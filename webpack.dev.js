@@ -8,6 +8,7 @@ const common = require('./webpack.common.js');
 const { enhance, filter, sort } = require('./src/utilities/content-tree-enhancers.js');
 
 module.exports = env => merge(common(env), {
+  mode: 'development',
   devtool: 'source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -21,13 +22,6 @@ module.exports = env => merge(common(env), {
       meta: {
         description: '...'
       }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      chunks: ['index']
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
     }),
     new DirectoryTreePlugin({
       dir: 'src/content',

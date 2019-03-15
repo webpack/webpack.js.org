@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const mdPlugins = [
   require('remark-slug'),
@@ -77,16 +77,14 @@ module.exports = (env = {}) => ({
       },
       {
         test: /\.font.js$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            {
-              loader: 'fontgen-loader',
-              options: { embed: true }
-            }
-          ]
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'fontgen-loader',
+            options: { embed: true }
+          }
+        ]
       },
       {
         test: /\.jsx?$/,
@@ -100,20 +98,32 @@ module.exports = (env = {}) => ({
         ]
       },
       {
-        test: /\.s?css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            'postcss-loader',
-            {
-              loader: 'sass-loader',
-              options: {
-                includePaths: [path.resolve(__dirname, './src/styles/partials')]
-              }
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                require('autoprefixer')
+              ],
             }
-          ]
-        })
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [ path.join('./src/styles/partials') ]
+            }
+          }
+        ]
       },
       {
         test: /\.woff2?$/,
@@ -131,10 +141,8 @@ module.exports = (env = {}) => ({
     ]
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename: '[chunkhash].css',
-      allChunks: true,
-      disable: env.dev
+    new MiniCssExtractPlugin({
+      filename: '[chunkhash].css'
     })
   ],
   stats: {

@@ -27,7 +27,7 @@ export default class Gitter extends React.Component {
     if (isClient) {
       import('gitter-sidecar').then(Sidecar => {
         if (!sidecar) {
-          sidecar = new Sidecar({
+          sidecar = new Sidecar.default({
             room: 'webpack/webpack',
             activationElement: false
           });
