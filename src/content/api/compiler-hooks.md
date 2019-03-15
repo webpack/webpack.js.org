@@ -62,6 +62,7 @@ compiler.hooks.entryOption.tap('MyPlugin', (context, entry) => {
 });
 ```
 
+Parameters: `context`, `entry`
 
 ### `afterPlugins`
 
@@ -132,6 +133,8 @@ Called after a `NormalModuleFactory` is created.
 
 
 ### `contextModuleFactory`
+
+`SyncHook`
 
 Runs a plugin after a `ContextModuleFactory` is created.
 
