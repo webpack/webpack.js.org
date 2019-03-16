@@ -1,6 +1,8 @@
 ---
 title: Writer's Guide
 sort: 2
+contributors:
+  - pranshuchittora
 ---
 
 The following sections contain all you need to know about editing and formatting the content within this site. Make sure to do some research before starting your edits or additions. Sometimes the toughest part is finding where the content should live and determining whether or not it already exists.

@@ -51,6 +51,7 @@ For the description of hook types, see [the Tapable docs](https://github.com/web
 
 Executes a plugin after [the `entry` configuration](https://webpack.js.org/configuration/entry-context/#entry) from webpack options has been processed.
 
+Parameters: `context`, `entry`
 
 ### `afterPlugins`
 
@@ -123,6 +124,8 @@ Parameters: `normalModuleFactory`
 
 ### `contextModuleFactory`
 
+`SyncHook`
+
 Runs a plugin after a `ContextModuleFactory` is created.
 
 Parameters: `contextModuleFactory`
@@ -152,7 +155,7 @@ Parameters: `compilationParams`
 
 Executed before emitting the `compilation` event (see below).
 
-Parameters: `compilation`
+Parameters: `compilation`, `compilationParams`
 
 
 ### `compilation`
@@ -161,7 +164,7 @@ Parameters: `compilation`
 
 Runs a plugin after a compilation has been created.
 
-Parameters: `compilation`
+Parameters: `compilation`, `compilationParams`
 
 
 ### `make`
