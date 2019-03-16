@@ -5,7 +5,7 @@ contributors:
   - pranshuchittora
 ---
 
-Welcome to an demonstration of the new `webpack init` feature! To view what we are building today, simply do `webpack init webpack-scaffold-demo`. This demo is to show you how to build your own webpack scaffold. Let's start by creating an file named `generator.js`.
+Welcome to an demonstration of the new `webpack init` feature! To view what we are building today, simply do `webpack init webpack-scaffold-demo`. This demo will show you how to build your own webpack scaffold. Let's start by creating a file named `generator.js`.
 
 
 
@@ -34,7 +34,7 @@ As you can see, the `configuration` object has to have one property you name, it
 
 ## Make it interactive
 
-In order for us to interact with the users, we make good use of the [`prompting`](http://yeoman.io/authoring/user-interactions.html) method yeoman has. In this method we can get various of answers from the user, like asking for entry points or plugins. You can either manually create each object representing a question, or you can make good use of our utilities from [`webpack-scaffold`](https://github.com/webpack/webpack-cli/tree/master/packages/webpack-scaffold). I'm in a good mood today, so I'm going to build a configuration if the user chooses `Pengwings`.
+In order for us to interact with the users, we make good use of the [`prompting`](http://yeoman.io/authoring/user-interactions.html) method yeoman has. In this method we can get various answers from the user, like asking for entry points or plugins. You can either manually create each object representing a question, or you can make good use of our utilities from [`webpack-scaffold`](https://github.com/webpack/webpack-cli/tree/master/packages/webpack-scaffold). I'm in a good mood today, so I'm going to build a configuration only if the user chooses `Pengwings`.
 
 
 ```js
@@ -173,7 +173,7 @@ These answers aren't well known on their own for us, so let's go ahead and creat
 
 ## Some more configs
 
-Let's start by looking at `dev-config.js`. We have some answers, now we want to use them to build up an config. How do we do that? Evidently, we should mount our values on the variable we've declared, with some properties we want to build up. We also want to use the answers for the entry prop. I've also taken the liberty to add an output property that has a `filename`.
+Let's start by looking at `dev-config.js`. We have some answers, now we want to use them to build up a config. How do we do that? Evidently, we should mount our values on the variable we've declared, with some properties we want to build up. We also want to use the answers for the entry prop. I've also taken the liberty to add an output property that has a `filename`.
 
 T> With string values, you need to wrap your strings once again. This is because we can declare some other functionality, using only " ", while " 'Mystring' " resolves to a string.
 
@@ -219,7 +219,7 @@ module.exports = function createDevConfig(answer) {
 
 ## Add more functionality
 
-We're ready to add an plugin, as a last piece of the puzzle. For this, I'm going to create an utility for commonsChunk, based on the input from the user. I'll start by adding another question in our prompt.
+We're ready to add a plugin, as the last piece of the puzzle. For this, I'm going to create a utility for commonsChunk, based on the input from the user. I'll start by adding another question to our prompt.
 
 ```js
 const Generator = require('yeoman-generator');
@@ -266,7 +266,7 @@ module.exports = function createCommonsChunkPlugin(chunk) {
 };
 ```
 
-Sweet! We've now created a scaffold with `entry`, `output`, `context` and a `plugin`. If you're curious on the API, check the API for more info on how to scaffold with `regexps`, `module`, or other!
+Sweet! We've now created a scaffold with `entry`, `output`, `context` and a `plugin`. If you're curious on the API, check the [API](../guides/scaffolding.md) for more info on how to scaffold with `regexps`, `module`, or other!
 
 
 
@@ -397,4 +397,4 @@ module.exports = class WebpackGenerator extends Generator {
 
 
 Congrats on your first scaffold! If you need help, submit an [issue](https://github.com/ev1stensberg/webpack-scaffold-demo/issues), or reach out to me on [Twitter](https://twitter.com/evenstensberg)!
-You can also check the [CLI repo](https://github.com/webpack/webpack-cli).  
+You can also check the [CLI repo](https://github.com/webpack/webpack-cli).
