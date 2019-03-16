@@ -266,7 +266,7 @@ module.exports = function createCommonsChunkPlugin(chunk) {
 };
 ```
 
-Sweet! We've now created a scaffold with `entry`, `output`, `context` and a `plugin`. If you're curious on the API, check the [API](../guides/scaffolding.md) for more info on how to scaffold with `regexps`, `module`, or other!
+Sweet! We've now created a scaffold with `entry`, `output`, `context` and a `plugin`. If you're curious on the API, check the [API](/src/content/guides/scaffolding.md) for more info on how to scaffold with `regexps`, `module`, or other!
 
 
 
