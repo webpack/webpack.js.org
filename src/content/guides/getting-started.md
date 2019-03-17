@@ -9,7 +9,6 @@ contributors:
   - johnstew
   - simon04
   - aaronang
-  - jecoopr
   - TheDutchCoder
   - sudarsangp
   - Vanguard90
@@ -99,8 +98,8 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2"
+      "webpack": "^4.20.2",
+      "webpack-cli": "^3.1.2"
     },
     "dependencies": {}
   }
@@ -202,7 +201,7 @@ Open `index.html` in your browser and, if everything went right, you should see 
 
 ## Modules
 
-The [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements have been standardized in [ES2015](https://babeljs.io/learn-es2015/) and [are supported in most browsers](https://caniuse.com/#search=modules). Some older browsers still lag behind but webpack supports modules out of the box.
+The [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements have been standardized in [ES2015](https://babeljs.io/docs/en/learn/). Although they are not supported in most browsers yet, webpack does support them out of the box.
 
 Behind the scenes, webpack actually "transpiles" the code so that older browsers can also run it. If you inspect `dist/main.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
 
@@ -271,8 +270,9 @@ __package.json__
     "version": "1.0.0",
     "description": "",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-+     "build": "webpack"
+-      "test": "echo \"Error: no test specified\" && exit 1" 
++      "test": "echo \"Error: no test specified\" && exit 1",
++      "build": "webpack"
     },
     "keywords": [],
     "author": "",

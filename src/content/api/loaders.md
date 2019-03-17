@@ -1,11 +1,15 @@
 ---
-title: Loader API
+title: Loader Interface
 sort: 4
 contributors:
   - TheLarkInn
   - jhnns
   - tbroadley
   - byzyk
+  - sokra
+  - EugeneHlushko
+  - jantimon
+  - superburrito
 ---
 
 A loader is just a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
@@ -92,7 +96,11 @@ module.exports.raw = true;
 
 ### Pitching Loader
 
-Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left). For the following [`use`](/configuration/module#rule-use) configuration:
+Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left). 
+
+T> Loaders may be added inline in requests and disabled via inline prefixes, which will impact the order in which they are "pitched" and executed. See [`Rule.enforce`](/configuration/module#ruleenforce) for more details.
+
+For the following configuration of [`use`](/configuration/module#rule-use):
 
 ``` javascript
 module.exports = {
@@ -565,3 +573,64 @@ As you can see below, not only error message, but also details about which loade
 W> The loader path in the error is displayed since webpack 4.12
 
 T> All the errors and warnings will be recorded into `stats`. Please see [Stats Data](/api/stats/#errors-and-warnings).
+
+
+### Inline matchResource
+
+A new inline request syntax was introduced in webpack v4. Prefixing `<match-resource>!=!` to a request will set the `matchResource` for this request.
+
+W> It is not recommended to use this syntax in application code.
+Inline request syntax is intended to only be used by loader generated code.
+Not following this recommendation will make your code webpack-specific and non-standard.
+
+T> A relative `matchResource` will resolve relative to the current context of the containing module.
+
+When a `matchResource` is set, it will be used to match with the [`module.rules`](/configuration/module/#module-rules) instead of the original resource. This can be useful if further loaders should be applied to the resource, or if the module type need to be changed. It's also displayed in the stats and used for matching [`Rule.issuer`](/configuration/module/#rule-issuer) and [`test` in `splitChunks`](/plugins/split-chunks-plugin/#splitchunks-cachegroups-cachegroup-test).
+
+Example:
+
+__file.js__
+
+```javascript
+/* STYLE: body { background: red; } */
+console.log('yep');
+```
+
+A loader could transform the file into the following file and use the `matchResource` to apply the user-specified CSS processing rules:
+
+__file.js__ (transformed by loader)
+
+```javascript
+import './file.js.css!=!extract-style-loader/getStyles!./file.js';
+console.log('yep');
+```
+
+This will add a dependency to `extract-style-loader/getStyles!./file.js` and treat the result as `file.js.css`. Because [`module.rules`](/configuration/module/#module-rules) has a rule matching `/\.css$/` and it will apply to this dependency.
+
+The loader could look like this:
+
+__extract-style-loader/index.js__
+
+```javascript
+const stringifyRequest = require('loader-utils').stringifyRequest;
+const getRemainingRequest = require('loader-utils').getRemainingRequest;
+const getStylesLoader = require.resolve('./getStyle');
+
+module.exports = function (source) {
+  if (STYLES_REGEXP.test(source)) {
+    source = source.replace(STYLES_REGEXP, '');
+    const remReq = getRemainingRequest(this);
+    return `import ${stringifyRequest(`${this.resource}.css!=!${getStylesLoader}!${remReq}`)};${source}`;
+  }
+  return source;
+};
+```
+
+__extract-style-loader/getStyles.js__
+
+```javascript
+module.exports = function(source) {
+  const match = STYLES_REGEXP.match(source);
+  return match[0];
+};
+```

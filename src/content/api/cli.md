@@ -2,7 +2,7 @@
 title: Command Line Interface
 sort: 2
 contributors:
-  - ev1stensberg
+  - evenstensberg
   - simon04
   - tbroadley
   - chenxsan
@@ -30,7 +30,7 @@ Read the [installation guide](/guides/installation) if you don't already have we
 
 ## Usage with config file
 
-```sh
+```bash
 webpack [--config webpack.config.js]
 ```
 

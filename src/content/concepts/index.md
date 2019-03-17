@@ -14,7 +14,6 @@ contributors:
   - arjunsajeev
   - byzyk
   - yairhaimo
-  - EugeneHlushko
   - farskid
   - LukeMwila
 ---
@@ -34,9 +33,9 @@ To get started you only need to understand its __Core Concepts__:
 - [Mode](#mode)
 - [Browser Compatibility](#browser-compatibility)
 
-This document is intended to give a __high-level__ overview of these concepts, while providing links to detailed concept specific use cases.
+This document is intended to give a __high-level__ overview of these concepts, while providing links to detailed concept-specific use cases.
 
-For a better understanding of the ideas behind module bundlers and how they work under the hood consult these resources:
+For a better understanding of the ideas behind module bundlers and how they work under the hood, consult these resources:
 
 - [Manually Bundling an Application](https://www.youtube.com/watch?v=UNMkLHzofQI)
 - [Live Coding a Simple Module Bundler](https://www.youtube.com/watch?v=Gc9-7PBqOC8)
