@@ -177,7 +177,7 @@ __webpack.config.js__
             'style-loader',
             'css-loader'
           ]
-        },
++       },
 +       {
 +         test: /\.(png|svg|jpg|gif)$/,
 +         use: [
