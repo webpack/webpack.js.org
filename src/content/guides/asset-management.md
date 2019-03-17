@@ -291,7 +291,7 @@ __webpack.config.js__
           use: [
             'file-loader'
           ]
-        },
++       },
 +       {
 +         test: /\.(woff|woff2|eot|ttf|otf)$/,
 +         use: [
