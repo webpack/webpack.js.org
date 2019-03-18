@@ -109,7 +109,7 @@ Adds a hook right before running the compiler.
 
 `AsyncSeriesHook`
 
-Hook into the compiler before it begins reading ["records"](https://webpack.js.org/configuration/other-options/#recordspath). 
+Hook into the compiler before it begins reading [`records`](/configuration/other-options/#recordspath). 
 
 - Callback Parameters: `compiler`
 
