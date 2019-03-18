@@ -54,7 +54,7 @@ For the description of hook types, see [the Tapable docs](https://github.com/web
 
 Called after the [`entry` configuration](https://webpack.js.org/configuration/entry-context/#entry) from webpack options has been processed.
 
-- Callback Parameters: [`context`](https://webpack.js.org/configuration/entry-context#context), [`entry`](https://webpack.js.org/configuration/entry-context#entry)
+- Callback Parameters: [`context`](/configuration/entry-context/#context), [`entry`](/configuration/entry-context/#entry)
 
 ```js
 compiler.hooks.entryOption.tap('MyPlugin', (context, entry) => {
