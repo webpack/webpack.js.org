@@ -218,7 +218,7 @@ Called after finishing and sealing the compilation.
 
 `SyncBailHook`
 
-Called before emitting assets, should return a boolean to say wheter ot not emit.
+Called before emitting assets. Should return a boolean telling whether to emit.
 
 - Callback Parameters: `compilation`
 
