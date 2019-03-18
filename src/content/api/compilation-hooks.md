@@ -542,7 +542,6 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
 
 
 
-
 ### `optimizeAssets`
 
 `AsyncSeriesHook`
