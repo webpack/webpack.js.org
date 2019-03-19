@@ -625,9 +625,9 @@ module.exports = {
 
 ## `devServer.open`
 
-`boolean` `string`
+`boolean: false` `string`
 
-Tells dev-server to open the browser after server had been started. Disabled by default.
+Tells dev-server to open the browser after server had been started. Set it to `true` to open your default browser.
 
 __webpack.config.js__
 
@@ -640,7 +640,9 @@ module.exports = {
 };
 ```
 
-If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass its name instead of boolean:
+Provide browser name to use instead of the default one:
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -654,29 +656,10 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --open
+webpack-dev-server --open 'Google Chrome'
 ```
 
-Or with specified browser:
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    open: 'Chrome'
-  }
-};
-```
-
-And via the CLI
-
-```bash
-webpack-dev-server --open 'Chrome'
-```
-
-T> The browser application name is platform dependent. Don't hard code it in reusable modules. For example, `'Chrome'` is Google Chrome on macOS, `'google-chrome'` on Linux and `'chrome'` on Windows.
+T> The browser application name is platform dependent. Don't hard code it in reusable modules. For example, `'Chrome'` is `'Google Chrome'` on macOS, `'google-chrome'` on Linux and `'chrome'` on Windows.
 
 
 ## `devServer.openPage`
