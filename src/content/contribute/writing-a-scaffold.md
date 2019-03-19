@@ -397,4 +397,3 @@ module.exports = class WebpackGenerator extends Generator {
 
 
 Congrats on your first scaffold! If you need help, submit an [issue](https://github.com/ev1stensberg/webpack-scaffold-demo/issues), or reach out to me on [Twitter](https://twitter.com/evenstensberg)!
-You can also check the [CLI repo](https://github.com/webpack/webpack-cli).
