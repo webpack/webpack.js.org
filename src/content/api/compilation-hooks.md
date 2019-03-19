@@ -6,6 +6,7 @@ contributors:
   - byzyk
   - madhavarshney
   - misterdev
+  - wizardofhogwarts
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -553,7 +554,6 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
 });
 ```
 
-
 ### `optimizeChunkAssets`
 
 `AsyncSeriesHook`
@@ -608,6 +608,7 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
 ```
 
 
+
 ### `optimizeAssets`
 
 `AsyncSeriesHook`
@@ -621,7 +622,7 @@ Optimize all assets stored in `compilation.assets`.
 
 `SyncHook`
 
-The assets has been optimized.
+The assets have been optimized.
 
 - Callback Parameters: `assets`
 
@@ -699,6 +700,7 @@ Executed after setting up a child compiler.
 W> This hook will be removed in v5.0.0
 
 The normal module loader is the function that actually loads all the modules
+
 in the module graph (one-by-one).
 
 - Callback Parameters: `loaderContext` `module`
@@ -707,7 +709,7 @@ in the module graph (one-by-one).
 
 `SyncWaterfallHook`
 
-This hooks allows to change the references reported by dependencies.
+This hooks allows changing the references reported by dependencies.
 
 - Callback Parameters: `depRef` `dependency` `module`
 

@@ -8,6 +8,7 @@ contributors:
   - fadysamirsadek
   - byzyk
   - debs-obrien
+  - wizardofhogwarts
 related:
   - title: CommonJS Wikipedia
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -59,7 +60,7 @@ export default {
 
 `import('path/to/module') -> Promise`
 
-Dynamically load modules. Calls to `import()` are treated as split points, meaning the requested module and it's children are split out into a separate chunk.
+Dynamically load modules. Calls to `import()` are treated as split points, meaning the requested module and its children are split out into a separate chunk.
 
 T> The [ES2015 Loader spec](https://whatwg.github.io/loader/) defines `import()` as method to load ES2015 modules dynamically on runtime.
 
@@ -167,7 +168,7 @@ W> Module ID is a number in webpack (in contrast to NodeJS where it is a string 
 
 ### `require.cache`
 
-Multiple requires to the same module result in only one module execution and only one export. Therefore a cache in the runtime exists. Removing values from this cache cause new module execution and a new export.
+Multiple requires of the same module result in only one module execution and only one export. Therefore a cache in the runtime exists. Removing values from this cache cause new module execution and a new export.
 
 W> This is only needed in rare cases for compatibility!
 
@@ -204,7 +205,7 @@ require.ensure(
 )
 ```
 
-Split out the given `dependencies` to a separate bundle that that will be loaded asynchronously. When using CommonJS module syntax, this is the only way to dynamically load dependencies. Meaning, this code can be run within execution, only loading the `dependencies` if certain conditions are met.
+Split out the given `dependencies` to a separate bundle that will be loaded asynchronously. When using CommonJS module syntax, this is the only way to dynamically load dependencies. Meaning, this code can be run within execution, only loading the `dependencies` if certain conditions are met.
 
 W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `require.ensure` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
@@ -401,7 +402,7 @@ require.ensure(['a', 'b'], function(require) { /* ... */ });
 require.ensure(['a', 'c'], function(require) { /* ... */ });
 ```
 
-This will result in following output:
+This will result in the following output:
 
 - entry chunk: `file.js` and `a`
 - anonymous chunk: `b`
