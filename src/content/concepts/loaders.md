@@ -80,6 +80,7 @@ module.exports = {
   }
 };
 ```
+
 > Note: For detailed information about [style-loader](/loaders/style-loader), [css-loader](/loaders/css-loader) and [sass-loader](/loaders/sass-loader), please visit the links.
 
 ### Inline
