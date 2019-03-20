@@ -8,8 +8,6 @@ contributors:
 Welcome to the demonstration of the new `webpack init` command! To view what we are building today, run `webpack init webpack-scaffold-demo`. This demo will show you how to build your own webpack scaffold. Let's start by creating a file named `generator.js`.
 
 
-
-
 ## Create a basic structure
 
 Let's create our skeleton. In order for the webpack CLI to detect our options, we have to define some properties in the constructor.
@@ -168,7 +166,7 @@ module.exports = class WebpackGenerator extends Generator {
 };
 ```
 
-These answers aren't well known on their own for us, so let's go ahead and create our config.
+Let's go ahead and create our config.
 
 
 ## Some more configs
@@ -196,7 +194,6 @@ module.exports = function createDevConfig(answer) {
 Run `webpack init webpack-scaffold-demo`, and you should see scaffold working.
 
 
-
 ## Basic Scaffold
 
 Now that we've got our initial scaffold. Let's add the rest of our options! For the `context`, let's say we've got a `path.join` we want to make use of. For this, we use a single quote string.
@@ -214,7 +211,6 @@ module.exports = function createDevConfig(answer) {
   return devConfig;
 };
 ```
-
 
 
 ## Add more functionality
@@ -252,7 +248,6 @@ module.exports = class WebpackGenerator extends Generator {
 ```
 
 
-
 ## Create string with chunks
 
 Now, we've got to create a string with our chunk. This is how it looks.
@@ -267,7 +262,6 @@ module.exports = function createCommonsChunkPlugin(chunk) {
 ```
 
 We've now created a scaffold with `entry`, `output`, `context` and a `plugin`. If you're curious on the API, check the [API](/guides/scaffolding/) for more info on how to scaffold with `regexps`, `module` and other!
-
 
 
 ## Defining scopes
@@ -311,11 +305,9 @@ module.exports = class WebpackGenerator extends Generator {
 ```
 
 
-
 ## Configuration nomenclature
 
 We recommend you to name your config file something meaningful, like in our case: "penguins". To do it, set the `this.options.env.configuration.dev.configName` to desired string.
-
 
 ```js
 const Generator = require('yeoman-generator');
@@ -351,6 +343,7 @@ module.exports = class WebpackGenerator extends Generator {
   }
 };
 ```
+
 
 ## Introducing .yo-rc.json
 
