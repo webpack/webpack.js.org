@@ -18,11 +18,11 @@ Before writing a `webpack-cli` scaffold, think about what you're trying to achie
 There are many resources where you can learn how to write a scaffold, you can start from: [How do I compose a
 webpack-scaffold?](https://github.com/evenstensberg/webpack-scaffold-demo)
 
-[`webpack-scaffold`](./packages/webpack-scaffold) is a utility suite for creating scaffolds. It contains functions that could be used to create a scaffold.
+`webpack-scaffold` is a utility suite for creating scaffolds. It contains functions that could be used to create a scaffold.
 
 ### Running a scaffold
 
-A scaffold can be executed using [`webpack-cli init`](./INIT.md):
+A scaffold can be executed using `webpack-cli init`:
 
 ```bash
 webpack-cli init <your-scaffold>
