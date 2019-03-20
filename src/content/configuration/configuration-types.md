@@ -59,6 +59,8 @@ module.exports = () => {
 };
 ```
 
+W> Keep in mind this only works when using CLI. [`webpack()`](/api/node/#webpack) expects a config object.
+
 
 ## Exporting multiple configurations
 
