@@ -5,7 +5,7 @@ contributors:
   - pranshuchittora
 ---
 
-Welcome to an demonstration of the new `webpack init` feature! To view what we are building today, simply do `webpack init webpack-scaffold-demo`. This demo will show you how to build your own webpack scaffold. Let's start by creating a file named `generator.js`.
+Welcome to the demonstration of the new `webpack init` command! To view what we are building today, run `webpack init webpack-scaffold-demo`. This demo will show you how to build your own webpack scaffold. Let's start by creating a file named `generator.js`.
 
 
 
