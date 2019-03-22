@@ -14,7 +14,7 @@ export default class Dropdown extends React.Component {
   }
 
   _closeDropdownOnEsc(e) {
-    if (e.key === "Escape" && this.state.active) {
+    if (e.key === 'Escape' && this.state.active) {
       this.setState({ active: false}, () => {
         this.dropdownButton.focus();
       });
@@ -29,7 +29,7 @@ export default class Dropdown extends React.Component {
 
   render() {
     let { className = '', items = [] } = this.props;
-    let activeMod = this.state.active ? "dropdown__list--active" : "";
+    let activeMod = this.state.active ? 'dropdown__list--active' : '';
 
     return (
       <nav 
@@ -40,18 +40,18 @@ export default class Dropdown extends React.Component {
       >
         <button
           ref={ el => this.dropdownButton = el }
-          aria-haspopup="true"
+          aria-haspopup='true'
           aria-expanded={ String(this.state.active) }
-          aria-label="Select language"
+          aria-label='Select language'
           onClick={ this._handleClick.bind(this) }
         >
           <img
-            className="dropdown__language"
-            alt="select language"
+            className='dropdown__language'
+            alt='select language'
             src={ LanguageIcon } />
           {/* Commented out until media breakpoints are in place
           <span>{ items[0].title }</span> */}
-          <i aria-hidden="true" className="dropdown__arrow" />
+          <i aria-hidden='true' className='dropdown__arrow' />
         </button>
         <div className={ `dropdown__list ${activeMod}` }>
           <ul>
@@ -76,19 +76,19 @@ export default class Dropdown extends React.Component {
   }
 
   _handleArrowKeys(currentIndex, lastIndex, e) {
-    if (["ArrowDown", "ArrowUp"].includes(e.key)) {
+    if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
       e.preventDefault();
     }
 
     let newIndex = currentIndex;
-    if (e.key === "ArrowDown") {
+    if (e.key === 'ArrowDown') {
       newIndex++;
       if (newIndex > lastIndex) {
         newIndex = 0;
       }
     }
 
-    if (e.key === "ArrowUp") {
+    if (e.key === 'ArrowUp') {
       newIndex--;
       if (newIndex < 0) {
         newIndex = lastIndex;
