@@ -5,13 +5,13 @@ contributors:
 sort: 2
 ---
 
-Setting up webpack for the first time is hard. Writing advanced configurations to optimize performance is even tougher. The `init` feature is designed to support people that want to create their own configuration or initializing other projects people create.
+It can be hard to set up a complex webpack configuration for the first time. Writing advanced configurations to optimize performance is even harder. The `init` feature is designed to support people that want to create their own configuration or initializing projects that other people create.
 
 ## Creating a scaffold
 
 Before writing a `webpack-cli` scaffold, think about what you're trying to achieve. Do you want a "general" scaffold that could be used by any project or type of app? Do you want something focused, like a scaffold that writes both your `webpack.config.js` and your framework code? It's also useful to think about the user experience for your scaffold.
 
-`webpack-cli` offers an experience that is interactive and you can prompt users for questions (like, "What is your entry point?") to help customize the output accordingly.
+`webpack-cli` offers interactive experience to customize the output accordingly. For example asking questions like: "What is your entry point?".
 
 ### Writing a scaffold
 
@@ -30,7 +30,7 @@ webpack-cli init <your-scaffold>
 
 #### Running a scaffold locally
 
-When the scaffold package is in your local file system you should pass its path to `init`:
+When the scaffold package is in your local file system you should point `init` to its path:
 
 ```bash
 webpack-cli init path/to/your/scaffold
@@ -55,7 +55,7 @@ Or you can create a global module and symlink to the local one:
 
 #### Running a scaffold from npm
 
-If the package is in npm, its name must begin with `webpack-scaffold` and can be used running:
+If the package is available from npm, its name must begin with `webpack-scaffold` and can be used by running:
 
 ```bash
 webpack-cli init webpack-scaffold-yourpackage
@@ -63,9 +63,9 @@ webpack-cli init webpack-scaffold-yourpackage
 
 ## API
 
-To create a `scaffold`, you must create a [`yeoman-generator`](http://yeoman.io/authoring/). Because of that, you can optionally extend your generator to include methods from the [Yeoman API](http://yeoman.io/learning/). It's worth noting that we support all the properties of a regular webpack configuration. In order for us to do this, there's a thing you need to remember:
+To create a `scaffold`, you must create a [`yeoman-generator`](http://yeoman.io/authoring/). Thanks to it, you can optionally extend your generator to include methods from the [Yeoman API](http://yeoman.io/learning/). It's worth noting that we support all the properties of a regular webpack configuration. In order for us to do this, there's a thing you need to remember:
 
-> Objects are made using strings, while strings are made using double strings. This means that in order for you to create a string, you have to wrap it inside another string for us to validate it correctly.
+W> Objects are made using strings, while strings are made using double strings. This means that in order for you to create a string, you have to wrap it inside another string for us to validate it correctly.
 
 ### Required
 
@@ -82,6 +82,8 @@ To create a `scaffold`, you must create a [`yeoman-generator`](http://yeoman.io/
 
 ### `opts.env.configuration`(required)
 
+`object`
+
 This is the entry point your configuration, initialize it inside the constructor of your generator in order for the CLI to work:
 
 ```js
@@ -95,7 +97,9 @@ class MyScaffold extends Generator {
 
 ### `opts.env.configuration.myObj` (required)
 
-This is your scaffold, you add here the options that the CLI will transform into a webpack configuration. You can have many different scaffolds named as you prefer, representing different configurations like `dev.config` or `prod.config`:
+`object`
+
+This is your scaffold, you add the options that the CLI will transform into a webpack configuration here. You can have many different scaffolds named as you prefer, representing different configurations like `dev.config` or `prod.config`:
 
 ```js
 class MyScaffold extends Generator {
@@ -111,7 +115,9 @@ class MyScaffold extends Generator {
 
 ### `myObj.webpackOptions` (required)
 
-This object has the same format as a regular webpack configuration, so you declare here the properties that you want to scaffold, like `entry`, `output` and `context`. You can initialize this inside a yeoman method:
+`object`
+
+This object has the same format as a regular webpack [configuration](/configuration/). Declare the properties that you want to scaffold here, e.g. `entry`, `output` and `context`. You can initialize this inside a yeoman method:
 
 ```js
 this.options.env.configuration.dev.webpackOptions = {
@@ -122,6 +128,8 @@ this.options.env.configuration.dev.webpackOptions = {
 
 ### `myObj.merge` (optional)
 
+`string`
+
 If you want to use [`webpack-merge`](https://github.com/survivejs/webpack-merge), you can set the `merge` property of `myObj` to the name of the configuration you want to merge it with:
 
 ```js
@@ -130,7 +138,9 @@ this.options.env.configuration.dev.merge = 'myConfig';
 
 ### `myObj.topScope`(optional)
 
-The `topScope` property is where you write all the code needed by your configuration, like module imports and functions/variables definitions:
+`[string]`
+
+The `topScope` property is where you write all the code needed by your configuration, like module imports and functions/variables declarations:
 
 ```js
 this.options.env.configuration.dev.topScope = [
@@ -141,6 +151,8 @@ this.options.env.configuration.dev.topScope = [
 
 ### `myObj.configName`(optional)
 
+`string`
+
 `configName` allows you to customize the name of your configuration file. For example you can name it `webpack.base.js` instead of the default `webpack.config.js`:
 
 ```js
@@ -148,6 +160,8 @@ this.options.env.configuration.dev.configName = 'base';
 ```
 
 ### `writing` (required)
+
+`function`
 
 For the scaffolding instance to run, you need to write your configuration to a `.yo-rc.json` file. This could be done using one of the lifecycles in the yeoman generator, such as the `writing` method:
 

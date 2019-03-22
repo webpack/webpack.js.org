@@ -62,9 +62,9 @@ module.exports = class WebpackGenerator extends Generator {
 
 ## Configuring Webpack
 
-So far, we've made an interaction with the user. If you were coding along, great! So how do we proceed from here? Let's try to build a simple webpack configuration that has an [entry point](/configuration/entry-context/#entry), an [output](/concepts/#output), and a [context property](/configuration/entry-context/#context). For this, we need to create a `webpackOptions` property on our `dev` object. This is where `entry`, `output` and `context` is gonna be hooked up, later resulting in a `webpack.config.js`.
+So far, we've made an interaction with the user. If you were coding along, great! So how do we proceed from here? Let's try to build a simple webpack configuration that has an [entry point](/configuration/entry-context/#entry), an [output](/concepts/#output), and a [context property](/configuration/entry-context/#context). For this, we need to create a `webpackOptions` property on our `dev` object. This is where `entry`, `output` and `context` is going to be hooked up, later resulting in a `webpack.config.js`.
 
-T> Define the `webpackOptions` property in the constructor to make your scaffold as most clean as possible!
+T> Define the `webpackOptions` property in the constructor to keep your scaffold as clean as possible!
 
 ```js
 const Generator = require('yeoman-generator');
@@ -135,7 +135,7 @@ module.exports = class WebpackGenerator extends Generator {
 };
 ```
 
-We've now abstracted some part of the code that's probably going to be really big. Let's go ahead and add another question, like asking for an entry point.
+We've now abstracted that part of the code that's probably going to be really big. Let's go ahead and add another question, like asking for an entry point.
 
 ```js
 const Generator = require('yeoman-generator');
@@ -307,7 +307,7 @@ module.exports = class WebpackGenerator extends Generator {
 
 ## Configuration nomenclature
 
-We recommend you to name your config file something meaningful, like in our case: "penguins". To do it, set the `this.options.env.configuration.dev.configName` to desired string.
+We recommend you to name your configuration file something meaningful, like in our case: "penguins". To do it, set the `this.options.env.configuration.dev.configName` to desired string.
 
 ```js
 const Generator = require('yeoman-generator');
