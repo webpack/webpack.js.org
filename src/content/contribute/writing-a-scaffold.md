@@ -345,7 +345,7 @@ module.exports = class WebpackGenerator extends Generator {
 ```
 
 
-## Introducing .yo-rc.json
+## About .yo-rc.json
 
 To write the actual configuration, [webpack CLI](/api/cli/) creates a `.yo-rc.json` file for it to parse the AST. In order for the CLI to understand how to parse the configuration, we need to write to the `.yo-rc.json`. This is done using the `writing` lifecycle method built-in by yeoman.
 
