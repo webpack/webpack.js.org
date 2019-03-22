@@ -5,6 +5,7 @@ sort: 2
 contributors:
   - byzyk
   - madhavarshney
+  - wizardofhogwarts
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -486,7 +487,6 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
 });
 ```
 
-
 ### `optimizeChunkAssets`
 
 `AsyncSeriesHook`
@@ -541,6 +541,7 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
 ```
 
 
+
 ### `optimizeAssets`
 
 `AsyncSeriesHook`
@@ -554,7 +555,7 @@ Parameters: `assets`
 
 `SyncHook`
 
-The assets has been optimized.
+The assets have been optimized.
 
 Parameters: `assets`
 
@@ -629,7 +630,7 @@ Parameters: `childCompiler` `compilerName` `compilerIndex`
 
 `SyncHook`
 
-The normal module loader is the function that actually loads all the modules
+The normal module loader is the function that loads all the modules
 in the module graph (one-by-one).
 
 Parameters: `loaderContext` `module`
@@ -638,6 +639,6 @@ Parameters: `loaderContext` `module`
 
 `SyncWaterfallHook`
 
-`Compilation.hooks.dependencyReference(depRef, dependency, module)` allows to change the references reported by dependencies.
+`Compilation.hooks.dependencyReference(depRef, dependency, module)` allows changing the references reported by dependencies.
 
 Parameters: `depRef` `dependency` `module`
