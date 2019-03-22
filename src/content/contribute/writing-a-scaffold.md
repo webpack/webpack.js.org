@@ -2,7 +2,9 @@
 title: Writing a Scaffold
 sort: 3
 contributors:
+  - evenstensberg
   - pranshuchittora
+  - EugeneHlushko
 ---
 
 Welcome to the demonstration of the new `webpack init` command! To view what we are building today, run `webpack init webpack-scaffold-demo`. This demo will show you how to build your own webpack scaffold. Let's start by creating a file named `generator.js`.
@@ -196,7 +198,7 @@ Run `webpack init webpack-scaffold-demo`, and you should see scaffold working.
 
 ## Basic Scaffold
 
-Now that we've got our initial scaffold. Let's add the rest of our options! For the `context`, let's say we've got a `path.join` we want to make use of. For this, we use a single quote string.
+Now that we've got our initial scaffold. Let's add the rest of our options! For the `context`, let's say we've got a `path.join` we want to make use of. For this, we use a single quote string. By default the current directory is used, but it's recommended to pass a value in your configuration (context). This makes your configuration independent from CWD (current working directory).
 
 ```js
 module.exports = function createDevConfig(answer) {
@@ -237,7 +239,7 @@ module.exports = class WebpackGenerator extends Generator {
     return this.prompt([
       List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings']),
       Input('entry', 'What is the entry point in your app?'),
-      Input('plugin', 'What do you want to name your commonsChunk?')
+      Input('plugin', 'What do you want to name your splitChunks?')
     ]).then(answer => {
       if (answer['confirm'] === 'Pengwings') {
         this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);
@@ -253,10 +255,10 @@ module.exports = class WebpackGenerator extends Generator {
 Now, we've got to create a string with our chunk. This is how it looks.
 
 ```js
-module.exports = function createCommonsChunkPlugin(chunk) {
+module.exports = function createSplitChunksPlugin(chunk) {
   return (
-    'new webpack.optimize.CommonsChunkPlugin({name:' + '\'' + chunk + '\'' +
-		',filename:' + '\'' + chunk + '-[hash].min.js\'})'
+    'new webpack.optimization.splitChunks.name:' + '\'' + chunk + '\'' +
+		',filename:' + '\'' + chunk + '-[hash].min.js\''
   );
 };
 ```
@@ -290,7 +292,7 @@ module.exports = class WebpackGenerator extends Generator {
     return this.prompt([
       List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings']),
       Input('entry', 'What is the entry point in your app?'),
-      Input('plugin', 'What do you want to name your commonsChunk?')
+      Input('plugin', 'What do you want to name your splitChunks?')
     ]).then(answer => {
       if (answer['confirm'] === 'Pengwings') {
         this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);
@@ -329,7 +331,7 @@ module.exports = class WebpackGenerator extends Generator {
     return this.prompt([
       List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings']),
       Input('entry', 'What is the entry point in your app?'),
-      Input('plugin', 'What do you want to name your commonsChunk?')
+      Input('plugin', 'What do you want to name your splitChunks?')
     ]).then(answer => {
       if(answer['confirm'] === 'Pengwings') {
         this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);
@@ -370,7 +372,7 @@ module.exports = class WebpackGenerator extends Generator {
     return this.prompt([
       List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings']),
       Input('entry', 'What is the entry point in your app?'),
-      Input('plugin', 'What do you want to name your commonsChunk?')
+      Input('plugin', 'What do you want to name your splitChunks?')
     ]).then (answer => {
       if(answer['confirm'] === 'Pengwings') {
         this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);

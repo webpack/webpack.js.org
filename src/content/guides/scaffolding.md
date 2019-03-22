@@ -1,11 +1,12 @@
 ---
 title: Scaffolding
 contributors:
+  - evenstensberg
   - pranshuchittora
 sort: 2
 ---
 
-It can be hard to set up a complex webpack configuration for the first time. Writing advanced configurations to optimize performance is even harder. The `init` feature is designed to support people that want to create their own configuration or initializing projects that other people create.
+It can be hard to set up a complex webpack configuration for the first time. Writing advanced configurations to optimize performance is quite hard. The `init` feature is designed to support people that want to create their own configuration or initializing projects that other people create.
 
 ## Creating a scaffold
 
@@ -15,8 +16,7 @@ Before writing a `webpack-cli` scaffold, think about what you're trying to achie
 
 ### Writing a scaffold
 
-There are many resources where you can learn how to write a scaffold, you can start from: [How do I compose a
-webpack-scaffold?](https://github.com/evenstensberg/webpack-scaffold-demo)
+There are many resources where you can learn how to write a scaffold, you can start from: [Writing a Scaffold](/contribute/writing-a-scaffold)
 
 `webpack-scaffold` is a utility suite for creating scaffolds. It contains functions that could be used to create a scaffold.
 
@@ -52,6 +52,7 @@ Or you can create a global module and symlink to the local one:
       	cd path/to/my-scaffold
       	yarn link
       	webpack-cli init my-scaffold
+        ```
 
 #### Running a scaffold from npm
 
