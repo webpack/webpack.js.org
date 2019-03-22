@@ -66,21 +66,24 @@ This is a concise way to display loaders, and helps to maintain clean code. It a
 
 Loaders are evaluated/executed from right to left. In the example below execution starts with sass-loader, continues with css-loader and finally ends with style-loader. See ["Loader Features"](/concepts/loaders/#loader-features) for more information about loaders order.
 
-```js-with-links-details
+``` js-with-links
 module.exports = {
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          { loader: ['style-loader'](/loaders/style-loader) },
+          // [style-loader](/loaders/style-loader)
+          { loader: ['style-loader'] },
+          // [css-loader](/loaders/css-loader)
           {
-            loader: ['css-loader'](/loaders/css-loader),
+            loader: ['css-loader'],
             options: {
               modules: true
             }
           },
-          { loader: ['sass-loader'](/loaders/sass-loader) }
+          // [sass-loader](/loaders/sass-loader)
+          { loader: ['sass-loader'] }
         ]
       }
     ]
