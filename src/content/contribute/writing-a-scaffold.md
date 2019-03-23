@@ -215,7 +215,7 @@ module.exports = function createDevConfig(answer) {
 
 ## Add more functionality
 
-Now we are ready to add a plugin. For this, let's create an utility for [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) based on the input from the user. Start by adding another question to our prompt.
+Now we are ready to add a plugin. For this, let's create an utility for [`html-webpack-plugin`](/plugins/html-webpack-plugin/) based on the input from the user. Start by adding another question to our prompt.
 
 ```js
 const Generator = require('yeoman-generator');
@@ -237,7 +237,7 @@ module.exports = class WebpackGenerator extends Generator {
     return this.prompt([
       List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings']),
       Input('entry', 'What is the entry point in your app?'),
-      Input('plugin', 'What do you want to name your splitChunks?')
+      Input('plugin', 'What do you want to name your html file?')
     ]).then(answer => {
       if (answer['confirm'] === 'Pengwings') {
         this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);
@@ -248,15 +248,14 @@ module.exports = class WebpackGenerator extends Generator {
 ```
 
 
-## Create string with chunks
+## Create string with name
 
-Now, we've got to create a string with our chunk. This is how it looks.
+Now, we've got to create a string with our answer. This is how it looks.
 
 ```js
-module.exports = function createSplitChunksPlugin(chunk) {
+module.exports = function createHtmlPlugin(name) {
   return (
-    'new webpack.optimization.splitChunks.name:' + '\'' + chunk + '\'' +
-		',filename:' + '\'' + chunk + '-[hash].min.js\''
+    ` new HtmlWebpackPlugin({filename: "${name}.html" }) `
   );
 };
 ```
@@ -290,7 +289,7 @@ module.exports = class WebpackGenerator extends Generator {
     return this.prompt([
       List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings']),
       Input('entry', 'What is the entry point in your app?'),
-      Input('plugin', 'What do you want to name your splitChunks?')
+      Input('plugin', 'What do you want to name your html file?')
     ]).then(answer => {
       if (answer['confirm'] === 'Pengwings') {
         this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);
@@ -329,7 +328,7 @@ module.exports = class WebpackGenerator extends Generator {
     return this.prompt([
       List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings']),
       Input('entry', 'What is the entry point in your app?'),
-      Input('plugin', 'What do you want to name your splitChunks?')
+      Input('plugin', 'What do you want to name your html file?')
     ]).then(answer => {
       if(answer['confirm'] === 'Pengwings') {
         this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);
@@ -370,7 +369,7 @@ module.exports = class WebpackGenerator extends Generator {
     return this.prompt([
       List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings']),
       Input('entry', 'What is the entry point in your app?'),
-      Input('plugin', 'What do you want to name your splitChunks?')
+      Input('plugin', 'What do you want to name your html file?')
     ]).then (answer => {
       if(answer['confirm'] === 'Pengwings') {
         this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);
@@ -389,4 +388,4 @@ module.exports = class WebpackGenerator extends Generator {
 ```
 
 
-Congratulations on completing your first scaffold! If you need help, submit an [issue](https://github.com/ev1stensberg/webpack-scaffold-demo/issues), or reach out on [Twitter](https://twitter.com/evenstensberg)!
+Congratulations 🎉 on completing your first scaffold! If you need help, submit an [issue](https://github.com/ev1stensberg/webpack-scaffold-demo/issues), or reach out on [Twitter](https://twitter.com/evenstensberg)!
