@@ -16,7 +16,7 @@ Before writing a `webpack-cli` scaffold, think about what you're trying to achie
 
 ### Writing a scaffold
 
-There are many resources where you can learn how to write a scaffold, you can start from: [Writing a Scaffold](/contribute/writing-a-scaffold)
+There are many resources where you can learn how to write a scaffold, you can start from: [Writing a Scaffold](/contribute/writing-a-scaffold/)
 
 `webpack-scaffold` is a utility suite for creating scaffolds. It contains functions that could be used to create a scaffold.
 

@@ -168,12 +168,10 @@ module.exports = class WebpackGenerator extends Generator {
 };
 ```
 
-Let's go ahead and create our config.
-
 
 ## Some more configs
 
-Let's start by looking at `dev-config.js`. We have some answers, now we want to use them to build up a config. We will start with mounting our values on the variables we've declared, with some properties we want to build up. We also want to use the answers for the `entry` property. We've also added an output property that has a `filename`.
+Let's look at `dev-config.js`. We have access to user's answers, use them to assign values to desired config properties, in this case - `entry`. We've also added an output property that has a `filename`.
 
 T> String values must be quoted twice. This is to preserve our ability to add other functionality, using only " ", while " 'Mystring' " resolves to a string.
 
@@ -198,7 +196,7 @@ Run `webpack init webpack-scaffold-demo`, and you should see scaffold working.
 
 ## Basic Scaffold
 
-Now that we've got our initial scaffold. Let's add the rest of our options! For the `context`, let's say we've got a `path.join` we want to make use of. For this, we use a single quote string. By default the current directory is used, but it's recommended to pass a value in your configuration (context). This makes your configuration independent from CWD (current working directory).
+Now that we've got our initial scaffold. Let's add the rest of our options! For the `context`, let's say we need to use `path`'s `join` function. For this, we use a single quote string. By default the current directory is used, but it's recommended to pass a value in your configuration (context). This makes your configuration independent from CWD (current working directory).
 
 ```js
 module.exports = function createDevConfig(answer) {
