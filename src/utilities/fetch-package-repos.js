@@ -38,7 +38,7 @@ async function paginate (org) {
 }
 
 async function main() {
-  mkdirp.sync(path.resolve(__dirname, `../../repositories/`));
+  mkdirp.sync(path.resolve(__dirname, '../../repositories/'));
 
   for (const [type, collection] of Object.entries(fetch)) {
     const result = await Promise.all(collection.map(async (item) => {
