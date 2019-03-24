@@ -5,6 +5,8 @@ contributors:
   - evenstensberg
   - pranshuchittora
   - EugeneHlushko
+  - misterdev
+  - rishabh3112
 ---
 
 Welcome to the demonstration of the new `webpack init` command! To view what we are building today, run `webpack init webpack-scaffold-demo`. This demo will show you how to build your own webpack scaffold. Let's start by creating a file named `generator.js`.
@@ -32,11 +34,11 @@ module.exports = class WebpackGenerator extends Generator {
 };
 ```
 
-`configuration` object has to have one property you name (we named it `dev` in the snippet above). A good practise is to name the underlying property with the name you want to give to your `webpack.config.js` file for better indication of what configuration each file has.
+`configuration` object has to have one property you name (we named it `dev` in the snippet above). A good practice is to name the underlying property with the name you want to give to your `webpack.config.js` file for a better indication of what configuration each file has.
 
 ## Make it interactive
 
-In order for us to interact with the users, we make use of the [`prompting`](http://yeoman.io/authoring/user-interactions.html) method yeoman has. In this method we can get various answers from the user, like asking for entry points or plugins. You can either manually create each object representing a question or you can make good use of our utilities from [`webpack-scaffold`](https://github.com/webpack/webpack-cli/tree/master/packages/webpack-scaffold). We are in a good mood today, so let's build a configuration only if the user chooses `Pengwings`.
+In order for us to interact with the users, we make use of the [`prompting`](http://yeoman.io/authoring/user-interactions.html) method yeoman has. In this method, we can get various answers from the user, like asking for entry points or plugins. You can either manually create each object representing a question or you can make good use of our utilities from [`webpack-scaffold`](https://github.com/webpack/webpack-cli/tree/master/packages/webpack-scaffold). We are in a good mood today, so let's build a configuration only if the user chooses `Pengwings`.
 
 
 ```js
@@ -95,9 +97,10 @@ module.exports = class WebpackGenerator extends Generator {
 };
 ```
 
-## Dev Configs
 
-Congratulations! You've now created the base of an `webpack-scaffold`! Let's now add some more stuff to our future configuration file!
+## Dev Configurations
+
+Congratulations! You've now created the base of a `webpack-scaffold`! Let's now add some more stuff to our future configuration file!
 We are going to follow good convention, and extract our configuration into another file, named `dev-config.js`. As this is just regular JavaScript, we can make the module a function, and supply our `entry` as a parameter for us to build up a configuration file from.
 
 __dev-config.js__
@@ -194,7 +197,7 @@ Run `webpack init webpack-scaffold-demo`, and you should see scaffold working.
 
 ## Basic Scaffold
 
-Now that we've got our initial scaffold. Let's add the rest of our options! For the `context`, let's say we need to use `path`'s `join` function. For this, we use a single quote string. By default the current directory is used, but it's recommended to pass a value in your configuration (context). This makes your configuration independent from CWD (current working directory).
+Now that we've got our initial scaffold. Let's add the rest of our options! For the `context`, let's say we need to use `path`'s `join` function. For this, we use a single quote string. By default, the current directory is used, but it's recommended to pass a value in your configuration (context). This makes your configuration independent from CWD (current working directory).
 
 ```js
 module.exports = function createDevConfig(answer) {
@@ -381,4 +384,4 @@ module.exports = class WebpackGenerator extends Generator {
 ```
 
 
-Congratulations 🎉 on completing your first scaffold! If you need help, submit an [issue](https://github.com/ev1stensberg/webpack-scaffold-demo/issues), or reach out on [Twitter](https://twitter.com/evenstensberg)!
+Congratulations 🎉 on completing your first scaffold! If you need help, submit an [issue](https://github.com/evenstensberg/webpack-scaffold-demo/issues), or reach out on [Twitter](https://twitter.com/evenstensberg)!
