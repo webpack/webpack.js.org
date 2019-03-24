@@ -12,11 +12,11 @@ It can be hard to set up a complex webpack configuration for the first time. Wri
 
 Before writing a `webpack-cli` scaffold, think about what you're trying to achieve. Do you want a "general" scaffold that could be used by any project or type of app? Do you want something focused, like a scaffold that writes both your `webpack.config.js` and your framework code? It's also useful to think about the user experience for your scaffold.
 
-`webpack-cli` offers interactive experience to customize the output accordingly. For example asking questions like: "What is your entry point?".
+`webpack-cli` offers an interactive experience to customize the output accordingly. For example asking questions like: "What is your entry point?".
 
 ### Writing a scaffold
 
-There are many resources where you can learn how to write a scaffold, you can start from: [Writing a Scaffold](/contribute/writing-a-scaffold/)
+There are many resources where you can learn how to write a scaffold, you can start from [Writing a Scaffold](/contribute/writing-a-scaffold/)
 
 `webpack-scaffold` is a utility suite for creating scaffolds. It contains functions that could be used to create a scaffold.
 
