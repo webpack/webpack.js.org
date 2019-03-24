@@ -9,8 +9,11 @@ contributors:
 
 Welcome to the demonstration of the new `webpack init` command! To view what we are building today, run `webpack init webpack-scaffold-demo`. This demo will show you how to build your own webpack scaffold. Let's start by creating a file named `generator.js`.
 
-
 ## Create a basic structure
+
+Before writing a `webpack-cli` scaffold, think about what you're trying to achieve. Do you want a "general" scaffold that could be used by any project or type of app? Do you want something focused, like a scaffold that writes both your `webpack.config.js` and your framework code? It's also useful to think about the user experience for your scaffold.
+
+`webpack-cli` offers interactive experience to customize the output accordingly. For example asking questions like: "What is your entry point?".
 
 Let's create our skeleton. In order for the webpack CLI to detect our options, we have to define some properties in the constructor.
 
@@ -30,7 +33,6 @@ module.exports = class WebpackGenerator extends Generator {
 ```
 
 `configuration` object has to have one property you name (we named it `dev` in the snippet above). A good practise is to name the underlying property with the name you want to give to your `webpack.config.js` file for better indication of what configuration each file has.
-
 
 ## Make it interactive
 
@@ -60,7 +62,6 @@ module.exports = class WebpackGenerator extends Generator {
   }
 };
 ```
-
 
 ## Configuring Webpack
 
@@ -93,7 +94,6 @@ module.exports = class WebpackGenerator extends Generator {
   }
 };
 ```
-
 
 ## Dev Configs
 
@@ -168,7 +168,6 @@ module.exports = class WebpackGenerator extends Generator {
 };
 ```
 
-
 ## Some more configs
 
 Let's look at `dev-config.js`. We have access to user's answers, use them to assign values to desired config properties, in this case - `entry`. We've also added an output property that has a `filename`.
@@ -193,7 +192,6 @@ module.exports = function createDevConfig(answer) {
 
 Run `webpack init webpack-scaffold-demo`, and you should see scaffold working.
 
-
 ## Basic Scaffold
 
 Now that we've got our initial scaffold. Let's add the rest of our options! For the `context`, let's say we need to use `path`'s `join` function. For this, we use a single quote string. By default the current directory is used, but it's recommended to pass a value in your configuration (context). This makes your configuration independent from CWD (current working directory).
@@ -211,7 +209,6 @@ module.exports = function createDevConfig(answer) {
   return devConfig;
 };
 ```
-
 
 ## Add more functionality
 
@@ -247,7 +244,6 @@ module.exports = class WebpackGenerator extends Generator {
 };
 ```
 
-
 ## Create string with name
 
 Now, we've got to create a string with our answer. This is how it looks.
@@ -261,7 +257,6 @@ module.exports = function createHtmlPlugin(name) {
 ```
 
 We've now created a scaffold with `entry`, `output`, `context` and a `plugin`. If you're curious on the API, check the [API](/guides/scaffolding/) for more info on how to scaffold with `regexps`, `module` and other!
-
 
 ## Defining scopes
 
@@ -303,7 +298,6 @@ module.exports = class WebpackGenerator extends Generator {
 };
 ```
 
-
 ## Configuration nomenclature
 
 We recommend you to name your configuration file something meaningful, like in our case: "penguins". To do it, set the `this.options.env.configuration.dev.configName` to desired string.
@@ -342,7 +336,6 @@ module.exports = class WebpackGenerator extends Generator {
   }
 };
 ```
-
 
 ## About .yo-rc.json
 

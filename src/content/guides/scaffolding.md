@@ -8,12 +8,6 @@ sort: 2
 
 It can be hard to set up a complex webpack configuration for the first time. Writing advanced configurations to optimize performance is quite hard. The `init` feature is designed to support people that want to create their own configuration or initializing projects that other people create.
 
-## Creating a scaffold
-
-Before writing a `webpack-cli` scaffold, think about what you're trying to achieve. Do you want a "general" scaffold that could be used by any project or type of app? Do you want something focused, like a scaffold that writes both your `webpack.config.js` and your framework code? It's also useful to think about the user experience for your scaffold.
-
-`webpack-cli` offers interactive experience to customize the output accordingly. For example asking questions like: "What is your entry point?".
-
 ### Writing a scaffold
 
 There are many resources where you can learn how to write a scaffold, you can start from: [Writing a Scaffold](/contribute/writing-a-scaffold/)
@@ -39,17 +33,9 @@ webpack-cli init path/to/your/scaffold
 Or you can create a global module and symlink to the local one:
 
 - Using npm
-      	```bash
-      	cd path/to/my-scaffold
-      	npm link
-      	webpack-cli init my-scaffold
-      	```
+  `bash cd path/to/my-scaffold npm link webpack-cli init my-scaffold`
 - Using yarn
-      	```bash
-      	cd path/to/my-scaffold
-      	yarn link
-      	webpack-cli init my-scaffold
-        ```
+  `bash cd path/to/my-scaffold yarn link webpack-cli init my-scaffold`
 
 #### Running a scaffold from npm
 
@@ -67,10 +53,17 @@ W> Objects are made using strings, while strings are made using double strings. 
 
 ### Required
 
-- [opts.env.configuration](#optsenvconfiguration-required)
-- [opts.env.configuration.myObj](#optsenvconfigurationmyObj-required)
-- [myObj.webpackOptions](#myObjwebpackOptions-required)
-- [writing()](<#writing()-required>)
+- [API](#api)
+
+    - [Required](#required)
+    - [Optional](#optional)
+    - [`opts.env.configuration`(required)](#optsenvconfigurationrequired)
+    - [`opts.env.configuration.myObj` (required)](#optsenvconfigurationmyobj-required)
+    - [`myObj.webpackOptions` (required)](#myobjwebpackoptions-required)
+    - [`myObj.merge` (optional)](#myobjmerge-optional)
+    - [`myObj.topScope`(optional)](#myobjtopscopeoptional)
+    - [`myObj.configName`(optional)](#myobjconfignameoptional)
+    - [`writing` (required)](#writing-required)
 
 ### Optional
 
@@ -119,8 +112,8 @@ This object has the same format as a regular webpack [configuration](/configurat
 
 ```js
 this.options.env.configuration.dev.webpackOptions = {
-  entry:'\'app.js\'',
-  output:{}
+  entry: '\'app.js\'',
+  output: {}
 };
 ```
 
