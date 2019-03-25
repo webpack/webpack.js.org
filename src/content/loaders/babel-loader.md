@@ -6,9 +6,9 @@ repo: https://github.com/babel/babel-loader
 ---
 
 
-This package allows transpiling JavaScript files using [Babel](https://github.com/babel/babel) and [webpack](https://github.com/webpack/webpack).
+转译加载器，该加载器允许使用 [Babel](https://github.com/babel/babel) 和 [webpack](https://github.com/webpack/webpack) 转译 JavaScript 文件。
 
-__Notes:__ Issues with the output should be reported on the babel [issue tracker](https://github.com/babel/babel/issues).
+__注意:__ 输出 (output) 相关问题请提交至 babel [问题跟踪](https://github.com/babel/babel/issues)。
 
 ## 中文文档
 

@@ -4,7 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/bundle-loader/master/R
 edit: https://github.com/webpack-contrib/bundle-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/bundle-loader
 ---
-webpack 的 bundle loader
+捆绑加载器，主要用于实现按需加载。
 
 ## 安装
 

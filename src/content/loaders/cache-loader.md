@@ -4,7 +4,7 @@ source: https://raw.githubusercontent.com/webpack-contrib/cache-loader/master/RE
 edit: https://github.com/webpack-contrib/cache-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/cache-loader
 ---
-Caches the result of following loaders on disk (default) or in the database
+缓存加载器，用于缓存后面加载器的结果，写入本地默认磁盘或数据库。
 
 ## 安装
 
@@ -40,11 +40,13 @@ module.exports = {
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|**`cacheKey`**|`{Function(options, request) -> {String}}`|`undefined`|Allows you to override default cache key generator|
-|**`cacheDirectory`**|`{String}`|`path.resolve('.cache-loader')`|Provide a cache directory where cache items should be stored (used for default read/write implementation)|
-|**`cacheIdentifier`**|`{String}`|`cache-loader:{version} {process.env.NODE_ENV}`|Provide an invalidation identifier which is used to generate the hashes. You can use it for extra dependencies of loaders (used for default read/write implementation)|
-|**`write`**|`{Function(cacheKey, data, callback) -> {void}}`|`undefined`|Allows you to override default write cache data to file (e.g. Redis, memcached)|
-|**`read`**|`{Function(cacheKey, callback) -> {void}}`|`undefined`|Allows you to override default read cache data from file|
+|**`cacheContext`**|`{String}`|`undefined`|允许重写默认缓存上下文，然后生成相应路径。默认情况下，使用绝对路径|
+|**`cacheKey`**|`{Function(options, request) -> {String}}`|`undefined`|允许重写默认缓存密钥生成器|
+|**`cacheDirectory`**|`{String}`|`path.resolve('.cache-loader')`|提供应存储（用于默认读/写实现）缓存项的缓存目录|
+|**`cacheIdentifier`**|`{String}`|`cache-loader:{version} {process.env.NODE_ENV}`|提供用于生成哈希值的无效标识符。可以为（用于默认读/写实现的）加载器添加额外依赖项。|
+|**`write`**|`{Function(cacheKey, data, callback) -> {void}}`|`undefined`|允许重写默认写入缓存数据 (e.g. Redis, memcached)|
+|**`read`**|`{Function(cacheKey, callback) -> {void}}`|`undefined`|允许重写默认读取缓存数据|
+|**`readOnly`**|`{Boolean}`|`false`|允许重写默认值并将缓存设为只读（对于某些只从缓存中读取，不希望更新缓存的环境很有用）|
 
 ## 示例
 
