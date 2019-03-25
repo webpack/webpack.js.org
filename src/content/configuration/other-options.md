@@ -21,9 +21,9 @@ W> Help Wanted: This page is still a work in progress. If you are familiar with 
 
 ## `amd`
 
-`object`
+`object` `bool: false`
 
-Set the value of `require.amd` or `define.amd`:
+Set the value of `require.amd` or `define.amd`. Setting `amd` to `false` will disable webpack's AMD support.
 
 __webpack.config.js__
 
@@ -42,6 +42,7 @@ The allowances were the ability to restrict registrations to a specific version 
 
 This option allows you to set the key your module looks for to a truthy value.
 As it happens, the AMD support in webpack ignores the defined name anyways.
+
 
 
 ## `bail`

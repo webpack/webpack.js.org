@@ -80,7 +80,7 @@ Set a URL for source maps. Useful for hosting them on a host that requires autho
 
 ```js
 new webpack.SourceMapDevToolPlugin({
-  append: '\n//# sourceMappingURL=http://example.com/sourcemap/[url]',
+  append: '\n//# sourceMappingURL=https://example.com/sourcemap/[url]',
   filename: '[name].map'
 });
 ```

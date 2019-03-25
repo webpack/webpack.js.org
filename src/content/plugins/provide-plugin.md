@@ -26,10 +26,20 @@ new webpack.ProvidePlugin({
 });
 ```
 
+By default, module resolution path is current folder (`./**)` and `node_modules`.
+
+It is also possible to specify full path:
+
+```js
+new webpack.ProvidePlugin({
+  identifier: path.resolve(path.join(__dirname, 'src/module1'))
+  // ...
+});
+```
+
 Whenever the `identifier` is encountered as free variable in a module, the `module` is loaded automatically and the `identifier` is filled with the exports of the loaded `module` (or `property` in order to support named exports).
 
-W> For importing the default export of an ES2015 module, you have to specify the default property of module.
-
+For importing the default export of an ES2015 module, you have to specify the default property of module.
 
 ## Usage: jQuery
 

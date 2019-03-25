@@ -3,7 +3,7 @@ title: Loaders
 sort: 4
 contributors:
   - manekinekko
-  - ev1stensberg
+  - evenstensberg
   - SpaceK33z
   - gangachris
   - TheLarkInn
@@ -100,7 +100,7 @@ T> Use `module.rules` whenever possible, as this will reduce boilerplate in your
 
 You can also use loaders through the CLI:
 
-```sh
+```bash
 webpack --module-bind jade-loader --module-bind 'css=style-loader!css-loader'
 ```
 

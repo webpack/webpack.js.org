@@ -51,17 +51,8 @@
     height: 31px;
     border-radius: 50%;
     border: 1px solid white;
+    box-shadow: 0 0 0 1px rgb(112, 202, 10);
     overflow: hidden;
-  }
-
-  &__outline {
-    position: absolute;
-    top: 0;
-    margin: -1px;
-    width: calc(100% + 2px);
-    height: calc(100% - 4px);
-    border-radius: 50%;
-    border: 1px solid rgb(112, 202, 10);
   }
 
   &__bottom {

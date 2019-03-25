@@ -227,7 +227,7 @@ Note: the `ts-loader` documentation suggests the use of `cache-loader`, but this
 
 To gain typechecking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin).
 
-There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fast-incremental-builds) on the ts-loader github repository.
+There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin) on the ts-loader github repository.
 
 ---
 
