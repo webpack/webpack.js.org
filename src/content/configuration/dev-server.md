@@ -1088,7 +1088,7 @@ webpack-dev-server --socket socket
 
 `string: '/sockjs-node'`
 
-The path at which to connect to the reloading socket. Defaults to `/sockjs-node`.
+The path at which to connect to the reloading socket.
 
 __webpack.config.js__
 
