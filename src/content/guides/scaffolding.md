@@ -70,23 +70,16 @@ W> Objects are made using strings, while strings are made using double strings. 
 
 ### Required
 
-- [API](#api)
-
-    - [Required](#required)
-    - [Optional](#optional)
-    - [`opts.env.configuration`(required)](#optsenvconfigurationrequired)
-    - [`opts.env.configuration.myObj` (required)](#optsenvconfigurationmyobj-required)
-    - [`myObj.webpackOptions` (required)](#myobjwebpackoptions-required)
-    - [`myObj.merge` (optional)](#myobjmerge-optional)
-    - [`myObj.topScope`(optional)](#myobjtopscopeoptional)
-    - [`myObj.configName`(optional)](#myobjconfignameoptional)
-    - [`writing` (required)](#writing-required)
+- [`opts.env.configuration`(required)](#optsenvconfigurationrequired)
+- [`opts.env.configuration.myObj` (required)](#optsenvconfigurationmyobj-required)
+- [`myObj.webpackOptions` (required)](#myobjwebpackoptions-required)
+- [`writing` (required)](#writing-required)
 
 ### Optional
 
-- [myObj.merge](#myObjmerge-optional)
-- [myObj.topScope](#myObjtopScope-optional)
-- [myObj.configName](#myObjconfigName-optional)
+- [myObj.merge](#myobjmerge-optional)
+- [myObj.topScope](#myobjtopscopeoptional)
+- [myObj.configName](#myobjconfignameoptional)
 
 ### `opts.env.configuration`(required)
 
@@ -134,6 +127,20 @@ this.options.env.configuration.dev.webpackOptions = {
 };
 ```
 
+### `writing` (required)
+
+`function`
+
+For the scaffolding instance to run, you need to write your configuration to a `.yo-rc.json` file. This could be done using one of the lifecycles in the yeoman generator, such as the `writing` method:
+
+```js
+class MyScaffold extends Generator {
+  writing() {
+    this.config.set('configuration', myObj);
+  }
+}
+```
+
 ### `myObj.merge` (optional)
 
 `string`
@@ -165,18 +172,4 @@ this.options.env.configuration.dev.topScope = [
 
 ```js
 this.options.env.configuration.dev.configName = 'base';
-```
-
-### `writing` (required)
-
-`function`
-
-For the scaffolding instance to run, you need to write your configuration to a `.yo-rc.json` file. This could be done using one of the lifecycles in the yeoman generator, such as the `writing` method:
-
-```js
-class MyScaffold extends Generator {
-  writing() {
-    this.config.set('configuration', myObj);
-  }
-}
 ```
