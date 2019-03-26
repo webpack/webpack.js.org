@@ -9,4 +9,5 @@ npm-debug.log
 yarn-error.log
 package-lock.json
 .cache
+internal-links.tap
 src/content/**/*_all.md
