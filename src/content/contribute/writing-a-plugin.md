@@ -246,10 +246,6 @@ Various types of hooks supported are :-
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
     - Called using `callAsync( ... params)` method
 
-  someMethod() {
-  // Call a hook:
-  this.hooks.compilation.call();
-
 - __Async Parallel__
 
     - Defined using `AsyncParallelHook[params]`
