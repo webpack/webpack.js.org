@@ -2,7 +2,6 @@
 title: Writing a Scaffold
 sort: 3
 contributors:
-  - evenstensberg
   - pranshuchittora
   - EugeneHlushko
   - misterdev
