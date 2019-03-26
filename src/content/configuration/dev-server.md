@@ -1084,6 +1084,24 @@ webpack-dev-server --socket socket
 ```
 
 
+## `devServer.sockPath`
+
+`string: '/sockjs-node'`
+
+The path at which to connect to the reloading socket.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    sockPath: '/socket',
+  }
+};
+```
+
+
 ## `devServer.staticOptions`
 
 It is possible to configure advanced options for serving static files from `contentBase`. See the [Express documentation](http://expressjs.com/en/4x/api.html#express.static) for the possible options.
