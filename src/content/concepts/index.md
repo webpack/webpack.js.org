@@ -166,7 +166,7 @@ module.exports = {
 };
 ```
 
-Learn more about the [mode configuration here](/concepts/mode) and what optimizations take place on each value.
+Learn more about the [mode configuration here](/configuration/mode) and what optimizations take place on each value.
 
 
 ## Browser Compatibility
