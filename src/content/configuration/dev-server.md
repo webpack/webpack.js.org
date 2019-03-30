@@ -56,6 +56,8 @@ W> Be aware that when [exporting multiple configurations](/configuration/configu
 
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
 
+T> HTML template is required to serve the bundle, usually it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
+
 ## `devServer.after`
 
 `function (app, server)`
@@ -232,7 +234,7 @@ webpack-dev-server --compress
 
 `boolean: false` `string` `[string]` `number`
 
-Tell the server where to serve content from. This is only necessary if you want to serve static files. [`devServer.publicPath`](#devserver-publicpath-) will be used to determine where the bundles should be served from, and takes precedence.
+Tell the server where to serve content from. This is only necessary if you want to serve static files. [`devServer.publicPath`](#devserverpublicpath-) will be used to determine where the bundles should be served from, and takes precedence.
 
 T> It is recommended to use an absolute path.
 
@@ -450,7 +452,7 @@ T> Note that [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacem
 
 `boolean`
 
-Enables Hot Module Replacement (see [`devServer.hot`](#devserver-hot)) without page refresh as fallback in case of build failures.
+Enables Hot Module Replacement (see [`devServer.hot`](#devserverhot)) without page refresh as fallback in case of build failures.
 
 __webpack.config.js__
 
@@ -623,9 +625,9 @@ module.exports = {
 
 ## `devServer.open`
 
-`boolean` `string`
+`boolean: false` `string`
 
-Tells dev-server to open the browser after server had been started. Disabled by default.
+Tells dev-server to open the browser after server had been started. Set it to `true` to open your default browser.
 
 __webpack.config.js__
 
@@ -638,7 +640,9 @@ module.exports = {
 };
 ```
 
-If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass its name instead of boolean:
+Provide browser name to use instead of the default one:
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -652,29 +656,10 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --open
+webpack-dev-server --open 'Google Chrome'
 ```
 
-Or with specified browser:
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    open: 'Chrome'
-  }
-};
-```
-
-And via the CLI
-
-```bash
-webpack-dev-server --open 'Chrome'
-```
-
-T> The browser application name is platform dependent. Don't hard code it in reusable modules. For example, `'Chrome'` is Google Chrome on macOS, `'google-chrome'` on Linux and `'chrome'` on Windows.
+T> The browser application name is platform dependent. Don't hard code it in reusable modules. For example, `'Chrome'` is `'Google Chrome'` on macOS, `'google-chrome'` on Linux and `'chrome'` on Windows.
 
 
 ## `devServer.openPage`
@@ -1096,6 +1081,24 @@ Usage via the CLI
 
 ```bash
 webpack-dev-server --socket socket
+```
+
+
+## `devServer.sockPath`
+
+`string: '/sockjs-node'`
+
+The path at which to connect to the reloading socket.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    sockPath: '/socket',
+  }
+};
 ```
 
 

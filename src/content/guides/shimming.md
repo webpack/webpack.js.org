@@ -11,11 +11,12 @@ contributors:
   - EugeneHlushko
   - dhurlburtusa
   - plr108
+  - NicolasLetellier
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
   - title: useBuiltIns in babel-preset-env
-    url: https://github.com/babel/babel-preset-env#usebuiltins
+    url: https://babeljs.io/docs/en/babel-preset-env#usebuiltins
 ---
 
 The `webpack` compiler can understand modules written as ES2015 modules, CommonJS or AMD. However, some third party libraries may expect global dependencies (e.g. `$` for `jQuery`). The libraries might also create globals which need to be exported. These "broken modules" are one instance where _shimming_ comes into play.
@@ -260,7 +261,7 @@ Now from within our entry script (i.e. `src/index.js`), we could `import { file,
 
 Almost everything we've discussed thus far has been in relation to handling legacy packages. Let's move on to our second topic: __polyfills__.
 
-There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`](https://babeljs.io/docs/usage/polyfill/) we might simply:
+There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`](https://babeljs.io/docs/en/babel-polyfill/) we might simply:
 
 ``` bash
 npm install --save babel-polyfill
@@ -440,7 +441,7 @@ import 'core-js/modules/web.immediate';
 import 'core-js/modules/web.dom.iterable';
 ```
 
-See [the repository](https://github.com/babel/babel-preset-env) for more information.
+See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset-env) for more information.
 
 
 ## Node Built-Ins

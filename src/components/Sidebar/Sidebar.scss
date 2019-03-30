@@ -5,8 +5,7 @@
 .sidebar {
   display: none;
   width: 100%;
-  max-height: 100%;
-  overflow: auto;
+  max-width: 280px;
   will-change: transform;
 
   @include break {
@@ -16,7 +15,16 @@
 
 .sidebar__inner {
   padding: 1.5em;
-  overflow: hidden;
+  position: sticky;
+  top: -1px;
+  overflow: scroll;
+  max-height: 100vh;
+  // To hide scrollbar in Firefox
+  scrollbar-width: none;
+  // To hide scrollbar in Chrome
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
 }
 
 .sidebar__group {

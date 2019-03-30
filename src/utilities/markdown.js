@@ -5,7 +5,7 @@ module.exports = function() {
   var renderer = new marked.Renderer();
 
   renderer.image = function(href, title, text) {
-    return `<img src="${href}" alt="${text}">`;
+    return `<img src='${href}' alt='${text}'>`;
   };
 
   // Patch IDs (this.options.headerPrefix can be undefined!)
@@ -14,10 +14,10 @@ module.exports = function() {
     var id = parsed.id;
 
     return (
-      `<h${level} class="header">
-        <a class="anchor" aria-hidden="true" href="#${id}" id="${id}"></a>
-        <span class="text">${text}</span>
-        <a aria-label="${text}" class="icon-link" href="#${id}"></a>
+      `<h${level} class='header'>
+        <a class='anchor' aria-hidden='true' href='#${id}' id='${id}'></a>
+        <span class='text'>${text}</span>
+        <a aria-label='${text}' class='icon-link' href='#${id}'></a>
       </h${level}>\n`
     );
   };
@@ -31,28 +31,28 @@ module.exports = function() {
 
     if (/-with-links/.test(lang)) {
       linksEnabled = true;
-      lang = lang.replace(/-with-links/, "");
+      lang = lang.replace(/-with-links/, '');
     }
 
     if (/-with-details/.test(lang)) {
       detailsEnabled = true;
-      lang = lang.replace(/-with-details/, "");
+      lang = lang.replace(/-with-details/, '');
     }
 
     if (linksEnabled) {
       code = code.replace(/\[([^[\]]+?)\]\((.+?)\)/g, match => {
         match = /\[([^[\]]+?)\]\((.+?)\)/.exec(match);
-        links.push('<a class="code-link" href="' + match[2] + '">' + match[1] + '</a>');
-        return "MARKDOWNLINK_" + (links.length - 1) + "_";
+        links.push(`<a class="code-link" href="${match[2]}">${match[1]}</a>`);
+        return `MARKDOWNLINK_${(links.length - 1)}_`;
       });
     }
 
     if (detailsEnabled) {
-      code = code.replace(/<details>/g, "MARKDOWNDETAILSSTART\n");
-      code = code.replace(/ *<\/details>(\n)?/g, "\nMARKDOWNDETAILSEND\n");
-      code = code.replace(/<summary>/g, "\nMARKDOWNSUMMARYSTART\n");
-      code = code.replace(/ *<\/summary>/g, "\nMARKDOWNSUMMARYEND");
-      code = code.replace(/(?:)?( *)MARKDOWNDETAILSSTART([\s\S]*?)MARKDOWNSUMMARYSTART\n/g, "MARKDOWNDETAILSSTART$2MARKDOWNSUMMARYSTART\n$1");
+      code = code.replace(/<details>/g, 'MARKDOWNDETAILSSTART\n');
+      code = code.replace(/ *<\/details>(\n)?/g, '\nMARKDOWNDETAILSEND\n');
+      code = code.replace(/<summary>/g, '\nMARKDOWNSUMMARYSTART\n');
+      code = code.replace(/ *<\/summary>/g, '\nMARKDOWNSUMMARYEND');
+      code = code.replace(/(?:)?( *)MARKDOWNDETAILSSTART([\s\S]*?)MARKDOWNSUMMARYSTART\n/g, 'MARKDOWNDETAILSSTART$2MARKDOWNSUMMARYSTART\n$1');
     }
 
     var rendered = codeTemplate.call(this, code, lang, escaped);
@@ -65,10 +65,10 @@ module.exports = function() {
     }
 
     if (detailsEnabled) {
-      rendered = rendered.replace(/MARKDOWNDETAILSSTART.*?\n/g, "<details>");
-      rendered = rendered.replace(/\n.*?MARKDOWNDETAILSEND.*?\n/g, "</details>");
-      rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYSTART.*?\n/g, "<summary><span class='code-details-summary-span'>");
-      rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYEND.*?\n/g, "</span></summary>");
+      rendered = rendered.replace(/MARKDOWNDETAILSSTART.*?\n/g, '<details>');
+      rendered = rendered.replace(/\n.*?MARKDOWNDETAILSEND.*?\n/g, '</details>');
+      rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYSTART.*?\n/g, '<summary><span class="code-details-summary-span">');
+      rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYEND.*?\n/g, '</span></summary>');
     }
 
     return rendered;
@@ -170,10 +170,10 @@ function handleHTMLSplit(tokens, htmlArray, merging) {
   }
   // finish inline code
   else if(merging.length > 0 && tickLength > 1) {
-    htmlArray.unshift(tickSplit.slice(1, tickLength).join("`"));
-    merging += tickSplit[0]+"`";
+    htmlArray.unshift(tickSplit.slice(1, tickLength).join('`'));
+    merging += tickSplit[0]+'`';
     tokens = tokens.concat(parseContent(merging));
-    merging = "";
+    merging = '';
   }  else if (merging.length === 0) {
     tokens = tokens.concat(parseContent(htmlItem));
   }
@@ -205,7 +205,7 @@ function handleHTML(t) {
       if (item.indexOf('```') !== 0) {
         // split all html tags
         const htmlArray = item.split(/\s*(<[^>]*>)/g).filter(v => (v !== '' && v !== '\n'));
-        tokens = handleHTMLSplit(tokens, htmlArray, "");
+        tokens = handleHTMLSplit(tokens, htmlArray, '');
       }
       // normally parse code block
       else {
