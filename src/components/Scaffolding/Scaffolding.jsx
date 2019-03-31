@@ -22,31 +22,54 @@ import {
     return input.replace(/[^a-z0-9\s]/gi, '').replace(/(gt)/gi, '')
   }
   const Hit = ({ hit }) => {
-    console.log(hit);
   
     return (
       <article className="hit-card">
-        <a target="_blank" rel="noopener noreferrer"
-          href={hit.repository && hit.repository.url ? hit.repository.url: '/'}>
-          <div className="product-wrapper">
-              <div className="product-summary">
-                <div className="product-title">
-                <h3>{hit.name}</h3> 
-                </div>
-                <div className="product-avatar">
-                  <img src={hit.owner.avatar} height="40" width="40"/>
-                </div>
-              </div>
-              <div className="product-name">
-              <h3>{hit.owner.name}</h3>
-              </div>
-              
-              <div className="product-desc">
-                <p>{htmlDecode(hit.description)}</p>
-              </div>
+       {
+          hit.repository && hit.repository.url ? (
+            <a target="_blank" rel="noopener noreferrer"
+              href={hit.repository && hit.repository.url ? hit.repository.url: '/'}>
+              <div className="product-wrapper">
+                  <div className="product-summary">
+                    <div className="product-title">
+                    <h3>{hit.name}</h3> 
+                    </div>
+                    <div className="product-avatar">
+                      <img src={hit.owner.avatar} height="40" width="40"/>
+                    </div>
+                  </div>
+                  <div className="product-name">
+                  <h3>{hit.owner.name}</h3>
+                  </div>
+                  
+                  <div className="product-desc">
+                    <p>{htmlDecode(hit.description)}</p>
+                  </div>
 
-          </div>
-        </a>
+              </div>
+            </a>
+
+          ) : (
+          <div className="product-wrapper">
+            <div className="product-summary">
+              <div className="product-title">
+                <h3>{hit.name}</h3>
+              </div>
+              <div className="product-avatar">
+                <img src={hit.owner.avatar} height="40" width="40" />
+              </div>
+            </div>
+            <div className="product-name">
+              <h3>{hit.owner.name}</h3>
+            </div>
+
+            <div className="product-desc">
+              <p>{htmlDecode(hit.description)}</p>
+            </div>
+
+        </div>
+          )
+       }
       </article>
     );
   };
