@@ -22,7 +22,6 @@ import {
     return input.replace(/[^a-z0-9\s]/gi, '').replace(/(gt)/gi, '')
   }
   const Hit = ({ hit }) => {
-    console.log(hit)
   
     return (
       <article className="hit-card">
