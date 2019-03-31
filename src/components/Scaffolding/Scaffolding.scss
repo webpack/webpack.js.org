@@ -28,6 +28,9 @@ ul.ais-Hits-list {
     padding: 0;
 }
 
+.hit-card {
+    height: 100%;
+}
 
 .ais-SearchBox-reset svg,
 .ais-SearchBox-submit svg {
@@ -51,12 +54,12 @@ button.ais-SearchBox-submit {
 
 .ais-Hits-item {
     flex: 0 0 100%;
-}
-.product-wrapper {
     border-top: 1px solid getColor(denim);
-    border-bottom: 1px solid getColor(denim);
-    margin: 5px;
-    
+    margin: 0 !important;
+}
+
+.product-wrapper {
+    padding: 10px;
 }
 
 .product-summary {
@@ -64,16 +67,9 @@ button.ais-SearchBox-submit {
     display: flex;
     float: right;
 }
-.product-desc {
-    padding: 5px;
-}
 
 .product-title {
     padding: 5px 15px 5px 15px;
-}
-
-.product-name {
-    margin-top: 10px;
 }
 
 .product-avatar {
