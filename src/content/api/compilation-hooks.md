@@ -64,7 +64,7 @@ Parameters: `module`
 
 ### `finishModules`
 
-`SyncHook`
+`AsyncSeriesHook`
 
 All modules have been built.
 
