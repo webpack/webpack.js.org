@@ -100,8 +100,8 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2"
+      "webpack": "^4.20.2",
+      "webpack-cli": "^3.1.2"
     },
     "dependencies": {}
   }
@@ -193,7 +193,7 @@ main.js  70.4 KiB       0  [emitted]  main
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
 ```
 
 T> Your output may vary a bit, but if the build is successful then you are good to go. Also, don't worry about the warning, we'll tackle that later.
@@ -252,7 +252,7 @@ main.js  70.4 KiB       0  [emitted]  main
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
 ```
 
 T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a config of any name. This will be useful for more complex configurations that need to be split into multiple files.
@@ -303,7 +303,7 @@ main.js  70.4 KiB       0  [emitted]  main
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/.
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/.
 ```
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.

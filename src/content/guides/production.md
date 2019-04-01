@@ -149,7 +149,7 @@ Feel free to run those scripts and see how the output changes as we continue add
 
 ## Specify the Mode
 
-Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when not in _production_ some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV === 'production'` they might drop or add significant portions of code to optimize how things run for your actual users. Since webpack v4, specifying [`mode`](/concepts/mode/) automatically configures [`DefinePlugin`](/plugins/define-plugin) for you:
+Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when not in _production_ some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV === 'production'` they might drop or add significant portions of code to optimize how things run for your actual users. Since webpack v4, specifying [`mode`](/configuration/mode/) automatically configures [`DefinePlugin`](/plugins/define-plugin) for you:
 
 __webpack.prod.js__
 
@@ -192,14 +192,14 @@ __src/index.js__
 
 ## Minification
 
-webpack v4+ will minify your code by default in [`production mode`](/concepts/mode/#mode-production).
+webpack v4+ will minify your code by default in [`production mode`](/configuration/mode/#mode-production).
 
 Note that while the [`TerserPlugin`](/plugins/terser-webpack-plugin) is a great place to start for minification and being used by default, there are other options out there. Here are a few more popular ones:
 
 - [`BabelMinifyWebpackPlugin`](https://github.com/webpack-contrib/babel-minify-webpack-plugin)
-- [`ClosureCompilerPlugin`](https://github.com/roman01la/webpack-closure-compiler)
+- [`ClosureWebpackPlugin`](https://github.com/webpack-contrib/closure-webpack-plugin)
 
-If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimization-minimizer).
+If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
 
 
 ## Source Mapping

@@ -2,7 +2,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const SSGPlugin = require('static-site-generator-webpack-plugin');
 const RedirectWebpackPlugin = require('redirect-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -22,14 +21,8 @@ const paths = [
 
 // Prod only config
 const prod = {
+  mode: 'production',
   plugins: [
-    new UglifyJSPlugin({
-      parallel: true,
-      exclude: /^(server)/
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
     new CopyWebpackPlugin([
       {
         from: './assets/icon-square-small-slack.png',
@@ -92,7 +85,8 @@ module.exports = env => [
           'guides/why-webpack': '/comparison/',
           'guides/production-build': '/guides/production/',
           'migrating': '/migrate/3/',
-          'plugins/no-emit-on-errors-plugin': '/configuration/optimization/#optimization-noemitonerrors'
+          'plugins/no-emit-on-errors-plugin': '/configuration/optimization/#optimization-noemitonerrors',
+          'concepts/mode': '/configuration/mode'
         }
       })
     ],
@@ -102,12 +96,6 @@ module.exports = env => [
     }
   }),
   merge(common(env), prod, {
-    target: 'web',
-    plugins: [
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        chunks: ['index']
-      })
-    ]
+    target: 'web'
   })
 ];

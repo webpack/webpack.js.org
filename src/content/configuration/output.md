@@ -788,7 +788,7 @@ Note that `[hash]` in this parameter will be replaced with an hash of the compil
 
 `boolean`
 
-Tells webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` [mode](/concepts/mode/) respectively.
+Tells webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` [mode](/configuration/mode/) respectively.
 
 W> While the data this comments can provide is very useful during development when reading the generated code, it __should not__ be used in production.
 

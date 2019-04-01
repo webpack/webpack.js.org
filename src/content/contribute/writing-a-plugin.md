@@ -183,7 +183,7 @@ module.exports = FileListPlugin;
 
 A plugin can be classified into types based on the event hooks it taps into. Every event hook is pre-defined as synchronous or asynchronous or waterfall or parallel hook and hook is called internally using call/callAsync method. The list of hooks that are supported or can be tapped into are generally specified in this.hooks property.
 
-For example:-
+For example:
 
 ```javascript
 this.hooks = {
@@ -193,7 +193,7 @@ this.hooks = {
 
 It represents that the only hook supported is `shouldEmit` which is a hook of `SyncBailHook` type and the only parameter which will be passed to any plugin that taps into `shouldEmit` hook is `compilation`.
 
-Various types of hooks supported are :-
+Various types of hooks supported are :
 
 ### Synchronous Hooks
 
@@ -245,10 +245,6 @@ Various types of hooks supported are :-
     - Defined using `AsyncSeriesBailHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
     - Called using `callAsync( ... params)` method
-
-  someMethod() {
-  // Call a hook:
-  this.hooks.compilation.call();
 
 - __Async Parallel__
 
