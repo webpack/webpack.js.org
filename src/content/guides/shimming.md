@@ -441,7 +441,7 @@ import 'core-js/modules/web.immediate';
 import 'core-js/modules/web.dom.iterable';
 ```
 
-See [the babel-preset-env doc](https://babeljs.io/docs/en/babel-preset-env) for more information.
+See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset-env) for more information.
 
 
 ## Node Built-Ins
