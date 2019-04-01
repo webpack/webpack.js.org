@@ -23,9 +23,5 @@
   {
     "title": "Blog",
     "url": "//medium.com/webpack"
-  },
-  {
-    "title": "Discover",
-    "url": "api/discover"
   }
 ]
