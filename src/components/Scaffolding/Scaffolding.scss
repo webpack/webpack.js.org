@@ -7,15 +7,13 @@
 
 .ais-Hits-list  {
     list-style: none;
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
     justify-content: flex-end;
 }
 .ais-SearchBox-input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
-    padding: .3rem 1.7rem;
+    padding: .3em 1.7em;
     width: 100%;
     position: relative;
     background-color: getColor(elephant);
@@ -72,13 +70,14 @@ button.ais-SearchBox-submit {
 }
 
 .product-avatar {
-    & img {
+    img {
         border-radius: 25px;
         border: 1px solid getColor(denim);
     }
 }
 
 .product-desc {
+    color: #1a6bac;
     p {
         width: 25rem;
         overflow: hidden;

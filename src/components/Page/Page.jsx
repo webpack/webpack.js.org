@@ -80,7 +80,7 @@ const Page = ({ page, section }) => {
             </ul>
           </div>
         )}
-        {title === "Discover scaffolds" ? <Scaffolding /> : null}
+        {title === 'Discover scaffolds' ? <Scaffolding /> : null}
         { contributors.length > 0 && (
           <div>
             <hr />
