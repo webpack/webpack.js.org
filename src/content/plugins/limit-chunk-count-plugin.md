@@ -44,7 +44,7 @@ module.exports = {
 
 ### `minChunkSize`
 
-To keep chunk size above the specified limit by merging chunks that are smaller than the limit, use [MinChunkSizePlugin)[/plugins/min-chunk-size-plugin]
+Keeping chunk size above the specified limit is no longer a feature of this plugin. Use [MinChunkSizePlugin)[/plugins/min-chunk-size-plugin] instead.
 
 
 ## Usage via CLI
