@@ -196,7 +196,9 @@ module.exports = {
 
 `[string]: ['.wasm', '.mjs', '.js', '.json']`
 
-Automatically resolve certain extensions.
+Attempt to resolve these extensions in order.
+
+If multiple files share the same name but have different extensions, resolve the one with the extension listed first and skip the rest.
 
 __webpack.config.js__
 
