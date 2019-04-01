@@ -20,7 +20,7 @@ If you've been following the guides, you should have a solid understanding of so
 
 W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!
 
-Before proceeding lets first set [`mode` to `'development'`](/concepts/mode/#mode-development).
+Before proceeding lets first set [`mode` to `'development'`](/configuration/mode/#mode-development).
 
 __webpack.config.js__
 
