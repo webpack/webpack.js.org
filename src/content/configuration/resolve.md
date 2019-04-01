@@ -198,7 +198,7 @@ module.exports = {
 
 Attempt to resolve these extensions in order.
 
-If multiple files share the same name but have different extensions, resolve the one with the extension listed first and skip the rest.
+W> If multiple files share the same name but have different extensions, webpack will resolve the one with the extension listed first in the array and skip the rest.
 
 __webpack.config.js__
 
