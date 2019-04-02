@@ -5,6 +5,8 @@ contributors:
   - sallar
   - rynclark
   - byzyk
+  - wizardofhogwarts
+  - EugeneHlushko
 ---
 
 webpack provides a Node.js API which can be used directly in Node.js runtime.
@@ -38,11 +40,11 @@ import webpack from 'webpack';
 The imported `webpack` function is fed a webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback function is provided:
 
 ``` js-with-links
-const webpack = require("webpack");
+const webpack = require('webpack');
 
 webpack({
   // [Configuration Object](/configuration/)
-}, (err, [stats](#stats-object)) => {
+}, (err, stats) => { // [Stats Object](#stats-object)
   if (err || stats.hasErrors()) {
     // [Handle errors here](#error-handling)
   }
@@ -95,7 +97,7 @@ Calling the `run` method on the `Compiler` instance is much like the quick run
 method mentioned above:
 
 ``` js-with-links
-const webpack = require("webpack");
+const webpack = require('webpack');
 
 const compiler = webpack({
   // [Configuration Object](/configuration/)
@@ -109,7 +111,7 @@ compiler.run((err, [stats](#stats-object)) => {
 
 ## Watching
 
-Calling the `watch` method, triggers the webpack runner, but then watches for
+Calling the `watch` method triggers the webpack runner, but then watches for
 changes (much like CLI: `webpack --watch`), as soon as webpack detects a
 change, runs again. Returns an instance of `Watching`.
 
@@ -118,7 +120,7 @@ watch(watchOptions, callback);
 ```
 
 ``` js-with-links
-const webpack = require("webpack");
+const webpack = require('webpack');
 
 const compiler = webpack({
   // [Configuration Object](/configuration/)
@@ -128,7 +130,7 @@ const watching = compiler.watch({
   // Example [watchOptions](/configuration/watch/#watchoptions)
   aggregateTimeout: 300,
   poll: undefined
-}, (err, [stats](#stats-object)) => {
+}, (err, stats) => { // [Stats Object](#stats-object)
   // Print watch/build result here...
   console.log(stats);
 });
@@ -206,7 +208,7 @@ Returns compilation information as a JSON object. `options` can be either a
 string (a preset) or an object for more granular control:
 
 ``` js-with-links
-stats.toJson("minimal"); // [more options: "verbose", etc](/configuration/stats).
+stats.toJson('minimal'); // [more options: 'verbose', etc](/configuration/stats).
 ```
 
 ``` js
@@ -240,7 +242,7 @@ stats.toString({
 Here’s an example of `stats.toString()` usage:
 
 ``` js-with-links
-const webpack = require("webpack");
+const webpack = require('webpack');
 
 webpack({
   // [Configuration Object](/configuration/)
@@ -272,7 +274,7 @@ webpack([
   { entry: './index1.js', output: { filename: 'bundle1.js' } },
   { entry: './index2.js', output: { filename: 'bundle2.js' } }
 ], (err, [stats](#stats-object)) => {
-  process.stdout.write(stats.toString() + "\n");
+  process.stdout.write(stats.toString() + '\n');
 })
 ```
 
@@ -293,7 +295,7 @@ For a good error handling, you need to account for these three types of errors:
 Here’s an example that does all that:
 
 ``` js-with-links
-const webpack = require("webpack");
+const webpack = require('webpack');
 
 webpack({
   // [Configuration Object](/configuration/)
@@ -336,7 +338,7 @@ const MemoryFS = require('memory-fs');
 const webpack = require('webpack');
 
 const fs = new MemoryFS();
-const compiler = webpack({ /* options*/ });
+const compiler = webpack({ /* options */ });
 
 compiler.outputFileSystem = fs;
 compiler.run((err, stats) => {

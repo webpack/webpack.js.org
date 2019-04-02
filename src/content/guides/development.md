@@ -20,7 +20,7 @@ If you've been following the guides, you should have a solid understanding of so
 
 W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!
 
-Before proceeding lets first set [`mode` to `'development'`](/concepts/mode/#mode-development).
+Before proceeding lets first set [`mode` to `'development'`](/configuration/mode/#mode-development).
 
 __webpack.config.js__
 
@@ -36,7 +36,7 @@ __webpack.config.js__
       print: './src/print.js'
     },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Development'
       })
@@ -73,7 +73,7 @@ __webpack.config.js__
     },
 +   devtool: 'inline-source-map',
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Development'
       })
@@ -155,7 +155,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "clean-webpack-plugin": "^0.1.16",
+      "clean-webpack-plugin": "^2.0.0",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "file-loader": "^0.11.2",
@@ -214,7 +214,7 @@ __webpack.config.js__
 +     contentBase: './dist'
 +   },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Development'
       })
@@ -250,7 +250,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "clean-webpack-plugin": "^0.1.16",
+      "clean-webpack-plugin": "^2.0.0",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "file-loader": "^0.11.2",
@@ -299,7 +299,7 @@ __webpack.config.js__
       contentBase: './dist'
     },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Output Management'
       })
@@ -372,7 +372,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "clean-webpack-plugin": "^0.1.16",
+      "clean-webpack-plugin": "^2.0.0",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "express": "^4.15.3",
