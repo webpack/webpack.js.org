@@ -44,6 +44,42 @@ module.exports = {
 import exec from 'script-loader!./script.js';
 ```
 
+## Options
+
+|                    Name                     |         Type          |     Default     | Description                                 |
+| :-----------------------------------------: | :-------------------: | :-------------: | :------------------------------------------ |
+|        **[`sourceMap`](#sourcemap)**        |      `{Boolean}`      |     `false`     | Enable/Disable Sourcemaps
+
+### `sourceMap`
+
+Type: `Boolean`
+Default: `false`
+
+To include source maps set the `sourceMap` option.
+
+**webpack.config.js**
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.script\.js$/,
+        use: [
+          {
+            loader: 'script-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ]
+      }
+    ]
+  }
+}
+```
+
+
+
 ## Maintainers
 
 <table>

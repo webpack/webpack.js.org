@@ -18,10 +18,6 @@ repo: https://github.com/webpack-contrib/raw-loader
 
 A loader for webpack that allows importing files as a String.
 
-## Requirements
-
-This module requires a minimum of Node v6.9.0 and Webpack v4.0.0.
-
 ## Getting Started
 
 To begin, you'll need to install `raw-loader`:
@@ -46,12 +42,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.txt$/,
-        use: 'raw-loader'
-      }
-    ]
-  }
-}
+        test: /\.txt$/i,
+        use: 'raw-loader',
+      },
+    ],
+  },
+};
 ```
 
 Or from the command-line:
@@ -64,15 +60,27 @@ And run `webpack` via your preferred method.
 
 ## Examples
 
-Inline.
+### Inline
 
 ```js
 import txt from 'raw-loader!./file.txt';
 ```
 
+Beware, if you already define loader(s) for extension(s) in `webpack.config.js` you should use:
+
+```js
+import css from '!!raw-loader!./file.css'; // Adding `!!` to a request will disable all loaders specified in the configuration
+```
+
+## Contributing
+
+Please take a moment to read our contributing guidelines if you haven't yet done so.
+
+[CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/raw-loader/master/.github/CONTRIBUTING.md)
+
 ## License
 
-#### [MIT](https://raw.githubusercontent.com/webpack-contrib/raw-loader/master/LICENSE)
+[MIT](https://raw.githubusercontent.com/webpack-contrib/raw-loader/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/raw-loader.svg
 [npm-url]: https://npmjs.com/package/raw-loader
@@ -80,7 +88,7 @@ import txt from 'raw-loader!./file.txt';
 [node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/raw-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/raw-loader
-[tests]: 	https://img.shields.io/circleci/project/github/webpack-contrib/raw-loader.svg
+[tests]: https://img.shields.io/circleci/project/github/webpack-contrib/raw-loader.svg
 [tests-url]: https://circleci.com/gh/webpack-contrib/raw-loader
 [cover]: https://codecov.io/gh/webpack-contrib/raw-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/raw-loader

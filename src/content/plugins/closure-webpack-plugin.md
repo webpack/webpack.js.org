@@ -10,7 +10,7 @@ repo: https://github.com/webpack-contrib/closure-webpack-plugin
 
 This plugin supports the use of Google's Closure Tools with webpack.
 
-**Note: This is the webpack 4 prelease branch.**
+**Note: This is the webpack 4 branch.**
 
 [Closure-Compiler](https://developers.google.com/closure/compiler/) is a full optimizing compiler and transpiler.
 It offers unmatched optimizations, provides type checking and can easily target transpilation to different versions of ECMASCRIPT.
@@ -27,7 +27,7 @@ For webpack 3 support, see https://github.com/webpack-contrib/closure-webpack-pl
 You must install both the google-closure-compiler package as well as the closure-webpack-plugin.
 
 ```
-npm install --save-dev closure-webpack-plugin@next google-closure-compiler@webpack-beta
+npm install --save-dev closure-webpack-plugin google-closure-compiler
 ```
 
 ## Usage example
@@ -132,7 +132,7 @@ const ClosurePlugin = require('closure-webpack-plugin');
 
 module.exports = {
   plugins: [
-    new ClosurePlugin.ClosureLibrary({
+    new ClosurePlugin.LibraryPlugin({
       closureLibraryBase: require.resolve(
         'google-closure-library/closure/goog/base'
       ),

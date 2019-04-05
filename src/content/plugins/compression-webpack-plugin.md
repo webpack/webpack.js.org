@@ -280,6 +280,33 @@ module.exports = {
 }
 ```
 
+### Using Brotli
+
+[Brotli](https://en.wikipedia.org/wiki/Brotli) is a compression algorithm originally developed by Google, and offers compression superior to gzip.
+
+Node 11.7.0 and later has [native support](https://nodejs.org/api/zlib.html#zlib_zlib_createbrotlicompress_options) for Brotli compression in its zlib module.
+
+We can take advantage of this built-in support for Brotli in Node 11.7.0 and later by just passing in the appropriate `algorithm` to the CompressionPlugin:
+
+```js
+// in your webpack.config.js
+module.exports = {
+  plugins: [
+    new CompressionPlugin({
+      filename: '[path].br[query]',
+      algorithm: 'brotliCompress',
+      test: /\.(js|css|html|svg)$/,
+      compressionOptions: { level: 11 },
+      threshold: 10240,
+      minRatio: 0.8,
+      deleteOriginalAssets: false
+    })
+  ]
+}
+```
+
+**N.B.:** The `level` option matches `BROTLI_PARAM_QUALITY` [for Brotli-based streams](https://nodejs.org/api/zlib.html#zlib_for_brotli_based_streams)
+
 ## Contributing
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.

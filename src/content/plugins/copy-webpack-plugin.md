@@ -4,140 +4,233 @@ source: https://raw.githubusercontent.com/webpack-contrib/copy-webpack-plugin/ma
 edit: https://github.com/webpack-contrib/copy-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/copy-webpack-plugin
 ---
-Copies individual files or entire directories to the build directory
 
-## Install
 
-```bash
-npm i -D copy-webpack-plugin
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![deps][deps]][deps-url]
+[![tests][tests]][tests-url]
+[![cover][cover]][cover-url]
+[![chat][chat]][chat-url]
+[![size][size]][size-url]
+
+
+
+Copies individual files or entire directories to the build directory.
+
+## Getting Started
+
+To begin, you'll need to install `copy-webpack-plugin`:
+
+```console
+$ npm install copy-webpack-plugin --save-dev
 ```
 
-## Usage
+Then add the loader to your `webpack` config. For example:
 
 **webpack.config.js**
-```js
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-const config = {
+```js
+const CopyPlugin = require('copy-webpack-plugin');
+
+module.exports = {
   plugins: [
-    new CopyWebpackPlugin([ ...patterns ], options)
-  ]
-}
+    new CopyPlugin([
+      { from: 'source', to: 'dest' },
+      { from: 'other', to: 'public' },
+    ]),
+  ],
+};
 ```
 
-> ℹ️ If you want `webpack-dev-server` to write files to the output directory during development, you can force it with the [`write-file-webpack-plugin`](https://github.com/gajus/write-file-webpack-plugin).
+> ℹ️ If you want `webpack-dev-server` to write files to the output directory during development, you can force it with the [`writeToDisk`](https://github.com/webpack/webpack-dev-middleware#writetodisk) option or the [`write-file-webpack-plugin`](https://github.com/gajus/write-file-webpack-plugin).
 
-##
+## Options
 
-A simple pattern looks like this
-
-```js
-{ from: 'source', to: 'dest' }
-```
-
-Or, in case of just a `from` with the default destination, you can also use a `{String}` as shorthand instead of an `{Object}`
-
-```js
-'source'
-```
-
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|[`from`](#from)|`{String\|Object}`|`undefined`|Globs accept [minimatch options](https://github.com/isaacs/minimatch)|
-|[`fromArgs`](#fromArgs)|`{Object}`|`{ cwd: context }`|See the [`node-glob` options](https://github.com/isaacs/node-glob#options) in addition to the ones below|
-|[`to`](#to)|`{String\|Object}`|`undefined`|Output root if `from` is file or dir, resolved glob path if `from` is glob|
-|[`toType`](#toType)|`{String}`|``|[toType Options](#totype)|
-|[`test`](#test)|`{RegExp}`|``|Pattern for extracting elements to be used in `to` templates|
-|[`force`](#force)|`{Boolean}`|`false`|Overwrites files already in `compilation.assets` (usually added by other plugins/loaders)|
-|[`ignore`](#ignore)|`{Array}`|`[]`|Globs to ignore for this pattern|
-|`flatten`|`{Boolean}`|`false`|Removes all directory references and only copies file names.⚠️ If files have the same name, the result is non-deterministic|
-|[`transform`](#transform)|`{Function\|Promise}`|`(content, path) => content`|Function or Promise that modifies file contents before copying|
-|[`transformPath`](#transformPath)|`{Function\|Promise}`|`(targetPath, sourcePath) => path`|Function or Promise that modifies file writing path|
-|[`cache`](#cache)|`{Boolean\|Object}`|`false`|Enable `transform` caching. You can use `{ cache: { key: 'my-cache-key' } }` to invalidate the cache|
-|[`context`](#context)|`{String}`|`options.context \|\| compiler.options.context`|A path that determines how to interpret the `from` path|
-
-### `from`
+The plugin's signature:
 
 **webpack.config.js**
+
 ```js
-[
-  new CopyWebpackPlugin([
-    'relative/path/to/file.ext',
-    '/absolute/path/to/file.ext',
-    'relative/path/to/dir',
-    '/absolute/path/to/dir',
-    '**/*',
-    { glob: '\*\*/\*', dot: true }
-  ], options)
-]
+module.exports = {
+  plugins: [new CopyPlugin(patterns, options)],
+};
 ```
 
-### `to`
+### Patterns
+
+|               Name                |         Type          |                     Default                     | Description                                                                                           |
+| :-------------------------------: | :-------------------: | :---------------------------------------------: | :---------------------------------------------------------------------------------------------------- |
+|          [`from`](#from)          |  `{String\|Object}`   |                   `undefined`                   | Glob or path from where we сopy files.                                                                |
+|            [`to`](#to)            |      `{String}`       |                   `undefined`                   | Output path.                                                                                          |
+|       [`context`](#context)       |      `{String}`       | `options.context \|\| compiler.options.context` | A path that determines how to interpret the `from` path.                                              |
+|        [`toType`](#toType)        |      `{String}`       |                   `undefined`                   | Determinate what is `to` option - directory, file or template.                                        |
+|          [`test`](#test)          |      `{RegExp}`       |                   `undefined`                   | Pattern for extracting elements to be used in `to` templates.                                         |
+|         [`force`](#force)         |      `{Boolean}`      |                     `false`                     | Overwrites files already in `compilation.assets` (usually added by other plugins/loaders).            |
+|        [`ignore`](#ignore)        |       `{Array}`       |                      `[]`                       | Globs to ignore files.                                                                                |
+|       [`flatten`](#flatten)       |      `{Boolean}`      |                     `false`                     | Removes all directory references and only copies file names.                                          |
+|     [`transform`](#transform)     | `{Function\|Promise}` |                   `undefined`                   | Allows to modify the file contents.                                                                   |
+|         [`cache`](#cache)         |  `{Boolean\|Object}`  |                     `false`                     | Enable `transform` caching. You can use `{ cache: { key: 'my-cache-key' } }` to invalidate the cache. |
+| [`transformPath`](#transformPath) | `{Function\|Promise}` |                   `undefined`                   | Allows to modify the writing path.                                                                    |
+
+#### `from`
+
+Type: `String\|Object`
+Default: `undefined`
+
+Glob or path from where we сopy files.
+Globs accept [minimatch options](https://github.com/isaacs/minimatch).
+
+You can defined `from` as `Object` and use the [`node-glob` options](https://github.com/isaacs/node-glob#options).
+
+> ⚠️ Don't use directly `\\` in `from` (i.e `path\to\file.ext`) option because on UNIX the backslash is a valid character inside a path component, i.e., it's not a separator.
+> On Windows, the forward slash and the backward slash are both separators.
+> Instead please use `/` or `path` methods.
 
 **webpack.config.js**
+
 ```js
-[
-  new CopyWebpackPlugin([
-    { from: '**/*', to: 'relative/path/to/dest/' },
-    { from: '**/*', to: '/absolute/path/to/dest/' }
-  ], options)
-]
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      'relative/path/to/file.ext',
+      '/absolute/path/to/file.ext',
+      'relative/path/to/dir',
+      '/absolute/path/to/dir',
+      '**/*',
+      { glob: '**/*', dot: false },
+    ]),
+  ],
+};
 ```
 
-### `toType`
+#### `to`
 
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|**`'dir'`**|`{String}`|`undefined`|If `from` is directory, `to` has no extension or ends in `'/'`|
-|**`'file'`**|`{String}`|`undefined`|If `to` has extension or `from` is file|
-|**`'template'`**|`{String}`|`undefined`|If `to` contains [a template pattern](https://github.com/webpack-contrib/file-loader#placeholders)|
+Type: `String`
+Default: `undefined`
 
-#### `'dir'`
+Output path.
+
+> ⚠️ Don't use directly `\\` in `to` (i.e `path\to\dest`) option because on UNIX the backslash is a valid character inside a path component, i.e., it's not a separator.
+> On Windows, the forward slash and the backward slash are both separators.
+> Instead please use `/` or `path` methods.
 
 **webpack.config.js**
+
 ```js
-[
-  new CopyWebpackPlugin([
-    {
-      from: 'path/to/file.txt',
-      to: 'directory/with/extension.ext',
-      toType: 'dir'
-    }
-  ], options)
-]
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      { from: '**/*', to: 'relative/path/to/dest/' },
+      { from: '**/*', to: '/absolute/path/to/dest/' },
+    ]),
+  ],
+};
 ```
 
-#### `'file'`
+#### `context`
+
+Type: `String`
+Default: `options.context|compiler.options.context`
+
+A path that determines how to interpret the `from` path.
+
+> ⚠️ Don't use directly `\\` in `context` (i.e `path\to\context`) option because on UNIX the backslash is a valid character inside a path component, i.e., it's not a separator.
+> On Windows, the forward slash and the backward slash are both separators.
+> Instead please use `/` or `path` methods.
 
 **webpack.config.js**
+
 ```js
-[
-  new CopyWebpackPlugin([
-    {
-      from: 'path/to/file.txt',
-      to: 'file/without/extension',
-      toType: 'file'
-    },
-  ], options)
-]
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      {
+        from: 'src/*.txt',
+        to: 'dest/',
+        context: 'app/',
+      },
+    ]),
+  ],
+};
 ```
 
-#### `'template'`
+#### `toType`
+
+Type: `String`
+Default: `undefined`
+
+Determinate what is `to` option - directory, file or template.
+Sometimes it is hard to say what is `to`, example `path/to/dir-with.ext`.
+If you want to copy files in directory you need use `dir` option.
+We try to automatically determine the `type` so you most likely do not need this option.
+
+|       Name       |    Type    |   Default   | Description                                                                                        |
+| :--------------: | :--------: | :---------: | :------------------------------------------------------------------------------------------------- |
+|   **`'dir'`**    | `{String}` | `undefined` | If `from` is directory, `to` has no extension or ends in `'/'`                                     |
+|   **`'file'`**   | `{String}` | `undefined` | If `to` has extension or `from` is file                                                            |
+| **`'template'`** | `{String}` | `undefined` | If `to` contains [a template pattern](https://github.com/webpack-contrib/file-loader#placeholders) |
+
+##### `'dir'`
 
 **webpack.config.js**
+
 ```js
-[
-  new CopyWebpackPlugin([
-    {
-      from: 'src/',
-      to: 'dest/[name].[hash].[ext]',
-      toType: 'template'
-    }
-  ], options)
-]
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      {
+        from: 'path/to/file.txt',
+        to: 'directory/with/extension.ext',
+        toType: 'dir',
+      },
+    ]),
+  ],
+};
 ```
 
-### `test`
+##### `'file'`
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      {
+        from: 'path/to/file.txt',
+        to: 'file/without/extension',
+        toType: 'file',
+      },
+    ]),
+  ],
+};
+```
+
+##### `'template'`
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      {
+        from: 'src/',
+        to: 'dest/[name].[hash].[ext]',
+        toType: 'template',
+      },
+    ]),
+  ],
+};
+```
+
+#### `test`
+
+Type: `RegExp`
+Default: `undefined`
+
+Pattern for extracting elements to be used in `to` templates.
 
 Defines a `{RegExp}` to match some parts of the file path.
 These capture groups can be reused in the name property using `[N]` placeholder.
@@ -146,296 +239,309 @@ whereas `[1]` will contain the first capturing parenthesis of your `{RegExp}`
 and so on...
 
 **webpack.config.js**
+
 ```js
-[
-  new CopyWebpackPlugin([
-    {
-      from: '*/*',
-      to: '[1]-[2].[hash].[ext]',
-      test: /([^/]+)\/(.+)\.png$/
-    }
-  ], options)
-]
-```
-
-### `force`
-
-**webpack.config.js**
-```js
-[
-  new CopyWebpackPlugin([
-    { from: 'src/**/*', to: 'dest/', force: true }
-  ], options)
-]
-```
-
-### `ignore`
-
-**webpack.config.js**
-```js
-[
-  new CopyWebpackPlugin([
-    { from: 'src/**/*', to: 'dest/', ignore: [ '*.js' ] }
-  ], options)
-]
-```
-
-### `flatten`
-
-**webpack.config.js**
-```js
-[
-  new CopyWebpackPlugin([
-    { from: 'src/**/*', to: 'dest/', flatten: true }
-  ], options)
-]
-```
-
-### `transform`
-
-#### `{Function}`
-
-**webpack.config.js**
-```js
-[
-  new CopyWebpackPlugin([
-    {
-      from: 'src/*.png',
-      to: 'dest/',
-      transform (content, path) {
-        return optimize(content)
-      }
-    }
-  ], options)
-]
-```
-
-#### `{Promise}`
-
-**webpack.config.js**
-```js
-[
-  new CopyWebpackPlugin([
-    {
-      from: 'src/*.png',
-      to: 'dest/',
-      transform (content, path) {
-        return Promise.resolve(optimize(content))
-      }
-  }
-  ], options)
-]
-```
-
-### `transformPath`
-
-#### `{Function}`
-
-**webpack.config.js**
-```js
-[
-  new CopyWebpackPlugin([
-    {
-      from: 'src/*.png',
-      to: 'dest/',
-      transformPath (targetPath, absolutePath) {
-        return 'newPath';
-      }
-    }
-  ], options)
-]
-```
-
-#### `{Promise}`
-
-**webpack.config.js**
-```js
-[
-  new CopyWebpackPlugin([
-    {
-      from: 'src/*.png',
-      to: 'dest/',
-      transformPath (targePath, absolutePath) {
-        return Promise.resolve('newPath')
-      }
-  }
-  ], options)
-]
-```
-
-
-### `cache`
-
-**webpack.config.js**
-```js
-[
-  new CopyWebpackPlugin([
-    {
-      from: 'src/*.png',
-      to: 'dest/',
-      transform (content, path) {
-        return optimize(content)
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      {
+        from: '*/*',
+        to: '[1]-[2].[hash].[ext]',
+        test: /([^/]+)\/(.+)\.png$/,
       },
-      cache: true
-    }
-  ], options)
-]
+    ]),
+  ],
+};
 ```
 
-### `context`
+#### `force`
+
+Type: `Boolean`
+Default: `false`
+
+Overwrites files already in `compilation.assets` (usually added by other plugins/loaders).
 
 **webpack.config.js**
+
 ```js
-[
-  new CopyWebpackPlugin([
-    { from: 'src/*.txt', to: 'dest/', context: 'app/' }
-  ], options)
-]
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      {
+        from: 'src/**/*',
+        to: 'dest/',
+        force: true,
+      },
+    ]),
+  ],
+};
 ```
 
-## Options
+#### `ignore`
 
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|[`debug`](#debug)|`{String}`|**`'warning'`**|[Debug Options](#debug)|
-|[`ignore`](#ignore)|`{Array}`|`[]`|Array of globs to ignore (applied to `from`)|
-|[`context`](#context)|`{String}`|`compiler.options.context`|A path that determines how to interpret the `from` path, shared for all patterns|
-|[`copyUnmodified`](#copyUnmodified)|`{Boolean}`|`false`|Copies files, regardless of modification when using watch or `webpack-dev-server`. All files are copied on first build, regardless of this option|
+Type: `Array`
+Default: `[]`
 
-### `debug`
-
-|Name|Type|Default|Description|
-|:--:|:--:|:-----:|:----------|
-|**`'info'`**|`{String\|Boolean}`|`false`|File location and read info|
-|**`'debug'`**|`{String}`|`false`|Very detailed debugging info|
-|**`'warning'`**|`{String}`|`true`|Only warnings|
-
-#### `'info'`
+Globs to ignore files.
 
 **webpack.config.js**
+
 ```js
-[
-  new CopyWebpackPlugin(
-    [ ...patterns ],
-    { debug: 'info' }
-  )
-]
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      {
+        from: 'src/**/*',
+        to: 'dest/',
+        ignore: ['*.js'],
+      },
+    ]),
+  ],
+};
 ```
 
-#### `'debug'`
+#### `flatten`
+
+Type: `Boolean`
+Default: `false`
+
+Removes all directory references and only copies file names.
+
+> ⚠️ If files have the same name, the result is non-deterministic.
 
 **webpack.config.js**
+
 ```js
-[
-  new CopyWebpackPlugin(
-    [ ...patterns ],
-    { debug: 'debug' }
-  )
-]
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      {
+        from: 'src/**/*',
+        to: 'dest/',
+        flatten: true,
+      },
+    ]),
+  ],
+};
 ```
 
-#### `'warning' (default)`
+#### `transform`
+
+Type: `Function|Promise`
+Default: `undefined`
+
+Allows to modify the file contents.
+
+##### `{Function}`
 
 **webpack.config.js**
+
 ```js
-[
-  new CopyWebpackPlugin(
-    [ ...patterns ],
-    { debug: true }
-  )
-]
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      {
+        from: 'src/*.png',
+        to: 'dest/',
+        transform(content, path) {
+          return optimize(content);
+        },
+      },
+    ]),
+  ],
+};
 ```
 
-### `ignore`
+##### `{Promise}`
 
 **webpack.config.js**
+
 ```js
-[
-  new CopyWebpackPlugin(
-    [ ...patterns ],
-    { ignore: [ '*.js', '*.css' ] }
-  )
-]
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      {
+        from: 'src/*.png',
+        to: 'dest/',
+        transform(content, path) {
+          return Promise.resolve(optimize(content));
+        },
+      },
+    ]),
+  ],
+};
 ```
 
-### `context`
+#### `cache`
+
+Type: `Boolean|Object`
+Default: `false`
+
+Enable/disable `transform` caching. You can use `{ cache: { key: 'my-cache-key' } }` to invalidate the cache.
+Default path to cache directory: `node_modules/.cache/copy-webpack-plugin`.
 
 **webpack.config.js**
+
 ```js
-[
-  new CopyWebpackPlugin(
-    [ ...patterns ],
-    { context: '/app' }
-  )
-]
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      {
+        from: 'src/*.png',
+        to: 'dest/',
+        transform(content, path) {
+          return optimize(content);
+        },
+        cache: true,
+      },
+    ]),
+  ],
+};
 ```
 
-### `copyUnmodified`
+#### `transformPath`
+
+Type: `Function|Promise`
+Default: `undefined`
+
+Allows to modify the writing path.
+
+> ⚠️ Don't return directly `\\` in `transformPath` (i.e `path\to\newFile`) option because on UNIX the backslash is a valid character inside a path component, i.e., it's not a separator.
+> On Windows, the forward slash and the backward slash are both separators.
+> Instead please use `/` or `path` methods.
+
+##### `{Function}`
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      {
+        from: 'src/*.png',
+        to: 'dest/',
+        transformPath(targetPath, absolutePath) {
+          return 'newPath';
+        },
+      },
+    ]),
+  ],
+};
+```
+
+##### `{Promise}`
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  plugins: [
+    new CopyPlugin([
+      {
+        from: 'src/*.png',
+        to: 'dest/',
+        transformPath(targePath, absolutePath) {
+          return Promise.resolve('newPath');
+        },
+      },
+    ]),
+  ],
+};
+```
+
+### Options
+
+|                Name                 |    Type     |          Default           | Description                                                                                                                                       |
+| :---------------------------------: | :---------: | :------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+|       [`logLevel`](#logLevel)       | `{String}`  |        **`'warn'`**        | Level of messages that the module will log                                                                                                        |
+|         [`ignore`](#ignore)         |  `{Array}`  |            `[]`            | Array of globs to ignore (applied to `from`)                                                                                                      |
+|        [`context`](#context)        | `{String}`  | `compiler.options.context` | A path that determines how to interpret the `from` path, shared for all patterns                                                                  |
+| [`copyUnmodified`](#copyUnmodified) | `{Boolean}` |          `false`           | Copies files, regardless of modification when using watch or `webpack-dev-server`. All files are copied on first build, regardless of this option |
+
+#### `logLevel`
+
+This property defines the level of messages that the module will log. Valid levels include:
+
+- `trace`
+- `debug`
+- `info`
+- `warn` (default)
+- `error`
+- `silent`
+
+Setting a log level means that all other levels below it will be visible in the
+console. Setting `logLevel: 'silent'` will hide all console output. The module
+leverages [`webpack-log`](https://github.com/webpack-contrib/webpack-log#readme)
+for logging management, and more information can be found on its page.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  plugins: [new CopyPlugin([...patterns], { logLevel: 'debug' })],
+};
+```
+
+#### `ignore`
+
+Array of globs to ignore (applied to `from`).
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  plugins: [new CopyPlugin([...patterns], { ignore: ['*.js', '*.css'] })],
+};
+```
+
+#### `context`
+
+A path that determines how to interpret the `from` path, shared for all patterns.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  plugins: [new CopyPlugin([...patterns], { context: '/app' })],
+};
+```
+
+#### `copyUnmodified`
+
+Copies files, regardless of modification when using watch or `webpack-dev-server`. All files are copied on first build, regardless of this option.
 
 > ℹ️ By default, we only copy **modified** files during a `webpack --watch` or `webpack-dev-server` build. Setting this option to `true` will copy all files.
 
 **webpack.config.js**
+
 ```js
-[
-  new CopyWebpackPlugin(
-    [ ...patterns ],
-    { copyUnmodified: true }
-  )
-]
+module.exports = {
+  plugins: [new CopyPlugin([...patterns], { copyUnmodified: true })],
+};
 ```
 
-## Maintainers
+## Contributing
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/bebraw">
-          <img width="150" height="150" src="https://github.com/bebraw.png?v=3&s=150">
-          </br>
-          Juho Vepsäläinen
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/d3viant0ne">
-          <img width="150" height="150" src="https://github.com/d3viant0ne.png?v=3&s=150">
-          </br>
-          Joshua Wiens
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/michael-ciniawsky">
-          <img width="150" height="150" src="https://github.com/michael-ciniawsky.png?v=3&s=150">
-          </br>
-          Michael Ciniawsky
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://github.com/evilebottnawi">
-          <img width="150" height="150" src="https://github.com/evilebottnawi.png?v=3&s=150">
-          </br>
-          Alexander Krasnoyarov
-        </a>
-      </td>
-    </tr>
-  <tbody>
-</table>
+Please take a moment to read our contributing guidelines if you haven't yet done so.
 
+[CONTRIBUTING](https://raw.githubusercontent.com/webpack-contrib/copy-webpack-plugin/master/.github/CONTRIBUTING.md)
+
+## License
+
+[MIT](https://raw.githubusercontent.com/webpack-contrib/copy-webpack-plugin/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/copy-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/copy-webpack-plugin
-
 [node]: https://img.shields.io/node/v/copy-webpack-plugin.svg
 [node-url]: https://nodejs.org
-
 [deps]: https://david-dm.org/webpack-contrib/copy-webpack-plugin.svg
 [deps-url]: https://david-dm.org/webpack-contrib/copy-webpack-plugin
-
-[test]: https://secure.travis-ci.org/webpack-contrib/copy-webpack-plugin.svg
-[test-url]: http://travis-ci.org/webpack-contrib/copy-webpack-plugin
-
+[tests]: https://secure.travis-ci.org/webpack-contrib/copy-webpack-plugin.svg
+[tests-url]: http://travis-ci.org/webpack-contrib/copy-webpack-plugin
 [cover]: https://codecov.io/gh/webpack-contrib/copy-webpack-plugin/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/copy-webpack-plugin
-
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
+[size]: https://packagephobia.now.sh/badge?p=copy-webpack-plugin
+[size-url]: https://packagephobia.now.sh/result?p=copy-webpack-plugin
