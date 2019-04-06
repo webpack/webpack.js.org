@@ -10,7 +10,7 @@
     text-align:center;
 
     &--dark {
-      background-color:#f3f3f3;
+      background-color: #f3f3f3;
     }
 
     p {
@@ -19,20 +19,20 @@
     }
 
     .container {
-      padding:5em 1em;
+      padding: 5em 1em;
 
       @include break {
-        padding-left:1.5em;
-        padding-right:1.5em;
+        padding-left: 1.5em;
+        padding-right: 1.5em;
       }
     }
 
     pre {
-      text-align:left;
+      text-align: left;
     }
 
     .icon-link {
-      display:none;
+      display: none;
     }
   }
 
@@ -45,7 +45,7 @@
 
     &:before,
     &:after {
-      content: " ";
+      content: ' ';
       display: table;
     }
 
@@ -65,7 +65,7 @@
     }
   }
 
-  /* XXX: Hack to fix markown parsing issues */
+  /* XXX: Hack to fix markdown parsing issues */
   &__right {
     margin-bottom: 1em;
   }
