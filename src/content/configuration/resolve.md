@@ -21,7 +21,7 @@ These options change how modules are resolved. webpack provides reasonable defau
 
 `object`
 
-Configure how modules are resolved. For example, when calling `import 'lodash'` in ES2015, the `resolve` options can change where webpack goes to look for `'lodash'` (see [`modules`](#resolve-modules)).
+Configure how modules are resolved. For example, when calling `import 'lodash'` in ES2015, the `resolve` options can change where webpack goes to look for `'lodash'` (see [`modules`](#resolvemodules)).
 
 __webpack.config.js__
 
@@ -196,7 +196,9 @@ module.exports = {
 
 `[string]: ['.wasm', '.mjs', '.js', '.json']`
 
-Automatically resolve certain extensions.
+Attempt to resolve these extensions in order.
+
+W> If multiple files share the same name but have different extensions, webpack will resolve the one with the extension listed first in the array and skip the rest.
 
 __webpack.config.js__
 
