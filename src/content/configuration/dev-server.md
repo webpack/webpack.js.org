@@ -479,7 +479,9 @@ webpack-dev-server --hot-only
 
 Serve over HTTP/2 using [spdy](https://www.npmjs.com/package/spdy). This option is ignored for Node 10.0.0 and above, as spdy is broken for those versions. The dev server will migrate over to Node's built-in HTTP/2 once Express supports it.
 
-When this option is enabled but the server is unable to serve over HTTP/2, the server defaults to HTTPS. If this option is not explicitly set to `false`, it will default to `true` when using HTTPS.
+If this option is not explicitly set to `false`, it will default to `true` when using HTTPS. When this option is enabled but the server is unable to serve over HTTP/2, the server defaults to HTTPS.
+
+HTTP/2 with a self-signed certificate:
 
 __webpack.config.js__
 
@@ -492,7 +494,7 @@ module.exports = {
 };
 ```
 
-Provide your own certificate using the [https](#devserver-https) option:
+Provide your own certificate using the [https](#devserverhttps) option:
 
 __webpack.config.js__
 
@@ -514,6 +516,12 @@ Usage via the CLI
 
 ```bash
 webpack-dev-server --http2
+```
+
+To pass your own certificate via the CLI use the following options
+
+```bash
+webpack-dev-server --http2 --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
 ```
 
 
