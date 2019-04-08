@@ -13,6 +13,7 @@ contributors:
   - sterlingvix
   - jeremenichelli
   - dasarianudeep
+  - lukasgeiter
 ---
 
 Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index` and will output the result in `dist/main.js` minified and optimized for production.
@@ -144,14 +145,14 @@ module.exports = {
         /* Expert output configuration (on own risk) */
       </default>
       devtoolLineToLine: {
-        test: /\.jsx$/
+        test: /\\.jsx$/
       },
       // use a simple 1:1 mapped SourceMaps for these modules (faster)
       hotUpdateMainFilename: "[hash].hot-update.json", // string
       // filename template for HMR manifest
       hotUpdateChunkFilename: "[id].[hash].hot-update.js", // string
       // filename template for HMR chunks
-      sourcePrefix: "\t", // string
+      sourcePrefix: "\\t", // string
       // prefix module sources in bundle for better readablitity
     </expert>
   },
@@ -160,7 +161,7 @@ module.exports = {
     rules: [
       // rules for modules (configure loaders, parser options, etc.)
       {
-        test: /\.jsx?$/,
+        test: /\\.jsx?$/,
         include: [
           path.resolve(__dirname, "app")
         ],
@@ -189,7 +190,7 @@ module.exports = {
         // options for the loader
       },
       {
-        test: /\.html$/,
+        test: /\\.html$/,
         use: [
           // apply multiple loaders and options
           "htmllint-loader",
@@ -218,15 +219,15 @@ module.exports = {
         /* Advanced module configuration (click to show) */
       </default>
       noParse: [
-        /special-library\.js$/
+        /special-library\\.js$/
       ],
       // do not parse this module
       unknownContextRequest: ".",
       unknownContextRecursive: true,
-      unknownContextRegExp: /^\.\/.*$/,
+      unknownContextRegExp: /^\\.\\/.*$/,
       unknownContextCritical: true,
       exprContextRequest: ".",
-      exprContextRegExp: /^\.\/.*$/,
+      exprContextRegExp: /^\\.\\/.*$/,
       exprContextRecursive: true,
       exprContextCritical: true,
       wrappedContextRegExp: /.*/,
@@ -355,7 +356,7 @@ module.exports = {
       externals: ["react", /^@angular/],
     </default>
     externals: "react", // string (exact match)
-    externals: /^[a-z\-]+($|\/)/, // Regex
+    externals: /^[a-z\\-]+($|\\/)/, // Regex
     externals: { // object
       angular: "this angular", // this["angular"]
       react: { // UMD

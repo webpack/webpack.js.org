@@ -13,6 +13,7 @@ contributors:
   - debs-obrien
   - EugeneHlushko
   - wizardofhogwarts
+  - lukasgeiter
 ---
 
 Loaders are transformations that are applied on the source code of a module. They allow you to pre-process files as you `import` or “load” them. Thus, loaders are kind of like “tasks” in other build tools and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript or inline images as data URLs. Loaders even allow you to do things like `import` CSS files directly from your JavaScript modules!
@@ -35,8 +36,8 @@ __webpack.config.js__
 module.exports = {
   module: {
     rules: [
-      { test: /\.css$/, use: 'css-loader' },
-      { test: /\.ts$/, use: 'ts-loader' }
+      { test: /\\.css$/, use: 'css-loader' },
+      { test: /\\.ts$/, use: 'ts-loader' }
     ]
   }
 };
@@ -64,7 +65,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\\.css$/,
         use: [
           // [style-loader](/loaders/style-loader)
           { loader: 'style-loader' },

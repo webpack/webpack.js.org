@@ -11,7 +11,6 @@ pre[class*="lang-"] {
   line-height: 1.5;
   tab-size: 4;
   hyphens: none;
-  //color: getColor(fiord);
   color: desaturate(getColor(malibu), 40%);
   @include fontantialias(false);
 
@@ -25,7 +24,6 @@ pre[class*="lang-"] {
   padding: .4em .8em;
   margin: .5em 0;
   overflow: auto;
-  //background-color: rgba(238,238,238,0.35);
   background-color: getColor(elephant);
 }
 
@@ -50,9 +48,6 @@ pre[class*="lang-"] {
 
 .namespace {
   opacity: .7;
-}
-
-.token.function{
 }
 
 .token.property,
