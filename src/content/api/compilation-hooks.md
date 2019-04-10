@@ -144,7 +144,7 @@ Fired after the dependency optimization.
 
 `SyncHook`
 
-Triggered at the beginning of the optimization phase.  
+Triggered at the beginning of the optimization phase.
 
 
 ### `optimizeModulesBasic`
