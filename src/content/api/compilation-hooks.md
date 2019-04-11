@@ -380,7 +380,7 @@ Executed before assigning an `id` to each chunk.
 
 T> This hook will be available in v5.0.0
 
-Called to assign an `id` to each chunks.
+Called to assign an `id` to each chunk.
 
 - Callback Parameters: `modules`
 
