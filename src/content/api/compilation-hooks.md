@@ -523,7 +523,7 @@ Create additional assets for the chunks.
 
 `SyncBailHook`
 
-Called to determine wheter or not generate chunk assets. Returning anything `!== false` will allow chunk assets generation.
+Called to determine wheter or not generate chunks assets. Returning anything `!== false` will allow chunk assets generation.
 
 
 ### `beforeChunkAssets`
