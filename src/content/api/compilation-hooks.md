@@ -277,7 +277,7 @@ Called after the chunkmodules optimization has successfully completed.
 
 `SyncBailHook`
 
-Called to determine wheter or not storing records. Returning anything `!== false` will prevent every other "record" hook from being executed (`record`, `recordModules`, `recordChunks` and `recordHash` )
+Called to determine whether or not to store records. Returning anything `!== false` will prevent every other "record" hook from being executed (`record`, `recordModules`, `recordChunks` and `recordHash` )
 
 
 ### `reviveModules`
