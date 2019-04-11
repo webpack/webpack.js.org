@@ -400,7 +400,7 @@ Fired before chunks `id` optimization.
 
 `SyncHook`
 
-Fired at the beginning of the chunks `id` optimization phase.
+Called at the beginning of the chunks `id` optimization phase.
 
 - Callback Parameters: `chunks`
 
