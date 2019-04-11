@@ -178,7 +178,7 @@ W> This hook will be removed in v5.0.0
 
 `SyncHook`
 
-Fired after modules optimization has completed.
+Called after modules optimization has completed.
 
 - Callback Parameters: `modules`
 
