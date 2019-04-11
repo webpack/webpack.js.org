@@ -232,7 +232,7 @@ Called before optimizing the dependency tree. A plugin can tap into this hook to
 
 `SyncHook`
 
-Fired after the dependency three optimization has completed with success.
+Called after the dependency tree optimization has completed with success.
 
 - Callback Parameters: `chunks` `modules`
 
