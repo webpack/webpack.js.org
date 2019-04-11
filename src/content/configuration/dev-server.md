@@ -664,8 +664,10 @@ T> If you use the CLI, make sure __inline mode__ is disabled.
 `object`
 
 Allows dev-server to register custom mime types.
-The object is passed to underlying `webpack-dev-middleware`.
+The object is passed to the underlying `webpack-dev-middleware`.
 See [documentation](https://github.com/webpack/webpack-dev-middleware#mimetypes) for usage notes.
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
