@@ -369,7 +369,7 @@ Sort the chunks in from most to least important.
 
 `SyncHook`
 
-Executed before assigning an `id` to each chunks.
+Executed before assigning an `id` to each chunk.
 
 - Callback Parameters: `chunks`
 
