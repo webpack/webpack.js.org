@@ -530,7 +530,7 @@ Called to determine wheter or not generate chunk assets. Returning anything `!==
 
 `SyncHook`
 
-Executed before creating the chunk assets.
+Executed before creating the chunks assets.
 
 
 
