@@ -250,7 +250,7 @@ W> This hook will be removed in v5.0.0
 
 `SyncBailHook`
 
-Called after the three optimization, at the beginning of the chunkmodules optimization. A plugin can tap into this hook to perform a chunkmodules optimization.
+Called after the tree optimization, at the beginning of the chunk modules optimization. A plugin can tap into this hook to perform optimizations of chunk modules.
 
 - Callback Parameters: `chunks` `modules`
 
