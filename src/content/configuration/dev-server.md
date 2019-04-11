@@ -11,6 +11,7 @@ contributors:
   - EugeneHlushko
   - Yiidiir
   - Loonride
+  - dmohns
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -656,6 +657,24 @@ webpack-dev-server --lazy
 T> [`watchOptions`](#devserver-watchoptions-) will have no effect when used with __lazy mode__.
 
 T> If you use the CLI, make sure __inline mode__ is disabled.
+
+
+## `devServer.mimeTypes` 🔑
+
+`object`
+
+Allows dev-server to register custom mime types.
+The object is passed to underlying `webpack-dev-middleware`.
+See [documentation](https://github.com/webpack/webpack-dev-middleware#mimetypes) for usage notes.
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    mimeTypes: { 'text/html': ['phtml'] }
+  }
+};
+```
 
 
 ## `devServer.noInfo` 🔑
