@@ -331,7 +331,7 @@ Called to assign an `id` to each module.
 
 `SyncHook`
 
-Fired at the beginning of the modules `id` optimization.
+Called at the beginning of the modules `id` optimization.
 
 - Callback Parameters: `modules`
 
