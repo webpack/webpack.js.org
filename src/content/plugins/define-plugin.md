@@ -62,18 +62,8 @@ if (PRODUCTION) {
 }
 ```
 
-After passing through webpack with no minification results in:
+After passing through webpack results in:
 
-``` javascript
-if (!true) {
-  console.log('Debug info');
-}
-if (true) {
-  console.log('Production log');
-}
-```
-
-and then after a minification pass results in:
 
 ``` javascript
 console.log('Production log');
