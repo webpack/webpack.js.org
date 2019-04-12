@@ -68,8 +68,7 @@ After passing through webpack with no minification results in:
 if (!true) {
   console.log('Debug info');
 }
-if (true) {
-  console.log('Production log');
+if (fasle) {
 }
 ```
 
