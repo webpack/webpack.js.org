@@ -91,4 +91,4 @@ module.exports = {
 };
 ```
 
-When combining with the [`output.library`](/configuration/output#output-library) option: If an array is passed only the last item is exported.
+When combining with the [`output.library`](/configuration/output#outputlibrary) option: If an array is passed only the last item is exported.
