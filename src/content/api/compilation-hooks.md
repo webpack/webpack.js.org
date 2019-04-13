@@ -74,7 +74,7 @@ Executed when a module has been built successfully.
 
 ### `finishModules`
 
-`SyncHook`
+`AsyncSeriesHook`
 
 Called when all modules have been built without errors.
 

@@ -70,7 +70,10 @@
 
     a {
       color: getColor(emperor);
-      &:hover { color: getColor(denim); }
+
+      &:hover {
+        color: getColor(denim);
+      }
     }
   }
 
