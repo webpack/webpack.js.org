@@ -11,8 +11,8 @@
   }
 
   &__section {
-    position:relative;
-    text-align:center;
+    position: relative;
+    text-align: center;
 
     &--dark {
       background-color: #f3f3f3;
@@ -64,8 +64,8 @@
     width: 100%;
     float: left;
 
-    p{
-      text-align: start;
+    p {
+      text-align: left;
     }
 
     @include break {
