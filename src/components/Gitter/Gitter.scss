@@ -6,6 +6,7 @@
   position: absolute;
   right: 1.5em;
   height: calc(100% - 1.5em);
+  pointer-events: none;
 }
 
 .gitter__button {
@@ -21,6 +22,7 @@
   cursor: pointer;
   will-change: transform;
   transition: background 250ms;
+  pointer-events: auto;
 
   &:hover {
     background: darken(#59bcb7, 10%);
