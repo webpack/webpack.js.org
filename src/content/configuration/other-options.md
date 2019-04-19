@@ -47,7 +47,7 @@ As it happens, the AMD support in webpack ignores the defined name anyways.
 
 ## `bail`
 
-`boolean`
+`bool`
 
 Fail out on the first error instead of tolerating it. By default webpack will log these errors in red in the terminal, as well as the browser console when using HMR, but continue bundling. To enable it:
 
@@ -65,9 +65,9 @@ This will force webpack to exit its bundling process.
 
 ## `cache`
 
-`boolean` `object`
+`bool` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. Caching is enabled by default while in watch mode. To disable caching simply pass:
+Cache the generated webpack modules and chunks to improve build speed. Caching will be automatically enabled by default while in [watch mode](/configuration/watch#watch) and webpack is set to mode [`development`](/configuration/mode#mode-development). To enable caching manually set it to `true`:
 
 __webpack.config.js__
 
