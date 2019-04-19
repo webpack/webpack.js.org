@@ -2,6 +2,8 @@
 title: Resolvers
 group: Plugins
 sort: 3
+contributors:
+  - EugeneHlushko
 ---
 
 Resolvers are created using the `enhanced-resolve` package. The `Resolver`

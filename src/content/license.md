@@ -1,6 +1,8 @@
 ---
 title: License
 sort: 4
+contributors:
+  - EugeneHlushko
 ---
 
 ## webpack
