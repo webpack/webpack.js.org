@@ -1111,9 +1111,9 @@ webpack-dev-server --quiet
 
 ## `devServer.serveIndex`
 
-`boolean`
+`boolean: true`
 
-This option Enables/Disables [`serveIndex`](https://github.com/expressjs/serve-index) middleware. It's enabled by default.
+Tells dev-server to use [`serveIndex`](https://github.com/expressjs/serve-index) middleware when enabled.
 
 [`serveIndex`](https://github.com/expressjs/serve-index) middleware generates directory listings on viewing directories that don't have an index.html file.
 
