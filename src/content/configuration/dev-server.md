@@ -1108,6 +1108,7 @@ Usage via the CLI
 ```bash
 webpack-dev-server --quiet
 ```
+
 ## `devServer.serveIndex`
 
 `boolean`
