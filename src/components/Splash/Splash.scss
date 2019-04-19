@@ -9,7 +9,7 @@
   h2 {
     justify-content: center;
   }
-  
+
   &__section {
     position:relative;
     text-align:center;
@@ -63,6 +63,10 @@
   &__right {
     width: 100%;
     float: left;
+
+    p{
+      text-align: start;
+    }
 
     @include break {
       width: 50%;
