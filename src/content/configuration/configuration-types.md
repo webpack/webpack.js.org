@@ -10,6 +10,7 @@ contributors:
   - byzyk
   - EugeneHlushko
   - dhurlburtusa
+  - anshumanv
 ---
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
