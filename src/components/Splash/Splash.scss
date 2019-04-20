@@ -4,6 +4,11 @@
 .splash {
   position: relative;
   overflow: hidden;
+
+  h1,
+  h2 {
+    justify-content: center;
+  }
   
   &__section {
     position:relative;
