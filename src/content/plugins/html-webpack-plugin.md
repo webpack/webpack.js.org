@@ -54,7 +54,7 @@ This will generate a file `dist/index.html` containing the following:
 
 If you have multiple webpack entry points, they will all be included with `<script>` tags in the generated HTML.
 
-If you have any CSS assets in webpack's output (for example, CSS extracted with the [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/)) then these will be included with `<link>` tags in the HTML head.
+If you have any CSS assets in webpack's output (for example, CSS extracted with the [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/)) then these will be included with `<link>` tags in the `<head>` element of generated HTML.
 
 
 ## Configuration
