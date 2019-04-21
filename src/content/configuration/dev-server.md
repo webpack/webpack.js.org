@@ -1192,6 +1192,11 @@ module.exports = {
 };
 ```
 
+Usage via the CLI
+
+```bash
+webpack-dev-server --sockPath /socket
+```
 
 ## `devServer.staticOptions`
 
