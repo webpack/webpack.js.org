@@ -9,7 +9,7 @@ const fetch = {
     {
       organization: 'webpack-contrib',
       suffixes: ['-loader'],
-      hides: ['config-loader']
+      hides: ['webpack-contrib/config-loader']
     },
     'babel/babel-loader',
     'postcss/postcss-loader',
@@ -53,10 +53,8 @@ async function main() {
       const repos = await paginate(organization);
       return repos
         .map(repo => repo.full_name)
-        .filter(name =>
-          suffixes.some(suffix => name.endsWith(suffix)) &&
-          !hides.some(hide => name.endsWith(hide))
-        );
+        .filter(name => suffixes.some(suffix => name.endsWith(suffix)))
+        .filter(name => !hides.includes(name));
     }));
 
     const json = JSON.stringify(_.flatten(result), undefined, 2);
