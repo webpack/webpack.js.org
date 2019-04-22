@@ -11,6 +11,7 @@ contributors:
   - rosavage
   - saiprasad2595
   - EugeneHlushko
+  - AnayaDesign
 related:
   - title: Issue 652
     url: https://github.com/webpack/webpack.js.org/issues/652
@@ -140,7 +141,7 @@ This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin/#spli
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
   const CleanWebpackPlugin = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -218,7 +219,7 @@ __src/index.js__
 + import Print from './print';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -309,7 +310,7 @@ __src/index.js__
 + // import Print from './print';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');

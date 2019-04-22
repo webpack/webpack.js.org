@@ -12,6 +12,7 @@ contributors:
   - Yiidiir
   - Loonride
   - dmohns
+  - EslamHiko
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -1108,6 +1109,22 @@ Usage via the CLI
 webpack-dev-server --quiet
 ```
 
+## `devServer.serveIndex`
+
+`boolean: true`
+
+Tells dev-server to use [`serveIndex`](https://github.com/expressjs/serve-index) middleware when enabled.
+
+[`serveIndex`](https://github.com/expressjs/serve-index) middleware generates directory listings on viewing directories that don't have an index.html file.
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    serveIndex: true
+  }
+};
+```
 
 ## `devServer.setup`
 
