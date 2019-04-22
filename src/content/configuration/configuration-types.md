@@ -47,7 +47,7 @@ One option is to export a function from your webpack config instead of exporting
 
 webpack will run the function exported by the configuration file and wait for a Promise to be returned. Handy when you need to asynchronously load configuration variables.
 
-> It is possible to export multiple promises by wrapping them into `Promise.all([/* Your promises */]).`
+T> It is possible to export multiple promises by wrapping them into `Promise.all([/* Your promises */]).`
 
 ```js
 module.exports = () => {
