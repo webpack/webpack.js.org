@@ -37,7 +37,6 @@
   "webpack-contrib/cache-loader",
   "webpack-contrib/thread-loader",
   "webpack-contrib/polymer-webpack-loader",
-  "webpack-contrib/config-loader",
   "babel/babel-loader",
   "postcss/postcss-loader",
   "peerigon/extract-loader"
