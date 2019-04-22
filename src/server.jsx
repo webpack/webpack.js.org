@@ -26,7 +26,7 @@ export default locals => {
   let title = getPageTitle(locals.content, locals.path);
   let description = 'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.';
 
-  return ReactDOMServer.renderToString(
+  const renderedHtml = ReactDOMServer.renderToString(
     <StaticRouter location={locals.path} context={{}}>
       <html lang="en">
         <head>
@@ -64,4 +64,6 @@ export default locals => {
       </html>
     </StaticRouter>
   );
+
+  return '<!DOCTYPE html>' + renderedHtml;
 };
