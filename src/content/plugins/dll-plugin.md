@@ -59,7 +59,7 @@ This plugin can be used in two different modes, _scoped_ and _mapped_.
 
 #### Scoped Mode
 
-The content of the dll is accessible under a module prefix. i.e. with `scope = "xyz"` a file `abc` in the dll can be access via `require("xyz/abc")`.
+The content of the dll is accessible under a module prefix. i.e. with `scope = 'xyz'` a file `abc` in the dll can be access via `require('xyz/abc')`.
 
 T> [See an example use of scope](https://github.com/webpack/webpack/tree/master/examples/dll-user)
 
@@ -67,7 +67,7 @@ T> [See an example use of scope](https://github.com/webpack/webpack/tree/master/
 
 The content of the dll is mapped to the current directory. If a required file matches a file in the dll (after resolving), then the file from the dll is used instead.
 
-Because this happens after resolving every file in the dll bundle, the same paths must be available for the consumer of the dll bundle. i.e. if the dll contains `lodash` and the file `abc`, `require("lodash")` and `require("./abc")` will be used from the dll, rather than building them into the main bundle.
+Because this happens after resolving every file in the dll bundle, the same paths must be available for the consumer of the dll bundle. i.e. if the dll contains `lodash` and the file `abc`, `require('lodash')` and `require('./abc')` will be used from the dll, rather than building them into the main bundle.
 
 
 ## Usage
