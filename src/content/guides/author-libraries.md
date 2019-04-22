@@ -9,6 +9,7 @@ contributors:
   - marioacc
   - byzyk
   - EugeneHlushko
+  - AnayaDesign
   - chenxsan
 ---
 
@@ -101,7 +102,7 @@ webpackNumbers.wordToNum('Two');
 - __CommonJS module require:__
 
 ``` js
-var webpackNumbers = require('webpack-numbers');
+const webpackNumbers = require('webpack-numbers');
 // ...
 webpackNumbers.wordToNum('Two');
 ```
@@ -161,7 +162,7 @@ We can start with this basic webpack configuration:
 __webpack.config.js__
 
 ``` js
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
@@ -182,7 +183,7 @@ This can be done using the `externals` configuration:
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',
@@ -240,7 +241,7 @@ For widespread use of the library, we would like it to be compatible in differen
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',
@@ -268,7 +269,7 @@ This exposes your library bundle available as a global variable named `webpackNu
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',
