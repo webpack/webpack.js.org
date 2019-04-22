@@ -10,6 +10,7 @@ contributors:
   - byzyk
   - EugeneHlushko
   - AnayaDesign
+  - chenxsan
 ---
 
 Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
@@ -109,7 +110,7 @@ webpackNumbers.wordToNum('Two');
 - __AMD module require:__
 
 ``` js
-require(['webpackNumbers'], function ( webpackNumbers) {
+require(['webpackNumbers'], function (webpackNumbers) {
   // ...
   webpackNumbers.wordToNum('Two');
 });
@@ -145,7 +146,7 @@ For full library configuration and code please refer to [webpack-library-example
 
 Now let's bundle this library in a way that will achieve the following goals:
 
-- Without bundling `lodash`, but requiring it to be loaded by the consumer using `externals`.
+- Using `externals` to avoid bundling `lodash`, so the consumer is required to load it.
 - Setting the library name as `webpack-numbers`.
 - Exposing the library as a variable called `webpackNumbers`.
 - Being able to access the library inside Node.js.
@@ -297,7 +298,7 @@ You can expose the library in the following ways:
 - Window: available trough the `window` object, in the browser (`libraryTarget:'window'`).
 - UMD: available after AMD or CommonJS `require` (`libraryTarget:'umd'`).
 
-If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output#output-librarytarget) there for a detailed list of all available options.
+If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output#outputlibrarytarget) there for a detailed list of all available options.
 
 W> With webpack 3.5.5, using `libraryTarget: { root:'_' }` doesn't work properly (as stated in [issue 4824](https://github.com/webpack/webpack/issues/4824)). However, you can set `libraryTarget: { var: '_' }` to expect the library as a global variable.
 
@@ -332,4 +333,4 @@ W> The `module` property should point to a script that utilizes ES2015 module sy
 
 Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.
 
-T> To expose stylesheets associated with your library, the [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin) should be used. Users can then consume and load these as they would any other stylesheet.
+T> To expose stylesheets associated with your library, the [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin) should be used. Users can then consume and load these as they would any other stylesheet.

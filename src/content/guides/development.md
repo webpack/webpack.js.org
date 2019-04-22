@@ -10,6 +10,8 @@ contributors:
   - Calinou
   - GAumala
   - EugeneHlushko
+  - byzyk
+  - trivikr
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -18,6 +20,33 @@ If you've been following the guides, you should have a solid understanding of so
 
 W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!
 
+Before proceeding lets first set [`mode` to `'development'`](/configuration/mode/#mode-development).
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+  module.exports = {
++   mode: 'development',
+    entry: {
+      app: './src/index.js',
+      print: './src/print.js'
+    },
+    plugins: [
+      new CleanWebpackPlugin(),
+      new HtmlWebpackPlugin({
+        title: 'Development'
+      })
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
 
 ## Using source maps
 
@@ -37,13 +66,14 @@ __webpack.config.js__
   const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
+    mode: 'development',
     entry: {
       app: './src/index.js',
       print: './src/print.js'
     },
 +   devtool: 'inline-source-map',
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Development'
       })
@@ -125,7 +155,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "clean-webpack-plugin": "^0.1.16",
+      "clean-webpack-plugin": "^2.0.0",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "file-loader": "^0.11.2",
@@ -174,6 +204,7 @@ __webpack.config.js__
   const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
+    mode: 'development',
     entry: {
       app: './src/index.js',
       print: './src/print.js'
@@ -183,7 +214,7 @@ __webpack.config.js__
 +     contentBase: './dist'
 +   },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Development'
       })
@@ -219,7 +250,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "clean-webpack-plugin": "^0.1.16",
+      "clean-webpack-plugin": "^2.0.0",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "file-loader": "^0.11.2",
@@ -258,6 +289,7 @@ __webpack.config.js__
   const CleanWebpackPlugin = require('clean-webpack-plugin');
 
   module.exports = {
+    mode: 'development',
     entry: {
       app: './src/index.js',
       print: './src/print.js'
@@ -267,7 +299,7 @@ __webpack.config.js__
       contentBase: './dist'
     },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Output Management'
       })
@@ -298,7 +330,7 @@ __project__
 
 __server.js__
 
-``` js
+```javascript
 const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -340,7 +372,7 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "clean-webpack-plugin": "^0.1.16",
+      "clean-webpack-plugin": "^2.0.0",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "express": "^4.15.3",
@@ -378,9 +410,9 @@ When using automatic compilation of your code, you could run into issues when sa
 
 To disable this feature in some common editors, see the list below:
 
-- **Sublime Text 3**: Add `atomic_save: "false"` to your user preferences.
-- **JetBrains IDEs (e.g. WebStorm)**: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
-- **Vim**: Add `:set backupcopy=yes` to your settings.
+- __Sublime Text 3__: Add `atomic_save: 'false'` to your user preferences.
+- __JetBrains IDEs (e.g. WebStorm)__: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
+- __Vim__: Add `:set backupcopy=yes` to your settings.
 
 
 ## Conclusion

@@ -103,7 +103,7 @@ __webpack.prod.js__
 + });
 ```
 
-In `webpack.common.js`, we now have setup our `entry` and `output` configuration and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've set ``mode`` to ``development``. Also, we've added the recommended `devtool` for that environment (strong source mapping), as well as our simple `devServer` configuration. Finally, in `webpack.prod.js`,``mode`` is set to ``production`` which loads `UglifyJSPlugin` which was first introduced by the [tree shaking](/guides/tree-shaking) guide.
+In `webpack.common.js`, we now have setup our `entry` and `output` configuration and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've set ``mode`` to ``development``. Also, we've added the recommended `devtool` for that environment (strong source mapping), as well as our simple `devServer` configuration. Finally, in `webpack.prod.js`,``mode`` is set to ``production`` which loads `TerserPlugin` which was first introduced by the [tree shaking](/guides/tree-shaking) guide.
 
 Note the use of `merge()` in the environment-specific configurations to easily include our common configuration in `dev` and `prod`. The `webpack-merge` tool offers a variety of advanced features for merging but for our use case we won't need any of that.
 
@@ -148,10 +148,9 @@ __package.json__
 
 Feel free to run those scripts and see how the output changes as we continue adding to our _production_ configuration.
 
-
 ## Specify the Mode
 
-Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when not in _production_ some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV === 'production'` they might drop or add significant portions of code to optimize how things run for your actual users. Since webpack v4, specifying [`mode`](/concepts/mode/) automatically configures [`DefinePlugin`](/plugins/define-plugin) for you:
+Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when not in _production_ some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV === 'production'` they might drop or add significant portions of code to optimize how things run for your actual users. Since webpack v4, specifying [`mode`](/configuration/mode/) automatically configures [`DefinePlugin`](/plugins/define-plugin) for you:
 
 __webpack.prod.js__
 
@@ -194,14 +193,14 @@ __src/index.js__
 
 ## Minification
 
-webpack v4+ will minify your code by default in [`production mode`](/concepts/mode/#mode-production).
+webpack v4+ will minify your code by default in [`production mode`](/configuration/mode/#mode-production).
 
-Note that while the [`UglifyJSPlugin`](/plugins/uglifyjs-webpack-plugin) is a great place to start for minification and being used by default, there are other options out there. Here are a few more popular ones:
+Note that while the [`TerserPlugin`](/plugins/terser-webpack-plugin) is a great place to start for minification and being used by default, there are other options out there. Here are a few more popular ones:
 
 - [`BabelMinifyWebpackPlugin`](https://github.com/webpack-contrib/babel-minify-webpack-plugin)
-- [`ClosureCompilerPlugin`](https://github.com/roman01la/webpack-closure-compiler)
+- [`ClosureWebpackPlugin`](https://github.com/webpack-contrib/closure-webpack-plugin)
 
-If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimization-minimizer).
+If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
 
 
 ## Source Mapping
@@ -230,6 +229,6 @@ It is crucial to minimize your CSS on production, please see [Minimizing for Pro
 
 ## CLI Alternatives
 
-Some of what has been described above is also achievable via the command line. For example, the `--optimize-minimize` flag will include the `UglifyJSPlugin` behind the scenes. The `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above. And, `webpack -p` will automatically invoke both those flags and thus the plugins to be included.
+Some of what has been described above is also achievable via the command line. For example, the `--optimize-minimize` flag will include the `TerserPlugin` behind the scenes. The `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above. And, `webpack -p` will automatically invoke both those flags and thus the plugins to be included.
 
 While these short hand methods are nice, we usually recommend just using the configuration as it's better to understand exactly what is being done for you in both cases. The configuration also gives you more control on fine tuning other options within both plugins.

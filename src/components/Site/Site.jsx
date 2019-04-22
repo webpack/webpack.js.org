@@ -1,68 +1,157 @@
+// Import External Dependencies
 import React from 'react';
-import Interactive from 'antwar-interactive';
-import { GoogleAnalytics } from 'antwar-helpers';
+import { Switch, Route } from 'react-router-dom';
+import { hot as Hot } from 'react-hot-loader';
+import DocumentTitle from 'react-document-title';
+
+// Import Utilities
+import { extractPages, extractSections, getPageTitle } from '../../utilities/content-utils';
+import isClient from '../../utilities/is-client';
+
+// Import Components
 import NotificationBar from '../NotificationBar/NotificationBar';
 import Navigation from '../Navigation/Navigation';
-import Footer from '../Footer/Footer';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
+import Container from '../Container/Container';
+import Splash from '../Splash/Splash';
+import Sponsors from '../Sponsors/Sponsors';
+import Sidebar from '../Sidebar/Sidebar';
+import Footer from '../Footer/Footer';
+import Page from '../Page/Page';
+import Gitter from '../Gitter/Gitter';
+import Vote from '../Vote/Vote';
+import Organization from '../Organization/Organization';
+import StarterKits from '../StarterKits/StarterKits';
+
+// Load Styling
+import '../../styles/index';
+import '../../styles/icon.font.js';
 import './Site.scss';
 
-// Load base styling
-import '../../styles';
-import '../../styles/icon.font.js';
-import '../Container/Container.scss';
-import '../NotificationBar/NotificationBar.scss';
-import '../Navigation/Navigation.scss';
-import '../Navigation/Search.scss';
-import '../SidebarMobile/SidebarMobile.scss';
-import '../SidebarItem/SidebarItem.scss';
-import '../Logo/Logo.scss';
-import '../Dropdown/Dropdown.scss';
+// Load Content Tree
+import Content from '../../_content.json';
 
-const Site = ({
-  children,
-  section,
-  location: { pathname }
-}) => (
-  <div id="site" className="site">
-    <Interactive
-      id="src/components/NotificationBar/NotificationBar.jsx"
-      component={ NotificationBar } />
+class Site extends React.Component {
+  state = {
+    mobileSidebarOpen: false
+  };
 
-    <Interactive
-      id="src/components/Navigation/Navigation.jsx"
-      component={ Navigation }
-      pageUrl={ pathname } />
+  render() {
+    let { location } = this.props;
+    let { mobileSidebarOpen } = this.state;
+    let sections = extractSections(Content);
+    let section = sections.find(({ url }) => location.pathname.startsWith(url));
+    let pages = extractPages(Content);
 
-    <Interactive
-      id="src/components/SidebarMobile/SidebarMobile.jsx"
-      component={ SidebarMobile }
-      sections={
-        section.all()
-          .filter(section => section.path.hidden !== true)
-          .map((section) => ({
-            title: section.path.title,
-            url: section.url,
-            pages: section.pages.slice().sort(({ file: { attributes: a }}, { file: { attributes: b }}) => {
-              let group1 = a.group.toLowerCase();
-              let group2 = b.group.toLowerCase();
+    return (
+      <div className="site">
+        <DocumentTitle title={getPageTitle(Content, location.pathname)} />
+        <NotificationBar />
+        <Navigation
+          pathname={location.pathname}
+          toggleSidebar={this._toggleSidebar}
+          links={[
+            {
+              content: 'Documentation',
+              url: '/concepts',
+              isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
+              children: this._strip(sections.filter(item => item.name !== 'contribute'))
+            },
+            { content: 'Contribute', url: '/contribute' },
+            { content: 'Vote', url: '/vote' },
+            { content: 'Blog', url: 'https://medium.com/webpack' }
+          ]}
+        />
 
-              if (group1 < group2) return -1;
-              if (group1 > group2) return 1;
-              return a.sort - b.sort;
-            }).map(page => ({
-              title: page.file.title,
-              url: page.url
-            }))
-          }))
-      } />
+        {isClient ? <SidebarMobile
+          isOpen={mobileSidebarOpen}
+          sections={this._strip(Content.children)}
+          toggle={this._toggleSidebar} /> : null}
 
-    { children }
+        <Switch>
+          <Route path="/" exact component={Splash} />
+          <Route
+            render={props => (
+              <Container className="site__content">
+                <Switch>
+                  <Route path="/vote" component={Vote} />
+                  <Route path="/organization" component={Organization} />
+                  <Route path="/starter-kits" component={StarterKits} />
+                  {pages.map(page => (
+                    <Route
+                      key={page.url}
+                      exact={true}
+                      path={page.url}
+                      render={props => {
+                        let path = page.path.replace('src/content/', '');
+                        let content = this.props.import(path);
 
-    <Footer />
+                        return (
+                          <React.Fragment>
+                            <Sponsors />
+                            <Sidebar
+                              className="site__sidebar"
+                              currentPage={location.pathname}
+                              pages={this._strip(
+                                section
+                                  ? section.children
+                                  : Content.children.filter(item => item.type !== 'directory' && item.url !== '/')
+                              )}
+                            />
+                            <Page {...page} content={content} />
+                            <Gitter />
+                          </React.Fragment>
+                        );
+                      }}
+                    />
+                  ))}
+                  <Route render={props => '404 Not Found'} />
+                </Switch>
+              </Container>
+            )}
+          />
+        </Switch>
+        <Footer />
+      </div>
+    );
+  }
 
-    <GoogleAnalytics analyticsId="UA-46921629-2" />
-  </div>
-);
+  /**
+   * Toggle the mobile sidebar
+   *
+   * @param {boolean} open - Indicates whether the menu should be open or closed
+   */
+  _toggleSidebar = (open = !this.state.mobileSidebarOpen) => {
+    this.setState({
+      mobileSidebarOpen: open
+    });
+  };
 
-export default Site;
+  /**
+   * Strip any non-applicable properties
+   *
+   * @param  {array} array - ...
+   * @return {array}       - ...
+   */
+  _strip = array => {
+    let anchorTitleIndex = array.findIndex(item => item.name.toLowerCase() === 'index.md');
+
+    if (anchorTitleIndex !== -1) {
+      array.unshift(array[anchorTitleIndex]);
+
+      array.splice(anchorTitleIndex + 1, 1);
+    }
+
+    return array.map(({ title, name, url, group, sort, anchors, children }) => ({
+      title: title || name,
+      content: title || name,
+      url,
+      group,
+      sort,
+      anchors,
+      children: children ? this._strip(children) : []
+    }));
+  };
+}
+
+export default Hot(module)(Site);

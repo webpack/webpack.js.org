@@ -183,7 +183,7 @@ module.exports = FileListPlugin;
 
 A plugin can be classified into types based on the event hooks it taps into. Every event hook is pre-defined as synchronous or asynchronous or waterfall or parallel hook and hook is called internally using call/callAsync method. The list of hooks that are supported or can be tapped into are generally specified in this.hooks property.
 
-For example:-
+For example:
 
 ```javascript
 this.hooks = {
@@ -193,17 +193,17 @@ this.hooks = {
 
 It represents that the only hook supported is `shouldEmit` which is a hook of `SyncBailHook` type and the only parameter which will be passed to any plugin that taps into `shouldEmit` hook is `compilation`.
 
-Various types of hooks supported are :-
+Various types of hooks supported are :
 
 ### Synchronous Hooks
 
-- **SyncHook**
+- __SyncHook__
 
     - Defined as `new SyncHook([params])`
     - Tapped into using `tap` method.
     - Called using `call(...params)` method.
 
-- **Bail Hooks**
+- __Bail Hooks__
 
     - Defined using `SyncBailHook[params]`
     - Tapped into using `tap` method.
@@ -211,7 +211,7 @@ Various types of hooks supported are :-
 
   In these type of hooks, each of the plugin callbacks will be invoked one after the other with the specific `args`. If any value is returned except undefined by any plugin, then that value is returned by hook and no further plugin callback is invoked. Many useful events like `optimizeChunks`, `optimizeChunkModules` are SyncBailHooks.
 
-- **Waterfall Hooks**
+- __Waterfall Hooks__
 
     - Defined using `SyncWaterfallHook[params]`
     - Tapped into using `tap` method.
@@ -222,7 +222,7 @@ Various types of hooks supported are :-
 
 ### Asynchronous Hooks
 
-- **Async Series Hook**
+- __Async Series Hook__
 
     - Defined using `AsyncSeriesHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
@@ -231,7 +231,7 @@ Various types of hooks supported are :-
   The plugin handler functions are called with all arguments and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration. `callback` is called after all the handlers are called.
   This is also a commonly used pattern for events like `emit`, `run`.
 
-- **Async waterfall** The plugins will be applied asynchronously in the waterfall manner.
+- __Async waterfall__ The plugins will be applied asynchronously in the waterfall manner.
 
     - Defined using `AsyncWaterfallHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
@@ -240,23 +240,19 @@ Various types of hooks supported are :-
   The plugin handler functions are called with the current value and a callback function with the signature `(err: Error, nextValue: any) -> void.` When called `nextValue` is the current value for the next handler. The current value for the first handler is `init`. After all handlers are applied, callback is called with the last value. If any handler passes a value for `err`, the callback is called with this error and no more handlers are called.
   This plugin pattern is expected for events like `before-resolve` and `after-resolve`.
 
-- **Async Series Bail**
+- __Async Series Bail__
 
     - Defined using `AsyncSeriesBailHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
     - Called using `callAsync( ... params)` method
 
-  someMethod() {
-  // Call a hook:
-  this.hooks.compilation.call();
-
-- **Async Parallel**
+- __Async Parallel__
 
     - Defined using `AsyncParallelHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
     - Called using `callAsync( ... params)` method
 
-- **Async Series Bail**
+- __Async Series Bail__
 
     - Defined using `AsyncSeriesBailHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.

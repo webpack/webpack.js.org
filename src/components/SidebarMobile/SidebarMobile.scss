@@ -20,6 +20,10 @@
 
   &--visible {
     transform: translate3D(0, 0, 0);
+
+    .sidebar-mobile__toggle {
+      display: none;
+    }
   }
 
   &.no-delay{
@@ -46,12 +50,12 @@
 }
 
 .sidebar-mobile__close {
-  position:absolute;
-  cursor:pointer;
+  position: absolute;
+  cursor: pointer;
   right: 22px;
   top: 22px;
   font-size: 1.3em;
-  background: getColor(denim);
+  background-color: getColor(denim);
   color: getColor(white);
   width: 30px;
   height: 30px;
@@ -59,17 +63,17 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: background 150ms;
+  transition: background-color 150ms;
   -webkit-tap-highlight-color: transparent;
 
   &:hover {
-    background: darken(getColor(denim), 20%);
+    background-color: darken(getColor(denim), 20%);
   }
 }
 
 .sidebar-mobile__section {
   border-left: 2px solid transparent;
-  padding-bottom:0.5em;
+  padding-bottom: 0.5em;
 
   &--active {
     border-left: 2px solid getColor(malibu);

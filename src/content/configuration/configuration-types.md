@@ -9,6 +9,7 @@ contributors:
   - fadysamirsadek
   - byzyk
   - EugeneHlushko
+  - dhurlburtusa
 ---
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
@@ -30,8 +31,10 @@ One option is to export a function from your webpack config instead of exporting
 +    mode: env.production ? 'production' : 'development',
 +    devtool: env.production ? 'source-maps' : 'eval',
      plugins: [
-       new webpack.optimize.UglifyJsPlugin({
-+        compress: argv['optimize-minimize'] // only if -p or --optimize-minimize were passed
+       new TerserPlugin({
+         terserOptions: {
++          compress: argv['optimize-minimize'] // only if -p or --optimize-minimize were passed
+         }
        })
      ]
 +  };
@@ -59,7 +62,7 @@ module.exports = () => {
 
 ## Exporting multiple configurations
 
-Instead of exporting a single configuration object/function, you may export multiple configurations (multiple functions are supported since webpack 3.1.0). When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/configuration/output#output-librarytarget) such as AMD and CommonJS:
+Instead of exporting a single configuration object/function, you may export multiple configurations (multiple functions are supported since webpack 3.1.0). When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/configuration/output#outputlibrarytarget) such as AMD and CommonJS:
 
 ```js
 module.exports = [{
@@ -81,4 +84,4 @@ module.exports = [{
 }];
 ```
 
-T> If you pass a name to `--config-name` flag, webpack will only build that specific configuration.
+T> If you pass a name to [`--config-name`](/api/cli/#config-options) flag, webpack will only build that specific configuration.

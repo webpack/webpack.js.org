@@ -5,9 +5,10 @@ contributors:
   - morsdyce
   - kkamali
   - mtrivera
+  - byzyk
 ---
 
-T> This guide stems from the [*Getting Started*](/guides/getting-started/) guide.
+T> This guide stems from the [_Getting Started_](/guides/getting-started/) guide.
 
 [TypeScript](https://www.typescriptlang.org) is a typed superset of JavaScript that compiles to plain JavaScript. In this guide we will learn how to integrate TypeScript with webpack.
 
@@ -153,7 +154,7 @@ See the [devtool documentation](/configuration/devtool/) for more information.
 
 ## Using Third Party Libraries
 
-When installing third party libraries from npm, it is important to remember to install the typing definition for that library. These definitions can be found at [TypeSearch](http://microsoft.github.io/TypeSearch/).
+When installing third party libraries from npm, it is important to remember to install the typing definition for that library. These definitions can be found at [TypeSearch](https://microsoft.github.io/TypeSearch/).
 
 For example if we want to install lodash we can run the following command to get the typings for it:
 

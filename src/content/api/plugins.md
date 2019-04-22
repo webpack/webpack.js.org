@@ -8,6 +8,7 @@ contributors:
   - e-cloud
   - byzyk
   - EugeneHlushko
+  - wizardofhogwarts
 ---
 
 Plugins are a key piece of the webpack ecosystem and provide the community with
@@ -46,8 +47,8 @@ a different number of ways. The way this works is closely related to the
 [compiler hooks](/api/compiler-hooks/#hooks) each note the underlying `Tapable` hook indicating which
 `tap` methods are available.
 
-So depending which event you `tap` into, the plugin may run differently. For
-example, when hooking into `compile` stage, only the synchronous `tap` method
+So depending on which event you `tap` into, the plugin may run differently. For
+example, when hooking into the `compile` stage, only the synchronous `tap` method
 can be used:
 
 ``` js
@@ -60,18 +61,18 @@ However, for `run` which utilizes the `AsyncHook`, we can utilize `tapAsync`
 or `tapPromise` (as well as `tap`):
 
 ``` js
-compiler.hooks.run.tapAsync('MyPlugin', (compiler, callback) => {
+compiler.hooks.run.tapAsync('MyPlugin', (source, target, routesList, callback) => {
   console.log('Asynchronously tapping the run hook.');
   callback();
 });
 
-compiler.hooks.run.tapPromise('MyPlugin', compiler => {
+compiler.hooks.run.tapPromise('MyPlugin', (source, target, routesList) => {
   return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
     console.log('Asynchronously tapping the run hook with a delay.');
   });
 });
 
-compiler.hooks.run.tapPromise('MyPlugin', async compiler => {
+compiler.hooks.run.tapPromise('MyPlugin', async (source, target, routesList) => {
   await new Promise(resolve => setTimeout(resolve, 1000));
   console.log('Asynchronously tapping the run hook with a delay.');
 });

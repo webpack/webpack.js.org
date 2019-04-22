@@ -28,7 +28,7 @@ While they are technically feasible, __the following practices should be avoided
 
 T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuration. The key is to stick with something consistent that you and your team can understand and maintain.
 
-The following examples below describe how webpack's configuration can be both expressive and configurable because _it is code_:
+The examples below describe how webpack's configuration can be both expressive and configurable because _it is code_:
 
 ## Simple Configuration
 

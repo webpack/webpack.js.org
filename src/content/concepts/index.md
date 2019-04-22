@@ -14,7 +14,6 @@ contributors:
   - arjunsajeev
   - byzyk
   - yairhaimo
-  - EugeneHlushko
   - farskid
   - LukeMwila
 ---
@@ -32,10 +31,11 @@ To get started you only need to understand its __Core Concepts__:
 - [Loaders](#loaders)
 - [Plugins](#plugins)
 - [Mode](#mode)
+- [Browser Compatibility](#browser-compatibility)
 
-This document is intended to give a __high-level__ overview of these concepts, while providing links to detailed concept specific use cases.
+This document is intended to give a __high-level__ overview of these concepts, while providing links to detailed concept-specific use cases.
 
-For a better understanding of the ideas behind module bundlers and how they work under the hood consult these resources:
+For a better understanding of the ideas behind module bundlers and how they work under the hood, consult these resources:
 
 - [Manually Bundling an Application](https://www.youtube.com/watch?v=UNMkLHzofQI)
 - [Live Coding a Simple Module Bundler](https://www.youtube.com/watch?v=Gc9-7PBqOC8)
@@ -61,7 +61,7 @@ T> Learn more in the [entry points](/concepts/entry-points) section.
 
 ## Output
 
-The __output__ property tells webpack where to emit the *bundles* it creates and how to name these files. It defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
+The __output__ property tells webpack where to emit the _bundles_ it creates and how to name these files. It defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
 
 You can configure this part of the process by specifying an `output` field in your configuration:
 
@@ -118,6 +118,8 @@ The configuration above has defined a `rules` property for a single module with 
 
 W> It is important to remember that when defining rules in your webpack config, you are defining them under `module.rules` and not `rules`. For your benefit, webpack will warn you if this is done incorrectly.
 
+W> Keep in mind that when using regex to match files, you may not quote it. i.e `/\.txt$/` is not the same as `'/\.txt$/'`/ `"/\.txt$/"`. The former instructs webpack to match any file that ends with .txt and the latter instructs webpack to match a single file with an absolute path '.txt'; this is likely not your intention. 
+
 You can check further customization when including loaders in the [loaders section](/concepts/loaders).
 
 
@@ -164,7 +166,7 @@ module.exports = {
 };
 ```
 
-Learn more about the [mode configuration here](/concepts/mode) and what optimizations take place on each value.
+Learn more about the [mode configuration here](/configuration/mode) and what optimizations take place on each value.
 
 
 ## Browser Compatibility

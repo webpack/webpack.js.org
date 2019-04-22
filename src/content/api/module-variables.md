@@ -9,6 +9,7 @@ contributors:
   - tbroadley
   - byzyk
   - EugeneHlushko
+  - wizardofhogwarts
 related:
   - title: CommonJS
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -53,7 +54,7 @@ W> This CANNOT be used in an asynchronous function.
 
 ### `exports` (CommonJS)
 
-This variable is equal to default value of `module.exports` (i.e. an object). If `module.exports` gets overwritten, `exports` will no longer be exported.
+This variable is equal to the default value of `module.exports` (i.e. an object). If `module.exports` gets overwritten, `exports` will no longer be exported.
 
 ``` javascript
 exports.someValue = 42;
@@ -84,7 +85,7 @@ Depending on the config option `node.__dirname`:
 - `mock`: equal "/"
 - `true`: [node.js __dirname](https://nodejs.org/api/globals.html#globals_dirname)
 
-If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
+If used inside an expression that is parsed by the Parser, the config option is treated as `true`.
 
 
 ### `__filename` (NodeJS)
@@ -95,12 +96,12 @@ Depending on the config option `node.__filename`:
 - `mock`: equal "/index.js"
 - `true`: [node.js __filename](https://nodejs.org/api/globals.html#globals_filename)
 
-If used inside a expression that is parsed by the Parser, the config option is treated as `true`.
+If used inside an expression that is parsed by the Parser, the config option is treated as `true`.
 
 
 ### `__resourceQuery` (webpack-specific)
 
-The resource query of the current module. If the following `require` call were made, then the query string would be available in `file.js`.
+The resource query of the current module. If the following `require` call was made, then the query string would be available in `file.js`.
 
 ``` javascript
 require('file.js?test');

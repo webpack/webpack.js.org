@@ -22,7 +22,7 @@ This plugin is used in a separate webpack config exclusively to create a dll-onl
 
 - `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
 - `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[hash]` & `[name]` )
-- `path`: **absolute path** to the manifest json file (output)
+- `path`: __absolute path__ to the manifest json file (output)
 
 ```javascript
 new webpack.DllPlugin(options);
@@ -30,19 +30,19 @@ new webpack.DllPlugin(options);
 
 Creates a `manifest.json` which is written to the given `path`. It contains mappings from require and import requests, to module ids. It is used by the `DllReferencePlugin`.
 
-Combine this plugin with [`output.library`](/configuration/output/#output-library) option to expose (aka, put into the global scope) the dll function.
+Combine this plugin with [`output.library`](/configuration/output/#outputlibrary) option to expose (aka, put into the global scope) the dll function.
 
 
 ## `DllReferencePlugin`
 
 This plugin is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.
 
-- `context`: (**absolute path**) context of requests in the manifest (or content property)
+- `context`: (__absolute path__) context of requests in the manifest (or content property)
 - `manifest` : an object containing `content` and `name` or a string to the absolute path of the JSON manifest to be loaded upon compilation
 - `content` (optional): the mappings from request to module id (defaults to `manifest.content`)
 - `name` (optional): the name where the dll is exposed (defaults to `manifest.name`) (see also [`externals`](/configuration/externals/))
 - `scope` (optional): prefix which is used for accessing the content of the dll
-- `sourceType` (optional): how the dll is exposed ([libraryTarget](/configuration/output/#output-librarytarget))
+- `sourceType` (optional): how the dll is exposed ([libraryTarget](/configuration/output/#outputlibrarytarget))
 
 ```javascript
 new webpack.DllReferencePlugin(options);
@@ -50,7 +50,7 @@ new webpack.DllReferencePlugin(options);
 
 References a dll manifest file to map dependency names to module ids, then requires them as needed using the internal `__webpack_require__` function.
 
-W> Keep the `name` consistent with [`output.library`](/configuration/output/#output-library).
+W> Keep the `name` consistent with [`output.library`](/configuration/output/#outputlibrary).
 
 
 ### Modes
@@ -74,7 +74,7 @@ Because this happens after resolving every file in the dll bundle, the same path
 
 W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 
-**webpack.vendor.config.js**
+__webpack.vendor.config.js__
 
 ```javascript
 new webpack.DllPlugin({
@@ -84,7 +84,7 @@ new webpack.DllPlugin({
 });
 ```
 
-**webpack.app.config.js**
+__webpack.app.config.js__
 
 ```javascript
 new webpack.DllReferencePlugin({
