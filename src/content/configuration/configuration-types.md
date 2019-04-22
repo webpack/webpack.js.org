@@ -45,7 +45,7 @@ One option is to export a function from your webpack config instead of exporting
 
 ## Exporting a Promise
 
-webpack will run the function exported by the configuration file and wait for a Promise to be returned. If you have an array of Promises you can wrap it in `Promises.all([])`. Handy when you need to asynchronously load configuration variables.
+webpack will run the function exported by the configuration file and wait for a Promise to be returned. Handy when you need to asynchronously load configuration variables.
 
 ```js
 module.exports = () => {
