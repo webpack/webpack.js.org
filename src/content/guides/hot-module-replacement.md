@@ -192,7 +192,7 @@ __index.js__
   }
 
 - document.body.appendChild(component());
-+ const element = component(); // Store the element to re-render on print.js changes
++ let element = component(); // Store the element to re-render on print.js changes
 + document.body.appendChild(element);
 
   if (module.hot) {
@@ -305,7 +305,7 @@ __index.js__
     return element;
   }
 
-  const element = component();
+  let element = component();
   document.body.appendChild(element);
 
   if (module.hot) {
