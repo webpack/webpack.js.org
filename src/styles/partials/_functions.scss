@@ -4,7 +4,7 @@
 @import '../../../node_modules/modularscale-sass/stylesheets/modularscale';
 
 @function getFontSize($step) {
-  @return ms($step, 16px, $minor-third)
+  @return ms($step, 16px, $minor-third);
 }
 
 @function getColor($name) {
