@@ -14,7 +14,9 @@
   &__rank {
     text-transform: capitalize;
 
-    &:after { content: ' '; }
+    &:after {
+      content: ' ';
+    }
   }
 
   &__item {

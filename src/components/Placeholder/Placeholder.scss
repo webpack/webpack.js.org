@@ -1,8 +1,8 @@
 @import 'functions';
 
 .placeholder {
-
-  h2, p {
+  h2,
+  p {
     background-color: getColor(concrete);
     // use system font to prevent layout change
     font-family: sans-serif;

@@ -11,6 +11,7 @@ contributors:
   - rosavage
   - saiprasad2595
   - EugeneHlushko
+  - AnayaDesign
 related:
   - title: Issue 652
     url: https://github.com/webpack/webpack.js.org/issues/652
@@ -20,7 +21,7 @@ T> The examples in this guide stem from [getting started](/guides/getting-starte
 
 So we're using webpack to bundle our modular application which yields a deployable `/dist` directory. Once the contents of `/dist` have been deployed to a server, clients (typically browsers) will hit that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](https://searchstorage.techtarget.com/definition/cache). This allows sites to load faster with less unnecessary network traffic, however it can also cause headaches when you need new code to be picked up.
 
-This guide focuses on the configuration needed to ensure files produced by webpack compilation can remain cached unless their contents has changed.
+This guide focuses on the configuration needed to ensure files produced by webpack compilation can remain cached unless their content has changed.
 
 
 ## Output Filenames
@@ -140,7 +141,7 @@ This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin/#spli
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
   const CleanWebpackPlugin = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -218,7 +219,7 @@ __src/index.js__
 + import Print from './print';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -309,7 +310,7 @@ __src/index.js__
 + // import Print from './print';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');

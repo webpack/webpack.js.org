@@ -22,7 +22,7 @@ A single result can be returned in __sync mode__. For multiple results the `this
 
 ## Examples
 
-The following sections provide some basic examples of the different types of loaders. Note that the `map` and `meta` parameters are optional, see [`this.callback`](/api/loaders#this-callback) below.
+The following sections provide some basic examples of the different types of loaders. Note that the `map` and `meta` parameters are optional, see [`this.callback`](#thiscallback) below.
 
 ### Synchronous Loaders
 
@@ -49,7 +49,7 @@ module.exports = function(content, map, meta) {
 
 ### Asynchronous Loaders
 
-For asynchronous loaders, [`this.async`](/api/loaders#this-async) is used to retrieve the `callback` function:
+For asynchronous loaders, [`this.async`](#this-async) is used to retrieve the `callback` function:
 
 __async-loader.js__
 
