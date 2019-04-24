@@ -1,5 +1,6 @@
 // Import External Dependencies
 import React from 'react';
+import VisibilitySensor from '../VisibilitySensor/VisibilitySensor';
 
 // Import Data
 import Backers from './_supporters.json';
@@ -61,9 +62,10 @@ function formatMoney(number) {
   return str;
 }
 
-export default class Support extends React.Component {
+export default class Support extends VisibilitySensor {
   render() {
     let { rank } = this.props;
+    const { isVisible } = this.state;
 
     let supporters = SUPPORTERS;
     let minimum, maximum, maxAge, limit, random;
@@ -108,7 +110,7 @@ export default class Support extends React.Component {
     }
 
     return (
-      <div className="support">
+      <div className="support" ref={ this.visibilityTarget }>
         <div className="support__description">
           { rank === 'backer' ? (
             <p>
@@ -134,7 +136,7 @@ export default class Support extends React.Component {
                href={ supporter.website || `https://opencollective.com/${supporter.slug}` }>
               {<img
                 className={ `support__${rank}-avatar` }
-                src={ supporter.avatar || SmallIcon }
+                src={ (isVisible && supporter.avatar) ? supporter.avatar : SmallIcon }
                 alt={ supporter.name || supporter.slug ? `${supporter.name || supporter.slug}'s avatar` : 'avatar' }
                 onError={ this._handleImgError } />}
             </a>
