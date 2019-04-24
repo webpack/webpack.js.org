@@ -9,7 +9,7 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.1.2":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2":
   version "7.4.3"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.3.tgz#79888e452034223ad9609187a0ad1fe0d2ad4bdc"
   integrity sha512-9lsJwJLxDh/T3Q3SZszfWOTkk3pHbkmH+3KY+zwIDmsNlxsumuhS2TH3NIpktU4kNvfzy+k3eLT7aTJSPTo0OA==
@@ -9112,6 +9112,14 @@ react-hot-loader@^4.0.0-beta.12:
     react-lifecycles-compat "^3.0.4"
     shallowequal "^1.0.2"
     source-map "^0.7.3"
+
+react-intersection-observer@^8.22.6:
+  version "8.22.6"
+  resolved "https://registry.yarnpkg.com/react-intersection-observer/-/react-intersection-observer-8.22.6.tgz#b03ad27a612bdbb5510f5fd21e997bdfc012d784"
+  integrity sha512-xhQK9jqU4yUUCQPne4rXt21ExnWTpbC3fhXlJlWOchFH2S9kaf0CJU5pTyCds2HKs43QE1+y4sGkBAoktnpdGg==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    invariant "^2.0.0"
 
 react-is@^16.7.0, react-is@^16.8.1:
   version "16.8.6"
