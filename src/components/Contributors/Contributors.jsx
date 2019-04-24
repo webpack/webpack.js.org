@@ -1,11 +1,22 @@
 import React from 'react';
-import VisibilitySensor from '../VisibilitySensor/VisibilitySensor';
+import { InView } from 'react-intersection-observer';
 import SmallIcon from '../../assets/icon-square-small-slack.png';
 import './Contributors.scss';
 
-export default class Contributors extends VisibilitySensor {
+export default class Contributors extends React.Component {
+  state = {
+    inView: false
+  }
+
+  handleInView = (inView) => {
+    if (!inView) {
+      return;
+    }
+    this.setState({ inView });
+  }
+
   render() {
-    const { isVisible } = this.state;
+    const { inView } = this.state;
     const { contributors } = this.props;
     
     if (!contributors.length) {
@@ -13,7 +24,11 @@ export default class Contributors extends VisibilitySensor {
     }
   
     return (
-      <div className="contributors" ref={ this.visibilityTarget }>
+      <InView as="div"
+        onChange={ this.handleInView }
+        threshold={ 0 }
+        triggerOnce
+        className="contributors">
         <div className="contributors__list">
           {
             contributors.map(contributor => (
@@ -21,13 +36,13 @@ export default class Contributors extends VisibilitySensor {
                 className="contributor"
                 href={ `https://github.com/${contributor}` }>
                 <img alt={ contributor }
-                  src={ isVisible ? `https://github.com/${contributor}.png?size=90` : SmallIcon } />
+                  src={ inView ? `https://github.com/${contributor}.png?size=90` : SmallIcon } />
                 <span className="contributor__name"> {contributor}</span>
               </a>
             ))
           }
         </div>
-      </div>
+      </InView>
     );
   }
 }

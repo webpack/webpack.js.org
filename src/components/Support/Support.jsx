@@ -1,6 +1,6 @@
 // Import External Dependencies
 import React from 'react';
-import VisibilitySensor from '../VisibilitySensor/VisibilitySensor';
+import { InView } from 'react-intersection-observer';
 
 // Import Data
 import Backers from './_supporters.json';
@@ -62,10 +62,22 @@ function formatMoney(number) {
   return str;
 }
 
-export default class Support extends VisibilitySensor {
+export default class Support extends React.Component {
+  state = {
+    inView: false
+  }
+
+  handleInView = (inView) => {
+    if (!inView) {
+      return;
+    }
+    this.setState({ inView });
+  };
+
   render() {
     let { rank } = this.props;
-    const { isVisible } = this.state;
+
+    const { inView } = this.state;
 
     let supporters = SUPPORTERS;
     let minimum, maximum, maxAge, limit, random;
@@ -110,7 +122,11 @@ export default class Support extends VisibilitySensor {
     }
 
     return (
-      <div className="support" ref={ this.visibilityTarget }>
+      <InView as="div"
+        onChange={ this.handleInView }
+        threshold={ 0 }
+        triggerOnce
+        className="support">
         <div className="support__description">
           { rank === 'backer' ? (
             <p>
@@ -136,7 +152,7 @@ export default class Support extends VisibilitySensor {
                href={ supporter.website || `https://opencollective.com/${supporter.slug}` }>
               {<img
                 className={ `support__${rank}-avatar` }
-                src={ (isVisible && supporter.avatar) ? supporter.avatar : SmallIcon }
+                src={ (inView && supporter.avatar) ? supporter.avatar : SmallIcon }
                 alt={ supporter.name || supporter.slug ? `${supporter.name || supporter.slug}'s avatar` : 'avatar' }
                 onError={ this._handleImgError } />}
             </a>
@@ -148,7 +164,7 @@ export default class Support extends VisibilitySensor {
             Become a { rank === 'backer' ? 'backer' : 'sponsor' }
           </a>
         </div>
-      </div>
+      </InView>
     );
   }
 
