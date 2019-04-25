@@ -1,5 +1,6 @@
 // Import External Dependencies
 import React from 'react';
+import { InView } from 'react-intersection-observer';
 
 // Import Data
 import Backers from './_supporters.json';
@@ -62,8 +63,21 @@ function formatMoney(number) {
 }
 
 export default class Support extends React.Component {
+  state = {
+    inView: false
+  }
+
+  handleInView = (inView) => {
+    if (!inView) {
+      return;
+    }
+    this.setState({ inView });
+  };
+
   render() {
     let { rank } = this.props;
+
+    const { inView } = this.state;
 
     let supporters = SUPPORTERS;
     let minimum, maximum, maxAge, limit, random;
@@ -108,7 +122,11 @@ export default class Support extends React.Component {
     }
 
     return (
-      <div className="support">
+      <InView as="div"
+        onChange={ this.handleInView }
+        threshold={ 0 }
+        triggerOnce
+        className="support">
         <div className="support__description">
           { rank === 'backer' ? (
             <p>
@@ -134,7 +152,7 @@ export default class Support extends React.Component {
                href={ supporter.website || `https://opencollective.com/${supporter.slug}` }>
               {<img
                 className={ `support__${rank}-avatar` }
-                src={ supporter.avatar || SmallIcon }
+                src={ (inView && supporter.avatar) ? supporter.avatar : SmallIcon }
                 alt={ supporter.name || supporter.slug ? `${supporter.name || supporter.slug}'s avatar` : 'avatar' }
                 onError={ this._handleImgError } />}
             </a>
@@ -146,7 +164,7 @@ export default class Support extends React.Component {
             Become a { rank === 'backer' ? 'backer' : 'sponsor' }
           </a>
         </div>
-      </div>
+      </InView>
     );
   }
 

@@ -1,4 +1,4 @@
-@mixin break ($size: medium) {
+@mixin break($size: medium) {
   @media (min-width: map-get($screens, $size)) {
     @content;
   }
@@ -10,12 +10,11 @@
   text-overflow: ellipsis;
 }
 
-@mixin fontantialias ($on) {
+@mixin fontantialias($on) {
   @if $on == true {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-  @else {
+  } @else {
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
   }
