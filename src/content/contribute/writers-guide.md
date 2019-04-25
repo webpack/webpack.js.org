@@ -74,6 +74,28 @@ function foo () {
 foo();
 ```
 
+#### Quotation
+
+Use single quotes in code snippets and project files (`.jsx`, `.scss` etc):
+
+
+```diff
+- import webpack from "webpack";
++ import webpack from 'webpack';
+```
+
+
+And in inline backticks:
+
+__correct__
+
+Set value to `'index.md'`...
+
+__incorrect__
+
+Set value to `"index.md"`...
+
+
 ### Lists
 
 - Boo
