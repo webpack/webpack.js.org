@@ -1,12 +1,12 @@
 // Import External Dependencies
-const path = require('path');
-const webpack = require('webpack');
 const merge = require('webpack-merge');
 const SSGPlugin = require('static-site-generator-webpack-plugin');
 const RedirectWebpackPlugin = require('redirect-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const flattenContentTree = require('./src/utilities/flatten-content-tree');
 const contentTree = require('./src/_content.json');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
 
 // Load Common Configuration
 const common = require('./webpack.common.js');
@@ -22,6 +22,12 @@ const paths = [
 // Prod only config
 const prod = {
   mode: 'production',
+  optimization: {
+    minimizer: [
+      new TerserJSPlugin({}),
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  },
   plugins: [
     new CopyWebpackPlugin([
       {
