@@ -24,8 +24,9 @@
     "node": ">=8.9.4"
   },
   "scripts": {
-    "clean": "rimraf ./dist src/content/**/_*.md src/**/_*.json",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js --env.dev",
+    "clean-dist": "rimraf ./dist",
+    "clean": "npm run clean-dist && rimraf src/content/**/_*.md src/**/_*.json",
+    "start": "npm run clean-dist && cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js --env.dev",
     "update-repos": "node src/utilities/fetch-package-repos.js",
     "content": "node src/scripts/build-content-tree.js ./src/content ./src/_content.json",
     "build-test": "npm run build && http-server dist/",
@@ -130,7 +131,7 @@
     "tap-spot": "^1.1.1",
     "through2": "^2.0.3",
     "uglifyjs-webpack-plugin": "^1.1.6",
-    "webpack": "^4.29.6",
+    "webpack": "^4.30.0",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1",
     "webpack-merge": "^4.1.0"
@@ -149,6 +150,7 @@
     "react-dom": "^16.2.0",
     "react-g-analytics": "0.4.2",
     "react-hot-loader": "^4.0.0-beta.12",
+    "react-intersection-observer": "^8.22.6",
     "react-markdown": "4.0.4",
     "react-router-dom": "^4.2.2",
     "react-tiny-popover": "3.4.2",

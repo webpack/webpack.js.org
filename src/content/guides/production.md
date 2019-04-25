@@ -17,6 +17,7 @@ contributors:
   - xgirma
   - mehrdaad
   - SevenOutman
+  - AnayaDesign
 ---
 
 In this guide we'll dive into some of the best practices and utilities for building a production site or application.
@@ -64,7 +65,8 @@ __webpack.common.js__
 +     app: './src/index.js'
 +   },
 +   plugins: [
-+     new CleanWebpackPlugin(['dist']),
++     // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
++     new CleanWebpackPlugin(),
 +     new HtmlWebpackPlugin({
 +       title: 'Production'
 +     })
@@ -176,7 +178,7 @@ __src/index.js__
 + }
 
   function component() {
-    var element = document.createElement('pre');
+    const element = document.createElement('pre');
 
     element.innerHTML = [
       'Hello webpack!',

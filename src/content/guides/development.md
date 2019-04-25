@@ -36,6 +36,7 @@ __webpack.config.js__
       print: './src/print.js'
     },
     plugins: [
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Development'
@@ -214,6 +215,7 @@ __webpack.config.js__
 +     contentBase: './dist'
 +   },
     plugins: [
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Development'

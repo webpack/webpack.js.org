@@ -57,8 +57,12 @@
     padding-left: 1em;
     @include control-overflow;
 
-    &:first-child { margin-top: 0; }
-    &:last-child { margin-bottom: 0; }
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
     &:before {
       content: '';
       position: absolute;
@@ -90,7 +94,7 @@
 
   &--disabled {
     .sidebar-item__toggle {
-      color: #AAA;
+      color: #aaa;
     }
   }
 }
