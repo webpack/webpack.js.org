@@ -8,6 +8,7 @@ import isClient from '../../utilities/is-client';
 import '../Gitter/Gitter.scss';
 
 let sidecar = null;
+let sidecarLoadTriggered = false;
 
 // Create and export component
 export default class Gitter extends React.Component {
@@ -23,20 +24,20 @@ export default class Gitter extends React.Component {
     );
   }
 
-  componentDidMount() {
+  _handleIconClick = () => {
     if (isClient) {
-      import('gitter-sidecar').then(Sidecar => {
-        if (!sidecar) {
+      if (!sidecarLoadTriggered) {
+        sidecarLoadTriggered = true;
+        import('gitter-sidecar').then(Sidecar => {
           sidecar = new Sidecar.default({
             room: 'webpack/webpack',
             activationElement: false
           });
-        }
-      });
+          sidecar.toggleChat(true);
+        });
+      } else if (sidecar) {
+        sidecar.toggleChat(true);
+      }
     }
-  }
-
-  _handleIconClick = () => {
-    sidecar && sidecar.toggleChat(true);
   }
 }
