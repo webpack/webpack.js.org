@@ -378,7 +378,7 @@ module.exports = {
 
 Whether to resolve symlinks to their symlinked location.
 
-When enabled, symlinked resources are resolved to their _real_ path, not their symlinked location. Note that this may cause module resolution to fail when using tools that symlink packages (like `npm link`).
+When enabled, symlinked resources are resolved to their _real_ path, not their symlinked location. Note that this may cause module resolution to fail when using symlink packages created by packages manager tools (like `npm link`).
 
 __webpack.config.js__
 
