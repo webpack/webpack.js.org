@@ -25,19 +25,21 @@ export default class Gitter extends React.Component {
   }
 
   _handleIconClick = () => {
-    if (isClient) {
-      if (!sidecarLoadTriggered) {
-        sidecarLoadTriggered = true;
-        import('gitter-sidecar').then(Sidecar => {
-          sidecar = new Sidecar.default({
-            room: 'webpack/webpack',
-            activationElement: false
-          });
-          sidecar.toggleChat(true);
+    if (!isClient) {
+      return false;
+    }
+
+    if (!sidecarLoadTriggered) {
+      sidecarLoadTriggered = true;
+      import('gitter-sidecar').then(Sidecar => {
+        sidecar = new Sidecar.default({
+          room: 'webpack/webpack',
+          activationElement: false
         });
-      } else if (sidecar) {
         sidecar.toggleChat(true);
-      }
+      });
+    } else if (sidecar) {
+      sidecar.toggleChat(true);
     }
   }
 }
