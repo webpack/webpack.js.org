@@ -150,10 +150,10 @@
     "react-dom": "^16.8.6",
     "react-g-analytics": "0.4.2",
     "react-hot-loader": "^4.0.0-beta.12",
-    "react-intersection-observer": "^8.22.6",
     "react-markdown": "4.0.4",
     "react-router-dom": "^4.2.2",
     "react-tiny-popover": "3.4.2",
+    "react-visibility-sensor": "^5.0.2",
     "webpack.vote": "^0.1.2",
     "whatwg-fetch": "^2.0.3"
   }
