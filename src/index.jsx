@@ -3,8 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { BrowserRouter as AnalyticsRouter } from 'react-g-analytics';
-// import IntersectionObserver polyfill until safari ^12.x.x is not within monthly visitors.
-import 'intersection-observer';
 
 // Import Components
 import Site from './components/Site/Site';

@@ -141,7 +141,6 @@
     "ajv": "^5.5.2",
     "docsearch.js": "^2.5.2",
     "gitter-sidecar": "^1.2.3",
-    "intersection-observer": "^0.6.0",
     "javascriptstuff-db": "^1.12.0",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.7.2",
@@ -151,10 +150,10 @@
     "react-dom": "^16.8.6",
     "react-g-analytics": "0.4.2",
     "react-hot-loader": "^4.0.0-beta.12",
-    "react-intersection-observer": "^8.22.6",
     "react-markdown": "4.0.4",
     "react-router-dom": "^4.2.2",
     "react-tiny-popover": "3.4.2",
+    "react-visibility-sensor": "^5.0.2",
     "webpack.vote": "^0.1.2",
     "whatwg-fetch": "^2.0.3"
   }
