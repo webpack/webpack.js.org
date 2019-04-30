@@ -48,6 +48,7 @@ export default locals => {
           { Object.keys(assets).filter(asset => /\.css$/.test(asset)).map(path => (
             <link key={ path } rel="stylesheet" href={ `/${path}` } />
           ))}
+          <link rel="manifest" href="/manifest.json" />
         </head>
         <body>
           <div id="root">

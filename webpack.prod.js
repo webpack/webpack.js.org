@@ -31,6 +31,10 @@ const prod = {
   plugins: [
     new CopyWebpackPlugin([
       {
+        from: './assets/PWA',
+        to: './'
+      },
+      {
         from: './assets/icon-square-small-slack.png',
         to: './assets/'
       },
