@@ -93,7 +93,7 @@ export default class Cube extends React.Component {
         let nowTime = performance.now();
         let deltaTime = nowTime - lastTime;
 
-        if (repeatDelay <= deltaTime) {
+        if (repeatDelay <= deltaTime && !document.hidden) {
           let obj = {};
           obj[axis] = degrees += 90;
 
