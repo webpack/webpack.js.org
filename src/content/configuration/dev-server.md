@@ -1353,3 +1353,20 @@ module.exports = {
   }
 };
 ```
+
+## `devServer.sockPort`
+
+`number` `string`
+
+Tells `devServer` to use provided socket port.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    sockPort: 8080
+  }
+};
+```
