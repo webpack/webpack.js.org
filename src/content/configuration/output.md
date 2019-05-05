@@ -984,7 +984,7 @@ will name the AMD module of the UMD build. Otherwise an anonymous `define` is us
 
 Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted. 
 
-W> `output.futureEmitAssets` option will be removed in webpack v5.0.0. This behaviour will become the new default in webpack v5.0.0.
+W> `output.futureEmitAssets` option will be removed in webpack v5.0.0 and this behaviour will become the new default.
 
 ```javascript
 module.exports = {
