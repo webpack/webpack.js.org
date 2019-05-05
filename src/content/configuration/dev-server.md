@@ -1192,6 +1192,23 @@ module.exports = {
 };
 ```
 
+## `devServer.sockPort`
+
+`number` `string`
+
+Tells `devServer` to use provided socket port.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    sockPort: 8080
+  }
+};
+```
+
 
 ## `devServer.staticOptions`
 
@@ -1350,23 +1367,6 @@ module.exports = {
     writeToDisk: (filePath) => {
       return /superman\.css$/.test(filePath);
     }
-  }
-};
-```
-
-## `devServer.sockPort`
-
-`number` `string`
-
-Tells `devServer` to use provided socket port.
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    sockPort: 8080
   }
 };
 ```
