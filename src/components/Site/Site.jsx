@@ -31,6 +31,11 @@ import './Site.scss';
 // Load Content Tree
 import Content from '../../_content.json';
 
+// call offline plugin so it can build
+if (isClient) {
+  require('offline-plugin/runtime').install();
+}
+
 class Site extends React.Component {
   state = {
     mobileSidebarOpen: false

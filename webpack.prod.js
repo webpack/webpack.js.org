@@ -7,6 +7,7 @@ const flattenContentTree = require('./src/utilities/flatten-content-tree');
 const contentTree = require('./src/_content.json');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 
 // Load Common Configuration
 const common = require('./webpack.common.js');
@@ -43,7 +44,8 @@ const prod = {
         to: './assets/'
       },
       'CNAME'
-    ])
+    ]),
+    new OfflinePlugin()
   ]
 };
 
