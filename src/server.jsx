@@ -20,6 +20,12 @@ const bundles = [
   '/index.bundle.js'
 ];
 
+// As github pages uses trailing slash, we need to provide it to canonicals for consistency
+// between canonical href and final url served by github pages.
+function enforceTrailingSlash (url) {
+  return url.replace(/\/?$/, '/');
+}
+
 // Export method for `SSGPlugin`
 export default locals => {
   let { assets } = locals.webpackStats.compilation;
@@ -49,6 +55,7 @@ export default locals => {
             <link key={ path } rel="stylesheet" href={ `/${path}` } />
           ))}
           <link rel="manifest" href="/manifest.json" />
+          <link rel="canonical" href={enforceTrailingSlash(locals.path)} />
         </head>
         <body>
           <div id="root">
