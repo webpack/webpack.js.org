@@ -21,13 +21,10 @@ module.exports = env => merge(common(env), {
   },
   plugins: [
     new OfflinePlugin({
-      relativePaths: false,
-      publicPath: '/',
-      caches: {
-        main: [':rest:', ...cssFiles],
-        optional: ['*.chunk.js']
-      },
-      externals: ['/']
+      externals: ['/', ...cssFiles],
+      AppCache: {
+        FALLBACK: { '/': '/index.html' }
+      }
     })
   ]
 });
