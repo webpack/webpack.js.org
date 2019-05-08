@@ -23,7 +23,6 @@ module.exports = env => merge(common(env), {
     new OfflinePlugin({
       relativePaths: false,
       publicPath: '/',
-      appShell: '/',
       caches: {
         main: [':rest:', ...cssFiles],
         optional: ['*.chunk.js']
