@@ -44,8 +44,7 @@ const prod = {
         to: './assets/'
       },
       'CNAME'
-    ]),
-    new OfflinePlugin()
+    ])
   ]
 };
 
@@ -108,6 +107,11 @@ module.exports = env => [
     }
   }),
   merge(common(env), prod, {
-    target: 'web'
+    target: 'web',
+    plugins: [
+      new OfflinePlugin({
+        externals: paths
+      })
+    ]
   })
 ];
