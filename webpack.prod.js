@@ -9,6 +9,10 @@ const common = require('./webpack.common.js');
 
 // find css files for sw
 const cssFiles = require('./src/utilities/find-files-in-dist')('.css');
+// find favicons
+const favicons = require('./src/utilities/find-files-in-dist')('.ico');
+
+// fall back all urls to app shell
 
 module.exports = env => merge(common(env), {
   mode: 'production',
@@ -21,13 +25,14 @@ module.exports = env => merge(common(env), {
   },
   plugins: [
     new OfflinePlugin({
+      autoUpdate: true,
       publicPath: '/',
-      externals: ['/', ...cssFiles],
-      appShell: '/index.html',
+      appShell: '/concepts/',
+      // make sure to cache homepage and concepts as app shell for the rest of the pages.
+      externals: ['/concepts/', '/', '/manifest.json', ...cssFiles, ...favicons],
       excludes: [],
       AppCache: {
-        publicPath: '/',
-        FALLBACK: { '/': './dist/index.html' }
+        publicPath: '/'
       }
     })
   ]
