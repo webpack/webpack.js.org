@@ -82,6 +82,7 @@ class Site extends React.Component {
                   <Route path="/vote" component={Vote} />
                   <Route path="/organization" component={Organization} />
                   <Route path="/starter-kits" component={StarterKits} />
+                  <Route path="/app-shell" component={() => <React.Fragment />} />
                   {pages.map(page => (
                     <Route
                       key={page.url}

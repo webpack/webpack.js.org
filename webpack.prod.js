@@ -27,9 +27,9 @@ module.exports = env => merge(common(env), {
     new OfflinePlugin({
       autoUpdate: true,
       publicPath: '/',
-      appShell: '/concepts/',
-      // make sure to cache homepage and concepts as app shell for the rest of the pages.
-      externals: ['/concepts/', '/', '/manifest.json', ...cssFiles, ...favicons],
+      appShell: '/app-shell/',
+      // make sure to cache homepage and app shell as app shell for the rest of the pages.
+      externals: ['/app-shell/', '/', '/manifest.json', ...cssFiles, ...favicons],
       excludes: [],
       AppCache: {
         publicPath: '/'

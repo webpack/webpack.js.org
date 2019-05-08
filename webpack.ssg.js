@@ -14,7 +14,8 @@ const paths = [
   ...flattenContentTree(contentTree),
   '/vote',
   '/organization',
-  '/starter-kits'
+  '/starter-kits',
+  '/app-shell'
 ];
 
 module.exports = env => merge(common(env), {
