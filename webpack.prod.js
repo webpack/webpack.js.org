@@ -21,9 +21,13 @@ module.exports = env => merge(common(env), {
   },
   plugins: [
     new OfflinePlugin({
+      publicPath: '/',
       externals: ['/', ...cssFiles],
+      appShell: '/index.html',
+      excludes: [],
       AppCache: {
-        FALLBACK: { '/': '/index.html' }
+        publicPath: '/',
+        FALLBACK: { '/': './dist/index.html' }
       }
     })
   ]
