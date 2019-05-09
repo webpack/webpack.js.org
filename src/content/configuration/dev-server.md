@@ -10,6 +10,9 @@ contributors:
   - byzyk
   - EugeneHlushko
   - Yiidiir
+  - Loonride
+  - dmohns
+  - EslamHiko
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -55,6 +58,8 @@ If you're using dev-server through the Node.js API, the options in `devServer` w
 W> Be aware that when [exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations) only the `devServer` options for the first configuration will be taken into account and used for all the configurations in the array.
 
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
+
+T> HTML template is required to serve the bundle, usually it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
 
 ## `devServer.after`
 
@@ -232,7 +237,7 @@ webpack-dev-server --compress
 
 `boolean: false` `string` `[string]` `number`
 
-Tell the server where to serve content from. This is only necessary if you want to serve static files. [`devServer.publicPath`](#devserver-publicpath-) will be used to determine where the bundles should be served from, and takes precedence.
+Tell the server where to serve content from. This is only necessary if you want to serve static files. [`devServer.publicPath`](#devserverpublicpath-) will be used to determine where the bundles should be served from, and takes precedence.
 
 T> It is recommended to use an absolute path.
 
@@ -450,7 +455,7 @@ T> Note that [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacem
 
 `boolean`
 
-Enables Hot Module Replacement (see [`devServer.hot`](#devserver-hot)) without page refresh as fallback in case of build failures.
+Enables Hot Module Replacement (see [`devServer.hot`](#devserverhot)) without page refresh as fallback in case of build failures.
 
 __webpack.config.js__
 
@@ -467,6 +472,58 @@ Usage via the CLI
 
 ```bash
 webpack-dev-server --hot-only
+```
+
+
+## `devServer.http2`
+
+`boolean: false`
+
+Serve over HTTP/2 using [spdy](https://www.npmjs.com/package/spdy). This option is ignored for Node 10.0.0 and above, as spdy is broken for those versions. The dev server will migrate over to Node's built-in HTTP/2 once [Express](https://expressjs.com/) supports it.
+
+If `devServer.http2` is not explicitly set to `false`, it will default to `true` when [`devServer.https`](#devserverhttps) is enabled. When `devServer.http2` is enabled but the server is unable to serve over HTTP/2, the server defaults to HTTPS.
+
+HTTP/2 with a self-signed certificate:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    http2: true
+  }
+};
+```
+
+Provide your own certificate using the [https](#devserverhttps) option:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    http2: true,
+    https: {
+      key: fs.readFileSync('/path/to/server.key'),
+      cert: fs.readFileSync('/path/to/server.crt'),
+      ca: fs.readFileSync('/path/to/ca.pem'),
+    }
+  }
+};
+```
+
+Usage via CLI
+
+```bash
+webpack-dev-server --http2
+```
+
+To pass your own certificate via CLI, use the following options
+
+```bash
+webpack-dev-server --http2 --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
 ```
 
 
@@ -603,6 +660,26 @@ T> [`watchOptions`](#devserver-watchoptions-) will have no effect when used with
 T> If you use the CLI, make sure __inline mode__ is disabled.
 
 
+## `devServer.mimeTypes` 🔑
+
+`object`
+
+Allows dev-server to register custom mime types.
+The object is passed to the underlying `webpack-dev-middleware`.
+See [documentation](https://github.com/webpack/webpack-dev-middleware#mimetypes) for usage notes.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    mimeTypes: { 'text/html': ['phtml'] }
+  }
+};
+```
+
+
 ## `devServer.noInfo` 🔑
 
 `boolean`
@@ -623,9 +700,9 @@ module.exports = {
 
 ## `devServer.open`
 
-`boolean` `string`
+`boolean: false` `string`
 
-Tells dev-server to open the browser after server had been started. Disabled by default.
+Tells dev-server to open the browser after server had been started. Set it to `true` to open your default browser.
 
 __webpack.config.js__
 
@@ -638,7 +715,9 @@ module.exports = {
 };
 ```
 
-If no browser is provided (as shown above), your default browser will be used. To specify a different browser, just pass its name instead of boolean:
+Provide browser name to use instead of the default one:
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -652,29 +731,10 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --open
+webpack-dev-server --open 'Google Chrome'
 ```
 
-Or with specified browser:
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    open: 'Chrome'
-  }
-};
-```
-
-And via the CLI
-
-```bash
-webpack-dev-server --open 'Chrome'
-```
-
-T> The browser application name is platform dependent. Don't hard code it in reusable modules. For example, `'Chrome'` is Google Chrome on macOS, `'google-chrome'` on Linux and `'chrome'` on Windows.
+T> The browser application name is platform dependent. Don't hard code it in reusable modules. For example, `'Chrome'` is `'Google Chrome'` on macOS, `'google-chrome'` on Linux and `'chrome'` on Windows.
 
 
 ## `devServer.openPage`
@@ -1049,6 +1109,22 @@ Usage via the CLI
 webpack-dev-server --quiet
 ```
 
+## `devServer.serveIndex`
+
+`boolean: true`
+
+Tells dev-server to use [`serveIndex`](https://github.com/expressjs/serve-index) middleware when enabled.
+
+[`serveIndex`](https://github.com/expressjs/serve-index) middleware generates directory listings on viewing directories that don't have an index.html file.
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    serveIndex: true
+  }
+};
+```
 
 ## `devServer.setup`
 
@@ -1096,6 +1172,24 @@ Usage via the CLI
 
 ```bash
 webpack-dev-server --socket socket
+```
+
+
+## `devServer.sockPath`
+
+`string: '/sockjs-node'`
+
+The path at which to connect to the reloading socket.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    sockPath: '/socket',
+  }
+};
 ```
 
 
@@ -1226,3 +1320,36 @@ module.exports = {
 If this is too heavy on the file system, you can change this to an integer to set the interval in milliseconds.
 
 See [WatchOptions](/configuration/watch/) for more options.
+
+
+## `devServer.writeToDisk` 🔑
+
+`boolean: false` `function (filePath)`
+
+Tells `devServer` to write generated assets to the disk.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    writeToDisk: true
+  }
+};
+```
+
+Providing a `Function` to `devServer.writeToDisk` can be used for filtering. The function follows the same premise as [`Array#filter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) in which a boolean return value tells if the file should be written to disk.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    writeToDisk: (filePath) => {
+      return /superman\.css$/.test(filePath);
+    }
+  }
+};
+```

@@ -7,6 +7,7 @@ contributors:
   - sudarsangp
   - JGJP
   - EugeneHlushko
+  - AnayaDesign
 ---
 
 T> This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
@@ -49,8 +50,8 @@ __src/index.js__
 + import printMe from './print.js';
 
   function component() {
-    var element = document.createElement('div');
-+   var btn = document.createElement('button');
+    const element = document.createElement('div');
++   const btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -194,7 +195,7 @@ __webpack.config.js__
       print: './src/print.js'
     },
     plugins: [
-+     new CleanWebpackPlugin(['dist']),
++     new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Output Management'
       })

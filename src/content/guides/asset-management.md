@@ -8,6 +8,7 @@ contributors:
   - sudarsangp
   - chenxsan
   - EugeneHlushko
+  - AnayaDesign
 ---
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
@@ -30,8 +31,8 @@ __dist/index.html__
 +    <title>Asset Management</title>
     </head>
     <body>
--     <script src="./main.js"></script>
-+     <script src="./bundle.js"></script>
+-     <script src="main.js"></script>
++     <script src="bundle.js"></script>
     </body>
   </html>
 ```
@@ -121,7 +122,7 @@ __src/index.js__
 + import './style.css';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -217,14 +218,14 @@ __src/index.js__
 + import Icon from './icon.png';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
     element.classList.add('hello');
 
 +   // Add the image to our existing div.
-+   var myIcon = new Image();
++   const myIcon = new Image();
 +   myIcon.src = Icon;
 +
 +   element.appendChild(myIcon);
@@ -463,14 +464,14 @@ __src/index.js__
 + import Data from './data.xml';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
     element.classList.add('hello');
 
     // Add the image to our existing div.
-    var myIcon = new Image();
+    const myIcon = new Image();
     myIcon.src = Icon;
 
     element.appendChild(myIcon);
@@ -483,7 +484,7 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-When you open `index.html` and look at your console in your developer tools, you should be able to see your imported data being logged to the console!
+Re-run the `npm run build` command and open `index.html`. If you look at the console in your developer tools, you should be able to see your imported data being logged to the console!
 
 T> This can be especially helpful when implementing some sort of data visualization using a tool like [d3](https://github.com/d3). Instead of making an ajax request and parsing the data at runtime you can load it into your module during the build process so that the parsed data is ready to go as soon as the module hits the browser.
 
@@ -588,14 +589,14 @@ __src/index.js__
 - import Data from './data.xml';
 -
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 -
 -   // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 -   element.classList.add('hello');
 -
 -   // Add the image to our existing div.
--   var myIcon = new Image();
+-   const myIcon = new Image();
 -   myIcon.src = Icon;
 -
 -   element.appendChild(myIcon);

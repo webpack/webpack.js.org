@@ -9,6 +9,7 @@ contributors:
   - marioacc
   - byzyk
   - EugeneHlushko
+  - AnayaDesign
   - chenxsan
 ---
 
@@ -101,7 +102,7 @@ webpackNumbers.wordToNum('Two');
 - __CommonJS module require:__
 
 ``` js
-var webpackNumbers = require('webpack-numbers');
+const webpackNumbers = require('webpack-numbers');
 // ...
 webpackNumbers.wordToNum('Two');
 ```
@@ -109,7 +110,7 @@ webpackNumbers.wordToNum('Two');
 - __AMD module require:__
 
 ``` js
-require(['webpackNumbers'], function ( webpackNumbers) {
+require(['webpackNumbers'], function (webpackNumbers) {
   // ...
   webpackNumbers.wordToNum('Two');
 });
@@ -161,7 +162,7 @@ We can start with this basic webpack configuration:
 __webpack.config.js__
 
 ``` js
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
@@ -182,7 +183,7 @@ This can be done using the `externals` configuration:
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',
@@ -240,7 +241,7 @@ For widespread use of the library, we would like it to be compatible in differen
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',
@@ -268,7 +269,7 @@ This exposes your library bundle available as a global variable named `webpackNu
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',
@@ -297,7 +298,7 @@ You can expose the library in the following ways:
 - Window: available trough the `window` object, in the browser (`libraryTarget:'window'`).
 - UMD: available after AMD or CommonJS `require` (`libraryTarget:'umd'`).
 
-If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output#output-librarytarget) there for a detailed list of all available options.
+If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output#outputlibrarytarget) there for a detailed list of all available options.
 
 W> With webpack 3.5.5, using `libraryTarget: { root:'_' }` doesn't work properly (as stated in [issue 4824](https://github.com/webpack/webpack/issues/4824)). However, you can set `libraryTarget: { var: '_' }` to expect the library as a global variable.
 

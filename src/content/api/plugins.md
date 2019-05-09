@@ -8,6 +8,7 @@ contributors:
   - e-cloud
   - byzyk
   - EugeneHlushko
+  - wizardofhogwarts
 ---
 
 Plugins are a key piece of the webpack ecosystem and provide the community with
@@ -46,8 +47,8 @@ a different number of ways. The way this works is closely related to the
 [compiler hooks](/api/compiler-hooks/#hooks) each note the underlying `Tapable` hook indicating which
 `tap` methods are available.
 
-So depending which event you `tap` into, the plugin may run differently. For
-example, when hooking into `compile` stage, only the synchronous `tap` method
+So depending on which event you `tap` into, the plugin may run differently. For
+example, when hooking into the `compile` stage, only the synchronous `tap` method
 can be used:
 
 ``` js

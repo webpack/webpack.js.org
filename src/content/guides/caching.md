@@ -11,6 +11,7 @@ contributors:
   - rosavage
   - saiprasad2595
   - EugeneHlushko
+  - AnayaDesign
 related:
   - title: Issue 652
     url: https://github.com/webpack/webpack.js.org/issues/652
@@ -20,7 +21,7 @@ T> The examples in this guide stem from [getting started](/guides/getting-starte
 
 So we're using webpack to bundle our modular application which yields a deployable `/dist` directory. Once the contents of `/dist` have been deployed to a server, clients (typically browsers) will hit that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](https://searchstorage.techtarget.com/definition/cache). This allows sites to load faster with less unnecessary network traffic, however it can also cause headaches when you need new code to be picked up.
 
-This guide focuses on the configuration needed to ensure files produced by webpack compilation can remain cached unless their contents has changed.
+This guide focuses on the configuration needed to ensure files produced by webpack compilation can remain cached unless their content has changed.
 
 
 ## Output Filenames
@@ -51,6 +52,7 @@ __webpack.config.js__
   module.exports = {
     entry: './src/index.js',
     plugins: [
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
 -       title: 'Output Management'
@@ -103,9 +105,11 @@ __webpack.config.js__
   module.exports = {
     entry: './src/index.js',
     plugins: [
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         title: 'Caching'
+      })
     ],
     output: {
       filename: '[name].[contenthash].js',
@@ -139,13 +143,14 @@ This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin/#spli
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
   const CleanWebpackPlugin = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
     plugins: [
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         title: 'Caching'
@@ -217,7 +222,7 @@ __src/index.js__
 + import Print from './print';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -245,7 +250,7 @@ Running another build, we would expect only our `main` bundle's hash to change, 
 
 - The `main` bundle changed because of its new content.
 - The `vendor` bundle changed because its `module.id` was changed.
-- And, the `manifest` bundle changed because it now contains a reference to a new module.
+- And, the `runtime` bundle changed because it now contains a reference to a new module.
 
 The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins we can use to resolve this issue. The first is the `NamedModulesPlugin`, which will use the path to the module rather than a numerical identifier. While this plugin is useful during development for more readable output, it does take a bit longer to run. The second option is the [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin), which is recommended for production builds:
 
@@ -260,6 +265,7 @@ __webpack.config.js__
   module.exports = {
     entry: './src/index.js',
     plugins: [
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         title: 'Caching'
@@ -308,7 +314,7 @@ __src/index.js__
 + // import Print from './print';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');

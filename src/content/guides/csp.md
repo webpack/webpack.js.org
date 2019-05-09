@@ -8,7 +8,7 @@ related:
   - title: Nonce purpose explained
     url: https://stackoverflow.com/questions/42922784/what-s-the-purpose-of-the-html-nonce-attribute-for-script-and-style-elements
   - title: On the Insecurity of Whitelists and the Future of Content Security Policy
-    url: https://research.google.com/pubs/pub45542.html
+    url: https://ai.google/research/pubs/pub45542
   - title: Locking Down Your Website Scripts with CSP, Hashes, Nonces and Report URI
     url: https://www.troyhunt.com/locking-down-your-website-scripts-with-csp-hashes-nonces-and-report-uri/
   - title: CSP on MDN
@@ -33,7 +33,7 @@ __webpack_nonce__ = 'c29tZSBjb29sIHN0cmluZyB3aWxsIHBvcCB1cCAxMjM=';
 
 Please note that CSPs are not enabled by default. A corresponding header `Content-Security-Policy` or meta tag `<meta http-equiv="Content-Security-Policy" ...>` needs to be sent with the document to instruct the browser to enable the CSP. Here's an example of what a CSP header including a CDN white-listed URL might look like:
 
-``` http
+```html
 Content-Security-Policy: default-src 'self'; script-src 'self' https://trusted.cdn.com;
 ```
 

@@ -5,7 +5,7 @@
  * @return {undefined|bool} Returns false on error.
  */
 module.exports = function() {
-  const test = "localStorageTest";
+  const test = 'localStorageTest';
   try {
     localStorage.setItem(test, test);
     localStorage.removeItem(test);

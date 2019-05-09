@@ -1,6 +1,8 @@
 ---
 title: Writer's Guide
 sort: 2
+contributors:
+  - pranshuchittora
 ---
 
 The following sections contain all you need to know about editing and formatting the content within this site. Make sure to do some research before starting your edits or additions. Sometimes the toughest part is finding where the content should live and determining whether or not it already exists.
@@ -72,6 +74,28 @@ function foo () {
 foo();
 ```
 
+#### Quotation
+
+Use single quotes in code snippets and project files (`.jsx`, `.scss` etc):
+
+
+```diff
+- import webpack from "webpack";
++ import webpack from 'webpack';
+```
+
+
+And in inline backticks:
+
+__correct__
+
+Set value to `'index.md'`...
+
+__incorrect__
+
+Set value to `"index.md"`...
+
+
 ### Lists
 
 - Boo
@@ -119,3 +143,19 @@ W> This is a warning.
 __Syntax: ?\>__
 
 ?> This is a todo.
+
+### Assumptions and simplicity
+
+Do not make assumptions when writing the documentation.
+
+```diff
+- You might already know how to optimize bundle for production...
++ As we've learned in [production guide](/guides/production/)...
+```
+
+Please do not assume things are simple. Avoid words like 'just', 'simply'.
+
+```diff
+- Simply run command...
++ Run the `command-name` command...
+```
