@@ -147,7 +147,7 @@ module.exports = {
     moduleTrace: true,
 
     // Show outputPath
-    outputPath: true,
+    outputPath: true | false,
 
     // Show performance hint when file size exceeds `performance.maxAssetSize`
     performance: true,
