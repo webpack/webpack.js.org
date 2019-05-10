@@ -4,8 +4,12 @@
 
 .gitter {
   position: fixed;
-  right: 1.5em;
+  right: 1em;
   bottom: 3em;
+
+  @include break {
+    right: 1.5em;
+  }
 }
 
 .gitter__button {
