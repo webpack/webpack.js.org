@@ -632,10 +632,13 @@ Tells `devServer` to inject a Hot Module Replacement. Setting `devServer.injectH
 module.exports = {
   //...
   devServer: {
+    hot: true,
     injectHot: (compilerConfig) => compilerConfig.name === 'only-include'
   }
 };
 ```
+
+W> Make sure that [`devServer.hot`](#devserverhot) is set to `true` because `devServer.injectHot` only works with HMR.
 
 
 ## `devServer.inline`
