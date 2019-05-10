@@ -706,6 +706,49 @@ And finally the output is:
 });
 ```
 
+`libraryTarget: 'system'` - This will expose your library as a [System.register](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md)
+module. This feature was first released in [webpack@4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
+
+System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to System.register format allows
+you to `System.import('/bundle.js')` without any configuration and have your webpack bundle loaded into the System module registry.
+
+Example config:
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    libraryTarget: 'system'
+  }
+};
+```
+
+Output:
+
+```javascript
+System.register([], function(_export) {
+  return {
+    setters: [],
+    execute: function() {
+      // ...
+    },
+  };
+});
+```
+
+By adding `output.library` to a bundle compiled to `system` format, the output bundle will have the library name as an argument to System.register:
+
+```javascript
+System.register('my-library', [], function(_export) {
+  return {
+    setters: [],
+    execute: function() {
+      // ...
+    },
+  };
+});
+```
+
 Note that omitting `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
 
 ```javascript
