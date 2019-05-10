@@ -1,9 +1,9 @@
 // grab .css files from ssg run
 const fs = require('fs');
 
-module.exports = function (endsWith = false) {
+module.exports = function (fileSuffixes = []) {
     const filesInDist = fs.readdirSync('./dist');
-    return endsWith
-        ? filesInDist.filter((item) => item.endsWith(endsWith))
-        : filesInDist;
+    return fileSuffixes.length
+        ? filesInDist.filter((file) => fileSuffixes.find(suffix => file.endsWith(suffix)))
+        : [];
 };
