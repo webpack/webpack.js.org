@@ -30,7 +30,7 @@ module.exports = env => merge(common(env), {
       appShell: '/app-shell/',
       // make sure to cache homepage and app shell as app shell for the rest of the pages.
       externals: ['/app-shell/', '/', '/manifest.json', ...cssFiles, ...favicons],
-      excludes: [],
+      excludes: ['/images/icons/**'],
       AppCache: {
         publicPath: '/'
       }
