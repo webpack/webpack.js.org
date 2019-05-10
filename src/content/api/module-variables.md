@@ -131,7 +131,7 @@ The internal chunk loading function. Takes two arguments:
 - `chunkId` The id for the chunk to load.
 - `callback(require)` A callback function called once the chunk is loaded.
 
-You can override this function to customize retry behavior.  For example:
+T> You can override this function to customize retry behavior.  For example:
 
 ```js
 const cdns = [
