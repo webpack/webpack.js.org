@@ -131,6 +131,34 @@ The internal chunk loading function. Takes two arguments:
 - `chunkId` The id for the chunk to load.
 - `callback(require)` A callback function called once the chunk is loaded.
 
+You can override this function to customize retry behavior.  For example:
+
+```js
+const cdns = [
+	"https://cdn1.example.com/",
+	"https://cdn2.example.com/",
+	"https://cdn3.example.com/",
+];
+
+let currentCdn = 0;
+
+const original = __webpack_chunk_load__;
+__webpack_chunk_load__ = (id) => {
+	let n = cdns.length;
+	return (function tryCdn() {
+		if(--n === 0)
+			return original(id);
+		return original(id).catch(e => {
+			currentCdn = (currentCdn + 1) % cdns.length;
+			__webpack_public_path__ = cdns[currentCdn];
+			return tryCdn();
+		})
+	}());
+}
+```
+
+You will not see `__webpack_chunk_load__` in output code because webpack
+converts it to a property on `__webpack_require__`.
 
 ### `__webpack_modules__` (webpack-specific)
 
