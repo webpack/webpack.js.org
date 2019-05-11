@@ -27,7 +27,7 @@ module.exports = env => merge(common(env), {
       // make sure to cache homepage and app shell as app shell for the rest of the pages.
       // externals also re-validate on sw update (releases)
       externals: ['/app-shell/', '/', '/manifest.json', ...hashedAssetsBySSGRun],
-      excludes: [],
+      excludes: ['/images/icons/**'],
       AppCache: {
         publicPath: '/'
       }
