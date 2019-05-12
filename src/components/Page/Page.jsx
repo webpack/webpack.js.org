@@ -25,6 +25,7 @@ class Page extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0,0);
     const { content } = this.props;
 
     if (content instanceof Promise) {
