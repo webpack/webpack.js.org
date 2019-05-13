@@ -1,5 +1,6 @@
 // Import External Dependencies
 import React from 'react';
+import { Prompt } from 'react-router';
 
 // Import Components
 import PageLinks from '../PageLinks/PageLinks';
@@ -11,6 +12,7 @@ import Configuration from '../Configuration/Configuration';
 // Load Styling
 import './Page.scss';
 
+let positionMap = new Map();
 class Page extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +27,8 @@ class Page extends React.Component {
   }
 
   componentDidMount() {
-    window.scrollTo(0,0);
+    let savedPosition = positionMap.get(window.location.pathname);
+    window.scrollTo(savedPosition?savedPosition.xPosition:0, savedPosition?savedPosition.yPosition:0);
     const { content } = this.props;
 
     if (content instanceof Promise) {
@@ -70,6 +73,10 @@ class Page extends React.Component {
 
     return (
       <section className="page">
+        <Prompt message={()=>{
+            positionMap.set(window.location.pathname,{xPosition:window.scrollX,yPosition:window.scrollY});
+            return true;
+          }} ></Prompt>
         <PageLinks page={rest} />
 
         <Markdown>
