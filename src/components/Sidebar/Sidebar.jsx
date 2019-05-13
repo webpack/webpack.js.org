@@ -6,7 +6,7 @@ import Shield from '../Shield/Shield';
 import SidebarItem from '../SidebarItem/SidebarItem';
 
 // Load Styling
-import '../Sidebar/Sidebar.scss';
+import './Sidebar.scss';
 
 // Create and export the component
 export default ({
