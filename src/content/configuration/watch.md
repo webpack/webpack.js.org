@@ -8,6 +8,7 @@ contributors:
   - EugeneHlushko
   - byzyk
   - spicalous
+  - EslamHiko
 ---
 
 webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
@@ -68,7 +69,7 @@ module.exports = {
 
 ## `watchOptions.ignored`
 
-`RegExp` [`anymatch`](https://github.com/micromatch/anymatch)
+`RegExp: [/node_modules/]` [`anymatch`](https://github.com/micromatch/anymatch)
 
 For some systems, watching many file systems can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules`:
 
