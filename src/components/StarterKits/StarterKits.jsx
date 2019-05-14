@@ -11,9 +11,6 @@ import isClient from '../../utilities/is-client';
 // to allow sorting and such.
 
 const StarterKitsTable = React.lazy(() => import('./StarterKitsTable'));
-const StarterKitsTableRenderer = isClient
-  ? () => (<React.Suspense fallback={<React.Fragment />}><StarterKitsTable /></React.Suspense>)
-  : () => (<React.Fragment />);
 
 const StarterKits = props => (
   <Container className="starter-kits page__content markdown">
@@ -47,7 +44,11 @@ const StarterKits = props => (
             <div className="table-th">Tags</div>
           </div>
         </div>
-        <StarterKitsTableRenderer />
+        { isClient ? (
+          <React.Suspense>
+            <StarterKitsTable />
+          </React.Suspense>) : null
+        }
       </div>
     </div>
   </Container>
