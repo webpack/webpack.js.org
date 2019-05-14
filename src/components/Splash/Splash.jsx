@@ -5,7 +5,6 @@ import React from 'react';
 import Container from '../Container/Container';
 import SplashViz from '../SplashViz/SplashViz';
 import Markdown from '../Markdown/Markdown';
-import Support from '../Support/Support';
 
 // Import helpers
 import isClient from '../../utilities/is-client';
@@ -15,6 +14,8 @@ import SplashContent from '../../content/index.md';
 
 // Load Styling
 import './Splash.scss';
+
+const Support = React.lazy(() => import('../Support/Support'));
 
 const Splash = () => (
   <div className="splash">
@@ -42,7 +43,7 @@ const Splash = () => (
           </p>
 
           { isClient ? (
-            <React.Fragment>
+            <React.Suspense fallback={<React.Fragment />}>
               <h2>Latest Sponsors</h2>
               <Support rank="latest" />
 
@@ -60,7 +61,7 @@ const Splash = () => (
 
               <h2>Backers</h2>
               <Support rank="backer" />
-            </React.Fragment>
+            </React.Suspense>
           ) : null }
         </Markdown>
       </Container>
