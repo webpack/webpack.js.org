@@ -90,10 +90,15 @@
   padding: 0.75em 16px 0.25em;
   font-weight: 600;
   display: block;
+  font-size: 1.1rem;
 
   .sidebar-mobile__content div:not(:first-of-type) & {
     border-top: 1px solid getColor(alto);
   }
+}
+
+.sidebar-mobile__section-child {
+  margin-left: 20px;
 }
 
 .sidebar-mobile__page {
