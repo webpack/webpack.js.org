@@ -17,6 +17,7 @@ contributors:
   - xgirma
   - mehrdaad
   - SevenOutman
+  - AnayaDesign
 ---
 
 In this guide we'll dive into some of the best practices and utilities for building a production site or application.
@@ -64,7 +65,8 @@ __webpack.common.js__
 +     app: './src/index.js'
 +   },
 +   plugins: [
-+     new CleanWebpackPlugin(['dist']),
++     // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
++     new CleanWebpackPlugin(),
 +     new HtmlWebpackPlugin({
 +       title: 'Production'
 +     })
@@ -136,7 +138,7 @@ __package.json__
       "file-loader": "^0.11.2",
       "html-webpack-plugin": "^2.29.0",
       "style-loader": "^0.18.2",
-      "webpack": "^3.0.0",
+      "webpack": "^4.30.0",
       "webpack-dev-middleware": "^1.12.0",
       "webpack-dev-server": "^2.9.1",
       "webpack-merge": "^4.1.0",
@@ -176,7 +178,7 @@ __src/index.js__
 + }
 
   function component() {
-    var element = document.createElement('pre');
+    const element = document.createElement('pre');
 
     element.innerHTML = [
       'Hello webpack!',

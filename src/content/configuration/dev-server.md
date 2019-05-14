@@ -10,6 +10,9 @@ contributors:
   - byzyk
   - EugeneHlushko
   - Yiidiir
+  - Loonride
+  - dmohns
+  - EslamHiko
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -472,6 +475,58 @@ webpack-dev-server --hot-only
 ```
 
 
+## `devServer.http2`
+
+`boolean: false`
+
+Serve over HTTP/2 using [spdy](https://www.npmjs.com/package/spdy). This option is ignored for Node 10.0.0 and above, as spdy is broken for those versions. The dev server will migrate over to Node's built-in HTTP/2 once [Express](https://expressjs.com/) supports it.
+
+If `devServer.http2` is not explicitly set to `false`, it will default to `true` when [`devServer.https`](#devserverhttps) is enabled. When `devServer.http2` is enabled but the server is unable to serve over HTTP/2, the server defaults to HTTPS.
+
+HTTP/2 with a self-signed certificate:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    http2: true
+  }
+};
+```
+
+Provide your own certificate using the [https](#devserverhttps) option:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    http2: true,
+    https: {
+      key: fs.readFileSync('/path/to/server.key'),
+      cert: fs.readFileSync('/path/to/server.crt'),
+      ca: fs.readFileSync('/path/to/ca.pem'),
+    }
+  }
+};
+```
+
+Usage via CLI
+
+```bash
+webpack-dev-server --http2
+```
+
+To pass your own certificate via CLI, use the following options
+
+```bash
+webpack-dev-server --http2 --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
+```
+
+
 ## `devServer.https`
 
 `boolean` `object`
@@ -603,6 +658,26 @@ webpack-dev-server --lazy
 T> [`watchOptions`](#devserver-watchoptions-) will have no effect when used with __lazy mode__.
 
 T> If you use the CLI, make sure __inline mode__ is disabled.
+
+
+## `devServer.mimeTypes` 🔑
+
+`object`
+
+Allows dev-server to register custom mime types.
+The object is passed to the underlying `webpack-dev-middleware`.
+See [documentation](https://github.com/webpack/webpack-dev-middleware#mimetypes) for usage notes.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    mimeTypes: { 'text/html': ['phtml'] }
+  }
+};
+```
 
 
 ## `devServer.noInfo` 🔑
@@ -1034,6 +1109,22 @@ Usage via the CLI
 webpack-dev-server --quiet
 ```
 
+## `devServer.serveIndex`
+
+`boolean: true`
+
+Tells dev-server to use [`serveIndex`](https://github.com/expressjs/serve-index) middleware when enabled.
+
+[`serveIndex`](https://github.com/expressjs/serve-index) middleware generates directory listings on viewing directories that don't have an index.html file.
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    serveIndex: true
+  }
+};
+```
 
 ## `devServer.setup`
 

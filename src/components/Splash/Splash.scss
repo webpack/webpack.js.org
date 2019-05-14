@@ -4,13 +4,18 @@
 .splash {
   position: relative;
   overflow: hidden;
-  
+
+  h1,
+  h2 {
+    justify-content: center;
+  }
+
   &__section {
-    position:relative;
-    text-align:center;
+    position: relative;
+    text-align: center;
 
     &--dark {
-      background-color:#f3f3f3;
+      background-color: #f3f3f3;
     }
 
     p {
@@ -19,20 +24,20 @@
     }
 
     .container {
-      padding:5em 1em;
+      padding: 5em 1em;
 
       @include break {
-        padding-left:1.5em;
-        padding-right:1.5em;
+        padding-left: 1.5em;
+        padding-right: 1.5em;
       }
     }
 
     pre {
-      text-align:left;
+      text-align: left;
     }
 
     .icon-link {
-      display:none;
+      display: none;
     }
   }
 
@@ -45,7 +50,7 @@
 
     &:before,
     &:after {
-      content: " ";
+      content: ' ';
       display: table;
     }
 
@@ -59,13 +64,17 @@
     width: 100%;
     float: left;
 
+    p {
+      text-align: left;
+    }
+
     @include break {
       width: 50%;
       padding: 0 15px;
     }
   }
 
-  /* XXX: Hack to fix markown parsing issues */
+  /* XXX: Hack to fix markdown parsing issues */
   &__right {
     margin-bottom: 1em;
   }

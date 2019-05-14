@@ -13,6 +13,7 @@ contributors:
   - nerdkid93
   - EugeneHlushko
   - superburrito
+  - lukasgeiter
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -183,7 +184,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\\.css$/,
         oneOf: [
           {
             resourceQuery: /inline/, // foo.css?inline
@@ -264,7 +265,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\\.css$/,
         resourceQuery: /inline/,
         use: 'url-loader'
       }
@@ -308,7 +309,7 @@ module.exports = {
     rules: [
       //...
       {
-        test: /\.json$/,
+        test: /\\.json$/,
         type: 'javascript/auto',
         loader: 'custom-json-loader'
       }
@@ -433,7 +434,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\\.css$/,
         include: [
           path.resolve(__dirname, 'app/styles'),
           path.resolve(__dirname, 'vendor/styles')
@@ -558,6 +559,6 @@ T> You can use the `ContextReplacementPlugin` to modify these values for individ
 A few use cases:
 
 - Warn for dynamic dependencies: `wrappedContextCritical: true`.
-- `require(expr)` should include the whole directory: `exprContextRegExp: /^\.\//`
+- `require(expr)` should include the whole directory: `exprContextRegExp: /^\\.\\//`
 - `require('./templates/' + expr)` should not include subdirectories by default: `wrappedContextRecursive: false`
 - `strictExportPresence` makes missing exports an error instead of warning

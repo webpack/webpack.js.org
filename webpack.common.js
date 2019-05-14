@@ -1,7 +1,4 @@
-const fs = require('fs');
 const path = require('path');
-const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const mdPlugins = [
@@ -151,6 +148,7 @@ module.exports = (env = {}) => ({
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].[chunkhash].chunk.js'
   }
 });

@@ -26,6 +26,8 @@ contributors:
   - EugeneHlushko
   - Tiendo1011
   - byzyk
+  - AnayaDesign
+  - wizardofhogwarts
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -48,7 +50,7 @@ There are three general approaches to code splitting available:
 
 ## Entry Points
 
-This is by far the easiest, and most intuitive, way to split code. However, it is more manual and has some pitfalls we will go over. Let's take a look at how we might split another module from the main bundle:
+This is by far the easiest and most intuitive way to split code. However, it is more manual and has some pitfalls we will go over. Let's take a look at how we might split another module from the main bundle:
 
 __project__
 
@@ -162,7 +164,7 @@ Here are some other useful plugins and loaders provided by the community for spl
 
 ## Dynamic Imports
 
-Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and recommended approach is to use the [`import()` syntax](/api/module-methods#import-) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods#require-ensure). Let's try using the first of these two approaches...
+Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and recommended approach is to use the [`import()` syntax](/api/module-methods#import-1) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods#requireensure). Let's try using the first of these two approaches...
 
 W> `import()` calls use [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
@@ -217,12 +219,12 @@ __src/index.js__
 -
 - function component() {
 + function getComponent() {
--   var element = document.createElement('div');
+-   const element = document.createElement('div');
 -
 -   // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +   return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
-+     var element = document.createElement('div');
++     const element = document.createElement('div');
 +
 +     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +
@@ -258,14 +260,14 @@ __src/index.js__
 - function getComponent() {
 + async function getComponent() {
 -   return import(/* webpackChunkName: "lodash" */ 'lodash').then({ default: _ } => {
--     var element = document.createElement('div');
+-     const element = document.createElement('div');
 -
 -     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 -
 -     return element;
 -
 -   }).catch(error => 'An error occurred while loading the component');
-+   var element = document.createElement('div');
++   const element = document.createElement('div');
 +   const { default: _ } = await import(/* webpackChunkName: "lodash" */ 'lodash');
 +
 +   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -304,7 +306,7 @@ T> webpack will add the prefetch hint once the parent chunk has been loaded.
 Preload directive has a bunch of differences compared to prefetch:
 
 - A preloaded chunk starts loading in parallel to the parent chunk. A prefetched chunk starts after the parent chunk finishes loading.
-- A preloaded chunk has medium priority and is instantly downloaded. A prefetched chunk is downloaded while browser is idle.
+- A preloaded chunk has medium priority and is instantly downloaded. A prefetched chunk is downloaded while the browser is idle.
 - A preloaded chunk should be instantly requested by the parent chunk. A prefetched chunk can be used anytime in the future.
 - Browser support is different.
 
@@ -329,8 +331,8 @@ T> Using webpackPreload incorrectly can actually hurt performance, so be careful
 Once you start splitting your code, it can be useful to analyze the output to check where modules have ended up. The [official analyze tool](https://github.com/webpack/analyse) is a good place to start. There are some other community-supported options out there as well:
 
 - [webpack-chart](https://alexkuz.github.io/webpack-chart/): Interactive pie chart for webpack stats.
-- [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/): Visualize and analyze your bundles to see which modules are taking up space and which might be duplicates.
-- [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer): A plugin and CLI utility that represents bundle content as convenient interactive zoomable treemap.
+- [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/): Visualize and analyze your bundles to see which modules are taking up space and which are might be duplicates.
+- [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer): A plugin and CLI utility that represents bundle content as a convenient interactive zoomable treemap.
 - [webpack bundle optimize helper](https://webpack.jakoblind.no/optimize): This tool will analyze your bundle and give you actionable suggestions on what to improve to reduce your bundle size.
 
 ## Next Steps
