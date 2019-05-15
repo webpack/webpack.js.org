@@ -15,9 +15,7 @@ export default class Gitter extends React.Component {
   render() {
     return (
       <div className="gitter">
-        <div
-          className="gitter__button"
-          onClick={this._handleIconClick}>
+        <div className="gitter__button" onClick={this._handleIconClick}>
           <i className="gitter__icon icon-gitter" />
         </div>
       </div>
@@ -41,5 +39,5 @@ export default class Gitter extends React.Component {
     } else if (sidecar) {
       sidecar.toggleChat(true);
     }
-  }
+  };
 }

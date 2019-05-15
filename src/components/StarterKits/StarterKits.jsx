@@ -15,21 +15,24 @@ const StarterKits = props => (
     <h1>Starter Kits</h1>
 
     <p>
-      The following table contains a curated list of starter kits that can
-      be used as a jumping off point for webpack-based projects. To add a new
-      kit to the list please visit{' '}
-      <Link to="https://github.com/ahfarmer/javascriptstuff-db">this repository</Link>{' '}
+      The following table contains a curated list of starter kits that can be
+      used as a jumping off point for webpack-based projects. To add a new kit
+      to the list please visit{' '}
+      <Link to="https://github.com/ahfarmer/javascriptstuff-db">
+        this repository
+      </Link>{' '}
       and submit a PR against this file:
       <code>data/source/react-starter-projects.js</code>.
     </p>
 
     <blockquote className="warning">
       <div className="tip-content">
-        Boilerplates should be used as <strong>Proof of Concepts</strong> to help you learn
-        different webpack techniques for various frameworks. Make sure you understand
-        what's going on in them and avoid copy and paste coding. Also note that none
-        of these are officially supported by webpack. If you run into an issue, please
-        report that to the maintainer(s) of the repository.
+        Boilerplates should be used as <strong>Proof of Concepts</strong> to
+        help you learn different webpack techniques for various frameworks. Make
+        sure you understand what's going on in them and avoid copy and paste
+        coding. Also note that none of these are officially supported by
+        webpack. If you run into an issue, please report that to the
+        maintainer(s) of the repository.
       </div>
     </blockquote>
 
@@ -43,24 +46,26 @@ const StarterKits = props => (
           </div>
         </div>
         <div className="table-body">
-          { Kits.map((kit, i) => (
-            <div className="table-tr" key={ i }>
+          {Kits.map((kit, i) => (
+            <div className="table-tr" key={i}>
               <div className="table-td">
                 <div className="table-td-title">Project Name</div>
                 <div className="table-td-content">
-                  <Link to={ kit.githubUrl }>{ kit.githubRepoName }</Link>
+                  <Link to={kit.githubUrl}>{kit.githubRepoName}</Link>
                 </div>
               </div>
               <div className="table-td">
                 <div className="table-td-title">Maintainer</div>
-                <div className="table-td-content">{ kit.githubUserName }</div>
+                <div className="table-td-content">{kit.githubUserName}</div>
               </div>
               <div className="table-td">
                 <div className="table-td-title">Tags</div>
                 <div className="table-td-content">
-                  { kit.tags.map((tag, i) => (
-                    <span key={ i } className="starter-kits__tag">{ tag }</span>
-                  )) }
+                  {kit.tags.map((tag, i) => (
+                    <span key={i} className="starter-kits__tag">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>

@@ -11,7 +11,12 @@
 
     &:after {
       animation: placeholderAnimation 1s infinite;
-      background: linear-gradient(to right, getColor(concrete), #fcfcfc, getColor(concrete));
+      background: linear-gradient(
+        to right,
+        getColor(concrete),
+        #fcfcfc,
+        getColor(concrete)
+      );
       content: '';
       left: 0;
       height: 100%;

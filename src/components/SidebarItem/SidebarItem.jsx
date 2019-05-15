@@ -15,43 +15,39 @@ export default class SidebarItem extends React.Component {
     let disabledMod = anchors.length == 0 ? `${block}--disabled` : '';
 
     return (
-      <div className={ `${block} ${openMod} ${disabledMod}` }>
-        { anchors.length > 0 ? (
+      <div className={`${block} ${openMod} ${disabledMod}`}>
+        {anchors.length > 0 ? (
           <i
-            className={ `${block}__toggle icon-chevron-right` }
-            onClick={ this._toggle.bind(this) } />
+            className={`${block}__toggle icon-chevron-right`}
+            onClick={this._toggle.bind(this)}
+          />
         ) : (
-          <i className={ `${block}__toggle icon-vertical-bar` } />
+          <i className={`${block}__toggle icon-vertical-bar`} />
         )}
 
-        <Link
-          className={ `${block}__title` }
-          to={ this.props.url }>
-          { title }
+        <Link className={`${block}__title`} to={this.props.url}>
+          {title}
         </Link>
 
-        { anchors.length > 0 ? (
-          <ul className={ `${block}__anchors` }>
-            {
-              anchors.map((anchor, i) => (
-                <li
-                  key={ `anchor-${title}-${i}` }
-                  className={ `${block}__anchor` }
-                  title={ anchor.title }>
-                  <a href={ this._generateAnchorURL(anchor) }>
-                    { anchor.title }
-                  </a>
-                </li>
-              ))
-            }
+        {anchors.length > 0 ? (
+          <ul className={`${block}__anchors`}>
+            {anchors.map((anchor, i) => (
+              <li
+                key={`anchor-${title}-${i}`}
+                className={`${block}__anchor`}
+                title={anchor.title}
+              >
+                <a href={this._generateAnchorURL(anchor)}>{anchor.title}</a>
+              </li>
+            ))}
           </ul>
-        ) : null }
+        ) : null}
       </div>
     );
   }
 
   componentWillReceiveProps(nextProps) {
-    if ( nextProps.currentPage !== this.props.currentPage ) {
+    if (nextProps.currentPage !== this.props.currentPage) {
       this.setState({
         open: this._isOpen(nextProps)
       });
@@ -86,9 +82,8 @@ export default class SidebarItem extends React.Component {
   _generateAnchorURL(anchor) {
     let { currentPage, url } = this.props;
 
-    if ( `/${currentPage}` === url ) {
+    if (`/${currentPage}` === url) {
       return `#${anchor.id}`;
-
     } else if (!anchor.id) {
       return url;
     } else {

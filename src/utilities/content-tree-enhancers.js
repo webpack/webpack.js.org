@@ -6,7 +6,6 @@ const slug = require('remark-slug');
 const extractAnchors = require('remark-extract-anchors');
 
 const enhance = (tree, options) => {
-
   // delete `./` root directory on node
   const dir = path.normalize(options.dir).replace(/^(\.\/)/gm, '');
 
@@ -46,9 +45,13 @@ const enhance = (tree, options) => {
 
     tree.anchors = anchors;
 
-    Object.assign(tree, {
-      path: tree.path.replace(/\\/g, '/')
-    }, attributes);
+    Object.assign(
+      tree,
+      {
+        path: tree.path.replace(/\\/g, '/')
+      },
+      attributes
+    );
   }
 };
 

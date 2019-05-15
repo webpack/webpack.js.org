@@ -10,20 +10,22 @@ import Site from './components/Site/Site';
 // Import helpers
 import isClient from './utilities/is-client';
 
-const Router = process.env.NODE_ENV === 'production' ? AnalyticsRouter : BrowserRouter;
-const render = process.env.NODE_ENV === 'production' ? ReactDOM.hydrate : ReactDOM.render;
+const Router =
+  process.env.NODE_ENV === 'production' ? AnalyticsRouter : BrowserRouter;
+const render =
+  process.env.NODE_ENV === 'production' ? ReactDOM.hydrate : ReactDOM.render;
 
 // Client Side Rendering
 if (isClient) {
-  render((
+  render(
     <Router id="UA-46921629-2">
       <Route
         path="/"
-        render={ props => (
-          <Site
-            { ...props }
-            import={ path => import(`./content/${path}`) } />
-        )} />
-    </Router>
-  ), document.getElementById('root'));
+        render={props => (
+          <Site {...props} import={path => import(`./content/${path}`)} />
+        )}
+      />
+    </Router>,
+    document.getElementById('root')
+  );
 }

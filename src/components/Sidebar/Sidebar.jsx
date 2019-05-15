@@ -9,12 +9,7 @@ import SidebarItem from '../SidebarItem/SidebarItem';
 import './Sidebar.scss';
 
 // Create and export the component
-export default ({
-  className = '',
-  pages,
-  currentPage,
-  ...props
-}) => {
+export default ({ className = '', pages, currentPage, ...props }) => {
   let group;
 
   return (
@@ -30,7 +25,9 @@ export default ({
 
           return (
             <React.Fragment key={`sidebar-item-${index}`}>
-              {displayGroup ? <h4 className="sidebar__group">{group}</h4> : null}
+              {displayGroup ? (
+                <h4 className="sidebar__group">{group}</h4>
+              ) : null}
 
               <SidebarItem
                 index={index}
