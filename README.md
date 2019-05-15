@@ -1,10 +1,16 @@
-# webpack.js.org
+<div align="center">
+  <a href="https://github.com/webpack/webpack">
+    <img width="200" height="200" src="https://webpack.js.org/assets/icon-square-big.svg">
+  </a>
+  <h1>webpack.js.org</h1>
 
-[![Build Status][build-status]][build-status-url]
-[![Standard Version][release]][release-url]
-[![chat on gitter][chat]][chat-url]
+  [![Build Status][build-status]][build-status-url]
+  [![Standard Version][release]][release-url]
+  [![chat on gitter][chat]][chat-url]  
+  
+  Guides, documentation, and all things webpack.
+</div>
 
-Guides, documentation, and all things webpack.
 
 ## Content Progress
 
