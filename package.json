@@ -58,7 +58,9 @@
   },
   "lint-staged": {
     "*.{js,jsx,md}": [
-      "npm run lint:js"
+      "npm run lint:js",
+      "npm run format:js",
+      "npm run format:styles"
     ],
     "*.md": [
       "npm run lint:markdown"
