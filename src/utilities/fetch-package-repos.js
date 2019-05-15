@@ -9,20 +9,20 @@ const fetch = {
     {
       organization: 'webpack-contrib',
       suffixes: ['-loader'],
-      hides: ['webpack-contrib/config-loader']
+      hides: ['webpack-contrib/config-loader'],
     },
     'babel/babel-loader',
     'postcss/postcss-loader',
-    'peerigon/extract-loader'
+    'peerigon/extract-loader',
   ],
 
   plugins: [
     {
       organization: 'webpack-contrib',
       suffixes: ['-webpack-plugin', '-extract-plugin'],
-      hides: []
-    }
-  ]
+      hides: [],
+    },
+  ],
 };
 
 const api = new GithubAPI();
@@ -31,7 +31,7 @@ async function paginate(org) {
   let response = await api.repos.listForOrg({
     org,
     type: 'public',
-    per_page: 100
+    per_page: 100,
   });
   let { data } = response;
 
@@ -60,7 +60,7 @@ async function main() {
           .map(repo => repo.full_name)
           .filter(name => suffixes.some(suffix => name.endsWith(suffix)))
           .filter(name => !hides.includes(name));
-      })
+      }),
     );
 
     const json = JSON.stringify(_.flatten(result), undefined, 2);

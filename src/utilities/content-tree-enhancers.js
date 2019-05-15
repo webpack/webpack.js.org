@@ -48,9 +48,9 @@ const enhance = (tree, options) => {
     Object.assign(
       tree,
       {
-        path: tree.path.replace(/\\/g, '/')
+        path: tree.path.replace(/\\/g, '/'),
       },
-      attributes
+      attributes,
     );
   }
 };
@@ -90,5 +90,5 @@ module.exports = {
   enhance,
   filter,
   restructure,
-  sort
+  sort,
 };

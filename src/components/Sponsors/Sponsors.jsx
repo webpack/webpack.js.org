@@ -24,7 +24,7 @@ export default props => {
             marginTop: '1em',
             fontSize: '2em',
             textAlign: 'center',
-            color: '#535353'
+            color: '#535353',
           }}
         >
           ag-grid is proud to partner with webpack

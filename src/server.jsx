@@ -92,7 +92,7 @@ export default locals => {
           ))}
         </body>
       </html>
-    </StaticRouter>
+    </StaticRouter>,
   );
 
   return '<!DOCTYPE html>' + renderedHtml;

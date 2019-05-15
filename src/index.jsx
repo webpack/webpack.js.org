@@ -26,6 +26,6 @@ if (isClient) {
         )}
       />
     </Router>,
-    document.getElementById('root')
+    document.getElementById('root'),
   );
 }

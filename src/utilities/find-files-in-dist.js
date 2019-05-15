@@ -5,7 +5,7 @@ module.exports = function(fileSuffixes = []) {
   const filesInDist = fs.readdirSync('./dist');
   return fileSuffixes.length
     ? filesInDist.filter(file =>
-        fileSuffixes.find(suffix => file.endsWith(suffix))
+        fileSuffixes.find(suffix => file.endsWith(suffix)),
       )
     : [];
 };

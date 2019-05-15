@@ -28,14 +28,14 @@ function buildContentTree(source, output) {
   }
   if (!output) {
     return console.error(
-      'build-content-tree: you must provide a output file name'
+      'build-content-tree: you must provide a output file name',
     );
   }
 
   let content = directoryTree(source, { extensions: /\.md/ });
 
   content = restructure(content, {
-    dir: source
+    dir: source,
   });
 
   fs.writeFileSync(path.resolve(output), JSON.stringify(content, 2), error => {

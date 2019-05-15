@@ -6,7 +6,7 @@ const block = 'sidebar-item';
 
 export default class SidebarItem extends React.Component {
   state = {
-    open: this._isOpen(this.props)
+    open: this._isOpen(this.props),
   };
 
   render() {
@@ -49,7 +49,7 @@ export default class SidebarItem extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentPage !== this.props.currentPage) {
       this.setState({
-        open: this._isOpen(nextProps)
+        open: this._isOpen(nextProps),
       });
     }
   }
@@ -70,7 +70,7 @@ export default class SidebarItem extends React.Component {
    */
   _toggle(e) {
     this.setState({
-      open: !this.state.open
+      open: !this.state.open,
     });
   }
 

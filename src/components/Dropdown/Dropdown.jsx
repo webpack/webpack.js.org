@@ -4,24 +4,24 @@ import './Dropdown.scss';
 
 export default class Dropdown extends React.Component {
   state = {
-    active: false
+    active: false,
   };
 
   componentDidMount() {
     document.addEventListener(
       'keyup',
       this._closeDropdownOnEsc.bind(this),
-      true
+      true,
     );
     document.addEventListener(
       'focus',
       this._closeDropdownIfFocusLost.bind(this),
-      true
+      true,
     );
     document.addEventListener(
       'click',
       this._closeDropdownIfFocusLost.bind(this),
-      true
+      true,
     );
   }
 
@@ -75,7 +75,7 @@ export default class Dropdown extends React.Component {
                     onKeyDown={this._handleArrowKeys.bind(
                       this,
                       i,
-                      items.length - 1
+                      items.length - 1,
                     )}
                     ref={node =>
                       this.links ? this.links.push(node) : (this.links = [node])
@@ -131,7 +131,7 @@ export default class Dropdown extends React.Component {
    */
   _toggle(state = false) {
     this.setState({
-      active: state
+      active: state,
     });
   }
 }

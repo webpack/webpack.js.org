@@ -22,18 +22,18 @@ request(url)
       for (const key of REQUIRED_KEYS) {
         if (!item || typeof item !== 'object')
           throw new Error(
-            `Supporters: ${JSON.stringify(item)} is not an object.`
+            `Supporters: ${JSON.stringify(item)} is not an object.`,
           );
         if (!(key in item))
           throw new Error(
-            `Supporters: ${JSON.stringify(item)} doesn't include ${key}.`
+            `Supporters: ${JSON.stringify(item)} doesn't include ${key}.`,
           );
       }
     }
 
     // Write the file
     return asyncWriteFile(`./src/components/Support/${filename}`, body).then(
-      () => console.log('Fetched 1 file: _supporters.json')
+      () => console.log('Fetched 1 file: _supporters.json'),
     );
   })
   .catch(error => {

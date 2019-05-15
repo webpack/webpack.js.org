@@ -19,7 +19,7 @@
     "no-unused-vars": 0,
     "no-console": 0,
     "semi": ["error", "always"],
-    "quotes": ["error", "single"]
+    "quotes": ["error", "single"],
   },
   "overrides": [
     {

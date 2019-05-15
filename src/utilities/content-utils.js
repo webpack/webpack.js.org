@@ -24,7 +24,7 @@ export const flattenContent = tree => {
   if (tree.children) {
     return tree.children.reduce((flat, item) => {
       return flat.concat(
-        Array.isArray(item.children) ? flattenContent(item) : item
+        Array.isArray(item.children) ? flattenContent(item) : item,
       );
     }, []);
   } else return [];
@@ -61,7 +61,7 @@ export const extractSections = tree => {
  */
 export const extractPages = tree => {
   return flattenContent(tree).filter(
-    item => item.extension === '.md' || item.extension === '.mdx'
+    item => item.extension === '.md' || item.extension === '.mdx',
   );
 };
 

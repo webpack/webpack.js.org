@@ -8,7 +8,7 @@ import DocumentTitle from 'react-document-title';
 import {
   extractPages,
   extractSections,
-  getPageTitle
+  getPageTitle,
 } from '../../utilities/content-utils';
 import isClient from '../../utilities/is-client';
 
@@ -42,7 +42,7 @@ if (isClient) {
 
 class Site extends React.Component {
   state = {
-    mobileSidebarOpen: false
+    mobileSidebarOpen: false,
   };
 
   render() {
@@ -65,15 +65,15 @@ class Site extends React.Component {
               url: '/concepts',
               isActive: url =>
                 /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
-                  url
+                  url,
                 ),
               children: this._strip(
-                sections.filter(item => item.name !== 'contribute')
-              )
+                sections.filter(item => item.name !== 'contribute'),
+              ),
             },
             { content: 'Contribute', url: '/contribute' },
             { content: 'Vote', url: '/vote' },
-            { content: 'Blog', url: 'https://medium.com/webpack' }
+            { content: 'Blog', url: 'https://medium.com/webpack' },
           ]}
         />
 
@@ -119,8 +119,8 @@ class Site extends React.Component {
                                   : Content.children.filter(
                                       item =>
                                         item.type !== 'directory' &&
-                                        item.url !== '/'
-                                    )
+                                        item.url !== '/',
+                                    ),
                               )}
                             />
                             <Page {...page} content={content} />
@@ -148,7 +148,7 @@ class Site extends React.Component {
    */
   _toggleSidebar = (open = !this.state.mobileSidebarOpen) => {
     this.setState({
-      mobileSidebarOpen: open
+      mobileSidebarOpen: open,
     });
   };
 
@@ -160,7 +160,7 @@ class Site extends React.Component {
    */
   _strip = array => {
     let anchorTitleIndex = array.findIndex(
-      item => item.name.toLowerCase() === 'index.md'
+      item => item.name.toLowerCase() === 'index.md',
     );
 
     if (anchorTitleIndex !== -1) {
@@ -177,8 +177,8 @@ class Site extends React.Component {
         group,
         sort,
         anchors,
-        children: children ? this._strip(children) : []
-      })
+        children: children ? this._strip(children) : [],
+      }),
     );
   };
 }

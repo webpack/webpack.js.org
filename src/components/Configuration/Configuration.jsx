@@ -19,7 +19,7 @@ const detailComponentsList = [
   'externals',
   'stats',
   'advanced',
-  'libraryTarget'
+  'libraryTarget',
 ];
 
 const Pre = props => {
@@ -35,7 +35,7 @@ const Pre = props => {
             <Details
               children={child.props.children.slice(
                 4,
-                React.Children.count(child.props.children) - 4
+                React.Children.count(child.props.children) - 4,
               )}
               url={child.props.props.url}
             />
@@ -54,11 +54,11 @@ const Pre = props => {
       }
 
       return child;
-    }
+    },
   );
 
   const newProps = {
-    children: newChildren
+    children: newChildren,
   };
 
   return (
@@ -70,6 +70,6 @@ const Pre = props => {
 
 export default {
   components: {
-    pre: Pre
-  }
+    pre: Pre,
+  },
 };

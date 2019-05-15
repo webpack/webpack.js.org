@@ -5,7 +5,7 @@ import './Contributors.scss';
 
 export default class Contributors extends React.Component {
   state = {
-    inView: false
+    inView: false,
   };
 
   handleInView = inView => {

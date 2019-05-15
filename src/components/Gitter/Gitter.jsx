@@ -32,7 +32,7 @@ export default class Gitter extends React.Component {
       import('gitter-sidecar').then(Sidecar => {
         sidecar = new Sidecar.default({
           room: 'webpack/webpack',
-          activationElement: false
+          activationElement: false,
         });
         sidecar.toggleChat(true);
       });

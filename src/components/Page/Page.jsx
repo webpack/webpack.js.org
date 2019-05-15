@@ -20,7 +20,7 @@ class Page extends React.Component {
 
     this.state = {
       content: isDynamicContent ? Placeholder() : content.default || content,
-      contentLoaded: isDynamicContent ? false : true
+      contentLoaded: isDynamicContent ? false : true,
     };
   }
 
@@ -32,13 +32,13 @@ class Page extends React.Component {
         .then(module =>
           this.setState({
             content: module.default || module,
-            contentLoaded: true
-          })
+            contentLoaded: true,
+          }),
         )
         .catch(error =>
           this.setState({
-            content: 'Error loading content.'
-          })
+            content: 'Error loading content.',
+          }),
         );
     }
   }
@@ -61,7 +61,7 @@ class Page extends React.Component {
       contentRender = (
         <div
           dangerouslySetInnerHTML={{
-            __html: this.state.content
+            __html: this.state.content,
           }}
         />
       );

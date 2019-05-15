@@ -47,11 +47,11 @@ module.exports = function processREADME(body, options = {}) {
       // Modify links to keep them within the site
       .replace(
         /https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g,
-        '/loaders/$2/$3'
+        '/loaders/$2/$3',
       )
       .replace(
         /https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g,
-        '/plugins/$2/$3'
+        '/plugins/$2/$3',
       )
       // Replace any <h2> with `##`
       .replace(/<h2[^>]*>/g, '## ')

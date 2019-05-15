@@ -33,28 +33,28 @@ const Organization = props => {
             <h6>Activity</h6>
             <Shield
               content={`github/commits-since/${org.repo}/${encodeURIComponent(
-                'master@{6 months ago}'
+                'master@{6 months ago}',
               )}`}
               label="6m"
             />
             &nbsp;
             <Shield
               content={`github/commits-since/${org.repo}/${encodeURIComponent(
-                'master@{3 months ago}'
+                'master@{3 months ago}',
               )}`}
               label="3m"
             />
             &nbsp;
             <Shield
               content={`github/commits-since/${org.repo}/${encodeURIComponent(
-                'master@{1 month ago}'
+                'master@{1 month ago}',
               )}`}
               label="1m"
             />
             &nbsp;
             <Shield
               content={`github/commits-since/${org.repo}/${encodeURIComponent(
-                'master@{1 week ago}'
+                'master@{1 week ago}',
               )}`}
               label="1w"
             />

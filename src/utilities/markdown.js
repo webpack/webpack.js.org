@@ -52,7 +52,7 @@ module.exports = function() {
       code = code.replace(/ *<\/summary>/g, '\nMARKDOWNSUMMARYEND');
       code = code.replace(
         /(?:)?( *)MARKDOWNDETAILSSTART([\s\S]*?)MARKDOWNSUMMARYSTART\n/g,
-        'MARKDOWNDETAILSSTART$2MARKDOWNSUMMARYSTART\n$1'
+        'MARKDOWNDETAILSSTART$2MARKDOWNSUMMARYSTART\n$1',
       );
     }
 
@@ -69,15 +69,15 @@ module.exports = function() {
       rendered = rendered.replace(/MARKDOWNDETAILSSTART.*?\n/g, '<details>');
       rendered = rendered.replace(
         /\n.*?MARKDOWNDETAILSEND.*?\n/g,
-        '</details>'
+        '</details>',
       );
       rendered = rendered.replace(
         /\n.*?MARKDOWNSUMMARYSTART.*?\n/g,
-        '<summary><span class="code-details-summary-span">'
+        '<summary><span class="code-details-summary-span">',
       );
       rendered = rendered.replace(
         /\n.*?MARKDOWNSUMMARYEND.*?\n/g,
-        '</span></summary>'
+        '</span></summary>',
       );
     }
 
@@ -101,7 +101,7 @@ module.exports = function() {
         smartypants: false,
         headerPrefix: '',
         renderer: renderer,
-        xhtml: false
+        xhtml: false,
       };
 
       var tokens = parseContent(content);
@@ -124,7 +124,7 @@ module.exports = function() {
         .lexer(content)
         .filter(chunk => chunk.type === 'heading')
         .map(chunk => parseAnchor(chunk.text));
-    }
+    },
   };
 };
 
@@ -163,7 +163,7 @@ function parseAnchor(string) {
 
   return {
     title: clean,
-    id: clean.replace(/[^\w\u4e00-\u9fa5]+/g, '-').toLowerCase()
+    id: clean.replace(/[^\w\u4e00-\u9fa5]+/g, '-').toLowerCase(),
   };
 }
 
@@ -244,7 +244,7 @@ function handleTable(t) {
   for (let i = 0; i < t.header.length; i++) {
     cell += handleTableCell(this.inline.output(t.header[i]), {
       header: true,
-      align: t.align[i]
+      align: t.align[i],
     });
   }
 
@@ -260,7 +260,7 @@ function handleTable(t) {
       cell += handleTableCell(this.inline.output(row[j]), {
         header: false,
         headerTitle: this.inline.output(t.header[j]),
-        align: t.align[j]
+        align: t.align[j],
       });
     }
 
@@ -309,7 +309,7 @@ function parseCustomQuote(token, match, className) {
         text:
           `<blockquote class="${className}">` +
           `<div class="tip-content"> ${text.slice(2).trim()} </div>` +
-          '</blockquote>'
+          '</blockquote>',
       };
     }
   }
@@ -331,14 +331,14 @@ function handleTok() {
       return this.renderer.heading(
         this.inline.output(this.token.text),
         this.token.depth,
-        this.token.text
+        this.token.text,
       );
     }
     case 'code': {
       return this.renderer.code(
         this.token.text,
         this.token.lang,
-        this.token.escaped
+        this.token.escaped,
       );
     }
     case 'blockquote_start': {

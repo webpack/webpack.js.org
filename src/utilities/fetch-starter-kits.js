@@ -5,14 +5,14 @@ const starters = require('javascriptstuff-db/react-starter-projects');
 const file = './src/components/StarterKits/_starter-kits.json';
 
 const webpackStarters = starters.projects.filter(p =>
-  p.tags.some(t => t.includes('webpack'))
+  p.tags.some(t => t.includes('webpack')),
 );
 
 const data = webpackStarters.map(ws => ({
   ...ws,
   githubUrl: `https://github.com/${ws.githubPath}`,
   githubUserName: ws.githubPath.split('/')[0],
-  githubRepoName: ws.githubPath.split('/')[1]
+  githubRepoName: ws.githubPath.split('/')[1],
 }));
 
 const body = JSON.stringify(data);
