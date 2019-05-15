@@ -38,8 +38,10 @@
     "build": "run-s fetch content && cross-env NODE_ENV=production webpack --config webpack.ssg.js && cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "postbuild": "npm run sitemap",
     "test": "npm run lint",
+    "format": "npm run format:js && npm run format:style && npm run format:markdown",
     "format:js": "prettier --write ./src/**/*.{js,jsx}",
     "format:style": "prettier --write ./{src/**/,src/**/**}/*.scss",
+    "format:markdown": "prettier --write ./{src/**/,src/**/**}/*.md",
     "lint": "run-s lint:*",
     "lint:js": "eslint src --ext .js,.jsx,.md --cache true --cache-location .cache/.eslintcache",
     "lint:markdown": "markdownlint --rules markdownlint-rule-emphasis-style --config ./.markdownlint.json *.md ./src/content/**/*.md --ignore './src/content/**/_*.md'",
@@ -57,12 +59,15 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,md,scss}": [
-      "npm run lint:js",
+    "*.{js,jsx}": [
       "npm run format:js",
-      "npm run format:styles"
+      "npm run lint:js"
+    ],
+    "*.scss": [
+      "npm run format:style"
     ],
     "*.md": [
+      "npm run format:markdown",
       "npm run lint:markdown"
     ]
   },
@@ -87,7 +92,7 @@
     "directory-tree-webpack-plugin": "0.3",
     "duplexer": "^0.1.1",
     "eslint": "4.19.1",
-    "eslint-config-prettier": "^4.2.0",
+    "eslint-config-prettier": "4.2.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-markdown": "1.0.0-rc.0",
     "file-loader": "^1.1.11",
