@@ -22,7 +22,7 @@ soon. For dev-related work please see [General - Updates & Fixes][general-url].
 
 ## Translation
 
-To help translate this documentation please jump to the [translate branch][translate-url].
+To help translate this documentation please jump to the [translation branch][translate-url].
 
 ## Contributing
 
