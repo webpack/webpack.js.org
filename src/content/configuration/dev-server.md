@@ -659,6 +659,29 @@ T> [`watchOptions`](#devserver-watchoptions-) will have no effect when used with
 
 T> If you use the CLI, make sure __inline mode__ is disabled.
 
+## `devServer.liveReload` 
+
+`boolean: true`
+
+When `devServer.liveReload` is disabled, the dev-server will never reload/refresh the page.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    liveReload: true
+  }
+};
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --live-reload
+```
+
 
 ## `devServer.mimeTypes` 🔑
 
