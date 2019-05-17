@@ -659,7 +659,7 @@ T> [`watchOptions`](#devserver-watchoptions-) will have no effect when used with
 
 T> If you use the CLI, make sure __inline mode__ is disabled.
 
-## `devServer.liveReload` 
+## `devServer.liveReload`
 
 `boolean: true`
 
