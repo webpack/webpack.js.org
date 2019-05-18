@@ -663,7 +663,7 @@ T> If you use the CLI, make sure __inline mode__ is disabled.
 
 `boolean: true`
 
-When `devServer.liveReload` is disabled, the dev-server will never reload/refresh the page.
+When `devServer.liveReload` is enabled, the dev-server will reload/refresh the page when file changes if [`devServer.hot`](#devserverhot) option is disabled or [`devServer.watchContentBase`](#devserverwatchcontentbase) is enabled.
 
 __webpack.config.js__
 
