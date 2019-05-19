@@ -62,4 +62,4 @@ testing of the site at no cost...
 [release]: https://img.shields.io/badge/release-standard%20version-brightgreen.svg
 [release-url]: https://github.com/conventional-changelog/standard-version
 [translate-url]: https://github.com/webpack/webpack.js.org/tree/translation
-[writer-guide-url]: https://webpack.js.org/writers-guide
+[writer-guide-url]: https://webpack.js.org/contribute/writers-guide
