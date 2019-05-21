@@ -2,6 +2,7 @@
 
 [![Build Status][build-status]][build-status-url]
 [![Standard Version][release]][release-url]
+[![chat on gitter][chat]][chat-url]
 
 Guides, documentation, and all things webpack.
 
@@ -45,6 +46,8 @@ testing of the site at no cost...
 [build-status-url]: http://travis-ci.org/webpack/webpack.js.org
 [browserstack]: ./browserstack-logo.png
 [browserstack-url]: http://browserstack.com/
+[chat]: https://badges.gitter.im/webpack/webpack.svg
+[chat-url]: https://gitter.im/webpack/webpack
 [concepts-url]: https://github.com/webpack/webpack.js.org/issues/1386
 [contributing-url]: https://github.com/webpack/webpack.js.org/blob/master/.github/CONTRIBUTING.md
 [general-url]: https://github.com/webpack/webpack.js.org/issues/1525
@@ -53,4 +56,4 @@ testing of the site at no cost...
 [release]: https://img.shields.io/badge/release-standard%20version-brightgreen.svg
 [release-url]: https://github.com/conventional-changelog/standard-version
 [translate-url]: https://github.com/webpack/webpack.js.org/tree/translation
-[writer-guide-url]: https://webpack.js.org/writers-guide
+[writer-guide-url]: https://webpack.js.org/contribute/writers-guide
