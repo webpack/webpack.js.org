@@ -1,6 +1,7 @@
 import React from 'react';
 import Container from '../Container/Container';
 import Link from '../Link/Link';
+import {PlaceholderComponent} from '../Placeholder/Placeholder';
 import './StarterKits.scss';
 import isClient from '../../utilities/is-client';
 
@@ -45,7 +46,7 @@ const StarterKits = props => (
           </div>
         </div>
         { isClient ? (
-          <React.Suspense>
+          <React.Suspense fallback={<PlaceholderComponent />}>
             <StarterKitsTable />
           </React.Suspense>) : null
         }

@@ -5,6 +5,7 @@ import React from 'react';
 import Container from '../Container/Container';
 import SplashViz from '../SplashViz/SplashViz';
 import Markdown from '../Markdown/Markdown';
+import {PlaceholderComponent} from '../Placeholder/Placeholder';
 
 // Import helpers
 import isClient from '../../utilities/is-client';
@@ -43,7 +44,7 @@ const Splash = () => (
           </p>
 
           { isClient ? (
-            <React.Suspense fallback={<React.Fragment />}>
+            <React.Suspense fallback={<PlaceholderComponent />}>
               <h2>Latest Sponsors</h2>
               <Support rank="latest" />
 
