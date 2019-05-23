@@ -119,7 +119,7 @@ __src/index.js__
 
 ``` diff
   import _ from 'lodash';
-+ import './style.css';
++ import css from './style.css';
 
   function component() {
     const element = document.createElement('div');
