@@ -53,7 +53,7 @@ __webpack.config.js__
     entry: './src/index.js',
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
 -       title: 'Output Management'
 +       title: 'Caching'
@@ -61,7 +61,7 @@ __webpack.config.js__
     ],
     output: {
 -     filename: 'bundle.js',
-+     filename: '[name].[contenthash].js',
++     filename: '[name].[hash].js',
       path: path.resolve(__dirname, 'dist')
     }
   };
@@ -106,13 +106,13 @@ __webpack.config.js__
     entry: './src/index.js',
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching'
       })
     ],
     output: {
-      filename: '[name].[contenthash].js',
+      filename: '[name].[hash].js',
       path: path.resolve(__dirname, 'dist')
     },
 +   optimization: {
@@ -151,13 +151,13 @@ __webpack.config.js__
     entry: './src/index.js',
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching'
       }),
     ],
     output: {
-      filename: '[name].[contenthash].js',
+      filename: '[name].[hash].js',
       path: path.resolve(__dirname, 'dist')
     },
     optimization: {
@@ -266,14 +266,14 @@ __webpack.config.js__
     entry: './src/index.js',
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching'
       }),
 +      new webpack.HashedModuleIdsPlugin()
     ],
     output: {
-      filename: '[name].[contenthash].js',
+      filename: '[name].[hash].js',
       path: path.resolve(__dirname, 'dist')
     },
     optimization: {
