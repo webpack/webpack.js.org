@@ -9,6 +9,7 @@ contributors:
   - chenxsan
   - EugeneHlushko
   - AnayaDesign
+  - wizardofhogwarts
 ---
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
