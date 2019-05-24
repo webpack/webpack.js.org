@@ -7,12 +7,8 @@ const OfflinePlugin = require('offline-plugin');
 // Load Common Configuration
 const common = require('./webpack.common.js');
 
-// find css files for sw
-const cssFiles = require('./src/utilities/find-files-in-dist')('.css');
-// find favicons
-const favicons = require('./src/utilities/find-files-in-dist')('.ico');
-
-// fall back all urls to app shell
+// find [css, ico, svg] versioned (hashed) files emitted by SSG run
+const hashedAssetsBySSGRun = require('./src/utilities/find-files-in-dist')(['.css', '.ico', '.svg']);
 
 module.exports = env => merge(common(env), {
   mode: 'production',
@@ -29,8 +25,9 @@ module.exports = env => merge(common(env), {
       publicPath: '/',
       appShell: '/app-shell/',
       // make sure to cache homepage and app shell as app shell for the rest of the pages.
-      externals: ['/app-shell/', '/', '/manifest.json', ...cssFiles, ...favicons],
-      excludes: [],
+      // externals also re-validate on sw update (releases)
+      externals: ['/app-shell/', '/', '/manifest.json', ...hashedAssetsBySSGRun],
+      excludes: ['/images/icons/**'],
       AppCache: {
         publicPath: '/'
       }
