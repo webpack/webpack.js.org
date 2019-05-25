@@ -438,9 +438,9 @@ Access to the `compilation`'s `inputFileSystem` property.
 
 ### `this.mode`
 
-The [`mode` configuration](/configuration/mode/) for webpack.
+Read in which [`mode`](/configuration/mode/) webpack is running.
 
-Example values: `"production"`, `"development"`, or `"none"`
+Possible values: `'production'`, `'development'`, `'none'`
 
 
 ## Deprecated context properties
