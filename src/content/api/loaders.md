@@ -436,6 +436,13 @@ Emit a file. This is webpack-specific.
 Access to the `compilation`'s `inputFileSystem` property.
 
 
+### `this.mode`
+
+Read in which [`mode`](/configuration/mode/) webpack is running.
+
+Possible values: `'production'`, `'development'`, `'none'`
+
+
 ## Deprecated context properties
 
 W> The usage of these properties is highly discouraged since we are planning to remove them from the context. They are still listed here for documentation purposes.
