@@ -78,8 +78,8 @@ module.exports = {
       }
     ]
   },
-  resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ]
++  resolve: {
++    extensions: [ '.tsx', '.ts', '.js' ]
   },
   output: {
     filename: 'bundle.js',
