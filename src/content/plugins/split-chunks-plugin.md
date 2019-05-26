@@ -210,7 +210,7 @@ module.exports = {
 };
 ```
 
-#### `splitChunks.cacheGroups.priority`
+#### `splitChunks.cacheGroups.{cacheGroup}.priority`
 
 `number`
 
