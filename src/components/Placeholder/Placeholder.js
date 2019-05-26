@@ -1,8 +1,10 @@
+import React from 'react';
+
 // Import Styling
 import './Placeholder.scss';
 
 // Placeholder string
-const Placeholder = () => (`
+const PlaceholderString = () => (`
   <div class="placeholder">
     <p class="placeholder__medium">&nbsp;</p>
     <p class="placeholder__large">&nbsp;</p>
@@ -22,4 +24,17 @@ const Placeholder = () => (`
   </div>
 `);
 
-export default Placeholder;
+function PlaceholderComponent() {
+  return (
+    <div className="placeholder">
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </div>
+  );
+}
+
+export {
+  PlaceholderString,
+  PlaceholderComponent
+};
