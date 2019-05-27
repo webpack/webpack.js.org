@@ -16,7 +16,7 @@ This feature is provided by webpack's internal [`NodeStuffPlugin`](https://githu
 
 ## `node`
 
-`object`
+`boolean | object`
 
 This is an object where each property is the name of a Node global or module and each value may be one of the following...
 
