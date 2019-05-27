@@ -8,6 +8,7 @@ contributors:
   - wizardofhogwarts
   - EugeneHlushko
   - lukasgeiter
+  - toshihidetagami
 ---
 
 webpack provides a Node.js API which can be used directly in Node.js runtime.
@@ -104,7 +105,7 @@ const compiler = webpack({
   // [Configuration Object](/configuration/)
 });
 
-compiler.run((err, [stats](#stats-object)) => {
+compiler.run((err, stats) => { // [Stats Object](#stats-object)
   // ...
 });
 ```
@@ -274,7 +275,7 @@ var webpack = require('webpack');
 webpack([
   { entry: './index1.js', output: { filename: 'bundle1.js' } },
   { entry: './index2.js', output: { filename: 'bundle2.js' } }
-], (err, [stats](#stats-object)) => {
+], (err, stats) => { // [Stats Object](#stats-object)
   process.stdout.write(stats.toString() + '\\n');
 })
 ```
