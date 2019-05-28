@@ -7,7 +7,7 @@ import {
   Configure,
 } from 'react-instantsearch-dom';
 
-import HitBox from './HitBox';
+import HitBox from '../HitBox/HitBox';
 import './Scaffolding.scss';
 
 const searchClient = algoliasearch(
