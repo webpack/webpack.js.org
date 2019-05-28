@@ -53,7 +53,11 @@ export default class Scaffolding extends React.Component {
      return (
       <div>
         <InstantSearch searchClient={searchClient} indexName="npm-search">
-          <Configure filters="computedKeywords:webpack-scaffold" hitsPerPage={16} />
+          <Configure
+            filters="computedKeywords:webpack-scaffold"
+            hitsPerPage={16}
+            analyticsTags={['webpack-scaffold']}
+          />
           <div className="search-wrapper">
             <SearchBox />
           </div>
