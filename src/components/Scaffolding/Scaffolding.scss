@@ -13,7 +13,7 @@
 }
 .ais-SearchBox-input {
     appearance: none;
-    padding: .3em 1.7em;
+    padding: 1em 3em;
     width: 100%;
     position: relative;
     background-color: getColor(elephant);
@@ -65,8 +65,8 @@ button.ais-SearchBox-submit {
     float: right;
 }
 
-.product-title {
-    padding: 5px 15px 5px 15px;
+.product-title, .product-name {
+    padding: .5em 1em 1em 0.2em;
 }
 
 .product-avatar {
