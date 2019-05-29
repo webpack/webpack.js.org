@@ -64,7 +64,7 @@ Now let's configure webpack to handle TypeScript:
 
 __webpack.config.js__
 
-``` js
+``` diff
 const path = require('path');
 
 module.exports = {
