@@ -100,7 +100,7 @@ import * as webpackNumbers from 'webpack-numbers';
 webpackNumbers.wordToNum('Two');
 ```
 
-- __CommonJS module requires:__
+- __CommonJS module require:__
 
 ``` js
 const webpackNumbers = require('webpack-numbers');
@@ -108,7 +108,7 @@ const webpackNumbers = require('webpack-numbers');
 webpackNumbers.wordToNum('Two');
 ```
 
-- __AMD module requires:__
+- __AMD module require:__
 
 ``` js
 require(['webpackNumbers'], function (webpackNumbers) {
@@ -306,7 +306,7 @@ W> With webpack 3.5.5, using `libraryTarget: { root:'_' }` doesn't work properly
 
 ### Final Steps
 
-Optimize your output for production by the following steps in the [production guide](/guides/production). Let's also add the path to your generated bundle as the package's `main` field in with the `package.json`
+Optimize your output for production by following the steps mentioned in the [production guide](/guides/production). Let's also add the path to your generated bundle as the package's `main` field in with the `package.json`
 
 __package.json__
 
