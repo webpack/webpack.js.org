@@ -5,7 +5,7 @@ import React from 'react';
 import PageLinks from '../PageLinks/PageLinks';
 import Markdown from '../Markdown/Markdown';
 import Contributors from '../Contributors/Contributors';
-import Placeholder from '../Placeholder/Placeholder';
+import {PlaceholderString} from '../Placeholder/Placeholder';
 import Configuration from '../Configuration/Configuration';
 
 // Load Styling
@@ -19,7 +19,7 @@ class Page extends React.Component {
     const isDynamicContent = content instanceof Promise;
 
     this.state = {
-      content: isDynamicContent ? Placeholder() : content.default || content,
+      content: isDynamicContent ? PlaceholderString() : content.default || content,
       contentLoaded: isDynamicContent ? false : true
     };
   }
