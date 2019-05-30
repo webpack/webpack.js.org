@@ -492,7 +492,7 @@ T> This can be especially helpful when implementing some sort of data visualizat
 
 ## Global Assets
 
-The coolest part of everything mentioned above is that loading asset this way allows you to group modules and assets together in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be very useful:
+The coolest part of everything mentioned above is that loading assets this way allows you to group modules and assets together in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be very useful:
 
 ``` diff
 - |- /assets
