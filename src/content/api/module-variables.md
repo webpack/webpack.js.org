@@ -139,6 +139,8 @@ Access to the internal object of all modules.
 
 ### `__webpack_get_script_filename__` (webpack-specific)
 
+`function (chunkId)`
+
 This is a function that, when called with a chunk id, returns the filename of that chunk.
 
 T> It is assignable, which allows changing the filename used by the runtime for chunk loading.
