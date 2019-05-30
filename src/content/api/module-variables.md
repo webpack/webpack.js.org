@@ -141,7 +141,7 @@ Access to the internal object of all modules.
 
 `function (chunkId)`
 
-This is a function that, when called with a chunk id, returns the filename of that chunk.
+Returns the filename of chunk by Id.
 
 T> It is assignable, which allows changing the filename used by the runtime for chunk loading.
 
