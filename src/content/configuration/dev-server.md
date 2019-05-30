@@ -663,7 +663,8 @@ T> If you use the CLI, make sure __inline mode__ is disabled.
 
 `boolean: true`
 
-When `devServer.liveReload` is enabled, the dev-server will reload/refresh the page when file changes if [`devServer.hot`](#devserverhot) option is disabled or [`devServer.watchContentBase`](#devserverwatchcontentbase) is enabled.
+By default, the dev-server will reload/refresh the page when file changes are detected. [`devServer.hot`](#devserverhot) option must be disabled or [`devServer.watchContentBase`](#devserverwatchcontentbase) option must be enabled in order for `liveReload` to take effect. Disable `devServer.liveReload` by setting it to `false`:
+
 
 __webpack.config.js__
 
@@ -671,7 +672,7 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    liveReload: true
+    liveReload: false
   }
 };
 ```
@@ -679,7 +680,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --live-reload
+webpack-dev-server --no-live-reload
 ```
 
 

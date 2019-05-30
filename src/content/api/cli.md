@@ -300,7 +300,7 @@ Parameter         | Explanation                              | Usage
 `--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV="'development'"`
 `--hot`           | Enables [Hot Module Replacement](/concepts/hot-module-replacement) | `--hot=true`
 `--labeled-modules` | Enables labeled modules [Uses LabeledModulesPlugin] |
-`--live-reload`           | Enables page live reloading | `--live-reload=true`
+`--live-reload`           | Enables live reloading | `--live-reload=true`
 `--plugin`        | Load this [plugin](/configuration/plugins/) |
 `--prefetch`      | Prefetch the particular file             | `--prefetch=./files.js`
 `--provide`       | Provide these modules as globals, see [shimming](/guides/shimming) | `--provide jQuery=jquery`
