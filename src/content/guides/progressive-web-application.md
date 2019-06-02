@@ -5,6 +5,7 @@ contributors:
   - johnnyreilly
   - chenxsan
   - EugeneHlushko
+  - benschac
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -32,6 +33,12 @@ __package.json__
   },
   ...
 }
+```
+Note: webpack-dev-server writes in-memory by default. We will need to write to disk for http-server to read our dist.
+```
+devServer: {
+ writeToDisk: true
+},
 ```
 
 If you haven't previously done so, run the command `npm run build` to build your project. Then run the command `npm start`. This should produce the following output:
