@@ -8,7 +8,7 @@ contributors:
   - ldrick
   - jasonblanchard
   - byzyk
-  - renjithvk
+  - renjithspace
   - Raiondesu
   - EugeneHlushko
   - grgur
