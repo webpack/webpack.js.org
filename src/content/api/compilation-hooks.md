@@ -601,7 +601,7 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
     console.log({
       id: chunk.id,
       name: chunk.name,
-      includes: chunk.modules.map(module => module.request)
+      includes: chunk.getModules().map(module => module.request)
     });
   });
 });
