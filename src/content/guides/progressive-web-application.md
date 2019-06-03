@@ -5,6 +5,7 @@ contributors:
   - johnnyreilly
   - chenxsan
   - EugeneHlushko
+  - benschac
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -31,6 +32,15 @@ __package.json__
 +    "start": "http-server dist"
   },
   ...
+}
+```
+
+Note: webpack-dev-server writes in-memory by default. We will need to write to disk for http-server to read our dist.
+
+```diff
+...
+devServer: {
++ writeToDisk: true
 }
 ```
 
