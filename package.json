@@ -49,7 +49,7 @@
     "sitemap": "cd dist && sitemap-static --pretty --prefix=https://webpack.js.org/ > sitemap.xml",
     "serve": "npm run build && sirv start ./dist --port 4000",
     "deploy": "gh-pages -d dist",
-    "chapterize": "node ./concatenate-docs.js"
+    "chapterize": "node ./src/scripts/concatenate-docs.js"
   },
   "husky": {
     "hooks": {
