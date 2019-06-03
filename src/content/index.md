@@ -1,67 +1,78 @@
 ---
 title: webpack
+sort: 0
 ---
 
-## Write your code
+## Write Your Code
 
 <div class="splash__wrap">
 <div class="splash__left">
-__app.js__
+
+__src/index.js__
 
 ```js
 import bar from './bar';
 
 bar();
 ```
+
 </div>
 <div class="splash__right">
-__bar.js__
+
+__src/bar.js__
 
 ```js
 export default function bar() {
   //
 }
 ```
+
 </div>
 </div>
 
 
-## Bundle with webpack
+## Bundle It
 
 <div class="splash__wrap">
 <div class="splash__left">
-__webpack.config.js__
+
+__[Without config](https://youtu.be/3Nv9muOkb6k?t=21293)__ or provide custom __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
-  entry: './app.js',
+  entry: './src/index.js',
   output: {
+    path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   }
-}
+};
 ```
+
 </div>
 <div class="splash__right">
+
 __page.html__
 
 ```html
+<!doctype html>
 <html>
   <head>
     ...
   </head>
   <body>
     ...
-    <script src="bundle.js"></script>
+    <script src="dist/bundle.js"></script>
   </body>
 </html>
 ```
+
+</div>
 </div>
 
 Then run `webpack` on the command-line to create `bundle.js`.
 
-## It's that simple
+## Awesome isn't it? Let's dive in!
 
 __[Get Started](/guides/getting-started)__ quickly in our __Guides__ section, or dig into the __[Concepts](/concepts)__ section for more high-level information on the core notions behind webpack.
-
-</div>
-

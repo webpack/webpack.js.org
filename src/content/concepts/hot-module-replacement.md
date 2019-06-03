@@ -2,6 +2,7 @@
 title: Hot Module Replacement
 sort: 11
 contributors:
+  - kryptokinght
   - SpaceK33z
   - sokra
   - GRardB
@@ -13,7 +14,7 @@ Hot Module Replacement (HMR) exchanges, adds, or removes [modules](/concepts/mod
 
 - Retain application state which is lost during a full reload.
 - Save valuable development time by only updating what's changed.
-- Tweak styling faster -- almost comparable to changing styles in the browser's debugger.
+- Modifications made to CSS/JS in the source code results in an instant browser update which is almost comparable to changing styles directly in the browser's dev tools.
 
 
 ## How It Works
@@ -46,7 +47,7 @@ The compiler ensures that module IDs and chunk IDs are consistent between these 
 
 ### In a Module
 
-HMR is an opt-in feature that only affects modules containing HMR code. One example would be patching styling through the [`style-loader`](https://github.com/webpack/style-loader). In order for patching to work, the `style-loader` implements the HMR interface; when it receives an update through HMR, it replaces the old styles with the new ones.
+HMR is an opt-in feature that only affects modules containing HMR code. One example would be patching styling through the [`style-loader`](https://github.com/webpack-contrib/style-loader). In order for patching to work, the `style-loader` implements the HMR interface; when it receives an update through HMR, it replaces the old styles with the new ones.
 
 Similarly, when implementing the HMR interface in a module, you can describe what should happen when the module is updated. However, in most cases, it's not mandatory to write HMR code in every module. If a module has no HMR handlers, the update bubbles up. This means that a single handler can update a complete module tree. If a single module from the tree is updated, the entire set of dependencies is reloaded.
 

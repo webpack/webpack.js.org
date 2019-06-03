@@ -5,7 +5,6 @@ contributors:
   - jmreidy
   - jhnns
   - sararubin
-  - aiduryagin
   - rohannair
   - joshsantos
   - drpicox
@@ -14,6 +13,12 @@ contributors:
   - gdi2290
   - bdwain
   - caryli
+  - xgirma
+  - EugeneHlushko
+  - AnayaDesign
+  - aviyacohen
+  - dhruvdutt
+
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -32,13 +37,14 @@ W> __HMR__ is not intended for use in production, meaning it should only be used
 
 This feature is great for productivity. All we need to do is update our [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration, and use webpack's built in HMR plugin. We'll also remove the entry point for `print.js` as it will now be consumed by the `index.js` module.
 
-T> If you took the route of using `webpack-dev-middleware` instead of `webpack-dev-server`, please use the [`webpack-hot-middleware`](https://github.com/glenjamin/webpack-hot-middleware) package to enable HMR on your custom server or application.
+T> If you took the route of using `webpack-dev-middleware` instead of `webpack-dev-server`, please use the [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) package to enable HMR on your custom server or application.
 
 __webpack.config.js__
 
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
 + const webpack = require('webpack');
 
   module.exports = {
@@ -53,6 +59,8 @@ __webpack.config.js__
 +     hot: true
     },
     plugins: [
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement'
       }),
@@ -65,9 +73,7 @@ __webpack.config.js__
   };
 ```
 
-You can also use the CLI to modify the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration with the following command: `webpack-dev-server --hotOnly`.
-
-To get it up and running let's run `npm start` from the command line.
+T> You can use the CLI to modify the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration with the following command: `webpack-dev-server --hotOnly`.
 
 Now let's update the `index.js` file so that when a change inside `print.js` is detected we tell webpack to accept the updated module.
 
@@ -78,8 +84,8 @@ __index.js__
   import printMe from './print.js';
 
   function component() {
-    var element = document.createElement('div');
-    var btn = document.createElement('button');
+    const element = document.createElement('div');
+    const btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -101,7 +107,7 @@ __index.js__
 + }
 ```
 
-Start changing the `console.log` statement in `print.js`, and you should see the following output in the browser console.
+Start changing the `console.log` statement in `print.js`, and you should see the following output in the browser console (don't worry about that `button.onclick = printMe` output for now, we will also update that part later).
 
 __print.js__
 
@@ -124,7 +130,6 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 + 0.4b8ee77….hot-update.js:10 Updating print.js...
 + main.js:4330 [HMR] Updated modules:
 + main.js:4330 [HMR]  - 20
-+ main.js:4330 [HMR] Consider using the NamedModulesPlugin for module names.
 ```
 
 
@@ -158,6 +163,8 @@ server.listen(5000, 'localhost', () => {
 });
 ```
 
+T> If you're [using `webpack-dev-middleware`](/guides/development#using-webpack-dev-middleware), check out the [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) package to enable HMR on your custom dev server.
+
 
 ## Gotchas
 
@@ -174,8 +181,8 @@ __index.js__
   import printMe from './print.js';
 
   function component() {
-    var element = document.createElement('div');
-    var btn = document.createElement('button');
+    const element = document.createElement('div');
+    const btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -222,6 +229,7 @@ __webpack.config.js__
 ```diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
   const webpack = require('webpack');
 
   module.exports = {
@@ -242,6 +250,8 @@ __webpack.config.js__
 +     ]
 +   },
     plugins: [
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement'
       }),
@@ -286,8 +296,8 @@ __index.js__
 + import './styles.css';
 
   function component() {
-    var element = document.createElement('div');
-    var btn = document.createElement('button');
+    const element = document.createElement('div');
+    const btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -331,8 +341,7 @@ There are many other loaders and examples out in the community to make HMR inter
 
 - [React Hot Loader](https://github.com/gaearon/react-hot-loader): Tweak react components in real time.
 - [Vue Loader](https://github.com/vuejs/vue-loader): This loader supports HMR for vue components out of the box.
-- [Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader): Supports HMR for the Elm programming language.
-- [Redux HMR](https://survivejs.com/webpack/appendices/hmr-with-react/#configuring-hmr-with-redux): No loader or plugin necessary! A simple change to your main store file is all that's required.
-- [Angular HMR](https://github.com/AngularClass/angular-hmr): No loader necessary! A simple change to your main NgModule file is all that's required to have full control over the HMR APIs.
+- [Elm Hot webpack Loader](https://github.com/klazuka/elm-hot-webpack-loader): Supports HMR for the Elm programming language.
+- [Angular HMR](https://github.com/gdi2290/angular-hmr): No loader necessary! A simple change to your main NgModule file is all that's required to have full control over the HMR APIs.
 
 T> If you know of any other loaders or plugins that help with or enhance Hot Module Replacement please submit a pull request to add to this list!

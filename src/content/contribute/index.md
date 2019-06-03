@@ -5,9 +5,11 @@ contributors:
   - rouzbeh84
   - scottdj92
   - harrynewsome
+  - dhedgecock
+  - tbroadley
 ---
 
-The people who contribute to webpack do so for the love of open source, our users and ecosystem, and most importantly, pushing the web forward together. Because of our [Open Collective](http://opencollective.com/webpack) model for funding and transparency, we are able to funnel support and funds through contributors, dependent projects, and the contributor and core teams. To make a donation, simply click the button below...
+The people who contribute to webpack do so for the love of open source, our users and ecosystem, and most importantly, pushing the web forward together. Because of our [Open Collective](https://opencollective.com/webpack) model for funding and transparency, we are able to funnel support and funds through contributors, dependent projects, and the contributor and core teams. To make a donation, simply click the button below...
 
 <div align="center">
   <a href="https://opencollective.com/webpack/donate" target="_blank">
@@ -20,7 +22,7 @@ But what is the return on the investment?
 
 ## Developers
 
-The biggest core feature we'd like to provide is enjoyable development experience. Developers like you can help by contributing to rich and vibrant documentation, issuing pull requests to help us cover niche use cases, and to help sustain what you love about webpack.
+The biggest core feature we'd like to provide is an enjoyable development experience. Developers like you can help by contributing to rich and vibrant documentation, issuing pull requests to help us cover niche use cases, and to help sustain what you love about webpack.
 
 ### How Can I Help?
 
@@ -33,18 +35,18 @@ Anybody can help by doing any of the following:
 
 ### Encouraging Employers
 
-You can ask your employer to improve your workflow by leveraging webpack: an all-in-one tool for fonts, images and image optimiziation, and json. Explain to them how webpack will attempt to bundle your code and assets the best it can for the smallest file size, leading to speedier sites and applications.
+You can ask your employer to improve your workflow by leveraging webpack: an all-in-one tool for fonts, images and image optimization, and json. Explain to them how webpack will attempt to bundle your code and assets the best it can for the smallest file size, leading to speedier sites and applications.
 
 ### Your Contributions
 
-Contributing to webpack is not contributing to an exclusive club. You as a developer are contributing to the overall health of downstream projects. Hundreds, if not thousands, of projects depend on webpack and contributing will make the ecosystem better for all users.
+Contributing to webpack is not contributing to an exclusive club. You as a developer are contributing to the overall health of downstream projects. Hundreds, if not thousands, of projects depend on webpack and contributing will make the ecosystem better for all the users.
 
 The remainder of this section of the site is dedicated to developers such as yourself who would like to become a part of our ever-growing community:
 
-- [Writing a Loader](./how-to-write-a-loader)
-- [Writing a Plugin](./how-to-write-a-plugin)
-- [Plugin Patterns](./plugin-patterns)
-- [Release Process](./release-process)
+- [Writing a Loader](/contribute/writing-a-loader)
+- [Writing a Plugin](/contribute/writing-a-plugin)
+- [Plugin Patterns](/contribute/plugin-patterns)
+- [Release Process](/contribute/release-process)
 
 
 ## Executives
@@ -62,7 +64,7 @@ Aside from monetary assistance, companies can support webpack by:
 - Providing developers that are not actively working on a project.
 - Contributing computing power for improved CI and regression testing.
 
-You can also encourage your developers to contribute to the ecosystem by open-sourcing webpack loaders, plugins and other utilities. And, as mentioned above, we would greatly appreciate any help increasing our CI/CD infrastructure.
+You can also encourage your developers to contribute to the ecosystem by open-sourcing webpack loaders, plugins and other utilities. And, as mentioned above, we would greatly appreciate any help in increasing our CI/CD infrastructure.
 
 ### Anyone Else
 

@@ -1,2 +1,3 @@
-build/
-antwar.config.js
+dist/
+src/content/loaders/_*.md
+src/content/plugins/_*.md

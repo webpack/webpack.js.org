@@ -1,53 +1,45 @@
+// Import External Dependencies
 import React from 'react';
 
+// Import Utilities
+import isClient from '../../utilities/is-client';
+
+// Load Styling
+import '../Gitter/Gitter.scss';
+
+let sidecar = null;
+let sidecarLoadTriggered = false;
+
+// Create and export component
 export default class Gitter extends React.Component {
-  state = {
-    offset: 0
-  };
-
   render() {
-    let { offset } = this.state;
-
     return (
-      <span className="gitter">
+      <div className="gitter">
         <div
-          className="gitter__button js-gitter-toggle-chat-button"
-          style={{
-            marginBottom: offset
-          }}>
+          className="gitter__button"
+          onClick={this._handleIconClick}>
           <i className="gitter__icon icon-gitter" />
         </div>
-      </span>
+      </div>
     );
   }
 
-  componentDidMount() {
-    setTimeout(
-      this._recalculate.bind(this),
-      250
-    );
+  _handleIconClick = () => {
+    if (!isClient) {
+      return false;
+    }
 
-    document.addEventListener(
-      'scroll',
-      this._recalculate.bind(this)
-    );
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener(
-      'scroll',
-      this._recalculate.bind(this)
-    );
-  }
-
-  _recalculate(e) {
-    let { scrollY, innerHeight } = window;
-    let { scrollHeight } = document.body;
-    let distToBottom = scrollHeight - scrollY - innerHeight;
-    let footerHeight = document.querySelector('footer').offsetHeight;
-
-    this.setState({
-      offset: distToBottom < footerHeight ? footerHeight - distToBottom : 0
-    });
+    if (!sidecarLoadTriggered) {
+      sidecarLoadTriggered = true;
+      import('gitter-sidecar').then(Sidecar => {
+        sidecar = new Sidecar.default({
+          room: 'webpack/webpack',
+          activationElement: false
+        });
+        sidecar.toggleChat(true);
+      });
+    } else if (sidecar) {
+      sidecar.toggleChat(true);
+    }
   }
 }

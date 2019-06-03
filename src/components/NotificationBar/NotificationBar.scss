@@ -5,20 +5,12 @@
   color: getColor(white);
   background: getColor(emperor);
 
-  p:not(:last-child) {
-    padding-bottom: 1em;
-  }
-
   a {
     color: getColor(malibu);
 
     &:hover {
       color: darken(getColor(malibu), 25%);
     }
-  }
-
-  &--dismissed {
-    display: none;
   }
 }
 
@@ -32,15 +24,15 @@
 }
 
 .notification-bar__close {
-  color: getColor(white);
-  font-size: 16px;
-  padding: 0;
-  background: none;
-  border: none;
   position: absolute;
+  font-size: 16px;
   top: 10px;
   right: 1em;
+  padding: 0;
+  border: none;
   cursor: pointer;
+  color: getColor(white);
+  background: none;
   transition: color 250ms;
 
   &:hover {

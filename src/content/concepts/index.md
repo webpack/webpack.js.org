@@ -1,5 +1,5 @@
 ---
-title: Core Concepts
+title: Concepts
 sort: 1
 contributors:
   - TheLarkInn
@@ -7,41 +7,65 @@ contributors:
   - grgur
   - johnstew
   - jimrfenner
+  - TheDutchCoder
+  - adambraimbridge
+  - EugeneHlushko
+  - jeremenichelli
+  - arjunsajeev
+  - byzyk
+  - yairhaimo
+  - farskid
+  - LukeMwila
 ---
 
-*webpack* is a _module bundler_ for modern JavaScript applications. When webpack processes your application, it recursively builds a _dependency graph_ that includes every module your application needs, then packages all of those modules into a small number of _bundles_ - often only one - to be loaded by the browser.
+At its core, __webpack__ is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a [dependency graph](/concepts/dependency-graph/) which maps every module your project needs and generates one or more _bundles_.
 
-It is [incredibly configurable](/configuration), but to get started you only need to understand **Four Core Concepts**: entry, output, loaders, and plugins.
+T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).
 
-This document is intended to give a **high-level** overview of these concepts, while providing links to detailed concept specific use cases.
+Since version 4.0.0, __webpack does not require a configuration file__ to bundle your project, nevertheless it is [incredibly configurable](/configuration) to better fit your needs.
+
+To get started you only need to understand its __Core Concepts__:
+
+- [Entry](#entry)
+- [Output](#output)
+- [Loaders](#loaders)
+- [Plugins](#plugins)
+- [Mode](#mode)
+- [Browser Compatibility](#browser-compatibility)
+
+This document is intended to give a __high-level__ overview of these concepts, while providing links to detailed concept-specific use cases.
+
+For a better understanding of the ideas behind module bundlers and how they work under the hood, consult these resources:
+
+- [Manually Bundling an Application](https://www.youtube.com/watch?v=UNMkLHzofQI)
+- [Live Coding a Simple Module Bundler](https://www.youtube.com/watch?v=Gc9-7PBqOC8)
+- [Detailed Explanation of a Simple Module Bundler](https://github.com/ronami/minipack)
 
 
 ## Entry
 
-webpack creates a graph of all of your application's dependencies. The starting point of this graph is known as an _entry point_. The _entry point_ tells webpack _where to start_ and follows the graph of dependencies to know _what to bundle_. You can think of your application's _entry point_ as the **contextual root** or **the first file to kick off your app**.
+An __entry point__ indicates which module webpack should use to begin building out its internal [dependency graph](/concepts/dependency-graph/). webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
 
-In webpack we define _entry points_ using the `entry` property in our [webpack configuration object](/configuration).
+By default its value is `./src/index.js`, but you can specify a different (or multiple entry points) by configuring the __entry__ property in the [webpack configuration](/configuration). For example:
 
-The simplest example is seen below:
+__webpack.config.js__
 
-**webpack.config.js**
-
-```javascript
+``` js
 module.exports = {
   entry: './path/to/my/entry/file.js'
 };
 ```
 
-There are multiple ways to declare your `entry` property that are specific to your application's needs.
-
-[Learn more!](/concepts/entry-points)
+T> Learn more in the [entry points](/concepts/entry-points) section.
 
 
 ## Output
 
-Once you've bundled all of your assets together, you still need to tell webpack **where** to bundle your application. The webpack `output` property tells webpack **how to treat bundled code**.
+The __output__ property tells webpack where to emit the _bundles_ it creates and how to name these files. It defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
 
-**webpack.config.js**
+You can configure this part of the process by specifying an `output` field in your configuration:
+
+__webpack.config.js__
 
 ```javascript
 const path = require('path');
@@ -55,35 +79,29 @@ module.exports = {
 };
 ```
 
-In the example above, we use the `output.filename` and the `output.path` properties to tell webpack the name of our bundle and where we want it to be emitted to.
+In the example above, we use the `output.filename` and the `output.path` properties to tell webpack the name of our bundle and where we want it to be emitted to. In case you're wondering about the path module being imported at the top, it is a core [Node.js module](https://nodejs.org/api/modules.html) that gets used to manipulate file paths.
 
-T> You may see the term **emitted** or **emit** used throughout our documentation and [plugin API](/api/plugins). This is a fancy term for 'produced' or 'discharged'.
-
-The `output` property has [many more configurable features](/configuration/output), but let's spend some time understanding some of the most common use cases for the `output` property.
-
-[Learn more!](/concepts/output)
+T> The `output` property has [many more configurable features](/configuration/output) and if you like to know more about the concepts behind it, you can [read more in the output section](/concepts/output).
 
 
 ## Loaders
 
-The goal is to have all of the assets in your project be **webpack's** concern and not the browser's (though, to be clear, this doesn't mean that they all have to be bundled together). webpack treats [every file (.css, .html, .scss, .jpg, etc.) as a module](/concepts/modules). However, webpack itself **only understands JavaScript**.
+Out of the box, webpack only understands JavaScript and JSON files. __Loaders__ allow webpack to process other types of files and convert them into valid [modules](/concepts/modules) that can be consumed by your application and added to the dependency graph.
 
-**Loaders in webpack _transform these files into modules_ as they are added to your dependency graph.**
+W> Note that the ability to `import` any type of module, e.g. `.css` files, is a feature specific to webpack and may not be supported by other bundlers or task runners. We feel this extension of the language is warranted as it allows developers to build a more accurate dependency graph.
 
-At a high level, **loaders** have two purposes in your webpack config. They work to:
+At a high level, __loaders__ have two properties in your webpack configuration:
 
-1. Identify which file or files should be transformed by a certain Loader. (`test` property)
-2. Transform those files so that they can be added to your dependency graph (and eventually your bundle). (`use` property)
+1. The `test` property identifies which file or files should be transformed.
+2. The `use` property indicates which loader should be used to do the transforming.
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```javascript
 const path = require('path');
 
-const config = {
-  entry: './path/to/my/entry/file.js',
+module.exports = {
   output: {
-    path: path.resolve(__dirname, 'dist'),
     filename: 'my-first-webpack.bundle.js'
   },
   module: {
@@ -92,56 +110,65 @@ const config = {
     ]
   }
 };
-
-module.exports = config;
 ```
 
 The configuration above has defined a `rules` property for a single module with two required properties: `test` and `use`. This tells webpack's compiler the following:
 
-> "Hey webpack compiler, when you come across a path that resolves to a '.txt' file inside of a `require()`/`import` statement, **use** the `raw-loader` to transform it before you add it to the bundle."
+> "Hey webpack compiler, when you come across a path that resolves to a '.txt' file inside of a `require()`/`import` statement, __use__ the `raw-loader` to transform it before you add it to the bundle."
 
-W> It is important to remember that **when defining rules in your webpack config, you are defining them under `module.rules` and not `rules`**. For your benefit, webpack will 'yell at you' if this is done incorrectly.
+W> It is important to remember that when defining rules in your webpack config, you are defining them under `module.rules` and not `rules`. For your benefit, webpack will warn you if this is done incorrectly.
 
-There are other, more specific properties to define on Loaders that we haven't yet covered.
+W> Keep in mind that when using regex to match files, you may not quote it. i.e `/\.txt$/` is not the same as `'/\.txt$/'`/ `"/\.txt$/"`. The former instructs webpack to match any file that ends with .txt and the latter instructs webpack to match a single file with an absolute path '.txt'; this is likely not your intention. 
 
-[Learn more!](/concepts/loaders)
+You can check further customization when including loaders in the [loaders section](/concepts/loaders).
 
 
 ## Plugins
 
-While Loaders only execute transforms on a per-file basis, `plugins` are most commonly used to perform actions and custom functionality on "compilations" or "chunks" of your bundled modules [(and so much more!)](/concepts/plugins). The webpack Plugin system is [extremely powerful and customizable](/api/plugins).
+While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks like bundle optimization, asset management and injection of environment variables.
 
-In order to use a plugin, you just need to `require()` it and add it to the `plugins` array. Most plugins are customizable via options. Since you can use a plugin multiple times in a config for different purposes, you need to create an instance of it by calling it with `new`.
+T> Check out the [plugin interface](/api/plugins) and how to use it to extend webpacks capabilities.
 
-**webpack.config.js**
+In order to use a plugin, you need to `require()` it and add it to the `plugins` array. Most plugins are customizable through options. Since you can use a plugin multiple times in a config for different purposes, you need to create an instance of it by calling it with the `new` operator.
+
+__webpack.config.js__
 
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
 const webpack = require('webpack'); //to access built-in plugins
-const path = require('path');
 
-const config = {
-  entry: './path/to/my/entry/file.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'my-first-webpack.bundle.js'
-  },
+module.exports = {
   module: {
     rules: [
       { test: /\.txt$/, use: 'raw-loader' }
     ]
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
     new HtmlWebpackPlugin({template: './src/index.html'})
   ]
 };
-
-module.exports = config;
 ```
 
-There are many plugins that webpack provides out of the box! Check out our [list of plugins](/plugins) for more information.
+In the example above, the `html-webpack-plugin` generates an HTML file for your application by injecting automatically all your generated bundles.
 
-Using plugins in your webpack config is straightforward - however, there are many use cases that are worth further exploration.
+T> There are many plugins that webpack provides out of the box! Check out the [list of plugins](/plugins).
 
-[Learn more!](/concepts/plugins)
+Using plugins in your webpack config is straightforward - however, there are many use cases that are worth further exploration. [Learn more about them here](/concepts/plugins).
+
+
+## Mode
+
+By setting the `mode` parameter to either `development`, `production` or `none`, you can enable webpack's built-in optimizations that correspond to each environment. The default value is `production`.
+
+```javascript
+module.exports = {
+  mode: 'production'
+};
+```
+
+Learn more about the [mode configuration here](/configuration/mode) and what optimizations take place on each value.
+
+
+## Browser Compatibility
+
+webpack supports all browsers that are [ES5-compliant](https://kangax.github.io/compat-table/es5/) (IE8 and below are not supported). webpack needs `Promise` for `import()` and `require.ensure()`. If you want to support older browsers, you will need to [load a polyfill](/guides/shimming/) before using these expressions.

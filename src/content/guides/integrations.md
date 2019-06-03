@@ -6,11 +6,12 @@ contributors:
   - bebraw
   - tashian
   - skipjack
+  - AnayaDesign
 ---
 
-Let's start by clearing up a common misconception. webpack is a module bundler like [Browserify](http://browserify.org/) or [Brunch](http://brunch.io/). It is _not a task runner_ like [Make](https://www.gnu.org/software/make/), [Grunt](https://gruntjs.com/), or [Gulp](https://gulpjs.com/). Task runners handle automation of common development tasks such as linting, building, or testing your project. Compared to bundlers, task runners have a higher level focus. You can still benefit from their higher level tooling while leaving the problem of bundling to webpack.
+Let's start by clearing up a common misconception. webpack is a module bundler like [Browserify](http://browserify.org/) or [Brunch](https://brunch.io/). It is _not a task runner_ like [Make](https://www.gnu.org/software/make/), [Grunt](https://gruntjs.com/), or [Gulp](https://gulpjs.com/). Task runners handle automation of common development tasks such as linting, building, or testing your project. Compared to bundlers, task runners have a higher level focus. You can still benefit from their higher level tooling while leaving the problem of bundling to webpack.
 
-Bundlers help you get your JavaScript and stylesheets ready for deployment, transforming them into a format that's suitable for the browser. For example, JavaScript can be [minified](/plugins/uglifyjs-webpack-plugin) or [split into chunks](/guides/code-splitting) and [lazy-loaded](/guides/lazy-loading) to improve performance. Bundling is one of the most important challenges in web development, and solving it well can remove a lot of pain from the process.
+Bundlers help you get your JavaScript and stylesheets ready for deployment, transforming them into a format that's suitable for the browser. For example, JavaScript can be [minified](/plugins/terser-webpack-plugin) or [split into chunks](/guides/code-splitting) and [lazy-loaded](/guides/lazy-loading) to improve performance. Bundling is one of the most important challenges in web development, and solving it well can remove a lot of pain from the process.
 
 The good news is that, while there is some overlap, task runners and bundlers can play well together if approached in the right way. This guide provides a high-level overview of how webpack can be integrated into some of the more popular task runners.
 
@@ -27,7 +28,7 @@ So while webpack's core focus is bundling, there are a variety of extensions tha
 For those using Grunt, we recommend the [`grunt-webpack`](https://www.npmjs.com/package/grunt-webpack) package. With `grunt-webpack` you can run webpack or [webpack-dev-server](https://github.com/webpack/webpack-dev-server) as a task, get access to stats within [template tags](https://gruntjs.com/api/grunt.template), split development and production configurations and more. Start by installing `grunt-webpack` as well as `webpack` itself if you haven't already:
 
 ``` bash
-npm i --save-dev grunt-webpack webpack
+npm install --save-dev grunt-webpack webpack
 ```
 
 Then register a configuration and load the task:
@@ -60,7 +61,7 @@ For more information, please visit the [repository](https://github.com/webpack-c
 Gulp is also a fairly straightforward integration with the help of the [`webpack-stream`](https://github.com/shama/webpack-stream) package (a.k.a. `gulp-webpack`). In this case, it is unnecessary to install `webpack` separately as it is a direct dependency of `webpack-stream`:
 
 ``` bash
-npm i --save-dev webpack-stream
+npm install --save-dev webpack-stream
 ```
 
 Just `require('webpack-stream')` instead of `webpack` and optionally pass it an configuration:
@@ -68,8 +69,8 @@ Just `require('webpack-stream')` instead of `webpack` and optionally pass it an 
 __gulpfile.js__
 
 ``` js
-var gulp = require('gulp');
-var webpack = require('webpack-stream');
+const gulp = require('gulp');
+const webpack = require('webpack-stream');
 gulp.task('default', function() {
   return gulp.src('src/entry.js')
     .pipe(webpack({
@@ -87,7 +88,7 @@ For more information, please visit the [repository](https://github.com/shama/web
 The [`mocha-webpack`](https://github.com/zinserjan/mocha-webpack) utility can be used for a clean integration with Mocha. The repository offers more details on the pros and cons but essentially `mocha-webpack` is a simple wrapper that provides almost the same CLI as Mocha itself and provides various webpack functionality like an improved watch mode and improved path resolution. Here is a small example of how you would install it and use it to run a test suite (found within `./test`):
 
 ``` bash
-npm i --save-dev webpack mocha mocha-webpack
+npm install --save-dev webpack mocha mocha-webpack
 mocha-webpack 'test/**/*.js'
 ```
 
@@ -96,10 +97,10 @@ For more information, please visit the [repository](https://github.com/zinserjan
 
 ## Karma
 
-The [`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) package allows you to use webpack to pre-process files in [Karma](http://karma-runner.github.io/1.0/index.html). It also makes use of [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware) and allows passing configurations for both. A simple example may look something like this:
+The [`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) package allows you to use webpack to pre-process files in [Karma](https://karma-runner.github.io/1.0/index.html). It also makes use of [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware) and allows passing configurations for both. A simple example may look something like this:
 
 ``` bash
-npm i --save-dev webpack karma karma-webpack
+npm install --save-dev webpack karma karma-webpack
 ```
 
 __karma.conf.js__
