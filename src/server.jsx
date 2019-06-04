@@ -26,6 +26,10 @@ function enforceTrailingSlash (url) {
   return url.replace(/\/?$/, '/');
 }
 
+function isPrintPage(url) {
+  return url.includes('/printable');
+}
+
 // Export method for `SSGPlugin`
 export default locals => {
   let { assets } = locals.webpackStats.compilation;
@@ -39,6 +43,7 @@ export default locals => {
           <meta charset="utf-8" />
           <meta name="theme-color" content="#2B3A42" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          { isPrintPage(locals.path) ? <meta name="robots" content="noindex" /> : null }
           <title>{title}</title>
           <meta name="description" content={ description } />
           <meta property="og:site_name" content="webpack" />
@@ -70,7 +75,11 @@ export default locals => {
                   import={ path => require(`./content/${path}`) } />
               )} />
           </div>
-          { (locals.path.includes('/printable')) ? null : bundles.map(path => <script key={ path } src={ path } />) }
+          {
+            (isPrintPage(locals.path))
+              ? <script>window.print();</script>
+              : bundles.map(path => <script key={ path } src={ path } />)
+          }
         </body>
       </html>
     </StaticRouter>

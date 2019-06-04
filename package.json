@@ -51,7 +51,7 @@
     "sitemap": "cd dist && sitemap-static --pretty --prefix=https://webpack.js.org/ > sitemap.xml",
     "serve": "npm run build && sirv start ./dist --port 4000",
     "deploy": "gh-pages -d dist",
-    "preprintable": "rimraf src/content/**/printable.md*",
+    "preprintable": "npm run clean-printable",
     "printable": "node ./src/scripts/concatenate-docs.js"
   },
   "husky": {
