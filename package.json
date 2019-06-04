@@ -72,7 +72,7 @@
   "devDependencies": {
     "@mdx-js/loader": "0.15.7",
     "@mdx-js/mdx": "0.15.7",
-    "@octokit/rest": "^15.9.4",
+    "@octokit/rest": "^16.27.1",
     "alex": "^5.1.0",
     "autoprefixer": "^7.2.3",
     "babel-core": "^6.26.0",
