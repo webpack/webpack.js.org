@@ -70,7 +70,7 @@ export default locals => {
                   import={ path => require(`./content/${path}`) } />
               )} />
           </div>
-          { bundles.map(path => <script key={ path } src={ path } />) }
+          { (locals.path.includes('/printable')) ? null : bundles.map(path => <script key={ path } src={ path } />) }
         </body>
       </html>
     </StaticRouter>

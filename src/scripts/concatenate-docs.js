@@ -5,6 +5,7 @@ const front = require('front-matter');
 
 // root path
 const rootPath = path.join('src', 'content');
+const outFileName = 'printable.md';
 
 console.info('Concatenating *.md files of each content directory to create chapter-wide help files to be used for printing');
 
@@ -17,12 +18,7 @@ function getDirectoryRecursive(basePath) {
 	console.log(`Processing: ${basePath}`);
 
 	// create destination file name of compound file
-	const targetFilePath = path.join(basePath, `${basePath.substr(rootPath.length).replace(/[/\\]/, '_')}_all.md`);
-
-	// TODO: maybe clean those in the pre-build and remove this
-	if (fs.existsSync(targetFilePath)) {
-		fs.unlinkSync(targetFilePath);
-	}
+	const targetFilePath = path.join(basePath, outFileName);
 
 	// list current working directory
 	fs.readdir(basePath, function (err, fileNames) {
@@ -38,9 +34,6 @@ function getDirectoryRecursive(basePath) {
 				getDirectoryRecursive(fullPath);
 			} else if (fullPath.endsWith('.md') || fullPath.endsWith('.mdx')) {
 				let fc = fileContents[fileContents.length] = front(fs.readFileSync(fullPath).toString());
-
-				// only include files providing a FrontMatter 'sort' attribute
-				if (!fc.attributes.sort) --fileContents.length;
 			}
 		}
 
@@ -76,5 +69,5 @@ getDirectoryRecursive(rootPath);
 
 // end message
 process.on('exit', () =>
-  console.info(`Successfully created "_all.md" files in each directory within ${rootPath}`)
+  console.info(`Successfully created "${outFileName}" files in each directory within ${rootPath}`)
 );
