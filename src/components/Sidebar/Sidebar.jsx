@@ -4,6 +4,7 @@ import React from 'react';
 // Import Local Components
 import Shield from '../Shield/Shield';
 import SidebarItem from '../SidebarItem/SidebarItem';
+import Print from '../Print/Print';
 
 // Load Styling
 import './Sidebar.scss';
@@ -23,6 +24,7 @@ export default ({
           <a href="https://github.com/webpack/webpack/releases">
             <Shield content="npm/v/webpack" label="webpack" />
           </a>
+          <Print url={currentPage} />
         </div>
 
         {pages.map((page, index) => {
@@ -43,17 +45,7 @@ export default ({
             </React.Fragment>
           );
         })}
-
-        <a href={_printPageUrlFromUrl(currentPage)} rel="nofollow">Print Section</a>
       </div>
     </nav>
   );
 };
-
-function _printPageUrlFromUrl(urlRaw) {
-  // for now support both trailing slash and without it
-  // when https://github.com/webpack/webpack.js.org/pull/3064 is merged, this is simplified.
-  let url = urlRaw[urlRaw.length-1] === '/' ? urlRaw.substring(0, urlRaw.length-1) : urlRaw;
-  let urlSplit = url.split('/');
-  return (urlSplit.length > 2) ? `/${url.split('/')[1]}/printable/` : `${url}/printable/`;
-}
