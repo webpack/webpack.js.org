@@ -2,16 +2,16 @@
 @import 'functions';
 
 .page-links {
-  @media print {
-    display: none !important;
-  }
-
   position: absolute;
   display: none;
   top: 1.5em;
   right: 1.5em;
   font-weight: 600;
   text-transform: uppercase;
+
+  @media print {
+    display: none;
+  }
 
   &__gap {
     margin: 0 1em;
