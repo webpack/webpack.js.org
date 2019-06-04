@@ -1,14 +1,17 @@
 import React from 'react';
 import Container from '../Container/Container';
 import Link from '../Link/Link';
-import Kits from './_starter-kits.json';
+import {PlaceholderComponent} from '../Placeholder/Placeholder';
 import './StarterKits.scss';
+import isClient from '../../utilities/is-client';
 
 // NOTE: The table classes used in this component correspond to
 // those used in the markdown utility. Ideally we will soon create
 // a table component that both the markdown utility and this page
 // can use. This component could even use something like griddle
 // to allow sorting and such.
+
+const StarterKitsTable = React.lazy(() => import('./StarterKitsTable'));
 
 const StarterKits = props => (
   <Container className="starter-kits page__content markdown">
@@ -42,30 +45,11 @@ const StarterKits = props => (
             <div className="table-th">Tags</div>
           </div>
         </div>
-        <div className="table-body">
-          { Kits.map((kit, i) => (
-            <div className="table-tr" key={ i }>
-              <div className="table-td">
-                <div className="table-td-title">Project Name</div>
-                <div className="table-td-content">
-                  <Link to={ kit.githubUrl }>{ kit.githubRepoName }</Link>
-                </div>
-              </div>
-              <div className="table-td">
-                <div className="table-td-title">Maintainer</div>
-                <div className="table-td-content">{ kit.githubUserName }</div>
-              </div>
-              <div className="table-td">
-                <div className="table-td-title">Tags</div>
-                <div className="table-td-content">
-                  { kit.tags.map((tag, i) => (
-                    <span key={ i } className="starter-kits__tag">{ tag }</span>
-                  )) }
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        { isClient ? (
+          <React.Suspense fallback={<PlaceholderComponent />}>
+            <StarterKitsTable />
+          </React.Suspense>) : null
+        }
       </div>
     </div>
   </Container>
