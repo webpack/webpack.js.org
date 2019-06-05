@@ -64,8 +64,7 @@ class Site extends React.Component {
             },
             { content: 'Contribute', url: '/contribute' },
             { content: 'Vote', url: '/vote' },
-            { content: 'Blog', url: 'https://medium.com/webpack' },
-            { content: 'Swag', url: 'https://webpack.threadless.com/' }
+            { content: 'Blog', url: 'https://medium.com/webpack' }
           ]}
         />
 
