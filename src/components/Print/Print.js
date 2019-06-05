@@ -1,5 +1,6 @@
 import React from 'react';
-
+// Load Styling
+import './Print.scss';
 import icon from '../../assets/icon-print.svg';
 
 const PRINTABLE_SECTIONS = [
@@ -23,13 +24,17 @@ export default function Print (props) {
     }
 
     return (
-      <a href={_printPageUrlFromUrl(url)}
-        rel="nofollow"
-        alt="Print"
-        title="Print"
-        target="_blank">
-        <img src={icon} />
-      </a>
+      <div className="sidebar-item sidebar-item--disabled`">
+        <i className="sidebar-item__toggle icon-vertical-bar" />
+        <a class="sidebar-item__title sidebar-link__print" href={_printPageUrlFromUrl(url)}
+          rel="nofollow"
+          alt="Print"
+          title="Print"
+          target="_blank">
+          Print Section
+          <img src={icon} />
+        </a>
+      </div>
     );
 }
 

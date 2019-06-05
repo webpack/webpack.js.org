@@ -24,8 +24,8 @@ export default ({
           <a href="https://github.com/webpack/webpack/releases">
             <Shield content="npm/v/webpack" label="webpack" />
           </a>
-          <Print url={currentPage} />
         </div>
+        <Print url={currentPage} />
 
         {pages.map((page, index) => {
           let displayGroup = group !== page.group && page.group !== '-';
