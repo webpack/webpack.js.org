@@ -1163,6 +1163,123 @@ module.exports = {
 };
 ```
 
+
+## `devServer.serverMode`
+
+`string: 'sockjs' | require.resolve('path/to/implementation')` `function: class extending BaseServer`
+
+W> `serverMode` is an experimental option, meaning its usage could potentially change without warning.
+
+This option allows you to choose the current socket server implementation, or provide your own custom socket server implementation. The current default implementation is [`'sockjs'`](https://www.npmjs.com/package/sockjs). [`'ws'`](https://www.npmjs.com/package/ws) will soon be implemented as an alternative to `'sockjs'`, and will become the default implementation in the next major `devServer` version.
+
+To create a custom implementation, you must create a class that extends [`BaseClient`](https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js), found in the `lib/servers/` directory of the `webpack-dev-server` module. See the example below for full implementation details.
+
+Use the current default implementation:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    serverMode: 'sockjs'
+  }
+};
+```
+
+`CustomServer.js` example using the [`sockjs`](https://www.npmjs.com/package/sockjs) API:
+
+```javascript
+const sockjs = require('sockjs');
+const BaseServer = require('webpack-dev-server/lib/servers/BaseServer');
+
+module.exports = class CustomServer extends BaseServer {
+  /**
+  *
+  * @param {Object} server - The devServer instance you are working with
+  *
+  */
+  constructor(server) {
+    // you must call super(server)
+    // this will set this.server so you can use it in other class methods
+    super(server);
+
+    // you can freely set any instance variables
+    // this.socket will be useful for implementing other required methods
+    this.socket = sockjs.createServer({
+      sockjs_url: '/__webpack_dev_server__/sockjs.bundle.js',
+    });
+
+    // this.server.listeningApp is the listening HTTP/HTTPS server
+    // that you should attach the socket server to
+    this.socket.installHandlers(this.server.listeningApp, {
+      // this.server.sockPath is the path that devServer clients
+      // will connect to
+      prefix: this.server.sockPath,
+    });
+  }
+
+  /**
+  * You must implement this function.
+  * Sends a message to a connected client
+  *
+  * @param {Object} connection - the socket connection
+  * @param {string} message - the message being sent
+  *
+  */
+  send(connection, message) {
+    connection.write(message);
+  }
+
+  /**
+  * You must implement this function.
+  * Closes a connected client
+  *
+  * @param {Object} connection - the socket connection to close
+  *
+  */
+  close(connection) {
+    connection.close();
+  }
+
+  /**
+  * You must implement this function.
+  * Handles new connections. Note that the devServer manages the 
+  * connections for you, so you do not have to save them. Simply pass
+  * them along to the callback function.
+  *
+  * @param {function} f - A function that expects a single connection object argument
+  *
+  */
+  onConnection(f) {
+    this.socket.on('connection', f);
+  }
+}
+```
+
+Using `CustomServer.js` via path:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    serverMode: require.resolve('./CustomServer')
+  }
+};
+```
+
+Using `CustomServer.js` by passing in the class:
+
+```javascript
+const CustomServer = require('./CustomServer');
+
+module.exports = {
+  //...
+  devServer: {
+    serverMode: CustomServer
+  }
+};
+```
+
+
 ## `devServer.setup`
 
 `function (app, server)`
