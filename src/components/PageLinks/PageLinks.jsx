@@ -1,6 +1,7 @@
 import React from 'react';
 import Url from 'url';
 import './PageLinks.scss';
+import icon from '../../assets/icon-print.svg';
 
 const baseURL = 'https://github.com/webpack/webpack.js.org/edit/master/';
 
@@ -27,6 +28,16 @@ export default ({
         Edit Document
         <i className="page-links__icon icon-edit" />
       </a>
+      <span className="page-links__gap">|</span>
+      <a className="page-links__link page-links__print" onClick={_handlePrintClick} title="Print this page">
+        Print Document
+        <img src={icon} />
+      </a>
     </div>
   );
 };
+
+function _handlePrintClick (e) {
+  e.preventDefault();
+  window.print();
+}

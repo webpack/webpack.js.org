@@ -9,6 +9,11 @@
   font-weight: 600;
   text-transform: uppercase;
 
+  @media print {
+    display: flex;
+    align-items: center;
+  }
+
   &__gap {
     margin: 0 1em;
   }
@@ -22,6 +27,15 @@
     align-self: center;
     font-size: 0.9em;
     margin-left: 0.5em;
+  }
+
+  &__print {
+    cursor: pointer;
+
+    img {
+      height: 17px;
+      margin-left: 3px;
+    }
   }
 
   @include break {
