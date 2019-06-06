@@ -1166,7 +1166,7 @@ module.exports = {
 
 ## `devServer.serverMode`
 
-`string: 'sockjs' | require.resolve('path/to/implementation')` `function: class extending <a href="https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js">BaseServer</a>`
+`string: 'sockjs' | require.resolve('path/to/implementation')` `function: class extending [BaseServer](https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js)`
 
 W> `serverMode` is an experimental option, meaning its usage could potentially change without warning.
 
