@@ -4,10 +4,7 @@
 .notification-bar {
   color: getColor(white);
   background: getColor(emperor);
-  position: fixed;
-  bottom: 0;
   width: 100%;
-  z-index: 100;
 
   a {
     color: getColor(malibu);

@@ -51,22 +51,25 @@ class Site extends React.Component {
     return (
       <div className="site">
         <DocumentTitle title={getPageTitle(Content, location.pathname)} />
-        <NotificationBar />
-        <Navigation
+        <div className="site__header">
+          <NotificationBar />
+          <Navigation
           pathname={location.pathname}
           toggleSidebar={this._toggleSidebar}
-          links={[
-            {
-              content: 'Documentation',
-              url: '/concepts',
-              isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
-              children: this._strip(sections.filter(item => item.name !== 'contribute'))
-            },
-            { content: 'Contribute', url: '/contribute' },
-            { content: 'Vote', url: '/vote' },
-            { content: 'Blog', url: 'https://medium.com/webpack' }
-          ]}
-        />
+            links={[
+              {
+                content: 'Documentation',
+                url: '/concepts',
+                isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
+                children: this._strip(sections.filter(item => item.name !== 'contribute'))
+              },
+              { content: 'Contribute', url: '/contribute' },
+              { content: 'Vote', url: '/vote' },
+              { content: 'Blog', url: 'https://medium.com/webpack' }
+            ]}
+          >
+          </Navigation>
+        </div>
 
         {isClient ? <SidebarMobile
           isOpen={mobileSidebarOpen}
