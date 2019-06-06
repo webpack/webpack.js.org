@@ -1212,6 +1212,24 @@ webpack-dev-server --socket socket
 ```
 
 
+## `devServer.sockHost`
+
+`string`
+
+Tells clients connected to `devServer` to use provided socket host.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    sockHost: 'myhost.test'
+  }
+};
+```
+
+
 ## `devServer.sockPath`
 
 `string: '/sockjs-node'`
@@ -1233,7 +1251,7 @@ module.exports = {
 
 `number` `string`
 
-Tells `devServer` to use provided socket port.
+Tells clients connected to `devServer` to use provided socket port.
 
 __webpack.config.js__
 
