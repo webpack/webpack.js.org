@@ -1166,13 +1166,13 @@ module.exports = {
 
 ## `devServer.serverMode`
 
-`string: 'sockjs' | require.resolve('path/to/implementation')` `function: class extending BaseServer`
+`string: 'sockjs' | require.resolve('path/to/implementation')` `function: class extending <a href="https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js">BaseServer</a>`
 
 W> `serverMode` is an experimental option, meaning its usage could potentially change without warning.
 
 This option allows you to choose the current socket server implementation, or provide your own custom socket server implementation. The current default implementation is [`'sockjs'`](https://www.npmjs.com/package/sockjs). [`'ws'`](https://www.npmjs.com/package/ws) will soon be implemented as an alternative to `'sockjs'`, and will become the default implementation in the next major `devServer` version.
 
-To create a custom implementation, you must create a class that extends [`BaseClient`](https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js), found in the `lib/servers/` directory of the `webpack-dev-server` module. See the example below for full implementation details.
+To create a custom implementation, you must create a class that extends [`BaseServer`](https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js), found in the `lib/servers/` directory of the `webpack-dev-server` module. See the example below for full implementation details.
 
 Use the current default implementation:
 
