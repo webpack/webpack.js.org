@@ -9,6 +9,13 @@
 
   @include break {
     flex: 3;
-    padding: 1.5em;
+    // page links not fitting in 768+ resolutions with long headings
+    padding: 2em 1.5em 1.5em;
+  }
+
+  .related__section {
+    @media print {
+      display: none;
+    }
   }
 }
