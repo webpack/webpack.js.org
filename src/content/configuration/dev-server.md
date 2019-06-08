@@ -1252,7 +1252,7 @@ module.exports = class CustomServer extends BaseServer {
   onConnection(f) {
     this.socket.on('connection', f);
   }
-}
+};
 ```
 
 Using `CustomServer.js` via path:
