@@ -35,14 +35,7 @@ __package.json__
 }
 ```
 
-Note: webpack-dev-server writes in-memory by default. We will need to write to disk for http-server to read our dist.
-
-```diff
-...
-devServer: {
-+ writeToDisk: true
-}
-```
+Note: [webpack DevServer](/configuration/dev-server/) writes in-memory by default. We'll need to enable [writeToDisk](/configuration/dev-server#devserverwritetodisk-) option in order for http-server to be able to serve files from `./dist` directory.
 
 If you haven't previously done so, run the command `npm run build` to build your project. Then run the command `npm start`. This should produce the following output:
 
