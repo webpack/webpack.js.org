@@ -4,6 +4,7 @@ import React from 'react';
 // Import Local Components
 import Shield from '../Shield/Shield';
 import SidebarItem from '../SidebarItem/SidebarItem';
+import Print from '../Print/Print';
 
 // Load Styling
 import './Sidebar.scss';
@@ -16,13 +17,15 @@ export default ({
   ...props
 }) => {
   let group;
-
   return (
     <nav className={`sidebar ${className}`}>
       <div className="sidebar__inner">
-        <a href="https://github.com/webpack/webpack/releases">
-          <Shield content="npm/v/webpack" label="webpack" />
-        </a>
+        <div className="sidebar__shields">
+          <a href="https://github.com/webpack/webpack/releases">
+            <Shield content="npm/v/webpack" label="webpack" />
+          </a>
+        </div>
+        <Print url={currentPage} />
 
         {pages.map((page, index) => {
           let displayGroup = group !== page.group && page.group !== '-';
