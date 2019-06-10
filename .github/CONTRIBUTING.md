@@ -16,7 +16,7 @@ Start by ensuring you have Node installed and forking the repository:
 
 Once you are in the project directory, run the following commands:
 
-- `npm install` to pull all dependencies.
+- `npm install` to pull all dependencies. Make sure to check notes below if you prefer Yarn.
 - `npm run build` to create a production version of the site.
 - `npm start` to develop on a local webpack-dev-server: [localhost:3000][3].
 - `npm run fetch` to retrieve external documentation/data.
@@ -29,6 +29,8 @@ See the `package.json` for the full list of `scripts`.
 > Note that __Node 6.9.x__ or above is required for the build process to run properly.
 
 > Note that a __Python version between v2.5.0 and 3.0.0__ is required for the [proselint][12] dependency.
+
+> Although __Yarn__ is not required to work with webpack docs, the core team is using it more extensively. If you prefer to use Yarn make sure you [got it installed][13] and run `yarn` to pull all dependencies, `yarn build` to build the project, or `yarn start` to start development server.
 
 > On Debian and Ubuntu operating systems you may have to use `node >= 7.0.0` to avoid build errors with `node-sass`. Please note that we don't officially support building on these systems.
 
@@ -59,7 +61,7 @@ Making a branch in your fork for your contribution is helpful in the following w
 
 ## Committing Your Changes
 
-Please follow the [conventionalcommits][10] specification. For example, for documentation
+Please follow the [conventional commits][10] specification. For example, for documentation
 changes, a short commit message may resemble the following:
 
 ``` md
@@ -125,3 +127,4 @@ any time spent fixing typos or clarifying sections in the documentation.
 [10]: http://conventionalcommits.org/
 [11]: https://github.com/conventional-changelog/standard-version
 [12]: https://github.com/amperser/proselint
+[13]: https://yarnpkg.com/lang/en/docs/install

@@ -6,12 +6,14 @@
 
   .ds-dropdown-menu {
     box-shadow: none;
+    margin-top: 19px;
+    margin-right: -37px;
 
     &:before {
       content: none;
     }
 
-    [class^=ds-dataset-] {
+    [class^='ds-dataset-'] {
       border-radius: 0;
       border-color: getColor(malibu);
       border-width: 2px 0;
@@ -73,7 +75,7 @@
     padding: 8px 16px 8px 12px;
   }
 
-  .ds-suggestion:nth-child(n+2) {
+  .ds-suggestion:nth-child(n + 2) {
     .algolia-docsearch-suggestion--category-header {
       border-top: 1px solid #dedede;
     }

@@ -1,6 +1,8 @@
 ---
 title: Writer's Guide
 sort: 2
+contributors:
+  - pranshuchittora
 ---
 
 The following sections contain all you need to know about editing and formatting the content within this site. Make sure to do some research before starting your edits or additions. Sometimes the toughest part is finding where the content should live and determining whether or not it already exists.
@@ -20,6 +22,7 @@ Each article contains a small section at the top written in [YAML Frontmatter](h
 ``` yaml
 ---
 title: My Article
+group: My Sub-Section
 sort: 3
 contributors:
   - [github username]
@@ -32,7 +35,8 @@ related:
 Let's break these down:
 
 - `title`: The name of the article.
-- `sort`: The order of the article within its section.
+- `group`: The name of the sub-section
+- `sort`: The order of the article within its section (or) sub-section if it is present.
 - `contributors`: A list of GitHub usernames who have contributed to this article.
 - `related`: Any related reading or useful examples.
 
@@ -70,6 +74,28 @@ function foo () {
 foo();
 ```
 
+#### Quotation
+
+Use single quotes in code snippets and project files (`.jsx`, `.scss` etc):
+
+
+```diff
+- import webpack from "webpack";
++ import webpack from 'webpack';
+```
+
+
+And in inline backticks:
+
+__correct__
+
+Set value to `'index.md'`...
+
+__incorrect__
+
+Set value to `"index.md"`...
+
+
 ### Lists
 
 - Boo
@@ -86,7 +112,7 @@ Parameter   | Explanation                                      | Input Type | De
 --devtool   | Define source map type for the bundled resources | string     | -
 --progress  | Print compilation progress in percentage         | boolean    | false
 
-Same goes for tables.
+Tables should also be ordered alphabetically.
 
 ### Configuration Properties
 
@@ -100,20 +126,36 @@ The [configuration](/configuration) properties should be ordered alphabetically 
 
 #### Blockquote
 
-**Syntax: \>**
+__Syntax: \>__
 
 > This is a blockquote.
 
 #### Tip
 
-**Syntax: T\>**
+__Syntax: T\>__
 
 T> This is a tip.
 
-**Syntax: W\>**
+__Syntax: W\>__
 
 W> This is a warning.
 
-**Syntax: ?\>**
+__Syntax: ?\>__
 
 ?> This is a todo.
+
+### Assumptions and simplicity
+
+Do not make assumptions when writing the documentation.
+
+```diff
+- You might already know how to optimize bundle for production...
++ As we've learned in [production guide](/guides/production/)...
+```
+
+Please do not assume things are simple. Avoid words like 'just', 'simply'.
+
+```diff
+- Simply run command...
++ Run the `command-name` command...
+```
