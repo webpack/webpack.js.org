@@ -4,9 +4,11 @@ sort: 14
 contributors:
   - thelarkinn
   - tbroadley
+  - byzyk
+  - madhavarshney
 ---
 
-These options allows you to control how webpack notifies you of assets and entrypoints that exceed a specific file limit. 
+These options allows you to control how webpack notifies you of assets and entry points that exceed a specific file limit.
 This feature was inspired by the idea of [webpack Performance Budgets](https://github.com/webpack/webpack/issues/3216).
 
 ## `performance`
@@ -25,39 +27,51 @@ Turns hints on/off. In addition, tells webpack to throw either an error or a war
 Given an asset is created that is over 250kb:
 
 ```js
-performance: {
-  hints: false
-}
+module.exports = {
+  //...
+  performance: {
+    hints: false
+  }
+};
 ```
 
 No hint warnings or errors are shown.
 
 ```js
-performance: {
-  hints: "warning"
-}
+module.exports = {
+  //...
+  performance: {
+    hints: 'warning'
+  }
+};
 ```
 
 A warning will be displayed notifying you of a large asset. We recommend something like this for development environments.
 
 ```js
-performance: {
-  hints: "error"
-}
+module.exports = {
+  //...
+  performance: {
+    hints: 'error'
+  }
+};
 ```
 
-An error will be displayed notifying you of a large asset. We recommend using `hints: "error"` during production builds to help prevent deploying production bundles that are too large, impacting webpage performance. 
+An error will be displayed notifying you of a large asset. We recommend using `hints: "error"` during production builds to help prevent deploying production bundles that are too large, impacting webpage performance.
 
 ## `performance.maxEntrypointSize`
 
 `int`
 
-An entrypoint represents all assets that would be utilized during initial load time for a specific entry. This option controls when webpack should emit performance hints based on the maximum entrypoint size. The default value is `250000` (bytes).
+An entry point represents all assets that would be utilized during initial load time for a specific entry. This option controls when webpack should emit performance hints based on the maximum entry point size. The default value is `250000` (bytes).
 
 ```js
-performance: {
-  maxEntrypointSize: 400000
-}
+module.exports = {
+  //...
+  performance: {
+    maxEntrypointSize: 400000
+  }
+};
 ```
 
 ## `performance.maxAssetSize`
@@ -68,31 +82,37 @@ An asset is any emitted file from webpack. This option controls when webpack emi
 
 
 ```js
-performance: {
-  maxAssetSize: 100000
-}
+module.exports = {
+  //...
+  performance: {
+    maxAssetSize: 100000
+  }
+};
 ```
 
 ## `performance.assetFilter`
 
 `Function`
 
-This property allows webpack to control what files are used to calculate performance hints. The default function is seen below: 
+This property allows webpack to control what files are used to calculate performance hints. The default function is seen below:
 
 ```js
-function(assetFilename) {
-	return !(/\.map$/.test(assetFilename))
-};
+function assetFilter(assetFilename) {
+  return !(/\.map$/.test(assetFilename));
+}
 ```
 
-You can override this property by passing your own function in: 
+You can override this property by passing your own function in:
 
-```js 
-performance: {
-  assetFilter: function(assetFilename) {
-    return assetFilename.endsWith('.js');
+```js
+module.exports = {
+  //...
+  performance: {
+    assetFilter: function(assetFilename) {
+      return assetFilename.endsWith('.js');
+    }
   }
-}
+};
 ```
 
 The example above will only give you performance hints based on `.js` files.

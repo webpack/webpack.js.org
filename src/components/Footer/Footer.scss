@@ -12,7 +12,7 @@
   justify-content: space-between;
   align-content: center;
   padding: 0.4em 0;
-  border-top:1px solid getColor(concrete);
+  border-top: 1px solid getColor(concrete);
 
   @include break {
     flex-direction: initial;
@@ -35,13 +35,13 @@
 
 .footer__left {
   @include break {
-    padding-left:1.5em;
+    padding-left: 1.5em;
   }
 }
 
 .footer__right {
   @include break {
-    padding-right:1.5em;
+    padding-right: 1.5em;
   }
 }
 
@@ -55,12 +55,12 @@
 }
 
 .footer__icon {
-  display:inline-block;
-  height:35px;
+  display: inline-block;
+  height: 35px;
 
   img {
-    width:auto;
-    height:100%;
+    width: auto;
+    height: 100%;
   }
 }
 
