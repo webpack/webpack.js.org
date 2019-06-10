@@ -1247,6 +1247,12 @@ module.exports = {
 };
 ```
 
+Usage via the CLI
+
+```bash
+webpack-dev-server --sockPath /socket
+```
+
 ## `devServer.sockPort`
 
 `number` `string`
@@ -1263,7 +1269,6 @@ module.exports = {
   }
 };
 ```
-
 
 ## `devServer.staticOptions`
 
