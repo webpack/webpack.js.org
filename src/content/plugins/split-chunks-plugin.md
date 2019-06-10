@@ -10,6 +10,7 @@ contributors:
   - jacobangel
   - madhavarshney
   - sakhisheikh
+  - superburrito
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
@@ -156,7 +157,7 @@ The algorithm is deterministic and changes to the modules will only have local i
 
 When the chunk has a name already, each part will get a new name derived from that name. Depending on the value of `optimization.splitChunks.hidePathInfo` it will add a key derived from the first module name or a hash of it.
 
-`maxSize` options is intended to be used with HTTP/2 and long term caching. It increase the request count for better caching. It could also be used to decrease the file size for faster rebuilding.
+`maxSize` option is intended to be used with HTTP/2 and long term caching. It increases the request count for better caching. It could also be used to decrease the file size for faster rebuilding.
 
 T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Actual priority is `maxInitialRequest/maxAsyncRequests < maxSize < minSize`.
 
@@ -164,7 +165,11 @@ T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Ac
 
 `boolean: true | function (module, chunks, cacheGroupKey) | string`
 
-The name of the split chunk. Providing `true` will automatically generate a name based on chunks and cache group key. Providing a string or function will allow you to use a custom name. If the name matches an entry point name, the entry point will be removed.
+The name of the split chunk. Providing `true` will automatically generate a name based on chunks and cache group key.
+
+Providing a string or a function allows you to use a custom name. Specifying either a string or a function that always returns the same string will merge all common modules and vendors into a single chunk. This might lead to bigger initial downloads and slow down page loads.
+
+If the `splitChunks.name` matches an [entry point](/configuration/entry-context/#entry) name, the entry point will be removed.
 
 T> It is recommended to set `splitChunks.name` to `false` for production builds so that it doesn't change names unnecessarily.
 
@@ -205,7 +210,7 @@ module.exports = {
 };
 ```
 
-#### `splitChunks.cacheGroups.priority`
+#### `splitChunks.cacheGroups.{cacheGroup}.priority`
 
 `number`
 

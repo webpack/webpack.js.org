@@ -2,7 +2,7 @@
 title: Command Line Interface
 sort: 2
 contributors:
-  - ev1stensberg
+  - evenstensberg
   - simon04
   - tbroadley
   - chenxsan
@@ -10,6 +10,7 @@ contributors:
   - madhavarshney
   - EugeneHlushko
   - byzyk
+  - wizardofhogwarts
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -30,7 +31,7 @@ Read the [installation guide](/guides/installation) if you don't already have we
 
 ## Usage with config file
 
-```sh
+```bash
 webpack [--config webpack.config.js]
 ```
 
@@ -97,7 +98,7 @@ This will form the bundle with both the files as separate entry points.
 
 ### Common Options
 
-W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/concepts/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
+W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/configuration/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
 
 __List all of the options available on the cli__
 
@@ -108,7 +109,7 @@ webpack -h
 
 __Build source using a config file__
 
-Specifies a different [configuration](/configuration) file to pick up. Use this if you want to specify something different than `webpack.config.js`, which is the default.
+Specifies a different [configuration](/configuration) file to pick up. Use this if you want to specify something different from `webpack.config.js`, which is the default.
 
 ```bash
 webpack --config example.config.js
@@ -227,7 +228,7 @@ Parameter            | Explanation                            | Usage
 
 ### Watch Options
 
-These options makes the build [watch](/configuration/watch/) for changes in files of the dependency graph and perform the build again.
+These options make the build [watch](/configuration/watch/) for changes in files of the dependency graph and perform the build again.
 
 Parameter                 | Explanation
 ------------------------- | ----------------------
@@ -331,7 +332,7 @@ For each module, the following details are included in the output as applicable:
 - `building`: time to build the module (e.g. loaders and parsing)
 - `dependencies`: time to identify and connect the module’s dependencies
 
-Paired with `--progress`, `--profile` gives you an in depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
+Paired with `--progress`, `--profile` gives you an in-depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
 
 ```bash
 webpack --progress --profile

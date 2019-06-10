@@ -14,6 +14,7 @@ contributors:
   - byzyk
   - pnevares
   - EugeneHlushko
+  - AnayaDesign
   - torifat
 related:
   - title: "webpack 4 beta — try it today!"
@@ -62,7 +63,7 @@ export function cube(x) {
 }
 ```
 
-Set the `mode` configuration option to [development](/concepts/mode/#mode-development) to make sure that the bundle is not minified:
+Set the `mode` configuration option to [development](/configuration/mode/#mode-development) to make sure that the bundle is not minified:
 
 __webpack.config.js__
 
@@ -92,8 +93,8 @@ __src/index.js__
 + import { cube } from './math.js';
 
   function component() {
--   var element = document.createElement('div');
-+   var element = document.createElement('pre');
+-   const element = document.createElement('div');
++   const element = document.createElement('pre');
 
 -   // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -177,7 +178,7 @@ Finally, `"sideEffects"` can also be set from the [`module.rules` configuration 
 
 ## Minify the Output
 
-So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that set the `mode` configuration option to [`production`](/concepts/mode/#mode-production) configuration option.
+So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that set the `mode` configuration option to [`production`](/configuration/mode/#mode-production) configuration option.
 
 __webpack.config.js__
 
@@ -213,7 +214,7 @@ So, what we've learned is that in order to take advantage of _tree shaking_, you
 - Use ES2015 module syntax (i.e. `import` and `export`).
 - Ensure no compilers transform your ES2015 module syntax into CommonJS modules (this is the default behavior of popular Babel preset @babel/preset-env - see [documentation](https://babeljs.io/docs/en/babel-preset-env#modules) for more details).
 - Add a `"sideEffects"` property to your project's `package.json` file.
-- Use [`production`](/concepts/mode/#mode-production) `mode` configuration option to enable [various optimizations](/concepts/mode/#usage) including minification and tree shaking.
+- Use [`production`](/configuration/mode/#mode-production) `mode` configuration option to enable [various optimizations](/configuration/mode/#usage) including minification and tree shaking.
 
 You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them to fall.
 
