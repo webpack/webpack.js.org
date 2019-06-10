@@ -5,8 +5,7 @@ import 'webpack.vote/dist/style.min.css';
 
 const Vote = ({ section, page }) => (
   <Container className="vote markdown">
-    <VoteApp
-      development={ false } />
+    <VoteApp development={false} />
   </Container>
 );
 

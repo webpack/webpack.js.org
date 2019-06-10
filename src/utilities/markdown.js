@@ -13,13 +13,11 @@ module.exports = function() {
     var parsed = parseAnchor(raw);
     var id = parsed.id;
 
-    return (
-      `<h${level} class='header'>
+    return `<h${level} class='header'>
         <a class='anchor' aria-hidden='true' href='#${id}' id='${id}'></a>
         <span class='text'>${text}</span>
         <a aria-label='${text}' class='icon-link' href='#${id}'></a>
-      </h${level}>\n`
-    );
+      </h${level}>\n`;
   };
 
   var codeTemplate = renderer.code;
@@ -43,7 +41,7 @@ module.exports = function() {
       code = code.replace(/\[([^[\]]+?)\]\((.+?)\)/g, match => {
         match = /\[([^[\]]+?)\]\((.+?)\)/.exec(match);
         links.push(`<a class="code-link" href="${match[2]}">${match[1]}</a>`);
-        return `MARKDOWNLINK_${(links.length - 1)}_`;
+        return `MARKDOWNLINK_${links.length - 1}_`;
       });
     }
 
@@ -52,14 +50,17 @@ module.exports = function() {
       code = code.replace(/ *<\/details>(\n)?/g, '\nMARKDOWNDETAILSEND\n');
       code = code.replace(/<summary>/g, '\nMARKDOWNSUMMARYSTART\n');
       code = code.replace(/ *<\/summary>/g, '\nMARKDOWNSUMMARYEND');
-      code = code.replace(/(?:)?( *)MARKDOWNDETAILSSTART([\s\S]*?)MARKDOWNSUMMARYSTART\n/g, 'MARKDOWNDETAILSSTART$2MARKDOWNSUMMARYSTART\n$1');
+      code = code.replace(
+        /(?:)?( *)MARKDOWNDETAILSSTART([\s\S]*?)MARKDOWNSUMMARYSTART\n/g,
+        'MARKDOWNDETAILSSTART$2MARKDOWNSUMMARYSTART\n$1'
+      );
     }
 
     var rendered = codeTemplate.call(this, code, lang, escaped);
 
     if (linksEnabled) {
       rendered = rendered.replace(/MARKDOWNLINK_(\d+)_/g, match => {
-        var idx = +(/MARKDOWNLINK_(\d+)_/.exec(match)[1]);
+        var idx = +/MARKDOWNLINK_(\d+)_/.exec(match)[1];
         return links[idx];
       });
     }
@@ -67,7 +68,10 @@ module.exports = function() {
     if (detailsEnabled) {
       rendered = rendered.replace(/MARKDOWNDETAILSSTART.*?\n/g, '<details>');
       rendered = rendered.replace(/\n.*?MARKDOWNDETAILSEND.*?\n/g, '</details>');
-      rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYSTART.*?\n/g, '<summary><span class="code-details-summary-span">');
+      rendered = rendered.replace(
+        /\n.*?MARKDOWNSUMMARYSTART.*?\n/g,
+        '<summary><span class="code-details-summary-span">'
+      );
       rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYEND.*?\n/g, '</span></summary>');
     }
 
@@ -97,7 +101,7 @@ module.exports = function() {
       var tokens = parseContent(content);
       tokens.links = [];
 
-      marked.Parser.prototype.tok = function () {
+      marked.Parser.prototype.tok = function() {
         if (this.token.type === 'table') {
           return handleTable.call(this, this.token);
         } else {
@@ -110,7 +114,8 @@ module.exports = function() {
 
     // Note that this should correspond with renderer.heading
     getAnchors: function(content) {
-      return marked.lexer(content)
+      return marked
+        .lexer(content)
         .filter(chunk => chunk.type === 'heading')
         .map(chunk => parseAnchor(chunk.text));
     }
@@ -123,7 +128,8 @@ function parseContent(data) {
   marked.lexer(data).forEach(function(t) {
     // add custom quotes
     if (t.type === 'paragraph') {
-      var quote = parseCustomQuote(t, 'T>', 'tip') ||
+      var quote =
+        parseCustomQuote(t, 'T>', 'tip') ||
         parseCustomQuote(t, 'W>', 'warning') ||
         parseCustomQuote(t, '?>', 'todo') ||
         t;
@@ -144,7 +150,7 @@ function parseContent(data) {
 }
 
 function parseAnchor(string) {
-  var stripped = string.replace(/\[(.+)\]\(.+\)/gi, '$1').replace(/(<([^>]+)>)/ig, '');
+  var stripped = string.replace(/\[(.+)\]\(.+\)/gi, '$1').replace(/(<([^>]+)>)/gi, '');
   var clean = stripped.replace(/`/g, '');
 
   return {
@@ -154,31 +160,31 @@ function parseAnchor(string) {
 }
 
 function handleHTMLSplit(tokens, htmlArray, merging) {
-  const htmlItem =  htmlArray[0];
+  const htmlItem = htmlArray[0];
   const tickSplit = htmlItem.split('`');
   const tickLength = tickSplit.length;
 
   htmlArray = htmlArray.slice(1);
 
   // detect start of the inline code
-  if(merging.length === 0 && tickLength%2 === 0) {
+  if (merging.length === 0 && tickLength % 2 === 0) {
     merging = htmlItem;
   }
   // append code inside the inline code
-  else if(merging.length > 0 && tickLength === 1) {
+  else if (merging.length > 0 && tickLength === 1) {
     merging += htmlItem;
   }
   // finish inline code
-  else if(merging.length > 0 && tickLength > 1) {
+  else if (merging.length > 0 && tickLength > 1) {
     htmlArray.unshift(tickSplit.slice(1, tickLength).join('`'));
-    merging += tickSplit[0]+'`';
+    merging += tickSplit[0] + '`';
     tokens = tokens.concat(parseContent(merging));
     merging = '';
-  }  else if (merging.length === 0) {
+  } else if (merging.length === 0) {
     tokens = tokens.concat(parseContent(htmlItem));
   }
 
-  if(htmlArray.length === 0) {
+  if (htmlArray.length === 0) {
     return tokens;
   }
 
@@ -186,34 +192,34 @@ function handleHTMLSplit(tokens, htmlArray, merging) {
 }
 
 function handleHTML(t) {
-    let tokens = [];
+  let tokens = [];
 
-    // Split code in markdown, so that HTML inside code is not parsed
-    const codeArray = t.text.split(/(```(.|\n)*```)/g).filter(v => (v && v !== '' && v !== '\n'));
+  // Split code in markdown, so that HTML inside code is not parsed
+  const codeArray = t.text.split(/(```(.|\n)*```)/g).filter(v => v && v !== '' && v !== '\n');
 
-    // if only one item in codeArray, then it's already parsed
-    if(codeArray.length == 1) {
-      const htmlArray = codeArray[0].split(/\s*(<[^>]*>)/g).filter(v => (v !== '' && v !== '\n'));
+  // if only one item in codeArray, then it's already parsed
+  if (codeArray.length == 1) {
+    const htmlArray = codeArray[0].split(/\s*(<[^>]*>)/g).filter(v => v !== '' && v !== '\n');
 
-      if (htmlArray.length == 1) {
-        return t;
-      }
+    if (htmlArray.length == 1) {
+      return t;
     }
+  }
 
-    codeArray.forEach(item => {
-      // if item is not code, then check for html tags and parse accordingly
-      if (item.indexOf('```') !== 0) {
-        // split all html tags
-        const htmlArray = item.split(/\s*(<[^>]*>)/g).filter(v => (v !== '' && v !== '\n'));
-        tokens = handleHTMLSplit(tokens, htmlArray, '');
-      }
-      // normally parse code block
-      else {
-        tokens = tokens.concat(parseContent(item));
-      }
-    });
+  codeArray.forEach(item => {
+    // if item is not code, then check for html tags and parse accordingly
+    if (item.indexOf('```') !== 0) {
+      // split all html tags
+      const htmlArray = item.split(/\s*(<[^>]*>)/g).filter(v => v !== '' && v !== '\n');
+      tokens = handleHTMLSplit(tokens, htmlArray, '');
+    }
+    // normally parse code block
+    else {
+      tokens = tokens.concat(parseContent(item));
+    }
+  });
 
-    return tokens;
+  return tokens;
 }
 
 function handleTable(t) {
@@ -265,7 +271,7 @@ function handleTableRow(content) {
 }
 
 function handleTableCell(content, flags) {
-  if(flags.header) {
+  if (flags.header) {
     return `<div class="table-th">${content}</div>`;
   }
 
@@ -286,11 +292,10 @@ function parseCustomQuote(token, match, className) {
     if (text.indexOf(match) === 0) {
       return {
         type: 'html',
-        text: (
+        text:
           `<blockquote class="${className}">` +
           `<div class="tip-content"> ${text.slice(2).trim()} </div>` +
           '</blockquote>'
-        )
       };
     }
   }
@@ -312,12 +317,11 @@ function handleTok() {
       return this.renderer.heading(
         this.inline.output(this.token.text),
         this.token.depth,
-        this.token.text);
+        this.token.text
+      );
     }
     case 'code': {
-      return this.renderer.code(this.token.text,
-        this.token.lang,
-        this.token.escaped);
+      return this.renderer.code(this.token.text, this.token.lang, this.token.escaped);
     }
     case 'blockquote_start': {
       while (this.next().type !== 'blockquote_end') {
@@ -337,9 +341,7 @@ function handleTok() {
     }
     case 'list_item_start': {
       while (this.next().type !== 'list_item_end') {
-        body += this.token.type === 'text'
-          ? this.parseText()
-          : this.tok();
+        body += this.token.type === 'text' ? this.parseText() : this.tok();
       }
 
       return this.renderer.listitem(body);
@@ -352,9 +354,10 @@ function handleTok() {
       return this.renderer.listitem(body);
     }
     case 'html': {
-      let html = !this.token.pre && !this.options.pedantic
-        ? this.inline.output(this.token.text)
-        : this.token.text;
+      let html =
+        !this.token.pre && !this.options.pedantic
+          ? this.inline.output(this.token.text)
+          : this.token.text;
       return this.renderer.html(html);
     }
     case 'paragraph': {
@@ -365,7 +368,6 @@ function handleTok() {
     }
   }
 }
-
 
 /**
  * Fixes escaped '|' characters in table cells.
@@ -383,20 +385,16 @@ function fixPipesEscapingForTableRow(row) {
       // Starting to handle broken chain by creating first cell to append content to.
       handlingBroken = true;
       fixedRow.push(fixBroken(cellString));
-
     } else if (!isBroken(cellString) && handlingBroken) {
       // Finishing to handle broken chain by appending the last element to the current cell.
       fixedRow[fixedRow.length - 1] += cellString;
       handlingBroken = false;
-
     } else if (isBroken(cellString) && handlingBroken) {
       // Appending next broken cell to the current cell.
       fixedRow[fixedRow.length - 1] += fixBroken(cellString);
-
     } else {
       // Just adding cell normally.
       fixedRow.push(cellString);
-
     }
 
     index++;
@@ -404,11 +402,11 @@ function fixPipesEscapingForTableRow(row) {
 
   return fixedRow;
 
-  function isBroken (cellString) {
+  function isBroken(cellString) {
     return cellString.endsWith('\\');
   }
 
-  function fixBroken (cellString) {
+  function fixBroken(cellString) {
     return cellString.replace(/\\$/, '|');
   }
 }

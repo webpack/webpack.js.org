@@ -23,10 +23,10 @@ function main() {
 }
 
 function buildContentTree(source, output) {
-  if(!source) {
+  if (!source) {
     return console.error('build-content-tree: you must provide a source path');
   }
-  if(!output) {
+  if (!output) {
     return console.error('build-content-tree: you must provide a output file name');
   }
 
@@ -36,7 +36,7 @@ function buildContentTree(source, output) {
     dir: source
   });
 
-  fs.writeFileSync(path.resolve(output), JSON.stringify(content, 2), (error) => {
+  fs.writeFileSync(path.resolve(output), JSON.stringify(content, 2), error => {
     if (error) {
       console.log('scripts/build-content-tree', error);
     } else {

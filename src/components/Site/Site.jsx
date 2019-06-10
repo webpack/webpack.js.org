@@ -59,7 +59,8 @@ class Site extends React.Component {
             {
               content: 'Documentation',
               url: '/concepts',
-              isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
+              isActive: url =>
+                /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
               children: this._strip(sections.filter(item => item.name !== 'contribute'))
             },
             { content: 'Contribute', url: '/contribute' },
@@ -68,10 +69,13 @@ class Site extends React.Component {
           ]}
         />
 
-        {isClient ? <SidebarMobile
-          isOpen={mobileSidebarOpen}
-          sections={this._strip(Content.children)}
-          toggle={this._toggleSidebar} /> : null}
+        {isClient ? (
+          <SidebarMobile
+            isOpen={mobileSidebarOpen}
+            sections={this._strip(Content.children)}
+            toggle={this._toggleSidebar}
+          />
+        ) : null}
 
         <Switch>
           <Route path="/" exact component={Splash} />
@@ -101,7 +105,9 @@ class Site extends React.Component {
                               pages={this._strip(
                                 section
                                   ? section.children
-                                  : Content.children.filter(item => item.type !== 'directory' && item.url !== '/')
+                                  : Content.children.filter(
+                                      item => item.type !== 'directory' && item.url !== '/'
+                                    )
                               )}
                             />
                             <Page {...page} content={content} />

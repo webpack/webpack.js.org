@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from '../Container/Container';
 import Link from '../Link/Link';
-import {PlaceholderComponent} from '../Placeholder/Placeholder';
+import { PlaceholderComponent } from '../Placeholder/Placeholder';
 import './StarterKits.scss';
 import isClient from '../../utilities/is-client';
 
@@ -18,21 +18,20 @@ const StarterKits = props => (
     <h1>Starter Kits</h1>
 
     <p>
-      The following table contains a curated list of starter kits that can
-      be used as a jumping off point for webpack-based projects. To add a new
-      kit to the list please visit{' '}
-      <Link to="https://github.com/ahfarmer/javascriptstuff-db">this repository</Link>{' '}
-      and submit a PR against this file:
+      The following table contains a curated list of starter kits that can be used as a jumping off
+      point for webpack-based projects. To add a new kit to the list please visit{' '}
+      <Link to="https://github.com/ahfarmer/javascriptstuff-db">this repository</Link> and submit a
+      PR against this file:
       <code>data/source/react-starter-projects.js</code>.
     </p>
 
     <blockquote className="warning">
       <div className="tip-content">
         Boilerplates should be used as <strong>Proof of Concepts</strong> to help you learn
-        different webpack techniques for various frameworks. Make sure you understand
-        what's going on in them and avoid copy and paste coding. Also note that none
-        of these are officially supported by webpack. If you run into an issue, please
-        report that to the maintainer(s) of the repository.
+        different webpack techniques for various frameworks. Make sure you understand what's going
+        on in them and avoid copy and paste coding. Also note that none of these are officially
+        supported by webpack. If you run into an issue, please report that to the maintainer(s) of
+        the repository.
       </div>
     </blockquote>
 
@@ -45,11 +44,11 @@ const StarterKits = props => (
             <div className="table-th">Tags</div>
           </div>
         </div>
-        { isClient ? (
+        {isClient ? (
           <React.Suspense fallback={<PlaceholderComponent />}>
             <StarterKitsTable />
-          </React.Suspense>) : null
-        }
+          </React.Suspense>
+        ) : null}
       </div>
     </div>
   </Container>

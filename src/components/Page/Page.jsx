@@ -5,7 +5,7 @@ import React from 'react';
 import PageLinks from '../PageLinks/PageLinks';
 import Markdown from '../Markdown/Markdown';
 import Contributors from '../Contributors/Contributors';
-import {PlaceholderString} from '../Placeholder/Placeholder';
+import { PlaceholderString } from '../Placeholder/Placeholder';
 import Configuration from '../Configuration/Configuration';
 
 // Load Styling
@@ -48,8 +48,7 @@ class Page extends React.Component {
 
     const { contentLoaded } = this.state;
     const loadRelated = contentLoaded && related && related.length !== 0;
-    const loadContributors =
-      contentLoaded && contributors && contributors.length !== 0;
+    const loadContributors = contentLoaded && contributors && contributors.length !== 0;
 
     const { content } = this.state;
 

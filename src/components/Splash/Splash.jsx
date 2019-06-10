@@ -5,7 +5,7 @@ import React from 'react';
 import Container from '../Container/Container';
 import SplashViz from '../SplashViz/SplashViz';
 import Markdown from '../Markdown/Markdown';
-import {PlaceholderComponent} from '../Placeholder/Placeholder';
+import { PlaceholderComponent } from '../Placeholder/Placeholder';
 
 // Import helpers
 import isClient from '../../utilities/is-client';
@@ -25,9 +25,11 @@ const Splash = () => (
     <div className="splash__section splash__section--dark page__content">
       <Container>
         <Markdown>
-          <div dangerouslySetInnerHTML={{
-            __html: SplashContent
-          }} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: SplashContent
+            }}
+          />
         </Markdown>
       </Container>
     </div>
@@ -43,7 +45,7 @@ const Splash = () => (
             great documentation and learning material!
           </p>
 
-          { isClient ? (
+          {isClient ? (
             <React.Suspense fallback={<PlaceholderComponent />}>
               <h2>Latest Sponsors</h2>
               <Support rank="latest" />
@@ -63,7 +65,7 @@ const Splash = () => (
               <h2>Backers</h2>
               <Support rank="backer" />
             </React.Suspense>
-          ) : null }
+          ) : null}
         </Markdown>
       </Container>
     </div>

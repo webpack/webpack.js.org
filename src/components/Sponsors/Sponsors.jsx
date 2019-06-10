@@ -15,18 +15,20 @@ export default props => {
     <div className="sponsors">
       <Link
         className="sponsors__content"
-        to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship">
-        <img src={ AGLogo } />
-        <img src={ WebpackIcon } style={{ width: '100px' }} />
-        <div style={{
-          marginTop: '1em',
-          fontSize: '2em',
-          textAlign: 'center',
-          color: '#535353'
-        }}>
+        to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship"
+      >
+        <img src={AGLogo} />
+        <img src={WebpackIcon} style={{ width: '100px' }} />
+        <div
+          style={{
+            marginTop: '1em',
+            fontSize: '2em',
+            textAlign: 'center',
+            color: '#535353'
+          }}
+        >
           ag-grid is proud to partner with webpack
         </div>
-
       </Link>
     </div>
   );

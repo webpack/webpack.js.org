@@ -23,34 +23,29 @@ export default class TextRotater extends React.PureComponent {
   state = {
     currentIndex: 0,
     contentHeight: 0
-  }
+  };
 
   render() {
     const { children, maxWidth } = this.props;
     const { currentIndex, contentHeight } = this.state;
     const childrenCount = React.Children.count(children);
 
-    const currentChild = React.cloneElement(
-      children[currentIndex], {
-        ref: c => (this.content = c)
-      }
-    );
+    const currentChild = React.cloneElement(children[currentIndex], {
+      ref: c => (this.content = c)
+    });
 
-    const nextChild = React.cloneElement(
-      children[
-        (currentIndex + 1) % childrenCount
-      ]
-    );
+    const nextChild = React.cloneElement(children[(currentIndex + 1) % childrenCount]);
 
     return (
       <div className="text-rotater">
         <div
           className="text-rotater__wrap"
-          ref={ trw => (this.textRotatorWrap = trw) }
-          onTransitionEnd={ this._handleTransitionEnd }
-          style={ { height: contentHeight, width: maxWidth } }>
-          { currentChild }
-          { nextChild }
+          ref={trw => (this.textRotatorWrap = trw)}
+          onTransitionEnd={this._handleTransitionEnd}
+          style={{ height: contentHeight, width: maxWidth }}
+        >
+          {currentChild}
+          {nextChild}
         </div>
       </div>
     );
@@ -69,24 +64,18 @@ export default class TextRotater extends React.PureComponent {
       }
     }, delay);
 
-    window.addEventListener(
-      'resize',
-      this._calculateContentHeight
-    );
+    window.addEventListener('resize', this._calculateContentHeight);
   }
 
   componentWillUnmount() {
-    window.removeEventListener(
-      'resize',
-      this._calculateContentHeight
-    );
+    window.removeEventListener('resize', this._calculateContentHeight);
   }
 
   _calculateContentHeight = () => {
     this.setState({
-      contentHeight: this.content.clientHeight,
+      contentHeight: this.content.clientHeight
     });
-  }
+  };
 
   _handleTransitionEnd = () => {
     const { children, repeatDelay } = this.props;
@@ -94,15 +83,18 @@ export default class TextRotater extends React.PureComponent {
     if (this.textRotatorWrap) {
       this.textRotatorWrap.classList.remove('text-rotater--slide-up');
 
-      this.setState({
-        currentIndex: (this.state.currentIndex + 1) % React.Children.count(children),
-      }, () => {
-        setTimeout(() => {
-          if (this.textRotatorWrap) {
-            this.textRotatorWrap.classList.add('text-rotater--slide-up');
-          }
-        }, repeatDelay);
-      });
+      this.setState(
+        {
+          currentIndex: (this.state.currentIndex + 1) % React.Children.count(children)
+        },
+        () => {
+          setTimeout(() => {
+            if (this.textRotatorWrap) {
+              this.textRotatorWrap.classList.add('text-rotater--slide-up');
+            }
+          }, repeatDelay);
+        }
+      );
     }
-  }
+  };
 }

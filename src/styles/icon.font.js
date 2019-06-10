@@ -1,9 +1,7 @@
 module.exports = {
-  files: [
-    './icons/*.svg'
-  ],
+  files: ['./icons/*.svg'],
   fontName: 'icons',
   cssTemplate: './icon.template.hbs',
   fixedWidth: true,
-  types: [ 'woff' ]
+  types: ['woff']
 };

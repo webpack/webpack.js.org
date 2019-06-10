@@ -15,7 +15,7 @@ export default class Dropdown extends React.Component {
 
   _closeDropdownOnEsc(e) {
     if (e.key === 'Escape' && this.state.active) {
-      this.setState({ active: false}, () => {
+      this.setState({ active: false }, () => {
         this.dropdownButton.focus();
       });
     }
@@ -32,43 +32,39 @@ export default class Dropdown extends React.Component {
     let activeMod = this.state.active ? 'dropdown__list--active' : '';
 
     return (
-      <nav 
-        className={ `dropdown ${className}` }
-        ref={ el => this.dropdown = el }
-        onMouseOver={ this._toggle.bind(this, true) }
-        onMouseLeave={ this._toggle.bind(this, false) }
+      <nav
+        className={`dropdown ${className}`}
+        ref={el => (this.dropdown = el)}
+        onMouseOver={this._toggle.bind(this, true)}
+        onMouseLeave={this._toggle.bind(this, false)}
       >
         <button
-          ref={ el => this.dropdownButton = el }
-          aria-haspopup='true'
-          aria-expanded={ String(this.state.active) }
-          aria-label='Select language'
-          onClick={ this._handleClick.bind(this) }
+          ref={el => (this.dropdownButton = el)}
+          aria-haspopup="true"
+          aria-expanded={String(this.state.active)}
+          aria-label="Select language"
+          onClick={this._handleClick.bind(this)}
         >
-          <img
-            className='dropdown__language'
-            alt='select language'
-            src={ LanguageIcon } />
+          <img className="dropdown__language" alt="select language" src={LanguageIcon} />
           {/* Commented out until media breakpoints are in place
           <span>{ items[0].title }</span> */}
-          <i aria-hidden='true' className='dropdown__arrow' />
+          <i aria-hidden="true" className="dropdown__arrow" />
         </button>
-        <div className={ `dropdown__list ${activeMod}` }>
+        <div className={`dropdown__list ${activeMod}`}>
           <ul>
-            {
-              items.map((item, i) => {
-                return (
-                  <li key={ item.title }>
-                    <a 
-                      onKeyDown={this._handleArrowKeys.bind(this, i, items.length - 1)}
-                      ref={ node => this.links ? this.links.push(node) : this.links = [node] } 
-                      href={ item.url }>
-                      <span lang={ item.lang }>{ item.title }</span>
-                    </a>
-                  </li>
-                );
-              })
-            }
+            {items.map((item, i) => {
+              return (
+                <li key={item.title}>
+                  <a
+                    onKeyDown={this._handleArrowKeys.bind(this, i, items.length - 1)}
+                    ref={node => (this.links ? this.links.push(node) : (this.links = [node]))}
+                    href={item.url}
+                  >
+                    <span lang={item.lang}>{item.title}</span>
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </nav>
@@ -99,7 +95,7 @@ export default class Dropdown extends React.Component {
   }
 
   _handleClick(e) {
-    this.setState({active: !this.state.active}, () => {
+    this.setState({ active: !this.state.active }, () => {
       if (this.state.active) {
         this.links[0].focus();
       }

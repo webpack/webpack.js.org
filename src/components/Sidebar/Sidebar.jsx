@@ -10,12 +10,7 @@ import Print from '../Print/Print';
 import './Sidebar.scss';
 
 // Create and export the component
-export default ({
-  className = '',
-  pages,
-  currentPage,
-  ...props
-}) => {
+export default ({ className = '', pages, currentPage, ...props }) => {
   let group;
   return (
     <nav className={`sidebar ${className}`}>

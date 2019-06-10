@@ -25,7 +25,9 @@ async function main() {
 
     await mkdirp(outputDir);
 
-    const repos = JSON.parse(await readFile(path.resolve(__dirname, `../../repositories/${type}.json`)));
+    const repos = JSON.parse(
+      await readFile(path.resolve(__dirname, `../../repositories/${type}.json`))
+    );
 
     for (const repo of repos) {
       const [org, packageName] = repo.split('/');
@@ -66,4 +68,3 @@ async function main() {
 }
 
 main();
-

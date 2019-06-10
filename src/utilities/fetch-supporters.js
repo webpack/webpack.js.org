@@ -71,7 +71,9 @@ const getAllOrders = async () => {
 
 getAllOrders()
   .then(orders => {
-    let supporters = orders.map(nodeToSupporter).sort((a, b) => b.totalDonations - a.totalDonations);
+    let supporters = orders
+      .map(nodeToSupporter)
+      .sort((a, b) => b.totalDonations - a.totalDonations);
 
     // Deduplicating supporters with multiple orders
     supporters = uniqBy(supporters, 'slug');
