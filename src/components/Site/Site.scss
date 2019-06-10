@@ -13,3 +13,11 @@
     flex: 0 0 280px;
   }
 }
+
+@media print {
+  header,
+  nav,
+  footer {
+    display: none;
+  }
+}

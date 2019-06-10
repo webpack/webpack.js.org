@@ -31,6 +31,11 @@ import './Site.scss';
 // Load Content Tree
 import Content from '../../_content.json';
 
+// call offline plugin so it can build
+if (isClient) {
+  require('offline-plugin/runtime').install();
+}
+
 class Site extends React.Component {
   state = {
     mobileSidebarOpen: false
@@ -77,6 +82,7 @@ class Site extends React.Component {
                   <Route path="/vote" component={Vote} />
                   <Route path="/organization" component={Organization} />
                   <Route path="/starter-kits" component={StarterKits} />
+                  <Route path="/app-shell" component={() => <React.Fragment />} />
                   {pages.map(page => (
                     <Route
                       key={page.url}

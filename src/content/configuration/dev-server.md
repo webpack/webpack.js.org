@@ -604,6 +604,43 @@ webpack-dev-server --info=false
 ```
 
 
+## `devServer.injectClient`
+
+`boolean: false` `function (compilerConfig)`
+
+Tells `devServer` to inject a client. Setting `devServer.injectClient` to `true` will result in always injecting a client. It is possible to provide a function to inject conditionally:
+
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    injectClient: (compilerConfig) => compilerConfig.name === 'only-include'
+  }
+};
+```
+
+
+## `devServer.injectHot`
+
+`boolean: false` `function (compilerConfig)`
+
+Tells `devServer` to inject a Hot Module Replacement. Setting `devServer.injectHot` to `true` will result in always injecting. It is possible to provide a function to inject conditionally:
+
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    hot: true,
+    injectHot: (compilerConfig) => compilerConfig.name === 'only-include'
+  }
+};
+```
+
+W> Make sure that [`devServer.hot`](#devserverhot) is set to `true` because `devServer.injectHot` only works with HMR.
+
+
 ## `devServer.inline`
 
 `boolean`
@@ -1175,6 +1212,24 @@ webpack-dev-server --socket socket
 ```
 
 
+## `devServer.sockHost`
+
+`string`
+
+Tells clients connected to `devServer` to use provided socket host.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    sockHost: 'myhost.test'
+  }
+};
+```
+
+
 ## `devServer.sockPath`
 
 `string: '/sockjs-node'`
@@ -1196,6 +1251,23 @@ Usage via the CLI
 
 ```bash
 webpack-dev-server --sockPath /socket
+```
+
+## `devServer.sockPort`
+
+`number` `string`
+
+Tells clients connected to `devServer` to use provided socket port.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    sockPort: 8080
+  }
+};
 ```
 
 ## `devServer.staticOptions`

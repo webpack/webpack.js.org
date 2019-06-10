@@ -34,3 +34,20 @@
   text-transform: uppercase;
   color: getColor(dusty-grey);
 }
+
+.sidebar__shields {
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    margin-right: 6px;
+
+    img {
+      height: 20px;
+    }
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}

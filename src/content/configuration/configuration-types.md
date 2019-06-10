@@ -10,6 +10,7 @@ contributors:
   - byzyk
   - EugeneHlushko
   - dhurlburtusa
+  - anshumanv
 ---
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
@@ -45,6 +46,8 @@ One option is to export a function from your webpack config instead of exporting
 ## Exporting a Promise
 
 webpack will run the function exported by the configuration file and wait for a Promise to be returned. Handy when you need to asynchronously load configuration variables.
+
+T> It is possible to export multiple promises by wrapping them into `Promise.all([/* Your promises */]).`
 
 ```js
 module.exports = () => {

@@ -35,7 +35,7 @@
 
 .footer__left {
   @include break {
-    padding-left:1.5em;
+    padding-left: 1.5em;
   }
 }
 
@@ -55,12 +55,12 @@
 }
 
 .footer__icon {
-  display:inline-block;
-  height:35px;
+  display: inline-block;
+  height: 35px;
 
   img {
-    width:auto;
-    height:100%;
+    width: auto;
+    height: 100%;
   }
 }
 

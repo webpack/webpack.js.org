@@ -36,6 +36,7 @@ __webpack.config.js__
       print: './src/print.js'
     },
     plugins: [
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Development'
@@ -161,7 +162,7 @@ __package.json__
       "file-loader": "^0.11.2",
       "html-webpack-plugin": "^2.29.0",
       "style-loader": "^0.18.2",
-      "webpack": "^3.0.0",
+      "webpack": "^4.30.0",
       "xml-loader": "^1.2.1"
     }
   }
@@ -214,6 +215,7 @@ __webpack.config.js__
 +     contentBase: './dist'
 +   },
     plugins: [
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Development'
@@ -256,7 +258,7 @@ __package.json__
       "file-loader": "^0.11.2",
       "html-webpack-plugin": "^2.29.0",
       "style-loader": "^0.18.2",
-      "webpack": "^3.0.0",
+      "webpack": "^4.30.0",
       "xml-loader": "^1.2.1"
     }
   }
@@ -379,7 +381,7 @@ __package.json__
       "file-loader": "^0.11.2",
       "html-webpack-plugin": "^2.29.0",
       "style-loader": "^0.18.2",
-      "webpack": "^3.0.0",
+      "webpack": "^4.30.0",
       "webpack-dev-middleware": "^1.12.0",
       "xml-loader": "^1.2.1"
     }
