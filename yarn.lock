@@ -9111,18 +9111,6 @@ prism-languages@0.4.0:
   resolved "https://registry.yarnpkg.com/prism-languages/-/prism-languages-0.4.0.tgz#7b36964ac896909f888d3355aa9ac6055b116e87"
   integrity sha512-Qfg/joAMAV3Dl0Ot79WV+5TZQUh9pc149HEtBO5/APiWzMAL8rJmBvH8C7uIlScBQpdW9KOQqm60wuHbKWbOVg==
 
-prism-languages@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/prism-languages/-/prism-languages-0.3.3.tgz#79c395b4e25d4c4b12b9687beee7cbfa2373e1e4"
-  integrity sha1-ecOVtOJdTEsSuWh77ufL+iNz4eQ=
-
-prismjs@^1.9.0:
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.16.0.tgz#406eb2c8aacb0f5f0f1167930cb83835d10a4308"
-  integrity sha512-OA4MKxjFZHSvZcisLGe14THYsug/nF6O1f0pAJc0KN0wTyAcLqmsbE+lTGKSpyh+9pEW57+k6pg2AfYR+coyHA==
-  optionalDependencies:
-    clipboard "^2.0.0"
-
 prismjs@~1.14.0:
   version "1.14.0"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.14.0.tgz#bbccfdb8be5d850d26453933cb50122ca0362ae0"
@@ -9388,11 +9376,6 @@ raw-body@2.3.3:
     http-errors "1.6.3"
     iconv-lite "0.4.23"
     unpipe "1.0.0"
-
-raw-loader@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/raw-loader/-/raw-loader-0.5.1.tgz#0c3d0beaed8a01c966d9787bf778281252a979aa"
-  integrity sha1-DD0L6u2KAclm2Xh793goElKpeao=
 
 rc@^1.0.1, rc@^1.1.0, rc@^1.1.6, rc@^1.2.7, rc@~1.2.7:
   version "1.2.8"
