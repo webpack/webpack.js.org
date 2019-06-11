@@ -5,6 +5,7 @@ contributors:
   - simon04
   - re-fort
   - byzyk
+  - seckin92
 ---
 
 Automatically load modules instead of having to `import` or `require` them everywhere.
@@ -25,10 +26,20 @@ new webpack.ProvidePlugin({
 });
 ```
 
-Whenever the `identifier` is encountered as free variable in a module, the `module` is loaded automatically and the `identifier` is filled with the exports of the loaded `module` (of `property` in order to support named exports).
+By default, module resolution path is current folder (`./**)` and `node_modules`.
 
-W> For importing the default export of an ES2015 module, you have to specify the default property of module.
+It is also possible to specify full path:
 
+```js
+new webpack.ProvidePlugin({
+  identifier: path.resolve(path.join(__dirname, 'src/module1'))
+  // ...
+});
+```
+
+Whenever the `identifier` is encountered as free variable in a module, the `module` is loaded automatically and the `identifier` is filled with the exports of the loaded `module` (or `property` in order to support named exports).
+
+For importing the default export of an ES2015 module, you have to specify the default property of module.
 
 ## Usage: jQuery
 

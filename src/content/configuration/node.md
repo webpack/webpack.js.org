@@ -7,6 +7,7 @@ contributors:
   - oneforwonder
   - Rob--W
   - byzyk
+  - EugeneHlushko
 ---
 
 These options configure whether to polyfill or mock certain [Node.js globals](https://nodejs.org/docs/latest/api/globals.html) and modules. This allows code originally written for the Node.js environment to run in other environments like the browser.
@@ -16,7 +17,7 @@ This feature is provided by webpack's internal [`NodeStuffPlugin`](https://githu
 
 ## `node`
 
-`object`
+`boolean: false | object`
 
 This is an object where each property is the name of a Node global or module and each value may be one of the following...
 
@@ -82,8 +83,8 @@ Default: `"mock"`
 
 Options:
 
-- `true`: The filename of the **input** file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
-- `false`: The regular Node.js `__filename` behavior. The filename of the **output** file when run in a Node.js environment.
+- `true`: The filename of the __input__ file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
+- `false`: The regular Node.js `__filename` behavior. The filename of the __output__ file when run in a Node.js environment.
 - `"mock"`: The fixed value `"index.js"`.
 
 
@@ -95,8 +96,8 @@ Default: `"mock"`
 
 Options:
 
-- `true`: The dirname of the **input** file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
-- `false`: The regular Node.js `__dirname` behavior. The dirname of the **output** file when run in a Node.js environment.
+- `true`: The dirname of the __input__ file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
+- `false`: The regular Node.js `__dirname` behavior. The dirname of the __output__ file when run in a Node.js environment.
 - `"mock"`: The fixed value `"/"`.
 
 

@@ -5,6 +5,8 @@ contributors:
   - TheLarkInn
   - simon04
   - rouzbeh84
+  - EugeneHlushko
+  - byzyk
 related:
    - title: JavaScript Module Systems Showdown
      url: https://auth0.com/blog/javascript-module-systems-showdown/
@@ -24,26 +26,26 @@ webpack builds on lessons learned from these systems and applies the concept of 
 
 In contrast to [Node.js modules](https://nodejs.org/api/modules.html), webpack _modules_ can express their _dependencies_ in a variety of ways. A few examples are:
 
-* An [ES2015 `import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) statement
-* A [CommonJS](http://www.commonjs.org/specs/modules/1.0/) `require()` statement
-* An [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) `define` and `require` statement
-* An [`@import` statement](https://developer.mozilla.org/en-US/docs/Web/CSS/@import) inside of a css/sass/less file.
-* An image url in a stylesheet (`url(...)`) or html (`<img src=...>`) file.
+- An [ES2015 `import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) statement
+- A [CommonJS](http://www.commonjs.org/specs/modules/1.0/) `require()` statement
+- An [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) `define` and `require` statement
+- An [`@import` statement](https://developer.mozilla.org/en-US/docs/Web/CSS/@import) inside of a css/sass/less file.
+- An image url in a stylesheet (`url(...)`) or html (`<img src=...>`) file.
 
 T> webpack 1 requires a specific loader to convert ES2015 `import`, however this is possible out of the box via webpack 2
 
 ## Supported Module Types
 
-webpack supports modules written in a variety of languages and preprocessors, via _loaders_. _Loaders_ describe to webpack **how** to process non-JavaScript _modules_ and include these _dependencies_ into your _bundles_.
+webpack supports modules written in a variety of languages and preprocessors, via _loaders_. _Loaders_ describe to webpack __how__ to process non-JavaScript _modules_ and include these _dependencies_ into your _bundles_.
 The webpack community has built _loaders_ for a wide variety of popular languages and language processors, including:
 
-* [CoffeeScript](http://coffeescript.org)
-* [TypeScript](https://www.typescriptlang.org)
-* [ESNext (Babel)](https://babeljs.io)
-* [Sass](http://sass-lang.com)
-* [Less](http://lesscss.org)
-* [Stylus](http://stylus-lang.com)
+- [CoffeeScript](http://coffeescript.org)
+- [TypeScript](https://www.typescriptlang.org)
+- [ESNext (Babel)](https://babeljs.io)
+- [Sass](http://sass-lang.com)
+- [Less](http://lesscss.org)
+- [Stylus](http://stylus-lang.com)
 
-And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for **any stack**, while staying **non-opinionated** about your development, testing, and production workflows.
+And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for __any stack__, while staying __non-opinionated__ about your development, testing, and production workflows.
 
-For a full list, see [**the list of loaders**](/loaders) or [**write your own**](/api/loaders).
+For a full list, see [__the list of loaders__](/loaders) or [__write your own__](/api/loaders).

@@ -8,6 +8,9 @@ contributors:
   - 5angel
   - marioacc
   - byzyk
+  - EugeneHlushko
+  - AnayaDesign
+  - chenxsan
 ---
 
 Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
@@ -88,7 +91,7 @@ export function wordToNum(word) {
 
 The usage specification for the library use will be as follows:
 
-* __ES2015 module import:__
+- __ES2015 module import:__
 
 ``` js
 import * as webpackNumbers from 'webpack-numbers';
@@ -96,18 +99,18 @@ import * as webpackNumbers from 'webpack-numbers';
 webpackNumbers.wordToNum('Two');
 ```
 
-* __CommonJS module require:__
+- __CommonJS module require:__
 
 ``` js
-var webpackNumbers = require('webpack-numbers');
+const webpackNumbers = require('webpack-numbers');
 // ...
 webpackNumbers.wordToNum('Two');
 ```
 
-* __AMD module require:__
+- __AMD module require:__
 
 ``` js
-require(['webpackNumbers'], function ( webpackNumbers) {
+require(['webpackNumbers'], function (webpackNumbers) {
   // ...
   webpackNumbers.wordToNum('Two');
 });
@@ -133,8 +136,8 @@ The consumer also can use the library by loading it via a script tag:
 
 Note that we can also configure it to expose the library in the following ways:
 
-* Property in the global object, for node.
-* Property in the `this` object.
+- Property in the global object, for node.
+- Property in the `this` object.
 
 For full library configuration and code please refer to [webpack-library-example](https://github.com/kalcifer/webpack-library-example).
 
@@ -143,23 +146,23 @@ For full library configuration and code please refer to [webpack-library-example
 
 Now let's bundle this library in a way that will achieve the following goals:
 
-* Without bundling `lodash`, but requiring it to be loaded by the consumer using `externals`.
-* Setting the library name as `webpack-numbers`.
-* Exposing the library as a variable called `webpackNumbers`.
-* Being able to access the library inside Node.js.
+- Using `externals` to avoid bundling `lodash`, so the consumer is required to load it.
+- Setting the library name as `webpack-numbers`.
+- Exposing the library as a variable called `webpackNumbers`.
+- Being able to access the library inside Node.js.
 
 Also, the consumer should be able to access the library the following ways:
 
-* ES2015 module. i.e. `import webpackNumbers from 'webpack-numbers'`.
-* CommonJS module. i.e. `require('webpack-numbers')`.
-* Global variable when included through `script` tag.
+- ES2015 module. i.e. `import webpackNumbers from 'webpack-numbers'`.
+- CommonJS module. i.e. `require('webpack-numbers')`.
+- Global variable when included through `script` tag.
 
 We can start with this basic webpack configuration:
 
 __webpack.config.js__
 
 ``` js
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
@@ -180,7 +183,7 @@ This can be done using the `externals` configuration:
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',
@@ -238,7 +241,7 @@ For widespread use of the library, we would like it to be compatible in differen
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',
@@ -266,7 +269,7 @@ This exposes your library bundle available as a global variable named `webpackNu
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
+  const path = require('path');
 
   module.exports = {
     entry: './src/index.js',
@@ -290,12 +293,12 @@ __webpack.config.js__
 
 You can expose the library in the following ways:
 
-* Variable: as a global variable made available by a `script` tag (`libraryTarget:'var'`).
-* This: available through the `this` object (`libraryTarget:'this'`).
-* Window: available trough the `window` object, in the browser (`libraryTarget:'window'`).
-* UMD: available after AMD or CommonJS `require` (`libraryTarget:'umd'`).
+- Variable: as a global variable made available by a `script` tag (`libraryTarget:'var'`).
+- This: available through the `this` object (`libraryTarget:'this'`).
+- Window: available trough the `window` object, in the browser (`libraryTarget:'window'`).
+- UMD: available after AMD or CommonJS `require` (`libraryTarget:'umd'`).
 
-If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output#output-librarytarget) there for a detailed list of all available options.
+If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output#outputlibrarytarget) there for a detailed list of all available options.
 
 W> With webpack 3.5.5, using `libraryTarget: { root:'_' }` doesn't work properly (as stated in [issue 4824](https://github.com/webpack/webpack/issues/4824)). However, you can set `libraryTarget: { var: '_' }` to expect the library as a global variable.
 
@@ -330,4 +333,4 @@ W> The `module` property should point to a script that utilizes ES2015 module sy
 
 Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.
 
-T> To expose stylesheets associated with your library, the [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin) should be used. Users can then consume and load these as they would any other stylesheet.
+T> To expose stylesheets associated with your library, the [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin) should be used. Users can then consume and load these as they would any other stylesheet.
