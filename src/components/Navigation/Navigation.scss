@@ -119,7 +119,7 @@
   text-shadow: 0 0 0 #666;
   transition: all 250ms;
 
-  &::-webkit-input-placeholder{
+  &::-webkit-input-placeholder {
     color: lighten(getColor(fiord), 15%);
     text-shadow: none;
     -webkit-text-fill-color: initial;
@@ -213,8 +213,12 @@
 }
 
 @media (max-width: 720px) {
-  .navigation__mobile { display: block; }
-  .navigation__items { display: none; }
+  .navigation__mobile {
+    display: block;
+  }
+  .navigation__items {
+    display: none;
+  }
   .navigation--search .navigation__logo {
     pointer-events: none;
     overflow: hidden;

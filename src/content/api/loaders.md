@@ -10,18 +10,19 @@ contributors:
   - EugeneHlushko
   - jantimon
   - superburrito
+  - wizardofhogwarts
 ---
 
 A loader is just a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
 
-The first loader is passed one argument: the content of the resource file. The compiler expects a result from the last loader. The result should be a `String` or a `Buffer` (which is converted to a string), representing the JavaScript source code of the module. An optional SourceMap result (as JSON object) may also be passed.
+The first loader is passed one argument: the content of the resource file. The compiler expects a result from the last loader. The result should be a `String` or a `Buffer` (which is converted to a string), representing the JavaScript source code of the module. An optional SourceMap result (as a JSON object) may also be passed.
 
 A single result can be returned in __sync mode__. For multiple results the `this.callback()` must be called. In __async mode__ `this.async()` must be called to indicate that the [loader runner](https://github.com/webpack/loader-runner) should wait for an asynchronous result. It returns `this.callback()`. Then the loader must return `undefined` and call that callback.
 
 
 ## Examples
 
-The following sections provide some basic examples of the different types of loaders. Note that the `map` and `meta` parameters are optional, see [`this.callback`](/api/loaders#this-callback) below.
+The following sections provide some basic examples of the different types of loaders. Note that the `map` and `meta` parameters are optional, see [`this.callback`](#thiscallback) below.
 
 ### Synchronous Loaders
 
@@ -48,7 +49,7 @@ module.exports = function(content, map, meta) {
 
 ### Asynchronous Loaders
 
-For asynchronous loaders, [`this.async`](/api/loaders#this-async) is used to retrieve the `callback` function:
+For asynchronous loaders, [`this.async`](#this-async) is used to retrieve the `callback` function:
 
 __async-loader.js__
 
@@ -74,7 +75,7 @@ module.exports = function(content, map, meta) {
 };
 ```
 
-T> Loaders were originally designed to work in synchronous loader pipelines, like Node.js (using [enhanced-require](https://github.com/webpack/enhanced-require)), _and_ asynchronous pipelines, like in webpack. However, since expensive synchronous computations are a bad idea in a single-threaded environment like Node.js, we advise to make your loader asynchronously if possible. Synchronous loaders are ok if the amount of computation is trivial.
+T> Loaders were originally designed to work in synchronous loader pipelines, like Node.js (using [enhanced-require](https://github.com/webpack/enhanced-require)), _and_ asynchronous pipelines, like in webpack. However, since expensive synchronous computations are a bad idea in a single-threaded environment like Node.js, we advise making your loader asynchronous if possible. Synchronous loaders are ok if the amount of computation is trivial.
 
 
 ### "Raw" Loader
@@ -190,7 +191,7 @@ __Loader API version.__ Currently `2`. This is useful for providing backwards co
 
 ### `this.context`
 
-__The directory of the module.__ Can be used as context for resolving other stuff.
+__The directory of the module.__ Can be used as a context for resolving other stuff.
 
 In the example: `/abc` because `resource.js` is in this directory
 
@@ -233,7 +234,7 @@ this.callback(
 1. The first argument must be an `Error` or `null`
 2. The second argument a `string` or a [`Buffer`](https://nodejs.org/api/buffer.html).
 3. Optional: The third argument must be a source map that is parsable by [this module](https://github.com/mozilla/source-map).
-4. Optional: The fourth option, ignored by webpack, can be anything (e.g. some meta data).
+4. Optional: The fourth option, ignored by webpack, can be anything (e.g. some metadata).
 
 T> It can be useful to pass an abstract syntax tree (AST), like [`ESTree`](https://github.com/estree/estree), as the fourth argument (`meta`) to speed up the build time if you want to share common ASTs between loaders.
 
@@ -260,7 +261,7 @@ cacheable(flag = true: boolean)
 
 By default, loader results are flagged as cacheable. Call this method passing `false` to make the loader's result not cacheable.
 
-A cacheable loader must have a deterministic result, when inputs and dependencies haven't changed. This means the loader shouldn't have other dependencies than specified with `this.addDependency`.
+A cacheable loader must have a deterministic result when inputs and dependencies haven't changed. This means the loader shouldn't have other dependencies than specified with `this.addDependency`.
 
 
 ### `this.loaders`
@@ -337,7 +338,7 @@ T> Loaders were originally designed to also work as Babel transforms. Therefore 
 
 ### `this.sourceMap`
 
-Should a source map be generated. Since generating source maps can be an expensive task, you should check if source maps are actually requested.
+Tells if source map should be generated. Since generating source maps can be an expensive task, you should check if source maps are actually requested.
 
 
 ### `this.emitWarning`
@@ -435,6 +436,13 @@ Emit a file. This is webpack-specific.
 Access to the `compilation`'s `inputFileSystem` property.
 
 
+### `this.mode`
+
+Read in which [`mode`](/configuration/mode/) webpack is running.
+
+Possible values: `'production'`, `'development'`, `'none'`
+
+
 ## Deprecated context properties
 
 W> The usage of these properties is highly discouraged since we are planning to remove them from the context. They are still listed here for documentation purposes.
@@ -460,12 +468,12 @@ Resolve a request like a require expression.
 
 ### `this.value`
 
-Pass values to the next loader. If you know what your result exports if executed as module, set this value here (as a only element array).
+Pass values to the next loader. If you know what your result exports if executed as a module, set this value here (as an only element array).
 
 
 ### `this.inputValue`
 
-Passed from the last loader. If you would execute the input argument as module, consider reading this variable for a shortcut (for performance).
+Passed from the last loader. If you would execute the input argument as a module, consider reading this variable for a shortcut (for performance).
 
 
 ### `this.options`
@@ -480,7 +488,7 @@ A boolean flag. It is set when in debug mode.
 
 ### `this.minimize`
 
-Should the result be minimized.
+Tells if result should be minimized.
 
 
 ### `this._compilation`
@@ -585,7 +593,7 @@ Not following this recommendation will make your code webpack-specific and non-s
 
 T> A relative `matchResource` will resolve relative to the current context of the containing module.
 
-When a `matchResource` is set, it will be used to match with the [`module.rules`](/configuration/module/#module-rules) instead of the original resource. This can be useful if further loaders should be applied to the resource, or if the module type need to be changed. It's also displayed in the stats and used for matching [`Rule.issuer`](/configuration/module/#rule-issuer) and [`test` in `splitChunks`](/plugins/split-chunks-plugin/#splitchunks-cachegroups-cachegroup-test).
+When a `matchResource` is set, it will be used to match with the [`module.rules`](/configuration/module/#module-rules) instead of the original resource. This can be useful if further loaders should be applied to the resource, or if the module type needs to be changed. It's also displayed in the stats and used for matching [`Rule.issuer`](/configuration/module/#rule-issuer) and [`test` in `splitChunks`](/plugins/split-chunks-plugin/#splitchunks-cachegroups-cachegroup-test).
 
 Example:
 

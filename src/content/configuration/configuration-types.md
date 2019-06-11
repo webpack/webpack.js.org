@@ -10,6 +10,7 @@ contributors:
   - byzyk
   - EugeneHlushko
   - dhurlburtusa
+  - anshumanv
 ---
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
@@ -46,6 +47,8 @@ One option is to export a function from your webpack config instead of exporting
 
 webpack will run the function exported by the configuration file and wait for a Promise to be returned. Handy when you need to asynchronously load configuration variables.
 
+T> It is possible to export multiple promises by wrapping them into `Promise.all([/* Your promises */]).`
+
 ```js
 module.exports = () => {
   return new Promise((resolve, reject) => {
@@ -62,7 +65,7 @@ module.exports = () => {
 
 ## Exporting multiple configurations
 
-Instead of exporting a single configuration object/function, you may export multiple configurations (multiple functions are supported since webpack 3.1.0). When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/configuration/output#output-librarytarget) such as AMD and CommonJS:
+Instead of exporting a single configuration object/function, you may export multiple configurations (multiple functions are supported since webpack 3.1.0). When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/configuration/output#outputlibrarytarget) such as AMD and CommonJS:
 
 ```js
 module.exports = [{

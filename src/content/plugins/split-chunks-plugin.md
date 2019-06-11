@@ -157,7 +157,7 @@ The algorithm is deterministic and changes to the modules will only have local i
 
 When the chunk has a name already, each part will get a new name derived from that name. Depending on the value of `optimization.splitChunks.hidePathInfo` it will add a key derived from the first module name or a hash of it.
 
-`maxSize` options is intended to be used with HTTP/2 and long term caching. It increase the request count for better caching. It could also be used to decrease the file size for faster rebuilding.
+`maxSize` option is intended to be used with HTTP/2 and long term caching. It increases the request count for better caching. It could also be used to decrease the file size for faster rebuilding.
 
 T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Actual priority is `maxInitialRequest/maxAsyncRequests < maxSize < minSize`.
 
@@ -210,7 +210,7 @@ module.exports = {
 };
 ```
 
-#### `splitChunks.cacheGroups.priority`
+#### `splitChunks.cacheGroups.{cacheGroup}.priority`
 
 `number`
 

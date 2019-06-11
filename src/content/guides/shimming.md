@@ -9,13 +9,15 @@ contributors:
   - svyandun
   - byzyk
   - EugeneHlushko
+  - AnayaDesign
   - dhurlburtusa
   - plr108
+  - NicolasLetellier
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
   - title: useBuiltIns in babel-preset-env
-    url: https://github.com/babel/babel-preset-env#usebuiltins
+    url: https://babeljs.io/docs/en/babel-preset-env#usebuiltins
 ---
 
 The `webpack` compiler can understand modules written as ES2015 modules, CommonJS or AMD. However, some third party libraries may expect global dependencies (e.g. `$` for `jQuery`). The libraries might also create globals which need to be exported. These "broken modules" are one instance where _shimming_ comes into play.
@@ -55,7 +57,7 @@ __src/index.js__
 - import _ from 'lodash';
 -
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
 -   // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -106,7 +108,7 @@ __src/index.js__
 
 ``` diff
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +   element.innerHTML = join(['Hello', 'webpack'], ' ');
@@ -147,7 +149,7 @@ Some legacy modules rely on `this` being the `window` object. Let's update our `
 
 ``` diff
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     element.innerHTML = join(['Hello', 'webpack'], ' ');
 +
@@ -211,8 +213,8 @@ __project__
 __src/globals.js__
 
 ``` js
-var file = 'blah.txt';
-var helpers = {
+const file = 'blah.txt';
+const helpers = {
   test: function() { console.log('test something'); },
   parse: function() { console.log('parse something'); }
 };
@@ -274,7 +276,7 @@ __src/index.js__
 + import 'babel-polyfill';
 +
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     element.innerHTML = join(['Hello', 'webpack'], ' ');
 
@@ -303,7 +305,7 @@ __src/index.js__
 - import 'babel-polyfill';
 -
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     element.innerHTML = join(['Hello', 'webpack'], ' ');
 
@@ -381,13 +383,13 @@ __dist/index.html__
     <head>
       <title>Getting Started</title>
 +     <script>
-+       var modernBrowser = (
++       const modernBrowser = (
 +         'fetch' in window &&
 +         'assign' in Object
 +       );
 +
 +       if ( !modernBrowser ) {
-+         var scriptElement = document.createElement('script');
++         const scriptElement = document.createElement('script');
 +
 +         scriptElement.async = false;
 +         scriptElement.src = '/polyfills.bundle.js';
@@ -407,7 +409,7 @@ __src/index.js__
 
 ``` diff
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     element.innerHTML = join(['Hello', 'webpack'], ' ');
 
@@ -440,7 +442,7 @@ import 'core-js/modules/web.immediate';
 import 'core-js/modules/web.dom.iterable';
 ```
 
-See [the repository](https://github.com/babel/babel-preset-env) for more information.
+See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset-env) for more information.
 
 
 ## Node Built-Ins

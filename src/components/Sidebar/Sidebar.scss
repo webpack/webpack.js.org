@@ -6,7 +6,6 @@
   display: none;
   width: 100%;
   max-width: 280px;
-  max-height: 100%;
   will-change: transform;
 
   @include break {
@@ -18,7 +17,14 @@
   padding: 1.5em;
   position: sticky;
   top: -1px;
-  overflow: hidden;
+  overflow: scroll;
+  max-height: 100vh;
+  // To hide scrollbar in Firefox
+  scrollbar-width: none;
+  // To hide scrollbar in Chrome
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
 }
 
 .sidebar__group {
@@ -27,4 +33,21 @@
   font-weight: 600;
   text-transform: uppercase;
   color: getColor(dusty-grey);
+}
+
+.sidebar__shields {
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    margin-right: 6px;
+
+    img {
+      height: 20px;
+    }
+
+    &:last-child {
+      margin: 0;
+    }
+  }
 }

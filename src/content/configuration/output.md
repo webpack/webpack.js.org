@@ -788,7 +788,7 @@ Note that `[hash]` in this parameter will be replaced with an hash of the compil
 
 `boolean`
 
-Tells webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` [mode](/concepts/mode/) respectively.
+Tells webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` [mode](/configuration/mode/) respectively.
 
 W> While the data this comments can provide is very useful during development when reading the generated code, it __should not__ be used in production.
 
@@ -977,3 +977,20 @@ module.exports = {
 ```
 
 will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.
+
+## `output.futureEmitAssets`
+
+`boolean: false`
+
+Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted. 
+
+W> `output.futureEmitAssets` option will be removed in webpack v5.0.0 and this behaviour will become the new default.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    futureEmitAssets: true
+  }
+};
+```

@@ -8,6 +8,7 @@ contributors:
   - sudarsangp
   - chenxsan
   - EugeneHlushko
+  - AnayaDesign
 ---
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
@@ -30,8 +31,8 @@ __dist/index.html__
 +    <title>Asset Management</title>
     </head>
     <body>
--     <script src="./main.js"></script>
-+     <script src="./bundle.js"></script>
+-     <script src="main.js"></script>
++     <script src="bundle.js"></script>
     </body>
   </html>
 ```
@@ -121,7 +122,7 @@ __src/index.js__
 + import './style.css';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -145,7 +146,7 @@ Entrypoint main = bundle.js
 ...
 ```
 
-Open up `index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result) and look at the page's head tags. It should contain our style block that we imported in `index.js`.
+Open up `index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result, because the `<style>` tag is dynamically created by JavaScript) and look at the page's head tags. It should contain our style block that we imported in `index.js`.
 
 Note that you can, and in most cases should, [minimize css](/plugins/mini-css-extract-plugin/#minimizing-for-production) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
 
@@ -217,14 +218,14 @@ __src/index.js__
 + import Icon from './icon.png';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
     element.classList.add('hello');
 
 +   // Add the image to our existing div.
-+   var myIcon = new Image();
++   const myIcon = new Image();
 +   myIcon.src = Icon;
 +
 +   element.appendChild(myIcon);
@@ -463,14 +464,14 @@ __src/index.js__
 + import Data from './data.xml';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
     element.classList.add('hello');
 
     // Add the image to our existing div.
-    var myIcon = new Image();
+    const myIcon = new Image();
     myIcon.src = Icon;
 
     element.appendChild(myIcon);
@@ -588,14 +589,14 @@ __src/index.js__
 - import Data from './data.xml';
 -
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 -
 -   // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 -   element.classList.add('hello');
 -
 -   // Add the image to our existing div.
--   var myIcon = new Image();
+-   const myIcon = new Image();
 -   myIcon.src = Icon;
 -
 -   element.appendChild(myIcon);
