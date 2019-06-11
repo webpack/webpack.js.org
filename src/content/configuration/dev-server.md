@@ -696,6 +696,30 @@ T> [`watchOptions`](#devserver-watchoptions-) will have no effect when used with
 
 T> If you use the CLI, make sure __inline mode__ is disabled.
 
+## `devServer.liveReload`
+
+`boolean: true`
+
+By default, the dev-server will reload/refresh the page when file changes are detected. [`devServer.hot`](#devserverhot) option must be disabled or [`devServer.watchContentBase`](#devserverwatchcontentbase) option must be enabled in order for `liveReload` to take effect. Disable `devServer.liveReload` by setting it to `false`:
+
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    liveReload: false
+  }
+};
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --no-live-reload
+```
+
 
 ## `devServer.mimeTypes` 🔑
 
