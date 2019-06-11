@@ -1128,8 +1128,8 @@ module.exports = {
 The bundle will now be available as `http://localhost:8080/assets/bundle.js`.
 
 T> Make sure `devServer.publicPath` always starts and ends with a forward slash.
-
-It is also possible to use a full URL. This is necessary for [Hot Module Replacement](/concepts/hot-module-replacement/).
+  
+It is also possible to use a full URL.
 
 __webpack.config.js__
 
