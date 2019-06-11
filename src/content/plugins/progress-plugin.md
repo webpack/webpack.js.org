@@ -34,7 +34,7 @@ new webpack.ProgressPlugin(handler);
 
 ### Providing `object`
 
-When providing an `object` to the `ProgressPlugin`, next properties are supported:
+When providing an `object` to the `ProgressPlugin`, following properties are supported:
 
 - `activeModules: boolean = true` show's active modules count and one active module in progress message
 - `entries: boolean = false` show's entries count in progress message
