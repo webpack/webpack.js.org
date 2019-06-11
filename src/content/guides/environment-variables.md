@@ -29,7 +29,7 @@ __webpack.config.js__
 ``` js
 const path = require('path');
 
-// Note that if you don't pass all the env varialbles you'll get ReferenceError. 
+// Note that if you don't pass all the env variables you'll get ReferenceError. 
 // Either pass them all or make env defaults to empty object, i.e. `env = {}`.
 module.exports = env => {
   // Use env.<YOUR VARIABLE> here:
