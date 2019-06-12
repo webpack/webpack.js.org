@@ -105,7 +105,7 @@ module.exports = env => merge(common(env), {
         icons: [
           {
             src: path.resolve('src/assets/icon-pwa-512x512.png'),
-            sizes: [72, 96, 128, 144, 192, 384, 512],
+            sizes: [72, 96, 128, 144, 150, 192, 384, 512],
           },
           {
             src: path.resolve('src/assets/icon-pwa-512x512.png'),
