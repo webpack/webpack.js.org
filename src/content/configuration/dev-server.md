@@ -175,7 +175,9 @@ webpack-dev-server --bonjour
 
 ## `devServer.clientLogLevel`
 
-`string: 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error'`
+`string: 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'`
+
+`none` and `warning` are going to be deprecated at the next major version.
 
 When using _inline mode_, the console in your DevTools will show you messages e.g. before reloading, before an error or when [Hot Module Replacement](/concepts/hot-module-replacement/) is enabled. Defaults to `info`.
 
