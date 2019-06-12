@@ -175,11 +175,13 @@ webpack-dev-server --bonjour
 
 ## `devServer.clientLogLevel`
 
-`string: 'none' | 'info' | 'error' | 'warning'`
+`string: 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'`
+
+`none` and `warning` are going to be deprecated at the next major version.
 
 When using _inline mode_, the console in your DevTools will show you messages e.g. before reloading, before an error or when [Hot Module Replacement](/concepts/hot-module-replacement/) is enabled. Defaults to `info`.
 
-`devServer.clientLogLevel` may be too verbose, you can turn logging off by setting it to  `'none'`.
+`devServer.clientLogLevel` may be too verbose, you can turn logging off by setting it to  `'silent'`.
 
 __webpack.config.js__
 
@@ -187,7 +189,7 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    clientLogLevel: 'none'
+    clientLogLevel: 'silent'
   }
 };
 ```
@@ -195,7 +197,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --client-log-level none
+webpack-dev-server --client-log-level silent
 ```
 
 ## `devServer.color` - CLI only
