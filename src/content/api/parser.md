@@ -261,7 +261,7 @@ import _, { has } from 'lodash';
 __MyPlugin.js__
 
 ```js
-parser.hooks.import.tap('MyPlugin', (statement, source, exportName, identifierName) => {
+parser.hooks.importSpecifier.tap('MyPlugin', (statement, source, exportName, identifierName) => {
   /* First call
     source == 'lodash'
     exportName == 'default'
