@@ -1,4 +1,6 @@
 // Import External Dependencies
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+const path = require('path');
 const merge = require('webpack-merge');
 const SSGPlugin = require('static-site-generator-webpack-plugin');
 const RedirectWebpackPlugin = require('redirect-webpack-plugin');
@@ -78,10 +80,6 @@ module.exports = env => merge(common(env), {
       }),
       new CopyWebpackPlugin([
         {
-          from: './assets/PWA',
-          to: './'
-        },
-        {
           from: './assets/icon-square-small-slack.png',
           to: './assets/'
         },
@@ -90,6 +88,31 @@ module.exports = env => merge(common(env), {
           to: './assets/'
         },
         'CNAME'
-      ])
+      ]),
+      new WebpackPwaManifest({
+        name: 'webpack Documentation',
+        short_name: 'webpack',
+        description: 'webpack documentation web application',
+        background_color: '#2b3a42',
+        theme_color: '#2b3a42',
+        display: 'fullscreen',
+        inject: false,
+        fingerprints: false,
+        ios: true,
+        scope: '/',
+        start_url: '/',
+        orientation: 'omit',
+        icons: [
+          {
+            src: path.resolve('src/assets/icon-pwa-512x512.png'),
+            sizes: [72, 96, 128, 144, 192, 384, 512],
+          },
+          {
+            src: path.resolve('src/assets/icon-pwa-512x512.png'),
+            sizes: [120, 152, 167, 180],
+            ios: true,
+          },
+        ],
+      }),
     ]
   });
