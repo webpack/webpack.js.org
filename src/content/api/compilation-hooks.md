@@ -601,7 +601,7 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
     console.log({
       id: chunk.id,
       name: chunk.name,
-      includes: chunk.modules.map(module => module.request)
+      includes: chunk.getModules().map(module => module.request)
     });
   });
 });
@@ -697,7 +697,7 @@ Executed after setting up a child compiler.
 
 `SyncHook`
 
-W> This hook will be removed in v5.0.0
+W> This hook will be moved in v5.0.0 to `NormalModule.getCompilationHooks(compilation).loader`
 
 The normal module loader is the function that actually loads all the modules
 

@@ -8,6 +8,7 @@ import { getPageTitle } from './utilities/content-utils';
 
 // Import Components
 import Site from './components/Site/Site';
+import PrintScript from './components/Print/PrintScript';
 
 // Import Images
 import Favicon from './favicon.ico';
@@ -19,6 +20,16 @@ const bundles = [
   '/vendor.bundle.js',
   '/index.bundle.js'
 ];
+
+// As github pages uses trailing slash, we need to provide it to canonicals for consistency
+// between canonical href and final url served by github pages.
+function enforceTrailingSlash (url) {
+  return url.replace(/\/?$/, '/');
+}
+
+function isPrintPage(url) {
+  return url.includes('/printable');
+}
 
 // Export method for `SSGPlugin`
 export default locals => {
@@ -33,6 +44,7 @@ export default locals => {
           <meta charset="utf-8" />
           <meta name="theme-color" content="#2B3A42" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          { isPrintPage(locals.path) ? <meta name="robots" content="noindex" /> : null }
           <title>{title}</title>
           <meta name="description" content={ description } />
           <meta property="og:site_name" content="webpack" />
@@ -49,6 +61,10 @@ export default locals => {
             <link key={ path } rel="stylesheet" href={ `/${path}` } />
           ))}
           <link rel="manifest" href="/manifest.json" />
+          <link rel="canonical" href={`https://webpack.js.org${enforceTrailingSlash(locals.path)}`} />
+          <link rel="apple-touch-icon" href="/images/icons/icon-192x192.png" />
+          <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/icon-152x152.png" />
+          <link rel="icon" sizes="192x192" href="/images/icons/icon-192x192.png" />
         </head>
         <body>
           <div id="root">
@@ -60,7 +76,11 @@ export default locals => {
                   import={ path => require(`./content/${path}`) } />
               )} />
           </div>
-          { bundles.map(path => <script key={ path } src={ path } />) }
+          {
+            (isPrintPage(locals.path))
+              ? <PrintScript />
+              : bundles.map(path => <script key={ path } src={ path } />)
+          }
         </body>
       </html>
     </StaticRouter>

@@ -606,6 +606,43 @@ webpack-dev-server --info=false
 ```
 
 
+## `devServer.injectClient`
+
+`boolean: false` `function (compilerConfig)`
+
+Tells `devServer` to inject a client. Setting `devServer.injectClient` to `true` will result in always injecting a client. It is possible to provide a function to inject conditionally:
+
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    injectClient: (compilerConfig) => compilerConfig.name === 'only-include'
+  }
+};
+```
+
+
+## `devServer.injectHot`
+
+`boolean: false` `function (compilerConfig)`
+
+Tells `devServer` to inject a Hot Module Replacement. Setting `devServer.injectHot` to `true` will result in always injecting. It is possible to provide a function to inject conditionally:
+
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    hot: true,
+    injectHot: (compilerConfig) => compilerConfig.name === 'only-include'
+  }
+};
+```
+
+W> Make sure that [`devServer.hot`](#devserverhot) is set to `true` because `devServer.injectHot` only works with HMR.
+
+
 ## `devServer.inline`
 
 `boolean`
@@ -660,6 +697,30 @@ webpack-dev-server --lazy
 T> [`watchOptions`](#devserver-watchoptions-) will have no effect when used with __lazy mode__.
 
 T> If you use the CLI, make sure __inline mode__ is disabled.
+
+## `devServer.liveReload`
+
+`boolean: true`
+
+By default, the dev-server will reload/refresh the page when file changes are detected. [`devServer.hot`](#devserverhot) option must be disabled or [`devServer.watchContentBase`](#devserverwatchcontentbase) option must be enabled in order for `liveReload` to take effect. Disable `devServer.liveReload` by setting it to `false`:
+
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    liveReload: false
+  }
+};
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --no-live-reload
+```
 
 
 ## `devServer.mimeTypes` 🔑
@@ -1069,8 +1130,8 @@ module.exports = {
 The bundle will now be available as `http://localhost:8080/assets/bundle.js`.
 
 T> Make sure `devServer.publicPath` always starts and ends with a forward slash.
-
-It is also possible to use a full URL. This is necessary for [Hot Module Replacement](/concepts/hot-module-replacement/).
+  
+It is also possible to use a full URL.
 
 __webpack.config.js__
 
@@ -1177,6 +1238,24 @@ webpack-dev-server --socket socket
 ```
 
 
+## `devServer.sockHost`
+
+`string`
+
+Tells clients connected to `devServer` to use provided socket host.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    sockHost: 'myhost.test'
+  }
+};
+```
+
+
 ## `devServer.sockPath`
 
 `string: '/sockjs-node'`
@@ -1194,6 +1273,28 @@ module.exports = {
 };
 ```
 
+Usage via the CLI
+
+```bash
+webpack-dev-server --sockPath /socket
+```
+
+## `devServer.sockPort`
+
+`number` `string`
+
+Tells clients connected to `devServer` to use provided socket port.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    sockPort: 8080
+  }
+};
+```
 
 ## `devServer.staticOptions`
 

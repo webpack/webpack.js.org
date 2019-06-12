@@ -15,12 +15,11 @@ const fetch = {
     'postcss/postcss-loader',
     'peerigon/extract-loader'
   ],
-
   plugins: [
     {
       organization: 'webpack-contrib',
       suffixes: ['-webpack-plugin', '-extract-plugin'],
-      hides: []
+      hides: ['webpack-contrib/component-webpack-plugin']
     }
   ]
 };
@@ -51,6 +50,7 @@ async function main() {
       const { organization, suffixes, hides } = item;
 
       const repos = await paginate(organization);
+
       return repos
         .map(repo => repo.full_name)
         .filter(name => suffixes.some(suffix => name.endsWith(suffix)))

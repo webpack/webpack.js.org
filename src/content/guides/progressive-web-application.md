@@ -5,6 +5,7 @@ contributors:
   - johnnyreilly
   - chenxsan
   - EugeneHlushko
+  - benschac
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -33,6 +34,8 @@ __package.json__
   ...
 }
 ```
+
+Note: [webpack DevServer](/configuration/dev-server/) writes in-memory by default. We'll need to enable [writeToDisk](/configuration/dev-server#devserverwritetodisk-) option in order for http-server to be able to serve files from `./dist` directory.
 
 If you haven't previously done so, run the command `npm run build` to build your project. Then run the command `npm start`. This should produce the following output:
 

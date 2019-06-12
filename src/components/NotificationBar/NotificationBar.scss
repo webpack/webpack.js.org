@@ -5,6 +5,10 @@
   color: getColor(white);
   background: getColor(emperor);
 
+  @media print {
+    display: none;
+  }
+
   a {
     color: getColor(malibu);
 
