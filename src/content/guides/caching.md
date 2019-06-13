@@ -61,7 +61,7 @@ __webpack.config.js__
     ],
     output: {
 -     filename: 'bundle.js',
-+     filename: '[name].[hash].js',
++     filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
     }
   };
@@ -112,7 +112,7 @@ __webpack.config.js__
       })
     ],
     output: {
-      filename: '[name].[hash].js',
+      filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
     },
 +   optimization: {
@@ -157,7 +157,7 @@ __webpack.config.js__
       }),
     ],
     output: {
-      filename: '[name].[hash].js',
+      filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
     },
     optimization: {
@@ -273,7 +273,7 @@ __webpack.config.js__
 +      new webpack.HashedModuleIdsPlugin()
     ],
     output: {
-      filename: '[name].[hash].js',
+      filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
     },
     optimization: {
