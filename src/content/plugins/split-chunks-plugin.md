@@ -163,7 +163,7 @@ T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Ac
 
 ### `splitChunks.name`
 
-`boolean: true | function (module, chunks, cacheGroupKey) | string`
+`boolean: true | function (module, chunks, cacheGroupKey):string | string`
 
 Also available for each cacheGroup: `splitChunks.cacheGroups.{cacheGroup}.name`.
 
@@ -261,7 +261,7 @@ module.exports = {
 
 #### `splitChunks.cacheGroups.{cacheGroup}.test`
 
-`function (module, chunk) | RegExp | string`
+`function (module, chunk):boolean | RegExp | string`
 
 Controls which modules are selected by this cache group. Omitting it selects all modules. It can match the absolute module resource path or chunk names. When a chunk name is matched, all modules in the chunk are selected.
 
