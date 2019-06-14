@@ -19,7 +19,7 @@ related:
 
 T> The examples in this guide stem from [getting started](/guides/getting-started), [output management](/guides/output-management) and [code splitting](/guides/code-splitting).
 
-So we're using webpack to bundle our modular application which yields a deployable `/dist` directory. Once the contents of `/dist` have been deployed to a server, clients (typically browsers) will hit that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](https://searchstorage.techtarget.com/definition/cache). This allows sites to load faster with less unnecessary network traffic, however it can also cause headaches when you need new code to be picked up.
+So we're using webpack to bundle our modular application which yields a deployable `/dist` directory. Once the contents of `/dist` have been deployed to a server, clients (typically browsers) will hit that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](https://searchstorage.techtarget.com/definition/cache). This allows sites to load faster with less unnecessary network traffic. However, it can also cause headaches when you need new code to be picked up.
 
 This guide focuses on the configuration needed to ensure files produced by webpack compilation can remain cached unless their content has changed.
 
@@ -106,7 +106,7 @@ __webpack.config.js__
     entry: './src/index.js',
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching'
       })
@@ -151,7 +151,7 @@ __webpack.config.js__
     entry: './src/index.js',
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching'
       }),
@@ -266,7 +266,7 @@ __webpack.config.js__
     entry: './src/index.js',
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching'
       }),

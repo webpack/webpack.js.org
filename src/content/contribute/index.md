@@ -7,6 +7,7 @@ contributors:
   - harrynewsome
   - dhedgecock
   - tbroadley
+  - EugeneHlushko
 ---
 
 The people who contribute to webpack do so for the love of open source, our users and ecosystem, and most importantly, pushing the web forward together. Because of our [Open Collective](https://opencollective.com/webpack) model for funding and transparency, we are able to funnel support and funds through contributors, dependent projects, and the contributor and core teams. To make a donation, simply click the button below...
@@ -29,7 +30,7 @@ The biggest core feature we'd like to provide is an enjoyable development experi
 Anybody can help by doing any of the following:
 
 - Ask your employer to use webpack in projects.
-- Help us write and maintain the content on this site (see the [writer's guide](/writers-guide)).
+- Help us write and maintain the content on this site (see the [writer's guide](/contribute/writers-guide/)).
 - Contribute to the [core repository](https://github.com/webpack/webpack).
 - Become a backer or sponsor on [open collective](https://opencollective.com/webpack#support).
 

@@ -10,6 +10,10 @@
   @include break {
     right: 1.5em;
   }
+
+  @media print {
+    display: none;
+  }
 }
 
 .gitter__button {
