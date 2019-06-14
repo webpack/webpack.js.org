@@ -175,24 +175,6 @@ If the `splitChunks.name` matches an [entry point](/configuration/entry-context/
 
 T> It is recommended to set `splitChunks.name` to `false` for production builds so that it doesn't change names unnecessarily.
 
-__webpack.config.js__
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    splitChunks: {
-      name (module, chunks, cacheGroupKey) {
-        // generate a chunk name...
-        return; //...
-      }
-    }
-  }
-};
-```
-
-Usage as a function:
-
 __main.js__
 
 ```js
