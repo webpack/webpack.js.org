@@ -207,7 +207,7 @@ module.exports = {
 };
 ```
 
-Running webpack with following configuration would also output a chunk of the group common with next name: `commons-main-lodash.js.e7519d2bb8777058fa27.js` (hash given as an example of real world output).
+Running webpack with following `splitChunks` configuration would also output a chunk of the group common with next name: `commons-main-lodash.js.e7519d2bb8777058fa27.js` (hash given as an example of real world output).
 
 W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
 
