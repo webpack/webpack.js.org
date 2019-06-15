@@ -12,6 +12,7 @@ contributors:
   - EugeneHlushko
   - byzyk
   - trivikr
+  - aholzner
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -27,7 +28,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
 +   mode: 'development',
@@ -64,7 +65,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     mode: 'development',
@@ -202,7 +203,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     mode: 'development',
@@ -288,7 +289,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     mode: 'development',
