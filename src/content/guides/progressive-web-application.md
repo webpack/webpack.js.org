@@ -6,6 +6,7 @@ contributors:
   - chenxsan
   - EugeneHlushko
   - benschac
+  - aholzner
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -50,7 +51,7 @@ Available on:
 Hit CTRL-C to stop the server
 ```
 
-If you open your browser to `http://localhost:8080` (i.e. `http://127.0.0.1`) you should see your webpack application being served from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.  
+If you open your browser to `http://localhost:8080` (i.e. `http://127.0.0.1`) you should see your webpack application being served from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.
 
 This is what we aim to change. Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.
 
@@ -68,7 +69,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 + const WorkboxPlugin = require('workbox-webpack-plugin');
 
   module.exports = {
@@ -85,7 +86,7 @@ __webpack.config.js__
 -     })
 +     }),
 +     new WorkboxPlugin.GenerateSW({
-+       // these options encourage the ServiceWorkers to get in there fast 
++       // these options encourage the ServiceWorkers to get in there fast
 +       // and not allow any straggling "old" SWs to hang around
 +       clientsClaim: true,
 +       skipWaiting: true
