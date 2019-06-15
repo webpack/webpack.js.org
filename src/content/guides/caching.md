@@ -46,7 +46,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
@@ -99,7 +99,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
@@ -144,7 +144,7 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
@@ -259,7 +259,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
 + const webpack = require('webpack');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
