@@ -12,6 +12,7 @@ contributors:
   - saiprasad2595
   - EugeneHlushko
   - AnayaDesign
+  - aholzner
 related:
   - title: Issue 652
     url: https://github.com/webpack/webpack.js.org/issues/652
