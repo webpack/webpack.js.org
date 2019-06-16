@@ -751,7 +751,7 @@ module.exports = {
 ```
 
 `libraryTarget: 'system'` - This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md)
-module. This feature was first released in [webpack@4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
+module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
 
 System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and have your webpack bundle loaded into the System module registry.
 
