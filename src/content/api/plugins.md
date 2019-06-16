@@ -89,7 +89,6 @@ simply `require` the necessary hook class from `tapable` and create one:
 ``` js
 const SyncHook = require('tapable').SyncHook;
 
-// Within the `apply` method...
 if (compiler.hooks.myCustomHook) throw new Error('Already in use');
 compiler.hooks.myCustomHook = new SyncHook(['a', 'b', 'c']);
 
