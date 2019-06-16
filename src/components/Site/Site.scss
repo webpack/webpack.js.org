@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: #ffffff;
 
   &__content {
     flex: 1 1 auto;
@@ -11,5 +12,13 @@
 
   &__sidebar {
     flex: 0 0 280px;
+  }
+}
+
+@media print {
+  header,
+  nav,
+  footer {
+    display: none;
   }
 }
