@@ -88,22 +88,16 @@ export default class Cube extends React.Component {
       let degrees = 0;
       let axis = 'y';
 
-      let lastTime = performance.now();
       let animation = () => {
-        let nowTime = performance.now();
-        let deltaTime = nowTime - lastTime;
-
-        if (repeatDelay <= deltaTime) {
-          let obj = {};
-          obj[axis] = degrees += 90;
-
-          this.setState({ ...obj, iteration: (this.state.iteration + 1) % 4 });
-          lastTime = performance.now();
-        }
-
-        this._requestAnimation = requestAnimationFrame(animation);
+        let obj = {};
+        obj[axis] = degrees += 90;
+        this.setState({ ...obj, iteration: (this.state.iteration + 1) % 4 });
+        tick();
       };
-      animation();
+
+      let tick = () => setTimeout(() => requestAnimationFrame(animation), repeatDelay);
+
+      this._timeout = tick();
     }
   }
 
@@ -115,7 +109,7 @@ export default class Cube extends React.Component {
       this.container.removeEventListener('mouseleave', this._reset);
 
     } else if (continuous) {
-      cancelAnimationFrame(this._requestAnimation);
+      clearTimeout(this._timeout);
     }
   }
 

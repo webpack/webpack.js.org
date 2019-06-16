@@ -175,11 +175,13 @@ webpack-dev-server --bonjour
 
 ## `devServer.clientLogLevel`
 
-`string: 'none' | 'info' | 'error' | 'warning'`
+`string: 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'`
+
+`none` and `warning` are going to be deprecated at the next major version.
 
 When using _inline mode_, the console in your DevTools will show you messages e.g. before reloading, before an error or when [Hot Module Replacement](/concepts/hot-module-replacement/) is enabled. Defaults to `info`.
 
-`devServer.clientLogLevel` may be too verbose, you can turn logging off by setting it to  `'none'`.
+`devServer.clientLogLevel` may be too verbose, you can turn logging off by setting it to  `'silent'`.
 
 __webpack.config.js__
 
@@ -187,7 +189,7 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    clientLogLevel: 'none'
+    clientLogLevel: 'silent'
   }
 };
 ```
@@ -195,7 +197,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --client-log-level none
+webpack-dev-server --client-log-level silent
 ```
 
 ## `devServer.color` - CLI only
@@ -696,6 +698,30 @@ T> [`watchOptions`](#devserver-watchoptions-) will have no effect when used with
 
 T> If you use the CLI, make sure __inline mode__ is disabled.
 
+## `devServer.liveReload`
+
+`boolean: true`
+
+By default, the dev-server will reload/refresh the page when file changes are detected. [`devServer.hot`](#devserverhot) option must be disabled or [`devServer.watchContentBase`](#devserverwatchcontentbase) option must be enabled in order for `liveReload` to take effect. Disable `devServer.liveReload` by setting it to `false`:
+
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    liveReload: false
+  }
+};
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --no-live-reload
+```
+
 
 ## `devServer.mimeTypes` 🔑
 
@@ -1104,8 +1130,8 @@ module.exports = {
 The bundle will now be available as `http://localhost:8080/assets/bundle.js`.
 
 T> Make sure `devServer.publicPath` always starts and ends with a forward slash.
-
-It is also possible to use a full URL. This is necessary for [Hot Module Replacement](/concepts/hot-module-replacement/).
+  
+It is also possible to use a full URL.
 
 __webpack.config.js__
 
@@ -1212,6 +1238,24 @@ webpack-dev-server --socket socket
 ```
 
 
+## `devServer.sockHost`
+
+`string`
+
+Tells clients connected to `devServer` to use provided socket host.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    sockHost: 'myhost.test'
+  }
+};
+```
+
+
 ## `devServer.sockPath`
 
 `string: '/sockjs-node'`
@@ -1229,11 +1273,17 @@ module.exports = {
 };
 ```
 
+Usage via the CLI
+
+```bash
+webpack-dev-server --sockPath /socket
+```
+
 ## `devServer.sockPort`
 
 `number` `string`
 
-Tells `devServer` to use provided socket port.
+Tells clients connected to `devServer` to use provided socket port.
 
 __webpack.config.js__
 
@@ -1245,7 +1295,6 @@ module.exports = {
   }
 };
 ```
-
 
 ## `devServer.staticOptions`
 

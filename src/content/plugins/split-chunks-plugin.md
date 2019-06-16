@@ -11,6 +11,7 @@ contributors:
   - madhavarshney
   - sakhisheikh
   - superburrito
+  - ryandrew14
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
@@ -163,15 +164,27 @@ T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Ac
 
 ### `splitChunks.name`
 
-`boolean: true | function (module, chunks, cacheGroupKey) | string`
+`boolean: true | function (module, chunks, cacheGroupKey):string | string`
+
+Also available for each cacheGroup: `splitChunks.cacheGroups.{cacheGroup}.name`.
 
 The name of the split chunk. Providing `true` will automatically generate a name based on chunks and cache group key.
 
 Providing a string or a function allows you to use a custom name. Specifying either a string or a function that always returns the same string will merge all common modules and vendors into a single chunk. This might lead to bigger initial downloads and slow down page loads.
 
+If you choose to specify a function, you may find the `chunk.name` and `chunk.hash` properties (where `chunk` is an element of the `chunks` array) particularly useful in choosing a name for your chunk.
+
 If the `splitChunks.name` matches an [entry point](/configuration/entry-context/#entry) name, the entry point will be removed.
 
 T> It is recommended to set `splitChunks.name` to `false` for production builds so that it doesn't change names unnecessarily.
+
+__main.js__
+
+```js
+import _ from 'lodash';
+
+console.log(_.join(['Hello', 'webpack'], ' '));
+```
 
 __webpack.config.js__
 
@@ -180,14 +193,24 @@ module.exports = {
   //...
   optimization: {
     splitChunks: {
-      name (module, chunks, cacheGroupKey) {
-        // generate a chunk name...
-        return; //...
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          // cacheGroupKey here is `commons` as the key of the cacheGroup
+          name(module, chunks, cacheGroupKey) {
+            const moduleFileName = module.identifier().split('/').reduceRight(item => item);
+            const allChunksNames = chunks.map((item) => item.name).join('~');
+            return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
+          },
+          chunks: 'all'
+        }
       }
     }
   }
 };
 ```
+
+Running webpack with following `splitChunks` configuration would also output a chunk of the group common with next name: `commons-main-lodash.js.e7519d2bb8777058fa27.js` (hash given as an example of real world output).
 
 W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
 
@@ -241,7 +264,7 @@ module.exports = {
 
 #### `splitChunks.cacheGroups.{cacheGroup}.test`
 
-`function (module, chunk) | RegExp | string`
+`function (module, chunk):boolean | RegExp | string`
 
 Controls which modules are selected by this cache group. Omitting it selects all modules. It can match the absolute module resource path or chunk names. When a chunk name is matched, all modules in the chunk are selected.
 

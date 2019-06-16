@@ -77,7 +77,7 @@ class Page extends React.Component {
           {contentRender}
 
           {loadRelated && (
-            <div>
+            <div className="related__section">
               <hr />
               <h3>Further Reading</h3>
               <ul>
@@ -91,7 +91,7 @@ class Page extends React.Component {
           )}
 
           {loadContributors && (
-            <div>
+            <div className="contributors__section">
               <hr />
               <h3>Contributors</h3>
               <Contributors contributors={contributors} />
