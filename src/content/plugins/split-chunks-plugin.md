@@ -303,7 +303,7 @@ module.exports = {
 
 #### `splitChunks.cacheGroups.{cacheGroup}.filename`
 
-`string`
+`string` `function (chunkData): string`
 
 Allows to override the filename when and only when it's an initial chunk.
 All placeholders available in [`output.filename`](/configuration/output/#output-filename) are also available here.
@@ -326,6 +326,48 @@ module.exports = {
   }
 };
 ```
+
+And as a function:
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          filename: (chunkData) => {
+            // Use chunkData object for generating filename string based on your requirements
+            return `${chunkData.chunk.name}-bundle.js`;
+          }
+        }
+      }
+    }
+  }
+};
+```
+
+It is possible to to create a folder structure by providing path prefixing the filename: `'js/vendor/bundle.js'`.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          filename: 'js/[name]/bundle.js'
+        }
+      }
+    }
+  }
+};
+```
+
 
 #### `splitChunks.cacheGroups.{cacheGroup}.enforce`
 
