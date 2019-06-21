@@ -13,10 +13,12 @@ import './Sidebar.scss';
 export default ({
   className = '',
   pages,
-  currentPage,
-  ...props
+  currentPage
 }) => {
   let group;
+  // just skipping this on SSG run shifts the index in sidebar item see #3127
+  const filteredPages = pages.filter(page => page.title !== 'printable.md');
+
   return (
     <nav className={`sidebar ${className}`}>
       <div className="sidebar__inner">
@@ -27,7 +29,7 @@ export default ({
         </div>
         <Print url={currentPage} />
 
-        {pages.map((page, index) => {
+        {filteredPages.map((page, index) => {
           let displayGroup = group !== page.group && page.group !== '-';
           group = page.group;
 
