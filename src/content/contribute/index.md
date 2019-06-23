@@ -1,6 +1,6 @@
 ---
 title: Contribute
-sort: 1
+sort: 0
 contributors:
   - rouzbeh84
   - scottdj92

@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-sort: 2
+sort: 1
 contributors:
   - bebraw
   - varunjayaraman

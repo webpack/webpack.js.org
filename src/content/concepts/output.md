@@ -1,6 +1,6 @@
 ---
 title: Output
-sort: 3
+sort: 2
 contributors:
   - TheLarkInn
   - chyipin

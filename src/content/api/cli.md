@@ -1,6 +1,6 @@
 ---
 title: Command Line Interface
-sort: 2
+sort: 1
 contributors:
   - evenstensberg
   - simon04

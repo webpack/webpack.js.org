@@ -1,7 +1,7 @@
 ---
 title: Parser Hooks
 group: Plugins
-sort: 4
+sort: 10
 contributors:
   - byzyk
   - DeTeam

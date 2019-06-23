@@ -1,6 +1,6 @@
 ---
 title: TypeScript
-sort: 14
+sort: 20
 contributors:
   - morsdyce
   - kkamali
