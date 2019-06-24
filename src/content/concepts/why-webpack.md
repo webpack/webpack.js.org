@@ -1,6 +1,6 @@
 ---
 title: Why webpack
-sort: 7
+sort: 12
 contributors:
 - debs-obrien
 - montogeek
