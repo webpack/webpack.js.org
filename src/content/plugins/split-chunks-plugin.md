@@ -349,7 +349,7 @@ module.exports = {
 };
 ```
 
-It is possible to to create a folder structure by providing path prefixing the filename: `'js/vendor/bundle.js'`.
+It is possible to create a folder structure by providing path prefixing the filename: `'js/vendor/bundle.js'`.
 
 __webpack.config.js__
 
