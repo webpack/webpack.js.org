@@ -1,6 +1,6 @@
 ---
 title: Mode
-sort: 4
+sort: 5
 contributors:
   - EugeneHlushko
   - byzyk

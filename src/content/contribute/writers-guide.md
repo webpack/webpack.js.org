@@ -1,6 +1,6 @@
 ---
 title: Writer's Guide
-sort: 2
+sort: 1
 contributors:
   - pranshuchittora
 ---

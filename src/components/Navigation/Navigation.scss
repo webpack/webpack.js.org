@@ -145,7 +145,6 @@
 
 .navigation-search__clear {
   display: none;
-  margin-right: 0.25em;
   margin-bottom: -1px;
 }
 
@@ -156,6 +155,10 @@
 
 .navigation-search--active .navigation-search__clear {
   display: block;
+}
+
+.navigation-search--active .navigation-search__search {
+  display: none;
 }
 
 .navigation-search__results {

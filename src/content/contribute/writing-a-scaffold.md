@@ -1,6 +1,6 @@
 ---
 title: Writing a Scaffold
-sort: 3
+sort: 4
 contributors:
   - pranshuchittora
   - EugeneHlushko

@@ -13,10 +13,10 @@ import './Sidebar.scss';
 export default ({
   className = '',
   pages,
-  currentPage,
-  ...props
+  currentPage
 }) => {
   let group;
+
   return (
     <nav className={`sidebar ${className}`}>
       <div className="sidebar__inner">

@@ -1,6 +1,6 @@
 ---
 title: Output
-sort: 5
+sort: 6
 contributors:
   - sokra
   - skipjack
@@ -748,6 +748,47 @@ module.exports = {
     libraryTarget: 'umd'
   }
 };
+```
+
+`libraryTarget: 'system'` - This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md)
+module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
+
+System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and have your webpack bundle loaded into the System module registry.
+
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    libraryTarget: 'system'
+  }
+};
+```
+
+Output:
+
+```javascript
+System.register([], function(_export) {
+  return {
+    setters: [],
+    execute: function() {
+      // ...
+    },
+  };
+});
+```
+
+By adding `output.library` to configuration in addition to having `output.libraryTarget` set to `system`, the output bundle will have the library name as an argument to `System.register`:
+
+```javascript
+System.register('my-library', [], function(_export) {
+  return {
+    setters: [],
+    execute: function() {
+      // ...
+    },
+  };
+});
 ```
 
 Module proof library.
