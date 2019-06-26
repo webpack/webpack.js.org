@@ -34,7 +34,7 @@ By default the current directory is used, but it's recommended to pass a value i
 
 `string | [string] | object { <key>: string | [string] } | (function: () => string | [string] | object { <key>: string | [string] })`
 
-The point or points to enter the application. At this point the application starts executing. If an array is passed all items will be executed.
+The point or points where to start the application bundling process. If an array is passed then all items will be processed.
 
 A dynamically loaded module is __not__ an entry point.
 
@@ -59,6 +59,10 @@ If a string or array of strings is passed, the chunk is named `main`. If an obje
 
 ### Dynamic entry
 
+If a function is passed then it will be invoked on every [make](/api/compiler-hooks/#make) event.
+
+> Note that the make event triggers when webpack starts and for every invalidation when [watching for file changes](/configuration/watch/).
+
 ```js
 module.exports = {
   //...
@@ -75,4 +79,16 @@ module.exports = {
 };
 ```
 
-When combining with the [`output.library`](/configuration/output#output-library) option: If an array is passed only the last item is exported.
+For example: you can use dynamic entries to get the actual entries from an external source (remote server, file system content or database):
+
+__webpack.config.js__
+
+``` js
+module.exports = {
+  entry() {
+    return fetchPathsFromSomeExternalSource(); // returns a promise that will be resolved with something like ['src/main-layout.js', 'src/admin-layout.js']
+  }
+};
+```
+
+When combining with the [`output.library`](/configuration/output#outputlibrary) option: If an array is passed only the last item is exported.

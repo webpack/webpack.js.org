@@ -63,7 +63,7 @@ This index lists common terms used throughout the webpack ecosystem.
 ## M
 
 - [__Module__](/concepts/modules): Discrete chunks of functionality that provide a smaller surface area than a full program. Well-written modules provide solid abstractions and encapsulation boundaries which make up a coherent design and clear purpose.
-- [__Module Resolution__](/concepts/module-resolution/): A module can be required as a dependency from another module and a resolver is a library which helps in locating a module by its absolute path.. Modules are searched for inside all directories specified in `resolve.modules`.
+- [__Module Resolution__](/concepts/module-resolution/): A module can be required as a dependency from another module and a resolver is a library which helps in locating a module by its absolute path. Modules are searched for inside all directories specified in `resolve.modules`.
 
 
 ## N
@@ -102,7 +102,7 @@ This index lists common terms used throughout the webpack ecosystem.
 
 ## W
 
-- [__webpack__](/): A highly configurable [module](/concepts/modules) bundler for modern JavaScript applications
+- [__webpack__](/): A highly configurable [module](/concepts/modules) bundler for modern JavaScript applications.
 
 
 ## X

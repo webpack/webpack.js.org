@@ -1,6 +1,6 @@
 ---
 title: Caching
-sort: 11
+sort: 6
 contributors:
   - okonet
   - jouni-kantola
@@ -8,8 +8,11 @@ contributors:
   - dannycjones
   - fadysamirsadek
   - afontcu
+  - rosavage
   - saiprasad2595
   - EugeneHlushko
+  - AnayaDesign
+  - aholzner
 related:
   - title: Issue 652
     url: https://github.com/webpack/webpack.js.org/issues/652
@@ -17,14 +20,14 @@ related:
 
 T> The examples in this guide stem from [getting started](/guides/getting-started), [output management](/guides/output-management) and [code splitting](/guides/code-splitting).
 
-So we're using webpack to bundle our modular application which yields a deployable `/dist` directory. Once the contents of `/dist` have been deployed to a server, clients (typically browsers) will hit that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](https://searchstorage.techtarget.com/definition/cache). This allows sites to load faster with less unnecessary network traffic, however it can also cause headaches when you need new code to be picked up.
+So we're using webpack to bundle our modular application which yields a deployable `/dist` directory. Once the contents of `/dist` have been deployed to a server, clients (typically browsers) will hit that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](https://searchstorage.techtarget.com/definition/cache). This allows sites to load faster with less unnecessary network traffic. However, it can also cause headaches when you need new code to be picked up.
 
-This guide focuses on the configuration needed to ensure files produced by webpack compilation can remain cached unless their contents has changed.
+This guide focuses on the configuration needed to ensure files produced by webpack compilation can remain cached unless their content has changed.
 
 
 ## Output Filenames
 
-A simple way to ensure the browser picks up changed files is by using `output.filename` [substitutions](/configuration/output#output-filename). The `[hash]` substitution can be used to include a build-specific hash in the filename, however it's even better to use the `[contenthash]` substitution which is the hash of the content of a file, which is different for each asset.
+We can use the `output.filename` [substitutions](/configuration/output#output-filename) setting to define the names of our output files. webpack provides a method of templating the filenames using bracketed strings called __substitutions__. The `[contenthash]` substitution will add a unique hash based on the content of an asset. When the asset's content changes, `[contenthash]` will change as well.
 
 Let's get our project set up using the example from [getting started](/guides/getting-started) with the `plugins` from [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
 
@@ -44,13 +47,14 @@ __webpack.config.js__
 
 ``` diff
   const path = require('path');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
 -       title: 'Output Management'
 +       title: 'Caching'
@@ -90,21 +94,23 @@ W> Output may differ depending on your current webpack version. Newer versions m
 
 ## Extracting Boilerplate
 
-As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) can be used to split modules out into separate bundles. webpack provides an optimization feature which does split out runtime code into a separate chunk(s) according to the options provided, simply use [`optimization.runtimeChunk`](/configuration/optimization/#optimization-runtimechunk) set to `single` for creating one runtime bundle:
+As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) can be used to split modules out into separate bundles. webpack provides an optimization feature to split runtime code into a separate chunk using the [`optimization.runtimeChunk`](/configuration/optimization/#optimization-runtimechunk) option. Set it to `single` to create a single runtime bundle for all chunks:
 
 __webpack.config.js__
 
 ``` diff
   const path = require('path');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching'
+      })
     ],
     output: {
       filename: '[name].[contenthash].js',
@@ -138,14 +144,15 @@ This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin/#spli
 __webpack.config.js__
 
 ``` diff
-  var path = require('path');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const path = require('path');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching'
       }),
@@ -216,7 +223,7 @@ __src/index.js__
 + import Print from './print';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -233,9 +240,9 @@ Running another build, we would expect only our `main` bundle's hash to change, 
 ``` bash
 ...
                            Asset       Size  Chunks                    Chunk Names
-  vendor.a7561fb0e9a071baadb9.js     541 kB       0  [emitted]  [big]  vendor
-    main.b746e3eb72875af2caa9.js    1.22 kB       1  [emitted]         main
-manifest.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         manifest
+  runtime.1400d5af64fc1b7b3a45.js    5.85 kB      0  [emitted]         runtime
+  vendor.a7561fb0e9a071baadb9.js     541 kB       1  [emitted]  [big]  vendor
+    main.b746e3eb72875af2caa9.js    1.22 kB       2  [emitted]         main
                       index.html  352 bytes          [emitted]
 ...
 ```
@@ -244,7 +251,7 @@ manifest.1400d5af64fc1b7b3a45.js    5.85 kB       2  [emitted]         manifest
 
 - The `main` bundle changed because of its new content.
 - The `vendor` bundle changed because its `module.id` was changed.
-- And, the `manifest` bundle changed because it now contains a reference to a new module.
+- And, the `runtime` bundle changed because it now contains a reference to a new module.
 
 The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins we can use to resolve this issue. The first is the `NamedModulesPlugin`, which will use the path to the module rather than a numerical identifier. While this plugin is useful during development for more readable output, it does take a bit longer to run. The second option is the [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin), which is recommended for production builds:
 
@@ -253,13 +260,14 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
 + const webpack = require('webpack');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching'
       }),
@@ -307,7 +315,7 @@ __src/index.js__
 + // import Print from './print';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -338,4 +346,4 @@ We can see that both builds yielded `55e79e5927a639d21a1b` in the `vendor` bundl
 
 ## Conclusion
 
-Caching gets messy. Plain and simple. However the walk-through above should give you a running start to deploying consistent, cacheable assets. See the _Further Reading_ section below to learn more.
+Caching can be complicated, but the benefit to application or site users makes it worth the effort. See the _Further Reading_ section below to learn more.

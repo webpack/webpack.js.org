@@ -1,6 +1,6 @@
 ---
 title: Stats
-sort: 15
+sort: 18
 contributors:
   - SpaceK33z
   - sallar
@@ -8,9 +8,10 @@ contributors:
   - ldrick
   - jasonblanchard
   - byzyk
-  - renjithvk
+  - renjithspace
   - Raiondesu
   - EugeneHlushko
+  - grgur
 ---
 
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
@@ -32,13 +33,14 @@ module.exports = {
 };
 ```
 
-| Preset | Alternative | Description |
-|--------|-------------|-------------|
-| `"errors-only"` | _none_  | Only output when errors happen |
-| `"minimal"`     | _none_  | Only output when errors or new compilation happen |
-| `"none"`        | `false` | Output nothing |
-| `"normal"`      | `true`  | Standard output |
-| `"verbose"`     | _none_  | Output everything |
+| Preset              | Alternative | Description                                       |
+|---------------------|-------------|---------------------------------------------------|
+| `"errors-only"`     | _none_      | Only output when errors happen                    |
+| `"errors-warnings"` | _none_      | Only output errors and warnings happen            |
+| `"minimal"`         | _none_      | Only output when errors or new compilation happen |
+| `"none"`            | `false`     | Output nothing                                    |
+| `"normal"`          | `true`      | Standard output                                   |
+| `"verbose"`         | _none_      | Output everything                                 |
 
 For more granular control, it is possible to specify exactly what information you want. Please note that all of the options in this object are optional.
 
@@ -148,6 +150,9 @@ module.exports = {
     // Show dependencies and origin of warnings/errors (since webpack 2.5.0)
     moduleTrace: true,
 
+    // Show outputPath
+    outputPath: true | false,
+
     // Show performance hint when file size exceeds `performance.maxAssetSize`
     performance: true,
 
@@ -221,3 +226,16 @@ For `assetsSort`, `chunksSort` and `moduleSort` there are several possible field
 - `issuerId` - an id of the issuer;
 - `issuerName` - a name of the issuer;
 - `issuerPath` - a full issuer object. There's no real need to sort by this field;
+
+### Colors
+
+You can specify your own terminal output colors using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code)
+
+```js
+module.exports = {
+  //...
+  colors: {
+    green: '\u001b[32m',
+  },
+};
+```

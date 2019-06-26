@@ -1,6 +1,6 @@
 ---
 title: Output
-sort: 3
+sort: 2
 contributors:
   - TheLarkInn
   - chyipin
@@ -61,7 +61,7 @@ module.exports = {
   //...
   output: {
     path: '/home/proj/cdn/assets/[hash]',
-    publicPath: 'http://cdn.example.com/assets/[hash]/'
+    publicPath: 'https://cdn.example.com/assets/[hash]/'
   }
 };
 ```
