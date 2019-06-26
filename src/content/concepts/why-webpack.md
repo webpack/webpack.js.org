@@ -2,10 +2,10 @@
 title: Why webpack
 sort: 12
 contributors:
-- debs-obrien
-- montogeek
-- jeremenichelli
-- EugeneHlushko
+  - debs-obrien
+  - montogeek
+  - jeremenichelli
+  - EugeneHlushko
 ---
 
 To understand why you should use webpack let's recap how we used JavaScript on the web before bundlers were a thing.
@@ -15,7 +15,7 @@ There are two ways to run JavaScript in a browser. First, include a script for e
 
 ## IIFE's - Immediately invoked function expressions
 
-IIFEs solve scoping issues for large projects; when script files are wrapped by an IIFE, you can safely concatenate or safely combine files without worrying about scope collision. 
+IIFEs solve scoping issues for large projects; when script files are wrapped by an IIFE, you can safely concatenate or safely combine files without worrying about scope collision.
 
 This lead to tools like Make, Gulp, Grunt, Broccoli or Brunch. These tools are known as task runners and they concatenate all your project files together.
 
@@ -35,7 +35,7 @@ CommonJS came out and introduced `require`, which allows you to load and use a m
 
 ## npm + Node.js + modules -- mass distribution
 
-JavaScript is taking over the world as a language, as a platform and as a way to rapidly develop and create fast applications. 
+JavaScript is taking over the world as a language, as a platform and as a way to rapidly develop and create fast applications.
 
 But there is no browser support for CommonJS. There are no [live bindings](https://medium.com/webpack/the-state-of-javascript-modules-4636d1774358). There are problems with circular references. Sync module resolution loader is slow. While CommonJS was a great solution for Node.js projects, browsers didn't support modules. Bundlers and tools like Browserify, RequireJS and SystemJS were created, allowing us to write CommonJS modules that run in a browser.
 
