@@ -366,7 +366,7 @@ module.exports = {
         root: "React"
       }
     },
-    externals: (request) => { /* ... */ return "commonjs " + request }
+    externals: ({request}) => { /* ... */ return "commonjs " + request }
   </externals>
   // Don't follow/bundle these modules, but request them at runtime from the environment
   serve: { //object
