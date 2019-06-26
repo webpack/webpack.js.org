@@ -260,6 +260,7 @@ __package.json__
       "html-webpack-plugin": "^2.29.0",
       "style-loader": "^0.18.2",
       "webpack": "^4.30.0",
++      "webpack-dev-server": "^3.7.2"
       "xml-loader": "^1.2.1"
     }
   }
