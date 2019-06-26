@@ -1,6 +1,6 @@
 ---
 title: Modules
-sort: 7
+sort: 6
 contributors:
   - TheLarkInn
   - simon04

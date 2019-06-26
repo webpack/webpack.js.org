@@ -3,6 +3,10 @@
 
 .organization {
   padding: 1.5em;
+
+  &__title > h4 {
+    margin-top: 0; // Overrides markdown scss
+  }
 }
 
 .organization__projects {
@@ -22,7 +26,7 @@
   margin-bottom: 1em;
   padding: 1em;
   border-radius: 2px;
-  box-shadow: 0 0 1px getColor(dove-grey); 
+  box-shadow: 0 0 1px getColor(dove-grey);
   overflow: hidden;
   background: getColor(concrete);
   transition: all 250ms;

@@ -1,6 +1,12 @@
 @import 'functions';
 @import 'mixins';
 
+.contributors__section {
+  @media print {
+    display: none;
+  }
+}
+
 .contributors__list {
   font-size: 14px;
   margin-left: -0.5em;
@@ -17,7 +23,7 @@
     height: 45px;
     width: 45px;
     border-radius: 50%;
-    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   }
 
   .contributor__name {
@@ -30,7 +36,7 @@
     overflow-wrap: break-word;
     hyphens: auto;
     color: getColor(fiord);
-    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
     background: transparentize(getColor(white), 0.05);
     transition: color 0.1s;
   }

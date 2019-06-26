@@ -1,11 +1,12 @@
 ---
 title: Other Options
-sort: 16
+sort: 19
 contributors:
   - sokra
   - skipjack
   - terinjokes
   - byzyk
+  - liorgreenb
   - vansosnin
   - EugeneHlushko
 related:
@@ -21,9 +22,9 @@ W> Help Wanted: This page is still a work in progress. If you are familiar with 
 
 ## `amd`
 
-`object`
+`object` `bool: false`
 
-Set the value of `require.amd` or `define.amd`:
+Set the value of `require.amd` or `define.amd`. Setting `amd` to `false` will disable webpack's AMD support.
 
 __webpack.config.js__
 
@@ -44,9 +45,10 @@ This option allows you to set the key your module looks for to a truthy value.
 As it happens, the AMD support in webpack ignores the defined name anyways.
 
 
+
 ## `bail`
 
-`boolean`
+`bool`
 
 Fail out on the first error instead of tolerating it. By default webpack will log these errors in red in the terminal, as well as the browser console when using HMR, but continue bundling. To enable it:
 
@@ -64,9 +66,9 @@ This will force webpack to exit its bundling process.
 
 ## `cache`
 
-`boolean` `object`
+`bool` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/concepts/mode/#mode-development) and disabled in [`production` mode](/concepts/mode/#mode-production). `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
+Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/concepts/mode/#mode-development) and disabled in [`production` mode](/configuration/mode/#mode-production). `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
 
 __webpack.config.js__
 
@@ -247,9 +249,10 @@ Expose custom values into the loader context.
 
 ## `parallelism`
 
-`number`
+`number: 100`
 
 Limit the number of parallel processed modules. Can be used to fine tune performance or to get more reliable profiling results.
+
 
 
 ## `profile`

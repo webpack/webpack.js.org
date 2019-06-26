@@ -1,6 +1,6 @@
 ---
 title: Asset Management
-sort: 3
+sort: 2
 contributors:
   - skipjack
   - michael-ciniawsky
@@ -8,6 +8,7 @@ contributors:
   - sudarsangp
   - chenxsan
   - EugeneHlushko
+  - AnayaDesign
 ---
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
@@ -30,10 +31,25 @@ __dist/index.html__
 +    <title>Asset Management</title>
     </head>
     <body>
--     <script src="./main.js"></script>
-+     <script src="./bundle.js"></script>
+-     <script src="main.js"></script>
++     <script src="bundle.js"></script>
     </body>
   </html>
+```
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    entry: './src/index.js',
+    output: {
+-     filename: 'main.js',
++     filename: 'bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
 ```
 
 
@@ -106,7 +122,7 @@ __src/index.js__
 + import './style.css';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -130,7 +146,7 @@ Entrypoint main = bundle.js
 ...
 ```
 
-Open up `index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result) and look at the page's head tags. It should contain our style block that we imported in `index.js`.
+Open up `index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result, because the `<style>` tag is dynamically created by JavaScript) and look at the page's head tags. It should contain our style block that we imported in `index.js`.
 
 Note that you can, and in most cases should, [minimize css](/plugins/mini-css-extract-plugin/#minimizing-for-production) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
 
@@ -202,14 +218,14 @@ __src/index.js__
 + import Icon from './icon.png';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
     element.classList.add('hello');
 
 +   // Add the image to our existing div.
-+   var myIcon = new Image();
++   const myIcon = new Image();
 +   myIcon.src = Icon;
 +
 +   element.appendChild(myIcon);
@@ -448,14 +464,14 @@ __src/index.js__
 + import Data from './data.xml';
 
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 
     // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
     element.classList.add('hello');
 
     // Add the image to our existing div.
-    var myIcon = new Image();
+    const myIcon = new Image();
     myIcon.src = Icon;
 
     element.appendChild(myIcon);
@@ -468,7 +484,7 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-When you open `index.html` and look at your console in your developer tools, you should be able to see your imported data being logged to the console!
+Re-run the `npm run build` command and open `index.html`. If you look at the console in your developer tools, you should be able to see your imported data being logged to the console!
 
 T> This can be especially helpful when implementing some sort of data visualization using a tool like [d3](https://github.com/d3). Instead of making an ajax request and parsing the data at runtime you can load it into your module during the build process so that the parsed data is ready to go as soon as the module hits the browser.
 
@@ -476,16 +492,16 @@ W> Only the default export of JSON modules can be used without warning.
 
 ```javascript
 // No warning
-import data from './data.json'
+import data from './data.json';
 
 // Warning shown, this is not allowed by the spec.
-import { foo } from './data.json'
+import { foo } from './data.json';
 ```
 
 
 ## Global Assets
 
-The coolest part of everything mentioned above, is that loading assets this way allows you to group modules and assets together in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be very useful:
+The coolest part of everything mentioned above, is that loading assets this way allows you to group modules and assets together in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be useful:
 
 ``` diff
 - |- /assets
@@ -583,14 +599,14 @@ __src/index.js__
 - import Data from './data.xml';
 -
   function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 -
 -   // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 -   element.classList.add('hello');
 -
 -   // Add the image to our existing div.
--   var myIcon = new Image();
+-   const myIcon = new Image();
 -   myIcon.src = Icon;
 -
 -   element.appendChild(myIcon);

@@ -1,6 +1,6 @@
 ---
 title: Production
-sort: 8
+sort: 17
 contributors:
   - henriquea
   - rajagopal4890
@@ -17,6 +17,8 @@ contributors:
   - xgirma
   - mehrdaad
   - SevenOutman
+  - AnayaDesign
+  - aholzner
 ---
 
 In this guide we'll dive into some of the best practices and utilities for building a production site or application.
@@ -56,7 +58,7 @@ __webpack.common.js__
 
 ``` diff
 + const path = require('path');
-+ const CleanWebpackPlugin = require('clean-webpack-plugin');
++ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 + const HtmlWebpackPlugin = require('html-webpack-plugin');
 +
 + module.exports = {
@@ -64,7 +66,8 @@ __webpack.common.js__
 +     app: './src/index.js'
 +   },
 +   plugins: [
-+     new CleanWebpackPlugin(['dist']),
++     // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
++     new CleanWebpackPlugin(),
 +     new HtmlWebpackPlugin({
 +       title: 'Production'
 +     })
@@ -136,7 +139,7 @@ __package.json__
       "file-loader": "^0.11.2",
       "html-webpack-plugin": "^2.29.0",
       "style-loader": "^0.18.2",
-      "webpack": "^3.0.0",
+      "webpack": "^4.30.0",
       "webpack-dev-middleware": "^1.12.0",
       "webpack-dev-server": "^2.9.1",
       "webpack-merge": "^4.1.0",
@@ -147,10 +150,9 @@ __package.json__
 
 Feel free to run those scripts and see how the output changes as we continue adding to our _production_ configuration.
 
-
 ## Specify the Mode
 
-Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when not in _production_ some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV === 'production'` they might drop or add significant portions of code to optimize how things run for your actual users. Since webpack v4, specifying [`mode`](/concepts/mode/) automatically configures [`DefinePlugin`](/plugins/define-plugin) for you:
+Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when not in _production_ some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV === 'production'` they might drop or add significant portions of code to optimize how things run for your actual users. Since webpack v4, specifying [`mode`](/configuration/mode/) automatically configures [`DefinePlugin`](/plugins/define-plugin) for you:
 
 __webpack.prod.js__
 
@@ -177,7 +179,7 @@ __src/index.js__
 + }
 
   function component() {
-    var element = document.createElement('pre');
+    const element = document.createElement('pre');
 
     element.innerHTML = [
       'Hello webpack!',
@@ -193,14 +195,14 @@ __src/index.js__
 
 ## Minification
 
-webpack v4+ will minify your code by default in [`production mode`](/concepts/mode/#mode-production).
+webpack v4+ will minify your code by default in [`production mode`](/configuration/mode/#mode-production).
 
 Note that while the [`TerserPlugin`](/plugins/terser-webpack-plugin/) is a great place to start for minification and being used by default, there are other options out there:
 
 - [`BabelMinifyWebpackPlugin`](https://github.com/webpack-contrib/babel-minify-webpack-plugin)
-- [`ClosureCompilerPlugin`](https://github.com/roman01la/webpack-closure-compiler)
+- [`ClosureWebpackPlugin`](https://github.com/webpack-contrib/closure-webpack-plugin)
 
-If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimization-minimizer).
+If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
 
 
 ## Source Mapping

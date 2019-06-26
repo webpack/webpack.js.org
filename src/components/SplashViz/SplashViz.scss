@@ -10,6 +10,7 @@
   max-height: 720px;
   background: getColor(elephant);
   flex-direction: column;
+  overflow: hidden;
 
   &__heading {
     color: getColor(white);

@@ -1,16 +1,17 @@
 ---
 title: Devtool
-sort: 10
+sort: 12
 contributors:
   - sokra
   - skipjack
   - SpaceK33z
   - lricoy
   - madhavarshney
+  - wizardofhogwarts
 related:
   - title: Enabling Source Maps
     url: https://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/
-  - title: Webpack's Devtool Source Map
+  - title: webpack's Devtool Source Map
     url: http://cheng.logdown.com/posts/2016/03/25/679045
 ---
 
@@ -66,7 +67,7 @@ T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilena
 
 `without source content` - Contents for the sources are not included in the Source Maps. Browsers usually try to load the source from the webserver or filesystem. You have to make sure to set [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate) correctly to match source urls.
 
-`(lines only)` - Source Maps are simplified to a single mapping per line. This usually means a single mapping per statement (assuming you author is this way). This prevents you from debugging execution on statement level and from settings breakpoints on columns of a line. Combining with minimizing is not possible as minimizers usually only emit a single line.
+`(lines only)` - Source Maps are simplified to a single mapping per line. This usually means a single mapping per statement (assuming you author it this way). This prevents you from debugging execution on statement level and from settings breakpoints on columns of a line. Combining with minimizing is not possible as minimizers usually only emit a single line.
 
 
 ### Development
