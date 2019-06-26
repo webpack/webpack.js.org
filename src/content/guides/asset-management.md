@@ -492,16 +492,16 @@ W> Only the default export of JSON modules can be used without warning.
 
 ```javascript
 // No warning
-import data from './data.json'
+import data from './data.json';
 
 // Warning shown, this is not allowed by the spec.
-import { foo } from './data.json'
+import { foo } from './data.json';
 ```
 
 
 ## Global Assets
 
-The coolest part of everything mentioned above, is that loading assets this way allows you to group modules and assets together in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be very useful:
+The coolest part of everything mentioned above, is that loading assets this way allows you to group modules and assets together in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be useful:
 
 ``` diff
 - |- /assets
