@@ -15,7 +15,7 @@
   justify-content: center;
 
   @include break {
-    justify-content: center;
+    justify-content: flex-start;
   }
 }
 
