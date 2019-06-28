@@ -1,6 +1,6 @@
 ---
 title: Writing a Plugin
-sort: 4
+sort: 3
 contributors:
   - tbroadley
   - nveenjain

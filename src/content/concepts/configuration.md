@@ -1,6 +1,6 @@
 ---
 title: Configuration
-sort: 6
+sort: 5
 contributors:
   - TheLarkInn
   - simon04

@@ -1,7 +1,7 @@
 ---
 title: Module Variables
 group: Modules
-sort: 4
+sort: 7
 contributors:
   - skipjack
   - sokra

@@ -1,6 +1,6 @@
 ---
 title: Build Performance
-sort: 17
+sort: 9
 contributors:
   - sokra
   - tbroadley

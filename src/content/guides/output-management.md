@@ -1,6 +1,6 @@
 ---
 title: Output Management
-sort: 4
+sort: 3
 contributors:
   - skipjack
   - TheDutchCoder
