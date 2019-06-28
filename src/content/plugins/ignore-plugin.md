@@ -23,15 +23,11 @@ new webpack.IgnorePlugin(resourceRegExp, [contextRegExp]);
 
 ## Using filter functions
 
-- `checkContext(context)` A Filter function that receives context as the argument, must return boolean.
-- `checkResource(resource)` A Filter function that receives resource as the argument, must return boolean.
+- `checkResource (resource, context)` A Filter function that receives `resource` and `context` as arguments, must return boolean.
+- `checkContext (context)` was __removed in webpack 5__ as `checkResource` already gets context.
 
 ```javascript
 new webpack.IgnorePlugin({
-  checkContext (context) {
-    // do something with context
-    return true|false;
-  },
   checkResource (resource) {
     // do something with resource
     return true|false;
