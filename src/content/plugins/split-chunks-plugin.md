@@ -156,6 +156,7 @@ Minimum number of chunks that must share a module before splitting.
 Minimum size, in bytes, for a chunk to be generated.
 
 ### `splitChunks.minRemainingSize`
+
 #### `splitChunks.cacheGroups.{cacheGroup}.minRemainingSize`
 
 `number`
