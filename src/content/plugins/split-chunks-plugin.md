@@ -58,6 +58,7 @@ module.exports = {
     splitChunks: {
       chunks: 'async',
       minSize: 30000,
+      minRemainingSize: 0,
       maxSize: 0,
       minChunks: 1,
       maxAsyncRequests: 6,
@@ -153,6 +154,14 @@ Minimum number of chunks that must share a module before splitting.
 `number`
 
 Minimum size, in bytes, for a chunk to be generated.
+
+### `splitChunks.minRemainingSize`
+
+#### `splitChunks.cacheGroups.{cacheGroup}.minRemainingSize`
+
+`number`
+
+`splitChunks.minRemainingSize` option was introduced in webpack 5 to avoid zero sized modules by ensuring that the minimum size of the chunk which remains after splitting is above a limit. Defaults to `0` in ['development' mode](/configuration/mode/#mode-development). For other cases `splitChunks.minRemainingSize` defaults to the value of `splitChunks.minSize` so it doesn't need to be specified manually expect for the rare cases where deep control is required.
 
 ### `splitChunks.maxSize`
 
