@@ -1,6 +1,6 @@
 ---
 title: Authoring Libraries
-sort: 12
+sort: 7
 contributors:
   - pksjce
   - johnstew

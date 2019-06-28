@@ -1,6 +1,6 @@
 ---
 title: Loader Interface
-sort: 4
+sort: 5
 contributors:
   - TheLarkInn
   - jhnns
@@ -434,6 +434,13 @@ Emit a file. This is webpack-specific.
 ### `this.fs`
 
 Access to the `compilation`'s `inputFileSystem` property.
+
+
+### `this.mode`
+
+Read in which [`mode`](/configuration/mode/) webpack is running.
+
+Possible values: `'production'`, `'development'`, `'none'`
 
 
 ## Deprecated context properties

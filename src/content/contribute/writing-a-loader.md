@@ -1,6 +1,6 @@
 ---
 title: Writing a Loader
-sort: 3
+sort: 2
 contributors:
   - asulaiman
   - michael-ciniawsky

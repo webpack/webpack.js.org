@@ -1,6 +1,6 @@
 ---
 title: Tree Shaking
-sort: 7
+sort: 16
 contributors:
   - simon04
   - zacanger

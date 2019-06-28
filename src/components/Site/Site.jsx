@@ -1,6 +1,6 @@
 // Import External Dependencies
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { hot as Hot } from 'react-hot-loader';
 import DocumentTitle from 'react-document-title';
 
@@ -59,12 +59,12 @@ class Site extends React.Component {
           links={[
             {
               content: 'Documentation',
-              url: '/concepts',
+              url: '/concepts/',
               isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
               children: this._strip(sections.filter(item => item.name !== 'contribute'))
             },
-            { content: 'Contribute', url: '/contribute' },
-            { content: 'Vote', url: '/vote' },
+            { content: 'Contribute', url: '/contribute/' },
+            { content: 'Vote', url: '/vote/' },
             { content: 'Blog', url: 'https://medium.com/webpack' }
           ]}
         />
@@ -75,6 +75,7 @@ class Site extends React.Component {
           toggle={this._toggleSidebar} /> : null}
 
         <Switch>
+          <Route exact strict path="/:url*" render={props => <Redirect to={`${props.location.pathname}/`}/>} />
           <Route path="/" exact component={Splash} />
           <Route
             render={props => (
@@ -157,7 +158,7 @@ class Site extends React.Component {
       sort,
       anchors,
       children: children ? this._strip(children) : []
-    }));
+    })).filter(page => page.title !== 'printable.md');
   };
 }
 
