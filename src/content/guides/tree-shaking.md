@@ -245,9 +245,9 @@ But we can help terser by using the `/*#__PURE__*/` annotation. It flags a state
 
 `var Button$1 = /*#__PURE__*/ withAppProvider()(Button);`
 
-This would allow to remove this piece of code. But there are still quastions with the imports which need to be included/evaluated because they could contain side effects.
+This would allow to remove this piece of code. But there are still questions with the imports which need to be included/evaluated because they could contain side effects.
 
-To takle this, we use [`"sideEffects"`](/guides/tree-shaking/#mark-the-file-as-side-effect-free) property in `package.json`.
+To tackle this, we use [`"sideEffects"`](/guides/tree-shaking/#mark-the-file-as-side-effect-free) property in `package.json`.
 
 It similar to `/*#__PURE__*/` but on a module level instead of a statement level. It says (`"sideEffects"` property): "If no direct export from a module flagged with no-sideEffects is used, the bundler can skip evaluating the module from side effects.".
 
