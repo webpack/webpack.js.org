@@ -1,6 +1,6 @@
 ---
 title: Installation
-sort: 1
+sort: 13
 contributors:
   - pksjce
   - bebraw

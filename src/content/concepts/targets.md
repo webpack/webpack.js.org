@@ -1,6 +1,6 @@
 ---
 title: Targets
-sort: 10
+sort: 9
 contributors:
   - TheLarkInn
   - rouzbeh84

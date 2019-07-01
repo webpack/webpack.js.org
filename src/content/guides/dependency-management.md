@@ -1,6 +1,6 @@
 ---
 title: Dependency Management
-sort: 20
+sort: 12
 contributors:
   - ndelangen
   - chrisVillanueva

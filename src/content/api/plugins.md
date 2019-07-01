@@ -1,7 +1,7 @@
 ---
 title: Plugin API
 group: Plugins
-sort: 0
+sort: 11
 contributors:
   - thelarkinn
   - pksjce

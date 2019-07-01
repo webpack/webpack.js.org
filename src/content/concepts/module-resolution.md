@@ -1,6 +1,6 @@
 ---
 title: Module Resolution
-sort: 8
+sort: 7
 contributors:
   - pksjce
   - pastelsky
