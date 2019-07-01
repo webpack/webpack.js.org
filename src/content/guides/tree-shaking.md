@@ -311,7 +311,7 @@ In this case only 4 modules are included in the bundle:
 
 After this optimization, other optimizations can still apply. For example: `buttonFrom` and `buttonsFrom` exports from `Button.js` are unused too. `usedExports` optimization will pick it up and terser may be able to drop some statements from the module.
 
-Module Concatenation also apply and these 4 modules plus the entry module (and probably more dependencies) can be concatenated. So `index.js` has no code generated in the end.
+Module Concatenation also applies. So that these 4 modules plus the entry module (and probably more dependencies) can be concatenated. __`index.js` has no code generated in the end__.
 
 ## Minify the Output
 
