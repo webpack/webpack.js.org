@@ -253,13 +253,12 @@ Running another build, we would expect only our `main` bundle's hash to change, 
 - The `vendor` bundle changed because its `module.id` was changed.
 - And, the `runtime` bundle changed because it now contains a reference to a new module.
 
-The first and last are expected -- it's the `vendor` hash we want to fix. Luckily, there are two plugins we can use to resolve this issue. The first is the `NamedModulesPlugin`, which will use the path to the module rather than a numerical identifier. While this plugin is useful during development for more readable output, it does take a bit longer to run. The second option is the [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin), which is recommended for production builds:
+The first and last are expected, it's the `vendor` hash we want to fix. Let's use [`optimization.moduleIds`](/configuration/optimization/#optimizationmoduleids) with `'hashed'` option:
 
 __webpack.config.js__
 
 ``` diff
   const path = require('path');
-+ const webpack = require('webpack');
   const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -270,14 +269,14 @@ __webpack.config.js__
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching'
-      }),
-+      new webpack.HashedModuleIdsPlugin()
+      })
     ],
     output: {
       filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist')
     },
     optimization: {
++     moduleIds: 'hashed',
       runtimeChunk: 'single',
       splitChunks: {
         cacheGroups: {
