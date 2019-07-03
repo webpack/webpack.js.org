@@ -275,7 +275,7 @@ An array of all the loaders. It is writable in the pitch phase.
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
 
-In [the example](#the-loader-context):
+In the example:
 
 ``` javascript
 [
@@ -299,21 +299,21 @@ In [the example](#the-loader-context):
 
 The index in the loaders array of the current loader.
 
-In [the example](#the-loader-context): in loader1: `0`, in loader2: `1`
+In the example: in loader1: `0`, in loader2: `1`
 
 
 ### `this.resource`
 
 The resource part of the request, including query.
 
-In [the example](#the-loader-context): `"/abc/resource.js?rrr"`
+In the example: `"/abc/resource.js?rrr"`
 
 
 ### `this.resourcePath`
 
 The resource file.
 
-In [the example](#the-loader-context): `"/abc/resource.js"`
+In the example: `"/abc/resource.js"`
 
 
 ### `this.resourceQuery`
