@@ -18,7 +18,7 @@ The Node.js API is useful in scenarios in which you need to customize the build 
 
 ## Installation
 
-To start using webpack Node.js API, first install webpack if you haven’t yet:
+To start using the webpack Node.js API, first install webpack if you haven’t yet:
 
 ``` bash
 npm install --save-dev webpack
@@ -54,7 +54,7 @@ webpack({
 });
 ```
 
-T> The `err` object __will not__ include compilation errors and those must be handled separately using `stats.hasErrors()` which will be covered in detail in [Error Handling](#error-handling) section of this guide. The `err` object will only contain webpack-related issues, such as misconfiguration, etc.
+T> The `err` object __will not__ include compilation errors. Those must be handled separately using `stats.hasErrors()`, which will be covered in detail in the [Error Handling](#error-handling) section of this guide. The `err` object will only contain webpack-related issues, such as misconfiguration, etc.
 
 T> You can provide the `webpack` function with an array of configurations. See
 the [MultiCompiler](#multicompiler) section below for more information.
