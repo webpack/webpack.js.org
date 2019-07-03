@@ -402,7 +402,7 @@ addDependency(file: string)
 dependency(file: string) // shortcut
 ```
 
-Adds a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack-contrib/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the URLs for those attributes as dependencies of the html file that is parsed.
+Add a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack-contrib/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the URLs for those attributes as dependencies of the html file that is parsed.
 
 
 ### `this.addContextDependency`
@@ -420,7 +420,7 @@ Add a directory as dependency of the loader result.
 clearDependencies()
 ```
 
-Remove all dependencies of the loader result. Even initial dependencies and those of other loaders. Consider using `pitch`.
+Remove all dependencies of the loader result, even initial dependencies and those of other loaders. Consider using `pitch`.
 
 
 ### `this.emitFile`
