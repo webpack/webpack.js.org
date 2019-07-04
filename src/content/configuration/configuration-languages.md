@@ -75,9 +75,9 @@ __tsconfig-for-webpack-config.json__
 }
 ```
 
-T> `ts-node` can resolve a `tsconfig.json` file using the environment variable provided by `tsconfig-path`.
+T> `ts-node` can resolve a `tsconfig.json` file using the environment variable provided by `tsconfig-paths`.
 
-Then set the environment variable `process.env.TS_NODE_PROJECT` provided by `tsconfig-path` like so:
+Then set the environment variable `process.env.TS_NODE_PROJECT` provided by `tsconfig-paths` like so:
 
 __package.json__
 
