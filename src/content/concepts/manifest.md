@@ -7,7 +7,7 @@ contributors:
 related:
   - title: Separating a Manifest
     url: https://survivejs.com/webpack/optimizing/separating-manifest/
-  - title: Predictable Long Term Caching with Webpack
+  - title: Predictable Long Term Caching with webpack
     url: https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31
   - title: Caching
     url: /guides/caching/
