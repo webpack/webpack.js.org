@@ -89,6 +89,10 @@ module.exports = env => merge(common(env), {
           from: './assets/icon-square-big.svg',
           to: './assets/'
         },
+        {
+          from: './assets/robots.txt',
+          to: './'
+        },
         'CNAME'
       ])
     ]
