@@ -22,7 +22,7 @@ At its core, __webpack__ is a _static module bundler_ for modern JavaScript appl
 
 T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).
 
-Since version 4.0.0, __webpack does not require a configuration file__ to bundle your project; nevertheless, it is [incredibly configurable](/configuration) to better fit your needs.
+Since version 4.0.0, __webpack does not require a configuration file__ to bundle your project. Nevertheless, it is [incredibly configurable](/configuration) to better fit your needs.
 
 To get started you only need to understand its __Core Concepts__:
 
