@@ -267,7 +267,7 @@ webpack({
 The `MultiCompiler` module allows webpack to run multiple configurations in
 separate compilers. If the `options` parameter in the webpack's NodeJS api is
 an array of options, webpack applies separate compilers and calls the
-`callback` method at the end of each compiler execution.
+`callback` after all compilers have been executed.
 
 ``` js-with-links
 var webpack = require('webpack');
