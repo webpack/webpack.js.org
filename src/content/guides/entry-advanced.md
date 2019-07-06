@@ -26,7 +26,7 @@ __home.scss__
 __account.js__
 
 ```javascript
-console.log('accout page type');
+console.log('account page type');
 ```
 
 __account.scss__
