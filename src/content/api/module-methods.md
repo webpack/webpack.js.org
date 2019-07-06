@@ -59,7 +59,7 @@ export default {
 
 ### `import()`
 
-`function(String path):Promise`
+`function(string path):Promise`
 
 Dynamically load modules. Calls to `import()` are treated as split points, meaning the requested module and its children are split out into a separate chunk.
 
@@ -92,7 +92,7 @@ import(`./locale/${language}.json`).then(module => {
 });
 ```
 
-T> Using the [`webpackInclude` and `webpackExclude`](/api/module-methods/#magic-comments) options allows us to add regex patterns that reduce the files that webpack will bundle for this import.
+T> Using the [`webpackInclude` and `webpackExclude`](/api/module-methods/#magic-comments) options allows you to add regex patterns that reduce the number of files that webpack will bundle for this import.
 
 #### Magic Comments
 
