@@ -9,6 +9,7 @@ contributors:
   - byzyk
   - debs-obrien
   - wizardofhogwarts
+  - EugeneHlushko
 related:
   - title: CommonJS Wikipedia
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -58,11 +59,12 @@ export default {
 
 ### `import()`
 
-`import('path/to/module') -> Promise`
+`function(string path):Promise`
 
 Dynamically load modules. Calls to `import()` are treated as split points, meaning the requested module and its children are split out into a separate chunk.
 
 T> The [ES2015 Loader spec](https://whatwg.github.io/loader/) defines `import()` as method to load ES2015 modules dynamically on runtime.
+
 
 ``` javascript
 if ( module.hot ) {
@@ -73,6 +75,24 @@ if ( module.hot ) {
 ```
 
 W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
+
+
+### Dynamic expressions in import()
+
+It is not possible to use a fully dynamic import statement, such as `import(foo)`. Because `foo` could potentially be any path to any file in your system or project.
+
+The `import()` must contain at least some information about where the module is located. Bundling can be limited to a specific directory or set of files so that when you are using a dynamic expression - every module that could potentially be requested on an `import()` call is included. For example, ``import(`./locale/${language}.json`)`` will cause every `.json` file in the `./locale` directory to be bundled into the new chunk. At run time, when the variable `language` has been computed, any file like `english.json` or `german.json` will be available for consumption.
+
+
+```javascript
+// imagine we had a method to get language from cookies or other storage
+const language = detectVisitorLanguage();
+import(`./locale/${language}.json`).then(module => {
+  // do something with the translations
+});
+```
+
+T> Using the [`webpackInclude` and `webpackExclude`](/api/module-methods/#magic-comments) options allows you to add regex patterns that reduce the number of files that webpack will bundle for this import.
 
 #### Magic Comments
 
@@ -126,10 +146,6 @@ T> Note that all options can be combined like so `/* webpackMode: "lazy-once", w
 `webpackExclude`: A regular expression that will be matched against during import resolution. Any module that matches __will not be bundled__.
 
 T> Note that `webpackInclude` and `webpackExclude` options do not interfere with the prefix. eg: `./locale`.
-
-W> Fully dynamic statements, such as `import(foo)`, __will fail__ because webpack requires at least some file location information. This is because `foo` could potentially be any path to any file in your system or project. The `import()` must contain at least some information about where the module is located, so bundling can be limited to a specific directory or set of files.
-
-W> Every module that could potentially be requested on an `import()` call is included. For example, ``import(`./locale/${language}.json`)`` will cause every `.json` file in the `./locale` directory to be bundled into the new chunk. At run time, when the variable `language` has been computed, any file like `english.json` or `german.json` will be available for consumption. Using the `webpackInclude` and `webpackExclude` options allows us to add regex patterns that reduce the files that webpack will bundle for this import.
 
 W> The use of `System.import` in webpack [did not fit the proposed spec](https://github.com/webpack/webpack/issues/2163), so it was deprecated in webpack [2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`.
 
