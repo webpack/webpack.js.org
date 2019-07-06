@@ -280,6 +280,8 @@ __src/index.js__
   });
 ```
 
+T> It is possible to provide a [dynamic expression](/api/module-methods/#dynamic-expressions-in-import) to `import()` when you might need to import specific module based on a computed variable later.
+
 
 ## Prefetching/Preloading modules
 

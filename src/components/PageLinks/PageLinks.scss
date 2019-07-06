@@ -9,6 +9,14 @@
   font-weight: 600;
   text-transform: uppercase;
 
+  button {
+    padding: 0;
+    background: none;
+    border: none;
+    font-family: $font-stack-body;
+    font-weight: 600;
+  }
+
   @media print {
     display: none;
   }
