@@ -32,7 +32,7 @@ console.log('accout page type');
 __account.scss__
 
 ```scss
-// accout page individual styles
+// account page individual styles
 ```
 
 We will use [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) in `production` mode for css as a best practice.
