@@ -201,9 +201,10 @@
     text-align: left;
     padding: 6px 12px;
     background: darken(#f4f6f6, 1%);
+    border-right: 1px solid #cccccc;
 
-    &:first-child {
-      border-right: 1px solid #cccccc;
+    &:last-child {
+      border-right:none;
     }
   }
 
@@ -232,9 +233,10 @@
     flex-basis: 100%;
     align-self: stretch;
     padding: 4px 12px;
+    border-right: 1px solid #cccccc;
 
-    &:first-child {
-      border-right: 1px solid #cccccc;
+    &:last-child {
+      border-right:none;
     }
 
     @include break {

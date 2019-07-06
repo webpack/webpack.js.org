@@ -20,7 +20,8 @@ body {
   color: getColor(elephant);
 }
 
-a {
+a,
+button.as-link {
   color: $text-color-highlight;
   text-decoration: none;
   transition: color 250ms;
