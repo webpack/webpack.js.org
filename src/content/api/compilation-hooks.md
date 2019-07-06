@@ -295,7 +295,7 @@ Restore module information from records.
 
 W> This hook will be removed in v5.0.0
 
-Sort the modules in from most to least important.
+Sort the modules from most to least important.
 
 - Callback Parameters: `modules`
 
@@ -363,7 +363,7 @@ W> This hook will be removed in v5.0.0
 Sort the chunks in from most to least important.
 
 - Callback Parameters: `chunks`
-  
+
 
 ### `beforeChunkIds`
 
@@ -418,7 +418,7 @@ Triggered after chunk `id` optimization has finished.
 
 `SyncHook`
 
-Store module info to the records. This is triggered only if 
+Store module info to the records. This is triggered only if
 
 - Callback Parameters: `modules` `records`
 
@@ -622,7 +622,7 @@ Optimize all assets stored in `compilation.assets`.
 
 `SyncHook`
 
-The assets have been optimized.
+The assets have been optimized.
 
 - Callback Parameters: `assets`
 
@@ -681,7 +681,7 @@ Called to determine the path of an asset.
 
 `SyncBailHook`
 
-Called to determine if a asset need to be processed further after being emitted. 
+Called to determine if a asset need to be processed further after being emitted.
 
 
 ### `childCompiler`
