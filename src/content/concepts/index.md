@@ -23,7 +23,7 @@ At its core, __webpack__ is a _static module bundler_ for modern JavaScript appl
 
 T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).
 
-Since version 4.0.0, __webpack does not require a configuration file__ to bundle your project, nevertheless it is [incredibly configurable](/configuration) to better fit your needs.
+Since version 4.0.0, __webpack does not require a configuration file__ to bundle your project. Nevertheless, it is [incredibly configurable](/configuration) to better fit your needs.
 
 To get started you only need to understand its __Core Concepts__:
 
@@ -128,7 +128,7 @@ You can check further customization when including loaders in the [loaders secti
 
 While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks like bundle optimization, asset management and injection of environment variables.
 
-T> Check out the [plugin interface](/api/plugins) and how to use it to extend webpacks capabilities.
+T> Check out the [plugin interface](/api/plugins) and how to use it to extend webpack's capabilities.
 
 In order to use a plugin, you need to `require()` it and add it to the `plugins` array. Most plugins are customizable through options. Since you can use a plugin multiple times in a config for different purposes, you need to create an instance of it by calling it with the `new` operator.
 
@@ -154,7 +154,7 @@ In the example above, the `html-webpack-plugin` generates an HTML file for your 
 
 T> There are many plugins that webpack provides out of the box! Check out the [list of plugins](/plugins).
 
-Using plugins in your webpack config is straightforward - however, there are many use cases that are worth further exploration. [Learn more about them here](/concepts/plugins).
+Using plugins in your webpack config is straightforward. However, there are many use cases that are worth further exploration. [Learn more about them here](/concepts/plugins).
 
 
 ## Mode
