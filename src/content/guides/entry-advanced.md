@@ -7,7 +7,7 @@ contributors:
 
 ## Multiple file types per entry
 
-It is possible to provide different types of files when using an array of values for [entry](/configuration/entry-context/#entry) to achieve separate bundles for CSS and JavaScript (and other) files in applicataions that are not using `import` for styles in JavaScript (pre Single Page Applications or different reasons).
+It is possible to provide different types of files when using an array of values for [entry](/configuration/entry-context/#entry) to achieve separate bundles for CSS and JavaScript (and other) files in applications that are not using `import` for styles in JavaScript (pre Single Page Applications or different reasons).
 
 Let's make an example. We have a PHP application with two page types: home and account. The home page has different layout and non-sharable JavaScript with the rest of the application (account page). We want to output `home.js` and `home.css` from our application files for the home page and `account.js` and `account.css` for account page.
 
