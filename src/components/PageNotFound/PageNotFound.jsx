@@ -12,7 +12,7 @@ export default () => {
         Oops! The page you are looking for has been removed or relocated.
       </h4>
       <div className="pagenotfound-container__button">
-        <Link to="/">Go Back</Link>
+        <Link to="/">Go to Homepage</Link>
       </div>
     </div>
   );
