@@ -80,7 +80,7 @@ Flag this module as not-update-able. This makes sense when this module has irrev
 
 ### `dispose` (or `addDisposeHandler`)
 
-Add a handler which is executed when the current module code is replaced. This should be used to remove any persistent resource you have claimed or created. If you want to transfer state to the updated module, add it to given `data` parameter. This object will be available at `module.hot.data` after the update.
+Add a handler which is executed when the current module code is replaced. This should be used to remove any persistent resource you have claimed or created. If you want to transfer state to the updated module, add it to the given `data` parameter. This object will be available at `module.hot.data` after the update.
 
 ``` js
 module.hot.dispose(data => {
@@ -91,7 +91,7 @@ module.hot.dispose(data => {
 
 ### `removeDisposeHandler`
 
-Remove the callback added via `dispose` or `addDisposeHandler`.
+Remove the handler added via `dispose` or `addDisposeHandler`.
 
 ``` js
 module.hot.removeDisposeHandler(callback);
@@ -150,7 +150,7 @@ The optional `options` object can include the following properties:
 
 - `ignoreUnaccepted` (boolean): Ignore changes made to unaccepted modules.
 - `ignoreDeclined` (boolean): Ignore changes made to declined modules.
-- `ignoreErrored` (boolean): Ignore errors throw in accept handlers, error handlers and while reevaluating module.
+- `ignoreErrored` (boolean): Ignore errors thrown in accept handlers, error handlers and while reevaluating module.
 - `onDeclined` (function(info)): Notifier for declined modules
 - `onUnaccepted` (function(info)): Notifier for unaccepted modules
 - `onAccepted` (function(info)): Notifier for accepted modules
