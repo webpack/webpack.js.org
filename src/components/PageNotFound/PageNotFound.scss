@@ -1,26 +1,9 @@
-.pagenotfound-container {
-  width: 100%;
-  padding: 20px;
-
-  &__head{
-    color: #1b1b1b;
-    margin: 10px;
-    font-size: 2.2rem;
-  }
-
-  &__text{
-    margin: 10px;
-    font-size: 1.3rem;
-  }
-
-  &__button{
-    display: inline-block;
-    padding: 5px;
-    margin: 15px 10px;
-    font-size: 1.1rem;
-    border-radius: 5px;
-    width: auto;
-    border: 1px solid #1a6bac;
-  }
+.button{
+  text-decoration: none;
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  width: auto;
+  border: 1px solid #1a6bac;
 }
-
