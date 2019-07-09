@@ -201,7 +201,7 @@ module.exports = {
 
 ### Node.js Versions 8.9.10-9.11.1
 
-There was a [performance regression](https://github.com/nodejs/node/issues/19769) in Node.js versions 8.9.10 - 9.11.1 in the ES2015 `Map` and `Set` implementations. Webpack uses those data structures liberally, so this regression affects compile times.
+There was a [performance regression](https://github.com/nodejs/node/issues/19769) in Node.js versions 8.9.10 - 9.11.1 in the ES2015 `Map` and `Set` implementations. webpack uses those data structures liberally, so this regression affects compile times.
 
 Earlier and later Node.js versions are not affected.
 
