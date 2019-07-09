@@ -284,7 +284,7 @@ __package.json__
 // ...
 ```
 
-For `import { Button } from "@shopify/poliaris";` this has the following implications:
+For `import { Button } from "@shopify/polaris";` this has the following implications:
 
 - include it: include the module, evaluate it and continue analysing dependencies
 - skip over: don't include it, don't evaluate it but continue analysing dependencies
