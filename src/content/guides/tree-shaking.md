@@ -251,7 +251,7 @@ To tackle this, we use [`"sideEffects"`](/guides/tree-shaking/#mark-the-file-as-
 
 It similar to `/*#__PURE__*/` but on a module level instead of a statement level. It says (`"sideEffects"` property): "If no direct export from a module flagged with no-sideEffects is used, the bundler can skip evaluating the module for side effects.".
 
-In the polaris example original modules look like this:
+In the Shopify's Polaris example original modules look like this:
 
 __index.js__
 
