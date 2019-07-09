@@ -1,6 +1,6 @@
 ---
 title: Asset Management
-sort: 3
+sort: 2
 contributors:
   - skipjack
   - michael-ciniawsky

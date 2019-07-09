@@ -1,6 +1,6 @@
 ---
 title: DevServer
-sort: 9
+sort: 11
 contributors:
   - sokra
   - skipjack
@@ -1062,8 +1062,10 @@ module.exports = {
   //...
   devServer: {
     proxy: {
-      '/api': 'http://localhost:3000',
-      changeOrigin: true
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true
+      }
     }
   }
 };

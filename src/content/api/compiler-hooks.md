@@ -1,7 +1,7 @@
 ---
 title: Compiler Hooks
 group: Plugins
-sort: 1
+sort: 8
 contributors:
   - rishantagarwal
   - byzyk
@@ -109,7 +109,7 @@ Adds a hook right before running the compiler.
 
 `AsyncSeriesHook`
 
-Hook into the compiler before it begins reading [`records`](/configuration/other-options/#recordspath). 
+Hook into the compiler before it begins reading [`records`](/configuration/other-options/#recordspath).
 
 - Callback Parameters: `compiler`
 
@@ -173,7 +173,7 @@ compiler.hooks.beforeCompile.tapAsync('MyPlugin', (params, callback) => {
 
 `SyncHook`
 
-Called right after `beforeCompile`, before a new compilation is created. 
+Called right after `beforeCompile`, before a new compilation is created.
 
 - Callback Parameters: `compilationParams`
 
@@ -209,7 +209,7 @@ Executed before finishing the compilation.
 
 `AsyncSeriesHook`
 
-Called after finishing and sealing the compilation.  
+Called after finishing and sealing the compilation.
 
 - Callback Parameters: `compilation`
 

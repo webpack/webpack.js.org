@@ -1,7 +1,7 @@
 ---
 title: Module Variables
 group: Modules
-sort: 4
+sort: 7
 contributors:
   - skipjack
   - sokra
@@ -116,7 +116,7 @@ __resourceQuery === '?test';
 
 ### `__webpack_public_path__` (webpack-specific)
 
-Equals the config options `output.publicPath`.
+Equals the config option's `output.publicPath`.
 
 
 ### `__webpack_require__` (webpack-specific)

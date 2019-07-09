@@ -22,7 +22,9 @@ const enhance = (tree, options) => {
     // replace empty strings with `/`
     .replace(/^$/, '/')
     // delete trailing dots for node
-    .replace(/^(\.)/g, '');
+    .replace(/^(\.)/g, '')
+    // add trailing slash if missing
+    .replace(/\/?$/, '/');
 
   if (tree.type === 'file') {
     let anchors = [];

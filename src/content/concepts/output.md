@@ -1,6 +1,6 @@
 ---
 title: Output
-sort: 3
+sort: 2
 contributors:
   - TheLarkInn
   - chyipin
@@ -13,7 +13,7 @@ Configuring the `output` configuration options tells webpack how to write the co
 
 ## Usage
 
-The minimum requirements for the `output` property in your webpack config is to set its value to an object including the following thing:
+The minimum requirement for the `output` property in your webpack config is to set its value to an object including the following property:
 
 - A `filename` to use for the output file(s).
 

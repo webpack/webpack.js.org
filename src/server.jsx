@@ -45,7 +45,7 @@ export default locals => {
           <meta charset="utf-8" />
           <meta name="theme-color" content="#2B3A42" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          { isPrintPage(locals.path) ? <meta name="robots" content="noindex" /> : null }
+          { isPrintPage(locals.path) ? <meta name="robots" content="noindex,nofollow" /> : null }
           <title>{title}</title>
           <meta name="description" content={ description } />
           <meta property="og:site_name" content="webpack" />

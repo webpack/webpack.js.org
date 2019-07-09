@@ -3,7 +3,6 @@ title: MinChunkSizePlugin
 contributors:
   - byzyk
   - erykpiast
-sort: 1
 ---
 
 Keep chunk size above the specified limit by merging chunks that are smaller than the `minChunkSize`.

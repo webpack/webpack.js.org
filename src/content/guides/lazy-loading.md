@@ -1,6 +1,6 @@
 ---
 title: Lazy Loading
-sort: 10
+sort: 18
 contributors:
   - iammerrick
   - chrisVillanueva
