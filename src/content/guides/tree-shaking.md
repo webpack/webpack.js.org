@@ -182,7 +182,7 @@ The [`sideEffects`](/configuration/optimization/#optimizationsideeffects) and [`
 
 __`sideEffects` is much more effective__ since it allows to skip whole modules/files and the complete subtree.
 
-`usedExports` relies on [terser](https://github.com/terser-js/terser) to detect side effects in statements. It is a difficult task in JavaScript and not as effective as straighforward `sideEffects` flag. It also can't skip subtree/dependencies since the spec says that side effects need to be evaluated. While exporting function works fine, react's Higher Order Components (HOC) are problematic in this regard.
+`usedExports` relies on [terser](https://github.com/terser-js/terser) to detect side effects in statements. It is a difficult task in JavaScript and not as effective as straighforward `sideEffects` flag. It also can't skip subtree/dependencies since the spec says that side effects need to be evaluated. While exporting function works fine, React's Higher Order Components (HOC) are problematic in this regard.
 
 Let's make an example:
 
