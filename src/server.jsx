@@ -34,6 +34,7 @@ function isPrintPage(url) {
 // Export method for `SSGPlugin`
 export default locals => {
   let { assets } = locals.webpackStats.compilation;
+
   let title = getPageTitle(locals.content, locals.path);
   let description = 'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.';
 
@@ -62,9 +63,16 @@ export default locals => {
           ))}
           <link rel="manifest" href="/manifest.json" />
           <link rel="canonical" href={`https://webpack.js.org${enforceTrailingSlash(locals.path)}`} />
-          <link rel="apple-touch-icon" href="/images/icons/icon-192x192.png" />
-          <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/icon-152x152.png" />
-          <link rel="icon" sizes="192x192" href="/images/icons/icon-192x192.png" />
+          <meta name="mobile-web-app-capable" content="yes" />
+          <link rel="icon" sizes="192x192" href="/icon_192x192.png" />
+          <link rel="icon" sizes="512x512" href="/icon_512x512.png" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+          <meta name="apple-mobile-web-app-title" content="webpack" />
+          <link rel="apple-touch-icon-precomposed" href="/icon_180x180.png" />
+          <link rel="mask-icon" href={ Logo } color="#465e69" />
+          <meta name="msapplication-TileImage" content="/icon_150x150.png" />
+          <meta name="msapplication-TileColor" content="#465e69" />
         </head>
         <body>
           <div id="root">
