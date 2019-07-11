@@ -7,6 +7,7 @@ contributors:
   - madhavarshney
   - misterdev
   - wizardofhogwarts
+  - EugeneHlushko
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -277,7 +278,7 @@ Called after the chunkmodules optimization has successfully completed.
 
 `SyncBailHook`
 
-Called to determine whether or not to store records. Returning anything `!== false` will prevent every other "record" hook from being executed (`record`, `recordModules`, `recordChunks` and `recordHash` )
+Called to determine whether or not to store records. Returning anything `!== false` will prevent every other "record" hook from being executed ([`record`](#record), [`recordModules`](#recordmodules), [`recordChunks`](#recordchunks) and [`recordHash`](#recordhash)).
 
 
 ### `reviveModules`
@@ -418,7 +419,7 @@ Triggered after chunk `id` optimization has finished.
 
 `SyncHook`
 
-Store module info to the records. This is triggered only if
+Store module info to the records. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
 
 - Callback Parameters: `modules` `records`
 
@@ -427,7 +428,7 @@ Store module info to the records. This is triggered only if
 
 `SyncHook`
 
-Store chunk info to the records.
+Store chunk info to the records. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
 
 - Callback Parameters: `chunks` `records`
 
@@ -489,7 +490,7 @@ Called after the compilation is hashed.
 
 `SyncHook`
 
-Store information about record hash to the `records`.
+Store information about record hash to the `records`. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
 
 - Callback Parameters: `records`
 
@@ -498,7 +499,7 @@ Store information about record hash to the `records`.
 
 `SyncHook`
 
-Store information about the `compilation` to the `records`.
+Store information about the `compilation` to the `records`. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
 
 - Callback Parameters: `compilation` `records`
 
