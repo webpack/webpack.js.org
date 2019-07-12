@@ -453,7 +453,7 @@ By default, on-demand chunk's output starts with:
 __example-on-demand-chunk.js__
 
 ```javascript
-(window.webpackJsonp = window.webpackJsonp || []).push(...)
+(window.webpackJsonp = window.webpackJsonp || []).push(/* ... */);
 ```
 
 Change `output.jsonpFunction` for safe usage of multiple webpack runtimes on the same webpage:
@@ -474,7 +474,7 @@ On-demand chunks content would now change to:
 __example-on-demand-chunk.js__
 
 ```javascript
-(window.wpJsonpFlightsWidget = window.wpJsonpFlightsWidget || []).push(...)
+(window.wpJsonpFlightsWidget = window.wpJsonpFlightsWidget || []).push(/* ... */);
 ```
 
 ## `output.library`
