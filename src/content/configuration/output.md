@@ -419,7 +419,7 @@ T> Typically you don't need to change `output.hotUpdateChunkFilename`.
 
 ## `output.hotUpdateFunction`
 
-`function`
+`string`
 
 Only used when [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading hot updates.
 
@@ -438,16 +438,44 @@ T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
 ## `output.jsonpFunction`
 
-`string`
+`string: 'webpackJsonp'`
 
 Only used when [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading on-demand chunks.
 
 A JSONP function name used to asynchronously load chunks or join multiple initial chunks (SplitChunksPlugin, AggressiveSplittingPlugin).
 
-This needs to be changed if multiple webpack runtimes (from different compilation) are used on the same webpage.
+If using the [`output.library`](#outputlibrary) option, the library name is automatically concatenated with `output.jsonpFunction`'s value.
 
-If using the [`output.library`](#outputlibrary) option, the library name is automatically appended.
+W> If multiple webpack runtimes (from different compilations) are used on the same webpage, there is a risk of conflicts of on-demand chunks in the global namespace.
 
+By default, on-demand chunk's output starts with:
+
+__example-on-demand-chunk.js__
+
+```javascript
+(window.webpackJsonp = window.webpackJsonp || []).push(...)
+```
+
+Change `output.jsonpFunction` for safe usage of multiple webpack runtimes on the same webpage:
+
+__webpack.config.flight-widget.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    jsonpFunction: 'wpJsonpFlightsWidget'
+  }
+};
+```
+
+On-demand chunks content would now change to:
+
+__example-on-demand-chunk.js__
+
+```javascript
+(window.wpJsonpFlightsWidget = window.wpJsonpFlightsWidget || []).push(...)
+```
 
 ## `output.library`
 
