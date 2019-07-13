@@ -15,10 +15,10 @@ A scaffold is a node module which exports an `yeoman generator` based upon [Scaf
 [`webpack-scaffold-starter`](https://github.com/rishabh3112/webpack-scaffold-starter) can be used to setup a new scaffold project. To do so, follow the following commands.
 
 ```bash
-$ npm install -g webpack-scaffold-starter
-$ mkdir myscaffold && cd myscaffold
-$ webpack-scaffold
-$ git init # optional
+npm install -g webpack-scaffold-starter
+mkdir myscaffold && cd myscaffold
+webpack-scaffold
+git init # optional
 ```
 
 ## Setup
