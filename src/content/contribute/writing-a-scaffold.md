@@ -11,7 +11,9 @@ contributors:
 A scaffold is a node module which exports an `yeoman generator` based upon [Scaffolding API](/guides/scaffolding/#api). Scaffolds are used to initialise a new webpack project, tailored to a specific use case. To view what we are building today, run `webpack init webpack-scaffold-demo`. This demo will show you how to build your own webpack scaffold. Let's start by creating a file named `generator.js`.
 
 ## Quick Start
+
 [`webpack-scaffold-starter`](https://github.com/rishabh3112/webpack-scaffold-starter) can be used to setup a new scaffold project. To do so, follow the following commands.
+
 ```bash
 $ npm install -g webpack-scaffold-starter
 $ mkdir myscaffold && cd myscaffold
