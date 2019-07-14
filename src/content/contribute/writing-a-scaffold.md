@@ -8,7 +8,7 @@ contributors:
   - rishabh3112
 ---
 
-A scaffold is a node module which exports an `yeoman generator` based upon [Scaffolding API](/guides/scaffolding/#api). Scaffolds are used to initialise a new webpack project, tailored to a specific use case. To view what we are building today, run `webpack init webpack-scaffold-demo`. This demo will show you how to build your own webpack scaffold. Let's start by creating a file named `generator.js`.
+A scaffold is a node module which exports a `yeoman generator` based upon [Scaffolding API](/guides/scaffolding/#api). Scaffolds are used to initialise a new webpack project, tailored to a specific use case. To view what we are building today, run `webpack init webpack-scaffold-demo`. This demo will show you how to build your own webpack scaffold. Let's start by creating a file named `generator.js`.
 
 ## Quick Start
 
