@@ -9,9 +9,9 @@ export default () => {
     <div className="page markdown">
       <h1>Page Not Found</h1>
       <p>Oops! The page you are looking for has been removed or relocated.</p>
-      <div className="button">
-        <Link to="/">Go to Homepage</Link>
-      </div>
+      <Link className="button" to="/">
+        Go to Homepage
+      </Link>
     </div>
   );
 };
