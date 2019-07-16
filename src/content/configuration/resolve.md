@@ -113,7 +113,7 @@ The following table explains other cases:
 
 `/abc/node_modules` may resolve in `/node_modules` too.
 
-W> It should be noted that using `alias` will take precedence over any other module resolution as Webpack interprets it to be an exact location of a file.
+W> `resolve.alias` will takes precedence over other module resolutions.
 
 
 ### `resolve.aliasFields`
