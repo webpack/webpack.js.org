@@ -24,10 +24,11 @@ module.exports = env => merge(common(env), {
       autoUpdate: true,
       publicPath: '/',
       appShell: '/app-shell/',
+      responseStrategy: 'network-first',
       // make sure to cache homepage and app shell as app shell for the rest of the pages.
       // externals also re-validate on sw update (releases)
       externals: ['/app-shell/', '/', '/manifest.json', ...hashedAssetsBySSGRun],
-      excludes: ['/images/icons/**'],
+      excludes: ['/icon_*.png', '/**/printable/', '/robots.txt'],
       AppCache: {
         publicPath: '/'
       }

@@ -1,6 +1,6 @@
 ---
 title: Introduction
-sort: 1
+sort: 0
 contributors:
   - tbroadley
 ---

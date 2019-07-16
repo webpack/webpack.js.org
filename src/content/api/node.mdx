@@ -1,6 +1,6 @@
 ---
 title: Node Interface
-sort: 3
+sort: 2
 contributors:
   - sallar
   - rynclark
@@ -8,6 +8,7 @@ contributors:
   - wizardofhogwarts
   - EugeneHlushko
   - lukasgeiter
+  - toshihidetagami
 ---
 
 webpack provides a Node.js API which can be used directly in Node.js runtime.
@@ -17,7 +18,7 @@ The Node.js API is useful in scenarios in which you need to customize the build 
 
 ## Installation
 
-To start using webpack Node.js API, first install webpack if you haven’t yet:
+To start using the webpack Node.js API, first install webpack if you haven’t yet:
 
 ``` bash
 npm install --save-dev webpack
@@ -53,7 +54,7 @@ webpack({
 });
 ```
 
-T> The `err` object __will not__ include compilation errors and those must be handled separately using `stats.hasErrors()` which will be covered in detail in [Error Handling](#error-handling) section of this guide. The `err` object will only contain webpack-related issues, such as misconfiguration, etc.
+T> The `err` object __will not__ include compilation errors. Those must be handled separately using `stats.hasErrors()`, which will be covered in detail in the [Error Handling](#error-handling) section of this guide. The `err` object will only contain webpack-related issues, such as misconfiguration, etc.
 
 T> You can provide the `webpack` function with an array of configurations. See
 the [MultiCompiler](#multicompiler) section below for more information.
@@ -104,7 +105,7 @@ const compiler = webpack({
   // [Configuration Object](/configuration/)
 });
 
-compiler.run((err, [stats](#stats-object)) => {
+compiler.run((err, stats) => { // [Stats Object](#stats-object)
   // ...
 });
 ```
@@ -266,7 +267,7 @@ webpack({
 The `MultiCompiler` module allows webpack to run multiple configurations in
 separate compilers. If the `options` parameter in the webpack's NodeJS api is
 an array of options, webpack applies separate compilers and calls the
-`callback` method at the end of each compiler execution.
+`callback` after all compilers have been executed.
 
 ``` js-with-links
 var webpack = require('webpack');
@@ -274,7 +275,7 @@ var webpack = require('webpack');
 webpack([
   { entry: './index1.js', output: { filename: 'bundle1.js' } },
   { entry: './index2.js', output: { filename: 'bundle2.js' } }
-], (err, [stats](#stats-object)) => {
+], (err, stats) => { // [Stats Object](#stats-object)
   process.stdout.write(stats.toString() + '\\n');
 })
 ```

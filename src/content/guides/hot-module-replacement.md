@@ -1,6 +1,6 @@
 ---
 title: Hot Module Replacement
-sort: 6
+sort: 15
 contributors:
   - jmreidy
   - jhnns
@@ -18,6 +18,7 @@ contributors:
   - AnayaDesign
   - aviyacohen
   - dhruvdutt
+  - aholzner
 
 related:
   - title: Concepts - Hot Module Replacement
@@ -44,8 +45,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
-+ const webpack = require('webpack');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
@@ -63,8 +63,7 @@ __webpack.config.js__
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement'
-      }),
-+     new webpack.HotModuleReplacementPlugin()
+      })
     ],
     output: {
       filename: '[name].bundle.js',
@@ -229,8 +228,7 @@ __webpack.config.js__
 ```diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
-  const webpack = require('webpack');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
@@ -254,8 +252,7 @@ __webpack.config.js__
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement'
-      }),
-      new webpack.HotModuleReplacementPlugin()
+      })
     ],
     output: {
       filename: '[name].bundle.js',

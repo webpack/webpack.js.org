@@ -1,6 +1,6 @@
 ---
 title: Writing a Plugin
-sort: 4
+sort: 3
 contributors:
   - tbroadley
   - nveenjain
@@ -181,7 +181,7 @@ module.exports = FileListPlugin;
 
 ## Different Plugin Shapes
 
-A plugin can be classified into types based on the event hooks it taps into. Every event hook is pre-defined as synchronous or asynchronous or waterfall or parallel hook and hook is called internally using call/callAsync method. The list of hooks that are supported or can be tapped into are generally specified in this.hooks property.
+A plugin can be classified into types based on the event hooks it taps into. Every event hook is pre-defined as synchronous or asynchronous or waterfall or parallel hook and hook is called internally using call/callAsync method. The list of hooks that are supported or can be tapped into are generally specified in `this.hooks` property.
 
 For example:
 

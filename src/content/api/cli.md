@@ -1,6 +1,6 @@
 ---
 title: Command Line Interface
-sort: 2
+sort: 1
 contributors:
   - evenstensberg
   - simon04
@@ -11,6 +11,7 @@ contributors:
   - EugeneHlushko
   - byzyk
   - wizardofhogwarts
+  - EslamHiko
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -46,7 +47,7 @@ webpack <entry> [<entry>] -o <output>
 
 __`<entry>`__
 
-A filename or a set of named filenames which act as the entry point to build your project. You can pass multiple entries (every entry is loaded on startup). If you pass a pair in the form `<name>=<request>` you can create an additional entry point. It will be mapped to the configuration option `entry`.
+A filename or a set of named filenames which act as the entry point to build your project. You can pass multiple entries (every entry is loaded on startup). If you pass a pair in the form `<name>=<request>`, you can create an additional entry point. It will be mapped to the configuration option `entry`.
 
 __`<output>`__
 
@@ -70,7 +71,7 @@ If your project structure is as follows -
 webpack src/index.js -o dist/bundle.js
 ```
 
-This will bundle your source code with entry as `index.js` and the output bundle file will have a path of `dist` and the filename will be `bundle.js`
+This will bundle your source code with entry as `index.js`, and the output bundle file will have a path of `dist`, and the filename will be `bundle.js`
 
 ```bash
 	| Asset     | Size    | Chunks      | Chunk Names |
@@ -122,7 +123,7 @@ webpack --json
 webpack --json > stats.json
 ```
 
-In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.io/analyse/), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
+In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option, the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.io/analyse/), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
 
 ### Environment Options
 
@@ -240,7 +241,7 @@ Parameter                 | Explanation
 
 ### Optimize Options
 
-These options allow you to manipulate optimisations for a production build using webpack
+These options allow you to manipulate optimizations for a production build using webpack
 
 Parameter                   | Explanation                                            | Plugin Used
 --------------------------- | -------------------------------------------------------|----------------------
@@ -276,17 +277,17 @@ Parameter                        | Explanation                                  
 `--display-entrypoints`          | Display entry points in the output                                 | boolean
 `--display-error-details`        | Display details about errors                                       | boolean
 `--display-exclude`              | Exclude modules in the output                                      | boolean
-`--display-max-modules`          | Sets the maximum number of visible modules in output               | number
+`--display-max-modules`          | Set the maximum number of visible modules in output                | number
 `--display-modules`              | Display even excluded modules in the output                        | boolean
 `--display-optimization-bailout` | Scope hoisting fallback trigger (since webpack 3.0.0)              | boolean
 `--display-origins`              | Display origins of chunks in the output                            | boolean
 `--display-provided-exports`     | Display information about exports provided from modules            | boolean
 `--display-reasons`              | Display reasons about module inclusion in the output               | boolean
 `--display-used-exports`         | Display information about used exports in modules (Tree Shaking)   | boolean
-`--hide-modules`                 | Hides info about modules                                           | boolean
-`--sort-assets-by`               | Sorts the assets list by property in asset                         | string
-`--sort-chunks-by`               | Sorts the chunks list by property in chunk                         | string
-`--sort-modules-by`              | Sorts the modules list by property in module                       | string
+`--hide-modules`                 | Hide info about modules                                            | boolean
+`--sort-assets-by`               | Sort the assets list by property in asset                          | string
+`--sort-chunks-by`               | Sort the chunks list by property in chunk                          | string
+`--sort-modules-by`              | Sort the modules list by property in module                        | string
 `--verbose`                      | Show more details                                                  | boolean
 
 
@@ -299,6 +300,7 @@ Parameter         | Explanation                              | Usage
 `--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV="'development'"`
 `--hot`           | Enables [Hot Module Replacement](/concepts/hot-module-replacement) | `--hot=true`
 `--labeled-modules` | Enables labeled modules [Uses LabeledModulesPlugin] |
+`--live-reload`           | Enables live reloading | `--live-reload=true`
 `--plugin`        | Load this [plugin](/configuration/plugins/) |
 `--prefetch`      | Prefetch the particular file             | `--prefetch=./files.js`
 `--provide`       | Provide these modules as globals, see [shimming](/guides/shimming) | `--provide jQuery=jquery`

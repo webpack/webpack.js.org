@@ -1,6 +1,6 @@
 ---
 title: Resolve
-sort: 7
+sort: 8
 contributors:
   - sokra
   - skipjack
@@ -177,6 +177,8 @@ module.exports = {
 ### `resolve.enforceModuleExtension`
 
 `boolean: false`
+
+W> Removed in webpack 5
 
 Tells webpack whether to require to use an extension for modules (e.g. loaders).
 
@@ -438,6 +440,8 @@ T> Note that you can use alias here and other features familiar from resolve. Fo
 ### `resolveLoader.moduleExtensions`
 
 `[string]`
+
+W> Removed in webpack 5
 
 The extensions/suffixes that are used when resolving loaders. Since version two, we [strongly recommend](/migrate/3/#automatic-loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
 

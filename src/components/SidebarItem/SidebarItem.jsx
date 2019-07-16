@@ -81,18 +81,11 @@ export default class SidebarItem extends React.Component {
   /**
    * Generate the url for the given [anchor] depending on the current page
    *
-   * @return {object} anchor - The anchor object containing its id
+   * @param {object} anchor - The anchor object containing its id
+   * @returns {string}
    */
   _generateAnchorURL(anchor) {
-    let { currentPage, url } = this.props;
-
-    if ( `/${currentPage}` === url ) {
-      return `#${anchor.id}`;
-
-    } else if (!anchor.id) {
-      return url;
-    } else {
-      return `${url}#${anchor.id}`;
-    }
+    let {url} = this.props;
+    return anchor.id ? `${url}#${anchor.id}` : url;
   }
 }

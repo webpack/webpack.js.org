@@ -21,14 +21,15 @@ idea of where things are, and where they are going:
 
 - [Guides - Review and Simplify][guides-url]
 - [Concepts - Review and Organize][concepts-url]
-- [API - v4 Rewrite][api-url]
 
 We haven't created issues for the other sections yet, but they will be coming
 soon. For dev-related work please see [General - Updates & Fixes][general-url].
 
+The alpha version of webpack 5 is out and we are lagging behind with documenting all of the related changes. See [this refined search][webpack5-milestone-url] for the list of relevant documentation requests.
+
 ## Translation
 
-To help translate this documentation please jump to the [translate branch][translate-url].
+To help translate this documentation please jump to the [translation branch][translate-url].
 
 ## Contributing
 
@@ -47,7 +48,7 @@ testing of the site at no cost...
 
 [![BrowserStackLogo][browserstack]][browserstack-url]
 
-[api-url]: https://github.com/webpack/webpack.js.org/pull/1754
+[webpack5-milestone-url]: https://github.com/webpack/webpack.js.org/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22webpack+5%22
 [build-status]: https://secure.travis-ci.org/webpack/webpack.js.org.svg
 [build-status-url]: http://travis-ci.org/webpack/webpack.js.org
 [browserstack]: ./browserstack-logo.png
