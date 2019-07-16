@@ -158,7 +158,6 @@ __webpack_chunk_load__ = (id) => {
 ```
 
 T> You will not see `__webpack_chunk_load__` in output code because webpack converts it to a property on `__webpack_require__`.
-converts it to a property on `__webpack_require__`.
 
 ### `__webpack_modules__` (webpack-specific)
 
