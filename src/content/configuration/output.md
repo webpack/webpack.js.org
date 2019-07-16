@@ -105,32 +105,26 @@ Number of milliseconds before chunk request expires, defaults to 120 000. This
 
 ## `output.crossOriginLoading`
 
-`boolean` `string`
+`boolean: false` `string: ['anonymous', 'use-credentials']`
 
-Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks, by adding script tags.
+Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. Only takes effect when [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading on-demand chunks, by adding script tags.
 
-Enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. The following values are accepted...
-
-`crossOriginLoading: false` - Disable cross-origin loading (default)
-
-`crossOriginLoading: 'anonymous'` - Enable cross-origin loading __without credentials__
-
-`crossOriginLoading: 'use-credentials'` - Enable cross-origin loading __with credentials__
+- `'anonymous'` - Enable cross-origin loading __without credentials__
+- `'use-credentials'` - Enable cross-origin loading __with credentials__
 
 
 ## `output.jsonpScriptType`
 
-`string`
+`string: 'text/javascript'`
 
-Allows customization of the `script` type webpack injects `script` tags into the DOM to download async chunks. The following options are available:
+Allows customization of `type` attribute of `script` tags that webpack injects into the DOM to download async chunks. The following options are available:
 
-- `'text/javascript'` (default)
-- `'module'`: Use with ES6 ready code.
-
+- `'text/javascript'`: Default `type` in HTML5 and required for some browsers in HTML4.
+- `'module'`: Causes the code to be treated as a JavaScript module.
 
 ## `output.devtoolFallbackModuleFilenameTemplate`
 
-`string | function(info)`
+`string | function (info)`
 
 A fallback used when the template string or function above yields duplicates.
 
@@ -139,7 +133,7 @@ See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplat
 
 ## `output.devtoolLineToLine`
 
-`boolean | object`
+`boolean: false` `object`
 
 > Avoid using this option as it is __deprecated__ and will soon be removed.
 
@@ -161,7 +155,7 @@ module.exports = {
 
 ## `output.devtoolModuleFilenameTemplate`
 
-`string | function(info)`
+`string` `function (info)`
 
 This option is only used when [`devtool`](/configuration/devtool) uses an options which requires module names.
 
@@ -218,7 +212,7 @@ For example, if you have 2 libraries, with namespaces `library1` and `library2`,
 
 ## `output.filename`
 
-`string` `function`
+`string` `function (chunkData)`
 
 This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#outputpath) option.
 
@@ -366,19 +360,23 @@ module.exports = {
 
 ## `output.hashDigest`
 
-The encoding to use when generating the hash, defaults to `'hex'`. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported. Using `'base64'` for filenames might be problematic since it has the character `/` in its alphabet. Likewise `'latin1'` could contain any character.
+`string: 'hex'`
+
+The encoding to use when generating the hash. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported. Using `'base64'` for filenames might be problematic since it has the character `/` in its alphabet. Likewise `'latin1'` could contain any character.
 
 
 ## `output.hashDigestLength`
 
-The prefix length of the hash digest to use, defaults to `20`.
+`integer: 20`
+
+The prefix length of the hash digest to use.
 
 
 ## `output.hashFunction`
 
-`string|function`
+`string: 'md4'` `function`
 
-The hashing algorithm to use, defaults to `'md4'`. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) are supported. Since `4.0.0-alpha2`, the `hashFunction` can now be a constructor to a custom hash function. You can provide a non-crypto hash function for performance reasons.
+The hashing algorithm to use. All functions from Node.JS' [`crypto.createHash`](https://nodejs.org/api/crypto.html#crypto_crypto_createhash_algorithm_options) are supported. Since `4.0.0-alpha2`, the `hashFunction` can now be a constructor to a custom hash function. You can provide a non-crypto hash function for performance reasons.
 
 ```javascript
 module.exports = {
@@ -398,7 +396,7 @@ An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.
 
 ## `output.hotUpdateChunkFilename`
 
-`string` `function`
+`string: '[id].[hash].hot-update.js'` `function (chunkData)`
 
 Customize the filenames of hot update chunks. See [`output.filename`](#outputfilename) option for details on the possible values.
 
@@ -410,19 +408,20 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    hotUpdateChunkFilename: '[id].[hash].hot-update.js'
+    hotUpdateChunkFilename: (chunkData) => {
+      return `${chunkData.chunk.name === 'main' ? '' : '[name]/'}[id].[hash].hot-update.js`;
+    }
   }
 };
 ```
 
-Here is no need to change it.
-
+T> Typically you don't need to change `output.hotUpdateChunkFilename`.
 
 ## `output.hotUpdateFunction`
 
-`function`
+`string`
 
-Only used when [`target`](/configuration/target) is web, which uses JSONP for loading hot updates.
+Only used when [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading hot updates.
 
 A JSONP function used to asynchronously load hot-update chunks.
 
@@ -431,38 +430,52 @@ For details see [`output.jsonpFunction`](#outputjsonpfunction).
 
 ## `output.hotUpdateMainFilename`
 
-`string` `function`
+`string: '[hash].hot-update.json'` `function`
 
-Customize the main hot update filename. See [`output.filename`](#outputfilename) option for details on the possible values.
+Customize the main hot update filename. `[hash]` is the only available placeholder.
 
-`[hash]` is the only available placeholder, the default being:
+T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
-__webpack.config.js__
+## `output.jsonpFunction`
+
+`string: 'webpackJsonp'`
+
+Only used when [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading on-demand chunks.
+
+A JSONP function name used to asynchronously load chunks or join multiple initial chunks (SplitChunksPlugin, AggressiveSplittingPlugin).
+
+If using the [`output.library`](#outputlibrary) option, the library name is automatically concatenated with `output.jsonpFunction`'s value.
+
+W> If multiple webpack runtimes (from different compilations) are used on the same webpage, there is a risk of conflicts of on-demand chunks in the global namespace.
+
+By default, on-demand chunk's output starts with:
+
+__example-on-demand-chunk.js__
+
+```javascript
+(window.webpackJsonp = window.webpackJsonp || []).push(/* ... */);
+```
+
+Change `output.jsonpFunction` for safe usage of multiple webpack runtimes on the same webpage:
+
+__webpack.config.flight-widget.js__
 
 ```javascript
 module.exports = {
   //...
   output: {
-    hotUpdateMainFilename: '[hash].hot-update.json'
+    jsonpFunction: 'wpJsonpFlightsWidget'
   }
 };
 ```
 
-Here is no need to change it.
+On-demand chunks content would now change to:
 
+__example-on-demand-chunk.js__
 
-## `output.jsonpFunction`
-
-`string`
-
-Only used when [`target`](/configuration/target) is web, which uses JSONP for loading on-demand chunks.
-
-A JSONP function name used to asynchronously load chunks or join multiple initial chunks (SplitChunksPlugin, AggressiveSplittingPlugin).
-
-This needs to be changed if multiple webpack runtimes (from different compilation) are used on the same webpage.
-
-If using the [`output.library`](#outputlibrary) option, the library name is automatically appended.
-
+```javascript
+(window.wpJsonpFlightsWidget = window.wpJsonpFlightsWidget || []).push(/* ... */);
+```
 
 ## `output.library`
 
@@ -485,7 +498,7 @@ The variable `MyLibrary` will be bound with the return value of your entry file,
 
 W> Note that if an `array` is provided as an `entry` point, only the last module in the array will be exposed. If an `object` is provided, it can be exposed using an `array` syntax (see [this example](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for details).
 
-T> Read the [authoring libraries guide](/guides/author-libraries) guide for more information on `output.library` as well as `output.libraryTarget`.
+T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library` as well as `output.libraryTarget`.
 
 
 ## `output.libraryExport`
@@ -807,7 +820,7 @@ The dependencies for your library will be defined by the [`externals`](/configur
 
 ## `output.path`
 
-`string`
+`string: path.join(process.cwd(), 'dist')`
 
 The output directory as an __absolute__ path.
 
@@ -822,7 +835,7 @@ module.exports = {
 };
 ```
 
-Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
+Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching/) for details.
 
 
 ## `output.pathinfo`
@@ -844,7 +857,7 @@ module.exports = {
 };
 ```
 
-Note it also adds some info about tree shaking to the generated bundle.
+T> It also adds some info about tree shaking to the generated bundle.
 
 
 ## `output.publicPath`
@@ -933,11 +946,9 @@ See [this discussion](https://github.com/webpack/webpack/issues/2776#issuecommen
 
 ## `output.sourceMapFilename`
 
-`string`
+`string: '[file].map[query]'`
 
-This option is only used when [`devtool`](/configuration/devtool) uses a SourceMap option which writes an output file.
-
-Configure how source maps are named. By default `'[file].map'` is used.
+Configure how source maps are named. Only takes effect when [`devtool`](/configuration/devtool/) is set to `'source-map'`, which writes an output file.
 
 The `[name]`, `[id]`, `[hash]` and `[chunkhash]` substitutions from [`output.filename`](#outputfilename) can be used. In addition to those, you can use substitutions listed below. The `[file]` placeholder is replaced with the filename of the original file. We recommend __only using the `[file]` placeholder__, as the other placeholders won't work when generating SourceMaps for non-chunk files.
 
@@ -949,7 +960,7 @@ The `[name]`, `[id]`, `[hash]` and `[chunkhash]` substitutions from [`output.fil
 
 ## `output.sourcePrefix`
 
-`string`
+`string: ''`
 
 Change the prefix for each line in the output bundles.
 
@@ -964,14 +975,14 @@ module.exports = {
 };
 ```
 
-Note by default an empty string is used. Using some kind of indentation makes bundles look more pretty, but will cause issues with multi-line strings.
+T> Using some kind of indentation makes bundles look prettier, but will cause issues with multi-line strings.
 
-There is no need to change it.
+T> Typically you don't need to change `output.sourcePrefix`.
 
 
 ## `output.strictModuleExceptionHandling`
 
-`boolean`
+`boolean: false`
 
 Tell webpack to remove a module from the module instance cache (`require.cache`) if it throws an exception when it is `require`d.
 
@@ -1006,7 +1017,7 @@ require('module'); // <- also throws
 
 `boolean`
 
-When using `libraryTarget: "umd"`, setting:
+When using `libraryTarget: "umd"`, setting `output.umdNamedDefine` to `true` will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.
 
 ```javascript
 module.exports = {
@@ -1016,8 +1027,6 @@ module.exports = {
   }
 };
 ```
-
-will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.
 
 ## `output.futureEmitAssets`
 

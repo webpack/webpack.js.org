@@ -46,7 +46,6 @@ __webpack.config.js__
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
   const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-+ const webpack = require('webpack');
 
   module.exports = {
     entry: {
@@ -64,8 +63,7 @@ __webpack.config.js__
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement'
-      }),
-+     new webpack.HotModuleReplacementPlugin()
+      })
     ],
     output: {
       filename: '[name].bundle.js',
@@ -231,7 +229,6 @@ __webpack.config.js__
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
   const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-  const webpack = require('webpack');
 
   module.exports = {
     entry: {
@@ -255,8 +252,7 @@ __webpack.config.js__
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement'
-      }),
-      new webpack.HotModuleReplacementPlugin()
+      })
     ],
     output: {
       filename: '[name].bundle.js',

@@ -176,6 +176,141 @@ T> Note that any imported file is subject to tree shaking. This means if you use
 
 Finally, `"sideEffects"` can also be set from the [`module.rules` configuration option](/configuration/module/#module-rules).
 
+## Clarifying tree shaking and `sideEffects`
+
+The [`sideEffects`](/configuration/optimization/#optimizationsideeffects) and [`usedExports`](/configuration/optimization/#optimizationusedexports) (more known as tree shaking) optimizations are two different things.
+
+__`sideEffects` is much more effective__ since it allows to skip whole modules/files and the complete subtree.
+
+`usedExports` relies on [terser](https://github.com/terser-js/terser) to detect side effects in statements. It is a difficult task in JavaScript and not as effective as straighforward `sideEffects` flag. It also can't skip subtree/dependencies since the spec says that side effects need to be evaluated. While exporting function works fine, React's Higher Order Components (HOC) are problematic in this regard.
+
+Let's make an example:
+
+```javascript
+import { Button } from '@shopify/polaris';
+```
+
+The pre-bundled version looks like this:
+
+```javascript
+import hoistStatics from 'hoist-non-react-statics';
+
+function Button(_ref) {
+  // ...
+}
+
+function merge() {
+  var _final = {};
+
+  for (var _len = arguments.length, objs = new Array(_len), _key = 0; _key < _len; _key++) {
+    objs[_key] = arguments[_key];
+  }
+
+  for (var _i = 0, _objs = objs; _i < _objs.length; _i++) {
+    var obj = _objs[_i];
+    mergeRecursively(_final, obj);
+  }
+
+  return _final;
+}
+
+function withAppProvider() {
+  return function addProvider(WrappedComponent) {
+    var WithProvider =
+    /*#__PURE__*/
+    function (_React$Component) {
+      // ...
+      return WithProvider;
+    }(Component);
+
+    WithProvider.contextTypes = WrappedComponent.contextTypes ? merge(WrappedComponent.contextTypes, polarisAppProviderContextTypes) : polarisAppProviderContextTypes;
+    var FinalComponent = hoistStatics(WithProvider, WrappedComponent);
+    return FinalComponent;
+  };
+}
+
+var Button$1 = withAppProvider()(Button);
+
+export {
+  // ...,
+  Button$1
+};
+```
+
+When `Button` is unused you can effectively remove the `export { Button$1 };` which leaves all the remaining code. So the question is "Does this code have any side effects or can it be safely removed?". Difficult to say, especially because of this line `withAppProvider()(Button)`. `withAppProvider` is called and the return value is also called. Are there any side effects when calling `merge` or `hoistStatics`? Are there side effects when assigning `WithProvider.contextTypes` (Setter?) or when reading `WrappedComponent.contextTypes` (Getter?).
+
+Terser actually tries to figure it out, but it doesn't know for sure in many cases. This doesn't mean that terser is not doing its job well because it can't figure it out. It's just too difficult to determine it reliably in a dynamic language like JavaScript.
+
+But we can help terser by using the `/*#__PURE__*/` annotation. It flags a statement as side effect free. So a simple change would make it possible to tree-shake the code:
+
+`var Button$1 = /*#__PURE__*/ withAppProvider()(Button);`
+
+This would allow to remove this piece of code. But there are still questions with the imports which need to be included/evaluated because they could contain side effects.
+
+To tackle this, we use [`"sideEffects"`](/guides/tree-shaking/#mark-the-file-as-side-effect-free) property in `package.json`.
+
+It similar to `/*#__PURE__*/` but on a module level instead of a statement level. It says (`"sideEffects"` property): "If no direct export from a module flagged with no-sideEffects is used, the bundler can skip evaluating the module for side effects.".
+
+In the Shopify's Polaris example original modules look like this:
+
+__index.js__
+
+```javascript
+import './configure';
+export * from './types';
+export * from './components';
+```
+
+__components/index.js__
+
+```javascript
+// ...
+export { default as Breadcrumbs } from './Breadcrumbs';
+export { default as Button, buttonFrom, buttonsFrom, } from './Button';
+export { default as ButtonGroup } from './ButtonGroup';
+// ...
+```
+
+__package.json__
+
+```json
+// ...
+"sideEffects": [
+  "**/*.css",
+  "**/*.scss",
+  "./esnext/index.js",
+  "./esnext/configure.js"
+],
+// ...
+```
+
+For `import { Button } from "@shopify/polaris";` this has the following implications:
+
+- include it: include the module, evaluate it and continue analysing dependencies
+- skip over: don't include it, don't evaluate it but continue analysing dependencies
+- exclude it: don't include it, don't evaluate it and don't analyse dependencies
+
+Specifically per matching resource(s):
+
+- `index.js`: No direct export is used, but flagged with sideEffects -> include it
+- `configure.js`: No export is used, but flagged with sideEffects -> include it
+- `types/index.js`: No export is used, not flagged with sideEffects -> exclude it
+- `components/index.js`: No direct export is used, not flagged with sideEffects, but reexported exports are used -> skip over
+- `components/Breadcrumbs.js`: No export is used, not flagged with sideEffects -> exclude it. This also excluded all dependencies like `components/Breadcrumbs.css` even if they are flagged with sideEffects.
+- `components/Button.js`: Direct export is used, not flagged with sideEffects -> include it
+- `components/Button.css`: No export is used, but flagged with sideEffects -> include it
+
+In this case only 4 modules are included into the bundle:
+
+- `index.js`: pretty much empty
+- `configure.js`
+- `components/Button.js`
+- `components/Button.css`
+
+After this optimization, other optimizations can still apply. For example: `buttonFrom` and `buttonsFrom` exports from `Button.js` are unused too. `usedExports` optimization will pick it up and terser may be able to drop some statements from the module.
+
+Module Concatenation also applies. So that these 4 modules plus the entry module (and probably more dependencies) can be concatenated. __`index.js` has no code generated in the end__.
+
 ## Minify the Output
 
 So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that set the `mode` configuration option to [`production`](/configuration/mode/#mode-production) configuration option.
