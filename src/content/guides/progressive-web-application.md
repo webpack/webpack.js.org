@@ -1,10 +1,12 @@
 ---
 title: Progressive Web Application
-sort: 14
+sort: 21
 contributors:
   - johnnyreilly
   - chenxsan
   - EugeneHlushko
+  - benschac
+  - aholzner
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -34,6 +36,8 @@ __package.json__
 }
 ```
 
+Note: [webpack DevServer](/configuration/dev-server/) writes in-memory by default. We'll need to enable [writeToDisk](/configuration/dev-server#devserverwritetodisk-) option in order for http-server to be able to serve files from `./dist` directory.
+
 If you haven't previously done so, run the command `npm run build` to build your project. Then run the command `npm start`. This should produce the following output:
 
 ``` bash
@@ -47,7 +51,7 @@ Available on:
 Hit CTRL-C to stop the server
 ```
 
-If you open your browser to `http://localhost:8080` (i.e. `http://127.0.0.1`) you should see your webpack application being served from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.  
+If you open your browser to `http://localhost:8080` (i.e. `http://127.0.0.1`) you should see your webpack application being served from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.
 
 This is what we aim to change. Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.
 
@@ -65,7 +69,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 + const WorkboxPlugin = require('workbox-webpack-plugin');
 
   module.exports = {
@@ -74,14 +78,15 @@ __webpack.config.js__
       print: './src/print.js'
     },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
 -       title: 'Output Management'
 +       title: 'Progressive Web Application'
 -     })
 +     }),
 +     new WorkboxPlugin.GenerateSW({
-+       // these options encourage the ServiceWorkers to get in there fast 
++       // these options encourage the ServiceWorkers to get in there fast
 +       // and not allow any straggling "old" SWs to hang around
 +       clientsClaim: true,
 +       skipWaiting: true

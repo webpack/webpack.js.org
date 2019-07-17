@@ -1,6 +1,9 @@
 ---
 title: License
-sort: 4
+sort: 5
+contributors:
+  - EugeneHlushko
+  - pranshuchittora
 ---
 
 ## webpack

@@ -1,6 +1,6 @@
-@import "vars";
-@import "functions";
-@import "prism-theme";
+@import 'vars';
+@import 'functions';
+@import 'prism-theme';
 
 .markdown {
   line-height: 1.5em;
@@ -37,6 +37,7 @@
     line-height: 1.4;
     margin: 1.5em 0 0.25em;
     color: getColor(fiord);
+    word-break: break-all;
 
     tt,
     code {
@@ -44,7 +45,7 @@
       color: inherit;
     }
 
-    a[aria-hidden="true"] {
+    a[aria-hidden='true'] {
       margin-left: 8px;
       font-size: 0.8em;
       height: 1em;
@@ -53,7 +54,7 @@
       transition: all 250ms;
     }
 
-    &:hover a[aria-hidden="true"] {
+    &:hover a[aria-hidden='true'] {
       opacity: 1;
       visibility: visible;
     }
@@ -171,7 +172,7 @@
       color: #907a6e;
 
       .tip-content::before {
-        content: "[TODO]: ";
+        content: '[TODO]: ';
         font-style: normal;
       }
     }
@@ -200,9 +201,10 @@
     text-align: left;
     padding: 6px 12px;
     background: darken(#f4f6f6, 1%);
+    border-right: 1px solid #cccccc;
 
-    &:first-child {
-      border-right: 1px solid #cccccc;
+    &:last-child {
+      border-right:none;
     }
   }
 
@@ -231,9 +233,10 @@
     flex-basis: 100%;
     align-self: stretch;
     padding: 4px 12px;
+    border-right: 1px solid #cccccc;
 
-    &:first-child {
-      border-right: 1px solid #cccccc;
+    &:last-child {
+      border-right:none;
     }
 
     @include break {
@@ -275,7 +278,7 @@
     }
   }
 
-  img:not([class*="support__"]) {
+  img:not([class*='support__']) {
     max-width: 100%;
     height: auto;
   }
@@ -329,7 +332,7 @@
         cursor: pointer;
 
         &::after {
-          content: "\F103";
+          content: '\F103';
           float: left;
           position: relative;
           left: -2px;
@@ -378,39 +381,4 @@
       white-space: pre-line;
     }
   }
-
-  // TODO: Is the following still needed with remark-collapse?
-  //
-  // details:focus,
-  // summary:focus {
-  //   outline: none;
-  //   background: rgba(255,255,255,0.03);
-  //   border-radius: 2px;
-  // }
-
-  // @media screen and (-webkit-min-device-pixel-ratio:0) {
-  //   /* Style details arrow if on webkit */
-
-  //   details summary::-webkit-details-marker {
-  //     color: getColor(malibu);
-  //   }
-
-  //   summary::-webkit-details-marker {
-  //     display: none
-  //   }
-  //   summary:after {
-  //     content: "\F103";
-  //     float: left;
-  //     position: relative;
-  //     left: -2px;
-  //     text-align: center;
-  //     font-family: icons;
-  //     color: lighten(getColor(denim), 10%)
-  //   }
-
-  //   details[open] summary:after {
-  //     content: "\F101";
-  //     font-family: icons;
-  //   }
-  // }
 }

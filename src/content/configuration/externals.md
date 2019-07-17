@@ -1,6 +1,6 @@
 ---
 title: Externals
-sort: 13
+sort: 15
 contributors:
   - sokra
   - skipjack
@@ -83,7 +83,7 @@ module.exports = {
 
 ### object
 
-W> An object with `{ root, amd, commonjs, ... }` is only allowed for [`libraryTarget: 'umd'`](/configuration/output/#output-librarytarget). It's not allowed for other library targets.
+W> An object with `{ root, amd, commonjs, ... }` is only allowed for [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget). It's not allowed for other library targets.
 
 ```javascript
 module.exports = {

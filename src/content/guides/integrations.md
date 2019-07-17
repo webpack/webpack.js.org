@@ -1,11 +1,12 @@
 ---
 title: Integrations
-sort: 25
+sort: 23
 contributors:
   - pksjce
   - bebraw
   - tashian
   - skipjack
+  - AnayaDesign
 ---
 
 Let's start by clearing up a common misconception. webpack is a module bundler like [Browserify](http://browserify.org/) or [Brunch](https://brunch.io/). It is _not a task runner_ like [Make](https://www.gnu.org/software/make/), [Grunt](https://gruntjs.com/), or [Gulp](https://gulpjs.com/). Task runners handle automation of common development tasks such as linting, building, or testing your project. Compared to bundlers, task runners have a higher level focus. You can still benefit from their higher level tooling while leaving the problem of bundling to webpack.
@@ -68,8 +69,8 @@ Just `require('webpack-stream')` instead of `webpack` and optionally pass it an 
 __gulpfile.js__
 
 ``` js
-var gulp = require('gulp');
-var webpack = require('webpack-stream');
+const gulp = require('gulp');
+const webpack = require('webpack-stream');
 gulp.task('default', function() {
   return gulp.src('src/entry.js')
     .pipe(webpack({

@@ -1,6 +1,6 @@
 ---
 title: Dependency Graph
-sort: 9
+sort: 8
 contributors:
   - TheLarkInn
   - EugeneHlushko

@@ -1,6 +1,6 @@
 // Import External Dependencies
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { hot as Hot } from 'react-hot-loader';
 import DocumentTitle from 'react-document-title';
 
@@ -18,6 +18,7 @@ import Sponsors from '../Sponsors/Sponsors';
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
+import PageNotFound from '../PageNotFound/PageNotFound';
 import Gitter from '../Gitter/Gitter';
 import Vote from '../Vote/Vote';
 import Organization from '../Organization/Organization';
@@ -30,6 +31,11 @@ import './Site.scss';
 
 // Load Content Tree
 import Content from '../../_content.json';
+
+// call offline plugin so it can build
+if (isClient) {
+  require('offline-plugin/runtime').install();
+}
 
 class Site extends React.Component {
   state = {
@@ -53,12 +59,12 @@ class Site extends React.Component {
           links={[
             {
               content: 'Documentation',
-              url: '/concepts',
+              url: '/concepts/',
               isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
               children: this._strip(sections.filter(item => item.name !== 'contribute'))
             },
-            { content: 'Contribute', url: '/contribute' },
-            { content: 'Vote', url: '/vote' },
+            { content: 'Contribute', url: '/contribute/' },
+            { content: 'Vote', url: '/vote/' },
             { content: 'Blog', url: 'https://medium.com/webpack' }
           ]}
         />
@@ -69,6 +75,7 @@ class Site extends React.Component {
           toggle={this._toggleSidebar} /> : null}
 
         <Switch>
+          <Route exact strict path="/:url*" render={props => <Redirect to={`${props.location.pathname}/`}/>} />
           <Route path="/" exact component={Splash} />
           <Route
             render={props => (
@@ -77,6 +84,7 @@ class Site extends React.Component {
                   <Route path="/vote" component={Vote} />
                   <Route path="/organization" component={Organization} />
                   <Route path="/starter-kits" component={StarterKits} />
+                  <Route path="/app-shell" component={() => <React.Fragment />} />
                   {pages.map(page => (
                     <Route
                       key={page.url}
@@ -105,7 +113,7 @@ class Site extends React.Component {
                       }}
                     />
                   ))}
-                  <Route render={props => '404 Not Found'} />
+                  <Route render={props => <PageNotFound />} />
                 </Switch>
               </Container>
             )}
@@ -150,7 +158,7 @@ class Site extends React.Component {
       sort,
       anchors,
       children: children ? this._strip(children) : []
-    }));
+    })).filter(page => page.title !== 'printable.md');
   };
 }
 

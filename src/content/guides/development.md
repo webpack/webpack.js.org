@@ -1,6 +1,6 @@
 ---
 title: Development
-sort: 5
+sort: 4
 contributors:
   - SpaceK33z
   - rafde
@@ -12,6 +12,7 @@ contributors:
   - EugeneHlushko
   - byzyk
   - trivikr
+  - aholzner
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -20,14 +21,14 @@ If you've been following the guides, you should have a solid understanding of so
 
 W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!
 
-Before proceeding lets first set [`mode` to `'development'`](/concepts/mode/#mode-development).
+Before proceeding lets first set [`mode` to `'development'`](/configuration/mode/#mode-development).
 
 __webpack.config.js__
 
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
 +   mode: 'development',
@@ -36,7 +37,8 @@ __webpack.config.js__
       print: './src/print.js'
     },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Development'
       })
@@ -52,7 +54,7 @@ __webpack.config.js__
 
 When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, the stack trace will simply point to `bundle.js`. This isn't always helpful as you probably want to know exactly which source file the error came from.
 
-In order to make it easier to track down errors and warnings, JavaScript offers [source maps](http://blog.teamtreehouse.com/introduction-source-maps), which maps your compiled code back to your original source code. If an error originates from `b.js`, the source map will tell you exactly that.
+In order to make it easier to track down errors and warnings, JavaScript offers [source maps](http://blog.teamtreehouse.com/introduction-source-maps), which map your compiled code back to your original source code. If an error originates from `b.js`, the source map will tell you exactly that.
 
 There are a lot of [different options](/configuration/devtool) available when it comes to source maps. Be sure to check them out so you can configure them to your needs.
 
@@ -63,7 +65,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     mode: 'development',
@@ -73,7 +75,7 @@ __webpack.config.js__
     },
 +   devtool: 'inline-source-map',
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Development'
       })
@@ -155,13 +157,13 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "clean-webpack-plugin": "^0.1.16",
+      "clean-webpack-plugin": "^2.0.0",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "file-loader": "^0.11.2",
       "html-webpack-plugin": "^2.29.0",
       "style-loader": "^0.18.2",
-      "webpack": "^3.0.0",
+      "webpack": "^4.30.0",
       "xml-loader": "^1.2.1"
     }
   }
@@ -201,7 +203,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     mode: 'development',
@@ -214,7 +216,8 @@ __webpack.config.js__
 +     contentBase: './dist'
 +   },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Development'
       })
@@ -250,13 +253,13 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "clean-webpack-plugin": "^0.1.16",
+      "clean-webpack-plugin": "^2.0.0",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "file-loader": "^0.11.2",
       "html-webpack-plugin": "^2.29.0",
       "style-loader": "^0.18.2",
-      "webpack": "^3.0.0",
+      "webpack": "^4.30.0",
       "xml-loader": "^1.2.1"
     }
   }
@@ -286,7 +289,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     mode: 'development',
@@ -299,7 +302,7 @@ __webpack.config.js__
       contentBase: './dist'
     },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Output Management'
       })
@@ -372,14 +375,14 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "clean-webpack-plugin": "^0.1.16",
+      "clean-webpack-plugin": "^2.0.0",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "express": "^4.15.3",
       "file-loader": "^0.11.2",
       "html-webpack-plugin": "^2.29.0",
       "style-loader": "^0.18.2",
-      "webpack": "^3.0.0",
+      "webpack": "^4.30.0",
       "webpack-dev-middleware": "^1.12.0",
       "xml-loader": "^1.2.1"
     }

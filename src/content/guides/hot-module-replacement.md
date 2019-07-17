@@ -1,6 +1,6 @@
 ---
 title: Hot Module Replacement
-sort: 6
+sort: 15
 contributors:
   - jmreidy
   - jhnns
@@ -15,8 +15,11 @@ contributors:
   - caryli
   - xgirma
   - EugeneHlushko
+  - AnayaDesign
   - aviyacohen
-  
+  - dhruvdutt
+  - aholzner
+
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -42,8 +45,7 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
-+ const webpack = require('webpack');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
@@ -57,11 +59,11 @@ __webpack.config.js__
 +     hot: true
     },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement'
-      }),
-+     new webpack.HotModuleReplacementPlugin()
+      })
     ],
     output: {
       filename: '[name].bundle.js',
@@ -81,8 +83,8 @@ __index.js__
   import printMe from './print.js';
 
   function component() {
-    var element = document.createElement('div');
-    var btn = document.createElement('button');
+    const element = document.createElement('div');
+    const btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -178,8 +180,8 @@ __index.js__
   import printMe from './print.js';
 
   function component() {
-    var element = document.createElement('div');
-    var btn = document.createElement('button');
+    const element = document.createElement('div');
+    const btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -226,8 +228,7 @@ __webpack.config.js__
 ```diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
-  const webpack = require('webpack');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
@@ -247,11 +248,11 @@ __webpack.config.js__
 +     ]
 +   },
     plugins: [
-      new CleanWebpackPlugin(['dist']),
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement'
-      }),
-      new webpack.HotModuleReplacementPlugin()
+      })
     ],
     output: {
       filename: '[name].bundle.js',
@@ -292,8 +293,8 @@ __index.js__
 + import './styles.css';
 
   function component() {
-    var element = document.createElement('div');
-    var btn = document.createElement('button');
+    const element = document.createElement('div');
+    const btn = document.createElement('button');
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
@@ -337,7 +338,7 @@ There are many other loaders and examples out in the community to make HMR inter
 
 - [React Hot Loader](https://github.com/gaearon/react-hot-loader): Tweak react components in real time.
 - [Vue Loader](https://github.com/vuejs/vue-loader): This loader supports HMR for vue components out of the box.
-- [Elm Hot Loader](https://github.com/fluxxu/elm-hot-loader): Supports HMR for the Elm programming language.
+- [Elm Hot webpack Loader](https://github.com/klazuka/elm-hot-webpack-loader): Supports HMR for the Elm programming language.
 - [Angular HMR](https://github.com/gdi2290/angular-hmr): No loader necessary! A simple change to your main NgModule file is all that's required to have full control over the HMR APIs.
 
 T> If you know of any other loaders or plugins that help with or enhance Hot Module Replacement please submit a pull request to add to this list!

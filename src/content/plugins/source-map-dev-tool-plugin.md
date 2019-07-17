@@ -28,6 +28,7 @@ The following options are supported:
 - `append` (`string`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. `false` disables the appending.
 - `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate).
 - `fallbackModuleFilenameTemplate` (`string`): See link above.
+- `namespace` (`string`): See [`output.devtoolNamespace`](/configuration/output/#outputdevtoolnamespace).
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
 - `lineToLine` (`boolean` or `object`): Simplify and speed up source mapping by using line to line source mappings for matched modules.
@@ -41,7 +42,7 @@ The `fileContext` option is useful when you want to store source maps in an uppe
 
 T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
 
-T> If you want to use a custom configuration for this plugin in [development mode](/concepts/mode/#mode-development), make sure to disable the default one. I.e. set `devtool: false`.
+T> If you want to use a custom configuration for this plugin in [development mode](/configuration/mode/#mode-development), make sure to disable the default one. I.e. set `devtool: false`.
 
 W> Remember that when using the [`TerserPlugin`](/plugins/terser-webpack-plugin), you must utilize the `sourceMap` option.
 

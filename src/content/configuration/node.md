@@ -1,12 +1,13 @@
 ---
 title: Node
-sort: 14
+sort: 17
 contributors:
   - sokra
   - skipjack
   - oneforwonder
   - Rob--W
   - byzyk
+  - EugeneHlushko
 ---
 
 These options configure whether to polyfill or mock certain [Node.js globals](https://nodejs.org/docs/latest/api/globals.html) and modules. This allows code originally written for the Node.js environment to run in other environments like the browser.
@@ -16,7 +17,7 @@ This feature is provided by webpack's internal [`NodeStuffPlugin`](https://githu
 
 ## `node`
 
-`object`
+`boolean: false | object`
 
 This is an object where each property is the name of a Node global or module and each value may be one of the following...
 

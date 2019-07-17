@@ -1,6 +1,6 @@
 ---
 title: Build Performance
-sort: 17
+sort: 9
 contributors:
   - sokra
   - tbroadley
@@ -86,8 +86,8 @@ Use the `DllPlugin` to move code that is changed less often into a separate comp
 Decrease the total size of the compilation to increase build performance. Try to keep chunks small.
 
 - Use fewer/smaller libraries.
-- Use the `CommonsChunkPlugin` in Multi-Page Applications.
-- Use the `CommonsChunkPlugin` in `async` mode in Multi-Page Applications.
+- Use the `SplitChunksPlugin` in Multi-Page Applications.
+- Use the `SplitChunksPlugin` in `async` mode in Multi-Page Applications.
 - Remove unused code.
 - Only compile the part of the code you are currently developing on.
 
@@ -199,9 +199,11 @@ module.exports = {
 };
 ```
 
-### Node.js Version
+### Node.js Versions 8.9.10-9.11.1
 
-There has been a [performance regression](https://github.com/nodejs/node/issues/19769) in the latest stable versions of Node.js and its ES2015 `Map` and `Set` implementations. A fix has been merged into master, but a release has yet to be made. In the meantime, to get the most out of incremental build speeds, try to stick with version 8.9.x (the problem exists between 8.9.10 - 9.11.1). webpack has moved to using those ES2015 data structures liberally, and it will improve the initial build times as well.
+There was a [performance regression](https://github.com/nodejs/node/issues/19769) in Node.js versions 8.9.10 - 9.11.1 in the ES2015 `Map` and `Set` implementations. webpack uses those data structures liberally, so this regression affects compile times.
+
+Earlier and later Node.js versions are not affected.
 
 ### TypeScript Loader
 

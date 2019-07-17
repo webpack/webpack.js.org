@@ -16,13 +16,15 @@ const enhance = (tree, options) => {
     // delete source content directory
     .replace(dir, '')
     // Normalize url for Windows
-    .replace(/\\/g, "/")
+    .replace(/\\/g, '/')
     // remove `index` for root urls
     .replace(/\/index$/, '')
     // replace empty strings with `/`
     .replace(/^$/, '/')
     // delete trailing dots for node
-    .replace(/^(\.)/g, '');
+    .replace(/^(\.)/g, '')
+    // add trailing slash if missing
+    .replace(/\/?$/, '/');
 
   if (tree.type === 'file') {
     let anchors = [];
@@ -47,7 +49,7 @@ const enhance = (tree, options) => {
     tree.anchors = anchors;
 
     Object.assign(tree, {
-      path: tree.path.replace(/\\/g, "/")
+      path: tree.path.replace(/\\/g, '/')
     }, attributes);
   }
 };
