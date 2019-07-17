@@ -405,24 +405,66 @@ See [UseEntry](#useentry) for details.
 
 ## `Rule.resolve`
 
-Resolving can be configured on module level. For options see [resolve configuration page](/configuration/resolve/#resolve). All applied resolve options are merged.
+W> `Rule.resolve` is Available since webpack 4.36.1
+
+Resolving can be configured on module level. See all available options on [resolve configuration page](/configuration/resolve/#resolve).
+All applied resolve options get deeply merged with higher level [resolve](/configuration/resolve/#resolve).
+
+For example, let's imagine we have an entry in `./src/index.js`, `./src/footer/default.js` and a `./src/footer/overriden.js` to demonstrate the module level resolve.
+
+__./src/index.js__
+
+```javascript
+import footer from 'footer';
+console.log(footer);
+```
+
+__./src/footer/default.js__
+
+```javascript
+export default 'default footer';
+```
+
+__./src/footer/overriden.js__
+
+```javascript
+export default 'overriden footer';
+```
 
 __webpack.js.org__
 
 ```javascript
 module.exports = {
-  //...
+  resolve: {
+    alias: {
+      'footer': './footer/default.js'
+    }
+  }
+};
+```
+
+When creating a bundle with this configuration, `console.log(footer)` will output 'default footer'. Let's set `Rule.resolve` for `.js` files, and alias `footer` to `overriden.js`.
+
+__webpack.js.org__
+
+```javascript
+module.exports = {
+  resolve: {
+    alias: {
+      'footer': './footer/default.js'
+    }
+  },
   module: {
     rules: [
-      {
-        resolve: {
-          extensions: ['.jsx']
-        }
+      alias: {
+        'footer': './footer/overriden.js'
       }
     ]
   }
 };
 ```
+
+When creating a bundle with updated configuration, `console.log(footer)` will output 'overriden footer'.
 
 
 ## `Condition`
