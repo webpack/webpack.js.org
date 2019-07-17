@@ -403,6 +403,27 @@ module.exports = {
 
 See [UseEntry](#useentry) for details.
 
+## `Rule.resolve`
+
+Resolving can be configured on module level. For options see [resolve configuration page](/configuration/resolve/#resolve). All applied resolve options are merged.
+
+__webpack.js.org__
+
+```javascript
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        resolve: {
+          extensions: ['.jsx']
+        }
+      }
+    ]
+  }
+};
+```
+
 
 ## `Condition`
 
