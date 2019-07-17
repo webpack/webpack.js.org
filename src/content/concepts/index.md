@@ -1,6 +1,6 @@
 ---
 title: Concepts
-sort: 1
+sort: 0
 contributors:
   - TheLarkInn
   - jhnns
@@ -16,13 +16,14 @@ contributors:
   - yairhaimo
   - farskid
   - LukeMwila
+  - Jalitha
 ---
 
 At its core, __webpack__ is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a [dependency graph](/concepts/dependency-graph/) which maps every module your project needs and generates one or more _bundles_.
 
 T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).
 
-Since version 4.0.0, __webpack does not require a configuration file__ to bundle your project, nevertheless it is [incredibly configurable](/configuration) to better fit your needs.
+Since version 4.0.0, __webpack does not require a configuration file__ to bundle your project. Nevertheless, it is [incredibly configurable](/configuration) to better fit your needs.
 
 To get started you only need to understand its __Core Concepts__:
 
@@ -81,7 +82,7 @@ module.exports = {
 
 In the example above, we use the `output.filename` and the `output.path` properties to tell webpack the name of our bundle and where we want it to be emitted to. In case you're wondering about the path module being imported at the top, it is a core [Node.js module](https://nodejs.org/api/modules.html) that gets used to manipulate file paths.
 
-T> The `output` property has [many more configurable features](/configuration/output) and if you like to know more about the concepts behind it, you can [read more in the output section](/concepts/output).
+T> The `output` property has [many more configurable features](/configuration/output). If you want to learn about the concepts behind it, you can [read more in the output section](/concepts/output).
 
 
 ## Loaders
@@ -118,7 +119,7 @@ The configuration above has defined a `rules` property for a single module with 
 
 W> It is important to remember that when defining rules in your webpack config, you are defining them under `module.rules` and not `rules`. For your benefit, webpack will warn you if this is done incorrectly.
 
-W> Keep in mind that when using regex to match files, you may not quote it. i.e `/\.txt$/` is not the same as `'/\.txt$/'`/ `"/\.txt$/"`. The former instructs webpack to match any file that ends with .txt and the latter instructs webpack to match a single file with an absolute path '.txt'; this is likely not your intention. 
+W> Keep in mind that when using regex to match files, you may not quote it. i.e `/\.txt$/` is not the same as `'/\.txt$/'` or `"/\.txt$/"`. The former instructs webpack to match any file that ends with .txt and the latter instructs webpack to match a single file with an absolute path '.txt'; this is likely not your intention. 
 
 You can check further customization when including loaders in the [loaders section](/concepts/loaders).
 
@@ -127,7 +128,7 @@ You can check further customization when including loaders in the [loaders secti
 
 While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks like bundle optimization, asset management and injection of environment variables.
 
-T> Check out the [plugin interface](/api/plugins) and how to use it to extend webpacks capabilities.
+T> Check out the [plugin interface](/api/plugins) and how to use it to extend webpack's capabilities.
 
 In order to use a plugin, you need to `require()` it and add it to the `plugins` array. Most plugins are customizable through options. Since you can use a plugin multiple times in a config for different purposes, you need to create an instance of it by calling it with the `new` operator.
 
@@ -153,7 +154,7 @@ In the example above, the `html-webpack-plugin` generates an HTML file for your 
 
 T> There are many plugins that webpack provides out of the box! Check out the [list of plugins](/plugins).
 
-Using plugins in your webpack config is straightforward - however, there are many use cases that are worth further exploration. [Learn more about them here](/concepts/plugins).
+Using plugins in your webpack config is straightforward. However, there are many use cases that are worth further exploration. [Learn more about them here](/concepts/plugins).
 
 
 ## Mode

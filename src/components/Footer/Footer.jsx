@@ -23,6 +23,7 @@ const Footer = () => (
       </section>
 
       <section className="footer__right">
+        <Link className="footer__link" to="https://webpack.threadless.com/">Swag Store</Link>
         <Link className="footer__link" to="/glossary/">Glossary</Link>
         <Link className="footer__link" to="/branding/">Branding</Link>
         <Link className="footer__link" to="https://gitter.im/webpack/webpack">Gitter</Link>

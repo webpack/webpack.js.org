@@ -6,11 +6,22 @@ contributors:
   - byzyk
 ---
 
+`object` `function (percentage: number, message: string, ...args: string[])`
+
 The `ProgressPlugin` provides a way to customize how progress is reported during a compilation.
 
 ## Usage
 
-Create an instance of `ProgressPlugin` with a handler function which will be called when hooks report progress:
+Create an instance of `ProgressPlugin` and provide one of the allowed params.
+
+### Providing `function`
+ 
+Provide a handler function which will be called when hooks report progress. `handler` function arguments:
+
+- `percentage`: a number between 0 and 1 indicating the completion percentage of the compilation
+- `message`: a short description of the currently-executing hook
+- `...args`: zero or more additional strings describing the current progress
+
 
 ```js
 const handler = (percentage, message, ...args) => {
@@ -21,10 +32,30 @@ const handler = (percentage, message, ...args) => {
 new webpack.ProgressPlugin(handler);
 ```
 
-- `handler` is a function which takes these arguments:
-- `percentage`: a number between 0 and 1 indicating the completion percentage of the compilation.
-- `message`: a short description of the currently-executing hook.
-- `...args`: zero or more additional strings describing the current progress.
+### Providing `object`
+
+When providing an `object` to the `ProgressPlugin`, following properties are supported:
+
+- `activeModules: boolean = true` show's active modules count and one active module in progress message
+- `entries: boolean = false` show's entries count in progress message
+- [`handler: function(percentage, message, ...args)`](#providing-function)
+- `modules: boolean = true` show's modules count in progress message
+- `modulesCount: number = 500` a minimum modules count to start with. Takes effect when `modules` property is enabled.
+- `profile: true | false | null = false` tells `ProgressPlugin` to collect profile data for progress steps.
+
+
+```js
+new webpack.ProgressPlugin({
+  entries: true,
+  modules: true,
+  modulesCount: 100,
+  profile: true,
+  handler: (percentage, message, ...args) => {
+    // custom logic
+  }
+});
+```
+
 
 ## Supported Hooks
 

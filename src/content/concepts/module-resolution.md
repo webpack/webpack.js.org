@@ -1,6 +1,6 @@
 ---
 title: Module Resolution
-sort: 8
+sort: 7
 contributors:
   - pksjce
   - pastelsky
@@ -17,7 +17,7 @@ import foo from 'path/to/module';
 require('path/to/module');
 ```
 
-The dependency module can be from the application code or a third party library. The resolver helps
+The dependency module can be from the application code or a third-party library. The resolver helps
 webpack find the module code that needs to be included in the bundle for every such `require`/`import` statement.
 webpack uses [enhanced-resolve](https://github.com/webpack/enhanced-resolve) to resolve file paths while bundling modules.
 
@@ -56,7 +56,7 @@ import 'module/lib/file';
 ```
 
 Modules are searched for inside all directories specified in [`resolve.modules`](/configuration/resolve/#resolve-modules).
-You can replace the original module path by an alternate path by creating an alias for it using [`resolve.alias`](/configuration/resolve/#resolve-alias) configuration option.
+You can replace the original module path by an alternate path by creating an alias for it using the [`resolve.alias`](/configuration/resolve/#resolve-alias) configuration option.
 
 Once the path is resolved based on the above rule, the resolver checks to see if the path points to a file or a directory. If the path points to a file:
 

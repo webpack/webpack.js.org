@@ -75,14 +75,14 @@ export const getPageTitle = (tree, path) => {
   let page = findInContent(tree, item => item.url === path);
   let title;
 
-  if ( !page ) {
-    if ( !path.endsWith('/') ) path += '/';
+  if (!page) {
+    if (!path.endsWith('/')) path += '/';
     title = path.replace(/.*\/(.+)\//g, '$1');
     title = title.replace(/-/g, ' ');
-
-  } else if ( path === '/' ) {
+  } else if (path === '/') {
     title = page.title;
-
+  } else if (path.includes('/printable')) {
+    title = 'Combined printable page | webpack';
   } else title =`${page.title} | webpack`;
 
   return title;

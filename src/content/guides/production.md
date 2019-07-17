@@ -1,6 +1,6 @@
 ---
 title: Production
-sort: 8
+sort: 17
 contributors:
   - henriquea
   - rajagopal4890
@@ -19,6 +19,7 @@ contributors:
   - SevenOutman
   - AnayaDesign
   - wizardofhogwarts
+  - aholzner
 ---
 
 In this guide, we'll dive into some of the best practices and utilities for building a production site or application.
@@ -58,7 +59,7 @@ __webpack.common.js__
 
 ``` diff
 + const path = require('path');
-+ const CleanWebpackPlugin = require('clean-webpack-plugin');
++ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 + const HtmlWebpackPlugin = require('html-webpack-plugin');
 +
 + module.exports = {
