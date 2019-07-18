@@ -113,7 +113,7 @@ The following table explains other cases:
 
 `/abc/node_modules` may resolve in `/node_modules` too.
 
-W> `resolve.alias` will takes precedence over other module resolutions.
+W> `resolve.alias` takes precedence over other module resolutions.
 
 
 ### `resolve.aliasFields`
