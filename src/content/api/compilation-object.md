@@ -184,7 +184,7 @@ Parameters:
 - `groupOptions` - options for the chunk group.
 - `module` - a module that references the chunk group.
 - `loc` - the location from which the chunk group is referenced (inside of the module).
-- `request` - the request from which the the chunk group is referenced.
+- `request` - the request from which the chunk group is referenced.
 
 ### addChunk
 
@@ -248,17 +248,6 @@ Parameters:
 
 - `module` - a module to patch tie.
 - `chunk` - a chunk to patch tie.
-
-### removeChunkFromDependencies
-
-`function (block, chunk)`
-
-Removes given chunk from a dependecies block module and chunks after removing dependecy reasons. Called automatically by `removeReasonsOfDependencyBlock`.
-
-Parameters:
-
-- `block` - block tie for `Chunk`.
-- `chunk` - a chunk to remove from dependencies.
 
 ### removeChunkFromDependencies
 
