@@ -75,7 +75,7 @@ module.exports = {
 
 ## Compiler and Compilation
 
-Among the two most important resources while developing plugins are the `compiler` and `compilation` objects. Understanding their roles is an important first step in extending the webpack engine.
+Among the two most important resources while developing plugins are the [`compiler`](/api/node/#compiler-instance) and [`compilation`](/api/compilation-hooks/) objects. Understanding their roles is an important first step in extending the webpack engine.
 
 ```javascript
 class HelloCompilationPlugin {
