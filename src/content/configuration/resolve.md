@@ -12,6 +12,7 @@ contributors:
   - numb86
   - jgravois
   - EugeneHlushko
+  - Aghassi
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -111,6 +112,8 @@ The following table explains other cases:
 `index.js` may resolve to another file if defined in the `package.json`.
 
 `/abc/node_modules` may resolve in `/node_modules` too.
+
+W> `resolve.alias` takes precedence over other module resolutions.
 
 
 ### `resolve.aliasFields`
