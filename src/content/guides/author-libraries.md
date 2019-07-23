@@ -11,6 +11,7 @@ contributors:
   - EugeneHlushko
   - AnayaDesign
   - chenxsan
+  - wizardofhogwarts
 ---
 
 Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
@@ -151,7 +152,7 @@ Now let's bundle this library in a way that will achieve the following goals:
 - Exposing the library as a variable called `webpackNumbers`.
 - Being able to access the library inside Node.js.
 
-Also, the consumer should be able to access the library the following ways:
+Also, the consumer should be able to access the library in the following ways:
 
 - ES2015 module. i.e. `import webpackNumbers from 'webpack-numbers'`.
 - CommonJS module. i.e. `require('webpack-numbers')`.
@@ -219,7 +220,7 @@ import B from 'library/two';
 // ...
 ```
 
-You won't be able to exclude them from bundle by specifying `library` in the externals. You'll either need to exclude them one by one or by using a regular expression.
+You won't be able to exclude them from the bundle by specifying `library` in the externals. You'll either need to exclude them one by one or by using a regular expression.
 
 ``` js
 module.exports = {
@@ -264,7 +265,7 @@ __webpack.config.js__
 
 T> Note that the `library` setup is tied to the `entry` configuration. For most libraries, specifying a single entry point is sufficient. While [multi-part libraries](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) are possible, it is simpler to expose partial exports through an [index script](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file) that serves as a single entry point. Using an `array` as an `entry` point for a library is __not recommended__.
 
-This exposes your library bundle available as a global variable named `webpackNumbers` when imported. To make the library compatible with other environments, add `libraryTarget` property to the config. This will add the different options about how the library can be exposed.
+This exposes your library bundle available as a global variable named `webpackNumbers` when imported. To make the library compatible with other environments, add `libraryTarget` property to the config. This will add various options about how the library can be exposed.
 
 __webpack.config.js__
 
@@ -295,7 +296,7 @@ You can expose the library in the following ways:
 
 - Variable: as a global variable made available by a `script` tag (`libraryTarget:'var'`).
 - This: available through the `this` object (`libraryTarget:'this'`).
-- Window: available trough the `window` object, in the browser (`libraryTarget:'window'`).
+- Window: available through the `window` object, in the browser (`libraryTarget:'window'`).
 - UMD: available after AMD or CommonJS `require` (`libraryTarget:'umd'`).
 
 If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output#outputlibrarytarget) there for a detailed list of all available options.
@@ -305,7 +306,7 @@ W> With webpack 3.5.5, using `libraryTarget: { root:'_' }` doesn't work properly
 
 ### Final Steps
 
-Optimize your output for production by following the steps in the [production guide](/guides/production). Let's also add the path to your generated bundle as the package's `main` field in with our `package.json`
+Optimize your output for production by following the steps mentioned in the [production guide](/guides/production). Let's also add the path to your generated bundle as the package's `main` field in with the `package.json`
 
 __package.json__
 
@@ -317,7 +318,7 @@ __package.json__
 }
 ```
 
-Or, to add as standard module as per [this guide](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage):
+Or, to add it as a standard module as per [this guide](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage):
 
 ``` json
 {
