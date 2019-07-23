@@ -22,6 +22,8 @@ Returns Stats object for the current compilation.
 
 Returns Stats object for the current compilation.
 
+Parameters:
+
 - `module` - module to be added
 - `cacheGroup` - `cacheGroup` of the module
 
