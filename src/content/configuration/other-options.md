@@ -184,3 +184,57 @@ module.exports = {
   name: 'admin-app'
 };
 ```
+
+## infrastructureLogging
+
+Options for infrastructure level logging.
+
+`object: {}`
+
+#### infrastructureLogging.level
+
+`string`
+
+Enable infrastructure logging output. Similar to [`stats.logging`](/configuration/stats/#stats) option but for infrastructure. No default value is given.
+
+Possible values:
+
+- `'none'` - disable logging
+- `'error'` - errors only
+- `'warn'` - errors and warnings only
+- `'info'` - errors, warnings, and info messages
+- `'log'` - errors, warnings, info messages, log messages, groups, clears. Collapsed groups are displayed in a collapsed state.
+- `'verbose'` - log everything except debug and trace. Collapsed groups are displayed in expanded state.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    level: 'info'
+  }
+};
+```
+
+#### infrastructureLogging.debug
+
+`string` `RegExp` `(name) => boolean` `[string, RegExp, (name) => boolean]`
+
+Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#stats) option but for infrastructure. No default value is given.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    level: 'info',
+    debug: [
+      'MyPlugin',
+      /MyPlugin/,
+      (name) => name.contains('MyPlugin')
+    ]
+  }
+};
+```
