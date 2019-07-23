@@ -185,7 +185,7 @@ module.exports = {
 };
 ```
 
-## infrastructureLogging
+### infrastructureLogging
 
 Options for infrastructure level logging.
 
