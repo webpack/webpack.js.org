@@ -68,7 +68,7 @@ Below is a list of entry configurations and their real-world use cases:
 
 ### Separate App and Vendor Entries
 
-T> In webpack version < 4 it was common to add vendors as a separate entrypoint to compile it as a separate file (in combination with the `CommonsChunkPlugin`). <br><br> This is discouraged in webpack 4. Instead, the `optimization.splitChunks` option takes care of separating vendors and app modules and creating a separate file. __Do not__ create an entry for vendors or other stuff that is not the starting point of execution.
+T> In webpack version < 4 it was common to add vendors as a separate entry point to compile it as a separate file (in combination with the `CommonsChunkPlugin`). <br><br> This is discouraged in webpack 4. Instead, the `optimization.splitChunks` option takes care of separating vendors and app modules and creating a separate file. __Do not__ create an entry for vendors or other stuff that is not the starting point of execution.
 
 ### Multi Page Application
 
@@ -88,6 +88,6 @@ __What does this do?__ We are telling webpack that we would like 3 separate depe
 
 __Why?__ In a multi-page application, the server is going to fetch a new HTML document for you. The page reloads this new document and assets are redownloaded. However, this gives us the unique opportunity to do multiple things:
 
-- Use `optimization.splitChunks` to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the number of entry points increase.
+- Use `optimization.splitChunks` to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the number of entry points increases.
 
 T> As a rule of thumb: Use exactly one entry point for each HTML document.
