@@ -295,6 +295,6 @@ Allows to use infrastructure logging when enabled in the configuration via [`inf
 
 `SyncBailHook`
 
-Allows to log into [stats](/configuration/stats/) when enabled, see [`stats.logging`, `stats.loggingDebug` and `stats.loggingTrace` options](/configuration/other-options/#infrastructurelogging).
+Allows to log into [stats](/configuration/stats/) when enabled, see [`stats.logging`, `stats.loggingDebug` and `stats.loggingTrace` options](/configuration/stats/#stats).
 
 - Callback Parameters: `origin`, `logEntry`
