@@ -993,7 +993,11 @@ module.exports = {
 
 Sometimes you don't want to proxy everything. It is possible to bypass the proxy based on the return value of a function.
 
-In the function you get access to the request, response and proxy options. It must return either `false` or a path that will be served instead of continuing to proxy the request.
+In the function you get access to the request, response and proxy options.
+
+- Return `null` or `undefined` means continue to process the request with proxy.
+- Return `false` will produce a 404 error for the request.
+- If a string path is returned. The path will be served instead of continuing to proxy the request.
 
 E.g. for a browser request, you want to serve a HTML page, but for an API request you want to proxy it. You could do something like this:
 
@@ -1132,7 +1136,7 @@ module.exports = {
 The bundle will now be available as `http://localhost:8080/assets/bundle.js`.
 
 T> Make sure `devServer.publicPath` always starts and ends with a forward slash.
-  
+
 It is also possible to use a full URL.
 
 __webpack.config.js__
