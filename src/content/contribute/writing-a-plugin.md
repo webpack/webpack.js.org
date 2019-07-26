@@ -251,9 +251,3 @@ Various types of hooks supported are :
     - Defined using `AsyncParallelHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
     - Called using `callAsync( ... params)` method
-
-- __Async Series Bail__
-
-    - Defined using `AsyncSeriesBailHook[params]`
-    - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-    - Called using `callAsync( ... params)` method
