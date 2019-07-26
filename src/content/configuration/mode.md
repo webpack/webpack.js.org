@@ -80,6 +80,7 @@ module.exports = {
 -   noEmitOnErrors: false,
 -   checkWasmTypes: false,
 -   minimize: false,
+-   removeAvailableModules: false
 - },
 - plugins: [
 -   new webpack.NamedModulesPlugin(),
