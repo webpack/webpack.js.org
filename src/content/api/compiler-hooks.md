@@ -7,6 +7,7 @@ contributors:
   - byzyk
   - madhavarshney
   - misterdev
+  - EugeneHlushko
 ---
 
 The `Compiler` module is the main engine that creates a compilation instance
@@ -280,3 +281,20 @@ Executed when a watching compilation has been invalidated.
 `SyncHook`
 
 Called when a watching compilation has stopped.
+
+### `infrastructureLog`
+
+`SyncBailHook`
+
+Allows to use infrastructure logging when enabled in the configuration via [`infrastructureLogging` option](/configuration/other-options/#infrastructurelogging).
+
+- Callback Parameters: `name`, `type`, `args`
+
+
+### `log`
+
+`SyncBailHook`
+
+Allows to log into [stats](/configuration/stats/) when enabled, see [`stats.logging`, `stats.loggingDebug` and `stats.loggingTrace` options](/configuration/stats/#stats).
+
+- Callback Parameters: `origin`, `logEntry`
