@@ -237,7 +237,7 @@ module.exports = {
 
 ### Sorting fields
 
-For `assetsSort`, `chunksSort` and `moduleSort` there are several possible fields that you can sort items by:
+For `assetsSort`, `chunksSort` and `modulesSort` there are several possible fields that you can sort items by:
 
 - `id` is the item's id;
 - `name` - a item's name that was assigned to it upon importing;
