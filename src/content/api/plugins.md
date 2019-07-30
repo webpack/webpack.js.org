@@ -134,6 +134,14 @@ reportProgress(percentage, ...args);
 
 Note that only a subset of compiler and compilation hooks support the `reportProgress` function. See [`ProgressPlugin`](/plugins/progress-plugin/#supported-hooks) for a full list.
 
+## Logging
+
+Logging API is available since the release of webpack 4.37. When `logging` is enabled in [`stats configuration`](/configuration/stats/#stats) and/or when [`infrastructure logging`](/configuration/other-options/#infrastructurelogging) is enabled. Plugins may log messages which will be printed out in the respective logger format (stats, infrastructure).
+
+- Plugins should prefer to use `compilation.getLogger('PluginName')` for logging. This kind of logging is stored to the Stats and formatted accordingly. It can be filtered and exported by the user.
+- Plugins may use the `compiler.getInfrastructureLogger('PluginName')` for logging. Using 'infrastructure' logging is not stored in the Stats and therefore not formatted. It's usually logged to the console/dashboard/GUI directly. It can be filtered by the user.
+- Plugins may use special fallback logic for detecting logging support `compilation.getLogger ? compilation.getLogger('PluginName') : console` to provide a fallback for cases when an older webpack version is used which does not support `getLogger` method on `compilation` object.
+
 ## Next Steps
 
 See the [compiler hooks](/api/compiler-hooks/) section for a detailed listing of all the available
