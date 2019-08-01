@@ -35,6 +35,7 @@ The following options are supported:
 - `noSources` (`boolean`): Prevents the source file content from being included in the source map (defaults to `false`).
 - `publicPath` (`string`): Emits absolute URLs with public path prefix, e.g. `https://example.com/project/`.
 - `fileContext` (`string`): Makes the `[file]` argument relative to this directory.
+- `sourceRoot` (`string`): Provide a custom value for the `sourceRoot` property in the SourceMap.
 
 The `lineToLine` object allows for the same `test`, `include`, and `exclude` options described above.
 
