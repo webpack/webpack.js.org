@@ -4,7 +4,6 @@ import Banner from 'react-banner';
 
 // Import Components
 import Link from '../Link/Link';
-import Container from '../Container/Container';
 import Logo from '../Logo/Logo';
 import Dropdown from '../Dropdown/Dropdown';
 

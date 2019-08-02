@@ -6,6 +6,7 @@ contributors:
   - tbroadley
   - byzyk
   - madhavarshney
+  - wizardofhogwarts
 ---
 
 This guide contains some useful tips for improving build/compilation performance.
@@ -137,10 +138,10 @@ webpack 4 outputs a large amount of data with its `stats.toJson()` by default. A
 
 ### Devtool
 
-Be aware of the performance differences of the different `devtool` settings.
+Be aware of the performance differences between the different `devtool` settings.
 
 - `"eval"` has the best performance, but doesn't assist you for transpiled code.
-- The `cheap-source-map` variants are more performant, if you can live with the slightly worse mapping quality.
+- The `cheap-source-map` variants are more performant if you can live with the slightly worse mapping quality.
 - Use a `eval-source-map` variant for incremental builds.
 
 => In most cases, `cheap-module-eval-source-map` is the best option.
@@ -201,9 +202,11 @@ module.exports = {
 
 ### Node.js Versions 8.9.10-9.11.1
 
+
 There was a [performance regression](https://github.com/nodejs/node/issues/19769) in Node.js versions 8.9.10 - 9.11.1 in the ES2015 `Map` and `Set` implementations. webpack uses those data structures liberally, so this regression affects compile times.
 
 Earlier and later Node.js versions are not affected.
+
 
 ### TypeScript Loader
 
