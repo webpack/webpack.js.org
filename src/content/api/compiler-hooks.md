@@ -7,6 +7,7 @@ contributors:
   - byzyk
   - madhavarshney
   - misterdev
+  - EugeneHlushko
 ---
 
 The `Compiler` module is the main engine that creates a compilation instance
@@ -109,7 +110,7 @@ Adds a hook right before running the compiler.
 
 `AsyncSeriesHook`
 
-Hook into the compiler before it begins reading [`records`](/configuration/other-options/#recordspath). 
+Hook into the compiler before it begins reading [`records`](/configuration/other-options/#recordspath).
 
 - Callback Parameters: `compiler`
 
@@ -173,7 +174,7 @@ compiler.hooks.beforeCompile.tapAsync('MyPlugin', (params, callback) => {
 
 `SyncHook`
 
-Called right after `beforeCompile`, before a new compilation is created. 
+Called right after `beforeCompile`, before a new compilation is created.
 
 - Callback Parameters: `compilationParams`
 
@@ -209,7 +210,7 @@ Executed before finishing the compilation.
 
 `AsyncSeriesHook`
 
-Called after finishing and sealing the compilation.  
+Called after finishing and sealing the compilation.
 
 - Callback Parameters: `compilation`
 
@@ -280,3 +281,20 @@ Executed when a watching compilation has been invalidated.
 `SyncHook`
 
 Called when a watching compilation has stopped.
+
+### `infrastructureLog`
+
+`SyncBailHook`
+
+Allows to use infrastructure logging when enabled in the configuration via [`infrastructureLogging` option](/configuration/other-options/#infrastructurelogging).
+
+- Callback Parameters: `name`, `type`, `args`
+
+
+### `log`
+
+`SyncBailHook`
+
+Allows to log into [stats](/configuration/stats/) when enabled, see [`stats.logging`, `stats.loggingDebug` and `stats.loggingTrace` options](/configuration/stats/#stats).
+
+- Callback Parameters: `origin`, `logEntry`

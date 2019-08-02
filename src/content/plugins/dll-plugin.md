@@ -13,7 +13,7 @@ related:
     url: https://github.com/webpack/webpack/blob/master/examples/explicit-vendor-chunk/README.md
 ---
 
-The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way that can drastically improve build time performance.
+The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way that can drastically improve build time performance. The term "DLL" stands for Dynamic-link library which was originally introduced by Microsoft.
 
 
 ## `DllPlugin`

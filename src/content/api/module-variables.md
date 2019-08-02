@@ -116,7 +116,7 @@ __resourceQuery === '?test';
 
 ### `__webpack_public_path__` (webpack-specific)
 
-Equals the config options `output.publicPath`.
+Equals the config option's `output.publicPath`.
 
 
 ### `__webpack_require__` (webpack-specific)

@@ -6,6 +6,7 @@ contributors:
   - kinseyost
   - byzyk
   - madhavarshney
+  - koke
 related:
   - title: Building Eval Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin
@@ -28,7 +29,6 @@ The following options are supported:
 - `filename` (`string`): Defines the output filename of the SourceMap (will be inlined if no value is provided).
 - `append` (`string`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. `false` disables the appending.
 - `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate).
-- `sourceURLTemplate`: Define the sourceURL default: `webpack-internal:///${module.identifier}`
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
 - `protocol` (`string`): Allows user to override default protocol (`webpack-internal://`)
@@ -63,29 +63,5 @@ The following code would exclude source maps for any modules in the `vendor.js` 
 new webpack.EvalSourceMapDevToolPlugin({
   filename: '[name].js.map',
   exclude: ['vendor.js']
-});
-```
-
-### Setting sourceURL
-
-Set a URL for source maps. Useful for avoiding cross-origin issues such as:
-
-``` bash
-A cross-origin error was thrown. React doesn't have access to the actual error object in development. See https://fb.me/react-crossorigin-error for more information.
-```
-
-The option can be set to a function:
-
-``` js
-new webpack.EvalSourceMapDevToolPlugin({
-  sourceURLTemplate: module => `/${module.identifier}`
-});
-```
-
-Or a substitution string:
-
-``` js
-new webpack.EvalSourceMapDevToolPlugin({
-  sourceURLTemplate: '[all-loaders][resource]'
 });
 ```
