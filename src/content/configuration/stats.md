@@ -35,12 +35,12 @@ module.exports = {
 
 | Preset              | Alternative | Description                                       |
 |---------------------|-------------|---------------------------------------------------|
-| `"errors-only"`     | _none_      | Only output when errors happen                    |
-| `"errors-warnings"` | _none_      | Only output errors and warnings happen            |
-| `"minimal"`         | _none_      | Only output when errors or new compilation happen |
-| `"none"`            | `false`     | Output nothing                                    |
-| `"normal"`          | `true`      | Standard output                                   |
-| `"verbose"`         | _none_      | Output everything                                 |
+| `'errors-only'`     | _none_      | Only output when errors happen                    |
+| `'errors-warnings'` | _none_      | Only output errors and warnings happen            |
+| `'minimal'`         | _none_      | Only output when errors or new compilation happen |
+| `'none'`            | `false`     | Output nothing                                    |
+| `'normal'`          | `true`      | Standard output                                   |
+| `'verbose'`         | _none_      | Output everything                                 |
 
 For more granular control, it is possible to specify exactly what information you want. Please note that all of the options in this object are optional.
 
@@ -50,7 +50,8 @@ For more granular control, it is possible to specify exactly what information yo
 module.exports = {
   //...
   stats: {
-    // fallback value for stats options when an option is not defined (has precedence over local webpack defaults)
+    // fallback value for stats options when an option is not defined
+    // (has precedence over local webpack defaults)
     all: undefined,
 
     // Add asset Information
@@ -60,7 +61,7 @@ module.exports = {
     // You can reverse the sort with `!field`.
     // Some possible values: 'id' (default), 'name', 'size', 'chunks', 'failed', 'issuer'
     // For a complete list of fields see the bottom of the page
-    assetsSort: "field",
+    assetsSort: 'field',
 
     // Add build date and time information
     builtAt: true,
@@ -90,10 +91,10 @@ module.exports = {
     // You can reverse the sort with `!field`. Default is `id`.
     // Some other possible values: 'name', 'size', 'chunks', 'failed', 'issuer'
     // For a complete list of fields see the bottom of the page
-    chunksSort: "field",
+    chunksSort: 'field',
 
     // Context directory for request shortening
-    context: "../src/",
+    context: '../src/',
 
     // `webpack --colors` equivalent
     colors: false,
@@ -116,21 +117,47 @@ module.exports = {
     // Exclude assets from being displayed in stats
     // This can be done with a String, a RegExp, a Function getting the assets name
     // and returning a boolean or an Array of the above.
-    excludeAssets: "filter" | /filter/ | (assetName) => true | false |
-      ["filter"] | [/filter/] | [(assetName) => true|false],
+    // Possible values: String | RegExp | (assetName) => boolean | [String, RegExp, (assetName) => boolean]
+    // Example values: 'filter' | /filter/ | ['filter', /filter/] | (assetName) => assetName.contains('moduleA')
+    excludeAssets: [],
 
     // Exclude modules from being displayed in stats
     // This can be done with a String, a RegExp, a Function getting the modules source
     // and returning a boolean or an Array of the above.
-    excludeModules: "filter" | /filter/ | (moduleSource) => true | false |
-      ["filter"] | [/filter/] | [(moduleSource) => true|false],
+    // Possible values: String | RegExp | (moduleSource) => boolean | [String, RegExp, (moduleSource) => boolean]
+    // Example values: 'filter' | /filter/ | ['filter', /filter/] | (moduleSource) => true
+    excludeModules: exclude || [],
 
     // See excludeModules
-    exclude: "filter" | /filter/ | (moduleSource) => true | false |
-      ["filter"] | [/filter/] | [(moduleSource) => true|false],
+    // Possible values: String | RegExp | (moduleSource) => boolean | [String, RegExp, (moduleSource) => boolean]
+    // Example values: 'filter' | /filter/ | ['filter', /filter/] | (moduleSource) => true
+    exclude: excludeModules || [],
 
     // Add the hash of the compilation
     hash: true,
+
+    // Add logging output
+    // Possible values: 'none', 'error', 'warn', 'info', 'log', 'verbose', true, false
+    // 'none', false - disable logging
+    // 'error' - errors only
+    // 'warn' - errors and warnings only
+    // 'info' - errors, warnings, and info messages
+    // 'log', true - errors, warnings, info messages, log messages, groups, clears.
+    //    Collapsed groups are displayed in a collapsed state.
+    // 'verbose' - log everything except debug and trace.
+    //    Collapsed groups are displayed in expanded state.
+    logging: 'info',
+
+    // Include debug information of specified loggers such as plugins or loaders.
+    // Provide an array of filters to match plugins or loaders.
+    // Filters can be Strings, RegExps or Functions.
+    // when stats.logging is false, stats.loggingDebug option is ignored.
+    // Possible values: String | RegExp | (warning) => boolean | [String, RegExp, (name) => boolean]
+    // Example values: 'MyPlugin' | /MyPlugin/ | ['MyPlugin', /MyPlugin/] | (name) => name.contains('MyPlugin')
+    loggingDebug: [],
+
+    // Enable stack traces in logging output for errors, warnings and traces.
+    loggingTrace: true,
 
     // Set the maximum number of modules to be shown
     maxModules: 15,
@@ -142,7 +169,7 @@ module.exports = {
     // You can reverse the sort with `!field`. Default is `id`.
     // Some other possible values: 'name', 'size', 'chunks', 'failed', 'issuer'
     // For a complete list of fields see the bottom of the page
-    modulesSort: "field",
+    modulesSort: 'field',
 
     // Show dependencies and origin of warnings/errors (since webpack 2.5.0)
     moduleTrace: true,
@@ -180,7 +207,9 @@ module.exports = {
     // Filter warnings to be shown (since webpack 2.4.0),
     // can be a String, Regexp, a function getting the warning and returning a boolean
     // or an Array of a combination of the above. First match wins.
-    warningsFilter: "filter" | /filter/ | ["filter", /filter/] | (warning) => true|false
+    // Possible values: String | RegExp | (warning) => boolean | [String, RegExp, (warning) => boolean]
+    // Example values: 'filter' | /filter/ | ['filter', /filter/] | (warning) => true
+    warningsFilter: null
   }
 }
 ```
@@ -208,7 +237,7 @@ module.exports = {
 
 ### Sorting fields
 
-For `assetsSort`, `chunksSort` and `moduleSort` there are several possible fields that you can sort items by:
+For `assetsSort`, `chunksSort` and `modulesSort` there are several possible fields that you can sort items by:
 
 - `id` is the item's id;
 - `name` - a item's name that was assigned to it upon importing;

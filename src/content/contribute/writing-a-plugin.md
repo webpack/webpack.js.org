@@ -75,7 +75,7 @@ module.exports = {
 
 ## Compiler and Compilation
 
-Among the two most important resources while developing plugins are the `compiler` and `compilation` objects. Understanding their roles is an important first step in extending the webpack engine.
+Among the two most important resources while developing plugins are the [`compiler`](/api/node/#compiler-instance) and [`compilation`](/api/compilation-hooks/) objects. Understanding their roles is an important first step in extending the webpack engine.
 
 ```javascript
 class HelloCompilationPlugin {
@@ -249,11 +249,5 @@ Various types of hooks supported are :
 - __Async Parallel__
 
     - Defined using `AsyncParallelHook[params]`
-    - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-    - Called using `callAsync( ... params)` method
-
-- __Async Series Bail__
-
-    - Defined using `AsyncSeriesBailHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
     - Called using `callAsync( ... params)` method

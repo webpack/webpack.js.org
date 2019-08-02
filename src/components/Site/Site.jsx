@@ -18,6 +18,7 @@ import Sponsors from '../Sponsors/Sponsors';
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
+import PageNotFound from '../PageNotFound/PageNotFound';
 import Gitter from '../Gitter/Gitter';
 import Vote from '../Vote/Vote';
 import Organization from '../Organization/Organization';
@@ -112,7 +113,7 @@ class Site extends React.Component {
                       }}
                     />
                   ))}
-                  <Route render={props => '404 Not Found'} />
+                  <Route render={props => <PageNotFound />} />
                 </Switch>
               </Container>
             )}
