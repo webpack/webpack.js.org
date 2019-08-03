@@ -17,6 +17,7 @@ new webpack.DefinePlugin({
 });
 ```
 
+T> `DefinePlugin` is not an API to define a webpack plugin; instead, it is a plugin that defines variables in a webpack build.
 
 ## Usage
 
