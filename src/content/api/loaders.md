@@ -650,4 +650,4 @@ Logging API is available since the release of webpack 4.37. When `logging` is en
 
 - Loaders should prefer to use `this.getLogger()` for logging which is a shortcut to `compilation.getLogger()` with loader path and processed file. This kind of logging is stored to the Stats and formatted accordingly. It can be filtered and exported by the user.
 - Loaders may use `this.getLogger('name')` to get an independent logger with a child name. Loader path and processed file is still added.
-- Loaders may use special fallback logic for detecting logging support `this.getLogger() ? this.getLogger() : console` to provide a fallback for cases when an older webpack version is used which does not support `getLogger` method.
+- Loaders may use special fallback logic for detecting logging support `this.getLogger() ? this.getLogger() : console` to provide a fallback when an older webpack version is used which does not support `getLogger` method.
