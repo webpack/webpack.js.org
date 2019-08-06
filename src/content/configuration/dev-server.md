@@ -995,7 +995,7 @@ Sometimes you don't want to proxy everything. It is possible to bypass the proxy
 
 In the function you get access to the request, response and proxy options.
 
-- Return `null` or `undefined` means continue to process the request with proxy.
+- Return `null` or `undefined` to continue processing the request with proxy.
 - Return `false` will produce a 404 error for the request.
 - If a string path is returned. The path will be served instead of continuing to proxy the request.
 
