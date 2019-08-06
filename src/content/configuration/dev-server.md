@@ -997,7 +997,7 @@ In the function you get access to the request, response and proxy options.
 
 - Return `null` or `undefined` to continue processing the request with proxy.
 - Return `false` to produce a 404 error for the request.
-- If a string path is returned. The path will be served instead of continuing to proxy the request.
+- Return a path to serve from, instead of continuing to proxy the request.
 
 E.g. for a browser request, you want to serve a HTML page, but for an API request you want to proxy it. You could do something like this:
 
