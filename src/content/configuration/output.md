@@ -319,14 +319,15 @@ Note this option does not affect output files for on-demand-loaded chunks. For t
 
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
-| Template    | Description                                                                         |
-| ----------- | ----------------------------------------------------------------------------------- |
-| [hash]      | The hash of the module identifier                                                   |
-| [chunkhash] | The hash of the chunk content                                                       |
-| [name]      | The module name                                                                     |
-| [id]        | The module identifier                                                               |
-| [query]     | The module query, i.e., the string following `?` in the filename                    |
-| [function]  | The function, which can return filename [string]                                    |
+| Template      | Description                                                                         |
+| ------------- | ----------------------------------------------------------------------------------- |
+| [hash]        | The hash of the module identifier                                                   |
+| [contenthash] | the hash of the content of a file, which is different for each asset                |
+| [chunkhash]   | The hash of the chunk content                                                       |
+| [name]        | The module name                                                                     |
+| [id]          | The module identifier                                                               |
+| [query]       | The module query, i.e., the string following `?` in the filename                    |
+| [function]    | The function, which can return filename [string]                                    |
 
 The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
 
