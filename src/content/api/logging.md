@@ -29,7 +29,7 @@ W> __Avoid noise in the log!__ Keep in mind that multiple plugins and loaders ar
 
 - `logger.error(...)`: for error messages
 - `logger.warn(...)`: for warnings
-- `logger.info(...)`: for __important__ information messages. These messages are displayed by default. Only use this for messages that the user really needs to know
+- `logger.info(...)`: for __important__ information messages. These messages are displayed by default. Only use this for messages that the user really needs to see
 - `logger.log(...)`: for __unimportant__ information messages. These messages are displayed only when user had opted-in to see them
 - `logger.debug(...)`: for debugging information. These messages are displayed only when user had opted-in to see debug logging for specific modules
 - `logger.trace()`:  to display a stack trace. Displayed like `logger.debug`
