@@ -330,7 +330,7 @@ The following substitutions are available in template strings (via webpack's int
 
 The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
 
-In places where substitutions are supported but you don't want them to be substituted, for example when wanting to output a bundle with the literal name `[name].js`, you can escape it by adding backslashes between the brackets.
+It is possible to filter out placeholder replacement when you want to use one of the placeholders in actual file name. For example, to output a file `[name].js`, you have to escape the `[name]` placeholder by adding backslashes between the brackets. So that `[\name\]` generates `[name]` instead of getting replaced with the `name` of the asset.
 
 Example: `[\id\]` generates `[id]` instead of getting replaced with the `id`.
 
