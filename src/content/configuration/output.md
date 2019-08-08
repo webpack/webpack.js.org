@@ -331,6 +331,10 @@ The following substitutions are available in template strings (via webpack's int
 
 The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
 
+It is possible to filter out placeholder replacement when you want to use one of the placeholders in the actual file name. For example, to output a file `[name].js`, you have to escape the `[name]` placeholder by adding backslashes between the brackets. So that `[\name\]` generates `[name]` instead of getting replaced with the `name` of the asset.
+
+Example: `[\id\]` generates `[id]` instead of getting replaced with the `id`.
+
 If using a function for this option, the function will be passed an object containing the substitutions in the table above.
 
 T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
@@ -1033,7 +1037,7 @@ module.exports = {
 
 `boolean: false`
 
-Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted. 
+Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted.
 
 W> `output.futureEmitAssets` option will be removed in webpack v5.0.0 and this behaviour will become the new default.
 
