@@ -1,7 +1,7 @@
 ---
 title: Compilation Object
 group: Objects
-sort: 13
+sort: 14
 contributors:
   - EugeneHlushko
 ---
