@@ -1353,6 +1353,108 @@ webpack-dev-server --stdin
 ```
 
 
+## `devServer.transportMode`
+
+`string: 'sockjs' | 'ws'` `object`
+
+W> `transportMode` is an experimental option, meaning its usage could potentially change without warning.
+
+This option allows you to choose the current `devServer` client/server transport mode, or provide your own custom client/server implementation. This allows you to specify how your browser, or other client, communicates with the `devServer`. The `devServer` then uses this to inform the browser client when the page should reload, for example. 
+
+The current default mode is [`'sockjs'`](https://www.npmjs.com/package/sockjs). This mode uses [SockJS-node](https://github.com/sockjs/sockjs-node) as a server, and [SockJS-client](https://www.npmjs.com/package/sockjs-client) on the client.
+
+Use `'sockjs'` mode:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: 'sockjs'
+  }
+};
+```
+
+`'ws'` mode will become the default mode in the next major `devServer` version. This mode uses [ws](https://www.npmjs.com/package/ws) as a server, and native WebSockets on the client.
+
+Use `'ws'` mode:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: 'ws'
+  }
+};
+```
+
+You can also create custom client/server `transportMode` implementations. The client and server implementations must be compatible with one another to communicate successfully.
+
+To create a custom server implementation, you must create a class that extends [`BaseServer`](https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js), found in the `lib/servers/` directory of the `webpack-dev-server` module.
+
+<!-- TODO: add link to a custom server implementation example -->
+
+To create a custom client implementation, you must create a class that extends [`BaseClient`](https://github.com/webpack/webpack-dev-server/blob/master/client-src/clients/BaseClient.js), found in the `client-src/clients/` directory of the `webpack-dev-server` module.
+
+<!-- TODO: add link to a custom client implementation example -->
+
+Using path to `CustomServer.js`, a custom WebSocket server implementation, along with the compatible `'ws'` client:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: {
+      client: 'ws',
+      server: require.resolve('./CustomServer')
+    }
+  }
+};
+```
+
+Using class exported by `CustomServer.js`, a custom WebSocket server implementation, along with the compatible `'ws'` client:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: {
+      client: 'ws',
+      server: require('./CustomServer')
+    }
+  }
+};
+```
+
+Using path to `CustomClient.js`, a custom WebSocket client implementation, along with the compatible `'ws'` server:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: {
+      client: require.resolve('./CustomClient'),
+      server: 'ws'
+    }
+  }
+};
+```
+
+Using custom, compatible WebSocket client and server implementations:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: {
+      client: require.resolve('./CustomClient'),
+      server: require.resolve('./CustomServer')
+    }
+  }
+};
+```
+
+
+
 ## `devServer.useLocalIp`
 
 `boolean`
