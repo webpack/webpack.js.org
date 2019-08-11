@@ -248,6 +248,13 @@ Called after emitting assets to output directory.
 
 - Callback Parameters: `compilation`
 
+### `assetEmitted`
+
+`AsyncSeriesHook`
+
+Allows to get byte content of emitted asset. Available since webpack v4.39.0
+
+- Callback Parameters: `file`, `content`
 
 ### `done`
 
