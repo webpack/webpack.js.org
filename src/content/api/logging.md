@@ -38,3 +38,21 @@ W> __Avoid noise in the log!__ Keep in mind that multiple plugins and loaders ar
 - `logger.groupCollapsed(...)`:  to group messages together. Displayed collapsed like `logger.log`. Displayed expanded when logging level is set to `'verbose'` or `'debug'`.
 - `logger.clear()`: to print a horizontal line. Displayed like `logger.log`
 - `logger.profile(...)`, `logger.profileEnd(...)`: to capture a profile. Delegated to `console.profile` when supported
+
+## Runtime Logger API
+
+Runtime logger API is only intended to be used as a development tool, it is not intended to be included in [production mode](/configuration/mode/#mode-production).
+
+- `const logging = require('webpack/logging/runtime')`: to use the logger in runtime, require it directly from webpack
+- `logging.getLogger('name')`: to get individual logger by name
+- `logging.configureDefaultLogger(...)`: to override the default logger.
+
+```javascript
+const logging = require('webpack/logging/runtime');
+logging.configureDefaultLogger({
+  level: 'log',
+  debug: /something/
+});
+```
+
+- `logging.hooks.log`: to apply Plugins to the runtime logger
