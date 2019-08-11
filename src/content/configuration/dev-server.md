@@ -51,7 +51,7 @@ webpack output is served from /build/
 Content not from webpack is served from /path/to/dist/
 ```
 
-…that will give some background on the server's address and what it's serving.
+That will give some background on the server's address and what it's serving.
 
 If you're using dev-server through [the Node.js API](https://webpack.js.org/api/node/), the options in `devServer` will be ignored. Pass the options as a second parameter instead: `new WebpackDevServer(compiler, {...})`. [See an example of how to use webpack-dev-server with the Node.js API.](https://github.com/webpack/webpack-dev-server/tree/master/examples/api/simple)
 
@@ -726,7 +726,7 @@ module.exports = {
 
 `boolean`
 
-Suppresses messages like the webpack bundle information. Errors and warnings will still be shown. `devServer.noInfo` is disabled by default.
+Tells dev-server to suppress messages like the webpack bundle information. Errors and warnings will still be shown. `devServer.noInfo` is disabled by default.
 
 __webpack.config.js__
 
