@@ -30,23 +30,21 @@ T> The webpack repository contains an [example showing the effect of all `devtoo
 
 T> Instead of using the `devtool` option you can also use `SourceMapDevToolPlugin`/`EvalSourceMapDevToolPlugin` directly as it has more options. Never use both the `devtool` option and plugin together. The `devtool` option adds the plugin internally so you would end up with the plugin applied twice.
 
-devtool                        | build | rebuild | production | quality
------------------------------- | ----- | ------- | ---------- | -----------------------------
-(none)                         | +++   | +++     | yes        | bundled code
-eval                           | +++   | +++     | no         | generated code
-cheap-eval-source-map          | +     | ++      | no         | transformed code (lines only)
-cheap-module-eval-source-map   | o     | ++      | no         | original source (lines only)
-eval-source-map                | --    | +       | no         | original source
-cheap-source-map               | +     | o       | yes        | transformed code (lines only)
-cheap-module-source-map        | o     | -       | yes        | original source (lines only)
-inline-cheap-source-map        | +     | o       | no         | transformed code (lines only)
-inline-cheap-module-source-map | o     | -       | no         | original source (lines only)
-source-map                     | --    | --      | yes        | original source
-inline-source-map              | --    | --      | no         | original source
-hidden-source-map              | --    | --      | yes        | original source
-nosources-source-map           | --    | --      | yes        | without source content
-
-T> `+++` super fast, `++` fast, `+` pretty fast, `o` medium, `-` pretty slow, `--` slow
+devtool                        | build   | rebuild | production | quality
+------------------------------ | ------- | ------- | ---------- | -----------------------------
+(none)                         | fastest | fastest | yes        | bundled code
+eval                           | fastest | fastest | no         | generated code
+cheap-eval-source-map          | fast    | faster  | no         | transformed code (lines only)
+cheap-module-eval-source-map   | slow    | faster  | no         | original source (lines only)
+eval-source-map                | slowest | fast    | no         | original source
+cheap-source-map               | fast    | slow    | yes        | transformed code (lines only)
+cheap-module-source-map        | slow    | slower  | yes        | original source (lines only)
+inline-cheap-source-map        | fast    | slow    | no         | transformed code (lines only)
+inline-cheap-module-source-map | slow    | slower  | no         | original source (lines only)
+source-map                     | slowest | slowest | yes        | original source
+inline-source-map              | slowest | slowest | no         | original source
+hidden-source-map              | slowest | slowest | yes        | original source
+nosources-source-map           | slowest | slowest | yes        | without source content
 
 Some of these values are suited for development and some for production. For development you typically want fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate and support minimizing.
 
