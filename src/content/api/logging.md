@@ -36,6 +36,7 @@ W> __Avoid noise in the log!__ Keep in mind that multiple plugins and loaders ar
 - `logger.group(...)`: to group messages together. Displayed collapsed like `logger.log`
 - `logger.groupEnd()`: to end a logging group
 - `logger.groupCollapsed(...)`:  to group messages together. Displayed collapsed like `logger.log`. Displayed expanded when logging level is set to `'verbose'` or `'debug'`.
+- `logger.status`:  writes a temporary message, setting a new status, overrides the previous one
 - `logger.clear()`: to print a horizontal line. Displayed like `logger.log`
 - `logger.profile(...)`, `logger.profileEnd(...)`: to capture a profile. Delegated to `console.profile` when supported
 
