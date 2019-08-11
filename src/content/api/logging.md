@@ -43,14 +43,9 @@ W> __Avoid noise in the log!__ Keep in mind that multiple plugins and loaders ar
 
 Runtime logger API is only intended to be used as a development tool, it is not intended to be included in [production mode](/configuration/mode/#mode-production).
 
-- To use the logger in runtime, require it directly from webpack:
-
-```javascript
-const logging = require('webpack/logging/runtime');
-```
-
-- To get individual logger by name use `logging.getLogger('name')`;
-- To override the default logger use:
+- `const logging = require('webpack/logging/runtime')`: to use the logger in runtime, require it directly from webpack
+- `logging.getLogger('name')`: to get individual logger by name
+- `logging.configureDefaultLogger(...)`: to override the default logger.
 
 ```javascript
 const logging = require('webpack/logging/runtime');
@@ -60,4 +55,4 @@ logging.configureDefaultLogger({
 });
 ```
 
-- To apply Plugins to the runtime logger use `logging.hooks.log`
+- `logging.hooks.log`: to apply Plugins to the runtime logger
