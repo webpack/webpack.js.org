@@ -265,7 +265,7 @@ T> A logical next step from here is minifying and optimizing the images. Read th
 
 ## Loading Fonts
 
-What about other assets like fonts? The file and URL loaders take any file we load through them and output it to our build directory. This means we can use them for any kind of file, including fonts. Let's update our `webpack.config.js` to handle font files:
+What about other assets like fonts? The [file](/loaders/file-loader/) and [URL](/loaders/url-loader/) loaders take any file we load through them and output it to our build directory. This means we can use them for any kind of file, including fonts. Let's update our `webpack.config.js` to handle font files:
 
 __webpack.config.js__
 
