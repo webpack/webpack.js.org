@@ -287,7 +287,7 @@ __package.json__
   }
 ```
 
-Now we can use the `npm run build` command in place of the `npx` command we used earlier. Within `scripts` we can reference locally installed npm packages by name the same way we did with `npx`. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts (each with flags like `--config` if necessary).
+Now we can use the `npm run build` command in place of the `npx` command we used earlier. Within `scripts` we can reference locally installed npm packages by their names as we did with `npx`. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts (each with flags like `--config` if necessary).
 
 Now run the following command and see if your script alias works:
 
