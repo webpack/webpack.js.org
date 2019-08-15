@@ -308,7 +308,7 @@ T> We can pass custom parameters to webpack by adding two dashes between the `np
 
 ## Conclusion
 
-With a basic build complete, we recommend you read the next guide [`Asset Management`](/guides/asset-management) to learn how to manage assets like images and fonts with webpack. At this point, the project should look like this:
+With a basic build complete, we recommend you read the [`Asset Management guide`](/guides/asset-management/) to learn how to manage assets like images and fonts with webpack. At this point, the project should look like this:
 
 __project__
 
