@@ -453,7 +453,7 @@ __src/data.xml__
 </note>
 ```
 
-Now we can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable we import it to will contain parsed JSON for easy consumption:
+Now we can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable we import will contain parsed JSON for easy consumption:
 
 __src/index.js__
 
