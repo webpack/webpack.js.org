@@ -113,7 +113,7 @@ Note the use of `merge()` in the environment-specific configurations to easily i
 
 ## NPM Scripts
 
-Now let's repoint our `scripts` to the new configurations. We'll use the _development_ one for our `webpack-dev-server`, `npm start`, script and the _production_ one for our `npm run build` script:
+Now let's repoint our `scripts` to the new configurations. We'll use the _development_ one for our `npm start` script and the _production_ one for our `npm run build` script:
 
 __package.json__
 
@@ -227,7 +227,7 @@ T> Avoid `inline-***` and `eval-***` use in production as they can increase bund
 
 ## Minimize CSS
 
-It is crucial to minimize your CSS on production, please see [Minimizing for Production](/plugins/mini-css-extract-plugin/#minimizing-for-production) section.
+It is crucial to minimize your CSS for production. Please see the [Minimizing for Production](/plugins/mini-css-extract-plugin/#minimizing-for-production) section.
 
 
 ## CLI Alternatives
