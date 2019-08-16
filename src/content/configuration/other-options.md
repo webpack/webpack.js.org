@@ -196,7 +196,7 @@ Options for infrastructure level logging.
 
 `string`
 
-Enable infrastructure logging output. Similar to [`stats.logging`](/configuration/stats/#stats) option but for infrastructure. No default value is given.
+Enable infrastructure logging output. Similar to [`stats.logging`](/configuration/stats/#statslogging) option but for infrastructure. No default value is given.
 
 Possible values:
 
