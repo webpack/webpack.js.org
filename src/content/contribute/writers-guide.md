@@ -199,7 +199,7 @@ To mark a number, use `number`:
 
 `number = 15: 5, 15, 30`
 
-To mark an object, use `object`
+To mark an object, use `object`:
 
 `object = { prop1 string = true, prop2 boolean = false, prop3 function (module) => string}`
 
