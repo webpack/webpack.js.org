@@ -173,7 +173,7 @@ Where `= 'none'` means that default value is `'none'` for the given option.
 
 `string = 'none': 'none' | 'development' | 'production'`
 
-Where `: 'none' | 'development' | 'production'` enumerates the possible type values, in this case, three strings are acceptable: `'none' | 'development' | 'production'`.
+Where `: 'none' | 'development' | 'production'` enumerates the possible type values, in this case, three strings are acceptable: `'none'`, `'development'`, and `'production'`.
 
 Use space between types to list all available types for the given option:
 
