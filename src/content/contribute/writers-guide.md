@@ -202,5 +202,3 @@ To mark a number, use `number`:
 To mark an object, use `object`:
 
 `object = { prop1 string = 'none', prop2 boolean = false, prop3 function (module) => string }`
-
-
