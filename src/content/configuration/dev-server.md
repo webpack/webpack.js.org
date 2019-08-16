@@ -1395,7 +1395,7 @@ T> When providing a custom client and server implementation make sure that they 
 
 ### `devServer.transportMode.server`
 
-`string` `class` `path`
+`string` `class` `function` `path`
 
 To create a custom server implementation, create a class that extends [`BaseServer`](https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js).
 
