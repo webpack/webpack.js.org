@@ -193,7 +193,7 @@ To mark a Plugin as an available option value type, use camel case title of the 
 
 `TerserPlugin` `[TerserPlugin]`
 
-Which means that option exptects one or few `TerserPlugin` instances.
+Which means that the option exptects one or few `TerserPlugin` instances.
 
 To mark a number, use `number`:
 
