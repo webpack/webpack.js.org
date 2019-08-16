@@ -169,7 +169,7 @@ __configuration.example.option__
 
 `string = 'none'`
 
-Where `= 'none'` means that default value is `'none'` for the given option.
+Where `= 'none'` means that the default value is `'none'` for the given option.
 
 `string = 'none': 'none' | 'development' | 'production'`
 
