@@ -163,7 +163,7 @@ Please do not assume things are simple. Avoid words like 'just', 'simply'.
 
 ### Configuration defaults and types
 
-Always provide types and defaults to all of the documentation options in order to keep documentation accessible and well-written. We are adding types and defaults after entitling the documented option:
+Always provide types and defaults to all of the documentation options in order to keep the documentation accessible and well-written. We are adding types and defaults after entitling the documented option:
 
 __configuration.example.option__
 
