@@ -1393,7 +1393,7 @@ module.exports = {
 
 T> When providing a custom client and server implementation make sure that they are compatible with one another to communicate successfully.
 
-### devServer.transportMode.server
+### `devServer.transportMode.server`
 
 `string` `class` `path`
 
@@ -1427,7 +1427,7 @@ module.exports = {
 };
 ```
 
-### devServer.transportMode.client
+### `devServer.transportMode.client`
 
 `string` `path`
 
