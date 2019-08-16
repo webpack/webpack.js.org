@@ -54,7 +54,7 @@ module.exports = {
   stats: {
     all: undefined
   }
-}
+};
 ```
 
 ### `stats.assets`
@@ -69,7 +69,7 @@ module.exports = {
   stats: {
     assets: false
   }
-}
+};
 ```
 
 ### `stats.assetsSort`
@@ -84,7 +84,7 @@ module.exports = {
   stats: {
     assetsSort: '!size'
   }
-}
+};
 ```
 
 ### `stats.builtAt`
@@ -99,7 +99,7 @@ module.exports = {
   stats: {
     builtAt: false
   }
-}
+};
 ```
 
 ### `stats.cached`
@@ -114,7 +114,7 @@ module.exports = {
   stats: {
     cached: false
   }
-}
+};
 ```
 
 ### `stats.cachedAssets`
@@ -129,7 +129,7 @@ module.exports = {
   stats: {
     cachedAssets: false
   }
-}
+};
 ```
 
 ### `stats.children`
@@ -144,7 +144,7 @@ module.exports = {
   stats: {
     children: false
   }
-}
+};
 ```
 
 ### `stats.chunks`
@@ -159,7 +159,7 @@ module.exports = {
   stats: {
     chunks: false
   }
-}
+};
 ```
 
 ### `stats.chunkGroups`
@@ -174,7 +174,7 @@ module.exports = {
   stats: {
     chunkGroups: false
   }
-}
+};
 ```
 
 ### `stats.chunkModules`
@@ -189,7 +189,7 @@ module.exports = {
   stats: {
     chunkModules: false
   }
-}
+};
 ```
 
 ### `stats.chunkOrigins`
@@ -204,7 +204,7 @@ module.exports = {
   stats: {
     chunkOrigins: false
   }
-}
+};
 ```
 
 ### `stats.chunksSort`
@@ -219,7 +219,7 @@ module.exports = {
   stats: {
     chunksSort: 'name'
   }
-}
+};
 ```
 
 ### `stats.context`
@@ -234,7 +234,7 @@ module.exports = {
   stats: {
     context: '../src/components/'
   }
-}
+};
 ```
 
 ### `stats.colors`
@@ -249,7 +249,7 @@ module.exports = {
   stats: {
     colors: true
   }
-}
+};
 ```
 
  It is also available as a CLI flag:
@@ -281,7 +281,7 @@ module.exports = {
   stats: {
     depth: true
   }
-}
+};
 ```
 
 ### `stats.entrypoints`
@@ -296,7 +296,7 @@ module.exports = {
   stats: {
     entrypoints: true
   }
-}
+};
 ```
 
 ### `stats.env`
@@ -311,7 +311,7 @@ module.exports = {
   stats: {
     env: true
   }
-}
+};
 ```
 
 ### `stats.errors`
@@ -326,7 +326,7 @@ module.exports = {
   stats: {
     errors: false
   }
-}
+};
 ```
 
 ### `stats.errorDetails`
@@ -341,7 +341,7 @@ module.exports = {
   stats: {
     errorDetails: false
   }
-}
+};
 ```
 
 ### `stats.excludeAssets`
@@ -355,12 +355,12 @@ module.exports = {
   //...
   stats: {
     excludeAssets: [
-      `filter`,
+      'filter',
       /filter/,
       (assetName) => assetName.contains('moduleA')
     ]
   }
-}
+};
 ```
 
 ### `stats.excludeModules`
@@ -374,12 +374,12 @@ module.exports = {
   //...
   stats: {
     excludeModules: [
-      `filter`,
+      'filter',
       /filter/,
       (moduleSource) => true
     ]
   }
-}
+};
 ```
 
 Setting `stats.excludeModules` to `false` will disable the exclude behaviour.
@@ -390,7 +390,7 @@ module.exports = {
   stats: {
     excludeModules: false
   }
-}
+};
 ```
 
 ### `stats.exclude`
@@ -409,7 +409,7 @@ module.exports = {
   stats: {
     hash: false
   }
-}
+};
 ```
 
 ### `stats.logging`
@@ -429,9 +429,9 @@ Tells `stats` whether to add logging output.
 module.exports = {
   //...
   stats: {
-    logging: `verbose`
+    logging: 'verbose'
   }
-}
+};
 ```
 
 ### `stats.loggingDebug`
@@ -445,12 +445,12 @@ module.exports = {
   //...
   stats: {
     loggingDebug: [
-      `MyPlugin`,
+      'MyPlugin',
       /MyPlugin/,
       (name) => name.contains('MyPlugin')
     ]
   }
-}
+};
 ```
 
 ### `stats.loggingTrace`
@@ -466,7 +466,7 @@ module.exports = {
   stats: {
     loggingTrace: false
   }
-}
+};
 ```
 
 ### `stats.maxModules`
@@ -481,7 +481,7 @@ module.exports = {
   stats: {
     maxModules: 5
   }
-}
+};
 ```
 
 ### `stats.modules`
@@ -496,7 +496,7 @@ module.exports = {
   stats: {
     modules: false
   }
-}
+};
 ```
 
 ### `stats.modulesSort`
@@ -511,7 +511,7 @@ module.exports = {
   stats: {
     modulesSort: 'size'
   }
-}
+};
 ```
 
 ### `stats.moduleTrace`
@@ -526,7 +526,7 @@ module.exports = {
   stats: {
     moduleTrace: false
   }
-}
+};
 ```
 
 ### `stats.outputPath`
@@ -541,7 +541,7 @@ module.exports = {
   stats: {
     outputPath: false
   }
-}
+};
 ```
 
 ### `stats.performance`
@@ -556,7 +556,7 @@ module.exports = {
   stats: {
     performance: false
   }
-}
+};
 ```
 
 ### `stats.providedExports`
@@ -571,7 +571,7 @@ module.exports = {
   stats: {
     providedExports: true
   }
-}
+};
 ```
 
 ### `stats.publicPath`
@@ -586,7 +586,7 @@ module.exports = {
   stats: {
     publicPath: false
   }
-}
+};
 ```
 
 ### `stats.reasons`
@@ -601,7 +601,7 @@ module.exports = {
   stats: {
     reasons: false
   }
-}
+};
 ```
 
 ### `stats.source`
@@ -616,7 +616,7 @@ module.exports = {
   stats: {
     source: true
   }
-}
+};
 ```
 
 ### `stats.timings`
@@ -631,7 +631,7 @@ module.exports = {
   stats: {
     timings: false
   }
-}
+};
 ```
 
 ### `stats.usedExports`
@@ -646,7 +646,7 @@ module.exports = {
   stats: {
     usedExports: true
   }
-}
+};
 ```
 
 ### `stats.version`
@@ -661,7 +661,7 @@ module.exports = {
   stats: {
     version: false
   }
-}
+};
 ```
 
 ### `stats.warnings`
@@ -676,7 +676,7 @@ module.exports = {
   stats: {
     warnings: false
   }
-}
+};
 ```
 
 ### `stats.warningsFilter`
@@ -690,37 +690,37 @@ module.exports = {
   //...
   stats: {
     warningsFilter: [
-      `filter`,
+      'filter',
       /filter/,
       (warning) => true
     ]
   }
-}
+};
 ```
 
 ### Sorting fields
 
 For `assetsSort`, `chunksSort` and `modulesSort` there are several possible fields that you can sort items by:
 
-- `id` is the item's id;
-- `name` - a item's name that was assigned to it upon importing;
-- `size` - a size of item in bytes;
-- `chunks` - what chunks the item originates from (for example, if there are multiple subchunks for one chunk - the subchunks will be grouped together according to their main chunk);
-- `errors` - amount of errors in items;
-- `warnings` - amount of warnings in items;
-- `failed` - whether the item has failed compilation;
-- `cacheable` - whether the item is cacheable;
-- `built` - whether the asset has been built;
-- `prefetched` - whether the asset will be prefetched;
-- `optional` - whether the asset is optional;
-- `identifier` - identifier of the item;
-- `index` - item's processing index;
-- `index2`
-- `profile`
-- `issuer` - an identifier of the issuer;
-- `issuerId` - an id of the issuer;
-- `issuerName` - a name of the issuer;
-- `issuerPath` - a full issuer object. There's no real need to sort by this field;
+- `'id'` is the item's id;
+- `'name'` - a item's name that was assigned to it upon importing;
+- `'size'` - a size of item in bytes;
+- `'chunks'` - what chunks the item originates from (for example, if there are multiple subchunks for one chunk - the subchunks will be grouped together according to their main chunk);
+- `'errors'` - amount of errors in items;
+- `'warnings'` - amount of warnings in items;
+- `'failed'` - whether the item has failed compilation;
+- `'cacheable'` - whether the item is cacheable;
+- `'built'` - whether the asset has been built;
+- `'prefetched'` - whether the asset will be prefetched;
+- `'optional'` - whether the asset is optional;
+- `'identifier'` - identifier of the item;
+- `'index'` - item's processing index;
+- `'index2'`
+- `'profile'`
+- `'issuer'` - an identifier of the issuer;
+- `'issuerId'` - an id of the issuer;
+- `'issuerName'` - a name of the issuer;
+- `'issuerPath'` - a full issuer object. There's no real need to sort by this field;
 
 ### Extending stats behaviours
 
