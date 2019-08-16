@@ -187,7 +187,7 @@ To mark a function, also list arguments when they are available:
 
 `function (compilation, module, path) => boolean`
 
-Where `(compilation, module, path)` lists the arguments that the provided function will receive and `=> boolean` means that return value of the function must be a `boolean`.
+Where `(compilation, module, path)` lists the arguments that the provided function will receive and `=> boolean` means that the return value of the function must be a `boolean`.
 
 To mark a Plugin as an available option value type, use camel case title of the Plugin:
 
