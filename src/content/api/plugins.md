@@ -136,7 +136,7 @@ Note that only a subset of compiler and compilation hooks support the `reportPro
 
 ## Logging
 
-Logging API is available since the release of webpack 4.37. When `logging` is enabled in [`stats configuration`](/configuration/stats/#stats) and/or when [`infrastructure logging`](/configuration/other-options/#infrastructurelogging) is enabled, plugins may log messages which will be printed out in the respective logger format (stats, infrastructure).
+Logging API is available since the release of webpack 4.37. When `logging` is enabled in [`stats configuration`](/configuration/stats/#statslogging) and/or when [`infrastructure logging`](/configuration/other-options/#infrastructurelogging) is enabled, plugins may log messages which will be printed out in the respective logger format (stats, infrastructure).
 
 - Plugins should prefer to use `compilation.getLogger('PluginName')` for logging. This kind of logging is stored to the Stats and formatted accordingly. It can be filtered and exported by the user.
 - Plugins may use the `compiler.getInfrastructureLogger('PluginName')` for logging. Using `infrastructure` logging is not stored in the Stats and therefore not formatted. It's usually logged to the console/dashboard/GUI directly. It can be filtered by the user.
