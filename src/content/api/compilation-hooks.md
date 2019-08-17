@@ -1,7 +1,7 @@
 ---
 title: Compilation Hooks
 group: Plugins
-sort: 9
+sort: 10
 contributors:
   - byzyk
   - madhavarshney
