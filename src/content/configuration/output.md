@@ -319,16 +319,21 @@ Note this option does not affect output files for on-demand-loaded chunks. For t
 
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
-| Template    | Description                                                                         |
-| ----------- | ----------------------------------------------------------------------------------- |
-| [hash]      | The hash of the module identifier                                                   |
-| [chunkhash] | The hash of the chunk content                                                       |
-| [name]      | The module name                                                                     |
-| [id]        | The module identifier                                                               |
-| [query]     | The module query, i.e., the string following `?` in the filename                    |
-| [function]  | The function, which can return filename [string]                                    |
+| Template      | Description                                                                         |
+| ------------- | ----------------------------------------------------------------------------------- |
+| [hash]        | The hash of the module identifier                                                   |
+| [contenthash] | the hash of the content of a file, which is different for each asset                |
+| [chunkhash]   | The hash of the chunk content                                                       |
+| [name]        | The module name                                                                     |
+| [id]          | The module identifier                                                               |
+| [query]       | The module query, i.e., the string following `?` in the filename                    |
+| [function]    | The function, which can return filename [string]                                    |
 
 The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
+
+It is possible to filter out placeholder replacement when you want to use one of the placeholders in the actual file name. For example, to output a file `[name].js`, you have to escape the `[name]` placeholder by adding backslashes between the brackets. So that `[\name\]` generates `[name]` instead of getting replaced with the `name` of the asset.
+
+Example: `[\id\]` generates `[id]` instead of getting replaced with the `id`.
 
 If using a function for this option, the function will be passed an object containing the substitutions in the table above.
 
@@ -1032,7 +1037,7 @@ module.exports = {
 
 `boolean: false`
 
-Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted. 
+Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted.
 
 W> `output.futureEmitAssets` option will be removed in webpack v5.0.0 and this behaviour will become the new default.
 
