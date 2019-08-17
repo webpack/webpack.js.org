@@ -253,10 +253,10 @@ module.exports = {
 ```
 
  It is also available as a CLI flag:
- 
- ```bash
- webpack-cli --colors
- ```
+
+```bash
+webpack-cli --colors
+```
 
  You can specify your own terminal output colors using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code)
 
