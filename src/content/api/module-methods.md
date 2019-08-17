@@ -1,7 +1,7 @@
 ---
 title: Module Methods
 group: Modules
-sort: 6
+sort: 7
 contributors:
   - skipjack
   - sokra
