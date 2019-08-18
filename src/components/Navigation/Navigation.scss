@@ -10,10 +10,11 @@
 
 .navigation__inner {
   position: relative;
+  background: #2b3a42;
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: map-get($screens, large);
+  max-width: 1024px;
   margin: 0 auto;
   padding: 0.6em 1em;
 
