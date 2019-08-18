@@ -113,7 +113,7 @@ export default class SidebarMobile extends React.Component {
    * @param {object} e - Native click event
    */
   _handleBodyClick = e => {
-    const {isOpen, toggle} = this.props;
+    const { isOpen, toggle } = this.props;
     if (isOpen && !this._container.contains(e.target)) {
       toggle(false);
     }
