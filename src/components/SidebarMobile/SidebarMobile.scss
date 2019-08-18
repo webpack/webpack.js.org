@@ -50,9 +50,9 @@
 }
 
 .sidebar-mobile__close {
-  position: fixed;
+  position: absolute;
   cursor: pointer;
-  right: 40px;
+  right: 22px;
   top: 10px;
   font-size: 1.3em;
   background-color: getColor(denim);

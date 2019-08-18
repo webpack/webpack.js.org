@@ -39,8 +39,9 @@ export default class SidebarMobile extends React.Component {
     );
   }
 
-  _toggleBodyListener(add) {
+  _toggleBodyListener = (add) => {
     let actionName = add ? 'addEventListener' : 'removeEventListener';
+    window[actionName]('touchstart', this._handleBodyClick);
     window[actionName]('mousedown', this._handleBodyClick);
   }
 
@@ -109,14 +110,12 @@ export default class SidebarMobile extends React.Component {
   /**
    * Handle clicks on content
    *
-   * @param {object} e - Native click event
+   * @param {object} <embed src="" type=""/> - Native click event
    */
   _handleBodyClick = e => {
-    if (
-      this.props.isOpen &&
-      !this._container.contains(e.target)
-    ) {
-      this.props.toggle(false);
+    const {isOpen, toggle} = this.props;
+    if (isOpen && !this._container.contains(e.target)) {
+      toggle(false);
     }
   }
 
