@@ -18,10 +18,11 @@ contributors:
   - mehrdaad
   - SevenOutman
   - AnayaDesign
+  - wizardofhogwarts
   - aholzner
 ---
 
-In this guide we'll dive into some of the best practices and utilities for building a production site or application.
+In this guide, we'll dive into some of the best practices and utilities for building a production site or application.
 
 T> This walkthrough stems from [Tree Shaking](/guides/tree-shaking) and [Development](/guides/development). Please ensure you are familiar with the concepts/setup introduced in those guides before continuing on.
 
@@ -167,7 +168,7 @@ __webpack.prod.js__
 
 T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine dev-vs-prod behavior by server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `"production"` __within__ the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` within webpack configurations do not work as expected.
 
-If you're using a library like [`react`](https://reactjs.org/), you should actually see a significant drop in bundle size after adding this plugin. Also note that any of our local `/src` code can key off of this as well, so the following check would be valid:
+If you're using a library like [`react`](https://reactjs.org/), you should actually see a significant drop in bundle size after adding this plugin. Also, note that any of our local `/src` code can key off of this as well, so the following check would be valid:
 
 __src/index.js__
 
@@ -207,7 +208,7 @@ If you decide to try another minification plugin, just make sure your new choice
 
 ## Source Mapping
 
-We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that's recommended for production use (see [`devtool`](/configuration/devtool)). For this guide, we'll use the `source-map` option in _production_ as opposed to the `inline-source-map` we used in _development_:
+We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that's recommended for production use (see [`devtool`](/configuration/devtool)). For this guide, we'll use the `source-map` option in the _production_ as opposed to the `inline-source-map` we used in the _development_:
 
 __webpack.prod.js__
 
@@ -231,6 +232,6 @@ It is crucial to minimize your CSS on production, please see [Minimizing for Pro
 
 ## CLI Alternatives
 
-Some of what has been described above is also achievable via the command line. For example, the `--optimize-minimize` flag will include the `TerserPlugin` behind the scenes. The `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above. And, `webpack -p` will automatically invoke both those flags and thus the plugins to be included.
+Some of what has been described above can also be achieved by using the command line. For example, the `--optimize-minimize` flag will include the `TerserPlugin` behind the scenes. The `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above. And, `webpack -p` will automatically invoke both those flags and thus the plugins to be included.
 
-While these short hand methods are nice, we usually recommend just using the configuration as it's better to understand exactly what is being done for you in both cases. The configuration also gives you more control on fine tuning other options within both plugins.
+While these shorthand methods are nice, we usually recommend just using the configuration as it's better to understand exactly what is being done for you in both cases. The configuration also gives you more control on fine-tuning other options within both plugins.

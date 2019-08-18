@@ -21,7 +21,7 @@ If you've been following the guides, you should have a solid understanding of so
 
 W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!
 
-Before proceeding lets first set [`mode` to `'development'`](/configuration/mode/#mode-development).
+Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-development).
 
 __webpack.config.js__
 
@@ -54,7 +54,7 @@ __webpack.config.js__
 
 When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, the stack trace will simply point to `bundle.js`. This isn't always helpful as you probably want to know exactly which source file the error came from.
 
-In order to make it easier to track down errors and warnings, JavaScript offers [source maps](http://blog.teamtreehouse.com/introduction-source-maps), which maps your compiled code back to your original source code. If an error originates from `b.js`, the source map will tell you exactly that.
+In order to make it easier to track down errors and warnings, JavaScript offers [source maps](http://blog.teamtreehouse.com/introduction-source-maps), which map your compiled code back to your original source code. If an error originates from `b.js`, the source map will tell you exactly that.
 
 There are a lot of [different options](/configuration/devtool) available when it comes to source maps. Be sure to check them out so you can configure them to your needs.
 
@@ -121,7 +121,7 @@ We can see that the error also contains a reference to the file (`print.js`) and
 
 ## Choosing a Development Tool
 
-W> Some text editors have a "safe write" function that might interfere with some of the following tools. Read [Adjusting Your text Editor](#adjusting-your-text-editor) for a solution to these issues.
+W> Some text editors have a "safe write" function that might interfere with some of the following tools. Read [Adjusting Your Text Editor](#adjusting-your-text-editor) for a solution to these issues.
 
 It quickly becomes a hassle to manually run `npm run build` every time you want to compile your code.
 
@@ -231,7 +231,7 @@ __webpack.config.js__
 
 This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080`.
 
-W> webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files in different path, you can change this with the [`publicPath`](/configuration/dev-server/#devserver-publicpath-) option in the dev server's configuration.
+W> webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files on a different path, you can change this with the [`publicPath`](/configuration/dev-server/#devserverpublicpath-) option in the dev server's configuration.
 
 Let's add a script to easily run the dev server as well:
 
@@ -274,7 +274,7 @@ T> Now that your server is working, you might want to give [Hot Module Replaceme
 
 ### Using webpack-dev-middleware
 
-`webpack-dev-middleware` is a wrapper that will emit files processed by webpack to a server. This is used in `webpack-dev-server` internally, however it's available as a separate package to allow more custom setups if desired. We'll take a look at an example that combines webpack-dev-middleware with an express server.
+`webpack-dev-middleware` is a wrapper that will emit files processed by webpack to a server. This is used in `webpack-dev-server` internally, however it's available as a separate package to allow more custom setups if desired. We'll take a look at an example that combines `webpack-dev-middleware` with an express server.
 
 Let's install `express` and `webpack-dev-middleware` so we can get started:
 

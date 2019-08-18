@@ -10,7 +10,7 @@ related:
 
 In the past, one of webpack’s trade-offs when bundling was that each module in your bundle would be wrapped in individual function closures. These wrapper functions made it slower for your JavaScript to execute in the browser. In comparison, tools like Closure Compiler and RollupJS ‘hoist’ or concatenate the scope of all your modules into one closure and allow for your code to have a faster execution time in the browser.
 
-This plugin will enable the same concatenation behavior in webpack. By default this plugin is already enabled in [production `mode`](/configuration/mode/#mode-production) and disabled otherwise. If you need it in other modes, you can add it manually:
+This plugin will enable the same concatenation behavior in webpack. By default this plugin is already enabled in [production `mode`](/configuration/mode/#mode-production) and disabled otherwise. If you need to override the production `mode` optimization, set the [`optimization.concatenateModules` option](/configuration/optimization/#optimizationconcatenatemodules) to `false`. To enable concatenation behavior in other modes, you can add `ModuleConcatenationPlugin` manually or use the `optimization.concatenateModules` option:
 
 ```js
 new webpack.optimize.ModuleConcatenationPlugin();
@@ -21,7 +21,7 @@ new webpack.optimize.ModuleConcatenationPlugin();
 >
 > Scope hoisting is specifically a feature made possible by ECMAScript Module syntax. Because of this webpack may fallback to normal bundling based on what kind of modules you are using, and [other conditions](https://medium.com/webpack/webpack-freelancing-log-book-week-5-7-4764be3266f5).
 
-W> Keep in mind that this plugin will only be applied to [ES6 modules](/api/module-methods/#es6-recommended-) processed directly by webpack. When using a transpiler, you'll need to disable module processing (e.g. the [`modules`](https://babeljs.io/docs/plugins/preset-es2015/#optionsmodules) option in Babel).
+W> Keep in mind that this plugin will only be applied to [ES6 modules](/api/module-methods/#es6-recommended-) processed directly by webpack. When using a transpiler, you'll need to disable module processing (e.g. the [`modules`](https://babeljs.io/docs/en/babel-preset-env#modules) option in Babel).
 
 
 ## Optimization Bailouts

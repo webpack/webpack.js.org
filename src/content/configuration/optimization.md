@@ -90,7 +90,7 @@ By default webpack v4+ provides new common chunks strategies out of the box for 
 
 `object` `string` `boolean`
 
-Setting `optimization.runtimeChunk` to `true` or `"multiple"` adds an additional chunk to each entrypoint containing only the runtime. This setting is an alias for:
+Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk to each entrypoint containing only the runtime. This setting is an alias for:
 
 __webpack.config.js__
 
@@ -105,7 +105,7 @@ module.exports = {
 };
 ```
 
-The value `"single"` instead creates a runtime file to be shared for all generated chunks. This setting is an alias for:
+The value `'single'` instead creates a runtime file to be shared for all generated chunks. This setting is an alias for:
 
 __webpack.config.js__
 
@@ -254,7 +254,7 @@ module.exports = {
 
 `string` `bool: false`
 
-Tells webpack to set `process.env.NODE_ENV` to a given string value. `optimization.nodeEnv` uses [DefinePlugin](/plugins/define-plugin/) unless set to `false`. `optimization.nodeEnv` __defaults__ to [mode](/configuration/mode/) if set, else falls back to `"production"`.
+Tells webpack to set `process.env.NODE_ENV` to a given string value. `optimization.nodeEnv` uses [DefinePlugin](/plugins/define-plugin/) unless set to `false`. `optimization.nodeEnv` __defaults__ to [mode](/configuration/mode/) if set, else falls back to `'production'`.
 
 Possible values:
 
@@ -291,9 +291,9 @@ module.exports = {
 
 ## `optimization.removeAvailableModules`
 
-`bool: true`
+`bool: false`
 
-Tells webpack to detect and remove modules from chunks when these modules are already included in all parents. Setting `optimization.removeAvailableModules` to `false` will disable this optimization.
+Tells webpack to detect and remove modules from chunks when these modules are already included in all parents. Setting `optimization.removeAvailableModules` to `true` will enable this optimization. Enabled by default in [`production` mode](/configuration/mode/).
 
 __webpack.config.js__
 
@@ -301,7 +301,7 @@ __webpack.config.js__
 module.exports = {
   //...
   optimization: {
-    removeAvailableModules: false
+    removeAvailableModules: true
   }
 };
 ```

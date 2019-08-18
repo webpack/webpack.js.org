@@ -28,6 +28,7 @@ The following options are supported:
 - `append` (`string`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. `false` disables the appending.
 - `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate).
 - `fallbackModuleFilenameTemplate` (`string`): See link above.
+- `namespace` (`string`): See [`output.devtoolNamespace`](/configuration/output/#outputdevtoolnamespace).
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
 - `lineToLine` (`boolean` or `object`): Simplify and speed up source mapping by using line to line source mappings for matched modules.
