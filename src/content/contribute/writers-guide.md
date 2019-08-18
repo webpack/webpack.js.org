@@ -183,7 +183,7 @@ To mark an array, use square brackets:
 
 `string` `[string]`
 
-If multiple types are allowed in array, use comma:
+If multiple types are allowed in `array`, use comma:
 
 `string` `[string, RegExp, function(arg) => string]`
 
@@ -193,7 +193,7 @@ To mark a function, also list arguments when they are available:
 
 Where `(compilation, module, path)` lists the arguments that the provided function will receive and `=> boolean` means that the return value of the function must be a `boolean`.
 
-To mark a Plugin as an available option value type, use the camel case title of the Plugin:
+To mark a Plugin as an available option value type, use the camel case title of the `Plugin`:
 
 `TerserPlugin` `[TerserPlugin]`
 
