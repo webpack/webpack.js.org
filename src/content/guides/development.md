@@ -144,10 +144,9 @@ __package.json__
 
 ``` diff
   {
-    "name": "development",
+    "name": "webpack-demo",
     "version": "1.0.0",
     "description": "",
-    "main": "webpack.config.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
 +     "watch": "webpack --watch",
@@ -242,7 +241,7 @@ __package.json__
     "name": "development",
     "version": "1.0.0",
     "description": "",
-    "main": "webpack.config.js",
+    "private": true,
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "watch": "webpack --watch",
@@ -256,10 +255,12 @@ __package.json__
       "clean-webpack-plugin": "^2.0.0",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
+      "express": "^4.15.3",
       "file-loader": "^0.11.2",
       "html-webpack-plugin": "^2.29.0",
       "style-loader": "^0.18.2",
       "webpack": "^4.30.0",
+      "webpack-dev-server": "^3.8.0",
       "xml-loader": "^1.2.1"
     }
   }
@@ -363,7 +364,7 @@ __package.json__
     "name": "development",
     "version": "1.0.0",
     "description": "",
-    "main": "webpack.config.js",
+    "private": true,
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "watch": "webpack --watch",
@@ -384,6 +385,7 @@ __package.json__
       "style-loader": "^0.18.2",
       "webpack": "^4.30.0",
       "webpack-dev-middleware": "^1.12.0",
+      "webpack-dev-server": "^3.8.0",
       "xml-loader": "^1.2.1"
     }
   }
