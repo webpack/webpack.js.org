@@ -183,6 +183,10 @@ To mark an array, use square brackets:
 
 `string` `[string]`
 
+If multiple types are allowed in array, use comma:
+
+`string` `[string, RegExp, function(arg) => string]`
+
 To mark a function, also list arguments when they are available:
 
 `function (compilation, module, path) => boolean`
