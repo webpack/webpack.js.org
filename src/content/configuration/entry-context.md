@@ -7,6 +7,7 @@ contributors:
   - tarang9211
   - byzyk
   - madhavarshney
+  - EugeneHlushko
 ---
 
 The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
@@ -32,7 +33,7 @@ By default the current directory is used, but it's recommended to pass a value i
 
 ## `entry`
 
-`string | [string] | object { <key>: string | [string] } | (function: () => string | [string] | object { <key>: string | [string] })`
+`string` `[string]` `object = { <key> string | [string] }` `(function() => string | [string] | object = { <key> string | [string] })`
 
 The point or points where to start the application bundling process. If an array is passed then all items will be processed.
 

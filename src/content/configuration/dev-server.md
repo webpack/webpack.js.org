@@ -83,7 +83,7 @@ module.exports = {
 
 ## `devServer.allowedHosts`
 
-`array`
+`[string]`
 
 This option allows you to whitelist services that are allowed to access the dev server.
 
@@ -153,6 +153,8 @@ module.exports = {
 
 ## `devServer.bonjour`
 
+`boolean = false`
+
 This option broadcasts the server via [ZeroConf](http://www.zeroconf.org/) networking on start
 
 __webpack.config.js__
@@ -175,11 +177,11 @@ webpack-dev-server --bonjour
 
 ## `devServer.clientLogLevel`
 
-`string: 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'`
+`string = 'info': 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'`
 
-`none` and `warning` are going to be deprecated at the next major version.
+W> `none` and `warning` are going to be deprecated at the next major version.
 
-When using _inline mode_, the console in your DevTools will show you messages e.g. before reloading, before an error or when [Hot Module Replacement](/concepts/hot-module-replacement/) is enabled. Defaults to `info`.
+When using _inline mode_, the console in your DevTools will show you messages e.g. before reloading, before an error or when [Hot Module Replacement](/concepts/hot-module-replacement/) is enabled.
 
 `devServer.clientLogLevel` may be too verbose, you can turn logging off by setting it to  `'silent'`.
 
@@ -351,9 +353,9 @@ module.exports = {
 
 ## `devServer.historyApiFallback`
 
-`boolean` `object`
+`boolean = false` `object`
 
-When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have to be served in place of any `404` responses. `devServer.historyApiFallback` is disabled by default. Enable it by passing:
+When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have to be served in place of any `404` responses. Enable `devServer.historyApiFallback` by setting it to `true`:
 
 __webpack.config.js__
 
@@ -411,9 +413,9 @@ For more options and information, see the [connect-history-api-fallback](https:/
 
 ## `devServer.host`
 
-`string`
+`string = 'localhost'`
 
-Specify a host to use. By default this is `localhost`. If you want your server to be accessible externally, specify it like this:
+Specify a host to use. If you want your server to be accessible externally, specify it like this:
 
 __webpack.config.js__
 
@@ -479,7 +481,7 @@ webpack-dev-server --hot-only
 
 ## `devServer.http2`
 
-`boolean: false`
+`boolean = false`
 
 Serve over HTTP/2 using [spdy](https://www.npmjs.com/package/spdy). This option is ignored for Node 10.0.0 and above, as spdy is broken for those versions. The dev server will migrate over to Node's built-in HTTP/2 once [Express](https://expressjs.com/) supports it.
 
@@ -608,7 +610,7 @@ webpack-dev-server --info=false
 
 ## `devServer.injectClient`
 
-`boolean: false` `function (compilerConfig)`
+`boolean = false` `function (compilerConfig) => boolean`
 
 Tells `devServer` to inject a client. Setting `devServer.injectClient` to `true` will result in always injecting a client. It is possible to provide a function to inject conditionally:
 
@@ -625,7 +627,7 @@ module.exports = {
 
 ## `devServer.injectHot`
 
-`boolean: false` `function (compilerConfig)`
+`boolean = false` `function (compilerConfig) => boolean`
 
 Tells `devServer` to inject a Hot Module Replacement. Setting `devServer.injectHot` to `true` will result in always injecting. It is possible to provide a function to inject conditionally:
 
@@ -700,7 +702,7 @@ T> If you use the CLI, make sure __inline mode__ is disabled.
 
 ## `devServer.liveReload`
 
-`boolean: true`
+`boolean = true`
 
 By default, the dev-server will reload/refresh the page when file changes are detected. [`devServer.hot`](#devserverhot) option must be disabled or [`devServer.watchContentBase`](#devserverwatchcontentbase) option must be enabled in order for `liveReload` to take effect. Disable `devServer.liveReload` by setting it to `false`:
 
@@ -745,9 +747,9 @@ module.exports = {
 
 ## `devServer.noInfo` 🔑
 
-`boolean`
+`boolean = false`
 
-Tells dev-server to supress messages like the webpack bundle information. Errors and warnings will still be shown. `devServer.noInfo` is disabled by default.
+Tells dev-server to supress messages like the webpack bundle information. Errors and warnings will still be shown.
 
 __webpack.config.js__
 
@@ -826,9 +828,9 @@ webpack-dev-server --open-page "/different/page"
 
 ## `devServer.overlay`
 
-`boolean` `object: { boolean errors, boolean warnings }`
+`boolean = false` `object: { errors boolean = false, warnings boolean = false }`
 
-Shows a full-screen overlay in the browser when there are compiler errors or warnings. Disabled by default. If you want to show only compiler errors:
+Shows a full-screen overlay in the browser when there are compiler errors or warnings. If you want to show only compiler errors:
 
 __webpack.config.js__
 
@@ -1114,7 +1116,7 @@ webpack-dev-server --public myapp.test:80
 
 ## `devServer.publicPath` 🔑
 
-`string`
+`string = '/'`
 
 The bundled files will be available in the browser under this path.
 
@@ -1180,7 +1182,7 @@ webpack-dev-server --quiet
 
 ## `devServer.serveIndex`
 
-`boolean: true`
+`boolean = true`
 
 Tells dev-server to use [`serveIndex`](https://github.com/expressjs/serve-index) middleware when enabled.
 
@@ -1264,7 +1266,7 @@ module.exports = {
 
 ## `devServer.sockPath`
 
-`string: '/sockjs-node'`
+`string = '/sockjs-node'`
 
 The path at which to connect to the reloading socket.
 
@@ -1433,7 +1435,7 @@ See [WatchOptions](/configuration/watch/) for more options.
 
 ## `devServer.writeToDisk` 🔑
 
-`boolean: false` `function (filePath)`
+`boolean = false` `function (filePath)`
 
 Tells `devServer` to write generated assets to the disk.
 
