@@ -105,7 +105,7 @@
     "html-webpack-template": "^6.1.0",
     "http-server": "^0.10.0",
     "husky": "^1.0.0-rc.8",
-    "hyperlink": "^4.0.0",
+    "hyperlink": "^4.3.1",
     "lint-staged": "^8.1.0",
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.4",
