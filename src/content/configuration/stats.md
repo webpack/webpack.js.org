@@ -12,6 +12,7 @@ contributors:
   - Raiondesu
   - EugeneHlushko
   - grgur
+  - skovy
 ---
 
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
@@ -154,6 +155,7 @@ module.exports = {
     // when stats.logging is false, stats.loggingDebug option is ignored.
     // Possible values: String | RegExp | (warning) => boolean | [String, RegExp, (name) => boolean]
     // Example values: 'MyPlugin' | /MyPlugin/ | ['MyPlugin', /MyPlugin/] | (name) => name.contains('MyPlugin')
+    // Enable core logging: /webpack/
     loggingDebug: [],
 
     // Enable stack traces in logging output for errors, warnings and traces.
