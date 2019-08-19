@@ -22,7 +22,7 @@ W> Help Wanted: This page is still a work in progress. If you are familiar with 
 
 ## `amd`
 
-`object` `bool: false`
+`object` `boolean: false`
 
 Set the value of `require.amd` or `define.amd`. Setting `amd` to `false` will disable webpack's AMD support.
 
@@ -48,7 +48,7 @@ As it happens, the AMD support in webpack ignores the defined name anyways.
 
 ## `bail`
 
-`bool`
+`boolean`
 
 Fail out on the first error instead of tolerating it. By default webpack will log these errors in red in the terminal, as well as the browser console when using HMR, but continue bundling. To enable it:
 
@@ -66,7 +66,7 @@ This will force webpack to exit its bundling process.
 
 ## `cache`
 
-`bool` `object`
+`boolean` `object`
 
 Cache the generated webpack modules and chunks to improve build speed. Caching will be automatically enabled by default while in [watch mode](/configuration/watch#watch) and webpack is set to mode [`development`](/configuration/mode#mode-development). To enable caching manually set it to `true`:
 
@@ -108,7 +108,7 @@ Expose custom values into the loader context.
 
 ## `parallelism`
 
-`number: 100`
+`number = 100`
 
 Limit the number of parallel processed modules. Can be used to fine tune performance or to get more reliable profiling results.
 
@@ -190,7 +190,7 @@ module.exports = {
 
 Options for infrastructure level logging.
 
-`object: {}`
+`object = {}`
 
 #### infrastructureLogging.level
 
@@ -220,7 +220,7 @@ module.exports = {
 
 #### infrastructureLogging.debug
 
-`string` `RegExp` `(name) => boolean` `[string, RegExp, (name) => boolean]`
+`string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 
 Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#stats) option but for infrastructure. No default value is given.
 
