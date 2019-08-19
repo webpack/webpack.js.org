@@ -309,7 +309,7 @@ webpack-dev-server --disable-host-check
 This option lets you reduce the compilations in [lazy mode](#devserver-lazy-).
 By default in [lazy mode](#devserver-lazy-), every request results in a new compilation. With `filename`, it's possible to only compile when a certain file is requested.
 
-If [`output.filename`](/configuration/output/#output-filename) is set to `'bundle.js'` and `devServer.filename` is used like this:
+If [`output.filename`](/configuration/output/#outputfilename) is set to `'bundle.js'` and `devServer.filename` is used like this:
 
 __webpack.config.js__
 
@@ -1120,7 +1120,7 @@ webpack-dev-server --public myapp.test:80
 
 The bundled files will be available in the browser under this path.
 
-Imagine that the server is running under `http://localhost:8080` and [`output.filename`](/configuration/output/#output-filename) is set to `bundle.js`. By default the `devServer.publicPath` is `'/'`, so your bundle is available as `http://localhost:8080/bundle.js`.
+Imagine that the server is running under `http://localhost:8080` and [`output.filename`](/configuration/output/#outputfilename) is set to `bundle.js`. By default the `devServer.publicPath` is `'/'`, so your bundle is available as `http://localhost:8080/bundle.js`.
 
 Change `devServer.publicPath` to put bundle under specific directory:
 
@@ -1154,7 +1154,7 @@ module.exports = {
 
 The bundle will also be available as `http://localhost:8080/assets/bundle.js`.
 
-T> It is recommended that `devServer.publicPath` is the same as [`output.publicPath`](/configuration/output/#output-publicpath).
+T> It is recommended that `devServer.publicPath` is the same as [`output.publicPath`](/configuration/output/#outputpublicpath).
 
 
 ## `devServer.quiet` 🔑
