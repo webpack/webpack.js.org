@@ -113,7 +113,7 @@ Note the use of `merge()` in the environment-specific configurations to easily i
 
 ## NPM Scripts
 
-Now let's repoint our `scripts` to the new configurations. We'll use the _development_ one for our `npm start` script and the _production_ one for our `npm run build` script:
+Now, let's modify our npm scripts to use the new configuration files. For the `start` script, which runs `webpack-dev-server`, we will use `webpack.dev.js`, and for the `build` script, which runs `webpack` to create a production build, we will use `webpack.prod.js`:
 
 __package.json__
 
