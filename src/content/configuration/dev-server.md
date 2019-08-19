@@ -1355,11 +1355,9 @@ webpack-dev-server --stdin
 
 ## `devServer.transportMode`
 
-`string: 'sockjs' | 'ws'` `object`
+`string = 'sockjs': 'sockjs' | 'ws'` `object`
 
 W> `transportMode` is an experimental option, meaning its usage could potentially change without warning.
-
-The default value for this option is `'sockjs'`.
 
 T> Providing a string to `devServer.transportMode` is a shortcut to setting both `devServer.transportMode.client` and `devServer.transportMode.server` to the given string value.
 
@@ -1395,7 +1393,7 @@ T> When providing a custom client and server implementation make sure that they 
 
 ### `devServer.transportMode.server`
 
-`string` `class` `function` `path`
+`string` `function` `path`
 
 To create a custom server implementation, create a class that extends [`BaseServer`](https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js).
 
