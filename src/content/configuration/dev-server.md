@@ -1391,9 +1391,29 @@ module.exports = {
 
 T> When providing a custom client and server implementation make sure that they are compatible with one another to communicate successfully.
 
+### `devServer.transportMode.client`
+
+`string` `path`
+
+To create a custom client implementation, create a class that extends [`BaseClient`](https://github.com/webpack/webpack-dev-server/blob/master/client-src/clients/BaseClient.js).
+
+Using path to `CustomClient.js`, a custom WebSocket client implementation, along with the compatible `'ws'` server:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: {
+      client: require.resolve('./CustomClient'),
+      server: 'ws'
+    }
+  }
+};
+```
+
 ### `devServer.transportMode.server`
 
-`string` `function` `path`
+`string` `path` `function`
 
 To create a custom server implementation, create a class that extends [`BaseServer`](https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js).
 
@@ -1420,26 +1440,6 @@ module.exports = {
     transportMode: {
       client: 'ws',
       server: require('./CustomServer')
-    }
-  }
-};
-```
-
-### `devServer.transportMode.client`
-
-`string` `path`
-
-To create a custom client implementation, create a class that extends [`BaseClient`](https://github.com/webpack/webpack-dev-server/blob/master/client-src/clients/BaseClient.js).
-
-Using path to `CustomClient.js`, a custom WebSocket client implementation, along with the compatible `'ws'` server:
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    transportMode: {
-      client: require.resolve('./CustomClient'),
-      server: 'ws'
     }
   }
 };
