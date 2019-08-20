@@ -128,7 +128,7 @@
     "remark": "^10.0.1",
     "remark-autolink-headings": "^5.0.0",
     "remark-custom-blockquotes": "1.0.0",
-    "remark-extract-anchors": "1.0.0",
+    "remark-extract-anchors": "1.0.1",
     "remark-loader": "^0.3.0",
     "remark-mermaid": "^0.2.0",
     "remark-refractor": "1.1.0",
