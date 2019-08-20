@@ -306,8 +306,8 @@ webpack-dev-server --disable-host-check
 
 `string`
 
-This option lets you reduce the compilations in [lazy mode](#devserver-lazy-).
-By default in [lazy mode](#devserver-lazy-), every request results in a new compilation. With `filename`, it's possible to only compile when a certain file is requested.
+This option lets you reduce the compilations in [lazy mode](#devserverlazy-).
+By default in [lazy mode](#devserverlazy-), every request results in a new compilation. With `filename`, it's possible to only compile when a certain file is requested.
 
 If [`output.filename`](/configuration/output/#outputfilename) is set to `'bundle.js'` and `devServer.filename` is used like this:
 
@@ -328,7 +328,7 @@ module.exports = {
 
 It will now only compile the bundle when `/bundle.js` is requested.
 
-T> `filename` has no effect when used without [lazy mode](#devserver-lazy-).
+T> `filename` has no effect when used without [lazy mode](#devserverlazy-).
 
 
 ## `devServer.headers` 🔑
@@ -696,7 +696,7 @@ Usage via the CLI
 webpack-dev-server --lazy
 ```
 
-T> [`watchOptions`](#devserver-watchoptions-) will have no effect when used with __lazy mode__.
+T> [`watchOptions`](#devserverwatchoptions-) will have no effect when used with __lazy mode__.
 
 T> If you use the CLI, make sure __inline mode__ is disabled.
 
@@ -1201,7 +1201,7 @@ module.exports = {
 
 `function (app, server)`
 
-W> This option is __deprecated__ in favor of [`devServer.before`](#devserver-before) and will be removed in v3.0.0.
+W> This option is __deprecated__ in favor of [`devServer.before`](#devserverbefore) and will be removed in v3.0.0.
 
 Here you can access the Express app object and add your own custom middleware to it.
 For example, to define custom handlers for some paths:
@@ -1321,7 +1321,7 @@ module.exports = {
 };
 ```
 
-T> This only works when using [`devServer.contentBase`](#devserver-contentbase) as a `string`.
+T> This only works when using [`devServer.contentBase`](#devservercontentbase) as a `string`.
 
 
 ## `devServer.stats` 🔑
@@ -1387,7 +1387,7 @@ webpack-dev-server --useLocalIp
 
 `boolean`
 
-Tell dev-server to watch the files served by the [`devServer.contentBase`](#devserver-contentbase) option. It is disabled by default. When enabled, file changes will trigger a full page reload.
+Tell dev-server to watch the files served by the [`devServer.contentBase`](#devservercontentbase) option. It is disabled by default. When enabled, file changes will trigger a full page reload.
 
 __webpack.config.js__
 
