@@ -40,7 +40,7 @@ T> Learn how [mode](/configuration/mode/) works.
 
 ## `optimization.minimizer`
 
-`[<plugin>]` and or `[function (compiler)]`
+`[Plugin]` and or `[function (compiler)]`
 
 Allows you to override the default minimizer by providing a different one or more customized [TerserPlugin](/plugins/terser-webpack-plugin/) instances.
 
@@ -161,7 +161,7 @@ W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit 
 
 ## `optimization.namedModules`
 
-`boolean: false`
+`boolean = false`
 
 Tells webpack to use readable module identifiers for better debugging. When `optimization.namedModules` is not set in webpack config, webpack will enable it by default for [mode](/configuration/mode/) `development` and disable for [mode](/configuration/mode/) `production`.
 
@@ -178,7 +178,7 @@ module.exports = {
 
 ## `optimization.namedChunks`
 
-`boolean: false`
+`boolean = false`
 
 Tells webpack to use readable chunk identifiers for better debugging. This option is enabled by default for [mode](/configuration/mode/) `development` and disabled for [mode](/configuration/mode/) `production` if no option is provided in webpack config.
 
@@ -195,7 +195,7 @@ module.exports = {
 
 ## `optimization.moduleIds`
 
-`bool: false` `string: natural, named, hashed, size, total-size`
+`boolean = false` `string: 'natural' | 'named' | 'hashed' | 'size' | 'total-size'`
 
 Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. By default `optimization.moduleIds` is set to `false`.
 
@@ -222,7 +222,7 @@ module.exports = {
 
 ## `optimization.chunkIds`
 
-`bool: false` `string: natural, named, size, total-size`
+`boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size'`
 
 Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are couple of defaults for `optimization.chunkIds`:
 
@@ -252,7 +252,7 @@ module.exports = {
 
 ## `optimization.nodeEnv`
 
-`string` `bool: false`
+`boolean = false` `string`
 
 Tells webpack to set `process.env.NODE_ENV` to a given string value. `optimization.nodeEnv` uses [DefinePlugin](/plugins/define-plugin/) unless set to `false`. `optimization.nodeEnv` __defaults__ to [mode](/configuration/mode/) if set, else falls back to `'production'`.
 
@@ -274,7 +274,7 @@ module.exports = {
 
 ## `optimization.mangleWasmImports`
 
-`bool: false`
+`boolean = false`
 
 When set to `true` tells webpack to reduce the size of WASM by changing imports to shorter strings. It mangles module and export names.
 
@@ -291,7 +291,7 @@ module.exports = {
 
 ## `optimization.removeAvailableModules`
 
-`bool: false`
+`boolean = false`
 
 Tells webpack to detect and remove modules from chunks when these modules are already included in all parents. Setting `optimization.removeAvailableModules` to `true` will enable this optimization. Enabled by default in [`production` mode](/configuration/mode/).
 
@@ -308,7 +308,7 @@ module.exports = {
 
 ## `optimization.removeEmptyChunks`
 
-`bool: true`
+`boolean = true`
 
 Tells webpack to detect and remove chunks which are empty. Setting `optimization.removeEmptyChunks` to `false` will disable this optimization.
 
@@ -325,7 +325,7 @@ module.exports = {
 
 ## `optimization.mergeDuplicateChunks`
 
-`bool: true`
+`boolean = true`
 
 Tells webpack to merge chunks which contain the same modules. Setting `optimization.mergeDuplicateChunks` to `false` will disable this optimization.
 
@@ -342,7 +342,7 @@ module.exports = {
 
 ## `optimization.flagIncludedChunks`
 
-`bool`
+`boolean`
 
 Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don’t have to be loaded when the bigger chunk has been already loaded. By default `optimization.flagIncludedChunks` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
 
@@ -359,7 +359,7 @@ module.exports = {
 
 ## `optimization.occurrenceOrder`
 
-`bool`
+`boolean`
 
 Tells webpack to figure out an order of modules which will result in the smallest initial bundle. By default `optimization.occurrenceOrder` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
 
@@ -376,7 +376,7 @@ module.exports = {
 
 ## `optimization.providedExports`
 
-`bool`
+`boolean`
 
 Tells webpack to figure out which exports are provided by modules to generate more efficient code for `export * from ...`. By default  `optimization.providedExports` is enabled.
 
@@ -393,7 +393,7 @@ module.exports = {
 
 ## `optimization.usedExports`
 
-`bool`
+`boolean`
 
 Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimizationoccurrenceorder). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
 Dead code elimination in minimizers will benefit from this and can remove unused exports.
@@ -412,7 +412,7 @@ module.exports = {
 
 ## `optimization.concatenateModules`
 
-`bool`
+`boolean`
 
 Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on [`optimization.providedExports`](#optimizationprovidedexports) and [`optimization.usedExports`](#optimizationusedexports).
 By default `optimization.concatenateModules` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
@@ -430,7 +430,7 @@ module.exports = {
 
 ## `optimization.sideEffects`
 
-`bool`
+`boolean`
 
 Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used.
 
@@ -463,7 +463,7 @@ module.exports = {
 
 ## `optimization.portableRecords`
 
-`bool`
+`boolean`
 
 `optimization.portableRecords` tells webpack to generate records with relative paths to be able to move the context folder.
 
