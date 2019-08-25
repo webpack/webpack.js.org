@@ -2,6 +2,21 @@ const url = require('url');
 
 const beginsWithDocsDomainRegex = /^https?:\/\/webpack\.js\.org/;
 
+const fragmentLinkMap = {
+  '/api/module-variables/#__webpack_public_path__-webpack-specific-': '/api/module-variables/#__webpack_public_path__-webpack-specific',
+  '/configuration/module/#rule-exclude': '/configuration/module/#ruleexclude',
+  '/configuration/module/#rule-include': '/configuration/module/#ruleinclude',
+  '/configuration/module/#rule-options-rule-query': '/configuration/module/#ruleoptions--rulequery',
+  '/configuration/module/#rule-use': '/configuration/module/#ruleuse',
+  '/configuration/optimization/#optimization-concatenatemodules': '/configuration/optimization/#optimizationconcatenatemodules',
+  '/configuration/output/#output-chunkfilename': '/configuration/output/#outputchunkfilename',
+  '/configuration/output/#output-publicpath': '/configuration/output/#outputpublicpath',
+  '/configuration/resolve/#resolve-modules': '/configuration/resolve/#resolvemodules',
+  '/guides/shimming/#exports-loader': '/loaders/exports-loader',
+  '/guides/shimming/#imports-loader': '/loaders/imports-loader',
+  '/guides/shimming/#provideplugin': '/plugins/provide-plugin/',
+};
+
 module.exports = function processREADME(body, options = {}) {
   return body
     .replace(/[^]*?<div align="center">([^]*?)<\/div>/, (match, content) => {
@@ -35,6 +50,15 @@ module.exports = function processREADME(body, options = {}) {
       // Modify absolute documenation links to be root relative
       if (beginsWithDocsDomainRegex.test(href)) {
         href = href.replace(beginsWithDocsDomainRegex, '');
+      }
+
+      const fragmentLinkMapMatch = Object.keys(fragmentLinkMap).find(mapFrom => href.includes(mapFrom));
+      if (fragmentLinkMapMatch) {
+        href = href.replace(fragmentLinkMapMatch, fragmentLinkMap[fragmentLinkMapMatch]);
+        console.error(`DEPRECATED EXTERNAL README LINK:
+  URL: ${options.source}
+  ACTUAL: ${oldHref}
+  EXPECTED: ${oldHref.replace(fragmentLinkMapMatch, fragmentLinkMap[fragmentLinkMapMatch])}`);
       }
 
       if (oldHref !== href) {
