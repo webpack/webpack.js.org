@@ -51,7 +51,7 @@ function linkFixerFactory(sourceUrl) {
   EXPECTED: ${oldHref.replace(fragmentLinkMapMatch, fragmentLinkMap[fragmentLinkMapMatch])}`);
     }
 
-    // Lowercase all fragment links, since markdown generstors do the same
+    // Lowercase all fragment links, since markdown generators do the same
     if (href.includes('#')) {
       const [urlPath, urlFragment] = href.split('#');
 
