@@ -7093,12 +7093,17 @@ markdownlint@^0.11.0, markdownlint@~0.11.0:
   dependencies:
     markdown-it "8.4.2"
 
+marked@0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.6.1.tgz#a63addde477bca9613028de4b2bc3629e53a0562"
+  integrity sha512-+H0L3ibcWhAZE02SKMqmvYsErLo4EAVJxu5h3bHBBDvvjeWXtl92rGUSBYHL2++5Y+RSNgl8dYOAXcYe7lp1fA==
+
 marked@^0.3.5:
   version "0.3.19"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.19.tgz#5d47f709c4c9fc3c216b6d46127280f40b39d790"
   integrity sha512-ea2eGWOqNxPcXv8dyERdSr/6FmzvWwzjMxpfGB/sbMccXoct+xY+YukPD+QTUZwyvK7BZwcr4m21WBOW41pAkg==
 
-marked@^0.5.0, marked@^0.5.2:
+marked@^0.5.0:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.5.2.tgz#3efdb27b1fd0ecec4f5aba362bddcd18120e5ba9"
   integrity sha512-fdZvBa7/vSQIZCi4uuwo2N3q+7jJURpMVCcbaX0S1Mg65WZ5ilXvC67MviJAsdjqqgD+CEq4RKo5AYGgINkVAA==
@@ -9969,10 +9974,10 @@ remark-custom-blockquotes@1.0.0:
   dependencies:
     unist-util-visit "1.3.1"
 
-remark-extract-anchors@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/remark-extract-anchors/-/remark-extract-anchors-1.0.0.tgz#38088f8babef53e31260ced22c1cc4f55c2754de"
-  integrity sha512-u+OINJoC8/zyrasRC+GTG6HC3pQOj9E7HeQFNp8tfA1naDzbwj/jbgy/KMMaOZZGO+g3OxhFZV8HCKsYQCkyeg==
+remark-extract-anchors@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/remark-extract-anchors/-/remark-extract-anchors-1.0.2.tgz#e054701110070495b534ed642744747fa98992d1"
+  integrity sha512-549Dx/Ag8kaLOI5xsW8u3445qWxMfiCUbfbPdVqnwARGBg1mMbIaSfL3zx5D/h+QVwWLzRN0CvWQLalvO0wROA==
   dependencies:
     unist-util-visit "1.3.1"
 
