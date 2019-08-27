@@ -74,7 +74,7 @@ module.exports = env => merge(common(env), {
           'guides/why-webpack': '/comparison/',
           'guides/production-build': '/guides/production/',
           'migrating': '/migrate/3/',
-          'plugins/no-emit-on-errors-plugin': '/configuration/optimization/#optimization-noemitonerrors',
+          'plugins/no-emit-on-errors-plugin': '/configuration/optimization/#optimizationnoemitonerrors',
           'concepts/mode': '/configuration/mode'
         }
       }),

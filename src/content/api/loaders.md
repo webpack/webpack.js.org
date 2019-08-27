@@ -49,7 +49,7 @@ module.exports = function(content, map, meta) {
 
 ### Asynchronous Loaders
 
-For asynchronous loaders, [`this.async`](#this-async) is used to retrieve the `callback` function:
+For asynchronous loaders, [`this.async`](#thisasync) is used to retrieve the `callback` function:
 
 __async-loader.js__
 
@@ -101,7 +101,7 @@ Loaders are __always__ called from right to left. There are some instances where
 
 T> Loaders may be added inline in requests and disabled via inline prefixes, which will impact the order in which they are "pitched" and executed. See [`Rule.enforce`](/configuration/module#ruleenforce) for more details.
 
-For the following configuration of [`use`](/configuration/module#rule-use):
+For the following configuration of [`use`](/configuration/module#ruleuse):
 
 ``` javascript
 module.exports = {
@@ -511,7 +511,7 @@ Hacky access to the Module object being loaded.
 
 You can report errors from inside a loader by:
 
-- Using [this.emitError](/api/loaders/#this-emiterror). Will report the errors without interrupting module's compilation.
+- Using [this.emitError](/api/loaders/#thisemiterror). Will report the errors without interrupting module's compilation.
 - Using `throw` (or other uncaught exception). Throwing an error while a loader is running will cause current module compilation failure.
 - Using `callback` (in async mode). Pass an error to the callback will also cause module compilation failure.
 
@@ -594,7 +594,7 @@ Not following this recommendation will make your code webpack-specific and non-s
 
 T> A relative `matchResource` will resolve relative to the current context of the containing module.
 
-When a `matchResource` is set, it will be used to match with the [`module.rules`](/configuration/module/#module-rules) instead of the original resource. This can be useful if further loaders should be applied to the resource, or if the module type needs to be changed. It's also displayed in the stats and used for matching [`Rule.issuer`](/configuration/module/#rule-issuer) and [`test` in `splitChunks`](/plugins/split-chunks-plugin/#splitchunks-cachegroups-cachegroup-test).
+When a `matchResource` is set, it will be used to match with the [`module.rules`](/configuration/module/#modulerules) instead of the original resource. This can be useful if further loaders should be applied to the resource, or if the module type needs to be changed. It's also displayed in the stats and used for matching [`Rule.issuer`](/configuration/module/#ruleissuer) and [`test` in `splitChunks`](/plugins/split-chunks-plugin/#splitchunkscachegroupscachegrouptest).
 
 Example:
 
@@ -614,7 +614,7 @@ import './file.js.css!=!extract-style-loader/getStyles!./file.js';
 console.log('yep');
 ```
 
-This will add a dependency to `extract-style-loader/getStyles!./file.js` and treat the result as `file.js.css`. Because [`module.rules`](/configuration/module/#module-rules) has a rule matching `/\.css$/` and it will apply to this dependency.
+This will add a dependency to `extract-style-loader/getStyles!./file.js` and treat the result as `file.js.css`. Because [`module.rules`](/configuration/module/#modulerules) has a rule matching `/\.css$/` and it will apply to this dependency.
 
 The loader could look like this:
 
