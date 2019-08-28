@@ -108,7 +108,7 @@ Polyfills for Node.js core libraries from [`node-libs-browser`](https://github.c
 
 By default, webpack will polyfill each library if there is a known polyfill or do nothing if there is not one. In the latter case, webpack will behave as if the module name was configured with the `false` value.
 
-T> To import a built-in module, use [`__non_webpack_require__`](/api/module-variables/#__non_webpack_require__-webpack-specific-), i.e. `__non_webpack_require__('modulename')` instead of `require('modulename')`.
+T> To import a built-in module, use [`__non_webpack_require__`](/api/module-variables/#__non_webpack_require__-webpack-specific), i.e. `__non_webpack_require__('modulename')` instead of `require('modulename')`.
 
 Example:
 

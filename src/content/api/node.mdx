@@ -185,7 +185,7 @@ code compilation process. It includes:
 The [webpack CLI](/api/cli) uses this information to display nicely formatted
 output in your console.
 
-T> When using the [`MultiCompiler`](/api/plugins/compiler#multicompiler), a
+T> When using the [`MultiCompiler`](#multicompiler), a
 `MultiStats` instance is returned that fulfills the same interface as `stats`,
 i.e. the methods described below.
 
@@ -232,7 +232,7 @@ of this function’s output.
 Returns a formatted string of the compilation information (similar to
 [CLI](/api/cli) output).
 
-Options are the same as [`stats.toJson(options)`](/api/node#stats-tojson-options-) with one addition:
+Options are the same as [`stats.toJson(options)`](/api/node#statstojsonoptions) with one addition:
 
 ``` js
 stats.toString({

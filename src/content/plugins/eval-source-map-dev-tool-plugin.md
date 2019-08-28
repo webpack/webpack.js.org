@@ -28,7 +28,7 @@ The following options are supported:
 - `exclude` (`string|regex|array`): Exclude modules that match the given value from source map generation.
 - `filename` (`string`): Defines the output filename of the SourceMap (will be inlined if no value is provided).
 - `append` (`string`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. `false` disables the appending.
-- `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate).
+- `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate).
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
 - `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
 - `protocol` (`string`): Allows user to override default protocol (`webpack-internal://`)

@@ -41,7 +41,7 @@ When trying to fulfill the last two conditions, bigger chunks are preferred.
 
 ## Configuration
 
-webpack provides a set of options for developers that want more control over this functionality. 
+webpack provides a set of options for developers that want more control over this functionality.
 
 W> The default configuration was chosen to fit web performance best practices, but the optimal strategy for your project might differ. If you're changing the configuration, you should measure the impact of your changes to ensure there's a real benefit.
 
@@ -299,9 +299,9 @@ module.exports = {
 `string`
 
 Allows to override the filename when and only when it's an initial chunk.
-All placeholders available in [`output.filename`](/configuration/output/#output-filename) are also available here.
+All placeholders available in [`output.filename`](/configuration/output/#outputfilename) are also available here.
 
-W> This option can also be set globally in `splitChunks.filename`, but this isn't recommended and will likely lead to an error if [`splitChunks.chunks`](#splitchunks-chunks) is not set to `'initial'`. Avoid setting it globally.
+W> This option can also be set globally in `splitChunks.filename`, but this isn't recommended and will likely lead to an error if [`splitChunks.chunks`](#splitchunkschunks) is not set to `'initial'`. Avoid setting it globally.
 
 __webpack.config.js__
 
@@ -324,7 +324,7 @@ module.exports = {
 
 `boolean: false`
 
-Tells webpack to ignore [`splitChunks.minSize`](#splitchunks-minsize), [`splitChunks.minChunks`](#splitchunks-minchunks), [`splitChunks.maxAsyncRequests`](#splitchunks-maxasyncrequests) and [`splitChunks.maxInitialRequests`](#splitchunks-maxinitialrequests) options and always create chunks for this cache group.
+Tells webpack to ignore [`splitChunks.minSize`](#splitchunksminsize), [`splitChunks.minChunks`](#splitchunksminchunks), [`splitChunks.maxAsyncRequests`](#splitchunksmaxasyncrequests) and [`splitChunks.maxInitialRequests`](#splitchunksmaxinitialrequests) options and always create chunks for this cache group.
 
 __webpack.config.js__
 
@@ -460,7 +460,7 @@ W> This might result in a large chunk containing all external packages. It is re
 ### Split Chunks: Example 3
 
  Create a `custom vendor` chunk, which contains certain `node_modules` packages matched by `RegExp`.
- 
+
  __webpack.config.js__
 
 ```js
