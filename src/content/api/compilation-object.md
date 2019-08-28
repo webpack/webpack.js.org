@@ -20,7 +20,7 @@ Returns Stats object for the current compilation.
 
 `function (module, cacheGroup)`
 
-Returns Stats object for the current compilation.
+Adds a module to the current compilation.
 
 Parameters:
 
