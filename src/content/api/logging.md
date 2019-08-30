@@ -13,7 +13,7 @@ webpack logger is available to [loaders](/loaders/) and [plugins](/api/plugins/#
 
 Benefits of custom logging API in webpack:
 
-- Common place to [configure the logging](/configuration/stats/#stats) display level
+- Common place to [configure the logging](/configuration/stats/#statslogging) display level
 - Logging output exportable as part of the `stats.json`
 - Stats presets affect logging output
 - Plugins can affect logging capturing and display level
