@@ -226,8 +226,8 @@ module.exports = {
 
 Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are couple of defaults for `optimization.chunkIds`:
 
-- if [`optimization.occurrenceOrder`](#optimization-occurrenceorder) is enabled `optimization.chunkIds` is set to `'total-size'`
-- Disregarding previous if, if [`optimization.namedChunks`](#optimization-namedchunks) is enabled `optimization.chunkIds` is set to `'named'`
+- if [`optimization.occurrenceOrder`](#optimizationoccurrenceorder) is enabled `optimization.chunkIds` is set to `'total-size'`
+- Disregarding previous if, if [`optimization.namedChunks`](#optimizationnamedchunks) is enabled `optimization.chunkIds` is set to `'named'`
 - if none of the above, `optimization.chunkIds` will be defaulted to `'natural'`
 
 The following string values are supported:
@@ -446,7 +446,7 @@ __package.json__
 
 T> Please note that `sideEffects` should be in the npm module's `package.json` file and doesn't mean that you need to set `sideEffects` to `false` in your own project's `package.json` which requires that big module.
 
-`optimization.sideEffects` depends on [`optimization.providedExports`](#optimization-providedexports) to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.
+`optimization.sideEffects` depends on [`optimization.providedExports`](#optimizationprovidedexports) to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.
 
 By default `optimization.sideEffects` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
 

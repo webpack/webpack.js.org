@@ -27,7 +27,7 @@ This guide focuses on the configuration needed to ensure files produced by webpa
 
 ## Output Filenames
 
-We can use the `output.filename` [substitutions](/configuration/output#output-filename) setting to define the names of our output files. webpack provides a method of templating the filenames using bracketed strings called __substitutions__. The `[contenthash]` substitution will add a unique hash based on the content of an asset. When the asset's content changes, `[contenthash]` will change as well.
+We can use the `output.filename` [substitutions](/configuration/output#outputfilename) setting to define the names of our output files. webpack provides a method of templating the filenames using bracketed strings called __substitutions__. The `[contenthash]` substitution will add a unique hash based on the content of an asset. When the asset's content changes, `[contenthash]` will change as well.
 
 Let's get our project set up using the example from [getting started](/guides/getting-started) with the `plugins` from [output management](/guides/output-management), so we don't have to deal with maintaining our `index.html` file manually:
 
@@ -94,7 +94,7 @@ W> Output may differ depending on your current webpack version. Newer versions m
 
 ## Extracting Boilerplate
 
-As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) can be used to split modules out into separate bundles. webpack provides an optimization feature to split runtime code into a separate chunk using the [`optimization.runtimeChunk`](/configuration/optimization/#optimization-runtimechunk) option. Set it to `single` to create a single runtime bundle for all chunks:
+As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) can be used to split modules out into separate bundles. webpack provides an optimization feature to split runtime code into a separate chunk using the [`optimization.runtimeChunk`](/configuration/optimization/#optimizationruntimechunk) option. Set it to `single` to create a single runtime bundle for all chunks:
 
 __webpack.config.js__
 
@@ -139,7 +139,7 @@ runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
 ```
 
 It's also good practice to extract third-party libraries, such as `lodash` or `react`, to a separate `vendor` chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date.
-This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin/#splitchunks-cachegroups) option of the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) demonstrated in [Example 2 of SplitChunksPlugin](/plugins/split-chunks-plugin/#split-chunks-example-2). Lets add `optimization.splitChunks` with `cacheGroups` with next params and build:
+This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin#splitchunkscachegroups) option of the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) demonstrated in [Example 2 of SplitChunksPlugin](/plugins/split-chunks-plugin/#split-chunks-example-2). Lets add `optimization.splitChunks` with `cacheGroups` with next params and build:
 
 __webpack.config.js__
 
@@ -247,7 +247,7 @@ Running another build, we would expect only our `main` bundle's hash to change, 
 ...
 ```
 
-... we can see that all three have. This is because each [`module.id`](/api/module-variables#module-id-commonjs-) is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. So, to recap:
+... we can see that all three have. This is because each [`module.id`](/api/module-variables#moduleid-commonjs) is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. So, to recap:
 
 - The `main` bundle changed because of its new content.
 - The `vendor` bundle changed because its `module.id` was changed.

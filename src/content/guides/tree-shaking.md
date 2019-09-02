@@ -174,7 +174,7 @@ T> Note that any imported file is subject to tree shaking. This means if you use
 }
 ```
 
-Finally, `"sideEffects"` can also be set from the [`module.rules` configuration option](/configuration/module/#module-rules).
+Finally, `"sideEffects"` can also be set from the [`module.rules` configuration option](/configuration/module/#modulerules).
 
 ## Clarifying tree shaking and `sideEffects`
 
