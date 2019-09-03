@@ -9,6 +9,7 @@ contributors:
   - liorgreenb
   - vansosnin
   - EugeneHlushko
+  - skovy
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -142,33 +143,6 @@ module.exports = {
   }
 };
 ```
-
-### `cache.loglevel`
-
-`string: 'debug' | 'info' | 'verbose' | 'warning'`
-
-`cache.loglevel` tells webpack how much of `cache` log info to display.
-
-- `'debug'`: all access and errors with stack trace
-- `'info'`: all access
-- `'verbose'`: all write access
-- `'warning'`: only failed serialization and deserialization
-
-`cache.loglevel` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  cache: {
-    type: 'filesystem',
-    loglevel: 'debug'
-  }
-};
-```
-
-T> Caching usually doesn't emit errors. All failures are warnings and fall back to not caching this item. The build will keep working. It makes sense to enable warnings if you want to investigate why caching isn't working or doesn't increase performance. It also makes sense when developing webpack plugins that affect caching. When reporting bugs for the filesystem cache, make sure to get the stack trace of warnings with the `loglevel: 'debug'` option.
 
 ### `cache.name`
 
