@@ -50,7 +50,7 @@ Some of these values are suited for development and some for production. For dev
 
 W> There are some issues with Source Maps in Chrome. [We need your help!](https://github.com/webpack/webpack/issues/3165).
 
-T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) to customize the filenames of generated Source Maps.
+T> See [`output.sourceMapFilename`](/configuration/output#outputsourcemapfilename) to customize the filenames of generated Source Maps.
 
 
 ### Qualities
@@ -63,7 +63,7 @@ T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilena
 
 `original source` - You see each module separated from each other, annotated with module names. You see the code before transpilation, as you authored it. This depends on Loader support.
 
-`without source content` - Contents for the sources are not included in the Source Maps. Browsers usually try to load the source from the webserver or filesystem. You have to make sure to set [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate) correctly to match source urls.
+`without source content` - Contents for the sources are not included in the Source Maps. Browsers usually try to load the source from the webserver or filesystem. You have to make sure to set [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate) correctly to match source urls.
 
 `(lines only)` - Source Maps are simplified to a single mapping per line. This usually means a single mapping per statement (assuming you author it this way). This prevents you from debugging execution on statement level and from settings breakpoints on columns of a line. Combining with minimizing is not possible as minimizers usually only emit a single line.
 

@@ -13,7 +13,7 @@ webpack logger is available to [loaders](/loaders/) and [plugins](/api/plugins/#
 
 Benefits of custom logging API in webpack:
 
-- Common place to [configure the logging](/configuration/stats/#stats) display level
+- Common place to [configure the logging](/configuration/stats/#statslogging) display level
 - Logging output exportable as part of the `stats.json`
 - Stats presets affect logging output
 - Plugins can affect logging capturing and display level
@@ -36,5 +36,24 @@ W> __Avoid noise in the log!__ Keep in mind that multiple plugins and loaders ar
 - `logger.group(...)`: to group messages together. Displayed collapsed like `logger.log`
 - `logger.groupEnd()`: to end a logging group
 - `logger.groupCollapsed(...)`:  to group messages together. Displayed collapsed like `logger.log`. Displayed expanded when logging level is set to `'verbose'` or `'debug'`.
+- `logger.status`:  writes a temporary message, setting a new status, overrides the previous one
 - `logger.clear()`: to print a horizontal line. Displayed like `logger.log`
 - `logger.profile(...)`, `logger.profileEnd(...)`: to capture a profile. Delegated to `console.profile` when supported
+
+## Runtime Logger API
+
+Runtime logger API is only intended to be used as a development tool, it is not intended to be included in [production mode](/configuration/mode/#mode-production).
+
+- `const logging = require('webpack/logging/runtime')`: to use the logger in runtime, require it directly from webpack
+- `logging.getLogger('name')`: to get individual logger by name
+- `logging.configureDefaultLogger(...)`: to override the default logger.
+
+```javascript
+const logging = require('webpack/logging/runtime');
+logging.configureDefaultLogger({
+  level: 'log',
+  debug: /something/
+});
+```
+
+- `logging.hooks.log`: to apply Plugins to the runtime logger
