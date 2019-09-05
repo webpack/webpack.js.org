@@ -306,10 +306,10 @@ webpack-dev-server --disable-host-check
 
 `string`
 
-This option lets you reduce the compilations in [lazy mode](#devserver-lazy-).
-By default in [lazy mode](#devserver-lazy-), every request results in a new compilation. With `filename`, it's possible to only compile when a certain file is requested.
+This option lets you reduce the compilations in [lazy mode](#devserverlazy-).
+By default in [lazy mode](#devserverlazy-), every request results in a new compilation. With `filename`, it's possible to only compile when a certain file is requested.
 
-If [`output.filename`](/configuration/output/#output-filename) is set to `'bundle.js'` and `devServer.filename` is used like this:
+If [`output.filename`](/configuration/output/#outputfilename) is set to `'bundle.js'` and `devServer.filename` is used like this:
 
 __webpack.config.js__
 
@@ -328,7 +328,7 @@ module.exports = {
 
 It will now only compile the bundle when `/bundle.js` is requested.
 
-T> `filename` has no effect when used without [lazy mode](#devserver-lazy-).
+T> `filename` has no effect when used without [lazy mode](#devserverlazy-).
 
 
 ## `devServer.headers` 🔑
@@ -696,7 +696,7 @@ Usage via the CLI
 webpack-dev-server --lazy
 ```
 
-T> [`watchOptions`](#devserver-watchoptions-) will have no effect when used with __lazy mode__.
+T> [`watchOptions`](#devserverwatchoptions-) will have no effect when used with __lazy mode__.
 
 T> If you use the CLI, make sure __inline mode__ is disabled.
 
@@ -1120,7 +1120,7 @@ webpack-dev-server --public myapp.test:80
 
 The bundled files will be available in the browser under this path.
 
-Imagine that the server is running under `http://localhost:8080` and [`output.filename`](/configuration/output/#output-filename) is set to `bundle.js`. By default the `devServer.publicPath` is `'/'`, so your bundle is available as `http://localhost:8080/bundle.js`.
+Imagine that the server is running under `http://localhost:8080` and [`output.filename`](/configuration/output/#outputfilename) is set to `bundle.js`. By default the `devServer.publicPath` is `'/'`, so your bundle is available as `http://localhost:8080/bundle.js`.
 
 Change `devServer.publicPath` to put bundle under specific directory:
 
@@ -1154,7 +1154,7 @@ module.exports = {
 
 The bundle will also be available as `http://localhost:8080/assets/bundle.js`.
 
-T> It is recommended that `devServer.publicPath` is the same as [`output.publicPath`](/configuration/output/#output-publicpath).
+T> It is recommended that `devServer.publicPath` is the same as [`output.publicPath`](/configuration/output/#outputpublicpath).
 
 
 ## `devServer.quiet` 🔑
@@ -1201,7 +1201,7 @@ module.exports = {
 
 `function (app, server)`
 
-W> This option is __deprecated__ in favor of [`devServer.before`](#devserver-before) and will be removed in v3.0.0.
+W> This option is __deprecated__ in favor of [`devServer.before`](#devserverbefore) and will be removed in v3.0.0.
 
 Here you can access the Express app object and add your own custom middleware to it.
 For example, to define custom handlers for some paths:
@@ -1321,7 +1321,7 @@ module.exports = {
 };
 ```
 
-T> This only works when using [`devServer.contentBase`](#devserver-contentbase) as a `string`.
+T> This only works when using [`devServer.contentBase`](#devservercontentbase) as a `string`.
 
 
 ## `devServer.stats` 🔑
@@ -1359,6 +1359,102 @@ webpack-dev-server --stdin
 ```
 
 
+## `devServer.transportMode`
+
+`string = 'sockjs': 'sockjs' | 'ws'` `object`
+
+W> `transportMode` is an experimental option, meaning its usage could potentially change without warning.
+
+T> Providing a string to `devServer.transportMode` is a shortcut to setting both `devServer.transportMode.client` and `devServer.transportMode.server` to the given string value.
+
+This option allows us either to choose the current `devServer` transport mode for client/server individually or to provide custom client/server implementation. This allows to specify how browser or other client communicates with the `devServer`.
+
+The current default mode is [`'sockjs'`](https://www.npmjs.com/package/sockjs). This mode uses [SockJS-node](https://github.com/sockjs/sockjs-node) as a server, and [SockJS-client](https://www.npmjs.com/package/sockjs-client) on the client.
+
+`'ws'` mode will become the default mode in the next major `devServer` version. This mode uses [ws](https://www.npmjs.com/package/ws) as a server, and native WebSockets on the client.
+
+Use `'ws'` mode:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: 'ws'
+  }
+};
+```
+
+T> When providing a custom client and server implementation make sure that they are compatible with one another to communicate successfully.
+
+### `devServer.transportMode.client`
+
+`string` `path`
+
+To create a custom client implementation, create a class that extends [`BaseClient`](https://github.com/webpack/webpack-dev-server/blob/master/client-src/clients/BaseClient.js).
+
+Using path to `CustomClient.js`, a custom WebSocket client implementation, along with the compatible `'ws'` server:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: {
+      client: require.resolve('./CustomClient'),
+      server: 'ws'
+    }
+  }
+};
+```
+
+### `devServer.transportMode.server`
+
+`string` `path` `function`
+
+To create a custom server implementation, create a class that extends [`BaseServer`](https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js).
+
+Using path to `CustomServer.js`, a custom WebSocket server implementation, along with the compatible `'ws'` client:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: {
+      client: 'ws',
+      server: require.resolve('./CustomServer')
+    }
+  }
+};
+```
+
+Using class exported by `CustomServer.js`, a custom WebSocket server implementation, along with the compatible `'ws'` client:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: {
+      client: 'ws',
+      server: require('./CustomServer')
+    }
+  }
+};
+```
+
+Using custom, compatible WebSocket client and server implementations:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: {
+      client: require.resolve('./CustomClient'),
+      server: require.resolve('./CustomServer')
+    }
+  }
+};
+```
+
+
 ## `devServer.useLocalIp`
 
 `boolean`
@@ -1387,7 +1483,7 @@ webpack-dev-server --useLocalIp
 
 `boolean`
 
-Tell dev-server to watch the files served by the [`devServer.contentBase`](#devserver-contentbase) option. It is disabled by default. When enabled, file changes will trigger a full page reload.
+Tell dev-server to watch the files served by the [`devServer.contentBase`](#devservercontentbase) option. It is disabled by default. When enabled, file changes will trigger a full page reload.
 
 __webpack.config.js__
 
