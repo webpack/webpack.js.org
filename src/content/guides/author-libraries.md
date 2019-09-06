@@ -197,7 +197,7 @@ module.exports = [
   },
   devtool,
   optimization: {
-  runtimeChunk: true
+    runtimeChunk: true
   }
 }));
  ```
