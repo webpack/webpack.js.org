@@ -25,26 +25,37 @@
   }
 
   &__latest-avatar {
-    height: 64px;
+    max-height: 64px;
     max-width: 192px;
+    vertical-align: middle;
   }
 
   &__bronze-avatar {
-    height: 32px;
+    max-height: 32px;
     max-width: 96px;
+    vertical-align: middle;
   }
 
   &__silver-avatar {
-    height: 64px;
+    max-height: 64px;
     max-width: 192px;
+    vertical-align: middle;
   }
 
   &__gold-avatar {
-    height: 96px;
+    max-height: 96px;
+    max-width: 288px;
+    vertical-align: middle;
   }
 
   &__platinum-avatar {
-    height: 128px;
+    max-height: 128px;
+    max-width: 100%;
+    vertical-align: middle;
+
+    @media (min-width: 400px) {
+      max-width: 384px;
+    }
   }
 
   &__backer-avatar {
