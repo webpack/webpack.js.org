@@ -188,7 +188,7 @@ const path = require('path');
 
 module.exports = [
   'source-map'
-  ].map(devtool =>({
+].map(devtool =>({
   mode: 'development',
   entry: './src/index.js',
   output: {
@@ -196,9 +196,9 @@ module.exports = [
     filename: 'webpack-numbers.js'
   },
   devtool,
-	   optimization: {
-		 runtimeChunk: true
-	 }
+  optimization: {
+  runtimeChunk: true
+  }
 }));
  ```
 
