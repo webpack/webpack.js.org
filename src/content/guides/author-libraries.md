@@ -178,8 +178,9 @@ module.exports = {
 
 ## Base Configuration with source map 
  Source maps is a useful debugging tool to enable you to view where the original code was
- For more information about this and to see code examples please refer to:
+ For more information about getting source maps setup and available options please refer to:
  https://webpack.js.org/configuration/devtool/
+ To see code examples please refer to this repo:
  https://github.com/webpack/webpack/tree/master/examples/source-map
 
 ``` js
@@ -187,18 +188,18 @@ const path = require('path');
 
 module.exports = [
   'source-map'
-].map(devtool =>({
-mode: 'development',
-entry: './src/index.js',
+  ].map(devtool =>({
+  mode: 'development',
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'webpack-numbers.js'
   },
   devtool,
-	optimization: {
-		runtimeChunk: true
-	}
-}))
+	   optimization: {
+		 runtimeChunk: true
+	 }
+}));
  ```
 
 ## Externalize Lodash
