@@ -16,7 +16,7 @@ webpack can compile for multiple environments or _targets_. To understand what a
 
 ## `target`
 
-`string | function (compiler)`
+`string` `function (compiler)`
 
 Instructs webpack to target a specific environment.
 
@@ -41,9 +41,9 @@ For example, when the `target` is set to `"electron-main"`, webpack includes mul
 
 ### `function`
 
-If a function is passed, then it will be called with the compiler as a parameter. Set it to a function if none of the predefined targets from the list above meet your needs.
+If a function is passed, then it will be called with the compiler as a parameter. Set `target` to a `function` if none of the predefined targets from the list above meet your needs.
 
-For example, if you don't want any of the plugins they applied:
+For example, if you don't want any of the plugins applied:
 
 ```js
 const options = {

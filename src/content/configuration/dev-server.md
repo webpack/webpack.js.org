@@ -83,7 +83,7 @@ module.exports = {
 
 ## `devServer.allowedHosts`
 
-`array`
+`[string]`
 
 This option allows you to whitelist services that are allowed to access the dev server.
 
@@ -153,6 +153,8 @@ module.exports = {
 
 ## `devServer.bonjour`
 
+`boolean = false`
+
 This option broadcasts the server via [ZeroConf](http://www.zeroconf.org/) networking on start
 
 __webpack.config.js__
@@ -175,11 +177,11 @@ webpack-dev-server --bonjour
 
 ## `devServer.clientLogLevel`
 
-`string: 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'`
+`string = 'info': 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'`
 
-`none` and `warning` are going to be deprecated at the next major version.
+W> `none` and `warning` are going to be deprecated at the next major version.
 
-When using _inline mode_, the console in your DevTools will show you messages e.g. before reloading, before an error or when [Hot Module Replacement](/concepts/hot-module-replacement/) is enabled. Defaults to `info`.
+When using _inline mode_, the console in your DevTools will show you messages e.g. before reloading, before an error or when [Hot Module Replacement](/concepts/hot-module-replacement/) is enabled.
 
 `devServer.clientLogLevel` may be too verbose, you can turn logging off by setting it to  `'silent'`.
 
@@ -304,10 +306,10 @@ webpack-dev-server --disable-host-check
 
 `string`
 
-This option lets you reduce the compilations in [lazy mode](#devserver-lazy-).
-By default in [lazy mode](#devserver-lazy-), every request results in a new compilation. With `filename`, it's possible to only compile when a certain file is requested.
+This option lets you reduce the compilations in [lazy mode](#devserverlazy-).
+By default in [lazy mode](#devserverlazy-), every request results in a new compilation. With `filename`, it's possible to only compile when a certain file is requested.
 
-If [`output.filename`](/configuration/output/#output-filename) is set to `'bundle.js'` and `devServer.filename` is used like this:
+If [`output.filename`](/configuration/output/#outputfilename) is set to `'bundle.js'` and `devServer.filename` is used like this:
 
 __webpack.config.js__
 
@@ -326,7 +328,7 @@ module.exports = {
 
 It will now only compile the bundle when `/bundle.js` is requested.
 
-T> `filename` has no effect when used without [lazy mode](#devserver-lazy-).
+T> `filename` has no effect when used without [lazy mode](#devserverlazy-).
 
 
 ## `devServer.headers` 🔑
@@ -351,9 +353,9 @@ module.exports = {
 
 ## `devServer.historyApiFallback`
 
-`boolean` `object`
+`boolean = false` `object`
 
-When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have to be served in place of any `404` responses. `devServer.historyApiFallback` is disabled by default. Enable it by passing:
+When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have to be served in place of any `404` responses. Enable `devServer.historyApiFallback` by setting it to `true`:
 
 __webpack.config.js__
 
@@ -411,9 +413,9 @@ For more options and information, see the [connect-history-api-fallback](https:/
 
 ## `devServer.host`
 
-`string`
+`string = 'localhost'`
 
-Specify a host to use. By default this is `localhost`. If you want your server to be accessible externally, specify it like this:
+Specify a host to use. If you want your server to be accessible externally, specify it like this:
 
 __webpack.config.js__
 
@@ -479,7 +481,7 @@ webpack-dev-server --hot-only
 
 ## `devServer.http2`
 
-`boolean: false`
+`boolean = false`
 
 Serve over HTTP/2 using [spdy](https://www.npmjs.com/package/spdy). This option is ignored for Node 10.0.0 and above, as spdy is broken for those versions. The dev server will migrate over to Node's built-in HTTP/2 once [Express](https://expressjs.com/) supports it.
 
@@ -608,7 +610,7 @@ webpack-dev-server --info=false
 
 ## `devServer.injectClient`
 
-`boolean: false` `function (compilerConfig)`
+`boolean = false` `function (compilerConfig) => boolean`
 
 Tells `devServer` to inject a client. Setting `devServer.injectClient` to `true` will result in always injecting a client. It is possible to provide a function to inject conditionally:
 
@@ -625,7 +627,7 @@ module.exports = {
 
 ## `devServer.injectHot`
 
-`boolean: false` `function (compilerConfig)`
+`boolean = false` `function (compilerConfig) => boolean`
 
 Tells `devServer` to inject a Hot Module Replacement. Setting `devServer.injectHot` to `true` will result in always injecting. It is possible to provide a function to inject conditionally:
 
@@ -694,13 +696,13 @@ Usage via the CLI
 webpack-dev-server --lazy
 ```
 
-T> [`watchOptions`](#devserver-watchoptions-) will have no effect when used with __lazy mode__.
+T> [`watchOptions`](#devserverwatchoptions-) will have no effect when used with __lazy mode__.
 
 T> If you use the CLI, make sure __inline mode__ is disabled.
 
 ## `devServer.liveReload`
 
-`boolean: true`
+`boolean = true`
 
 By default, the dev-server will reload/refresh the page when file changes are detected. [`devServer.hot`](#devserverhot) option must be disabled or [`devServer.watchContentBase`](#devserverwatchcontentbase) option must be enabled in order for `liveReload` to take effect. Disable `devServer.liveReload` by setting it to `false`:
 
@@ -745,9 +747,9 @@ module.exports = {
 
 ## `devServer.noInfo` 🔑
 
-`boolean`
+`boolean = false`
 
-Tells dev-server to supress messages like the webpack bundle information. Errors and warnings will still be shown. `devServer.noInfo` is disabled by default.
+Tells dev-server to supress messages like the webpack bundle information. Errors and warnings will still be shown.
 
 __webpack.config.js__
 
@@ -826,9 +828,9 @@ webpack-dev-server --open-page "/different/page"
 
 ## `devServer.overlay`
 
-`boolean` `object: { boolean errors, boolean warnings }`
+`boolean = false` `object: { errors boolean = false, warnings boolean = false }`
 
-Shows a full-screen overlay in the browser when there are compiler errors or warnings. Disabled by default. If you want to show only compiler errors:
+Shows a full-screen overlay in the browser when there are compiler errors or warnings. If you want to show only compiler errors:
 
 __webpack.config.js__
 
@@ -993,7 +995,11 @@ module.exports = {
 
 Sometimes you don't want to proxy everything. It is possible to bypass the proxy based on the return value of a function.
 
-In the function you get access to the request, response and proxy options. It must return either `false` or a path that will be served instead of continuing to proxy the request.
+In the function you get access to the request, response and proxy options.
+
+- Return `null` or `undefined` to continue processing the request with proxy.
+- Return `false` to produce a 404 error for the request.
+- Return a path to serve from, instead of continuing to proxy the request.
 
 E.g. for a browser request, you want to serve a HTML page, but for an API request you want to proxy it. You could do something like this:
 
@@ -1062,8 +1068,10 @@ module.exports = {
   //...
   devServer: {
     proxy: {
-      '/api': 'http://localhost:3000',
-      changeOrigin: true
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true
+      }
     }
   }
 };
@@ -1108,11 +1116,11 @@ webpack-dev-server --public myapp.test:80
 
 ## `devServer.publicPath` 🔑
 
-`string`
+`string = '/'`
 
 The bundled files will be available in the browser under this path.
 
-Imagine that the server is running under `http://localhost:8080` and [`output.filename`](/configuration/output/#output-filename) is set to `bundle.js`. By default the `devServer.publicPath` is `'/'`, so your bundle is available as `http://localhost:8080/bundle.js`.
+Imagine that the server is running under `http://localhost:8080` and [`output.filename`](/configuration/output/#outputfilename) is set to `bundle.js`. By default the `devServer.publicPath` is `'/'`, so your bundle is available as `http://localhost:8080/bundle.js`.
 
 Change `devServer.publicPath` to put bundle under specific directory:
 
@@ -1130,7 +1138,7 @@ module.exports = {
 The bundle will now be available as `http://localhost:8080/assets/bundle.js`.
 
 T> Make sure `devServer.publicPath` always starts and ends with a forward slash.
-  
+
 It is also possible to use a full URL.
 
 __webpack.config.js__
@@ -1146,7 +1154,7 @@ module.exports = {
 
 The bundle will also be available as `http://localhost:8080/assets/bundle.js`.
 
-T> It is recommended that `devServer.publicPath` is the same as [`output.publicPath`](/configuration/output/#output-publicpath).
+T> It is recommended that `devServer.publicPath` is the same as [`output.publicPath`](/configuration/output/#outputpublicpath).
 
 
 ## `devServer.quiet` 🔑
@@ -1174,7 +1182,7 @@ webpack-dev-server --quiet
 
 ## `devServer.serveIndex`
 
-`boolean: true`
+`boolean = true`
 
 Tells dev-server to use [`serveIndex`](https://github.com/expressjs/serve-index) middleware when enabled.
 
@@ -1193,7 +1201,7 @@ module.exports = {
 
 `function (app, server)`
 
-W> This option is __deprecated__ in favor of [`devServer.before`](#devserver-before) and will be removed in v3.0.0.
+W> This option is __deprecated__ in favor of [`devServer.before`](#devserverbefore) and will be removed in v3.0.0.
 
 Here you can access the Express app object and add your own custom middleware to it.
 For example, to define custom handlers for some paths:
@@ -1258,7 +1266,7 @@ module.exports = {
 
 ## `devServer.sockPath`
 
-`string: '/sockjs-node'`
+`string = '/sockjs-node'`
 
 The path at which to connect to the reloading socket.
 
@@ -1313,7 +1321,7 @@ module.exports = {
 };
 ```
 
-T> This only works when using [`devServer.contentBase`](#devserver-contentbase) as a `string`.
+T> This only works when using [`devServer.contentBase`](#devservercontentbase) as a `string`.
 
 
 ## `devServer.stats` 🔑
@@ -1351,6 +1359,102 @@ webpack-dev-server --stdin
 ```
 
 
+## `devServer.transportMode`
+
+`string = 'sockjs': 'sockjs' | 'ws'` `object`
+
+W> `transportMode` is an experimental option, meaning its usage could potentially change without warning.
+
+T> Providing a string to `devServer.transportMode` is a shortcut to setting both `devServer.transportMode.client` and `devServer.transportMode.server` to the given string value.
+
+This option allows us either to choose the current `devServer` transport mode for client/server individually or to provide custom client/server implementation. This allows to specify how browser or other client communicates with the `devServer`.
+
+The current default mode is [`'sockjs'`](https://www.npmjs.com/package/sockjs). This mode uses [SockJS-node](https://github.com/sockjs/sockjs-node) as a server, and [SockJS-client](https://www.npmjs.com/package/sockjs-client) on the client.
+
+`'ws'` mode will become the default mode in the next major `devServer` version. This mode uses [ws](https://www.npmjs.com/package/ws) as a server, and native WebSockets on the client.
+
+Use `'ws'` mode:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: 'ws'
+  }
+};
+```
+
+T> When providing a custom client and server implementation make sure that they are compatible with one another to communicate successfully.
+
+### `devServer.transportMode.client`
+
+`string` `path`
+
+To create a custom client implementation, create a class that extends [`BaseClient`](https://github.com/webpack/webpack-dev-server/blob/master/client-src/clients/BaseClient.js).
+
+Using path to `CustomClient.js`, a custom WebSocket client implementation, along with the compatible `'ws'` server:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: {
+      client: require.resolve('./CustomClient'),
+      server: 'ws'
+    }
+  }
+};
+```
+
+### `devServer.transportMode.server`
+
+`string` `path` `function`
+
+To create a custom server implementation, create a class that extends [`BaseServer`](https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js).
+
+Using path to `CustomServer.js`, a custom WebSocket server implementation, along with the compatible `'ws'` client:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: {
+      client: 'ws',
+      server: require.resolve('./CustomServer')
+    }
+  }
+};
+```
+
+Using class exported by `CustomServer.js`, a custom WebSocket server implementation, along with the compatible `'ws'` client:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: {
+      client: 'ws',
+      server: require('./CustomServer')
+    }
+  }
+};
+```
+
+Using custom, compatible WebSocket client and server implementations:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    transportMode: {
+      client: require.resolve('./CustomClient'),
+      server: require.resolve('./CustomServer')
+    }
+  }
+};
+```
+
+
 ## `devServer.useLocalIp`
 
 `boolean`
@@ -1379,7 +1483,7 @@ webpack-dev-server --useLocalIp
 
 `boolean`
 
-Tell dev-server to watch the files served by the [`devServer.contentBase`](#devserver-contentbase) option. It is disabled by default. When enabled, file changes will trigger a full page reload.
+Tell dev-server to watch the files served by the [`devServer.contentBase`](#devservercontentbase) option. It is disabled by default. When enabled, file changes will trigger a full page reload.
 
 __webpack.config.js__
 
@@ -1427,7 +1531,7 @@ See [WatchOptions](/configuration/watch/) for more options.
 
 ## `devServer.writeToDisk` 🔑
 
-`boolean: false` `function (filePath)`
+`boolean = false` `function (filePath)`
 
 Tells `devServer` to write generated assets to the disk.
 

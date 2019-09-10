@@ -13,7 +13,7 @@ Configuring the `output` configuration options tells webpack how to write the co
 
 ## Usage
 
-The minimum requirements for the `output` property in your webpack config is to set its value to an object including the following thing:
+The minimum requirement for the `output` property in your webpack config is to set its value to an object including the following property:
 
 - A `filename` to use for the output file(s).
 
@@ -32,7 +32,7 @@ This configuration would output a single `bundle.js` file into the `dist` direct
 
 ## Multiple Entry Points
 
-If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use [substitutions](/configuration/output#output-filename) to ensure that each file has a unique name.
+If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use [substitutions](/configuration/output#outputfilename) to ensure that each file has a unique name.
 
 ```javascript
 module.exports = {
