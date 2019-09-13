@@ -3,7 +3,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const mdPlugins = [
   require('remark-slug'),
-  require('remark-mermaid'),
   [
     require('remark-custom-blockquotes'),
     {
