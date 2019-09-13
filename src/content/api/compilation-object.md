@@ -349,7 +349,6 @@ Parameters:
 
 Returns array of all assets under current compilation.
 
-
 ### getAsset
 
 `function (name)`
