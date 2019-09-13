@@ -172,4 +172,4 @@ Learn more about the [mode configuration here](/configuration/mode) and what opt
 
 ## Browser Compatibility
 
-webpack supports all browsers that are [ES5-compliant](https://kangax.github.io/compat-table/es5/) (IE8 and below are not supported). webpack needs `Promise` for `import()` and `require.ensure()`. If you want to support older browsers, you will need to [load a polyfill](/guides/shimming/) before using these expressions.
+webpack supports all browsers that are [ES5-compliant](https://kangax.github.io/compat-table/es5/) (IE8 and below are not supported). webpack needs `Promise` for [`import()` and `require.ensure()`](/guides/code-splitting/#dynamic-imports). If you want to support older browsers, you will need to [load a polyfill](/guides/shimming/) before using these expressions.
