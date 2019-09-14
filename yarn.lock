@@ -11762,7 +11762,7 @@ tap-parser@^7.0.0:
     js-yaml "^3.2.7"
     minipass "^2.2.0"
 
-"tap-render@github:Munter/tap-render#0.1.7-patch4":
+tap-render@Munter/tap-render#0.1.7-patch4:
   version "0.1.7"
   resolved "https://codeload.github.com/Munter/tap-render/tar.gz/c3a72d6260ee19cfd340d1e41d73a0edfdb29d94"
   dependencies:

@@ -32,7 +32,7 @@ export default ({
           group = page.group;
 
           return (
-            <React.Fragment key={`sidebar-item-${index}`}>
+            <React.Fragment key={page.url}>
               {displayGroup ? <h4 className="sidebar__group">{group}</h4> : null}
 
               <SidebarItem
