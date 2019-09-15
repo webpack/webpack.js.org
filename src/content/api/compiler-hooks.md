@@ -8,6 +8,7 @@ contributors:
   - madhavarshney
   - misterdev
   - EugeneHlushko
+  - superburrito
 ---
 
 The `Compiler` module is the main engine that creates a compilation instance
@@ -252,9 +253,21 @@ Called after emitting assets to output directory.
 
 `AsyncSeriesHook`
 
-Allows to get byte content of emitted asset. Available since webpack v4.39.0
+Executed when an asset has been emitted. Provides access to information about the emitted asset, such as its output path and byte content. 
 
-- Callback Parameters: `file`, `content`
+- Callback Parameters: `file`, `info`
+
+For example, you may access the asset's content buffer via `info.content`:
+
+```js
+compiler.hooks.assetEmitted.tap(
+  'MyPlugin',
+  (file, { content, source, outputPath, compilation, targetPath }) => {
+    console.log(content); // <Buffer 66 6f 6f 62 61 72>
+  }
+);
+```
+
 
 ### `done`
 
