@@ -38,6 +38,11 @@
     margin: 1.5em 0 0.25em;
     color: getColor(fiord);
     word-break: break-all;
+    
+    &[id] {
+      padding-top: 100px;
+      margin-top: calc(-100px + 1.5em);
+    }
 
     tt,
     code {
