@@ -9,7 +9,7 @@
   h4,
   h5,
   h6 {
-    .page &[id] {
+    &[id] {
       padding-top: 100px;
       margin-top: calc(-100px + 1.5em);
     }
