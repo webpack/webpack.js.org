@@ -2,6 +2,20 @@
 @import 'functions';
 @import 'prism-theme';
 
+.page .markdown {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    .page &[id] {
+      padding-top: 100px;
+      margin-top: calc(-100px + 1.5em);
+    }
+  }
+}
+
 .markdown {
   line-height: 1.5em;
 
@@ -38,11 +52,6 @@
     margin: 1.5em 0 0.25em;
     color: getColor(fiord);
     word-break: break-all;
-    
-    &[id] {
-      padding-top: 100px;
-      margin-top: calc(-100px + 1.5em);
-    }
 
     tt,
     code {
