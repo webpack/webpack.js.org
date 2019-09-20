@@ -102,7 +102,7 @@ module.exports = {
   //...
   output: {
     //...
-    chunkFilename: `[id].js`
+    chunkFilename: '[id].js'
   }
 };
 ```
