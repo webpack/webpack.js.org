@@ -111,7 +111,7 @@ Profile them to not introduce a performance problem here.
 
 ### Progress plugin
 
-If you already have a fast build time `progress-plugin` can be excessive. If you have long build times consider removing `progress-plugin` where the build happens to be remotely, for example your server or CI.
+If you already have a fast build time, `progress-plugin` can be excessive. If you have long build times, consider removing `progress-plugin` where the build happens to be remotely, for example your server or CI.
 
 ---
 
