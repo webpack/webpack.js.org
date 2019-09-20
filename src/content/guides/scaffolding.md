@@ -93,7 +93,7 @@ class MyScaffold extends Generator {
   constructor(args, opts) {
     super(args, opts);
     opts.env.configuration = {};
-  },
+  }
 }
 ```
 
@@ -111,7 +111,7 @@ class MyScaffold extends Generator {
       dev: {},
       prod: {},
     };
-  },
+  }
 }
 ```
 
@@ -138,7 +138,7 @@ For the scaffolding instance to run, you need to write your configuration to a `
 class MyScaffold extends Generator {
   writing() {
     this.config.set('configuration', myObj);
-  },
+  }
 }
 ```
 
