@@ -52,24 +52,24 @@ __webpack.config.js__
     entry: {
 -      app: './src/index.js',
 -      print: './src/print.js'
-+      app: './src/index.js'
++      app: './src/index.js',
     },
     devtool: 'inline-source-map',
     devServer: {
       contentBase: './dist',
-+     hot: true
++     hot: true,
     },
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Hot Module Replacement'
-      })
+        title: 'Hot Module Replacement',
+      }),
     ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
@@ -151,7 +151,7 @@ const config = require('./webpack.config.js');
 const options = {
   contentBase: './dist',
   hot: true,
-  host: 'localhost'
+  host: 'localhost',
 };
 
 webpackDevServer.addDevServerEntrypoints(config, options);
@@ -233,32 +233,32 @@ __webpack.config.js__
 
   module.exports = {
     entry: {
-      app: './src/index.js'
+      app: './src/index.js',
     },
     devtool: 'inline-source-map',
     devServer: {
       contentBase: './dist',
-      hot: true
+      hot: true,
     },
 +   module: {
 +     rules: [
 +       {
 +         test: /\.css$/,
-+         use: ['style-loader', 'css-loader']
-+       }
-+     ]
++         use: ['style-loader', 'css-loader'],
++       },
++     ],
 +   },
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Hot Module Replacement'
-      })
+        title: 'Hot Module Replacement',
+      }),
     ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 

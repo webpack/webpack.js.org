@@ -93,7 +93,7 @@ class MyScaffold extends Generator {
   constructor(args, opts) {
     super(args, opts);
     opts.env.configuration = {};
-  }
+  },
 }
 ```
 
@@ -109,9 +109,9 @@ class MyScaffold extends Generator {
     super(args, opts);
     opts.env.configuration = {
       dev: {},
-      prod: {}
+      prod: {},
     };
-  }
+  },
 }
 ```
 
@@ -124,7 +124,7 @@ This object has the same format as a regular webpack [configuration](/configurat
 ```js
 this.options.env.configuration.dev.webpackOptions = {
   entry: '\'app.js\'',
-  output: {}
+  output: {},
 };
 ```
 
@@ -138,7 +138,7 @@ For the scaffolding instance to run, you need to write your configuration to a `
 class MyScaffold extends Generator {
   writing() {
     this.config.set('configuration', myObj);
-  }
+  },
 }
 ```
 
@@ -161,7 +161,7 @@ The `topScope` property is where you write all the code needed by your configura
 ```js
 this.options.env.configuration.dev.topScope = [
   'const webpack = require("webpack");',
-  'const path = require("path");'
+  'const path = require("path");',
 ];
 ```
 

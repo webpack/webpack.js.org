@@ -38,10 +38,10 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader'
-      }
-    ]
-  }
+        loader: 'babel-loader',
+      },
+    ],
+  },
 };
 ```
 
@@ -55,10 +55,10 @@ module.exports = {
       {
         test: /\.js$/,
         include: path.resolve(__dirname, 'src'),
-        loader: 'babel-loader'
-      }
-    ]
-  }
+        loader: 'babel-loader',
+      },
+    ],
+  },
 };
 ```
 
@@ -168,7 +168,7 @@ Make sure the entry chunk is cheap to emit by keeping it small. The following co
 ```js
 new CommonsChunkPlugin({
   name: 'manifest',
-  minChunks: Infinity
+  minChunks: Infinity,
 });
 ```
 
@@ -183,7 +183,7 @@ module.exports = {
     removeAvailableModules: false,
     removeEmptyChunks: false,
     splitChunks: false,
-  }
+  },
 };
 ```
 
@@ -195,8 +195,8 @@ webpack has the ability to generate path info in the output bundle. However, thi
 module.exports = {
   // ...
   output: {
-    pathinfo: false
-  }
+    pathinfo: false,
+  },
 };
 ```
 

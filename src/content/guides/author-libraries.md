@@ -169,8 +169,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'webpack-numbers.js'
-  }
+    filename: 'webpack-numbers.js',
+  },
 };
 ```
 
@@ -190,17 +190,17 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'webpack-numbers.js'
--   }
+      filename: 'webpack-numbers.js',
+-   },
 +   },
 +   externals: {
 +     lodash: {
 +       commonjs: 'lodash',
 +       commonjs2: 'lodash',
 +       amd: 'lodash',
-+       root: '_'
-+     }
-+   }
++       root: '_',
++     },
++   },
   };
 ```
 
@@ -229,8 +229,8 @@ module.exports = {
     'library/one',
     'library/two',
     // Everything that starts with "library/"
-    /^library\/.+$/
-  ]
+    /^library\/.+$/,
+  ],
 };
 ```
 
@@ -250,16 +250,16 @@ __webpack.config.js__
       path: path.resolve(__dirname, 'dist'),
 -     filename: 'webpack-numbers.js'
 +     filename: 'webpack-numbers.js',
-+     library: 'webpackNumbers'
++     library: 'webpackNumbers',
     },
     externals: {
       lodash: {
         commonjs: 'lodash',
         commonjs2: 'lodash',
         amd: 'lodash',
-        root: '_'
-      }
-    }
+        root: '_',
+      },
+    },
   };
 ```
 
@@ -279,16 +279,16 @@ __webpack.config.js__
       filename: 'webpack-numbers.js',
 -     library: 'webpackNumbers'
 +     library: 'webpackNumbers',
-+     libraryTarget: 'umd'
++     libraryTarget: 'umd',
     },
     externals: {
       lodash: {
         commonjs: 'lodash',
         commonjs2: 'lodash',
         amd: 'lodash',
-        root: '_'
-      }
-    }
+        root: '_',
+      },
+    },
   };
 ```
 

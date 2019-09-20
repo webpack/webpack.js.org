@@ -79,14 +79,14 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
--   }
+      path: path.resolve(__dirname, 'dist'),
+-   },
 +   },
 +   plugins: [
 +     new webpack.ProvidePlugin({
-+       _: 'lodash'
-+     })
-+   ]
++       _: 'lodash',
++     }),
++   ],
   };
 ```
 
@@ -130,14 +130,14 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
       new webpack.ProvidePlugin({
 -       _: 'lodash'
-+       join: ['lodash', 'join']
-      })
-    ]
++       join: ['lodash', 'join'],
+      }),
+    ],
   };
 ```
 
@@ -175,21 +175,21 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
 +   module: {
 +     rules: [
 +       {
 +         test: require.resolve('index.js'),
-+         use: 'imports-loader?this=>window'
-+       }
-+     ]
++         use: 'imports-loader?this=>window',
++       },
++     ],
 +   },
     plugins: [
       new webpack.ProvidePlugin({
-        join: ['lodash', 'join']
-      })
-    ]
+        join: ['lodash', 'join'],
+      }),
+    ],
   };
 ```
 
@@ -217,7 +217,7 @@ __src/globals.js__
 const file = 'blah.txt';
 const helpers = {
   test: function() { console.log('test something'); },
-  parse: function() { console.log('parse something'); }
+  parse: function() { console.log('parse something'); },
 };
 ```
 
@@ -233,26 +233,26 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     module: {
       rules: [
         {
           test: require.resolve('index.js'),
-          use: 'imports-loader?this=>window'
--       }
+          use: 'imports-loader?this=>window',
+-       },
 +       },
 +       {
 +         test: require.resolve('globals.js'),
-+         use: 'exports-loader?file,parse=helpers.parse'
-+       }
-      ]
++         use: 'exports-loader?file,parse=helpers.parse',
++       },
+      ],
     },
     plugins: [
       new webpack.ProvidePlugin({
-        join: ['lodash', 'join']
-      })
-    ]
+        join: ['lodash', 'join'],
+      }),
+    ],
   };
 ```
 
@@ -347,30 +347,30 @@ __webpack.config.js__
 -   entry: './src/index.js',
 +   entry: {
 +     polyfills: './src/polyfills.js',
-+     index: './src/index.js'
++     index: './src/index.js',
 +   },
     output: {
 -     filename: 'bundle.js',
 +     filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     module: {
       rules: [
         {
           test: require.resolve('index.js'),
-          use: 'imports-loader?this=>window'
+          use: 'imports-loader?this=>window',
         },
         {
           test: require.resolve('globals.js'),
-          use: 'exports-loader?file,parse=helpers.parse'
-        }
-      ]
+          use: 'exports-loader?file,parse=helpers.parse',
+        },
+      ],
     },
     plugins: [
       new webpack.ProvidePlugin({
-        join: ['lodash', 'join']
-      })
-    ]
+        join: ['lodash', 'join'],
+      }),
+    ],
   };
 ```
 
