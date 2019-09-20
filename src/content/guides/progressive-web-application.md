@@ -81,10 +81,9 @@ __webpack.config.js__
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
--       title: 'Output Management'
+-       title: 'Output Management',
 +       title: 'Progressive Web Application',
--     }),
-+     }),
+      }),
 +     new WorkboxPlugin.GenerateSW({
 +       // these options encourage the ServiceWorkers to get in there fast
 +       // and not allow any straggling "old" SWs to hang around

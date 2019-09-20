@@ -79,7 +79,7 @@ __webpack.config.js__
 +         test: /\.css$/,
 +         use: [
 +           'style-loader',
-+           'css-loader'
++           'css-loader',
 +         ],
 +       },
 +     ],
@@ -549,7 +549,7 @@ __webpack.config.js__
 -         test: /\.css$/,
 -         use: [
 -           'style-loader',
--           'css-loader'
+-           'css-loader',
 -         ],
 -       },
 -       {

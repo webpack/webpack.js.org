@@ -56,7 +56,7 @@ __webpack.config.js__
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
--       title: 'Output Management'
+-       title: 'Output Management',
 +       title: 'Caching',
       }),
     ],
@@ -162,8 +162,7 @@ __webpack.config.js__
       path: path.resolve(__dirname, 'dist'),
     },
     optimization: {
--     runtimeChunk: 'single'
-+     runtimeChunk: 'single',
+      runtimeChunk: 'single',
 +     splitChunks: {
 +       cacheGroups: {
 +         vendor: {

@@ -191,8 +191,7 @@ __webpack.config.js__
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'webpack-numbers.js',
--   },
-+   },
+    },
 +   externals: {
 +     lodash: {
 +       commonjs: 'lodash',
@@ -248,8 +247,7 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
--     filename: 'webpack-numbers.js'
-+     filename: 'webpack-numbers.js',
+      filename: 'webpack-numbers.js',
 +     library: 'webpackNumbers',
     },
     externals: {
@@ -277,8 +275,7 @@ __webpack.config.js__
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'webpack-numbers.js',
--     library: 'webpackNumbers'
-+     library: 'webpackNumbers',
+      library: 'webpackNumbers',
 +     libraryTarget: 'umd',
     },
     externals: {

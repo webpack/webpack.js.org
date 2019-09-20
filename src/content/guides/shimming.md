@@ -80,8 +80,7 @@ __webpack.config.js__
     output: {
       filename: 'bundle.js',
       path: path.resolve(__dirname, 'dist'),
--   },
-+   },
+    },
 +   plugins: [
 +     new webpack.ProvidePlugin({
 +       _: 'lodash',
@@ -134,7 +133,7 @@ __webpack.config.js__
     },
     plugins: [
       new webpack.ProvidePlugin({
--       _: 'lodash'
+-       _: 'lodash',
 +       join: ['lodash', 'join'],
       }),
     ],
@@ -240,8 +239,7 @@ __webpack.config.js__
         {
           test: require.resolve('index.js'),
           use: 'imports-loader?this=>window',
--       },
-+       },
+        },
 +       {
 +         test: require.resolve('globals.js'),
 +         use: 'exports-loader?file,parse=helpers.parse',
