@@ -306,6 +306,8 @@ module.exports = {
 };
 ```
 
+W> `optimization.removeAvailableModules` reduces the performance of webpack, and will be disabled in `production` mode by default in next major release. Disable it in `production` mode if you want extra build performance.
+
 ## `optimization.removeEmptyChunks`
 
 `boolean = true`
