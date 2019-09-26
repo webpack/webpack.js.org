@@ -111,7 +111,8 @@ Profile them to not introduce a performance problem here.
 
 ### Progress plugin
 
-If you already have a fast build time, `progress-plugin` can be excessive. If you have long build times, consider removing `progress-plugin` where the build happens to be remotely, for example your server or Continious Integration.
+
+It is possible to shorten build times by removing `progress-plugin` from webpack's configuration. Keep in mind, `progress-plugin` might not provide as much value for fast builds as well, so make sure you are leveraging the benefits of using it.
 
 ---
 
