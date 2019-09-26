@@ -56,15 +56,15 @@ __webpack.config.js__
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
--       title: 'Output Management'
-+       title: 'Caching'
-      })
+-       title: 'Output Management',
++       title: 'Caching',
+      }),
     ],
     output: {
 -     filename: 'bundle.js',
 +     filename: '[name].[contenthash].js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
@@ -109,16 +109,16 @@ __webpack.config.js__
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Caching'
-      })
+        title: 'Caching',
+      }),
     ],
     output: {
       filename: '[name].[contenthash].js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
 +   optimization: {
-+     runtimeChunk: 'single'
-+   }
++     runtimeChunk: 'single',
++   },
   };
 ```
 
@@ -154,26 +154,25 @@ __webpack.config.js__
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Caching'
+        title: 'Caching',
       }),
     ],
     output: {
       filename: '[name].[contenthash].js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     optimization: {
--     runtimeChunk: 'single'
-+     runtimeChunk: 'single',
+      runtimeChunk: 'single',
 +     splitChunks: {
 +       cacheGroups: {
 +         vendor: {
 +           test: /[\\/]node_modules[\\/]/,
 +           name: 'vendors',
-+           chunks: 'all'
-+         }
-+       }
-+     }
-    }
++           chunks: 'all',
++         },
++       },
++     },
+    },
   };
 ```
 
@@ -268,12 +267,12 @@ __webpack.config.js__
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Caching'
-      })
+        title: 'Caching',
+      }),
     ],
     output: {
       filename: '[name].[contenthash].js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     optimization: {
 +     moduleIds: 'hashed',
@@ -283,11 +282,11 @@ __webpack.config.js__
           vendor: {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
-            chunks: 'all'
-          }
-        }
-      }
-    }
+            chunks: 'all',
+          },
+        },
+      },
+    },
   };
 ```
 

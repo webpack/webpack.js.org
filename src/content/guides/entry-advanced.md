@@ -46,7 +46,7 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
     home: ['./home.js', './home.scss'],
-    account: ['./account.js', './account.scss']
+    account: ['./account.js', './account.scss'],
   },
   output: {
     filename: '[name].js',
@@ -59,16 +59,16 @@ module.exports = {
           // fallback to style-loader in development
           process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
-          'sass-loader'
-        ]
-      }
-    ]
+          'sass-loader',
+        ],
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css'
+      filename: '[name].css',
     }),
-  ]
+  ],
 };
 ```
 
