@@ -74,13 +74,12 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
-- }
-+ },
+    path: path.resolve(__dirname, 'dist'),
+  },
 + mode: 'development',
 + optimization: {
-+   usedExports: true
-+ }
++   usedExports: true,
++ },
 };
 ```
 
@@ -324,13 +323,13 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
 - mode: 'development',
 - optimization: {
--   usedExports: true
+-   usedExports: true,
 - }
-+ mode: 'production'
++ mode: 'production',
 };
 ```
 

@@ -47,7 +47,7 @@ For a better understanding of the ideas behind module bundlers and how they work
 
 An __entry point__ indicates which module webpack should use to begin building out its internal [dependency graph](/concepts/dependency-graph/). webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
 
-By default its value is `./src/index.js`, but you can specify a different (or multiple entry points) by configuring the __entry__ property in the [webpack configuration](/configuration). For example:
+By default its value is `./src/index.js`, but you can specify a different (or multiple entry points) by setting an [`entry` property in the webpack configuration](/configuration/entry-context/#entry). For example:
 
 __webpack.config.js__
 
@@ -119,7 +119,7 @@ The configuration above has defined a `rules` property for a single module with 
 
 W> It is important to remember that when defining rules in your webpack config, you are defining them under `module.rules` and not `rules`. For your benefit, webpack will warn you if this is done incorrectly.
 
-W> Keep in mind that when using regex to match files, you may not quote it. i.e `/\.txt$/` is not the same as `'/\.txt$/'` or `"/\.txt$/"`. The former instructs webpack to match any file that ends with .txt and the latter instructs webpack to match a single file with an absolute path '.txt'; this is likely not your intention. 
+W> Keep in mind that when using regex to match files, you may not quote it. i.e `/\.txt$/` is not the same as `'/\.txt$/'` or `"/\.txt$/"`. The former instructs webpack to match any file that ends with .txt and the latter instructs webpack to match a single file with an absolute path '.txt'; this is likely not your intention.
 
 You can check further customization when including loaders in the [loaders section](/concepts/loaders).
 
