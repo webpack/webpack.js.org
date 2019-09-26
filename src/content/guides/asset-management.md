@@ -48,8 +48,8 @@ __webpack.config.js__
     output: {
 -     filename: 'main.js',
 +     filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
@@ -71,7 +71,7 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
 +   module: {
 +     rules: [
@@ -79,11 +79,11 @@ __webpack.config.js__
 +         test: /\.css$/,
 +         use: [
 +           'style-loader',
-+           'css-loader'
-+         ]
-+       }
-+     ]
-+   }
++           'css-loader',
++         ],
++       },
++     ],
++   },
   };
 ```
 
@@ -169,7 +169,7 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     module: {
       rules: [
@@ -178,16 +178,16 @@ __webpack.config.js__
           use: [
             'style-loader',
             'css-loader'
-          ]
+          ],
         },
 +       {
 +         test: /\.(png|svg|jpg|gif)$/,
 +         use: [
-+           'file-loader'
-+         ]
-+       }
-      ]
-    }
++           'file-loader',
++         ],
++       },
+      ],
+    },
   };
 ```
 
@@ -277,7 +277,7 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     module: {
       rules: [
@@ -286,22 +286,22 @@ __webpack.config.js__
           use: [
             'style-loader',
             'css-loader'
-          ]
+          ],
         },
         {
           test: /\.(png|svg|jpg|gif)$/,
           use: [
-            'file-loader'
-          ]
+            'file-loader',
+          ],
         },
 +       {
 +         test: /\.(woff|woff2|eot|ttf|otf)$/,
 +         use: [
-+           'file-loader'
-+         ]
-+       }
-      ]
-    }
++           'file-loader',
++         ],
++       },
+      ],
+    },
   };
 ```
 
@@ -381,7 +381,7 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     module: {
       rules: [
@@ -390,34 +390,34 @@ __webpack.config.js__
           use: [
             'style-loader',
             'css-loader'
-          ]
+          ],
         },
         {
           test: /\.(png|svg|jpg|gif)$/,
           use: [
-            'file-loader'
-          ]
+            'file-loader',
+          ],
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/,
           use: [
-            'file-loader'
-          ]
+            'file-loader',
+          ],
         },
 +       {
 +         test: /\.(csv|tsv)$/,
 +         use: [
-+           'csv-loader'
-+         ]
++           'csv-loader',
++         ],
 +       },
 +       {
 +         test: /\.xml$/,
 +         use: [
-+           'xml-loader'
-+         ]
-+       }
-      ]
-    }
++           'xml-loader',
++         ],
++       },
+      ],
+    },
   };
 ```
 
@@ -541,7 +541,7 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
 -   module: {
 -     rules: [
@@ -549,35 +549,35 @@ __webpack.config.js__
 -         test: /\.css$/,
 -         use: [
 -           'style-loader',
--           'css-loader'
--         ]
+-           'css-loader',
+-         ],
 -       },
 -       {
 -         test: /\.(png|svg|jpg|gif)$/,
 -         use: [
--           'file-loader'
--         ]
+-           'file-loader',
+-         ],
 -       },
 -       {
 -         test: /\.(woff|woff2|eot|ttf|otf)$/,
 -         use: [
--           'file-loader'
--         ]
+-           'file-loader',
+-         ],
 -       },
 -       {
 -         test: /\.(csv|tsv)$/,
 -         use: [
--           'csv-loader'
--         ]
+-           'csv-loader',
+-         ],
 -       },
 -       {
 -         test: /\.xml$/,
 -         use: [
--           'xml-loader'
--         ]
--       }
--     ]
--   }
+-           'xml-loader',
+-         ],
+-       },
+-     ],
+-   },
   };
 ```
 
