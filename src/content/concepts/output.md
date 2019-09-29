@@ -6,6 +6,7 @@ contributors:
   - chyipin
   - rouzbeh84
   - byzyk
+  - EugeneHlushko
 ---
 
 Configuring the `output` configuration options tells webpack how to write the compiled files to disk. Note that, while there can be multiple `entry` points, only one `output` configuration is specified.
@@ -13,9 +14,7 @@ Configuring the `output` configuration options tells webpack how to write the co
 
 ## Usage
 
-The minimum requirement for the `output` property in your webpack config is to set its value to an object including the following property:
-
-- A `filename` to use for the output file(s).
+The minimum requirement for the `output` property in your webpack configuration is to set its value to an object and provide an [`output.filename`](/configuration/output/#outputfilename) to use for the output file(s):
 
 __webpack.config.js__
 
