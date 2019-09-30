@@ -64,19 +64,19 @@ __webpack.common.js__
 +
 + module.exports = {
 +   entry: {
-+     app: './src/index.js'
++     app: './src/index.js',
 +   },
 +   plugins: [
 +     // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
 +     new CleanWebpackPlugin(),
 +     new HtmlWebpackPlugin({
-+       title: 'Production'
-+     })
++       title: 'Production',
++     }),
 +   ],
 +   output: {
 +     filename: '[name].bundle.js',
-+     path: path.resolve(__dirname, 'dist')
-+   }
++     path: path.resolve(__dirname, 'dist'),
++   },
 + };
 ```
 
@@ -90,8 +90,8 @@ __webpack.dev.js__
 +   mode: 'development',
 +   devtool: 'inline-source-map',
 +   devServer: {
-+     contentBase: './dist'
-+   }
++     contentBase: './dist',
++   },
 + });
 ```
 
@@ -218,7 +218,7 @@ __webpack.prod.js__
 
   module.exports = merge(common, {
     mode: 'production',
-+   devtool: 'source-map'
++   devtool: 'source-map',
   });
 ```
 
