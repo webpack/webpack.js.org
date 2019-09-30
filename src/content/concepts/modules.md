@@ -45,6 +45,7 @@ The webpack community has built _loaders_ for a wide variety of popular language
 - [Sass](http://sass-lang.com)
 - [Less](http://lesscss.org)
 - [Stylus](http://stylus-lang.com)
+- [Elm](https://elm-lang.org/)
 
 And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for __any stack__, while staying __non-opinionated__ about your development, testing, and production workflows.
 
