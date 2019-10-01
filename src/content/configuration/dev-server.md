@@ -840,6 +840,7 @@ module.exports = {
 ```
 
 Usage via the CLI
+
 ```bash
 webpack-dev-server --open-page "/different/page1,/different/page2"
 ```
