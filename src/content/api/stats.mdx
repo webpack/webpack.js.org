@@ -5,6 +5,7 @@ contributors:
   - skipjack
   - franjohn21
   - byzyk
+  - EugeneHlushko
 ---
 
 When compiling source code with webpack, users can generate a JSON file containing statistics about modules. These statistics can be used to analyze an application's dependency graph as well as to optimize compilation speed. The file is typically generated with the following CLI command:
@@ -22,33 +23,33 @@ The top-level structure of the output JSON file is fairly straightforward but th
 
 ``` js-with-links
 {
-  "version": "1.4.13", // Version of webpack used for the compilation
-  "hash": "11593e3b3ac85436984a", // Compilation specific hash
-  "time": 2469, // Compilation time in milliseconds
-  "filteredModules": 0, // A count of excluded modules when [`exclude`](/configuration/stats/#stats) is passed to the [`toJson`](/api/node/#statstojsonoptions) method
-  "outputPath": "/", // path to webpack output directory
-  "assetsByChunkName": {
+  'version': '1.4.13', // Version of webpack used for the compilation
+  'hash': '11593e3b3ac85436984a', // Compilation specific hash
+  'time': 2469, // Compilation time in milliseconds
+  'filteredModules': 0, // A count of excluded modules when [`exclude`](/configuration/stats/#stats) is passed to the [`toJson`](/api/node/#statstojsonoptions) method
+  'outputPath': '/', // path to webpack output directory
+  'assetsByChunkName': {
     // Chunk name to emitted asset(s) mapping
-    "main": "web.js?h=11593e3b3ac85436984a",
-    "named-chunk": "named-chunk.web.js",
-    "other-chunk": [
-      "other-chunk.js",
-      "other-chunk.css"
+    'main': 'web.js?h=11593e3b3ac85436984a',
+    'named-chunk': 'named-chunk.web.js',
+    'other-chunk': [
+      'other-chunk.js',
+      'other-chunk.css'
     ]
   },
-  "assets": [
+  'assets': [
     // A list of [asset objects](#asset-objects)
   ],
-  "chunks": [
+  'chunks': [
     // A list of [chunk objects](#chunk-objects)
   ],
-  "modules": [
+  'modules': [
     // A list of [module objects](#module-objects)
   ],
-  "errors": [
+  'errors': [
     // A list of [error strings](#errors-and-warnings)
   ],
-  "warnings": [
+  'warnings': [
     // A list of [warning strings](#errors-and-warnings)
   ]
 }
@@ -63,13 +64,21 @@ Each `assets` object represents an `output` file emitted from the compilation. T
 
 ```js
 {
-  "chunkNames": [], // The chunks this asset contains
-  "chunks": [ 10, 6 ], // The chunk IDs this asset contains
-  "emitted": true, // Indicates whether or not the asset made it to the `output` directory
-  "name": "10.web.js", // The `output` filename
-  "size": 1058 // The size of the file in bytes
+  'chunkNames': [], // The chunks this asset contains
+  'chunks': [ 10, 6 ], // The chunk IDs this asset contains
+  'emitted': true, // Indicates whether or not the asset made it to the `output` directory
+  'name': '10.web.js', // The `output` filename
+  'size': 1058, // The size of the file in bytes
+  'info': {
+    'immutable': true, // A flag telling whether the asset can be long term cached (contains a hash)
+    'size': 1058, // The size in bytes, only becomes available after asset has been emitted
+    'development': true, // A flag telling whether the asset is only used for development and doesn't count towards user-facing assets
+    'hotModuleReplacement': true // A flag telling whether the asset ships data for updating an existing application (HMR)
+  }
 }
 ```
+
+T> Asset's `info` property is available since webpack v4.40.0
 
 
 ### Chunk Objects

@@ -109,7 +109,7 @@ class MyScaffold extends Generator {
     super(args, opts);
     opts.env.configuration = {
       dev: {},
-      prod: {}
+      prod: {},
     };
   }
 }
@@ -124,7 +124,7 @@ This object has the same format as a regular webpack [configuration](/configurat
 ```js
 this.options.env.configuration.dev.webpackOptions = {
   entry: '\'app.js\'',
-  output: {}
+  output: {},
 };
 ```
 
@@ -161,7 +161,7 @@ The `topScope` property is where you write all the code needed by your configura
 ```js
 this.options.env.configuration.dev.topScope = [
   'const webpack = require("webpack");',
-  'const path = require("path");'
+  'const path = require("path");',
 ];
 ```
 

@@ -322,3 +322,37 @@ Parameters:
 ### checkConstraints
 
 `function`
+
+### emitAsset
+
+`function (file, source, assetInfo = {})`
+
+Parameters:
+
+- `file` - file name of the asset
+- `source` - source of the asset
+- `assetInfo` - additional asset information
+
+### updateAsset
+
+`function (file, newSourceOrFunction, assetInfoUpdateOrFunction)`
+
+Parameters:
+
+- `file` - file name of the asset
+- `newSourceOrFunction` - new asset source or function converting old to new
+- `assetInfoUpdateOrFunction` - new asset info or function converting old to new
+
+### getAssets
+
+`function`
+
+Returns array of all assets under current compilation.
+
+### getAsset
+
+`function (name)`
+
+Parameters:
+
+`name` - the name of the asset to return

@@ -87,7 +87,7 @@ module.exports = {
 
 ## `output.chunkFilename`
 
-`string`
+`string = '[id].js'`
 
 This option determines the name of non-entry chunk files. See [`output.filename`](#outputfilename) option for details on the possible values.
 
@@ -95,12 +95,36 @@ Note that these filenames need to be generated at runtime to send the requests f
 
 By default `[id].js` is used or a value inferred from [`output.filename`](#outputfilename) (`[name]` is replaced with `[id]` or `[id].` is prepended).
 
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkFilename: '[id].js'
+  }
+};
+```
+
 
 ## `output.chunkLoadTimeout`
 
-`number`
+`number = 120000`
 
-Number of milliseconds before chunk request expires, defaults to 120 000. This option is supported since webpack 2.6.0.
+Number of milliseconds before chunk request expires. This option is supported since webpack 2.6.0.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkLoadTimeout: 30000
+  }
+};
+```
 
 
 ## `output.crossOriginLoading`
