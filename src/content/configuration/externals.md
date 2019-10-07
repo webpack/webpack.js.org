@@ -12,7 +12,7 @@ contributors:
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
 
-T> __consumer__ here is any end-user application that includes the library that you have bundled using webpack.
+T> __consumer__ here is any end-user application that includes the library that you have excluded from the bundle using webpack.
 
 
 ## `externals`
