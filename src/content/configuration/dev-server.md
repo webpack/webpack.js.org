@@ -1553,7 +1553,7 @@ See [WatchOptions](/configuration/watch/) for more options.
 
 `boolean = false` `function (filePath)`
 
-Tells `devServer` to write generated assets to the disk.
+Tells `devServer` to write generated assets to the disk. The output is written to the [output.path](/configuration/output/#outputpath) directory.
 
 __webpack.config.js__
 
