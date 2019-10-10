@@ -21,7 +21,7 @@ If you've been following the guides, you should have a solid understanding of so
 
 W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!
 
-Before proceeding lets first set [`mode` to `'development'`](/configuration/mode/#mode-development).
+Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-development).
 
 __webpack.config.js__
 
@@ -34,19 +34,19 @@ __webpack.config.js__
 +   mode: 'development',
     entry: {
       app: './src/index.js',
-      print: './src/print.js'
+      print: './src/print.js',
     },
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Development'
-      })
+        title: 'Development',
+      }),
     ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
@@ -71,19 +71,19 @@ __webpack.config.js__
     mode: 'development',
     entry: {
       app: './src/index.js',
-      print: './src/print.js'
+      print: './src/print.js',
     },
 +   devtool: 'inline-source-map',
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Development'
-      })
+        title: 'Development',
+      }),
     ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
@@ -121,7 +121,7 @@ We can see that the error also contains a reference to the file (`print.js`) and
 
 ## Choosing a Development Tool
 
-W> Some text editors have a "safe write" function that might interfere with some of the following tools. Read [Adjusting Your text Editor](#adjusting-your-text-editor) for a solution to these issues.
+W> Some text editors have a "safe write" function that might interfere with some of the following tools. Read [Adjusting Your Text Editor](#adjusting-your-text-editor) for a solution to these issues.
 
 It quickly becomes a hassle to manually run `npm run build` every time you want to compile your code.
 
@@ -144,10 +144,9 @@ __package.json__
 
 ``` diff
   {
-    "name": "development",
+    "name": "webpack-demo",
     "version": "1.0.0",
     "description": "",
-    "main": "webpack.config.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
 +     "watch": "webpack --watch",
@@ -209,29 +208,29 @@ __webpack.config.js__
     mode: 'development',
     entry: {
       app: './src/index.js',
-      print: './src/print.js'
+      print: './src/print.js',
     },
     devtool: 'inline-source-map',
 +   devServer: {
-+     contentBase: './dist'
++     contentBase: './dist',
 +   },
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Development'
-      })
+        title: 'Development',
+      }),
     ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
 This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080`.
 
-W> webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files in different path, you can change this with the [`publicPath`](/configuration/dev-server/#devserver-publicpath-) option in the dev server's configuration.
+W> webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files on a different path, you can change this with the [`publicPath`](/configuration/dev-server/#devserverpublicpath-) option in the dev server's configuration.
 
 Let's add a script to easily run the dev server as well:
 
@@ -242,7 +241,7 @@ __package.json__
     "name": "development",
     "version": "1.0.0",
     "description": "",
-    "main": "webpack.config.js",
+    "private": true,
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "watch": "webpack --watch",
@@ -256,10 +255,12 @@ __package.json__
       "clean-webpack-plugin": "^2.0.0",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
+      "express": "^4.15.3",
       "file-loader": "^0.11.2",
       "html-webpack-plugin": "^2.29.0",
       "style-loader": "^0.18.2",
       "webpack": "^4.30.0",
+      "webpack-dev-server": "^3.8.0",
       "xml-loader": "^1.2.1"
     }
   }
@@ -274,7 +275,7 @@ T> Now that your server is working, you might want to give [Hot Module Replaceme
 
 ### Using webpack-dev-middleware
 
-`webpack-dev-middleware` is a wrapper that will emit files processed by webpack to a server. This is used in `webpack-dev-server` internally, however it's available as a separate package to allow more custom setups if desired. We'll take a look at an example that combines webpack-dev-middleware with an express server.
+`webpack-dev-middleware` is a wrapper that will emit files processed by webpack to a server. This is used in `webpack-dev-server` internally, however it's available as a separate package to allow more custom setups if desired. We'll take a look at an example that combines `webpack-dev-middleware` with an express server.
 
 Let's install `express` and `webpack-dev-middleware` so we can get started:
 
@@ -295,23 +296,23 @@ __webpack.config.js__
     mode: 'development',
     entry: {
       app: './src/index.js',
-      print: './src/print.js'
+      print: './src/print.js',
     },
     devtool: 'inline-source-map',
     devServer: {
-      contentBase: './dist'
+      contentBase: './dist',
     },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Output Management'
-      })
+        title: 'Output Management',
+      }),
     ],
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
-+     publicPath: '/'
-    }
++     publicPath: '/',
+    },
   };
 ```
 
@@ -345,7 +346,7 @@ const compiler = webpack(config);
 // Tell express to use the webpack-dev-middleware and use the webpack.config.js
 // configuration file as a base.
 app.use(webpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath
+  publicPath: config.output.publicPath,
 }));
 
 // Serve the files on port 3000.
@@ -363,7 +364,7 @@ __package.json__
     "name": "development",
     "version": "1.0.0",
     "description": "",
-    "main": "webpack.config.js",
+    "private": true,
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "watch": "webpack --watch",
@@ -384,6 +385,7 @@ __package.json__
       "style-loader": "^0.18.2",
       "webpack": "^4.30.0",
       "webpack-dev-middleware": "^1.12.0",
+      "webpack-dev-server": "^3.8.0",
       "xml-loader": "^1.2.1"
     }
   }

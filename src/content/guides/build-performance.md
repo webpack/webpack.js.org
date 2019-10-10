@@ -6,6 +6,7 @@ contributors:
   - tbroadley
   - byzyk
   - madhavarshney
+  - wizardofhogwarts
 ---
 
 This guide contains some useful tips for improving build/compilation performance.
@@ -37,10 +38,10 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader'
-      }
-    ]
-  }
+        loader: 'babel-loader',
+      },
+    ],
+  },
 };
 ```
 
@@ -54,10 +55,10 @@ module.exports = {
       {
         test: /\.js$/,
         include: path.resolve(__dirname, 'src'),
-        loader: 'babel-loader'
-      }
-    ]
-  }
+        loader: 'babel-loader',
+      },
+    ],
+  },
 };
 ```
 
@@ -108,6 +109,10 @@ Enable persistent caching with the `cache-loader`. Clear cache directory on `"po
 
 Profile them to not introduce a performance problem here.
 
+### Progress plugin
+
+It is possible to shorten build times by removing `progress-plugin` from webpack's configuration. Keep in mind, `progress-plugin` might not provide as much value for fast builds as well, so make sure you are leveraging the benefits of using it.
+
 ---
 
 
@@ -137,10 +142,10 @@ webpack 4 outputs a large amount of data with its `stats.toJson()` by default. A
 
 ### Devtool
 
-Be aware of the performance differences of the different `devtool` settings.
+Be aware of the performance differences between the different `devtool` settings.
 
 - `"eval"` has the best performance, but doesn't assist you for transpiled code.
-- The `cheap-source-map` variants are more performant, if you can live with the slightly worse mapping quality.
+- The `cheap-source-map` variants are more performant if you can live with the slightly worse mapping quality.
 - Use a `eval-source-map` variant for incremental builds.
 
 => In most cases, `cheap-module-eval-source-map` is the best option.
@@ -167,7 +172,7 @@ Make sure the entry chunk is cheap to emit by keeping it small. The following co
 ```js
 new CommonsChunkPlugin({
   name: 'manifest',
-  minChunks: Infinity
+  minChunks: Infinity,
 });
 ```
 
@@ -182,7 +187,7 @@ module.exports = {
     removeAvailableModules: false,
     removeEmptyChunks: false,
     splitChunks: false,
-  }
+  },
 };
 ```
 
@@ -194,16 +199,18 @@ webpack has the ability to generate path info in the output bundle. However, thi
 module.exports = {
   // ...
   output: {
-    pathinfo: false
-  }
+    pathinfo: false,
+  },
 };
 ```
 
 ### Node.js Versions 8.9.10-9.11.1
 
+
 There was a [performance regression](https://github.com/nodejs/node/issues/19769) in Node.js versions 8.9.10 - 9.11.1 in the ES2015 `Map` and `Set` implementations. webpack uses those data structures liberally, so this regression affects compile times.
 
 Earlier and later Node.js versions are not affected.
+
 
 ### TypeScript Loader
 

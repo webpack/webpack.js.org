@@ -74,13 +74,12 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
-- }
-+ },
+    path: path.resolve(__dirname, 'dist'),
+  },
 + mode: 'development',
 + optimization: {
-+   usedExports: true
-+ }
++   usedExports: true,
++ },
 };
 ```
 
@@ -174,7 +173,7 @@ T> Note that any imported file is subject to tree shaking. This means if you use
 }
 ```
 
-Finally, `"sideEffects"` can also be set from the [`module.rules` configuration option](/configuration/module/#module-rules).
+Finally, `"sideEffects"` can also be set from the [`module.rules` configuration option](/configuration/module/#modulerules).
 
 ## Clarifying tree shaking and `sideEffects`
 
@@ -247,11 +246,11 @@ But we can help terser by using the `/*#__PURE__*/` annotation. It flags a state
 
 This would allow to remove this piece of code. But there are still questions with the imports which need to be included/evaluated because they could contain side effects.
 
-To tackle this, we use [`"sideEffects"`](/guides/tree-shaking/#mark-the-file-as-side-effect-free) property in `package.json`.
+To tackle this, we use the [`"sideEffects"`](/guides/tree-shaking/#mark-the-file-as-side-effect-free) property in `package.json`.
 
-It similar to `/*#__PURE__*/` but on a module level instead of a statement level. It says (`"sideEffects"` property): "If no direct export from a module flagged with no-sideEffects is used, the bundler can skip evaluating the module for side effects.".
+It's similar to `/*#__PURE__*/` but on a module level instead of a statement level. It says (`"sideEffects"` property): "If no direct export from a module flagged with no-sideEffects is used, the bundler can skip evaluating the module for side effects.".
 
-In the Shopify's Polaris example original modules look like this:
+In the Shopify's Polaris example, original modules look like this:
 
 __index.js__
 
@@ -313,7 +312,7 @@ Module Concatenation also applies. So that these 4 modules plus the entry module
 
 ## Minify the Output
 
-So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that set the `mode` configuration option to [`production`](/configuration/mode/#mode-production) configuration option.
+So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that, set the `mode` configuration option to [`production`](/configuration/mode/#mode-production).
 
 __webpack.config.js__
 
@@ -324,13 +323,13 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
 - mode: 'development',
 - optimization: {
--   usedExports: true
+-   usedExports: true,
 - }
-+ mode: 'production'
++ mode: 'production',
 };
 ```
 
@@ -338,7 +337,7 @@ T> Note that the `--optimize-minimize` flag can be used to enable `TerserPlugin`
 
 With that squared away, we can run another `npm run build` and see if anything has changed.
 
-Notice anything different about `dist/bundle.js`? Clearly the whole bundle is now minified and mangled, but, if you look carefully, you won't see the `square` function included but will see a mangled version of the `cube` function (`function r(e){return e*e*e}n.a=r`). With minification and tree shaking our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
+Notice anything different about `dist/bundle.js`? Clearly the whole bundle is now minified and mangled, but, if you look carefully, you won't see the `square` function included but will see a mangled version of the `cube` function (`function r(e){return e*e*e}n.a=r`). With minification and tree shaking, our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
 
 T> [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin) is needed for the tree shaking to work. It is added by `mode: "production"`. If you are not using it, remember to add the [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin) manually.
 
@@ -347,9 +346,9 @@ T> [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin) is needed f
 So, what we've learned is that in order to take advantage of _tree shaking_, you must...
 
 - Use ES2015 module syntax (i.e. `import` and `export`).
-- Ensure no compilers transform your ES2015 module syntax into CommonJS modules (this is the default behavior of popular Babel preset @babel/preset-env - see [documentation](https://babeljs.io/docs/en/babel-preset-env#modules) for more details).
+- Ensure no compilers transform your ES2015 module syntax into CommonJS modules (this is the default behavior of the popular Babel preset @babel/preset-env - see the [documentation](https://babeljs.io/docs/en/babel-preset-env#modules) for more details).
 - Add a `"sideEffects"` property to your project's `package.json` file.
-- Use [`production`](/configuration/mode/#mode-production) `mode` configuration option to enable [various optimizations](/configuration/mode/#usage) including minification and tree shaking.
+- Use the [`production`](/configuration/mode/#mode-production) `mode` configuration option to enable [various optimizations](/configuration/mode/#usage) including minification and tree shaking.
 
 You can imagine your application as a tree. The source code and libraries you actually use represent the green, living leaves of the tree. Dead code represents the brown, dead leaves of the tree that are consumed by autumn. In order to get rid of the dead leaves, you have to shake the tree, causing them to fall.
 

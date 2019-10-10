@@ -4,6 +4,8 @@
 .notification-bar {
   color: getColor(white);
   background: getColor(emperor);
+  width: 100%;
+  min-height: 56px;
 
   @media print {
     display: none;
@@ -20,7 +22,7 @@
 
 .notification-bar__inner {
   position: relative;
-  padding: 0.5em 1em;
+  padding: 0.5em 36px 0.5em 1em;
 
   @include break {
     padding: 0.5em 1.5em;

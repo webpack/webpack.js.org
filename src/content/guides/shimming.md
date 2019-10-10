@@ -13,6 +13,7 @@ contributors:
   - dhurlburtusa
   - plr108
   - NicolasLetellier
+  - wizardofhogwarts
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
@@ -47,9 +48,9 @@ webpack-demo
 |- /node_modules
 ```
 
-Remember that `lodash` package we were using? For demonstration purposes, let's say we wanted to instead provide this as a global throughout our application. To do this, we can use the `ProvidePlugin`.
+Remember that `lodash` package we were using? For demonstration purposes, let's say we wanted to instead provide this as a global throughout our application. To do this, we can use `ProvidePlugin`.
 
-The [`ProvidePlugin`](/plugins/provide-plugin) makes a package available as a variable in every module compiled through webpack. If webpack sees that variable used, it will include the given package in the final bundle. Let's go ahead by removing the `import` statement for `lodash` and instead providing it via the plugin:
+The [`ProvidePlugin`](/plugins/provide-plugin) makes a package available as a variable in every module compiled through webpack. If webpack sees that variable used, it will include the given package in the final bundle. Let's go ahead by removing the `import` statement for `lodash` and instead provide it via the plugin:
 
 __src/index.js__
 
@@ -78,14 +79,13 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
--   }
-+   },
+      path: path.resolve(__dirname, 'dist'),
+    },
 +   plugins: [
 +     new webpack.ProvidePlugin({
-+       _: 'lodash'
-+     })
-+   ]
++       _: 'lodash',
++     }),
++   ],
   };
 ```
 
@@ -129,14 +129,14 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
       new webpack.ProvidePlugin({
--       _: 'lodash'
-+       join: ['lodash', 'join']
-      })
-    ]
+-       _: 'lodash',
++       join: ['lodash', 'join'],
+      }),
+    ],
   };
 ```
 
@@ -174,21 +174,21 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
 +   module: {
 +     rules: [
 +       {
 +         test: require.resolve('index.js'),
-+         use: 'imports-loader?this=>window'
-+       }
-+     ]
++         use: 'imports-loader?this=>window',
++       },
++     ],
 +   },
     plugins: [
       new webpack.ProvidePlugin({
-        join: ['lodash', 'join']
-      })
-    ]
+        join: ['lodash', 'join'],
+      }),
+    ],
   };
 ```
 
@@ -216,7 +216,7 @@ __src/globals.js__
 const file = 'blah.txt';
 const helpers = {
   test: function() { console.log('test something'); },
-  parse: function() { console.log('parse something'); }
+  parse: function() { console.log('parse something'); },
 };
 ```
 
@@ -232,26 +232,25 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     module: {
       rules: [
         {
           test: require.resolve('index.js'),
-          use: 'imports-loader?this=>window'
--       }
-+       },
+          use: 'imports-loader?this=>window',
+        },
 +       {
 +         test: require.resolve('globals.js'),
-+         use: 'exports-loader?file,parse=helpers.parse'
-+       }
-      ]
++         use: 'exports-loader?file,parse=helpers.parse',
++       },
+      ],
     },
     plugins: [
       new webpack.ProvidePlugin({
-        join: ['lodash', 'join']
-      })
-    ]
+        join: ['lodash', 'join'],
+      }),
+    ],
   };
 ```
 
@@ -346,30 +345,30 @@ __webpack.config.js__
 -   entry: './src/index.js',
 +   entry: {
 +     polyfills: './src/polyfills.js',
-+     index: './src/index.js'
++     index: './src/index.js',
 +   },
     output: {
 -     filename: 'bundle.js',
 +     filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     module: {
       rules: [
         {
           test: require.resolve('index.js'),
-          use: 'imports-loader?this=>window'
+          use: 'imports-loader?this=>window',
         },
         {
           test: require.resolve('globals.js'),
-          use: 'exports-loader?file,parse=helpers.parse'
-        }
-      ]
+          use: 'exports-loader?file,parse=helpers.parse',
+        },
+      ],
     },
     plugins: [
       new webpack.ProvidePlugin({
-        join: ['lodash', 'join']
-      })
-    ]
+        join: ['lodash', 'join'],
+      }),
+    ],
   };
 ```
 
@@ -458,7 +457,7 @@ The [`script-loader`](/loaders/script-loader/) evaluates code in the global cont
 
 W> When using the `script-loader`, the module is added as a string to the bundle. It is not minimized by `webpack`, so use a minimized version. There is also no `devtool` support for libraries added by this loader.
 
-When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module in [`noParse`](/configuration/module/#module-noparse). This will cause webpack to include the module without parsing it or resolving `require()` and `import` statements. This practice is also used to improve the build performance.
+When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module in [`noParse`](/configuration/module/#modulenoparse). This will cause webpack to include the module without parsing it or resolving `require()` and `import` statements. This practice is also used to improve the build performance.
 
 W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
 
