@@ -39,8 +39,13 @@ if (isClient) {
 
 class Site extends React.Component {
   state = {
+    isMounted: false,
     mobileSidebarOpen: false
   };
+
+  componentDidMount() {
+    this.setState({ isMounted: true });
+  }
 
   render() {
     let { location } = this.props;
@@ -102,11 +107,11 @@ class Site extends React.Component {
                             <Sidebar
                               className="site__sidebar"
                               currentPage={location.pathname}
-                              pages={this._strip(
+                              pages={this.state.isMounted ? this._strip(
                                 section
                                   ? section.children
                                   : Content.children.filter(item => item.type !== 'directory' && item.url !== '/')
-                              )}
+                              ) : [] }
                             />
                             <Page {...page} content={content} />
                             <Gitter />
