@@ -76,6 +76,7 @@ function restructure(item, options) {
   enhance(item, options);
 
   if (item.children) {
+    // item.children.push(...item.children.splice(item.children.findIndex(child => child.name === 'printable.md'), 1));
     item.children.forEach(child => restructure(child, options));
 
     item.children.filter(filter);
