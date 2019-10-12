@@ -75,27 +75,26 @@ __webpack.config.js__
   module.exports = {
     entry: {
       app: './src/index.js',
-      print: './src/print.js'
+      print: './src/print.js',
     },
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
--       title: 'Output Management'
-+       title: 'Progressive Web Application'
--     })
-+     }),
+-       title: 'Output Management',
++       title: 'Progressive Web Application',
+      }),
 +     new WorkboxPlugin.GenerateSW({
 +       // these options encourage the ServiceWorkers to get in there fast
 +       // and not allow any straggling "old" SWs to hang around
 +       clientsClaim: true,
-+       skipWaiting: true
-+     })
++       skipWaiting: true,
++     }),
     ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 

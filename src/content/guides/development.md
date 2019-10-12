@@ -34,19 +34,19 @@ __webpack.config.js__
 +   mode: 'development',
     entry: {
       app: './src/index.js',
-      print: './src/print.js'
+      print: './src/print.js',
     },
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Development'
-      })
+        title: 'Development',
+      }),
     ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
@@ -71,19 +71,19 @@ __webpack.config.js__
     mode: 'development',
     entry: {
       app: './src/index.js',
-      print: './src/print.js'
+      print: './src/print.js',
     },
 +   devtool: 'inline-source-map',
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Development'
-      })
+        title: 'Development',
+      }),
     ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
@@ -208,23 +208,23 @@ __webpack.config.js__
     mode: 'development',
     entry: {
       app: './src/index.js',
-      print: './src/print.js'
+      print: './src/print.js',
     },
     devtool: 'inline-source-map',
 +   devServer: {
-+     contentBase: './dist'
++     contentBase: './dist',
 +   },
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Development'
-      })
+        title: 'Development',
+      }),
     ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
@@ -296,23 +296,23 @@ __webpack.config.js__
     mode: 'development',
     entry: {
       app: './src/index.js',
-      print: './src/print.js'
+      print: './src/print.js',
     },
     devtool: 'inline-source-map',
     devServer: {
-      contentBase: './dist'
+      contentBase: './dist',
     },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Output Management'
-      })
+        title: 'Output Management',
+      }),
     ],
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
-+     publicPath: '/'
-    }
++     publicPath: '/',
+    },
   };
 ```
 
@@ -346,7 +346,7 @@ const compiler = webpack(config);
 // Tell express to use the webpack-dev-middleware and use the webpack.config.js
 // configuration file as a base.
 app.use(webpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath
+  publicPath: config.output.publicPath,
 }));
 
 // Serve the files on port 3000.

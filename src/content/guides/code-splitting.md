@@ -84,12 +84,12 @@ module.exports = {
   mode: 'development',
   entry: {
     index: './src/index.js',
-+   another: './src/another-module.js'
++   another: './src/another-module.js',
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  }
+    path: path.resolve(__dirname, 'dist'),
+  },
 };
 ```
 
@@ -128,17 +128,17 @@ __webpack.config.js__
     mode: 'development',
     entry: {
       index: './src/index.js',
-      another: './src/another-module.js'
+      another: './src/another-module.js',
     },
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
 +   optimization: {
 +     splitChunks: {
-+       chunks: 'all'
-+     }
-+   }
++       chunks: 'all',
++     },
++   },
   };
 ```
 
@@ -178,20 +178,19 @@ __webpack.config.js__
   module.exports = {
     mode: 'development',
     entry: {
-+     index: './src/index.js'
--     index: './src/index.js',
--     another: './src/another-module.js'
+      index: './src/index.js',
+-     another: './src/another-module.js',
     },
     output: {
       filename: '[name].bundle.js',
 +     chunkFilename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
 -   optimization: {
 -     splitChunks: {
--       chunks: 'all'
--     }
--   }
+-       chunks: 'all',
+-     },
+-   },
   };
 ```
 
