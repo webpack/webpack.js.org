@@ -766,7 +766,7 @@ module.exports = {
 
 `function (server)`
 
-This option allow to developers run own scripts after run webpack-dev-server
+Provides an option to execute a custom function when `webpack-dev-server` starts listening for connections on a port.
 
 __webpack.config.js__
 
@@ -775,7 +775,8 @@ module.exports = {
   //...
   devServer: {
     onListening: function(server) {
-      // do fancy stuff
+      const port = server.listeningApp.address().port;
+      console.log('Listening on port:', port);
     }
   }
 };
