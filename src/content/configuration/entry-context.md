@@ -39,7 +39,7 @@ The point or points where to start the application bundling process. If an array
 
 A dynamically loaded module is __not__ an entry point.
 
-Simple rule: one entry point per HTML page. SPA: one entry point, MPA: multiple entry points.
+General rule: one entry point per HTML page. SPA: one entry point, MPA: multiple entry points.
 
 ```js
 module.exports = {
