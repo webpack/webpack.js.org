@@ -24,7 +24,7 @@ The webpack logo should be placed on a white background with enough space around
 
 [svg](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.svg) | [png](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.png) | [jpg](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.jpg)
 
-Just double the size of the inner dark blue cube to get an idea how much space the logo should have.
+Double the size of the inner dark blue cube to get an idea how much space the logo should have.
 
 For dark backgrounds, you can use the negative version of the logo:
 
@@ -57,7 +57,7 @@ Square-sized icon for smaller areas (like favicons):
 
 [svg](https://github.com/webpack/media/blob/master/logo/icon-square-small.svg) | [png](https://github.com/webpack/media/blob/master/logo/icon-square-small.png) | [jpg](https://github.com/webpack/media/blob/master/logo/icon-square-small.jpg)
 
-T> For those of you following our guidelines and have gotten this far, we've made a special smaller size image used especially for custom emoji (like in a slack or gitter channel ;))
+T> For those of you following our guidelines and have gotten this far, we've made a smaller size image used especially for custom emoji (like in a slack or gitter channel ;))
 
 <img src="/assets/icon-square-small-slack.png" width="50" alt="icon square small example">
 
