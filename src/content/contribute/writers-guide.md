@@ -154,7 +154,7 @@ Do not make assumptions when writing the documentation.
 + As we've learned in [production guide](/guides/production/)...
 ```
 
-Please do not assume things are simple. Avoid words like 'just', 'simply'.
+Please do not assume things are 'simple' or 'easy'. Avoid words like 'just', 'simply'.
 
 ```diff
 - Simply run command...
