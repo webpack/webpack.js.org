@@ -1,6 +1,6 @@
 ---
 title: Guides
-sort: 0
+sort: -1
 contributors:
   - skipjack
   - EugeneHlushko
