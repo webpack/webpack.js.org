@@ -1556,7 +1556,7 @@ module.exports = {
   //...
   devServer: {
     writeToDisk: (filePath) => {
-      return /titan\.css$/.test(filePath);
+      return /styles\.css$/.test(filePath);
     }
   }
 };
