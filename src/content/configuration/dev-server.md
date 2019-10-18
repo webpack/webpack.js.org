@@ -13,6 +13,7 @@ contributors:
   - Loonride
   - dmohns
   - EslamHiko
+  - fokusferit
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -1483,7 +1484,7 @@ webpack-dev-server --useLocalIp
 
 `boolean`
 
-Tell dev-server to watch the files served by the [`devServer.contentBase`](#devservercontentbase) option. It is deactivated by default. When enabled, file changes will trigger a full page reload.
+Tell dev-server to watch the files served by the [`devServer.contentBase`](#devservercontentbase) option. It is turned off by default. When enabled, file changes will trigger a full page reload.
 
 __webpack.config.js__
 

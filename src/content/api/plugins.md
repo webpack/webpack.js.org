@@ -9,6 +9,7 @@ contributors:
   - byzyk
   - EugeneHlushko
   - wizardofhogwarts
+  - fokusferit
 ---
 
 Plugins are a key piece of the webpack ecosystem and provide the community with

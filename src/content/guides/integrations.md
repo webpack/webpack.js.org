@@ -7,6 +7,7 @@ contributors:
   - tashian
   - skipjack
   - AnayaDesign
+  - fokusferit
 ---
 
 Let's start by clearing up a common misconception. webpack is a module bundler like [Browserify](http://browserify.org/) or [Brunch](https://brunch.io/). It is _not a task runner_ like [Make](https://www.gnu.org/software/make/), [Grunt](https://gruntjs.com/), or [Gulp](https://gulpjs.com/). Task runners handle automation of common development tasks such as linting, building, or testing your project. Compared to bundlers, task runners have a higher level focus. You can still benefit from their higher level tooling while leaving the problem of bundling to webpack.

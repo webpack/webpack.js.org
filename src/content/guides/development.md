@@ -13,6 +13,7 @@ contributors:
   - byzyk
   - trivikr
   - aholzner
+  - fokusferit
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.

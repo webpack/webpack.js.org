@@ -17,6 +17,7 @@ contributors:
   - eemeli
   - EugeneHlushko
   - g-plane
+  - fokusferit
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -161,7 +162,7 @@ See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplat
 
 > Avoid using this option as it is __deprecated__ and will soon be removed.
 
-Enables line to line mapping for all or some modules. This produces a source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
+Enables line to line mapping for all or some modules. This produces a basic source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
 
 Pass a boolean to enable or disable this feature for all modules (defaults to `false`). Use `object` for granular control, e.g. to enable this feature for all javascript files within a certain directory:
 

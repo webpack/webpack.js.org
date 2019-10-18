@@ -8,6 +8,7 @@ contributors:
   - lricoy
   - madhavarshney
   - wizardofhogwarts
+  - fokusferit
 related:
   - title: Enabling Source Maps
     url: https://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/

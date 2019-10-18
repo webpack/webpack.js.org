@@ -6,6 +6,7 @@ contributors:
 - montogeek
 - jeremenichelli
 - EugeneHlushko
+- fokusferit
 ---
 
 To understand why you should use webpack, let's recap how we used JavaScript on the web before bundlers were a thing.

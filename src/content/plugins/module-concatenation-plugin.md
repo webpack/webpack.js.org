@@ -4,6 +4,7 @@ contributors:
   - skipjack
   - TheLarkInn
   - byzyk
+  - fokusferit
 related:
   - webpack 3: Official Release!!
 ---

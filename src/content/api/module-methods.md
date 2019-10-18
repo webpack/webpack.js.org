@@ -10,6 +10,7 @@ contributors:
   - debs-obrien
   - wizardofhogwarts
   - EugeneHlushko
+  - fokusferit
 related:
   - title: CommonJS Wikipedia
     url: https://en.wikipedia.org/wiki/CommonJS

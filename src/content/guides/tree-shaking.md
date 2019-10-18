@@ -16,6 +16,7 @@ contributors:
   - EugeneHlushko
   - AnayaDesign
   - torifat
+  - fokusferit
 related:
   - title: "webpack 4 beta — try it today!"
     url: https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2#9a67

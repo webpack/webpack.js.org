@@ -8,6 +8,7 @@ contributors:
   - byzyk
   - madhavarshney
   - EugeneHlushko
+  - fokusferit
 ---
 
 The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.

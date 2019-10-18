@@ -6,6 +6,7 @@ contributors:
   - re-fort
   - byzyk
   - seckin92
+  - fokusferit
 ---
 
 Automatically load modules instead of having to `import` or `require` them everywhere.

@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - rouzbeh84
   - byzyk
+  - fokusferit
 ---
 
 Here you can find __webpack__ project brand guidelines, assets, and license. See our official [media repository](https://github.com/webpack/media) for more information and to find the [license](https://github.com/webpack/media/blob/master/LICENSE) that governs this work. Click any of the images to download them.
@@ -57,7 +58,7 @@ Square-sized icon for smaller areas (like favicons):
 
 [svg](https://github.com/webpack/media/blob/master/logo/icon-square-small.svg) | [png](https://github.com/webpack/media/blob/master/logo/icon-square-small.png) | [jpg](https://github.com/webpack/media/blob/master/logo/icon-square-small.jpg)
 
-T> For those of you following our guidelines and have gotten this far, we've made a smaller size image used especially for custom emoji (like in a slack or gitter channel ;))
+T> For those of you following our guidelines and have gotten this far, we've made a specific smaller size image used especially for custom emoji (like in a slack or gitter channel ;))
 
 <img src="/assets/icon-square-small-slack.png" width="50" alt="icon square small example">
 

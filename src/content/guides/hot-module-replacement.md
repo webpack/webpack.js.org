@@ -20,7 +20,7 @@ contributors:
   - dhruvdutt
   - wizardofhogwarts
   - aholzner
-
+  - fokusferit
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -261,7 +261,7 @@ __webpack.config.js__
   };
 ```
 
-Hot loading stylesheets is as intuitiv as importing them into a module:
+Hot loading stylesheets is as intuitive as importing them into a module:
 
 __project__
 

@@ -11,6 +11,7 @@ contributors:
   - jantimon
   - superburrito
   - wizardofhogwarts
+  - fokusferit
 ---
 
 A loader is a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
@@ -36,7 +37,7 @@ module.exports = function(content, map, meta) {
 };
 ```
 
-The `this.callback` method is more flexible as it allows multiple arguments to be passed as opposed to the `content`.
+The `this.callback` method is more flexible as you pass multiple arguments instead of using `content` only.
 
 __sync-loader-with-multiple-results.js__
 

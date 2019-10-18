@@ -6,6 +6,7 @@ contributors:
   - byzyk
   - mrichmond
   - Fental
+  - fokusferit
 related:
   - title: 'webpack default options (source code)'
     url: https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js

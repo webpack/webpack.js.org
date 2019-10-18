@@ -9,7 +9,6 @@ contributors:
   - eko3alpha
   - refactorized
   - byzyk
-  - fokusferit
 ---
 
 webpack has a rich plugin interface. Most of the features within webpack itself use this plugin interface. This makes webpack __flexible__.

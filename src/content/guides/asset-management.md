@@ -10,6 +10,7 @@ contributors:
   - EugeneHlushko
   - AnayaDesign
   - wizardofhogwarts
+  - fokusferit
 ---
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
@@ -454,7 +455,7 @@ __src/data.xml__
 </note>
 ```
 
-Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import it to will contain parsed JSON accessible in your code:
+Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import it to will contain parsed JSON for consumption:
 
 __src/index.js__
 
