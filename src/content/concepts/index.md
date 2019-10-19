@@ -1,6 +1,6 @@
 ---
 title: Concepts
-sort: 0
+sort: -1
 contributors:
   - TheLarkInn
   - jhnns
