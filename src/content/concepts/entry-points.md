@@ -44,7 +44,7 @@ This is a great choice when you are looking to quickly setup a webpack configura
 
 ## Object Syntax
 
-Usage: `entry: {[string entryChunkName]: string | [string]}`
+Usage: `entry: { entryChunkName string [string] }`
 
 __webpack.config.js__
 
