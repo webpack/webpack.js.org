@@ -1,6 +1,6 @@
 ---
 title: Plugins
-sort: 0
+sort: -1
 contributors:
   - simon04
   - gonzoyumo

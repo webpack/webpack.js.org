@@ -334,7 +334,7 @@ For each module, the following details are included in the output as applicable:
 - `building`: time to build the module (e.g. loaders and parsing)
 - `dependencies`: time to identify and connect the module’s dependencies
 
-Paired with `--progress`, `--profile` gives you an in-depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
+Paired with `--progress`, `--profile` gives you an in-depth idea of which step in the compilation is taking how long. This can help you optimize your build in a more informed manner.
 
 ```bash
 webpack --progress --profile
