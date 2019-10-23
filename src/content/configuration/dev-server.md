@@ -805,7 +805,7 @@ T> The browser application name is platform dependent. Don't hard code it in reu
 
 ## `devServer.openPage`
 
-`string` `array = []: string`
+`string` `[string]`
 
 Specify a page to navigate to when opening the browser.
 
