@@ -127,7 +127,7 @@ In every other case, webpack prints out a set of stats showing bundle, chunk and
 
 ### Environment Options
 
-When the webpack configuration [exports a function](/configuration/configuration-types#exporting-a-function), an "environment" may be passed to it.
+When the webpack configuration [exports a function](/configuration/configuration-types/#exporting-a-function), an "environment" may be passed to it.
 
 ```bash
 webpack --env.production    # sets env.production == true
