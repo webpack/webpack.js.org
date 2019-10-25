@@ -1,6 +1,6 @@
 ---
 title: Devtool
-sort: 10
+sort: 12
 contributors:
   - sokra
   - skipjack
@@ -30,29 +30,27 @@ T> The webpack repository contains an [example showing the effect of all `devtoo
 
 T> Instead of using the `devtool` option you can also use `SourceMapDevToolPlugin`/`EvalSourceMapDevToolPlugin` directly as it has more options. Never use both the `devtool` option and plugin together. The `devtool` option adds the plugin internally so you would end up with the plugin applied twice.
 
-devtool                        | build | rebuild | production | quality
------------------------------- | ----- | ------- | ---------- | -----------------------------
-(none)                         | +++   | +++     | yes        | bundled code
-eval                           | +++   | +++     | no         | generated code
-cheap-eval-source-map          | +     | ++      | no         | transformed code (lines only)
-cheap-module-eval-source-map   | o     | ++      | no         | original source (lines only)
-eval-source-map                | --    | +       | no         | original source
-cheap-source-map               | +     | o       | yes        | transformed code (lines only)
-cheap-module-source-map        | o     | -       | yes        | original source (lines only)
-inline-cheap-source-map        | +     | o       | no         | transformed code (lines only)
-inline-cheap-module-source-map | o     | -       | no         | original source (lines only)
-source-map                     | --    | --      | yes        | original source
-inline-source-map              | --    | --      | no         | original source
-hidden-source-map              | --    | --      | yes        | original source
-nosources-source-map           | --    | --      | yes        | without source content
-
-T> `+++` super fast, `++` fast, `+` pretty fast, `o` medium, `-` pretty slow, `--` slow
+devtool                        | build   | rebuild | production | quality
+------------------------------ | ------- | ------- | ---------- | -----------------------------
+(none)                         | fastest | fastest | yes        | bundled code
+eval                           | fastest | fastest | no         | generated code
+cheap-eval-source-map          | fast    | faster  | no         | transformed code (lines only)
+cheap-module-eval-source-map   | slow    | faster  | no         | original source (lines only)
+eval-source-map                | slowest | fast    | no         | original source
+cheap-source-map               | fast    | slow    | yes        | transformed code (lines only)
+cheap-module-source-map        | slow    | slower  | yes        | original source (lines only)
+inline-cheap-source-map        | fast    | slow    | no         | transformed code (lines only)
+inline-cheap-module-source-map | slow    | slower  | no         | original source (lines only)
+source-map                     | slowest | slowest | yes        | original source
+inline-source-map              | slowest | slowest | no         | original source
+hidden-source-map              | slowest | slowest | yes        | original source
+nosources-source-map           | slowest | slowest | yes        | without source content
 
 Some of these values are suited for development and some for production. For development you typically want fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate and support minimizing.
 
 W> There are some issues with Source Maps in Chrome. [We need your help!](https://github.com/webpack/webpack/issues/3165).
 
-T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) to customize the filenames of generated Source Maps.
+T> See [`output.sourceMapFilename`](/configuration/output#outputsourcemapfilename) to customize the filenames of generated Source Maps.
 
 
 ### Qualities
@@ -65,7 +63,7 @@ T> See [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilena
 
 `original source` - You see each module separated from each other, annotated with module names. You see the code before transpilation, as you authored it. This depends on Loader support.
 
-`without source content` - Contents for the sources are not included in the Source Maps. Browsers usually try to load the source from the webserver or filesystem. You have to make sure to set [`output.devtoolModuleFilenameTemplate`](/configuration/output/#output-devtoolmodulefilenametemplate) correctly to match source urls.
+`without source content` - Contents for the sources are not included in the Source Maps. Browsers usually try to load the source from the webserver or filesystem. You have to make sure to set [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate) correctly to match source urls.
 
 `(lines only)` - Source Maps are simplified to a single mapping per line. This usually means a single mapping per statement (assuming you author it this way). This prevents you from debugging execution on statement level and from settings breakpoints on columns of a line. Combining with minimizing is not possible as minimizers usually only emit a single line.
 

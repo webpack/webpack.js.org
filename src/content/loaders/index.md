@@ -1,6 +1,6 @@
 ---
 title: Loaders
-sort: 1
+sort: -1
 contributors:
   - simon04
   - bajras
@@ -39,6 +39,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 - [`ts-loader`](https://github.com/TypeStrong/ts-loader) or [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader) Loads [TypeScript](https://www.typescriptlang.org/) 2.0+ like JavaScript
 - [`coffee-loader`](/loaders/coffee-loader) Loads [CoffeeScript](http://coffeescript.org/) like JavaScript
 - [`fengari-loader`](https://github.com/fengari-lua/fengari-loader/) Loads Lua code using [fengari](https://fengari.io/)
+- [`elm-webpack-loader`](https://github.com/elm-community/elm-webpack-loader) Loads [Elm](https://elm-lang.org/) like JavaScript
 
 
 ## Templating

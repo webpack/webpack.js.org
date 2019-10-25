@@ -1,6 +1,6 @@
 ---
 title: Modules
-sort: 7
+sort: 6
 contributors:
   - TheLarkInn
   - simon04
@@ -32,7 +32,7 @@ In contrast to [Node.js modules](https://nodejs.org/api/modules.html), webpack _
 - An [`@import` statement](https://developer.mozilla.org/en-US/docs/Web/CSS/@import) inside of a css/sass/less file.
 - An image url in a stylesheet (`url(...)`) or html (`<img src=...>`) file.
 
-T> webpack 1 requires a specific loader to convert ES2015 `import`, however this is possible out of the box via webpack 2
+T> webpack 1 requires a specific loader to convert ES2015 `import`; however, this is possible out of the box via webpack 2
 
 ## Supported Module Types
 
@@ -45,6 +45,7 @@ The webpack community has built _loaders_ for a wide variety of popular language
 - [Sass](http://sass-lang.com)
 - [Less](http://lesscss.org)
 - [Stylus](http://stylus-lang.com)
+- [Elm](https://elm-lang.org/)
 
 And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for __any stack__, while staying __non-opinionated__ about your development, testing, and production workflows.
 

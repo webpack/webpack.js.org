@@ -1,6 +1,6 @@
 ---
 title: Code Splitting
-sort: 9
+sort: 5
 contributors:
   - pksjce
   - pastelsky
@@ -84,12 +84,12 @@ module.exports = {
   mode: 'development',
   entry: {
     index: './src/index.js',
-+   another: './src/another-module.js'
++   another: './src/another-module.js',
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  }
+    path: path.resolve(__dirname, 'dist'),
+  },
 };
 ```
 
@@ -128,21 +128,21 @@ __webpack.config.js__
     mode: 'development',
     entry: {
       index: './src/index.js',
-      another: './src/another-module.js'
+      another: './src/another-module.js',
     },
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
 +   optimization: {
 +     splitChunks: {
-+       chunks: 'all'
-+     }
-+   }
++       chunks: 'all',
++     },
++   },
   };
 ```
 
-With the [`optimization.splitChunks`](/plugins/split-chunks-plugin/#optimization-splitchunks) configuration option in place, we should now see the duplicate dependency removed from our `index.bundle.js` and `another.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
+With the [`optimization.splitChunks`](/plugins/split-chunks-plugin/#optimizationsplitchunks) configuration option in place, we should now see the duplicate dependency removed from our `index.bundle.js` and `another.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
 
 ``` bash
 ...
@@ -178,24 +178,23 @@ __webpack.config.js__
   module.exports = {
     mode: 'development',
     entry: {
-+     index: './src/index.js'
--     index: './src/index.js',
--     another: './src/another-module.js'
+      index: './src/index.js',
+-     another: './src/another-module.js',
     },
     output: {
       filename: '[name].bundle.js',
 +     chunkFilename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
 -   optimization: {
 -     splitChunks: {
--       chunks: 'all'
--     }
--   }
+-       chunks: 'all',
+-     },
+-   },
   };
 ```
 
-Note the use of `chunkFilename`, which determines the name of non-entry chunk files. For more information on `chunkFilename`, see [output documentation](/configuration/output/#output-chunkfilename). We'll also update our project to remove the now unused files:
+Note the use of `chunkFilename`, which determines the name of non-entry chunk files. For more information on `chunkFilename`, see [output documentation](/configuration/output/#outputchunkfilename). We'll also update our project to remove the now unused files:
 
 __project__
 
@@ -241,7 +240,7 @@ __src/index.js__
 
 The reason we need `default` is that since webpack 4, when importing a CommonJS module, the import will no longer resolve to the value of `module.exports`, it will instead create an artificial namespace object for the CommonJS module. For more information on the reason behind this, read [webpack 4: import() and CommonJs](https://medium.com/webpack/webpack-4-import-and-commonjs-d619d626b655)
 
-Note the use of `webpackChunkName` in the comment. This will cause our separate bundle to be named `lodash.bundle.js` instead of just `[id].bundle.js`. For more information on `webpackChunkName` and the other available options, see the [`import()` documentation](/api/module-methods#import-). Let's run webpack to see `lodash` separated out to a separate bundle:
+Note the use of `webpackChunkName` in the comment. This will cause our separate bundle to be named `lodash.bundle.js` instead of just `[id].bundle.js`. For more information on `webpackChunkName` and the other available options, see the [`import()` documentation](/api/module-methods#import-1). Let's run webpack to see `lodash` separated out to a separate bundle:
 
 ``` bash
 ...
@@ -279,6 +278,8 @@ __src/index.js__
     document.body.appendChild(component);
   });
 ```
+
+T> It is possible to provide a [dynamic expression](/api/module-methods/#dynamic-expressions-in-import) to `import()` when you might need to import specific module based on a computed variable later.
 
 
 ## Prefetching/Preloading modules
@@ -334,6 +335,7 @@ Once you start splitting your code, it can be useful to analyze the output to ch
 - [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/): Visualize and analyze your bundles to see which modules are taking up space and which might be duplicates.
 - [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer): A plugin and CLI utility that represents bundle content as a convenient interactive zoomable treemap.
 - [webpack bundle optimize helper](https://webpack.jakoblind.no/optimize): This tool will analyze your bundle and give you actionable suggestions on what to improve to reduce your bundle size.
+- [bundle-stats](https://github.com/bundle-stats/bundle-stats): Generate a bundle report(bundle size, assets, modules) and compare the results between different builds.
 
 ## Next Steps
 

@@ -1,6 +1,6 @@
 ---
 title: Externals
-sort: 13
+sort: 15
 contributors:
   - sokra
   - skipjack
@@ -78,8 +78,7 @@ module.exports = {
 };
 ```
 
-`subtract: ['./math', 'subtract']` converts to a parent child construct, where `./math` is the parent module and your bundle only requires the subset under `subtract` variable.
-
+`subtract: ['./math', 'subtract']` allows you select part of a commonjs module, where `./math` is the module and your bundle only requires the subset under the `subtract` variable. This example would translate to `require('./math').subtract;`
 
 ### object
 

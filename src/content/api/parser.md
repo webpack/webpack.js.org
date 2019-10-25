@@ -1,7 +1,7 @@
 ---
 title: Parser Hooks
 group: Plugins
-sort: 4
+sort: 11
 contributors:
   - byzyk
   - DeTeam
@@ -261,7 +261,7 @@ import _, { has } from 'lodash';
 __MyPlugin.js__
 
 ```js
-parser.hooks.import.tap('MyPlugin', (statement, source, exportName, identifierName) => {
+parser.hooks.importSpecifier.tap('MyPlugin', (statement, source, exportName, identifierName) => {
   /* First call
     source == 'lodash'
     exportName == 'default'
@@ -461,7 +461,7 @@ Triggered when parsing the `typeof` of an identifier
 
 Called when parsing a function call.
 
-- Hook Paramaeters: `identifier`
+- Hook Parameters: `identifier`
 - Callback Parameters: `expression`
 
 ```js

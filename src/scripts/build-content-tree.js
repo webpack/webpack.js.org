@@ -5,7 +5,6 @@
 const directoryTree = require('directory-tree');
 const fs = require('fs');
 const path = require('path');
-const { promisify } = require('util');
 
 // Import Utils
 const { restructure } = require('../utilities/content-tree-enhancers.js');
@@ -30,7 +29,7 @@ function buildContentTree(source, output) {
     return console.error('build-content-tree: you must provide a output file name');
   }
 
-  let content = directoryTree(source, { extensions: /\.md/ });
+  let content = directoryTree(source, { extensions: /\.(md|mdx)/ });
 
   content = restructure(content, {
     dir: source

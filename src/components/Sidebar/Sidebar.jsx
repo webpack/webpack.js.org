@@ -10,8 +10,13 @@ import Print from '../Print/Print';
 import './Sidebar.scss';
 
 // Create and export the component
-export default ({ className = '', pages, currentPage, ...props }) => {
+export default ({
+  className = '',
+  pages,
+  currentPage
+}) => {
   let group;
+
   return (
     <nav className={`sidebar ${className}`}>
       <div className="sidebar__inner">
@@ -27,7 +32,7 @@ export default ({ className = '', pages, currentPage, ...props }) => {
           group = page.group;
 
           return (
-            <React.Fragment key={`sidebar-item-${index}`}>
+            <div key={page.url}>
               {displayGroup ? <h4 className="sidebar__group">{group}</h4> : null}
 
               <SidebarItem
@@ -37,7 +42,7 @@ export default ({ className = '', pages, currentPage, ...props }) => {
                 anchors={page.anchors}
                 currentPage={currentPage}
               />
-            </React.Fragment>
+            </div>
           );
         })}
       </div>

@@ -1,6 +1,6 @@
 ---
 title: Watch and WatchOptions
-sort: 12
+sort: 14
 contributors:
   - sokra
   - skipjack
@@ -15,7 +15,7 @@ webpack can watch files and recompile whenever they change. This page explains h
 
 ## `watch`
 
-`boolean: false`
+`boolean = false`
 
 Turn on watch mode. This means that after the initial build, webpack will continue to watch for changes in any of the resolved files.
 
@@ -52,7 +52,7 @@ module.exports = {
 
 ## `watchOptions.aggregateTimeout`
 
-`number: 300`
+`number = 300`
 
 Add a delay before rebuilding once the first file changed. This allows webpack to aggregate any other changes made during this time period into one rebuild. Pass a value in milliseconds:
 
@@ -101,7 +101,7 @@ T> If you use `require.context`, webpack will watch your entire directory. You w
 
 ## `watchOptions.poll`
 
-`boolean: false` `number`
+`boolean = false` `number`
 
 Turn on [polling](https://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
 
@@ -121,7 +121,7 @@ T> If watching does not work for you, try out this option. Watching does not wor
 
 ## `info-verbosity`
 
-`string: 'none', 'info', 'verbose'`
+`string: 'none' | 'info' | 'verbose'`
 
 Controls verbosity of the lifecycle messaging, e.g. the `Started watching files...` log. Setting `info-verbosity` to `verbose` will also message to console at the beginning and the end of incremental build. `info-verbosity` is set to `info` by default.
 

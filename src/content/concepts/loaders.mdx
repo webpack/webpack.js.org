@@ -1,6 +1,6 @@
 ---
 title: Loaders
-sort: 4
+sort: 3
 contributors:
   - manekinekko
   - evenstensberg
@@ -25,8 +25,7 @@ Loaders are transformations that are applied on the source code of a module. The
 For example, you can use loaders to tell webpack to load a CSS file or to convert TypeScript to JavaScript. To do this, you would start by installing the loaders you need:
 
 ``` bash
-npm install --save-dev css-loader
-npm install --save-dev ts-loader
+npm install --save-dev css-loader ts-loader
 ```
 
 And then instruct webpack to use the [`css-loader`](/loaders/css-loader) for every `.css` file and the [`ts-loader`](https://github.com/TypeStrong/ts-loader) for all `.ts` files:
@@ -56,7 +55,7 @@ There are three ways to use loaders in your application:
 
 ### Configuration
 
-[`module.rules`](/configuration/module/#module-rules) allows you to specify several loaders within your webpack configuration.
+[`module.rules`](/configuration/module/#modulerules) allows you to specify several loaders within your webpack configuration.
 This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.
 
 Loaders are evaluated/executed from right to left (or from bottom to top). In the example below execution starts with sass-loader, continues with css-loader and finally ends with style-loader. See ["Loader Features"](/concepts/loaders/#loader-features) for more information about loaders order.
@@ -141,8 +140,7 @@ This uses the `jade-loader` for `.jade` files, and the [`style-loader`](/loaders
 - Plugins can give loaders more features.
 - Loaders can emit additional arbitrary files.
 
-Loaders allow more power in the JavaScript ecosystem through preprocessing
-functions (loaders). Users now have more flexibility to include fine-grained logic such as compression, packaging, language translations and [more](/loaders).
+Loaders provide a way to customize the output through their preprocessing functions. Users now have more flexibility to include fine-grained logic such as compression, packaging, language translations and [more](/loaders).
 
 
 ## Resolving Loaders

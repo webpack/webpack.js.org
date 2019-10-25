@@ -1,6 +1,6 @@
 ---
 title: Hot Module Replacement
-sort: 6
+sort: 15
 contributors:
   - jmreidy
   - jhnns
@@ -18,6 +18,8 @@ contributors:
   - AnayaDesign
   - aviyacohen
   - dhruvdutt
+  - wizardofhogwarts
+  - aholzner
 
 related:
   - title: Concepts - Hot Module Replacement
@@ -35,7 +37,7 @@ W> __HMR__ is not intended for use in production, meaning it should only be used
 
 ## Enabling HMR
 
-This feature is great for productivity. All we need to do is update our [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration, and use webpack's built in HMR plugin. We'll also remove the entry point for `print.js` as it will now be consumed by the `index.js` module.
+This feature is great for productivity. All we need to do is update our [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration, and use webpack's built-in HMR plugin. We'll also remove the entry point for `print.js` as it will now be consumed by the `index.js` module.
 
 T> If you took the route of using `webpack-dev-middleware` instead of `webpack-dev-server`, please use the [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) package to enable HMR on your custom server or application.
 
@@ -44,32 +46,29 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
-+ const webpack = require('webpack');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
--      app: './src/index.js',
--      print: './src/print.js'
-+      app: './src/index.js'
+       app: './src/index.js',
+-      print: './src/print.js',
     },
     devtool: 'inline-source-map',
     devServer: {
       contentBase: './dist',
-+     hot: true
++     hot: true,
     },
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Hot Module Replacement'
+        title: 'Hot Module Replacement',
       }),
-+     new webpack.HotModuleReplacementPlugin()
     ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
@@ -114,7 +113,7 @@ __print.js__
 ``` diff
   export default function printMe() {
 -   console.log('I get called from print.js!');
-+   console.log('Updating print.js...')
++   console.log('Updating print.js...');
   }
 ```
 
@@ -151,7 +150,7 @@ const config = require('./webpack.config.js');
 const options = {
   contentBase: './dist',
   hot: true,
-  host: 'localhost'
+  host: 'localhost',
 };
 
 webpackDevServer.addDevServerEntrypoints(config, options);
@@ -229,38 +228,36 @@ __webpack.config.js__
 ```diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
-  const webpack = require('webpack');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
-      app: './src/index.js'
+      app: './src/index.js',
     },
     devtool: 'inline-source-map',
     devServer: {
       contentBase: './dist',
-      hot: true
+      hot: true,
     },
 +   module: {
 +     rules: [
 +       {
 +         test: /\.css$/,
-+         use: ['style-loader', 'css-loader']
-+       }
-+     ]
++         use: ['style-loader', 'css-loader'],
++       },
++     ],
 +   },
     plugins: [
       // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Hot Module Replacement'
+        title: 'Hot Module Replacement',
       }),
-      new webpack.HotModuleReplacementPlugin()
     ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
@@ -343,5 +340,6 @@ There are many other loaders and examples out in the community to make HMR inter
 - [Vue Loader](https://github.com/vuejs/vue-loader): This loader supports HMR for vue components out of the box.
 - [Elm Hot webpack Loader](https://github.com/klazuka/elm-hot-webpack-loader): Supports HMR for the Elm programming language.
 - [Angular HMR](https://github.com/gdi2290/angular-hmr): No loader necessary! A simple change to your main NgModule file is all that's required to have full control over the HMR APIs.
+- [Svelte Loader](https://github.com/sveltejs/svelte-loader): This loader supports HMR for Svelte components out of the box.
 
-T> If you know of any other loaders or plugins that help with or enhance Hot Module Replacement please submit a pull request to add to this list!
+T> If you know of any other loaders or plugins that help with or enhance HMR, please submit a pull request to add them to this list!

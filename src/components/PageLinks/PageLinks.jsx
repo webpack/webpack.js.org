@@ -26,14 +26,10 @@ export default ({ page = {}, ...props }) => {
         <i className="page-links__icon icon-edit" />
       </a>
       <span className="page-links__gap">|</span>
-      <a
-        className="page-links__link page-links__print"
-        onClick={_handlePrintClick}
-        title="Print this page"
-      >
+      <button className="page-links__link page-links__print as-link" onClick={_handlePrintClick} title="Print this page">
         Print Document
         <img src={icon} />
-      </a>
+      </button>
     </div>
   );
 };

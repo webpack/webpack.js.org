@@ -4,7 +4,6 @@ import Banner from 'react-banner';
 
 // Import Components
 import Link from '../Link/Link';
-import Container from '../Container/Container';
 import Logo from '../Logo/Logo';
 import Dropdown from '../Dropdown/Dropdown';
 
@@ -34,7 +33,13 @@ export default class Navigation extends React.Component {
             content: <i aria-hidden="true" className="icon-github" />
           },
           {
-            title: 'Webpack on Stack Overflow',
+            title: 'webpack on Twitter',
+            url: 'https://twitter.com/webpack',
+            className: 'navigation__item--icon',
+            content: <i aria-hidden="true" className="icon-twitter" />
+          },
+          {
+            title: 'webpack on Stack Overflow',
             url: 'https://stackoverflow.com/questions/tagged/webpack',
             className: 'navigation__item--icon',
             content: <i aria-hidden="true" className="icon-stack-overflow" />

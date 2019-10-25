@@ -1,6 +1,6 @@
 ---
 title: Environment Variables
-sort: 16
+sort: 8
 contributors:
   - simon04
   - grisanu
@@ -41,8 +41,8 @@ module.exports = env => {
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 };
 ```

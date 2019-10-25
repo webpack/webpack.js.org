@@ -1,6 +1,6 @@
 ---
 title: Targets
-sort: 10
+sort: 9
 contributors:
   - TheLarkInn
   - rouzbeh84
@@ -65,7 +65,7 @@ The example above will create a `lib.js` and `lib.node.js` file in your `dist` f
 
 ## Resources
 
-As seen from the options above there are multiple different deployment _targets_ that you can choose from. Below is a list of examples, and resources that you can refer to.
+As seen from the options above, there are multiple deployment _targets_ that you can choose from. Below is a list of examples and resources that you can refer to.
 
 -  __[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)__: A great resource for testing and viewing different webpack _targets_. Also great for bug reporting.
 - __[Boilerplate of Electron-React Application](https://github.com/chentsulin/electron-react-boilerplate)__: A good example of a build process for electron's main process and renderer process.

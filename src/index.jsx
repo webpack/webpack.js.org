@@ -10,8 +10,10 @@ import Site from './components/Site/Site';
 // Import helpers
 import isClient from './utilities/is-client';
 
-const Router = process.env.NODE_ENV === 'production' ? AnalyticsRouter : BrowserRouter;
-const render = process.env.NODE_ENV === 'production' ? ReactDOM.hydrate : ReactDOM.render;
+const isProduction = process.env.NODE_ENV === 'production';
+
+const Router = isProduction ? AnalyticsRouter : BrowserRouter;
+const render = isProduction ? ReactDOM.hydrate : ReactDOM.render;
 
 // Client Side Rendering
 if (isClient) {
