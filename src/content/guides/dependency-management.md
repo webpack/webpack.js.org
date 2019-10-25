@@ -1,11 +1,12 @@
 ---
 title: Dependency Management
-sort: 20
+sort: 12
 contributors:
   - ndelangen
   - chrisVillanueva
   - sokra
   - byzyk
+  - AnayaDesign
 ---
 
 > es6 modules
@@ -17,7 +18,7 @@ contributors:
 
 ## require with expression
 
-A context is created if your request contains expressions, so the **exact** module is not known on compile time.
+A context is created if your request contains expressions, so the __exact__ module is not known on compile time.
 
 Example:
 
@@ -32,9 +33,9 @@ Directory: ./template
 Regular expression: /^.*\.ejs$/
 ```
 
-**context module**
+__context module__
 
-A context module is generated. It contains references to **all modules in that directory** that can be required with a request matching the regular expression. The context module contains a map which translates requests to module ids.
+A context module is generated. It contains references to __all modules in that directory__ that can be required with a request matching the regular expression. The context module contains a map which translates requests to module ids.
 
 Example:
 
@@ -63,7 +64,7 @@ webpack parses for `require.context()` in the code while building.
 The syntax is as follows:
 
 ```javascript
-require.context(directory, useSubdirectories = false, regExp = /^\.\//);
+require.context(directory, useSubdirectories = true, regExp = /^\.\/.*$/, mode = 'sync');
 ```
 
 Examples:
@@ -101,7 +102,7 @@ importAll(require.context('../components/', true, /\.js$/));
 ```
 
 ```javascript
-var cache = {};
+const cache = {};
 
 function importAll (r) {
   r.keys().forEach(key => cache[key] = r(key));

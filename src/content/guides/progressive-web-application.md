@@ -1,9 +1,12 @@
 ---
 title: Progressive Web Application
-sort: 14
+sort: 21
 contributors:
   - johnnyreilly
   - chenxsan
+  - EugeneHlushko
+  - benschac
+  - aholzner
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -33,6 +36,8 @@ __package.json__
 }
 ```
 
+Note: [webpack DevServer](/configuration/dev-server/) writes in-memory by default. We'll need to enable [writeToDisk](/configuration/dev-server#devserverwritetodisk-) option in order for http-server to be able to serve files from `./dist` directory.
+
 If you haven't previously done so, run the command `npm run build` to build your project. Then run the command `npm start`. This should produce the following output:
 
 ``` bash
@@ -46,7 +51,7 @@ Available on:
 Hit CTRL-C to stop the server
 ```
 
-If you open your browser to `http://localhost:8080` (i.e. `http://127.0.0.1`) you should see your webpack application being served up from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.  
+If you open your browser to `http://localhost:8080` (i.e. `http://127.0.0.1`) you should see your webpack application being served from the `dist` directory. If you stop the server and refresh, the webpack application is no longer available.
 
 This is what we aim to change. Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.
 
@@ -64,58 +69,46 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const CleanWebpackPlugin = require('clean-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 + const WorkboxPlugin = require('workbox-webpack-plugin');
 
   module.exports = {
     entry: {
       app: './src/index.js',
-      print: './src/print.js'
+      print: './src/print.js',
     },
-  plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
--     title: 'Output Management'
-+     title: 'Progressive Web Application'
--   })
-+   }),
-+   new WorkboxPlugin.GenerateSW({
-+     // these options encourage the ServiceWorkers to get in there fast 
-+     // and not allow any straggling "old" SWs to hang around
-+     clientsClaim: true,
-+     skipWaiting: true
-+   })
-  ],
+    plugins: [
+      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      new CleanWebpackPlugin(),
+      new HtmlWebpackPlugin({
+-       title: 'Output Management',
++       title: 'Progressive Web Application',
+      }),
++     new WorkboxPlugin.GenerateSW({
++       // these options encourage the ServiceWorkers to get in there fast
++       // and not allow any straggling "old" SWs to hang around
++       clientsClaim: true,
++       skipWaiting: true,
++     }),
+    ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
 With that in place, let's see what happens when we do an `npm run build`:
 
 ``` bash
-clean-webpack-plugin: /mnt/c/Source/webpack-follow-along/dist has been removed.
-Hash: 6588e31715d9be04be25
-Version: webpack 3.10.0
-Time: 782ms
-                                                Asset       Size  Chunks                    Chunk Names
-                                        app.bundle.js     545 kB    0, 1  [emitted]  [big]  app
-                                      print.bundle.js    2.74 kB       1  [emitted]         print
-                                           index.html  254 bytes          [emitted]
+...
+                  Asset       Size  Chunks                    Chunk Names
+          app.bundle.js     545 kB    0, 1  [emitted]  [big]  app
+        print.bundle.js    2.74 kB       1  [emitted]         print
+             index.html  254 bytes          [emitted]
 precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js  268 bytes          [emitted]
-                                    service-worker.js       1 kB          [emitted]
-   [0] ./src/print.js 87 bytes {0} {1} [built]
-   [1] ./src/index.js 477 bytes {0} [built]
-   [3] (webpack)/buildin/global.js 509 bytes {0} [built]
-   [4] (webpack)/buildin/module.js 517 bytes {0} [built]
-    + 1 hidden module
-Child html-webpack-plugin for "index.html":
-     1 asset
-       [2] (webpack)/buildin/global.js 509 bytes {0} [built]
-       [3] (webpack)/buildin/module.js 517 bytes {0} [built]
-        + 2 hidden modules
+      service-worker.js       1 kB          [emitted]
+...
 ```
 
 As you can see, we now have 2 extra files being generated; `service-worker.js` and the more verbose `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js`. `service-worker.js` is the Service Worker file and `precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js` is a file that `service-worker.js` requires so it can run. Your own generated files will likely be different; but you should have an `service-worker.js` file there.

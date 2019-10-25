@@ -25,13 +25,30 @@ new webpack.BannerPlugin(options);
 
 ```js
 {
-  banner: string, // the banner as string, it will be wrapped in a comment
+  banner: string | function, // the banner as string or function, it will be wrapped in a comment
   raw: boolean, // if true, banner will not be wrapped in a comment
   entryOnly: boolean, // if true, the banner will only be added to the entry chunks
   test: string | RegExp | Array,
   include: string | RegExp | Array,
   exclude: string | RegExp | Array,
 }
+```
+
+## Usage
+
+
+```javascript
+import webpack from 'webpack';
+
+// string
+new webpack.BannerPlugin({
+  banner: 'hello world'
+});
+
+// function
+new webpack.BannerPlugin({
+  banner: (yourVariable) => { return `yourVariable: ${yourVariable}`; }
+});
 ```
 
 

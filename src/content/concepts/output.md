@@ -1,11 +1,12 @@
 ---
 title: Output
-sort: 3
+sort: 2
 contributors:
   - TheLarkInn
   - chyipin
   - rouzbeh84
   - byzyk
+  - EugeneHlushko
 ---
 
 Configuring the `output` configuration options tells webpack how to write the compiled files to disk. Note that, while there can be multiple `entry` points, only one `output` configuration is specified.
@@ -13,11 +14,9 @@ Configuring the `output` configuration options tells webpack how to write the co
 
 ## Usage
 
-The minimum requirements for the `output` property in your webpack config is to set its value to an object including the following thing:
+The minimum requirement for the `output` property in your webpack configuration is to set its value to an object and provide an [`output.filename`](/configuration/output/#outputfilename) to use for the output file(s):
 
-- A `filename` to use for the output file(s).
-
-**webpack.config.js**
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -32,7 +31,7 @@ This configuration would output a single `bundle.js` file into the `dist` direct
 
 ## Multiple Entry Points
 
-If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use [substitutions](/configuration/output#output-filename) to ensure that each file has a unique name.
+If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use [substitutions](/configuration/output#outputfilename) to ensure that each file has a unique name.
 
 ```javascript
 module.exports = {
@@ -54,14 +53,14 @@ module.exports = {
 
 Here's a more complicated example of using a CDN and hashes for assets:
 
-**config.js**
+__config.js__
 
 ```javascript
 module.exports = {
   //...
   output: {
     path: '/home/proj/cdn/assets/[hash]',
-    publicPath: 'http://cdn.example.com/assets/[hash]/'
+    publicPath: 'https://cdn.example.com/assets/[hash]/'
   }
 };
 ```
