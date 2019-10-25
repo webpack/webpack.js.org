@@ -15,7 +15,7 @@ The `stats` option lets you precisely control what bundle information gets displ
 
 T> For webpack-dev-server, this property needs to be in the `devServer` object.
 
-T> For webpack-dev-middleware, this property needs to be in the `webpack-dev-middleware options` object.
+T> For webpack-dev-middleware, this property needs to be in the webpack-dev-middleware's `options` object.
 
 W> This option does not have any effect when using the Node.js API.
 
