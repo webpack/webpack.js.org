@@ -27,7 +27,11 @@ const fetch = {
 const api = new GithubAPI();
 
 async function paginate(org) {
-  let response = await api.repos.listForOrg({ org, type: 'public', per_page: 100 });
+  let response = await api.repos.listForOrg({
+    org,
+    type: 'public',
+    per_page: 100,
+  });
   let { data } = response;
 
   while (api.hasNextPage(response)) {

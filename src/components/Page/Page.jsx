@@ -19,7 +19,9 @@ class Page extends React.Component {
     const isDynamicContent = content instanceof Promise;
 
     this.state = {
-      content: isDynamicContent ? PlaceholderString() : content.default || content,
+      content: isDynamicContent
+        ? PlaceholderString()
+        : content.default || content,
       contentLoaded: isDynamicContent ? false : true,
     };
   }
@@ -48,7 +50,8 @@ class Page extends React.Component {
 
     const { contentLoaded } = this.state;
     const loadRelated = contentLoaded && related && related.length !== 0;
-    const loadContributors = contentLoaded && contributors && contributors.length !== 0;
+    const loadContributors =
+      contentLoaded && contributors && contributors.length !== 0;
 
     const { content } = this.state;
 

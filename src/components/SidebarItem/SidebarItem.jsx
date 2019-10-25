@@ -17,12 +17,19 @@ export default class SidebarItem extends React.Component {
     return (
       <div className={`${block} ${openMod} ${disabledMod}`}>
         {anchors.length > 0 ? (
-          <i className={`${block}__toggle icon-chevron-right`} onClick={this._toggle.bind(this)} />
+          <i
+            className={`${block}__toggle icon-chevron-right`}
+            onClick={this._toggle.bind(this)}
+          />
         ) : (
           <i className={`${block}__toggle icon-vertical-bar`} />
         )}
 
-        <Link key={this.props.url} className={`${block}__title`} to={this.props.url}>
+        <Link
+          key={this.props.url}
+          className={`${block}__title`}
+          to={this.props.url}
+        >
           {title}
         </Link>
 

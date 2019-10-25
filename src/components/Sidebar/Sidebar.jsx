@@ -29,7 +29,9 @@ export default ({ className = '', pages, currentPage }) => {
 
           return (
             <div key={page.url}>
-              {displayGroup ? <h4 className="sidebar__group">{group}</h4> : null}
+              {displayGroup ? (
+                <h4 className="sidebar__group">{group}</h4>
+              ) : null}
 
               <SidebarItem
                 index={index}

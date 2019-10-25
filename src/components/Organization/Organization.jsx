@@ -12,14 +12,17 @@ const Organization = (props) => {
       <h1>The Organization</h1>
 
       <p>
-        The list below provides a brief overview of all commonly used projects in the webpack
-        ecosystem.
+        The list below provides a brief overview of all commonly used projects
+        in the webpack ecosystem.
       </p>
 
       <div className="organization__projects">
         {Items.map((org) => (
           <div className="organization__project" key={org.repo}>
-            <a className="organization__title" href={`https://github.com/${org.repo}`}>
+            <a
+              className="organization__title"
+              href={`https://github.com/${org.repo}`}
+            >
               <h4>{org.repo}</h4>
             </a>
             <p>{org.description}</p>

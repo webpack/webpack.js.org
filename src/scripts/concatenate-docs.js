@@ -35,7 +35,9 @@ function getDirectoryRecursive(basePath) {
       if (fs.statSync(fullPath).isDirectory()) {
         getDirectoryRecursive(fullPath);
       } else if (fullPath.endsWith('.md') || fullPath.endsWith('.mdx')) {
-        let fc = (fileContents[fileContents.length] = front(fs.readFileSync(fullPath).toString()));
+        let fc = (fileContents[fileContents.length] = front(
+          fs.readFileSync(fullPath).toString()
+        ));
       }
     }
 
@@ -45,8 +47,14 @@ function getDirectoryRecursive(basePath) {
         const left = fileContents[i].attributes;
         const right = fileContents[j].attributes;
 
-        if (left.sort > right.sort || (left.sort == right.sort && left.title > right.title)) {
-          [fileContents[i], fileContents[j]] = [fileContents[j], fileContents[i]];
+        if (
+          left.sort > right.sort ||
+          (left.sort == right.sort && left.title > right.title)
+        ) {
+          [fileContents[i], fileContents[j]] = [
+            fileContents[j],
+            fileContents[i],
+          ];
         }
       }
 
@@ -80,5 +88,7 @@ getDirectoryRecursive(rootPath);
 
 // end message
 process.on('exit', () =>
-  console.info(`Successfully created "${outFileName}" files in each directory within ${rootPath}`)
+  console.info(
+    `Successfully created "${outFileName}" files in each directory within ${rootPath}`
+  )
 );

@@ -40,7 +40,11 @@ export default class Contributors extends React.Component {
               >
                 <img
                   alt={contributor}
-                  src={inView ? `https://github.com/${contributor}.png?size=90` : SmallIcon}
+                  src={
+                    inView
+                      ? `https://github.com/${contributor}.png?size=90`
+                      : SmallIcon
+                  }
                 />
                 <span className="contributor__name"> {contributor}</span>
               </a>

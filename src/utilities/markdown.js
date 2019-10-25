@@ -67,12 +67,18 @@ module.exports = function() {
 
     if (detailsEnabled) {
       rendered = rendered.replace(/MARKDOWNDETAILSSTART.*?\n/g, '<details>');
-      rendered = rendered.replace(/\n.*?MARKDOWNDETAILSEND.*?\n/g, '</details>');
+      rendered = rendered.replace(
+        /\n.*?MARKDOWNDETAILSEND.*?\n/g,
+        '</details>'
+      );
       rendered = rendered.replace(
         /\n.*?MARKDOWNSUMMARYSTART.*?\n/g,
         '<summary><span class="code-details-summary-span">'
       );
-      rendered = rendered.replace(/\n.*?MARKDOWNSUMMARYEND.*?\n/g, '</span></summary>');
+      rendered = rendered.replace(
+        /\n.*?MARKDOWNSUMMARYEND.*?\n/g,
+        '</span></summary>'
+      );
     }
 
     return rendered;
@@ -150,7 +156,9 @@ function parseContent(data) {
 }
 
 function parseAnchor(string) {
-  var stripped = string.replace(/\[(.+)\]\(.+\)/gi, '$1').replace(/(<([^>]+)>)/gi, '');
+  var stripped = string
+    .replace(/\[(.+)\]\(.+\)/gi, '$1')
+    .replace(/(<([^>]+)>)/gi, '');
   var clean = stripped.replace(/`/g, '');
 
   return {
@@ -195,11 +203,15 @@ function handleHTML(t) {
   let tokens = [];
 
   // Split code in markdown, so that HTML inside code is not parsed
-  const codeArray = t.text.split(/(```(.|\n)*```)/g).filter((v) => v && v !== '' && v !== '\n');
+  const codeArray = t.text
+    .split(/(```(.|\n)*```)/g)
+    .filter((v) => v && v !== '' && v !== '\n');
 
   // if only one item in codeArray, then it's already parsed
   if (codeArray.length == 1) {
-    const htmlArray = codeArray[0].split(/\s*(<[^>]*>)/g).filter((v) => v !== '' && v !== '\n');
+    const htmlArray = codeArray[0]
+      .split(/\s*(<[^>]*>)/g)
+      .filter((v) => v !== '' && v !== '\n');
 
     if (htmlArray.length == 1) {
       return t;
@@ -210,7 +222,9 @@ function handleHTML(t) {
     // if item is not code, then check for html tags and parse accordingly
     if (item.indexOf('```') !== 0) {
       // split all html tags
-      const htmlArray = item.split(/\s*(<[^>]*>)/g).filter((v) => v !== '' && v !== '\n');
+      const htmlArray = item
+        .split(/\s*(<[^>]*>)/g)
+        .filter((v) => v !== '' && v !== '\n');
       tokens = handleHTMLSplit(tokens, htmlArray, '');
     }
     // normally parse code block
@@ -321,7 +335,11 @@ function handleTok() {
       );
     }
     case 'code': {
-      return this.renderer.code(this.token.text, this.token.lang, this.token.escaped);
+      return this.renderer.code(
+        this.token.text,
+        this.token.lang,
+        this.token.escaped
+      );
     }
     case 'blockquote_start': {
       while (this.next().type !== 'blockquote_end') {

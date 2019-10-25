@@ -5,7 +5,11 @@ import { hot as Hot } from 'react-hot-loader';
 import DocumentTitle from 'react-document-title';
 
 // Import Utilities
-import { extractPages, extractSections, getPageTitle } from '../../utilities/content-utils';
+import {
+  extractPages,
+  extractSections,
+  getPageTitle,
+} from '../../utilities/content-utils';
 import isClient from '../../utilities/is-client';
 
 // Import Components
@@ -62,8 +66,12 @@ class Site extends React.Component {
                 content: 'Documentation',
                 url: '/concepts/',
                 isActive: (url) =>
-                  /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
-                children: this._strip(sections.filter((item) => item.name !== 'contribute')),
+                  /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
+                    url
+                  ),
+                children: this._strip(
+                  sections.filter((item) => item.name !== 'contribute')
+                ),
               },
               { content: 'Contribute', url: '/contribute/' },
               { content: 'Vote', url: '/vote/' },
@@ -95,7 +103,10 @@ class Site extends React.Component {
                   <Route path="/vote" component={Vote} />
                   <Route path="/organization" component={Organization} />
                   <Route path="/starter-kits" component={StarterKits} />
-                  <Route path="/app-shell" component={() => <React.Fragment />} />
+                  <Route
+                    path="/app-shell"
+                    component={() => <React.Fragment />}
+                  />
                   {pages.map((page) => (
                     <Route
                       key={page.url}
@@ -115,7 +126,9 @@ class Site extends React.Component {
                                 section
                                   ? section.children
                                   : Content.children.filter(
-                                      (item) => item.type !== 'directory' && item.url !== '/'
+                                      (item) =>
+                                        item.type !== 'directory' &&
+                                        item.url !== '/'
                                     )
                               )}
                             />
@@ -155,7 +168,9 @@ class Site extends React.Component {
    * @return {array}       - ...
    */
   _strip = (array) => {
-    let anchorTitleIndex = array.findIndex((item) => item.name.toLowerCase() === 'index.md');
+    let anchorTitleIndex = array.findIndex(
+      (item) => item.name.toLowerCase() === 'index.md'
+    );
 
     if (anchorTitleIndex !== -1) {
       array.unshift(array[anchorTitleIndex]);

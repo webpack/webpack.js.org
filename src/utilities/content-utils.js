@@ -23,7 +23,9 @@ export const walkContent = (tree, callback) => {
 export const flattenContent = (tree) => {
   if (tree.children) {
     return tree.children.reduce((flat, item) => {
-      return flat.concat(Array.isArray(item.children) ? flattenContent(item) : item);
+      return flat.concat(
+        Array.isArray(item.children) ? flattenContent(item) : item
+      );
     }, []);
   } else return [];
 };

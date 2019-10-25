@@ -30,7 +30,10 @@ export default class SidebarMobile extends React.Component {
         />
 
         <div className="sidebar-mobile__content">
-          <i className="sidebar-mobile__close icon-cross" onClick={toggle.bind(null, false)} />
+          <i
+            className="sidebar-mobile__close icon-cross"
+            onClick={toggle.bind(null, false)}
+          />
 
           {this._getSections()}
         </div>
@@ -61,7 +64,9 @@ export default class SidebarMobile extends React.Component {
 
       return (
         <div
-          className={`sidebar-mobile__section ${active ? 'sidebar-mobile__section--active' : ''}`}
+          className={`sidebar-mobile__section ${
+            active ? 'sidebar-mobile__section--active' : ''
+          }`}
           key={section.url}
         >
           <Link
@@ -168,10 +173,16 @@ export default class SidebarMobile extends React.Component {
     this._container.style.transform = '';
 
     // are we open?
-    if (isOpen && this._initialTouchPosition.x - this._lastTouchPosition.x > threshold) {
+    if (
+      isOpen &&
+      this._initialTouchPosition.x - this._lastTouchPosition.x > threshold
+    ) {
       // this is in top level nav callback
       this.props.toggle(false);
-    } else if (!isOpen && this._lastTouchPosition.x - this._initialTouchPosition.x > threshold) {
+    } else if (
+      !isOpen &&
+      this._lastTouchPosition.x - this._initialTouchPosition.x > threshold
+    ) {
       this.props.toggle(true);
       e.preventDefault();
       e.stopPropagation();

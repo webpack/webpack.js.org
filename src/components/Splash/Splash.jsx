@@ -40,9 +40,10 @@ const Splash = () => (
           <h1>Support the Team</h1>
 
           <p>
-            Through contributions, donations, and sponsorship, you allow webpack to thrive. Your
-            donations directly support office hours, continued enhancements, and most importantly,
-            great documentation and learning material!
+            Through contributions, donations, and sponsorship, you allow webpack
+            to thrive. Your donations directly support office hours, continued
+            enhancements, and most importantly, great documentation and learning
+            material!
           </p>
 
           {isClient ? (

@@ -8,9 +8,21 @@ export default class Dropdown extends React.Component {
   };
 
   componentDidMount() {
-    document.addEventListener('keyup', this._closeDropdownOnEsc.bind(this), true);
-    document.addEventListener('focus', this._closeDropdownIfFocusLost.bind(this), true);
-    document.addEventListener('click', this._closeDropdownIfFocusLost.bind(this), true);
+    document.addEventListener(
+      'keyup',
+      this._closeDropdownOnEsc.bind(this),
+      true
+    );
+    document.addEventListener(
+      'focus',
+      this._closeDropdownIfFocusLost.bind(this),
+      true
+    );
+    document.addEventListener(
+      'click',
+      this._closeDropdownIfFocusLost.bind(this),
+      true
+    );
   }
 
   _closeDropdownOnEsc(e) {
@@ -45,7 +57,11 @@ export default class Dropdown extends React.Component {
           aria-label="Select language"
           onClick={this._handleClick.bind(this)}
         >
-          <img className="dropdown__language" alt="select language" src={LanguageIcon} />
+          <img
+            className="dropdown__language"
+            alt="select language"
+            src={LanguageIcon}
+          />
           {/* Commented out until media breakpoints are in place
           <span>{ items[0].title }</span> */}
           <i aria-hidden="true" className="dropdown__arrow" />
@@ -56,8 +72,14 @@ export default class Dropdown extends React.Component {
               return (
                 <li key={item.title}>
                   <a
-                    onKeyDown={this._handleArrowKeys.bind(this, i, items.length - 1)}
-                    ref={(node) => (this.links ? this.links.push(node) : (this.links = [node]))}
+                    onKeyDown={this._handleArrowKeys.bind(
+                      this,
+                      i,
+                      items.length - 1
+                    )}
+                    ref={(node) =>
+                      this.links ? this.links.push(node) : (this.links = [node])
+                    }
                     href={item.url}
                   >
                     <span lang={item.lang}>{item.title}</span>

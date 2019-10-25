@@ -98,7 +98,8 @@ export default class Cube extends React.Component {
         tick();
       };
 
-      let tick = () => setTimeout(() => requestAnimationFrame(animation), repeatDelay);
+      let tick = () =>
+        setTimeout(() => requestAnimationFrame(animation), repeatDelay);
 
       this._timeout = tick();
     }

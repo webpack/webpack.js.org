@@ -34,7 +34,9 @@ export default class TextRotater extends React.PureComponent {
       ref: (c) => (this.content = c),
     });
 
-    const nextChild = React.cloneElement(children[(currentIndex + 1) % childrenCount]);
+    const nextChild = React.cloneElement(
+      children[(currentIndex + 1) % childrenCount]
+    );
 
     return (
       <div className="text-rotater">
@@ -85,7 +87,8 @@ export default class TextRotater extends React.PureComponent {
 
       this.setState(
         {
-          currentIndex: (this.state.currentIndex + 1) % React.Children.count(children),
+          currentIndex:
+            (this.state.currentIndex + 1) % React.Children.count(children),
         },
         () => {
           setTimeout(() => {

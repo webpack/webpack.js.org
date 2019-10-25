@@ -20,7 +20,8 @@ class MessageBar extends React.Component {
         <Container className="notification-bar__inner">
           <p>
             Sponsor webpack and get apparel from the{' '}
-            <a href="https://webpack.threadless.com">official shop</a>! All proceeds go to our{' '}
+            <a href="https://webpack.threadless.com">official shop</a>! All
+            proceeds go to our{' '}
             <a href="https://opencollective.com/webpack">open collective</a>!
           </p>
           {localStorageIsEnabled ? (
@@ -67,7 +68,9 @@ export default class NotificationBar extends React.Component {
     const { dismissed } = this.state;
 
     return (
-      <React.Fragment>{!dismissed ? <MessageBar onClose={this.onClose} /> : null}</React.Fragment>
+      <React.Fragment>
+        {!dismissed ? <MessageBar onClose={this.onClose} /> : null}
+      </React.Fragment>
     );
   }
 }
