@@ -178,7 +178,7 @@ module.exports = {
 
 ## Base Configuration with source map 
 
- Source maps is a useful debugging tool to enable you to view where the original code was
+ Source maps is a useful debugging tool to enable you to view where the original code was.
  For more information about getting source maps setup and available options please refer to:
  https://webpack.js.org/configuration/devtool/
  To see code examples please refer to this repo:
