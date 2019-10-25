@@ -21,7 +21,7 @@ if (isClient) {
     <Router id="UA-46921629-2">
       <Route
         path="/"
-        render={props => <Site {...props} import={path => import(`./content/${path}`)} />}
+        render={(props) => <Site {...props} import={(path) => import(`./content/${path}`)} />}
       />
     </Router>,
     document.getElementById('root')

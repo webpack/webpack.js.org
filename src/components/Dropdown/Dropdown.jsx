@@ -4,7 +4,7 @@ import './Dropdown.scss';
 
 export default class Dropdown extends React.Component {
   state = {
-    active: false
+    active: false,
   };
 
   componentDidMount() {
@@ -34,12 +34,12 @@ export default class Dropdown extends React.Component {
     return (
       <nav
         className={`dropdown ${className}`}
-        ref={el => (this.dropdown = el)}
+        ref={(el) => (this.dropdown = el)}
         onMouseOver={this._toggle.bind(this, true)}
         onMouseLeave={this._toggle.bind(this, false)}
       >
         <button
-          ref={el => (this.dropdownButton = el)}
+          ref={(el) => (this.dropdownButton = el)}
           aria-haspopup="true"
           aria-expanded={String(this.state.active)}
           aria-label="Select language"
@@ -57,7 +57,7 @@ export default class Dropdown extends React.Component {
                 <li key={item.title}>
                   <a
                     onKeyDown={this._handleArrowKeys.bind(this, i, items.length - 1)}
-                    ref={node => (this.links ? this.links.push(node) : (this.links = [node]))}
+                    ref={(node) => (this.links ? this.links.push(node) : (this.links = [node]))}
                     href={item.url}
                   >
                     <span lang={item.lang}>{item.title}</span>
@@ -109,7 +109,7 @@ export default class Dropdown extends React.Component {
    */
   _toggle(state = false) {
     this.setState({
-      active: state
+      active: state,
     });
   }
 }

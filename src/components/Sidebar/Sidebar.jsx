@@ -10,11 +10,7 @@ import Print from '../Print/Print';
 import './Sidebar.scss';
 
 // Create and export the component
-export default ({
-  className = '',
-  pages,
-  currentPage
-}) => {
+export default ({ className = '', pages, currentPage }) => {
   let group;
 
   return (

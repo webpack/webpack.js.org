@@ -39,7 +39,7 @@ if (isClient) {
 
 class Site extends React.Component {
   state = {
-    mobileSidebarOpen: false
+    mobileSidebarOpen: false,
   };
 
   render() {
@@ -55,19 +55,20 @@ class Site extends React.Component {
         <div className="site__header">
           <NotificationBar />
           <Navigation
-          pathname={location.pathname}
-          toggleSidebar={this._toggleSidebar}
-          links={[
-            {
-              content: 'Documentation',
-              url: '/concepts/',
-              isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
-              children: this._strip(sections.filter(item => item.name !== 'contribute'))
-            },
-            { content: 'Contribute', url: '/contribute/' },
-            { content: 'Vote', url: '/vote/' },
-            { content: 'Blog', url: 'https://medium.com/webpack' }
-          ]}
+            pathname={location.pathname}
+            toggleSidebar={this._toggleSidebar}
+            links={[
+              {
+                content: 'Documentation',
+                url: '/concepts/',
+                isActive: (url) =>
+                  /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
+                children: this._strip(sections.filter((item) => item.name !== 'contribute')),
+              },
+              { content: 'Contribute', url: '/contribute/' },
+              { content: 'Vote', url: '/vote/' },
+              { content: 'Blog', url: 'https://medium.com/webpack' },
+            ]}
           />
         </div>
 
@@ -80,22 +81,27 @@ class Site extends React.Component {
         ) : null}
 
         <Switch>
-          <Route exact strict path="/:url*" render={props => <Redirect to={`${props.location.pathname}/`}/>} />
+          <Route
+            exact
+            strict
+            path="/:url*"
+            render={(props) => <Redirect to={`${props.location.pathname}/`} />}
+          />
           <Route path="/" exact component={Splash} />
           <Route
-            render={props => (
+            render={(props) => (
               <Container className="site__content">
                 <Switch>
                   <Route path="/vote" component={Vote} />
                   <Route path="/organization" component={Organization} />
                   <Route path="/starter-kits" component={StarterKits} />
                   <Route path="/app-shell" component={() => <React.Fragment />} />
-                  {pages.map(page => (
+                  {pages.map((page) => (
                     <Route
                       key={page.url}
                       exact={true}
                       path={page.url}
-                      render={props => {
+                      render={(props) => {
                         let path = page.path.replace('src/content/', '');
                         let content = this.props.import(path);
 
@@ -109,7 +115,7 @@ class Site extends React.Component {
                                 section
                                   ? section.children
                                   : Content.children.filter(
-                                      item => item.type !== 'directory' && item.url !== '/'
+                                      (item) => item.type !== 'directory' && item.url !== '/'
                                     )
                               )}
                             />
@@ -120,7 +126,7 @@ class Site extends React.Component {
                       }}
                     />
                   ))}
-                  <Route render={props => <PageNotFound />} />
+                  <Route render={(props) => <PageNotFound />} />
                 </Switch>
               </Container>
             )}
@@ -138,7 +144,7 @@ class Site extends React.Component {
    */
   _toggleSidebar = (open = !this.state.mobileSidebarOpen) => {
     this.setState({
-      mobileSidebarOpen: open
+      mobileSidebarOpen: open,
     });
   };
 
@@ -148,8 +154,8 @@ class Site extends React.Component {
    * @param  {array} array - ...
    * @return {array}       - ...
    */
-  _strip = array => {
-    let anchorTitleIndex = array.findIndex(item => item.name.toLowerCase() === 'index.md');
+  _strip = (array) => {
+    let anchorTitleIndex = array.findIndex((item) => item.name.toLowerCase() === 'index.md');
 
     if (anchorTitleIndex !== -1) {
       array.unshift(array[anchorTitleIndex]);
@@ -157,15 +163,17 @@ class Site extends React.Component {
       array.splice(anchorTitleIndex + 1, 1);
     }
 
-    return array.map(({ title, name, url, group, sort, anchors, children }) => ({
-      title: title || name,
-      content: title || name,
-      url,
-      group,
-      sort,
-      anchors,
-      children: children ? this._strip(children) : []
-    })).filter(page => page.title !== 'printable.md');
+    return array
+      .map(({ title, name, url, group, sort, anchors, children }) => ({
+        title: title || name,
+        content: title || name,
+        url,
+        group,
+        sort,
+        anchors,
+        children: children ? this._strip(children) : [],
+      }))
+      .filter((page) => page.title !== 'printable.md');
   };
 }
 

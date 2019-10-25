@@ -6,7 +6,7 @@ import Shield from '../Shield/Shield';
 import Items from './projects.json';
 import './Organization.scss';
 
-const Organization = props => {
+const Organization = (props) => {
   return (
     <Container className="organization page__content markdown">
       <h1>The Organization</h1>
@@ -17,7 +17,7 @@ const Organization = props => {
       </p>
 
       <div className="organization__projects">
-        {Items.map(org => (
+        {Items.map((org) => (
           <div className="organization__project" key={org.repo}>
             <a className="organization__title" href={`https://github.com/${org.repo}`}>
               <h4>{org.repo}</h4>

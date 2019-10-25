@@ -15,7 +15,7 @@ const SUPPORTERS = [...Backers];
 // Merge or add additional backers/sponsors
 for (const additional of Additional) {
   const existing = SUPPORTERS.find(
-    supporter => supporter.slug && supporter.slug === additional.slug
+    (supporter) => supporter.slug && supporter.slug === additional.slug
   );
 
   if (existing) {
@@ -32,27 +32,27 @@ SUPPORTERS.sort((a, b) => b.totalDonations - a.totalDonations);
 const ranks = {
   backer: {
     maximum: 200,
-    random: 100
+    random: 100,
   },
   latest: {
     maxAge: 14 * 24 * 60 * 60 * 1000,
-    limit: 10
+    limit: 10,
   },
   bronze: {
     minimum: 200,
-    maximum: 2000
+    maximum: 2000,
   },
   silver: {
     minimum: 2000,
-    maximum: 10000
+    maximum: 10000,
   },
   gold: {
     minimum: 10000,
-    maximum: 50000
+    maximum: 50000,
   },
   platinum: {
-    minimum: 50000
-  }
+    minimum: 50000,
+  },
 };
 
 function formatMoney(number) {
@@ -66,10 +66,10 @@ function formatMoney(number) {
 
 export default class Support extends React.Component {
   state = {
-    inView: false
+    inView: false,
   };
 
-  handleInView = inView => {
+  handleInView = (inView) => {
     if (!inView) {
       return;
     }
@@ -93,17 +93,17 @@ export default class Support extends React.Component {
     }
 
     if (typeof minimum === 'number') {
-      supporters = supporters.filter(item => item.totalDonations >= minimum * 100);
+      supporters = supporters.filter((item) => item.totalDonations >= minimum * 100);
     }
 
     if (typeof maximum === 'number') {
-      supporters = supporters.filter(item => item.totalDonations < maximum * 100);
+      supporters = supporters.filter((item) => item.totalDonations < maximum * 100);
     }
 
     if (typeof maxAge === 'number') {
       const now = Date.now();
       supporters = supporters.filter(
-        item => item.firstDonation && now - new Date(item.firstDonation).getTime() < maxAge
+        (item) => item.firstDonation && now - new Date(item.firstDonation).getTime() < maxAge
       );
     }
 

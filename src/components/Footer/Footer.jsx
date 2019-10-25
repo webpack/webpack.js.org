@@ -31,11 +31,21 @@ const Footer = () => (
       </section>
 
       <section className="footer__right">
-        <Link className="footer__link" to="https://webpack.threadless.com/">Swag Store</Link>
-        <Link className="footer__link" to="/glossary/">Glossary</Link>
-        <Link className="footer__link" to="/branding/">Branding</Link>
-        <Link className="footer__link" to="https://gitter.im/webpack/webpack">Gitter</Link>
-        <Link className="footer__link" to="https://github.com/webpack/webpack/releases">Changelog</Link>
+        <Link className="footer__link" to="https://webpack.threadless.com/">
+          Swag Store
+        </Link>
+        <Link className="footer__link" to="/glossary/">
+          Glossary
+        </Link>
+        <Link className="footer__link" to="/branding/">
+          Branding
+        </Link>
+        <Link className="footer__link" to="https://gitter.im/webpack/webpack">
+          Gitter
+        </Link>
+        <Link className="footer__link" to="https://github.com/webpack/webpack/releases">
+          Changelog
+        </Link>
         <Link className="footer__link footer__license" to="/license">
           <img alt="Creative Commons License" src={CC} />
           <img alt="Creative Commons License" src={BY} />

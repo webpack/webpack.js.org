@@ -29,7 +29,7 @@ function isPrintPage(url) {
 }
 
 // Export method for `SSGPlugin`
-export default locals => {
+export default (locals) => {
   let { assets } = locals.webpackStats.compilation;
 
   let title = getPageTitle(locals.content, locals.path);
@@ -43,7 +43,7 @@ export default locals => {
           <meta charset="utf-8" />
           <meta name="theme-color" content="#2B3A42" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          { isPrintPage(locals.path) ? <meta name="robots" content="noindex,nofollow" /> : null }
+          {isPrintPage(locals.path) ? <meta name="robots" content="noindex,nofollow" /> : null}
           <title>{title}</title>
           <meta name="description" content={description} />
           <meta property="og:site_name" content="webpack" />
@@ -57,12 +57,15 @@ export default locals => {
           <meta property="twitter:domain" content="https://webpack.js.org/" />
           <link rel="icon" type="image/x-icon" href={Favicon} />
           {Object.keys(assets)
-            .filter(asset => /\.css$/.test(asset))
-            .map(path => (
+            .filter((asset) => /\.css$/.test(asset))
+            .map((path) => (
               <link key={path} rel="stylesheet" href={`/${path}`} />
             ))}
           <link rel="manifest" href="/manifest.json" />
-          <link rel="canonical" href={`https://webpack.js.org${enforceTrailingSlash(locals.path)}`} />
+          <link
+            rel="canonical"
+            href={`https://webpack.js.org${enforceTrailingSlash(locals.path)}`}
+          />
           <meta name="mobile-web-app-capable" content="yes" />
           <link rel="icon" sizes="192x192" href="/icon_192x192.png" />
           <link rel="icon" sizes="512x512" href="/icon_512x512.png" />
@@ -70,7 +73,7 @@ export default locals => {
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
           <meta name="apple-mobile-web-app-title" content="webpack" />
           <link rel="apple-touch-icon-precomposed" href="/icon_180x180.png" />
-          <link rel="mask-icon" href={ Logo } color="#465e69" />
+          <link rel="mask-icon" href={Logo} color="#465e69" />
           <meta name="msapplication-TileImage" content="/icon_150x150.png" />
           <meta name="msapplication-TileColor" content="#465e69" />
         </head>
@@ -78,13 +81,15 @@ export default locals => {
           <div id="root">
             <Route
               path="/"
-              render={props => <Site {...props} import={path => require(`./content/${path}`)} />}
+              render={(props) => (
+                <Site {...props} import={(path) => require(`./content/${path}`)} />
+              )}
             />
           </div>
           {isPrintPage(locals.path) ? (
             <PrintScript />
           ) : (
-            bundles.map(path => <script key={path} src={path} />)
+            bundles.map((path) => <script key={path} src={path} />)
           )}
         </body>
       </html>

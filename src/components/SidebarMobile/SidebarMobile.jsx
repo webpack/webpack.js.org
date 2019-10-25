@@ -9,7 +9,7 @@ export default class SidebarMobile extends React.Component {
   _lastTouchPosition = {};
 
   render() {
-    let {isOpen, toggle} = this.props;
+    let { isOpen, toggle } = this.props;
     let openMod = isOpen ? ' sidebar-mobile--visible' : '';
 
     this._toggleBodyListener(isOpen);
@@ -17,21 +17,20 @@ export default class SidebarMobile extends React.Component {
     return (
       <nav
         className={`sidebar-mobile${openMod}`}
-        ref={ref => this._container = ref}
+        ref={(ref) => (this._container = ref)}
         onTouchStart={this._handleTouchStart}
         onTouchMove={this._handleTouchMove}
-        onTouchEnd={this._handleTouchEnd}>
-
+        onTouchEnd={this._handleTouchEnd}
+      >
         <div
           className="sidebar-mobile__toggle"
           onTouchStart={this._handleTouchStart}
           onTouchMove={this._handleOpenerTouchMove}
-          onTouchEnd={this._handleTouchEnd} />
+          onTouchEnd={this._handleTouchEnd}
+        />
 
         <div className="sidebar-mobile__content">
-          <i
-            className="sidebar-mobile__close icon-cross"
-            onClick={toggle.bind(null, false)} />
+          <i className="sidebar-mobile__close icon-cross" onClick={toggle.bind(null, false)} />
 
           {this._getSections()}
         </div>
@@ -39,11 +38,11 @@ export default class SidebarMobile extends React.Component {
     );
   }
 
-  _toggleBodyListener = add => {
+  _toggleBodyListener = (add) => {
     let actionName = add ? 'addEventListener' : 'removeEventListener';
     window[actionName]('touchstart', this._handleBodyClick);
     window[actionName]('mousedown', this._handleBodyClick);
-  }
+  };
 
   /**
    * Get markup for each section
@@ -57,18 +56,20 @@ export default class SidebarMobile extends React.Component {
       pathname = window.location.pathname;
     }
 
-    return this.props.sections.map(section => {
+    return this.props.sections.map((section) => {
       let active = section.url !== '/' && pathname.startsWith(section.url);
 
       return (
         <div
           className={`sidebar-mobile__section ${active ? 'sidebar-mobile__section--active' : ''}`}
-          key={section.url}>
+          key={section.url}
+        >
           <Link
             className="sidebar-mobile__section-header"
             key={section.url}
             to={section.url}
-            onClick={this.props.toggle.bind(null, false)}>
+            onClick={this.props.toggle.bind(null, false)}
+          >
             <h3>{section.title || section.url}</h3>
           </Link>
 
@@ -91,16 +92,19 @@ export default class SidebarMobile extends React.Component {
       pathname = window.location.pathname;
     }
 
-    return pages.map(page => {
+    return pages.map((page) => {
       let url = `${page.url}`,
         active = pathname === url;
 
       return (
         <Link
           key={url}
-          className={`sidebar-mobile__page sidebar-mobile__section-child ${active ? 'sidebar-mobile__page--active' : ''}`}
+          className={`sidebar-mobile__page sidebar-mobile__section-child ${
+            active ? 'sidebar-mobile__page--active' : ''
+          }`}
           to={url}
-          onClick={this.props.toggle.bind(null, false)}>
+          onClick={this.props.toggle.bind(null, false)}
+        >
           {page.title}
         </Link>
       );
@@ -112,14 +116,14 @@ export default class SidebarMobile extends React.Component {
    *
    * @param {object} e - Native click event
    */
-  _handleBodyClick = e => {
-    const {isOpen, toggle} = this.props;
+  _handleBodyClick = (e) => {
+    const { isOpen, toggle } = this.props;
     if (isOpen && !this._container.contains(e.target)) {
       toggle(false);
     }
   };
 
-  _handleTouchStart = e => {
+  _handleTouchStart = (e) => {
     this._initialTouchPosition.x = e.touches[0].pageX;
     this._initialTouchPosition.y = e.touches[0].pageY;
 
@@ -127,7 +131,7 @@ export default class SidebarMobile extends React.Component {
     this._container.classList.add('no-delay');
   };
 
-  _handleTouchMove = e => {
+  _handleTouchMove = (e) => {
     let xDiff = this._initialTouchPosition.x - e.touches[0].pageX;
     let yDiff = this._initialTouchPosition.y - e.touches[0].pageY;
     let factor = Math.abs(yDiff / xDiff);
@@ -141,7 +145,7 @@ export default class SidebarMobile extends React.Component {
     }
   };
 
-  _handleOpenerTouchMove = e => {
+  _handleOpenerTouchMove = (e) => {
     let xDiff = e.touches[0].pageX - this._initialTouchPosition.x;
     let yDiff = this._initialTouchPosition.y - e.touches[0].pageY;
     let factor = Math.abs(yDiff / xDiff);
@@ -155,8 +159,8 @@ export default class SidebarMobile extends React.Component {
     }
   };
 
-  _handleTouchEnd = e => {
-    const {isOpen} = this.props;
+  _handleTouchEnd = (e) => {
+    const { isOpen } = this.props;
     const threshold = 20;
 
     // Free up all the inline styling

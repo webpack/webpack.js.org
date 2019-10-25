@@ -37,13 +37,13 @@ const graphqlQuery = `query account($limit: Int, $offset: Int) {
 
 const graphqlPageSize = 1000;
 
-const nodeToSupporter = node => ({
+const nodeToSupporter = (node) => ({
   name: node.fromAccount.name,
   slug: node.fromAccount.slug,
   website: node.fromAccount.website,
   avatar: node.fromAccount.imageUrl,
   firstDonation: node.createdAt,
-  totalDonations: node.totalDonations.value * 100
+  totalDonations: node.totalDonations.value * 100,
 });
 
 const getAllOrders = async () => {
@@ -51,7 +51,7 @@ const getAllOrders = async () => {
     method: 'POST',
     uri: graphqlEndpoint,
     body: { query: graphqlQuery, variables: { limit: graphqlPageSize, offset: 0 } },
-    json: true
+    json: true,
   };
 
   let allOrders = [];
@@ -70,7 +70,7 @@ const getAllOrders = async () => {
 };
 
 getAllOrders()
-  .then(orders => {
+  .then((orders) => {
     let supporters = orders
       .map(nodeToSupporter)
       .sort((a, b) => b.totalDonations - a.totalDonations);
@@ -98,6 +98,6 @@ getAllOrders()
       console.log(`Fetched 1 file: ${filename}`)
     );
   })
-  .catch(error => {
+  .catch((error) => {
     console.error('utilities/fetch-supporters:', error);
   });

@@ -50,7 +50,7 @@ function getDirectoryRecursive(basePath) {
         }
       }
 
-		// write compound target file
+    // write compound target file
     const targetFile = fs.createWriteStream(targetFilePath);
 
     targetFile.write(`---
@@ -62,7 +62,7 @@ contributors:
 
     `);
 
-    targetFile.on('error', error => {
+    targetFile.on('error', (error) => {
       throw error;
     });
 

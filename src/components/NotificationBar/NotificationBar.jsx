@@ -51,14 +51,14 @@ export default class NotificationBar extends React.Component {
     super(props);
     this.onClose = this.onClose.bind(this);
     this.state = {
-      dismissed: barDismissed()
+      dismissed: barDismissed(),
     };
   }
 
   onClose() {
-    this.setState(state => {
+    this.setState((state) => {
       return {
-        dismissed: !state.dismissed
+        dismissed: !state.dismissed,
       };
     });
   }

@@ -19,11 +19,11 @@ const detailComponentsList = [
   'externals',
   'stats',
   'advanced',
-  'libraryTarget'
+  'libraryTarget',
 ];
 
-const Pre = props => {
-  const newChildren = React.Children.map(props.children.props.children, child => {
+const Pre = (props) => {
+  const newChildren = React.Children.map(props.children.props.children, (child) => {
     if (React.isValidElement(child)) {
       if (child.props.props.className.includes('keyword')) {
         if (!detailComponentsList.includes(child.props.props.componentname)) return child;
@@ -51,7 +51,7 @@ const Pre = props => {
   });
 
   const newProps = {
-    children: newChildren
+    children: newChildren,
   };
 
   return (
@@ -63,6 +63,6 @@ const Pre = props => {
 
 export default {
   components: {
-    pre: Pre
-  }
+    pre: Pre,
+  },
 };

@@ -5,10 +5,10 @@ import './Contributors.scss';
 
 export default class Contributors extends React.Component {
   state = {
-    inView: false
+    inView: false,
   };
 
-  handleInView = inView => {
+  handleInView = (inView) => {
     if (!inView) {
       return;
     }
@@ -32,7 +32,7 @@ export default class Contributors extends React.Component {
       >
         <div className="contributors">
           <div className="contributors__list">
-            {contributors.map(contributor => (
+            {contributors.map((contributor) => (
               <a
                 key={contributor}
                 className="contributor"

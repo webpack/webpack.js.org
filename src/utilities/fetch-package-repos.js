@@ -9,19 +9,19 @@ const fetch = {
     {
       organization: 'webpack-contrib',
       suffixes: ['-loader'],
-      hides: ['webpack-contrib/config-loader']
+      hides: ['webpack-contrib/config-loader'],
     },
     'babel/babel-loader',
     'postcss/postcss-loader',
-    'peerigon/extract-loader'
+    'peerigon/extract-loader',
   ],
   plugins: [
     {
       organization: 'webpack-contrib',
       suffixes: ['-webpack-plugin', '-extract-plugin'],
-      hides: ['webpack-contrib/component-webpack-plugin']
-    }
-  ]
+      hides: ['webpack-contrib/component-webpack-plugin'],
+    },
+  ],
 };
 
 const api = new GithubAPI();
@@ -43,7 +43,7 @@ async function main() {
 
   for (const [type, collection] of Object.entries(fetch)) {
     const result = await Promise.all(
-      collection.map(async item => {
+      collection.map(async (item) => {
         if (typeof item === 'string') {
           return item;
         }
@@ -53,16 +53,16 @@ async function main() {
         const repos = await paginate(organization);
 
         return repos
-          .map(repo => repo.full_name)
-          .filter(name => suffixes.some(suffix => name.endsWith(suffix)))
-          .filter(name => !hides.includes(name));
+          .map((repo) => repo.full_name)
+          .filter((name) => suffixes.some((suffix) => name.endsWith(suffix)))
+          .filter((name) => !hides.includes(name));
       })
     );
 
     const json = JSON.stringify(_.flatten(result), undefined, 2);
     const jsonPath = path.resolve(__dirname, `../../repositories/${type}.json`);
 
-    fs.writeFile(jsonPath, json, err => {
+    fs.writeFile(jsonPath, json, (err) => {
       if (err) {
         throw err;
       }

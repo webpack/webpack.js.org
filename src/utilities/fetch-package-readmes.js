@@ -16,7 +16,7 @@ const types = ['loaders', 'plugins'];
 
 const pathMap = {
   loaders: path.resolve(__dirname, '../content/loaders'),
-  plugins: path.resolve(__dirname, '../content/plugins')
+  plugins: path.resolve(__dirname, '../content/plugins'),
 };
 
 async function main() {
@@ -49,18 +49,18 @@ async function main() {
         title: title,
         source: url,
         edit: editUrl,
-        repo: htmlUrl
+        repo: htmlUrl,
       });
 
       request(url)
-        .then(async content => {
+        .then(async (content) => {
           const body = processReadme(content, { source: url });
 
           await writeFile(fileName, headmatter + body);
 
           console.log('Generated:', path.relative(cwd, fileName));
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     }

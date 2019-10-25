@@ -30,19 +30,19 @@ export default class Navigation extends React.Component {
             title: 'GitHub Repository',
             url: 'https://github.com/webpack/webpack',
             className: 'navigation__item--icon',
-            content: <i aria-hidden="true" className="icon-github" />
+            content: <i aria-hidden="true" className="icon-github" />,
           },
           {
             title: 'webpack on Twitter',
             url: 'https://twitter.com/webpack',
             className: 'navigation__item--icon',
-            content: <i aria-hidden="true" className="icon-twitter" />
+            content: <i aria-hidden="true" className="icon-twitter" />,
           },
           {
             title: 'webpack on Stack Overflow',
             url: 'https://stackoverflow.com/questions/tagged/webpack',
             className: 'navigation__item--icon',
-            content: <i aria-hidden="true" className="icon-stack-overflow" />
+            content: <i aria-hidden="true" className="icon-stack-overflow" />,
           },
           {
             className: 'navigation__item--icon',
@@ -51,11 +51,11 @@ export default class Navigation extends React.Component {
                 className="navigation__languages"
                 items={[
                   { title: 'English', url: 'https://webpack.js.org/' },
-                  { lang: 'zh', title: '中文', url: 'https://webpack.docschina.org/' }
+                  { lang: 'zh', title: '中文', url: 'https://webpack.docschina.org/' },
                 ]}
               />
-            )
-          }
+            ),
+          },
         ]}
         link={Link}
         onMenuClick={toggleSidebar}
@@ -70,7 +70,7 @@ export default class Navigation extends React.Component {
       DocSearch({
         apiKey: 'fac401d1a5f68bc41f01fb6261661490',
         indexName: 'webpack-js-org',
-        inputSelector: '.navigation-search__input'
+        inputSelector: '.navigation-search__input',
       });
     }
   }

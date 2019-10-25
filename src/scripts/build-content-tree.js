@@ -32,10 +32,10 @@ function buildContentTree(source, output) {
   let content = directoryTree(source, { extensions: /\.(md|mdx)/ });
 
   content = restructure(content, {
-    dir: source
+    dir: source,
   });
 
-  fs.writeFileSync(path.resolve(output), JSON.stringify(content, 2), error => {
+  fs.writeFileSync(path.resolve(output), JSON.stringify(content, 2), (error) => {
     if (error) {
       console.log('scripts/build-content-tree', error);
     } else {

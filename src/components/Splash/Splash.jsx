@@ -27,7 +27,7 @@ const Splash = () => (
         <Markdown>
           <div
             dangerouslySetInnerHTML={{
-              __html: SplashContent
+              __html: SplashContent,
             }}
           />
         </Markdown>
