@@ -17,7 +17,7 @@ contributors:
 
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
 
-T> For [`webpack-dev-server`](https://webpack.js.org/configuration/dev-server/), this property must be in [the `devServer` object](https://webpack.js.org/configuration/dev-server/#devserver).
+T> For [`webpack-dev-server`](/configuration/dev-server/), this property must be in [the `devServer` object](/configuration/dev-server/#devserver).
 
 W> This option has no effect when using [the Node.js API](https://webpack.js.org/api/node/).
 
