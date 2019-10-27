@@ -31,7 +31,7 @@ This configuration would output a single `bundle.js` file into the `dist` direct
 
 ## Multiple Entry Points
 
-If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use [substitutions](/configuration/output#outputfilename) to ensure that each file has a unique name.
+If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use [substitutions](/configuration/output/#outputfilename) to ensure that each file has a unique name.
 
 ```javascript
 module.exports = {
