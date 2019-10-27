@@ -11,6 +11,7 @@ contributors:
   - EugeneHlushko
   - dhurlburtusa
   - anshumanv
+  - sibiraj-s
 ---
 
 Besides exporting a single config object, there are a few more ways that cover other needs as well.
@@ -22,7 +23,7 @@ Eventually you will find the need to disambiguate in your `webpack.config.js` be
 
 One option is to export a function from your webpack config instead of exporting an object. The function will be invoked with two arguments:
 
-- An environment as the first parameter. See the [environment options CLI documentation](/api/cli#environment-options) for syntax examples.
+- An environment as the first parameter. See the [environment options CLI documentation](/api/cli/#environment-options) for syntax examples.
 - An options map (`argv`) as the second parameter. This describes the options passed to webpack, with keys such as [`output-filename`](/api/cli/#output-options) and [`optimize-minimize`](/api/cli/#optimize-options).
 
 ```diff
@@ -65,7 +66,7 @@ module.exports = () => {
 
 ## Exporting multiple configurations
 
-Instead of exporting a single configuration object/function, you may export multiple configurations (multiple functions are supported since webpack 3.1.0). When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/configuration/output#outputlibrarytarget) such as AMD and CommonJS:
+Instead of exporting a single configuration object/function, you may export multiple configurations (multiple functions are supported since webpack 3.1.0). When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/configuration/output/#outputlibrarytarget) such as AMD and CommonJS:
 
 ```js
 module.exports = [{
