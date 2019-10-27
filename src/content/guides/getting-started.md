@@ -33,8 +33,7 @@ First let's create a directory, initialize npm, [install webpack locally](/guide
 mkdir webpack-demo
 cd webpack-demo
 npm init -y
-npm install webpack --save-dev
-npm install webpack-cli --save-dev
+npm install webpack webpack-cli --save-dev
 ```
 
 T> Throughout the Guides we will use `diff` blocks to show you what changes we're making to directories, files, and code.
