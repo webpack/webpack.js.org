@@ -27,7 +27,7 @@ webpack is used to compile JavaScript modules. Once [installed](/guides/installa
 
 ## Basic Setup
 
-First let's create a directory, initialize npm, [install webpack locally](/guides/installation#local-installation), and install the webpack-cli (the tool used to run webpack on the command line):
+First let's create a directory, initialize npm, [install webpack locally](/guides/installation/#local-installation), and install the webpack-cli (the tool used to run webpack on the command line):
 
 ``` bash
 mkdir webpack-demo

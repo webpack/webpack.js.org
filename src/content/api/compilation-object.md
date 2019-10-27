@@ -327,6 +327,8 @@ Parameters:
 
 `function (file, source, assetInfo = {})`
 
+W> Available since webpack 4.40.0
+
 Parameters:
 
 - `file` - file name of the asset
@@ -336,6 +338,8 @@ Parameters:
 ### updateAsset
 
 `function (file, newSourceOrFunction, assetInfoUpdateOrFunction)`
+
+W> Available since webpack 4.40.0
 
 Parameters:
 
@@ -347,11 +351,15 @@ Parameters:
 
 `function`
 
+W> Available since webpack 4.40.0
+
 Returns array of all assets under current compilation.
 
 ### getAsset
 
 `function (name)`
+
+W> Available since webpack 4.40.0
 
 Parameters:
 

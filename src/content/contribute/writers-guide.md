@@ -209,3 +209,13 @@ To mark a number, use `number`:
 To mark an object, use `object`:
 
 `object = { prop1 string = 'none': 'none' | 'development' | 'production', prop2 boolean = false, prop3 function (module) => string }`
+
+When object's key can have multiple types, use `|` to list them. Here is an example, where `prop1` can be both a string and an array of strings:
+
+`object = { prop1 string = 'none': 'none' | 'development' | 'production' | [string]}`
+
+This allows us to display the defaults, enumeration and other information.
+
+If the object's key is dynamic, user-defined, use `<key>` to describe it:
+
+`object = { <key> string }`

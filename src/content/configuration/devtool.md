@@ -51,7 +51,7 @@ Some of these values are suited for development and some for production. For dev
 
 W> There are some issues with Source Maps in Chrome. [We need your help!](https://github.com/webpack/webpack/issues/3165).
 
-T> See [`output.sourceMapFilename`](/configuration/output#outputsourcemapfilename) to customize the filenames of generated Source Maps.
+T> See [`output.sourceMapFilename`](/configuration/output/#outputsourcemapfilename) to customize the filenames of generated Source Maps.
 
 
 ### Qualities

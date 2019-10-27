@@ -68,7 +68,7 @@ This will force webpack to exit its bundling process.
 
 `boolean` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. Caching will be automatically enabled by default while in [watch mode](/configuration/watch#watch) and webpack is set to mode [`development`](/configuration/mode#mode-development). To enable caching manually set it to `true`:
+Cache the generated webpack modules and chunks to improve build speed. Caching will be automatically enabled by default while in [watch mode](/configuration/watch/#watch) and webpack is set to mode [`development`](/configuration/mode/#mode-development). To enable caching manually set it to `true`:
 
 __webpack.config.js__
 

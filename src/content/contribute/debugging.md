@@ -18,7 +18,7 @@ related:
 
 When contributing to the core repo, writing a loader/plugin, or working on a complex project, debugging tools can be central to your workflow. Whether the problem is slow performance on a large project or an unhelpful traceback, the following utilities can make figuring it out less painful.
 
-- The [`stats` data](/api/stats) made available through [Node](/api/node#stats-object) and the [CLI](/api/cli#common-options).
+- The [`stats` data](/api/stats) made available through [Node](/api/node/#stats-object) and the [CLI](/api/cli/#common-options).
 - Chrome __DevTools__ via `node-nightly` and the latest Node.js versions.
 
 
@@ -33,7 +33,7 @@ Whether you want to sift through [this data](/api/stats) manually or use a tool 
 - The relationships between modules.
 - And much more...
 
-On top of that, the official [analyze tool](https://github.com/webpack/analyse) and [various others](/guides/code-splitting#bundle-analysis) will accept this data and visualize it in various ways.
+On top of that, the official [analyze tool](https://github.com/webpack/analyse) and [various others](/guides/code-splitting/#bundle-analysis) will accept this data and visualize it in various ways.
 
 
 ## DevTools

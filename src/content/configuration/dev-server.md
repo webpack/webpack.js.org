@@ -14,6 +14,7 @@ contributors:
   - dmohns
   - EslamHiko
   - fokusferit
+  - digitaljohn
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -805,7 +806,7 @@ T> The browser application name is platform dependent. Don't hard code it in reu
 
 ## `devServer.openPage`
 
-`string`
+`string` `[string]`
 
 Specify a page to navigate to when opening the browser.
 
@@ -824,6 +825,25 @@ Usage via the CLI
 
 ```bash
 webpack-dev-server --open-page "/different/page"
+```
+
+If you wish to specify multiple pages to open in the browser.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    openPage: ['/different/page1', '/different/page2']
+  }
+};
+```
+
+Usage via the CLI
+
+```bash
+webpack-dev-server --open-page "/different/page1,/different/page2"
 ```
 
 
