@@ -117,9 +117,9 @@ Loaders should do only a single task. This not only makes the job of maintaining
 
 ### Chaining
 
-Take advantage of the fact that loaders can be chained together. Instead of writing one complex single loader that tackles five tasks, write five loaders that divide this effort into smaller problems. Isolating the use case for each loader keeps each one small, clear to understand, and may create an opportunity to be used for a use case you hadn't thought about from the beginning. 
+Take advantage of the fact that loaders can be chained together. Instead of writing one complex loader that tackles five tasks, write five loaders that divide this effort into smaller problems. Isolating the use case for each loader keeps them clean and readable, and may create an opportunity to be used for a use case you hadn't thought about from the beginning. 
 
-Take the case of rendering a template file with data specified via loader options or query parameters. It could be written as a single loader that compiles the template from source, executes it and returns a module that exports a string containing the HTML code. However, in accordance with guidelines, we can use multiple loaders which are all providing one functionality. Instead of using one complex loader we can use multiple open source loaders which can be chained:
+Take the case of rendering a template file with data specified via loader options or query parameters. It could be written as a single loader that compiles the template from source, executes it and returns a module that exports a string containing the HTML code. However, in accordance with guidelines, we can use existing `apply-loader` chained with multiple open source loaders:
 
 - `jade-loader`: Convert template to a module that exports a function.
 - `apply-loader`: Executes the function with loader options and returns raw HTML.

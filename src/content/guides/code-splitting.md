@@ -287,7 +287,7 @@ T> It is possible to provide a [dynamic expression](/api/module-methods/#dynamic
 
 webpack 4.6.0+ adds support for prefetching and preloading.
 
-Using these inline directives while declaring your imports allows webpack to output a “Resource Hint” which tells the browser how to prioritize the script loading:
+Using these inline directives while declaring your imports allows webpack to output a "Resource Hint" which tells the browser how to prioritize the script loading:
 
 - prefetch: resource is probably needed for some navigation in the future
 - preload: resource might be needed during the current navigation

@@ -155,12 +155,14 @@ Do not make assumptions when writing the documentation.
 + As we've learned in [production guide](/guides/production/)...
 ```
 
-Please do not assume things are 'simple' or 'easy'. Avoid words like 'just', 'simply'.
+Please do not assume things are "simple", "easy" or "special". Avoid words like 'just', 'simply' or "basically".
 
 ```diff
 - Simply run command...
 + Run the `command-name` command...
 ```
+
+Also avoid words with can be considered insensitive like "disabled" or "special". Instead use for example "turned off" or "specific".
 
 ### Configuration defaults and types
 

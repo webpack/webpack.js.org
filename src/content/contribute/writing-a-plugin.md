@@ -146,7 +146,7 @@ module.exports = HelloAsyncPlugin;
 
 Once we can latch onto the webpack compiler and each individual compilations, the possibilities become endless for what we can do with the engine itself. We can reformat existing files, create derivative files, or fabricate entirely new assets.
 
-Let's write a exemplary plugin that generates a new build file called `filelist.md`; the contents of which will list all of the asset files in our build. This plugin might look something like this:
+Let's write an exemplary plugin that generates a new build file called `filelist.md`; the contents of which will list all of the asset files in our build. This plugin might look something like this:
 
 ```javascript
 class FileListPlugin {

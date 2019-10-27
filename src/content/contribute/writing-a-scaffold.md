@@ -111,7 +111,7 @@ module.exports = class WebpackGenerator extends Generator {
 ## Dev Configurations
 
 Congratulations! You've now created the base of a `webpack-scaffold`! Let's now add some more stuff to our future configuration file!
-We are going to follow good convention, and extract our configuration into another file, named `dev-config.js`. As this is regular JavaScript, we can make the module a function, and supply our `entry` as a parameter for us to build up a configuration file from.
+Following best practices, we are going to extract our configuration into another JavaScript file, named `dev-config.js`. Export a function, and supply our `entry` as a parameter for us to build up a configuration file from.
 
 __dev-config.js__
 

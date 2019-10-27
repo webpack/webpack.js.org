@@ -385,7 +385,7 @@ require.context(
 )
 ```
 
-Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, a `filter` for more fine grained control of the modules included, and a `mode` to define the way how loading will work. Underlying modules can then be quickly resolved later on:
+Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, a `filter` for more fine grained control of the modules included, and a `mode` to define the way how loading will work. Underlying modules can then be resolved later on:
 
 ```javascript
 var context = require.context('components', true, /\.html$/);
