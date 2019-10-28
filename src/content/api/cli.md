@@ -82,7 +82,7 @@ This will bundle your source code with entry as `index.js`, and the output bundl
 ```
 
 ```bash
-webpack index=./src/index.js entry2=./src/index2.js dist/bundle.js
+webpack index=./src/index.js entry2=./src/index2.js -o dist/bundle.js
 ```
 
 This will form the bundle with both the files as separate entry points.
@@ -127,7 +127,7 @@ In every other case, webpack prints out a set of stats showing bundle, chunk and
 
 ### Environment Options
 
-When the webpack configuration [exports a function](/configuration/configuration-types#exporting-a-function), an "environment" may be passed to it.
+When the webpack configuration [exports a function](/configuration/configuration-types/#exporting-a-function), an "environment" may be passed to it.
 
 ```bash
 webpack --env.production    # sets env.production == true

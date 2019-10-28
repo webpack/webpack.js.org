@@ -27,14 +27,13 @@ webpack is used to compile JavaScript modules. Once [installed](/guides/installa
 
 ## Basic Setup
 
-First let's create a directory, initialize npm, [install webpack locally](/guides/installation#local-installation), and install the webpack-cli (the tool used to run webpack on the command line):
+First let's create a directory, initialize npm, [install webpack locally](/guides/installation/#local-installation), and install the webpack-cli (the tool used to run webpack on the command line):
 
 ``` bash
 mkdir webpack-demo
 cd webpack-demo
 npm init -y
-npm install webpack --save-dev
-npm install webpack-cli --save-dev
+npm install webpack webpack-cli --save-dev
 ```
 
 T> Throughout the Guides we will use `diff` blocks to show you what changes we're making to directories, files, and code.
