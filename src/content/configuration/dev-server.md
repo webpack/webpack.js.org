@@ -64,7 +64,7 @@ T> HTML template is required to serve the bundle, usually it is an `index.html` 
 
 ## `devServer.after`
 
-`function (app, server)`
+`function (app, server, compiler)`
 
 Provides the ability to execute custom middleware after all other middleware
 internally within the server.
@@ -75,7 +75,7 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    after: function(app, server) {
+    after: function(app, server, compiler) {
       // do fancy stuff
     }
   }
@@ -131,7 +131,7 @@ webpack-dev-server --entry /entry/file --output-path /output/path --allowed-host
 
 ## `devServer.before`
 
-`function (app, server)`
+`function (app, server, compiler)`
 
 Provides the ability to execute custom middleware prior to all other middleware
 internally within the server. This could be used to define custom handlers, for
@@ -143,7 +143,7 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    before: function(app, server) {
+    before: function(app, server, compiler) {
       app.get('/some/path', function(req, res) {
         res.json({ custom: 'response' });
       });
@@ -763,6 +763,25 @@ module.exports = {
 };
 ```
 
+## `devServer.onListening`
+
+`function (server)`
+
+Provides an option to execute a custom function when `webpack-dev-server` starts listening for connections on a port.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    onListening: function(server) {
+      const port = server.listeningApp.address().port;
+      console.log('Listening on port:', port);
+    }
+  }
+};
+```
 
 ## `devServer.open`
 
