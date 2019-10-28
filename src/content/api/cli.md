@@ -175,7 +175,7 @@ This set of options allows you to manipulate certain [output](/configuration/out
 
 ### Cascade Options
 
-Sometime we want to add a option conditionally to an existing script, without writing writing the same script again so we can cascade option to it with just using `--` before the option and access it in our config file.
+CLI allows to provide variables by adding `--` before the variable name and value. You can access such variables in the configuration file.
 
 For npm:
 
@@ -191,6 +191,14 @@ For yarn, we can skip `--` :
 ```
 
 T> Hence you can get only `{ presets: "compress" }` in [environment variables](/guides/environment-variables) when you run `build:compress`.
+
+In webpack config you can access the variable as follows:
+
+``` js
+module.export = ({ presets }) => {
+  // presets variable is available in webpack config
+};
+```
 
 #### Example Usage
 
