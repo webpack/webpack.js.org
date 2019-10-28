@@ -1,6 +1,6 @@
 ---
 title: Loaders
-sort: 1
+sort: -1
 contributors:
   - simon04
   - bajras
@@ -11,7 +11,7 @@ contributors:
 
 webpack enables use of [loaders](/concepts/loaders) to preprocess files. This allows you to bundle any static resource way beyond JavaScript. You can easily write your own loaders using Node.js.
 
-Loaders are activated by using `loadername!` prefixes in `require()` statements, or are automatically applied via regex from your webpack configuration – see [configuration](/concepts/loaders#configuration).
+Loaders are activated by using `loadername!` prefixes in `require()` statements, or are automatically applied via regex from your webpack configuration – see [configuration](/concepts/loaders/#configuration).
 
 
 ## Files
@@ -39,6 +39,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 - [`ts-loader`](https://github.com/TypeStrong/ts-loader) or [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader) Loads [TypeScript](https://www.typescriptlang.org/) 2.0+ like JavaScript
 - [`coffee-loader`](/loaders/coffee-loader) Loads [CoffeeScript](http://coffeescript.org/) like JavaScript
 - [`fengari-loader`](https://github.com/fengari-lua/fengari-loader/) Loads Lua code using [fengari](https://fengari.io/)
+- [`elm-webpack-loader`](https://github.com/elm-community/elm-webpack-loader) Loads [Elm](https://elm-lang.org/) like JavaScript
 
 
 ## Templating
@@ -77,6 +78,6 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 - [`polymer-loader`](https://github.com/webpack-contrib/polymer-webpack-loader) Process HTML & CSS with preprocessor of choice and `require()` Web Components like first-class modules
 - [`angular2-template-loader`](https://github.com/TheLarkInn/angular2-template-loader) Loads and compiles [Angular](https://angular.io/) Components
 
+## Awesome
 
-![Awesome](../assets/awesome-badge.svg)
 For more third-party loaders, see the list from [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#loaders).

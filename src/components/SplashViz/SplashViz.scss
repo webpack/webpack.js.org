@@ -10,16 +10,18 @@
   max-height: 720px;
   background: getColor(elephant);
   flex-direction: column;
+  overflow: hidden;
 
   &__heading {
     color: getColor(white);
     font-size: getFontSize(4);
     text-align: center;
     font-weight: 200;
-    margin-top: 24px;
+    margin-top: 130px;
 
     @include break {
       font-size: getFontSize(5);
+      margin-top: 110px;
     }
   }
 

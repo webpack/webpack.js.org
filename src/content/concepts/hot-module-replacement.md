@@ -14,7 +14,7 @@ Hot Module Replacement (HMR) exchanges, adds, or removes [modules](/concepts/mod
 
 - Retain application state which is lost during a full reload.
 - Save valuable development time by only updating what's changed.
-- Modifications made to CSS/JS in the source code results in an instant browser update which is almost comparable to changing styles directly in the browser's dev tools.
+- Instantly update the browser when modifications are made to CSS/JS in the source code, which is almost comparable to changing styles directly in the browser's dev tools.
 
 
 ## How It Works
@@ -35,7 +35,7 @@ You can set up HMR so that this process happens automatically, or you can choose
 
 ### In the Compiler
 
-In addition to normal assets, the compiler needs to emit an "update" to allow updating from previous version to the new version. The "update" consists of two parts:
+In addition to normal assets, the compiler needs to emit an "update" to allow updating from the previous version to the new version. The "update" consists of two parts:
 
 1. The updated [manifest](/concepts/manifest) (JSON)
 2. One or more updated chunks (JavaScript)

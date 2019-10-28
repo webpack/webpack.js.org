@@ -7,6 +7,7 @@ contributors:
   - bebraw
   - skipjack
   - byzyk
+  - pranshuchittora
 ---
 
 This index lists common terms used throughout the webpack ecosystem.
@@ -40,20 +41,10 @@ This index lists common terms used throughout the webpack ecosystem.
 - [__Entry Point__](/concepts/entry-points): The entry point tells webpack where to start and follows the graph of dependencies to know what to bundle. You can think of your application's entry point(s) as the __contextual root(s)__ of what you want bundled.
 
 
-## F
-
-## G
-
 ## H
 
 - [__Hot Module Replacement (HMR)__](/concepts/hot-module-replacement): A process that exchanges, adds, or removes  `modules` while an application is running without a full page reload.
 
-
-## I
-
-## J
-
-## K
 
 ## L
 
@@ -63,10 +54,8 @@ This index lists common terms used throughout the webpack ecosystem.
 ## M
 
 - [__Module__](/concepts/modules): Discrete chunks of functionality that provide a smaller surface area than a full program. Well-written modules provide solid abstractions and encapsulation boundaries which make up a coherent design and clear purpose.
-- [__Module Resolution__](/concepts/module-resolution/): A module can be required as a dependency from another module and a resolver is a library which helps in locating a module by its absolute path.. Modules are searched for inside all directories specified in `resolve.modules`.
+- [__Module Resolution__](/concepts/module-resolution/): A module can be required as a dependency from another module and a resolver is a library which helps in locating a module by its absolute path. Modules are searched for inside all directories specified in `resolve.modules`.
 
-
-## N
 
 ## O
 
@@ -79,21 +68,16 @@ This index lists common terms used throughout the webpack ecosystem.
 - [__Plugin__](/concepts/plugins): A JavaScript object that has an `apply` property. This `apply` property is called by the webpack compiler, giving access to the entire compilation lifecycle. These packages will typically extend compilation functionality in one way or another.
 
 
-## Q
-
 ## R
 
 - [__Request__](/guides/dependency-management/): Refers to the expression in the require/import statement, e.g. _require("./template/" + name + ".ejs")_, the request is _"./template/" + name + ".ejs"_.
 
-## S
 
 ## T
 
 - [__Target__](/configuration/target/): User configured deployment target(s) [listed here](/configuration/target/) to compile for a specific environment like the browser, NodeJS, or Electron.
 - [__Tree Shaking__](/guides/tree-shaking/): Unused/Excess code elimination, or more precisely, live code importing. Compilers like webpack will accomplish this by analyzing the various kinds `import` statements and usage of the imported code to determine what parts of dependencies are actually being utilized, dropping parts of the "tree" that are not.
 
-
-## U
 
 ## V
 
@@ -102,11 +86,4 @@ This index lists common terms used throughout the webpack ecosystem.
 
 ## W
 
-- [__webpack__](/): A highly configurable [module](/concepts/modules) bundler for modern JavaScript applications
-
-
-## X
-
-## Y
-
-## Z
+- [__webpack__](/): A highly configurable [module](/concepts/modules) bundler for modern JavaScript applications.

@@ -1,6 +1,6 @@
 ---
 title: Installation
-sort: 1
+sort: 13
 contributors:
   - pksjce
   - bebraw
@@ -27,10 +27,11 @@ To install the latest release or a specific version, run one of the following co
 
 ``` bash
 npm install --save-dev webpack
+# or specific version
 npm install --save-dev webpack@<version>
 ```
 
-If you're using webpack v4 or later, you'll need to install the [CLI](/api/cli/).
+If you're using webpack v4 or later, you'll also need to install the [CLI](/api/cli/).
 
 ``` bash
 npm install --save-dev webpack-cli
@@ -44,7 +45,7 @@ Installing locally is what we recommend for most projects. This makes it easier 
 }
 ```
 
-T> To run the local installation of webpack you can access its bin version as `node_modules/.bin/webpack`.
+T> To run the local installation of webpack you can access its binary version as `node_modules/.bin/webpack`. Alternatively, if you are using npm v5.2.0 or greater, you can run 'npx webpack' to do it.
 
 
 ## Global Installation
@@ -64,6 +65,7 @@ If you are enthusiastic about using the latest that webpack has to offer, you ca
 
 ``` bash
 npm install webpack@beta
+# or specific tag/branch
 npm install webpack/webpack#<tagname/branchname>
 ```
 

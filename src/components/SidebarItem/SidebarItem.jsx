@@ -1,6 +1,6 @@
 import React from 'react';
-import { uniqueId } from 'lodash';
 import Link from '../Link/Link';
+import './SidebarItem.scss';
 
 const block = 'sidebar-item';
 
@@ -10,42 +10,43 @@ export default class SidebarItem extends React.Component {
   };
 
   render() {
-    let { title, anchors = [] } = this.props;
+    let {title, anchors = []} = this.props;
     let openMod = this.state.open ? `${block}--open` : '';
     let disabledMod = anchors.length == 0 ? `${block}--disabled` : '';
 
     return (
-      <div className={ `${block} ${openMod} ${disabledMod}` }>
-        { anchors.length > 0 ? (
+      <div className={`${block} ${openMod} ${disabledMod}`}>
+        {anchors.length > 0 ? (
           <i
-            className={ `${block}__toggle icon-chevron-right` }
-            onClick={ this._toggle.bind(this) } />
+            className={`${block}__toggle icon-chevron-right`}
+            onClick={this._toggle.bind(this)} />
         ) : (
-          <i className={ `${block}__toggle icon-vertical-bar` } />
+          <i className={`${block}__toggle icon-vertical-bar`} />
         )}
 
         <Link
-          className={ `${block}__title` }
-          to={ this.props.url }>
-          { title }
+          key={this.props.url}
+          className={`${block}__title`}
+          to={this.props.url}>
+          {title}
         </Link>
 
-        { anchors.length > 0 ? (
-          <ul className={ `${block}__anchors` }>
+        {anchors.length > 0 ? (
+          <ul className={`${block}__anchors`}>
             {
-              anchors.map(anchor => (
+              anchors.map((anchor, i) => (
                 <li
-                  key={ `anchor-${title}-${uniqueId()}` }
-                  className={ `${block}__anchor` }
-                  title={ anchor.title }>
-                  <a href={ this._generateAnchorURL(anchor) }>
-                    { anchor.title }
+                  key={this._generateAnchorURL(anchor)}
+                  className={`${block}__anchor`}
+                  title={anchor.title}>
+                  <a href={this._generateAnchorURL(anchor)}>
+                    {anchor.title}
                   </a>
                 </li>
               ))
             }
           </ul>
-        ) : null }
+        ) : null}
       </div>
     );
   }
@@ -73,28 +74,19 @@ export default class SidebarItem extends React.Component {
    * @param {object} e - Click event
    */
   _toggle(e) {
-    let { onToggle } = this.props;
-
     this.setState({
       open: !this.state.open
-    }, () => {
-      if (typeof onToggle === 'function') {
-        onToggle();
-      }
     });
   }
 
   /**
    * Generate the url for the given [anchor] depending on the current page
    *
-   * @return {object} anchor - The anchor object containing its id
+   * @param {object} anchor - The anchor object containing its id
+   * @returns {string}
    */
   _generateAnchorURL(anchor) {
-    let { currentPage, url } = this.props;
-
-    if ( `/${currentPage}` === url ) {
-      return `#${anchor.id}`;
-
-    } else return `${url}#${anchor.id}`;
+    let {url} = this.props;
+    return anchor.id ? `${url}#${anchor.id}` : url;
   }
 }

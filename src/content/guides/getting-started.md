@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-sort: 2
+sort: 1
 contributors:
   - bebraw
   - varunjayaraman
@@ -9,7 +9,6 @@ contributors:
   - johnstew
   - simon04
   - aaronang
-  - jecoopr
   - TheDutchCoder
   - sudarsangp
   - Vanguard90
@@ -21,16 +20,18 @@ contributors:
   - ztomasze
   - Spiral90210
   - byzyk
+  - wizardofhogwarts
 ---
 
-Webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
+webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
 
 ## Basic Setup
 
-First let's create a directory, initialize npm, [install webpack locally](/guides/installation#local-installation), and install the webpack-cli (the tool used to run webpack on the command line):
+First let's create a directory, initialize npm, [install webpack locally](/guides/installation/#local-installation), and install the webpack-cli (the tool used to run webpack on the command line):
 
 ``` bash
-mkdir webpack-demo && cd webpack-demo
+mkdir webpack-demo
+cd webpack-demo
 npm init -y
 npm install webpack webpack-cli --save-dev
 ```
@@ -53,7 +54,7 @@ __src/index.js__
 
 ``` javascript
 function component() {
-  let element = document.createElement('div');
+  const element = document.createElement('div');
 
   // Lodash, currently included via a script, is required for this line to work
   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -99,8 +100,8 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2"
+      "webpack": "^4.20.2",
+      "webpack-cli": "^3.1.2"
     },
     "dependencies": {}
   }
@@ -118,7 +119,7 @@ Let's use webpack to manage these scripts instead.
 
 ## Creating a Bundle
 
-First we'll tweak our directory structure slightly, separating the "source" code (`/src`) from our "distribution" code (`/dist`). The "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser:
+First we'll tweak our directory structure slightly, separating the "source" code (`/src`) from our "distribution" code (`/dist`). The "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser. Tweak the directory structure as follows:
 
 __project__
 
@@ -148,7 +149,7 @@ __src/index.js__
 + import _ from 'lodash';
 +
   function component() {
-    let element = document.createElement('div');
+    const element = document.createElement('div');
 
 -   // Lodash, currently included via a script, is required for this line to work
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -192,17 +193,19 @@ main.js  70.4 KiB       0  [emitted]  main
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
 ```
 
 T> Your output may vary a bit, but if the build is successful then you are good to go. Also, don't worry about the warning, we'll tackle that later.
 
 Open `index.html` in your browser and, if everything went right, you should see the following text: 'Hello webpack'.
 
+W> If you are getting a syntax error in the middle of minified JavaScript when opening `index.html` in the browser, set [`development mode`](/configuration/mode/#mode-development) and run `npx webpack` again. This is related to running `npx webpack` on latest Node.js (v12.5+) instead of [LTS version](https://nodejs.org/en/).
+
 
 ## Modules
 
-The [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements have been standardized in [ES2015](https://babeljs.io/learn-es2015/) and [are supported in most browsers](https://caniuse.com/#search=modules). Some older browsers still lag behind but webpack supports modules out of the box.
+The [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements have been standardized in [ES2015](https://babeljs.io/docs/en/learn/). Although they are not supported in most browsers yet, webpack does support them out of the box.
 
 Behind the scenes, webpack actually "transpiles" the code so that older browsers can also run it. If you inspect `dist/main.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
 
@@ -234,8 +237,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
-  }
+    path: path.resolve(__dirname, 'dist'),
+  },
 };
 ```
 
@@ -251,7 +254,7 @@ main.js  70.4 KiB       0  [emitted]  main
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
 ```
 
 T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a config of any name. This will be useful for more complex configurations that need to be split into multiple files.
@@ -271,8 +274,9 @@ __package.json__
     "version": "1.0.0",
     "description": "",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-+     "build": "webpack"
+-      "test": "echo \"Error: no test specified\" && exit 1"
++      "test": "echo \"Error: no test specified\" && exit 1",
++      "build": "webpack"
     },
     "keywords": [],
     "author": "",
@@ -301,7 +305,7 @@ main.js  70.4 KiB       0  [emitted]  main
 
 WARNING in configuration
 The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/.
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/.
 ```
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.

@@ -1,6 +1,6 @@
 ---
 title: Externals
-sort: 13
+sort: 15
 contributors:
   - sokra
   - skipjack
@@ -12,7 +12,7 @@ contributors:
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
 
-T> __consumer__ here is any end user application that includes the library that you have bundled using webpack.
+T> __consumer__ here is any end-user application.
 
 
 ## `externals`
@@ -78,12 +78,11 @@ module.exports = {
 };
 ```
 
-`subtract: ['./math', 'subtract']` converts to a parent child construct, where `./math` is the parent module and your bundle only requires the subset under `subtract` variable.
-
+`subtract: ['./math', 'subtract']` allows you select part of a commonjs module, where `./math` is the module and your bundle only requires the subset under the `subtract` variable. This example would translate to `require('./math').subtract;`
 
 ### object
 
-W> An object with `{ root, amd, commonjs, ... }` is only allowed for [`libraryTarget: 'umd'`](/configuration/output/#output-librarytarget). It's not allowed for other library targets.
+W> An object with `{ root, amd, commonjs, ... }` is only allowed for [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget). It's not allowed for other library targets.
 
 ```javascript
 module.exports = {
@@ -117,7 +116,7 @@ This syntax is used to describe all the possible ways that an external library c
 
 ### function
 
-It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides some options to, for example, whitelist packages.
+It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides some options too, for example, whitelist packages.
 
 It basically comes down to this:
 
@@ -149,7 +148,7 @@ module.exports = {
 };
 ```
 
-In this case any dependency named `jQuery`, capitalized or not, or `$` would be externalized.
+In this case, any dependency named `jQuery`, capitalized or not, or `$` would be externalized.
 
 ### Combining syntaxes
 

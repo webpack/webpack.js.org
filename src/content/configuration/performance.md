@@ -1,11 +1,12 @@
 ---
 title: Performance
-sort: 14
+sort: 16
 contributors:
   - thelarkinn
   - tbroadley
   - byzyk
   - madhavarshney
+  - EugeneHlushko
 ---
 
 These options allows you to control how webpack notifies you of assets and entry points that exceed a specific file limit.
@@ -20,9 +21,9 @@ Configure how performance hints are shown. For example if you have an asset that
 
 ## `performance.hints`
 
-`false | "error" | "warning"`
+`string = 'warning': 'error' | 'warning'` `boolean: false`
 
-Turns hints on/off. In addition, tells webpack to throw either an error or a warning when hints are found. This property is set to `"warning"` by default.
+Turns hints on/off. In addition, tells webpack to throw either an error or a warning when hints are found.
 
 Given an asset is created that is over 250kb:
 
@@ -61,9 +62,9 @@ An error will be displayed notifying you of a large asset. We recommend using `h
 
 ## `performance.maxEntrypointSize`
 
-`int`
+`number = 250000`
 
-An entry point represents all assets that would be utilized during initial load time for a specific entry. This option controls when webpack should emit performance hints based on the maximum entry point size. The default value is `250000` (bytes).
+An entry point represents all assets that would be utilized during initial load time for a specific entry. This option controls when webpack should emit performance hints based on the maximum entry point size in bytes.
 
 ```js
 module.exports = {
@@ -76,9 +77,9 @@ module.exports = {
 
 ## `performance.maxAssetSize`
 
-`int`
+`number = 250000`
 
-An asset is any emitted file from webpack. This option controls when webpack emits a performance hint based on individual asset size. The default value is `250000` (bytes).
+An asset is any emitted file from webpack. This option controls when webpack emits a performance hint based on individual asset size in bytes.
 
 
 ```js
@@ -92,9 +93,9 @@ module.exports = {
 
 ## `performance.assetFilter`
 
-`Function`
+`function(assetFilename) => boolean`
 
-This property allows webpack to control what files are used to calculate performance hints. The default function is seen below:
+This property allows webpack to control what files are used to calculate performance hints. The default function is:
 
 ```js
 function assetFilter(assetFilename) {

@@ -1,11 +1,12 @@
 ---
 title: Dependency Management
-sort: 20
+sort: 12
 contributors:
   - ndelangen
   - chrisVillanueva
   - sokra
   - byzyk
+  - AnayaDesign
 ---
 
 > es6 modules
@@ -63,7 +64,7 @@ webpack parses for `require.context()` in the code while building.
 The syntax is as follows:
 
 ```javascript
-require.context(directory, useSubdirectories = false, regExp = /^\.\//);
+require.context(directory, useSubdirectories = true, regExp = /^\.\/.*$/, mode = 'sync');
 ```
 
 Examples:
@@ -101,7 +102,7 @@ importAll(require.context('../components/', true, /\.js$/));
 ```
 
 ```javascript
-var cache = {};
+const cache = {};
 
 function importAll (r) {
   r.keys().forEach(key => cache[key] = r(key));
