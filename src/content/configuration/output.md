@@ -240,7 +240,7 @@ For example, if you have 2 libraries, with namespaces `library1` and `library2`,
 
 This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#outputpath) option.
 
-For a single [`entry`](/configuration/entry-context#entry) point, this can be a static name.
+For a single [`entry`](/configuration/entry-context/#entry) point, this can be a static name.
 
 __webpack.config.js__
 

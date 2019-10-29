@@ -83,7 +83,7 @@ T> Asset's `info` property is available since webpack v4.40.0
 
 ### Chunk Objects
 
-Each `chunks` object represents a group of modules known as a [chunk](/glossary#c). Each object follows the following structure:
+Each `chunks` object represents a group of modules known as a [chunk](/glossary/#c). Each object follows the following structure:
 
 ```js-with-links
 {
@@ -143,13 +143,13 @@ What good would these statistics be without some description of the compiled app
   ],
   "errors": 0, // Number of errors when resolving or processing the module
   "failed": false, // Whether or not compilation failed on this module
-  "id": 0, // The ID of the module (analogous to [`module.id`](/api/module-variables#moduleid-commonjs))
+  "id": 0, // The ID of the module (analogous to [`module.id`](/api/module-variables/#moduleid-commonjs))
   "identifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // A unique ID used internally
   "name": "./lib/index.web.js", // Path to the actual file
   "optional": false, // All requests to this module are with `try... catch` blocks (irrelevant with ESM)
   "prefetched": false, // Indicates whether or not the module was [prefetched](/plugins/prefetch-plugin)
   "profile": {
-    // Module specific compilation stats corresponding to the [`--profile` flag](/api/cli#profiling) (in milliseconds)
+    // Module specific compilation stats corresponding to the [`--profile` flag](/api/cli/#profiling) (in milliseconds)
     "building": 73, // Loading and parsing
     "dependencies": 242, // Building dependencies
     "factory": 11 // Resolving dependencies
