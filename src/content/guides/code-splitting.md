@@ -28,6 +28,7 @@ contributors:
   - byzyk
   - AnayaDesign
   - wizardofhogwarts
+  - maximilianschmelzer 
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -259,7 +260,7 @@ __src/index.js__
 ``` diff
 - function getComponent() {
 + async function getComponent() {
--   return import(/* webpackChunkName: "lodash" */ 'lodash').then({ default: _ } => {
+-   return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
 -     const element = document.createElement('div');
 -
 -     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
