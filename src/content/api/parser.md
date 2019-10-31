@@ -515,7 +515,7 @@ Called when parsing an expression.
 ```js
 const a = this;
 
-parser.hooks.new.for('this').tap('MyPlugin', expression => {});
+parser.hooks.expression.for('this').tap('MyPlugin', expression => {});
 ```
 
 
@@ -531,7 +531,7 @@ Executed when parsing a `MemberExpression`.
 ```js
 const a = process.env;
 
-parser.hooks.new.for('process').tap('MyPlugin', expression => {});
+parser.hooks.expressionAnyMember.for('process').tap('MyPlugin', expression => {});
 ```
 
 
