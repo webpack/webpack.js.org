@@ -13,6 +13,7 @@ contributors:
   - sterlingvix
   - jeremenichelli
   - dasarianudeep
+  - lukasgeiter
 ---
 
 Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index` and will output the result in `dist/main.js` minified and optimized for production.
@@ -49,7 +50,7 @@ __webpack.config.js__
 const path = require('path');
 
 module.exports = {
-  <mode "/concepts/mode">
+  <mode "/configuration/mode">
     <default>
       mode: "production", // "production" | "development" | "none"
     </default>
@@ -58,7 +59,7 @@ module.exports = {
     mode: "none", // no defaults
   </mode>
   // Chosen mode tells webpack to use its built-in optimizations accordingly.
-  <entry "/configuration/entry-context#entry">
+  <entry "/configuration/entry-context/#entry">
     <default>
       entry: "./app/entry", // string | object | array
     </default>
@@ -80,7 +81,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"), // string
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
-    <filename "/configuration/output#output-filename">
+    <filename "/configuration/output/#outputfilename">
       <default>
         filename: "bundle.js", // string
       </default>
@@ -88,7 +89,7 @@ module.exports = {
       filename: "[chunkhash].js", // for long term caching
     </filename>
     // the filename template for entry chunks
-    <publicPath "/configuration/output#output-publicpath">
+    <publicPath "/configuration/output/#outputpublicpath">
       <default>
         publicPath: "/assets/", // string
       </default>
@@ -98,7 +99,7 @@ module.exports = {
     // the url to the output directory resolved relative to the HTML page
     library: "MyLibrary", // string,
     // the name of the exported library
-    <libraryTarget "/configuration/output#output-librarytarget">
+    <libraryTarget "/configuration/output/#outputlibrarytarget">
       <default>
         libraryTarget: "umd", // universal module definition
       </default>
@@ -144,14 +145,14 @@ module.exports = {
         /* Expert output configuration (on own risk) */
       </default>
       devtoolLineToLine: {
-        test: /\.jsx$/
+        test: /\\.jsx$/
       },
       // use a simple 1:1 mapped SourceMaps for these modules (faster)
       hotUpdateMainFilename: "[hash].hot-update.json", // string
       // filename template for HMR manifest
       hotUpdateChunkFilename: "[id].[hash].hot-update.js", // string
       // filename template for HMR chunks
-      sourcePrefix: "\t", // string
+      sourcePrefix: "\\t", // string
       // prefix module sources in bundle for better readablitity
     </expert>
   },
@@ -160,7 +161,7 @@ module.exports = {
     rules: [
       // rules for modules (configure loaders, parser options, etc.)
       {
-        test: /\.jsx?$/,
+        test: /\\.jsx?$/,
         include: [
           path.resolve(__dirname, "app")
         ],
@@ -189,7 +190,7 @@ module.exports = {
         // options for the loader
       },
       {
-        test: /\.html$/,
+        test: /\\.html$/,
         use: [
           // apply multiple loaders and options
           "htmllint-loader",
@@ -218,15 +219,15 @@ module.exports = {
         /* Advanced module configuration (click to show) */
       </default>
       noParse: [
-        /special-library\.js$/
+        /special-library\\.js$/
       ],
       // do not parse this module
       unknownContextRequest: ".",
       unknownContextRecursive: true,
-      unknownContextRegExp: /^\.\/.*$/,
+      unknownContextRegExp: /^\\.\\/.*$/,
       unknownContextCritical: true,
       exprContextRequest: ".",
-      exprContextRegExp: /^\.\/.*$/,
+      exprContextRegExp: /^\\.\\/.*$/,
       exprContextRecursive: true,
       exprContextCritical: true,
       wrappedContextRegExp: /.*/,
@@ -255,7 +256,7 @@ module.exports = {
       // alias "module" -> "./app/third/module.js" and "module/file" results in error
       // modules aliases are imported relative to the current context
     },
-    <alias "/configuration/resolve#resolve-alias">
+    <alias "/configuration/resolve/#resolvealias">
       <default>
         /* Alternative alias syntax (click to show) */
       </default>
@@ -286,7 +287,7 @@ module.exports = {
       // properites that are read from description file
       // to alias requests in this package
       enforceExtension: false,
-      // if true request must not include an extensions
+      // if true request must not include an extension
       // if false request may already include an extension
       moduleExtensions: ["-module"],
       enforceModuleExtension: false,
@@ -305,7 +306,7 @@ module.exports = {
     </advancedResolve>
   },
   performance: {
-    <hints "/configuration/performance#performance-hints">
+    <hints "/configuration/performance/#performance-hints">
       <default>
         hints: "warning", // enum
       </default>
@@ -355,7 +356,7 @@ module.exports = {
       externals: ["react", /^@angular/],
     </default>
     externals: "react", // string (exact match)
-    externals: /^[a-z\-]+($|\/)/, // Regex
+    externals: /^[a-z\\-]+($|\\/)/, // Regex
     externals: { // object
       angular: "this angular", // this["angular"]
       react: { // UMD
@@ -458,7 +459,7 @@ Or use [webpack-cli's `init` command](https://github.com/webpack/webpack-cli/tre
 npx webpack-cli init
 ```
 
-W> You might be promted to install `@webpack-cli/init` if it is not yet installed in the project or globally.
+W> You might be prompted to install `@webpack-cli/init` if it is not yet installed in the project or globally.
 
 T> After running `npx webpack-cli init` you might get more packages installed to your project depending on the choices you've made during configuration generation.
 

@@ -1,6 +1,6 @@
 ---
 title: Content Security Policies
-sort: 17
+sort: 10
 contributors:
   - EugeneHlushko
   - probablyup

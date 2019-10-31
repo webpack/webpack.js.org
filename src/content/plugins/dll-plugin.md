@@ -13,12 +13,12 @@ related:
     url: https://github.com/webpack/webpack/blob/master/examples/explicit-vendor-chunk/README.md
 ---
 
-The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way that can drastically improve build time performance.
+The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way that can drastically improve build time performance. The term "DLL" stands for Dynamic-link library which was originally introduced by Microsoft.
 
 
 ## `DllPlugin`
 
-This plugin is used in a separate webpack config exclusively to create a dll-only-bundle. It creates a `manifest.json` file, which is used by the [`DllReferencePlugin`](/plugins/dll-plugin#dllreferenceplugin) to map dependencies.
+This plugin is used in a separate webpack config exclusively to create a dll-only-bundle. It creates a `manifest.json` file, which is used by the [`DllReferencePlugin`](#dllreferenceplugin) to map dependencies.
 
 - `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
 - `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[hash]` & `[name]` )
@@ -28,9 +28,9 @@ This plugin is used in a separate webpack config exclusively to create a dll-onl
 new webpack.DllPlugin(options);
 ```
 
-Creates a `manifest.json` which is written to the given `path`. It contains mappings from require and import requests, to module ids. It is used by the `DllReferencePlugin`.
+Creates a `manifest.json` which is written to the given `path`. It contains mappings from require and import requests to module ids. It is used by the `DllReferencePlugin`.
 
-Combine this plugin with [`output.library`](/configuration/output/#output-library) option to expose (aka, put into the global scope) the dll function.
+Combine this plugin with [`output.library`](/configuration/output/#outputlibrary) option to expose (aka, put into the global scope) the dll function.
 
 
 ## `DllReferencePlugin`
@@ -40,9 +40,9 @@ This plugin is used in the primary webpack config, it references the dll-only-bu
 - `context`: (__absolute path__) context of requests in the manifest (or content property)
 - `manifest` : an object containing `content` and `name` or a string to the absolute path of the JSON manifest to be loaded upon compilation
 - `content` (optional): the mappings from request to module id (defaults to `manifest.content`)
-- `name` (optional): the name where the dll is exposed (defaults to `manifest.name`) (see also [`externals`](/configuration/externals/))
+- `name` (optional): an identifier where the dll is exposed (defaults to `manifest.name`) (see also [`externals`](/configuration/externals/))
 - `scope` (optional): prefix which is used for accessing the content of the dll
-- `sourceType` (optional): how the dll is exposed ([libraryTarget](/configuration/output/#output-librarytarget))
+- `sourceType` (optional): how the dll is exposed ([libraryTarget](/configuration/output/#outputlibrarytarget))
 
 ```javascript
 new webpack.DllReferencePlugin(options);
@@ -50,7 +50,7 @@ new webpack.DllReferencePlugin(options);
 
 References a dll manifest file to map dependency names to module ids, then requires them as needed using the internal `__webpack_require__` function.
 
-W> Keep the `name` consistent with [`output.library`](/configuration/output/#output-library).
+W> Keep the `name` consistent with [`output.library`](/configuration/output/#outputlibrary).
 
 
 ### Modes
@@ -59,7 +59,7 @@ This plugin can be used in two different modes, _scoped_ and _mapped_.
 
 #### Scoped Mode
 
-The content of the dll is accessible under a module prefix. i.e. with `scope = "xyz"` a file `abc` in the dll can be access via `require("xyz/abc")`.
+The content of the dll is accessible under a module prefix. i.e. with `scope = 'xyz'` a file `abc` in the dll can be access via `require('xyz/abc')`.
 
 T> [See an example use of scope](https://github.com/webpack/webpack/tree/master/examples/dll-user)
 
@@ -67,7 +67,7 @@ T> [See an example use of scope](https://github.com/webpack/webpack/tree/master/
 
 The content of the dll is mapped to the current directory. If a required file matches a file in the dll (after resolving), then the file from the dll is used instead.
 
-Because this happens after resolving every file in the dll bundle, the same paths must be available for the consumer of the dll bundle. i.e. if the dll contains `lodash` and the file `abc`, `require("lodash")` and `require("./abc")` will be used from the dll, rather than building them into the main bundle.
+Because this happens after resolving every file in the dll bundle, the same paths must be available for the consumer of the dll bundle. i.e. if the dll contains `lodash` and the file `abc`, `require('lodash')` and `require('./abc')` will be used from the dll, rather than building them into the main bundle.
 
 
 ## Usage
@@ -90,7 +90,6 @@ __webpack.app.config.js__
 new webpack.DllReferencePlugin({
   context: __dirname,
   manifest: require('./manifest.json'),
-  name: './my-dll.js',
   scope: 'xyz',
   sourceType: 'commonjs2'
 });

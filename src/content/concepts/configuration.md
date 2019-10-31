@@ -1,6 +1,6 @@
 ---
 title: Configuration
-sort: 6
+sort: 5
 contributors:
   - TheLarkInn
   - simon04
@@ -14,7 +14,7 @@ Because it's a standard Node.js CommonJS module, you __can do the following__:
 
 - import other files via `require(...)`
 - use utilities on npm via `require(...)`
-- use JavaScript control flow expressions i. e. the `?:` operator
+- use JavaScript control flow expressions, e.g. the `?:` operator
 - use constants or variables for often used values
 - write and execute functions to generate a part of the configuration
 
@@ -47,7 +47,7 @@ module.exports = {
 };
 ```
 
-_See_: [Configuration section](/configuration/) for the all supported configuration options
+_See_: [Configuration section](/configuration/) for all supported configuration options
 
 ## Multiple Targets
 

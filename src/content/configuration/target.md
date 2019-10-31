@@ -1,6 +1,6 @@
 ---
 title: Target
-sort: 11
+sort: 13
 contributors:
   - juangl
   - sokra
@@ -16,7 +16,7 @@ webpack can compile for multiple environments or _targets_. To understand what a
 
 ## `target`
 
-`string | function (compiler)`
+`string` `function (compiler)`
 
 Instructs webpack to target a specific environment.
 
@@ -30,6 +30,7 @@ Option                | Description
 `async-node`          | Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)
 `electron-main`       | Compile for [Electron](https://electronjs.org/) for main process.
 `electron-renderer`   | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.
+`electron-preload`    | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `NodeTemplatePlugin` with `asyncChunkLoading` set to `true`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.
 `node`                | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)
 `node-webkit`         | Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)
 `web`                 | Compile for usage in a browser-like environment __(default)__
@@ -40,9 +41,9 @@ For example, when the `target` is set to `"electron-main"`, webpack includes mul
 
 ### `function`
 
-If a function is passed, then it will be called with the compiler as a parameter. Set it to a function if none of the predefined targets from the list above meet your needs.
+If a function is passed, then it will be called with the compiler as a parameter. Set `target` to a `function` if none of the predefined targets from the list above meet your needs.
 
-For example, if you don't want any of the plugins they applied:
+For example, if you don't want any of the plugins applied:
 
 ```js
 const options = {

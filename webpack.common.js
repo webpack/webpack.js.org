@@ -1,12 +1,8 @@
-const fs = require('fs');
 const path = require('path');
-const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const mdPlugins = [
   require('remark-slug'),
-  require('remark-mermaid'),
   [
     require('remark-custom-blockquotes'),
     {
@@ -18,7 +14,7 @@ const mdPlugins = [
     }
   ],
   [
-    require('@rigor789/remark-autolink-headings'),
+    require('remark-autolink-headings'),
     {
       behaviour: 'append'
     }
@@ -151,6 +147,7 @@ module.exports = (env = {}) => ({
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].[chunkhash].chunk.js'
   }
 });

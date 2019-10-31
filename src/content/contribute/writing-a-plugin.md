@@ -1,6 +1,6 @@
 ---
 title: Writing a Plugin
-sort: 4
+sort: 3
 contributors:
   - tbroadley
   - nveenjain
@@ -13,9 +13,9 @@ Plugins expose the full potential of the webpack engine to third-party developer
 
 ## Creating a Plugin
 
-A plugin for webpack consists of
+A plugin for webpack consists of:
 
-- A named JavaScript function.
+- A named JavaScript function or a JavaScript class.
 - Defines `apply` method in its prototype.
 - Specifies an [event hook](/api/compiler-hooks/) to tap into.
 - Manipulates webpack internal instance specific data.
@@ -75,7 +75,7 @@ module.exports = {
 
 ## Compiler and Compilation
 
-Among the two most important resources while developing plugins are the `compiler` and `compilation` objects. Understanding their roles is an important first step in extending the webpack engine.
+Among the two most important resources while developing plugins are the [`compiler`](/api/node/#compiler-instance) and [`compilation`](/api/compilation-hooks/) objects. Understanding their roles is an important first step in extending the webpack engine.
 
 ```javascript
 class HelloCompilationPlugin {
@@ -181,9 +181,9 @@ module.exports = FileListPlugin;
 
 ## Different Plugin Shapes
 
-A plugin can be classified into types based on the event hooks it taps into. Every event hook is pre-defined as synchronous or asynchronous or waterfall or parallel hook and hook is called internally using call/callAsync method. The list of hooks that are supported or can be tapped into are generally specified in this.hooks property.
+A plugin can be classified into types based on the event hooks it taps into. Every event hook is pre-defined as synchronous or asynchronous or waterfall or parallel hook and hook is called internally using call/callAsync method. The list of hooks that are supported or can be tapped into are generally specified in `this.hooks` property.
 
-For example:-
+For example:
 
 ```javascript
 this.hooks = {
@@ -193,7 +193,7 @@ this.hooks = {
 
 It represents that the only hook supported is `shouldEmit` which is a hook of `SyncBailHook` type and the only parameter which will be passed to any plugin that taps into `shouldEmit` hook is `compilation`.
 
-Various types of hooks supported are :-
+Various types of hooks supported are :
 
 ### Synchronous Hooks
 
@@ -246,18 +246,8 @@ Various types of hooks supported are :-
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
     - Called using `callAsync( ... params)` method
 
-  someMethod() {
-  // Call a hook:
-  this.hooks.compilation.call();
-
 - __Async Parallel__
 
     - Defined using `AsyncParallelHook[params]`
-    - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-    - Called using `callAsync( ... params)` method
-
-- __Async Series Bail__
-
-    - Defined using `AsyncSeriesBailHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
     - Called using `callAsync( ... params)` method

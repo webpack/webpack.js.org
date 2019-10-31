@@ -1,6 +1,6 @@
 ---
 title: Loader Interface
-sort: 4
+sort: 5
 contributors:
   - TheLarkInn
   - jhnns
@@ -22,7 +22,7 @@ A single result can be returned in __sync mode__. For multiple results the `this
 
 ## Examples
 
-The following sections provide some basic examples of the different types of loaders. Note that the `map` and `meta` parameters are optional, see [`this.callback`](/api/loaders#this-callback) below.
+The following sections provide some basic examples of the different types of loaders. Note that the `map` and `meta` parameters are optional, see [`this.callback`](#thiscallback) below.
 
 ### Synchronous Loaders
 
@@ -49,7 +49,7 @@ module.exports = function(content, map, meta) {
 
 ### Asynchronous Loaders
 
-For asynchronous loaders, [`this.async`](/api/loaders#this-async) is used to retrieve the `callback` function:
+For asynchronous loaders, [`this.async`](#thisasync) is used to retrieve the `callback` function:
 
 __async-loader.js__
 
@@ -97,11 +97,11 @@ module.exports.raw = true;
 
 ### Pitching Loader
 
-Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left). 
+Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left).
 
-T> Loaders may be added inline in requests and disabled via inline prefixes, which will impact the order in which they are "pitched" and executed. See [`Rule.enforce`](/configuration/module#ruleenforce) for more details.
+T> Loaders may be added inline in requests and disabled via inline prefixes, which will impact the order in which they are "pitched" and executed. See [`Rule.enforce`](/configuration/module/#ruleenforce) for more details.
 
-For the following configuration of [`use`](/configuration/module#rule-use):
+For the following configuration of [`use`](/configuration/module/#ruleuse):
 
 ``` javascript
 module.exports = {
@@ -147,7 +147,7 @@ module.exports.pitch = function(remainingRequest, precedingRequest, data) {
 };
 ```
 
-Second, if a loader delivers a result in the `pitch` method the process turns around and skips the remaining loaders. In our example above, if the `b-loader`s `pitch` method returned something:
+Second, if a loader delivers a result in the `pitch` method, the process turns around and skips the remaining loaders. In our example above, if the `b-loader`s `pitch` method returned something:
 
 ``` javascript
 module.exports = function(content) {
@@ -176,7 +176,8 @@ See the [bundle-loader](https://github.com/webpack-contrib/bundle-loader) for a 
 
 The loader context represents the properties that are available inside of a loader assigned to the `this` property.
 
-Given the following example this require call is used:
+Given the following example, this require call is used:
+
 In `/abc/file.js`:
 
 ``` javascript
@@ -232,7 +233,7 @@ this.callback(
 ```
 
 1. The first argument must be an `Error` or `null`
-2. The second argument a `string` or a [`Buffer`](https://nodejs.org/api/buffer.html).
+2. The second argument is a `string` or a [`Buffer`](https://nodejs.org/api/buffer.html).
 3. Optional: The third argument must be a source map that is parsable by [this module](https://github.com/mozilla/source-map).
 4. Optional: The fourth option, ignored by webpack, can be anything (e.g. some metadata).
 
@@ -261,12 +262,12 @@ cacheable(flag = true: boolean)
 
 By default, loader results are flagged as cacheable. Call this method passing `false` to make the loader's result not cacheable.
 
-A cacheable loader must have a deterministic result when inputs and dependencies haven't changed. This means the loader shouldn't have other dependencies than specified with `this.addDependency`.
+A cacheable loader must have a deterministic result when inputs and dependencies haven't changed. This means the loader shouldn't have dependencies other than those specified with `this.addDependency`.
 
 
 ### `this.loaders`
 
-An array of all the loaders. It is writeable in the pitch phase.
+An array of all the loaders. It is writable in the pitch phase.
 
 <!-- eslint-skip -->
 
@@ -333,7 +334,7 @@ Example values: `"web"`, `"node"`
 
 This boolean is set to true when this is compiled by webpack.
 
-T> Loaders were originally designed to also work as Babel transforms. Therefore if you write a loader that works for both, you can use this property to know if there is access to additional loaderContext and webpack features.
+T> Loaders were originally designed to also work as Babel transforms. Therefore, if you write a loader that works for both, you can use this property to know if there is access to additional loaderContext and webpack features.
 
 
 ### `this.sourceMap`
@@ -401,7 +402,7 @@ addDependency(file: string)
 dependency(file: string) // shortcut
 ```
 
-Adds a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack-contrib/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the url's for those attributes as dependencies of the html file that is parsed.
+Add a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack-contrib/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the URLs for those attributes as dependencies of the html file that is parsed.
 
 
 ### `this.addContextDependency`
@@ -419,7 +420,7 @@ Add a directory as dependency of the loader result.
 clearDependencies()
 ```
 
-Remove all dependencies of the loader result. Even initial dependencies and these of other loaders. Consider using `pitch`.
+Remove all dependencies of the loader result, even initial dependencies and those of other loaders. Consider using `pitch`.
 
 
 ### `this.emitFile`
@@ -434,6 +435,13 @@ Emit a file. This is webpack-specific.
 ### `this.fs`
 
 Access to the `compilation`'s `inputFileSystem` property.
+
+
+### `this.mode`
+
+Read in which [`mode`](/configuration/mode/) webpack is running.
+
+Possible values: `'production'`, `'development'`, `'none'`
 
 
 ## Deprecated context properties
@@ -503,7 +511,7 @@ Hacky access to the Module object being loaded.
 
 You can report errors from inside a loader by:
 
-- Using [this.emitError](/api/loaders/#this-emiterror). Will report the errors without interrupting module's compilation.
+- Using [this.emitError](/api/loaders/#thisemiterror). Will report the errors without interrupting module's compilation.
 - Using `throw` (or other uncaught exception). Throwing an error while a loader is running will cause current module compilation failure.
 - Using `callback` (in async mode). Pass an error to the callback will also cause module compilation failure.
 
@@ -586,7 +594,7 @@ Not following this recommendation will make your code webpack-specific and non-s
 
 T> A relative `matchResource` will resolve relative to the current context of the containing module.
 
-When a `matchResource` is set, it will be used to match with the [`module.rules`](/configuration/module/#module-rules) instead of the original resource. This can be useful if further loaders should be applied to the resource, or if the module type needs to be changed. It's also displayed in the stats and used for matching [`Rule.issuer`](/configuration/module/#rule-issuer) and [`test` in `splitChunks`](/plugins/split-chunks-plugin/#splitchunks-cachegroups-cachegroup-test).
+When a `matchResource` is set, it will be used to match with the [`module.rules`](/configuration/module/#modulerules) instead of the original resource. This can be useful if further loaders should be applied to the resource, or if the module type needs to be changed. It's also displayed in the stats and used for matching [`Rule.issuer`](/configuration/module/#ruleissuer) and [`test` in `splitChunks`](/plugins/split-chunks-plugin/#splitchunkscachegroupscachegrouptest).
 
 Example:
 
@@ -606,7 +614,7 @@ import './file.js.css!=!extract-style-loader/getStyles!./file.js';
 console.log('yep');
 ```
 
-This will add a dependency to `extract-style-loader/getStyles!./file.js` and treat the result as `file.js.css`. Because [`module.rules`](/configuration/module/#module-rules) has a rule matching `/\.css$/` and it will apply to this dependency.
+This will add a dependency to `extract-style-loader/getStyles!./file.js` and treat the result as `file.js.css`. Because [`module.rules`](/configuration/module/#modulerules) has a rule matching `/\.css$/` and it will apply to this dependency.
 
 The loader could look like this:
 
@@ -635,3 +643,11 @@ module.exports = function(source) {
   return match[0];
 };
 ```
+
+## Logging
+
+Logging API is available since the release of webpack 4.37. When `logging` is enabled in [`stats configuration`](/configuration/stats/#statslogging) and/or when [`infrastructure logging`](/configuration/other-options/#infrastructurelogging) is enabled, loaders may log messages which will be printed out in the respective logger format (stats, infrastructure).
+
+- Loaders should prefer to use `this.getLogger()` for logging which is a shortcut to `compilation.getLogger()` with loader path and processed file. This kind of logging is stored to the Stats and formatted accordingly. It can be filtered and exported by the webpack user.
+- Loaders may use `this.getLogger('name')` to get an independent logger with a child name. Loader path and processed file is still added.
+- Loaders may use special fallback logic for detecting logging support `this.getLogger() ? this.getLogger() : console` to provide a fallback when an older webpack version is used which does not support `getLogger` method.

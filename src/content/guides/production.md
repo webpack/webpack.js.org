@@ -1,6 +1,6 @@
 ---
 title: Production
-sort: 8
+sort: 17
 contributors:
   - henriquea
   - rajagopal4890
@@ -17,9 +17,12 @@ contributors:
   - xgirma
   - mehrdaad
   - SevenOutman
+  - AnayaDesign
+  - wizardofhogwarts
+  - aholzner
 ---
 
-In this guide we'll dive into some of the best practices and utilities for building a production site or application.
+In this guide, we'll dive into some of the best practices and utilities for building a production site or application.
 
 T> This walkthrough stems from [Tree Shaking](/guides/tree-shaking) and [Development](/guides/development). Please ensure you are familiar with the concepts/setup introduced in those guides before continuing on.
 
@@ -56,23 +59,24 @@ __webpack.common.js__
 
 ``` diff
 + const path = require('path');
-+ const CleanWebpackPlugin = require('clean-webpack-plugin');
++ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 + const HtmlWebpackPlugin = require('html-webpack-plugin');
 +
 + module.exports = {
 +   entry: {
-+     app: './src/index.js'
++     app: './src/index.js',
 +   },
 +   plugins: [
-+     new CleanWebpackPlugin(['dist']),
++     // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
++     new CleanWebpackPlugin(),
 +     new HtmlWebpackPlugin({
-+       title: 'Production'
-+     })
++       title: 'Production',
++     }),
 +   ],
 +   output: {
 +     filename: '[name].bundle.js',
-+     path: path.resolve(__dirname, 'dist')
-+   }
++     path: path.resolve(__dirname, 'dist'),
++   },
 + };
 ```
 
@@ -86,8 +90,8 @@ __webpack.dev.js__
 +   mode: 'development',
 +   devtool: 'inline-source-map',
 +   devServer: {
-+     contentBase: './dist'
-+   }
++     contentBase: './dist',
++   },
 + });
 ```
 
@@ -109,7 +113,7 @@ Note the use of `merge()` in the environment-specific configurations to easily i
 
 ## NPM Scripts
 
-Now let's repoint our `scripts` to the new configurations. We'll use the _development_ one for our `webpack-dev-server`, `npm start`, script and the _production_ one for our `npm run build` script:
+Now, let's modify our npm scripts to use the new configuration files. For the `start` script, which runs `webpack-dev-server`, we will use `webpack.dev.js`, and for the `build` script, which runs `webpack` to create a production build, we will use `webpack.prod.js`:
 
 __package.json__
 
@@ -136,7 +140,7 @@ __package.json__
       "file-loader": "^0.11.2",
       "html-webpack-plugin": "^2.29.0",
       "style-loader": "^0.18.2",
-      "webpack": "^3.0.0",
+      "webpack": "^4.30.0",
       "webpack-dev-middleware": "^1.12.0",
       "webpack-dev-server": "^2.9.1",
       "webpack-merge": "^4.1.0",
@@ -149,7 +153,7 @@ Feel free to run those scripts and see how the output changes as we continue add
 
 ## Specify the Mode
 
-Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when not in _production_ some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV === 'production'` they might drop or add significant portions of code to optimize how things run for your actual users. Since webpack v4, specifying [`mode`](/concepts/mode/) automatically configures [`DefinePlugin`](/plugins/define-plugin) for you:
+Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when not in _production_ some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV === 'production'` they might drop or add significant portions of code to optimize how things run for your actual users. Since webpack v4, specifying [`mode`](/configuration/mode/) automatically configures [`DefinePlugin`](/plugins/define-plugin) for you:
 
 __webpack.prod.js__
 
@@ -164,7 +168,7 @@ __webpack.prod.js__
 
 T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine dev-vs-prod behavior by server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `"production"` __within__ the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` within webpack configurations do not work as expected.
 
-If you're using a library like [`react`](https://reactjs.org/), you should actually see a significant drop in bundle size after adding this plugin. Also note that any of our local `/src` code can key off of this as well, so the following check would be valid:
+If you're using a library like [`react`](https://reactjs.org/), you should actually see a significant drop in bundle size after adding this plugin. Also, note that any of our local `/src` code can key off of this as well, so the following check would be valid:
 
 __src/index.js__
 
@@ -176,7 +180,7 @@ __src/index.js__
 + }
 
   function component() {
-    var element = document.createElement('pre');
+    const element = document.createElement('pre');
 
     element.innerHTML = [
       'Hello webpack!',
@@ -192,19 +196,19 @@ __src/index.js__
 
 ## Minification
 
-webpack v4+ will minify your code by default in [`production mode`](/concepts/mode/#mode-production).
+webpack v4+ will minify your code by default in [`production mode`](/configuration/mode/#mode-production).
 
 Note that while the [`TerserPlugin`](/plugins/terser-webpack-plugin) is a great place to start for minification and being used by default, there are other options out there. Here are a few more popular ones:
 
 - [`BabelMinifyWebpackPlugin`](https://github.com/webpack-contrib/babel-minify-webpack-plugin)
 - [`ClosureWebpackPlugin`](https://github.com/webpack-contrib/closure-webpack-plugin)
 
-If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimization-minimizer).
+If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
 
 
 ## Source Mapping
 
-We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that's recommended for production use (see [`devtool`](/configuration/devtool)). For this guide, we'll use the `source-map` option in _production_ as opposed to the `inline-source-map` we used in _development_:
+We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that's recommended for production use (see [`devtool`](/configuration/devtool)). For this guide, we'll use the `source-map` option in the _production_ as opposed to the `inline-source-map` we used in the _development_:
 
 __webpack.prod.js__
 
@@ -214,7 +218,7 @@ __webpack.prod.js__
 
   module.exports = merge(common, {
     mode: 'production',
-+   devtool: 'source-map'
++   devtool: 'source-map',
   });
 ```
 
@@ -223,11 +227,11 @@ T> Avoid `inline-***` and `eval-***` use in production as they can increase bund
 
 ## Minimize CSS
 
-It is crucial to minimize your CSS on production, please see [Minimizing for Production](/plugins/mini-css-extract-plugin/#minimizing-for-production) section.
+It is crucial to minimize your CSS for production. Please see the [Minimizing for Production](/plugins/mini-css-extract-plugin/#minimizing-for-production) section.
 
 
 ## CLI Alternatives
 
-Some of what has been described above is also achievable via the command line. For example, the `--optimize-minimize` flag will include the `TerserPlugin` behind the scenes. The `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above. And, `webpack -p` will automatically invoke both those flags and thus the plugins to be included.
+Some of what has been described above can also be achieved by using the command line. For example, the `--optimize-minimize` flag will include the `TerserPlugin` behind the scenes. The `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above. And, `webpack -p` will automatically invoke both those flags and thus the plugins to be included.
 
-While these short hand methods are nice, we usually recommend just using the configuration as it's better to understand exactly what is being done for you in both cases. The configuration also gives you more control on fine tuning other options within both plugins.
+While these shorthand methods are nice, we usually recommend just using the configuration as it's better to understand exactly what is being done for you in both cases. The configuration also gives you more control on fine-tuning other options within both plugins.

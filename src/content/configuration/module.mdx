@@ -1,6 +1,6 @@
 ---
 title: Module
-sort: 6
+sort: 7
 contributors:
   - sokra
   - skipjack
@@ -13,6 +13,7 @@ contributors:
   - nerdkid93
   - EugeneHlushko
   - superburrito
+  - lukasgeiter
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -73,7 +74,7 @@ In a Rule the properties [`test`](#ruletest), [`include`](#ruleinclude), [`exclu
 
 When using multiple conditions, all conditions must match.
 
-W> Be careful! The resource is the _resolved_ path of the file, which means symlinked resources are the real path _not_ the symlink location. This is good to remember when using tools that symlink packages (like `npm link`), common conditions like `/node_modules/` may inadvertently miss symlinked files. Note that you can turn off symlink resolving (so that resources are resolved to the symlink path) via [`resolve.symlinks`](/configuration/resolve#resolve-symlinks).
+W> Be careful! The resource is the _resolved_ path of the file, which means symlinked resources are the real path _not_ the symlink location. This is good to remember when using tools that symlink packages (like `npm link`), common conditions like `/node_modules/` may inadvertently miss symlinked files. Note that you can turn off symlink resolving (so that resources are resolved to the symlink path) via [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks).
 
 
 ### Rule results
@@ -123,7 +124,7 @@ All normal and pre loaders can be omitted (overridden) by prefixing `-!` in the 
 All normal, post and pre loaders can be omitted (overridden) by prefixing `!!` in the request.
 
 ``` javascript
-// Disable preloaders
+// Disable normal loaders
 import { a } from '!./file1.js';
 
 // Disable preloaders and normal loaders
@@ -183,7 +184,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\\.css$/,
         oneOf: [
           {
             resourceQuery: /inline/, // foo.css?inline
@@ -264,7 +265,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\\.css$/,
         resourceQuery: /inline/,
         use: 'url-loader'
       }
@@ -308,7 +309,7 @@ module.exports = {
     rules: [
       //...
       {
-        test: /\.json$/,
+        test: /\\.json$/,
         type: 'javascript/auto',
         loader: 'custom-json-loader'
       }
@@ -402,6 +403,69 @@ module.exports = {
 
 See [UseEntry](#useentry) for details.
 
+## `Rule.resolve`
+
+W> `Rule.resolve` is Available since webpack 4.36.1
+
+Resolving can be configured on module level. See all available options on [resolve configuration page](/configuration/resolve/#resolve).
+All applied resolve options get deeply merged with higher level [resolve](/configuration/resolve/#resolve).
+
+For example, let's imagine we have an entry in `./src/index.js`, `./src/footer/default.js` and a `./src/footer/overriden.js` to demonstrate the module level resolve.
+
+__./src/index.js__
+
+```javascript
+import footer from 'footer';
+console.log(footer);
+```
+
+__./src/footer/default.js__
+
+```javascript
+export default 'default footer';
+```
+
+__./src/footer/overriden.js__
+
+```javascript
+export default 'overriden footer';
+```
+
+__webpack.js.org__
+
+```javascript
+module.exports = {
+  resolve: {
+    alias: {
+      'footer': './footer/default.js'
+    }
+  }
+};
+```
+
+When creating a bundle with this configuration, `console.log(footer)` will output 'default footer'. Let's set `Rule.resolve` for `.js` files, and alias `footer` to `overriden.js`.
+
+__webpack.js.org__
+
+```javascript
+module.exports = {
+  resolve: {
+    alias: {
+      'footer': './footer/default.js'
+    }
+  },
+  module: {
+    rules: [
+      alias: {
+        'footer': './footer/overriden.js'
+      }
+    ]
+  }
+};
+```
+
+When creating a bundle with updated configuration, `console.log(footer)` will output 'overriden footer'.
+
 
 ## `Condition`
 
@@ -433,7 +497,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\\.css$/,
         include: [
           path.resolve(__dirname, 'app/styles'),
           path.resolve(__dirname, 'vendor/styles')
@@ -451,7 +515,7 @@ module.exports = {
 
 __`object`__
 
-It must have a `loader` property being a string. It is resolved relative to the configuration [`context`](/configuration/entry-context#context) with the loader resolving options ([resolveLoader](/configuration/resolve#resolveloader)).
+It must have a `loader` property being a string. It is resolved relative to the configuration [`context`](/configuration/entry-context/#context) with the loader resolving options ([resolveLoader](/configuration/resolve/#resolveloader)).
 
 It can have an `options` property being a string or object. This value is passed to the loader, which should interpret it as loader options.
 
@@ -558,6 +622,6 @@ T> You can use the `ContextReplacementPlugin` to modify these values for individ
 A few use cases:
 
 - Warn for dynamic dependencies: `wrappedContextCritical: true`.
-- `require(expr)` should include the whole directory: `exprContextRegExp: /^\.\//`
+- `require(expr)` should include the whole directory: `exprContextRegExp: /^\\.\\//`
 - `require('./templates/' + expr)` should not include subdirectories by default: `wrappedContextRecursive: false`
 - `strictExportPresence` makes missing exports an error instead of warning
