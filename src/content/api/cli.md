@@ -316,7 +316,6 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 | `--sort-modules-by`              | Sorts the modules list by property in module                                                                               | string  |
 | `--verbose`                      | Show more details                                                                                                          | boolean |
 
-
 ### Advanced Options
 
 | Parameter               | Explanation                                                        | Usage                                           |
