@@ -62,6 +62,8 @@ module.exports = () => {
 };
 ```
 
+W> Returning a `Promise` only works when using webpack via CLI. [`webpack()`](/api/node/#webpack) expects an object.
+
 
 ## Exporting multiple configurations
 
