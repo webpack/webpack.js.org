@@ -48,7 +48,7 @@ As it happens, the AMD support in webpack ignores the defined name anyways.
 
 ## `bail`
 
-`boolean: false`
+`boolean = false`
 
 Fail out on the first error instead of tolerating it. By default webpack will log these errors in red in the terminal, as well as the browser console when using HMR, but continue bundling. To enable it:
 
