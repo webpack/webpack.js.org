@@ -1080,7 +1080,7 @@ module.exports = {
 
 `boolean = true`
 
-Tells webpack to check if to be emitted file already exists and has the same content before writing to the output filesystem.
+Tells webpack to check if to be emitted file already exists and has the same content before writing to the output file system.
 
 W> webpack will not write output file when file already exists on disk with the same content.
 
