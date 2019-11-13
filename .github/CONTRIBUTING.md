@@ -1,14 +1,14 @@
 Contributing
 ------------
 
-From adding an issue for a documentation suggestion to creating a pull request: every
+From opening an issue for a documentation suggestion to creating a pull request: every
 contribution is appreciated and welcome. If you're planning to implement a new section or
 page please create an issue first.
 
 
 ## Setup
 
-Start by ensuring you have Node installed and forking the repository:
+Start by ensuring that you have Node.js installed and forking the repository:
 
 - Install [Node.js][1] if you have not already.
 - Fork the **webpack.js.org** repo from [the main repository][2].
@@ -30,7 +30,7 @@ See the `package.json` for the full list of `scripts`.
 
 > Note that a __Python version between v2.5.0 and 3.0.0__ is required for the [proselint][12] dependency.
 
-> Although __Yarn__ is not required to work with webpack docs, the core team is using it more extensively. If you prefer to use Yarn make sure you [got it installed][13] and run `yarn` to pull all dependencies, `yarn build` to build the project, or `yarn start` to start development server.
+> Although __Yarn__ is not required to work with webpack docs, the core team is using it more extensively. If you prefer to use Yarn make sure that you [get it installed][13] and run `yarn` to pull all dependencies, `yarn build` to build the project, or `yarn start` to start the development server.
 
 > On Debian and Ubuntu operating systems you may have to use `node >= 7.0.0` to avoid build errors with `node-sass`. Please note that we don't officially support building on these systems.
 

@@ -17,7 +17,7 @@ This feature is provided by webpack's internal [`NodeStuffPlugin`](https://githu
 
 ## `node`
 
-`boolean: false | object`
+`boolean = false` `object`
 
 This is an object where each property is the name of a Node global or module and each value may be one of the following...
 
@@ -45,17 +45,16 @@ module.exports = {
 
 Since webpack 3.0.0, the `node` option may be set to `false` to completely turn off the `NodeStuffPlugin` and `NodeSourcePlugin` plugins.
 
-
 ## `node.global`
 
-`boolean: true`
+`boolean = true`
 
 See [the source](https://github.com/webpack/webpack/blob/master/buildin/global.js) for the exact behavior of this object.
 
 
 ## `node.__filename`
 
-`boolean` `string: 'mock'`
+`string = 'mock'` `boolean`
 
 Options:
 
@@ -66,7 +65,7 @@ Options:
 
 ## `node.__dirname`
 
-`boolean` `string: 'mock'`
+`string = 'mock'` `boolean`
 
 Options:
 

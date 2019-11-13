@@ -5,6 +5,7 @@ contributors:
   - skipjack
   - franjohn21
   - byzyk
+  - EugeneHlushko
   - superburrito
 ---
 
@@ -23,37 +24,37 @@ The top-level structure of the output JSON file is fairly straightforward but th
 
 ``` js-with-links
 {
-  "version": "5.0.0-alpha.6", // Version of webpack used for the compilation
-  "hash": "11593e3b3ac85436984a", // Compilation specific hash
-  "time": 2469, // Compilation time in milliseconds
-  "filteredModules": 0, // A count of excluded modules when [`exclude`](/configuration/stats/#stats) is passed to the [`toJson`](/api/node/#stats-tojson-options-) method
-  "outputPath": "/", // path to webpack output directory
-  "assetsByChunkName": {
+  'version': '5.0.0-alpha.6', // Version of webpack used for the compilation
+  'hash': '11593e3b3ac85436984a', // Compilation specific hash
+  'time': 2469, // Compilation time in milliseconds
+  'filteredModules': 0, // A count of excluded modules when [`exclude`](/configuration/stats/#stats) is passed to the [`toJson`](/api/node/#stats-tojson-options-) method
+  'outputPath': ''/', // path to webpack output directory
+  'assetsByChunkName': {
     // Chunk name to emitted asset(s) mapping
-    "main": [
-      "web.js?h=11593e3b3ac85436984a"
+    'main': [
+      'web.js?h=11593e3b3ac85436984a'
     ],
-    "named-chunk": [
-      "named-chunk.web.js"
+    'named-chunk': [
+      'named-chunk.web.js'
     ],
-    "other-chunk": [
-      "other-chunk.js",
-      "other-chunk.css"
+    'other-chunk': [
+      'other-chunk.js',
+      'other-chunk.css'
     ]
   },
-  "assets": [
+  'assets': [
     // A list of [asset objects](#asset-objects)
   ],
-  "chunks": [
+  'chunks': [
     // A list of [chunk objects](#chunk-objects)
   ],
-  "modules": [
+  'modules': [
     // A list of [module objects](#module-objects)
   ],
-  "errors": [
+  'errors': [
     // A list of [error strings](#errors-and-warnings)
   ],
-  "warnings": [
+  'warnings': [
     // A list of [warning strings](#errors-and-warnings)
   ]
 }
@@ -68,18 +69,26 @@ Each `assets` object represents an `output` file emitted from the compilation. T
 
 ```js
 {
-  "chunkNames": [], // The chunks this asset contains
-  "chunks": [ 10, 6 ], // The chunk IDs this asset contains
-  "emitted": true, // Indicates whether or not the asset made it to the `output` directory
-  "name": "10.web.js", // The `output` filename
-  "size": 1058 // The size of the file in bytes
+  'chunkNames': [], // The chunks this asset contains
+  'chunks': [ 10, 6 ], // The chunk IDs this asset contains
+  'emitted': true, // Indicates whether or not the asset made it to the `output` directory
+  'name': '10.web.js', // The `output` filename
+  'size': 1058, // The size of the file in bytes
+  'info': {
+    'immutable': true, // A flag telling whether the asset can be long term cached (contains a hash)
+    'size': 1058, // The size in bytes, only becomes available after asset has been emitted
+    'development': true, // A flag telling whether the asset is only used for development and doesn't count towards user-facing assets
+    'hotModuleReplacement': true // A flag telling whether the asset ships data for updating an existing application (HMR)
+  }
 }
 ```
+
+T> Asset's `info` property is available since webpack v4.40.0
 
 
 ### Chunk Objects
 
-Each `chunks` object represents a group of modules known as a [chunk](/glossary#c). Each object follows the following structure:
+Each `chunks` object represents a group of modules known as a [chunk](/glossary/#c). Each object follows the following structure:
 
 ```js-with-links
 {
@@ -139,13 +148,13 @@ What good would these statistics be without some description of the compiled app
   ],
   "errors": 0, // Number of errors when resolving or processing the module
   "failed": false, // Whether or not compilation failed on this module
-  "id": 0, // The ID of the module (analogous to [`module.id`](/api/module-variables#module-id-commonjs-))
+  "id": 0, // The ID of the module (analogous to [`module.id`](/api/module-variables/#moduleid-commonjs))
   "identifier": "(webpack)\\test\\browsertest\\lib\\index.web.js", // A unique ID used internally
   "name": "./lib/index.web.js", // Path to the actual file
   "optional": false, // All requests to this module are with `try... catch` blocks (irrelevant with ESM)
   "prefetched": false, // Indicates whether or not the module was [prefetched](/plugins/prefetch-plugin)
   "profile": {
-    // Module specific compilation stats corresponding to the [`--profile` flag](/api/cli#profiling) (in milliseconds)
+    // Module specific compilation stats corresponding to the [`--profile` flag](/api/cli/#profiling) (in milliseconds)
     "building": 73, // Loading and parsing
     "dependencies": 242, // Building dependencies
     "factory": 11 // Resolving dependencies

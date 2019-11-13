@@ -49,7 +49,16 @@ function getDirectoryRecursive(basePath) {
 			}
 
 		// write compound target file
-		const targetFile = fs.createWriteStream(targetFilePath);
+    const targetFile = fs.createWriteStream(targetFilePath);
+
+    targetFile.write(`---
+title: Printable
+sort: 999
+contributors:
+  - webpack
+---
+
+    `);
 
 		targetFile.on('error', (error) => {
       throw error;

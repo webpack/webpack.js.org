@@ -1,7 +1,7 @@
 ---
 title: JavascriptParser Hooks
 group: Plugins
-sort: 10
+sort: 11
 contributors:
   - byzyk
   - DeTeam
@@ -462,7 +462,7 @@ Triggered when parsing the `typeof` of an identifier
 
 Called when parsing a function call.
 
-- Hook Paramaeters: `identifier`
+- Hook Parameters: `identifier`
 - Callback Parameters: `expression`
 
 ```js

@@ -1,4 +1,6 @@
 // Import External Dependencies
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+const path = require('path');
 const merge = require('webpack-merge');
 const SSGPlugin = require('static-site-generator-webpack-plugin');
 const RedirectWebpackPlugin = require('redirect-webpack-plugin');
@@ -72,15 +74,11 @@ module.exports = env => merge(common(env), {
           'guides/why-webpack': '/comparison/',
           'guides/production-build': '/guides/production/',
           'migrating': '/migrate/3/',
-          'plugins/no-emit-on-errors-plugin': '/configuration/optimization/#optimization-noemitonerrors',
+          'plugins/no-emit-on-errors-plugin': '/configuration/optimization/#optimizationnoemitonerrors',
           'concepts/mode': '/configuration/mode'
         }
       }),
       new CopyWebpackPlugin([
-        {
-          from: './assets/PWA',
-          to: './'
-        },
         {
           from: './assets/icon-square-small-slack.png',
           to: './assets/'
@@ -89,7 +87,36 @@ module.exports = env => merge(common(env), {
           from: './assets/icon-square-big.svg',
           to: './assets/'
         },
+        {
+          from: './assets/robots.txt',
+          to: './'
+        },
         'CNAME'
-      ])
+      ]),
+      new WebpackPwaManifest({
+        name: 'webpack Documentation',
+        short_name: 'webpack',
+        description: 'webpack documentation web application',
+        background_color: '#2b3a42',
+        theme_color: '#2b3a42',
+        display: 'fullscreen',
+        inject: false,
+        fingerprints: false,
+        ios: true,
+        scope: '/',
+        start_url: '/',
+        orientation: 'omit',
+        icons: [
+          {
+            src: path.resolve('src/assets/icon-pwa-512x512.png'),
+            sizes: [72, 96, 128, 144, 150, 192, 384, 512],
+          },
+          {
+            src: path.resolve('src/assets/icon-pwa-512x512.png'),
+            sizes: [120, 152, 167, 180],
+            ios: true,
+          },
+        ],
+      }),
     ]
   });

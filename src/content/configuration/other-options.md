@@ -23,7 +23,7 @@ W> Help Wanted: This page is still a work in progress. If you are familiar with 
 
 ## `amd`
 
-`object` `bool: false`
+`object` `boolean: false`
 
 Set the value of `require.amd` or `define.amd`. Setting `amd` to `false` will disable webpack's AMD support.
 
@@ -49,7 +49,7 @@ As it happens, the AMD support in webpack ignores the defined name anyways.
 
 ## `bail`
 
-`bool`
+`boolean = false`
 
 Fail out on the first error instead of tolerating it. By default webpack will log these errors in red in the terminal, as well as the browser console when using HMR, but continue bundling. To enable it:
 
@@ -67,7 +67,7 @@ This will force webpack to exit its bundling process.
 
 ## `cache`
 
-`bool` `object`
+`boolean` `object`
 
 Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/concepts/mode/#mode-development) and disabled in [`production` mode](/configuration/mode/#mode-production). `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
 
@@ -223,7 +223,7 @@ Expose custom values into the loader context.
 
 ## `parallelism`
 
-`number: 100`
+`number = 100`
 
 Limit the number of parallel processed modules. Can be used to fine tune performance or to get more reliable profiling results.
 
@@ -298,5 +298,59 @@ __webpack.config.js__
 module.exports = {
   //...
   name: 'admin-app'
+};
+```
+
+### infrastructureLogging
+
+Options for infrastructure level logging.
+
+`object = {}`
+
+#### infrastructureLogging.level
+
+`string`
+
+Enable infrastructure logging output. Similar to [`stats.logging`](/configuration/stats/#statslogging) option but for infrastructure. No default value is given.
+
+Possible values:
+
+- `'none'` - disable logging
+- `'error'` - errors only
+- `'warn'` - errors and warnings only
+- `'info'` - errors, warnings, and info messages
+- `'log'` - errors, warnings, info messages, log messages, groups, clears. Collapsed groups are displayed in a collapsed state.
+- `'verbose'` - log everything except debug and trace. Collapsed groups are displayed in expanded state.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    level: 'info'
+  }
+};
+```
+
+#### infrastructureLogging.debug
+
+`string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
+
+Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#stats) option but for infrastructure. No default value is given.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    level: 'info',
+    debug: [
+      'MyPlugin',
+      /MyPlugin/,
+      (name) => name.contains('MyPlugin')
+    ]
+  }
 };
 ```
