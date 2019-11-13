@@ -288,7 +288,7 @@ module.exports = {
 
 ### `stats.entrypoints`
 
-`boolean = false`
+`boolean = true`
 
 Tells `stats` whether to display the entry points with the corresponding bundles.
 
@@ -296,7 +296,7 @@ Tells `stats` whether to display the entry points with the corresponding bundles
 module.exports = {
   //...
   stats: {
-    entrypoints: true
+    entrypoints: false
   }
 };
 ```
