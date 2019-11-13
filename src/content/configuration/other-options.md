@@ -22,7 +22,7 @@ W> Help Wanted: This page is still a work in progress. If you are familiar with 
 
 ## `amd`
 
-`object` `boolean: false`
+`object` `boolean = false`
 
 Set the value of `require.amd` or `define.amd`. Setting `amd` to `false` will disable webpack's AMD support.
 
