@@ -18,6 +18,7 @@ import Sponsors from '../Sponsors/Sponsors';
 import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
+import PageNotFound from '../PageNotFound/PageNotFound';
 import Gitter from '../Gitter/Gitter';
 import Vote from '../Vote/Vote';
 import Organization from '../Organization/Organization';
@@ -51,8 +52,9 @@ class Site extends React.Component {
     return (
       <div className="site">
         <DocumentTitle title={getPageTitle(Content, location.pathname)} />
-        <NotificationBar />
-        <Navigation
+        <div className="site__header">
+          <NotificationBar />
+          <Navigation
           pathname={location.pathname}
           toggleSidebar={this._toggleSidebar}
           links={[
@@ -66,7 +68,8 @@ class Site extends React.Component {
             { content: 'Vote', url: '/vote/' },
             { content: 'Blog', url: 'https://medium.com/webpack' }
           ]}
-        />
+          />
+        </div>
 
         {isClient ? <SidebarMobile
           isOpen={mobileSidebarOpen}
@@ -112,7 +115,7 @@ class Site extends React.Component {
                       }}
                     />
                   ))}
-                  <Route render={props => '404 Not Found'} />
+                  <Route render={props => <PageNotFound />} />
                 </Switch>
               </Container>
             )}

@@ -59,7 +59,7 @@ module.exports = {
     mode: "none", // no defaults
   </mode>
   // Chosen mode tells webpack to use its built-in optimizations accordingly.
-  <entry "/configuration/entry-context#entry">
+  <entry "/configuration/entry-context/#entry">
     <default>
       entry: "./app/entry", // string | object | array
     </default>
@@ -81,7 +81,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"), // string
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
-    <filename "/configuration/output#output-filename">
+    <filename "/configuration/output/#outputfilename">
       <default>
         filename: "bundle.js", // string
       </default>
@@ -89,7 +89,7 @@ module.exports = {
       filename: "[chunkhash].js", // for long term caching
     </filename>
     // the filename template for entry chunks
-    <publicPath "/configuration/output#output-publicpath">
+    <publicPath "/configuration/output/#outputpublicpath">
       <default>
         publicPath: "/assets/", // string
       </default>
@@ -99,7 +99,7 @@ module.exports = {
     // the url to the output directory resolved relative to the HTML page
     library: "MyLibrary", // string,
     // the name of the exported library
-    <libraryTarget "/configuration/output#output-librarytarget">
+    <libraryTarget "/configuration/output/#outputlibrarytarget">
       <default>
         libraryTarget: "umd", // universal module definition
       </default>
@@ -256,7 +256,7 @@ module.exports = {
       // alias "module" -> "./app/third/module.js" and "module/file" results in error
       // modules aliases are imported relative to the current context
     },
-    <alias "/configuration/resolve#resolve-alias">
+    <alias "/configuration/resolve/#resolvealias">
       <default>
         /* Alternative alias syntax (click to show) */
       </default>
@@ -306,7 +306,7 @@ module.exports = {
     </advancedResolve>
   },
   performance: {
-    <hints "/configuration/performance#performance-hints">
+    <hints "/configuration/performance/#performance-hints">
       <default>
         hints: "warning", // enum
       </default>
@@ -459,7 +459,7 @@ Or use [webpack-cli's `init` command](https://github.com/webpack/webpack-cli/tre
 npx webpack-cli init
 ```
 
-W> You might be promted to install `@webpack-cli/init` if it is not yet installed in the project or globally.
+W> You might be prompted to install `@webpack-cli/init` if it is not yet installed in the project or globally.
 
 T> After running `npx webpack-cli init` you might get more packages installed to your project depending on the choices you've made during configuration generation.
 

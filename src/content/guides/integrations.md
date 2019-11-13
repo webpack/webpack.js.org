@@ -42,11 +42,11 @@ module.exports = function(grunt) {
   grunt.initConfig({
     webpack: {
       options: {
-        stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+        stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development',
       },
       prod: webpackConfig,
-      dev: Object.assign({ watch: true }, webpackConfig)
-    }
+      dev: Object.assign({ watch: true }, webpackConfig),
+    },
   });
 
   grunt.loadNpmTasks('grunt-webpack');
@@ -110,18 +110,18 @@ module.exports = function(config) {
   config.set({
     files: [
       { pattern: 'test/*_test.js', watched: false },
-      { pattern: 'test/**/*_test.js', watched: false }
+      { pattern: 'test/**/*_test.js', watched: false },
     ],
     preprocessors: {
       'test/*_test.js': [ 'webpack' ],
-      'test/**/*_test.js': [ 'webpack' ]
+      'test/**/*_test.js': [ 'webpack' ],
     },
     webpack: {
       // Any custom webpack configuration...
     },
     webpackMiddleware: {
       // Any custom webpack-dev-middleware configuration...
-    }
+    },
   });
 };
 ```
