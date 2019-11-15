@@ -38,7 +38,7 @@ module.exports = {
 
 ### `resolve.alias`
 
-`object`
+`object` `[string]` `boolean: false`
 
 Create aliases to `import` or `require` certain modules more easily. For example, to alias a bunch of commonly used `src/` folders:
 
@@ -115,6 +115,31 @@ The following table explains other cases:
 
 W> `resolve.alias` takes precedence over other module resolutions.
 
+W> [string] and `false` values are supported since webpack 5.0.x.
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      _: [path.resolve(__dirname, 'src/utilities/'), path.resolve(__dirname, 'src/templates/')]
+    }
+  }
+};
+```
+
+`resolve.alias` when set to `false` will ignore a module.
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      'ignored-module': false,
+    }
+  }
+};
+```
 
 ### `resolve.aliasFields`
 
