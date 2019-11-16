@@ -21,7 +21,7 @@ class MyPlugin {
         // Explore each module within the chunk (built inputs):
         chunk.getModules().forEach(module => {
           // Explore each source file path that was included into the module:
-          module.fileDependencies.forEach(filepath => {
+          module.buildInfo && module.buildInfo.fileDependencies && module.buildInfo.fileDependencies.forEach(filepath => {
             // we've learned a lot about the source structure now...
           });
         });
