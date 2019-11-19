@@ -20,7 +20,7 @@ Since version 4 webpack runs optimizations for you depending on the chosen  [`mo
 
 `boolean`
 
-Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/).
+Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimization-minimizer).
 
 This is `true` by default in `production` mode.
 
@@ -40,7 +40,7 @@ T> Learn how [mode](/configuration/mode/) works.
 
 ## `optimization.minimizer`
 
-`[Plugin]` and or `[function (compiler)]`
+`[TerserPlugin]` and or `[function (compiler)]`
 
 Allows you to override the default minimizer by providing a different one or more customized [TerserPlugin](/plugins/terser-webpack-plugin/) instances.
 
@@ -206,8 +206,9 @@ Option                | Description
 `natural`             | Numeric ids in order of usage.
 `named`               | Readable ids for better debugging.
 `hashed`              | Short hashes as ids for better long term caching.
+`deterministic`       | Module names are hashed into small numeric values.
 `size`                | Numeric ids focused on minimal initial download size.
-`total-size`          | numeric ids focused on minimal total download size.
+`total-size`          | Numeric ids focused on minimal total download size.
 
 __webpack.config.js__
 
@@ -217,6 +218,24 @@ module.exports = {
   optimization: {
     moduleIds: 'hashed'
   }
+};
+```
+
+`deterministic` option is useful for long term caching, but still results in smaller bundles compared to `hashed`. Length of the numeric value is chosen to fill a maximum of 80% of the id space. By default a minimum length of 3 digits is used when `optimization.moduleIds` is set to `deterministic`. To override the default behaviour set `optimization.moduleIds` to `false` and use the `webpack.ids.DeterministicModuleIdsPlugin`.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    moduleIds: false
+  },
+  plugins: [
+    new webpack.ids.DeterministicModuleIdsPlugin({
+      maxLength: 5
+    })
+  ]
 };
 ```
 
@@ -478,6 +497,25 @@ module.exports = {
   //...
   optimization: {
     portableRecords: true
+  }
+};
+```
+
+## `optimization.mangleExports`
+
+`bool`
+
+`optimization.mangleExports` allows to control export mangling.
+
+By default `optimization.mangleExports` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    mangleExports: true
   }
 };
 ```
