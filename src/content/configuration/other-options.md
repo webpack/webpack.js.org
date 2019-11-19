@@ -69,7 +69,7 @@ This will force webpack to exit its bundling process.
 
 `boolean` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/concepts/mode/#mode-development) and disabled in [`production` mode](/configuration/mode/#mode-production). `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
+Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/configuration/mode/#mode-development) and disabled in [`production` mode](/configuration/mode/#mode-production). `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
 
 __webpack.config.js__
 
@@ -106,7 +106,7 @@ While setting `cache.type` to `filesystem` opens up more options for configurati
 
 Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
 
-`cache.cacheDirectory` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+`cache.cacheDirectory` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
 __webpack.config.js__
 
@@ -130,7 +130,7 @@ W> The final location of the cache is a combination of `cache.cacheDirectory` + 
 
 Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/crypto.html) for more details. Defaults to `md4`.
 
-`cache.hashAlgorithm` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+`cache.hashAlgorithm` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
 __webpack.config.js__
 
@@ -150,7 +150,7 @@ module.exports = {
 
 Name for the cache. Different names will lead to different coexisting caches. Defaults to `${config.name}-${config.mode}`. Using `cache.name` makes sense when you have multiple configurations which should have independent caches.
 
-`cache.name` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+`cache.name` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
 __webpack.config.js__
 
@@ -175,7 +175,7 @@ module.exports = {
 - `'instant'`: Store data when instantly. Blocks compilation until data is stored
 - `'pack'`: Store data when compiler is idle in a single file for all cached items
 
-`cache.store` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+`cache.store` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
 __webpack.config.js__
 
@@ -195,7 +195,7 @@ module.exports = {
 
 Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when config changed in a way which doesn't allow to reuse cache. This will invalidate the cache. Defaults to `''`.
 
-`cache.version` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+`cache.version` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
 __webpack.config.js__
 
