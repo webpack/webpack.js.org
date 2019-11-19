@@ -20,7 +20,7 @@ const docs = [
   }
 ];
 
-const currentDocsVersion = 4;
+const currentDocsVersion = 5;
 
 // Create and export the component
 export default ({
