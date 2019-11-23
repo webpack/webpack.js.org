@@ -288,7 +288,7 @@ module.exports = {
 
 ### `stats.entrypoints`
 
-`boolean = false`
+`boolean = true`
 
 Tells `stats` whether to display the entry points with the corresponding bundles.
 
@@ -296,7 +296,7 @@ Tells `stats` whether to display the entry points with the corresponding bundles
 module.exports = {
   //...
   stats: {
-    entrypoints: true
+    entrypoints: false
   }
 };
 ```
@@ -700,6 +700,12 @@ module.exports = {
 };
 ```
 
+### `stats.chunkRelations`
+
+`boolean = false`
+
+Tells `stats` to display chunk parents, children and siblings.
+
 ### Sorting fields
 
 For `assetsSort`, `chunksSort` and `modulesSort` there are several possible fields that you can sort items by:
@@ -726,7 +732,7 @@ For `assetsSort`, `chunksSort` and `modulesSort` there are several possible fiel
 
 ### Extending stats behaviours
 
-If you want to use one of the pre-defined behaviours e.g. `'minimal'` but still override one or more of the rules, see [the source code](https://github.com/webpack/webpack/blob/master/lib/Stats.js#L1394-L1401). You would want to copy the configuration options from `case 'minimal': ...` and add your additional rules while providing an object to `stats`.
+If you want to use one of the pre-defined behaviours e.g. `'minimal'` but still override one or more of the rules: specify the desired `stats.preset` and add the customized or additional rules afterwards.
 
 __webpack.config.js__
 
@@ -734,13 +740,7 @@ __webpack.config.js__
 module.exports = {
   //..
   stats: {
-    // copied from `'minimal'`
-    all: false,
-    modules: true,
-    maxModules: 0,
-    errors: true,
-    warnings: true,
-    // our additional options
+    preset: 'minimal',
     moduleTrace: true,
     errorDetails: true
   }
