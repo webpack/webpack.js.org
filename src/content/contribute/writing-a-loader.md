@@ -206,6 +206,7 @@ T> If the language only accepts relative urls (e.g. `url(file)` always refers to
 Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and generate a `require` to that shared module:
 
 __src/loader-runtime.js__
+
 ```js
 const {someOtherModule} = require('./some-other-module');
 
@@ -217,6 +218,7 @@ module.exports = function runtime(params) {
 ```
 
 __src/loader.js__
+
 ```js
 import runtime from './loader-runtime.js';
 
