@@ -203,11 +203,11 @@ T> If the language only accepts relative urls (e.g. `url(file)` always refers to
 
 ### Common Code
 
-Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and generate a `require` to that shared module, like so:
+Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and generate a `require` to that shared module:
 
 __src/loader-runtime.js__
 ```js
-const {someOtherModule} from './some-other-module';
+const {someOtherModule} = require('./some-other-module');
 
 module.exports = function runtime(params) {
   const x = params.y * 2;
@@ -221,7 +221,7 @@ __src/loader.js__
 import runtime from './loader-runtime.js';
 
 export default function loader(source) {
-  // Some other loader logic
+  // Custom loader logic
 
   return `${runtime({
     source,
