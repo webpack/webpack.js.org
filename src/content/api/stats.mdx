@@ -71,6 +71,7 @@ Each `assets` object represents an `output` file emitted from the compilation. T
 {
   'chunkNames': [], // The chunks this asset contains
   'chunks': [ 10, 6 ], // The chunk IDs this asset contains
+  'comparedForEmit': false, // Indicates whether or not the asset was compared with the same file on the output file system
   'emitted': true, // Indicates whether or not the asset made it to the `output` directory
   'name': '10.web.js', // The `output` filename
   'size': 1058, // The size of the file in bytes
