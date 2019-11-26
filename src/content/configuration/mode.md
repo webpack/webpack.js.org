@@ -13,7 +13,7 @@ related:
 
 Providing the `mode` configuration option tells webpack to use its built-in optimizations accordingly.
 
-`string = 'production': 'none' | 'development' | 'production'`
+`string = 'none' | 'development' | 'production'`
 
 ## Usage
 
