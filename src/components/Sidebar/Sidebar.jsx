@@ -1,104 +1,72 @@
-import React, { Component } from 'react';
-import throttle from 'lodash.throttle';
+// Import External Dependencies
+import React from 'react';
+
+// Import Local Components
 import Shield from '../Shield/Shield';
 import SidebarItem from '../SidebarItem/SidebarItem';
+import Print from '../Print/Print';
 
-export default class Sidebar extends Component {
-  state = {
-    fixed: false,
-    availableHeight: null,
-    maxWidth: null
-  };
+// Load Styling
+import './Sidebar.scss';
 
-  render() {
-    let { pages, currentPage } = this.props;
-    let { fixed, availableHeight, maxWidth } = this.state;
-    let group;
+const docs = [
+  {
+    version: 5,
+    url: 'https://webpack.js.org',
+  },
+  {
+    version: 4,
+    url: 'https://v4.webpack.js.org',
+  }
+];
 
-    return (
-      <nav
-        className="sidebar"
-        ref={ ref => this._container = ref }
-        style={{
-          position: fixed ? 'fixed' : null,
-          top: fixed ? 0 : null,
-          width: fixed ? maxWidth : null,
-          maxHeight: availableHeight
-        }}>
+const currentDocsVersion = 5;
 
-        <div className="sidebar__inner">
+// Create and export the component
+export default ({
+  className = '',
+  pages,
+  currentPage
+}) => {
+  let group;
+
+  return (
+    <nav className={`sidebar ${className}`}>
+      <div className="sidebar__inner">
+        <div className="sidebar__shields">
           <a href="https://github.com/webpack/webpack/releases">
             <Shield content="npm/v/webpack" label="webpack" />
           </a>
-
-          { pages.map((page, index) => {
-            let displayGroup = group !== page.group && page.group !== '-';
-            group = page.group;
-
-            return (
-              <div key={ `sidebar-item-${index}` }>
-                { displayGroup ? (
-                  <h4 className="sidebar__group">
-                    { group }
-                  </h4>
-                ) : null }
-
-                <SidebarItem
-                  index={ index }
-                  url={ page.url }
-                  title={ page.title }
-                  anchors={ page.anchors }
-                  currentPage={ currentPage }
-                  onToggle={ this._recalculate } />
-              </div>
-            );
-          })}
         </div>
+        <Print url={currentPage} />
 
-      </nav>
-    );
-  }
+        {pages.map((page, index) => {
+          let displayGroup = group !== page.group && page.group !== '-';
+          group = page.group;
 
-  componentDidMount() {
-    setTimeout(
-      this._recalculate,
-      250
-    );
+          return (
+            <div key={page.url}>
+              {displayGroup ? <h4 className="sidebar__group">{group}</h4> : null}
 
-    document.addEventListener(
-      'scroll',
-      this._recalculate
-    );
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener(
-      'scroll',
-      this._recalculate
-    );
-  }
-
-  /**
-   * Re-calculate fixed state and position
-   *
-   */
-  _recalculate = throttle(() => {
-    let { scrollY, innerHeight } = window;
-    let { scrollHeight } = document.body;
-    let { offsetHeight: sidebarHeight } = this._container;
-    let { offsetWidth: parentWidth, offsetHeight: parentHeight } = this._container.parentNode;
-    let headerHeight = document.querySelector('header').offsetHeight + document.querySelector('.notification-bar').offsetHeight;
-    let footerHeight = document.querySelector('footer').offsetHeight;
-    let distToBottom = scrollHeight - scrollY - innerHeight;
-
-    // Calculate the space that the footer and header are actually occupying
-    let headerSpace = scrollY > headerHeight ? 0 : headerHeight - scrollY;
-    let footerSpace = distToBottom > footerHeight ? 0 : footerHeight - distToBottom;
-
-    this.setState({
-      fixed: scrollY >= headerHeight && sidebarHeight < parentHeight,
-      availableHeight: innerHeight - headerSpace - footerSpace,
-      maxWidth: parentWidth
-    });
-  }, 250);
-}
+              <SidebarItem
+                index={index}
+                url={page.url}
+                title={page.title}
+                anchors={page.anchors}
+                currentPage={currentPage}
+              />
+            </div>
+          );
+        })}
+        <div className="sidebar__docs-version">
+          You are reading webpack {currentDocsVersion} documentation. Change here to:
+          <ul>
+            {docs.filter(item => item.version !== currentDocsVersion).map(item => <li key={`webpack-${item.version}-docs`}>
+              <a rel="nofollow" href={item.url}>webpack {item.version} documentation</a>
+            </li>)}
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+};

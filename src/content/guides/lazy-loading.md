@@ -1,12 +1,13 @@
 ---
 title: Lazy Loading
-sort: 10
+sort: 18
 contributors:
   - iammerrick
   - chrisVillanueva
   - skipjack
   - byzyk
   - EugeneHlushko
+  - AnayaDesign
 related:
   - title: Lazy Loading ES2015 Modules in the Browser
     url: https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
@@ -19,9 +20,9 @@ Lazy, or "on demand", loading is a great way to optimize your site or applicatio
 
 ## Example
 
-Let's take the example from [Code Splitting](/guides/code-splitting#dynamic-imports) and tweak it a bit to demonstrate this concept even more. The code there does cause a separate chunk, `lodash.bundle.js`, to be generated and technically "lazy-loads" it as soon as the script is run. The trouble is that no user interaction is required to load the bundle -- meaning that every time the page is loaded, the request will fire. This doesn't help us too much and will impact performance negatively.
+Let's take the example from [Code Splitting](/guides/code-splitting/#dynamic-imports) and tweak it a bit to demonstrate this concept even more. The code there does cause a separate chunk, `lodash.bundle.js`, to be generated and technically "lazy-loads" it as soon as the script is run. The trouble is that no user interaction is required to load the bundle -- meaning that every time the page is loaded, the request will fire. This doesn't help us too much and will impact performance negatively.
 
-Let's try something different. We'll add an interaction to log some text to the console when the user clicks a button. However, we'll wait to load that code (`print.js`) until the interaction occurs for the first time. To do this we'll go back and rework the [final _Dynamic Imports_ example](/guides/code-splitting#dynamic-imports) from _Code Splitting_ and leave `lodash` in the main chunk.
+Let's try something different. We'll add an interaction to log some text to the console when the user clicks a button. However, we'll wait to load that code (`print.js`) until the interaction occurs for the first time. To do this we'll go back and rework the [final _Dynamic Imports_ example](/guides/code-splitting/#dynamic-imports) from _Code Splitting_ and leave `lodash` in the main chunk.
 
 __project__
 
@@ -53,10 +54,10 @@ __src/index.js__
 +
 - async function getComponent() {
 + function component() {
-    var element = document.createElement('div');
+    const element = document.createElement('div');
 -   const _ = await import(/* webpackChunkName: "lodash" */ 'lodash');
-+   var button = document.createElement('button');
-+   var br = document.createElement('br');
++   const button = document.createElement('button');
++   const br = document.createElement('br');
 
 +   button.innerHTML = 'Click me and look at the console!';
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -66,7 +67,7 @@ __src/index.js__
 +   // Note that because a network request is involved, some indication
 +   // of loading would need to be shown in a production-level site/app.
 +   button.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
-+     var print = module.default;
++     const print = module.default;
 +
 +     print();
 +   });
@@ -100,4 +101,5 @@ Many frameworks and libraries have their own recommendations on how this should 
 
 - React: [Code Splitting and Lazy Loading](https://reacttraining.com/react-router/web/guides/code-splitting)
 - Vue: [Lazy Load in Vue using Webpack's code splitting](https://alexjoverm.github.io/2017/07/16/Lazy-load-in-Vue-using-Webpack-s-code-splitting/)
+- Angular: [Lazy Loading route configuration](https://angular.io/guide/router#milestone-6-asynchronous-routing)
 - AngularJS: [AngularJS + Webpack = lazyLoad](https://medium.com/@var_bin/angularjs-webpack-lazyload-bb7977f390dd) by [@var_bincom](https://twitter.com/var_bincom)

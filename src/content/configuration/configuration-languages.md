@@ -11,7 +11,7 @@ contributors:
   - byzyk
 ---
 
-webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/js-cli/js-interpret) package. Using [node-interpret](https://github.com/js-cli/js-interpret), webpack can handle many different types of configuration files.
+webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
 
 
 ## TypeScript
@@ -75,24 +75,26 @@ __tsconfig-for-webpack-config.json__
 }
 ```
 
-T> `ts-node` can resolve a `tsconfig.json` file using the environment variable provided by `tsconfig-path`.
+T> `ts-node` can resolve a `tsconfig.json` file using the environment variable provided by `tsconfig-paths`.
 
-Then set the environment variable `process.env.TS_NODE_PROJECT` provided by `tsconfig-path` like so:
+Then set the environment variable `process.env.TS_NODE_PROJECT` provided by `tsconfig-paths` like so:
 
 __package.json__
 
 ```json
 {
   "scripts": {
-    "build": "TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack"
+    "build": "cross-env TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack"
   }
 }
 ```
 
+W> We had been getting reports that `TS_NODE_PROJECT` might not work with `"TS_NODE_PROJECT" unrecognized command` error. Therefore running it with `cross-env` seems to fix the issue, for more info [see this issue](https://github.com/webpack/webpack.js.org/issues/2733).
+
 
 ## CoffeeScript
 
-Similarly, to use [CoffeeScript](http://coffeescript.org/), you would first install the necessary dependencies:
+Similarly, to use [CoffeeScript](https://coffeescript.org/), you would first install the necessary dependencies:
 
 ``` bash
 npm install --save-dev coffee-script
@@ -120,7 +122,6 @@ config =
     use: 'babel-loader'
   } ]
   plugins: [
-    new (webpack.optimize.UglifyJsPlugin)
     new HtmlWebpackPlugin(template: './src/index.html')
   ]
 
@@ -132,7 +133,7 @@ module.exports = config
 
 In the example below JSX (React JavaScript Markup) and Babel are used to create a JSON Configuration that webpack can understand.
 
-> Courtesy of [Jason Miller](https://twitter.com/_developit/status/769583291666169862)
+> Courtesy of [Jason Miller](https://twitter.com/_developit)
 
 First install the necessary dependencies:
 
@@ -169,10 +170,6 @@ export default (
       }} />
     </resolve>
     <plugins>
-      <uglify-js opts={{
-        compression: true,
-        mangle: false
-      }} />
       <CustomPlugin foo="bar" />
     </plugins>
   </webpack>

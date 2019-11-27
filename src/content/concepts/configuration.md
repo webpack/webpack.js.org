@@ -1,6 +1,6 @@
 ---
 title: Configuration
-sort: 6
+sort: 5
 contributors:
   - TheLarkInn
   - simon04
@@ -14,7 +14,7 @@ Because it's a standard Node.js CommonJS module, you __can do the following__:
 
 - import other files via `require(...)`
 - use utilities on npm via `require(...)`
-- use JavaScript control flow expressions i. e. the `?:` operator
+- use JavaScript control flow expressions, e.g. the `?:` operator
 - use constants or variables for often used values
 - write and execute functions to generate a part of the configuration
 
@@ -28,7 +28,7 @@ While they are technically feasible, __the following practices should be avoided
 
 T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuration. The key is to stick with something consistent that you and your team can understand and maintain.
 
-The following examples below describe how webpack's configuration can be both expressive and configurable because _it is code_:
+The examples below describe how webpack's configuration can be both expressive and configurable because _it is code_:
 
 ## Simple Configuration
 
@@ -47,7 +47,7 @@ module.exports = {
 };
 ```
 
-_See_: [Configuration section](/configuration/) for the all supported configuration options
+_See_: [Configuration section](/configuration/) for all supported configuration options
 
 ## Multiple Targets
 

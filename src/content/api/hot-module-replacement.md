@@ -1,5 +1,6 @@
 ---
 title: Hot Module Replacement
+sort: 4
 contributors:
   - sokra
   - skipjack
@@ -12,7 +13,7 @@ related:
     url: /guides/hot-module-replacement
 ---
 
-If [Hot Module Replacement](/concepts/hot-module-replacement) has been enabled via the [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin), its interface will be exposed under the [`module.hot` property](/api/module-variables#module-hot-webpack-specific-). Typically, users will check to see if the interface is accessible, then begin working with it. As an example, here's how you might `accept` an updated module:
+If [Hot Module Replacement](/concepts/hot-module-replacement) has been enabled via the [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin), its interface will be exposed under the [`module.hot` property](/api/module-variables/#modulehot-webpack-specific). Typically, users will check to see if the interface is accessible, then begin working with it. As an example, here's how you might `accept` an updated module:
 
 ``` js
 if (module.hot) {
@@ -65,7 +66,7 @@ module.hot.decline(
 );
 ```
 
-Flag a dependency as not-update-able. This makes sense when changing exports of this dependency can be handled or handling is not implemented yet. Depending on your HMR management code an update to this dependencies (or unaccepted dependencies of it) usually causes a full-reload of the page.
+Flag a dependency as not-update-able. This makes sense when changing exports of this dependency can be handled or handling is not implemented yet. Depending on your HMR management code an update to these dependencies (or unaccepted dependencies of it) usually causes a full-reload of the page.
 
 ### `decline` (self)
 
@@ -75,11 +76,11 @@ Reject updates for itself.
 module.hot.decline();
 ```
 
-Flag this module as not-update-able. This make sense when this module has inrevertable side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
+Flag this module as not-update-able. This makes sense when this module has irreversible side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
 
 ### `dispose` (or `addDisposeHandler`)
 
-Add a handler which is executed when the current module code is replaced. This should be used to remove any persistent resource you have claimed or created. If you want to transfer state to the updated module, add it to given `data` parameter. This object will be available at `module.hot.data` after the update.
+Add a handler which is executed when the current module code is replaced. This should be used to remove any persistent resource you have claimed or created. If you want to transfer state to the updated module, add it to the given `data` parameter. This object will be available at `module.hot.data` after the update.
 
 ``` js
 module.hot.dispose(data => {
@@ -90,7 +91,7 @@ module.hot.dispose(data => {
 
 ### `removeDisposeHandler`
 
-Remove the callback added via `dispose` or `addDisposeHandler`.
+Remove the handler added via `dispose` or `addDisposeHandler`.
 
 ``` js
 module.hot.removeDisposeHandler(callback);
@@ -114,7 +115,7 @@ module.hot.status(); // Will return one of the following strings...
 | ready       | The update is prepared and available                                                   |
 | dispose     | The process is calling the `dispose` handlers on the modules that will be replaced     |
 | apply       | The process is calling the `accept` handlers and re-executing self-accepted modules    |
-| abort       | An update was aborted, but the system is still in it's previous state                  |
+| abort       | An update was aborted, but the system is still in its previous state                  |
 | fail        | An update has thrown an exception and the system's state has been compromised          |
 
 
@@ -149,7 +150,7 @@ The optional `options` object can include the following properties:
 
 - `ignoreUnaccepted` (boolean): Ignore changes made to unaccepted modules.
 - `ignoreDeclined` (boolean): Ignore changes made to declined modules.
-- `ignoreErrored` (boolean): Ignore errors throw in accept handlers, error handlers and while reevaluating module.
+- `ignoreErrored` (boolean): Ignore errors thrown in accept handlers, error handlers and while reevaluating module.
 - `onDeclined` (function(info)): Notifier for declined modules
 - `onUnaccepted` (function(info)): Notifier for unaccepted modules
 - `onAccepted` (function(info)): Notifier for accepted modules

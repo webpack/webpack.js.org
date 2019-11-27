@@ -1,10 +1,11 @@
 ---
 title: Development - Vagrant
-sort: 19
+sort: 11
 contributors:
   - SpaceK33z
   - chrisVillanueva
   - byzyk
+  - wizardofhogwarts
 ---
 
 If you have a more advanced project and use [Vagrant](https://www.vagrantup.com/) to run your development environment in a Virtual Machine, you'll often want to also run webpack in the VM.
@@ -30,11 +31,11 @@ Make sure to have a `webpack.config.js` file. If you haven't already, use this a
 ```js
 module.exports = {
   context: __dirname,
-  entry: './app.js'
+  entry: './app.js',
 };
 ```
 
-And create a `index.html` file. The script tag should point to your bundle. If `output.filename` is not specified in the config, this will be `bundle.js`.
+And create an `index.html` file. The script tag should point to your bundle. If `output.filename` is not specified in the config, this will be `bundle.js`.
 
 ```html
 <!doctype html>
@@ -58,12 +59,12 @@ Now, let's run the server:
 webpack-dev-server --host 0.0.0.0 --public 10.10.10.61:8080 --watch-poll
 ```
 
-By default the server will only be accessible from localhost. We'll be accessing it from our host PC, so we need to change `--host` to allow this.
+By default, the server will only be accessible from localhost. We'll be accessing it from our host PC, so we need to change `--host` to allow this.
 
 webpack-dev-server will include a script in your bundle that connects to a WebSocket to reload when a change in any of your files occurs.
 The `--public` flag makes sure the script knows where to look for the WebSocket. The server will use port `8080` by default, so we should also specify that here.
 
-`--watch-poll` makes sure that webpack can detect changes in your files. By default webpack listens to events triggered by the filesystem, but VirtualBox has many problems with this.
+`--watch-poll` makes sure that webpack can detect changes in your files. By default, webpack listens to events triggered by the filesystem, but VirtualBox has many problems with this.
 
 The server should be accessible on `http://10.10.10.61:8080` now. If you make a change in `app.js`, it should live reload.
 
@@ -98,7 +99,7 @@ The command to start webpack-dev-server can then be changed to this:
 webpack-dev-server --public 10.10.10.61 --watch-poll
 ```
 
-This makes the server only accessible on `127.0.0.1`, which is fine, because nginx takes care of making it available on your host PC.
+This makes the server only accessible on `127.0.0.1`, which is fine because nginx takes care of making it available on your host PC.
 
 ## Conclusion
 

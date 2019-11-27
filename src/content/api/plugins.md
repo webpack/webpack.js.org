@@ -1,13 +1,14 @@
 ---
 title: Plugin API
 group: Plugins
-sort: 0
+sort: 12
 contributors:
   - thelarkinn
   - pksjce
   - e-cloud
   - byzyk
   - EugeneHlushko
+  - wizardofhogwarts
 ---
 
 Plugins are a key piece of the webpack ecosystem and provide the community with
@@ -46,8 +47,8 @@ a different number of ways. The way this works is closely related to the
 [compiler hooks](/api/compiler-hooks/#hooks) each note the underlying `Tapable` hook indicating which
 `tap` methods are available.
 
-So depending which event you `tap` into, the plugin may run differently. For
-example, when hooking into `compile` stage, only the synchronous `tap` method
+So depending on which event you `tap` into, the plugin may run differently. For
+example, when hooking into the `compile` stage, only the synchronous `tap` method
 can be used:
 
 ``` js
@@ -89,7 +90,6 @@ simply `require` the necessary hook class from `tapable` and create one:
 ``` js
 const SyncHook = require('tapable').SyncHook;
 
-// Within the `apply` method...
 if (compiler.hooks.myCustomHook) throw new Error('Already in use');
 compiler.hooks.myCustomHook = new SyncHook(['a', 'b', 'c']);
 
@@ -132,6 +132,14 @@ reportProgress(percentage, ...args);
 - `...args`: Any number of strings, which will be passed to the `ProgressPlugin` handler to be reported to the user.
 
 Note that only a subset of compiler and compilation hooks support the `reportProgress` function. See [`ProgressPlugin`](/plugins/progress-plugin/#supported-hooks) for a full list.
+
+## Logging
+
+Logging API is available since the release of webpack 4.37. When `logging` is enabled in [`stats configuration`](/configuration/stats/#statslogging) and/or when [`infrastructure logging`](/configuration/other-options/#infrastructurelogging) is enabled, plugins may log messages which will be printed out in the respective logger format (stats, infrastructure).
+
+- Plugins should prefer to use `compilation.getLogger('PluginName')` for logging. This kind of logging is stored to the Stats and formatted accordingly. It can be filtered and exported by the user.
+- Plugins may use the `compiler.getInfrastructureLogger('PluginName')` for logging. Using `infrastructure` logging is not stored in the Stats and therefore not formatted. It's usually logged to the console/dashboard/GUI directly. It can be filtered by the user.
+- Plugins may use special fallback logic for detecting logging support `compilation.getLogger ? compilation.getLogger('PluginName') : console` to provide a fallback for cases when an older webpack version is used which does not support `getLogger` method on `compilation` object.
 
 ## Next Steps
 
