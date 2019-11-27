@@ -12,6 +12,7 @@ contributors:
   - fadysamirsadek
   - nerdkid93
   - EugeneHlushko
+  - smelukov
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -234,6 +235,27 @@ module.exports = {
 }
 ```
 
+If `Rule.type` is `asset` then `Rules.parser` may be an object that describe a condition to decide - encode file content to base64 or emit it as a separate file info output directory:
+
+`{ dataUrlCondition: { maxSize: number } }`: if a module source size is less than `dataUrlCondition.maxSize` then module will be injected into the bundle as base64-encoded string, otherwise module file will be emitted info output directory.
+
+`{ dataUrlCondition: (source: string | Buffer, { filename: string, module: NormalModule }) => boolean }`: if the function returns true, then module will be injected into the bundle as base64-encoded string, otherwise module file will be emitted info output directory.
+
+For more info - see [Asset Modules](/guides/asset-modules/)
+
+## `Rule.generator`
+
+If `Rule.type` is `asset` or `asset/inline` then `Rules.generator` may be an object that describe an encoding of the module source:
+
+`{ dataUrl: { encoding: "base64" | false }`:
+
+- `dataUrl.encoding: "base64"`: encode module source with base64 (default)
+- `dataUrl.encoding: false`: don't encode a module source
+- `dataUrl.mimetype`: a mimetype for data-url (resolves by module resource extension by default)
+
+`{ dataUrl: ((source: string | Buffer, context: { filename: string, module: Module }) => string) }`: a function that executes for a module and should return a data-url string
+
+For more info - see [Asset Modules](/guides/asset-modules/)
 
 ## `Rule.resource`
 
@@ -283,7 +305,7 @@ Indicate what parts of the module contain side effects. See [Tree Shaking](/guid
 
 `string`
 
-Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/experimental'`
+Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/experimental' | 'asset' | 'asset/source' | 'asset/resource' | 'asset/inline'`
 
 `Rule.type` sets the type for a matching module. This prevents defaultRules and their default importing behaviors from occurring. For example, if you want to load a `.json` file through a custom loader, you'd need to set the `type` to `javascript/auto` to bypass webpack's built-in json importing. (See [v4.0 changelog](https://github.com/webpack/webpack/releases/tag/v4.0.0) for more details)
 
@@ -305,6 +327,7 @@ module.exports = {
 };
 ```
 
+> See [Asset Modules](/guides/asset-modules/) for more about `asset*` type
 
 ## `Rule.use`
 

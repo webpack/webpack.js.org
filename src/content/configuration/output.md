@@ -16,6 +16,7 @@ contributors:
   - harshwardhansingh
   - eemeli
   - EugeneHlushko
+  - smelukov
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -339,6 +340,9 @@ If using a function for this option, the function will be passed an object conta
 
 T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
 
+## `output.assetModuleFilename`
+
+The same as [`output.filename`](#output-filename) but for [Asset Modules](/guides/asset-modules/)
 
 ## `output.hashDigest`
 
