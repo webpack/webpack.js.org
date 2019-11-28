@@ -344,7 +344,7 @@ T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plu
 
 ## `output.assetModuleFilename`
 
-The same as [`output.filename`](#output-filename) but for [Asset Modules](/guides/asset-modules/)
+The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/)
 
 ## `output.globalObject`
 
