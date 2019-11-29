@@ -107,8 +107,7 @@ The following table explains other cases:
 | `{ xyz$: 'modu' }`                  | `/abc/node_modules/modu/index.js`     | `/abc/node_modules/xyz/file.js`     |
 | `{ xyz: 'modu/some/file.js' }`      | `/abc/node_modules/modu/some/file.js` | error                               |
 | `{ xyz: 'modu/dir' }`               | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/modu/dir/file.js`|
-| `{ xyz: 'xyz/dir' }`                | `/abc/node_modules/xyz/dir/index.js`  | `/abc/node_modules/xyz/dir/file.js` |
-| `{ xyz$: 'xyz/dir' }`               | `/abc/node_modules/xyz/dir/index.js`  | `/abc/node_modules/xyz/file.js`     |
+| `{ xyz$: 'modu/dir' }`              | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/xyz/file.js`     |
 
 `index.js` may resolve to another file if defined in the `package.json`.
 
