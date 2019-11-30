@@ -6,7 +6,7 @@ contributors:
 
 Asset Modules is a type of modules that allows to use assets files (fonts, icons, etc) without configuring additional loaders.
 
-Prior webpack 5 the frontend-developers was using:
+Prior to webpack 5 it was common to use:
 
 - [`raw-loader`](/loaders/raw-loader) to import any file as a string
 - [`url-loader`](/loaders/url-loader) to inline any file into the bundle as a data-url resource
