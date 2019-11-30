@@ -281,7 +281,6 @@ module.exports = {
 This one will automatically chooses between `resource` and `inline` by a condition.
 
 Followed by default condition, for all the files with size less than 8kb will be applied `inline` module type, and `resource` otherwise.
-
 You may customize the condition by the parser options:
 
 __webpack.config.js__
