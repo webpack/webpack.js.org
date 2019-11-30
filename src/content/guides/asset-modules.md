@@ -8,7 +8,7 @@ Asset Modules is a type of modules that allows to use assets files (fonts, icons
 
 Prior to webpack 5 it was common to use:
 
-- [`raw-loader`](/loaders/raw-loader) to import any file as a string
+- [`raw-loader`](/loaders/raw-loader/) to import a file as a string
 - [`url-loader`](/loaders/url-loader) to inline any file into the bundle as a data-url resource
 - [`file-loader`](/loaders/file-loader) to emit any file into the output directory
 
