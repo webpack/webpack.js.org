@@ -81,7 +81,7 @@ All `png` files will be emitted to the output directory and their paths will be 
 
 By default, `asset/resource` modules are emitting with `[hash][ext]` filename into output directory.
 
-You can modify this template with `output.assetModuleFilename` in your config:
+You can modify this template by setting `output.assetModuleFilename` in your configuration:
 
 __webpack.config.js__
 
