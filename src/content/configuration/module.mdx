@@ -249,7 +249,7 @@ module.exports = {
 }
 ```
 
-If `Rule.type` is `asset` then `Rules.parser` may be an object that describe a condition to decide - encode file content to base64 or emit it as a separate file info output directory:
+If `Rule.type` is an `asset` then `Rules.parser` may be an object that describes a condition whether to encode file contents to Base64 or emit it as a separate file info the output directory:
 
 `{ dataUrlCondition: { maxSize: number } }`: if a module source size is less than `dataUrlCondition.maxSize` then module will be injected into the bundle as base64-encoded string, otherwise module file will be emitted info output directory.
 
