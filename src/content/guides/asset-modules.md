@@ -120,7 +120,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+-   assetModuleFilename: 'images/[hash][ext]'
   },
   experiments: {
     asset: true
@@ -216,10 +217,7 @@ module.exports = {
 -       type: 'asset/inline',
 -       generator: {
 -         dataUrl: content => {
--           if (typeof content !== "string") {
--             content = content.toString();
--           }
--
+-           content = content.toString();
 -           return svgToMiniDataURI(content);
 -         }
 -       }
@@ -311,8 +309,6 @@ module.exports = {
   },
 };
 ```
-
-Followed by this condition, for all the files with size less than 4kb will be applied `inline` module type, and `resource` otherwise.
 
 Also you can specify a function to decide to inline or not:
 

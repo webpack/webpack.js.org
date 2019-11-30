@@ -249,27 +249,81 @@ module.exports = {
 }
 ```
 
-If `Rule.type` is an `asset` then `Rules.parser` may be an object that describes a condition whether to encode file contents to Base64 or emit it as a separate file info the output directory:
+If `Rule.type` is an `asset` then `Rules.parser` option may be an object or function that describes a condition whether to encode file contents to Base64 or emit it as a separate file info the output directory
 
-`{ dataUrlCondition: { maxSize: number } }`: if a module source size is less than `dataUrlCondition.maxSize` then module will be injected into the bundle as a Base64-encoded string, otherwise module file will be emitted into the output directory.
-
-`{ dataUrlCondition: (source: string | Buffer, { filename: string, module: NormalModule }) => boolean }`: if the function returns true, then module will be injected into the bundle as base64-encoded string, otherwise module file will be emitted info output directory.
+If `Rule.type` is an `asset` or `asset/inline` then `Rule.generator` option may be an object that describes an encoding of the module source or a function that encodes a module source by a custom algorithm
 
 For more info - see [Asset Modules](/guides/asset-modules/)
 
-## `Rule.generator`
+## `Rule.parse.dataUrlCondition` as an object
 
-If `Rule.type` is an `asset` or an `asset/inline` then `Rule.generator` may be an object that describes an encoding of the module source:
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        //...
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8096
+          }
+        }
+      }
+    ]
+  }
+}
+```
 
-`{ dataUrl: { encoding: "base64" | false }`:
+## `dataUrlCondition.minSize`
 
-- `dataUrl.encoding: "base64"`: encode module source with base64 (default)
-- `dataUrl.encoding: false`: don't encode a module source
-- `dataUrl.mimetype`: a mimetype for data-url (resolves by module resource extension by default)
+`number`
 
-`{ dataUrl: ((source: string | Buffer, context: { filename: string, module: Module }) => string) }`: a function that executes for a module and should return a data-url string
+If a module source size is less than `maxSize` then module will be injected into the bundle as a Base64-encoded string, otherwise module file will be emitted into the output directory.
 
-See [Asset Modules guide](/guides/asset-modules/) for additional information
+## `Rule.parse.dataUrlCondition` as a function
+
+`function(source, { filename, module }) => boolean`
+
+If the function returns true, then module will be injected into the bundle as base64-encoded string, otherwise module file will be emitted info output directory.
+
+## `Rule.generator.dataUrl` as an object
+
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        //...
+        generator: {
+          encoding: 'base64',
+          mimetype: ''
+        }
+      }
+    ]
+  }
+}
+```
+
+## `dataUrl.encoding`
+
+`'base' | false`
+
+- `base64` - encode a module source with Base64 algorithm
+- `false` - don't encode a module source
+
+## `dataUrl.mimetype`
+
+`string`
+
+A mimetype for data-url. Resolves from module resource extension by default
+
+## `Rule.generator.dataUrl` as a function
+
+`function(source, { filename, module }) => string`
+
+A function that executes for a module and should return a data-url string
 
 ## `Rule.resource`
 
