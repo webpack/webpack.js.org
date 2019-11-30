@@ -9,21 +9,21 @@ Asset Modules is a type of modules that allows to use assets files (fonts, icons
 Prior to webpack 5 it was common to use:
 
 - [`raw-loader`](/loaders/raw-loader/) to import a file as a string
-- [`url-loader`](/loaders/url-loader) to inline any file into the bundle as a data-url resource
-- [`file-loader`](/loaders/file-loader) to emit any file into the output directory
+- [`url-loader`](/loaders/url-loader/) to inline a file into the bundle as a data URI
+- [`file-loader`](/loaders/file-loader/) to emit a file into the output directory
 
-Asset Modules feature replaces all of these loaders by adding 4 new module types:
+Asset Modules type replaces all of these loaders by adding 4 new module types:
 
-- `asset/resource` emits a separate file and exports the URL (like `url-loader`)
-- `asset/inline` exports a data-url of the asset (like `url-loader`)
-- `asset/source` exports the source code of the asset (like `raw-loader`)
-- `asset` automatically chooses between data-url and separate file (like `url-loader` with limit)
+- `asset/resource` emits a separate file and exports the URL. Previously achievable by using `url-loader`.
+- `asset/inline` exports a data URI of the asset. Previously achievable by using `url-loader`.
+- `asset/source` exports the source code of the asset. Previously achievable by using `raw-loader`.
+- `asset` automatically chooses between exporting a data URI and emitting a separate file. Previously achievable by using `url-loader` with asset size limit.
 
-> For now, this feature available only with `experiments.asset: true` in your configuration
+W> This is an experimental feature. Enable Asset Modules by setting `experiments.asset: true` in [experiments](/configuration/experiments/) option of your webpack  configuration
 
 __webpack.config.js__
 
-``` diff
+```diff
 const path = require('path');
 
 module.exports = {
@@ -34,7 +34,7 @@ module.exports = {
   },
 + experiments: {
 +   asset: true
-+ }
++ },
 };
 ```
 
@@ -61,7 +61,7 @@ module.exports = {
 +       type: 'asset/resource'
 +     }
 +   ]
-+ }
++ },
 };
 ```
 
@@ -75,7 +75,7 @@ import mainImage from './images/main.png';
 img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 ```
 
-All `png` files will be emitted to the output directory and their paths will be injected into the bundles. Just like with `file-loader`
+All `.png` files will be emitted to the output directory and their paths will be injected into the bundles.
 
 ### Custom output filename
 
@@ -105,11 +105,11 @@ module.exports = {
         type: 'asset/resource'
       }
     ]
-  }
+  },
 };
 ```
 
-## Inlined assets
+## Inlining assets
 
 __webpack.config.js__
 
@@ -150,11 +150,11 @@ __src/index.js__
 + block.style.background = `url(${metroMap}); // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
 ```
 
-All `svg` files will be injected into the bundles as data-url. Just like with `url-loader`
+All `.svg` files will be injected into the bundles as data URI.
 
-### Custom data-url generator
+### Custom data URI generator
 
-By default, data-url is a file content encoded with base64.
+By default, data URI emitted by webpack represents file contents encoded by using Base64 algorithm.
 
 If you want to use a custom encoding algorithm, you may specify a custom function to encode a file content:
 
@@ -190,7 +190,7 @@ module.exports = {
 };
 ```
 
-This one will use `mini-svg-data-uri` package to encode all `svg` files.
+Now all `.svg` files will be encoded by `mini-svg-data-uri` package.
 
 ## Source assets
 
@@ -227,7 +227,7 @@ module.exports = {
 +       type: 'asset/source',
       }
     ]
-  }
+  },
 };
 ```
 
@@ -241,15 +241,15 @@ __src/index.js__
 
 ``` diff
 - import metroMap from './images/matro.svg';
-+ import examleText from './example.txt';
++ import exampleText from './example.txt';
 
 // ...
 
 - block.style.background = `url(${metroMap}); // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
-+ block.textContent = examleText; // 'Hello world'
++ block.textContent = exampleText; // 'Hello world'
 ```
 
-All `txt` files will be injected into the bundles as is. Just like with `raw-loader`
+All `.txt` files will be injected into the bundles as is.
 
 ## General asset type
 
@@ -274,13 +274,12 @@ module.exports = {
 +       type: 'asset',
       }
     ]
-  }
+  },
 };
 ```
 
-This one will automatically chooses between `resource` and `inline` by a condition.
+Now webpack will automatically choose between `resource` and `inline` by following a default condition: a file with size less than 8kb will be treated as a `inline` module type and `resource` module type otherwise.
 
-Followed by default condition, for all the files with size less than 8kb will be applied `inline` module type, and `resource` otherwise.
 You can change this condition by setting a `parser.dataUrlCondition.maxSize` option on the module rule of your webpack configuration:
 
 __webpack.config.js__
