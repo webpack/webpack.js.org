@@ -316,6 +316,21 @@ module.exports = {
 };
 ```
 
+### `stats.orphanModules`
+
+`boolean = false`
+
+Tells `stats` whether to hide `orphan` modules. A module is an `orphan` if it is not included in any chunk. Orphans modules are now hidden by default in `Stats`.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    orphanModules: true
+  }
+};
+```
+
 ### `stats.errors`
 
 `boolean = true`
