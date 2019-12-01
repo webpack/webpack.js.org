@@ -249,6 +249,105 @@ module.exports = {
 }
 ```
 
+If `Rule.type` is an `asset` then `Rules.parser` option may be an object or function that describes a condition whether to encode file contents to Base64 or emit it as a separate file into the output directory.
+
+If `Rule.type` is an `asset` or `asset/inline` then `Rule.generator` option may be an object that describes an encoding of the module source or a function that encodes a module source by a custom algorithm.
+
+For more info - see [Asset Modules](/guides/asset-modules/)
+
+## `Rule.parse.dataUrlCondition` as an object
+
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        //...
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8096
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+## `dataUrlCondition.minSize`
+
+`number`
+
+If a module source size is less than `maxSize` then module will be injected into the bundle as a Base64-encoded string, otherwise module file will be emitted into the output directory.
+
+## `Rule.parse.dataUrlCondition` as a function
+
+`function(source, { filename, module }) => boolean`
+
+If the function returns true, then module will be injected into the bundle as base64-encoded string, otherwise module file will be emitted info output directory.
+
+## `Rule.generator.dataUrl` as an object
+
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        //...
+        generator: {
+          encoding: 'base64',
+          mimetype: ''
+        }
+      }
+    ]
+  }
+}
+```
+
+## `dataUrl.encoding`
+
+`'base' | false`
+
+- `base64` - encode a module source with Base64 algorithm
+- `false` - don't encode a module source
+
+## `dataUrl.mimetype`
+
+`string`
+
+A mimetype for data-url. Resolves from module resource extension by default
+
+## `Rule.generator.dataUrl` as a function
+
+`function(source, { filename, module }) => string`
+
+A function that executes for a module and should return a data-url string
+
+__webpack.config.js__
+
+``` js
+module.exports = {
+  experiments: {
+    asset: true
+  },
+  module: {
+    rules: [
+      {
+        test: /\.txt/,
+        type: 'asset',
+        parser: {
+          dataUrlCondition(source, { filename, module }) {
+            content = content.toString();
+            return content.includes('some marker');
+          }
+        }
+      }
+    ]
+  }
+};
+```
 
 ## `Rule.resource`
 
@@ -323,7 +422,7 @@ Indicate what parts of the module contain side effects. See [Tree Shaking](/guid
 
 `string`
 
-Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/sync' | 'webassembly/async'`
+Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/sync' | 'webassembly/async' | 'asset' | 'asset/source' | 'asset/resource' | 'asset/inline'`
 
 `Rule.type` sets the type for a matching module. This prevents defaultRules and their default importing behaviors from occurring. For example, if you want to load a `.json` file through a custom loader, you'd need to set the `type` to `javascript/auto` to bypass webpack's built-in json importing. (See [v4.0 changelog](https://github.com/webpack/webpack/releases/tag/v4.0.0) for more details)
 
@@ -345,6 +444,7 @@ module.exports = {
 };
 ```
 
+> See [Asset Modules](/guides/asset-modules/) for more about `asset*` type
 
 ## `Rule.use`
 
