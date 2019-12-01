@@ -310,38 +310,4 @@ module.exports = {
 };
 ```
 
-Also you can specify a function to decide to inline or not:
-
-__webpack.config.js__
-
-``` diff
-const path = require('path');
-
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
-  },
-  module: {
-    rules: [
-      {
-        test: /\.txt/,
-        type: 'asset',
-        parser: {
--         dataUrlCondition: {
--           maxSize: 4 * 1024 // 4kb
--         }
-+         dataUrlCondition(source, { filename, module }) {
-+           content = content.toString();
-+           return content.includes('some marker');
-+         }
-        }
-      }
-    ]
-  }
-};
-```
+Also you can [specify a function](/configuration/module/#ruleparsedataurlcondition-as-a-function) to decide to inlining a module or not.

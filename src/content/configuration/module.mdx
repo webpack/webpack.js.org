@@ -325,6 +325,30 @@ A mimetype for data-url. Resolves from module resource extension by default
 
 A function that executes for a module and should return a data-url string
 
+__webpack.config.js__
+
+``` js
+module.exports = {
+  experiments: {
+    asset: true
+  },
+  module: {
+    rules: [
+      {
+        test: /\.txt/,
+        type: 'asset',
+        parser: {
+          dataUrlCondition(source, { filename, module }) {
+            content = content.toString();
+            return content.includes('some marker');
+          }
+        }
+      }
+    ]
+  }
+};
+```
+
 ## `Rule.resource`
 
 A [`Condition`](#condition) matched with the resource. You can either supply a `Rule.resource` option or use the shortcut options `Rule.test`, `Rule.exclude`, and `Rule.include`. See details in [`Rule` conditions](#rule-conditions).
