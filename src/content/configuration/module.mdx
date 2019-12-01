@@ -15,6 +15,7 @@ contributors:
   - superburrito
   - lukasgeiter
   - skovy
+  - smelukov
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -275,6 +276,31 @@ module.exports = {
 };
 ```
 
+## `Rule.parser.parse`
+
+`function(input) => string | object`
+
+If `Rule.type` is a `json` then `Rules.parser.parse` option may be a function that implements a custom logic to parse a module source to a JS-object. It may be useful to import `toml`, `yaml` and other non-JSON files as a JSON without a specific loaders:
+
+__webpack.config.js__
+
+```javascript
+const toml = require("toml");
+
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.toml/,
+        parser: {
+          parse: toml.parse
+        }
+      }
+    ]
+  }
+};
+```
 
 ## `Rule.rules`
 
