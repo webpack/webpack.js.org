@@ -155,28 +155,6 @@ A fallback used when the template string or function above yields duplicates.
 See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate).
 
 
-## `output.devtoolLineToLine`
-
-`boolean = false` `object: { test string | RegExp, include string | RegExp, exclude string | RegExp}`
-
-> Avoid using this option as it is __deprecated__ and will soon be removed.
-
-Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
-
-Pass a boolean to enable or disable this feature for all modules (defaults to `false`). Use `object` for granular control, e.g. to enable this feature for all javascript files within a certain directory:
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
-  }
-};
-```
-
-
 ## `output.devtoolModuleFilenameTemplate`
 
 `string = 'webpack://[namespace]/[resource-path]?[loaders]'` `function (info) => string`
@@ -1072,6 +1050,23 @@ module.exports = {
   //...
   output: {
     futureEmitAssets: true
+  }
+};
+```
+
+## `output.compareBeforeEmit`
+
+`boolean = true`
+
+Tells webpack to check if to be emitted file already exists and has the same content before writing to the output file system.
+
+W> webpack will not write output file when file already exists on disk with the same content.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    compareBeforeEmit: false
   }
 };
 ```

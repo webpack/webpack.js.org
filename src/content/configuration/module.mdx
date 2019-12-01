@@ -14,6 +14,8 @@ contributors:
   - EugeneHlushko
   - superburrito
   - lukasgeiter
+  - skovy
+  - smelukov
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -274,6 +276,31 @@ module.exports = {
 };
 ```
 
+## `Rule.parser.parse`
+
+`function(input) => string | object`
+
+If `Rule.type` is a `json` then `Rules.parser.parse` option may be a function that implements a custom logic to parse a module source to a JS-object. It may be useful to import `toml`, `yaml` and other non-JSON files as a JSON without a specific loaders:
+
+__webpack.config.js__
+
+```javascript
+const toml = require("toml");
+
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.toml/,
+        parser: {
+          parse: toml.parse
+        }
+      }
+    ]
+  }
+};
+```
 
 ## `Rule.rules`
 
@@ -296,7 +323,7 @@ Indicate what parts of the module contain side effects. See [Tree Shaking](/guid
 
 `string`
 
-Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/experimental'`
+Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/sync' | 'webassembly/async'`
 
 `Rule.type` sets the type for a matching module. This prevents defaultRules and their default importing behaviors from occurring. For example, if you want to load a `.json` file through a custom loader, you'd need to set the `type` to `javascript/auto` to bypass webpack's built-in json importing. (See [v4.0 changelog](https://github.com/webpack/webpack/releases/tag/v4.0.0) for more details)
 

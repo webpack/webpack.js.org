@@ -160,7 +160,7 @@ class Site extends React.Component {
       sort,
       anchors,
       children: children ? this._strip(children) : []
-    })).filter(page => page.title !== 'printable.md');
+    })).filter(page => (page.title !== 'printable.md' && !page.content.includes('Printable')));
   };
 }
 
