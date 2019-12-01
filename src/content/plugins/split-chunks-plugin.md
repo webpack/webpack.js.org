@@ -34,8 +34,8 @@ webpack will automatically split chunks based on these conditions:
 
 - New chunk can be shared OR modules are from the `node_modules` folder
 - New chunk would be bigger than 30kb (before min+gz)
-- Maximum number of parallel requests when loading chunks on demand would be lower or equal to 5
-- Maximum number of parallel requests at initial page load would be lower or equal to 3
+- Maximum number of parallel requests when loading chunks on demand would be lower or equal to 6
+- Maximum number of parallel requests at initial page load would be lower or equal to 4
 
 When trying to fulfill the last two conditions, bigger chunks are preferred.
 
@@ -58,13 +58,13 @@ module.exports = {
     splitChunks: {
       chunks: 'async',
       minSize: 30000,
+      minRemainingSize: 0,
       maxSize: 0,
       minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
+      maxAsyncRequests: 6,
+      maxInitialRequests: 4,
       automaticNameDelimiter: '~',
       automaticNameMaxLength: 30,
-      name: true,
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
@@ -155,6 +155,16 @@ Minimum number of chunks that must share a module before splitting.
 
 Minimum size, in bytes, for a chunk to be generated.
 
+### `splitChunks.minRemainingSize`
+
+#### `splitChunks.cacheGroups.{cacheGroup}.minRemainingSize`
+
+`number`
+
+`splitChunks.minRemainingSize` option was introduced in webpack 5 to avoid zero sized modules by ensuring that the minimum size of the chunk which remains after splitting is above a limit. Defaults to `0` in ['development' mode](/configuration/mode/#mode-development). For other cases `splitChunks.minRemainingSize` defaults to the value of `splitChunks.minSize` so it doesn't need to be specified manually expect for the rare cases where deep control is required.
+
+W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remaining.
+
 ### `splitChunks.maxSize`
 
 `number`
@@ -167,6 +177,24 @@ When the chunk has a name already, each part will get a new name derived from th
 `maxSize` option is intended to be used with HTTP/2 and long term caching. It increases the request count for better caching. It could also be used to decrease the file size for faster rebuilding.
 
 T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Actual priority is `maxInitialRequest/maxAsyncRequests < maxSize < minSize`.
+
+T> Setting the value for `maxSize` sets the value for both `maxAsyncSize` and `maxInitialSize`.
+
+### `splitChunks.maxAsyncSize`
+
+`number`
+
+Like `maxSize`, `maxAsyncSize` can be applied globally (`splitChunks.maxAsyncSize`), to cacheGroups (`splitChunks.cacheGroups.{cacheGroup}.maxAsyncSize`), or to the fallback cache group (`splitChunks.fallbackCacheGroup.maxAsyncSize`).
+
+The difference between `maxAsyncSize` and `maxSize` is that `maxAsyncSize` will only affect on-demand loading chunks.
+
+### `splitChunks.maxInitialSize`
+
+`number`
+
+Like `maxSize`, `maxInitialSize` can be applied globally (`splitChunks.maxInitialSize`), to cacheGroups (`splitChunks.cacheGroups.{cacheGroup}.maxInitialSize`), or to the fallback cache group (`splitChunks.fallbackCacheGroup.maxInitialSize`).
+
+The difference between `maxInitialSize` and `maxSize` is that `maxInitialSize` will only affect initial load chunks.
 
 ### `splitChunks.name`
 
@@ -268,6 +296,31 @@ module.exports = {
 };
 ```
 
+#### `splitChunks.cacheGroups.{cacheGroup}.type`
+
+`function` `RegExp` `string`
+
+Allows to assign modules to a cache group by module type.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        json: {
+          type: 'json'
+        }
+      }
+    }
+  }
+};
+```
+
+#### `splitChunks.cacheGroups.test`
+
 #### `splitChunks.cacheGroups.{cacheGroup}.test`
 
 `function (module, chunk) => boolean` `RegExp` `string`
@@ -296,7 +349,7 @@ module.exports = {
 
 #### `splitChunks.cacheGroups.{cacheGroup}.filename`
 
-`string`
+`string` `function (chunkData): string`
 
 Allows to override the filename when and only when it's an initial chunk.
 All placeholders available in [`output.filename`](/configuration/output/#outputfilename) are also available here.
@@ -320,6 +373,48 @@ module.exports = {
 };
 ```
 
+And as a function:
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          filename: (chunkData) => {
+            // Use chunkData object for generating filename string based on your requirements
+            return `${chunkData.chunk.name}-bundle.js`;
+          }
+        }
+      }
+    }
+  }
+};
+```
+
+It is possible to create a folder structure by providing path prefixing the filename: `'js/vendor/bundle.js'`.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          filename: 'js/[name]/bundle.js'
+        }
+      }
+    }
+  }
+};
+```
+
+
 #### `splitChunks.cacheGroups.{cacheGroup}.enforce`
 
 `boolean = false`
@@ -336,6 +431,29 @@ module.exports = {
       cacheGroups: {
         vendors: {
           enforce: true
+        }
+      }
+    }
+  }
+};
+```
+
+#### `splitChunks.cacheGroups.{cacheGroup}.idHint`
+
+`string`
+
+Sets the hint for chunk id. It will be added to chunk's filename.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          idHint: 'vendors'
         }
       }
     }

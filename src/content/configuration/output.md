@@ -17,6 +17,7 @@ contributors:
   - eemeli
   - EugeneHlushko
   - g-plane
+  - smelukov
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -153,28 +154,6 @@ Allows customization of `type` attribute of `script` tags that webpack injects i
 A fallback used when the template string or function above yields duplicates.
 
 See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate).
-
-
-## `output.devtoolLineToLine`
-
-`boolean = false` `object: { test string | RegExp, include string | RegExp, exclude string | RegExp}`
-
-> Avoid using this option as it is __deprecated__ and will soon be removed.
-
-Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
-
-Pass a boolean to enable or disable this feature for all modules (defaults to `false`). Use `object` for granular control, e.g. to enable this feature for all javascript files within a certain directory:
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
-  }
-};
-```
 
 
 ## `output.devtoolModuleFilenameTemplate`
@@ -363,6 +342,9 @@ If using a function for this option, the function will be passed an object conta
 
 T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
 
+## `output.assetModuleFilename`
+
+The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/)
 
 ## `output.globalObject`
 
@@ -1087,6 +1069,23 @@ Tell webpack the maximum EcmaScript version of the webpack generated code. It sh
 module.exports = {
   output: {
     ecmaVersion: 6
+  }
+};
+```
+
+## `output.compareBeforeEmit`
+
+`boolean = true`
+
+Tells webpack to check if to be emitted file already exists and has the same content before writing to the output file system.
+
+W> webpack will not write output file when file already exists on disk with the same content.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    compareBeforeEmit: false
   }
 };
 ```

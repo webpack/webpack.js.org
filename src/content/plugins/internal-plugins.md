@@ -26,7 +26,7 @@ Plugins affecting the environment of the compiler.
 
 ### NodeEnvironmentPlugin
 
-`node/NodeEnvironmentPlugin()`
+`webpack.node.NodeEnvironmentPlugin()`
 
 Applies Node.js style filesystem to the compiler.
 
@@ -178,7 +178,7 @@ Tries to evaluate expressions in `if (...)` statements and ternaries to replace 
 
 There are multiple optimizations in production mode regarding dead branches:
 
-- The ones performed by Terser
+- The ones performed by [Terser](https://github.com/fabiosantoscode/terser)
 - The ones performed by webpack
 
 webpack will try to evaluate conditional statements. If it succeeds then the dead branch is removed. webpack can't do constant folding unless the compiler knows it. For example:
@@ -313,7 +313,7 @@ Merges chunks until each chunk has the minimum size of `minChunkSize`.
 
 Adds chunk ids of chunks which are included in the chunk. This eliminates unnecessary chunk loads.
 
-### OccurrenceOrderPlugin
+### OccurenceOrderPlugin
 
 `optimize/OccurrenceOrderPlugin(preferEntry)`
 
