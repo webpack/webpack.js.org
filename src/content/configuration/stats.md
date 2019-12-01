@@ -346,6 +346,21 @@ module.exports = {
 };
 ```
 
+### `stats.errorStack`
+
+`boolean = true`
+
+Tells `stats` whether to show stack trace of errors.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    errorStack: false
+  }
+};
+```
+
 ### `stats.excludeAssets`
 
 `array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean`
