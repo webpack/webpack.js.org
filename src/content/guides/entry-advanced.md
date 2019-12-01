@@ -35,7 +35,7 @@ __account.scss__
 // account page individual styles
 ```
 
-We will use [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) in `production` mode for css as a best practice.
+We will use [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin/) in `production` mode for css as a best practice.
 
 __webpack.config.js__
 
