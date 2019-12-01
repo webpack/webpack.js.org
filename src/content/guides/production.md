@@ -106,7 +106,7 @@ __webpack.prod.js__
 + });
 ```
 
-In `webpack.common.js`, we now have setup our `entry` and `output` configuration and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've set ``mode`` to ``development``. Also, we've added the recommended `devtool` for that environment (strong source mapping), as well as our simple `devServer` configuration. Finally, in `webpack.prod.js`,``mode`` is set to ``production`` which loads `TerserPlugin` which was first introduced by the [tree shaking](/guides/tree-shaking) guide.
+In `webpack.common.js`, we now have setup our `entry` and `output` configuration and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've set ``mode`` to ``development``. Also, we've added the recommended `devtool` for that environment (strong source mapping), as well as our simple `devServer` configuration. Finally, in `webpack.prod.js`,``mode`` is set to ``production`` which loads [TerserPlugin](/plugins/terser-webpack-plugin/), which was first introduced by the [tree shaking](/guides/tree-shaking) guide.
 
 Note the use of `merge()` in the environment-specific configurations to easily include our common configuration in `dev` and `prod`. The `webpack-merge` tool offers a variety of advanced features for merging but for our use case we won't need any of that.
 
@@ -198,7 +198,7 @@ __src/index.js__
 
 webpack v4+ will minify your code by default in [`production mode`](/configuration/mode/#mode-production).
 
-Note that while the [`TerserPlugin`](/plugins/terser-webpack-plugin) is a great place to start for minification and being used by default, there are other options out there. Here are a few more popular ones:
+Note that while the [`TerserPlugin`](/plugins/terser-webpack-plugin/) is a great place to start for minification and being used by default, there are other options out there:
 
 - [`BabelMinifyWebpackPlugin`](https://github.com/webpack-contrib/babel-minify-webpack-plugin)
 - [`ClosureWebpackPlugin`](https://github.com/webpack-contrib/closure-webpack-plugin)

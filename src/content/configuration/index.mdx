@@ -182,8 +182,6 @@ module.exports = {
         // flags to apply these rules, even if they are overridden (advanced option)
         loader: "babel-loader",
         // the loader which should be applied, it'll be resolved relative to the context
-        // -loader suffix is no longer optional in webpack2 for clarity reasons
-        // see webpack 1 upgrade guide
         options: {
           presets: ["es2015"]
         },
@@ -366,7 +364,7 @@ module.exports = {
         root: "React"
       }
     },
-    externals: (request) => { /* ... */ return "commonjs " + request }
+    externals: ({request}) => { /* ... */ return "commonjs " + request }
   </externals>
   // Don't follow/bundle these modules, but request them at runtime from the environment
   serve: { //object

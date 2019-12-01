@@ -2,10 +2,10 @@
 title: Why webpack
 sort: 12
 contributors:
-- debs-obrien
-- montogeek
-- jeremenichelli
-- EugeneHlushko
+  - debs-obrien
+  - montogeek
+  - jeremenichelli
+  - EugeneHlushko
 ---
 
 To understand why you should use webpack, let's recap how we used JavaScript on the web before bundlers were a thing.

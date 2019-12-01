@@ -1,11 +1,12 @@
 ---
-title: Parser Hooks
+title: JavascriptParser Hooks
 group: Plugins
 sort: 11
 contributors:
   - byzyk
   - DeTeam
   - misterdev
+  - EugeneHlushko
 ---
 
 The `parser` instance, found in the `compiler`, is used to parse each module
@@ -475,7 +476,7 @@ parser.hooks.call.for('eval').tap('MyPlugin', expression => {});
 
 `SyncBailHook`
 
-Triggered when parsing a call to a member function of an object. 
+Triggered when parsing a call to a member function of an object.
 
 - Hook Parameters: `objectIdentifier`
 - Callback Parameters: `expression`
@@ -491,7 +492,7 @@ parser.hooks.callAnyMember.for('myObj').tap('MyPlugin', expression => {});
 
 `SyncBailHook`
 
-Invoked when parsing a `new` expression. 
+Invoked when parsing a `new` expression.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
