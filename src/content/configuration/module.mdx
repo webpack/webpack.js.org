@@ -249,9 +249,9 @@ module.exports = {
 }
 ```
 
-If `Rule.type` is an `asset` then `Rules.parser` option may be an object or function that describes a condition whether to encode file contents to Base64 or emit it as a separate file into the output directory
+If `Rule.type` is an `asset` then `Rules.parser` option may be an object or function that describes a condition whether to encode file contents to Base64 or emit it as a separate file into the output directory.
 
-If `Rule.type` is an `asset` or `asset/inline` then `Rule.generator` option may be an object that describes an encoding of the module source or a function that encodes a module source by a custom algorithm
+If `Rule.type` is an `asset` or `asset/inline` then `Rule.generator` option may be an object that describes an encoding of the module source or a function that encodes a module source by a custom algorithm.
 
 For more info - see [Asset Modules](/guides/asset-modules/)
 
@@ -375,6 +375,31 @@ module.exports = {
 };
 ```
 
+## `Rule.parser.parse`
+
+`function(input) => string | object`
+
+If `Rule.type` is a `json` then `Rules.parser.parse` option may be a function that implements a custom logic to parse a module source to a JS-object. It may be useful to import `toml`, `yaml` and other non-JSON files as a JSON without a specific loaders:
+
+__webpack.config.js__
+
+```javascript
+const toml = require("toml");
+
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.toml/,
+        parser: {
+          parse: toml.parse
+        }
+      }
+    ]
+  }
+};
+```
 
 ## `Rule.rules`
 
