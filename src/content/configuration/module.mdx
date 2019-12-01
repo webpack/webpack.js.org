@@ -249,13 +249,19 @@ module.exports = {
 }
 ```
 
-If `Rule.type` is an `asset` then `Rules.parser` option may be an object or function that describes a condition whether to encode file contents to Base64 or emit it as a separate file into the output directory.
+If `Rule.type` is an `asset` then `Rules.parser` option may be an object or a function that describes a condition whether to encode file contents to Base64 or emit it as a separate file into the output directory.
 
-If `Rule.type` is an `asset` or `asset/inline` then `Rule.generator` option may be an object that describes an encoding of the module source or a function that encodes a module source by a custom algorithm.
+If `Rule.type` is an `asset` or `asset/inline` then `Rule.generator` option may be an object that describes the encoding of the module source or a function that encodes module's source by a custom algorithm.
 
-For more info - see [Asset Modules](/guides/asset-modules/)
+See [Asset Modules gude](/guides/asset-modules/) for additional information and use cases.
 
-## `Rule.parse.dataUrlCondition` as an object
+## `Rule.parser.dataUrlCondition`
+
+`object = { maxSize number = 8096 }` `function (source, { filename, module }) => boolean`
+
+If a module source size is less than `maxSize` then module will be injected into the bundle as a Base64-encoded string, otherwise module file will be emitted into the output directory.
+
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -266,7 +272,7 @@ module.exports = {
         //...
         parser: {
           dataUrlCondition: {
-            maxSize: 8096
+            maxSize: 4 * 1024
           }
         }
       }
@@ -275,19 +281,39 @@ module.exports = {
 }
 ```
 
-## `dataUrlCondition.minSize`
+When a function given, returning `true` tells webpack to inject the module into the bundle as Base64-encoded string, otherwise module file will be emitted info output directory.
 
-`number`
+__webpack.config.js__
 
-If a module source size is less than `maxSize` then module will be injected into the bundle as a Base64-encoded string, otherwise module file will be emitted into the output directory.
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        //...
+        parser: {
+          dataUrlCondition: (source, { filename, module })) => {
+            const content = source.toString();
+            return content.includes('some marker');
+          }
+        }
+      }
+    ]
+  }
+}
+```
 
-## `Rule.parse.dataUrlCondition` as a function
+## `Rule.generator.dataUrl`
 
-`function(source, { filename, module }) => boolean`
+`object = { encoding string = 'base64' | false, mimetype string = undefined | false }` `function (content, { felename, module }) => string`
 
-If the function returns true, then module will be injected into the bundle as base64-encoded string, otherwise module file will be emitted info output directory.
+When `Rule.generator.dataUrl` is used as an object, you can configure two properties:
 
-## `Rule.generator.dataUrl` as an object
+- encoding: When set to `'base64'`, module source will be encoded with Base64 algorithm. Setting `encoding` to false will disable encoding.
+- mimetype: A mimetype for data URI. Resolves from module resource extension by default.
+
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -298,7 +324,7 @@ module.exports = {
         //...
         generator: {
           encoding: 'base64',
-          mimetype: ''
+          mimetype: 'mimetype/png'
         }
       }
     ]
@@ -306,47 +332,29 @@ module.exports = {
 }
 ```
 
-## `dataUrl.encoding`
+When used a a function, it executes for every module and must return a data URI string.
 
-`'base' | false`
-
-- `base64` - encode a module source with Base64 algorithm
-- `false` - don't encode a module source
-
-## `dataUrl.mimetype`
-
-`string`
-
-A mimetype for data-url. Resolves from module resource extension by default
-
-## `Rule.generator.dataUrl` as a function
-
-`function(source, { filename, module }) => string`
-
-A function that executes for a module and should return a data-url string
-
-__webpack.config.js__
-
-``` js
+```js
 module.exports = {
-  experiments: {
-    asset: true
-  },
+  //...
   module: {
     rules: [
       {
-        test: /\.txt/,
-        type: 'asset',
-        parser: {
-          dataUrlCondition(source, { filename, module }) {
-            content = content.toString();
-            return content.includes('some marker');
+        //...
+        generator: {
+          dataUrl: content => {
+            const svgToMiniDataURI = require('mini-svg-data-uri');
+            if (typeof content !== 'string') {
+							content = content.toString();
+						}
+
+            return svgToMiniDataURI(content);
           }
         }
       }
     ]
   }
-};
+}
 ```
 
 ## `Rule.resource`
@@ -444,7 +452,7 @@ module.exports = {
 };
 ```
 
-> See [Asset Modules](/guides/asset-modules/) for more about `asset*` type
+> See [Asset Modules guide](/guides/asset-modules/) for more about `asset*` type.
 
 ## `Rule.use`
 
