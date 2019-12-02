@@ -1058,6 +1058,21 @@ module.exports = {
 };
 ```
 
+## `output.ecmaVersion`
+
+Tell webpack the maximum EcmaScript version of the webpack generated code. It should be one of these:
+
+- should be >= 5, should be <= 11
+- should be >= 2009, should be <= 2020
+
+```javascript
+module.exports = {
+  output: {
+    ecmaVersion: 6
+  }
+};
+```
+
 ## `output.compareBeforeEmit`
 
 `boolean = true`
