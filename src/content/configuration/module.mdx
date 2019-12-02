@@ -306,7 +306,7 @@ module.exports = {
 
 ## `Rule.generator.dataUrl`
 
-`object = { encoding string = 'base64' | false, mimetype string = undefined | false }` `function (content, { felename, module }) => string`
+`object = { encoding string = 'base64' | false, mimetype string = undefined | false }` `function (content, { filename, module }) => string`
 
 When `Rule.generator.dataUrl` is used as an object, you can configure two properties:
 
@@ -345,9 +345,8 @@ module.exports = {
           dataUrl: content => {
             const svgToMiniDataURI = require('mini-svg-data-uri');
             if (typeof content !== 'string') {
-							content = content.toString();
-						}
-
+              content = content.toString();
+            }
             return svgToMiniDataURI(content);
           }
         }
