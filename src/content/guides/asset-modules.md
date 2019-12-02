@@ -1,10 +1,12 @@
 ---
 title: Asset Modules
+sort: 24
 contributors:
   - smelukov
+  - EugeneHlushko
 ---
 
-Asset Modules is a type of modules that allows to use assets files (fonts, icons, etc) without configuring additional loaders.
+Asset Modules is a type of module that allows to use asset files (fonts, icons, etc) without configuring additional loaders.
 
 Prior to webpack 5 it was common to use:
 
@@ -19,7 +21,7 @@ Asset Modules type replaces all of these loaders by adding 4 new module types:
 - `asset/source` exports the source code of the asset. Previously achievable by using `raw-loader`.
 - `asset` automatically chooses between exporting a data URI and emitting a separate file. Previously achievable by using `url-loader` with asset size limit.
 
-W> This is an experimental feature. Enable Asset Modules by setting `experiments.asset: true` in [experiments](/configuration/experiments/) option of your webpack  configuration
+W> This is an experimental feature. Enable Asset Modules by setting `experiments.asset: true` in [experiments](/configuration/experiments/) option of your webpack configuration.
 
 __webpack.config.js__
 
@@ -67,10 +69,8 @@ module.exports = {
 
 __src/index.js__
 
-``` js
+```js
 import mainImage from './images/main.png';
-
-// ...
 
 img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 ```
@@ -81,11 +81,11 @@ All `.png` files will be emitted to the output directory and their paths will be
 
 By default, `asset/resource` modules are emitting with `[hash][ext]` filename into output directory.
 
-You can modify this template by setting `output.assetModuleFilename` in your configuration:
+You can modify this template by setting [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) in your webpack configuration:
 
 __webpack.config.js__
 
-``` diff
+```diff
 const path = require('path');
 
 module.exports = {
@@ -141,11 +141,9 @@ module.exports = {
 
 __src/index.js__
 
-``` diff
+```diff
 - import mainImage from './images/main.png';
 + import metroMap from './images/matro.svg';
-
-// ...
 
 - img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 + block.style.background = `url(${metroMap}); // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
@@ -161,7 +159,7 @@ If you want to use a custom encoding algorithm, you may specify a custom functio
 
 __webpack.config.js__
 
-``` diff
+```diff
 const path = require('path');
 + const svgToMiniDataURI = require('mini-svg-data-uri');
 
@@ -197,7 +195,7 @@ Now all `.svg` files will be encoded by `mini-svg-data-uri` package.
 
 __webpack.config.js__
 
-``` diff
+```diff
 const path = require('path');
 - const svgToMiniDataURI = require('mini-svg-data-uri');
 
@@ -231,17 +229,15 @@ module.exports = {
 
 __src/example.txt__
 
-``` text
+```text
 Hello world
 ```
 
 __src/index.js__
 
-``` diff
+```diff
 - import metroMap from './images/matro.svg';
 + import exampleText from './example.txt';
-
-// ...
 
 - block.style.background = `url(${metroMap}); // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
 + block.textContent = exampleText; // 'Hello world'
@@ -278,7 +274,7 @@ module.exports = {
 
 Now webpack will automatically choose between `resource` and `inline` by following a default condition: a file with size less than 8kb will be treated as a `inline` module type and `resource` module type otherwise.
 
-You can change this condition by setting a `parser.dataUrlCondition.maxSize` option on the module rule of your webpack configuration:
+You can change this condition by setting a [`Rule.parser.dataUrlCondition.maxSize`](/configuration/module/#ruleparserdataurlcondition) option on the module rule level of your webpack configuration:
 
 __webpack.config.js__
 
@@ -310,4 +306,4 @@ module.exports = {
 };
 ```
 
-Also you can [specify a function](/configuration/module/#ruleparsedataurlcondition-as-a-function) to decide to inlining a module or not.
+Also you can [specify a function](/configuration/module/#ruleparserdataurlcondition) to decide to inlining a module or not.
