@@ -591,6 +591,21 @@ module.exports = {
 };
 ```
 
+### `stats.preset`
+
+`string`
+
+Sets the [preset](/configuration/stats/#stats) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    preset: 'minimal'
+  }
+};
+```
+
 ### `stats.providedExports`
 
 `boolean = false`
