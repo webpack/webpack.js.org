@@ -316,6 +316,21 @@ module.exports = {
 };
 ```
 
+### `stats.orphanModules`
+
+`boolean = false`
+
+Tells `stats` whether to hide `orphan` modules. A module is an `orphan` if it is not included in any chunk. Orphans modules are now hidden by default in `Stats`.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    orphanModules: true
+  }
+};
+```
+
 ### `stats.errors`
 
 `boolean = true`
@@ -342,6 +357,21 @@ module.exports = {
   //...
   stats: {
     errorDetails: false
+  }
+};
+```
+
+### `stats.errorStack`
+
+`boolean = true`
+
+Tells `stats` whether to show stack trace of errors.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    errorStack: false
   }
 };
 ```
@@ -557,6 +587,21 @@ module.exports = {
   //...
   stats: {
     performance: false
+  }
+};
+```
+
+### `stats.preset`
+
+`string`
+
+Sets the [preset](/configuration/stats/#stats) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    preset: 'minimal'
   }
 };
 ```
