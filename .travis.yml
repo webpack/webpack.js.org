@@ -45,5 +45,5 @@ jobs:
 
     - stage: Post-build
       name: Deploy
-      if: branch = master AND type = push
+      if: branch = master AND type IN (push, cron)
       script: bash ./src/scripts/deploy.sh
