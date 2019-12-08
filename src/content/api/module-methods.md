@@ -177,9 +177,11 @@ W> Using it asynchronously may not have the expected effect.
 require.resolve(dependency: String);
 ```
 
-Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. See [`module.id`](/api/module-variables/#moduleid-commonjs) for more information.
+Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. It is recommended to treat it as an opaque value which can only used with `require.cache[id]` or `__webpack_require__(id)` (best to avoid such usage).
 
-W> Module ID is a number in webpack (in contrast to NodeJS where it is a string -- the filename).
+W> Module ID's type can be a `number` or a `string` depending on the [`optimization.moduleIds`](/configuration/optimization/#optimizationmoduleids) configuration.
+
+See [`module.id`](/api/module-variables/#moduleid-commonjs) for more information.
 
 
 ### `require.cache`
