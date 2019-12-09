@@ -1089,3 +1089,35 @@ module.exports = {
   }
 };
 ```
+
+## `output.iife`
+
+`boolean = true`
+
+Tells webpack to add iife wrapper around emitted code
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    iife: true
+  }
+}
+```
+
+## `output.module`
+
+`boolean = true`
+
+Allow outputting javascript files as module type. It set  `output.iife` to `false`, `output.libraryTarget` to `"module"`, `output.jsonpScriptType` to `"module"` and `terserOptions.module` = `true`
+
+W> `output.module` is an experimental feature and can be enabled by enabling `experiments.outputModule`
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    module: true
+  }
+}
+```
