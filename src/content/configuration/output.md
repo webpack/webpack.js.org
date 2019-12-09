@@ -1102,7 +1102,7 @@ module.exports = {
   output: {
     iife: true
   }
-}
+};
 ```
 
 ## `output.module`
@@ -1119,5 +1119,5 @@ module.exports = {
   output: {
     module: true
   }
-}
+};
 ```
