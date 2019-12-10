@@ -1094,7 +1094,7 @@ module.exports = {
 
 `boolean = true`
 
-Tells webpack to add iife wrapper around emitted code
+Tells webpack to add [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) wrapper around emitted code.
 
 ```javascript
 module.exports = {
