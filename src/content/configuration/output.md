@@ -1109,7 +1109,7 @@ module.exports = {
 
 `boolean = true`
 
-Allow outputting javascript files as module type. It set  `output.iife` to `false`, `output.libraryTarget` to `"module"`, `output.jsonpScriptType` to `"module"` and `terserOptions.module` = `true`
+Allow outputting JavaScript files as module type. It set `output.iife` to `false`, `output.libraryTarget` to `"module"`, `output.jsonpScriptType` to `"module"` and `terserOptions.module` = `true`
 
 W> `output.module` is an experimental feature and can be enabled by enabling `experiments.outputModule`
 
