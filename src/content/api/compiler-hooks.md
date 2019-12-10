@@ -156,7 +156,6 @@ The `compilationParams` variable is initialized as follows:
 compilationParams = {
   normalModuleFactory,
   contextModuleFactory,
-  compilationDependencies
 };
 ```
 

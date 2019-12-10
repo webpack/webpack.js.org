@@ -51,3 +51,20 @@
     }
   }
 }
+
+.sidebar__docs-version {
+  color: #535353;
+  border-top: 1px solid #f2f2f2;
+  margin-top: 12px;
+  padding-top: 12px;
+  font-size: 15px;
+
+  ul {
+    margin-top: 12px;
+
+    li {
+      margin-top: 6px;
+      list-style: none;
+    }
+  }
+}
