@@ -20,7 +20,7 @@ Once you are in the project directory, run the following commands:
 - `npm run build` to create a production version of the site.
 - `npm start` to develop on a local webpack-dev-server: [localhost:3000][3].
 
-> NOTE: run `npm fetch` before running `npm start` command for first time
+> NOTE: run `npm fetch` before running `npm start` command for the first time
 
 - `npm run fetch` to retrieve external documentation/data.
 
