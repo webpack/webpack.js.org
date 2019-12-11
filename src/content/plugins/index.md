@@ -9,6 +9,7 @@ contributors:
   - eko3alpha
   - refactorized
   - byzyk
+  - EugeneHlushko
 ---
 
 webpack has a rich plugin interface. Most of the features within webpack itself use this plugin interface. This makes webpack __flexible__.
@@ -30,7 +31,6 @@ Name                                                     | Description
 [`I18nWebpackPlugin`](/plugins/i18n-webpack-plugin)          | Add i18n support to your bundles
 [`IgnorePlugin`](/plugins/ignore-plugin)                     | Exclude certain modules from bundles
 [`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin) | Set min/max limits for chunking to better control chunking
-[`LoaderOptionsPlugin`](/plugins/loader-options-plugin)      | Used for migrating from webpack 1 to 2
 [`MinChunkSizePlugin`](/plugins/min-chunk-size-plugin)       | Keep chunk size above the specified limit
 [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin)       | creates a CSS file per JS file which requires CSS
 [`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimizationnoemitonerrors)  | Skip the emitting phase when there are compilation errors
