@@ -169,8 +169,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'webpack-numbers.js'
-  }
+    filename: 'webpack-numbers.js',
+  },
 };
 ```
 
@@ -190,17 +190,16 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'webpack-numbers.js'
--   }
-+   },
+      filename: 'webpack-numbers.js',
+    },
 +   externals: {
 +     lodash: {
 +       commonjs: 'lodash',
 +       commonjs2: 'lodash',
 +       amd: 'lodash',
-+       root: '_'
-+     }
-+   }
++       root: '_',
++     },
++   },
   };
 ```
 
@@ -229,8 +228,8 @@ module.exports = {
     'library/one',
     'library/two',
     // Everything that starts with "library/"
-    /^library\/.+$/
-  ]
+    /^library\/.+$/,
+  ],
 };
 ```
 
@@ -248,18 +247,17 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
--     filename: 'webpack-numbers.js'
-+     filename: 'webpack-numbers.js',
-+     library: 'webpackNumbers'
+      filename: 'webpack-numbers.js',
++     library: 'webpackNumbers',
     },
     externals: {
       lodash: {
         commonjs: 'lodash',
         commonjs2: 'lodash',
         amd: 'lodash',
-        root: '_'
-      }
-    }
+        root: '_',
+      },
+    },
   };
 ```
 
@@ -277,18 +275,17 @@ __webpack.config.js__
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'webpack-numbers.js',
--     library: 'webpackNumbers'
-+     library: 'webpackNumbers',
-+     libraryTarget: 'umd'
+      library: 'webpackNumbers',
++     libraryTarget: 'umd',
     },
     externals: {
       lodash: {
         commonjs: 'lodash',
         commonjs2: 'lodash',
         amd: 'lodash',
-        root: '_'
-      }
-    }
+        root: '_',
+      },
+    },
   };
 ```
 
@@ -299,7 +296,7 @@ You can expose the library in the following ways:
 - Window: available through the `window` object, in the browser (`libraryTarget:'window'`).
 - UMD: available after AMD or CommonJS `require` (`libraryTarget:'umd'`).
 
-If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output#outputlibrarytarget) there for a detailed list of all available options.
+If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output/#outputlibrarytarget) there for a detailed list of all available options.
 
 W> With webpack 3.5.5, using `libraryTarget: { root:'_' }` doesn't work properly (as stated in [issue 4824](https://github.com/webpack/webpack/issues/4824)). However, you can set `libraryTarget: { var: '_' }` to expect the library as a global variable.
 

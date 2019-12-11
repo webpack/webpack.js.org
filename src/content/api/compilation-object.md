@@ -322,3 +322,45 @@ Parameters:
 ### checkConstraints
 
 `function`
+
+### emitAsset
+
+`function (file, source, assetInfo = {})`
+
+W> Available since webpack 4.40.0
+
+Parameters:
+
+- `file` - file name of the asset
+- `source` - source of the asset
+- `assetInfo` - additional asset information
+
+### updateAsset
+
+`function (file, newSourceOrFunction, assetInfoUpdateOrFunction)`
+
+W> Available since webpack 4.40.0
+
+Parameters:
+
+- `file` - file name of the asset
+- `newSourceOrFunction` - new asset source or function converting old to new
+- `assetInfoUpdateOrFunction` - new asset info or function converting old to new
+
+### getAssets
+
+`function`
+
+W> Available since webpack 4.40.0
+
+Returns array of all assets under current compilation.
+
+### getAsset
+
+`function (name)`
+
+W> Available since webpack 4.40.0
+
+Parameters:
+
+`name` - the name of the asset to return

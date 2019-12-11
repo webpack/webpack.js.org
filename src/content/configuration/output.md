@@ -17,6 +17,7 @@ contributors:
   - eemeli
   - EugeneHlushko
   - g-plane
+  - smelukov
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -87,7 +88,7 @@ module.exports = {
 
 ## `output.chunkFilename`
 
-`string`
+`string = '[id].js'`
 
 This option determines the name of non-entry chunk files. See [`output.filename`](#outputfilename) option for details on the possible values.
 
@@ -95,12 +96,36 @@ Note that these filenames need to be generated at runtime to send the requests f
 
 By default `[id].js` is used or a value inferred from [`output.filename`](#outputfilename) (`[name]` is replaced with `[id]` or `[id].` is prepended).
 
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkFilename: '[id].js'
+  }
+};
+```
+
 
 ## `output.chunkLoadTimeout`
 
-`number`
+`number = 120000`
 
-Number of milliseconds before chunk request expires, defaults to 120 000. This option is supported since webpack 2.6.0.
+Number of milliseconds before chunk request expires. This option is supported since webpack 2.6.0.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkLoadTimeout: 30000
+  }
+};
+```
 
 
 ## `output.crossOriginLoading`
@@ -129,28 +154,6 @@ Allows customization of `type` attribute of `script` tags that webpack injects i
 A fallback used when the template string or function above yields duplicates.
 
 See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate).
-
-
-## `output.devtoolLineToLine`
-
-`boolean = false` `object: { test string | RegExp, include string | RegExp, exclude string | RegExp}`
-
-> Avoid using this option as it is __deprecated__ and will soon be removed.
-
-Enables line to line mapping for all or some modules. This produces a simple source map where each line of the generated source is mapped to the same line of the original source. This is a performance optimization and should only be used if all input lines match generated lines.
-
-Pass a boolean to enable or disable this feature for all modules (defaults to `false`). Use `object` for granular control, e.g. to enable this feature for all javascript files within a certain directory:
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    devtoolLineToLine: { test: /\.js$/, include: 'src/utilities' }
-  }
-};
-```
 
 
 ## `output.devtoolModuleFilenameTemplate`
@@ -216,7 +219,7 @@ For example, if you have 2 libraries, with namespaces `library1` and `library2`,
 
 This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#outputpath) option.
 
-For a single [`entry`](/configuration/entry-context#entry) point, this can be a static name.
+For a single [`entry`](/configuration/entry-context/#entry) point, this can be a static name.
 
 __webpack.config.js__
 
@@ -339,6 +342,9 @@ If using a function for this option, the function will be passed an object conta
 
 T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
 
+## `output.assetModuleFilename`
+
+The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/)
 
 ## `output.globalObject`
 
@@ -1048,6 +1054,38 @@ module.exports = {
   //...
   output: {
     futureEmitAssets: true
+  }
+};
+```
+
+## `output.ecmaVersion`
+
+Tell webpack the maximum EcmaScript version of the webpack generated code. It should be one of these:
+
+- should be >= 5, should be <= 11
+- should be >= 2009, should be <= 2020
+
+```javascript
+module.exports = {
+  output: {
+    ecmaVersion: 6
+  }
+};
+```
+
+## `output.compareBeforeEmit`
+
+`boolean = true`
+
+Tells webpack to check if to be emitted file already exists and has the same content before writing to the output file system.
+
+W> webpack will not write output file when file already exists on disk with the same content.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    compareBeforeEmit: false
   }
 };
 ```

@@ -27,6 +27,7 @@ To install the latest release or a specific version, run one of the following co
 
 ``` bash
 npm install --save-dev webpack
+# or specific version
 npm install --save-dev webpack@<version>
 ```
 
@@ -64,6 +65,7 @@ If you are enthusiastic about using the latest that webpack has to offer, you ca
 
 ``` bash
 npm install webpack@beta
+# or specific tag/branch
 npm install webpack/webpack#<tagname/branchname>
 ```
 

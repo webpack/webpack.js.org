@@ -25,16 +25,17 @@ contributors:
 
 webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
 
+W> Since webpack v5.0.0-beta.1 the minimum Node.js version to run webpack is 10.13.0 (LTS)
+
 ## Basic Setup
 
-First let's create a directory, initialize npm, [install webpack locally](/guides/installation#local-installation), and install the webpack-cli (the tool used to run webpack on the command line):
+First let's create a directory, initialize npm, [install webpack locally](/guides/installation/#local-installation), and install the webpack-cli (the tool used to run webpack on the command line):
 
 ``` bash
 mkdir webpack-demo
 cd webpack-demo
 npm init -y
-npm install webpack --save-dev
-npm install webpack-cli --save-dev
+npm install webpack webpack-cli --save-dev
 ```
 
 T> Throughout the Guides we will use `diff` blocks to show you what changes we're making to directories, files, and code.
@@ -238,8 +239,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
-  }
+    path: path.resolve(__dirname, 'dist'),
+  },
 };
 ```
 

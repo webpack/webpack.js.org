@@ -419,7 +419,7 @@ Triggered after chunk `id` optimization has finished.
 
 `SyncHook`
 
-Store module info to the records. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
+Store module info to the records. This is triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
 
 - Callback Parameters: `modules` `records`
 
@@ -696,15 +696,7 @@ Executed after setting up a child compiler.
 
 ### `normalModuleLoader`
 
-`SyncHook`
-
-W> This hook will be moved in v5.0.0 to `NormalModule.getCompilationHooks(compilation).loader`
-
-The normal module loader is the function that actually loads all the modules
-
-in the module graph (one-by-one).
-
-- Callback Parameters: `loaderContext` `module`
+Since webpack v5 `normalModuleLoader` hook was removed. Now to access the loader use `NormalModule.getCompilationHooks(compilation).loader` instead.
 
 ### `dependencyReference`
 

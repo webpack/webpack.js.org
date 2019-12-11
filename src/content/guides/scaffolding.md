@@ -1,10 +1,10 @@
 ---
 title: Scaffolding
+sort: 14
 contributors:
   - evenstensberg
   - pranshuchittora
   - EugeneHlushko
-sort: 14
 ---
 
 It can be hard to set up a complex webpack configuration for the first time. Writing advanced configurations to optimize performance is quite hard. The `init` feature is designed to support people that want to create their own configuration or initializing projects that other people create.
@@ -109,7 +109,7 @@ class MyScaffold extends Generator {
     super(args, opts);
     opts.env.configuration = {
       dev: {},
-      prod: {}
+      prod: {},
     };
   }
 }
@@ -124,7 +124,7 @@ This object has the same format as a regular webpack [configuration](/configurat
 ```js
 this.options.env.configuration.dev.webpackOptions = {
   entry: '\'app.js\'',
-  output: {}
+  output: {},
 };
 ```
 
@@ -161,7 +161,7 @@ The `topScope` property is where you write all the code needed by your configura
 ```js
 this.options.env.configuration.dev.topScope = [
   'const webpack = require("webpack");',
-  'const path = require("path");'
+  'const path = require("path");',
 ];
 ```
 
