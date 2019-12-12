@@ -402,7 +402,7 @@ addDependency(file: string)
 dependency(file: string) // shortcut
 ```
 
-Add a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack-contrib/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the URLs for those attributes as dependencies of the html file that is parsed.
+Add a file as dependency of the loader result in order to make them watchable. For example, [`sass-loader`](https://github.com/webpack-contrib/sass-loader), [`less-loader`](https://github.com/webpack-contrib/less-loader) uses this to recompile whenever any imported `css` file changes.
 
 
 ### `this.addContextDependency`
