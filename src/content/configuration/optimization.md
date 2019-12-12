@@ -519,3 +519,22 @@ module.exports = {
   }
 };
 ```
+
+## `optimization.innerGraph`
+
+`bool`
+
+`optimization.innerGraph` tells webpack whether to conduct inner graph analysis for unused exports.
+
+By default `optimization.innerGraph` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    innerGraph: true
+  }
+};
+```
