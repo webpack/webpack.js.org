@@ -607,7 +607,7 @@ module.exports = {
 };
 ```
 
-Set `stats.preset` to `false` is the same as using a [preset](/configuration/stats/#stats) `'none'`.
+Set `stats.preset` to `false` tells webpack to use `'none'` [stats preset](/configuration/stats/#stats).
 
 ### `stats.providedExports`
 
