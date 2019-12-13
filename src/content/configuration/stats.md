@@ -479,6 +479,7 @@ module.exports = {
     loggingDebug: [
       'MyPlugin',
       /MyPlugin/,
+      /webpack/, // To get core logging
       (name) => name.contains('MyPlugin')
     ]
   }
