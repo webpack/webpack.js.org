@@ -237,7 +237,7 @@ module.exports = {
 };
 ```
 
-W> `moduleIds: 'hashed'` is deprecated in favour of `deterministic` and also `moduleIds: total-size` has been remove in V5.
+W> `moduleIds: 'hashed'` is deprecated in favour of `deterministic`. `moduleIds: total-size` has been removed in webpack 5.
 
 ## `optimization.chunkIds`
 
