@@ -594,7 +594,7 @@ module.exports = {
 
 ### `stats.preset`
 
-`string`
+`string` `boolean: false`
 
 Sets the [preset](/configuration/stats/#stats) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
 
@@ -606,6 +606,8 @@ module.exports = {
   }
 };
 ```
+
+Set `stats.preset` to `false` is the same as using a [preset](/configuration/stats/#stats) `'none'`.
 
 ### `stats.providedExports`
 
