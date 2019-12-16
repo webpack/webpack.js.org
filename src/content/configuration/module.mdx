@@ -386,12 +386,12 @@ module.exports = {
 
 `function(input) => string | object`
 
-If `Rule.type` is a `json` then `Rules.parser.parse` option may be a function that implements a custom logic to parse a module source to a JS-object. It may be useful to import `toml`, `yaml` and other non-JSON files as a JSON without a specific loaders:
+If `Rule.type` is set to `'json'` then `Rules.parser.parse` option may be a function that implements custom logic to parse module's source and convert it to a JavaScript `object`. It may be useful to import `toml`, `yaml` and other non-JSON files as JSON, without specific loaders:
 
 __webpack.config.js__
 
 ```javascript
-const toml = require("toml");
+const toml = require('toml');
 
 module.exports = {
   //...
