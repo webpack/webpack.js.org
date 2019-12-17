@@ -320,7 +320,7 @@ module.exports = {
 
 `boolean = false`
 
-Tells `stats` whether to hide `orphan` modules. A module is an `orphan` if it is not included in any chunk. Orphans modules are now hidden by default in `Stats`.
+Tells `stats` whether to hide `orphan` modules. A module is an `orphan` if it is not included in any chunk. Orphan modules are hidden by default in `stats`.
 
 ```javascript
 module.exports = {
@@ -479,6 +479,7 @@ module.exports = {
     loggingDebug: [
       'MyPlugin',
       /MyPlugin/,
+      /webpack/, // To get core logging
       (name) => name.contains('MyPlugin')
     ]
   }
