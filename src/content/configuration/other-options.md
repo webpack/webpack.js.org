@@ -166,16 +166,15 @@ module.exports = {
 
 ### `cache.store`
 
-`string: 'background' | 'idle' | 'instant' | 'pack'`
+`string: 'pack'`
 
-`cache.store` tells webpack when to store data on the file system. Defaults to `'idle'`.
+`cache.store` tells webpack when to store data on the file system. Defaults to `'pack'`.
 
-- `'background'`: Store data in background while compiling, but doesn't block the compilation
-- `'idle'`: Store data when compiler is idle in one file per cached item
-- `'instant'`: Store data when instantly. Blocks compilation until data is stored
 - `'pack'`: Store data when compiler is idle in a single file for all cached items
 
 `cache.store` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+
+W> `pack` is the only supported mode since webpack 5.0.x
 
 __webpack.config.js__
 
