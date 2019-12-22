@@ -215,7 +215,7 @@ W> Don't share the cache between calls with different options.
 
 `number = 10000`
 
-Time in `ms`. `cache.idleTimeout` denotes the time period after which the cache storing should happen. Defaults to `10000` which is equivalent to `10s`
+Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
 
 __webpack.config.js__
 
