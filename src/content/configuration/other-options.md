@@ -234,7 +234,7 @@ W> `cache.idleTimeout` is only available when [`cache.store`](#cachestore) is se
 
 `number = 0`
 
-Time in `ms`. `cache.idleTimeoutForInitialStore` is the time period after which the initial cache storing should happen. It defaults to `0` which is equivalent to `0s`.
+Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period after which the initial cache storing should happen.
 
 __webpack.config.js__
 
