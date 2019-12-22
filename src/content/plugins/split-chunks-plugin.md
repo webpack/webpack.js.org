@@ -248,6 +248,29 @@ Running webpack with following `splitChunks` configuration would also output a c
 
 W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
 
+### `splitChunks.automaticNamePrefix`
+
+`string = ''`
+
+Sets the name prefix for created chunks.
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      automaticNamePrefix: 'general-prefix',
+      cacheGroups: {
+        react: {
+          // ...
+          automaticNamePrefix: 'react-chunks-prefix'
+        }
+      }
+    }
+  }
+};
+```
+
 ### `splitChunks.cacheGroups`
 
 Cache groups can inherit and/or override any options from `splitChunks.*`; but `test`, `priority` and `reuseExistingChunk` can only be configured on cache group level. To disable any of the default cache groups, set them to `false`.
