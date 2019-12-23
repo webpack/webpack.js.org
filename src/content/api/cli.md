@@ -82,7 +82,7 @@ This will bundle your source code with entry as `index.js`, and the output bundl
 ```
 
 ```bash
-webpack index=./src/index.js entry2=./src/index2.js dist/bundle.js
+webpack index=./src/index.js entry2=./src/index2.js -o dist/bundle.js
 ```
 
 This will form the bundle with both the files as separate entry points.
@@ -127,7 +127,7 @@ In every other case, webpack prints out a set of stats showing bundle, chunk and
 
 ### Environment Options
 
-When the webpack configuration [exports a function](/configuration/configuration-types#exporting-a-function), an "environment" may be passed to it.
+When the webpack configuration [exports a function](/configuration/configuration-types/#exporting-a-function), an "environment" may be passed to it.
 
 ```bash
 webpack --env.production    # sets env.production == true
@@ -146,7 +146,7 @@ Invocation                               | Resulting environment
 `webpack --env.prod --env min`           | `[{ prod: true }, "min"]`
 `webpack --env.prod=foo --env.prod=bar`  | `{prod: [ "foo", "bar" ]}`
 
-T> See the [environment variables](/guides/environment-variables) guide for more information on its usage.
+T> See the [environment variables](/guides/environment-variables/) guide for more information on its usage.
 
 ### Config Options
 
@@ -160,7 +160,7 @@ Parameter                 | Explanation                                 | Input 
 
 ### Output Options
 
-This set of options allows you to manipulate certain [output](/configuration/output) parameters of your build.
+This set of options allows you to manipulate certain [output](/configuration/output/) parameters of your build.
 
 Parameter                 | Explanation                                 | Input type | Default
 ------------------------- | ------------------------------------------- | ---------- | ------------------
@@ -245,9 +245,9 @@ These options allow you to manipulate optimizations for a production build using
 
 Parameter                   | Explanation                                            | Plugin Used
 --------------------------- | -------------------------------------------------------|----------------------
-`--optimize-max-chunks`     | Try to keep the chunk count below a limit              | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin)
-`--optimize-min-chunk-size` | Try to keep the chunk size above a limit               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin)
-`--optimize-minimize`       | Minimize javascript and switches loaders to minimizing | [TerserPlugin](/plugins/terser-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/)
+`--optimize-max-chunks`     | Try to keep the chunk count below a limit              | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin/)
+`--optimize-min-chunk-size` | Try to keep the chunk size above a limit               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin/)
+`--optimize-minimize`       | Minimize javascript and switches loaders to minimizing | [TerserPlugin](/plugins/terser-webpack-plugin/)
 
 
 ### Resolve Options
@@ -297,13 +297,13 @@ Parameter         | Explanation                              | Usage
 ----------------- | ---------------------------------------- | -----
 `--bail`          | Abort the compilation on first error     |
 `--cache`         | Enable in memory caching [Enabled by default for watch] | `--cache=false`
-`--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV="'development'"`
-`--hot`           | Enables [Hot Module Replacement](/concepts/hot-module-replacement) | `--hot=true`
+`--define`        | Define any free variable, see [shimming](/guides/shimming/) | `--define process.env.NODE_ENV="'development'"`
+`--hot`           | Enables [Hot Module Replacement](/concepts/hot-module-replacement/) | `--hot=true`
 `--labeled-modules` | Enables labeled modules [Uses LabeledModulesPlugin] |
 `--live-reload`           | Enables live reloading | `--live-reload=true`
 `--plugin`        | Load this [plugin](/configuration/plugins/) |
 `--prefetch`      | Prefetch the particular file             | `--prefetch=./files.js`
-`--provide`       | Provide these modules as globals, see [shimming](/guides/shimming) | `--provide jQuery=jquery`
+`--provide`       | Provide these modules as globals, see [shimming](/guides/shimming/) | `--provide jQuery=jquery`
 `--records-input-path` | Path to the records file (reading)  |
 `--records-output-path` | Path to the records file (writing) |
 `--records-path`  | Path to the records file                 |
@@ -314,7 +314,7 @@ Parameter         | Explanation                              | Usage
 Shortcut | Replaces
 ---------|----------------------------
 -d       | `--debug --devtool cheap-module-eval-source-map --output-pathinfo`
--p       | `--optimize-minimize --define process.env.NODE_ENV="production"`, see [building for production](/guides/production)
+-p       | `--mode production`, see [building for production](/guides/production/)
 
 ### Profiling
 
@@ -334,7 +334,7 @@ For each module, the following details are included in the output as applicable:
 - `building`: time to build the module (e.g. loaders and parsing)
 - `dependencies`: time to identify and connect the module’s dependencies
 
-Paired with `--progress`, `--profile` gives you an in-depth idea of which step in the compilation is taking how long. This can help you optimise your build in a more informed manner.
+Paired with `--progress`, `--profile` gives you an in-depth idea of which step in the compilation is taking how long. This can help you optimize your build in a more informed manner.
 
 ```bash
 webpack --progress --profile

@@ -14,6 +14,9 @@ contributors:
   - EugeneHlushko
   - superburrito
   - lukasgeiter
+  - skovy
+  - smelukov
+  - opl-
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -74,7 +77,7 @@ In a Rule the properties [`test`](#ruletest), [`include`](#ruleinclude), [`exclu
 
 When using multiple conditions, all conditions must match.
 
-W> Be careful! The resource is the _resolved_ path of the file, which means symlinked resources are the real path _not_ the symlink location. This is good to remember when using tools that symlink packages (like `npm link`), common conditions like `/node_modules/` may inadvertently miss symlinked files. Note that you can turn off symlink resolving (so that resources are resolved to the symlink path) via [`resolve.symlinks`](/configuration/resolve#resolvesymlinks).
+W> Be careful! The resource is the _resolved_ path of the file, which means symlinked resources are the real path _not_ the symlink location. This is good to remember when using tools that symlink packages (like `npm link`), common conditions like `/node_modules/` may inadvertently miss symlinked files. Note that you can turn off symlink resolving (so that resources are resolved to the symlink path) via [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks).
 
 
 ### Rule results
@@ -99,7 +102,13 @@ The [`parser`](#ruleparser) property affects the parser options.
 
 Nested rules can be specified under the properties [`rules`](#rulerules) and [`oneOf`](#ruleoneof).
 
-These rules are evaluated when the Rule condition matches.
+These rules are evaluated only when the parent Rule condition matches. Each nested rule can contain its own conditions.
+
+The order of evaluation is as follows:
+
+1. The parent rule
+2. [`rules`](#rulerules)
+3. [`oneOf`](#ruleoneof)
 
 
 ## `Rule.enforce`
@@ -201,6 +210,9 @@ module.exports = {
 };
 ```
 
+T> See [`Nested rules`](#nested-rules) for more information.
+
+
 ## `Rule.options` / `Rule.query`
 
 `Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.options`](#useentry) for details.
@@ -247,6 +259,112 @@ module.exports = {
 }
 ```
 
+If `Rule.type` is an `asset` then `Rules.parser` option may be an object or a function that describes a condition whether to encode file contents to Base64 or emit it as a separate file into the output directory.
+
+If `Rule.type` is an `asset` or `asset/inline` then `Rule.generator` option may be an object that describes the encoding of the module source or a function that encodes module's source by a custom algorithm.
+
+See [Asset Modules guide](/guides/asset-modules/) for additional information and use cases.
+
+## `Rule.parser.dataUrlCondition`
+
+`object = { maxSize number = 8096 }` `function (source, { filename, module }) => boolean`
+
+If a module source size is less than `maxSize` then module will be injected into the bundle as a Base64-encoded string, otherwise module file will be emitted into the output directory.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        //...
+        parser: {
+          dataUrlCondition: {
+            maxSize: 4 * 1024
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+When a function is given, returning `true` tells webpack to inject the module into the bundle as Base64-encoded string, otherwise module file will be emitted into the output directory.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        //...
+        parser: {
+          dataUrlCondition: (source, { filename, module })) => {
+            const content = source.toString();
+            return content.includes('some marker');
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+## `Rule.generator.dataUrl`
+
+`object = { encoding string = 'base64' | false, mimetype string = undefined | false }` `function (content, { filename, module }) => string`
+
+When `Rule.generator.dataUrl` is used as an object, you can configure two properties:
+
+- encoding: When set to `'base64'`, module source will be encoded using Base64 algorithm. Setting `encoding` to false will disable encoding.
+- mimetype: A mimetype for data URI. Resolves from module resource extension by default.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        //...
+        generator: {
+          encoding: 'base64',
+          mimetype: 'mimetype/png'
+        }
+      }
+    ]
+  }
+}
+```
+
+When used a a function, it executes for every module and must return a data URI string.
+
+```js
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        //...
+        generator: {
+          dataUrl: content => {
+            const svgToMiniDataURI = require('mini-svg-data-uri');
+            if (typeof content !== 'string') {
+              content = content.toString();
+            }
+            return svgToMiniDataURI(content);
+          }
+        }
+      }
+    ]
+  }
+}
+```
 
 ## `Rule.resource`
 
@@ -274,10 +392,37 @@ module.exports = {
 };
 ```
 
+## `Rule.parser.parse`
+
+`function(input) => string | object`
+
+If `Rule.type` is set to `'json'` then `Rules.parser.parse` option may be a function that implements custom logic to parse module's source and convert it to a JavaScript `object`. It may be useful to import `toml`, `yaml` and other non-JSON files as JSON, without specific loaders:
+
+__webpack.config.js__
+
+```javascript
+const toml = require('toml');
+
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.toml/,
+        parser: {
+          parse: toml.parse
+        }
+      }
+    ]
+  }
+};
+```
 
 ## `Rule.rules`
 
 An array of [`Rules`](#rule) that is also used when the Rule matches.
+
+T> See [`Nested rules`](#nested-rules) for more information.
 
 
 ## `Rule.sideEffects`
@@ -296,7 +441,7 @@ Indicate what parts of the module contain side effects. See [Tree Shaking](/guid
 
 `string`
 
-Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/experimental'`
+Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 'json' | 'webassembly/sync' | 'webassembly/async' | 'asset' | 'asset/source' | 'asset/resource' | 'asset/inline'`
 
 `Rule.type` sets the type for a matching module. This prevents defaultRules and their default importing behaviors from occurring. For example, if you want to load a `.json` file through a custom loader, you'd need to set the `type` to `javascript/auto` to bypass webpack's built-in json importing. (See [v4.0 changelog](https://github.com/webpack/webpack/releases/tag/v4.0.0) for more details)
 
@@ -318,6 +463,7 @@ module.exports = {
 };
 ```
 
+> See [Asset Modules guide](/guides/asset-modules/) for more about `asset*` type.
 
 ## `Rule.use`
 
@@ -515,7 +661,7 @@ module.exports = {
 
 __`object`__
 
-It must have a `loader` property being a string. It is resolved relative to the configuration [`context`](/configuration/entry-context#context) with the loader resolving options ([resolveLoader](/configuration/resolve#resolveloader)).
+It must have a `loader` property being a string. It is resolved relative to the configuration [`context`](/configuration/entry-context/#context) with the loader resolving options ([resolveLoader](/configuration/resolve/#resolveloader)).
 
 It can have an `options` property being a string or object. This value is passed to the loader, which should interpret it as loader options.
 

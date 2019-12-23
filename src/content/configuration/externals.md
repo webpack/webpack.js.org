@@ -12,7 +12,7 @@ contributors:
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
 
-T> __consumer__ here is any end-user application that includes the library that you have bundled using webpack.
+T> __consumer__ here is any end-user application.
 
 
 ## `externals`
@@ -116,6 +116,8 @@ This syntax is used to describe all the possible ways that an external library c
 
 ### function
 
+`function ({ context, request }, callback)`
+
 It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides some options too, for example, whitelist packages.
 
 It basically comes down to this:
@@ -124,7 +126,7 @@ It basically comes down to this:
 module.exports = {
   //...
   externals: [
-    function(context, request, callback) {
+    function({ context, request }, callback) {
       if (/^yourregex$/.test(request)){
         return callback(null, 'commonjs ' + request);
       }

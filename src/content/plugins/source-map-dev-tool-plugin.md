@@ -5,6 +5,7 @@ contributors:
   - simon04
   - neilkennedy
   - byzyk
+  - EugeneHlushko
 related:
   - title: Building Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#-sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin-
@@ -21,22 +22,20 @@ new webpack.SourceMapDevToolPlugin(options);
 
 The following options are supported:
 
-- `test` (`string|regex|array`): Include source maps for modules based on their extension (defaults to `.js`, `.mjs`, and `.css`).
-- `include` (`string|regex|array`): Include source maps for module paths that match the given value.
-- `exclude` (`string|regex|array`): Exclude modules that match the given value from source map generation.
+- `test` (`string` `RegExp` `[string, RegExp]`): Include source maps for modules based on their extension (defaults to `.js`, `.mjs`, and `.css`).
+- `include` (`string` `RegExp` `[string, RegExp]`): Include source maps for module paths that match the given value.
+- `exclude` (`string` `RegExp` `[string, RegExp]`): Exclude modules that match the given value from source map generation.
 - `filename` (`string`): Defines the output filename of the SourceMap (will be inlined if no value is provided).
-- `append` (`string`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. `false` disables the appending.
+- `append` (`string`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. Since webpack v4.36.0, path parameters are supported: `[chunk]`, `[filename]` and `[contenthash]`. Setting `append` to `false` disables the appending.
 - `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate).
 - `fallbackModuleFilenameTemplate` (`string`): See link above.
 - `namespace` (`string`): See [`output.devtoolNamespace`](/configuration/output/#outputdevtoolnamespace).
-- `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
-- `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
-- `lineToLine` (`boolean` or `object`): Simplify and speed up source mapping by using line to line source mappings for matched modules.
-- `noSources` (`boolean`): Prevents the source file content from being included in the source map (defaults to `false`).
+- `module = true` (`boolean`): Indicates whether loaders should generate source maps.
+- `columns = true` (`boolean`): Indicates whether column mappings should be used.
+- `noSources = false` (`boolean`): Prevents the source file content from being included in the source map.
 - `publicPath` (`string`): Emits absolute URLs with public path prefix, e.g. `https://example.com/project/`.
 - `fileContext` (`string`): Makes the `[file]` argument relative to this directory.
-
-The `lineToLine` object allows for the same `test`, `include`, and `exclude` options described above.
+- `sourceRoot` (`string`): Provide a custom value for the `sourceRoot` property in the SourceMap.
 
 The `fileContext` option is useful when you want to store source maps in an upper level directory to avoid `../../` appearing in the absolute `[url]`.
 
@@ -44,7 +43,7 @@ T> Setting `module` and/or `columns` to `false` will yield less accurate source 
 
 T> If you want to use a custom configuration for this plugin in [development mode](/configuration/mode/#mode-development), make sure to disable the default one. I.e. set `devtool: false`.
 
-W> Remember that when using the [`TerserPlugin`](/plugins/terser-webpack-plugin), you must utilize the `sourceMap` option.
+W> If the default webpack `minimizer` has been overridden (such as to customise the `TerserPlugin` options), make sure to configure its replacement with `sourceMap: true` to enable SourceMap support.
 
 ## Examples
 

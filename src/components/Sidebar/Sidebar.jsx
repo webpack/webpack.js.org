@@ -9,6 +9,19 @@ import Print from '../Print/Print';
 // Load Styling
 import './Sidebar.scss';
 
+const docs = [
+  {
+    version: 5,
+    url: 'https://webpack.js.org',
+  },
+  {
+    version: 4,
+    url: 'https://v4.webpack.js.org',
+  }
+];
+
+const currentDocsVersion = 5;
+
 // Create and export the component
 export default ({
   className = '',
@@ -32,7 +45,7 @@ export default ({
           group = page.group;
 
           return (
-            <React.Fragment key={`sidebar-item-${index}`}>
+            <div key={page.url}>
               {displayGroup ? <h4 className="sidebar__group">{group}</h4> : null}
 
               <SidebarItem
@@ -42,9 +55,17 @@ export default ({
                 anchors={page.anchors}
                 currentPage={currentPage}
               />
-            </React.Fragment>
+            </div>
           );
         })}
+        <div className="sidebar__docs-version">
+          You are reading webpack {currentDocsVersion} documentation. Change here to:
+          <ul>
+            {docs.filter(item => item.version !== currentDocsVersion).map(item => <li key={`webpack-${item.version}-docs`}>
+              <a rel="nofollow" href={item.url}>webpack {item.version} documentation</a>
+            </li>)}
+          </ul>
+        </div>
       </div>
     </nav>
   );

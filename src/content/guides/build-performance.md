@@ -38,10 +38,10 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader'
-      }
-    ]
-  }
+        loader: 'babel-loader',
+      },
+    ],
+  },
 };
 ```
 
@@ -55,10 +55,10 @@ module.exports = {
       {
         test: /\.js$/,
         include: path.resolve(__dirname, 'src'),
-        loader: 'babel-loader'
-      }
-    ]
-  }
+        loader: 'babel-loader',
+      },
+    ],
+  },
 };
 ```
 
@@ -108,6 +108,10 @@ Enable persistent caching with the `cache-loader`. Clear cache directory on `"po
 ### Custom plugins/loaders
 
 Profile them to not introduce a performance problem here.
+
+### Progress plugin
+
+It is possible to shorten build times by removing `ProgressPlugin` from webpack's configuration. Keep in mind, `ProgressPlugin` might not provide as much value for fast builds as well, so make sure you are leveraging the benefits of using it.
 
 ---
 
@@ -168,7 +172,7 @@ Make sure the entry chunk is cheap to emit by keeping it small. The following co
 ```js
 new CommonsChunkPlugin({
   name: 'manifest',
-  minChunks: Infinity
+  minChunks: Infinity,
 });
 ```
 
@@ -183,7 +187,7 @@ module.exports = {
     removeAvailableModules: false,
     removeEmptyChunks: false,
     splitChunks: false,
-  }
+  },
 };
 ```
 
@@ -195,8 +199,8 @@ webpack has the ability to generate path info in the output bundle. However, thi
 module.exports = {
   // ...
   output: {
-    pathinfo: false
-  }
+    pathinfo: false,
+  },
 };
 ```
 

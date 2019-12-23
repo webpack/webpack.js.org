@@ -99,9 +99,9 @@ module.exports.raw = true;
 
 Loaders are __always__ called from right to left. There are some instances where the loader only cares about the __metadata__ behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from __left to right__ before the loaders are actually executed (from right to left).
 
-T> Loaders may be added inline in requests and disabled via inline prefixes, which will impact the order in which they are "pitched" and executed. See [`Rule.enforce`](/configuration/module#ruleenforce) for more details.
+T> Loaders may be added inline in requests and disabled via inline prefixes, which will impact the order in which they are "pitched" and executed. See [`Rule.enforce`](/configuration/module/#ruleenforce) for more details.
 
-For the following configuration of [`use`](/configuration/module#ruleuse):
+For the following configuration of [`use`](/configuration/module/#ruleuse):
 
 ``` javascript
 module.exports = {
@@ -402,7 +402,7 @@ addDependency(file: string)
 dependency(file: string) // shortcut
 ```
 
-Add a file as dependency of the loader result in order to make them watchable. For example, [`html-loader`](https://github.com/webpack-contrib/html-loader) uses this technique as it finds `src` and `src-set` attributes. Then, it sets the URLs for those attributes as dependencies of the html file that is parsed.
+Add a file as dependency of the loader result in order to make them watchable. For example, [`sass-loader`](https://github.com/webpack-contrib/sass-loader), [`less-loader`](https://github.com/webpack-contrib/less-loader) uses this to recompile whenever any imported `css` file changes.
 
 
 ### `this.addContextDependency`

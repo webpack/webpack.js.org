@@ -50,7 +50,7 @@ Some of these values are suited for development and some for production. For dev
 
 W> There are some issues with Source Maps in Chrome. [We need your help!](https://github.com/webpack/webpack/issues/3165).
 
-T> See [`output.sourceMapFilename`](/configuration/output#outputsourcemapfilename) to customize the filenames of generated Source Maps.
+T> See [`output.sourceMapFilename`](/configuration/output/#outputsourcemapfilename) to customize the filenames of generated Source Maps.
 
 
 ### Qualities
@@ -113,4 +113,4 @@ W> You should not deploy the Source Map file to the webserver. Instead only use 
 
 W> It still exposes filenames and structure for decompiling, but it doesn't expose the original code.
 
-T> When using the `terser-webpack-plugin` you must provide the `sourceMap: true` option to enable SourceMap support.
+T> If the default webpack `minimizer` has been overridden (such as to customise the `terser-webpack-plugin` options), make sure to configure its replacement with `sourceMap: true` to enable SourceMap support.

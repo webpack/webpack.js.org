@@ -48,8 +48,8 @@ __webpack.config.js__
     output: {
 -     filename: 'main.js',
 +     filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
@@ -71,7 +71,7 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
 +   module: {
 +     rules: [
@@ -79,11 +79,11 @@ __webpack.config.js__
 +         test: /\.css$/,
 +         use: [
 +           'style-loader',
-+           'css-loader'
-+         ]
-+       }
-+     ]
-+   }
++           'css-loader',
++         ],
++       },
++     ],
++   },
   };
 ```
 
@@ -169,7 +169,7 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     module: {
       rules: [
@@ -178,16 +178,16 @@ __webpack.config.js__
           use: [
             'style-loader',
             'css-loader'
-          ]
+          ],
         },
 +       {
 +         test: /\.(png|svg|jpg|gif)$/,
 +         use: [
-+           'file-loader'
-+         ]
-+       }
-      ]
-    }
++           'file-loader',
++         ],
++       },
+      ],
+    },
   };
 ```
 
@@ -277,7 +277,7 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     module: {
       rules: [
@@ -286,22 +286,22 @@ __webpack.config.js__
           use: [
             'style-loader',
             'css-loader'
-          ]
+          ],
         },
         {
           test: /\.(png|svg|jpg|gif)$/,
           use: [
-            'file-loader'
-          ]
+            'file-loader',
+          ],
         },
 +       {
 +         test: /\.(woff|woff2|eot|ttf|otf)$/,
 +         use: [
-+           'file-loader'
-+         ]
-+       }
-      ]
-    }
++           'file-loader',
++         ],
++       },
+      ],
+    },
   };
 ```
 
@@ -381,7 +381,7 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     module: {
       rules: [
@@ -390,34 +390,34 @@ __webpack.config.js__
           use: [
             'style-loader',
             'css-loader'
-          ]
+          ],
         },
         {
           test: /\.(png|svg|jpg|gif)$/,
           use: [
-            'file-loader'
-          ]
+            'file-loader',
+          ],
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/,
           use: [
-            'file-loader'
-          ]
+            'file-loader',
+          ],
         },
 +       {
 +         test: /\.(csv|tsv)$/,
 +         use: [
-+           'csv-loader'
-+         ]
++           'csv-loader',
++         ],
 +       },
 +       {
 +         test: /\.xml$/,
 +         use: [
-+           'xml-loader'
-+         ]
-+       }
-      ]
-    }
++           'xml-loader',
++         ],
++       },
+      ],
+    },
   };
 ```
 
@@ -454,7 +454,7 @@ __src/data.xml__
 </note>
 ```
 
-Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import it to will contain parsed JSON for easy consumption:
+Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import, will contain parsed JSON for easy consumption:
 
 __src/index.js__
 
@@ -489,10 +489,20 @@ Re-run the `npm run build` command and open `index.html`. If you look at the con
 
 T> This can be especially helpful when implementing some sort of data visualization using a tool like [d3](https://github.com/d3). Instead of making an ajax request and parsing the data at runtime you can load it into your module during the build process so that the parsed data is ready to go as soon as the module hits the browser.
 
+W> Only the default export of JSON modules can be used without warning.
+
+```javascript
+// No warning
+import data from './data.json';
+
+// Warning shown, this is not allowed by the spec.
+import { foo } from './data.json';
+```
+
 
 ## Global Assets
 
-The coolest part of everything mentioned above is that loading assets this way allows you to group modules and assets together in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be very useful:
+The coolest part of everything mentioned above, is that loading assets this way allows you to group modules and assets together in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be useful:
 
 ``` diff
 - |- /assets
@@ -506,7 +516,7 @@ The coolest part of everything mentioned above is that loading assets this way a
 
 This setup makes your code a lot more portable as everything that is closely coupled now lives together. Let's say you want to use `/my-component` in another project, simply copy or move it into the `/components` directory over there. As long as you've installed any _external dependencies_ and your _configuration has the same loaders_ defined, you should be good to go.
 
-However, let's say you're locked into your old ways or you have some assets that are shared between multiple components (views, templates, modules, etc.). It's still possible to store these assets in a base directory and even use [aliasing](/configuration/resolve#resolvealias) to make them easier to `import`.
+However, let's say you're locked into your old ways or you have some assets that are shared between multiple components (views, templates, modules, etc.). It's still possible to store these assets in a base directory and even use [aliasing](/configuration/resolve/#resolvealias) to make them easier to `import`.
 
 
 ## Wrapping up
@@ -541,7 +551,7 @@ __webpack.config.js__
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
 -   module: {
 -     rules: [
@@ -549,35 +559,35 @@ __webpack.config.js__
 -         test: /\.css$/,
 -         use: [
 -           'style-loader',
--           'css-loader'
--         ]
+-           'css-loader',
+-         ],
 -       },
 -       {
 -         test: /\.(png|svg|jpg|gif)$/,
 -         use: [
--           'file-loader'
--         ]
+-           'file-loader',
+-         ],
 -       },
 -       {
 -         test: /\.(woff|woff2|eot|ttf|otf)$/,
 -         use: [
--           'file-loader'
--         ]
+-           'file-loader',
+-         ],
 -       },
 -       {
 -         test: /\.(csv|tsv)$/,
 -         use: [
--           'csv-loader'
--         ]
+-           'csv-loader',
+-         ],
 -       },
 -       {
 -         test: /\.xml$/,
 -         use: [
--           'xml-loader'
--         ]
--       }
--     ]
--   }
+-           'xml-loader',
+-         ],
+-       },
+-     ],
+-   },
   };
 ```
 
