@@ -7,7 +7,7 @@ contributors:
   - EugeneHlushko
 ---
 
-It can be hard to set up a complex webpack configuration for the first time. Writing advanced configurations to optimize performance could be even harder. The `init` feature is designed to support people that want to create their own configuration or initializing projects that other people create.
+It can be hard to set up a complex webpack configuration for the first time. Writing advanced configurations to optimize performance could be even more difficult. The `init` feature is designed to support people that want to create their own configuration or initializing projects that other people create.
 
 ## Creating a scaffold
 
