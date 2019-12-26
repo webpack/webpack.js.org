@@ -13,7 +13,7 @@ It can be hard to set up a complex webpack configuration for the first time. Wri
 
 Before writing a `webpack-cli` scaffold, think about what you're trying to achieve and who is going to use it:
 
-- Do you want a generalized scaffold that could be used by any project or type of application?
+- Do you want a generic scaffold that could be used by a wide variety of applications and projects?
 - Do you want something specific, like a scaffold that writes both your `webpack.config.js` and your framework code?
 - Who are the potential users and what user experience will look like for the users of your scaffold?
 
