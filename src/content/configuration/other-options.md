@@ -10,6 +10,7 @@ contributors:
   - vansosnin
   - EugeneHlushko
   - skovy
+  - rishabh3112
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -166,16 +167,15 @@ module.exports = {
 
 ### `cache.store`
 
-`string: 'background' | 'idle' | 'instant' | 'pack'`
+`string: 'pack'`
 
-`cache.store` tells webpack when to store data on the file system. Defaults to `'idle'`.
+`cache.store` tells webpack when to store data on the file system. Defaults to `'pack'`.
 
-- `'background'`: Store data in background while compiling, but doesn't block the compilation
-- `'idle'`: Store data when compiler is idle in one file per cached item
-- `'instant'`: Store data when instantly. Blocks compilation until data is stored
 - `'pack'`: Store data when compiler is idle in a single file for all cached items
 
 `cache.store` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+
+W> `pack` is the only supported mode since webpack 5.0.x
 
 __webpack.config.js__
 
@@ -211,6 +211,43 @@ module.exports = {
 
 W> Don't share the cache between calls with different options.
 
+### `cache.idleTimeout`
+
+`number = 10000`
+
+Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    idleTimeout: 10000
+  }
+};
+```
+
+W> `cache.idleTimeout` is only available when [`cache.store`](#cachestore) is set to either `'pack'` or `'idle'`
+
+### `cache.idleTimeoutForInitialStore`
+
+`number = 0`
+
+Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period after which the initial cache storing should happen.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    idleTimoutForInitialStore: 0
+  }
+};
+```
+
+W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#cachestore) is set to either `'pack'` or `'idle'`
 
 ## `loader`
 

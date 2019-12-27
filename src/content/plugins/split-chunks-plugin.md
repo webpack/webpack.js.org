@@ -161,7 +161,7 @@ Minimum size, in bytes, for a chunk to be generated.
 
 `number`
 
-`splitChunks.minRemainingSize` option was introduced in webpack 5 to avoid zero sized modules by ensuring that the minimum size of the chunk which remains after splitting is above a limit. Defaults to `0` in ['development' mode](/configuration/mode/#mode-development). For other cases `splitChunks.minRemainingSize` defaults to the value of `splitChunks.minSize` so it doesn't need to be specified manually expect for the rare cases where deep control is required.
+`splitChunks.minRemainingSize` option was introduced in webpack 5 to avoid zero sized modules by ensuring that the minimum size of the chunk which remains after splitting is above a limit. Defaults to `0` in ['development' mode](/configuration/mode/#mode-development). For other cases `splitChunks.minRemainingSize` defaults to the value of `splitChunks.minSize` so it doesn't need to be specified manually except for the rare cases where deep control is required.
 
 W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remaining.
 
@@ -247,6 +247,29 @@ module.exports = {
 Running webpack with following `splitChunks` configuration would also output a chunk of the group common with next name: `commons-main-lodash.js.e7519d2bb8777058fa27.js` (hash given as an example of real world output).
 
 W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
+
+### `splitChunks.automaticNamePrefix`
+
+`string = ''`
+
+Sets the name prefix for created chunks.
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      automaticNamePrefix: 'general-prefix',
+      cacheGroups: {
+        react: {
+          // ...
+          automaticNamePrefix: 'react-chunks-prefix'
+        }
+      }
+    }
+  }
+};
+```
 
 ### `splitChunks.cacheGroups`
 
