@@ -20,7 +20,7 @@ contributors:
 
 A context is created if your request contains expressions, so the __exact__ module is not known on compile time.
 
-Example, given we have the following folder structure with files:
+Example, given we have the following folder structure including `.ejs` files:
 
 ```bash
 example_directory
