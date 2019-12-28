@@ -9,11 +9,12 @@ contributors:
   - misterdev
   - EugeneHlushko
   - superburrito
+  - wizardofhogwarts
 ---
 
 The `Compiler` module is the main engine that creates a compilation instance
 with all the options passed through the [CLI](/api/cli) or [Node API](/api/node). It extends the
-`Tapable` class in order to register and call plugins. Most user facing plugins
+`Tapable` class in order to register and call plugins. Most user-facing plugins
 are first registered on the `Compiler`.
 
 T> This module is exposed as `webpack.Compiler` and can be used directly. See
@@ -88,7 +89,7 @@ Triggered after resolver setup is complete.
 
 `SyncHook`
 
-Called while preparing the compiler environment, right after inizializing the plugins in the configuration file.
+Called while preparing the compiler environment, right after initializing the plugins in the configuration file.
 
 
 ### `afterEnvironment`
