@@ -8,6 +8,7 @@ contributors:
   - byzyk
   - madhavarshney
   - dhurlburtusa
+  - jamesgeorge007
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
