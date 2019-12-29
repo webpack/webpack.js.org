@@ -5,6 +5,7 @@ sort: 14
 contributors:
   - EugeneHlushko
   - wizardofhogwarts
+  - jamesgeorge007
 ---
 
 Compilation object has many methods and hooks available. On this page, we will list the available methods and properties.
@@ -163,7 +164,7 @@ Unseals the compilation.
 
 Parameters:
 
-- `callback` - function to be invoked when compilation has been sealed.
+- `callback` - function to be invoked when the compilation has been unsealed.
 
 ### reportDependencyErrorsAndWarnings
 
