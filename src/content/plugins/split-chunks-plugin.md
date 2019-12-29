@@ -383,7 +383,7 @@ module.exports = {
 };
 ```
 
-To see what info is available in `module` and `chunks` objects, you can put `debugger;` statement in the callback, [run your webpack build in debug mode](/contribute/debugging/#devtools).
+In order to see what information is available in `module` and `chunks` objects, you can put `debugger;` statement in the callback. Then [run your webpack build in debug mode](/contribute/debugging/#devtools) to inspect the parameters in Chromium DevTools.
 
 Providing a `RegExp` to `{cacheGroup}.test`:
 
