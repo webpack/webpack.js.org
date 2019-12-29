@@ -81,6 +81,8 @@ module.exports = {
 };
 ```
 
+W> Files' paths when processed by webpack contain `/` on Unixy platforms and `\` on Windows. That's why you should always use `[\\/]` in `{cacheGroup}.test` fields to represent path separator, and not just `/` or `\`. Otherwise your webpack config won't work correctly cross-platform.
+
 ### `splitChunks.automaticNameDelimiter`
 
 `string`
@@ -359,8 +361,24 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         vendors: {
+          // example 1: regex that matches `node_modules` and some other source folders.
+          // Note the usage of `[\\/]` as path separator for cross-platform compatibility.
+          test: /[\\/]node_modules[\\/]|vendor[\\/]analytics_provider|vendor[\\/]other_lib/
+        },
+        svg: {
           test(module, chunks) {
-            //...
+            // example 2: callback; match modules by path. Might be easier to maintain than a complex regex.
+            // `module.resource` contains the absolute path of the file on disk.
+            // Note the usage of `path.sep` instead of / or \, for cross-platform compatibility.
+            const path = require('path');
+            return module.resource &&
+                 module.resource.endsWith('.svg') &&
+                 module.resource.includes(`${path.sep}cacheable_svgs${path.sep}`);
+          }
+        },
+        example3: {
+          test(module, chunks) {
+            // example 3: callback; only match modules of certain type
             return module.type === 'javascript/auto';
           }
         }
@@ -369,6 +387,8 @@ module.exports = {
   }
 };
 ```
+
+To see what info is available in `module` and `chunks` objects, you can put `debugger;` statement in the callback, [run your webpack build in debug mode](/contribute/debugging/#devtools) and inspect the parameters in Chromium DevTools.
 
 #### `splitChunks.cacheGroups.{cacheGroup}.filename`
 
