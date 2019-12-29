@@ -81,7 +81,7 @@ module.exports = {
 };
 ```
 
-W> Files' paths when processed by webpack contain `/` on Unixy platforms and `\` on Windows. That's why you should always use `[\\/]` in `{cacheGroup}.test` fields to represent path separator, and not just `/` or `\`. Otherwise your webpack config won't work correctly cross-platform.
+W> When files paths are processed by webpack, they always contain `/` on Unix systems and `\` on Windows. That's why using `[\\/]` in `{cacheGroup}.test` fields is necessary to represent a path separator. `/` or `\` in `{cacheGroup}.test` will cause issues when used cross-platform.
 
 ### `splitChunks.automaticNameDelimiter`
 
@@ -388,7 +388,7 @@ module.exports = {
 };
 ```
 
-To see what info is available in `module` and `chunks` objects, you can put `debugger;` statement in the callback, [run your webpack build in debug mode](/contribute/debugging/#devtools) and inspect the parameters in Chromium DevTools.
+In order to see what information is available in `module` and `chunks` objects, you can put `debugger;` statement in the callback. Then [run your webpack build in debug mode](/contribute/debugging/#devtools) to inspect the parameters in Chromium DevTools.
 
 #### `splitChunks.cacheGroups.{cacheGroup}.filename`
 
