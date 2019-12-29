@@ -6,7 +6,7 @@ contributors:
   - skipjack
   - tbroadley
   - byzyk
-  -wizardofhogwarts
+  - wizardofhogwarts
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
