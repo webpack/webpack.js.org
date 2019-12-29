@@ -172,8 +172,8 @@ Adds errors and warnings of the given module to the compilation errors and warni
 
 Parameters:
 
-- `module` - the module which's errors and warnings to be reported.
-- `blocks` - a set of dependencies blocks to report from.
+- `module` - the module whose errors and warnings are to be reported.
+- `blocks` - a set of dependency blocks to report from.
 
 ### addChunkInGroup
 
