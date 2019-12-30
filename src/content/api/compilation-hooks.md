@@ -269,7 +269,7 @@ W> This hook will be removed in v5.0.0
 
 `SyncHook`
 
-Called after the chunkmodules optimization has completed with success.
+Called after the chunkmodules optimization has completed successfully.
 
 - Callback Parameters: `chunks` `modules`
 
