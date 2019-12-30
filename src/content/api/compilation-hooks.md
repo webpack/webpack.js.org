@@ -197,7 +197,7 @@ W> This hook will be removed in v5.0.0
 
 `SyncBailHook`
 
-Called at the beginning of the chunks optimization phase. A plugin can tap into this hook to perform chunk optimizations.
+Called at the beginning of the chunk optimization phase. A plugin can tap into this hook to perform optimizations on chunks.
 
 - Callback Parameters: `chunks`
 
