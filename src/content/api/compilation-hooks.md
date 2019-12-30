@@ -161,7 +161,7 @@ W> This hook will be removed in v5.0.0
 
 `SyncBailHook`
 
-Called at the beginning of the modules optimization phase. A plugin can tap into this hook to perform module optimizations.
+Called at the beginning of the module optimization phase. A plugin can tap into this hook to perform optimizations on modules.
 
 - Callback Parameters: `modules`
 
