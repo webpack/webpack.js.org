@@ -161,7 +161,7 @@ W> This hook will be removed in v5.0.0
 
 `SyncBailHook`
 
-Called at the beginning of the modules optimization phase. A plugin can tap into this hook to perform modules optimizations.
+Called at the beginning of the module optimization phase. A plugin can tap into this hook to perform optimizations on modules.
 
 - Callback Parameters: `modules`
 
@@ -197,7 +197,7 @@ W> This hook will be removed in v5.0.0
 
 `SyncBailHook`
 
-Called at the beginning of the chunks optimizion phase. A plugin can tap into this hook to perform chunks optimizations.
+Called at the beginning of the chunk optimization phase. A plugin can tap into this hook to perform optimizations on chunks.
 
 - Callback Parameters: `chunks`
 
@@ -269,7 +269,7 @@ W> This hook will be removed in v5.0.0
 
 `SyncHook`
 
-Called after the chunkmodules optimization has successfully completed.
+Called after the chunkmodules optimization has completed successfully.
 
 - Callback Parameters: `chunks` `modules`
 
@@ -524,7 +524,7 @@ Create additional assets for the chunks.
 
 `SyncBailHook`
 
-Called to determine wheter or not generate chunks assets. Returning anything `!== false` will allow chunk assets generation.
+Called to determine whether or not generate chunks assets. Returning anything `!== false` will allow chunk assets generation.
 
 
 ### `beforeChunkAssets`
@@ -682,7 +682,7 @@ Called to determine the path of an asset.
 
 `SyncBailHook`
 
-Called to determine if a asset need to be processed further after being emitted.
+Called to determine if an asset needs to be processed further after being emitted.
 
 
 ### `childCompiler`
@@ -702,7 +702,7 @@ Since webpack v5 `normalModuleLoader` hook was removed. Now to access the loader
 
 `SyncWaterfallHook`
 
-This hooks allows changing the references reported by dependencies.
+This hook allows changing the references reported by dependencies.
 
 - Callback Parameters: `depRef` `dependency` `module`
 
