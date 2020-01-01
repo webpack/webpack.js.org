@@ -81,6 +81,8 @@ module.exports = {
 };
 ```
 
+W> When files paths are processed by webpack, they always contain `/` on Unix systems and `\` on Windows. That's why using `[\\/]` in `{cacheGroup}.test` fields is necessary to represent a path separator. `/` or `\` in `{cacheGroup}.test` will cause issues when used cross-platform.
+
 ### `splitChunks.automaticNameDelimiter`
 
 `string`
@@ -350,6 +352,41 @@ module.exports = {
 
 Controls which modules are selected by this cache group. Omitting it selects all modules. It can match the absolute module resource path or chunk names. When a chunk name is matched, all modules in the chunk are selected.
 
+Providing a function to`{cacheGroup}.test`:
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        svgGroup: {
+          test(module, chunks) {
+            // `module.resource` contains the absolute path of the file on disk.
+            // Note the usage of `path.sep` instead of / or \, for cross-platform compatibility.
+            const path = require('path');
+            return module.resource &&
+                 module.resource.endsWith('.svg') &&
+                 module.resource.includes(`${path.sep}cacheable_svgs${path.sep}`);
+          }
+        },
+        byModuleTypeGroup: {
+          test(module, chunks) {
+            return module.type === 'javascript/auto';
+          }
+        }
+      }
+    }
+  }
+};
+```
+
+In order to see what information is available in `module` and `chunks` objects, you can put `debugger;` statement in the callback. Then [run your webpack build in debug mode](/contribute/debugging/#devtools) to inspect the parameters in Chromium DevTools.
+
+Providing a `RegExp` to `{cacheGroup}.test`:
+
 __webpack.config.js__
 
 ```js
@@ -359,10 +396,8 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         vendors: {
-          test(module, chunks) {
-            //...
-            return module.type === 'javascript/auto';
-          }
+          // Note the usage of `[\\/]` as a path separator for cross-platform compatibility.
+          test: /[\\/]node_modules[\\/]|vendor[\\/]analytics_provider|vendor[\\/]other_lib/
         }
       }
     }
