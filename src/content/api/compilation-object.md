@@ -48,16 +48,6 @@ Parameters:
 
 - `module` - module to be searched for. Identifier is extracted from the module by the compilation using `module.identifier()` method.
 
-### waitForBuildingFinished
-
-`function (module, callback)`
-
-Runs a given `callback` function when given module was built.
-
-Parameters:
-
-- `module` - module at question.
-- `callback` - a function to be invoked.
 
 ### buildModule
 
