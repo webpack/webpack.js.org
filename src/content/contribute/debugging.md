@@ -6,6 +6,7 @@ contributors:
   - tbroadley
   - madhavarshney
   - bhavya9107
+  - akaustav
 related:
   - title: Learn and Debug webpack with Chrome DevTools!
     url: https://medium.com/webpack/webpack-bits-learn-and-debug-webpack-with-chrome-dev-tools-da1c5b19554
@@ -41,7 +42,7 @@ While [`console`](https://nodejs.org/api/console.html) statements may work well 
 
 This gives you the power to easily create breakpoints, debug memory usage, expose and examine objects in the console, and much more. In this short demo, we'll utilize the [`node-nightly`](https://github.com/hemanth/node-nightly) package which provides access to the latest and greatest inspecting capabilities.
 
-W> The `--inspect` interface has been available since v6.3.0 so feel to try it out with your local version, but be warned that certain features and flags may differ from the ones in this demo.
+W> The `--inspect` interface has been available since v6.3.0 so feel free to try it out with your local version, but be warned that certain features and flags may differ from the ones in this demo.
 
 Let's start by installing it globally:
 
