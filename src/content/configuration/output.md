@@ -17,6 +17,7 @@ contributors:
   - eemeli
   - EugeneHlushko
   - g-plane
+  - smelukov
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -341,6 +342,9 @@ If using a function for this option, the function will be passed an object conta
 
 T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
 
+## `output.assetModuleFilename`
+
+The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/)
 
 ## `output.globalObject`
 
@@ -1054,6 +1058,21 @@ module.exports = {
 };
 ```
 
+## `output.ecmaVersion`
+
+Tell webpack the maximum EcmaScript version of the webpack generated code. It should be one of these:
+
+- should be >= 5, should be <= 11
+- should be >= 2009, should be <= 2020
+
+```javascript
+module.exports = {
+  output: {
+    ecmaVersion: 6
+  }
+};
+```
+
 ## `output.compareBeforeEmit`
 
 `boolean = true`
@@ -1067,6 +1086,38 @@ module.exports = {
   //...
   output: {
     compareBeforeEmit: false
+  }
+};
+```
+
+## `output.iife`
+
+`boolean = true`
+
+Tells webpack to add [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) wrapper around emitted code.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    iife: true
+  }
+};
+```
+
+## `output.module`
+
+`boolean = true`
+
+Allow outputting JavaScript files as module type. It sets `output.iife` to `false`, `output.libraryTarget` to `'module'`, `output.jsonpScriptType` to `'module'` and `terserOptions.module` to `true`
+
+W> `output.module` is an experimental feature and can be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    module: true
   }
 };
 ```

@@ -7,9 +7,11 @@ contributors:
 
 Generate Chrome profile file which includes timings of plugins execution. Outputs `events.json` file by default. It is possible to provide custom file path using `outputPath` option.
 
+> Note : ProfilingPlugin accepts only absolute paths.
+
 ## Options
 
-- `outputPath`: A relative path to a custom output file (json)
+- `outputPath`: An absolute path to a custom output file (json)
 
 ## Usage: default
 

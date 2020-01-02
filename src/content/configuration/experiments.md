@@ -17,6 +17,7 @@ W> Because experimental features have relaxed semantic versioning and might cont
 Available options:
 
 - `mjs`: Support `.mjs` files as a way to define [EcmaScript modules](https://nodejs.org/api/esm.html#esm_ecmascript_modules)
+- `outputModule`: enables the use of [`output.module`](/configuration/output/#outputmodule) configuration option and sets it to `true`. Enables the use of `output.libraryTarget` as `'module'` and sets it to `'module'`.
 
 __webpack.config.js__
 
