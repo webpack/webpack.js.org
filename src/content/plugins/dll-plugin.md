@@ -23,16 +23,20 @@ This plugin is used in a separate webpack config exclusively to create a dll-onl
 - `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
 - `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[hash]` & `[name]` )
 - `path`: __absolute path__ to the manifest json file (output)
-- `entryOnly`: if `true`, only entry points will be exposed
+- `entryOnly`: if `true`, only entry points will be exposed (defaults to `true`)
 - `type`: type of the dll bundle
 
 ```javascript
 new webpack.DllPlugin(options);
 ```
 
+Using the DllPlugin without `entryOnly: true` will disable Tree Shaking in the DLL as all exports might be used.
+
 Creates a `manifest.json` which is written to the given `path`. It contains mappings from require and import requests to module ids. It is used by the `DllReferencePlugin`.
 
 Combine this plugin with [`output.library`](/configuration/output/#outputlibrary) option to expose (aka, put into the global scope) the dll function.
+
+W> We recommend using only `entryOnly: true`
 
 
 ## `DllReferencePlugin`
