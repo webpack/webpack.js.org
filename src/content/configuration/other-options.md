@@ -11,6 +11,7 @@ contributors:
   - EugeneHlushko
   - skovy
   - rishabh3112
+  - niravasher
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -124,6 +125,34 @@ module.exports = {
 ```
 
 W> The final location of the cache is a combination of `cache.cacheDirectory` + `cache.name`.
+
+### `cache.buildDependencies`
+
+`object`
+
+`cache.buildDependencies` is an object of arrays of additional code dependencies of the build. webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
+
+Defaults to `webpack/lib` to get all dependencies of webpack.
+
+T> It's recommended to set `cache.buildDependencies.config: [__filename]` in your webpack configuration to get the latest configuration and all dependencies.
+
+```javascript
+module.exports = {
+  cache: {
+    buildDependencies: {
+      // This makes all dependencies of this file - build dependencies
+      config: [__filename]
+      // By default webpack and loaders are build dependencies
+    }
+  }
+};
+```
+
+### `cache.managedPaths`
+
+`[path] = ['./node_modules']`
+
+`cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
 
 ### `cache.hashAlgorithm`
 
