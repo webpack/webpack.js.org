@@ -14,6 +14,7 @@ contributors:
   - EugeneHlushko
   - Aghassi
   - myshov
+  - niravasher
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -39,7 +40,7 @@ module.exports = {
 
 ### `resolve.alias`
 
-`object`
+`object` `[string]` `boolean: false`
 
 Create aliases to `import` or `require` certain modules more easily. For example, to alias a bunch of commonly used `src/` folders:
 
@@ -114,6 +115,32 @@ The following table explains other cases:
 `/abc/node_modules` may resolve in `/node_modules` too.
 
 W> `resolve.alias` takes precedence over other module resolutions.
+
+W> `[string]` and `false` values are supported since webpack 5.0.0
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      _: [path.resolve(__dirname, 'src/utilities/'), path.resolve(__dirname, 'src/templates/')]
+    }
+  }
+};
+```
+
+Setting `resolve.alias` to `false` will tell webpack to ignore a module.
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      'ignored-module': false,
+    }
+  }
+};
+```
 
 
 ### `resolve.aliasFields`
