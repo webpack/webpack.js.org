@@ -34,6 +34,7 @@ Creates a `manifest.json` which is written to the given `path`. It contains mapp
 
 Combine this plugin with [`output.library`](/configuration/output/#outputlibrary) option to expose (aka, put into the global scope) the dll function.
 
+W> Using the DllPlugin without `entryOnly: true` will disable Tree Shaking in the DLL as all exports might be used. We recommend using only `entryOnly: true`.
 
 ## `DllReferencePlugin`
 
