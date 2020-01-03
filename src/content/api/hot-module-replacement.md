@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - tbroadley
   - byzyk
+  - wizardofhogwarts
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -66,7 +67,7 @@ module.hot.decline(
 );
 ```
 
-Flag a dependency as not-update-able. This makes sense when changing exports of this dependency can be handled or handling is not implemented yet. Depending on your HMR management code an update to these dependencies (or unaccepted dependencies of it) usually causes a full-reload of the page.
+Flag a dependency as not-update-able. This makes sense when changing exports of this dependency can be handled or handling is not implemented yet. Depending on your HMR management code, an update to these dependencies (or unaccepted dependencies of it) usually causes a full-reload of the page.
 
 ### `decline` (self)
 
@@ -76,7 +77,7 @@ Reject updates for itself.
 module.hot.decline();
 ```
 
-Flag this module as not-update-able. This makes sense when this module has irreversible side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
+Flag this module as not-update-able. This makes sense when this module has irreversible side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code, an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
 
 ### `dispose` (or `addDisposeHandler`)
 

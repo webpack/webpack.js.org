@@ -4,10 +4,11 @@ group: Objects
 sort: 14
 contributors:
   - EugeneHlushko
+  - wizardofhogwarts
   - jamesgeorge007
 ---
 
-Compilation object has many methods and hooks avaialble. On this page we will list the available methods and properties.
+Compilation object has many methods and hooks available. On this page, we will list the available methods and properties.
 
 ## compilation object methods
 
@@ -93,7 +94,7 @@ Parameters:
 
 - `module` - module to add dependencies to.
 - `dependencies` - set of sorted dependencies to iterate through and add to the module.
-- `bail` - whether to bail or not when error occurs.
+- `bail` - whether to bail or not when an error occurs.
 - `cacheGroup` - `cacheGroup` of the module.
 - `recursive` - whether it is a recursive traversal.
 - `callback` - function to invoke after adding the module dependencies.
@@ -173,8 +174,8 @@ Adds errors and warnings of the given module to the compilation errors and warni
 
 Parameters:
 
-- `module` - the module which's errors and warnings to be reported.
-- `blocks` - a set of dependencies blocks to report from.
+- `module` - the module whose errors and warnings are to be reported.
+- `blocks` - a set of dependency blocks to report from.
 
 ### addChunkInGroup
 
@@ -203,7 +204,7 @@ Parameters:
 
 `function (module)`
 
-Assigns `depth` to the given module and its depencency blocks recursively.
+Assigns `depth` to the given module and its dependency blocks recursively.
 
 Parameters:
 
@@ -245,7 +246,7 @@ Parameters:
 
 `function (module, chunk)`
 
-Patches ties of module and chunk after removing dependecy reasons. Called automatically by `removeReasonsOfDependencyBlock`.
+Patches ties of module and chunk after removing dependency reasons. Called automatically by `removeReasonsOfDependencyBlock`.
 
 Parameters:
 
@@ -256,7 +257,7 @@ Parameters:
 
 `function (block, chunk)`
 
-Removes given chunk from a dependecies block module and chunks after removing dependecy reasons. Called automatically by `removeReasonsOfDependencyBlock`.
+Removes given chunk from a dependencies block module and chunks after removing dependency reasons. Called automatically by `removeReasonsOfDependencyBlock`.
 
 Parameters:
 
@@ -312,7 +313,7 @@ Parameters:
 
 `function (name, outputOptions, plugins)`
 
-Allows to run another instance of webpack inside of webpack. However as a child with different settings and configurations applied. It copies all hooks and plugins from parent (or top level compiler) and creates a child `Compiler` instance. Returns the created `Compiler`.
+Allows to run another instance of webpack inside of webpack. However as a child with different settings and configurations applied. It copies all hooks and plugins from parent (or top-level compiler) and creates a child `Compiler` instance. Returns the created `Compiler`.
 
 Parameters:
 
