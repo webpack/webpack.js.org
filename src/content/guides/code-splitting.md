@@ -77,7 +77,7 @@ console.log(
 );
 ```
 
-__webpack.config.jsFor more detailed setup please install refer this guide https://www.robinwieruch.de/minimal-react-webpack-babel-setup/
+__webpack.config.js__
  __
 
 ``` diff
