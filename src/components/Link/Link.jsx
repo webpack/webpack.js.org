@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function offsetAnchor() {
   if(location.hash.length !== 0) {
-      window.scrollTo(window.scrollX, window.scrollY - 100);
+    window.scrollTo(window.scrollX, window.scrollY - 100);
   }
 }
 window.addEventListener('hashchange', offsetAnchor);
