@@ -56,6 +56,9 @@ module.exports = {
 Last but not least, if you've already created a separate repository and package for your loader, you could [`npm link`](https://docs.npmjs.com/cli/link) it to the project in which you'd like to test it out.
 
 
+T> Use [`webpack-default`](https://github.com/webpack-contrib/webpack-defaults) to setup your webpack loader project. It will generate a webpack's standard project for your loader
+
+
 ## Simple Usage
 
 When a single loader is applied to the resource, the loader is called with only one parameter -- a string containing the content of the resource file.
