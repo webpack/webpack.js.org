@@ -83,9 +83,9 @@ module.exports = {
 
 W> When files paths are processed by webpack, they always contain `/` on Unix systems and `\` on Windows. That's why using `[\\/]` in `{cacheGroup}.test` fields is necessary to represent a path separator. `/` or `\` in `{cacheGroup}.test` will cause issues when used cross-platform.
 
-W> Passing an entry name to `{cacheGroup}.test` is no longer allowed from Webpack 5.
+W> Passing an entry name to `{cacheGroup}.test` is no longer allowed from webpack 5.
 
-W> Using a name of an existing chunk is not longer allowed for `{cacheGroup}.name` (it will throw an error).
+W> Using a name of an existing chunk is no longer allowed for `{cacheGroup}.name` (it will throw an error).
 
 ### `splitChunks.automaticNameDelimiter`
 
