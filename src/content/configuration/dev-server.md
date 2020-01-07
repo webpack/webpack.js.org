@@ -790,7 +790,7 @@ module.exports = {
 
 ## `devServer.open`
 
-`boolean: false` `string`
+`boolean = false` `string`
 
 Tells dev-server to open the browser after server had been started. Set it to `true` to open your default browser.
 
@@ -1350,6 +1350,8 @@ module.exports = {
 
 ## `devServer.staticOptions`
 
+`object`
+
 It is possible to configure advanced options for serving static files from `contentBase`. See the [Express documentation](http://expressjs.com/en/4x/api.html#express.static) for the possible options.
 
 __webpack.config.js__
@@ -1575,7 +1577,7 @@ See [WatchOptions](/configuration/watch/) for more options.
 
 ## `devServer.writeToDisk` 🔑
 
-`boolean = false` `function (filePath)`
+`boolean = false` `function (filePath) => boolean`
 
 Tells `devServer` to write generated assets to the disk. The output is written to the [output.path](/configuration/output/#outputpath) directory.
 
