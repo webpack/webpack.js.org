@@ -8,6 +8,7 @@ contributors:
   - skipjack
   - byzyk
   - pranshuchittora
+  - jamesgeorge007
 ---
 
 This index lists common terms used throughout the webpack ecosystem.
