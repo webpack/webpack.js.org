@@ -49,6 +49,7 @@ This index lists common terms used throughout the webpack ecosystem.
 ## L
 
 - [__Loaders__](/concepts/loaders): Transformations that are applied on the source code of a module. They allow you to pre-process files as you `require()` or "load" them. Similar to a 'task-runner'.
+- [__Lazy Loading__](/guides/lazy-loading): A process of loading parts (chunks) of your application lazily. In other words loading them only when we really need them.
 
 
 ## M
