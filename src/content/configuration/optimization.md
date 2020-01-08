@@ -8,6 +8,7 @@ contributors:
   - byzyk
   - madhavarshney
   - dhurlburtusa
+  - jamesgeorge007
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -507,7 +508,7 @@ module.exports = {
 
 `optimization.mangleExports` allows to control export mangling.
 
-By default `optimization.mangleExports` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise.
+By default `optimization.mangleExports` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
 
 __webpack.config.js__
 
@@ -526,7 +527,7 @@ module.exports = {
 
 `optimization.innerGraph` tells webpack whether to conduct inner graph analysis for unused exports.
 
-By default `optimization.innerGraph` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise.
+By default `optimization.innerGraph` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
 
 __webpack.config.js__
 

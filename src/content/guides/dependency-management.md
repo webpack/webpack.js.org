@@ -20,7 +20,20 @@ contributors:
 
 A context is created if your request contains expressions, so the __exact__ module is not known on compile time.
 
-Example:
+Example, given we have the following folder structure including `.ejs` files:
+
+```bash
+example_directory
+│
+└───template
+│   │   table.ejs
+│   │   table-row.ejs
+│   │
+│   └───directory
+│       │   another.ejs
+```
+
+When following `require()` call is evaluated:
 
 ```javascript
 require('./template/' + name + '.ejs');
@@ -37,19 +50,19 @@ __context module__
 
 A context module is generated. It contains references to __all modules in that directory__ that can be required with a request matching the regular expression. The context module contains a map which translates requests to module ids.
 
-Example:
+Example map:
 
 ```json
 {
   "./table.ejs": 42,
   "./table-row.ejs": 43,
-  "./directory/folder.ejs": 44
+  "./directory/another.ejs": 44
 }
 ```
 
 The context module also contains some runtime logic to access the map.
 
-This means dynamic requires are supported but will cause all possible modules to be included in the bundle.
+This means dynamic requires are supported but will cause all matching modules to be included in the bundle.
 
 
 ## `require.context`
