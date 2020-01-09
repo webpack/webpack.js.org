@@ -74,7 +74,7 @@ module.exports = {
 ```
 
 
-Use [`schema-utils`](https://github.com/webpack/schema-utils) in order to validate the options being passed through the plugin options. Here is an example
+Use [`schema-utils`](https://github.com/webpack/schema-utils) in order to validate the options being passed through the plugin options. Here is an example:
 
 ```javascript
 
