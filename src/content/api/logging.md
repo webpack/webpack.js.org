@@ -22,7 +22,7 @@ Benefits of custom logging API in webpack:
 - CLI, UI tools for webpack may choose different ways to display logging
 - webpack core can emit logging output, e.g. timing data
 
-By introducing webpack logging API we hope to unify the way webpack plugins and loaders emit the logging messages and allow better ways to inspect build problems. Integrated logging solution supports plugins and loaders developers by improving their development experience. Paves the way for non-CLI webpack solutions like dashboards or other UIs.
+By introducing webpack logging API we hope to unify the way webpack plugins and loaders emit logs and allow better ways to inspect build problems. Integrated logging solution supports plugins and loaders developers by improving their development experience. Paves the way for non-CLI webpack solutions like dashboards or other UIs.
 
 W> __Avoid noise in the log!__ Keep in mind that multiple plugins and loaders are used together. Loaders are usually processing multiple files and are invoked for every file. Choose the logging level as low as possible to keep the log output informative.
 
