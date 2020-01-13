@@ -6,6 +6,7 @@ contributors:
   - pastelsky
   - byzyk
   - EugeneHlushko
+  - wizardofhogwarts
 ---
 
 A resolver is a library which helps in locating a module by its absolute path.
