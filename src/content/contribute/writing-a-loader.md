@@ -56,7 +56,7 @@ module.exports = {
 Last but not least, if you've already created a separate repository and package for your loader, you could [`npm link`](https://docs.npmjs.com/cli/link) it to the project in which you'd like to test it out.
 
 
-T> Use [`webpack-defaults`](https://github.com/webpack-contrib/webpack-defaults) to setup your webpack loader project. It will generate a webpack standard project for your loader.
+T> You can use [`webpack-defaults` package](https://github.com/webpack-contrib/webpack-defaults) to generate boilerplate code necessary to start writing your loader.
 
 
 ## Simple Usage
