@@ -66,7 +66,7 @@ module.exports = {
       automaticNameDelimiter: '~',
       automaticNameMaxLength: 30,
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           test: /[\\/]node_modules[\\/]/,
           priority: -10
         },
@@ -316,7 +316,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           reuseExistingChunk: true
         }
       }
@@ -399,7 +399,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           // Note the usage of `[\\/]` as a path separator for cross-platform compatibility.
           test: /[\\/]node_modules[\\/]|vendor[\\/]analytics_provider|vendor[\\/]other_lib/
         }
@@ -426,7 +426,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           filename: '[name].bundle.js'
         }
       }
@@ -445,7 +445,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           filename: (chunkData) => {
             // Use chunkData object for generating filename string based on your requirements
             return `${chunkData.chunk.name}-bundle.js`;
@@ -467,7 +467,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           filename: 'js/[name]/bundle.js'
         }
       }
@@ -491,7 +491,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           enforce: true
         }
       }
@@ -514,7 +514,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           idHint: 'vendors'
         }
       }

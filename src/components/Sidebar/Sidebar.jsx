@@ -61,8 +61,8 @@ export default ({
         <div className="sidebar__docs-version">
           You are reading webpack {currentDocsVersion} documentation. Change here to:
           <ul>
-            {docs.filter(item => item.version !== currentDocsVersion).map(item => <li key={`webpack-${item.version}-docs`}>
-              <a rel="nofollow" href={item.url}>webpack {item.version} documentation</a>
+            {docs.filter(item => item.version !== currentDocsVersion).map(({version, url}) => <li key={`webpack-${version}-docs`}>
+              <a rel="nofollow" href={url}>webpack {version} documentation</a>
             </li>)}
           </ul>
         </div>
