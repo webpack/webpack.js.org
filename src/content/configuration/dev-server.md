@@ -932,7 +932,7 @@ webpack-dev-server --pfx /path/to/file.pfx
 
 `string`
 
-The passphrase to an SSL PFX file.
+The passphrase to a SSL PFX file.
 
 __webpack.config.js__
 
