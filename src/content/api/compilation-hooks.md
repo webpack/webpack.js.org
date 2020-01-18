@@ -9,6 +9,7 @@ contributors:
   - wizardofhogwarts
   - EugeneHlushko
   - chenxsan
+  - jamesgeorge007
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
