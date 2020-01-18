@@ -17,6 +17,7 @@ contributors:
   - skovy
   - smelukov
   - opl-
+  - Mistyyyy
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -602,8 +603,12 @@ module.exports = {
   },
   module: {
     rules: [
-      alias: {
-        'footer': './footer/overriden.js'
+      {
+        resolve: {
+          alias: {
+            'footer': './footer/overriden.js'
+          }
+        }
       }
     ]
   }

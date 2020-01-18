@@ -66,7 +66,7 @@ module.exports = {
       automaticNameDelimiter: '~',
       automaticNameMaxLength: 30,
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           test: /[\\/]node_modules[\\/]/,
           priority: -10
         },
@@ -81,7 +81,7 @@ module.exports = {
 };
 ```
 
-W> Files' paths when processed by webpack contain `/` on Unixy platforms and `\` on Windows. That's why you should always use `[\\/]` in `{cacheGroup}.test` fields to represent path separator, and not just `/` or `\`. Otherwise your webpack config won't work correctly cross-platform.
+W> When files paths are processed by webpack, they always contain `/` on Unix systems and `\` on Windows. That's why using `[\\/]` in `{cacheGroup}.test` fields is necessary to represent a path separator. `/` or `\` in `{cacheGroup}.test` will cause issues when used cross-platform.
 
 ### `splitChunks.automaticNameDelimiter`
 
@@ -312,7 +312,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           reuseExistingChunk: true
         }
       }
@@ -352,6 +352,8 @@ module.exports = {
 
 Controls which modules are selected by this cache group. Omitting it selects all modules. It can match the absolute module resource path or chunk names. When a chunk name is matched, all modules in the chunk are selected.
 
+Providing a function to`{cacheGroup}.test`:
+
 __webpack.config.js__
 
 ```js
@@ -360,14 +362,8 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
-          // example 1: regex that matches `node_modules` and some other source folders.
-          // Note the usage of `[\\/]` as path separator for cross-platform compatibility.
-          test: /[\\/]node_modules[\\/]|vendor[\\/]analytics_provider|vendor[\\/]other_lib/
-        },
-        svg: {
+        svgGroup: {
           test(module, chunks) {
-            // example 2: callback; match modules by path. Might be easier to maintain than a complex regex.
             // `module.resource` contains the absolute path of the file on disk.
             // Note the usage of `path.sep` instead of / or \, for cross-platform compatibility.
             const path = require('path');
@@ -376,9 +372,8 @@ module.exports = {
                  module.resource.includes(`${path.sep}cacheable_svgs${path.sep}`);
           }
         },
-        example3: {
+        byModuleTypeGroup: {
           test(module, chunks) {
-            // example 3: callback; only match modules of certain type
             return module.type === 'javascript/auto';
           }
         }
@@ -388,7 +383,27 @@ module.exports = {
 };
 ```
 
-To see what info is available in `module` and `chunks` objects, you can put `debugger;` statement in the callback, [run your webpack build in debug mode](/contribute/debugging/#devtools) and inspect the parameters in Chromium DevTools.
+In order to see what information is available in `module` and `chunks` objects, you can put `debugger;` statement in the callback. Then [run your webpack build in debug mode](/contribute/debugging/#devtools) to inspect the parameters in Chromium DevTools.
+
+Providing a `RegExp` to `{cacheGroup}.test`:
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        defaultVendors: {
+          // Note the usage of `[\\/]` as a path separator for cross-platform compatibility.
+          test: /[\\/]node_modules[\\/]|vendor[\\/]analytics_provider|vendor[\\/]other_lib/
+        }
+      }
+    }
+  }
+};
+```
 
 #### `splitChunks.cacheGroups.{cacheGroup}.filename`
 
@@ -407,7 +422,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           filename: '[name].bundle.js'
         }
       }
@@ -426,7 +441,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           filename: (chunkData) => {
             // Use chunkData object for generating filename string based on your requirements
             return `${chunkData.chunk.name}-bundle.js`;
@@ -448,7 +463,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           filename: 'js/[name]/bundle.js'
         }
       }
@@ -472,7 +487,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           enforce: true
         }
       }
@@ -495,7 +510,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        vendors: {
+        defaultVendors: {
           idHint: 'vendors'
         }
       }

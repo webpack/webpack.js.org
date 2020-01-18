@@ -73,3 +73,9 @@ You can also encourage your developers to contribute to the ecosystem by open-so
 To anyone else who is interested in helping our mission -- e.g. venture capitalists, government entities, digital agencies, etc. -- we would love for you to work with us, one of the top npm packages, to improve your product! Please don't hesitate to reach out with questions.
 
 <!-- add slides here -->
+
+## Pull requests
+
+Documentation of webpack features and changes is now being updated as webpack evolves. An automated issue creation integration was established and proven to be effective in the recent years.
+When a feature gets merged, an issue with a documentation request is created in our repository and we expect to resolve it in a timely manner. This means that there are features, changes and breaking changes awaiting to be documented, reviewed and released. That said, if Pull Request's author is abandoning it for more than 30 days, we may mark such Pull Request as stale. We may take over the work that is needed to finish it.
+If Pull Request author grants write access to their fork to the [webpack Documentation team](https://github.com/orgs/webpack/teams/documentation-team/members) we will commit directly to your branch and finish the work. In other cases, we may have to start over by ourselves or by delegating it to willing community members. This may render your Pull Request redundant and it might get closed as a part of the cleanup process.
