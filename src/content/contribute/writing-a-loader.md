@@ -302,10 +302,10 @@ __test/example.txt__
 Hey [name]!
 ```
 
-Pay close attention to this next step as we'll be using the [Node.js API](/api/node) and [`memory-fs`](https://github.com/webpack/memory-fs) to execute webpack. This lets us avoid emitting `output` to disk and will give us access to the `stats` data which we can use to grab our transformed module:
+Pay close attention to this next step as we'll be using the [Node.js API](/api/node) and [`memfs`](https://github.com/streamich/memfs) to execute webpack. This lets us avoid emitting `output` to disk and will give us access to the `stats` data which we can use to grab our transformed module:
 
 ``` bash
-npm install --save-dev webpack memory-fs
+npm install --save-dev webpack memfs
 ```
 
 __test/compiler.js__
