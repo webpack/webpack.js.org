@@ -17,7 +17,7 @@ Providing the `mode` configuration option tells webpack to use its built-in opti
 
 ## Usage
 
-Just provide the `mode` option in the config:
+Provide the `mode` option in the config:
 
 ```javascript
 module.exports = {
