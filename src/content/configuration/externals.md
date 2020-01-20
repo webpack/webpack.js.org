@@ -11,14 +11,12 @@ contributors:
   - jamesgeorge007
 ---
 
-The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
-
-T> __consumer__ here is any end-user application.
+The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
 
 
 ## `externals`
 
-`string` `object` `function`  `regex`
+`string` `object` `function`  `RegExp`
 
 __Prevent bundling__ of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
 
@@ -140,7 +138,7 @@ module.exports = {
 The `'commonjs ' + request` defines the type of module that needs to be externalized.
 
 
-### regex
+### RegExp
 
 Every dependency that matches the given regular expression will be excluded from the output bundles.
 
