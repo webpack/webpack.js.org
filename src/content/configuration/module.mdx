@@ -16,6 +16,8 @@ contributors:
   - lukasgeiter
   - skovy
   - smelukov
+  - opl-
+  - Mistyyyy
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -101,7 +103,13 @@ The [`parser`](#ruleparser) property affects the parser options.
 
 Nested rules can be specified under the properties [`rules`](#rulerules) and [`oneOf`](#ruleoneof).
 
-These rules are evaluated when the Rule condition matches.
+These rules are evaluated only when the parent Rule condition matches. Each nested rule can contain its own conditions.
+
+The order of evaluation is as follows:
+
+1. The parent rule
+2. [`rules`](#rulerules)
+3. [`oneOf`](#ruleoneof)
 
 
 ## `Rule.enforce`
@@ -202,6 +210,9 @@ module.exports = {
   }
 };
 ```
+
+T> See [`Nested rules`](#nested-rules) for more information.
+
 
 ## `Rule.options` / `Rule.query`
 
@@ -386,12 +397,12 @@ module.exports = {
 
 `function(input) => string | object`
 
-If `Rule.type` is a `json` then `Rules.parser.parse` option may be a function that implements a custom logic to parse a module source to a JS-object. It may be useful to import `toml`, `yaml` and other non-JSON files as a JSON without a specific loaders:
+If `Rule.type` is set to `'json'` then `Rules.parser.parse` option may be a function that implements custom logic to parse module's source and convert it to a JavaScript `object`. It may be useful to import `toml`, `yaml` and other non-JSON files as JSON, without specific loaders:
 
 __webpack.config.js__
 
 ```javascript
-const toml = require("toml");
+const toml = require('toml');
 
 module.exports = {
   //...
@@ -411,6 +422,8 @@ module.exports = {
 ## `Rule.rules`
 
 An array of [`Rules`](#rule) that is also used when the Rule matches.
+
+T> See [`Nested rules`](#nested-rules) for more information.
 
 
 ## `Rule.sideEffects`
@@ -590,8 +603,12 @@ module.exports = {
   },
   module: {
     rules: [
-      alias: {
-        'footer': './footer/overriden.js'
+      {
+        resolve: {
+          alias: {
+            'footer': './footer/overriden.js'
+          }
+        }
       }
     ]
   }

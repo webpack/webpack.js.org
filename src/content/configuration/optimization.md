@@ -8,6 +8,7 @@ contributors:
   - byzyk
   - madhavarshney
   - dhurlburtusa
+  - jamesgeorge007
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -195,7 +196,7 @@ module.exports = {
 
 ## `optimization.moduleIds`
 
-`boolean = false` `string: 'natural' | 'named' | 'hashed' | 'size' | 'total-size'`
+`boolean = false` `string: 'natural' | 'named' | 'size'`
 
 Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. By default `optimization.moduleIds` is set to `false`.
 
@@ -205,10 +206,8 @@ Option                | Description
 --------------------- | -----------------------
 `natural`             | Numeric ids in order of usage.
 `named`               | Readable ids for better debugging.
-`hashed`              | Short hashes as ids for better long term caching.
 `deterministic`       | Module names are hashed into small numeric values.
 `size`                | Numeric ids focused on minimal initial download size.
-`total-size`          | Numeric ids focused on minimal total download size.
 
 __webpack.config.js__
 
@@ -238,6 +237,8 @@ module.exports = {
   ]
 };
 ```
+
+W> `moduleIds: 'hashed'` is deprecated in favour of `deterministic`. `moduleIds: total-size` has been removed in webpack 5.
 
 ## `optimization.chunkIds`
 
@@ -507,7 +508,7 @@ module.exports = {
 
 `optimization.mangleExports` allows to control export mangling.
 
-By default `optimization.mangleExports` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise.
+By default `optimization.mangleExports` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
 
 __webpack.config.js__
 
@@ -516,6 +517,25 @@ module.exports = {
   //...
   optimization: {
     mangleExports: true
+  }
+};
+```
+
+## `optimization.innerGraph`
+
+`bool`
+
+`optimization.innerGraph` tells webpack whether to conduct inner graph analysis for unused exports.
+
+By default `optimization.innerGraph` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    innerGraph: true
   }
 };
 ```

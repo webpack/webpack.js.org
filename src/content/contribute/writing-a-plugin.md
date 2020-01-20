@@ -73,6 +73,34 @@ module.exports = {
 };
 ```
 
+
+Use [`schema-utils`](https://github.com/webpack/schema-utils) in order to validate the options being passed through the plugin options. Here is an example:
+
+```javascript
+
+import validateOptions from 'schema-utils';
+
+// schema for options object
+const schema = {
+  type: 'object',
+  properties: {
+    test: {
+      type: 'string'
+    }
+  }
+};
+
+export default class HelloWorldPlugin {
+
+  constructor(options = {}){
+    validateOptions(schema, options, 'Hello World Plugin');
+  }
+
+  apply(compiler) {}
+}
+```
+
+
 ## Compiler and Compilation
 
 Among the two most important resources while developing plugins are the [`compiler`](/api/node/#compiler-instance) and [`compilation`](/api/compilation-hooks/) objects. Understanding their roles is an important first step in extending the webpack engine.
