@@ -115,7 +115,7 @@ The following table explains other cases:
 
 W> `resolve.alias` takes precedence over other module resolutions.
 
-W> [string] and `false` values are supported since webpack 5.0.x.
+W> `[string]` and `false` values are supported since webpack 5.0.0.
 
 ```js
 module.exports = {
@@ -128,7 +128,7 @@ module.exports = {
 };
 ```
 
-`resolve.alias` when set to `false` will ignore a module.
+Setting `resolve.alias` to `false` will tell webpack to ignore a module.
 
 ```js
 module.exports = {
