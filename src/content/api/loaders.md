@@ -219,7 +219,7 @@ In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/re
 
 Extracts given loader options. Optionally, accepts JSON schema as an argument.
 
-T> since webpack 5, `this.getOptions` is available in loader context. It substitutes `getOptions` method from [loader-utils](https://github.com/webpack/loader-utils#getoptions).
+T> Since webpack 5, `this.getOptions` is available in loader context. It substitutes `getOptions` method from [loader-utils](https://github.com/webpack/loader-utils#getoptions).
 
 
 ### `this.callback`
