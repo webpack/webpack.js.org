@@ -57,6 +57,9 @@ module.exports = {
 Last but not least, if you've already created a separate repository and package for your loader, you could [`npm link`](https://docs.npmjs.com/cli/link) it to the project in which you'd like to test it out.
 
 
+T> You can use [`webpack-defaults` package](https://github.com/webpack-contrib/webpack-defaults) to generate boilerplate code necessary to start writing your loader.
+
+
 ## Simple Usage
 
 When a single loader is applied to the resource, the loader is called with only one parameter -- a string containing the content of the resource file.
@@ -299,10 +302,10 @@ __test/example.txt__
 Hey [name]!
 ```
 
-Pay close attention to this next step as we'll be using the [Node.js API](/api/node) and [`memory-fs`](https://github.com/webpack/memory-fs) to execute webpack. This lets us avoid emitting `output` to disk and will give us access to the `stats` data which we can use to grab our transformed module:
+Pay close attention to this next step as we'll be using the [Node.js API](/api/node) and [`memfs`](https://github.com/streamich/memfs) to execute webpack. This lets us avoid emitting `output` to disk and will give us access to the `stats` data which we can use to grab our transformed module:
 
 ``` bash
-npm install --save-dev webpack memory-fs
+npm install --save-dev webpack memfs
 ```
 
 __test/compiler.js__
