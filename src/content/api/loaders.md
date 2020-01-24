@@ -199,7 +199,7 @@ In the example: `/abc` because `resource.js` is in this directory
 
 ### `this.rootContext`
 
-Starting with webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
+Since webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
 
 
 ### `this.request`
@@ -214,7 +214,12 @@ In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/re
 1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
 2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
 
-T> Use the [`getOptions` method](https://github.com/webpack/loader-utils#getoptions) from `loader-utils` to extract given loader options.
+
+### `this.getOptions(schema)`
+
+Extracts given loader options. Optionally, accepts JSON schema as an argument.
+
+T> Since webpack 5, `this.getOptions` is available in loader context. It substitutes `getOptions` method from [loader-utils](https://github.com/webpack/loader-utils#getoptions).
 
 
 ### `this.callback`

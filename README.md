@@ -6,8 +6,8 @@
 
   [![Build Status][build-status]][build-status-url]
   [![Standard Version][release]][release-url]
-  [![chat on gitter][chat]][chat-url]  
-  
+  [![chat on gitter][chat]][chat-url]
+
   Guides, documentation, and all things webpack.
 </div>
 
@@ -25,11 +25,17 @@ idea of where things are, and where they are going:
 We haven't created issues for the other sections yet, but they will be coming
 soon. For dev-related work please see [General - Updates & Fixes][general-url].
 
-The alpha version of webpack 5 is out and we are lagging behind with documenting all of the related changes. See [this refined search][webpack5-milestone-url] for the list of relevant documentation requests.
-
 ## Translation
 
 To help translate this documentation please jump to the [translation branch][translate-url].
+
+## Versioning
+
+Since webpack 4 we have created a subdomain-based archive for older states of documentation
+matching older webpack version. webpack 4's documentation is available at
+[https://v4.webpack.js.org/](https://v4.webpack.js.org/) and is deployed from [`gh-pages` branch of v4.webpack.js.org repository](https://github.com/webpack/v4.webpack.js.org/tree/gh-pages)
+
+There are various known issues that need fixing (#3366).
 
 ## Contributing
 
