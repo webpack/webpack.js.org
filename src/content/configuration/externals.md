@@ -9,16 +9,15 @@ contributors:
   - byzyk
   - zefman
   - Mistyyyy
+  - jamesgeorge007
 ---
 
-The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
-
-T> __consumer__ here is any end-user application.
+The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
 
 
 ## `externals`
 
-`string` `object` `function`  `regex`
+`string` `object` `function`  `RegExp`
 
 __Prevent bundling__ of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
 
@@ -112,7 +111,7 @@ module.exports = {
 };
 ```
 
-This syntax is used to describe all the possible ways that an external library can be available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
+This syntax is used to describe all the possible ways that an external library can be made available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
 
 
 ### function
@@ -140,7 +139,7 @@ module.exports = {
 The `'commonjs ' + request` defines the type of module that needs to be externalized.
 
 
-### regex
+### RegExp
 
 Every dependency that matches the given regular expression will be excluded from the output bundles.
 
