@@ -30,21 +30,36 @@ T> The webpack repository contains an [example showing the effect of all `devtoo
 
 T> Instead of using the `devtool` option you can also use `SourceMapDevToolPlugin`/`EvalSourceMapDevToolPlugin` directly as it has more options. Never use both the `devtool` option and plugin together. The `devtool` option adds the plugin internally so you would end up with the plugin applied twice.
 
-devtool                        | build   | rebuild | production | quality
------------------------------- | ------- | ------- | ---------- | -----------------------------
-(none)                         | fastest | fastest | yes        | bundled code
-eval                           | fastest | fastest | no         | generated code
-cheap-eval-source-map          | fast    | faster  | no         | transformed code (lines only)
-cheap-module-eval-source-map   | slow    | faster  | no         | original source (lines only)
-eval-source-map                | slowest | fast    | no         | original source
-cheap-source-map               | fast    | slow    | yes        | transformed code (lines only)
-cheap-module-source-map        | slow    | slower  | yes        | original source (lines only)
-inline-cheap-source-map        | fast    | slow    | no         | transformed code (lines only)
-inline-cheap-module-source-map | slow    | slower  | no         | original source (lines only)
-source-map                     | slowest | slowest | yes        | original source
-inline-source-map              | slowest | slowest | no         | original source
-hidden-source-map              | slowest | slowest | yes        | original source
-nosources-source-map           | slowest | slowest | yes        | without source content
+devtool                                  | build   | rebuild | production | quality
+---------------------------------------- | ------- | ------- | ---------- | -----------------------------
+(none)                                   | fastest | fastest | yes        | bundled code
+eval                                     | fastest | fastest | no         | generated code
+eval-cheap-source-map                    | fast    | faster  | no         | transformed code (lines only)
+eval-cheap-module-source-map             | slow    | faster  | no         | original source (lines only)
+eval-source-map                          | slowest | fast    | no         | original source
+eval-nosources-source-map                |         |         |            |
+eval-nosources-cheap-source-map          |         |         |            |
+eval-nosources-cheap-module-source-map   |         |         |            |
+cheap-source-map                         | fast    | slow    | yes        | transformed code (lines only)
+cheap-module-source-map                  | slow    | slower  | yes        | original source (lines only)
+inline-cheap-source-map                  | fast    | slow    | no         | transformed code (lines only)
+inline-cheap-module-source-map           | slow    | slower  | no         | original source (lines only)
+inline-source-map                        | slowest | slowest | no         | original source
+inline-nosources-source-map              |         |         |            |
+inline-nosources-cheap-source-map        |         |         |            |
+inline-nosources-cheap-module-source-map |         |         |            |
+source-map                               | slowest | slowest | yes        | original source
+hidden-source-map                        | slowest | slowest | yes        | original source
+hidden-nosources-source-map              |         |         |            |
+hidden-nosources-cheap-source-map        |         |         |            |
+hidden-nosources-cheap-module-source-map |         |         |            |
+hidden-cheap-source-map                  |         |         |            |
+hidden-cheap-module-source-map           |         |         |            |
+nosources-source-map                     | slowest | slowest | yes        | without source content
+nosources-cheap-source-map               |         |         |            |
+nosources-cheap-module-source-map        |         |         |            |
+
+T> We expect a certain pattern when validate devtool name, pay attention and dont mix up the sequence of devtool string. The pattern is: `[inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map`.
 
 Some of these values are suited for development and some for production. For development you typically want fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate and support minimizing.
 
