@@ -78,6 +78,7 @@ __index.html__
     <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
+    <div id="div"></div>
     <script src="./src/index.js"></script>
   </body>
 </html>
