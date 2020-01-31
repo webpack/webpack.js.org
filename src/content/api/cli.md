@@ -366,3 +366,13 @@ webpack --progress --profile
 6ms emitting
 ⋮
 ```
+
+## Pass CLI arguments to NodeJS
+
+In case you need to pass nodejs-specific options or flags, you can use the `--node-args`-option.
+
+Everything you specify there will be passed to NodeJS process, and the rest to webpack-cli as the options.
+
+For example, exec `webpack --node-args="--max-old-space-size=4096"`  to increasing the memory limit of NodeJS to 4gb
+
+You can pass multiple options to NodeJS: `webpack --node-args="--max-old-space-size=4096" --node-args="-r /path/to/preload/file.js"`
