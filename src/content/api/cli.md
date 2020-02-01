@@ -372,7 +372,7 @@ webpack --progress --profile
 
 To pass arguments directly to Node.js process, you can use the `--node-args` option. All other flags and options will be received by the webpack-cli.
 
-For example, to increasing the memory limit of Node.js process to 4 GB
+For example, to increase the memory limit of Node.js process to 4 GB
 
 ```bash
 webpack --node-args="--max-old-space-size=4096"
