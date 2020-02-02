@@ -109,6 +109,44 @@ module.exports = {
 };
 ```
 
+Another case to customize output filename is to emit some kind of assets to a specified directory:
+
+```diff
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
++   assetModuleFilename: 'images/[hash][ext]'
+  },
+  experiments: {
+    asset: true
+  },
+  module: {
+    rules: [
+      {
+        test: /\.png/,
+        type: 'asset/resource'
+-     }
++     },
++     {
++       test: /\.html/,
++       type: 'asset/resource',
++       generator: {
++         filename: 'static/[hash][ext]'
++       }
++     }
+    ]
+  },
+};
+```
+
+With this config all the `html` files will be emitted into a `static` directory within the output directory.
+
+`Rule.generator.filename` is the same as [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) and works only with `asset` and `asset/resource` module types.
+
 ## Inlining assets
 
 __webpack.config.js__
@@ -133,7 +171,15 @@ module.exports = {
 -       type: 'asset/resource'
 +       test: /\.svg/,
 +       type: 'asset/inline'
-      }
+-     },
++     }
+-     {
+-       test: /\.html/,
+-       type: 'asset/resource',
+-       generator: {
+-         filename: 'static/[hash][ext]'
+-       }
+-     }
     ]
   }
 };
