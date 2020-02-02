@@ -18,6 +18,7 @@ contributors:
   - EugeneHlushko
   - g-plane
   - smelukov
+  - Neob91
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -833,7 +834,7 @@ The dependencies for your library will be defined by the [`externals`](/configur
 
 ## `output.path`
 
-`string: path.join(process.cwd(), 'dist')`
+`string = path.join(process.cwd(), 'dist')`
 
 The output directory as an __absolute__ path.
 

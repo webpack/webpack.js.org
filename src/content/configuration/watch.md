@@ -8,6 +8,7 @@ contributors:
   - EugeneHlushko
   - byzyk
   - spicalous
+  - Neob91
 ---
 
 webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
@@ -121,9 +122,9 @@ T> If watching does not work for you, try out this option. Watching does not wor
 
 ## `info-verbosity`
 
-`string: 'none' | 'info' | 'verbose'`
+`string = 'info': 'none' | 'info' | 'verbose'`
 
-Controls verbosity of the lifecycle messaging, e.g. the `Started watching files...` log. Setting `info-verbosity` to `verbose` will also message to console at the beginning and the end of incremental build. `info-verbosity` is set to `info` by default.
+Controls verbosity of the lifecycle messaging, e.g. the `Started watching files...` log. Setting `info-verbosity` to `verbose` will also message to console at the beginning and the end of incremental build.
 
 ```bash
 webpack --watch --info-verbosity verbose
