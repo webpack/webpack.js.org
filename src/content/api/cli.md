@@ -378,4 +378,8 @@ For example, to increase the memory limit of Node.js process to 4 GB
 webpack --node-args="--max-old-space-size=4096"
 ```
 
-You can pass multiple options to Node.js: `webpack --node-args="--max-old-space-size=4096" --node-args="-r /path/to/preload/file.js"`
+Also, you can pass multiple options to Node.js process
+
+```bash
+webpack --node-args="--max-old-space-size=4096" --node-args="-r /path/to/preload/file.js"
+```
