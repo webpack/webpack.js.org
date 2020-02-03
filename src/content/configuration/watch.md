@@ -91,7 +91,7 @@ __webpack.config.js__
 module.exports = {
   //...
   watchOptions: {
-    ignored: ['files/**/*.js', 'node_modules']
+    ignored: ['files/**/*.js', 'node_modules/**']
   }
 };
 ```
