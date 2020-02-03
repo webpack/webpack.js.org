@@ -52,7 +52,7 @@ __How to get the logger ?__
   };
   ```
 
-- if you want to get the logger from webpack as a node api, use
+- if you want to get the logger from webpack as a Node.js API, use
 
   ```javascript
   const { Logger } = require('webpack/lib/logging/Logger');
