@@ -3,6 +3,7 @@ title: Logger Interface
 sort: 6
 contributors:
   - EugeneHlushko
+  - anikethsaha
 ---
 
 T> Available since webpack 4.39.0
