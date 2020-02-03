@@ -23,9 +23,9 @@ Benefits of custom logging API in webpack:
 
 By introducing webpack logging API we hope to unify the way webpack plugins and loaders emit logging messages and allow better ways to inspect build problems. Integrated logging solution supports plugins and loaders developers by improving their development experience. Paves the way for non-CLI webpack solutions like dashboards or other UIs.
 
-W> **Avoid noise in the log!** Keep in mind that multiple plugins and loaders are used together. Loaders are usually processing multiple files and are invoked for every file. Choose logging level as low as possible to keep the log output informative.
+W> __Avoid noise in the log!__ Keep in mind that multiple plugins and loaders are used together. Loaders are usually processing multiple files and are invoked for every file. Choose logging level as low as possible to keep the log output informative.
 
-**How to get the logger ?**
+__How to get the logger ?__
 
 - If you want to store the logs in the Stats, you should use `compilation.getLogger('PluginName')`
 
@@ -63,8 +63,8 @@ W> **Avoid noise in the log!** Keep in mind that multiple plugins and loaders ar
 
 - `logger.error(...)`: for error messages
 - `logger.warn(...)`: for warnings
-- `logger.info(...)`: for **important** information messages. These messages are displayed by default. Only use this for messages that the user really needs to see
-- `logger.log(...)`: for **unimportant** information messages. These messages are displayed only when user had opted-in to see them
+- `logger.info(...)`: for __important__ information messages. These messages are displayed by default. Only use this for messages that the user really needs to see
+- `logger.log(...)`: for __unimportant__ information messages. These messages are displayed only when user had opted-in to see them
 - `logger.debug(...)`: for debugging information. These messages are displayed only when user had opted-in to see debug logging for specific modules
 - `logger.trace()`: to display a stack trace. Displayed like `logger.debug`
 - `logger.group(...)`: to group messages together. Displayed collapsed like `logger.log`
