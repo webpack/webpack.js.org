@@ -29,33 +29,31 @@ __How to get the logger ?__
 
 - If you want to store the logs in the Stats, you should use `compilation.getLogger('PluginName')`
 
-  ```js
+  ```javascript
   // example
 
-  apply(compiler){
+  pluginName.prototype.apply = function(compiler){
     // get the compilation object by tapping in a compiler hook
     compiler.hooks.emit.tapAsync('PluginName', (compilation, callback) => {
       const logger = compilation.getLogger('PluginName');
-      ...
-    })
-  }
+    });
+  };
 
   ```
 
 - If you dont want to store your logs in the Stats, use `infrastructure` logging
 
-  ```js
+  ```javascript
   // example
 
-  apply(compiler){
+  pluginName.prototype.apply = function(compiler){
     const logger = compiler.getInfrastructureLogger('PluginName');
-    ...
-  }
+  };
   ```
 
 - if you want to get the logger from webpack as a node api, use
 
-  ```js
+  ```javascript
   const { Logger } = require('webpack/lib/logging/Logger');
   ```
 
