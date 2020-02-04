@@ -10,7 +10,7 @@ contributors:
   - EugeneHlushko
 ---
 
-These options configure whether to polyfill or mock certain [Node.js globals](https://nodejs.org/docs/latest/api/globals.html) and modules. This allows code originally written for the Node.js environment to run in other environments like the browser.
+The following Node.js options configure whether to polyfill or mock certain [Node.js globals](https://nodejs.org/docs/latest/api/globals.html) and modules. This allows code originally written for the Node.js environment to run in other environments like the browser.
 
 This feature is provided by webpack's internal [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js) plugin. If the target is "web" (default) or "webworker", the [`NodeSourcePlugin`](https://github.com/webpack/webpack/blob/master/lib/node/NodeSourcePlugin.js) plugin is also activated.
 

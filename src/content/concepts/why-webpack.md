@@ -44,6 +44,9 @@ But there is no browser support for CommonJS. There are no [live bindings](https
 
 The good news for web projects is that modules are becoming an official feature in the ECMAScript standard. However, browser support is incomplete and bundling is still faster and currently recommended over these early module implementations.
 
+## Automatic Dependency Collection
+
+Old school Task Runners and even Google Closure Compiler requires you to manually declare all dependencies upfront. While bundlers like webpack automatically builds and infer your [dependency graph](/concepts/dependency-graph/) based on what is imported and exported. This along with other [plugins](/concepts/plugins/) and [loaders](/concepts/loaders/) make for a great developer experience.
 
 ## Wouldn't it be nice…
 
