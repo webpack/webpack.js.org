@@ -4,6 +4,7 @@ contributors:
   - elliottsj
   - EugeneHlushko
   - byzyk
+  - smelukov
 ---
 
 `
@@ -39,26 +40,77 @@ new webpack.ProgressPlugin(handler);
 
 When providing an `object` to the `ProgressPlugin`, following properties are supported:
 
-- `activeModules` show's active modules count and one active module in progress message
-- `entries` show's entries count in progress message
-- [`handler: function (percentage, message, ...args)`](#providing-function)
-- `modules` show's modules count in progress message
-- `modulesCount` a minimum modules count to start with. Takes effect when `modules` property is enabled.
-- `profile` tells `ProgressPlugin` to collect profile data for progress steps.
-
-
 ```js
 new webpack.ProgressPlugin({
+  activeModules: false,
   entries: true,
-  modules: true,
-  modulesCount: 100,
-  profile: true,
-  handler: (percentage, message, ...args) => {
+  handler(percentage, message, ...args) {
     // custom logic
-  }
+  },
+  modules: true,
+  modulesCount: 5000,
+  profile: false,
+  dependencies: true,
+  dependenciesCount: 10000,
+  percentBy: null
 });
 ```
 
+#### `activeModules`
+
+`boolean = false`
+
+Shows active modules count and one active module in progress message.
+
+#### `entries`
+
+`boolean = true`
+
+Shows entries count in progress message.
+
+#### `handler`
+
+See [Providing function](#providing-function)
+
+#### `modules`
+
+`boolean = true`
+
+Shows modules count in progress message.
+
+#### `modulesCount`
+
+`number = 5000`
+
+A minimum modules count to start with. Takes effect when `modules` property is enabled.
+
+#### `profile`
+
+`boolean = false`
+
+Tells `ProgressPlugin` to collect profile data for progress steps.
+
+- `percentBy` tells `ProgressPlugin` how to calculate progress percentage.
+
+#### `dependencies`
+
+`boolean = true`
+
+Shows dependencies count in progress message.
+
+#### `dependenciesCount`
+
+`number = 10000`
+
+A minimum dependencies count to start with. Takes effect when `dependencies` property is enabled.
+
+#### `percentBy`
+
+`string = null: 'entries' | 'dependencies' | 'modules' | null`
+
+Tells `ProgressPlugin` how to calculate progress percentage.
+
+On the projects with tons of entry points better use `percentBy: 'entries'` because the amount of entry points is known in advance, therefore the percentage will be more realistic.
 
 ## Supported Hooks
 
