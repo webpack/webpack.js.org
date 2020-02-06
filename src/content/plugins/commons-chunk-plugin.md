@@ -177,7 +177,7 @@ new webpack.optimize.CommonsChunkPlugin({
 
 ### Passing the `minChunks` property a function
 
-You also have the ability to pass the `minChunks` property a function. This function is called by the `CommonsChunkPlugin` and calls the function with `module` and `count` arguments.
+You also can pass the `minChunks` property a function. This function is called by the `CommonsChunkPlugin` and calls the function with `module` and `count` arguments.
 
 The `module` argument represents each module in the chunks you have provided via the `name`/`names` property.
 `module` has the shape of a [NormalModule](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js), which has two particularly useful properties for this use case:

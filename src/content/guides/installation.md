@@ -65,7 +65,7 @@ If you are enthusiastic about using the latest that webpack has to offer, you ca
 
 ``` bash
 npm install webpack@beta
-# or specific tag/branch
+# or a specific tag/branch
 npm install webpack/webpack#<tagname/branchname>
 ```
 
