@@ -224,6 +224,6 @@ Sometimes, we want to describe certain properties of objects and functions in li
 - `madeUp` (`boolean = true`): short description
 - `shortText` (`string = 'i am text'`): another short description
 
-W> `:` is not important here, note the property, type and default.
+W> `:` is not a necessity here, note the property, type and default.
 
 An example can be found on the [`options` section of the EvalSourceMapDevToolPlugin's page](/plugins/eval-source-map-dev-tool-plugin/#options).
