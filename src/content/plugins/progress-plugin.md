@@ -42,10 +42,11 @@ When providing an `object` to the `ProgressPlugin`, following properties are sup
 
 - `activeModules` (`boolean = false`): Shows active modules count and one active module in progress message.
 - `entries` (`boolean = true`): Shows entries count in progress message.
-- `handler` (See [Providing function](#providing-function)): `modules` (`boolean = true`): Shows modules count in progress message.
+- `handler` (See [Providing function](#providing-function))
+- `modules` (`boolean = true`): Shows modules count in progress message.
 - `modulesCount` (`number = 5000`): A minimum modules count to start with. Takes effect when `modules` property is enabled.
 - `profile` (`boolean = false`): Tells `ProgressPlugin` to collect profile data for progress steps.
-- `dependencies` (`boolean = true`): Shows dependencies count in progress message.
+- `dependencies` (`boolean = true`): Shows the count of dependencies in progress message.
 - `dependenciesCount` (`number = 10000`): A minimum dependencies count to start with. Takes effect when `dependencies` property is enabled.
 - `percentBy` (`string = null: 'entries' | 'dependencies' | 'modules' | null`): Tells `ProgressPlugin` how to calculate progress percentage.
 
@@ -65,7 +66,7 @@ new webpack.ProgressPlugin({
 });
 ```
 
-> On the projects with many entry points better use `percentBy: 'entries'` because of entry points amount is known in advance, therefore the percentage will be more realistic.
+> We recommend using `percentBy: 'entries'` setting for projects with [multiple configured entry points](/configuration/entry-context/#entry). Percentage calculation will become more accurate because the amount of entry points is known in advance.
 
 ## Supported Hooks
 
