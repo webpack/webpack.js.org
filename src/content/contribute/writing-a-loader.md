@@ -127,7 +127,7 @@ As discussed earlier, webpack loaders can be chained. So, along with passing con
 
 - __Through pitch method__
 
-  Webpack loader has a concept of pitching loaders. You can find a detailed explanation [`here`](https://webpack.js.org/api/loaders/#pitching-loader). Here anything assigned to `data` can be accessed by the previous loader's `this.data`. It is mainly used to share data between the pitch phase and normal phase
+  webpack loader has a concept of pitching loaders. You can find a detailed explanation [`here`](https://webpack.js.org/api/loaders/#pitching-loader). Here anything assigned to `data` can be accessed by the previous loader's `this.data`. It is mainly used to share data between the pitch phase and normal phase.
 
   For example, in the preview chained loader, if `jade-loader` needs to share some data to `apply-loader`, it can assign the data to `data.x` in its pitch phase and `apply-loader` can access that using `this.data.x`.
 
