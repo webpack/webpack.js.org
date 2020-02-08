@@ -216,3 +216,14 @@ This allows us to display the defaults, enumeration and other information.
 If the object's key is dynamic, user-defined, use `<key>` to describe it:
 
 `object = { <key> string }`
+
+### Options shortlists and their typing
+
+Sometimes, we want to describe certain properties of objects and functions in lists. When applicable add typing directly to the list where properties are enlisted:
+
+- `madeUp` (`boolean = true`): short description
+- `shortText` (`string = 'i am text'`): another short description
+
+W> `:` is not a necessity here, note the property, type and default.
+
+An example can be found on the [`options` section of the EvalSourceMapDevToolPlugin's page](/plugins/eval-source-map-dev-tool-plugin/#options).
