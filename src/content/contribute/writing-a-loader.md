@@ -123,7 +123,7 @@ T> The fact that loaders can be chained also means they don't necessarily have t
 
 ### Data sharing
 
-As discussed earlier, webpack loaders can be chained. So, along with passing the content with the next chained loader, we can even share data to next loader. There are two ways to share data among loaders.
+As discussed earlier, webpack loaders can be chained. So, along with passing content to the next chained loader, we can even share data with the next loader. There are two ways to share data among loaders.
 
 - __Through pitch method__
 
