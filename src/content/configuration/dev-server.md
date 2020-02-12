@@ -17,6 +17,7 @@ contributors:
   - bhavya9107
   - wizardofhogwarts
   - jamesgeorge007
+  - g100g
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -283,6 +284,23 @@ Usage via the CLI
 webpack-dev-server --content-base /path/to/content/dir
 ```
 
+## `devServer.contentBasePublicPath`
+
+`string`
+
+Tell the server at what URL to serve `devServer.contentBase` static content. If there was a file `assets/manifest.json`, it would be served at `/serve-content-base-at-this-url/assets/manifest.json`
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    contentBase: path.join(__dirname, 'assets'),
+    contentBasePublicPath: '/serve-content-base-at-this-url'
+  }
+};
+```
 
 ## `devServer.disableHostCheck`
 
