@@ -446,7 +446,6 @@ module.exports = function(source) {
   console.log(this.hot); // true if --hot flag is passed
   return source;
 };
-
 ```
 
 ### `this.fs`
