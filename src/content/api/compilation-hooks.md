@@ -8,6 +8,7 @@ contributors:
   - misterdev
   - wizardofhogwarts
   - EugeneHlushko
+  - anikethsaha
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -27,6 +28,7 @@ compilation.hooks.someHook.tap(/* ... */);
 As with the `compiler`, `tapAsync` and `tapPromise` may also be available
 depending on the type of hook.
 
+W> Note that from __webpack@5__, `hooks` are no longer extensible. Use a `WeakMap` to add custom hooks.
 
 ### `buildModule`
 

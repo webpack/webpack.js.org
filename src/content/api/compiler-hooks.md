@@ -9,6 +9,7 @@ contributors:
   - misterdev
   - EugeneHlushko
   - superburrito
+  - anikethsaha
 ---
 
 The `Compiler` module is the main engine that creates a compilation instance
@@ -22,6 +23,8 @@ for more information.
 
 When developing a plugin for webpack, you might want to know where each hook is called. To learn this, search for `hooks.<hook name>.call` across the webpack source
 
+
+W> Note that from __webpack@5__, `hooks` are no longer extensible. Use a `WeakMap` to add custom hooks.
 
 ## Watching
 
@@ -252,7 +255,7 @@ Called after emitting assets to output directory.
 
 `AsyncSeriesHook`
 
-Executed when an asset has been emitted. Provides access to information about the emitted asset, such as its output path and byte content. 
+Executed when an asset has been emitted. Provides access to information about the emitted asset, such as its output path and byte content.
 
 - Callback Parameters: `file`, `info`
 
