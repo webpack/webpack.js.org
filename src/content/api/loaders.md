@@ -439,7 +439,15 @@ Emit a file. This is webpack-specific.
 
 ### `this.hot`
 
-Enables HMR for Module loaders, `this.hot = true`
+Information about HMR for loaders
+
+```javascript
+module.exports = function(source) {
+  console.log(this.hot); // true if --hot flag is passed
+  return source;
+};
+
+```
 
 ### `this.fs`
 
