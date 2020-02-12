@@ -123,28 +123,22 @@ T> The fact that loaders can be chained also means they don't necessarily have t
 
 ### Data sharing
 
-As discussed earlier, webpack loaders can be chained. So, along with passing the content with the next chained loader, we can even share data to next loader. There are two ways to share data among loaders.
+As discussed earlier, webpack loaders can be chained. So, along with passing the content(source code) with the next chained loader, we can even share data to next loader. There are two ways to share data among loaders.
 
-- __Through pitch method__
+__Using `this.callback` method of raw loaders__
 
-  Webpack loader has a concept of pitching loaders. You can find a detailed explanation [`here`](https://webpack.js.org/api/loaders/#pitching-loader). Here anything assigned to `data` can be accessed by the previous loader's `this.data`. It is mainly used to share data between the pitch phase and normal phase
+In raw method _(the default exported function)_, we can pass data to next chained loader using the fourth argument of `this.callback`
 
-  For example, in the preview chained loader, if `jade-loader` needs to share some data to `apply-loader`, it can assign the data to `data.x` in its pitch phase and `apply-loader` can access that using `this.data.x`.
+Example
 
-- __Using `this.callback` method of raw loaders__
-
-  In raw method _(the default exported function)_, we can pass data to next chained loader using the fourth argument of `this.callback`
-
-  example
-
-  ```javascript
-  export default function(source) {
-    const options = getOptions(this);
-    this.callback(null, `export default ${JSON.stringify(source)}`, null, {
-      some: data
-    });
-  }
-  ```
+```javascript
+export default function(source) {
+  const options = getOptions(this);
+  this.callback(null, `export default ${JSON.stringify(source)}`, null, {
+    some: data
+  });
+}
+```
 
 ### Modular
 
