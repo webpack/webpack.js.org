@@ -437,6 +437,10 @@ emitFile(name: string, content: Buffer|string, sourceMap: {...})
 Emit a file. This is webpack-specific.
 
 
+### `this.hot`
+
+Enables HMR for Module loaders, `this.hot = true`
+
 ### `this.fs`
 
 Access to the `compilation`'s `inputFileSystem` property.
