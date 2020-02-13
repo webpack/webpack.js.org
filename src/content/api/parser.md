@@ -35,7 +35,7 @@ depending on the type of hook.
 The following lifecycle hooks are exposed by the `parser` and can be accessed
 as such:
 
-W> Note that from __webpack@5__, `hooks` are no longer extensible. Use a `WeakMap` to add custom hooks.
+W> Note that from __webpack@5__, `hooks` are no longer extendable. Use a `WeakMap` to add custom hooks.
 
 ### evaluateTypeof
 
