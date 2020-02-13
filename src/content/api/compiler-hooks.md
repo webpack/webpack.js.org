@@ -23,7 +23,7 @@ for more information.
 
 When developing a plugin for webpack, you might want to know where each hook is called. To learn this, search for `hooks.<hook name>.call` across the webpack source
 
-W> Note that from **webpack@5**, `hooks` are no longer extendable. Use a `WeakMap` to add custom hooks.
+W> Note that from __webpack@5__, `hooks` are no longer extendable. Use a `WeakMap` to add custom hooks.
 
 ## Watching
 

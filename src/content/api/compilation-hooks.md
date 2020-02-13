@@ -28,7 +28,7 @@ compilation.hooks.someHook.tap(/* ... */);
 As with the `compiler`, `tapAsync` and `tapPromise` may also be available
 depending on the type of hook.
 
-W> Note that from **webpack@5**, `hooks` are no longer extendable. Use a `WeakMap` to add custom hooks.
+W> Note that from __webpack@5__, `hooks` are no longer extendable. Use a `WeakMap` to add custom hooks.
 
 ### `buildModule`
 
@@ -520,7 +520,7 @@ compilation.hooks.optimizeChunkAssets.tapAsync(
     chunks.forEach(chunk => {
       chunk.files.forEach(file => {
         compilation.assets[file] = new ConcatSource(
-          '/**Sweet Banner**/',
+          '/__Sweet Banner__/',
           '\n',
           compilation.assets[file]
         );
