@@ -284,11 +284,12 @@ Usage via the CLI
 webpack-dev-server --content-base /path/to/content/dir
 ```
 
+
 ## `devServer.contentBasePublicPath`
 
-`string`
+`string = '/'`
 
-Tell the server at what URL to serve `devServer.contentBase` static content. If there was a file `assets/manifest.json`, it would be served at `/serve-content-base-at-this-url/assets/manifest.json`
+Tell the server at what URL to serve `devServer.contentBase` static content. If there was a file `assets/manifest.json`, it would be served at `/serve-content-base-at-this-url/manifest.json`
 
 __webpack.config.js__
 
@@ -301,6 +302,7 @@ module.exports = {
   }
 };
 ```
+
 
 ## `devServer.disableHostCheck`
 
