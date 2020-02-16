@@ -28,7 +28,7 @@ compilation.hooks.someHook.tap(/* ... */);
 As with the `compiler`, `tapAsync` and `tapPromise` may also be available
 depending on the type of hook.
 
-W> Note that from __webpack@5__, `hooks` are no longer extendable. Use a `WeakMap` to add custom hooks.
+W> Since webpack 5, `hooks` are no longer extendable. Use a `WeakMap` to add custom hooks.
 
 ### `buildModule`
 
