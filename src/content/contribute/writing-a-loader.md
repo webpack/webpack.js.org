@@ -124,7 +124,7 @@ Take advantage of the fact that loaders can be chained together. Instead of writ
 
 Take the case of rendering a template file with data specified via loader options or query parameters. It could be written as a single loader that compiles the template from source, executes it and returns a module that exports a string containing the HTML code. However, in accordance with guidelines, a simple `apply-loader` exists that can be chained with other open source loaders:
 
-- `jade-loader`: Convert template to a module that exports a function.
+- `pug-loader`: Convert template to a module that exports a function.
 - `apply-loader`: Executes the function with loader options and returns raw HTML.
 - `html-loader`: Accepts HTML and outputs a valid JavaScript module.
 
