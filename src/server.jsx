@@ -52,7 +52,7 @@ export default locals => {
           <meta property="og:type" content="website" />
           <meta property="og:title" content={ title } />
           <meta property="og:description" name="description" content={ description } />
-          <meta property="og:image" content={ Logo } />
+          <meta property="og:image" content="https://webpack.js.org/icon_180x180.png" />
           <meta property="twitter:card" content="summary" />
           <meta property="twitter:site" content="@webpack" />
           <meta property="twitter:creator" content="@webpack" />
