@@ -439,7 +439,7 @@ Emit a file. This is webpack-specific.
 
 ### `this.hot`
 
-Information about HMR for loaders
+Information about HMR for loaders.
 
 ```javascript
 module.exports = function(source) {
