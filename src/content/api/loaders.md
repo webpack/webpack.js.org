@@ -80,7 +80,7 @@ T> Loaders were originally designed to work in synchronous loader pipelines, lik
 
 ### "Raw" Loader
 
-By default, the resource file is converted to a UTF-8 string and passed to the loader. By setting the `raw` flag, the loader will receive the raw `Buffer`. Every loader is allowed to deliver its result as `String` or as `Buffer`. The compiler converts them between loaders.
+By default, the resource file is converted to a UTF-8 string and passed to the loader. By setting the `raw` flag to `true`, the loader will receive the raw `Buffer`. Every loader is allowed to deliver its result as a `String` or as a `Buffer`. The compiler converts them between loaders.
 
 __raw-loader.js__
 
@@ -206,7 +206,7 @@ Since webpack 4, the formerly `this.options.context` is provided as `this.rootCo
 
 The resolved request string.
 
-In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr"`
+In the example: `'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
 
 
 ### `this.query`
@@ -311,28 +311,28 @@ In the example: in loader1: `0`, in loader2: `1`
 
 The resource part of the request, including query.
 
-In the example: `"/abc/resource.js?rrr"`
+In the example: `'/abc/resource.js?rrr'`
 
 
 ### `this.resourcePath`
 
 The resource file.
 
-In the example: `"/abc/resource.js"`
+In the example: `'/abc/resource.js'`
 
 
 ### `this.resourceQuery`
 
 The query of the resource.
 
-In the example: `"?rrr"`
+In the example: `'?rrr'`
 
 
 ### `this.target`
 
 Target of compilation. Passed from configuration options.
 
-Example values: `"web"`, `"node"`
+Example values: `'web'`, `'node'`
 
 
 ### `this.webpack`
