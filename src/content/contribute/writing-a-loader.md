@@ -126,7 +126,6 @@ T> The fact that loaders can be chained also means they don't necessarily have t
 webpack loaders can be chained and share data with the next chained loader. To share data with the next chained loader, pass it alongside the content (source code). Do it by using the `this.callback` method of raw loaders. In raw method _(the default exported function)_, pass data using the fourth argument of `this.callback`:
 
 __Using `this.callback` method of raw loaders__
-In raw method _(the default exported function)_, we can pass data to next chained loader using the fourth argument of `this.callback`
 
 Example
 
