@@ -419,7 +419,7 @@ module.exports = {
 
 Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimizationoccurrenceorder). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
 Dead code elimination in minimizers will benefit from this and can remove unused exports.
-By default `optimization.usedExports` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+By default `optimization.usedExports` is enabled in all [modes](/configuration/mode/).
 
 __webpack.config.js__
 
@@ -470,7 +470,7 @@ T> Please note that `sideEffects` should be in the npm module's `package.json` f
 
 `optimization.sideEffects` depends on [`optimization.providedExports`](#optimizationprovidedexports) to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.
 
-By default `optimization.sideEffects` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+By default `optimization.sideEffects` is enabled in all [modes](/configuration/mode/).
 
 __webpack.config.js__
 
@@ -527,7 +527,7 @@ module.exports = {
 
 `optimization.innerGraph` tells webpack whether to conduct inner graph analysis for unused exports.
 
-By default `optimization.innerGraph` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+By default `optimization.innerGraph` is enabled in all [modes](/configuration/mode/).
 
 __webpack.config.js__
 

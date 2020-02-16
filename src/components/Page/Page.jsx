@@ -33,6 +33,8 @@ class Page extends React.Component {
           this.setState({
             content: module.default || module,
             contentLoaded: true
+          }, () => {
+            document.documentElement.scrollTop = 0;
           })
         )
         .catch(error =>

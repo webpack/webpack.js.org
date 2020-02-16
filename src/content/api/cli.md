@@ -12,6 +12,7 @@ contributors:
   - byzyk
   - wizardofhogwarts
   - EslamHiko
+  - smelukov
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -365,4 +366,20 @@ webpack --progress --profile
 1ms asset optimization
 6ms emitting
 ⋮
+```
+
+## Pass CLI arguments to Node.js
+
+To pass arguments directly to Node.js process, you can use the `--node-args` option. All other flags and options will be received by the webpack-cli.
+
+For example, to increase the memory limit of Node.js process to 4 GB
+
+```bash
+webpack --node-args="--max-old-space-size=4096"
+```
+
+Also, you can pass multiple options to Node.js process
+
+```bash
+webpack --node-args="--max-old-space-size=4096" --node-args="-r /path/to/preload/file.js"
 ```
