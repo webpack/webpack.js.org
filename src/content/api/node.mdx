@@ -332,14 +332,14 @@ system. However, it is possible to change the input or output behavior using a
 different kind of file system (memory, webDAV, etc). To accomplish this, one
 can change the `inputFileSystem` or `outputFileSystem`. For example, you can
 replace the default `outputFileSystem` with
-[`memory-fs`](https://github.com/webpack/memory-fs) to write files to memory
+[`memfs`](https://github.com/streamich/memfs) to write files to memory
 instead of to disk:
 
 ``` js
-const MemoryFS = require('memory-fs');
+const { createFsFromVolume, Volume } = require('memfs');
 const webpack = require('webpack');
 
-const fs = new MemoryFS();
+const fs = new createFsFromVolume(new Volume());
 const compiler = webpack({ /* options */ });
 
 compiler.outputFileSystem = fs;
