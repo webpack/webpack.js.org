@@ -127,7 +127,6 @@ webpack loaders can be chained and share data with the next chained loader. To s
 
 __Using `this.callback` method of raw loaders__
 
-Example
 
 ```javascript
 export default function(source) {
