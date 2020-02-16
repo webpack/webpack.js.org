@@ -443,7 +443,7 @@ Information about HMR for loaders
 
 ```javascript
 module.exports = function(source) {
-  console.log(this.hot); // true if --hot flag is passed
+  console.log(this.hot); // true if HMR is enabled via --hot flag or webpack configuration
   return source;
 };
 ```
