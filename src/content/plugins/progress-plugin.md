@@ -66,13 +66,13 @@ new webpack.ProgressPlugin({
 });
 ```
 
-## Percent calculation
+## Percentage calculation
 
-By default, progress percentage calculates based on built modules count and total modules count: `built / total`
+By default, progress percentage is calculated based on built modules count and total modules count: `built / total`
 
 The total modules count is unknown in advance and changes during the build. This may cause inaccurate progress percentage.
 
-To solve this problem `ProgressPlugin` caches the last know total modules count and reuses this value on the next build. The first build will warm the cache but the following builds will use and update this value.
+To solve this problem `ProgressPlugin` caches the last known total modules count and reuses this value on the next build. The first build will warm the cache but the following builds will use and update this value.
 
 > We recommend using `percentBy: 'entries'` setting for projects with [multiple configured entry points](/configuration/entry-context/#entry). Percentage calculation will become more accurate because the amount of entry points is known in advance.
 
