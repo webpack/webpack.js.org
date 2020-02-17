@@ -60,15 +60,24 @@ If a string or array of strings is passed, the chunk is named `main`. If an obje
 
 ### Entry descriptor
 
-If an object is passed the value might be a string, array of strings or descriptor:
+If an object is passed the value might be a string, array of strings or a descriptor:
 
 ```js
 module.exports = {
   //...
   entry: {
     home: './home.js',
-    about: ['./about.js'],
-    contact: { import: './contact.js' }
+    shared: ['react', 'react-dom', 'redux', 'react-redux'],
+    catalog: { 
+      import: './catalog.js', 
+      filename: 'pages/catalog.js', 
+      dependOn:'shared'
+    },
+    personal: { 
+      import: './personal.js', 
+      filename: 'pages/personal.js', 
+      dependOn:'shared'
+    }
   }
 };
 ```
