@@ -4,6 +4,9 @@ sort: 24
 contributors:
   - smelukov
   - EugeneHlushko
+related:
+  - title: webpack 5 - Asset Modules
+    url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
 ---
 
 Asset Modules is a type of module that allows to use asset files (fonts, icons, etc) without configuring additional loaders.
