@@ -78,7 +78,7 @@ Descriptor syntax might be used to pass additional options to an entry point.
 
 ### Output filename
 
-By default, an output filename for the entry chunk is getting from [`output.filename`](/configuration/output/#outputfilename) but you can specify a custom output filename for a specific entry:
+By default, the output filename for the entry chunk is extracted from [`output.filename`](/configuration/output/#outputfilename) but you can specify a custom output filename for a specific entry:
 
 ```js
 module.exports = {
