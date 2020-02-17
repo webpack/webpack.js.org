@@ -19,6 +19,7 @@ contributors:
   - g-plane
   - smelukov
   - Neob91
+  - anikethsaha
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -408,7 +409,7 @@ An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.
 
 ## `output.hotUpdateChunkFilename`
 
-`string = '[id].[hash].hot-update.js'` `function (chunkData) => string`
+`string = '[id].[hash].hot-update.js'`
 
 Customize the filenames of hot update chunks. See [`output.filename`](#outputfilename) option for details on the possible values.
 
@@ -420,9 +421,7 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    hotUpdateChunkFilename: (chunkData) => {
-      return `${chunkData.chunk.name === 'main' ? '' : '[name]/'}[id].[hash].hot-update.js`;
-    }
+    hotUpdateChunkFilename: '[id].[hash].hot-update.js'
   }
 };
 ```
