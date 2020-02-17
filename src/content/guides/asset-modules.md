@@ -5,7 +5,7 @@ contributors:
   - smelukov
   - EugeneHlushko
 related:
-  - title: Webpack 5 - Asset Modules
+  - title: webpack 5 - Asset Modules
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
 ---
 
