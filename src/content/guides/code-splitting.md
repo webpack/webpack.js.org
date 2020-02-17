@@ -119,7 +119,7 @@ The first of these two points is definitely an issue for our example, as `lodash
 
 ### Entry dependencies
 
-The [`dependOn` option](https://webpack.js.org/configuration/entry-context/#dependencies) allows to share the modules between the chunks
+The [`dependOn` option](/configuration/entry-context/#dependencies) allows to share the modules between the chunks
 
 ``` diff
   const path = require('path');
