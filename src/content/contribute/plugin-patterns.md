@@ -81,6 +81,8 @@ You may also feed new file paths into the watch graph to receive compilation tri
 
 T> The `fileDependencies` set is rebuilt in each compilation, so your plugin must add its own watched dependencies into each compilation to keep them under watch.
 
+W> Since webpack 5, `compilation.fileDependencies`, `compilation.contextDependencies` and `compilation.missingDependencies` are now a `Set` instead of a `Sortable Set` and thus no longer sorted.
+
 ## Changed chunks
 
 Similar to the watch graph, it's fairly simple to monitor changed chunks (or modules, for that matter) within a compilation by tracking their hashes.
