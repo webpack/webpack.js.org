@@ -116,7 +116,7 @@ The following table explains other cases:
 
 W> `resolve.alias` takes precedence over other module resolutions.
 
-W> [`null-loader`](https://github.com/webpack-contrib/null-loader) will be deprecated in `webpack@5`. use `alias: { xyz$: false }` or using absolute path `alias: {[path.resolve(__dirname, "....")]: false }`
+W> [`null-loader`](https://github.com/webpack-contrib/null-loader) will be deprecated in `webpack@5`. use `alias: { xyz$: false }` or absolute path `alias: {[path.resolve(__dirname, "....")]: false }`
 
 ### `resolve.aliasFields`
 
