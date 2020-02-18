@@ -340,7 +340,7 @@ instead of to disk:
 const { createFsFromVolume, Volume } = require('memfs');
 const webpack = require('webpack');
 
-const fs = new createFsFromVolume(new Volume());
+const fs = createFsFromVolume(new Volume());
 const compiler = webpack({ /* options */ });
 
 compiler.outputFileSystem = fs;
