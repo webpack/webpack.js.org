@@ -78,7 +78,7 @@ module.exports = MyPlugin;
 
 You may also feed new file paths into the watch graph to receive compilation triggers when those files change. Simply push valid file paths into the `compilation.fileDependencies` array to add them to the watch. Note: the `fileDependencies` array is rebuilt in each compilation, so your plugin must push its own watched dependencies into each compilation to keep them under watch.
 
-W> Note that `compilation.fileDependencies`, `compilation.contextDependencies` and `compilation.missingDependencies` are now a `Set` instead of a `Sortable Set` and thus no longer sorted.
+W> Since webpack 5, `compilation.fileDependencies`, `compilation.contextDependencies` and `compilation.missingDependencies` are now a `Set` instead of a `Sortable Set` and thus no longer sorted.
 
 ## Changed chunks
 
