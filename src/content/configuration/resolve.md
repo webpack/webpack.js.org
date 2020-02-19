@@ -14,6 +14,7 @@ contributors:
   - EugeneHlushko
   - Aghassi
   - myshov
+  - anikethsaha
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -115,6 +116,7 @@ The following table explains other cases:
 
 W> `resolve.alias` takes precedence over other module resolutions.
 
+W> [`null-loader`](https://github.com/webpack-contrib/null-loader) will be deprecated in `webpack@5`. use `alias: { xyz$: false }` or absolute path `alias: {[path.resolve(__dirname, "....")]: false }`
 
 ### `resolve.aliasFields`
 

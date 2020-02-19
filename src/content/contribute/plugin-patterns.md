@@ -49,7 +49,7 @@ module.exports = MyPlugin;
 
 ### Monitoring the watch graph
 
-While running webpack middleware, each compilation includes a `fileDependencies` set (what files are being watched) and a `fileTimestamps` map that maps watched file paths to a timestamp. These are extremely useful for detecting what files have changed within the compilation:
+While running webpack middleware, each compilation includes a `fileDependencies` `Set` (what files are being watched) and a `fileTimestamps` `Map` that maps watched file paths to a timestamp. These are extremely useful for detecting what files have changed within the compilation:
 
 ```javascript
 class MyPlugin {
@@ -77,9 +77,11 @@ class MyPlugin {
 module.exports = MyPlugin;
 ```
 
-You may also feed new file paths into the watch graph to receive compilation triggers when those files change. Add valid file paths into the `compilation.fileDependencies` set to add them to the watched files.
+You may also feed new file paths into the watch graph to receive compilation triggers when those files change. Add valid file paths into the `compilation.fileDependencies` `Set` to add them to the watched files.
 
-T> The `fileDependencies` set is rebuilt in each compilation, so your plugin must add its own watched dependencies into each compilation to keep them under watch.
+T> The `fileDependencies` `Set` is rebuilt in each compilation, so your plugin must add its own watched dependencies into each compilation to keep them under watch.
+
+W> Since webpack 5, `compilation.fileDependencies`, `compilation.contextDependencies` and `compilation.missingDependencies` are now a `Set` instead of a `Sortable Set` and thus no longer sorted.
 
 ## Changed chunks
 
