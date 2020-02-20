@@ -10,6 +10,7 @@ contributors:
   - zefman
   - Mistyyyy
   - jamesgeorge007
+  - tanhauhau
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
