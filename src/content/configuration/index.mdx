@@ -367,12 +367,6 @@ module.exports = {
     externals: ({request}) => { /* ... */ return "commonjs " + request }
   </externals>
   // Don't follow/bundle these modules, but request them at runtime from the environment
-  serve: { //object
-    port: 1337,
-    content: './dist',
-    // ...
-  },
-  // lets you provide options for webpack-serve
   <stats "/configuration/stats">
     <default>
       stats: "errors-only",
