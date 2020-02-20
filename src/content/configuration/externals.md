@@ -10,6 +10,7 @@ contributors:
   - zefman
   - Mistyyyy
   - jamesgeorge007
+  - tanhauhau
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
@@ -66,6 +67,30 @@ The following syntaxes are accepted...
 
 See the example above. The property name `jquery` indicates that the module `jquery` in `import $ from 'jquery'` should be excluded. In order to replace this module, the value `jQuery` will be used to retrieve a global `jQuery` variable. In other words, when a string is provided it will be treated as `root` (defined above and below).
 
+On the other hand, if you want to externalise a library that is available as a CommonJS module, you can provide the external library type together with the library name.
+
+For example, if you want to exclude `fs-extra` from the output bundle and import it during the runtime instead, you can specify it as follows:
+
+```javascript
+module.exports = {
+  // ...
+  externals: {
+    'fs-extra': 'commonjs2 fs-extra',
+  }
+};
+```
+
+This leaves any dependent modules unchanged, i.e. the code shown below:
+
+```javascript
+import fs from 'fs-extra';
+```
+
+will compile to something like:
+
+```javascript
+const fs = require('fs-extra');
+```
 
 ### array
 
