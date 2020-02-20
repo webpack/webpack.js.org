@@ -91,7 +91,7 @@ module.exports = {
 
 This will direct webpack to _enter_ through `./index.ts`, _load_ all `.ts` and `.tsx` files through the `ts-loader`, and _output_ a `bundle.js` file in our current directory.
 
-Now let's change the import of `lodash` in our `./index.ts` due to the fact that there is no default export present in `lodash` definitions.
+Now lets change the import of `lodash` in our `./index.ts` due to the fact that there is no default export present in `lodash` definitions.
 
 __./index.ts__
 
