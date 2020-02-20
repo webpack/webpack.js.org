@@ -68,7 +68,7 @@ See the example above. The property name `jquery` indicates that the module `jqu
 
 On the other hand, if you want to externalise a library that is available as a CommonJS module, you can provide the external library type together with the library name.
 
-For example, if you want to exclude `fs-extra` from the output bundle, and you want instead import it during runtime, you can specify as below:
+For example, if you want to exclude `fs-extra` from the output bundle and import it during the runtime instead, you can specify it as follows:
 
 ```javascript
 module.exports = {
