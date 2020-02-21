@@ -9,6 +9,7 @@ contributors:
   - peterblazejewicz
   - youta1119
   - byzyk
+  - Nek-
 ---
 
 webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
