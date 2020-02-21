@@ -159,7 +159,7 @@ On macOS, folders can get corrupted in certain scenarios. See [this article](htt
 
 ### Windows Paths
 
-Because webpack expects absolute paths for many config options such as `__dirname + '/app/folder'` the Windows `\` path separator can break some functionality.
+Because webpack expects absolute paths for many configuration options such as `__dirname + '/app/folder'` the Windows `\` path separator can break some functionality.
 
 Use the correct separators. I.e. `path.resolve(__dirname, 'app/folder')` or `path.join(__dirname, 'app', 'folder')`.
 

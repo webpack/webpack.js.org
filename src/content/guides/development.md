@@ -195,7 +195,7 @@ The `webpack-dev-server` provides you with a simple web server and the ability t
 npm install --save-dev webpack-dev-server
 ```
 
-Change your config file to tell the dev server where to look for files:
+Change your configuration file to tell the dev server where to look for files:
 
 __webpack.config.js__
 
