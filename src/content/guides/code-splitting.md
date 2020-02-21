@@ -28,7 +28,8 @@ contributors:
   - byzyk
   - AnayaDesign
   - wizardofhogwarts
-  - maximilianschmelzer 
+  - maximilianschmelzer
+  - smelukov
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -115,6 +116,32 @@ The first of these two points is definitely an issue for our example, as `lodash
 
 
 ## Prevent Duplication
+
+### Entry dependencies
+
+The [`dependOn` option](/configuration/entry-context/#dependencies) allows to share the modules between the chunks
+
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    mode: 'development',
+    entry: {
+-     index: './src/index.js',
+-     another: './src/another-module.js',
++     index: { import: './src/index.js', dependOn: 'shared' },
++     another: { import: './src/another-module.js', dependOn: 'shared' },
++     shared: 'lodash',
+    },
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist'),
+    },
+  };
+```
+
+
+### `SplitChunksPlugin`
 
 The [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
 
