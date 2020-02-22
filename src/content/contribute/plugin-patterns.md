@@ -45,7 +45,7 @@ module.exports = MyPlugin;
 W> __Deprecation warning__: Array functions will still work.
 
 - `module.fileDependencies`: An array of source file paths included into a module. This includes the source JavaScript file itself (ex: `index.js`), and all dependency asset files (stylesheets, images, etc) that it has required. Reviewing dependencies is useful for seeing what source files belong to a module.
-- `compilation.chunks`: A set of chunks (build outputs) in the compilation. Each chunk manages the composition of a final rendered assets.
+- `compilation.chunks`: A set of chunks (build outputs) in the compilation. Each chunk manages the composition of a final rendered asset.
 
 W> __Deprecation warning__: Array functions will still work.
 
