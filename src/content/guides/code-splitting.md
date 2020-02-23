@@ -196,7 +196,7 @@ Two similar techniques are supported by webpack when it comes to dynamic code sp
 
 W> `import()` calls use [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
-Before we start, let's remove the extra [`entry`](/concepts/entry-points/) and [`optimization.splitChunks`](/plugins/split-chunks-plugin) from our config as they won't be needed for this next demonstration:
+Before we start, let's remove the extra [`entry`](/concepts/entry-points/) and [`optimization.splitChunks`](/plugins/split-chunks-plugin) from our configuration as they won't be needed for this next demonstration:
 
 __webpack.config.js__
 

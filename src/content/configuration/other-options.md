@@ -194,7 +194,7 @@ module.exports = {
 
 `string = ''`
 
-Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when config changed in a way which doesn't allow to reuse cache. This will invalidate the cache.
+Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when configuration changed in a way which doesn't allow to reuse cache. This will invalidate the cache.
 
 `cache.version` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 

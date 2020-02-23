@@ -61,14 +61,14 @@ class HelloWorldPlugin {
 module.exports = HelloWorldPlugin;
 ```
 
-Then to use the plugin, include an instance in your webpack config `plugins` array:
+Then to use the plugin, include an instance in your webpack configuration `plugins` array:
 
 ```javascript
 // webpack.config.js
 var HelloWorldPlugin = require('hello-world');
 
 module.exports = {
-  // ... config settings here ...
+  // ... configuration settings here ...
   plugins: [new HelloWorldPlugin({ options: true })]
 };
 ```
