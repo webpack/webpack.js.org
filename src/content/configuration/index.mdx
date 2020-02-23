@@ -14,6 +14,7 @@ contributors:
   - jeremenichelli
   - dasarianudeep
   - lukasgeiter
+  - EugeneHlushko
 ---
 
 Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index` and will output the result in `dist/main.js` minified and optimized for production.
@@ -24,19 +25,17 @@ All the available configuration options are specified below.
 
 T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
 
-
 ## Use different configuration file
 
 If for some reason you want to use different configuration file depending on certain situations you can change this via command line by using the `--config` flag.
 
-**package.json**
+__package.json__
 
 ```json
 "scripts": {
   "build": "webpack --config prod.config.js"
 }
 ```
-
 
 ## Options
 
@@ -439,6 +438,8 @@ module.exports = {
     // TODO
   </advanced>
 ```
+
+W> webpack applies configuration defaults after [plugins defaults](/contribute/writing-a-plugin/#configuration-defaults) are applied.
 
 T> Want to rapidly generate webpack configuration file for your project requirements with few clicks away.
 
