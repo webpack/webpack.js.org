@@ -18,7 +18,7 @@ The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way
 
 ## `DllPlugin`
 
-This plugin is used in a separate webpack config exclusively to create a dll-only-bundle. It creates a `manifest.json` file, which is used by the [`DllReferencePlugin`](#dllreferenceplugin) to map dependencies.
+This plugin is used in a separate webpack configuration exclusively to create a dll-only-bundle. It creates a `manifest.json` file, which is used by the [`DllReferencePlugin`](#dllreferenceplugin) to map dependencies.
 
 - `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
 - `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[hash]` & `[name]` )
