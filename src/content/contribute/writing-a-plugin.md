@@ -7,6 +7,7 @@ contributors:
   - iamakulov
   - byzyk
   - franjohn21
+  - EugeneHlushko
 ---
 
 Plugins expose the full potential of the webpack engine to third-party developers. Using staged build callbacks, developers can introduce their own behaviors into the webpack build process. Building plugins is a bit more advanced than building loaders, because you'll need to understand some of the webpack low-level internals to hook into them. Be prepared to read some source code!
@@ -61,14 +62,14 @@ class HelloWorldPlugin {
 module.exports = HelloWorldPlugin;
 ```
 
-Then to use the plugin, include an instance in your webpack config `plugins` array:
+Then to use the plugin, include an instance in your webpack configuration `plugins` array:
 
 ```javascript
 // webpack.config.js
 var HelloWorldPlugin = require('hello-world');
 
 module.exports = {
-  // ... config settings here ...
+  // ... configuration settings here ...
   plugins: [new HelloWorldPlugin({ options: true })]
 };
 ```
@@ -279,3 +280,7 @@ Various types of hooks supported are :
     - Defined using `AsyncParallelHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
     - Called using `callAsync( ... params)` method
+
+### Configuration defaults
+
+webpack applies configuration defaults after plugins defaults are applied. This allows plugins to feature their own defaults and provides a way to create configuration preset plugins.

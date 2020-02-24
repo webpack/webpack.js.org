@@ -79,24 +79,24 @@ See [node.js process](https://nodejs.org/api/process.html).
 
 ### `__dirname` (NodeJS)
 
-Depending on the config option `node.__dirname`:
+Depending on the configuration option `node.__dirname`:
 
 - `false`: Not defined
-- `mock`: equal "/"
+- `mock`: equal to `'/'`
 - `true`: [node.js __dirname](https://nodejs.org/api/globals.html#globals_dirname)
 
-If used inside an expression that is parsed by the Parser, the config option is treated as `true`.
+If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
 
 
 ### `__filename` (NodeJS)
 
-Depending on the config option `node.__filename`:
+Depending on the configuration option `node.__filename`:
 
 - `false`: Not defined
-- `mock`: equal "/index.js"
+- `mock`: equal to `'/index.js'`
 - `true`: [node.js __filename](https://nodejs.org/api/globals.html#globals_filename)
 
-If used inside an expression that is parsed by the Parser, the config option is treated as `true`.
+If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
 
 
 ### `__resourceQuery` (webpack-specific)
@@ -116,7 +116,7 @@ __resourceQuery === '?test';
 
 ### `__webpack_public_path__` (webpack-specific)
 
-Equals the config option's `output.publicPath`.
+Equals the configuration option's `output.publicPath`.
 
 
 ### `__webpack_require__` (webpack-specific)
@@ -149,4 +149,4 @@ Generates a `require` function that is not parsed by webpack. Can be used to do 
 
 ### `DEBUG`  (webpack-specific)
 
-Equals the config option `debug`.
+Equals the configuration option `debug`.

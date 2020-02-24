@@ -14,6 +14,7 @@ contributors:
   - jeremenichelli
   - dasarianudeep
   - lukasgeiter
+  - EugeneHlushko
 ---
 
 Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index` and will output the result in `dist/main.js` minified and optimized for production.
@@ -24,19 +25,17 @@ All the available configuration options are specified below.
 
 T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
 
+## Use different configuration file
 
-## Use different config file
+If for some reason you want to use different configuration file depending on certain situations you can change this via command line by using the `--config` flag.
 
-If for some reason you want to use different config file depending on certain situations you can change this via command line by using the `--config` flag.
-
-**package.json**
+__package.json__
 
 ```json
 "scripts": {
   "build": "webpack --config prod.config.js"
 }
 ```
-
 
 ## Options
 
@@ -367,12 +366,6 @@ module.exports = {
     externals: ({request}) => { /* ... */ return "commonjs " + request }
   </externals>
   // Don't follow/bundle these modules, but request them at runtime from the environment
-  serve: { //object
-    port: 1337,
-    content: './dist',
-    // ...
-  },
-  // lets you provide options for webpack-serve
   <stats "/configuration/stats">
     <default>
       stats: "errors-only",
@@ -446,6 +439,8 @@ module.exports = {
   </advanced>
 ```
 
+W> webpack applies configuration defaults after [plugins defaults](/contribute/writing-a-plugin/#configuration-defaults) are applied.
+
 T> Want to rapidly generate webpack configuration file for your project requirements with few clicks away.
 
 [Generate Custom Webpack Configuration](https://generatewebpackconfig.netlify.com/) is an interactive portal you can play around by selecting custom webpack configuration options tailored for your frontend project. It automatically generates
@@ -487,4 +482,4 @@ found 0 vulnerabilities
 Congratulations! Your new webpack configuration file has been created!
 ```
 
-[createapp.dev - create a webpack config in your browser](https://createapp.dev/webpack) is an online tool for creating custom webpack configuration. It allows you to select various features that will be combined and added to resulting configuration file. Also, it generates an example project based on provided webpack configuration that you can review in your browser and download.
+[createapp.dev - create a webpack configuration in your browser](https://createapp.dev/webpack) is an online tool for creating custom webpack configuration. It allows you to select various features that will be combined and added to resulting configuration file. Also, it generates an example project based on provided webpack configuration that you can review in your browser and download.
