@@ -82,7 +82,7 @@ See [node.js process](https://nodejs.org/api/process.html).
 Depending on the configuration option `node.__dirname`:
 
 - `false`: Not defined
-- `mock`: equal "/"
+- `mock`: equal to `'/'`
 - `true`: [node.js __dirname](https://nodejs.org/api/globals.html#globals_dirname)
 
 If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
@@ -93,7 +93,7 @@ If used inside an expression that is parsed by the Parser, the configuration opt
 Depending on the configuration option `node.__filename`:
 
 - `false`: Not defined
-- `mock`: equal "/index.js"
+- `mock`: equal to `'/index.js'`
 - `true`: [node.js __filename](https://nodejs.org/api/globals.html#globals_filename)
 
 If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
