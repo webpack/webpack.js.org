@@ -2,6 +2,14 @@
 @import 'functions';
 @import 'prism-theme';
 
+$bannerHeight: 56px;
+$navigationHeight: 56px;
+$navigationSubHeight: 28px;
+$someExtraHeight: 10px;
+
+$topHeightDesktop: $navigationHeight + $navigationSubHeight + $someExtraHeight;
+$topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
+
 .markdown {
   line-height: 1.5em;
 
@@ -38,6 +46,7 @@
     margin: 1.5em 0 0.25em;
     color: getColor(fiord);
     word-break: break-all;
+    scroll-margin-top: $topHeightDesktop;
 
     tt,
     code {
@@ -380,5 +389,11 @@
     tt {
       white-space: pre-line;
     }
+  }
+}
+
+.notification-bar-visible .markdown {
+  h1,h2,h3,h4,h5,h6{
+    scroll-margin-top: $topHeightDesktopWithBanner;
   }
 }
