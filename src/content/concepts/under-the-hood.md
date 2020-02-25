@@ -30,7 +30,7 @@ export default 'the app';
 By using each other, the modules form a graph (`ModuleGraph`). 
 
 Usually, modules don't exist by themselves and combine into chunks.
-Chunks combine into chunk groups and form a graph (`ChunkGraph`) because interconnected through modules.
+Chunks combine into chunk groups and form a graph (`ChunkGraph`) interconnected through modules.
 When you describe an entry point - under the hood, you create a chunk group with one chunk.
 
 __./webpack.config.js__
@@ -42,7 +42,7 @@ module.exports = {
 ```
 
 One chunk group with the `main` name created (`main` is the default name for an entry point).
-This chunk group contains `./index.js` module. As the parser handles imports inside `./index.js` new modules add into this chunk.
+This chunk group contains `./index.js` module. As the parser handles imports inside `./index.js` new modules are added into this chunk.
 
 Another example:
 
@@ -57,10 +57,10 @@ module.exports = {
 };
 ```
 
-Two chunk groups with names `home` and `about` created.
+Two chunk groups with names `home` and `about` are created.
 Each of them has a chunk with a module - `./home.js` for `home` and `./about.js` for `about`
 
-> There are might be more than one chunk in the chunk group. For example [SplitChunkPlugin](/plugins/split-chunks-plugin/) do so - it splits a chunk into one or more chunks.
+> There might be more than one chunk in the chunk group. For example [SplitChunkPlugin](/plugins/split-chunks-plugin/) does so - it splits a chunk into one or more chunks.
 
 ## Chunks
 
@@ -68,10 +68,10 @@ Chunks come in two forms - `initial` and `non-initial`
 
 `initial` is the main chunk for the entry point. This chunk contains all the modules (and its dependencies) that you specify for an entry point.
 
-`non-initlal` is a chunk that may be lazy-loaded. It may appear when [dynamic import](/guides/code-splitting/#dynamic-imports) or [SplitChunkPlugin](/plugins/split-chunks-plugin/) is using.
+`non-initlal` is a chunk that may be lazy-loaded. It may appear when [dynamic import](/guides/code-splitting/#dynamic-imports) or [SplitChunkPlugin](/plugins/split-chunks-plugin/) is being used.
 
 Each chunk has a corresponding __asset__.
-The assets are the output files - the result of the bundling.
+The assets are the output files - the result of bundling.
 
 __webpack.config.js__
 
@@ -90,7 +90,7 @@ import ReactDOM from 'react-dom';
 import('./app.jsx').then(App => ReactDOM.render(<App />, root));
 ```
 
-Initial chunk with name `main` created. It contains:
+Initial chunk with name `main` is created. It contains:
 
 - `./src/index.jsx`
 - `react`
@@ -98,14 +98,14 @@ Initial chunk with name `main` created. It contains:
 
 and all their dependencies, except `./app.jsx`
 
-Non-initial chunk for `./app.jsx` created because this module imported dynamically.
+Non-initial chunk for `./app.jsx` is created as this module is imported dynamically.
 
 __Output:__
 
 - `/dist/main.js` - an initial chunk 
 - `/dist/394.js` - non-initial chunk
 
-By default, there is no name for non-initial chunks so that a unique ID used instead of a name.
+By default, there is no name for non-initial chunks so that a unique ID is used instead of a name.
 In the case of dynamic import we may specify a chunk name explicitly by using a ["magic" comment](/api/module-methods/#magic-comments):
 
 ```js
