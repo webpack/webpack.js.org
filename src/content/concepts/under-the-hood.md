@@ -68,7 +68,7 @@ Chunks come in two forms - `initial` and `non-initial`
 
 `initial` is the main chunk for the entry point. This chunk contains all the modules (and its dependencies) that you specify for an entry point.
 
-`non-initlal` is a chunk that may be lazy-loaded. It may appear when [dynamic import](/guides/code-splitting/#dynamic-imports) or [SplitChunkPlugin](/plugins/split-chunks-plugin/) is being used.
+`non-initial` is a chunk that may be lazy-loaded. It may appear when [dynamic import](/guides/code-splitting/#dynamic-imports) or [SplitChunkPlugin](/plugins/split-chunks-plugin/) is being used.
 
 Each chunk has a corresponding __asset__.
 The assets are the output files - the result of bundling.
