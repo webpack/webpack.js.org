@@ -30,7 +30,7 @@ export default 'the app';
 
 By using each other, the modules form a graph (`ModuleGraph`).
 
-Usually, modules don't exist by themselves and combine into chunks.
+During the bundling process, modules are combined into chunks.
 Chunks combine into chunk groups and form a graph (`ChunkGraph`) interconnected through modules.
 When you describe an entry point - under the hood, you create a chunk group with one chunk.
 
