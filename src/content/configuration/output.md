@@ -322,6 +322,8 @@ Note this option is called filename but you are still allowed to use something l
 
 Note this option does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case you would have to try the specific loader's available options.
 
+## Template strings
+
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
 | Template      | Description                                                                         |
