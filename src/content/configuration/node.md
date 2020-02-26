@@ -49,7 +49,7 @@ Since webpack 3.0.0, the `node` option may be set to `false` to completely turn 
 
 `boolean = true`
 
-See [the source](https://github.com/webpack/webpack/blob/master/buildin/global.js) for the exact behavior of this object.
+See [the source](https://nodejs.org/api/globals.html) for the exact behavior of this object.
 
 
 ## `node.__filename`
