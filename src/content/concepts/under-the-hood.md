@@ -61,7 +61,7 @@ module.exports = {
 Two chunk groups with names `home` and `about` are created.
 Each of them has a chunk with a module - `./home.js` for `home` and `./about.js` for `about`
 
-> There might be more than one chunk in a chunk group. For example [SplitChunskPlugin](/plugins/split-chunks-plugin/) splits a chunk into one or more chunks.
+> There might be more than one chunk in a chunk group. For example [SplitChunksPlugin](/plugins/split-chunks-plugin/) splits a chunk into one or more chunks.
 
 ## Chunks
 
