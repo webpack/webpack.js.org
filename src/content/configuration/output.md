@@ -1062,6 +1062,8 @@ module.exports = {
 
 ## `output.ecmaVersion`
 
+`number = 6`
+
 Tell webpack the maximum EcmaScript version of the webpack generated code. It should be one of these:
 
 - should be >= 5, should be <= 11
