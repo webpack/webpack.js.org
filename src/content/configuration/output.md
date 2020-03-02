@@ -372,6 +372,28 @@ module.exports = {
 };
 ```
 
+## `output.uniqueName`
+
+`string`
+
+A unique name of the webpack build to avoid multiple webpack runtimes to conflict when using globals. It defaults to [`output.library`](/configuration/output/#outputlibrary) name or the package name from `package.json` in the context, if both aren't found, it is set to an `''`.
+
+`output.uniqueName` will be used to generate unique globals for:
+
+- [`output.jsonpFunction`](/configuration/output/#outputjsonpfunction)
+- `output.chunkCallbackName`
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  // ...
+  output: {
+    uniqueName: 'my-package-xyz'
+  }
+};
+```
+
 
 ## `output.hashDigest`
 
