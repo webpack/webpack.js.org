@@ -130,6 +130,25 @@ module.exports = {
 ```
 
 
+## `output.chunkCallbackName`
+
+`string = 'webpackChunkwebpack'`
+
+The callback function name used by webpack for loading of chunks in Web Workers.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkCallbackName: 'myCustomFunc'
+  }
+};
+```
+
+
 ## `output.crossOriginLoading`
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
