@@ -97,8 +97,8 @@ The following table explains other cases:
 | `alias:`                            | `import 'xyz'`                        | `import 'xyz/file.js'`              |
 | ----------------------------------- | ------------------------------------- | ----------------------------------- |
 | `{}`                                | `/abc/node_modules/xyz/index.js`      | `/abc/node_modules/xyz/file.js`     |
-| `{ xyz: '/abs/path/to/file.js' }`   | `/abs/path/to/file.js`                | error                               |
-| `{ xyz$: '/abs/path/to/file.js' }`  | `/abs/path/to/file.js`                | `/abc/node_modules/xyz/file.js`     |
+| `{ xyz: '/abc/path/to/file.js' }`   | `/abc/path/to/file.js`                | error                               |
+| `{ xyz$: '/abc/path/to/file.js' }`  | `/abc/path/to/file.js`                | `/abc/node_modules/xyz/file.js`     |
 | `{ xyz: './dir/file.js' }`          | `/abc/dir/file.js`                    | error                               |
 | `{ xyz$: './dir/file.js' }`         | `/abc/dir/file.js`                    | `/abc/node_modules/xyz/file.js`     |
 | `{ xyz: '/some/dir' }`              | `/some/dir/index.js`                  | `/some/dir/file.js`                 |
