@@ -20,6 +20,7 @@ contributors:
   - smelukov
   - Neob91
   - anikethsaha
+  - jamesgeorge007
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -1118,7 +1119,7 @@ module.exports = {
 };
 ```
 
-T> The dafault value of `output.ecmaVersion` in webpack 4 is `5`.
+T> The default value of `output.ecmaVersion` in webpack 4 is `5`.
 
 ## `output.compareBeforeEmit`
 
