@@ -1072,7 +1072,7 @@ module.exports = {
   }
 };
 ```
-T> Deafult ecmaVersion is 2015(6) for webpack5 and for webpack4 it is 5.
+T> The dafault value of `output.ecmaVersion` in webpack 4 is `5`.
 
 ## `output.compareBeforeEmit`
 
