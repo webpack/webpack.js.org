@@ -1072,6 +1072,7 @@ module.exports = {
   }
 };
 ```
+
 T> The dafault value of `output.ecmaVersion` in webpack 4 is `5`.
 
 ## `output.compareBeforeEmit`
