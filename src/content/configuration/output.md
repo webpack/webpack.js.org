@@ -401,7 +401,7 @@ A unique name of the webpack build to avoid multiple webpack runtimes to conflic
 `output.uniqueName` will be used to generate unique globals for:
 
 - [`output.jsonpFunction`](/configuration/output/#outputjsonpfunction)
-- `output.chunkCallbackName`
+- [`output.chunkCallbackName`](/configuration/output/#outputchunkcallbackname)
 
 __webpack.config.js__
 
