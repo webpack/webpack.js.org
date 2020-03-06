@@ -227,3 +227,7 @@ Sometimes, we want to describe certain properties of objects and functions in li
 W> `:` is not a necessity here, note the property, type and default.
 
 An example can be found on the [`options` section of the EvalSourceMapDevToolPlugin's page](/plugins/eval-source-map-dev-tool-plugin/#options).
+
+### Adding links
+
+We use relative links (/concepts/mode/) to internal link in our internal guide instead of absolute URL (https://webpack.js.org/concepts/mode/).
