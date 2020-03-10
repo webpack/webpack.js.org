@@ -153,7 +153,7 @@ Generates a `require` function that is not parsed by webpack. Can be used to do 
 
 In modules, `__webpack_exports_info__` is available
 
-- `__webpack_exports_info__` always `true`
+- `__webpack_exports_info__` is always `true`
 
 - `__webpack_exports_info__.<exportName>.used` is `false` when the export is known to be unused, `true` otherwise
 
