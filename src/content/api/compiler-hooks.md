@@ -106,6 +106,12 @@ Adds a hook right before running the compiler.
 
 - Callback Parameters: `compiler`
 
+### `additionalPass`
+
+`AsyncSeriesHook`
+
+This hook allows you to do a one more additional pass of the build.
+
 
 ### `run`
 
