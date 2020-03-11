@@ -151,7 +151,7 @@ Generates a `require` function that is not parsed by webpack. Can be used to do 
 
 ### `__webpack_exports_info__` (webpack-specific)
 
-In modules, `__webpack_exports_info__` is available
+In modules, `__webpack_exports_info__` is available to allow exports introspection:
 
 - `__webpack_exports_info__` is always `true`
 
