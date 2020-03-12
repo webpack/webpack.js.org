@@ -728,7 +728,7 @@ compilation.hooks.statsPreset.for('my-preset').tap('MyPlugin', options => {
 
 `SyncHook`
 
-It's called for a options object and should normalize to a format usable by the following hooks. It should also normalize missing options to the default value.
+It's called for an options object and should normalize to a format usable by the following hooks. It should also normalize missing options to the default value.
 
 - Callback Parameters: `options` `context`
 
