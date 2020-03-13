@@ -139,7 +139,7 @@ W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
 
 `webpackPreload`: Tells the browser that the resource might be needed during the current navigation. Check out the guide for more information on [how webpackPreload works](/guides/code-splitting/#prefetchingpreloading-modules).
 
-T> Note that all options can be combined like so `/* webpackMode: ""lazy-once", webpackChunkName: "all-i18n-data" */`. This is wrapped in a JavaScript object and executed using [node VM](https://nodejs.org/dist/latest-v8.x/docs/api/vm.html). You do not need to add curly brackets.
+T> Note that all options can be combined like so `/* webpackMode: "lazy-once", webpackChunkName: "all-i18n-data" */`. This is wrapped in a JavaScript object and executed using [node VM](https://nodejs.org/dist/latest-v8.x/docs/api/vm.html). You do not need to add curly brackets.
 
 `webpackInclude`: A regular expression that will be matched against during import resolution. Only modules that match __will be bundled__.
 
