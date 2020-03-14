@@ -9649,7 +9649,12 @@ react-is@^16.7.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
-react-is@^16.8.1, react-is@^16.8.6:
+react-is@^16.8.1:
+  version "16.13.0"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.0.tgz#0f37c3613c34fe6b37cd7f763a0d6293ab15c527"
+  integrity sha512-GFMtL0vHkiBv9HluwNZTggSn/sCyEt9n02aM0dSAjGGyqyNlAyftYm4phPxdvCigG15JreC5biwxCgTAJZ7yAA==
+
+react-is@^16.8.6:
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
   integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
@@ -12955,9 +12960,9 @@ webpack-sources@^1.4.0, webpack-sources@^1.4.1, webpack-sources@^1.4.3:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-"webpack.vote@https://github.com/webpack-contrib/voting-app.git#v0.3.0":
+"webpack.vote@https://github.com/webpack-contrib/voting-app.git":
   version "0.3.0"
-  resolved "https://github.com/webpack-contrib/voting-app.git#8f14c325eec6179297fe0848d48b4ed5120246b1"
+  resolved "https://github.com/webpack-contrib/voting-app.git#99d04388fe57e2c3303387ab821c04a99b2381e6"
   dependencies:
     react-textarea-autosize "^5.2.1"
     uuid "^3.1.0"
