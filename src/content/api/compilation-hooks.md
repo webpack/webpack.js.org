@@ -105,29 +105,11 @@ Fired when the compilation stops accepting new modules.
 Fired when a compilation begins accepting new modules.
 
 
-### `optimizeDependenciesBasic`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
-
-Parameters: `modules`
-
-
 ### `optimizeDependencies`
 
 `SyncBailHook`
 
 Fired at the beginning of dependency optimization.
-
-- Callback Parameters: `modules`
-
-
-### `optimizeDependenciesAdvanced`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `modules`
 
@@ -148,29 +130,11 @@ Fired after the dependency optimization.
 Triggered at the beginning of the optimization phase.
 
 
-### `optimizeModulesBasic`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
-
-- Callback Parameters: `modules`
-
-
 ### `optimizeModules`
 
 `SyncBailHook`
 
 Called at the beginning of the module optimization phase. A plugin can tap into this hook to perform optimizations on modules.
-
-- Callback Parameters: `modules`
-
-
-### `optimizeModulesAdvanced`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `modules`
 
@@ -184,29 +148,11 @@ Called after modules optimization has completed.
 - Callback Parameters: `modules`
 
 
-### `optimizeChunksBasic`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
-
-- Callback Parameters: `chunks`
-
-
 ### `optimizeChunks`
 
 `SyncBailHook`
 
 Called at the beginning of the chunk optimization phase. A plugin can tap into this hook to perform optimizations on chunks.
-
-- Callback Parameters: `chunks`
-
-
-### `optimizeChunksAdvanced`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `chunks`
 
@@ -238,29 +184,11 @@ Called after the dependency tree optimization has completed with success.
 - Callback Parameters: `chunks` `modules`
 
 
-### `optimizeChunkModulesBasic`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
-
-- Callback Parameters: `chunks` `modules`
-
-
 ### `optimizeChunkModules`
 
 `SyncBailHook`
 
 Called after the tree optimization, at the beginning of the chunk modules optimization. A plugin can tap into this hook to perform optimizations of chunk modules.
-
-- Callback Parameters: `chunks` `modules`
-
-
-### `optimizeChunkModulesAdvanced`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `chunks` `modules`
 
@@ -288,26 +216,6 @@ Called to determine whether or not to store records. Returning anything `!== fal
 Restore module information from records.
 
 - Callback Parameters: `modules` `records`
-
-
-### `optimizeModuleOrder`
-
-`SyncHook`
-
-W> This hook will be removed in v5.0.0
-
-Sort the modules from most to least important.
-
-- Callback Parameters: `modules`
-
-
-### `advancedOptimizeModuleOrder`
-
-`SyncHook`
-
-W> This hook will be removed in v5.0.0
-
-- Callback Parameters: `modules`
 
 
 ### `beforeModuleIds`
@@ -355,44 +263,11 @@ Restore chunk information from records.
 - Callback Parameters: `chunks` `records`
 
 
-### `optimizeChunkOrder`
-
-`SyncHook`
-
-W> This hook will be removed in v5.0.0
-
-Sort the chunks in from most to least important.
-
-- Callback Parameters: `chunks`
-
-
 ### `beforeChunkIds`
 
 `SyncHook`
 
 Executed before assigning an `id` to each chunk.
-
-- Callback Parameters: `chunks`
-
-
-### `chunkIds`
-
-`SyncHook`
-
-T> This hook will be available in v5.0.0
-
-Called to assign an `id` to each chunk.
-
-- Callback Parameters: `modules`
-
-
-### `beforeOptimizeChunkIds`
-
-`SyncHook`
-
-T> This hook will be available in v5.0.0
-
-Fired before chunks `id` optimization.
 
 - Callback Parameters: `chunks`
 
@@ -431,45 +306,6 @@ Store module info to the records. This is triggered if [`shouldRecord`](#shouldr
 Store chunk info to the records. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
 
 - Callback Parameters: `chunks` `records`
-
-
-### `optimizeCodeGeneration`
-
-T> This hook will be available in v5.0.0
-
-A plugin can tap into this hook to optimize the generated code.
-
-- Callback Parameters: `modules`
-
-
-### `beforeModuleHash`
-
-T> This hook will be available in v5.0.0
-
-Called before hashing modules.
-
-
-### `afterModuleHash`
-
-T> This hook will be available in v5.0.0
-
-Called after hashing modules.
-
-
-### `beforeRuntimeRequirements`
-
-T> This hook will be available in v5.0.0
-
-Called before processing the modules required at runtime.
-
-- Callback Parameters: `entrypoints`
-
-
-### `afterRuntimeRequirements`
-
-T> This hook will be available in v5.0.0
-
-Called after processing the runtime requirements.
 
 
 ### `beforeHash`
@@ -697,13 +533,3 @@ Executed after setting up a child compiler.
 ### `normalModuleLoader`
 
 Since webpack v5 `normalModuleLoader` hook was removed. Now to access the loader use `NormalModule.getCompilationHooks(compilation).loader` instead.
-
-### `dependencyReference`
-
-`SyncWaterfallHook`
-
-This hook allows changing the references reported by dependencies.
-
-- Callback Parameters: `depRef` `dependency` `module`
-
-W> The `module` parameter will be removed in v5.0.0
