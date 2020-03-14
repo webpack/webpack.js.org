@@ -14,8 +14,8 @@ module.exports = env => merge(common(env), {
   mode: 'production',
   target: 'web',
   optimization: {
+    minimize: true,
     minimizer: [
-      new TerserJSPlugin({}),
       new OptimizeCSSAssetsPlugin({})
     ]
   },
