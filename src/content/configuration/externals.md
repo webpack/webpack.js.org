@@ -11,6 +11,7 @@ contributors:
   - Mistyyyy
   - jamesgeorge007
   - tanhauhau
+  - snitin315
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
@@ -18,7 +19,7 @@ The `externals` configuration option provides a way of excluding dependencies fr
 
 ## `externals`
 
-`string` `object` `function`  `RegExp`
+`string` `array` `object` `function`  `RegExp`
 
 __Prevent bundling__ of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
 
