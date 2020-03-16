@@ -775,7 +775,7 @@ module.exports = {
 
 `boolean = false`
 
-Tells dev-server to supress messages like the webpack bundle information. Errors and warnings will still be shown.
+Tells dev-server to suppress messages like the webpack bundle information. Errors and warnings will still be shown.
 
 __webpack.config.js__
 
