@@ -18,6 +18,7 @@ contributors:
   - wizardofhogwarts
   - jamesgeorge007
   - g100g
+  - anikethsaha
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -582,11 +583,10 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    https: {
-      key: fs.readFileSync('/path/to/server.key'),
-      cert: fs.readFileSync('/path/to/server.crt'),
-      ca: fs.readFileSync('/path/to/ca.pem'),
-    }
+    https: true,
+    key: fs.readFileSync('/path/to/server.key'),
+    cert: fs.readFileSync('/path/to/server.crt'),
+    ca: fs.readFileSync('/path/to/ca.pem'),
   }
 };
 ```
