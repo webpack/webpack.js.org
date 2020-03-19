@@ -8,6 +8,7 @@ contributors:
   - JGJP
   - EugeneHlushko
   - AnayaDesign
+  - snitin315
 ---
 
 T> This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
@@ -71,7 +72,7 @@ Let's also update our `dist/index.html` file, in preparation for webpack to spli
 __dist/index.html__
 
 ``` diff
-  <!doctype html>
+  <!DOCTYPE html>
   <html>
     <head>
 -     <title>Asset Management</title>

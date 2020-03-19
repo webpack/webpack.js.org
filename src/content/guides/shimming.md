@@ -14,6 +14,7 @@ contributors:
   - plr108
   - NicolasLetellier
   - wizardofhogwarts
+  - snitin315
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
@@ -377,7 +378,7 @@ With that in place, we can add the logic to conditionally load our new `polyfill
 __dist/index.html__
 
 ``` diff
-  <!doctype html>
+  <!DOCTYPE html>
   <html>
     <head>
       <title>Getting Started</title>

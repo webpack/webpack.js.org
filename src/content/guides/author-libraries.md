@@ -12,6 +12,7 @@ contributors:
   - AnayaDesign
   - chenxsan
   - wizardofhogwarts
+  - snitin315
 ---
 
 Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
@@ -120,7 +121,7 @@ require(['webpackNumbers'], function (webpackNumbers) {
 The consumer also can use the library by loading it via a script tag:
 
 ``` html
-<!doctype html>
+<!DOCTYPE html>
 <html>
   ...
   <script src="https://unpkg.com/webpack-numbers"></script>

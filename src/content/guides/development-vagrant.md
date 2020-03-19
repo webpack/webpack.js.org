@@ -6,6 +6,7 @@ contributors:
   - chrisVillanueva
   - byzyk
   - wizardofhogwarts
+  - snitin315
 ---
 
 If you have a more advanced project and use [Vagrant](https://www.vagrantup.com/) to run your development environment in a Virtual Machine, you'll often want to also run webpack in the VM.
@@ -38,7 +39,7 @@ module.exports = {
 And create an `index.html` file. The script tag should point to your bundle. If `output.filename` is not specified in the config, this will be `bundle.js`.
 
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <script src="/bundle.js" charset="utf-8"></script>

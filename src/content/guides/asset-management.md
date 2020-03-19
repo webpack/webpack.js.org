@@ -10,6 +10,7 @@ contributors:
   - EugeneHlushko
   - AnayaDesign
   - wizardofhogwarts
+  - snitin315
 ---
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
@@ -25,7 +26,7 @@ Let's make a minor change to our project before we get started:
 __dist/index.html__
 
 ``` diff
-  <!doctype html>
+  <!DOCTYPE html>
   <html>
     <head>
 -    <title>Getting Started</title>
