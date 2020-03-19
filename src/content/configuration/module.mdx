@@ -194,7 +194,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.css$/,
         oneOf: [
           {
             resourceQuery: /inline/, // foo.css?inline
@@ -382,11 +381,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.png/,
         type: 'asset/resource'
       },
       {
-        test: /\.html/,
         type: 'asset/resource',
         generator: {
           filename: 'static/[hash][ext]'
@@ -414,7 +411,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.css$/,
         resourceQuery: /inline/,
         use: 'url-loader'
       }
@@ -439,7 +435,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.toml/,
         type: 'json',
         parser: {
           parse: toml.parse
@@ -486,7 +481,6 @@ module.exports = {
     rules: [
       //...
       {
-        test: /\\.json$/,
         type: 'javascript/auto',
         loader: 'custom-json-loader'
       }
@@ -659,12 +653,6 @@ Conditions can be one of these:
 - An array of Conditions: At least one of the Conditions must match.
 - An object: All properties must match. Each property has a defined behavior.
 
-`{ test: Condition }`: The Condition must match. The convention is to provide a RegExp or array of RegExps here, but it's not enforced.
-
-`{ include: Condition }`: The Condition must match. The convention is to provide a string or array of strings here, but it's not enforced.
-
-`{ exclude: Condition }`: The Condition must NOT match. The convention is to provide a string or array of strings here, but it's not enforced.
-
 `{ and: [Condition] }`: All Conditions must match.
 
 `{ or: [Condition] }`: Any Condition must match.
@@ -679,11 +667,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.css$/,
-        include: [
-          path.resolve(__dirname, 'app/styles'),
-          path.resolve(__dirname, 'vendor/styles')
-        ]
+        {not: : /\\.css$/}
       }
     ]
   }
