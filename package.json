@@ -28,7 +28,7 @@
     "clean-printable": "rimraf src/content/**/printable.md",
     "preclean": "run-s clean-dist clean-printable",
     "clean": "rimraf src/content/**/_*.md src/**/_*.json",
-    "start": "npm run clean-dist && cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js --env.dev",
+    "start": "yarn clean-dist && cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js --env.dev",
     "update-repos": "node src/utilities/fetch-package-repos.js",
     "content": "node src/scripts/build-content-tree.js ./src/content ./src/_content.json",
     "bundle-analyze": "run-s clean fetch printable content && cross-env NODE_ENV=production webpack --config webpack.ssg.js && run-s clean-printable content && cross-env NODE_ENV=production webpack --config webpack.prod.js  --profile --json > stats.json && webpack-bundle-analyzer stats.json",
@@ -36,11 +36,11 @@
     "fetch:readmes": "node src/utilities/fetch-package-readmes.js",
     "fetch:supporters": "node src/utilities/fetch-supporters.js",
     "fetch:starter-kits": "node src/utilities/fetch-starter-kits.js",
-    "prebuild": "npm run clean",
+    "prebuild": "yarn clean",
     "build": "run-s fetch printable content && cross-env NODE_ENV=production webpack --config webpack.ssg.js && run-s clean-printable content && cross-env NODE_ENV=production webpack --config webpack.prod.js",
-    "postbuild": "bundlesize && npm run sitemap",
-    "build-test": "npm run build && http-server dist/",
-    "test": "npm run lint",
+    "postbuild": "bundlesize && yarn sitemap",
+    "build-test": "yarn build && http-server dist/",
+    "test": "yarn lint",
     "lint": "run-s lint:*",
     "lint:js": "eslint src --ext .js,.jsx,.md --cache true --cache-location .cache/.eslintcache",
     "lint:markdown": "markdownlint --rules markdownlint-rule-emphasis-style --config ./.markdownlint.json *.md ./src/content/**/*.md --ignore './src/content/**/_*.md'",
@@ -48,9 +48,9 @@
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
     "lint:links": "hyperlink -c 8 -r dist/index.html --canonicalroot https://webpack.js.org/ -i --skip https://img.shields.io --skip **/printable** --skip https://david-dm.org --skip https://codecov.io/gh --skip 'content-type-mismatch https://travis-ci.org' > internal-links.tap; cat internal-links.tap | tap-spot",
     "sitemap": "cd dist && sitemap-static --ignore-file=../sitemap-ignore.json --pretty --prefix=https://webpack.js.org/ > sitemap.xml",
-    "serve": "npm run build && sirv start ./dist --port 4000",
+    "serve": "yarn build && sirv start ./dist --port 4000",
     "deploy": "gh-pages -d dist",
-    "preprintable": "npm run clean-printable",
+    "preprintable": "yarn clean-printable",
     "printable": "node ./src/scripts/concatenate-docs.js"
   },
   "husky": {
@@ -60,10 +60,10 @@
   },
   "lint-staged": {
     "*.{js,jsx,md}": [
-      "npm run lint:js"
+      "yarn lint:js"
     ],
     "*.md": [
-      "npm run lint:markdown"
+      "yarn lint:markdown"
     ]
   },
   "bundlesize": [
