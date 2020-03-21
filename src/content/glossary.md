@@ -76,6 +76,11 @@ This index lists common terms used throughout the webpack ecosystem.
 - [__Request__](/guides/dependency-management/): Refers to the expression in the require/import statement, e.g. _require("./template/" + name + ".ejs")_, the request is _"./template/" + name + ".ejs"_.
 
 
+## S
+
+- [__Scaffolding__](/guides/scaffolding/): This feature allows creating a webpack configuration by using customizable third-party initialization packages.
+
+
 ## T
 
 - [__Target__](/configuration/target/): User configured deployment target(s) [listed here](/configuration/target/) to compile for a specific environment like the browser, NodeJS, or Electron.

@@ -10,6 +10,8 @@ contributors:
   - byzyk
   - EugeneHlushko
   - wizardofhogwarts
+  - anikethsaha
+
 related:
   - title: CommonJS
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -146,6 +148,30 @@ This variable is only available with the `HotModuleReplacementPlugin` or the `Ex
 
 Generates a `require` function that is not parsed by webpack. Can be used to do cool stuff with a global require function if available.
 
+
+### `__webpack_exports_info__` (webpack-specific)
+
+In modules, `__webpack_exports_info__` is available to allow exports introspection:
+
+- `__webpack_exports_info__` is always `true`
+
+- `__webpack_exports_info__.<exportName>.used` is `false` when the export is known to be unused, `true` otherwise
+
+- `__webpack_exports_info__.<exportName>.useInfo` is
+
+    - `false` when the export is known to be unused
+    - `true` when the export is known to be used
+    - `null` when the export usage could depend on runtime conditions
+    - `undefined` when no info is available
+
+- `__webpack_exports_info__.<exportName>.provideInfo` is
+
+    - `false` when the export is known to be not provided
+    - `true` when the export is known to be provided
+    - `null` when the export provision could depend on runtime conditions
+    - `undefined` when no info is available
+
+- Accessing the info from nested exports is possible: i. e. `__webpack_exports_info__.<exportName>.<exportName>.<exportName>.used`
 
 ### `DEBUG`  (webpack-specific)
 

@@ -149,6 +149,13 @@ Runs a plugin after a `ContextModuleFactory` is created.
 - Callback Parameters: `contextModuleFactory`
 
 
+### `initialize`
+
+`SyncHook`
+
+Called when a compiler object is initialized.
+
+
 ### `beforeCompile`
 
 `AsyncSeriesHook`

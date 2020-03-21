@@ -13,6 +13,7 @@ contributors:
   - wizardofhogwarts
   - EslamHiko
   - smelukov
+  - anikethsaha
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -153,7 +154,7 @@ T> See the [environment variables](/guides/environment-variables/) guide for mor
 
 Parameter                 | Explanation                                 | Input type | Default
 ------------------------- | ------------------------------------------- | ---------- | ------------------
-`--config`                | Path to the configuration file                                       | string | webpack.config.js or webpackfile.js
+`--config`                | Path to the configuration file                                       | string | `webpack.config.js` or `webpackfile.js`
 `--config-register, -r`   | Preload one or more modules before loading the webpack configuration | array  |
 `--config-name`           | Name of the configuration to use                                     | string |
 `--env`                   | Environment passed to the configuration, when it is a function       |        |
@@ -166,14 +167,14 @@ This set of options allows you to manipulate certain [output](/configuration/out
 Parameter                 | Explanation                                 | Input type | Default
 ------------------------- | ------------------------------------------- | ---------- | ------------------
 `--output-chunk-filename` | The output filename for additional chunks   | string     | filename with [id] instead of [name] or [id] prefixed
-`--output-filename`       | The output filename of the bundle           | string     | [name].js
-`--output-jsonp-function` | The name of the JSONP function used for chunk loading | string | webpackJsonp
+`--output-filename`       | The output filename of the bundle           | string     | `[name].js`
+`--output-jsonp-function` | The name of the JSONP function used for chunk loading | string | `webpackJsonp`
 `--output-library`        | Expose the exports of the entry point as library | string |
-`--output-library-target` | The type for exposing the exports of the entry point as library | string | var
+`--output-library-target` | The type for exposing the exports of the entry point as library | string | `var`
 `--output-path`           | The output path for compilation assets      | string     | Current directory
-`--output-pathinfo`       | Include a comment with the request for every dependency | boolean | false
-`--output-public-path`    | The public path for the assets              | string     | /
-`--output-source-map-filename` | The output filename for the SourceMap  | string     | [name].map or [outputFilename].map
+`--output-pathinfo`       | Include a comment with the request for every dependency | boolean | `false`
+`--output-public-path`    | The public path for the assets              | string     | `/`
+`--output-source-map-filename` | The output filename for the SourceMap  | string     | `[name].map` or `[outputFilename].map`
 `--build-delimiter` | Display custom text after build output | string | Default string is null. You could provide a string such as `=== Build done ===`
 
 
@@ -212,10 +213,10 @@ This set of options allows you to better debug the application containing assets
 
 Parameter    | Explanation                                      | Input type | Default value
 ------------ | ------------------------------------------------ | ---------- | -------------
-`--debug`    | Switch loaders to debug mode                     | boolean    | false
-`--devtool`  | Define [source map type](/configuration/devtool/) for the bundled resources | string | -
-`--progress` | Print compilation progress in percentage         | boolean    | false
-`--display-error-details` | Display details about errors | boolean | false
+`--debug`    | Switch loaders to debug mode                     | boolean    | `false`
+`--devtool`  | Define [source map type](/configuration/devtool/) for the bundled resources | string | `-`
+`--progress` | Print compilation progress in percentage         | boolean    | `false`
+`--display-error-details` | Display details about errors | boolean | `false`
 
 ### Module Options
 
@@ -268,28 +269,28 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 
 Parameter                        | Explanation                                                        | Type
 -------------------------------- | ------------------------------------------------------------------ | -------
-`--color`, `--colors`            | Force colors on the console [default: enabled for TTY output only] | boolean
-`--no-color`, `--no-colors`      | Force no colors on the console                                     | boolean
-`--display`                      | Select [display preset](/configuration/stats) (verbose, detailed, normal, minimal, errors-only, none; since webpack 3.0.0) | string
-`--display-cached`               | Display also cached modules in the output                          | boolean
-`--display-cached-assets`        | Display also cached assets in the output                           | boolean
-`--display-chunks`               | Display chunks in the output                                       | boolean
-`--display-depth`                | Display distance from entry point for each module                  | boolean
-`--display-entrypoints`          | Display entry points in the output                                 | boolean
-`--display-error-details`        | Display details about errors                                       | boolean
-`--display-exclude`              | Exclude modules in the output                                      | boolean
-`--display-max-modules`          | Set the maximum number of visible modules in output                | number
-`--display-modules`              | Display even excluded modules in the output                        | boolean
-`--display-optimization-bailout` | Scope hoisting fallback trigger (since webpack 3.0.0)              | boolean
-`--display-origins`              | Display origins of chunks in the output                            | boolean
-`--display-provided-exports`     | Display information about exports provided from modules            | boolean
-`--display-reasons`              | Display reasons about module inclusion in the output               | boolean
-`--display-used-exports`         | Display information about used exports in modules (Tree Shaking)   | boolean
-`--hide-modules`                 | Hide info about modules                                            | boolean
-`--sort-assets-by`               | Sort the assets list by property in asset                          | string
-`--sort-chunks-by`               | Sort the chunks list by property in chunk                          | string
-`--sort-modules-by`              | Sort the modules list by property in module                        | string
-`--verbose`                      | Show more details                                                  | boolean
+`--color`, `--colors`            | Force colors on the console [default: enabled for TTY output only] | `boolean`
+`--no-color`, `--no-colors`      | Force no colors on the console                                     | `boolean`
+`--display`                      | Select [display preset](/configuration/stats) (verbose, detailed, normal, minimal, errors-only, none; since webpack 3.0.0) | `string`
+`--display-cached`               | Display also cached modules in the output                          | `boolean`
+`--display-cached-assets`        | Display also cached assets in the output                           | `boolean`
+`--display-chunks`               | Display chunks in the output                                       | `boolean`
+`--display-depth`                | Display distance from entry point for each module                  | `boolean`
+`--display-entrypoints`          | Display entry points in the output                                 | `boolean`
+`--display-error-details`        | Display details about errors                                       | `boolean`
+`--display-exclude`              | Exclude modules in the output                                      | `boolean`
+`--display-max-modules`          | Set the maximum number of visible modules in output                | `number`
+`--display-modules`              | Display even excluded modules in the output                        | `boolean`
+`--display-optimization-bailout` | Scope hoisting fallback trigger (since webpack 3.0.0)              | `boolean`
+`--display-origins`              | Display origins of chunks in the output                            | `boolean`
+`--display-provided-exports`     | Display information about exports provided from modules            | `boolean`
+`--display-reasons`              | Display reasons about module inclusion in the output               | `boolean`
+`--display-used-exports`         | Display information about used exports in modules (Tree Shaking)   | `boolean`
+`--hide-modules`                 | Hide info about modules                                            | `boolean`
+`--sort-assets-by`               | Sort the assets list by property in asset                          | `string`
+`--sort-chunks-by`               | Sort the chunks list by property in chunk                          | `string`
+`--sort-modules-by`              | Sort the modules list by property in module                        | `string`
+`--verbose`                      | Show more details                                                  | `boolean`
 
 
 ### Advanced Options
