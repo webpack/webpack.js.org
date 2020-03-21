@@ -4,7 +4,9 @@ const starters = require('javascriptstuff-db/react-starter-projects');
 
 const file = './src/components/StarterKits/_starter-kits.json';
 
-const webpackStarters = starters.projects.filter(p => p.tags.some(t => t.includes('webpack')));
+const webpackStarters = starters.projects.filter(p =>
+  p.tags.some(t => t.includes('webpack'))
+);
 
 const data = webpackStarters.map(ws => ({
   ...ws,

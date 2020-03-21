@@ -6,41 +6,49 @@ import './Contributors.scss';
 export default class Contributors extends React.Component {
   state = {
     inView: false
-  }
+  };
 
-  handleInView = (inView) => {
+  handleInView = inView => {
     if (!inView) {
       return;
     }
     this.setState({ inView });
-  }
+  };
 
   render() {
     const { inView } = this.state;
     const { contributors } = this.props;
-    
+
     if (!contributors.length) {
       return <noscript />;
     }
-  
+
     return (
-      <VisibilitySensor delayedCall
+      <VisibilitySensor
+        delayedCall
         partialVisibility
-        intervalDelay={ 300 }
-        onChange={ this.handleInView }>
+        intervalDelay={300}
+        onChange={this.handleInView}
+      >
         <div className="contributors">
           <div className="contributors__list">
-            {
-              contributors.map(contributor => (
-                <a key={ contributor }
-                  className="contributor"
-                  href={ `https://github.com/${contributor}` }>
-                  <img alt={ contributor }
-                    src={ inView ? `https://github.com/${contributor}.png?size=90` : SmallIcon } />
-                  <span className="contributor__name"> {contributor}</span>
-                </a>
-              ))
-            }
+            {contributors.map(contributor => (
+              <a
+                key={contributor}
+                className="contributor"
+                href={`https://github.com/${contributor}`}
+              >
+                <img
+                  alt={contributor}
+                  src={
+                    inView
+                      ? `https://github.com/${contributor}.png?size=90`
+                      : SmallIcon
+                  }
+                />
+                <span className="contributor__name"> {contributor}</span>
+              </a>
+            ))}
           </div>
         </div>
       </VisibilitySensor>

@@ -1,7 +1,7 @@
-const flattenContentTree = (tree) => {
+const flattenContentTree = tree => {
   let paths = [];
 
-  const crawl = (node) => {
+  const crawl = node => {
     if ('url' in node) {
       paths.push(node.url);
     }

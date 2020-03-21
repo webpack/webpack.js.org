@@ -4,7 +4,7 @@ import React from 'react';
 import './Placeholder.scss';
 
 // Placeholder string
-const PlaceholderString = () => (`
+const PlaceholderString = () => `
   <div class="placeholder">
     <p class="placeholder__medium">&nbsp;</p>
     <p class="placeholder__large">&nbsp;</p>
@@ -22,7 +22,7 @@ const PlaceholderString = () => (`
     <p class="placeholder__small">&nbsp;</p>
     <p class="placeholder__medium">&nbsp;</p>
   </div>
-`);
+`;
 
 function PlaceholderComponent() {
   return (
@@ -34,7 +34,4 @@ function PlaceholderComponent() {
   );
 }
 
-export {
-  PlaceholderString,
-  PlaceholderComponent
-};
+export { PlaceholderString, PlaceholderComponent };

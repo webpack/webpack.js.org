@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended","plugin:prettier/recommended"],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -19,7 +19,8 @@
     "no-unused-vars": 0,
     "no-console": 0,
     "semi": ["error", "always"],
-    "quotes": ["error", "single"]
+    "quotes": ["error", "single"],
+    "prettier/prettier": "error"
   },
   "overrides": [
     {

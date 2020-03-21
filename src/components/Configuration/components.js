@@ -87,7 +87,7 @@ export class Details extends React.Component {
         content={<Card body={content} />}
       >
         <span
-          className='code-details-summary-span'
+          className="code-details-summary-span"
           onClick={this.toggleVisibility}
         >
           {summary}

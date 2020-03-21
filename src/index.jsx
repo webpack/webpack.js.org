@@ -17,15 +17,15 @@ const render = isProduction ? ReactDOM.hydrate : ReactDOM.render;
 
 // Client Side Rendering
 if (isClient) {
-  render((
+  render(
     <Router id="UA-46921629-2">
       <Route
         path="/"
-        render={ props => (
-          <Site
-            { ...props }
-            import={ path => import(`./content/${path}`) } />
-        )} />
-    </Router>
-  ), document.getElementById('root'));
+        render={props => (
+          <Site {...props} import={path => import(`./content/${path}`)} />
+        )}
+      />
+    </Router>,
+    document.getElementById('root')
+  );
 }

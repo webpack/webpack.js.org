@@ -5,7 +5,7 @@ import React from 'react';
 import PageLinks from '../PageLinks/PageLinks';
 import Markdown from '../Markdown/Markdown';
 import Contributors from '../Contributors/Contributors';
-import {PlaceholderString} from '../Placeholder/Placeholder';
+import { PlaceholderString } from '../Placeholder/Placeholder';
 import Configuration from '../Configuration/Configuration';
 
 // Load Styling
@@ -19,7 +19,9 @@ class Page extends React.Component {
     const isDynamicContent = content instanceof Promise;
 
     this.state = {
-      content: isDynamicContent ? PlaceholderString() : content.default || content,
+      content: isDynamicContent
+        ? PlaceholderString()
+        : content.default || content,
       contentLoaded: isDynamicContent ? false : true
     };
   }
@@ -30,12 +32,15 @@ class Page extends React.Component {
     if (content instanceof Promise) {
       content
         .then(module =>
-          this.setState({
-            content: module.default || module,
-            contentLoaded: true
-          }, () => {
-            document.documentElement.scrollTop = 0;
-          })
+          this.setState(
+            {
+              content: module.default || module,
+              contentLoaded: true
+            },
+            () => {
+              document.documentElement.scrollTop = 0;
+            }
+          )
         )
         .catch(error =>
           this.setState({

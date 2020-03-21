@@ -12,22 +12,18 @@ import './Sidebar.scss';
 const docs = [
   {
     version: 5,
-    url: 'https://webpack.js.org',
+    url: 'https://webpack.js.org'
   },
   {
     version: 4,
-    url: 'https://v4.webpack.js.org',
+    url: 'https://v4.webpack.js.org'
   }
 ];
 
 const currentDocsVersion = 5;
 
 // Create and export the component
-export default ({
-  className = '',
-  pages,
-  currentPage
-}) => {
+export default ({ className = '', pages, currentPage }) => {
   let group;
 
   return (
@@ -46,7 +42,9 @@ export default ({
 
           return (
             <div key={page.url}>
-              {displayGroup ? <h4 className="sidebar__group">{group}</h4> : null}
+              {displayGroup ? (
+                <h4 className="sidebar__group">{group}</h4>
+              ) : null}
 
               <SidebarItem
                 index={index}
@@ -59,11 +57,18 @@ export default ({
           );
         })}
         <div className="sidebar__docs-version">
-          You are reading webpack {currentDocsVersion} documentation. Change here to:
+          You are reading webpack {currentDocsVersion} documentation. Change
+          here to:
           <ul>
-            {docs.filter(item => item.version !== currentDocsVersion).map(({version, url}) => <li key={`webpack-${version}-docs`}>
-              <a rel="nofollow" href={url}>webpack {version} documentation</a>
-            </li>)}
+            {docs
+              .filter(item => item.version !== currentDocsVersion)
+              .map(({ version, url }) => (
+                <li key={`webpack-${version}-docs`}>
+                  <a rel="nofollow" href={url}>
+                    webpack {version} documentation
+                  </a>
+                </li>
+              ))}
           </ul>
         </div>
       </div>

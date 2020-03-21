@@ -14,7 +14,7 @@ const PRINTABLE_SECTIONS = [
   'plugins'
 ];
 
-export default function Print (props) {
+export default function Print(props) {
   const { url } = props;
   const printUrl = _printPageUrlFromUrl(url);
 
@@ -26,12 +26,14 @@ export default function Print (props) {
   return (
     <div className="sidebar-item sidebar-item--disabled`">
       <i className="sidebar-item__toggle icon-vertical-bar" />
-      <a className="sidebar-item__title sidebar-link__print"
+      <a
+        className="sidebar-item__title sidebar-link__print"
         href={printUrl}
         rel="nofollow"
         alt="Print"
         title="Print"
-        target="_blank">
+        target="_blank"
+      >
         Print Section
         <img src={icon} />
       </a>
@@ -41,5 +43,7 @@ export default function Print (props) {
 
 function _printPageUrlFromUrl(urlRaw) {
   let urlSplit = urlRaw.split('/');
-  return PRINTABLE_SECTIONS.includes(urlSplit[1]) ? `/${urlSplit[1]}/printable/` : false;
+  return PRINTABLE_SECTIONS.includes(urlSplit[1])
+    ? `/${urlSplit[1]}/printable/`
+    : false;
 }

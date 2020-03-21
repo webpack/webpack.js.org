@@ -5,7 +5,7 @@ import 'webpack.vote/dist/style.min.css';
 export default class Vote extends React.Component {
   state = {
     VoteApp: null
-  }
+  };
   componentDidMount() {
     if (window && !window.__ssgrun) {
       import('webpack.vote').then(VoteApp => {
@@ -17,7 +17,7 @@ export default class Vote extends React.Component {
     const { VoteApp } = this.state;
     return (
       <Container className="vote markdown">
-        { VoteApp ? <VoteApp development={ false } /> : null }
+        {VoteApp ? <VoteApp development={false} /> : null}
       </Container>
     );
   }

@@ -7,7 +7,7 @@
 export const walkContent = (tree, callback) => {
   callback(tree);
 
-  if ( tree.children ) {
+  if (tree.children) {
     tree.children.forEach(child => {
       walkContent(child, callback);
     });
@@ -21,13 +21,12 @@ export const walkContent = (tree, callback) => {
  * @return {array}       - A flattened list of leaf node descendants
  */
 export const flattenContent = tree => {
-  if ( tree.children ) {
+  if (tree.children) {
     return tree.children.reduce((flat, item) => {
       return flat.concat(
         Array.isArray(item.children) ? flattenContent(item) : item
       );
     }, []);
-
   } else return [];
 };
 
@@ -61,7 +60,9 @@ export const extractSections = tree => {
  * @return {array}       - All markdown descendants of the given `tree`
  */
 export const extractPages = tree => {
-  return flattenContent(tree).filter(item => item.extension === '.md' || item.extension === '.mdx');
+  return flattenContent(tree).filter(
+    item => item.extension === '.md' || item.extension === '.mdx'
+  );
 };
 
 /**
@@ -83,7 +84,7 @@ export const getPageTitle = (tree, path) => {
     title = page.title;
   } else if (path.includes('/printable')) {
     title = 'Combined printable page | webpack';
-  } else title =`${page.title} | webpack`;
+  } else title = `${page.title} | webpack`;
 
   return title;
 };

@@ -22,8 +22,8 @@ export default class Navigation extends React.Component {
     return (
       <Banner
         blockName="navigation"
-        logo={ <Logo light={ true } /> }
-        url={ pathname }
+        logo={<Logo light={true} />}
+        url={pathname}
         items={[
           ...links,
           {
@@ -51,13 +51,19 @@ export default class Navigation extends React.Component {
                 className="navigation__languages"
                 items={[
                   { title: 'English', url: 'https://webpack.js.org/' },
-                  { lang: 'zh', title: '中文', url: 'https://webpack.docschina.org/' }
-                ]} />
+                  {
+                    lang: 'zh',
+                    title: '中文',
+                    url: 'https://webpack.docschina.org/'
+                  }
+                ]}
+              />
             )
           }
         ]}
-        link={ Link }
-        onMenuClick={ toggleSidebar } />
+        link={Link}
+        onMenuClick={toggleSidebar}
+      />
     );
   }
 

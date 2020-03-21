@@ -9,15 +9,15 @@ const mdPlugins = [
       mapping: {
         'T>': 'tip',
         'W>': 'warning',
-        '?>': 'todo'
-      }
-    }
+        '?>': 'todo',
+      },
+    },
   ],
   [
     require('remark-autolink-headings'),
     {
-      behaviour: 'append'
-    }
+      behaviour: 'append',
+    },
   ],
   [
     require('remark-responsive-tables'),
@@ -27,11 +27,11 @@ const mdPlugins = [
         description: 'description',
         content: 'content',
         mobile: 'mobile',
-        desktop: 'desktop'
-      }
-    }
+        desktop: 'desktop',
+      },
+    },
   ],
-  require('remark-refractor')
+  require('remark-refractor'),
 ];
 
 module.exports = (env = {}) => ({
@@ -41,12 +41,12 @@ module.exports = (env = {}) => ({
     vendor: [
       'react', // Replace with preact or inferno
       'react-dom', // Replace with preact or inferno
-      'react-router-dom'
-    ]
+      'react-router-dom',
+    ],
   },
   resolve: {
     symlinks: false,
-    extensions: ['.js', '.jsx', '.scss']
+    extensions: ['.js', '.jsx', '.scss'],
   },
   module: {
     rules: [
@@ -57,19 +57,19 @@ module.exports = (env = {}) => ({
           {
             loader: '@mdx-js/loader',
             options: {
-              mdPlugins
-            }
-          }
-        ]
+              mdPlugins,
+            },
+          },
+        ],
       },
       {
         test: /\.md$/,
         use: {
           loader: 'remark-loader',
           options: {
-            plugins: mdPlugins
-          }
-        }
+            plugins: mdPlugins,
+          },
+        },
       },
       {
         test: /\.font.js$/,
@@ -78,9 +78,9 @@ module.exports = (env = {}) => ({
           'css-loader',
           {
             loader: 'fontgen-loader',
-            options: { embed: true }
-          }
-        ]
+            options: { embed: true },
+          },
+        ],
       },
       {
         test: /\.jsx?$/,
@@ -89,16 +89,13 @@ module.exports = (env = {}) => ({
           'babel-loader',
           {
             loader: 'eslint-loader',
-            options: { fix: true }
-          }
-        ]
+            options: { fix: true },
+          },
+        ],
       },
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader'
-        ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.scss$/,
@@ -108,46 +105,44 @@ module.exports = (env = {}) => ({
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [
-                require('autoprefixer')
-              ],
-            }
+              plugins: () => [require('autoprefixer')],
+            },
           },
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [ path.join('./src/styles/partials') ]
-            }
-          }
-        ]
+              includePaths: [path.join('./src/styles/partials')],
+            },
+          },
+        ],
       },
       {
         test: /\.woff2?$/,
         use: {
           loader: 'file-loader',
           options: {
-            prefix: 'font/'
-          }
-        }
+            prefix: 'font/',
+          },
+        },
       },
       {
         test: /\.(jpg|png|svg|ico)$/,
-        use: 'file-loader'
-      }
-    ]
+        use: 'file-loader',
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[chunkhash].css'
-    })
+      filename: '[chunkhash].css',
+    }),
   ],
   stats: {
-    children: false
+    children: false,
   },
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
     filename: '[name].bundle.js',
-    chunkFilename: '[name].[chunkhash].chunk.js'
-  }
+    chunkFilename: '[name].[chunkhash].chunk.js',
+  },
 });

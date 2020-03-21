@@ -213,7 +213,7 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
     border-right: 1px solid #cccccc;
 
     &:last-child {
-      border-right:none;
+      border-right: none;
     }
   }
 
@@ -245,7 +245,7 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
     border-right: 1px solid #cccccc;
 
     &:last-child {
-      border-right:none;
+      border-right: none;
     }
 
     @include break {
@@ -271,7 +271,7 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
     flex-direction: column;
     justify-content: baseline;
     margin: 10px 0;
-    padding: 0 10px
+    padding: 0 10px;
   }
 
   .description.desktop {
@@ -394,7 +394,12 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
 }
 
 .notification-bar-visible .markdown {
-  h1,h2,h3,h4,h5,h6{
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     scroll-margin-top: $topHeightDesktopWithBanner;
   }
 }
