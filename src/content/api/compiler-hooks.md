@@ -106,6 +106,12 @@ Adds a hook right before running the compiler.
 
 - Callback Parameters: `compiler`
 
+### `additionalPass`
+
+`AsyncSeriesHook`
+
+This hook allows you to do a one more additional pass of the build.
+
 
 ### `run`
 
@@ -141,6 +147,13 @@ Called after a `NormalModuleFactory` is created.
 Runs a plugin after a `ContextModuleFactory` is created.
 
 - Callback Parameters: `contextModuleFactory`
+
+
+### `initialize`
+
+`SyncHook`
+
+Called when a compiler object is initialized.
 
 
 ### `beforeCompile`

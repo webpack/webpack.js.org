@@ -52,10 +52,16 @@ export default class NotificationBar extends React.Component {
     this.state = {
       dismissed: barDismissed()
     };
+    if (!this.state.dismissed && typeof document !== 'undefined') {
+      document.body.classList.add('notification-bar-visible');
+    }
   }
 
   onClose() {
     this.setState(state => {
+      if (!state.dismissed && typeof document !== 'undefined') {
+        document.body.classList.remove('notification-bar-visible');
+      }
       return {
         dismissed: !state.dismissed
       };

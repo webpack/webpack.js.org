@@ -14,6 +14,7 @@ contributors:
   - EugeneHlushko
   - Aghassi
   - myshov
+  - anikethsaha
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -96,8 +97,8 @@ The following table explains other cases:
 | `alias:`                            | `import 'xyz'`                        | `import 'xyz/file.js'`              |
 | ----------------------------------- | ------------------------------------- | ----------------------------------- |
 | `{}`                                | `/abc/node_modules/xyz/index.js`      | `/abc/node_modules/xyz/file.js`     |
-| `{ xyz: '/abs/path/to/file.js' }`   | `/abs/path/to/file.js`                | error                               |
-| `{ xyz$: '/abs/path/to/file.js' }`  | `/abs/path/to/file.js`                | `/abc/node_modules/xyz/file.js`     |
+| `{ xyz: '/abc/path/to/file.js' }`   | `/abc/path/to/file.js`                | error                               |
+| `{ xyz$: '/abc/path/to/file.js' }`  | `/abc/path/to/file.js`                | `/abc/node_modules/xyz/file.js`     |
 | `{ xyz: './dir/file.js' }`          | `/abc/dir/file.js`                    | error                               |
 | `{ xyz$: './dir/file.js' }`         | `/abc/dir/file.js`                    | `/abc/node_modules/xyz/file.js`     |
 | `{ xyz: '/some/dir' }`              | `/some/dir/index.js`                  | `/some/dir/file.js`                 |
@@ -115,6 +116,7 @@ The following table explains other cases:
 
 W> `resolve.alias` takes precedence over other module resolutions.
 
+W> [`null-loader`](https://github.com/webpack-contrib/null-loader) will be deprecated in `webpack@5`. use `alias: { xyz$: false }` or absolute path `alias: {[path.resolve(__dirname, "....")]: false }`
 
 ### `resolve.aliasFields`
 
