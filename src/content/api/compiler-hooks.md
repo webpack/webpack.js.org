@@ -9,6 +9,7 @@ contributors:
   - misterdev
   - EugeneHlushko
   - superburrito
+  - chenxsan
 ---
 
 The `Compiler` module is the main engine that creates a compilation instance
@@ -88,7 +89,7 @@ Triggered after resolver setup is complete.
 
 `SyncHook`
 
-Called while preparing the compiler environment, right after inizializing the plugins in the configuration file.
+Called while preparing the compiler environment, right after initializing the plugins in the configuration file.
 
 
 ### `afterEnvironment`
