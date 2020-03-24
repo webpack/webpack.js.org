@@ -30,6 +30,8 @@ This plugin is used in a separate webpack configuration exclusively to create a 
 new webpack.DllPlugin(options);
 ```
 
+W> We recommend using DllPlugin only with `entryOnly: true`, otherwise tree shaking in the DLL won't work as all the exports might be used.
+
 Creates a `manifest.json` which is written to the given `path`. It contains mappings from require and import requests to module ids. It is used by the `DllReferencePlugin`.
 
 Combine this plugin with [`output.library`](/configuration/output/#outputlibrary) option to expose (aka, put into the global scope) the dll function.
