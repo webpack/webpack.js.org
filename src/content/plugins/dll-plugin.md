@@ -30,7 +30,7 @@ This plugin is used in a separate webpack configuration exclusively to create a 
 new webpack.DllPlugin(options);
 ```
 
-Using the DllPlugin without `entryOnly: true` will disable Tree Shaking in the DLL as all exports might be used.
+W> We recommend using DllPlugin only with `entryOnly: true`, otherwise tree shaking in the DLL won't work as all the exports might be used.
 
 Creates a `manifest.json` which is written to the given `path`. It contains mappings from require and import requests to module ids. It is used by the `DllReferencePlugin`.
 
