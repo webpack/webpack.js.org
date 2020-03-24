@@ -415,11 +415,10 @@ module.exports = {
 
 ## `optimization.usedExports`
 
-`boolean`
+`boolean = true`
 
 Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimizationoccurrenceorder). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
 Dead code elimination in minimizers will benefit from this and can remove unused exports.
-By default `optimization.usedExports` is enabled in all [modes](/configuration/mode/).
 
 __webpack.config.js__
 
@@ -427,7 +426,7 @@ __webpack.config.js__
 module.exports = {
   //...
   optimization: {
-    usedExports: true
+    usedExports: false
   }
 };
 ```
@@ -452,7 +451,7 @@ module.exports = {
 
 ## `optimization.sideEffects`
 
-`boolean`
+`boolean = true`
 
 Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used.
 
@@ -469,8 +468,6 @@ __package.json__
 T> Please note that `sideEffects` should be in the npm module's `package.json` file and doesn't mean that you need to set `sideEffects` to `false` in your own project's `package.json` which requires that big module.
 
 `optimization.sideEffects` depends on [`optimization.providedExports`](#optimizationprovidedexports) to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.
-
-By default `optimization.sideEffects` is enabled in all [modes](/configuration/mode/).
 
 __webpack.config.js__
 
@@ -504,7 +501,7 @@ module.exports = {
 
 ## `optimization.mangleExports`
 
-`bool`
+`boolean`
 
 `optimization.mangleExports` allows to control export mangling.
 
@@ -523,11 +520,9 @@ module.exports = {
 
 ## `optimization.innerGraph`
 
-`bool`
+`boolean = true`
 
 `optimization.innerGraph` tells webpack whether to conduct inner graph analysis for unused exports.
-
-By default `optimization.innerGraph` is enabled in all [modes](/configuration/mode/).
 
 __webpack.config.js__
 
@@ -535,7 +530,7 @@ __webpack.config.js__
 module.exports = {
   //...
   optimization: {
-    innerGraph: true
+    innerGraph: false
   }
 };
 ```
