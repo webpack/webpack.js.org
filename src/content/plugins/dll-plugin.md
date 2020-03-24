@@ -36,7 +36,6 @@ Creates a `manifest.json` which is written to the given `path`. It contains mapp
 
 Combine this plugin with [`output.library`](/configuration/output/#outputlibrary) option to expose (aka, put into the global scope) the dll function.
 
-W> We recommend using only `entryOnly: true`
 
 
 ## `DllReferencePlugin`
