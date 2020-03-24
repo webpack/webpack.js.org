@@ -9,6 +9,7 @@ contributors:
   - peterblazejewicz
   - youta1119
   - byzyk
+  - Nek-
 ---
 
 webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
@@ -29,8 +30,8 @@ and then proceed to write your configuration:
 __webpack.config.ts__
 
 ```typescript
-import path from 'path';
-import webpack from 'webpack';
+import * as path from 'path';
+import * as webpack from 'webpack';
 
 const config: webpack.Configuration = {
   mode: 'production',

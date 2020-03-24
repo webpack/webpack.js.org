@@ -8,6 +8,7 @@ contributors:
   - EugeneHlushko
   - byzyk
   - spicalous
+  - Neob91
 ---
 
 webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
@@ -91,7 +92,7 @@ __webpack.config.js__
 module.exports = {
   //...
   watchOptions: {
-    ignored: ['files/**/*.js', 'node_modules']
+    ignored: ['files/**/*.js', 'node_modules/**']
   }
 };
 ```
@@ -121,9 +122,9 @@ T> If watching does not work for you, try out this option. Watching does not wor
 
 ## `info-verbosity`
 
-`string: 'none' | 'info' | 'verbose'`
+`string = 'info': 'none' | 'info' | 'verbose'`
 
-Controls verbosity of the lifecycle messaging, e.g. the `Started watching files...` log. Setting `info-verbosity` to `verbose` will also message to console at the beginning and the end of incremental build. `info-verbosity` is set to `info` by default.
+Controls verbosity of the lifecycle messaging, e.g. the `Started watching files...` log. Setting `info-verbosity` to `verbose` will also message to console at the beginning and the end of incremental build.
 
 ```bash
 webpack --watch --info-verbosity verbose
@@ -158,7 +159,7 @@ On macOS, folders can get corrupted in certain scenarios. See [this article](htt
 
 ### Windows Paths
 
-Because webpack expects absolute paths for many config options such as `__dirname + '/app/folder'` the Windows `\` path separator can break some functionality.
+Because webpack expects absolute paths for many configuration options such as `__dirname + '/app/folder'` the Windows `\` path separator can break some functionality.
 
 Use the correct separators. I.e. `path.resolve(__dirname, 'app/folder')` or `path.join(__dirname, 'app', 'folder')`.
 

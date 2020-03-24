@@ -80,7 +80,7 @@ T> Loaders were originally designed to work in synchronous loader pipelines, lik
 
 ### "Raw" Loader
 
-By default, the resource file is converted to a UTF-8 string and passed to the loader. By setting the `raw` flag, the loader will receive the raw `Buffer`. Every loader is allowed to deliver its result as `String` or as `Buffer`. The compiler converts them between loaders.
+By default, the resource file is converted to a UTF-8 string and passed to the loader. By setting the `raw` flag to `true`, the loader will receive the raw `Buffer`. Every loader is allowed to deliver its result as a `String` or as a `Buffer`. The compiler converts them between loaders.
 
 __raw-loader.js__
 
@@ -199,14 +199,14 @@ In the example: `/abc` because `resource.js` is in this directory
 
 ### `this.rootContext`
 
-Starting with webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
+Since webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
 
 
 ### `this.request`
 
 The resolved request string.
 
-In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr"`
+In the example: `'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
 
 
 ### `this.query`
@@ -214,7 +214,12 @@ In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/re
 1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
 2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
 
-T> Use the [`getOptions` method](https://github.com/webpack/loader-utils#getoptions) from `loader-utils` to extract given loader options.
+
+### `this.getOptions(schema)`
+
+Extracts given loader options. Optionally, accepts JSON schema as an argument.
+
+T> Since webpack 5, `this.getOptions` is available in loader context. It substitutes `getOptions` method from [loader-utils](https://github.com/webpack/loader-utils#getoptions).
 
 
 ### `this.callback`
@@ -306,28 +311,28 @@ In the example: in loader1: `0`, in loader2: `1`
 
 The resource part of the request, including query.
 
-In the example: `"/abc/resource.js?rrr"`
+In the example: `'/abc/resource.js?rrr'`
 
 
 ### `this.resourcePath`
 
 The resource file.
 
-In the example: `"/abc/resource.js"`
+In the example: `'/abc/resource.js'`
 
 
 ### `this.resourceQuery`
 
 The query of the resource.
 
-In the example: `"?rrr"`
+In the example: `'?rrr'`
 
 
 ### `this.target`
 
 Target of compilation. Passed from configuration options.
 
-Example values: `"web"`, `"node"`
+Example values: `'web'`, `'node'`
 
 
 ### `this.webpack`
@@ -431,6 +436,17 @@ emitFile(name: string, content: Buffer|string, sourceMap: {...})
 
 Emit a file. This is webpack-specific.
 
+
+### `this.hot`
+
+Information about HMR for loaders.
+
+```javascript
+module.exports = function(source) {
+  console.log(this.hot); // true if HMR is enabled via --hot flag or webpack configuration
+  return source;
+};
+```
 
 ### `this.fs`
 

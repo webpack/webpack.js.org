@@ -8,16 +8,17 @@ contributors:
   - fadysamirsadek
   - byzyk
   - zefman
+  - Mistyyyy
+  - jamesgeorge007
+  - tanhauhau
 ---
 
-The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
-
-T> __consumer__ here is any end-user application.
+The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
 
 
 ## `externals`
 
-`string` `object` `function`  `regex`
+`string` `object` `function`  `RegExp`
 
 __Prevent bundling__ of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
 
@@ -66,6 +67,30 @@ The following syntaxes are accepted...
 
 See the example above. The property name `jquery` indicates that the module `jquery` in `import $ from 'jquery'` should be excluded. In order to replace this module, the value `jQuery` will be used to retrieve a global `jQuery` variable. In other words, when a string is provided it will be treated as `root` (defined above and below).
 
+On the other hand, if you want to externalise a library that is available as a CommonJS module, you can provide the external library type together with the library name.
+
+For example, if you want to exclude `fs-extra` from the output bundle and import it during the runtime instead, you can specify it as follows:
+
+```javascript
+module.exports = {
+  // ...
+  externals: {
+    'fs-extra': 'commonjs2 fs-extra',
+  }
+};
+```
+
+This leaves any dependent modules unchanged, i.e. the code shown below:
+
+```javascript
+import fs from 'fs-extra';
+```
+
+will compile to something like:
+
+```javascript
+const fs = require('fs-extra');
+```
 
 ### array
 
@@ -111,12 +136,12 @@ module.exports = {
 };
 ```
 
-This syntax is used to describe all the possible ways that an external library can be available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
+This syntax is used to describe all the possible ways that an external library can be made available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
 
 
 ### function
 
-`function ({ context, request }, callback)`
+`function (context, request, callback)`
 
 It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides some options too, for example, whitelist packages.
 
@@ -126,7 +151,7 @@ It basically comes down to this:
 module.exports = {
   //...
   externals: [
-    function({ context, request }, callback) {
+    function(context, request, callback) {
       if (/^yourregex$/.test(request)){
         return callback(null, 'commonjs ' + request);
       }
@@ -139,7 +164,7 @@ module.exports = {
 The `'commonjs ' + request` defines the type of module that needs to be externalized.
 
 
-### regex
+### RegExp
 
 Every dependency that matches the given regular expression will be excluded from the output bundles.
 

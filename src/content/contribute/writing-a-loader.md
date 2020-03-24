@@ -5,6 +5,8 @@ contributors:
   - asulaiman
   - michael-ciniawsky
   - byzyk
+  - anikethsaha
+  - jamesgeorge007
 ---
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
@@ -54,6 +56,9 @@ module.exports = {
 ```
 
 Last but not least, if you've already created a separate repository and package for your loader, you could [`npm link`](https://docs.npmjs.com/cli/link) it to the project in which you'd like to test it out.
+
+
+T> You can use [`webpack-defaults` package](https://github.com/webpack-contrib/webpack-defaults) to generate boilerplate code necessary to start writing your loader.
 
 
 ## Simple Usage
@@ -120,7 +125,7 @@ Take advantage of the fact that loaders can be chained together. Instead of writ
 
 Take the case of rendering a template file with data specified via loader options or query parameters. It could be written as a single loader that compiles the template from source, executes it and returns a module that exports a string containing the HTML code. However, in accordance with guidelines, a simple `apply-loader` exists that can be chained with other open source loaders:
 
-- `jade-loader`: Convert template to a module that exports a function.
+- `pug-loader`: Convert template to a module that exports a function.
 - `apply-loader`: Executes the function with loader options and returns raw HTML.
 - `html-loader`: Accepts HTML and outputs a valid JavaScript module.
 
@@ -298,10 +303,10 @@ __test/example.txt__
 Hey [name]!
 ```
 
-Pay close attention to this next step as we'll be using the [Node.js API](/api/node) and [`memory-fs`](https://github.com/webpack/memory-fs) to execute webpack. This lets us avoid emitting `output` to disk and will give us access to the `stats` data which we can use to grab our transformed module:
+Pay close attention to this next step as we'll be using the [Node.js API](/api/node) and [`memfs`](https://github.com/streamich/memfs) to execute webpack. This lets us avoid emitting `output` to disk and will give us access to the `stats` data which we can use to grab our transformed module:
 
 ``` bash
-npm install --save-dev webpack memory-fs
+npm install --save-dev webpack memfs
 ```
 
 __test/compiler.js__
@@ -309,7 +314,7 @@ __test/compiler.js__
 ```js
 import path from 'path';
 import webpack from 'webpack';
-import memoryfs from 'memory-fs';
+import { createFsFromVolume, Volume } from 'memfs';
 
 export default (fixture, options = {}) => {
   const compiler = webpack({
@@ -332,7 +337,7 @@ export default (fixture, options = {}) => {
     }
   });
 
-  compiler.outputFileSystem = new memoryfs();
+  compiler.outputFileSystem = createFsFromVolume(new Volume());
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {

@@ -8,6 +8,7 @@ contributors:
   - lricoy
   - madhavarshney
   - wizardofhogwarts
+  - anikethsaha
 related:
   - title: Enabling Source Maps
     url: https://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/
@@ -30,21 +31,36 @@ T> The webpack repository contains an [example showing the effect of all `devtoo
 
 T> Instead of using the `devtool` option you can also use `SourceMapDevToolPlugin`/`EvalSourceMapDevToolPlugin` directly as it has more options. Never use both the `devtool` option and plugin together. The `devtool` option adds the plugin internally so you would end up with the plugin applied twice.
 
-devtool                        | build   | rebuild | production | quality
------------------------------- | ------- | ------- | ---------- | -----------------------------
-(none)                         | fastest | fastest | yes        | bundled code
-eval                           | fastest | fastest | no         | generated code
-cheap-eval-source-map          | fast    | faster  | no         | transformed code (lines only)
-cheap-module-eval-source-map   | slow    | faster  | no         | original source (lines only)
-eval-source-map                | slowest | fast    | no         | original source
-cheap-source-map               | fast    | slow    | yes        | transformed code (lines only)
-cheap-module-source-map        | slow    | slower  | yes        | original source (lines only)
-inline-cheap-source-map        | fast    | slow    | no         | transformed code (lines only)
-inline-cheap-module-source-map | slow    | slower  | no         | original source (lines only)
-source-map                     | slowest | slowest | yes        | original source
-inline-source-map              | slowest | slowest | no         | original source
-hidden-source-map              | slowest | slowest | yes        | original source
-nosources-source-map           | slowest | slowest | yes        | without source content
+devtool                                  | build   | rebuild | production | quality
+---------------------------------------- | ------- | ------- | ---------- | -----------------------------
+(none)                                   | fastest | fastest | yes        | bundled code
+eval                                     | fastest | fastest | no         | generated code
+eval-cheap-source-map                    | fast    | faster  | no         | transformed code (lines only)
+eval-cheap-module-source-map             | slow    | faster  | no         | original source (lines only)
+eval-source-map                          | slowest | fast    | no         | original source
+eval-nosources-source-map                |         |         |            |
+eval-nosources-cheap-source-map          |         |         |            |
+eval-nosources-cheap-module-source-map   |         |         |            |
+cheap-source-map                         | fast    | slow    | yes        | transformed code (lines only)
+cheap-module-source-map                  | slow    | slower  | yes        | original source (lines only)
+inline-cheap-source-map                  | fast    | slow    | no         | transformed code (lines only)
+inline-cheap-module-source-map           | slow    | slower  | no         | original source (lines only)
+inline-source-map                        | slowest | slowest | no         | original source
+inline-nosources-source-map              |         |         |            |
+inline-nosources-cheap-source-map        |         |         |            |
+inline-nosources-cheap-module-source-map |         |         |            |
+source-map                               | slowest | slowest | yes        | original source
+hidden-source-map                        | slowest | slowest | yes        | original source
+hidden-nosources-source-map              |         |         |            |
+hidden-nosources-cheap-source-map        |         |         |            |
+hidden-nosources-cheap-module-source-map |         |         |            |
+hidden-cheap-source-map                  |         |         |            |
+hidden-cheap-module-source-map           |         |         |            |
+nosources-source-map                     | slowest | slowest | yes        | without source content
+nosources-cheap-source-map               |         |         |            |
+nosources-cheap-module-source-map        |         |         |            |
+
+T> We expect a certain pattern when validate devtool name, pay attention and dont mix up the sequence of devtool string. The pattern is: `[inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map`.
 
 Some of these values are suited for development and some for production. For development you typically want fast Source Maps at the cost of bundle size, but for production you want separate Source Maps that are accurate and support minimizing.
 
@@ -76,9 +92,9 @@ The following options are ideal for development:
 
 `eval-source-map` - Each module is executed with `eval()` and a SourceMap is added as a DataUrl to the `eval()`. Initially it is slow, but it provides fast rebuild speed and yields real files. Line numbers are correctly mapped since it gets mapped to the original code. It yields the best quality SourceMaps for development.
 
-`cheap-eval-source-map` - Similar to `eval-source-map`, each module is executed with `eval()`. It is "cheap" because it doesn't have column mappings, it only maps line numbers. It ignores SourceMaps from Loaders and only display transpiled code similar to the `eval` devtool.
+`eval-cheap-source-map` - Similar to `eval-source-map`, each module is executed with `eval()`. It is "cheap" because it doesn't have column mappings, it only maps line numbers. It ignores SourceMaps from Loaders and only display transpiled code similar to the `eval` devtool.
 
-`cheap-module-eval-source-map` - Similar to `cheap-eval-source-map`, however, in this case Source Maps from Loaders are processed for better results. However Loader Source Maps are simplified to a single mapping per line.
+`cheap-module-eval-source-map` - Similar to `eval-cheap-source-map`, however, in this case Source Maps from Loaders are processed for better results. However Loader Source Maps are simplified to a single mapping per line.
 
 ### Special cases
 
