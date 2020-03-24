@@ -37,7 +37,6 @@ Creates a `manifest.json` which is written to the given `path`. It contains mapp
 Combine this plugin with [`output.library`](/configuration/output/#outputlibrary) option to expose (aka, put into the global scope) the dll function.
 
 
-
 ## `DllReferencePlugin`
 
 This plugin is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.
