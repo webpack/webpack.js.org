@@ -296,6 +296,19 @@ Parameters:
 
 `function (filename, data)`
 
+Returns interpolated path.
+
+Parameters:
+
+- `filename` - used to get asset path with hash.
+- `data` - data object.
+
+### getPathWithInfo
+
+`function (filename, data)`
+
+Returns interpolated path and asset information.
+
 Parameters:
 
 - `filename` - used to get asset path with hash.
