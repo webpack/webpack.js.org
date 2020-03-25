@@ -485,11 +485,6 @@ Pass values to the next loader. If you know what your result exports if executed
 Passed from the last loader. If you would execute the input argument as a module, consider reading this variable for a shortcut (for performance).
 
 
-### `this.options`
-
-W> The `options` property has been deprecated in webpack 3 and removed in webpack 4.
-
-
 ### `this.debug`
 
 A boolean flag. It is set when in debug mode.
