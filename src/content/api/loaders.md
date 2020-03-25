@@ -11,6 +11,7 @@ contributors:
   - jantimon
   - superburrito
   - wizardofhogwarts
+  - snitin315
 ---
 
 A loader is just a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
@@ -472,15 +473,6 @@ exec(code: string, filename: string)
 ```
 
 Execute some code fragment like a module. See [this comment](https://github.com/webpack/webpack.js.org/issues/1268#issuecomment-313513988) for a replacement method if needed.
-
-
-### `this.resolveSync`
-
-``` typescript
-resolveSync(context: string, request: string) -> string
-```
-
-Resolve a request like a require expression.
 
 
 ### `this.value`
