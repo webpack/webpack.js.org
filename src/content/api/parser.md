@@ -345,7 +345,7 @@ Called for every specifier of every `export`-import statement.
 
 Called when parsing a variable declaration.
 
-- Callbak Parameters: `declaration`
+- Callback Parameters: `declaration`
 
 
 ### varDeclarationLet
@@ -354,7 +354,7 @@ Called when parsing a variable declaration.
 
 Called when parsing a variable declaration defined using `let`
 
-- Callbak Parameters: `declaration`
+- Callback Parameters: `declaration`
 
 
 ### varDeclarationConst
@@ -363,7 +363,7 @@ Called when parsing a variable declaration defined using `let`
 
 Called when parsing a variable declaration defined using `const`
 
-- Callbak Parameters: `declaration`
+- Callback Parameters: `declaration`
 
 
 ### varDeclarationVar
@@ -372,7 +372,7 @@ Called when parsing a variable declaration defined using `const`
 
 Called when parsing a variable declaration defined using `var`
 
-- Callbak Parameters: `declaration`
+- Callback Parameters: `declaration`
 
 
 ### canRename
