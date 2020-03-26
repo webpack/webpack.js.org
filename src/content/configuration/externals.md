@@ -19,7 +19,7 @@ The `externals` configuration option provides a way of excluding dependencies fr
 
 ## `externals`
 
-`string` `array` `object` `function`  `RegExp`
+`string` `[string]` `object` `function`  `RegExp`
 
 __Prevent bundling__ of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
 
@@ -93,7 +93,7 @@ will compile to something like:
 const fs = require('fs-extra');
 ```
 
-### array
+### [string]
 
 ```javascript
 module.exports = {
@@ -195,7 +195,7 @@ module.exports = {
         amd: 'lodash',
         root: '_' // indicates global variable
       },
-      // Array
+      // [String]
       subtract: ['./math', 'subtract']
     },
     // Function
