@@ -9,6 +9,7 @@ contributors:
   - madhavarshney
   - dhurlburtusa
   - jamesgeorge007
+  - anikethsaha
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -242,7 +243,7 @@ W> `moduleIds: 'hashed'` is deprecated in favour of `deterministic`. `moduleIds:
 
 ## `optimization.chunkIds`
 
-`boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size'`
+`boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic' `
 
 Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are couple of defaults for `optimization.chunkIds`:
 
@@ -256,8 +257,10 @@ Option                  | Description
 ----------------------- | -----------------------
 `'natural'`             | Numeric ids in order of usage.
 `'named'`               | Readable ids for better debugging.
+`'deterministic'`       | Deterministic ids for chunks (default in production mode).
 `'size'`                | Numeric ids focused on minimal initial download size.
 `'total-size'`          | numeric ids focused on minimal total download size.
+
 
 __webpack.config.js__
 
