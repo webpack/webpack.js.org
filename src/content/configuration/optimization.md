@@ -9,6 +9,7 @@ contributors:
   - madhavarshney
   - dhurlburtusa
   - jamesgeorge007
+  - snitin315
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -196,7 +197,7 @@ module.exports = {
 
 ## `optimization.moduleIds`
 
-`boolean = false` `string: 'natural' | 'named' | 'size'`
+`boolean = false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
 
 Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. By default `optimization.moduleIds` is set to `false`.
 
@@ -238,7 +239,9 @@ module.exports = {
 };
 ```
 
-W> `moduleIds: 'hashed'` is deprecated in favour of `deterministic`. `moduleIds: total-size` has been removed in webpack 5.
+W> `moduleIds: 'deterministic'` was added in webpack 5 and `moduleIds: 'hashed'` is deprecated in favor of it.
+
+W> `moduleIds: total-size` has been removed in webpack 5.
 
 ## `optimization.chunkIds`
 
