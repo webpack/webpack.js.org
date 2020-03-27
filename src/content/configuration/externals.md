@@ -195,7 +195,7 @@ module.exports = {
         amd: 'lodash',
         root: '_' // indicates global variable
       },
-      // [String]
+      // [string]
       subtract: ['./math', 'subtract']
     },
     // Function
