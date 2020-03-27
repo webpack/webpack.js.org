@@ -10601,9 +10601,9 @@ rc@^1.0.1, rc@^1.1.0, rc@^1.1.6, rc@^1.2.7, rc@~1.2.7:
     strip-json-comments "~2.0.1"
 
 react-banner@^1.0.0-rc.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-banner/-/react-banner-1.0.2.tgz#398bcbb26187ce20bea304d4fd71a8ca18fdee46"
-  integrity sha512-UwyAU8njV9G5NPeDUopXXx86pOJ37w/tc8+oZ6zLDjsJG5p4gEGVRdmcHhP6S439QBz3+eShTmmg/5mZ3EDMKw==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-banner/-/react-banner-1.0.3.tgz#5714d953d617473a2ea8adee263567f2436f6cc2"
+  integrity sha512-0CXzDZFe6nxGZPR1Y0qb3WPvoy56G40lWKZLpSRfklpL9lIEZLhOFzBavStaehzIfMjmppEVpSkbrnOTocZbnw==
 
 react-document-title@^2.0.3:
   version "2.0.3"
