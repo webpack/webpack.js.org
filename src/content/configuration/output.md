@@ -1085,6 +1085,21 @@ module.exports = {
 };
 ```
 
+## `output.enabledLibraryTypes`
+
+`array`
+
+List of library types enabled for use by entry points.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledLibraryTypes: ['module']
+  }
+};
+```
+
 ## `output.futureEmitAssets`
 
 `boolean = false`
