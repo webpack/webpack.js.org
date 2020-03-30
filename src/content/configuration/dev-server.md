@@ -258,6 +258,8 @@ By default, it will use your current working directory to serve content. To disa
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   devServer: {
@@ -271,6 +273,8 @@ It is also possible to serve from multiple directories:
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   devServer: {
@@ -295,6 +299,8 @@ Tell the server at what URL to serve `devServer.contentBase` static content. If 
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   devServer: {
