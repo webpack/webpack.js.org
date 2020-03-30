@@ -81,6 +81,8 @@ W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 __webpack.vendor.config.js__
 
 ```javascript
+const path = require('path');
+
 new webpack.DllPlugin({
   context: __dirname,
   name: '[name]_[hash]',

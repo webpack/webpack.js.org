@@ -884,6 +884,8 @@ The output directory as an __absolute__ path.
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   output: {
@@ -932,6 +934,8 @@ Simple rule: The URL of your [`output.path`](#outputpath) from the view of the H
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   output: {

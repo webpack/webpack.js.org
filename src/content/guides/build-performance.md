@@ -49,6 +49,8 @@ module.exports = {
 Use the `include` field to only apply the loader modules that actually need to be transformed by it:
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   module: {
