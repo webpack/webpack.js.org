@@ -11109,10 +11109,10 @@ remark-custom-blockquotes@1.0.0:
   dependencies:
     unist-util-visit "1.3.1"
 
-remark-extract-anchors@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/remark-extract-anchors/-/remark-extract-anchors-1.1.0.tgz#42b7197cfdf140876f505e9fcce10e7582aefb61"
-  integrity sha512-ts358r0SkLjlSkQywAnpFKPg87ib5WA5jR8moYsUDA14tK46+URUn+5plu3TCeIhiIZq4ocOTDIFeHupk75FvQ==
+remark-extract-anchors@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/remark-extract-anchors/-/remark-extract-anchors-1.1.1.tgz#27ae97771a9a1b7f27a0e5eece9dea3b7d1e18b8"
+  integrity sha512-PAxItS12ufkwmdMC3S3ZUGM9d70/dXlbJ8QbEVmLuiLRzRbrEttwY/RM1y1eJ3ZpRodnMd1z7mFaZtpYlAhhvQ==
   dependencies:
     unist-util-visit "1.3.1"
 
