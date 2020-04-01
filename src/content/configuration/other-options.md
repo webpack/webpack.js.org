@@ -12,6 +12,8 @@ contributors:
   - skovy
   - rishabh3112
   - Neob91
+  - pranshuchittora
+  - snitin315
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -104,26 +106,13 @@ While setting `cache.type` to `filesystem` opens up more options for configurati
 
 ### `cache.buildDependencies`
 
-`Object: [path]`
+`{[path]} = {['webpack/lib']}`
 
-`cache.buildDependencies` is an object of arrays of additional code dependencies of the build. webpack will use an hash of these items and all dependencies to invalidate the filesystem cache.
+`cache.buildDependencies` is an object of arrays of additional code dependencies of the build. webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
 
 Defaults to `webpack/lib` to get all dependencies of webpack.
 
-T> It's recommended to set `cache.buildDependencies.config: [__filename]` in `webpack.config.js` to get the config and all dependencies.
-
-```javascript
-module.exports = {
-  cache: {
-    buildDependencies: {
-      // recommended to invalidate cache on config changes
-      // This also makes all dependencies of this file build dependencies
-      config: [__filename]
-      // By default webpack and loaders are build dependencies
-    }
-  }
-};
-```
+T> It's recommended to set `cache.buildDependencies.config: [__filename]` in your webpack configuration to get the latest configuration and all dependencies.
 
 ### `cache.cacheDirectory`
 
@@ -168,6 +157,12 @@ module.exports = {
   }
 };
 ```
+
+### `cache.managedPaths`
+
+`[path] = ['./node_modules']`
+
+`cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
 
 ### `cache.name`
 
