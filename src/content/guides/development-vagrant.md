@@ -72,7 +72,7 @@ The server should be accessible on `http://10.10.10.61:8080` now. If you make a 
 
 To mimic a more production-like environment, it is also possible to proxy the webpack-dev-server with nginx.
 
-In your nginx config file, add the following:
+In your nginx configuration file, add the following:
 
 ```nginx
 server {

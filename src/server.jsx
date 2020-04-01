@@ -13,6 +13,7 @@ import PrintScript from './components/Print/PrintScript';
 // Import Images
 import Favicon from './favicon.ico';
 import Logo from './assets/logo-on-white-bg.svg';
+import OgImage from './assets/icon-pwa-512x512.png';
 
 // Define bundles (previously used `Object.values(locals.assets)`) but
 // can't retrieve from there anymore due to separate compilation.
@@ -52,7 +53,7 @@ export default locals => {
           <meta property="og:type" content="website" />
           <meta property="og:title" content={ title } />
           <meta property="og:description" name="description" content={ description } />
-          <meta property="og:image" content={ Logo } />
+          <meta property="og:image" content={ `https://webpack.js.org${OgImage}` } />
           <meta property="twitter:card" content="summary" />
           <meta property="twitter:site" content="@webpack" />
           <meta property="twitter:creator" content="@webpack" />

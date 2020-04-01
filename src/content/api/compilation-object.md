@@ -254,14 +254,6 @@ Parameters:
 - `block` - block tie for `Chunk`.
 - `chunk` - a chunk to remove from dependencies.
 
-### applyModuleIds
-
-`function`
-
-### applyChunkIds
-
-`function`
-
 ### sortItemsWithModuleIds
 
 `function`

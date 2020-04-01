@@ -10,6 +10,8 @@ contributors:
   - zefman
   - Mistyyyy
   - jamesgeorge007
+  - tanhauhau
+  - snitin315
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
@@ -17,7 +19,7 @@ The `externals` configuration option provides a way of excluding dependencies fr
 
 ## `externals`
 
-`string` `object` `function`  `RegExp`
+`string` `[string]` `object` `function`  `RegExp`
 
 __Prevent bundling__ of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
 
@@ -66,8 +68,32 @@ The following syntaxes are accepted...
 
 See the example above. The property name `jquery` indicates that the module `jquery` in `import $ from 'jquery'` should be excluded. In order to replace this module, the value `jQuery` will be used to retrieve a global `jQuery` variable. In other words, when a string is provided it will be treated as `root` (defined above and below).
 
+On the other hand, if you want to externalise a library that is available as a CommonJS module, you can provide the external library type together with the library name.
 
-### array
+For example, if you want to exclude `fs-extra` from the output bundle and import it during the runtime instead, you can specify it as follows:
+
+```javascript
+module.exports = {
+  // ...
+  externals: {
+    'fs-extra': 'commonjs2 fs-extra',
+  }
+};
+```
+
+This leaves any dependent modules unchanged, i.e. the code shown below:
+
+```javascript
+import fs from 'fs-extra';
+```
+
+will compile to something like:
+
+```javascript
+const fs = require('fs-extra');
+```
+
+### [string]
 
 ```javascript
 module.exports = {
@@ -169,7 +195,7 @@ module.exports = {
         amd: 'lodash',
         root: '_' // indicates global variable
       },
-      // Array
+      // [string]
       subtract: ['./math', 'subtract']
     },
     // Function

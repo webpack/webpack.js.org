@@ -39,7 +39,7 @@ const enhance = (tree, options) => {
 
     remark()
       .use(slug)
-      .use(extractAnchors, { anchors })
+      .use(extractAnchors, { anchors, levels: 3 })
       .process(content, err => {
         if (err) {
           throw err;
