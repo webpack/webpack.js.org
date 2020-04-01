@@ -4,6 +4,7 @@ sort: 5
 contributors:
   - nveenjain
   - EugeneHlushko
+  - benglynn
 ---
 
 Plugins grant unlimited opportunity to perform customizations within the webpack build system. This allows you to create custom asset types, perform unique build modifications, or even enhance the webpack runtime while using middleware. The following are some features of webpack that become useful while writing plugins.
@@ -48,21 +49,21 @@ module.exports = MyPlugin;
 
 ### Monitoring the watch graph
 
-While running webpack middleware, each compilation includes a `fileDependencies` array (what files are being watched) and a `fileTimestamps` hash that maps watched file paths to a timestamp. These are extremely useful for detecting what files have changed within the compilation:
+While running webpack middleware, each compilation includes a `fileDependencies` `Set` (what files are being watched) and a `fileTimestamps` `Map` that maps watched file paths to a timestamp. These are extremely useful for detecting what files have changed within the compilation:
 
 ```javascript
 class MyPlugin {
   constructor() {
     this.startTime = Date.now();
-    this.prevTimestamps = {};
+    this.prevTimestamps = new Map();
   }
   apply(compiler) {
     compiler.hooks.emit.tapAsync('MyPlugin', (compilation, callback) => {
-      var changedFiles = Object.keys(compilation.fileTimestamps).filter(
+      const changedFiles = Array.from(compilation.fileTimestamps.keys()).filter(
         watchfile => {
           return (
-            (this.prevTimestamps[watchfile] || this.startTime) <
-            (compilation.fileTimestamps[watchfile] || Infinity)
+            (this.prevTimestamps.get(watchfile) || this.startTime) <
+            (compilation.fileTimestamps.get(watchfile) || Infinity)
           );
         }
       );
@@ -76,7 +77,11 @@ class MyPlugin {
 module.exports = MyPlugin;
 ```
 
-You may also feed new file paths into the watch graph to receive compilation triggers when those files change. Simply push valid file paths into the `compilation.fileDependencies` array to add them to the watch. Note: the `fileDependencies` array is rebuilt in each compilation, so your plugin must push its own watched dependencies into each compilation to keep them under watch.
+You may also feed new file paths into the watch graph to receive compilation triggers when those files change. Add valid file paths into the `compilation.fileDependencies` `Set` to add them to the watched files.
+
+T> The `fileDependencies` `Set` is rebuilt in each compilation, so your plugin must add its own watched dependencies into each compilation to keep them under watch.
+
+W> Since webpack 5, `compilation.fileDependencies`, `compilation.contextDependencies` and `compilation.missingDependencies` are now a `Set` instead of a `Sortable Set` and thus no longer sorted.
 
 ## Changed chunks
 

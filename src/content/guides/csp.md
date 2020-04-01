@@ -4,6 +4,7 @@ sort: 10
 contributors:
   - EugeneHlushko
   - probablyup
+  - wizardofhogwarts
 related:
   - title: Nonce purpose explained
     url: https://stackoverflow.com/questions/42922784/what-s-the-purpose-of-the-html-nonce-attribute-for-script-and-style-elements
@@ -15,7 +16,7 @@ related:
     url: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 ---
 
-Webpack is capable of adding `nonce` to all scripts that it loads. To activate the feature set a `__webpack_nonce__` variable needs to be included in your entry script. A unique hash based nonce should be generated and provided for each unique page view this is why `__webpack_nonce__` is specified in the entry file and not in the configuration. Please note that `nonce` should always be a base64-encoded string.
+webpack is capable of adding `nonce` to all scripts that it loads. To activate the feature set a `__webpack_nonce__` variable needs to be included in your entry script. A unique hash based nonce should be generated and provided for each unique page view this is why `__webpack_nonce__` is specified in the entry file and not in the configuration. Please note that `nonce` should always be a base64-encoded string.
 
 
 ## Examples
