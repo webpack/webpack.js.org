@@ -8,6 +8,7 @@ contributors:
   - skipjack
   - byzyk
   - EugeneHlushko
+  - EslamHiko
 related:
   - title: Code Splitting Example
     url: https://github.com/webpack/webpack/blob/master/examples/explicit-vendor-chunk/README.md
