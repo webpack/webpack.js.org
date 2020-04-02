@@ -76,7 +76,7 @@ module.exports = {
 ```
 
 
-Use [`schema-utils`](https://github.com/webpack/schema-utils) in order to validate the options being passed through the plugin options.(Notice that [`schema-utils`](https://github.com/webpack/schema-utils) api has changed, but webpack use the v1.0.0 version, so you should the same version with webpack.) Here is an example:
+Use [`schema-utils`](https://github.com/webpack/schema-utils) in order to validate the options being passed through the plugin options.(Notice that [`schema-utils`](https://github.com/webpack/schema-utils) API has changed, but webpack use the v1.0.0 version, so you should use the same version with webpack.) Here is an example:
 
 ```javascript
 
