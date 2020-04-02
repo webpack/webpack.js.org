@@ -816,7 +816,7 @@ module.exports = {
 
 ## `devServer.open`
 
-`boolean = false` `string`
+`boolean = false` `string` `object`
 
 Tells dev-server to open the browser after server had been started. Set it to `true` to open your default browser.
 
@@ -840,6 +840,21 @@ module.exports = {
   //...
   devServer: {
     open: 'Google Chrome'
+  }
+};
+```
+
+You can also provide options when opening the browser:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    open: {
+      app: ['Google Chrome','--incognito']
+    }
   }
 };
 ```
