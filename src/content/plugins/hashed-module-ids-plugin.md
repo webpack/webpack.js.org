@@ -3,6 +3,7 @@ title: HashedModuleIdsPlugin
 contributors:
   - shaodahong
   - byzyk
+  - EslamHiko
 ---
 
 This plugin will cause hashes to be based on the relative path of the module, generating a four character string as the module id. Suggested for use in production.
