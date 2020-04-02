@@ -844,7 +844,7 @@ module.exports = {
 };
 ```
 
-You can also provide options when opening the browser:
+Sometimes you may want to use some options when opening the browser like opening an incognito window. In order to do that you can set `open` to an object. The object must have `app` property as an array. The first element in the array must be the browser name and the other following elements are the options you want. For example:
 
 __webpack.config.js__
 
