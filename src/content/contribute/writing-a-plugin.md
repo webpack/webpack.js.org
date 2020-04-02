@@ -95,7 +95,7 @@ const schema = {
 export default class HelloWorldPlugin {
 
   constructor(options = {}){
-    validateOptions(schema, options, 'Hello World Plugin');
+    validateOptions(schema, options, { name: 'Hello World Plugin' });
   }
 
   apply(compiler) {}
