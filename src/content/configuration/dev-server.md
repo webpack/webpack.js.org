@@ -311,7 +311,7 @@ module.exports = {
 };
 ```
 
-T> In case when you have several micro applications which all have custom static folders, you can pass an array of strings.
+Provide an array of strings in case you have multiple static folders set in  [`contentBase`](#devservercontentbase)
 
 __webpack.config.js__
 
