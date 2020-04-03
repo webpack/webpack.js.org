@@ -19,6 +19,7 @@ contributors:
   - jamesgeorge007
   - g100g
   - anikethsaha
+  - snitin315
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -292,7 +293,7 @@ webpack-dev-server --content-base /path/to/content/dir
 
 ## `devServer.contentBasePublicPath`
 
-`string = '/'`
+`string = '/'` `[string]`
 
 Tell the server at what URL to serve `devServer.contentBase` static content. If there was a file `assets/manifest.json`, it would be served at `/serve-content-base-at-this-url/manifest.json`
 
@@ -310,6 +311,22 @@ module.exports = {
 };
 ```
 
+T> In case when you have several micro applications which all have custom static folders, you can pass an array of strings.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    contentBase: [contentBasePublic, contentBaseOther],
+    contentBasePublicPath: [
+      contentBasePublicPath,
+      contentBasePublicOtherPath,
+    ]
+  }
+};
+```
 
 ## `devServer.disableHostCheck`
 
