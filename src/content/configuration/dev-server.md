@@ -269,7 +269,7 @@ module.exports = {
 };
 ```
 
-It is also possible to serve from multiple directories:
+It is also possible to serve from multiple directories in case you want to serve static content at multiple URLs with [`contentBasePublicPath`](#devservercontentbasepublicpath):
 
 __webpack.config.js__
 
@@ -311,7 +311,7 @@ module.exports = {
 };
 ```
 
-Provide an array of strings in case you have multiple static folders set in  [`contentBase`](#devservercontentbase)
+Provide an array of strings in case you have multiple static folders set in [`contentBase`](#devservercontentbase).
 
 __webpack.config.js__
 
@@ -322,7 +322,7 @@ module.exports = {
     contentBase: [contentBasePublic, contentBaseOther],
     contentBasePublicPath: [
       contentBasePublicPath,
-      contentBasePublicOtherPath,
+      contentBasePublicOtherPath
     ]
   }
 };
