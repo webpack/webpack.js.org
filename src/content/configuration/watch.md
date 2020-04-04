@@ -34,7 +34,7 @@ T> In [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [w
 
 ## `watchOptions`
 
-`object`
+`object` `number`
 
 A set of options used to customize watch mode:
 
@@ -47,6 +47,15 @@ module.exports = {
     aggregateTimeout: 300,
     poll: 1000
   }
+};
+```
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  watchOptions:  300
 };
 ```
 
