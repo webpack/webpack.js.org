@@ -106,6 +106,21 @@ module.exports = {
 };
 ```
 
+### `stats.moduleAssets`
+
+`boolean = true`
+
+Tells `stats` whether to add information about assets inside modules. Set `stats.moduleAssets` to `false` to hide it.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    moduleAssets: false
+  }
+};
+```
+
 ### `stats.cached`
 
 `boolean = true`
