@@ -21,6 +21,7 @@ contributors:
   - Neob91
   - anikethsaha
   - jamesgeorge007
+  - hiroppy
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -48,7 +49,7 @@ module.exports = {
 
 which will yield the following:
 
-__webpack.config.js__
+__someLibName.js__
 
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
