@@ -116,7 +116,7 @@
     "markdownlint-rule-emphasis-style": "^1.0.0",
     "marked": "0.6.1",
     "mini-css-extract-plugin": "^0.5.0",
-    "minimist": "1.2.2",
+    "minimist": "1.2.3",
     "mkdirp": "^0.5.1",
     "modularscale-sass": "^3.0.3",
     "node-sass": "^4.5.3",
