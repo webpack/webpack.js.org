@@ -13,6 +13,7 @@ contributors:
   - EugeneHlushko
   - grgur
   - anshumanv
+  - pixel-ray
 ---
 
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
@@ -207,6 +208,21 @@ module.exports = {
   //...
   stats: {
     chunkModules: false
+  }
+};
+```
+
+### `stats.chunkRootModules`
+
+`boolean = true`
+
+Tells `stats` whether to add information about the root modules of chunks. Applied if `stats.chunks = true`.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkRootModules: false
   }
 };
 ```
