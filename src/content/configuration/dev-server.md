@@ -833,7 +833,7 @@ module.exports = {
 
 ## `devServer.open`
 
-`boolean = false` `string`
+`boolean = false` `string` `object`
 
 Tells dev-server to open the browser after server had been started. Set it to `true` to open your default browser.
 
@@ -857,6 +857,21 @@ module.exports = {
   //...
   devServer: {
     open: 'Google Chrome'
+  }
+};
+```
+
+If you want to use flags when opening the browser like opening an incognito window (`--incognito` flag), you can set `open` to an object. The object accepts all [open](https://www.npmjs.com/package/open) options, `app` property must be an array. The first element in the array must be the browser name and the other following elements are the flags you want to use. For example:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    open: {
+      app: ['Google Chrome', '--incognito', '--other-flag']
+    }
   }
 };
 ```
