@@ -50,7 +50,7 @@ module.exports = {
 };
 ```
 
-When number is provided instead of an object, `watchOptions.aggregateTimeout` is set to the argument passed.
+Providing a number to the `watchOptions` sets `watchOptions.aggregateTimeout` to the given number.
 
 __webpack.config.js__
 
