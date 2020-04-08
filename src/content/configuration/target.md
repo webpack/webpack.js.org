@@ -51,7 +51,7 @@ __webpack.config.js__
 module.exports = {
   // ...
   target: () => undefined
-}
+};
 ```
 
 Or you can apply specific plugins you want:
@@ -67,5 +67,5 @@ module.exports = {
     new webpack.JsonpTemplatePlugin(options.output).apply(compiler);
     new webpack.LoaderTargetPlugin('web').apply(compiler);
   }
-}
+};
 ```
