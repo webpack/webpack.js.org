@@ -58,10 +58,8 @@ const webpack = require('webpack');
 
 const options = {
   target: (compiler) => {
-    compiler.apply(
-      new webpack.JsonpTemplatePlugin(options.output),
-      new webpack.LoaderTargetPlugin('web')
-    );
+    new webpack.JsonpTemplatePlugin(options.output).apply(compiler);
+    new webpack.LoaderTargetPlugin('web').apply(compiler);
   }
 };
 ```

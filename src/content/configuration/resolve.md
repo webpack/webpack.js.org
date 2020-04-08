@@ -47,6 +47,8 @@ Create aliases to `import` or `require` certain modules more easily. For example
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   resolve: {
@@ -75,6 +77,8 @@ A trailing `$` can also be added to the given object's keys to signify an exact 
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   resolve: {
@@ -317,6 +321,8 @@ If you want to add a directory to search in that takes precedence over `node_mod
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   resolve: {

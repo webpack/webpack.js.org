@@ -37,7 +37,7 @@ function linkFixerFactory(sourceUrl) {
       href = url.resolve(rendered_url, href);
     }
 
-    // Modify absolute documenation links to be root relative
+    // Modify absolute documentation links to be root relative
     if (beginsWithDocsDomainRegex.test(href)) {
       href = href.replace(beginsWithDocsDomainRegex, '');
     }

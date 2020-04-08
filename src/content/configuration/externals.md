@@ -11,6 +11,7 @@ contributors:
   - Mistyyyy
   - jamesgeorge007
   - tanhauhau
+  - snitin315
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
@@ -18,7 +19,7 @@ The `externals` configuration option provides a way of excluding dependencies fr
 
 ## `externals`
 
-`string` `object` `function`  `RegExp`
+`string` `[string]` `object` `function`  `RegExp`
 
 __Prevent bundling__ of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
 
@@ -92,7 +93,7 @@ will compile to something like:
 const fs = require('fs-extra');
 ```
 
-### array
+### [string]
 
 ```javascript
 module.exports = {
@@ -194,7 +195,7 @@ module.exports = {
         amd: 'lodash',
         root: '_' // indicates global variable
       },
-      // Array
+      // [string]
       subtract: ['./math', 'subtract']
     },
     // Function
