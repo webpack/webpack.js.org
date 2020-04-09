@@ -254,7 +254,7 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
   }
 
   .title {
-    width: 40%;
+    width: unset;
     display: flex;
     flex-direction: column;
     justify-content: baseline;
@@ -266,11 +266,12 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
   }
 
   .content {
-    width: 60%;
+    width: unset;
     display: flex;
     flex-direction: column;
     justify-content: baseline;
     margin: 10px 0;
+    padding: 0 10px
   }
 
   .description.desktop {

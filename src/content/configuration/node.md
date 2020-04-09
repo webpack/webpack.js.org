@@ -37,8 +37,8 @@ module.exports = {
   //...
   node: {
     global: false,
-    __filename: 'mock',
-    __dirname: 'mock',
+    __filename: false,
+    __dirname: false,
   }
 };
 ```
@@ -47,14 +47,14 @@ Since webpack 3.0.0, the `node` option may be set to `false` to completely turn 
 
 ## `node.global`
 
-`boolean = true`
+`boolean = false`
 
 See [the source](https://nodejs.org/api/globals.html) for the exact behavior of this object.
 
 
 ## `node.__filename`
 
-`string = 'mock'` `boolean`
+`string` `boolean = false`
 
 Options:
 
@@ -65,7 +65,7 @@ Options:
 
 ## `node.__dirname`
 
-`string = 'mock'` `boolean`
+`string` `boolean = false`
 
 Options:
 

@@ -307,6 +307,8 @@ Use this option to generate a JSON file containing webpack "records" -- pieces o
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   recordsPath: path.join(__dirname, 'records.json')
@@ -336,6 +338,8 @@ Specify where the records should be written. The following example shows how you
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   recordsInputPath: path.join(__dirname, 'records.json'),

@@ -18,6 +18,7 @@ contributors:
   - wizardofhogwarts
   - jamesgeorge007
   - g100g
+  - anikethsaha
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -257,6 +258,8 @@ By default, it will use your current working directory to serve content. To disa
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   devServer: {
@@ -270,6 +273,8 @@ It is also possible to serve from multiple directories:
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   devServer: {
@@ -294,6 +299,8 @@ Tell the server at what URL to serve `devServer.contentBase` static content. If 
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   devServer: {
@@ -582,11 +589,10 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    https: {
-      key: fs.readFileSync('/path/to/server.key'),
-      cert: fs.readFileSync('/path/to/server.crt'),
-      ca: fs.readFileSync('/path/to/ca.pem'),
-    }
+    https: true,
+    key: fs.readFileSync('/path/to/server.key'),
+    cert: fs.readFileSync('/path/to/server.crt'),
+    ca: fs.readFileSync('/path/to/ca.pem'),
   }
 };
 ```
@@ -775,7 +781,7 @@ module.exports = {
 
 `boolean = false`
 
-Tells dev-server to supress messages like the webpack bundle information. Errors and warnings will still be shown.
+Tells dev-server to suppress messages like the webpack bundle information. Errors and warnings will still be shown.
 
 __webpack.config.js__
 

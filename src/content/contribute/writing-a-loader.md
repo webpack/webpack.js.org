@@ -21,6 +21,8 @@ To test a single loader, you can simply use `path` to `resolve` a local file wit
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   module: {
@@ -44,6 +46,8 @@ To test multiple, you can utilize the `resolveLoader.modules` configuration to u
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   resolveLoader: {

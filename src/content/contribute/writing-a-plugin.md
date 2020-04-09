@@ -8,6 +8,7 @@ contributors:
   - byzyk
   - franjohn21
   - EugeneHlushko
+  - snitin315
 ---
 
 Plugins expose the full potential of the webpack engine to third-party developers. Using staged build callbacks, developers can introduce their own behaviors into the webpack build process. Building plugins is a bit more advanced than building loaders, because you'll need to understand some of the webpack low-level internals to hook into them. Be prepared to read some source code!
@@ -52,7 +53,7 @@ Plugins are instantiated objects with an `apply` method on their prototype. This
 class HelloWorldPlugin {
   apply(compiler) {
     compiler.hooks.done.tap('Hello World Plugin', (
-      stats /* stats is passed as argument when done hook is tapped.  */
+      stats /* stats is passed as an argument when done hook is tapped.  */
     ) => {
       console.log('Hello World!');
     });

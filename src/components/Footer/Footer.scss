@@ -23,6 +23,9 @@
 .footer__right {
   flex: 0 0 auto;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 100%;
   margin: auto;
   align-items: center;
   padding: 0.25em 0;
