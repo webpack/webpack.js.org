@@ -21,6 +21,7 @@ contributors:
   - Neob91
   - anikethsaha
   - jamesgeorge007
+  - hiroppy
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -48,7 +49,7 @@ module.exports = {
 
 which will yield the following:
 
-__webpack.config.js__
+__someLibName.js__
 
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1085,23 +1086,6 @@ module.exports = {
   //...
   output: {
     umdNamedDefine: true
-  }
-};
-```
-
-## `output.futureEmitAssets`
-
-`boolean = false`
-
-Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted.
-
-W> `output.futureEmitAssets` option will be removed in webpack v5.0.0 and this behaviour will become the new default.
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    futureEmitAssets: true
   }
 };
 ```
