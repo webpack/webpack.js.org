@@ -126,6 +126,26 @@ module.exports = {
 
 W> The final location of the cache is a combination of `cache.cacheDirectory` + `cache.name`.
 
+### `cache.cacheLocation`
+
+`string`
+
+Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.name)`.
+
+__webpack.config.js__
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    cacheLocation: path.resolve(__dirname, '.test_cache')
+  }
+};
+```
+
 ### `cache.hashAlgorithm`
 
 `string`
