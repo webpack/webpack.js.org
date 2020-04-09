@@ -260,7 +260,7 @@ Option                  | Description
 ----------------------- | -----------------------
 `'natural'`             | Numeric ids in order of usage.
 `'named'`               | Readable ids for better debugging.
-`'deterministic'`       | Short numeric ids which will not be changing between compilation. Good for long term caching. Enable by default for production mode
+`'deterministic'`       | Short numeric ids which will not be changing between compilation. Good for long term caching. Enable by default for production mode.
 `'size'`                | Numeric ids focused on minimal initial download size.
 `'total-size'`          | numeric ids focused on minimal total download size.
 
