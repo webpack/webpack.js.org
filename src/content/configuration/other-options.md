@@ -130,7 +130,7 @@ W> The final location of the cache is a combination of `cache.cacheDirectory` + 
 
 `string`
 
-Locations for the cache. Defaults to `cache.cacheDirectory/cache.name`.
+Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.name)`.
 
 __webpack.config.js__
 
