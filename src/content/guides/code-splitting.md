@@ -28,7 +28,8 @@ contributors:
   - byzyk
   - AnayaDesign
   - wizardofhogwarts
-  - maximilianschmelzer 
+  - maximilianschmelzer
+  - smelukov
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -116,6 +117,32 @@ The first of these two points is definitely an issue for our example, as `lodash
 
 ## Prevent Duplication
 
+### Entry dependencies
+
+The [`dependOn` option](/configuration/entry-context/#dependencies) allows to share the modules between the chunks
+
+``` diff
+  const path = require('path');
+
+  module.exports = {
+    mode: 'development',
+    entry: {
+-     index: './src/index.js',
+-     another: './src/another-module.js',
++     index: { import: './src/index.js', dependOn: 'shared' },
++     another: { import: './src/another-module.js', dependOn: 'shared' },
++     shared: 'lodash',
+    },
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist'),
+    },
+  };
+```
+
+
+### `SplitChunksPlugin`
+
 The [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
 
 W> The `CommonsChunkPlugin` has been removed in webpack v4 legato. To learn how chunks are treated in the latest version, check out the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/).
@@ -169,7 +196,7 @@ Two similar techniques are supported by webpack when it comes to dynamic code sp
 
 W> `import()` calls use [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
-Before we start, let's remove the extra [`entry`](/concepts/entry-points/) and [`optimization.splitChunks`](/plugins/split-chunks-plugin) from our config as they won't be needed for this next demonstration:
+Before we start, let's remove the extra [`entry`](/concepts/entry-points/) and [`optimization.splitChunks`](/plugins/split-chunks-plugin) from our configuration as they won't be needed for this next demonstration:
 
 __webpack.config.js__
 

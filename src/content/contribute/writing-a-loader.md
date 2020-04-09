@@ -6,6 +6,7 @@ contributors:
   - michael-ciniawsky
   - byzyk
   - anikethsaha
+  - jamesgeorge007
 ---
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
@@ -20,6 +21,8 @@ To test a single loader, you can simply use `path` to `resolve` a local file wit
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   module: {
@@ -43,6 +46,8 @@ To test multiple, you can utilize the `resolveLoader.modules` configuration to u
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   resolveLoader: {
@@ -124,7 +129,7 @@ Take advantage of the fact that loaders can be chained together. Instead of writ
 
 Take the case of rendering a template file with data specified via loader options or query parameters. It could be written as a single loader that compiles the template from source, executes it and returns a module that exports a string containing the HTML code. However, in accordance with guidelines, a simple `apply-loader` exists that can be chained with other open source loaders:
 
-- `jade-loader`: Convert template to a module that exports a function.
+- `pug-loader`: Convert template to a module that exports a function.
 - `apply-loader`: Executes the function with loader options and returns raw HTML.
 - `html-loader`: Accepts HTML and outputs a valid JavaScript module.
 

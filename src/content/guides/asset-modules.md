@@ -4,6 +4,9 @@ sort: 24
 contributors:
   - smelukov
   - EugeneHlushko
+related:
+  - title: webpack 5 - Asset Modules
+    url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
 ---
 
 Asset Modules is a type of module that allows to use asset files (fonts, icons, etc) without configuring additional loaders.
@@ -143,7 +146,7 @@ module.exports = {
 };
 ```
 
-With this config all the `html` files will be emitted into a `static` directory within the output directory.
+With this configuration all the `html` files will be emitted into a `static` directory within the output directory.
 
 `Rule.generator.filename` is the same as [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) and works only with `asset` and `asset/resource` module types.
 
