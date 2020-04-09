@@ -35,7 +35,7 @@ export default ({
       <div className="sidebar__inner">
         <div className="sidebar__shields">
           <a href="https://github.com/webpack/webpack/releases">
-            <Shield content="npm/v/webpack" label="webpack" />
+            <Shield content="github/package-json/v/webpack/webpack" label="webpack" />
           </a>
         </div>
         <Print url={currentPage} />
