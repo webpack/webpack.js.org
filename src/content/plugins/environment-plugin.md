@@ -45,6 +45,8 @@ T> Unlike [`DefinePlugin`](/plugins/define-plugin), default values are applied t
 
 T> To specify an unset default value, use `null` instead of `undefined`.
 
+W> If an environment variable is not found during bundling and no default value was provided, webpack will throw an error instead of a warning.
+
 __Example:__
 
 Let's investigate the result when running the previous `EnvironmentPlugin` configuration on a test file `entry.js`:

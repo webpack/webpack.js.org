@@ -6,6 +6,7 @@ contributors:
   - skipjack
   - tbroadley
   - byzyk
+  - wizardofhogwarts
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -66,7 +67,7 @@ module.hot.decline(
 );
 ```
 
-Flag a dependency as not-update-able. This makes sense when changing exports of this dependency can be handled or handling is not implemented yet. Depending on your HMR management code an update to these dependencies (or unaccepted dependencies of it) usually causes a full-reload of the page.
+Flag a dependency as not-update-able. This makes sense when changing exports of this dependency can be handled or handling is not implemented yet. Depending on your HMR management code, an update to these dependencies (or unaccepted dependencies of it) usually causes a full-reload of the page.
 
 ### `decline` (self)
 
@@ -76,7 +77,7 @@ Reject updates for itself.
 module.hot.decline();
 ```
 
-Flag this module as not-update-able. This makes sense when this module has irreversible side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
+Flag this module as not-update-able. This makes sense when this module has irreversible side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code, an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
 
 ### `dispose` (or `addDisposeHandler`)
 
@@ -163,10 +164,10 @@ The `info` parameter will be an object containing some of the following values:
 
 ```js
 {
-  type: "self-declined" | "declined" |
-        "unaccepted" | "accepted" |
-        "disposed" | "accept-errored" |
-        "self-accept-errored" | "self-accept-error-handler-errored",
+  type: 'self-declined' | 'declined' |
+        'unaccepted' | 'accepted' |
+        'disposed' | 'accept-errored' |
+        'self-accept-errored' | 'self-accept-error-handler-errored',
   moduleId: 4, // The module in question.
   dependencyId: 3, // For errors: the module id owning the accept handler.
   chain: [1, 2, 3, 4], // For declined/accepted/unaccepted: the chain from where the update was propagated.

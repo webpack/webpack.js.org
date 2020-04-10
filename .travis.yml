@@ -1,10 +1,6 @@
-sudo: false
 language: node_js
 node_js:
-  - "8"
-
-matrix:
-  fast_finish: true
+  - "10.18.0"
 
 cache:
   yarn: true
@@ -45,5 +41,5 @@ jobs:
 
     - stage: Post-build
       name: Deploy
-      if: branch = master AND type = push
+      if: branch = master AND type IN (push, cron)
       script: bash ./src/scripts/deploy.sh

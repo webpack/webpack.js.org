@@ -36,7 +36,9 @@ module.exports = env => merge(common(env), {
     plugins: [
       new SSGPlugin({
         globals: {
-          window: {}
+          window: {
+            __ssgrun: true
+          }
         },
         paths,
         locals: {

@@ -35,7 +35,7 @@ __account.scss__
 // account page individual styles
 ```
 
-We will use [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) in `production` mode for css as a best practice.
+We will use [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin/) in `production` mode for css as a best practice.
 
 __webpack.config.js__
 
@@ -72,7 +72,7 @@ module.exports = {
 };
 ```
 
-Running webpack with above config will output into `./dist` as we did not specify different output path. `./dist` directory will now contain four files:
+Running webpack with above configuration will output into `./dist` as we did not specify different output path. `./dist` directory will now contain four files:
 
 - home.js
 - home.css

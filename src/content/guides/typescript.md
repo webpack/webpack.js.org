@@ -6,6 +6,7 @@ contributors:
   - kkamali
   - mtrivera
   - byzyk
+  - EugeneHlushko
 ---
 
 T> This guide stems from the [_Getting Started_](/guides/getting-started/) guide.
@@ -90,6 +91,26 @@ module.exports = {
 
 This will direct webpack to _enter_ through `./index.ts`, _load_ all `.ts` and `.tsx` files through the `ts-loader`, and _output_ a `bundle.js` file in our current directory.
 
+Now lets change the import of `lodash` in our `./index.ts` due to the fact that there is no default export present in `lodash` definitions.
+
+__./index.ts__
+
+``` diff
+- import _ from 'lodash';
++ import * as _ from 'lodash';
+
+  function component() {
+    const element = document.createElement('div');
+
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+
+    return element;
+  }
+
+  document.body.appendChild(component());
+```
+
+T> To make imports do this by default and keep `import _ from 'lodash';` syntax in TypeScript, set `"allowSyntheticDefaultImports" : true` and `"esModuleInterop" : true` in your __tsconfig.json__ file. This is related to TypeScript configuration and mentioned in our guide only for your information.
 
 ## Loader
 

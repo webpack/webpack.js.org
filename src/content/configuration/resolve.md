@@ -13,6 +13,8 @@ contributors:
   - jgravois
   - EugeneHlushko
   - Aghassi
+  - myshov
+  - anikethsaha
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -45,6 +47,8 @@ Create aliases to `import` or `require` certain modules more easily. For example
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   resolve: {
@@ -73,6 +77,8 @@ A trailing `$` can also be added to the given object's keys to signify an exact 
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   resolve: {
@@ -95,8 +101,8 @@ The following table explains other cases:
 | `alias:`                            | `import 'xyz'`                        | `import 'xyz/file.js'`              |
 | ----------------------------------- | ------------------------------------- | ----------------------------------- |
 | `{}`                                | `/abc/node_modules/xyz/index.js`      | `/abc/node_modules/xyz/file.js`     |
-| `{ xyz: '/abs/path/to/file.js' }`   | `/abs/path/to/file.js`                | error                               |
-| `{ xyz$: '/abs/path/to/file.js' }`  | `/abs/path/to/file.js`                | `/abc/node_modules/xyz/file.js`     |
+| `{ xyz: '/abc/path/to/file.js' }`   | `/abc/path/to/file.js`                | error                               |
+| `{ xyz$: '/abc/path/to/file.js' }`  | `/abc/path/to/file.js`                | `/abc/node_modules/xyz/file.js`     |
 | `{ xyz: './dir/file.js' }`          | `/abc/dir/file.js`                    | error                               |
 | `{ xyz$: './dir/file.js' }`         | `/abc/dir/file.js`                    | `/abc/node_modules/xyz/file.js`     |
 | `{ xyz: '/some/dir' }`              | `/some/dir/index.js`                  | `/some/dir/file.js`                 |
@@ -105,9 +111,8 @@ The following table explains other cases:
 | `{ xyz: 'modu' }`                   | `/abc/node_modules/modu/index.js`     | `/abc/node_modules/modu/file.js`    |
 | `{ xyz$: 'modu' }`                  | `/abc/node_modules/modu/index.js`     | `/abc/node_modules/xyz/file.js`     |
 | `{ xyz: 'modu/some/file.js' }`      | `/abc/node_modules/modu/some/file.js` | error                               |
-| `{ xyz: 'modu/dir' }`               | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/dir/file.js`     |
-| `{ xyz: 'xyz/dir' }`                | `/abc/node_modules/xyz/dir/index.js`  | `/abc/node_modules/xyz/dir/file.js` |
-| `{ xyz$: 'xyz/dir' }`               | `/abc/node_modules/xyz/dir/index.js`  | `/abc/node_modules/xyz/file.js`     |
+| `{ xyz: 'modu/dir' }`               | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/modu/dir/file.js`|
+| `{ xyz$: 'modu/dir' }`              | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/xyz/file.js`     |
 
 `index.js` may resolve to another file if defined in the `package.json`.
 
@@ -115,6 +120,7 @@ The following table explains other cases:
 
 W> `resolve.alias` takes precedence over other module resolutions.
 
+W> [`null-loader`](https://github.com/webpack-contrib/null-loader) will be deprecated in `webpack@5`. use `alias: { xyz$: false }` or absolute path `alias: {[path.resolve(__dirname, "....")]: false }`
 
 ### `resolve.aliasFields`
 
@@ -315,6 +321,8 @@ If you want to add a directory to search in that takes precedence over `node_mod
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   resolve: {

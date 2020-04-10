@@ -9,6 +9,8 @@ contributors:
   - EugeneHlushko
   - lukasgeiter
   - toshihidetagami
+  - chenxsan
+  - jamesgeorge007
 ---
 
 webpack provides a Node.js API which can be used directly in Node.js runtime.
@@ -223,7 +225,7 @@ stats.toJson({
 All available options and presets are described in the stats [documentation](/configuration/stats).
 
 > Here’s an [example]
-(https://github.com/webpack/analyse/blob/master/app/pages/upload/example.json)
+(https://raw.githubusercontent.com/webpack/analyse/master/app/pages/upload/example1.json)
 of this function’s output.
 
 
@@ -288,7 +290,7 @@ like [parallel-webpack](https://www.npmjs.com/package/parallel-webpack).
 
 ## Error Handling
 
-For a good error handling, you need to account for these three types of errors:
+For good error handling, you need to account for these three types of errors:
 
 - Fatal webpack errors (wrong configuration, etc)
 - Compilation errors (missing modules, syntax errors, etc)
@@ -332,14 +334,14 @@ system. However, it is possible to change the input or output behavior using a
 different kind of file system (memory, webDAV, etc). To accomplish this, one
 can change the `inputFileSystem` or `outputFileSystem`. For example, you can
 replace the default `outputFileSystem` with
-[`memory-fs`](https://github.com/webpack/memory-fs) to write files to memory
+[`memfs`](https://github.com/streamich/memfs) to write files to memory
 instead of to disk:
 
 ``` js
-const MemoryFS = require('memory-fs');
+const { createFsFromVolume, Volume } = require('memfs');
 const webpack = require('webpack');
 
-const fs = new MemoryFS();
+const fs = createFsFromVolume(new Volume());
 const compiler = webpack({ /* options */ });
 
 compiler.outputFileSystem = fs;

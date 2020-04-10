@@ -1,11 +1,12 @@
 ---
-title: Parser Hooks
+title: JavascriptParser Hooks
 group: Plugins
 sort: 11
 contributors:
   - byzyk
   - DeTeam
   - misterdev
+  - EugeneHlushko
 ---
 
 The `parser` instance, found in the `compiler`, is used to parse each module
@@ -344,7 +345,7 @@ Called for every specifier of every `export`-import statement.
 
 Called when parsing a variable declaration.
 
-- Callbak Parameters: `declaration`
+- Callback Parameters: `declaration`
 
 
 ### varDeclarationLet
@@ -353,7 +354,7 @@ Called when parsing a variable declaration.
 
 Called when parsing a variable declaration defined using `let`
 
-- Callbak Parameters: `declaration`
+- Callback Parameters: `declaration`
 
 
 ### varDeclarationConst
@@ -362,7 +363,7 @@ Called when parsing a variable declaration defined using `let`
 
 Called when parsing a variable declaration defined using `const`
 
-- Callbak Parameters: `declaration`
+- Callback Parameters: `declaration`
 
 
 ### varDeclarationVar
@@ -371,7 +372,7 @@ Called when parsing a variable declaration defined using `const`
 
 Called when parsing a variable declaration defined using `var`
 
-- Callbak Parameters: `declaration`
+- Callback Parameters: `declaration`
 
 
 ### canRename
@@ -475,7 +476,7 @@ parser.hooks.call.for('eval').tap('MyPlugin', expression => {});
 
 `SyncBailHook`
 
-Triggered when parsing a call to a member function of an object. 
+Triggered when parsing a call to a member function of an object.
 
 - Hook Parameters: `objectIdentifier`
 - Callback Parameters: `expression`
@@ -491,7 +492,7 @@ parser.hooks.callAnyMember.for('myObj').tap('MyPlugin', expression => {});
 
 `SyncBailHook`
 
-Invoked when parsing a `new` expression. 
+Invoked when parsing a `new` expression.
 
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`

@@ -130,10 +130,10 @@ W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
 
 `webpackMode`: Since webpack 2.6.0, different modes for resolving dynamic imports can be specified. The following options are supported:
 
-- `"lazy"` (default): Generates a lazy-loadable chunk for each `import()`ed module.
-- `"lazy-once"`: Generates a single lazy-loadable chunk that can satisfy all calls to `import()`. The chunk will be fetched on the first call to `import()`, and subsequent calls to `import()` will use the same network response. Note that this only makes sense in the case of a partially dynamic statement, e.g. ``import(`./locales/${language}.json`)``, where there are multiple module paths that could potentially be requested.
-- `"eager"`: Generates no extra chunk. All modules are included in the current chunk and no additional network requests are made. A `Promise` is still returned but is already resolved. In contrast to a static import, the module isn't executed until the call to `import()` is made.
-- `"weak"`: Tries to load the module if the module function has already been loaded in some other way (e.g. another chunk imported it or a script containing the module was loaded). A `Promise` is still returned, but only successfully resolves if the chunks are already on the client. If the module is not available, the `Promise` is rejected. A network request will never be performed. This is useful for universal rendering when required chunks are always manually served in initial requests (embedded within the page), but not in cases where app navigation will trigger an import not initially served.
+- `'lazy'` (default): Generates a lazy-loadable chunk for each `import()`ed module.
+- `'lazy-once'`: Generates a single lazy-loadable chunk that can satisfy all calls to `import()`. The chunk will be fetched on the first call to `import()`, and subsequent calls to `import()` will use the same network response. Note that this only makes sense in the case of a partially dynamic statement, e.g. ``import(`./locales/${language}.json`)``, where multiple module paths that can potentially be requested.
+- `'eager'`: Generates no extra chunk. All modules are included in the current chunk and no additional network requests are made. A `Promise` is still returned but is already resolved. In contrast to a static import, the module isn't executed until the call to `import()` is made.
+- `'weak'`: Tries to load the module if the module function has already been loaded in some other way (e.g. another chunk imported it or a script containing the module was loaded). A `Promise` is still returned, but only successfully resolves if the chunks are already on the client. If the module is not available, the `Promise` is rejected. A network request will never be performed. This is useful for universal rendering when required chunks are always manually served in initial requests (embedded within the page), but not in cases where app navigation will trigger an import not initially served.
 
 `webpackPrefetch`: Tells the browser that the resource is probably needed for some navigation in the future. Check out the guide for more information on [how webpackPrefetch works](/guides/code-splitting/#prefetchingpreloading-modules).
 
@@ -177,9 +177,11 @@ W> Using it asynchronously may not have the expected effect.
 require.resolve(dependency: String);
 ```
 
-Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. See [`module.id`](/api/module-variables/#moduleid-commonjs) for more information.
+Synchronously retrieve a module's ID. The compiler will ensure that the dependency is available in the output bundle. It is recommended to treat it as an opaque value which can only be used with `require.cache[id]` or `__webpack_require__(id)` (best to avoid such usage).
 
-W> Module ID is a number in webpack (in contrast to NodeJS where it is a string -- the filename).
+W> Module ID's type can be a `number` or a `string` depending on the [`optimization.moduleIds`](/configuration/optimization/#optimizationmoduleids) configuration.
+
+See [`module.id`](/api/module-variables/#moduleid-commonjs) for more information.
 
 
 ### `require.cache`
@@ -391,7 +393,7 @@ var context = require.context('components', true, /\.html$/);
 var componentA = context.resolve('componentA');
 ```
 
-If `mode` is specified as "lazy", the underlying modules will be loaded asynchronously:
+If `mode` is set to `'lazy'`, the underlying modules will be loaded asynchronously:
 
 ```javascript
 var context = require.context('locales', true, /\.json$/, 'lazy');
@@ -400,7 +402,7 @@ context('localeA').then(locale => {
 });
 ```
 
-The full list of available modes and its behavior is described in [`import()`](#import-1) documentation.
+The full list of available modes and their behavior is described in [`import()`](#import-1) documentation.
 
 ### `require.include`
 

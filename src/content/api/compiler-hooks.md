@@ -8,6 +8,8 @@ contributors:
   - madhavarshney
   - misterdev
   - EugeneHlushko
+  - superburrito
+  - chenxsan
 ---
 
 The `Compiler` module is the main engine that creates a compilation instance
@@ -87,7 +89,7 @@ Triggered after resolver setup is complete.
 
 `SyncHook`
 
-Called while preparing the compiler environment, right after inizializing the plugins in the configuration file.
+Called while preparing the compiler environment, right after initializing the plugins in the configuration file.
 
 
 ### `afterEnvironment`
@@ -104,6 +106,12 @@ Called right after the `environment` hook, when the compiler environment setup i
 Adds a hook right before running the compiler.
 
 - Callback Parameters: `compiler`
+
+### `additionalPass`
+
+`AsyncSeriesHook`
+
+This hook allows you to do a one more additional pass of the build.
 
 
 ### `run`
@@ -142,6 +150,13 @@ Runs a plugin after a `ContextModuleFactory` is created.
 - Callback Parameters: `contextModuleFactory`
 
 
+### `initialize`
+
+`SyncHook`
+
+Called when a compiler object is initialized.
+
+
 ### `beforeCompile`
 
 `AsyncSeriesHook`
@@ -156,7 +171,6 @@ The `compilationParams` variable is initialized as follows:
 compilationParams = {
   normalModuleFactory,
   contextModuleFactory,
-  compilationDependencies
 };
 ```
 
@@ -252,9 +266,21 @@ Called after emitting assets to output directory.
 
 `AsyncSeriesHook`
 
-Allows to get byte content of emitted asset. Available since webpack v4.39.0
+Executed when an asset has been emitted. Provides access to information about the emitted asset, such as its output path and byte content. 
 
-- Callback Parameters: `file`, `content`
+- Callback Parameters: `file`, `info`
+
+For example, you may access the asset's content buffer via `info.content`:
+
+```js
+compiler.hooks.assetEmitted.tap(
+  'MyPlugin',
+  (file, { content, source, outputPath, compilation, targetPath }) => {
+    console.log(content); // <Buffer 66 6f 6f 62 61 72>
+  }
+);
+```
+
 
 ### `done`
 

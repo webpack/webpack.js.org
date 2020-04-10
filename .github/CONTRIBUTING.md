@@ -19,6 +19,9 @@ Once you are in the project directory, run the following commands:
 - `npm install` to pull all dependencies. Make sure to check notes below if you prefer Yarn.
 - `npm run build` to create a production version of the site.
 - `npm start` to develop on a local webpack-dev-server: [localhost:3000][3].
+
+> NOTE: run `npm fetch` before running `npm start` command for the first time
+
 - `npm run fetch` to retrieve external documentation/data.
 
 The final command, `npm run fetch`, is optional as both `npm run build` and `npm start`
