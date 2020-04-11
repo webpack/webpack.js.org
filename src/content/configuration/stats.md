@@ -12,6 +12,8 @@ contributors:
   - Raiondesu
   - EugeneHlushko
   - grgur
+  - anshumanv
+  - pixel-ray
 ---
 
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
@@ -35,14 +37,15 @@ module.exports = {
 };
 ```
 
-| Preset              | Alternative | Description                                       |
-|---------------------|-------------|---------------------------------------------------|
-| `'errors-only'`     | _none_      | Only output when errors happen                    |
-| `'errors-warnings'` | _none_      | Only output errors and warnings happen            |
-| `'minimal'`         | _none_      | Only output when errors or new compilation happen |
-| `'none'`            | `false`     | Output nothing                                    |
-| `'normal'`          | `true`      | Standard output                                   |
-| `'verbose'`         | _none_      | Output everything                                 |
+| Preset              | Alternative | Description                                                    |
+| ------------------- | ----------- | -------------------------------------------------------------- |
+| `'errors-only'`     | _none_      | Only output when errors happen                                 |
+| `'errors-warnings'` | _none_      | Only output errors and warnings happen                         |
+| `'minimal'`         | _none_      | Only output when errors or new compilation happen              |
+| `'none'`            | `false`     | Output nothing                                                 |
+| `'normal'`          | `true`      | Standard output                                                |
+| `'verbose'`         | _none_      | Output everything                                              |
+| `'detailed'`        | _none_      | Output everything except `chunkModules` and `chunkRootModules` |
 
 For more granular control, it is possible to specify exactly what information you want. Please note that all of the options in this object are optional.
 
@@ -100,6 +103,21 @@ module.exports = {
   //...
   stats: {
     builtAt: false
+  }
+};
+```
+
+### `stats.moduleAssets`
+
+`boolean = true`
+
+Tells `stats` whether to add information about assets inside modules. Set `stats.moduleAssets` to `false` to hide it.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    moduleAssets: false
   }
 };
 ```
@@ -190,6 +208,21 @@ module.exports = {
   //...
   stats: {
     chunkModules: false
+  }
+};
+```
+
+### `stats.chunkRootModules`
+
+`boolean = true`
+
+Tells `stats` whether to add information about the root modules of chunks. Applied if `stats.chunks = true`.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkRootModules: false
   }
 };
 ```

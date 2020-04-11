@@ -34,7 +34,7 @@ T> In [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [w
 
 ## `watchOptions`
 
-`object`
+`object` `number`
 
 A set of options used to customize watch mode:
 
@@ -47,6 +47,17 @@ module.exports = {
     aggregateTimeout: 300,
     poll: 1000
   }
+};
+```
+
+Providing a number to the `watchOptions` sets `watchOptions.aggregateTimeout` to the given number.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  // same as watchOptions.aggregateTimeout = 300
+  watchOptions:  300
 };
 ```
 
@@ -159,7 +170,7 @@ On macOS, folders can get corrupted in certain scenarios. See [this article](htt
 
 ### Windows Paths
 
-Because webpack expects absolute paths for many config options such as `__dirname + '/app/folder'` the Windows `\` path separator can break some functionality.
+Because webpack expects absolute paths for many configuration options such as `__dirname + '/app/folder'` the Windows `\` path separator can break some functionality.
 
 Use the correct separators. I.e. `path.resolve(__dirname, 'app/folder')` or `path.join(__dirname, 'app', 'folder')`.
 

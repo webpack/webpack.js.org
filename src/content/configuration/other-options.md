@@ -126,6 +126,26 @@ module.exports = {
 
 W> The final location of the cache is a combination of `cache.cacheDirectory` + `cache.name`.
 
+### `cache.cacheLocation`
+
+`string`
+
+Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.name)`.
+
+__webpack.config.js__
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    cacheLocation: path.resolve(__dirname, '.test_cache')
+  }
+};
+```
+
 ### `cache.hashAlgorithm`
 
 `string`
@@ -194,7 +214,7 @@ module.exports = {
 
 `string = ''`
 
-Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when config changed in a way which doesn't allow to reuse cache. This will invalidate the cache.
+Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when configuration changed in a way which doesn't allow to reuse cache. This will invalidate the cache.
 
 `cache.version` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
@@ -287,6 +307,8 @@ Use this option to generate a JSON file containing webpack "records" -- pieces o
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   recordsPath: path.join(__dirname, 'records.json')
@@ -316,6 +338,8 @@ Specify where the records should be written. The following example shows how you
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   recordsInputPath: path.join(__dirname, 'records.json'),

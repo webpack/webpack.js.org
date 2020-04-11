@@ -134,7 +134,7 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 
 ## Via the Node.js API
 
-When using Webpack Dev Server with the Node.js API, don't put the dev server options on the webpack config object. Instead, pass them as a second parameter upon creation. For example:
+When using Webpack Dev Server with the Node.js API, don't put the dev server options on the webpack configuration object. Instead, pass them as a second parameter upon creation. For example:
 
 `new WebpackDevServer(compiler, options)`
 

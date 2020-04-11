@@ -146,7 +146,7 @@ module.exports = {
 };
 ```
 
-With this config all the `html` files will be emitted into a `static` directory within the output directory.
+With this configuration all the `html` files will be emitted into a `static` directory within the output directory.
 
 `Rule.generator.filename` is the same as [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) and works only with `asset` and `asset/resource` module types.
 
