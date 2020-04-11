@@ -164,10 +164,10 @@ The `info` parameter will be an object containing some of the following values:
 
 ```js
 {
-  type: "self-declined" | "declined" |
-        "unaccepted" | "accepted" |
-        "disposed" | "accept-errored" |
-        "self-accept-errored" | "self-accept-error-handler-errored",
+  type: 'self-declined' | 'declined' |
+        'unaccepted' | 'accepted' |
+        'disposed' | 'accept-errored' |
+        'self-accept-errored' | 'self-accept-error-handler-errored',
   moduleId: 4, // The module in question.
   dependencyId: 3, // For errors: the module id owning the accept handler.
   chain: [1, 2, 3, 4], // For declined/accepted/unaccepted: the chain from where the update was propagated.

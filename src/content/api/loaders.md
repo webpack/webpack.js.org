@@ -11,6 +11,7 @@ contributors:
   - jantimon
   - superburrito
   - wizardofhogwarts
+  - snitin315
 ---
 
 A loader is just a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
@@ -80,7 +81,7 @@ T> Loaders were originally designed to work in synchronous loader pipelines, lik
 
 ### "Raw" Loader
 
-By default, the resource file is converted to a UTF-8 string and passed to the loader. By setting the `raw` flag, the loader will receive the raw `Buffer`. Every loader is allowed to deliver its result as `String` or as `Buffer`. The compiler converts them between loaders.
+By default, the resource file is converted to a UTF-8 string and passed to the loader. By setting the `raw` flag to `true`, the loader will receive the raw `Buffer`. Every loader is allowed to deliver its result as a `String` or as a `Buffer`. The compiler converts them between loaders.
 
 __raw-loader.js__
 
@@ -206,7 +207,7 @@ Since webpack 4, the formerly `this.options.context` is provided as `this.rootCo
 
 The resolved request string.
 
-In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr"`
+In the example: `'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
 
 
 ### `this.query`
@@ -311,28 +312,28 @@ In the example: in loader1: `0`, in loader2: `1`
 
 The resource part of the request, including query.
 
-In the example: `"/abc/resource.js?rrr"`
+In the example: `'/abc/resource.js?rrr'`
 
 
 ### `this.resourcePath`
 
 The resource file.
 
-In the example: `"/abc/resource.js"`
+In the example: `'/abc/resource.js'`
 
 
 ### `this.resourceQuery`
 
 The query of the resource.
 
-In the example: `"?rrr"`
+In the example: `'?rrr'`
 
 
 ### `this.target`
 
 Target of compilation. Passed from configuration options.
 
-Example values: `"web"`, `"node"`
+Example values: `'web'`, `'node'`
 
 
 ### `this.webpack`
@@ -474,15 +475,6 @@ exec(code: string, filename: string)
 Execute some code fragment like a module. See [this comment](https://github.com/webpack/webpack.js.org/issues/1268#issuecomment-313513988) for a replacement method if needed.
 
 
-### `this.resolveSync`
-
-``` typescript
-resolveSync(context: string, request: string) -> string
-```
-
-Resolve a request like a require expression.
-
-
 ### `this.value`
 
 Pass values to the next loader. If you know what your result exports if executed as a module, set this value here (as an only element array).
@@ -491,11 +483,6 @@ Pass values to the next loader. If you know what your result exports if executed
 ### `this.inputValue`
 
 Passed from the last loader. If you would execute the input argument as a module, consider reading this variable for a shortcut (for performance).
-
-
-### `this.options`
-
-W> The `options` property has been deprecated in webpack 3 and removed in webpack 4.
 
 
 ### `this.debug`

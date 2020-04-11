@@ -6,6 +6,7 @@ contributors:
   - michael-ciniawsky
   - byzyk
   - anikethsaha
+  - jamesgeorge007
 ---
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
@@ -19,6 +20,8 @@ To test a single loader, you can simply use `path` to `resolve` a local file wit
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   module: {
@@ -44,6 +47,8 @@ To test multiple, you can utilize the `resolveLoader.modules` configuration to u
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   resolveLoader: {
