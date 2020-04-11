@@ -9,6 +9,7 @@ contributors:
   - madhavarshney
   - dhurlburtusa
   - jamesgeorge007
+  - anikethsaha
   - snitin315
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
@@ -245,7 +246,7 @@ W> `moduleIds: total-size` has been removed in webpack 5.
 
 ## `optimization.chunkIds`
 
-`boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size'`
+`boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic' `
 
 Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are couple of defaults for `optimization.chunkIds`:
 
@@ -259,8 +260,10 @@ Option                  | Description
 ----------------------- | -----------------------
 `'natural'`             | Numeric ids in order of usage.
 `'named'`               | Readable ids for better debugging.
+`'deterministic'`       | Short numeric ids which will not be changing between compilation. Good for long term caching. Enable by default for production mode.
 `'size'`                | Numeric ids focused on minimal initial download size.
 `'total-size'`          | numeric ids focused on minimal total download size.
+
 
 __webpack.config.js__
 
