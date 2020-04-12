@@ -29,7 +29,7 @@ This is an object where each property is the name of a Node global or module and
 
 W> Not every Node global supports all four options. The compiler will throw an error for property-value combinations that aren't supported (e.g. `global: 'empty'`). See the sections below for more details.
 
-T> If you are using a module which needs global variables in it, use `ProvidePlugin` instead of `global`
+T> If you are using a module which needs global variables in it, use `ProvidePlugin` instead of `global`.
 
 These are the defaults:
 
