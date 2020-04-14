@@ -16,19 +16,17 @@ contributors:
   - pixel-ray
 ---
 
+`object` `string`
+
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
 
-T> For webpack-dev-server, this property needs to be in the `devServer` object.
+T> For webpack-dev-server, this property needs to be in the [`devServer` configuration object](/configuration/dev-server/#devserverstats-).
 
-T> For webpack-dev-middleware, this property needs to be in the webpack-dev-middleware's `options` object.
+T> For [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware), this property needs to be in the webpack-dev-middleware's `options` object.
 
 W> This option does not have any effect when using the Node.js API.
 
-## `stats`
-
-`object` `string`
-
-There are some presets available to use as a shortcut. Use them like this:
+__webpack.js.org__
 
 ```js
 module.exports = {
@@ -36,6 +34,11 @@ module.exports = {
   stats: 'errors-only'
 };
 ```
+
+## Stats Presets
+
+webpack comes with certain presets available for the stats output:
+
 
 | Preset              | Alternative | Description                                                    |
 | ------------------- | ----------- | -------------------------------------------------------------- |
@@ -47,7 +50,11 @@ module.exports = {
 | `'verbose'`         | _none_      | Output everything                                              |
 | `'detailed'`        | _none_      | Output everything except `chunkModules` and `chunkRootModules` |
 
-For more granular control, it is possible to specify exactly what information you want. Please note that all of the options in this object are optional.
+## Stats Options
+
+It is possible to specify which information you want to see in the stats output.
+
+T> All of the options in the stats configuration object are optional.
 
 ### `stats.all`
 
