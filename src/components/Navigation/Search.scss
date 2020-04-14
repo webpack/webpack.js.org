@@ -90,15 +90,9 @@
     color: getColor(dusty-grey);
 
     .algolia-docsearch-suggestion--highlight {
-      color: $text-color-highlight;
       box-shadow: none;
       font-weight: bold;
     }
-  }
-
-  .algolia-docsearch-suggestion--highlight {
-    color: $text-color-highlight;
-    background: rgba(getColor(malibu), 0.15);
   }
 
   .algolia-docsearch-suggestion--category-header {
@@ -116,11 +110,19 @@
     background: transparentize(getColor(dusty-grey), 0.92);
     display: block;
     color: transparent;
+    .algolia-docsearch-suggestion--highlight {
+      color: transparent;
+      background: transparent;
+    }
   }
 
   .algolia-docsearch-suggestion__secondary
     .algolia-docsearch-suggestion--subcategory-column {
     color: getColor(dove-grey);
+    .algolia-docsearch-suggestion--highlight {
+      color: $text-color-highlight;
+      background: rgba(getColor(malibu), 0.15);
+    }
   }
 
   .algolia-docsearch-suggestion--content {
