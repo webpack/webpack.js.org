@@ -12,7 +12,11 @@
 }
 
 // when notification is shown
-.notification-bar + header .navigation-search .algolia-autocomplete .ds-dropdown-menu {
+.notification-bar
+  + header
+  .navigation-search
+  .algolia-autocomplete
+  .ds-dropdown-menu {
   @media (max-width: 600px) {
     top: 110px !important;
   }
@@ -50,11 +54,36 @@
 
   .algolia-docsearch-suggestion {
     padding: 0;
+    .algolia-docsearch-suggestion--subcategory-column {
+      width: 30%;
+      padding: 8px 16px 8px 12px;
+      color: transparent;
+      font-weight: 400;
+      opacity: 1;
+      text-align: right;
+      &::after {
+        display: none;
+      }
+    }
+    .algolia-docsearch-suggestion--content {
+      width: 70%;
+      padding: 8px 16px 8px 12px;
+      &::before {
+        content: '';
+        position: absolute;
+        display: block;
+        top: 0;
+        height: 100%;
+        width: 1px;
+        background: #ddd;
+        left: -1px;
+      }
+    }
   }
 
   .algolia-docsearch-suggestion--wrapper {
     display: flex;
-    padding: 0 0.5em;
+    padding: 0;
   }
 
   .algolia-docsearch-suggestion--text {
@@ -89,7 +118,8 @@
     color: transparent;
   }
 
-  .algolia-docsearch-suggestion__secondary .algolia-docsearch-suggestion--subcategory-column {
+  .algolia-docsearch-suggestion__secondary
+    .algolia-docsearch-suggestion--subcategory-column {
     color: getColor(dove-grey);
   }
 
