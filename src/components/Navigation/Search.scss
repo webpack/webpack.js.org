@@ -129,6 +129,16 @@
     padding: 8px 16px 8px 12px;
   }
 
+  .algolia-docsearch-suggestion__secondary {
+    border-top: 1px solid lighten(getColor(mine-shaft), 65%);
+  }
+
+  .ds-suggestion:first-of-type {
+    .algolia-docsearch-suggestion__secondary {
+      border-top: none;
+    }
+  }
+
   .ds-suggestion:nth-child(n + 2) {
     .algolia-docsearch-suggestion--category-header {
       border-top: 1px solid #dedede;
