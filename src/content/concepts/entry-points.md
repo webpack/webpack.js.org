@@ -94,7 +94,7 @@ __webpack.dev.js__
 ```javascript
 module.exports = {
   entry: {
-    filename: [name].bundle.js
+    filename: '[name].bundle.js'
   }
 };
 ```
