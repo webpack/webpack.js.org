@@ -28,9 +28,9 @@ new webpack.BannerPlugin(options);
   banner: string | function, // the banner as string or function, it will be wrapped in a comment
   raw: boolean, // if true, banner will not be wrapped in a comment
   entryOnly: boolean, // if true, the banner will only be added to the entry chunks
-  test: string | RegExp | Array,
-  include: string | RegExp | Array,
-  exclude: string | RegExp | Array,
+  test: string | RegExp | Array, // Include all modules that pass test assertion.
+  include: string | RegExp | Array, // Include all modules matching any of these conditions.
+  exclude: string | RegExp | Array, // Exclude all modules matching any of these conditions.
 }
 ```
 
