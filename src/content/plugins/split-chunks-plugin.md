@@ -206,8 +206,6 @@ If you choose to specify a function, you may find the `chunk.name` and `chunk.ha
 
 If the `splitChunks.name` matches an [entry point](/configuration/entry-context/#entry) name, the entry point will be removed.
 
-T> It is recommended to set `splitChunks.name` to `false` for production builds so that it doesn't change names unnecessarily.
-
 __main.js__
 
 ```js
