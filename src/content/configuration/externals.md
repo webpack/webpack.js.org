@@ -12,6 +12,7 @@ contributors:
   - jamesgeorge007
   - tanhauhau
   - snitin315
+  - beejunk
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
@@ -144,9 +145,21 @@ This syntax is used to describe all the possible ways that an external library c
 
 `function (context, request, callback)`
 
-It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides some options too, for example, whitelist packages.
+It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides some options to, for example, whitelist packages.
 
-It basically comes down to this:
+The function receives three parameters:
+
+- `context` (`string`): The directory of the file which contains the import.
+- `request` (`string`): The import path being requested.
+- `callback` (`Function`): Callback function used to indicate how the module should be externalized.
+
+The callback function takes three parameters:
+
+- `err` (`Error`): Used to indicate if there has been an error while externalizing the import. If there is an error, this should be the only parameter used.
+- `result` (`string | string[] | Object`): Describes the external module. Can accept a string in the format `${type} ${path}`, or one of the other standard external formats ([string](#string), [string[]](#string-1), or [Object](#object))
+- `type` (`string`): Optional parameter that indicates the module type (if it has not already been indicated in the `result` parameter).
+
+As an example, to externalize all imports where the import path matches a regular expression you could do the following:
 
 ```javascript
 module.exports = {
@@ -154,16 +167,67 @@ module.exports = {
   externals: [
     function(context, request, callback) {
       if (/^yourregex$/.test(request)){
+        // Externalize to a commonjs module using the request path 
         return callback(null, 'commonjs ' + request);
       }
+
+      // Continue without externalizing the import
       callback();
     }
   ]
 };
 ```
 
-The `'commonjs ' + request` defines the type of module that needs to be externalized.
+Other examples using different module formats:
 
+```javascript
+module.exports = {
+  externals: [
+    function(context, request, callback) {
+      // The external is a `commonjs2` module located at `@scope/library`
+      callback(null, '@scope/library', 'commonjs2');
+    }
+  ]
+};
+```
+
+```javascript
+module.exports = {
+  externals: [
+    function(context, request, callback) {
+      // The external is a global variable called `nameOfGlobal`.
+      callback(null, 'nameOfGlobal');
+    }
+  ]
+};
+```
+
+```javascript
+module.exports = {
+  externals: [
+    function(context, request, callback) {
+      // The external is a named export in the `@scope/library` module.
+      callback(null, ['@scope/library', 'namedexport'], 'commonjs');
+    }
+  ]
+};
+```
+
+```javascript
+module.exports = {
+  externals: [
+    function(context, request, callback) {
+      // The external is a UMD module
+      callback(null, {
+        root: 'componentsGlobal',
+        commonjs: '@scope/components',
+        commonjs2: '@scope/components',
+        amd: 'components'
+      });
+    }
+  ]
+};
+```
 
 ### RegExp
 
