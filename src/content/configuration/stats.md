@@ -636,7 +636,7 @@ module.exports = {
 
 `string` `boolean: false`
 
-Sets the [preset](/configuration/stats/#stats) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
+Sets the [preset](/configuration/stats/#stats-presets) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
 
 ```javascript
 module.exports = {
@@ -647,7 +647,7 @@ module.exports = {
 };
 ```
 
-Setting value of `stats.preset` to `false` tells webpack to use `'none'` [stats preset](/configuration/stats/#stats).
+Setting value of `stats.preset` to `false` tells webpack to use `'none'` [stats preset](/configuration/stats/#stats-presets).
 
 ### `stats.providedExports`
 
