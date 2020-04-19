@@ -145,21 +145,23 @@ This syntax is used to describe all the possible ways that an external library c
 
 `function (context, request, callback)`
 
-It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides some options to, for example, whitelist packages.
+It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides options to whitelist packages.
 
-The function receives three parameters:
+The function receives three arguments:
 
 - `context` (`string`): The directory of the file which contains the import.
 - `request` (`string`): The import path being requested.
-- `callback` (`Function`): Callback function used to indicate how the module should be externalized.
+- `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
 
-The callback function takes three parameters:
+The callback function takes three arguments:
 
 - `err` (`Error`): Used to indicate if there has been an error while externalizing the import. If there is an error, this should be the only parameter used.
-- `result` (`string | string[] | Object`): Describes the external module. Can accept a string in the format `${type} ${path}`, or one of the other standard external formats ([string](#string), [string[]](#string-1), or [Object](#object))
+- `result` (`string` `[string]` `object`): Describes the external module. Can accept a string in the format `${type} ${path}`, or one of the other standard external formats ([`string`](#string), [`[string]`](#string-1), or [`object`](#object))
 - `type` (`string`): Optional parameter that indicates the module type (if it has not already been indicated in the `result` parameter).
 
 As an example, to externalize all imports where the import path matches a regular expression you could do the following:
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -180,6 +182,8 @@ module.exports = {
 
 Other examples using different module formats:
 
+__webpack.config.js__
+
 ```javascript
 module.exports = {
   externals: [
@@ -190,6 +194,8 @@ module.exports = {
   ]
 };
 ```
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -202,6 +208,8 @@ module.exports = {
 };
 ```
 
+__webpack.config.js__
+
 ```javascript
 module.exports = {
   externals: [
@@ -212,6 +220,8 @@ module.exports = {
   ]
 };
 ```
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
