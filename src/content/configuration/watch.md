@@ -34,7 +34,7 @@ T> In [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [w
 
 ## `watchOptions`
 
-`object` `number`
+`object` `number = 200`
 
 A set of options used to customize watch mode:
 
@@ -44,7 +44,7 @@ __webpack.config.js__
 module.exports = {
   //...
   watchOptions: {
-    aggregateTimeout: 300,
+    aggregateTimeout: 200,
     poll: 1000
   }
 };
@@ -64,7 +64,7 @@ module.exports = {
 
 ## `watchOptions.aggregateTimeout`
 
-`number = 300`
+`number = 200`
 
 Add a delay before rebuilding once the first file changed. This allows webpack to aggregate any other changes made during this time period into one rebuild. Pass a value in milliseconds:
 
