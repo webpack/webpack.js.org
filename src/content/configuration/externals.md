@@ -188,7 +188,7 @@ __webpack.config.js__
 module.exports = {
   externals: [
     function(context, request, callback) {
-      // The external is a `commonjs2` module located at `@scope/library`
+      // The external is a `commonjs2` module located in `@scope/library`
       callback(null, '@scope/library', 'commonjs2');
     }
   ]
