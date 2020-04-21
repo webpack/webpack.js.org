@@ -864,6 +864,17 @@ System.register('my-library', [], function(_export) {
 
 Module proof library.
 
+Note that as of webpack@5.0.0-beta.15, you can access [SystemJS context](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md#format-definition) via `__system_context__`:
+
+```javascript
+// Log the URL of the current SystemJS module
+console.log(__system_context__.meta.url);
+
+// Import a SystemJS module, with the current SystemJS module's url as the parentUrl
+__system_context__.import('./other-file.js').then(m => {
+  console.log(m);
+});
+```
 
 ### Other Targets
 
