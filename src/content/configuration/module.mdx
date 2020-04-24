@@ -49,6 +49,22 @@ module.exports = {
 };
 ```
 
+## `module.unsafeCache`
+
+`boolean: false` `function()`
+
+Cache the resolving of module requests.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  module: {
+    unsafeCache: false,
+  }
+};
+```
 
 ## `module.rules`
 
