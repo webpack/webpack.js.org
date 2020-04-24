@@ -115,7 +115,7 @@ T> If you use `require.context`, webpack will watch your entire directory. You w
 
 `boolean = false` `number`
 
-Turn on [polling](https://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
+Turn on [polling](https://en.wikipedia.org/wiki/Polling_(computer_science)) by passing `true`, or specifying a poll interval in milliseconds:
 
 __webpack.config.js__
 
