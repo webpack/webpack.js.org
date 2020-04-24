@@ -252,6 +252,7 @@ Tells webpack which algorithm to use when choosing chunk ids. Setting `optimizat
 
 - if [`optimization.occurrenceOrder`](#optimizationoccurrenceorder) is enabled `optimization.chunkIds` is set to `'total-size'`
 - Disregarding previous if, if [`optimization.namedChunks`](#optimizationnamedchunks) is enabled `optimization.chunkIds` is set to `'named'`
+- Also if the environment is development then `optimization.chunkIds` is set to `'named'`, while in production it is set to `'deterministic'`
 - if none of the above, `optimization.chunkIds` will be defaulted to `'natural'`
 
 The following string values are supported:
