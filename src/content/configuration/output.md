@@ -862,7 +862,7 @@ System.register('my-library', [], function(_export) {
 });
 ```
 
-As of webpack@5.0.0-beta.15, you can access [SystemJS context](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md#format-definition) via `__system_context__`:
+You can access [SystemJS context](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md#format-definition) via `__system_context__`:
 
 ```javascript
 // Log the URL of the current SystemJS module
