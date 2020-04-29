@@ -278,7 +278,7 @@ module.exports = {
 };
 ```
 
-By default a minimum length of 3 digits is used when `optimization.chunkIds` is set to `deterministic`. To override the default behaviour set `optimization.chunkIds` to `false` and use the `webpack.ids.DeterministicChunkIdsPlugin`.
+By default, a minimum length of 3 digits is used when `optimization.chunkIds` is set to `'deterministic'`. To override the default behaviour, set `optimization.chunkIds` to `false` and use the `webpack.ids.DeterministicChunkIdsPlugin`.
 
 __webpack.config.js__
 
