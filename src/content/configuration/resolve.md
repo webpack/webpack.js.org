@@ -120,9 +120,9 @@ The following table explains other cases:
 
 W> `resolve.alias` takes precedence over other module resolutions.
 
-W> [`null-loader`](https://github.com/webpack-contrib/null-loader) is deprecated in `webpack@5`. use `alias: { xyz$: false }` or absolute path `alias: {[path.resolve(__dirname, "....")]: false }`
+W> [`null-loader`](https://github.com/webpack-contrib/null-loader) is deprecated in webpack 5. use `alias: { xyz$: false }` or absolute path `alias: {[path.resolve(__dirname, './path/to/module')]: false }`
 
-W> `[string]` values are supported since webpack 5.0.0.
+W> `[string]` values are supported since webpack 5.
 
 ```js
 module.exports = {
