@@ -11,6 +11,7 @@ contributors:
   - jamesgeorge007
   - anikethsaha
   - snitin315
+  - pixel-ray
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -274,6 +275,24 @@ module.exports = {
   optimization: {
     chunkIds: 'named'
   }
+};
+```
+
+By default, a minimum length of 3 digits is used when `optimization.chunkIds` is set to `'deterministic'`. To override the default behaviour, set `optimization.chunkIds` to `false` and use the `webpack.ids.DeterministicChunkIdsPlugin`.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    chunkIds: false
+  },
+  plugins: [
+    new webpack.ids.DeterministicChunkIdsPlugin({
+      maxLength: 5
+    })
+  ]
 };
 ```
 
