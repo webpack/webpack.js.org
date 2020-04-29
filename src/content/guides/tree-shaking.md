@@ -310,6 +310,17 @@ After this optimization, other optimizations can still apply. For example: `butt
 
 Module Concatenation also applies. So that these 4 modules plus the entry module (and probably more dependencies) can be concatenated. __`index.js` has no code generated in the end__.
 
+## Mark a function call as side-effect-free
+
+It is possible to tell webpack that a function call is side-effect-free (pure) by using the `/*#__PURE__*/` annotation. It can be put in front of function calls to mark them as side-effect-free. Arguments passed to the function are not being marked by the annotation and may need to be marked individually. When the initial value in a variable declaration of an unused variable is considered as side-effect-free (pure), it is getting marked as dead code, not executed and dropped by the minimizer.
+This behavior is enabled when [`optimization.innerGraph`](/configuration/optimization/#optimizationinnergraph) is set to `true`.
+
+__file.js__
+
+```javascript
+/*#__PURE__*/ double(55);
+```
+
 ## Minify the Output
 
 So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that, set the `mode` configuration option to [`production`](/configuration/mode/#mode-production).
@@ -339,7 +350,7 @@ With that squared away, we can run another `npm run build` and see if anything h
 
 Notice anything different about `dist/bundle.js`? Clearly the whole bundle is now minified and mangled, but, if you look carefully, you won't see the `square` function included but will see a mangled version of the `cube` function (`function r(e){return e*e*e}n.a=r`). With minification and tree shaking, our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
 
-T> [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin) is needed for the tree shaking to work. It is added by `mode: "production"`. If you are not using it, remember to add the [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin) manually.
+T> [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin/) is needed for the tree shaking to work. It is added by `mode: 'production'`. If you are not using it, remember to add the [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin/) manually.
 
 ## Conclusion
 

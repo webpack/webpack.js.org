@@ -18,6 +18,10 @@ contributors:
   - EugeneHlushko
   - g-plane
   - smelukov
+  - Neob91
+  - anikethsaha
+  - jamesgeorge007
+  - hiroppy
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -45,7 +49,7 @@ module.exports = {
 
 which will yield the following:
 
-__webpack.config.js__
+__someLibName.js__
 
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -123,6 +127,25 @@ module.exports = {
   output: {
     //...
     chunkLoadTimeout: 30000
+  }
+};
+```
+
+
+## `output.chunkCallbackName`
+
+`string = 'webpackChunkwebpack'`
+
+The callback function name used by webpack for loading of chunks in Web Workers.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkCallbackName: 'myCustomFunc'
   }
 };
 ```
@@ -320,6 +343,8 @@ Note this option is called filename but you are still allowed to use something l
 
 Note this option does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case you would have to try the specific loader's available options.
 
+## Template strings
+
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
 | Template      | Description                                                                         |
@@ -350,7 +375,7 @@ The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides
 
 `string = 'window'`
 
-When targeting a library, especially the `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`.
+When targeting a library, especially when `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`.
 
 For example:
 
@@ -364,6 +389,28 @@ module.exports = {
     libraryTarget: 'umd',
     filename: 'myLib.js',
     globalObject: 'this'
+  }
+};
+```
+
+## `output.uniqueName`
+
+`string`
+
+A unique name of the webpack build to avoid multiple webpack runtimes to conflict when using globals. It defaults to [`output.library`](/configuration/output/#outputlibrary) name or the package name from `package.json` in the context, if both aren't found, it is set to an `''`.
+
+`output.uniqueName` will be used to generate unique globals for:
+
+- [`output.jsonpFunction`](/configuration/output/#outputjsonpfunction)
+- [`output.chunkCallbackName`](/configuration/output/#outputchunkcallbackname)
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  // ...
+  output: {
+    uniqueName: 'my-package-xyz'
   }
 };
 ```
@@ -407,7 +454,7 @@ An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.
 
 ## `output.hotUpdateChunkFilename`
 
-`string = '[id].[hash].hot-update.js'` `function (chunkData) => string`
+`string = '[id].[hash].hot-update.js'`
 
 Customize the filenames of hot update chunks. See [`output.filename`](#outputfilename) option for details on the possible values.
 
@@ -419,9 +466,7 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    hotUpdateChunkFilename: (chunkData) => {
-      return `${chunkData.chunk.name === 'main' ? '' : '[name]/'}[id].[hash].hot-update.js`;
-    }
+    hotUpdateChunkFilename: '[id].[hash].hot-update.js'
   }
 };
 ```
@@ -518,7 +563,7 @@ T> Read the [authoring libraries guide](/guides/author-libraries/) guide for mor
 
 `string` `[string]`
 
-Configure which module or modules will be exposed via the `libraryTarget`. It is `undefined` by default, same behaviour will be applied if you set `libraryTarget` to an empty string e.g. `''` it will export the whole (namespace) object. The examples below demonstrate the effect of this config when using `libraryTarget: 'var'`.
+Configure which module or modules will be exposed via the `libraryTarget`. It is `undefined` by default, same behaviour will be applied if you set `libraryTarget` to an empty string e.g. `''` it will export the whole (namespace) object. The examples below demonstrate the effect of this configuration when using `libraryTarget: 'var'`.
 
 The following configurations are supported:
 
@@ -833,13 +878,15 @@ The dependencies for your library will be defined by the [`externals`](/configur
 
 ## `output.path`
 
-`string: path.join(process.cwd(), 'dist')`
+`string = path.join(process.cwd(), 'dist')`
 
 The output directory as an __absolute__ path.
 
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   output: {
@@ -888,6 +935,8 @@ Simple rule: The URL of your [`output.path`](#outputpath) from the view of the H
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   output: {
@@ -1041,24 +1090,9 @@ module.exports = {
 };
 ```
 
-## `output.futureEmitAssets`
-
-`boolean = false`
-
-Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted.
-
-W> `output.futureEmitAssets` option will be removed in webpack v5.0.0 and this behaviour will become the new default.
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    futureEmitAssets: true
-  }
-};
-```
-
 ## `output.ecmaVersion`
+
+`number = 6`
 
 Tell webpack the maximum EcmaScript version of the webpack generated code. It should be one of these:
 
@@ -1073,6 +1107,8 @@ module.exports = {
 };
 ```
 
+T> The default value of `output.ecmaVersion` in webpack 4 is `5`.
+
 ## `output.compareBeforeEmit`
 
 `boolean = true`
@@ -1086,6 +1122,38 @@ module.exports = {
   //...
   output: {
     compareBeforeEmit: false
+  }
+};
+```
+
+## `output.iife`
+
+`boolean = true`
+
+Tells webpack to add [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) wrapper around emitted code.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    iife: true
+  }
+};
+```
+
+## `output.module`
+
+`boolean = true`
+
+Allow outputting JavaScript files as module type. It sets `output.iife` to `false`, `output.libraryTarget` to `'module'`, `output.jsonpScriptType` to `'module'` and `terserOptions.module` to `true`
+
+W> `output.module` is an experimental feature and can be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    module: true
   }
 };
 ```

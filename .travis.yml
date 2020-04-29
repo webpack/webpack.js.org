@@ -1,10 +1,6 @@
-sudo: false
 language: node_js
 node_js:
-  - "8"
-
-matrix:
-  fast_finish: true
+  - "10.18.0"
 
 cache:
   yarn: true

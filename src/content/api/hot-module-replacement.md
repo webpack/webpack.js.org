@@ -6,6 +6,8 @@ contributors:
   - skipjack
   - tbroadley
   - byzyk
+  - wizardofhogwarts
+  - snitin315
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -66,7 +68,7 @@ module.hot.decline(
 );
 ```
 
-Flag a dependency as not-update-able. This makes sense when changing exports of this dependency can be handled or handling is not implemented yet. Depending on your HMR management code an update to these dependencies (or unaccepted dependencies of it) usually causes a full-reload of the page.
+Flag a dependency as not-update-able. This makes sense when changing exports of this dependency can be handled or handling is not implemented yet. Depending on your HMR management code, an update to these dependencies (or unaccepted dependencies of it) usually causes a full-reload of the page.
 
 ### `decline` (self)
 
@@ -76,7 +78,7 @@ Reject updates for itself.
 module.hot.decline();
 ```
 
-Flag this module as not-update-able. This makes sense when this module has irreversible side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
+Flag this module as not-update-able. This makes sense when this module has irreversible side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code, an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
 
 ### `dispose` (or `addDisposeHandler`)
 
@@ -88,6 +90,79 @@ module.hot.dispose(data => {
 });
 ```
 
+
+### `invalidate`
+
+Calling this method will invalidate the current module, which disposes and recreates it when the HMR update is applied. This bubbles like a normal update of this module. `invalidate` can't be self-accepted by this module.
+
+When called during the `idle` state, a new HMR update will be created containing this module. HMR will enter the `ready` state.
+
+When called during the `ready` or `prepare` state, this module will be added to the current HMR update.
+
+When called during the `check` state, this module will be added to the update when an update is available. If no update is available it will create a new update. HMR will enter the `ready` state.
+
+When called during the `dispose` or `apply` state, HMR will pick it up after getting out of those states.
+
+### Use Cases
+
+__Conditional Accepting__
+
+A module can accept a dependency, but can call `invalidate` when the change of the dependency is not handleable:
+
+```js
+import { x, y } from './dep';
+import { processX, processY } from 'anotherDep';
+
+const oldY = y;
+
+processX(x);
+export default processY(y);
+
+module.hot.accept('./dep', () => {
+  if(y !== oldY) {
+    // This can't be handled, bubble to parent
+    module.hot.invalidate();
+    return;
+  }
+  // This can be handled
+  processX(x);
+});
+```
+
+__Conditional self accept__
+
+A module can self-accept itself, but can invalidate itself when the change is not handleable:
+
+```javascript
+const VALUE = 'constant';
+
+export default VALUE;
+
+if(module.hot.data && module.hot.data.value && module.hot.data.value !== VALUE) {
+  module.hot.invalidate();
+} else {
+  module.hot.dispose(data => {
+    data.value = VALUE;
+  });
+  module.hot.accept();
+}
+```
+
+__Triggering custom HMR updates__
+
+```javascript
+const moduleId = chooseAModule();
+const code = __webpack_modules__[moduleId].toString();
+__webpack_modules__[moduleId] = eval(`(${makeChanges(code)})`);
+if(require.cache[moduleId]) {
+  require.cache[moduleId].hot.invalidate();
+  module.hot.apply();
+}
+```
+
+T> When `invalidate` is called, the [`dispose`](#dispose-or-adddisposehandler) handler will be eventually called and fill `module.hot.data`. If [`dispose`](#dispose-or-adddisposehandler) handler is not registered, an empty object will be supplied to `module.hot.data`.
+
+W> Do not get caught in an `invalidate` loop, by calling `invalidate` again and again. This will result in stack overflow and HMR entering the `fail` state.
 
 ### `removeDisposeHandler`
 
@@ -163,10 +238,10 @@ The `info` parameter will be an object containing some of the following values:
 
 ```js
 {
-  type: "self-declined" | "declined" |
-        "unaccepted" | "accepted" |
-        "disposed" | "accept-errored" |
-        "self-accept-errored" | "self-accept-error-handler-errored",
+  type: 'self-declined' | 'declined' |
+        'unaccepted' | 'accepted' |
+        'disposed' | 'accept-errored' |
+        'self-accept-errored' | 'self-accept-error-handler-errored',
   moduleId: 4, // The module in question.
   dependencyId: 3, // For errors: the module id owning the accept handler.
   chain: [1, 2, 3, 4], // For declined/accepted/unaccepted: the chain from where the update was propagated.

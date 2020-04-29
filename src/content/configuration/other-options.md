@@ -10,6 +10,8 @@ contributors:
   - vansosnin
   - EugeneHlushko
   - skovy
+  - rishabh3112
+  - Neob91
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -124,6 +126,26 @@ module.exports = {
 
 W> The final location of the cache is a combination of `cache.cacheDirectory` + `cache.name`.
 
+### `cache.cacheLocation`
+
+`string`
+
+Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.name)`.
+
+__webpack.config.js__
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    cacheLocation: path.resolve(__dirname, '.test_cache')
+  }
+};
+```
+
 ### `cache.hashAlgorithm`
 
 `string`
@@ -166,16 +188,15 @@ module.exports = {
 
 ### `cache.store`
 
-`string: 'background' | 'idle' | 'instant' | 'pack'`
+`string = 'pack': 'pack'`
 
-`cache.store` tells webpack when to store data on the file system. Defaults to `'idle'`.
+`cache.store` tells webpack when to store data on the file system.
 
-- `'background'`: Store data in background while compiling, but doesn't block the compilation
-- `'idle'`: Store data when compiler is idle in one file per cached item
-- `'instant'`: Store data when instantly. Blocks compilation until data is stored
 - `'pack'`: Store data when compiler is idle in a single file for all cached items
 
 `cache.store` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+
+W> `pack` is the only supported mode since webpack 5.0.x
 
 __webpack.config.js__
 
@@ -191,9 +212,9 @@ module.exports = {
 
 ### `cache.version`
 
-`string: ''`
+`string = ''`
 
-Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when config changed in a way which doesn't allow to reuse cache. This will invalidate the cache. Defaults to `''`.
+Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when configuration changed in a way which doesn't allow to reuse cache. This will invalidate the cache.
 
 `cache.version` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
@@ -211,6 +232,43 @@ module.exports = {
 
 W> Don't share the cache between calls with different options.
 
+### `cache.idleTimeout`
+
+`number = 10000`
+
+Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    idleTimeout: 10000
+  }
+};
+```
+
+W> `cache.idleTimeout` is only available when [`cache.store`](#cachestore) is set to either `'pack'` or `'idle'`
+
+### `cache.idleTimeoutForInitialStore`
+
+`number = 0`
+
+Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period after which the initial cache storing should happen.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    idleTimoutForInitialStore: 0
+  }
+};
+```
+
+W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#cachestore) is set to either `'pack'` or `'idle'`
 
 ## `loader`
 
@@ -249,6 +307,8 @@ Use this option to generate a JSON file containing webpack "records" -- pieces o
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   recordsPath: path.join(__dirname, 'records.json')
@@ -278,6 +338,8 @@ Specify where the records should be written. The following example shows how you
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   recordsInputPath: path.join(__dirname, 'records.json'),
@@ -337,7 +399,7 @@ module.exports = {
 
 `string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 
-Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#stats) option but for infrastructure. No default value is given.
+Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) option but for infrastructure. No default value is given.
 
 __webpack.config.js__
 

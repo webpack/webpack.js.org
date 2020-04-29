@@ -12,6 +12,8 @@ contributors:
   - byzyk
   - wizardofhogwarts
   - EslamHiko
+  - smelukov
+  - anikethsaha
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -21,16 +23,16 @@ related:
     url: https://hackernoon.com/optimising-your-application-bundle-size-with-webpack-e85b00bab579#.5w5ko08pq
   - title: Analyzing & optimizing your webpack bundle
     url: https://medium.com/@ahmedelgabri/analyzing-optimizing-your-webpack-bundle-8590818af4df#.hce4vdjs9
-  - title: Analysing and minimising the size of client side bundle with webpack and source-map-explorer
+  - title: Analysing and minimising the size of client-side bundle with webpack and source-map-explorer
     url: https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x
 ---
 
-For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the config file.
+For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the configuration file.
 
 Read the [installation guide](/guides/installation) if you don't already have webpack and CLI installed.
 
 
-## Usage with config file
+## Usage with configuration file
 
 ```bash
 webpack [--config webpack.config.js]
@@ -39,7 +41,7 @@ webpack [--config webpack.config.js]
 See [configuration](/configuration) for the options in the configuration file.
 
 
-## Usage without config file
+## Usage without configuration file
 
 ```sh
 webpack <entry> [<entry>] -o <output>
@@ -108,7 +110,7 @@ webpack --help
 webpack -h
 ```
 
-__Build source using a config file__
+__Build source using a configuration file__
 
 Specifies a different [configuration](/configuration) file to pick up. Use this if you want to specify something different from `webpack.config.js`, which is the default.
 
@@ -146,33 +148,33 @@ Invocation                               | Resulting environment
 `webpack --env.prod --env min`           | `[{ prod: true }, "min"]`
 `webpack --env.prod=foo --env.prod=bar`  | `{prod: [ "foo", "bar" ]}`
 
-T> See the [environment variables](/guides/environment-variables) guide for more information on its usage.
+T> See the [environment variables](/guides/environment-variables/) guide for more information on its usage.
 
-### Config Options
+### Configuration Options
 
 Parameter                 | Explanation                                 | Input type | Default
 ------------------------- | ------------------------------------------- | ---------- | ------------------
-`--config`                | Path to the config file                     | string     | webpack.config.js or webpackfile.js
-`--config-register, -r`   | Preload one or more modules before loading the webpack configuration | array |
-`--config-name`           | Name of the config to use                   | string     |
-`--env`                   | Environment passed to the config, when it is a function  | |
-`--mode`                  | Mode to use, either "development" or "production" | string |
+`--config`                | Path to the configuration file                                       | string | `webpack.config.js` or `webpackfile.js`
+`--config-register, -r`   | Preload one or more modules before loading the webpack configuration | array  |
+`--config-name`           | Name of the configuration to use                                     | string |
+`--env`                   | Environment passed to the configuration, when it is a function       |        |
+`--mode`                  | Mode to use                                                          | string | `'production'`
 
 ### Output Options
 
-This set of options allows you to manipulate certain [output](/configuration/output) parameters of your build.
+This set of options allows you to manipulate certain [output](/configuration/output/) parameters of your build.
 
 Parameter                 | Explanation                                 | Input type | Default
 ------------------------- | ------------------------------------------- | ---------- | ------------------
 `--output-chunk-filename` | The output filename for additional chunks   | string     | filename with [id] instead of [name] or [id] prefixed
-`--output-filename`       | The output filename of the bundle           | string     | [name].js
-`--output-jsonp-function` | The name of the JSONP function used for chunk loading | string | webpackJsonp
+`--output-filename`       | The output filename of the bundle           | string     | `[name].js`
+`--output-jsonp-function` | The name of the JSONP function used for chunk loading | string | `webpackJsonp`
 `--output-library`        | Expose the exports of the entry point as library | string |
-`--output-library-target` | The type for exposing the exports of the entry point as library | string | var
+`--output-library-target` | The type for exposing the exports of the entry point as library | string | `var`
 `--output-path`           | The output path for compilation assets      | string     | Current directory
-`--output-pathinfo`       | Include a comment with the request for every dependency | boolean | false
-`--output-public-path`    | The public path for the assets              | string     | /
-`--output-source-map-filename` | The output filename for the SourceMap  | string     | [name].map or [outputFilename].map
+`--output-pathinfo`       | Include a comment with the request for every dependency | boolean | `false`
+`--output-public-path`    | The public path for the assets              | string     | `/`
+`--output-source-map-filename` | The output filename for the SourceMap  | string     | `[name].map` or `[outputFilename].map`
 `--build-delimiter` | Display custom text after build output | string | Default string is null. You could provide a string such as `=== Build done ===`
 
 
@@ -211,10 +213,10 @@ This set of options allows you to better debug the application containing assets
 
 Parameter    | Explanation                                      | Input type | Default value
 ------------ | ------------------------------------------------ | ---------- | -------------
-`--debug`    | Switch loaders to debug mode                     | boolean    | false
-`--devtool`  | Define [source map type](/configuration/devtool/) for the bundled resources | string | -
-`--progress` | Print compilation progress in percentage         | boolean    | false
-`--display-error-details` | Display details about errors | boolean | false
+`--debug`    | Switch loaders to debug mode                     | boolean    | `false`
+`--devtool`  | Define [source map type](/configuration/devtool/) for the bundled resources | string | `-`
+`--progress` | Print compilation progress in percentage         | boolean    | `false`
+`--display-error-details` | Display details about errors | boolean | `false`
 
 ### Module Options
 
@@ -245,9 +247,9 @@ These options allow you to manipulate optimizations for a production build using
 
 Parameter                   | Explanation                                            | Plugin Used
 --------------------------- | -------------------------------------------------------|----------------------
-`--optimize-max-chunks`     | Try to keep the chunk count below a limit              | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin)
-`--optimize-min-chunk-size` | Try to keep the chunk size above a limit               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin)
-`--optimize-minimize`       | Minimize javascript and switches loaders to minimizing | [TerserPlugin](/plugins/terser-webpack-plugin/) & [LoaderOptionsPlugin](/plugins/loader-options-plugin/)
+`--optimize-max-chunks`     | Try to keep the chunk count below a limit              | [LimitChunkCountPlugin](/plugins/limit-chunk-count-plugin/)
+`--optimize-min-chunk-size` | Try to keep the chunk size above a limit               | [MinChunkSizePlugin](/plugins/min-chunk-size-plugin/)
+`--optimize-minimize`       | Minimize javascript and switches loaders to minimizing | [TerserPlugin](/plugins/terser-webpack-plugin/)
 
 
 ### Resolve Options
@@ -267,28 +269,28 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 
 Parameter                        | Explanation                                                        | Type
 -------------------------------- | ------------------------------------------------------------------ | -------
-`--color`, `--colors`            | Force colors on the console [default: enabled for TTY output only] | boolean
-`--no-color`, `--no-colors`      | Force no colors on the console                                     | boolean
-`--display`                      | Select [display preset](/configuration/stats) (verbose, detailed, normal, minimal, errors-only, none; since webpack 3.0.0) | string
-`--display-cached`               | Display also cached modules in the output                          | boolean
-`--display-cached-assets`        | Display also cached assets in the output                           | boolean
-`--display-chunks`               | Display chunks in the output                                       | boolean
-`--display-depth`                | Display distance from entry point for each module                  | boolean
-`--display-entrypoints`          | Display entry points in the output                                 | boolean
-`--display-error-details`        | Display details about errors                                       | boolean
-`--display-exclude`              | Exclude modules in the output                                      | boolean
-`--display-max-modules`          | Set the maximum number of visible modules in output                | number
-`--display-modules`              | Display even excluded modules in the output                        | boolean
-`--display-optimization-bailout` | Scope hoisting fallback trigger (since webpack 3.0.0)              | boolean
-`--display-origins`              | Display origins of chunks in the output                            | boolean
-`--display-provided-exports`     | Display information about exports provided from modules            | boolean
-`--display-reasons`              | Display reasons about module inclusion in the output               | boolean
-`--display-used-exports`         | Display information about used exports in modules (Tree Shaking)   | boolean
-`--hide-modules`                 | Hide info about modules                                            | boolean
-`--sort-assets-by`               | Sort the assets list by property in asset                          | string
-`--sort-chunks-by`               | Sort the chunks list by property in chunk                          | string
-`--sort-modules-by`              | Sort the modules list by property in module                        | string
-`--verbose`                      | Show more details                                                  | boolean
+`--color`, `--colors`            | Force colors on the console [default: enabled for TTY output only] | `boolean`
+`--no-color`, `--no-colors`      | Force no colors on the console                                     | `boolean`
+`--display`                      | Select [display preset](/configuration/stats) (verbose, detailed, normal, minimal, errors-only, none; since webpack 3.0.0) | `string`
+`--display-cached`               | Display also cached modules in the output                          | `boolean`
+`--display-cached-assets`        | Display also cached assets in the output                           | `boolean`
+`--display-chunks`               | Display chunks in the output                                       | `boolean`
+`--display-depth`                | Display distance from entry point for each module                  | `boolean`
+`--display-entrypoints`          | Display entry points in the output                                 | `boolean`
+`--display-error-details`        | Display details about errors                                       | `boolean`
+`--display-exclude`              | Exclude modules in the output                                      | `boolean`
+`--display-max-modules`          | Set the maximum number of visible modules in output                | `number`
+`--display-modules`              | Display even excluded modules in the output                        | `boolean`
+`--display-optimization-bailout` | Scope hoisting fallback trigger (since webpack 3.0.0)              | `boolean`
+`--display-origins`              | Display origins of chunks in the output                            | `boolean`
+`--display-provided-exports`     | Display information about exports provided from modules            | `boolean`
+`--display-reasons`              | Display reasons about module inclusion in the output               | `boolean`
+`--display-used-exports`         | Display information about used exports in modules (Tree Shaking)   | `boolean`
+`--hide-modules`                 | Hide info about modules                                            | `boolean`
+`--sort-assets-by`               | Sort the assets list by property in asset                          | `string`
+`--sort-chunks-by`               | Sort the chunks list by property in chunk                          | `string`
+`--sort-modules-by`              | Sort the modules list by property in module                        | `string`
+`--verbose`                      | Show more details                                                  | `boolean`
 
 
 ### Advanced Options
@@ -297,13 +299,13 @@ Parameter         | Explanation                              | Usage
 ----------------- | ---------------------------------------- | -----
 `--bail`          | Abort the compilation on first error     |
 `--cache`         | Enable in memory caching [Enabled by default for watch] | `--cache=false`
-`--define`        | Define any free variable, see [shimming](/guides/shimming) | `--define process.env.NODE_ENV="'development'"`
-`--hot`           | Enables [Hot Module Replacement](/concepts/hot-module-replacement) | `--hot=true`
+`--define`        | Define any free variable, see [shimming](/guides/shimming/) | `--define process.env.NODE_ENV="'development'"`
+`--hot`           | Enables [Hot Module Replacement](/concepts/hot-module-replacement/) | `--hot=true`
 `--labeled-modules` | Enables labeled modules [Uses LabeledModulesPlugin] |
 `--live-reload`           | Enables live reloading | `--live-reload=true`
 `--plugin`        | Load this [plugin](/configuration/plugins/) |
 `--prefetch`      | Prefetch the particular file             | `--prefetch=./files.js`
-`--provide`       | Provide these modules as globals, see [shimming](/guides/shimming) | `--provide jQuery=jquery`
+`--provide`       | Provide these modules as globals, see [shimming](/guides/shimming/) | `--provide jQuery=jquery`
 `--records-input-path` | Path to the records file (reading)  |
 `--records-output-path` | Path to the records file (writing) |
 `--records-path`  | Path to the records file                 |
@@ -314,7 +316,7 @@ Parameter         | Explanation                              | Usage
 Shortcut | Replaces
 ---------|----------------------------
 -d       | `--debug --devtool cheap-module-eval-source-map --output-pathinfo`
--p       | `--optimize-minimize --define process.env.NODE_ENV="production"`, see [building for production](/guides/production)
+-p       | `--mode production`, see [building for production](/guides/production/)
 
 ### Profiling
 
@@ -365,4 +367,20 @@ webpack --progress --profile
 1ms asset optimization
 6ms emitting
 ⋮
+```
+
+## Pass CLI arguments to Node.js
+
+To pass arguments directly to Node.js process, you can use the `--node-args` option. All other flags and options will be received by the webpack-cli.
+
+For example, to increase the memory limit of Node.js process to 4 GB
+
+```bash
+webpack --node-args="--max-old-space-size=4096"
+```
+
+Also, you can pass multiple options to Node.js process
+
+```bash
+webpack --node-args="--max-old-space-size=4096" --node-args="-r /path/to/preload/file.js"
 ```

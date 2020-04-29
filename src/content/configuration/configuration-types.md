@@ -13,14 +13,14 @@ contributors:
   - anshumanv
 ---
 
-Besides exporting a single config object, there are a few more ways that cover other needs as well.
+Besides exporting a single configuration object, there are a few more ways that cover other needs as well.
 
 
 ## Exporting a Function
 
 Eventually you will find the need to disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production). You have (at least) two options:
 
-One option is to export a function from your webpack config instead of exporting an object. The function will be invoked with two arguments:
+One option is to export a function from your webpack configuration instead of exporting an object. The function will be invoked with two arguments:
 
 - An environment as the first parameter. See the [environment options CLI documentation](/api/cli/#environment-options) for syntax examples.
 - An options map (`argv`) as the second parameter. This describes the options passed to webpack, with keys such as [`output-filename`](/api/cli/#output-options) and [`optimize-minimize`](/api/cli/#optimize-options).
@@ -89,4 +89,4 @@ module.exports = [{
 }];
 ```
 
-T> If you pass a name to [`--config-name`](/api/cli/#config-options) flag, webpack will only build that specific configuration.
+T> If you pass a name to [`--config-name`](/api/cli/#configuration-options) flag, webpack will only build that specific configuration.

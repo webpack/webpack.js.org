@@ -158,6 +158,8 @@ Also, the consumer should be able to access the library in the following ways:
 - CommonJS module. i.e. `require('webpack-numbers')`.
 - Global variable when included through `script` tag.
 
+
+
 We can start with this basic webpack configuration:
 
 __webpack.config.js__
@@ -174,6 +176,34 @@ module.exports = {
 };
 ```
 
+## Base Configuration with source map
+
+ Source maps is a useful debugging tool that allows you to view where the minified code originated from.
+
+__webpack.config.js__
+
+``` js
+const path = require('path');
+
+module.exports = [
+  'source-map'
+].map(devtool => ({
+  mode: 'development',
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'webpack-numbers.js'
+  },
+  devtool,
+  optimization: {
+    runtimeChunk: true
+  }
+}));
+ ```
+
+>  For more information about getting source maps setup and available options please refer to [Devtool configuration](https://webpack.js.org/configuration/devtool/)
+
+> To see code examples please refer to [webpack repository](https://github.com/webpack/webpack/tree/master/examples/source-map)
 
 ## Externalize Lodash
 
