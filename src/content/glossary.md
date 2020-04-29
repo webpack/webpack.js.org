@@ -79,6 +79,7 @@ This index lists common terms used throughout the webpack ecosystem.
 ## S
 
 - [__Scaffolding__](/guides/scaffolding/): This feature allows creating a webpack configuration by using customizable third-party initialization packages.
+- [__Shimming__](/guides/shimming/): Not all JS files can be used directly with webpack. The file maybe in an unsupported module format, or not even in any module format. It is here where `shimming` comes into play.
 
 
 ## T

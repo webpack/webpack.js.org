@@ -11,6 +11,7 @@ contributors:
   - jamesgeorge007
   - anikethsaha
   - snitin315
+  - pixel-ray
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -252,6 +253,7 @@ Tells webpack which algorithm to use when choosing chunk ids. Setting `optimizat
 
 - if [`optimization.occurrenceOrder`](#optimizationoccurrenceorder) is enabled `optimization.chunkIds` is set to `'total-size'`
 - Disregarding previous if, if [`optimization.namedChunks`](#optimizationnamedchunks) is enabled `optimization.chunkIds` is set to `'named'`
+- Also if the environment is development then `optimization.chunkIds` is set to `'named'`, while in production it is set to `'deterministic'`
 - if none of the above, `optimization.chunkIds` will be defaulted to `'natural'`
 
 The following string values are supported:
@@ -273,6 +275,24 @@ module.exports = {
   optimization: {
     chunkIds: 'named'
   }
+};
+```
+
+By default, a minimum length of 3 digits is used when `optimization.chunkIds` is set to `'deterministic'`. To override the default behaviour, set `optimization.chunkIds` to `false` and use the `webpack.ids.DeterministicChunkIdsPlugin`.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    chunkIds: false
+  },
+  plugins: [
+    new webpack.ids.DeterministicChunkIdsPlugin({
+      maxLength: 5
+    })
+  ]
 };
 ```
 
