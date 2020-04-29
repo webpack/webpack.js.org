@@ -34,7 +34,7 @@ T> In [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [w
 
 ## `watchOptions`
 
-`object`
+`object` `number = 200`
 
 A set of options used to customize watch mode:
 
@@ -44,16 +44,27 @@ __webpack.config.js__
 module.exports = {
   //...
   watchOptions: {
-    aggregateTimeout: 300,
+    aggregateTimeout: 200,
     poll: 1000
   }
+};
+```
+
+Providing a number to the `watchOptions` sets `watchOptions.aggregateTimeout` to the given number.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  // same as watchOptions.aggregateTimeout = 300
+  watchOptions:  300
 };
 ```
 
 
 ## `watchOptions.aggregateTimeout`
 
-`number = 300`
+`number = 200`
 
 Add a delay before rebuilding once the first file changed. This allows webpack to aggregate any other changes made during this time period into one rebuild. Pass a value in milliseconds:
 
@@ -104,7 +115,7 @@ T> If you use `require.context`, webpack will watch your entire directory. You w
 
 `boolean = false` `number`
 
-Turn on [polling](https://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
+Turn on [polling](https://en.wikipedia.org/wiki/Polling_(computer_science)) by passing `true`, or specifying a poll interval in milliseconds:
 
 __webpack.config.js__
 

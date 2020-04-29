@@ -21,6 +21,8 @@ The entry object is where webpack looks to start building the bundle. The contex
 The base directory, an __absolute path__, for resolving entry points and loaders from configuration.
 
 ``` js
+const path = require('path');
+
 module.exports = {
   //...
   context: path.resolve(__dirname, 'app')
@@ -68,14 +70,14 @@ module.exports = {
   entry: {
     home: './home.js',
     shared: ['react', 'react-dom', 'redux', 'react-redux'],
-    catalog: { 
-      import: './catalog.js', 
-      filename: 'pages/catalog.js', 
+    catalog: {
+      import: './catalog.js',
+      filename: 'pages/catalog.js',
       dependOn:'shared'
     },
-    personal: { 
-      import: './personal.js', 
-      filename: 'pages/personal.js', 
+    personal: {
+      import: './personal.js',
+      filename: 'pages/personal.js',
       dependOn:'shared'
     }
   }

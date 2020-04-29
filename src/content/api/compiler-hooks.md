@@ -9,6 +9,7 @@ contributors:
   - misterdev
   - EugeneHlushko
   - superburrito
+  - chenxsan
 ---
 
 The `Compiler` module is the main engine that creates a compilation instance
@@ -88,7 +89,7 @@ Triggered after resolver setup is complete.
 
 `SyncHook`
 
-Called while preparing the compiler environment, right after inizializing the plugins in the configuration file.
+Called while preparing the compiler environment, right after initializing the plugins in the configuration file.
 
 
 ### `afterEnvironment`
@@ -105,6 +106,12 @@ Called right after the `environment` hook, when the compiler environment setup i
 Adds a hook right before running the compiler.
 
 - Callback Parameters: `compiler`
+
+### `additionalPass`
+
+`AsyncSeriesHook`
+
+This hook allows you to do a one more additional pass of the build.
 
 
 ### `run`
@@ -141,6 +148,13 @@ Called after a `NormalModuleFactory` is created.
 Runs a plugin after a `ContextModuleFactory` is created.
 
 - Callback Parameters: `contextModuleFactory`
+
+
+### `initialize`
+
+`SyncHook`
+
+Called when a compiler object is initialized.
 
 
 ### `beforeCompile`
@@ -252,7 +266,7 @@ Called after emitting assets to output directory.
 
 `AsyncSeriesHook`
 
-Executed when an asset has been emitted. Provides access to information about the emitted asset, such as its output path and byte content. 
+Executed when an asset has been emitted. Provides access to information about the emitted asset, such as its output path and byte content.
 
 - Callback Parameters: `file`, `info`
 
@@ -314,6 +328,6 @@ Allows to use infrastructure logging when enabled in the configuration via [`inf
 
 `SyncBailHook`
 
-Allows to log into [stats](/configuration/stats/) when enabled, see [`stats.logging`, `stats.loggingDebug` and `stats.loggingTrace` options](/configuration/stats/#stats).
+Allows to log into [stats](/configuration/stats/) when enabled, see [`stats.logging`, `stats.loggingDebug` and `stats.loggingTrace` options](/configuration/stats/#stats-options).
 
 - Callback Parameters: `origin`, `logEntry`

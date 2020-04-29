@@ -39,6 +39,7 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
   h5,
   h6 {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     font-family: $font-stack-heading;
     font-weight: 600;
@@ -254,7 +255,7 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
   }
 
   .title {
-    width: 40%;
+    width: unset;
     display: flex;
     flex-direction: column;
     justify-content: baseline;
@@ -266,11 +267,12 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
   }
 
   .content {
-    width: 60%;
+    width: unset;
     display: flex;
     flex-direction: column;
     justify-content: baseline;
     margin: 10px 0;
+    padding: 0 10px
   }
 
   .description.desktop {
