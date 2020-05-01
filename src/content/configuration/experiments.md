@@ -17,7 +17,7 @@ W> Because experimental features have relaxed semantic versioning and might cont
 Available options:
 
 - `mjs`: Support `.mjs` files as a way to define [EcmaScript modules](https://nodejs.org/api/esm.html#esm_ecmascript_modules)
-- `syncWebAssembly`: Support old WebAssembly like in webpack 4
+- `syncWebAssembly`: Support the old WebAssembly like in webpack 4
 - `asyncWebAssembly`: Support new WebAssembly according to the [updated spec](https://github.com/WebAssembly/esm-integration), makes a WebAssembly module an async module
 - `topLevelAwait`: Support [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), makes the module an async module when `await` is used on top-level
 - `importAsync`: import async modules with `import`
