@@ -19,7 +19,7 @@ Available options:
 - `mjs`: Support `.mjs` files as a way to define [EcmaScript modules](https://nodejs.org/api/esm.html#esm_ecmascript_modules)
 - `syncWebAssembly`: Support the old WebAssembly like in webpack 4
 - `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module
-- `topLevelAwait`: Support [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), makes the module an async module when `await` is used on top-level
+- `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level
 - `importAsync`: import async modules with `import`
 - `importAwait`: import async modules with `import await`
 - `asset`: a type of module that allows to use asset files (fonts, icons, etc) without configuring additional loaders, similar to `file-loader`|`url-loader`|`raw-loader`
