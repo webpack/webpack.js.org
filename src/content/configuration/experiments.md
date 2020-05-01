@@ -3,8 +3,8 @@ title: Experiments
 sort: 19
 contributors:
   - EugeneHlushko
+  - chenxsan
 ---
-
 
 ## `experiments`
 
@@ -17,6 +17,12 @@ W> Because experimental features have relaxed semantic versioning and might cont
 Available options:
 
 - `mjs`: Support `.mjs` files as a way to define [EcmaScript modules](https://nodejs.org/api/esm.html#esm_ecmascript_modules)
+- `syncWebAssembly`: Support the old WebAssembly like in webpack 4
+- `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module
+- `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level
+- `importAsync`: import async modules with `import`
+- `importAwait`: import async modules with `import await`
+- `asset`: a type of module that allows to use asset files (fonts, images, etc) without configuring loaders to handle their importing, similar to `file-loader` | `url-loader` | `raw-loader`
 - `outputModule`: enables the use of [`output.module`](/configuration/output/#outputmodule) configuration option and sets it to `true`. Enables the use of `output.libraryTarget` as `'module'` and sets it to `'module'`.
 
 __webpack.config.js__
@@ -25,7 +31,14 @@ __webpack.config.js__
 module.exports = {
   //...
   experiments: {
-    mjs: true
-  }
+    mjs: true,
+    outputModule: true,
+    syncWebAssembly: true,
+    topLevelAwait: true,
+    asset: true,
+    asyncWebAssembly: true,
+    importAsync: true,
+    importAwait: true,
+  },
 };
 ```
