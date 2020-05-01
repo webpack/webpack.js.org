@@ -230,4 +230,4 @@ An example can be found on the [`options` section of the EvalSourceMapDevToolPlu
 
 ### Adding links
 
-We use relative links (/concepts/mode/) to internal link in our internal guide instead of absolute URL (https://webpack.js.org/concepts/mode/).
+Please use relative URLs (/concepts/mode/) to link our own content instead of absolute URL (https://webpack.js.org/concepts/mode/).
