@@ -1087,7 +1087,7 @@ module.exports = {
 
 ## `output.enabledLibraryTypes`
 
-`array`
+`[string]`
 
 List of library types enabled for use by entry points.
 
