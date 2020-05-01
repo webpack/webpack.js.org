@@ -22,7 +22,7 @@ Available options:
 - `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level
 - `importAsync`: import async modules with `import`
 - `importAwait`: import async modules with `import await`
-- `asset`: a type of module that allows to use asset files (fonts, icons, etc) without configuring additional loaders, similar to `file-loader`|`url-loader`|`raw-loader`
+- `asset`: a type of module that allows to use asset files (fonts, images, etc) without configuring loaders to handle their importing, similar to `file-loader` | `url-loader` | `raw-loader`
 - `outputModule`: enables the use of [`output.module`](/configuration/output/#outputmodule) configuration option and sets it to `true`. Enables the use of `output.libraryTarget` as `'module'` and sets it to `'module'`.
 
 __webpack.config.js__
