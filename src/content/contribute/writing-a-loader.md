@@ -333,15 +333,15 @@ export default (fixture, options = {}) => {
         test: /\.txt$/,
         use: {
           loader: path.resolve(__dirname, '../src/loader.js'),
-          options: {
-            name: 'Alice'
-          }
+          options,
         }
       }]
     }
   });
 
-  compiler.outputFileSystem = createFsFromVolume(new Volume());
+  const volume = createFsFromVolume(new Volume());
+  volume.join = path.join;
+  compiler.outputFileSystem = volume;
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
@@ -364,7 +364,7 @@ __test/loader.test.js__
 import compiler from './compiler.js';
 
 test('Inserts name and outputs JavaScript', async () => {
-  const stats = await compiler('example.txt');
+  const stats = await compiler('example.txt', { name: 'Alice' });
   const output = stats.toJson().modules[0].source;
 
   expect(output).toBe('export default "Hey Alice!\\n"');
@@ -377,6 +377,9 @@ __package.json__
 {
   "scripts": {
     "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
 ```
