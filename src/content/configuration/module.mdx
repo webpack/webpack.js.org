@@ -51,12 +51,12 @@ module.exports = {
 
 ## `module.unsafeCache`
 
-`boolean` `function()`
+`boolean` `function ()`
 
-Cache the resolving of module requests. There are couple of defaults for `module.unsafeCache`:
+Cache the resolution of module requests. There are couple of defaults for `module.unsafeCache`:
 
-- `false` if cache is disabled.
-- `true` if cache is enabled and the module appears to come from node_modules otherwise `false`.
+- `false` if [`cache`](/configuration/other-options/#cache) is disabled.
+- `true` if [`cache`](/configuration/other-options/#cache) is enabled and the module appears to come from node_modules otherwise `false`.
 
 __webpack.config.js__
 
@@ -69,7 +69,7 @@ module.exports = {
 };
 ```
 
-W> The default value is true in webpack 4.
+W> The default value is `true` in webpack 4.
 
 ## `module.rules`
 
