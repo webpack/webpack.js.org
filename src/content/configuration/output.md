@@ -22,6 +22,7 @@ contributors:
   - anikethsaha
   - jamesgeorge007
   - hiroppy
+  - chenxsan
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -238,7 +239,7 @@ For example, if you have 2 libraries, with namespaces `library1` and `library2`,
 
 ## `output.filename`
 
-`string` `function (chunkData) => string`
+`string` `function (pathData) => string`
 
 This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#outputpath) option.
 
@@ -330,8 +331,8 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    filename: (chunkData) => {
-      return chunkData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
+    filename: (pathData) => {
+      return pathData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
     },
   }
 };
