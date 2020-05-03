@@ -1,5 +1,5 @@
 ---
-title: Modules
+title: 模块（Modules）
 sort: 6
 contributors:
   - TheLarkInn
@@ -12,30 +12,30 @@ related:
      url: https://auth0.com/blog/javascript-module-systems-showdown/
 ---
 
-In [modular programming](https://en.wikipedia.org/wiki/Modular_programming), developers break programs up into discrete chunks of functionality called a _module_.
+在[模块化编程](https://en.wikipedia.org/wiki/Modular_programming)中，开发者将程序分解为功能离散的 chunk，并称之为 __模块__。
 
-Each module has a smaller surface area than a full program, making verification, debugging, and testing trivial.
-Well-written _modules_ provide solid abstractions and encapsulation boundaries, so that each module has a coherent design and a clear purpose within the overall application.
+每个模块都拥有小于完整程序的体积，使得验证、调试及测试变得轻而易举。
+精心编写的 __模块__提供了可靠的抽象和封装界限，使得应用程序中每个模块都具备了条理清晰的设计和明确的目的。
 
-Node.js has supported modular programming almost since its inception.
-On the web, however, support for _modules_ has been slow to arrive.
-Multiple tools exist that support modular JavaScript on the web, with a variety of benefits and limitations.
-webpack builds on lessons learned from these systems and applies the concept of _modules_ to any file in your project.
+Node.js 从一开始就支持模块化编程。
+然而，web 的_模块化_正在缓慢支持中。
+在 web 界存在多种支持 JavaScript 模块化的工具，这些工具各有优势和限制。
+webpack 从这些系统中汲取了经验和教训，并将_模块_的概念应用到项目的任何文件中。
 
-## What is a webpack Module
+## 何为 webpack 模块
 
-In contrast to [Node.js modules](https://nodejs.org/api/modules.html), webpack _modules_ can express their _dependencies_ in a variety of ways. A few examples are:
+与 [Node.js 模块](https://nodejs.org/api/modules.html)相比，webpack _模块_能以各种方式表达它们的依赖关系。下面是一些示例：
 
-- An [ES2015 `import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) statement
-- A [CommonJS](http://www.commonjs.org/specs/modules/1.0/) `require()` statement
-- An [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) `define` and `require` statement
-- An [`@import` statement](https://developer.mozilla.org/en-US/docs/Web/CSS/@import) inside of a css/sass/less file.
-- An image url in a stylesheet `url(...)` or HTML `<img src=...>` file.
+- [ES2015 `import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 语句
+- [CommonJS](http://www.commonjs.org/specs/modules/1.0/) `require()` 语句
+- [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) `define` 和 `require` 语句
+- css/sass/less 文件中的 [`@import` 语句](https://developer.mozilla.org/en-US/docs/Web/CSS/@import)。
+- stylesheet `url(...)` 或者 HTML `<img src=...>` 文件中的图片链接。
 
-## Supported Module Types
+## 支持的模块类型
 
-webpack supports modules written in a variety of languages and preprocessors, via _loaders_. _Loaders_ describe to webpack __how__ to process non-JavaScript _modules_ and include these _dependencies_ into your _bundles_.
-The webpack community has built _loaders_ for a wide variety of popular languages and language processors, including:
+通过 _loader_ 可以使 webpack 支持多种语言和预处理器语法编写的模块。_loader_ 描述了 webpack __如何__ 处理非 JavaScript _模块_，并将相关_依赖_引入你的 _bundle_ 中。
+webpack 社区已经为各种流行的语言和预处理器创建了 _loader_，其中包括：
 
 - [CoffeeScript](http://coffeescript.org)
 - [TypeScript](https://www.typescriptlang.org)
@@ -45,6 +45,6 @@ The webpack community has built _loaders_ for a wide variety of popular language
 - [Stylus](http://stylus-lang.com)
 - [Elm](https://elm-lang.org/)
 
-And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for __any stack__, while staying __non-opinionated__ about your development, testing, and production workflows.
+当然还有更多！总得来说，webpack 提供了可定制，强大且丰富的 API，允许在 __任何技术栈__ 中使用，同时支持在开发、测试和生产环境的工作流中做到 __无侵入性__。
 
-For a full list, see [__the list of loaders__](/loaders) or [__write your own__](/api/loaders).
+关于 loader 的相关信息，请参考 [__loader 列表__](/loaders) 或 [__自定义 loader__](/api/loaders)。
