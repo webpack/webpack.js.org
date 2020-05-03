@@ -1090,6 +1090,38 @@ module.exports = {
 };
 ```
 
+## `output.enabledLibraryTypes`
+
+`[string]`
+
+List of library types enabled for use by entry points.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledLibraryTypes: ['module']
+  }
+};
+```
+
+## `output.futureEmitAssets`
+
+`boolean = false`
+
+Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted.
+
+W> `output.futureEmitAssets` option will be removed in webpack v5.0.0 and this behaviour will become the new default.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    futureEmitAssets: true
+  }
+};
+```
+
 ## `output.ecmaVersion`
 
 `number = 6`

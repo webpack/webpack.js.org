@@ -2,6 +2,9 @@ import React from 'react';
 import Container from '../Container/Container';
 import 'webpack.vote/dist/style.min.css';
 
+// Load Styling
+import './Vote.scss';
+
 export default class Vote extends React.Component {
   state = {
     VoteApp: null
