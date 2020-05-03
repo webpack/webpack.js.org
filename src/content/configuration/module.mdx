@@ -14,6 +14,7 @@ contributors:
   - EugeneHlushko
   - superburrito
   - lukasgeiter
+  - salemhilal
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -51,6 +52,28 @@ module.exports = {
 `[Rule]`
 
 An array of [Rules](#rule) which are matched to requests when modules are created. These rules can modify how the module is created. They can apply loaders to the module, or modify the parser.
+
+
+## `module.unsafeCache`
+
+`boolean` `function (module)`
+
+Cache the resolution of module requests, as well as the module's list of dependencies. Note that this feature can cause problems if the module is moved and should resolve to a different location. By default, this option is enabled only if [`cache`](/configuration/other-options/#cache) is enabled.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  module: {
+    unsafeCache: false,
+  }
+};
+```
+
+W> In Webpack 5, the default value is `true` if the `cache` option is enabled _and_ the module appears to come from the node_modules directory.
+
+
 
 
 ## Rule
