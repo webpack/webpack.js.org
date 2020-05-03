@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: 配置（Configuration）
 sort: 5
 contributors:
   - TheLarkInn
@@ -8,29 +8,29 @@ contributors:
   - byzyk
 ---
 
-You may have noticed that few webpack configurations look exactly alike. This is because __webpack's configuration file is a JavaScript file that exports a webpack [configuration](/configuration/).__ This configuration is then processed by webpack based upon its defined properties.
+你可能已经注意到，很少有 webpack 配置看起来完全相同。这是因为 __webpack 的配置文件是 JavaScript 文件，文件内导出了一个 webpack [配置的对象](/configuration/)。__ webpack 会根据该配置定义的属性进行处理。
 
-Because it's a standard Node.js CommonJS module, you __can do the following__:
+由于 webpack 遵循 CommonJS 模块规范，因此，你__可以在配置中使用__：
 
-- import other files via `require(...)`
-- use utilities on npm via `require(...)`
-- use JavaScript control flow expressions, e.g. the `?:` operator
-- use constants or variables for often used values
-- write and execute functions to generate a part of the configuration
+- 通过 `require(...)` 引入其他文件
+- 通过 `require(...)` 使用 npm 下载的工具函数
+- 使用 JavaScript 控制流表达式，例如 `?:` 操作符
+- 对 value 使用常量或变量赋值
+- 编写并执行函数，生成部分配置
 
-Use these features when appropriate.
+请在合适的场景，使用这些功能。
 
-While they are technically feasible, __the following practices should be avoided__:
+虽然技术上可行，__但还是应避免如下操作__：
 
-- Access CLI arguments, when using the webpack CLI (instead write your own CLI, or [use `--env`](/configuration/configuration-types/))
-- Export non-deterministic values (calling webpack twice should result in the same output files)
-- Write long configurations (instead split the configuration into multiple files)
+- 当使用 webpack CLI 工具时，访问 CLI 参数（应编写自己的 CLI 工具替代，或者[使用 `--env`](/configuration/configuration-types/)）
+- 导出不确定的结果（两次调用 webpack 应产生相同的输出文件）
+- 编写超长的配置（应将配置文件拆分成多个）
 
-T> The most important part to take away from this document is that there are many different ways to format and style your webpack configuration. The key is to stick with something consistent that you and your team can understand and maintain.
+T> 此文档中得出最重要的结论是，webpack 的配置可以有许多不同的样式和风格。关键在于，为了易于维护和理解这些配置，需要在团队内部保证一致。
 
-The examples below describe how webpack's configuration can be both expressive and configurable because _it is code_:
+接下来的示例中，展示了 webpack 配置如何实现既可表达，又可灵活配置，这主要得益于_配置即为代码_：
 
-## Simple Configuration
+## 基本配置
 
 __webpack.config.js__
 
@@ -47,16 +47,16 @@ module.exports = {
 };
 ```
 
-_See_: [Configuration section](/configuration/) for all supported configuration options
+_查看_：[配置章节](/configuration/)中所有支持的配置选项。
 
-## Multiple Targets
+## 多个 target
 
-Along with exporting a single configuration as an object, [function](/configuration/configuration-types/#exporting-a-function) or [Promise](/configuration/configuration-types/#exporting-a-promise), you can export multiple configurations.
+除了可以将单个配置导出问 object，[function](/configuration/configuration-types/#exporting-a-function) 或 [Promise](/configuration/configuration-types/#exporting-a-promise) 以为，还可以将其导出为多个配置。
 
-_See_: [Exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations)
+_查看_：[导出多个配置](/configuration/configuration-types/#exporting-multiple-configurations)
 
-## Using other Configuration Languages
+## 使用其它配置语言
 
-webpack accepts configuration files written in multiple programming and data languages.
+webpack 支持由多种编程和数据语言编写的配置文件。
 
-_See_: [Configuration Languages](/configuration/configuration-languages/)
+_查看_：[配置语言](/configuration/configuration-languages/)
