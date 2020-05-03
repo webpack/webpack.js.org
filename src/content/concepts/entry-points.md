@@ -1,5 +1,5 @@
 ---
-title: Entry Points
+title: 入口起点(entry points)
 sort: 1
 contributors:
   - TheLarkInn
@@ -10,12 +10,12 @@ contributors:
   - Zearin
 ---
 
-As mentioned in [Getting Started](/guides/getting-started/#using-a-configuration), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you __can__ configure the `entry` property, in addition to explaining why it may be useful to you.
+正如我们在 [起步](/guides/getting-started/#using-a-configuration) 中提到的，在 webpack 配置中有多种方式定义 `entry` 属性。除了解释为什么它可能非常有用，我们还将向你展示__如何去__配置 `entry` 属性。
 
 
-## Single Entry (Shorthand) Syntax
+## 单个入口（简写）语法
 
-Usage: `entry: string | [string]`
+用法：`entry: string | [string]`
 
 __webpack.config.js__
 
@@ -25,7 +25,7 @@ module.exports = {
 };
 ```
 
-The single entry syntax for the `entry` property is a shorthand for:
+`entry` 属性的单个入口语法，参考下面的简写：
 
 __webpack.config.js__
 
@@ -37,14 +37,14 @@ module.exports = {
 };
 ```
 
-T> __What happens when you pass an array to `entry`?__ Passing an array of file paths to the `entry` property creates what is known as a __"multi-main entry"__. This is useful when you would like to inject multiple dependent files together and graph their dependencies into one "chunk".
+T> __当你向 `entry` 传入一个数组时会发生什么？__向 `entry` 属性传入文件路径数组，将创建出一个 __多主入口(multi-main entry)__。在你想要一次注入多个依赖文件，并且将它们的依赖导向(graph)到一个 chunk 时，这种方式就很有用。
 
-This is a great choice when you are looking to quickly setup a webpack configuration for an application or tool with one entry point (i.e. a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.
+当你正在寻找为「只有一个入口起点的应用程序或工具（即 library）」快速设置 webpack 配置的时候，这会是个很不错的选择。然而，使用此语法在扩展配置时有失灵活性。
 
 
-## Object Syntax
+## 对象语法
 
-Usage: `entry: { <entryChunkName> string | [string] }`
+用法：`entry: { <entryChunkName> string | [string] }`
 
 __webpack.config.js__
 
@@ -57,16 +57,16 @@ module.exports = {
 };
 ```
 
-The object syntax is more verbose. However, this is the most scalable way of defining entry/entries in your application.
+对象语法会比较繁琐。然而，这是应用程序中定义入口的最可扩展的方式。
 
-T> __"Scalable webpack configurations"__ are ones that can be reused and combined with other partial configurations. This is a popular technique used to separate concerns by environment, build target, and runtime. They are then merged using specialized tools like [webpack-merge](https://github.com/survivejs/webpack-merge).
+T> __“webpack 配置的可扩展”__是指，这些配置可以重复使用，并且可以与其他配置组合使用。这是一种流行的技术，用于将关注点从环境(environment)、构建目标(build target)、运行时(runtime)中分离。然后使用专门的工具（如 [webpack-merge](https://github.com/survivejs/webpack-merge)）将它们合并起来。
 
 
-## Scenarios
+## 常见场景
 
-Below is a list of entry configurations and their real-world use cases:
+以下列出一些入口配置和它们的实际用例：
 
-### Separate App and Vendor Entries
+### 分离 app(应用程序) 和 vendor(第三方库) 入口
 
 __webpack.config.js__
 
@@ -99,13 +99,13 @@ module.exports = {
 };
 ```
 
-__What does this do?__ We are telling webpack that we would like 2 separate entry points (like the above example).
+__这是什么？__这是告诉 webpack 我们想要配置 2 个单独的入口点（例如上面的示例）。
 
-__Why?__ With this you can import required libraries or files that aren't modified (e.g. Bootstrap, jQuery, images, etc) inside `vendor.js` and they will be bundled together into their own chunk. Content hash remains the same, which allows the browser to cache them separately thereby reducing load time.
+__为什么？__这样你就可以在 `vendor.js` 中存入未做修改的必要 library 或文件（例如 Bootstrap, jQuery, 图片等），然后将它们打包在一起成为单独的 chunk。内容哈希保持不变，这使浏览器可以独立地缓存它们，从而减少了加载时间。
 
-T> In webpack version < 4 it was common to add vendors as a separate entry point to compile it as a separate file (in combination with the `CommonsChunkPlugin`). <br><br> This is discouraged in webpack 4. Instead, the [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) option takes care of separating vendors and app modules and creating a separate file. __Do not__ create an entry for vendors or other stuff that is not the starting point of execution.
+T> 在 webpack < 4 的版本中，通常将 vendor 作为一个单独的入口起点添加到 entry 选项中，以将其编译为一个单独的文件（与 `CommonsChunkPlugin` 结合使用）。<br><br>而在 webpack 4 中不鼓励这样做。而是使用 [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) 选项，将 vendor 和 app(应用程序) 模块分开，并为其创建一个单独的文件。__不要__ 为 vendor 或其他不是执行起点创建 entry。
 
-### Multi Page Application
+### 多页面应用程序
 
 __webpack.config.js__
 
@@ -119,8 +119,8 @@ module.exports = {
 };
 ```
 
-__What does this do?__ We are telling webpack that we would like 3 separate dependency graphs (like the above example).
+__这是什么？__我们告诉 webpack 需要三个独立分离的依赖图（如上面的示例）。
 
-__Why?__ In a multi-page application, the server is going to fetch a new HTML document for you. The page reloads this new document and assets are redownloaded. However, this gives us the unique opportunity to do things like using [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the number of entry points increases.
+__为什么？__在多页面应用程序中，server 会拉取一个新的 HTML 文档给你的客户端。页面重新加载此新文档，并且资源被重新下载。然而，这给了我们特殊的机会去做很多事，例如使用 [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) 为页面间共享的应用程序代码创建 bundle。由于入口起点数量的增多，多页应用能够复用多个入口起点之间的大量代码/模块，从而可以极大地从这些技术中受益。
 
-T> As a rule of thumb: Use exactly one entry point for each HTML document.
+T> 根据经验：每个 HTML 文档只使用一个入口起点。
