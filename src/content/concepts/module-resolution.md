@@ -1,5 +1,5 @@
 ---
-title: Module Resolution
+title: 模块解析（Module Resolution）
 sort: 7
 contributors:
   - pksjce
@@ -9,26 +9,26 @@ contributors:
   - wizardofhogwarts
 ---
 
-A resolver is a library which helps in locating a module by its absolute path.
-A module can be required as a dependency from another module as:
+resolver 是一个帮助寻找模块绝对路径的库。
+一个模块可以作为另一个模块的依赖模块，然后被后者引用，如下：
 
 ```js
 import foo from 'path/to/module';
-// or
+// 或者
 require('path/to/module');
 ```
 
-The dependency module can be from the application code or a third-party library. The resolver helps
-webpack find the module code that needs to be included in the bundle for every such `require`/`import` statement.
-webpack uses [enhanced-resolve](https://github.com/webpack/enhanced-resolve) to resolve file paths while bundling modules.
+所依赖的模块可以是来自应用程序的代码或第三方库。
+resolver 帮助 webpack 从每个 `require`/`import` 语句中，找到需要引入到 bundle 中的模块代码。
+当打包模块时，webpack 使用 [enhanced-resolve](https://github.com/webpack/enhanced-resolve) 来解析文件路径。
 
 
-## Resolving rules in webpack
+## webpack 中的解析规则
 
-Using `enhanced-resolve`, webpack can resolve three kinds of file paths:
+使用 `enhanced-resolve`，webpack 能解析三种文件路径：
 
 
-### Absolute paths
+### 绝对路径
 
 ```js
 import '/home/me/file';
@@ -36,51 +36,51 @@ import '/home/me/file';
 import 'C:\\Users\\me\\file';
 ```
 
-Since we already have the absolute path to the file, no further resolution is required.
+由于已经获得文件的绝对路径，因此不需要再做进一步解析。
 
 
-### Relative paths
+### 相对路径
 
 ```js
 import '../src/file1';
 import './file2';
 ```
 
-In this case, the directory of the resource file where the `import` or `require` occurs is taken to be the context directory. The relative path specified in the `import/require` is joined to this context path to produce the absolute path to the module.
+在这种情况下，使用 `import` 或 `require` 的资源文件所处的目录，被认为是上下文目录。在 `import/require` 中给定的相对路径，会拼接此上下文路径，来生成模块的绝对路径。
 
 
-### Module paths
+### 模块路径
 
 ```js
 import 'module';
 import 'module/lib/file';
 ```
 
-Modules are searched for inside all directories specified in [`resolve.modules`](/configuration/resolve/#resolvemodules).
-You can replace the original module path by an alternate path by creating an alias for it using the [`resolve.alias`](/configuration/resolve/#resolvealias) configuration option.
+在 [`resolve.modules`](/configuration/resolve/#resolvemodules) 中指定的所有目录检索模块。
+你可以通过配置别名的方式来替换初始模块路径，具体请参照 [`resolve.alias`](/configuration/resolve/#resolvealias) 配置选项。
 
-Once the path is resolved based on the above rule, the resolver checks to see if the path points to a file or a directory. If the path points to a file:
+一旦根据上述规则解析路径后，resolver 将会检查路径是指向文件还是文件夹。如果路径指向文件：
 
-- If the path has a file extension, then the file is bundled straightaway.
-- Otherwise, the file extension is resolved using the [`resolve.extensions`](/configuration/resolve/#resolveextensions) option, which tells the resolver which extensions are acceptable for resolution e.g. `.js`, `.jsx`.
+- 如果文件具有扩展名，则直接将文件打包。
+- 否则，将使用 [`resolve.extensions`](/configuration/resolve/#resolveextensions) 选项作为文件扩展名来解析，此选项会告诉解析器在解析中能够接受那些扩展名（例如 `.js`，`.jsx`）。
 
-If the path points to a folder, then the following steps are taken to find the right file with the right extension:
+如果路径指向一个文件夹，则进行如下步骤寻找具有正确扩展名的文件：
 
-- If the folder contains a `package.json` file, then fields specified in [`resolve.mainFields`](/configuration/resolve/#resolvemainfields) configuration option are looked up in order, and the first such field in `package.json` determines the file path.
-- If there is no `package.json` or if the [`resolve.mainFields`](/configuration/resolve/#resolvemainfields) do not return a valid path, file names specified in the [`resolve.mainFiles`](/configuration/resolve/#resolvemainfiles) configuration option are looked for in order, to see if a matching filename exists in the imported/required directory.
-- The file extension is then resolved in a similar way using the [`resolve.extensions`](/configuration/resolve/#resolveextensions) option.
+- 如果文件夹中包含 `package.json` 文件，则会根据 [`resolve.mainFields`](/configuration/resolve/#resolve-mainfields) 配置中的字段顺序查找，并根据 `package.json` 中的符合配置要求的第一个字段来确定文件路径。
+- 如果不存在 `package.json` 文件或 [`resolve.mainFields`](/configuration/resolve/#resolvemainfields) 没有返回有效路径，则会根据 [`resolve.mainFiles`](/configuration/resolve/#resolvemainfiles) 配置选项中指定的文件名顺序查找，看是否能在 import/require 的目录下匹配到一个存在的文件名。
+- 然后使用 [`resolve.extensions`](/configuration/resolve/#resolveextensions) 选项，以类似的方式解析文件扩展名。
 
-webpack provides reasonable [defaults](/configuration/resolve) for these options depending on your build target.
-
-
-## Resolving Loaders
-
-This follows the same rules as those specified for file resolution. But the [`resolveLoader`](/configuration/resolve/#resolveloader) configuration option can be used to have separate resolution rules for loaders.
+webpack 会根据构建目标，为这些选项提供合理的[默认](/configuration/resolve)配置。
 
 
-## Caching
+## 解析 loader
 
-Every filesystem access is cached so that multiple parallel or serial requests to the same file occur faster. In [watch mode](/configuration/watch/#watch), only modified files are evicted from the cache. If watch mode is off, then the cache gets purged before every compilation.
+loader 的解析规则也遵循特定的规范。但是 [`resolveLoader`](/configuration/resolve/#resolveloader) 配置项可以为 loader 设置独立的解析规则。
 
 
-See [Resolve API](/configuration/resolve) to learn more about the configuration options mentioned above.
+## 缓存
+
+每次文件系统访问文件都会被缓存，以便于更快触发对同一文件的多个并行或串行请求。在 [watch 模式](/configuration/watch/#watch) 下，只有修改过的文件会被从缓存中移出。如果关闭 watch 模式，则会在每次编译前清理缓存。
+
+
+欲了解更多上述配置信息，请查阅 [Resolve API](/configuration/resolve)。
