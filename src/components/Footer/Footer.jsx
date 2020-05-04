@@ -4,6 +4,7 @@ import Container from '../Container/Container';
 import Icon from '../../assets/icon-square-small.svg';
 import CC from '../../assets/cc.svg';
 import BY from '../../assets/by.svg';
+import Vercel from '../../assets/powered-by-vercel.svg';
 import './Footer.scss';
 
 const Footer = () => (
@@ -35,6 +36,9 @@ const Footer = () => (
           <img
             alt="Creative Commons License"
             src={ BY } />
+        </Link>
+        <Link className="footer__link footer__license" to="https://vercel.com/?utm_source=webpackdocs">
+          <img src={ Vercel } alt="Powered by Vercel" />
         </Link>
       </section>
     </Container>
