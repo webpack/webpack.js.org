@@ -1,20 +1,20 @@
 ---
-title: Under The Hood
+title: 揭示内部原理
 sort: 13
 contributors:
   - smelukov
   - EugeneHlushko
 ---
 
-> This section describes webpack internals and can be useful for plugin developers
+> 此章节描述 webpack 内部实现，对于插件开发人员可能会提供帮助
 
-The bundling is a function that takes some files and emits others.
+打包，是指处理某些文件并将其输出为其他文件的能力。
 
-But between input and output, it also has [modules](/concepts/modules/), [entry points](/concepts/entry-points/), chunks, chunk groups, and many other intermediate parts.
+但是，在输入和输出之间，还包括有 [模块](/concepts/modules/), [入口起点](/concepts/entry-points/), chunk, chunk 组和许多其他中间部分。
 
-## The main parts
+## 主要部分
 
-Every file used in your project is a [Module](/concepts/modules/)
+项目中使用的每个文件都是一个 [模块](/concepts/modules/)
 
 __./index.js__
 
@@ -28,11 +28,11 @@ __./app.js__
 export default 'the app';
 ```
 
-By using each other, the modules form a graph (`ModuleGraph`).
+通过互相引用，这些模块会形成一个图(`ModuleGraph`)数据结构。
 
-During the bundling process, modules are combined into chunks.
-Chunks combine into chunk groups and form a graph (`ChunkGraph`) interconnected through modules.
-When you describe an entry point - under the hood, you create a chunk group with one chunk.
+在打包过程中，模块会被合并成 chunk。
+chunk 合并成 chunk 组，并形成一个通过模块互相连接的图(`ModuleGraph`)。
+那么如何通过以上来描述一个入口起点：在其内部，会创建一个只有一个 chunk 的 chunk 组。
 
 __./webpack.config.js__
 
@@ -42,10 +42,10 @@ module.exports = {
 };
 ```
 
-One chunk group with the `main` name created (`main` is the default name for an entry point).
-This chunk group contains `./index.js` module. As the parser handles imports inside `./index.js` new modules are added into this chunk.
+这会创建出一个名为 `main` 的 chunk 组（`main` 是入口起点的默认名称）。
+此 chunk 组包含 `./index.js` 模块。随着 parser 处理 `./index.js` 内部的 import 时， 新模块就会被添加到此 chunk 中。
 
-Another example:
+另外的一个示例：
 
 __./webpack.config.js__
 
@@ -58,19 +58,19 @@ module.exports = {
 };
 ```
 
-Two chunk groups with names `home` and `about` are created.
-Each of them has a chunk with a module - `./home.js` for `home` and `./about.js` for `about`
+这会创建出两个名为 `home` 和 `about` 的 chunk 组。
+每个 chunk 组都有一个包含一个模块的 chunk：`./home.js` 对应 `home`，`./about.js` 对应 `about`
 
-> There might be more than one chunk in a chunk group. For example [SplitChunksPlugin](/plugins/split-chunks-plugin/) splits a chunk into one or more chunks.
+> 一个 chunk 组中可能有多个 chunk。例如，[SplitChunksPlugin](/plugins/split-chunks-plugin/) 会将一个 chunk 拆分为一个或多个 chunk。
 
-## Chunks
+## chunk
 
-Chunks come in two forms:
+chunk 有两种形式：
 
-- `initial` is the main chunk for the entry point. This chunk contains all the modules and its dependencies that you specify for an entry point.
-- `non-initial` is a chunk that may be lazy-loaded. It may appear when [dynamic import](/guides/code-splitting/#dynamic-imports) or [SplitChunksPlugin](/plugins/split-chunks-plugin/) is being used.
+- `initial(初始化)` 是入口起点的 main chunk。此 chunk 包含为入口起点指定的所有模块及其依赖项。
+- `non-initial` 是可以延迟加载的块。可能会出现在使用 [动态导入(dynamic imports)](/guides/code-splitting/#dynamic-imports) 或者 [SplitChunksPlugin](/plugins/split-chunks-plugin/) 时。
 
-Each chunk has a corresponding __asset__. The assets are the output files - the result of bundling.
+每个 chunk 都有对应的 __asset(资源)__。资源，是指输出文件（即打包结果）。
 
 __webpack.config.js__
 
@@ -89,23 +89,23 @@ import ReactDOM from 'react-dom';
 import('./app.jsx').then(App => ReactDOM.render(<App />, root));
 ```
 
-Initial chunk with name `main` is created. It contains:
+这会创建出一个名为 `main` 的 initial chunk。其中包含：
 
 - `./src/index.jsx`
 - `react`
 - `react-dom`
 
-and all their dependencies, except `./app.jsx`
+以及除 `./app.jsx` 外的所有依赖
 
-Non-initial chunk for `./app.jsx` is created as this module is imported dynamically.
+然后会为 `./app.jsx` 创建 non-initial chunk，这是因为 `./app.jsx` 是动态导入的。
 
 __Output:__
 
-- `/dist/main.js` - an `initial` chunk
+- `/dist/main.js` - 一个 `initial` chunk
 - `/dist/394.js` - `non-initial` chunk
 
-By default, there is no name for `non-initial` chunks so that a unique ID is used instead of a name.
-When using dynamic import we may specify a chunk name explicitly by using a ["magic" comment](/api/module-methods/#magic-comments):
+默认情况下，这些 `non-initial` chunk 没有名称，因此会使用唯一 ID 来替代名称。
+在使用动态导入时，我们可以通过使用 [magic comment(魔术注释)](/api/module-methods/#magic-comments) 来显式指定 chunk 名称：
 
 ```js
 import(
@@ -116,18 +116,18 @@ import(
 
 __Output:__
 
-- `/dist/main.js` - an `initial` chunk
+- `/dist/main.js` - 一个 `initial` chunk
 - `/dist/app.js` - `non-initial` chunk
 
-## Output
+## output(输出)
 
-The names of the output files are affected by the two fields in the config:
+输出文件的名称会受配置中的两个字段的影响：
 
-- [`output.filename`](/configuration/output/#outputfilename) - for `initial` chunk files
-- [`output.chunkFilename`](/configuration/output/#outputchunkfilename) - for `non-initial` chunk files
+- [`output.filename`](/configuration/output/#outputfilename) - 用于 `initial` chunk 文件
+- [`output.chunkFilename`](/configuration/output/#outputchunkfilename) - 用于 `non-initial` chunk 文件
 
-A [few placeholders](/configuration/output/#template-strings) are available in these fields. Most often:
+这些字段中会有一些 [占位符](/configuration/output/#template-strings)。常用的占位符如下：
 
-- `[id]` - chunk id (e.g. `[id].js` -> `485.js`)
-- `[name]` - chunk name (e.g. `[name].js` -> `app.js`). If a chunk has no name, then its id will used
-- `[contenthash]` - md4-hash of the output file content (e.g. `[contenthash].js` -> `4ea6ff1de66c537eb9b2.js`)
+- `[id]` - chunk id（例如 `[id].js` -> `485.js`）
+- `[name]` - chunk name（例如 `[name].js` -> `app.js`）。如果 chunk 没有名称，则会使用其 id 作为名称
+- `[contenthash]` - 输出文件内容的 md4-hash（例如 `[contenthash].js` -> `4ea6ff1de66c537eb9b2.js`）
