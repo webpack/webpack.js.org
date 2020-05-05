@@ -121,6 +121,17 @@ module.exports = {
 
 The `app` chunk will not contain the modules that `react-vendors` has.
 
+Also you can specify multiple files per entry using array:
+
+```js
+module.exports = {
+  //...
+  entry: {
+    app: { import: ['./app.js', './app2.js'], dependOn: 'react-vendors' },
+    'react-vendors': ['react', 'react-dom', 'prop-types']
+  }
+};
+```
 
 ### Dynamic entry
 
