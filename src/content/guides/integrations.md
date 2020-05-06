@@ -1,5 +1,5 @@
 ---
-title: Integrations
+title: 集成
 sort: 23
 contributors:
   - pksjce
@@ -9,29 +9,29 @@ contributors:
   - AnayaDesign
 ---
 
-Let's start by clearing up a common misconception. webpack is a module bundler like [Browserify](http://browserify.org/) or [Brunch](https://brunch.io/). It is _not a task runner_ like [Make](https://www.gnu.org/software/make/), [Grunt](https://gruntjs.com/), or [Gulp](https://gulpjs.com/). Task runners handle automation of common development tasks such as linting, building, or testing your project. Compared to bundlers, task runners have a higher level focus. You can still benefit from their higher level tooling while leaving the problem of bundling to webpack.
+首先，我们要消除一个常见的误解。webpack 是一个模块打包工具(module bundler)（例如，[Browserify](http://browserify.org/) 或 [Brunch](https://brunch.io/)）。而_不是一个任务执行工具(task runner)_（例如，[Make](https://www.gnu.org/software/make/), [Grunt](https://gruntjs.com/) 或者 [Gulp](https://gulpjs.com/) ）。任务执行工具用来自动化处理常见的开发任务，例如，lint(代码检测)、build(构建)、test(测试)。相比模块打包工具，任务执行工具则聚焦在偏重上层的问题上面。你仍然可以得益于这种用法：使用上层的工具，而将打包部分的问题留给 webpack。
 
-Bundlers help you get your JavaScript and stylesheets ready for deployment, transforming them into a format that's suitable for the browser. For example, JavaScript can be [minified](/plugins/terser-webpack-plugin/) or [split into chunks](/guides/code-splitting) and [lazy-loaded](/guides/lazy-loading) to improve performance. Bundling is one of the most important challenges in web development, and solving it well can remove a lot of pain from the process.
+打包工具帮助你取得准备用于部署的 JavaScript 和 stylesheet，将它们转换为适合浏览器的可用格式。例如，可以通过 [压缩](/plugins/terser-webpack-plugin)、[分离 chunk](/guides/code-splitting) 和 [惰性加载](/guides/lazy-loading) 我们的 JavaScript 来提高性能。打包是 web 开发中最重要的挑战之一，解决此问题可以消除开发过程中的大部分痛点。
 
-The good news is that, while there is some overlap, task runners and bundlers can play well together if approached in the right way. This guide provides a high-level overview of how webpack can be integrated into some of the more popular task runners.
+好的消息是，虽然有一些功能重叠，但是如果使用方式正确，任务运行工具和模块打包工具还是能够一起协同工作。本指南提供了关于如何将 webpack 与一些流行的任务运行工具集成在一起的高度概述。
 
 
 ## NPM Scripts
 
-Often webpack users use npm [`scripts`](https://docs.npmjs.com/misc/scripts) as their task runner. This is a good starting point. Cross-platform support can become a problem, but there are several workarounds for that. Many, if not most users, get by with simple npm `scripts` and various levels of webpack configuration and tooling.
+通常 webpack 用户使用 npm [`scripts`](https://docs.npmjs.com/misc/scripts) 来作为任务执行工具。这是比较好的开始。然而跨平台支持可能是个问题，但是有几种解决方案。许多用户（但不是大多数用户）直接使用 npm `scripts` 和各种级别的 webpack 配置和工具。
 
-So while webpack's core focus is bundling, there are a variety of extensions that can enable you to use it for jobs typical of a task runner. Integrating a separate tool adds complexity, so be sure to weigh the pros and cons before going forward.
+因此，虽然 webpack 核心重点是打包，但是可以通过各种扩展，将它用于任务运行工具的常见工作。集成一个单独的工具会增加复杂度，因此在开始前一定要权衡利弊。
 
 
 ## Grunt
 
-For those using Grunt, we recommend the [`grunt-webpack`](https://www.npmjs.com/package/grunt-webpack) package. With `grunt-webpack` you can run webpack or [webpack-dev-server](https://github.com/webpack/webpack-dev-server) as a task, get access to stats within [template tags](https://gruntjs.com/api/grunt.template), split development and production configurations and more. Start by installing `grunt-webpack` as well as `webpack` itself if you haven't already:
+对于那些使用 Grunt 的人，我们推荐使用 [`grunt-webpack`](https://www.npmjs.com/package/grunt-webpack) package。使用 `grunt-webpack` 你可以将 webpack 或 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 作为一项任务(task)执行，访问 [grunt template tags](https://gruntjs.com/api/grunt.template) 中的统计信息，拆分开发和生产配置等等。如果还没有安装 `grunt-webpack` 和 `webpack`，请先安装它们：
 
 ``` bash
 npm install --save-dev grunt-webpack webpack
 ```
 
-Then register a configuration and load the task:
+然后，注册一个配置并加载任务：
 
 __Gruntfile.js__
 
@@ -53,18 +53,18 @@ module.exports = function(grunt) {
 };
 ```
 
-For more information, please visit the [repository](https://github.com/webpack-contrib/grunt-webpack).
+获取更多信息，请查看 [仓库](https://github.com/webpack-contrib/grunt-webpack)。
 
 
 ## Gulp
 
-Gulp is also a fairly straightforward integration with the help of the [`webpack-stream`](https://github.com/shama/webpack-stream) package (a.k.a. `gulp-webpack`). In this case, it is unnecessary to install `webpack` separately as it is a direct dependency of `webpack-stream`:
+在 [`webpack-stream`](https://github.com/shama/webpack-stream) package（也称作 `gulp-webpack`） 的帮助下，可以相当直接地将 Gulp 与 webpack 集成。在这种情况下，不需要单独安装 `webpack`，因为它是 `webpack-stream` 直接依赖：
 
 ``` bash
 npm install --save-dev webpack-stream
 ```
 
-Just `require('webpack-stream')` instead of `webpack` and optionally pass it an configuration:
+只要将 `webpack` 替换为 `require('webpack-stream')`，并传递一个配置：
 
 __gulpfile.js__
 
@@ -80,24 +80,24 @@ gulp.task('default', function() {
 });
 ```
 
-For more information, please visit the [repository](https://github.com/shama/webpack-stream).
+获取更多信息，请查看 [仓库](https://github.com/shama/webpack-stream)。
 
 
 ## Mocha
 
-The [`mocha-webpack`](https://github.com/zinserjan/mocha-webpack) utility can be used for a clean integration with Mocha. The repository offers more details on the pros and cons but essentially `mocha-webpack` is a simple wrapper that provides almost the same CLI as Mocha itself and provides various webpack functionality like an improved watch mode and improved path resolution. Here is a small example of how you would install it and use it to run a test suite (found within `./test`):
+[`mocha-webpack`](https://github.com/zinserjan/mocha-webpack) 可以将 Mocha 与 webpack 完全集成。这个仓库提供了很多关于其优势和劣势的细节，基本上 `mocha-webpack` 只是一个简单封装，提供与 Mocha 几乎相同的 CLI，并提供各种 webpack 功能，例如改进了 watch mode 和改进了路径分析。这里是一个如何安装并使用它来运行测试套件的示例（在 `./test` 中找到）：
 
 ``` bash
 npm install --save-dev webpack mocha mocha-webpack
 mocha-webpack 'test/**/*.js'
 ```
 
-For more information, please visit the [repository](https://github.com/zinserjan/mocha-webpack).
+获取更多信息，请查看 [仓库](https://github.com/zinserjan/mocha-webpack)。
 
 
 ## Karma
 
-The [`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) package allows you to use webpack to pre-process files in [Karma](https://karma-runner.github.io/1.0/index.html). It also makes use of [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware) and allows passing configurations for both. A simple example may look something like this:
+[`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) package 允许你使用 webpack 预处理 [Karma](https://karma-runner.github.io/1.0/index.html) 中的文件。它也可以使用 [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware)，并允许传递两者的配置。下面是一个简单的示例：
 
 ``` bash
 npm install --save-dev webpack karma karma-webpack
@@ -126,4 +126,4 @@ module.exports = function(config) {
 };
 ```
 
-For more information, please visit the [repository](https://github.com/webpack-contrib/karma-webpack).
+获取更多信息，请查看 [仓库](https://github.com/webpack-contrib/karma-webpack)。

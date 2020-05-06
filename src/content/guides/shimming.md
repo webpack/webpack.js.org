@@ -1,5 +1,5 @@
 ---
-title: Shimming
+title: Shimming 预置依赖
 sort: 19
 contributors:
   - pksjce
@@ -21,20 +21,20 @@ related:
     url: https://babeljs.io/docs/en/babel-preset-env#usebuiltins
 ---
 
-The `webpack` compiler can understand modules written as ES2015 modules, CommonJS or AMD. However, some third party libraries may expect global dependencies (e.g. `$` for `jQuery`). The libraries might also create globals which need to be exported. These "broken modules" are one instance where _shimming_ comes into play.
+`webpack` compiler 能够识别遵循 ES2015 模块语法、CommonJS 或 AMD 规范编写的模块。然而，一些 third party(第三方库) 可能会引用一些全局依赖（例如 `jQuery` 中的 `$`）。因此这些 library 也可能会创建一些需要导出的全局变量。这些 "broken modules(不符合规范的模块)" 就是 _shimming(预置依赖)_ 发挥作用的地方。
 
-W> __We don't recommend using globals!__ The whole concept behind webpack is to allow more modular front-end development. This means writing isolated modules that are well contained and do not rely on hidden dependencies (e.g. globals). Please use these features only when necessary.
+W> __我们不推荐使用全局依赖！__webpack 背后的整个理念是使前端开发更加模块化。也就是说，需要编写具有良好的封闭性(well contained)、不依赖于隐含依赖（例如，全局变量）的彼此隔离的模块。请只在必要的时候才使用这些特性。
 
-Another instance where _shimming_ can be useful is when you want to [polyfill](https://en.wikipedia.org/wiki/Polyfill_%28programming%29) browser functionality to support more users. In this case, you may only want to deliver those polyfills to the browsers that need patching (i.e. load them on demand).
+_shim_ 另外一个极其有用的使用场景就是：当你希望 [polyfill](https://en.wikipedia.org/wiki/Polyfill_(programming)) 扩展浏览器能力，来支持到更多用户时。在这种情况下，你可能只是想要将这些 polyfills 提供给需要修补(patch)的浏览器（也就是实现按需加载）。
 
-The following article will walk through both of these use cases.
+下面的文章将向我们展示这两种用例。
 
-T> For simplicity, this guide stems from the examples in [Getting Started](/guides/getting-started). Please make sure you are familiar with the setup there before moving on.
+T> 为了方便，本指南继续沿用 [起步](/guides/getting-started) 中的代码示例。在继续之前，请确保你已经熟悉这些配置。
 
 
-## Shimming Globals
+## Shimming 预置全局变量
 
-Let's start with the first use case of shimming global variables. Before we do anything let's take another look at our project:
+让我们开始第一个 shimming 全局变量的用例。在此之前，先看下我们的项目：
 
 __project__
 
@@ -48,9 +48,9 @@ webpack-demo
 |- /node_modules
 ```
 
-Remember that `lodash` package we were using? For demonstration purposes, let's say we wanted to instead provide this as a global throughout our application. To do this, we can use `ProvidePlugin`.
+还记得我们之前用过的 `lodash` 吗？出于演示目的，例如把这个应用程序中的模块依赖，改为一个全局变量依赖。要实现这些，我们需要使用 `ProvidePlugin` 插件。
 
-The [`ProvidePlugin`](/plugins/provide-plugin) makes a package available as a variable in every module compiled through webpack. If webpack sees that variable used, it will include the given package in the final bundle. Let's go ahead by removing the `import` statement for `lodash` and instead provide it via the plugin:
+使用 [`ProvidePlugin`](/plugins/provide-plugin) 后，能够在 webpack 编译的每个模块中，通过访问一个变量来获取一个 package。如果 webpack 看到模块中用到这个变量，它将在最终 bundle 中引入给定的 package。让我们先移除 `lodash` 的 `import` 语句，改为通过插件提供它：
 
 __src/index.js__
 
@@ -89,11 +89,11 @@ __webpack.config.js__
   };
 ```
 
-What we've essentially done here is tell webpack...
+我们本质上所做的，就是告诉 webpack……
 
-> If you encounter at least one instance of the variable `_`, include the `lodash` package and provide it to the modules that need it.
+> 如果你遇到了至少一处用到 `_` 变量的模块实例，那请你将 `lodash` package 引入进来，并将其提供给需要用到它的模块。
 
-If we run a build, we should still see the same output:
+运行我们的构建脚本，将会看到同样的输出：
 
 ``` bash
 ...
@@ -102,7 +102,7 @@ bundle.js  544 kB       0  [emitted]  [big]  main
 ...
 ```
 
-We can also use the `ProvidePlugin` to expose a single export of a module by configuring it with an "array path" (e.g. `[module, child, ...children?]`). So let's imagine we only wanted to provide the `join` method from `lodash` wherever it's invoked:
+还可以使用 `ProvidePlugin` 暴露出某个模块中单个导出，通过配置一个“数组路径”（例如 `[module, child, ...children?]`）实现此功能。所以，我们假想如下，无论 `join` 方法在何处调用，我们都只会获取到 `lodash` 中提供的 `join` 方法。
 
 __src/index.js__
 
@@ -140,12 +140,12 @@ __webpack.config.js__
   };
 ```
 
-This would go nicely with [Tree Shaking](/guides/tree-shaking) as the rest of the `lodash` library should get dropped.
+这样就能很好的与 [tree shaking](/guides/tree-shaking) 配合，将 `lodash` library 中的其余没有用到的导出去除。
 
 
-## Granular Shimming
+## 细粒度 Shimming
 
-Some legacy modules rely on `this` being the `window` object. Let's update our `index.js` so this is the case:
+一些遗留模块依赖的 `this` 指向的是 `window` 对象。在接下来的用例中，调整我们的 `index.js`：
 
 ``` diff
   function component() {
@@ -153,7 +153,7 @@ Some legacy modules rely on `this` being the `window` object. Let's update our `
 
     element.innerHTML = join(['Hello', 'webpack'], ' ');
 +
-+   // Assume we are in the context of `window`
++   // 假设我们处于 `window` 上下文
 +   this.alert('Hmmm, this probably isn\'t a great idea...')
 
     return element;
@@ -162,7 +162,7 @@ Some legacy modules rely on `this` being the `window` object. Let's update our `
   document.body.appendChild(component());
 ```
 
-This becomes a problem when the module is executed in a CommonJS context where `this` is equal to `module.exports`. In this case you can override `this` using the [`imports-loader`](/loaders/imports-loader/):
+当模块运行在 CommonJS 上下文中，这将会变成一个问题，也就是说此时的 `this` 指向的是 `module.exports`。在这种情况下，你可以通过使用 [`imports-loader`](/loaders/imports-loader/) 覆盖 `this` 指向：
 
 __webpack.config.js__
 
@@ -193,9 +193,9 @@ __webpack.config.js__
 ```
 
 
-## Global Exports
+## 全局 Exports
 
-Let's say a library creates a global variable that it expects its consumers to use. We can add a small module to our setup to demonstrate this:
+让我们假设，某个 library 创建出一个全局变量，它期望 consumer(使用者) 使用这个变量。为此，我们可以在项目配置中，添加一个小模块来演示说明：
 
 __project__
 
@@ -220,7 +220,7 @@ const helpers = {
 };
 ```
 
-Now, while you'd likely never do this in your own source code, you may encounter a dated library you'd like to use that contains similar code to what's shown above. In this case, we can use [`exports-loader`](/loaders/exports-loader/), to export that global variable as a normal module export. For instance, in order to export `file` as `file` and `helpers.parse` as `parse`:
+你可能从来没有在自己的源码中做过这些事情，但是你也许遇到过一个老旧的 library，和上面所展示的代码类似。在这种情况下，我们可以使用 [`exports-loader`](/loaders/exports-loader/)，将一个全局变量作为一个普通的模块来导出。例如，为了将 `file` 导出为 `file` 以及将 `helpers.parse` 导出为 `parse`，做如下调整：
 
 __webpack.config.js__
 
@@ -254,20 +254,20 @@ __webpack.config.js__
   };
 ```
 
-Now from within our entry script (i.e. `src/index.js`), we could `import { file, parse } from './globals.js';` and all should work smoothly.
+现在，在我们的 entry 入口文件中（即 `src/index.js`），我们能 `import { file, parse } from './globals.js';` ，然后一切将顺利运行。
 
 
-## Loading Polyfills
+## 加载 Polyfills
 
-Almost everything we've discussed thus far has been in relation to handling legacy packages. Let's move on to our second topic: __polyfills__.
+目前为止我们所讨论的所有内容都是处理那些遗留的 package，让我们进入到第二个话题：__polyfill__。
 
-There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`](https://babeljs.io/docs/en/babel-polyfill/) we might simply:
+有很多方法来加载 polyfill。例如，想要引入 [`babel-polyfill`](https://babel.docschina.org/docs/en/babel-polyfill/) 我们只需如下操作：
 
 ``` bash
 npm install --save babel-polyfill
 ```
 
-and `import` it so as to include it in our main bundle:
+然后，使用 `import` 将其引入到我们的主 bundle 文件：
 
 __src/index.js__
 
@@ -285,14 +285,14 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-T> Note that we aren't binding the `import` to a variable. This is because polyfills simply run on their own, prior to the rest of the code base, allowing us to then assume certain native functionality exists.
+T> 注意，我们没有将 `import` 绑定到某个变量。这是因为 polyfill 直接基于自身执行，并且是在基础代码执行之前，这样通过这些预置，我们就可以假定已经具有某些原生功能。
 
-Note that this approach prioritizes correctness over bundle size. To be safe and robust, polyfills/shims must run __before all other code__, and thus either need to load synchronously, or, all app code needs to load after all polyfills/shims load.
-There are many misconceptions in the community, as well, that modern browsers "don't need" polyfills, or that polyfills/shims merely serve to add missing features - in fact, they often _repair broken implementations_, even in the most modern of browsers.
-The best practice thus remains to unconditionally and synchronously load all polyfills/shims, despite the bundle size cost this incurs.
+注意，这种方式优先考虑正确性，而不考虑 bundle 体积大小。为了安全和可靠，polyfill/shim 必须__运行于所有其他代码之前__，而且需要同步加载，或者说，需要在所有 polyfill/shim 加载之后，再去加载所有应用程序代码。
+社区中存在许多误解，即现代浏览器“不需要”polyfill，或者 polyfill/shim 仅用于添加缺失功能 - 实际上，它们通常用于_修复损坏实现(repair broken implementation)_，即使是在最现代的浏览器中，也会出现这种情况。
+因此，最佳实践仍然是，不加选择地和同步地加载所有 polyfill/shim，尽管这会导致额外的 bundle 体积成本。
 
-If you feel that you have mitigated these concerns and wish to incur the risk of brokenness, here's one way you might do it:
-Let's move our `import` to a new file and add the [`whatwg-fetch`](https://github.com/github/fetch) polyfill:
+如果你认为自己已经打消这些顾虑，并且希望承受损坏的风险。那么接下来的这件事情，可能是你应该要做的：
+我们将会把 `import` 放入一个新文件，并加入 [`whatwg-fetch`](https://github.com/github/fetch) polyfill：
 
 ``` bash
 npm install --save whatwg-fetch
@@ -372,7 +372,7 @@ __webpack.config.js__
   };
 ```
 
-With that in place, we can add the logic to conditionally load our new `polyfills.bundle.js` file. How you make this decision depends on the technologies and browsers you need to support. We'll just do some simple testing to determine whether our polyfills are needed:
+如上配置之后，我们可以在代码中添加一些逻辑，有条件地加载新的 `polyfills.bundle.js` 文件。根据需要支持的技术和浏览器来决定是否加载。我们将做一些简单的试验，来确定是否需要引入这些 polyfill：
 
 __dist/index.html__
 
@@ -402,7 +402,7 @@ __dist/index.html__
   </html>
 ```
 
-Now we can `fetch` some data within our entry script:
+现在，在 entry 入口文件中，可以通过 `fetch` 获取一些数据：
 
 __src/index.js__
 
@@ -426,12 +426,12 @@ __src/index.js__
 +   .catch(error => console.error('Something went wrong when fetching this data: ', error))
 ```
 
-If we run our build, another `polyfills.bundle.js` file will be emitted and everything should still run smoothly in the browser. Note that this set up could likely be improved upon but it should give you a good idea of how you can provide polyfills only to the users that actually need them.
+执行构建脚本，可以看到，浏览器发送了额外的 `polyfills.bundle.js` 文件请求，然后所有代码顺利执行。注意，以上的这些设定可能还会有所改进，这里我们向你提供一个很棒的想法：将 polyfill 提供给需要引入它的用户。
 
 
-## Further Optimizations
+## 进一步优化
 
-The `babel-preset-env` package uses [browserslist](https://github.com/browserslist/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the [`useBuiltIns`](https://babeljs.io/docs/en/babel-preset-env#usebuiltins) option, `false` by default, which converts your global `babel-polyfill` import to a more granular feature by feature `import` pattern:
+`babel-preset-env` package 通过 [browserslist](https://github.com/browserslist/browserslist) 来转译那些你浏览器中不支持的特性。这个 preset 使用 [`useBuiltIns`](https://babel.docschina.org/docs/en/babel-preset-env#usebuiltins) 选项，默认值是 `false`，这种方式可以将全局 `babel-polyfill` 导入，改进为更细粒度的 `import` 格式：
 
 ``` js
 import 'core-js/modules/es7.string.pad-start';
@@ -444,21 +444,25 @@ import 'core-js/modules/web.dom.iterable';
 See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset-env) for more information.
 
 
-## Node Built-Ins
+## Node 内置
 
-Node built-ins, like `process`, can be polyfilled right directly from your configuration file without the use of any special loaders or plugins. See the [node configuration page](/configuration/node) for more information and examples.
+像 `process` 这种 Node 内置模块，能直接根据配置文件进行正确的 polyfill，而不需要任何特定的 loader 或者 plugin。查看 [node](/configuration/node) 配置页面获取更多信息。
 
 
-## Other Utilities
+## 其他工具
 
-There are a few other tools that can help when dealing with legacy modules.
+还有一些其他的工具，也能够帮助我们处理这些遗留模块。
 
-The [`script-loader`](/loaders/script-loader/) evaluates code in the global context, similar to inclusion via a `script` tag. In this mode, every normal library should work. `require`, `module`, etc. are undefined.
+[`script-loader`](/loaders/script-loader/) 会在 global context(全局上下文) 中对代码进行 eval 取值，这类似于通过一个 `script` 标签引入脚本。在这种模式下，每个正常的 library 都应该能运行。对 `require`, `module` 等取值是 undefined。
 
-W> When using the `script-loader`, the module is added as a string to the bundle. It is not minimized by `webpack`, so use a minimized version. There is also no `devtool` support for libraries added by this loader.
+W> 在使用 `script-loader` 时，模块将转为一个字符串，然后添加到 bundle 中。它不会被 `webpack` 压缩，所以你应该选择一个 min 版本。而且，使用此 loader 添加的 library 也没有 `devtool` 支持。
 
-When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module in [`noParse`](/configuration/module/#modulenoparse). This will cause webpack to include the module without parsing it or resolving `require()` and `import` statements. This practice is also used to improve the build performance.
+这些遗留模块如果没有 AMD/CommonJS 版本，但你也想将他们加入 `dist` 文件，则可以使用 [`noParse`](/configuration/module/#module-noparse) 来标识出这个模块。这样就能使 webpack 将引入这些模块，但是不进行转化(parse)，以及不解析(resolve) `require()` 和 `import` 语句。这种用法还会提高构建性能。
 
-W> Any feature requiring the AST, like the `ProvidePlugin`, will not work.
+W> 任何需要 AST 的功能（例如 `ProvidePlugin`）都不起作用。
 
-Lastly, there are some modules that support multiple [module styles](/concepts/modules); e.g. a combination of AMD, CommonJS, and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `define=>false` via the [`imports-loader`](/loaders/imports-loader/).
+最后，一些模块支持多种 [模块格式](/concepts/modules)，例如一个混合有 AMD、CommonJS 和 legacy(遗留) 的模块。在大多数这样的模块中，会首先检查 `define`，然后使用一些怪异代码导出一些属性。在这些情况下，可以通过 [`imports-loader`](/loaders/imports-loader/) 设置 `define=>false` 来强制 CommonJS 路径。
+
+***
+
+T> 译者注：shimming 是一个库(library)，它将一个新的 API 引入到一个旧的环境中，而且仅靠旧的环境中已有的手段实现。polyfill 就是一个用在浏览器 API 上的 shimming。我们通常的做法是先检查当前浏览器是否支持某个 API，如果不支持的话就按需加载对应的 polyfill。然后新旧浏览器就都可以使用这个 API 了。

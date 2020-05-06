@@ -53,7 +53,6 @@ HMR 是可选功能，只会影响包含 HMR 代码的模块。举个例子，�
 
 有关 `module.hot` 接口的详细信息，请查看 [HMR API 页面](/api/hot-module-replacement)。
 
-
 ### 在 Runtime 中
 
 这件事情比较有技术性……如果你对其内部不感兴趣，可以随时跳到 [HMR API 页面](/api/hot-module-replacement) 或 [HMR 指南](/guides/hot-module-replacement)。
