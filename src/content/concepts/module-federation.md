@@ -30,7 +30,7 @@ Nesting container is possible. Containers can use modules from other containers.
 
 ### Overriding
 
-A container is able to flag selected local modules as "overridable". A consumer of the container is able to provide "overrides", which are modules that replace one of the overridable module of the container. All modules of the container will use the replacement module instead of the local module when the consomer provides one. When the consumer doesn't provide a replacement module, all modules of the container will use the local one.
+A container is able to flag selected local modules as "overridable". A consumer of the container is able to provide "overrides", which are modules that replace one of the overridable module of the container. All modules of the container will use the replacement module instead of the local module when the consumer provides one. When the consumer doesn't provide a replacement module, all modules of the container will use the local one.
 
 The container will organize overridable modules in a way that they do not need to be downloaded when they has been overriding by the consumer. This usually happens by placing them into separate chunks.
 
@@ -69,7 +69,7 @@ This plugin adds specified references to containers as externals and allows to i
 
 ### `ModuleFederationPlugin` (high level)
 
-This plugins combines `ContainerPlugin` and `ContainerReferencePlugin`. Overrides and overridables are combined into a single list of specified shared modules.
+This plugin combines `ContainerPlugin` and `ContainerReferencePlugin`. Overrides and overridables are combined into a single list of specified shared modules.
 
 ## Concept goals
 
