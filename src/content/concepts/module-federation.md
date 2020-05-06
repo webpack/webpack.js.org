@@ -85,7 +85,7 @@ This plugins combines `ContainerPlugin` and `ContainerReferencePlugin`. Override
 
 ### Separate builds per page
 
-Each page of a Single Page Application is exposed from container build in a separate build. The application shell is also a separate build referencing all pages as remove modules. This way each page can be separately deployed. The application shell is deployed when routes are updated or new routes are added. The application shell defines commonly used libraries as shared modules to avoid duplication of them in the page builds.
+Each page of a Single Page Application is exposed from container build in a separate build. The application shell is also a separate build referencing all pages as remote modules. This way each page can be separately deployed. The application shell is deployed when routes are updated or new routes are added. The application shell defines commonly used libraries as shared modules to avoid duplication of them in the page builds.
 
 ### Components library as container
 
