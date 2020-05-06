@@ -89,5 +89,4 @@ Each page of a Single Page Application is exposed from container build in a sepa
 
 ### Components library as container
 
-Many applications that share a common components library. This component library is build as container with each component exposed. Each application consumes components from the component library container.
-Changes to the component library can be separately deployed without the need to re-deploy all applications. The application automatically use the up-to-date version of the component library.
+Many applications share a common components library which could be built as container with each component exposed. Each application consumes components from the components library container. Changes to the components library can be separately deployed without the need to re-deploy all applications. The application automatically use the up-to-date version of the components library.
