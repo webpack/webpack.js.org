@@ -10,7 +10,7 @@ related:
 
 ## Motivation
 
-Multiple separate builds should form a single application. These separate builds should not have build dependencies between each other, so they can be developed and deployed individually.
+Multiple separate builds should form a single application. These separate builds should not have dependencies between each other, so they can be developed and deployed individually.
 
 This is often known as Micro-Frontends, but is not limited to that.
 
@@ -18,11 +18,11 @@ This is often known as Micro-Frontends, but is not limited to that.
 
 We distinguish between local and remote modules. Local modules are normal modules which are part of the current build. Remote modules are modules that are not part of the current build and loaded from a so-called container at the runtime.
 
-Loading remote modules is considered as async operation. When using a remote module these async operation will be placed in the next chunk loading operation(s) that is between the remote module and the entrypoint. It's not possible to use a remote module without a chunk loading operation.
+Loading remote modules is considered async operation. When using a remote module these async operations will be placed in the next chunk loading operation(s) that is between the remote module and the entrypoint. It's not possible to use a remote module without a chunk loading operation.
 
 A chunk loading operation is usually an `import()` call, but older constructs like `require.ensure` or `require([...])` are supported as well.
 
-A container is created through a container entry, which exposes asynchronous access to the specified modules. The exposed access is separated into two steps:
+A container is created through a container entry, which exposes asynchronous access to the specific modules. The exposed access is separated into two steps:
 
 1. loading the module (asynchronous)
 2. evaluating the module (synchronous).
@@ -33,11 +33,11 @@ It is possible to nest a container. Containers can use modules from other contai
 
 ### Overriding
 
-A container is able to flag selected local modules as "overridable". A consumer of the container is able to provide "overrides", which are modules that replace one of the overridable module of the container. All modules of the container will use the replacement module instead of the local module when the consumer provides one. When the consumer doesn't provide a replacement module, all modules of the container will use the local one.
+A container is able to flag selected local modules as "overridable". A consumer of the container is able to provide "overrides", which are modules that replace one of the overridable modules of the container. All modules of the container will use the replacement module instead of the local module when the consumer provides one. When the consumer doesn't provide a replacement module, all modules of the container will use the local one.
 
-The container will organize overridable modules in a way that they do not need to be downloaded when they have been overridden by the consumer. This usually happens by placing them into separate chunks.
+The container will manage overridable modules in a way that they do not need to be downloaded when they have been overridden by the consumer. This usually happens by placing them into separate chunks.
 
-On the other hand, the provider of the replacement modules, will only provide asynchronous loading functions. It allows the container to load replacement modules only when they are needed. The provider will organize replacement modules in a way that they do not need to be downloaded at all when they are not requested by the container. This usually happens by placing them into separate chunks.
+On the other hand, the provider of the replacement modules, will only provide asynchronous loading functions. It allows the container to load replacement modules only when they are needed. The provider will manage replacement modules in a way that they do not need to be downloaded at all when they are not requested by the container. This usually happens by placing them into separate chunks.
 
 A "name" is used to identify overridable modules from the container.
 
@@ -60,7 +60,7 @@ Shared modules are modules that are both overridable and provided as overrides t
 
 ### `OverridablesPlugin` (low level)
 
-This plugin makes specified modules "overridable". A local API (`__webpack_override__`) allows to provide overrides.
+This plugin makes specific modules "overridable". A local API (`__webpack_override__`) allows to provide overrides.
 
 ### `ContainerPlugin` (low level)
 
@@ -68,7 +68,7 @@ This plugin creates an additional container entry with the specified exposed mod
 
 ### `ContainerReferencePlugin` (low level)
 
-This plugin adds specified references to containers as externals and allows to import remote modules from these containers. It also calls the `override` API of these containers to provide overrides to them. Local overrides (via `__webpack_override__` or `override` API when build is also a container) and specified overrides are provided to all referenced containers.
+This plugin adds specific references to containers as externals and allows to import remote modules from these containers. It also calls the `override` API of these containers to provide overrides to them. Local overrides (via `__webpack_override__` or `override` API when build is also a container) and specified overrides are provided to all referenced containers.
 
 ### `ModuleFederationPlugin` (high level)
 
@@ -92,4 +92,4 @@ Each page of a Single Page Application is exposed from container build in a sepa
 
 ### Components library as container
 
-Many applications share a common components library which could be built as a container with each component exposed. Each application consumes components from the components library container. Changes to the components library can be separately deployed without the need to re-deploy all applications. The application automatically use the up-to-date version of the components library.
+Many applications share a common components library which could be built as a container with each component exposed. Each application consumes components from the components library container. Changes to the components library can be separately deployed without the need to re-deploy all applications. The application automatically uses the up-to-date version of the components library.
