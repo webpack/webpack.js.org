@@ -48,7 +48,7 @@ Overrides are provided in a similar way as the container exposes modules, separa
 
 W> When nesting is used, providing overrides to one container will automatically override the modules with the same "name" in the nested container(s).
 
-Overrides must be provided before the modules of the container are loaded, otherwise behavior is undefined.
+Overrides must be provided before the modules of the container are loaded.
 
 ## High-level concepts
 
