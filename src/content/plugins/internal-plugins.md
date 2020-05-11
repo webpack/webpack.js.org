@@ -285,9 +285,3 @@ Merges chunks until each chunk has the minimum size of `minChunkSize`.
 `optimize/FlagIncludedChunksPlugin()`
 
 Adds chunk ids of chunks which are included in the chunk. This eliminates unnecessary chunk loads.
-
-### DedupePlugin
-
-`optimize/DedupePlugin()`
-
-Deduplicates modules and adds runtime code.
