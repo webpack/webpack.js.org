@@ -121,12 +121,6 @@ Decorates the templates by generating a SourceMap for each chunk.
 
 `sourceMapFilename` the filename template of the SourceMap. `[hash]`, `[name]`, `[id]`, `[file]` and `[filebase]` are replaced. If this argument is missing, the SourceMap will be inlined as DataUrl.
 
-### NoHotModuleReplacementPlugin
-
-`NoHotModuleReplacementPlugin()`
-
-Defines `module.hot` as `false` to remove hot module replacement code.
-
 ### HotModuleReplacementPlugin
 
 `HotModuleReplacementPlugin(options)`
