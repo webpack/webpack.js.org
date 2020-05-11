@@ -5,6 +5,7 @@ contributors:
   - EugeneHlushko
   - ooflorent
   - Legends
+  - chenxsan
 ---
 
 This is a list of plugins which are used by webpack internally.
@@ -34,13 +35,11 @@ Applies Node.js style filesystem to the compiler.
 
 Plugins affecting the compiler
 
-### CachePlugin
+### MemoryCachePlugin
 
-`CachePlugin([cache])`
+`MemoryCachePlugin()`
 
-Adds a cache to the compiler, where modules are cached.
-
-You can pass a `cache` object, where the modules are cached. Otherwise one is created per plugin instance.
+Adds a cache to the compiler, where modules are cached in memory.
 
 ### ProgressPlugin
 
