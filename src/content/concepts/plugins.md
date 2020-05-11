@@ -94,4 +94,4 @@ compiler.run(function(err, stats) {
 });
 ```
 
-T> 你知道吗：以上看到的示例和 [webpack 运行时(runtime)本身](https://github.com/webpack/webpack/blob/e7087ffeda7fa37dfe2ca70b5593c6e899629a2c/bin/webpack.js#L290-L292) 极其类似。[wepback 源码](https://github.com/webpack/webpack) 中隐藏有大量使用示例，你可以将其应用在自己的配置和脚本中。
+T> 你知道吗：以上看到的示例和 [webpack 运行时(runtime)本身](https://github.com/webpack/webpack/blob/e7087ffeda7fa37dfe2ca70b5593c6e899629a2c/bin/webpack.js#L290-L292) 极其类似。[webpack 源码](https://github.com/webpack/webpack) 中隐藏有大量使用示例，你可以将其应用在自己的配置和脚本中。
