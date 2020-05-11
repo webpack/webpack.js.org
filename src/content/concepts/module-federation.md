@@ -1,8 +1,10 @@
 ---
 title: Module Federation
+sort: 8
 contributors:
   - sokra
   - chenxsan
+  - EugeneHlushko
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
@@ -71,7 +73,7 @@ module.exports = {
     new OverridablesPlugin([
       {
         // we define an overridable module with OverridablesPlugin
-        test1: './src/test1.js', 
+        test1: './src/test1.js',
       },
     ]),
   ],
@@ -83,7 +85,7 @@ __src/index.js__
 ```js
 __webpack_override__({
   // here we override test1 module
-  test1: () => 'I will override test1 module under src', 
+  test1: () => 'I will override test1 module under src',
 });
 ```
 
