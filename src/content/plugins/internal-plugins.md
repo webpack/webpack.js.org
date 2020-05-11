@@ -224,12 +224,6 @@ Provides AMD-style `define` and `require` to modules. Also bind `require.amd`, `
 
 Provides CommonJs-style `require` to modules.
 
-### LabeledModulesPlugin
-
-`dependencies/LabeledModulesPlugin()`
-
-Provide labels `require:` and `exports:` to modules.
-
 ### RequireContextPlugin
 
 `dependencies/RequireContextPlugin(modulesDirectories, extensions)`
