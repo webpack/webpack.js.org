@@ -151,10 +151,6 @@ Make webpack_public_path, webpack_require, webpack_modules and webpack_chunk_loa
 
 Currently useless. Ensures compatibility with other module loaders.
 
-### ConsolePlugin
-
-Offers a pseudo `console` if it is not available.
-
 ### ConstPlugin
 
 Tries to evaluate expressions in `if (...)` statements and ternaries to replace them with `true`/`false` for further possible dead branch elimination using hooks fired by the parser.
