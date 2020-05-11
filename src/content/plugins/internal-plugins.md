@@ -71,16 +71,6 @@ Prefetches `request` and dependencies to enable a more parallel compilation. It 
 
 ## output
 
-### FunctionModulePlugin
-
-`FunctionModulePlugin(context, options)`
-
-Each emitted module is wrapped in a function.
-
-`options` are the output options.
-
-If `options.pathinfo` is set, each module function is annotated with a comment containing the module identifier shortened to `context` (absolute path).
-
 ### JsonpTemplatePlugin
 
 `JsonpTemplatePlugin(options)`
