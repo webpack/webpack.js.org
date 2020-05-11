@@ -286,14 +286,6 @@ Merges chunks until each chunk has the minimum size of `minChunkSize`.
 
 Adds chunk ids of chunks which are included in the chunk. This eliminates unnecessary chunk loads.
 
-### OccurenceOrderPlugin
-
-`optimize/OccurrenceOrderPlugin(preferEntry)`
-
-Order the modules and chunks by occurrence. This saves space, because often referenced modules and chunks get smaller ids.
-
-`preferEntry` If true, references in entry chunks have higher priority
-
 ### DedupePlugin
 
 `optimize/DedupePlugin()`
