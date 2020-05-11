@@ -63,12 +63,6 @@ Plugins, which add entry chunks to the compilation.
 
 Adds an entry chunk on compilation. The chunk is named `chunkName` and contains only one module (plus dependencies). The module is resolved from `request` in `context` (absolute path).
 
-### MultiEntryPlugin
-
-`MultiEntryPlugin(context, requests, chunkName)`
-
-Adds an entry chunk on compilation. The chunk is named `chunkName` and contains a module for each item in the `requests` array (plus dependencies). Each item in `requests` is resolved in `context` (absolute path).
-
 ### PrefetchPlugin
 
 `PrefetchPlugin(context, request)`
