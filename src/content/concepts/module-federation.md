@@ -1,8 +1,10 @@
 ---
 title: Module Federation
+sort: 8
 contributors:
   - sokra
   - chenxsan
+  - EugeneHlushko
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
@@ -18,7 +20,7 @@ This is often known as Micro-Frontends, but is not limited to that.
 
 We distinguish between local and remote modules. Local modules are normal modules which are part of the current build. Remote modules are modules that are not part of the current build and loaded from a so-called container at the runtime.
 
-Loading remote modules is considered async operation. When using a remote module these async operations will be placed in the next chunk loading operation(s) that is between the remote module and the entrypoint. It's not possible to use a remote module without a chunk loading operation.
+Loading remote modules is considered asynchronous operation. When using a remote module these asynchronous operations will be placed in the next chunk loading operation(s) that is between the remote module and the entrypoint. It's not possible to use a remote module without a chunk loading operation.
 
 A chunk loading operation is usually an `import()` call, but older constructs like `require.ensure` or `require([...])` are supported as well.
 
@@ -71,7 +73,7 @@ module.exports = {
     new OverridablesPlugin([
       {
         // we define an overridable module with OverridablesPlugin
-        test1: './src/test1.js', 
+        test1: './src/test1.js',
       },
     ]),
   ],
@@ -83,7 +85,7 @@ __src/index.js__
 ```js
 __webpack_override__({
   // here we override test1 module
-  test1: () => 'I will override test1 module under src', 
+  test1: () => 'I will override test1 module under src',
 });
 ```
 
