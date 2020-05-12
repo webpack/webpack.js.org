@@ -36,9 +36,6 @@ const Footer = () => (
             alt="Creative Commons License"
             src={ BY } />
         </Link>
-        <Link className="footer__link footer__license" to="https://vercel.com/?utm_source=webpackdocs">
-          <img src={ Vercel } alt="Powered by Vercel" />
-        </Link>
       </section>
     </Container>
   </footer>
