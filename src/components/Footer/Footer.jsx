@@ -4,7 +4,6 @@ import Container from '../Container/Container';
 import Icon from '../../assets/icon-square-small.svg';
 import CC from '../../assets/cc.svg';
 import BY from '../../assets/by.svg';
-import Vercel from '../../assets/powered-by-vercel.svg';
 import './Footer.scss';
 
 const Footer = () => (
