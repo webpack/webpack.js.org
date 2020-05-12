@@ -402,7 +402,7 @@ module.exports = {
 
 #### `splitChunks.cacheGroups.{cacheGroup}.filename`
 
-`string` `function (pathData): string`
+`string` `function (pathData, assetInfo): string`
 
 Allows to override the filename when and only when it's an initial chunk.
 All placeholders available in [`output.filename`](/configuration/output/#outputfilename) are also available here.
