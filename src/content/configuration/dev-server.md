@@ -487,7 +487,7 @@ webpack-dev-server --host 0.0.0.0
 
 ## `devServer.hot`
 
-`boolean` | `"only"`
+`boolean = true` `string: 'only'`
 Enable webpack's [Hot Module Replacement](/concepts/hot-module-replacement/) feature:
 
 __webpack.config.js__
