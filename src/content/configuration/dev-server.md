@@ -503,7 +503,7 @@ module.exports = {
 
 T> Note that [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin/) is required to fully enable HMR. If `webpack` or `webpack-dev-server` are launched with the `--hot` option, this plugin will be added automatically, so you may not need to add this to your `webpack.config.js`. See the [HMR concepts page](/concepts/hot-module-replacement/) for more information.
 
-If `only` is set, it will Enable HMR without page refresh as a fallback in case of build failures.
+When set to  `'only'`, HMR will work without page refresh as a fallback when build errors.
 
 
 ## `devServer.http2`
