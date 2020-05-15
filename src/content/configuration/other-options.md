@@ -126,6 +126,26 @@ module.exports = {
 
 W> The final location of the cache is a combination of `cache.cacheDirectory` + `cache.name`.
 
+### `cache.cacheLocation`
+
+`string`
+
+Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.name)`.
+
+__webpack.config.js__
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    cacheLocation: path.resolve(__dirname, '.test_cache')
+  }
+};
+```
+
 ### `cache.hashAlgorithm`
 
 `string`
@@ -379,7 +399,7 @@ module.exports = {
 
 `string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 
-Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#stats) option but for infrastructure. No default value is given.
+Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) option but for infrastructure. No default value is given.
 
 __webpack.config.js__
 

@@ -19,6 +19,7 @@ contributors:
   - jamesgeorge007
   - g100g
   - anikethsaha
+  - snitin315
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -268,7 +269,7 @@ module.exports = {
 };
 ```
 
-It is also possible to serve from multiple directories:
+It is also possible to serve from multiple directories in case you want to serve static content at multiple URLs with [`contentBasePublicPath`](#devservercontentbasepublicpath):
 
 __webpack.config.js__
 
@@ -292,7 +293,7 @@ webpack-dev-server --content-base /path/to/content/dir
 
 ## `devServer.contentBasePublicPath`
 
-`string = '/'`
+`string = '/'` `[string]`
 
 Tell the server at what URL to serve `devServer.contentBase` static content. If there was a file `assets/manifest.json`, it would be served at `/serve-content-base-at-this-url/manifest.json`
 
@@ -310,6 +311,22 @@ module.exports = {
 };
 ```
 
+Provide an array of strings in case you have multiple static folders set in [`contentBase`](#devservercontentbase).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    contentBase: [contentBasePublic, contentBaseOther],
+    contentBasePublicPath: [
+      contentBasePublicPath,
+      contentBasePublicOtherPath
+    ]
+  }
+};
+```
 
 ## `devServer.disableHostCheck`
 
@@ -816,7 +833,7 @@ module.exports = {
 
 ## `devServer.open`
 
-`boolean = false` `string`
+`boolean = false` `string` `object`
 
 Tells dev-server to open the browser after server had been started. Set it to `true` to open your default browser.
 
@@ -840,6 +857,21 @@ module.exports = {
   //...
   devServer: {
     open: 'Google Chrome'
+  }
+};
+```
+
+If you want to use flags when opening the browser like opening an incognito window (`--incognito` flag), you can set `open` to an object. The object accepts all [open](https://www.npmjs.com/package/open) options, `app` property must be an array. The first element in the array must be the browser name and the other following elements are the flags you want to use. For example:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    open: {
+      app: ['Google Chrome', '--incognito', '--other-flag']
+    }
   }
 };
 ```

@@ -363,7 +363,7 @@ Here is a Warning!
  @ ./src/index.js 1:0-25
  ```
 
-T> Note that the warnings will not be displayed if `stats.warnings` is set to `false`, or some other omit setting is used to `stats` such as `none` or `errors-only`. See the [stats configuration](/configuration/stats/#stats).
+T> Note that the warnings will not be displayed if `stats.warnings` is set to `false`, or some other omit setting is used to `stats` such as `none` or `errors-only`. See the [stats presets configuration](/configuration/stats/#stats-presets).
 
 ### `this.emitError`
 
