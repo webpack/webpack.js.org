@@ -68,6 +68,41 @@ Below is a list of entry configurations and their real-world use cases:
 
 ### Separate App and Vendor Entries
 
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  entry: {
+    main: './src/app.js',
+    vendor: './src/vendor.js'
+  }
+};
+```
+
+__webpack.prod.js__
+
+```javascript
+module.exports = {
+  output: {
+    filename: '[name].[contentHash].bundle.js'
+  }
+};
+```
+
+__webpack.dev.js__
+
+```javascript
+module.exports = {
+  entry: {
+    filename: '[name].bundle.js'
+  }
+};
+```
+
+__What does this do?__ We are telling webpack that we would like 2 separate entry points (like the above example).
+
+__Why?__ With this you can import required libraries or files that aren't modified (e.g. Bootstrap, jQuery, images, etc) inside `vendor.js` and they will be bundled together into their own chunk. Content hash remains the same, which allows the browser to cache them separately thereby reducing load time.
+
 T> In webpack version < 4 it was common to add vendors as a separate entry point to compile it as a separate file (in combination with the `CommonsChunkPlugin`). <br><br> This is discouraged in webpack 4. Instead, the [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) option takes care of separating vendors and app modules and creating a separate file. __Do not__ create an entry for vendors or other stuff that is not the starting point of execution.
 
 ### Multi Page Application
