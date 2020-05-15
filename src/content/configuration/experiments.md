@@ -3,6 +3,7 @@ title: Experiments
 sort: 19
 contributors:
   - EugeneHlushko
+  - wizardofhogwarts
   - chenxsan
 ---
 
@@ -10,7 +11,7 @@ contributors:
 
 `boolean: false`
 
-`experiments` option was introduced in webpack 5 in order to empower users with an ability of activating and trying out experimental features.
+`experiments` option was introduced in webpack 5 to empower users with the ability to activate and try out experimental features.
 
 W> Because experimental features have relaxed semantic versioning and might contain breaking changes, make sure to fix webpack's version to minor e.g. `webpack: ~5.4.3` instead of `webpack: ^5.4.3` or use a lockfile when using `experiments`.
 
