@@ -12,9 +12,8 @@ __webpack.config.js__
 
 ``` javascript
 module.exports = {
-	plugins: [
-        new webpack.ContextExclusionPlugin(/dont/)
-    ]
+  plugins: [
+    new webpack.ContextExclusionPlugin(/dont/)
+  ]
 };
-
 ```
