@@ -1,15 +1,15 @@
 ---
-title: Advanced entry
+title: entry 高级用法
 sort: 24
 contributors:
   - EugeneHlushko
 ---
 
-## Multiple file types per entry
+## 每个入口使用多种文件类型
 
-It is possible to provide different types of files when using an array of values for [entry](/configuration/entry-context/#entry) to achieve separate bundles for CSS and JavaScript (and other) files in applications that are not using `import` for styles in JavaScript (pre Single Page Applications or different reasons).
+在不使用 `import` 样式文件的应用程序中（预单页应用程序或其他原因），使用一个值数组结构的 [entry](/configuration/entry-context/#entry)，并且在其中传入不同类型的文件，可以实现将 CSS 和 JavaScript（和其他）文件分离在不同的 bundle。
 
-Let's make an example. We have a PHP application with two page types: home and account. The home page has different layout and non-sharable JavaScript with the rest of the application (account page). We want to output `home.js` and `home.css` from our application files for the home page and `account.js` and `account.css` for account page.
+举个例子。我们有一个具有两种页面类型的 PHP 应用程序：home(首页) 和 account(帐户)。home 与应用程序其余部分（account 页面）具有不同的布局和不可共享的 JavaScript。我们想要从应用程序文件中输出 home 页面的 `home.js` 和 `home.css`，为 account 页面输出 `account.js` 和 `account.css`。
 
 __home.js__
 
@@ -35,7 +35,7 @@ __account.scss__
 // account page individual styles
 ```
 
-We will use [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin/) in `production` mode for css as a best practice.
+我们将在 `production(生产)` 模式中使用 [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin/) 作为 CSS 的一个最佳实践。
 
 __webpack.config.js__
 
@@ -72,7 +72,7 @@ module.exports = {
 };
 ```
 
-Running webpack with above configuration will output into `./dist` as we did not specify different output path. `./dist` directory will now contain four files:
+由于我们未指定其他输出路径，因此使用以上配置运行 webpack 将输出到 `./dist`。`./dist` 目录下现在包含四个文件：
 
 - home.js
 - home.css

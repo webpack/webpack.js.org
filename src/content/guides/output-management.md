@@ -1,5 +1,5 @@
 ---
-title: Output Management
+title: 管理输出
 sort: 3
 contributors:
   - skipjack
@@ -10,13 +10,13 @@ contributors:
   - AnayaDesign
 ---
 
-T> This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
+T> 本指南继续沿用 [`管理资源`](/guides/asset-management) 指南中的代码示例。
 
-So far we've manually included all our assets in our `index.html` file, but as your application grows and once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting), it will be difficult to keep managing your `index.html` file manually. However, a few plugins exist that will make this process much easier to manage.
+到目前为止，我们都是在 `index.html` 文件中手动引入所有资源，然而随着应用程序增长，并且一旦开始 [在文件名中使用 hash](/guides/caching) 并输出 [多个 bundle](/guides/code-splitting)，如果继续手动管理 `index.html` 文件，就会变得困难起来。然而，通过一些插件可以使这个过程更容易管控。
 
-## Preparation
+## 预先准备
 
-First, let's adjust our project a little bit:
+首先，调整一下我们的项目：
 
 __project__
 
@@ -31,7 +31,7 @@ __project__
   |- /node_modules
 ```
 
-Let's add some logic to our `src/print.js` file:
+我们在 `src/print.js` 文件中添加一些逻辑：
 
 __src/print.js__
 
@@ -41,7 +41,7 @@ export default function printMe() {
 }
 ```
 
-And use that function in our `src/index.js` file:
+并且在 `src/index.js` 文件中使用这个函数：
 
 __src/index.js__
 
@@ -55,7 +55,7 @@ __src/index.js__
 
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
-+   btn.innerHTML = 'Click me and check the console!';
++   btn.innerHTML = '点击这里，然后查看 console！';
 +   btn.onclick = printMe;
 +
 +   element.appendChild(btn);
@@ -66,7 +66,7 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-Let's also update our `dist/index.html` file, in preparation for webpack to split out entries:
+还要更新 `dist/index.html` 文件，来为 webpack 分离入口做好准备：
 
 __dist/index.html__
 
@@ -74,8 +74,8 @@ __dist/index.html__
   <!doctype html>
   <html>
     <head>
--     <title>Asset Management</title>
-+     <title>Output Management</title>
+-     <title>管理资源</title>
++     <title>管理输出</title>
 +     <script src="./print.bundle.js"></script>
     </head>
     <body>
@@ -85,7 +85,7 @@ __dist/index.html__
   </html>
 ```
 
-Now adjust the config. We'll be adding our `src/print.js` as a new entry point (`print`) and we'll change the output as well, so that it will dynamically generate bundle names, based on the entry point names:
+现在调整配置。我们将在 entry 添加 `src/print.js` 作为新的入口起点（`print`），然后修改 output，以便根据入口起点定义的名称，动态地产生 bundle 名称：
 
 __webpack.config.js__
 
@@ -106,7 +106,7 @@ __webpack.config.js__
   };
 ```
 
-Let's run `npm run build` and see what this generates:
+执行 `npm run build`，然后看到生成如下：
 
 ``` bash
 ...
@@ -116,14 +116,14 @@ print.bundle.js  2.74 kB       1  [emitted]         print
 ...
 ```
 
-We can see that webpack generates our `print.bundle.js` and `app.bundle.js` files, which we also specified in our `index.html` file. if you open `index.html` in your browser, you can see what happens when you click the button.
+我们可以看到，webpack 生成 `print.bundle.js` 和 `app.bundle.js` 文件，这也和我们在 `index.html` 文件中指定的文件名称相对应。如果你在浏览器中打开 `index.html`，就可以看到在点击按钮时会发生什么。
 
-But what would happen if we changed the name of one of our entry points, or even added a new one? The generated bundles would be renamed on a build, but our `index.html` file would still reference the old names. Let's fix that with the [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin).
+但是，如果我们更改了我们的一个入口起点的名称，甚至添加了一个新的入口，会发生什么？会在构建时重新命名生成的 bundle，但是我们的 `index.html` 文件仍然引用旧的名称。让我们用 [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin) 来解决这个问题。
 
 
-## Setting up HtmlWebpackPlugin
+## 设置 HtmlWebpackPlugin
 
-First install the plugin and adjust the `webpack.config.js` file:
+首先安装插件，并且调整 `webpack.config.js` 文件：
 
 ``` bash
 npm install --save-dev html-webpack-plugin
@@ -142,7 +142,7 @@ __webpack.config.js__
     },
 +   plugins: [
 +     new HtmlWebpackPlugin({
-+       title: 'Output Management',
++       title: '管理输出',
 +     }),
 +   ],
     output: {
@@ -152,7 +152,7 @@ __webpack.config.js__
   };
 ```
 
-Before we do a build, you should know that the `HtmlWebpackPlugin` by default will generate its own `index.html` file, even though we already have one in the `dist/` folder. This means that it will replace our `index.html` file with a newly generated one. Let's see what happens when we do an `npm run build`:
+在我们构建之前，你应该了解，虽然在 `dist/` 文件夹我们已经有了 `index.html` 这个文件，然而 `HtmlWebpackPlugin` 还是会默认生成它自己的 `index.html` 文件。也就是说，它会用新生成的 `index.html` 文件，替换我们的原有文件。我们看下执行 `npm run build` 后会发生什么：
 
 ``` bash
 ...
@@ -163,20 +163,20 @@ Before we do a build, you should know that the `HtmlWebpackPlugin` by default wi
 ...
 ```
 
-If you open `index.html` in your code editor, you'll see that the `HtmlWebpackPlugin` has created an entirely new file for you and that all the bundles are automatically added.
+如果在代码编辑器中打开 `index.html`，你会看到 `HtmlWebpackPlugin` 创建了一个全新的文件，所有的 bundle 会自动添加到 html 中。
 
-If you want to learn more about all the features and options that the `HtmlWebpackPlugin` provides, then you should read up on it on the [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) repo.
+如果你想要了解 `HtmlWebpackPlugin` 插件提供的全部的功能和选项，你就应该阅读 [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) 仓库中的源码。
 
-You can also take a look at [`html-webpack-template`](https://github.com/jaketrent/html-webpack-template) which provides a couple of extra features in addition to the default template.
+还可以看下 [`html-webpack-template`](https://github.com/jaketrent/html-webpack-template)，除了提供默认模板之外，还提供了一些额外的功能。
 
 
-## Cleaning up the `/dist` folder
+## 清理 `/dist` 文件夹
 
-As you might have noticed over the past guides and code example, our `/dist` folder has become quite cluttered. Webpack will generate the files and put them in the `/dist` folder for you, but it doesn't keep track of which files are actually in use by your project.
+你可能已经注意到，由于遗留了之前的指南和代码示例，我们的 `/dist` 文件夹显得相当杂乱。webpack 将生成文件并放置在 `/dist` 文件夹中，但是它不会追踪哪些文件是实际在项目中用到的。
 
-In general it's good practice to clean the `/dist` folder before each build, so that only used files will be generated. Let's take care of that.
+通常比较推荐的做法是，在每次构建前清理 `/dist` 文件夹，这样只会生成用到的文件。让我们实现这个需求。
 
-A popular plugin to manage this is the [`clean-webpack-plugin`](https://www.npmjs.com/package/clean-webpack-plugin) so let's install and configure it.
+[`clean-webpack-plugin`](https://www.npmjs.com/package/clean-webpack-plugin) 是一个流行的清理插件，安装和配置它。
 
 ``` bash
 npm install --save-dev clean-webpack-plugin
@@ -197,7 +197,7 @@ __webpack.config.js__
     plugins: [
 +     new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Output Management',
+        title: '管理输出',
       }),
     ],
     output: {
@@ -207,18 +207,18 @@ __webpack.config.js__
   };
 ```
 
-Now run an `npm run build` and inspect the `/dist` folder. If everything went well you should now only see the files generated from the build and no more old files!
+现在，执行 `npm run build`，检查 `/dist` 文件夹。如果一切顺利，现在只会看到构建后生成的文件，而没有旧文件！
 
 
-## The Manifest
+## manifest
 
-You might be wondering how webpack and its plugins seem to "know" what files are being generated. The answer is in the manifest that webpack keeps to track how all the modules map to the output bundles. If you're interested in managing webpack's [`output`](/configuration/output) in other ways, the manifest would be a good place to start.
+你可能会很感兴趣，webpack 和 webpack 插件似乎“知道”应该生成哪些文件。答案是，webpack 通过 manifest，可以追踪所有模块到输出 bundle 之间的映射。如果你想要知道如何以其他方式来控制 webpack [`输出`](/configuration/output)，了解 manifest 是个好的开始。
 
-The manifest data can be extracted into a json file for easy consumption using the [`WebpackManifestPlugin`](https://github.com/danethurber/webpack-manifest-plugin).
+通过 [`WebpackManifestPlugin`](https://github.com/danethurber/webpack-manifest-plugin) 插件，可以将 manifest 数据提取为一个容易使用的 json 文件。
 
-We won't go through a full example of how to use this plugin within your projects, but you can read up on [the concept page](/concepts/manifest) and the [caching guide](/guides/caching) to find out how this ties into long term caching.
+我们不会在此展示一个如何在项目中使用此插件的完整示例，你可以在 [manifest](/concepts/manifest) 概念页面深入阅读，以及在 [缓存](/guides/caching) 指南中，了解它与长效缓存有何关系。
 
 
-## Conclusion
+## 结论
 
-Now that you've learned about dynamically adding bundles to your HTML, let's dive into the [development guide](/guides/development). Or, if you want to dig into more advanced topics, we would recommend heading over to the [code splitting guide](/guides/code-splitting).
+现在，你已经了解如何向 HTML 动态添加 bundle，让我们深入 [开发环境](/guides/development) 指南。或者如果你想要深入更多相关高级话题，我们推荐你前往 [代码分离](/guides/code-splitting) 指南。

@@ -1,5 +1,5 @@
 ---
-title: Development
+title: 开发环境
 sort: 4
 contributors:
   - SpaceK33z
@@ -15,13 +15,13 @@ contributors:
   - aholzner
 ---
 
-T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
+T> 本指南继续沿用 [管理输出](/guides/output-management) 指南中的代码示例。
 
-If you've been following the guides, you should have a solid understanding of some of the webpack basics. Before we continue, let's look into setting up a development environment to make our lives a little easier.
+如果你一直跟随之前的指南，应该对一些 webpack 基础知识有着很扎实的理解。在我们继续之前，先来看看如何设置一个开发环境，使我们的开发体验变得更轻松一些。
 
-W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!
+W> 本指南中的工具__仅用于开发环境__，请__不要__在生产环境中使用它们！
 
-Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-development).
+在开始前，我们先将 [`mode` 设置为 `'development'`](/configuration/mode/#mode-development)。
 
 __webpack.config.js__
 
@@ -37,10 +37,10 @@ __webpack.config.js__
       print: './src/print.js',
     },
     plugins: [
-      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+      // 对于 CleanWebpackPlugin 的 v2 versions 以下版本，使用 new CleanWebpackPlugin(['dist/*'])
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Development',
+        title: '开发环境',
       }),
     ],
     output: {
@@ -50,15 +50,15 @@ __webpack.config.js__
   };
 ```
 
-## Using source maps
+## 使用 source map
 
-When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, the stack trace will simply point to `bundle.js`. This isn't always helpful as you probably want to know exactly which source file the error came from.
+当 webpack 打包源代码时，可能会很难追踪到 error(错误) 和 warning(警告) 在源代码中的原始位置。例如，如果将三个源文件（`a.js`, `b.js` 和 `c.js`）打包到一个 bundle（`bundle.js`）中，而其中一个源文件包含一个错误，那么堆栈跟踪就会直接指向到 `bundle.js`。你可能需要准确地知道错误来自于哪个源文件，所以这种提示这通常不会提供太多帮助。
 
-In order to make it easier to track down errors and warnings, JavaScript offers [source maps](http://blog.teamtreehouse.com/introduction-source-maps), which map your compiled code back to your original source code. If an error originates from `b.js`, the source map will tell you exactly that.
+为了更容易地追踪 error 和 warning，JavaScript 提供了 [source maps](http://blog.teamtreehouse.com/introduction-source-maps) 功能，可以将编译后的代码映射回原始源代码。如果一个错误来自于 `b.js`，source map 就会明确的告诉你。
 
-There are a lot of [different options](/configuration/devtool) available when it comes to source maps. Be sure to check them out so you can configure them to your needs.
+source map 有许多 [可用选项](/configuration/devtool)，请务必仔细阅读它们，以便可以根据需要进行配置。
 
-For this guide, let's use the `inline-source-map` option, which is good for illustrative purposes (though not for production):
+对于本指南，我们将使用 `inline-source-map` 选项，这有助于解释说明示例意图（此配置仅用于示例，不要用于生产环境）：
 
 __webpack.config.js__
 
@@ -87,7 +87,7 @@ __webpack.config.js__
   };
 ```
 
-Now let's make sure we have something to debug, so let's create an error in our `print.js` file:
+现在，让我们来做一些调试，在 `print.js` 文件中生成一个错误：
 
 __src/print.js__
 
@@ -98,7 +98,7 @@ __src/print.js__
   }
 ```
 
-Run an `npm run build`, it should compile to something like this:
+运行 `npm run build`，编译如下：
 
 ``` bash
 ...
@@ -109,36 +109,36 @@ print.bundle.js    6.43 kB       1  [emitted]         print
 ...
 ```
 
-Now open the resulting `index.html` file in your browser. Click the button and look in your console where the error is displayed. The error should say something like this:
+现在，在浏览器中打开生成的 `index.html` 文件，点击按钮，并且在控制台查看显示的错误。错误应该如下：
 
  ``` bash
  Uncaught ReferenceError: cosnole is not defined
     at HTMLButtonElement.printMe (print.js:2)
  ```
 
-We can see that the error also contains a reference to the file (`print.js`) and line number (2) where the error occurred. This is great because now we know exactly where to look in order to fix the issue.
+我们可以看到，此错误包含有发生错误的文件（`print.js`）和行号（2）的引用。这是非常有帮助的，因为现在我们可以确切地知道，所要解决问题的位置。
 
 
-## Choosing a Development Tool
+## 选择一个开发工具
 
-W> Some text editors have a "safe write" function that might interfere with some of the following tools. Read [Adjusting Your Text Editor](#adjusting-your-text-editor) for a solution to these issues.
+W> 某些文本编辑器具有 "safe write(安全写入)" 功能，可能会干扰下面一些工具。阅读 [调整文本编辑器](#adjusting-your-text-editor) 以解决这些问题。
 
-It quickly becomes a hassle to manually run `npm run build` every time you want to compile your code.
+在每次编译代码时，手动运行 `npm run build` 会显得很麻烦。
 
-There are a couple of different options available in webpack that help you automatically compile your code whenever it changes:
+webpack 提供几种可选方式，帮助你在代码发生变化后自动编译代码：
 
- 1. webpack's Watch Mode
+ 1. webpack watch mode(webpack 观察模式)
  2. webpack-dev-server
  3. webpack-dev-middleware
 
-In most cases, you probably would want to use `webpack-dev-server`, but let's explore all of the above options.
+多数场景中，你可能需要使用 `webpack-dev-server`，但是不妨探讨一下以上的所有选项。
 
 
-### Using Watch Mode
+### 使用 watch mode(观察模式)
 
-You can instruct webpack to "watch" all files within your dependency graph for changes. If one of these files is updated, the code will be recompiled so you don't have to run the full build manually.
+你可以指示 webpack "watch" 依赖图中所有文件的更改。如果其中一个文件被更新，代码将被重新编译，所以你不必再去手动运行整个构建。
 
-Let's add an npm script that will start webpack's Watch Mode:
+我们添加一个用于启动 webpack watch mode 的 npm scripts：
 
 __package.json__
 
@@ -168,7 +168,7 @@ __package.json__
   }
 ```
 
-Change your configuration file to tell `CleanWebpackPlugin` we dont want to remove `index.html` file after incremental build triggered by watch, we do it via using the [`cleanStaleWebpackAssets` option](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional):
+修改配置文件，告知 `CleanWebpackPlugin` 你不想在 watch 触发增量构建后删除 `index.html` 文件，我们通过配置 [`cleanStaleWebpackAssets` 选项](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional) 来实现：
 
 __webpack.config.js__
 
@@ -201,10 +201,10 @@ __webpack.config.js__
   };
 ```
 
-Now run `npm run watch` from the command line and see how webpack compiles your code.
-You can see that it doesn't exit the command line because the script is currently watching your files.
+现在，你可以在命令行中运行 `npm run watch`，然后就会看到 webpack 是如何编译代码。
+然而，你会发现并没有退出命令行。这是因为此 script 当前还在 watch 你的文件。
 
-Now, while webpack is watching your files, let's remove the error we introduced earlier:
+现在，webpack 观察文件的同时，先移除我们之前加入的错误：
 
 __src/print.js__
 
@@ -215,20 +215,20 @@ __src/print.js__
   }
 ```
 
-Now save your file and check the terminal window. You should see that webpack automatically recompiles the changed module!
+现在，保存文件并检查 terminal(终端) 窗口。应该可以看到 webpack 自动地重新编译修改后的模块！
 
-The only downside is that you have to refresh your browser in order to see the changes. It would be much nicer if that would happen automatically as well, so let's try `webpack-dev-server` which will do exactly that.
+唯一的缺点是，为了看到修改后的实际效果，你需要刷新浏览器。如果能够自动刷新浏览器就更好了，因此接下来我们会尝试通过 `webpack-dev-server` 实现此功能。
 
 
-### Using webpack-dev-server
+### 使用 webpack-dev-server
 
-The `webpack-dev-server` provides you with a simple web server and the ability to use live reloading. Let's set it up:
+`webpack-dev-server` 为你提供了一个简单的 web server，并且具有 live reloading(实时重新加载) 功能。设置如下：
 
 ``` bash
 npm install --save-dev webpack-dev-server
 ```
 
-Change your configuration file to tell the dev server where to look for files:
+修改配置文件，告知 dev server，从什么位置查找文件：
 
 __webpack.config.js__
 
@@ -260,11 +260,11 @@ __webpack.config.js__
   };
 ```
 
-This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080`.
+以上配置告知 `webpack-dev-server`，将 `dist` 目录下的文件 serve 到 `localhost:8080` 下。（译注：serve，将资源作为 server 的可访问文件）
 
-W> webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files on a different path, you can change this with the [`publicPath`](/configuration/dev-server/#devserverpublicpath-) option in the dev server's configuration.
+W> webpack-dev-server 在编译之后不会写入到任何输出文件。而是将 bundle 文件保留在内存中，然后将它们 serve 到 server 中，就好像它们是挂载在 server 根路径上的真实文件一样。如果你的页面希望在其他不同路径中找到 bundle 文件，则可以通过 dev server 配置中的 [`publicPath`](/configuration/dev-server/#devserverpublicpath-) 选项进行修改。
 
-Let's add a script to easily run the dev server as well:
+我们添加一个可以直接运行 dev server 的 script：
 
 __package.json__
 
@@ -298,24 +298,24 @@ __package.json__
   }
 ```
 
-Now we can run `npm start` from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!
+现在，在命令行中运行 `npm start`，我们会看到浏览器自动加载页面。如果你更改任何源文件并保存它们，web server 将在编译代码后自动重新加载。试试看！
 
-The `webpack-dev-server` comes with many configurable options. Head over to the [documentation](/configuration/dev-server) to learn more.
+`webpack-dev-server` 具有许多可配置的选项。关于其他更多配置，请查看 [配置文档](/configuration/dev-server)。
 
-T> Now that your server is working, you might want to give [Hot Module Replacement](/guides/hot-module-replacement) a try!
+T> 现在，server 正在运行，你可能需要尝试 [模块热替换(hot module replacement)](/guides/hot-module-replacement)！
 
 
-### Using webpack-dev-middleware
+### 使用 webpack-dev-middleware
 
-`webpack-dev-middleware` is a wrapper that will emit files processed by webpack to a server. This is used in `webpack-dev-server` internally, however it's available as a separate package to allow more custom setups if desired. We'll take a look at an example that combines `webpack-dev-middleware` with an express server.
+`webpack-dev-middleware` 是一个封装器(wrapper)，它可以把 webpack 处理过的文件发送到一个 server。  `webpack-dev-server` 在内部使用了它，然而它也可以作为一个单独的 package 来使用，以便根据需求进行更多自定义设置。下面是一个 webpack-dev-middleware 配合 express server 的示例。
 
-Let's install `express` and `webpack-dev-middleware` so we can get started:
+首先，安装 `express` 和 `webpack-dev-middleware`：
 
 ``` bash
 npm install --save-dev express webpack-dev-middleware
 ```
 
-Now we need to make some adjustments to our webpack configuration file in order to make sure the middleware will function correctly:
+现在，我们需要调整 webpack 配置文件，以确保 middleware(中间件) 功能能够正确启用：
 
 __webpack.config.js__
 
@@ -337,7 +337,7 @@ __webpack.config.js__
     plugins: [
       new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
       new HtmlWebpackPlugin({
-        title: 'Output Management',
+        title: '管理输出',
       }),
     ],
     output: {
@@ -348,7 +348,7 @@ __webpack.config.js__
   };
 ```
 
-The `publicPath` will be used within our server script as well in order to make sure files are served correctly on `http://localhost:3000`. We'll specify the port number later. The next step is setting up our custom `express` server:
+我们将会在 server 脚本使用 `publicPath`，以确保文件资源能够正确地 serve 在 `http://localhost:3000` 下，稍后我们会指定 port number(端口号)。接下来是设置自定义 `express` server：
 
 __project__
 
@@ -375,19 +375,19 @@ const app = express();
 const config = require('./webpack.config.js');
 const compiler = webpack(config);
 
-// Tell express to use the webpack-dev-middleware and use the webpack.config.js
-// configuration file as a base.
+// 告知 express 使用 webpack-dev-middleware，
+// 以及将 webpack.config.js 配置文件作为基础配置。
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,
 }));
 
-// Serve the files on port 3000.
+// 将文件 serve 到 port 3000。
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!\n');
 });
 ```
 
-Now add an npm script to make it a little easier to run the server:
+现在，添加一个 npm script，以使我们更方便地运行 server：
 
 __package.json__
 
@@ -423,7 +423,7 @@ __package.json__
   }
 ```
 
-Now in your terminal run `npm run server`, it should give you an output similar to this:
+现在，在 terminal(终端) 中执行 `npm run server`，将会有类似如下信息输出：
 
 ``` bash
 Example app listening on port 3000!
@@ -436,22 +436,22 @@ print.bundle.js    6.57 kB       1  [emitted]         print
 webpack: Compiled successfully.
 ```
 
-Now fire up your browser and go to `http://localhost:3000`. You should see your webpack app running and functioning!
+现在，打开浏览器，访问 `http://localhost:3000`。应该看到 webpack 应用程序已经运行！
 
-T> If you would like to know more about how Hot Module Replacement works, we recommend you read the [Hot Module Replacement](/guides/hot-module-replacement/) guide.
-
-
-## Adjusting Your Text Editor
-
-When using automatic compilation of your code, you could run into issues when saving your files. Some editors have a "safe write" feature that can potentially interfere with recompilation.
-
-To disable this feature in some common editors, see the list below:
-
-- __Sublime Text 3__: Add `atomic_save: 'false'` to your user preferences.
-- __JetBrains IDEs (e.g. WebStorm)__: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
-- __Vim__: Add `:set backupcopy=yes` to your settings.
+T> 如果想要了解更多关于模块热替换(hot module replacement)的运行机制，我们推荐你查看 [模块热替换(hot module replacement)](/guides/hot-module-replacement/) 指南。
 
 
-## Conclusion
+## 调整文本编辑器
 
-Now that you've learned how to automatically compile your code and run a simple development server, you can check out the next guide, which will cover [Hot Module Replacement](/guides/hot-module-replacement).
+使用自动编译代码时，可能会在保存文件时遇到一些问题。某些编辑器具有 "safe write(安全写入)" 功能，会影响重新编译。
+
+在一些常见的编辑器中禁用此功能，查看以下列表：
+
+- __Sublime Text 3__：在用户首选项(user preferences)中添加 `atomic_save: 'false'`。
+- __JetBrains IDEs (e.g. WebStorm)__：在 `Preferences > Appearance & Behavior > System Settings` 中取消选中 "Use safe write"。
+- __Vim__：在设置(settings)中增加 `:set backupcopy=yes`。
+
+
+## 结论
+
+现在，你已经学会了如何自动编译代码，并运行一个简单的 development server，查看下一个指南，其中将介绍 [模块热替换(hot module replacement)](/guides/hot-module-replacement)。

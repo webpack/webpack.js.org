@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: 起步
 sort: 1
 contributors:
   - bebraw
@@ -24,13 +24,13 @@ contributors:
   - myshov
 ---
 
-webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
+webpack 用于编译 JavaScript 模块。一旦完成 [安装](/guides/installation)，你就可以通过 webpack [CLI](/api/cli) 或 [API](/api/node) 与其配合交互。如果你还不熟悉 webpack，请阅读 [核心概念](/concepts) 和 [对比](/comparison)，了解为什么要使用 webpack，而不是社区中的其他工具。
 
-W> Since webpack v5.0.0-beta.1 the minimum Node.js version to run webpack is 10.13.0 (LTS)
+W> 从 webpack v5.0.0-beta.1 开始，需要运行的 Node.js 最低版本是 10.13.0 (LTS)
 
-## Basic Setup
+## 基本安装
 
-First let's create a directory, initialize npm, [install webpack locally](/guides/installation/#local-installation), and install the webpack-cli (the tool used to run webpack on the command line):
+首先我们创建一个目录，初始化 npm，然后 [在本地安装 webpack](/guides/installation#local-installation)，接着安装 webpack-cli（此工具用于在命令行中运行 webpack）：
 
 ``` bash
 mkdir webpack-demo
@@ -39,9 +39,9 @@ npm init -y
 npm install webpack webpack-cli --save-dev
 ```
 
-T> Throughout the Guides we will use `diff` blocks to show you what changes we're making to directories, files, and code.
+T> 贯穿整个指南的是，我们将使用 `diff` 块，来展示对目录、文件和代码所做的修改。
 
-Now we'll create the following directory structure, files and their contents:
+现在，我们将创建以下目录结构、文件和内容：
 
 __project__
 
@@ -59,7 +59,7 @@ __src/index.js__
 function component() {
   const element = document.createElement('div');
 
-  // Lodash, currently included via a script, is required for this line to work
+  // lodash（目前通过一个 script 引入）对于执行这一行是必需的
   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
   return element;
@@ -74,7 +74,7 @@ __index.html__
 <!doctype html>
 <html>
   <head>
-    <title>Getting Started</title>
+    <title>起步</title>
     <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -83,9 +83,9 @@ __index.html__
 </html>
 ```
 
-We also need to adjust our `package.json` file in order to make sure we mark our package as `private`, as well as removing the `main` entry. This is to prevent an accidental publish of your code.
+我们还需要调整 `package.json` 文件，以便确保我们安装包是 `private(私有的)`，并且移除 `main` 入口。这可以防止意外发布你的代码。
 
-T> If you want to learn more about the inner workings of `package.json`, then we recommend reading the [npm documentation](https://docs.npmjs.com/files/package.json).
+T> 如果你想要了解 `package.json` 内在机制的更多信息，我们推荐阅读 [npm 文档](https://docs.npmjs.com/files/package.json)。
 
 __package.json__
 
@@ -110,19 +110,19 @@ __package.json__
   }
 ```
 
-In this example, there are implicit dependencies between the `<script>` tags. Our `index.js` file depends on `lodash` being included in the page before it runs. This is because `index.js` never explicitly declared a need for `lodash`; it just assumes that the global variable `_` exists.
+在此示例中，`<script>` 标签之间存在隐式依赖关系。在 `index.js` 文件执行之前，还需要在页面中先引入 `lodash`。这是因为 `index.js` 并未显式声明它需要 `lodash`，只是假定推测已经存在一个全局变量 `_`。
 
-There are problems with managing JavaScript projects this way:
+使用这种方式去管理 JavaScript 项目会有一些问题：
 
-- It is not immediately apparent that the script depends on an external library.
-- If a dependency is missing, or included in the wrong order, the application will not function properly.
-- If a dependency is included but not used, the browser will be forced to download unnecessary code.
+- 无法直接体现，脚本的执行依赖于外部库。
+- 如果依赖不存在，或者引入顺序错误，应用程序将无法正常运行。
+- 如果依赖被引入但是并没有使用，浏览器将被迫下载无用代码。
 
-Let's use webpack to manage these scripts instead.
+让我们使用 webpack 来管理这些脚本。
 
-## Creating a Bundle
+## 创建一个 bundle
 
-First we'll tweak our directory structure slightly, separating the "source" code (`/src`) from our "distribution" code (`/dist`). The "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser. Tweak the directory structure as follows:
+首先，我们稍微调整下目录结构，将源代码(`/src`)从分发代码(`/dist`)中分离出来。源代码是指用于书写和编辑的代码。分发代码是指在构建过程中，经过最小化和优化后产生的输出结果，最终将在浏览器中加载。调整后目录结构如下：
 
 __project__
 
@@ -136,15 +136,15 @@ __project__
     |- index.js
 ```
 
-To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally:
+要在 `index.js` 中打包 `lodash` 依赖，我们需要在本地安装 library：
 
 ``` bash
 npm install --save lodash
 ```
 
-T> When installing a package that will be bundled into your production bundle, you should use `npm install --save`. If you're installing a package for development purposes (e.g. a linter, testing libraries, etc.) then you should use `npm install --save-dev`. More information can be found in the [npm documentation](https://docs.npmjs.com/cli/install).
+T> 在安装一个 package，而此 package 要打包到生产环境 bundle 中时，你应该使用 `npm install --save`。如果你在安装一个用于开发环境的 package 时（例如，linter, 测试库等），你应该使用 `npm install --save-dev`。更多信息请查看 [npm 文档](https://docs.npmjs.com/cli/install)。
 
-Now, lets import `lodash` in our script:
+现在，在我们的 script 中 import `lodash`：
 
 __src/index.js__
 
@@ -154,7 +154,7 @@ __src/index.js__
   function component() {
     const element = document.createElement('div');
 
--   // Lodash, currently included via a script, is required for this line to work
+-   // lodash（目前通过一个 script 引入）对于执行这一行是必需的
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
     return element;
@@ -163,7 +163,7 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-Now, since we'll be bundling our scripts, we have to update our `index.html` file. Let's remove the lodash `<script>`, as we now `import` it, and modify the other `<script>` tag to load the bundle, instead of the raw `/src` file:
+现在，我们将会打包所有脚本，我们必须更新 `index.html` 文件。由于现在是通过 `import` 引入 lodash，所以要将 lodash `<script>` 删除，然后修改另一个 `<script>` 标签来加载 bundle，而不是原始的 `/src` 文件：
 
 __dist/index.html__
 
@@ -171,7 +171,7 @@ __dist/index.html__
   <!doctype html>
   <html>
    <head>
-     <title>Getting Started</title>
+     <title>起步</title>
 -    <script src="https://unpkg.com/lodash@4.16.6"></script>
    </head>
    <body>
@@ -181,9 +181,9 @@ __dist/index.html__
   </html>
 ```
 
-In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
+在这个设置中，`index.js` 显式要求引入的 `lodash` 必须存在，然后将它绑定为 `_`（没有全局作用域污染）。通过声明模块所需的依赖，webpack 能够利用这些信息去构建依赖图，然后使用图生成一个优化过的 bundle，并且会以正确顺序执行。
 
-With that said, let's run `npx webpack`, which will take our script at `src/index.js` as the [entry point](/concepts/entry-points), and will generate `dist/main.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2/npm 5.2.0 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
+可以这样说，执行 `npx webpack`，会将我们的脚本 `src/index.js` 作为 [入口起点](/concepts/entry-points)，也会生成 `dist/main.js` 作为 [输出](/concepts/output)。Node 8.2/npm 5.2.0 以上版本提供的 `npx` 命令，可以运行在初次安装的 webpack package 中的 webpack 二进制文件（即 `./node_modules/.bin/webpack`）：
 
 ``` bash
 npx webpack
@@ -194,30 +194,30 @@ Built at: 13/06/2018 11:52:07
 main.js  70.4 KiB       0  [emitted]  main
 ...
 
-WARNING in configuration
-The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
+WARNING in configuration (配置警告)
+The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment. ('mode' 选项还未设置，webpack 会将其值回退至 'production'。将 'mode' 选项设置为 'development' 或 'production'，来启用对应环境的默认优化设置)
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/ (也可以将其设置为 'none'，以禁用所有默认行为。了解更多 https://webpack.js.org/configuration/mode/)
 ```
 
-T> Your output may vary a bit, but if the build is successful then you are good to go. Also, don't worry about the warning, we'll tackle that later.
+T> 输出可能会稍有不同，但是只要构建成功，那么你就可以放心继续。并且不要担心警告，稍后我们就会解决。
 
-Open `index.html` in your browser and, if everything went right, you should see the following text: 'Hello webpack'.
+在浏览器中打开 `index.html`，如果一切正常，你应该能看到以下文本：'Hello webpack'。
 
-W> If you are getting a syntax error in the middle of minified JavaScript when opening `index.html` in the browser, set [`development mode`](/configuration/mode/#mode-development) and run `npx webpack` again. This is related to running `npx webpack` on latest Node.js (v12.5+) instead of [LTS version](https://nodejs.org/en/).
-
-
-## Modules
-
-The [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements have been standardized in [ES2015](https://babeljs.io/docs/en/learn/). They are supported in most of the browsers at this moment, however there are some browsers that don't recognize the new syntax. But don't worry, webpack does support them out of the box.
-
-Behind the scenes, webpack actually "transpiles" the code so that older browsers can also run it. If you inspect `dist/main.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
-
-Note that webpack will not alter any code other than `import` and `export` statements. If you are using other [ES2015 features](http://es6-features.org/), make sure to [use a transpiler](/loaders/#transpiling) such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/) via webpack's [loader system](/concepts/loaders/).
+W> 在浏览器中打开 `index.html`，如果在压缩过后的 JavaScript 中出现语法错误，请设置 [`development 模式`](/configuration/mode/#mode-development)，并再次运行 `npx webpack`。这与最新版本 Node.js (v12.5+) 上运行 `npx webpack` 有关，和 [LTS 版本](https://nodejs.org/en/) 无关。
 
 
-## Using a Configuration
+## 模块
 
-As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to manually type in a lot of commands in the terminal, so let's create one:
+[ES2015](https://babeljs.io/learn-es2015/) 中的 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 和 [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) 语句已经被标准化。虽然大多数浏览器还无法支持它们，但是 webpack 却能够提供开箱即用般的支持。
+
+事实上，webpack 在幕后会将代码“转译”，以便旧版本浏览器可以执行。如果你检查 `dist/main.js`，你可以看到 webpack 具体如何实现，这是独创精巧的设计！除了 `import` 和 `export`，webpack 还能够很好地支持多种其他模块语法，更多信息请查看 [模块 API](/api/module-methods)。
+
+注意，webpack 不会更改代码中除 `import` 和 `export` 语句以外的部分。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你在 webpack [loader 系统](/concepts/loaders/) 中使用了一个像是 [Babel](https://babel.docschina.org/) 或 [Bublé](https://buble.surge.sh/guide/) 的 [transpiler(转译器)](/loaders/#transpiling)。
+
+
+## 使用一个配置文件
+
+在 webpack v4 中，可以无须任何配置，然而大多数项目会需要很复杂的设置，这就是为什么 webpack 仍然要支持 [配置文件](/concepts/configuration)。这比在 terminal(终端) 中手动输入大量命令要高效的多，所以让我们创建一个配置文件：
 
 __project__
 
@@ -245,7 +245,7 @@ module.exports = {
 };
 ```
 
-Now, let's run the build again but instead using our new configuration file:
+现在，让我们通过新的配置文件再次执行构建：
 
 ``` bash
 npx webpack --config webpack.config.js
@@ -255,19 +255,19 @@ npx webpack --config webpack.config.js
 main.js  70.4 KiB       0  [emitted]  main
 ...
 
-WARNING in configuration
-The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
+WARNING in configuration (配置警告)
+The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment. ('mode' 选项还未设置，webpack 会将其值回退至 'production'。将 'mode' 选项设置为 'development' 或 'production'，来启用对应环境的默认优化设置)
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/ (也可以将其设置为 'none'，以禁用所有默认行为。了解更多 https://webpack.js.org/configuration/mode/)
 ```
 
-T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a configuration of any name. This will be useful for more complex configurations that need to be split into multiple files.
+T> 如果 `webpack.config.js` 存在，则 `webpack` 命令将默认选择使用它。我们在这里使用 `--config` 选项只是向你表明，可以传递任何名称的配置文件。这对于需要拆分成多个文件的复杂配置是非常有用的。
 
-A configuration file allows far more flexibility than simple CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](/configuration) to learn more.
+比起 CLI 这种简单直接的使用方式，配置文件具有更多的灵活性。我们可以通过配置方式指定 loader 规则(loader rule)、plugin(插件)、resolve 选项，以及许多其他增强功能。更多详细信息请查看 [配置文档](/configuration)。
 
 
-## NPM Scripts
+## npm scripts
 
-Given it's not particularly fun to run a local copy of webpack from the CLI, we can set up a little shortcut. Let's adjust our _package.json_ by adding an [npm script](https://docs.npmjs.com/misc/scripts):
+考虑到用 CLI 这种方式来运行本地的 webpack 副本并不是特别方便，我们可以设置一个快捷方式。调整 _package.json_ 文件，添加一个 [npm script](https://docs.npmjs.com/misc/scripts)：
 
 __package.json__
 
@@ -294,9 +294,9 @@ __package.json__
   }
 ```
 
-Now the `npm run build` command can be used in place of the `npx` command we used earlier. Note that within `scripts` we can reference locally installed npm packages by name the same way we did with `npx`. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts (each with flags like `--config` if necessary).
+现在，可以使用 `npm run build` 命令，来替代我们之前使用的 `npx` 命令。注意，使用 npm `scripts`，我们可以像使用 `npx` 那样通过模块名引用本地安装的 npm packages。这是大多数基于 npm 的项目遵循的标准，因为它允许所有贡献者使用同一组通用脚本（如果必要，每个命令都需要添加 `--config` flag）。
 
-Now run the following command and see if your script alias works:
+现在运行以下命令，然后看看你的脚本别名是否正常运行：
 
 ``` bash
 npm run build
@@ -306,17 +306,17 @@ npm run build
 main.js  70.4 KiB       0  [emitted]  main
 ...
 
-WARNING in configuration
-The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/.
+WARNING in configuration (配置警告)
+The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment. ('mode' 选项还未设置，webpack 会将其值回退至 'production'。将 'mode' 选项设置为 'development' 或 'production'，来启用对应环境的默认优化设置)
+You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/ (也可以将其设置为 'none'，以禁用所有默认行为。了解更多 https://webpack.js.org/configuration/mode/)
 ```
 
-T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.
+T> 通过在 `npm run build` 命令和你的参数之间添加两个中横线，可以将自定义参数传递给 webpack，例如：`npm run build -- --colors`。
 
 
-## Conclusion
+## 结论
 
-Now that you have a basic build together you should move on to the next guide [`Asset Management`](/guides/asset-management) to learn how to manage assets like images and fonts with webpack. At this point, your project should look like this:
+现在，你已经有了一个基础构建配置，你应该移至下一章节 [`资源管理`](/guides/asset-management) 指南，以了解如何通过 webpack 来管理资源，例如 images、fonts。此刻你的项目看起来应该如下：
 
 __project__
 
@@ -332,6 +332,6 @@ webpack-demo
 |- /node_modules
 ```
 
-T> If you're using npm 5, you'll probably also see a `package-lock.json` file in your directory.
+T> 如果你使用的是 npm 5，你可能还会在目录中看到一个 `package-lock.json` 文件。
 
-If you want to learn more about webpack's design, you can check out the [basic concepts](/concepts) and [configuration](/configuration) pages. Furthermore, the [API](/api) section digs into the various interfaces webpack offers.
+如果想要了解 webpack 设计思想，你应该看下 [基本概念](/concepts) 和 [配置](/configuration) 页面。此外，[API](/api) 章节可以深入了解 webpack 提供的各种接口。

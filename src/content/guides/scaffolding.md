@@ -1,5 +1,5 @@
 ---
-title: Scaffolding
+title: 脚手架
 sort: 14
 contributors:
   - evenstensberg
@@ -8,43 +8,43 @@ contributors:
   - jamesgeorge007
 ---
 
-It can be hard to set up a complex webpack configuration for the first time. Writing advanced configurations to optimize performance could be even more difficult. The `init` feature allows creating a webpack configuration by using customizable third-party initialization packages.
+首次设置复杂的 webpack 配置可能会很困难。并且编写高级配置来优化性能会更加困难。下面提供的 `init` 能力，可以让我们使用可自定义的第三方初始化包，来创建 webpack 配置。
 
-## Creating a scaffold
+## 创建脚手架
 
-Before writing a `webpack-cli` scaffold, think about what you're trying to achieve and who is going to use it:
+在编写 `webpack-cli` 脚手架之前，请先考虑下要实现的目标和要使用的群体：
 
-- Do you want a generic scaffold that could be used by a wide variety of applications and projects?
-- Do you want something specific, like a scaffold that writes both your `webpack.config.js` and your framework code?
-- Who are the potential users and what user experience will look like for the users of your scaffold?
+- 是否需要实现一个可被多种应用程序和项目使用的通用脚手架？
+- 是否需要脚手架支持特定内容，例如同时编写 webpack.config.js 和框架代码的脚手架？
+- 谁是潜在的用户，脚手架用户将会有什么样的用户体验？
 
-`webpack-cli` offers an interactive experience to customize the output accordingly. For example asking questions like: "What is your entry point?".
+`webpack-cli` 提供了一种交互式体验，可以对应地自定义输出。例如，询问类似 "你的入口起点是什么？" 这样的问题。
 
-### Writing a scaffold
+### 编写脚手架
 
-There are various resources where you can learn how to write a scaffold, you can start by reading [Writing a Scaffold](/contribute/writing-a-scaffold/) tutorial.
+如果你想要学习如何编写脚手架，这里有许多资源可以参考，可以阅读 [编写脚手架](/contribute/writing-a-scaffold/) 教程作为开始。
 
-`webpack-scaffold` is a utility suite for creating scaffolds. It contains functions that could be used to create a scaffold.
+`webpack-scaffold` 是用于创建脚手架的工具套件。它包含一些可用于创建脚手架的功能。
 
-### Running a scaffold
+### 执行脚手架
 
-A scaffold can be executed using `webpack-cli init`:
+可以使用 `webpack-cli init` 执行脚手架：
 
 ```bash
 webpack-cli init <your-scaffold>
 ```
 
-#### Running a scaffold locally
+#### 在本地运行脚手架
 
-When the scaffold package is in your local file system you should point `init` to its path:
+当脚手架 package 位于本地文件系统中时，应将 `init` 指向其路径：
 
 ```bash
 webpack-cli init path/to/your/scaffold
 ```
 
-Or you can create a global module and symlink to the local one:
+或者，还可以创建一个全局模块并符号链接(symlink)到本地​​模块：
 
-- Using npm
+- 使用 npm
 
 ```bash
 cd path/to/my-scaffold
@@ -52,7 +52,7 @@ npm link
 webpack-cli init my-scaffold
 ```
 
-- Using yarn
+- 使用 yarn
 
 ```bash
 cd path/to/my-scaffold
@@ -60,9 +60,9 @@ yarn link
 webpack-cli init my-scaffold
 ```
 
-#### Running a scaffold from npm
+#### 从 npm 运行脚手架
 
-If the package is available from npm, its name must begin with `webpack-scaffold` and can be used by running:
+如果可以从 npm 获得此 package，则其名称必须以 `webpack-scaffold` 开头，并且可以通过运行以下命令来使用：
 
 ```bash
 webpack-cli init webpack-scaffold-yourpackage
@@ -70,28 +70,28 @@ webpack-cli init webpack-scaffold-yourpackage
 
 ## API
 
-To create a `scaffold`, you must create a [`yeoman-generator`](http://yeoman.io/authoring/). Thanks to it, you can optionally extend your generator to include methods from the [Yeoman API](http://yeoman.io/learning/). It's worth noting that we support all the properties of a regular webpack configuration. In order for us to do this, there's a thing you need to remember:
+要创建一个`脚手架`，必须创建一个 [`yeoman-generator`](http://yeoman.io/authoring/)。感谢它的存在，现在可以选择在它的基础上扩展出你自己的 generator，其中同样包括 Yeoman API 中提供的方法。值得注意的是，我们支持常规 webpack 配置的所有属性。为了实现这一点，需要记住一件事：
 
-W> Objects are made using strings, while strings are made using double strings. This means that in order for you to create a string, you have to wrap it inside another string for us to validate it correctly.
+W> 使用字符串创建对象，而使用双字符串(double string)创建字符串。这意味着，为了创建一个字符串，你必须将其包装在另一个字符串中，以便我们正确验证它。
 
-### Required
+### 必选项
 
 - [`opts.env.configuration`(required)](#optsenvconfigurationrequired)
 - [`opts.env.configuration.myObj` (required)](#optsenvconfigurationmyobj-required)
 - [`myObj.webpackOptions` (required)](#myobjwebpackoptions-required)
 - [`writing` (required)](#writing-required)
 
-### Optional
+### 可选项
 
 - [myObj.merge](#myobjmerge-optional)
 - [myObj.topScope](#myobjtopscopeoptional)
 - [myObj.configName](#myobjconfignameoptional)
 
-### `opts.env.configuration`(required)
+### `opts.env.configuration`（必选项）
 
 `object`
 
-This is the entry point your configuration, initialize it inside the constructor of your generator in order for the CLI to work:
+这里是你配置的入口起点，请在 generator 的构造函数中对其进行初始化，以使 CLI 能够正常运行：
 
 ```js
 class MyScaffold extends Generator {
@@ -102,11 +102,11 @@ class MyScaffold extends Generator {
 }
 ```
 
-### `opts.env.configuration.myObj` (required)
+### `opts.env.configuration.myObj`（必选项）
 
 `object`
 
-This is your scaffold, you add the options that the CLI will transform into a webpack configuration here. You can have many different scaffolds named as you prefer, representing different configurations like `dev.config` or `prod.config`:
+这里是你的脚手架，此处添加一些选项，CLI 会将其转换为 webpack 配置。你可以根据自己的喜好命名多种不同的脚手架，它们代表不同的配置，例如 `dev.config` 或 `prod.config`：
 
 ```js
 class MyScaffold extends Generator {
@@ -120,11 +120,11 @@ class MyScaffold extends Generator {
 }
 ```
 
-### `myObj.webpackOptions` (required)
+### `myObj.webpackOptions`（必选项）
 
 `object`
 
-This object has the same format as a regular webpack [configuration](/configuration/). Declare the properties that you want to scaffold here, e.g. `entry`, `output` and `context`. You can initialize this inside a yeoman method:
+该对象具有与常规 webpack [配置](/configuration/) 相同的格式。在此处声明想要预置的属性，例如 `entry`, `output` 和 `context`。可以在 yeoman 方法中对此进行初始化：
 
 ```js
 this.options.env.configuration.dev.webpackOptions = {
@@ -133,11 +133,11 @@ this.options.env.configuration.dev.webpackOptions = {
 };
 ```
 
-### `writing` (required)
+### `writing`（必选项）
 
 `function`
 
-For the scaffolding instance to run, you need to write your configuration to a `.yo-rc.json` file. This could be done using one of the lifecycles in the yeoman generator, such as the `writing` method:
+为了运行脚手架实例，需要将配置写入一个 `.yo-rc.json` 文件。可以使用 yeoman generator 中提供的某个生命周期来完成，例如 `writing` 方法：
 
 ```js
 class MyScaffold extends Generator {
@@ -147,21 +147,21 @@ class MyScaffold extends Generator {
 }
 ```
 
-### `myObj.merge` (optional)
+### `myObj.merge`（可选项）
 
 `string`
 
-If you want to use [`webpack-merge`](https://github.com/survivejs/webpack-merge), you can set the `merge` property of `myObj` to the name of the configuration you want to merge it with:
+如果要使用 [`webpack-merge`](https://github.com/survivejs/webpack-merge)，可以将 `myObj` 的 `merge` 属性，设置为需要合并的配置的名称：
 
 ```js
 this.options.env.configuration.dev.merge = 'myConfig';
 ```
 
-### `myObj.topScope`(optional)
+### `myObj.topScope`（可选项）
 
 `[string]`
 
-The `topScope` property is where you write all the code needed by your configuration, like module imports and functions/variables declarations:
+在 `topScope` 属性中，可以编写配置所需的所有代码，例如模块导入和函数/变量声明：
 
 ```js
 this.options.env.configuration.dev.topScope = [
@@ -170,11 +170,11 @@ this.options.env.configuration.dev.topScope = [
 ];
 ```
 
-### `myObj.configName`(optional)
+### `myObj.configName`（可选项）
 
 `string`
 
-`configName` allows you to customize the name of your configuration file. For example you can name it `webpack.base.js` instead of the default `webpack.config.js`:
+`configName` 允许自定义配置文件的名称。例如，可以将其命名为 `webpack.base.js`  而不是默认的 `webpack.config.js`：
 
 ```js
 this.options.env.configuration.dev.configName = 'base';

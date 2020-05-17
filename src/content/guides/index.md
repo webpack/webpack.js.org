@@ -1,5 +1,5 @@
 ---
-title: Guides
+title: 指南
 sort: -1
 contributors:
   - skipjack
@@ -7,8 +7,8 @@ contributors:
   - benschac
 ---
 
-This section contains guides for understanding and mastering the wide variety of tools and features that webpack offers. The first is a simple guide that takes you through [getting started](/guides/getting-started/).
+指南章节，用于理解和掌握 webpack 提供的各种工具和特性。首先，通过 [起步](/guides/getting-started/) 进行简单导入。
 
-The guides get more advanced as you go on. Most serve as a starting point, and once completed you should feel more comfortable diving into the actual [documentation](/configuration/).
+指南会逐步带你由浅入深。本章节更多是作为一个切入点，一旦阅读完成后，你就会更加容易深入到实际的 [配置](/configuration) 文档中。
 
-W> The output shown from running webpack in the guides may differ slightly from the output of newer versions. This is to be expected. As long as the bundles look similar and run correctly, then there shouldn't be any issues. If you do come across an example that seems to be broken by a new version, please [create an issue](https://github.com/webpack/webpack.js.org/issues/new/choose) and we will do our best to resolve the discrepancy.
+W> 指南中运行 webpack 后显示的输出，可能和新版本的输出略有不同。这是意料之中的事情。只要 bundle 看起来接近，而且运行正常，那就没有问题。如果你遇到在新版本中，示例无法良好运行，请 [创建一个 issue](https://github.com/webpack/webpack.js.org/issues/new/choose)，我们将尽力解决版本差异。

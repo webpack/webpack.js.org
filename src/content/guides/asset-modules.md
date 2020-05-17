@@ -1,30 +1,30 @@
 ---
-title: Asset Modules
+title: 资源模块
 sort: 24
 contributors:
   - smelukov
   - EugeneHlushko
 related:
-  - title: webpack 5 - Asset Modules
+  - title: webpack 5 - 资源模块
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
 ---
 
-Asset Modules is a type of module that allows to use asset files (fonts, icons, etc) without configuring additional loaders.
+资源模块(asset module)是一种模块类型，它允许使用资源文件（字体，图标等）而无需配置额外 loader。
 
-Prior to webpack 5 it was common to use:
+在 webpack 5 之前，通常使用：
 
-- [`raw-loader`](/loaders/raw-loader/) to import a file as a string
-- [`url-loader`](/loaders/url-loader/) to inline a file into the bundle as a data URI
-- [`file-loader`](/loaders/file-loader/) to emit a file into the output directory
+- [`raw-loader`](/loaders/raw-loader/) 将文件导入为字符串
+- [`url-loader`](/loaders/url-loader/) 将文件作为 data URI 内联到 bundle 中
+- [`file-loader`](/loaders/file-loader/) 将文件发送到输出目录
 
-Asset Modules type replaces all of these loaders by adding 4 new module types:
+资源模块类型(asset module type)，通过添加 4 种新的模块类型，来替换所有这些 loader：
 
-- `asset/resource` emits a separate file and exports the URL. Previously achievable by using `file-loader`.
-- `asset/inline` exports a data URI of the asset. Previously achievable by using `url-loader`.
-- `asset/source` exports the source code of the asset. Previously achievable by using `raw-loader`.
-- `asset` automatically chooses between exporting a data URI and emitting a separate file. Previously achievable by using `url-loader` with asset size limit.
+- `asset/resource` 发送一个单独的文件并导出 URL。之前通过使用 `file-loader` 实现。
+- `asset/inline` 导出一个资源的 data URI。之前通过使用 `url-loader` 实现。
+- `asset/source` 导出资源的源代码。之前通过使用 `raw-loader` 实现。
+- `asset` 在导出一个 data URI 和发送一个单独的文件之间自动选择。之前通过使用 `url-loader`，并且配置资源体积限制实现。
 
-W> This is an experimental feature. Enable Asset Modules by setting `experiments.asset: true` in [experiments](/configuration/experiments/) option of your webpack configuration.
+W> 这是一项实验功能。通过在 webpack 配置的 [experiments](/configuration/experiments/) 选项中设置 `experiments.asset: true` 来开启资源模块。
 
 __webpack.config.js__
 
@@ -43,7 +43,7 @@ module.exports = {
 };
 ```
 
-## Resource assets
+## resource 资源(resource asset)
 
 __webpack.config.js__
 
@@ -78,13 +78,13 @@ import mainImage from './images/main.png';
 img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 ```
 
-All `.png` files will be emitted to the output directory and their paths will be injected into the bundles.
+所有 `.png` 文件都将被发送到输出目录，并且其路径将被注入到 bundle 中。
 
-### Custom output filename
+### 自定义输出文件名
 
-By default, `asset/resource` modules are emitting with `[hash][ext]` filename into output directory.
+默认情况下，`asset/resource` 模块以 `[hash][ext]` 文件名发送到输出目录。
 
-You can modify this template by setting [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) in your webpack configuration:
+可以通过在 webpack 配置中设置 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 来修改此模板字符串：
 
 __webpack.config.js__
 
@@ -112,7 +112,7 @@ module.exports = {
 };
 ```
 
-Another case to customize output filename is to emit some kind of assets to a specified directory:
+另一种自定义输出文件名的方式是，将某些资源发送到指定目录：
 
 ```diff
 const path = require('path');
@@ -146,11 +146,11 @@ module.exports = {
 };
 ```
 
-With this configuration all the `html` files will be emitted into a `static` directory within the output directory.
+使用此配置，所有 `html` 文件都将被发送到输出目录中的 `static` 目录中。
 
-`Rule.generator.filename` is the same as [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) and works only with `asset` and `asset/resource` module types.
+`Rule.generator.filename` 与 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 相同，并且仅适用于 `asset` 和 `asset/resource` 模块类型。
 
-## Inlining assets
+## inline 资源(inlining asset)
 
 __webpack.config.js__
 
@@ -198,13 +198,13 @@ __src/index.js__
 + block.style.background = `url(${metroMap}); // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
 ```
 
-All `.svg` files will be injected into the bundles as data URI.
+所有 `.svg` 文件都将作为 data URI 注入到 bundle 中。
 
-### Custom data URI generator
+### 自定义 data URI 生成器
 
-By default, data URI emitted by webpack represents file contents encoded by using Base64 algorithm.
+webpack 输出的 data URI，默认是呈现为使用 Base64 算法编码的文件内容。
 
-If you want to use a custom encoding algorithm, you may specify a custom function to encode a file content:
+如果要使用自定义编码算法，则可以指定一个自定义函数来编码文件内容：
 
 __webpack.config.js__
 
@@ -238,9 +238,9 @@ module.exports = {
 };
 ```
 
-Now all `.svg` files will be encoded by `mini-svg-data-uri` package.
+现在，所有 `.svg` 文件都将通过 `mini-svg-data-uri` 包进行编码。
 
-## Source assets
+## source 资源(source asset)
 
 __webpack.config.js__
 
@@ -292,9 +292,9 @@ __src/index.js__
 + block.textContent = exampleText; // 'Hello world'
 ```
 
-All `.txt` files will be injected into the bundles as is.
+所有 `.txt` 文件将原样注入到 bundle 中。
 
-## General asset type
+## 通用资源类型(general asset type)
 
 __webpack.config.js__
 
@@ -321,9 +321,9 @@ module.exports = {
 };
 ```
 
-Now webpack will automatically choose between `resource` and `inline` by following a default condition: a file with size less than 8kb will be treated as a `inline` module type and `resource` module type otherwise.
+现在，webpack 将按照默认条件，自动地在 `resource` 和 `inline` 之间进行选择：小于 8kb 的文件，将会视为 `inline` 模块类型，否则会被视为 `resource` 模块类型。
 
-You can change this condition by setting a [`Rule.parser.dataUrlCondition.maxSize`](/configuration/module/#ruleparserdataurlcondition) option on the module rule level of your webpack configuration:
+可以通过在 webpack 配置的 module rule 层级中，设置 [`Rule.parser.dataUrlCondition.maxSize`](/configuration/module/#ruleparserdataurlcondition) 选项来修改此条件：
 
 __webpack.config.js__
 
@@ -355,4 +355,4 @@ module.exports = {
 };
 ```
 
-Also you can [specify a function](/configuration/module/#ruleparserdataurlcondition) to decide to inlining a module or not.
+还可以 [指定一个函数](/configuration/module/#ruleparserdataurlcondition) 来决定是否 inline 模块。
