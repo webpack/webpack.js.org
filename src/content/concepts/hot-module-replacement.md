@@ -53,7 +53,8 @@ HMR 是可选功能，只会影响包含 HMR 代码的模块。举个例子，�
 
 有关 `module.hot` 接口的详细信息，请查看 [HMR API 页面](/api/hot-module-replacement)。
 
-### 在 Runtime 中
+
+### 在 runtime 中
 
 这件事情比较有技术性……如果你对其内部不感兴趣，可以随时跳到 [HMR API 页面](/api/hot-module-replacement) 或 [HMR 指南](/guides/hot-module-replacement)。
 
@@ -66,7 +67,7 @@ HMR 是可选功能，只会影响包含 HMR 代码的模块。举个例子，�
 之后，所有无效 module 都会被（通过 dispose handler）处理和解除加载。然后更新当前 hash，并且调用所有 `accept` handler。runtime 切换回 `idle` 状态，一切照常继续。
 
 
-## Get Started
+## 起步
 
 在开发环境，可以将 HMR 作为 LiveReload 的替代。[webpack-dev-server](/configuration/dev-server/) 支持 `hot` 模式，在试图重新加载整个页面之前，`hot` 模式会尝试使用 HMR 来更新。更多细节请查看 [模块热替换](/guides/hot-module-replacement) 指南。
 

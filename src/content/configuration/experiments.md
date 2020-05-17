@@ -1,8 +1,9 @@
 ---
-title: Experiments
+title: 实验特性(experiments)
 sort: 19
 contributors:
   - EugeneHlushko
+  - wizardofhogwarts
   - chenxsan
 ---
 
@@ -10,20 +11,20 @@ contributors:
 
 `boolean: false`
 
-`experiments` option was introduced in webpack 5 in order to empower users with an ability of activating and trying out experimental features.
+`experiments` 配置是在 webpack 5 中推出，目的是为了给用户赋能去开启并试用一些实验的特性。
 
-W> Because experimental features have relaxed semantic versioning and might contain breaking changes, make sure to fix webpack's version to minor e.g. `webpack: ~5.4.3` instead of `webpack: ^5.4.3` or use a lockfile when using `experiments`.
+W> 由于实验特性具有相对 宽松的语义版本，可能会有重大的变更，所以主确定你将 webpack 的版本固定为小版本号，例如与其使用 `webpack: ~5.4.3` 不如使用 `webpack: ^5.4.3` 或者当使用 `experiments` 配置时使用版本锁定能力.
 
-Available options:
+可用的配置项：
 
-- `mjs`: Support `.mjs` files as a way to define [EcmaScript modules](https://nodejs.org/api/esm.html#esm_ecmascript_modules)
-- `syncWebAssembly`: Support the old WebAssembly like in webpack 4
-- `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module
-- `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level
-- `importAsync`: import async modules with `import`
-- `importAwait`: import async modules with `import await`
-- `asset`: a type of module that allows to use asset files (fonts, images, etc) without configuring loaders to handle their importing, similar to `file-loader` | `url-loader` | `raw-loader`
-- `outputModule`: enables the use of [`output.module`](/configuration/output/#outputmodule) configuration option and sets it to `true`. Enables the use of `output.libraryTarget` as `'module'` and sets it to `'module'`.
+- `mjs`: 支持  `.mjs` 文件来定义 [EcmaScript 模块](https://nodejs.org/api/esm.html#esm_ecmascript_modules)
+- `syncWebAssembly`: 支持旧版本  webpack 4 的  WebAssembly
+- `asyncWebAssembly`: 支持新版本的 WebAssembly，该版本依据 [更新的规格书](https://github.com/WebAssembly/esm-integration), 它使 WebAssembly 模块作为一个异步的模块
+- `topLevelAwait`: 支持 [顶层 Await 阶段3提议](https://github.com/tc39/proposal-top-level-await), 当 `await` 在顶层使用，它让模块成为一个异步模块。
+- `importAsync`: 使用 `import` 导入异步模块
+- `importAwait`: 使用 `import await` 导入异步模块
+- `asset`: 一种允许使用资源文件  (如字体fonts, 图片images, 等)而不需要配置类似于 `file-loader` | `url-loader` | `raw-loader` 等loaders 来处理它们的导入的模块
+- `outputModule`: 开启使用 [`output.module`](/configuration/output/#outputmodule) 配置同时将它设置成 `true`。 开启使用 `output.libraryTarget` 作为 `'module'` 且将它设置成 `'module'`。
 
 __webpack.config.js__
 
