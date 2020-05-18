@@ -1,6 +1,6 @@
 ---
-title: Targets
-sort: 9
+title: target
+sort: 10
 contributors:
   - TheLarkInn
   - rouzbeh84
@@ -12,7 +12,7 @@ contributors:
 
 由于 JavaScript 即可以编写服务端代码也可以编写浏览器代码，所以 webpack 提供了多种部署 _target_，你可以在 webpack 的[配置选项](/configuration)中进行设置。
 
-W> webpack 的 `target` 属性，不要和 `output.libraryTarget` 属性混淆。有关 `output` 属性的更多信息，请参阅 [output 的指南](/concepts/output/)
+W> webpack 的 `target` 属性，不要和 `output.libraryTarget` 属性混淆。有关 `output` 属性的更多信息，请参阅 [output 指南](/concepts/output/)
 
 ## 用法
 

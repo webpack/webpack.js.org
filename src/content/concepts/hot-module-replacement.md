@@ -1,6 +1,6 @@
 ---
 title: 模块热替换(hot module replacement)
-sort: 11
+sort: 12
 contributors:
   - kryptokinght
   - SpaceK33z

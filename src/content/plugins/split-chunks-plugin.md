@@ -13,6 +13,7 @@ contributors:
   - superburrito
   - ryandrew14
   - snitin315
+  - chenxsan
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
@@ -401,7 +402,7 @@ module.exports = {
 
 #### `splitChunks.cacheGroups.{cacheGroup}.filename`
 
-`string` `function (chunkData): string`
+`string` `function (pathData, assetInfo) => string`
 
 Allows to override the filename when and only when it's an initial chunk.
 All placeholders available in [`output.filename`](/configuration/output/#outputfilename) are also available here.
@@ -436,9 +437,9 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         defaultVendors: {
-          filename: (chunkData) => {
-            // Use chunkData object for generating filename string based on your requirements
-            return `${chunkData.chunk.name}-bundle.js`;
+          filename: (pathData) => {
+            // Use pathData object for generating filename string based on your requirements
+            return `${pathData.chunk.name}-bundle.js`;
           }
         }
       }

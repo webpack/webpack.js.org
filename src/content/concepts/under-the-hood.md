@@ -1,6 +1,6 @@
 ---
 title: 揭示内部原理
-sort: 13
+sort: 14
 contributors:
   - smelukov
   - EugeneHlushko
