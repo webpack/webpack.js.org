@@ -1,6 +1,6 @@
 ---
 title: The Manifest
-sort: 10
+sort: 11
 contributors:
   - skipjack
   - EugeneHlushko

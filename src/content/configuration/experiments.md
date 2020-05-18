@@ -11,7 +11,11 @@ contributors:
 
 `boolean: false`
 
+<<<<<<< HEAD
 `experiments` 配置是在 webpack 5 中推出，目的是为了给用户赋能去开启并试用一些实验的特性。
+=======
+`experiments` option was introduced in webpack 5 to empower users with the ability to activate and try out experimental features.
+>>>>>>> 2deb7b29197d0205d9d66849bf645557a803bc0d
 
 W> 由于实验特性具有相对 宽松的语义版本，可能会有重大的变更，所以主确定你将 webpack 的版本固定为小版本号，例如与其使用 `webpack: ~5.4.3` 不如使用 `webpack: ^5.4.3` 或者当使用 `experiments` 配置时使用版本锁定能力.
 
