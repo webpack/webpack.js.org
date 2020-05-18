@@ -1,11 +1,6 @@
 ---
-<<<<<<< HEAD
 title: 模块热替换(hot module replacement)
-sort: 11
-=======
-title: Hot Module Replacement
 sort: 12
->>>>>>> 2deb7b29197d0205d9d66849bf645557a803bc0d
 contributors:
   - kryptokinght
   - SpaceK33z

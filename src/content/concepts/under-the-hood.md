@@ -1,11 +1,6 @@
 ---
-<<<<<<< HEAD
 title: 揭示内部原理
-sort: 13
-=======
-title: Under The Hood
 sort: 14
->>>>>>> 2deb7b29197d0205d9d66849bf645557a803bc0d
 contributors:
   - smelukov
   - EugeneHlushko

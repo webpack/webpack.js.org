@@ -1,11 +1,6 @@
 ---
-<<<<<<< HEAD
-title: 依赖图（Dependency Graph）
-sort: 8
-=======
-title: Dependency Graph
+title: 依赖图(dependency graph)
 sort: 9
->>>>>>> 2deb7b29197d0205d9d66849bf645557a803bc0d
 contributors:
   - TheLarkInn
   - EugeneHlushko

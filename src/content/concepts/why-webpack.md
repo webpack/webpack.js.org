@@ -1,11 +1,6 @@
 ---
-<<<<<<< HEAD
 title: 为什么选择 webpack
-sort: 12
-=======
-title: Why webpack
 sort: 13
->>>>>>> 2deb7b29197d0205d9d66849bf645557a803bc0d
 contributors:
   - debs-obrien
   - montogeek
