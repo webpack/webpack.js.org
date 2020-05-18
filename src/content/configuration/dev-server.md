@@ -68,6 +68,8 @@ W> Be aware that when [exporting multiple configurations](/configuration/configu
 
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
 
+T> If you want to manually recompile the bundle, navigating to the `/invalidate` route will [invalidate](/api/node/#invalidate-watching) the current compilation of the bundle and recompile it for you via [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate). Depending on your configuration, URL may look like `http://localhost:9000/invalidate`.
+
 T> HTML template is required to serve the bundle, usually it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
 
 ## `devServer.after`
