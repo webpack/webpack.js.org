@@ -1664,3 +1664,14 @@ module.exports = {
   }
 };
 ```
+
+T> NODE_OPTIONS can be used to make HTTP_MAX_HEADER_SIZE configurable as : 
+
+__package.json__
+
+```json
+{
+  "scripts": "NODE_OPTIONS='--max-http-header-size=100000' webpack-dev-server"
+}
+```
+
