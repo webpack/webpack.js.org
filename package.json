@@ -55,7 +55,7 @@
     "jest": "jest",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "cypress": "start-server-and-test http-get://localhost:3000 cypress:run"
+    "cypress:ci": "start-server-and-test http-get://localhost:3000 cypress:run"
   },
   "husky": {
     "hooks": {
