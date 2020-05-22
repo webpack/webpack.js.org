@@ -50,7 +50,7 @@ Overrides are provided in a similar way as the container exposes modules, separa
 
 W> When nesting is used, providing overrides to one container will automatically override the modules with the same "name" in the nested container(s).
 
-Overrides must be provided before the modules of the container are loaded.
+Overrides must be provided before the modules of the container are loaded. Overridables that are used in initial chunk, can only be overridden by a synchronous module override that doesn't use Promises. Once evaluated, overridables are no longer overridable.
 
 ## High-level concepts
 
