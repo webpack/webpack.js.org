@@ -150,12 +150,12 @@ Inline loaders and `!` prefixes should not be used as they are non-standard. The
 
 ## `Rule.exclude`
 
-`Rule.exclude` is a shortcut to `Rule.resource.exclude`. If you supply a `Rule.exclude` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.exclude`](#condition) for details.
+Exclude all modules matching any of these conditions. If you supply a `Rule.exclude` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.exclude`](#condition) for details.
 
 
 ## `Rule.include`
 
-`Rule.include` is a shortcut to `Rule.resource.include`. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.include`](#condition) for details.
+Include all modules matching any of these conditions. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.include`](#condition) for details.
 
 
 ## `Rule.issuer`
@@ -400,7 +400,7 @@ module.exports = {
 
 ## `Rule.resource`
 
-A [`Condition`](#condition) matched with the resource. You can either supply a `Rule.resource` option or use the shortcut options `Rule.test`, `Rule.exclude`, and `Rule.include`. See details in [`Rule` conditions](#rule-conditions).
+A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
 
 
 ## `Rule.resourceQuery`
@@ -467,7 +467,7 @@ Indicate what parts of the module contain side effects. See [Tree Shaking](/guid
 
 ## `Rule.test`
 
-`Rule.test` is a shortcut to `Rule.resource.test`. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.test`](#condition) for details.
+Include all modules that pass test assertion. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.test`](#condition) for details.
 
 
 ## `Rule.type`
