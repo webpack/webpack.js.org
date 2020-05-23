@@ -9,13 +9,12 @@ contributors:
   - EugeneHlushko
 ---
 
-The `parser` instance, found in the `compiler`, is used to parse each module
-being processed by webpack. The `parser` is yet another webpack class that
-extends `tapable` and provides a variety of `tapable` hooks that can be used by
-plugin authors to customize the parsing process.
+`parser` 实例，在 `compiler` 中被发现，是用来解析由 webpack
+处理过的每个模块。`parser` 也是扩展自 `tapable` 的 webpack 类
+并且提供多种 `tapable` 钩子，
 
-The `parser` is found within [module factories](/api/compiler-hooks/#normalmodulefactory) and therefore takes little
-more work to access:
+以下示例中，`parser` 位于 [module factories](/api/compiler-hooks/#normalmodulefactory) 中，因此需要调用额外钩子
+来进行获取：
 
 ``` js
 compiler.hooks.normalModuleFactory.tap('MyPlugin', factory => {
@@ -25,14 +24,14 @@ compiler.hooks.normalModuleFactory.tap('MyPlugin', factory => {
 });
 ```
 
-As with the `compiler`, `tapAsync` and `tapPromise` may also be available
-depending on the type of hook.
+和 `compiler` 用法相同，取决于不同的钩子类型，
+也可以在某些钩子上访问 `tapAsync` 和 `tapPromise`。
 
 
-## Hooks
+## 钩子
 
-The following lifecycle hooks are exposed by the `parser` and can be accessed
-as such:
+以下生命周期钩子函数，是由 `parser` 暴露，可以通过
+如下方式访问：
 
 
 ### evaluateTypeof
@@ -51,7 +50,7 @@ parser.hooks.evaluateTypeof.for('myIdentifier').tap('MyPlugin', expression => {
 });
 ```
 
-This will trigger the `evaluateTypeof` hook:
+这会触发 `evaluateTypeof` 钩子的调用：
 
 ```js
 const a = typeof myIdentifier;
