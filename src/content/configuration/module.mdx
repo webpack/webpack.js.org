@@ -49,6 +49,27 @@ module.exports = {
 };
 ```
 
+## `module.unsafeCache`
+
+`boolean` `function (module)`
+
+Cache the resolution of module requests. There are couple of defaults for `module.unsafeCache`:
+
+- `false` if [`cache`](/configuration/other-options/#cache) is disabled.
+- `true` if [`cache`](/configuration/other-options/#cache) is enabled and the module appears to come from node modules, `false` otherwise.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  module: {
+    unsafeCache: false,
+  }
+};
+```
+
+W> The default value is `true` in webpack 4.
 
 ## `module.rules`
 
@@ -367,6 +388,36 @@ module.exports = {
 }
 ```
 
+## `Rule.generator.filename`
+
+The same as [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) but for specific rule. Overrides `output.assetModuleFilename` and works only with `asset` and `asset/resource` module types.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  output: {
+    assetModuleFilename: 'images/[hash][ext]'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.png/,
+        type: 'asset/resource'
+      },
+      {
+        test: /\.html/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'static/[hash][ext]'
+        }
+      }
+    ]
+  }
+}
+```
+
 ## `Rule.resource`
 
 A [`Condition`](#condition) matched with the resource. You can either supply a `Rule.resource` option or use the shortcut options `Rule.test`, `Rule.exclude`, and `Rule.include`. See details in [`Rule` conditions](#rule-conditions).
@@ -410,6 +461,7 @@ module.exports = {
     rules: [
       {
         test: /\.toml/,
+        type: 'json',
         parser: {
           parse: toml.parse
         }
@@ -557,7 +609,7 @@ W> `Rule.resolve` is Available since webpack 4.36.1
 Resolving can be configured on module level. See all available options on [resolve configuration page](/configuration/resolve/#resolve).
 All applied resolve options get deeply merged with higher level [resolve](/configuration/resolve/#resolve).
 
-For example, let's imagine we have an entry in `./src/index.js`, `./src/footer/default.js` and a `./src/footer/overriden.js` to demonstrate the module level resolve.
+For example, let's imagine we have an entry in `./src/index.js`, `./src/footer/default.js` and a `./src/footer/overridden.js` to demonstrate the module level resolve.
 
 __./src/index.js__
 
@@ -572,10 +624,10 @@ __./src/footer/default.js__
 export default 'default footer';
 ```
 
-__./src/footer/overriden.js__
+__./src/footer/overridden.js__
 
 ```javascript
-export default 'overriden footer';
+export default 'overridden footer';
 ```
 
 __webpack.js.org__
@@ -590,7 +642,7 @@ module.exports = {
 };
 ```
 
-When creating a bundle with this configuration, `console.log(footer)` will output 'default footer'. Let's set `Rule.resolve` for `.js` files, and alias `footer` to `overriden.js`.
+When creating a bundle with this configuration, `console.log(footer)` will output 'default footer'. Let's set `Rule.resolve` for `.js` files, and alias `footer` to `overridden.js`.
 
 __webpack.js.org__
 
@@ -606,7 +658,7 @@ module.exports = {
       {
         resolve: {
           alias: {
-            'footer': './footer/overriden.js'
+            'footer': './footer/overridden.js'
           }
         }
       }
@@ -615,7 +667,7 @@ module.exports = {
 };
 ```
 
-When creating a bundle with updated configuration, `console.log(footer)` will output 'overriden footer'.
+When creating a bundle with updated configuration, `console.log(footer)` will output 'overridden footer'.
 
 
 ## `Condition`
@@ -643,6 +695,8 @@ Conditions can be one of these:
 __Example:__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   module: {

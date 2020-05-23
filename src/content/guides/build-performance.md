@@ -7,6 +7,7 @@ contributors:
   - byzyk
   - madhavarshney
   - wizardofhogwarts
+  - anikethsaha
 ---
 
 This guide contains some useful tips for improving build/compilation performance.
@@ -20,9 +21,9 @@ The following best practices should help, whether you're running build scripts i
 
 ### Stay Up to Date
 
-Use the latest webpack version. We are always making performance improvements. The latest stable version of webpack is:
+Use the latest webpack version. We are always making performance improvements. The latest recommended version of webpack is:
 
-[![latest webpack version](https://img.shields.io/npm/v/webpack.svg?label=webpack&style=flat-square&maxAge=3600)](https://github.com/webpack/webpack/releases)
+[![latest webpack version](https://img.shields.io/github/package-json/v/webpack/webpack.svg?label=webpack&style=flat-square&maxAge=3600)](https://github.com/webpack/webpack/releases)
 
 Staying up-to-date with __Node.js__  can also help with performance. On top of this, keeping your package manager (e.g. `npm` or `yarn`) up-to-date can also help. Newer versions create more efficient module trees and increase resolving speed.
 
@@ -48,6 +49,8 @@ module.exports = {
 Use the `include` field to only apply the loader modules that actually need to be transformed by it:
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   module: {
@@ -105,6 +108,8 @@ W> Don't use too many workers, as there is a boot overhead for the Node.js runti
 Enable persistent caching with the `cache-loader`. Clear cache directory on `"postinstall"` in `package.json`.
 
 
+T> We support yarn PnP version 3 [`yarn 2 berry`](https://next.yarnpkg.com/features/pnp) for persistent caching
+
 ### Custom plugins/loaders
 
 Profile them to not introduce a performance problem here.
@@ -148,7 +153,7 @@ Be aware of the performance differences between the different `devtool` settings
 - The `cheap-source-map` variants are more performant if you can live with the slightly worse mapping quality.
 - Use a `eval-source-map` variant for incremental builds.
 
-=> In most cases, `cheap-module-eval-source-map` is the best option.
+=> In most cases, `eval-cheap-module-source-map` is the best option.
 
 
 ### Avoid Production Specific Tooling

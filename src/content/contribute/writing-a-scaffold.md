@@ -183,7 +183,7 @@ module.exports = class WebpackGenerator extends Generator {
 
 ## Some more configs
 
-Let's look at `dev-config.js`. We have access to user's answers, use them to assign values to desired config properties, in this case - `entry`. We've also added an output property that has a `filename`.
+Let's look at `dev-config.js`. We have access to user's answers, use them to assign values to desired configuration properties, in this case - `entry`. We've also added an output property that has a `filename`.
 
 T> String values must be quoted twice. This is to preserve our ability to add other functionality, using only " ", while " 'Mystring' " resolves to a string.
 

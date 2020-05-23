@@ -66,8 +66,6 @@ module.exports = {
 -   nodeEnv: 'development',
 -   flagIncludedChunks: false,
 -   occurrenceOrder: false,
--   sideEffects: false,
--   usedExports: false,
 -   concatenateModules: false,
 -   splitChunks: {
 -     hidePathInfo: false,
@@ -108,8 +106,6 @@ module.exports = {
 -   nodeEnv: 'production',
 -   flagIncludedChunks: true,
 -   occurrenceOrder: true,
--   sideEffects: true,
--   usedExports: true,
 -   concatenateModules: true,
 -   splitChunks: {
 -     hidePathInfo: true,
@@ -144,8 +140,6 @@ module.exports = {
 - optimization: {
 -   flagIncludedChunks: false,
 -   occurrenceOrder: false,
--   sideEffects: false,
--   usedExports: false,
 -   concatenateModules: false,
 -   splitChunks: {
 -     hidePathInfo: false,
