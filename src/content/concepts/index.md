@@ -46,7 +46,7 @@ For a better understanding of the ideas behind module bundlers and how they work
 
 ## Entry
 
-An __entry point__ indicates which module webpack should use to begin building out its internal [dependency graph](/concepts/dependency-graph/). webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
+An __entry point__ indicates which module webpack should use to begin building out its internal [dependency graph](/concepts/dependency-graph/). Webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
 
 By default its value is `./src/index.js`, but you can specify a different (or multiple entry points) by setting an [`entry` property in the webpack configuration](/configuration/entry-context/#entry). For example:
 
