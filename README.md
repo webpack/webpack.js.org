@@ -54,11 +54,17 @@ testing of the site at no cost...
 
 [![BrowserStackLogo][browserstack]][browserstack-url]
 
+_Vercel_ has given us a Pro account.
+
+[![VercelLogo][vercel]][vercel-url]
+
 [webpack5-milestone-url]: https://github.com/webpack/webpack.js.org/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22webpack+5%22
 [build-status]: https://secure.travis-ci.org/webpack/webpack.js.org.svg
 [build-status-url]: http://travis-ci.org/webpack/webpack.js.org
 [browserstack]: ./browserstack-logo.png
+[vercel]: ./src/assets/powered-by-vercel.svg
 [browserstack-url]: http://browserstack.com/
+[vercel-url]: https://vercel.com/?utm_source=webpackdocs
 [chat]: https://badges.gitter.im/webpack/webpack.svg
 [chat-url]: https://gitter.im/webpack/webpack
 [concepts-url]: https://github.com/webpack/webpack.js.org/issues/1386

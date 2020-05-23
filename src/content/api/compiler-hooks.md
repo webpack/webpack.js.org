@@ -266,7 +266,7 @@ Called after emitting assets to output directory.
 
 `AsyncSeriesHook`
 
-Executed when an asset has been emitted. Provides access to information about the emitted asset, such as its output path and byte content. 
+Executed when an asset has been emitted. Provides access to information about the emitted asset, such as its output path and byte content.
 
 - Callback Parameters: `file`, `info`
 
@@ -328,6 +328,6 @@ Allows to use infrastructure logging when enabled in the configuration via [`inf
 
 `SyncBailHook`
 
-Allows to log into [stats](/configuration/stats/) when enabled, see [`stats.logging`, `stats.loggingDebug` and `stats.loggingTrace` options](/configuration/stats/#stats).
+Allows to log into [stats](/configuration/stats/) when enabled, see [`stats.logging`, `stats.loggingDebug` and `stats.loggingTrace` options](/configuration/stats/#stats-options).
 
 - Callback Parameters: `origin`, `logEntry`

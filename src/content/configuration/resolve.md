@@ -120,7 +120,34 @@ The following table explains other cases:
 
 W> `resolve.alias` takes precedence over other module resolutions.
 
-W> [`null-loader`](https://github.com/webpack-contrib/null-loader) will be deprecated in `webpack@5`. use `alias: { xyz$: false }` or absolute path `alias: {[path.resolve(__dirname, "....")]: false }`
+W> [`null-loader`](https://github.com/webpack-contrib/null-loader) is deprecated in webpack 5. use `alias: { xyz$: false }` or absolute path `alias: {[path.resolve(__dirname, './path/to/module')]: false }`
+
+W> `[string]` values are supported since webpack 5.
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      _: [path.resolve(__dirname, 'src/utilities/'), path.resolve(__dirname, 'src/templates/')]
+    }
+  }
+};
+```
+
+Setting `resolve.alias` to `false` will tell webpack to ignore a module.
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      'ignored-module': false,
+      './ignored-module': false,
+    }
+  }
+};
+```
 
 ### `resolve.aliasFields`
 
