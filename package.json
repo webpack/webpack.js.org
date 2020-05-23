@@ -51,7 +51,8 @@
     "serve": "npm run build && sirv start ./dist --port 4000",
     "deploy": "gh-pages -d dist",
     "preprintable": "npm run clean-printable",
-    "printable": "node ./src/scripts/concatenate-docs.js"
+    "printable": "node ./src/scripts/concatenate-docs.js",
+    "jest": "jest"
   },
   "husky": {
     "hooks": {
@@ -105,6 +106,7 @@
     "http-server": "^0.10.0",
     "husky": "^1.0.0-rc.8",
     "hyperlink": "^4.4.0",
+    "jest": "^23.6.0",
     "lint-staged": "^8.1.0",
     "loader-utils": "^1.1.0",
     "lodash": "^4.17.4",
@@ -114,7 +116,7 @@
     "markdownlint-rule-emphasis-style": "^1.0.0",
     "marked": "0.6.1",
     "mini-css-extract-plugin": "^0.5.0",
-    "minimist": "1.2.2",
+    "minimist": "1.2.3",
     "mkdirp": "^0.5.1",
     "modularscale-sass": "^3.0.3",
     "node-sass": "^4.5.3",
@@ -126,7 +128,7 @@
     "remark": "^10.0.1",
     "remark-autolink-headings": "5.2.1",
     "remark-custom-blockquotes": "1.0.0",
-    "remark-extract-anchors": "1.0.2",
+    "remark-extract-anchors": "1.1.1",
     "remark-loader": "^0.3.0",
     "remark-refractor": "1.1.0",
     "remark-responsive-tables": "1.0.0",

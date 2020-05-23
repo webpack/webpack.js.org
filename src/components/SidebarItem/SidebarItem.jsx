@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from '../Link/Link';
 import './SidebarItem.scss';
+import list2Tree from '../../utilities/list2Tree';
 
 const block = 'sidebar-item';
 
@@ -9,11 +10,31 @@ export default class SidebarItem extends React.Component {
     open: this._isOpen(this.props)
   };
 
+  renderAnchors(anchors) {
+    return (
+      <ul className={`${block}__anchors`}>
+        {anchors.map((anchor, i) => (
+          <li
+            key={this._generateAnchorURL(anchor)}
+            className={`${block}__anchor`}
+            title={anchor.title}
+          >
+            <a href={this._generateAnchorURL(anchor)}>{anchor.title}</a>
+            {anchor.children && this.renderAnchors(anchor.children)}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   render() {
     let {title, anchors = []} = this.props;
     let openMod = this.state.open ? `${block}--open` : '';
     let disabledMod = anchors.length == 0 ? `${block}--disabled` : '';
 
+    const filteredAnchors = anchors.filter(anchor => anchor.level > 1);
+    const tree = list2Tree(filteredAnchors);
+    
     return (
       <div className={`${block} ${openMod} ${disabledMod}`}>
         {anchors.length > 0 ? (
@@ -31,22 +52,7 @@ export default class SidebarItem extends React.Component {
           {title}
         </Link>
 
-        {anchors.length > 0 ? (
-          <ul className={`${block}__anchors`}>
-            {
-              anchors.map((anchor, i) => (
-                <li
-                  key={this._generateAnchorURL(anchor)}
-                  className={`${block}__anchor`}
-                  title={anchor.title}>
-                  <a href={this._generateAnchorURL(anchor)}>
-                    {anchor.title}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        ) : null}
+        {anchors.length > 0 ? this.renderAnchors(tree) : null}
       </div>
     );
   }
