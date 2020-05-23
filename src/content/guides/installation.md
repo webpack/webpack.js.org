@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: 安装
 sort: 13
 contributors:
   - pksjce
@@ -9,35 +9,39 @@ contributors:
   - sibiraj-s
 ---
 
-This guide goes through the various methods used to install webpack.
+本指南介绍了安装 webpack 的各种方法。
 
 
-## Prerequisites
+## 前提条件
 
-Before we begin, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current Long Term Support (LTS) release is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack and/or its related packages require.
+在开始之前，请确保安装了 [Node.js](https://nodejs.org/en/) 的最新版本。使用 Node.js 最新的长期支持版本(LTS - Long Term Support)，是理想的起步。
+使用旧版本，你可能遇到各种问题，因为它们可能缺少 webpack 功能，
+或者缺少相关 package。
 
 
-## Local Installation
+## 本地安装
 
-The latest webpack release is:
+最新的 webpack 正式版本是：
 
 [![GitHub release](https://img.shields.io/npm/v/webpack.svg?label=webpack&style=flat-square&maxAge=3600)](https://github.com/webpack/webpack/releases)
 
-To install the latest release or a specific version, run one of the following commands:
+要安装最新版本或特定版本，请运行以下命令之一：
 
 ``` bash
 npm install --save-dev webpack
-# or specific version
+# 或指定版本
 npm install --save-dev webpack@<version>
 ```
 
-If you're using webpack v4 or later, you'll also need to install the [CLI](/api/cli/).
+如果你使用 webpack v4+ 版本，你还需要安装 [CLI](/api/cli/)。
 
 ``` bash
 npm install --save-dev webpack-cli
 ```
 
-Installing locally is what we recommend for most projects. This makes it easier to upgrade projects individually when breaking changes are introduced. Typically webpack is run via one or more [npm scripts](https://docs.npmjs.com/misc/scripts) which will look for a webpack installation in your local `node_modules` directory:
+对于大多数项目，我们建议本地安装。这可以在引入重大更新(breaking change)版本时，更容易分别升级项目。
+通常会通过运行一个或多个 [npm scripts](https://docs.npmjs.com/misc/scripts) 以在本地 `node_modules` 目录中查找安装的 webpack，
+来运行 webpack：
 
 ```json
 "scripts": {
@@ -45,28 +49,30 @@ Installing locally is what we recommend for most projects. This makes it easier 
 }
 ```
 
-T> To run the local installation of webpack you can access its binary version as `node_modules/.bin/webpack`. Alternatively, if you are using npm v5.2.0 or greater, you can run 'npx webpack' to do it.
+T> 想要运行本地安装的 webpack，你可以通过 `node_modules/.bin/webpack` 来访问它的二进制版本。另外，如果你使用的是 npm v5.2.0 或更高版本，则可以运行 'npx webpack' 来执行。
 
 
-## Global Installation
+## 全局安装
 
-The following NPM installation will make `webpack` available globally:
+通过以下 NPM 安装方式，可以使 `webpack` 在全局环境下可用：
 
 ``` bash
 npm install --global webpack
 ```
 
-W> Note that this is __not a recommended practice__. Installing globally locks you down to a specific version of webpack and could fail in projects that use a different version.
+W> __不推荐__ 全局安装 webpack。这会将你项目中的 webpack 锁定到指定版本，并且在使用不同的 webpack 版本的项目中，
+可能会导致构建失败。
 
 
-## Bleeding Edge
+## 最新体验版本
 
-If you are enthusiastic about using the latest that webpack has to offer, you can install beta versions or even directly from the webpack repository using the following commands:
+如果你热衷于使用最新版本的 webpack，你可以使用以下命令安装 beta 版本，
+或者直接从 webpack 的仓库中安装：
 
 ``` bash
 npm install webpack@beta
-# or specific tag/branch
+# 或指定的 tag/分支
 npm install webpack/webpack#<tagname/branchname>
 ```
 
-W> Take caution when installing these bleeding edge releases! They may still contain bugs and therefore should not be used in production.
+W> 安装这些最新体验版本时要小心！它们可能仍然包含 bug，因此不应该用于生产环境。
