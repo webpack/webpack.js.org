@@ -8,6 +8,7 @@ contributors:
   - Rob--W
   - byzyk
   - EugeneHlushko
+  - anikethsaha
 ---
 
 The following Node.js options configure whether to polyfill or mock certain [Node.js globals](https://nodejs.org/docs/latest/api/globals.html) and modules. This allows code originally written for the Node.js environment to run in other environments like the browser.
@@ -27,6 +28,8 @@ This is an object where each property is the name of a Node global or module and
 - `false`: Provide nothing. Code that expects this object may crash with a `ReferenceError`. Code that attempts to import the module using `require('modulename')` may trigger a `Cannot find module "modulename"` error.
 
 W> Not every Node global supports all four options. The compiler will throw an error for property-value combinations that aren't supported (e.g. `global: 'empty'`). See the sections below for more details.
+
+T> If you are using a module which needs global variables in it, use `ProvidePlugin` instead of `global`.
 
 These are the defaults:
 

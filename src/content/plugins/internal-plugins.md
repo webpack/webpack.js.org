@@ -5,6 +5,7 @@ contributors:
   - EugeneHlushko
   - ooflorent
   - Legends
+  - chenxsan
 ---
 
 This is a list of plugins which are used by webpack internally.
@@ -34,13 +35,11 @@ Applies Node.js style filesystem to the compiler.
 
 Plugins affecting the compiler
 
-### CachePlugin
+### MemoryCachePlugin
 
-`CachePlugin([cache])`
+`MemoryCachePlugin()`
 
-Adds a cache to the compiler, where modules are cached.
-
-You can pass a `cache` object, where the modules are cached. Otherwise one is created per plugin instance.
+Adds a cache to the compiler, where modules are cached in memory.
 
 ### ProgressPlugin
 
@@ -64,12 +63,6 @@ Plugins, which add entry chunks to the compilation.
 
 Adds an entry chunk on compilation. The chunk is named `chunkName` and contains only one module (plus dependencies). The module is resolved from `request` in `context` (absolute path).
 
-### MultiEntryPlugin
-
-`MultiEntryPlugin(context, requests, chunkName)`
-
-Adds an entry chunk on compilation. The chunk is named `chunkName` and contains a module for each item in the `requests` array (plus dependencies). Each item in `requests` is resolved in `context` (absolute path).
-
 ### PrefetchPlugin
 
 `PrefetchPlugin(context, request)`
@@ -77,16 +70,6 @@ Adds an entry chunk on compilation. The chunk is named `chunkName` and contains 
 Prefetches `request` and dependencies to enable a more parallel compilation. It doesn't create any chunk. The module is resolved from `request` in `context` (absolute path).
 
 ## output
-
-### FunctionModulePlugin
-
-`FunctionModulePlugin(context, options)`
-
-Each emitted module is wrapped in a function.
-
-`options` are the output options.
-
-If `options.pathinfo` is set, each module function is annotated with a comment containing the module identifier shortened to `context` (absolute path).
 
 ### JsonpTemplatePlugin
 
@@ -138,12 +121,6 @@ Decorates the templates by generating a SourceMap for each chunk.
 
 `sourceMapFilename` the filename template of the SourceMap. `[hash]`, `[name]`, `[id]`, `[file]` and `[filebase]` are replaced. If this argument is missing, the SourceMap will be inlined as DataUrl.
 
-### NoHotModuleReplacementPlugin
-
-`NoHotModuleReplacementPlugin()`
-
-Defines `module.hot` as `false` to remove hot module replacement code.
-
 ### HotModuleReplacementPlugin
 
 `HotModuleReplacementPlugin(options)`
@@ -167,10 +144,6 @@ Make webpack_public_path, webpack_require, webpack_modules and webpack_chunk_loa
 ### CompatibilityPlugin
 
 Currently useless. Ensures compatibility with other module loaders.
-
-### ConsolePlugin
-
-Offers a pseudo `console` if it is not available.
 
 ### ConstPlugin
 
@@ -245,12 +218,6 @@ Provides AMD-style `define` and `require` to modules. Also bind `require.amd`, `
 
 Provides CommonJs-style `require` to modules.
 
-### LabeledModulesPlugin
-
-`dependencies/LabeledModulesPlugin()`
-
-Provide labels `require:` and `exports:` to modules.
-
 ### RequireContextPlugin
 
 `dependencies/RequireContextPlugin(modulesDirectories, extensions)`
@@ -312,17 +279,3 @@ Merges chunks until each chunk has the minimum size of `minChunkSize`.
 `optimize/FlagIncludedChunksPlugin()`
 
 Adds chunk ids of chunks which are included in the chunk. This eliminates unnecessary chunk loads.
-
-### OccurenceOrderPlugin
-
-`optimize/OccurrenceOrderPlugin(preferEntry)`
-
-Order the modules and chunks by occurrence. This saves space, because often referenced modules and chunks get smaller ids.
-
-`preferEntry` If true, references in entry chunks have higher priority
-
-### DedupePlugin
-
-`optimize/DedupePlugin()`
-
-Deduplicates modules and adds runtime code.

@@ -39,6 +39,7 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
   h5,
   h6 {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     font-family: $font-stack-heading;
     font-weight: 600;
