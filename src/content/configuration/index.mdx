@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: 配置
 sort: 1
 contributors:
   - sokra
@@ -18,17 +18,17 @@ contributors:
   - bigdawggi
 ---
 
-Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index.js` and will output the result in `dist/main.js` minified and optimized for production.
+webpack 开箱即用，可以无需使用任何配置文件。然而，webpack 会假定项目的入口起点为 `src/index.js`，然后会在 `dist/main.js` 输出结果，并且在生产环境开启压缩和优化。
 
-Usually your projects will need to extend this functionality, for this you can create a `webpack.config.js` file in the root folder and webpack will automatically use it.
+通常你的项目还需要继续扩展此能力，为此你可以在项目根目录下创建一个 `webpack.config.js` 文件，然后 webpack 会自动使用它。
 
-All the available configuration options are specified below.
+下面指定了所有可用的配置选项。
 
-T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
+T> 刚开始学习 webpack？请查看我们提供的指南，从 webpack 一些 [核心概念](/concepts) 开始学习吧！
 
-## Use different configuration file
+## 使用不同的配置文件
 
-If for some reason you want to use different configuration file depending on certain situations you can change this via command line by using the `--config` flag.
+如果出于某些原因，需要根据特定情况使用不同的配置文件，则可以通过在命令行中使用 `--config` flag 修改此配置文件名称。
 
 __package.json__
 
@@ -38,11 +38,11 @@ __package.json__
 }
 ```
 
-## Options
+## 选项
 
-Click on the name of each option in the configuration code below to jump to the detailed documentation. Also note that the items with arrows can be expanded to show more examples and, in some cases, more advanced configuration.
+点击下面配置代码中每个选项的名称，跳转到详细的文档。还要注意，带有箭头的项目可以展开，以显示更多示例，在某些情况下可以看到高级配置。
 
-W> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
+T> 注意整个配置中我们使用 Node 内置的 [path 模块](https://nodejs.org/api/path.html)，并在它前面加上 [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname)这个全局变量。可以防止不同操作系统之间的文件路径问题，并且可以使相对路径按照预期工作。更多「POSIX 和 Windows」的相关信息请查看 [此章节](https://nodejs.org/api/path.html#path_windows_vs_posix)。
 
 __webpack.config.js__
 
@@ -69,26 +69,26 @@ module.exports = {
       b: ["./app/entry-b1", "./app/entry-b2"]
     },
   </entry>
-  // defaults to ./src
-  // Here the application starts executing
-  // and webpack starts bundling
+  // 默认为 ./src
+  // 这里应用程序开始执行
+  // webpack 开始打包
   <link "/configuration/output">
     <default>
       output: {
     </default>
   </link>
-    // options related to how webpack emits results
+    // webpack 如何输出结果的相关选项
     path: path.resolve(__dirname, "dist"), // string
-    // the target directory for all output files
-    // must be an absolute path (use the Node.js path module)
+    // 所有输出文件的目标路径
+    // 必须是绝对路径（使用 Node.js 的 path 模块）
     <filename "/configuration/output/#outputfilename">
       <default>
         filename: "bundle.js", // string
       </default>
-      filename: "[name].js", // for multiple entry points
-      filename: "[chunkhash].js", // for long term caching
+      filename: "[name].js", // 用于多个入口起点(entry point)
+      filename: "[chunkhash].js", // 用于长效缓存
     </filename>
-    // the filename template for entry chunks
+    // entry chunk 的文件名模板
     <publicPath "/configuration/output/#outputpublicpath">
       <default>
         publicPath: "/assets/", // string
@@ -96,64 +96,64 @@ module.exports = {
       publicPath: "",
       publicPath: "https://cdn.example.com/",
     </publicPath>
-    // the url to the output directory resolved relative to the HTML page
+    // 输出解析文件的目录，url 相对于 HTML 页面
     library: "MyLibrary", // string,
-    // the name of the exported library
+    // 导出库(export library)的名称
     <libraryTarget "/configuration/output/#outputlibrarytarget">
       <default>
-        libraryTarget: "umd", // universal module definition
+        libraryTarget: "umd", // 通用模块定义
       </default>
-      libraryTarget: "umd2", // universal module definition
-      libraryTarget: "commonjs2", // exported with module.exports
-      libraryTarget: "commonjs", // exported as properties to exports
-      libraryTarget: "amd", // defined with AMD defined method
-      libraryTarget: "this", // property set on this
-      libraryTarget: "var", // variable defined in root scope
-      libraryTarget: "assign", // blind assignment
-      libraryTarget: "window", // property set to window object
-      libraryTarget: "global", // property set to global object
-      libraryTarget: "jsonp", // jsonp wrapper
+      libraryTarget: "umd2", // 通用模块定义
+      libraryTarget: "commonjs2", // 使用 module.exports 导出
+      libraryTarget: "commonjs", // 作为 exports 的属性导出
+      libraryTarget: "amd", // 使用 AMD 定义方法来定义
+      libraryTarget: "this", // 在 this 上设置属性
+      libraryTarget: "var", // 变量定义于根作用域下
+      libraryTarget: "assign", // 盲分配(blind assignment)
+      libraryTarget: "window", // 在 window 对象上设置属性
+      libraryTarget: "global", // 在 global 对象上设置属性
+      libraryTarget: "jsonp", // jsonp 包裹
     </libraryTarget>
-    // the type of the exported library
+    // 导出库(export library)的类型
     <advancedOutput "#">
       <default>
-        /* Advanced output configuration (click to show) */
+        /* 高级输出配置（点击显示） */
       </default>
       pathinfo: true, // boolean
-      // include useful path info about modules, exports, requests, etc. into the generated cod
+      // 包括一些有帮助的路径信息，例如在生成代码时的 module(模块), export(导出), request 等路径信息。
       chunkFilename: "[id].js",
-      chunkFilename: "[chunkhash].js", // for long term caching
-      // the filename template for additional chunks
+      chunkFilename: "[chunkhash].js", // 长效缓存
+      // 附加 chunk(additional chunk) 的文件名模板
       jsonpFunction: "myWebpackJsonp", // string
-      // name of the JSONP function used to load chunks
+      // 用于加载 chunk 的 JSONP 函数名
       sourceMapFilename: "[file].map", // string
       sourceMapFilename: "sourcemaps/[file].map", // string
-      // the filename template of the source map location
+      // source map location 的文件名模板
       devtoolModuleFilenameTemplate: "webpack:///[resource-path]", // string
-      // the name template for modules in a devtool
+      // devtool 模块的文件名模板
       devtoolFallbackModuleFilenameTemplate: "webpack:///[resource-path]?[hash]", // string
-      // the name template for modules in a devtool (used for conflicts)
+      // devtool 模块的文件名模板（用于冲突）
       umdNamedDefine: true, // boolean
-      // use a named AMD module in UMD library
-      crossOriginLoading: "use-credentials", // enum
+      // 在 UMD 库中使用命名的 AMD 模块
+      crossOriginLoading: "use-credentials", // 枚举
       crossOriginLoading: "anonymous",
       crossOriginLoading: false,
-      // specifies how cross origin request are issued by the runtime
+      // 指定 runtime 如何处理跨域请求问题
     </advancedOutput>
     <expert "#">
       <default>
-        /* Expert output configuration (on own risk) */
+        /* 专家级输出配置（自行承担风险） */
       </default>
       devtoolLineToLine: {
         test: /\\.jsx$/
       },
-      // use a simple 1:1 mapped SourceMaps for these modules (faster)
+      // 为这些模块使用 1:1 映射 SourceMaps（快速）
       hotUpdateMainFilename: "[hash].hot-update.json", // string
-      // filename template for HMR manifest
+      // HMR manifest 的文件名模板
       hotUpdateChunkFilename: "[id].[hash].hot-update.js", // string
-      // filename template for HMR chunks
+      // HMR chunk 的文件名模板
       sourcePrefix: "\\t", // string
-      // prefix module sources in bundle for better readablitity
+      // 使 bundle 内前置式模块资源具有更好可读性
     </expert>
   },
   module: {
