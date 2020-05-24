@@ -1,5 +1,5 @@
 ---
-title: Authoring Libraries
+title: 创建 library
 sort: 7
 contributors:
   - pksjce
@@ -14,14 +14,14 @@ contributors:
   - wizardofhogwarts
 ---
 
-Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
+除了打包应用程序，webpack 还可以用于打包 JavaScript library。以下指南适用于希望简化打包策略的 library 作者。
 
 
-## Authoring a Library
+## 创建一个 library
 
-Let's assume that you are writing a small library ,`webpack-numbers`, that allows users to convert the numbers 1 through 5 from their numeric representation to a textual one and vice-versa, e.g. 2 to 'two'.
+假设你正在编写一个名为 `webpack-numbers` 的小的 library，可以将数字 1 到 5 转换为文本表示，反之亦然，例如将 2 转换为 'two'。
 
-The basic project structure may look like this:
+基本的项目结构可能如下所示：
 
 __project__
 
@@ -33,7 +33,7 @@ __project__
 +    |- ref.json
 ```
 
-Initialize npm, install webpack and lodash:
+初始化 npm，安装 webpack 和 lodash：
 
 ``` bash
 npm init -y
@@ -90,7 +90,7 @@ export function wordToNum(word) {
 }
 ```
 
-The usage specification for the library use will be as follows:
+这个 library 的调用规范如下：
 
 - __ES2015 module import:__
 
@@ -117,7 +117,7 @@ require(['webpackNumbers'], function (webpackNumbers) {
 });
 ```
 
-The consumer also can use the library by loading it via a script tag:
+consumer(使用者) 还可以通过一个 script 标签来加载和使用此 library：
 
 ``` html
 <!doctype html>
@@ -126,41 +126,41 @@ The consumer also can use the library by loading it via a script tag:
   <script src="https://unpkg.com/webpack-numbers"></script>
   <script>
     // ...
-    // Global variable
+    // 全局变量
     webpackNumbers.wordToNum('Five')
-    // Property in the window object
+    // window 对象中的属性
     window.webpackNumbers.wordToNum('Five')
     // ...
   </script>
 </html>
 ```
 
-Note that we can also configure it to expose the library in the following ways:
+注意，我们还可以通过以下配置方式，将 library 暴露为：
 
-- Property in the global object, for node.
-- Property in the `this` object.
+- global 对象中的属性，用于 Node.js。
+- `this` 对象中的属性。
 
-For full library configuration and code please refer to [webpack-library-example](https://github.com/kalcifer/webpack-library-example).
-
-
-## Base Configuration
-
-Now let's bundle this library in a way that will achieve the following goals:
-
-- Using `externals` to avoid bundling `lodash`, so the consumer is required to load it.
-- Setting the library name as `webpack-numbers`.
-- Exposing the library as a variable called `webpackNumbers`.
-- Being able to access the library inside Node.js.
-
-Also, the consumer should be able to access the library in the following ways:
-
-- ES2015 module. i.e. `import webpackNumbers from 'webpack-numbers'`.
-- CommonJS module. i.e. `require('webpack-numbers')`.
-- Global variable when included through `script` tag.
+完整的 library 配置和代码，请查看 [webpack-library-example](https://github.com/kalcifer/webpack-library-example)。
 
 
+## 基本配置
 
-We can start with this basic webpack configuration:
+现在，让我们以某种方式打包这个 library，能够实现以下几个目标：
+
+- 使用 `externals` 选项，避免将 `lodash` 打包到应用程序，而使用者会去加载它。
+- 将 library 的名称设置为 `webpack-numbers`。
+- 将 library 暴露为一个名为 `webpackNumbers` 的变量。
+- 能够访问其他 Node.js 中的 library。
+
+此外，consumer(使用者) 应该能够通过以下方式访问 library：
+
+- ES2015 模块。例如 `import webpackNumbers from 'webpack-numbers'`。
+- CommonJS 模块。例如 `require('webpack-numbers')`.
+- 全局变量，在通过 `script` 标签引入时。
+
+
+
+我们可以从如下 webpack 基本配置开始：
 
 __webpack.config.js__
 
@@ -176,9 +176,9 @@ module.exports = {
 };
 ```
 
-## Base Configuration with source map
+## 使用 source map 的基本配置
 
- Source maps is a useful debugging tool that allows you to view where the minified code originated from.
+source map 是有用的调试工具，可以查看压缩代码对应的原始代码。
 
 __webpack.config.js__
 
@@ -201,15 +201,15 @@ module.exports = [
 }));
  ```
 
->  For more information about getting source maps setup and available options please refer to [Devtool configuration](https://webpack.js.org/configuration/devtool/)
+>  关于 source map 配置和可用选项的更多信息，请参考 [devtool 配置](https://webpack.js.org/configuration/devtool/)
 
-> To see code examples please refer to [webpack repository](https://github.com/webpack/webpack/tree/master/examples/source-map)
+> 查看代码示例， 请参考 [webpack 仓库](https://github.com/webpack/webpack/tree/master/examples/source-map)
 
-## Externalize Lodash
+## 外部化 lodash
 
-Now, if you run `webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. In this case, we'd prefer to treat `lodash` as a `peerDependency`. Meaning that the consumer should already have `lodash` installed. Hence you would want to give up control of this external library to the consumer of your library.
+现在，如果执行 `webpack`，你会发现创建了一个体积相当大的文件。如果你查看这个文件，会看到 lodash 也被打包到代码中。在这种场景中，我们更倾向于把 `lodash` 当作 `peerDependency`。也就是说，consumer(使用者) 应该已经安装过 `lodash` 。因此，你就可以放弃控制此外部 library ，而是将控制权让给使用 library 的 consumer。
 
-This can be done using the `externals` configuration:
+这可以使用 `externals` 配置来完成：
 
 __webpack.config.js__
 
@@ -233,14 +233,14 @@ __webpack.config.js__
   };
 ```
 
-This means that your library expects a dependency named `lodash` to be available in the consumer's environment.
+这意味着你的 library 需要一个名为 `lodash` 的依赖，这个依赖在 consumer 环境中必须存在且可用。
 
-T> Note that if you only plan on using your library as a dependency in another webpack bundle, you may specify `externals` as an array.
+T> 注意，如果你仅计划将 library 用作另一个 webpack bundle 中的依赖模块，则可以直接将 `externals` 指定为一个数组。
 
 
-## External Limitations
+## 外部化的限制
 
-For libraries that use several files from a dependency:
+对于想要实现从一个依赖中调用多个文件的那些 library：
 
 ``` js
 import A from 'library/one';
@@ -249,7 +249,7 @@ import B from 'library/two';
 // ...
 ```
 
-You won't be able to exclude them from the bundle by specifying `library` in the externals. You'll either need to exclude them one by one or by using a regular expression.
+无法通过在 externals 中指定整个 `library` 的方式，将它们从 bundle 中排除。而是需要逐个或者使用一个正则表达式，来排除它们。
 
 ``` js
 module.exports = {
@@ -257,16 +257,16 @@ module.exports = {
   externals: [
     'library/one',
     'library/two',
-    // Everything that starts with "library/"
+    // 匹配以 "library/" 开始的所有依赖
     /^library\/.+$/,
   ],
 };
 ```
 
 
-## Expose the Library
+## 暴露 library
 
-For widespread use of the library, we would like it to be compatible in different environments, i.e. CommonJS, AMD, Node.js and as a global variable. To make your library available for consumption, add the `library` property inside `output`:
+对于用法广泛的 library，我们希望它能够兼容不同的环境，例如 CommonJS，AMD，Node.js 或者作为一个全局变量。为了让你的 library 能够在各种使用环境中可用，需要在 `output` 中添加 `library` 属性：
 
 __webpack.config.js__
 
@@ -291,9 +291,9 @@ __webpack.config.js__
   };
 ```
 
-T> Note that the `library` setup is tied to the `entry` configuration. For most libraries, specifying a single entry point is sufficient. While [multi-part libraries](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) are possible, it is simpler to expose partial exports through an [index script](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file) that serves as a single entry point. Using an `array` as an `entry` point for a library is __not recommended__.
+T> 注意，`library` 设置绑定到 `entry` 配置。对于大多数 library，指定一个入口起点就足够了。虽然 [一次打包暴露多个库](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) 也是也可以的，然而，通过 [index script(索引脚本)（仅用于访问一个入口起点）](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file) 暴露部分导出则更为简单。我们__不推荐__使用`数组`作为 library 的 `entry`。
 
-This exposes your library bundle available as a global variable named `webpackNumbers` when imported. To make the library compatible with other environments, add `libraryTarget` property to the config. This will add various options about how the library can be exposed.
+这会将你的 library bundle 暴露为名为 `webpackNumbers` 的全局变量，consumer 通过此名称来 import。为了让 library 和其他环境兼容，则需要在配置中添加 `libraryTarget` 属性。这个选项可以控制以多种形式暴露 library。
 
 __webpack.config.js__
 
@@ -319,21 +319,21 @@ __webpack.config.js__
   };
 ```
 
-You can expose the library in the following ways:
+有以下几种方式暴露 library：
 
-- Variable: as a global variable made available by a `script` tag (`libraryTarget:'var'`).
-- This: available through the `this` object (`libraryTarget:'this'`).
-- Window: available through the `window` object, in the browser (`libraryTarget:'window'`).
-- UMD: available after AMD or CommonJS `require` (`libraryTarget:'umd'`).
+- 变量：作为一个全局变量，通过 `script` 标签来访问（`libraryTarget:'var'`）。
+- this：通过 `this` 对象访问（`libraryTarget:'this'`）。
+- window：在浏览器中通过 `window` 对象访问（`libraryTarget:'window'`）。
+- UMD：在 AMD 或 CommonJS `require` 之后可访问（`libraryTarget:'umd'`）。
 
-If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output/#outputlibrarytarget) there for a detailed list of all available options.
+如果设置了 `library` 但没有设置 `libraryTarget`，则 `libraryTarget` 默认指定为 `var`，详细说明请查看 [output ](/configuration/output) 文档。查看 [`output.libraryTarget`](/configuration/output#outputlibrarytarget) 文档，以获取所有可用选项的详细列表。
 
-W> With webpack 3.5.5, using `libraryTarget: { root:'_' }` doesn't work properly (as stated in [issue 4824](https://github.com/webpack/webpack/issues/4824)). However, you can set `libraryTarget: { var: '_' }` to expect the library as a global variable.
+W> 在 webpack v3.5.5 中，使用 `libraryTarget: { root:'_' }` 将无法正常工作（参考 [issue 4824](https://github.com/webpack/webpack/issues/4824)) 所述）。然而，可以设置 `libraryTarget: { var: '_' }` 来将 library 作为全局变量。
 
 
-### Final Steps
+### 最终步骤
 
-Optimize your output for production by following the steps mentioned in the [production guide](/guides/production). Let's also add the path to your generated bundle as the package's `main` field in with the `package.json`
+遵循 [生产环境](/guides/production) 指南中提到的步骤，来优化生产环境下的输出结果。那么，我们还需要将生成 bundle 的文件路径，添加到 `package.json` 中的 `main` 字段中。
 
 __package.json__
 
@@ -345,7 +345,7 @@ __package.json__
 }
 ```
 
-Or, to add it as a standard module as per [this guide](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage):
+或者，按照这个 [指南](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage)，将其添加为标准模块：
 
 ``` json
 {
@@ -355,10 +355,10 @@ Or, to add it as a standard module as per [this guide](https://github.com/dherma
 }
 ```
 
-The key `main` refers to the [standard from `package.json`](https://docs.npmjs.com/files/package.json#main), and `module` to [a](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md) [proposal](https://github.com/rollup/rollup/wiki/pkg.module) to allow the JavaScript ecosystem upgrade to use ES2015 modules without breaking backwards compatibility.
+这里的 key(键) `main` 是参照 [`package.json` 标准](https://docs.npmjs.com/files/package.json#main)，而 `module` 是参照 [一个](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md)[提案](https://github.com/rollup/rollup/wiki/pkg.module)，此提案允许 JavaScript 生态系统升级使用 ES2015 模块，而不会破坏向后兼容性。
 
-W> The `module` property should point to a script that utilizes ES2015 module syntax but no other syntax features that aren't yet supported by browsers or node. This enables webpack to parse the module syntax itself, allowing for lighter bundles via [tree shaking](https://webpack.js.org/guides/tree-shaking/) if users are only consuming certain parts of the library.
+W> `module` 属性应指向一个使用 ES2015 模块语法的脚本，但不包括浏览器或 Node.js 尚不支持的其他语法特性。这使得 webpack 本身就可以解析模块语法，如果用户只用到 library 的某些部分，则允许通过 [tree shaking](https://webpack.docschina.org/guides/tree-shaking/) 打包更轻量的包。
 
-Now you can [publish it as an npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages) and find it at [unpkg.com](https://unpkg.com/#/) to distribute it to your users.
+现在，你可以 [将其发布为一个 npm package](https://docs.npmjs.com/getting-started/publishing-npm-packages)，并且在 [unpkg.com](https://unpkg.com/#/) 找到它，并分发给你的用户。
 
-T> To expose stylesheets associated with your library, the [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin) should be used. Users can then consume and load these as they would any other stylesheet.
+T> 为了暴露和 library 关联着的样式表，你应该使用 [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin)。然后，用户可以像使用其他样式表一样使用和加载这些样式表。
