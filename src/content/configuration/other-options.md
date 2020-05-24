@@ -188,11 +188,12 @@ module.exports = {
 
 ### `cache.store`
 
-`string = 'pack': 'pack'`
+`string = 'pack' | 'idle'`
 
 `cache.store` tells webpack when to store data on the file system.
 
-- `'pack'`: Store data when compiler is idle in a single file for all cached items
+- `'pack'`: Store data when compiler is packing in a single file for all cached items
+- `'idle'`: Store data when compiler is idle in a single file for all cached items
 
 `cache.store` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
