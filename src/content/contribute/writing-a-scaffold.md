@@ -1,6 +1,6 @@
 ---
 title: Writing a Scaffold
-sort: 3
+sort: 4
 contributors:
   - pranshuchittora
   - EugeneHlushko
@@ -8,9 +8,20 @@ contributors:
   - rishabh3112
 ---
 
-Welcome to the demonstration of the new `webpack init` command! To view what we are building today, run `webpack init webpack-scaffold-demo`. This demo will show you how to build your own webpack scaffold. Let's start by creating a file named `generator.js`.
+A scaffold is an ECMAScript Module which exports a `yeoman generator` based on [Scaffolding API](/guides/scaffolding/#api). Scaffolds can be used but not limited to initialize a new webpack project, tailored to a specific use case. To view what we are building today, run `webpack init webpack-scaffold-demo`. This demo will show you how to build your own webpack scaffold. Let's start by creating a file named `generator.js`.
 
-## Create a basic structure
+## Quick Start
+
+[`webpack-scaffold-starter`](https://github.com/rishabh3112/webpack-scaffold-starter) can be used to setup a new scaffold project. To do so, follow the following commands.
+
+```bash
+mkdir my-scaffold && cd my-scaffold
+npm install webpack-scaffold-starter
+npx webpack-scaffold
+git init # optional
+```
+
+## Setup
 
 Before writing a `webpack-cli` scaffold, think about what you're trying to achieve. Do you want a "general" scaffold that could be used by any project or type of app? Do you want something focused, like a scaffold that writes both your `webpack.config.js` and your framework code? It's also useful to think about the user experience for your scaffold.
 

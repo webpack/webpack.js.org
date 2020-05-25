@@ -1,6 +1,6 @@
 ---
 title: Plugins
-sort: 5
+sort: 4
 contributors:
   - TheLarkInn
   - jhnns
@@ -31,6 +31,8 @@ class ConsoleLogOnBuildWebpackPlugin {
     });
   }
 }
+
+module.exports = ConsoleLogOnBuildWebpackPlugin;
 ```
 
 The first parameter of the tap method of the compiler hook should be a camelized version of the plugin name. It is advisable to use a constant for this so it can be reused in all hooks.

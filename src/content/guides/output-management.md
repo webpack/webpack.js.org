@@ -1,6 +1,6 @@
 ---
 title: Output Management
-sort: 4
+sort: 3
 contributors:
   - skipjack
   - TheDutchCoder
@@ -96,13 +96,13 @@ __webpack.config.js__
 -   entry: './src/index.js',
 +   entry: {
 +     app: './src/index.js',
-+     print: './src/print.js'
++     print: './src/print.js',
 +   },
     output: {
 -     filename: 'bundle.js',
 +     filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
@@ -138,17 +138,17 @@ __webpack.config.js__
   module.exports = {
     entry: {
       app: './src/index.js',
-      print: './src/print.js'
+      print: './src/print.js',
     },
 +   plugins: [
 +     new HtmlWebpackPlugin({
-+       title: 'Output Management'
-+     })
++       title: 'Output Management',
++     }),
 +   ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 
@@ -187,23 +187,23 @@ __webpack.config.js__
 ``` diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-+ const CleanWebpackPlugin = require('clean-webpack-plugin');
++ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
       app: './src/index.js',
-      print: './src/print.js'
+      print: './src/print.js',
     },
     plugins: [
 +     new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Output Management'
-      })
+        title: 'Output Management',
+      }),
     ],
     output: {
       filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist')
-    }
+      path: path.resolve(__dirname, 'dist'),
+    },
   };
 ```
 

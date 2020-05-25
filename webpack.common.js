@@ -3,7 +3,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const mdPlugins = [
   require('remark-slug'),
-  require('remark-mermaid'),
   [
     require('remark-custom-blockquotes'),
     {
@@ -15,7 +14,7 @@ const mdPlugins = [
     }
   ],
   [
-    require('@rigor789/remark-autolink-headings'),
+    require('remark-autolink-headings'),
     {
       behaviour: 'append'
     }

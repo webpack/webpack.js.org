@@ -1,8 +1,9 @@
 ---
 title: Writer's Guide
-sort: 2
+sort: 1
 contributors:
   - pranshuchittora
+  - EugeneHlushko
 ---
 
 The following sections contain all you need to know about editing and formatting the content within this site. Make sure to do some research before starting your edits or additions. Sometimes the toughest part is finding where the content should live and determining whether or not it already exists.
@@ -159,3 +160,59 @@ Please do not assume things are simple. Avoid words like 'just', 'simply'.
 - Simply run command...
 + Run the `command-name` command...
 ```
+
+### Configuration defaults and types
+
+Always provide types and defaults to all of the documentation options in order to keep the documentation accessible and well-written. We are adding types and defaults after entitling the documented option:
+
+__configuration.example.option__
+
+`string = 'none'`
+
+Where `= 'none'` means that the default value is `'none'` for the given option.
+
+`string = 'none': 'none' | 'development' | 'production'`
+
+Where `: 'none' | 'development' | 'production'` enumerates the possible type values, in this case, three strings are acceptable: `'none'`, `'development'`, and `'production'`.
+
+Use space between types to list all available types for the given option:
+
+`string = 'none': 'none' | 'development' | 'production'` `boolean`
+
+To mark an array, use square brackets:
+
+`string` `[string]`
+
+If multiple types are allowed in `array`, use comma:
+
+`string` `[string, RegExp, function(arg) => string]`
+
+To mark a function, also list arguments when they are available:
+
+`function (compilation, module, path) => boolean`
+
+Where `(compilation, module, path)` lists the arguments that the provided function will receive and `=> boolean` means that the return value of the function must be a `boolean`.
+
+To mark a Plugin as an available option value type, use the camel case title of the `Plugin`:
+
+`TerserPlugin` `[TerserPlugin]`
+
+Which means that the option expects one or few `TerserPlugin` instances.
+
+To mark a number, use `number`:
+
+`number = 15: 5, 15, 30`
+
+To mark an object, use `object`:
+
+`object = { prop1 string = 'none': 'none' | 'development' | 'production', prop2 boolean = false, prop3 function (module) => string }`
+
+When object's key can have multiple types, use `|` to list them. Here is an example, where `prop1` can be both a string and an array of strings:
+
+`object = { prop1 string = 'none': 'none' | 'development' | 'production' | [string]}`
+
+This allows us to display the defaults, enumeration and other information.
+
+If the object's key is dynamic, user-defined, use `<key>` to describe it:
+
+`object = { <key> string }`

@@ -1,6 +1,6 @@
 ---
 title: Resolve
-sort: 7
+sort: 8
 contributors:
   - sokra
   - skipjack
@@ -12,6 +12,7 @@ contributors:
   - numb86
   - jgravois
   - EugeneHlushko
+  - Aghassi
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -112,6 +113,8 @@ The following table explains other cases:
 
 `/abc/node_modules` may resolve in `/node_modules` too.
 
+W> `resolve.alias` takes precedence over other module resolutions.
+
 
 ### `resolve.aliasFields`
 
@@ -140,7 +143,7 @@ If unsafe cache is enabled, includes `request.context` in the cache key. This op
 
 ### `resolve.descriptionFiles`
 
-`[string]: ['package.json']`
+`[string] = ['package.json']`
 
 The JSON files to use for descriptions.
 
@@ -158,7 +161,7 @@ module.exports = {
 
 ### `resolve.enforceExtension`
 
-`boolean: false`
+`boolean = false`
 
 If `true`, it will not allow extension-less files. So by default `require('./foo')` works if `./foo` has a `.js` extension, but with this enabled only `require('./foo.js')` will work.
 
@@ -176,7 +179,9 @@ module.exports = {
 
 ### `resolve.enforceModuleExtension`
 
-`boolean: false`
+`boolean = false`
+
+W> Removed in webpack 5
 
 Tells webpack whether to require to use an extension for modules (e.g. loaders).
 
@@ -194,7 +199,7 @@ module.exports = {
 
 ### `resolve.extensions`
 
-`[string]: ['.wasm', '.mjs', '.js', '.json']`
+`[string] = ['.wasm', '.mjs', '.js', '.json']`
 
 Attempt to resolve these extensions in order.
 
@@ -266,7 +271,7 @@ When we `import * as Upstream from 'upstream'` this will actually resolve to the
 
 ### `resolve.mainFiles`
 
-`[string]: ['index']`
+`[string] = ['index']`
 
 The filename to be used while resolving directories.
 
@@ -284,7 +289,7 @@ module.exports = {
 
 ### `resolve.modules`
 
-`[string]: ['node_modules']`
+`[string] = ['node_modules']`
 
 Tell webpack what directories should be searched when resolving modules.
 
@@ -321,7 +326,7 @@ module.exports = {
 
 ### `resolve.unsafeCache`
 
-`regex` `array` `boolean: true`
+`RegExp` `[RegExp]` `boolean: true`
 
 Enable aggressive, but __unsafe__, caching of modules. Passing `true` will cache everything.
 
@@ -374,7 +379,7 @@ module.exports = {
 
 ### `resolve.symlinks`
 
-`boolean: true`
+`boolean = true`
 
 Whether to resolve symlinks to their symlinked location.
 
@@ -394,7 +399,7 @@ module.exports = {
 
 ### `resolve.cachePredicate`
 
-`function: function (module) { return true; }`
+`function(module) => boolean`
 
 A function which decides whether a request should be cached or not. An object is passed to the function with `path` and `request` properties. It must return a boolean.
 
@@ -415,9 +420,9 @@ module.exports = {
 
 ## `resolveLoader`
 
-`object`
+`object { modules [string] = ['node_modules'], extensions [string] = ['.js', '.json'], mainFields [string] = ['loader', 'main']}`
 
-This set of options is identical to the `resolve` property set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages. Default:
+This set of options is identical to the `resolve` property set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages.
 
 __webpack.config.js__
 
@@ -439,7 +444,9 @@ T> Note that you can use alias here and other features familiar from resolve. Fo
 
 `[string]`
 
-The extensions/suffixes that are used when resolving loaders. Since version two, we [strongly recommend](/migrate/3/#automatic-loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
+W> Removed in webpack 5
+
+The extensions/suffixes that are used when resolving loaders. Since version two, we [strongly recommend](/migrate/3/#automatic--loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
 
 __webpack.config.js__
 

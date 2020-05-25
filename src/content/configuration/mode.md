@@ -1,6 +1,6 @@
 ---
 title: Mode
-sort: 4
+sort: 5
 contributors:
   - EugeneHlushko
   - byzyk
@@ -13,9 +13,7 @@ related:
 
 Providing the `mode` configuration option tells webpack to use its built-in optimizations accordingly.
 
-`string`
-
-T> Possible values for `mode` are: `none`, `development` or `production`(default).
+`string = 'production': 'none' | 'development' | 'production'`
 
 ## Usage
 
@@ -23,7 +21,7 @@ Just provide the `mode` option in the config:
 
 ```javascript
 module.exports = {
-  mode: 'production'
+  mode: 'development'
 };
 ```
 
@@ -31,7 +29,7 @@ module.exports = {
 or pass it as a [CLI](/api/cli/) argument:
 
 ```bash
-webpack --mode=production
+webpack --mode=development
 ```
 
 The following string values are supported:
@@ -80,6 +78,7 @@ module.exports = {
 -   noEmitOnErrors: false,
 -   checkWasmTypes: false,
 -   minimize: false,
+-   removeAvailableModules: false
 - },
 - plugins: [
 -   new webpack.NamedModulesPlugin(),

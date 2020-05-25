@@ -144,7 +144,7 @@ export default class Support extends React.Component {
 
           {
             supporters.map((supporter, index) => (
-              <a key={ supporter.id || supporter.slug || index }
+              <a key={ supporter.slug || index }
                 className="support__item"
                 title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.slug}` }
                 target="_blank"

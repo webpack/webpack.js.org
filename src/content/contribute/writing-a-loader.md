@@ -1,6 +1,6 @@
 ---
 title: Writing a Loader
-sort: 3
+sort: 2
 contributors:
   - asulaiman
   - michael-ciniawsky
@@ -247,7 +247,7 @@ __.babelrc__
 }
 ```
 
-Our loader will process `.txt` files and simply replace any instance of `[name]` with the `name` option given to the loader. Then it will output a valid JavaScript module containing the text as it's default export:
+Our loader will process `.txt` files and simply replace any instance of `[name]` with the `name` option given to the loader. Then it will output a valid JavaScript module containing the text as its default export:
 
 __src/loader.js__
 

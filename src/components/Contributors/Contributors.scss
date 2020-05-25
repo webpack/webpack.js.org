@@ -1,10 +1,15 @@
 @import 'functions';
 @import 'mixins';
 
+.contributors__section {
+  @media print {
+    display: none;
+  }
+}
+
 .contributors__list {
   font-size: 14px;
   margin-left: -0.5em;
-  padding-right: 75px;
 }
 
 .contributor {

@@ -4,6 +4,7 @@ import React from 'react';
 // Import Local Components
 import Shield from '../Shield/Shield';
 import SidebarItem from '../SidebarItem/SidebarItem';
+import Print from '../Print/Print';
 
 // Load Styling
 import './Sidebar.scss';
@@ -12,24 +13,26 @@ import './Sidebar.scss';
 export default ({
   className = '',
   pages,
-  currentPage,
-  ...props
+  currentPage
 }) => {
   let group;
 
   return (
     <nav className={`sidebar ${className}`}>
       <div className="sidebar__inner">
-        <a href="https://github.com/webpack/webpack/releases">
-          <Shield content="npm/v/webpack" label="webpack" />
-        </a>
+        <div className="sidebar__shields">
+          <a href="https://github.com/webpack/webpack/releases">
+            <Shield content="npm/v/webpack" label="webpack" />
+          </a>
+        </div>
+        <Print url={currentPage} />
 
         {pages.map((page, index) => {
           let displayGroup = group !== page.group && page.group !== '-';
           group = page.group;
 
           return (
-            <React.Fragment key={`sidebar-item-${index}`}>
+            <div key={page.url}>
               {displayGroup ? <h4 className="sidebar__group">{group}</h4> : null}
 
               <SidebarItem
@@ -39,7 +42,7 @@ export default ({
                 anchors={page.anchors}
                 currentPage={currentPage}
               />
-            </React.Fragment>
+            </div>
           );
         })}
       </div>
