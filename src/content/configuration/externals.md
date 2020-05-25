@@ -13,6 +13,7 @@ contributors:
   - tanhauhau
   - snitin315
   - beejunk
+  - EugeneHlushko
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
@@ -169,7 +170,7 @@ module.exports = {
   externals: [
     function(context, request, callback) {
       if (/^yourregex$/.test(request)){
-        // Externalize to a commonjs module using the request path 
+        // Externalize to a commonjs module using the request path
         return callback(null, 'commonjs ' + request);
       }
 
@@ -243,6 +244,8 @@ module.exports = {
 
 Every dependency that matches the given regular expression will be excluded from the output bundles.
 
+__webpack.config.js__
+
 ```javascript
 module.exports = {
   //...
@@ -255,6 +258,8 @@ In this case, any dependency named `jQuery`, capitalized or not, or `$` would be
 ### Combining syntaxes
 
 Sometimes you may want to use a combination of the above syntaxes. This can be done in the following manner:
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -286,3 +291,23 @@ module.exports = {
 ```
 
 For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
+
+
+## `externalsType`
+
+`string = 'var'`
+
+Specifies the default type of externals, depends on [`output.libraryTarget`](/configuration/output/#outputlibrarytarget) being set to the same value.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    libraryTarget: 'promise'
+  }
+  externalsType: `promise`
+};
+```

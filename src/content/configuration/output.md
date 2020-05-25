@@ -619,7 +619,6 @@ MyLibrary.doSomething();
 
 W> When using this option, an empty `output.library` will result in no assignment.
 
-
 `libraryTarget: 'assign'` - This will generate an implied global which has the potential to reassign an existing value (use with caution).
 
 ```javascript
@@ -875,6 +874,12 @@ __system_context__.import('./other-file.js').then(m => {
 });
 ```
 
+### Asyncrhonous
+
+`libraryTarget: 'promise'` - same as `libraryTarget: 'var'` but waits for the result.
+
+`libraryTarget: 'import'` - uses `import()` to load a native EcmaScript module.
+
 ### Other Targets
 
 `libraryTarget: 'jsonp'` - This will wrap the return value of your entry point into a jsonp wrapper.
@@ -884,6 +889,26 @@ MyLibrary(_entry_return_);
 ```
 
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
+
+
+## `output.importFunctionName`
+
+`string = 'import'`
+
+The name of the native `import()` function used for [`'import'` type externals](/configuration/output/#asyncrhonous).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    libraryTarget: 'import',
+    importFunctionName: 'polyfillForImport'
+  }
+};
+```
 
 
 ## `output.path`
