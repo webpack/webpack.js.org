@@ -151,7 +151,7 @@ module.exports = {
 
 `object`
 
-`cache.buildDependencies` is an object of arrays of additional code dependencies of the build. webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
+`cache.buildDependencies` is an object of arrays of additional code dependencies for the build. webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
 
 Defaults to `webpack/lib` to get all dependencies of webpack.
 
