@@ -10,6 +10,9 @@ contributors:
   - vansosnin
   - EugeneHlushko
   - skovy
+  - rishabh3112
+  - niravasher
+  - Neob91
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -69,7 +72,7 @@ This will force webpack to exit its bundling process.
 
 `boolean` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/concepts/mode/#mode-development) and disabled in [`production` mode](/configuration/mode/#mode-production). `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
+Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/configuration/mode/#mode-development) and disabled in [`production` mode](/configuration/mode/#mode-production). `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
 
 __webpack.config.js__
 
@@ -106,7 +109,7 @@ While setting `cache.type` to `filesystem` opens up more options for configurati
 
 Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
 
-`cache.cacheDirectory` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+`cache.cacheDirectory` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
 __webpack.config.js__
 
@@ -124,13 +127,61 @@ module.exports = {
 
 W> The final location of the cache is a combination of `cache.cacheDirectory` + `cache.name`.
 
+### `cache.cacheLocation`
+
+`string`
+
+Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.name)`.
+
+__webpack.config.js__
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    cacheLocation: path.resolve(__dirname, '.test_cache')
+  }
+};
+```
+
+### `cache.buildDependencies`
+
+`object`
+
+`cache.buildDependencies` is an object of arrays of additional code dependencies for the build. webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
+
+Defaults to `webpack/lib` to get all dependencies of webpack.
+
+T> It's recommended to set `cache.buildDependencies.config: [__filename]` in your webpack configuration to get the latest configuration and all dependencies.
+
+```javascript
+module.exports = {
+  cache: {
+    buildDependencies: {
+      // This makes all dependencies of this file - build dependencies
+      config: [__filename]
+      // By default webpack and loaders are build dependencies
+    }
+  }
+};
+```
+
+### `cache.managedPaths`
+
+`[string] = ['./node_modules']`
+
+`cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
+
 ### `cache.hashAlgorithm`
 
 `string`
 
 Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/crypto.html) for more details. Defaults to `md4`.
 
-`cache.hashAlgorithm` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+`cache.hashAlgorithm` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
 __webpack.config.js__
 
@@ -150,7 +201,7 @@ module.exports = {
 
 Name for the cache. Different names will lead to different coexisting caches. Defaults to `${config.name}-${config.mode}`. Using `cache.name` makes sense when you have multiple configurations which should have independent caches.
 
-`cache.name` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+`cache.name` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
 __webpack.config.js__
 
@@ -166,16 +217,15 @@ module.exports = {
 
 ### `cache.store`
 
-`string: 'background' | 'idle' | 'instant' | 'pack'`
+`string = 'pack': 'pack'`
 
-`cache.store` tells webpack when to store data on the file system. Defaults to `'idle'`.
+`cache.store` tells webpack when to store data on the file system.
 
-- `'background'`: Store data in background while compiling, but doesn't block the compilation
-- `'idle'`: Store data when compiler is idle in one file per cached item
-- `'instant'`: Store data when instantly. Blocks compilation until data is stored
 - `'pack'`: Store data when compiler is idle in a single file for all cached items
 
-`cache.store` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+`cache.store` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+
+W> `pack` is the only supported mode since webpack 5.0.x
 
 __webpack.config.js__
 
@@ -191,11 +241,11 @@ module.exports = {
 
 ### `cache.version`
 
-`string: ''`
+`string = ''`
 
-Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when config changed in a way which doesn't allow to reuse cache. This will invalidate the cache. Defaults to `''`.
+Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when configuration changed in a way which doesn't allow to reuse cache. This will invalidate the cache.
 
-`cache.version` option is only available when [`cache.type`](#cache-type) is set to `filesystem`.
+`cache.version` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
 __webpack.config.js__
 
@@ -211,6 +261,43 @@ module.exports = {
 
 W> Don't share the cache between calls with different options.
 
+### `cache.idleTimeout`
+
+`number = 10000`
+
+Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    idleTimeout: 10000
+  }
+};
+```
+
+W> `cache.idleTimeout` is only available when [`cache.store`](#cachestore) is set to either `'pack'` or `'idle'`
+
+### `cache.idleTimeoutForInitialStore`
+
+`number = 0`
+
+Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period after which the initial cache storing should happen.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    idleTimoutForInitialStore: 0
+  }
+};
+```
+
+W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#cachestore) is set to either `'pack'` or `'idle'`
 
 ## `loader`
 
@@ -249,6 +336,8 @@ Use this option to generate a JSON file containing webpack "records" -- pieces o
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   recordsPath: path.join(__dirname, 'records.json')
@@ -278,6 +367,8 @@ Specify where the records should be written. The following example shows how you
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   recordsInputPath: path.join(__dirname, 'records.json'),
@@ -337,7 +428,7 @@ module.exports = {
 
 `string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 
-Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#stats) option but for infrastructure. No default value is given.
+Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) option but for infrastructure. No default value is given.
 
 __webpack.config.js__
 

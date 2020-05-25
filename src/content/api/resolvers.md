@@ -12,7 +12,7 @@ The `enhanced-resolve` package can be used directly to create new resolvers,
 however any [`compiler` instance](/api/node/#compiler-instance) has a few resolver instances that can be
 tapped into.
 
-Before reading on, make sure you at least skim through the
+Before reading on, make sure to have a look at the
 [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) and [`tapable`](/api/plugins/#tapable) documentation.
 
 
@@ -20,12 +20,12 @@ Before reading on, make sure you at least skim through the
 
 There are three types of built-in resolvers available on the `compiler` class:
 
-- Normal: Resolves a module via an absolute or relative path.
-- Context: Resolves a module within a given context.
-- Loader: Resolves a webpack [loader](/loaders).
+- `normal`: Resolves a module via an absolute or relative path.
+- `context`: Resolves a module within a given context.
+- `loader`: Resolves a webpack [loader](/loaders).
 
-Depending on need, any one of these built-in resolver used by the `compiler`
-can be customized via plugins as such:
+Depending on need, any one of these built-in resolvers, that are used by the `compiler`,
+can be customized via plugins:
 
 ``` js
 compiler.resolverFactory.plugin('resolver [type]', resolver => {
@@ -35,15 +35,10 @@ compiler.resolverFactory.plugin('resolver [type]', resolver => {
 });
 ```
 
-Where `[type]` is one of the three resolvers mention above, specified as:
+Where `[type]` is one of the three resolvers mentioned above.
 
-- `normal`
-- `context`
-- `loader`
-
-
-See the `enhanced-resolve` [documentation](https://github.com/webpack/enhanced-resolve) for a full list of hooks and
-descriptions.
+See the [`enhanced-resolve` documentation](https://github.com/webpack/enhanced-resolve) for a full list of hooks and their
+description.
 
 
 ## Configuration Options
@@ -54,6 +49,6 @@ users to change the resolving behavior through a variety of options including
 through resolve `plugins`.
 
 The resolver plugins, e.g. [`DirectoryNamedPlugin`](https://github.com/shaketbaby/directory-named-webpack-plugin), can be included
-directly in `resolve.plugins` rather than using standard plugins. Note that the
-`resolve` configuration affects the `normal` and `context` resolvers while
-`resolveLoader` is used to modify the `loader` resolver.
+directly in `resolve.plugins` rather than using directly in [`plugins` configuration option](/configuration/plugins/#plugins).
+
+T> Note that the `resolve` configuration affects the `normal` and `context` resolvers while `resolveLoader` is used to modify the `loader` resolver.

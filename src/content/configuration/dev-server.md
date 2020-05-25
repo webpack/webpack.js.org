@@ -14,6 +14,12 @@ contributors:
   - dmohns
   - EslamHiko
   - digitaljohn
+  - bhavya9107
+  - wizardofhogwarts
+  - jamesgeorge007
+  - g100g
+  - anikethsaha
+  - snitin315
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -56,9 +62,13 @@ that will give some background on where the server is located and what it's serv
 
 If you're using dev-server through the Node.js API, the options in `devServer` will be ignored. Pass the options as a second parameter instead: `new WebpackDevServer(compiler, {...})`. [See here](https://github.com/webpack/webpack-dev-server/tree/master/examples/api/simple) for an example of how to use webpack-dev-server through the Node.js API.
 
+W> You cannot use the second `compiler` argument (a callback) when using `WebpackDevServer`.
+
 W> Be aware that when [exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations) only the `devServer` options for the first configuration will be taken into account and used for all the configurations in the array.
 
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
+
+T> If you want to manually recompile the bundle, navigating to the `/invalidate` route will [invalidate](/api/node/#invalidate-watching) the current compilation of the bundle and recompile it for you via [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate). Depending on your configuration, URL may look like `http://localhost:9000/invalidate`.
 
 T> HTML template is required to serve the bundle, usually it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
 
@@ -246,11 +256,13 @@ Tell the server where to serve content from. This is only necessary if you want 
 
 T> It is recommended to use an absolute path.
 
-By default it will use your current working directory to serve content. To disable `contentBase` set it to `false`.
+By default, it will use your current working directory to serve content. To disable `contentBase` set it to `false`.
 
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   devServer: {
@@ -259,11 +271,13 @@ module.exports = {
 };
 ```
 
-It is also possible to serve from multiple directories:
+It is also possible to serve from multiple directories in case you want to serve static content at multiple URLs with [`contentBasePublicPath`](#devservercontentbasepublicpath):
 
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   devServer: {
@@ -278,6 +292,43 @@ Usage via the CLI
 webpack-dev-server --content-base /path/to/content/dir
 ```
 
+
+## `devServer.contentBasePublicPath`
+
+`string = '/'` `[string]`
+
+Tell the server at what URL to serve `devServer.contentBase` static content. If there was a file `assets/manifest.json`, it would be served at `/serve-content-base-at-this-url/manifest.json`
+
+__webpack.config.js__
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  devServer: {
+    contentBase: path.join(__dirname, 'assets'),
+    contentBasePublicPath: '/serve-content-base-at-this-url'
+  }
+};
+```
+
+Provide an array of strings in case you have multiple static folders set in [`contentBase`](#devservercontentbase).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    contentBase: [contentBasePublic, contentBaseOther],
+    contentBasePublicPath: [
+      contentBasePublicPath,
+      contentBasePublicOtherPath
+    ]
+  }
+};
+```
 
 ## `devServer.disableHostCheck`
 
@@ -460,7 +511,7 @@ T> Note that [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacem
 
 `boolean`
 
-Enables Hot Module Replacement (see [`devServer.hot`](#devserverhot)) without page refresh as fallback in case of build failures.
+Enables Hot Module Replacement (see [`devServer.hot`](#devserverhot)) without page refresh as a fallback in case of build failures.
 
 __webpack.config.js__
 
@@ -536,7 +587,7 @@ webpack-dev-server --http2 --key /path/to/server.key --cert /path/to/server.crt 
 
 `boolean` `object`
 
-By default dev-server will be served over HTTP. It can optionally be served over HTTP/2 with HTTPS:
+By default, dev-server will be served over HTTP. It can optionally be served over HTTP/2 with HTTPS:
 
 __webpack.config.js__
 
@@ -549,7 +600,7 @@ module.exports = {
 };
 ```
 
-With the above setting a self-signed certificate is used, but you can provide your own:
+With the above setting, a self-signed certificate is used, but you can provide your own:
 
 __webpack.config.js__
 
@@ -557,11 +608,10 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    https: {
-      key: fs.readFileSync('/path/to/server.key'),
-      cert: fs.readFileSync('/path/to/server.crt'),
-      ca: fs.readFileSync('/path/to/ca.pem'),
-    }
+    https: true,
+    key: fs.readFileSync('/path/to/server.key'),
+    cert: fs.readFileSync('/path/to/server.crt'),
+    ca: fs.readFileSync('/path/to/ca.pem'),
   }
 };
 ```
@@ -650,7 +700,7 @@ W> Make sure that [`devServer.hot`](#devserverhot) is set to `true` because `dev
 
 `boolean`
 
-Toggle between the dev-server's two different modes. By default the application will be served with _inline mode_ enabled. This means that a script will be inserted in your bundle to take care of live reloading, and build messages will appear in the browser console.
+Toggle between the dev-server's two different modes. By default, the application will be served with _inline mode_ enabled. This means that a script will be inserted in your bundle to take care of live reloading, and build messages will appear in the browser console.
 
 It is also possible to use __iframe mode__, which uses an `<iframe>` under a notification bar with messages about the build. To switch to __iframe mode__:
 
@@ -750,7 +800,7 @@ module.exports = {
 
 `boolean = false`
 
-Tells dev-server to supress messages like the webpack bundle information. Errors and warnings will still be shown.
+Tells dev-server to suppress messages like the webpack bundle information. Errors and warnings will still be shown.
 
 __webpack.config.js__
 
@@ -785,7 +835,7 @@ module.exports = {
 
 ## `devServer.open`
 
-`boolean: false` `string`
+`boolean = false` `string` `object`
 
 Tells dev-server to open the browser after server had been started. Set it to `true` to open your default browser.
 
@@ -809,6 +859,21 @@ module.exports = {
   //...
   devServer: {
     open: 'Google Chrome'
+  }
+};
+```
+
+If you want to use flags when opening the browser like opening an incognito window (`--incognito` flag), you can set `open` to an object. The object accepts all [open](https://www.npmjs.com/package/open) options, `app` property must be an array. The first element in the array must be the browser name and the other following elements are the flags you want to use. For example:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    open: {
+      app: ['Google Chrome', '--incognito', '--other-flag']
+    }
   }
 };
 ```
@@ -977,7 +1042,7 @@ webpack-dev-server --port 8080
 
 Proxying some URLs can be useful when you have a separate API backend development server and you want to send API requests on the same domain.
 
-The dev-server makes use of the powerful [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) package. Check out its [documentation](https://github.com/chimurai/http-proxy-middleware#options) for more advanced usages. Note that some of `http-proxy-middleware`'s features do not require a `target` key, e.g. its `router` feature, but you will still need to include a `target` key in your config here, otherwise `webpack-dev-server` won't pass it along to `http-proxy-middleware`).
+The dev-server makes use of the powerful [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) package. Check out its [documentation](https://github.com/chimurai/http-proxy-middleware#options) for more advanced usages. Note that some of `http-proxy-middleware`'s features do not require a `target` key, e.g. its `router` feature, but you will still need to include a `target` key in your configuration here, otherwise `webpack-dev-server` won't pass it along to `http-proxy-middleware`).
 
 With a backend on `localhost:3000`, you can use this to enable proxying:
 
@@ -1014,7 +1079,7 @@ module.exports = {
 };
 ```
 
-A backend server running on HTTPS with an invalid certificate will not be accepted by default. If you want to, modify your config like this:
+A backend server running on HTTPS with an invalid certificate will not be accepted by default. If you want to, modify your configuration like this:
 
 __webpack.config.js__
 
@@ -1034,13 +1099,13 @@ module.exports = {
 
 Sometimes you don't want to proxy everything. It is possible to bypass the proxy based on the return value of a function.
 
-In the function you get access to the request, response and proxy options.
+In the function you get access to the request, response, and proxy options.
 
 - Return `null` or `undefined` to continue processing the request with proxy.
 - Return `false` to produce a 404 error for the request.
 - Return a path to serve from, instead of continuing to proxy the request.
 
-E.g. for a browser request, you want to serve a HTML page, but for an API request you want to proxy it. You could do something like this:
+E.g. for a browser request, you want to serve an HTML page, but for an API request you want to proxy it. You could do something like this:
 
 __webpack.config.js__
 
@@ -1345,6 +1410,8 @@ module.exports = {
 
 ## `devServer.staticOptions`
 
+`object`
+
 It is possible to configure advanced options for serving static files from `contentBase`. See the [Express documentation](http://expressjs.com/en/4x/api.html#express.static) for the possible options.
 
 __webpack.config.js__
@@ -1548,7 +1615,7 @@ webpack-dev-server --watch-content-base
 
 Control options related to watching the files.
 
-webpack uses the file system to get notified of file changes. In some cases this does not work. For example, when using Network File System (NFS). [Vagrant](https://www.vagrantup.com/) also has a lot of problems with this. In these cases, use polling:
+webpack uses the file system to get notified of file changes. In some cases, this does not work. For example, when using Network File System (NFS). [Vagrant](https://www.vagrantup.com/) also has a lot of problems with this. In these cases, use polling:
 
 __webpack.config.js__
 
@@ -1570,7 +1637,7 @@ See [WatchOptions](/configuration/watch/) for more options.
 
 ## `devServer.writeToDisk` 🔑
 
-`boolean = false` `function (filePath)`
+`boolean = false` `function (filePath) => boolean`
 
 Tells `devServer` to write generated assets to the disk. The output is written to the [output.path](/configuration/output/#outputpath) directory.
 

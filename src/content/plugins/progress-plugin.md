@@ -4,6 +4,7 @@ contributors:
   - elliottsj
   - EugeneHlushko
   - byzyk
+  - smelukov
 ---
 
 `
@@ -39,26 +40,41 @@ new webpack.ProgressPlugin(handler);
 
 When providing an `object` to the `ProgressPlugin`, following properties are supported:
 
-- `activeModules` show's active modules count and one active module in progress message
-- `entries` show's entries count in progress message
-- [`handler: function (percentage, message, ...args)`](#providing-function)
-- `modules` show's modules count in progress message
-- `modulesCount` a minimum modules count to start with. Takes effect when `modules` property is enabled.
-- `profile` tells `ProgressPlugin` to collect profile data for progress steps.
-
+- `activeModules` (`boolean = false`): Shows active modules count and one active module in progress message.
+- `entries` (`boolean = true`): Shows entries count in progress message.
+- `handler` (See [Providing function](#providing-function))
+- `modules` (`boolean = true`): Shows modules count in progress message.
+- `modulesCount` (`number = 5000`): A minimum modules count to start with. Takes effect when `modules` property is enabled.
+- `profile` (`boolean = false`): Tells `ProgressPlugin` to collect profile data for progress steps.
+- `dependencies` (`boolean = true`): Shows the count of dependencies in progress message.
+- `dependenciesCount` (`number = 10000`): A minimum dependencies count to start with. Takes effect when `dependencies` property is enabled.
+- `percentBy` (`string = null: 'entries' | 'dependencies' | 'modules' | null`): Tells `ProgressPlugin` how to calculate progress percentage.
 
 ```js
 new webpack.ProgressPlugin({
+  activeModules: false,
   entries: true,
-  modules: true,
-  modulesCount: 100,
-  profile: true,
-  handler: (percentage, message, ...args) => {
+  handler(percentage, message, ...args) {
     // custom logic
-  }
+  },
+  modules: true,
+  modulesCount: 5000,
+  profile: false,
+  dependencies: true,
+  dependenciesCount: 10000,
+  percentBy: null
 });
 ```
 
+## Percentage calculation
+
+By default, progress percentage is calculated based on built modules count and total modules count: `built / total`
+
+The total modules count is unknown in advance and changes during the build. This may cause inaccurate progress percentage.
+
+To solve this problem `ProgressPlugin` caches the last known total modules count and reuses this value on the next build. The first build will warm the cache but the following builds will use and update this value.
+
+> We recommend using `percentBy: 'entries'` setting for projects with [multiple configured entry points](/configuration/entry-context/#entry). Percentage calculation will become more accurate because the amount of entry points is known in advance.
 
 ## Supported Hooks
 

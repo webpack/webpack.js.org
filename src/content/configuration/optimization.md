@@ -8,6 +8,10 @@ contributors:
   - byzyk
   - madhavarshney
   - dhurlburtusa
+  - jamesgeorge007
+  - anikethsaha
+  - snitin315
+  - pixel-ray
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -20,7 +24,7 @@ Since version 4 webpack runs optimizations for you depending on the chosen  [`mo
 
 `boolean`
 
-Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimization-minimizer).
+Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
 
 This is `true` by default in `production` mode.
 
@@ -195,7 +199,7 @@ module.exports = {
 
 ## `optimization.moduleIds`
 
-`boolean = false` `string: 'natural' | 'named' | 'hashed' | 'size' | 'total-size'`
+`boolean = false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
 
 Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. By default `optimization.moduleIds` is set to `false`.
 
@@ -205,10 +209,8 @@ Option                | Description
 --------------------- | -----------------------
 `natural`             | Numeric ids in order of usage.
 `named`               | Readable ids for better debugging.
-`hashed`              | Short hashes as ids for better long term caching.
 `deterministic`       | Module names are hashed into small numeric values.
 `size`                | Numeric ids focused on minimal initial download size.
-`total-size`          | Numeric ids focused on minimal total download size.
 
 __webpack.config.js__
 
@@ -239,14 +241,19 @@ module.exports = {
 };
 ```
 
+W> `moduleIds: 'deterministic'` was added in webpack 5 and `moduleIds: 'hashed'` is deprecated in favor of it.
+
+W> `moduleIds: total-size` has been removed in webpack 5.
+
 ## `optimization.chunkIds`
 
-`boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size'`
+`boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic' `
 
 Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are couple of defaults for `optimization.chunkIds`:
 
 - if [`optimization.occurrenceOrder`](#optimizationoccurrenceorder) is enabled `optimization.chunkIds` is set to `'total-size'`
 - Disregarding previous if, if [`optimization.namedChunks`](#optimizationnamedchunks) is enabled `optimization.chunkIds` is set to `'named'`
+- Also if the environment is development then `optimization.chunkIds` is set to `'named'`, while in production it is set to `'deterministic'`
 - if none of the above, `optimization.chunkIds` will be defaulted to `'natural'`
 
 The following string values are supported:
@@ -255,8 +262,10 @@ Option                  | Description
 ----------------------- | -----------------------
 `'natural'`             | Numeric ids in order of usage.
 `'named'`               | Readable ids for better debugging.
+`'deterministic'`       | Short numeric ids which will not be changing between compilation. Good for long term caching. Enable by default for production mode.
 `'size'`                | Numeric ids focused on minimal initial download size.
 `'total-size'`          | numeric ids focused on minimal total download size.
+
 
 __webpack.config.js__
 
@@ -266,6 +275,24 @@ module.exports = {
   optimization: {
     chunkIds: 'named'
   }
+};
+```
+
+By default, a minimum length of 3 digits is used when `optimization.chunkIds` is set to `'deterministic'`. To override the default behaviour, set `optimization.chunkIds` to `false` and use the `webpack.ids.DeterministicChunkIdsPlugin`.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    chunkIds: false
+  },
+  plugins: [
+    new webpack.ids.DeterministicChunkIdsPlugin({
+      maxLength: 5
+    })
+  ]
 };
 ```
 
@@ -414,11 +441,10 @@ module.exports = {
 
 ## `optimization.usedExports`
 
-`boolean`
+`boolean = true`
 
 Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimizationoccurrenceorder). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
 Dead code elimination in minimizers will benefit from this and can remove unused exports.
-By default `optimization.usedExports` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
 
 __webpack.config.js__
 
@@ -426,7 +452,7 @@ __webpack.config.js__
 module.exports = {
   //...
   optimization: {
-    usedExports: true
+    usedExports: false
   }
 };
 ```
@@ -451,7 +477,7 @@ module.exports = {
 
 ## `optimization.sideEffects`
 
-`boolean`
+`boolean = true`
 
 Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used.
 
@@ -468,8 +494,6 @@ __package.json__
 T> Please note that `sideEffects` should be in the npm module's `package.json` file and doesn't mean that you need to set `sideEffects` to `false` in your own project's `package.json` which requires that big module.
 
 `optimization.sideEffects` depends on [`optimization.providedExports`](#optimizationprovidedexports) to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.
-
-By default `optimization.sideEffects` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
 
 __webpack.config.js__
 
@@ -503,11 +527,11 @@ module.exports = {
 
 ## `optimization.mangleExports`
 
-`bool`
+`boolean`
 
 `optimization.mangleExports` allows to control export mangling.
 
-By default `optimization.mangleExports` is enabled in `production` [mode](/concepts/mode/) and disabled elsewise.
+By default `optimization.mangleExports` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
 
 __webpack.config.js__
 
@@ -516,6 +540,23 @@ module.exports = {
   //...
   optimization: {
     mangleExports: true
+  }
+};
+```
+
+## `optimization.innerGraph`
+
+`boolean = true`
+
+`optimization.innerGraph` tells webpack whether to conduct inner graph analysis for unused exports.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    innerGraph: false
   }
 };
 ```

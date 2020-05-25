@@ -179,7 +179,7 @@ __webpack.config.js__
 +   module: {
 +     rules: [
 +       {
-+         test: require.resolve('index.js'),
++         test: require.resolve('./src/index.js'),
 +         use: 'imports-loader?this=>window',
 +       },
 +     ],
@@ -237,11 +237,11 @@ __webpack.config.js__
     module: {
       rules: [
         {
-          test: require.resolve('index.js'),
+          test: require.resolve('./src/index.js'),
           use: 'imports-loader?this=>window',
         },
 +       {
-+         test: require.resolve('globals.js'),
++         test: require.resolve('./src/globals.js'),
 +         use: 'exports-loader?file,parse=helpers.parse',
 +       },
       ],
@@ -355,11 +355,11 @@ __webpack.config.js__
     module: {
       rules: [
         {
-          test: require.resolve('index.js'),
+          test: require.resolve('./src/index.js'),
           use: 'imports-loader?this=>window',
         },
         {
-          test: require.resolve('globals.js'),
+          test: require.resolve('./src/globals.js'),
           use: 'exports-loader?file,parse=helpers.parse',
         },
       ],

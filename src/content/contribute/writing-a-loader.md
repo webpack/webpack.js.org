@@ -5,6 +5,9 @@ contributors:
   - asulaiman
   - michael-ciniawsky
   - byzyk
+  - anikethsaha
+  - jamesgeorge007
+  - chenxsan
 ---
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
@@ -19,6 +22,8 @@ To test a single loader, you can simply use `path` to `resolve` a local file wit
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   module: {
@@ -42,6 +47,8 @@ To test multiple, you can utilize the `resolveLoader.modules` configuration to u
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   resolveLoader: {
@@ -54,6 +61,9 @@ module.exports = {
 ```
 
 Last but not least, if you've already created a separate repository and package for your loader, you could [`npm link`](https://docs.npmjs.com/cli/link) it to the project in which you'd like to test it out.
+
+
+T> You can use [`webpack-defaults` package](https://github.com/webpack-contrib/webpack-defaults) to generate boilerplate code necessary to start writing your loader.
 
 
 ## Simple Usage
@@ -120,7 +130,7 @@ Take advantage of the fact that loaders can be chained together. Instead of writ
 
 Take the case of rendering a template file with data specified via loader options or query parameters. It could be written as a single loader that compiles the template from source, executes it and returns a module that exports a string containing the HTML code. However, in accordance with guidelines, a simple `apply-loader` exists that can be chained with other open source loaders:
 
-- `jade-loader`: Convert template to a module that exports a function.
+- `pug-loader`: Convert template to a module that exports a function.
 - `apply-loader`: Executes the function with loader options and returns raw HTML.
 - `html-loader`: Accepts HTML and outputs a valid JavaScript module.
 
@@ -203,7 +213,34 @@ T> If the language only accepts relative urls (e.g. `url(file)` always refers to
 
 ### Common Code
 
-Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and generate a `require` to that shared module.
+Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and generate a `require` to that shared module:
+
+__src/loader-runtime.js__
+
+```js
+const {someOtherModule} = require('./some-other-module');
+
+module.exports = function runtime(params) {
+  const x = params.y * 2;
+
+  return someOtherModule(params, x);
+};
+```
+
+__src/loader.js__
+
+```js
+import runtime from './loader-runtime.js';
+
+export default function loader(source) {
+  // Custom loader logic
+
+  return `${runtime({
+    source,
+    y: Math.random()
+  })}`;
+}
+```
 
 ### Absolute Paths
 
@@ -229,22 +266,24 @@ For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpa
 So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a simple unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest](https://jestjs.io/) framework to do this. We'll also install `babel-jest` and some presets that will allow us to use the `import` / `export` and `async` / `await`. Let's start by installing and saving these as a `devDependencies`:
 
 ``` bash
-npm install --save-dev jest babel-jest babel-preset-env
+npm install --save-dev jest babel-jest @babel/core @babel/preset-env
 ```
 
-__.babelrc__
+__babel.config.js__
 
-```json
-{
-  "presets": [[
-    "env",
-    {
-      "targets": {
-        "node": "4"
-      }
-    }
-  ]]
-}
+```js
+module.exports = {
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          node: 'current',
+        },
+      },
+    ],
+  ],
+};
 ```
 
 Our loader will process `.txt` files and simply replace any instance of `[name]` with the `name` option given to the loader. Then it will output a valid JavaScript module containing the text as its default export:
@@ -267,14 +306,14 @@ We'll use this loader to process the following file:
 
 __test/example.txt__
 
-``` bash
+```bash
 Hey [name]!
 ```
 
-Pay close attention to this next step as we'll be using the [Node.js API](/api/node) and [`memory-fs`](https://github.com/webpack/memory-fs) to execute webpack. This lets us avoid emitting `output` to disk and will give us access to the `stats` data which we can use to grab our transformed module:
+Pay close attention to this next step as we'll be using the [Node.js API](/api/node) and [`memfs`](https://github.com/streamich/memfs) to execute webpack. This lets us avoid emitting `output` to disk and will give us access to the `stats` data which we can use to grab our transformed module:
 
 ``` bash
-npm install --save-dev webpack memory-fs
+npm install --save-dev webpack memfs
 ```
 
 __test/compiler.js__
@@ -282,7 +321,7 @@ __test/compiler.js__
 ```js
 import path from 'path';
 import webpack from 'webpack';
-import memoryfs from 'memory-fs';
+import { createFsFromVolume, Volume } from 'memfs';
 
 export default (fixture, options = {}) => {
   const compiler = webpack({
@@ -305,7 +344,8 @@ export default (fixture, options = {}) => {
     }
   });
 
-  compiler.outputFileSystem = new memoryfs();
+  compiler.outputFileSystem = createFsFromVolume(new Volume());
+  compiler.outputFileSystem.join = path.join.bind(path);
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
@@ -325,13 +365,16 @@ And now, finally, we can write our test and add an npm script to run it:
 __test/loader.test.js__
 
 ```js
+/**
+ * @jest-environment node
+ */
 import compiler from './compiler.js';
 
 test('Inserts name and outputs JavaScript', async () => {
   const stats = await compiler('example.txt');
   const output = stats.toJson().modules[0].source;
 
-  expect(output).toBe('export default "Hey Alice!\\n"');
+  expect(output).toBe('export default "Hey Alice!\"');
 });
 ```
 

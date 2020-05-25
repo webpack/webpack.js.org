@@ -69,8 +69,6 @@ new webpack.optimize.CommonsChunkPlugin(options);
 }
 ```
 
-T> The deprecated webpack 1 constructor `new webpack.optimize.CommonsChunkPlugin(options, filenameTemplate, selectedChunks, minChunks)` is no longer supported. Use a corresponding options object instead.
-
 
 ## Examples
 
