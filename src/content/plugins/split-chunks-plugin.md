@@ -85,8 +85,6 @@ W> When files paths are processed by webpack, they always contain `/` on Unix sy
 
 W> Since webpack 5, passing an entry name to `{cacheGroup}.test` and using a name of an existing chunk for `{cacheGroup}.name` is no longer allowed.
 
-W> Using a name of an existing chunk is no longer allowed for `{cacheGroup}.name` (it will throw an error).
-
 ### `splitChunks.automaticNameDelimiter`
 
 `string`
