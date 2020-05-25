@@ -874,12 +874,6 @@ __system_context__.import('./other-file.js').then(m => {
 });
 ```
 
-### Asyncrhonous
-
-`libraryTarget: 'promise'` - same as `libraryTarget: 'var'` but waits for the result.
-
-`libraryTarget: 'import'` - uses `import()` to load a native EcmaScript module.
-
 ### Other Targets
 
 `libraryTarget: 'jsonp'` - This will wrap the return value of your entry point into a jsonp wrapper.
@@ -895,7 +889,7 @@ The dependencies for your library will be defined by the [`externals`](/configur
 
 `string = 'import'`
 
-The name of the native `import()` function used for importing the [`'import'` type externals](/configuration/output/#asyncrhonous).
+The name of the native `import()` function. Can be used for polyfilling, e.g. with [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
 
 __webpack.config.js__
 

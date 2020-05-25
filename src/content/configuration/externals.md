@@ -290,6 +290,8 @@ module.exports = {
 };
 ```
 
+W> [Default type](/configuration/externals/#externalstype) will be used if you sepcify `externals` without a type e.g. `externals: { react: 'react' }` instead of `externals: { react: 'commonjs-module react' }`.
+
 For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
 
 
@@ -297,17 +299,34 @@ For more information on how to use this configuration, please refer to the artic
 
 `string = 'var'`
 
-Specifies the default type of externals, depends on [`output.libraryTarget`](/configuration/output/#outputlibrarytarget) being set to the same value.
+Specifies the default type of externals. `amd`, `root` and `system` externals __depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget) of the external__ being set to the same value e.g. you can consume `amd` externals within an `amd` library.
+
+Supported types:
+
+- `'var'`
+- `'module'`
+- `'assign'`
+- `'this'`
+- `'window'`
+- `'self'`
+- `'global'`
+- `'commonjs'`
+- `'commonjs2'`
+- `'commonjs-module'`
+- `'amd'`
+- `'amd-require'`
+- `'umd'`
+- `'umd2'`
+- `'jsonp'`
+- `'system'`
+- `'promise'` - same as `'var'` but awaits the result
+- `'import'` - uses `import()` to load a native EcmaScript module
 
 __webpack.config.js__
 
 ```javascript
 module.exports = {
   //...
-  output: {
-    //...
-    libraryTarget: 'promise'
-  }
   externalsType: `promise`
 };
 ```
