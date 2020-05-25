@@ -17,6 +17,7 @@ contributors:
   - farskid
   - LukeMwila
   - Jalitha
+  - muhmushtaha
 ---
 
 At its core, __webpack__ is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a [dependency graph](/concepts/dependency-graph/) which maps every module your project needs and generates one or more _bundles_.
@@ -130,7 +131,7 @@ While loaders are used to transform certain types of modules, plugins can be lev
 
 T> Check out the [plugin interface](/api/plugins) and how to use it to extend webpack's capabilities.
 
-In order to use a plugin, you need to `require()` it and add it to the `plugins` array. Most plugins are customizable through options. Since you can use a plugin multiple times in a config for different purposes, you need to create an instance of it by calling it with the `new` operator.
+In order to use a plugin, you need to `require()` it and add it to the `plugins` array. Most plugins are customizable through options. Since you can use a plugin multiple times in a configuration for different purposes, you need to create an instance of it by calling it with the `new` operator.
 
 __webpack.config.js__
 
@@ -154,7 +155,7 @@ In the example above, the `html-webpack-plugin` generates an HTML file for your 
 
 T> There are many plugins that webpack provides out of the box! Check out the [list of plugins](/plugins).
 
-Using plugins in your webpack config is straightforward. However, there are many use cases that are worth further exploration. [Learn more about them here](/concepts/plugins).
+Using plugins in your webpack configuration is straightforward. However, there are many use cases that are worth further exploration. [Learn more about them here](/concepts/plugins).
 
 
 ## Mode

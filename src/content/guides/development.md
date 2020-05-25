@@ -168,6 +168,36 @@ __package.json__
   }
 ```
 
+Change your configuration file to tell `CleanWebpackPlugin` we dont want to remove `index.html` file after incremental build triggered by watch, we do it via using the [`cleanStaleWebpackAssets` option](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional):
+
+__webpack.config.js__
+
+``` diff
+  const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+  module.exports = {
+    mode: 'development',
+    entry: {
+      app: './src/index.js',
+      print: './src/print.js',
+    },
+    devtool: 'inline-source-map',
+    plugins: [
+-     new CleanWebpackPlugin(),
++     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+      new HtmlWebpackPlugin({
+        title: 'Development',
+      }),
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist'),
+    },
+  };
+```
+
 Now run `npm run watch` from the command line and see how webpack compiles your code.
 You can see that it doesn't exit the command line because the script is currently watching your files.
 
@@ -195,7 +225,7 @@ The `webpack-dev-server` provides you with a simple web server and the ability t
 npm install --save-dev webpack-dev-server
 ```
 
-Change your config file to tell the dev server where to look for files:
+Change your configuration file to tell the dev server where to look for files:
 
 __webpack.config.js__
 
@@ -215,8 +245,7 @@ __webpack.config.js__
 +     contentBase: './dist',
 +   },
     plugins: [
-      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(),
+      new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
       new HtmlWebpackPlugin({
         title: 'Development',
       }),
@@ -303,7 +332,7 @@ __webpack.config.js__
       contentBase: './dist',
     },
     plugins: [
-      new CleanWebpackPlugin(),
+      new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
       new HtmlWebpackPlugin({
         title: 'Output Management',
       }),

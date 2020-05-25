@@ -18,6 +18,11 @@ contributors:
   - EugeneHlushko
   - g-plane
   - smelukov
+  - Neob91
+  - anikethsaha
+  - jamesgeorge007
+  - hiroppy
+  - chenxsan
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -45,7 +50,7 @@ module.exports = {
 
 which will yield the following:
 
-__webpack.config.js__
+__someLibName.js__
 
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -123,6 +128,25 @@ module.exports = {
   output: {
     //...
     chunkLoadTimeout: 30000
+  }
+};
+```
+
+
+## `output.chunkCallbackName`
+
+`string = 'webpackChunkwebpack'`
+
+The callback function name used by webpack for loading of chunks in Web Workers.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkCallbackName: 'myCustomFunc'
   }
 };
 ```
@@ -215,7 +239,7 @@ For example, if you have 2 libraries, with namespaces `library1` and `library2`,
 
 ## `output.filename`
 
-`string` `function (chunkData) => string`
+`string` `function (pathData, assetInfo) => string`
 
 This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#outputpath) option.
 
@@ -307,8 +331,8 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    filename: (chunkData) => {
-      return chunkData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
+    filename: (pathData) => {
+      return pathData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
     },
   }
 };
@@ -319,6 +343,8 @@ Make sure to read the [Caching guide](/guides/caching) for details. There are mo
 Note this option is called filename but you are still allowed to use something like `'js/[name]/bundle.js'` to create a folder structure.
 
 Note this option does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case you would have to try the specific loader's available options.
+
+## Template strings
 
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
@@ -350,7 +376,7 @@ The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides
 
 `string = 'window'`
 
-When targeting a library, especially the `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`.
+When targeting a library, especially when `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`.
 
 For example:
 
@@ -364,6 +390,28 @@ module.exports = {
     libraryTarget: 'umd',
     filename: 'myLib.js',
     globalObject: 'this'
+  }
+};
+```
+
+## `output.uniqueName`
+
+`string`
+
+A unique name of the webpack build to avoid multiple webpack runtimes to conflict when using globals. It defaults to [`output.library`](/configuration/output/#outputlibrary) name or the package name from `package.json` in the context, if both aren't found, it is set to an `''`.
+
+`output.uniqueName` will be used to generate unique globals for:
+
+- [`output.jsonpFunction`](/configuration/output/#outputjsonpfunction)
+- [`output.chunkCallbackName`](/configuration/output/#outputchunkcallbackname)
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  // ...
+  output: {
+    uniqueName: 'my-package-xyz'
   }
 };
 ```
@@ -407,7 +455,7 @@ An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.
 
 ## `output.hotUpdateChunkFilename`
 
-`string = '[id].[hash].hot-update.js'` `function (chunkData) => string`
+`string = '[id].[hash].hot-update.js'`
 
 Customize the filenames of hot update chunks. See [`output.filename`](#outputfilename) option for details on the possible values.
 
@@ -419,9 +467,7 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    hotUpdateChunkFilename: (chunkData) => {
-      return `${chunkData.chunk.name === 'main' ? '' : '[name]/'}[id].[hash].hot-update.js`;
-    }
+    hotUpdateChunkFilename: '[id].[hash].hot-update.js'
   }
 };
 ```
@@ -518,7 +564,7 @@ T> Read the [authoring libraries guide](/guides/author-libraries/) guide for mor
 
 `string` `[string]`
 
-Configure which module or modules will be exposed via the `libraryTarget`. It is `undefined` by default, same behaviour will be applied if you set `libraryTarget` to an empty string e.g. `''` it will export the whole (namespace) object. The examples below demonstrate the effect of this config when using `libraryTarget: 'var'`.
+Configure which module or modules will be exposed via the `libraryTarget`. It is `undefined` by default, same behaviour will be applied if you set `libraryTarget` to an empty string e.g. `''` it will export the whole (namespace) object. The examples below demonstrate the effect of this configuration when using `libraryTarget: 'var'`.
 
 The following configurations are supported:
 
@@ -572,7 +618,6 @@ MyLibrary.doSomething();
 ```
 
 W> When using this option, an empty `output.library` will result in no assignment.
-
 
 `libraryTarget: 'assign'` - This will generate an implied global which has the potential to reassign an existing value (use with caution).
 
@@ -817,8 +862,17 @@ System.register('my-library', [], function(_export) {
 });
 ```
 
-Module proof library.
+You can access [SystemJS context](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md#format-definition) via `__system_context__`:
 
+```javascript
+// Log the URL of the current SystemJS module
+console.log(__system_context__.meta.url);
+
+// Import a SystemJS module, with the current SystemJS module's url as the parentUrl
+__system_context__.import('./other-file.js').then(m => {
+  console.log(m);
+});
+```
 
 ### Other Targets
 
@@ -831,15 +885,35 @@ MyLibrary(_entry_return_);
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
 
 
+## `output.importFunctionName`
+
+`string = 'import'`
+
+The name of the native `import()` function. Can be used for polyfilling, e.g. with [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    importFunctionName: '__import__'
+  }
+};
+```
+
+
 ## `output.path`
 
-`string: path.join(process.cwd(), 'dist')`
+`string = path.join(process.cwd(), 'dist')`
 
 The output directory as an __absolute__ path.
 
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   output: {
@@ -888,6 +962,8 @@ Simple rule: The URL of your [`output.path`](#outputpath) from the view of the H
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   output: {
@@ -1041,6 +1117,21 @@ module.exports = {
 };
 ```
 
+## `output.enabledLibraryTypes`
+
+`[string]`
+
+List of library types enabled for use by entry points.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledLibraryTypes: ['module']
+  }
+};
+```
+
 ## `output.futureEmitAssets`
 
 `boolean = false`
@@ -1060,6 +1151,8 @@ module.exports = {
 
 ## `output.ecmaVersion`
 
+`number = 6`
+
 Tell webpack the maximum EcmaScript version of the webpack generated code. It should be one of these:
 
 - should be >= 5, should be <= 11
@@ -1072,6 +1165,8 @@ module.exports = {
   }
 };
 ```
+
+T> The default value of `output.ecmaVersion` in webpack 4 is `5`.
 
 ## `output.compareBeforeEmit`
 

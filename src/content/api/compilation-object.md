@@ -264,14 +264,6 @@ Parameters:
 - `block` - block tie for `Chunk`.
 - `chunk` - a chunk to remove from dependencies.
 
-### applyModuleIds
-
-`function`
-
-### applyChunkIds
-
-`function`
-
 ### sortItemsWithModuleIds
 
 `function`
@@ -303,6 +295,19 @@ Parameters:
 ### getPath
 
 `function (filename, data)`
+
+Returns interpolated path.
+
+Parameters:
+
+- `filename` - used to get asset path with hash.
+- `data` - data object.
+
+### getPathWithInfo
+
+`function (filename, data)`
+
+Returns interpolated path and asset information.
 
 Parameters:
 
