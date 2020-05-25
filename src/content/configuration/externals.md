@@ -299,7 +299,7 @@ For more information on how to use this configuration, please refer to the artic
 
 `string = 'var'`
 
-Specifies the default type of externals. `amd`, `root` and `system` externals __depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget) of the external__ being set to the same value e.g. you can consume `amd` externals within an `amd` library.
+Specifies the default type of externals. `amd`, `root` and `system` externals __depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)__ being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
 
 Supported types:
 
@@ -311,7 +311,6 @@ Supported types:
 - `'self'`
 - `'global'`
 - `'commonjs'`
-- `'commonjs2'`
 - `'commonjs-module'`
 - `'amd'`
 - `'amd-require'`
@@ -319,8 +318,8 @@ Supported types:
 - `'umd2'`
 - `'jsonp'`
 - `'system'`
-- `'promise'` - same as `'var'` but awaits the result
-- `'import'` - uses `import()` to load a native EcmaScript module
+- `'promise'` - same as `'var'` but awaits the result (async module, depends on [`experiments.importAsync`](/configuration/experiments/))
+- `'import'` - uses `import()` to load a native EcmaScript module (async module, depends on [`experiments.importAsync`](/configuration/experiments/))
 
 __webpack.config.js__
 

@@ -898,8 +898,7 @@ module.exports = {
   //...
   output: {
     //...
-    libraryTarget: 'import',
-    importFunctionName: 'polyfillForImport'
+    importFunctionName: '__import__'
   }
 };
 ```
