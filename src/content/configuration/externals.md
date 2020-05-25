@@ -327,6 +327,6 @@ __webpack.config.js__
 ```javascript
 module.exports = {
   //...
-  externalsType: `promise`
+  externalsType: 'promise'
 };
 ```
