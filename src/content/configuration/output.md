@@ -897,7 +897,6 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    //...
     importFunctionName: '__import__'
   }
 };
