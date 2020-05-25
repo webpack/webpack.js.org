@@ -895,7 +895,7 @@ The dependencies for your library will be defined by the [`externals`](/configur
 
 `string = 'import'`
 
-The name of the native `import()` function used for [`'import'` type externals](/configuration/output/#asyncrhonous).
+The name of the native `import()` function used for importing the [`'import'` type externals](/configuration/output/#asyncrhonous).
 
 __webpack.config.js__
 
