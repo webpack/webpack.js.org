@@ -1,5 +1,5 @@
 ---
-title: Environment Variables
+title: 环境变量
 sort: 8
 contributors:
   - simon04
@@ -13,19 +13,19 @@ related:
     url: https://blog.flennik.com/the-fine-art-of-the-webpack-2-config-dc4d19d7f172#d60a
 ---
 
-To disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production) you may use environment variables.
+想要消除 `webpack.config.js` 在 [开发环境](/guides/development) 和 [生产环境](/guides/production) 之间的差异，你可能需要环境变量(environment variable)。
 
-T> webpack's environment variables are different from the [environment variables](https://en.wikipedia.org/wiki/Environment_variable) of operating system shells like `bash` and `CMD.exe`
+T> webpack 环境变量，与操作系统中的 `bash` 和 `CMD.exe` 这些 shell [环境变量](https://en.wikipedia.org/wiki/Environment_variable) 不同。
 
-The webpack command line [environment option](/api/cli/#environment-options) `--env` allows you to pass in as many environment variables as you like. Environment variables will be made accessible in your `webpack.config.js`. For example, `--env.production` or `--env.NODE_ENV=local` (`NODE_ENV` is conventionally used to define the environment type, see [here](https://dzone.com/articles/what-you-should-know-about-node-env).)
+webpack 命令行 [环境配置](/api/cli/#environment-options) 的 `--env` 参数，可以允许你传入任意数量的环境变量。而在 `webpack.config.js` 中可以访问到这些环境变量。例如，`--env.production` 或 `--env.NODE_ENV=local`（`NODE_ENV` 通常约定用于定义环境类型，查看 [这里](https://dzone.com/articles/what-you-should-know-about-node-env)）。
 
 ```bash
 webpack --env.NODE_ENV=local --env.production --progress
 ```
 
-T> Setting up your `env` variable without assignment, `--env.production` sets `--env.production` to `true` by default. There are also other syntaxes that you can use. See the [webpack CLI](/api/cli/#environment-options) documentation for more information.
+T> 如果设置 `env` 变量，却没有赋值，`--env.production` 默认表示将 `--env.production` 设置为 `true`。还有许多其他可以使用的语法。更多详细信息，请查看 [webpack CLI](/api/cli/#environment-options) 文档。
 
-There is one change that you will have to make to your webpack config. Typically, `module.exports` points to the configuration object. To use the `env` variable, you must convert `module.exports` to a function:
+对于我们的 webpack 配置，有一个必须要修改之处。通常，`module.exports` 指向配置对象。要使用 `env` 变量，你必须将 `module.exports` 转换成一个函数：
 
 __webpack.config.js__
 
