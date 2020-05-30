@@ -8,7 +8,7 @@ contributors:
   - jamesgeorge007
 ---
 
-Compilation object has many methods and hooks available. On this page, we will list the available methods and properties.
+The Compilation object has many methods and hooks available. On this page, we will list the available methods and properties.
 
 ## compilation object methods
 
@@ -37,7 +37,7 @@ Fetches a module from a compilation by its identifier.
 
 Parameters:
 
-- `module` - module to be fetched. Identifier is extracted from the module by the compilation using `module.identifier()` method.
+- `module` - module to be fetched. The identifier is extracted from the module by the compilation using `module.identifier()` method.
 
 ### findModule
 
@@ -47,18 +47,18 @@ Attempts to search for a module by its identifier.
 
 Parameters:
 
-- `module` - module to be searched for. Identifier is extracted from the module by the compilation using `module.identifier()` method.
+- `module` - module to be searched for. The identifier is extracted from the module by the compilation using `module.identifier()` method.
 
 ### waitForBuildingFinished
 
 `function (module, callback)`
 
-Runs a given `callback` function when given module was built.
+Runs a given `callback` function when the given module was built.
 
 Parameters:
 
-- `module` - module at question.
-- `callback` - a function to be invoked.
+- `module` - the module at question.
+- `callback` - the function to be invoked.
 
 ### buildModule
 
@@ -110,19 +110,19 @@ Parameters:
 
 - `context` - context path for entry.
 - `entry` - entry dependency.
-- `name` - name of entry.
+- `name` - the name of entry.
 - `callback` - function to be invoked when addEntry finishes.
 
 ### prefetch
 
 `function (context, dependency, callback)`
 
-Creates a module from given dependency.
+Creates a module from a given dependency.
 
 Parameters:
 
 - `context` - context path.
-- `dependency` - dependency that was used to create the module.
+- `dependency` - the dependency that was used to create the module.
 - `callback` - module callback that sends a module up one level.
 
 ### rebuildModule
@@ -140,7 +140,7 @@ Parameters:
 
 `function (callback)`
 
-Finishes compilation and invokes given callback.
+Finishes compilation and invokes the given callback.
 
 Parameters:
 
@@ -229,13 +229,13 @@ Creates the `Chunk` graph from the `Module` graph. The process is done in two ph
 
 Parameters:
 
-- `inputChunkGroups` - chunk groups which are processed.
+- `inputChunkGroups` - chunk groups that are processed.
 
 ### removeReasonsOfDependencyBlock
 
 `function (module, block)`
 
-Removes relation of the module to dependency block.
+Removes relation of the module to the dependency block.
 
 Parameters:
 
@@ -296,7 +296,7 @@ Parameters:
 
 `function (filename, data)`
 
-Returns interpolated path.
+Returns the interpolated path.
 
 Parameters:
 
@@ -318,7 +318,7 @@ Parameters:
 
 `function (name, outputOptions, plugins)`
 
-Allows to run another instance of webpack inside of webpack. However as a child with different settings and configurations applied. It copies all hooks and plugins from parent (or top-level compiler) and creates a child `Compiler` instance. Returns the created `Compiler`.
+Allows running another instance of webpack inside of webpack. However, as a child with different settings and configurations applied. It copies all hooks and plugins from the parent (or top-level compiler) and creates a child `Compiler` instance. Returns the created `Compiler`.
 
 Parameters:
 
@@ -339,7 +339,7 @@ W> Available since webpack 4.40.0
 Parameters:
 
 - `file` - file name of the asset
-- `source` - source of the asset
+- `source` - the source of the asset
 - `assetInfo` - additional asset information
 
 ### updateAsset
@@ -360,7 +360,7 @@ Parameters:
 
 W> Available since webpack 4.40.0
 
-Returns array of all assets under current compilation.
+Returns array of all assets under the current compilation.
 
 ### getAsset
 
