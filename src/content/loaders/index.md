@@ -7,6 +7,7 @@ contributors:
   - rhys-vdw
   - EugeneHlushko
   - hemal7735
+  - snitin315
 ---
 
 webpack enables use of [loaders](/concepts/loaders) to preprocess files. This allows you to bundle any static resource way beyond JavaScript. You can easily write your own loaders using Node.js.
@@ -25,18 +26,16 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 
 ## JSON
 
-- [`json-loader`](/loaders/json-loader) Loads a [JSON](http://json.org/) file (included by default)
 - [`json5-loader`](/loaders/json5-loader) Loads and transpiles a [JSON 5](https://json5.org/) file
 - [`cson-loader`](https://github.com/awnist/cson-loader) Loads and transpiles a [CSON](https://github.com/bevry/cson#what-is-cson) file
 
 
 ## Transpiling
 
-- [`script-loader`](/loaders/script-loader) Executes a JavaScript file once in global context (like in script tag), requires are not parsed
 - [`babel-loader`](/loaders/babel-loader) Loads ES2015+ code and transpiles to ES5 using [Babel](https://babeljs.io/)
 - [`buble-loader`](https://github.com/sairion/buble-loader) Loads ES2015+ code and transpiles to ES5 using [Bublé](https://buble.surge.sh/guide/)
 - [`traceur-loader`](https://github.com/jupl/traceur-loader) Loads ES2015+ code and transpiles to ES5 using [Traceur](https://github.com/google/traceur-compiler#readme)
-- [`ts-loader`](https://github.com/TypeStrong/ts-loader) or [`awesome-typescript-loader`](https://github.com/s-panferov/awesome-typescript-loader) Loads [TypeScript](https://www.typescriptlang.org/) 2.0+ like JavaScript
+- [`ts-loader`](https://github.com/TypeStrong/ts-loader) Loads [TypeScript](https://www.typescriptlang.org/) 2.0+ like JavaScript
 - [`coffee-loader`](/loaders/coffee-loader) Loads [CoffeeScript](http://coffeescript.org/) like JavaScript
 - [`fengari-loader`](https://github.com/fengari-lua/fengari-loader/) Loads Lua code using [fengari](https://fengari.io/)
 - [`elm-webpack-loader`](https://github.com/elm-community/elm-webpack-loader) Loads [Elm](https://elm-lang.org/) like JavaScript
@@ -67,10 +66,6 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 
 - [`mocha-loader`](/loaders/mocha-loader) Tests with [mocha](https://mochajs.org/) (Browser/NodeJS)
 - [`eslint-loader`](https://github.com/webpack-contrib/eslint-loader) PreLoader for linting code using [ESLint](https://eslint.org/)
-- [`jshint-loader`](/loaders/jshint-loader) PreLoader for linting code using [JSHint](http://jshint.com/about/)
-- [`jscs-loader`](https://github.com/unindented/jscs-loader) PreLoader for code style checking using [JSCS](http://jscs.info/)
-- [`coverjs-loader`](/loaders/coverjs-loader) PreLoader to determine the testing coverage using [CoverJS](https://github.com/arian/CoverJS)
-
 
 ## Frameworks
 
