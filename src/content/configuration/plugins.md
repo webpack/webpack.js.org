@@ -1,5 +1,5 @@
 ---
-title: Plugins
+title: 插件(Plugins)
 sort: 10
 contributors:
   - sokra
@@ -9,15 +9,18 @@ contributors:
   - EugeneHlushko
 ---
 
-The `plugins` option is used to customize the webpack build process in a variety of ways. webpack comes with a variety built-in plugins available under `webpack.[plugin-name]`. See [Plugins page](/plugins) for a list of plugins and documentation but note that there are a lot more out in the community.
+`plugins` 选项用于以各种方式自定义 webpack 构建过程。webpack 附带了各种内置插件，可以通过 `webpack.[plugin-name]` 访问这些插件。请查看 [插件页面](/plugins) 获取插件列表和对应文档，
+但请注意这只是其中一部分，社区中还有许多插件。
 
-T> Note: This page only discusses using plugins, however if you are interested in writing your own please visit [Writing a Plugin](/contribute/writing-a-plugin/).
+T> 注意：本页面仅讨论使用插件，如果你有兴趣编写自己的插件，
+请访问 [编写一个插件](/contribute/writing-a-plugin/) 页面。
 
 
 ## `plugins`
 
 [`[Plugin]`](/plugins/)
 
+一组 webpack 插件。例如，[`DefinePlugin`](/plugins/define-plugin/) 允许你创建可在编译时配置的全局常量。这对需要再开发环境构建和生产环境构建之间产生不同行为来说非常有用。
 An array of webpack plugins. For example, [`DefinePlugin`](/plugins/define-plugin/) allows you to create global constants which can be configured at compile time. This can be useful for allowing different behavior between development builds and release builds.
 
 __webpack.config.js__
@@ -33,17 +36,17 @@ module.exports = {
 };
 ```
 
-A more complex example, using multiple plugins, might look something like this:
+一个复杂示例，使用多个插件，可能看起来就像这样：
 
 __webpack.config.js__
 
 ```js
 var webpack = require('webpack');
-// importing plugins that do not come by default in webpack
+// 导入非 webpack 自带默认插件
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var DashboardPlugin = require('webpack-dashboard/plugin');
 
-// adding plugins to your configuration
+// 在配置中添加插件
 module.exports = {
   //...
   plugins: [
@@ -52,11 +55,11 @@ module.exports = {
       allChunks: true,
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    // compile time plugins
+   // 编译时(compile time)插件
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
     }),
-    // webpack-dev-server enhancement plugins
+   // webpack-dev-server 强化插件
     new DashboardPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ]
