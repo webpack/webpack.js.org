@@ -1,5 +1,5 @@
 ---
-title: Compilation Hooks
+title: compilation 钩子
 group: Plugins
 sort: 10
 contributors:
@@ -10,31 +10,31 @@ contributors:
   - EugeneHlushko
 ---
 
-The `Compilation` module is used by the `Compiler` to create new compilations
-(or builds). A `compilation` instance has access to all modules and their
-dependencies (most of which are circular references). It is the literal
-compilation of all the modules in the dependency graph of an application.
-During the compilation phase, modules are loaded, sealed, optimized, chunked,
-hashed and restored.
+`Compilation` 模块会被 `Compiler` 用来创建新的 compilation 对象（或新的 build 对象）。
+`compilation` 实例能够访问所有的模块和它们的依赖（大部分是循环依赖）。
+它会对应用程序的依赖图中所有模块，
+进行字面上的编译(literal compilation)。
+在编译阶段，模块会被加载(load)、封存(seal)、优化(optimize)、
+分块(chunk)、哈希(hash)和重新创建(restore)。
 
-The `Compilation` class also extends `Tapable` and provides the following
-lifecycle hooks. They can be tapped the same way as compiler hooks:
+`Compilation` 类扩展(extend)自 `Tapable`，并提供了以下生命周期钩子。
+可以按照 compiler 钩子的相同方式来调用 tap：
 
 ``` js
 compilation.hooks.someHook.tap(/* ... */);
 ```
 
-As with the `compiler`, `tapAsync` and `tapPromise` may also be available
-depending on the type of hook.
+和 `compiler` 用法相同，取决于不同的钩子类型，
+所以也可以在某些钩子上访问 `tapAsync` 和 `tapPromise`。
 
 
 ### `buildModule`
 
 `SyncHook`
 
-Triggered before a module build has started, can be used to modify the module.
+在模块构建开始之前触发，可以用来修改模块。
 
-- Callback Parameters: `module`
+- 回调参数：`module`
 
 
 ```js
@@ -50,324 +50,324 @@ compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
 
 `SyncHook`
 
-Fired before rebuilding a module.
+在重新构建一个模块之前触发。
 
-- Callback Parameters: `module`
+- 回调参数：`module`
 
 
 ### `failedModule`
 
 `SyncHook`
 
-Run when a module build has failed.
+模块构建失败时执行。
 
-- Callback Parameters: `module` `error`
+- 回调参数：`module` `error`
 
 
 ### `succeedModule`
 
 `SyncHook`
 
-Executed when a module has been built successfully.
+模块构建成功时执行。
 
-- Callback Parameters: `module`
+- 回调参数：`module`
 
 
 ### `finishModules`
 
 `AsyncSeriesHook`
 
-Called when all modules have been built without errors.
+所有模块都完成构建并且没有错误时执行。
 
-- Callback Parameters: `modules`
+- 回调参数：`modules`
 
 
 ### `finishRebuildingModule`
 
 `SyncHook`
 
-Executed when a module has been rebuilt, in case of both success or with errors.
+一个模块完成重新构建时执行，在都成功或有错误的情况下。
 
-- Callback Parameters: `module`
+- 回调参数：`module`
 
 
 ### `seal`
 
 `SyncHook`
 
-Fired when the compilation stops accepting new modules.
+compilation 对象停止接收新的模块时触发。
 
 
 ### `unseal`
 
 `SyncHook`
 
-Fired when a compilation begins accepting new modules.
+compilation 对象开始接收新模块时触发。
 
 
 ### `optimizeDependencies`
 
 `SyncBailHook`
 
-Fired at the beginning of dependency optimization.
+依赖优化开始时触发。
 
-- Callback Parameters: `modules`
+- 回调参数：`modules`
 
 
 ### `afterOptimizeDependencies`
 
 `SyncHook`
 
-Fired after the dependency optimization.
+依赖优化之后触发。
 
-- Callback Parameters: `modules`
+- 回调参数：`modules`
 
 
 ### `optimize`
 
 `SyncHook`
 
-Triggered at the beginning of the optimization phase.
+优化阶段开始时触发。
 
 
 ### `optimizeModules`
 
 `SyncBailHook`
 
-Called at the beginning of the module optimization phase. A plugin can tap into this hook to perform optimizations on modules.
+在模块优化阶段开始时调用。插件可以 tap 此钩子对模块进行优化。
 
-- Callback Parameters: `modules`
+- 回调参数：`modules`
 
 
 ### `afterOptimizeModules`
 
 `SyncHook`
 
-Called after modules optimization has completed.
+在模块优化完成之后调用。
 
-- Callback Parameters: `modules`
+- 回调参数：`modules`
 
 
 ### `optimizeChunks`
 
 `SyncBailHook`
 
-Called at the beginning of the chunk optimization phase. A plugin can tap into this hook to perform optimizations on chunks.
+在 chunk 优化阶段开始时调用。插件可以 tap 此钩子对 chunk 执行优化。
 
-- Callback Parameters: `chunks`
+- 回调参数：`chunks`
 
 
 ### `afterOptimizeChunks`
 
 `SyncHook`
 
-Fired after chunk optimization has completed.
+chunk 优化完成之后触发。
 
-- Callback Parameters: `chunks`
+- 回调参数：`chunks`
 
 
 ### `optimizeTree`
 
 `AsyncSeriesHook`
 
-Called before optimizing the dependency tree. A plugin can tap into this hook to perform a dependency tree optimization.
+在优化依赖树之前调用。插件可以 tap 此钩子执行依赖树优化。
 
-- Callback Parameters: `chunks` `modules`
+- 回调参数：`chunks` `modules`
 
 
 ### `afterOptimizeTree`
 
 `SyncHook`
 
-Called after the dependency tree optimization has completed with success.
+在依赖树优化成功完成之后调用。
 
-- Callback Parameters: `chunks` `modules`
+- 回调参数：`chunks` `modules`
 
 
 ### `optimizeChunkModules`
 
 `SyncBailHook`
 
-Called after the tree optimization, at the beginning of the chunk modules optimization. A plugin can tap into this hook to perform optimizations of chunk modules.
+在树优化之后，chunk 模块优化开始时调用。插件可以 tap 此钩子来执行 chunk 模块的优化。
 
-- Callback Parameters: `chunks` `modules`
+- 回调参数：`chunks` `modules`
 
 
 ### `afterOptimizeChunkModules`
 
 `SyncHook`
 
-Called after the chunkmodules optimization has completed successfully.
+在 chunk 模块优化成功完成之后调用。
 
-- Callback Parameters: `chunks` `modules`
+- 回调参数：`chunks` `modules`
 
 
 ### `shouldRecord`
 
 `SyncBailHook`
 
-Called to determine whether or not to store records. Returning anything `!== false` will prevent every other "record" hook from being executed ([`record`](#record), [`recordModules`](#recordmodules), [`recordChunks`](#recordchunks) and [`recordHash`](#recordhash)).
+调用来决定是否存储 record。返回任何内容 `!== false` 将阻止执行所有其他 "record" 钩子（[`record`](#record), [`recordModules`](#recordmodules), [`recordChunks`](#recordchunks) 和 [`recordHash`](#recordhash)）。
 
 
 ### `reviveModules`
 
 `SyncHook`
 
-Restore module information from records.
+从 record 中恢复模块信息。
 
-- Callback Parameters: `modules` `records`
+- 回调参数：`modules` `records`
 
 
 ### `beforeModuleIds`
 
 `SyncHook`
 
-Executed before assigning an `id` to each module.
+在为每个模块分配 `id` 之前执行。
 
-- Callback Parameters: `modules`
+- 回调参数：`modules`
 
 
 ### `moduleIds`
 
 `SyncHook`
 
-Called to assign an `id` to each module.
+调用来每个模块分配一个 `id`。
 
-- Callback Parameters: `modules`
+- 回调参数：`modules`
 
 
 ### `optimizeModuleIds`
 
 `SyncHook`
 
-Called at the beginning of the modules `id` optimization.
+在模块 `id` 优化开始时调用。
 
-- Callback Parameters: `modules`
+- 回调参数：`modules`
 
 
 ### `afterOptimizeModuleIds`
 
 `SyncHook`
 
-Called when the modules `id` optimization phase has completed.
+在模块 `id` 优化完成时调用。
 
-- Callback Parameters: `modules`
+- 回调参数：`modules`
 
 
 ### `reviveChunks`
 
 `SyncHook`
 
-Restore chunk information from records.
+从 record 中恢复 chunk 信息。
 
-- Callback Parameters: `chunks` `records`
+- 回调参数：`chunks` `records`
 
 
 ### `beforeChunkIds`
 
 `SyncHook`
 
-Executed before assigning an `id` to each chunk.
+在为每个 chunk 分配 `id` 之前执行。
 
-- Callback Parameters: `chunks`
+- 回调参数：`chunks`
 
 
 ### `optimizeChunkIds`
 
 `SyncHook`
 
-Called at the beginning of the chunks `id` optimization phase.
+在 chunk `id` 优化阶段开始时调用。
 
-- Callback Parameters: `chunks`
+- 回调参数：`chunks`
 
 
 ### `afterOptimizeChunkIds`
 
 `SyncHook`
 
-Triggered after chunk `id` optimization has finished.
+chunk `id` 优化结束之后触发。
 
-- Callback Parameters: `chunks`
+- 回调参数：`chunks`
 
 
 ### `recordModules`
 
 `SyncHook`
 
-Store module info to the records. This is triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
+将模块信息存储到 record 中。[`shouldRecord`](#shouldrecord) 返回 truthy 值时触发。
 
-- Callback Parameters: `modules` `records`
+- 回调参数：`modules` `records`
 
 
 ### `recordChunks`
 
 `SyncHook`
 
-Store chunk info to the records. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
+将 chunk 存储到 record 中。[`shouldRecord`](#shouldrecord) 返回 truthy 值时触发。
 
-- Callback Parameters: `chunks` `records`
+- 回调参数：`chunks` `records`
 
 
 ### `beforeHash`
 
 `SyncHook`
 
-Called before the compilation is hashed.
+在 compilation 添加哈希(hash)之前。
 
 
 ### `afterHash`
 
 `SyncHook`
 
-Called after the compilation is hashed.
+在 compilation 添加哈希(hash)之后。
 
 
 ### `recordHash`
 
 `SyncHook`
 
-Store information about record hash to the `records`. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
+将有关 record 的信息存储到 `records` 中。仅在 [`shouldRecord`](#shouldrecord) 返回 truthy 值时触发。
 
-- Callback Parameters: `records`
+- 回调参数：`records`
 
 
 ### `record`
 
 `SyncHook`
 
-Store information about the `compilation` to the `records`. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
+将 `compilation` 相关信息存储到 `record` 中。仅在 [`shouldRecord`](#shouldrecord) 返回 truthy 值时触发。
 
-- Callback Parameters: `compilation` `records`
+- 回调参数：`compilation` `records`
 
 
 ### `beforeModuleAssets`
 
 `SyncHook`
 
-Executed before module assets creation.
+在创建模块 asset 之前执行。
 
 
 ### `additionalChunkAssets`
 
 `SyncHook`
 
-Create additional assets for the chunks.
+为这些 chunk 创建其他 asset。
 
-- Callback Parameters: `chunks`
+- 回调参数：`chunks`
 
 
 ### `shouldGenerateChunkAssets`
 
 `SyncBailHook`
 
-Called to determine whether or not generate chunks assets. Returning anything `!== false` will allow chunk assets generation.
+调用以确定是否生成 chunk asset。返回任何 `!== false` 将允许生成 chunk asset。
 
 
 ### `beforeChunkAssets`
 
 `SyncHook`
 
-Executed before creating the chunks assets.
+在创建 chunk asset 之前。
 
 
 
@@ -375,8 +375,8 @@ Executed before creating the chunks assets.
 
 `AsyncSeriesHook`
 
-Create additional assets for the compilation. This hook can be used to download
-an image, for example:
+为 compilation 创建额外 asset。
+这个钩子可以用来下载图像，例如：
 
 ``` js
 compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
@@ -395,11 +395,11 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
 
 `AsyncSeriesHook`
 
-Optimize any chunk assets. The assets are stored in `compilation.assets`. A
-`Chunk` has a property `files` which points to all files created by a chunk.
-Any additional chunk assets are stored in `compilation.additionalChunkAssets`.
+优化所有 chunk asset。asset 存储在 `compilation.assets` 中。
+每个 `Chunk` 都具有一个 `files` 属性，其指向由一个 chunk 创建的所有文件。
+任何额外 chunk asset 都存储在 `compilation.additionalChunkAssets` 中。
 
-- Callback Parameters: `chunks`
+- 回调参数：`chunks`
 
 Here's an example that simply adds a banner to each chunk.
 
@@ -426,11 +426,11 @@ compilation.hooks
 
 `SyncHook`
 
-The chunk assets have been optimized.
+chunk asset 已经被优化。
 
-- Callback Parameters: `chunks`
+- 回调参数：`chunks`
 
-Here's an example plugin from [@boopathi](https://github.com/boopathi) that outputs exactly what went into each chunk.
+这里是一个来自 [@boopathi](https://github.com/boopathi) 的示例插件，详细地输出每个 chunk 里有什么。
 
 ``` js
 compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
@@ -450,86 +450,86 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
 
 `AsyncSeriesHook`
 
-Optimize all assets stored in `compilation.assets`.
+优化存储在 `compilation.assets` 中的所有 asset。
 
-- Callback Parameters: `assets`
+- 回调参数：`assets`
 
 
 ### `afterOptimizeAssets`
 
 `SyncHook`
 
-The assets have been optimized.
+asset 已经优化。
 
-- Callback Parameters: `assets`
+- 回调参数：`assets`
 
 
 ### `needAdditionalSeal`
 
 `SyncBailHook`
 
-Called to determine if the compilation needs to be unsealed to include other files.
+调用来决定 compilation 是否需要解除 seal 以引入其他文件。
 
 
 ### `afterSeal`
 
 `AsyncSeriesHook`
 
-Executed right after `needAdditionalSeal`.
+在 `needAdditionalSeal` 之后立即执行。
 
 
 ### `chunkHash`
 
 `SyncHook`
 
-Triggered to emit the hash for each chunk.
+触发来为每个 chunk 生成 hash。
 
-- Callback Parameters: `chunk` `chunkHash`
+- 回调参数：`chunk` `chunkHash`
 
 
 ### `moduleAsset`
 
 `SyncHook`
 
-Called when an asset from a module was added to the compilation.
+一个模块中的一个 asset 被添加到 compilation 时调用。
 
-- Callback Parameters: `module` `filename`
+- 回调参数：`module` `filename`
 
 
 ### `chunkAsset`
 
 `SyncHook`
 
-Triggered when an asset from a chunk was added to the compilation.
+一个 chunk 中的一个 asset 被添加到 compilation 时调用。
 
-- Callback Parameters: `chunk` `filename`
+- 回调参数：`chunk` `filename`
 
 
 ### `assetPath`
 
 `SyncWaterfallHook`
 
-Called to determine the path of an asset.
+调用以决定 asset 的路径。
 
-- Callback Parameters: `path` `options`
+- 回调参数：`path` `options`
 
 
 ### `needAdditionalPass`
 
 `SyncBailHook`
 
-Called to determine if an asset needs to be processed further after being emitted.
+调用以决定 asset 在输出后是否需要进一步处理。
 
 
 ### `childCompiler`
 
 `SyncHook`
 
-Executed after setting up a child compiler.
+子 compiler 设置之后执行。
 
-- Callback Parameters: `childCompiler` `compilerName` `compilerIndex`
+- 回调参数：`childCompiler` `compilerName` `compilerIndex`
 
 
 ### `normalModuleLoader`
 
-Since webpack v5 `normalModuleLoader` hook was removed. Now to access the loader use `NormalModule.getCompilationHooks(compilation).loader` instead.
+从 webpack v5 开始，`normalModuleLoader` 钩子已经删除。现在要访问loader 请改用 `NormalModule.getCompilationHooks(compilation).loader`。
