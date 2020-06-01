@@ -154,7 +154,12 @@ __src/index.js__
   function component() {
     const element = document.createElement('div');
 
+<<<<<<< HEAD
 -   // lodash（目前通过一个 script 引入）对于执行这一行是必需的
+=======
+-   // Lodash, currently included via a script, is required for this line to work
++   // Lodash, now imported by this script
+>>>>>>> bd8afff511df4f26c18ba192fa9fd7204fd0986e
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
     return element;

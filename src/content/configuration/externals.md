@@ -13,6 +13,7 @@ contributors:
   - tanhauhau
   - snitin315
   - beejunk
+  - EugeneHlushko
 ---
 
 `externals` 配置选项提供了「从输出的 bundle 中排除依赖」的方法。相反，所创建的 bundle 依赖于那些存在于用户环境(consumer's environment)中的依赖。此功能通常对 __library 开发人员__来说是最有用的，然而也会有各种各样的应用程序用到它。
@@ -169,7 +170,11 @@ module.exports = {
   externals: [
     function(context, request, callback) {
       if (/^yourregex$/.test(request)){
+<<<<<<< HEAD
         // 使用请求路径将一个 commonjs 模块外部化
+=======
+        // Externalize to a commonjs module using the request path
+>>>>>>> bd8afff511df4f26c18ba192fa9fd7204fd0986e
         return callback(null, 'commonjs ' + request);
       }
 
@@ -243,6 +248,8 @@ module.exports = {
 
 匹配给定正则表达式的每个依赖，都将从输出 bundle 中排除。
 
+__webpack.config.js__
+
 ```javascript
 module.exports = {
   //...
@@ -255,6 +262,8 @@ module.exports = {
 ### 混用语法
 
 有时你需要混用上面介绍的语法。这可以像以下这样操作：
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -285,4 +294,46 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 关于如何使用此 externals 配置的更多信息，请参考[如何编写 library](/guides/author-libraries)。
+=======
+W> [Default type](/configuration/externals/#externalstype) will be used if you sepcify `externals` without a type e.g. `externals: { react: 'react' }` instead of `externals: { react: 'commonjs-module react' }`.
+
+For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
+
+
+## `externalsType`
+
+`string = 'var'`
+
+Specifies the default type of externals. `amd`, `root` and `system` externals __depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)__ being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
+
+Supported types:
+
+- `'var'`
+- `'module'`
+- `'assign'`
+- `'this'`
+- `'window'`
+- `'self'`
+- `'global'`
+- `'commonjs'`
+- `'commonjs-module'`
+- `'amd'`
+- `'amd-require'`
+- `'umd'`
+- `'umd2'`
+- `'jsonp'`
+- `'system'`
+- `'promise'` - same as `'var'` but awaits the result (async module, depends on [`experiments.importAsync`](/configuration/experiments/))
+- `'import'` - uses `import()` to load a native EcmaScript module (async module, depends on [`experiments.importAsync`](/configuration/experiments/))
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  externalsType: 'promise'
+};
+```
+>>>>>>> bd8afff511df4f26c18ba192fa9fd7204fd0986e
