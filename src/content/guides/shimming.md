@@ -14,6 +14,7 @@ contributors:
   - plr108
   - NicolasLetellier
   - wizardofhogwarts
+  - snitin315
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
@@ -453,11 +454,7 @@ See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset
 
 还有一些其他的工具，也能够帮助我们处理这些遗留模块。
 
-[`script-loader`](/loaders/script-loader/) 会在 global context(全局上下文) 中对代码进行 eval 取值，这类似于通过一个 `script` 标签引入脚本。在这种模式下，每个正常的 library 都应该能运行。对 `require`, `module` 等取值是 undefined。
-
-W> 在使用 `script-loader` 时，模块将转为一个字符串，然后添加到 bundle 中。它不会被 `webpack` 压缩，所以你应该选择一个 min 版本。而且，使用此 loader 添加的 library 也没有 `devtool` 支持。
-
-这些遗留模块如果没有 AMD/CommonJS 版本，但你也想将他们加入 `dist` 文件，则可以使用 [`noParse`](/configuration/module/#module-noparse) 来标识出这个模块。这样就能使 webpack 将引入这些模块，但是不进行转化(parse)，以及不解析(resolve) `require()` 和 `import` 语句。这种用法还会提高构建性能。
+如果这些遗留模块没有 AMD/CommonJS 版本，但你也想将他们加入 `dist` 文件，则可以使用 [`noParse`](/configuration/module/#modulenoparse) 来标识出这个模块。这样就能使 webpack 将引入这些模块，但是不进行转化(parse)，以及不解析(resolve) `require()` 和 `import` 语句。这种用法还会提高构建性能。
 
 W> 任何需要 AST 的功能（例如 `ProvidePlugin`）都不起作用。
 
