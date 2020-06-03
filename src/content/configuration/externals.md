@@ -170,11 +170,7 @@ module.exports = {
   externals: [
     function(context, request, callback) {
       if (/^yourregex$/.test(request)){
-<<<<<<< HEAD
-        // 使用请求路径将一个 commonjs 模块外部化
-=======
-        // Externalize to a commonjs module using the request path
->>>>>>> bd8afff511df4f26c18ba192fa9fd7204fd0986e
+        // 使用 request 路径，将一个 commonjs 模块外部化
         return callback(null, 'commonjs ' + request);
       }
 
@@ -294,12 +290,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-关于如何使用此 externals 配置的更多信息，请参考[如何编写 library](/guides/author-libraries)。
-=======
 W> [Default type](/configuration/externals/#externalstype) will be used if you sepcify `externals` without a type e.g. `externals: { react: 'react' }` instead of `externals: { react: 'commonjs-module react' }`.
 
-For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
+关于如何使用此 externals 配置的更多信息，请参考 [如何编写 library](/guides/author-libraries)。
 
 
 ## `externalsType`
@@ -336,4 +329,3 @@ module.exports = {
   externalsType: 'promise'
 };
 ```
->>>>>>> bd8afff511df4f26c18ba192fa9fd7204fd0986e
