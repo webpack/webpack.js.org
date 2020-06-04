@@ -46,7 +46,7 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
     line-height: 1.4;
     margin: 1.5em 0 0.25em;
     color: getColor(fiord);
-    word-break: break-all;
+    word-break: break-word;
     scroll-margin-top: $topHeightDesktop;
 
     tt,
