@@ -503,6 +503,11 @@ There're many stages to use:
 - `PROCESS_ASSETS_STAGE_ANALYSE` - Analyse existing assets.
 - `PROCESS_ASSETS_STAGE_REPORT` - Creating assets for reporting purposes.
 
+### `afterProcessAssets`
+
+`SyncHook`
+
+Executed after `processAssets` finished without error.
 
 ### `needAdditionalSeal`
 
