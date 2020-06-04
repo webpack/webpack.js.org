@@ -38,7 +38,7 @@
     "fetch:starter-kits": "node src/utilities/fetch-starter-kits.js",
     "prebuild": "npm run clean",
     "build": "run-s fetch printable content && cross-env NODE_ENV=production webpack --config webpack.ssg.js && run-s clean-printable content && cross-env NODE_ENV=production webpack --config webpack.prod.js",
-    "postbuild": "bundlesize && npm run sitemap",
+    "postbuild": "npm run sitemap",
     "build-test": "npm run build && http-server dist/",
     "test": "npm run lint",
     "lint": "run-s lint:*",
