@@ -9,7 +9,7 @@ related:
     url: https://medium.com/@Yoriiis/the-real-power-of-webpack-4-splitchunks-plugin-fad097c45ba0
 ---
 
-The ChunksWebpackPlugin creates HTML files with entry points and chunks relations to serve your webpack bundles. It is very convenient with multiple page application which contains multiple entry points and it works without configuration.
+The ChunksWebpackPlugin creates HTML files with entry points and chunks relations to serve your webpack bundles. It is suitable with multiple page application which contains multiple entry points.
 
 Since Webpack 4, SplitChunksPlugin offer the possibility to optimizes all chunks. It can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks. See the webpack documentation for [`splitChunks.chunks`](https://webpack.js.org/plugins/split-chunks-plugin/#splitchunkschunks).
 
