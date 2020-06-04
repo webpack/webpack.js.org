@@ -18,6 +18,7 @@ Name                                                     | Description
 -------------------------------------------------------- | -----------
 [`BabelMinifyWebpackPlugin`](/plugins/babel-minify-webpack-plugin) | Minification with [babel-minify](https://github.com/babel/minify)
 [`BannerPlugin`](/plugins/banner-plugin)                 | Add a banner to the top of each generated chunk
+[`ChunksWebpackPlugin`](/plugins/chunks-webpack-plugin)  | Create HTML files with entrypoints and chunks relations to serve your bundles
 [`CommonsChunkPlugin`](/plugins/commons-chunk-plugin)    | Extract common modules shared between chunks
 [`CompressionWebpackPlugin`](/plugins/compression-webpack-plugin) | Prepare compressed versions of assets to serve them with Content-Encoding
 [`ContextReplacementPlugin`](/plugins/context-replacement-plugin) | Override the inferred context of a `require` expression
