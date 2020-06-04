@@ -482,7 +482,7 @@ compilation.hooks.processAssets.tap(
     stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
   },
   (assets) => {
-    delete assets['a.js'];
+    // code here
   }
 );
 ```
