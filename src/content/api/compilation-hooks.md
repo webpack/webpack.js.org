@@ -8,6 +8,7 @@ contributors:
   - misterdev
   - wizardofhogwarts
   - EugeneHlushko
+  - chenxsan
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -462,6 +463,45 @@ Optimize all assets stored in `compilation.assets`.
 The assets have been optimized.
 
 - Callback Parameters: `assets`
+
+
+### `processAssets`
+
+`AsyncSeriesHook`
+
+Asset processing.
+
+- Callback Parameters: `assets`
+
+Here's an example:
+
+```js
+compilation.hooks.processAssets.tap(
+  {
+    name: 'MyPlugin',
+    stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
+  },
+  (assets) => {
+    delete assets['a.js'];
+  }
+);
+```
+
+There're many stages to use:
+
+- `PROCESS_ASSETS_STAGE_ADDITIONAL` - Add additional assets to the compilation.
+- `PROCESS_ASSETS_STAGE_PRE_PROCESS` - Basic preprocessing of assets.
+- `PROCESS_ASSETS_STAGE_DERIVED` - Derive new assets from existing assets.
+- `PROCESS_ASSETS_STAGE_ADDITIONS` - Add additional sections to existing assets, like a banner or initialization code.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE` - Optimize existing assets in a general way.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_COUNT` - Optimize the count of existing assets, e.g. by merging them.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY` - Optimize the compatibility of existing assets, e.g. add polyfills or vendor-prefixes.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE` - Optimize the size of existing assets, e.g. by minimizing or omitting whitespace.
+- `PROCESS_ASSETS_STAGE_SUMMARIZE` - Summarize the list of existing assets.
+- `PROCESS_ASSETS_STAGE_DEV_TOOLING` - Add development tooling to assets, e.g. by extracting a SourceMap.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` - Optimize the transfer of existing assets, e.g. by preparing a compressed (gzip) file as separate asset.
+- `PROCESS_ASSETS_STAGE_ANALYSE` - Analyse existing assets.
+- `PROCESS_ASSETS_STAGE_REPORT` - Creating assets for reporting purposes.
 
 
 ### `needAdditionalSeal`
