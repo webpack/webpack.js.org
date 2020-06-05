@@ -41,7 +41,7 @@ ChunksWebpackPlugin was built for Node.js `>=8.11.2` and webpack `>=4.x`.
 
 ## Example
 
-For example implementation, please see the [Github documentation](https://github.com/yoriiis/chunks-webpack-plugin/blob/master/README.md#example).
+For example usage, please see the [`ChunksWebpackPlugin` Github documentation](https://github.com/yoriiis/chunks-webpack-plugin/blob/master/README.md#example).
 
 ## Basic usage
 
