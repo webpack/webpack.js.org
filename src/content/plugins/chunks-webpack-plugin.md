@@ -124,7 +124,7 @@ Tells the plugin whether to personalize the default template for the HTML `<styl
 
 ```js
 new ChunksWebpackPlugin({
-  templateStyle: '<link rel="stylesheet" href="{{chunk}}" />'
+  templateStyle: '<link rel="stylesheet" href="https://cdn.domain.com/{{chunk}}" />'
 });
 ```
 
@@ -138,7 +138,7 @@ Tells the plugin whether to personalize the default template for the HTML `<scri
 
 ```js
 new ChunksWebpackPlugin({
-  templateScript: '<script src="{{chunk}}"></script>'
+  templateScript: '<script defer src="{{chunk}}"></script>'
 });
 ```
 
