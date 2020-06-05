@@ -100,7 +100,7 @@ new ChunksWebpackPlugin({
 });
 ```
 
-T> The default behavior will use the  `options.output.path` from the [webpack configuration](https://webpack.js.org/configuration/output/#outputpath).
+T> By default, plugin will use the [`output.path` option](/configuration/output/#outputpath) value.
 
 W> The `outputPath` must be an absolute path.
 
