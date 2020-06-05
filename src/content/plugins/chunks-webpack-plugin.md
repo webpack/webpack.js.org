@@ -66,7 +66,7 @@ module.exports = {
 };
 ```
 
-HTML files are built in the output path directory with all the other assets.
+HTML files are built in the output path directory with the rest of the webpack output.
 
 Then, include the HTML files in the wanted pages.
 
