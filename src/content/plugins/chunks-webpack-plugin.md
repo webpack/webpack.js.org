@@ -53,8 +53,8 @@ The plugin will generate two HTML files for each entry points. Each filename con
 First, let's add the plugin to the webpack configuration.
 
 ```js
-var ChunksWebpackPlugin = require('chunks-webpack-plugin');
-var path = require('path');
+const ChunksWebpackPlugin = require('chunks-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: 'main.js',
@@ -146,7 +146,7 @@ T> Keep the `{{chunk}}` placeholder, it is automatically replaced by the concate
 
 ### `customFormatTags`
 
-`false || function (chunksSorted, files)`
+`boolean: false` `function (chunksSorted, Entrypoint) => object`
 
 Tells the plugin whether to personalize the default behavior for generating your own templates. The function is called for each entry point. Can be used to add a custom behavior for a specific entry point.
 
@@ -275,7 +275,7 @@ __main-scripts.html__
 Example of the webpack configuration with multiple entry points which share common code:
 
 ```js
-<span class="x x-first x-last">const</span> ChunksWebpackPlugin = require('chunks-webpack-plugin');
+const ChunksWebpackPlugin = require('chunks-webpack-plugin');
 const path = require('path');
 
 module.exports = {
