@@ -191,7 +191,7 @@ The list of the chunks sorted by type: `styles` and `scripts`.
 
 #### `Entrypoint`
 
-`Object`
+`object`
 
 The object is included in every single ChunkGroup. The variable contains all information about the current entry point; log it on the console for more details.
 
