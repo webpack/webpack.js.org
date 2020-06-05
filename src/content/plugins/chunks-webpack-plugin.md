@@ -134,7 +134,7 @@ T> Keep the `{{chunk}}` placeholder, it is automatically replaced by the concate
 
 `string = '<script src="{{chunk}}"></script>'`
 
-Tells the plugin whether to personalize the default template for the HTML `<script>` tags. For example, add additional attributes, a CDN prefix or something else.
+Tells the plugin whether to personalize the default template for the HTML `<script>` tags. For example, add additional attributes or a CDN prefix.
 
 ```js
 new ChunksWebpackPlugin({
