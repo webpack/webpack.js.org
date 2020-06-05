@@ -244,7 +244,7 @@ The [webpack caching](https://webpack.js.org/guides/caching) feature allows you 
 
 ```js
 const ChunksWebpackPlugin = require('chunks-webpack-plugin');
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   entry: 'main.js',
