@@ -243,7 +243,7 @@ W> This option cancels the main functionality of the plugin and HTML files will 
 The [webpack caching](https://webpack.js.org/guides/caching) feature allows you to generate HTML files that include hash in the filename.
 
 ```js
-var ChunksWebpackPlugin = require('chunks-webpack-plugin');
+const ChunksWebpackPlugin = require('chunks-webpack-plugin');
 var path = require('path');
 
 module.exports = {
