@@ -490,24 +490,24 @@ compilation.hooks.processAssets.tap(
 There're many stages to use:
 
 - `PROCESS_ASSETS_STAGE_ADDITIONAL` - Add additional assets to the compilation.
-- `PROCESS_ASSETS_STAGE_PRE_PROCESS` - Basic preprocessing of assets.
-- `PROCESS_ASSETS_STAGE_DERIVED` - Derive new assets from existing assets.
-- `PROCESS_ASSETS_STAGE_ADDITIONS` - Add additional sections to existing assets, like a banner or initialization code.
+- `PROCESS_ASSETS_STAGE_PRE_PROCESS` - Basic preprocessing of the assets.
+- `PROCESS_ASSETS_STAGE_DERIVED` - Derive new assets from the existing assets.
+- `PROCESS_ASSETS_STAGE_ADDITIONS` - Add additional sections to the existing assets e.g. banner or initialization code.
 - `PROCESS_ASSETS_STAGE_OPTIMIZE` - Optimize existing assets in a general way.
 - `PROCESS_ASSETS_STAGE_OPTIMIZE_COUNT` - Optimize the count of existing assets, e.g. by merging them.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY` - Optimize the compatibility of existing assets, e.g. add polyfills or vendor-prefixes.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY` - Optimize the compatibility of existing assets, e.g. add polyfills or vendor prefixes.
 - `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE` - Optimize the size of existing assets, e.g. by minimizing or omitting whitespace.
 - `PROCESS_ASSETS_STAGE_SUMMARIZE` - Summarize the list of existing assets.
-- `PROCESS_ASSETS_STAGE_DEV_TOOLING` - Add development tooling to assets, e.g. by extracting a SourceMap.
+- `PROCESS_ASSETS_STAGE_DEV_TOOLING` - Add development tooling to the assets, e.g. by extracting a source map.
 - `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` - Optimize the transfer of existing assets, e.g. by preparing a compressed (gzip) file as separate asset.
-- `PROCESS_ASSETS_STAGE_ANALYSE` - Analyse existing assets.
-- `PROCESS_ASSETS_STAGE_REPORT` - Creating assets for reporting purposes.
+- `PROCESS_ASSETS_STAGE_ANALYSE` - Analyze the existing assets.
+- `PROCESS_ASSETS_STAGE_REPORT` - Creating assets for the reporting purposes.
 
 ### `afterProcessAssets`
 
 `SyncHook`
 
-Executed after `processAssets` finished without error.
+Called after the [`processAssets`](#processassets) hook had finished without error.
 
 ### `needAdditionalSeal`
 
