@@ -275,7 +275,7 @@ __main-scripts.html__
 Example of webpack configuration with multiple entry points which share common codes:
 
 ```js
-var ChunksWebpackPlugin = require('chunks-webpack-plugin');
+<span class="x x-first x-last">const</span> ChunksWebpackPlugin = require('chunks-webpack-plugin');
 var path = require('path');
 
 module.exports = {
