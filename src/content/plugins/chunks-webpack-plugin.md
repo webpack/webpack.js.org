@@ -174,11 +174,11 @@ W> The function provides more flexibility by replacing the default behavior. Fol
 
 The function must return an object with the following format:
 
-```json
-{
-  "styles": "",
-  "scripts": ""
-}
+```js
+return {
+  styles: '',
+  scripts: ''
+};
 ```
 
 The `customFormatTags` function has two parameters:
