@@ -148,7 +148,7 @@ T> Keep the `{{chunk}}` placeholder, it is automatically replaced by the concate
 
 `false || function (chunksSorted, files)`
 
-Tells the plugin whether to personalize the default behavior for generate your own templates. The function is called for each entry points. Custom behavior can also be add for a specific entry point if necessary.
+Tells the plugin whether to personalize the default behavior for generating your own templates. The function is called for each entry point. Can be used to add a custom behavior for a specific entry point.
 
 ```js
 new ChunksWebpackPlugin({
