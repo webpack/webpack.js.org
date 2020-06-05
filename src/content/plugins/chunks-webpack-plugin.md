@@ -86,7 +86,7 @@ __main-scripts.html__
 
 ## Using a configuration
 
-You can pass configuration options to ChunksWebpackPlugin to overrides default settings. Allowed values are as follows:
+You can pass a configuration object to `ChunksWebpackPlugin` to override the default settings.
 
 ### `outputPath`
 
