@@ -236,7 +236,7 @@ new ChunksWebpackPlugin({
 });
 ```
 
-W> This option cancels the main functionality of the plugin and HTML files will not be generated. It can be useful only with addition of `generateChunksManifest` option for a custom generation of the HTML files.
+W> When set to `false`, HTML files will not be generated. It can only be useful together with  `generateChunksManifest` option set to `true` for custom generation of the HTML files.
 
 ### Caching
 
