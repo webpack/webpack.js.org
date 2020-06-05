@@ -232,7 +232,7 @@ Tells the plugin whether to generate the HTML files.
 
 ```js
 new ChunksWebpackPlugin({
-  generateChunksManifest: true
+  generateChunksFiles: false
 });
 ```
 
