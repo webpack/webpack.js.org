@@ -21,7 +21,7 @@ With multiple entry points, it can be difficult to identify relation between the
 
 ## Zero config
 
-The plugin works without configuration. For advanced usage, see the section [using configuration](#using-a-configuration).
+It works without configuration. For advanced usage, see the [using configuration section](#using-a-configuration).
 
 ## Installation
 
