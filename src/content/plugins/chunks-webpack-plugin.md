@@ -276,7 +276,7 @@ Example of webpack configuration with multiple entry points which share common c
 
 ```js
 <span class="x x-first x-last">const</span> ChunksWebpackPlugin = require('chunks-webpack-plugin');
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   entry: {
