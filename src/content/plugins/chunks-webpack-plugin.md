@@ -45,7 +45,7 @@ For example usage, please see the [`ChunksWebpackPlugin` Github documentation](h
 
 ## Basic usage
 
-The plugin will generate two HTML files for each entry points. Each filename contains the entry point name, the `{{entry}}` placeholder is automatically replaced.
+`ChunksWebpackPlugin` will generate two HTML files for each entry point. Each filename contains the entry point name, the `{{entry}}` placeholder is automatically replaced.
 
 - `{{entry}}-styles.html`: contains all HTML `<link>` tags
 - `{{entry}}-scripts.html`: contains all HTML `<script>` tags
