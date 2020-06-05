@@ -201,7 +201,7 @@ W> Use this variable only for a full customization if the `chunksSorted` variabl
 
 `boolean = false`
 
-Tells the plugin whether to generate the `chunks-manifest.json`. The file contains the list of all the chunks grouped by entry points.
+Tells the plugin whether to generate the `chunks-manifest.json`. The file contains the list of all chunks grouped by entry points.
 
 ```js
 new ChunksWebpackPlugin({
