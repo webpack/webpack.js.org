@@ -120,7 +120,7 @@ new ChunksWebpackPlugin({
 
 `string = '<link rel="stylesheet" href="{{chunk}}" />'`
 
-Tells the plugin whether to personalize the default template for the HTML `<style>` tags. For example, add additional attributes, a CDN prefix or something else.
+Tells the plugin whether to personalize the default template for the HTML `<style>` tags. For example, add additional attributes or a CDN prefix.
 
 ```js
 new ChunksWebpackPlugin({
