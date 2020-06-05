@@ -15,7 +15,7 @@ Since webpack 4, `SplitChunksPlugin` offers the possibility to optimizes all chu
 
 `splitChunks.chunks` option can be set to automatically generate new chunks associated with an entry point. For example, entry points `a.js` and `b.js` share common code with the file `vendors~a~b.js`.
 
-With multiple entry points, it can be difficult to identify relation between auto-generated chunks and entry points.
+With multiple entry points, it can be difficult to identify relation between the auto-generated chunks and entry points.
 
 The plugin parse the `entrypoints` [Map](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map) object from the webpack compilation to get all valid entry points and associated files. Then, it generates HTML files which include all assets filtered by entry point and the `chunks-manifest.json` file.
 
