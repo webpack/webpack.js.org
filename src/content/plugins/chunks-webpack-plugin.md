@@ -4,7 +4,7 @@ contributors:
   - yoriiis
 related:
   - title: SplitChunksPlugin
-    url: /plugins/split-chunks-plugin
+    url: /plugins/split-chunks-plugin/
   - title: The real power of Webpack 4 SplitChunks Plugin
     url: https://medium.com/@Yoriiis/the-real-power-of-webpack-4-splitchunks-plugin-fad097c45ba0
 ---
