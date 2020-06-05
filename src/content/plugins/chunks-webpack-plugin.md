@@ -37,7 +37,7 @@ yarn add chunks-webpack-plugin --dev
 
 ## Environment
 
-ChunksWebpackPlugin was built for Node.js `>=8.11.2` and webpack `>=4.x`.
+`ChunksWebpackPlugin` was built for Node.js `>=8.11.2` and webpack `>=4.x`.
 
 ## Example
 
