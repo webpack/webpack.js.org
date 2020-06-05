@@ -13,7 +13,7 @@ The `ChunksWebpackPlugin` creates HTML files with entry points and chunks relati
 
 Since webpack 4, `SplitChunksPlugin` offers the possibility to optimizes all chunks. It can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks. See the webpack documentation for [`splitChunks.chunks`](/plugins/split-chunks-plugin/#splitchunkschunks) for details.
 
-This option automatically generate new chunks associated with an entry point. For example, entry points `a.js` and `b.js` share common codes with the file `vendors~a~b.js`.
+`splitChunks.chunks` option can be set to automatically generate new chunks associated with an entry point. For example, entry points `a.js` and `b.js` share common code with the file `vendors~a~b.js`.
 
 With multiple entry points, it can be difficult to identify relation between auto-generated chunks and entry points.
 
