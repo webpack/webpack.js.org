@@ -205,7 +205,7 @@ Tells the plugin whether to generate the `chunks-manifest.json`. The file contai
 
 ```js
 new ChunksWebpackPlugin({
-  generateChunksManifest: false
+  generateChunksManifest: true
 });
 ```
 
