@@ -272,7 +272,7 @@ __main-scripts.html__
 
 ### Multiple entry points
 
-Example of webpack configuration with multiple entry points which share common codes:
+Example of the webpack configuration with multiple entry points which share common code:
 
 ```js
 <span class="x x-first x-last">const</span> ChunksWebpackPlugin = require('chunks-webpack-plugin');
