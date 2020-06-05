@@ -17,7 +17,7 @@ Since webpack 4, `SplitChunksPlugin` offers the possibility to optimizes all chu
 
 With multiple entry points, it can be difficult to identify relation between the auto-generated chunks and entry points.
 
-The plugin parse the `entrypoints` [Map](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map) object from the webpack compilation to get all valid entry points and associated files. Then, it generates HTML files which include all assets filtered by entry point and the `chunks-manifest.json` file.
+`ChunksWebpackPlugin` parses the `entrypoints` [Map](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map) from the webpack compilation to get all valid entry points and associated files. Then, it generates HTML files which include all assets filtered by an entry point and the `chunks-manifest.json` file.
 
 ## Zero config
 
