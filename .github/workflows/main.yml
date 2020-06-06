@@ -42,3 +42,4 @@ jobs:
         staticSrcPath: ./dist
         bucket: ${{ secrets.BUCKET }}
         region: ${{ secrets.REGION }}
+        skipFiles: ${{ secrets.SKIP_FILES }}
