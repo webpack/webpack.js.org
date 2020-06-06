@@ -27,7 +27,7 @@ jobs:
         BASE_BRANCH: cn
         BRANCH: gh-pages
         FOLDER: dist
-        BUILD_SCRIPT: npm i && npm run build
+        BUILD_SCRIPT: yarn && yarn build
     - name: Check Build
       run: |
         sudo -i
@@ -37,7 +37,6 @@ jobs:
       id: deployStatic
       uses: lcxfs1991/docschina-actions@master
       with:
-        skipFiles: ${{ secrets.SKIPFILES }}
         secretId: ${{ secrets.SECRET_ID }}
         secretKey: ${{ secrets.SECRET_KEY }}
         staticSrcPath: ./dist
