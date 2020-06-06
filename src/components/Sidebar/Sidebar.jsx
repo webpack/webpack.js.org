@@ -12,11 +12,11 @@ import './Sidebar.scss';
 const docs = [
   {
     version: 5,
-    url: 'https://webpack.js.org',
+    url: 'https://webpack.docschina.org',
   },
   {
     version: 4,
-    url: 'https://v4.webpack.js.org',
+    url: 'https://v4.webpack.docschina.org',
   }
 ];
 
