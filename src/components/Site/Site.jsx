@@ -59,14 +59,15 @@ class Site extends React.Component {
           toggleSidebar={this._toggleSidebar}
           links={[
             {
-              content: 'Documentation',
+              content: '文档',
               url: '/concepts/',
               isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
               children: this._strip(sections.filter(item => item.name !== 'contribute'))
             },
-            { content: 'Contribute', url: '/contribute/' },
-            { content: 'Vote', url: '/vote/' },
-            { content: 'Blog', url: 'https://medium.com/webpack' }
+            { content: '参与贡献', url: '/contribute/' },
+            { content: '投票', url: '/vote/' },
+            { content: '博客', url: 'https://medium.com/webpack' },
+            { content: '印记中文', url: 'https://docschina.org' }
           ]}
           />
         </div>
