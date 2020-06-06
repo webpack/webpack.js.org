@@ -37,9 +37,9 @@ jobs:
       id: deployStatic
       uses: lcxfs1991/docschina-actions@master
       with:
+        skipFiles: ${{ secrets.SKIP_FILES }}
         secretId: ${{ secrets.SECRET_ID }}
         secretKey: ${{ secrets.SECRET_KEY }}
         staticSrcPath: ./dist
         bucket: ${{ secrets.BUCKET }}
         region: ${{ secrets.REGION }}
-        skipFiles: ${{ secrets.SKIP_FILES }}
