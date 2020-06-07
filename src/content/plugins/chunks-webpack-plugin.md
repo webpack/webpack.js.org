@@ -181,7 +181,6 @@ return {
 };
 ```
 
-
 #### `chunksSorted`
 
 `object`
@@ -271,7 +270,8 @@ __main-scripts.html__
 
 ### Multiple entry points
 
-Example of the webpack configuration with multiple entry points which share common code:
+Example of the webpack configuration with multiple entry points which share common code with the `splitChunks` option.
+
 
 ```js
 const ChunksWebpackPlugin = require('chunks-webpack-plugin');
@@ -286,7 +286,12 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
     filename: 'bundle.js'
   },
-  plugins: [new ChunksWebpackPlugin()]
+  plugins: [new ChunksWebpackPlugin()],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
 };
 ```
 
