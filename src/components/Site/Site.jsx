@@ -153,15 +153,26 @@ class Site extends React.Component {
       array.splice(anchorTitleIndex + 1, 1);
     }
 
-    return array.map(({ title, name, url, group, sort, anchors, children }) => ({
-      title: title || name,
-      content: title || name,
-      url,
-      group,
-      sort,
-      anchors,
-      children: children ? this._strip(children) : []
-    })).filter(page => (page.title !== 'printable.md' && !page.content.includes('Printable')));
+    const map = new Map([
+      ['concepts', '概念'],
+      ['configuration', '配置'],
+      ['guides', '指南'],
+      ['loaders', 'loader'],
+      ['migrate', '迁移'],
+      ['plugins', 'plugin'],
+    ]);
+    return array.map(({ title, name, url, group, sort, anchors, children }) => {
+      const cnTitle = map.get(title) || map.get(name);
+      return {
+        title: cnTitle || title || name,
+        content: cnTitle || title || name,
+        url,
+        group,
+        sort,
+        anchors,
+        children: children ? this._strip(children) : []
+      };
+    }).filter(page => (page.title !== 'printable.md' && !page.content.includes('Printable')));
   };
 }
 
