@@ -25,7 +25,7 @@ It works without configuration. For advanced usage, see the [using configuration
 
 ## Installation
 
-The plugin is available as a package with the name of `chunks-webpack-plugin` on [npm](https://www.npmjs.com/package/chunks-webpack-plugin) and [Github](https://github.com/yoriiis/chunks-webpack-plugin).
+`ChunksWebpackPlugin` is available on npm as [`chunks-webpack-plugin`](https://www.npmjs.com/package/chunks-webpack-plugin) and as [`chunks-webpack-plugin` on Github](https://github.com/yoriiis/chunks-webpack-plugin).
 
 ```bash
 npm install chunks-webpack-plugin --save-dev
@@ -68,7 +68,7 @@ module.exports = {
 
 HTML files are built in the output path directory with the rest of the webpack output.
 
-Then, include the HTML files in the wanted pages.
+Now you can include the outputted HTML files into your HTML page templates. You can do it with e.g. Twig.
 
 __main-styles.html__
 
