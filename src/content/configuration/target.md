@@ -1,5 +1,5 @@
 ---
-title: Target
+title: 构建目标(Targets)
 sort: 13
 contributors:
   - juangl
@@ -12,38 +12,47 @@ contributors:
   - EugeneHlushko
 ---
 
-webpack can compile for multiple environments or _targets_. To understand what a `target` is in detail, read through [the targets concept page](/concepts/targets/).
+webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `target` 的详细信息，
+请阅读 [target 概念页面](/concepts/targets/)。
 
 ## `target`
 
 `string` `function (compiler)`
 
-Instructs webpack to target a specific environment.
+告知 webpack 为目标(target)指定一个环境。
 
 
 ### `string`
 
-The following string values are supported via [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js):
+通过 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js) ，
+可以支持以下字符串值：
 
-Option                | Description
+选项                | 描述
 --------------------- | -----------------------
-`async-node`          | Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)
-`electron-main`       | Compile for [Electron](https://electronjs.org/) for main process.
-`electron-renderer`   | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.
-`electron-preload`    | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `NodeTemplatePlugin` with `asyncChunkLoading` set to `true`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.
-`node`                | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)
-`node-webkit`         | Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)
-`web`                 | Compile for usage in a browser-like environment __(default)__
-`webworker`           | Compile as WebWorker
+`async-node`          | 编译为类 Node.js 环境可用（使用 fs 和 vm 异步加载分块）
+`electron-main`       |  编译为 [Electron](https://electronjs.org/) 主进程。
+`electron-renderer`   | 编译为 [Electron](https://electronjs.org/) 渲染进程，使用 `JsonpTemplatePlugin`, 
+`FunctionModulePlugin` 来为浏览器环境提供目标，使用 `NodeTargetPlugin` 和 `ExternalsPlugin`
+为 CommonJS 和 Electron 内置模块提供目标。
+`electron-preload`    | 编译为 [Electron](https://electronjs.org/) 渲染进程，
+使用 `NodeTemplatePlugin` 且 `asyncChunkLoading` 设置为 `true` ，`FunctionModulePlugin` 来为浏览器提供目标，使用 `NodeTargetPlugin` 和 `ExternalsPlugin` 为 CommonJS 和 Electron 内置模块提供目标。
+`node`                | 编译为类 Node.js 环境可用（使用 Node.js `require` 加载 chunks）
+`node-webkit`         | 编译为 Webkit 可用，并且使用 jsonp 去加载分块。支持 Node.js 内置模块和 [`nw.gui`](http://docs.nwjs.io/en/latest/) 
+导入（实验性质）
+`web`                 | 编译为类浏览器环境里可用 __（默认）__
+`webworker`           | 编译成一个 WebWorker
 
-For example, when the `target` is set to `"electron-main"`, webpack includes multiple electron specific variables. For more information on which templates and externals are used, you can refer to webpack's [source code](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L148-L183).
+例如，当 `target` 设置为 `"electron-main"`，webpack 引入多个 electron 特定的变量。
+有关使用哪些模板和 externals 的更多信息，
+你可以 [直接参考 webpack 源码](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L148-L183)。
 
 
 ### `function`
 
-If a function is passed, then it will be called with the compiler as a parameter. Set `target` to a `function` if none of the predefined targets from the list above meet your needs.
+如果传入一个函数，此函数调用时会传入一个 编译器（compiler） 作为参数。如果以上列表中没有一个预定义的目标(target)符合你的要求，
+请将其设置为一个函数。
 
-For example, if you don't want any of the plugins applied:
+例如，如果你不需要使用以上任何插件：
 
 __webpack.config.js__
 
@@ -54,7 +63,7 @@ module.exports = {
 };
 ```
 
-Or you can apply specific plugins you want:
+或者可以使用你想要指定的插件
 
 __webpack.config.js__
 
