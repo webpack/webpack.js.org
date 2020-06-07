@@ -181,7 +181,6 @@ return {
 };
 ```
 
-The `customFormatTags` function has two parameters:
 
 #### `chunksSorted`
 
