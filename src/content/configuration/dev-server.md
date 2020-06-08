@@ -1666,3 +1666,13 @@ module.exports = {
   }
 };
 ```
+
+T> It is possible to set any Node.js flags via `NODE_OPTIONS`, for example, to configure `HTTP_MAX_HEADER_SIZE`: 
+
+__package.json__
+
+```json
+{
+  "scripts": "NODE_OPTIONS='--max-http-header-size=100000' webpack-dev-server"
+}
+```
