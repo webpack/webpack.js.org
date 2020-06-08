@@ -25,7 +25,7 @@ It works without configuration. For advanced usage, see the [using configuration
 
 ## Installation
 
-`ChunksWebpackPlugin` is available on npm as [`chunks-webpack-plugin`](https://www.npmjs.com/package/chunks-webpack-plugin) and as [`chunks-webpack-plugin` on Github](https://github.com/yoriiis/chunks-webpack-plugin).
+`ChunksWebpackPlugin` is available on npm as [`chunks-webpack-plugin`](https://www.npmjs.com/package/chunks-webpack-plugin) and as [`chunks-webpack-plugin` on GitHub](https://github.com/yoriiis/chunks-webpack-plugin).
 
 ```bash
 npm install chunks-webpack-plugin --save-dev
