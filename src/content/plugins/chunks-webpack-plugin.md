@@ -9,9 +9,9 @@ related:
     url: https://medium.com/@Yoriiis/the-real-power-of-webpack-4-splitchunks-plugin-fad097c45ba0
 ---
 
-The `ChunksWebpackPlugin` creates HTML files with entry points and chunks relations to serve your webpack bundles. It is suitable with multi-page applications that contains multiple entry points.
+The `ChunksWebpackPlugin` creates HTML files with entry points and chunks relations to serve your webpack bundles. It is suitable with multi-page applications that contain multiple entry points.
 
-Since webpack 4, `SplitChunksPlugin` offers the possibility to optimizes all chunks. It can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks. See the webpack documentation for [`splitChunks.chunks`](/plugins/split-chunks-plugin/#splitchunkschunks) for details.
+Since webpack 4, `SplitChunksPlugin` offers the possibility to optimizes all chunks. It can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks. See the webpack documentation of [`splitChunks.chunks`](/plugins/split-chunks-plugin/#splitchunkschunks) for details.
 
 `splitChunks.chunks` option can be set to automatically generate new chunks associated with an entry point. For example, entry points `a.js` and `b.js` share common code with the file `vendors~a~b.js`.
 
@@ -19,7 +19,7 @@ With multiple entry points, it can be difficult to identify relation between the
 
 `ChunksWebpackPlugin` parses the `entrypoints` [Map](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Map) from the webpack compilation to get all valid entry points and associated files. Then, it generates HTML files which include all assets filtered by an entry point and the `chunks-manifest.json` file.
 
-## Zero config
+## Zero configuration
 
 It works without configuration. For advanced usage, see the [using configuration section](#using-a-configuration).
 
@@ -41,7 +41,7 @@ yarn add chunks-webpack-plugin --dev
 
 ## Example
 
-For example usage, please see the [`ChunksWebpackPlugin` Github documentation](https://github.com/yoriiis/chunks-webpack-plugin/blob/master/README.md#example).
+For example usage, please see the [`ChunksWebpackPlugin` GitHub documentation](https://github.com/yoriiis/chunks-webpack-plugin/blob/master/README.md#example).
 
 ## Basic usage
 
