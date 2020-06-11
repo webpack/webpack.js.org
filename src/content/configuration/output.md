@@ -23,6 +23,7 @@ contributors:
   - jamesgeorge007
   - hiroppy
   - chenxsan
+  - snitin315
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -365,8 +366,6 @@ It is possible to filter out placeholder replacement when you want to use one of
 Example: `[\id\]` generates `[id]` instead of getting replaced with the `id`.
 
 If using a function for this option, the function will be passed an object containing the substitutions in the table above.
-
-T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
 
 ## `output.assetModuleFilename`
 
