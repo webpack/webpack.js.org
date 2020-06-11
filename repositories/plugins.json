@@ -3,7 +3,6 @@
   "webpack-contrib/copy-webpack-plugin",
   "webpack-contrib/npm-install-webpack-plugin",
   "webpack-contrib/stylelint-webpack-plugin",
-  "webpack-contrib/zopfli-webpack-plugin",
   "webpack-contrib/closure-webpack-plugin",
   "webpack-contrib/mini-css-extract-plugin",
   "webpack-contrib/terser-webpack-plugin"
