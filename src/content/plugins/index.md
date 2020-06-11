@@ -26,7 +26,6 @@ Name                                                     | Description
 [`DefinePlugin`](/plugins/define-plugin)           | Allow global constants configured at compile time
 [`DllPlugin`](/plugins/dll-plugin)                 | Split bundles in order to drastically improve build time
 [`EnvironmentPlugin`](/plugins/environment-plugin) | Shorthand for using the [`DefinePlugin`](/plugins/define-plugin) on `process.env` keys
-[`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) | Extract text (CSS) from your bundles into a separate file
 [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) | Enable Hot Module Replacement (HMR)
 [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)          | Easily create HTML files to serve your bundles
 [`IgnorePlugin`](/plugins/ignore-plugin)                     | Exclude certain modules from bundles

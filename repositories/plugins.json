@@ -1,6 +1,5 @@
 [
   "webpack-contrib/compression-webpack-plugin",
-  "webpack-contrib/extract-text-webpack-plugin",
   "webpack-contrib/copy-webpack-plugin",
   "webpack-contrib/npm-install-webpack-plugin",
   "webpack-contrib/stylelint-webpack-plugin",
