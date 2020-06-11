@@ -235,12 +235,6 @@
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack-contrib/i18n-webpack-plugin",
-		"npm": "i18n-webpack-plugin",
-		"description": "Embed localization into your bundle.",
-		"maintainer": ""
-	},
-	{
 		"repo": "webpack-contrib/json5-loader",
 		"npm": "json5-loader",
 		"description": "Load JSON5 into a pre-parsed variable.",

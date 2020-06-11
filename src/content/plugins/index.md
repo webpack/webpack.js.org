@@ -10,6 +10,7 @@ contributors:
   - refactorized
   - byzyk
   - EugeneHlushko
+  - snitin315
 ---
 
 webpack has a rich plugin interface. Most of the features within webpack itself use this plugin interface. This makes webpack __flexible__.
@@ -28,7 +29,6 @@ Name                                                     | Description
 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) | Extract text (CSS) from your bundles into a separate file
 [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) | Enable Hot Module Replacement (HMR)
 [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)          | Easily create HTML files to serve your bundles
-[`I18nWebpackPlugin`](/plugins/i18n-webpack-plugin)          | Add i18n support to your bundles
 [`IgnorePlugin`](/plugins/ignore-plugin)                     | Exclude certain modules from bundles
 [`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin) | Set min/max limits for chunking to better control chunking
 [`MinChunkSizePlugin`](/plugins/min-chunk-size-plugin)       | Keep chunk size above the specified limit
