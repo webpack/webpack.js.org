@@ -3,7 +3,7 @@ import Url from 'url';
 import './PageLinks.scss';
 import icon from '../../assets/icon-print.svg';
 
-const baseURL = 'https://github.com/webpack/webpack.js.org/edit/master/';
+const baseURL = 'https://github.com/docschina/webpack.js.org/edit/cn/';
 
 export default ({
   page = {},
@@ -25,12 +25,16 @@ export default ({
       ) : null }
 
       <a className="page-links__link" href={ editLink }>
-        Edit Document
+        查看原文
         <i className="page-links__icon icon-edit" />
+      </a>
+      <a className="page-links__link" href={ editLink }>
+        编辑此页
+        <i className="page-links__icon icon-link" />
       </a>
       <span className="page-links__gap">|</span>
       <button className="page-links__link page-links__print as-link" onClick={_handlePrintClick} title="Print this page">
-        Print Document
+        打印文档
         <img src={icon} />
       </button>
     </div>
