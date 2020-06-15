@@ -352,7 +352,7 @@ Executed before module assets creation.
 
 `SyncHook`
 
-W> `additionalChunkAssets` is deprecated (use [Compilation.hook.processAssets](#processassets) instead and use one of Compilation.PROCESS_ASSETS_STAGE_* as stage option)
+W> `additionalChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
 
 Create additional assets for the chunks.
 
