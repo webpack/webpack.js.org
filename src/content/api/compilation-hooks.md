@@ -398,7 +398,7 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
 
 `AsyncSeriesHook`
 
-W> `optimizeChunkAssets` is deprecated (use [Compilation.hook.processAssets](#processassets) instead and use one of Compilation.PROCESS_ASSETS_STAGE_* as stage option)
+W> `optimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
 
 Optimize any chunk assets. The assets are stored in `compilation.assets`. A
 `Chunk` has a property `files` which points to all files created by a chunk.
