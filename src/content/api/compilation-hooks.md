@@ -431,7 +431,7 @@ compilation.hooks
 
 `SyncHook`
 
-W> `afterOptimizeChunkAssets` is deprecated (use [Compilation.hook.processAssets](#processassets) instead and use one of Compilation.PROCESS_ASSETS_STAGE_* as stage option)
+W> `afterOptimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
 
 The chunk assets have been optimized.
 
