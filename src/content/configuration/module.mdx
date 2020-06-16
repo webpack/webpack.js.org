@@ -18,6 +18,7 @@ contributors:
   - smelukov
   - opl-
   - Mistyyyy
+  - anshumanv
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -170,12 +171,12 @@ Inline loaders and `!` prefixes should not be used as they are non-standard. The
 
 ## `Rule.exclude`
 
-`Rule.exclude` is a shortcut to `Rule.resource.exclude`. If you supply a `Rule.exclude` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.exclude`](#condition) for details.
+Exclude all modules matching any of these conditions. If you supply a `Rule.exclude` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.exclude`](#condition) for details.
 
 
 ## `Rule.include`
 
-`Rule.include` is a shortcut to `Rule.resource.include`. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.include`](#condition) for details.
+Include all modules matching any of these conditions. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.include`](#condition) for details.
 
 
 ## `Rule.issuer`
@@ -420,7 +421,7 @@ module.exports = {
 
 ## `Rule.resource`
 
-A [`Condition`](#condition) matched with the resource. You can either supply a `Rule.resource` option or use the shortcut options `Rule.test`, `Rule.exclude`, and `Rule.include`. See details in [`Rule` conditions](#rule-conditions).
+A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
 
 
 ## `Rule.resourceQuery`
@@ -487,7 +488,7 @@ Indicate what parts of the module contain side effects. See [Tree Shaking](/guid
 
 ## `Rule.test`
 
-`Rule.test` is a shortcut to `Rule.resource.test`. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.test`](#condition) for details.
+Include all modules that pass test assertion. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.test`](#condition) for details.
 
 
 ## `Rule.type`
@@ -679,12 +680,6 @@ Conditions can be one of these:
 - A function: It's called with the input and must return a truthy value to match.
 - An array of Conditions: At least one of the Conditions must match.
 - An object: All properties must match. Each property has a defined behavior.
-
-`{ test: Condition }`: The Condition must match. The convention is to provide a RegExp or array of RegExps here, but it's not enforced.
-
-`{ include: Condition }`: The Condition must match. The convention is to provide a string or array of strings here, but it's not enforced.
-
-`{ exclude: Condition }`: The Condition must NOT match. The convention is to provide a string or array of strings here, but it's not enforced.
 
 `{ and: [Condition] }`: All Conditions must match.
 
