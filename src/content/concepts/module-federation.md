@@ -5,6 +5,7 @@ contributors:
   - sokra
   - chenxsan
   - EugeneHlushko
+  - jamesgeorge007
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
@@ -103,13 +104,28 @@ This plugin combines `ContainerPlugin` and `ContainerReferencePlugin`. Overrides
 
 ## Concept goals
 
-- It should be possible to expose and use any module type that webpack supports
-- Chunk loading should load everything needed in parallel (web: single round-trip to server)
+- It should be possible to expose and use any module type that webpack supports.
+- Chunk loading should load everything needed in parallel (web: single round-trip to server).
 - Control from consumer to container
-    - Overriding modules is a one-directional operation
-    - Sibling containers cannot override each other's modules
-- Concept should be environment-independent
-    - Usable in web, Node.js, etc
+    - Overriding modules is a one-directional operation.
+    - Sibling containers cannot override each other's modules.
+- Concept should be environment-independent.
+    - Usable in web, Node.js, etc.
+- Relative and absolute request in shared.
+    - Will always be provided, even if not used.
+    - Will resolve relative to `config.context`.
+    - Do not use a `requiredVersion` by default.
+- Module requests in shared
+    - are only provided when they are used.
+    - will match all used equal module requests in your build.
+    - will provide all matching modules.
+    - will extract `requiredVersion` from package.json at this position in the graph.
+    - could provide and consume multiple different version when you have nested node_modules.
+- Module requests with trailing / in shared
+    - will match all module requests with this prefix.
+- New packageName option to choose package name inorder to look for a `requiredVersion`. For module requests it is automatically inferred by default.
+- `requiredVersion` can now be `false` when automatic infer should be disabled.
+- See also the webpack/examples/module-federation example for a lot of explanations and examples.
 
 ## Use cases
 
