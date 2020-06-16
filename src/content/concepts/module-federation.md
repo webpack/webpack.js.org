@@ -125,7 +125,7 @@ This plugin combines `ContainerPlugin` and `ContainerReferencePlugin`. Overrides
     - will match all module requests with this prefix.
 - New packageName option to choose package name inorder to look for a `requiredVersion`. For module requests it is automatically inferred by default.
 - `requiredVersion` can now be `false` when automatic infer should be disabled.
-- See also the webpack/examples/module-federation example for a lot of explanations and examples.
+- See also the [module-federation-examples](https://github.com/module-federation/module-federation-examples) for a lot of explanations and examples.
 
 ## Use cases
 
