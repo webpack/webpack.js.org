@@ -13,6 +13,7 @@ contributors:
   - tanhauhau
   - snitin315
   - beejunk
+  - EugeneHlushko
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
@@ -169,7 +170,7 @@ module.exports = {
   externals: [
     function(context, request, callback) {
       if (/^yourregex$/.test(request)){
-        // Externalize to a commonjs module using the request path 
+        // Externalize to a commonjs module using the request path
         return callback(null, 'commonjs ' + request);
       }
 
@@ -243,6 +244,8 @@ module.exports = {
 
 Every dependency that matches the given regular expression will be excluded from the output bundles.
 
+__webpack.config.js__
+
 ```javascript
 module.exports = {
   //...
@@ -255,6 +258,8 @@ In this case, any dependency named `jQuery`, capitalized or not, or `$` would be
 ### Combining syntaxes
 
 Sometimes you may want to use a combination of the above syntaxes. This can be done in the following manner:
+
+__webpack.config.js__
 
 ```javascript
 module.exports = {
@@ -285,4 +290,42 @@ module.exports = {
 };
 ```
 
+W> [Default type](/configuration/externals/#externalstype) will be used if you sepcify `externals` without a type e.g. `externals: { react: 'react' }` instead of `externals: { react: 'commonjs-module react' }`.
+
 For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
+
+
+## `externalsType`
+
+`string = 'var'`
+
+Specifies the default type of externals. `amd`, `root` and `system` externals __depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)__ being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
+
+Supported types:
+
+- `'var'`
+- `'module'`
+- `'assign'`
+- `'this'`
+- `'window'`
+- `'self'`
+- `'global'`
+- `'commonjs'`
+- `'commonjs-module'`
+- `'amd'`
+- `'amd-require'`
+- `'umd'`
+- `'umd2'`
+- `'jsonp'`
+- `'system'`
+- `'promise'` - same as `'var'` but awaits the result (async module, depends on [`experiments.importAsync`](/configuration/experiments/))
+- `'import'` - uses `import()` to load a native EcmaScript module (async module, depends on [`experiments.importAsync`](/configuration/experiments/))
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  externalsType: 'promise'
+};
+```

@@ -49,6 +49,27 @@ module.exports = {
 };
 ```
 
+## `module.unsafeCache`
+
+`boolean` `function (module)`
+
+Cache the resolution of module requests. There are couple of defaults for `module.unsafeCache`:
+
+- `false` if [`cache`](/configuration/other-options/#cache) is disabled.
+- `true` if [`cache`](/configuration/other-options/#cache) is enabled and the module appears to come from node modules, `false` otherwise.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  module: {
+    unsafeCache: false,
+  }
+};
+```
+
+W> The default value is `true` in webpack 4.
 
 ## `module.rules`
 
