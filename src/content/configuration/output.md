@@ -619,7 +619,6 @@ MyLibrary.doSomething();
 
 W> When using this option, an empty `output.library` will result in no assignment.
 
-
 `libraryTarget: 'assign'` - This will generate an implied global which has the potential to reassign an existing value (use with caution).
 
 ```javascript
@@ -884,6 +883,24 @@ MyLibrary(_entry_return_);
 ```
 
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
+
+
+## `output.importFunctionName`
+
+`string = 'import'`
+
+The name of the native `import()` function. Can be used for polyfilling, e.g. with [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    importFunctionName: '__import__'
+  }
+};
+```
 
 
 ## `output.path`
