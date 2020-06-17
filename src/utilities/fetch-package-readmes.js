@@ -16,7 +16,7 @@ const types = ['loaders', 'plugins'];
 
 const pathMap = {
   loaders: path.resolve(__dirname, '../content/loaders'),
-  plugins: path.resolve(__dirname, '../content/plugins')
+  plugins: path.resolve(__dirname, '../content/plugins'),
 };
 
 async function main() {
@@ -25,14 +25,16 @@ async function main() {
 
     await mkdirp(outputDir);
 
-    const repos = JSON.parse(await readFile(path.resolve(__dirname, `../../repositories/${type}.json`)));
+    const repos = JSON.parse(
+      await readFile(path.resolve(__dirname, `../../repositories/${type}.json`))
+    );
 
     for (const repo of repos) {
       const [org, packageName] = repo.split('/');
       const url = `https://raw.githubusercontent.com/${repo}/master/README.md`;
       const htmlUrl = `https://github.com/${repo}`;
       const editUrl = `${htmlUrl}/edit/master/README.md`;
-      const fileName = path.resolve(outputDir, `_${packageName}.md`);
+      const fileName = path.resolve(outputDir, `${packageName}.md`);
 
       let title = packageName;
 
@@ -47,18 +49,18 @@ async function main() {
         title: title,
         source: url,
         edit: editUrl,
-        repo: htmlUrl
+        repo: htmlUrl,
       });
 
       request(url)
-        .then(async content => {
+        .then(async (content) => {
           const body = processReadme(content, { source: url });
 
           await writeFile(fileName, headmatter + body);
 
           console.log('Generated:', path.relative(cwd, fileName));
         })
-        .catch(err => {
+        .catch((err) => {
           throw err;
         });
     }
@@ -66,4 +68,3 @@ async function main() {
 }
 
 main();
-
