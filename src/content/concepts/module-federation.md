@@ -59,6 +59,8 @@ Each build acts as container and also consumes other build as container. This wa
 
 Shared modules are modules that are both overridable and provided as overrides to nested container. They usually point to the same module in each build, e.g. the same library.
 
+The `packageName` option allows setting a package name to look for a `requiredVersion`. It is automatically inferred for the module requests by default, set `requiredVersion` to `false` when automatic infer should be disabled.
+
 ## Building blocks
 
 ### `OverridablesPlugin` (low level)
@@ -111,21 +113,17 @@ This plugin combines `ContainerPlugin` and `ContainerReferencePlugin`. Overrides
     - Sibling containers cannot override each other's modules.
 - Concept should be environment-independent.
     - Usable in web, Node.js, etc.
-- Relative and absolute request in shared.
+- Relative and absolute request in shared:
     - Will always be provided, even if not used.
     - Will resolve relative to `config.context`.
-    - Do not use a `requiredVersion` by default.
-- Module requests in shared
-    - are only provided when they are used.
-    - will match all used equal module requests in your build.
-    - will provide all matching modules.
-    - will extract `requiredVersion` from package.json at this position in the graph.
-    - could provide and consume multiple different version when you have nested node_modules.
-- Module requests with trailing / in shared
-    - will match all module requests with this prefix.
-- New packageName option to choose package name inorder to look for a `requiredVersion`. For module requests it is automatically inferred by default.
-- `requiredVersion` can now be `false` when automatic infer should be disabled.
-- See also the [module-federation-examples](https://github.com/module-federation/module-federation-examples) for a lot of explanations and examples.
+    - Does not use a `requiredVersion` by default.
+- Module requests in shared:
+    - Are only provided when they are used.
+    - Will match all used equal module requests in your build.
+    - Will provide all matching modules.
+    - Will extract `requiredVersion` from package.json at this position in the graph.
+    - Could provide and consume multiple different version when you have nested node_modules.
+- Module requests with trailing `/` in shared will match all module requests with this prefix.
 
 ## Use cases
 
@@ -136,3 +134,7 @@ Each page of a Single Page Application is exposed from container build in a sepa
 ### Components library as container
 
 Many applications share a common components library which could be built as a container with each component exposed. Each application consumes components from the components library container. Changes to the components library can be separately deployed without the need to re-deploy all applications. The application automatically uses the up-to-date version of the components library.
+
+### Further reading
+
+See the [module-federation-examples](https://github.com/module-federation/module-federation-examples) for a lot of explanations and examples.
