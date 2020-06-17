@@ -136,3 +136,85 @@ Each page of a Single Page Application is exposed from container build in a sepa
 ### Components library as container
 
 Many applications share a common components library which could be built as a container with each component exposed. Each application consumes components from the components library container. Changes to the components library can be separately deployed without the need to re-deploy all applications. The application automatically uses the up-to-date version of the components library.
+
+## Troubleshooting
+`Uncaught Error: Shared module is not available for eager consumption` <br/>
+You are eagerly executing an app which is operating as a omnidirectional host.
+
+You have a few options to choose from:
+
+You can set the dependency as eager inside the advanced API of Module Federation, which doesn’t put the modules in an async chunk, but provides them synchronously.
+This allows us to use these shared modules in the initial chunk. But be careful as all provided and fallback modules will always be downloaded.
+It’s wise to provide it only at one point of your app, e.g. the shell.
+```js
+shared: {
+  ...deps,
+  react: {
+    eager: true,
+    singleton: true,
+    requiredVersion: deps.react,
+  },
+  "react-dom": {
+    eager: true,
+    singleton: true,
+    requiredVersion: deps["react-dom"],
+  },
+```
+If you do not want to set dependencies as “eager” then you can take advantage of bundle-loader
+In your webpack configuration. add this loader
+```js
+module: {
+  rules: [
+    {
+      test: /bootstrap\.js$/,
+      loader: "bundle-loader",
+      options: {
+        lazy: true,
+      },
+    },
+  ]
+}
+```
+Then change your entry point to look like this.
+Create a `bootstrap.js` file, and move the contents of your entry point code into that file
+
+```js
+//index.js
+import bootstrap from "./bootstrap";
+bootstrap();
+//bootstrap.js
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+ReactDOM.render(<App />, document.getElementById("root"));
+```
+
+This creates an opportunity for webpack to coordinate with other remotes and decide who will vend what, before beginning to execute the application. This approach will increase RTT as webpack is unable to async load everything in one roundtrip.
+The recommended solution to eager imports
+Methods mentioned above work, but can have some limits or drawbacks.
+
+We strongly recommend a dynamic import of a bootstrap file. Doing so will not create any additional Round Trips, it’s also more performant in general as initialization code is split out of a larger chunk.
+`ìmport('./bootstrap')`
+2. `Uncaught Error: Module “./Button” does not exist in container.`
+It likely does not say button, but the error message will look similar.
+This issue is typically seen if you are upgrading from beta.16 to beta.17
+Within ModuleFederationPlugin. Change the exposes from:
+
+```js
+exposes: {
+  "Button": "./src/Button",
+},
+```
+
+To this:
+```js
+exposes: {
+  "./Button": "./src/Button",
+},
+```
+
+3. `Uncaught TypeError: fn is not a function`
+
+You likely are missing the remoteEntry.js, make sure its added.
+If you have the remoteEntry loaded for the remote you are trying to consume, but still, see this error.
+Add the host’s remoteEntry.js file to the HTML as well.
