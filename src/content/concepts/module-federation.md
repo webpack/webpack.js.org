@@ -177,6 +177,14 @@ new ModuleFederationPlugin({
 
 ```js
 const config = {
+  entry: 'bundle-loader!./bootstrap.js'
+};
+```
+
+Or you can set via module rules: [See Full Example](https://github.com/module-federation/module-federation-examples/blob/master/basic-host-remote/app1/webpack.config.js)
+
+```js
+const config = {
   module: {
     rules: [
       {
