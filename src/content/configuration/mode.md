@@ -1,5 +1,5 @@
 ---
-title: Mode
+title: 模式（Mode）
 sort: 5
 contributors:
   - EugeneHlushko
@@ -11,13 +11,13 @@ related:
     url: https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js
 ---
 
-Providing the `mode` configuration option tells webpack to use its built-in optimizations accordingly.
+提供 `mode` 配置选项，告知 webpack 使用相应模式的内置优化。
 
 `string = 'production': 'none' | 'development' | 'production'`
 
-## Usage
+## 用法
 
-Provide the `mode` option in the config:
+只需在配置对象中提供 `mode` 选项：
 
 ```javascript
 module.exports = {
@@ -26,23 +26,23 @@ module.exports = {
 ```
 
 
-or pass it as a [CLI](/api/cli/) argument:
+或者从 [CLI](/api/cli/) 参数中传递：
 
 ```bash
 webpack --mode=development
 ```
 
-The following string values are supported:
+支持以下字符串值：
 
-Option                | Description
+选项                  | 描述
 --------------------- | -----------------------
-`development`         | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `development`. Enables `NamedChunksPlugin` and `NamedModulesPlugin`.
-`production`          | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `production`. Enables `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` and `TerserPlugin`.
-`none`                | Opts out of any default optimization options
+`development`         | 会将 `DefinePlugin` 中 `process.env.NODE_ENV` 的值设置为 `development`. 启用 `NamedChunksPlugin` 和 `NamedModulesPlugin` 。
+`production`          | 会将 `DefinePlugin` 中 `process.env.NODE_ENV` 的值设置为 `production`. 启用 `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` 和 `TerserPlugin` 。
+`none`                | 不使用任何默认优化选项
 
-If not set, webpack sets `production` as the default value for `mode`.
+如果没有设置，webpack 会给 `mode` 的默认值设置为 `production`。
 
-T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
+T> 请注意，设置 `NODE_ENV` 并不会自动地设置 `mode`。
 
 
 ### Mode: development
@@ -155,7 +155,7 @@ module.exports = {
 }
 ```
 
-If you want to change the behavior according to the __mode__ variable inside the _webpack.config.js_, you have to export a function instead of an object:
+如果要根据 _webpack.config.js_ 中的 __mode__ 变量更改打包行为，则必须将配置导出为函数，而不是导出对象：
 
 ```javascript
 var config = {
