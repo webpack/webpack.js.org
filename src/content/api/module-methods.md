@@ -10,6 +10,7 @@ contributors:
   - debs-obrien
   - wizardofhogwarts
   - EugeneHlushko
+  - chenxsan
 related:
   - title: CommonJS Wikipedia
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -103,6 +104,7 @@ Inline comments to make features work. By adding comments to the import, we can 
 import(
   /* webpackChunkName: "my-chunk-name" */
   /* webpackMode: "lazy" */
+  /* webpackExports: ["default", "named"] */
   'module'
 );
 
@@ -146,6 +148,8 @@ T> Note that all options can be combined like so `/* webpackMode: "lazy-once", w
 `webpackExclude`: A regular expression that will be matched against during import resolution. Any module that matches __will not be bundled__.
 
 T> Note that `webpackInclude` and `webpackExclude` options do not interfere with the prefix. eg: `./locale`.
+
+`webpackExports`: tells webpack to only bundle the used exports of a module when using dynamic imports. It can decrease the output size of a chunk. Available since [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18).
 
 W> The use of `System.import` in webpack [did not fit the proposed spec](https://github.com/webpack/webpack/issues/2163), so it was deprecated in webpack [2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`.
 
