@@ -352,6 +352,8 @@ Executed before module assets creation.
 
 `SyncHook`
 
+W> `additionalChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
+
 Create additional assets for the chunks.
 
 - Callback Parameters: `chunks`
@@ -396,6 +398,8 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
 
 `AsyncSeriesHook`
 
+W> `optimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
+
 Optimize any chunk assets. The assets are stored in `compilation.assets`. A
 `Chunk` has a property `files` which points to all files created by a chunk.
 Any additional chunk assets are stored in `compilation.additionalChunkAssets`.
@@ -426,6 +430,8 @@ compilation.hooks
 ### `afterOptimizeChunkAssets`
 
 `SyncHook`
+
+W> `afterOptimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
 
 The chunk assets have been optimized.
 
