@@ -10,9 +10,9 @@ __webpack.config.js__
 
 ``` javascript
 module.exports = {
-	plugins: [
-        new webpack.NoEmitOnErrorsPlugin()
-    ]
+  plugins: [
+    new webpack.NoEmitOnErrorsPlugin()
+  ]
 };
 
 ```
