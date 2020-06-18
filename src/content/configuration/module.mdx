@@ -326,7 +326,7 @@ module.exports = {
       {
         //...
         parser: {
-          dataUrlCondition: (source, { filename, module })) => {
+          dataUrlCondition: (source, { filename, module }) => {
             const content = source.toString();
             return content.includes('some marker');
           }
