@@ -195,7 +195,7 @@ __src/index.js__
 + import metroMap from './images/matro.svg';
 
 - img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
-+ block.style.background = `url(${metroMap}); // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
++ block.style.background = `url(${metroMap})`; // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
 ```
 
 All `.svg` files will be injected into the bundles as data URI.

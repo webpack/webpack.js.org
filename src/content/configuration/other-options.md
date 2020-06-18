@@ -11,6 +11,7 @@ contributors:
   - EugeneHlushko
   - skovy
   - rishabh3112
+  - niravasher
   - Neob91
 related:
   - title: Using Records
@@ -145,6 +146,34 @@ module.exports = {
   }
 };
 ```
+
+### `cache.buildDependencies`
+
+`object`
+
+`cache.buildDependencies` is an object of arrays of additional code dependencies for the build. webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
+
+Defaults to `webpack/lib` to get all dependencies of webpack.
+
+T> It's recommended to set `cache.buildDependencies.config: [__filename]` in your webpack configuration to get the latest configuration and all dependencies.
+
+```javascript
+module.exports = {
+  cache: {
+    buildDependencies: {
+      // This makes all dependencies of this file - build dependencies
+      config: [__filename]
+      // By default webpack and loaders are build dependencies
+    }
+  }
+};
+```
+
+### `cache.managedPaths`
+
+`[string] = ['./node_modules']`
+
+`cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
 
 ### `cache.hashAlgorithm`
 
