@@ -9,6 +9,8 @@ contributors:
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
+  - title: Explanations and Examples
+    url: https://github.com/module-federation/module-federation-examples
 ---
 
 ## Motivation
@@ -134,7 +136,3 @@ Each page of a Single Page Application is exposed from container build in a sepa
 ### Components library as container
 
 Many applications share a common components library which could be built as a container with each component exposed. Each application consumes components from the components library container. Changes to the components library can be separately deployed without the need to re-deploy all applications. The application automatically uses the up-to-date version of the components library.
-
-### Further reading
-
-See the [module-federation-examples](https://github.com/module-federation/module-federation-examples) for a lot of explanations and examples.
