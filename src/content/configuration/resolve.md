@@ -455,9 +455,9 @@ module.exports = {
 
 ### `resolve.restrictions`
 
-`[string | RegExp]`
+`[string, RegExp]`
 
-A list of resolve restrictions to restrict the paths a request can be resolved.
+A list of resolve restrictions to restrict the paths that a request can be resolved on.
 
 __webpack.config.js__
 
