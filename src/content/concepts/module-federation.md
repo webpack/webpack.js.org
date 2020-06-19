@@ -5,9 +5,12 @@ contributors:
   - sokra
   - chenxsan
   - EugeneHlushko
+  - jamesgeorge007
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
+  - title: Explanations and Examples
+    url: https://github.com/module-federation/module-federation-examples
 ---
 
 ## Motivation
@@ -58,6 +61,8 @@ Each build acts as container and also consumes other build as container. This wa
 
 Shared modules are modules that are both overridable and provided as overrides to nested container. They usually point to the same module in each build, e.g. the same library.
 
+The `packageName` option allows setting a package name to look for a `requiredVersion`. It is automatically inferred for the module requests by default, set `requiredVersion` to `false` when automatic infer should be disabled.
+
 ## Building blocks
 
 ### `OverridablesPlugin` (low level)
@@ -103,13 +108,24 @@ This plugin combines `ContainerPlugin` and `ContainerReferencePlugin`. Overrides
 
 ## Concept goals
 
-- It should be possible to expose and use any module type that webpack supports
-- Chunk loading should load everything needed in parallel (web: single round-trip to server)
+- It should be possible to expose and use any module type that webpack supports.
+- Chunk loading should load everything needed in parallel (web: single round-trip to server).
 - Control from consumer to container
-    - Overriding modules is a one-directional operation
-    - Sibling containers cannot override each other's modules
-- Concept should be environment-independent
-    - Usable in web, Node.js, etc
+    - Overriding modules is a one-directional operation.
+    - Sibling containers cannot override each other's modules.
+- Concept should be environment-independent.
+    - Usable in web, Node.js, etc.
+- Relative and absolute request in shared:
+    - Will always be provided, even if not used.
+    - Will resolve relative to `config.context`.
+    - Does not use a `requiredVersion` by default.
+- Module requests in shared:
+    - Are only provided when they are used.
+    - Will match all used equal module requests in your build.
+    - Will provide all matching modules.
+    - Will extract `requiredVersion` from package.json at this position in the graph.
+    - Could provide and consume multiple different version when you have nested node_modules.
+- Module requests with trailing `/` in shared will match all module requests with this prefix.
 
 ## Use cases
 
