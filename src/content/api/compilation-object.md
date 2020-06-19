@@ -8,261 +8,261 @@ contributors:
   - jamesgeorge007
 ---
 
-The Compilation object has many methods and hooks available. On this page, we will list the available methods and properties.
+Compilation 对象有很多可用的方法和钩子。在此页面，我们将会列举出这些可用的方法和属性。
 
-## compilation object methods
+## compilation 对象方法
 
 ### getStats
 
 `function`
 
-Returns Stats object for the current compilation.
+返回当前编译的状态对象。
 
 ### addModule
 
 `function (module, cacheGroup)`
 
-Adds a module to the current compilation.
+向当前编译添加一个模块。
 
-Parameters:
+参数：
 
-- `module` - module to be added
-- `cacheGroup` - `cacheGroup` of the module
+- `module` - 要添加的模块
+- `cacheGroup` - 模块的 `cacheGroup`
 
 ### getModule
 
 `function (module)`
 
-Fetches a module from a compilation by its identifier.
+通过编译的标识符获取其模块。
 
-Parameters:
+参数：
 
-- `module` - module to be fetched. The identifier is extracted from the module by the compilation using `module.identifier()` method.
+- `module` - 要获取的模块。标识符是通过编译使用 `module.identifier()` 方法从模块中提取的。
 
 ### findModule
 
 `function (module)`
 
-Attempts to search for a module by its identifier.
+尝试通过其标识符搜索模块。
 
-Parameters:
+参数：
 
-- `module` - module to be searched for. The identifier is extracted from the module by the compilation using `module.identifier()` method.
+- `module` - 要搜索的模块。标识符是通过编译使用 `module.identifier()` 方法从模块中提取的。
 
 ### waitForBuildingFinished
 
 `function (module, callback)`
 
-Runs a given `callback` function when the given module was built.
+在构建给定模块时运行给定的 `callback` 函数。
 
-Parameters:
+参数：
 
-- `module` - the module at question.
-- `callback` - the function to be invoked.
+- `module` - 有问题的模块。
+- `callback` - 要调用的函数。
 
 ### buildModule
 
 `function (module, optional, origin, dependencies)`
 
-Builds the given module.
+构建给定的模块。
 
-Parameters:
+参数：
 
-- `module` - the module to be built.
-- `optional` - optional flag.
-- `origin` - origin module from which this module build was requested.
-- `dependencies` - optional dependencies of the module to be built.
+- `module` - 要构建的模块。
+- `optional` - 可选标志。
+- `origin` - 请求此模块构建的原始模块。
+- `dependencies` - 要构建模块的可选依赖。
 
 ### processModuleDependencies
 
 `function (module, callback)`
 
-Process the given module dependencies.
+处理给定模块依赖。
 
-Parameters:
+参数：
 
-- `module` - module to be processed for the dependencies.
-- `callback` - function to be invoked when dependencies of the module had been processed.
+- `module` - 要被处理依赖的模块。
+- `callback` - 模块依赖处理完成时回调的函数。
 
 ### addModuleDependencies
 
 `function (module, dependencies, bail, cacheGroup, recursive, callback)`
 
-Adds dependencies to the module. Automatically called by `processModuleDependencies` after processing dependencies.
+向模块添加依赖。处理依赖之后被 `processModuleDependencies` 自动调用。
 
-Parameters:
+参数：
 
-- `module` - module to add dependencies to.
-- `dependencies` - set of sorted dependencies to iterate through and add to the module.
-- `bail` - whether to bail or not when an error occurs.
-- `cacheGroup` - `cacheGroup` of the module.
-- `recursive` - whether it is a recursive traversal.
-- `callback` - function to invoke after adding the module dependencies.
+- `module` - 要添加依赖的模块。
+- `dependencies` - 要遍历添加到模块的一组已排序依赖。
+- `bail` - 发生错误时是否中断进程并抛出 error。
+- `cacheGroup` - 模块的 `cacheGroup`。
+- `recursive` - 是否要递归遍历。
+- `callback` - 添加模块依赖之后回调的函数。
 
 
 ### addEntry
 
 `function (context, entry, name, callback)`
 
-Adds an entry to the compilation.
+为编译添加入口。
 
-Parameters:
+参数：
 
-- `context` - context path for entry.
-- `entry` - entry dependency.
-- `name` - the name of entry.
-- `callback` - function to be invoked when addEntry finishes.
+- `context` - 入口的上下文路径。
+- `entry` - 入口依赖。
+- `name` - 入口名称。
+- `callback` - 添加入口完成之后回调的函数。
 
 ### prefetch
 
 `function (context, dependency, callback)`
 
-Creates a module from a given dependency.
+根据给定的依赖创建一个模块。
 
-Parameters:
+参数：
 
-- `context` - context path.
-- `dependency` - the dependency that was used to create the module.
-- `callback` - module callback that sends a module up one level.
+- `context` - 上下文路径。
+- `dependency` - 被用来创建模块的依赖。
+- `callback` - 向上一级发送模块的模块回调。
 
 ### rebuildModule
 
 `function (module, thisCallback)`
 
-Triggers a re-build of the module.
+触发模块的重建。
 
-Parameters:
+参数：
 
-- `module` - module to be rebuilt.
-- `thisCallback` - function to be invoked when the module finishes rebuilding.
+- `module` - 要被重建的模块。
+- `thisCallback` - 模块重建完成之后调用的函数。
 
 ### finish
 
 `function (callback)`
 
-Finishes compilation and invokes the given callback.
+完成编译并调用给定的回调。
 
-Parameters:
+参数：
 
-- `callback` - function to be invoked when the compilation has been finished.
+- `callback` - 编译完成之后调用的函数。
 
 ### seal
 
 `function (callback)`
 
-Seals the compilation.
+封闭编译。
 
-Parameters:
+参数：
 
-- `callback` - function to be invoked when the compilation has been sealed.
+- `callback` - 封闭编译时回调的函数。
 
 ### unseal
 
 `function`
 
-Unseals the compilation.
+解除封闭编译。
 
-Parameters:
+参数：
 
-- `callback` - function to be invoked when the compilation has been unsealed.
+- `callback` - 解除封闭编译时回调的函数。
 
 ### reportDependencyErrorsAndWarnings
 
 `function (module, blocks)`
 
-Adds errors and warnings of the given module to the compilation errors and warnings.
+将给定模块的错误和警告添加到编译的错误和警告中。
 
-Parameters:
+参数：
 
-- `module` - the module whose errors and warnings are to be reported.
-- `blocks` - a set of dependency blocks to report from.
+- `module` - 要被报告错误与警告的模块。
+- `blocks` - 一组要报告的依赖块。
 
 ### addChunkInGroup
 
 `function (groupOptions, module, loc, request)`
 
-Adds module to an existing chunk group or creates a new one. Returns a `chunkGroup`.
+将模块添加到现有 chunk 组或创建一个新的组。返回一个 `chunkGroup`。
 
-Parameters:
+参数：
 
-- `groupOptions` - options for the chunk group.
-- `module` - a module that references the chunk group.
-- `loc` - the location from which the chunk group is referenced (inside of the module).
-- `request` - the request from which the chunk group is referenced.
+- `groupOptions` - chunk  组的选项。
+- `module` - 引用 chunk 组的模块。
+- `loc` - 引用 chunk 组的位置（模块内部）。
+- `request` - 引用 chunk 组的请求。
 
 ### addChunk
 
 `function (name)`
 
-Creates and adds a new chunk to the `compilation.chunks`. Returns that `chunk`.
+向 `compilation.chunks` 创建或添加一个新的 chunk。返回这个 `chunk`.
 
-Parameters:
+参数：
 
-- `name` - the name of the chunk.
+- `name` - chunk 的名称。
 
 ### assignDepth
 
 `function (module)`
 
-Assigns `depth` to the given module and its dependency blocks recursively.
+为给定的模块及其依赖块递归分配 `depth` 。
 
-Parameters:
+参数：
 
-- `module` - the module to assign depth to.
+- `module` - 要被分配 depth 的模块。
 
 ### getDependencyReference
 
 `function (module, dependency)`
 
-Returns the reference to the dependency from a given module.
+返回给定模块对依赖的引用。
 
-Parameters:
+参数：
 
-- `module` - the module at question.
-- `dependency` - the dependency to get reference to.
+- `module` - 有问题的模块。
+- `dependency` - 要引用的依赖。
 
 ### processDependenciesBlocksForChunkGroups
 
 `function (inputChunkGroups)`
 
-Creates the `Chunk` graph from the `Module` graph. The process is done in two phases. Phase one: traverse the module graph and build a basic chunks graph in `chunkDependencies`. Phase two: traverse every possible way through the basic chunk graph and track the available modules. While traversing, `processDependenciesBlocksForChunkGroups` connects chunks with each other and `Blocks` with `Chunks`. It stops traversing when all modules for a chunk are already available and it doesn't connect unneeded chunks.
+通过 `Module` 图创建 `Chunk` 图。该过程分为两个阶段完成。阶段一：遍历模块图，在 `chunkDependencies` 中创建一个基础 chunk 图。阶段二：通过基本 chunk 图遍历所有可能的方法并且跟踪可用模块。遍历过程中 `processDependenciesBlocksForChunkGroups` 将 chunk 相互连接，并将 `Blocks` 与 `Chunks` 连接. 当一个 chunk 的所有模块都已经可用且未连接不需要的 chunk 时，它将停止遍历。
 
-Parameters:
+参数：
 
-- `inputChunkGroups` - chunk groups that are processed.
+- `inputChunkGroups` - 被处理的 chunk 组。
 
 ### removeReasonsOfDependencyBlock
 
 `function (module, block)`
 
-Removes relation of the module to the dependency block.
+移除模块与依赖块之间的关系。
 
-Parameters:
+参数：
 
-- `module` - a module relationship to be removed.
-- `block` - dependency block.
+- `module` - 要移除的模块关系。
+- `block` - 依赖块。
 
 ### patchChunksAfterReasonRemoval
 
 `function (module, chunk)`
 
-Patches ties of module and chunk after removing dependency reasons. Called automatically by `removeReasonsOfDependencyBlock`.
+删除依赖性原因后，修补模块和 chunk 的关系。被 `removeReasonsOfDependencyBlock` 自动调用。
 
-Parameters:
+参数：
 
-- `module` - a module to patch tie.
-- `chunk` - a chunk to patch tie.
+- `module` - 要修复关系的模块。
+- `chunk` - 要修复关系的 chunk。
 
 ### removeChunkFromDependencies
 
 `function (block, chunk)`
 
-Removes given chunk from a dependencies block module and chunks after removing dependency reasons. Called automatically by `removeReasonsOfDependencyBlock`.
+在除去依赖性原因后，从依赖块模块和 chunk 中移除给定的 chunk。会被 `removeReasonsOfDependencyBlock` 自动调用。
 
-Parameters:
+参数：
 
-- `block` - block tie for `Chunk`.
-- `chunk` - a chunk to remove from dependencies.
+- `block` - `Chunk` 的块连接。
+- `chunk` - 从依赖中删除的块。
 
 ### sortItemsWithModuleIds
 
@@ -296,35 +296,35 @@ Parameters:
 
 `function (filename, data)`
 
-Returns the interpolated path.
+返回插值路径。
 
-Parameters:
+参数：
 
-- `filename` - used to get asset path with hash.
-- `data` - data object.
+- `filename` - 用于通过哈希获取资源路径。
+- `data` - 数据对象。
 
 ### getPathWithInfo
 
 `function (filename, data)`
 
-Returns interpolated path and asset information.
+返回插值路径和资源信息。
 
-Parameters:
+参数：
 
-- `filename` - used to get asset path with hash.
-- `data` - data object.
+- `filename` - 用于通过哈希获取资源路径。
+- `data` - 数据对象。
 
 ### createChildCompiler
 
 `function (name, outputOptions, plugins)`
 
-Allows running another instance of webpack inside of webpack. However, as a child with different settings and configurations applied. It copies all hooks and plugins from the parent (or top-level compiler) and creates a child `Compiler` instance. Returns the created `Compiler`.
+允许在 webpack 中运行另一个 webpack 实例。但是，子编译器会应用不同的设置和配置。他会从父编译器（或者顶级编译器）中复制所有的钩子(hook)和插件(plugin)，并且创建一个子 `Compiler` 实例。 返回值为创建好的 `Compiler` 实例。
 
-Parameters:
+参数：
 
-- `name` - name for the child `Compiler`.
-- `outputOptions` - output options object.
-- `plugins` - webpack plugins that will be applied.
+- `name` -  子 `Compiler` 的名称。
+- `outputOptions` - 输出选项。
+- `plugins` - 将被提供的 webpack 插件。
 
 ### checkConstraints
 
@@ -334,40 +334,40 @@ Parameters:
 
 `function (file, source, assetInfo = {})`
 
-W> Available since webpack 4.40.0
+W> webpack 4.40.0 后可用。
 
-Parameters:
+参数：
 
-- `file` - file name of the asset
-- `source` - the source of the asset
-- `assetInfo` - additional asset information
+- `file` - 资源名称。
+- `source` - 资源来源。
+- `assetInfo` - 附加资源信息。
 
 ### updateAsset
 
 `function (file, newSourceOrFunction, assetInfoUpdateOrFunction)`
 
-W> Available since webpack 4.40.0
+W> webpack 4.40.0 后可用。
 
-Parameters:
+参数：
 
-- `file` - file name of the asset
-- `newSourceOrFunction` - new asset source or function converting old to new
-- `assetInfoUpdateOrFunction` - new asset info or function converting old to new
+- `file` - 资源名称。
+- `newSourceOrFunction` - 新资源来源或将旧资源转换为新资源的函数。
+- `assetInfoUpdateOrFunction` - 新资源信息或将旧资源转换为新资源的函数。
 
 ### getAssets
 
 `function`
 
-W> Available since webpack 4.40.0
+W> webpack 4.40.0 后可用。
 
-Returns array of all assets under the current compilation.
+返回当前编译下所有资源的数组。
 
 ### getAsset
 
 `function (name)`
 
-W> Available since webpack 4.40.0
+W> webpack 4.40.0 后可用。
 
-Parameters:
+参数：
 
-`name` - the name of the asset to return
+`name` - 要返回的资源名称。
