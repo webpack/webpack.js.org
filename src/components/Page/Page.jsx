@@ -7,6 +7,7 @@ import Markdown from '../Markdown/Markdown';
 import Contributors from '../Contributors/Contributors';
 import {PlaceholderString} from '../Placeholder/Placeholder';
 import Configuration from '../Configuration/Configuration';
+import AdjacentPages from './AdjacentPages';
 
 // Load Styling
 import './Page.scss';
@@ -55,7 +56,7 @@ class Page extends React.Component {
   }
 
   render() {
-    const { title, contributors = [], related = [], ...rest } = this.props;
+    const { title, contributors = [], related = [], previous, next, ...rest } = this.props;
 
     const { contentLoaded } = this.state;
     const loadRelated = contentLoaded && related && related.length !== 0;
@@ -86,6 +87,10 @@ class Page extends React.Component {
           <h1>{title}</h1>
 
           {contentRender}
+          
+          {
+            (previous || next) && <AdjacentPages previous={previous} next={next} />
+          }
 
           {loadRelated && (
             <div className="related__section">
