@@ -26,7 +26,7 @@ export default function AdjacentPages({ previous, next }) {
       )}
       {next && (
         <div className="adjacent-links__next">
-          <div>Next »</div>
+          <div className="adjacent-links__label--next">Next »</div>
           <Link className="adjacent-links__link" to={next.url}>
             {next.title}
           </Link>
