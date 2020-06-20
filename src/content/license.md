@@ -1,5 +1,5 @@
 ---
-title: License
+title: 遵循许可
 sort: 5
 contributors:
   - EugeneHlushko
@@ -8,17 +8,17 @@ contributors:
 
 ## webpack
 
-webpack is [MIT licensed](https://github.com/webpack/webpack/blob/master/LICENSE).
+webpack 遵循 [MIT 许可](https://github.com/webpack/webpack/blob/master/LICENSE)。
 
-## webpack logo and icon
+## webpack logo 和 icon
 
-The webpack logo and icon are under a different license which can be
-found [here](https://github.com/webpack/media).
+webpack logo 和 icon 遵循不同的许可，
+具体可以查看[这里](https://github.com/webpack/media)
 
-## webpack documentation
+## webpack 文档
 
-The content on [https://webpack.js.org/](https://webpack.js.org/) is available under [Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/) license meaning attribution is required should you use the content elsewhere.
+[https://webpack.docschina.org/](https://webpack.docschina.org/) 内容遵循 [Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/) 许可，如果你在其他地方使用我们的内容，则需要放置许可证，并声明文档归属。
 
-## webpack code samples
+## webpack 代码示例
 
-The code samples use [CC0 1.0 Universal (CC0 1.0) (Public Domain)](https://creativecommons.org/publicdomain/zero/1.0/) and you are free to use them as you like.
+代码示例使用 [CC0 1.0 Universal (CC0 1.0)（公共领域）](https://creativecommons.org/publicdomain/zero/1.0/) 许可，你可以自由使用它们。
