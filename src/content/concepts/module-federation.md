@@ -155,7 +155,7 @@ It’s wise to provide it only at one point of your app, e.g. the shell.
 We strongly recommend using an asynchronous boundary. It will split out the initialization code of a larger chunk to avoid any additional round trips and improve performance in general.
 `import('./bootstrap')`
 
-Create a `bootstrap.js` file, and move the original contents of the entry point code into that file.
+Create a `bootstrap.js` file and move the original contents of the entry point code into it.
 
 __index.js__
 
