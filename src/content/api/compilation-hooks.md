@@ -352,13 +352,9 @@ chunk `id` 优化结束之后触发。
 
 `SyncHook`
 
-<<<<<<< HEAD
-为这些 chunk 创建其他 asset。
-=======
-W> `additionalChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
+W> `additionalChunkAssets` 已弃用（可使用 [Compilation.hook.processAssets](#processassets) 来代替，并且可使用 Compilation.PROCESS_ASSETS_STAGE_* 作为其选项参数。）
 
-Create additional assets for the chunks.
->>>>>>> c4219d44ef50ce4c3920ee3f99758718f561e2f6
+为这些 chunk 创建其他 asset。
 
 - 回调参数：`chunks`
 
@@ -402,17 +398,11 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
 
 `AsyncSeriesHook`
 
-<<<<<<< HEAD
+W> `optimizeChunkAssets` 已弃用。（可使用 [Compilation.hook.processAssets](#processassets) 来代替，并且可使用 Compilation.PROCESS_ASSETS_STAGE_* 作为其选项参数。
+
 优化所有 chunk asset。asset 存储在 `compilation.assets` 中。
 每个 `Chunk` 都具有一个 `files` 属性，其指向由一个 chunk 创建的所有文件。
 任何额外 chunk asset 都存储在 `compilation.additionalChunkAssets` 中。
-=======
-W> `optimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
-
-Optimize any chunk assets. The assets are stored in `compilation.assets`. A
-`Chunk` has a property `files` which points to all files created by a chunk.
-Any additional chunk assets are stored in `compilation.additionalChunkAssets`.
->>>>>>> c4219d44ef50ce4c3920ee3f99758718f561e2f6
 
 - 回调参数：`chunks`
 
@@ -441,13 +431,9 @@ compilation.hooks
 
 `SyncHook`
 
-<<<<<<< HEAD
-chunk asset 已经被优化。
-=======
-W> `afterOptimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
+W> `afterOptimizeChunkAssets` 已弃用。（可使用 [Compilation.hook.processAssets](#processassets) 来代替，并且可使用 Compilation.PROCESS_ASSETS_STAGE_* 作为其选项参数。
 
-The chunk assets have been optimized.
->>>>>>> c4219d44ef50ce4c3920ee3f99758718f561e2f6
+chunk asset 已经被优化。
 
 - 回调参数：`chunks`
 
