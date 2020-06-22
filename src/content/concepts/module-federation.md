@@ -241,16 +241,6 @@ new ModuleFederationPlugin({
   }
 });
 
-To this:
-
-```js
-new ModuleFederationPlugin({
-  exposes: {
-    './Button':'./src/Button'
-  }
-});
-```
-
 `Uncaught TypeError: fn is not a function`
 
 You likely are missing the remote container, make sure its added.
