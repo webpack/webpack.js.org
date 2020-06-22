@@ -18,6 +18,7 @@ contributors:
   - smelukov
   - opl-
   - Mistyyyy
+  - anshumanv
 ---
 
 这些选项决定了如何处理项目中的[不同类型的模块](/concepts/modules)。
@@ -175,12 +176,20 @@ Inline loaders and `!` prefixes should not be used as they are non-standard. The
 
 ## `Rule.exclude`
 
+<<<<<<< HEAD
 `Rule.exclude` 是 `Rule.resource.exclude` 的简写。如果你提供了 `Rule.exclude` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.exclude`](#condition)。
+=======
+Exclude all modules matching any of these conditions. If you supply a `Rule.exclude` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.exclude`](#condition) for details.
+>>>>>>> c4219d44ef50ce4c3920ee3f99758718f561e2f6
 
 
 ## `Rule.include`
 
+<<<<<<< HEAD
 `Rule.include` 是 `Rule.resource.include` 的简写。如果你提供了 `Rule.include` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.include`](#condition)。
+=======
+Include all modules matching any of these conditions. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.include`](#condition) for details.
+>>>>>>> c4219d44ef50ce4c3920ee3f99758718f561e2f6
 
 
 ## `Rule.issuer`
@@ -336,7 +345,7 @@ module.exports = {
       {
         //...
         parser: {
-          dataUrlCondition: (source, { filename, module })) => {
+          dataUrlCondition: (source, { filename, module }) => {
             const content = source.toString();
             return content.includes('some marker');
           }
@@ -431,7 +440,11 @@ module.exports = {
 
 ## `Rule.resource`
 
+<<<<<<< HEAD
 [`条件`](#条件)会匹配 resource。既可以提供 `Rule.resource` 选项，也可以使用快捷选项 `Rule.test`，`Rule.exclude` 和 `Rule.include`。在 [`Rule` 条件](#rule-conditions) 中查看详细。
+=======
+A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
+>>>>>>> c4219d44ef50ce4c3920ee3f99758718f561e2f6
 
 
 ## `Rule.resourceQuery`
@@ -499,7 +512,11 @@ T> 详情参阅 [`嵌套规则`](#nested-rules) 。
 
 ## `Rule.test`
 
+<<<<<<< HEAD
 `Rule.test` 是 `Rule.resource.test` 的简写。如果你提供了一个 `Rule.test` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.test`](#condition)。
+=======
+Include all modules that pass test assertion. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.test`](#condition) for details.
+>>>>>>> c4219d44ef50ce4c3920ee3f99758718f561e2f6
 
 
 ## `Rule.type`
@@ -697,6 +714,7 @@ module.exports = {
 - 条件数组：至少一个匹配条件。
 - 对象：匹配所有属性。每个属性都有一个定义行为。
 
+<<<<<<< HEAD
 `{ test: Condition }`：匹配特定条件。一般是提供一个正则表达式或正则表达式的数组，但这不是强制的。
 
 `{ include: Condition }`：匹配特定条件。一般是提供一个字符串或者字符串数组，但这不是强制的。
@@ -704,6 +722,9 @@ module.exports = {
 `{ exclude: Condition }`：排除特定条件。一般是提供一个字符串或字符串数组，但这不是强制的。
 
 `{ and: [Condition] }`：必须匹配数组中的所有条件
+=======
+`{ and: [Condition] }`: All Conditions must match.
+>>>>>>> c4219d44ef50ce4c3920ee3f99758718f561e2f6
 
 `{ or: [Condition] }`：匹配数组中任何一个条件
 
