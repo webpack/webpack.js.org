@@ -152,7 +152,7 @@ This allows us to use these shared modules in the initial chunk. But be careful 
 
 It’s wise to provide it only at one point of your app, e.g. the shell.
 
-We strongly recommend using an async boundary. Doing so will not create any additional round trips, it’s also more performant in general as initialization code is split out of a larger chunk.
+We strongly recommend using an asynchronous boundary. It will split out the initialization code of a larger chunk to avoid any additional round trips and improve performance in general.
 `ìmport('./bootstrap')`
 
 Create a `bootstrap.js` file, and move the original contents of the entry point code into that file.
