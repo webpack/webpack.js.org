@@ -185,7 +185,7 @@ new ModuleFederationPlugin({
 });
 ```
 
-`bundle-loader` can be used as an alternative to setting dependencies as "eager". This method is less performant as it will introduce additional round trips.
+`bundle-loader` can be used as an alternative to setting dependencies as `'eager'`. This method is less performant as it will introduce additional round trips.
 
 ```js
 const config = {
