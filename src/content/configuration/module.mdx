@@ -18,6 +18,7 @@ contributors:
   - smelukov
   - opl-
   - Mistyyyy
+  - anshumanv
 ---
 
 这些选项决定了如何处理项目中的[不同类型的模块](/concepts/modules)。
@@ -175,12 +176,12 @@ Inline loaders and `!` prefixes should not be used as they are non-standard. The
 
 ## `Rule.exclude`
 
-`Rule.exclude` 是 `Rule.resource.exclude` 的简写。如果你提供了 `Rule.exclude` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.exclude`](#condition)。
+排除所有符合条件的模块。如果你提供了 `Rule.exclude` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.exclude`](#condition)。
 
 
 ## `Rule.include`
 
-`Rule.include` 是 `Rule.resource.include` 的简写。如果你提供了 `Rule.include` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.include`](#condition)。
+引入符合以下任何条件的模块。如果你提供了 `Rule.include` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.include`](#condition)。
 
 
 ## `Rule.issuer`
@@ -336,7 +337,7 @@ module.exports = {
       {
         //...
         parser: {
-          dataUrlCondition: (source, { filename, module })) => {
+          dataUrlCondition: (source, { filename, module }) => {
             const content = source.toString();
             return content.includes('some marker');
           }
@@ -431,7 +432,7 @@ module.exports = {
 
 ## `Rule.resource`
 
-[`条件`](#条件)会匹配 resource。既可以提供 `Rule.resource` 选项，也可以使用快捷选项 `Rule.test`，`Rule.exclude` 和 `Rule.include`。在 [`Rule` 条件](#rule-conditions) 中查看详细。
+[`条件`](#条件)会匹配 resource。在 [`Rule` 条件](#rule-conditions) 中查阅详情。
 
 
 ## `Rule.resourceQuery`
@@ -499,7 +500,7 @@ T> 详情参阅 [`嵌套规则`](#nested-rules) 。
 
 ## `Rule.test`
 
-`Rule.test` 是 `Rule.resource.test` 的简写。如果你提供了一个 `Rule.test` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.test`](#condition)。
+引入所有通过断言测试的模块。如果你提供了一个 `Rule.test` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.test`](#condition)。
 
 
 ## `Rule.type`
@@ -696,12 +697,6 @@ module.exports = {
 - 函数：调用输入的函数，必须返回一个真值(truthy value)以匹配。
 - 条件数组：至少一个匹配条件。
 - 对象：匹配所有属性。每个属性都有一个定义行为。
-
-`{ test: Condition }`：匹配特定条件。一般是提供一个正则表达式或正则表达式的数组，但这不是强制的。
-
-`{ include: Condition }`：匹配特定条件。一般是提供一个字符串或者字符串数组，但这不是强制的。
-
-`{ exclude: Condition }`：排除特定条件。一般是提供一个字符串或字符串数组，但这不是强制的。
 
 `{ and: [Condition] }`：必须匹配数组中的所有条件
 

@@ -352,6 +352,8 @@ chunk `id` 优化结束之后触发。
 
 `SyncHook`
 
+W> `additionalChunkAssets` 已弃用（可使用 [Compilation.hook.processAssets](#processassets) 来代替，并且可使用 Compilation.PROCESS_ASSETS_STAGE_* 作为其选项参数。）
+
 为这些 chunk 创建其他 asset。
 
 - 回调参数：`chunks`
@@ -396,6 +398,8 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
 
 `AsyncSeriesHook`
 
+W> `optimizeChunkAssets` 已弃用。（可使用 [Compilation.hook.processAssets](#processassets) 来代替，并且可使用 Compilation.PROCESS_ASSETS_STAGE_* 作为其选项参数。
+
 优化所有 chunk asset。asset 存储在 `compilation.assets` 中。
 每个 `Chunk` 都具有一个 `files` 属性，其指向由一个 chunk 创建的所有文件。
 任何额外 chunk asset 都存储在 `compilation.additionalChunkAssets` 中。
@@ -426,6 +430,8 @@ compilation.hooks
 ### `afterOptimizeChunkAssets`
 
 `SyncHook`
+
+W> `afterOptimizeChunkAssets` 已弃用。（可使用 [Compilation.hook.processAssets](#processassets) 来代替，并且可使用 Compilation.PROCESS_ASSETS_STAGE_* 作为其选项参数。
 
 chunk asset 已经被优化。
 

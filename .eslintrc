@@ -6,10 +6,12 @@
     "browser": true,
     "es6": true,
     "node": true,
-    "jest": true
+    "jest": true,
+    "cypress/globals": true
   },
   "plugins": [
-    "markdown"
+    "markdown",
+    "cypress"
   ],
   "globals": {
     "__DEV__": true
