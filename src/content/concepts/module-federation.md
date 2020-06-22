@@ -187,13 +187,17 @@ new ModuleFederationPlugin({
 
 `bundle-loader` can be used as an alternative to setting dependencies as `'eager'`. This method is less performant as it will introduce additional round trips.
 
+__webpack.config.js__
+
 ```js
 const config = {
   entry: 'bundle-loader!./bootstrap.js'
 };
 ```
 
-Or you can set via module rules: [See Full Example](https://github.com/module-federation/module-federation-examples/blob/master/basic-host-remote/app1/webpack.config.js)
+Or you can set it via module rules: [See Full Example](https://github.com/module-federation/module-federation-examples/blob/master/basic-host-remote/app1/webpack.config.js)
+
+__webpack.config.js__
 
 ```js
 const config = {
