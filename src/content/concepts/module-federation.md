@@ -142,25 +142,37 @@ Many applications share a common components library which could be built as a co
 
 ## Troubleshooting
 
-`Uncaught Error: Shared module is not available for eager consumption` <br/> The application is eagerly executing an app which is operating as an omnidirectional host. There are options to choose from: <br> You can set the dependency as eager inside the advanced API of Module Federation, which doesn’t put the modules in an async chunk, but provides them synchronously.<br>This allows us to use these shared modules in the initial chunk. But be careful as all provided and fallback modules will always be downloaded. <br> It’s wise to provide it only at one point of your app, e.g. the shell.
+`Uncaught Error: Shared module is not available for eager consumption`
 
+The application is eagerly executing an app which is operating as an omnidirectional host. There are options to choose from:
+
+You can set the dependency as eager inside the advanced API of Module Federation, which doesn’t put the modules in an async chunk, but provides them synchronously.
+
+This allows us to use these shared modules in the initial chunk. But be careful as all provided and fallback modules will always be downloaded.
+
+It’s wise to provide it only at one point of your app, e.g. the shell.
 
 We strongly recommend using an async boundary. Doing so will not create any additional round trips, it’s also more performant in general as initialization code is split out of a larger chunk.
 `ìmport('./bootstrap')`
 
 Create a `bootstrap.js` file, and move the original contents of the entry point code into that file.
 
+__index.js__
+
 ```js
-//index.js
 import('./bootstrap');
-//bootstrap.js
+```
+
+__bootstrap.js__
+
+```js
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-Methods mentioned above work, but can have some limits or drawbacks.
+Methods mentioned below work, but can have some limits or drawbacks.
 
 ```js
 new ModuleFederationPlugin({
@@ -213,7 +225,13 @@ import App from './App';
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-`Uncaught Error: Module “./Button” does not exist in container.` <br> It likely does not say button, but the error message will look similar. <br> This issue is typically seen if you are upgrading from beta.16 to beta.17 <br> Within ModuleFederationPlugin. Change the exposes from:
+`Uncaught Error: Module “./Button” does not exist in container.`
+
+It likely does not say button, but the error message will look similar.
+
+This issue is typically seen if you are upgrading from beta.16 to beta.17
+
+Within ModuleFederationPlugin. Change the exposes from:
 
 ```js
 new ModuleFederationPlugin({
@@ -236,4 +254,4 @@ new ModuleFederationPlugin({
 `Uncaught TypeError: fn is not a function`
 
 You likely are missing the remote container, make sure its added.
-If you have the container loaded for the remote you are trying to consume, but still see this error, add the host’s remote container file to the HTML as well.
+If you have the container loaded for the remote you are trying to consume, but still see this error, add the host container's remote container file to the HTML as well.
