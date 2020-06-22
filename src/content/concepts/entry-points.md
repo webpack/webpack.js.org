@@ -93,7 +93,7 @@ __webpack.dev.js__
 
 ```javascript
 module.exports = {
-  entry: {
+  output: {
     filename: '[name].bundle.js'
   }
 };

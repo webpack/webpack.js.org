@@ -34,7 +34,16 @@ class Page extends React.Component {
             content: module.default || module,
             contentLoaded: true
           }, () => {
-            document.documentElement.scrollTop = 0;
+            const hash = window.location.hash;
+            if (hash) {
+              const element = document.querySelector(hash);
+              if (element) {
+                element.scrollIntoView();
+              }
+            } else {
+              document.documentElement.scrollTop = 0;
+            }
+            
           })
         )
         .catch(error =>

@@ -1,6 +1,6 @@
 ---
 title: Hot Module Replacement
-sort: 11
+sort: 12
 contributors:
   - kryptokinght
   - SpaceK33z

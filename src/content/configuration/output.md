@@ -22,6 +22,7 @@ contributors:
   - anikethsaha
   - jamesgeorge007
   - hiroppy
+  - chenxsan
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -238,7 +239,7 @@ For example, if you have 2 libraries, with namespaces `library1` and `library2`,
 
 ## `output.filename`
 
-`string` `function (chunkData) => string`
+`string` `function (pathData, assetInfo) => string`
 
 This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#outputpath) option.
 
@@ -330,8 +331,8 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    filename: (chunkData) => {
-      return chunkData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
+    filename: (pathData) => {
+      return pathData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
     },
   }
 };
@@ -618,7 +619,6 @@ MyLibrary.doSomething();
 
 W> When using this option, an empty `output.library` will result in no assignment.
 
-
 `libraryTarget: 'assign'` - This will generate an implied global which has the potential to reassign an existing value (use with caution).
 
 ```javascript
@@ -862,8 +862,17 @@ System.register('my-library', [], function(_export) {
 });
 ```
 
-Module proof library.
+You can access [SystemJS context](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md#format-definition) via `__system_context__`:
 
+```javascript
+// Log the URL of the current SystemJS module
+console.log(__system_context__.meta.url);
+
+// Import a SystemJS module, with the current SystemJS module's url as the parentUrl
+__system_context__.import('./other-file.js').then(m => {
+  console.log(m);
+});
+```
 
 ### Other Targets
 
@@ -874,6 +883,24 @@ MyLibrary(_entry_return_);
 ```
 
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
+
+
+## `output.importFunctionName`
+
+`string = 'import'`
+
+The name of the native `import()` function. Can be used for polyfilling, e.g. with [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    importFunctionName: '__import__'
+  }
+};
+```
 
 
 ## `output.path`
@@ -1086,6 +1113,38 @@ module.exports = {
   //...
   output: {
     umdNamedDefine: true
+  }
+};
+```
+
+## `output.enabledLibraryTypes`
+
+`[string]`
+
+List of library types enabled for use by entry points.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledLibraryTypes: ['module']
+  }
+};
+```
+
+## `output.futureEmitAssets`
+
+`boolean = false`
+
+Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted.
+
+W> `output.futureEmitAssets` option will be removed in webpack v5.0.0 and this behaviour will become the new default.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    futureEmitAssets: true
   }
 };
 ```
