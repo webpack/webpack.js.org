@@ -233,13 +233,13 @@ This issue is typically seen if you are upgrading from beta.16 to beta.17
 
 Within ModuleFederationPlugin. Change the exposes from:
 
-```js
+```diff
 new ModuleFederationPlugin({
   exposes: {
-    'Button': './src/Button'
+-   'Button': './src/Button'
++   './Button':'./src/Button'
   }
 });
-```
 
 To this:
 
