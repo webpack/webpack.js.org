@@ -451,4 +451,4 @@ To disable this feature in some common editors, see the list below:
 
 ## Conclusion
 
-Now that you've learned how to automatically compile your code and run a simple development server, you can check out the next guide, which will cover [Hot Module Replacement](/guides/hot-module-replacement).
+Now that you've learned how to automatically compile your code and run a simple development server, you can check out the next guide, which will cover [Code Splitting](/guides/code-splitting/).
