@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { BrowserRouter as AnalyticsRouter } from 'react-plausible-analytics';
 
+require('offline-plugin/runtime').install();
+
 // Import Components
 import Site from './components/Site/Site';
 
@@ -18,7 +20,7 @@ const render = isProduction ? ReactDOM.hydrate : ReactDOM.render;
 // Client Side Rendering
 if (isClient) {
   render((
-    <Router>
+    <Router id="we_need_to_add_the_plausible_id_here">
       <Route
         path="/"
         render={ props => (
