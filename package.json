@@ -170,11 +170,12 @@
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.0.0-beta.12",
     "react-markdown": "4.2.2",
+    "react-plausible-analytics": "git+https://codeberg.org/resynth1943/react-plausible-analytics.git#master",
     "react-router-dom": "^4.2.2",
     "react-tiny-popover": "3.4.2",
     "react-visibility-sensor": "^5.0.2",
     "webpack-pwa-manifest": "^4.0.0",
-    "webpack.vote": "https://github.com/webpack/voting-app.git",
+    "webpack.vote": "git+https://github.com/webpack/voting-app.git",
     "whatwg-fetch": "^2.0.3"
   }
 }
