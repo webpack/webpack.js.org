@@ -16,17 +16,17 @@ repo: https://github.com/webpack-contrib/worker-loader
 
 
 
-worker loader module for webpack
+webpack 的 worker loader 模块
 
-## Getting Started
+## 快速开始
 
-To begin, you'll need to install `worker-loader`:
+开始之前你需要安装 `worker-loader` ：
 
 ```console
 $ npm install worker-loader --save-dev
 ```
 
-### Inlined
+### 内敛
 
 **App.js**
 
@@ -34,7 +34,7 @@ $ npm install worker-loader --save-dev
 import Worker from 'worker-loader!./Worker.js';
 ```
 
-### Config
+### 配置
 
 **webpack.config.js**
 
@@ -64,16 +64,16 @@ worker.onmessage = function (event) {};
 worker.addEventListener('message', function (event) {});
 ```
 
-And run `webpack` via your preferred method.
+然后，通过你的首选方式去运行 `webpack`。
 
-## Options
+## 选项
 
 ### `fallback`
 
-Type: `Boolean`
-Default: `false`
+类型： `Boolean`
+默认值： `false`
 
-Require a fallback for non-worker supporting environments.
+是否需要支持非 worker 环境的回退。
 
 **webpack.config.js**
 
@@ -93,10 +93,10 @@ module.exports = {
 
 ### `inline`
 
-Type: `Boolean`
-Default: `false`
+类型： `Boolean`
+默认值： `false`
 
-You can also inline the worker as a BLOB with the `inline` parameter.
+你也可以使用 `inline` 参数，将 worker 内联为一个 BLOB。
 
 **webpack.config.js**
 
@@ -114,7 +114,7 @@ module.exports = {
 };
 ```
 
-_Note: Inline mode will also create chunks for browsers without support for inline workers, to disable this behavior just set `fallback` parameter as `false`._
+*注意：内联模式还会为不支持内联 worker 的浏览器创建 chunk， 要禁用此行为，只需将  `fallback` 参数设置为 `false`。*
 
 **webpack.config.js**
 
@@ -133,12 +133,12 @@ module.exports = {
 
 ### `name`
 
-Type: `String`
-Default: `[hash].worker.js`
+类型： `String`
+默认值： `[hash].worker.js`
 
-To set a custom name for the output script, use the `name` parameter.
-The name may contain the string `[hash]`, which will be replaced with a content dependent hash for caching purposes.
-When using `name` alone `[hash]` is omitted.
+使用 `name` 参数，为输出的脚本设置一个自定义名称。
+名称可能含有 `[hash]` 字符串，为了缓存会被替换为依赖内容哈希值。
+只使用 `name` 时，`[hash]` 会被忽略。
 
 **webpack.config.js**
 
@@ -157,11 +157,11 @@ module.exports = {
 
 ### publicPath
 
-Type: `String`
-Default: `null`
+类型： `String`
+默认值： `null`
 
-Overrides the path from which worker scripts are downloaded.
-If not specified, the same public path used for other webpack assets is used.
+重写 worker 脚本的下载路径。
+如果未指定， 则使用与其他 webpack 资源相同的公共路径。
 
 **webpack.config.js**
 
@@ -182,7 +182,7 @@ module.exports = {
 
 ### Basic
 
-The worker file can import dependencies just like any other file:
+worker 文件可以像其他文件导入依赖那样来导入依赖：
 
 **Worker.js**
 
@@ -200,9 +200,9 @@ self.postMessage({ foo: 'foo' });
 self.addEventListener('message', (event) => console.log(event));
 ```
 
-### Integrating with ES Modules
+### 集成 ES 模块
 
-_Note: You can even use ES2015 Modules if you have the [`babel-loader`](https://github.com/babel/babel-loader) configured._
+*注意：如果配置好 [`babel-loader`](https://github.com/babel/babel-loader) ， 你甚至可以使用 ES2015 模块。*
 
 **Worker.js**
 
@@ -220,9 +220,9 @@ self.postMessage({ foo: 'foo' });
 self.addEventListener('message', (event) => console.log(event));
 ```
 
-### Integrating with TypeScript
+### 集成 TypeScript
 
-To integrate with TypeScript, you will need to define a custom module for the exports of your worker
+为了集成 TypeScript，在导出 worker 时，你需要声明一个自定义模块。
 
 **typings/worker-loader.d.ts**
 
@@ -241,10 +241,10 @@ declare module 'worker-loader!*' {
 ```typescript
 const ctx: Worker = self as any;
 
-// Post data to parent thread
+// 发送数据到父线程
 ctx.postMessage({ foo: 'foo' });
 
-// Respond to message from parent thread
+// 响应父线程的消息
 ctx.addEventListener('message', (event) => console.log(event));
 ```
 
@@ -261,14 +261,14 @@ worker.onmessage = (event) => {};
 worker.addEventListener('message', (event) => {});
 ```
 
-### Cross-Origin Policy
+### 跨域策略
 
-[`WebWorkers`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) are restricted by a [same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy), so if your `webpack` assets are not being served from the same origin as your application, their download may be blocked by your browser.
-This scenario can commonly occur if you are hosting your assets under a CDN domain.
-Even downloads from the `webpack-dev-server` could be blocked.
-There are two workarounds:
+[`WebWorkers`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) 受到 [同源策略](https://en.wikipedia.org/wiki/Same-origin_policy) 的限制， 如果 `webpack` 资源的访问服务和应用程序不是同源，浏览器就会拦截其下载。
+如果在 CDN 域下托管资源， 通常就会出现这种情况。 
+甚至从 `webpack-dev-server` 下载时都会被拦截。
+有两种解决方法：
 
-Firstly, you can inline the worker as a blob instead of downloading it as an external script via the [`inline`](#inline) parameter
+第一种，通过配置 [`inline`](#inline) 参数，将 worker 作为 blob 内联， 而不是将其作为外部脚本下载
 
 **App.js**
 
@@ -291,12 +291,12 @@ module.exports = {
 };
 ```
 
-Secondly, you may override the base download URL for your worker script via the [`publicPath`](#publicpath) option
+第二种，通过配置 [`publicPath`](#publicpath) 选项， 重写 worker 脚本的基础下载 URL
 
 **App.js**
 
 ```js
-// This will cause the worker to be downloaded from `/workers/file.worker.js`
+// 这会使 worker 从 `/workers/file.worker.js` 下载
 import Worker from './file.worker.js';
 ```
 
@@ -317,7 +317,7 @@ module.exports = {
 
 ## Contributing
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+如果你从未阅读过我们的贡献指南，请在上面花点时间。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/worker-loader/blob/master/.github/CONTRIBUTING.md)
 
