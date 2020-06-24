@@ -4,8 +4,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { BrowserRouter as AnalyticsRouter } from 'react-plausible-analytics';
 
-require('offline-plugin/runtime').install();
-
 // Import Components
 import Site from './components/Site/Site';
 
