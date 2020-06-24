@@ -18,7 +18,7 @@ const render = isProduction ? ReactDOM.hydrate : ReactDOM.render;
 // Client Side Rendering
 if (isClient) {
   render((
-    <Router id="we_need_to_add_the_plausible_id_here">
+    <Router domain="webpack.js.org">
       <Route
         path="/"
         render={ props => (
