@@ -19,22 +19,22 @@ related:
     url: https://en.wikipedia.org/wiki/Asynchronous_module_definition
 ---
 
-This section covers all __variables__ available in code compiled with webpack. Modules will have access to certain data from the compilation process through `module` and other variables.
+本章节涵盖了使用 webpack 编译的代码中所有的 __变量__。模块将通过 `module` 和其他变量，来访问编译过程中的某些数据。
 
 
 ### `module.loaded` (NodeJS)
 
-This is `false` if the module is currently executing, and `true` if the sync execution has finished.
+`false` 表示该模块正在执行， `true` 表示同步执行已经完成。
 
 
 ### `module.hot` (webpack-specific)
 
-Indicates whether or not [Hot Module Replacement](/concepts/hot-module-replacement) is enabled and provides an interface to the process. See the [HMR API page](/api/hot-module-replacement) for details.
+表示 [模块热替换(Hot Module Replacement)](/concepts/hot-module-replacement) 是否启用，并给进程提供一个接口。详细说明请查看 [模块热替换 API 页面](/api/hot-module-replacement)。
 
 
 ### `module.id` (CommonJS)
 
-The ID of the current module.
+当前模块的 ID。
 
 ``` javascript
 module.id === require.resolve('./file.js');
@@ -43,7 +43,7 @@ module.id === require.resolve('./file.js');
 
 ### `module.exports` (CommonJS)
 
-Defines the value that will be returned when a consumer makes a `require` call to the module (defaults to a new object).
+调用者通过 `require` 对模块进行调用时返回的值（默认为一个新对象）。
 
 ``` javascript
 module.exports = function doSomething() {
@@ -51,12 +51,12 @@ module.exports = function doSomething() {
 };
 ```
 
-W> This CANNOT be used in an asynchronous function.
+W> 无法在异步函数中访问该变量。
 
 
 ### `exports` (CommonJS)
 
-This variable is equal to the default value of `module.exports` (i.e. an object). If `module.exports` gets overwritten, `exports` will no longer be exported.
+该变量默认值为 `module.exports`（即一个对象）。 如果 `module.exports` 被重写的话， `exports` 不再会被导出。
 
 ``` javascript
 exports.someValue = 42;
@@ -71,39 +71,39 @@ exports.aFunction = function doSomething() {
 
 ### `global` (NodeJS)
 
-See [node.js global](https://nodejs.org/api/globals.html#globals_global).
+见 [node.js global](https://nodejs.org/api/globals.html#globals_global).
 
 
 ### `process` (NodeJS)
 
-See [node.js process](https://nodejs.org/api/process.html).
+见 [node.js process](https://nodejs.org/api/process.html).
 
 
 ### `__dirname` (NodeJS)
 
-Depending on the configuration option `node.__dirname`:
+取决于 `node.__dirname` 配置选项：
 
-- `false`: Not defined
-- `mock`: equal to `'/'`
+- `false`: 未定义
+- `mock`: 等同于 `'/'`
 - `true`: [node.js __dirname](https://nodejs.org/api/globals.html#globals_dirname)
 
-If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
+如果在一个被 Parser 解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
 
 ### `__filename` (NodeJS)
 
-Depending on the configuration option `node.__filename`:
+取决于 `node.__filename` 配置选项：
 
-- `false`: Not defined
-- `mock`: equal to `'/index.js'`
+- `false`: 未定义
+- `mock`: 等同于 `'/index.js'`
 - `true`: [node.js __filename](https://nodejs.org/api/globals.html#globals_filename)
 
-If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
+如果在一个被 Parser 解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
 
-### `__resourceQuery` (webpack-specific)
+### `__resourceQuery` (webpack 特有变量)
 
-The resource query of the current module. If the following `require` call was made, then the query string would be available in `file.js`.
+当前模块的资源查询(resource query) 。如果进行了如下的 `reqiure` 调用，那么查询字符串(query string)在`file.js` 中可访问。
 
 ``` javascript
 require('file.js?test');
@@ -116,63 +116,63 @@ __resourceQuery === '?test';
 ```
 
 
-### `__webpack_public_path__` (webpack-specific)
+### `__webpack_public_path__` (webpack 特有变量)
 
-Equals the configuration option's `output.publicPath`.
-
-
-### `__webpack_require__` (webpack-specific)
-
-The raw require function. This expression isn't parsed by the Parser for dependencies.
+等同于 `output.publicPath` 配置选项。
 
 
-### `__webpack_chunk_load__` (webpack-specific)
+### `__webpack_require__` (webpack 特有变量)
 
-The internal chunk loading function. Takes two arguments:
-
-- `chunkId` The id for the chunk to load.
-- `callback(require)` A callback function called once the chunk is loaded.
+原始 require 函数。这个表达式不会被解析器解析为依赖。
 
 
-### `__webpack_modules__` (webpack-specific)
+### `__webpack_chunk_load__` (webpack 特有变量)
 
-Access to the internal object of all modules.
+内部 chunk 载入函数，有两个输入参数：
 
-
-### `__webpack_hash__` (webpack-specific)
-
-This variable is only available with the `HotModuleReplacementPlugin` or the `ExtendedAPIPlugin`. It provides access to the hash of the compilation.
+- `chunkId` 需要载入的 chunk id。
+- `callback(require)` chunk 载入后调用的回调函数。
 
 
-### `__non_webpack_require__` (webpack-specific)
+### `__webpack_modules__` (webpack 特有变量)
 
-Generates a `require` function that is not parsed by webpack. Can be used to do cool stuff with a global require function if available.
+访问所有模块的内部对象。
 
 
-### `__webpack_exports_info__` (webpack-specific)
+### `__webpack_hash__` (webpack 特有变量)
 
-In modules, `__webpack_exports_info__` is available to allow exports introspection:
+这个变量只有在启用 `HotModuleReplacementPlugin` 或者 `ExtendedAPIPlugin` 时才生效。这个变量提供对编译过程中(compilation)的 hash 信息的获取。
 
-- `__webpack_exports_info__` is always `true`
 
-- `__webpack_exports_info__.<exportName>.used` is `false` when the export is known to be unused, `true` otherwise
+### `__non_webpack_require__` (webpack 特有变量)
 
-- `__webpack_exports_info__.<exportName>.useInfo` is
+生成一个不会被 webpack 解析的 `require` 函数。配合全局可以获取到的 require 函数，可以完成一些酷炫操作。
 
-    - `false` when the export is known to be unused
-    - `true` when the export is known to be used
-    - `null` when the export usage could depend on runtime conditions
-    - `undefined` when no info is available
 
-- `__webpack_exports_info__.<exportName>.provideInfo` is
+### `__webpack_exports_info__` (webpack 特有变量)
 
-    - `false` when the export is known to be not provided
-    - `true` when the export is known to be provided
-    - `null` when the export provision could depend on runtime conditions
-    - `undefined` when no info is available
+在模块中, `__webpack_exports_info__` 可以被获取到，以便导出模块用以自我检查：
 
-- Accessing the info from nested exports is possible: i. e. `__webpack_exports_info__.<exportName>.<exportName>.<exportName>.used`
+- `__webpack_exports_info__` 总是 `true`
 
-### `DEBUG`  (webpack-specific)
+- 当导出模块未被使用时 `__webpack_exports_info__.<exportName>.used` 为 `false`, 否则是 `true`
 
-Equals the configuration option `debug`.
+- `__webpack_exports_info__.<exportName>.useInfo` 是
+
+    - `false` 当导出模块未被使用
+    - `true` 当导出模块被使用
+    - `null` 当导出模块的使用情况取决于运行时的条件
+    - `undefined` 当没有可用信息时
+
+- `__webpack_exports_info__.<exportName>.provideInfo` 是
+
+    - `false` 当导出模块没有被提供
+    - `true` 当导出模块被提供
+    - `null` 当导出模块的提供情况取决于运行时的条件
+    - `undefined` 当没有可用信息时
+
+- 可以从嵌套的 exports 中得到相关信息: 例如 `__webpack_exports_info__.<exportName>.<exportName>.<exportName>.used`
+
+### `DEBUG`  (webpack 特有变量)
+
+等同于 `debug` 配置选项。
