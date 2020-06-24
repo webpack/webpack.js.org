@@ -4,6 +4,7 @@ sort: 14
 contributors:
   - smelukov
   - EugeneHlushko
+  - chenxsan
 ---
 
 > This section describes webpack internals and can be useful for plugin developers
@@ -129,5 +130,5 @@ The names of the output files are affected by the two fields in the config:
 A [few placeholders](/configuration/output/#template-strings) are available in these fields. Most often:
 
 - `[id]` - chunk id (e.g. `[id].js` -> `485.js`)
-- `[name]` - chunk name (e.g. `[name].js` -> `app.js`). If a chunk has no name, then its id will used
+- `[name]` - chunk name (e.g. `[name].js` -> `app.js`). If a chunk has no name, then its id will be used
 - `[contenthash]` - md4-hash of the output file content (e.g. `[contenthash].js` -> `4ea6ff1de66c537eb9b2.js`)
