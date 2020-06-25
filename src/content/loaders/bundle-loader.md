@@ -4,17 +4,18 @@ source: https://raw.githubusercontent.com/webpack-contrib/bundle-loader/master/R
 edit: https://github.com/webpack-contrib/bundle-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/bundle-loader
 ---
-Bundle loader for webpack
+应用于 webpack 的 bundle loader
 
-## Install
+## 安装
 
 ```bash
 npm i bundle-loader --save
 ```
 
-## Usage
+## 用法
 
 **webpack.config.js**
+
 ```js
 module.exports = {
   module: {
@@ -28,46 +29,47 @@ module.exports = {
 }
 ```
 
-The chunk is requested, when you require the bundle.
+当你引用 bundle-loader 时，chunk 会被请求。
 
 **file.js**
 ```js
 import bundle from './file.bundle.js';
 ```
 
-To wait until the chunk is available (and get the exports)
-you need to async wait for it.
+需要使用异步处理，
+以使得 chunk 在浏览器加载（以及在获取其导出）时可用。
 
 ```js
 bundle((file) => {
-  // use the file like it was required
+  // 按需引入文件
   const file = require('./file.js')
 });
 ```
 
-This wraps the `require('file.js')` in a `require.ensure` block
+上述代码会将 `require('file.js')` 包裹在一段 `require.ensure` 代码块中。
 
-Multiple callbacks can be added. They will be executed in the order of addition.
+可以添加多个回调函数，这些回调函数会按照添加的顺序依次执行。
 
 ```js
 bundle(callbackTwo)
 bundle(callbackThree)
 ```
 
-If a callback is added after dependencies were loaded, it will be called immediately.
+当依赖模块都加载完毕时, 如果此时添加一个回调函数，回到函数将会立即执行。
 
-## Options
+## 选项
 
-|Name|Type|Default|Description|
+|选项名|类型|默认值|描述|
 |:--:|:--:|:-----:|:----------|
-|**`lazy`**|`{Boolean}`|`false`|Loads the imported bundle asynchronously|
-|**`name`**|`{String}`|`[id].[name]`|Configure a custom filename for your imported bundle|
+|**`lazy`**|`{Boolean}`|`false`| 异步加载导入的 bundle |
+|**`name`**|`{String}`|`[id].[name]`| 为导入的 bundle 配置自定义文件名 |
 
 ### `lazy`
 
-The file is requested when you require the `bundle-loader`. If you want it to request it lazy, use:
+当使用 `bundle-loader` 时，文件会被请求(request)。如果想让文件按需加载(request it lazy)，请使用：
 
 **webpack.config.js**
+
 ```js
 {
   loader: 'bundle-loader',
@@ -83,14 +85,15 @@ import bundle from './file.bundle.js'
 bundle((file) => {...})
 ```
 
-> ℹ️  The chunk is not requested until you call the load function
+> ℹ️ 只有调用 load 函数时，chunk 才会被请求(request)
 
 ### `name`
 
-You may set name for a bundle using the `name` options parameter.
-See [documentation](https://github.com/webpack/loader-utils#interpolatename).
+可以通过配置中 `name` 选项参数，来设置 bundle 的名称。
+请查阅相关[文档](https://github.com/webpack/loader-utils#interpolatename)。
 
 **webpack.config.js**
+
 ```js
 {
   loader: 'bundle-loader',
@@ -100,26 +103,26 @@ See [documentation](https://github.com/webpack/loader-utils#interpolatename).
 }
 ```
 
-> :warning: chunks created by the loader will be named according to the
-[`output.chunkFilename`](/configuration/output/#outputchunkfilename) rule, which defaults to `[id].[name]`. Here `[name]` corresponds to the chunk name set in the `name` options parameter.
+> :warning: 一旦 loader 创建了 chunk，将遵循以下命名规则 [`output.chunkFilename`](/configuration/output/#outputchunkfilename) 规则，
+默认是 `[id].[name]`。这里 `[name]` 对应着配置中 name 选项参数设置的 chunk 名称。
 
-## Examples
+## 示例
 
 ```js
 import bundle from './file.bundle.js'
 ```
 
 **webpack.config.js**
-``` js
+```js
 module.exports = {
   entry: {
-   index: './App.js'
+    index: './App.js'
   },
   output: {
     path: path.resolve(__dirname, 'dest'),
     filename: '[name].js',
-    // or whatever other format you want
-    chunkFilename: '[name].[id].js',
+    // 此处可以自定义其他格式
+    chunkFilename: '[name].[id].js'
   },
   module: {
     rules: [
@@ -137,13 +140,13 @@ module.exports = {
 }
 ```
 
-Normal chunks will show up using the `filename` rule above, and be named according to their `[chunkname]`.
+一般情况下，chunk 会使用上面的 `filename` 规则，并根据其对应的 `[chunkname]` 命名。
 
-Chunks from `bundle-loader`, however will load using the `chunkFilename` rule, so the example files will produce `my-chunk.1.js` and `file-2.js` respectively.
+然而，来自 `bundle-loader` 中的 chunk 会使用 `chunkFilename` 规则命名。因此，打包后的示例文件最终将生成为 `my-chunk.1.js` 和 `file-2.js`。
 
-You can also use `chunkFilename` to add hash values to the filename, since putting `[hash]` in the bundle options parameter does not work correctly.
+当然，你也可以在 `chunkFilename` 添加哈希值作为文件名的一部分，这是因为在 bundle 的配置选项中放置 `[hash]` 不会生效。
 
-## Maintainers
+## 维护人员
 
 <table>
   <tbody>
