@@ -142,7 +142,7 @@ Many applications share a common components library which could be built as a co
 
 ## Troubleshooting
 
-#### `Uncaught Error: Shared module is not available for eager consumption`
+__`Uncaught Error: Shared module is not available for eager consumption`__
 
 The application is eagerly executing an application which is operating as an omnidirectional host. There are options to choose from:
 
@@ -240,7 +240,7 @@ __index.js__
 + bootstrap();
 ```
 
-#### `Uncaught Error: Module "./Button" does not exist in container.`
+__`Uncaught Error: Module "./Button" does not exist in container.`__
 
 It likely does not say `"./Button"`, but the error message will look similar. This issue is typically seen if you are upgrading from webpack beta.16 to webpack beta.17.
 
@@ -255,7 +255,7 @@ new ModuleFederationPlugin({
 });
 ```
 
-#### `Uncaught TypeError: fn is not a function`
+__`Uncaught TypeError: fn is not a function`__
 
 You are likely missing the remote container, make sure its added.
 If you have the container loaded for the remote you are trying to consume, but still see this error, add the host container's remote container file to the HTML as well.
