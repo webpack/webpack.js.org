@@ -4,7 +4,6 @@
   "webpack-contrib/css-loader",
   "webpack-contrib/style-loader",
   "webpack-contrib/less-loader",
-  "webpack-contrib/bundle-loader",
   "webpack-contrib/val-loader",
   "webpack-contrib/file-loader",
   "webpack-contrib/url-loader",
