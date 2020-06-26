@@ -142,28 +142,17 @@ Many applications share a common components library which could be built as a co
 
 ## Troubleshooting
 
-`Uncaught Error: Shared module is not available for eager consumption`
+__`Uncaught Error: Shared module is not available for eager consumption`__
 
-The application is eagerly executing an app which is operating as an omnidirectional host. There are options to choose from:
+The application is eagerly executing an application which is operating as an omnidirectional host. There are options to choose from:
 
-You can set the dependency as eager inside the advanced API of Module Federation, which doesn’t put the modules in an async chunk, but provides them synchronously.
-
-This allows us to use these shared modules in the initial chunk. But be careful as all provided and fallback modules will always be downloaded.
-
-It’s wise to provide it only at one point of your app, e.g. the shell.
+You can set the dependency as eager inside the advanced API of Module Federation, which doesn’t put the modules in an async chunk, but provides them synchronously. This allows us to use these shared modules in the initial chunk. But be careful as all provided and fallback modules will always be downloaded. It’s recommended to provide it only at one point of your application, e.g. the shell.
 
 We strongly recommend using an asynchronous boundary. It will split out the initialization code of a larger chunk to avoid any additional round trips and improve performance in general.
-`import('./bootstrap')`
 
-Create a `bootstrap.js` file and move the original contents of the entry point code into it.
+For example, your entry looked like this:
 
 __index.js__
-
-```js
-import('./bootstrap');
-```
-
-__bootstrap.js__
 
 ```js
 import React from 'react';
@@ -172,9 +161,35 @@ import App from './App';
 ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
+Let's create `bootstrap.js` file and move contents of the entry into it, and import that bootstrap into the entry:
+
+__index.js__
+
+```diff
++ import('./bootstrap');
+- import React from 'react';
+- import ReactDOM from 'react-dom';
+- import App from './App';
+- ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+__bootstrap.js__
+
+```diff
++ import React from 'react';
++ import ReactDOM from 'react-dom';
++ import App from './App';
++ ReactDOM.render(<App />, document.getElementById('root'));
+```
+
 Methods mentioned below work, but can have some limits or drawbacks.
 
+Setting `eager: true` for dependency via the `ModuleFederationPlugin`
+
+__webpack.config.js__
+
 ```js
+// ...
 new ModuleFederationPlugin({
   shared: {
     ...deps,
@@ -185,7 +200,7 @@ new ModuleFederationPlugin({
 });
 ```
 
-`bundle-loader` can be used as an alternative to setting dependencies as `'eager'`. This method is less performant as it will introduce additional round trips.
+Using `bundle-loader` as an alternative to setting dependencies as `'eager'`. This method is less performant as it will introduce additional round trips.
 
 __webpack.config.js__
 
@@ -215,25 +230,19 @@ const config = {
 };
 ```
 
-Then change the entry point to look like this.
-Create a `bootstrap.js` file, and move the original contents of the entry point code into that file.
+But have to change the entry point to look like this:
 
-```js
-//index.js
-import bootstrap from './bootstrap';
-bootstrap();
-//bootstrap.js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-ReactDOM.render(<App />, document.getElementById('root'));
+__index.js__
+
+```diff
+- import('./bootstrap');
++ import bootstrap from './bootstrap';
++ bootstrap();
 ```
 
-`Uncaught Error: Module “./Button” does not exist in container.`
+__`Uncaught Error: Module "./Button" does not exist in container.`__
 
-It likely does not say button, but the error message will look similar.
-
-This issue is typically seen if you are upgrading from beta.16 to beta.17
+It likely does not say `"./Button"`, but the error message will look similar. This issue is typically seen if you are upgrading from webpack beta.16 to webpack beta.17.
 
 Within ModuleFederationPlugin. Change the exposes from:
 
@@ -244,8 +253,9 @@ new ModuleFederationPlugin({
 +   './Button':'./src/Button'
   }
 });
+```
 
-`Uncaught TypeError: fn is not a function`
+__`Uncaught TypeError: fn is not a function`__
 
-You likely are missing the remote container, make sure its added.
+You are likely missing the remote container, make sure its added.
 If you have the container loaded for the remote you are trying to consume, but still see this error, add the host container's remote container file to the HTML as well.
