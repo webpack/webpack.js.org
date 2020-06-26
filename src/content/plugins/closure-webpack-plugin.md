@@ -89,7 +89,7 @@ The plugin controls several compiler flags. The following flags should not be us
 
 ## Aggressive Bundle Mode
 
-In this mode, the compiler rewrites CommonJS modules and hoists require calls. Some modules are not compatible with this type of rewritting. In particular, hoisting will cause the following code to execute out of order:
+In this mode, the compiler rewrites CommonJS modules and hoists require calls. Some modules are not compatible with this type of rewriting. In particular, hoisting will cause the following code to execute out of order:
 
 ```js
 const foo = require('foo');
