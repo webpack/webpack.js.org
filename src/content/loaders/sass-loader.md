@@ -27,7 +27,12 @@ npm install sass-loader sass webpack --save-dev
 ```
 
 `sass-loader` requires you to install either [Dart Sass](https://github.com/sass/dart-sass) on your own (more documentation can be found below) or [Node Sass](https://github.com/sass/node-sass).
+
 This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
+
+> ℹ️ We recommend using [Dart Sass](https://github.com/sass/dart-sass).
+
+> ⚠ [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) feature.
 
 Chain the `sass-loader` with the [css-loader](/loaders/css-loader/) and the [style-loader](/loaders/style-loader/) to immediately apply all styles to the DOM or the [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) to extract it into a separate file.
 
@@ -108,7 +113,7 @@ Thankfully there are a two solutions to this problem:
 |  **[`implementation`](#implementation)**  |      `{Object}`      |                 `sass`                  | Setup Sass implementation to use.                         |
 |     **[`sassOptions`](#sassoptions)**     | `{Object\|Function}` | defaults values for Sass implementation | Options for Sass.                                         |
 |       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.               |
-|     **[`prependData`](#sassoptions)**     | `{String\|Function}` |               `undefined`               | Prepends `Sass`/`SCSS` code before the actual entry file. |
+|     **[`prependData`](#prependdata)**     | `{String\|Function}` |               `undefined`               | Prepends `Sass`/`SCSS` code before the actual entry file. |
 | **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.            |
 
 ### `implementation`
@@ -265,6 +270,8 @@ Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://g
 
 > ℹ We recommend not to set the `outFile`, `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because `sass-loader` automatically sets these options when the `sourceMap` option is `true`.
 
+> ℹ️ Access to the [loader context](/api/loaders/#the-loader-context) inside the custom importer can be done using the `this.webpackLoaderContext` property.
+
 There is a slight difference between the `sass` (`dart-sass`) and `node-sass` options.
 
 Please consult documentation before using them:
@@ -385,7 +392,8 @@ module.exports = {
 ```
 
 > ℹ In some rare cases `node-sass` can output invalid source maps (it is a `node-sass` bug).
-> In order to avoid this, you can try to update `node-sass` to latest version or you can try to set within `sassOptions` the `outputStyle` option to `compressed`.
+
+> > In order to avoid this, you can try to update `node-sass` to latest version or you can try to set within `sassOptions` the `outputStyle` option to `compressed`.
 
 **webpack.config.js**
 
