@@ -16,17 +16,17 @@ repo: https://github.com/webpack-contrib/cache-loader
 
 
 
-The `cache-loader` allow to Caches the result of following loaders on disk (default) or in the database.
+`cache-loader` 允许缓存以下 loaders 到（默认）磁盘或数据库。
 
-## Getting Started
+## 起步
 
-To begin, you'll need to install `cache-loader`:
+在开始前，需要安装 `cache-loader`:
 
 ```console
 npm install --save-dev cache-loader
 ```
 
-Add this loader in front of other (expensive) loaders to cache the result on disk.
+在一些性能开销较大的 loader 之前添加 cache-loader，以便将结果缓存到磁盘里。
 
 **webpack.config.js**
 
@@ -44,25 +44,25 @@ module.exports = {
 };
 ```
 
-> ⚠️ Note that there is an overhead for saving the reading and saving the cache file, so only use this loader to cache expensive loaders.
+> ⚠️  请注意，保存和读取这些缓存文件会有一些时间开销，所以请只对性能开销较大的 loader 使用此 loader。
 
-## Options
+## 选项
 
-|         Name          |                       Type                       |                        n Default                        | Description                                                                                                                                                            |
+|         名称          |                       类型                       |                        默认值                        | 描述                                                                                                                                                            |
 | :-------------------: | :----------------------------------------------: | :-----------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|  **`cacheContext`**   |                    `{String}`                    |                       `undefined`                       | Allows you to override the default cache context in order to generate the cache relatively to a path. By default it will use absolute paths                            |
-|    **`cacheKey`**     |    `{Function(options, request) -> {String}}`    |                       `undefined`                       | Allows you to override default cache key generator                                                                                                                     |
-| **`cacheDirectory`**  |                    `{String}`                    | `findCacheDir({ name: 'cache-loader' }) or os.tmpdir()` | Provide a cache directory where cache items should be stored (used for default read/write implementation)                                                              |
-| **`cacheIdentifier`** |                    `{String}`                    |     `cache-loader:{version} {process.env.NODE_ENV}`     | Provide an invalidation identifier which is used to generate the hashes. You can use it for extra dependencies of loaders (used for default read/write implementation) |
-|     **`compare`**     |      `{Function(stats, dep) -> {Boolean}}`       |                       `undefined`                       | Allows you to override default comparison function between the cached dependency and the one is being read. Return `true` to use the cached resource                   |
-|    **`precision`**    |                    `{Number}`                    |                           `0`                           | Round `mtime` by this number of milliseconds both for `stats` and `dep` before passing those params to the comparing function                                          |
-|      **`read`**       |    `{Function(cacheKey, callback) -> {void}}`    |                       `undefined`                       | Allows you to override default read cache data from file                                                                                                               |
-|    **`readOnly`**     |                   `{Boolean}`                    |                         `false`                         | Allows you to override default value and make the cache read only (useful for some environments where you don't want the cache to be updated, only read from it)       |
-|      **`write`**      | `{Function(cacheKey, data, callback) -> {void}}` |                       `undefined`                       | Allows you to override default write cache data to file (e.g. Redis, memcached)                                                                                        |
+|  **`cacheContext`**   |                    `{String}`                    |                       `undefined`                       | 允许覆写默认的缓存上下文以便生成相对缓存路径。默认情况下生成的是绝对路径 |
+|    **`cacheKey`**     |    `{Function(options, request) -> {String}}`    |                       `undefined`                       | 允许覆写默认的缓缓存键生成器 |
+| **`cacheDirectory`**  |                    `{String}`                    | `findCacheDir({ name: 'cache-loader' }) or os.tmpdir()` | 提供一个可存储缓存项（供默认读/写执行使用）的缓存目录 |
+| **`cacheIdentifier`** |                    `{String}`                    |     `cache-loader:{version} {process.env.NODE_ENV}`     | 提供一个用于生成哈希值的无效标识符。可以用于 loaders 的额外依赖（供默认读/写执行使用）|
+|     **`compare`**     |      `{Function(stats, dep) -> {Boolean}}`       |                       `undefined`                       | 允许覆写用于比较缓存依赖和当前读取依赖的默认函数，返回值为 `true` 时使用缓存资源 |
+|    **`precision`**    |                    `{Number}`                    |                           `0`                           | 在将 `stats` 和 `dep` 参数传入比较函数之前，浮动于 `mtime` 的毫秒数 |
+|      **`read`**       |    `{Function(cacheKey, callback) -> {void}}`    |                       `undefined`                       | 允许覆写默认从文件中读取的缓存数据 |
+|    **`readOnly`**     |                   `{Boolean}`                    |                         `false`                         | 允许覆写默认值并将缓存设置为只读（比如某些环境中不需要缓存更新，只需要读取）|
+|      **`write`**      | `{Function(cacheKey, data, callback) -> {void}}` |                       `undefined`                       | 允许覆写默认向文件写入缓存数据（比如 Redis, memcached）|
 
-## Examples
+## 示例
 
-### Basic
+### 基本用法
 
 **webpack.config.js**
 
@@ -73,27 +73,27 @@ module.exports = {
       {
         test: /\.js$/,
         use: ['cache-loader', 'babel-loader'],
-        include: path.resolve('src'),
-      },
-    ],
-  },
+        include: path.resolve('src')
+      }
+    ]
+  }
 };
 ```
 
-### Database Integration
+### 数据库集成
 
 **webpack.config.js**
 
 ```js
-// Or different database client - memcached, mongodb, ...
+// 或其他数据库终端 - memcached，mongodb...
 const redis = require('redis');
 const crypto = require('crypto');
 
 // ...
-// connect to client
+// 连接终端
 // ...
 
-const BUILD_CACHE_TIMEOUT = 24 * 3600; // 1 day
+const BUILD_CACHE_TIMEOUT = 24 * 3600; // 1 天
 
 function digest(str) {
   return crypto
@@ -102,12 +102,12 @@ function digest(str) {
     .digest('hex');
 }
 
-// Generate own cache key
+// 生成自己的缓存键
 function cacheKey(options, request) {
   return `build:cache:${digest(request)}`;
 }
 
-// Read data from database and parse them
+// 从数据库读取数据并进行转换
 function read(key, callback) {
   client.get(key, (err, result) => {
     if (err) {
@@ -127,7 +127,7 @@ function read(key, callback) {
   });
 }
 
-// Write data to database under cacheKey
+// 根据缓存键向数据库写入数据
 function write(key, data, callback) {
   client.set(key, JSON.stringify(data), 'EX', BUILD_CACHE_TIMEOUT, callback);
 }
@@ -155,13 +155,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## 贡献
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+如果您尚未了解，建议您阅读以下贡献指引。
 
-[CONTRIBUTING](https://github.com/webpack-contrib/cache-loader/blob/master/.github/CONTRIBUTING.md)
+[贡献](https://github.com/webpack-contrib/cache-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## 许可
 
 [MIT](https://github.com/webpack-contrib/cache-loader/blob/master/LICENSE)
 
