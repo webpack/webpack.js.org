@@ -15,99 +15,100 @@ related:
     url: /guides/hot-module-replacement
 ---
 
-If [Hot Module Replacement](/concepts/hot-module-replacement) has been enabled via the [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin), its interface will be exposed under the [`module.hot` property](/api/module-variables/#modulehot-webpack-specific). Typically, users will check to see if the interface is accessible, then begin working with it. As an example, here's how you might `accept` an updated module:
+如果已经通过 [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) 启用了 [Hot Module Replacement](/concepts/hot-module-replacement), 则它的接口将被暴露在 [`module.hot` 属性](/api/module-variables/#modulehot-webpack-specific) 下面。通常，用户先要检查这个接口是否可访问, 再使用它。你可以这样使用 `accept` 操作一个更新的模块：
 
 ``` js
 if (module.hot) {
   module.hot.accept('./library.js', function() {
-    // Do something with the updated library module...
+    // 对更新过的 library 模块做些事情...
   });
 }
 ```
 
-The following methods are supported...
+支持以下方法……
 
-## Module API
+## 模块 API
 
 ### `accept`
 
-Accept updates for the given `dependencies` and fire a `callback` to react to those updates.
+接受(accept)给定 `依赖模块(dependencies)` 的更新，并触发一个 `回调函数` 来响应更新。
 
 ``` js
 module.hot.accept(
-  dependencies, // Either a string or an array of strings
-  callback // Function to fire when the dependencies are updated
+  dependencies, // 可以是一个字符串或字符串数组
+  callback // 用于在模块更新后触发的函数
 );
 ```
 
-When using ESM `import` all imported symbols from `dependencies` are automatically updated. Note: The dependency string must match exactly with the `from` string in the `import`. In some cases `callback` can even be omitted. Using `require()` in the `callback` doesn't make sense here.
+当使用 ESM `import` 时，所有从 `dependencies` 中导入的符号都会自动更新。注意：依赖项字符串必须与 `import` 中的 `from` 字符串完全匹配。在某些情况下， 甚至可以省略 `callback`。在 `callback` 中使用的 `require()` 在这里没有任何意义。
 
-When using CommonJS you need to update dependencies manually by using `require()` in the `callback`. Omitting the `callback` doesn't make sense here.
+在使用 CommonJS 时，你应该通过 `callback` 中的 `require()` 手动更新依赖模块。省略 `callback` 在这里没有任何意义。
 
-### `accept` (self)
+### `accept` (自身)
 
-Accept updates for itself.
+接受自身更新。
 
 ``` js
 module.hot.accept(
-  errorHandler // Function to handle errors when evaluating the new version
+  errorHandler // 在计算新版本时处理错误的函数
 );
 ```
 
-When this module or dependencies are updated, this module can be disposed and re-evaluated without informing parents. This makes sense if this module has no exports (or exports are updated in another way).
+在此模块或依赖模块更新时，可以在不通知父依赖的情况下，对此模块处理和重新取值。如果此模块没有导出（或以其他方式更新的导出），这是有意义的。
 
-The `errorHandler` is fired when the evaluation of this module (or dependencies) has thrown an exception.
+当执行此模块（或依赖模块）抛出异常时，会触发 `errorHandler`。
 
 ### `decline`
 
-Reject updates for the given `dependencies` forcing the update to fail with a `'decline'` code.
+拒绝给定`依赖模块`的更新，使用 `'decline'` 方法强制更新失败。
 
 ``` js
 module.hot.decline(
-  dependencies // Either a string or an array of strings
+  dependencies // 可以是一个字符串或字符串数组
 );
 ```
 
-Flag a dependency as not-update-able. This makes sense when changing exports of this dependency can be handled or handling is not implemented yet. Depending on your HMR management code, an update to these dependencies (or unaccepted dependencies of it) usually causes a full-reload of the page.
+将依赖模块标记为不可更新(not-update-able)。在处理「依赖的导出正在更新」或「尚未实现处理」时，这是有意义的。取决于你的 HMR 管理代码，此依赖模块（或其未接受的依赖模块）更新，通常会导致页面被完全重新加载。
 
-### `decline` (self)
+### `decline` (自身)
 
-Reject updates for itself.
+拒绝自身更新。
 
 ``` js
 module.hot.decline();
 ```
 
-Flag this module as not-update-able. This makes sense when this module has irreversible side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code, an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
+将依赖模块标记为不可更新(not-update-able)。当此模块具有无法避免的外部作用(side-effect)，或者尚未对此模块进行 HMR 处理时，这是有意义的。取决于你的 HMR 管理代码，此依赖模块（或其未接受的依赖模块）更新，通常会导致页面被完全重新加载。
 
 ### `dispose` (or `addDisposeHandler`)
 
-Add a handler which is executed when the current module code is replaced. This should be used to remove any persistent resource you have claimed or created. If you want to transfer state to the updated module, add it to the given `data` parameter. This object will be available at `module.hot.data` after the update.
+添加一个处理函数，在当前模块代码被替换时执行。此函数应该用于移除你声明或创建的任何持久资源。如果要将状态传入到更新过的模块，请添加给定 `data` 参数。更新后，此对象在更新之后可通过 `module.hot.data` 调用。
 
 ``` js
 module.hot.dispose(data => {
-  // Clean up and pass data to the updated module...
+  // 清理并将 data 传递到更新后的模块...
 });
 ```
 
 
 ### `invalidate`
 
-Calling this method will invalidate the current module, which disposes and recreates it when the HMR update is applied. This bubbles like a normal update of this module. `invalidate` can't be self-accepted by this module.
+调用此方法将使当前模块无效，而当前模块将在应用 HMR 更新时进行部署并重新创建。这个模块的更新像冒泡一样，拒绝自身更新。
 
-When called during the `idle` state, a new HMR update will be created containing this module. HMR will enter the `ready` state.
+在 `idle` 状态下调用时，将创建一个包含此模块的新 HMR 更新。HMR 将进入 `ready` 状态。
 
-When called during the `ready` or `prepare` state, this module will be added to the current HMR update.
+在 `ready` 或 `prepare` 状态下调用时，此模块将添加到当前 HMR 的更新中。
 
-When called during the `check` state, this module will be added to the update when an update is available. If no update is available it will create a new update. HMR will enter the `ready` state.
+在 `check` 状态期间被调用时，如果有可用更新，则此模块将添加到更新中。如果没有可用的更新，它将创建一个新更新。HMR 将进入 `ready` 状态。
 
-When called during the `dispose` or `apply` state, HMR will pick it up after getting out of those states.
+在 `dispose` 或 `apply` 状态下调用时，HMR 将在退出这些状态后将其拾取。
 
-### Use Cases
+
+### 用例
 
 __Conditional Accepting__
 
-A module can accept a dependency, but can call `invalidate` when the change of the dependency is not handleable:
+一个模块可以接受一个依赖，但是当依赖的改变无法处理时，可以调用 `invalidate`：
 
 ```js
 import { x, y } from './dep';
@@ -120,18 +121,18 @@ export default processY(y);
 
 module.hot.accept('./dep', () => {
   if(y !== oldY) {
-    // This can't be handled, bubble to parent
+    // 无法处理，冒泡给父级
     module.hot.invalidate();
     return;
   }
-  // This can be handled
+  // 可以处理
   processX(x);
 });
 ```
 
 __Conditional self accept__
 
-A module can self-accept itself, but can invalidate itself when the change is not handleable:
+模块可以自我接受，但是当更改无法处理时可以使自身失效：
 
 ```javascript
 const VALUE = 'constant';
@@ -160,79 +161,79 @@ if(require.cache[moduleId]) {
 }
 ```
 
-T> When `invalidate` is called, the [`dispose`](#dispose-or-adddisposehandler) handler will be eventually called and fill `module.hot.data`. If [`dispose`](#dispose-or-adddisposehandler) handler is not registered, an empty object will be supplied to `module.hot.data`.
+T> 当调用 `invalidate` 时，将最终调用 [`dispose`](#dispose-or-adddisposehandler) 处理函数并填充 `module.hot.data`。如果未注册 [`dispose`](#dispose-or-adddisposehandler) 处理程序, 则将空对象提供给 `module.hot.data`.
 
-W> Do not get caught in an `invalidate` loop, by calling `invalidate` again and again. This will result in stack overflow and HMR entering the `fail` state.
+W> 通过一次次的调用 `invalidate`，不要陷入 `invalidate` 循环。这将导致栈溢出并且 HMR 进入 `fail` 状态。
 
 ### `removeDisposeHandler`
 
-Remove the handler added via `dispose` or `addDisposeHandler`.
+删除由 `dispose` 或 `addDisposeHandler` 添加的回调函数。
 
 ``` js
 module.hot.removeDisposeHandler(callback);
 ```
 
-## Management API
+## API 管理
 
 ### `status`
 
-Retrieve the current status of the hot module replacement process.
+获取当前模块热替换进程的状态。
 
 ``` js
-module.hot.status(); // Will return one of the following strings...
+module.hot.status(); // 返回以下字符串之一...
 ```
 
 | Status      | Description                                                                            |
 | ----------- | -------------------------------------------------------------------------------------- |
-| idle        | The process is waiting for a call to `check` (see below)                               |
-| check       | The process is checking for updates                                                    |
-| prepare     | The process is getting ready for the update (e.g. downloading the updated module)      |
-| ready       | The update is prepared and available                                                   |
-| dispose     | The process is calling the `dispose` handlers on the modules that will be replaced     |
-| apply       | The process is calling the `accept` handlers and re-executing self-accepted modules    |
-| abort       | An update was aborted, but the system is still in its previous state                  |
-| fail        | An update has thrown an exception and the system's state has been compromised          |
+| idle        | 该进程正在等待调用 `check`（见下文） |
+| check       | 该进程正在检查以更新 |
+| prepare     | 该进程正在准备更新（例如，下载已更新的模块） |
+| ready       | 此更新已准备并可用 |
+| dispose     | 该进程正在调用将被替换模块的 `dispose` 处理函数 |
+| apply       | 该进程正在调用 `accept` 处理函数，并重新执行自我接受(self-accepted)的模块 |
+| abort       | 更新已中止，但系统仍处于之前的状态 |
+| fail        | 更新已抛出异常，系统状态已被破坏 |
 
 
 ### `check`
 
-Test all loaded modules for updates and, if updates exist, `apply` them.
+测试所有加载的模块以进行更新，如果有更新，则 `apply` 它们。
 
 ``` js
 module.hot.check(autoApply).then(outdatedModules => {
-  // outdated modules...
+  // 超时的模块...
 }).catch(error => {
-  // catch errors
+  // 捕获错误
 });
 ```
 
-The `autoApply` parameter can either be a boolean or `options` to pass to the `apply` method when called.
+当被调用时，传递给 `apply` 方法的 `autoApply` 参数可以是布尔值，也可以是 `options`，
 
 
 ### `apply`
 
-Continue the update process (as long as `module.hot.status() === 'ready'`).
+继续更新进程（当 `module.hot.status() === 'ready'` 时）。
 
 ``` js
 module.hot.apply(options).then(outdatedModules => {
-  // outdated modules...
+  // 超时的模块...
 }).catch(error => {
-  // catch errors
+  // 捕获错误
 });
 ```
 
-The optional `options` object can include the following properties:
+可选的 `options` 对象可以包含以下属性：
 
-- `ignoreUnaccepted` (boolean): Ignore changes made to unaccepted modules.
-- `ignoreDeclined` (boolean): Ignore changes made to declined modules.
-- `ignoreErrored` (boolean): Ignore errors thrown in accept handlers, error handlers and while reevaluating module.
-- `onDeclined` (function(info)): Notifier for declined modules
-- `onUnaccepted` (function(info)): Notifier for unaccepted modules
-- `onAccepted` (function(info)): Notifier for accepted modules
-- `onDisposed` (function(info)): Notifier for disposed modules
-- `onErrored` (function(info)): Notifier for errors
+- `ignoreUnaccepted` (boolean): 忽略对不可接受的模块所做的更改。
+- `ignoreDeclined` (boolean): 忽略对已拒绝的模块所做的更改。
+- `ignoreErrored` (boolean): 忽略在接受处理程序、错误处理程序以及重新评估模块时抛出的错误。
+- `onDeclined` (function(info)): 拒绝模块的通知者。
+- `onUnaccepted` (function(info)): 不可接受的模块的通知程序。
+- `onAccepted` (function(info)): 可接受模块的通知者。
+- `onDisposed` (function(info)): 废弃模块的通知者。
+- `onErrored` (function(info)): 错误通知者。
 
-The `info` parameter will be an object containing some of the following values:
+`info` 参数将是一个包含以下某些值的对象：
 
 <!-- eslint-skip -->
 
@@ -242,35 +243,35 @@ The `info` parameter will be an object containing some of the following values:
         'unaccepted' | 'accepted' |
         'disposed' | 'accept-errored' |
         'self-accept-errored' | 'self-accept-error-handler-errored',
-  moduleId: 4, // The module in question.
-  dependencyId: 3, // For errors: the module id owning the accept handler.
-  chain: [1, 2, 3, 4], // For declined/accepted/unaccepted: the chain from where the update was propagated.
-  parentId: 5, // For declined: the module id of the declining parent
-  outdatedModules: [1, 2, 3, 4], // For accepted: the modules that are outdated and will be disposed
-  outdatedDependencies: { // For accepted: The location of accept handlers that will handle the update
+  moduleId: 4, // 有问题的模块。
+  dependencyId: 3, // 对于错误：拥有接受处理程序的模块 ID。
+  chain: [1, 2, 3, 4], // 对于拒绝/接受/不接受：传播更新的 `chain`。
+  parentId: 5, // 对于拒绝：下降的父模块 ID。
+  outdatedModules: [1, 2, 3, 4], // 对于接受：已过时且将被处置的模块。
+  outdatedDependencies: { // 对于接受：将处理更新的接受处理程序的位置。
     5: [4]
   },
-  error: new Error(...), // For errors: the thrown error
-  originalError: new Error(...) // For self-accept-error-handler-errored:
-                                // the error thrown by the module before the error handler tried to handle it.
+  error: new Error(...), // 对于错误：抛出错误
+  originalError: new Error(...) // 对于自我接受错误处理程序错误：
+                                // 在错误处理程序尝试处理该模块之前，该模块引发的错误。
 }
 ```
 
 
 ### `addStatusHandler`
 
-Register a function to listen for changes in `status`.
+注册一个函数来监听 `status` 的变化。
 
 ``` js
 module.hot.addStatusHandler(status => {
-  // React to the current status...
+  // 响应当前状态...
 });
 ```
 
 
 ### `removeStatusHandler`
 
-Remove a registered status handler.
+移除一个注册的状态处理函数。
 
 ``` js
 module.hot.removeStatusHandler(callback);
