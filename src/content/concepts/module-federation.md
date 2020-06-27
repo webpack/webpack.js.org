@@ -6,11 +6,14 @@ contributors:
   - chenxsan
   - EugeneHlushko
   - jamesgeorge007
+  - ScriptedAlchemy
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
-  - title: Explanations and Examples
+  - title: 'Explanations and Examples'
     url: https://github.com/module-federation/module-federation-examples
+  - title: 'Module Federation YouTube Playlist'
+    url: https://www.youtube.com/playlist?list=PLWSiF9YHHK-DqsFHGYbeAMwbd9xcZbEWJ
 ---
 
 ## Motivation
@@ -136,3 +139,123 @@ Each page of a Single Page Application is exposed from container build in a sepa
 ### Components library as container
 
 Many applications share a common components library which could be built as a container with each component exposed. Each application consumes components from the components library container. Changes to the components library can be separately deployed without the need to re-deploy all applications. The application automatically uses the up-to-date version of the components library.
+
+## Troubleshooting
+
+__`Uncaught Error: Shared module is not available for eager consumption`__
+
+The application is eagerly executing an application which is operating as an omnidirectional host. There are options to choose from:
+
+You can set the dependency as eager inside the advanced API of Module Federation, which doesn’t put the modules in an async chunk, but provides them synchronously. This allows us to use these shared modules in the initial chunk. But be careful as all provided and fallback modules will always be downloaded. It’s recommended to provide it only at one point of your application, e.g. the shell.
+
+We strongly recommend using an asynchronous boundary. It will split out the initialization code of a larger chunk to avoid any additional round trips and improve performance in general.
+
+For example, your entry looked like this:
+
+__index.js__
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+Let's create `bootstrap.js` file and move contents of the entry into it, and import that bootstrap into the entry:
+
+__index.js__
+
+```diff
++ import('./bootstrap');
+- import React from 'react';
+- import ReactDOM from 'react-dom';
+- import App from './App';
+- ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+__bootstrap.js__
+
+```diff
++ import React from 'react';
++ import ReactDOM from 'react-dom';
++ import App from './App';
++ ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+Methods mentioned below work, but can have some limits or drawbacks.
+
+Setting `eager: true` for dependency via the `ModuleFederationPlugin`
+
+__webpack.config.js__
+
+```js
+// ...
+new ModuleFederationPlugin({
+  shared: {
+    ...deps,
+    react: {
+      eager: true,
+    }
+  }
+});
+```
+
+Using `bundle-loader` as an alternative to setting dependencies as `'eager'`. This method is less performant as it will introduce additional round trips.
+
+__webpack.config.js__
+
+```js
+const config = {
+  entry: 'bundle-loader!./bootstrap.js'
+};
+```
+
+Or you can set it via module rules: [See Full Example](https://github.com/module-federation/module-federation-examples/blob/master/basic-host-remote/app1/webpack.config.js)
+
+__webpack.config.js__
+
+```js
+const config = {
+  module: {
+    rules: [
+      {
+        test: /bootstrap\.js$/,
+        loader: 'bundle-loader',
+        options: {
+          lazy: true,
+        },
+      },
+    ]
+  }
+};
+```
+
+But have to change the entry point to look like this:
+
+__index.js__
+
+```diff
+- import('./bootstrap');
++ import bootstrap from './bootstrap';
++ bootstrap();
+```
+
+__`Uncaught Error: Module "./Button" does not exist in container.`__
+
+It likely does not say `"./Button"`, but the error message will look similar. This issue is typically seen if you are upgrading from webpack beta.16 to webpack beta.17.
+
+Within ModuleFederationPlugin. Change the exposes from:
+
+```diff
+new ModuleFederationPlugin({
+  exposes: {
+-   'Button': './src/Button'
++   './Button':'./src/Button'
+  }
+});
+```
+
+__`Uncaught TypeError: fn is not a function`__
+
+You are likely missing the remote container, make sure its added.
+If you have the container loaded for the remote you are trying to consume, but still see this error, add the host container's remote container file to the HTML as well.
