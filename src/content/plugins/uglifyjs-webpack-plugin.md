@@ -16,21 +16,21 @@ repo: https://github.com/webpack-contrib/uglifyjs-webpack-plugin
 
 
 
-This plugin uses [uglify-js](https://github.com/mishoo/UglifyJS2) to minify your JavaScript.
+此插件使用 [uglify-js](https://github.com/mishoo/UglifyJS2) 压缩你的 JavaScript。
 
 ## Requirements
 
-This module requires a minimum of Node v6.9.0 and Webpack v4.0.0.
+此模块要求的最小版本为 Node v6.9.0 和 Webpack v4.0.0 版本。
 
 ## Getting Started
 
-To begin, you'll need to install `uglifyjs-webpack-plugin`:
+首先，你需要安装 `uglifyjs-webpack-plugin`：
 
 ```console
 $ npm install uglifyjs-webpack-plugin --save-dev
 ```
 
-Then add the plugin to your `webpack` config. For example:
+然后把插件添加到你的 `webpack` 配置中。例如：
 
 **webpack.config.js**
 
@@ -44,16 +44,16 @@ module.exports = {
 };
 ```
 
-And run `webpack` via your preferred method.
+紧接着通过你的首选方式运行 `webpack`。
 
 ## Options
 
 ### `test`
 
-Type: `String|RegExp|Array<String|RegExp>`
-Default: `/\.js(\?.*)?$/i`
+类型：`String|RegExp|Array<String|RegExp>`
+默认值：`/\.js(\?.*)?$/i`
 
-Test to match files against.
+测试匹配的文件。
 
 **webpack.config.js**
 
@@ -71,10 +71,10 @@ module.exports = {
 
 ### `include`
 
-Type: `String|RegExp|Array<String|RegExp>`
-Default: `undefined`
+类型：`String|RegExp|Array<String|RegExp>`
+默认值：`undefined`
 
-Files to include.
+要被处理的文件。
 
 **webpack.config.js**
 
@@ -92,10 +92,10 @@ module.exports = {
 
 ### `exclude`
 
-Type: `String|RegExp|Array<String|RegExp>`
-Default: `undefined`
+类型：`String|RegExp|Array<String|RegExp>`
+默认值：`undefined`
 
-Files to exclude.
+不被处理的文件。
 
 **webpack.config.js**
 
@@ -113,11 +113,11 @@ module.exports = {
 
 ### `chunkFilter`
 
-Type: `Function<(chunk) -> boolean>`
-Default: `() => true`
+类型：`Function<(chunk) -> boolean>`
+默认值：`() => true`
 
-Allowing to filter which chunks should be uglified (by default all chunks are uglified).
-Return `true` to uglify the chunk, `false` otherwise.
+判断哪些 chunk 可以被压缩（默认所有的 chunk 都会被压缩）。
+返回值为 `true` 则会被压缩，`false` 则不会被压缩。
 
 **webpack.config.js**
 
@@ -127,7 +127,7 @@ module.exports = {
     minimizer: [
       new UglifyJsPlugin({
         chunkFilter: (chunk) => {
-          // Exclude uglification for the `vendor` chunk
+          // `vendor` 块不压缩
           if (chunk.name === 'vendor') {
             return false;
           }
@@ -142,17 +142,17 @@ module.exports = {
 
 ### `cache`
 
-Type: `Boolean|String`
-Default: `false`
+类型：`Boolean|String`
+默认值：`false`
 
-Enable file caching.
-Default path to cache directory: `node_modules/.cache/uglifyjs-webpack-plugin`.
+启用文件缓存。
+默认的缓存目录路径：`node_modules/.cache/uglifyjs-webpack-plugin`。
 
-> ℹ️ If you use your own `minify` function please read the `minify` section for cache invalidation correctly.
+> ℹ️ 如果你使用自定义的 `minify` 函数，请正确阅读 `minify` 部分以了解缓存失效。
 
 #### `Boolean`
 
-Enable/disable file caching.
+启用/禁用文件缓存。
 
 **webpack.config.js**
 
@@ -170,7 +170,7 @@ module.exports = {
 
 #### `String`
 
-Enable file caching and set path to cache directory.
+启用文件缓存并设置缓存目录路径。
 
 **webpack.config.js**
 
@@ -190,23 +190,23 @@ module.exports = {
 
 ### `cacheKeys`
 
-Type: `Function<(defaultCacheKeys, file) -> Object>`
-Default: `defaultCacheKeys => defaultCacheKeys`
+类型：`Function<(defaultCacheKeys, file) -> Object>`
+默认值：`defaultCacheKeys => defaultCacheKeys`
 
-Allows you to override default cache keys.
+允许重写默认的缓存 key。
 
-Default cache keys:
+默认的缓存 key：
 
 ```js
 ({
-  'uglify-js': require('uglify-js/package.json').version, // uglify version
-  'uglifyjs-webpack-plugin': require('../package.json').version, // plugin version
-  'uglifyjs-webpack-plugin-options': this.options, // plugin options
-  path: compiler.outputPath ? `${compiler.outputPath}/${file}` : file, // asset path
+  'uglify-js': require('uglify-js/package.json').version, // uglify 版本
+  'uglifyjs-webpack-plugin': require('../package.json').version, // plugin 版本
+  'uglifyjs-webpack-plugin-options': this.options, // plugin 选项
+  path: compiler.outputPath ? `${compiler.outputPath}/${file}` : file, // 输出资源路径
   hash: crypto
     .createHash('md4')
     .update(input)
-    .digest('hex'), // source file hash
+    .digest('hex'), // 资源文件hash
 });
 ```
 
@@ -231,17 +231,17 @@ module.exports = {
 
 ### `parallel`
 
-Type: `Boolean|Number`
-Default: `false`
+类型：`Boolean|Number`
+默认值：`false`
 
-Use multi-process parallel running to improve the build speed.
-Default number of concurrent runs: `os.cpus().length - 1`.
+使用多进程并行运行以提高构建速度。
+默认并发运行次数：`os.cups().length - 1`。
 
-> ℹ️ Parallelization can speedup your build significantly and is therefore **highly recommended**.
+> ℹ️ 并行化可以显著地加快构建速度，因此**强烈推荐**使用并行化。
 
 #### `Boolean`
 
-Enable/disable multi-process parallel running.
+启用/禁用多进程并行运行。
 
 **webpack.config.js**
 
@@ -259,7 +259,7 @@ module.exports = {
 
 #### `Number`
 
-Enable multi-process parallel running and set number of concurrent runs.
+启用多进程并行运行并设置并发运行的次数。
 
 **webpack.config.js**
 
@@ -277,13 +277,13 @@ module.exports = {
 
 ### `sourceMap`
 
-Type: `Boolean`
-Default: `false`
+类型：`Boolean`
+默认值：`false`
 
-Use source maps to map error message locations to modules (this slows down the compilation).
-If you use your own `minify` function please read the `minify` section for handling source maps correctly.
+使用源映射将错误信息位置映射到模块（这将会减慢编译速度）。
+如果你使用自定义的 `minify` 函数，请正确阅读 `minify` 部分以确保正确处理源映射。
 
-> ⚠️ **`cheap-source-map` options don't work with this plugin**.
+> ⚠️ **`cheap-source-map` 选项不适用于此插件**。
 
 **webpack.config.js**
 
@@ -301,14 +301,14 @@ module.exports = {
 
 ### `minify`
 
-Type: `Function`
-Default: `undefined`
+类型：`Function`
+默认值：`undefined`
 
-Allows you to override default minify function.
-By default plugin uses [uglify-js](https://github.com/mishoo/UglifyJS2) package.
-Useful for using and testing unpublished versions or forks.
+允许你覆盖默认的 minify 函数。
+默认情况下，插件使用 [uglify-js](https://github.com/mishoo/UglifyJS2) 软件包。
+对于使用和测试未发布的版本或分支很有用。
 
-> ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**.
+> ⚠️ **开启 `parallel` 选项时，始终在 `minify` 函数内部使用 `require`**。
 
 **webpack.config.js**
 
@@ -320,11 +320,11 @@ module.exports = {
         minify(file, sourceMap) {
           const extractedComments = [];
 
-          // Custom logic for extract comments
+          // 自定义提取注释的逻辑
 
-          const { error, map, code, warnings } = require('uglify-module') // Or require('./path/to/uglify-module')
+          const { error, map, code, warnings } = require('uglify-module') // 或者 require('./path/to/uglify-module')
             .minify(file, {
-              /* Your options for minification */
+              /* 你的压缩选项 */
             });
 
           return { error, map, code, warnings, extractedComments };
@@ -337,10 +337,10 @@ module.exports = {
 
 ### `uglifyOptions`
 
-Type: `Object`
-Default: [default](https://github.com/mishoo/UglifyJS2#minify-options)
+类型：`Object`
+默认值：[默认值](https://github.com/mishoo/UglifyJS2#minify-options)
 
-UglifyJS minify [options](https://github.com/mishoo/UglifyJS2#minify-options).
+UglifyJS 压缩[选项](https://github.com/mishoo/UglifyJS2#minify-options)。
 
 **webpack.config.js**
 
@@ -353,7 +353,7 @@ module.exports = {
           warnings: false,
           parse: {},
           compress: {},
-          mangle: true, // Note `mangle.properties` is `false` by default.
+          mangle: true, // 注意 `mangle.properties` 的默认值是 `false`。
           output: null,
           toplevel: false,
           nameCache: null,
@@ -368,17 +368,17 @@ module.exports = {
 
 ### `extractComments`
 
-Type: `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
-Default: `false`
+类型：`Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
+默认值：`false`
 
-Whether comments shall be extracted to a separate file, (see [details](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a)).
-By default extract only comments using `/^\**!|@preserve|@license|@cc_on/i` regexp condition and remove remaining comments.
-If the original file is named `foo.js`, then the comments will be stored to `foo.js.LICENSE`.
-The `uglifyOptions.output.comments` option specifies whether the comment will be preserved, i.e. it is possible to preserve some comments (e.g. annotations) while extracting others or even preserving comments that have been extracted.
+是否提取注释到单独的文件中，（请参阅[详细信息](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a)）。
+默认情况下，只提取注释中使用 `/^\**!|@preserve|@license|@cc_on/i` 正则条件匹配同时删除剩余注释。
+如果原始文件名字为 `foo.js`，则注释文件将会被储存到 `foo.js.LICENSE` 中。
+`uglifyOptions.output.comments` 选项指定是否保留注释，也就是说，当提取其他的注释时，可以保留一些注释（如：注解），甚至是保留已经被提取的注释。
 
 #### `Boolean`
 
-Enable/disable extracting comments.
+启用/禁用提取注释。
 
 **webpack.config.js**
 
@@ -396,7 +396,7 @@ module.exports = {
 
 #### `String`
 
-Extract `all` or `some` (use `/^\**!|@preserve|@license|@cc_on/i` RegExp) comments.
+提取`所有`或`一些`（使用 `/^\**!|@preserve|@license|@cc_on/i` 正则匹配） 注释。
 
 **webpack.config.js**
 
@@ -414,7 +414,7 @@ module.exports = {
 
 #### `RegExp`
 
-All comments that match the given expression will be extracted to the separate file.
+所有的与给定表达式相匹配注释将被提取到单独的文件中。
 
 **webpack.config.js**
 
@@ -432,7 +432,7 @@ module.exports = {
 
 #### `Function<(node, comment) -> Boolean>`
 
-All comments that match the given expression will be extracted to the separate file.
+所有的与给定表达式相匹配注释将被提取到单独的文件中。
 
 **webpack.config.js**
 
@@ -456,7 +456,7 @@ module.exports = {
 
 #### `Object`
 
-Allow to customize condition for extract comments, specify extracted file name and banner.
+允许自定义条件提取注释，指定提取的文件名和banner。
 
 **webpack.config.js**
 
@@ -482,9 +482,9 @@ module.exports = {
 
 ##### `condition`
 
-Type: `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
+类型：`Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
 
-Condition what comments you need extract.
+设置需要提取的注释。
 
 **webpack.config.js**
 
@@ -510,11 +510,11 @@ module.exports = {
 
 ##### `filename`
 
-Type: `Regex|Function<(string) -> String>`
-Default: `${file}.LICENSE`
+类型：`Regex|Function<(string) -> String>`
+默认值：`${file}.LICENSE`
 
-The file where the extracted comments will be stored.
-Default is to append the suffix `.LICENSE` to the original filename.
+提取的注释被储存时的文件名。
+默认是将后缀 `.LICENSE` 添加到原始文件名后面。
 
 **webpack.config.js**
 
@@ -538,12 +538,12 @@ module.exports = {
 
 ##### `banner`
 
-Type: `Boolean|String|Function<(string) -> String>`
-Default: `/*! For license information please see ${commentsFile} */`
+类型：`Boolean|String|Function<(string) -> String>`
+默认值：`/*! For license information please see ${commentsFile} */`
 
-The banner text that points to the extracted file and will be added on top of the original file.
-Can be `false` (no banner), a `String`, or a `Function<(string) -> String>` that will be called with the filename where extracted comments have been stored.
-Will be wrapped into comment.
+指向提取文件的 banner 文本，将会被添加到源文件的顶部。
+可能是 `false`，一个 `String`，或者一个 `Function<(string) -> String>`，该函数将使用储存提取注释的文件名来调用。
+将会被包装到注释中。
 
 **webpack.config.js**
 
@@ -569,11 +569,11 @@ module.exports = {
 
 ### `warningsFilter`
 
-Type: `Function<(warning, source) -> Boolean>`
-Default: `() => true`
+类型：`Function<(warning, source) -> Boolean>`
+默认值：`() => true`
 
-Allow to filter [uglify-js](https://github.com/mishoo/UglifyJS2) warnings.
-Return `true` to keep the warning, `false` otherwise.
+允许过滤 [uglify-js](https://github.com/mishoo/UglifyJS2) 警告。
+返回值为 `true` 则会保持警告，`false` 则不保留警告。
 
 **webpack.config.js**
 
@@ -603,7 +603,7 @@ module.exports = {
 
 ### Cache And Parallel
 
-Enable cache and multi-process parallel running.
+开启缓存并启用多进程并行运行。
 
 **webpack.config.js**
 
@@ -622,7 +622,7 @@ module.exports = {
 
 ### Preserve Comments
 
-Extract all legal comments (i.e. `/^\**!|@preserve|@license|@cc_on/i`) and preserve `/@license/i` comments.
+提取所有合法注释（即使用 `/^\**!|@preserve|@license|@cc_on/i` 正则匹配），同时保留 `/@license/i` 注释。
 
 **webpack.config.js**
 
@@ -645,7 +645,7 @@ module.exports = {
 
 ### Remove Comments
 
-If you avoid building with comments, set **uglifyOptions.output.comments** to **false** as in this config:
+如果你构建时不想出现注释，可以按照以下配置将 **uglifyOptions.output.comments** 设置为 **false**：
 
 **webpack.config.js**
 
@@ -667,7 +667,7 @@ module.exports = {
 
 ### Custom Minify Function
 
-Override default minify function - use [terser](https://github.com/fabiosantoscode/terser) for minification.
+覆盖默认的 minify 函数 —— 使用 [terser](https://github.com/fabiosantoscode/terser) 进行压缩。
 
 **webpack.config.js**
 
@@ -690,7 +690,7 @@ module.exports = {
         minify(file, sourceMap) {
           // https://github.com/mishoo/UglifyJS2#minify-options
           const uglifyJsOptions = {
-            /* your `uglify-js` package options */
+            /* `uglify-js` package 的相关配置 */
           };
 
           if (sourceMap) {
@@ -709,9 +709,9 @@ module.exports = {
 
 ## Contributing
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+如果你至今还没有阅读，请花一点时间阅读我们的贡献指南。
 
-[CONTRIBUTING](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
+[贡献](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
 
 ## License
 
