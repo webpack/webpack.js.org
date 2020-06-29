@@ -198,12 +198,6 @@
 		"maintainer": "kostasmanionis"
 	},
 	{
-		"repo": "webpack-contrib/bundle-loader",
-		"npm": "bundle-loader",
-		"description": "Load a module and it's children into a separate bundle.",
-		"maintainer": ""
-	},
-	{
 		"repo": "webpack-contrib/coffee-loader",
 		"npm": "coffee-loader",
 		"description": "Load and parse coffee script modules into JS.",
