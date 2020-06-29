@@ -4,6 +4,7 @@ sort: 14
 contributors:
   - smelukov
   - EugeneHlushko
+  - chenxsan
 ---
 
 > 此章节描述 webpack 内部实现，对于插件开发人员可能会提供帮助

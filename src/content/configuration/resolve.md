@@ -15,6 +15,7 @@ contributors:
   - Aghassi
   - myshov
   - anikethsaha
+  - chenxsan
 ---
 
 这些选项能设置模块如何被解析。webpack 提供合理的默认值，但是还是可能会修改一些解析的细节。
@@ -449,6 +450,24 @@ module.exports = {
   },
 };
 ```
+
+### `resolve.restrictions`
+
+`[string, RegExp]`
+
+解析限制列表，用于限制可以解析请求的路径。
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    restrictions: [/\.(sass|scss|css)$/]
+  }
+};
+```
+
 
 ## `resolveLoader`
 
