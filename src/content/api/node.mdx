@@ -1,5 +1,5 @@
 ---
-title: Node Interface
+title: Node 接口
 sort: 2
 contributors:
   - sallar
@@ -13,26 +13,26 @@ contributors:
   - jamesgeorge007
 ---
 
-webpack provides a Node.js API which can be used directly in Node.js runtime.
+webpack 提供了 Node.js API，可以在 Node.js 运行时下直接使用。
 
-The Node.js API is useful in scenarios in which you need to customize the build or development process since all the reporting and error handling must be done manually and webpack only does the compiling part. For this reason the [`stats`](/configuration/stats) configuration options will not have any effect in the `webpack()` call.
+当你需要自定义构建或开发流程时，Node.js API 非常有用，因为此时所有的报告和错误处理都必须自行实现，webpack 仅仅负责编译的部分。所以 [`stats`](/configuration/stats) 配置选项不会在 `webpack()` 调用中生效。
 
 
-## Installation
+## 安装(Installation)
 
-To start using the webpack Node.js API, first install webpack if you haven’t yet:
+开始使用 webpack 的 Node.js API 之前，首先你需要安装 webpack：
 
 ``` bash
 npm install --save-dev webpack
 ```
 
-Then require the webpack module in your Node.js script:
+在 Node.js 文件中，引入 webpack 模块:
 
 ``` js
 const webpack = require('webpack');
 ```
 
-Or if you prefer ES2015:
+或者如果你更喜欢 ES2015:
 
 ``` js
 import webpack from 'webpack';
@@ -41,70 +41,69 @@ import webpack from 'webpack';
 
 ## `webpack()`
 
-The imported `webpack` function is fed a webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback function is provided:
+导入的 `webpack` 函数会将 [配置对象](/configuration/) 传给 webpack，如果同时传入回调函数会在 webpack compiler 运行时被执行:
 
 ``` js-with-links
 const webpack = require('webpack');
 
 webpack({
-  // [Configuration Object](/configuration/)
+  // [配置对象](/configuration/)
 }, (err, stats) => { // [Stats Object](#stats-object)
   if (err || stats.hasErrors()) {
-    // [Handle errors here](#error-handling)
+    // [在这里处理错误](#error-handling)
   }
-  // Done processing
+  // 处理完成
 });
 ```
 
-T> The `err` object __will not__ include compilation errors. Those must be handled separately using `stats.hasErrors()`, which will be covered in detail in the [Error Handling](#error-handling) section of this guide. The `err` object will only contain webpack-related issues, such as misconfiguration, etc.
+T> `err`对象 __不包含__ 编译错误，必须使用 `stats.hasErrors()` 单独处理，文档的 [错误处理](#error-handling) 将对这部分将对此进行详细介绍。`err` 对象只包含 webpack 相关的问题，例如配置错误等。
 
-T> You can provide the `webpack` function with an array of configurations. See
-the [MultiCompiler](#multicompiler) section below for more information.
+T> 你也可以为 `webpack` 函数提供一个配置数组。更多详细信息，请查看 [MultiCompiler](#multicompiler) 章节。
 
 
-## Compiler Instance
+## Compiler 实例（Compiler Instance）
 
-If you don’t pass the `webpack` runner function a callback, it will return a
-webpack `Compiler` instance. This instance can be used to manually trigger the
-webpack runner or have it build and watch for changes, much like the
-[CLI](/api/cli/). The `Compiler` instance provides the following methods:
+如果你不向 `webpack` 传入可执行的回调函数，
+它会返回一个 webpack `Compiler` 实例。
+你可以通过手动执行它或者为它的构建时添加一个监听器，
+就像 [CLI](/api/cli/) 类似。`Compiler` 实例提供了以下方法:
 
 - `.run(callback)`
 - `.watch(watchOptions, handler)`
 
-Typically, only one master `Compiler` instance is created, although child
-compilers can be created in order to delegate specific tasks. The `Compiler` is
-ultimately just a function which performs bare minimum functionality to keep a
-lifecycle running. It delegates all the loading, bundling, and writing work to
-registered plugins.
+通常情况下，仅会创建一个主要 `Compiler` 实例，
+虽然可以创建一些子 compiler 来代理到特定任务。
+`Compiler` 基本上只是执行最低限度的功能，以维持生命周期运行的功能。
+它将所有的加载、打包和写入工作，
+都委托到注册过的插件上。
 
-The `hooks` property on a `Compiler` instance is used to register a plugin to
-any hook event in the `Compiler`'s lifecycle. The
-[`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js)
-and [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js)
-utilities are used by webpack to configure its `Compiler` instance with all the
-built-in plugins.
+`Compiler` 实例上的 `hooks` 属性，用于将一个插件注册
+到 `Compiler` 的生命周期中的所有钩子事件上。
+`webpack` 使用 
+[`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js) 
+和 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js) 
+来配置 `Compiler` 实例以及所有内置插件。
 
-The `run` method is then used to kickstart all compilation work. Upon
-completion, the given `callback` function is executed. The final logging of
-stats and errors should be done in this `callback` function.
+使用 `run` 方法启动所有编译工作。
+完成之后，执行传入的的 `callback` 函数。
+最终记录下来的概括信息（stats）和错误（errors），都应在这个 callback 函数中获取。
 
-W> The API only supports a single concurrent compilation at a time. When using
-`run`, wait for it to finish before calling `run` or `watch` again. When using
-`watch`, call `close` and wait for it to finish before calling `run` or `watch`
-again. Concurrent compilations will corrupt the output files.
+W> 这个 API 一次仅支持一个编译。当使用 `run` 时，
+再次调用 `run` 或 `watch` 之前需等待它完成。
+当使用 `watch` 时，调用 `close`，并等待它完成后，
+然后才能再次调用 `run` 或 `watch`。并发编译将破坏输出文件。
 
 
-## Run
+## 执行（Run）
 
-Calling the `run` method on the `Compiler` instance is much like the quick run
-method mentioned above:
+调用 `Compiler` 实例的 `run` 方法跟上文提到的
+快速执行方法很类似：
 
 ``` js-with-links
 const webpack = require('webpack');
 
 const compiler = webpack({
-  // [Configuration Object](/configuration/)
+  // [配置对象](/configuration/)
 });
 
 compiler.run((err, stats) => { // [Stats Object](#stats-object)
@@ -113,11 +112,11 @@ compiler.run((err, stats) => { // [Stats Object](#stats-object)
 ```
 
 
-## Watching
+## 监听(Watching)
 
-Calling the `watch` method triggers the webpack runner, but then watches for
-changes (much like CLI: `webpack --watch`), as soon as webpack detects a
-change, runs again. Returns an instance of `Watching`.
+调用 `watch` 方法会触发 webpack 执行，但之后会监听变更（很像 CLI 命令: `webpack --watch`），
+一旦 webpack 检测到文件变更，就会重新执行编译。
+该方法返回一个 `Watching` 实例。
 
 ``` js
 watch(watchOptions, callback);
@@ -127,32 +126,32 @@ watch(watchOptions, callback);
 const webpack = require('webpack');
 
 const compiler = webpack({
-  // [Configuration Object](/configuration/)
+  // [配置对象](/configuration/)
 });
 
 const watching = compiler.watch({
-  // Example [watchOptions](/configuration/watch/#watchoptions)
+  // [watchOptions](/configuration/watch/#watchoptions) 示例
   aggregateTimeout: 300,
   poll: undefined
 }, (err, stats) => { // [Stats Object](#stats-object)
-  // Print watch/build result here...
+  // 这里打印 watch/build 结果...
   console.log(stats);
 });
 ```
 
-`Watching` options are covered in detail
-[here](/configuration/watch/#watchoptions).
+`Watching` 配置选项的细节可以在
+[这里](/configuration/watch/#watchoptions)查询。
 
-W> Filesystem inaccuracies may trigger multiple builds for a single change. So,
-in the example above, the `console.log` statement may fire multiple times for a
-single modification. Users should expect this behavior and may check
-`stats.hash` to see if the file hash has actually changed.
+W> 文件系统不正确的问题，可能会对单次修改触发多次构建。
+因此，在上面的示例中，一次修改可能会多次触发 `console.log` 语句。
+用户应该预知此行为，
+并且可能需要检查 `stats.hash` 来查看文件哈希是否确实变更。
 
 
-### Close `Watching`
+### 关闭 `Watching` (Close `Watching`)
 
-The `watch` method returns a `Watching` instance that exposes
-`.close(callback)` method. Calling this method will end watching:
+`watch` 方法返回一个 `Watching` 实例，该实例会暴露一个 `.close(callback)` 方法。
+调用该方法将会结束监听:
 
 ``` js
 watching.close(() => {
@@ -160,59 +159,59 @@ watching.close(() => {
 });
 ```
 
-W> It’s not allowed to watch or run again before the existing watcher has been
-closed or invalidated.
+W> 不允许在监听器关闭或者失效前
+再次监听或执行。
 
 
 ### Invalidate `Watching`
 
-Using `watching.invalidate`, you can manually invalidate the current compiling
-round, without stopping the watch process:
+使用 `watching.invalidate`，你可以手动使当前编译循环（compiling round）无效，
+而不会停止监听进程（process）：
 
 ``` js
 watching.invalidate();
 ```
 
 
-## Stats Object
+## Stats 对象(Stats Object)
 
-The `stats` object that is passed as a second argument of the
-[`webpack()`](#webpack) callback, is a good source of information about the
-code compilation process. It includes:
+`stats` 对象会被作为 [`webpack()`](#webpack) 回调函数的第二个参数传递，
+可以通过它获取到代码编译过程中的有用信息，
+包括：
 
-- Errors and Warnings (if any)
-- Timings
-- Module and Chunk information
+- 错误和警告(有过有的话)
+- 计时信息
+- module 和 chunk 信息
 
-The [webpack CLI](/api/cli) uses this information to display nicely formatted
-output in your console.
+[webpack CLI](/api/cli) 正是基于这些信息在控制台
+展示友好的格式输出。
 
-T> When using the [`MultiCompiler`](#multicompiler), a
-`MultiStats` instance is returned that fulfills the same interface as `stats`,
-i.e. the methods described below.
+T> 当使用 [`MultiCompiler`](#multicompiler) 时，
+会返回一个 `MultiStats` 实例，
+它实现与 `stats` 相同的接口，也就是下面描述的方法。
 
-This `stats` object exposes the following methods:
+`stats` 对象暴露了以下方法:
 
 
 ### `stats.hasErrors()`
 
-Can be used to check if there were errors while compiling. Returns `true` or
-`false`.
+可以用来检查编译期是否有错误，
+返回值为 `true` 或 `false`。
 
 
 ### `stats.hasWarnings()`
 
-Can be used to check if there were warnings while compiling. Returns `true` or
-`false`.
+可以用来检查编译期是否有警告，
+返回值为 `true` 或 `false`。
 
 
 ### `stats.toJson(options)`
 
-Returns compilation information as a JSON object. `options` can be either a
-string (a preset) or an object for more granular control:
+以 JSON 对象形式返回编译信息。
+`options` 可以是一个字符串（预设值）或是颗粒化控制的对象:
 
 ``` js-with-links
-stats.toJson('minimal'); // [more options: 'verbose', etc](/configuration/stats).
+stats.toJson('minimal'); // [更多选项如: "verbose" 等](/configuration/stats).
 ```
 
 ``` js
@@ -222,34 +221,34 @@ stats.toJson({
 });
 ```
 
-All available options and presets are described in the stats [documentation](/configuration/stats).
+所有可用的配置选项和预设值都可查询 stats [文档](/configuration/stats)。
 
-> Here’s an [example]
-(https://raw.githubusercontent.com/webpack/analyse/master/app/pages/upload/example2.json)
-of this function’s output.
+> 这里有
+该函数输出的
+[示例](https://raw.githubusercontent.com/webpack/analyse/master/app/pages/upload/example2.json)。
 
 
 ### `stats.toString(options)`
 
-Returns a formatted string of the compilation information (similar to
-[CLI](/api/cli) output).
+以格式化的字符串形式返回描述编译信息
+（类似 [CLI](/api/cli) 的输出）。
 
-Options are the same as [`stats.toJson(options)`](/api/node/#statstojsonoptions) with one addition:
+配置对象与 [`stats.toJson(options)`](/api/node/#statstojsonoptions) 一致，除了额外增加的一个选项:
 
 ``` js
 stats.toString({
-  // Add console colors
+  // 增加控制台颜色开关
   colors: true
 });
 ```
 
-Here’s an example of `stats.toString()` usage:
+下面是 `stats.toString()` 用法的示例:
 
 ``` js-with-links
 const webpack = require('webpack');
 
 webpack({
-  // [Configuration Object](/configuration/)
+  // [配置对象](/configuration/)
 }, (err, stats) => {
   if (err) {
     console.error(err);
@@ -257,8 +256,8 @@ webpack({
   }
 
   console.log(stats.toString({
-    chunks: false,  // Makes the build much quieter
-    colors: true    // Shows colors in the console
+    chunks: false,  // 使构建过程更静默无输出
+    colors: true    // 在控制台展示颜色
   }));
 });
 ```
@@ -266,10 +265,10 @@ webpack({
 
 ## MultiCompiler
 
-The `MultiCompiler` module allows webpack to run multiple configurations in
-separate compilers. If the `options` parameter in the webpack's NodeJS api is
-an array of options, webpack applies separate compilers and calls the
-`callback` after all compilers have been executed.
+`MultiCompiler` 模块可以让 webpack 在单个 compiler 中执行多个配置。
+如果传给 webpack 的 Node.js API 的 `options` 参数，
+是一个由配置对象构成的数组，则 webpack 会应用单独 compiler，
+并且在每次 compiler 执行结束时，都会调用 `callback` 方法。
 
 ``` js-with-links
 var webpack = require('webpack');
@@ -282,27 +281,27 @@ webpack([
 })
 ```
 
-W> Multiple configurations will __not be run in parallel__. Each
-configuration is only processed after the previous one has finished
-processing. To process them in parallel, you can use a third-party solution
-like [parallel-webpack](https://www.npmjs.com/package/parallel-webpack).
+W> 多个配置对象在执行时，__不会并行执行__。
+每个配置都只会在前一个处理结束后，才进行处理。
+想要并行处理，你可以使用第三方解决方案，
+例如 [parallel-webpack](https://www.npmjs.com/package/parallel-webpack)。
 
 
-## Error Handling
+## 错误处理(Error Handling)
 
-For good error handling, you need to account for these three types of errors:
+完备的错误处理中需要考虑以下三种类型的错误:
 
-- Fatal webpack errors (wrong configuration, etc)
-- Compilation errors (missing modules, syntax errors, etc)
-- Compilation warnings
+- 致命的 wepback 错误（配置出错等）
+- 编译错误（缺失的 module，语法错误等）
+- 编译警告
 
-Here’s an example that does all that:
+下面是一个覆盖这些场景的示例:
 
 ``` js-with-links
 const webpack = require('webpack');
 
 webpack({
-  // [Configuration Object](/configuration/)
+  // [配置对象](/configuration/)
 }, (err, stats) => {
   if (err) {
     console.error(err.stack || err);
@@ -327,15 +326,15 @@ webpack({
 ```
 
 
-## Custom File Systems
+## 自定义文件系统(Custom File Systems)
 
-By default, webpack reads files and writes files to disk using a normal file
-system. However, it is possible to change the input or output behavior using a
-different kind of file system (memory, webDAV, etc). To accomplish this, one
-can change the `inputFileSystem` or `outputFileSystem`. For example, you can
-replace the default `outputFileSystem` with
-[`memfs`](https://github.com/streamich/memfs) to write files to memory
-instead of to disk:
+默认情况下，webpack 使用普通文件系统来读取文件并将文件写入磁盘。
+但是，还可以使用不同类型的文件系统（内存(memory), webDAV 等）来更改输入或输出行为。
+为了实现这一点，
+可以改变 `inputFileSystem` 或 `outputFileSystem`。
+例如，可以使用 [`memfs`](https://github.com/streamich/memfs) 替换默认的 `outputFileSystem`，
+以将文件写入到内存中，
+而不是写入到磁盘:
 
 ``` js
 const { createFsFromVolume, Volume } = require('memfs');
@@ -346,17 +345,17 @@ const compiler = webpack({ /* options */ });
 
 compiler.outputFileSystem = fs;
 compiler.run((err, stats) => {
-  // Read the output later:
+  // 之后读取输出:
   const content = fs.readFileSync('...');
 });
 ```
 
-Note that this is what
-[webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware),
-used by [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
-and many other packages, uses to mysteriously hide your files but continue
-serving them up to the browser!
+值得一提的是，被 
+[webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 
+及众多其他包依赖的 
+[webpack-dev-server](https://github.com/webpack/webpack-dev-server) 就是通过这种方式，
+将你的文件神秘地隐藏起来，但却仍然可以用它们为浏览器提供服务！
 
-T> The output file system you provide needs to be compatible with Node’s own
-[`fs`](https://nodejs.org/api/fs.html) interface, which requires the `mkdirp`
-and `join` helper methods.
+T> 你指定的输出文件系统需要
+兼容 Node 自身的 [`fs`](https://nodejs.org/api/fs.html) 模块接口，
+接口需要提供 `mkdirp` 和 `join` 工具方法。
