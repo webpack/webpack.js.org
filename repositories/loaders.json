@@ -15,7 +15,6 @@
   "webpack-contrib/mocha-loader",
   "webpack-contrib/expose-loader",
   "webpack-contrib/node-loader",
-  "webpack-contrib/transform-loader",
   "webpack-contrib/html-loader",
   "webpack-contrib/sass-loader",
   "webpack-contrib/source-map-loader",

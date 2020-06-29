@@ -1,4 +1,3 @@
-
 [
 	{
 		"repo": "webpack/memory-fs",
@@ -185,12 +184,6 @@
 		"npm": "compression-webpack-plugin",
 		"description": "Compress assets to serve with Content-Encoding.",
 		"maintainer": "palmerj3"
-	},
-	{
-		"repo": "webpack-contrib/transform-loader",
-		"npm": "transform-loader",
-		"description": "Load modules with browserify transforms.",
-		"maintainer": "minwe"
 	},
 	{
 		"repo": "webpack-contrib/grunt-webpack",
