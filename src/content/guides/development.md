@@ -451,4 +451,8 @@ T> 如果想要了解更多关于模块热替换(hot module replacement)的运�
 
 ## 结论
 
+<<<<<<< HEAD
 现在，你已经学会了如何自动编译代码，并运行一个简单的 development server，查看下一个指南，其中将介绍 [模块热替换(hot module replacement)](/guides/hot-module-replacement)。
+=======
+Now that you've learned how to automatically compile your code and run a simple development server, you can check out the next guide, which will cover [Code Splitting](/guides/code-splitting/).
+>>>>>>> 2b68c271d9143c560cacd3871d66b042eefd653b

@@ -4,6 +4,7 @@ sort: 14
 contributors:
   - smelukov
   - EugeneHlushko
+  - chenxsan
 ---
 
 > 此章节描述 webpack 内部实现，对于插件开发人员可能会提供帮助
@@ -128,6 +129,12 @@ __Output:__
 
 这些字段中会有一些 [占位符](/configuration/output/#template-strings)。常用的占位符如下：
 
+<<<<<<< HEAD
 - `[id]` - chunk id（例如 `[id].js` -> `485.js`）
 - `[name]` - chunk name（例如 `[name].js` -> `app.js`）。如果 chunk 没有名称，则会使用其 id 作为名称
 - `[contenthash]` - 输出文件内容的 md4-hash（例如 `[contenthash].js` -> `4ea6ff1de66c537eb9b2.js`）
+=======
+- `[id]` - chunk id (e.g. `[id].js` -> `485.js`)
+- `[name]` - chunk name (e.g. `[name].js` -> `app.js`). If a chunk has no name, then its id will be used
+- `[contenthash]` - md4-hash of the output file content (e.g. `[contenthash].js` -> `4ea6ff1de66c537eb9b2.js`)
+>>>>>>> 2b68c271d9143c560cacd3871d66b042eefd653b
