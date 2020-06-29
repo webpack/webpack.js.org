@@ -451,13 +451,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-=======
 ### `resolve.restrictions`
 
 `[string, RegExp]`
 
-A list of resolve restrictions to restrict the paths that a request can be resolved on.
+解析限制列表，用于限制可以解析请求的路径。
 
 __webpack.config.js__
 
@@ -471,7 +469,6 @@ module.exports = {
 ```
 
 
->>>>>>> 2b68c271d9143c560cacd3871d66b042eefd653b
 ## `resolveLoader`
 
 `object { modules [string] = ['node_modules'], extensions [string] = ['.js', '.json'], mainFields [string] = ['loader', 'main']}`
