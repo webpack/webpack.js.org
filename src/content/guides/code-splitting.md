@@ -30,6 +30,7 @@ contributors:
   - wizardofhogwarts
   - maximilianschmelzer
   - smelukov
+  - chenxsan
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -186,8 +187,6 @@ Entrypoint another = vendors~another~index.bundle.js another.bundle.js
 Here are some other useful plugins and loaders provided by the community for splitting code:
 
 - [`mini-css-extract-plugin`](/plugins/mini-css-extract-plugin): Useful for splitting CSS out from the main application.
-- [`bundle-loader`](/loaders/bundle-loader): Used to split code and lazy load the resulting bundles.
-- [`promise-loader`](https://github.com/gaearon/promise-loader): Similar to the `bundle-loader` but uses promises.
 
 
 ## Dynamic Imports
