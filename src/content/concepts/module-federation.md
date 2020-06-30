@@ -60,7 +60,7 @@ Overrides must be provided before the modules of the container are loaded. Overr
 
 ## High-level concepts
 
-Each build acts as container and also consumes other build as container. This way each build is able to access any other exposed module by loading it from its container.
+Each build acts as a container and also consumes other builds as containers. This way each build is able to access any other exposed module by loading it from its container.
 
 Shared modules are modules that are both overridable and provided as overrides to nested container. They usually point to the same module in each build, e.g. the same library.
 
