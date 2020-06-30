@@ -22,4 +22,6 @@ eval `ssh-agent -s`
 ssh-add src/scripts/deploy_key
 
 # Now that we're all set up, we can deploy
+pwd
+ls -alh .
 yarn deploy
