@@ -182,7 +182,7 @@ __bootstrap.js__
 + ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-Methods mentioned below work, but can have some limits or drawbacks.
+This method works but can have limitations or drawbacks.
 
 Setting `eager: true` for dependency via the `ModuleFederationPlugin`
 
@@ -198,46 +198,6 @@ new ModuleFederationPlugin({
     }
   }
 });
-```
-
-Using `bundle-loader` as an alternative to setting dependencies as `'eager'`. This method is less performant as it will introduce additional round trips.
-
-__webpack.config.js__
-
-```js
-const config = {
-  entry: 'bundle-loader!./bootstrap.js'
-};
-```
-
-Or you can set it via module rules: [See Full Example](https://github.com/module-federation/module-federation-examples/blob/master/basic-host-remote/app1/webpack.config.js)
-
-__webpack.config.js__
-
-```js
-const config = {
-  module: {
-    rules: [
-      {
-        test: /bootstrap\.js$/,
-        loader: 'bundle-loader',
-        options: {
-          lazy: true,
-        },
-      },
-    ]
-  }
-};
-```
-
-But have to change the entry point to look like this:
-
-__index.js__
-
-```diff
-- import('./bootstrap');
-+ import bootstrap from './bootstrap';
-+ bootstrap();
 ```
 
 __`Uncaught Error: Module "./Button" does not exist in container.`__
