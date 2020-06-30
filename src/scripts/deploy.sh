@@ -22,4 +22,9 @@ eval `ssh-agent -s`
 ssh-add src/scripts/deploy_key
 
 # Now that we're all set up, we can deploy
-yarn deploy
+# yarn deploy
+pwd
+ls -alh .
+echo "########"
+ls -alh dist
+NODE_DEBUG=gh-pages yarn deploy
