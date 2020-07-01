@@ -15,6 +15,7 @@ contributors:
   - Aghassi
   - myshov
   - anikethsaha
+  - chenxsan
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -448,6 +449,23 @@ module.exports = {
       // additional logic
       return true;
     }
+  }
+};
+```
+
+### `resolve.restrictions`
+
+`[string, RegExp]`
+
+A list of resolve restrictions to restrict the paths that a request can be resolved on.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    restrictions: [/\.(sass|scss|css)$/]
   }
 };
 ```

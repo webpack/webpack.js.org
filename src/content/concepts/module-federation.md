@@ -5,9 +5,15 @@ contributors:
   - sokra
   - chenxsan
   - EugeneHlushko
+  - jamesgeorge007
+  - ScriptedAlchemy
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
+  - title: 'Explanations and Examples'
+    url: https://github.com/module-federation/module-federation-examples
+  - title: 'Module Federation YouTube Playlist'
+    url: https://www.youtube.com/playlist?list=PLWSiF9YHHK-DqsFHGYbeAMwbd9xcZbEWJ
 ---
 
 ## Motivation
@@ -54,9 +60,11 @@ Overrides must be provided before the modules of the container are loaded. Overr
 
 ## High-level concepts
 
-Each build acts as container and also consumes other build as container. This way each build is able to access any other exposed module by loading it from its container.
+Each build acts as a container and also consumes other builds as containers. This way each build is able to access any other exposed module by loading it from its container.
 
 Shared modules are modules that are both overridable and provided as overrides to nested container. They usually point to the same module in each build, e.g. the same library.
+
+The `packageName` option allows setting a package name to look for a `requiredVersion`. It is automatically inferred for the module requests by default, set `requiredVersion` to `false` when automatic infer should be disabled.
 
 ## Building blocks
 
@@ -103,13 +111,24 @@ This plugin combines `ContainerPlugin` and `ContainerReferencePlugin`. Overrides
 
 ## Concept goals
 
-- It should be possible to expose and use any module type that webpack supports
-- Chunk loading should load everything needed in parallel (web: single round-trip to server)
+- It should be possible to expose and use any module type that webpack supports.
+- Chunk loading should load everything needed in parallel (web: single round-trip to server).
 - Control from consumer to container
-    - Overriding modules is a one-directional operation
-    - Sibling containers cannot override each other's modules
-- Concept should be environment-independent
-    - Usable in web, Node.js, etc
+    - Overriding modules is a one-directional operation.
+    - Sibling containers cannot override each other's modules.
+- Concept should be environment-independent.
+    - Usable in web, Node.js, etc.
+- Relative and absolute request in shared:
+    - Will always be provided, even if not used.
+    - Will resolve relative to `config.context`.
+    - Does not use a `requiredVersion` by default.
+- Module requests in shared:
+    - Are only provided when they are used.
+    - Will match all used equal module requests in your build.
+    - Will provide all matching modules.
+    - Will extract `requiredVersion` from package.json at this position in the graph.
+    - Could provide and consume multiple different version when you have nested node_modules.
+- Module requests with trailing `/` in shared will match all module requests with this prefix.
 
 ## Use cases
 
@@ -120,3 +139,83 @@ Each page of a Single Page Application is exposed from container build in a sepa
 ### Components library as container
 
 Many applications share a common components library which could be built as a container with each component exposed. Each application consumes components from the components library container. Changes to the components library can be separately deployed without the need to re-deploy all applications. The application automatically uses the up-to-date version of the components library.
+
+## Troubleshooting
+
+__`Uncaught Error: Shared module is not available for eager consumption`__
+
+The application is eagerly executing an application which is operating as an omnidirectional host. There are options to choose from:
+
+You can set the dependency as eager inside the advanced API of Module Federation, which doesn’t put the modules in an async chunk, but provides them synchronously. This allows us to use these shared modules in the initial chunk. But be careful as all provided and fallback modules will always be downloaded. It’s recommended to provide it only at one point of your application, e.g. the shell.
+
+We strongly recommend using an asynchronous boundary. It will split out the initialization code of a larger chunk to avoid any additional round trips and improve performance in general.
+
+For example, your entry looked like this:
+
+__index.js__
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+Let's create `bootstrap.js` file and move contents of the entry into it, and import that bootstrap into the entry:
+
+__index.js__
+
+```diff
++ import('./bootstrap');
+- import React from 'react';
+- import ReactDOM from 'react-dom';
+- import App from './App';
+- ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+__bootstrap.js__
+
+```diff
++ import React from 'react';
++ import ReactDOM from 'react-dom';
++ import App from './App';
++ ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+This method works but can have limitations or drawbacks.
+
+Setting `eager: true` for dependency via the `ModuleFederationPlugin`
+
+__webpack.config.js__
+
+```js
+// ...
+new ModuleFederationPlugin({
+  shared: {
+    ...deps,
+    react: {
+      eager: true,
+    }
+  }
+});
+```
+
+__`Uncaught Error: Module "./Button" does not exist in container.`__
+
+It likely does not say `"./Button"`, but the error message will look similar. This issue is typically seen if you are upgrading from webpack beta.16 to webpack beta.17.
+
+Within ModuleFederationPlugin. Change the exposes from:
+
+```diff
+new ModuleFederationPlugin({
+  exposes: {
+-   'Button': './src/Button'
++   './Button':'./src/Button'
+  }
+});
+```
+
+__`Uncaught TypeError: fn is not a function`__
+
+You are likely missing the remote container, make sure its added.
+If you have the container loaded for the remote you are trying to consume, but still see this error, add the host container's remote container file to the HTML as well.
