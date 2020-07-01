@@ -62,27 +62,26 @@ class Site extends React.Component {
         <div className="site__header">
           <NotificationBar />
           <Navigation
-            pathname={location.pathname}
-            toggleSidebar={this._toggleSidebar}
-            links={[
-              {
-                content: 'Documentation',
-                url: '/concepts/',
-                isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
-                children: this._strip(sections.filter(item => item.name !== 'contribute'))
-              },
-              { content: 'Contribute', url: '/contribute/' },
-              { content: 'Vote', url: '/vote/' },
-              { content: 'Blog', url: 'https://medium.com/webpack' }
-            ]}
+          pathname={location.pathname}
+          toggleSidebar={this._toggleSidebar}
+          links={[
+            {
+              content: 'Documentation',
+              url: '/concepts/',
+              isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
+              children: this._strip(sections.filter(item => item.name !== 'contribute'))
+            },
+            { content: 'Contribute', url: '/contribute/' },
+            { content: 'Vote', url: '/vote/' },
+            { content: 'Blog', url: 'https://medium.com/webpack' }
+          ]}
           />
         </div>
 
         {isClient ? <SidebarMobile
-            isOpen={mobileSidebarOpen}
-            sections={this._strip(Content.children)}
-            toggle={this._toggleSidebar}
-          /> : null}
+          isOpen={mobileSidebarOpen}
+          sections={this._strip(Content.children)}
+          toggle={this._toggleSidebar} /> : null}
 
         <Switch>
           <Route exact strict path="/:url*" render={props => <Redirect to={`${props.location.pathname}/`}/>} />
@@ -166,15 +165,14 @@ class Site extends React.Component {
     }
 
     return array.map(({ title, name, url, group, sort, anchors, children }) => ({
-        title: title || name,
-        content: title || name,
-        url,
-        group,
-        sort,
-        anchors,
-        children: children ? this._strip(children) : []
-      }))
-      .filter(page => page.title !== 'printable.md' && !page.content.includes('Printable'));
+      title: title || name,
+      content: title || name,
+      url,
+      group,
+      sort,
+      anchors,
+      children: children ? this._strip(children) : []
+    })).filter(page => page.title !== 'printable.md' && !page.content.includes('Printable'));
   };
 }
 
