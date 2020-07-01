@@ -5,11 +5,7 @@ import { hot as Hot } from 'react-hot-loader';
 import DocumentTitle from 'react-document-title';
 
 // Import Utilities
-import {
-  extractPages,
-  extractSections,
-  getPageTitle
-} from '../../utilities/content-utils';
+import { extractPages, extractSections, getPageTitle } from '../../utilities/content-utils';
 import isClient from '../../utilities/is-client';
 import getAdjacentPages from '../../utilities/get-adjacent-pages';
 
@@ -72,13 +68,8 @@ class Site extends React.Component {
               {
                 content: 'Documentation',
                 url: '/concepts/',
-                isActive: url =>
-                  /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
-                    url
-                  ),
-                children: this._strip(
-                  sections.filter(item => item.name !== 'contribute')
-                )
+                isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
+                children: this._strip(sections.filter(item => item.name !== 'contribute'))
               },
               { content: 'Contribute', url: '/contribute/' },
               { content: 'Vote', url: '/vote/' },
@@ -87,21 +78,14 @@ class Site extends React.Component {
           />
         </div>
 
-        {isClient ? (
-          <SidebarMobile
+        {isClient ? <SidebarMobile
             isOpen={mobileSidebarOpen}
             sections={this._strip(Content.children)}
             toggle={this._toggleSidebar}
-          />
-        ) : null}
+          /> : null}
 
         <Switch>
-          <Route
-            exact
-            strict
-            path="/:url*"
-            render={props => <Redirect to={`${props.location.pathname}/`} />}
-          />
+          <Route exact strict path="/:url*" render={props => <Redirect to={`${props.location.pathname}/`}/>} />
           <Route path="/" exact component={Splash} />
           <Route
             render={props => (
@@ -110,10 +94,7 @@ class Site extends React.Component {
                   <Route path="/vote" component={Vote} />
                   <Route path="/organization" component={Organization} />
                   <Route path="/starter-kits" component={StarterKits} />
-                  <Route
-                    path="/app-shell"
-                    component={() => <React.Fragment />}
-                  />
+                  <Route path="/app-shell" component={() => <React.Fragment />} />
                   {pages.map(page => (
                     <Route
                       key={page.url}
@@ -176,9 +157,7 @@ class Site extends React.Component {
    * @return {array}       - ...
    */
   _strip = array => {
-    let anchorTitleIndex = array.findIndex(
-      item => item.name.toLowerCase() === 'index.md'
-    );
+    let anchorTitleIndex = array.findIndex(item => item.name.toLowerCase() === 'index.md');
 
     if (anchorTitleIndex !== -1) {
       array.unshift(array[anchorTitleIndex]);
@@ -186,8 +165,7 @@ class Site extends React.Component {
       array.splice(anchorTitleIndex + 1, 1);
     }
 
-    return array
-      .map(({ title, name, url, group, sort, anchors, children }) => ({
+    return array.map(({ title, name, url, group, sort, anchors, children }) => ({
         title: title || name,
         content: title || name,
         url,
@@ -196,10 +174,7 @@ class Site extends React.Component {
         anchors,
         children: children ? this._strip(children) : []
       }))
-      .filter(
-        page =>
-          page.title !== 'printable.md' && !page.content.includes('Printable')
-      );
+      .filter(page => page.title !== 'printable.md' && !page.content.includes('Printable'));
   };
 }
 
