@@ -18,46 +18,46 @@ repo: https://github.com/webpack-contrib/coffee-loader
 
 Compile [CoffeeScript](https://coffeescript.org/) to JavaScript.
 
-## Getting Started
+## 起步
 
-To begin, you'll need to install `coffeescript` and `coffee-loader`:
+安装 `coffeescript` 和 `coffee-loader`：
 
 ```console
 npm install --save-dev coffeescript coffee-loader
 ```
 
-Then add the plugin to your `webpack` config. For example:
+然后添加 plugin 到 `webpack` 配置文件. 例：
 
 **file.coffee**
 
 ```coffee
-# Assignment:
+# 任务：
 number   = 42
 opposite = true
 
-# Conditions:
+# 条件：
 number = -42 if opposite
 
-# Functions:
+# 函数：
 square = (x) -> x * x
 
-# Arrays:
+# 数组：
 list = [1, 2, 3, 4, 5]
 
-# Objects:
+# 对象：
 math =
   root:   Math.sqrt
   square: square
   cube:   (x) -> x * square x
 
-# Splats:
+# Splats：
 race = (winner, runners...) ->
   print winner, runners
 
-# Existence:
+# 存在性：
 alert "I knew it!" if elvis?
 
-# Array comprehensions:
+# 数组推导（comprehensions）：
 cubes = (math.cube num for num in list)
 ```
 
@@ -76,26 +76,26 @@ module.exports = {
 };
 ```
 
-Alternative usage:
+替代方案：
 
 ```js
 import coffee from 'coffee-loader!./file.coffee';
 ```
 
-And run `webpack` via your preferred method.
+然后按偏好运行 `webpack`
 
-## Options
+## 选项
 
-Type: `Object`
-Default: `{ bare: true }`
+类型：`Object`
+默认：`{ bare: true }`
 
-Options for CoffeeScript. All possible options you can find [here](https://coffeescript.org/#nodejs-usage).
+所有 coffeescript 选项的文档 [点击查看](https://coffeescript.org/#nodejs-usage).
 
-Documentation for the `transpile` option you can find [here](https://coffeescript.org/#transpilation).
+`transpile` 选项的文档 [点击查看](https://coffeescript.org/#transpilation).
 
-> ℹ️ The `sourceMap` option takes a value from the `compiler.devtool` value by default.
+> ℹ️ `sourceMap` 选项从 `compiler.devtool` 中选取一个值作为默认值。
 
-> ℹ️ The `filename` option takes a value from webpack loader API. The option value will be ignored.
+> ℹ️ `filename` 选项从 webpack loader API 中选取一个值。 选项值将被忽略。
 
 **webpack.config.js**
 
@@ -118,18 +118,18 @@ module.exports = {
 };
 ```
 
-## Examples
+## 示例
 
-### CoffeeScript and Babel
+### CoffeeScript 与 Babel
 
-From CoffeeScript 2 documentation:
+来自 CoffeeScript 2 的文档：
 
-> CoffeeScript 2 generates JavaScript that uses the latest, modern syntax.
-> The runtime or browsers where you want your code to run might not support all of that syntax.
-> In that case, we want to convert modern JavaScript into older JavaScript that will run in older versions of Node or older browsers; for example, { a } = obj into a = obj.a.
-> This is done via transpilers like Babel, Bublé or Traceur Compiler.
+> CoffeeScript 2 使用最新的句法生成 JavaScript。
+> 代码运行所在的运行时或浏览器有可能无法支持全部相关句法。
+> 这种情况下，新的 JavaScript 句法将被转换为旧的 JavaScript 句法，以便在较低版本 Node 环境或浏览器中运行这些代码。比如将 { a } = obj 转换为 a = obj.a.
+> 这个转换的过程是由一些诸如 Babel, Bublé or Traceur Compiler 等转换工具完成的。
 
-You'll need to install `@babel/core` and `@babel/preset-env` and then create a configuration file:
+安装 `@babel/core` 和 `@babel/preset-env`  然后创建配置文件：
 
 ```console
 npm install --save-dev @babel/core @babel/preset-env
@@ -158,7 +158,7 @@ module.exports = {
 
 ### Literate CoffeeScript
 
-For using Literate CoffeeScript you should setup:
+开启 Literate CoffeeScript 时需要设置：
 
 **webpack.config.js**
 
@@ -178,13 +178,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## 贡献
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+如果您尚未了解，建议您阅读以下贡献指引。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/coffee-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## 许可
 
 [MIT](https://github.com/webpack-contrib/coffee-loader/blob/master/LICENSE)
 
