@@ -108,13 +108,13 @@ Thankfully there are a two solutions to this problem:
 
 ## Options
 
-|                   Name                    |         Type         |                 Default                 | Description                                               |
-| :---------------------------------------: | :------------------: | :-------------------------------------: | :-------------------------------------------------------- |
-|  **[`implementation`](#implementation)**  |      `{Object}`      |                 `sass`                  | Setup Sass implementation to use.                         |
-|     **[`sassOptions`](#sassoptions)**     | `{Object\|Function}` | defaults values for Sass implementation | Options for Sass.                                         |
-|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.               |
-|     **[`prependData`](#prependdata)**     | `{String\|Function}` |               `undefined`               | Prepends `Sass`/`SCSS` code before the actual entry file. |
-| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.            |
+|                   Name                    |         Type         |                 Default                 | Description                                                       |
+| :---------------------------------------: | :------------------: | :-------------------------------------: | :---------------------------------------------------------------- |
+|  **[`implementation`](#implementation)**  |      `{Object}`      |                 `sass`                  | Setup Sass implementation to use.                                 |
+|     **[`sassOptions`](#sassoptions)**     | `{Object\|Function}` | defaults values for Sass implementation | Options for Sass.                                                 |
+|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.                       |
+|  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |               `undefined`               | Prepends/Appends `Sass`/`SCSS` code before the actual entry file. |
+| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.                    |
 
 ### `implementation`
 
@@ -422,17 +422,15 @@ module.exports = {
 };
 ```
 
-### `prependData`
+### `additionalData`
 
 Type: `String|Function`
 Default: `undefined`
 
 Prepends `Sass`/`SCSS` code before the actual entry file.
-In this case, the `sass-loader` will not override the `data` option but just append the entry's content.
+In this case, the `sass-loader` will not override the `data` option but just **prepend** the entry's content.
 
 This is especially useful when some of your Sass variables depend on the environment:
-
-> ℹ Since you're injecting code, this will break the source mappings in your entry file. Often there's a simpler solution than this, like multiple Sass entry files.
 
 #### `String`
 
@@ -448,7 +446,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              prependData: '$env: ' + process.env.NODE_ENV + ';',
+              additionalData: '$env: ' + process.env.NODE_ENV + ';',
             },
           },
         ],
@@ -472,16 +470,16 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              prependData: (loaderContext) => {
+              additionalData: (content, loaderContext) => {
                 // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
                 if (relativePath === 'styles/foo.scss') {
-                  return '$value: 100px;';
+                  return '$value: 100px;' + content;
                 }
 
-                return '$value: 200px;';
+                return '$value: 200px;' + content;
               },
             },
           },
