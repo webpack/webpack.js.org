@@ -1,4 +1,3 @@
-
 [
 	{
 		"repo": "webpack/memory-fs",
@@ -187,12 +186,6 @@
 		"maintainer": "palmerj3"
 	},
 	{
-		"repo": "webpack-contrib/transform-loader",
-		"npm": "transform-loader",
-		"description": "Load modules with browserify transforms.",
-		"maintainer": "minwe"
-	},
-	{
 		"repo": "webpack-contrib/grunt-webpack",
 		"npm": "grunt-webpack",
 		"description": "Integrate webpack into a grunt build process.",
@@ -203,12 +196,6 @@
 		"npm": "jshint-loader",
 		"description": "Load and lint modules with JSHint.",
 		"maintainer": "kostasmanionis"
-	},
-	{
-		"repo": "webpack-contrib/bundle-loader",
-		"npm": "bundle-loader",
-		"description": "Load a module and it's children into a separate bundle.",
-		"maintainer": ""
 	},
 	{
 		"repo": "webpack-contrib/coffee-loader",
