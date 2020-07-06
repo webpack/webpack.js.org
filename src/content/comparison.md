@@ -42,7 +42,7 @@ webpack 并非唯一的模块打包工具。当您面临选择 webpack 或者是
 | Node.js 内置库 `require("path")` | __yes__ | no | __yes__ | __yes__ | [node-resolve-plugin](https://github.com/rollup/rollup-plugin-node-resolve) | |
 | 其他 Node.js 相关内容 | process，__dir/filename，global | - | process，__dir/filename，global | process，__dir/filename，global for cjs | global ([commonjs-plugin](https://github.com/rollup/rollup-plugin-commonjs)) | |
 | Plugin | __yes__ | yes | __yes__ | yes | yes | yes |
-| 预处理 | __loaders，[transforms](https://github.com/webpack-contrib/transform-loader)__ | loaders | transforms | plugin translate | plugin transforms | compilers，optimizers |
+| 预处理 | __loaders__ | loaders | transforms | plugin translate | plugin transforms | compilers，optimizers |
 | 浏览器替换项 | `web_modules`，`.web.js`，package.json 字段，别名（alias）配置项 | 别名配置项 | package.json 字段，别名配置项 | package.json，别名配置项 | no | |
 | 读取文件 | 文件系统 | __web__ | 文件系统 | 使用插件 | 文件系统或者使用插件 | 文件系统 |
 | 运行时开销 | __每个模块 243B + 20B + 每个依赖 4B__ | 每个模块 14.7kB + 0B + 每个依赖 (3B + X) | 每个模块 415B + 25B + 每个依赖 (6B + 2X) | 自运行 bundle 5.5kB，所有 loader 和 polyfill 38kB，普通模块 0，293B CJS，ES2015 System.register 压缩 (gzip) 前 139B | __ES2015 module 无开销__ （其他格式可能会有）| |

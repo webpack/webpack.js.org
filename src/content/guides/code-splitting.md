@@ -30,6 +30,7 @@ contributors:
   - wizardofhogwarts
   - maximilianschmelzer
   - smelukov
+  - chenxsan
 related:
   - title: webpack 中的 <link rel=”prefetch/preload”>
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -186,8 +187,6 @@ Entrypoint another = vendors~another~index.bundle.js another.bundle.js
 以下是由社区提供，一些对于代码分离很有帮助的 plugin 和 loader：
 
 - [`mini-css-extract-plugin`](plugins/mini-css-extract-plugin): 用于将 CSS 从主应用程序中分离。
-- [`bundle-loader`](/loaders/bundle-loader): 用于分离代码和延迟加载生成的 bundle。
-- [`promise-loader`](https://github.com/gaearon/promise-loader): 类似于 `bundle-loader` ，但是使用的是 promises。
 
 
 ## 动态导入(dynamic import)
