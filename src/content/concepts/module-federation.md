@@ -142,7 +142,7 @@ Many applications share a common components library which could be built as a co
 
 ## Dynamic Remote Containers
 
-The container interface supports `get` and `init`.
+The container interface supports `get` and `init` methods.
 `init` is a possible async method that is called with one argument: the share scope object. This object is used as share scope in the remote container and is filled with the provided modules from a host.
 It can be leveraged to connect remote containers to a host container dynamically at runtime
 
