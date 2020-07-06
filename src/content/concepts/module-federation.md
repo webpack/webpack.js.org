@@ -157,7 +157,7 @@ It can be leveraged to connect remote containers to a host container dynamically
 })();
 ```
 
-The container might try to provide shared modules, but if the shared module has already been used this will result in a warning and the provided shared module will be ignored. The container might still use it as a fallback.
+The container tries to provide shared modules, but if the shared module has already been used, a warning and the provided shared module will be ignored. The container might still use it as a fallback.
 
 The same way you could dynamically load an A/B test, which provides some newer versions of a shared module.
 T > Ensure you have loaded the container.js file before attempting to dynamically connect a remote container
