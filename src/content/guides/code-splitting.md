@@ -186,13 +186,7 @@ Entrypoint another = vendors~another~index.bundle.js another.bundle.js
 
 以下是由社区提供，一些对于代码分离很有帮助的 plugin 和 loader：
 
-<<<<<<< HEAD
 - [`mini-css-extract-plugin`](plugins/mini-css-extract-plugin): 用于将 CSS 从主应用程序中分离。
-- [`bundle-loader`](/loaders/bundle-loader): 用于分离代码和延迟加载生成的 bundle。
-- [`promise-loader`](https://github.com/gaearon/promise-loader): 类似于 `bundle-loader` ，但是使用的是 promises。
-=======
-- [`mini-css-extract-plugin`](/plugins/mini-css-extract-plugin): Useful for splitting CSS out from the main application.
->>>>>>> d0b7637fdd5141c311d2f8e6cdfe4200223fb949
 
 
 ## 动态导入(dynamic import)

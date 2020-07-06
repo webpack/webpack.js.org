@@ -16,11 +16,7 @@ contributors:
 
 ## A
 
-<<<<<<< HEAD
 - [__Asset__](/guides/asset-management/): 资源是对图像、字体、媒体和任何其他类型文件的统称，通常用于网站和其他应用程序中。这些文件通常在 [output](/glossary/#o) 中最终输出为单独的文件，但也可以通过诸如 [style-loader](/loaders/style-loader) 或 [url-loader](/loaders/url-loader)之类的方法内联。
-=======
-- [__Asset__](/guides/asset-management/): This is a general term for the images, fonts, media, and any other kind of files that are typically used in websites and other applications. These typically end up as individual files within the [output](/glossary/#o) but can also be inlined via things like the [style-loader](/loaders/style-loader) or [url-loader](/loaders/url-loader).
->>>>>>> d0b7637fdd5141c311d2f8e6cdfe4200223fb949
 
 
 ## B
