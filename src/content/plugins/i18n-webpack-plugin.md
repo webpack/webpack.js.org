@@ -4,21 +4,21 @@ source: https://raw.githubusercontent.com/webpack-contrib/i18n-webpack-plugin/ma
 edit: https://github.com/webpack-contrib/i18n-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/i18n-webpack-plugin
 ---
-i18n (localization) plugin for Webpack.
+webpack 的 i18n（本地化）插件
 
-## Install
+## 安装
 
 ```bash
 npm i -D i18n-webpack-plugin
 ```
 
-## Usage
+## 使用
 
-This plugin creates bundles with translations baked in. So you can serve the translated bundle to your clients.
+该插件会在 bundle 的生成过程中进行文案翻译，因此你可以直接将翻译后的 bundle 交付给用户。
 
-see [webpack/webpack/examples/i18n](https://github.com/webpack/webpack/tree/master/examples/i18n).
+具体示例可见 [webpack/webpack/examples/i18n](https://github.com/webpack/webpack/tree/master/examples/i18n).
 
-## Options
+## 插件配置
 
 ```
 plugins: [
@@ -26,12 +26,12 @@ plugins: [
   new I18nPlugin(languageConfig, optionsObj)
 ],
 ```
- - `optionsObj.functionName`: the default value is `__`, you can change it to other function name.
- - `optionsObj.failOnMissing`: the default value is `false`, which will show a warning message, if the mapping text cannot be found. If set to `true`, the message will be an error message.
- - `optionsObj.hideMessage`: the default value is `false`, which will show the warning/error message. If set to `true`, the message will be hidden.
- - `optionsObj.nested`: the default value is `false`. If set to `true`, the keys in `languageConfig` can be nested. This option is interpreted only if `languageConfig` isn't a function.
+ - `optionsObj.functionName`: 默认值为 `__`，你可以将其修改为其他函数名。
+ - `optionsObj.failOnMissing`：默认值为 `false`，如果要翻译的文本缺失，插件会展示警告信息。若设置为 `true`，在上述情况下插件将会抛出错误信息。
+ - `optionsObj.hideMessage`：默认值为 `false`，插件可以展示警告/报错信息. 若设置为 `true`，插件将会隐藏相关的警告或报错信息。
+ - `optionsObj.nested`：默认值为 `false`。如果设置为 `true`，`languageConfig` 中键值的编写可以嵌套。该选项当且仅当参数 `languageConfig` 的类型不是一个函数时才能生效.
 
-## Maintainers
+## 维护者
 
 <table>
   <tbody>
