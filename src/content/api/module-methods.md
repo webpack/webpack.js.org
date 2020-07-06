@@ -11,6 +11,7 @@ contributors:
   - wizardofhogwarts
   - EugeneHlushko
   - chenxsan
+  - jamesgeorge007
 related:
   - title: CommonJS Wikipedia
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -151,8 +152,11 @@ T> 注意，`webpackInclude` 和 `webpackExclude` 不会影响到前缀，例如
 
 `webpackExports`: 告诉 webpack 在使用动态导入时，只打包这个模块使用的导出项。它可以减小 chunk 的大小。从 [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18) 起可用。
 
+<<<<<<< HEAD
 W> 在 webpack 中使用 `System.import` [不符合提案规则](https://github.com/webpack/webpack/issues/2163)，所以在 [2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) 后被弃用，并且建议使用 `import()`。
 
+=======
+>>>>>>> d0b7637fdd5141c311d2f8e6cdfe4200223fb949
 
 ## CommonJS
 
