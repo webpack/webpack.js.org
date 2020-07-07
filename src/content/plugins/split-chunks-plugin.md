@@ -138,7 +138,7 @@ Maximum number of parallel requests when on-demand loading.
 
 ### `splitChunks.maxInitialRequests`
 
-`number=30`
+`number = 30`
 
 Maximum number of parallel requests at an entry point.
 
