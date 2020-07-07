@@ -561,7 +561,7 @@ T> Read the [authoring libraries guide](/guides/author-libraries/) guide for mor
 
 ## ouput.scriptType
 
-`string='module'` `bool=false`
+`string: 'module' | 'text/javascript'` `boolean = false`
 
 This option enables loading async chunks via a custom script type, such as script type=`module`.
 
