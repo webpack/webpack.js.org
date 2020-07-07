@@ -50,14 +50,18 @@ Since webpack 3.0.0, the `node` option may be set to `false` to completely turn 
 
 ## `node.global`
 
-`boolean = false`
+`boolean = true`
+
+Defaults to `false` for [targets](https://webpack.js.org/configuration/target/) `node`, `async-node` and `electron-main`.
 
 See [the source](https://nodejs.org/api/globals.html) for the exact behavior of this object.
 
 
 ## `node.__filename`
 
-`string` `boolean = false`
+`boolean` `string = mock`
+
+Defaults to `false` for [targets](https://webpack.js.org/configuration/target/) `node`, `async-node` and `electron-main`.
 
 Options:
 
@@ -68,7 +72,9 @@ Options:
 
 ## `node.__dirname`
 
-`string` `boolean = false`
+`boolean` `string = mock`
+
+Defaults to `false` for [targets](https://webpack.js.org/configuration/target/) `node`, `async-node` and `electron-main`.
 
 Options:
 
