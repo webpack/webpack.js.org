@@ -7,6 +7,7 @@ contributors:
   - simon04
   - EugeneHlushko
   - sibiraj-s
+  - chenxsan
 ---
 
 This guide goes through the various methods used to install webpack.
@@ -30,6 +31,8 @@ npm install --save-dev webpack
 # or specific version
 npm install --save-dev webpack@<version>
 ```
+
+T> Whether to use `--save-dev` or not depends on your use cases. Say you're using webpack only for bundling, then it's suggested that you install it with `--save-dev` option since you're not going to include webpack in your production build. Otherwise you can ignore `--save-dev`.
 
 If you're using webpack v4 or later, you'll also need to install the [CLI](/api/cli/).
 
@@ -64,9 +67,9 @@ W> Note that this is __not a recommended practice__. Installing globally locks y
 If you are enthusiastic about using the latest that webpack has to offer, you can install beta versions or even directly from the webpack repository using the following commands:
 
 ``` bash
-npm install webpack@beta
+npm install --save-dev webpack@next
 # or specific tag/branch
-npm install webpack/webpack#<tagname/branchname>
+npm install --save-dev webpack/webpack#<tagname/branchname>
 ```
 
 W> Take caution when installing these bleeding edge releases! They may still contain bugs and therefore should not be used in production.
