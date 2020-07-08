@@ -84,7 +84,7 @@ __webpack.common.js__
 __webpack.dev.js__
 
 ``` diff
-+ const merge = require('webpack-merge');
++ const {merge} = require('webpack-merge');
 + const common = require('./webpack.common.js');
 +
 + module.exports = merge(common, {
@@ -99,7 +99,7 @@ __webpack.dev.js__
 __webpack.prod.js__
 
 ``` diff
-+ const merge = require('webpack-merge');
++ const {merge} = require('webpack-merge');
 + const common = require('./webpack.common.js');
 +
 + module.exports = merge(common, {
@@ -159,7 +159,7 @@ Many libraries will key off the `process.env.NODE_ENV` variable to determine wha
 __webpack.prod.js__
 
 ``` diff
-  const merge = require('webpack-merge');
+  const {merge} = require('webpack-merge');
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
@@ -214,7 +214,7 @@ We encourage you to have source maps enabled in production, as they are useful f
 __webpack.prod.js__
 
 ``` diff
-  const merge = require('webpack-merge');
+  const {merge} = require('webpack-merge');
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
