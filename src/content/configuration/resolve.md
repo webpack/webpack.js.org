@@ -470,6 +470,24 @@ module.exports = {
 };
 ```
 
+### `resolve.roots`
+
+`[string]`
+
+A list of directories where requests of server-relative URLs (starting with '/') are resolved. On non-windows system these requests are resolved as absolute path first.
+
+__webpack.config.js__
+
+```js
+const fixtures = path.resolve(__dirname, 'fixtures');
+module.exports = {
+  //...
+  resolve: {
+    roots: [__dirname, fixtures]
+  }
+};
+```
+
 
 ## `resolveLoader`
 
