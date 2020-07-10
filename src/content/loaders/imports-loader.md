@@ -628,7 +628,11 @@ import $ from 'jquery';
 Type: `String`
 Default: `undefined`
 
-Adds custom code.
+Adds custom code as a preamble before the module's code.
+
+##### Examples
+
+###### Define custom variable
 
 **webpack.config.js**
 
@@ -662,6 +666,47 @@ Generate output:
 import $ from 'jquery';
 
 var myVariable = false;
+
+// ...
+// Code
+// ...
+```
+
+###### Disable AMD Import Syntax
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: require.resolve('example.js'),
+        use: [
+          {
+            loader: 'imports-loader',
+            options: {
+              imports: {
+                moduleName: 'jquery',
+                name: '$',
+              },
+              additionalCode:
+                'var define = false; /* Disable AMD for misbehaving libraries */',
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+Generate output:
+
+```js
+import $ from 'jquery';
+
+var define = false; /* Disable AMD for misbehaving libraries */
 
 // ...
 // Code
