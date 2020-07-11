@@ -27,7 +27,7 @@ By introducing webpack logging API we hope to unify the way webpack plugins and 
 
 W> __Avoid noise in the log!__ Keep in mind that multiple plugins and loaders are used together. Loaders are usually processing multiple files and are invoked for every file. Choose a logging level as low as possible to keep the log output informative.
 
-__my_webpack_plugin.js__
+__my-webpack-plugin.js__
 
 ```js
 const PLUGIN_NAME = 'my-webpack-plugin';
@@ -46,7 +46,7 @@ export class MyWebpackPlugin {
 }
 ```
 
-__my_webpack_loader.js__
+__my-webpack-loader.js__
 
 ```js
 module.exports = function (source) {
