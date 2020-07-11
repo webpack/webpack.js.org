@@ -46,6 +46,17 @@ export class MyWebpackPlugin {
 }
 ```
 
+__my_webpack_loader.js__
+
+```js
+module.exports = function (source) {
+  // you can get Logger with `this.getLogger` in your webpack loaders
+  const logger = this.getLogger('my-webpack-loader');
+  logger.info('hello Logger');
+  return source;
+};
+```
+
 ## Logger methods
 
 - `logger.error(...)`: for error messages
