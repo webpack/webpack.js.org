@@ -4,6 +4,7 @@ sort: 6
 contributors:
   - EugeneHlushko
   - wizardofhogwarts
+  - chenxsan
 ---
 
 T> Available since webpack 4.39.0
@@ -25,6 +26,25 @@ Benefits of custom logging API in webpack:
 By introducing webpack logging API we hope to unify the way webpack plugins and loaders emit logs and allow better ways to inspect build problems. Integrated logging solution supports plugins and loaders developers by improving their development experience. Paves the way for non-CLI webpack solutions like dashboards or other UIs.
 
 W> __Avoid noise in the log!__ Keep in mind that multiple plugins and loaders are used together. Loaders are usually processing multiple files and are invoked for every file. Choose a logging level as low as possible to keep the log output informative.
+
+__my_webpack_plugin.js__
+
+```js
+const PLUGIN_NAME = 'my-webpack-plugin';
+export class MyWebpackPlugin {
+  apply(compiler) {
+    // you can access Logger from compiler
+    const logger = compiler.getInfrastructureLogger(PLUGIN_NAME);
+    logger.log('log from compiler');
+
+    compiler.hooks.compilation.tap(PLUGIN_NAME, compilation => {
+      // you can also access Logger from compilation
+      const logger = compilation.getLogger(PLUGIN_NAME);
+      logger.info('log from compilation');
+    });
+  }
+}
+```
 
 ## Logger methods
 
