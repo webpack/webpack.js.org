@@ -16,27 +16,27 @@ repo: https://github.com/webpack-contrib/sass-loader
 
 
 
-Loads a Sass/SCSS file and compiles it to CSS.
+加载 Sass/SCSS 文件并将他们编译为 CSS。
 
-## Getting Started
+## 快速开始
 
-To begin, you'll need to install `sass-loader`:
+首先，你需要安装 `sass-loader`：
 
 ```console
 npm install sass-loader sass webpack --save-dev
 ```
 
-`sass-loader` requires you to install either [Dart Sass](https://github.com/sass/dart-sass) or [Node Sass](https://github.com/sass/node-sass) on your own (more documentation can be found below).
+`sass-loader` 需要预先安装 [Dart Sass](https://github.com/sass/dart-sass) 或 [Node Sass](https://github.com/sass/node-sass)（可以在这两个链接中找到更多的资料）。这可以控制所有依赖的版本， 并自由的选择使用的 Sass 实现。
 
-This allows you to control the versions of all your dependencies, and to choose which Sass implementation to use.
+这样可以控制所有依赖项的版本，并选择要使用的 Sass 实现。
 
-> ℹ️ We recommend using [Dart Sass](https://github.com/sass/dart-sass).
+> ℹ️ 我们推荐使用 [Dart Sass](https://github.com/sass/dart-sass)。
 
-> ⚠ [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) feature.
+> ⚠ [Node Sass](https://github.com/sass/node-sass) 不能与 [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) 特性一起正常工作。
 
-Chain the `sass-loader` with the [css-loader](/loaders/css-loader/) and the [style-loader](/loaders/style-loader/) to immediately apply all styles to the DOM or the [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) to extract it into a separate file.
+将 `sass-loader` 、[css-loader](/loaders/css-loader/) 与 [style-loader](/loaders/style-loader/) 进行链式调用，可以将样式以 style 标签的形式插入 DOM 中，或者使用 [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) 将样式输出到独立的文件中。
 
-Then add the loader to your Webpack configuration. For example:
+然后将本 loader 添加到你的 Webpack 配置中。例如：
 
 **app.js**
 
@@ -63,11 +63,11 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // Creates `style` nodes from JS strings
+          // 将 JS 字符串生成为 style 节点
           'style-loader',
-          // Translates CSS into CommonJS
+          // 将 CSS 转化成 CommonJS 模块
           'css-loader',
-          // Compiles Sass to CSS
+          // 将 Sass 编译成 CSS
           'sass-loader',
         ],
       },
@@ -76,57 +76,57 @@ module.exports = {
 };
 ```
 
-Finally run `webpack` via your preferred method.
+最后通过你喜欢的方式运行 `webpack`。
 
-### Resolving `import` at-rules
+### 解析 `import` 的规则
 
-Webpack provides an [advanced mechanism to resolve files](/concepts/module-resolution/).
+Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)。
 
-The `sass-loader` uses Sass's custom importer feature to pass all queries to the Webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell Webpack that this is not a relative import:
+`sass-loader` 使用 Sass 提供的 custom importer 特性，将所有 query 传递给 Webpack 解析引擎。只要在包名前加上 `~` ，告诉 Webpack 这不是一个相对路径，这样就可以从 `node_modules` 中 import 自己的 Sass 模块了：
 
 ```scss
 @import '~bootstrap';
 ```
 
-It's important to only prepend it with `~`, because `~/` resolves to the home directory.
-Webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS and Sass files have no special syntax for importing relative files.
-Writing `@import "style.scss"` is the same as `@import "./style.scss";`
+重要的是，只在前面加上 `~`，因为`~/` 将会解析到用户的主目录（home directory）。
+因为 CSS 和 Sass 文件没有用于导入相关文件的特殊语法，所以 Webpack 需要区分 `bootstrap` 和 `~bootstrap`。
+ `@import "style.scss"` 和 `@import "./style.scss";` 两种写法是相同的。
 
-### Problems with `url(...)`
+### `url(...)` 的问题
 
-Since Sass implementations don't provide [url rewriting](https://github.com/sass/libsass/issues/532), all linked assets must be relative to the output.
+由于 Saass 的实现没有提供 [url 重写](https://github.com/sass/libsass/issues/532)的功能，所以相关的资源都必须是相对于输出文件（ouput）而言的。
 
-- If you pass the generated CSS on to the `css-loader`, all urls must be relative to the entry-file (e.g. `main.scss`).
-- If you're just generating CSS without passing it to the `css-loader`, it must be relative to your web root.
+- 如果生成的 CSS 传递给了 `css-loader`，则所有的 url 规则都必须是相对于入口文件的（例如：`main.scss`）。
+- 如果仅仅生成了 CSS 文件，没有将其传递给 `css-loader`，那么所有的 url 都是相对于网站的根目录的。
 
-You will be disrupted by this first issue. It is natural to expect relative references to be resolved against the `.sass`/`.scss` file in which they are specified (like in regular `.css` files).
+第一种情况可能会带来一些困扰。通常情况下我们希望相对路径引用的解析是相对于声明它的 `.sass`/`.scss` 文件（如同在 `.css` 文件中一样）。
 
-Thankfully there are a two solutions to this problem:
+幸运的是，有两种方法可以解决这个问题：
 
-- Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it before `sass-loader` in the loader chain.
-- Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`.
+- 将 [resolve-url-loader](https://github.com/bholloway/resolve-url-loader) 设置于 loader 链中的 `sass-loader` 之前，就可以重写 url。
+- Library 作者一般都会提供变量，用来设置资源路径。比如 [bootstrap-sass](https://github.com/twbs/bootstrap-sass) 可以通过 `$icon-font-path` 进行设置。
 
-## Options
+## 配置选项
 
-|                   Name                    |         Type         |                 Default                 | Description                                                       |
-| :---------------------------------------: | :------------------: | :-------------------------------------: | :---------------------------------------------------------------- |
-|  **[`implementation`](#implementation)**  |      `{Object}`      |                 `sass`                  | Setup Sass implementation to use.                                 |
-|     **[`sassOptions`](#sassoptions)**     | `{Object\|Function}` | defaults values for Sass implementation | Options for Sass.                                                 |
-|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.                       |
-|  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |               `undefined`               | Prepends/Appends `Sass`/`SCSS` code before the actual entry file. |
-| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.                    |
+|                   名称                    |         类型         |       默认值       | Description                                    |
+| :---------------------------------------: | :------------------: | :----------------: | :--------------------------------------------- |
+|  **[`implementation`](#implementation)**  |      `{Object}`      |       `sass`       | 设置使用的 Sass 的实现。                       |
+|     **[`sassOptions`](#sassoptions)**     | `{Object\|Function}` | Sass 实现的默认值  | Sass 自身选项。                                |
+|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      | `compiler.devtool` | 启用 / 禁用 source maps 的生成。               |
+|  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |    `undefined`     | 在实际的输入文件之前添加 `Sass` /`SCSS` 代码。 |
+| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |       `true`       | 启用 / 禁用默认的 Webpack importer。           |
 
 ### `implementation`
 
-Type: `Object`
-Default: `sass`
+类型： `Object`
+默认值： `sass`
 
-The special `implementation` option determines which implementation of Sass to use.
+特殊的 `implementation` 选项确定要使用的 Sass 实现。 
 
-By default the loader resolve the implementation based on your dependencies.
-Just add required implementation to `package.json` (`sass` or `node-sass` package) and install dependencies.
+默认情况下，loader 将会根据你的依赖解析需要使用的实现。
+只需将必需的实现添加到 `package.json`（`sass` 或 `node-sass` 包）中并安装依赖项即可。
 
-Example where the `sass-loader` loader uses the `sass` (`dart-sass`) implementation:
+示例，此时 `sass-loader` 将会使用 `sass` （`dart-sass`）实现：
 
 **package.json**
 
@@ -139,7 +139,7 @@ Example where the `sass-loader` loader uses the `sass` (`dart-sass`) implementat
 }
 ```
 
-Example where the `sass-loader` loader uses the `node-sass` implementation:
+示例，此时 `sass-loader` 将会使用 `node-sass` 实现：
 
 **package.json**
 
@@ -152,12 +152,12 @@ Example where the `sass-loader` loader uses the `node-sass` implementation:
 }
 ```
 
-Beware the situation when `node-sass` and `sass` were installed! By default the `sass-loader` prefers `sass`.
-In order to avoid this situation you can use the `implementation` option.
+需注意同时安装 `node-sass` 和 `sass` 的情况！默认情况下，`sass-loader` 会选择 `sass`。
+为了避免这种情况，你可以使用 `implementation` 选项。
 
-The `implementation` options either accepts `sass` (`Dart Sass`) or `node-sass` as a module.
+`implementation` 选项可以以模块的形式接受 `sass`（`Dart Sass`）或 `node-sass`。
 
-For example, to use Dart Sass, you'd pass:
+例如，为了使用 Dart Sass，你应该传递：
 
 ```js
 module.exports = {
@@ -171,7 +171,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              // Prefer `dart-sass`
+              // `dart-sass` 是首选
               implementation: require('sass'),
             },
           },
@@ -182,10 +182,10 @@ module.exports = {
 };
 ```
 
-Note that when using `sass` (`Dart Sass`), **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks.
-To avoid this overhead, you can use the [fibers](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path.
+需要注意的是，当使用 `sass`（`Dart Sass`）时，由于异步回调的开销，通常情况下**同步编译的速度是异步编译速度的两倍**。
+为了避免这种开销，你可以使用 [fibers](https://www.npmjs.com/package/fibers) 包从同步代码中调用异步导入程序。
 
-We automatically inject the [`fibers`](https://github.com/laverdet/node-fibers) package (setup `sassOptions.fiber`) if is possible (i.e. you need install the [`fibers`](https://github.com/laverdet/node-fibers) package).
+如果可能，我们会自动注入 [`fibers`](https://github.com/laverdet/node-fibers) 软件包（设置 `sassOptions.fiber`）（当然需要你安装 [`fibers`](https://github.com/laverdet/node-fibers) 包）。
 
 **package.json**
 
@@ -199,7 +199,7 @@ We automatically inject the [`fibers`](https://github.com/laverdet/node-fibers) 
 }
 ```
 
-You can disable automatically injecting the [`fibers`](https://github.com/laverdet/node-fibers) package by passing a `false` value for the `sassOptions.fiber` option.
+你可以通过向 `sassOptions.fiber` 传递 `false` 参数关闭自动注入的 [`fibers`](https://github.com/laverdet/node-fibers) 包。
 
 **webpack.config.js**
 
@@ -228,7 +228,7 @@ module.exports = {
 };
 ```
 
-You can also pass the `fiber` value using this code:
+你还可以通过一下代码传递 `fiber`：
 
 **webpack.config.js**
 
@@ -259,29 +259,29 @@ module.exports = {
 
 ### `sassOptions`
 
-Type: `Object|Function`
-Default: defaults values for Sass implementation
+类型：`Object|Function`
+默认值：Sass 实现的默认值
 
-Options for [Dart Sass](http://sass-lang.com/dart-sass) or [Node Sass](https://github.com/sass/node-sass) implementation.
+[Dart Sass](http://sass-lang.com/dart-sass) 或者 [Node Sass](https://github.com/sass/node-sass) 实现的选项。
 
-> ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
+> ℹ️ `indentedSyntax` 选项值为 `true`，是对 `sass` 的扩展。
 
-> ℹ️ Options such as `data` and `file` are unavailable and will be ignored.
+> ℹ️ 像 `data` 和 `file` 这样的选项是不可用的，且会被忽略。
 
-> ℹ We recommend not to set the `outFile`, `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because `sass-loader` automatically sets these options when the `sourceMap` option is `true`.
+> ℹ 我们推荐不要设置 `outFile`，`sourceMapContents`，`sourceMapEmbed`，`sourceMapRoot` 这些选项，因为当 `sourceMap` 是 `true` 时，`sass-loader` 会自动设置这些选项。
 
-> ℹ️ Access to the [loader context](/api/loaders/#the-loader-context) inside the custom importer can be done using the `this.webpackLoaderContext` property.
+> ℹ️ 可以使用 `this.webpackLoaderContext` 属性访问自定义 importer 中的 [loader 上下文](/api/loaders/#the-loader-context)。
 
-There is a slight difference between the `sass` (`dart-sass`) and `node-sass` options.
+`sass` （`dart-sass`）和 `node-sass` 之间的选项略有不同。
 
-Please consult documentation before using them:
+在使用他们之前，请查阅有关文档：
 
-- [Dart Sass documentation](https://github.com/sass/dart-sass#javascript-api) for all available `sass` options.
-- [Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
+- [Dart Sass 文档](https://github.com/sass/dart-sass#javascript-api) 提供了所有可用的 `sass` 选项。
+- [Node Sass 文档](https://github.com/sass/node-sass/#options) 提供了所有可用的 `node-sass` 选项。
 
 #### `Object`
 
-Use and object for the Sass implementation setup.
+使用对象设置 Sass 实现的启动选项。
 
 **webpack.config.js**
 
@@ -312,7 +312,7 @@ module.exports = {
 
 #### `Function`
 
-Allows to setup the Sass implementation by setting different options based on the loader context.
+允许通过 loader 上下文为 Sass 实现设置不同的选项。
 
 ```js
 module.exports = {
@@ -327,7 +327,7 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sassOptions: (loaderContext) => {
-                // More information about available properties https://webpack.js.org/api/loaders/
+                // 有关可用属性的更多信息 https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
@@ -352,15 +352,15 @@ module.exports = {
 
 ### `sourceMap`
 
-Type: `Boolean`
-Default: depends on the `compiler.devtool` value
+类型：`Boolean`
+默认值：取决于 `compiler.devtool` 的值
 
-Enables/Disables generation of source maps.
+开启/关闭生成 source map。
 
-By default generation of source maps depends on the [`devtool`](/configuration/devtool/) option.
-All values enable source map generation except `eval` and `false` value.
+默认情况下 source maps 的生成取决于 [`devtool`](/configuration/devtool/) 选项。
+除 `eval` 和 `false` 之外的所有值都将开启 source map 的生成。
 
-> ℹ If a `true` the `sourceMap`, `sourceMapRoot`, `sourceMapEmbed`, `sourceMapContents` and `omitSourceMapUrl` from `sassOptions` will be ignored.
+> ℹ 如果为 `true` 将会忽略来自 `sassOptions` 的 `sourceMap`，`sourceMapRoot`，`sourceMapEmbed`，`sourceMapContents` 和 `omitSourceMapUrl` 选项。
 
 **webpack.config.js**
 
@@ -391,9 +391,9 @@ module.exports = {
 };
 ```
 
-> ℹ In some rare cases `node-sass` can output invalid source maps (it is a `node-sass` bug).
+> ℹ 在极少数情况下，`node-sass` 会输出无效的 source maps（这是 `node-sass` 的 bug）。
 
-> > In order to avoid this, you can try to update `node-sass` to latest version or you can try to set within `sassOptions` the `outputStyle` option to `compressed`.
+> > 为了避免这种情况，你可以尝试将 `node-sass` 更新到最新版本，或者可以尝试将 `sassOptions` 中的 `outputStyle` 选项设置为 `compressed`。
 
 **webpack.config.js**
 
@@ -424,13 +424,13 @@ module.exports = {
 
 ### `additionalData`
 
-Type: `String|Function`
-Default: `undefined`
+类型：`String|Function`
+默认值：`undefined`
 
-Prepends `Sass`/`SCSS` code before the actual entry file.
-In this case, the `sass-loader` will not override the `data` option but just **prepend** the entry's content.
+在实际的文件之前要添加的 `Sass` / `SCSS` 代码。
+在这种情况下，`sass-loader` 将不会覆盖 `data` 选项，而只是将它**拼接**在入口文件内容之前。
 
-This is especially useful when some of your Sass variables depend on the environment:
+当某些 Sass 变量取决于环境时，这非常有用：
 
 #### `String`
 
@@ -471,7 +471,7 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               additionalData: (content, loaderContext) => {
-                // More information about available properties https://webpack.js.org/api/loaders/
+                // 有关可用属性的更多信息 https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
@@ -492,13 +492,13 @@ module.exports = {
 
 ### `webpackImporter`
 
-Type: `Boolean`
-Default: `true`
+类型：`Boolean`
+默认值：`true`
 
-Enables/Disables the default Webpack importer.
+开启 / 关闭默认的 Webpack importer。
 
-This can improve performance in some cases. Use it with caution because aliases and `@import` at-rules starting with `~` will not work.
-You can pass own `importer` to solve this (see [`importer docs`](https://github.com/sass/node-sass#importer--v200---experimental)).
+在某些情况下，可以提高性能。但是请谨慎使用，因为 aliases 和以 `〜` 开头的 `@import` 规则将不起作用。
+你可以传递自己的 `importer` 来解决这个问题（参阅 [`importer docs`](https://github.com/sass/node-sass#importer--v200---experimental)）。
 
 **webpack.config.js**
 
@@ -524,16 +524,16 @@ module.exports = {
 };
 ```
 
-## Examples
+## 示例
 
-### Extracts CSS into separate files
+### 提取样式表
 
-For production builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
+对于生产版本，我们建议从 bundle 中提取 CSS，以便之后可以使 CSS/JS 资源并行加载。
 
-There are two possibilities to extract a style sheet from the bundle:
+从 bundle 中提取样式表，有 2 种实用的方式：
 
-- [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) (use this, when using webpack 4 configuration. Works in all use-cases)
-- [extract-loader](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
+- [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/)（在使用 webpack 4 时使用此 plugin，它将适用于所有用例）
+- [extract-loader](https://github.com/peerigon/extract-loader)（简单，专门针对 css-loader 的输出）
 
 **webpack.config.js**
 
@@ -546,7 +546,7 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // fallback to style-loader in development
+          // 在开发过程中回退到 style-loader
           process.env.NODE_ENV !== 'production'
             ? 'style-loader'
             : MiniCssExtractPlugin.loader,
@@ -558,8 +558,8 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
+      // 与 webpackOptions.output 中的选项相似
+      // 所有的选项都是可选的
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
@@ -569,15 +569,15 @@ module.exports = {
 
 ### Source maps
 
-Enables/Disables generation of source maps.
+开启/关闭 source map 的生成。
 
-To enable CSS source maps, you'll need to pass the `sourceMap` option to the `sass-loader` _and_ the css-loader.
+为了开启 CSS source maps，需要将 `sourceMap` 选项作为参数，传递给 `sass-loader` 和 `css-loader`。
 
 **webpack.config.js**
 
 ```javascript
 module.exports = {
-  devtool: 'source-map', // any "source-map"-like devtool is possible
+  devtool: 'source-map', // 任何类似于 "source-map" 的选项都是支持的
   module: {
     rules: [
       {
@@ -603,11 +603,11 @@ module.exports = {
 };
 ```
 
-If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test) for a running example.
+如果你要在 Chrome 中编辑原始的 Sass 文件，建议阅读 [这篇不错的博客](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0)。具体示例参考 [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test)。
 
-## Contributing
+## 贡献
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+如果你还没有阅读过我们的贡献指南，请花一点时间阅读它。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/sass-loader/blob/master/.github/CONTRIBUTING.md)
 
