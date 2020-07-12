@@ -559,6 +559,22 @@ W> Note that if an `array` is provided as an `entry` point, only the last module
 
 T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library` as well as `output.libraryTarget`.
 
+## ouput.scriptType
+
+`string: 'module' | 'text/javascript'` `boolean = false`
+
+This option allows loading asynchronous chunks with a custom script type, such as `<script type="module" ...>`.
+
+T> If [`output.module`](#outputmodule) is set to `true`, `ouput.scriptType` will default to `'module'` instead of `false`.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    scriptType: 'module'
+  }
+};
+```
 
 ## `output.libraryExport`
 

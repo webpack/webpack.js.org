@@ -132,13 +132,13 @@ T> You can combine this configuration with the [HtmlWebpackPlugin](/plugins/html
 
 ### `splitChunks.maxAsyncRequests`
 
-`number`
+`number = 30`
 
 Maximum number of parallel requests when on-demand loading.
 
 ### `splitChunks.maxInitialRequests`
 
-`number`
+`number = 30`
 
 Maximum number of parallel requests at an entry point.
 
