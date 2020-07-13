@@ -50,14 +50,18 @@ module.exports = {
 
 ## `node.global`
 
-`boolean = false`
+`boolean = true`
+
+Defaults to `false` for [targets](https://webpack.js.org/configuration/target/) `node`, `async-node` and `electron-main`.
 
 关于此对象的准确行为，请查看[源码](https://github.com/webpack/webpack/blob/master/buildin/global.js)。
 
 
 ## `node.__filename`
 
-`string` `boolean = false`
+`boolean` `string = mock`
+
+Defaults to `false` for [targets](https://webpack.js.org/configuration/target/) `node`, `async-node` and `electron-main`.
 
 选项：
 
@@ -68,7 +72,9 @@ module.exports = {
 
 ## `node.__dirname`
 
-`string` `boolean = false`
+`boolean` `string = mock`
+
+Defaults to `false` for [targets](https://webpack.js.org/configuration/target/) `node`, `async-node` and `electron-main`.
 
 选项：
 

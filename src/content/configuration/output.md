@@ -559,6 +559,22 @@ W> 注意，如果将`数组`作为 `entry`，那么只会暴露数组中的最�
 
 T> 有关 `output.library` 以及 `output.libraryTarget` 详细信息，请查看[创建 library 指南](/guides/author-libraries/)。
 
+## ouput.scriptType
+
+`string: 'module' | 'text/javascript'` `boolean = false`
+
+This option allows loading asynchronous chunks with a custom script type, such as `<script type="module" ...>`.
+
+T> If [`output.module`](#outputmodule) is set to `true`, `ouput.scriptType` will default to `'module'` instead of `false`.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    scriptType: 'module'
+  }
+};
+```
 
 ## `output.libraryExport`
 
