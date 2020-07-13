@@ -34,13 +34,9 @@ npm install --save-dev webpack
 npm install --save-dev webpack@<version>
 ```
 
-<<<<<<< HEAD
-如果你使用 webpack v4+ 版本，你还需要安装 [CLI](/api/cli/)。
-=======
-T> Whether to use `--save-dev` or not depends on your use cases. Say you're using webpack only for bundling, then it's suggested that you install it with `--save-dev` option since you're not going to include webpack in your production build. Otherwise you can ignore `--save-dev`.
+T> 是否使用 `--save-dev` 取决于你的应用场景。假设你仅使用 webpack 进行构建操作，那么建议你在安装时使用 `--save-dev` 选项，因为可能你不需要在生产环境上使用 webpack。如果需要应用于生产环境，请忽略 `--save-dev` 选项。
 
-If you're using webpack v4 or later, you'll also need to install the [CLI](/api/cli/).
->>>>>>> 5e884b650a73f37e66b1c65758cac23d42764087
+如果你使用 webpack v4+ 版本，你还需要安装 [CLI](/api/cli/)。
 
 ``` bash
 npm install --save-dev webpack-cli
@@ -77,15 +73,9 @@ W> __不推荐__ 全局安装 webpack。这会将你项目中的 webpack 锁定�
 或者直接从 webpack 的仓库中安装：
 
 ``` bash
-<<<<<<< HEAD
-npm install webpack@beta
-# 或指定的 tag/分支
-npm install webpack/webpack#<tagname/branchname>
-=======
 npm install --save-dev webpack@next
-# or specific tag/branch
+# 或指定的 tag/分支
 npm install --save-dev webpack/webpack#<tagname/branchname>
->>>>>>> 5e884b650a73f37e66b1c65758cac23d42764087
 ```
 
 W> 安装这些最新体验版本时要小心！它们可能仍然包含 bug，因此不应该用于生产环境。
