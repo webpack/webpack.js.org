@@ -1,6 +1,6 @@
 ---
 title: Production
-sort: 17
+sort: 18
 contributors:
   - henriquea
   - rajagopal4890
@@ -21,6 +21,7 @@ contributors:
   - wizardofhogwarts
   - aholzner
   - EugeneHlushko
+  - makuzaverite
 ---
 
 In this guide, we'll dive into some of the best practices and utilities for building a production site or application.
@@ -29,7 +30,7 @@ T> This walkthrough stems from [Tree Shaking](/guides/tree-shaking) and [Develop
 
 ## Setup
 
-The goals of _development_ and _production_ builds differ greatly. In _development_, we want strong source mapping and a localhost server with live reloading or hot module replacement. In _production_, our goals shift to a focus on minified bundles, lighter weight source maps, and optimized assets to improve load time. With this logical separation at hand, we typically recommend writing **separate webpack configurations** for each environment.
+The goals of _development_ and _production_ builds differ greatly. In _development_, we want strong source mapping and a localhost server with live reloading or hot module replacement. In _production_, our goals shift to a focus on minified bundles, lighter weight source maps, and optimized assets to improve load time. With this logical separation at hand, we typically recommend writing __separate webpack configurations__ for each environment.
 
 While we will separate the _production_ and _development_ specific bits out, note that we'll still maintain a "common" configuration to keep things DRY. In order to merge these configurations together, we'll use a utility called [`webpack-merge`](https://github.com/survivejs/webpack-merge). With the "common" configuration in place, we won't have to duplicate code within the environment-specific configurations.
 
@@ -39,7 +40,7 @@ Let's start by installing `webpack-merge` and splitting out the bits we've alrea
 npm install --save-dev webpack-merge
 ```
 
-**project**
+__project__
 
 ```diff
   webpack-demo
@@ -55,7 +56,7 @@ npm install --save-dev webpack-merge
   |- /node_modules
 ```
 
-**webpack.common.js**
+__webpack.common.js__
 
 ```diff
 + const path = require('path');
@@ -80,7 +81,7 @@ npm install --save-dev webpack-merge
 + };
 ```
 
-**webpack.dev.js**
+__webpack.dev.js__
 
 ```diff
 + const { merge } = require('webpack-merge');
@@ -95,7 +96,7 @@ npm install --save-dev webpack-merge
 + });
 ```
 
-**webpack.prod.js**
+__webpack.prod.js__
 
 ```diff
 + const { merge } = require('webpack-merge');
@@ -114,7 +115,7 @@ Note the use of `merge()` calls in the environment-specific configurations to in
 
 Now, let's modify our npm scripts to use the new configuration files. For the `start` script, which runs `webpack-dev-server`, we will use `webpack.dev.js`, and for the `build` script, which runs `webpack` to create a production build, we will use `webpack.prod.js`:
 
-**package.json**
+__package.json__
 
 ```diff
   {
@@ -154,7 +155,7 @@ Feel free to run those scripts and see how the output changes as we continue add
 
 Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when `process.env.NODE_ENV` is not set to `'production'` some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV` set to `'production'` they might drop or add significant portions of code to optimize how things run for your actual users. Since webpack v4, specifying [`mode`](/configuration/mode/) automatically configures [`DefinePlugin`](/plugins/define-plugin) for you:
 
-**webpack.prod.js**
+__webpack.prod.js__
 
 ```diff
   const { merge } = require('webpack-merge');
@@ -165,11 +166,11 @@ Many libraries will key off the `process.env.NODE_ENV` variable to determine wha
   });
 ```
 
-T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine dev-vs-prod behavior by server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `'production'` **within** the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` within webpack configurations do not work as expected.
+T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine dev-vs-prod behavior by server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `'production'` __within__ the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[hash].bundle.js' : '[name].bundle.js'` within webpack configurations do not work as expected.
 
 If you're using a library like [`react`](https://reactjs.org/), you should actually see a significant drop in bundle size after adding `DefinePlugin`. Also, note that any of our local `/src` code can key off of this as well, so the following check would be valid:
 
-**src/index.js**
+__src/index.js__
 
 ```diff
   import { cube } from './math.js';
@@ -207,7 +208,7 @@ If you decide to try another minification plugin, just make sure your new choice
 
 We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that's recommended for production use (see [`devtool`](/configuration/devtool)). For this guide, we'll use the `source-map` option in the _production_ as opposed to the `inline-source-map` we used in the _development_:
 
-**webpack.prod.js**
+__webpack.prod.js__
 
 ```diff
   const { merge } = require('webpack-merge');
