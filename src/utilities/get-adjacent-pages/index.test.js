@@ -1,4 +1,4 @@
-const getAdjacentPages = require('.');
+import getAdjacentPages from './index';
 const needle = { url: '/webpack' };
 describe('getAdjacentPages', () => {
   it('returns only next page', () => {
