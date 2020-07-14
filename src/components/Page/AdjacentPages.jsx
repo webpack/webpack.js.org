@@ -14,6 +14,7 @@ AdjacentPages.propTypes = {
 };
 
 export default function AdjacentPages({ previous, next }) {
+  if (!previous && !next) return null;
   return (
     <div className="adjacent-links">
       {previous && (
