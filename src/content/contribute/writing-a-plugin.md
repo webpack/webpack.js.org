@@ -102,7 +102,7 @@ export default class HelloWorldPlugin {
 }
 ```
 
-W> The [`schema-utils`](https://github.com/webpack/schema-utils) API has changed in recent versions. Webpack still uses the v1.0.0 release, and we ask that you do the same until further notice.
+W> The [`schema-utils`](https://github.com/webpack/schema-utils) API has changed in recent versions. webpack still uses the v1.0.0 release, and we ask that you do the same until further notice.
 
 ## Compiler and Compilation
 
