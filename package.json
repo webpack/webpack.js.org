@@ -94,6 +94,7 @@
     "cypress": "^4.5.0",
     "directory-tree": "2.2.0",
     "directory-tree-webpack-plugin": "0.3",
+    "docschina-remark-slugger": "^0.1.4",
     "duplexer": "^0.1.1",
     "eslint": "4.19.1",
     "eslint-loader": "^2.0.0",

@@ -2,7 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const mdPlugins = [
-  require('remark-slug'),
+  require('docschina-remark-slugger'),
   [
     require('remark-custom-blockquotes'),
     {

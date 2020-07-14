@@ -13,18 +13,33 @@ export default class SidebarItem extends React.Component {
   renderAnchors(anchors) {
     return (
       <ul className={`${block}__anchors`}>
-        {anchors.map((anchor, i) => (
-          <li
-            key={this._generateAnchorURL(anchor)}
-            className={`${block}__anchor`}
-            title={anchor.title}
-          >
-            <a href={this._generateAnchorURL(anchor)}>{anchor.title}</a>
-            {anchor.children && this.renderAnchors(anchor.children)}
-          </li>
-        ))}
+        {
+          anchors.map((anchor, i) => {
+            anchor = this._handleAnchor(anchor);
+            return (<li
+              key={this._generateAnchorURL(anchor)}
+              className={`${block}__anchor`}
+              title={anchor.title}
+            >
+              <a href={this._generateAnchorURL(anchor)}>{anchor.title}</a>
+              {anchor.children && this.renderAnchors(anchor.children)}
+            </li>
+            );
+          })
+        }
       </ul>
     );
+  }
+
+  _handleAnchor(anchor) {
+    let id = anchor.id;
+    let title = anchor.title;
+    const match = /^.+(\s*\{#([a-z0-9\-_]+?)\}\s*)$/.exec(title);
+    id = match ? match[2] : id;
+    title = match ? title.replace(match[1], '').trim() : title;
+    anchor.id = id;
+    anchor.title = title;
+    return anchor;
   }
 
   render() {
