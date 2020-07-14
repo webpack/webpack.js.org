@@ -23,12 +23,12 @@ webpack find the module code that needs to be included in the bundle for every s
 webpack uses [enhanced-resolve](https://github.com/webpack/enhanced-resolve) to resolve file paths while bundling modules.
 
 
-## Resolving rules in webpack
+## Resolving rules in webpack {#resolving-rules-in-webpack}
 
 Using `enhanced-resolve`, webpack can resolve three kinds of file paths:
 
 
-### Absolute paths
+### Absolute paths {#absolute-paths}
 
 ```js
 import '/home/me/file';
@@ -39,7 +39,7 @@ import 'C:\\Users\\me\\file';
 Since we already have the absolute path to the file, no further resolution is required.
 
 
-### Relative paths
+### Relative paths {#relative-paths}
 
 ```js
 import '../src/file1';
@@ -49,7 +49,7 @@ import './file2';
 In this case, the directory of the resource file where the `import` or `require` occurs is taken to be the context directory. The relative path specified in the `import/require` is joined to this context path to produce the absolute path to the module.
 
 
-### Module paths
+### Module paths {#module-paths}
 
 ```js
 import 'module';
@@ -73,12 +73,12 @@ If the path points to a folder, then the following steps are taken to find the r
 webpack provides reasonable [defaults](/configuration/resolve) for these options depending on your build target.
 
 
-## Resolving Loaders
+## Resolving Loaders {#resolving-loaders}
 
 This follows the same rules as those specified for file resolution. But the [`resolveLoader`](/configuration/resolve/#resolveloader) configuration option can be used to have separate resolution rules for loaders.
 
 
-## Caching
+## Caching {#caching}
 
 Every filesystem access is cached so that multiple parallel or serial requests to the same file occur faster. In [watch mode](/configuration/watch/#watch), only modified files are evicted from the cache. If watch mode is off, then the cache gets purged before every compilation.
 

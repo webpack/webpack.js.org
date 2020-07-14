@@ -16,7 +16,7 @@ Enables [Hot Module Replacement](/concepts/hot-module-replacement), otherwise kn
 W> HMR should __never__ be used in production.
 
 
-## Basic Usage
+## Basic Usage {#basic-usage}
 
 Enabling HMR is easy and in most cases no options are necessary.
 
@@ -27,7 +27,7 @@ new webpack.HotModuleReplacementPlugin({
 ```
 
 
-## Options
+## Options {#options}
 
 The following options are accepted:
 

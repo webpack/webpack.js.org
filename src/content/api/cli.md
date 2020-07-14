@@ -32,7 +32,7 @@ For proper usage and easy distribution of this configuration, webpack can be con
 Read the [installation guide](/guides/installation) if you don't already have webpack and CLI installed.
 
 
-## Usage with configuration file
+## Usage with configuration file {#usage-with-configuration-file}
 
 ```bash
 webpack [--config webpack.config.js]
@@ -41,7 +41,7 @@ webpack [--config webpack.config.js]
 See [configuration](/configuration) for the options in the configuration file.
 
 
-## Usage without configuration file
+## Usage without configuration file {#usage-without-configuration-file}
 
 ```sh
 webpack <entry> [<entry>] -o <output>
@@ -99,7 +99,7 @@ This will form the bundle with both the files as separate entry points.
 ```
 
 
-### Common Options
+### Common Options {#common-options}
 
 W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/configuration/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
 
@@ -127,7 +127,7 @@ webpack --json > stats.json
 
 In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option, the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.io/analyse/), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
 
-### Environment Options
+### Environment Options {#environment-options}
 
 When the webpack configuration [exports a function](/configuration/configuration-types/#exporting-a-function), an "environment" may be passed to it.
 
@@ -150,7 +150,7 @@ Invocation                               | Resulting environment
 
 T> See the [environment variables](/guides/environment-variables/) guide for more information on its usage.
 
-### Configuration Options
+### Configuration Options {#configuration-options}
 
 Parameter                 | Explanation                                 | Input type | Default
 ------------------------- | ------------------------------------------- | ---------- | ------------------
@@ -160,7 +160,7 @@ Parameter                 | Explanation                                 | Input 
 `--env`                   | Environment passed to the configuration, when it is a function       |        |
 `--mode`                  | Mode to use                                                          | string | `'production'`
 
-### Output Options
+### Output Options {#output-options}
 
 This set of options allows you to manipulate certain [output](/configuration/output/) parameters of your build.
 
@@ -178,7 +178,7 @@ Parameter                 | Explanation                                 | Input 
 `--build-delimiter` | Display custom text after build output | string | Default string is null. You could provide a string such as `=== Build done ===`
 
 
-#### Example Usage
+#### Example Usage {#example-usage}
 
 ```bash
 webpack index=./src/index.js index2=./src/index2.js --output-path='./dist' --output-filename='[name][hash].bundle.js'
@@ -207,7 +207,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 ```
 
 
-### Debug Options
+### Debug Options {#debug-options}
 
 This set of options allows you to better debug the application containing assets compiled with webpack
 
@@ -218,7 +218,7 @@ Parameter    | Explanation                                      | Input type | D
 `--progress` | Print compilation progress in percentage         | boolean    | `false`
 `--display-error-details` | Display details about errors | boolean | `false`
 
-### Module Options
+### Module Options {#module-options}
 
 These options allow you to bind [modules](/configuration/module/) as allowed by webpack
 
@@ -229,7 +229,7 @@ Parameter            | Explanation                            | Usage
 `--module-bind-pre`  | Bind a file extension to a pre loader  |
 
 
-### Watch Options
+### Watch Options {#watch-options}
 
 These options make the build [watch](/configuration/watch/) for changes in files of the dependency graph and perform the build again.
 
@@ -241,7 +241,7 @@ Parameter                 | Explanation
 `--watch-stdin`, `--stdin` | Exit the process when stdin is closed
 
 
-### Optimize Options
+### Optimize Options {#optimize-options}
 
 These options allow you to manipulate optimizations for a production build using webpack
 
@@ -252,7 +252,7 @@ Parameter                   | Explanation                                       
 `--optimize-minimize`       | Minimize javascript and switches loaders to minimizing | [TerserPlugin](/plugins/terser-webpack-plugin/)
 
 
-### Resolve Options
+### Resolve Options {#resolve-options}
 
 These allow you to configure the webpack [resolver](/configuration/resolve/) with aliases and extensions.
 
@@ -263,7 +263,7 @@ Parameter              | Explanation                                            
 `--resolve-loader-alias` | Minimize javascript and switches loaders to minimizing  |
 
 
-### Stats Options
+### Stats Options {#stats-options}
 
 These options allow webpack to display various [stats](/configuration/stats/) and style them differently in the console output.
 
@@ -293,7 +293,7 @@ Parameter                        | Explanation                                  
 `--verbose`                      | Show more details                                                  | `boolean`
 
 
-### Advanced Options
+### Advanced Options {#advanced-options}
 
 Parameter         | Explanation                              | Usage
 ----------------- | ---------------------------------------- | -----
@@ -311,14 +311,14 @@ Parameter         | Explanation                              | Usage
 `--records-path`  | Path to the records file                 |
 `--target`        | The [targeted](/configuration/target/) execution environment | `--target='node'`
 
-### Shortcuts
+### Shortcuts {#shortcuts}
 
 Shortcut | Replaces
 ---------|----------------------------
 -d       | `--debug --devtool cheap-module-eval-source-map --output-pathinfo`
 -p       | `--mode production`, see [building for production](/guides/production/)
 
-### Profiling
+### Profiling {#profiling}
 
 The `--profile` option captures timing information for each step of the compilation and includes this in the output.
 
@@ -369,7 +369,7 @@ webpack --progress --profile
 ⋮
 ```
 
-## Pass CLI arguments to Node.js
+## Pass CLI arguments to Node.js {#pass-cli-arguments-to-nodejs}
 
 To pass arguments directly to Node.js process, you can use the `--node-args` option. All other flags and options will be received by the webpack-cli.
 

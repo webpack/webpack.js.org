@@ -16,14 +16,14 @@ Bundlers help you get your JavaScript and stylesheets ready for deployment, tran
 The good news is that, while there is some overlap, task runners and bundlers can play well together if approached in the right way. This guide provides a high-level overview of how webpack can be integrated into some of the more popular task runners.
 
 
-## NPM Scripts
+## NPM Scripts {#npm-scripts}
 
 Often webpack users use npm [`scripts`](https://docs.npmjs.com/misc/scripts) as their task runner. This is a good starting point. Cross-platform support can become a problem, but there are several workarounds for that. Many, if not most users, get by with simple npm `scripts` and various levels of webpack configuration and tooling.
 
 So while webpack's core focus is bundling, there are a variety of extensions that can enable you to use it for jobs typical of a task runner. Integrating a separate tool adds complexity, so be sure to weigh the pros and cons before going forward.
 
 
-## Grunt
+## Grunt {#grunt}
 
 For those using Grunt, we recommend the [`grunt-webpack`](https://www.npmjs.com/package/grunt-webpack) package. With `grunt-webpack` you can run webpack or [webpack-dev-server](https://github.com/webpack/webpack-dev-server) as a task, get access to stats within [template tags](https://gruntjs.com/api/grunt.template), split development and production configurations and more. Start by installing `grunt-webpack` as well as `webpack` itself if you haven't already:
 
@@ -56,7 +56,7 @@ module.exports = function(grunt) {
 For more information, please visit the [repository](https://github.com/webpack-contrib/grunt-webpack).
 
 
-## Gulp
+## Gulp {#gulp}
 
 Gulp is also a fairly straightforward integration with the help of the [`webpack-stream`](https://github.com/shama/webpack-stream) package (a.k.a. `gulp-webpack`). In this case, it is unnecessary to install `webpack` separately as it is a direct dependency of `webpack-stream`:
 
@@ -83,7 +83,7 @@ gulp.task('default', function() {
 For more information, please visit the [repository](https://github.com/shama/webpack-stream).
 
 
-## Mocha
+## Mocha {#mocha}
 
 The [`mocha-webpack`](https://github.com/zinserjan/mocha-webpack) utility can be used for a clean integration with Mocha. The repository offers more details on the pros and cons but essentially `mocha-webpack` is a simple wrapper that provides almost the same CLI as Mocha itself and provides various webpack functionality like an improved watch mode and improved path resolution. Here is a small example of how you would install it and use it to run a test suite (found within `./test`):
 
@@ -95,7 +95,7 @@ mocha-webpack 'test/**/*.js'
 For more information, please visit the [repository](https://github.com/zinserjan/mocha-webpack).
 
 
-## Karma
+## Karma {#karma}
 
 The [`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) package allows you to use webpack to pre-process files in [Karma](https://karma-runner.github.io/1.0/index.html). It also makes use of [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware) and allows passing configurations for both. A simple example may look something like this:
 

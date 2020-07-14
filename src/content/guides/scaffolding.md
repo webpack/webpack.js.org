@@ -10,7 +10,7 @@ contributors:
 
 It can be hard to set up a complex webpack configuration for the first time. Writing advanced configurations to optimize performance could be even more difficult. The `init` feature allows creating a webpack configuration by using customizable third-party initialization packages.
 
-## Creating a scaffold
+## Creating a scaffold {#creating-a-scaffold}
 
 Before writing a `webpack-cli` scaffold, think about what you're trying to achieve and who is going to use it:
 
@@ -20,13 +20,13 @@ Before writing a `webpack-cli` scaffold, think about what you're trying to achie
 
 `webpack-cli` offers an interactive experience to customize the output accordingly. For example asking questions like: "What is your entry point?".
 
-### Writing a scaffold
+### Writing a scaffold {#writing-a-scaffold}
 
 There are various resources where you can learn how to write a scaffold, you can start by reading [Writing a Scaffold](/contribute/writing-a-scaffold/) tutorial.
 
 `webpack-scaffold` is a utility suite for creating scaffolds. It contains functions that could be used to create a scaffold.
 
-### Running a scaffold
+### Running a scaffold {#running-a-scaffold}
 
 A scaffold can be executed using `webpack-cli init`:
 
@@ -34,7 +34,7 @@ A scaffold can be executed using `webpack-cli init`:
 webpack-cli init <your-scaffold>
 ```
 
-#### Running a scaffold locally
+#### Running a scaffold locally {#running-a-scaffold-locally}
 
 When the scaffold package is in your local file system you should point `init` to its path:
 
@@ -60,7 +60,7 @@ yarn link
 webpack-cli init my-scaffold
 ```
 
-#### Running a scaffold from npm
+#### Running a scaffold from npm {#running-a-scaffold-from-npm}
 
 If the package is available from npm, its name must begin with `webpack-scaffold` and can be used by running:
 
@@ -68,26 +68,26 @@ If the package is available from npm, its name must begin with `webpack-scaffold
 webpack-cli init webpack-scaffold-yourpackage
 ```
 
-## API
+## API {#api}
 
 To create a `scaffold`, you must create a [`yeoman-generator`](http://yeoman.io/authoring/). Thanks to it, you can optionally extend your generator to include methods from the [Yeoman API](http://yeoman.io/learning/). It's worth noting that we support all the properties of a regular webpack configuration. In order for us to do this, there's a thing you need to remember:
 
 W> Objects are made using strings, while strings are made using double strings. This means that in order for you to create a string, you have to wrap it inside another string for us to validate it correctly.
 
-### Required
+### Required {#required}
 
 - [`opts.env.configuration`(required)](#optsenvconfigurationrequired)
 - [`opts.env.configuration.myObj` (required)](#optsenvconfigurationmyobj-required)
 - [`myObj.webpackOptions` (required)](#myobjwebpackoptions-required)
 - [`writing` (required)](#writing-required)
 
-### Optional
+### Optional {#optional}
 
 - [myObj.merge](#myobjmerge-optional)
 - [myObj.topScope](#myobjtopscopeoptional)
 - [myObj.configName](#myobjconfignameoptional)
 
-### `opts.env.configuration`(required)
+### `opts.env.configuration`(required) {#optsenvconfigurationrequired}
 
 `object`
 
@@ -102,7 +102,7 @@ class MyScaffold extends Generator {
 }
 ```
 
-### `opts.env.configuration.myObj` (required)
+### `opts.env.configuration.myObj` (required) {#optsenvconfigurationmyobj-required}
 
 `object`
 
@@ -120,7 +120,7 @@ class MyScaffold extends Generator {
 }
 ```
 
-### `myObj.webpackOptions` (required)
+### `myObj.webpackOptions` (required) {#myobjwebpackoptions-required}
 
 `object`
 
@@ -133,7 +133,7 @@ this.options.env.configuration.dev.webpackOptions = {
 };
 ```
 
-### `writing` (required)
+### `writing` (required) {#writing-required}
 
 `function`
 
@@ -147,7 +147,7 @@ class MyScaffold extends Generator {
 }
 ```
 
-### `myObj.merge` (optional)
+### `myObj.merge` (optional) {#myobjmerge-optional}
 
 `string`
 
@@ -157,7 +157,7 @@ If you want to use [`webpack-merge`](https://github.com/survivejs/webpack-merge)
 this.options.env.configuration.dev.merge = 'myConfig';
 ```
 
-### `myObj.topScope`(optional)
+### `myObj.topScope`(optional) {#myobjtopscopeoptional}
 
 `[string]`
 
@@ -170,7 +170,7 @@ this.options.env.configuration.dev.topScope = [
 ];
 ```
 
-### `myObj.configName`(optional)
+### `myObj.configName`(optional) {#myobjconfignameoptional}
 
 `string`
 

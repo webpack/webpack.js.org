@@ -44,7 +44,7 @@ For a better understanding of the ideas behind module bundlers and how they work
 - [Detailed Explanation of a Simple Module Bundler](https://github.com/ronami/minipack)
 
 
-## Entry
+## Entry {#entry}
 
 An __entry point__ indicates which module webpack should use to begin building out its internal [dependency graph](/concepts/dependency-graph/). webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
 
@@ -61,7 +61,7 @@ module.exports = {
 T> Learn more in the [entry points](/concepts/entry-points) section.
 
 
-## Output
+## Output {#output}
 
 The __output__ property tells webpack where to emit the _bundles_ it creates and how to name these files. It defaults to `./dist/main.js` for the main output file and to the `./dist` folder for any other generated file.
 
@@ -86,7 +86,7 @@ In the example above, we use the `output.filename` and the `output.path` propert
 T> The `output` property has [many more configurable features](/configuration/output). If you want to learn about the concepts behind it, you can [read more in the output section](/concepts/output).
 
 
-## Loaders
+## Loaders {#loaders}
 
 Out of the box, webpack only understands JavaScript and JSON files. __Loaders__ allow webpack to process other types of files and convert them into valid [modules](/concepts/modules) that can be consumed by your application and added to the dependency graph.
 
@@ -125,7 +125,7 @@ W> Keep in mind that when using regex to match files, you may not quote it. i.e 
 You can check further customization when including loaders in the [loaders section](/concepts/loaders).
 
 
-## Plugins
+## Plugins {#plugins}
 
 While loaders are used to transform certain types of modules, plugins can be leveraged to perform a wider range of tasks like bundle optimization, asset management and injection of environment variables.
 
@@ -158,7 +158,7 @@ T> There are many plugins that webpack provides out of the box! Check out the [l
 Using plugins in your webpack configuration is straightforward. However, there are many use cases that are worth further exploration. [Learn more about them here](/concepts/plugins).
 
 
-## Mode
+## Mode {#mode}
 
 By setting the `mode` parameter to either `development`, `production` or `none`, you can enable webpack's built-in optimizations that correspond to each environment. The default value is `production`.
 
@@ -171,11 +171,11 @@ module.exports = {
 Learn more about the [mode configuration here](/configuration/mode) and what optimizations take place on each value.
 
 
-## Browser Compatibility
+## Browser Compatibility {#browser-compatibility}
 
 webpack supports all browsers that are [ES5-compliant](https://kangax.github.io/compat-table/es5/) (IE8 and below are not supported). webpack needs `Promise` for [`import()` and `require.ensure()`](/guides/code-splitting/#dynamic-imports). If you want to support older browsers, you will need to [load a polyfill](/guides/shimming/) before using these expressions.
 
 
-## Environment
+## Environment {#environment}
 
 webpack runs on Node.js version 8.x and higher.

@@ -13,7 +13,7 @@ The bundling is a function that takes some files and emits others.
 
 But between input and output, it also has [modules](/concepts/modules/), [entry points](/concepts/entry-points/), chunks, chunk groups, and many other intermediate parts.
 
-## The main parts
+## The main parts {#the-main-parts}
 
 Every file used in your project is a [Module](/concepts/modules/)
 
@@ -64,7 +64,7 @@ Each of them has a chunk with a module - `./home.js` for `home` and `./about.js`
 
 > There might be more than one chunk in a chunk group. For example [SplitChunksPlugin](/plugins/split-chunks-plugin/) splits a chunk into one or more chunks.
 
-## Chunks
+## Chunks {#chunks}
 
 Chunks come in two forms:
 
@@ -120,7 +120,7 @@ __Output:__
 - `/dist/main.js` - an `initial` chunk
 - `/dist/app.js` - `non-initial` chunk
 
-## Output
+## Output {#output}
 
 The names of the output files are affected by the two fields in the config:
 

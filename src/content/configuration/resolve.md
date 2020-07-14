@@ -21,7 +21,7 @@ contributors:
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
 
 
-## `resolve`
+## `resolve` {#resolve}
 
 `object`
 
@@ -39,7 +39,7 @@ module.exports = {
 ```
 
 
-### `resolve.alias`
+### `resolve.alias` {#resolvealias}
 
 `object`
 
@@ -150,7 +150,7 @@ module.exports = {
 };
 ```
 
-### `resolve.aliasFields`
+### `resolve.aliasFields` {#resolvealiasfields}
 
 `[string]: ['browser']`
 
@@ -168,14 +168,14 @@ module.exports = {
 ```
 
 
-### `resolve.cacheWithContext`
+### `resolve.cacheWithContext` {#resolvecachewithcontext}
 
 `boolean` (since webpack 3.1.0)
 
 If unsafe cache is enabled, includes `request.context` in the cache key. This option is taken into account by the [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) module. Since webpack 3.1.0 context in resolve caching is ignored when resolve or resolveLoader plugins are provided. This addresses a performance regression.
 
 
-### `resolve.descriptionFiles`
+### `resolve.descriptionFiles` {#resolvedescriptionfiles}
 
 `[string] = ['package.json']`
 
@@ -193,7 +193,7 @@ module.exports = {
 ```
 
 
-### `resolve.enforceExtension`
+### `resolve.enforceExtension` {#resolveenforceextension}
 
 `boolean = false`
 
@@ -211,7 +211,7 @@ module.exports = {
 ```
 
 
-### `resolve.enforceModuleExtension`
+### `resolve.enforceModuleExtension` {#resolveenforcemoduleextension}
 
 `boolean = false`
 
@@ -231,7 +231,7 @@ module.exports = {
 ```
 
 
-### `resolve.extensions`
+### `resolve.extensions` {#resolveextensions}
 
 `[string] = ['.wasm', '.mjs', '.js', '.json']`
 
@@ -259,7 +259,7 @@ import File from '../path/to/file';
 W> Using this will __override the default array__, meaning that webpack will no longer try to resolve modules using the default extensions.
 
 
-### `resolve.mainFields`
+### `resolve.mainFields` {#resolvemainfields}
 
 `[string]`
 
@@ -303,7 +303,7 @@ For example, consider an arbitrary library called `upstream` with a `package.jso
 When we `import * as Upstream from 'upstream'` this will actually resolve to the file in the `browser` property. The `browser` property takes precedence because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will first try to resolve using the file in the `module` field.
 
 
-### `resolve.mainFiles`
+### `resolve.mainFiles` {#resolvemainfiles}
 
 `[string] = ['index']`
 
@@ -321,7 +321,7 @@ module.exports = {
 ```
 
 
-### `resolve.modules`
+### `resolve.modules` {#resolvemodules}
 
 `[string] = ['node_modules']`
 
@@ -360,7 +360,7 @@ module.exports = {
 ```
 
 
-### `resolve.unsafeCache`
+### `resolve.unsafeCache` {#resolveunsafecache}
 
 `RegExp` `[RegExp]` `boolean: true`
 
@@ -393,7 +393,7 @@ module.exports = {
 W> Changes to cached paths may cause failure in rare cases.
 
 
-### `resolve.plugins`
+### `resolve.plugins` {#resolveplugins}
 
 [`[Plugin]`](/plugins/)
 
@@ -413,7 +413,7 @@ module.exports = {
 ```
 
 
-### `resolve.symlinks`
+### `resolve.symlinks` {#resolvesymlinks}
 
 `boolean = true`
 
@@ -433,7 +433,7 @@ module.exports = {
 ```
 
 
-### `resolve.cachePredicate`
+### `resolve.cachePredicate` {#resolvecachepredicate}
 
 `function(module) => boolean`
 
@@ -453,7 +453,7 @@ module.exports = {
 };
 ```
 
-### `resolve.restrictions`
+### `resolve.restrictions` {#resolverestrictions}
 
 `[string, RegExp]`
 
@@ -471,7 +471,7 @@ module.exports = {
 ```
 
 
-## `resolveLoader`
+## `resolveLoader` {#resolveloader}
 
 `object { modules [string] = ['node_modules'], extensions [string] = ['.js', '.json'], mainFields [string] = ['loader', 'main']}`
 
@@ -493,7 +493,7 @@ module.exports = {
 T> Note that you can use alias here and other features familiar from resolve. For example `{ txt: 'raw-loader' }` would shim `txt!templates/demo.txt` to use `raw-loader`.
 
 
-### `resolveLoader.moduleExtensions`
+### `resolveLoader.moduleExtensions` {#resolveloadermoduleextensions}
 
 `[string]`
 

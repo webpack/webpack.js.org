@@ -14,7 +14,7 @@ contributors:
 webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
 
 
-## `watch`
+## `watch` {#watch}
 
 `boolean = false`
 
@@ -32,7 +32,7 @@ module.exports = {
 T> In [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) watch mode is enabled by default.
 
 
-## `watchOptions`
+## `watchOptions` {#watchoptions}
 
 `object` `number = 200`
 
@@ -62,7 +62,7 @@ module.exports = {
 ```
 
 
-## `watchOptions.aggregateTimeout`
+## `watchOptions.aggregateTimeout` {#watchoptionsaggregatetimeout}
 
 `number = 200`
 
@@ -78,7 +78,7 @@ module.exports = {
 ```
 
 
-## `watchOptions.ignored`
+## `watchOptions.ignored` {#watchoptionsignored}
 
 `RegExp` [`anymatch`](https://github.com/micromatch/anymatch)
 
@@ -111,7 +111,7 @@ module.exports = {
 T> If you use `require.context`, webpack will watch your entire directory. You will need to ignore files and/or directories so that unwanted changes will not trigger a rebuild.
 
 
-## `watchOptions.poll`
+## `watchOptions.poll` {#watchoptionspoll}
 
 `boolean = false` `number`
 
@@ -131,7 +131,7 @@ module.exports = {
 T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
 
 
-## `info-verbosity`
+## `info-verbosity` {#info-verbosity}
 
 `string = 'info': 'none' | 'info' | 'verbose'`
 
@@ -142,11 +142,11 @@ webpack --watch --info-verbosity verbose
 ```
 
 
-## Troubleshooting
+## Troubleshooting {#troubleshooting}
 
 If you are experiencing any issues, please see the following notes. There are a variety of reasons why webpack might miss a file change.
 
-### Changes Seen But Not Processed
+### Changes Seen But Not Processed {#changes-seen-but-not-processed}
 
 Verify that webpack is not being notified of changes by running webpack with the --progress flag. If progress shows on save but no files are outputted, it is likely a configuration issue, not a file watching issue.
 
@@ -154,7 +154,7 @@ Verify that webpack is not being notified of changes by running webpack with the
 webpack --watch --progress
 ```
 
-### Not Enough Watchers
+### Not Enough Watchers {#not-enough-watchers}
 
 Verify that you have enough available watchers in your system. If this value is too low, the file watcher in Webpack won't recognize the changes:
 
@@ -164,22 +164,22 @@ cat /proc/sys/fs/inotify/max_user_watches
 
 Arch users, add `fs.inotify.max_user_watches=524288` to `/etc/sysctl.d/99-sysctl.conf` and then execute `sysctl --system`. Ubuntu users (and possibly others), execute: `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`.
 
-### macOS fsevents Bug
+### macOS fsevents Bug {#macos-fsevents-bug}
 
 On macOS, folders can get corrupted in certain scenarios. See [this article](https://github.com/livereload/livereload-site/blob/master/livereload.com/_articles/troubleshooting/os-x-fsevents-bug-may-prevent-monitoring-of-certain-folders.md).
 
-### Windows Paths
+### Windows Paths {#windows-paths}
 
 Because webpack expects absolute paths for many configuration options such as `__dirname + '/app/folder'` the Windows `\` path separator can break some functionality.
 
 Use the correct separators. I.e. `path.resolve(__dirname, 'app/folder')` or `path.join(__dirname, 'app', 'folder')`.
 
-### Vim
+### Vim {#vim}
 
 On some machines Vim is preconfigured with the [backupcopy option](http://vimdoc.sourceforge.net/htmldoc/options.html#'backupcopy') set to `auto`. This could potentially cause problems with the system's file watching mechanism. Switching this option to `yes` will make sure a copy of the file is made and the original one overwritten on save.
 
 `:set backupcopy=yes`
 
-### Saving in WebStorm
+### Saving in WebStorm {#saving-in-webstorm}
 
 When using the JetBrains WebStorm IDE, you may find that saving changed files does not trigger the watcher as you might expect. Try disabling the `safe write` option in the settings, which determines whether files are saved to a temporary location first before the originals are overwritten: uncheck `File > {Settings|Preferences} > Appearance & Behavior > System Settings > Use "safe write" (save changes to a temporary file first)`.

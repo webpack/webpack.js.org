@@ -12,14 +12,14 @@ contributors:
 These options allows you to control how webpack notifies you of assets and entry points that exceed a specific file limit.
 This feature was inspired by the idea of [webpack Performance Budgets](https://github.com/webpack/webpack/issues/3216).
 
-## `performance`
+## `performance` {#performance}
 
 `object`
 
 Configure how performance hints are shown. For example if you have an asset that is over 250kb, webpack will emit a warning notifying you of this.
 
 
-## `performance.hints`
+## `performance.hints` {#performancehints}
 
 `string = 'warning': 'error' | 'warning'` `boolean: false`
 
@@ -60,7 +60,7 @@ module.exports = {
 
 An error will be displayed notifying you of a large asset. We recommend using `hints: "error"` during production builds to help prevent deploying production bundles that are too large, impacting webpage performance.
 
-## `performance.maxEntrypointSize`
+## `performance.maxEntrypointSize` {#performancemaxentrypointsize}
 
 `number = 250000`
 
@@ -75,7 +75,7 @@ module.exports = {
 };
 ```
 
-## `performance.maxAssetSize`
+## `performance.maxAssetSize` {#performancemaxassetsize}
 
 `number = 250000`
 
@@ -91,7 +91,7 @@ module.exports = {
 };
 ```
 
-## `performance.assetFilter`
+## `performance.assetFilter` {#performanceassetfilter}
 
 `function(assetFilename) => boolean`
 

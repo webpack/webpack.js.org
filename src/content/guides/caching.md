@@ -25,7 +25,7 @@ So we're using webpack to bundle our modular application which yields a deployab
 This guide focuses on the configuration needed to ensure files produced by webpack compilation can remain cached unless their content has changed.
 
 
-## Output Filenames
+## Output Filenames {#output-filenames}
 
 We can use the `output.filename` [substitutions](/configuration/output/#outputfilename) setting to define the names of our output files. webpack provides a method of templating the filenames using bracketed strings called __substitutions__. The `[contenthash]` substitution will add a unique hash based on the content of an asset. When the asset's content changes, `[contenthash]` will change as well.
 
@@ -92,7 +92,7 @@ This is because webpack includes certain boilerplate, specifically the runtime a
 
 W> Output may differ depending on your current webpack version. Newer versions may not have all the same issues with hashing as some older versions, but we still recommend the following steps to be safe.
 
-## Extracting Boilerplate
+## Extracting Boilerplate {#extracting-boilerplate}
 
 As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) can be used to split modules out into separate bundles. webpack provides an optimization feature to split runtime code into a separate chunk using the [`optimization.runtimeChunk`](/configuration/optimization/#optimizationruntimechunk) option. Set it to `single` to create a single runtime bundle for all chunks:
 
@@ -190,7 +190,7 @@ vendors.a42c3ca0d742766d7a28.js   69.4 KiB       1  [emitted]  vendors
 
 We can now see that our `main` bundle does not contain `vendor` code from `node_modules` directory and is down in size to `240 bytes`!
 
-## Module Identifiers
+## Module Identifiers {#module-identifiers}
 
 Let's add another module, `print.js`, to our project:
 
@@ -342,6 +342,6 @@ Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.j
 We can see that both builds yielded `55e79e5927a639d21a1b` in the `vendor` bundle's filename.
 
 
-## Conclusion
+## Conclusion {#conclusion}
 
 Caching can be complicated, but the benefit to application or site users makes it worth the effort. See the _Further Reading_ section below to learn more.

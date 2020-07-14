@@ -16,7 +16,7 @@ Progressive Web Applications (or PWAs) are web apps that deliver an experience s
 This section will focus on adding an offline experience to our app. We'll achieve this using a Google project called [Workbox](https://github.com/GoogleChrome/workbox) which provides tools that help make offline support for web apps easier to setup.
 
 
-## We Don't Work Offline Now
+## We Don't Work Offline Now {#we-dont-work-offline-now}
 
 So far, we've been viewing the output by going directly to the local file system. Typically though, a real user accesses a web app over a network; their browser talking to a __server__ which will serve up the required assets (e.g. `.html`, `.js`, and `.css` files).
 
@@ -56,7 +56,7 @@ If you open your browser to `http://localhost:8080` (i.e. `http://127.0.0.1`) yo
 This is what we aim to change. Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.
 
 
-## Adding Workbox
+## Adding Workbox {#adding-workbox}
 
 Let's add the Workbox webpack plugin and adjust the `webpack.config.js` file:
 
@@ -116,7 +116,7 @@ As you can see, we now have 2 extra files being generated; `service-worker.js` a
 So we're now at the happy point of having produced a Service Worker. What's next?
 
 
-## Registering Our Service Worker
+## Registering Our Service Worker {#registering-our-service-worker}
 
 Let's allow our Service Worker to come out and play by registering it. We'll do that by adding the registration code below:
 
@@ -146,6 +146,6 @@ SW registered
 Now to test it. Stop your server and refresh your page. If your browser supports Service Workers then you should still be looking at your application. However, it has been served up by your Service Worker and __not__ by the server.
 
 
-## Conclusion
+## Conclusion {#conclusion}
 
 You have built an offline app using the Workbox project. You've started the journey of turning your web app into a PWA. You may now want to think about taking things further. A good resource to help you with that can be found [here](https://developers.google.com/web/progressive-web-apps/).

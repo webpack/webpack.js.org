@@ -17,11 +17,11 @@ Hot Module Replacement (HMR) exchanges, adds, or removes [modules](/concepts/mod
 - Instantly update the browser when modifications are made to CSS/JS in the source code, which is almost comparable to changing styles directly in the browser's dev tools.
 
 
-## How It Works
+## How It Works {#how-it-works}
 
 Let's go through some different viewpoints to understand exactly how HMR works...
 
-### In the Application
+### In the Application {#in-the-application}
 
 The following steps allow modules to be swapped in and out of an application:
 
@@ -33,7 +33,7 @@ The following steps allow modules to be swapped in and out of an application:
 You can set up HMR so that this process happens automatically, or you can choose to require user interaction for updates to occur.
 
 
-### In the Compiler
+### In the Compiler {#in-the-compiler}
 
 In addition to normal assets, the compiler needs to emit an "update" to allow updating from the previous version to the new version. The "update" consists of two parts:
 
@@ -45,7 +45,7 @@ The manifest contains the new compilation hash and a list of all updated chunks.
 The compiler ensures that module IDs and chunk IDs are consistent between these builds. It typically stores these IDs in memory (e.g. with [webpack-dev-server](/configuration/dev-server/)), but it's also possible to store them in a JSON file.
 
 
-### In a Module
+### In a Module {#in-a-module}
 
 HMR is an opt-in feature that only affects modules containing HMR code. One example would be patching styling through the [`style-loader`](https://github.com/webpack-contrib/style-loader). In order for patching to work, the `style-loader` implements the HMR interface; when it receives an update through HMR, it replaces the old styles with the new ones.
 
@@ -54,7 +54,7 @@ Similarly, when implementing the HMR interface in a module, you can describe wha
 See the [HMR API page](/api/hot-module-replacement) for details on the `module.hot` interface.
 
 
-### In the Runtime
+### In the Runtime {#in-the-runtime}
 
 Here things get a bit more technical... if you're not interested in the internals, feel free to jump to the [HMR API page](/api/hot-module-replacement) or [HMR guide](/guides/hot-module-replacement).
 
@@ -67,7 +67,7 @@ The `apply` method flags all updated modules as invalid. For each invalid module
 Afterwards, all invalid modules are disposed (via the dispose handler) and unloaded. The current hash is then updated and all `accept` handlers are called. The runtime switches back to the `idle` state and everything continues as normal.
 
 
-## Get Started
+## Get Started {#get-started}
 
 HMR can be used in development as a LiveReload replacement. [webpack-dev-server](/configuration/dev-server/) supports a `hot` mode in which it tries to update with HMR before trying to reload the whole page. See the [Hot Module Replacement guide](/guides/hot-module-replacement) for details.
 

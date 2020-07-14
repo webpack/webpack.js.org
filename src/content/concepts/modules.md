@@ -22,7 +22,7 @@ On the web, however, support for _modules_ has been slow to arrive.
 Multiple tools exist that support modular JavaScript on the web, with a variety of benefits and limitations.
 webpack builds on lessons learned from these systems and applies the concept of _modules_ to any file in your project.
 
-## What is a webpack Module
+## What is a webpack Module {#what-is-a-webpack-module}
 
 In contrast to [Node.js modules](https://nodejs.org/api/modules.html), webpack _modules_ can express their _dependencies_ in a variety of ways. A few examples are:
 
@@ -32,7 +32,7 @@ In contrast to [Node.js modules](https://nodejs.org/api/modules.html), webpack _
 - An [`@import` statement](https://developer.mozilla.org/en-US/docs/Web/CSS/@import) inside of a css/sass/less file.
 - An image url in a stylesheet `url(...)` or HTML `<img src=...>` file.
 
-## Supported Module Types
+## Supported Module Types {#supported-module-types}
 
 webpack supports modules written in a variety of languages and preprocessors, via _loaders_. _Loaders_ describe to webpack __how__ to process non-JavaScript _modules_ and include these _dependencies_ into your _bundles_.
 The webpack community has built _loaders_ for a wide variety of popular languages and language processors, including:

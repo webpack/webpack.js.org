@@ -17,7 +17,7 @@ related:
 The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way that can drastically improve build time performance. The term "DLL" stands for Dynamic-link library which was originally introduced by Microsoft.
 
 
-## `DllPlugin`
+## `DllPlugin` {#dllplugin}
 
 This plugin is used in a separate webpack configuration exclusively to create a dll-only-bundle. It creates a `manifest.json` file, which is used by the [`DllReferencePlugin`](#dllreferenceplugin) to map dependencies.
 
@@ -39,7 +39,7 @@ Creates a `manifest.json` which is written to the given `path`. It contains mapp
 Combine this plugin with [`output.library`](/configuration/output/#outputlibrary) option to expose (aka, put into the global scope) the dll function.
 
 
-## `DllReferencePlugin`
+## `DllReferencePlugin` {#dllreferenceplugin}
 
 This plugin is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.
 
@@ -60,24 +60,24 @@ References a dll manifest file to map dependency names to module ids, then requi
 W> Keep the `name` consistent with [`output.library`](/configuration/output/#outputlibrary).
 
 
-### Modes
+### Modes {#modes}
 
 This plugin can be used in two different modes, _scoped_ and _mapped_.
 
-#### Scoped Mode
+#### Scoped Mode {#scoped-mode}
 
 The content of the dll is accessible under a module prefix. i.e. with `scope = 'xyz'` a file `abc` in the dll can be access via `require('xyz/abc')`.
 
 T> [See an example use of scope](https://github.com/webpack/webpack/tree/master/examples/dll-user)
 
-#### Mapped Mode
+#### Mapped Mode {#mapped-mode}
 
 The content of the dll is mapped to the current directory. If a required file matches a file in the dll (after resolving), then the file from the dll is used instead.
 
 Because this happens after resolving every file in the dll bundle, the same paths must be available for the consumer of the dll bundle. i.e. if the dll contains `lodash` and the file `abc`, `require('lodash')` and `require('./abc')` will be used from the dll, rather than building them into the main bundle.
 
 
-## Usage
+## Usage {#usage}
 
 W> `DllReferencePlugin` and `DllPlugin` are used in _separate_ webpack configs.
 
@@ -105,7 +105,7 @@ new webpack.DllReferencePlugin({
 ```
 
 
-## Examples
+## Examples {#examples}
 
 [Vendor](https://github.com/webpack/webpack/tree/master/examples/dll) and [User](https://github.com/webpack/webpack/tree/master/examples/dll-user)
 
@@ -114,9 +114,9 @@ _Two separate example folders. Demonstrates scope and context._
 T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
 
 
-## References
+## References {#references}
 
-### Source
+### Source {#source}
 
 - [DllPlugin source](https://github.com/webpack/webpack/blob/master/lib/DllPlugin.js)
 - [DllReferencePlugin source](https://github.com/webpack/webpack/blob/master/lib/DllReferencePlugin.js)
@@ -124,7 +124,7 @@ T> Multiple `DllPlugins` and multiple `DllReferencePlugins`.
 - [DllModuleFactory source](https://github.com/webpack/webpack/blob/master/lib/DllModuleFactory.js)
 - [ManifestPlugin source](https://github.com/webpack/webpack/blob/master/lib/LibManifestPlugin.js)
 
-### Tests
+### Tests {#tests}
 
 - [DllPlugin creation test](https://github.com/webpack/webpack/blob/master/test/configCases/dll-plugin/0-create-dll/webpack.config.js)
 - [DllPlugin without scope test](https://github.com/webpack/webpack/blob/master/test/configCases/dll-plugin/2-use-dll-without-scope/webpack.config.js)

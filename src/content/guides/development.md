@@ -50,7 +50,7 @@ __webpack.config.js__
   };
 ```
 
-## Using source maps
+## Using source maps {#using-source-maps}
 
 When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, the stack trace will simply point to `bundle.js`. This isn't always helpful as you probably want to know exactly which source file the error came from.
 
@@ -119,7 +119,7 @@ Now open the resulting `index.html` file in your browser. Click the button and l
 We can see that the error also contains a reference to the file (`print.js`) and line number (2) where the error occurred. This is great because now we know exactly where to look in order to fix the issue.
 
 
-## Choosing a Development Tool
+## Choosing a Development Tool {#choosing-a-development-tool}
 
 W> Some text editors have a "safe write" function that might interfere with some of the following tools. Read [Adjusting Your Text Editor](#adjusting-your-text-editor) for a solution to these issues.
 
@@ -134,7 +134,7 @@ There are a couple of different options available in webpack that help you autom
 In most cases, you probably would want to use `webpack-dev-server`, but let's explore all of the above options.
 
 
-### Using Watch Mode
+### Using Watch Mode {#using-watch-mode}
 
 You can instruct webpack to "watch" all files within your dependency graph for changes. If one of these files is updated, the code will be recompiled so you don't have to run the full build manually.
 
@@ -217,7 +217,7 @@ Now save your file and check the terminal window. You should see that webpack au
 The only downside is that you have to refresh your browser in order to see the changes. It would be much nicer if that would happen automatically as well, so let's try `webpack-dev-server` which will do exactly that.
 
 
-### Using webpack-dev-server
+### Using webpack-dev-server {#using-webpack-dev-server}
 
 The `webpack-dev-server` provides you with a simple web server and the ability to use live reloading. Let's set it up:
 
@@ -302,7 +302,7 @@ The `webpack-dev-server` comes with many configurable options. Head over to the 
 T> Now that your server is working, you might want to give [Hot Module Replacement](/guides/hot-module-replacement) a try!
 
 
-### Using webpack-dev-middleware
+### Using webpack-dev-middleware {#using-webpack-dev-middleware}
 
 `webpack-dev-middleware` is a wrapper that will emit files processed by webpack to a server. This is used in `webpack-dev-server` internally, however it's available as a separate package to allow more custom setups if desired. We'll take a look at an example that combines `webpack-dev-middleware` with an express server.
 
@@ -438,7 +438,7 @@ Now fire up your browser and go to `http://localhost:3000`. You should see your 
 T> If you would like to know more about how Hot Module Replacement works, we recommend you read the [Hot Module Replacement](/guides/hot-module-replacement/) guide.
 
 
-## Adjusting Your Text Editor
+## Adjusting Your Text Editor {#adjusting-your-text-editor}
 
 When using automatic compilation of your code, you could run into issues when saving your files. Some editors have a "safe write" feature that can potentially interfere with recompilation.
 
@@ -449,6 +449,6 @@ To disable this feature in some common editors, see the list below:
 - __Vim__: Add `:set backupcopy=yes` to your settings.
 
 
-## Conclusion
+## Conclusion {#conclusion}
 
 Now that you've learned how to automatically compile your code and run a simple development server, you can check out the next guide, which will cover [Code Splitting](/guides/code-splitting/).

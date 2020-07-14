@@ -13,7 +13,7 @@ new webpack.optimize.MinChunkSizePlugin({
 });
 ```
 
-## Usage via CLI
+## Usage via CLI {#usage-via-cli}
 
 This plugin and it's options can also be invoked via the [CLI](/api/cli/):
 

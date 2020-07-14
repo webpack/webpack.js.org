@@ -33,7 +33,7 @@ The following article will walk through both of these use cases.
 T> For simplicity, this guide stems from the examples in [Getting Started](/guides/getting-started). Please make sure you are familiar with the setup there before moving on.
 
 
-## Shimming Globals
+## Shimming Globals {#shimming-globals}
 
 Let's start with the first use case of shimming global variables. Before we do anything let's take another look at our project:
 
@@ -144,7 +144,7 @@ __webpack.config.js__
 This would go nicely with [Tree Shaking](/guides/tree-shaking) as the rest of the `lodash` library should get dropped.
 
 
-## Granular Shimming
+## Granular Shimming {#granular-shimming}
 
 Some legacy modules rely on `this` being the `window` object. Let's update our `index.js` so this is the case:
 
@@ -194,7 +194,7 @@ __webpack.config.js__
 ```
 
 
-## Global Exports
+## Global Exports {#global-exports}
 
 Let's say a library creates a global variable that it expects its consumers to use. We can add a small module to our setup to demonstrate this:
 
@@ -258,7 +258,7 @@ __webpack.config.js__
 Now from within our entry script (i.e. `src/index.js`), we could `import { file, parse } from './globals.js';` and all should work smoothly.
 
 
-## Loading Polyfills
+## Loading Polyfills {#loading-polyfills}
 
 Almost everything we've discussed thus far has been in relation to handling legacy packages. Let's move on to our second topic: __polyfills__.
 
@@ -430,7 +430,7 @@ __src/index.js__
 If we run our build, another `polyfills.bundle.js` file will be emitted and everything should still run smoothly in the browser. Note that this set up could likely be improved upon but it should give you a good idea of how you can provide polyfills only to the users that actually need them.
 
 
-## Further Optimizations
+## Further Optimizations {#further-optimizations}
 
 The `babel-preset-env` package uses [browserslist](https://github.com/browserslist/browserslist) to transpile only what is not supported in your browsers matrix. This preset comes with the [`useBuiltIns`](https://babeljs.io/docs/en/babel-preset-env#usebuiltins) option, `false` by default, which converts your global `babel-polyfill` import to a more granular feature by feature `import` pattern:
 
@@ -445,12 +445,12 @@ import 'core-js/modules/web.dom.iterable';
 See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset-env) for more information.
 
 
-## Node Built-Ins
+## Node Built-Ins {#node-built-ins}
 
 Node built-ins, like `process`, can be polyfilled right directly from your configuration file without the use of any special loaders or plugins. See the [node configuration page](/configuration/node) for more information and examples.
 
 
-## Other Utilities
+## Other Utilities {#other-utilities}
 
 There are a few other tools that can help when dealing with legacy modules.
 

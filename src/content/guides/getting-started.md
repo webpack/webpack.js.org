@@ -28,7 +28,7 @@ webpack is used to compile JavaScript modules. Once [installed](/guides/installa
 
 W> Since webpack v5.0.0-beta.1 the minimum Node.js version to run webpack is 10.13.0 (LTS)
 
-## Basic Setup
+## Basic Setup {#basic-setup}
 
 First let's create a directory, initialize npm, [install webpack locally](/guides/installation/#local-installation), and install the webpack-cli (the tool used to run webpack on the command line):
 
@@ -120,7 +120,7 @@ There are problems with managing JavaScript projects this way:
 
 Let's use webpack to manage these scripts instead.
 
-## Creating a Bundle
+## Creating a Bundle {#creating-a-bundle}
 
 First we'll tweak our directory structure slightly, separating the "source" code (`/src`) from our "distribution" code (`/dist`). The "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser. Tweak the directory structure as follows:
 
@@ -207,7 +207,7 @@ Open `index.html` in your browser and, if everything went right, you should see 
 W> If you are getting a syntax error in the middle of minified JavaScript when opening `index.html` in the browser, set [`development mode`](/configuration/mode/#mode-development) and run `npx webpack` again. This is related to running `npx webpack` on latest Node.js (v12.5+) instead of [LTS version](https://nodejs.org/en/).
 
 
-## Modules
+## Modules {#modules}
 
 The [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements have been standardized in [ES2015](https://babeljs.io/docs/en/learn/). They are supported in most of the browsers at this moment, however there are some browsers that don't recognize the new syntax. But don't worry, webpack does support them out of the box.
 
@@ -216,7 +216,7 @@ Behind the scenes, webpack actually "transpiles" the code so that older browsers
 Note that webpack will not alter any code other than `import` and `export` statements. If you are using other [ES2015 features](http://es6-features.org/), make sure to [use a transpiler](/loaders/#transpiling) such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/) via webpack's [loader system](/concepts/loaders/).
 
 
-## Using a Configuration
+## Using a Configuration {#using-a-configuration}
 
 As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to manually type in a lot of commands in the terminal, so let's create one:
 
@@ -266,7 +266,7 @@ T> If a `webpack.config.js` is present, the `webpack` command picks it up by def
 A configuration file allows far more flexibility than simple CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](/configuration) to learn more.
 
 
-## NPM Scripts
+## NPM Scripts {#npm-scripts}
 
 Given it's not particularly fun to run a local copy of webpack from the CLI, we can set up a little shortcut. Let's adjust our _package.json_ by adding an [npm script](https://docs.npmjs.com/misc/scripts):
 
@@ -315,7 +315,7 @@ You can also set it to 'none' to disable any default behavior. Learn more: https
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.
 
 
-## Conclusion
+## Conclusion {#conclusion}
 
 Now that you have a basic build together you should move on to the next guide [`Asset Management`](/guides/asset-management) to learn how to manage assets like images and fonts with webpack. At this point, your project should look like this:
 

@@ -32,7 +32,7 @@ The webpack 2 release came with built-in support for ES2015 modules (alias _harm
 T> The remainder of this guide will stem from [Getting Started](/guides/getting-started). If you haven't read through that guide already, please do so now.
 
 
-## Add a Utility
+## Add a Utility {#add-a-utility}
 
 Let's add a new utility file to our project, `src/math.js`, that exports two functions:
 
@@ -131,7 +131,7 @@ __dist/bundle.js (around lines 90 - 100)__
 Note the `unused harmony export square` comment above. If you look at the code below it, you'll notice that `square` is not being imported, however, it is still included in the bundle. We'll fix that in the next section.
 
 
-## Mark the file as side-effect-free
+## Mark the file as side-effect-free {#mark-the-file-as-side-effect-free}
 
 In a 100% ESM module world, identifying side effects is straightforward. However, we aren't there just yet, so in the mean time it's necessary to provide hints to webpack's compiler on the "pureness" of your code.
 
@@ -175,7 +175,7 @@ T> Note that any imported file is subject to tree shaking. This means if you use
 
 Finally, `"sideEffects"` can also be set from the [`module.rules` configuration option](/configuration/module/#modulerules).
 
-## Clarifying tree shaking and `sideEffects`
+## Clarifying tree shaking and `sideEffects` {#clarifying-tree-shaking-and-sideeffects}
 
 The [`sideEffects`](/configuration/optimization/#optimizationsideeffects) and [`usedExports`](/configuration/optimization/#optimizationusedexports) (more known as tree shaking) optimizations are two different things.
 
@@ -310,7 +310,7 @@ After this optimization, other optimizations can still apply. For example: `butt
 
 Module Concatenation also applies. So that these 4 modules plus the entry module (and probably more dependencies) can be concatenated. __`index.js` has no code generated in the end__.
 
-## Mark a function call as side-effect-free
+## Mark a function call as side-effect-free {#mark-a-function-call-as-side-effect-free}
 
 It is possible to tell webpack that a function call is side-effect-free (pure) by using the `/*#__PURE__*/` annotation. It can be put in front of function calls to mark them as side-effect-free. Arguments passed to the function are not being marked by the annotation and may need to be marked individually. When the initial value in a variable declaration of an unused variable is considered as side-effect-free (pure), it is getting marked as dead code, not executed and dropped by the minimizer.
 This behavior is enabled when [`optimization.innerGraph`](/configuration/optimization/#optimizationinnergraph) is set to `true`.
@@ -321,7 +321,7 @@ __file.js__
 /*#__PURE__*/ double(55);
 ```
 
-## Minify the Output
+## Minify the Output {#minify-the-output}
 
 So we've cued up our "dead code" to be dropped by using the `import` and `export` syntax, but we still need to drop it from the bundle. To do that, set the `mode` configuration option to [`production`](/configuration/mode/#mode-production).
 
@@ -352,7 +352,7 @@ Notice anything different about `dist/bundle.js`? Clearly the whole bundle is no
 
 T> [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin/) is needed for the tree shaking to work. It is added by `mode: 'production'`. If you are not using it, remember to add the [`ModuleConcatenationPlugin`](/plugins/module-concatenation-plugin/) manually.
 
-## Conclusion
+## Conclusion {#conclusion}
 
 So, what we've learned is that in order to take advantage of _tree shaking_, you must...
 

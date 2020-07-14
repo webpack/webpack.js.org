@@ -18,7 +18,7 @@ new webpack.DefinePlugin({
 ```
 
 
-## Usage
+## Usage {#usage}
 
 Each key passed into `DefinePlugin` is an identifier or multiple identifiers joined with `.`.
 
@@ -80,7 +80,7 @@ console.log('Production log');
 ```
 
 
-## Feature Flags
+## Feature Flags {#feature-flags}
 
 Enable/disable features in production/development build using [feature flags](https://en.wikipedia.org/wiki/Feature_toggle).
 
@@ -92,7 +92,7 @@ new webpack.DefinePlugin({
 ```
 
 
-## Service URLs
+## Service URLs {#service-urls}
 
 Use a different service URL in production/development builds:
 

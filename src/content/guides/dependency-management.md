@@ -16,7 +16,7 @@ contributors:
 > amd
 
 
-## require with expression
+## require with expression {#require-with-expression}
 
 A context is created if your request contains expressions, so the __exact__ module is not known on compile time.
 
@@ -65,7 +65,7 @@ The context module also contains some runtime logic to access the map.
 This means dynamic requires are supported but will cause all matching modules to be included in the bundle.
 
 
-## `require.context`
+## `require.context` {#requirecontext}
 
 You can create your own context with the `require.context()` function.
 
@@ -95,7 +95,7 @@ require.context('../', true, /\.stories\.js$/);
 W> The arguments passed to `require.context` must be literals!
 
 
-### context module API
+### context module API {#context-module-api}
 
 A context module exports a (require) function that takes one argument: the request.
 

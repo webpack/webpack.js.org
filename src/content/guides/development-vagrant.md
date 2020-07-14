@@ -10,7 +10,7 @@ contributors:
 
 If you have a more advanced project and use [Vagrant](https://www.vagrantup.com/) to run your development environment in a Virtual Machine, you'll often want to also run webpack in the VM.
 
-## Configuring the Project
+## Configuring the Project {#configuring-the-project}
 
 To start, make sure that the `Vagrantfile` has a static IP;
 
@@ -51,7 +51,7 @@ And create an `index.html` file. The script tag should point to your bundle. If 
 
 Note that you also need to create an `app.js` file.
 
-## Running the Server
+## Running the Server {#running-the-server}
 
 Now, let's run the server:
 
@@ -68,7 +68,7 @@ The `--public` flag makes sure the script knows where to look for the WebSocket.
 
 The server should be accessible on `http://10.10.10.61:8080` now. If you make a change in `app.js`, it should live reload.
 
-## Advanced Usage with nginx
+## Advanced Usage with nginx {#advanced-usage-with-nginx}
 
 To mimic a more production-like environment, it is also possible to proxy the webpack-dev-server with nginx.
 
@@ -101,6 +101,6 @@ webpack-dev-server --public 10.10.10.61 --watch-poll
 
 This makes the server only accessible on `127.0.0.1`, which is fine because nginx takes care of making it available on your host PC.
 
-## Conclusion
+## Conclusion {#conclusion}
 
 We made the Vagrant box accessible from a static IP, and then made webpack-dev-server publicly accessible so it is reachable from a browser. We then tackled a common problem that VirtualBox doesn't send out filesystem events, causing the server to not reload on file changes.

@@ -13,12 +13,12 @@ contributors:
 This guide goes through the various methods used to install webpack.
 
 
-## Prerequisites
+## Prerequisites {#prerequisites}
 
 Before we begin, make sure you have a fresh version of [Node.js](https://nodejs.org/en/) installed. The current Long Term Support (LTS) release is an ideal starting point. You may run into a variety of issues with the older versions as they may be missing functionality webpack and/or its related packages require.
 
 
-## Local Installation
+## Local Installation {#local-installation}
 
 The latest webpack release is:
 
@@ -51,7 +51,7 @@ Installing locally is what we recommend for most projects. This makes it easier 
 T> To run the local installation of webpack you can access its binary version as `node_modules/.bin/webpack`. Alternatively, if you are using npm v5.2.0 or greater, you can run 'npx webpack' to do it.
 
 
-## Global Installation
+## Global Installation {#global-installation}
 
 The following NPM installation will make `webpack` available globally:
 
@@ -62,7 +62,7 @@ npm install --global webpack
 W> Note that this is __not a recommended practice__. Installing globally locks you down to a specific version of webpack and could fail in projects that use a different version.
 
 
-## Bleeding Edge
+## Bleeding Edge {#bleeding-edge}
 
 If you are enthusiastic about using the latest that webpack has to offer, you can install beta versions or even directly from the webpack repository using the following commands:
 

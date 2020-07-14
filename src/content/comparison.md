@@ -53,7 +53,7 @@ webpack is not the only module bundler out there. If you are choosing between us
 X is the length of the path string
 
 
-## Bundling vs. Loading
+## Bundling vs. Loading {#bundling-vs-loading}
 
 It's important to note some key differences between _loading_ and _bundling_ modules. A tool like [SystemJS](https://github.com/systemjs/systemjs), which can be found under the hood of [JSPM](https://github.com/jspm/jspm-cli), is used to load and transpile modules at runtime in the browser. This differs significantly from webpack, where modules are transpiled (through "loaders") and bundled before hitting the browser.
 

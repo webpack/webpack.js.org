@@ -12,7 +12,7 @@ contributors:
 Configuring the `output` configuration options tells webpack how to write the compiled files to disk. Note that, while there can be multiple `entry` points, only one `output` configuration is specified.
 
 
-## Usage
+## Usage {#usage}
 
 The minimum requirement for the `output` property in your webpack configuration is to set its value to an object and provide an [`output.filename`](/configuration/output/#outputfilename) to use for the output file(s):
 
@@ -29,7 +29,7 @@ module.exports = {
 This configuration would output a single `bundle.js` file into the `dist` directory.
 
 
-## Multiple Entry Points
+## Multiple Entry Points {#multiple-entry-points}
 
 If your configuration creates more than a single "chunk" (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use [substitutions](/configuration/output/#outputfilename) to ensure that each file has a unique name.
 
@@ -49,7 +49,7 @@ module.exports = {
 ```
 
 
-## Advanced
+## Advanced {#advanced}
 
 Here's a more complicated example of using a CDN and hashes for assets:
 

@@ -15,7 +15,7 @@ __Plugins__ are the [backbone](https://github.com/webpack/tapable) of webpack. w
 They also serve the purpose of doing __anything else__ that a [loader](/concepts/loaders) cannot do.
 
 
-## Anatomy
+## Anatomy {#anatomy}
 
 A webpack __plugin__ is a JavaScript object that has an [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) method. This `apply` method is called by the webpack compiler, giving access to the __entire__ compilation lifecycle.
 
@@ -37,14 +37,14 @@ module.exports = ConsoleLogOnBuildWebpackPlugin;
 
 The first parameter of the tap method of the compiler hook should be a camelized version of the plugin name. It is advisable to use a constant for this so it can be reused in all hooks.
 
-## Usage
+## Usage {#usage}
 
 Since __plugins__ can take arguments/options, you must pass a `new` instance to the `plugins` property in your webpack configuration.
 
 Depending on how you are using webpack, there are multiple ways to use plugins.
 
 
-### Configuration
+### Configuration {#configuration}
 
 __webpack.config.js__
 
@@ -75,7 +75,7 @@ module.exports = {
 ```
 
 
-### Node API
+### Node API {#node-api}
 
 When using the Node API, you can also pass plugins via the `plugins` property in the configuration.
 

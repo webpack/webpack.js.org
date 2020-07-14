@@ -24,7 +24,7 @@ Let's start by going over `tapable` utility, which provides the backbone of
 webpack's plugin interface.
 
 
-## Tapable
+## Tapable {#tapable}
 
 This small library is a core utility in webpack but can also be used elsewhere
 to provide a similar plugin interface. Many objects in webpack extend the
@@ -39,7 +39,7 @@ the hooks they provide, and each hook's type (e.g. the `SyncHook`) will be
 noted.
 
 
-## Plugin Types
+## Plugin Types {#plugin-types}
 
 Depending on the hooks used and `tap` methods applied, plugins can function in
 a different number of ways. The way this works is closely related to the
@@ -82,7 +82,7 @@ The moral of the story is that there are a variety of ways to `hook` into the
 `compiler`, each one allowing your plugin to run as it sees fit.
 
 
-## Custom Hooks
+## Custom Hooks {#custom-hooks}
 
 In order to add a new hook to the compilation for other plugins to `tap` into,
 simply `require` the necessary hook class from `tapable` and create one:
@@ -100,7 +100,7 @@ compiler.hooks.myCustomHook.call(a, b, c);
 Again, see the [documentation](https://github.com/webpack/tapable) for `tapable` to learn more about the
 different hook classes and how they work.
 
-## Reporting Progress
+## Reporting Progress {#reporting-progress}
 
 Plugins can report progress via [`ProgressPlugin`](/plugins/progress-plugin/), which prints progress messages to stderr by default. In order to enable progress reporting, pass a `--progress` argument when running the [webpack CLI](/api/cli/).
 
@@ -133,7 +133,7 @@ reportProgress(percentage, ...args);
 
 Note that only a subset of compiler and compilation hooks support the `reportProgress` function. See [`ProgressPlugin`](/plugins/progress-plugin/#supported-hooks) for a full list.
 
-## Logging
+## Logging {#logging}
 
 Logging API is available since the release of webpack 4.37. When `logging` is enabled in [`stats configuration`](/configuration/stats/#statslogging) and/or when [`infrastructure logging`](/configuration/other-options/#infrastructurelogging) is enabled, plugins may log messages which will be printed out in the respective logger format (stats, infrastructure).
 
@@ -141,7 +141,7 @@ Logging API is available since the release of webpack 4.37. When `logging` is en
 - Plugins may use the `compiler.getInfrastructureLogger('PluginName')` for logging. Using `infrastructure` logging is not stored in the Stats and therefore not formatted. It's usually logged to the console/dashboard/GUI directly. It can be filtered by the user.
 - Plugins may use special fallback logic for detecting logging support `compilation.getLogger ? compilation.getLogger('PluginName') : console` to provide a fallback for cases when an older webpack version is used which does not support `getLogger` method on `compilation` object.
 
-## Next Steps
+## Next Steps {#next-steps}
 
 See the [compiler hooks](/api/compiler-hooks/) section for a detailed listing of all the available
 `compiler` hooks and the parameters they make available.

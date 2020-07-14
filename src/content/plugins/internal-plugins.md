@@ -21,57 +21,57 @@ Categories of internal plugins:
 - [source](#source)
 - [optimize](#optimize)
 
-## environment
+## environment {#environment}
 
 Plugins affecting the environment of the compiler.
 
-### NodeEnvironmentPlugin
+### NodeEnvironmentPlugin {#nodeenvironmentplugin}
 
 `webpack.node.NodeEnvironmentPlugin()`
 
 Applies Node.js style filesystem to the compiler.
 
-## compiler
+## compiler {#compiler}
 
 Plugins affecting the compiler
 
-### MemoryCachePlugin
+### MemoryCachePlugin {#memorycacheplugin}
 
 `MemoryCachePlugin()`
 
 Adds a cache to the compiler, where modules are cached in memory.
 
-### ProgressPlugin
+### ProgressPlugin {#progressplugin}
 
 `ProgressPlugin(handler)`
 
 Hook into the compiler to extract progress information. The `handler` must have the signature `function(percentage, message)`. Percentage is called with a value between 0 and 1, where 0 indicates the start and 1 the end.
 
-### RecordIdsPlugin
+### RecordIdsPlugin {#recordidsplugin}
 
 `RecordIdsPlugin()`
 
 Saves and restores module and chunk ids from records.
 
-## entry
+## entry {#entry}
 
 Plugins, which add entry chunks to the compilation.
 
-### SingleEntryPlugin
+### SingleEntryPlugin {#singleentryplugin}
 
 `SingleEntryPlugin(context, request, chunkName)`
 
 Adds an entry chunk on compilation. The chunk is named `chunkName` and contains only one module (plus dependencies). The module is resolved from `request` in `context` (absolute path).
 
-### PrefetchPlugin
+### PrefetchPlugin {#prefetchplugin}
 
 `PrefetchPlugin(context, request)`
 
 Prefetches `request` and dependencies to enable a more parallel compilation. It doesn't create any chunk. The module is resolved from `request` in `context` (absolute path).
 
-## output
+## output {#output}
 
-### JsonpTemplatePlugin
+### JsonpTemplatePlugin {#jsonptemplateplugin}
 
 `JsonpTemplatePlugin(options)`
 
@@ -85,7 +85,7 @@ Chunks are wrapped into JSONP-calls. A loading algorithm is included in entry ch
 
 `options.chunkFilename` is the filename under that chunks are expected.
 
-### NodeTemplatePlugin
+### NodeTemplatePlugin {#nodetemplateplugin}
 
 `node/NodeTemplatePlugin(options)`
 
@@ -95,13 +95,13 @@ Chunks are wrapped into Node.js modules exporting the bundled modules. The entry
 
 `options.chunkFilename` is the filename under that chunks are expected.
 
-### LibraryTemplatePlugin
+### LibraryTemplatePlugin {#librarytemplateplugin}
 
 `LibraryTemplatePlugin(name, target)`
 
 The entries chunks are decorated to form a library `name` of type `type`.
 
-### WebWorkerTemplatePlugin
+### WebWorkerTemplatePlugin {#webworkertemplateplugin}
 
 `webworker/WebWorkerTemplatePlugin(options)`
 
@@ -109,11 +109,11 @@ Chunks are loaded by `importScripts`. Else it's similar to [`JsonpTemplatePlugin
 
 `options` are the output options.
 
-### EvalDevToolModulePlugin
+### EvalDevToolModulePlugin {#evaldevtoolmoduleplugin}
 
 Decorates the module template by wrapping each module in a `eval` annotated with `// @sourceURL`.
 
-### SourceMapDevToolPlugin
+### SourceMapDevToolPlugin {#sourcemapdevtoolplugin}
 
 `SourceMapDevToolPlugin(sourceMapFilename, sourceMappingURLComment, moduleFilenameTemplate, fallbackModuleFilenameTemplate)`
 
@@ -121,7 +121,7 @@ Decorates the templates by generating a SourceMap for each chunk.
 
 `sourceMapFilename` the filename template of the SourceMap. `[hash]`, `[name]`, `[id]`, `[file]` and `[filebase]` are replaced. If this argument is missing, the SourceMap will be inlined as DataUrl.
 
-### HotModuleReplacementPlugin
+### HotModuleReplacementPlugin {#hotmodulereplacementplugin}
 
 `HotModuleReplacementPlugin(options)`
 
@@ -133,19 +133,19 @@ Add support for hot module replacement. Decorates the templates to add runtime c
 
 `options.hotUpdateFunction` JSON function name for the hot update.
 
-## source
+## source {#source}
 
 Plugins affecting the source code of modules.
 
-### APIPlugin
+### APIPlugin {#apiplugin}
 
 Make webpack_public_path, webpack_require, webpack_modules and webpack_chunk_load accessible. Ensures that `require.valueOf` and `require.onError` are not processed by other plugins.
 
-### CompatibilityPlugin
+### CompatibilityPlugin {#compatibilityplugin}
 
 Currently useless. Ensures compatibility with other module loaders.
 
-### ConstPlugin
+### ConstPlugin {#constplugin}
 
 Tries to evaluate expressions in `if (...)` statements and ternaries to replace them with `true`/`false` for further possible dead branch elimination using hooks fired by the parser.
 
@@ -170,13 +170,13 @@ In the above example, webpack is unable to prune the branch, but Terser does. Ho
 
 It is important to mention that `import { calculateTax } from './tax';` will also get pruned because `calculateTax()` call was in the dead branch and got eliminated.
 
-### ProvidePlugin
+### ProvidePlugin {#provideplugin}
 
 `ProvidePlugin(name, request)`
 
 If `name` is used in a module it is filled by a module loaded by `require(<request>)`.
 
-### NodeStuffPlugin
+### NodeStuffPlugin {#nodestuffplugin}
 
 `NodeStuffPlugin(options, context)`
 
@@ -184,13 +184,13 @@ Provide stuff that is normally available in Node.js modules.
 
 It also ensures that `module` is filled with some Node.js stuff if you use it.
 
-### RequireJsStuffPlugin
+### RequireJsStuffPlugin {#requirejsstuffplugin}
 
 Provide stuff that is normally available in require.js.
 
 `require[js].config` is removed. `require.version` is `0.0.0`. `requirejs.onError` is mapped to `require.onError`.
 
-### NodeSourcePlugin
+### NodeSourcePlugin {#nodesourceplugin}
 
 `node/NodeSourcePlugin(options)`
 
@@ -198,7 +198,7 @@ This module adds stuff from Node.js that is not available in non Node.js environ
 
 It adds polyfills for `process`, `console`, `Buffer` and `global` if used. It also binds the built in Node.js replacement modules.
 
-### NodeTargetPlugin
+### NodeTargetPlugin {#nodetargetplugin}
 
 `node/NodeTargetPlugin()`
 
@@ -206,37 +206,37 @@ The plugins should be used if you run the bundle in a Node.js environment.
 
 If ensures that native modules are loaded correctly even if bundled.
 
-### AMDPlugin
+### AMDPlugin {#amdplugin}
 
 `dependencies/AMDPlugin(options)`
 
 Provides AMD-style `define` and `require` to modules. Also bind `require.amd`, `define.amd` and webpack_amd_options##  to the `options` passed as parameter.
 
-### CommonJsPlugin
+### CommonJsPlugin {#commonjsplugin}
 
 `dependencies/CommonJsPlugin`
 
 Provides CommonJs-style `require` to modules.
 
-### RequireContextPlugin
+### RequireContextPlugin {#requirecontextplugin}
 
 `dependencies/RequireContextPlugin(modulesDirectories, extensions)`
 
 Provides `require.context`. The parameter `modulesDirectories` and `extensions` are used to find alternative requests for files. It's useful to provide the same arrays as you provide to the resolver.
 
-### RequireEnsurePlugin
+### RequireEnsurePlugin {#requireensureplugin}
 
 `dependencies/RequireEnsurePlugin()`
 
 Provides `require.ensure`.
 
-### RequireIncludePlugin
+### RequireIncludePlugin {#requireincludeplugin}
 
 `dependencies/RequireIncludePlugin()`
 
 Provides `require.include`.
 
-### DefinePlugin
+### DefinePlugin {#defineplugin}
 
 `DefinePlugin(definitions)`
 
@@ -244,9 +244,9 @@ Define constants for identifier.
 
 `definitions` is an object.
 
-## optimize
+## optimize {#optimize}
 
-### LimitChunkCountPlugin
+### LimitChunkCountPlugin {#limitchunkcountplugin}
 
 `optimize/LimitChunkCountPlugin(options)`
 
@@ -256,25 +256,25 @@ The overhead for each chunks is provided by `options.chunkOverhead` or defaults 
 
 Chunks that reduce the total size the most are merged first. If multiple combinations are equal the minimal merged size wins.
 
-### MergeDuplicateChunksPlugin
+### MergeDuplicateChunksPlugin {#mergeduplicatechunksplugin}
 
 `optimize/MergeDuplicateChunksPlugin()`
 
 Chunks with the same modules are merged.
 
-### RemoveEmptyChunksPlugin
+### RemoveEmptyChunksPlugin {#removeemptychunksplugin}
 
 `optimize/RemoveEmptyChunksPlugin()`
 
 Modules that are included in every parent chunk are removed from the chunk.
 
-### MinChunkSizePlugin
+### MinChunkSizePlugin {#minchunksizeplugin}
 
 `optimize/MinChunkSizePlugin(minChunkSize)`
 
 Merges chunks until each chunk has the minimum size of `minChunkSize`.
 
-### FlagIncludedChunksPlugin
+### FlagIncludedChunksPlugin {#flagincludedchunksplugin}
 
 `optimize/FlagIncludedChunksPlugin()`
 

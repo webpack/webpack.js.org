@@ -28,7 +28,7 @@ contributors:
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
 
 
-## `output.auxiliaryComment`
+## `output.auxiliaryComment` {#outputauxiliarycomment}
 
 `string` `object`
 
@@ -91,7 +91,7 @@ module.exports = {
 ```
 
 
-## `output.chunkFilename`
+## `output.chunkFilename` {#outputchunkfilename}
 
 `string = '[id].js'`
 
@@ -114,7 +114,7 @@ module.exports = {
 ```
 
 
-## `output.chunkLoadTimeout`
+## `output.chunkLoadTimeout` {#outputchunkloadtimeout}
 
 `number = 120000`
 
@@ -133,7 +133,7 @@ module.exports = {
 ```
 
 
-## `output.chunkCallbackName`
+## `output.chunkCallbackName` {#outputchunkcallbackname}
 
 `string = 'webpackChunkwebpack'`
 
@@ -152,7 +152,7 @@ module.exports = {
 ```
 
 
-## `output.crossOriginLoading`
+## `output.crossOriginLoading` {#outputcrossoriginloading}
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
 
@@ -162,7 +162,7 @@ Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web
 - `'use-credentials'` - Enable cross-origin loading __with credentials__
 
 
-## `output.jsonpScriptType`
+## `output.jsonpScriptType` {#outputjsonpscripttype}
 
 `string = 'text/javascript': 'module' | 'text/javascript'`
 
@@ -171,7 +171,7 @@ Allows customization of `type` attribute of `script` tags that webpack injects i
 - `'text/javascript'`: Default `type` in HTML5 and required for some browsers in HTML4.
 - `'module'`: Causes the code to be treated as a JavaScript module.
 
-## `output.devtoolFallbackModuleFilenameTemplate`
+## `output.devtoolFallbackModuleFilenameTemplate` {#outputdevtoolfallbackmodulefilenametemplate}
 
 `string` `function (info)`
 
@@ -180,7 +180,7 @@ A fallback used when the template string or function above yields duplicates.
 See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate).
 
 
-## `output.devtoolModuleFilenameTemplate`
+## `output.devtoolModuleFilenameTemplate` {#outputdevtoolmodulefilenametemplate}
 
 `string = 'webpack://[namespace]/[resource-path]?[loaders]'` `function (info) => string`
 
@@ -228,7 +228,7 @@ module.exports = {
 If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#outputdevtoolfallbackmodulefilenametemplate) is used instead for these modules.
 
 
-## `output.devtoolNamespace`
+## `output.devtoolNamespace` {#outputdevtoolnamespace}
 
 `string`
 
@@ -237,7 +237,7 @@ This option determines the modules namespace used with the [`output.devtoolModul
 For example, if you have 2 libraries, with namespaces `library1` and `library2`, which both have a file `./src/index.js` (with potentially different contents), they will expose these files as `webpack://library1/./src/index.js` and `webpack://library2/./src/index.js`.
 
 
-## `output.filename`
+## `output.filename` {#outputfilename}
 
 `string` `function (pathData, assetInfo) => string`
 
@@ -344,7 +344,7 @@ Note this option is called filename but you are still allowed to use something l
 
 Note this option does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case you would have to try the specific loader's available options.
 
-## Template strings
+## Template strings {#template-strings}
 
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
@@ -368,11 +368,11 @@ If using a function for this option, the function will be passed an object conta
 
 T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
 
-## `output.assetModuleFilename`
+## `output.assetModuleFilename` {#outputassetmodulefilename}
 
 The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/)
 
-## `output.globalObject`
+## `output.globalObject` {#outputglobalobject}
 
 `string = 'window'`
 
@@ -394,7 +394,7 @@ module.exports = {
 };
 ```
 
-## `output.uniqueName`
+## `output.uniqueName` {#outputuniquename}
 
 `string`
 
@@ -417,21 +417,21 @@ module.exports = {
 ```
 
 
-## `output.hashDigest`
+## `output.hashDigest` {#outputhashdigest}
 
 `string = 'hex'`
 
 The encoding to use when generating the hash. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported. Using `'base64'` for filenames might be problematic since it has the character `/` in its alphabet. Likewise `'latin1'` could contain any character.
 
 
-## `output.hashDigestLength`
+## `output.hashDigestLength` {#outputhashdigestlength}
 
 `number = 20`
 
 The prefix length of the hash digest to use.
 
 
-## `output.hashFunction`
+## `output.hashFunction` {#outputhashfunction}
 
 `string = 'md4'` `function`
 
@@ -448,12 +448,12 @@ module.exports = {
 
 Make sure that the hashing function will have `update` and `digest` methods available.
 
-## `output.hashSalt`
+## `output.hashSalt` {#outputhashsalt}
 
 An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding).
 
 
-## `output.hotUpdateChunkFilename`
+## `output.hotUpdateChunkFilename` {#outputhotupdatechunkfilename}
 
 `string = '[id].[hash].hot-update.js'`
 
@@ -474,7 +474,7 @@ module.exports = {
 
 T> Typically you don't need to change `output.hotUpdateChunkFilename`.
 
-## `output.hotUpdateFunction`
+## `output.hotUpdateFunction` {#outputhotupdatefunction}
 
 `string`
 
@@ -485,7 +485,7 @@ A JSONP function used to asynchronously load hot-update chunks.
 For details see [`output.jsonpFunction`](#outputjsonpfunction).
 
 
-## `output.hotUpdateMainFilename`
+## `output.hotUpdateMainFilename` {#outputhotupdatemainfilename}
 
 `string = '[hash].hot-update.json'` `function`
 
@@ -493,7 +493,7 @@ Customize the main hot update filename. `[hash]` is the only available placehold
 
 T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
-## `output.jsonpFunction`
+## `output.jsonpFunction` {#outputjsonpfunction}
 
 `string = 'webpackJsonp'`
 
@@ -534,7 +534,7 @@ __example-on-demand-chunk.js__
 (window.wpJsonpFlightsWidget = window.wpJsonpFlightsWidget || []).push(/* ... */);
 ```
 
-## `output.library`
+## `output.library` {#outputlibrary}
 
 `string` `object`
 
@@ -559,7 +559,7 @@ W> Note that if an `array` is provided as an `entry` point, only the last module
 
 T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library` as well as `output.libraryTarget`.
 
-## ouput.scriptType
+## ouput.scriptType {#ouputscripttype}
 
 `string: 'module' | 'text/javascript'` `boolean = false`
 
@@ -576,7 +576,7 @@ module.exports = {
 };
 ```
 
-## `output.libraryExport`
+## `output.libraryExport` {#outputlibraryexport}
 
 `string` `[string]`
 
@@ -612,7 +612,7 @@ MySubModule.doSomething();
 ```
 
 
-## `output.libraryTarget`
+## `output.libraryTarget` {#outputlibrarytarget}
 
 `string = 'var'`
 
@@ -620,7 +620,7 @@ Configure how the library will be exposed. Any one of the following options can 
 
 T> Note that `_entry_return_` in the example code below is the value returned by the entry point. In the bundle itself, it is the output of the function that is generated by webpack from the entry point.
 
-### Expose a Variable
+### Expose a Variable {#expose-a-variable}
 
 These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by `output.library` at whatever scope the bundle was included at.
 
@@ -646,7 +646,7 @@ Be aware that if `MyLibrary` isn't defined earlier your library will be set in g
 W> When using this option, an empty `output.library` will result in a broken output bundle.
 
 
-### Expose Via Object Assignment
+### Expose Via Object Assignment {#expose-via-object-assignment}
 
 These options assign the return value of the entry point (e.g. whatever the entry point exported) to a specific object under the name defined by `output.library`.
 
@@ -694,7 +694,7 @@ exports['MyLibrary'] = _entry_return_;
 require('MyLibrary').doSomething();
 ```
 
-### Module Definition Systems
+### Module Definition Systems {#module-definition-systems}
 
 These options will result in a bundle that comes with a more complete header to ensure compatibility with various module systems. The `output.library` option will take on a different meaning under the following `output.libraryTarget` options.
 
@@ -890,7 +890,7 @@ __system_context__.import('./other-file.js').then(m => {
 });
 ```
 
-### Other Targets
+### Other Targets {#other-targets}
 
 `libraryTarget: 'jsonp'` - This will wrap the return value of your entry point into a jsonp wrapper.
 
@@ -901,7 +901,7 @@ MyLibrary(_entry_return_);
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
 
 
-## `output.importFunctionName`
+## `output.importFunctionName` {#outputimportfunctionname}
 
 `string = 'import'`
 
@@ -919,7 +919,7 @@ module.exports = {
 ```
 
 
-## `output.path`
+## `output.path` {#outputpath}
 
 `string = path.join(process.cwd(), 'dist')`
 
@@ -941,7 +941,7 @@ module.exports = {
 Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching/) for details.
 
 
-## `output.pathinfo`
+## `output.pathinfo` {#outputpathinfo}
 
 `boolean`
 
@@ -963,7 +963,7 @@ module.exports = {
 T> It also adds some info about tree shaking to the generated bundle.
 
 
-## `output.publicPath`
+## `output.publicPath` {#outputpublicpath}
 
 `string = ''` `function`
 
@@ -1049,7 +1049,7 @@ __webpack_public_path__ = myRuntimePublicPath;
 See [this discussion](https://github.com/webpack/webpack/issues/2776#issuecomment-233208623) for more information on `__webpack_public_path__`.
 
 
-## `output.sourceMapFilename`
+## `output.sourceMapFilename` {#outputsourcemapfilename}
 
 `string = '[file].map[query]'`
 
@@ -1063,7 +1063,7 @@ The `[name]`, `[id]`, `[hash]` and `[chunkhash]` substitutions from [`output.fil
 | [filebase]                 | The module [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) |
 
 
-## `output.sourcePrefix`
+## `output.sourcePrefix` {#outputsourceprefix}
 
 `string = ''`
 
@@ -1085,7 +1085,7 @@ T> Using some kind of indentation makes bundles look prettier, but will cause is
 T> Typically you don't need to change `output.sourcePrefix`.
 
 
-## `output.strictModuleExceptionHandling`
+## `output.strictModuleExceptionHandling` {#outputstrictmoduleexceptionhandling}
 
 `boolean = false`
 
@@ -1118,7 +1118,7 @@ require('module'); // <- also throws
 ```
 
 
-## `output.umdNamedDefine`
+## `output.umdNamedDefine` {#outputumdnameddefine}
 
 `boolean`
 
@@ -1133,7 +1133,7 @@ module.exports = {
 };
 ```
 
-## `output.enabledLibraryTypes`
+## `output.enabledLibraryTypes` {#outputenabledlibrarytypes}
 
 `[string]`
 
@@ -1148,7 +1148,7 @@ module.exports = {
 };
 ```
 
-## `output.futureEmitAssets`
+## `output.futureEmitAssets` {#outputfutureemitassets}
 
 `boolean = false`
 
@@ -1165,7 +1165,7 @@ module.exports = {
 };
 ```
 
-## `output.ecmaVersion`
+## `output.ecmaVersion` {#outputecmaversion}
 
 `number = 6`
 
@@ -1184,7 +1184,7 @@ module.exports = {
 
 T> The default value of `output.ecmaVersion` in webpack 4 is `5`.
 
-## `output.compareBeforeEmit`
+## `output.compareBeforeEmit` {#outputcomparebeforeemit}
 
 `boolean = true`
 
@@ -1201,7 +1201,7 @@ module.exports = {
 };
 ```
 
-## `output.iife`
+## `output.iife` {#outputiife}
 
 `boolean = true`
 
@@ -1216,7 +1216,7 @@ module.exports = {
 };
 ```
 
-## `output.module`
+## `output.module` {#outputmodule}
 
 `boolean = true`
 

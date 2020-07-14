@@ -28,7 +28,7 @@ In this guide, we'll dive into some of the best practices and utilities for buil
 T> This walkthrough stems from [Tree Shaking](/guides/tree-shaking) and [Development](/guides/development). Please ensure you are familiar with the concepts/setup introduced in those guides before continuing on.
 
 
-## Setup
+## Setup {#setup}
 
 The goals of _development_ and _production_ builds differ greatly. In _development_, we want strong source mapping and a localhost server with live reloading or hot module replacement. In _production_, our goals shift to a focus on minified bundles, lighter weight source maps, and optimized assets to improve load time. With this logical separation at hand, we typically recommend writing __separate webpack configurations__ for each environment.
 
@@ -112,7 +112,7 @@ In `webpack.common.js`, we now have setup our `entry` and `output` configuration
 Note the use of `merge()` calls in the environment-specific configurations to include our common configuration in `webpack.dev.js` and `webpack.prod.js`. The `webpack-merge` tool offers a variety of advanced features for merging but for our use case we won't need any of that.
 
 
-## NPM Scripts
+## NPM Scripts {#npm-scripts}
 
 Now, let's modify our npm scripts to use the new configuration files. For the `start` script, which runs `webpack-dev-server`, we will use `webpack.dev.js`, and for the `build` script, which runs `webpack` to create a production build, we will use `webpack.prod.js`:
 
@@ -152,7 +152,7 @@ __package.json__
 
 Feel free to run those scripts and see how the output changes as we continue adding to our _production_ configuration.
 
-## Specify the Mode
+## Specify the Mode {#specify-the-mode}
 
 Many libraries will key off the `process.env.NODE_ENV` variable to determine what should be included in the library. For example, when `process.env.NODE_ENV` is not set to `'production'` some libraries may add additional logging and testing to make debugging easier. However, with `process.env.NODE_ENV` set to `'production'` they might drop or add significant portions of code to optimize how things run for your actual users. Since webpack v4, specifying [`mode`](/configuration/mode/) automatically configures [`DefinePlugin`](/plugins/define-plugin) for you:
 
@@ -195,7 +195,7 @@ __src/index.js__
 ```
 
 
-## Minification
+## Minification {#minification}
 
 webpack v4+ will minify your code by default in [`production mode`](/configuration/mode/#mode-production).
 
@@ -207,7 +207,7 @@ Note that while the [`TerserPlugin`](/plugins/terser-webpack-plugin/) is a great
 If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
 
 
-## Source Mapping
+## Source Mapping {#source-mapping}
 
 We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that's recommended for production use (see [`devtool`](/configuration/devtool)). For this guide, we'll use the `source-map` option in the _production_ as opposed to the `inline-source-map` we used in the _development_:
 
@@ -226,12 +226,12 @@ __webpack.prod.js__
 T> Avoid `inline-***` and `eval-***` use in production as they can increase bundle size and reduce the overall performance.
 
 
-## Minimize CSS
+## Minimize CSS {#minimize-css}
 
 It is crucial to minimize your CSS for production. Please see the [Minimizing for Production](/plugins/mini-css-extract-plugin/#minimizing-for-production) section.
 
 
-## CLI Alternatives
+## CLI Alternatives {#cli-alternatives}
 
 Some of what has been described above can also be achieved by using the command line. For example, the `--optimize-minimize` flag will include the `TerserPlugin` behind the scenes. The `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above. And, `webpack -p` will automatically invoke both those flags and thus the plugins to be included.
 

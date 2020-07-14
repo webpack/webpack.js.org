@@ -14,7 +14,7 @@ T> This guide extends on code examples found in the [`Asset Management`](/guides
 
 So far we've manually included all our assets in our `index.html` file, but as your application grows and once you start [using hashes in filenames](/guides/caching) and outputting [multiple bundles](/guides/code-splitting), it will be difficult to keep managing your `index.html` file manually. However, a few plugins exist that will make this process much easier to manage.
 
-## Preparation
+## Preparation {#preparation}
 
 First, let's adjust our project a little bit:
 
@@ -121,7 +121,7 @@ We can see that webpack generates our `print.bundle.js` and `app.bundle.js` file
 But what would happen if we changed the name of one of our entry points, or even added a new one? The generated bundles would be renamed on a build, but our `index.html` file would still reference the old names. Let's fix that with the [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin).
 
 
-## Setting up HtmlWebpackPlugin
+## Setting up HtmlWebpackPlugin {#setting-up-htmlwebpackplugin}
 
 First install the plugin and adjust the `webpack.config.js` file:
 
@@ -170,7 +170,7 @@ If you want to learn more about all the features and options that the `HtmlWebpa
 You can also take a look at [`html-webpack-template`](https://github.com/jaketrent/html-webpack-template) which provides a couple of extra features in addition to the default template.
 
 
-## Cleaning up the `/dist` folder
+## Cleaning up the `/dist` folder {#cleaning-up-the-dist-folder}
 
 As you might have noticed over the past guides and code example, our `/dist` folder has become quite cluttered. Webpack will generate the files and put them in the `/dist` folder for you, but it doesn't keep track of which files are actually in use by your project.
 
@@ -210,7 +210,7 @@ __webpack.config.js__
 Now run an `npm run build` and inspect the `/dist` folder. If everything went well you should now only see the files generated from the build and no more old files!
 
 
-## The Manifest
+## The Manifest {#the-manifest}
 
 You might be wondering how webpack and its plugins seem to "know" what files are being generated. The answer is in the manifest that webpack keeps to track how all the modules map to the output bundles. If you're interested in managing webpack's [`output`](/configuration/output) in other ways, the manifest would be a good place to start.
 
@@ -219,6 +219,6 @@ The manifest data can be extracted into a json file for easy consumption using t
 We won't go through a full example of how to use this plugin within your projects, but you can read up on [the concept page](/concepts/manifest) and the [caching guide](/guides/caching) to find out how this ties into long term caching.
 
 
-## Conclusion
+## Conclusion {#conclusion}
 
 Now that you've learned about dynamically adding bundles to your HTML, let's dive into the [development guide](/guides/development). Or, if you want to dig into more advanced topics, we would recommend heading over to the [code splitting guide](/guides/code-splitting).

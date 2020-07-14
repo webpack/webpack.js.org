@@ -15,7 +15,7 @@ contributors:
 webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
 
 
-## TypeScript
+## TypeScript {#typescript}
 
 To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies, i.e., TypeScript and the relevant type definitions from the [DefinitelyTyped](https://definitelytyped.org/) project:
 
@@ -93,7 +93,7 @@ __package.json__
 W> We had been getting reports that `TS_NODE_PROJECT` might not work with `"TS_NODE_PROJECT" unrecognized command` error. Therefore running it with `cross-env` seems to fix the issue, for more info [see this issue](https://github.com/webpack/webpack.js.org/issues/2733).
 
 
-## CoffeeScript
+## CoffeeScript {#coffeescript}
 
 Similarly, to use [CoffeeScript](https://coffeescript.org/), you would first install the necessary dependencies:
 
@@ -130,7 +130,7 @@ module.exports = config
 ```
 
 
-## Babel and JSX
+## Babel and JSX {#babel-and-jsx}
 
 In the example below JSX (React JavaScript Markup) and Babel are used to create a JSON Configuration that webpack can understand.
 

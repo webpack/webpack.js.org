@@ -51,7 +51,7 @@ There are three general approaches to code splitting available:
 - Dynamic Imports: Split code via inline function calls within modules.
 
 
-## Entry Points
+## Entry Points {#entry-points}
 
 This is by far the easiest and most intuitive way to split code. However, it is more manual and has some pitfalls we will go over. Let's take a look at how we might split another module from the main bundle:
 
@@ -116,9 +116,9 @@ As mentioned there are some pitfalls to this approach:
 The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in both bundles. Let's remove this duplication by using the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/).
 
 
-## Prevent Duplication
+## Prevent Duplication {#prevent-duplication}
 
-### Entry dependencies
+### Entry dependencies {#entry-dependencies}
 
 The [`dependOn` option](/configuration/entry-context/#dependencies) allows to share the modules between the chunks
 
@@ -142,7 +142,7 @@ The [`dependOn` option](/configuration/entry-context/#dependencies) allows to sh
 ```
 
 
-### `SplitChunksPlugin`
+### `SplitChunksPlugin` {#splitchunksplugin}
 
 The [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
 
@@ -189,7 +189,7 @@ Here are some other useful plugins and loaders provided by the community for spl
 - [`mini-css-extract-plugin`](/plugins/mini-css-extract-plugin): Useful for splitting CSS out from the main application.
 
 
-## Dynamic Imports
+## Dynamic Imports {#dynamic-imports}
 
 Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and recommended approach is to use the [`import()` syntax](/api/module-methods/#import-1) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods/#requireensure). Let's try using the first of these two approaches...
 
@@ -310,7 +310,7 @@ __src/index.js__
 T> It is possible to provide a [dynamic expression](/api/module-methods/#dynamic-expressions-in-import) to `import()` when you might need to import specific module based on a computed variable later.
 
 
-## Prefetching/Preloading modules
+## Prefetching/Preloading modules {#prefetchingpreloading-modules}
 
 webpack 4.6.0+ adds support for prefetching and preloading.
 
@@ -355,7 +355,7 @@ When a page which uses the `ChartComponent` is requested, the charting-library-c
 T> Using webpackPreload incorrectly can actually hurt performance, so be careful when using it.
 
 
-## Bundle Analysis
+## Bundle Analysis {#bundle-analysis}
 
 Once you start splitting your code, it can be useful to analyze the output to check where modules have ended up. The [official analyze tool](https://github.com/webpack/analyse) is a good place to start. There are some other community-supported options out there as well:
 
@@ -365,6 +365,6 @@ Once you start splitting your code, it can be useful to analyze the output to ch
 - [webpack bundle optimize helper](https://webpack.jakoblind.no/optimize): This tool will analyze your bundle and give you actionable suggestions on what to improve to reduce your bundle size.
 - [bundle-stats](https://github.com/bundle-stats/bundle-stats): Generate a bundle report(bundle size, assets, modules) and compare the results between different builds.
 
-## Next Steps
+## Next Steps {#next-steps}
 
 See [Lazy Loading](/guides/lazy-loading/) for a more concrete example of how `import()` can be used in a real application and [Caching](/guides/caching/) to learn how to split code more effectively.

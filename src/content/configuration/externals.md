@@ -20,7 +20,7 @@ contributors:
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
 
 
-## `externals`
+## `externals` {#externals}
 
 `string` `[string]` `object` `function`  `RegExp`
 
@@ -67,7 +67,7 @@ The bundle with external dependencies can be used in various module contexts, su
 The following syntaxes are accepted...
 
 
-### string
+### string {#string}
 
 See the example above. The property name `jquery` indicates that the module `jquery` in `import $ from 'jquery'` should be excluded. In order to replace this module, the value `jQuery` will be used to retrieve a global `jQuery` variable. In other words, when a string is provided it will be treated as `root` (defined above and below).
 
@@ -96,7 +96,7 @@ will compile to something like:
 const fs = require('fs-extra');
 ```
 
-### [string]
+### [string] {#string}
 
 ```javascript
 module.exports = {
@@ -109,7 +109,7 @@ module.exports = {
 
 `subtract: ['./math', 'subtract']` allows you select part of a commonjs module, where `./math` is the module and your bundle only requires the subset under the `subtract` variable. This example would translate to `require('./math').subtract;`
 
-### object
+### object {#object}
 
 W> An object with `{ root, amd, commonjs, ... }` is only allowed for [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget). It's not allowed for other library targets.
 
@@ -143,7 +143,7 @@ module.exports = {
 This syntax is used to describe all the possible ways that an external library can be made available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
 
 
-### function
+### function {#function}
 
 `function (context, request, callback)`
 
@@ -241,7 +241,7 @@ module.exports = {
 };
 ```
 
-### RegExp
+### RegExp {#regexp}
 
 Every dependency that matches the given regular expression will be excluded from the output bundles.
 
@@ -256,7 +256,7 @@ module.exports = {
 
 In this case, any dependency named `jQuery`, capitalized or not, or `$` would be externalized.
 
-### Combining syntaxes
+### Combining syntaxes {#combining-syntaxes}
 
 Sometimes you may want to use a combination of the above syntaxes. This can be done in the following manner:
 
@@ -296,7 +296,7 @@ W> [Default type](/configuration/externals/#externalstype) will be used if you s
 For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
 
 
-## `externalsType`
+## `externalsType` {#externalstype}
 
 `string = 'var'`
 

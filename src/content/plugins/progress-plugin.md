@@ -14,11 +14,11 @@ object = { boolean activeModules = true, boolean entries = false, function (numb
 
 The `ProgressPlugin` provides a way to customize how progress is reported during a compilation.
 
-## Usage
+## Usage {#usage}
 
 Create an instance of `ProgressPlugin` and provide one of the allowed params.
 
-### Providing `function`
+### Providing `function` {#providing-function}
 
 Provide a handler function which will be called when hooks report progress. `handler` function arguments:
 
@@ -36,7 +36,7 @@ const handler = (percentage, message, ...args) => {
 new webpack.ProgressPlugin(handler);
 ```
 
-### Providing `object`
+### Providing `object` {#providing-object}
 
 When providing an `object` to the `ProgressPlugin`, following properties are supported:
 
@@ -66,7 +66,7 @@ new webpack.ProgressPlugin({
 });
 ```
 
-## Percentage calculation
+## Percentage calculation {#percentage-calculation}
 
 By default, progress percentage is calculated based on built modules count and total modules count: `built / total`
 
@@ -76,7 +76,7 @@ To solve this problem `ProgressPlugin` caches the last known total modules count
 
 > We recommend using `percentBy: 'entries'` setting for projects with [multiple configured entry points](/configuration/entry-context/#entry). Percentage calculation will become more accurate because the amount of entry points is known in advance.
 
-## Supported Hooks
+## Supported Hooks {#supported-hooks}
 
 The following hooks report progress information to `ProgressPlugin`.
 
@@ -143,6 +143,6 @@ __Compilation__
 - afterOptimizeAssets*
 - afterSeal*
 
-## Source
+## Source {#source}
 
 - [`ProgressPlugin` source](https://github.com/webpack/webpack/blob/master/lib/ProgressPlugin.js)

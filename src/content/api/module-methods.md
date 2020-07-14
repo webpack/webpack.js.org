@@ -24,12 +24,12 @@ This section covers all methods available in code compiled with webpack. When us
 W> While webpack supports multiple module syntaxes, we recommend following a single syntax for consistency and to avoid odd behaviors/bugs. Here's [one example](https://github.com/webpack/webpack.js.org/issues/552) of mixing ES6 and CommonJS, but there are surely others.
 
 
-## ES6 (Recommended)
+## ES6 (Recommended) {#es6-recommended}
 
 Version 2 of webpack supports ES6 module syntax natively, meaning you can use `import` and `export` without a tool like babel to handle this for you. Keep in mind that you will still probably need babel for other ES6+ features. The following methods are supported by webpack:
 
 
-### `import`
+### `import` {#import}
 
 Statically `import` the `export`s of another module.
 
@@ -41,7 +41,7 @@ import { NamedExport } from './other-module.js';
 W> The keyword here is __statically__. A normal `import` statement cannot be used dynamically within other logic or contain variables. See the [spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) for more information and `import()` below for dynamic usage.
 
 
-### `export`
+### `export` {#export}
 
 Export anything as a `default` or named export.
 
@@ -59,7 +59,7 @@ export default {
 ```
 
 
-### `import()`
+### `import()` {#import}
 
 `function(string path):Promise`
 
@@ -79,7 +79,7 @@ if ( module.hot ) {
 W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
 
-### Dynamic expressions in import()
+### Dynamic expressions in import() {#dynamic-expressions-in-import}
 
 It is not possible to use a fully dynamic import statement, such as `import(foo)`. Because `foo` could potentially be any path to any file in your system or project.
 
@@ -96,7 +96,7 @@ import(`./locale/${language}.json`).then(module => {
 
 T> Using the [`webpackInclude` and `webpackExclude`](/api/module-methods/#magic-comments) options allows you to add regex patterns that reduce the number of files that webpack will bundle for this import.
 
-#### Magic Comments
+#### Magic Comments {#magic-comments}
 
 Inline comments to make features work. By adding comments to the import, we can do things such as name our chunk or select different modes. For a full list of these magic comments see the code below followed by an explanation of what these comments do.
 
@@ -153,12 +153,12 @@ T> Note that `webpackInclude` and `webpackExclude` options do not interfere with
 `webpackExports`: tells webpack to only bundle the used exports of a module when using dynamic imports. It can decrease the output size of a chunk. Available since [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18).
 
 
-## CommonJS
+## CommonJS {#commonjs}
 
 The goal of CommonJS is to specify an ecosystem for JavaScript outside the browser. The following CommonJS methods are supported by webpack:
 
 
-### `require`
+### `require` {#require}
 
 ``` javascript
 require(dependency: String);
@@ -174,7 +174,7 @@ var myModule = require('my-module');
 W> Using it asynchronously may not have the expected effect.
 
 
-### `require.resolve`
+### `require.resolve` {#requireresolve}
 
 ``` javascript
 require.resolve(dependency: String);
@@ -187,7 +187,7 @@ W> Module ID's type can be a `number` or a `string` depending on the [`optimizat
 See [`module.id`](/api/module-variables/#moduleid-commonjs) for more information.
 
 
-### `require.cache`
+### `require.cache` {#requirecache}
 
 Multiple requires of the same module result in only one module execution and only one export. Therefore a cache in the runtime exists. Removing values from this cache causes new module execution and a new export.
 
@@ -211,7 +211,7 @@ require.cache[module.id] !== module;
 ```
 
 
-### `require.ensure`
+### `require.ensure` {#requireensure}
 
 W> `require.ensure()` is specific to webpack and superseded by `import()`.
 
@@ -253,12 +253,12 @@ W> Although the implementation of `require` is passed as an argument to the `cal
 
 
 
-## AMD
+## AMD {#amd}
 
 Asynchronous Module Definition (AMD) is a JavaScript specification that defines an interface for writing and loading modules. The following AMD methods are supported by webpack:
 
 
-### `define` (with factory)
+### `define` (with factory) {#define-with-factory}
 
 <!-- eslint-skip -->
 
@@ -284,7 +284,7 @@ define(['jquery', 'my-module'], function($, myModule) {
 W> This CANNOT be used in an asynchronous function.
 
 
-### `define` (with value)
+### `define` (with value) {#define-with-value}
 
 <!-- eslint-skip -->
 
@@ -303,7 +303,7 @@ define({
 W> This CANNOT be used in an async function.
 
 
-### `require` (amd-version)
+### `require` (amd-version) {#require-amd-version}
 
 <!-- eslint-skip -->
 
@@ -325,12 +325,12 @@ W> There is no option to provide a chunk name.
 
 
 
-## Labeled Modules
+## Labeled Modules {#labeled-modules}
 
 The internal `LabeledModulesPlugin` enables you to use the following methods for exporting and requiring within your modules:
 
 
-### `export` label
+### `export` label {#export-label}
 
 Export the given `value`. The label can occur before a function declaration or a variable declaration. The function name or variable name is the identifier under which the value is exported.
 
@@ -346,7 +346,7 @@ export: function method(value) {
 W> Using it in an async function may not have the expected effect.
 
 
-### `require` label
+### `require` label {#require-label}
 
 Make all exports from the dependency available in the current scope. The `require` label can occur before a string. The dependency must export values with the `export` label. CommonJS or AMD modules cannot be consumed.
 
@@ -371,12 +371,12 @@ method(...);
 
 
 
-## Webpack
+## Webpack {#webpack}
 
 Aside from the module syntaxes described above, webpack also allows a few custom, webpack-specific methods:
 
 
-### `require.context`
+### `require.context` {#requirecontext}
 
 <!-- eslint-skip -->
 
@@ -407,7 +407,7 @@ context('localeA').then(locale => {
 
 The full list of available modes and their behavior is described in [`import()`](#import-1) documentation.
 
-### `require.include`
+### `require.include` {#requireinclude}
 
 <!-- eslint-skip -->
 
@@ -432,7 +432,7 @@ This will result in the following output:
 Without `require.include('a')` it would be duplicated in both anonymous chunks.
 
 
-### `require.resolveWeak`
+### `require.resolveWeak` {#requireresolveweak}
 
 Similar to `require.resolve`, but this won't pull the `module` into the bundle. It's what is considered a "weak" dependency.
 

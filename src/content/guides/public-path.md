@@ -10,11 +10,11 @@ contributors:
 The `publicPath` configuration option can be quite useful in a variety of scenarios. It allows you to specify the base path for all the assets within your application.
 
 
-## Use Cases
+## Use Cases {#use-cases}
 
 There are a few use cases in real applications where this feature becomes especially neat. Essentially, every file emitted to your `output.path` directory will be referenced from the `output.publicPath` location. This includes child chunks (created via [code splitting](/guides/code-splitting/)) and any other assets (e.g. images, fonts, etc.) that are a part of your dependency graph.
 
-### Environment Based
+### Environment Based {#environment-based}
 
 In development for example, we might have an `assets/` folder that lives on the same level of our index page. This is fine, but what if we wanted to host all these static assets on a CDN in production?
 
@@ -40,7 +40,7 @@ export default {
 };
 ```
 
-### On The Fly
+### On The Fly {#on-the-fly}
 
 Another possible use case is to set the `publicPath` on the fly. webpack exposes a global variable called `__webpack_public_path__` that allows you to do that. So, in your application's entry point, you can simply do this:
 

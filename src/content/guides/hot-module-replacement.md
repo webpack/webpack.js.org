@@ -35,7 +35,7 @@ Hot Module Replacement (or HMR) is one of the most useful features offered by we
 W> __HMR__ is not intended for use in production, meaning it should only be used in development. See the [building for production guide](/guides/production) for more information.
 
 
-## Enabling HMR
+## Enabling HMR {#enabling-hmr}
 
 This feature is great for productivity. All we need to do is update our [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration, and use webpack's built-in HMR plugin. We'll also remove the entry point for `print.js` as it will now be consumed by the `index.js` module.
 
@@ -132,7 +132,7 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 ```
 
 
-## Via the Node.js API
+## Via the Node.js API {#via-the-nodejs-api}
 
 When using Webpack Dev Server with the Node.js API, don't put the dev server options on the webpack configuration object. Instead, pass them as a second parameter upon creation. For example:
 
@@ -165,7 +165,7 @@ server.listen(5000, 'localhost', () => {
 T> If you're [using `webpack-dev-middleware`](/guides/development/#using-webpack-dev-middleware), check out the [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) package to enable HMR on your custom dev server.
 
 
-## Gotchas
+## Gotchas {#gotchas}
 
 Hot Module Replacement can be tricky. To show this, let's go back to our working example. If you go ahead and click the button on the example page, you will realize the console is printing the old `printMe` function.
 
@@ -211,7 +211,7 @@ __index.js__
 This is just one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there (some of which are mentioned below) that will make hot module replacement much easier.
 
 
-## HMR with Stylesheets
+## HMR with Stylesheets {#hmr-with-stylesheets}
 
 Hot Module Replacement with CSS is actually fairly straightforward with the help of the `style-loader`. This loader uses `module.hot.accept` behind the scenes to patch `<style>` tags when CSS dependencies are updated.
 
@@ -332,7 +332,7 @@ __styles.css__
 ```
 
 
-## Other Code and Frameworks
+## Other Code and Frameworks {#other-code-and-frameworks}
 
 There are many other loaders and examples out in the community to make HMR interact smoothly with a variety of frameworks and libraries...
 

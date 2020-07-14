@@ -18,7 +18,7 @@ Prior to webpack, front-end developers would use tools like grunt and gulp to pr
 
 One of the coolest webpack features is that you can also _include any other type of file_, besides JavaScript, for which there is a loader. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) can be applied to everything used in building a website or web app. Let's start with CSS, as you may already be familiar with that setup.
 
-## Setup
+## Setup {#setup}
 
 Let's make a minor change to our project before we get started:
 
@@ -54,7 +54,7 @@ __webpack.config.js__
 ```
 
 
-## Loading CSS
+## Loading CSS {#loading-css}
 
 In order to `import` a CSS file from within a JavaScript module, you need to install and add the [style-loader](/loaders/style-loader) and [css-loader](/loaders/css-loader) to your [`module` configuration](/configuration/module):
 
@@ -152,7 +152,7 @@ Open up `index.html` in your browser again and you should see that `Hello webpac
 Note that you can, and in most cases should, [minimize css](/plugins/mini-css-extract-plugin/#minimizing-for-production) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
 
 
-## Loading Images
+## Loading Images {#loading-images}
 
 So now we're pulling in our CSS, but what about our images like backgrounds and icons? Using the [file-loader](/loaders/file-loader) we can easily incorporate those in our system as well:
 
@@ -264,7 +264,7 @@ If all went well, you should now see your icon as a repeating background, as wel
 T> A logical next step from here is minifying and optimizing your images. Check out the [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) and [url-loader](/loaders/url-loader) for more on how you can enhance your image loading process.
 
 
-## Loading Fonts
+## Loading Fonts {#loading-fonts}
 
 So what about other assets like fonts? The file and url loaders will take any file you load through them and output it to your build directory. This means we can use them for any kind of file, including fonts. Let's update our `webpack.config.js` to handle font files:
 
@@ -364,7 +364,7 @@ Entrypoint main = bundle.js
 Open up `index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes.
 
 
-## Loading Data
+## Loading Data {#loading-data}
 
 Another useful asset that can be loaded is data, like JSON files, CSVs, TSVs, and XML. Support for JSON is actually built-in, similar to NodeJS, meaning `import Data from './data.json'` will work by default. To import CSVs, TSVs, and XML you could use the [csv-loader](https://github.com/theplatapi/csv-loader) and [xml-loader](https://github.com/gisikw/xml-loader). Let's handle loading all three:
 
@@ -500,7 +500,7 @@ import { foo } from './data.json';
 ```
 
 
-## Global Assets
+## Global Assets {#global-assets}
 
 The coolest part of everything mentioned above, is that loading assets this way allows you to group modules and assets in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be useful:
 
@@ -519,7 +519,7 @@ This setup makes your code a lot more portable as everything that is closely cou
 However, let's say you're locked into your old ways or you have some assets that are shared between multiple components (views, templates, modules, etc.). It's still possible to store these assets in a base directory and even use [aliasing](/configuration/resolve/#resolvealias) to make them easier to `import`.
 
 
-## Wrapping up
+## Wrapping up {#wrapping-up}
 
 For the next guides we won't be using all the different assets we've used in this guide, so let's do some cleanup so we're prepared for the next piece of the guides [Output Management](https://webpack.js.org/guides/output-management/):
 
@@ -621,11 +621,11 @@ __src/index.js__
 ```
 
 
-## Next guide
+## Next guide {#next-guide}
 
 Let's move on to [Output Management](https://webpack.js.org/guides/output-management/)
 
 
-## Further Reading
+## Further Reading {#further-reading}
 
 - [Loading Fonts](https://survivejs.com/webpack/loading/fonts/) on SurviveJS

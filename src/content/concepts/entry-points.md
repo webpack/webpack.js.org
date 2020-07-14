@@ -13,7 +13,7 @@ contributors:
 As mentioned in [Getting Started](/guides/getting-started/#using-a-configuration), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you __can__ configure the `entry` property, in addition to explaining why it may be useful to you.
 
 
-## Single Entry (Shorthand) Syntax
+## Single Entry (Shorthand) Syntax {#single-entry-shorthand-syntax}
 
 Usage: `entry: string | [string]`
 
@@ -42,7 +42,7 @@ T> __What happens when you pass an array to `entry`?__ Passing an array of file 
 This is a great choice when you are looking to quickly setup a webpack configuration for an application or tool with one entry point (i.e. a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.
 
 
-## Object Syntax
+## Object Syntax {#object-syntax}
 
 Usage: `entry: { <entryChunkName> string | [string] }`
 
@@ -62,11 +62,11 @@ The object syntax is more verbose. However, this is the most scalable way of def
 T> __"Scalable webpack configurations"__ are ones that can be reused and combined with other partial configurations. This is a popular technique used to separate concerns by environment, build target, and runtime. They are then merged using specialized tools like [webpack-merge](https://github.com/survivejs/webpack-merge).
 
 
-## Scenarios
+## Scenarios {#scenarios}
 
 Below is a list of entry configurations and their real-world use cases:
 
-### Separate App and Vendor Entries
+### Separate App and Vendor Entries {#separate-app-and-vendor-entries}
 
 __webpack.config.js__
 
@@ -105,7 +105,7 @@ __Why?__ With this you can import required libraries or files that aren't modifi
 
 T> In webpack version < 4 it was common to add vendors as a separate entry point to compile it as a separate file (in combination with the `CommonsChunkPlugin`). <br><br> This is discouraged in webpack 4. Instead, the [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) option takes care of separating vendors and app modules and creating a separate file. __Do not__ create an entry for vendors or other stuff that is not the starting point of execution.
 
-### Multi Page Application
+### Multi Page Application {#multi-page-application}
 
 __webpack.config.js__
 

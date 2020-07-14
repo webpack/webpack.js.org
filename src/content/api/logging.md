@@ -27,7 +27,7 @@ By introducing webpack logging API we hope to unify the way webpack plugins and 
 
 W> __Avoid noise in the log!__ Keep in mind that multiple plugins and loaders are used together. Loaders are usually processing multiple files and are invoked for every file. Choose a logging level as low as possible to keep the log output informative.
 
-## Examples of how to get and use webpack logger in loaders and plugins
+## Examples of how to get and use webpack logger in loaders and plugins {#examples-of-how-to-get-and-use-webpack-logger-in-loaders-and-plugins}
 
 __my-webpack-plugin.js__
 
@@ -59,7 +59,7 @@ module.exports = function (source) {
 };
 ```
 
-## Logger methods
+## Logger methods {#logger-methods}
 
 - `logger.error(...)`: for error messages
 - `logger.warn(...)`: for warnings
@@ -74,7 +74,7 @@ module.exports = function (source) {
 - `logger.clear()`: to print a horizontal line. Displayed like `logger.log`
 - `logger.profile(...)`, `logger.profileEnd(...)`: to capture a profile. Delegated to `console.profile` when supported
 
-## Runtime Logger API
+## Runtime Logger API {#runtime-logger-api}
 
 Runtime logger API is only intended to be used as a development tool, it is not intended to be included in [production mode](/configuration/mode/#mode-production).
 

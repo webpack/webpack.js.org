@@ -5,7 +5,7 @@ contributors:
   - EugeneHlushko
 ---
 
-## Multiple file types per entry
+## Multiple file types per entry {#multiple-file-types-per-entry}
 
 It is possible to provide different types of files when using an array of values for [entry](/configuration/entry-context/#entry) to achieve separate bundles for CSS and JavaScript (and other) files in applications that are not using `import` for styles in JavaScript (pre Single Page Applications or different reasons).
 

@@ -16,7 +16,7 @@ The following Node.js options configure whether to polyfill or mock certain [Nod
 This feature is provided by webpack's internal [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js) plugin. If the target is "web" (default) or "webworker", the [`NodeSourcePlugin`](https://github.com/webpack/webpack/blob/master/lib/node/NodeSourcePlugin.js) plugin is also activated.
 
 
-## `node`
+## `node` {#node}
 
 `boolean = false` `object`
 
@@ -48,7 +48,7 @@ module.exports = {
 
 Since webpack 3.0.0, the `node` option may be set to `false` to completely turn off the `NodeStuffPlugin` and `NodeSourcePlugin` plugins.
 
-## `node.global`
+## `node.global` {#nodeglobal}
 
 `boolean = true`
 
@@ -57,7 +57,7 @@ Defaults to `false` for [targets](https://webpack.js.org/configuration/target/) 
 See [the source](https://nodejs.org/api/globals.html) for the exact behavior of this object.
 
 
-## `node.__filename`
+## `node.__filename` {#node__filename}
 
 `boolean` `string = mock`
 
@@ -70,7 +70,7 @@ Options:
 - `'mock'`: The fixed value `'index.js'`.
 
 
-## `node.__dirname`
+## `node.__dirname` {#node__dirname}
 
 `boolean` `string = mock`
 

@@ -14,14 +14,14 @@ contributors:
 
 webpack can compile for multiple environments or _targets_. To understand what a `target` is in detail, read through [the targets concept page](/concepts/targets/).
 
-## `target`
+## `target` {#target}
 
 `string` `function (compiler)`
 
 Instructs webpack to target a specific environment.
 
 
-### `string`
+### `string` {#string}
 
 The following string values are supported via [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js):
 
@@ -39,7 +39,7 @@ Option                | Description
 For example, when the `target` is set to `"electron-main"`, webpack includes multiple electron specific variables. For more information on which templates and externals are used, you can refer to webpack's [source code](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L148-L183).
 
 
-### `function`
+### `function` {#function}
 
 If a function is passed, then it will be called with the compiler as a parameter. Set `target` to a `function` if none of the predefined targets from the list above meet your needs.
 

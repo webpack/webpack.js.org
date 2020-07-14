@@ -30,7 +30,7 @@ T> The most important part to take away from this document is that there are man
 
 The examples below describe how webpack's configuration can be both expressive and configurable because _it is code_:
 
-## Simple Configuration
+## Simple Configuration {#simple-configuration}
 
 __webpack.config.js__
 
@@ -49,13 +49,13 @@ module.exports = {
 
 _See_: [Configuration section](/configuration/) for all supported configuration options
 
-## Multiple Targets
+## Multiple Targets {#multiple-targets}
 
 Along with exporting a single configuration as an object, [function](/configuration/configuration-types/#exporting-a-function) or [Promise](/configuration/configuration-types/#exporting-a-promise), you can export multiple configurations.
 
 _See_: [Exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations)
 
-## Using other Configuration Languages
+## Using other Configuration Languages {#using-other-configuration-languages}
 
 webpack accepts configuration files written in multiple programming and data languages.
 

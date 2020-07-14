@@ -43,7 +43,7 @@ module.exports = {
 };
 ```
 
-## Resource assets
+## Resource assets {#resource-assets}
 
 __webpack.config.js__
 
@@ -80,7 +80,7 @@ img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 
 All `.png` files will be emitted to the output directory and their paths will be injected into the bundles.
 
-### Custom output filename
+### Custom output filename {#custom-output-filename}
 
 By default, `asset/resource` modules are emitting with `[hash][ext]` filename into output directory.
 
@@ -150,7 +150,7 @@ With this configuration all the `html` files will be emitted into a `static` dir
 
 `Rule.generator.filename` is the same as [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) and works only with `asset` and `asset/resource` module types.
 
-## Inlining assets
+## Inlining assets {#inlining-assets}
 
 __webpack.config.js__
 
@@ -200,7 +200,7 @@ __src/index.js__
 
 All `.svg` files will be injected into the bundles as data URI.
 
-### Custom data URI generator
+### Custom data URI generator {#custom-data-uri-generator}
 
 By default, data URI emitted by webpack represents file contents encoded by using Base64 algorithm.
 
@@ -240,7 +240,7 @@ module.exports = {
 
 Now all `.svg` files will be encoded by `mini-svg-data-uri` package.
 
-## Source assets
+## Source assets {#source-assets}
 
 __webpack.config.js__
 
@@ -294,7 +294,7 @@ __src/index.js__
 
 All `.txt` files will be injected into the bundles as is.
 
-## General asset type
+## General asset type {#general-asset-type}
 
 __webpack.config.js__
 

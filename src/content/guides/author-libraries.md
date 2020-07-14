@@ -17,7 +17,7 @@ contributors:
 Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
 
 
-## Authoring a Library
+## Authoring a Library {#authoring-a-library}
 
 Let's assume that you are writing a small library ,`webpack-numbers`, that allows users to convert the numbers 1 through 5 from their numeric representation to a textual one and vice-versa, e.g. 2 to 'two'.
 
@@ -143,7 +143,7 @@ Note that we can also configure it to expose the library in the following ways:
 For full library configuration and code please refer to [webpack-library-example](https://github.com/kalcifer/webpack-library-example).
 
 
-## Base Configuration
+## Base Configuration {#base-configuration}
 
 Now let's bundle this library in a way that will achieve the following goals:
 
@@ -176,7 +176,7 @@ module.exports = {
 };
 ```
 
-## Base Configuration with source map
+## Base Configuration with source map {#base-configuration-with-source-map}
 
  Source maps is a useful debugging tool that allows you to view where the minified code originated from.
 
@@ -205,7 +205,7 @@ module.exports = [
 
 > To see code examples please refer to [webpack repository](https://github.com/webpack/webpack/tree/master/examples/source-map)
 
-## Externalize Lodash
+## Externalize Lodash {#externalize-lodash}
 
 Now, if you run `webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. In this case, we'd prefer to treat `lodash` as a `peerDependency`. Meaning that the consumer should already have `lodash` installed. Hence you would want to give up control of this external library to the consumer of your library.
 
@@ -238,7 +238,7 @@ This means that your library expects a dependency named `lodash` to be available
 T> Note that if you only plan on using your library as a dependency in another webpack bundle, you may specify `externals` as an array.
 
 
-## External Limitations
+## External Limitations {#external-limitations}
 
 For libraries that use several files from a dependency:
 
@@ -264,7 +264,7 @@ module.exports = {
 ```
 
 
-## Expose the Library
+## Expose the Library {#expose-the-library}
 
 For widespread use of the library, we would like it to be compatible in different environments, i.e. CommonJS, AMD, Node.js and as a global variable. To make your library available for consumption, add the `library` property inside `output`:
 
@@ -331,7 +331,7 @@ If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var
 W> With webpack 3.5.5, using `libraryTarget: { root:'_' }` doesn't work properly (as stated in [issue 4824](https://github.com/webpack/webpack/issues/4824)). However, you can set `libraryTarget: { var: '_' }` to expect the library as a global variable.
 
 
-### Final Steps
+### Final Steps {#final-steps}
 
 Optimize your output for production by following the steps mentioned in the [production guide](/guides/production). Let's also add the path to your generated bundle as the package's `main` field in with the `package.json`
 

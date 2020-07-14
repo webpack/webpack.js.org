@@ -22,7 +22,7 @@ When contributing to the core repo, writing a loader/plugin, or even just workin
 - Chrome __DevTools__ via `node-nightly` and the latest Node.js versions.
 
 
-## Stats
+## Stats {#stats}
 
 Whether you want to sift through [this data](/api/stats) manually or use a tool to process it, the `stats` data can be extremely useful when debugging build issues. We won't go in depth here as there's an [entire page](/api/stats) dedicated to its contents, but know that you can use it to find the following information:
 
@@ -36,7 +36,7 @@ Whether you want to sift through [this data](/api/stats) manually or use a tool 
 On top of that, the official [analyze tool](https://github.com/webpack/analyse) and [various others](/guides/code-splitting/#bundle-analysis) will accept this data and visualize it in various ways.
 
 
-## DevTools
+## DevTools {#devtools}
 
 While [`console`](https://nodejs.org/api/console.html) statements may work well in simpler scenarios, sometimes a more robust solution is needed. As most front-end developers already know, Chrome DevTools are a life saver when debugging web applications, _but they don’t have to stop there_. As of Node v6.3.0+, developers can use the built-in `--inspect` flag to debug a node program in DevTools.
 

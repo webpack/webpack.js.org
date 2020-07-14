@@ -14,7 +14,7 @@ Because JavaScript can be written for both server and browser, webpack offers mu
 
 W> The webpack `target` property is not to be confused with the `output.libraryTarget` property. For more information see [our guide](/concepts/output/) on the `output` property.
 
-## Usage
+## Usage {#usage}
 
 To set the `target` property, you simply set the target value in your webpack config:
 
@@ -32,7 +32,7 @@ Each _target_ has a variety of deployment/environment specific additions, suppor
 
 ?> Further expansion for other popular target values
 
-## Multiple Targets
+## Multiple Targets {#multiple-targets}
 
 Although webpack does __not__ support multiple strings being passed into the `target` property, you can create an isomorphic library by bundling two separate configurations:
 
@@ -63,7 +63,7 @@ module.exports = [ serverConfig, clientConfig ];
 
 The example above will create a `lib.js` and `lib.node.js` file in your `dist` folder.
 
-## Resources
+## Resources {#resources}
 
 As seen from the options above, there are multiple deployment _targets_ that you can choose from. Below is a list of examples and resources that you can refer to.
 

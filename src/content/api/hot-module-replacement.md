@@ -27,9 +27,9 @@ if (module.hot) {
 
 The following methods are supported...
 
-## Module API
+## Module API {#module-api}
 
-### `accept`
+### `accept` {#accept}
 
 Accept updates for the given `dependencies` and fire a `callback` to react to those updates.
 
@@ -44,7 +44,7 @@ When using ESM `import` all imported symbols from `dependencies` are automatical
 
 When using CommonJS you need to update dependencies manually by using `require()` in the `callback`. Omitting the `callback` doesn't make sense here.
 
-### `accept` (self)
+### `accept` (self) {#accept-self}
 
 Accept updates for itself.
 
@@ -58,7 +58,7 @@ When this module or dependencies are updated, this module can be disposed and re
 
 The `errorHandler` is fired when the evaluation of this module (or dependencies) has thrown an exception.
 
-### `decline`
+### `decline` {#decline}
 
 Reject updates for the given `dependencies` forcing the update to fail with a `'decline'` code.
 
@@ -70,7 +70,7 @@ module.hot.decline(
 
 Flag a dependency as not-update-able. This makes sense when changing exports of this dependency can be handled or handling is not implemented yet. Depending on your HMR management code, an update to these dependencies (or unaccepted dependencies of it) usually causes a full-reload of the page.
 
-### `decline` (self)
+### `decline` (self) {#decline-self}
 
 Reject updates for itself.
 
@@ -80,7 +80,7 @@ module.hot.decline();
 
 Flag this module as not-update-able. This makes sense when this module has irreversible side-effects, or HMR handling is not implemented for this module yet. Depending on your HMR management code, an update to this module (or unaccepted dependencies) usually causes a full-reload of the page.
 
-### `dispose` (or `addDisposeHandler`)
+### `dispose` (or `addDisposeHandler`) {#dispose-or-adddisposehandler}
 
 Add a handler which is executed when the current module code is replaced. This should be used to remove any persistent resource you have claimed or created. If you want to transfer state to the updated module, add it to the given `data` parameter. This object will be available at `module.hot.data` after the update.
 
@@ -91,7 +91,7 @@ module.hot.dispose(data => {
 ```
 
 
-### `invalidate`
+### `invalidate` {#invalidate}
 
 Calling this method will invalidate the current module, which disposes and recreates it when the HMR update is applied. This bubbles like a normal update of this module. `invalidate` can't be self-accepted by this module.
 
@@ -103,7 +103,7 @@ When called during the `check` state, this module will be added to the update wh
 
 When called during the `dispose` or `apply` state, HMR will pick it up after getting out of those states.
 
-### Use Cases
+### Use Cases {#use-cases}
 
 __Conditional Accepting__
 
@@ -164,7 +164,7 @@ T> When `invalidate` is called, the [`dispose`](#dispose-or-adddisposehandler) h
 
 W> Do not get caught in an `invalidate` loop, by calling `invalidate` again and again. This will result in stack overflow and HMR entering the `fail` state.
 
-### `removeDisposeHandler`
+### `removeDisposeHandler` {#removedisposehandler}
 
 Remove the handler added via `dispose` or `addDisposeHandler`.
 
@@ -172,9 +172,9 @@ Remove the handler added via `dispose` or `addDisposeHandler`.
 module.hot.removeDisposeHandler(callback);
 ```
 
-## Management API
+## Management API {#management-api}
 
-### `status`
+### `status` {#status}
 
 Retrieve the current status of the hot module replacement process.
 
@@ -194,7 +194,7 @@ module.hot.status(); // Will return one of the following strings...
 | fail        | An update has thrown an exception and the system's state has been compromised          |
 
 
-### `check`
+### `check` {#check}
 
 Test all loaded modules for updates and, if updates exist, `apply` them.
 
@@ -209,7 +209,7 @@ module.hot.check(autoApply).then(outdatedModules => {
 The `autoApply` parameter can either be a boolean or `options` to pass to the `apply` method when called.
 
 
-### `apply`
+### `apply` {#apply}
 
 Continue the update process (as long as `module.hot.status() === 'ready'`).
 
@@ -257,7 +257,7 @@ The `info` parameter will be an object containing some of the following values:
 ```
 
 
-### `addStatusHandler`
+### `addStatusHandler` {#addstatushandler}
 
 Register a function to listen for changes in `status`.
 
@@ -268,7 +268,7 @@ module.hot.addStatusHandler(status => {
 ```
 
 
-### `removeStatusHandler`
+### `removeStatusHandler` {#removestatushandler}
 
 Remove a registered status handler.
 

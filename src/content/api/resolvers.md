@@ -16,7 +16,7 @@ Before reading on, make sure to have a look at the
 [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) and [`tapable`](/api/plugins/#tapable) documentation.
 
 
-## Types
+## Types {#types}
 
 There are three types of built-in resolvers available on the `compiler` class:
 
@@ -41,7 +41,7 @@ See the [`enhanced-resolve` documentation](https://github.com/webpack/enhanced-r
 description.
 
 
-## Configuration Options
+## Configuration Options {#configuration-options}
 
 The resolvers mentioned above can also be customized via a configuration file
 with the [`resolve`](/configuration/resolve/) or [`resolveLoader`](/configuration/resolve/#resolveloader) options. These options allow

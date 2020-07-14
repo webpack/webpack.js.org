@@ -14,7 +14,7 @@ contributors:
 The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
 
 
-## `context`
+## `context` {#context}
 
 `string`
 
@@ -34,7 +34,7 @@ By default the current directory is used, but it's recommended to pass a value i
 ---
 
 
-## `entry`
+## `entry` {#entry}
 
 `string` `[string]` `object = { <key> string | [string] | object = { import string | [string], dependOn string | [string], filename string }}` `(function() => string | [string] | object = { <key> string | [string] } | object = { import string | [string], dependOn string | [string], filename string })`
 
@@ -56,11 +56,11 @@ module.exports = {
 ```
 
 
-### Naming
+### Naming {#naming}
 
 If a string or array of strings is passed, the chunk is named `main`. If an object is passed, each key is the name of a chunk, and the value describes the entry point for the chunk.
 
-### Entry descriptor
+### Entry descriptor {#entry-descriptor}
 
 If an object is passed the value might be a string, array of strings or a descriptor:
 
@@ -87,7 +87,7 @@ module.exports = {
 Descriptor syntax might be used to pass additional options to an entry point.
 
 
-### Output filename
+### Output filename {#output-filename}
 
 By default, the output filename for the entry chunk is extracted from [`output.filename`](/configuration/output/#outputfilename) but you can specify a custom output filename for a specific entry:
 
@@ -105,7 +105,7 @@ module.exports = {
 Descriptor syntax was used here to pass `filename`-option to the specific entry points.
 
 
-### Dependencies
+### Dependencies {#dependencies}
 
 By default, every entry chunk stores all the modules that it uses. With `dependOn`-option you can share the modules from one entry chunk to another:
 
@@ -133,7 +133,7 @@ module.exports = {
 };
 ```
 
-### Dynamic entry
+### Dynamic entry {#dynamic-entry}
 
 If a function is passed then it will be invoked on every [make](/api/compiler-hooks/#make) event.
 

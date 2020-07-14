@@ -20,7 +20,7 @@ T> This guide is a small follow-up to [Code Splitting](/guides/code-splitting). 
 Lazy, or "on demand", loading is a great way to optimize your site or application. This practice essentially involves splitting your code at logical breakpoints, and then loading it once the user has done something that requires, or will require, a new block of code. This speeds up the initial load of the application and lightens its overall weight as some blocks may never even be loaded.
 
 
-## Example
+## Example {#example}
 
 Let's take the example from [Code Splitting](/guides/code-splitting/#dynamic-imports) and tweak it a bit to demonstrate this concept even more. The code there does cause a separate chunk, `lodash.bundle.js`, to be generated and technically "lazy-loads" it as soon as the script is run. The trouble is that no user interaction is required to load the bundle -- meaning that every time the page is loaded, the request will fire. This doesn't help us too much and will impact performance negatively.
 
@@ -97,7 +97,7 @@ index.bundle.js     548 kB       1  [emitted]  [big]  index
 ```
 
 
-## Frameworks
+## Frameworks {#frameworks}
 
 Many frameworks and libraries have their own recommendations on how this should be accomplished within their methodologies. Here are a few examples:
 

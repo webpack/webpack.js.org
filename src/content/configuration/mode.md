@@ -15,7 +15,7 @@ Providing the `mode` configuration option tells webpack to use its built-in opti
 
 `string = 'production': 'none' | 'development' | 'production'`
 
-## Usage
+## Usage {#usage}
 
 Provide the `mode` option in the config:
 
@@ -45,7 +45,7 @@ If not set, webpack sets `production` as the default value for `mode`.
 T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 
 
-### Mode: development
+### Mode: development {#mode-development}
 
 
 ```diff
@@ -87,7 +87,7 @@ module.exports = {
 ```
 
 
-### Mode: production
+### Mode: production {#mode-production}
 
 
 ```diff
@@ -127,7 +127,7 @@ module.exports = {
 ```
 
 
-### Mode: none
+### Mode: none {#mode-none}
 
 
 ```diff

@@ -14,7 +14,7 @@ T> This guide stems from the [_Getting Started_](/guides/getting-started/) guide
 [TypeScript](https://www.typescriptlang.org) is a typed superset of JavaScript that compiles to plain JavaScript. In this guide we will learn how to integrate TypeScript with webpack.
 
 
-## Basic Setup
+## Basic Setup {#basic-setup}
 
 First install the TypeScript compiler and loader by running:
 
@@ -112,14 +112,14 @@ __./index.ts__
 
 T> To make imports do this by default and keep `import _ from 'lodash';` syntax in TypeScript, set `"allowSyntheticDefaultImports" : true` and `"esModuleInterop" : true` in your __tsconfig.json__ file. This is related to TypeScript configuration and mentioned in our guide only for your information.
 
-## Loader
+## Loader {#loader}
 
 [`ts-loader`](https://github.com/TypeStrong/ts-loader)
 
 We use `ts-loader` in this guide as it makes enabling additional webpack features, such as importing other web assets, a bit easier.
 
 
-## Source Maps
+## Source Maps {#source-maps}
 
 To learn more about source maps, see the [development guide](/guides/development).
 
@@ -173,7 +173,7 @@ __webpack.config.js__
 See the [devtool documentation](/configuration/devtool/) for more information.
 
 
-## Using Third Party Libraries
+## Using Third Party Libraries {#using-third-party-libraries}
 
 When installing third party libraries from npm, it is important to remember to install the typing definition for that library. These definitions can be found at [TypeSearch](https://microsoft.github.io/TypeSearch/).
 
@@ -186,7 +186,7 @@ npm install --save-dev @types/lodash
 For more information see [this blog post](https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/).
 
 
-## Importing Other Assets
+## Importing Other Assets {#importing-other-assets}
 
 To use non-code assets with TypeScript, we need to defer the type for these imports. This requires a `custom.d.ts` file which signifies custom definitions for TypeScript in our project. Let's set up a declaration for `.svg` files:
 
@@ -202,7 +202,7 @@ declare module "*.svg" {
 Here we declare a new module for SVGs by specifying any import that ends in `.svg` and defining the module's `content` as `any`. We could be more explicit about it being a url by defining the type as string. The same concept applies to other assets including CSS, SCSS, JSON and more.
 
 
-## Build Performance
+## Build Performance {#build-performance}
 
 W> This may degrade build performance.
 

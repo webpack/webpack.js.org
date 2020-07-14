@@ -21,7 +21,7 @@ This option controls if and how source maps are generated.
 Use the [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin) for a more fine grained configuration. See the [`source-map-loader`](/loaders/source-map-loader) to deal with existing source maps.
 
 
-## `devtool`
+## `devtool` {#devtool}
 
 `string` `false`
 
@@ -69,7 +69,7 @@ W> There are some issues with Source Maps in Chrome. [We need your help!](https:
 T> See [`output.sourceMapFilename`](/configuration/output/#outputsourcemapfilename) to customize the filenames of generated Source Maps.
 
 
-### Qualities
+### Qualities {#qualities}
 
 `bundled code` - You see all generated code as a big blob of code. You don't see modules separated from each other.
 
@@ -84,7 +84,7 @@ T> See [`output.sourceMapFilename`](/configuration/output/#outputsourcemapfilena
 `(lines only)` - Source Maps are simplified to a single mapping per line. This usually means a single mapping per statement (assuming you author it this way). This prevents you from debugging execution on statement level and from settings breakpoints on columns of a line. Combining with minimizing is not possible as minimizers usually only emit a single line.
 
 
-### Development
+### Development {#development}
 
 The following options are ideal for development:
 
@@ -96,7 +96,7 @@ The following options are ideal for development:
 
 `eval-cheap-module-source-map` - Similar to `eval-cheap-source-map`, however, in this case Source Maps from Loaders are processed for better results. However Loader Source Maps are simplified to a single mapping per line.
 
-### Special cases
+### Special cases {#special-cases}
 
 The following options are not ideal for development nor production. They are needed for some special cases, i. e. for some 3rd party tools.
 
@@ -111,7 +111,7 @@ The following options are not ideal for development nor production. They are nee
 `inline-cheap-module-source-map` - Similar to `cheap-module-source-map` but SourceMap is added as a DataUrl to the bundle.
 
 
-### Production
+### Production {#production}
 
 These options are typically used in production:
 

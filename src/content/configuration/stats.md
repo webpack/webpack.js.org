@@ -35,7 +35,7 @@ module.exports = {
 };
 ```
 
-## Stats Presets
+## Stats Presets {#stats-presets}
 
 webpack comes with certain presets available for the stats output:
 
@@ -50,13 +50,13 @@ webpack comes with certain presets available for the stats output:
 | `'verbose'`         | _none_      | Output everything                                              |
 | `'detailed'`        | _none_      | Output everything except `chunkModules` and `chunkRootModules` |
 
-## Stats Options
+## Stats Options {#stats-options}
 
 It is possible to specify which information you want to see in the stats output.
 
 T> All of the options in the stats configuration object are optional.
 
-### `stats.all`
+### `stats.all` {#statsall}
 
 A fallback value for stats options when an option is not defined. It has precedence over local webpack defaults.
 
@@ -69,7 +69,7 @@ module.exports = {
 };
 ```
 
-### `stats.assets`
+### `stats.assets` {#statsassets}
 
 `boolean = true`
 
@@ -84,7 +84,7 @@ module.exports = {
 };
 ```
 
-### `stats.assetsSort`
+### `stats.assetsSort` {#statsassetssort}
 
 `string = 'id'`
 
@@ -99,7 +99,7 @@ module.exports = {
 };
 ```
 
-### `stats.builtAt`
+### `stats.builtAt` {#statsbuiltat}
 
 `boolean = true`
 
@@ -114,7 +114,7 @@ module.exports = {
 };
 ```
 
-### `stats.moduleAssets`
+### `stats.moduleAssets` {#statsmoduleassets}
 
 `boolean = true`
 
@@ -129,7 +129,7 @@ module.exports = {
 };
 ```
 
-### `stats.cached`
+### `stats.cached` {#statscached}
 
 `boolean = true`
 
@@ -144,7 +144,7 @@ module.exports = {
 };
 ```
 
-### `stats.cachedAssets`
+### `stats.cachedAssets` {#statscachedassets}
 
 `boolean = true`
 
@@ -159,7 +159,7 @@ module.exports = {
 };
 ```
 
-### `stats.children`
+### `stats.children` {#statschildren}
 
 `boolean = true`
 
@@ -174,7 +174,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunks`
+### `stats.chunks` {#statschunks}
 
 `boolean = true`
 
@@ -189,7 +189,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunkGroups`
+### `stats.chunkGroups` {#statschunkgroups}
 
 `boolean = true`
 
@@ -204,7 +204,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunkModules`
+### `stats.chunkModules` {#statschunkmodules}
 
 `boolean = true`
 
@@ -219,7 +219,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunkRootModules`
+### `stats.chunkRootModules` {#statschunkrootmodules}
 
 `boolean = true`
 
@@ -234,7 +234,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunkOrigins`
+### `stats.chunkOrigins` {#statschunkorigins}
 
 `boolean = true`
 
@@ -249,7 +249,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunksSort`
+### `stats.chunksSort` {#statschunkssort}
 
 `string = 'id'`
 
@@ -264,7 +264,7 @@ module.exports = {
 };
 ```
 
-### `stats.context`
+### `stats.context` {#statscontext}
 
 `string = '../src/'`
 
@@ -279,7 +279,7 @@ module.exports = {
 };
 ```
 
-### `stats.colors`
+### `stats.colors` {#statscolors}
 
 `boolean = false` `object`
 
@@ -311,7 +311,7 @@ module.exports = {
 };
 ```
 
-### `stats.depth`
+### `stats.depth` {#statsdepth}
 
 `boolean = false`
 
@@ -326,7 +326,7 @@ module.exports = {
 };
 ```
 
-### `stats.entrypoints`
+### `stats.entrypoints` {#statsentrypoints}
 
 `boolean = true`
 
@@ -341,7 +341,7 @@ module.exports = {
 };
 ```
 
-### `stats.env`
+### `stats.env` {#statsenv}
 
 `boolean = false`
 
@@ -356,7 +356,7 @@ module.exports = {
 };
 ```
 
-### `stats.orphanModules`
+### `stats.orphanModules` {#statsorphanmodules}
 
 `boolean = false`
 
@@ -371,7 +371,7 @@ module.exports = {
 };
 ```
 
-### `stats.errors`
+### `stats.errors` {#statserrors}
 
 `boolean = true`
 
@@ -386,7 +386,7 @@ module.exports = {
 };
 ```
 
-### `stats.errorDetails`
+### `stats.errorDetails` {#statserrordetails}
 
 `boolean = true`
 
@@ -401,7 +401,7 @@ module.exports = {
 };
 ```
 
-### `stats.errorStack`
+### `stats.errorStack` {#statserrorstack}
 
 `boolean = true`
 
@@ -416,7 +416,7 @@ module.exports = {
 };
 ```
 
-### `stats.excludeAssets`
+### `stats.excludeAssets` {#statsexcludeassets}
 
 `array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean`
 
@@ -435,7 +435,7 @@ module.exports = {
 };
 ```
 
-### `stats.excludeModules`
+### `stats.excludeModules` {#statsexcludemodules}
 
 `array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean` `boolean: false`
 
@@ -465,11 +465,11 @@ module.exports = {
 };
 ```
 
-### `stats.exclude`
+### `stats.exclude` {#statsexclude}
 
 See [`stats.excludeModules`](#statsexcludemodules).
 
-### `stats.hash`
+### `stats.hash` {#statshash}
 
 `boolean = true`
 
@@ -484,7 +484,7 @@ module.exports = {
 };
 ```
 
-### `stats.logging`
+### `stats.logging` {#statslogging}
 
 `string = 'info': 'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose'` `boolean`
 
@@ -506,7 +506,7 @@ module.exports = {
 };
 ```
 
-### `stats.loggingDebug`
+### `stats.loggingDebug` {#statsloggingdebug}
 
 `array = []: string | RegExp | function (name) => boolean` `string` `RegExp` `function (name) => boolean`
 
@@ -526,7 +526,7 @@ module.exports = {
 };
 ```
 
-### `stats.loggingTrace`
+### `stats.loggingTrace` {#statsloggingtrace}
 
 `boolean = true`
 
@@ -542,7 +542,7 @@ module.exports = {
 };
 ```
 
-### `stats.maxModules`
+### `stats.maxModules` {#statsmaxmodules}
 
 `number = 15`
 
@@ -557,7 +557,7 @@ module.exports = {
 };
 ```
 
-### `stats.modules`
+### `stats.modules` {#statsmodules}
 
 `boolean = true`
 
@@ -572,7 +572,7 @@ module.exports = {
 };
 ```
 
-### `stats.modulesSort`
+### `stats.modulesSort` {#statsmodulessort}
 
 `string = 'id'`
 
@@ -587,7 +587,7 @@ module.exports = {
 };
 ```
 
-### `stats.moduleTrace`
+### `stats.moduleTrace` {#statsmoduletrace}
 
 `boolean = true`
 
@@ -602,7 +602,7 @@ module.exports = {
 };
 ```
 
-### `stats.outputPath`
+### `stats.outputPath` {#statsoutputpath}
 
 `boolean = true`
 
@@ -617,7 +617,7 @@ module.exports = {
 };
 ```
 
-### `stats.performance`
+### `stats.performance` {#statsperformance}
 
 `boolean = true`
 
@@ -632,7 +632,7 @@ module.exports = {
 };
 ```
 
-### `stats.preset`
+### `stats.preset` {#statspreset}
 
 `string` `boolean: false`
 
@@ -649,7 +649,7 @@ module.exports = {
 
 Setting value of `stats.preset` to `false` tells webpack to use `'none'` [stats preset](/configuration/stats/#stats-presets).
 
-### `stats.providedExports`
+### `stats.providedExports` {#statsprovidedexports}
 
 `boolean = false`
 
@@ -664,7 +664,7 @@ module.exports = {
 };
 ```
 
-### `stats.publicPath`
+### `stats.publicPath` {#statspublicpath}
 
 `boolean = true`
 
@@ -679,7 +679,7 @@ module.exports = {
 };
 ```
 
-### `stats.reasons`
+### `stats.reasons` {#statsreasons}
 
 `boolean = true`
 
@@ -694,7 +694,7 @@ module.exports = {
 };
 ```
 
-### `stats.source`
+### `stats.source` {#statssource}
 
 `boolean = false`
 
@@ -709,7 +709,7 @@ module.exports = {
 };
 ```
 
-### `stats.timings`
+### `stats.timings` {#statstimings}
 
 `boolean = true`
 
@@ -724,7 +724,7 @@ module.exports = {
 };
 ```
 
-### `stats.usedExports`
+### `stats.usedExports` {#statsusedexports}
 
 `boolean = false`
 
@@ -739,7 +739,7 @@ module.exports = {
 };
 ```
 
-### `stats.version`
+### `stats.version` {#statsversion}
 
 `boolean = true`
 
@@ -754,7 +754,7 @@ module.exports = {
 };
 ```
 
-### `stats.warnings`
+### `stats.warnings` {#statswarnings}
 
 `boolean = true`
 
@@ -769,7 +769,7 @@ module.exports = {
 };
 ```
 
-### `stats.warningsFilter`
+### `stats.warningsFilter` {#statswarningsfilter}
 
 `array = []: string | RegExp | function (warning) => boolean` `string` `RegExp` `function (warning) => boolean`
 
@@ -788,13 +788,13 @@ module.exports = {
 };
 ```
 
-### `stats.chunkRelations`
+### `stats.chunkRelations` {#statschunkrelations}
 
 `boolean = false`
 
 Tells `stats` to display chunk parents, children and siblings.
 
-### Sorting fields
+### Sorting fields {#sorting-fields}
 
 For `assetsSort`, `chunksSort` and `modulesSort` there are several possible fields that you can sort items by:
 
@@ -818,7 +818,7 @@ For `assetsSort`, `chunksSort` and `modulesSort` there are several possible fiel
 - `'issuerName'` - a name of the issuer;
 - `'issuerPath'` - a full issuer object. There's no real need to sort by this field;
 
-### Extending stats behaviours
+### Extending stats behaviours {#extending-stats-behaviours}
 
 If you want to use one of the pre-defined behaviours e.g. `'minimal'` but still override one or more of the rules: specify the desired `stats.preset` and add the customized or additional rules afterwards.
 
