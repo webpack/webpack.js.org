@@ -140,6 +140,49 @@ Each page of a Single Page Application is exposed from container build in a sepa
 
 Many applications share a common components library which could be built as a container with each component exposed. Each application consumes components from the components library container. Changes to the components library can be separately deployed without the need to re-deploy all applications. The application automatically uses the up-to-date version of the components library.
 
+## Dynamic Remote Containers
+
+The container interface supports `get` and `init` methods.
+`init` is a `async` compatible method that is called with one argument: the shared scope object. This object is used as a shared scope in the remote container and is filled with the provided modules from a host.
+It can be leveraged to connect remote containers to a host container dynamically at runtime
+
+```js
+(async () =>{
+  // Initializes the share scope. This fills it with known provided modules from this build and all remotes
+  await __webpack_initialize_sharing__('default');
+  const container = window.someContainer; // or get the container somewhere else
+  // Initialize the container, it may provide shared modules
+  await container.init(__webpack_share_scopes__.default);
+  const module = await container.get('./module');
+})();
+```
+
+The container tries to provide shared modules, but if the shared module has already been used, a warning and the provided shared module will be ignored. The container might still use it as a fallback.
+
+ This way you could dynamically load an A/B test which provides different version of a shared module.
+T > Ensure you have loaded the container.js file before attempting to dynamically connect a remote container
+
+Example:
+
+```js
+function loadComponent(scope, module) {
+  return async () => {
+    // Initializes the share scope. This fills it with known provided modules from this build and all remotes
+    await __webpack_init_sharing__('default');
+    const container = window[scope]; // or get the container somewhere else
+    // Initialize the container, it may provide shared modules
+    await container.init(__webpack_share_scopes__.default);
+    const factory = await window[scope].get(module);
+    const Module = factory();
+    return Module;
+  };
+}
+
+loadComponent('abtests','test123');
+```
+
+[See full implementation](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)
+
 ## Troubleshooting
 
 __`Uncaught Error: Shared module is not available for eager consumption`__
