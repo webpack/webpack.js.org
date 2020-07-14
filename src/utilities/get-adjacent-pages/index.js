@@ -1,6 +1,5 @@
 module.exports = function getAdjacentPages(haystack, needle, by = 'url') {
-  let previous = undefined,
-    next = undefined;
+  let previous, next;
   const findMe = haystack.findIndex(page => page[by] === needle[by]);
   if (findMe !== -1) {
     previous = haystack[findMe - 1];
