@@ -13,6 +13,6 @@ new webpack.WatchIgnorePlugin(paths);
 ```
 
 
-## Options
+## Options {#options}
 
 - `paths` (`[string, RegExp]`): A list of RegExps or absolute paths to directories or files that should be ignored

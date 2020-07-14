@@ -27,9 +27,13 @@ if (module.hot) {
 
 支持以下方法……
 
+<<<<<<< HEAD
 ## 模块 API
+=======
+## Module API {#module-api}
+>>>>>>> en-master
 
-### `accept`
+### `accept` {#accept}
 
 接受(accept)给定 `依赖模块(dependencies)` 的更新，并触发一个 `回调函数` 来响应更新。
 
@@ -44,7 +48,11 @@ module.hot.accept(
 
 在使用 CommonJS 时，你应该通过 `callback` 中的 `require()` 手动更新依赖模块。省略 `callback` 在这里没有任何意义。
 
+<<<<<<< HEAD
 ### `accept` (自身)
+=======
+### `accept` (self) {#accept-self}
+>>>>>>> en-master
 
 接受自身更新。
 
@@ -58,7 +66,7 @@ module.hot.accept(
 
 当执行此模块（或依赖模块）抛出异常时，会触发 `errorHandler`。
 
-### `decline`
+### `decline` {#decline}
 
 拒绝给定`依赖模块`的更新，使用 `'decline'` 方法强制更新失败。
 
@@ -70,7 +78,11 @@ module.hot.decline(
 
 将依赖模块标记为不可更新(not-update-able)。在处理「依赖的导出正在更新」或「尚未实现处理」时，这是有意义的。取决于你的 HMR 管理代码，此依赖模块（或其未接受的依赖模块）更新，通常会导致页面被完全重新加载。
 
+<<<<<<< HEAD
 ### `decline` (自身)
+=======
+### `decline` (self) {#decline-self}
+>>>>>>> en-master
 
 拒绝自身更新。
 
@@ -80,7 +92,7 @@ module.hot.decline();
 
 将依赖模块标记为不可更新(not-update-able)。当此模块具有无法避免的外部作用(side-effect)，或者尚未对此模块进行 HMR 处理时，这是有意义的。取决于你的 HMR 管理代码，此依赖模块（或其未接受的依赖模块）更新，通常会导致页面被完全重新加载。
 
-### `dispose` (or `addDisposeHandler`)
+### `dispose` (or `addDisposeHandler`) {#dispose-or-adddisposehandler}
 
 添加一个处理函数，在当前模块代码被替换时执行。此函数应该用于移除你声明或创建的任何持久资源。如果要将状态传入到更新过的模块，请添加给定 `data` 参数。更新后，此对象在更新之后可通过 `module.hot.data` 调用。
 
@@ -91,7 +103,7 @@ module.hot.dispose(data => {
 ```
 
 
-### `invalidate`
+### `invalidate` {#invalidate}
 
 调用此方法将使当前模块无效，而当前模块将在应用 HMR 更新时进行部署并重新创建。这个模块的更新像冒泡一样，拒绝自身更新。
 
@@ -103,8 +115,12 @@ module.hot.dispose(data => {
 
 在 `dispose` 或 `apply` 状态下调用时，HMR 将在退出这些状态后将其拾取。
 
+<<<<<<< HEAD
 
 ### 用例
+=======
+### Use Cases {#use-cases}
+>>>>>>> en-master
 
 __Conditional Accepting__
 
@@ -165,7 +181,7 @@ T> 当调用 `invalidate` 时，将最终调用 [`dispose`](#dispose-or-adddispo
 
 W> 通过一次次的调用 `invalidate`，不要陷入 `invalidate` 循环。这将导致栈溢出并且 HMR 进入 `fail` 状态。
 
-### `removeDisposeHandler`
+### `removeDisposeHandler` {#removedisposehandler}
 
 删除由 `dispose` 或 `addDisposeHandler` 添加的回调函数。
 
@@ -173,9 +189,13 @@ W> 通过一次次的调用 `invalidate`，不要陷入 `invalidate` 循环。�
 module.hot.removeDisposeHandler(callback);
 ```
 
+<<<<<<< HEAD
 ## API 管理
+=======
+## Management API {#management-api}
+>>>>>>> en-master
 
-### `status`
+### `status` {#status}
 
 获取当前模块热替换进程的状态。
 
@@ -195,7 +215,7 @@ module.hot.status(); // 返回以下字符串之一...
 | fail        | 更新已抛出异常，系统状态已被破坏 |
 
 
-### `check`
+### `check` {#check}
 
 测试所有加载的模块以进行更新，如果有更新，则 `apply` 它们。
 
@@ -210,7 +230,7 @@ module.hot.check(autoApply).then(outdatedModules => {
 当被调用时，传递给 `apply` 方法的 `autoApply` 参数可以是布尔值，也可以是 `options`，
 
 
-### `apply`
+### `apply` {#apply}
 
 继续更新进程（当 `module.hot.status() === 'ready'` 时）。
 
@@ -258,7 +278,7 @@ module.hot.apply(options).then(outdatedModules => {
 ```
 
 
-### `addStatusHandler`
+### `addStatusHandler` {#addstatushandler}
 
 注册一个函数来监听 `status` 的变化。
 
@@ -269,7 +289,7 @@ module.hot.addStatusHandler(status => {
 ```
 
 
-### `removeStatusHandler`
+### `removeStatusHandler` {#removestatushandler}
 
 移除一个注册的状态处理函数。
 

@@ -14,12 +14,20 @@ contributors:
 
 ---
 
+<<<<<<< HEAD
 ## 通用环境
+=======
+## General {#general}
+>>>>>>> en-master
 
 无论你是在 [开发环境](/guides/development) 还是在 [生产环境](/guides/production) 下运行构建脚本，以下最佳实践都会有所帮助。
 
 
+<<<<<<< HEAD
 ### 更新到最新版本
+=======
+### Stay Up to Date {#stay-up-to-date}
+>>>>>>> en-master
 
 使用最新的 webpack 版本。我们会经常进行性能优化。webpack 的最新稳定版本是：
 
@@ -28,7 +36,11 @@ contributors:
 将 __Node.js__ 更新到最新版本，也有助于提高性能。除此之外，将你的 package 管理工具（例如 `npm` 或者 `yarn`）更新到最新版本，也有助于提高性能。较新的版本能够建立更高效的模块树以及提高解析速度。
 
 
+<<<<<<< HEAD
 ### loader
+=======
+### Loaders {#loaders}
+>>>>>>> en-master
 
 将 loader 应用于最少数量的必要模块。而非如下:
 
@@ -66,12 +78,20 @@ module.exports = {
 ```
 
 
+<<<<<<< HEAD
 ### 引导(bootstrap)
+=======
+### Bootstrap {#bootstrap}
+>>>>>>> en-master
 
 每个额外的 loader/plugin 都有其启动时间。尽量少地使用工具。
 
 
+<<<<<<< HEAD
 ### 解析
+=======
+### Resolving {#resolving}
+>>>>>>> en-master
 
 以下步骤可以提高解析速度：
 
@@ -80,12 +100,20 @@ module.exports = {
 - 如果你使用自定义 resolve plugin 规则，并且没有指定 context 上下文，可以设置 `resolve.cacheWithContext: false`。
 
 
+<<<<<<< HEAD
 ### dll
+=======
+### Dlls {#dlls}
+>>>>>>> en-master
 
 使用 `DllPlugin` 为更改不频繁的代码生成单独的编译结果。这可以提高应用程序的编译速度，尽管它增加了构建过程的复杂度。
 
 
+<<<<<<< HEAD
 ### 小即是快(smaller = faster)
+=======
+### Smaller = Faster {#smaller--faster}
+>>>>>>> en-master
 
 减少编译结果的整体大小，以提高构建性能。尽量保持 chunk 体积小。
 
@@ -96,44 +124,68 @@ module.exports = {
 - 只编译你当前正在开发的那些代码。
 
 
+<<<<<<< HEAD
 ### worker 池(worker pool)
+=======
+### Worker Pool {#worker-pool}
+>>>>>>> en-master
 
 `thread-loader` 可以将非常消耗资源的 loader 分流给一个 worker pool。
 
 W> 不要使用太多的 worker，因为 Node.js 的 runtime 和 loader 都有启动开销。最小化 worker 和 main process(主进程) 之间的模块传输。进程间通讯(IPC, inter process communication)是非常消耗资源的。
 
 
+<<<<<<< HEAD
 ### 持久化缓存
+=======
+### Persistent cache {#persistent-cache}
+>>>>>>> en-master
 
 使用 `cache-loader` 启用持久化缓存。使用 `package.json` 中的 `"postinstall"` 清除缓存目录。
 
 
 T> 我们支持 yarn PnP v3 [`yarn 2 berry`](https://next.yarnpkg.com/features/pnp)，来进行持久缓存
 
+<<<<<<< HEAD
 ### 自定义 plugin/loader
+=======
+### Custom plugins/loaders {#custom-pluginsloaders}
+>>>>>>> en-master
 
 Profile them to not introduce a performance problem here.
 
-### Progress plugin
+### Progress plugin {#progress-plugin}
 
 It is possible to shorten build times by removing `ProgressPlugin` from webpack's configuration. Keep in mind, `ProgressPlugin` might not provide as much value for fast builds as well, so make sure you are leveraging the benefits of using it.
 
 ---
 
 
+<<<<<<< HEAD
 ## 开发环境
+=======
+## Development {#development}
+>>>>>>> en-master
 
 以下步骤对于_开发环境_特别有帮助。
 
 
+<<<<<<< HEAD
 ### 增量编译
+=======
+### Incremental Builds {#incremental-builds}
+>>>>>>> en-master
 
 使用 webpack 的 watch mode(监听模式)。而不使用其他工具来 watch 文件和调用 webpack 。内置的 watch mode 会记录时间戳并将此信息传递给 compilation 以使缓存失效。
 
 在某些配置环境中，watch mode 会回退到 poll mode(轮询模式)。监听许多文件会导致 CPU 大量负载。在这些情况下，可以使用 `watchOptions.poll` 来增加轮询的间隔时间。
 
 
+<<<<<<< HEAD
 ### 在内存中编译
+=======
+### Compile in Memory {#compile-in-memory}
+>>>>>>> en-master
 
 下面几个工具通过在内存中（而不是写入磁盘）编译和 serve 资源来提高性能：
 
@@ -141,11 +193,19 @@ It is possible to shorten build times by removing `ProgressPlugin` from webpack'
 - `webpack-hot-middleware`
 - `webpack-dev-middleware`
 
+<<<<<<< HEAD
 ### stats.toJson 加速
+=======
+### stats.toJson speed {#statstojson-speed}
+>>>>>>> en-master
 
 webpack 4 默认使用 `stats.toJson()` 输出大量数据。除非在增量步骤中做必要的统计，否则请避免获取 `stats` 对象的部分内容。`webpack-dev-server` 在 v3.1.3 以后的版本，包含一个重要的性能修复，即最小化每个增量构建步骤中，从 `stats` 对象获取的数据量。
 
+<<<<<<< HEAD
 ### devtool
+=======
+### Devtool {#devtool}
+>>>>>>> en-master
 
 需要注意的是不同的 `devtool` 设置，会导致性能差异。
 
@@ -156,7 +216,11 @@ webpack 4 默认使用 `stats.toJson()` 输出大量数据。除非在增量步�
 => 在大多数情况下，最佳选择是 `eval-cheap-module-source-map`。
 
 
+<<<<<<< HEAD
 ### 避免在生产环境下才会用到的工具
+=======
+### Avoid Production Specific Tooling {#avoid-production-specific-tooling}
+>>>>>>> en-master
 
 某些 utility, plugin 和 loader 都只用于生产环境。例如，在开发环境下使用 `TerserPlugin` 来 minify(压缩) 和 mangle(混淆破坏) 代码是没有意义的。通常在开发环境下，应该排除以下这些工具：
 
@@ -168,7 +232,11 @@ webpack 4 默认使用 `stats.toJson()` 输出大量数据。除非在增量步�
 - `ModuleConcatenationPlugin`
 
 
+<<<<<<< HEAD
 ### 最小化 entry chunk
+=======
+### Minimal Entry Chunk {#minimal-entry-chunk}
+>>>>>>> en-master
 
 webpack 只会在文件系统中输出已经更新的 chunk。某些配置选项（HMR, `output.chunkFilename` 的 `[name]`/`[chunkhash]`, `[hash]`）来说，除了对已经更新的 chunk 无效之外，对于 entry chunk 也不会生效。
 
@@ -181,7 +249,11 @@ new CommonsChunkPlugin({
 });
 ```
 
+<<<<<<< HEAD
 ### 避免额外的优化步骤
+=======
+### Avoid Extra Optimization Steps {#avoid-extra-optimization-steps}
+>>>>>>> en-master
 
 webpack 通过执行额外的算法任务，来优化输出结果的体积和加载性能。这些优化适用于小型代码库，但是在大型代码库中却非常耗费性能：
 
@@ -196,7 +268,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### 输出结果不携带路径信息
+=======
+### Output Without Path Info {#output-without-path-info}
+>>>>>>> en-master
 
 webpack 会在输出的 bundle 中生成路径信息。然而，在打包数千个模块的项目中，这会导致造成垃圾回收性能压力。在 `options.output.pathinfo` 设置中关闭：
 
@@ -209,7 +285,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### Node.js 版本 8.9.10-9.11.1
+=======
+### Node.js Versions 8.9.10-9.11.1 {#nodejs-versions-8910-9111}
+>>>>>>> en-master
 
 
  Node.js v8.9.10 - v9.11.1 中的 ES2015 `Map` 和 `Set` 实现，存在 [性能回退](https://github.com/nodejs/node/issues/19769)。webpack 大量地使用这些数据结构，因此这次回退也会影响编译时间。
@@ -217,7 +297,11 @@ module.exports = {
 之前和之后的 Node.js 版本不受影响。
 
 
+<<<<<<< HEAD
 ### TypeScript loader
+=======
+### TypeScript Loader {#typescript-loader}
+>>>>>>> en-master
 
 现在，`ts-loader` 已经开始使用 TypeScript 内置 watch mode API，可以明显减少每次迭代时重新构建的模块数量。`experimentalWatchApi` 与普通 TypeScript watch mode 共享同样的逻辑，并且在开发环境使用时非常稳定。此外开启 `transpileOnly`，用于真正快速增量构建。
 
@@ -246,14 +330,22 @@ ts-loader 的 github 仓库中有一个 [完整示例](https://github.com/TypeSt
 ---
 
 
+<<<<<<< HEAD
 ## 生产环境
+=======
+## Production {#production}
+>>>>>>> en-master
 
 以下步骤对于_生产环境_特别有帮助。
 
 W> __不要为了很小的性能收益，牺牲应用程序的质量！__注意，在大多数情况下，优化代码质量比构建性能更重要。
 
 
+<<<<<<< HEAD
 ### 多个 compilation 对象
+=======
+### Multiple Compilations {#multiple-compilations}
+>>>>>>> en-master
 
 在创建多个 compilation 时，以下工具可以帮助到你：
 
@@ -261,30 +353,38 @@ W> __不要为了很小的性能收益，牺牲应用程序的质量！__注意�
 - `cache-loader`：可以在多个 compilation 之间共享缓存。
 
 
+<<<<<<< HEAD
 ### source map
+=======
+### Source Maps {#source-maps}
+>>>>>>> en-master
 
 source map 相当消耗资源。你真的需要它们？
 
 ---
 
 
+<<<<<<< HEAD
 ## 工具相关问题
+=======
+## Specific Tooling Issues {#specific-tooling-issues}
+>>>>>>> en-master
 
 下列工具存在某些可能会降低构建性能的问题：
 
 
-### Babel
+### Babel {#babel}
 
 - 最小化项目中的 preset/plugin 数量。
 
 
-### TypeScript
+### TypeScript {#typescript}
 
 - 在单独的进程中使用 `fork-ts-checker-webpack-plugin` 进行类型检查。
 - 配置 loader 跳过类型检查。
 - 使用 `ts-loader` 时，设置 `happyPackMode: true` / `transpileOnly: true`。
 
 
-### Sass
+### Sass {#sass}
 
 - `node-sass` 中有个来自 Node.js 线程池的阻塞线程的 bug。 当使用 `thread-loader` 时，需要设置 `workerParallelJobs: 2`。

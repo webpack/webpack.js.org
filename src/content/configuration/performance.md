@@ -12,14 +12,14 @@ contributors:
 这些选项可以控制 webpack 如何通知「资源(asset)和入口起点超过指定文件限制」。
 此功能受到 [webpack 性能评估](https://github.com/webpack/webpack/issues/3216)的启发。
 
-## `performance`
+## `performance` {#performance}
 
 `object`
 
 配置如何展示性能提示。例如，如果一个资源超过 250kb，webpack 会对此输出一个警告来通知你。
 
 
-## `performance.hints`
+## `performance.hints` {#performancehints}
 
 `string = 'warning': 'error' | 'warning'` `boolean: false`
 
@@ -60,7 +60,7 @@ module.exports = {
 
 将展示一条错误，通知你这是体积大的资源。在生产环境构建时，我们推荐使用 `hints: "error"`，有助于防止把体积巨大的 bundle 部署到生产环境，从而影响网页的性能。
 
-## `performance.maxEntrypointSize`
+## `performance.maxEntrypointSize` {#performancemaxentrypointsize}
 
 `number = 250000`
 
@@ -75,7 +75,7 @@ module.exports = {
 };
 ```
 
-## `performance.maxAssetSize`
+## `performance.maxAssetSize` {#performancemaxassetsize}
 
 `number = 250000`
 
@@ -91,7 +91,7 @@ module.exports = {
 };
 ```
 
-## `performance.assetFilter`
+## `performance.assetFilter` {#performanceassetfilter}
 
 `function(assetFilename) => boolean`
 

@@ -21,7 +21,7 @@ contributors:
 这些选项能设置模块如何被解析。webpack 提供合理的默认值，但是还是可能会修改一些解析的细节。
 关于 resolver 具体如何工作的更多解释说明，请查看[模块解析](/concepts/module-resolution)。
 
-## `resolve`
+## `resolve` {#resolve}
 
 `object`
 
@@ -38,7 +38,12 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `resolve.alias`
+=======
+
+### `resolve.alias` {#resolvealias}
+>>>>>>> en-master
 
 `object`
 
@@ -152,7 +157,7 @@ module.exports = {
 };
 ```
 
-### `resolve.aliasFields`
+### `resolve.aliasFields` {#resolvealiasfields}
 
 `[string]: ['browser']`
 
@@ -170,14 +175,19 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `resolve.cacheWithContext`
+=======
+
+### `resolve.cacheWithContext` {#resolvecachewithcontext}
+>>>>>>> en-master
 
 `boolean` (从 webpack 3.1.0起支持)
 
 如果启用了不安全缓存，请在缓存键(cache key)中引入 `request.context`。这个选项被 [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) 模块考虑在内。从 webpack 3.1.0 开始，在配置了 resolve 或 resolveLoader 插件时，解析缓存(resolve caching)中的上下文(context)会被忽略。
 这解决了性能衰退的问题。
 
-### `resolve.descriptionFiles`
+### `resolve.descriptionFiles` {#resolvedescriptionfiles}
 
 `[string] = ['package.json']`
 
@@ -194,7 +204,12 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `resolve.enforceExtension`
+=======
+
+### `resolve.enforceExtension` {#resolveenforceextension}
+>>>>>>> en-master
 
 `boolean = false`
 
@@ -212,7 +227,12 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `resolve.enforceModuleExtension`
+=======
+
+### `resolve.enforceModuleExtension` {#resolveenforcemoduleextension}
+>>>>>>> en-master
 
 `boolean = false`
 
@@ -231,7 +251,12 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `resolve.extensions`
+=======
+
+### `resolve.extensions` {#resolveextensions}
+>>>>>>> en-master
 
 `[string] = ['.wasm', '.mjs', '.js', '.json']`
 
@@ -259,7 +284,7 @@ import File from '../path/to/file';
 
 W> 使用此选项会 **覆盖默认数组**，这就意味着 webpack 将不再尝试使用默认扩展来解析模块。
 
-### `resolve.mainFields`
+### `resolve.mainFields` {#resolvemainfields}
 
 `[string]`
 
@@ -304,7 +329,7 @@ module.exports = {
 在这里 `browser` 属性是最优先选择的，因为它是 `mainFields` 的第一项。同时，由 webpack 打包的 Node.js 应用程序首先会尝试
 从 `module` 字段中解析文件。
 
-### `resolve.mainFiles`
+### `resolve.mainFiles` {#resolvemainfiles}
 
 `[string] = ['index']`
 
@@ -321,7 +346,12 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `resolve.modules`
+=======
+
+### `resolve.modules` {#resolvemodules}
+>>>>>>> en-master
 
 `[string] = ['node_modules']`
 
@@ -360,7 +390,12 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `resolve.unsafeCache`
+=======
+
+### `resolve.unsafeCache` {#resolveunsafecache}
+>>>>>>> en-master
 
 `RegExp` `[RegExp]` `boolean: true`
 
@@ -393,7 +428,7 @@ module.exports = {
 
 W> 修改缓存路径可能在极少数情况下导致失败。
 
-### `resolve.plugins`
+### `resolve.plugins` {#resolveplugins}
 
 [`[Plugin]`](/plugins/)
 
@@ -411,7 +446,12 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `resolve.symlinks`
+=======
+
+### `resolve.symlinks` {#resolvesymlinks}
+>>>>>>> en-master
 
 `boolean = true`
 
@@ -430,7 +470,12 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `resolve.cachePredicate`
+=======
+
+### `resolve.cachePredicate` {#resolvecachepredicate}
+>>>>>>> en-master
 
 `function(module) => boolean`
 
@@ -451,7 +496,7 @@ module.exports = {
 };
 ```
 
-### `resolve.restrictions`
+### `resolve.restrictions` {#resolverestrictions}
 
 `[string, RegExp]`
 
@@ -469,7 +514,7 @@ module.exports = {
 ```
 
 
-## `resolveLoader`
+## `resolveLoader` {#resolveloader}
 
 `object { modules [string] = ['node_modules'], extensions [string] = ['.js', '.json'], mainFields [string] = ['loader', 'main']}`
 
@@ -491,7 +536,7 @@ module.exports = {
 
 T> 注意，这里你可以使用别名，并且其他特性类似于 resolve 对象。例如，`{ txt: 'raw-loader' }` 会使用 `raw-loader` 去 shim(填充) `txt!templates/demo.txt`。
 
-### `resolveLoader.moduleExtensions`
+### `resolveLoader.moduleExtensions` {#resolveloadermoduleextensions}
 
 `[string]`
 

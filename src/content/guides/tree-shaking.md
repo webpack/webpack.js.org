@@ -32,7 +32,11 @@ webpack 2 正式版本内置支持 ES2015 模块（也叫做 _harmony modules_�
 T> 本指南的继承自 [起步](/guides/getting-started) 指南。如果你尚未阅读该指南，请先行阅读。
 
 
+<<<<<<< HEAD
 ## 添加一个通用模块
+=======
+## Add a Utility {#add-a-utility}
+>>>>>>> en-master
 
 在我们的项目中添加一个新的通用模块文件 `src/math.js`，并导出两个函数：
 
@@ -130,7 +134,11 @@ __dist/bundle.js (around lines 90 - 100)__
 注意，上面的 `unused harmony export square` 注释。如果你观察它下面的代码，你会注意到虽然我们没有引用 `square`，但它仍然被包含在 bundle 中。我们将在下一节解决这个问题。
 
 
+<<<<<<< HEAD
 ## 将文件标记为 side-effect-free(无副作用)
+=======
+## Mark the file as side-effect-free {#mark-the-file-as-side-effect-free}
+>>>>>>> en-master
 
 在一个纯粹的 ESM 模块世界中，很容易识别出哪些文件有 side effect。然而，我们的项目无法达到这种纯度，所以，此时有必要提示 webpack compiler 哪些代码是“纯粹部分”。
 
@@ -174,7 +182,11 @@ T> 注意，所有导入文件都会受到 tree shaking 的影响。这意味着
 
 最后，还可以在 [`module.rules` 配置选项](/configuration/module/#module-rules) 中设置 `"sideEffects"`。
 
+<<<<<<< HEAD
 ## 解释 tree shaking 和 `sideEffects`
+=======
+## Clarifying tree shaking and `sideEffects` {#clarifying-tree-shaking-and-sideeffects}
+>>>>>>> en-master
 
 [`sideEffects`](/configuration/optimization/#optimizationsideeffects) 和 [`usedExports`](/configuration/optimization/#optimizationusedexports)（更多被认为是 tree shaking）是两种不同的优化方式。
 
@@ -309,7 +321,11 @@ __package.json__
 
 模块合并也会应用。所以这4个模块，加上入口的模块（也可能有更多的依赖）会被合并。 __`index.js` 最终没有生成代码__.
 
+<<<<<<< HEAD
 ## 将函数调用标记为无副作用
+=======
+## Mark a function call as side-effect-free {#mark-a-function-call-as-side-effect-free}
+>>>>>>> en-master
 
 是可以告诉 webpack 一个函数调用是无副作用的，只要通过 `/*#__PURE__*/` 注释。它可以被放到函数调用之前，用来标记它们是无副作用的(pure)。传到函数中的入参是无法被刚才的注释所标记，需要单独每一个标记才可以。如果一个没被使用的变量定义的初始值被认为是无副作用的（pure），它会被标记为死代码，不会被执行且会被压缩工具清除掉。这个行为被会开启当 [`optimization.innerGraph`](/configuration/optimization/#optimizationinnergraph) 被设置成 `true`。
 
@@ -319,7 +335,11 @@ __file.js__
 /*#__PURE__*/ double(55);
 ```
 
+<<<<<<< HEAD
 ## 压缩输出结果
+=======
+## Minify the Output {#minify-the-output}
+>>>>>>> en-master
 
 通过 `import` 和 `export`  语法，我们已经找出需要删除的“未引用代码(dead code)”，然而，不仅仅是要找出，还要在 bundle 中删除它们。为此，我们需要将 `mode` 配置选项设置为 [`production`](/configuration/mode/#mode-production)。
 
@@ -350,7 +370,11 @@ T> 注意，也可以在命令行接口中使用 `--optimize-minimize` 标记，
 
 T> 在使用 tree shaking 时必须有 [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin) 的支持，您可以通过设置配置项 `mode: "production"` 以启用它。如果您没有如此做，请记得手动引入 [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin)。
 
+<<<<<<< HEAD
 ## 结论
+=======
+## Conclusion {#conclusion}
+>>>>>>> en-master
 
 因此，我们学到为了利用 _tree shaking_ 的优势， 你必须...
 

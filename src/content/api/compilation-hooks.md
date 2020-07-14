@@ -29,7 +29,7 @@ compilation.hooks.someHook.tap(/* ... */);
 所以也可以在某些钩子上访问 `tapAsync` 和 `tapPromise`。
 
 
-### `buildModule`
+### `buildModule` {#buildmodule}
 
 `SyncHook`
 
@@ -47,7 +47,7 @@ compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
 ```
 
 
-### `rebuildModule`
+### `rebuildModule` {#rebuildmodule}
 
 `SyncHook`
 
@@ -56,7 +56,7 @@ compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
 - 回调参数：`module`
 
 
-### `failedModule`
+### `failedModule` {#failedmodule}
 
 `SyncHook`
 
@@ -65,7 +65,7 @@ compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
 - 回调参数：`module` `error`
 
 
-### `succeedModule`
+### `succeedModule` {#succeedmodule}
 
 `SyncHook`
 
@@ -74,7 +74,7 @@ compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
 - 回调参数：`module`
 
 
-### `finishModules`
+### `finishModules` {#finishmodules}
 
 `AsyncSeriesHook`
 
@@ -83,7 +83,7 @@ compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
 - 回调参数：`modules`
 
 
-### `finishRebuildingModule`
+### `finishRebuildingModule` {#finishrebuildingmodule}
 
 `SyncHook`
 
@@ -92,21 +92,21 @@ compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
 - 回调参数：`module`
 
 
-### `seal`
+### `seal` {#seal}
 
 `SyncHook`
 
 compilation 对象停止接收新的模块时触发。
 
 
-### `unseal`
+### `unseal` {#unseal}
 
 `SyncHook`
 
 compilation 对象开始接收新模块时触发。
 
 
-### `optimizeDependencies`
+### `optimizeDependencies` {#optimizedependencies}
 
 `SyncBailHook`
 
@@ -115,7 +115,7 @@ compilation 对象开始接收新模块时触发。
 - 回调参数：`modules`
 
 
-### `afterOptimizeDependencies`
+### `afterOptimizeDependencies` {#afteroptimizedependencies}
 
 `SyncHook`
 
@@ -124,14 +124,14 @@ compilation 对象开始接收新模块时触发。
 - 回调参数：`modules`
 
 
-### `optimize`
+### `optimize` {#optimize}
 
 `SyncHook`
 
 优化阶段开始时触发。
 
 
-### `optimizeModules`
+### `optimizeModules` {#optimizemodules}
 
 `SyncBailHook`
 
@@ -140,7 +140,7 @@ compilation 对象开始接收新模块时触发。
 - 回调参数：`modules`
 
 
-### `afterOptimizeModules`
+### `afterOptimizeModules` {#afteroptimizemodules}
 
 `SyncHook`
 
@@ -149,7 +149,7 @@ compilation 对象开始接收新模块时触发。
 - 回调参数：`modules`
 
 
-### `optimizeChunks`
+### `optimizeChunks` {#optimizechunks}
 
 `SyncBailHook`
 
@@ -158,7 +158,7 @@ compilation 对象开始接收新模块时触发。
 - 回调参数：`chunks`
 
 
-### `afterOptimizeChunks`
+### `afterOptimizeChunks` {#afteroptimizechunks}
 
 `SyncHook`
 
@@ -167,7 +167,7 @@ chunk 优化完成之后触发。
 - 回调参数：`chunks`
 
 
-### `optimizeTree`
+### `optimizeTree` {#optimizetree}
 
 `AsyncSeriesHook`
 
@@ -176,7 +176,7 @@ chunk 优化完成之后触发。
 - 回调参数：`chunks` `modules`
 
 
-### `afterOptimizeTree`
+### `afterOptimizeTree` {#afteroptimizetree}
 
 `SyncHook`
 
@@ -185,7 +185,7 @@ chunk 优化完成之后触发。
 - 回调参数：`chunks` `modules`
 
 
-### `optimizeChunkModules`
+### `optimizeChunkModules` {#optimizechunkmodules}
 
 `SyncBailHook`
 
@@ -194,7 +194,7 @@ chunk 优化完成之后触发。
 - 回调参数：`chunks` `modules`
 
 
-### `afterOptimizeChunkModules`
+### `afterOptimizeChunkModules` {#afteroptimizechunkmodules}
 
 `SyncHook`
 
@@ -203,14 +203,14 @@ chunk 优化完成之后触发。
 - 回调参数：`chunks` `modules`
 
 
-### `shouldRecord`
+### `shouldRecord` {#shouldrecord}
 
 `SyncBailHook`
 
 调用来决定是否存储 record。返回任何内容 `!== false` 将阻止执行所有其他 "record" 钩子（[`record`](#record), [`recordModules`](#recordmodules), [`recordChunks`](#recordchunks) 和 [`recordHash`](#recordhash)）。
 
 
-### `reviveModules`
+### `reviveModules` {#revivemodules}
 
 `SyncHook`
 
@@ -219,7 +219,7 @@ chunk 优化完成之后触发。
 - 回调参数：`modules` `records`
 
 
-### `beforeModuleIds`
+### `beforeModuleIds` {#beforemoduleids}
 
 `SyncHook`
 
@@ -228,7 +228,7 @@ chunk 优化完成之后触发。
 - 回调参数：`modules`
 
 
-### `moduleIds`
+### `moduleIds` {#moduleids}
 
 `SyncHook`
 
@@ -237,7 +237,7 @@ chunk 优化完成之后触发。
 - 回调参数：`modules`
 
 
-### `optimizeModuleIds`
+### `optimizeModuleIds` {#optimizemoduleids}
 
 `SyncHook`
 
@@ -246,7 +246,7 @@ chunk 优化完成之后触发。
 - 回调参数：`modules`
 
 
-### `afterOptimizeModuleIds`
+### `afterOptimizeModuleIds` {#afteroptimizemoduleids}
 
 `SyncHook`
 
@@ -255,7 +255,7 @@ chunk 优化完成之后触发。
 - 回调参数：`modules`
 
 
-### `reviveChunks`
+### `reviveChunks` {#revivechunks}
 
 `SyncHook`
 
@@ -264,7 +264,7 @@ chunk 优化完成之后触发。
 - 回调参数：`chunks` `records`
 
 
-### `beforeChunkIds`
+### `beforeChunkIds` {#beforechunkids}
 
 `SyncHook`
 
@@ -273,7 +273,7 @@ chunk 优化完成之后触发。
 - 回调参数：`chunks`
 
 
-### `optimizeChunkIds`
+### `optimizeChunkIds` {#optimizechunkids}
 
 `SyncHook`
 
@@ -282,7 +282,7 @@ chunk 优化完成之后触发。
 - 回调参数：`chunks`
 
 
-### `afterOptimizeChunkIds`
+### `afterOptimizeChunkIds` {#afteroptimizechunkids}
 
 `SyncHook`
 
@@ -291,7 +291,7 @@ chunk `id` 优化结束之后触发。
 - 回调参数：`chunks`
 
 
-### `recordModules`
+### `recordModules` {#recordmodules}
 
 `SyncHook`
 
@@ -300,7 +300,7 @@ chunk `id` 优化结束之后触发。
 - 回调参数：`modules` `records`
 
 
-### `recordChunks`
+### `recordChunks` {#recordchunks}
 
 `SyncHook`
 
@@ -309,21 +309,21 @@ chunk `id` 优化结束之后触发。
 - 回调参数：`chunks` `records`
 
 
-### `beforeHash`
+### `beforeHash` {#beforehash}
 
 `SyncHook`
 
 在 compilation 添加哈希(hash)之前。
 
 
-### `afterHash`
+### `afterHash` {#afterhash}
 
 `SyncHook`
 
 在 compilation 添加哈希(hash)之后。
 
 
-### `recordHash`
+### `recordHash` {#recordhash}
 
 `SyncHook`
 
@@ -332,7 +332,7 @@ chunk `id` 优化结束之后触发。
 - 回调参数：`records`
 
 
-### `record`
+### `record` {#record}
 
 `SyncHook`
 
@@ -341,14 +341,14 @@ chunk `id` 优化结束之后触发。
 - 回调参数：`compilation` `records`
 
 
-### `beforeModuleAssets`
+### `beforeModuleAssets` {#beforemoduleassets}
 
 `SyncHook`
 
 在创建模块 asset 之前执行。
 
 
-### `additionalChunkAssets`
+### `additionalChunkAssets` {#additionalchunkassets}
 
 `SyncHook`
 
@@ -359,14 +359,14 @@ W> `additionalChunkAssets` 已弃用（可使用 [Compilation.hook.processAssets
 - 回调参数：`chunks`
 
 
-### `shouldGenerateChunkAssets`
+### `shouldGenerateChunkAssets` {#shouldgeneratechunkassets}
 
 `SyncBailHook`
 
 调用以确定是否生成 chunk asset。返回任何 `!== false` 将允许生成 chunk asset。
 
 
-### `beforeChunkAssets`
+### `beforeChunkAssets` {#beforechunkassets}
 
 `SyncHook`
 
@@ -374,7 +374,7 @@ W> `additionalChunkAssets` 已弃用（可使用 [Compilation.hook.processAssets
 
 
 
-### `additionalAssets`
+### `additionalAssets` {#additionalassets}
 
 `AsyncSeriesHook`
 
@@ -394,7 +394,7 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
 });
 ```
 
-### `optimizeChunkAssets`
+### `optimizeChunkAssets` {#optimizechunkassets}
 
 `AsyncSeriesHook`
 
@@ -427,7 +427,7 @@ compilation.hooks
 ```
 
 
-### `afterOptimizeChunkAssets`
+### `afterOptimizeChunkAssets` {#afteroptimizechunkassets}
 
 `SyncHook`
 
@@ -453,7 +453,7 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
 
 
 
-### `optimizeAssets`
+### `optimizeAssets` {#optimizeassets}
 
 `AsyncSeriesHook`
 
@@ -462,7 +462,7 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
 - 回调参数：`assets`
 
 
-### `afterOptimizeAssets`
+### `afterOptimizeAssets` {#afteroptimizeassets}
 
 `SyncHook`
 
@@ -471,7 +471,7 @@ asset 已经优化。
 - 回调参数：`assets`
 
 
-### `processAssets`
+### `processAssets` {#processassets}
 
 `AsyncSeriesHook`
 
@@ -509,27 +509,27 @@ There're many stages to use:
 - `PROCESS_ASSETS_STAGE_ANALYSE` - Analyze the existing assets.
 - `PROCESS_ASSETS_STAGE_REPORT` - Creating assets for the reporting purposes.
 
-### `afterProcessAssets`
+### `afterProcessAssets` {#afterprocessassets}
 
 `SyncHook`
 
 Called after the [`processAssets`](#processassets) hook had finished without error.
 
-### `needAdditionalSeal`
+### `needAdditionalSeal` {#needadditionalseal}
 
 `SyncBailHook`
 
 调用来决定 compilation 是否需要解除 seal 以引入其他文件。
 
 
-### `afterSeal`
+### `afterSeal` {#afterseal}
 
 `AsyncSeriesHook`
 
 在 `needAdditionalSeal` 之后立即执行。
 
 
-### `chunkHash`
+### `chunkHash` {#chunkhash}
 
 `SyncHook`
 
@@ -538,7 +538,7 @@ Called after the [`processAssets`](#processassets) hook had finished without err
 - 回调参数：`chunk` `chunkHash`
 
 
-### `moduleAsset`
+### `moduleAsset` {#moduleasset}
 
 `SyncHook`
 
@@ -547,7 +547,7 @@ Called after the [`processAssets`](#processassets) hook had finished without err
 - 回调参数：`module` `filename`
 
 
-### `chunkAsset`
+### `chunkAsset` {#chunkasset}
 
 `SyncHook`
 
@@ -556,7 +556,7 @@ Called after the [`processAssets`](#processassets) hook had finished without err
 - 回调参数：`chunk` `filename`
 
 
-### `assetPath`
+### `assetPath` {#assetpath}
 
 `SyncWaterfallHook`
 
@@ -565,14 +565,14 @@ Called after the [`processAssets`](#processassets) hook had finished without err
 - 回调参数：`path` `options`
 
 
-### `needAdditionalPass`
+### `needAdditionalPass` {#needadditionalpass}
 
 `SyncBailHook`
 
 调用以决定 asset 在输出后是否需要进一步处理。
 
 
-### `childCompiler`
+### `childCompiler` {#childcompiler}
 
 `SyncHook`
 
@@ -581,6 +581,6 @@ Called after the [`processAssets`](#processassets) hook had finished without err
 - 回调参数：`childCompiler` `compilerName` `compilerIndex`
 
 
-### `normalModuleLoader`
+### `normalModuleLoader` {#normalmoduleloader}
 
 从 webpack v5 开始，`normalModuleLoader` 钩子已经删除。现在要访问loader 请改用 `NormalModule.getCompilationHooks(compilation).loader`。

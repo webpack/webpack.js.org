@@ -44,7 +44,11 @@ T> 可以在 [这里](/concepts/modules) 了解更多关于 JavaScript 模块和
 - [一个简单打包工具的详细说明](https://github.com/ronami/minipack)
 
 
+<<<<<<< HEAD
 ## 入口(entry)
+=======
+## Entry {#entry}
+>>>>>>> en-master
 
 __入口起点(entry point)__指示 webpack 应该使用哪个模块，来作为构建其内部 [依赖图(dependency graph)](/concepts/dependency-graph/) 的开始。进入入口起点后，webpack 会找出有哪些模块和库是入口起点（直接和间接）依赖的。
 
@@ -61,7 +65,11 @@ module.exports = {
 T> 在 [入口起点](/concepts/entry-points) 章节可以了解更多信息。
 
 
+<<<<<<< HEAD
 ## 输出(output)
+=======
+## Output {#output}
+>>>>>>> en-master
 
 __output__ 属性告诉 webpack 在哪里输出它所创建的 _bundle_，以及如何命名这些文件。主要输出文件的默认值是 `./dist/main.js`，其他生成文件默认放置在 `./dist` 文件夹中。
 
@@ -86,7 +94,11 @@ module.exports = {
 T> `output` 属性还有 [更多可配置的特性](/configuration/output)，如果你想要了解更多关于 `output` 属性的概念，可以通过阅读 [输出章节](/concepts/output) 来了解更多。
 
 
+<<<<<<< HEAD
 ## loader
+=======
+## Loaders {#loaders}
+>>>>>>> en-master
 
 webpack 只能理解 JavaScript 和 JSON 文件，这是 webpack 开箱可用的自带能力。__loader__ 让 webpack 能够去处理其他类型的文件，并将它们转换为有效 [模块](/concepts/modules)，以供应用程序使用，以及被添加到依赖图中。
 
@@ -125,7 +137,11 @@ W> 请记住，使用正则表达式匹配文件时，你不要为它添加引�
 在使用 loader 时，可以阅读 [loader 章节](/concepts/loaders) 查看更深入的自定义配置。
 
 
+<<<<<<< HEAD
 ## 插件(plugin)
+=======
+## Plugins {#plugins}
+>>>>>>> en-master
 
 loader 用于转换某些类型的模块，而插件则可以用于执行范围更广的任务。包括：打包优化，资源管理，注入环境变量。
 
@@ -158,7 +174,11 @@ T> webpack 提供许多开箱可用的插件！查阅 [插件列表](/plugins) �
 在 webpack 配置中使用插件是简单直接的。然而，也有很多值得我们进一步探讨的用例。[查看这里了解更多](/concepts/plugins)。
 
 
+<<<<<<< HEAD
 ## 模式(mode)
+=======
+## Mode {#mode}
+>>>>>>> en-master
 
 通过选择 `development`, `production` 或 `none` 之中的一个，来设置 `mode` 参数，你可以启用 webpack 内置在相应环境下的优化。其默认值为 `production`。
 
@@ -171,11 +191,19 @@ module.exports = {
 想要了解更多，请查阅 [mode 配置](/configuration/mode)，这里有具体每个值相应的优化行为。
 
 
+<<<<<<< HEAD
 ## 浏览器兼容性(browser compatibility)
+=======
+## Browser Compatibility {#browser-compatibility}
+>>>>>>> en-master
 
 webpack 支持所有符合 [ES5 标准](https://kangax.github.io/compat-table/es5/) 的浏览器（不支持 IE8 及以下版本）。webpack 的 `import()` 和 `require.ensure()` 需要 `Promise`。如果你想要支持旧版本浏览器，在使用这些表达式之前，还需要 [提前加载 polyfill](/guides/shimming/)。
 
 
+<<<<<<< HEAD
 ## 环境(environment)
+=======
+## Environment {#environment}
+>>>>>>> en-master
 
 webpack 运行与 Node.js v8.x+ 版本。

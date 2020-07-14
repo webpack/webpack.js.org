@@ -50,7 +50,11 @@ __webpack.config.js__
   };
 ```
 
+<<<<<<< HEAD
 ## 使用 source map
+=======
+## Using source maps {#using-source-maps}
+>>>>>>> en-master
 
 当 webpack 打包源代码时，可能会很难追踪到 error(错误) 和 warning(警告) 在源代码中的原始位置。例如，如果将三个源文件（`a.js`, `b.js` 和 `c.js`）打包到一个 bundle（`bundle.js`）中，而其中一个源文件包含一个错误，那么堆栈跟踪就会直接指向到 `bundle.js`。你可能需要准确地知道错误来自于哪个源文件，所以这种提示这通常不会提供太多帮助。
 
@@ -119,7 +123,11 @@ print.bundle.js    6.43 kB       1  [emitted]         print
 我们可以看到，此错误包含有发生错误的文件（`print.js`）和行号（2）的引用。这是非常有帮助的，因为现在我们可以确切地知道，所要解决问题的位置。
 
 
+<<<<<<< HEAD
 ## 选择一个开发工具
+=======
+## Choosing a Development Tool {#choosing-a-development-tool}
+>>>>>>> en-master
 
 W> 某些文本编辑器具有 "safe write(安全写入)" 功能，可能会干扰下面一些工具。阅读 [调整文本编辑器](#adjusting-your-text-editor) 以解决这些问题。
 
@@ -134,7 +142,11 @@ webpack 提供几种可选方式，帮助你在代码发生变化后自动编译
 多数场景中，你可能需要使用 `webpack-dev-server`，但是不妨探讨一下以上的所有选项。
 
 
+<<<<<<< HEAD
 ### 使用 watch mode(观察模式)
+=======
+### Using Watch Mode {#using-watch-mode}
+>>>>>>> en-master
 
 你可以指示 webpack "watch" 依赖图中所有文件的更改。如果其中一个文件被更新，代码将被重新编译，所以你不必再去手动运行整个构建。
 
@@ -217,7 +229,11 @@ __src/print.js__
 唯一的缺点是，为了看到修改后的实际效果，你需要刷新浏览器。如果能够自动刷新浏览器就更好了，因此接下来我们会尝试通过 `webpack-dev-server` 实现此功能。
 
 
+<<<<<<< HEAD
 ### 使用 webpack-dev-server
+=======
+### Using webpack-dev-server {#using-webpack-dev-server}
+>>>>>>> en-master
 
 `webpack-dev-server` 为你提供了一个简单的 web server，并且具有 live reloading(实时重新加载) 功能。设置如下：
 
@@ -302,7 +318,11 @@ __package.json__
 T> 现在，server 正在运行，你可能需要尝试 [模块热替换(hot module replacement)](/guides/hot-module-replacement)！
 
 
+<<<<<<< HEAD
 ### 使用 webpack-dev-middleware
+=======
+### Using webpack-dev-middleware {#using-webpack-dev-middleware}
+>>>>>>> en-master
 
 `webpack-dev-middleware` 是一个封装器(wrapper)，它可以把 webpack 处理过的文件发送到一个 server。  `webpack-dev-server` 在内部使用了它，然而它也可以作为一个单独的 package 来使用，以便根据需求进行更多自定义设置。下面是一个 webpack-dev-middleware 配合 express server 的示例。
 
@@ -438,7 +458,11 @@ webpack: Compiled successfully.
 T> 如果想要了解更多关于模块热替换(hot module replacement)的运行机制，我们推荐你查看 [模块热替换(hot module replacement)](/guides/hot-module-replacement/) 指南。
 
 
+<<<<<<< HEAD
 ## 调整文本编辑器
+=======
+## Adjusting Your Text Editor {#adjusting-your-text-editor}
+>>>>>>> en-master
 
 使用自动编译代码时，可能会在保存文件时遇到一些问题。某些编辑器具有 "safe write(安全写入)" 功能，会影响重新编译。
 
@@ -449,6 +473,10 @@ T> 如果想要了解更多关于模块热替换(hot module replacement)的运�
 - __Vim__：在设置(settings)中增加 `:set backupcopy=yes`。
 
 
+<<<<<<< HEAD
 ## 结论
+=======
+## Conclusion {#conclusion}
+>>>>>>> en-master
 
 现在，你已经学会了如何自动编译代码，并运行一个简单的 development server，查看下一个指南，其中将介绍[代码分割（Code Splitting）](/guides/code-splitting/)。

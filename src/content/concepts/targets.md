@@ -14,7 +14,11 @@ contributors:
 
 W> webpack 的 `target` 属性，不要和 `output.libraryTarget` 属性混淆。有关 `output` 属性的更多信息，请参阅 [output 指南](/concepts/output/)
 
+<<<<<<< HEAD
 ## 用法
+=======
+## Usage {#usage}
+>>>>>>> en-master
 
 想设置 `target` 属性，只需在 webpack 配置中设置 target 字段：
 
@@ -32,7 +36,11 @@ module.exports = {
 
 ?> 后续会进一步扩展受欢迎的 target。
 
+<<<<<<< HEAD
 ## 多 target
+=======
+## Multiple Targets {#multiple-targets}
+>>>>>>> en-master
 
 虽然 webpack __不支持__ 向 `target` 属性传入多个字符串，但是可以通过设置两个独立配置，来构建对 library 进行同构：
 
@@ -63,7 +71,11 @@ module.exports = [ serverConfig, clientConfig ];
 
 上述示例中，将会在 `dist` 文件夹下创建 `lib.js` 和 `lib.node.js` 文件。
 
+<<<<<<< HEAD
 ## 资源
+=======
+## Resources {#resources}
+>>>>>>> en-master
 
 从上面选项可以看出，你可以选择部署不同的 _target_。下面是可以参考的示例和资源：
 

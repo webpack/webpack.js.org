@@ -15,7 +15,11 @@ __插件__是 webpack 的 [支柱](https://github.com/webpack/tapable) 功能。
 插件目的在于解决 [loader](/concepts/loaders) 无法实现的__其他事__。
 
 
+<<<<<<< HEAD
 ## 剖析
+=======
+## Anatomy {#anatomy}
+>>>>>>> en-master
 
 webpack __插件__是一个具有 [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 方法的 JavaScript 对象。`apply` 方法会被 webpack compiler 调用，并且在__整个__编译生命周期都可以访问 compiler 对象。
 
@@ -37,14 +41,22 @@ module.exports = ConsoleLogOnBuildWebpackPlugin;
 
 compiler hook 的 tap 方法的第一个参数，应该是驼峰式命名的插件名称。建议为此使用一个常量，以便它可以在所有 hook 中重复使用。
 
+<<<<<<< HEAD
 ## 用法
+=======
+## Usage {#usage}
+>>>>>>> en-master
 
 由于__插件__可以携带参数/选项，你必须在 webpack 配置中，向 `plugins` 属性传入一个 `new` 实例。
 
 取决于你的 webpack 用法，对应有多种使用插件的方式。
 
 
+<<<<<<< HEAD
 ### 配置方式
+=======
+### Configuration {#configuration}
+>>>>>>> en-master
 
 __webpack.config.js__
 
@@ -75,7 +87,11 @@ module.exports = {
 ```
 
 
+<<<<<<< HEAD
 ### Node API 方式
+=======
+### Node API {#node-api}
+>>>>>>> en-master
 
 在使用 Node API 时，还可以通过配置中的 `plugins` 属性传入插件。
 

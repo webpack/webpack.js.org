@@ -28,7 +28,7 @@ contributors:
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
 
 
-## `output.auxiliaryComment`
+## `output.auxiliaryComment` {#outputauxiliarycomment}
 
 `string` `object`
 
@@ -91,7 +91,7 @@ module.exports = {
 ```
 
 
-## `output.chunkFilename`
+## `output.chunkFilename` {#outputchunkfilename}
 
 `string = '[id].js'`
 
@@ -114,7 +114,7 @@ module.exports = {
 ```
 
 
-## `output.chunkLoadTimeout`
+## `output.chunkLoadTimeout` {#outputchunkloadtimeout}
 
 `number = 120000`
 
@@ -133,7 +133,7 @@ module.exports = {
 ```
 
 
-## `output.chunkCallbackName`
+## `output.chunkCallbackName` {#outputchunkcallbackname}
 
 `string = 'webpackChunkwebpack'`
 
@@ -152,7 +152,7 @@ module.exports = {
 ```
 
 
-## `output.crossOriginLoading`
+## `output.crossOriginLoading` {#outputcrossoriginloading}
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
 
@@ -162,7 +162,7 @@ module.exports = {
 - `'use-credentials'` - __携带凭据(credential)__ 启用跨域加载
 
 
-## `output.jsonpScriptType`
+## `output.jsonpScriptType` {#outputjsonpscripttype}
 
 `string = 'text/javascript': 'module' | 'text/javascript'`
 
@@ -171,7 +171,7 @@ webpack 会注入 DOM 中的 `script` 标签的 `type` 属性，以下载 async 
 - `'text/javascript'`: HTML5 中的默认 `type`，在一些浏览器的 HTML4 必需。
 - `'module'`: 代码会被视为 JavaScript 模块。
 
-## `output.devtoolFallbackModuleFilenameTemplate`
+## `output.devtoolFallbackModuleFilenameTemplate` {#outputdevtoolfallbackmodulefilenametemplate}
 
 `string` `function (info)`
 
@@ -180,7 +180,7 @@ webpack 会注入 DOM 中的 `script` 标签的 `type` 属性，以下载 async 
 查看 [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate)。
 
 
-## `output.devtoolModuleFilenameTemplate`
+## `output.devtoolModuleFilenameTemplate` {#outputdevtoolmodulefilenametemplate}
 
 `string = 'webpack://[namespace]/[resource-path]?[loaders]'` `function (info) => string`
 
@@ -228,7 +228,7 @@ module.exports = {
 如果多个模块产生相同的名称，使用 [`output.devtoolFallbackModuleFilenameTemplate`](#outputdevtoolfallbackmodulefilenametemplate) 来代替这些模块。
 
 
-## `output.devtoolNamespace`
+## `output.devtoolNamespace` {#outputdevtoolnamespace}
 
 `string`
 
@@ -237,7 +237,7 @@ module.exports = {
 例如，如果你有两个 library，分别使用命名空间 `library1` 和 `library2`，并且都有一个文件 `./src/index.js`（可能具有不同内容），它们会将这些文件暴露为 `webpack://library1/./src/index.js` 和 `webpack://library2/./src/index.js`。
 
 
-## `output.filename`
+## `output.filename` {#outputfilename}
 
 `string` `function (pathData, assetInfo) => string`
 
@@ -344,7 +344,7 @@ module.exports = {
 
 注意，此选项不会影响那些「按需加载 chunk」的输出文件。对于这些文件，请使用 [`output.chunkFilename`](#outputchunkfilename) 选项来控制输出。通过 loader 创建的文件也不受影响。在这种情况下，你必须尝试 loader 特定的可用选项。
 
-## Template strings
+## Template strings {#template-strings}
 
 可以使用以下替换模板字符串（通过 webpack 内部的[`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)）:
 
@@ -368,11 +368,11 @@ module.exports = {
 
 T> 在使用 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) 时，可以用 `[contenthash]` 来获取提取文件的 hash（既不是 `[hash]` 也不是 `[chunkhash]`）。
 
-## `output.assetModuleFilename`
+## `output.assetModuleFilename` {#outputassetmodulefilename}
 
 参考 [`output.filename`](#outputfilename) 不过应用于 [Asset Modules](/guides/asset-modules/)
 
-## `output.globalObject`
+## `output.globalObject` {#outputglobalobject}
 
 `string = 'window'`
 
@@ -394,7 +394,7 @@ module.exports = {
 };
 ```
 
-## `output.uniqueName`
+## `output.uniqueName` {#outputuniquename}
 
 `string`
 
@@ -417,21 +417,21 @@ module.exports = {
 ```
 
 
-## `output.hashDigest`
+## `output.hashDigest` {#outputhashdigest}
 
 `string = 'hex'`
 
 在生成 hash 时使用的编码方式。支持 Node.js [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) 的所有编码。对文件名使用 `'base64'`，可能会出现问题，因为 base64 字母表中具有 `/` 这个字符(character)。同样的，`'latin1'` 规定可以含有任何字符(character)。
 
 
-## `output.hashDigestLength`
+## `output.hashDigestLength` {#outputhashdigestlength}
 
 `number = 20`
 
 散列摘要的前缀长度。
 
 
-## `output.hashFunction`
+## `output.hashFunction` {#outputhashfunction}
 
 `string = 'md4'` `function`
 
@@ -448,12 +448,12 @@ module.exports = {
 
 确保 hash 函数有可访问的 `update` 和 `digest` 方法。
 
-## `output.hashSalt`
+## `output.hashSalt` {#outputhashsalt}
 
 一个可选的加盐值，通过 Node.JS [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding) 来更新哈希。
 
 
-## `output.hotUpdateChunkFilename`
+## `output.hotUpdateChunkFilename` {#outputhotupdatechunkfilename}
 
 `string = '[id].[hash].hot-update.js'`
 
@@ -474,7 +474,7 @@ module.exports = {
 
 T> 通常，你不需要修改 `output.hotUpdateChunkFilename`.
 
-## `output.hotUpdateFunction`
+## `output.hotUpdateFunction` {#outputhotupdatefunction}
 
 `string`
 
@@ -485,7 +485,7 @@ JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 详细请查看 [`output.jsonpFunction`](#outputjsonpfunction)。
 
 
-## `output.hotUpdateMainFilename`
+## `output.hotUpdateMainFilename` {#outputhotupdatemainfilename}
 
 `string = '[hash].hot-update.json'` `function`
 
@@ -493,7 +493,7 @@ JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
 T> 通常，你不需要修改 `output.hotUpdateMainFilename`.
 
-## `output.jsonpFunction`
+## `output.jsonpFunction` {#outputjsonpfunction}
 
 `string = 'webpackJsonp'`
 
@@ -534,7 +534,7 @@ __example-on-demand-chunk.js__
 (window.wpJsonpFlightsWidget = window.wpJsonpFlightsWidget || []).push(/* ... */);
 ```
 
-## `output.library`
+## `output.library` {#outputlibrary}
 
 `string` `object`
 
@@ -559,7 +559,7 @@ W> 注意，如果将`数组`作为 `entry`，那么只会暴露数组中的最�
 
 T> 有关 `output.library` 以及 `output.libraryTarget` 详细信息，请查看[创建 library 指南](/guides/author-libraries/)。
 
-## ouput.scriptType
+## ouput.scriptType {#ouputscripttype}
 
 `string: 'module' | 'text/javascript'` `boolean = false`
 
@@ -576,7 +576,7 @@ module.exports = {
 };
 ```
 
-## `output.libraryExport`
+## `output.libraryExport` {#outputlibraryexport}
 
 `string` `[string]`
 
@@ -612,7 +612,7 @@ MySubModule.doSomething();
 ```
 
 
-## `output.libraryTarget`
+## `output.libraryTarget` {#outputlibrarytarget}
 
 `string = 'var'`
 
@@ -620,7 +620,11 @@ MySubModule.doSomething();
 
 T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回的值。在 bundle 本身中，它是从入口起点、由 webpack 生成的函数的输出结果。
 
+<<<<<<< HEAD
 ### 暴露为一个变量
+=======
+### Expose a Variable {#expose-a-variable}
+>>>>>>> en-master
 
 这些选项将入口起点的返回值（例如，入口起点的任何导出值），在 bundle 包所引入的位置，赋值给 output.library 提供的变量名。
 
@@ -646,7 +650,11 @@ MyLibrary = _entry_return_;
 W> 当使用此选项时，将 `output.library` 设置为空，将产生一个破损的输出 bundle。
 
 
+<<<<<<< HEAD
 ### 通过在对象上赋值暴露
+=======
+### Expose Via Object Assignment {#expose-via-object-assignment}
+>>>>>>> en-master
 
 这些选项将入口起点的返回值（例如，入口起点的任何导出值）赋值给一个特定对象的属性（此名称由 `output.library` 定义）下。
 
@@ -694,7 +702,11 @@ exports['MyLibrary'] = _entry_return_;
 require('MyLibrary').doSomething();
 ```
 
+<<<<<<< HEAD
 ### 模块定义系统
+=======
+### Module Definition Systems {#module-definition-systems}
+>>>>>>> en-master
 
 这些选项将导致 bundle 带有更完整的模块头部，以确保与各种模块系统的兼容性。根据 `output.libraryTarget` 选项不同，`output.library` 选项将具有不同的含义。
 
@@ -890,7 +902,11 @@ __system_context__.import('./other-file.js').then(m => {
 });
 ```
 
+<<<<<<< HEAD
 ### 其他 Targets
+=======
+### Other Targets {#other-targets}
+>>>>>>> en-master
 
 `libraryTarget: 'jsonp'` - 这将把入口起点的返回值，包裹到一个 jsonp 包装容器中
 
@@ -901,7 +917,7 @@ MyLibrary(_entry_return_);
 你的 library 的依赖将由 [`externals`](/configuration/externals/) 配置定义。
 
 
-## `output.importFunctionName`
+## `output.importFunctionName` {#outputimportfunctionname}
 
 `string = 'import'`
 
@@ -919,7 +935,7 @@ module.exports = {
 ```
 
 
-## `output.path`
+## `output.path` {#outputpath}
 
 `string = path.join(process.cwd(), 'dist')`
 
@@ -941,7 +957,7 @@ module.exports = {
 注意，`[hash]` 在参数中被替换为编译过程(compilation)的 hash。详细信息请查看[指南 - 缓存](/guides/caching/)。
 
 
-## `output.pathinfo`
+## `output.pathinfo` {#outputpathinfo}
 
 `boolean`
 
@@ -963,7 +979,7 @@ module.exports = {
 T> 这些注释也会被添加至经过 tree shaking 后生成的 bundle 中。
 
 
-## `output.publicPath`
+## `output.publicPath` {#outputpublicpath}
 
 `string = ''` `function`
 
@@ -1049,7 +1065,7 @@ __webpack_public_path__ = myRuntimePublicPath;
 有关 `__webpack_public_path__` 的更多信息，请查看[此讨论](https://github.com/webpack/webpack/issues/2776#issuecomment-233208623)。
 
 
-## `output.sourceMapFilename`
+## `output.sourceMapFilename` {#outputsourcemapfilename}
 
 `string = '[file].map[query]'`
 
@@ -1063,7 +1079,7 @@ __webpack_public_path__ = myRuntimePublicPath;
 | [filebase]                 | 模块 [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) |
 
 
-## `output.sourcePrefix`
+## `output.sourcePrefix` {#outputsourceprefix}
 
 `string = ''`
 
@@ -1085,7 +1101,7 @@ T> 使用一些缩进会使 bundle 看起来更美观，但会导致多行字符
 T> 通常，你不需要修改 `output.sourcePrefix`。
 
 
-## `output.strictModuleExceptionHandling`
+## `output.strictModuleExceptionHandling` {#outputstrictmoduleexceptionhandling}
 
 `boolean = false`
 
@@ -1118,7 +1134,7 @@ require('module'); // <- 仍然抛出
 ```
 
 
-## `output.umdNamedDefine`
+## `output.umdNamedDefine` {#outputumdnameddefine}
 
 `boolean`
 
@@ -1133,7 +1149,7 @@ module.exports = {
 };
 ```
 
-## `output.enabledLibraryTypes`
+## `output.enabledLibraryTypes` {#outputenabledlibrarytypes}
 
 `[string]`
 
@@ -1148,7 +1164,7 @@ module.exports = {
 };
 ```
 
-## `output.futureEmitAssets`
+## `output.futureEmitAssets` {#outputfutureemitassets}
 
 `boolean = false`
 
@@ -1165,7 +1181,7 @@ module.exports = {
 };
 ```
 
-## `output.ecmaVersion`
+## `output.ecmaVersion` {#outputecmaversion}
 
 `number = 6`
 
@@ -1184,7 +1200,7 @@ module.exports = {
 
 T> 在 webpack 4 中  `output.ecmaVersion` 的默认值是 `5`.
 
-## `output.compareBeforeEmit`
+## `output.compareBeforeEmit` {#outputcomparebeforeemit}
 
 `boolean = true`
 
@@ -1201,7 +1217,7 @@ module.exports = {
 };
 ```
 
-## `output.iife`
+## `output.iife` {#outputiife}
 
 `boolean = true`
 
@@ -1216,7 +1232,7 @@ module.exports = {
 };
 ```
 
-## `output.module`
+## `output.module` {#outputmodule}
 
 `boolean = true`
 

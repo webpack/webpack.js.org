@@ -14,7 +14,7 @@ contributors:
 入口对象是用于 webpack 查找开始构建 bundle 的地方。上下文是入口文件所处的目录的绝对路径的字符串。
 
 
-## `context`
+## `context` {#context}
 
 `string`
 
@@ -34,7 +34,7 @@ module.exports = {
 ---
 
 
-## `entry`
+## `entry` {#entry}
 
 `string` `[string]` `object = { <key> string | [string] | object = { import string | [string], dependOn string | [string], filename string }}` `(function() => string | [string] | object = { <key> string | [string] } | object = { import string | [string], dependOn string | [string], filename string })`
 
@@ -56,11 +56,11 @@ module.exports = {
 ```
 
 
-### Naming
+### Naming {#naming}
 
 如果传入一个字符串或字符串数组，chunk 会被命名为 `main`。如果传入一个对象，则每个属性的键(key)会是 chunk 的名称，该属性的值描述了 chunk 的入口点。
 
-### Entry descriptor
+### Entry descriptor {#entry-descriptor}
 
 如果传入一个对象，对象的属性的值可以是一个字符串、字符串数组或者一个描述符(descriptor):
 
@@ -87,7 +87,7 @@ module.exports = {
 描述符语法可以用来传入额外的选项给入口。
 
 
-### Output filename
+### Output filename {#output-filename}
 
 默认情况下，入口 chunk 的输出文件名是从 [`output.filename`](/configuration/output/#outputfilename) 中提取出来的，但你可以为特定的入口指定一个自定义的输出文件名。
 
@@ -105,7 +105,7 @@ module.exports = {
 描述符语法在这里被用来将 `filename`—选项传递给指定的入口点。
 
 
-### Dependencies
+### Dependencies {#dependencies}
 
 默认情况下，每个入口 chunk 保存了全部其用的模块(modules)。使用 `dependOn`—选项你可以与另一个入口 chunk 共享模块:
 
@@ -133,7 +133,7 @@ module.exports = {
 };
 ```
 
-### Dynamic entry
+### Dynamic entry {#dynamic-entry}
 
 如果传入一个函数，那么它将会在每次 [make](/api/compiler-hooks/#make) 事件中被调用。
 

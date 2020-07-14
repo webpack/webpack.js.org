@@ -6,19 +6,31 @@ contributors:
   - pranshuchittora
 ---
 
-## webpack
+## webpack {#webpack}
 
 webpack 遵循 [MIT 许可](https://github.com/webpack/webpack/blob/master/LICENSE)。
 
+<<<<<<< HEAD
 ## webpack logo 和 icon
+=======
+## webpack logo and icon {#webpack-logo-and-icon}
+>>>>>>> en-master
 
 webpack logo 和 icon 遵循不同的许可，
 具体可以查看[这里](https://github.com/webpack/media)
 
+<<<<<<< HEAD
 ## webpack 文档
+=======
+## webpack documentation {#webpack-documentation}
+>>>>>>> en-master
 
 [https://webpack.docschina.org/](https://webpack.docschina.org/) 内容遵循 [Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/) 许可，如果你在其他地方使用我们的内容，则需要放置许可证，并声明文档归属。
 
+<<<<<<< HEAD
 ## webpack 代码示例
+=======
+## webpack code samples {#webpack-code-samples}
+>>>>>>> en-master
 
 代码示例使用 [CC0 1.0 Universal (CC0 1.0)（公共领域）](https://creativecommons.org/publicdomain/zero/1.0/) 许可，你可以自由使用它们。

@@ -15,14 +15,14 @@ contributors:
 webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `target` 的详细信息，
 请阅读 [target 概念页面](/concepts/targets/)。
 
-## `target`
+## `target` {#target}
 
 `string` `function (compiler)`
 
 告知 webpack 为目标(target)指定一个环境。
 
 
-### `string`
+### `string` {#string}
 
 通过 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js) ，
 可以支持以下字符串值：
@@ -47,7 +47,7 @@ webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `
 你可以 [直接参考 webpack 源码](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L148-L183)。
 
 
-### `function`
+### `function` {#function}
 
 如果传入一个函数，此函数调用时会传入一个 编译器（compiler） 作为参数。如果以上列表中没有一个预定义的目标(target)符合你的要求，
 请将其设置为一个函数。

@@ -16,7 +16,7 @@ contributors:
 Besides exporting a single configuration object, there are a few more ways that cover other needs as well.
 
 
-## Exporting a Function
+## Exporting a Function {#exporting-a-function}
 
 Eventually you will find the need to disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production). You have (at least) two options:
 
@@ -43,7 +43,7 @@ One option is to export a function from your webpack configuration instead of ex
 ```
 
 
-## Exporting a Promise
+## Exporting a Promise {#exporting-a-promise}
 
 webpack will run the function exported by the configuration file and wait for a Promise to be returned. Handy when you need to asynchronously load configuration variables.
 
@@ -65,7 +65,7 @@ module.exports = () => {
 W> Returning a `Promise` only works when using webpack via CLI. [`webpack()`](/api/node/#webpack) expects an object.
 
 
-## Exporting multiple configurations
+## Exporting multiple configurations {#exporting-multiple-configurations}
 
 Instead of exporting a single configuration object/function, you may export multiple configurations (multiple functions are supported since webpack 3.1.0). When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/configuration/output/#outputlibrarytarget) such as AMD and CommonJS:
 

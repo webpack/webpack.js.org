@@ -18,7 +18,7 @@ new webpack.SourceMapDevToolPlugin(options);
 ```
 
 
-## Options
+## Options {#options}
 
 The following options are supported:
 
@@ -45,11 +45,11 @@ T> If you want to use a custom configuration for this plugin in [development mod
 
 W> If the default webpack `minimizer` has been overridden (such as to customise the `TerserPlugin` options), make sure to configure its replacement with `sourceMap: true` to enable SourceMap support.
 
-## Examples
+## Examples {#examples}
 
 The following examples demonstrate some common use cases for this plugin.
 
-### Basic Use Case
+### Basic Use Case {#basic-use-case}
 
 You can use the following code to replace the configuration option `devtool: inline-source-map` with an equivalent custom plugin configuration:
 
@@ -63,7 +63,7 @@ module.exports = {
 };
 ```
 
-### Exclude Vendor Maps
+### Exclude Vendor Maps {#exclude-vendor-maps}
 
 The following code would exclude source maps for any modules in the `vendor.js` bundle:
 
@@ -74,7 +74,7 @@ new webpack.SourceMapDevToolPlugin({
 });
 ```
 
-### Host Source Maps Externally
+### Host Source Maps Externally {#host-source-maps-externally}
 
 Set a URL for source maps. Useful for hosting them on a host that requires authorization.
 

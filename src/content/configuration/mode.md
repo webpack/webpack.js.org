@@ -15,7 +15,11 @@ related:
 
 `string = 'production': 'none' | 'development' | 'production'`
 
+<<<<<<< HEAD
 ## 用法
+=======
+## Usage {#usage}
+>>>>>>> en-master
 
 只需在配置对象中提供 `mode` 选项：
 
@@ -45,7 +49,7 @@ webpack --mode=development
 T> 请注意，设置 `NODE_ENV` 并不会自动地设置 `mode`。
 
 
-### Mode: development
+### Mode: development {#mode-development}
 
 
 ```diff
@@ -87,7 +91,7 @@ module.exports = {
 ```
 
 
-### Mode: production
+### Mode: production {#mode-production}
 
 
 ```diff
@@ -127,7 +131,7 @@ module.exports = {
 ```
 
 
-### Mode: none
+### Mode: none {#mode-none}
 
 
 ```diff
