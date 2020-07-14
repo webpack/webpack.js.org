@@ -23,11 +23,11 @@ const docs = [
 const currentDocsVersion = 5;
 
 // Create and export the component
-export default ({
+export default function Sidebar({
   className = '',
   pages,
   currentPage
-}) => {
+}) {
   let group;
 
   return (
@@ -69,4 +69,4 @@ export default ({
       </div>
     </nav>
   );
-};
+}
