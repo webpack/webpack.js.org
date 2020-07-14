@@ -4,6 +4,7 @@ contributors:
   - skipjack
   - byzyk
   - chenxsan
+  - snitin315
 related:
   - title: Concepts - Hot Module Replacement
     url: /concepts/hot-module-replacement
@@ -25,13 +26,3 @@ new webpack.HotModuleReplacementPlugin({
   // Options...
 });
 ```
-
-
-## Options
-
-The following options are accepted:
-
-- `multiStep` (boolean): If `true`, the plugin will build in two steps -- first compiling the hot update chunks, and then the remaining normal assets.
-- `fullBuildTimeout` (number): The delay between the two steps when `multiStep` is enabled.
-
-W> These options are experimental and may be deprecated. As mentioned above, they are typically not necessary and including a `new webpack.HotModuleReplacementPlugin()` is enough.
