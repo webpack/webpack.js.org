@@ -4,6 +4,7 @@ sort: 6
 contributors:
   - EugeneHlushko
   - wizardofhogwarts
+  - chenxsan
 ---
 
 T> 本 API 从 v4.39.0 开始可用
@@ -25,6 +26,38 @@ Webpack Logger 可以用在 [loader](/loaders/) 和 [plugin](/api/plugins/#loggi
 通过引入 Webpack Logger API，我们希望统一 Webpack plugins 和 loaders 生成日志的方式，并提供更好的方法来检查构建问题。 集成的 Logging 解决方案可以帮助 plugins 和 loader 的开发人员提升他们的开发经验。同时为非 CLI 形式的 Webpack 解决方案构建铺平了道路，例如 dashboard 或其他 UI。
 
 W> __避免在日志中输出无效信息！__请记住，多个 plugin 和 loader 经常一起使用。loader 通常处理多个文件，并且每个文件都会调用，所以尽可能选择较低的日志级别以保证 log 的信息量。
+
+## Examples of how to get and use webpack logger in loaders and plugins
+
+__my-webpack-plugin.js__
+
+```js
+const PLUGIN_NAME = 'my-webpack-plugin';
+export class MyWebpackPlugin {
+  apply(compiler) {
+    // you can access Logger from compiler
+    const logger = compiler.getInfrastructureLogger(PLUGIN_NAME);
+    logger.log('log from compiler');
+
+    compiler.hooks.compilation.tap(PLUGIN_NAME, compilation => {
+      // you can also access Logger from compilation
+      const logger = compilation.getLogger(PLUGIN_NAME);
+      logger.info('log from compilation');
+    });
+  }
+}
+```
+
+__my-webpack-loader.js__
+
+```js
+module.exports = function (source) {
+  // you can get Logger with `this.getLogger` in your webpack loaders
+  const logger = this.getLogger('my-webpack-loader');
+  logger.info('hello Logger');
+  return source;
+};
+```
 
 ## Logger methods
 

@@ -7,6 +7,7 @@ import DocumentTitle from 'react-document-title';
 // Import Utilities
 import { extractPages, extractSections, getPageTitle } from '../../utilities/content-utils';
 import isClient from '../../utilities/is-client';
+import getAdjacentPages from '../../utilities/get-adjacent-pages';
 
 // Import Components
 import NotificationBar from '../NotificationBar/NotificationBar';
@@ -48,7 +49,13 @@ class Site extends React.Component {
     let sections = extractSections(Content);
     let section = sections.find(({ url }) => location.pathname.startsWith(url));
     let pages = extractPages(Content);
-
+    const sidebarPages = this._strip(
+      section
+        ? section.children
+        : Content.children.filter(
+            item => item.type !== 'directory' && item.url !== '/'
+          )
+    );
     return (
       <div className="site">
         <DocumentTitle title={getPageTitle(Content, location.pathname)} />
@@ -96,20 +103,25 @@ class Site extends React.Component {
                       render={props => {
                         let path = page.path.replace('src/content/', '');
                         let content = this.props.import(path);
-
+                        const { previous, next } = getAdjacentPages(
+                          sidebarPages,
+                          page,
+                          'url'
+                        );
                         return (
                           <React.Fragment>
                             <Sponsors />
                             <Sidebar
                               className="site__sidebar"
                               currentPage={location.pathname}
-                              pages={this._strip(
-                                section
-                                  ? section.children
-                                  : Content.children.filter(item => item.type !== 'directory' && item.url !== '/')
-                              )}
+                              pages={sidebarPages}
                             />
-                            <Page {...page} content={content} />
+                            <Page
+                              {...page}
+                              content={content}
+                              previous={previous}
+                              next={next}
+                            />
                             <Gitter />
                           </React.Fragment>
                         );
