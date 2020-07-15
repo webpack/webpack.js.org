@@ -67,11 +67,7 @@ $('.my-element').animate(/* ... */);
 可以接受以下语法……
 
 
-<<<<<<< HEAD
-### 字符串
-=======
-### string {#string}
->>>>>>> en-master
+### 字符串 {#string}
 
 请查看上面的例子。属性名称是 `jquery`，表示应该排除 `import $ from 'jquery'` 中的 `jquery` 模块。为了替换这个模块，`jQuery` 的值将被用来检索一个全局的 `jQuery` 变量。换句话说，当设置为一个字符串时，它将被视为`全局的`（定义在上面和下面）。
 
@@ -100,11 +96,7 @@ import fs from 'fs-extra';
 const fs = require('fs-extra');
 ```
 
-<<<<<<< HEAD
-### 字符串数组
-=======
-### [string] {#string}
->>>>>>> en-master
+### 字符串数组 {#string}
 
 ```javascript
 module.exports = {
@@ -117,11 +109,7 @@ module.exports = {
 
 `subtract: ['./math', 'subtract']` 转换为父子结构，其中 `./math` 是父模块，而 bundle 只引用 `subtract` 变量下的子集。该例子会编译成 `require('./math').subtract;`
 
-<<<<<<< HEAD
-### 对象
-=======
-### object {#object}
->>>>>>> en-master
+### 对象 {#object}
 
 W> 一个形如  `{ root, amd, commonjs, ... }` 的对象仅允许用于  [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget) 这样的配置.它不被允许 用于其它的 library targets 配置值.
 
@@ -155,11 +143,7 @@ module.exports = {
 此语法用于描述外部 library 所有可用的访问方式。这里 `lodash` 这个外部 library 可以在 AMD 和 CommonJS 模块系统中通过 `lodash` 访问，但在全局变量形式下用 `_` 访问。`subtract` 可以通过全局 `math` 对象下的属性 `subtract` 访问（例如 `window['math']['subtract']`）。
 
 
-<<<<<<< HEAD
-### 函数
-=======
-### function {#function}
->>>>>>> en-master
+### 函数 {#function}
 
 `function (context, request, callback)`
 
@@ -272,11 +256,7 @@ module.exports = {
 
 这个示例中，所有名为 `jQuery` 的依赖（忽略大小写），或者 `$`，都会被外部化。
 
-<<<<<<< HEAD
-### 混用语法
-=======
-### Combining syntaxes {#combining-syntaxes}
->>>>>>> en-master
+### 混用语法 {#combining-syntaxes}
 
 有时你需要混用上面介绍的语法。这可以像以下这样操作：
 

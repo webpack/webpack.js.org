@@ -16,11 +16,7 @@ contributors:
  [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) 和 [`tapable`](/api/plugins/#tapable) 文档。
 
 
-<<<<<<< HEAD
-## 类型
-=======
-## Types {#types}
->>>>>>> en-master
+## 类型 {#types}
 
 在 `compiler` 类中，提供了三种类型的内置解析器：
 
@@ -45,11 +41,7 @@ compiler.resolverFactory.plugin('resolver [type]', resolver => {
 介绍。
 
 
-<<<<<<< HEAD
-## 配置选项
-=======
-## Configuration Options {#configuration-options}
->>>>>>> en-master
+## 配置选项 {#configuration-options}
 
 上述解析器也可以
 利用 [`resolve`](/configuration/resolve/) or [`resolveLoader`](/configuration/resolve/#resolveloader) 选项，通过配置文件进行定制。这些选项允许

@@ -12,11 +12,7 @@ contributors:
 可以通过配置 `output` 选项，告知 webpack 如何向硬盘写入编译文件。注意，即使可以存在多个 `entry` 起点，但只能指定一个 `output` 配置。
 
 
-<<<<<<< HEAD
-## 用法
-=======
-## Usage {#usage}
->>>>>>> en-master
+## 用法 {#usage}
 
 在 webpack 配置中，`output` 属性的最低要求是，将它的值设置为一个对象，然后为将输出文件的文件名配置为一个 [`output.filename`](/configuration/output/#outputfilename)：
 
@@ -33,11 +29,7 @@ module.exports = {
 此配置将一个单独的 `bundle.js` 文件输出到 `dist` 目录中。
 
 
-<<<<<<< HEAD
-## 多个入口起点
-=======
-## Multiple Entry Points {#multiple-entry-points}
->>>>>>> en-master
+## 多个入口起点 {#multiple-entry-points}
 
 如果配置中创建出多于一个 "chunk"（例如，使用多个入口起点或使用像 CommonsChunkPlugin 这样的插件），则应该使用 [占位符(substitutions)](/configuration/output#output-filename) 来确保每个文件具有唯一的名称。
 
@@ -57,11 +49,7 @@ module.exports = {
 ```
 
 
-<<<<<<< HEAD
-## 高级进阶
-=======
-## Advanced {#advanced}
->>>>>>> en-master
+## 高级进阶 {#advanced}
 
 以下是对资源使用 CDN 和 hash 的复杂示例：
 

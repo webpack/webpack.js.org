@@ -24,11 +24,7 @@ T> 此模块会暴露在 `webpack.Compiler`，
 在为 webpack 开发插件时，你可能需要知道每个钩子函数是在哪里调用的。想要了解这些内容，请在 webpack 源码中搜索 `hooks.<hook name>.call`。
 
 
-<<<<<<< HEAD
-## 监听(watching)
-=======
-## Watching {#watching}
->>>>>>> en-master
+## 监听(watching) {#watching}
 
 `Compiler` 支持可以监控文件系统的 [监听(watching)](/api/node/#watching) 机制，并且在文件修改时重新编译。
 当处于监听模式(watch mode)时，
@@ -39,11 +35,7 @@ compiler 会触发诸如 `watchRun`, `watchClose` 和 `invalid` 等额外的事�
 还可以通过 [CLI](/api/cli/#watch-options) 进入监听模式。
 
 
-<<<<<<< HEAD
-## 钩子
-=======
-## Hooks {#hooks}
->>>>>>> en-master
+## 钩子 {#hooks}
 
 以下生命周期钩子函数，是由 `compiler` 暴露，
 可以通过如下方式访问：

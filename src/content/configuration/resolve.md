@@ -38,12 +38,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.alias`
-=======
-
 ### `resolve.alias` {#resolvealias}
->>>>>>> en-master
 
 `object`
 
@@ -175,12 +170,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.cacheWithContext`
-=======
-
 ### `resolve.cacheWithContext` {#resolvecachewithcontext}
->>>>>>> en-master
 
 `boolean` (从 webpack 3.1.0起支持)
 
@@ -204,12 +194,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.enforceExtension`
-=======
-
 ### `resolve.enforceExtension` {#resolveenforceextension}
->>>>>>> en-master
 
 `boolean = false`
 
@@ -227,12 +212,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.enforceModuleExtension`
-=======
-
 ### `resolve.enforceModuleExtension` {#resolveenforcemoduleextension}
->>>>>>> en-master
 
 `boolean = false`
 
@@ -251,12 +231,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.extensions`
-=======
-
 ### `resolve.extensions` {#resolveextensions}
->>>>>>> en-master
 
 `[string] = ['.wasm', '.mjs', '.js', '.json']`
 
@@ -346,12 +321,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.modules`
-=======
-
 ### `resolve.modules` {#resolvemodules}
->>>>>>> en-master
 
 `[string] = ['node_modules']`
 
@@ -390,12 +360,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.unsafeCache`
-=======
-
 ### `resolve.unsafeCache` {#resolveunsafecache}
->>>>>>> en-master
 
 `RegExp` `[RegExp]` `boolean: true`
 
@@ -446,12 +411,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.symlinks`
-=======
-
 ### `resolve.symlinks` {#resolvesymlinks}
->>>>>>> en-master
 
 `boolean = true`
 
@@ -470,12 +430,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.cachePredicate`
-=======
-
 ### `resolve.cachePredicate` {#resolvecachepredicate}
->>>>>>> en-master
 
 `function(module) => boolean`
 

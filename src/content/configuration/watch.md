@@ -142,19 +142,11 @@ webpack --watch --info-verbosity verbose
 ```
 
 
-<<<<<<< HEAD
-## 故障排除
-=======
-## Troubleshooting {#troubleshooting}
->>>>>>> en-master
+## 故障排除 {#troubleshooting}
 
 如果您遇到任何问题，请查看以下注意事项。对于 webpack 为何会忽略文件修改，这里有多种原因。
 
-<<<<<<< HEAD
-### 发现修改，但并未做处理
-=======
-### Changes Seen But Not Processed {#changes-seen-but-not-processed}
->>>>>>> en-master
+### 发现修改，但并未做处理 {#changes-seen-but-not-processed}
 
 在运行 webpack 时，通过使用 --progress 标志，来验证文件修改后，是否没有通知 webpack。如果进度显示保存，但没有输出文件，则可能是配置问题，而不是文件监视问题。
 
@@ -162,11 +154,7 @@ webpack --watch --info-verbosity verbose
 webpack --watch --progress
 ```
 
-<<<<<<< HEAD
-### 没有足够的文件观察者
-=======
-### Not Enough Watchers {#not-enough-watchers}
->>>>>>> en-master
+### 没有足够的文件观察者 {#not-enough-watchers}
 
 确认系统中有足够多的文件观察者。如果这个值太低，webpack 中的文件观察者将无法识别修改：
 
@@ -192,10 +180,6 @@ Arch 用户，请将 `fs.inotify.max_user_watches=524288` 添加到 `/etc/sysctl
 
 `:set backupcopy=yes`
 
-<<<<<<< HEAD
-### 在 WebStorm 中保存
-=======
-### Saving in WebStorm {#saving-in-webstorm}
->>>>>>> en-master
+### 在 WebStorm 中保存 {#saving-in-webstorm}
 
 使用 JetBrains WebStorm IDE 时，你可能会发现保存修改过的文件，并不会按照预期触发观察者。尝试在设置中禁用`安全写入(safe write)`选项，该选项确定在原文件被覆盖之前，文件是否先保存到临时位置：取消选中 `File > {Settings|Preferences} > Appearance & Behavior > System Settings > Use "safe write" (save changes to a temporary file first)`。

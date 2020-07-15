@@ -28,11 +28,7 @@ contributors:
 T> 以下示例来源于 [tree shaking](/guides/tree-shaking) 和 [开发环境](/guides/development)。在继续之前，请确保你已经熟悉这些指南中所介绍的概念/配置。
 
 
-<<<<<<< HEAD
-## 配置
-=======
-## Setup {#setup}
->>>>>>> en-master
+## 配置 {#setup}
 
 _development(开发环境)_ 和 _production(生产环境)_ 这两个环境下的构建目标存在着巨大差异。在_开发环境_中，我们需要：强大的 source map 和一个有着 live reloading(实时重新加载) 或 hot module replacement(热模块替换) 能力的 localhost server。而_生产环境_目标则转移至其他方面，关注点在于压缩 bundle、更轻量的 source map、资源优化等，通过这些优化方式改善加载时间。由于要遵循逻辑分离，我们通常建议为每个环境编写__彼此独立的 webpack 配置__。
 
@@ -156,11 +152,7 @@ __package.json__
 
 随便运行下这些脚本，然后查看输出结果的变化，然后我们会继续添加一些_生产环境_配置。
 
-<<<<<<< HEAD
-## 指定 mode
-=======
-## Specify the Mode {#specify-the-mode}
->>>>>>> en-master
+## 指定 mode {#specify-the-mode}
 
 许多 library 通过与 `process.env.NODE_ENV` 环境变量关联，以决定 library 中应该引用哪些内容。例如，当`process.env.NODE_ENV` 没有被设置为 `'production'` 时，某些 library 为了使调试变得容易，可能会添加额外的 log(日志记录) 和 test(测试) 功能。并且，在使用 `process.env.NODE_ENV === 'production'` 时，一些 library 可能针对具体用户的环境，删除或添加一些重要代码，以进行代码执行方面的优化。从 webpack v4 开始, 指定 [`mode`](/configuration/mode/) 会自动地配置 [`DefinePlugin`](/plugins/define-plugin)：
 
@@ -203,11 +195,7 @@ __src/index.js__
 ```
 
 
-<<<<<<< HEAD
-## 压缩(Minification)
-=======
-## Minification {#minification}
->>>>>>> en-master
+## 压缩(Minification) {#minification}
 
 webpack v4+ will minify your code by default in [`production mode`](/configuration/mode/#mode-production).
 
@@ -219,11 +207,7 @@ webpack v4+ will minify your code by default in [`production mode`](/configurati
 如果决定尝试一些其他压缩插件，只要确保新插件也会按照 [tree shake](/guides/tree-shaking) 指南中所陈述的具有删除未引用代码(dead code)的能力，并将它作为 [`optimization.minimizer`](/configuration/optimization/#optimization-minimizer)。
 
 
-<<<<<<< HEAD
-## 源码映射(Source Mapping)
-=======
-## Source Mapping {#source-mapping}
->>>>>>> en-master
+## 源码映射(Source Mapping) {#source-mapping}
 
 我们鼓励你在生产环境中启用 source map，因为它们对 debug(调试源码) 和运行 benchmark tests(基准测试) 很有帮助。虽然有着如此强大的功能，然而还是应该针对生产环境用途，选择一个可以快速构建的推荐配置（更多选项请查看 [`devtool`](/configuration/devtool)）。对于本指南，我们将在_生产环境_中使用 `source-map` 选项，而不是我们在_开发环境_中用到的 `inline-source-map`：
 
@@ -242,20 +226,12 @@ __webpack.prod.js__
 T> 避免在生产中使用 `inline-***` 和 `eval-***`，因为它们会增加 bundle 体积大小，并降低整体性能。
 
 
-<<<<<<< HEAD
-## 压缩 CSS
-=======
-## Minimize CSS {#minimize-css}
->>>>>>> en-master
+## 压缩 CSS {#minimize-css}
 
 将生产环境下的 CSS 进行压缩会非常重要，请查看 [在生产环境下压缩](/plugins/mini-css-extract-plugin/#minimizing-for-production) 章节。
 
 
-<<<<<<< HEAD
-## CLI 替代选项
-=======
-## CLI Alternatives {#cli-alternatives}
->>>>>>> en-master
+## CLI 替代选项 {#cli-alternatives}
 
 以上所述也可以通过命令行实现。例如，`--optimize-minimize` 标记将在幕后引用 `TerserPlugin`。和以上描述的 `DefinePlugin` 实例相同，`--define process.env.NODE_ENV="'production'"` 也会做同样的事情。而且，`webpack -p` 将自动地配置上述这两个标记，从而调用需要引入的插件。
 

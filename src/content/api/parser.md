@@ -28,11 +28,7 @@ compiler.hooks.normalModuleFactory.tap('MyPlugin', factory => {
 也可以在某些钩子上访问 `tapAsync` 和 `tapPromise`。
 
 
-<<<<<<< HEAD
-## 钩子
-=======
-## Hooks {#hooks}
->>>>>>> en-master
+## 钩子 {#hooks}
 
 以下生命周期钩子函数，是由 `parser` 暴露，可以通过
 如下方式访问：

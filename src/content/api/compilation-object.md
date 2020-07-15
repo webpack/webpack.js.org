@@ -10,11 +10,7 @@ contributors:
 
 Compilation 对象有很多可用的方法和钩子。在此页面，我们将会列举出这些可用的方法和属性。
 
-<<<<<<< HEAD
-## compilation 对象方法
-=======
-## compilation object methods {#compilation-object-methods}
->>>>>>> en-master
+## compilation 对象方法 {#compilation-object-methods}
 
 ### getStats {#getstats}
 

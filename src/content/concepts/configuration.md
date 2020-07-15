@@ -30,11 +30,7 @@ T> 此文档中得出最重要的结论是，webpack 的配置可以有许多不
 
 接下来的示例中，展示了 webpack 配置如何实现既可表达，又可灵活配置，这主要得益于_配置即为代码_：
 
-<<<<<<< HEAD
-## 基本配置
-=======
-## Simple Configuration {#simple-configuration}
->>>>>>> en-master
+## 基本配置 {#simple-configuration}
 
 __webpack.config.js__
 
@@ -53,21 +49,13 @@ module.exports = {
 
 _查看_：[配置章节](/configuration/)中所有支持的配置选项。
 
-<<<<<<< HEAD
-## 多个 target
-=======
-## Multiple Targets {#multiple-targets}
->>>>>>> en-master
+## 多个 target {#multiple-targets}
 
 除了可以将单个配置导出问 object，[function](/configuration/configuration-types/#exporting-a-function) 或 [Promise](/configuration/configuration-types/#exporting-a-promise) 以为，还可以将其导出为多个配置。
 
 _查看_：[导出多个配置](/configuration/configuration-types/#exporting-multiple-configurations)
 
-<<<<<<< HEAD
-## 使用其它配置语言
-=======
-## Using other Configuration Languages {#using-other-configuration-languages}
->>>>>>> en-master
+## 使用其它配置语言 {#using-other-configuration-languages}
 
 webpack 支持由多种编程和数据语言编写的配置文件。
 

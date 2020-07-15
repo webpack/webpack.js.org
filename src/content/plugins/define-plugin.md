@@ -92,11 +92,7 @@ new webpack.DefinePlugin({
 ```
 
 
-<<<<<<< HEAD
-## Service URL
-=======
-## Service URLs {#service-urls}
->>>>>>> en-master
+## Service URL {#service-urls}
 
 在生产或开发构建中使用不同的服务 URL：
 

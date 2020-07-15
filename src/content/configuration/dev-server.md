@@ -29,11 +29,7 @@ contributors:
 T> 与 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 兼容的配置项后面 🔑 标记。
 
 
-<<<<<<< HEAD
-## 开发服务器(`devServer`)
-=======
-## `devServer` {#devserver}
->>>>>>> en-master
+## 开发服务器(`devServer`) {#devserver}
 
 `object`
 

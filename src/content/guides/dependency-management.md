@@ -16,11 +16,7 @@ contributors:
 > amd
 
 
-<<<<<<< HEAD
-## 带表达式的 require 语句
-=======
-## require with expression {#require-with-expression}
->>>>>>> en-master
+## 带表达式的 require 语句 {#require-with-expression}
 
 如果你的 request 含有表达式(expressions)，就会创建一个上下文(context)，因为在编译时(compile time)并不清楚 __具体__ 导入哪个模块。
 

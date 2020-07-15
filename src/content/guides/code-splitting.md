@@ -51,11 +51,7 @@ T> 本指南继续沿用 [起步](/guides/getting-started) 和 [管理输出](/g
 - 动态导入：通过模块的内联函数调用来分离代码。
 
 
-<<<<<<< HEAD
-## 入口起点(entry point)
-=======
-## Entry Points {#entry-points}
->>>>>>> en-master
+## 入口起点(entry point) {#entry-points}
 
 这是迄今为止最简单直观的分离代码的方式。不过，这种方式手动配置较多，并有一些隐患，我们将会解决这些问题。先来看看如何从 main bundle 中分离 another module(另一个模块)：
 
@@ -120,15 +116,9 @@ Entrypoint another = another.bundle.js
 以上两点中，第一点对我们的示例来说无疑是个问题，因为之前我们在 `./src/index.js` 中也引入过 `lodash`，这样就在两个 bundle 中造成重复引用。接着，我们通过使用 [`SplitChunksPlugin`](/plugins/split-chunks-plugin) 来移除重复的模块。
 
 
-<<<<<<< HEAD
-## 防止重复(prevent duplication)
+## 防止重复(prevent duplication) {#prevent-duplication}
 
-### 入口依赖
-=======
-## Prevent Duplication {#prevent-duplication}
-
-### Entry dependencies {#entry-dependencies}
->>>>>>> en-master
+### 入口依赖 {#entry-dependencies}
 
 配置 [`dependOn` option](/configuration/entry-context/#dependencies) 选项，这样可以在多个 chunk 之间共享模块。
 
@@ -199,11 +189,7 @@ Entrypoint another = vendors~another~index.bundle.js another.bundle.js
 - [`mini-css-extract-plugin`](plugins/mini-css-extract-plugin): 用于将 CSS 从主应用程序中分离。
 
 
-<<<<<<< HEAD
-## 动态导入(dynamic import)
-=======
-## Dynamic Imports {#dynamic-imports}
->>>>>>> en-master
+## 动态导入(dynamic import) {#dynamic-imports}
 
 当涉及到动态代码拆分时，webpack 提供了两个类似的技术。第一种，也是推荐选择的方式是，使用符合 [ECMAScript 提案](https://github.com/tc39/proposal-dynamic-import) 的 [`import()` 语法](/api/module-methods/#import-1) 来实现动态导入。第二种，则是 webpack 的遗留功能，使用 webpack 特定的 [`require.ensure`](/api/module-methods/#requireensure)。让我们先尝试使用第一种……
 
@@ -324,11 +310,7 @@ __src/index.js__
 T> 在稍后示例中，可能会根据计算后的变量(computed variable)导入特定模块时，可以通过向 `import()` 传入一个 [动态表达式](/api/module-methods/#dynamic-expressions-in-import)。
 
 
-<<<<<<< HEAD
-## 预获取/预加载模块(prefetch/preload module)
-=======
-## Prefetching/Preloading modules {#prefetchingpreloading-modules}
->>>>>>> en-master
+## 预获取/预加载模块(prefetch/preload module) {#prefetchingpreloading-modules}
 
 webpack v4.6.0+ 增加了对预获取和预加载的支持。
 
@@ -373,11 +355,7 @@ import(/* webpackPreload: true */ 'ChartingLibrary');
 T> 不正确地使用 webpackPreload 会有损性能，请谨慎使用。
 
 
-<<<<<<< HEAD
-## bundle 分析(bundle analysis)
-=======
-## Bundle Analysis {#bundle-analysis}
->>>>>>> en-master
+## bundle 分析(bundle analysis) {#bundle-analysis}
 
 一旦开始分离代码，一件很有帮助的事情是，分析输出结果来检查模块在何处结束。 [官方分析工具](https://github.com/webpack/analyse) 是一个不错的开始。还有一些其他社区支持的可选项：
 
@@ -387,10 +365,6 @@ T> 不正确地使用 webpackPreload 会有损性能，请谨慎使用。
 - [webpack bundle optimize helper](https://webpack.jakoblind.no/optimize)：这个工具会分析你的 bundle，并提供可操作的改进措施，以减少 bundle 的大小。
 - [bundle-stats](https://github.com/bundle-stats/bundle-stats)：生成一个 bundle 报告（bundle 大小、资源、模块），并比较不同构建之间的结果。
 
-<<<<<<< HEAD
-## 下一步
-=======
-## Next Steps {#next-steps}
->>>>>>> en-master
+## 下一步 {#next-steps}
 
 接下来，查看 [延迟加载](/guides/lazy-loading/) 来学习如何在实际一个真实应用程序中使用 `import()` 的具体示例，以及查看 [缓存](/guides/caching/) 来学习如何有效地分离代码。

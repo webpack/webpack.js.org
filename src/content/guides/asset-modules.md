@@ -43,11 +43,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## resource 资源(resource asset)
-=======
-## Resource assets {#resource-assets}
->>>>>>> en-master
+## resource 资源(resource asset) {#resource-assets}
 
 __webpack.config.js__
 
@@ -84,11 +80,7 @@ img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 
 所有 `.png` 文件都将被发送到输出目录，并且其路径将被注入到 bundle 中。
 
-<<<<<<< HEAD
-### 自定义输出文件名
-=======
-### Custom output filename {#custom-output-filename}
->>>>>>> en-master
+### 自定义输出文件名 {#custom-output-filename}
 
 默认情况下，`asset/resource` 模块以 `[hash][ext]` 文件名发送到输出目录。
 
@@ -158,11 +150,7 @@ module.exports = {
 
 `Rule.generator.filename` 与 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 相同，并且仅适用于 `asset` 和 `asset/resource` 模块类型。
 
-<<<<<<< HEAD
-## inline 资源(inlining asset)
-=======
-## Inlining assets {#inlining-assets}
->>>>>>> en-master
+## inline 资源(inlining asset) {#inlining-assets}
 
 __webpack.config.js__
 
@@ -212,11 +200,7 @@ __src/index.js__
 
 所有 `.svg` 文件都将作为 data URI 注入到 bundle 中。
 
-<<<<<<< HEAD
-### 自定义 data URI 生成器
-=======
-### Custom data URI generator {#custom-data-uri-generator}
->>>>>>> en-master
+### 自定义 data URI 生成器 {#custom-data-uri-generator}
 
 webpack 输出的 data URI，默认是呈现为使用 Base64 算法编码的文件内容。
 
@@ -256,11 +240,7 @@ module.exports = {
 
 现在，所有 `.svg` 文件都将通过 `mini-svg-data-uri` 包进行编码。
 
-<<<<<<< HEAD
-## source 资源(source asset)
-=======
-## Source assets {#source-assets}
->>>>>>> en-master
+## source 资源(source asset) {#source-assets}
 
 __webpack.config.js__
 
@@ -314,11 +294,7 @@ __src/index.js__
 
 所有 `.txt` 文件将原样注入到 bundle 中。
 
-<<<<<<< HEAD
-## 通用资源类型(general asset type)
-=======
-## General asset type {#general-asset-type}
->>>>>>> en-master
+## 通用资源类型(general asset type) {#general-asset-type}
 
 __webpack.config.js__
 

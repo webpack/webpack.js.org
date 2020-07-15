@@ -27,11 +27,7 @@ if (module.hot) {
 
 支持以下方法……
 
-<<<<<<< HEAD
-## 模块 API
-=======
-## Module API {#module-api}
->>>>>>> en-master
+## 模块 API {#module-api}
 
 ### `accept` {#accept}
 
@@ -48,11 +44,7 @@ module.hot.accept(
 
 在使用 CommonJS 时，你应该通过 `callback` 中的 `require()` 手动更新依赖模块。省略 `callback` 在这里没有任何意义。
 
-<<<<<<< HEAD
-### `accept` (自身)
-=======
-### `accept` (self) {#accept-self}
->>>>>>> en-master
+### `accept` (自身) {#accept-self}
 
 接受自身更新。
 
@@ -78,11 +70,7 @@ module.hot.decline(
 
 将依赖模块标记为不可更新(not-update-able)。在处理「依赖的导出正在更新」或「尚未实现处理」时，这是有意义的。取决于你的 HMR 管理代码，此依赖模块（或其未接受的依赖模块）更新，通常会导致页面被完全重新加载。
 
-<<<<<<< HEAD
-### `decline` (自身)
-=======
-### `decline` (self) {#decline-self}
->>>>>>> en-master
+### `decline` (自身) {#decline-self}
 
 拒绝自身更新。
 
@@ -115,12 +103,7 @@ module.hot.dispose(data => {
 
 在 `dispose` 或 `apply` 状态下调用时，HMR 将在退出这些状态后将其拾取。
 
-<<<<<<< HEAD
-
-### 用例
-=======
-### Use Cases {#use-cases}
->>>>>>> en-master
+### 用例 {#use-cases}
 
 __Conditional Accepting__
 
@@ -189,11 +172,7 @@ W> 通过一次次的调用 `invalidate`，不要陷入 `invalidate` 循环。�
 module.hot.removeDisposeHandler(callback);
 ```
 
-<<<<<<< HEAD
-## API 管理
-=======
-## Management API {#management-api}
->>>>>>> en-master
+## API 管理 {#management-api}
 
 ### `status` {#status}
 

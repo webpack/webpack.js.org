@@ -10,11 +10,7 @@ contributors:
 
 首次设置复杂的 webpack 配置可能会很困难。并且编写高级配置来优化性能会更加困难。下面提供的 `init` 能力，可以让我们使用可自定义的第三方初始化包，来创建 webpack 配置。
 
-<<<<<<< HEAD
-## 创建脚手架
-=======
-## Creating a scaffold {#creating-a-scaffold}
->>>>>>> en-master
+## 创建脚手架 {#creating-a-scaffold}
 
 在编写 `webpack-cli` 脚手架之前，请先考虑下要实现的目标和要使用的群体：
 
@@ -24,21 +20,13 @@ contributors:
 
 `webpack-cli` 提供了一种交互式体验，可以对应地自定义输出。例如，询问类似 "你的入口起点是什么？" 这样的问题。
 
-<<<<<<< HEAD
-### 编写脚手架
-=======
-### Writing a scaffold {#writing-a-scaffold}
->>>>>>> en-master
+### 编写脚手架 {#writing-a-scaffold}
 
 如果你想要学习如何编写脚手架，这里有许多资源可以参考，可以阅读 [编写脚手架](/contribute/writing-a-scaffold/) 教程作为开始。
 
 `webpack-scaffold` 是用于创建脚手架的工具套件。它包含一些可用于创建脚手架的功能。
 
-<<<<<<< HEAD
-### 执行脚手架
-=======
-### Running a scaffold {#running-a-scaffold}
->>>>>>> en-master
+### 执行脚手架 {#running-a-scaffold}
 
 可以使用 `webpack-cli init` 执行脚手架：
 
@@ -46,11 +34,7 @@ contributors:
 webpack-cli init <your-scaffold>
 ```
 
-<<<<<<< HEAD
-#### 在本地运行脚手架
-=======
-#### Running a scaffold locally {#running-a-scaffold-locally}
->>>>>>> en-master
+#### 在本地运行脚手架 {#running-a-scaffold-locally}
 
 当脚手架 package 位于本地文件系统中时，应将 `init` 指向其路径：
 
@@ -76,11 +60,7 @@ yarn link
 webpack-cli init my-scaffold
 ```
 
-<<<<<<< HEAD
-#### 从 npm 运行脚手架
-=======
-#### Running a scaffold from npm {#running-a-scaffold-from-npm}
->>>>>>> en-master
+#### 从 npm 运行脚手架 {#running-a-scaffold-from-npm}
 
 如果可以从 npm 获得此 package，则其名称必须以 `webpack-scaffold` 开头，并且可以通过运行以下命令来使用：
 
@@ -94,32 +74,20 @@ webpack-cli init webpack-scaffold-yourpackage
 
 W> 使用字符串创建对象，而使用双字符串(double string)创建字符串。这意味着，为了创建一个字符串，你必须将其包装在另一个字符串中，以便我们正确验证它。
 
-<<<<<<< HEAD
-### 必选项
-=======
-### Required {#required}
->>>>>>> en-master
+### 必选项 {#required}
 
 - [`opts.env.configuration`(required)](#optsenvconfigurationrequired)
 - [`opts.env.configuration.myObj` (required)](#optsenvconfigurationmyobj-required)
 - [`myObj.webpackOptions` (required)](#myobjwebpackoptions-required)
 - [`writing` (required)](#writing-required)
 
-<<<<<<< HEAD
-### 可选项
-=======
-### Optional {#optional}
->>>>>>> en-master
+### 可选项 {#optional}
 
 - [myObj.merge](#myobjmerge-optional)
 - [myObj.topScope](#myobjtopscopeoptional)
 - [myObj.configName](#myobjconfignameoptional)
 
-<<<<<<< HEAD
-### `opts.env.configuration`（必选项）
-=======
-### `opts.env.configuration`(required) {#optsenvconfigurationrequired}
->>>>>>> en-master
+### `opts.env.configuration`（必选项） {#optsenvconfigurationrequired}
 
 `object`
 
@@ -134,11 +102,7 @@ class MyScaffold extends Generator {
 }
 ```
 
-<<<<<<< HEAD
-### `opts.env.configuration.myObj`（必选项）
-=======
-### `opts.env.configuration.myObj` (required) {#optsenvconfigurationmyobj-required}
->>>>>>> en-master
+### `opts.env.configuration.myObj`（必选项） {#optsenvconfigurationmyobj-required}
 
 `object`
 
@@ -156,11 +120,7 @@ class MyScaffold extends Generator {
 }
 ```
 
-<<<<<<< HEAD
-### `myObj.webpackOptions`（必选项）
-=======
-### `myObj.webpackOptions` (required) {#myobjwebpackoptions-required}
->>>>>>> en-master
+### `myObj.webpackOptions`（必选项） {#myobjwebpackoptions-required}
 
 `object`
 
@@ -173,11 +133,7 @@ this.options.env.configuration.dev.webpackOptions = {
 };
 ```
 
-<<<<<<< HEAD
-### `writing`（必选项）
-=======
-### `writing` (required) {#writing-required}
->>>>>>> en-master
+### `writing`（必选项） {#writing-required}
 
 `function`
 
@@ -191,11 +147,7 @@ class MyScaffold extends Generator {
 }
 ```
 
-<<<<<<< HEAD
-### `myObj.merge`（可选项）
-=======
-### `myObj.merge` (optional) {#myobjmerge-optional}
->>>>>>> en-master
+### `myObj.merge`（可选项） {#myobjmerge-optional}
 
 `string`
 
@@ -205,11 +157,7 @@ class MyScaffold extends Generator {
 this.options.env.configuration.dev.merge = 'myConfig';
 ```
 
-<<<<<<< HEAD
-### `myObj.topScope`（可选项）
-=======
-### `myObj.topScope`(optional) {#myobjtopscopeoptional}
->>>>>>> en-master
+### `myObj.topScope`（可选项）{#myobjtopscopeoptional}
 
 `[string]`
 
@@ -222,11 +170,7 @@ this.options.env.configuration.dev.topScope = [
 ];
 ```
 
-<<<<<<< HEAD
-### `myObj.configName`（可选项）
-=======
-### `myObj.configName`(optional) {#myobjconfignameoptional}
->>>>>>> en-master
+### `myObj.configName`（可选项） {#myobjconfignameoptional}
 
 `string`
 

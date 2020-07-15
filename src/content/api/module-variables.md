@@ -101,11 +101,7 @@ exports.aFunction = function doSomething() {
 如果在一个被 Parser 解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
 
-<<<<<<< HEAD
-### `__resourceQuery` (webpack 特有变量)
-=======
-### `__resourceQuery` (webpack-specific) {#__resourcequery-webpack-specific}
->>>>>>> en-master
+### `__resourceQuery` (webpack 特有变量) {#__resourcequery-webpack-specific}
 
 当前模块的资源查询(resource query) 。如果进行了如下的 `reqiure` 调用，那么查询字符串(query string)在`file.js` 中可访问。
 
@@ -120,29 +116,17 @@ __resourceQuery === '?test';
 ```
 
 
-<<<<<<< HEAD
-### `__webpack_public_path__` (webpack 特有变量)
-=======
-### `__webpack_public_path__` (webpack-specific) {#__webpack_public_path__-webpack-specific}
->>>>>>> en-master
+### `__webpack_public_path__` (webpack 特有变量) {#__webpack_public_path__-webpack-specific}
 
 等同于 `output.publicPath` 配置选项。
 
 
-<<<<<<< HEAD
-### `__webpack_require__` (webpack 特有变量)
-=======
-### `__webpack_require__` (webpack-specific) {#__webpack_require__-webpack-specific}
->>>>>>> en-master
+### `__webpack_require__` (webpack 特有变量) {#__webpack_require__-webpack-specific}
 
 原始 require 函数。这个表达式不会被解析器解析为依赖。
 
 
-<<<<<<< HEAD
-### `__webpack_chunk_load__` (webpack 特有变量)
-=======
-### `__webpack_chunk_load__` (webpack-specific) {#__webpack_chunk_load__-webpack-specific}
->>>>>>> en-master
+### `__webpack_chunk_load__` (webpack 特有变量) {#__webpack_chunk_load__-webpack-specific}
 
 内部 chunk 载入函数，有两个输入参数：
 
@@ -150,38 +134,22 @@ __resourceQuery === '?test';
 - `callback(require)` chunk 载入后调用的回调函数。
 
 
-<<<<<<< HEAD
-### `__webpack_modules__` (webpack 特有变量)
-=======
-### `__webpack_modules__` (webpack-specific) {#__webpack_modules__-webpack-specific}
->>>>>>> en-master
+### `__webpack_modules__` (webpack 特有变量) {#__webpack_modules__-webpack-specific}
 
 访问所有模块的内部对象。
 
 
-<<<<<<< HEAD
-### `__webpack_hash__` (webpack 特有变量)
-=======
-### `__webpack_hash__` (webpack-specific) {#__webpack_hash__-webpack-specific}
->>>>>>> en-master
+### `__webpack_hash__` (webpack 特有变量) {#__webpack_hash__-webpack-specific}
 
 这个变量只有在启用 `HotModuleReplacementPlugin` 或者 `ExtendedAPIPlugin` 时才生效。这个变量提供对编译过程中(compilation)的 hash 信息的获取。
 
 
-<<<<<<< HEAD
-### `__non_webpack_require__` (webpack 特有变量)
-=======
-### `__non_webpack_require__` (webpack-specific) {#__non_webpack_require__-webpack-specific}
->>>>>>> en-master
+### `__non_webpack_require__` (webpack 特有变量) {#__non_webpack_require__-webpack-specific}
 
 生成一个不会被 webpack 解析的 `require` 函数。配合全局可以获取到的 require 函数，可以完成一些酷炫操作。
 
 
-<<<<<<< HEAD
-### `__webpack_exports_info__` (webpack 特有变量)
-=======
-### `__webpack_exports_info__` (webpack-specific) {#__webpack_exports_info__-webpack-specific}
->>>>>>> en-master
+### `__webpack_exports_info__` (webpack 特有变量) {#__webpack_exports_info__-webpack-specific}
 
 在模块中, `__webpack_exports_info__` 可以被获取到，以便导出模块用以自我检查：
 
@@ -205,10 +173,6 @@ __resourceQuery === '?test';
 
 - 可以从嵌套的 exports 中得到相关信息: 例如 `__webpack_exports_info__.<exportName>.<exportName>.<exportName>.used`
 
-<<<<<<< HEAD
-### `DEBUG`  (webpack 特有变量)
-=======
-### `DEBUG`  (webpack-specific) {#debug--webpack-specific}
->>>>>>> en-master
+### `DEBUG`  (webpack 特有变量) {#debug--webpack-specific}
 
 等同于 `debug` 配置选项。

@@ -620,11 +620,7 @@ MySubModule.doSomething();
 
 T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回的值。在 bundle 本身中，它是从入口起点、由 webpack 生成的函数的输出结果。
 
-<<<<<<< HEAD
-### 暴露为一个变量
-=======
-### Expose a Variable {#expose-a-variable}
->>>>>>> en-master
+### 暴露为一个变量 {#expose-a-variable}
 
 这些选项将入口起点的返回值（例如，入口起点的任何导出值），在 bundle 包所引入的位置，赋值给 output.library 提供的变量名。
 
@@ -650,11 +646,7 @@ MyLibrary = _entry_return_;
 W> 当使用此选项时，将 `output.library` 设置为空，将产生一个破损的输出 bundle。
 
 
-<<<<<<< HEAD
-### 通过在对象上赋值暴露
-=======
-### Expose Via Object Assignment {#expose-via-object-assignment}
->>>>>>> en-master
+### 通过在对象上赋值暴露 {#expose-via-object-assignment}
 
 这些选项将入口起点的返回值（例如，入口起点的任何导出值）赋值给一个特定对象的属性（此名称由 `output.library` 定义）下。
 
@@ -702,11 +694,7 @@ exports['MyLibrary'] = _entry_return_;
 require('MyLibrary').doSomething();
 ```
 
-<<<<<<< HEAD
-### 模块定义系统
-=======
-### Module Definition Systems {#module-definition-systems}
->>>>>>> en-master
+### 模块定义系统 {#module-definition-systems}
 
 这些选项将导致 bundle 带有更完整的模块头部，以确保与各种模块系统的兼容性。根据 `output.libraryTarget` 选项不同，`output.library` 选项将具有不同的含义。
 
@@ -902,11 +890,7 @@ __system_context__.import('./other-file.js').then(m => {
 });
 ```
 
-<<<<<<< HEAD
-### 其他 Targets
-=======
-### Other Targets {#other-targets}
->>>>>>> en-master
+### 其他 Targets {#other-targets}
 
 `libraryTarget: 'jsonp'` - 这将把入口起点的返回值，包裹到一个 jsonp 包装容器中
 

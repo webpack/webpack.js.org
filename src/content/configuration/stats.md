@@ -50,11 +50,7 @@ webpack 有一些特定的预设选项给统计信息输出：
 | `'verbose'`         | _none_      | 全部输出                                                        |
 | `'detailed'`        | _none_      | 全部输出除了 `chunkModules` 和 `chunkRootModules`                |
 
-<<<<<<< HEAD
-## Stats 选项
-=======
-## Stats Options {#stats-options}
->>>>>>> en-master
+## Stats 选项 {#stats-options}
 
 你可以在统计输出里指定你想看到的信息。
 
@@ -796,10 +792,9 @@ module.exports = {
 
 `boolean = false`
 
-<<<<<<< HEAD
 告知 `stats` 展示 chunk 的父chunk，孩子chunk和兄弟chunk。
 
-### 字段排序
+### 字段排序 {#sorting-fields}
 
 对于 `assetsSort`, `chunksSort` 和 `modulesSort` 它们有几个可用的字段用于排序：
 
@@ -816,27 +811,6 @@ module.exports = {
 - `'optional'` - 资源是否可选;
 - `'identifier'` - 元素的标识符;
 - `'index'` - 元素加工指针;
-=======
-Tells `stats` to display chunk parents, children and siblings.
-
-### Sorting fields {#sorting-fields}
-
-For `assetsSort`, `chunksSort` and `modulesSort` there are several possible fields that you can sort items by:
-
-- `'id'` is the item's id;
-- `'name'` - a item's name that was assigned to it upon importing;
-- `'size'` - a size of item in bytes;
-- `'chunks'` - what chunks the item originates from (for example, if there are multiple subchunks for one chunk - the subchunks will be grouped together according to their main chunk);
-- `'errors'` - amount of errors in items;
-- `'warnings'` - amount of warnings in items;
-- `'failed'` - whether the item has failed compilation;
-- `'cacheable'` - whether the item is cacheable;
-- `'built'` - whether the asset has been built;
-- `'prefetched'` - whether the asset will be prefetched;
-- `'optional'` - whether the asset is optional;
-- `'identifier'` - identifier of the item;
-- `'index'` - item's processing index;
->>>>>>> en-master
 - `'index2'`
 - `'profile'`
 - `'issuer'` - 发起者(issuer)的标识符;
@@ -844,11 +818,7 @@ For `assetsSort`, `chunksSort` and `modulesSort` there are several possible fiel
 - `'issuerName'` - 发起者(issuer)的名字;
 - `'issuerPath'` - 一个完整的发起者(issuer)对象。基于这个字段排序没有现实的需要;
 
-<<<<<<< HEAD
-### 扩展统计信息行为
-=======
-### Extending stats behaviours {#extending-stats-behaviours}
->>>>>>> en-master
+### 扩展统计信息行为 {#extending-stats-behaviours}
 
 如果你想使用其中一个预定义的行为，例如 `'minimal'`，但仍想重载一个或更多的规则：请指定想要设置的 `stats.preset` 同时在后面添加自定义或额外的规则。
 

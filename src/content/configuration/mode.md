@@ -15,11 +15,7 @@ related:
 
 `string = 'production': 'none' | 'development' | 'production'`
 
-<<<<<<< HEAD
-## 用法
-=======
-## Usage {#usage}
->>>>>>> en-master
+## 用法 {#usage}
 
 只需在配置对象中提供 `mode` 选项：
 
