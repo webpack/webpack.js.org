@@ -18,7 +18,11 @@ webpack 提供了 Node.js API，可以在 Node.js 运行时下直接使用。
 当你需要自定义构建或开发流程时，Node.js API 非常有用，因为此时所有的报告和错误处理都必须自行实现，webpack 仅仅负责编译的部分。所以 [`stats`](/configuration/stats) 配置选项不会在 `webpack()` 调用中生效。
 
 
+<<<<<<< HEAD
 ## 安装(Installation)
+=======
+## Installation {#installation}
+>>>>>>> en-master
 
 开始使用 webpack 的 Node.js API 之前，首先你需要安装 webpack：
 
@@ -39,7 +43,7 @@ import webpack from 'webpack';
 ```
 
 
-## `webpack()`
+## `webpack()` {#webpack}
 
 导入的 `webpack` 函数会将 [配置对象](/configuration/) 传给 webpack，如果同时传入回调函数会在 webpack compiler 运行时被执行:
 
@@ -61,7 +65,11 @@ T> `err`对象 __不包含__ 编译错误，必须使用 `stats.hasErrors()` 单
 T> 你也可以为 `webpack` 函数提供一个配置数组。更多详细信息，请查看 [MultiCompiler](#multicompiler) 章节。
 
 
+<<<<<<< HEAD
 ## Compiler 实例（Compiler Instance）
+=======
+## Compiler Instance {#compiler-instance}
+>>>>>>> en-master
 
 如果你不向 `webpack` 传入可执行的回调函数，
 它会返回一个 webpack `Compiler` 实例。
@@ -94,7 +102,11 @@ W> 这个 API 一次仅支持一个编译。当使用 `run` 时，
 然后才能再次调用 `run` 或 `watch`。并发编译将破坏输出文件。
 
 
+<<<<<<< HEAD
 ## 执行（Run）
+=======
+## Run {#run}
+>>>>>>> en-master
 
 调用 `Compiler` 实例的 `run` 方法跟上文提到的
 快速执行方法很类似：
@@ -112,7 +124,11 @@ compiler.run((err, stats) => { // [Stats Object](#stats-object)
 ```
 
 
+<<<<<<< HEAD
 ## 监听(Watching)
+=======
+## Watching {#watching}
+>>>>>>> en-master
 
 调用 `watch` 方法会触发 webpack 执行，但之后会监听变更（很像 CLI 命令: `webpack --watch`），
 一旦 webpack 检测到文件变更，就会重新执行编译。
@@ -148,7 +164,11 @@ W> 文件系统不正确的问题，可能会对单次修改触发多次构建�
 并且可能需要检查 `stats.hash` 来查看文件哈希是否确实变更。
 
 
+<<<<<<< HEAD
 ### 关闭 `Watching` (Close `Watching`)
+=======
+### Close `Watching` {#close-watching}
+>>>>>>> en-master
 
 `watch` 方法返回一个 `Watching` 实例，该实例会暴露一个 `.close(callback)` 方法。
 调用该方法将会结束监听:
@@ -163,7 +183,7 @@ W> 不允许在监听器关闭或者失效前
 再次监听或执行。
 
 
-### Invalidate `Watching`
+### Invalidate `Watching` {#invalidate-watching}
 
 使用 `watching.invalidate`，你可以手动使当前编译循环（compiling round）无效，
 而不会停止监听进程（process）：
@@ -173,7 +193,11 @@ watching.invalidate();
 ```
 
 
+<<<<<<< HEAD
 ## Stats 对象(Stats Object)
+=======
+## Stats Object {#stats-object}
+>>>>>>> en-master
 
 `stats` 对象会被作为 [`webpack()`](#webpack) 回调函数的第二个参数传递，
 可以通过它获取到代码编译过程中的有用信息，
@@ -193,19 +217,19 @@ T> 当使用 [`MultiCompiler`](#multicompiler) 时，
 `stats` 对象暴露了以下方法:
 
 
-### `stats.hasErrors()`
+### `stats.hasErrors()` {#statshaserrors}
 
 可以用来检查编译期是否有错误，
 返回值为 `true` 或 `false`。
 
 
-### `stats.hasWarnings()`
+### `stats.hasWarnings()` {#statshaswarnings}
 
 可以用来检查编译期是否有警告，
 返回值为 `true` 或 `false`。
 
 
-### `stats.toJson(options)`
+### `stats.toJson(options)` {#statstojsonoptions}
 
 以 JSON 对象形式返回编译信息。
 `options` 可以是一个字符串（预设值）或是颗粒化控制的对象:
@@ -228,7 +252,7 @@ stats.toJson({
 [示例](https://raw.githubusercontent.com/webpack/analyse/master/app/pages/upload/example2.json)。
 
 
-### `stats.toString(options)`
+### `stats.toString(options)` {#statstostringoptions}
 
 以格式化的字符串形式返回描述编译信息
 （类似 [CLI](/api/cli) 的输出）。
@@ -263,7 +287,7 @@ webpack({
 ```
 
 
-## MultiCompiler
+## MultiCompiler {#multicompiler}
 
 `MultiCompiler` 模块可以让 webpack 在单个 compiler 中执行多个配置。
 如果传给 webpack 的 Node.js API 的 `options` 参数，
@@ -287,7 +311,11 @@ W> 多个配置对象在执行时，__不会并行执行__。
 例如 [parallel-webpack](https://www.npmjs.com/package/parallel-webpack)。
 
 
+<<<<<<< HEAD
 ## 错误处理(Error Handling)
+=======
+## Error Handling {#error-handling}
+>>>>>>> en-master
 
 完备的错误处理中需要考虑以下三种类型的错误:
 
@@ -326,7 +354,11 @@ webpack({
 ```
 
 
+<<<<<<< HEAD
 ## 自定义文件系统(Custom File Systems)
+=======
+## Custom File Systems {#custom-file-systems}
+>>>>>>> en-master
 
 默认情况下，webpack 使用普通文件系统来读取文件并将文件写入磁盘。
 但是，还可以使用不同类型的文件系统（内存(memory), webDAV 等）来更改输入或输出行为。
