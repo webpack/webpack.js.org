@@ -20,7 +20,7 @@ contributors:
 
 Loaders are transformations that are applied to the source code of a module. They allow you to pre-process files as you `import` or “load” them. Thus, loaders are kind of like “tasks” in other build tools and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript or load inline images as data URLs. Loaders even allow you to do things like `import` CSS files directly from your JavaScript modules!
 
-## Example
+## Example {#example}
 
 For example, you can use loaders to tell webpack to load a CSS file or to convert TypeScript to JavaScript. To do this, you would start by installing the loaders you need:
 
@@ -44,7 +44,7 @@ module.exports = {
 ```
 
 
-## Using Loaders
+## Using Loaders {#using-loaders}
 
 There are three ways to use loaders in your application:
 
@@ -53,7 +53,7 @@ There are three ways to use loaders in your application:
 - [CLI](#cli): Specify them within a shell command.
 
 
-### Configuration
+### Configuration {#configuration}
 
 [`module.rules`](/configuration/module/#modulerules) allows you to specify several loaders within your webpack configuration.
 This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.
@@ -86,7 +86,7 @@ module.exports = {
 ```
 
 
-### Inline
+### Inline {#inline}
 
 It's possible to specify loaders in an `import` statement, or any [equivalent "importing" method](/api/module-methods). Separate loaders from the resource with `!`. Each part is resolved relative to the current directory.
 
@@ -119,7 +119,7 @@ Options can be passed with a query parameter, e.g. `?key=value&foo=bar`, or a JS
 T> Use `module.rules` whenever possible, as this will reduce boilerplate in your source code and allow you to debug or locate a loader faster if something goes south.
 
 
-### CLI
+### CLI {#cli}
 
 You can also use loaders through the CLI:
 
@@ -130,7 +130,7 @@ webpack --module-bind pug-loader --module-bind 'css=style-loader!css-loader'
 This uses the `pug-loader` for `.jade` files, and the [`style-loader`](/loaders/style-loader) and [`css-loader`](/loaders/css-loader) for `.css` files.
 
 
-## Loader Features
+## Loader Features {#loader-features}
 
 - Loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order. The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, webpack expects JavaScript to be returned by the last loader in the chain.
 - Loaders can be synchronous or asynchronous.
@@ -143,7 +143,7 @@ This uses the `pug-loader` for `.jade` files, and the [`style-loader`](/loaders/
 Loaders provide a way to customize the output through their preprocessing functions. Users now have more flexibility to include fine-grained logic such as compression, packaging, language translations and [more](/loaders).
 
 
-## Resolving Loaders
+## Resolving Loaders {#resolving-loaders}
 
 Loaders follow the standard [module resolution](/concepts/module-resolution/). In most cases it will be loaded from the [module path](/concepts/module-resolution/#module-paths) (think `npm install`, `node_modules`).
 

@@ -48,6 +48,7 @@
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
     "lint:links": "hyperlink -c 8 -r dist/index.html --canonicalroot https://webpack.js.org/ -i --skip https://img.shields.io --skip **/printable** --skip https://david-dm.org --skip https://codecov.io/gh --skip 'content-type-mismatch https://travis-ci.org' > internal-links.tap; cat internal-links.tap | tap-spot",
     "lint:heading": "textlint --fix src/content/*",
+    "lint:headingMDX": "textlint --fix src/content/**/*.mdx",
     "sitemap": "cd dist && sitemap-static --ignore-file=../sitemap-ignore.json --pretty --prefix=https://webpack.js.org/ > sitemap.xml",
     "serve": "npm run build && sirv start ./dist --port 4000",
     "deploy": "gh-pages -d dist",

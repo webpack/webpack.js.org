@@ -24,7 +24,7 @@ contributors:
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
 
 
-## `module.noParse`
+## `module.noParse` {#modulenoparse}
 
 `RegExp` `[RegExp]` `function(resource)` `string` `[string]`
 
@@ -50,7 +50,7 @@ module.exports = {
 };
 ```
 
-## `module.unsafeCache`
+## `module.unsafeCache` {#moduleunsafecache}
 
 `boolean` `function (module)`
 
@@ -72,21 +72,21 @@ module.exports = {
 
 W> The default value is `true` in webpack 4.
 
-## `module.rules`
+## `module.rules` {#modulerules}
 
 `[Rule]`
 
 An array of [Rules](#rule) which are matched to requests when modules are created. These rules can modify how the module is created. They can apply loaders to the module, or modify the parser.
 
 
-## Rule
+## Rule {#rule}
 
 `object`
 
 A Rule can be separated into three parts — Conditions, Results and nested Rules.
 
 
-### Rule Conditions
+### Rule Conditions {#rule-conditions}
 
 There are two input values for the conditions:
 
@@ -103,7 +103,7 @@ When using multiple conditions, all conditions must match.
 W> Be careful! The resource is the _resolved_ path of the file, which means symlinked resources are the real path _not_ the symlink location. This is good to remember when using tools that symlink packages (like `npm link`), common conditions like `/node_modules/` may inadvertently miss symlinked files. Note that you can turn off symlink resolving (so that resources are resolved to the symlink path) via [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks).
 
 
-### Rule results
+### Rule results {#rule-results}
 
 Rule results are used only when the Rule condition matches.
 
@@ -121,7 +121,7 @@ The [`enforce`](#ruleenforce) property affects the loader category. Whether it's
 The [`parser`](#ruleparser) property affects the parser options.
 
 
-## Nested rules
+## Nested rules {#nested-rules}
 
 Nested rules can be specified under the properties [`rules`](#rulerules) and [`oneOf`](#ruleoneof).
 
@@ -134,7 +134,7 @@ The order of evaluation is as follows:
 3. [`oneOf`](#ruleoneof)
 
 
-## `Rule.enforce`
+## `Rule.enforce` {#ruleenforce}
 
 `string`
 
@@ -169,17 +169,17 @@ import { c } from  '!!./file3.js';
 Inline loaders and `!` prefixes should not be used as they are non-standard. They may be use by loader generated code.
 
 
-## `Rule.exclude`
+## `Rule.exclude` {#ruleexclude}
 
 Exclude all modules matching any of these conditions. If you supply a `Rule.exclude` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.exclude`](#condition) for details.
 
 
-## `Rule.include`
+## `Rule.include` {#ruleinclude}
 
 Include all modules matching any of these conditions. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.include`](#condition) for details.
 
 
-## `Rule.issuer`
+## `Rule.issuer` {#ruleissuer}
 
 A [`Condition`](#condition) to match against the module that issued the request. In the following example, the `issuer` for the `a.js` request would be the path to the `index.js` file.
 
@@ -192,19 +192,19 @@ import A from './a.js';
 This option can be used to apply loaders to the dependencies of a specific module or set of modules.
 
 
-## `Rule.loader`
+## `Rule.loader` {#ruleloader}
 
 `Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.loader`](#useentry) for details.
 
 
-## `Rule.loaders`
+## `Rule.loaders` {#ruleloaders}
 
 W> This option is __deprecated__ in favor of `Rule.use`.
 
 `Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#ruleuse) for details.
 
 
-## `Rule.oneOf`
+## `Rule.oneOf` {#ruleoneof}
 
 An array of [`Rules`](#rule) from which only the first matching Rule is used when the Rule matches.
 
@@ -236,14 +236,14 @@ module.exports = {
 T> See [`Nested rules`](#nested-rules) for more information.
 
 
-## `Rule.options` / `Rule.query`
+## `Rule.options` / `Rule.query` {#ruleoptions--rulequery}
 
 `Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.options`](#useentry) for details.
 
 W> `Rule.query` is deprecated in favor of `Rule.options` and `UseEntry.options`.
 
 
-## `Rule.parser`
+## `Rule.parser` {#ruleparser}
 
 An object with parser options. All applied parser options are merged.
 
@@ -288,7 +288,7 @@ If `Rule.type` is an `asset` or `asset/inline` then `Rule.generator` option may 
 
 See [Asset Modules guide](/guides/asset-modules/) for additional information and use cases.
 
-## `Rule.parser.dataUrlCondition`
+## `Rule.parser.dataUrlCondition` {#ruleparserdataurlcondition}
 
 `object = { maxSize number = 8096 }` `function (source, { filename, module }) => boolean`
 
@@ -337,7 +337,7 @@ module.exports = {
 }
 ```
 
-## `Rule.generator.dataUrl`
+## `Rule.generator.dataUrl` {#rulegeneratordataurl}
 
 `object = { encoding string = 'base64' | false, mimetype string = undefined | false }` `function (content, { filename, module }) => string`
 
@@ -389,7 +389,7 @@ module.exports = {
 }
 ```
 
-## `Rule.generator.filename`
+## `Rule.generator.filename` {#rulegeneratorfilename}
 
 The same as [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) but for specific rule. Overrides `output.assetModuleFilename` and works only with `asset` and `asset/resource` module types.
 
@@ -419,12 +419,12 @@ module.exports = {
 }
 ```
 
-## `Rule.resource`
+## `Rule.resource` {#ruleresource}
 
 A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
 
 
-## `Rule.resourceQuery`
+## `Rule.resourceQuery` {#ruleresourcequery}
 
 A [`Condition`](#condition) matched with the resource query. This option is used to test against the query section of a request string (i.e. from the question mark onwards). If you were to `import Foo from './foo.css?inline'`, the following condition would match:
 
@@ -445,7 +445,7 @@ module.exports = {
 };
 ```
 
-## `Rule.parser.parse`
+## `Rule.parser.parse` {#ruleparserparse}
 
 `function(input) => string | object`
 
@@ -472,26 +472,26 @@ module.exports = {
 };
 ```
 
-## `Rule.rules`
+## `Rule.rules` {#rulerules}
 
 An array of [`Rules`](#rule) that is also used when the Rule matches.
 
 T> See [`Nested rules`](#nested-rules) for more information.
 
 
-## `Rule.sideEffects`
+## `Rule.sideEffects` {#rulesideeffects}
 
 `bool`
 
 Indicate what parts of the module contain side effects. See [Tree Shaking](/guides/tree-shaking/#mark-the-file-as-side-effect-free) for details.
 
 
-## `Rule.test`
+## `Rule.test` {#ruletest}
 
 Include all modules that pass test assertion. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.test`](#condition) for details.
 
 
-## `Rule.type`
+## `Rule.type` {#ruletype}
 
 `string`
 
@@ -519,7 +519,7 @@ module.exports = {
 
 > See [Asset Modules guide](/guides/asset-modules/) for more about `asset*` type.
 
-## `Rule.use`
+## `Rule.use` {#ruleuse}
 
 `[UseEntry]` `function(info)`
 
@@ -603,7 +603,7 @@ module.exports = {
 
 See [UseEntry](#useentry) for details.
 
-## `Rule.resolve`
+## `Rule.resolve` {#ruleresolve}
 
 W> `Rule.resolve` is Available since webpack 4.36.1
 
@@ -671,7 +671,7 @@ module.exports = {
 When creating a bundle with updated configuration, `console.log(footer)` will output 'overridden footer'.
 
 
-## `Condition`
+## `Condition` {#condition}
 
 Conditions can be one of these:
 
@@ -709,7 +709,7 @@ module.exports = {
 ```
 
 
-## `UseEntry`
+## `UseEntry` {#useentry}
 
 `object` `function(info)`
 
@@ -781,7 +781,7 @@ module.exports = {
 ```
 
 
-## Module Contexts
+## Module Contexts {#module-contexts}
 
 > Avoid using these options as they are __deprecated__ and will soon be removed.
 
