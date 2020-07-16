@@ -18,11 +18,7 @@ webpack 提供了 Node.js API，可以在 Node.js 运行时下直接使用。
 当你需要自定义构建或开发流程时，Node.js API 非常有用，因为此时所有的报告和错误处理都必须自行实现，webpack 仅仅负责编译的部分。所以 [`stats`](/configuration/stats) 配置选项不会在 `webpack()` 调用中生效。
 
 
-<<<<<<< HEAD
-## 安装(Installation)
-=======
-## Installation {#installation}
->>>>>>> en-master
+## 安装(Installation) {#installation}
 
 开始使用 webpack 的 Node.js API 之前，首先你需要安装 webpack：
 
@@ -65,11 +61,7 @@ T> `err`对象 __不包含__ 编译错误，必须使用 `stats.hasErrors()` 单
 T> 你也可以为 `webpack` 函数提供一个配置数组。更多详细信息，请查看 [MultiCompiler](#multicompiler) 章节。
 
 
-<<<<<<< HEAD
-## Compiler 实例（Compiler Instance）
-=======
-## Compiler Instance {#compiler-instance}
->>>>>>> en-master
+## Compiler 实例（Compiler Instance） {#compiler-instance}
 
 如果你不向 `webpack` 传入可执行的回调函数，
 它会返回一个 webpack `Compiler` 实例。
@@ -102,11 +94,7 @@ W> 这个 API 一次仅支持一个编译。当使用 `run` 时，
 然后才能再次调用 `run` 或 `watch`。并发编译将破坏输出文件。
 
 
-<<<<<<< HEAD
-## 执行（Run）
-=======
-## Run {#run}
->>>>>>> en-master
+## 执行（Run） {#run}
 
 调用 `Compiler` 实例的 `run` 方法跟上文提到的
 快速执行方法很类似：
@@ -124,11 +112,7 @@ compiler.run((err, stats) => { // [Stats Object](#stats-object)
 ```
 
 
-<<<<<<< HEAD
-## 监听(Watching)
-=======
-## Watching {#watching}
->>>>>>> en-master
+## 监听(Watching) {#watching}
 
 调用 `watch` 方法会触发 webpack 执行，但之后会监听变更（很像 CLI 命令: `webpack --watch`），
 一旦 webpack 检测到文件变更，就会重新执行编译。
@@ -164,11 +148,7 @@ W> 文件系统不正确的问题，可能会对单次修改触发多次构建�
 并且可能需要检查 `stats.hash` 来查看文件哈希是否确实变更。
 
 
-<<<<<<< HEAD
-### 关闭 `Watching` (Close `Watching`)
-=======
-### Close `Watching` {#close-watching}
->>>>>>> en-master
+### 关闭 `Watching` (Close `Watching`) {#close-watching}
 
 `watch` 方法返回一个 `Watching` 实例，该实例会暴露一个 `.close(callback)` 方法。
 调用该方法将会结束监听:
@@ -193,11 +173,7 @@ watching.invalidate();
 ```
 
 
-<<<<<<< HEAD
-## Stats 对象(Stats Object)
-=======
-## Stats Object {#stats-object}
->>>>>>> en-master
+## Stats 对象(Stats Object) {#stats-object}
 
 `stats` 对象会被作为 [`webpack()`](#webpack) 回调函数的第二个参数传递，
 可以通过它获取到代码编译过程中的有用信息，
@@ -311,11 +287,7 @@ W> 多个配置对象在执行时，__不会并行执行__。
 例如 [parallel-webpack](https://www.npmjs.com/package/parallel-webpack)。
 
 
-<<<<<<< HEAD
-## 错误处理(Error Handling)
-=======
-## Error Handling {#error-handling}
->>>>>>> en-master
+## 错误处理(Error Handling) {#error-handling}
 
 完备的错误处理中需要考虑以下三种类型的错误:
 
@@ -354,11 +326,7 @@ webpack({
 ```
 
 
-<<<<<<< HEAD
-## 自定义文件系统(Custom File Systems)
-=======
-## Custom File Systems {#custom-file-systems}
->>>>>>> en-master
+## 自定义文件系统(Custom File Systems) {#custom-file-systems}
 
 默认情况下，webpack 使用普通文件系统来读取文件并将文件写入磁盘。
 但是，还可以使用不同类型的文件系统（内存(memory), webDAV 等）来更改输入或输出行为。
