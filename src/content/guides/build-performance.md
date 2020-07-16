@@ -219,7 +219,7 @@ Earlier and later Node.js versions are not affected.
 
 ### TypeScript Loader
 
-Faster builds using ts-loader can be acheived by using the `transpileOnly` loader option. On its own, this option turns off typechecking. To gain typechecking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin).  This speeds up TypeScript type checking and ESLint linting by moving each to a separate process.
+Faster builds using ts-loader can be acheived by using the `transpileOnly` loader option. On its own, this option turns off typechecking. To gain typechecking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin). This speeds up TypeScript type checking and ESLint linting by moving each to a separate process.
 
 There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin) on the ts-loader github repository.
 
