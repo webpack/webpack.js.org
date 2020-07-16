@@ -219,7 +219,9 @@ Earlier and later Node.js versions are not affected.
 
 ### TypeScript Loader
 
-Recently, `ts-loader` has started to consume the internal TypeScript watch mode APIs which dramatically decreases the number of modules to be rebuilt on each iteration. This `experimentalWatchApi` shares the same logic as the normal TypeScript watch mode itself and is quite stable for development use. Turn on `transpileOnly`, as well, for even faster incremental builds.
+Faster builds using ts-loader can be acheived by using the `transpileOnly` loader option. On its own, this option turns off typechecking. To gain typechecking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin).  This speeds up TypeScript type checking and ESLint linting by moving each to a separate process.
+
+There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin) on the ts-loader github repository.
 
 ```js
 module.exports = {
@@ -229,19 +231,12 @@ module.exports = {
     {
       loader: 'ts-loader',
       options: {
-        transpileOnly: true,
-        experimentalWatchApi: true,
+        transpileOnly: true
       },
     },
   ],
 };
 ```
-
-Note: the `ts-loader` documentation suggests the use of `cache-loader`, but this actually slows the incremental builds down with disk writes.
-
-To gain typechecking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin).
-
-There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin) on the ts-loader github repository.
 
 ---
 
