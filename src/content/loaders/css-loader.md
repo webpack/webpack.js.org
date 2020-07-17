@@ -108,16 +108,15 @@ module.exports = {
 
 ## Options
 
-|                    Name                     |            Type             | Default  | Description                                                            |
-| :-----------------------------------------: | :-------------------------: | :------: | :--------------------------------------------------------------------- |
-|              **[`url`](#url)**              |    `{Boolean\|Function}`    |  `true`  | Enables/Disables `url`/`image-set` functions handling                  |
-|           **[`import`](#import)**           |    `{Boolean\|Function}`    |  `true`  | Enables/Disables `@import` at-rules handling                           |
-|          **[`modules`](#modules)**          | `{Boolean\|String\|Object}` | `false`  | Enables/Disables CSS Modules and their configuration                   |
-|        **[`sourceMap`](#sourcemap)**        |         `{Boolean}`         | `false`  | Enables/Disables generation of source maps                             |
-|    **[`importLoaders`](#importloaders)**    |         `{Number}`          |   `0`    | Enables/Disables or setups number of loaders applied before CSS loader |
-| **[`localsConvention`](#localsconvention)** |         `{String}`          | `'asIs'` | Style of exported classnames                                           |
-|       **[`onlyLocals`](#onlylocals)**       |         `{Boolean}`         | `false`  | Export only locals                                                     |
-|         **[`esModule`](#esmodule)**         |         `{Boolean}`         | `false`  | Use ES modules syntax                                                  |
+|                 Name                  |            Type             |      Default       | Description                                                            |
+| :-----------------------------------: | :-------------------------: | :----------------: | :--------------------------------------------------------------------- |
+|           **[`url`](#url)**           |    `{Boolean\|Function}`    |       `true`       | Enables/Disables `url`/`image-set` functions handling                  |
+|        **[`import`](#import)**        |    `{Boolean\|Function}`    |       `true`       | Enables/Disables `@import` at-rules handling                           |
+|       **[`modules`](#modules)**       | `{Boolean\|String\|Object}` |      `false`       | Enables/Disables CSS Modules and their configuration                   |
+|     **[`sourceMap`](#sourcemap)**     |         `{Boolean}`         | `compiler.devtool` | Enables/Disables generation of source maps                             |
+| **[`importLoaders`](#importloaders)** |         `{Number}`          |        `0`         | Enables/Disables or setups number of loaders applied before CSS loader |
+|    **[`onlyLocals`](#onlylocals)**    |         `{Boolean}`         |      `false`       | Export only locals                                                     |
+|      **[`esModule`](#esmodule)**      |         `{Boolean}`         |      `false`       | Use ES modules syntax                                                  |
 
 ### `url`
 
@@ -125,7 +124,7 @@ Type: `Boolean|Function`
 Default: `true`
 
 Enables/Disables `url`/`image-set` functions handling.
-Control `url()` resolving. Absolute URLs and root-relative URLs are not resolving.
+Control `url()` resolving. Absolute URLs are not resolving.
 
 Examples resolutions:
 
@@ -531,8 +530,10 @@ module.exports = {
             mode: 'local',
             exportGlobals: true,
             localIdentName: '[path][name]__[local]--[hash:base64:5]',
+            localsConvention: 'camelCase',
             context: path.resolve(__dirname, 'src'),
             hashPrefix: 'my-custom-hash',
+            namedExport: true,
           },
         },
       },
@@ -755,6 +756,55 @@ module.exports = {
 };
 ```
 
+##### `localsConvention`
+
+Type: `String`
+Default: `'asIs'`
+
+Style of exported classnames.
+
+By default, the exported JSON keys mirror the class names (i.e `asIs` value).
+
+|         Name          |    Type    | Description                                                                                      |
+| :-------------------: | :--------: | :----------------------------------------------------------------------------------------------- |
+|     **`'asIs'`**      | `{String}` | Class names will be exported as is.                                                              |
+|   **`'camelCase'`**   | `{String}` | Class names will be camelized, the original class name will not to be removed from the locals    |
+| **`'camelCaseOnly'`** | `{String}` | Class names will be camelized, the original class name will be removed from the locals           |
+|    **`'dashes'`**     | `{String}` | Only dashes in class names will be camelized                                                     |
+|  **`'dashesOnly'`**   | `{String}` | Dashes in class names will be camelized, the original class name will be removed from the locals |
+
+**file.css**
+
+```css
+.class-name {
+}
+```
+
+**file.js**
+
+```js
+import { className } from 'file.css';
+```
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'css-loader',
+        options: {
+          mode: 'local',
+          localsConvention: 'camelCase',
+        },
+      },
+    ],
+  },
+};
+```
+
 ##### `context`
 
 Type: `String`
@@ -865,16 +915,64 @@ module.exports = {
 };
 ```
 
-### `sourceMap`
+##### `namedExport`
 
 Type: `Boolean`
 Default: `false`
 
-Enables/Disables generation of source maps.
+Enable/disable ES modules named export for css classes.
+Names of exported classes are converted to camelCase.
 
-To include source maps set the `sourceMap` option.
+> i It is not allowed to use JavaScript reserved words in css class names
 
-They are not enabled by default because they expose a runtime overhead and increase in bundle size (JS source maps do not).
+**styles.css**
+
+```css
+.foo-baz {
+  color: red;
+}
+.bar {
+  color: blue;
+}
+```
+
+**index.js**
+
+```js
+import { fooBaz, bar } from './styles.css';
+
+console.log(fooBaz, bar);
+```
+
+You can enable a ES module named export using:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'css-loader',
+        options: {
+          esModule: true,
+          modules: {
+            namedExport: true,
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+### `sourceMap`
+
+Type: `Boolean`
+Default: depends on the `compiler.devtool` value
+
+By default generation of source maps depends on the [`devtool`](/configuration/devtool/) option. All values enable source map generation except `eval` and `false` value.
 
 **webpack.config.js**
 
@@ -932,54 +1030,6 @@ module.exports = {
 ```
 
 This may change in the future when the module system (i. e. webpack) supports loader matching by origin.
-
-### `localsConvention`
-
-Type: `String`
-Default: `'asIs'`
-
-Style of exported classnames.
-
-By default, the exported JSON keys mirror the class names (i.e `asIs` value).
-
-|         Name          |    Type    | Description                                                                                      |
-| :-------------------: | :--------: | :----------------------------------------------------------------------------------------------- |
-|     **`'asIs'`**      | `{String}` | Class names will be exported as is.                                                              |
-|   **`'camelCase'`**   | `{String}` | Class names will be camelized, the original class name will not to be removed from the locals    |
-| **`'camelCaseOnly'`** | `{String}` | Class names will be camelized, the original class name will be removed from the locals           |
-|    **`'dashes'`**     | `{String}` | Only dashes in class names will be camelized                                                     |
-|  **`'dashesOnly'`**   | `{String}` | Dashes in class names will be camelized, the original class name will be removed from the locals |
-
-**file.css**
-
-```css
-.class-name {
-}
-```
-
-**file.js**
-
-```js
-import { className } from 'file.css';
-```
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        loader: 'css-loader',
-        options: {
-          localsConvention: 'camelCase',
-        },
-      },
-    ],
-  },
-};
-```
 
 ### `onlyLocals`
 
@@ -1119,6 +1169,39 @@ module.exports = {
         },
       },
     ],
+  },
+};
+```
+
+### Resolve unresolved URLs using an alias
+
+**index.css**
+
+```css
+.class {
+  background: url(/assets/unresolved/img.png);
+}
+```
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+  resolve: {
+    alias: {
+      '/assets/unresolved/img.png': path.resolve(
+        __dirname,
+        'assets/real-path-to-img/img.png'
+      ),
+    },
   },
 };
 ```
