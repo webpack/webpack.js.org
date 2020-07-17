@@ -336,6 +336,6 @@ webpack-demo
 
 T> If you're using npm 5, you'll probably also see a `package-lock.json` file in your directory.
 
-W> Do not compile untrusted code with webpack. It can potentially allow a bad actor to execute malicious code on your machine, your CI, or in the web browser of the user.
+W> Do not compile untrusted code with webpack. It can potentially allow a bad performer to execute malicious code on your machine, your CI, or in the web browser of the user.
 
 If you want to learn more about webpack's design, you can check out the [basic concepts](/concepts) and [configuration](/configuration) pages. Furthermore, the [API](/api) section digs into the various interfaces webpack offers.
