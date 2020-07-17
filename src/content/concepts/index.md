@@ -28,13 +28,13 @@ T> 可以在 [这里](/concepts/modules) 了解更多关于 JavaScript 模块和
 
 在开始前你需要先理解一些__核心概念__：
 
-- [入口(entry) {#entry}](#入口entry-entry)
-- [输出(output) {#output}](#输出output-output)
-- [loader {#loaders}](#loader-loaders)
-- [插件(plugin) {#plugins}](#插件plugin-plugins)
-- [模式(mode) {#mode}](#模式mode-mode)
-- [浏览器兼容性(browser compatibility) {#browser-compatibility}](#浏览器兼容性browser-compatibility-browser-compatibility)
-- [环境(environment) {#environment}](#环境environment-environment)
+- [入口(entry)](#entry)
+- [输出(output)](#output)
+- [loader](#loaders)
+- [插件(plugin)](#plugins)
+- [模式(mode) {#mode}](#mode)
+- [浏览器兼容性(browser compatibility)](#browser-compatibility)
+- [环境(environment)](#environment)
 
 本文档旨在给出这些概念的__高度__概述，同时提供具体概念的详尽相关用例的链接。
 
