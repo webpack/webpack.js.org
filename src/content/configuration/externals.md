@@ -14,6 +14,7 @@ contributors:
   - snitin315
   - beejunk
   - EugeneHlushko
+  - chenxsan
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
@@ -290,7 +291,7 @@ module.exports = {
 };
 ```
 
-W> [Default type](/configuration/externals/#externalstype) will be used if you sepcify `externals` without a type e.g. `externals: { react: 'react' }` instead of `externals: { react: 'commonjs-module react' }`.
+W> [Default type](/configuration/externals/#externalstype) will be used if you specify `externals` without a type e.g. `externals: { react: 'react' }` instead of `externals: { react: 'commonjs-module react' }`.
 
 For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
 
