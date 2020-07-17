@@ -32,7 +32,7 @@ T> 可以在 [这里](/concepts/modules) 了解更多关于 JavaScript 模块和
 - [输出(output)](#output)
 - [loader](#loaders)
 - [插件(plugin)](#plugins)
-- [模式(mode) {#mode}](#mode)
+- [模式(mode)](#mode)
 - [浏览器兼容性(browser compatibility)](#browser-compatibility)
 - [环境(environment)](#environment)
 
