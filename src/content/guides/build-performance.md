@@ -237,6 +237,8 @@ module.exports = {
 };
 ```
 
+T> There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin) on the `ts-loader` GitHub repository.
+
 ---
 
 
