@@ -84,7 +84,7 @@ __webpack.common.js__
 __webpack.dev.js__
 
 ``` diff
-+ const merge = require('webpack-merge');
++ const { merge } = require('webpack-merge');
 + const common = require('./webpack.common.js');
 +
 + module.exports = merge(common, {
@@ -99,7 +99,7 @@ __webpack.dev.js__
 __webpack.prod.js__
 
 ``` diff
-+ const merge = require('webpack-merge');
++ const { merge } = require('webpack-merge');
 + const common = require('./webpack.common.js');
 +
 + module.exports = merge(common, {
