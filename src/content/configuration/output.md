@@ -557,7 +557,7 @@ T> Read the [authoring libraries guide](/guides/author-libraries/) guide for mor
 
 This option allows loading asynchronous chunks with a custom script type, such as `<script type="module" ...>`.
 
-T> If [`output.module`](#outputmodule) is set to `true`, `ouput.scriptType` will default to `'module'` instead of `false`.
+T> If [`output.module`](#outputmodule) is set to `true`, `output.scriptType` will default to `'module'` instead of `false`.
 
 ```javascript
 module.exports = {
