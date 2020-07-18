@@ -551,7 +551,7 @@ W> Note that if an `array` is provided as an `entry` point, only the last module
 
 T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library` as well as `output.libraryTarget`.
 
-## ouput.scriptType
+## output.scriptType
 
 `string: 'module' | 'text/javascript'` `boolean = false`
 
