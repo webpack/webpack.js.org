@@ -20,7 +20,7 @@ The `expose-loader` loader allows to expose a module (in whole or in part) to gl
 
 For further hints on compatibility issues, check out [Shimming](/guides/shimming/) of the official docs.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `expose-loader`:
 
@@ -30,7 +30,7 @@ $ npm install expose-loader --save-dev
 
 Then you can use the `expose-loader` using two approaches.
 
-## Inline
+## Inline {#inline}
 
 The `|` or `%20` (space) allow to separate the `globalName`, `moduleLocalName` and `override` of expose.
 The documentation and syntax examples can be read [here](#syntax).
@@ -58,7 +58,7 @@ import {
 // Adds the `map` and `reduce` method from `underscore` to the global object under the name `_.map` and `_.reduce`
 ```
 
-## Using Configuration
+## Using Configuration {#using-configuration}
 
 **src/index.js**
 
@@ -107,24 +107,24 @@ So the expose only applies to the `jquery` module. And it's only exposed when us
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
 |           Name            |                   Type                    |   Default   | Description     |
 | :-----------------------: | :---------------------------------------: | :---------: | :-------------- |
 | **[`exposes`](#exposes)** | `{String\|Object\|Array<String\|Object>}` | `undefined` | List of exposes |
 
-### `exposes`
+### `exposes` {#exposes}
 
 Type: `String|Object|Array<String|Object>`
 Default: `undefined`
 
 List of exposes.
 
-#### `String`
+#### `String` {#string}
 
 Allows to use a string to describe an expose.
 
-##### `Syntax`
+##### `Syntax` {#syntax}
 
 The `|` or `%20` (space) allow to separate the `globalName`, `moduleLocalName` and `override` of expose.
 
@@ -161,11 +161,11 @@ module.exports = {
 };
 ```
 
-#### `Object`
+#### `Object` {#object}
 
 Allows to use an object to describe an expose.
 
-##### `globalName`
+##### `globalName` {#globalname}
 
 Type: `String|Array<String>`
 Default: `undefined`
@@ -200,7 +200,7 @@ module.exports = {
 };
 ```
 
-##### `moduleLocalName`
+##### `moduleLocalName` {#modulelocalname}
 
 Type: `String`
 Default: `undefined`
@@ -235,7 +235,7 @@ module.exports = {
 };
 ```
 
-##### `override`
+##### `override` {#override}
 
 Type: `Boolean`
 Default: `false`
@@ -273,7 +273,7 @@ module.exports = {
 };
 ```
 
-#### `Array`
+#### `Array` {#array}
 
 **src/index.js**
 
@@ -313,13 +313,13 @@ It will expose **only** `map`, `filter` and `find` (under `myNameForFind` name) 
 
 In a browser these methods will be available under `windows._.map(..args)`, `windows._.filter(...args)` and `windows._.myNameForFind(...args)` methods.
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/expose-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/expose-loader/blob/master/LICENSE)
 

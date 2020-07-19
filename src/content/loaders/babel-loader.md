@@ -12,7 +12,11 @@ repo: https://github.com/babel/babel-loader
 
 **注意**：请在 Babel [Issues](https://github.com/babel/babel/issues) tracker 上报告输出时遇到的问题。
 
+<<<<<<< HEAD
 ## 安装
+=======
+## Install {#install}
+>>>>>>> test-loader-plugin-t
 
 > webpack 4.x | babel-loader 8.x | babel 7.x
 
@@ -20,7 +24,11 @@ repo: https://github.com/babel/babel-loader
 npm install -D babel-loader @babel/core @babel/preset-env webpack
 ```
 
+<<<<<<< HEAD
 ## 用法
+=======
+## Usage {#usage}
+>>>>>>> test-loader-plugin-t
 
 webpack 文档：[Loaders](/loaders/)
 
@@ -43,7 +51,11 @@ module: {
 }
 ```
 
+<<<<<<< HEAD
 ### 选项
+=======
+### Options {#options}
+>>>>>>> test-loader-plugin-t
 
 查看 babel [选项](https://babeljs.io/docs/en/options)。
 
@@ -77,9 +89,15 @@ module: {
 
 * `customize`: 默认值为 `null`。导出 `custom` 回调函数的模块路径，[例如传入 `.custom()` 的 callback 函数](#自定义-loader)。由于你必须创建一个新文件才能使用它，建议改为使用 `.custom` 来创建一个包装 loader。只有在你_必须_继续直接使用 `babel-loader` 但又想自定义的情况下，才使用这项配置。
 
+<<<<<<< HEAD
 ## 疑难解答
 
 ### babel-loader 很慢！
+=======
+## Troubleshooting {#troubleshooting}
+
+### babel-loader is slow! {#babel-loader-is-slow}
+>>>>>>> test-loader-plugin-t
 
 确保转译尽可能少的文件。你可能使用 `/\.m?js$/` 来匹配，这样也许会去转译 `node_modules` 目录或者其他不需要的源代码。
 
@@ -87,7 +105,11 @@ module: {
 
 你也可以通过使用 `cacheDirectory` 选项，将 babel-loader 提速至少两倍。这会将转译的结果缓存到文件系统中。
 
+<<<<<<< HEAD
 ### Babel 在每个文件都插入了辅助代码，使代码体积过大！
+=======
+### Babel is injecting helpers into each file and bloating my code! {#babel-is-injecting-helpers-into-each-file-and-bloating-my-code}
+>>>>>>> test-loader-plugin-t
 
 Babel 对一些公共方法使用了非常小的辅助代码，比如 `_extend`。默认情况下会被添加到每一个需要它的文件中。
 
@@ -117,7 +139,11 @@ rules: [
 ]
 ```
 
+<<<<<<< HEAD
 #### **注意**：transform-runtime 和自定义 polyfills (例如 Promise library)
+=======
+#### **NOTE**: transform-runtime & custom polyfills (e.g. Promise library) {#note-transform-runtime--custom-polyfills-eg-promise-library}
+>>>>>>> test-loader-plugin-t
 
 由于 [@babel/plugin-transform-runtime](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-runtime) 包含了一个 polyfill，含有自定义的 [regenerator-runtime](https://github.com/facebook/regenerator/blob/master/packages/regenerator-runtime/runtime.js) 和 [core-js](https://github.com/zloirock/core-js), 下面使用 `webpack.ProvidePlugin` 来配置 shimming 的常用方法将没有作用：
 
@@ -163,7 +189,11 @@ require('@babel/runtime/core-js/promise').default = require('bluebird');
 require('./app');
 ```
 
+<<<<<<< HEAD
 ### `babel` 的 Node.js API 已经被移到 `babel-core` 中。
+=======
+### The Node.js API for `babel` has been moved to `babel-core`. {#the-nodejs-api-for-babel-has-been-moved-to-babel-core}
+>>>>>>> test-loader-plugin-t
 
 如果你收到这个信息，这说明你有一个已经安装的 `babel` npm package，并且在 webpack 配置中使用 loader 简写方式（在 webpack 2.x 版本中将不再支持这种方式）：
 ```javascript
@@ -184,7 +214,11 @@ webpack 将尝试读取 `babel` package 而不是 `babel-loader`。
   }
 ```
 
+<<<<<<< HEAD
 ## 根据 webpack 部署目标(target)的自定义配置
+=======
+## Customize config based on webpack target {#customize-config-based-on-webpack-target}
+>>>>>>> test-loader-plugin-t
 
 Webpack 支持打包成多种 [部署目标](/concepts/targets/) 。例如，当需要为不同的部署目标（例如 `web` _和_ `node`）指定不同的 Babel 配置时， babel-loader 通过 Babel 的[caller](https://babeljs.io/docs/en/config-files#apicallercb) API 提供了 `target`属性。
 
@@ -215,7 +249,11 @@ module.exports = api => {
 }
 ```
 
+<<<<<<< HEAD
 ## 自定义 loader
+=======
+## Customized Loader {#customized-loader}
+>>>>>>> test-loader-plugin-t
 
 `babel-loader` 提供了一个 loader-builder 工具函数，
 允许用户为 Babel 处理过的每个文件添加自定义处理选项
@@ -228,7 +266,11 @@ module.exports = api => {
 可以向 `customize` 选项传入一个字符串，
 此字符串指向一个导出 `custom` 回调函数的文件。
 
+<<<<<<< HEAD
 ### 示例
+=======
+### Example {#example}
+>>>>>>> test-loader-plugin-t
 
 ```js
 // 从 "./my-custom-loader.js" 中导出，或者任何你想要的文件中导出。
@@ -293,22 +335,22 @@ module.exports = {
 };
 ```
 
-### `customOptions(options: Object): { custom: Object, loader: Object }`
+### `customOptions(options: Object): { custom: Object, loader: Object }` {#customoptionsoptions-object--custom-object-loader-object-}
 
 指定的 loader 的选项，
 从 `babel-loader` 选项中分离出自定义选项。
 
 
-### `config(cfg: PartialConfig): Object`
+### `config(cfg: PartialConfig): Object` {#configcfg-partialconfig-object}
 
 指定的 Babel 的 `PartialConfig` 对象，
 返回应该被传递给 `babel.transform` 的 `option` 对象。
 
 
-### `result(result: Result): Result`
+### `result(result: Result): Result` {#resultresult-result-result}
 
 指定的 Babel 结果对象，允许 loaders 对它进行额外的调整。
 
 
-## License
+## License {#license}
 [MIT](https://couto.mit-license.org/)

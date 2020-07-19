@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/terser-webpack-plugin
 
 This plugin uses [terser](https://github.com/terser-js/terser) to minify your JavaScript.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `terser-webpack-plugin`:
 
@@ -43,9 +43,9 @@ module.exports = {
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
-### `test`
+### `test` {#test}
 
 Type: `String|RegExp|Array<String|RegExp>`
 Default: `/\.m?js(\?.*)?$/i`
@@ -67,7 +67,7 @@ module.exports = {
 };
 ```
 
-### `include`
+### `include` {#include}
 
 Type: `String|RegExp|Array<String|RegExp>`
 Default: `undefined`
@@ -89,7 +89,7 @@ module.exports = {
 };
 ```
 
-### `exclude`
+### `exclude` {#exclude}
 
 Type: `String|RegExp|Array<String|RegExp>`
 Default: `undefined`
@@ -111,7 +111,7 @@ module.exports = {
 };
 ```
 
-### `cache`
+### `cache` {#cache}
 
 > ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
 
@@ -123,7 +123,7 @@ Default path to cache directory: `node_modules/.cache/terser-webpack-plugin`.
 
 > ℹ️ If you use your own `minify` function please read the `minify` section for cache invalidation correctly.
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 Enable/disable file caching.
 
@@ -142,7 +142,7 @@ module.exports = {
 };
 ```
 
-#### `String`
+#### `String` {#string}
 
 Enable file caching and set path to cache directory.
 
@@ -161,7 +161,7 @@ module.exports = {
 };
 ```
 
-### `cacheKeys`
+### `cacheKeys` {#cachekeys}
 
 > ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
 
@@ -202,7 +202,7 @@ module.exports = {
 };
 ```
 
-### `parallel`
+### `parallel` {#parallel}
 
 Type: `Boolean|Number`
 Default: `true`
@@ -214,7 +214,7 @@ Default number of concurrent runs: `os.cpus().length - 1`.
 
 > ⚠️ If you use **Circle CI** or any other environment that doesn't provide real available count of CPUs then you need to setup explicitly number of CPUs to avoid `Error: Call retries were exceeded` (see [#143](https://github.com/webpack-contrib/terser-webpack-plugin/issues/143), [#202](https://github.com/webpack-contrib/terser-webpack-plugin/issues/202)).
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 Enable/disable multi-process parallel running.
 
@@ -233,7 +233,7 @@ module.exports = {
 };
 ```
 
-#### `Number`
+#### `Number` {#number}
 
 Enable multi-process parallel running and set number of concurrent runs.
 
@@ -252,7 +252,7 @@ module.exports = {
 };
 ```
 
-### `sourceMap`
+### `sourceMap` {#sourcemap}
 
 Type: `Boolean`
 Default: `false` (see below for details around `devtool` value and `SourceMapDevToolPlugin` plugin)
@@ -286,7 +286,7 @@ module.exports = {
 };
 ```
 
-### `minify`
+### `minify` {#minify}
 
 Type: `Function`
 Default: `undefined`
@@ -323,7 +323,7 @@ module.exports = {
 };
 ```
 
-### `terserOptions`
+### `terserOptions` {#terseroptions}
 
 Type: `Object`
 Default: [default](https://github.com/terser-js/terser#minify-options)
@@ -359,7 +359,7 @@ module.exports = {
 };
 ```
 
-### `extractComments`
+### `extractComments` {#extractcomments}
 
 Type: `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>|Object`
 Default: `true`
@@ -369,7 +369,7 @@ By default extract only comments using `/^\**!|@preserve|@license|@cc_on/i` rege
 If the original file is named `foo.js`, then the comments will be stored to `foo.js.LICENSE.txt`.
 The `terserOptions.output.comments` option specifies whether the comment will be preserved, i.e. it is possible to preserve some comments (e.g. annotations) while extracting others or even preserving comments that have been extracted.
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 Enable/disable extracting comments.
 
@@ -388,7 +388,7 @@ module.exports = {
 };
 ```
 
-#### `String`
+#### `String` {#string}
 
 Extract `all` or `some` (use `/^\**!|@preserve|@license|@cc_on/i` RegExp) comments.
 
@@ -407,7 +407,7 @@ module.exports = {
 };
 ```
 
-#### `RegExp`
+#### `RegExp` {#regexp}
 
 All comments that match the given expression will be extracted to the separate file.
 
@@ -426,7 +426,7 @@ module.exports = {
 };
 ```
 
-#### `Function<(node, comment) -> Boolean>`
+#### `Function<(node, comment) -> Boolean>` {#functionnode-comment---boolean}
 
 All comments that match the given expression will be extracted to the separate file.
 
@@ -451,7 +451,7 @@ module.exports = {
 };
 ```
 
-#### `Object`
+#### `Object` {#object}
 
 Allow to customize condition for extract comments, specify extracted file name and banner.
 
@@ -479,7 +479,7 @@ module.exports = {
 };
 ```
 
-##### `condition`
+##### `condition` {#condition}
 
 Type: `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
 
@@ -509,7 +509,7 @@ module.exports = {
 };
 ```
 
-##### `filename`
+##### `filename` {#filename}
 
 Type: `String|Function<(string) -> String>`
 Default: `[file].LICENSE.txt[query]`
@@ -540,7 +540,7 @@ module.exports = {
 };
 ```
 
-##### `banner`
+##### `banner` {#banner}
 
 Type: `Boolean|String|Function<(string) -> String>`
 Default: `/*! For license information please see ${commentsFile} */`
@@ -573,7 +573,7 @@ module.exports = {
 };
 ```
 
-### `warningsFilter`
+### `warningsFilter` {#warningsfilter}
 
 Type: `Function<(warning, file, source) -> Boolean>`
 Default: `() => true`
@@ -612,9 +612,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### Preserve Comments
+### Preserve Comments {#preserve-comments}
 
 Extract all legal comments (i.e. `/^\**!|@preserve|@license|@cc_on/i`) and preserve `/@license/i` comments.
 
@@ -638,7 +638,7 @@ module.exports = {
 };
 ```
 
-### Remove Comments
+### Remove Comments {#remove-comments}
 
 If you avoid building with comments, use this config:
 
@@ -662,7 +662,7 @@ module.exports = {
 };
 ```
 
-### Custom Minify Function
+### Custom Minify Function {#custom-minify-function}
 
 Override default minify function - use `uglify-js` for minification.
 
@@ -705,13 +705,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/terser-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/terser-webpack-plugin/blob/master/LICENSE)
 

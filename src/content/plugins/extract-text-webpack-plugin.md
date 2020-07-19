@@ -6,7 +6,7 @@ repo: https://github.com/webpack-contrib/extract-text-webpack-plugin
 ---
 Extract text from a bundle, or bundles, into a separate file.
 
-## Install
+## Install {#install}
 
 ```bash
 
@@ -17,7 +17,7 @@ npm install --save-dev extract-text-webpack-plugin@2.1.2
 npm install --save-dev extract-text-webpack-plugin@1.0.1
 ```
 
-## Usage
+## Usage {#usage}
 
 > :warning: Since webpack v4 the `extract-text-webpack-plugin` should not be used for css. Use [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) instead.
 
@@ -54,7 +54,7 @@ It moves all the required `*.css` modules in entry chunks into a separate CSS fi
 | CSS cached separate | No Hot Module Replacement |
 | Faster runtime (less code and DOM operations) | ... |
 
-## Options
+## Options {#options}
 
 ```js
 new ExtractTextPlugin(options: filename | object)
@@ -78,7 +78,7 @@ new ExtractTextPlugin(options: filename | object)
 
 > :warning: `ExtractTextPlugin` generates a file **per entry**, so you must use `[name]`, `[id]` or `[contenthash]` when using multiple entries.
 
-#### `#extract`
+#### `#extract` {#extract}
 
 ```js
 ExtractTextPlugin.extract(options: loader | object)
@@ -93,7 +93,7 @@ Creates an extracting loader from an existing loader. Supports loaders of type `
 |**`options.publicPath`**|`{String}`|Override the `publicPath` setting for this loader|
 
 
-#### Multiple Instances
+#### Multiple Instances {#multiple-instances}
 
 There is also an `extract` function on the instance. You should use this if you have more than one instance of  `ExtractTextPlugin`.
 
@@ -124,7 +124,7 @@ module.exports = {
 };
 ```
 
-### Extracting Sass or LESS
+### Extracting Sass or LESS {#extracting-sass-or-less}
 
 The configuration is the same, switch out `sass-loader` for `less-loader` when necessary.
 
@@ -153,7 +153,7 @@ module.exports = {
 }
 ```
 
-### `url()` Resolving
+### `url()` Resolving {#url-resolving}
 
 If you are finding that urls are not resolving properly when you run webpack. You can expand your loader functionality with options. The `url: false` property allows your paths resolved without any changes.
 
@@ -192,7 +192,7 @@ module.exports = {
 }
 ```
 
-### Modify filename
+### Modify filename {#modify-filename}
 
 `filename` parameter could be `Function`. It passes `getPath` to process the format like `css/[name].css` and returns the real file name, `css/js/a.css`. You can replace `css/js` with `css` then you will get the new path `css/a.css`.
 
@@ -211,7 +211,7 @@ plugins: [
 ]
 ```
 
-## Maintainers
+## Maintainers {#maintainers}
 
 <table>
   <tbody>

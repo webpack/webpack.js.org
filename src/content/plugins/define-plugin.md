@@ -92,7 +92,11 @@ new webpack.DefinePlugin({
 ```
 
 
+<<<<<<< HEAD
 ## Service URL {#service-urls}
+=======
+## Service URLs {#service-urls}
+>>>>>>> test-loader-plugin-t
 
 在生产或开发构建中使用不同的服务 URL：
 

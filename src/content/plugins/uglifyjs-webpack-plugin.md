@@ -18,11 +18,11 @@ repo: https://github.com/webpack-contrib/uglifyjs-webpack-plugin
 
 此插件使用 [uglify-js](https://github.com/mishoo/UglifyJS2) 压缩你的 JavaScript。
 
-## Requirements
+## Requirements {#requirements}
 
 此模块要求的最小版本为 Node v6.9.0 和 Webpack v4.0.0 版本。
 
-## Getting Started
+## Getting Started {#getting-started}
 
 首先，你需要安装 `uglifyjs-webpack-plugin`：
 
@@ -46,9 +46,9 @@ module.exports = {
 
 紧接着通过你的首选方式运行 `webpack`。
 
-## Options
+## Options {#options}
 
-### `test`
+### `test` {#test}
 
 类型：`String|RegExp|Array<String|RegExp>`
 默认值：`/\.js(\?.*)?$/i`
@@ -69,7 +69,7 @@ module.exports = {
 };
 ```
 
-### `include`
+### `include` {#include}
 
 类型：`String|RegExp|Array<String|RegExp>`
 默认值：`undefined`
@@ -90,7 +90,7 @@ module.exports = {
 };
 ```
 
-### `exclude`
+### `exclude` {#exclude}
 
 类型：`String|RegExp|Array<String|RegExp>`
 默认值：`undefined`
@@ -111,7 +111,7 @@ module.exports = {
 };
 ```
 
-### `chunkFilter`
+### `chunkFilter` {#chunkfilter}
 
 类型：`Function<(chunk) -> boolean>`
 默认值：`() => true`
@@ -140,7 +140,7 @@ module.exports = {
 };
 ```
 
-### `cache`
+### `cache` {#cache}
 
 类型：`Boolean|String`
 默认值：`false`
@@ -150,7 +150,7 @@ module.exports = {
 
 > ℹ️ 如果你使用自定义的 `minify` 函数，请正确阅读 `minify` 部分以了解缓存失效。
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 启用/禁用文件缓存。
 
@@ -168,7 +168,7 @@ module.exports = {
 };
 ```
 
-#### `String`
+#### `String` {#string}
 
 启用文件缓存并设置缓存目录路径。
 
@@ -188,7 +188,7 @@ module.exports = {
 };
 ```
 
-### `cacheKeys`
+### `cacheKeys` {#cachekeys}
 
 类型：`Function<(defaultCacheKeys, file) -> Object>`
 默认值：`defaultCacheKeys => defaultCacheKeys`
@@ -229,7 +229,7 @@ module.exports = {
 };
 ```
 
-### `parallel`
+### `parallel` {#parallel}
 
 类型：`Boolean|Number`
 默认值：`false`
@@ -239,7 +239,7 @@ module.exports = {
 
 > ℹ️ 并行化可以显著地加快构建速度，因此**强烈推荐**使用并行化。
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 启用/禁用多进程并行运行。
 
@@ -257,7 +257,7 @@ module.exports = {
 };
 ```
 
-#### `Number`
+#### `Number` {#number}
 
 启用多进程并行运行并设置并发运行的次数。
 
@@ -275,7 +275,7 @@ module.exports = {
 };
 ```
 
-### `sourceMap`
+### `sourceMap` {#sourcemap}
 
 类型：`Boolean`
 默认值：`false`
@@ -299,7 +299,7 @@ module.exports = {
 };
 ```
 
-### `minify`
+### `minify` {#minify}
 
 类型：`Function`
 默认值：`undefined`
@@ -335,7 +335,7 @@ module.exports = {
 };
 ```
 
-### `uglifyOptions`
+### `uglifyOptions` {#uglifyoptions}
 
 类型：`Object`
 默认值：[默认值](https://github.com/mishoo/UglifyJS2#minify-options)
@@ -366,7 +366,7 @@ module.exports = {
 };
 ```
 
-### `extractComments`
+### `extractComments` {#extractcomments}
 
 类型：`Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
 默认值：`false`
@@ -376,7 +376,7 @@ module.exports = {
 如果原始文件名字为 `foo.js`，则注释文件将会被储存到 `foo.js.LICENSE` 中。
 `uglifyOptions.output.comments` 选项指定是否保留注释，也就是说，当提取其他的注释时，可以保留一些注释（如：注解），甚至是保留已经被提取的注释。
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 启用/禁用提取注释。
 
@@ -394,7 +394,7 @@ module.exports = {
 };
 ```
 
-#### `String`
+#### `String` {#string}
 
 提取`所有`或`一些`（使用 `/^\**!|@preserve|@license|@cc_on/i` 正则匹配） 注释。
 
@@ -412,7 +412,7 @@ module.exports = {
 };
 ```
 
-#### `RegExp`
+#### `RegExp` {#regexp}
 
 所有的与给定表达式相匹配注释将被提取到单独的文件中。
 
@@ -430,7 +430,7 @@ module.exports = {
 };
 ```
 
-#### `Function<(node, comment) -> Boolean>`
+#### `Function<(node, comment) -> Boolean>` {#functionnode-comment---boolean}
 
 所有的与给定表达式相匹配注释将被提取到单独的文件中。
 
@@ -454,7 +454,7 @@ module.exports = {
 };
 ```
 
-#### `Object`
+#### `Object` {#object}
 
 允许自定义条件提取注释，指定提取的文件名和banner。
 
@@ -480,7 +480,7 @@ module.exports = {
 };
 ```
 
-##### `condition`
+##### `condition` {#condition}
 
 类型：`Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
 
@@ -508,7 +508,7 @@ module.exports = {
 };
 ```
 
-##### `filename`
+##### `filename` {#filename}
 
 类型：`Regex|Function<(string) -> String>`
 默认值：`${file}.LICENSE`
@@ -536,7 +536,7 @@ module.exports = {
 };
 ```
 
-##### `banner`
+##### `banner` {#banner}
 
 类型：`Boolean|String|Function<(string) -> String>`
 默认值：`/*! For license information please see ${commentsFile} */`
@@ -567,7 +567,7 @@ module.exports = {
 };
 ```
 
-### `warningsFilter`
+### `warningsFilter` {#warningsfilter}
 
 类型：`Function<(warning, source) -> Boolean>`
 默认值：`() => true`
@@ -599,9 +599,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### Cache And Parallel
+### Cache And Parallel {#cache-and-parallel}
 
 开启缓存并启用多进程并行运行。
 
@@ -620,7 +620,7 @@ module.exports = {
 };
 ```
 
-### Preserve Comments
+### Preserve Comments {#preserve-comments}
 
 提取所有合法注释（即使用 `/^\**!|@preserve|@license|@cc_on/i` 正则匹配），同时保留 `/@license/i` 注释。
 
@@ -643,7 +643,7 @@ module.exports = {
 };
 ```
 
-### Remove Comments
+### Remove Comments {#remove-comments}
 
 如果你构建时不想出现注释，可以按照以下配置将 **uglifyOptions.output.comments** 设置为 **false**：
 
@@ -665,7 +665,7 @@ module.exports = {
 };
 ```
 
-### Custom Minify Function
+### Custom Minify Function {#custom-minify-function}
 
 覆盖默认的 minify 函数 —— 使用 [terser](https://github.com/fabiosantoscode/terser) 进行压缩。
 
@@ -707,13 +707,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 如果你至今还没有阅读，请花一点时间阅读我们的贡献指南。
 
 [贡献](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/blob/master/LICENSE)
 

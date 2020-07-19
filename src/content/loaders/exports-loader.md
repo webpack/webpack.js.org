@@ -26,7 +26,7 @@ For further hints on compatibility issues, check out [Shimming](/guides/shimming
 >
 > ⚠ Be careful, existing exports (`export`/`module.exports`/`exports`) in the original code and exporting new values can cause a failure.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `exports-loader`:
 
@@ -34,7 +34,7 @@ To begin, you'll need to install `exports-loader`:
 $ npm install exports-loader --save-dev
 ```
 
-### Inline
+### Inline {#inline}
 
 The `|` or `%20` (space) allow to separate the `syntax`, `name` and `alias` of export.
 The documentation and syntax examples can be read [here](#syntax).
@@ -150,7 +150,7 @@ myFunctionAlias('Hello world');
 
 Description of string values can be found in the documentation below.
 
-### Using Configuration
+### Using Configuration {#using-configuration}
 
 **webpack.config.js**
 
@@ -174,14 +174,14 @@ module.exports = {
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
 |           Name            |                   Type                    |   Default   | Description                 |
 | :-----------------------: | :---------------------------------------: | :---------: | :-------------------------- |
 |    **[`type`](#type)**    |                `{String}`                 |  `module`   | Format of generated exports |
 | **[`exports`](#exports)** | `{String\|Object\|Array<String\|Object>}` | `undefined` | List of exports             |
 
-### `type`
+### `type` {#type}
 
 Type: `String`
 Default: `module`
@@ -190,7 +190,7 @@ Format of generated exports.
 
 Possible values - `commonjs` (CommonJS module syntax) and `module` (ES module syntax).
 
-#### `commonjs`
+#### `commonjs` {#commonjs}
 
 **webpack.config.js**
 
@@ -221,7 +221,7 @@ Generate output:
 module.exports = { Foo };
 ```
 
-#### `module`
+#### `module` {#module}
 
 **webpack.config.js**
 
@@ -252,18 +252,18 @@ Generate output:
 export { Foo };
 ```
 
-### `exports`
+### `exports` {#exports}
 
 Type: `String|Array`
 Default: `undefined`
 
 List of exports.
 
-#### `String`
+#### `String` {#string}
 
 Allows to use a string to describe an export.
 
-##### `Syntax`
+##### `Syntax` {#syntax}
 
 The `|` or `%20` (space) allow to separate the `syntax`, `name` and `alias` of export.
 
@@ -293,9 +293,9 @@ Examples:
 
 > ⚠ Aliases can't be used together with `default` or `single` syntaxes.
 
-##### Examples
+##### Examples {#examples}
 
-###### ES Module Default Export
+###### ES Module Default Export {#es-module-default-export}
 
 **webpack.config.js**
 
@@ -325,7 +325,7 @@ Generate output:
 export default Foo;
 ```
 
-###### ES Module Named Exports
+###### ES Module Named Exports {#es-module-named-exports}
 
 **webpack.config.js**
 
@@ -355,7 +355,7 @@ Generate output:
 export { Foo as FooA };
 ```
 
-###### CommonJS Single Export
+###### CommonJS Single Export {#commonjs-single-export}
 
 **webpack.config.js**
 
@@ -386,7 +386,7 @@ Generate output:
 module.exports = Foo;
 ```
 
-###### CommonJS Multiple Exports
+###### CommonJS Multiple Exports {#commonjs-multiple-exports}
 
 **webpack.config.js**
 
@@ -417,7 +417,7 @@ Generate output:
 module.exports = { FooA: Foo };
 ```
 
-#### `Object`
+#### `Object` {#object}
 
 Allows to use an object to describe an export.
 
@@ -427,9 +427,9 @@ Properties:
 - `name` - name of an exported value (**required**)
 - `alias` - alias of an exported value (**may be omitted**)
 
-##### Examples
+##### Examples {#examples}
 
-###### ES Module Default Export
+###### ES Module Default Export {#es-module-default-export}
 
 **webpack.config.js**
 
@@ -462,7 +462,7 @@ Generate output:
 export default Foo;
 ```
 
-###### ES Module Named Exports
+###### ES Module Named Exports {#es-module-named-exports}
 
 **webpack.config.js**
 
@@ -496,7 +496,7 @@ Generate output:
 export { Foo as FooA };
 ```
 
-###### CommonJS Single Export
+###### CommonJS Single Export {#commonjs-single-export}
 
 **webpack.config.js**
 
@@ -530,7 +530,7 @@ Generate output:
 module.exports = Foo;
 ```
 
-###### CommonJS Multiple Exports
+###### CommonJS Multiple Exports {#commonjs-multiple-exports}
 
 **webpack.config.js**
 
@@ -565,7 +565,7 @@ Generate output:
 module.exports = { FooA: Foo };
 ```
 
-#### `Array`
+#### `Array` {#array}
 
 Allow to specify multiple exports. Each item can be a [`string`](https://github.com/webpack-contrib/exports-loader#string) or an [`object`](https://github.com/webpack-contrib/exports-loader#object).
 
@@ -575,9 +575,9 @@ Allow to specify multiple exports. Each item can be a [`string`](https://github.
 
 > ⚠ Not possible to use multiple `single` values due to CommonJS format limitations.
 
-##### Examples
+##### Examples {#examples}
 
-###### CommonJS Multiple Exports
+###### CommonJS Multiple Exports {#commonjs-multiple-exports}
 
 **webpack.config.js**
 
@@ -608,7 +608,7 @@ Generate output:
 module.exports = { Foo, Bar, BazA: Bar };
 ```
 
-###### ES Module Default Export And Named Exports Together
+###### ES Module Default Export And Named Exports Together {#es-module-default-export-and-named-exports-together}
 
 **webpack.config.js**
 
@@ -639,7 +639,7 @@ export default Foo;
 export { Bar as BarA };
 ```
 
-###### Named Exports
+###### Named Exports {#named-exports}
 
 **webpack.config.js**
 
@@ -673,13 +673,13 @@ Generate output:
 export { Foo as FooA, Bar, Baz };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/exports-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/exports-loader/blob/master/LICENSE)
 

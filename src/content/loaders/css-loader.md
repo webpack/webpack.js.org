@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/css-loader
 
 The `css-loader` interprets `@import` and `url()` like `import/require()` and will resolve them.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `css-loader`:
 
@@ -53,7 +53,7 @@ Good loaders for requiring your assets are the [file-loader](/loaders/file-loade
 
 And run `webpack` via your preferred method.
 
-### `toString`
+### `toString` {#tostring}
 
 You can also use the css-loader results directly as a string, such as in Angular's component style.
 
@@ -106,7 +106,7 @@ module.exports = {
 };
 ```
 
-## Options
+## Options {#options}
 
 |                 Name                  |            Type             |      Default       | Description                                                            |
 | :-----------------------------------: | :-------------------------: | :----------------: | :--------------------------------------------------------------------- |
@@ -118,7 +118,7 @@ module.exports = {
 |    **[`onlyLocals`](#onlylocals)**    |         `{Boolean}`         |      `false`       | Export only locals                                                     |
 |      **[`esModule`](#esmodule)**      |         `{Boolean}`         |      `false`       | Use ES modules syntax                                                  |
 
-### `url`
+### `url` {#url}
 
 Type: `Boolean|Function`
 Default: `true`
@@ -145,7 +145,7 @@ url('~module/image.png') => require('module/image.png')
 url(~aliasDirectory/image.png) => require('otherDirectory/image.png')
 ```
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 Enable/disable `url()` resolving.
 
@@ -167,7 +167,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 Allow to filter `url()`. All filtered `url()` will not be resolved (left in the code as they were written).
 
@@ -198,7 +198,7 @@ module.exports = {
 };
 ```
 
-### `import`
+### `import` {#import}
 
 Type: `Boolean|Function`
 Default: `true`
@@ -226,7 +226,7 @@ To import styles from a `node_modules` path (include `resolve.modules`) and for 
 @import url(~aliasDirectory/style.css) => require('otherDirectory/style.css')
 ```
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 Enable/disable `@import` resolving.
 
@@ -248,7 +248,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 Allow to filter `@import`. All filtered `@import` will not be resolved (left in the code as they were written).
 
@@ -281,7 +281,7 @@ module.exports = {
 };
 ```
 
-### `modules`
+### `modules` {#modules}
 
 Type: `Boolean|String|Object`
 Default: `false`
@@ -310,9 +310,9 @@ module.exports = {
 };
 ```
 
-#### `Features`
+#### `Features` {#features}
 
-##### `Scope`
+##### `Scope` {#scope}
 
 Using `local` value requires you to specify `:global` classes.
 Using `global` value requires you to specify `:local` classes.
@@ -373,7 +373,7 @@ CamelCase is recommended for local selectors. They are easier to use within the 
 
 You can use `:local(#someId)`, but this is not recommended. Use classes instead of ids.
 
-##### `Composing`
+##### `Composing` {#composing}
 
 When declaring a local classname you can compose a local class from another local classname.
 
@@ -409,7 +409,7 @@ exports.locals = {
 }
 ```
 
-##### `Importing`
+##### `Importing` {#importing}
 
 To import a local classname from another module.
 
@@ -440,7 +440,7 @@ To import from multiple modules use multiple `composes:` rules.
 }
 ```
 
-##### `Values`
+##### `Values` {#values}
 
 You can use `@value` to specific values to be reused throughout a document.
 
@@ -467,7 +467,7 @@ We recommend use prefix `v-` for values, `s-` for selectors and `m-` for media a
 }
 ```
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 Enable **CSS Modules** features.
 
@@ -489,7 +489,7 @@ module.exports = {
 };
 ```
 
-#### `String`
+#### `String` {#string}
 
 Enable **CSS Modules** features and setup `mode`.
 
@@ -512,7 +512,7 @@ module.exports = {
 };
 ```
 
-#### `Object`
+#### `Object` {#object}
 
 Enable **CSS Modules** features and setup options for them.
 
@@ -542,14 +542,14 @@ module.exports = {
 };
 ```
 
-##### `auto`
+##### `auto` {#auto}
 
 Type: `Boolean|RegExp|Function`
 Default: `'undefined'`
 
 Allows auto enable css modules based on filename.
 
-###### `Boolean`
+###### `Boolean` {#boolean}
 
 Possible values:
 
@@ -576,7 +576,7 @@ module.exports = {
 };
 ```
 
-###### `RegExp`
+###### `RegExp` {#regexp}
 
 Enable css modules for files based on the filename satisfying your regex check.
 
@@ -600,7 +600,7 @@ module.exports = {
 };
 ```
 
-###### `Function`
+###### `Function` {#function}
 
 Enable css modules for files based on the filename satisfying your filter function check.
 
@@ -624,14 +624,14 @@ module.exports = {
 };
 ```
 
-##### `mode`
+##### `mode` {#mode}
 
 Type: `String|Function`
 Default: `'local'`
 
 Setup `mode` option. You can omit the value when you want `local` mode.
 
-###### `String`
+###### `String` {#string}
 
 Possible values - `local`, `global`, and `pure`.
 
@@ -655,7 +655,7 @@ module.exports = {
 };
 ```
 
-###### `Function`
+###### `Function` {#function}
 
 Allows set different values for the `mode` option based on a filename
 
@@ -692,7 +692,7 @@ module.exports = {
 };
 ```
 
-##### `exportGlobals`
+##### `exportGlobals` {#exportglobals}
 
 Type: `Boolean`
 Default: `false`
@@ -719,7 +719,7 @@ module.exports = {
 };
 ```
 
-##### `localIdentName`
+##### `localIdentName` {#localidentname}
 
 Type: `String`
 Default: `'[hash:base64]'`
@@ -756,7 +756,7 @@ module.exports = {
 };
 ```
 
-##### `localsConvention`
+##### `localsConvention` {#localsconvention}
 
 Type: `String`
 Default: `'asIs'`
@@ -805,7 +805,7 @@ module.exports = {
 };
 ```
 
-##### `context`
+##### `context` {#context}
 
 Type: `String`
 Default: `undefined`
@@ -833,7 +833,7 @@ module.exports = {
 };
 ```
 
-##### `hashPrefix`
+##### `hashPrefix` {#hashprefix}
 
 Type: `String`
 Default: `undefined`
@@ -860,7 +860,7 @@ module.exports = {
 };
 ```
 
-##### `getLocalIdent`
+##### `getLocalIdent` {#getlocalident}
 
 Type: `Function`
 Default: `undefined`
@@ -890,7 +890,7 @@ module.exports = {
 };
 ```
 
-##### `localIdentRegExp`
+##### `localIdentRegExp` {#localidentregexp}
 
 Type: `String|RegExp`
 Default: `undefined`
@@ -915,7 +915,7 @@ module.exports = {
 };
 ```
 
-##### `namedExport`
+##### `namedExport` {#namedexport}
 
 Type: `Boolean`
 Default: `false`
@@ -967,7 +967,7 @@ module.exports = {
 };
 ```
 
-### `sourceMap`
+### `sourceMap` {#sourcemap}
 
 Type: `Boolean`
 Default: depends on the `compiler.devtool` value
@@ -992,7 +992,7 @@ module.exports = {
 };
 ```
 
-### `importLoaders`
+### `importLoaders` {#importloaders}
 
 Type: `Number`
 Default: `0`
@@ -1031,7 +1031,7 @@ module.exports = {
 
 This may change in the future when the module system (i. e. webpack) supports loader matching by origin.
 
-### `onlyLocals`
+### `onlyLocals` {#onlylocals}
 
 Type: `Boolean`
 Default: `false`
@@ -1060,7 +1060,7 @@ module.exports = {
 };
 ```
 
-### `esModule`
+### `esModule` {#esmodule}
 
 Type: `Boolean`
 Default: `false`
@@ -1088,9 +1088,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### Assets
+### Assets {#assets}
 
 The following `webpack.config.js` can load CSS files, embed small PNG/JPG/GIF/SVG images as well as fonts as [Data URLs](https://tools.ietf.org/html/rfc2397) and copy larger files to the output directory.
 
@@ -1116,7 +1116,7 @@ module.exports = {
 };
 ```
 
-### Extract
+### Extract {#extract}
 
 For production builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
 
@@ -1124,7 +1124,7 @@ For production builds it's recommended to extract the CSS from your bundle being
 
 - As an alternative, if seeking better development performance and css outputs that mimic production. [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin) offers a hot module reload friendly, extended version of mini-css-extract-plugin. HMR real CSS files in dev, works like mini-css in non-dev
 
-### Pure CSS, CSS modules and PostCSS
+### Pure CSS, CSS modules and PostCSS {#pure-css-css-modules-and-postcss}
 
 When you have pure CSS (without CSS modules), CSS modules and PostCSS in your project you can use this setup:
 
@@ -1173,7 +1173,7 @@ module.exports = {
 };
 ```
 
-### Resolve unresolved URLs using an alias
+### Resolve unresolved URLs using an alias {#resolve-unresolved-urls-using-an-alias}
 
 **index.css**
 
@@ -1206,13 +1206,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/css-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/css-loader/blob/master/LICENSE)
 

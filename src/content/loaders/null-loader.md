@@ -21,7 +21,7 @@ One use for this loader is to silence modules imported by a dependency. Say, for
 example, your project relies on an ES6 library that imports a polyfill you don't
 need, so removing it will cause no loss in functionality.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `null-loader`:
 
@@ -51,13 +51,13 @@ module.exports = {
 
 And run `webpack` via your preferred method.
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/null-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/null-loader/blob/master/LICENSE)
 

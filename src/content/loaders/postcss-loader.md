@@ -9,15 +9,15 @@ repo: https://github.com/postcss/postcss-loader
   <p>Loader for <a href="https://webpack.js.org/">webpack</a> to process CSS with <a href="https://postcss.org/">PostCSS</a></p>
 </div>
 
-## Install
+## Install {#install}
 
 ```bash
 npm i -D postcss-loader
 ```
 
-## Usage
+## Usage {#usage}
 
-### `Configuration`
+### `Configuration` {#configuration}
 
 **`postcss.config.js`**
 ```js
@@ -33,7 +33,7 @@ module.exports = {
 
 You can read more about common PostCSS Config [here](https://github.com/michael-ciniawsky/postcss-load-config).
 
-### `Config Cascade`
+### `Config Cascade` {#config-cascade}
 
 You can use different `postcss.config.js` files in different directories.
 Config lookup starts from `path.dirname(file)` and walks the file tree upwards until a config file is found.
@@ -92,7 +92,7 @@ module.exports = {
 }
 ```
 
-## Options
+## Options {#options}
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
@@ -104,7 +104,7 @@ module.exports = {
 |[`plugins`](#plugins)|`{Array\|Function}`|`[]`|Set PostCSS Plugins|
 |[`sourceMap`](#sourcemap)|`{String\|Boolean}`|`false`|Enable Source Maps|
 
-### `Exec`
+### `Exec` {#exec}
 
 If you use JS styles without the [`postcss-js`][postcss-js] parser, add the `exec` option.
 
@@ -120,14 +120,14 @@ If you use JS styles without the [`postcss-js`][postcss-js] parser, add the `exe
 }
 ```
 
-### `Config`
+### `Config` {#config}
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |[`path`](#path)|`{String}`|`undefined`|PostCSS Config Directory|
 |[`context`](#context-ctx)|`{Object}`|`undefined`|PostCSS Config Context|
 
-#### `Path`
+#### `Path` {#path}
 
 You can manually specify the path to search for your config (`postcss.config.js`) with the `config.path` option. This is needed if you store your config  in a separate e.g `./config || ./.config` folder.
 
@@ -150,7 +150,7 @@ You can manually specify the path to search for your config (`postcss.config.js`
 
 [supported config formats]: https://github.com/michael-ciniawsky/postcss-load-config#usage
 
-#### `Context (ctx)`
+#### `Context (ctx)` {#context-ctx}
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
@@ -187,7 +187,7 @@ module.exports = ({ file, options, env }) => ({
 }
 ```
 
-### `Plugins`
+### `Plugins` {#plugins}
 
 **`webpack.config.js`**
 ```js
@@ -206,7 +206,7 @@ module.exports = ({ file, options, env }) => ({
 
 > ⚠️  webpack requires an identifier (`ident`) in `options` when `{Function}/require` is used (Complex Options). The `ident` can be freely named as long as it is unique. It's recommended to name it (`ident: 'postcss'`)
 
-### `Syntaxes`
+### `Syntaxes` {#syntaxes}
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
@@ -214,7 +214,7 @@ module.exports = ({ file, options, env }) => ({
 |[`syntax`](#syntax)|`{String\|Function}`|`undefined`|Custom PostCSS Syntax|
 |[`stringifier`](#stringifier)|`{String\|Function}`|`undefined`|Custom PostCSS Stringifier|
 
-#### `Parser`
+#### `Parser` {#parser}
 
 **`webpack.config.js`**
 ```js
@@ -227,7 +227,7 @@ module.exports = ({ file, options, env }) => ({
 }
 ```
 
-#### `Syntax`
+#### `Syntax` {#syntax}
 
 **`webpack.config.js`**
 ```js
@@ -240,7 +240,7 @@ module.exports = ({ file, options, env }) => ({
 }
 ```
 
-#### `Stringifier`
+#### `Stringifier` {#stringifier}
 
 **`webpack.config.js`**
 ```js
@@ -253,7 +253,7 @@ module.exports = ({ file, options, env }) => ({
 }
 ```
 
-### `SourceMap`
+### `SourceMap` {#sourcemap}
 
 Enables source map support, `postcss-loader` will use the previous source map given by other loaders and update it accordingly, if no previous loader is applied before `postcss-loader`, the loader will generate a source map for you.
 
@@ -270,7 +270,7 @@ Enables source map support, `postcss-loader` will use the previous source map gi
 }
 ```
 
-#### `'inline'`
+#### `'inline'` {#inline}
 
 You can set the `sourceMap: 'inline'` option to inline the source map
 within the CSS directly as an annotation comment.
@@ -291,9 +291,9 @@ within the CSS directly as an annotation comment.
 /*# sourceMappingURL=data:application/json;base64, ... */
 ```
 
-## Examples
+## Examples {#examples}
 
-### `Stylelint`
+### `Stylelint` {#stylelint}
 
 **`webpack.config.js`**
 ```js
@@ -317,7 +317,7 @@ within the CSS directly as an annotation comment.
 }
 ```
 
-### `Autoprefixing`
+### `Autoprefixing` {#autoprefixing}
 
 **`webpack.config.js`**
 ```js
@@ -342,7 +342,7 @@ within the CSS directly as an annotation comment.
 
 > :warning: [`postcss-preset-env`](https://github.com/csstools/postcss-preset-env) includes [`autoprefixer`](https://github.com/postcss/autoprefixer), so adding it separately is not necessary if you already use the preset.
 
-### `CSS Modules`
+### `CSS Modules` {#css-modules}
 
 This loader [cannot be used] with [CSS Modules] out of the box due
 to the way `css-loader` processes file imports. To make them work properly,
@@ -367,7 +367,7 @@ or use [postcss-modules] instead of `css-loader`.
 [CSS Modules]: https://github.com/webpack/css-loader#css-modules
 [postcss-modules]: https://github.com/css-modules/postcss-modules
 
-### `CSS-in-JS`
+### `CSS-in-JS` {#css-in-js}
 
 If you want to process styles written in JavaScript, use the [postcss-js] parser.
 
@@ -409,7 +409,7 @@ export default {
 
 [babel-plugin-add-module-exports]: https://github.com/59naga/babel-plugin-add-module-exports
 
-### [Extract CSS][ExtractPlugin]
+### [Extract CSS][ExtractPlugin] {#extract-cssextractplugin}
 
 [ExtractPlugin]: https://github.com/webpack-contrib/mini-css-extract-plugin
 
@@ -440,7 +440,7 @@ module.exports = {
 }
 ```
 
-## Maintainers
+## Maintainers {#maintainers}
 
 <table>
   <tbody>

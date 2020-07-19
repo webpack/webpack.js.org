@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/stylelint-webpack-plugin
 
 > A Stylelint plugin for webpack
 
-## Install
+## Install {#install}
 
 ```bash
 npm install stylelint-webpack-plugin --save-dev
@@ -30,7 +30,7 @@ npm install stylelint-webpack-plugin --save-dev
 npm install stylelint --save-dev
 ```
 
-## Usage
+## Usage {#usage}
 
 In your webpack configuration:
 
@@ -44,11 +44,11 @@ module.exports = {
 };
 ```
 
-## Options
+## Options {#options}
 
 See [stylelint's options](http://stylelint.io/user-guide/node-api/#options) for the complete list of options available. These options are passed through to the `stylelint` directly.
 
-### `configFile`
+### `configFile` {#configfile}
 
 - Type: `String`
 - Default: `undefined`
@@ -57,93 +57,93 @@ Specify the config file location to be used by `stylelint`.
 
 **Note:** By default this is [handled by `stylelint`](http://stylelint.io/user-guide/configuration/).
 
-### `context`
+### `context` {#context}
 
 - Type: `String`
 - Default: `compiler.context`
 
 A string indicating the root of your files.
 
-### `files`
+### `files` {#files}
 
 - Type: `String|Array[String]`
 - Default: `'**/*.s?(a|c)ss'`
 
 Specify the glob pattern for finding files. Must be relative to `options.context`.
 
-### `fix`
+### `fix` {#fix}
 
 - Type: `Boolean`
 - Default: `false`
 
 If `true`, `stylelint` will fix as many errors as possible. The fixes are made to the actual source files. All unfixed errors will be reported. See [Autofixing errors](https://stylelint.io/user-guide/cli#autofixing-errors) docs.
 
-### `formatter`
+### `formatter` {#formatter}
 
 - Type: `String|Function`
 - Default: `'string'`
 
 Specify the formatter that you would like to use to format your results. See [formatter option](https://stylelint.io/user-guide/node-api#formatter).
 
-### `lintDirtyModulesOnly`
+### `lintDirtyModulesOnly` {#lintdirtymodulesonly}
 
 - Type: `Boolean`
 - Default: `false`
 
 Lint only changed files, skip lint on start.
 
-### `stylelintPath`
+### `stylelintPath` {#stylelintpath}
 
 - Type: `String`
 - Default: `stylelint`
 
 Path to `stylelint` instance that will be used for linting.
 
-### Errors and Warning
+### Errors and Warning {#errors-and-warning}
 
 **By default the plugin will auto adjust error reporting depending on stylelint errors/warnings counts.**
 You can still force this behavior by using `emitError` **or** `emitWarning` options:
 
-#### `emitError`
+#### `emitError` {#emiterror}
 
 - Type: `Boolean`
 - Default: `false`
 
 Will always return errors, if set to `true`.
 
-#### `emitWarning`
+#### `emitWarning` {#emitwarning}
 
 - Type: `Boolean`
 - Default: `false`
 
 Will always return warnings, if set to `true`.
 
-#### `failOnError`
+#### `failOnError` {#failonerror}
 
 - Type: `Boolean`
 - Default: `false`
 
 Will cause the module build to fail if there are any errors, if set to `true`.
 
-#### `failOnWarning`
+#### `failOnWarning` {#failonwarning}
 
 - Type: `Boolean`
 - Default: `false`
 
 Will cause the module build to fail if there are any warnings, if set to `true`.
 
-#### `quiet`
+#### `quiet` {#quiet}
 
 - Type: `Boolean`
 - Default: `false`
 
 Will process and report errors only and ignore warnings, if set to `true`.
 
-## Changelog
+## Changelog {#changelog}
 
 [Changelog](https://github.com/webpack-contrib/stylelint-webpack-plugin/blob/master/CHANGELOG.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/stylelint-webpack-plugin/blob/master/LICENSE)
 

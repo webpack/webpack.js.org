@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/compression-webpack-plugin
 
 Prepare compressed versions of assets to serve them with Content-Encoding.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `compression-webpack-plugin`:
 
@@ -40,7 +40,7 @@ module.exports = {
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
 |                      Name                       |                   Type                    |      Default       | Description                                                                                                   |
 | :---------------------------------------------: | :---------------------------------------: | :----------------: | :------------------------------------------------------------------------------------------------------------ |
@@ -54,7 +54,7 @@ And run `webpack` via your preferred method.
 |           **[`filename`](#filename)**           |           `{String\|Function}`            | `[path].gz[query]` | The target asset filename.                                                                                    |
 |              **[`cache`](#cache)**              |                `{Boolean}`                |       `true`       | Enable file caching                                                                                           |
 
-### `test`
+### `test` {#test}
 
 Type: `String|RegExp|Array<String|RegExp>`
 Default: `undefined`
@@ -73,7 +73,7 @@ module.exports = {
 };
 ```
 
-### `include`
+### `include` {#include}
 
 Type: `String|RegExp|Array<String|RegExp>`
 Default: `undefined`
@@ -92,7 +92,7 @@ module.exports = {
 };
 ```
 
-### `exclude`
+### `exclude` {#exclude}
 
 Type: `String|RegExp|Array<String|RegExp>`
 Default: `undefined`
@@ -111,14 +111,14 @@ module.exports = {
 };
 ```
 
-### `algorithm`
+### `algorithm` {#algorithm}
 
 Type: `String|Function`
 Default: `gzip`
 
 The compression algorithm/function.
 
-#### `String`
+#### `String` {#string}
 
 The algorithm is taken from [zlib](https://nodejs.org/api/zlib.html).
 
@@ -134,7 +134,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 Allow to specify a custom compression function.
 
@@ -152,7 +152,7 @@ module.exports = {
 };
 ```
 
-### `compressionOptions`
+### `compressionOptions` {#compressionoptions}
 
 Type: `Object`
 Default: `{ level: 9 }`
@@ -175,7 +175,7 @@ module.exports = {
 };
 ```
 
-### `threshold`
+### `threshold` {#threshold}
 
 Type: `Number`
 Default: `0`
@@ -194,7 +194,7 @@ module.exports = {
 };
 ```
 
-### `minRatio`
+### `minRatio` {#minratio}
 
 Type: `Number`
 Default: `0.8`
@@ -216,14 +216,14 @@ module.exports = {
 };
 ```
 
-### `filename`
+### `filename` {#filename}
 
 Type: `String|Function`
 Default: `[path].gz[query]`
 
 The target asset filename.
 
-#### `String`
+#### `String` {#string}
 
 `[file]` is replaced with the original asset filename.
 `[path]` is replaced with the path of the original asset.
@@ -244,7 +244,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 **webpack.config.js**
 
@@ -263,7 +263,7 @@ module.exports = {
 };
 ```
 
-### `deleteOriginalAssets`
+### `deleteOriginalAssets` {#deleteoriginalassets}
 
 Type: `Boolean`
 Default: `false`
@@ -282,7 +282,7 @@ module.exports = {
 };
 ```
 
-### `cache`
+### `cache` {#cache}
 
 > ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
 
@@ -292,7 +292,7 @@ Default: `true`
 Enable file caching.
 The default path to cache directory: `node_modules/.cache/compression-webpack-plugin`.
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 Enable/disable file caching.
 
@@ -308,7 +308,7 @@ module.exports = {
 };
 ```
 
-#### `String`
+#### `String` {#string}
 
 Enable file caching and set path to cache directory.
 
@@ -324,9 +324,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### Using Zopfli
+### Using Zopfli {#using-zopfli}
 
 Prepare compressed versions of assets using `zopfli` library.
 
@@ -357,7 +357,7 @@ module.exports = {
 };
 ```
 
-### Using Brotli
+### Using Brotli {#using-brotli}
 
 [Brotli](https://en.wikipedia.org/wiki/Brotli) is a compression algorithm originally developed by Google, and offers compression superior to gzip.
 
@@ -390,7 +390,7 @@ module.exports = {
 
 **Note** The `level` option matches `BROTLI_PARAM_QUALITY` [for Brotli-based streams](https://nodejs.org/api/zlib.html#zlib_for_brotli_based_streams)
 
-### Multiple compressed versions of assets for different algorithm
+### Multiple compressed versions of assets for different algorithm {#multiple-compressed-versions-of-assets-for-different-algorithm}
 
 **webpack.config.js**
 
@@ -420,13 +420,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/compression-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/compression-webpack-plugin/blob/master/LICENSE)
 

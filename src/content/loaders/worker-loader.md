@@ -18,7 +18,11 @@ repo: https://github.com/webpack-contrib/worker-loader
 
 webpack 的 worker loader 模块
 
+<<<<<<< HEAD
 ## 快速开始
+=======
+## Getting Started {#getting-started}
+>>>>>>> test-loader-plugin-t
 
 开始之前你需要安装 `worker-loader` ：
 
@@ -26,7 +30,11 @@ webpack 的 worker loader 模块
 $ npm install worker-loader --save-dev
 ```
 
+<<<<<<< HEAD
 ### 内敛
+=======
+### Inlined {#inlined}
+>>>>>>> test-loader-plugin-t
 
 **App.js**
 
@@ -34,7 +42,11 @@ $ npm install worker-loader --save-dev
 import Worker from 'worker-loader!./Worker.js';
 ```
 
+<<<<<<< HEAD
 ### 配置
+=======
+### Config {#config}
+>>>>>>> test-loader-plugin-t
 
 **webpack.config.js**
 
@@ -66,9 +78,13 @@ worker.addEventListener('message', function (event) {});
 
 然后，通过你的首选方式去运行 `webpack`。
 
+<<<<<<< HEAD
 ## 选项
+=======
+## Options {#options}
+>>>>>>> test-loader-plugin-t
 
-### `fallback`
+### `fallback` {#fallback}
 
 类型： `Boolean`
 默认值： `false`
@@ -91,7 +107,7 @@ module.exports = {
 };
 ```
 
-### `inline`
+### `inline` {#inline}
 
 类型： `Boolean`
 默认值： `false`
@@ -131,7 +147,7 @@ module.exports = {
 };
 ```
 
-### `name`
+### `name` {#name}
 
 类型： `String`
 默认值： `[hash].worker.js`
@@ -155,7 +171,7 @@ module.exports = {
 };
 ```
 
-### publicPath
+### publicPath {#publicpath}
 
 类型： `String`
 默认值： `null`
@@ -178,16 +194,16 @@ module.exports = {
 };
 ```
 
-### workerType
+### workerType {#workertype}
 
 Type: `string`
 Default: `Worker`
 
 Set the worker type. Defaults to `Worker`. Supports `ServiceWorker`, `SharedWorker`.
 
-## Examples
+## Examples {#examples}
 
-### Basic
+### Basic {#basic}
 
 worker 文件可以像其他文件导入依赖那样来导入依赖：
 
@@ -207,7 +223,11 @@ self.postMessage({ foo: 'foo' });
 self.addEventListener('message', (event) => console.log(event));
 ```
 
+<<<<<<< HEAD
 ### 集成 ES 模块
+=======
+### Integrating with ES Modules {#integrating-with-es-modules}
+>>>>>>> test-loader-plugin-t
 
 *注意：如果配置好 [`babel-loader`](https://github.com/babel/babel-loader) ， 你甚至可以使用 ES2015 模块。*
 
@@ -227,7 +247,11 @@ self.postMessage({ foo: 'foo' });
 self.addEventListener('message', (event) => console.log(event));
 ```
 
+<<<<<<< HEAD
 ### 集成 TypeScript
+=======
+### Integrating with TypeScript {#integrating-with-typescript}
+>>>>>>> test-loader-plugin-t
 
 为了集成 TypeScript，在导出 worker 时，你需要声明一个自定义模块。
 
@@ -268,7 +292,11 @@ worker.onmessage = (event) => {};
 worker.addEventListener('message', (event) => {});
 ```
 
+<<<<<<< HEAD
 ### 跨域策略
+=======
+### Cross-Origin Policy {#cross-origin-policy}
+>>>>>>> test-loader-plugin-t
 
 [`WebWorkers`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) 受到 [同源策略](https://en.wikipedia.org/wiki/Same-origin_policy) 的限制， 如果 `webpack` 资源的访问服务和应用程序不是同源，浏览器就会拦截其下载。
 如果在 CDN 域下托管资源， 通常就会出现这种情况。 
@@ -322,13 +350,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 如果你从未阅读过我们的贡献指南，请在上面花点时间。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/worker-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/worker-loader/blob/master/LICENSE)
 

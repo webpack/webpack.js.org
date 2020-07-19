@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/style-loader
 
 Inject CSS into the DOM.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `style-loader`:
 
@@ -59,7 +59,7 @@ module.exports = {
 };
 ```
 
-## Options
+## Options {#options}
 
 |              Name               |         Type         |  Default   | Description                                              |
 | :-----------------------------: | :------------------: | :--------: | :------------------------------------------------------- |
@@ -69,7 +69,7 @@ module.exports = {
 |       [**`base`**](#base)       |      `{Number}`      |   `true`   | Sets module ID base (DLLPlugin)                          |
 |   [**`esModule`**](#esmodule)   |     `{Boolean}`      |  `false`   | Use ES modules syntax                                    |
 
-### `injectType`
+### `injectType` {#injecttype}
 
 Type: `String`
 Default: `styleTag`
@@ -84,7 +84,7 @@ Possible values:
 - `lazySingletonStyleTag`
 - `linkTag`
 
-#### `styleTag`
+#### `styleTag` {#styletag}
 
 Automatically injects styles into the DOM using multiple `<style></style>`. It is **default** behaviour.
 
@@ -141,7 +141,7 @@ The loader inject styles like:
 </style>
 ```
 
-#### `singletonStyleTag`
+#### `singletonStyleTag` {#singletonstyletag}
 
 Automatically injects styles into the DOM using one `<style></style>`.
 
@@ -198,7 +198,7 @@ The loader inject styles like:
 </style>
 ```
 
-#### `lazyStyleTag`
+#### `lazyStyleTag` {#lazystyletag}
 
 Injects styles into the DOM using multiple `<style></style>` on demand.
 We recommend following `.lazy.css` naming convention for lazy styles and the `.css` for basic `style-loader` usage (similar to other file types, i.e. `.lazy.less` and `.less`).
@@ -267,7 +267,7 @@ The loader inject styles like:
 </style>
 ```
 
-#### `lazySingletonStyleTag`
+#### `lazySingletonStyleTag` {#lazysingletonstyletag}
 
 Injects styles into the DOM using one `<style></style>` on demand.
 We recommend following `.lazy.css` naming convention for lazy styles and the `.css` for basic `style-loader` usage (similar to other file types, i.e. `.lazy.less` and `.less`).
@@ -339,7 +339,7 @@ The loader generate this:
 </style>
 ```
 
-#### `linkTag`
+#### `linkTag` {#linktag}
 
 Injects styles into the DOM using multiple `<link rel="stylesheet" href="path/to/file.css">` .
 
@@ -375,7 +375,7 @@ The loader generate this:
 <link rel="stylesheet" href="path/to/other-styles.css" />
 ```
 
-### `attributes`
+### `attributes` {#attributes}
 
 Type: `Object`
 Default: `{}`
@@ -410,7 +410,7 @@ module.exports = {
 <style id="id"></style>
 ```
 
-### `insert`
+### `insert` {#insert}
 
 Type: `String|Function`
 Default: `head`
@@ -420,7 +420,7 @@ This will cause CSS created by the loader to take priority over CSS already pres
 You can use other values if the standard behavior is not suitable for you, but we do not recommend doing this.
 If you target an [iframe](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement) make sure you have sufficient access rights, the styles will be injected into the content document head.
 
-#### `String`
+#### `String` {#string}
 
 Allows to setup custom [query selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) where styles inject into the DOM.
 
@@ -449,7 +449,7 @@ module.exports = {
 
 A new `<style>`/`<link>` elements will be inserted into at bottom of `body` tag.
 
-#### `Function`
+#### `Function` {#function}
 
 Allows to override default behavior and insert styles at any position.
 
@@ -497,7 +497,7 @@ module.exports = {
 
 Insert styles at top of `head` tag.
 
-### `base`
+### `base` {#base}
 
 This setting is primarily used as a workaround for [css clashes](https://github.com/webpack-contrib/style-loader/issues/163) when using one or more [DllPlugin](https://robertknight.github.io/posts/webpack-dll-plugins/)'s. `base` allows you to prevent either the _app_'s css (or _DllPlugin2_'s css) from overwriting _DllPlugin1_'s css by specifying a css module id base which is greater than the range used by _DllPlugin1_ e.g.:
 
@@ -552,7 +552,7 @@ module.exports = {
 };
 ```
 
-### `esModule`
+### `esModule` {#esmodule}
 
 Type: `Boolean`
 Default: `false`
@@ -580,9 +580,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### Source maps
+### Source maps {#source-maps}
 
 The loader automatically inject source maps when previous loader emit them.
 Therefore, to generate source maps, set the `sourceMap` option to `true` for the previous loader.
@@ -605,7 +605,7 @@ module.exports = {
 };
 ```
 
-### Nonce
+### Nonce {#nonce}
 
 There are two ways to work with `nonce`:
 
@@ -614,7 +614,7 @@ There are two ways to work with `nonce`:
 
 > ⚠ the `attributes` option takes precedence over the `__webpack_nonce__` variable
 
-#### `attributes`
+#### `attributes` {#attributes}
 
 **component.js**
 
@@ -657,7 +657,7 @@ The loader generate:
 </style>
 ```
 
-#### `__webpack_nonce__`
+#### `__webpack_nonce__` {#__webpack_nonce__}
 
 **create-nonce.js**
 
@@ -707,7 +707,7 @@ The loader generate:
 </style>
 ```
 
-#### Insert styles at top
+#### Insert styles at top {#insert-styles-at-top}
 
 Inserts styles at top of `head` tag.
 
@@ -748,7 +748,7 @@ module.exports = {
 };
 ```
 
-#### Insert styles before target element
+#### Insert styles before target element {#insert-styles-before-target-element}
 
 Inserts styles before `#id` element.
 
@@ -791,13 +791,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/style-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/style-loader/blob/master/LICENSE)
 

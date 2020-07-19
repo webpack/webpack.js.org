@@ -18,7 +18,11 @@ repo: https://github.com/webpack-contrib/coffee-loader
 
 Compile [CoffeeScript](https://coffeescript.org/) to JavaScript.
 
+<<<<<<< HEAD
 ## 起步
+=======
+## Getting Started {#getting-started}
+>>>>>>> test-loader-plugin-t
 
 安装 `coffeescript` 和 `coffee-loader`：
 
@@ -84,7 +88,11 @@ import coffee from 'coffee-loader!./file.coffee';
 
 然后按偏好运行 `webpack`
 
+<<<<<<< HEAD
 ## 选项
+=======
+## Options {#options}
+>>>>>>> test-loader-plugin-t
 
 类型：`Object`
 默认：`{ bare: true }`
@@ -118,9 +126,15 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## 示例
 
 ### CoffeeScript 与 Babel
+=======
+## Examples {#examples}
+
+### CoffeeScript and Babel {#coffeescript-and-babel}
+>>>>>>> test-loader-plugin-t
 
 来自 CoffeeScript 2 的文档：
 
@@ -156,7 +170,7 @@ module.exports = {
 };
 ```
 
-### Literate CoffeeScript
+### Literate CoffeeScript {#literate-coffeescript}
 
 开启 Literate CoffeeScript 时需要设置：
 
@@ -178,13 +192,21 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## 贡献
+=======
+## Contributing {#contributing}
+>>>>>>> test-loader-plugin-t
 
 如果您尚未了解，建议您阅读以下贡献指引。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/coffee-loader/blob/master/.github/CONTRIBUTING.md)
 
+<<<<<<< HEAD
 ## 许可
+=======
+## License {#license}
+>>>>>>> test-loader-plugin-t
 
 [MIT](https://github.com/webpack-contrib/coffee-loader/blob/master/LICENSE)
 
