@@ -51,7 +51,7 @@ _查看_：[配置章节](/configuration/)中所有支持的配置选项。
 
 ## 多个 target {#multiple-targets}
 
-除了可以将单个配置导出问 object，[function](/configuration/configuration-types/#exporting-a-function) 或 [Promise](/configuration/configuration-types/#exporting-a-promise) 以为，还可以将其导出为多个配置。
+除了可以将单个配置导出为 object，[function](/configuration/configuration-types/#exporting-a-function) 或 [Promise](/configuration/configuration-types/#exporting-a-promise) 以外，还可以将其导出为多个配置。
 
 _查看_：[导出多个配置](/configuration/configuration-types/#exporting-multiple-configurations)
 
