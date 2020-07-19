@@ -17,7 +17,7 @@ repo: https://github.com/webpack-contrib/url-loader
 
 A loader for webpack which transforms files into base64 URIs.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `url-loader`:
 
@@ -59,7 +59,7 @@ module.exports = {
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
 |             Name              |            Type             |                            Default                            | Description                                                                         |
 | :---------------------------: | :-------------------------: | :-----------------------------------------------------------: | :---------------------------------------------------------------------------------- |
@@ -70,14 +70,14 @@ And run `webpack` via your preferred method.
 |  **[`fallback`](#fallback)**  |         `{String}`          |                         `file-loader`                         | Specifies an alternative loader to use when a target file's size exceeds the limit. |
 |  **[`esModule`](#esmodule)**  |         `{Boolean}`         |                            `true`                             | Use ES modules syntax.                                                              |
 
-### `limit`
+### `limit` {#limit}
 
 Type: `Boolean|Number|String`
 Default: `undefined`
 
 The limit can be specified via loader options and defaults to no limit.
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 Enable or disable transform files into base64.
 
@@ -103,7 +103,7 @@ module.exports = {
 };
 ```
 
-#### `Number|String`
+#### `Number|String` {#numberstring}
 
 A `Number` or `String` specifying the maximum size of a file in bytes.
 If the file size is **equal** or **greater** than the limit [`file-loader`](/loaders/file-loader/) will be used (by default) and all query parameters are passed to it.
@@ -132,7 +132,7 @@ module.exports = {
 };
 ```
 
-### `mimetype`
+### `mimetype` {#mimetype}
 
 Type: `Boolean|String`
 Default: based from [mime-types](https://github.com/jshttp/mime-types)
@@ -140,7 +140,7 @@ Default: based from [mime-types](https://github.com/jshttp/mime-types)
 Specify the `mimetype` which the file will be inlined with.
 If unspecified the `mimetype` value will be used from [mime-types](https://github.com/jshttp/mime-types).
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 The `true` value allows to generation the `mimetype` part from [mime-types](https://github.com/jshttp/mime-types).
 The `false` value removes the `mediatype` part from a Data URL (if omitted, defaults to `text/plain;charset=US-ASCII`).
@@ -167,7 +167,7 @@ module.exports = {
 };
 ```
 
-#### `String`
+#### `String` {#string}
 
 Sets the MIME type for the file to be transformed.
 
@@ -193,7 +193,7 @@ module.exports = {
 };
 ```
 
-### `encoding`
+### `encoding` {#encoding}
 
 Type: `Boolean|String`
 Default: `base64`
@@ -201,7 +201,7 @@ Default: `base64`
 Specify the `encoding` which the file will be inlined with.
 If unspecified the `encoding` will be `base64`.
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 If you don't want to use any encoding you can set `encoding` to `false` however if you set it to `true` it will use the default encoding `base64`.
 
@@ -227,7 +227,7 @@ module.exports = {
 };
 ```
 
-#### `String`
+#### `String` {#string}
 
 It supports [Node.js Buffers and Character Encodings](https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings) which are `["utf8","utf16le","latin1","base64","hex","ascii","binary","ucs2"]`.
 
@@ -253,7 +253,7 @@ module.exports = {
 };
 ```
 
-### `generator`
+### `generator` {#generator}
 
 Type: `Function`
 Default: `(mimetype, encoding, content, resourcePath) => mimetype;encoding,base64_content`
@@ -292,7 +292,7 @@ module.exports = {
 };
 ```
 
-### `fallback`
+### `fallback` {#fallback}
 
 Type: `String`
 Default: `'file-loader'`
@@ -348,7 +348,7 @@ module.exports = {
 };
 ```
 
-### `esModule`
+### `esModule` {#esmodule}
 
 Type: `Boolean`
 Default: `true`
@@ -380,9 +380,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### SVG
+### SVG {#svg}
 
 SVG can be compressed into a more compact output, avoiding `base64`.
 You can read about it more [here](https://css-tricks.com/probably-dont-base64-svg/).
@@ -412,13 +412,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/url-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/url-loader/blob/master/LICENSE)
 

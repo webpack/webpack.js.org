@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/html-loader
 
 Exports HTML as string. HTML is minimized when the compiler demands.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `html-loader`:
 
@@ -49,7 +49,7 @@ module.exports = {
 };
 ```
 
-## Options
+## Options {#options}
 
 |                Name                 |        Type         |                   Default                    | Description                                      |
 | :---------------------------------: | :-----------------: | :------------------------------------------: | :----------------------------------------------- |
@@ -58,7 +58,7 @@ module.exports = {
 |     **[`minimize`](#minimize)**     | `{Boolean\|Object}` | `true` in production mode, otherwise `false` | Tell `html-loader` to minimize HTML              |
 |     **[`esModule`](#esmodule)**     |     `{Boolean}`     |                   `false`                    | Use ES modules syntax                            |
 
-### `attributes`
+### `attributes` {#attributes}
 
 Type: `Boolean|Object`
 Default: `true`
@@ -82,7 +82,7 @@ Supported tags and attributes:
 - the `poster` attribute of the `video` tag
 - the `src` attribute of the `video` tag
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 The `true` value enables processing of all default elements and attributes, the `false` disable processing of all attributes.
 
@@ -105,7 +105,7 @@ module.exports = {
 };
 ```
 
-#### `Object`
+#### `Object` {#object}
 
 Allows you to specify which tags and attributes to process, filter them, filter urls and process sources starts with `/`.
 For example:
@@ -183,7 +183,7 @@ module.exports = {
 };
 ```
 
-#### `list`
+#### `list` {#list}
 
 Type: `Array`
 Default: https://github.com/webpack-contrib/html-loader#attributes
@@ -314,7 +314,7 @@ module.exports = {
 };
 ```
 
-#### `urlFilter`
+#### `urlFilter` {#urlfilter}
 
 Type: `Function`
 Default: `undefined`
@@ -350,7 +350,7 @@ module.exports = {
 };
 ```
 
-#### `root`
+#### `root` {#root}
 
 Type: `String`
 Default: `undefined`
@@ -378,7 +378,7 @@ module.exports = {
 };
 ```
 
-### `preprocessor`
+### `preprocessor` {#preprocessor}
 
 Type: `Function`
 Default: `undefined`
@@ -396,7 +396,7 @@ Allows pre-processing of content before handling.
 <div>
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 You can set the `preprocessor` option as a `Function` instance.
 
@@ -474,14 +474,14 @@ module.exports = {
 };
 ```
 
-### `minimize`
+### `minimize` {#minimize}
 
 Type: `Boolean|Object`
 Default: `true` in production mode, otherwise `false`
 
 Tell `html-loader` to minimize HTML.
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 The enabled rules for minimizing by default are the following ones:
 
@@ -514,7 +514,7 @@ module.exports = {
 };
 ```
 
-#### `Object`
+#### `Object` {#object}
 
 **webpack.config.js**
 
@@ -543,7 +543,7 @@ module.exports = {
 };
 ```
 
-### `esModule`
+### `esModule` {#esmodule}
 
 Type: `Boolean`
 Default: `false`
@@ -571,9 +571,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### CDN
+### CDN {#cdn}
 
 **webpack.config.js**
 
@@ -625,7 +625,7 @@ require('html-loader?-attributes!./file.html');
 
 > :warning: `-attributes` sets `attributes: false`.
 
-### Process `script` and `link` tags
+### Process `script` and `link` tags {#process-script-and-link-tags}
 
 **script.file.js**
 
@@ -691,7 +691,7 @@ module.exports = {
 };
 ```
 
-### 'Root-relative' URLs
+### 'Root-relative' URLs {#root-relative-urls}
 
 With the same configuration as in the CDN example:
 
@@ -717,7 +717,7 @@ require('html-loader?{"attributes":{"root":"."}}!./file.html');
 // => '<img src="http://cdn.example.com/49eba9f/a992ca.jpg">'
 ```
 
-### Templating
+### Templating {#templating}
 
 You can use any template system. Below is an example for [handlebars](https://handlebarsjs.com/).
 
@@ -765,7 +765,7 @@ module.exports = {
 };
 ```
 
-### PostHTML
+### PostHTML {#posthtml}
 
 You can use [PostHTML](https://github.com/posthtml/posthtml) without any additional loaders.
 
@@ -808,7 +808,7 @@ module.exports = {
 };
 ```
 
-### Export into HTML files
+### Export into HTML files {#export-into-html-files}
 
 A very common scenario is exporting the HTML into their own _.html_ file, to
 serve them directly instead of injecting with javascript. This can be achieved
@@ -838,13 +838,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/html-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/html-loader/blob/master/LICENSE)
 

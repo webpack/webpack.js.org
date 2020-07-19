@@ -8,20 +8,20 @@ repo: https://github.com/webpack-contrib/istanbul-instrumenter-loader
 
 Instrument JS files with [istanbul-lib-instrument](https://github.com/istanbuljs/istanbuljs/tree/master/packages/istanbul-lib-instrument) for subsequent code coverage reporting
 
-## Install
+## Install {#install}
 
 ```bash
 npm i -D istanbul-instrumenter-loader
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">Usage</a>
+## <a href="https://webpack.js.org/concepts/loaders">Usage</a> {#a-hrefhttpswebpackjsorgconceptsloadersusagea}
 
-### `References`
+### `References` {#references}
 
 * [karma-webpack](https://github.com/webpack/karma-webpack)
 * [karma-coverage-istanbul-reporter](https://github.com/mattlewis92/karma-coverage-istanbul-reporter)
 
-### `Structure`
+### `Structure` {#structure}
 
 ```
 ├─ src
@@ -87,7 +87,7 @@ config.set({
 });
 ```
 
-### with `Babel`
+### with `Babel` {#with-babel}
 
 You must run the instrumentation as a post step
 
@@ -104,7 +104,7 @@ You must run the instrumentation as a post step
 }
 ```
 
-## <a href="https://github.com/istanbuljs/istanbuljs/blob/master/packages/istanbul-lib-instrument/api.md#instrumenter">Options</a>
+## <a href="https://github.com/istanbuljs/istanbuljs/blob/master/packages/istanbul-lib-instrument/api.md#instrumenter">Options</a> {#a-hrefhttpsgithubcomistanbuljsistanbuljsblobmasterpackagesistanbul-lib-instrumentapimdinstrumenteroptionsa}
 
 The loader supports all options supported by `istanbul-lib-instrument`
 
@@ -130,7 +130,7 @@ The loader supports all options supported by `istanbul-lib-instrument`
 }
 ```
 
-## Maintainers
+## Maintainers {#maintainers}
 
 <table>
   <tbody>

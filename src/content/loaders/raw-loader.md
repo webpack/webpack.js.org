@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/raw-loader
 
 A loader for webpack that allows importing files as a String.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `raw-loader`:
 
@@ -52,13 +52,13 @@ module.exports = {
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
 |            Name             |    Type     | Default | Description            |
 | :-------------------------: | :---------: | :-----: | :--------------------- |
 | **[`esModule`](#esmodule)** | `{Boolean}` | `true`  | Uses ES modules syntax |
 
-### `esModule`
+### `esModule` {#esmodule}
 
 Type: `Boolean`
 Default: `true`
@@ -90,9 +90,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### Inline
+### Inline {#inline}
 
 ```js
 import txt from 'raw-loader!./file.txt';
@@ -104,13 +104,13 @@ Beware, if you already define loader(s) for extension(s) in `webpack.config.js` 
 import css from '!!raw-loader!./file.txt'; // Adding `!!` to a request will disable all loaders specified in the configuration
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/raw-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/raw-loader/blob/master/LICENSE)
 

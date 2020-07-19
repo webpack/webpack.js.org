@@ -20,7 +20,7 @@ new webpack.BannerPlugin(options);
 ```
 
 
-## Options
+## Options {#options}
 
 <!-- eslint-skip -->
 
@@ -35,7 +35,7 @@ new webpack.BannerPlugin(options);
 }
 ```
 
-## Usage
+## Usage {#usage}
 
 
 ```javascript
@@ -53,7 +53,7 @@ new webpack.BannerPlugin({
 ```
 
 
-## Placeholders
+## Placeholders {#placeholders}
 
 Since webpack 2.5.0, placeholders are evaluated in the `banner` string:
 

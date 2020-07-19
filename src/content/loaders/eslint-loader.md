@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/eslint-loader
 
 > A ESlint loader for webpack
 
-## Install
+## Install {#install}
 
 ```bash
 npm install eslint-loader --save-dev
@@ -30,7 +30,7 @@ npm install eslint-loader --save-dev
 npm install eslint --save-dev
 ```
 
-## Usage
+## Usage {#usage}
 
 In your webpack configuration:
 
@@ -95,13 +95,13 @@ module.exports = {
 };
 ```
 
-## Options
+## Options {#options}
 
 You can pass [eslint options](http://eslint.org/docs/developer-guide/nodejs-api#cliengine) using standard webpack [loader options](/configuration/module/#useentry).
 
 **Note**: That the config option you provide will be passed to the `CLIEngine`. This is a different set of options than what you'd specify in `package.json` or `.eslintrc`. See the [eslint docs](http://eslint.org/docs/developer-guide/nodejs-api#cliengine) for more detail.
 
-### `cache`
+### `cache` {#cache}
 
 - Type: `Boolean|String`
 - Default: `false`
@@ -130,7 +130,7 @@ module.exports = {
 };
 ```
 
-### `eslintPath`
+### `eslintPath` {#eslintpath}
 
 - Type: `String`
 - Default: `eslint`
@@ -155,7 +155,7 @@ module.exports = {
 };
 ```
 
-### `fix`
+### `fix` {#fix}
 
 - Type: `Boolean`
 - Default: `false`
@@ -182,7 +182,7 @@ module.exports = {
 };
 ```
 
-### `formatter`
+### `formatter` {#formatter}
 
 - Type: `String|Function`
 - Default: `stylish`
@@ -223,11 +223,11 @@ module.exports = {
 };
 ```
 
-### Errors and Warning
+### Errors and Warning {#errors-and-warning}
 
 **By default the loader will auto adjust error reporting depending on eslint errors/warnings counts.** You can still force this behavior by using `emitError` **or** `emitWarning` options:
 
-#### `emitError`
+#### `emitError` {#emiterror}
 
 - Type: `Boolean`
 - Default: `false`
@@ -252,7 +252,7 @@ module.exports = {
 };
 ```
 
-#### `emitWarning`
+#### `emitWarning` {#emitwarning}
 
 - Type: `Boolean`
 - Default: `false`
@@ -277,7 +277,7 @@ module.exports = {
 };
 ```
 
-#### `failOnError`
+#### `failOnError` {#failonerror}
 
 - Type: `Boolean`
 - Default: `false`
@@ -302,7 +302,7 @@ module.exports = {
 };
 ```
 
-#### `failOnWarning`
+#### `failOnWarning` {#failonwarning}
 
 - Type: `Boolean`
 - Default: `false`
@@ -327,7 +327,7 @@ module.exports = {
 };
 ```
 
-#### `quiet`
+#### `quiet` {#quiet}
 
 - Type: `Boolean`
 - Default: `false`
@@ -352,7 +352,7 @@ module.exports = {
 };
 ```
 
-#### `outputReport`
+#### `outputReport` {#outputreport}
 
 - Type: `Boolean|Object`
 - Default: `false`
@@ -382,21 +382,21 @@ module.exports = {
 };
 ```
 
-## Gotchas
+## Gotchas {#gotchas}
 
-### NoEmitOnErrorsPlugin
+### NoEmitOnErrorsPlugin {#noemitonerrorsplugin}
 
 `NoEmitOnErrorsPlugin` is now automatically enabled in webpack 4, when mode is either unset, or set to production. So even ESLint warnings will fail the build. No matter what error settings are used for `eslint-loader`, except if `emitWarning` enabled.
 
-### Defining `configFile` or using `eslint -c path/.eslintrc`
+### Defining `configFile` or using `eslint -c path/.eslintrc` {#defining-configfile-or-using-eslint--c-patheslintrc}
 
 Bear in mind that when you define `configFile`, `eslint` doesn't automatically look for `.eslintrc` files in the directory of the file to be linted. More information is available in official eslint documentation in section [_Using Configuration Files_](http://eslint.org/docs/user-guide/configuring#using-configuration-files). See [#129](https://github.com/webpack-contrib/eslint-loader/issues/129).
 
-## Changelog
+## Changelog {#changelog}
 
 [Changelog](https://github.com/webpack-contrib/eslint-loader/blob/master/CHANGELOG.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/eslint-loader/blob/master/LICENSE)
 

@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/less-loader
 
 A Less loader for webpack. Compiles Less to CSS.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `less-loader`:
 
@@ -45,7 +45,7 @@ module.exports = {
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
 |                  Name                   |         Type         |         Default          | Description                                      |
 | :-------------------------------------: | :------------------: | :----------------------: | :----------------------------------------------- |
@@ -55,14 +55,14 @@ And run `webpack` via your preferred method.
 |      **[`sourceMap`](#sourcemap)**      |     `{Boolean}`      |    `compiler.devtool`    | Enables/Disables generation of source maps.      |
 | **[`implementation`](#implementation)** |      `{Object}`      |          `less`          | Setup Less implementation to use.                |
 
-### `lessOptions`
+### `lessOptions` {#lessoptions}
 
 Type: `Object|Function`
 Default: `{ relativeUrls: true }`
 
 You can pass any Less specific options to the `less-loader` through the `lessOptions` property in the [loader options](/configuration/module/#ruleoptions--rulequery). See the [Less documentation](http://lesscss.org/usage/#command-line-usage-options) for all available options in dash-case. Since we're passing these options to Less programmatically, you need to pass them in camelCase here:
 
-#### `Object`
+#### `Object` {#object}
 
 Use an object to pass options through to Less.
 
@@ -96,7 +96,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 Allows setting the options passed through to Less based off of the loader context.
 
@@ -136,7 +136,7 @@ module.exports = {
 };
 ```
 
-### `prependData`
+### `prependData` {#prependdata}
 
 Type: `String|Function`
 Default: `undefined`
@@ -147,7 +147,7 @@ This is especially useful when some of your Less variables depend on the environ
 
 > ℹ Since you're injecting code, this will break the source mappings in your entry file. Often there's a simpler solution than this, like multiple Less entry files.
 
-#### `String`
+#### `String` {#string}
 
 ```js
 module.exports = {
@@ -171,7 +171,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 ```js
 module.exports = {
@@ -205,7 +205,7 @@ module.exports = {
 };
 ```
 
-### `appendData`
+### `appendData` {#appenddata}
 
 Type: `String|Function`
 Default: `undefined`
@@ -216,7 +216,7 @@ This can be useful when you need to rewrite some of your Less variables.:
 
 > ℹ Since you're injecting code, this will break the source mappings in your entry file. Often there's a simpler solution than this, like multiple Less entry files.
 
-#### `String`
+#### `String` {#string}
 
 ```js
 module.exports = {
@@ -240,7 +240,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 ```js
 module.exports = {
@@ -274,7 +274,7 @@ module.exports = {
 };
 ```
 
-### `sourceMap`
+### `sourceMap` {#sourcemap}
 
 Type: `Boolean`
 Default: depends on the `compiler.devtool` value
@@ -310,7 +310,7 @@ module.exports = {
 };
 ```
 
-### `implementation`
+### `implementation` {#implementation}
 
 Type: `Object`
 Default: `less`
@@ -345,9 +345,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### Normal usage
+### Normal usage {#normal-usage}
 
 Chain the `less-loader` with the [`css-loader`](/loaders/css-loader/) and the [`style-loader`](/loaders/style-loader/) to immediately apply all styles to the DOM.
 
@@ -378,7 +378,7 @@ module.exports = {
 
 Unfortunately, Less doesn't map all options 1-by-1 to camelCase. When in doubt, [check their executable](https://github.com/less/less.js/blob/3.x/bin/lessc) and search for the dash-case option.
 
-### Source maps
+### Source maps {#source-maps}
 
 To enable sourcemaps for CSS, you'll need to pass the `sourceMap` property in the loader's options. If this is not passed, the loader will respect the setting for webpack source maps, set in `devtool`.
 
@@ -414,15 +414,15 @@ module.exports = {
 
 If you want to edit the original Less files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). The blog post is about Sass but it also works for Less.
 
-### In production
+### In production {#in-production}
 
 Usually, it's recommended to extract the style sheets into a dedicated file in production using the [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/). This way your styles are not dependent on JavaScript.
 
-### Imports
+### Imports {#imports}
 
 Starting with `less-loader` 4, you can now choose between Less' builtin resolver and webpack's resolver. By default, webpack's resolver is used.
 
-#### webpack resolver
+#### webpack resolver {#webpack-resolver}
 
 webpack provides an [advanced mechanism to resolve files](/configuration/resolve/). The `less-loader` applies a Less plugin that passes all queries to the webpack resolver. Thus you can import your Less modules from `node_modules`. Just prepend them with a `~` which tells webpack to look up the [`modules`](/configuration/resolve/#resolvemodules).
 
@@ -432,7 +432,7 @@ webpack provides an [advanced mechanism to resolve files](/configuration/resolve
 
 It's important to only prepend it with `~`, because `~/` resolves to the home-directory. webpack needs to distinguish between `bootstrap` and `~bootstrap`, because CSS and Less files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
 
-##### Non-Less imports
+##### Non-Less imports {#non-less-imports}
 
 Using webpack's resolver, you can import any file type. You just need a loader that exports valid Less code. Often, you will also want to set the `issuer` condition to ensure that this rule is only applied on imports originating from Less files:
 
@@ -455,7 +455,7 @@ module.exports = {
 };
 ```
 
-#### Less resolver
+#### Less resolver {#less-resolver}
 
 If you specify the `paths` option, modules will be searched in the given `paths`. This is Less' default behavior. `paths` should be an array with absolute paths:
 
@@ -489,7 +489,7 @@ module.exports = {
 };
 ```
 
-### Plugins
+### Plugins {#plugins}
 
 In order to use [plugins](http://lesscss.org/usage/#plugins), simply set the
 `plugins` option like this:
@@ -514,7 +514,7 @@ module.exports = {
 };
 ```
 
-### Extracting style sheets
+### Extracting style sheets {#extracting-style-sheets}
 
 Bundling CSS with webpack has some nice advantages like referencing images and fonts with hashed urls or [hot module replacement](/concepts/hot-module-replacement/) in development. In production, on the other hand, it's not a good idea to apply your style sheets depending on JS execution. Rendering may be delayed or even a [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content) might be visible. Thus it's often still better to have them as separate files in your final production build.
 
@@ -523,17 +523,17 @@ There are two possibilities to extract a style sheet from the bundle:
 - [`extract-loader`](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
 - [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) (more complex, but works in all use-cases)
 
-### CSS modules gotcha
+### CSS modules gotcha {#css-modules-gotcha}
 
 There is a known problem with Less and [CSS modules](https://github.com/css-modules/css-modules) regarding relative file paths in `url(...)` statements. [See this issue for an explanation](https://github.com/webpack-contrib/less-loader/issues/109#issuecomment-253797335).
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/less-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/less-loader/blob/master/LICENSE)
 

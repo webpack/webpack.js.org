@@ -18,11 +18,11 @@ repo: https://github.com/webpack-contrib/uglifyjs-webpack-plugin
 
 This plugin uses [uglify-js](https://github.com/mishoo/UglifyJS2) to minify your JavaScript.
 
-## Requirements
+## Requirements {#requirements}
 
 This module requires a minimum of Node v6.9.0 and Webpack v4.0.0.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `uglifyjs-webpack-plugin`:
 
@@ -46,9 +46,9 @@ module.exports = {
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
-### `test`
+### `test` {#test}
 
 Type: `String|RegExp|Array<String|RegExp>`
 Default: `/\.js(\?.*)?$/i`
@@ -69,7 +69,7 @@ module.exports = {
 };
 ```
 
-### `include`
+### `include` {#include}
 
 Type: `String|RegExp|Array<String|RegExp>`
 Default: `undefined`
@@ -90,7 +90,7 @@ module.exports = {
 };
 ```
 
-### `exclude`
+### `exclude` {#exclude}
 
 Type: `String|RegExp|Array<String|RegExp>`
 Default: `undefined`
@@ -111,7 +111,7 @@ module.exports = {
 };
 ```
 
-### `chunkFilter`
+### `chunkFilter` {#chunkfilter}
 
 Type: `Function<(chunk) -> boolean>`
 Default: `() => true`
@@ -140,7 +140,7 @@ module.exports = {
 };
 ```
 
-### `cache`
+### `cache` {#cache}
 
 Type: `Boolean|String`
 Default: `false`
@@ -150,7 +150,7 @@ Default path to cache directory: `node_modules/.cache/uglifyjs-webpack-plugin`.
 
 > ℹ️ If you use your own `minify` function please read the `minify` section for cache invalidation correctly.
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 Enable/disable file caching.
 
@@ -168,7 +168,7 @@ module.exports = {
 };
 ```
 
-#### `String`
+#### `String` {#string}
 
 Enable file caching and set path to cache directory.
 
@@ -188,7 +188,7 @@ module.exports = {
 };
 ```
 
-### `cacheKeys`
+### `cacheKeys` {#cachekeys}
 
 Type: `Function<(defaultCacheKeys, file) -> Object>`
 Default: `defaultCacheKeys => defaultCacheKeys`
@@ -229,7 +229,7 @@ module.exports = {
 };
 ```
 
-### `parallel`
+### `parallel` {#parallel}
 
 Type: `Boolean|Number`
 Default: `false`
@@ -239,7 +239,7 @@ Default number of concurrent runs: `os.cpus().length - 1`.
 
 > ℹ️ Parallelization can speedup your build significantly and is therefore **highly recommended**.
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 Enable/disable multi-process parallel running.
 
@@ -257,7 +257,7 @@ module.exports = {
 };
 ```
 
-#### `Number`
+#### `Number` {#number}
 
 Enable multi-process parallel running and set number of concurrent runs.
 
@@ -275,7 +275,7 @@ module.exports = {
 };
 ```
 
-### `sourceMap`
+### `sourceMap` {#sourcemap}
 
 Type: `Boolean`
 Default: `false`
@@ -299,7 +299,7 @@ module.exports = {
 };
 ```
 
-### `minify`
+### `minify` {#minify}
 
 Type: `Function`
 Default: `undefined`
@@ -335,7 +335,7 @@ module.exports = {
 };
 ```
 
-### `uglifyOptions`
+### `uglifyOptions` {#uglifyoptions}
 
 Type: `Object`
 Default: [default](https://github.com/mishoo/UglifyJS2#minify-options)
@@ -366,7 +366,7 @@ module.exports = {
 };
 ```
 
-### `extractComments`
+### `extractComments` {#extractcomments}
 
 Type: `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
 Default: `false`
@@ -376,7 +376,7 @@ By default extract only comments using `/^\**!|@preserve|@license|@cc_on/i` rege
 If the original file is named `foo.js`, then the comments will be stored to `foo.js.LICENSE`.
 The `uglifyOptions.output.comments` option specifies whether the comment will be preserved, i.e. it is possible to preserve some comments (e.g. annotations) while extracting others or even preserving comments that have been extracted.
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 Enable/disable extracting comments.
 
@@ -394,7 +394,7 @@ module.exports = {
 };
 ```
 
-#### `String`
+#### `String` {#string}
 
 Extract `all` or `some` (use `/^\**!|@preserve|@license|@cc_on/i` RegExp) comments.
 
@@ -412,7 +412,7 @@ module.exports = {
 };
 ```
 
-#### `RegExp`
+#### `RegExp` {#regexp}
 
 All comments that match the given expression will be extracted to the separate file.
 
@@ -430,7 +430,7 @@ module.exports = {
 };
 ```
 
-#### `Function<(node, comment) -> Boolean>`
+#### `Function<(node, comment) -> Boolean>` {#functionnode-comment---boolean}
 
 All comments that match the given expression will be extracted to the separate file.
 
@@ -454,7 +454,7 @@ module.exports = {
 };
 ```
 
-#### `Object`
+#### `Object` {#object}
 
 Allow to customize condition for extract comments, specify extracted file name and banner.
 
@@ -480,7 +480,7 @@ module.exports = {
 };
 ```
 
-##### `condition`
+##### `condition` {#condition}
 
 Type: `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
 
@@ -508,7 +508,7 @@ module.exports = {
 };
 ```
 
-##### `filename`
+##### `filename` {#filename}
 
 Type: `Regex|Function<(string) -> String>`
 Default: `${file}.LICENSE`
@@ -536,7 +536,7 @@ module.exports = {
 };
 ```
 
-##### `banner`
+##### `banner` {#banner}
 
 Type: `Boolean|String|Function<(string) -> String>`
 Default: `/*! For license information please see ${commentsFile} */`
@@ -567,7 +567,7 @@ module.exports = {
 };
 ```
 
-### `warningsFilter`
+### `warningsFilter` {#warningsfilter}
 
 Type: `Function<(warning, source) -> Boolean>`
 Default: `() => true`
@@ -599,9 +599,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### Cache And Parallel
+### Cache And Parallel {#cache-and-parallel}
 
 Enable cache and multi-process parallel running.
 
@@ -620,7 +620,7 @@ module.exports = {
 };
 ```
 
-### Preserve Comments
+### Preserve Comments {#preserve-comments}
 
 Extract all legal comments (i.e. `/^\**!|@preserve|@license|@cc_on/i`) and preserve `/@license/i` comments.
 
@@ -643,7 +643,7 @@ module.exports = {
 };
 ```
 
-### Remove Comments
+### Remove Comments {#remove-comments}
 
 If you avoid building with comments, set **uglifyOptions.output.comments** to **false** as in this config:
 
@@ -665,7 +665,7 @@ module.exports = {
 };
 ```
 
-### Custom Minify Function
+### Custom Minify Function {#custom-minify-function}
 
 Override default minify function - use [terser](https://github.com/fabiosantoscode/terser) for minification.
 
@@ -707,13 +707,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/uglifyjs-webpack-plugin/blob/master/LICENSE)
 

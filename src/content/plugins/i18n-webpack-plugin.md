@@ -6,19 +6,19 @@ repo: https://github.com/webpack-contrib/i18n-webpack-plugin
 ---
 i18n (localization) plugin for Webpack.
 
-## Install
+## Install {#install}
 
 ```bash
 npm i -D i18n-webpack-plugin
 ```
 
-## Usage
+## Usage {#usage}
 
 This plugin creates bundles with translations baked in. So you can serve the translated bundle to your clients.
 
 see [webpack/webpack/examples/i18n](https://github.com/webpack/webpack/tree/master/examples/i18n).
 
-## Options
+## Options {#options}
 
 ```
 plugins: [
@@ -31,7 +31,7 @@ plugins: [
  - `optionsObj.hideMessage`: the default value is `false`, which will show the warning/error message. If set to `true`, the message will be hidden.
  - `optionsObj.nested`: the default value is `false`. If set to `true`, the keys in `languageConfig` can be nested. This option is interpreted only if `languageConfig` isn't a function.
 
-## Maintainers
+## Maintainers {#maintainers}
 
 <table>
   <tbody>

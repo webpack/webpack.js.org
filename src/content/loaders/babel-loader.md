@@ -12,7 +12,7 @@ This package allows transpiling JavaScript files using [Babel](https://github.co
 
 **Note**: Issues with the output should be reported on the Babel [Issues](https://github.com/babel/babel/issues) tracker.
 
-## Install
+## Install {#install}
 
 > webpack 4.x | babel-loader 8.x | babel 7.x
 
@@ -20,7 +20,7 @@ This package allows transpiling JavaScript files using [Babel](https://github.co
 npm install -D babel-loader @babel/core @babel/preset-env webpack
 ```
 
-## Usage
+## Usage {#usage}
 
 webpack documentation: [Loaders](/loaders/)
 
@@ -43,7 +43,7 @@ module: {
 }
 ```
 
-### Options
+### Options {#options}
 
 See the `babel` [options](https://babeljs.io/docs/en/options).
 
@@ -77,9 +77,9 @@ This loader also supports the following loader-specific option:
 
 * `customize`: Default `null`. The path of a module that exports a `custom` callback [like the one that you'd pass to `.custom()`](#customized-loader). Since you already have to make a new file to use this, it is recommended that you instead use `.custom` to create a wrapper loader. Only use this if you _must_ continue using `babel-loader` directly, but still want to customize.
 
-## Troubleshooting
+## Troubleshooting {#troubleshooting}
 
-### babel-loader is slow!
+### babel-loader is slow! {#babel-loader-is-slow}
 
 Make sure you are transforming as few files as possible. Because you are probably matching `/\.m?js$/`, you might be transforming the `node_modules` folder or other unwanted source.
 
@@ -87,7 +87,7 @@ To exclude `node_modules`, see the `exclude` option in the `loaders` config as d
 
 You can also speed up babel-loader by as much as 2x by using the `cacheDirectory` option. This will cache transformations to the filesystem.
 
-### Babel is injecting helpers into each file and bloating my code!
+### Babel is injecting helpers into each file and bloating my code! {#babel-is-injecting-helpers-into-each-file-and-bloating-my-code}
 
 Babel uses very small helpers for common functions such as `_extend`. By default, this will be added to every file that requires it.
 
@@ -117,7 +117,7 @@ rules: [
 ]
 ```
 
-#### **NOTE**: transform-runtime & custom polyfills (e.g. Promise library)
+#### **NOTE**: transform-runtime & custom polyfills (e.g. Promise library) {#note-transform-runtime--custom-polyfills-eg-promise-library}
 
 Since [@babel/plugin-transform-runtime](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-runtime) includes a polyfill that includes a custom [regenerator-runtime](https://github.com/facebook/regenerator/blob/master/packages/regenerator-runtime/runtime.js) and [core-js](https://github.com/zloirock/core-js), the following usual shimming method using `webpack.ProvidePlugin` will not work:
 
@@ -163,7 +163,7 @@ require('@babel/runtime/core-js/promise').default = require('bluebird');
 require('./app');
 ```
 
-### The Node.js API for `babel` has been moved to `babel-core`.
+### The Node.js API for `babel` has been moved to `babel-core`. {#the-nodejs-api-for-babel-has-been-moved-to-babel-core}
 
 If you receive this message, it means that you have the npm package `babel` installed and are using the short notation of the loader in the webpack config (which is not valid anymore as of webpack 2.x):
 ```javascript
@@ -184,7 +184,7 @@ In the case one of your dependencies is installing `babel` and you cannot uninst
   }
 ```
 
-## Customize config based on webpack target
+## Customize config based on webpack target {#customize-config-based-on-webpack-target}
 
 Webpack supports bundling multiple [targets](/concepts/targets/). For cases where you may want different Babel configurations for each target (like `web` _and_ `node`), this loader provides a `target` property via Babel's [caller](https://babeljs.io/docs/en/config-files#apicallercb) API.
 
@@ -215,7 +215,7 @@ module.exports = api => {
 }
 ```
 
-## Customized Loader
+## Customized Loader {#customized-loader}
 
 `babel-loader` exposes a loader-builder utility that allows users to add custom handling
 of Babel's configuration for each file that it processes.
@@ -228,7 +228,7 @@ In cases where you want to customize without actually having a file to call `.cu
 may also pass the `customize` option with a string pointing at a file that exports
 your `custom` callback function.
 
-### Example
+### Example {#example}
 
 ```js
 // Export from "./my-custom-loader.js" or whatever you want.
@@ -293,22 +293,22 @@ module.exports = {
 };
 ```
 
-### `customOptions(options: Object): { custom: Object, loader: Object }`
+### `customOptions(options: Object): { custom: Object, loader: Object }` {#customoptionsoptions-object--custom-object-loader-object-}
 
 Given the loader's options, split custom options out of `babel-loader`'s
 options.
 
 
-### `config(cfg: PartialConfig): Object`
+### `config(cfg: PartialConfig): Object` {#configcfg-partialconfig-object}
 
 Given Babel's `PartialConfig` object, return the `options` object that should
 be passed to `babel.transform`.
 
 
-### `result(result: Result): Result`
+### `result(result: Result): Result` {#resultresult-result-result}
 
 Given Babel's result object, allow loaders to make additional tweaks to it.
 
 
-## License
+## License {#license}
 [MIT](https://couto.mit-license.org/)

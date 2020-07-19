@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/file-loader
 
 The `file-loader` resolves `import`/`require()` on a file into a url and emits the file into the output directory.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `file-loader`:
 
@@ -61,9 +61,9 @@ specified to do so) and returns the public URI of the file.
 
 > ℹ️ By default the filename of the resulting file is the hash of the file's contents with the original extension of the required resource.
 
-## Options
+## Options {#options}
 
-### `name`
+### `name` {#name}
 
 Type: `String|Function`
 Default: `'[contenthash].[ext]'`
@@ -72,7 +72,7 @@ Specifies a custom filename template for the target file(s) using the query
 parameter `name`. For example, to emit a file from your `context` directory into
 the output directory retaining the full directory structure, you might use:
 
-#### `String`
+#### `String` {#string}
 
 **webpack.config.js**
 
@@ -92,7 +92,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 **webpack.config.js**
 
@@ -123,14 +123,14 @@ module.exports = {
 
 > ℹ️ By default the path and name you specify will output the file in that same directory, and will also use the same URI path to access the file.
 
-### `outputPath`
+### `outputPath` {#outputpath}
 
 Type: `String|Function`
 Default: `undefined`
 
 Specify a filesystem path where the target file(s) will be placed.
 
-#### `String`
+#### `String` {#string}
 
 **webpack.config.js**
 
@@ -150,7 +150,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 **webpack.config.js**
 
@@ -186,14 +186,14 @@ module.exports = {
 };
 ```
 
-### `publicPath`
+### `publicPath` {#publicpath}
 
 Type: `String|Function`
 Default: [`__webpack_public_path__`](/api/module-variables/#__webpack_public_path__-webpack-specific)+outputPath
 
 Specifies a custom public path for the target file(s).
 
-#### `String`
+#### `String` {#string}
 
 **webpack.config.js**
 
@@ -213,7 +213,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 **webpack.config.js**
 
@@ -249,7 +249,7 @@ module.exports = {
 };
 ```
 
-### `postTransformPublicPath`
+### `postTransformPublicPath` {#posttransformpublicpath}
 
 Type: `Function`
 Default: `undefined`
@@ -275,7 +275,7 @@ module.exports = {
 };
 ```
 
-### `context`
+### `context` {#context}
 
 Type: `String`
 Default: [`context`](/configuration/entry-context/#context)
@@ -302,7 +302,7 @@ module.exports = {
 };
 ```
 
-### `emitFile`
+### `emitFile` {#emitfile}
 
 Type: `Boolean`
 Default: `true`
@@ -340,7 +340,7 @@ module.exports = {
 };
 ```
 
-### `regExp`
+### `regExp` {#regexp}
 
 Type: `RegExp`
 Default: `undefined`
@@ -380,7 +380,7 @@ module.exports = {
 
 > ℹ️ If `[0]` is used, it will be replaced by the entire tested string, whereas `[1]` will contain the first capturing parenthesis of your regex and so on...
 
-### `esModule`
+### `esModule` {#esmodule}
 
 Type: `Boolean`
 Default: `true`
@@ -412,80 +412,80 @@ module.exports = {
 };
 ```
 
-## Placeholders
+## Placeholders {#placeholders}
 
 Full information about placeholders you can find [here](https://github.com/webpack/loader-utils#interpolatename).
 
-### `[ext]`
+### `[ext]` {#ext}
 
 Type: `String`
 Default: `file.extname`
 
 The file extension of the target file/resource.
 
-### `[name]`
+### `[name]` {#name}
 
 Type: `String`
 Default: `file.basename`
 
 The basename of the file/resource.
 
-### `[path]`
+### `[path]` {#path}
 
 Type: `String`
 Default: `file.directory`
 
 The path of the resource relative to the webpack/config `context`.
 
-### `[folder]`
+### `[folder]` {#folder}
 
 Type: `String`
 Default: `file.folder`
 
 The folder of the resource is in.
 
-### `[query]`
+### `[query]` {#query}
 
 Type: `String`
 Default: `file.query`
 
 The query of the resource, i.e. `?foo=bar`.
 
-### `[emoji]`
+### `[emoji]` {#emoji}
 
 Type: `String`
 Default: `undefined`
 
 A random emoji representation of `content`.
 
-### `[emoji:<length>]`
+### `[emoji:<length>]` {#emojilength}
 
 Type: `String`
 Default: `undefined`
 
 Same as above, but with a customizable number of emojis
 
-### `[hash]`
+### `[hash]` {#hash}
 
 Type: `String`
 Default: `md4`
 
 Specifies the hash method to use for hashing the file content.
 
-### `[contenthash]`
+### `[contenthash]` {#contenthash}
 
 Type: `String`
 Default: `md4`
 
 Specifies the hash method to use for hashing the file content.
 
-### `[<hashType>:hash:<digestType>:<length>]`
+### `[<hashType>:hash:<digestType>:<length>]` {#hashtypehashdigesttypelength}
 
 Type: `String`
 
 The hash of options.content (Buffer) (by default it's the hex digest of the hash).
 
-#### `digestType`
+#### `digestType` {#digesttype}
 
 Type: `String`
 Default: `'hex'`
@@ -494,30 +494,30 @@ The [digest](https://en.wikipedia.org/wiki/Cryptographic_hash_function) that the
 hash function should use. Valid values include: base26, base32, base36,
 base49, base52, base58, base62, base64, and hex.
 
-#### `hashType`
+#### `hashType` {#hashtype}
 
 Type: `String`
 Default: `'md4'`
 
 The type of hash that the has function should use. Valid values include: `md4`, `md5`, `sha1`, `sha256`, and `sha512`.
 
-#### `length`
+#### `length` {#length}
 
 Type: `Number`
 Default: `undefined`
 
 Users may also specify a length for the computed hash.
 
-### `[N]`
+### `[N]` {#n}
 
 Type: `String`
 Default: `undefined`
 
 The n-th match obtained from matching the current file name against the `regExp`.
 
-## Examples
+## Examples {#examples}
 
-### Names
+### Names {#names}
 
 The following examples show how one might use `file-loader` and what the result would be.
 
@@ -630,7 +630,7 @@ Result:
 path/to/file.png?e43b20c069c4a01867c31e98cbce33c9
 ```
 
-### CDN
+### CDN {#cdn}
 
 The following examples show how to use `file-loader` for CDN uses query params.
 
@@ -672,7 +672,7 @@ Result:
 https://cdn.example.com/directory/image.png?width=300&height=300
 ```
 
-### Dynamic public path depending on environment variable at run time
+### Dynamic public path depending on environment variable at run time {#dynamic-public-path-depending-on-environment-variable-at-run-time}
 
 An application might want to configure different CDN hosts depending on an environment variable that is only available when running the application. This can be an advantage, as only one build of the application is necessary, which behaves differently depending on environment variables of the deployment environment. Since file-loader is applied when compiling the application, and not when running it, the environment variable cannot be used in the file-loader configuration. A way around this is setting the `__webpack_public_path__` to the desired CDN host depending on the environment variable at the entrypoint of the application. The option `postTransformPublicPath` can be used to configure a custom path depending on a variable like `__webpack_public_path__`.
 
@@ -739,13 +739,13 @@ Result when run with `NAMESPACE=dev` env variable:
 https://cache-dev.myserver.net/web/static/assets/image.somehash.png
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/file-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/file-loader/blob/master/LICENSE)
 

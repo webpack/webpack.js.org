@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/cache-loader
 
 The `cache-loader` allow to Caches the result of following loaders on disk (default) or in the database.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `cache-loader`:
 
@@ -46,7 +46,7 @@ module.exports = {
 
 > ⚠️ Note that there is an overhead for saving the reading and saving the cache file, so only use this loader to cache expensive loaders.
 
-## Options
+## Options {#options}
 
 |         Name          |                       Type                       |                        n Default                        | Description                                                                                                                                                            |
 | :-------------------: | :----------------------------------------------: | :-----------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -60,9 +60,9 @@ module.exports = {
 |    **`readOnly`**     |                   `{Boolean}`                    |                         `false`                         | Allows you to override default value and make the cache read only (useful for some environments where you don't want the cache to be updated, only read from it)       |
 |      **`write`**      | `{Function(cacheKey, data, callback) -> {void}}` |                       `undefined`                       | Allows you to override default write cache data to file (e.g. Redis, memcached)                                                                                        |
 
-## Examples
+## Examples {#examples}
 
-### Basic
+### Basic {#basic}
 
 **webpack.config.js**
 
@@ -80,7 +80,7 @@ module.exports = {
 };
 ```
 
-### Database Integration
+### Database Integration {#database-integration}
 
 **webpack.config.js**
 
@@ -155,13 +155,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/cache-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/cache-loader/blob/master/LICENSE)
 

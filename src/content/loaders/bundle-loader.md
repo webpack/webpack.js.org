@@ -6,13 +6,13 @@ repo: https://github.com/webpack-contrib/bundle-loader
 ---
 Bundle loader for webpack
 
-## Install
+## Install {#install}
 
 ```bash
 npm i bundle-loader --save
 ```
 
-## Usage
+## Usage {#usage}
 
 **webpack.config.js**
 ```js
@@ -56,14 +56,14 @@ bundle(callbackThree)
 
 If a callback is added after dependencies were loaded, it will be called immediately.
 
-## Options
+## Options {#options}
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |**`lazy`**|`{Boolean}`|`false`|Loads the imported bundle asynchronously|
 |**`name`**|`{String}`|`[id].[name]`|Configure a custom filename for your imported bundle|
 
-### `lazy`
+### `lazy` {#lazy}
 
 The file is requested when you require the `bundle-loader`. If you want it to request it lazy, use:
 
@@ -85,7 +85,7 @@ bundle((file) => {...})
 
 > ℹ️  The chunk is not requested until you call the load function
 
-### `name`
+### `name` {#name}
 
 You may set name for a bundle using the `name` options parameter.
 See [documentation](https://github.com/webpack/loader-utils#interpolatename).
@@ -103,7 +103,7 @@ See [documentation](https://github.com/webpack/loader-utils#interpolatename).
 > :warning: chunks created by the loader will be named according to the
 [`output.chunkFilename`](/configuration/output/#outputchunkfilename) rule, which defaults to `[id].[name]`. Here `[name]` corresponds to the chunk name set in the `name` options parameter.
 
-## Examples
+## Examples {#examples}
 
 ```js
 import bundle from './file.bundle.js'
@@ -143,7 +143,7 @@ Chunks from `bundle-loader`, however will load using the `chunkFilename` rule, s
 
 You can also use `chunkFilename` to add hash values to the filename, since putting `[hash]` in the bundle options parameter does not work correctly.
 
-## Maintainers
+## Maintainers {#maintainers}
 
 <table>
   <tbody>

@@ -15,7 +15,7 @@ new webpack.HashedModuleIdsPlugin({
 ```
 
 
-## Options
+## Options {#options}
 
 This plugin supports the following options:
 
@@ -25,7 +25,7 @@ This plugin supports the following options:
 - `hashDigestLength`: The prefix length of the hash digest to use, defaults to `4`. Note that some generated ids might be longer than specified here, to avoid module id collisions.
 
 
-## Usage
+## Usage {#usage}
 
 Here's an example of how this plugin might be used:
 

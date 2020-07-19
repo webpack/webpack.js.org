@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/sass-loader
 
 Loads a Sass/SCSS file and compiles it to CSS.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `sass-loader`:
 
@@ -78,7 +78,7 @@ module.exports = {
 
 Finally run `webpack` via your preferred method.
 
-### Resolving `import` at-rules
+### Resolving `import` at-rules {#resolving-import-at-rules}
 
 Webpack provides an [advanced mechanism to resolve files](/concepts/module-resolution/).
 
@@ -92,7 +92,7 @@ It's important to only prepend it with `~`, because `~/` resolves to the home di
 Webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS and Sass files have no special syntax for importing relative files.
 Writing `@import "style.scss"` is the same as `@import "./style.scss";`
 
-### Problems with `url(...)`
+### Problems with `url(...)` {#problems-with-url}
 
 Since Sass implementations don't provide [url rewriting](https://github.com/sass/libsass/issues/532), all linked assets must be relative to the output.
 
@@ -106,7 +106,7 @@ Thankfully there are a two solutions to this problem:
 - Add the missing url rewriting using the [resolve-url-loader](https://github.com/bholloway/resolve-url-loader). Place it before `sass-loader` in the loader chain.
 - Library authors usually provide a variable to modify the asset path. [bootstrap-sass](https://github.com/twbs/bootstrap-sass) for example has an `$icon-font-path`.
 
-## Options
+## Options {#options}
 
 |                   Name                    |         Type         |                 Default                 | Description                                                       |
 | :---------------------------------------: | :------------------: | :-------------------------------------: | :---------------------------------------------------------------- |
@@ -116,7 +116,7 @@ Thankfully there are a two solutions to this problem:
 |  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |               `undefined`               | Prepends/Appends `Sass`/`SCSS` code before the actual entry file. |
 | **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.                    |
 
-### `implementation`
+### `implementation` {#implementation}
 
 Type: `Object`
 Default: `sass`
@@ -257,7 +257,7 @@ module.exports = {
 };
 ```
 
-### `sassOptions`
+### `sassOptions` {#sassoptions}
 
 Type: `Object|Function`
 Default: defaults values for Sass implementation
@@ -279,7 +279,7 @@ Please consult documentation before using them:
 - [Dart Sass documentation](https://github.com/sass/dart-sass#javascript-api) for all available `sass` options.
 - [Node Sass documentation](https://github.com/sass/node-sass/#options) for all available `node-sass` options.
 
-#### `Object`
+#### `Object` {#object}
 
 Use and object for the Sass implementation setup.
 
@@ -310,7 +310,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 Allows to setup the Sass implementation by setting different options based on the loader context.
 
@@ -350,7 +350,7 @@ module.exports = {
 };
 ```
 
-### `sourceMap`
+### `sourceMap` {#sourcemap}
 
 Type: `Boolean`
 Default: depends on the `compiler.devtool` value
@@ -422,7 +422,7 @@ module.exports = {
 };
 ```
 
-### `additionalData`
+### `additionalData` {#additionaldata}
 
 Type: `String|Function`
 Default: `undefined`
@@ -432,7 +432,7 @@ In this case, the `sass-loader` will not override the `data` option but just **p
 
 This is especially useful when some of your Sass variables depend on the environment:
 
-#### `String`
+#### `String` {#string}
 
 ```js
 module.exports = {
@@ -456,7 +456,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 ```js
 module.exports = {
@@ -490,7 +490,7 @@ module.exports = {
 };
 ```
 
-### `webpackImporter`
+### `webpackImporter` {#webpackimporter}
 
 Type: `Boolean`
 Default: `true`
@@ -524,9 +524,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### Extracts CSS into separate files
+### Extracts CSS into separate files {#extracts-css-into-separate-files}
 
 For production builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
 
@@ -567,7 +567,7 @@ module.exports = {
 };
 ```
 
-### Source maps
+### Source maps {#source-maps}
 
 Enables/Disables generation of source maps.
 
@@ -605,13 +605,13 @@ module.exports = {
 
 If you want to edit the original Sass files inside Chrome, [there's a good blog post](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0). Checkout [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test) for a running example.
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/sass-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/sass-loader/blob/master/LICENSE)
 

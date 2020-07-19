@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/source-map-loader
 
 Extracts source maps from existing source files (from their <code>sourceMappingURL</code>).
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `source-map-loader`:
 
@@ -60,9 +60,9 @@ Be mindful in setting [include](/configuration/module/#ruleinclude) and [exclude
 
 And run `webpack` via your preferred method.
 
-## Examples
+## Examples {#examples}
 
-### Ignoring Warnings
+### Ignoring Warnings {#ignoring-warnings}
 
 To ignore warnings, you can use the following configuration:
 
@@ -87,13 +87,13 @@ module.exports = {
 
 More information about the `warningsFilters` option you can find [here](/configuration/stats/#statswarningsfilter);
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/source-map-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/source-map-loader/blob/master/LICENSE)
 

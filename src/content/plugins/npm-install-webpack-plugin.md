@@ -13,13 +13,13 @@ a dependency you didn't know you needed until now.
 Instead, use `require` or `import` how you normally would and `npm install`
 will happen **automatically to install & save missing dependencies** while you work!
 
-## Install
+## Install {#install}
 
 ```bash
 $ npm install --save-dev npm-install-webpack-plugin
 ```
 
-## Usage
+## Usage {#usage}
 
 In your `webpack.config.js`:
 
@@ -62,11 +62,11 @@ plugins: [
 ],
 ```
 
-## Demo
+## Demo {#demo}
 
 ![npm-install-webpack-plugin demo](https://cloud.githubusercontent.com/assets/15182/12540538/6a4e8f1a-c2d0-11e5-97ee-4ddaf6892645.gif)
 
-## Features
+## Features {#features}
 
 - [x] Works with both webpack `^v1.12.0` and `^2.1.0-beta.0`.
 - [x] Auto-installs `.babelrc` plugins & presets.
@@ -88,14 +88,14 @@ plugins: [
       (e.g. `require("react")` can alias to `react-lite`)
 
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/npm-install-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
 
 
-## Maintainers
+## Maintainers {#maintainers}
 
 <table>
   <tbody>

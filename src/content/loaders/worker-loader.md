@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/worker-loader
 
 worker loader module for webpack
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `worker-loader`:
 
@@ -26,7 +26,7 @@ To begin, you'll need to install `worker-loader`:
 $ npm install worker-loader --save-dev
 ```
 
-### Inlined
+### Inlined {#inlined}
 
 **App.js**
 
@@ -34,7 +34,7 @@ $ npm install worker-loader --save-dev
 import Worker from 'worker-loader!./Worker.js';
 ```
 
-### Config
+### Config {#config}
 
 **webpack.config.js**
 
@@ -66,9 +66,9 @@ worker.addEventListener('message', function (event) {});
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
-### `fallback`
+### `fallback` {#fallback}
 
 Type: `Boolean`
 Default: `false`
@@ -91,7 +91,7 @@ module.exports = {
 };
 ```
 
-### `inline`
+### `inline` {#inline}
 
 Type: `Boolean`
 Default: `false`
@@ -131,7 +131,7 @@ module.exports = {
 };
 ```
 
-### `name`
+### `name` {#name}
 
 Type: `String`
 Default: `[hash].worker.js`
@@ -155,7 +155,7 @@ module.exports = {
 };
 ```
 
-### publicPath
+### publicPath {#publicpath}
 
 Type: `String`
 Default: `null`
@@ -178,16 +178,16 @@ module.exports = {
 };
 ```
 
-### workerType
+### workerType {#workertype}
 
 Type: `string`
 Default: `Worker`
 
 Set the worker type. Defaults to `Worker`. Supports `ServiceWorker`, `SharedWorker`.
 
-## Examples
+## Examples {#examples}
 
-### Basic
+### Basic {#basic}
 
 The worker file can import dependencies just like any other file:
 
@@ -207,7 +207,7 @@ self.postMessage({ foo: 'foo' });
 self.addEventListener('message', (event) => console.log(event));
 ```
 
-### Integrating with ES Modules
+### Integrating with ES Modules {#integrating-with-es-modules}
 
 _Note: You can even use ES2015 Modules if you have the [`babel-loader`](https://github.com/babel/babel-loader) configured._
 
@@ -227,7 +227,7 @@ self.postMessage({ foo: 'foo' });
 self.addEventListener('message', (event) => console.log(event));
 ```
 
-### Integrating with TypeScript
+### Integrating with TypeScript {#integrating-with-typescript}
 
 To integrate with TypeScript, you will need to define a custom module for the exports of your worker
 
@@ -268,7 +268,7 @@ worker.onmessage = (event) => {};
 worker.addEventListener('message', (event) => {});
 ```
 
-### Cross-Origin Policy
+### Cross-Origin Policy {#cross-origin-policy}
 
 [`WebWorkers`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) are restricted by a [same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy), so if your `webpack` assets are not being served from the same origin as your application, their download may be blocked by your browser.
 This scenario can commonly occur if you are hosting your assets under a CDN domain.
@@ -322,13 +322,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/worker-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/worker-loader/blob/master/LICENSE)
 

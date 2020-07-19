@@ -17,7 +17,7 @@ new webpack.NormalModuleReplacementPlugin(
 ```
 
 
-## Basic Example
+## Basic Example {#basic-example}
 
 Replace a specific module when building for a [development environment](/guides/production).
 
@@ -33,7 +33,7 @@ new webpack.NormalModuleReplacementPlugin(
 ```
 
 
-## Advanced Example
+## Advanced Example {#advanced-example}
 
 Conditional build depending on an [specified environment](/configuration/configuration-types).
 

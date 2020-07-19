@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/coffee-loader
 
 Compile [CoffeeScript](https://coffeescript.org/) to JavaScript.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `coffeescript` and `coffee-loader`:
 
@@ -84,7 +84,7 @@ import coffee from 'coffee-loader!./file.coffee';
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
 Type: `Object`
 Default: `{ bare: true }`
@@ -118,9 +118,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### CoffeeScript and Babel
+### CoffeeScript and Babel {#coffeescript-and-babel}
 
 From CoffeeScript 2 documentation:
 
@@ -156,7 +156,7 @@ module.exports = {
 };
 ```
 
-### Literate CoffeeScript
+### Literate CoffeeScript {#literate-coffeescript}
 
 For using Literate CoffeeScript you should setup:
 
@@ -178,13 +178,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/coffee-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/coffee-loader/blob/master/LICENSE)
 

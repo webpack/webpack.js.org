@@ -6,13 +6,13 @@ repo: https://github.com/webpack-contrib/svg-inline-loader
 ---
 This Webpack loader inlines SVG as module. If you use Adobe suite or Sketch to export SVGs, you will get auto-generated, unneeded crusts. This loader removes it for you, too.
 
-## Install
+## Install {#install}
 
 ```bash
 npm install svg-inline-loader --save-dev
 ```
 
-## Configuration
+## Configuration {#configuration}
 
 Simply add configuration object to `module.loaders` like this.
 
@@ -25,56 +25,56 @@ Simply add configuration object to `module.loaders` like this.
 
 warning: You should configure this loader only once via `module.loaders` or `require('!...')`. See [#15](https://github.com/webpack-contrib/svg-inline-loader/issues/15) for detail.
 
-## Query Options
+## Query Options {#query-options}
 
-#### `removeTags: boolean`
+#### `removeTags: boolean` {#removetags-boolean}
 
 Removes specified tags and its children. You can specify tags by setting `removingTags` query array.
 
 default: `removeTags: false`
 
-#### `removingTags: [...string]`
+#### `removingTags: [...string]` {#removingtags-string}
 
 warning: this won't work unless you specify `removeTags: true`
 
 default: `removingTags: ['title', 'desc', 'defs', 'style']`
 
-#### `warnTags: [...string]`
+#### `warnTags: [...string]` {#warntags-string}
 
 warns about tags, ex: ['desc', 'defs', 'style']
 
 default: `warnTags: []`
 
-#### `removeSVGTagAttrs: boolean`
+#### `removeSVGTagAttrs: boolean` {#removesvgtagattrs-boolean}
 
 Removes `width` and `height` attributes from `<svg />`.
 
 default: `removeSVGTagAttrs: true`
 
-#### `removingTagAttrs: [...string]`
+#### `removingTagAttrs: [...string]` {#removingtagattrs-string}
 
 Removes attributes from inside the `<svg />`.
 
 default: `removingTagAttrs: []`
 
-#### `warnTagAttrs: [...string]`
+#### `warnTagAttrs: [...string]` {#warntagattrs-string}
 
 Warns to console about attributes from inside the `<svg />`.
 
 default: `warnTagAttrs: []`
-#### `classPrefix: boolean || string`
+#### `classPrefix: boolean || string` {#classprefix-boolean--string}
 
 Adds a prefix to class names to avoid collision across svg files.
 
 default: `classPrefix: false`
 
-#### `idPrefix: boolean || string`
+#### `idPrefix: boolean || string` {#idprefix-boolean--string}
 
 Adds a prefix to ids to avoid collision across svg files.
 
 default: `idPrefix: false`
 
-## Example Usage
+## Example Usage {#example-usage}
 
 ```js
 // Using default hashed prefix (__[hash:base64:7]__)
@@ -96,7 +96,7 @@ Preferred usage is via a `module.loaders`:
     }
 ```
 
-## Maintainers
+## Maintainers {#maintainers}
 
 <table>
   <tbody>

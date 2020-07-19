@@ -20,7 +20,7 @@ A browserify transformation loader for webpack.
 
 This loader allows use of [browserify transforms](https://github.com/substack/node-browserify/wiki/list-of-transforms) via a webpack loader.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `transform-loader`:
 
@@ -61,12 +61,12 @@ module.exports = {
 
 And run `webpack` via your preferred method.
 
-## QueryString Options
+## QueryString Options {#querystring-options}
 
 When using the loader via a `require` query string you may specify one of two
 types; a loader name, or a function index.
 
-### <loder-name>
+### <loder-name> {#loder-name}
 
 Type: `String`
 
@@ -75,16 +75,16 @@ The name of the `browserify` transform you wish to use.
 _Note: You must install the correct transform manually. Webpack nor this loader
 will do that for you._
 
-### <loder-index>
+### <loder-index> {#loder-index}
 
 Type: `Number`
 
 The index of a function contained within `options.transforms` which to use to
 transform the target file(s).
 
-## Options
+## Options {#options}
 
-### `transforms`
+### `transforms` {#transforms}
 
 Type: `Array[Function]`
 Default: `undefined`
@@ -132,13 +132,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/transform-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/transform-loader/blob/master/LICENSE)
 

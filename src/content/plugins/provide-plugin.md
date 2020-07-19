@@ -43,7 +43,7 @@ Whenever the `identifier` is encountered as free variable in a module, the `modu
 
 For importing the default export of an ES2015 module, you have to specify the default property of module.
 
-## Usage: jQuery
+## Usage: jQuery {#usage-jquery}
 
 To automatically load `jquery` we can simply point both variables it exposes to the corresponding node module:
 
@@ -64,7 +64,7 @@ jQuery('#item'); // <= just works
 ```
 
 
-## Usage: jQuery with Angular 1
+## Usage: jQuery with Angular 1 {#usage-jquery-with-angular-1}
 
 Angular looks for `window.jQuery` in order to determine whether jQuery is present, see the [source code](https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823).
 
@@ -75,7 +75,7 @@ new webpack.ProvidePlugin({
 ```
 
 
-## Usage: Lodash Map
+## Usage: Lodash Map {#usage-lodash-map}
 
 ```javascript
 new webpack.ProvidePlugin({
@@ -83,7 +83,7 @@ new webpack.ProvidePlugin({
 });
 ```
 
-### Usage: Vue.js
+### Usage: Vue.js {#usage-vuejs}
 
 ```javascript
 new webpack.ProvidePlugin({

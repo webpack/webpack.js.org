@@ -6,13 +6,13 @@ repo: https://github.com/webpack-contrib/thread-loader
 ---
 Runs the following loaders in a worker pool.
 
-## Install
+## Install {#install}
 
 ```bash
 npm install --save-dev thread-loader
 ```
 
-## Usage
+## Usage {#usage}
 
 Put this loader in front of other loaders. The following loaders run in a worker pool.
 
@@ -26,7 +26,7 @@ Each worker is a separate node.js process, which has an overhead of ~600ms. Ther
 
 Use this loader only for expensive operations!
 
-## Examples
+## Examples {#examples}
 
 **webpack.config.js**
 
@@ -112,7 +112,7 @@ threadLoader.warmup({
 ```
 
 
-## Maintainers
+## Maintainers {#maintainers}
 
 <table>
   <tbody>
