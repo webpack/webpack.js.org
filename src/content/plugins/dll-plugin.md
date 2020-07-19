@@ -77,11 +77,7 @@ dll 中的内容会被映射到当前目录下。如果被 `require` 的文件�
 由于这是在解析了 dll 中每个文件之后才触发的，因此相同的路径必须能够确保这个 dll bundle 的使用者（不一定是人，可指某些代码）有权限访问。 举例来说， 假如一个 dll bundle 中含有 `loadash` 库以及文件 `abc`， 那么 `require("lodash")` 和 `require("./abc")` 都不会被编译进主 bundle 文件中，而是会被 dll 所使用。
 
 
-<<<<<<< HEAD
 ## 用法(Usage) {#usage}
-=======
-## Usage {#usage}
->>>>>>> test-loader-plugin-t
 
 W> `DllReferencePlugin` 和 `DllPlugin` 都是在 _单独的_ webpack 配置中使用的。
 
@@ -109,11 +105,7 @@ new webpack.DllReferencePlugin({
 ```
 
 
-<<<<<<< HEAD
 ## 示例 {#examples}
-=======
-## Examples {#examples}
->>>>>>> test-loader-plugin-t
 
 [Vendor](https://github.com/webpack/webpack/tree/master/examples/dll) 和 [User](https://github.com/webpack/webpack/tree/master/examples/dll-user)
 
@@ -122,11 +114,7 @@ _两个单独的用例，用来分别演示作用域（scope）和上下文（co
 T> 多个 `DllPlugins` 和 `DllReferencePlugins`。
 
 
-<<<<<<< HEAD
 ## 参考 {#references}
-=======
-## References {#references}
->>>>>>> test-loader-plugin-t
 
 ### Source {#source}
 
