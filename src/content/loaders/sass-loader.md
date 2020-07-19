@@ -18,11 +18,7 @@ repo: https://github.com/webpack-contrib/sass-loader
 
 加载 Sass/SCSS 文件并将他们编译为 CSS。
 
-<<<<<<< HEAD
-## 快速开始
-=======
-## Getting Started {#getting-started}
->>>>>>> test-loader-plugin-t
+## 快速开始 {#getting-started}
 
 首先，你需要安装 `sass-loader`：
 
@@ -82,11 +78,7 @@ module.exports = {
 
 最后通过你喜欢的方式运行 `webpack`。
 
-<<<<<<< HEAD
-### 解析 `import` 的规则
-=======
-### Resolving `import` at-rules {#resolving-import-at-rules}
->>>>>>> test-loader-plugin-t
+### 解析 `import` 的规则 {#resolving-import-at-rules}
 
 Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)。
 
@@ -100,11 +92,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 因为 CSS 和 Sass 文件没有用于导入相关文件的特殊语法，所以 Webpack 需要区分 `bootstrap` 和 `~bootstrap`。
  `@import "style.scss"` 和 `@import "./style.scss";` 两种写法是相同的。
 
-<<<<<<< HEAD
-### `url(...)` 的问题
-=======
-### Problems with `url(...)` {#problems-with-url}
->>>>>>> test-loader-plugin-t
+### `url(...)` 的问题 {#problems-with-url}
 
 由于 Saass 的实现没有提供 [url 重写](https://github.com/sass/libsass/issues/532)的功能，所以相关的资源都必须是相对于输出文件（ouput）而言的。
 
@@ -118,11 +106,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 - 将 [resolve-url-loader](https://github.com/bholloway/resolve-url-loader) 设置于 loader 链中的 `sass-loader` 之前，就可以重写 url。
 - Library 作者一般都会提供变量，用来设置资源路径。比如 [bootstrap-sass](https://github.com/twbs/bootstrap-sass) 可以通过 `$icon-font-path` 进行设置。
 
-<<<<<<< HEAD
-## 配置选项
-=======
-## Options {#options}
->>>>>>> test-loader-plugin-t
+## 配置选项 {#options}
 
 |                   名称                    |         类型         |       默认值       | Description                                    |
 | :---------------------------------------: | :------------------: | :----------------: | :--------------------------------------------- |
@@ -540,15 +524,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## 示例
+## 示例 {#examples}
 
-### 提取样式表
-=======
-## Examples {#examples}
-
-### Extracts CSS into separate files {#extracts-css-into-separate-files}
->>>>>>> test-loader-plugin-t
+### 提取样式表 {#extracts-css-into-separate-files}
 
 对于生产版本，我们建议从 bundle 中提取 CSS，以便之后可以使 CSS/JS 资源并行加载。
 
@@ -627,11 +605,7 @@ module.exports = {
 
 如果你要在 Chrome 中编辑原始的 Sass 文件，建议阅读 [这篇不错的博客](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0)。具体示例参考 [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test)。
 
-<<<<<<< HEAD
-## 贡献
-=======
-## Contributing {#contributing}
->>>>>>> test-loader-plugin-t
+## 贡献 {#contributing}
 
 如果你还没有阅读过我们的贡献指南，请花一点时间阅读它。
 

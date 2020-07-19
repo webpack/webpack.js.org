@@ -60,11 +60,7 @@ new webpack.DllReferencePlugin(options);
 W> 保持 `name` 与 [`output.library`](/configuration/output/#outputlibrary) 一致。
 
 
-<<<<<<< HEAD
 ### 模式(Modes) {#modes}
-=======
-### Modes {#modes}
->>>>>>> test-loader-plugin-t
 
 这个插件支持两种模式，分别是作用域（_scoped_）和映射（_mapped_）。
 

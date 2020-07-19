@@ -6,21 +6,13 @@ repo: https://github.com/webpack-contrib/bundle-loader
 ---
 应用于 webpack 的 bundle loader
 
-<<<<<<< HEAD
-## 安装
-=======
-## Install {#install}
->>>>>>> test-loader-plugin-t
+## 安装 {#install}
 
 ```bash
 npm i bundle-loader --save
 ```
 
-<<<<<<< HEAD
-## 用法
-=======
-## Usage {#usage}
->>>>>>> test-loader-plugin-t
+## 用法 {#usage}
 
 **webpack.config.js**
 
@@ -65,11 +57,7 @@ bundle(callbackThree)
 
 当依赖模块都加载完毕时, 如果此时添加一个回调函数，回到函数将会立即执行。
 
-<<<<<<< HEAD
-## 选项
-=======
-## Options {#options}
->>>>>>> test-loader-plugin-t
+## 选项 {#options}
 
 |选项名|类型|默认值|描述|
 |:--:|:--:|:-----:|:----------|
@@ -118,11 +106,7 @@ bundle((file) => {...})
 > :warning: 一旦 loader 创建了 chunk，将遵循以下命名规则 [`output.chunkFilename`](/configuration/output/#outputchunkfilename) 规则，
 默认是 `[id].[name]`。这里 `[name]` 对应着配置中 name 选项参数设置的 chunk 名称。
 
-<<<<<<< HEAD
-## 示例
-=======
-## Examples {#examples}
->>>>>>> test-loader-plugin-t
+## 示例 {#examples}
 
 ```js
 import bundle from './file.bundle.js'
@@ -162,11 +146,7 @@ module.exports = {
 
 当然，你也可以在 `chunkFilename` 添加哈希值作为文件名的一部分，这是因为在 bundle 的配置选项中放置 `[hash]` 不会生效。
 
-<<<<<<< HEAD
-## 维护人员
-=======
-## Maintainers {#maintainers}
->>>>>>> test-loader-plugin-t
+## 维护人员 {#maintainers}
 
 <table>
   <tbody>

@@ -18,11 +18,7 @@ repo: https://github.com/webpack-contrib/eslint-loader
 
 > 用于 Webpack 的 ESlint loader
 
-<<<<<<< HEAD
-## 安装
-=======
-## Install {#install}
->>>>>>> test-loader-plugin-t
+## 安装 {#install}
 
 ```bash
 npm install eslint-loader --save-dev
@@ -34,11 +30,7 @@ npm install eslint-loader --save-dev
 npm install eslint --save-dev
 ```
 
-<<<<<<< HEAD
-## 用法
-=======
-## Usage {#usage}
->>>>>>> test-loader-plugin-t
+## 用法 {#usage}
 
 在你的 webpack 设置中添加下列配置：
 
@@ -103,11 +95,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## 选项
-=======
-## Options {#options}
->>>>>>> test-loader-plugin-t
+## 选项 {#options}
 
 你可以通过标准 webpack [loader 选项](/configuration/module/#useentry)传递[ eslint 选项](http://eslint.org/docs/developer-guide/nodejs-api#cliengine)。
 
@@ -235,11 +223,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### 错误与警告
-=======
-### Errors and Warning {#errors-and-warning}
->>>>>>> test-loader-plugin-t
+### 错误与警告 {#errors-and-warning}
 
 **默认情况下，加载程序将根据 eslint 错误/警告计数自动调整错误报告。** 你仍然可以通过使用 `emitError` **或** `emitWarning` 选项来强制启用这种行为
 
@@ -398,21 +382,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## 陷阱
-=======
-## Gotchas {#gotchas}
->>>>>>> test-loader-plugin-t
+## 陷阱 {#gotchas}
 
 ### NoEmitOnErrorsPlugin {#noemitonerrorsplugin}
 
 当模式未被配置，或运行在生产环境下时，会在 webpack4 中自动启用 `NoEmitOnErrorsPlugin`。因此，无论 `eslint-loader` 中使用了什么错误配置，即使 ESLint 抛出警告也会导致构建失败，除非启用了 `emitWarning`。
 
-<<<<<<< HEAD
-### 定义 `configFile` 或使用 `eslint -c path/.eslintrc`
-=======
-### Defining `configFile` or using `eslint -c path/.eslintrc` {#defining-configfile-or-using-eslint--c-patheslintrc}
->>>>>>> test-loader-plugin-t
+### 定义 `configFile` 或使用 `eslint -c path/.eslintrc` {#defining-configfile-or-using-eslint--c-patheslintrc}
 
 请记住，当你定义 `configFile` 时，`eslint` 不会在需要 lint 的文件目录中自动查找 `.eslintrc`。更多信息请参阅 eslint 官方文档中的此章节[_使用配置文件_](http://eslint.org/docs/user-guide/configuring#using-configuration-files)，以及此 issue [#129](https://github.com/webpack-contrib/eslint-loader/issues/129)。
 
