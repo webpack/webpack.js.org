@@ -32,7 +32,7 @@ related:
 如果你还没有安装过 webpack 和 CLI，请先阅读 [安装指南](/guides/installation)。
 
 
-## 使用配置文件的用法
+## 使用配置文件的用法 {#usage-with-configuration-file}
 
 ```bash
 webpack [--config webpack.config.js]
@@ -41,7 +41,7 @@ webpack [--config webpack.config.js]
 配置文件中的相关选项，请参阅[配置](/configuration)。
 
 
-## 不使用配置文件的用法
+## 不使用配置文件的用法 {#usage-without-configuration-file}
 
 ```sh
 webpack <entry> [<entry>] -o <output>
@@ -99,7 +99,7 @@ webpack ./src/index.js ./src.index2.js -o dist/bundle.js
 ```
 
 
-### 常用配置
+### 常用配置 {#common-options}
 
 W> 注意，命令行接口（Command Line Interface）参数的优先级，高于配置文件参数。例如，如果将 [`--mode="production"`](/configuration/mode/#usage) 传入 webpack CLI，而配置文件使用的是 `development`，最终会使用 `production`。
 
@@ -127,7 +127,7 @@ webpack --json > stats.json
 
 在其他每个情况下，webpack 会打印一组统计信息，用于显示 bundle, chunk 和用时等详细信息。使用此选项，输出可以是 JSON 对象。此输出文件(response)可被 webpack 的[分析工具](https://webpack.github.com/analyse)、chrisbateman 的 [webpack 可视化工具](https://chrisbateman.github.io/webpack-visualizer/)或 th0r 的 [webpack bundle 分析工具](https://github.com/webpack-contrib/webpack-bundle-analyzer)接收后进行分析。分析工具将接收 JSON 并以图形形式提供构建的所有细节。
 
-### 环境选项
+### 环境选项 {#environment-options}
 
 当 webpack 配置对象[导出为一个函数](/configuration/configuration-types/#exporting-a-function)时，可以向其传入一个 "环境对象（environment）"。
 
@@ -150,7 +150,7 @@ webpack --env.platform=web  # 设置 env.platform == "web"
 
 T> 参阅[环境变量](/guides/environment-variables/)指南获取更多使用方法。
 
-### 配置选项
+### 配置选项 {#configuration-options}
 
 参数 | 说明 | 输入类型 | 默认值
 ------------------------- | ------------------------------------------- | ---------- | ------------------
@@ -160,7 +160,7 @@ T> 参阅[环境变量](/guides/environment-variables/)指南获取更多使用�
 `--env`                   | 当配置文件是一个函数时，会将环境变量传给这个函数 |
 `--mode`                  | 用到的模式 | string | `'production'`
 
-### 输出配置
+### 输出配置 {#output-options}
 
 通过以下这些配置，你可以调整构建流程的某些[输出](/configuration/output/)参数。
 
@@ -178,7 +178,7 @@ T> 参阅[环境变量](/guides/environment-variables/)指南获取更多使用�
 `--build-delimiter` | 在构建输出之后，显示的自定义文本 | string | 默认字符串是 null。你可以提供一个 `=== Build done ===` 这样的字符串
 
 
-#### 示例用法
+#### 示例用法 {#example-usage}
 
 ```bash
 webpack index=./src/index.js index2=./src/index2.js --output-path='./dist' --output-filename='[name][hash].bundle.js'
@@ -207,7 +207,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 ```
 
 
-### Debug 配置
+### Debug 配置 {#debug-options}
 
 以下这些配置可以帮助你在 Webpack 编译过程中更好地 debug。
 
@@ -218,7 +218,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 `--progress` | 打印出编译进度的百分比值 | boolean    | `false`
 `--display-error-details` | 展示错误细节 | boolean | `false`
 
-### 模块配置
+### 模块配置 {#module-options}
 
 这些配置可以用于绑定 Webpack 允许的[模块](/configuration/module/)。
 
@@ -229,7 +229,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 `--module-bind-pre`  | 为 pre loader 绑定一个文件扩展 |
 
 
-### Watch 选项
+### Watch 选项 {#watch-options}
 
 这些配置可以用于[观察](/configuration/watch/)依赖文件的变化，一旦有变化，则可以重新执行构建流程。
 
@@ -241,7 +241,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 `--watch-stdin`, `--stdin` | 当 stdin 关闭时，退出进程
 
 
-### 性能优化配置
+### 性能优化配置 {#optimize-options}
 
 在生产环境的构建时，这些配置可以用于调整 webpack 的一些性能相关的配置。
 
@@ -252,7 +252,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 `--optimize-minimize`       | 压缩混淆 javascript，并且把 loader 设置为 minimizing | [TerserPlugin](/plugins/terser-webpack-plugin/)
 
 
-### Resolve 配置
+### Resolve 配置 {#resolve-options}
 
 这些配置可以用于设置 webpack [resolver](/configuration/resolve/) 时使用的别名（alias）和扩展名（extension）。
 
@@ -263,7 +263,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 `--resolve-loader-alias` | 最小化 JavaScript，并且将 loader 切换到最简 |
 
 
-### 统计数据配置
+### 统计数据配置 {#stats-options}
 
 以下选项用于配置 Webpack 在控制台输出的[统计数据](/configuration/stats/)，以及这些数据的样式。
 
@@ -293,7 +293,7 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 `--verbose`                      | 显示更多信息 | `boolean`
 
 
-### 高级配置
+### 高级配置 {#advanced-options}
 
 参数 | 说明 | 用法
 ----------------- | ---------------------------------------- | -----
@@ -311,14 +311,14 @@ webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --
 `--records-path`  | 记录文件的路径 |
 `--target`        | [目标](/configuration/target/)的执行环境 | `--target='node'`
 
-### 简写
+### 简写 {#shortcuts}
 
 简写 | 含义
 ---------|----------------------------
 -d       | `--debug --devtool cheap-module-eval-source-map --output-pathinfo`
 -p       | `--mode production`，查阅[构建生产环境](/guides/production/)
 
-### Profiling
+### Profiling {#profiling}
 
 `--profile` 选项捕获编译时每个步骤的时间信息，并且将这些信息包含在输出中。
 
@@ -369,7 +369,7 @@ webpack --progress --profile
 ⋮
 ```
 
-## 将 CLI 参数传递给 Node.js
+## 将 CLI 参数传递给 Node.js {#pass-cli-arguments-to-nodejs}
 
 将参数直接传递给 Node.js 进程，你可以使用 `--node-args` 选项。所有其他的标志和选项将由 webpack-cli 接收。
 

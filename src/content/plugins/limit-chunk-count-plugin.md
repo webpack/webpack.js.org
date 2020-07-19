@@ -18,11 +18,11 @@ new webpack.optimize.LimitChunkCountPlugin({
 ```
 
 
-## Options
+## Options {#options}
 
 The following options are supported:
 
-### `maxChunks`
+### `maxChunks` {#maxchunks}
 
 `number`
 
@@ -42,12 +42,12 @@ module.exports = {
 };
 ```
 
-### `minChunkSize`
+### `minChunkSize` {#minchunksize}
 
 Keeping chunk size above the specified limit is no longer a feature of this plugin. Use [MinChunkSizePlugin)[/plugins/min-chunk-size-plugin] instead.
 
 
-## Usage via CLI
+## Usage via CLI {#usage-via-cli}
 
 This plugin and it's options can also be invoked via the [CLI](/api/cli/):
 

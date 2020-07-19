@@ -20,7 +20,7 @@ contributors:
 `externals` 配置选项提供了「从输出的 bundle 中排除依赖」的方法。相反，所创建的 bundle 依赖于那些存在于用户环境(consumer's environment)中的依赖。此功能通常对 __library 开发人员__来说是最有用的，然而也会有各种各样的应用程序用到它。
 
 
-## `externals`
+## `externals` {#externals}
 
 `string` `[string]` `object` `function`  `RegExp`
 
@@ -67,7 +67,7 @@ $('.my-element').animate(/* ... */);
 可以接受以下语法……
 
 
-### 字符串
+### 字符串 {#string}
 
 请查看上面的例子。属性名称是 `jquery`，表示应该排除 `import $ from 'jquery'` 中的 `jquery` 模块。为了替换这个模块，`jQuery` 的值将被用来检索一个全局的 `jQuery` 变量。换句话说，当设置为一个字符串时，它将被视为`全局的`（定义在上面和下面）。
 
@@ -96,7 +96,7 @@ import fs from 'fs-extra';
 const fs = require('fs-extra');
 ```
 
-### 字符串数组
+### 字符串数组 {#string}
 
 ```javascript
 module.exports = {
@@ -109,7 +109,7 @@ module.exports = {
 
 `subtract: ['./math', 'subtract']` 转换为父子结构，其中 `./math` 是父模块，而 bundle 只引用 `subtract` 变量下的子集。该例子会编译成 `require('./math').subtract;`
 
-### 对象
+### 对象 {#object}
 
 W> 一个形如  `{ root, amd, commonjs, ... }` 的对象仅允许用于  [`libraryTarget: 'umd'`](/configuration/output/#outputlibrarytarget) 这样的配置.它不被允许 用于其它的 library targets 配置值.
 
@@ -143,7 +143,7 @@ module.exports = {
 此语法用于描述外部 library 所有可用的访问方式。这里 `lodash` 这个外部 library 可以在 AMD 和 CommonJS 模块系统中通过 `lodash` 访问，但在全局变量形式下用 `_` 访问。`subtract` 可以通过全局 `math` 对象下的属性 `subtract` 访问（例如 `window['math']['subtract']`）。
 
 
-### 函数
+### 函数 {#function}
 
 `function (context, request, callback)`
 
@@ -241,7 +241,7 @@ module.exports = {
 };
 ```
 
-### RegExp
+### RegExp {#regexp}
 
 匹配给定正则表达式的每个依赖，都将从输出 bundle 中排除。
 
@@ -256,7 +256,7 @@ module.exports = {
 
 这个示例中，所有名为 `jQuery` 的依赖（忽略大小写），或者 `$`，都会被外部化。
 
-### 混用语法
+### 混用语法 {#combining-syntaxes}
 
 有时你需要混用上面介绍的语法。这可以像以下这样操作：
 
@@ -296,7 +296,7 @@ W> [Default type](/configuration/externals/#externalstype) will be used if you s
 关于如何使用此 externals 配置的更多信息，请参考 [如何编写 library](/guides/author-libraries)。
 
 
-## `externalsType`
+## `externalsType` {#externalstype}
 
 `string = 'var'`
 

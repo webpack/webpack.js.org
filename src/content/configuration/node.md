@@ -16,7 +16,7 @@ contributors:
 此功能由 webpack 内部的 [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js) 插件提供。如果 target 是 "web"（默认）或 "webworker"，那么 [`NodeSourcePlugin`](https://github.com/webpack/webpack/blob/master/lib/node/NodeSourcePlugin.js) 插件也会被激活。
 
 
-## `node`
+## `node` {#node}
 
 `boolean = false` `object`
 
@@ -48,7 +48,7 @@ module.exports = {
 
 从 webpack 3.0.0 开始，`node` 选项可能被设置为 `false`，以完全关闭 `NodeStuffPlugin` 和 `NodeSourcePlugin` 插件。
 
-## `node.global`
+## `node.global` {#nodeglobal}
 
 `boolean = true`
 
@@ -57,7 +57,7 @@ Defaults to `false` for [targets](https://webpack.js.org/configuration/target/) 
 关于此对象的准确行为，请查看[源码](https://github.com/webpack/webpack/blob/master/buildin/global.js)。
 
 
-## `node.__filename`
+## `node.__filename` {#node__filename}
 
 `boolean` `string = mock`
 
@@ -70,7 +70,7 @@ Defaults to `false` for [targets](https://webpack.js.org/configuration/target/) 
 - `"mock"`: value 填充为 `"index.js"`.
 
 
-## `node.__dirname`
+## `node.__dirname` {#node__dirname}
 
 `boolean` `string = mock`
 

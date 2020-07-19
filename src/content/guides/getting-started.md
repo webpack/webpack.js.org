@@ -28,7 +28,7 @@ webpack 用于编译 JavaScript 模块。一旦完成 [安装](/guides/installat
 
 W> 从 webpack v5.0.0-beta.1 开始，需要运行的 Node.js 最低版本是 10.13.0 (LTS)
 
-## 基本安装
+## 基本安装 {#basic-setup}
 
 首先我们创建一个目录，初始化 npm，然后 [在本地安装 webpack](/guides/installation#local-installation)，接着安装 webpack-cli（此工具用于在命令行中运行 webpack）：
 
@@ -120,7 +120,7 @@ __package.json__
 
 让我们使用 webpack 来管理这些脚本。
 
-## 创建一个 bundle
+## 创建一个 bundle {#creating-a-bundle}
 
 首先，我们稍微调整下目录结构，创建分发代码(`/dist`)文件夹用于存放分发代码，源代码(`/src`)文件夹仍存放源代码。源代码是指用于书写和编辑的代码。分发代码是指在构建过程中，经过最小化和优化后产生的输出结果，最终将在浏览器中加载。调整后目录结构如下：
 
@@ -207,7 +207,7 @@ T> 输出可能会稍有不同，但是只要构建成功，那么你就可以�
 W> 在浏览器中打开 `index.html`，如果在压缩过后的 JavaScript 中出现语法错误，请设置 [`development 模式`](/configuration/mode/#mode-development)，并再次运行 `npx webpack`。这与最新版本 Node.js (v12.5+) 上运行 `npx webpack` 有关，和 [LTS 版本](https://nodejs.org/en/) 无关。
 
 
-## 模块
+## 模块 {#modules}
 
 [ES2015](https://babeljs.io/learn-es2015/) 中的 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 和 [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) 语句已经被标准化。虽然大多数浏览器还无法支持它们，但是 webpack 却能够提供开箱即用般的支持。
 
@@ -216,7 +216,7 @@ W> 在浏览器中打开 `index.html`，如果在压缩过后的 JavaScript 中�
 注意，webpack 不会更改代码中除 `import` 和 `export` 语句以外的部分。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你在 webpack [loader 系统](/concepts/loaders/) 中使用了一个像是 [Babel](https://babel.docschina.org/) 或 [Bublé](https://buble.surge.sh/guide/) 的 [transpiler(转译器)](/loaders/#transpiling)。
 
 
-## 使用一个配置文件
+## 使用一个配置文件 {#using-a-configuration}
 
 在 webpack v4 中，可以无须任何配置，然而大多数项目会需要很复杂的设置，这就是为什么 webpack 仍然要支持 [配置文件](/concepts/configuration)。这比在 terminal(终端) 中手动输入大量命令要高效的多，所以让我们创建一个配置文件：
 
@@ -266,7 +266,7 @@ T> 如果 `webpack.config.js` 存在，则 `webpack` 命令将默认选择使用
 比起 CLI 这种简单直接的使用方式，配置文件具有更多的灵活性。我们可以通过配置方式指定 loader 规则(loader rule)、plugin(插件)、resolve 选项，以及许多其他增强功能。更多详细信息请查看 [配置文档](/configuration)。
 
 
-## npm scripts
+## npm scripts {#npm-scripts}
 
 考虑到用 CLI 这种方式来运行本地的 webpack 副本并不是特别方便，我们可以设置一个快捷方式。调整 _package.json_ 文件，添加一个 [npm script](https://docs.npmjs.com/misc/scripts)：
 
@@ -315,7 +315,7 @@ You can also set it to 'none' to disable any default behavior. Learn more: https
 T> 通过在 `npm run build` 命令和你的参数之间添加两个中横线，可以将自定义参数传递给 webpack，例如：`npm run build -- --colors`。
 
 
-## 结论
+## 结论 {#conclusion}
 
 现在，你已经有了一个基础构建配置，你应该移至下一章节 [`资源管理`](/guides/asset-management) 指南，以了解如何通过 webpack 来管理资源，例如 images、fonts。此刻你的项目看起来应该如下：
 

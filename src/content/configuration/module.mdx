@@ -24,7 +24,7 @@ contributors:
 这些选项决定了如何处理项目中的[不同类型的模块](/concepts/modules)。
 
 
-## `module.noParse`
+## `module.noParse` {#modulenoparse}
 
 `RegExp` `[RegExp]` `function(resource)` `string` `[string]`
 
@@ -50,7 +50,7 @@ module.exports = {
 };
 ```
 
-## `module.unsafeCache`
+## `module.unsafeCache` {#moduleunsafecache}
 
 `boolean` `function (module)`
 
@@ -72,7 +72,7 @@ module.exports = {
 
 W> The default value is `true` in webpack 4.
 
-## `module.rules`
+## `module.rules` {#modulerules}
 
 `[Rule]`
 
@@ -80,14 +80,14 @@ W> The default value is `true` in webpack 4.
 这些规则能够对模块(module)应用 loader，或者修改解析器(parser)。
 
 
-## Rule
+## Rule {#rule}
 
 `object`
 
 每个规则可以分为三部分 - 条件(condition)，结果(result)和嵌套规则(nested rule)。
 
 
-### Rule 条件
+### Rule 条件 {#rule-conditions}
 
 条件有两种输入值：
 
@@ -107,7 +107,7 @@ W> 小心！resource 是文件的 _解析_ 路径，这意味着符号链接的�
 关闭符号链接解析（以便将资源解析为符号链接路径）。
 
 
-### Rule 结果
+### Rule 结果 {#rule-results}
 
 规则结果只在规则条件匹配时使用。
 
@@ -125,7 +125,7 @@ W> 小心！resource 是文件的 _解析_ 路径，这意味着符号链接的�
 [`parser`](#rule-parser) 属性会影响 parser 选项。
 
 
-## 嵌套的 Rule
+## 嵌套的 Rule {#nested-rules}
 
 可以使用属性 [`rules`](#rule-rules) 和 [`oneOf`](#rule-oneof) 指定嵌套规则。
 
@@ -138,7 +138,7 @@ W> 小心！resource 是文件的 _解析_ 路径，这意味着符号链接的�
 3. [`oneOf`](#ruleoneof)
 
 
-## `Rule.enforce`
+## `Rule.enforce` {#ruleenforce}
 
 `string`
 
@@ -174,17 +174,17 @@ import { c } from  '!!./file3.js';
 Inline loaders and `!` prefixes should not be used as they are non-standard. They may be use by loader generated code.
 
 
-## `Rule.exclude`
+## `Rule.exclude` {#ruleexclude}
 
 排除所有符合条件的模块。如果你提供了 `Rule.exclude` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.exclude`](#condition)。
 
 
-## `Rule.include`
+## `Rule.include` {#ruleinclude}
 
 引入符合以下任何条件的模块。如果你提供了 `Rule.include` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.include`](#condition)。
 
 
-## `Rule.issuer`
+## `Rule.issuer` {#ruleissuer}
 
 一个[`条件`](#condition)，用来与被发出的 request 对应的模块项匹配。在以下示例中，`a.js` request 的`发出者(issuer)`
 是 index.js 文件的路径。
@@ -198,19 +198,19 @@ import A from './a.js';
 这个选项可以用来将 loader 应用到一个特定模块或一组模块的依赖中。
 
 
-## `Rule.loader`
+## `Rule.loader` {#ruleloader}
 
 `Rule.loader` 是 `Rule.use: [ { loader } ]` 的简写。详细请查看 [`Rule.use`](#rule-use) 和 [`UseEntry.loader`](#useentry)。
 
 
-## `Rule.loaders`
+## `Rule.loaders` {#ruleloaders}
 
 W>  由于需要支持 `Rule.use`，此选项 __已废弃__。
 
 `Rule.loaders` 是 `Rule.use` 的别名。详细请查看 [`Rule.use`](#rule-use)。
 
 
-## `Rule.oneOf`
+## `Rule.oneOf` {#ruleoneof}
 
 [`规则`](#rule)数组，当规则匹配时，只使用第一个匹配规则。
 
@@ -242,7 +242,7 @@ module.exports = {
 T> 详情请参阅 [`嵌套规则`](#nested-rules)。
 
 
-## `Rule.options` / `Rule.query`
+## `Rule.options` / `Rule.query` {#ruleoptions--rulequery}
 
 `Rule.options` 和 `Rule.query` 是 `Rule.use: [ { options } ]` 的简写。详细请查看 [`Rule.use`](#rule-use) 
 和 [`UseEntry.options`](#useentry)。
@@ -250,7 +250,7 @@ T> 详情请参阅 [`嵌套规则`](#nested-rules)。
 W> 由于需要支持 `Rule.options` 和 `UseEntry.options`，`Rule.use`，`Rule.query` 已废弃。
 
 
-## `Rule.parser`
+## `Rule.parser` {#ruleparser}
 
 解析选项对象。所有应用的解析选项都将合并。
 
@@ -297,7 +297,7 @@ If `Rule.type` is an `asset` or `asset/inline` then `Rule.generator` option may 
 
 See [Asset Modules guide](/guides/asset-modules/) for additional information and use cases.
 
-## `Rule.parser.dataUrlCondition`
+## `Rule.parser.dataUrlCondition` {#ruleparserdataurlcondition}
 
 `object = { maxSize number = 8096 }` `function (source, { filename, module }) => boolean`
 
@@ -348,7 +348,7 @@ module.exports = {
 }
 ```
 
-## `Rule.generator.dataUrl`
+## `Rule.generator.dataUrl` {#rulegeneratordataurl}
 
 `object = { encoding string = 'base64' | false, mimetype string = undefined | false }` `function (content, { filename, module }) => string`
 
@@ -400,7 +400,7 @@ module.exports = {
 }
 ```
 
-## `Rule.generator.filename`
+## `Rule.generator.filename` {#rulegeneratorfilename}
 
 对某些特定的规则而言与 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 相同. 覆盖了 `output.assetModuleFilename` 选项并且仅与 `asset` 和 `asset/resource` 模块类型一同起作用。
 
@@ -430,12 +430,12 @@ module.exports = {
 }
 ```
 
-## `Rule.resource`
+## `Rule.resource` {#ruleresource}
 
 [`条件`](#条件)会匹配 resource。在 [`Rule` 条件](#rule-conditions) 中查阅详情。
 
 
-## `Rule.resourceQuery`
+## `Rule.resourceQuery` {#ruleresourcequery}
 
 A [`Condition`](#condition) matched with the resource query. This option is used to test against the query section of a request string (i.e. from the question mark onwards). If you were to `import Foo from './foo.css?inline'`, the following condition would match:
 
@@ -456,7 +456,7 @@ module.exports = {
 };
 ```
 
-## `Rule.parser.parse`
+## `Rule.parser.parse` {#ruleparserparse}
 
 `function(input) => string | object`
 
@@ -484,26 +484,26 @@ module.exports = {
 };
 ```
 
-## `Rule.rules`
+## `Rule.rules` {#rulerules}
 
 [`规则`](#rule)数组，当规则匹配时使用。
 
 T> 详情参阅 [`嵌套规则`](#nested-rules) 。
 
 
-## `Rule.sideEffects`
+## `Rule.sideEffects` {#rulesideeffects}
 
 `bool`
 
 表明模块的哪一部份包含副作用。详情参阅 [Tree Shaking](/guides/tree-shaking/#mark-the-file-as-side-effect-free)。
 
 
-## `Rule.test`
+## `Rule.test` {#ruletest}
 
 引入所有通过断言测试的模块。如果你提供了一个 `Rule.test` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.test`](#condition)。
 
 
-## `Rule.type`
+## `Rule.type` {#ruletype}
 
 `string`
 
@@ -533,7 +533,7 @@ module.exports = {
 
 > 关于 `asset*` 类型详参 [资源模块指南](/guides/asset-modules/) 。
 
-## `Rule.use`
+## `Rule.use` {#ruleuse}
 
 `[UseEntry]` `function(info)`
 
@@ -618,7 +618,7 @@ module.exports = {
 
 参参 [UseEntry](#useentry)。
 
-## `Rule.resolve`
+## `Rule.resolve` {#ruleresolve}
 
 W> `Rule.resolve` 从 webpack 4.36.1 起可用
 
@@ -688,7 +688,7 @@ module.exports = {
 当用该配置创建一个包，`console.log(footer)` 会输出 'overridden footer'。
 
 
-## `条件`
+## `条件` {#condition}
 
 条件可以是这些之一：
 
@@ -726,7 +726,7 @@ module.exports = {
 ```
 
 
-## `UseEntry`
+## `UseEntry` {#useentry}
 
 `object` `function(info)`
 
@@ -802,7 +802,7 @@ module.exports = {
 ```
 
 
-## 模块上下文(Module Contexts)
+## 模块上下文(Module Contexts) {#module-contexts}
 
 > 避免使用这些选项，因为它们 __已废弃__，并将很快删除。
 

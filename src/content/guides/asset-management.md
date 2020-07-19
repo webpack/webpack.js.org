@@ -18,7 +18,7 @@ contributors:
 
 webpack 最出色的功能之一就是，除了引入 JavaScript，还可以通过 loader _引入任何其他类型的文件_。也就是说，以上列出的那些 JavaScript 的优点（例如显式依赖），同样可以用来构建 web 站点或 web 应用程序中的所有非 JavaScript 内容。让我们从 CSS 开始起步，或许你可能已经熟悉了下面这些设置。
 
-## 设置
+## 设置 {#setup}
 
 在开始之前，让我们对项目做一个小的修改：
 
@@ -54,7 +54,7 @@ __webpack.config.js__
 ```
 
 
-## 加载 CSS
+## 加载 CSS {#loading-css}
 
 为了在 JavaScript 模块中 `import` 一个 CSS 文件，你需要安装 [style-loader](/loaders/style-loader) 和 [css-loader](/loaders/css-loader)，并在 [`module` 配置](/configuration/module) 中添加这些 loader：
 
@@ -152,7 +152,7 @@ Entrypoint main = bundle.js
 注意，在多数情况下，你也可以进行 [压缩 CSS](/plugins/mini-css-extract-plugin/#minimizing-for-production)，以便在生产环境中节省加载时间。最重要的是，现有的 loader 可以支持任何你可以想到的 CSS 风格 - [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader) 和 [less](/loaders/less-loader) 等。
 
 
-## 加载 images 图像
+## 加载 images 图像 {#loading-images}
 
 假想，现在我们正在下载 CSS，但是像 background 和 icon 这样的图像，要如何处理呢？使用 [file-loader](/loaders/file-loader)，我们可以轻松地将这些内容混合到 CSS 中：
 
@@ -264,7 +264,7 @@ Entrypoint main = bundle.js
 T> 合乎逻辑下一步是，压缩和优化你的图像。查看 [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) 和 [url-loader](/loaders/url-loader)，以了解更多关于如何增强加载处理图像功能。
 
 
-## 加载 fonts 字体
+## 加载 fonts 字体 {#loading-fonts}
 
 那么，像字体这样的其他资源如何处理呢？file-loader 和 url-loader 可以接收并加载任何文件，然后将其输出到构建目录。这就是说，我们可以将它们用于任何类型的文件，也包括字体。让我们更新 `webpack.config.js` 来处理字体文件：
 
@@ -364,7 +364,7 @@ Entrypoint main = bundle.js
 重新打开 `index.html` 看看我们的 `Hello webpack` 文本显示是否换上了新的字体。如果一切顺利，你应该能看到变化。
 
 
-## 加载数据
+## 加载数据 {#loading-data}
 
 此外，可以加载的有用资源还有数据，如 JSON 文件，CSV、TSV 和 XML。类似于 NodeJS，JSON 支持实际上是内置的，也就是说 `import Data from './data.json'` 默认将正常运行。要导入 CSV、TSV 和 XML，你可以使用 [csv-loader](https://github.com/theplatapi/csv-loader) 和 [xml-loader](https://github.com/gisikw/xml-loader)。让我们处理加载这三类文件：
 
@@ -500,7 +500,7 @@ import { foo } from './data.json';
 ```
 
 
-## 全局资源
+## 全局资源 {#global-assets}
 
 上述所有内容中最出色之处在于，以这种方式加载资源，你可以以更直观的方式将模块和资源组合在一起。无需依赖于含有全部资源的 `/assets` 目录，而是将资源与代码组合在一起使用。例如，类似这样的结构会非常有用：
 
@@ -519,7 +519,7 @@ import { foo } from './data.json';
 但是，假如你只能被局限在旧有开发方式，或者你有一些在多个组件（视图、模板、模块等）之间共享的资源。你仍然可以将这些资源存储在一个基本目录(base directory)中，甚至配合使用 [alias](/configuration/resolve/#resolvealias) 来使它们更方便 `import 导入`。
 
 
-## 回退处理
+## 回退处理 {#wrapping-up}
 
 对于下篇指南，我们无需使用本指南中所有用到的资源，因此我们会进行一些清理工作，以便为下篇指南 [管理输出](/guides/output-management/) 做好准备：
 
@@ -621,11 +621,11 @@ __src/index.js__
 ```
 
 
-## 下篇指南
+## 下篇指南 {#next-guide}
 
 我们继续移步到 [管理输出](/guides/output-management/)
 
 
-## 延伸阅读
+## 延伸阅读 {#further-reading}
 
 - [加载字体](https://survivejs.com/webpack/loading/fonts/) on SurviveJS

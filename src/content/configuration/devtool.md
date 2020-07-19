@@ -21,7 +21,7 @@ related:
 使用 [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin) 进行更细粒度的配置。查看 [`source-map-loader`](/loaders/source-map-loader) 来处理已有的 source map。
 
 
-## `devtool`
+## `devtool` {#devtool}
 
 `string` `false`
 
@@ -69,7 +69,7 @@ W> Chrome 中的 source map 有一些问题。[我们需要你的帮助！](http
 T> 查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) 自定义生成的 source map 的文件名。
 
 
-### 品质说明(quality)
+### 品质说明(quality) {#qualities}
 
 `打包后的代码` - 将所有生成的代码视为一大块代码。你看不到相互分离的模块。
 
@@ -84,7 +84,7 @@ T> 查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfil
 `（仅限行）` - source map 被简化为每行一个映射。这通常意味着每个语句只有一个映射（假设你使用这种方式）。这会妨碍你在语句级别上调试执行，也会妨碍你在每行的一些列上设置断点。与压缩后的代码组合后，映射关系是不可能实现的，因为压缩工具通常只会输出一行。
 
 
-### 对于开发环境
+### 对于开发环境 {#development}
 
 以下选项非常适合开发环境：
 
@@ -96,7 +96,7 @@ T> 查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfil
 
 `eval-cheap-module-source-map` - 类似 `eval-cheap-source-map`，并且，在这种情况下，源自 loader 的 source map 会得到更好的处理结果。然而，loader source map 会被简化为每行一个映射(mapping)。
 
-### 特定场景
+### 特定场景 {#special-cases}
 
 以下选项对于开发环境和生产环境并不理想。他们是一些特定场景下需要的，例如，针对一些第三方工具。
 
@@ -111,7 +111,7 @@ T> 查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfil
 `inline-cheap-module-source-map` - 类似 `cheap-module-source-map`，但是 source mapp 转换为 DataUrl 添加到 bundle 中。
 
 
-### 对于生产环境
+### 对于生产环境 {#production}
 
 这些选项通常用于生产环境中：
 

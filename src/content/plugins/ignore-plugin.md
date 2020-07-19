@@ -11,7 +11,7 @@ contributors:
 
 IgnorePlugin prevents generation of modules for `import` or `require` calls matching the regular expressions or filter functions:
 
-## Using regular expressions
+## Using regular expressions {#using-regular-expressions}
 
 - `resourceRegExp`: A RegExp to test the resource against.
 - `contextRegExp`: (optional) A RegExp to test the context (directory) against.
@@ -22,7 +22,7 @@ new webpack.IgnorePlugin({resourceRegExp, contextRegExp});
 new webpack.IgnorePlugin(resourceRegExp, [contextRegExp]);
 ```
 
-## Using filter functions
+## Using filter functions {#using-filter-functions}
 
 - `checkResource (resource, context)` A Filter function that receives `resource` and `context` as arguments, must return boolean.
 - `checkContext (context)` was __removed in webpack 5__ as `checkResource` already gets context.
@@ -36,7 +36,7 @@ new webpack.IgnorePlugin({
 });
 ```
 
-## Example of ignoring Moment Locales
+## Example of ignoring Moment Locales {#example-of-ignoring-moment-locales}
 
 As of [moment](https://momentjs.com/) 2.18, all locales are bundled together with the core library (see [this GitHub issue](https://github.com/moment/moment/issues/2373)).
 

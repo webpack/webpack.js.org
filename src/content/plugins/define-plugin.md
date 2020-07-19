@@ -18,7 +18,7 @@ new webpack.DefinePlugin({
 ```
 
 
-## Usage
+## Usage {#usage}
 
 传递给 `DefinePlugin` 的每个键都是一个标识符或多个以 `.` 连接的标识符。
 
@@ -80,7 +80,7 @@ console.log('Production log');
 ```
 
 
-## Feature Flags
+## Feature Flags {#feature-flags}
 
 使用 [feature flags](https://en.wikipedia.org/wiki/Feature_toggle) 在生产/开发构建中可以启用/禁用项目的不同特性。
 
@@ -92,7 +92,7 @@ new webpack.DefinePlugin({
 ```
 
 
-## Service URL
+## Service URL {#service-urls}
 
 在生产或开发构建中使用不同的服务 URL：
 

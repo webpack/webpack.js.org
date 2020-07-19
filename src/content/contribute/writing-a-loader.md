@@ -13,7 +13,7 @@ contributors:
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
 
 
-## Setup
+## Setup {#setup}
 
 Before we dig into the different types of loaders, their usage, and examples, let's take a look at the three ways you can develop and test a loader locally.
 
@@ -66,7 +66,7 @@ Last but not least, if you've already created a separate repository and package 
 T> You can use [`webpack-defaults` package](https://github.com/webpack-contrib/webpack-defaults) to generate boilerplate code necessary to start writing your loader.
 
 
-## Simple Usage
+## Simple Usage {#simple-usage}
 
 When a single loader is applied to the resource, the loader is called with only one parameter -- a string containing the content of the resource file.
 
@@ -75,7 +75,7 @@ Synchronous loaders can simply `return` a single value representing the transfor
 The loader is expected to give back one or two values. The first value is a resulting JavaScript code as string or buffer. The second optional value is a SourceMap as JavaScript object.
 
 
-## Complex Usage
+## Complex Usage {#complex-usage}
 
 When multiple loaders are chained, it is important to remember that they are executed in reverse order -- either right to left or bottom to top depending on array format.
 
@@ -105,7 +105,7 @@ module.exports = {
 ```
 
 
-## Guidelines
+## Guidelines {#guidelines}
 
 The following guidelines should be followed when writing a loader. They are ordered in terms of importance and some only apply in certain scenarios, read the detailed sections that follow for more information.
 
@@ -120,11 +120,11 @@ The following guidelines should be followed when writing a loader. They are orde
 - Avoid __absolute paths__.
 - Use __peer dependencies__.
 
-### Simple
+### Simple {#simple}
 
 Loaders should do only a single task. This not only makes the job of maintaining each loader easier, but also allows them to be chained for usage in more scenarios.
 
-### Chaining
+### Chaining {#chaining}
 
 Take advantage of the fact that loaders can be chained together. Instead of writing a single loader that tackles five tasks, write five simpler loaders that divide this effort. Isolating them not only keeps each individual loader simple, but may allow for them to be used for something you hadn't thought of originally.
 
@@ -136,15 +136,15 @@ Take the case of rendering a template file with data specified via loader option
 
 T> The fact that loaders can be chained also means they don't necessarily have to output JavaScript. As long as the next loader in the chain can handle its output, the loader can return any type of module.
 
-### Modular
+### Modular {#modular}
 
 Keep the output modular. Loader generated modules should respect the same design principles as normal modules.
 
-### Stateless
+### Stateless {#stateless}
 
 Make sure the loader does not retain state between module transformations. Each run should always be independent of other compiled modules as well as previous compilations of the same module.
 
-### Loader Utilities
+### Loader Utilities {#loader-utilities}
 
 Take advantage of the [`loader-utils`](https://github.com/webpack/loader-utils) package. It provides a variety of useful tools but one of the most common is retrieving the options passed to the loader. Along with `loader-utils`, the [`schema-utils`](https://github.com/webpack-contrib/schema-utils) package should be used for consistent JSON Schema based validation of loader options. Here's a brief example that utilizes both:
 
@@ -174,7 +174,7 @@ export default function(source) {
 }
 ```
 
-### Loader Dependencies
+### Loader Dependencies {#loader-dependencies}
 
 If a loader uses external resources (i.e. by reading from filesystem), they __must__ indicate it. This information is used to invalidate cacheable loaders and recompile in watch mode. Here's a brief example of how to accomplish this using the `addDependency` method:
 
@@ -196,7 +196,7 @@ export default function(source) {
 }
 ```
 
-### Module Dependencies
+### Module Dependencies {#module-dependencies}
 
 Depending on the type of module, there may be a different schema used to specify dependencies. In CSS for example, the `@import` and `url(...)` statements are used. These dependencies should be resolved by the module system.
 
@@ -211,7 +211,7 @@ In the case of the `less-loader`, it cannot transform each `@import` to a `requi
 
 T> If the language only accepts relative urls (e.g. `url(file)` always refers to `./file`), you can use the `~` convention to specify references to installed modules (e.g. those in `node_modules`). So, in the case of `url`, that would look something like `url('~some-library/image.jpg')`.
 
-### Common Code
+### Common Code {#common-code}
 
 Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and generate a `require` to that shared module:
 
@@ -242,11 +242,11 @@ export default function loader(source) {
 }
 ```
 
-### Absolute Paths
+### Absolute Paths {#absolute-paths}
 
 Don't insert absolute paths into the module code as they break hashing when the root for the project is moved. There's a [`stringifyRequest`](https://github.com/webpack/loader-utils#stringifyrequest) method in `loader-utils` which can be used to convert an absolute path to a relative one.
 
-### Peer Dependencies
+### Peer Dependencies {#peer-dependencies}
 
 If the loader you're working on is a simple wrapper around another package, then you should include the package as a `peerDependency`. This approach allows the application's developer to specify the exact version in the `package.json` if desired.
 
@@ -261,7 +261,7 @@ For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpa
 ```
 
 
-## Testing
+## Testing {#testing}
 
 So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a simple unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest](https://jestjs.io/) framework to do this. We'll also install `babel-jest` and some presets that will allow us to use the `import` / `export` and `async` / `await`. Let's start by installing and saving these as a `devDependencies`:
 

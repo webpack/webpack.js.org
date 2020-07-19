@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "textlint-rule-heading": true
+  },
+  "plugins": {
+    "@textlint/markdown": {
+      "extensions": [".mdx"]
+    }
+  }
+}

@@ -13,7 +13,7 @@ contributors:
 
 Plugins expose the full potential of the webpack engine to third-party developers. Using staged build callbacks, developers can introduce their own behaviors into the webpack build process. Building plugins is a bit more advanced than building loaders, because you'll need to understand some of the webpack low-level internals to hook into them. Be prepared to read some source code!
 
-## Creating a Plugin
+## Creating a Plugin {#creating-a-plugin}
 
 A plugin for webpack consists of:
 
@@ -45,7 +45,7 @@ class MyExampleWebpackPlugin {
 }
 ```
 
-## Basic plugin architecture
+## Basic plugin architecture {#basic-plugin-architecture}
 
 Plugins are instantiated objects with an `apply` method on their prototype. This `apply` method is called once by the webpack compiler while installing the plugin. The `apply` method is given a reference to the underlying webpack compiler, which grants access to compiler callbacks. A simple plugin is structured as follows:
 
@@ -104,7 +104,7 @@ export default class HelloWorldPlugin {
 
 W> [`schema-utils`](https://github.com/webpack/schema-utils) API has changed in recent versions, although webpack still uses the `v1.0.0` version and we ask you to do the same until further notice.
 
-## Compiler and Compilation
+## Compiler and Compilation {#compiler-and-compilation}
 
 Among the two most important resources while developing plugins are the [`compiler`](/api/node/#compiler-instance) and [`compilation`](/api/compilation-hooks/) objects. Understanding their roles is an important first step in extending the webpack engine.
 
@@ -126,11 +126,11 @@ module.exports = HelloCompilationPlugin;
 
 The list of hooks available on the `compiler`, `compilation`, and other important objects, see the [plugins API](/api/plugins/) docs.
 
-## Async event hooks
+## Async event hooks {#async-event-hooks}
 
 Some plugin hooks are asynchronous. To tap into them, we can use `tap` method which will behave in synchronous manner or use one of `tapAsync` method or `tapPromise` method which are asynchronous methods.
 
-### tapAsync
+### tapAsync {#tapasync}
 
 When we use `tapAsync` method to tap into plugins, we need to call the callback function which is supplied as the last argument to our function.
 
@@ -150,7 +150,7 @@ class HelloAsyncPlugin {
 module.exports = HelloAsyncPlugin;
 ```
 
-#### tapPromise
+#### tapPromise {#tappromise}
 
 When we use `tapPromise` method to tap into plugins, we need to return a promise which resolves when our asynchronous task is completed.
 
@@ -172,7 +172,7 @@ class HelloAsyncPlugin {
 module.exports = HelloAsyncPlugin;
 ```
 
-## Example
+## Example {#example}
 
 Once we can latch onto the webpack compiler and each individual compilations, the possibilities become endless for what we can do with the engine itself. We can reformat existing files, create derivative files, or fabricate entirely new assets.
 
@@ -210,7 +210,7 @@ class FileListPlugin {
 module.exports = FileListPlugin;
 ```
 
-## Different Plugin Shapes
+## Different Plugin Shapes {#different-plugin-shapes}
 
 A plugin can be classified into types based on the event hooks it taps into. Every event hook is pre-defined as synchronous or asynchronous or waterfall or parallel hook and hook is called internally using call/callAsync method. The list of hooks that are supported or can be tapped into are generally specified in `this.hooks` property.
 
@@ -226,7 +226,7 @@ It represents that the only hook supported is `shouldEmit` which is a hook of `S
 
 Various types of hooks supported are :
 
-### Synchronous Hooks
+### Synchronous Hooks {#synchronous-hooks}
 
 - __SyncHook__
 
@@ -251,7 +251,7 @@ Various types of hooks supported are :
   Here each of the plugins are called one after the other with the arguments from the return value of the previous plugin. The plugin must take the order of its execution into account.
   It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence at least 1 param must be supplied for waterfall hooks. This pattern is used in the Tapable instances which are related to the webpack templates like `ModuleTemplate`, `ChunkTemplate` etc.
 
-### Asynchronous Hooks
+### Asynchronous Hooks {#asynchronous-hooks}
 
 - __Async Series Hook__
 
@@ -283,6 +283,6 @@ Various types of hooks supported are :
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
     - Called using `callAsync( ... params)` method
 
-### Configuration defaults
+### Configuration defaults {#configuration-defaults}
 
 webpack applies configuration defaults after plugins defaults are applied. This allows plugins to feature their own defaults and provides a way to create configuration preset plugins.

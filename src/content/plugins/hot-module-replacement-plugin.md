@@ -16,7 +16,7 @@ related:
 W> HMR **绝对不能**被用在生产环境。
 
 
-## 基本使用
+## 基本使用 {#basic-usage}
 
 启用 HMR 很容易，且在大多数情况下不需要任何配置。
 
@@ -27,7 +27,7 @@ new webpack.HotModuleReplacementPlugin({
 ```
 
 
-## 配置选项
+## 配置选项 {#options}
 
 可接收以下配置选项：
 

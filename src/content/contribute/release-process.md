@@ -10,12 +10,12 @@ contributors:
 The release process for deploying webpack is actually quite painless. Read through the following steps, so you have a clear understanding of how it's done.
 
 
-## Pull Requests
+## Pull Requests {#pull-requests}
 
 When merging pull requests into the `master` branch, select the _Create Merge Commit_ option.
 
 
-## Releasing
+## Releasing {#releasing}
 
 ```bash
 npm version patch && git push --follow-tags && npm publish

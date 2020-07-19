@@ -12,7 +12,7 @@ new webpack.PrefetchPlugin([context], request);
 ```
 
 
-## Options
+## Options {#options}
 
 - `context`: An absolute path to a directory
 - `request`: A request string for a normal module

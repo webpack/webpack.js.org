@@ -24,7 +24,7 @@ related:
 W> 寻求帮助：这个页面还在更新中，如果你发现本页面内有描述不准确或者不完整，请在 [webpack 的文档仓库](https://github.com/webpack/webpack.js.org)中创建 issue 或者 pull request
 
 
-## `amd`
+## `amd` {#amd}
 
 `object` `boolean: false`
 
@@ -50,7 +50,7 @@ module.exports = {
 
 
 
-## `bail`
+## `bail` {#bail}
 
 `boolean = false`
 
@@ -68,7 +68,7 @@ module.exports = {
 这将迫使 webpack 退出其打包过程。
 
 
-## `cache`
+## `cache` {#cache}
 
 `boolean` `object`
 
@@ -84,7 +84,7 @@ module.exports = {
 ```
 
 
-### `cache.type`
+### `cache.type` {#cachetype}
 
 `string: 'memory' | 'filesystem'`
 
@@ -103,7 +103,7 @@ module.exports = {
 
 当将 `cache.type` 设置成 `filesystem` 会开放更多的选荐可配置。
 
-### `cache.cacheDirectory`
+### `cache.cacheDirectory` {#cachecachedirectory}
 
 `string`
 
@@ -127,7 +127,7 @@ module.exports = {
 
 W> 最终的缓存目标是 `cache.cacheDirectory` + `cache.name` 的混合.
 
-### `cache.cacheLocation`
+### `cache.cacheLocation` {#cachecachelocation}
 
 `string`
 
@@ -147,7 +147,7 @@ module.exports = {
 };
 ```
 
-### `cache.buildDependencies`
+### `cache.buildDependencies` {#cachebuilddependencies}
 
 `object`
 
@@ -169,13 +169,13 @@ module.exports = {
 };
 ```
 
-### `cache.managedPaths`
+### `cache.managedPaths` {#cachemanagedpaths}
 
 `[string] = ['./node_modules']`
 
 `cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
 
-### `cache.hashAlgorithm`
+### `cache.hashAlgorithm` {#cachehashalgorithm}
 
 `string`
 
@@ -195,7 +195,7 @@ module.exports = {
 };
 ```
 
-### `cache.name`
+### `cache.name` {#cachename}
 
 `string`
 
@@ -215,7 +215,7 @@ module.exports = {
 };
 ```
 
-### `cache.store`
+### `cache.store` {#cachestore}
 
 `string = 'pack': 'pack'`
 
@@ -239,7 +239,7 @@ module.exports = {
 };
 ```
 
-### `cache.version`
+### `cache.version` {#cacheversion}
 
 `string = ''`
 
@@ -261,7 +261,7 @@ module.exports = {
 
 W> 在具有不同选项的调用之间不要共享缓存。
 
-### `cache.idleTimeout`
+### `cache.idleTimeout` {#cacheidletimeout}
 
 `number = 10000`
 
@@ -280,7 +280,7 @@ module.exports = {
 
 W> `cache.idleTimeout` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 或 `'idle'` 才可配置。
 
-### `cache.idleTimeoutForInitialStore`
+### `cache.idleTimeoutForInitialStore` {#cacheidletimeoutforinitialstore}
 
 `number = 0`
 
@@ -299,7 +299,7 @@ module.exports = {
 
 W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 或 `'idle'` 才可配置。
 
-## `loader`
+## `loader` {#loader}
 
 `object`
 
@@ -308,7 +308,7 @@ W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置
 ?> 添加一个例子...
 
 
-## `parallelism`
+## `parallelism` {#parallelism}
 
 `number = 100`
 
@@ -316,7 +316,7 @@ W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置
 
 
 
-## `profile`
+## `profile` {#profile}
 
 `boolean`
 
@@ -327,7 +327,7 @@ T> 使用 [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) 可�
 T> 与 `parallelism: 1` 混用以达到更好的结果。
 
 
-## `recordsPath`
+## `recordsPath` {#recordspath}
 
 `string`
 
@@ -351,14 +351,14 @@ T> 注意，虽然这个文件是由编译器(compiler)生成的，但你可能�
 W> 设置 `recordsPath` 本质上会把 `recordsInputPath` 和 `recordsOutputPath` 都设置成相同的路径。通常来讲这也是符合逻辑的，除非你决定改变记录文件的名称。可以查看下面的实例：
 
 
-## `recordsInputPath`
+## `recordsInputPath` {#recordsinputpath}
 
 `string`
 
 指定读取最后一条记录的文件的名称。这可以用来重命名一个记录文件，可以查看下面的实例：
 
 
-## `recordsOutputPath`
+## `recordsOutputPath` {#recordsoutputpath}
 
 `string`
 
@@ -377,7 +377,7 @@ module.exports = {
 ```
 
 
-## `name`
+## `name` {#name}
 
 `string`
 
@@ -392,13 +392,13 @@ module.exports = {
 };
 ```
 
-### infrastructureLogging
+### infrastructureLogging {#infrastructurelogging}
 
 用于基础设施水平的日志选项。
 
 `object = {}`
 
-#### infrastructureLogging.level
+#### infrastructureLogging.level {#infrastructurelogginglevel}
 
 `string`
 
@@ -424,7 +424,7 @@ module.exports = {
 };
 ```
 
-#### infrastructureLogging.debug
+#### infrastructureLogging.debug {#infrastructureloggingdebug}
 
 `string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 

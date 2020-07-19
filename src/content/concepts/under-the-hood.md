@@ -13,7 +13,7 @@ contributors:
 
 但是，在输入和输出之间，还包括有 [模块](/concepts/modules/), [入口起点](/concepts/entry-points/), chunk, chunk 组和许多其他中间部分。
 
-## 主要部分
+## 主要部分 {#the-main-parts}
 
 项目中使用的每个文件都是一个 [模块](/concepts/modules/)
 
@@ -64,7 +64,7 @@ module.exports = {
 
 > 一个 chunk 组中可能有多个 chunk。例如，[SplitChunksPlugin](/plugins/split-chunks-plugin/) 会将一个 chunk 拆分为一个或多个 chunk。
 
-## chunk
+## chunk {#chunks}
 
 chunk 有两种形式：
 
@@ -120,7 +120,7 @@ __Output:__
 - `/dist/main.js` - 一个 `initial` chunk
 - `/dist/app.js` - `non-initial` chunk
 
-## output(输出)
+## output(输出) {#output}
 
 输出文件的名称会受配置中的两个字段的影响：
 

@@ -13,7 +13,7 @@ contributors:
 正如我们在 [起步](/guides/getting-started/#using-a-configuration) 中提到的，在 webpack 配置中有多种方式定义 `entry` 属性。除了解释为什么它可能非常有用，我们还将向你展示__如何去__配置 `entry` 属性。
 
 
-## 单个入口（简写）语法
+## 单个入口（简写）语法 {#single-entry-shorthand-syntax}
 
 用法：`entry: string | [string]`
 
@@ -42,7 +42,7 @@ T> __当你向 `entry` 传入一个数组时会发生什么？__向 `entry` 属�
 当你正在寻找为「只有一个入口起点的应用程序或工具（即 library）」快速设置 webpack 配置的时候，这会是个很不错的选择。然而，使用此语法在扩展配置时有失灵活性。
 
 
-## 对象语法
+## 对象语法 {#object-syntax}
 
 用法：`entry: { <entryChunkName> string | [string] }`
 
@@ -62,11 +62,11 @@ module.exports = {
 T> __“webpack 配置的可扩展”__是指，这些配置可以重复使用，并且可以与其他配置组合使用。这是一种流行的技术，用于将关注点从环境(environment)、构建目标(build target)、运行时(runtime)中分离。然后使用专门的工具（如 [webpack-merge](https://github.com/survivejs/webpack-merge)）将它们合并起来。
 
 
-## 常见场景
+## 常见场景 {#scenarios}
 
 以下列出一些入口配置和它们的实际用例：
 
-### 分离 app(应用程序) 和 vendor(第三方库) 入口
+### 分离 app(应用程序) 和 vendor(第三方库) 入口 {#separate-app-and-vendor-entries}
 
 __webpack.config.js__
 
@@ -105,7 +105,7 @@ __为什么？__这样你就可以在 `vendor.js` 中存入未做修改的必要
 
 T> 在 webpack < 4 的版本中，通常将 vendor 作为一个单独的入口起点添加到 entry 选项中，以将其编译为一个单独的文件（与 `CommonsChunkPlugin` 结合使用）。<br><br>而在 webpack 4 中不鼓励这样做。而是使用 [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) 选项，将 vendor 和 app(应用程序) 模块分开，并为其创建一个单独的文件。__不要__ 为 vendor 或其他不是执行起点创建 entry。
 
-### 多页面应用程序
+### 多页面应用程序 {#multi-page-application}
 
 __webpack.config.js__
 

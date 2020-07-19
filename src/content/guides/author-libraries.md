@@ -17,7 +17,7 @@ contributors:
 除了打包应用程序，webpack 还可以用于打包 JavaScript library。以下指南适用于希望简化打包策略的 library 作者。
 
 
-## 创建一个 library
+## 创建一个 library {#authoring-a-library}
 
 假设你正在编写一个名为 `webpack-numbers` 的小的 library，可以将数字 1 到 5 转换为文本表示，反之亦然，例如将 2 转换为 'two'。
 
@@ -143,7 +143,7 @@ consumer(使用者) 还可以通过一个 script 标签来加载和使用此 lib
 完整的 library 配置和代码，请查看 [webpack-library-example](https://github.com/kalcifer/webpack-library-example)。
 
 
-## 基本配置
+## 基本配置 {#base-configuration}
 
 现在，让我们以某种方式打包这个 library，能够实现以下几个目标：
 
@@ -176,7 +176,7 @@ module.exports = {
 };
 ```
 
-## 使用 source map 的基本配置
+## 使用 source map 的基本配置 {#base-configuration-with-source-map}
 
 source map 是有用的调试工具，可以查看压缩代码对应的原始代码。
 
@@ -205,7 +205,7 @@ module.exports = [
 
 > 查看代码示例， 请参考 [webpack 仓库](https://github.com/webpack/webpack/tree/master/examples/source-map)
 
-## 外部化 lodash
+## 外部化 lodash {#externalize-lodash}
 
 现在，如果执行 `webpack`，你会发现创建了一个体积相当大的文件。如果你查看这个文件，会看到 lodash 也被打包到代码中。在这种场景中，我们更倾向于把 `lodash` 当作 `peerDependency`。也就是说，consumer(使用者) 应该已经安装过 `lodash` 。因此，你就可以放弃控制此外部 library ，而是将控制权让给使用 library 的 consumer。
 
@@ -238,7 +238,7 @@ __webpack.config.js__
 T> 注意，如果你仅计划将 library 用作另一个 webpack bundle 中的依赖模块，则可以直接将 `externals` 指定为一个数组。
 
 
-## 外部化的限制
+## 外部化的限制 {#external-limitations}
 
 对于想要实现从一个依赖中调用多个文件的那些 library：
 
@@ -264,7 +264,7 @@ module.exports = {
 ```
 
 
-## 暴露 library
+## 暴露 library {#expose-the-library}
 
 对于用法广泛的 library，我们希望它能够兼容不同的环境，例如 CommonJS，AMD，Node.js 或者作为一个全局变量。为了让你的 library 能够在各种使用环境中可用，需要在 `output` 中添加 `library` 属性：
 
@@ -331,7 +331,7 @@ __webpack.config.js__
 W> 在 webpack v3.5.5 中，使用 `libraryTarget: { root:'_' }` 将无法正常工作（参考 [issue 4824](https://github.com/webpack/webpack/issues/4824)) 所述）。然而，可以设置 `libraryTarget: { var: '_' }` 来将 library 作为全局变量。
 
 
-### 最终步骤
+### 最终步骤 {#final-steps}
 
 遵循 [生产环境](/guides/production) 指南中提到的步骤，来优化生产环境下的输出结果。那么，我们还需要将生成 bundle 的文件路径，添加到 `package.json` 中的 `main` 字段中。
 

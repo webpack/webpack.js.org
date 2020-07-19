@@ -20,7 +20,7 @@ new webpack.EvalSourceMapDevToolPlugin(options);
 ```
 
 
-## Options
+## Options {#options}
 
 The following options are supported:
 
@@ -38,11 +38,11 @@ T> Setting `module` and/or `columns` to `false` will yield less accurate source 
 
 T> If you want to use a custom configuration for this plugin in [development mode](/configuration/mode/#mode-development), make sure to disable the default one. I.e. set `devtool: false`.
 
-## Examples
+## Examples {#examples}
 
 The following examples demonstrate some common use cases for this plugin.
 
-### Basic Use Case
+### Basic Use Case {#basic-use-case}
 
 You can use the following code to replace the configuration option `devtool: eval-source-map` with an equivalent custom plugin configuration:
 
@@ -56,7 +56,7 @@ module.exports = {
 };
 ```
 
-### Exclude Vendor Maps
+### Exclude Vendor Maps {#exclude-vendor-maps}
 
 The following code would exclude source maps for any modules in the `vendor.js` bundle:
 
