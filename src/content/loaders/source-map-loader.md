@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/source-map-loader
 
 从现有的源文件中提取 source maps（从 <code>sourceMappingURL</code> 中提取）。
 
-## 起步
+## 起步 {#getting-started}
 
 安装 `source-map-loader`：
 
@@ -60,9 +60,9 @@ module.exports = {
 
 最后按偏好运行 `webpack` 方法。
 
-## 示例
+## 示例 {#examples}
 
-### 忽略警告
+### 忽略警告 {#ignoring-warnings}
 
 忽略警告可以使用以下配置：
 
@@ -87,13 +87,13 @@ module.exports = {
 
 有关 `warningsFilters` 选项的详细信息请[参阅](/configuration/stats/#statswarningsfilter)；
 
-## 贡献
+## 贡献 {#contributing}
 
 如果您尚未了解，建议您阅读以下贡献指引。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/source-map-loader/blob/master/.github/CONTRIBUTING.md)
 
-## 许可
+## 许可 {#license}
 
 [MIT](https://github.com/webpack-contrib/source-map-loader/blob/master/LICENSE)
 

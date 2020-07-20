@@ -27,7 +27,7 @@ For further hints on compatibility issues, check out [Shimming](/guides/shimming
 
 > ⚠ Be careful, existing imports (`import`/`require`) in the original code and importing new values can cause failure.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `imports-loader`:
 
@@ -45,7 +45,7 @@ $('img').doSomeAwesomeJqueryPluginStuff();
 
 Then you can inject the `jquery` value into the module by configuring the `imports-loader` using two approaches.
 
-### Inline
+### Inline {#inline}
 
 The `|` or `%20` (space) allow to separate the `syntax`, `moduleName`, `name` and `alias` of import.
 The documentation and syntax examples can be read [here](#syntax).
@@ -132,7 +132,7 @@ import myLib from 'imports-loader?additionalCode=var%20myVariable%20=%20false;!.
 // ...
 ```
 
-### Using Configuration
+### Using Configuration {#using-configuration}
 
 **webpack.config.js**
 
@@ -183,7 +183,7 @@ import angular from 'angular';
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
 |                  Name                   |                   Type                    |   Default   | Description                                                            |
 | :-------------------------------------: | :---------------------------------------: | :---------: | :--------------------------------------------------------------------- |
@@ -192,7 +192,7 @@ And run `webpack` via your preferred method.
 |        **[`wrapper`](#wrapper)**        |        `{Boolean\|String\|Object}`        | `undefined` | Closes the module code in a function (`(function () { ... }).call();`) |
 | **[`additionalCode`](#additionalcode)** |                `{String}`                 | `undefined` | Adds custom code                                                       |
 
-### `type`
+### `type` {#type}
 
 Type: `String`
 Default: `module`
@@ -201,7 +201,7 @@ Format of generated exports.
 
 Possible values - `commonjs` (CommonJS module syntax) and `module` (ES module syntax).
 
-#### `commonjs`
+#### `commonjs` {#commonjs}
 
 **webpack.config.js**
 
@@ -233,7 +233,7 @@ var Foo = require('Foo');
 // ...
 ```
 
-#### `module`
+#### `module` {#module}
 
 **webpack.config.js**
 
@@ -264,18 +264,18 @@ import Foo from 'Foo';
 // ...
 ```
 
-### `imports`
+### `imports` {#imports}
 
 Type: `String|Object|Array<String|Object>`
 Default: `undefined`
 
 List of imports.
 
-#### `String`
+#### `String` {#string}
 
 Allows to use a string to describe an export.
 
-##### `Syntax`
+##### `Syntax` {#syntax}
 
 The `|` or `%20` (space) allow to separate the `syntax`, `moduleName`, `name` and `alias` of import.
 
@@ -314,9 +314,9 @@ If type `commonjs`:
 
 > ⚠ Aliases can't be used together with `default`, `namespace`, `side-effects`, `single` and `pure` syntaxes.
 
-###### Examples
+###### Examples {#examples}
 
-###### ES Module Default Import
+###### ES Module Default Import {#es-module-default-import}
 
 **webpack.config.js**
 
@@ -346,7 +346,7 @@ import myName from 'lib';
 // ...
 ```
 
-###### CommonJS Single Import
+###### CommonJS Single Import {#commonjs-single-import}
 
 **webpack.config.js**
 
@@ -377,7 +377,7 @@ var myName = require('lib');
 // ...
 ```
 
-#### `Object`
+#### `Object` {#object}
 
 Allows to use an object to describe an import.
 
@@ -394,7 +394,7 @@ Properties:
 
 > ⚠ Alias can't be used together with `default`, `namespace`, `side-effects`, `single` and `pure` syntaxes.
 
-##### Examples
+##### Examples {#examples}
 
 **webpack.config.js**
 
@@ -433,12 +433,12 @@ import { lib2_method_2 as lib_2_method_2_alias } from 'lib_2';
 // ...
 ```
 
-#### `Array`
+#### `Array` {#array}
 
 Allow to specify multiple imports.
 Each item can be a [`string`](https://github.com/webpack-contrib/imports-loader#string) or an [`object`](https://github.com/webpack-contrib/imports-loader#object).
 
-##### Examples
+##### Examples {#examples}
 
 **webpack.config.js**
 
@@ -491,7 +491,7 @@ import 'lib_4';
 // ...
 ```
 
-### `wrapper`
+### `wrapper` {#wrapper}
 
 Type: `Boolean|String|Object`
 Default: `undefined`
@@ -500,7 +500,7 @@ Closes the module code in a function with a given `thisArg` and `args` (`(functi
 
 > ⚠ Do not use this option if source code contains ES module import(s)
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 **webpack.config.js**
 
@@ -540,7 +540,7 @@ import $ from 'jquery';
 }.call());
 ```
 
-#### `String`
+#### `String` {#string}
 
 **webpack.config.js**
 
@@ -580,7 +580,7 @@ import $ from 'jquery';
 }.call(window));
 ```
 
-#### `Object`
+#### `Object` {#object}
 
 **webpack.config.js**
 
@@ -623,16 +623,16 @@ import $ from 'jquery';
 }.call(window, myVariable, myOtherVariable));
 ```
 
-### `additionalCode`
+### `additionalCode` {#additionalcode}
 
 Type: `String`
 Default: `undefined`
 
 Adds custom code as a preamble before the module's code.
 
-##### Examples
+##### Examples {#examples}
 
-###### Define custom variable
+###### Define custom variable {#define-custom-variable}
 
 **webpack.config.js**
 
@@ -672,7 +672,7 @@ var myVariable = false;
 // ...
 ```
 
-###### Disable AMD Import Syntax
+###### Disable AMD Import Syntax {#disable-amd-import-syntax}
 
 **webpack.config.js**
 
@@ -713,13 +713,13 @@ var define = false; /* Disable AMD for misbehaving libraries */
 // ...
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/imports-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/imports-loader/blob/master/LICENSE)
 

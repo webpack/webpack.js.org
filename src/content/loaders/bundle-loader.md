@@ -6,13 +6,13 @@ repo: https://github.com/webpack-contrib/bundle-loader
 ---
 应用于 webpack 的 bundle loader
 
-## 安装
+## 安装 {#install}
 
 ```bash
 npm i bundle-loader --save
 ```
 
-## 用法
+## 用法 {#usage}
 
 **webpack.config.js**
 
@@ -57,14 +57,14 @@ bundle(callbackThree)
 
 当依赖模块都加载完毕时, 如果此时添加一个回调函数，回到函数将会立即执行。
 
-## 选项
+## 选项 {#options}
 
 |选项名|类型|默认值|描述|
 |:--:|:--:|:-----:|:----------|
 |**`lazy`**|`{Boolean}`|`false`| 异步加载导入的 bundle |
 |**`name`**|`{String}`|`[id].[name]`| 为导入的 bundle 配置自定义文件名 |
 
-### `lazy`
+### `lazy` {#lazy}
 
 当使用 `bundle-loader` 时，文件会被请求(request)。如果想让文件按需加载(request it lazy)，请使用：
 
@@ -87,7 +87,7 @@ bundle((file) => {...})
 
 > ℹ️ 只有调用 load 函数时，chunk 才会被请求(request)
 
-### `name`
+### `name` {#name}
 
 可以通过配置中 `name` 选项参数，来设置 bundle 的名称。
 请查阅相关[文档](https://github.com/webpack/loader-utils#interpolatename)。
@@ -106,7 +106,7 @@ bundle((file) => {...})
 > :warning: 一旦 loader 创建了 chunk，将遵循以下命名规则 [`output.chunkFilename`](/configuration/output/#outputchunkfilename) 规则，
 默认是 `[id].[name]`。这里 `[name]` 对应着配置中 name 选项参数设置的 chunk 名称。
 
-## 示例
+## 示例 {#examples}
 
 ```js
 import bundle from './file.bundle.js'
@@ -146,7 +146,7 @@ module.exports = {
 
 当然，你也可以在 `chunkFilename` 添加哈希值作为文件名的一部分，这是因为在 bundle 的配置选项中放置 `[hash]` 不会生效。
 
-## 维护人员
+## 维护人员 {#maintainers}
 
 <table>
   <tbody>

@@ -6,19 +6,19 @@ repo: https://github.com/webpack-contrib/i18n-webpack-plugin
 ---
 webpack 的 i18n（本地化）插件
 
-## 安装
+## 安装 {#install}
 
 ```bash
 npm i -D i18n-webpack-plugin
 ```
 
-## 使用
+## 使用 {#usage}
 
 该插件会在 bundle 的生成过程中进行文案翻译，因此你可以直接将翻译后的 bundle 交付给用户。
 
 具体示例可见 [webpack/webpack/examples/i18n](https://github.com/webpack/webpack/tree/master/examples/i18n).
 
-## 插件配置
+## 插件配置 {#options}
 
 ```
 plugins: [
@@ -31,7 +31,7 @@ plugins: [
  - `optionsObj.hideMessage`：默认值为 `false`，插件可以展示警告/报错信息. 若设置为 `true`，插件将会隐藏相关的警告或报错信息。
  - `optionsObj.nested`：默认值为 `false`。如果设置为 `true`，`languageConfig` 中键值的编写可以嵌套。该选项当且仅当参数 `languageConfig` 的类型不是一个函数时才能生效.
 
-## 维护者
+## 维护者 {#maintainers}
 
 <table>
   <tbody>

@@ -22,7 +22,7 @@ Allows to connect native node modules with `.node` extension.
 
 > ⚠ `node-loader` only works on the `node`/`electron-main`/`electron-main` targets.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `node-loader`:
 
@@ -51,7 +51,7 @@ module.exports = {
 };
 ```
 
-### Inline
+### Inline {#inline}
 
 **index.js**
 
@@ -61,7 +61,7 @@ import node from 'node-loader!./file.node';
 
 And run `webpack` via your preferred method.
 
-### Configuration
+### Configuration {#configuration}
 
 **index.js**
 
@@ -92,14 +92,14 @@ module.exports = {
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
 |         Name          |         Type         |         Default         | Description                                                  |
 | :-------------------: | :------------------: | :---------------------: | :----------------------------------------------------------- |
 | **[`flags`](#flags)** |      `{Number}`      |       `undefined`       | Enables/Disables `url`/`image-set` functions handling        |
 |  **[`name`](#name)**  | `{String\|Function}` | `'[contenthash].[ext]'` | Specifies a custom filename template for the target file(s). |
 
-### `flags`
+### `flags` {#flags}
 
 Type: `Number`
 Default: `undefined`
@@ -137,14 +137,14 @@ module.exports = {
 };
 ```
 
-### `name`
+### `name` {#name}
 
 Type: `String|Function`
 Default: `'[contenthash].[ext]'`
 
 Specifies a custom filename template for the target file(s).
 
-#### `String`
+#### `String` {#string}
 
 **webpack.config.js**
 
@@ -168,7 +168,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 **webpack.config.js**
 
@@ -201,13 +201,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/node-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/node-loader/blob/master/LICENSE)
 

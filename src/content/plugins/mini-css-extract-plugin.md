@@ -27,7 +27,7 @@ Compared to the extract-text-webpack-plugin:
 - Easier to use
 - Specific to CSS
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `mini-css-extract-plugin`:
 
@@ -71,16 +71,16 @@ module.exports = {
 };
 ```
 
-## Options
+## Options {#options}
 
-### `publicPath`
+### `publicPath` {#publicpath}
 
 Type: `String|Function`
 Default: the `publicPath` in `webpackOptions.output`
 
 Specifies a custom public path for the target file(s).
 
-#### `String`
+#### `String` {#string}
 
 **webpack.config.js**
 
@@ -115,7 +115,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 **webpack.config.js**
 
@@ -152,7 +152,7 @@ module.exports = {
 };
 ```
 
-### `esModule`
+### `esModule` {#esmodule}
 
 Type: `Boolean`
 Default: `false`
@@ -188,9 +188,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### Minimal example
+### Minimal example {#minimal-example}
 
 **webpack.config.js**
 
@@ -229,7 +229,7 @@ module.exports = {
 };
 ```
 
-### The `publicPath` option as function
+### The `publicPath` option as function {#the-publicpath-option-as-function}
 
 **webpack.config.js**
 
@@ -269,7 +269,7 @@ module.exports = {
 };
 ```
 
-### Advanced configuration example
+### Advanced configuration example {#advanced-configuration-example}
 
 This plugin should be used only on `production` builds without `style-loader` in the loaders chain, especially if you want to have HMR in `development`.
 
@@ -313,7 +313,7 @@ module.exports = {
 };
 ```
 
-### Hot Module Reloading (HMR)
+### Hot Module Reloading (HMR) {#hot-module-reloading-hmr}
 
 The `mini-css-extract-plugin` supports hot reloading of actual css files in development.
 Some options are provided to enable HMR of both standard stylesheets and locally scoped CSS or CSS modules.
@@ -359,7 +359,7 @@ module.exports = {
 };
 ```
 
-### Minimizing For Production
+### Minimizing For Production {#minimizing-for-production}
 
 To minify the output, use a plugin like [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin).
 Setting `optimization.minimizer` overrides the defaults provided by webpack, so make sure to also specify a JS minimizer:
@@ -392,7 +392,7 @@ module.exports = {
 };
 ```
 
-### Using preloaded or inlined CSS
+### Using preloaded or inlined CSS {#using-preloaded-or-inlined-css}
 
 The runtime code detects already added CSS via `<link>` or `<style>` tag.
 This can be useful when injecting CSS on server-side for Server-Side-Rendering.
@@ -400,7 +400,7 @@ The `href` of the `<link>` tag has to match the URL that will be used for loadin
 The `data-href` attribute can be used for `<link>` and `<style>` too.
 When inlining CSS `data-href` must be used.
 
-### Extracting all CSS in a single file
+### Extracting all CSS in a single file {#extracting-all-css-in-a-single-file}
 
 The CSS can be extracted in one CSS file using `optimization.splitChunks.cacheGroups`.
 
@@ -438,7 +438,7 @@ module.exports = {
 };
 ```
 
-### Extracting CSS based on entry
+### Extracting CSS based on entry {#extracting-css-based-on-entry}
 
 You may also extract the CSS based on the webpack entry name.
 This is especially useful if you import routes dynamically but want to keep your CSS bundled according to entry.
@@ -499,7 +499,7 @@ module.exports = {
 };
 ```
 
-### Module Filename Option
+### Module Filename Option {#module-filename-option}
 
 With the `moduleFilename` option you can use chunk data to customize the filename. This is particularly useful when dealing with multiple entry points and wanting to get more control out of the filename for a given entry point/chunk. In the example below, we'll use `moduleFilename` to output the generated css into a different directory.
 
@@ -525,7 +525,7 @@ module.exports = {
 };
 ```
 
-### Long Term Caching
+### Long Term Caching {#long-term-caching}
 
 For long term caching use `filename: "[contenthash].css"`. Optionally add `[name]`.
 
@@ -552,7 +552,7 @@ module.exports = {
 };
 ```
 
-### Remove Order Warnings
+### Remove Order Warnings {#remove-order-warnings}
 
 For projects where css ordering has been mitigated through consistent use of scoping or naming conventions, the css order warnings can be disabled by setting the ignoreOrder flag to true for the plugin.
 
@@ -578,20 +578,20 @@ module.exports = {
 };
 ```
 
-### Media Query Plugin
+### Media Query Plugin {#media-query-plugin}
 
 If you'd like to extract the media queries from the extracted CSS (so mobile users don't need to load desktop or tablet specific CSS anymore) you should use one of the following plugins:
 
 - [Media Query Plugin](https://github.com/SassNinja/media-query-plugin)
 - [Media Query Splitting Plugin](https://github.com/mike-diamond/media-query-splitting-plugin)
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/mini-css-extract-plugin/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/mini-css-extract-plugin/blob/master/LICENSE)
 

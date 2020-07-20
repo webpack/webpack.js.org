@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/mocha-loader
 
 Allows [Mocha](https://mochajs.org/) tests to be loaded and run via webpack.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `mocha-loader` and `mocha`:
 
@@ -65,9 +65,9 @@ import test from 'mocha-loader!./test.js';
 
 No options for loader.
 
-## Examples
+## Examples {#examples}
 
-### Basic
+### Basic {#basic}
 
 **file.js**
 
@@ -97,13 +97,13 @@ describe('Test', () => {
 });
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/mocha-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/mocha-loader/blob/master/LICENSE)
 

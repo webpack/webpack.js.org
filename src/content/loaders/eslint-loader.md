@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/eslint-loader
 
 > 用于 Webpack 的 ESlint loader
 
-## 安装
+## 安装 {#install}
 
 ```bash
 npm install eslint-loader --save-dev
@@ -30,7 +30,7 @@ npm install eslint-loader --save-dev
 npm install eslint --save-dev
 ```
 
-## 用法
+## 用法 {#usage}
 
 在你的 webpack 设置中添加下列配置：
 
@@ -95,13 +95,13 @@ module.exports = {
 };
 ```
 
-## 选项
+## 选项 {#options}
 
 你可以通过标准 webpack [loader 选项](/configuration/module/#useentry)传递[ eslint 选项](http://eslint.org/docs/developer-guide/nodejs-api#cliengine)。
 
 **注意**：你提供的配置选项将被传递给`CLIEngine`。这是与在 `package.json` 或 `.eslintrc` 中指定的选项不同的一组选项。查阅 [eslint 文档](http://eslint.org/docs/developer-guide/nodejs-api#cliengine)以获取更多相关信息。
 
-### `cache`
+### `cache` {#cache}
 
 - Type: `Boolean|String`
 - Default: `false`
@@ -130,7 +130,7 @@ module.exports = {
 };
 ```
 
-### `eslintPath`
+### `eslintPath` {#eslintpath}
 
 - Type: `String`
 - Default: `eslint`
@@ -155,7 +155,7 @@ module.exports = {
 };
 ```
 
-### `fix`
+### `fix` {#fix}
 
 - Type: `Boolean`
 - Default: `false`
@@ -182,7 +182,7 @@ module.exports = {
 };
 ```
 
-### `formatter`
+### `formatter` {#formatter}
 
 - Type: `String|Function`
 - Default: `stylish`
@@ -223,11 +223,11 @@ module.exports = {
 };
 ```
 
-### 错误与警告
+### 错误与警告 {#errors-and-warning}
 
 **默认情况下，加载程序将根据 eslint 错误/警告计数自动调整错误报告。** 你仍然可以通过使用 `emitError` **或** `emitWarning` 选项来强制启用这种行为
 
-#### `emitError`
+#### `emitError` {#emiterror}
 
 - Type: `Boolean`
 - Default: `false`
@@ -252,7 +252,7 @@ module.exports = {
 };
 ```
 
-#### `emitWarning`
+#### `emitWarning` {#emitwarning}
 
 - Type: `Boolean`
 - Default: `false`
@@ -277,7 +277,7 @@ module.exports = {
 };
 ```
 
-#### `failOnError`
+#### `failOnError` {#failonerror}
 
 - Type: `Boolean`
 - Default: `false`
@@ -302,7 +302,7 @@ module.exports = {
 };
 ```
 
-#### `failOnWarning`
+#### `failOnWarning` {#failonwarning}
 
 - Type: `Boolean`
 - Default: `false`
@@ -327,7 +327,7 @@ module.exports = {
 };
 ```
 
-#### `quiet`
+#### `quiet` {#quiet}
 
 - Type: `Boolean`
 - Default: `false`
@@ -352,7 +352,7 @@ module.exports = {
 };
 ```
 
-#### `outputReport`
+#### `outputReport` {#outputreport}
 
 - Type: `Boolean|Object`
 - Default: `false`
@@ -382,21 +382,21 @@ module.exports = {
 };
 ```
 
-## 陷阱
+## 陷阱 {#gotchas}
 
-### NoEmitOnErrorsPlugin
+### NoEmitOnErrorsPlugin {#noemitonerrorsplugin}
 
 当模式未被配置，或运行在生产环境下时，会在 webpack4 中自动启用 `NoEmitOnErrorsPlugin`。因此，无论 `eslint-loader` 中使用了什么错误配置，即使 ESLint 抛出警告也会导致构建失败，除非启用了 `emitWarning`。
 
-### 定义 `configFile` 或使用 `eslint -c path/.eslintrc`
+### 定义 `configFile` 或使用 `eslint -c path/.eslintrc` {#defining-configfile-or-using-eslint--c-patheslintrc}
 
 请记住，当你定义 `configFile` 时，`eslint` 不会在需要 lint 的文件目录中自动查找 `.eslintrc`。更多信息请参阅 eslint 官方文档中的此章节[_使用配置文件_](http://eslint.org/docs/user-guide/configuring#using-configuration-files)，以及此 issue [#129](https://github.com/webpack-contrib/eslint-loader/issues/129)。
 
-## Changelog
+## Changelog {#changelog}
 
 [Changelog](https://github.com/webpack-contrib/eslint-loader/blob/master/CHANGELOG.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/eslint-loader/blob/master/LICENSE)
 

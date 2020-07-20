@@ -6,13 +6,13 @@ repo: https://github.com/webpack-contrib/zopfli-webpack-plugin
 ---
 Node-Zopfli plugin for Webpack.
 
-## Install
+## Install {#install}
 
 ```bash
 npm i -D zopfli-webpack-plugin
 ```
 
-## Usage
+## Usage {#usage}
 
 ``` javascript
 var ZopfliPlugin = require("zopfli-webpack-plugin");
@@ -29,7 +29,7 @@ module.exports = {
 }
 ```
 
-## Arguments
+## Arguments {#arguments}
 
 * `asset`: The target asset name. `[file]` is replaced with the original asset. `[path]` is replaced with the path of the original asset and `[query]` with the query. Defaults to `"[path].gz[query]"`.
 * `filename`: A `function(asset)` which receives the asset name (after processing `asset` option) and returns the new asset name. Defaults to `false`.
@@ -39,7 +39,7 @@ module.exports = {
 * `minRatio`: Only assets that compress better that this ratio are processed. Defaults to `0.8`.
 * `deleteOriginalAssets`: Whether to delete the original assets or not. Defaults to `false`.
 
-## Option Arguments
+## Option Arguments {#option-arguments}
 
 * verbose: Default: false,
 * verbose_more: Default: false,
@@ -48,7 +48,7 @@ module.exports = {
 * blocksplittinglast: Default: false,
 * blocksplittingmax: Default: 15
 
-## Maintainers
+## Maintainers {#maintainers}
 
 <table>
   <tbody>

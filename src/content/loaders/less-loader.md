@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/less-loader
 
 webpack 将 Less 编译为 CSS 的 loader。
 
-## 快速开始
+## 快速开始 {#getting-started}
 
 首先，你需要先安装 `less-loader`：
 
@@ -45,7 +45,7 @@ module.exports = {
 
 接着使用你习惯的方式运行 `webpack`。
 
-## 可选项
+## 可选项 {#options}
 
 |                  名称                   |         类型         |         默认值          | 描述                                      |
 | :-------------------------------------: | :------------------: | :----------------------: | :----------------------------------------------- |
@@ -55,14 +55,14 @@ module.exports = {
 |      **[`sourceMap`](#sourcemap)**      |     `{Boolean}`      |    `compiler.devtool`    | 是否生成 source map。       |
 | **[`implementation`](#implementation)** |      `{Object}`      |          `less`          | 配置 Less 使用的实现库                |
 
-### `lessOptions`
+### `lessOptions` {#lessoptions}
 
 类型: `Object|Function`
 默认值: `{ relativeUrls: true }`
 
 通过 `lessOptions` 属性，你可以设置 [loader options](/configuration/module/#ruleoptions--rulequery) 中的任意特定的选项值给 `less-loader`。所有可用的选项值请参看 [Less 命令行可选参数文档](http://lesscss.org/usage/#command-line-usage-options)。由于我们是通过编程的方式将这些选项传递给 Less，因此您需要将破折号（dash-case）转换为驼峰值（camelCase）后传递它们。
 
-#### `Object`
+#### `Object` {#object}
 
 使用对象（Object）的形式传递 options 给 Less。
 
@@ -96,7 +96,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 允许根据 loader 的 context 来设置 options，再传递给 Less。
 
@@ -136,7 +136,7 @@ module.exports = {
 };
 ```
 
-### `prependData`
+### `prependData` {#prependdata}
 
 类型: `String|Function`
 默认值: `undefined`
@@ -147,7 +147,7 @@ module.exports = {
 
 > ℹ 由于你注入了代码，因此它将破坏入口文件的源映射关系。通常有比这更简单的解决方案，例如多个 Less 入口文件。
 
-#### `String`
+#### `String` {#string}
 
 ```js
 module.exports = {
@@ -171,7 +171,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 ```js
 module.exports = {
@@ -205,7 +205,7 @@ module.exports = {
 };
 ```
 
-### `appendData`
+### `appendData` {#appenddata}
 
 类型: `String|Function`
 默认值: `undefined`
@@ -216,7 +216,7 @@ module.exports = {
 
 > ℹ 由于你注入了代码，因此它将破坏入口文件的源映射关系。通常有比这更简单的解决方案，例如多个 Less 入口文件。
 
-#### `String`
+#### `String` {#string}
 
 ```js
 module.exports = {
@@ -240,7 +240,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 ```js
 module.exports = {
@@ -274,7 +274,7 @@ module.exports = {
 };
 ```
 
-### `sourceMap`
+### `sourceMap` {#sourcemap}
 
 类型: `Boolean`
 默认值: 取决于 `compiler.devtool` 的值
@@ -310,7 +310,7 @@ module.exports = {
 };
 ```
 
-### `implementation`
+### `implementation` {#implementation}
 
 类型: `Object`
 默认值: `less`
@@ -345,9 +345,9 @@ module.exports = {
 };
 ```
 
-## 示例
+## 示例 {#examples}
 
-### 常规用法
+### 常规用法 {#normal-usage}
 
 将 `less-loader`、[`css-loader`](/loaders/css-loader/) 和 [`style-loader`](/loaders/style-loader/) 串联起来使用可立即将所有样式应用于 DOM。
 
@@ -378,7 +378,7 @@ module.exports = {
 
 不幸的是，Less 并没有将所有选项 1 对 1 映射为 camelCase（驼峰值）。如有疑问，请[检查执行文件]（https://github.com/less/less.js/blob/3.x/bin/lessc）并搜索破折号选项。
 
-### Source maps
+### Source maps {#source-maps}
 
 为了生成 CSS 的 source map, 你需要在 loader 的可选项中设置 `sourceMap` 属性。如果没设置的话 loader 将会继承你 webpack 中为生成 source map 设置的属性值 `devtool`。
 
@@ -414,15 +414,15 @@ module.exports = {
 
 如果你想在 Chrome 中修改原始的 Less 文件，可以参考[这篇不错的博客](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0)。这篇博客虽然写的 Sass，但也适合于 Less。
 
-### 生产环境
+### 生产环境 {#in-production}
 
 在生产环境中推荐使用 [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) 来提取样式表到专门的文件中，这样你的样式就不需要依赖 JavaScript。
 
-### 导入
+### 导入 {#imports}
 
 从 `less-loader` v4 版本起，你有两种解析器可用，Less 内置解析器和 webpack 解析器。默认情况使用 webpack 解析器。
 
-#### webpack 解析器
+#### webpack 解析器 {#webpack-resolver}
 
 webpack 提供了一种 [解析文件的高级机制](/configuration/resolve/)。`less-loader` 作为 Less 的插件，该插件将所有的查询结果传递给 webpack 解析器，因此你可以从 `node_modules` 中导入 Less 模块，只需要在它们前面加上 `~` 符号告诉 webpack 从 [`modules`](/configuration/resolve/#resolvemodules) 中去查找。
 
@@ -432,7 +432,7 @@ webpack 提供了一种 [解析文件的高级机制](/configuration/resolve/)�
 
 在其前面加上 `〜` 很关键，因为 `〜/` 会解析到根目录。webpack 需要区分 `bootstrap` 和 `〜bootstrap`，因为 CSS 和 Less 文件没有用于导入相对路径文件的特殊语法。写 `@import“ file”` 等同于 `@import“ ./file”;`
 
-##### 非 Less 导入
+##### 非 Less 导入 {#non-less-imports}
 
 使用 webpack 解析器，您可以导入任何文件类型。你只需要一个导出有效的 Less 代码的 loader。通常，您还需要设置 `issuer` 条件，以确保此规则仅适用于源自 Less 文件的导入：
 
@@ -455,7 +455,7 @@ module.exports = {
 };
 ```
 
-#### Less 解析器
+#### Less 解析器 {#less-resolver}
 
 如果指定 `paths` 选项，将从指定的 `paths` 中搜索模块，这是 Less 的默认行为。`paths` 应该是具有绝对路径的数组。
 
@@ -489,7 +489,7 @@ module.exports = {
 };
 ```
 
-### 插件
+### 插件 {#plugins}
 
 想要使用 [插件](http://lesscss.org/usage/#plugins)，只需要简单设置下 `plugins` 选项就可以，
 配置如下：
@@ -514,7 +514,7 @@ module.exports = {
 };
 ```
 
-### 提取样式表
+### 提取样式表 {#extracting-style-sheets}
 
 通过 webpack 打包 CSS 有很多好处，比如给引用图片和字体文件路径添加 hash, 在开发环境可以 [模块热替换](/concepts/hot-module-replacement/)。另一方面，在生产环境，根据 JS 来控制应用样式表不是一个好的方式，可能会导致延迟渲染，甚至可能会出现[闪烁现象](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)。因此，在你最终的生产环境中将它们拆分成单独的文件来存放通常是比较好的选择。
 
@@ -523,17 +523,17 @@ module.exports = {
 - [`extract-loader`](https://github.com/peerigon/extract-loader) （简单，但得专门指定 `css-loader` 的 output）
 - [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) （较复杂，但适用于所有的场景）
 
-### CSS modules 陷阱
+### CSS modules 陷阱 {#css-modules-gotcha}
 
 Less 和 [CSS modules](https://github.com/css-modules/css-modules) 有一个已知的问题，关于 `url（...）` 语句中的相对文件路径，[看下这个问题的解释](https://github.com/webpack-contrib/less-loader/issues/109#issuecomment-253797335)。
 
-## 贡献
+## 贡献 {#contributing}
 
 如果你还没有看过我们的贡献者指南请先花点时间看一下。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/less-loader/blob/master/.github/CONTRIBUTING.md)
 
-## 许可
+## 许可 {#license}
 
 [MIT](https://github.com/webpack-contrib/less-loader/blob/master/LICENSE)
 

@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/coffee-loader
 
 Compile [CoffeeScript](https://coffeescript.org/) to JavaScript.
 
-## 起步
+## 起步 {#getting-started}
 
 安装 `coffeescript` 和 `coffee-loader`：
 
@@ -84,7 +84,7 @@ import coffee from 'coffee-loader!./file.coffee';
 
 然后按偏好运行 `webpack`
 
-## 选项
+## 选项 {#options}
 
 类型：`Object`
 默认：`{ bare: true }`
@@ -118,9 +118,9 @@ module.exports = {
 };
 ```
 
-## 示例
+## 示例 {#examples}
 
-### CoffeeScript 与 Babel
+### CoffeeScript 与 Babel {#coffeescript-and-babel}
 
 来自 CoffeeScript 2 的文档：
 
@@ -156,7 +156,7 @@ module.exports = {
 };
 ```
 
-### Literate CoffeeScript
+### Literate CoffeeScript {#literate-coffeescript}
 
 开启 Literate CoffeeScript 时需要设置：
 
@@ -178,13 +178,13 @@ module.exports = {
 };
 ```
 
-## 贡献
+## 贡献 {#contributing}
 
 如果您尚未了解，建议您阅读以下贡献指引。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/coffee-loader/blob/master/.github/CONTRIBUTING.md)
 
-## 许可
+## 许可 {#license}
 
 [MIT](https://github.com/webpack-contrib/coffee-loader/blob/master/LICENSE)
 

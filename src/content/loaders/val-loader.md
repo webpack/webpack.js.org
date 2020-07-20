@@ -28,7 +28,7 @@ The target module is called with two arguments: `(options, loaderContext)`
 - `options`: The loader options (for instance provided in the webpack config. See the [example](#examples) below).
 - `loaderContext`: [The loader context](/api/loaders/#the-loader-context).
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `val-loader`:
 
@@ -73,13 +73,13 @@ const answer = require('target-file');
 
 And run `webpack` via your preferred method.
 
-## Return Object Properties
+## Return Object Properties {#return-object-properties}
 
 Targeted modules of this loader must export a `Function` that returns an object,
 or a `Promise` resolving an object (e.g. async function), containing a `code` property at a minimum, but can
 contain any number of additional properties.
 
-### `code`
+### `code` {#code}
 
 Type: `String|Buffer`
 Default: `undefined`
@@ -87,14 +87,14 @@ _Required_
 
 Code passed along to webpack or the next loader that will replace the module.
 
-### `sourceMap`
+### `sourceMap` {#sourcemap}
 
 Type: `Object`
 Default: `undefined`
 
 A source map passed along to webpack or the next loader.
 
-### `ast`
+### `ast` {#ast}
 
 Type: `Array[Object]`
 Default: `undefined`
@@ -103,7 +103,7 @@ An [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
 that will be passed to the next loader. Useful to speed up the build time if the
 next loader uses the same AST.
 
-### `dependencies`
+### `dependencies` {#dependencies}
 
 Type: `Array[String]`
 Default: `[]`
@@ -113,7 +113,7 @@ by webpack for changes.
 
 Dependencies can also be added using [`loaderContext.addDependency(file: string)`](/api/loaders/#thisadddependency).
 
-### `contextDependencies`
+### `contextDependencies` {#contextdependencies}
 
 Type: `Array[String]`
 Default: `[]`
@@ -123,7 +123,7 @@ watched by webpack for changes.
 
 Context dependencies can also be added using [`loaderContext.addContextDependency(directory: string)`](/api/loaders/#thisaddcontextdependency).
 
-### `cacheable`
+### `cacheable` {#cacheable}
 
 Type: `Boolean`
 Default: `false`
@@ -131,9 +131,9 @@ Default: `false`
 If `true`, specifies that the code can be re-used in watch mode if none of the
 `dependencies` have changed.
 
-## Examples
+## Examples {#examples}
 
-### Simple
+### Simple {#simple}
 
 In this example the loader is configured to operator on a file name of
 `years-in-ms.js`, execute the code, and store the result in the bundle as the
@@ -184,7 +184,7 @@ import tenYearsMs from 'years-in-ms';
 console.log(tenYearsMs); // 315360000000
 ```
 
-### Modernizr
+### Modernizr {#modernizr}
 
 Example shows how to build [`modernizr`](https://www.npmjs.com/package/modernizr).
 
@@ -241,7 +241,7 @@ module.exports = {
 };
 ```
 
-### Figlet
+### Figlet {#figlet}
 
 Example shows how to build [`figlet`](https://www.npmjs.com/package/figlet).
 
@@ -329,13 +329,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/val-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/val-loader/blob/master/LICENSE)
 
