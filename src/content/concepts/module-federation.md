@@ -144,12 +144,14 @@ Many applications share a common components library which could be built as a co
 
 The container interface supports `get` and `init` methods.
 `init` is a `async` compatible method that is called with one argument: the shared scope object. This object is used as a shared scope in the remote container and is filled with the provided modules from a host.
-It can be leveraged to connect remote containers to a host container dynamically at runtime
+It can be leveraged to connect remote containers to a host container dynamically at runtime.
+
+__init.js__
 
 ```js
-(async () =>{
-  // Initializes the share scope. This fills it with known provided modules from this build and all remotes
-  await __webpack_initialize_sharing__('default');
+(async () => {
+  // Initializes the shared scope. Fills it with known provided modules from this build and all remotes
+  await __webpack_init_sharing__('default');
   const container = window.someContainer; // or get the container somewhere else
   // Initialize the container, it may provide shared modules
   await container.init(__webpack_share_scopes__.default);
@@ -159,15 +161,17 @@ It can be leveraged to connect remote containers to a host container dynamically
 
 The container tries to provide shared modules, but if the shared module has already been used, a warning and the provided shared module will be ignored. The container might still use it as a fallback.
 
- This way you could dynamically load an A/B test which provides different version of a shared module.
-T > Ensure you have loaded the container.js file before attempting to dynamically connect a remote container
+This way you could dynamically load an A/B test which provides a different version of a shared module.
+T> Ensure you have loaded the container before attempting to dynamically connect a remote container.
 
 Example:
+
+__init.js__
 
 ```js
 function loadComponent(scope, module) {
   return async () => {
-    // Initializes the share scope. This fills it with known provided modules from this build and all remotes
+    // Initializes the shared scope. Fills it with known provided modules from this build and all remotes
     await __webpack_init_sharing__('default');
     const container = window[scope]; // or get the container somewhere else
     // Initialize the container, it may provide shared modules
@@ -178,7 +182,7 @@ function loadComponent(scope, module) {
   };
 }
 
-loadComponent('abtests','test123');
+loadComponent('abtests', 'test123');
 ```
 
 [See full implementation](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)

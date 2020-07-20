@@ -300,7 +300,7 @@ W> [Default type](/configuration/externals/#externalstype) will be used if you s
 
 `string = 'var'`
 
-Specifies the default type of externals. `amd`, `root` and `system` externals __depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)__ being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
+Specifies the default type of externals. `amd`, `umd`, `system` and `jsonp` externals __depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)__ being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
 
 Supported types:
 

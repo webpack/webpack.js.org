@@ -23,6 +23,7 @@ contributors:
   - jamesgeorge007
   - hiroppy
   - chenxsan
+  - snitin315
 ---
 
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
@@ -162,6 +163,7 @@ module.exports = {
 - `'use-credentials'` - __携带凭据(credential)__ 启用跨域加载
 
 
+<<<<<<< HEAD
 ## `output.jsonpScriptType` {#outputjsonpscripttype}
 
 `string = 'text/javascript': 'module' | 'text/javascript'`
@@ -172,6 +174,9 @@ webpack 会注入 DOM 中的 `script` 标签的 `type` 属性，以下载 async 
 - `'module'`: 代码会被视为 JavaScript 模块。
 
 ## `output.devtoolFallbackModuleFilenameTemplate` {#outputdevtoolfallbackmodulefilenametemplate}
+=======
+## `output.devtoolFallbackModuleFilenameTemplate`
+>>>>>>> 2bba09f860c1106278b82d79d3f0d7063a8e0dd4
 
 `string` `function (info)`
 
@@ -1220,7 +1225,11 @@ module.exports = {
 
 `boolean = true`
 
+<<<<<<< HEAD
 允许输出的 JavaScript 文件作为模块类型。 设置 `output.iife` 为 `false`, `output.libraryTarget` 为 `'module'`, `output.jsonpScriptType` 为 `'module'` 和 `terserOptions.module` 为 `true`
+=======
+Allow outputting JavaScript files as module type. It sets `output.iife` to `false`, `output.libraryTarget` to `'module'`, `output.scriptType` to `'module'` and `terserOptions.module` to `true`
+>>>>>>> 2bba09f860c1106278b82d79d3f0d7063a8e0dd4
 
 W> `output.module` 是一个实验性的功能， 想要使用的话，通过设置 [`experiments.outputModule`](/configuration/experiments/#experiments) 为 `true`.
 
