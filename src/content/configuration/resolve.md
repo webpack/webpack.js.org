@@ -474,7 +474,7 @@ module.exports = {
 
 `[string]`
 
-A list of directories where requests of server-relative URLs (starting with '/') are resolved, defaults to `[options.context]`. On non-windows systems these requests are resolved as absolute path first.
+A list of directories where requests of server-relative URLs (starting with '/') are resolved, defaults to `[options.context]`. On non-Windows systems these requests are resolved as an absolute path first.
 
 __webpack.config.js__
 
