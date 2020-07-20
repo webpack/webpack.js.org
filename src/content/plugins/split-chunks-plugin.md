@@ -155,20 +155,16 @@ Minimum number of chunks that must share a module before splitting.
 
 Minimum size, in bytes, for a chunk to be generated.
 
-<<<<<<< HEAD
-### `splitChunks.minRemainingSize` {#splitchunksminremainingsize}
-=======
-### `splitChunks.enforceSizeThreshold`
+### `splitChunks.enforceSizeThreshold` {#splitchunksenforcesizethreshold}
 
-#### `splitChunks.cacheGroups.{cacheGroup}.enforceSizeThreshold`
+#### `splitChunks.cacheGroups.{cacheGroup}.enforceSizeThreshold` {#splitchunkscachegroupscachegroupenforcesizethreshold}
 
 `number = 50000`
 
 Size threshold at which splitting is enforced and other restrictions (minRemainingSize, maxAsyncRequests, maxInitialRequests) are ignored.
 
 
-### `splitChunks.minRemainingSize`
->>>>>>> 2bba09f860c1106278b82d79d3f0d7063a8e0dd4
+### `splitChunks.minRemainingSize` {#splitchunksminremainingsize}
 
 #### `splitChunks.cacheGroups.{cacheGroup}.minRemainingSize` {#splitchunkscachegroupscachegroupminremainingsize}
 

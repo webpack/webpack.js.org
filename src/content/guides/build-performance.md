@@ -219,12 +219,8 @@ module.exports = {
 
 ### TypeScript loader {#typescript-loader}
 
-<<<<<<< HEAD
-现在，`ts-loader` 已经开始使用 TypeScript 内置 watch mode API，可以明显减少每次迭代时重新构建的模块数量。`experimentalWatchApi` 与普通 TypeScript watch mode 共享同样的逻辑，并且在开发环境使用时非常稳定。此外开启 `transpileOnly`，用于真正快速增量构建。
-=======
-To improve the build time when using `ts-loader`, use the `transpileOnly` loader option. On its own, this option turns off type checking. To gain type checking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin). This speeds up TypeScript type checking and ESLint linting by moving each to a separate process.
+你可以为 loader 传入 `transpileOnly` 选项，以缩短使用 `ts-loader` 时的构建时间。使用此选项，会关闭类型检查。如果要再次开启类型检查，请使用 [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin)。使用此插件会将检查过程移至单独的进程，可以加快 TypeScript 的类型检查和 ESLint 插入的速度。
 
->>>>>>> 2bba09f860c1106278b82d79d3f0d7063a8e0dd4
 
 ```js
 module.exports = {
@@ -241,15 +237,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-注意：`ts-loader` 文档建议使用 `cache-loader`，但是这实际上会由于使用硬盘写入而减缓增量构建速度。
-
-为了重新获得类型检查，请使用 [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin)。
-
-ts-loader 的 github 仓库中有一个 [完整示例](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin)。
-=======
-T> There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin) on the `ts-loader` GitHub repository.
->>>>>>> 2bba09f860c1106278b82d79d3f0d7063a8e0dd4
+T> 这是一个关于 `ts-loader` [完整示例](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin)的 Github 仓库。
 
 ---
 
