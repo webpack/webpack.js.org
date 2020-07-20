@@ -19,6 +19,7 @@ contributors:
   - opl-
   - Mistyyyy
   - anshumanv
+  - chenxsan
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -203,6 +204,28 @@ W> This option is __deprecated__ in favor of `Rule.use`.
 
 `Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#ruleuse) for details.
 
+
+## `Rule.mimetype`
+
+You can match config rules to data uri with `mimetype`.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        mimetype: 'application/json',
+        type: 'json',
+      }
+    ]
+  }
+}
+```
+
+`application/json`, `text/javascript`, `application/javascript`, `application/node` and `application/wasm` are already included by default as mimetype.
 
 ## `Rule.oneOf`
 
