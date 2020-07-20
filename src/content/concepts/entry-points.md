@@ -8,6 +8,7 @@ contributors:
   - sokra
   - EugeneHlushko
   - Zearin
+  - chenxsan
 ---
 
 正如我们在 [起步](/guides/getting-started/#using-a-configuration) 中提到的，在 webpack 配置中有多种方式定义 `entry` 属性。除了解释为什么它可能非常有用，我们还将向你展示__如何去__配置 `entry` 属性。
@@ -44,7 +45,7 @@ T> __当你向 `entry` 传入一个数组时会发生什么？__向 `entry` 属�
 
 ## 对象语法 {#object-syntax}
 
-用法：`entry: { <entryChunkName> string | [string] }`
+用法：`entry: { <entryChunkName> string | [string] } | {}`
 
 __webpack.config.js__
 
@@ -61,6 +62,7 @@ module.exports = {
 
 T> __“webpack 配置的可扩展”__是指，这些配置可以重复使用，并且可以与其他配置组合使用。这是一种流行的技术，用于将关注点从环境(environment)、构建目标(build target)、运行时(runtime)中分离。然后使用专门的工具（如 [webpack-merge](https://github.com/survivejs/webpack-merge)）将它们合并起来。
 
+T> 当你通过插件生成入口时，你可以传递空对象 `{}` 给 `entry`。
 
 ## 常见场景 {#scenarios}
 

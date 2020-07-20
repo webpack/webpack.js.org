@@ -59,13 +59,14 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks: 'async',
-      minSize: 30000,
+      minSize: 20000,
       minRemainingSize: 0,
       maxSize: 0,
       minChunks: 1,
       maxAsyncRequests: 6,
       maxInitialRequests: 4,
       automaticNameDelimiter: '~',
+      enforceSizeThreshold: 50000,
       cacheGroups: {
         defaultVendors: {
           test: /[\\/]node_modules[\\/]/,
@@ -153,6 +154,15 @@ Minimum number of chunks that must share a module before splitting.
 `number`
 
 Minimum size, in bytes, for a chunk to be generated.
+
+### `splitChunks.enforceSizeThreshold` {#splitchunksenforcesizethreshold}
+
+#### `splitChunks.cacheGroups.{cacheGroup}.enforceSizeThreshold` {#splitchunkscachegroupscachegroupenforcesizethreshold}
+
+`number = 50000`
+
+Size threshold at which splitting is enforced and other restrictions (minRemainingSize, maxAsyncRequests, maxInitialRequests) are ignored.
+
 
 ### `splitChunks.minRemainingSize` {#splitchunksminremainingsize}
 
