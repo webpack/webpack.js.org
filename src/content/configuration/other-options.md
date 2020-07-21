@@ -399,7 +399,7 @@ Options for infrastructure level logging.
 
 `object = {}`
 
-### infrastructureLogging.level
+### level
 
 `string`
 
@@ -425,7 +425,7 @@ module.exports = {
 };
 ```
 
-### infrastructureLogging.debug
+### debug
 
 `string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 
