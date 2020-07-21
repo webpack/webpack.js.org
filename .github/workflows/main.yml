@@ -27,7 +27,7 @@ jobs:
         BASE_BRANCH: cn
         BRANCH: gh-pages
         FOLDER: dist
-        BUILD_SCRIPT: yarn && yarn build
+        BUILD_SCRIPT: npm i && npm run clean && npm run build
     - name: Check Build
       run: |
         sudo -i
