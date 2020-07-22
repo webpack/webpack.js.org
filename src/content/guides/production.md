@@ -42,7 +42,7 @@ npm install --save-dev webpack-merge
 
 __project__
 
-```diff
+``` diff
   webpack-demo
   |- package.json
 - |- webpack.config.js
@@ -58,7 +58,7 @@ __project__
 
 __webpack.common.js__
 
-```diff
+``` diff
 + const path = require('path');
 + const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 + const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -83,7 +83,7 @@ __webpack.common.js__
 
 __webpack.dev.js__
 
-```diff
+``` diff
 + const { merge } = require('webpack-merge');
 + const common = require('./webpack.common.js');
 +
@@ -98,7 +98,7 @@ __webpack.dev.js__
 
 __webpack.prod.js__
 
-```diff
+``` diff
 + const { merge } = require('webpack-merge');
 + const common = require('./webpack.common.js');
 +
@@ -117,7 +117,7 @@ Now, let's modify our npm scripts to use the new configuration files. For the `s
 
 __package.json__
 
-```diff
+``` diff
   {
     "name": "development",
     "version": "1.0.0",
@@ -157,7 +157,7 @@ Many libraries will key off the `process.env.NODE_ENV` variable to determine wha
 
 __webpack.prod.js__
 
-```diff
+``` diff
   const { merge } = require('webpack-merge');
   const common = require('./webpack.common.js');
 
@@ -210,7 +210,7 @@ We encourage you to have source maps enabled in production, as they are useful f
 
 __webpack.prod.js__
 
-```diff
+``` diff
   const { merge } = require('webpack-merge');
   const common = require('./webpack.common.js');
 
