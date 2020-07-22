@@ -4,6 +4,7 @@ sort: 18
 contributors:
   - henriquea
   - rajagopal4890
+  - makuzaverite
   - markerikson
   - simon04
   - kisnows
@@ -21,7 +22,6 @@ contributors:
   - wizardofhogwarts
   - aholzner
   - EugeneHlushko
-  - makuzaverite
 ---
 
 In this guide, we'll dive into some of the best practices and utilities for building a production site or application.
@@ -36,7 +36,7 @@ While we will separate the _production_ and _development_ specific bits out, not
 
 Let's start by installing `webpack-merge` and splitting out the bits we've already worked on in previous guides:
 
-```bash
+``` bash
 npm install --save-dev webpack-merge
 ```
 
