@@ -23,6 +23,7 @@ contributors:
   - jamesgeorge007
   - hiroppy
   - chenxsan
+  - snitin315
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -161,15 +162,6 @@ Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web
 - `'anonymous'` - Enable cross-origin loading __without credentials__
 - `'use-credentials'` - Enable cross-origin loading __with credentials__
 
-
-## `output.jsonpScriptType`
-
-`string = 'text/javascript': 'module' | 'text/javascript'`
-
-Allows customization of `type` attribute of `script` tags that webpack injects into the DOM to download async chunks.
-
-- `'text/javascript'`: Default `type` in HTML5 and required for some browsers in HTML4.
-- `'module'`: Causes the code to be treated as a JavaScript module.
 
 ## `output.devtoolFallbackModuleFilenameTemplate`
 
@@ -1220,7 +1212,7 @@ module.exports = {
 
 `boolean = true`
 
-Allow outputting JavaScript files as module type. It sets `output.iife` to `false`, `output.libraryTarget` to `'module'`, `output.jsonpScriptType` to `'module'` and `terserOptions.module` to `true`
+Allow outputting JavaScript files as module type. It sets `output.iife` to `false`, `output.libraryTarget` to `'module'`, `output.scriptType` to `'module'` and `terserOptions.module` to `true`
 
 W> `output.module` is an experimental feature and can be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
 
