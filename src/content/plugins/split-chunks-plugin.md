@@ -17,14 +17,13 @@ contributors:
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
-  - title: "webpack 4: Code Splitting, chunk graph and the splitChunks optimization"
+  - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
 Originally, chunks (and modules imported inside them) were connected by a parent-child relationship in the internal webpack graph. The `CommonsChunkPlugin` was used to avoid duplicated dependencies across them, but further optimizations were not possible.
 
 Since webpack v4, the `CommonsChunkPlugin` was removed in favor of `optimization.splitChunks`.
-
 
 ## Defaults
 
@@ -51,7 +50,7 @@ W> The default configuration was chosen to fit web performance best practices, b
 
 This configuration object represents the default behavior of the `SplitChunksPlugin`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -63,23 +62,23 @@ module.exports = {
       minRemainingSize: 0,
       maxSize: 0,
       minChunks: 1,
-      maxAsyncRequests: 6,
-      maxInitialRequests: 4,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
       automaticNameDelimiter: '~',
       enforceSizeThreshold: 50000,
       cacheGroups: {
         defaultVendors: {
           test: /[\\/]node_modules[\\/]/,
-          priority: -10
+          priority: -10,
         },
         default: {
           minChunks: 2,
           priority: -20,
-          reuseExistingChunk: true
-        }
-      }
-    }
-  }
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -99,7 +98,7 @@ By default webpack will generate names using origin and name of the chunk (e.g. 
 
 This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -107,9 +106,9 @@ module.exports = {
   optimization: {
     splitChunks: {
       // include all types of chunks
-      chunks: 'all'
-    }
-  }
+      chunks: 'all',
+    },
+  },
 };
 ```
 
@@ -120,12 +119,12 @@ module.exports = {
   //...
   optimization: {
     splitChunks: {
-      chunks (chunk) {
+      chunks(chunk) {
         // exclude `my-excluded-chunk`
         return chunk.name !== 'my-excluded-chunk';
-      }
-    }
-  }
+      },
+    },
+  },
 };
 ```
 
@@ -133,13 +132,13 @@ T> You can combine this configuration with the [HtmlWebpackPlugin](/plugins/html
 
 ### `splitChunks.maxAsyncRequests`
 
-`number = 30`
+`number`
 
 Maximum number of parallel requests when on-demand loading.
 
 ### `splitChunks.maxInitialRequests`
 
-`number = 30`
+`number`
 
 Maximum number of parallel requests at an entry point.
 
@@ -162,7 +161,6 @@ Minimum size, in bytes, for a chunk to be generated.
 `number = 50000`
 
 Size threshold at which splitting is enforced and other restrictions (minRemainingSize, maxAsyncRequests, maxInitialRequests) are ignored.
-
 
 ### `splitChunks.minRemainingSize`
 
@@ -221,7 +219,7 @@ If the `splitChunks.name` matches an [entry point](/configuration/entry-context/
 
 T> It is recommended to set `splitChunks.name` to `false` for production builds so that it doesn't change names unnecessarily.
 
-__main.js__
+**main.js**
 
 ```js
 import _ from 'lodash';
@@ -229,7 +227,7 @@ import _ from 'lodash';
 console.log(_.join(['Hello', 'webpack'], ' '));
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -241,15 +239,18 @@ module.exports = {
           test: /[\\/]node_modules[\\/]/,
           // cacheGroupKey here is `commons` as the key of the cacheGroup
           name(module, chunks, cacheGroupKey) {
-            const moduleFileName = module.identifier().split('/').reduceRight(item => item);
+            const moduleFileName = module
+              .identifier()
+              .split('/')
+              .reduceRight((item) => item);
             const allChunksNames = chunks.map((item) => item.name).join('~');
             return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
           },
-          chunks: 'all'
-        }
-      }
-    }
-  }
+          chunks: 'all',
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -272,11 +273,11 @@ module.exports = {
       cacheGroups: {
         react: {
           // ...
-          automaticNamePrefix: 'react-chunks-prefix'
-        }
-      }
-    }
-  }
+          automaticNamePrefix: 'react-chunks-prefix',
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -284,7 +285,7 @@ module.exports = {
 
 Cache groups can inherit and/or override any options from `splitChunks.*`; but `test`, `priority` and `reuseExistingChunk` can only be configured on cache group level. To disable any of the default cache groups, set them to `false`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -292,10 +293,10 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        default: false
-      }
-    }
-  }
+        default: false,
+      },
+    },
+  },
 };
 ```
 
@@ -311,7 +312,7 @@ A module can belong to multiple cache groups. The optimization will prefer the c
 
 If the current chunk contains modules already split out from the main bundle, it will be reused instead of a new one being generated. This can impact the resulting file name of the chunk.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -320,11 +321,11 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         defaultVendors: {
-          reuseExistingChunk: true
-        }
-      }
-    }
-  }
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -334,7 +335,7 @@ module.exports = {
 
 Allows to assign modules to a cache group by module type.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -343,11 +344,11 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         json: {
-          type: 'json'
-        }
-      }
-    }
-  }
+          type: 'json',
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -361,7 +362,7 @@ Controls which modules are selected by this cache group. Omitting it selects all
 
 Providing a function to`{cacheGroup}.test`:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -374,19 +375,21 @@ module.exports = {
             // `module.resource` contains the absolute path of the file on disk.
             // Note the usage of `path.sep` instead of / or \, for cross-platform compatibility.
             const path = require('path');
-            return module.resource &&
-                 module.resource.endsWith('.svg') &&
-                 module.resource.includes(`${path.sep}cacheable_svgs${path.sep}`);
-          }
+            return (
+              module.resource &&
+              module.resource.endsWith('.svg') &&
+              module.resource.includes(`${path.sep}cacheable_svgs${path.sep}`)
+            );
+          },
         },
         byModuleTypeGroup: {
           test(module, chunks) {
             return module.type === 'javascript/auto';
-          }
-        }
-      }
-    }
-  }
+          },
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -394,7 +397,7 @@ In order to see what information is available in `module` and `chunks` objects, 
 
 Providing a `RegExp` to `{cacheGroup}.test`:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -404,11 +407,11 @@ module.exports = {
       cacheGroups: {
         defaultVendors: {
           // Note the usage of `[\\/]` as a path separator for cross-platform compatibility.
-          test: /[\\/]node_modules[\\/]|vendor[\\/]analytics_provider|vendor[\\/]other_lib/
-        }
-      }
-    }
-  }
+          test: /[\\/]node_modules[\\/]|vendor[\\/]analytics_provider|vendor[\\/]other_lib/,
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -421,7 +424,7 @@ All placeholders available in [`output.filename`](/configuration/output/#outputf
 
 W> This option can also be set globally in `splitChunks.filename`, but this isn't recommended and will likely lead to an error if [`splitChunks.chunks`](#splitchunkschunks) is not set to `'initial'`. Avoid setting it globally.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -430,17 +433,17 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         defaultVendors: {
-          filename: '[name].bundle.js'
-        }
-      }
-    }
-  }
+          filename: '[name].bundle.js',
+        },
+      },
+    },
+  },
 };
 ```
 
 And as a function:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -452,17 +455,17 @@ module.exports = {
           filename: (pathData) => {
             // Use pathData object for generating filename string based on your requirements
             return `${pathData.chunk.name}-bundle.js`;
-          }
-        }
-      }
-    }
-  }
+          },
+        },
+      },
+    },
+  },
 };
 ```
 
 It is possible to create a folder structure by providing path prefixing the filename: `'js/vendor/bundle.js'`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -471,14 +474,13 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         defaultVendors: {
-          filename: 'js/[name]/bundle.js'
-        }
-      }
-    }
-  }
+          filename: 'js/[name]/bundle.js',
+        },
+      },
+    },
+  },
 };
 ```
-
 
 #### `splitChunks.cacheGroups.{cacheGroup}.enforce`
 
@@ -486,7 +488,7 @@ module.exports = {
 
 Tells webpack to ignore [`splitChunks.minSize`](#splitchunksminsize), [`splitChunks.minChunks`](#splitchunksminchunks), [`splitChunks.maxAsyncRequests`](#splitchunksmaxasyncrequests) and [`splitChunks.maxInitialRequests`](#splitchunksmaxinitialrequests) options and always create chunks for this cache group.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -495,11 +497,11 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         defaultVendors: {
-          enforce: true
-        }
-      }
-    }
-  }
+          enforce: true,
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -509,7 +511,7 @@ module.exports = {
 
 Sets the hint for chunk id. It will be added to chunk's filename.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -518,11 +520,11 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         defaultVendors: {
-          idHint: 'vendors'
-        }
-      }
-    }
-  }
+          idHint: 'vendors',
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -543,7 +545,7 @@ import 'react';
 //...
 ```
 
-__Result:__ A separate chunk would be created containing `react`. At the import call this chunk is loaded in parallel to the original chunk containing `./a`.
+**Result:** A separate chunk would be created containing `react`. At the import call this chunk is loaded in parallel to the original chunk containing `./a`.
 
 Why:
 
@@ -579,7 +581,7 @@ import './more-helpers'; // more-helpers is also 40kb in size
 //...
 ```
 
-__Result:__ A separate chunk would be created containing `./helpers` and all dependencies of it. At the import calls this chunk is loaded in parallel to the original chunks.
+**Result:** A separate chunk would be created containing `./helpers` and all dependencies of it. At the import calls this chunk is loaded in parallel to the original chunks.
 
 Why:
 
@@ -594,7 +596,7 @@ Putting the content of `helpers` into each chunk will result into its code being
 
 Create a `commons` chunk, which includes all code shared between entry points.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -605,11 +607,11 @@ module.exports = {
         commons: {
           name: 'commons',
           chunks: 'initial',
-          minChunks: 2
-        }
-      }
-    }
-  }
+          minChunks: 2,
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -619,7 +621,7 @@ W> This configuration can enlarge your initial bundles, it is recommended to use
 
 Create a `vendors` chunk, which includes all code from `node_modules` in the whole application.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -630,11 +632,11 @@ module.exports = {
         commons: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
-          chunks: 'all'
-        }
-      }
-    }
-  }
+          chunks: 'all',
+        },
+      },
+    },
+  },
 };
 ```
 
@@ -642,9 +644,9 @@ W> This might result in a large chunk containing all external packages. It is re
 
 ### Split Chunks: Example 3
 
- Create a `custom vendor` chunk, which contains certain `node_modules` packages matched by `RegExp`.
+Create a `custom vendor` chunk, which contains certain `node_modules` packages matched by `RegExp`.
 
- __webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -656,10 +658,10 @@ module.exports = {
           test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
           name: 'vendor',
           chunks: 'all',
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 };
 ```
 
