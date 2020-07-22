@@ -170,7 +170,7 @@ module.exports = {
 
 ### Overrides
 
-If you want to change the options configured by the `mode` variable, you’ll need to export a function instead of an object to update your `config` object:
+If you want to change the options configured by the `mode` variable, you’ll need to export a function instead of an object to override the options webpack enables:
 
 ```javascript
 var config = {
