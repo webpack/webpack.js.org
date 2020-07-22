@@ -49,8 +49,6 @@ T> Learn how [mode](/configuration/mode/) works.
 
 Allows you to override the default minimizer by providing a different one or more customized [TerserPlugin](/plugins/terser-webpack-plugin/) instances.
 
-`"..."` can be used in `optimization.minimizer` to access the defaults.
-
 __webpack.config.js__
 
 ```js
@@ -83,6 +81,16 @@ module.exports = {
         new TerserPlugin({ /* your config */ }).apply(compiler);
       }
     ],
+  }
+};
+```
+
+`"..."` can be used in `optimization.minimizer` to access the defaults.
+
+```js
+module.exports = {
+  optimization: {
+    minimizer: [new CssMinimizer(), '...'],
   }
 };
 ```
