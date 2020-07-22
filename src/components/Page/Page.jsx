@@ -37,7 +37,8 @@ class Page extends React.Component {
           }, () => {
             const hash = window.location.hash;
             if (hash) {
-              const element = document.querySelector(hash);
+              const newHash = decodeURIComponent(hash);
+              const element = document.querySelector(newHash);
               if (element) {
                 element.scrollIntoView();
               }
