@@ -6,6 +6,7 @@ contributors:
   - byzyk
   - mrichmond
   - Fental
+  - mattsacks
 related:
   - title: 'webpack default options (source code)'
     url: https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js
@@ -47,112 +48,127 @@ T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 
 ### Mode: development
 
+Adding the option `mode: 'development'` to your configuration will enable the
+following:
 
-```diff
+```javascript
 // webpack.development.config.js
 module.exports = {
-+ mode: 'development'
-- devtool: 'eval',
-- cache: true,
-- performance: {
--   hints: false
-- },
-- output: {
--   pathinfo: true
-- },
-- optimization: {
--   namedModules: true,
--   namedChunks: true,
--   nodeEnv: 'development',
--   flagIncludedChunks: false,
--   occurrenceOrder: false,
--   concatenateModules: false,
--   splitChunks: {
--     hidePathInfo: false,
--     minSize: 10000,
--     maxAsyncRequests: Infinity,
--     maxInitialRequests: Infinity,
--   },
--   noEmitOnErrors: false,
--   checkWasmTypes: false,
--   minimize: false,
--   removeAvailableModules: false
-- },
-- plugins: [
--   new webpack.NamedModulesPlugin(),
--   new webpack.NamedChunksPlugin(),
--   new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("development") }),
-- ]
-}
+  // Enabling this option...
+  mode: 'development',
+
+  // ...turns on the following:
+  devtool: 'eval',
+  cache: true,
+  performance: {
+    hints: false
+  },
+  output: {
+    pathinfo: true
+  },
+  optimization: {
+    namedModules: true,
+    namedChunks: true,
+    nodeEnv: 'development',
+    flagIncludedChunks: false,
+    occurrenceOrder: false,
+    concatenateModules: false,
+    splitChunks: {
+      hidePathInfo: false,
+      minSize: 10000,
+      maxAsyncRequests: Infinity,
+      maxInitialRequests: Infinity,
+    },
+    noEmitOnErrors: false,
+    checkWasmTypes: false,
+    minimize: false,
+    removeAvailableModules: false
+  },
+  plugins: [
+    new webpack.NamedModulesPlugin(),
+    new webpack.NamedChunksPlugin(),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('development') }),
+  ]
+};
 ```
 
 
 ### Mode: production
 
+Adding the option `mode: 'production'` to your configuration will enable the
+following:
 
-```diff
-// webpack.production.config.js
+```javascript
+// webpack.development.config.js
 module.exports = {
-+  mode: 'production',
-- performance: {
--   hints: 'warning'
-- },
-- output: {
--   pathinfo: false
-- },
-- optimization: {
--   namedModules: false,
--   namedChunks: false,
--   nodeEnv: 'production',
--   flagIncludedChunks: true,
--   occurrenceOrder: true,
--   concatenateModules: true,
--   splitChunks: {
--     hidePathInfo: true,
--     minSize: 30000,
--     maxAsyncRequests: 5,
--     maxInitialRequests: 3,
--   },
--   noEmitOnErrors: true,
--   checkWasmTypes: true,
--   minimize: true,
-- },
-- plugins: [
--   new TerserPlugin(/* ... */),
--   new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("production") }),
--   new webpack.optimize.ModuleConcatenationPlugin(),
--   new webpack.NoEmitOnErrorsPlugin()
-- ]
-}
+  // Enabling this option...
+  mode: 'production',
+
+  // ...turns on the following:
+  performance: {
+    hints: 'warning'
+  },
+  output: {
+    pathinfo: false
+  },
+  optimization: {
+    namedModules: false,
+    namedChunks: false,
+    nodeEnv: 'production',
+    flagIncludedChunks: true,
+    occurrenceOrder: true,
+    concatenateModules: true,
+    splitChunks: {
+      hidePathInfo: true,
+      minSize: 30000,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+    },
+    noEmitOnErrors: true,
+    checkWasmTypes: true,
+    minimize: true,
+  },
+  plugins: [
+    new TerserPlugin(/* ... */),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ]
+};
 ```
 
 
 ### Mode: none
 
+Adding the option `mode: 'none'` to your configuration will enable the
+following:
 
-```diff
+```javascript
 // webpack.custom.config.js
 module.exports = {
-+ mode: 'none',
-- performance: {
--  hints: false
-- },
-- optimization: {
--   flagIncludedChunks: false,
--   occurrenceOrder: false,
--   concatenateModules: false,
--   splitChunks: {
--     hidePathInfo: false,
--     minSize: 10000,
--     maxAsyncRequests: Infinity,
--     maxInitialRequests: Infinity,
--   },
--   noEmitOnErrors: false,
--   checkWasmTypes: false,
--   minimize: false,
-- },
-- plugins: []
-}
+  // Enabling this option...
+  mode: 'none',
+  
+  // ...turns on the following:
+  performance: {
+    hints: false
+  },
+  optimization: {
+    flagIncludedChunks: false,
+    occurrenceOrder: false,
+    concatenateModules: false,
+    splitChunks: {
+      hidePathInfo: false,
+      minSize: 10000,
+      maxAsyncRequests: Infinity,
+      maxInitialRequests: Infinity,
+    },
+    noEmitOnErrors: false,
+    checkWasmTypes: false,
+    minimize: false,
+  },
+  plugins: []
+};
 ```
 
 If you want to change the behavior according to the __mode__ variable inside the _webpack.config.js_, you have to export a function instead of an object:
