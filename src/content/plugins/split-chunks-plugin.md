@@ -89,13 +89,13 @@ W> Since webpack 5, passing an entry name to `{cacheGroup}.test` and using a nam
 
 ### `splitChunks.automaticNameDelimiter`
 
-`string`
+`string = '~'`
 
 By default webpack will generate names using origin and name of the chunk (e.g. `vendors~main.js`). This option lets you specify the delimiter to use for the generated names.
 
 ### `splitChunks.chunks`
 
-`function (chunk)` `string`
+`string = 'async'` `function (chunk)`
 
 This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
 
@@ -133,41 +133,41 @@ T> You can combine this configuration with the [HtmlWebpackPlugin](/plugins/html
 
 ### `splitChunks.maxAsyncRequests`
 
-`number`
+`number = 30`
 
 Maximum number of parallel requests when on-demand loading.
 
 ### `splitChunks.maxInitialRequests`
 
-`number`
+`number = 30`
 
 Maximum number of parallel requests at an entry point.
 
 ### `splitChunks.minChunks`
 
-`number`
+`number = 1`
 
 Minimum number of chunks that must share a module before splitting.
 
 ### `splitChunks.minSize`
 
-`number`
+`number = 0`
 
 Minimum size, in bytes, for a chunk to be generated.
 
 ### `splitChunks.enforceSizeThreshold`
 
-#### `splitChunks.cacheGroups.{cacheGroup}.enforceSizeThreshold`
-
 `number = 50000`
+
+#### `splitChunks.cacheGroups.{cacheGroup}.enforceSizeThreshold`
 
 Size threshold at which splitting is enforced and other restrictions (minRemainingSize, maxAsyncRequests, maxInitialRequests) are ignored.
 
 ### `splitChunks.minRemainingSize`
 
-#### `splitChunks.cacheGroups.{cacheGroup}.minRemainingSize`
+`number = 0`
 
-`number`
+#### `splitChunks.cacheGroups.{cacheGroup}.minRemainingSize`
 
 `splitChunks.minRemainingSize` option was introduced in webpack 5 to avoid zero sized modules by ensuring that the minimum size of the chunk which remains after splitting is above a limit. Defaults to `0` in ['development' mode](/configuration/mode/#mode-development). For other cases `splitChunks.minRemainingSize` defaults to the value of `splitChunks.minSize` so it doesn't need to be specified manually except for the rare cases where deep control is required.
 
@@ -175,7 +175,7 @@ W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remai
 
 ### `splitChunks.maxSize`
 
-`number`
+`number = 0`
 
 Using `maxSize` (either globally `optimization.splitChunks.maxSize` per cache group `optimization.splitChunks.cacheGroups[x].maxSize` or for the fallback cache group `optimization.splitChunks.fallbackCacheGroup.maxSize`) tells webpack to try to split chunks bigger than `maxSize` bytes into smaller parts. Parts will be at least `minSize` (next to `maxSize`) in size.
 The algorithm is deterministic and changes to the modules will only have local impact. So that it is usable when using long term caching and doesn't require records. `maxSize` is only a hint and could be violated when modules are bigger than `maxSize` or splitting would violate `minSize`.
