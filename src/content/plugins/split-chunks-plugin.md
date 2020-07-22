@@ -96,7 +96,7 @@ By default webpack will generate names using origin and name of the chunk (e.g. 
 
 ### `splitChunks.chunks`
 
-`string = 'async'` `function (chunk)`
+`string = 'all'` `function (chunk)`
 
 This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
 
