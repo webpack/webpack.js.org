@@ -48,8 +48,7 @@ T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 
 ### Mode: development
 
-Adding the option `mode: 'development'` to your configuration will enable the
-following:
+Adding the option `mode: 'development'` to your configuration will enable the following:
 
 ```javascript
 // webpack.development.config.js
@@ -95,8 +94,7 @@ module.exports = {
 
 ### Mode: production
 
-Adding the option `mode: 'production'` to your configuration will enable the
-following:
+Adding the option `mode: 'production'` to your configuration will enable the following:
 
 ```javascript
 // webpack.development.config.js
@@ -140,8 +138,7 @@ module.exports = {
 
 ### Mode: none
 
-Adding the option `mode: 'none'` to your configuration will enable the
-following:
+Adding the option `mode: 'none'` to your configuration will enable the following:
 
 ```javascript
 // webpack.custom.config.js
@@ -171,7 +168,9 @@ module.exports = {
 };
 ```
 
-If you want to change the behavior according to the __mode__ variable inside the _webpack.config.js_, you have to export a function instead of an object:
+### Overrides
+
+If you want to change the options configured by the `mode` variable, you’ll need to export a function instead of an object to update your `config` object:
 
 ```javascript
 var config = {
