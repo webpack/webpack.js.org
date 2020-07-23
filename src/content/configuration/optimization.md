@@ -85,6 +85,16 @@ module.exports = {
 };
 ```
 
+`'...'` can be used in `optimization.minimizer` to access the defaults.
+
+```js
+module.exports = {
+  optimization: {
+    minimizer: [new CssMinimizer(), '...'],
+  }
+};
+```
+
 ## `optimization.splitChunks`
 
 `object`
