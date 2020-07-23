@@ -82,7 +82,7 @@ module.exports = {
 };
 ```
 
-__./src/index.js__
+__./src/index.jsx__
 
 ```js
 import React from 'react';
@@ -93,7 +93,7 @@ import('./app.jsx').then(App => ReactDOM.render(<App />, root));
 
 Initial chunk with name `main` is created. It contains:
 
-- `./src/index.js`
+- `./src/index.jsx`
 - `react`
 - `react-dom`
 
