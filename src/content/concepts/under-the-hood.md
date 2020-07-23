@@ -5,6 +5,7 @@ contributors:
   - smelukov
   - EugeneHlushko
   - chenxsan
+  - amirsaeed671
 ---
 
 > This section describes webpack internals and can be useful for plugin developers
@@ -92,7 +93,7 @@ import('./app.jsx').then(App => ReactDOM.render(<App />, root));
 
 Initial chunk with name `main` is created. It contains:
 
-- `./src/index.jsx`
+- `./src/index.js`
 - `react`
 - `react-dom`
 
