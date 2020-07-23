@@ -5,6 +5,7 @@ contributors:
   - smelukov
   - EugeneHlushko
   - chenxsan
+  - amirsaeed671
 ---
 
 > This section describes webpack internals and can be useful for plugin developers
@@ -81,7 +82,7 @@ module.exports = {
 };
 ```
 
-__./src/index.js__
+__./src/index.jsx__
 
 ```js
 import React from 'react';
