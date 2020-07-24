@@ -691,38 +691,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-##### `exportGlobals` {#exportglobals}
-
-Type: `Boolean`
-Default: `false`
-
-Allow `css-loader` to export names from global class or id, so you can use that as local name.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        loader: 'css-loader',
-        options: {
-          modules: {
-            exportGlobals: true,
-          },
-        },
-      },
-    ],
-  },
-};
-```
-
 ##### `localIdentName` {#localidentname}
-=======
-##### `localIdentName`
->>>>>>> fb11e090ce6ce1c9d6aedba9fa972eae71d58e33
 
 Type: `String`
 Default: `'[hash:base64]'`
@@ -759,11 +728,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-##### `localsConvention` {#localsconvention}
-=======
-##### `localIdentContext`
->>>>>>> fb11e090ce6ce1c9d6aedba9fa972eae71d58e33
+##### `localIdentContext` {#localidentcontext}
 
 Type: `String`
 Default: `compiler.context`
@@ -790,11 +755,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-##### `context` {#context}
-=======
-##### `localIdentHashPrefix`
->>>>>>> fb11e090ce6ce1c9d6aedba9fa972eae71d58e33
+##### `localIdentHashPrefix` {#localidenthashprefix}
 
 Type: `String`
 Default: `undefined`
@@ -821,11 +782,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-##### `hashPrefix` {#hashprefix}
-=======
-##### `localIdentRegExp`
->>>>>>> fb11e090ce6ce1c9d6aedba9fa972eae71d58e33
+##### `localIdentRegExp` {#localidentregexp}
 
 Type: `String|RegExp`
 Default: `undefined`
@@ -880,11 +837,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-##### `localIdentRegExp` {#localidentregexp}
-=======
-##### `namedExport`
->>>>>>> fb11e090ce6ce1c9d6aedba9fa972eae71d58e33
+##### `namedExport` {#namedexport}
 
 Type: `Boolean`
 Default: `false`
@@ -937,11 +890,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-##### `namedExport` {#namedexport}
-=======
-##### `exportGlobals`
->>>>>>> fb11e090ce6ce1c9d6aedba9fa972eae71d58e33
+##### `exportGlobals` {#exportglobals}
 
 Type: `Boolean`
 Default: `false`
@@ -1114,40 +1063,7 @@ module.exports = {
 
 This may change in the future when the module system (i. e. webpack) supports loader matching by origin.
 
-<<<<<<< HEAD
-### `onlyLocals` {#onlylocals}
-
-Type: `Boolean`
-Default: `false`
-
-Export only locals.
-
-**Useful** when you use **css modules** for pre-rendering (for example SSR).
-For pre-rendering with `mini-css-extract-plugin` you should use this option instead of `style-loader!css-loader` **in the pre-rendering bundle**.
-It doesn't embed CSS but only exports the identifier mappings.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        loader: 'css-loader',
-        options: {
-          onlyLocals: true,
-        },
-      },
-    ],
-  },
-};
-```
-
 ### `esModule` {#esmodule}
-=======
-### `esModule`
->>>>>>> fb11e090ce6ce1c9d6aedba9fa972eae71d58e33
 
 Type: `Boolean`
 Default: `true`
