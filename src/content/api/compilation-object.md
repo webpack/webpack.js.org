@@ -6,6 +6,7 @@ contributors:
   - EugeneHlushko
   - wizardofhogwarts
   - jamesgeorge007
+  - snitin315
 ---
 
 The Compilation object has many methods and hooks available. On this page, we will list the available methods and properties.
@@ -279,10 +280,6 @@ Parameters:
 ### createHash
 
 `function`
-
-### modifyHash
-
-`function (update)`
 
 ### createModuleAssets
 
