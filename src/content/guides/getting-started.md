@@ -202,7 +202,7 @@ You can also set it to 'none' to disable any default behavior. Learn more: https
 
 T> Your output may vary a bit, but if the build is successful then you are good to go. Also, don't worry about the warning, we'll tackle that later.
 
-Open `index.html` in your browser and, if everything went right, you should see the following text: 'Hello webpack'.
+Open `index.html` from the `dist` directory in your browser and, if everything went right, you should see the following text: 'Hello webpack'.
 
 W> If you are getting a syntax error in the middle of minified JavaScript when opening `index.html` in the browser, set [`development mode`](/configuration/mode/#mode-development) and run `npx webpack` again. This is related to running `npx webpack` on latest Node.js (v12.5+) instead of [LTS version](https://nodejs.org/en/).
 
