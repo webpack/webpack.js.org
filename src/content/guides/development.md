@@ -168,7 +168,7 @@ __package.json__
   }
 ```
 
-Change your configuration file to tell `CleanWebpackPlugin` we dont want to remove `index.html` file after incremental build triggered by watch, we do it via using the [`cleanStaleWebpackAssets` option](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional):
+Tell `CleanWebpackPlugin` that we don't want to remove the `index.html` file after the incremental build triggered by watch. We do this with the [`cleanStaleWebpackAssets` option](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional):
 
 __webpack.config.js__
 
