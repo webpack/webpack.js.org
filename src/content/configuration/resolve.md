@@ -440,6 +440,25 @@ module.exports = {
 T> Note that you can use alias here and other features familiar from resolve. For example `{ txt: 'raw-loader' }` would shim `txt!templates/demo.txt` to use `raw-loader`.
 
 
+### `resolve.roots`
+
+`[string]`
+
+A list of directories where requests of server-relative URLs (starting with '/') are resolved, defaults to [`context` configuration option](/configuration/entry-context/#context). On non-Windows systems these requests are resolved as an absolute path first.
+
+__webpack.config.js__
+
+```js
+const fixtures = path.resolve(__dirname, 'fixtures');
+module.exports = {
+  //...
+  resolve: {
+    roots: [__dirname, fixtures]
+  }
+};
+```
+
+
 ### `resolveLoader.moduleExtensions`
 
 `[string]`
