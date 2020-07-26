@@ -6,7 +6,7 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ cn ]
+    branches: [cn]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,29 +17,40 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-    - name: Build and Deploy
-      uses: JamesIves/github-pages-deploy-action@master
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BASE_BRANCH: cn
-        BRANCH: gh-pages
-        FOLDER: dist
-        BUILD_SCRIPT: npm i && npm run clean && npm run build
-    - name: Check Build
-      run: |
-        sudo -i
-        sudo chown -R $USER ./dist
-        
-    - name: Docschina Github Action
-      id: deployStatic
-      uses: lcxfs1991/docschina-actions@master
-      with:
-        skipFiles: ${{ secrets.SKIP_FILES }}
-        secretId: ${{ secrets.SECRET_ID }}
-        secretKey: ${{ secrets.SECRET_KEY }}
-        staticSrcPath: ./dist
-        bucket: ${{ secrets.BUCKET }}
-        region: ${{ secrets.REGION }}
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install
+        run: |
+          npm i
+          npm run clean
+
+      - name: Build
+        run: |
+          npm run build
+
+      - name: Check Build
+        run: |
+          sudo -i
+          sudo chown -R $USER ./dist
+
+      - name: Docschina Github Action
+        id: deployStatic
+        uses: lcxfs1991/docschina-actions@master
+        with:
+          skipFiles: ${{ secrets.SKIP_FILES }}
+          secretId: ${{ secrets.SECRET_ID }}
+          secretKey: ${{ secrets.SECRET_KEY }}
+          staticSrcPath: ./dist
+          bucket: ${{ secrets.BUCKET }}
+          region: ${{ secrets.REGION }}
