@@ -19,6 +19,7 @@ contributors:
   - opl-
   - Mistyyyy
   - anshumanv
+  - chenxsan
 ---
 
 这些选项决定了如何处理项目中的[不同类型的模块](/concepts/modules)。
@@ -209,6 +210,28 @@ W>  由于需要支持 `Rule.use`，此选项 __已废弃__。
 
 `Rule.loaders` 是 `Rule.use` 的别名。详细请查看 [`Rule.use`](#rule-use)。
 
+
+## `Rule.mimetype` {#rulemimetype}
+
+你可以使用 `mimetype` 使 rules 配置与 data 的 uri 进行匹配。
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        mimetype: 'application/json',
+        type: 'json',
+      }
+    ]
+  }
+}
+```
+
+mimetype 已默认包含了 `application/json`，`text/javascript`，`application/javascript`，`application/node` 以及 `application/wasm`。
 
 ## `Rule.oneOf` {#ruleoneof}
 

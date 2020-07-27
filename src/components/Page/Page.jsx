@@ -43,7 +43,7 @@ class Page extends React.Component {
                 element.scrollIntoView();
               }
             } else {
-              document.documentElement.scrollTop = 0;
+              window.scrollTo(0, 0);
             }
             
           })

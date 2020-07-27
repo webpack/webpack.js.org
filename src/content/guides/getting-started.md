@@ -202,7 +202,7 @@ You can also set it to 'none' to disable any default behavior. Learn more: https
 
 T> 输出可能会稍有不同，但是只要构建成功，那么你就可以放心继续。并且不要担心警告，稍后我们就会解决。
 
-在浏览器中打开 `index.html`，如果一切正常，你应该能看到以下文本：'Hello webpack'。
+在浏览器中打开 `dist` 目录下的 `index.html`，如果一切正常，你应该能看到以下文本：'Hello webpack'。
 
 W> 在浏览器中打开 `index.html`，如果在压缩过后的 JavaScript 中出现语法错误，请设置 [`development 模式`](/configuration/mode/#mode-development)，并再次运行 `npx webpack`。这与最新版本 Node.js (v12.5+) 上运行 `npx webpack` 有关，和 [LTS 版本](https://nodejs.org/en/) 无关。
 

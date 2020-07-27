@@ -4,6 +4,7 @@ sort: 17
 contributors:
   - henriquea
   - rajagopal4890
+  - makuzaverite
   - markerikson
   - simon04
   - kisnows
@@ -26,7 +27,6 @@ contributors:
 在本指南中，我们将深入一些最佳实践和工具，将站点或应用程序构建到生产环境中。
 
 T> 以下示例来源于 [tree shaking](/guides/tree-shaking) 和 [开发环境](/guides/development)。在继续之前，请确保你已经熟悉这些指南中所介绍的概念/配置。
-
 
 ## 配置 {#setup}
 
@@ -84,7 +84,7 @@ __webpack.common.js__
 __webpack.dev.js__
 
 ``` diff
-+ const merge = require('webpack-merge');
++ const { merge } = require('webpack-merge');
 + const common = require('./webpack.common.js');
 +
 + module.exports = merge(common, {
@@ -99,7 +99,7 @@ __webpack.dev.js__
 __webpack.prod.js__
 
 ``` diff
-+ const merge = require('webpack-merge');
++ const { merge } = require('webpack-merge');
 + const common = require('./webpack.common.js');
 +
 + module.exports = merge(common, {
@@ -110,7 +110,6 @@ __webpack.prod.js__
 现在，在 `webpack.common.js` 中，我们设置了 `entry` 和 `output` 配置，并且在其中引入这两个环境公用的全部插件。在 `webpack.dev.js` 中，我们将 `mode` 设置为 `development`，并且为此环境添加了推荐的 `devtool`（强大的 source map）和简单的 `devServer` 配置。最后，在 `webpack.prod.js` 中，我们将 `mode` 设置为 `production`，其中会引入之前在 [tree shaking](/guides/tree-shaking) 指南中介绍过的 `TerserPlugin`。
 
 注意，在环境特定的配置中使用 `merge()` 功能，可以很方便地引用 `webpack.dev.js` 和 `webpack.prod.js` 中公用的 common 配置。`webpack-merge` 工具提供了各种 merge(合并) 高级功能，但是在我们的用例中，无需用到这些功能。
-
 
 ## NPM Scripts {#npm-scripts}
 
@@ -159,7 +158,7 @@ __package.json__
 __webpack.prod.js__
 
 ``` diff
-  const merge = require('webpack-merge');
+  const { merge } = require('webpack-merge');
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
@@ -173,7 +172,7 @@ T> 技术上讲，`NODE_ENV` 是一个由 Node.js 暴露给执行脚本的系统
 
 __src/index.js__
 
-``` diff
+```diff
   import { cube } from './math.js';
 +
 + if (process.env.NODE_ENV !== 'production') {
@@ -194,7 +193,6 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-
 ## 压缩(Minification) {#minification}
 
 webpack v4+ will minify your code by default in [`production mode`](/configuration/mode/#mode-production).
@@ -206,7 +204,6 @@ webpack v4+ will minify your code by default in [`production mode`](/configurati
 
 如果决定尝试一些其他压缩插件，只要确保新插件也会按照 [tree shake](/guides/tree-shaking) 指南中所陈述的具有删除未引用代码(dead code)的能力，并将它作为 [`optimization.minimizer`](/configuration/optimization/#optimization-minimizer)。
 
-
 ## 源码映射(Source Mapping) {#source-mapping}
 
 我们鼓励你在生产环境中启用 source map，因为它们对 debug(调试源码) 和运行 benchmark tests(基准测试) 很有帮助。虽然有着如此强大的功能，然而还是应该针对生产环境用途，选择一个可以快速构建的推荐配置（更多选项请查看 [`devtool`](/configuration/devtool)）。对于本指南，我们将在_生产环境_中使用 `source-map` 选项，而不是我们在_开发环境_中用到的 `inline-source-map`：
@@ -214,7 +211,7 @@ webpack v4+ will minify your code by default in [`production mode`](/configurati
 __webpack.prod.js__
 
 ``` diff
-  const merge = require('webpack-merge');
+  const { merge } = require('webpack-merge');
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
@@ -225,11 +222,9 @@ __webpack.prod.js__
 
 T> 避免在生产中使用 `inline-***` 和 `eval-***`，因为它们会增加 bundle 体积大小，并降低整体性能。
 
-
 ## 压缩 CSS {#minimize-css}
 
 将生产环境下的 CSS 进行压缩会非常重要，请查看 [在生产环境下压缩](/plugins/mini-css-extract-plugin/#minimizing-for-production) 章节。
-
 
 ## CLI 替代选项 {#cli-alternatives}
 
