@@ -26,16 +26,3 @@ new webpack.HotModuleReplacementPlugin({
   // Options...
 });
 ```
-<<<<<<< HEAD
-
-
-## 配置选项 {#options}
-
-可接收以下配置选项：
-
-- `multiStep` (boolean): 为 `true`，插件会分两步构建 —— 首先编译热更新 chunk，然后保留普通资源(normal assets)。
-- `fullBuildTimeout` (number): 用于当 `multiStep` 启用时，定义两个步骤之间的延迟时间。
-
-W> 这些选项是实验性的并且可能会被弃用。就像上面说的，它们并非必须，正常情况下只需要 `new webpack.HotModuleReplacementPlugin()` 就足够了。
-=======
->>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19

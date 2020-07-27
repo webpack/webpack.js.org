@@ -65,15 +65,9 @@ Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` a
 
 选项：
 
-<<<<<<< HEAD
-- `true`: __输入__ 文件的文件名，是相对于 [`context` 选项](https://webpack.js.org/configuration/entry-context/#context)。
+- `true`: __输入__ 文件的文件名，是相对于 [`context` 选项](/configuration/entry-context/#context)。
 - `false`: 常规的 Node.js `__filename` 行为。在 Node.js 环境中运行时，__输出__ 文件的文件名。
-- `"mock"`: value 填充为 `"index.js"`.
-=======
-- `true`: The filename of the __input__ file relative to the [`context` option](/configuration/entry-context/#context).
-- `false`: The regular Node.js `__filename` behavior. The filename of the __output__ file when run in a Node.js environment.
-- `'mock'`: The fixed value `'index.js'`.
->>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
+- `'mock'`: value 填充为 `'index.js'`.
 
 
 ## `node.__dirname` {#node__dirname}
@@ -84,12 +78,6 @@ Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` a
 
 选项：
 
-<<<<<<< HEAD
-- `true`: __输入__ 文件的目录名，是相对于 [`context` 选项](https://webpack.js.org/configuration/entry-context/#context)。
+- `true`: __输入__ 文件的目录名，是相对于 [`context` 选项](/configuration/entry-context/#context)。
 - `false`: 常规的 Node.js `__dirname` 行为。在 Node.js 环境中运行时，__输出__ 文件的目录名。
-- `"mock"`: value 填充为 `"/"`。
-=======
-- `true`: The dirname of the __input__ file relative to the [`context` option](/configuration/entry-context/#context).
-- `false`: The regular Node.js `__dirname` behavior. The dirname of the __output__ file when run in a Node.js environment.
-- `'mock'`: The fixed value `'/'`.
->>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
+- `'mock'`: value 填充为 `'/'`。

@@ -28,12 +28,7 @@ contributors:
 
 T> 以下示例来源于 [tree shaking](/guides/tree-shaking) 和 [开发环境](/guides/development)。在继续之前，请确保你已经熟悉这些指南中所介绍的概念/配置。
 
-<<<<<<< HEAD
-
 ## 配置 {#setup}
-=======
-## Setup
->>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
 
 _development(开发环境)_ 和 _production(生产环境)_ 这两个环境下的构建目标存在着巨大差异。在_开发环境_中，我们需要：强大的 source map 和一个有着 live reloading(实时重新加载) 或 hot module replacement(热模块替换) 能力的 localhost server。而_生产环境_目标则转移至其他方面，关注点在于压缩 bundle、更轻量的 source map、资源优化等，通过这些优化方式改善加载时间。由于要遵循逻辑分离，我们通常建议为每个环境编写__彼此独立的 webpack 配置__。
 
@@ -116,12 +111,7 @@ __webpack.prod.js__
 
 注意，在环境特定的配置中使用 `merge()` 功能，可以很方便地引用 `webpack.dev.js` 和 `webpack.prod.js` 中公用的 common 配置。`webpack-merge` 工具提供了各种 merge(合并) 高级功能，但是在我们的用例中，无需用到这些功能。
 
-<<<<<<< HEAD
-
 ## NPM Scripts {#npm-scripts}
-=======
-## NPM Scripts
->>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
 
 现在，我们把 `scripts` 重新指向到新配置。让 `npm start` script 中 `webpack-dev-server`, 使用 `webpack.dev.js`, 而让 `npm run build` script 使用 `webpack.prod.js`:
 
@@ -203,12 +193,7 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-<<<<<<< HEAD
-
 ## 压缩(Minification) {#minification}
-=======
-## Minification
->>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
 
 webpack v4+ will minify your code by default in [`production mode`](/configuration/mode/#mode-production).
 
@@ -219,12 +204,7 @@ webpack v4+ will minify your code by default in [`production mode`](/configurati
 
 如果决定尝试一些其他压缩插件，只要确保新插件也会按照 [tree shake](/guides/tree-shaking) 指南中所陈述的具有删除未引用代码(dead code)的能力，并将它作为 [`optimization.minimizer`](/configuration/optimization/#optimization-minimizer)。
 
-<<<<<<< HEAD
-
 ## 源码映射(Source Mapping) {#source-mapping}
-=======
-## Source Mapping
->>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
 
 我们鼓励你在生产环境中启用 source map，因为它们对 debug(调试源码) 和运行 benchmark tests(基准测试) 很有帮助。虽然有着如此强大的功能，然而还是应该针对生产环境用途，选择一个可以快速构建的推荐配置（更多选项请查看 [`devtool`](/configuration/devtool)）。对于本指南，我们将在_生产环境_中使用 `source-map` 选项，而不是我们在_开发环境_中用到的 `inline-source-map`：
 
@@ -242,21 +222,11 @@ __webpack.prod.js__
 
 T> 避免在生产中使用 `inline-***` 和 `eval-***`，因为它们会增加 bundle 体积大小，并降低整体性能。
 
-<<<<<<< HEAD
-
 ## 压缩 CSS {#minimize-css}
-=======
-## Minimize CSS
->>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
 
 将生产环境下的 CSS 进行压缩会非常重要，请查看 [在生产环境下压缩](/plugins/mini-css-extract-plugin/#minimizing-for-production) 章节。
 
-<<<<<<< HEAD
-
 ## CLI 替代选项 {#cli-alternatives}
-=======
-## CLI Alternatives
->>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
 
 以上所述也可以通过命令行实现。例如，`--optimize-minimize` 标记将在幕后引用 `TerserPlugin`。和以上描述的 `DefinePlugin` 实例相同，`--define process.env.NODE_ENV="'production'"` 也会做同样的事情。而且，`webpack -p` 将自动地配置上述这两个标记，从而调用需要引入的插件。
 

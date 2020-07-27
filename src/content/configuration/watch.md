@@ -51,20 +51,6 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-直接向 `watchOptions` 设置为一个数字，等同于将 `watchOptions.aggregateTimeout` 设置为给定的数字。
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  // 与 watchOptions.aggregateTimeout = 300 相同
-  watchOptions:  300
-};
-```
-
-=======
->>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
 
 ## `watchOptions.aggregateTimeout` {#watchoptionsaggregatetimeout}
 

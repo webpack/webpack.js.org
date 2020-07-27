@@ -88,10 +88,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `optimization.splitChunks` {#optimizationsplitchunks}
-=======
-`'...'` can be used in `optimization.minimizer` to access the defaults.
+在 `optimization.minimizer` 中可以使用 `'...'` 来访问默认值。
 
 ```js
 module.exports = {
@@ -101,8 +98,7 @@ module.exports = {
 };
 ```
 
-## `optimization.splitChunks`
->>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
+## `optimization.splitChunks` {#optimizationsplitchunks}
 
 `object`
 
@@ -113,12 +109,7 @@ module.exports = {
 
 `object` `string` `boolean`
 
-<<<<<<< HEAD
-将 `optimization.runtimeChunk` 设置为 `true` 或 `"multiple"`，会为每个仅含有 runtime 的入口起点添加一个额外 chunk。
-此设置是如下设置的别名：
-=======
-Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk containing only the runtime to each entrypoint. This setting is an alias for:
->>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
+将 `optimization.runtimeChunk` 设置为 `true` 或 `'multiple'`，会为每个只含有 runtime 的入口添加一个额外 chunk。此配置的别名如下：
 
 __webpack.config.js__
 
