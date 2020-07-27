@@ -158,18 +158,18 @@ Minimum size, in bytes, for a chunk to be generated.
 
 ### `splitChunks.enforceSizeThreshold`
 
-`number = 50000`
-
 #### `splitChunks.cacheGroups.{cacheGroup}.enforceSizeThreshold`
+
+`number = 50000`
 
 Size threshold at which splitting is enforced and other restrictions (minRemainingSize, maxAsyncRequests, maxInitialRequests) are ignored.
 
 
 ### `splitChunks.minRemainingSize`
 
-`number = 0`
-
 #### `splitChunks.cacheGroups.{cacheGroup}.minRemainingSize`
+
+`number = 0`
 
 `splitChunks.minRemainingSize` option was introduced in webpack 5 to avoid zero sized modules by ensuring that the minimum size of the chunk which remains after splitting is above a limit. Defaults to `0` in ['development' mode](/configuration/mode/#mode-development). For other cases `splitChunks.minRemainingSize` defaults to the value of `splitChunks.minSize` so it doesn't need to be specified manually except for the rare cases where deep control is required.
 
