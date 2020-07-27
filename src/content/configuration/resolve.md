@@ -468,6 +468,24 @@ module.exports = {
 };
 ```
 
+### `resolve.roots`
+
+`[string]`
+
+A list of directories where requests of server-relative URLs (starting with '/') are resolved, defaults to [`context` configuration option](/configuration/entry-context/#context). On non-Windows systems these requests are resolved as an absolute path first.
+
+__webpack.config.js__
+
+```js
+const fixtures = path.resolve(__dirname, 'fixtures');
+module.exports = {
+  //...
+  resolve: {
+    roots: [__dirname, fixtures]
+  }
+};
+```
+
 
 ## `resolveLoader` {#resolveloader}
 

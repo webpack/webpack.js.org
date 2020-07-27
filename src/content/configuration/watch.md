@@ -9,6 +9,7 @@ contributors:
   - byzyk
   - spicalous
   - Neob91
+  - Loonride
 ---
 
 webpack 可以监听文件变化，当它们修改后会重新编译。这个页面介绍了如何启用这个功能，以及当 watch 无法正常运行的时候你可以做的一些调整。
@@ -34,7 +35,7 @@ T> [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 和 [webp
 
 ## `watchOptions` {#watchoptions}
 
-`object` `number = 200`
+`object`
 
 一组用来定制 watch 模式的选项：
 
@@ -50,6 +51,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 直接向 `watchOptions` 设置为一个数字，等同于将 `watchOptions.aggregateTimeout` 设置为给定的数字。
 
 __webpack.config.js__
@@ -61,6 +63,8 @@ module.exports = {
 };
 ```
 
+=======
+>>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
 
 ## `watchOptions.aggregateTimeout` {#watchoptionsaggregatetimeout}
 

@@ -6,6 +6,7 @@ contributors:
   - EugeneHlushko
   - wizardofhogwarts
   - jamesgeorge007
+  - snitin315
 ---
 
 Compilation 对象有很多可用的方法和钩子。在此页面，我们将会列举出这些可用的方法和属性。
@@ -280,11 +281,15 @@ Compilation 对象有很多可用的方法和钩子。在此页面，我们将�
 
 `function`
 
+<<<<<<< HEAD
 ### modifyHash {#modifyhash}
 
 `function (update)`
 
 ### createModuleAssets {#createmoduleassets}
+=======
+### createModuleAssets
+>>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
 
 `function`
 

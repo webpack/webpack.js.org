@@ -12,6 +12,7 @@ contributors:
   - anikethsaha
   - snitin315
   - pixel-ray
+  - chenxsan
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -87,7 +88,21 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `optimization.splitChunks` {#optimizationsplitchunks}
+=======
+`'...'` can be used in `optimization.minimizer` to access the defaults.
+
+```js
+module.exports = {
+  optimization: {
+    minimizer: [new CssMinimizer(), '...'],
+  }
+};
+```
+
+## `optimization.splitChunks`
+>>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
 
 `object`
 
@@ -98,8 +113,12 @@ module.exports = {
 
 `object` `string` `boolean`
 
+<<<<<<< HEAD
 将 `optimization.runtimeChunk` 设置为 `true` 或 `"multiple"`，会为每个仅含有 runtime 的入口起点添加一个额外 chunk。
 此设置是如下设置的别名：
+=======
+Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk containing only the runtime to each entrypoint. This setting is an alias for:
+>>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
 
 __webpack.config.js__
 

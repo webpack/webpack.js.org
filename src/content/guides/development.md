@@ -168,7 +168,11 @@ __package.json__
   }
 ```
 
+<<<<<<< HEAD
 修改配置文件，告知 `CleanWebpackPlugin` 你不想在 watch 触发增量构建后删除 `index.html` 文件，我们通过配置 [`cleanStaleWebpackAssets` 选项](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional) 来实现：
+=======
+Tell `CleanWebpackPlugin` that we don't want to remove the `index.html` file after the incremental build triggered by watch. We do this with the [`cleanStaleWebpackAssets` option](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional):
+>>>>>>> 1c664394e0652edb8d52d0aa87b6024c4bef6f19
 
 __webpack.config.js__
 
