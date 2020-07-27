@@ -40,7 +40,7 @@ import { NamedExport } from './other-module.js';
 
 W> 这里的关键词是__静态的__。标准的 `import` 语句中，模块语句中不能以「具有逻辑或含有变量」的动态方式去引入其他模块。关于 import 的更多信息和 `import()` 动态用法，请查看这里的[说明](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)。
 
-You can also `import` Data URI:
+你也通过 `import` 来引入 Data URI：
 
 ```javascript
 import 'data:text/javascript;charset=utf-8;base64,Y29uc29sZS5sb2coJ2lubGluZSAxJyk7';
