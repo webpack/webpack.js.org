@@ -152,7 +152,7 @@ Minimum number of chunks that must share a module before splitting.
 
 ### `splitChunks.minSize`
 
-`number = 0`
+`number = 20000`
 
 Minimum size, in bytes, for a chunk to be generated.
 
