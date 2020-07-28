@@ -36,9 +36,9 @@ By default it only affects on-demand chunks, because changing initial chunks wou
 webpack will automatically split chunks based on these conditions:
 
 - New chunk can be shared OR modules are from the `node_modules` folder
-- New chunk would be bigger than 30kb (before min+gz)
-- Maximum number of parallel requests when loading chunks on demand would be lower or equal to 6
-- Maximum number of parallel requests at initial page load would be lower or equal to 4
+- New chunk would be bigger than 20kb (before min+gz)
+- Maximum number of parallel requests when loading chunks on demand would be lower or equal to 30
+- Maximum number of parallel requests at initial page load would be lower or equal to 30
 
 When trying to fulfill the last two conditions, bigger chunks are preferred.
 
