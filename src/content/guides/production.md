@@ -4,6 +4,7 @@ sort: 17
 contributors:
   - henriquea
   - rajagopal4890
+  - makuzaverite
   - markerikson
   - simon04
   - kisnows
@@ -26,7 +27,6 @@ contributors:
 In this guide, we'll dive into some of the best practices and utilities for building a production site or application.
 
 T> This walkthrough stems from [Tree Shaking](/guides/tree-shaking) and [Development](/guides/development). Please ensure you are familiar with the concepts/setup introduced in those guides before continuing on.
-
 
 ## Setup
 
@@ -84,7 +84,7 @@ __webpack.common.js__
 __webpack.dev.js__
 
 ``` diff
-+ const merge = require('webpack-merge');
++ const { merge } = require('webpack-merge');
 + const common = require('./webpack.common.js');
 +
 + module.exports = merge(common, {
@@ -99,7 +99,7 @@ __webpack.dev.js__
 __webpack.prod.js__
 
 ``` diff
-+ const merge = require('webpack-merge');
++ const { merge } = require('webpack-merge');
 + const common = require('./webpack.common.js');
 +
 + module.exports = merge(common, {
@@ -110,7 +110,6 @@ __webpack.prod.js__
 In `webpack.common.js`, we now have setup our `entry` and `output` configuration and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've set `mode` to `development`. Also, we've added the recommended `devtool` for that environment (strong source mapping), as well as our simple `devServer` configuration. Finally, in `webpack.prod.js`,`mode` is set to `production` which loads [`TerserPlugin`](/plugins/terser-webpack-plugin/), which was first introduced by the [tree shaking](/guides/tree-shaking/) guide.
 
 Note the use of `merge()` calls in the environment-specific configurations to include our common configuration in `webpack.dev.js` and `webpack.prod.js`. The `webpack-merge` tool offers a variety of advanced features for merging but for our use case we won't need any of that.
-
 
 ## NPM Scripts
 
@@ -159,7 +158,7 @@ Many libraries will key off the `process.env.NODE_ENV` variable to determine wha
 __webpack.prod.js__
 
 ``` diff
-  const merge = require('webpack-merge');
+  const { merge } = require('webpack-merge');
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
@@ -173,7 +172,7 @@ If you're using a library like [`react`](https://reactjs.org/), you should actua
 
 __src/index.js__
 
-``` diff
+```diff
   import { cube } from './math.js';
 +
 + if (process.env.NODE_ENV !== 'production') {
@@ -194,7 +193,6 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-
 ## Minification
 
 webpack v4+ will minify your code by default in [`production mode`](/configuration/mode/#mode-production).
@@ -206,7 +204,6 @@ Note that while the [`TerserPlugin`](/plugins/terser-webpack-plugin/) is a great
 
 If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
 
-
 ## Source Mapping
 
 We encourage you to have source maps enabled in production, as they are useful for debugging as well as running benchmark tests. That said, you should choose one with a fairly quick build speed that's recommended for production use (see [`devtool`](/configuration/devtool)). For this guide, we'll use the `source-map` option in the _production_ as opposed to the `inline-source-map` we used in the _development_:
@@ -214,7 +211,7 @@ We encourage you to have source maps enabled in production, as they are useful f
 __webpack.prod.js__
 
 ``` diff
-  const merge = require('webpack-merge');
+  const { merge } = require('webpack-merge');
   const common = require('./webpack.common.js');
 
   module.exports = merge(common, {
@@ -225,11 +222,9 @@ __webpack.prod.js__
 
 T> Avoid `inline-***` and `eval-***` use in production as they can increase bundle size and reduce the overall performance.
 
-
 ## Minimize CSS
 
 It is crucial to minimize your CSS for production. Please see the [Minimizing for Production](/plugins/mini-css-extract-plugin/#minimizing-for-production) section.
-
 
 ## CLI Alternatives
 
