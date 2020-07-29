@@ -141,6 +141,13 @@ The [`dependOn` option](/configuration/entry-context/#dependencies) allows to sh
   };
 ```
 
+#### `optimization.runtimeChunk`
+
+`optimization.runtimeChunk: 'single'` is needed when multiple entry points are being used on a single HTML page.
+
+Using multiple entry points per page should be avoided when possible in favor of an entry point with multiple imports: `entry: { page: ['./analytics', './app'] }`. This results in a better optimization and consistent execution order when using `async` script tags.
+
+T> Multiple entry points per page could be used in scenarios where HTML is generated in a dynamic matter, e. g. when components on page are unknown at compile-time and HTML page is composed dynamically depending on the data.
 
 ### `SplitChunksPlugin`
 
