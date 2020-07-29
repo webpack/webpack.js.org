@@ -149,7 +149,6 @@ Using multiple entry points per page should be avoided when possible in favor of
 
 T> Multiple entry points per page could be used in scenarios where HTML is generated in a dynamic matter, e. g. when components on page are unknown at compile-time and HTML page is composed dynamically depending on the data.
 
-
 ### `SplitChunksPlugin`
 
 The [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
