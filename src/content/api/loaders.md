@@ -11,6 +11,9 @@ contributors:
   - jantimon
   - superburrito
   - wizardofhogwarts
+  - snitin315
+  - chenxsan
+  - jamesgeorge007
 ---
 
 A loader is just a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
@@ -80,7 +83,7 @@ T> Loaders were originally designed to work in synchronous loader pipelines, lik
 
 ### "Raw" Loader
 
-By default, the resource file is converted to a UTF-8 string and passed to the loader. By setting the `raw` flag, the loader will receive the raw `Buffer`. Every loader is allowed to deliver its result as `String` or as `Buffer`. The compiler converts them between loaders.
+By default, the resource file is converted to a UTF-8 string and passed to the loader. By setting the `raw` flag to `true`, the loader will receive the raw `Buffer`. Every loader is allowed to deliver its result as a `String` or as a `Buffer`. The compiler converts them between loaders.
 
 __raw-loader.js__
 
@@ -169,9 +172,6 @@ The steps above would be shortened to:
 |- a-loader normal execution
 ```
 
-See the [bundle-loader](https://github.com/webpack-contrib/bundle-loader) for a good example of how this process can be used in a more meaningful way.
-
-
 ## The Loader Context
 
 The loader context represents the properties that are available inside of a loader assigned to the `this` property.
@@ -199,14 +199,14 @@ In the example: `/abc` because `resource.js` is in this directory
 
 ### `this.rootContext`
 
-Starting with webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
+Since webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
 
 
 ### `this.request`
 
 The resolved request string.
 
-In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr"`
+In the example: `'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
 
 
 ### `this.query`
@@ -214,7 +214,12 @@ In the example: `"/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/re
 1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
 2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
 
-T> Use the [`getOptions` method](https://github.com/webpack/loader-utils#getoptions) from `loader-utils` to extract given loader options.
+
+### `this.getOptions(schema)`
+
+Extracts given loader options. Optionally, accepts JSON schema as an argument.
+
+T> Since webpack 5, `this.getOptions` is available in loader context. It substitutes `getOptions` method from [loader-utils](https://github.com/webpack/loader-utils#getoptions).
 
 
 ### `this.callback`
@@ -306,28 +311,28 @@ In the example: in loader1: `0`, in loader2: `1`
 
 The resource part of the request, including query.
 
-In the example: `"/abc/resource.js?rrr"`
+In the example: `'/abc/resource.js?rrr'`
 
 
 ### `this.resourcePath`
 
 The resource file.
 
-In the example: `"/abc/resource.js"`
+In the example: `'/abc/resource.js'`
 
 
 ### `this.resourceQuery`
 
 The query of the resource.
 
-In the example: `"?rrr"`
+In the example: `'?rrr'`
 
 
 ### `this.target`
 
 Target of compilation. Passed from configuration options.
 
-Example values: `"web"`, `"node"`
+Example values: `'web'`, `'node'`
 
 
 ### `this.webpack`
@@ -357,7 +362,7 @@ Here is a Warning!
  @ ./src/index.js 1:0-25
  ```
 
-T> Note that the warnings will not be displayed if `stats.warnings` is set to `false`, or some other omit setting is used to `stats` such as `none` or `errors-only`. See the [stats configuration](/configuration/stats/#stats).
+T> Note that the warnings will not be displayed if `stats.warnings` is set to `false`, or some other omit setting is used to `stats` such as `none` or `errors-only`. See the [stats presets configuration](/configuration/stats/#stats-presets).
 
 ### `this.emitError`
 
@@ -384,6 +389,8 @@ loadModule(request: string, callback: function(err, source, sourceMap, module))
 ```
 
 Resolves the given request to a module, applies all configured loaders and calls back with the generated source, the sourceMap and the module instance (usually an instance of [`NormalModule`](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js)). Use this function if you need to know the source code of another module to generate the result.
+
+`this.loadModule` in a loader context uses CommonJS resolve rules by default. Use `this.getResolve` with an appropriate `dependencyType`, e. g. `'esm'`, `'commonjs'` or a custom one before using a different semantic.
 
 
 ### `this.resolve`
@@ -432,6 +439,17 @@ emitFile(name: string, content: Buffer|string, sourceMap: {...})
 Emit a file. This is webpack-specific.
 
 
+### `this.hot`
+
+Information about HMR for loaders.
+
+```javascript
+module.exports = function(source) {
+  console.log(this.hot); // true if HMR is enabled via --hot flag or webpack configuration
+  return source;
+};
+```
+
 ### `this.fs`
 
 Access to the `compilation`'s `inputFileSystem` property.
@@ -458,15 +476,6 @@ exec(code: string, filename: string)
 Execute some code fragment like a module. See [this comment](https://github.com/webpack/webpack.js.org/issues/1268#issuecomment-313513988) for a replacement method if needed.
 
 
-### `this.resolveSync`
-
-``` typescript
-resolveSync(context: string, request: string) -> string
-```
-
-Resolve a request like a require expression.
-
-
 ### `this.value`
 
 Pass values to the next loader. If you know what your result exports if executed as a module, set this value here (as an only element array).
@@ -475,11 +484,6 @@ Pass values to the next loader. If you know what your result exports if executed
 ### `this.inputValue`
 
 Passed from the last loader. If you would execute the input argument as a module, consider reading this variable for a shortcut (for performance).
-
-
-### `this.options`
-
-W> The `options` property has been deprecated in webpack 3 and removed in webpack 4.
 
 
 ### `this.debug`

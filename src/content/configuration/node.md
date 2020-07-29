@@ -8,9 +8,10 @@ contributors:
   - Rob--W
   - byzyk
   - EugeneHlushko
+  - anikethsaha
 ---
 
-These options configure whether to polyfill or mock certain [Node.js globals](https://nodejs.org/docs/latest/api/globals.html) and modules. This allows code originally written for the Node.js environment to run in other environments like the browser.
+The following Node.js options configure whether to polyfill or mock certain [Node.js globals](https://nodejs.org/docs/latest/api/globals.html) and modules. This allows code originally written for the Node.js environment to run in other environments like the browser.
 
 This feature is provided by webpack's internal [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js) plugin. If the target is "web" (default) or "webworker", the [`NodeSourcePlugin`](https://github.com/webpack/webpack/blob/master/lib/node/NodeSourcePlugin.js) plugin is also activated.
 
@@ -28,6 +29,8 @@ This is an object where each property is the name of a Node global or module and
 
 W> Not every Node global supports all four options. The compiler will throw an error for property-value combinations that aren't supported (e.g. `global: 'empty'`). See the sections below for more details.
 
+T> If you are using a module which needs global variables in it, use `ProvidePlugin` instead of `global`.
+
 These are the defaults:
 
 __webpack.config.js__
@@ -37,8 +40,8 @@ module.exports = {
   //...
   node: {
     global: false,
-    __filename: 'mock',
-    __dirname: 'mock',
+    __filename: false,
+    __dirname: false,
   }
 };
 ```
@@ -49,26 +52,32 @@ Since webpack 3.0.0, the `node` option may be set to `false` to completely turn 
 
 `boolean = true`
 
-See [the source](https://github.com/webpack/webpack/blob/master/buildin/global.js) for the exact behavior of this object.
+Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` and `electron-main`.
+
+See [the source](https://nodejs.org/api/globals.html) for the exact behavior of this object.
 
 
 ## `node.__filename`
 
-`string = 'mock'` `boolean`
+`boolean` `string = mock`
+
+Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` and `electron-main`.
 
 Options:
 
-- `true`: The filename of the __input__ file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
+- `true`: The filename of the __input__ file relative to the [`context` option](/configuration/entry-context/#context).
 - `false`: The regular Node.js `__filename` behavior. The filename of the __output__ file when run in a Node.js environment.
 - `'mock'`: The fixed value `'index.js'`.
 
 
 ## `node.__dirname`
 
-`string = 'mock'` `boolean`
+`boolean` `string = mock`
+
+Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` and `electron-main`.
 
 Options:
 
-- `true`: The dirname of the __input__ file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
+- `true`: The dirname of the __input__ file relative to the [`context` option](/configuration/entry-context/#context).
 - `false`: The regular Node.js `__dirname` behavior. The dirname of the __output__ file when run in a Node.js environment.
 - `'mock'`: The fixed value `'/'`.

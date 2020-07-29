@@ -21,7 +21,7 @@ npm install --save-dev html-webpack-plugin
 
 The plugin will generate an HTML5 file for you that includes all your webpack
 bundles in the body using `script` tags. Just add the plugin to your webpack
-config as follows:
+configuration as follows:
 
 ```javascript
 var HtmlWebpackPlugin = require('html-webpack-plugin');
