@@ -9,6 +9,7 @@ contributors:
   - byzyk
   - spicalous
   - Neob91
+  - Loonride
 ---
 
 webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
@@ -34,7 +35,7 @@ T> In [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [w
 
 ## `watchOptions`
 
-`object` `number = 200`
+`object`
 
 A set of options used to customize watch mode:
 
@@ -47,17 +48,6 @@ module.exports = {
     aggregateTimeout: 200,
     poll: 1000
   }
-};
-```
-
-Providing a number to the `watchOptions` sets `watchOptions.aggregateTimeout` to the given number.
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  // same as watchOptions.aggregateTimeout = 300
-  watchOptions:  300
 };
 ```
 

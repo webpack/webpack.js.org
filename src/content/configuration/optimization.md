@@ -12,6 +12,7 @@ contributors:
   - anikethsaha
   - snitin315
   - pixel-ray
+  - chenxsan
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -84,6 +85,16 @@ module.exports = {
 };
 ```
 
+`'...'` can be used in `optimization.minimizer` to access the defaults.
+
+```js
+module.exports = {
+  optimization: {
+    minimizer: [new CssMinimizer(), '...'],
+  }
+};
+```
+
 ## `optimization.splitChunks`
 
 `object`
@@ -94,7 +105,7 @@ By default webpack v4+ provides new common chunks strategies out of the box for 
 
 `object` `string` `boolean`
 
-Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk to each entrypoint containing only the runtime. This setting is an alias for:
+Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk containing only the runtime to each entrypoint. This setting is an alias for:
 
 __webpack.config.js__
 

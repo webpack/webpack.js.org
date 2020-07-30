@@ -68,7 +68,7 @@ If you are enthusiastic about using the latest that webpack has to offer, you ca
 
 ``` bash
 npm install --save-dev webpack@next
-# or specific tag/branch
+# or a specific tag/branch
 npm install --save-dev webpack/webpack#<tagname/branchname>
 ```
 
