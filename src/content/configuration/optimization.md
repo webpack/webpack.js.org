@@ -157,7 +157,7 @@ module.exports = {
 
 ## `optimization.emitOnErrors`
 
-`boolean`
+`boolean = false`
 
 Use the `optimization.emitOnErrors` to emit assets whenever there are errors while compiling. This ensures that erroring assets are emitted. Critical errors are emitted into the generated code and will cause errors at runtime.
 
