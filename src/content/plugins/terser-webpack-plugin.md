@@ -519,6 +519,8 @@ Available placeholders: `[file]`, `[query]` and `[filebase]` (`[base]` for webpa
 The file where the extracted comments will be stored.
 Default is to append the suffix `.LICENSE.txt` to the original filename.
 
+> ⚠️ We highly recommend using the `txt` extension. Using `js`/`cjs`/`mjs` extensions may conflict with existing assets which leads to broken code.
+
 **webpack.config.js**
 
 ```js

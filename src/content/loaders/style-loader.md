@@ -570,7 +570,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: 'style-loader',
         options: {
           esModule: true,
         },
