@@ -1000,10 +1000,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `sourceMap` {#sourcemap}
-=======
-### `icss`
+### `icss` {#icss}
 
 Type: Boolean Default: `true` if `modules` are enabled, false otherwise
 
@@ -1030,8 +1027,7 @@ module.exports = {
 };
 ```
 
-### `sourceMap`
->>>>>>> a79777cdac452a130fd7499974213fe918c95554
+### `sourceMap` {#sourcemap}
 
 Type: `Boolean`
 Default: depends on the `compiler.devtool` value
