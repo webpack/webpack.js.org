@@ -32,7 +32,7 @@ const Splash = () => (
       </Container>
     </div>
 
-    <div className="splash__section page__content">
+    {/* <div className="splash__section page__content">
       <Container>
         <Markdown>
           <h1>Support the Team</h1>
@@ -66,7 +66,7 @@ const Splash = () => (
           ) : null }
         </Markdown>
       </Container>
-    </div>
+    </div> */}
   </div>
 );
 
