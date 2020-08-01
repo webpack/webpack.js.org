@@ -3,7 +3,7 @@ title: webpack
 sort: -1
 ---
 
-## Write Your Code {#write-your-code}
+## 编写代码 {#write-your-code}
 
 <div class="splash__wrap">
 <div class="splash__left">
@@ -31,12 +31,12 @@ export default function bar() {
 </div>
 
 
-## Bundle It {#bundle-it}
+## 构建 {#bundle-it}
 
 <div class="splash__wrap">
 <div class="splash__left">
 
-__[Without config](https://youtu.be/3Nv9muOkb6k?t=21293)__ or provide custom __webpack.config.js__
+__[不使用配置](https://youtu.be/3Nv9muOkb6k?t=21293)__ 或提供自定义的 __webpack.config.js__
 
 ```js
 const path = require('path');
@@ -71,8 +71,8 @@ __page.html__
 </div>
 </div>
 
-Then run `webpack` on the command-line to create `bundle.js`.
+在控制台运行 `webpack` 命令，生成 `bundle.js`。
 
-## Awesome isn't it? Let's dive in! {#awesome-isnt-it-lets-dive-in}
+## 深入学习 {#awesome-isnt-it-lets-dive-in}
 
-__[Get Started](/guides/getting-started)__ quickly in our __Guides__ section, or dig into the __[Concepts](/concepts)__ section for more high-level information on the core notions behind webpack.
+**[快速开始](/guides/getting-started)**部分在**指南**章节，如果有兴趣深入学习，可以查阅**[概念](/concepts)**章节，以了解 webpack 的核心概念以及底层实现。

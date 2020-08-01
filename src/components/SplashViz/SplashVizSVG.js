@@ -4,7 +4,7 @@ module.exports = {
   <svg viewBox="0 0 1088 615" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g stroke-width="1" fill="none" fill-rule="evenodd">
         <text font-family="'Source Sans Pro', sans-serif" font-size="18" font-weight="600" fill="#86A5BA">
-            <tspan x="933.778" y="459">STATIC ASSETS</tspan>
+            <tspan x="933.778" y="459">静态资源</tspan>
         </text>
         <g transform="translate(1002, 326)">
             <g>
@@ -49,7 +49,7 @@ module.exports = {
             <path d="M0.477941176,72.395 C0.477941176,72.395 169.382939,0.895 447.847936,0.895" stroke-dasharray="6" transform="translate(224.162939, 36.645000) scale(1, -1) translate(-224.162939, -36.645000) "></path>
         </g>
         <text font-family="'Source Sans Pro', sans-serif" font-size="18" font-weight="600" fill="#86A5BA">
-            <tspan x="24.934" y="562">MODULES WITH DEPENDENCIES</tspan>
+            <tspan x="24.934" y="562">模块依赖</tspan>
         </text>
         <g transform="translate(228, 335)">
             <g>
