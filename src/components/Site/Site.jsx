@@ -66,7 +66,7 @@ class Site extends React.Component {
           toggleSidebar={this._toggleSidebar}
           links={[
             {
-              content: '文档',
+              content: '中文文档',
               url: '/concepts/',
               isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
               children: this._strip(sections.filter(item => item.name !== 'contribute'))
