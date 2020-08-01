@@ -452,7 +452,7 @@ module.exports = {
 
 ## `optimization.usedExports`
 
-`boolean = true`
+`boolean = true`  `string: 'global'`
 
 Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimizationoccurrenceorder). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
 Dead code elimination in minimizers will benefit from this and can remove unused exports.
@@ -464,6 +464,17 @@ module.exports = {
   //...
   optimization: {
     usedExports: false
+  }
+};
+```
+
+To opt-out from used exports analysis per runtime:
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    usedExports: 'global'
   }
 };
 ```
