@@ -243,7 +243,7 @@ export {
 
 `var Button$1 = /*#__PURE__*/ withAppProvider()(Button);`
 
-这样会允许去掉这代码代码，但仍然会有一些导入的问题需要被包括/评估，因为它们包含了副作用。
+这样会允许去掉这代码，但仍然会有一些导入的问题需要被包括/评估，因为它们包含了副作用。
 
 为了解决这个问题，我们使用在 `package.json` 中[`"sideEffects"`](/guides/tree-shaking/#mark-the-file-as-side-effect-free) 属性。
 
