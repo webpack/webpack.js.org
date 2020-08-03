@@ -1136,10 +1136,10 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    proxy: [{
+    proxy: {
       context: ['/auth', '/api'],
       target: 'http://localhost:3000',
-    }]
+    }
   }
 };
 ```
