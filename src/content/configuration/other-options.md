@@ -13,6 +13,7 @@ contributors:
   - rishabh3112
   - niravasher
   - Neob91
+  - chenxsan
 related:
   - title: 使用 Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -392,13 +393,21 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### infrastructureLogging {#infrastructurelogging}
+=======
+## infrastructureLogging
+>>>>>>> 5d17458cbd113c4fe8eb19c0a8fa034751b4fad6
 
 用于基础设施水平的日志选项。
 
 `object = {}`
 
+<<<<<<< HEAD
 #### infrastructureLogging.level {#infrastructurelogginglevel}
+=======
+### level
+>>>>>>> 5d17458cbd113c4fe8eb19c0a8fa034751b4fad6
 
 `string`
 
@@ -424,7 +433,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 #### infrastructureLogging.debug {#infrastructureloggingdebug}
+=======
+### debug
+>>>>>>> 5d17458cbd113c4fe8eb19c0a8fa034751b4fad6
 
 `string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 
