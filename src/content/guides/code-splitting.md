@@ -141,13 +141,13 @@ Entrypoint another = another.bundle.js
   };
 ```
 
-#### `optimization.runtimeChunk`
+#### `optimization.runtimeChunk` {#optimizationruntimechunk}
 
-`optimization.runtimeChunk: 'single'` is needed when multiple entry points are being used on a single HTML page.
+在单个 HTML 页面上使用多个入口时，需设置 `optimization.runtimeChunk: 'single'`。
 
-Using multiple entry points per page should be avoided when possible in favor of an entry point with multiple imports: `entry: { page: ['./analytics', './app'] }`. This results in a better optimization and consistent execution order when using `async` script tags.
+应避免使用每页多个入口，而应使用多个引入的入口：`entry: { page: ['./analytics', './app'] }`。当在 script 标签中使用 `async` 时，会有更易于优化，且执行顺序一致。
 
-T> Multiple entry points per page could be used in scenarios where HTML is generated in a dynamic matter, e. g. when components on page are unknown at compile-time and HTML page is composed dynamically depending on the data.
+T> 在使用脚本动态生成  HTML 的场景中，可以使用每页多个入口，例如：当页面上的组件编译时间未知，且 HTML 的页面数据动态获取时。
 
 ### `SplitChunksPlugin` {#splitchunksplugin}
 
