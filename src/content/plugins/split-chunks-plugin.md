@@ -14,6 +14,7 @@ contributors:
   - ryandrew14
   - snitin315
   - chenxsan
+  - rohrlaf
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
@@ -35,9 +36,9 @@ By default it only affects on-demand chunks, because changing initial chunks wou
 webpack will automatically split chunks based on these conditions:
 
 - New chunk can be shared OR modules are from the `node_modules` folder
-- New chunk would be bigger than 30kb (before min+gz)
-- Maximum number of parallel requests when loading chunks on demand would be lower or equal to 6
-- Maximum number of parallel requests at initial page load would be lower or equal to 4
+- New chunk would be bigger than 20kb (before min+gz)
+- Maximum number of parallel requests when loading chunks on demand would be lower or equal to 30
+- Maximum number of parallel requests at initial page load would be lower or equal to 30
 
 When trying to fulfill the last two conditions, bigger chunks are preferred.
 
@@ -58,13 +59,13 @@ module.exports = {
   //...
   optimization: {
     splitChunks: {
-      chunks: 'async',
+      chunks: 'all',
       minSize: 20000,
       minRemainingSize: 0,
       maxSize: 0,
       minChunks: 1,
-      maxAsyncRequests: 6,
-      maxInitialRequests: 4,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
       automaticNameDelimiter: '~',
       enforceSizeThreshold: 50000,
       cacheGroups: {
@@ -89,13 +90,13 @@ W> Since webpack 5, passing an entry name to `{cacheGroup}.test` and using a nam
 
 ### `splitChunks.automaticNameDelimiter` {#splitchunksautomaticnamedelimiter}
 
-`string`
+`string = '~'`
 
 By default webpack will generate names using origin and name of the chunk (e.g. `vendors~main.js`). This option lets you specify the delimiter to use for the generated names.
 
 ### `splitChunks.chunks` {#splitchunkschunks}
 
-`function (chunk)` `string`
+`string = 'all'` `function (chunk)`
 
 This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
 
@@ -145,13 +146,13 @@ Maximum number of parallel requests at an entry point.
 
 ### `splitChunks.minChunks` {#splitchunksminchunks}
 
-`number`
+`number = 1`
 
 Minimum number of chunks that must share a module before splitting.
 
 ### `splitChunks.minSize` {#splitchunksminsize}
 
-`number`
+`number = 20000`
 
 Minimum size, in bytes, for a chunk to be generated.
 
@@ -168,7 +169,7 @@ Size threshold at which splitting is enforced and other restrictions (minRemaini
 
 #### `splitChunks.cacheGroups.{cacheGroup}.minRemainingSize` {#splitchunkscachegroupscachegroupminremainingsize}
 
-`number`
+`number = 0`
 
 `splitChunks.minRemainingSize` option was introduced in webpack 5 to avoid zero sized modules by ensuring that the minimum size of the chunk which remains after splitting is above a limit. Defaults to `0` in ['development' mode](/configuration/mode/#mode-development). For other cases `splitChunks.minRemainingSize` defaults to the value of `splitChunks.minSize` so it doesn't need to be specified manually except for the rare cases where deep control is required.
 
@@ -176,7 +177,7 @@ W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remai
 
 ### `splitChunks.maxSize` {#splitchunksmaxsize}
 
-`number`
+`number = 0`
 
 Using `maxSize` (either globally `optimization.splitChunks.maxSize` per cache group `optimization.splitChunks.cacheGroups[x].maxSize` or for the fallback cache group `optimization.splitChunks.fallbackCacheGroup.maxSize`) tells webpack to try to split chunks bigger than `maxSize` bytes into smaller parts. Parts will be at least `minSize` (next to `maxSize`) in size.
 The algorithm is deterministic and changes to the modules will only have local impact. So that it is usable when using long term caching and doesn't require records. `maxSize` is only a hint and could be violated when modules are bigger than `maxSize` or splitting would violate `minSize`.

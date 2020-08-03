@@ -9,7 +9,7 @@ contributors:
   - iamakulov
 ---
 
-IgnorePlugin prevents generation of modules for `import` or `require` calls matching the regular expressions or filter functions:
+IgnorePlugin prevents the generation of modules for `import` or `require` calls matching the regular expressions or filter functions:
 
 ## Using regular expressions {#using-regular-expressions}
 

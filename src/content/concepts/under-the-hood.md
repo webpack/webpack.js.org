@@ -5,6 +5,7 @@ contributors:
   - smelukov
   - EugeneHlushko
   - chenxsan
+  - amirsaeed671
 ---
 
 > 此章节描述 webpack 内部实现，对于插件开发人员可能会提供帮助
@@ -81,7 +82,7 @@ module.exports = {
 };
 ```
 
-__./src/index.js__
+__./src/index.jsx__
 
 ```js
 import React from 'react';
