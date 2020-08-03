@@ -254,7 +254,7 @@
 	{
 		"repo": "webpack-contrib/css-minimizer-webpack-plugin",
 		"npm": "css-minimizer-webpack-plugin",
-		"description": "This plugin uses cssnano to optimize and minify your CSS.",
+		"description": "Optimize and minify your CSS using cssnano.",
 		"maintainer": ""
 	}
 ]
