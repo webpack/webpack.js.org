@@ -74,11 +74,7 @@ W> __不推荐__ 全局安装 webpack。这会将你项目中的 webpack 锁定�
 
 ``` bash
 npm install --save-dev webpack@next
-<<<<<<< HEAD
-# 或指定的 tag/分支
-=======
-# or a specific tag/branch
->>>>>>> 5d17458cbd113c4fe8eb19c0a8fa034751b4fad6
+# 或特定的 tag/分支
 npm install --save-dev webpack/webpack#<tagname/branchname>
 ```
 

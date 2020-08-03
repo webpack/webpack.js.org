@@ -393,21 +393,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### infrastructureLogging {#infrastructurelogging}
-=======
-## infrastructureLogging
->>>>>>> 5d17458cbd113c4fe8eb19c0a8fa034751b4fad6
+## infrastructureLogging {#infrastructurelogging}
 
 用于基础设施水平的日志选项。
 
 `object = {}`
 
-<<<<<<< HEAD
-#### infrastructureLogging.level {#infrastructurelogginglevel}
-=======
-### level
->>>>>>> 5d17458cbd113c4fe8eb19c0a8fa034751b4fad6
+### level {#level}
 
 `string`
 
@@ -433,11 +425,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-#### infrastructureLogging.debug {#infrastructureloggingdebug}
-=======
-### debug
->>>>>>> 5d17458cbd113c4fe8eb19c0a8fa034751b4fad6
+### debug {#debug}
 
 `string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 
