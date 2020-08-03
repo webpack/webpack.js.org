@@ -243,9 +243,9 @@ export {
 
 `var Button$1 = /*#__PURE__*/ withAppProvider()(Button);`
 
-这样会允许去掉这代码，但仍然会有一些导入的问题需要被包括/评估，因为它们包含了副作用。
+这会使得这段代码被过滤，但仍然会有一些引入的问题，需要对其进行评估，因为它们产生了副作用。
 
-为了解决这个问题，我们使用在 `package.json` 中[`"sideEffects"`](/guides/tree-shaking/#mark-the-file-as-side-effect-free) 属性。
+为了解决这个问题，我们需要在 `package.json` 中添加 [`"sideEffects"`](/guides/tree-shaking/#mark-the-file-as-side-effect-free) 属性。
 
 它类似于 `/*#__PURE__*/` 但是作用于模块的层面，而不是代码语句的层面。它表示的意思是(指`"sideEffects"` 属性)：“如果被标记为无副作用的模块没有被直接导出使用，打包工具会跳过进行模块的副作用分析评估。”。
 
