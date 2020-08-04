@@ -319,8 +319,8 @@ Supported types:
 - `'umd2'`
 - `'jsonp'`
 - `'system'`
-- `'promise'` - same as `'var'` but awaits the result (async module, depends on [`experiments.importAsync`](/configuration/experiments/))
-- `'import'` - uses `import()` to load a native EcmaScript module (async module, depends on [`experiments.importAsync`](/configuration/experiments/))
+- `'promise'` - same as `'var'` but awaits the result (async module)
+- `'import'` - uses `import()` to load a native EcmaScript module (async module)
 
 __webpack.config.js__
 
