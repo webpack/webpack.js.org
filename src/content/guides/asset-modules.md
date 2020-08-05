@@ -4,6 +4,7 @@ sort: 24
 contributors:
   - smelukov
   - EugeneHlushko
+  - chenxsan
 related:
   - title: webpack 5 - Asset Modules
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
@@ -82,7 +83,7 @@ All `.png` files will be emitted to the output directory and their paths will be
 
 ### Custom output filename
 
-By default, `asset/resource` modules are emitting with `[hash][ext]` filename into output directory.
+By default, `asset/resource` modules are emitting with `[hash][ext][query]` filename into output directory.
 
 You can modify this template by setting [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) in your webpack configuration:
 
@@ -96,7 +97,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-+   assetModuleFilename: 'images/[hash][ext]'
++   assetModuleFilename: 'images/[hash][ext][query]'
   },
   experiments: {
     asset: true
@@ -122,7 +123,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-+   assetModuleFilename: 'images/[hash][ext]'
++   assetModuleFilename: 'images/[hash][ext][query]'
   },
   experiments: {
     asset: true
@@ -138,7 +139,7 @@ module.exports = {
 +       test: /\.html/,
 +       type: 'asset/resource',
 +       generator: {
-+         filename: 'static/[hash][ext]'
++         filename: 'static/[hash][ext][query]'
 +       }
 +     }
     ]
@@ -162,7 +163,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
--   assetModuleFilename: 'images/[hash][ext]'
+-   assetModuleFilename: 'images/[hash][ext][query]'
   },
   experiments: {
     asset: true
@@ -180,7 +181,7 @@ module.exports = {
 -       test: /\.html/,
 -       type: 'asset/resource',
 -       generator: {
--         filename: 'static/[hash][ext]'
+-         filename: 'static/[hash][ext][query]'
 -       }
 -     }
     ]
