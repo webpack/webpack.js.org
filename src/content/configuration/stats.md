@@ -698,7 +698,7 @@ module.exports = {
 
 `boolean = false`
 
-Add information about assets that are related to other assets (like SourceMaps for assets).
+Tells `stats` whether to add information about assets that are related to other assets (like SourceMaps for assets).
 
 ```javascript
 module.exports = {
