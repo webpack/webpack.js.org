@@ -694,6 +694,21 @@ module.exports = {
 };
 ```
 
+### `stats.relatedAssets`
+
+`boolean = false`
+
+Tells `stats` whether to add information about assets that are related to other assets (like SourceMaps for assets).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    relatedAssets: true
+  }
+};
+```
+
 ### `stats.source`
 
 `boolean = false`
