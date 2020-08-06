@@ -9,6 +9,7 @@ contributors:
   - koke
   - jamesgeorge007
   - anshumanv
+  - EugeneHlushko
 related:
   - title: Building Eval Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin
@@ -62,7 +63,6 @@ The following code would exclude source maps for any modules in the `vendor.js` 
 
 ``` js
 new webpack.EvalSourceMapDevToolPlugin({
-  filename: '[name].js.map',
   exclude: ['vendor.js']
 });
 ```
