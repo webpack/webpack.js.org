@@ -68,12 +68,25 @@ worker.addEventListener('message', function (event) {});
 
 ## 选项 {#options}
 
-### `fallback` {#fallback}
+|                 选项名                  |             类型             |             默认值             | 描述                                                                       |
+| :-----------------------------------: | :--------------------------: | :-----------------------------: | :-------------------------------------------------------------------------------- |
+|        **[`worker`](#worker)**        |      `{String\|Object}`      |            `Worker`             | 允许设置 web worker 构造函数的名称和选项                             |
+|    **[`publicPath`](#publicpath)**    |     `{String\|Function}`     |  与 `output.publicPath` 相同   | 在浏览器中引用时，指定输出文件的 public url 地址 |
+|      **[`filename`](#filename)**      |     `{String\|Function}`     |   与 `output.filename` 相同    | web worker 入口 chunk 的文件名                                      |
+| **[`chunkFilename`](#chunkfilename)** |          `{String}`          | 与 `output.chunkFilename` 相同 | web worker 非入口 chunk 的文件名                                  |
+|        **[`inline`](#inline)**        | `'no-fallback'\|'fallback'`  |           `undefined`           | 允许将内联的 web worker 作为 `BLOB`                                            |
+|      **[`esModule`](#esmodule)**      |         `{Boolean}`          |             `true`              | 使用 ES 模块语法                                                             |
 
-类型： `Boolean`
-默认值： `false`
+### `worker` {#worker}
 
-是否需要支持非 worker 环境的回退。
+类型：`String|Object`
+默认值：`Worker`
+
+设置 worker 的类型，
+
+#### `String` {#string}
+
+允许为 web worker 设置 constructor 的名字。
 
 **webpack.config.js**
 
@@ -82,9 +95,170 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.worker\.js$/,
-        use: { loader: 'worker-loader' },
-        options: { fallback: true },
+        test: /\.worker\.(c|m)?js$/i,
+        loader: 'worker-loader',
+        options: {
+          worker: 'SharedWorker',
+        },
+      },
+    ],
+  },
+};
+```
+
+#### `Object` {#object}
+
+为 web worker 设置 constructor 的名字和选项。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.worker\.(c|m)?js$/i,
+        loader: 'worker-loader',
+        options: {
+          worker: {
+            type: 'SharedWorker',
+            options: {
+              type: 'classic',
+              credentials: 'omit',
+              name: 'my-custom-worker-name',
+            },
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+### `publicPath` {#publicpath}
+
+类型：`String|Function`
+默认值：与 `output.publicPath` 相同
+
+在浏览器中引用时，`publicPath` 用于指定输出文件的 public URL 地址。
+如未定义，则使用与其他 webpack 资源相同的 public 地址。
+
+#### `String` {#string}
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.worker\.(c|m)?js$/i,
+        loader: 'worker-loader',
+        options: {
+          publicPath: '/scripts/workers/',
+        },
+      },
+    ],
+  },
+};
+```
+
+#### `Function` {#function}
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.worker\.(c|m)?js$/i,
+        loader: 'worker-loader',
+        options: {
+          publicPath: (pathData, assetInfo) => {
+            return `/scripts/${pathData.hash}/workers/`;
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+### `filename` {#filename}
+
+类型：`String|Function`
+默认值：与 `output.filename` 相同，会添加 `worker` 后缀，示例 —— `output.filename: '[name].js'` 的选项会变成 `[name].worker.js`
+
+web worker 入口 chunk 的文件名。
+
+#### `String` {#string}
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.worker\.(c|m)?js$/i,
+        loader: 'worker-loader',
+        options: {
+          filename: '[name].[contenthash].worker.js',
+        },
+      },
+    ],
+  },
+};
+```
+
+#### `Function` {#function}
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.worker\.(c|m)?js$/i,
+        loader: 'worker-loader',
+        options: {
+          filename: (pathData) => {
+            if (
+              /\.worker\.(c|m)?js$/i.test(pathData.chunk.entryModule.resource)
+            ) {
+              return '[name].custom.worker.js';
+            }
+
+            return '[name].js';
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+### `chunkFilename` {#chunkfilename}
+
+类型：`String`
+默认值：与 `output.chunkFilename` 相同，并在基础上添加 `worker` 后缀，示例 —— `output.chunkFilename: '[id].js'` 选项值会变为 `[id].worker.js`
+
+web worker 非入口 chunk 的文件名。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.worker\.(c|m)?js$/i,
+        loader: 'worker-loader',
+        options: {
+          chunkFilename: '[id].[contenthash].worker.js',
+        },
       },
     ],
   },
@@ -93,28 +267,12 @@ module.exports = {
 
 ### `inline` {#inline}
 
-类型： `Boolean`
-默认值： `false`
+类型：`'fallback' | 'no-fallback'`
+默认值：`undefined`
 
-你也可以使用 `inline` 参数，将 worker 内联为一个 BLOB。
+允许将内联的 web worker 作为 `BLOB`。
 
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.worker\.js$/,
-        use: { loader: 'worker-loader' },
-        options: { inline: true },
-      },
-    ],
-  },
-};
-```
-
-*注意：内联模式还会为不支持内联 worker 的浏览器创建 chunk， 要禁用此行为，只需将  `fallback` 参数设置为 `false`。*
+当 inline 模式设置为 `fallback` 时，会为不支持 web worker 的浏览器创建文件，要禁用此行为，只需将其设置为 `no-fallback` 即可。
 
 **webpack.config.js**
 
@@ -123,22 +281,25 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.worker\.(c|m)?js$/i,
         loader: 'worker-loader',
-        options: { inline: true, fallback: false },
+        options: {
+          inline: 'fallback',
+        },
       },
     ],
   },
 };
 ```
 
-### `name` {#name}
+### `esModule` {#esmodule}
 
-类型： `String`
-默认值： `[hash].worker.js`
+类型：`Boolean`
+默认值：`true`
 
-使用 `name` 参数，为输出的脚本设置一个自定义名称。
-名称可能含有 `[hash]` 字符串，为了缓存会被替换为依赖内容哈希值。
-只使用 `name` 时，`[hash]` 会被忽略。
+默认情况下，`worker-loader` 会生成使用 ES 模块语法的 JS 模块.
+
+如果想启用 CommonJS 模块语法，可使用如下配置:
 
 **webpack.config.js**
 
@@ -147,43 +308,16 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.worker\.(c|m)?js$/i,
         loader: 'worker-loader',
-        options: { name: 'WorkerName.[hash].js' },
+        options: {
+          esModule: false,
+        },
       },
     ],
   },
 };
 ```
-
-### publicPath {#publicpath}
-
-类型： `String`
-默认值： `null`
-
-重写 worker 脚本的下载路径。
-如果未指定， 则使用与其他 webpack 资源相同的公共路径。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        loader: 'worker-loader',
-        options: { publicPath: '/scripts/workers/' },
-      },
-    ],
-  },
-};
-```
-
-### workerType {#workertype}
-
-Type: `string`
-Default: `Worker`
-
-Set the worker type. Defaults to `Worker`. Supports `ServiceWorker`, `SharedWorker`.
 
 ## Examples {#examples}
 
@@ -191,59 +325,151 @@ Set the worker type. Defaults to `Worker`. Supports `ServiceWorker`, `SharedWork
 
 worker 文件可以像其他文件导入依赖那样来导入依赖：
 
-**Worker.js**
+**index.js**
 
 ```js
-const _ = require('lodash');
+import Worker from './my.worker.js';
 
-const obj = { foo: 'foo' };
+var worker = new Worker();
 
-_.has(obj, 'foo');
+var result;
 
-// Post data to parent thread
-self.postMessage({ foo: 'foo' });
+worker.onmessage = function (event) {
+  if (!result) {
+    result = document.createElement('div');
+    result.setAttribute('id', 'result');
 
-// Respond to message from parent thread
-self.addEventListener('message', (event) => console.log(event));
+    document.body.append(result);
+  }
+
+  result.innerText = JSON.stringify(event.data);
+};
+
+const button = document.getElementById('button');
+
+button.addEventListener('click', function () {
+  worker.postMessage({ postMessage: true });
+});
 ```
 
-### 集成 ES 模块 {#integrating-with-es-modules}
-
-*注意：如果配置好 [`babel-loader`](https://github.com/babel/babel-loader) ， 你甚至可以使用 ES2015 模块。*
-
-**Worker.js**
+**my.worker.js**
 
 ```js
-import _ from 'lodash';
+onmessage = function (event) {
+  var workerResult = event.data;
 
-const obj = { foo: 'foo' };
+  workerResult.onmessage = true;
 
-_.has(obj, 'foo');
+  postMessage(workerResult);
+};
+```
 
-// Post data to parent thread
-self.postMessage({ foo: 'foo' });
+**webpack.config.js**
 
-// Respond to message from parent thread
-self.addEventListener('message', (event) => console.log(event));
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.worker\.(c|m)?js$/i,
+        loader: 'worker-loader',
+        options: {
+          esModule: false,
+        },
+      },
+    ],
+  },
+};
+```
+
+### 集成 ES6+ 特性 {#integrating-with-es6-features}
+
+如果使用 [`babel-loader`](https://github.com/babel/babel-loader) 配置，甚至可以使用 ES6+ 的特性。
+
+**index.js**
+
+```js
+import Worker from './my.worker.js';
+
+const worker = new Worker();
+
+let result;
+
+worker.onmessage = (event) => {
+  if (!result) {
+    result = document.createElement('div');
+    result.setAttribute('id', 'result');
+
+    document.body.append(result);
+  }
+
+  result.innerText = JSON.stringify(event.data);
+};
+
+const button = document.getElementById('button');
+
+button.addEventListener('click', () => {
+  worker.postMessage({ postMessage: true });
+});
+```
+
+**my.worker.js**
+
+```js
+onmessage = function (event) {
+  const workerResult = event.data;
+
+  workerResult.onmessage = true;
+
+  postMessage(workerResult);
+};
+```
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.worker\.(c|m)?js$/i,
+        use: [
+          {
+            loader: 'worker-loader',
+          },
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
 ```
 
 ### 集成 TypeScript {#integrating-with-typescript}
 
-为了集成 TypeScript，在导出 worker 时，你需要声明一个自定义模块。
+要与 TypeScript 集成，你需要为 worker 导出一个自定义模块。
 
 **typings/worker-loader.d.ts**
 
 ```typescript
 declare module 'worker-loader!*' {
+  // You need to change `Worker`, if you specified a different value for the `workerType` option
   class WebpackWorker extends Worker {
     constructor();
   }
 
+  // Uncomment this if you set the `esModule` option to `false`
+  // export = WebpackWorker;
   export default WebpackWorker;
 }
 ```
 
-**Worker.ts**
+**my.worker.ts**
 
 ```typescript
 const ctx: Worker = self as any;
@@ -255,7 +481,7 @@ ctx.postMessage({ foo: 'foo' });
 ctx.addEventListener('message', (event) => console.log(event));
 ```
 
-**App.ts**
+**index.ts**
 
 ```typescript
 import Worker from 'worker-loader!./Worker';
@@ -273,6 +499,7 @@ worker.addEventListener('message', (event) => {});
 [`WebWorkers`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) 受到 [同源策略](https://en.wikipedia.org/wiki/Same-origin_policy) 的限制， 如果 `webpack` 资源的访问服务和应用程序不是同源，浏览器就会拦截其下载。
 如果在 CDN 域下托管资源， 通常就会出现这种情况。 
 甚至从 `webpack-dev-server` 下载时都会被拦截。
+
 有两种解决方法：
 
 第一种，通过配置 [`inline`](#inline) 参数，将 worker 作为 blob 内联， 而不是将其作为外部脚本下载
@@ -291,7 +518,7 @@ module.exports = {
     rules: [
       {
         loader: 'worker-loader',
-        options: { inline: true },
+        options: { inline: 'fallback' },
       },
     ],
   },
