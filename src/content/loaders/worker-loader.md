@@ -68,34 +68,25 @@ worker.addEventListener('message', function (event) {});
 
 ## 选项 {#options}
 
-<<<<<<< HEAD
-### `fallback` {#fallback}
-
-类型： `Boolean`
-默认值： `false`
-
-是否需要支持非 worker 环境的回退。
-=======
-|                 Name                  |             Type             |             Default             | Description                                                                       |
+|                 选项名                  |             类型             |             默认值             | 描述                                                                       |
 | :-----------------------------------: | :--------------------------: | :-----------------------------: | :-------------------------------------------------------------------------------- |
-|        **[`worker`](#worker)**        |      `{String\|Object}`      |            `Worker`             | Allows to set web worker constructor name and options                             |
-|    **[`publicPath`](#publicpath)**    |     `{String\|Function}`     |  based on `output.publicPath`   | specifies the public URL address of the output files when referenced in a browser |
-|      **[`filename`](#filename)**      |     `{String\|Function}`     |   based on `output.filename`    | The filename of entry chunks for web workers                                      |
-| **[`chunkFilename`](#chunkfilename)** |          `{String}`          | based on `output.chunkFilename` | The filename of non-entry chunks for web workers                                  |
-|        **[`inline`](#inline)**        | `'no-fallback'\|'fallback'`  |           `undefined`           | Allow to inline the worker as a `BLOB`                                            |
-|      **[`esModule`](#esmodule)**      |         `{Boolean}`          |             `true`              | Use ES modules syntax                                                             |
+|        **[`worker`](#worker)**        |      `{String\|Object}`      |            `Worker`             | 允许设置 web worker 构造函数的名称和选项                             |
+|    **[`publicPath`](#publicpath)**    |     `{String\|Function}`     |  与 `output.publicPath` 相同   | 在浏览器中引用时，指定输出文件的 public url 地址 |
+|      **[`filename`](#filename)**      |     `{String\|Function}`     |   与 `output.filename` 相同    | web worker 入口 chunk 的文件名                                      |
+| **[`chunkFilename`](#chunkfilename)** |          `{String}`          | 与 `output.chunkFilename` 相同 | web worker 非入口 chunk 的文件名                                  |
+|        **[`inline`](#inline)**        | `'no-fallback'\|'fallback'`  |           `undefined`           | 允许将内联的 web worker 作为 `BLOB`                                            |
+|      **[`esModule`](#esmodule)**      |         `{Boolean}`          |             `true`              | 使用 ES 模块语法                                                             |
 
-### `worker`
+### `worker` {#worker}
 
-Type: `String|Object`
-Default: `Worker`
+类型：`String|Object`
+默认值：`Worker`
 
-Set the worker type.
+设置 worker 的类型，
 
-#### `String`
+#### `String` {#string}
 
-Allows to set web worker constructor name.
->>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
+允许为 web worker 设置 constructor 的名字。
 
 **webpack.config.js**
 
@@ -115,17 +106,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `inline` {#inline}
+#### `Object` {#object}
 
-类型： `Boolean`
-默认值： `false`
-
-你也可以使用 `inline` 参数，将 worker 内联为一个 BLOB。
-=======
-#### `Object`
-
-Allow to set web worker constructor name and options.
+为 web worker 设置 constructor 的名字和选项。
 
 **webpack.config.js**
 
@@ -152,16 +135,15 @@ module.exports = {
 };
 ```
 
-### `publicPath`
+### `publicPath` {#publicpath}
 
-Type: `String|Function`
-Default: based on `output.publicPath`
+类型：`String|Function`
+默认值：与 `output.publicPath` 相同
 
-The `publicPath` specifies the public URL address of the output files when referenced in a browser.
-If not specified, the same public path used for other webpack assets is used.
+在浏览器中引用时，`publicPath` 用于指定输出文件的 public URL 地址。
+如未定义，则使用与其他 webpack 资源相同的 public 地址。
 
-#### `String`
->>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
+#### `String` {#string}
 
 **webpack.config.js**
 
@@ -181,11 +163,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-*注意：内联模式还会为不支持内联 worker 的浏览器创建 chunk， 要禁用此行为，只需将  `fallback` 参数设置为 `false`。*
-=======
-#### `Function`
->>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
+#### `Function` {#function}
 
 **webpack.config.js**
 
@@ -207,24 +185,14 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `name` {#name}
+### `filename` {#filename}
 
-类型： `String`
-默认值： `[hash].worker.js`
+类型：`String|Function`
+默认值：与 `output.filename` 相同，会添加 `worker` 后缀，示例 —— `output.filename: '[name].js'` 的选项会变成 `[name].worker.js`
 
-使用 `name` 参数，为输出的脚本设置一个自定义名称。
-名称可能含有 `[hash]` 字符串，为了缓存会被替换为依赖内容哈希值。
-只使用 `name` 时，`[hash]` 会被忽略。
-=======
-### `filename`
+web worker 入口 chunk 的文件名。
 
-Type: `String|Function`
-Default: based on `output.filename`, adding `worker` suffix, for example - `output.filename: '[name].js'` value of this option will be `[name].worker.js`
-
-The filename of entry chunks for web workers.
-
-#### `String`
+#### `String` {#string}
 
 **webpack.config.js**
 
@@ -244,8 +212,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
->>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
+#### `Function` {#function}
 
 **webpack.config.js**
 
@@ -273,22 +240,12 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### publicPath {#publicpath}
+### `chunkFilename` {#chunkfilename}
 
-类型： `String`
-默认值： `null`
+类型：`String`
+默认值：与 `output.chunkFilename` 相同，并在基础上添加 `worker` 后缀，示例 —— `output.chunkFilename: '[id].js'` 选项值会变为 `[id].worker.js`
 
-重写 worker 脚本的下载路径。
-如果未指定， 则使用与其他 webpack 资源相同的公共路径。
-=======
-### `chunkFilename`
-
-Type: `String`
-Default: based on `output.chunkFilename`, adding `worker` suffix, for example - `output.chunkFilename: '[id].js'` value of this option will be `[id].worker.js`
-
-The filename of non-entry chunks for web workers.
->>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
+web worker 非入口 chunk 的文件名。
 
 **webpack.config.js**
 
@@ -308,18 +265,14 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### workerType {#workertype}
-=======
-### `inline`
->>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
+### `inline` {#inline}
 
-Type: `'fallback' | 'no-fallback'`
-Default: `undefined`
+类型：`'fallback' | 'no-fallback'`
+默认值：`undefined`
 
-Allow to inline the worker as a `BLOB`.
+允许将内联的 web worker 作为 `BLOB`。
 
-Inline mode with the `fallback` value will create file for browsers without support web workers, to disable this behavior just use `no-fallback` value.
+当 inline 模式设置为 `fallback` 时，会为不支持 web worker 的浏览器创建文件，要禁用此行为，只需将其设置为 `no-fallback` 即可。
 
 **webpack.config.js**
 
@@ -339,14 +292,14 @@ module.exports = {
 };
 ```
 
-### `esModule`
+### `esModule` {#esmodule}
 
-Type: `Boolean`
-Default: `true`
+类型：`Boolean`
+默认值：`true`
 
-By default, `worker-loader` generates JS modules that use the ES modules syntax.
+默认情况下，`worker-loader` 会生成使用 ES 模块语法的 JS 模块.
 
-You can enable a CommonJS modules syntax using:
+如果想启用 CommonJS 模块语法，可使用如下配置:
 
 **webpack.config.js**
 
@@ -429,15 +382,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### 集成 ES 模块 {#integrating-with-es-modules}
+### 集成 ES6+ 特性 {#integrating-with-es6-features}
 
-*注意：如果配置好 [`babel-loader`](https://github.com/babel/babel-loader) ， 你甚至可以使用 ES2015 模块。*
-=======
-### Integrating with ES6+ features
-
-You can even use ES6+ features if you have the [`babel-loader`](https://github.com/babel/babel-loader) configured.
->>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
+如果使用 [`babel-loader`](https://github.com/babel/babel-loader) 配置，甚至可以使用 ES6+ 的特性。
 
 **index.js**
 
@@ -505,11 +452,7 @@ module.exports = {
 
 ### 集成 TypeScript {#integrating-with-typescript}
 
-<<<<<<< HEAD
-为了集成 TypeScript，在导出 worker 时，你需要声明一个自定义模块。
-=======
-To integrate with TypeScript, you will need to define a custom module for the exports of your worker.
->>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
+要与 TypeScript 集成，你需要为 worker 导出一个自定义模块。
 
 **typings/worker-loader.d.ts**
 
@@ -553,18 +496,11 @@ worker.addEventListener('message', (event) => {});
 
 ### 跨域策略 {#cross-origin-policy}
 
-<<<<<<< HEAD
 [`WebWorkers`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) 受到 [同源策略](https://en.wikipedia.org/wiki/Same-origin_policy) 的限制， 如果 `webpack` 资源的访问服务和应用程序不是同源，浏览器就会拦截其下载。
 如果在 CDN 域下托管资源， 通常就会出现这种情况。 
 甚至从 `webpack-dev-server` 下载时都会被拦截。
-有两种解决方法：
-=======
-[`WebWorkers`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) are restricted by a [same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy), so if your `webpack` assets are not being served from the same origin as your application, their download may be blocked by your browser.
-This scenario can commonly occur if you are hosting your assets under a CDN domain.
-Even downloads from the `webpack-dev-server` could be blocked.
 
-There are two workarounds:
->>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
+有两种解决方法：
 
 第一种，通过配置 [`inline`](#inline) 参数，将 worker 作为 blob 内联， 而不是将其作为外部脚本下载
 

@@ -542,10 +542,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-##### `auto` {#auto}
-=======
-##### `compileType`
+##### `compileType` {#compiletype}
 
 Type: `'module' | 'icss'`
 Default: `'module'`
@@ -577,8 +574,7 @@ module.exports = {
 };
 ```
 
-##### `auto`
->>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
+##### `auto` {#auto}
 
 Type: `Boolean|RegExp|Function`
 Default: `'true'`
@@ -1036,38 +1032,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `icss` {#icss}
-
-Type: Boolean Default: `true` if `modules` are enabled, false otherwise
-
-Enables/disables handling of the low level "Interoperable CSS" format for declaring
-import and export dependencies between CSS and other languages. ICSS enables
-CSS Module support, and is enabled automatically when `modules` are enabled. It
-can also be enabled independently to allow other loaders to handle processing CSS modules.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        loader: 'css-loader',
-        options: {
-          icss: true,
-        },
-      },
-    ],
-  },
-};
-```
-
 ### `sourceMap` {#sourcemap}
-=======
-### `sourceMap`
->>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
 
 Type: `Boolean`
 Default: depends on the `compiler.devtool` value
