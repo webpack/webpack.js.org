@@ -108,15 +108,14 @@ module.exports = {
 
 ## Options {#options}
 
-|                 Name                  |            Type             |                      Default                       | Description                                                            |
-| :-----------------------------------: | :-------------------------: | :------------------------------------------------: | :--------------------------------------------------------------------- |
-|           **[`url`](#url)**           |    `{Boolean\|Function}`    |                       `true`                       | Enables/Disables `url`/`image-set` functions handling                  |
-|        **[`import`](#import)**        |    `{Boolean\|Function}`    |                       `true`                       | Enables/Disables `@import` at-rules handling                           |
-|       **[`modules`](#modules)**       | `{Boolean\|String\|Object}` |                   `{auto: true}`                   | Enables/Disables CSS Modules and their configuration                   |
-|          **[`icss`](#icss)**          |         `{Boolean}`         | `true` if `modules` are enabled, `false` otherwise | Enables/Disables Interoperable CSS                                     |
-|     **[`sourceMap`](#sourcemap)**     |         `{Boolean}`         |                 `compiler.devtool`                 | Enables/Disables generation of source maps                             |
-| **[`importLoaders`](#importloaders)** |         `{Number}`          |                        `0`                         | Enables/Disables or setups number of loaders applied before CSS loader |
-|      **[`esModule`](#esmodule)**      |         `{Boolean}`         |                       `true`                       | Use ES modules syntax                                                  |
+|                 Name                  |            Type             |      Default       | Description                                                            |
+| :-----------------------------------: | :-------------------------: | :----------------: | :--------------------------------------------------------------------- |
+|           **[`url`](#url)**           |    `{Boolean\|Function}`    |       `true`       | Enables/Disables `url`/`image-set` functions handling                  |
+|        **[`import`](#import)**        |    `{Boolean\|Function}`    |       `true`       | Enables/Disables `@import` at-rules handling                           |
+|       **[`modules`](#modules)**       | `{Boolean\|String\|Object}` |   `{auto: true}`   | Enables/Disables CSS Modules and their configuration                   |
+|     **[`sourceMap`](#sourcemap)**     |         `{Boolean}`         | `compiler.devtool` | Enables/Disables generation of source maps                             |
+| **[`importLoaders`](#importloaders)** |         `{Number}`          |        `0`         | Enables/Disables or setups number of loaders applied before CSS loader |
+|      **[`esModule`](#esmodule)**      |         `{Boolean}`         |       `true`       | Use ES modules syntax                                                  |
 
 ### `url` {#url}
 
@@ -525,6 +524,7 @@ module.exports = {
         loader: 'css-loader',
         options: {
           modules: {
+            compileType: 'module',
             mode: 'local',
             auto: true,
             exportGlobals: true,
@@ -542,7 +542,43 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ##### `auto` {#auto}
+=======
+##### `compileType`
+
+Type: `'module' | 'icss'`
+Default: `'module'`
+
+Controls the level of compilation applied to the input styles.
+
+The `module` handles `class` and `id` scoping and `@value` values.
+The `icss` will only compile the low level `Interoperable CSS` format for declaring `:import` and `:export` dependencies between CSS and other languages.
+
+ICSS underpins CSS Module support, and provides a low level syntax for other tools to implement CSS-module variations of their own.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'css-loader',
+        options: {
+          modules: {
+            compileType: 'icss',
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+##### `auto`
+>>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
 
 Type: `Boolean|RegExp|Function`
 Default: `'true'`
@@ -1000,6 +1036,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `icss` {#icss}
 
 Type: Boolean Default: `true` if `modules` are enabled, false otherwise
@@ -1028,6 +1065,9 @@ module.exports = {
 ```
 
 ### `sourceMap` {#sourcemap}
+=======
+### `sourceMap`
+>>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
 
 Type: `Boolean`
 Default: depends on the `compiler.devtool` value

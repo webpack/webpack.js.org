@@ -177,8 +177,9 @@ Default cache keys:
   terser: require('terser/package.json').version, // terser version
   'terser-webpack-plugin': require('../package.json').version, // plugin version
   'terser-webpack-plugin-options': this.options, // plugin options
-  path: compiler.outputPath ? `${compiler.outputPath}/${file}` : file, // asset path
-  hash: crypto.createHash('md4').update(input).digest('hex'), // source file hash
+  nodeVersion: process.version, // Node.js version
+  name: file, // asset path
+  contentHash: crypto.createHash('md4').update(input).digest('hex'), // source file hash
 });
 ```
 
@@ -305,17 +306,18 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
+        // Can be async
         minify: (file, sourceMap) => {
           const extractedComments = [];
 
           // Custom logic for extract comments
 
-          const { error, map, code, warnings } = require('uglify-module') // Or require('./path/to/uglify-module')
+          const { map, code } = require('uglify-module') // Or require('./path/to/uglify-module')
             .minify(file, {
               /* Your options for minification */
             });
 
-          return { error, map, code, warnings, extractedComments };
+          return { map, code, extractedComments };
         },
       }),
     ],
@@ -340,7 +342,6 @@ module.exports = {
       new TerserPlugin({
         terserOptions: {
           ecma: undefined,
-          warnings: false,
           parse: {},
           compress: {},
           mangle: true, // Note `mangle.properties` is `false` by default.
@@ -575,6 +576,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `warningsFilter` {#warningsfilter}
 
 Type: `Function<(warning, file, source) -> Boolean>`
@@ -615,6 +617,9 @@ module.exports = {
 ```
 
 ## Examples {#examples}
+=======
+## Examples
+>>>>>>> b793da3ee7429e76656aedf213f1527c3a2c1a71
 
 ### Preserve Comments {#preserve-comments}
 
