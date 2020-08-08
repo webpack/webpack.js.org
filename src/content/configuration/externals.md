@@ -321,6 +321,7 @@ Supported types:
 - `'system'`
 - `'promise'` - same as `'var'` but awaits the result (async module)
 - `'import'` - uses `import()` to load a native EcmaScript module (async module)
+- `'script'` - load script with HTML `<script>` element and use the global variable defined.
 
 __webpack.config.js__
 
@@ -330,3 +331,60 @@ module.exports = {
   externalsType: 'promise'
 };
 ```
+
+### `script`
+
+External script can be loaded from any url when `externalsType` is set to `script`.
+
+There're two syntaxes for loading external script in webpack configuration:
+
+1. `{externals: {packageName: ['http://example.com/script.js', 'global', 'property', 'property']}}` (properties are optional)
+2. `{externals: {packageName: 'global@http://example.com/script.js'}}`
+
+For example, you can load lodash and jQuery from CDN:
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  // ...
+  externalsType: 'script',
+  externals: {
+    lodash: ['https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js', '_'],
+    jquery: '$@https://code.jquery.com/jquery-3.5.1.min.js' // shortcut syntax
+  }
+};
+```
+
+Then use them in your code:
+
+```js
+import $ from 'jquery';
+// `import 'jquery'` works too if you only want to use global variable
+import _ from 'lodash';
+// both local variable `$` and global variable `window.$` would be available here
+```
+
+T> `publicPath` won't be added to the url.
+
+In the case of `lodash`, you can expose any one of its property as you wish, for example:
+
+```js
+module.exports = {
+  // ...
+  externalsType: 'script',
+  externals: {
+    lodash: ['https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js', '_', 'head'],
+  }
+};
+```
+
+Both `head` and `window._` are exposed now when you `import` `lodash`:
+
+```js
+import head from 'lodash';
+console.log(head([1, 2, 3])); // logs 1 here
+console.log(window._.head(['a', 'b'])); // logs a here
+```
+
+T> When loading code with `script` tags, the runtime will try to find an existing `script` tag that matches the `src` attribute or has a specific `data-webpack` attribute. For chunk loading `data-webpack` attribute would have value of `"[output.uniqueName]:chunk-[chunkId]"` while external script has value of `"[output.uniqueName]:[global]"`. The script tag would be removed once the script is loaded. Options like `output.chunkLoadTimeout`, `output.crossOriginLoading` and `output.scriptType` apply to these external scripts too.
