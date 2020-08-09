@@ -351,6 +351,14 @@ Parameters:
 - `newSourceOrFunction` - new asset source or function converting old to new
 - `assetInfoUpdateOrFunction` - new asset info or function converting old to new
 
+### deleteAsset
+
+`function (file)`
+
+Parameters:
+
+- `file` - file name of the asset
+
 ### getAssets
 
 `function`
