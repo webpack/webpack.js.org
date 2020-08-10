@@ -22,6 +22,7 @@ contributors:
   - byzyk
   - wizardofhogwarts
   - myshov
+  - anshumanv
 ---
 
 webpack 用于编译 JavaScript 模块。一旦完成 [安装](/guides/installation)，你就可以通过 webpack [CLI](/api/cli) 或 [API](/api/node) 与其配合交互。如果你还不熟悉 webpack，请阅读 [核心概念](/concepts) 和 [对比](/comparison)，了解为什么要使用 webpack，而不是社区中的其他工具。
@@ -335,4 +336,10 @@ webpack-demo
 
 T> 如果你使用的是 npm 5，你可能还会在目录中看到一个 `package-lock.json` 文件。
 
+<<<<<<< HEAD
 如果想要了解 webpack 设计思想，你应该看下 [基本概念](/concepts) 和 [配置](/configuration) 页面。此外，[API](/api) 章节可以深入了解 webpack 提供的各种接口。
+=======
+W> Do not compile untrusted code with webpack. It could lead to execution of malicious code on your computer, remote servers, or in the Web browsers of the end users of your application.
+
+If you want to learn more about webpack's design, you can check out the [basic concepts](/concepts) and [configuration](/configuration) pages. Furthermore, the [API](/api) section digs into the various interfaces webpack offers.
+>>>>>>> 6e61f71557aca9e744e05043da8ffc1b6c8c08c3

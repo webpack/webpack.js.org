@@ -250,5 +250,11 @@
 		"npm": "angular2-template-loader",
 		"description": "Load angular2 components, inlining all html and styling.",
 		"maintainer": "thelarkinn"
+	},
+	{
+		"repo": "webpack-contrib/css-minimizer-webpack-plugin",
+		"npm": "css-minimizer-webpack-plugin",
+		"description": "Optimize and minify your CSS using cssnano.",
+		"maintainer": ""
 	}
 ]

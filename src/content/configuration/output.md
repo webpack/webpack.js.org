@@ -362,7 +362,13 @@ T> 在使用 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) 
 
 ## `output.assetModuleFilename` {#outputassetmodulefilename}
 
+<<<<<<< HEAD
 参考 [`output.filename`](#outputfilename) 不过应用于 [Asset Modules](/guides/asset-modules/)
+=======
+`string = '[hash][ext][query]'`
+
+The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/)
+>>>>>>> 6e61f71557aca9e744e05043da8ffc1b6c8c08c3
 
 ## `output.globalObject` {#outputglobalobject}
 

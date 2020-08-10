@@ -4,6 +4,7 @@ sort: 24
 contributors:
   - smelukov
   - EugeneHlushko
+  - chenxsan
 related:
   - title: webpack 5 - 资源模块
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
@@ -82,7 +83,11 @@ img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 
 ### 自定义输出文件名 {#custom-output-filename}
 
+<<<<<<< HEAD
 默认情况下，`asset/resource` 模块以 `[hash][ext]` 文件名发送到输出目录。
+=======
+By default, `asset/resource` modules are emitting with `[hash][ext][query]` filename into output directory.
+>>>>>>> 6e61f71557aca9e744e05043da8ffc1b6c8c08c3
 
 可以通过在 webpack 配置中设置 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 来修改此模板字符串：
 
@@ -96,7 +101,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-+   assetModuleFilename: 'images/[hash][ext]'
++   assetModuleFilename: 'images/[hash][ext][query]'
   },
   experiments: {
     asset: true
@@ -122,7 +127,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-+   assetModuleFilename: 'images/[hash][ext]'
++   assetModuleFilename: 'images/[hash][ext][query]'
   },
   experiments: {
     asset: true
@@ -138,7 +143,7 @@ module.exports = {
 +       test: /\.html/,
 +       type: 'asset/resource',
 +       generator: {
-+         filename: 'static/[hash][ext]'
++         filename: 'static/[hash][ext][query]'
 +       }
 +     }
     ]
@@ -162,7 +167,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
--   assetModuleFilename: 'images/[hash][ext]'
+-   assetModuleFilename: 'images/[hash][ext][query]'
   },
   experiments: {
     asset: true
@@ -180,7 +185,7 @@ module.exports = {
 -       test: /\.html/,
 -       type: 'asset/resource',
 -       generator: {
--         filename: 'static/[hash][ext]'
+-         filename: 'static/[hash][ext][query]'
 -       }
 -     }
     ]
