@@ -15,6 +15,7 @@ contributors:
   - snitin315
   - chenxsan
   - rohrlaf
+  - jamesgeorge007
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
@@ -59,7 +60,7 @@ module.exports = {
   //...
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      chunks: 'async',
       minSize: 20000,
       minRemainingSize: 0,
       maxSize: 0,
