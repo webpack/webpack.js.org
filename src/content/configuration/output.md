@@ -362,15 +362,17 @@ T> 在使用 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) 
 
 ## `output.assetModuleFilename` {#outputassetmodulefilename}
 
+`string = '[hash][ext][query]'`
+
 参考 [`output.filename`](#outputfilename) 不过应用于 [Asset Modules](/guides/asset-modules/)
 
 ## `output.globalObject` {#outputglobalobject}
 
 `string = 'window'`
 
-When targeting a library, especially when `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`.
+当输出为 library 时，尤其是当 `libraryTarget` 为 `'umd'`时，此选项将决定使用哪个全局对象来挂载 library。为了使 UMD 构建在浏览器和 Node.js 上均可用，应将 `output.globalObject` 选项设置为 `'this'`。
 
-For example:
+示例：
 
 __webpack.config.js__
 

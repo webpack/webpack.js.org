@@ -694,7 +694,22 @@ module.exports = {
 };
 ```
 
-### `stats.source` {#statssource}
+### `stats.relatedAssets`  {#statsrelatedassets}
+
+`boolean = false`
+
+告诉 `stats` 是否需添加与其他 assets 相关的信息（例如 assets 的 SourceMaps）。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    relatedAssets: true
+  }
+};
+```
+
+### `stats.source`  {#statssource}
 
 `boolean = false`
 
