@@ -694,14 +694,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `stats.source` {#statssource}
-=======
-### `stats.relatedAssets`
+### `stats.relatedAssets`  {#statsrelatedassets}
 
 `boolean = false`
 
-Tells `stats` whether to add information about assets that are related to other assets (like SourceMaps for assets).
+告诉 `stats` 是否需添加与其他 assets 相关的信息（例如 assets 的 SourceMaps）。
 
 ```javascript
 module.exports = {
@@ -712,8 +709,7 @@ module.exports = {
 };
 ```
 
-### `stats.source`
->>>>>>> 6e61f71557aca9e744e05043da8ffc1b6c8c08c3
+### `stats.source`  {#statssource}
 
 `boolean = false`
 

@@ -83,11 +83,7 @@ img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 
 ### 自定义输出文件名 {#custom-output-filename}
 
-<<<<<<< HEAD
-默认情况下，`asset/resource` 模块以 `[hash][ext]` 文件名发送到输出目录。
-=======
-By default, `asset/resource` modules are emitting with `[hash][ext][query]` filename into output directory.
->>>>>>> 6e61f71557aca9e744e05043da8ffc1b6c8c08c3
+默认情况下，`asset/resource` 模块以 `[hash][ext][query]` 文件名发送到输出目录。
 
 可以通过在 webpack 配置中设置 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 来修改此模板字符串：
 
