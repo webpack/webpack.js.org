@@ -25,6 +25,6 @@
   "webpack-contrib/thread-loader",
   "webpack-contrib/polymer-webpack-loader",
   "babel/babel-loader",
-  "postcss/postcss-loader",
+  "webpack-contrib/postcss-loader",
   "peerigon/extract-loader"
 ]
