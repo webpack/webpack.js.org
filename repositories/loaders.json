@@ -26,5 +26,6 @@
   "webpack-contrib/polymer-webpack-loader",
   "babel/babel-loader",
   "postcss/postcss-loader",
-  "peerigon/extract-loader"
+  "peerigon/extract-loader",
+  "webpack-contrib/remark-loader"
 ]
