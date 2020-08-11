@@ -334,7 +334,7 @@ module.exports = {
 
 ### `script`
 
-External script can be loaded from any url when `externalsType` is set to `script`.
+External script can be loaded from any URL when [`externalsType`](#externalstype) is set to `'script'`. The `<script>` tag would be removed after it has been loaded.
 
 There're two syntaxes for loading external script in webpack configuration:
 
@@ -365,7 +365,7 @@ import _ from 'lodash';
 // both local variable `$` and global variable `window.$` would be available here
 ```
 
-T> `publicPath` won't be added to the url.
+T> [`output.publicPath`](/configuration/output/#outputpublicpath) won't be added to the provided URL.
 
 In the case of `lodash`, you can expose any one of its property as you wish, for example:
 
@@ -387,4 +387,6 @@ console.log(head([1, 2, 3])); // logs 1 here
 console.log(window._.head(['a', 'b'])); // logs a here
 ```
 
-T> When loading code with `script` tags, the runtime will try to find an existing `script` tag that matches the `src` attribute or has a specific `data-webpack` attribute. For chunk loading `data-webpack` attribute would have value of `"[output.uniqueName]:chunk-[chunkId]"` while external script has value of `"[output.uniqueName]:[global]"`. The script tag would be removed once the script is loaded. Options like `output.chunkLoadTimeout`, `output.crossOriginLoading` and `output.scriptType` apply to these external scripts too.
+T> When loading code with HTML `<script>` tags, the webpack runtime will try to find an existing `<script>` tag that matches the `src` attribute or has a specific `data-webpack` attribute. For chunk loading `data-webpack` attribute would have value of `'[output.uniqueName]:chunk-[chunkId]'` while external script has value of `'[output.uniqueName]:[global]'`. 
+
+T> Options like `output.chunkLoadTimeout`, `output.crossOriginLoading` and `output.scriptType` will also have effect on the external scripts loaded this way.
