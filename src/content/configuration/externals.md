@@ -321,7 +321,7 @@ Supported types:
 - `'system'`
 - `'promise'` - same as `'var'` but awaits the result (async module)
 - `'import'` - uses `import()` to load a native EcmaScript module (async module)
-- `'script'` - load script with HTML `<script>` element and use the global variable defined.
+- `'script'` - load script exposing predefined global variables with HTML `<script>` element
 
 __webpack.config.js__
 
@@ -334,14 +334,33 @@ module.exports = {
 
 ### `script`
 
-External script can be loaded from any URL when [`externalsType`](#externalstype) is set to `'script'`. The `<script>` tag would be removed after it has been loaded.
+External script can be loaded from any URL when [`externalsType`](#externalstype) is set to `'script'`. The `<script>` tag would be removed after the script has been loaded.
 
-There're two syntaxes for loading external script in webpack configuration:
+#### Syntax
 
-1. `{externals: {packageName: ['http://example.com/script.js', 'global', 'property', 'property']}}` (properties are optional)
-2. `{externals: {packageName: 'global@http://example.com/script.js'}}`
+```javascript
+module.exports = {
+  externals: {
+    packageName: ['http://example.com/script.js', 'global', 'property', 'property'] // properties are optional
+  }
+};
+```
 
-For example, you can load lodash and jQuery from CDN:
+You can also use the shortcut syntax if you're not going to specify any properties:
+
+```javascript
+module.exports = {
+  externals: {
+    packageName: 'global@http://example.com/script.js' // no properties here
+  }
+};
+```
+
+T> [`output.publicPath`](/configuration/output/#outputpublicpath) won't be added to the provided URL.
+
+#### Example
+
+Let's load a `lodash` from CDN:
 
 __webpack.config.js__
 
@@ -351,23 +370,18 @@ module.exports = {
   externalsType: 'script',
   externals: {
     lodash: ['https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js', '_'],
-    jquery: '$@https://code.jquery.com/jquery-3.5.1.min.js' // shortcut syntax
   }
 };
 ```
 
-Then use them in your code:
+Then use it in code:
 
 ```js
-import $ from 'jquery';
-// `import 'jquery'` works too if you only want to use global variable
 import _ from 'lodash';
-// both local variable `$` and global variable `window.$` would be available here
+console.log(_.head([1, 2, 3]));
 ```
 
-T> [`output.publicPath`](/configuration/output/#outputpublicpath) won't be added to the provided URL.
-
-In the case of `lodash`, you can expose any one of its property as you wish, for example:
+Here's how we specify properties for the above example:
 
 ```js
 module.exports = {
@@ -379,7 +393,7 @@ module.exports = {
 };
 ```
 
-Both `head` and `window._` are exposed now when you `import` `lodash`:
+Both local variable `head` and global `window._` will be exposed when you `import` `lodash`:
 
 ```js
 import head from 'lodash';
