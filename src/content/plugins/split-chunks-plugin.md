@@ -15,6 +15,7 @@ contributors:
   - snitin315
   - chenxsan
   - rohrlaf
+  - jamesgeorge007
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
@@ -59,7 +60,7 @@ module.exports = {
   //...
   optimization: {
     splitChunks: {
-      chunks: 'all',
+      chunks: 'async',
       minSize: 20000,
       minRemainingSize: 0,
       maxSize: 0,
@@ -96,7 +97,7 @@ By default webpack will generate names using origin and name of the chunk (e.g. 
 
 ### `splitChunks.chunks`
 
-`string = 'all'` `function (chunk)`
+`string = 'async'` `function (chunk)`
 
 This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
 
