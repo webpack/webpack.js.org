@@ -22,6 +22,7 @@ contributors:
   - byzyk
   - wizardofhogwarts
   - myshov
+  - anshumanv
 ---
 
 webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
@@ -334,5 +335,7 @@ webpack-demo
 ```
 
 T> If you're using npm 5, you'll probably also see a `package-lock.json` file in your directory.
+
+W> Do not compile untrusted code with webpack. It could lead to execution of malicious code on your computer, remote servers, or in the Web browsers of the end users of your application.
 
 If you want to learn more about webpack's design, you can check out the [basic concepts](/concepts) and [configuration](/configuration) pages. Furthermore, the [API](/api) section digs into the various interfaces webpack offers.
