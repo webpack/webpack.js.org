@@ -180,11 +180,7 @@ module.exports = {
 |      [`path`](#path)      | `{String}` | `undefined` | PostCSS Config Directory |
 | [`context`](#context-ctx) | `{Object}` | `undefined` | PostCSS Config Context   |
 
-<<<<<<< HEAD
-#### `Path` {#path}
-=======
-##### `Path`
->>>>>>> 6063107a7577cfe0bf7e01f824f8fed07bd708bd
+##### `Path` {#path}
 
 You can manually specify the path to search for your config (`postcss.config.js`) with the `config.path` option. This is needed if you store your config in a separate e.g `./config || ./.config` folder.
 
@@ -208,11 +204,7 @@ You can manually specify the path to search for your config (`postcss.config.js`
 
 [supported config formats]: https://github.com/michael-ciniawsky/postcss-load-config#usage
 
-<<<<<<< HEAD
-#### `Context (ctx)` {#context-ctx}
-=======
-##### `Context (ctx)`
->>>>>>> 6063107a7577cfe0bf7e01f824f8fed07bd708bd
+##### `Context (ctx)` {#context-ctx}
 
 |   Name    |    Type    |        Default        | Description                      |
 | :-------: | :--------: | :-------------------: | :------------------------------- |
@@ -487,11 +479,7 @@ export default {
 
 [babel-plugin-add-module-exports]: https://github.com/59naga/babel-plugin-add-module-exports
 
-<<<<<<< HEAD
-### [Extract CSS][ExtractPlugin] {#extract-cssextractplugin}
-=======
-### [Extract CSS][extractplugin]
->>>>>>> 6063107a7577cfe0bf7e01f824f8fed07bd708bd
+### [Extract CSS][extractplugin] {#extract-cssextractplugin}
 
 [extractplugin]: https://github.com/webpack-contrib/mini-css-extract-plugin
 
