@@ -485,16 +485,20 @@ Tell `html-loader` to minimize HTML.
 
 The enabled rules for minimizing by default are the following ones:
 
-- `collapseWhitespace`
-- `conservativeCollapse`
-- `keepClosingSlash`
-- `minifyCSS`
-- `minifyJS`
-- `removeAttributeQuotes`
-- `removeComments`
-- `removeScriptTypeAttributes`
-- `removeStyleTypeAttributes`
-- `useShortDoctype`
+```js
+({
+  caseSensitive: true,
+  collapseWhitespace: true,
+  conservativeCollapse: true,
+  keepClosingSlash: true,
+  minifyCSS: true,
+  minifyJS: true,
+  removeComments: true,
+  removeRedundantAttributes: true,
+  removeScriptTypeAttributes: true,
+  removeStyleLinkTypeAttributes: true,
+});
+```
 
 **webpack.config.js**
 
