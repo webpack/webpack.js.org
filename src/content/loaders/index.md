@@ -8,6 +8,7 @@ contributors:
   - EugeneHlushko
   - hemal7735
   - snitin315
+  - anshumanv
 ---
 
 webpack enables use of [loaders](/concepts/loaders) to preprocess files. This allows you to bundle any static resource way beyond JavaScript. You can easily write your own loaders using Node.js.
@@ -51,6 +52,8 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 - [`handlebars-loader`](https://github.com/pcardune/handlebars-loader) Compiles Handlebars to HTML
 - [`markup-inline-loader`](https://github.com/asnowwolf/markup-inline-loader) Inline SVG/MathML files to HTML. It’s useful when applying icon font or applying CSS animation to SVG.
 - [`twig-loader`](https://github.com/zimmo-be/twig-loader) Compiles Twig templates and returns a function
+- [`remark-loader`](https://github.com/webpack-contrib/remark-loader) Load markdown through `remark` with built-in image resolution
+
 
 ## Styling
 
