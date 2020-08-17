@@ -101,3 +101,15 @@ new webpack.DefinePlugin({
   'SERVICE_URL': JSON.stringify('https://dev.example.com')
 });
 ```
+
+### Rebuild 
+
+Rebuild wehen the schema updates.
+
+```javascript
+new webpack.DefinePlugin({
+  BUILT_AT: webpack.DefinePlugin.runtimeValue(Date.now, [fileDep, fileDep])
+})
+```
+
+T> Passing `true` as second argument instead of `fileDependencies` will flag the module as uncachable.
