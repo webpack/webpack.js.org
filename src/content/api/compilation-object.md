@@ -351,6 +351,14 @@ W> webpack 4.40.0 后可用。
 - `newSourceOrFunction` - 新资源来源或将旧资源转换为新资源的函数。
 - `assetInfoUpdateOrFunction` - 新资源信息或将旧资源转换为新资源的函数。
 
+### deleteAsset {#deleteasset}
+
+`function (file)`
+
+参数：
+
+- `file` —— 资源的文件名
+
 ### getAssets {#getassets}
 
 `function`
