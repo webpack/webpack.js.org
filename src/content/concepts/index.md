@@ -152,7 +152,7 @@ module.exports = {
 };
 ```
 
-在上面的示例中，`html-webpack-plugin` 为应用程序生成 HTML 一个文件，并自动注入所有生成的 bundle。
+在上面的示例中，`html-webpack-plugin` 为应用程序生成一个 HTML 文件，并自动注入所有生成的 bundle。
 
 T> webpack 提供许多开箱可用的插件！查阅 [插件列表](/plugins) 获取更多。
 
@@ -179,4 +179,4 @@ webpack 支持所有符合 [ES5 标准](https://kangax.github.io/compat-table/es
 
 ## 环境(environment) {#environment}
 
-webpack 运行与 Node.js v8.x+ 版本。
+webpack 运行于 Node.js v8.x+ 版本。
