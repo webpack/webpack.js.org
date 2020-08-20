@@ -113,8 +113,8 @@ __webpack.app.config.js__
 const fileDep = path.resolve(__dirname, 'sample.txt');
 
 new webpack.DefinePlugin({
-  BUILT_AT: webpack.DefinePlugin.runtimeValue(Date.now, [fileDep]);
-})
+  BUILT_AT: webpack.DefinePlugin.runtimeValue(Date.now, [fileDep])
+});
 ```
 
 The first argument to `runtimeValue` is a `function` that returns the value to be assigned and the second argument is an array of `fileDependencies` (what files to be watch for). 
