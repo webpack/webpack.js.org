@@ -98,7 +98,7 @@ module.exports = {
 
 This option tells webpack to add `charset` attribute with value of `utf-8` to HTML `<script>` element.
 
-T> `charset` attribute for `<script>` element was [deprecated](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes). It defaults to `true` for compatibility of non-modern browsers.
+T> Although `charset` attribute for `<script>` element was [deprecated](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes), webpack still adds it by default for compatibility of non-modern browsers.
 
 ## `output.chunkFilename`
 
