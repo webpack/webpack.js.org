@@ -101,3 +101,24 @@ new webpack.DefinePlugin({
   'SERVICE_URL': JSON.stringify('https://dev.example.com')
 });
 ```
+
+### Rebuild 
+
+Rebuild where there are changes in runtimeValue.
+
+__webpack.app.config.js__
+
+```javascript
+
+const fileDep = path.resolve(__dirname, 'sample.txt');
+
+new webpack.DefinePlugin({
+  BUILT_AT: webpack.DefinePlugin.runtimeValue(Date.now, [fileDep])
+});
+```
+
+The first argument to `runtimeValue` is a `function` that returns the value to be assigned and the second argument is an array of `fileDependencies` (what files to be watch for). 
+
+In the previous example, the value of `BUILD_AT` would be the time at which the file passed as `fileDep` was last updated in the file system.
+
+T> Passing `true` as second argument instead of `fileDependencies` will flag the module as uncacheable.
