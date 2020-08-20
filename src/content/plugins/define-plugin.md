@@ -110,7 +110,7 @@ __webpack.app.config.js__
 
 ```javascript
 
-const fileDep = path.resolve(__dirname, "sample.txt");
+const fileDep = path.resolve(__dirname, 'sample.txt');
 
 new webpack.DefinePlugin({
   BUILT_AT: webpack.DefinePlugin.runtimeValue(Date.now, [fileDep])
