@@ -119,6 +119,6 @@ new webpack.DefinePlugin({
 
 The first argument to `runtimeValue` is a `function` that returns the value to be assigned and the second argument is an array of `fileDependencies` (what files to be watch for). 
 
-In the previous example, the value of `BUILD_AT` would be the time at which the fileDep was last updated. If the the file was updated at `1597778473060` then `BUILD_AT` would have `1597778473060` as its value.
+In the previous example, the value of `BUILD_AT` would be the time at which the file passed as `fileDep` was last updated in the file system.
 
 T> Passing `true` as second argument instead of `fileDependencies` will flag the module as uncacheable.
