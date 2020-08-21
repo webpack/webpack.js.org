@@ -247,6 +247,15 @@ Usage via the CLI
 webpack-dev-server --compress
 ```
 
+## `devServer.config` - CLI only
+
+`string`
+
+Specifies a different [configuration](/configuration) file to pick up. Use this if you want to specify something different from `webpack.config.js`, which is the default.
+
+```bash
+webpack-dev-server --config example.config.js
+```
 
 ## `devServer.contentBase`
 
