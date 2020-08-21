@@ -11,7 +11,7 @@ contributors:
 
 The `DefinePlugin` allows you to create global constants which can be configured at __compile__ time. This can be useful for allowing different behavior between development builds and production builds. If you perform logging in your development build but not in the production build you might use a global constant to determine whether logging takes place. That's where `DefinePlugin` shines, set it and forget it rules for development and production builds.
 
-``` javascript
+```javascript
 new webpack.DefinePlugin({
   // Definitions...
 });
@@ -29,7 +29,7 @@ Each key passed into `DefinePlugin` is an identifier or multiple identifiers joi
 
 The values will be inlined into the code allowing a minification pass to remove the redundant conditional.
 
-``` javascript
+```javascript
 new webpack.DefinePlugin({
   PRODUCTION: JSON.stringify(true),
   VERSION: JSON.stringify('5fa3b9'),
@@ -40,7 +40,7 @@ new webpack.DefinePlugin({
 });
 ```
 
-``` javascript
+```javascript
 console.log('Running App version ' + VERSION);
 if(!BROWSER_SUPPORTS_HTML5) require('html5shiv');
 ```
@@ -50,9 +50,7 @@ W> When defining values for `process` prefer `'process.env.NODE_ENV': JSON.strin
 
 T> Note that because the plugin does a direct text replacement, the value given to it must include __actual quotes__ inside of the string itself. Typically, this is done either with alternate quotes, such as `'"production"'`, or by using `JSON.stringify('production')`.
 
-__index.js__
-
-``` javascript
+```javascript
 if (!PRODUCTION) {
   console.log('Debug info');
 }
@@ -64,7 +62,7 @@ if (PRODUCTION) {
 
 After passing through webpack with no minification results in:
 
-``` javascript
+```javascript
 if (!true) {
   console.log('Debug info');
 }
@@ -75,7 +73,7 @@ if (true) {
 
 and then after a minification pass results in:
 
-``` javascript
+```javascript
 console.log('Production log');
 ```
 
@@ -102,14 +100,18 @@ new webpack.DefinePlugin({
 });
 ```
 
-### Rebuild 
+## Runtime values via `runtimeValue`
 
-Rebuild where there are changes in runtimeValue.
+`function (getterFunction, [string]) => getterFunction()`
 
-__webpack.app.config.js__
+It is possible to define variables with values that rely on files and will be re-evaluated when such files change in the file system. This means webpack will rebuild when such watched files change.
+
+Arguments:
+
+- The first argument of the `webpack.DefinePlugin.runtimeValue` is a `function` that should return the value to be assigned to the definition.
+- The second argument is an array of file paths to watch for. Pass `true` instead of `[string]` here to flag the module as uncacheable.
 
 ```javascript
-
 const fileDep = path.resolve(__dirname, 'sample.txt');
 
 new webpack.DefinePlugin({
@@ -117,8 +119,4 @@ new webpack.DefinePlugin({
 });
 ```
 
-The first argument to `runtimeValue` is a `function` that returns the value to be assigned and the second argument is an array of `fileDependencies` (what files to be watch for). 
-
-In the previous example, the value of `BUILD_AT` would be the time at which the file passed as `fileDep` was last updated in the file system.
-
-T> Passing `true` as second argument instead of `fileDependencies` will flag the module as uncacheable.
+The value of `BUILT_AT` would be the time at which the `'sample.txt'` was last updated in the file system, e.g. `1597953013291`.
