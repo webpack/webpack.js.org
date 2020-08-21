@@ -468,7 +468,7 @@ module.exports = {
 };
 ```
 
-### `resolve.roots`
+### `resolve.roots` {#resolveroots}
 
 `[string]`
 

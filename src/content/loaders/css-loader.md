@@ -1242,7 +1242,112 @@ module.exports = {
 };
 ```
 
-## 贡献 {#contributing}
+### 只允许 `可交互的 CSS` 使其与 `CSS Module` 特性分离{#separating-interoperable-css-only-and-css-module-features}
+
+下面是有关配置的示例代码，通过为所有未匹配到 `*.module.scss` 命名约定文件设置 `compileType` 选项，只允许使用 `可交互的 CSS` 特性（如 `:import` 和 `:export`），而不使用其他的 `CSS Module` 特性。此处仅供参考，因为在 v4 之前，`css-loader` 默认将 `ICSS` 特性应用于所有文件。
+同时，在本示例中，匹配到 `*.module.scss` 的所有文件都将被视为 `CSS Modules`。
+
+假设项目中有这样一个需求，要求 canvas 绘制使用的变量与 CSS 同步，换句话说就是 canvas 绘制使用的颜色（在 JavaScript 中设置的颜色名）与 HTML 背景（在 CSS 中通过 class 设置）相同。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      // ...
+      // --------
+      // SCSS ALL EXCEPT MODULES
+      {
+        test: /\.scss$/,
+        exclude: /\.module\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: {
+                compileType: 'icss'
+              }
+            }
+          },
+          {
+            loader: 'sass-loader'
+          },
+        ],
+      },
+      // --------
+      // SCSS MODULES
+      {
+        test: /\.module\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: {
+                compileType: 'module'
+              }
+            }
+          },
+          {
+            loader: 'sass-loader'
+          },
+        ],
+      },
+      // --------
+      // ...
+  },
+};
+```
+
+**variables.scss**
+
+文件被视为仅使用 `ICSS`。
+
+```scss
+$colorBackground: red;
+:export {
+  colorBackgroundCanvas: $colorBackground;
+}
+```
+
+**Component.module.scss**
+
+文件被视为 `CSS Module`。
+
+```scss
+@import 'variables.scss';
+.componentClass {
+  background-color: $colorBackground;
+}
+```
+
+**Component.jsx**
+
+在 JavaScript 中直接使用 `CSS Module` 的特性以及 SCSS 声明的变量。
+
+```jsx
+import svars from 'variables.scss';
+import styles from 'Component.module.scss';
+
+// Render DOM with CSS modules class name
+// <div className={styles.componentClass}>
+//   <canvas ref={mountsCanvas}/>
+// </div>
+
+// Somewhere in JavaScript canvas drawing code use the variable directly
+// const ctx = mountsCanvas.current.getContext('2d',{alpha: false});
+ctx.fillStyle = `${svars.colorBackgroundCanvas}`;
+```
+
+## Contributing {#contributing}
 
 如果您还没有阅读，请花一点时间阅读我们的贡献指南。
 

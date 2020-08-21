@@ -20,7 +20,7 @@ This plugin uses [cssnano](https://cssnano.co/) to optimize and minify your CSS.
 
 Just like [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) but more accurate with source maps and assets using query string, allows to cache and works in parallel mode.
 
-## Getting Started
+## Getting Started {#getting-started}
 
 To begin, you'll need to install `css-minimizer-webpack-plugin`:
 
@@ -56,9 +56,9 @@ If you want to run it also in development, put the plugin configuration in the `
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
-### `test`
+### `test` {#test}
 
 Type: `String|RegExp|Array<String|RegExp>` - default: `/\.css(\?.*)?$/i`
 
@@ -77,7 +77,7 @@ module.exports = {
 };
 ```
 
-### `include`
+### `include` {#include}
 
 Type: `String|RegExp|Array<String|RegExp>`
 Default: `undefined`
@@ -99,7 +99,7 @@ module.exports = {
 };
 ```
 
-### `exclude`
+### `exclude` {#exclude}
 
 Type: `String|RegExp|Array<String|RegExp>`
 Default: `undefined`
@@ -121,7 +121,7 @@ module.exports = {
 };
 ```
 
-### `cache`
+### `cache` {#cache}
 
 > ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
 
@@ -133,7 +133,7 @@ Default path to cache directory: `node_modules/.cache/css-minimizer-webpack-plug
 
 > ℹ️ If you use your own `minify` function please read the `minify` section for cache invalidation correctly.
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 Enable/disable file caching.
 
@@ -152,7 +152,7 @@ module.exports = {
 };
 ```
 
-#### `String`
+#### `String` {#string}
 
 Enable file caching and set path to cache directory.
 
@@ -171,7 +171,7 @@ module.exports = {
 };
 ```
 
-### `cacheKeys`
+### `cacheKeys` {#cachekeys}
 
 > ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
 
@@ -212,7 +212,7 @@ module.exports = {
 };
 ```
 
-### `parallel`
+### `parallel` {#parallel}
 
 Type: `Boolean|Number`
 Default: `true`
@@ -222,7 +222,7 @@ Default number of concurrent runs: `os.cpus().length - 1`.
 
 > ℹ️ Parallelization can speedup your build significantly and is therefore **highly recommended**.
 
-#### `Boolean`
+#### `Boolean` {#boolean}
 
 Enable/disable multi-process parallel running.
 
@@ -241,7 +241,7 @@ module.exports = {
 };
 ```
 
-#### `Number`
+#### `Number` {#number}
 
 Enable multi-process parallel running and set number of concurrent runs.
 
@@ -260,7 +260,7 @@ module.exports = {
 };
 ```
 
-### `sourceMap`
+### `sourceMap` {#sourcemap}
 
 Type: `Boolean|Object`
 Default: `false` (see below for details around `devtool` value and `SourceMapDevToolPlugin` plugin)
@@ -294,7 +294,7 @@ module.exports = {
 };
 ```
 
-### `minify`
+### `minify` {#minify}
 
 Type: `Function`
 Default: `undefined`
@@ -341,7 +341,7 @@ module.exports = {
 };
 ```
 
-### `minimizerOptions`
+### `minimizerOptions` {#minimizeroptions}
 
 Type: `Object`
 Default: `{ preset: 'default' }`
@@ -368,7 +368,7 @@ module.exports = {
 };
 ```
 
-### `warningsFilter`
+### `warningsFilter` {#warningsfilter}
 
 Type: `Function<(warning, file, source) -> Boolean>`
 Default: `() => true`
@@ -407,9 +407,9 @@ module.exports = {
 };
 ```
 
-## Examples
+## Examples {#examples}
 
-### Use sourcemaps
+### Use sourcemaps {#use-sourcemaps}
 
 Don't forget to enable `sourceMap` options for all loaders.
 
@@ -439,7 +439,7 @@ module.exports = {
 };
 ```
 
-### Remove all comments
+### Remove all comments {#remove-all-comments}
 
 Remove all comments (including comments starting with `/*!`).
 
@@ -462,13 +462,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/css-minimizer-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/css-minimizer-webpack-plugin/blob/master/LICENSE)
 
