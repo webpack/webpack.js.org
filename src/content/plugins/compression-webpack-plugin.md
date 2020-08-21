@@ -42,17 +42,17 @@ And run `webpack` via your preferred method.
 
 ## Options
 
-|                      Name                       |                   Type                    |      Default       | Description                                                                                                   |
-| :---------------------------------------------: | :---------------------------------------: | :----------------: | :------------------------------------------------------------------------------------------------------------ |
-|               **[`test`](#test)**               | `{String\|RegExp\|Array<String\|RegExp>}` |    `undefined`     | Include all assets that pass test assertion                                                                   |
-|            **[`include`](#include)**            | `{String\|RegExp\|Array<String\|RegExp>}` |    `undefined`     | Include all assets matching any of these conditions                                                           |
-|            **[`exclude`](#exclude)**            | `{String\|RegExp\|Array<String\|RegExp>}` |    `undefined`     | Exclude all assets matching any of these conditions                                                           |
-|          **[`algorithm`](#algorithm)**          |           `{String\|Function}`            |       `gzip`       | The compression algorithm/function                                                                            |
-| **[`compressionOptions`](#compressionoptions)** |                `{Object}`                 |   `{ level: 9 }`   | Compression options for `algorithm`                                                                           |
-|          **[`threshold`](#threshold)**          |                `{Number}`                 |        `0`         | Only assets bigger than this size are processed (in bytes)                                                    |
-|           **[`minRatio`](#minratio)**           |                `{Number}`                 |       `0.8`        | Only assets that compress better than this ratio are processed (`minRatio = Compressed Size / Original Size`) |
-|           **[`filename`](#filename)**           |           `{String\|Function}`            | `[path].gz[query]` | The target asset filename.                                                                                    |
-|              **[`cache`](#cache)**              |                `{Boolean}`                |       `true`       | Enable file caching                                                                                           |
+|                      Name                       |                   Type                    |    Default     | Description                                                                                                   |
+| :---------------------------------------------: | :---------------------------------------: | :------------: | :------------------------------------------------------------------------------------------------------------ |
+|               **[`test`](#test)**               | `{String\|RegExp\|Array<String\|RegExp>}` |  `undefined`   | Include all assets that pass test assertion                                                                   |
+|            **[`include`](#include)**            | `{String\|RegExp\|Array<String\|RegExp>}` |  `undefined`   | Include all assets matching any of these conditions                                                           |
+|            **[`exclude`](#exclude)**            | `{String\|RegExp\|Array<String\|RegExp>}` |  `undefined`   | Exclude all assets matching any of these conditions                                                           |
+|          **[`algorithm`](#algorithm)**          |           `{String\|Function}`            |     `gzip`     | The compression algorithm/function                                                                            |
+| **[`compressionOptions`](#compressionoptions)** |                `{Object}`                 | `{ level: 9 }` | Compression options for `algorithm`                                                                           |
+|          **[`threshold`](#threshold)**          |                `{Number}`                 |      `0`       | Only assets bigger than this size are processed (in bytes)                                                    |
+|           **[`minRatio`](#minratio)**           |                `{Number}`                 |     `0.8`      | Only assets that compress better than this ratio are processed (`minRatio = Compressed Size / Original Size`) |
+|           **[`filename`](#filename)**           |           `{String\|Function}`            |  `[path].gz`   | The target asset filename.                                                                                    |
+|              **[`cache`](#cache)**              |                `{Boolean}`                |     `true`     | Enable file caching                                                                                           |
 
 ### `test`
 
@@ -118,6 +118,8 @@ Default: `gzip`
 
 The compression algorithm/function.
 
+> ℹ️ If you use custom function for the `algorithm` option, the default value of the `compressionOptions` option is `{}`.
+
 #### `String`
 
 The algorithm is taken from [zlib](https://nodejs.org/api/zlib.html).
@@ -159,9 +161,9 @@ Default: `{ level: 9 }`
 
 Compression options for `algorithm`.
 
-If you use custom function for the `algorithm` option, the default value is `{}`.
-
 You can find all options here [zlib](https://nodejs.org/api/zlib.html#zlib_class_options).
+
+> ℹ️ If you use custom function for the `algorithm` option, the default value is `{}`.
 
 **webpack.config.js**
 
@@ -202,7 +204,12 @@ Default: `0.8`
 Only assets that compress better than this ratio are processed (`minRatio = Compressed Size / Original Size`).
 Example: you have `image.png` file with 1024b size, compressed version of file has 768b size, so `minRatio` equal `0.75`.
 In other words assets will be processed when the `Compressed Size / Original Size` value less `minRatio` value.
-You can use `1` value to process assets that are smaller than the original. Use a value of Number.MAX_SAFE_INTEGER to process all assets even if they are larger than the original (useful when you are pre-zipping all assets for AWS)
+
+You can use `1` value to process assets that are smaller than the original.
+
+Use a value of `Infinity` to process all assets even if they are larger than the original size or their original size is `0` bytes (useful when you are pre-zipping all assets for AWS).
+
+Use a value of `Number.MAX_SAFE_INTEGER` to process all assets even if they are larger than the original size, excluding assets with their original size is `0` bytes.
 
 **webpack.config.js**
 
@@ -210,6 +217,12 @@ You can use `1` value to process assets that are smaller than the original. Use 
 module.exports = {
   plugins: [
     new CompressionPlugin({
+      // Compress all assets, including files with `0` bytes size
+      // minRatio: Infinity
+
+      // Compress all assets, excluding files with `0` bytes size
+      // minRatio: Number.MAX_SAFE_INTEGER
+
       minRatio: 0.8,
     }),
   ],
@@ -238,7 +251,7 @@ The target asset filename.
 module.exports = {
   plugins: [
     new CompressionPlugin({
-      filename: '[path].gz[query]',
+      filename: '[path].gz',
     }),
   ],
 };
@@ -373,7 +386,7 @@ const zlib = require('zlib');
 module.exports = {
   plugins: [
     new CompressionPlugin({
-      filename: '[path].br[query]',
+      filename: '[path].br',
       algorithm: 'brotliCompress',
       test: /\.(js|css|html|svg)$/,
       compressionOptions: {
@@ -400,14 +413,14 @@ const zlib = require('zlib');
 module.exports = {
   plugins: [
     new CompressionPlugin({
-      filename: '[path].gz[query]',
+      filename: '[path].gz',
       algorithm: 'gzip',
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
       minRatio: 0.8,
     }),
     new CompressionPlugin({
-      filename: '[path].br[query]',
+      filename: '[path].br',
       algorithm: 'brotliCompress',
       test: /\.(js|css|html|svg)$/,
       compressionOptions: {

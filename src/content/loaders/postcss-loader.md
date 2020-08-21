@@ -57,7 +57,7 @@ Config lookup starts from `path.dirname(file)` and walks the file tree upwards u
 |– package.json
 ```
 
-After setting up your `postcss.config.js`, add `postcss-loader` to your `webpack.config.js`. You can use it standalone or in conjunction with `css-loader` (recommended). Use it **after** `css-loader` and `style-loader`, but **before** other preprocessor loaders like e.g `sass|less|stylus-loader`, if you use any.
+After setting up your `postcss.config.js`, add `postcss-loader` to your `webpack.config.js`. You can use it standalone or in conjunction with `css-loader` (recommended). Use it **before** `css-loader` and `style-loader`, but **after** other preprocessor loaders like e.g `sass|less|stylus-loader`, if you use any (since [webpack loaders evaluate right to left/bottom to top](/concepts/loaders/#configuration)).
 
 **`webpack.config.js`**
 
@@ -97,37 +97,52 @@ module.exports = {
 
 ## Options
 
-|            Name            |            Type             |   Default   | Description                                  |
-| :------------------------: | :-------------------------: | :---------: | :------------------------------------------- |
-|      [`exec`](#exec)       |         `{Boolean}`         | `undefined` | Enable PostCSS Parser support in `CSS-in-JS` |
-|   [`parser`](#syntaxes)    |     `{String\|Object}`      | `undefined` | Set PostCSS Parser                           |
-|   [`syntax`](#syntaxes)    |     `{String\|Object}`      | `undefined` | Set PostCSS Syntax                           |
-| [`stringifier`](#syntaxes) |     `{String\|Object}`      | `undefined` | Set PostCSS Stringifier                      |
-|    [`config`](#config)     | `{String\|Object\|Boolean}` | `undefined` | Set `postcss.config.js` config path && `ctx` |
-|   [`plugins`](#plugins)    |     `{Array\|Function}`     |    `[]`     | Set PostCSS Plugins                          |
-| [`sourceMap`](#sourcemap)  |     `{String\|Boolean}`     |   `false`   | Enable Source Maps                           |
+|            Name            |                     Type                      |      Default       | Description                                  |
+| :------------------------: | :-------------------------------------------: | :----------------: | :------------------------------------------- |
+|      [`exec`](#exec)       |                  `{Boolean}`                  |    `undefined`     | Enable PostCSS Parser support in `CSS-in-JS` |
+|   [`parser`](#syntaxes)    |         `{String\|Object\|Function}`          |    `undefined`     | Set PostCSS Parser                           |
+|   [`syntax`](#syntaxes)    |              `{String\|Object}`               |    `undefined`     | Set PostCSS Syntax                           |
+| [`stringifier`](#syntaxes) |         `{String\|Object\|Function}`          |    `undefined`     | Set PostCSS Stringifier                      |
+|    [`config`](#config)     |          `{String\|Object\|Boolean}`          |    `undefined`     | Set `postcss.config.js` config path && `ctx` |
+|   [`plugins`](#plugins)    | `{Function\|Object\|Array<Function\|Object>}` |        `[]`        | Set PostCSS Plugins                          |
+| [`sourceMap`](#sourcemap)  |              `{String\|Boolean}`              | `compiler.devtool` | Enables/Disables generation of source maps   |
 
 ### `Exec`
 
+Type: `Boolean`
+Default: `undefined`
+
 If you use JS styles without the [`postcss-js`][postcss-js] parser, add the `exec` option.
 
-**`webpack.config.js`**
+**webpack.config.js**
 
 ```js
-{
-  test: /\.style.js$/,
-  use: [
-    'style-loader',
-    { loader: 'css-loader', options: { importLoaders: 1 } },
-    { loader: 'postcss-loader', options: { parser: 'sugarss', exec: true } }
-  ]
-}
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.style.js$/,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          {
+            loader: 'postcss-loader',
+            options: { parser: 'sugarss', exec: true },
+          },
+        ],
+      },
+    ],
+  },
+};
 ```
 
 ### `Config`
 
 Type: `Boolean|String|Object`
 Default: `undefined`
+
+Options specified in the config file are combined with options passed to the loader.
+Loader options overwrite options from config.
 
 #### Boolean
 
@@ -182,29 +197,42 @@ module.exports = {
 
 ##### `Path`
 
+Type: `String`
+Default: `undefined`
+
 You can manually specify the path to search for your config (`postcss.config.js`) with the `config.path` option. This is needed if you store your config in a separate e.g `./config || ./.config` folder.
 
 > ⚠️ Otherwise it is **unnecessary** to set this option and is **not** recommended
 
 > ⚠️ Note that you **can't** use a **filename** other than the [supported config formats] (e.g `.postcssrc.js`, `postcss.config.js`), this option only allows you to manually specify the **directory** where config lookup should **start** from
 
-**`webpack.config.js`**
+**webpack.config.js**
 
 ```js
-{
-  loader: 'postcss-loader',
-  options: {
-    config: {
-      path: 'path/to/.config/' ✅
-      path: 'path/to/.config/css.config.js' ❌
-    }
-  }
-}
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          config: {
+            path: 'path/to/.config/', // ✅
+            path: 'path/to/.config/css.config.js', // ❌
+          },
+        },
+      },
+    ],
+  },
+};
 ```
 
 [supported config formats]: https://github.com/michael-ciniawsky/postcss-load-config#usage
 
 ##### `Context (ctx)`
+
+Type: `Object`
+Default: `undefined`
 
 |   Name    |    Type    |        Default        | Description                      |
 | :-------: | :--------: | :-------------------: | :------------------------------- |
@@ -229,108 +257,343 @@ module.exports = ({ file, options, env }) => ({
 });
 ```
 
-**`webpack.config.js`**
+**webpack.config.js**
 
 ```js
-{
-  loader: 'postcss-loader',
-  options: {
-    config: {
-      ctx: {
-        'postcss-preset-env': {...options},
-        cssnano: {...options},
-      }
-    }
-  }
-}
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          config: {
+            ctx: {
+              'postcss-preset-env': { ...options },
+              cssnano: { ...options },
+            },
+          },
+        },
+      },
+    ],
+  },
+};
 ```
 
 ### `Plugins`
 
+Type: `Function|Object|Array<Function\|Object>`
+Default: `[]`
+
 **`webpack.config.js`**
 
 ```js
-{
-  loader: 'postcss-loader',
-  options: {
-    ident: 'postcss',
-    plugins: (loader) => [
-      require('postcss-import')({ root: loader.resourcePath }),
-      require('postcss-preset-env')(),
-      require('cssnano')()
-    ]
-  }
-}
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          plugins: (loader) => [
+            require('postcss-import')({ root: loader.resourcePath }),
+            require('postcss-preset-env')(),
+            require('cssnano')(),
+          ],
+        },
+      },
+    ],
+  },
+};
 ```
 
-> ⚠️ webpack requires an identifier (`ident`) in `options` when `{Function}/require` is used (Complex Options). The `ident` can be freely named as long as it is unique. It's recommended to name it (`ident: 'postcss'`)
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          plugins: {
+            'postcss-import': {},
+            'postcss-nested': {},
+            'postcss-short': { prefix: 'x' },
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+It is possible to disable the plugin specified in the config.
+
+**`postcss.config.js`**
+
+```js
+module.exports = {
+  plugins: {
+    'postcss-short': { prefix: 'x' },
+    'postcss-import': {},
+    'postcss-nested': {},
+  },
+};
+```
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          plugins: {
+            'postcss-import': {},
+            'postcss-nested': {},
+            // Turn off the plugin
+            'postcss-short': false,
+          },
+        },
+      },
+    ],
+  },
+};
+```
 
 ### `Syntaxes`
 
-|             Name              |         Type         |   Default   | Description                |
-| :---------------------------: | :------------------: | :---------: | :------------------------- |
-|      [`parser`](#parser)      | `{String\|Function}` | `undefined` | Custom PostCSS Parser      |
-|      [`syntax`](#syntax)      | `{String\|Function}` | `undefined` | Custom PostCSS Syntax      |
-| [`stringifier`](#stringifier) | `{String\|Function}` | `undefined` | Custom PostCSS Stringifier |
+Type: `String|Object`
+Default: `undefined`
+
+|             Name              |             Type             |   Default   | Description                |
+| :---------------------------: | :--------------------------: | :---------: | :------------------------- |
+|      [`parser`](#parser)      |      `{String\|Object}`      | `undefined` | Custom PostCSS Parser      |
+|      [`syntax`](#syntax)      |      `{String\|Object}`      | `undefined` | Custom PostCSS Syntax      |
+| [`stringifier`](#stringifier) | `{String\|Object\|Function}` | `undefined` | Custom PostCSS Stringifier |
 
 #### `Parser`
+
+Type: `String|Object|Function`
+Default: `undefined`
+
+##### `String`
+
+The passed `string` is converted to the form `require('string')`.
 
 **`webpack.config.js`**
 
 ```js
-{
-  test: /\.sss$/,
-  use: [
-    ...,
-    { loader: 'postcss-loader', options: { parser: 'sugarss' } }
-  ]
-}
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.sss$/i,
+        loader: 'postcss-loader',
+        options: {
+          // Will be converted to `require('sugarss')`
+          parser: 'sugarss',
+        },
+      },
+    ],
+  },
+};
+```
+
+##### `Object`
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.sss$/i,
+        loader: 'postcss-loader',
+        options: {
+          parser: require('sugarss'),
+        },
+      },
+    ],
+  },
+};
+```
+
+##### `Function`
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.sss$/i,
+        loader: 'postcss-loader',
+        options: {
+          parser: require('sugarss').parse,
+        },
+      },
+    ],
+  },
+};
 ```
 
 #### `Syntax`
 
+Type: `String|Object`
+Default: `undefined`
+
+##### `String`
+
+The passed `string` is converted to the form `require('string')`.
+
 **`webpack.config.js`**
 
 ```js
-{
-  test: /\.css$/,
-  use: [
-    ...,
-    { loader: 'postcss-loader', options: { syntax: 'sugarss' } }
-  ]
-}
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          // Will be converted to `require('sugarss')`
+          syntax: 'sugarss',
+        },
+      },
+    ],
+  },
+};
+```
+
+##### `Object`
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          stringifier: require('sugarss'),
+        },
+      },
+    ],
+  },
+};
 ```
 
 #### `Stringifier`
 
+Type: `String|Object|Function`
+Default: `undefined`
+
+##### `String`
+
+The passed `string` is converted to the form `require('string')`.
+
 **`webpack.config.js`**
 
 ```js
-{
-  test: /\.css$/,
-  use: [
-    ...,
-    { loader: 'postcss-loader', options: { stringifier: 'midas' } }
-  ]
-}
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          // Will be converted to `require('sugarss')`
+          stringifier: 'sugarss',
+        },
+      },
+    ],
+  },
+};
+```
+
+##### `Object`
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          stringifier: require('sugarss'),
+        },
+      },
+    ],
+  },
+};
+```
+
+##### `Function`
+
+**`webpack.config.js`**
+
+```js
+const Midas = require('midas');
+const midas = new Midas();
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          stringifier: midas.stringifier,
+        },
+      },
+    ],
+  },
+};
 ```
 
 ### `SourceMap`
 
-Enables source map support, `postcss-loader` will use the previous source map given by other loaders and update it accordingly, if no previous loader is applied before `postcss-loader`, the loader will generate a source map for you.
+Type: `Boolean|String`
+Default: `compiler.devtool`
 
-**`webpack.config.js`**
+By default generation of source maps depends on the devtool option.
+All values enable source map generation except eval and false value.
+In most cases this option should be discouraged.
+If need `postcss-loader` to generate an inline map, use the `inline` value.
+`postcss-loader` will use the previous source map given by other loaders and update it accordingly, if no previous loader is applied before `postcss-loader`, the loader will generate a source map for you.
+
+**webpack.config.js**
 
 ```js
-{
-  test: /\.css/,
-  use: [
-    { loader: 'style-loader', options: { sourceMap: true } },
-    { loader: 'css-loader', options: { sourceMap: true } },
-    { loader: 'postcss-loader', options: { sourceMap: true } },
-    { loader: 'sass-loader', options: { sourceMap: true } }
-  ]
-}
+module.exports = {
+  devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          { loader: 'style-loader', options: { sourceMap: true } },
+          { loader: 'css-loader' },
+          { loader: 'postcss-loader' },
+          { loader: 'sass-loader' },
+        ],
+      },
+    ],
+  },
+};
 ```
 
 #### `'inline'`
@@ -338,15 +601,25 @@ Enables source map support, `postcss-loader` will use the previous source map gi
 You can set the `sourceMap: 'inline'` option to inline the source map
 within the CSS directly as an annotation comment.
 
-**`webpack.config.js`**
+**webpack.config.js**
 
 ```js
-{
-  loader: 'postcss-loader',
-  options: {
-    sourceMap: 'inline'
-  }
-}
+module.exports = {
+  devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          { loader: 'style-loader', options: { sourceMap: true } },
+          { loader: 'css-loader' },
+          { loader: 'postcss-loader', options: { sourceMap: 'inline' } },
+          { loader: 'sass-loader' },
+        ],
+      },
+    ],
+  },
+};
 ```
 
 ```css
@@ -361,51 +634,54 @@ within the CSS directly as an annotation comment.
 
 ### `Stylelint`
 
-**`webpack.config.js`**
+**webpack.config.js**
 
 ```js
-{
-  test: /\.css$/,
-  use: [
-    'style-loader',
-    'css-loader',
-    {
-      loader: 'postcss-loader',
-      options: {
-        ident: 'postcss',
-        plugins: [
-          require('postcss-import')(),
-          require('stylelint')(),
-          ...,
-        ]
-      }
-    }
-  ]
-}
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [require('postcss-import')(), require('stylelint')()],
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
 ```
 
 ### `Autoprefixing`
 
-**`webpack.config.js`**
+**webpack.config.js**
 
 ```js
-{
-  test: /\.css$/,
-  use: [
-    'style-loader',
-    'css-loader',
-    {
-      loader: 'postcss-loader',
-      options: {
-        ident: 'postcss',
-        plugins: [
-          require('autoprefixer')({...options}),
-          ...,
-        ]
-      }
-    }
-  ]
-}
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [require('autoprefixer')({ ...options })],
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
 ```
 
 > :warning: [`postcss-preset-env`](https://github.com/csstools/postcss-preset-env) includes [`autoprefixer`](https://github.com/postcss/autoprefixer), so adding it separately is not necessary if you already use the preset.
@@ -416,17 +692,26 @@ This loader [cannot be used] with [CSS Modules] out of the box due
 to the way `css-loader` processes file imports. To make them work properly,
 either add the css-loader’s [`importLoaders`] option.
 
-**`webpack.config.js`**
+**webpack.config.js**
 
 ```js
-{
-  test: /\.css$/,
-  use: [
-    'style-loader',
-    { loader: 'css-loader', options: { modules: true, importLoaders: 1 } },
-    'postcss-loader'
-  ]
-}
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: { modules: true, importLoaders: 1 },
+          },
+          'postcss-loader',
+        ],
+      },
+    ],
+  },
+};
 ```
 
 or use [postcss-modules] instead of `css-loader`.
@@ -442,18 +727,24 @@ If you want to process styles written in JavaScript, use the [postcss-js] parser
 
 [postcss-js]: https://github.com/postcss/postcss-js
 
-**`webpack.config.js`**
+**webpack.config.js**
 
 ```js
-{
-  test: /\.style.js$/,
-  use: [
-    'style-loader',
-    { loader: 'css-loader', options: { importLoaders: 2 } },
-    { loader: 'postcss-loader', options: { parser: 'postcss-js' } },
-    'babel-loader'
-  ]
-}
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.style.js$/,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 2 } },
+          { loader: 'postcss-loader', options: { parser: 'postcss-js' } },
+          'babel-loader',
+        ],
+      },
+    ],
+  },
+};
 ```
 
 As result you will be able to write styles in the following way
@@ -509,6 +800,145 @@ module.exports = {
     }),
   ],
 };
+```
+
+### `Emit assets`
+
+To write a asset from the postcss plugin to the webpack's output file system, need to add a message in `result.messages`.
+The message should contain the following fields:
+
+- `type` = `asset` - Message type (require, should be equal `asset`)
+- `file` - file name (require)
+- `content` - file content (require)
+- `sourceMap` - sourceMap
+- `info` - asset info
+
+**`webpack.config.js`**
+
+```js
+const customPlugin = () => (css, result) => {
+  result.messages.push({
+    type: 'asset',
+    file: 'sprite.svg',
+    content: '<svg>...</svg>',
+  });
+};
+
+const postcssPlugin = postcss.plugin('postcss-assets', customPlugin);
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [postcssPlugin()],
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+### `Add dependencies`
+
+There are two way to add dependencies:
+
+1. (Recommended). Postcss plugin should emit message in `result.messages`.
+
+The message should contain the following fields:
+
+- `type` = `dependency` - Message type (require, should be equal `dependency`)
+- `file` - absolute file path (require)
+
+**`webpack.config.js`**
+
+```js
+const path = require('path');
+
+const customPlugin = () => (css, result) => {
+  result.messages.push({
+    type: 'dependency',
+    file: path.resolve(__dirname, 'path', 'to', 'file'),
+  });
+};
+
+const postcssPlugin = postcss.plugin('postcss-assets', customPlugin);
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [postcssPlugin()],
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+2. Pass `loaderContext` in plugin.
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: 'path/to/postcss.config.js',
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+**`postcss.config.js`**
+
+```js
+module.exports = (loaderContext) => ({
+  plugins: [require('path/to/customPlugin')(loaderContext)],
+});
+```
+
+**`customPlugin.js`**
+
+```js
+const path = require('path');
+
+const customPlugin = (loaderContext) => (css, result) => {
+  loaderContext.webpack.addDependency(
+    path.resolve(__dirname, 'path', 'to', 'file')
+  );
+};
+
+module.exports = postcss.plugin('postcss-assets', customPlugin);
 ```
 
 ## Maintainers
