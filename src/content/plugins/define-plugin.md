@@ -107,6 +107,7 @@ new webpack.DefinePlugin({
 It is possible to define variables with values that rely on files and will be re-evaluated when such files change in the file system. This means webpack will rebuild when such watched files change.
 
 Arguments:
+
 - The first argument of the `webpack.DefinePlugin.runtimeValue` is a `function` that should return the value to be assigned to the definition.
 - The second argument is an array of file paths to watch for. Pass `true` instead of `[string]` here to flag the module as uncacheable.
 
