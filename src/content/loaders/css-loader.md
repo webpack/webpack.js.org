@@ -1242,10 +1242,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## 贡献 {#contributing}
-=======
-### Separating `Interoperable CSS`-only and `CSS Module` features
+### Separating `Interoperable CSS`-only and `CSS Module` features {#separating-interoperable-css-only-and-css-module-features}
 
 The following setup is an example of allowing `Interoperable CSS` features only (such as `:import` and `:export`) without using further `CSS Module` functionality by setting `compileType` option for all files that do not match `*.module.scss` naming convention. This is for reference as having `ICSS` features applied to all files was default `css-loader` behavior before v4.  
 Meanwhile all files matching `*.module.scss` are treated as `CSS Modules` in this example.
@@ -1350,8 +1347,7 @@ import styles from 'Component.module.scss';
 ctx.fillStyle = `${svars.colorBackgroundCanvas}`;
 ```
 
-## Contributing
->>>>>>> 684a0ad24b52bdd3123da945f08ebe52413c7cd2
+## Contributing {#contributing}
 
 如果您还没有阅读，请花一点时间阅读我们的贡献指南。
 

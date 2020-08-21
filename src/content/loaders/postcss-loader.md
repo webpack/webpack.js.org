@@ -144,7 +144,7 @@ Default: `undefined`
 Options specified in the config file are combined with options passed to the loader.
 Loader options overwrite options from config.
 
-#### Boolean
+#### Boolean {#boolean}
 
 Enables/Disables autoloading config.
 
@@ -166,7 +166,7 @@ module.exports = {
 };
 ```
 
-#### String
+#### String {#string}
 
 Allows to specify the absolute path to the config file.
 
@@ -188,7 +188,7 @@ module.exports = {
 };
 ```
 
-#### Object
+#### Object {#object}
 
 |           Name            |    Type    |   Default   | Description              |
 | :-----------------------: | :--------: | :---------: | :----------------------- |
@@ -382,7 +382,7 @@ Default: `undefined`
 Type: `String|Object|Function`
 Default: `undefined`
 
-##### `String`
+##### `String` {#string}
 
 The passed `string` is converted to the form `require('string')`.
 
@@ -405,7 +405,7 @@ module.exports = {
 };
 ```
 
-##### `Object`
+##### `Object` {#object}
 
 **`webpack.config.js`**
 
@@ -425,7 +425,7 @@ module.exports = {
 };
 ```
 
-##### `Function`
+##### `Function` {#function}
 
 **`webpack.config.js`**
 
@@ -450,7 +450,7 @@ module.exports = {
 Type: `String|Object`
 Default: `undefined`
 
-##### `String`
+##### `String` {#string}
 
 The passed `string` is converted to the form `require('string')`.
 
@@ -473,7 +473,7 @@ module.exports = {
 };
 ```
 
-##### `Object`
+##### `Object` {#object}
 
 **`webpack.config.js`**
 
@@ -498,7 +498,7 @@ module.exports = {
 Type: `String|Object|Function`
 Default: `undefined`
 
-##### `String`
+##### `String` {#string}
 
 The passed `string` is converted to the form `require('string')`.
 
@@ -521,11 +521,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `SourceMap` {#sourcemap}
-=======
-##### `Object`
->>>>>>> 684a0ad24b52bdd3123da945f08ebe52413c7cd2
+##### `Object` {#object}
 
 **`webpack.config.js`**
 
@@ -545,7 +541,7 @@ module.exports = {
 };
 ```
 
-##### `Function`
+##### `Function` {#function}
 
 **`webpack.config.js`**
 
@@ -568,7 +564,7 @@ module.exports = {
 };
 ```
 
-### `SourceMap`
+### `SourceMap` {#sourcemap}
 
 Type: `Boolean|String`
 Default: `compiler.devtool`
@@ -806,10 +802,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## Maintainers {#maintainers}
-=======
-### `Emit assets`
+### `Emit assets` {#emit-assets}
 
 To write a asset from the postcss plugin to the webpack's output file system, need to add a message in `result.messages`.
 The message should contain the following fields:
@@ -854,7 +847,7 @@ module.exports = {
 };
 ```
 
-### `Add dependencies`
+### `Add dependencies` {#add-dependencies}
 
 There are two way to add dependencies:
 
@@ -948,8 +941,7 @@ const customPlugin = (loaderContext) => (css, result) => {
 module.exports = postcss.plugin('postcss-assets', customPlugin);
 ```
 
-## Maintainers
->>>>>>> 684a0ad24b52bdd3123da945f08ebe52413c7cd2
+## Maintainers {#maintainers}
 
 <table>
   <tbody>

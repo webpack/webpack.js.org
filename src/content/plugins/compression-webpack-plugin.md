@@ -118,13 +118,9 @@ Default: `gzip`
 
 The compression algorithm/function.
 
-<<<<<<< HEAD
-#### `String` {#string}
-=======
 > ℹ️ If you use custom function for the `algorithm` option, the default value of the `compressionOptions` option is `{}`.
 
-#### `String`
->>>>>>> 684a0ad24b52bdd3123da945f08ebe52413c7cd2
+#### `String` {#string}
 
 The algorithm is taken from [zlib](https://nodejs.org/api/zlib.html).
 
