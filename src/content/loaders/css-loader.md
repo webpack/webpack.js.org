@@ -1242,12 +1242,12 @@ module.exports = {
 };
 ```
 
-### Separating `Interoperable CSS`-only and `CSS Module` features {#separating-interoperable-css-only-and-css-module-features}
+### 只允许 `可交互的 CSS` 使其与 `CSS Module` 特性分离{#separating-interoperable-css-only-and-css-module-features}
 
-The following setup is an example of allowing `Interoperable CSS` features only (such as `:import` and `:export`) without using further `CSS Module` functionality by setting `compileType` option for all files that do not match `*.module.scss` naming convention. This is for reference as having `ICSS` features applied to all files was default `css-loader` behavior before v4.  
-Meanwhile all files matching `*.module.scss` are treated as `CSS Modules` in this example.
+下面是有关配置的示例代码，通过为所有未匹配到 `*.module.scss` 命名约定文件设置 `compileType` 选项，只允许使用 `可交互的 CSS` 特性（如 `:import` 和 `:export`），而不使用其他的 `CSS Module` 特性。此处仅供参考，因为在 v4 之前，`css-loader` 默认将 `ICSS` 特性应用于所有文件。
+同时，在本示例中，匹配到 `*.module.scss` 的所有文件都将被视为 `CSS Modules`。
 
-An example case is assumed where a project requires canvas drawing variables to be synchronized with CSS - canvas drawing uses the same color (set by color name in JavaScript) as HTML background (set by class name in CSS).
+假设项目中有这样一个需求，要求 canvas 绘制使用的变量与 CSS 同步，换句话说就是 canvas 绘制使用的颜色（在 JavaScript 中设置的颜色名）与 HTML 背景（在 CSS 中通过 class 设置）相同。
 
 **webpack.config.js**
 
@@ -1309,7 +1309,7 @@ module.exports = {
 
 **variables.scss**
 
-File treated as `ICSS`-only.
+文件被视为仅使用 `ICSS`。
 
 ```scss
 $colorBackground: red;
@@ -1320,7 +1320,7 @@ $colorBackground: red;
 
 **Component.module.scss**
 
-File treated as `CSS Module`.
+文件被视为 `CSS Module`。
 
 ```scss
 @import 'variables.scss';
@@ -1331,7 +1331,7 @@ File treated as `CSS Module`.
 
 **Component.jsx**
 
-Using both `CSS Module` functionality as well as SCSS variables directly in JavaScript.
+在 JavaScript 中直接使用 `CSS Module` 的特性以及 SCSS 声明的变量。
 
 ```jsx
 import svars from 'variables.scss';
