@@ -96,9 +96,9 @@ module.exports = {
 
 `boolean = true`
 
-This option tells webpack to add `charset` attribute with value of `utf-8` to HTML `<script>` element.
+Tells webpack to add `charset="utf-8"` to the HTML `<script>` tag.
 
-T> Although `charset` attribute for `<script>` element was [deprecated](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes), webpack still adds it by default for compatibility with non-modern browsers.
+T> Although `charset` attribute for `<script>` tag was [deprecated](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes), webpack still adds it by default for compatibility with non-modern browsers.
 
 ## `output.chunkFilename`
 
