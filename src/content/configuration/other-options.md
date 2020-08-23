@@ -304,10 +304,32 @@ W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#ca
 
 `object`
 
-Expose custom values into the loader context.
+Expose custom values into the [loader context](/api/loaders/#the-loader-context).
 
-?> Add an example...
+For example, you can define a new variable in loader context:
 
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  // ...
+  loader: {
+    answer: 42
+  }
+};
+```
+
+Then use `this.answer` to get its value in loader:
+
+```javascript
+module.exports = function (source) {
+  // ...
+  console.log(this.answer); // will log `42` here
+  return source;
+};
+```
+
+T> You can override any properties in loader context as webpack copies all properties defined in `loader` to the loader context.
 
 ## `parallelism`
 
