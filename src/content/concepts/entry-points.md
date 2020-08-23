@@ -126,3 +126,74 @@ __What does this do?__ We are telling webpack that we would like 3 separate depe
 __Why?__ In a multi-page application, the server is going to fetch a new HTML document for you. The page reloads this new document and assets are redownloaded. However, this gives us the unique opportunity to do things like using [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the number of entry points increases.
 
 T> As a rule of thumb: Use exactly one entry point for each HTML document.
+
+### EntryDescription object
+
+An object with entry point description. You can specify the following properties.
+
+- `dependOn` :  The entrypoints that the current entrypoint depend on.They must be loaded when this entrypoint is loaded.
+- `filename` :  Specifies the name of each output file on disk.
+- `import`   :  Module(s) that are loaded upon startup.
+- `library`  :  Options for library.
+- `runtime`  :  The name of the runtime chunk. If set, a runtime chunk with this name is created else an existing entrypoint is used as runtime.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  entry: {
+    b2: {
+      dependOn: "depedningfile.js",
+      import: "./src/app.js"
+    }
+  }
+};
+```
+
+W> `runtime` and `dependOn` can not be specified both on a single entry, so the following config is invalid and would throw an error:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  entry: {
+    a2: "./a",
+    b2: {
+      runtime: "x2",
+      dependOn: "a2",
+      import: "./b"
+    }
+  }
+};
+```
+
+W> Make sure `runtime` must not point to an existing entrypoint name for example the below config would throw an error:
+
+```javascript
+module.exports = {
+  entry: {
+    a1: "./a",
+    b1: {
+      runtime: "a1",
+      import: "./b"
+    }
+  }
+};
+```
+
+W> Also `dependOn` must not be circular, follwing example again would throuw an error:
+
+```javascript
+module.exports = {
+  entry: {
+    a3: {
+      import: "./a",
+      dependOn: "b3"
+    },
+    b3: {
+      import: "./b",
+      dependOn: "a3"
+    }
+  }
+};
+```
