@@ -608,9 +608,9 @@ MySubModule.doSomething();
 
 ## `output.libraryTarget`
 
-`string`
+`string = 'var'`
 
-Defaults to `'module'` if `output.module` is set to `True` else deafults to `var'`.
+Defaults to `'module'` if [`output.module`](#outputmodule) is set to `true`, otherwise defaults to `var'`.
 
 Configure how the library will be exposed. Any one of the following options can be used. Please note that this option works in conjunction with the value assigned to [`output.library`](#outputlibrary). For the following examples, it is assumed that this value is configured as `MyLibrary`.
 
