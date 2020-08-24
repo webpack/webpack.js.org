@@ -21,6 +21,9 @@ contributors:
   - Neob91
   - anikethsaha
   - jamesgeorge007
+  - hiroppy
+  - chenxsan
+  - snitin315
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -48,7 +51,7 @@ module.exports = {
 
 which will yield the following:
 
-__webpack.config.js__
+__someLibName.js__
 
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -160,15 +163,6 @@ Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web
 - `'use-credentials'` - Enable cross-origin loading __with credentials__
 
 
-## `output.jsonpScriptType`
-
-`string = 'text/javascript': 'module' | 'text/javascript'`
-
-Allows customization of `type` attribute of `script` tags that webpack injects into the DOM to download async chunks.
-
-- `'text/javascript'`: Default `type` in HTML5 and required for some browsers in HTML4.
-- `'module'`: Causes the code to be treated as a JavaScript module.
-
 ## `output.devtoolFallbackModuleFilenameTemplate`
 
 `string` `function (info)`
@@ -237,7 +231,7 @@ For example, if you have 2 libraries, with namespaces `library1` and `library2`,
 
 ## `output.filename`
 
-`string` `function (chunkData) => string`
+`string` `function (pathData, assetInfo) => string`
 
 This option determines the name of each output bundle. The bundle is written to the directory specified by the [`output.path`](#outputpath) option.
 
@@ -329,8 +323,8 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    filename: (chunkData) => {
-      return chunkData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
+    filename: (pathData) => {
+      return pathData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
     },
   }
 };
@@ -367,6 +361,8 @@ If using a function for this option, the function will be passed an object conta
 T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
 
 ## `output.assetModuleFilename`
+
+`string = '[hash][ext][query]'`
 
 The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/)
 
@@ -557,6 +553,22 @@ W> Note that if an `array` is provided as an `entry` point, only the last module
 
 T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library` as well as `output.libraryTarget`.
 
+## ouput.scriptType
+
+`string: 'module' | 'text/javascript'` `boolean = false`
+
+This option allows loading asynchronous chunks with a custom script type, such as `<script type="module" ...>`.
+
+T> If [`output.module`](#outputmodule) is set to `true`, `ouput.scriptType` will default to `'module'` instead of `false`.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    scriptType: 'module'
+  }
+};
+```
 
 ## `output.libraryExport`
 
@@ -616,7 +628,6 @@ MyLibrary.doSomething();
 ```
 
 W> When using this option, an empty `output.library` will result in no assignment.
-
 
 `libraryTarget: 'assign'` - This will generate an implied global which has the potential to reassign an existing value (use with caution).
 
@@ -861,8 +872,17 @@ System.register('my-library', [], function(_export) {
 });
 ```
 
-Module proof library.
+You can access [SystemJS context](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md#format-definition) via `__system_context__`:
 
+```javascript
+// Log the URL of the current SystemJS module
+console.log(__system_context__.meta.url);
+
+// Import a SystemJS module, with the current SystemJS module's url as the parentUrl
+__system_context__.import('./other-file.js').then(m => {
+  console.log(m);
+});
+```
 
 ### Other Targets
 
@@ -873,6 +893,24 @@ MyLibrary(_entry_return_);
 ```
 
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
+
+
+## `output.importFunctionName`
+
+`string = 'import'`
+
+The name of the native `import()` function. Can be used for polyfilling, e.g. with [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    importFunctionName: '__import__'
+  }
+};
+```
 
 
 ## `output.path`
@@ -1089,6 +1127,21 @@ module.exports = {
 };
 ```
 
+## `output.enabledLibraryTypes`
+
+`[string]`
+
+List of library types enabled for use by entry points.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledLibraryTypes: ['module']
+  }
+};
+```
+
 ## `output.futureEmitAssets`
 
 `boolean = false`
@@ -1161,7 +1214,7 @@ module.exports = {
 
 `boolean = true`
 
-Allow outputting JavaScript files as module type. It sets `output.iife` to `false`, `output.libraryTarget` to `'module'`, `output.jsonpScriptType` to `'module'` and `terserOptions.module` to `true`
+Allow outputting JavaScript files as module type. It sets `output.iife` to `false`, `output.libraryTarget` to `'module'`, `output.scriptType` to `'module'` and `terserOptions.module` to `true`
 
 W> `output.module` is an experimental feature and can be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
 

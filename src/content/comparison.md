@@ -42,7 +42,7 @@ webpack is not the only module bundler out there. If you are choosing between us
 | Node.js built-in libs `require("path")` | __yes__ | no | __yes__ | __yes__ | [node-resolve-plugin](https://github.com/rollup/rollup-plugin-node-resolve) | |
 | Other Node.js stuff | process, __dir/filename, global | - | process, __dir/filename, global | process, __dir/filename, global for cjs | global ([commonjs-plugin](https://github.com/rollup/rollup-plugin-commonjs)) | |
 | Plugins | __yes__ | yes | __yes__ | yes | yes | yes |
-| Preprocessing | __loaders, [transforms](https://github.com/webpack-contrib/transform-loader)__ | loaders | transforms | plugin translate | plugin transforms | compilers, optimizers |
+| Preprocessing | __loaders__ | loaders | transforms | plugin translate | plugin transforms | compilers, optimizers |
 | Replacement for browser | `web_modules`, `.web.js`, package.json field, alias configuration option | alias option | package.json field, alias option | package.json, alias option | no | |
 | Requirable files | file system | __web__ | file system | through plugins | file system or through plugins | file system |
 | Runtime overhead | __243B + 20B per module + 4B per dependency__ | 14.7kB + 0B per module + (3B + X) per dependency | 415B + 25B per module + (6B + 2X) per dependency | 5.5kB for self-executing bundles, 38kB for full loader and polyfill, 0 plain modules, 293B CJS, 139B ES2015 System.register before gzip | __none for ES2015 modules__ (other formats may have) | |

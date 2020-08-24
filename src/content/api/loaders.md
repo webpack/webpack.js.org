@@ -12,6 +12,8 @@ contributors:
   - superburrito
   - wizardofhogwarts
   - snitin315
+  - chenxsan
+  - jamesgeorge007
 ---
 
 A loader is just a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
@@ -169,9 +171,6 @@ The steps above would be shortened to:
   |- b-loader `pitch` returns a module
 |- a-loader normal execution
 ```
-
-See the [bundle-loader](https://github.com/webpack-contrib/bundle-loader) for a good example of how this process can be used in a more meaningful way.
-
 
 ## The Loader Context
 
@@ -363,7 +362,7 @@ Here is a Warning!
  @ ./src/index.js 1:0-25
  ```
 
-T> Note that the warnings will not be displayed if `stats.warnings` is set to `false`, or some other omit setting is used to `stats` such as `none` or `errors-only`. See the [stats configuration](/configuration/stats/#stats).
+T> Note that the warnings will not be displayed if `stats.warnings` is set to `false`, or some other omit setting is used to `stats` such as `none` or `errors-only`. See the [stats presets configuration](/configuration/stats/#stats-presets).
 
 ### `this.emitError`
 
@@ -390,6 +389,8 @@ loadModule(request: string, callback: function(err, source, sourceMap, module))
 ```
 
 Resolves the given request to a module, applies all configured loaders and calls back with the generated source, the sourceMap and the module instance (usually an instance of [`NormalModule`](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js)). Use this function if you need to know the source code of another module to generate the result.
+
+`this.loadModule` in a loader context uses CommonJS resolve rules by default. Use `this.getResolve` with an appropriate `dependencyType`, e. g. `'esm'`, `'commonjs'` or a custom one before using a different semantic.
 
 
 ### `this.resolve`

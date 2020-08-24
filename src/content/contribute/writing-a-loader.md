@@ -7,6 +7,7 @@ contributors:
   - byzyk
   - anikethsaha
   - jamesgeorge007
+  - chenxsan
 ---
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
@@ -265,22 +266,24 @@ For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpa
 So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a simple unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest](https://jestjs.io/) framework to do this. We'll also install `babel-jest` and some presets that will allow us to use the `import` / `export` and `async` / `await`. Let's start by installing and saving these as a `devDependencies`:
 
 ``` bash
-npm install --save-dev jest babel-jest babel-preset-env
+npm install --save-dev jest babel-jest @babel/core @babel/preset-env
 ```
 
-__.babelrc__
+__babel.config.js__
 
-```json
-{
-  "presets": [[
-    "env",
-    {
-      "targets": {
-        "node": "4"
-      }
-    }
-  ]]
-}
+```js
+module.exports = {
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          node: 'current',
+        },
+      },
+    ],
+  ],
+};
 ```
 
 Our loader will process `.txt` files and simply replace any instance of `[name]` with the `name` option given to the loader. Then it will output a valid JavaScript module containing the text as its default export:
@@ -303,7 +306,7 @@ We'll use this loader to process the following file:
 
 __test/example.txt__
 
-``` bash
+```bash
 Hey [name]!
 ```
 
@@ -342,6 +345,7 @@ export default (fixture, options = {}) => {
   });
 
   compiler.outputFileSystem = createFsFromVolume(new Volume());
+  compiler.outputFileSystem.join = path.join.bind(path);
 
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
@@ -361,13 +365,16 @@ And now, finally, we can write our test and add an npm script to run it:
 __test/loader.test.js__
 
 ```js
+/**
+ * @jest-environment node
+ */
 import compiler from './compiler.js';
 
 test('Inserts name and outputs JavaScript', async () => {
   const stats = await compiler('example.txt');
   const output = stats.toJson().modules[0].source;
 
-  expect(output).toBe('export default "Hey Alice!\\n"');
+  expect(output).toBe('export default "Hey Alice!\"');
 });
 ```
 

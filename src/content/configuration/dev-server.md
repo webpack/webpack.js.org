@@ -19,6 +19,7 @@ contributors:
   - jamesgeorge007
   - g100g
   - anikethsaha
+  - snitin315
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -66,6 +67,8 @@ W> You cannot use the second `compiler` argument (a callback) when using `Webpac
 W> Be aware that when [exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations) only the `devServer` options for the first configuration will be taken into account and used for all the configurations in the array.
 
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
+
+T> If you want to manually recompile the bundle, navigating to the `/invalidate` route will [invalidate](/api/node/#invalidate-watching) the current compilation of the bundle and recompile it for you via [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate). Depending on your configuration, URL may look like `http://localhost:9000/invalidate`.
 
 T> HTML template is required to serve the bundle, usually it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
 
@@ -268,7 +271,7 @@ module.exports = {
 };
 ```
 
-It is also possible to serve from multiple directories:
+It is also possible to serve from multiple directories in case you want to serve static content at multiple URLs with [`contentBasePublicPath`](#devservercontentbasepublicpath):
 
 __webpack.config.js__
 
@@ -292,7 +295,7 @@ webpack-dev-server --content-base /path/to/content/dir
 
 ## `devServer.contentBasePublicPath`
 
-`string = '/'`
+`string = '/'` `[string]`
 
 Tell the server at what URL to serve `devServer.contentBase` static content. If there was a file `assets/manifest.json`, it would be served at `/serve-content-base-at-this-url/manifest.json`
 
@@ -310,6 +313,22 @@ module.exports = {
 };
 ```
 
+Provide an array of strings in case you have multiple static folders set in [`contentBase`](#devservercontentbase).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    contentBase: [contentBasePublic, contentBaseOther],
+    contentBasePublicPath: [
+      contentBasePublicPath,
+      contentBasePublicOtherPath
+    ]
+  }
+};
+```
 
 ## `devServer.disableHostCheck`
 
@@ -816,7 +835,7 @@ module.exports = {
 
 ## `devServer.open`
 
-`boolean = false` `string`
+`boolean = false` `string` `object`
 
 Tells dev-server to open the browser after server had been started. Set it to `true` to open your default browser.
 
@@ -840,6 +859,21 @@ module.exports = {
   //...
   devServer: {
     open: 'Google Chrome'
+  }
+};
+```
+
+If you want to use flags when opening the browser like opening an incognito window (`--incognito` flag), you can set `open` to an object. The object accepts all [open](https://www.npmjs.com/package/open) options, `app` property must be an array. The first element in the array must be the browser name and the other following elements are the flags you want to use. For example:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    open: {
+      app: ['Google Chrome', '--incognito', '--other-flag']
+    }
   }
 };
 ```
@@ -1631,4 +1665,14 @@ module.exports = {
     }
   }
 };
+```
+
+T> It is possible to set any Node.js flags via `NODE_OPTIONS`, for example, to configure `HTTP_MAX_HEADER_SIZE`: 
+
+__package.json__
+
+```json
+{
+  "scripts": "NODE_OPTIONS='--max-http-header-size=100000' webpack-dev-server"
+}
 ```

@@ -8,6 +8,7 @@ contributors:
   - skipjack
   - byzyk
   - EugeneHlushko
+  - EslamHiko
 related:
   - title: Code Splitting Example
     url: https://github.com/webpack/webpack/blob/master/examples/explicit-vendor-chunk/README.md
@@ -21,6 +22,7 @@ The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way
 This plugin is used in a separate webpack configuration exclusively to create a dll-only-bundle. It creates a `manifest.json` file, which is used by the [`DllReferencePlugin`](#dllreferenceplugin) to map dependencies.
 
 - `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
+- `format` (boolean = false): If `true`, manifest json file (output) will be formatted.
 - `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[hash]` & `[name]` )
 - `path`: __absolute path__ to the manifest json file (output)
 - `entryOnly` (boolean = true): if `true`, only entry points will be exposed
@@ -42,6 +44,7 @@ Combine this plugin with [`output.library`](/configuration/output/#outputlibrary
 This plugin is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.
 
 - `context`: (__absolute path__) context of requests in the manifest (or content property)
+- `extensions`: Extensions used to resolve modules in the dll bundle (only used when using 'scope').
 - `manifest` : an object containing `content` and `name` or a string to the absolute path of the JSON manifest to be loaded upon compilation
 - `content` (optional): the mappings from request to module id (defaults to `manifest.content`)
 - `name` (optional): an identifier where the dll is exposed (defaults to `manifest.name`) (see also [`externals`](/configuration/externals/))
