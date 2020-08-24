@@ -16,17 +16,17 @@ repo: https://github.com/webpack-contrib/terser-webpack-plugin
 
 
 
-This plugin uses [terser](https://github.com/terser-js/terser) to minify your JavaScript.
+该插件使用 [terser](https://github.com/terser-js/terser) 来压缩 JavaScript。
 
-## Getting Started {#getting-started}
+## 入门 {#getting-started}
 
-To begin, you'll need to install `terser-webpack-plugin`:
+首先，你需要安装 `terser-webpack-plugin`：
 
 ```console
 $ npm install terser-webpack-plugin --save-dev
 ```
 
-Then add the plugin to your `webpack` config. For example:
+然后将插件添加到你的 `webpack` 配置文件中。例如：
 
 **webpack.config.js**
 
@@ -41,16 +41,16 @@ module.exports = {
 };
 ```
 
-And run `webpack` via your preferred method.
+接下来，按照你习惯的方式运行 `webpack`。
 
-## Options {#options}
+## 选项 {#options}
 
 ### `test` {#test}
 
-Type: `String|RegExp|Array<String|RegExp>`
-Default: `/\.m?js(\?.*)?$/i`
+类型： `String|RegExp|Array<String|RegExp>`
+默认值：`/\.m?js(\?.*)?$/i`
 
-Test to match files against.
+用来匹配需要压缩的文件。
 
 **webpack.config.js**
 
@@ -69,10 +69,10 @@ module.exports = {
 
 ### `include` {#include}
 
-Type: `String|RegExp|Array<String|RegExp>`
-Default: `undefined`
+类型： `String|RegExp|Array<String|RegExp>`
+默认值： `undefined`
 
-Files to include.
+匹配参与压缩的文件。
 
 **webpack.config.js**
 
@@ -91,10 +91,10 @@ module.exports = {
 
 ### `exclude` {#exclude}
 
-Type: `String|RegExp|Array<String|RegExp>`
-Default: `undefined`
+类型： `String|RegExp|Array<String|RegExp>`
+默认值： `undefined`
 
-Files to exclude.
+匹配不需要压缩的文件。
 
 **webpack.config.js**
 
@@ -113,19 +113,19 @@ module.exports = {
 
 ### `cache` {#cache}
 
-> ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
+> ⚠ 此配置在 Webpack 5 已弃用！请使用 https://webpack.js.org/configuration/other-options/#cache 代替。
 
-Type: `Boolean|String`
-Default: `true`
+类型： `Boolean|String`
+默认值： `true`
 
-Enable file caching.
-Default path to cache directory: `node_modules/.cache/terser-webpack-plugin`.
+启用文件缓存。
+缓存目录的默认路径： `node_modules/.cache/terser-webpack-plugin`。
 
-> ℹ️ If you use your own `minify` function please read the `minify` section for cache invalidation correctly.
+> ℹ️ 如果你使用自己的 `minify` 函数，请务必阅读 `minify` 部分以了解缓存失效策略。
 
 #### `Boolean` {#boolean}
 
-Enable/disable file caching.
+启用/禁用文件缓存。
 
 **webpack.config.js**
 
@@ -144,7 +144,7 @@ module.exports = {
 
 #### `String` {#string}
 
-Enable file caching and set path to cache directory.
+启用文件缓存功能并设置缓存目录的路径。
 
 **webpack.config.js**
 
@@ -163,14 +163,14 @@ module.exports = {
 
 ### `cacheKeys` {#cachekeys}
 
-> ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
+> ⚠ 此配置在 Webpack 5 已弃用！请使用 https://webpack.js.org/configuration/other-options/#cache 代替。
 
-Type: `Function<(defaultCacheKeys, file) -> Object>`
-Default: `defaultCacheKeys => defaultCacheKeys`
+类型： `Function<(defaultCacheKeys, file) -> Object>`
+默认值： `defaultCacheKeys => defaultCacheKeys`
 
-Allows you to override default cache keys.
+你可以指定自定义的缓存键，用来覆盖默认的缓存键。
 
-Default cache keys:
+默认缓存键：
 
 ```js
 ({
@@ -205,19 +205,19 @@ module.exports = {
 
 ### `parallel` {#parallel}
 
-Type: `Boolean|Number`
-Default: `true`
+类型： `Boolean|Number`
+默认值： `true`
 
-Use multi-process parallel running to improve the build speed.
-Default number of concurrent runs: `os.cpus().length - 1`.
+使用多进程并发运行以提高构建速度。
+并发运行的默认数量： `os.cpus().length - 1` 。
 
-> ℹ️ Parallelization can speedup your build significantly and is therefore **highly recommended**.
+> 并发运行可以显著提高构建速度，因此**强烈建议添加此配置** 。
 
-> ⚠️ If you use **Circle CI** or any other environment that doesn't provide real available count of CPUs then you need to setup explicitly number of CPUs to avoid `Error: Call retries were exceeded` (see [#143](https://github.com/webpack-contrib/terser-webpack-plugin/issues/143), [#202](https://github.com/webpack-contrib/terser-webpack-plugin/issues/202)).
+> 如果你使用 **Circle CI** 或任何其他不提供 CPU 实际可用数量的环境，则需要显式设置 CPU 数量，以避免 `Error: Call retries were exceeded`（请参阅 [#143](https://github.com/webpack-contrib/terser-webpack-plugin/issues/143)，[#202](https://github.com/webpack-contrib/terser-webpack-plugin/issues/202) ）。
 
 #### `Boolean` {#boolean}
 
-Enable/disable multi-process parallel running.
+启用/禁用多进程并发运行功能。
 
 **webpack.config.js**
 
@@ -236,7 +236,7 @@ module.exports = {
 
 #### `Number` {#number}
 
-Enable multi-process parallel running and set number of concurrent runs.
+启用多进程并发运行并设置并发运行次数。
 
 **webpack.config.js**
 
@@ -255,22 +255,22 @@ module.exports = {
 
 ### `sourceMap` {#sourcemap}
 
-Type: `Boolean`
-Default: `false` (see below for details around `devtool` value and `SourceMapDevToolPlugin` plugin)
+类型： `Boolean`
+默认值： `false` （有关 `devtool` 值和 `SourceMapDevToolPlugin` 插件的详细信息，请参见下文）
 
-**Works only with `source-map`, `inline-source-map`, `hidden-source-map` and `nosources-source-map` values for the [`devtool`](/configuration/devtool/) option.**
+**仅适用于当 [`devtool`](/configuration/devtool/) 选项的值为：`source-map`、`inline-source-map`、`hidden-source-map` 以及 `nosources-source-map` 时。**
 
-Why?
+为什么？
 
-- `eval` wraps modules in `eval("string")` and the minimizer does not handle strings.
-- `cheap` has not column information and minimizer generate only a single line, which leave only a single mapping.
+- `eval` 将模块包装在 `eval("string")`，并且压缩程序 (minimizer) 不处理字符串。
+- `cheap` 没有列信息，并且压缩程序 (minimizer) 最终仅生成单行代码，仅单个映射。
 
-The plugin respect the [`devtool`](/configuration/devtool/) and using the `SourceMapDevToolPlugin` plugin.
-Using supported `devtool` values enable source map generation.
-Using `SourceMapDevToolPlugin` with enabled the `columns` option enables source map generation.
+该插件遵循 [`devtool`](/configuration/devtool/) 选项并使用 `SourceMapDevToolPlugin` 插件。
+使用受支持的 `devtool` 值可生成 source maps。
+将 `SourceMapDevToolPlugin` 与 `columns` 选项一起使用也可以生成 source maps。
 
-Use source maps to map error message locations to modules (this slows down the compilation).
-If you use your own `minify` function please read the `minify` section for handling source maps correctly.
+使用 source maps 能够将错误消息位置映射到其在模块中的对应位置（但生成 source maps 会降低编译速度）。
+如果你使用了自己的 `minify` 函数，请阅读 `minify` 部分确保正确处理 source maps。
 
 **webpack.config.js**
 
@@ -289,14 +289,14 @@ module.exports = {
 
 ### `minify` {#minify}
 
-Type: `Function`
-Default: `undefined`
+类型： `Function`
+默认值： `undefined`
 
-Allows you to override default minify function.
-By default plugin uses [terser](https://github.com/terser-js/terser) package.
-Useful for using and testing unpublished versions or forks.
+允许你自定义压缩函数。
+默认情况下，插件使用 [terser](https://github.com/terser-js/terser) 库。
+对于使用和测试未发布的版本或 fork 的代码很帮助。
 
-> ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**.
+> ⚠️ **启用 `parallel` 选项时，在 `minify` 函数内部只能使用 `require`** 。
 
 **webpack.config.js**
 
@@ -327,10 +327,10 @@ module.exports = {
 
 ### `terserOptions` {#terseroptions}
 
-Type: `Object`
-Default: [default](https://github.com/terser-js/terser#minify-options)
+类型： `Object`
+默认值： [默认](https://github.com/terser-js/terser#minify-options)
 
-Terser minify [options](https://github.com/terser-js/terser#minify-options).
+Terser 压缩[配置](https://github.com/terser-js/terser#minify-options) 。
 
 **webpack.config.js**
 
@@ -362,17 +362,17 @@ module.exports = {
 
 ### `extractComments` {#extractcomments}
 
-Type: `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>|Object`
-Default: `true`
+类型： `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>|Object`
+默认值： `true`
 
-Whether comments shall be extracted to a separate file, (see [details](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a)).
-By default extract only comments using `/^\**!|@preserve|@license|@cc_on/i` regexp condition and remove remaining comments.
-If the original file is named `foo.js`, then the comments will be stored to `foo.js.LICENSE.txt`.
-The `terserOptions.output.comments` option specifies whether the comment will be preserved, i.e. it is possible to preserve some comments (e.g. annotations) while extracting others or even preserving comments that have been extracted.
+是否将注释剥离到单独的文件中（请参阅[详细信息](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a)）。
+默认情况下，仅剥离 `/^\**!|@preserve|@license|@cc_on/i` 正则表达式匹配的注释，其余注释会删除。
+如果原始文件名为 `foo.js` ，则注释将存储到 `foo.js.LICENSE.txt` 。
+`terserOptions.output.comments` 选项指定是否保留注释，即可以在剥离其他注释时保留一些注释，甚至保留已剥离的注释。
 
 #### `Boolean` {#boolean}
 
-Enable/disable extracting comments.
+启用/禁用剥离注释功能。
 
 **webpack.config.js**
 
@@ -391,7 +391,7 @@ module.exports = {
 
 #### `String` {#string}
 
-Extract `all` or `some` (use `/^\**!|@preserve|@license|@cc_on/i` RegExp) comments.
+剥离 `all` 或 `some` （使用 `/^\**!|@preserve|@license|@cc_on/i` 正则表达式进行匹配）注释。
 
 **webpack.config.js**
 
@@ -410,7 +410,7 @@ module.exports = {
 
 #### `RegExp` {#regexp}
 
-All comments that match the given expression will be extracted to the separate file.
+与指定表达式匹配的所有注释将会被剥离到单独的文件中。
 
 **webpack.config.js**
 
@@ -427,9 +427,9 @@ module.exports = {
 };
 ```
 
-#### `Function<(node, comment) -> Boolean>` {#functionnode-comment---boolean}
+#### `Function<(node, comment) -> Boolean>` {＃functionnode-comment --- boolean}
 
-All comments that match the given expression will be extracted to the separate file.
+与指定表达式匹配的所有注释将会被剥离到单独的文件中。
 
 **webpack.config.js**
 
@@ -454,7 +454,7 @@ module.exports = {
 
 #### `Object` {#object}
 
-Allow to customize condition for extract comments, specify extracted file name and banner.
+允许自定义剥离注释的条件，指定剥离的文件名和标题。
 
 **webpack.config.js**
 
@@ -482,9 +482,9 @@ module.exports = {
 
 ##### `condition` {#condition}
 
-Type: `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
+类型： `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
 
-Condition what comments you need extract.
+自定义需要剥离的注释。
 
 **webpack.config.js**
 
@@ -512,15 +512,16 @@ module.exports = {
 
 ##### `filename` {#filename}
 
-Type: `String|Function<(string) -> String>`
-Default: `[file].LICENSE.txt[query]`
+类型： `String|Function<(string) -> String>`
+默认值： `[file].LICENSE.txt [query]`
 
-Available placeholders: `[file]`, `[query]` and `[filebase]` (`[base]` for webpack 5).
+可用的占位符： `[file]` ， `[query]` 和 `[filebase]` （webpack 5 使用 `[base]` ）。
 
-The file where the extracted comments will be stored.
-Default is to append the suffix `.LICENSE.txt` to the original filename.
+剥离出来的注释将被存储到的文件的文件名。
+默认是将后缀 `.LICENSE.txt` 附加到原始文件名。
 
-> ⚠️ We highly recommend using the `txt` extension. Using `js`/`cjs`/`mjs` extensions may conflict with existing assets which leads to broken code.
+> ⚠️我们强烈建议使用 `txt` 扩展名。
+使用 `js` / `cjs` / `mjs` 扩展名可能会与现有资源文件冲突，从而导致代码运行出错。
 
 **webpack.config.js**
 
@@ -545,12 +546,12 @@ module.exports = {
 
 ##### `banner` {#banner}
 
-Type: `Boolean|String|Function<(string) -> String>`
-Default: `/*! For license information please see ${commentsFile} */`
+类型： `Boolean|String|Function<(string) -> String>`
+默认值： `/*! For license information please see ${commentsFile} */`
 
-The banner text that points to the extracted file and will be added on top of the original file.
-Can be `false` (no banner), a `String`, or a `Function<(string) -> String>` that will be called with the filename where extracted comments have been stored.
-Will be wrapped into comment.
+指向剥离文件的标语文本将被添加到原始文件的顶部。
+可以为 `false` （无标题）， `String` 或一个函数：`Function<(string) -> String>` ，该函数将被使用存储剥离的注释的文件名来调用。
+标语内容将被合并到注释中。
 
 **webpack.config.js**
 
@@ -576,11 +577,11 @@ module.exports = {
 };
 ```
 
-## Examples {#examples}
+## 示例 {#examples}
 
-### Preserve Comments {#preserve-comments}
+### 保留注释 {#preserve-comments}
 
-Extract all legal comments (i.e. `/^\**!|@preserve|@license|@cc_on/i`) and preserve `/@license/i` comments.
+剥离所有有效的注释（即 `/^\**!|@preserve|@license|@cc_on/i` ）并保留 `/@license/i` 注释。
 
 **webpack.config.js**
 
@@ -602,9 +603,9 @@ module.exports = {
 };
 ```
 
-### Remove Comments {#remove-comments}
+### 删除注释 {#remove-comments}
 
-If you avoid building with comments, use this config:
+如果要在构建时去除注释，请使用以下配置：
 
 **webpack.config.js**
 
@@ -626,9 +627,9 @@ module.exports = {
 };
 ```
 
-### Custom Minify Function {#custom-minify-function}
+### 自定义压缩函数 {#custom-minify-function}
 
-Override default minify function - use `uglify-js` for minification.
+覆盖默认的 minify 函数 - 使用 `uglify-js` 进行压缩。
 
 **webpack.config.js**
 
@@ -669,13 +670,13 @@ module.exports = {
 };
 ```
 
-## Contributing {#contributing}
+## 贡献 {#contributing}
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+请花一点时间阅读我们的贡献指南。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/terser-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## 许可证 {#license}
 
 [MIT](https://github.com/webpack-contrib/terser-webpack-plugin/blob/master/LICENSE)
 
