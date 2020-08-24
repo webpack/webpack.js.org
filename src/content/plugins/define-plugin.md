@@ -11,7 +11,7 @@ contributors:
 
 `DefinePlugin` 允许在 __编译时__ 创建配置的全局常量，这在需要区分开发模式与生产模式进行不同的操作时，非常有用。例如，如果想在开发构建中进行日志记录，而不在生产构建中进行，就可以定义一个全局常量去判断是否记录日志。这就是 `DefinePlugin` 的发光之处，设置好它，就可以忘掉开发环境和生产环境的构建规则。
 
-``` javascript
+```javascript
 new webpack.DefinePlugin({
   // 定义...
 });
@@ -29,7 +29,7 @@ new webpack.DefinePlugin({
 
 这些值将内联到代码中，从而允许通过代码压缩来删除冗余的条件判断。
 
-``` javascript
+```javascript
 new webpack.DefinePlugin({
   PRODUCTION: JSON.stringify(true),
   VERSION: JSON.stringify('5fa3b9'),
@@ -40,7 +40,7 @@ new webpack.DefinePlugin({
 });
 ```
 
-``` javascript
+```javascript
 console.log('Running App version ' + VERSION);
 if(!BROWSER_SUPPORTS_HTML5) require('html5shiv');
 ```
@@ -50,9 +50,7 @@ W> 在为 `process` 定义值时，`'process.env.NODE_ENV': JSON.stringify('prod
 
 T> 请注意，由于本插件会直接替换文本，因此提供的值必须在字符串本身中再包含一个 __实际的引号__ 。通常，可以使用类似 `'"production"'` 这样的替换引号，或者直接用 `JSON.stringify('production')`。
 
-__index.js__
-
-``` javascript
+```javascript
 if (!PRODUCTION) {
   console.log('Debug info');
 }
@@ -64,7 +62,7 @@ if (PRODUCTION) {
 
 未经 webpack 压缩过的代码：
 
-``` javascript
+```javascript
 if (!true) {
   console.log('Debug info');
 }
@@ -75,7 +73,7 @@ if (true) {
 
 经过压缩后：
 
-``` javascript
+```javascript
 console.log('Production log');
 ```
 
@@ -101,3 +99,24 @@ new webpack.DefinePlugin({
   'SERVICE_URL': JSON.stringify('https://dev.example.com')
 });
 ```
+
+## Runtime values via `runtimeValue`
+
+`function (getterFunction, [string]) => getterFunction()`
+
+It is possible to define variables with values that rely on files and will be re-evaluated when such files change in the file system. This means webpack will rebuild when such watched files change.
+
+Arguments:
+
+- The first argument of the `webpack.DefinePlugin.runtimeValue` is a `function` that should return the value to be assigned to the definition.
+- The second argument is an array of file paths to watch for. Pass `true` instead of `[string]` here to flag the module as uncacheable.
+
+```javascript
+const fileDep = path.resolve(__dirname, 'sample.txt');
+
+new webpack.DefinePlugin({
+  BUILT_AT: webpack.DefinePlugin.runtimeValue(Date.now, [fileDep])
+});
+```
+
+The value of `BUILT_AT` would be the time at which the `'sample.txt'` was last updated in the file system, e.g. `1597953013291`.
