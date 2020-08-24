@@ -7,6 +7,8 @@ contributors:
   - iamakulov
   - byzyk
   - franjohn21
+  - EugeneHlushko
+  - snitin315
 ---
 
 Plugins expose the full potential of the webpack engine to third-party developers. Using staged build callbacks, developers can introduce their own behaviors into the webpack build process. Building plugins is a bit more advanced than building loaders, because you'll need to understand some of the webpack low-level internals to hook into them. Be prepared to read some source code!
@@ -51,7 +53,7 @@ Plugins are instantiated objects with an `apply` method on their prototype. This
 class HelloWorldPlugin {
   apply(compiler) {
     compiler.hooks.done.tap('Hello World Plugin', (
-      stats /* stats is passed as argument when done hook is tapped.  */
+      stats /* stats is passed as an argument when done hook is tapped.  */
     ) => {
       console.log('Hello World!');
     });
@@ -61,17 +63,46 @@ class HelloWorldPlugin {
 module.exports = HelloWorldPlugin;
 ```
 
-Then to use the plugin, include an instance in your webpack config `plugins` array:
+Then to use the plugin, include an instance in your webpack configuration `plugins` array:
 
 ```javascript
 // webpack.config.js
 var HelloWorldPlugin = require('hello-world');
 
 module.exports = {
-  // ... config settings here ...
+  // ... configuration settings here ...
   plugins: [new HelloWorldPlugin({ options: true })]
 };
 ```
+
+
+Use [`schema-utils`](https://github.com/webpack/schema-utils) in order to validate the options being passed through the plugin options. Here is an example:
+
+```javascript
+
+import validateOptions from 'schema-utils';
+
+// schema for options object
+const schema = {
+  type: 'object',
+  properties: {
+    test: {
+      type: 'string'
+    }
+  }
+};
+
+export default class HelloWorldPlugin {
+
+  constructor(options = {}){
+    validateOptions(schema, options, 'Hello World Plugin');
+  }
+
+  apply(compiler) {}
+}
+```
+
+W> The [`schema-utils`](https://github.com/webpack/schema-utils) API has changed in recent versions. webpack still uses the v1.0.0 release, and we ask that you do the same until further notice.
 
 ## Compiler and Compilation
 
@@ -251,3 +282,7 @@ Various types of hooks supported are :
     - Defined using `AsyncParallelHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
     - Called using `callAsync( ... params)` method
+
+### Configuration defaults
+
+webpack applies configuration defaults after plugins defaults are applied. This allows plugins to feature their own defaults and provides a way to create configuration preset plugins.

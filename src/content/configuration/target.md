@@ -45,23 +45,27 @@ If a function is passed, then it will be called with the compiler as a parameter
 
 For example, if you don't want any of the plugins applied:
 
+__webpack.config.js__
+
 ```js
-const options = {
+module.exports = {
+  // ...
   target: () => undefined
 };
 ```
 
 Or you can apply specific plugins you want:
 
+__webpack.config.js__
+
 ```js
 const webpack = require('webpack');
 
-const options = {
+module.exports = {
+  // ...
   target: (compiler) => {
-    compiler.apply(
-      new webpack.JsonpTemplatePlugin(options.output),
-      new webpack.LoaderTargetPlugin('web')
-    );
+    new webpack.JsonpTemplatePlugin(options.output).apply(compiler);
+    new webpack.LoaderTargetPlugin('web').apply(compiler);
   }
 };
 ```

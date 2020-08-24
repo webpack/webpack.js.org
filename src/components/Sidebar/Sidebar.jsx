@@ -23,11 +23,11 @@ const docs = [
 const currentDocsVersion = 5;
 
 // Create and export the component
-export default ({
+export default function Sidebar({
   className = '',
   pages,
   currentPage
-}) => {
+}) {
   let group;
 
   return (
@@ -35,7 +35,7 @@ export default ({
       <div className="sidebar__inner">
         <div className="sidebar__shields">
           <a href="https://github.com/webpack/webpack/releases">
-            <Shield content="npm/v/webpack" label="webpack" />
+            <Shield content="github/package-json/v/webpack/webpack" label="webpack" />
           </a>
         </div>
         <Print url={currentPage} />
@@ -61,12 +61,12 @@ export default ({
         <div className="sidebar__docs-version">
           You are reading webpack {currentDocsVersion} documentation. Change here to:
           <ul>
-            {docs.filter(item => item.version !== currentDocsVersion).map(item => <li key={`webpack-${item.version}-docs`}>
-              <a rel="nofollow" href={item.url}>webpack {item.version} documentation</a>
+            {docs.filter(item => item.version !== currentDocsVersion).map(({version, url}) => <li key={`webpack-${version}-docs`}>
+              <a rel="nofollow" href={url}>webpack {version} documentation</a>
             </li>)}
           </ul>
         </div>
       </div>
     </nav>
   );
-};
+}

@@ -2,6 +2,17 @@
 @import 'functions';
 @import 'prism-theme';
 
+$bannerHeight: 56px;
+$navigationHeight: 56px;
+$navigationSubHeight: 28px;
+$someExtraHeight: 10px;
+
+$topHeightDesktop: $navigationHeight + $navigationSubHeight + $someExtraHeight;
+$topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
+
+$topHeightMobile: $navigationHeight;
+$topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
+
 .markdown {
   line-height: 1.5em;
 
@@ -24,20 +35,38 @@
     font-size: getFontSize(-1);
   }
 
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    &:before {
+      content: '';
+      display: block;
+      visibility: hidden;
+      pointer-events: none;
+      height: $topHeightMobile;
+      margin-top: -#{$topHeightMobile};
+      @include break {
+        height: $topHeightDesktop;
+        margin-top: -#{$topHeightDesktop};
+      }
+    }
+  }
+
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    display: flex;
-    align-items: center;
+    display: block;
     font-family: $font-stack-heading;
     font-weight: 600;
     line-height: 1.4;
-    margin: 1.5em 0 0.25em;
+    margin: 0 0 0.25em;
     color: getColor(fiord);
-    word-break: break-all;
+    word-break: break-word;
 
     tt,
     code {
@@ -204,7 +233,7 @@
     border-right: 1px solid #cccccc;
 
     &:last-child {
-      border-right:none;
+      border-right: none;
     }
   }
 
@@ -236,7 +265,7 @@
     border-right: 1px solid #cccccc;
 
     &:last-child {
-      border-right:none;
+      border-right: none;
     }
 
     @include break {
@@ -245,7 +274,7 @@
   }
 
   .title {
-    width: 40%;
+    width: unset;
     display: flex;
     flex-direction: column;
     justify-content: baseline;
@@ -257,11 +286,12 @@
   }
 
   .content {
-    width: 60%;
+    width: unset;
     display: flex;
     flex-direction: column;
     justify-content: baseline;
     margin: 10px 0;
+    padding: 0 10px;
   }
 
   .description.desktop {
@@ -370,8 +400,6 @@
       line-height: initial;
       overflow: auto;
       margin: 0;
-      vertical-align: middle;
-      white-space: normal;
     }
   }
 
@@ -379,6 +407,28 @@
     code,
     tt {
       white-space: pre-line;
+    }
+  }
+}
+
+.notification-bar-visible .markdown {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    &:before {
+      content: '';
+      display: block;
+      visibility: hidden;
+      pointer-events: none;
+      height: $topHeightMobileWithBanner;
+      margin-top: -#{$topHeightMobileWithBanner};
+      @include break {
+        height: $topHeightDesktopWithBanner;
+        margin-top: -#{$topHeightDesktopWithBanner};
+      }
     }
   }
 }

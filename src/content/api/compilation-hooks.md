@@ -8,6 +8,7 @@ contributors:
   - misterdev
   - wizardofhogwarts
   - EugeneHlushko
+  - chenxsan
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -105,29 +106,11 @@ Fired when the compilation stops accepting new modules.
 Fired when a compilation begins accepting new modules.
 
 
-### `optimizeDependenciesBasic`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
-
-Parameters: `modules`
-
-
 ### `optimizeDependencies`
 
 `SyncBailHook`
 
 Fired at the beginning of dependency optimization.
-
-- Callback Parameters: `modules`
-
-
-### `optimizeDependenciesAdvanced`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `modules`
 
@@ -148,29 +131,11 @@ Fired after the dependency optimization.
 Triggered at the beginning of the optimization phase.
 
 
-### `optimizeModulesBasic`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
-
-- Callback Parameters: `modules`
-
-
 ### `optimizeModules`
 
 `SyncBailHook`
 
 Called at the beginning of the module optimization phase. A plugin can tap into this hook to perform optimizations on modules.
-
-- Callback Parameters: `modules`
-
-
-### `optimizeModulesAdvanced`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `modules`
 
@@ -184,29 +149,11 @@ Called after modules optimization has completed.
 - Callback Parameters: `modules`
 
 
-### `optimizeChunksBasic`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
-
-- Callback Parameters: `chunks`
-
-
 ### `optimizeChunks`
 
 `SyncBailHook`
 
 Called at the beginning of the chunk optimization phase. A plugin can tap into this hook to perform optimizations on chunks.
-
-- Callback Parameters: `chunks`
-
-
-### `optimizeChunksAdvanced`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `chunks`
 
@@ -238,29 +185,11 @@ Called after the dependency tree optimization has completed with success.
 - Callback Parameters: `chunks` `modules`
 
 
-### `optimizeChunkModulesBasic`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
-
-- Callback Parameters: `chunks` `modules`
-
-
 ### `optimizeChunkModules`
 
 `SyncBailHook`
 
 Called after the tree optimization, at the beginning of the chunk modules optimization. A plugin can tap into this hook to perform optimizations of chunk modules.
-
-- Callback Parameters: `chunks` `modules`
-
-
-### `optimizeChunkModulesAdvanced`
-
-`SyncBailHook`
-
-W> This hook will be removed in v5.0.0
 
 - Callback Parameters: `chunks` `modules`
 
@@ -288,26 +217,6 @@ Called to determine whether or not to store records. Returning anything `!== fal
 Restore module information from records.
 
 - Callback Parameters: `modules` `records`
-
-
-### `optimizeModuleOrder`
-
-`SyncHook`
-
-W> This hook will be removed in v5.0.0
-
-Sort the modules from most to least important.
-
-- Callback Parameters: `modules`
-
-
-### `advancedOptimizeModuleOrder`
-
-`SyncHook`
-
-W> This hook will be removed in v5.0.0
-
-- Callback Parameters: `modules`
 
 
 ### `beforeModuleIds`
@@ -355,44 +264,11 @@ Restore chunk information from records.
 - Callback Parameters: `chunks` `records`
 
 
-### `optimizeChunkOrder`
-
-`SyncHook`
-
-W> This hook will be removed in v5.0.0
-
-Sort the chunks in from most to least important.
-
-- Callback Parameters: `chunks`
-
-
 ### `beforeChunkIds`
 
 `SyncHook`
 
 Executed before assigning an `id` to each chunk.
-
-- Callback Parameters: `chunks`
-
-
-### `chunkIds`
-
-`SyncHook`
-
-T> This hook will be available in v5.0.0
-
-Called to assign an `id` to each chunk.
-
-- Callback Parameters: `modules`
-
-
-### `beforeOptimizeChunkIds`
-
-`SyncHook`
-
-T> This hook will be available in v5.0.0
-
-Fired before chunks `id` optimization.
 
 - Callback Parameters: `chunks`
 
@@ -431,45 +307,6 @@ Store module info to the records. This is triggered if [`shouldRecord`](#shouldr
 Store chunk info to the records. This is only triggered if [`shouldRecord`](#shouldrecord) returns a truthy value.
 
 - Callback Parameters: `chunks` `records`
-
-
-### `optimizeCodeGeneration`
-
-T> This hook will be available in v5.0.0
-
-A plugin can tap into this hook to optimize the generated code.
-
-- Callback Parameters: `modules`
-
-
-### `beforeModuleHash`
-
-T> This hook will be available in v5.0.0
-
-Called before hashing modules.
-
-
-### `afterModuleHash`
-
-T> This hook will be available in v5.0.0
-
-Called after hashing modules.
-
-
-### `beforeRuntimeRequirements`
-
-T> This hook will be available in v5.0.0
-
-Called before processing the modules required at runtime.
-
-- Callback Parameters: `entrypoints`
-
-
-### `afterRuntimeRequirements`
-
-T> This hook will be available in v5.0.0
-
-Called after processing the runtime requirements.
 
 
 ### `beforeHash`
@@ -515,6 +352,8 @@ Executed before module assets creation.
 
 `SyncHook`
 
+W> `additionalChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
+
 Create additional assets for the chunks.
 
 - Callback Parameters: `chunks`
@@ -559,6 +398,8 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
 
 `AsyncSeriesHook`
 
+W> `optimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
+
 Optimize any chunk assets. The assets are stored in `compilation.assets`. A
 `Chunk` has a property `files` which points to all files created by a chunk.
 Any additional chunk assets are stored in `compilation.additionalChunkAssets`.
@@ -589,6 +430,8 @@ compilation.hooks
 ### `afterOptimizeChunkAssets`
 
 `SyncHook`
+
+W> `afterOptimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
 
 The chunk assets have been optimized.
 
@@ -627,6 +470,50 @@ The assets have been optimized.
 
 - Callback Parameters: `assets`
 
+
+### `processAssets`
+
+`AsyncSeriesHook`
+
+Asset processing.
+
+- Callback Parameters: `assets`
+
+Here's an example:
+
+```js
+compilation.hooks.processAssets.tap(
+  {
+    name: 'MyPlugin',
+    stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
+  },
+  (assets) => {
+    // code here
+  }
+);
+```
+
+There're many stages to use:
+
+- `PROCESS_ASSETS_STAGE_ADDITIONAL` - Add additional assets to the compilation.
+- `PROCESS_ASSETS_STAGE_PRE_PROCESS` - Basic preprocessing of the assets.
+- `PROCESS_ASSETS_STAGE_DERIVED` - Derive new assets from the existing assets.
+- `PROCESS_ASSETS_STAGE_ADDITIONS` - Add additional sections to the existing assets e.g. banner or initialization code.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE` - Optimize existing assets in a general way.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_COUNT` - Optimize the count of existing assets, e.g. by merging them.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY` - Optimize the compatibility of existing assets, e.g. add polyfills or vendor prefixes.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE` - Optimize the size of existing assets, e.g. by minimizing or omitting whitespace.
+- `PROCESS_ASSETS_STAGE_SUMMARIZE` - Summarize the list of existing assets.
+- `PROCESS_ASSETS_STAGE_DEV_TOOLING` - Add development tooling to the assets, e.g. by extracting a source map.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` - Optimize the transfer of existing assets, e.g. by preparing a compressed (gzip) file as separate asset.
+- `PROCESS_ASSETS_STAGE_ANALYSE` - Analyze the existing assets.
+- `PROCESS_ASSETS_STAGE_REPORT` - Creating assets for the reporting purposes.
+
+### `afterProcessAssets`
+
+`SyncHook`
+
+Called after the [`processAssets`](#processassets) hook had finished without error.
 
 ### `needAdditionalSeal`
 
@@ -697,13 +584,3 @@ Executed after setting up a child compiler.
 ### `normalModuleLoader`
 
 Since webpack v5 `normalModuleLoader` hook was removed. Now to access the loader use `NormalModule.getCompilationHooks(compilation).loader` instead.
-
-### `dependencyReference`
-
-`SyncWaterfallHook`
-
-This hook allows changing the references reported by dependencies.
-
-- Callback Parameters: `depRef` `dependency` `module`
-
-W> The `module` parameter will be removed in v5.0.0
