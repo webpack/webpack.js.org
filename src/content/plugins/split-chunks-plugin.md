@@ -270,7 +270,6 @@ module.exports = {
   //...
   optimization: {
     splitChunks: {
-      automaticNamePrefix: 'general-prefix',
       cacheGroups: {
         react: {
           // ...
@@ -281,6 +280,8 @@ module.exports = {
   }
 };
 ```
+
+T>  The option is only allowed within cacheGroups.
 
 ### `splitChunks.cacheGroups`
 
