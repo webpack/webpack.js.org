@@ -11709,9 +11709,9 @@ remark-react@^4.0.0:
     hast-util-sanitize "^1.0.0"
     mdast-util-to-hast "^3.0.0"
 
-"remark-refractor@git://github.com/chenxsan/remark-refractor.git#update-refractor":
+"remark-refractor@git://github.com/montogeek/remark-refractor.git":
   version "1.0.0"
-  resolved "git://github.com/chenxsan/remark-refractor.git#5d77d109829aac7fc817f1058eb12e9b18ecf0ef"
+  resolved "git://github.com/montogeek/remark-refractor.git#9b6048f89739b27f9de701d29d29d980b3ea18d7"
   dependencies:
     refractor "^3.1.0"
     unist-util-visit "1.3.1"
