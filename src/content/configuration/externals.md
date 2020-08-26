@@ -96,7 +96,7 @@ will compile to something like:
 const fs = require('fs-extra');
 ```
 
-### [string]
+### array of string
 
 ```javascript
 module.exports = {
