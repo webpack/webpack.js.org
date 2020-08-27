@@ -20,10 +20,10 @@ A Less loader for webpack. Compiles Less to CSS.
 
 ## Getting Started
 
-To begin, you'll need to install `less-loader`:
+To begin, you'll need to install `less` and `less-loader`:
 
 ```console
-$ npm install less-loader --save-dev
+$ npm install less less-loader --save-dev
 ```
 
 Then add the loader to your `webpack` config. For example:
@@ -47,13 +47,12 @@ And run `webpack` via your preferred method.
 
 ## Options
 
-|                  Name                   |         Type         |         Default          | Description                                      |
-| :-------------------------------------: | :------------------: | :----------------------: | :----------------------------------------------- |
-|    **[`lessOptions`](#lessoptions)**    | `{Object\|Function}` | `{ relativeUrls: true }` | Options for Less.                                |
-|    **[`prependData`](#prependdata)**    | `{String\|Function}` |       `undefined`        | Prepends Less code before the actual entry file. |
-|     **[`appendData`](#appenddata)**     | `{String\|Function}` |       `undefined`        | Prepends Less code after the actual entry file.  |
-|      **[`sourceMap`](#sourcemap)**      |     `{Boolean}`      |    `compiler.devtool`    | Enables/Disables generation of source maps.      |
-| **[`implementation`](#implementation)** |      `{Object}`      |          `less`          | Setup Less implementation to use.                |
+|                   Name                    |         Type         |         Default          | Description                                            |
+| :---------------------------------------: | :------------------: | :----------------------: | :----------------------------------------------------- |
+|     **[`lessOptions`](#lessoptions)**     | `{Object\|Function}` | `{ relativeUrls: true }` | Options for Less.                                      |
+|  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |       `undefined`        | Prepends/Appends `Less` code to the actual entry file. |
+|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |    `compiler.devtool`    | Enables/Disables generation of source maps.            |
+| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |          `true`          | Enables/Disables the default Webpack importer.         |
 
 ### `lessOptions`
 
@@ -136,12 +135,13 @@ module.exports = {
 };
 ```
 
-### `prependData`
+### `additionalData`
 
 Type: `String|Function`
 Default: `undefined`
 
 Prepends `Less` code before the actual entry file.
+In this case, the `less-loader` will not override the source but just **prepend** the entry's content.
 
 This is especially useful when some of your Less variables depend on the environment:
 
@@ -161,7 +161,7 @@ module.exports = {
           {
             loader: 'less-loader',
             options: {
-              prependData: `@env: ${process.env.NODE_ENV};`,
+              additionalData: `@env: ${process.env.NODE_ENV};`,
             },
           },
         ],
@@ -185,16 +185,16 @@ module.exports = {
           {
             loader: 'less-loader',
             options: {
-              prependData: (loaderContext) => {
+              additionalData: (content, loaderContext) => {
                 // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
                 if (relativePath === 'styles/foo.less') {
-                  return '@value: 100px;';
+                  return '@value: 100px;' + content;
                 }
 
-                return '@value: 200px;';
+                return '@value: 200px;' + content;
               },
             },
           },
@@ -204,17 +204,6 @@ module.exports = {
   },
 };
 ```
-
-### `appendData`
-
-Type: `String|Function`
-Default: `undefined`
-
-AppendData `Less` code after the actual entry file.
-
-This can be useful when you need to rewrite some of your Less variables.:
-
-> ℹ Since you're injecting code, this will break the source mappings in your entry file. Often there's a simpler solution than this, like multiple Less entry files.
 
 #### `String`
 
@@ -310,32 +299,30 @@ module.exports = {
 };
 ```
 
-### `implementation`
+### `webpackImporter`
 
-Type: `Object`
-Default: `less`
+Type: `Boolean`
+Default: `true`
 
-> ⚠ less-loader compatible with Less version 3 only
+Enables/Disables the default Webpack importer.
 
-The special `implementation` option determines which implementation of Less to use.
-The `implementation` options either accepts `less` as a module.
-This is useful if you want to use Less with a smaller version. Do not forget that then you must install your own version of Less.
+This can improve performance in some cases. Use it with caution because aliases and `@import` at-rules starting with `~` will not work.
 
-For example, to use custom Less implementation, you'd pass:
+**webpack.config.js**
 
 ```js
 module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           'style-loader',
           'css-loader',
           {
             loader: 'less-loader',
             options: {
-              implementation: require('less'),
+              webpackImporter: false,
             },
           },
         ],
@@ -491,8 +478,7 @@ module.exports = {
 
 ### Plugins
 
-In order to use [plugins](http://lesscss.org/usage/#plugins), simply set the
-`plugins` option like this:
+In order to use [plugins](http://lesscss.org/usage/#plugins), simply set the `plugins` option like this:
 
 ```js
 // webpack.config.js
@@ -511,6 +497,20 @@ module.exports = {
       },
     },
   ...
+};
+```
+
+> ℹ️ Access to the [loader context](/api/loaders/#the-loader-context) inside the custom plugin can be done using the `less.webpackLoaderContext` property.
+
+```js
+module.exports = {
+  install: function (less, pluginManager, functions) {
+    functions.add('pi', function () {
+      // Loader context is available in `less.webpackLoaderContext`
+
+      return Math.PI;
+    });
+  },
 };
 ```
 

@@ -1,8 +1,8 @@
 ---
 title: postcss-loader
-source: https://raw.githubusercontent.com/postcss/postcss-loader/master/README.md
-edit: https://github.com/postcss/postcss-loader/edit/master/README.md
-repo: https://github.com/postcss/postcss-loader
+source: https://raw.githubusercontent.com/webpack-contrib/postcss-loader/master/README.md
+edit: https://github.com/webpack-contrib/postcss-loader/edit/master/README.md
+repo: https://github.com/webpack-contrib/postcss-loader
 ---
 
   

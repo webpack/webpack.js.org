@@ -76,11 +76,17 @@ Supported tags and attributes:
 - the `href` attribute of the `link` tag (only for stylesheets)
 - the `data` attribute of the `object` tag
 - the `src` attribute of the `script` tag
+- the `href` attribute of the `script` tag
+- the `xlink:href` attribute of the `script` tag
 - the `src` attribute of the `source` tag
 - the `srcset` attribute of the `source` tag
 - the `src` attribute of the `track` tag
 - the `poster` attribute of the `video` tag
 - the `src` attribute of the `video` tag
+- the `xlink:href` attribute of the `image` tag
+- the `href` attribute of the `image` tag
+- the `xlink:href` attribute of the `use` tag
+- the `href` attribute of the `use` tag
 
 #### `Boolean`
 
@@ -108,6 +114,7 @@ module.exports = {
 #### `Object`
 
 Allows you to specify which tags and attributes to process, filter them, filter urls and process sources starts with `/`.
+
 For example:
 
 **webpack.config.js**
@@ -122,16 +129,8 @@ module.exports = {
         options: {
           attributes: {
             list: [
-              {
-                tag: 'img',
-                attribute: 'src',
-                type: 'src',
-              },
-              {
-                tag: 'img',
-                attribute: 'srcset',
-                type: 'srcset',
-              },
+              // All default supported tags and attributes
+              '...',
               {
                 tag: 'img',
                 attribute: 'data-src',
@@ -142,26 +141,6 @@ module.exports = {
                 attribute: 'data-srcset',
                 type: 'srcset',
               },
-              {
-                tag: 'link',
-                attribute: 'href',
-                type: 'src',
-                filter: (tag, attribute, attributes) => {
-                  if (!/stylesheet/i.test(attributes.rel)) {
-                    return false;
-                  }
-
-                  if (
-                    attributes.type &&
-                    attributes.type.trim().toLowerCase() !== 'text/css'
-                  ) {
-                    return false;
-                  }
-
-                  return true;
-                },
-              },
-              // More attributes
             ],
             urlFilter: (attribute, value, resourcePath) => {
               // The `attribute` argument contains a name of the HTML attribute.
@@ -186,9 +165,11 @@ module.exports = {
 #### `list`
 
 Type: `Array`
-Default: https://github.com/webpack-contrib/html-loader#attributes
+Default: [supported tags and attributes](#attributes).
 
 Allows to setup which tags and attributes to process and how, and the ability to filter some of them.
+
+Using `...` syntax allows you to extend [default supported tags and attributes](#attributes).
 
 For example:
 
@@ -204,22 +185,8 @@ module.exports = {
         options: {
           attributes: {
             list: [
-              {
-                // Tag name
-                tag: 'img',
-                // Attribute name
-                attribute: 'src',
-                // Type of processing, can be `src` or `scrset`
-                type: 'src',
-              },
-              {
-                // Tag name
-                tag: 'img',
-                // Attribute name
-                attribute: 'srcset',
-                // Type of processing, can be `src` or `scrset`
-                type: 'srcset',
-              },
+              // All default supported tags and attributes
+              '...',
               {
                 tag: 'img',
                 attribute: 'data-src',
