@@ -461,9 +461,6 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## Contributing {#contributing}
-=======
 ### Using custom minifier [csso](https://github.com/css/csso)
 
 By default plugin uses [cssnano](https://github.com/cssnano/cssnano) package.
@@ -538,8 +535,7 @@ module.exports = {
 };
 ```
 
-## Contributing
->>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 

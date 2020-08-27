@@ -188,28 +188,25 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## 应用举例 {#examples}
-=======
 ### `modules`
 
-Type: `Object`
-Default: `undefined`
+类型：`Object`
+默认值：`undefined`
 
-Configuration CSS Modules.
+用于配置 CSS Modules。
 
 #### `namedExport`
 
-Type: `Boolean`
-Default: `false`
+类型：`Boolean`
+类型：`false`
 
-Enables/disables ES modules named export for locals.
+启用/禁用 ES 模块命名导出。
 
-> ⚠ Names of locals are converted to `camelCase`.
+> ⚠ 命名会被修改为 `camelCase` 的形式。
 
-> ⚠ It is not allowed to use JavaScript reserved words in css class names.
+> ⚠ 不允许在 css 的 class name 中使用 JavaScript 关键字。
 
-> ⚠ Options `esModule` and `modules.namedExport` in `css-loader` and `MiniCssExtractPlugin.loader` should be enabled.
+> ⚠ 应启用 `css-loader` 和 `MiniCssExtractPlugin.loader` 中的 `esModule` 以及 `modules.namedExport` 选项。
 
 **styles.css**
 
@@ -230,7 +227,7 @@ import { fooBaz, bar } from './styles.css';
 console.log(fooBaz, bar);
 ```
 
-You can enable a ES module named export using:
+你可以按照如下配置启用 ES 模块命名导出。
 
 **webpack.config.js**
 
@@ -270,8 +267,7 @@ module.exports = {
 };
 ```
 
-## Examples
->>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
+## 示例 {#examples}
 
 ### 最简单的例子 {#minimal-example}
 

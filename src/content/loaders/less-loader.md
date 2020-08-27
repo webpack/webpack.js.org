@@ -20,11 +20,7 @@ webpack 将 Less 编译为 CSS 的 loader。
 
 ## 快速开始 {#getting-started}
 
-<<<<<<< HEAD
-首先，你需要先安装 `less-loader`：
-=======
-To begin, you'll need to install `less` and `less-loader`:
->>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
+首先，你需要先安装 `less` 和 `less-loader`：
 
 ```console
 $ npm install less less-loader --save-dev
@@ -51,22 +47,12 @@ module.exports = {
 
 ## 可选项 {#options}
 
-<<<<<<< HEAD
 |                  名称                   |         类型         |         默认值          | 描述                                      |
 | :-------------------------------------: | :------------------: | :----------------------: | :----------------------------------------------- |
 |    **[`lessOptions`](#lessoptions)**    | `{Object\|Function}` | `{ relativeUrls: true }` | Less 的可选项。                                |
-|    **[`prependData`](#prependdata)**    | `{String\|Function}` |       `undefined`        | 在实际输入文件开头追加 Less 代码。 |
-|     **[`appendData`](#appenddata)**     | `{String\|Function}` |       `undefined`        | 在实际输入文件末尾追加 Less 代码。  |
+|     **[`additionalData`](#additionaldata)**     | `{String\|Function}` |       `undefined`        | 在入口文件起始或末尾添加 Less 代码。  |
 |      **[`sourceMap`](#sourcemap)**      |     `{Boolean}`      |    `compiler.devtool`    | 是否生成 source map。       |
 | **[`implementation`](#implementation)** |      `{Object}`      |          `less`          | 配置 Less 使用的实现库                |
-=======
-|                   Name                    |         Type         |         Default          | Description                                            |
-| :---------------------------------------: | :------------------: | :----------------------: | :----------------------------------------------------- |
-|     **[`lessOptions`](#lessoptions)**     | `{Object\|Function}` | `{ relativeUrls: true }` | Options for Less.                                      |
-|  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |       `undefined`        | Prepends/Appends `Less` code to the actual entry file. |
-|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |    `compiler.devtool`    | Enables/Disables generation of source maps.            |
-| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |          `true`          | Enables/Disables the default Webpack importer.         |
->>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
 
 ### `lessOptions` {#lessoptions}
 
@@ -149,21 +135,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `prependData` {#prependdata}
-=======
-### `additionalData`
->>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
+### `additionalData` {#additionaldata}
 
 类型: `String|Function`
 默认值: `undefined`
 
-<<<<<<< HEAD
-在实际输入文件的开头追加 `Less` 代码
-=======
-Prepends `Less` code before the actual entry file.
-In this case, the `less-loader` will not override the source but just **prepend** the entry's content.
->>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
+在实际入口文件的起始位置添加 `Less` 代码。
+这种情况下，`less-loader` 只会**追加**并不会覆盖文件内容。
 
 当你的 Less 变量依赖环境变量时这个属性将非常有用：
 
@@ -207,13 +185,8 @@ module.exports = {
           {
             loader: 'less-loader',
             options: {
-<<<<<<< HEAD
-              prependData: (loaderContext) => {
-                // 更多可用的属性见 https://webpack.js.org/api/loaders/
-=======
               additionalData: (content, loaderContext) => {
-                // More information about available properties https://webpack.js.org/api/loaders/
->>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
+                // 更多可用的属性见 https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
@@ -232,22 +205,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `appendData` {#appenddata}
-
-类型: `String|Function`
-默认值: `undefined`
-
-在实际输入文件末尾追加 Less 代码。
-
-当你需要重写一些 Less 变量的时候会很有用：
-
-> ℹ 由于你注入了代码，因此它将破坏入口文件的源映射关系。通常有比这更简单的解决方案，例如多个 Less 入口文件。
-
 #### `String` {#string}
-=======
-#### `String`
->>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
 
 ```js
 module.exports = {
@@ -341,31 +299,16 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `implementation` {#implementation}
-
-类型: `Object`
-默认值: `less`
-
-> ⚠ less-loader 仅与 Less3 版本兼容
-
-特殊的 `implementation` 选项确定要使用的 Less 实现库。
-`implementation` 选项接受 `less` 作为一个模块。
-当你想使用小版本的 Less 时这个选项很有用，但不要忘记了你需要安装自己的 Less 版本。
-
-如下示例，你可以这样去设置自定义的 Less 实现器：
-=======
 ### `webpackImporter`
 
-Type: `Boolean`
-Default: `true`
+类型：`Boolean`
+默认值：`true`
 
-Enables/Disables the default Webpack importer.
+启用/禁用 webpack 默认的 importer。
 
-This can improve performance in some cases. Use it with caution because aliases and `@import` at-rules starting with `~` will not work.
+在某些情况下，这样做可以提高性能，但是请慎用，因为可能会使得 aliases 和以 `~` 开头的 `@import` 规则失效。
 
 **webpack.config.js**
->>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
 
 ```js
 module.exports = {
@@ -535,12 +478,8 @@ module.exports = {
 
 ### 插件 {#plugins}
 
-<<<<<<< HEAD
-想要使用 [插件](http://lesscss.org/usage/#plugins)，只需要简单设置下 `plugins` 选项就可以，
-配置如下：
-=======
-In order to use [plugins](http://lesscss.org/usage/#plugins), simply set the `plugins` option like this:
->>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
+想要使用 [插件](http://lesscss.org/usage/#plugins)，只需要简单设置下 `plugins` 选项即可，
+具体配置如下：
 
 ```js
 // webpack.config.js
@@ -562,10 +501,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### 提取样式表 {#extracting-style-sheets}
-=======
-> ℹ️ Access to the [loader context](/api/loaders/#the-loader-context) inside the custom plugin can be done using the `less.webpackLoaderContext` property.
+> ℹ️ 使用 `less.webpackLoaderContext` 属性可以访问自定义插件中的 [loader context](/api/loaders/#the-loader-context)。
 
 ```js
 module.exports = {
@@ -579,8 +515,7 @@ module.exports = {
 };
 ```
 
-### Extracting style sheets
->>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
+### 提取样式 {#extracting-style-sheets}
 
 通过 webpack 打包 CSS 有很多好处，比如给引用图片和字体文件路径添加 hash, 在开发环境可以 [模块热替换](/concepts/hot-module-replacement/)。另一方面，在生产环境，根据 JS 来控制应用样式表不是一个好的方式，可能会导致延迟渲染，甚至可能会出现[闪烁现象](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)。因此，在你最终的生产环境中将它们拆分成单独的文件来存放通常是比较好的选择。
 
