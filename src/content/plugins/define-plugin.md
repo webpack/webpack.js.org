@@ -100,7 +100,7 @@ new webpack.DefinePlugin({
 });
 ```
 
-## Runtime values via `runtimeValue`
+## Runtime values via `runtimeValue` {#runtime-values-via-runtimevalue}
 
 `function (getterFunction, [string]) => getterFunction()`
 

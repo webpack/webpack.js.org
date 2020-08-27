@@ -188,7 +188,86 @@ module.exports = {
 };
 ```
 
-## 应用举例 {#examples}
+### `modules` {#modules}
+
+类型：`Object`
+默认值：`undefined`
+
+用于配置 CSS Modules。
+
+#### `namedExport` {#namedexport}
+
+类型：`Boolean`
+类型：`false`
+
+启用/禁用 ES 模块命名导出。
+
+> ⚠ 命名会被修改为 `camelCase` 的形式。
+
+> ⚠ 不允许在 css 的 class name 中使用 JavaScript 关键字。
+
+> ⚠ 应启用 `css-loader` 和 `MiniCssExtractPlugin.loader` 中的 `esModule` 以及 `modules.namedExport` 选项。
+
+**styles.css**
+
+```css
+.foo-baz {
+  color: red;
+}
+.bar {
+  color: blue;
+}
+```
+
+**index.js**
+
+```js
+import { fooBaz, bar } from './styles.css';
+
+console.log(fooBaz, bar);
+```
+
+你可以按照如下配置启用 ES 模块命名导出。
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  plugins: [new MiniCssExtractPlugin()],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: true,
+              modules: {
+                namedExport: true,
+              },
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              esModule: true,
+              modules: {
+                namedExport: true,
+                localIdentName: 'foo__[name]__[local]',
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+## 示例 {#examples}
 
 ### 最简单的例子 {#minimal-example}
 

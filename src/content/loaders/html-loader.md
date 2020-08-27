@@ -78,9 +78,13 @@ module.exports = {
 - `script` 标签的 `src` 属性
 - `source` 标签的 `src` 属性
 - `source` 标签的 `srcset` 属性
-- `track` 标记的 `src` 属性
+- `track` 标签的 `src` 属性
 - `video` 标签的 `poster` 属性
-- `video` 代码的 `src` 属性
+- `video` 标签的 `src` 属性
+- `image` 标签的 `xlink:href` 属性
+- `image` 标签的 `href` 属性
+- `use` 标签的 `xlink:href` 属性
+- `use` 标签的 `href` 属性
 
 #### `Boolean` {#boolean}
 
@@ -108,6 +112,7 @@ module.exports = {
 #### `Object` {#object}
 
 你可以配置要处理的标签和属性，来过滤它们，过滤 URL 并处理以 `/` 开头的资源地址。
+
 例如：
 
 **webpack.config.js**
@@ -122,16 +127,8 @@ module.exports = {
         options: {
           attributes: {
             list: [
-              {
-                tag: 'img',
-                attribute: 'src',
-                type: 'src',
-              },
-              {
-                tag: 'img',
-                attribute: 'srcset',
-                type: 'srcset',
-              },
+              // All default supported tags and attributes
+              '...',
               {
                 tag: 'img',
                 attribute: 'data-src',
@@ -142,26 +139,6 @@ module.exports = {
                 attribute: 'data-srcset',
                 type: 'srcset',
               },
-              {
-                tag: 'link',
-                attribute: 'href',
-                type: 'src',
-                filter: (tag, attribute, attributes) => {
-                  if (!/stylesheet/i.test(attributes.rel)) {
-                    return false;
-                  }
-
-                  if (
-                    attributes.type &&
-                    attributes.type.trim().toLowerCase() !== 'text/css'
-                  ) {
-                    return false;
-                  }
-
-                  return true;
-                },
-              },
-              // More attributes
             ],
             urlFilter: (attribute, value, resourcePath) => {
               // The `attribute` argument contains a name of the HTML attribute.
@@ -186,9 +163,11 @@ module.exports = {
 #### `list` {#list}
 
 类型：`Array`
-默认值： https://github.com/webpack-contrib/html-loader#attributes
+默认值：[支持的标签和属性列表](#attributes)
 
 允许设置要处理的标签和属性以及处理方式，以及过滤其中一些标签和属性的能力。
+
+使用 `...` 语法可以使用所有[默认支持的标签和属性](#attributes)。
 
 例如：
 
@@ -204,22 +183,8 @@ module.exports = {
         options: {
           attributes: {
             list: [
-              {
-                // Tag name
-                tag: 'img',
-                // Attribute name
-                attribute: 'src',
-                // Type of processing, can be `src` or `scrset`
-                type: 'src',
-              },
-              {
-                // Tag name
-                tag: 'img',
-                // Attribute name
-                attribute: 'srcset',
-                // Type of processing, can be `src` or `scrset`
-                type: 'srcset',
-              },
+              // All default supported tags and attributes
+              '...',
               {
                 tag: 'img',
                 attribute: 'data-src',

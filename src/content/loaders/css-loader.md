@@ -950,7 +950,7 @@ module.exports = {
 };
 ```
 
-##### `exportlocalsConvention` {#exportlocalsconvention}
+##### `exportLocalsConvention` {#exportlocalsconvention}
 
 类型：`String`
 默认：取决于 `modules.namedExport` 选项值，如果为 `true` 则对应的是 `camelCaseOnly`，反之对应的是 `asIs`

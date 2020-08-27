@@ -330,7 +330,6 @@ module.exports = {
               return {
                 css: result.css,
                 map: result.map,
-                error: result.error,
                 warnings: result.warnings(),
               };
             });
@@ -455,6 +454,80 @@ module.exports = {
               discardComments: { removeAll: true },
             },
           ],
+        },
+      }),
+    ],
+  },
+};
+```
+
+### Using custom minifier [csso](https://github.com/css/csso) {#using-custom-minifier-cssohttpsgithubcomcsscsso}
+
+By default plugin uses [cssnano](https://github.com/cssnano/cssnano) package.
+It is possible to use another minify function.
+
+> ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  devtool: 'source-map',
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minify: ({ input, postcssOptions }) => {
+          // eslint-disable-next-line global-require
+          const csso = require('csso');
+
+          const minifiedCss = csso.minify(input, {
+            filename: postcssOptions.from,
+            sourceMap: true,
+          });
+
+          return {
+            css: minifiedCss.css,
+            map: minifiedCss.map.toJSON(),
+          };
+        },
+      }),
+    ],
+  },
+};
+```
+
+### Using custom minifier [clean-css](https://github.com/jakubpawlowicz/clean-css) {#using-custom-minifier-clean-csshttpsgithubcomjakubpawlowiczclean-css}
+
+By default plugin uses [cssnano](https://github.com/cssnano/cssnano) package.
+It is possible to use another minify function.
+
+> ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  devtool: 'source-map',
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minify: async ({ input, postcssOptions }) => {
+          // eslint-disable-next-line global-require
+          const CleanCSS = require('clean-css');
+
+          const minifiedCss = await new CleanCSS({ sourceMap: true }).minify({
+            [postcssOptions.from]: https://github.com/webpack-contrib/css-minimizer-webpack-plugin/blob/master/%7B
+              styles: input,
+            },
+          });
+
+          return {
+            css: minifiedCss.styles,
+            map: minifiedCss.sourceMap.toJSON(),
+            warnings: minifiedCss.warnings,
+          };
         },
       }),
     ],

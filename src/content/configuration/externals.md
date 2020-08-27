@@ -332,11 +332,11 @@ module.exports = {
 };
 ```
 
-### `script`
+### `script` {#script}
 
 External script can be loaded from any URL when [`externalsType`](#externalstype) is set to `'script'`. The `<script>` tag would be removed after the script has been loaded.
 
-#### Syntax
+#### Syntax {#syntax}
 
 ```javascript
 module.exports = {
@@ -358,7 +358,7 @@ module.exports = {
 
 T> [`output.publicPath`](/configuration/output/#outputpublicpath) won't be added to the provided URL.
 
-#### Example
+#### Example {#example}
 
 Let's load a `lodash` from CDN:
 
