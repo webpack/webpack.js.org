@@ -460,3 +460,9 @@ Options affecting how file system snapshots are created and validated.
 `[string]`
 
 List of paths that are managed by a package manager and can be trusted to not be modified otherwise.
+
+### `immutablePaths`
+
+`[string]`
+
+List of paths that are managed by a package manager and contain version or hash in their paths so all files are immutable.
