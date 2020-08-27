@@ -68,6 +68,7 @@ module.exports = {
 
 支持的标签和属性：
 
+<<<<<<< HEAD
 - `audio` 标签的 `src` 属性
 - `embed` 标签的 `src` 属性
 - `img` 标签的 `src` 属性
@@ -81,6 +82,27 @@ module.exports = {
 - `track` 标记的 `src` 属性
 - `video` 标签的 `poster` 属性
 - `video` 代码的 `src` 属性
+=======
+- the `src` attribute of the `audio` tag
+- the `src` attribute of the `embed` tag
+- the `src` attribute of the `img` tag
+- the `srcset` attribute of the `img` tag
+- the `src` attribute of the `input` tag
+- the `href` attribute of the `link` tag (only for stylesheets)
+- the `data` attribute of the `object` tag
+- the `src` attribute of the `script` tag
+- the `href` attribute of the `script` tag
+- the `xlink:href` attribute of the `script` tag
+- the `src` attribute of the `source` tag
+- the `srcset` attribute of the `source` tag
+- the `src` attribute of the `track` tag
+- the `poster` attribute of the `video` tag
+- the `src` attribute of the `video` tag
+- the `xlink:href` attribute of the `image` tag
+- the `href` attribute of the `image` tag
+- the `xlink:href` attribute of the `use` tag
+- the `href` attribute of the `use` tag
+>>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
 
 #### `Boolean` {#boolean}
 
@@ -107,8 +129,14 @@ module.exports = {
 
 #### `Object` {#object}
 
+<<<<<<< HEAD
 你可以配置要处理的标签和属性，来过滤它们，过滤 URL 并处理以 `/` 开头的资源地址。
 例如：
+=======
+Allows you to specify which tags and attributes to process, filter them, filter urls and process sources starts with `/`.
+
+For example:
+>>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
 
 **webpack.config.js**
 
@@ -122,16 +150,8 @@ module.exports = {
         options: {
           attributes: {
             list: [
-              {
-                tag: 'img',
-                attribute: 'src',
-                type: 'src',
-              },
-              {
-                tag: 'img',
-                attribute: 'srcset',
-                type: 'srcset',
-              },
+              // All default supported tags and attributes
+              '...',
               {
                 tag: 'img',
                 attribute: 'data-src',
@@ -142,26 +162,6 @@ module.exports = {
                 attribute: 'data-srcset',
                 type: 'srcset',
               },
-              {
-                tag: 'link',
-                attribute: 'href',
-                type: 'src',
-                filter: (tag, attribute, attributes) => {
-                  if (!/stylesheet/i.test(attributes.rel)) {
-                    return false;
-                  }
-
-                  if (
-                    attributes.type &&
-                    attributes.type.trim().toLowerCase() !== 'text/css'
-                  ) {
-                    return false;
-                  }
-
-                  return true;
-                },
-              },
-              // More attributes
             ],
             urlFilter: (attribute, value, resourcePath) => {
               // The `attribute` argument contains a name of the HTML attribute.
@@ -185,12 +185,23 @@ module.exports = {
 
 #### `list` {#list}
 
+<<<<<<< HEAD
 类型：`Array`
 默认值： https://github.com/webpack-contrib/html-loader#attributes
+=======
+Type: `Array`
+Default: [supported tags and attributes](#attributes).
+>>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
 
 允许设置要处理的标签和属性以及处理方式，以及过滤其中一些标签和属性的能力。
 
+<<<<<<< HEAD
 例如：
+=======
+Using `...` syntax allows you to extend [default supported tags and attributes](#attributes).
+
+For example:
+>>>>>>> d66c12c4e477d18f30f219aa5dd066ace00042de
 
 **webpack.config.js**
 
@@ -204,22 +215,8 @@ module.exports = {
         options: {
           attributes: {
             list: [
-              {
-                // Tag name
-                tag: 'img',
-                // Attribute name
-                attribute: 'src',
-                // Type of processing, can be `src` or `scrset`
-                type: 'src',
-              },
-              {
-                // Tag name
-                tag: 'img',
-                // Attribute name
-                attribute: 'srcset',
-                // Type of processing, can be `src` or `scrset`
-                type: 'srcset',
-              },
+              // All default supported tags and attributes
+              '...',
               {
                 tag: 'img',
                 attribute: 'data-src',
