@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/remark-loader
 
 Load markdown through `remark` with built-in image resolution.
 
-## Usage
+## Usage {#usage}
 
 Simply add the loader to your configuration, and pass options.
 
@@ -58,14 +58,14 @@ Here's the full list of [`remark` plugins](https://github.com/wooorm/remark/blob
 We no longer support any `react` specific features.
 Please see the wonderful [MDX](https://mdxjs.com/) project if you're interested in mixing JSX with Markdown.
 
-## Options
+## Options {#options}
 
 |                     Name                      |    Type     | Default | Description              |
 | :-------------------------------------------: | :---------: | :-----: | :----------------------- |
 |     **[`remarkOptions`](#remarkoptions)**     | `{Object}`  |  `{}`   | Remark options           |
 | **[`removeFrontMatter`](#removefrontmatter)** | `{Boolean}` | `true`  | Remove removeFrontMatter |
 
-### remarkOptions
+### remarkOptions {#remarkoptions}
 
 |            Name             |          Type          |   Default   | Description                                                                                       |
 | :-------------------------: | :--------------------: | :---------: | :------------------------------------------------------------------------------------------------ |
@@ -73,14 +73,14 @@ Please see the wonderful [MDX](https://mdxjs.com/) project if you're interested 
 | **[`settings`](#settings)** |       `{Object}`       | `undefined` | Remark settings                                                                                   |
 |     **[`data`](#data)**     |       `{Object}`       | `undefined` | Information available to all plugins                                                              |
 
-#### plugins
+#### plugins {#plugins}
 
 Type: `Array<String\|Array>`
 Default: `[]`
 
 Allows to connect [`remark` plugins](https://github.com/wooorm/remark/blob/master/doc/plugins.md)
 
-##### String
+##### String {#string}
 
 **webpack.config.js**
 
@@ -109,7 +109,7 @@ module.exports = {
 };
 ```
 
-##### Array
+##### Array {#array}
 
 If need to specify options for the plugin, can pass the plugin using an array, where the second argument will be options.
 
@@ -151,7 +151,7 @@ module.exports = {
 };
 ```
 
-#### settings
+#### settings {#settings}
 
 Type: `Object`
 Default: `undefined`
@@ -186,7 +186,7 @@ module.exports = {
 };
 ```
 
-#### data
+#### data {#data}
 
 Type: `Object`
 Default: `undefined`
@@ -228,7 +228,7 @@ module.exports = {
 };
 ```
 
-### removeFrontMatter
+### removeFrontMatter {#removefrontmatter}
 
 Type: `Boolean`
 Default: `true`
@@ -264,16 +264,16 @@ module.exports = {
 };
 ```
 
-## Inspiration
+## Inspiration {#inspiration}
 
 This project was inspired the following open source work:
 
 - [`react-markdown-loader`](https://github.com/javiercf/react-markdown-loader)
 - [`marksy`](https://github.com/cerebral/marksy)
 
-## Examples
+## Examples {#examples}
 
-### Markdown to HTML
+### Markdown to HTML {#markdown-to-html}
 
 To get html, need to add [`remark-html`](https://github.com/wooorm/remark-html) to the remark plugins and add [`html-loader`](/loaders/html-loader/) to the `webpack.config`
 
@@ -311,7 +311,7 @@ module.exports = {
 };
 ```
 
-### Markdown to Markdown
+### Markdown to Markdown {#markdown-to-markdown}
 
 **index.js**
 
@@ -339,13 +339,13 @@ module.exports = {
 };
 ```
 
-## Contributing
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/remark-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## License {#license}
 
 [MIT](https://github.com/webpack-contrib/remark-loader/blob/master/LICENSE)
 

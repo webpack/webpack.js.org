@@ -427,7 +427,7 @@ module.exports = {
 };
 ```
 
-#### `Function<(node, comment) -> Boolean>` {＃functionnode-comment --- boolean}
+#### `Function<(node, comment) -> Boolean>` {＃functionnode-comment --- boolean} {#functionnode-comment---boolean-＃functionnode-comment-----boolean}
 
 与指定表达式匹配的所有注释将会被剥离到单独的文件中。
 

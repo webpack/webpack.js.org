@@ -188,14 +188,14 @@ module.exports = {
 };
 ```
 
-### `modules`
+### `modules` {#modules}
 
 类型：`Object`
 默认值：`undefined`
 
 用于配置 CSS Modules。
 
-#### `namedExport`
+#### `namedExport` {#namedexport}
 
 类型：`Boolean`
 类型：`false`

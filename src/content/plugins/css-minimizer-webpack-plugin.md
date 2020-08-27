@@ -461,7 +461,7 @@ module.exports = {
 };
 ```
 
-### Using custom minifier [csso](https://github.com/css/csso)
+### Using custom minifier [csso](https://github.com/css/csso) {#using-custom-minifier-cssohttpsgithubcomcsscsso}
 
 By default plugin uses [cssnano](https://github.com/cssnano/cssnano) package.
 It is possible to use another minify function.
@@ -497,7 +497,7 @@ module.exports = {
 };
 ```
 
-### Using custom minifier [clean-css](https://github.com/jakubpawlowicz/clean-css)
+### Using custom minifier [clean-css](https://github.com/jakubpawlowicz/clean-css) {#using-custom-minifier-clean-csshttpsgithubcomjakubpawlowiczclean-css}
 
 By default plugin uses [cssnano](https://github.com/cssnano/cssnano) package.
 It is possible to use another minify function.

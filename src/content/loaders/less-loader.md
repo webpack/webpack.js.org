@@ -299,7 +299,7 @@ module.exports = {
 };
 ```
 
-### `webpackImporter`
+### `webpackImporter` {#webpackimporter}
 
 类型：`Boolean`
 默认值：`true`
