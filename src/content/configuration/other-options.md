@@ -491,6 +491,8 @@ Snapshots for building of modules.
 - `hash`: Compare content hashes to determine invalidation (more expensive, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
 
+`snapshot.module` defaults to `{ timestamp: true }` in development while `{ timestamp: true, hash: true }` in production.
+
 ### `resolve`
 
 `object = {hash boolean, timestamp boolean}`
@@ -499,6 +501,8 @@ Snapshots for resolving of requests.
 
 - `hash`: Compare content hashes to determine invalidation (more expensive, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
+
+`snapshot.resolve` defaults to `{ timestamp: true }` in development while `{ timestamp: true, hash: true }` in production.
 
 ### `resolveBuildDependencies`
 
