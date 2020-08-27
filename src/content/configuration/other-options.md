@@ -453,7 +453,7 @@ module.exports = {
 
 `object`
 
-Options affecting how file system snapshots are created and validated.
+Options affecting how file system snapshots are created and invalidated.
 
 ### `managedPaths`
 
@@ -478,7 +478,7 @@ Snapshots for build dependencies when using the persistent cache.
 
 Both `hash` and `timestamp` are optional.
 
-- `{ hash: true }`: Good for CI caching with a fresh checkout. A fresh checkout doesn't keep timestamps so hashes are used.
+- `{ hash: true }`: Good for CI caching with a fresh checkout which doesn't keep timestamps and hashes are used.
 - `{ timestamp: true }`: Good for local development caching.
 - `{ timestamp: true, hash: true }`: Good for both cases mentioned above, but has a small performance hit for the initial build since the timestamps are compared first then mismatch hashes are compared which allows cheap check before file need to be read for hash.
 
