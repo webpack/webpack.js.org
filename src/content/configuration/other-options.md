@@ -457,6 +457,6 @@ Options affecting how file system snapshots are created and validated.
 
 ### `managedPaths`
 
-`[string] = ['./node_modules']`
+`[string]`
 
 List of paths that are managed by a package manager and can be trusted to not be modified otherwise.
