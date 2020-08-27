@@ -170,12 +170,6 @@ module.exports = {
 };
 ```
 
-### `cache.managedPaths`
-
-`[string] = ['./node_modules']`
-
-`cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
-
 ### `cache.hashAlgorithm`
 
 `string`
@@ -446,3 +440,15 @@ module.exports = {
   }
 };
 ```
+
+## snapshot
+
+`object`
+
+Options affecting how file system snapshots are created and validated.
+
+### `managedPaths`
+
+`[string] = ['./node_modules']`
+
+List of paths that are managed by a package manager and can be trusted to not be modified otherwise.
