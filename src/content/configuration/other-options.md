@@ -466,3 +466,45 @@ List of paths that are managed by a package manager and can be trusted to not be
 `[string]`
 
 List of paths that are managed by a package manager and contain version or hash in their paths so all files are immutable.
+
+### `buildDependencies`
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+Snapshots for build dependencies when using the persistent cache.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
+
+Both `hash` and `timestamp` are optional.
+
+- `{ hash: true }`: Good for CI caching with a fresh checkout. A fresh checkout doesn't keep timestamps so hashes are used.
+- `{ timestamp: true }`: Good for local development caching.
+- `{ timestamp: true, hash: true }`: Good for both cases mentioned above, but has a small performance hit for the initial build since the timestamps are compared first then mismatch hashes are compared which allows cheap check before file need to be read for hash.
+
+### `module`
+
+`object = {hash boolean, timestamp boolean}`
+
+Snapshots for building of modules.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
+
+### `resolve`
+
+`object = {hash boolean, timestamp boolean}`
+
+Snapshots for resolving of requests.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
+
+### `resolveBuildDependencies`
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+Snapshots for resolving of build dependencies when using the persistent cache.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
