@@ -293,7 +293,7 @@ __webpack.config.js__
 module.exports = {
   //..
   cache: {
-    idleTimoutForInitialStore: 0
+    idleTimeoutForInitialStore: 0
   }
 };
 ```
