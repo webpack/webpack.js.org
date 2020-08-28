@@ -321,6 +321,8 @@ module.exports = {
 
 Then use `this.answer` to get its value in loader:
 
+__custom-loader.js__
+
 ```javascript
 module.exports = function (source) {
   // ...
