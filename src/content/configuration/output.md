@@ -92,6 +92,14 @@ module.exports = {
 ```
 
 
+## `output.charset`
+
+`boolean = true`
+
+Tells webpack to add `charset="utf-8"` to the HTML `<script>` tag.
+
+T> Although `charset` attribute for `<script>` tag was [deprecated](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes), webpack still adds it by default for compatibility with non-modern browsers.
+
 ## `output.chunkFilename`
 
 `string = '[id].js'`
