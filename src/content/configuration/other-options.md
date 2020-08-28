@@ -329,7 +329,7 @@ module.exports = function (source) {
 };
 ```
 
-T> You can override any properties in loader context as webpack copies all properties defined in `loader` to the loader context.
+T> You can override properties in the loader context as webpack copies all properties that are defined in the `loader` to the loader context.
 
 ## `parallelism`
 
