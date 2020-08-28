@@ -455,6 +455,33 @@ module.exports = {
 
 Options affecting how file system snapshots are created and invalidated.
 
+__webpack.config.js__
+
+```javascript
+const path = require('path');
+module.exports = {
+  // ...
+  snapshot: {
+    managedPaths: [path.resolve(__dirname, '../node_modules')],
+    immutablePaths: [],
+    buildDependencies: {
+      hash: true,
+      timestamp: true
+    },
+    module: {
+      timestamp: true
+    },
+    resolve: {
+      timestamp: true
+    },
+    resolveBuildDependencies: {
+      hash: true,
+      timestamp: true
+    }
+  }
+};
+```
+
 ### `managedPaths`
 
 `[string]`
