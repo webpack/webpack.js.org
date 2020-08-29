@@ -30,7 +30,7 @@ One option is to export a function from your webpack configuration instead of ex
 +module.exports = function(env, argv) {
 +  return {
 +    mode: env.production ? 'production' : 'development',
-+    devtool: env.production ? 'source-maps' : 'eval',
++    devtool: env.production ? 'source-map' : 'eval',
      plugins: [
        new TerserPlugin({
          terserOptions: {

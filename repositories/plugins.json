@@ -5,5 +5,6 @@
   "webpack-contrib/stylelint-webpack-plugin",
   "webpack-contrib/closure-webpack-plugin",
   "webpack-contrib/mini-css-extract-plugin",
-  "webpack-contrib/terser-webpack-plugin"
+  "webpack-contrib/terser-webpack-plugin",
+  "webpack-contrib/css-minimizer-webpack-plugin"
 ]

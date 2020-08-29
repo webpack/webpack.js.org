@@ -13,6 +13,7 @@ contributors:
   - rishabh3112
   - niravasher
   - Neob91
+  - chenxsan
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -292,7 +293,7 @@ __webpack.config.js__
 module.exports = {
   //..
   cache: {
-    idleTimoutForInitialStore: 0
+    idleTimeoutForInitialStore: 0
   }
 };
 ```
@@ -392,13 +393,13 @@ module.exports = {
 };
 ```
 
-### infrastructureLogging
+## infrastructureLogging
 
 Options for infrastructure level logging.
 
 `object = {}`
 
-#### infrastructureLogging.level
+### level
 
 `string`
 
@@ -424,7 +425,7 @@ module.exports = {
 };
 ```
 
-#### infrastructureLogging.debug
+### debug
 
 `string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 
