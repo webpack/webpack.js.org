@@ -865,15 +865,8 @@ T> 你可以使用 `ContextReplacementPlugin` 来修改这些单个依赖的值�
 
 几个用例：
 
-<<<<<<< HEAD
 - 动态依赖的警告：`wrappedContextCritical: true`。
 - `require(expr)` 应该包含整个目录：`exprContextRegExp: /^\.\//`
 - `require("./templates/" + expr)` 不应该包含默认子目录：`wrappedContextRecursive: false`
 - `strictExportPresence` 将缺失的导出提示成错误而不是警告
-=======
-- Warn for dynamic dependencies: `wrappedContextCritical: true`.
-- `require(expr)` should include the whole directory: `exprContextRegExp: /^\\.\\//`
-- `require('./templates/' + expr)` should not include subdirectories by default: `wrappedContextRecursive: false`
-- `strictExportPresence` makes missing exports an error instead of warning
-- Set the inner regular expression for partial dynamic dependencies : `wrappedContextRegExp: /\\.\\*/`
->>>>>>> 82b9e9264f3ed2db1d7ce949a6bd9e7ae8171cd9
+- 为部分动态依赖项设置内部正则表达式：`wrappedContextRegExp: /\\.\\*/`
