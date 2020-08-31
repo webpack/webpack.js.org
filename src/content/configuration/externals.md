@@ -96,7 +96,7 @@ import fs from 'fs-extra';
 const fs = require('fs-extra');
 ```
 
-### 字符串数组 {#string}
+### `[string]` {#string}
 
 ```javascript
 module.exports = {

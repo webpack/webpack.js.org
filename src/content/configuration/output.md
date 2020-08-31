@@ -92,6 +92,14 @@ module.exports = {
 ```
 
 
+## `output.charset` {#outputcharset}
+
+`boolean = true`
+
+告诉 webpack 为 HTML 的 `<script>` 标签添加 `charset="utf-8"` 标识。
+
+T> 尽管 `<script>` [已弃用](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes)了 `charset` 属性，当 webpack 还是默认添加了它，目的是与非现代浏览器兼容。
+
 ## `output.chunkFilename` {#outputchunkfilename}
 
 `string = '[id].js'`
@@ -553,13 +561,13 @@ W> 注意，如果将`数组`作为 `entry`，那么只会暴露数组中的最�
 
 T> 有关 `output.library` 以及 `output.libraryTarget` 详细信息，请查看[创建 library 指南](/guides/author-libraries/)。
 
-## ouput.scriptType {#ouputscripttype}
+## output.scriptType {#ouputscripttype}
 
 `string: 'module' | 'text/javascript'` `boolean = false`
 
-This option allows loading asynchronous chunks with a custom script type, such as `<script type="module" ...>`.
+此选项允许加载使用自定义 srcipt 类型的异步 chunk，例如 `<script type="module" ...>`。
 
-T> If [`output.module`](#outputmodule) is set to `true`, `ouput.scriptType` will default to `'module'` instead of `false`.
+T> 如果 [`output.module`](#outputmodule) 设置为 `true`，则 `output.scriptType` 会默认将 `'module'` 替换为 `false`。
 
 ```javascript
 module.exports = {
@@ -574,30 +582,30 @@ module.exports = {
 
 `string` `[string]`
 
-Configure which module or modules will be exposed via the `libraryTarget`. It is `undefined` by default, same behaviour will be applied if you set `libraryTarget` to an empty string e.g. `''` it will export the whole (namespace) object. The examples below demonstrate the effect of this configuration when using `libraryTarget: 'var'`.
+通过配置 `libraryTarget` 决定暴露哪些模块。默认情况下为 `undefined`，如果你将 `libraryTarget` 设置为空字符串，则与默认情况具有相同的行为。例如，如果设置为 `''`，将导出整个（命名空间）对象。下述 demo 演示了当设置 `libraryTarget: 'var'` 时的效果。
 
-The following configurations are supported:
+支持以下配置：
 
-`libraryExport: 'default'` - The __default export of your entry point__ will be assigned to the library target:
+`libraryExport: 'default'` - **入口的默认导出**将分配给 library target：
 
 ```javascript
 // if your entry has a default export of `MyDefaultModule`
 var MyDefaultModule = _entry_return_.default;
 ```
 
-`libraryExport: 'MyModule'` - The __specified module__ will be assigned to the library target:
+`libraryExport: 'MyModule'` - 这个**确定的模块**将被分配给 library target：
 
 ```javascript
 var MyModule = _entry_return_.MyModule;
 ```
 
-`libraryExport: ['MyModule', 'MySubModule']` - The array is interpreted as a __path to a module__ to be assigned to the library target:
+`libraryExport: ['MyModule', 'MySubModule']` - 数组将被解析为要分配给 library target 的**模块路径**：
 
 ```javascript
 var MySubModule = _entry_return_.MyModule.MySubModule;
 ```
 
-With the `libraryExport` configurations specified above, the resulting libraries could be utilized as such:
+使用上述指定的 `libraryExport` 配置时，library 的结果可以这样使用：
 
 ```javascript
 MyDefaultModule.doSomething();

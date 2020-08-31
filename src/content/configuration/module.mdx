@@ -869,3 +869,4 @@ T> 你可以使用 `ContextReplacementPlugin` 来修改这些单个依赖的值�
 - `require(expr)` 应该包含整个目录：`exprContextRegExp: /^\.\//`
 - `require("./templates/" + expr)` 不应该包含默认子目录：`wrappedContextRecursive: false`
 - `strictExportPresence` 将缺失的导出提示成错误而不是警告
+- 为部分动态依赖项设置内部正则表达式：`wrappedContextRegExp: /\\.\\*/`

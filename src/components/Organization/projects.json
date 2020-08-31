@@ -255,6 +255,6 @@
 		"repo": "webpack-contrib/css-minimizer-webpack-plugin",
 		"npm": "css-minimizer-webpack-plugin",
 		"description": "Optimize and minify your CSS using cssnano.",
-		"maintainer": ""
+		"maintainer": "cap-Bernardito"
 	}
 ]
