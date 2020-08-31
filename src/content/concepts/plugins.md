@@ -15,7 +15,7 @@ __Plugins__ are the [backbone](https://github.com/webpack/tapable) of webpack. w
 
 They also serve the purpose of doing __anything else__ that a [loader](/concepts/loaders) cannot do.
 
-T> When consuming [`webpack-sources`](https://github.com/webpack/webpack-sources) package in plugins, use `require("webpack").sources` instead of `require("webpack-sources")` to avoid version conflicts for persistent caching.
+T> When consuming [`webpack-sources`](https://github.com/webpack/webpack-sources) package in plugins, use `require('webpack').sources` instead of `require('webpack-sources')` to avoid version conflicts for persistent caching.
 
 
 ## Anatomy
