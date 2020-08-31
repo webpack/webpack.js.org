@@ -92,7 +92,19 @@ module.exports = {
 ```
 
 
+<<<<<<< HEAD
 ## `output.chunkFilename` {#outputchunkfilename}
+=======
+## `output.charset`
+
+`boolean = true`
+
+Tells webpack to add `charset="utf-8"` to the HTML `<script>` tag.
+
+T> Although `charset` attribute for `<script>` tag was [deprecated](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes), webpack still adds it by default for compatibility with non-modern browsers.
+
+## `output.chunkFilename`
+>>>>>>> 82b9e9264f3ed2db1d7ce949a6bd9e7ae8171cd9
 
 `string = '[id].js'`
 
@@ -553,13 +565,17 @@ W> 注意，如果将`数组`作为 `entry`，那么只会暴露数组中的最�
 
 T> 有关 `output.library` 以及 `output.libraryTarget` 详细信息，请查看[创建 library 指南](/guides/author-libraries/)。
 
+<<<<<<< HEAD
 ## ouput.scriptType {#ouputscripttype}
+=======
+## output.scriptType
+>>>>>>> 82b9e9264f3ed2db1d7ce949a6bd9e7ae8171cd9
 
 `string: 'module' | 'text/javascript'` `boolean = false`
 
 This option allows loading asynchronous chunks with a custom script type, such as `<script type="module" ...>`.
 
-T> If [`output.module`](#outputmodule) is set to `true`, `ouput.scriptType` will default to `'module'` instead of `false`.
+T> If [`output.module`](#outputmodule) is set to `true`, `output.scriptType` will default to `'module'` instead of `false`.
 
 ```javascript
 module.exports = {
