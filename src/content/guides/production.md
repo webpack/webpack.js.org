@@ -22,6 +22,7 @@ contributors:
   - wizardofhogwarts
   - aholzner
   - EugeneHlushko
+  - snitin315
 ---
 
 In this guide, we'll dive into some of the best practices and utilities for building a production site or application.
@@ -199,7 +200,6 @@ webpack v4+ will minify your code by default in [`production mode`](/configurati
 
 Note that while the [`TerserPlugin`](/plugins/terser-webpack-plugin/) is a great place to start for minification and being used by default, there are other options out there:
 
-- [`BabelMinifyWebpackPlugin`](https://github.com/webpack-contrib/babel-minify-webpack-plugin)
 - [`ClosureWebpackPlugin`](https://github.com/webpack-contrib/closure-webpack-plugin)
 
 If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).

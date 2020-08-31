@@ -366,8 +366,6 @@ Example: `[\id\]` generates `[id]` instead of getting replaced with the `id`.
 
 If using a function for this option, the function will be passed an object containing the substitutions in the table above.
 
-T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
-
 ## `output.assetModuleFilename`
 
 `string = '[hash][ext][query]'`
