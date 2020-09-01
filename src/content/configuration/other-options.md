@@ -507,7 +507,7 @@ Both `hash` and `timestamp` are optional.
 
 - `{ hash: true }`: Good for CI caching with a fresh checkout which doesn't keep timestamps and uses hashes.
 - `{ timestamp: true }`: Good for local development caching.
-- `{ timestamp: true, hash: true }`: Good for both cases mentioned above, but has a small performance hit for the initial build since the timestamps are compared first then mismatch hashes are compared which allows cheap check before file need to be read for hash.
+- `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps are the same, which leads to a small performance hit for the initial build.
 
 ### `module`
 
