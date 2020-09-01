@@ -449,7 +449,7 @@ module.exports = {
 };
 ```
 
-## snapshot
+## `snapshot`
 
 `object`
 
@@ -486,26 +486,26 @@ module.exports = {
 
 `[string]`
 
-List of paths that are managed by a package manager and can be trusted to not be modified otherwise.
+An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
 
 ### `immutablePaths`
 
 `[string]`
 
-List of paths that are managed by a package manager and contain version or hash in their paths so all files are immutable.
+An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
 
 ### `buildDependencies`
 
-`object = {hash boolean = true, timestamp boolean = true}`
+`object = { hash boolean = true, timestamp boolean = true }`
 
 Snapshots for build dependencies when using the persistent cache.
 
-- `hash`: Compare content hashes to determine invalidation (more expensive, but changes less often).
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
 
 Both `hash` and `timestamp` are optional.
 
-- `{ hash: true }`: Good for CI caching with a fresh checkout which doesn't keep timestamps and hashes are used.
+- `{ hash: true }`: Good for CI caching with a fresh checkout which doesn't keep timestamps and uses hashes.
 - `{ timestamp: true }`: Good for local development caching.
 - `{ timestamp: true, hash: true }`: Good for both cases mentioned above, but has a small performance hit for the initial build since the timestamps are compared first then mismatch hashes are compared which allows cheap check before file need to be read for hash.
 
@@ -513,9 +513,9 @@ Both `hash` and `timestamp` are optional.
 
 `object = {hash boolean, timestamp boolean}`
 
-Snapshots for building of modules.
+Snapshots for building modules.
 
-- `hash`: Compare content hashes to determine invalidation (more expensive, but changes less often).
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
 
 `snapshot.module` defaults to `{ timestamp: true }` in development while `{ timestamp: true, hash: true }` in production.
@@ -526,7 +526,7 @@ Snapshots for building of modules.
 
 Snapshots for resolving of requests.
 
-- `hash`: Compare content hashes to determine invalidation (more expensive, but changes less often).
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
 
 `snapshot.resolve` defaults to `{ timestamp: true }` in development while `{ timestamp: true, hash: true }` in production.
@@ -537,5 +537,5 @@ Snapshots for resolving of requests.
 
 Snapshots for resolving of build dependencies when using the persistent cache.
 
-- `hash`: Compare content hashes to determine invalidation (more expensive, but changes less often).
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
