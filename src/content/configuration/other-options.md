@@ -306,7 +306,7 @@ W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#ca
 
 Expose custom values into the [loader context](/api/loaders/#the-loader-context).
 
-For example, you can define a new variable in loader context:
+For example, you can define a new variable in the loader context:
 
 __webpack.config.js__
 
@@ -319,7 +319,7 @@ module.exports = {
 };
 ```
 
-Then use `this.answer` to get its value in loader:
+Then use `this.answer` to get its value in the loader:
 
 __custom-loader.js__
 
