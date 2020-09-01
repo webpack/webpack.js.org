@@ -453,7 +453,7 @@ module.exports = {
 
 `object`
 
-Options affecting how file system snapshots are created and invalidated.
+`snapshot` options decide how the file system snapshots are created and invalidated.
 
 __webpack.config.js__
 
@@ -511,25 +511,21 @@ Both `hash` and `timestamp` are optional.
 
 ### `module`
 
-`object = {hash boolean, timestamp boolean}`
+`object = {hash boolean = true, timestamp boolean = true}`
 
 Snapshots for building modules.
 
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
 
-`snapshot.module` defaults to `{ timestamp: true }` in development while `{ timestamp: true, hash: true }` in production.
-
 ### `resolve`
 
-`object = {hash boolean, timestamp boolean}`
+`object = {hash boolean = true, timestamp boolean = true}`
 
 Snapshots for resolving of requests.
 
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
-
-`snapshot.resolve` defaults to `{ timestamp: true }` in development while `{ timestamp: true, hash: true }` in production.
 
 ### `resolveBuildDependencies`
 
