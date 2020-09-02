@@ -624,12 +624,6 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-
-## Next guide
-
-Let's move on to [Output Management](https://webpack.js.org/guides/output-management/)
-
-
 ## Further Reading
 
 - [Loading Fonts](https://survivejs.com/webpack/loading/fonts/) on SurviveJS
