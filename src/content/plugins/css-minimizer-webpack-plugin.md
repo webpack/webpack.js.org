@@ -313,9 +313,9 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        minify: (data) => {
+        sourceMap: true,
+        minify: (data, inputMap, minimizerOptions) => {
           const postcss = require('postcss');
-          const { input, postcssOptions, minimizerOptions } = data;
 
           const plugin = postcss.plugin(
             'custom-plugin',
@@ -323,6 +323,16 @@ module.exports = {
               // custom code
             }
           );
+
+          const [[filename, input]] = Object.entries(data);
+
+          const postcssOptions = {
+            from: filename,
+            to: filename,
+            map: {
+              prev: inputMap,
+            },
+          };
 
           return postcss([plugin])
             .process(input, postcssOptions)
@@ -477,14 +487,23 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        minify: ({ input, postcssOptions }) => {
-          // eslint-disable-next-line global-require
+        sourceMap: true,
+        minify: async (data, inputMap) => {
           const csso = require('csso');
+          const sourcemap = require('source-map');
 
+          const [[filename, input]] = Object.entries(data);
           const minifiedCss = csso.minify(input, {
-            filename: postcssOptions.from,
+            filename: filename,
             sourceMap: true,
           });
+
+          if (inputMap) {
+            minifiedCss.map.applySourceMap(
+              new sourcemap.SourceMapConsumer(inputMap),
+              filename
+            );
+          }
 
           return {
             css: minifiedCss.css,
@@ -513,13 +532,16 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        minify: async ({ input, postcssOptions }) => {
+        sourceMap: true,
+        minify: async (data, inputMap) => {
           // eslint-disable-next-line global-require
           const CleanCSS = require('clean-css');
 
+          const [[filename, input]] = Object.entries(data);
           const minifiedCss = await new CleanCSS({ sourceMap: true }).minify({
-            [postcssOptions.from]: https://github.com/webpack-contrib/css-minimizer-webpack-plugin/blob/master/%7B
+            [filename]: https://github.com/webpack-contrib/css-minimizer-webpack-plugin/blob/master/%7B
               styles: input,
+              sourceMap: inputMap,
             },
           });
 

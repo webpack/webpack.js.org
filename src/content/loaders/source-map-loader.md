@@ -50,15 +50,69 @@ module.exports = {
 };
 ```
 
-`source-map-loader` extracts existing source maps from all JavaScript entries.
+The `source-map-loader` extracts existing source maps from all JavaScript entries.
 This includes both inline source maps as well as those linked via URL.
 All source map data is passed to webpack for processing as per a chosen [source map style](/configuration/devtool/) specified by the `devtool` option in [webpack.config.js](/configuration/).
 This loader is especially useful when using 3rd-party libraries having their own source maps.
 If not extracted and processed into the source map of the webpack bundle, browsers may misinterpret source map data. `source-map-loader` allows webpack to maintain source map data continuity across libraries so ease of debugging is preserved.
-`source-map-loader` will extract from any JavaScript file, including those in the `node_modules` directory.
+The `source-map-loader` will extract from any JavaScript file, including those in the `node_modules` directory.
 Be mindful in setting [include](/configuration/module/#ruleinclude) and [exclude](/configuration/module/#ruleexclude) rule conditions to maximize bundling performance.
 
 And run `webpack` via your preferred method.
+
+## Options
+
+|                          Name                           |     Type     |   Default   | Description                                    |
+| :-----------------------------------------------------: | :----------: | :---------: | :--------------------------------------------- |
+| **[`filterSourceMappingUrl`](#filtersourcemappingurl)** | `{Function}` | `undefined` | Allows to control `SourceMappingURL` behaviour |
+
+### filterSourceMappingUrl
+
+Type: `Function`
+Default: `undefined`
+
+Allows you to specify the behavior of the loader for `SourceMappingURL` comment.
+
+The function must return one of the values:
+
+- `true` or `'consume'` - consume the source map and remove `SourceMappingURL` comment (default behavior)
+- `false` or `'remove'` - do not consume the source map and remove `SourceMappingURL` comment
+- `skip` - do not consume the source map and do not remove `SourceMappingURL` comment
+
+Example configuration:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        use: [
+          {
+            loader: 'source-map-loader',
+            options: {
+              filterSourceMappingUrl: (url, resourcePath) => {
+                if (/broker-source-map-url\.js$/i.test(url)) {
+                  return false;
+                }
+
+                if (/keep-source-mapping-url\.js$/i.test(resourcePath)) {
+                  return 'skip';
+                }
+
+                return true;
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
 
 ## Examples
 
