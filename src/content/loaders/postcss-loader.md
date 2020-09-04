@@ -57,7 +57,9 @@ Config lookup starts from `path.dirname(file)` and walks the file tree upwards u
 |– package.json
 ```
 
-After setting up your `postcss.config.js`, add `postcss-loader` to your `webpack.config.js`. You can use it standalone or in conjunction with `css-loader` (recommended). Use it **before** `css-loader` and `style-loader`, but **after** other preprocessor loaders like e.g `sass|less|stylus-loader`, if you use any (since [webpack loaders evaluate right to left/bottom to top](/concepts/loaders/#configuration)).
+After setting up your `postcss.config.js`, add `postcss-loader` to your `webpack.config.js`.
+You can use it standalone or in conjunction with `css-loader` (recommended).
+Use it **before** `css-loader` and `style-loader`, but **after** other preprocessor loaders like e.g `sass|less|stylus-loader`, if you use any (since [webpack loaders evaluate right to left/bottom to top](/concepts/loaders/#configuration)).
 
 **`webpack.config.js`**
 
@@ -97,15 +99,12 @@ module.exports = {
 
 ## Options {#options}
 
-|            Name            |                     Type                      |      Default       | Description                                  |
-| :------------------------: | :-------------------------------------------: | :----------------: | :------------------------------------------- |
-|      [`exec`](#exec)       |                  `{Boolean}`                  |    `undefined`     | Enable PostCSS Parser support in `CSS-in-JS` |
-|   [`parser`](#syntaxes)    |         `{String\|Object\|Function}`          |    `undefined`     | Set PostCSS Parser                           |
-|   [`syntax`](#syntaxes)    |              `{String\|Object}`               |    `undefined`     | Set PostCSS Syntax                           |
-| [`stringifier`](#syntaxes) |         `{String\|Object\|Function}`          |    `undefined`     | Set PostCSS Stringifier                      |
-|    [`config`](#config)     |          `{String\|Object\|Boolean}`          |    `undefined`     | Set `postcss.config.js` config path && `ctx` |
-|   [`plugins`](#plugins)    | `{Function\|Object\|Array<Function\|Object>}` |        `[]`        | Set PostCSS Plugins                          |
-| [`sourceMap`](#sourcemap)  |              `{String\|Boolean}`              | `compiler.devtool` | Enables/Disables generation of source maps   |
+|                Name                 |            Type             |                Default                | Description                                     |
+| :---------------------------------: | :-------------------------: | :-----------------------------------: | :---------------------------------------------- |
+|           [`exec`](#exec)           |         `{Boolean}`         |              `undefined`              | Enable PostCSS Parser support in `CSS-in-JS`    |
+|         [`config`](#config)         | `{String\|Object\|Boolean}` |              `undefined`              | Set `postcss.config.js` config path && `ctx`    |
+| [`postcssOptions`](#postcssoptions) |         `{Object}`          | `defaults values for Postcss.process` | Set Postcss.process options and postcss plugins |
+|      [`sourceMap`](#sourcemap)      |         `{Boolean}`         |          `compiler.devtool`           | Enables/Disables generation of source maps      |
 
 ### `Exec` {#exec}
 
@@ -127,7 +126,12 @@ module.exports = {
           { loader: 'css-loader', options: { importLoaders: 1 } },
           {
             loader: 'postcss-loader',
-            options: { parser: 'sugarss', exec: true },
+            options: {
+              postcssOptions: {
+                parser: 'sugarss',
+              },
+              exec: true,
+            },
           },
         ],
       },
@@ -247,13 +251,11 @@ Default: `undefined`
 ```js
 module.exports = ({ file, options, env }) => ({
   parser: file.extname === '.sss' ? 'sugarss' : false,
-  plugins: {
-    'postcss-import': { root: file.dirname },
-    'postcss-preset-env': options['postcss-preset-env']
-      ? options['postcss-preset-env']
-      : false,
-    cssnano: env === 'production' ? options.cssnano : false,
-  },
+  plugins: [
+    // Plugins with options and without
+    ['postcss-import', { root: file.dirname }],
+    'postcss-preset-env',
+  ],
 });
 ```
 
@@ -280,10 +282,48 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `Plugins` {#plugins}
+=======
+### `postcssOptions`
+>>>>>>> 6f6c9bf26f993aab3d944e151c3597970eb90a00
 
-Type: `Function|Object|Array<Function\|Object>`
+|             Name              |                     Type                      |   Default   | Description                    |
+| :---------------------------: | :-------------------------------------------: | :---------: | :----------------------------- |
+|     [`plugins`](#plugins)     | `{Function\|Object\|Array<Function\|Object>}` |    `[]`     | Set PostCSS Plugins            |
+|      [`parser`](#parser)      |         `{String\|Object\|Function}`          | `undefined` | Set custom PostCSS Parser      |
+|      [`syntax`](#syntax)      |              `{String\|Object}`               | `undefined` | Set custom PostCSS Syntax      |
+| [`stringifier`](#stringifier) |         `{String\|Object\|Function}`          | `undefined` | Set custom PostCSS Stringifier |
+
+#### `Plugins`
+
+Type: `Function|Object|Array<String|Function\|Object|Array>`
 Default: `[]`
+
+It is recommended to specify plugins in the format `Array<String\|Array>` or `Function` that returns the same array as shown below.
+`Object` format (`{pluginName: pluginOptions}`) is deprecated and will be removed in the next major release.
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          plugins: [
+            'postcss-import',
+            'postcss-nested',
+            ['postcss-short', { prefix: 'x' }],
+          ],
+        },
+      },
+    ],
+  },
+};
+```
 
 **`webpack.config.js`**
 
@@ -296,9 +336,9 @@ module.exports = {
         loader: 'postcss-loader',
         options: {
           plugins: (loader) => [
-            require('postcss-import')({ root: loader.resourcePath }),
-            require('postcss-preset-env')(),
-            require('cssnano')(),
+            ['postcss-import', { root: loader.resourcePath }],
+            'postcss-nested',
+            'cssnano',
           ],
         },
       },
@@ -306,6 +346,32 @@ module.exports = {
   },
 };
 ```
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          postcssOptions: {
+            plugins: (loader) => [
+              require('postcss-import')({ root: loader.resourcePath }),
+              require('postcss-preset-env')(),
+              require('cssnano')(),
+            ],
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+> ⚠️ The method below for specifying plugins is deprecated.
 
 **`webpack.config.js`**
 
@@ -353,11 +419,13 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
-          plugins: {
-            'postcss-import': {},
-            'postcss-nested': {},
-            // Turn off the plugin
-            'postcss-short': false,
+          postcssOptions: {
+            plugins: {
+              'postcss-import': {},
+              'postcss-nested': {},
+              // Turn off the plugin
+              'postcss-short': false,
+            },
           },
         },
       },
@@ -366,6 +434,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `Syntaxes` {#syntaxes}
 
 Type: `String|Object`
@@ -378,6 +447,9 @@ Default: `undefined`
 | [`stringifier`](#stringifier) | `{String\|Object\|Function}` | `undefined` | Custom PostCSS Stringifier |
 
 #### `Parser` {#parser}
+=======
+#### `Parser`
+>>>>>>> 6f6c9bf26f993aab3d944e151c3597970eb90a00
 
 Type: `String|Object|Function`
 Default: `undefined`
@@ -396,8 +468,10 @@ module.exports = {
         test: /\.sss$/i,
         loader: 'postcss-loader',
         options: {
-          // Will be converted to `require('sugarss')`
-          parser: 'sugarss',
+          postcssOptions: {
+            // Will be converted to `require('sugarss')`
+            parser: 'sugarss',
+          },
         },
       },
     ],
@@ -417,7 +491,9 @@ module.exports = {
         test: /\.sss$/i,
         loader: 'postcss-loader',
         options: {
-          parser: require('sugarss'),
+          postcssOptions: {
+            parser: require('sugarss'),
+          },
         },
       },
     ],
@@ -437,7 +513,9 @@ module.exports = {
         test: /\.sss$/i,
         loader: 'postcss-loader',
         options: {
-          parser: require('sugarss').parse,
+          postcssOptions: {
+            parser: require('sugarss').parse,
+          },
         },
       },
     ],
@@ -464,8 +542,10 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
-          // Will be converted to `require('sugarss')`
-          syntax: 'sugarss',
+          postcssOptions: {
+            // Will be converted to `require('sugarss')`
+            syntax: 'sugarss',
+          },
         },
       },
     ],
@@ -485,7 +565,9 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
-          stringifier: require('sugarss'),
+          postcssOptions: {
+            stringifier: require('sugarss'),
+          },
         },
       },
     ],
@@ -512,8 +594,10 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
-          // Will be converted to `require('sugarss')`
-          stringifier: 'sugarss',
+          postcssOptions: {
+            // Will be converted to `require('sugarss')`
+            stringifier: 'sugarss',
+          },
         },
       },
     ],
@@ -533,7 +617,9 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
-          stringifier: require('sugarss'),
+          postcssOptions: {
+            stringifier: require('sugarss'),
+          },
         },
       },
     ],
@@ -556,7 +642,9 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
-          stringifier: midas.stringifier,
+          postcssOptions: {
+            stringifier: midas.stringifier,
+          },
         },
       },
     ],
@@ -566,6 +654,7 @@ module.exports = {
 
 ### `SourceMap` {#sourcemap}
 
+<<<<<<< HEAD
 Type: `Boolean|String`
 Default: `compiler.devtool`
 
@@ -597,24 +686,26 @@ module.exports = {
 ```
 
 #### `'inline'` {#inline}
+=======
+Type: `Boolean`
+Default: depends on the `compiler.devtool` value
+>>>>>>> 6f6c9bf26f993aab3d944e151c3597970eb90a00
 
-You can set the `sourceMap: 'inline'` option to inline the source map
-within the CSS directly as an annotation comment.
+By default generation of source maps depends on the [`devtool`](/configuration/devtool/) option. All values enable source map generation except `eval` and `false` value.
 
 **webpack.config.js**
 
 ```js
 module.exports = {
-  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.css$/i,
         use: [
-          { loader: 'style-loader', options: { sourceMap: true } },
-          { loader: 'css-loader' },
-          { loader: 'postcss-loader', options: { sourceMap: 'inline' } },
-          { loader: 'sass-loader' },
+          { loader: 'style-loader' },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } },
         ],
       },
     ],
@@ -622,6 +713,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ```css
 .class {
   color: red;
@@ -631,6 +723,9 @@ module.exports = {
 ```
 
 ## Examples {#examples}
+=======
+## Examples
+>>>>>>> 6f6c9bf26f993aab3d944e151c3597970eb90a00
 
 ### `Stylelint` {#stylelint}
 
@@ -648,7 +743,9 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [require('postcss-import')(), require('stylelint')()],
+              postcssOptions: {
+                plugins: ['postcss-import', 'stylelint'],
+              },
             },
           },
         ],
@@ -674,7 +771,9 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [require('autoprefixer')({ ...options })],
+              postcssOptions: {
+                plugins: [['autoprefixer', { ...options }]],
+              },
             },
           },
         ],
@@ -738,7 +837,14 @@ module.exports = {
         use: [
           'style-loader',
           { loader: 'css-loader', options: { importLoaders: 2 } },
-          { loader: 'postcss-loader', options: { parser: 'postcss-js' } },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                parser: 'postcss-js',
+              },
+            },
+          },
           'babel-loader',
         ],
       },
@@ -837,7 +943,9 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [postcssPlugin()],
+              postcssOptions: {
+                plugins: [postcssPlugin()],
+              },
             },
           },
         ],
@@ -883,7 +991,9 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [postcssPlugin()],
+              postcssOptions: {
+                plugins: [postcssPlugin()],
+              },
             },
           },
         ],
@@ -923,7 +1033,9 @@ module.exports = {
 
 ```js
 module.exports = (loaderContext) => ({
-  plugins: [require('path/to/customPlugin')(loaderContext)],
+  postcssOptions: {
+    plugins: [require('path/to/customPlugin')(loaderContext)],
+  },
 });
 ```
 
