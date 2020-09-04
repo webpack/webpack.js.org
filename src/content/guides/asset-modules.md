@@ -25,25 +25,6 @@ Asset Modules type replaces all of these loaders by adding 4 new module types:
 - `asset/source` exports the source code of the asset. Previously achievable by using `raw-loader`.
 - `asset` automatically chooses between exporting a data URI and emitting a separate file. Previously achievable by using `url-loader` with asset size limit.
 
-W> This is an experimental feature. Enable Asset Modules by setting `experiments.asset: true` in [experiments](/configuration/experiments/) option of your webpack configuration.
-
-__webpack.config.js__
-
-```diff
-const path = require('path');
-
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-+ experiments: {
-+   asset: true
-+ },
-};
-```
-
 ## Resource assets
 
 __webpack.config.js__
@@ -56,9 +37,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
 + module: {
 +   rules: [
@@ -99,9 +77,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
 +   assetModuleFilename: 'images/[hash][ext][query]'
   },
-  experiments: {
-    asset: true
-  },
   module: {
     rules: [
       {
@@ -124,9 +99,6 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
 +   assetModuleFilename: 'images/[hash][ext][query]'
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -164,9 +136,6 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
 -   assetModuleFilename: 'images/[hash][ext][query]'
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -219,9 +188,6 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
   },
-  experiments: {
-    asset: true
-  },
   module: {
     rules: [
       {
@@ -254,9 +220,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -308,9 +271,6 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
   },
-  experiments: {
-    asset: true
-  },
   module: {
     rules: [
       {
@@ -336,9 +296,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
