@@ -282,11 +282,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `Plugins` {#plugins}
-=======
-### `postcssOptions`
->>>>>>> 6f6c9bf26f993aab3d944e151c3597970eb90a00
+### `postcssOptions` {#postcss-options}
 
 |             Name              |                     Type                      |   Default   | Description                    |
 | :---------------------------: | :-------------------------------------------: | :---------: | :----------------------------- |
@@ -295,7 +291,7 @@ module.exports = {
 |      [`syntax`](#syntax)      |              `{String\|Object}`               | `undefined` | Set custom PostCSS Syntax      |
 | [`stringifier`](#stringifier) |         `{String\|Object\|Function}`          | `undefined` | Set custom PostCSS Stringifier |
 
-#### `Plugins`
+#### `Plugins` {#plugins}
 
 Type: `Function|Object|Array<String|Function\|Object|Array>`
 Default: `[]`
@@ -434,22 +430,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `Syntaxes` {#syntaxes}
-
-Type: `String|Object`
-Default: `undefined`
-
-|             Name              |             Type             |   Default   | Description                |
-| :---------------------------: | :--------------------------: | :---------: | :------------------------- |
-|      [`parser`](#parser)      |      `{String\|Object}`      | `undefined` | Custom PostCSS Parser      |
-|      [`syntax`](#syntax)      |      `{String\|Object}`      | `undefined` | Custom PostCSS Syntax      |
-| [`stringifier`](#stringifier) | `{String\|Object\|Function}` | `undefined` | Custom PostCSS Stringifier |
-
 #### `Parser` {#parser}
-=======
-#### `Parser`
->>>>>>> 6f6c9bf26f993aab3d944e151c3597970eb90a00
 
 Type: `String|Object|Function`
 Default: `undefined`
@@ -654,42 +635,8 @@ module.exports = {
 
 ### `SourceMap` {#sourcemap}
 
-<<<<<<< HEAD
-Type: `Boolean|String`
-Default: `compiler.devtool`
-
-By default generation of source maps depends on the devtool option.
-All values enable source map generation except eval and false value.
-In most cases this option should be discouraged.
-If need `postcss-loader` to generate an inline map, use the `inline` value.
-`postcss-loader` will use the previous source map given by other loaders and update it accordingly, if no previous loader is applied before `postcss-loader`, the loader will generate a source map for you.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  devtool: 'source-map',
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: [
-          { loader: 'style-loader', options: { sourceMap: true } },
-          { loader: 'css-loader' },
-          { loader: 'postcss-loader' },
-          { loader: 'sass-loader' },
-        ],
-      },
-    ],
-  },
-};
-```
-
-#### `'inline'` {#inline}
-=======
 Type: `Boolean`
 Default: depends on the `compiler.devtool` value
->>>>>>> 6f6c9bf26f993aab3d944e151c3597970eb90a00
 
 By default generation of source maps depends on the [`devtool`](/configuration/devtool/) option. All values enable source map generation except `eval` and `false` value.
 
@@ -713,19 +660,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-```css
-.class {
-  color: red;
-}
-
-/*# sourceMappingURL=data:application/json;base64, ... */
-```
-
 ## Examples {#examples}
-=======
-## Examples
->>>>>>> 6f6c9bf26f993aab3d944e151c3597970eb90a00
 
 ### `Stylelint` {#stylelint}
 

@@ -279,10 +279,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-#### `toType` {#totype}
-=======
-#### `filter`
+#### `filter` {#filter}
 
 Type: `Function`
 Default: `undefined`
@@ -317,8 +314,7 @@ module.exports = {
 };
 ```
 
-#### `toType`
->>>>>>> 6f6c9bf26f993aab3d944e151c3597970eb90a00
+#### `toType` {#totype}
 
 Type: `String`
 Default: `undefined`
