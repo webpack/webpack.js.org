@@ -98,7 +98,7 @@
     "directory-tree": "2.2.0",
     "directory-tree-webpack-plugin": "0.3",
     "duplexer": "^0.1.1",
-    "eslint": "5.16.0",
+    "eslint": "6.8.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-markdown": "1.0.0-rc.0",
