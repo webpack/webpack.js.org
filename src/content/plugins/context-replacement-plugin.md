@@ -45,6 +45,8 @@ The `moment/locale` context is restricted to files matching `/de|fr|hu/`. Thus o
 
 ## Content Callback
 
+<!-- eslint-skip -->
+
 ```javascript
 new webpack.ContextReplacementPlugin(
   resourceRegExp: RegExp,
@@ -71,6 +73,8 @@ new webpack.ContextReplacementPlugin(/^\.\/locale$/, (context) => {
 ## Other Options
 
 The `newContentResource` and `newContentCreateContextMap` parameters are also available:
+
+<!-- eslint-skip -->
 
 ```javascript
 new webpack.ContextReplacementPlugin(
