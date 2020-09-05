@@ -4,9 +4,9 @@
     "@babel/preset-react"
   ],
   "plugins": [
-    "syntax-dynamic-import",
-    "transform-object-rest-spread",
-    "transform-class-properties"
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-class-properties"
   ],
   "env": {
     "development": {
