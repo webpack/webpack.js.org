@@ -60,6 +60,60 @@ module.exports = {
 
 最后按偏好运行 `webpack` 方法。
 
+## 选项 {#options}
+
+|                          选项名                           |     类型     |   默认值   | 描述                                    |
+| :-----------------------------------------------------: | :----------: | :---------: | :--------------------------------------------- |
+| **[`filterSourceMappingUrl`](#filtersourcemappingurl)** | `{Function}` | `undefined` | 允许控制 `SourceMappingURL` 的行为 |
+
+### filterSourceMappingUrl {#filter-source-mapping-url}
+
+类型：`Function`
+默认值：`undefined`
+
+允许你为 `SourceMappingURL` 注释指定 loader 的特定行为。
+
+此函数的返回值必须为下列之一：
+
+- `true` 或 `'consume'` — 使用 source map 并删除 `SourceMappingURL` 注释（默认行为）
+- `false` 或 `'remove'` — 不使用 source map 并删除 `SourceMappingURL` 注释
+- `skip` — 不使用 source map 但不删除 `SourceMappingURL` 注释
+
+示例配置：
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        use: [
+          {
+            loader: 'source-map-loader',
+            options: {
+              filterSourceMappingUrl: (url, resourcePath) => {
+                if (/broker-source-map-url\.js$/i.test(url)) {
+                  return false;
+                }
+
+                if (/keep-source-mapping-url\.js$/i.test(resourcePath)) {
+                  return 'skip';
+                }
+
+                return true;
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
 ## 示例 {#examples}
 
 ### 忽略警告 {#ignoring-warnings}
