@@ -162,6 +162,7 @@ __init.js__
 The container tries to provide shared modules, but if the shared module has already been used, a warning and the provided shared module will be ignored. The container might still use it as a fallback.
 
 This way you could dynamically load an A/B test which provides a different version of a shared module.
+
 T> Ensure you have loaded the container before attempting to dynamically connect a remote container.
 
 Example:
