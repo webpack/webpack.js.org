@@ -366,13 +366,7 @@ module.exports = {
 
 如果将这个选项设为一个函数，函数将返回一个包含上面表格中替换信息的对象。
 
-<<<<<<< HEAD
-T> 在使用 [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin) 时，可以用 `[contenthash]` 来获取提取文件的 hash（既不是 `[hash]` 也不是 `[chunkhash]`）。
-
 ## `output.assetModuleFilename` {#outputassetmodulefilename}
-=======
-## `output.assetModuleFilename`
->>>>>>> 8056bf3623679b8bf24516895267b8d23eca0e1d
 
 `string = '[hash][ext][query]'`
 

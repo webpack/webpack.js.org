@@ -217,27 +217,7 @@ new webpack.optimize.CommonsChunkPlugin({
 });
 ```
 
-<<<<<<< HEAD
-In order to obtain a single CSS file containing your application and vendor CSS, use the following `minChunks` function together with [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin/):
-
-```javascript
-new webpack.optimize.CommonsChunkPlugin({
-  name: 'vendor',
-  minChunks: function (module) {
-    // This prevents stylesheet resources with the .css or .scss extension
-    // from being moved from their original chunk to the vendor chunk
-    if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
-      return false;
-    }
-    return module.context && module.context.includes('node_modules');
-  }
-});
-```
-
 ## Manifest file {#manifest-file}
-=======
-## Manifest file
->>>>>>> 8056bf3623679b8bf24516895267b8d23eca0e1d
 
 To extract the webpack bootstrap logic into a separate file, use the `CommonsChunkPlugin` on a `name` which is not defined as `entry`. Commonly the name `manifest` is used. See the [caching guide](/guides/caching) for details.
 

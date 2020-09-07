@@ -43,12 +43,7 @@ __webpack.config.js__
 
 ```js
 var webpack = require('webpack');
-<<<<<<< HEAD
 // 导入非 webpack 自带默认插件
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-=======
-// importing plugins that do not come by default in webpack
->>>>>>> 8056bf3623679b8bf24516895267b8d23eca0e1d
 var DashboardPlugin = require('webpack-dashboard/plugin');
 
 // 在配置中添加插件
