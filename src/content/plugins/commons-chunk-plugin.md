@@ -9,6 +9,7 @@ contributors:
   - jeremenichelli
   - byzyk
   - madhavarshney
+  - snitin315
 ---
 
 The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (known as a chunk), consisting of common modules shared between multiple entry points.
@@ -216,6 +217,7 @@ new webpack.optimize.CommonsChunkPlugin({
 });
 ```
 
+<<<<<<< HEAD
 In order to obtain a single CSS file containing your application and vendor CSS, use the following `minChunks` function together with [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin/):
 
 ```javascript
@@ -233,6 +235,9 @@ new webpack.optimize.CommonsChunkPlugin({
 ```
 
 ## Manifest file {#manifest-file}
+=======
+## Manifest file
+>>>>>>> 8056bf3623679b8bf24516895267b8d23eca0e1d
 
 To extract the webpack bootstrap logic into a separate file, use the `CommonsChunkPlugin` on a `name` which is not defined as `entry`. Commonly the name `manifest` is used. See the [caching guide](/guides/caching) for details.
 

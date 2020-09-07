@@ -7,6 +7,7 @@ contributors:
   - yatharthk
   - byzyk
   - EugeneHlushko
+  - snitin315
 ---
 
 `plugins` 选项用于以各种方式自定义 webpack 构建过程。webpack 附带了各种内置插件，可以通过 `webpack.[plugin-name]` 访问这些插件。请查看 [插件页面](/plugins) 获取插件列表和对应文档，
@@ -42,18 +43,18 @@ __webpack.config.js__
 
 ```js
 var webpack = require('webpack');
+<<<<<<< HEAD
 // 导入非 webpack 自带默认插件
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+=======
+// importing plugins that do not come by default in webpack
+>>>>>>> 8056bf3623679b8bf24516895267b8d23eca0e1d
 var DashboardPlugin = require('webpack-dashboard/plugin');
 
 // 在配置中添加插件
 module.exports = {
   //...
   plugins: [
-    new ExtractTextPlugin({
-      filename: 'build.min.css',
-      allChunks: true,
-    }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
    // 编译时(compile time)插件
     new webpack.DefinePlugin({
