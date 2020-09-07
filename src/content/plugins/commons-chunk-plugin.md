@@ -9,6 +9,7 @@ contributors:
   - jeremenichelli
   - byzyk
   - madhavarshney
+  - snitin315
 ---
 
 The `CommonsChunkPlugin` is an opt-in feature that creates a separate file (known as a chunk), consisting of common modules shared between multiple entry points.
@@ -211,22 +212,6 @@ new webpack.optimize.CommonsChunkPlugin({
   name: 'vendor',
   minChunks: function (module) {
     // this assumes your vendor imports exist in the node_modules directory
-    return module.context && module.context.includes('node_modules');
-  }
-});
-```
-
-In order to obtain a single CSS file containing your application and vendor CSS, use the following `minChunks` function together with [`ExtractTextPlugin`](/plugins/extract-text-webpack-plugin/):
-
-```javascript
-new webpack.optimize.CommonsChunkPlugin({
-  name: 'vendor',
-  minChunks: function (module) {
-    // This prevents stylesheet resources with the .css or .scss extension
-    // from being moved from their original chunk to the vendor chunk
-    if(module.resource && (/^.*\.(css|scss)$/).test(module.resource)) {
-      return false;
-    }
     return module.context && module.context.includes('node_modules');
   }
 });

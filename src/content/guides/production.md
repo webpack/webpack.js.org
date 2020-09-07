@@ -22,6 +22,7 @@ contributors:
   - wizardofhogwarts
   - aholzner
   - EugeneHlushko
+  - snitin315
 ---
 
 在本指南中，我们将深入一些最佳实践和工具，将站点或应用程序构建到生产环境中。
@@ -199,7 +200,6 @@ webpack v4+ will minify your code by default in [`production mode`](/configurati
 
 注意，虽然生产环境下默认使用 [`TerserPlugin`](/plugins/terser-webpack-plugin) ，并且也是代码压缩方面比较好的选择，但是还有一些其他可选择项。以下有几个同样很受欢迎的插件：
 
-- [`BabelMinifyWebpackPlugin`](https://github.com/webpack-contrib/babel-minify-webpack-plugin)
 - [`ClosureWebpackPlugin`](https://github.com/webpack-contrib/closure-webpack-plugin)
 
 如果决定尝试一些其他压缩插件，只要确保新插件也会按照 [tree shake](/guides/tree-shaking) 指南中所陈述的具有删除未引用代码(dead code)的能力，并将它作为 [`optimization.minimizer`](/configuration/optimization/#optimization-minimizer)。

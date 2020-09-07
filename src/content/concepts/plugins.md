@@ -8,11 +8,14 @@ contributors:
   - johnstew
   - MisterDev
   - byzyk
+  - chenxsan
 ---
 
 __插件__是 webpack 的 [支柱](https://github.com/webpack/tapable) 功能。webpack 自身也是构建于你在 webpack 配置中用到的__相同的插件系统__之上！
 
 插件目的在于解决 [loader](/concepts/loaders) 无法实现的__其他事__。
+
+T> 如果在插件中使用了 [`webpack-sources`](https://github.com/webpack/webpack-sources) 的 package，请使用 `require('webpack').sources` 替代 `require('webpack-sources')`，以避免持久缓存的版本冲突。
 
 
 ## 剖析 {#anatomy}

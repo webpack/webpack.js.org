@@ -102,12 +102,6 @@
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack-contrib/extract-text-webpack-plugin",
-		"npm": "extract-text-webpack-plugin",
-		"description": "Extract text from a bundle into a file.",
-		"maintainer": ""
-	},
-	{
 		"repo": "webpack-contrib/sass-loader",
 		"npm": "sass-loader",
 		"description": "Load and parse SASS modules into CSS.",
@@ -219,12 +213,6 @@
 		"repo": "webpack-contrib/val-loader",
 		"npm": "val-loader",
 		"description": "Load and execute a module while compiling, returning the result.",
-		"maintainer": ""
-	},
-	{
-		"repo": "webpack-contrib/i18n-webpack-plugin",
-		"npm": "i18n-webpack-plugin",
-		"description": "Embed localization into your bundle.",
 		"maintainer": ""
 	},
 	{
