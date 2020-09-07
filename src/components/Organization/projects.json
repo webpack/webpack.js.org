@@ -102,12 +102,6 @@
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack-contrib/extract-text-webpack-plugin",
-		"npm": "extract-text-webpack-plugin",
-		"description": "Extract text from a bundle into a file.",
-		"maintainer": ""
-	},
-	{
 		"repo": "webpack-contrib/sass-loader",
 		"npm": "sass-loader",
 		"description": "Load and parse SASS modules into CSS.",
@@ -222,12 +216,6 @@
 		"maintainer": ""
 	},
 	{
-		"repo": "webpack-contrib/i18n-webpack-plugin",
-		"npm": "i18n-webpack-plugin",
-		"description": "Embed localization into your bundle.",
-		"maintainer": ""
-	},
-	{
 		"repo": "webpack-contrib/json5-loader",
 		"npm": "json5-loader",
 		"description": "Load JSON5 into a pre-parsed variable.",
@@ -250,5 +238,11 @@
 		"npm": "angular2-template-loader",
 		"description": "Load angular2 components, inlining all html and styling.",
 		"maintainer": "thelarkinn"
+	},
+	{
+		"repo": "webpack-contrib/css-minimizer-webpack-plugin",
+		"npm": "css-minimizer-webpack-plugin",
+		"description": "Optimize and minify your CSS using cssnano.",
+		"maintainer": "cap-Bernardito"
 	}
 ]

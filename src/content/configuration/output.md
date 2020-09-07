@@ -23,6 +23,7 @@ contributors:
   - jamesgeorge007
   - hiroppy
   - chenxsan
+  - snitin315
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -90,6 +91,14 @@ module.exports = {
 };
 ```
 
+
+## `output.charset`
+
+`boolean = true`
+
+Tells webpack to add `charset="utf-8"` to the HTML `<script>` tag.
+
+T> Although `charset` attribute for `<script>` tag was [deprecated](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes), webpack still adds it by default for compatibility with non-modern browsers.
 
 ## `output.chunkFilename`
 
@@ -161,15 +170,6 @@ Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web
 - `'anonymous'` - Enable cross-origin loading __without credentials__
 - `'use-credentials'` - Enable cross-origin loading __with credentials__
 
-
-## `output.jsonpScriptType`
-
-`string = 'text/javascript': 'module' | 'text/javascript'`
-
-Allows customization of `type` attribute of `script` tags that webpack injects into the DOM to download async chunks.
-
-- `'text/javascript'`: Default `type` in HTML5 and required for some browsers in HTML4.
-- `'module'`: Causes the code to be treated as a JavaScript module.
 
 ## `output.devtoolFallbackModuleFilenameTemplate`
 
@@ -366,9 +366,9 @@ Example: `[\id\]` generates `[id]` instead of getting replaced with the `id`.
 
 If using a function for this option, the function will be passed an object containing the substitutions in the table above.
 
-T> When using the [`ExtractTextWebpackPlugin`](/plugins/extract-text-webpack-plugin), use `[contenthash]` to obtain a hash of the extracted file (neither `[hash]` nor `[chunkhash]` work).
-
 ## `output.assetModuleFilename`
+
+`string = '[hash][ext][query]'`
 
 The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/)
 
@@ -559,13 +559,13 @@ W> Note that if an `array` is provided as an `entry` point, only the last module
 
 T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library` as well as `output.libraryTarget`.
 
-## ouput.scriptType
+## output.scriptType
 
 `string: 'module' | 'text/javascript'` `boolean = false`
 
 This option allows loading asynchronous chunks with a custom script type, such as `<script type="module" ...>`.
 
-T> If [`output.module`](#outputmodule) is set to `true`, `ouput.scriptType` will default to `'module'` instead of `false`.
+T> If [`output.module`](#outputmodule) is set to `true`, `output.scriptType` will default to `'module'` instead of `false`.
 
 ```javascript
 module.exports = {
@@ -1220,7 +1220,7 @@ module.exports = {
 
 `boolean = true`
 
-Allow outputting JavaScript files as module type. It sets `output.iife` to `false`, `output.libraryTarget` to `'module'`, `output.jsonpScriptType` to `'module'` and `terserOptions.module` to `true`
+Allow outputting JavaScript files as module type. It sets `output.iife` to `false`, `output.libraryTarget` to `'module'`, `output.scriptType` to `'module'` and `terserOptions.module` to `true`
 
 W> `output.module` is an experimental feature and can be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
 

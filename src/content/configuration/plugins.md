@@ -7,6 +7,7 @@ contributors:
   - yatharthk
   - byzyk
   - EugeneHlushko
+  - snitin315
 ---
 
 The `plugins` option is used to customize the webpack build process in a variety of ways. webpack comes with a variety built-in plugins available under `webpack.[plugin-name]`. See [Plugins page](/plugins) for a list of plugins and documentation but note that there are a lot more out in the community.
@@ -40,17 +41,12 @@ __webpack.config.js__
 ```js
 var webpack = require('webpack');
 // importing plugins that do not come by default in webpack
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var DashboardPlugin = require('webpack-dashboard/plugin');
 
 // adding plugins to your configuration
 module.exports = {
   //...
   plugins: [
-    new ExtractTextPlugin({
-      filename: 'build.min.css',
-      allChunks: true,
-    }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     // compile time plugins
     new webpack.DefinePlugin({

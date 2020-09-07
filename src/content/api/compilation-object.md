@@ -6,6 +6,7 @@ contributors:
   - EugeneHlushko
   - wizardofhogwarts
   - jamesgeorge007
+  - snitin315
 ---
 
 The Compilation object has many methods and hooks available. On this page, we will list the available methods and properties.
@@ -280,10 +281,6 @@ Parameters:
 
 `function`
 
-### modifyHash
-
-`function (update)`
-
 ### createModuleAssets
 
 `function`
@@ -353,6 +350,14 @@ Parameters:
 - `file` - file name of the asset
 - `newSourceOrFunction` - new asset source or function converting old to new
 - `assetInfoUpdateOrFunction` - new asset info or function converting old to new
+
+### deleteAsset
+
+`function (file)`
+
+Parameters:
+
+- `file` - file name of the asset
 
 ### getAssets
 
