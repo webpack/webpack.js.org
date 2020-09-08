@@ -57,7 +57,7 @@ module.exports = (env = {}) => ({
           {
             loader: '@mdx-js/loader',
             options: {
-              mdPlugins
+              remarkPlugins: mdPlugins
             }
           }
         ]
