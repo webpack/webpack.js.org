@@ -82,7 +82,7 @@
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
-    "@mdx-js/loader": "0.16.8",
+    "@mdx-js/loader": "^1.6.16",
     "@octokit/rest": "^16.27.1",
     "alex": "^5.1.0",
     "autoprefixer": "^7.2.3",
