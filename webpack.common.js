@@ -126,7 +126,7 @@ module.exports = (env = {}) => ({
         use: {
           loader: 'file-loader',
           options: {
-            prefix: 'font/'
+            outputPath: 'font'
           }
         }
       },
