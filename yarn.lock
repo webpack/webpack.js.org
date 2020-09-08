@@ -1304,7 +1304,7 @@
     "@mdx-js/tag" "^0.15.6"
     loader-utils "^1.1.0"
 
-"@mdx-js/mdx@0.15.7", "@mdx-js/mdx@^0.15.7":
+"@mdx-js/mdx@^0.15.7":
   version "0.15.7"
   resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-0.15.7.tgz#5fde5841d7b6f4c78f80c19fff559532af5ce5ad"
   integrity sha512-bWUQidQhjTRFh5nK01kW3qQLCH/aCq6VTapOZ/+WI5hL4exoRw6TgnxxmgSf/p7mmrGxIpCHmnaWXdbHSObxlg==
