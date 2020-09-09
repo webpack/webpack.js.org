@@ -90,7 +90,7 @@
     "bundlesize": "^0.17.1",
     "copy-webpack-plugin": "4.5.2",
     "cross-env": "5.2.0",
-    "css-loader": "^0.28.10",
+    "css-loader": "^4.3.0",
     "cypress": "^4.5.0",
     "directory-tree": "2.2.0",
     "directory-tree-webpack-plugin": "0.3",
