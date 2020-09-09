@@ -85,7 +85,7 @@
     "@mdx-js/loader": "^1.6.16",
     "@octokit/rest": "^16.27.1",
     "alex": "^5.1.0",
-    "autoprefixer": "^7.2.3",
+    "autoprefixer": "^9.8.6",
     "babel-loader": "^8.1.0",
     "bundlesize": "^0.17.1",
     "copy-webpack-plugin": "4.5.2",
