@@ -166,9 +166,7 @@ The goal of CommonJS is to specify an ecosystem for JavaScript outside the brows
 
 ### `require`
 
-<!-- eslint-skip -->
-
-``` javascript
+```typescript
 require(dependency: String);
 ```
 
@@ -184,9 +182,7 @@ W> Using it asynchronously may not have the expected effect.
 
 ### `require.resolve`
 
-<!-- eslint-skip -->
-
-``` javascript
+```typescript
 require.resolve(dependency: String);
 ```
 
