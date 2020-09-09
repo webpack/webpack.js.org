@@ -166,7 +166,7 @@ The goal of CommonJS is to specify an ecosystem for JavaScript outside the brows
 
 ### `require`
 
-``` javascript
+```typescript
 require(dependency: String);
 ```
 
@@ -182,7 +182,7 @@ W> Using it asynchronously may not have the expected effect.
 
 ### `require.resolve`
 
-``` javascript
+```typescript
 require.resolve(dependency: String);
 ```
 
