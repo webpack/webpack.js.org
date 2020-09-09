@@ -118,7 +118,9 @@ module.exports = (env = {}) => ({
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [ path.join('./src/styles/partials') ]
+              sassOptions: {
+                includePaths: [ path.join('./src/styles/partials') ]
+              }
             }
           }
         ]
