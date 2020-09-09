@@ -64,12 +64,19 @@ module.exports = (env = {}) => ({
       },
       {
         test: /\.md$/,
-        use: {
-          loader: 'remark-loader',
-          options: {
-            plugins: mdPlugins
+        use: [
+          {
+            loader: 'html-loader'
+          },
+          {
+            loader: 'remark-loader',
+            options: {
+              remarkOptions: {
+                plugins: [...mdPlugins, require('remark-html')]
+              }
+            }
           }
-        }
+        ]
       },
       {
         test: /\.font.js$/,
