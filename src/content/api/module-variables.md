@@ -96,7 +96,7 @@ Returns the absolute `file:` URL of the module.
 
 __src/index.js__
 
-```text
+```javascript
 console.log(import.meta.url); // output something like `file:///path/to/your/project/src/index.js`
 ```
 
@@ -106,7 +106,7 @@ Returns the webpack version.
 
 __src/index.js__
 
-```text
+```javascript
 console.log(import.meta.webpack); // output `5` for webpack 5
 ```
 
