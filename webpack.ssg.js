@@ -80,21 +80,23 @@ module.exports = env => merge(common(env), {
           'concepts/mode': '/configuration/mode'
         }
       }),
-      new CopyWebpackPlugin([
-        {
-          from: './assets/icon-square-small-slack.png',
-          to: './assets/'
-        },
-        {
-          from: './assets/icon-square-big.svg',
-          to: './assets/'
-        },
-        {
-          from: './assets/robots.txt',
-          to: './'
-        },
-        'CNAME'
-      ]),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: './assets/icon-square-small-slack.png',
+            to: './assets/'
+          },
+          {
+            from: './assets/icon-square-big.svg',
+            to: './assets/'
+          },
+          {
+            from: './assets/robots.txt',
+            to: './'
+          },
+          'CNAME'
+        ]
+      }),
       new WebpackPwaManifest({
         name: 'webpack Documentation',
         short_name: 'webpack',
