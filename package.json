@@ -147,7 +147,6 @@
     "tap-spot": "^1.1.1",
     "terser-webpack-plugin": "^2.3.5",
     "through2": "^2.0.3",
-    "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^4.42.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.2.3",
