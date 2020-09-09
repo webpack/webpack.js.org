@@ -1,6 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const isDev = process.env.NODE_ENV !== 'production';
 const mdPlugins = [
   require('remark-slug'),
   [
@@ -74,7 +74,7 @@ module.exports = (env = {}) => ({
       {
         test: /\.font.js$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'fontgen-loader',
@@ -96,14 +96,14 @@ module.exports = (env = {}) => ({
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader'
         ]
       },
       {
         test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
