@@ -11472,10 +11472,10 @@ redent@^1.0.0:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
 
-redirect-webpack-plugin@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/redirect-webpack-plugin/-/redirect-webpack-plugin-0.1.1.tgz#37de577dc230e05edc1ab68d2416644dea1f552a"
-  integrity sha512-YivwISR6PUxZxU/ltaDeV681QG20SJpYpiLH0KYgJ0bZRCVjwCZenDxLRbp05A0GCJ4Qru/D75xkWySt2897HQ==
+redirect-webpack-plugin@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/redirect-webpack-plugin/-/redirect-webpack-plugin-1.0.0.tgz#01c330594d57c1ba2b6406b935c2aca15b32102d"
+  integrity sha512-GMylB9NFSnOWTsUDlXShwsOZ6BGxPW9NroiR8z5Bv1bvxnCW6EGcIU5EQWWad9QXnHcVvYNux7YbJFZSSsnzDg==
   dependencies:
     webpack-sources "^1.1.0"
 
