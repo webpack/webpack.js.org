@@ -47,7 +47,10 @@ module.exports = (env = {}) => ({
   },
   resolve: {
     symlinks: false,
-    extensions: ['.js', '.jsx', '.scss']
+    extensions: ['.js', '.jsx', '.scss'],
+    alias: {
+      path: 'path-browserify'
+    }
   },
   module: {
     rules: [
