@@ -156,7 +156,6 @@
     "ajv": "^5.5.2",
     "docsearch.js": "^2.5.2",
     "gitter-sidecar": "^1.2.3",
-    "handlebars": "4.5.3",
     "javascriptstuff-db": "^1.12.0",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.7.2",
