@@ -4515,19 +4515,14 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-directory-tree-webpack-plugin@0.3:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/directory-tree-webpack-plugin/-/directory-tree-webpack-plugin-0.3.1.tgz#4f84ad17504125472912534bafb250eba3ada9f2"
-  integrity sha512-lXzTMN4URJjgcb+3MxZxgrfuJuIdQ7PU4LgL09zwGgF13pRUZWdEu5tHKhcYD2LafR8uNQ4sZqGCIXHYMeFbSQ==
+directory-tree-webpack-plugin@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/directory-tree-webpack-plugin/-/directory-tree-webpack-plugin-1.0.2.tgz#2457223b6f55bcbb7b3d4788e9469885ac3d85b9"
+  integrity sha512-F1/Jd/caZcPqaLlo1QgRTp4eqT/Pj0DyvIAPAtLJk0LhMz07ie00x8sOzMAS2ZGEvWfcOutvNIFtYZ5+KaKCaw==
   dependencies:
     directory-tree "^2.0.0"
 
-directory-tree@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/directory-tree/-/directory-tree-2.2.0.tgz#bfa239d47c26cf3edde52ddebd037911f51c6ee0"
-  integrity sha512-ZHQDIK7NHy0xokdR9sE0h+YfN2unwjLK6CwofJ6NpMuQVEcTZqjTeiTgmx60ieJkngZYkVFAVGiihE4hwpkJeQ==
-
-directory-tree@^2.0.0:
+directory-tree@^2.0.0, directory-tree@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/directory-tree/-/directory-tree-2.2.4.tgz#6d5bd7d82e48378e256a1e87b678a43c50076e2e"
   integrity sha512-2N43msQptKbi3WMfIs+U09yi6bfyKL+MWyj5VMj8t1F/Tx04bt1cn/EEIU3o1JBltlJk7NQnzOEuTNa/KQvbWA==
