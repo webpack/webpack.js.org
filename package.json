@@ -163,7 +163,7 @@
     "react-dom": "^16.8.6",
     "react-g-analytics": "0.4.2",
     "react-hot-loader": "^4.0.0-beta.12",
-    "react-markdown": "4.2.2",
+    "react-markdown": "^4.3.1",
     "react-router-dom": "^4.2.2",
     "react-tiny-popover": "5",
     "react-visibility-sensor": "^5.0.2",
