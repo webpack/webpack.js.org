@@ -91,7 +91,7 @@
     "copy-webpack-plugin": "^6.1.0",
     "cross-env": "^7.0.2",
     "css-loader": "^4.3.0",
-    "cypress": "^4.5.0",
+    "cypress": "^5.1.0",
     "directory-tree": "2.2.0",
     "directory-tree-webpack-plugin": "0.3",
     "duplexer": "^0.1.1",
