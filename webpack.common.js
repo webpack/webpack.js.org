@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const isDev = process.env.NODE_ENV !== 'production';
 const mdPlugins = [
   require('remark-slug'),
@@ -93,11 +94,7 @@ module.exports = (env = {}) => ({
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: [
-          'babel-loader',
-          {
-            loader: 'eslint-loader',
-            options: { fix: true }
-          }
+          'babel-loader'
         ]
       },
       {
@@ -151,7 +148,8 @@ module.exports = (env = {}) => ({
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[chunkhash].css'
-    })
+    }),
+    new ESLintPlugin({fix: true, extensions: ['js', 'jsx']})
   ],
   stats: {
     children: false
