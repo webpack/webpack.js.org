@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const HTMLPlugin = require('html-webpack-plugin');
 const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
 const HTMLTemplate = require('html-webpack-template');

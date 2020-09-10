@@ -1,7 +1,7 @@
 // Import External Dependencies
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const SSGPlugin = require('static-site-generator-webpack-plugin');
 const RedirectWebpackPlugin = require('redirect-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');

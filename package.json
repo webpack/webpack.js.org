@@ -151,7 +151,7 @@
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^5.1.4"
   },
   "dependencies": {
     "ajv": "^5.5.2",
