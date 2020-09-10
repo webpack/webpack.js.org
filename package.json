@@ -134,7 +134,7 @@
     "remark-loader": "^1.0.0",
     "remark-refractor": "git://github.com/montogeek/remark-refractor.git",
     "remark-responsive-tables": "1.0.0",
-    "remark-slug": "^5.0.0",
+    "remark-slug": "^6.0.0",
     "request-promise": "4.2.4",
     "rimraf": "^3.0.2",
     "sass-loader": "^10.0.2",
