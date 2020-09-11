@@ -1,6 +1,6 @@
 // Import External Dependencies
 const { merge } = require('webpack-merge');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('css-minimizer-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 
