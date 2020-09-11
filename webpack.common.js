@@ -155,7 +155,7 @@ module.exports = (env = {}) => ({
     }),
     new ESLintPlugin({fix: true, extensions: ['js', 'jsx']}),
     new webpack.DefinePlugin({
-      'process.env.RESET_APP_DATA_TIMER': null // fix for algoliasearch
+      'process.env.RESET_APP_DATA_TIMER': JSON.stringify('') // fix for algoliasearch
     })
   ],
   stats: {
