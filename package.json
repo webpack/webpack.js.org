@@ -170,8 +170,5 @@
     "react-visibility-sensor": "^5.0.2",
     "webpack-pwa-manifest": "^4.0.0",
     "webpack.vote": "https://github.com/webpack/voting-app.git"
-  },
-  "resolutions": {
-    "terser-webpack-plugin": "https://github.com/webpack-contrib/terser-webpack-plugin#feat-improve-caching"
   }
 }

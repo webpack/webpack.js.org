@@ -32,6 +32,7 @@ module.exports = env => merge(common(env), {
     },
     optimization: {
       splitChunks: false,
+      minimize: false
     },
     plugins: [
       new SSGPlugin({
