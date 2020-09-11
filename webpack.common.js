@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const isDev = process.env.NODE_ENV !== 'production';
+const webpack = require('webpack');
 const mdPlugins = [
   require('remark-slug'),
   [
@@ -152,7 +153,10 @@ module.exports = (env = {}) => ({
     new MiniCssExtractPlugin({
       filename: '[chunkhash].css'
     }),
-    new ESLintPlugin({fix: true, extensions: ['js', 'jsx']})
+    new ESLintPlugin({fix: true, extensions: ['js', 'jsx']}),
+    new webpack.DefinePlugin({
+      'process.env.RESET_APP_DATA_TIMER': null // fix for algoliasearch
+    })
   ],
   stats: {
     children: false
