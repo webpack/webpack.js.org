@@ -258,6 +258,29 @@ __src/index.js__
 
 All `.txt` files will be injected into the bundles as is.
 
+## URL assets
+
+When using `new URL('./path/to/asset', import.meta.url)`, webpack creates an asset module too.
+
+__src/index.js__
+
+```js
+const logo = new URL('./logo.svg', import.meta.url);
+```
+
+Depends on the [`target`](/configuration/target) in your configuration, webpack will compile the above code into different result:
+
+```js
+// target: web
+new URL(__webpack_public_path__ + 'logo.svg', document.baseURI || self.location.href);
+
+// target: webworker
+new URL(__webpack_public_path__ + 'logo.svg', self.location);
+
+// target: node, node-webkit, nwjs, electron-main, electron-renderer, electron-preload, async-node
+new URL(__webpack_public_path__ + 'logo.svg', require('url').pathToFileUrl(__filename));
+```
+
 ## General asset type
 
 __webpack.config.js__
