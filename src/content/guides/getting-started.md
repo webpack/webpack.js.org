@@ -76,7 +76,7 @@ __index.html__
 <html>
   <head>
     <title>Getting Started</title>
-    <script src="https://unpkg.com/lodash@4.16.6"></script>
+    <script src="https://unpkg.com/lodash@4.17.20"></script>
   </head>
   <body>
     <script src="./src/index.js"></script>
