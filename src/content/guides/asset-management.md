@@ -505,9 +505,9 @@ import { foo } from './data.json';
 
 ### Customize parser of JSON modules
 
-It's possible to import any `toml`, `yaml` or `json5` file as JSON module with a [custom parser](/configuration/module/#ruleparserparse) instead of specific webpack loader.
+It's possible to import any `toml`, `yaml` or `json5` files as a JSON module by using a [custom parser](/configuration/module/#ruleparserparse) instead of a specific webpack loader.
 
-Let's say you have a `data.toml`, a `data.yaml` and a `data.json5` under `src` folder:
+Let's say you have a `data.toml`, a `data.yaml` and a `data.json5` files under `src` folder:
 
 __src/data.toml__
 
