@@ -31,8 +31,7 @@ module.exports = env => merge(common(env), {
       libraryTarget: 'umd'
     },
     optimization: {
-      splitChunks: false,
-      minimize: false
+      splitChunks: false
     },
     plugins: [
       new SSGPlugin({
