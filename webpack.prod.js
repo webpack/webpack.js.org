@@ -2,7 +2,7 @@
 const { merge } = require('webpack-merge');
 const OptimizeCSSAssetsPlugin = require('css-minimizer-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
-const OfflinePlugin = require('offline-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 // Load Common Configuration
 const common = require('./webpack.common.js');
@@ -20,18 +20,6 @@ module.exports = env => merge(common(env), {
     ]
   },
   plugins: [
-    new OfflinePlugin({
-      autoUpdate: true,
-      publicPath: '/',
-      appShell: '/app-shell/',
-      responseStrategy: 'network-first',
-      // make sure to cache homepage and app shell as app shell for the rest of the pages.
-      // externals also re-validate on sw update (releases)
-      externals: ['/app-shell/', '/', '/manifest.json', ...hashedAssetsBySSGRun],
-      excludes: ['/icon_*.png', '/**/printable/', '/robots.txt'],
-      AppCache: {
-        publicPath: '/'
-      }
-    })
+    new GenerateSW()
   ]
 });

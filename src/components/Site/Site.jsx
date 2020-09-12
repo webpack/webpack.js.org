@@ -33,9 +33,19 @@ import './Site.scss';
 // Load Content Tree
 import Content from '../../_content.json';
 
-// call offline plugin so it can build
 if (isClient) {
-  require('offline-plugin/runtime').install();
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/service-worker.js')
+        .then((registration) => {
+          console.log('SW registered: ', registration);
+        })
+        .catch((registrationError) => {
+          console.log('SW registration failed: ', registrationError);
+        });
+    });
+  }
 }
 
 class Site extends React.Component {
