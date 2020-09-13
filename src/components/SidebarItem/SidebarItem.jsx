@@ -48,7 +48,8 @@ export default class SidebarItem extends React.Component {
         <Link
           key={this.props.url}
           className={`${block}__title`}
-          to={this.props.url}>
+          to={this.props.url}
+          onClick={()=>window.scrollTo(0,0)}>
           {title}
         </Link>
 
