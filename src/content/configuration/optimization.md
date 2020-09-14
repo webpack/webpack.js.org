@@ -29,11 +29,6 @@ related:
 告知 webpack 使用 [TerserPlugin](/plugins/terser-webpack-plugin/) 或其它在 [`optimization.minimizer`](#optimizationminimizer) 
 定义的插件压缩 bundle。
 
-<<<<<<< HEAD
-`production` 模式下，这里默认是 `true`。
-
-=======
->>>>>>> 5471307522f569bcf1aff50b5a952d528d4c2a3e
 __webpack.config.js__
 
 
