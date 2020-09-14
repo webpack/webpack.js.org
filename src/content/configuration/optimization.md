@@ -24,12 +24,10 @@ related:
 
 ## `optimization.minimize` {#optimizationminimize}
 
-`boolean`
+`boolean = true`
 
 告知 webpack 使用 [TerserPlugin](/plugins/terser-webpack-plugin/) 或其它在 [`optimization.minimizer`](#optimizationminimizer) 
 定义的插件压缩 bundle。
-
-`production` 模式下，这里默认是 `true`。
 
 __webpack.config.js__
 

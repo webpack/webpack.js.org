@@ -174,6 +174,8 @@ module.exports = {
 
 `[string] = ['./node_modules']`
 
+W> Moved to [snapshot.managedPaths](#managedpaths)
+
 `cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
 
 ### `cache.hashAlgorithm` {#cachehashalgorithm}
@@ -446,3 +448,90 @@ module.exports = {
   }
 };
 ```
+
+## `snapshot`
+
+`object`
+
+`snapshot` options decide how the file system snapshots are created and invalidated.
+
+__webpack.config.js__
+
+```javascript
+const path = require('path');
+module.exports = {
+  // ...
+  snapshot: {
+    managedPaths: [path.resolve(__dirname, '../node_modules')],
+    immutablePaths: [],
+    buildDependencies: {
+      hash: true,
+      timestamp: true
+    },
+    module: {
+      timestamp: true
+    },
+    resolve: {
+      timestamp: true
+    },
+    resolveBuildDependencies: {
+      hash: true,
+      timestamp: true
+    }
+  }
+};
+```
+
+### `managedPaths`
+
+`[string]`
+
+An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
+
+### `immutablePaths`
+
+`[string]`
+
+An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
+
+### `buildDependencies`
+
+`object = { hash boolean = true, timestamp boolean = true }`
+
+Snapshots for build dependencies when using the persistent cache.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
+
+Both `hash` and `timestamp` are optional.
+
+- `{ hash: true }`: Good for CI caching with a fresh checkout which doesn't keep timestamps and uses hashes.
+- `{ timestamp: true }`: Good for local development caching.
+- `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps are the same, which leads to a small performance hit for the initial build.
+
+### `module`
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+Snapshots for building modules.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
+
+### `resolve`
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+Snapshots for resolving of requests.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
+
+### `resolveBuildDependencies`
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+Snapshots for resolving of build dependencies when using the persistent cache.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.

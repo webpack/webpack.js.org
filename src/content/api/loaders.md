@@ -467,15 +467,6 @@ Possible values: `'production'`, `'development'`, `'none'`
 W> The usage of these properties is highly discouraged since we are planning to remove them from the context. They are still listed here for documentation purposes.
 
 
-### `this.exec` {#thisexec}
-
-``` typescript
-exec(code: string, filename: string)
-```
-
-Execute some code fragment like a module. See [this comment](https://github.com/webpack/webpack.js.org/issues/1268#issuecomment-313513988) for a replacement method if needed.
-
-
 ### `this.value` {#thisvalue}
 
 Pass values to the next loader. If you know what your result exports if executed as a module, set this value here (as an only element array).
