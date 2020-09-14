@@ -103,7 +103,7 @@ resolver 设置完成之后触发。
 
 `AsyncSeriesHook`
 
-在 compiler.run 执行之前调用。
+在开始执行一次构建之前调用，compiler.run 方法开始执行后立刻进行调用。
 
 - 回调参数：`compiler`
 
