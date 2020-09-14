@@ -162,8 +162,8 @@ module.exports = {
 
 `boolean`
 
-在编译出错时，使用 `optimization.noEmitOnErrors` 来跳过生成阶段(emitting phase)。这可以确保没有生成出错误资源。而 stats 中所有 assets 
-中的 `emitted` 标记都是 `false`。
+在编译出错时，使用 `optimization.noEmitOnErrors` 来跳过生成阶段(emitting phase)。这可以确保没有生成出错误资源，
+但是 stats 中所有 assets 属性中的 `emitted` 都会标记为 `false`。
 
 __webpack.config.js__
 
