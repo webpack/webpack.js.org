@@ -421,7 +421,7 @@ Option   | Description                                      | Input Type
 `electronMain`     | Treat electron built-in modules in the main context like `app`, `ipc-main` or `shell` as external and load them via `require()` when used.                     | boolean
 `electronPreload`     | Treat electron built-in modules in the preload context like `web-frame`, `ipc-renderer` or `shell` as external and load them via `require()` when used.                     | boolean
 `node`     | Treat node.js built-in modules like `fs`, `path` or `vm` as external and load them via `require()` when used.| boolean
-`nodeWebkit`     | Treat `node-webkit` legacy `nw.gui` module as external and load it via `require()` when used.| boolean
+`nodeWebkit` (deprecated)    | Treat `node-webkit` legacy `nw.gui` module as external and load it via `require()` when used.| boolean
 `web`     | Treat references to `http(s)://...` and `std:...` as external and load them via `import` when used. __(Note that this changes execution order as externals are executed before any other code in the chunk)__.| boolean
 `webAsync`     | Treat references to 'http(s)://...' and 'std:...' as external and load them via async import() when used __(Note that this external type is an async module, which has various effects on the execution)__.| boolean
 
