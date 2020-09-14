@@ -33,17 +33,6 @@ module.exports = env => merge(common(env), {
           }
         },
         {
-          urlPattern: /images\.opencollective\.com\/.*avatar\.png/,
-          handler: 'CacheFirst',
-          options: {
-            cacheName: 'avatar',
-            expiration: {
-              maxAgeSeconds: 60 * 60 * 24 * 30,
-              maxEntries: 100
-            }
-          }
-        },
-        {
           urlPattern: /\/$/, // cache html at runtime
           handler: 'NetworkFirst',
         },
