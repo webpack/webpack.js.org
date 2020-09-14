@@ -4,6 +4,7 @@ contributors:
   - simon04
   - byzyk
   - masives
+  - chenxsan
 related:
   - title: Issue 2783 - ContextReplacementPlugin Description
     url: https://github.com/webpack/webpack/issues/2783#issuecomment-234137265
@@ -18,9 +19,7 @@ The `ContextReplacementPlugin` allows you to override the inferred information. 
 
 ## Usage {#usage}
 
-<!-- eslint-skip -->
-
-```javascript
+```typescript
 new webpack.ContextReplacementPlugin(
   resourceRegExp: RegExp,
   newContentResource?: string,
@@ -45,7 +44,7 @@ The `moment/locale` context is restricted to files matching `/de|fr|hu/`. Thus o
 
 ## Content Callback {#content-callback}
 
-```javascript
+```typescript
 new webpack.ContextReplacementPlugin(
   resourceRegExp: RegExp,
   newContentCallback: (data) => void
@@ -72,7 +71,7 @@ new webpack.ContextReplacementPlugin(/^\.\/locale$/, (context) => {
 
 The `newContentResource` and `newContentCreateContextMap` parameters are also available:
 
-```javascript
+```typescript
 new webpack.ContextReplacementPlugin(
   resourceRegExp: RegExp,
   newContentResource: string,

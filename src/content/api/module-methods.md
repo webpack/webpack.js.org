@@ -166,7 +166,7 @@ CommonJS 的目标是为浏览器之外的 JavaScript 指定一个生态系统�
 
 ### `require` {#require}
 
-``` javascript
+```typescript
 require(dependency: String);
 ```
 
@@ -182,7 +182,7 @@ W> 以异步的方式使用，可能不会达到预期效果。
 
 ### `require.resolve` {#requireresolve}
 
-``` javascript
+```typescript
 require.resolve(dependency: String);
 ```
 

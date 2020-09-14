@@ -467,6 +467,7 @@ Possible values: `'production'`, `'development'`, `'none'`
 W> The usage of these properties is highly discouraged since we are planning to remove them from the context. They are still listed here for documentation purposes.
 
 
+<<<<<<< HEAD
 ### `this.exec` {#thisexec}
 
 ``` typescript
@@ -477,6 +478,9 @@ Execute some code fragment like a module. See [this comment](https://github.com/
 
 
 ### `this.value` {#thisvalue}
+=======
+### `this.value`
+>>>>>>> 5471307522f569bcf1aff50b5a952d528d4c2a3e
 
 Pass values to the next loader. If you know what your result exports if executed as a module, set this value here (as an only element array).
 
