@@ -1146,10 +1146,11 @@ __webpack.config.js__
 
 ```javascript
 module.exports = {
+  //...
   output: {
     workerChunkLoading: false
   }
-}
+};
 ```
 
 ## `output.enabledLibraryTypes`
