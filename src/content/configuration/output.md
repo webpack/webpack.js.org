@@ -1136,13 +1136,11 @@ module.exports = {
 
 ## `output.workerChunkLoading`
 
-`string = 'require' | 'import-scripts' | 'async-node' | 'universal'` `boolean: false` 
+`string = 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false` 
 
-The new option `workerChunkLoading` controls the chunk loading of workers (default chosen based on output.chunkLoading). 
+The new option `workerChunkLoading` controls the chunk loading of workers. 
 
-The method of loading chunks (methods included by default are 'jsonp' (web), 'importScripts' (WebWorker), 'require' (sync node.js), 'async-node' (async node.js), but others might be added by plugins).
-
-T> The default value of this option changes when `target` is different. For more details, see [`output.workerChunkLoading` default value](https://github.com/webpack/webpack/blob/2c00413b26b266d4bf9fd2d68a13769837908461/lib/config/defaults.js#L604) and [new `target.js`](https://github.com/webpack/webpack/blob/2c00413b26b266d4bf9fd2d68a13769837908461/lib/config/target.js#L64)
+T> The default value of this option changes when `target` is different. For more details, see [`output.workerChunkLoading` default value](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js#L604) and [`target.js`](https://github.com/webpack/webpack/blob/master/lib/config/target.js#L64).
 
 __webpack.config.js__
 
