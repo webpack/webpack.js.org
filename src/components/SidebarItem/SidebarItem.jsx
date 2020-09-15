@@ -28,7 +28,7 @@ export default class SidebarItem extends React.Component {
   }
 
   scrollTop() {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   render() {
