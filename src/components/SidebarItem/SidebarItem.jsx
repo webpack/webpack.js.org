@@ -27,6 +27,10 @@ export default class SidebarItem extends React.Component {
     );
   }
 
+  scrollTop() {
+    window.scrollTo(0, 0)
+  }
+
   render() {
     let {title, anchors = []} = this.props;
     let openMod = this.state.open ? `${block}--open` : '';
@@ -49,7 +53,7 @@ export default class SidebarItem extends React.Component {
           key={this.props.url}
           className={`${block}__title`}
           to={this.props.url}
-          onClick={()=>window.scrollTo(0,0)}>
+          onClick={this.scrollTop}>
           {title}
         </Link>
 
