@@ -693,6 +693,30 @@ module.exports = {
 
 When creating a bundle with updated configuration, `console.log(footer)` will output 'overridden footer'.
 
+### `resolve.fullySpecified`
+
+`boolean = true`
+
+When using `import`s in `.mjs` files or any `.js` files when their nearest parent `package.json` file contains a `"type"` field with a value of `"module"`, you're required to provide file extension, otherwise webpack would fail the compiling with `Module not found` error.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false // disable the enforcement
+        }
+      }
+    ]
+  }
+};
+```
+
 
 ## `Condition`
 
