@@ -15,12 +15,15 @@ import 'docsearch.js/dist/cdn/docsearch.css';
 import './Navigation.scss';
 import './Search.scss';
 
+const onSearch = () => {};
+
 export default class Navigation extends React.Component {
   render() {
     let { pathname, links, toggleSidebar } = this.props;
 
     return (
       <Banner
+        onSearch={onSearch}
         blockName="navigation"
         logo={ <Logo light={ true } /> }
         url={ pathname }

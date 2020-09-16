@@ -9,6 +9,7 @@ contributors:
   - byzyk
   - spicalous
   - Neob91
+  - Loonride
 ---
 
 webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
@@ -44,7 +45,7 @@ __webpack.config.js__
 module.exports = {
   //...
   watchOptions: {
-    aggregateTimeout: 300,
+    aggregateTimeout: 200,
     poll: 1000
   }
 };
@@ -53,7 +54,7 @@ module.exports = {
 
 ## `watchOptions.aggregateTimeout`
 
-`number = 300`
+`number = 200`
 
 Add a delay before rebuilding once the first file changed. This allows webpack to aggregate any other changes made during this time period into one rebuild. Pass a value in milliseconds:
 
@@ -104,7 +105,7 @@ T> If you use `require.context`, webpack will watch your entire directory. You w
 
 `boolean = false` `number`
 
-Turn on [polling](https://whatis.techtarget.com/definition/polling) by passing `true`, or specifying a poll interval in milliseconds:
+Turn on [polling](https://en.wikipedia.org/wiki/Polling_(computer_science)) by passing `true`, or specifying a poll interval in milliseconds:
 
 __webpack.config.js__
 

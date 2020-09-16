@@ -30,6 +30,7 @@ contributors:
   - wizardofhogwarts
   - maximilianschmelzer
   - smelukov
+  - chenxsan
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -140,6 +141,13 @@ The [`dependOn` option](/configuration/entry-context/#dependencies) allows to sh
   };
 ```
 
+#### `optimization.runtimeChunk`
+
+`optimization.runtimeChunk: 'single'` is needed when multiple entry points are being used on a single HTML page.
+
+Using multiple entry points per page should be avoided when possible in favor of an entry point with multiple imports: `entry: { page: ['./analytics', './app'] }`. This results in a better optimization and consistent execution order when using `async` script tags.
+
+T> Multiple entry points per page could be used in scenarios where HTML is generated in a dynamic matter, e. g. when components on page are unknown at compile-time and HTML page is composed dynamically depending on the data.
 
 ### `SplitChunksPlugin`
 
@@ -186,8 +194,6 @@ Entrypoint another = vendors~another~index.bundle.js another.bundle.js
 Here are some other useful plugins and loaders provided by the community for splitting code:
 
 - [`mini-css-extract-plugin`](/plugins/mini-css-extract-plugin): Useful for splitting CSS out from the main application.
-- [`bundle-loader`](/loaders/bundle-loader): Used to split code and lazy load the resulting bundles.
-- [`promise-loader`](https://github.com/gaearon/promise-loader): Similar to the `bundle-loader` but uses promises.
 
 
 ## Dynamic Imports
@@ -212,7 +218,6 @@ __webpack.config.js__
     output: {
       filename: '[name].bundle.js',
 +     chunkFilename: '[name].bundle.js',
-      publicPath: 'dist/',
       path: path.resolve(__dirname, 'dist'),
     },
 -   optimization: {

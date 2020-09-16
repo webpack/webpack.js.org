@@ -13,21 +13,20 @@ contributors:
   - EugeneHlushko
   - grgur
   - anshumanv
+  - pixel-ray
 ---
-
-The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
-
-T> For webpack-dev-server, this property needs to be in the `devServer` object.
-
-T> For webpack-dev-middleware, this property needs to be in the webpack-dev-middleware's `options` object.
-
-W> This option does not have any effect when using the Node.js API.
-
-## `stats`
 
 `object` `string`
 
-There are some presets available to use as a shortcut. Use them like this:
+The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
+
+T> For webpack-dev-server, this property needs to be in the [`devServer` configuration object](/configuration/dev-server/#devserverstats-).
+
+T> For [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware), this property needs to be in the webpack-dev-middleware's `options` object.
+
+W> This option does not have any effect when using the Node.js API.
+
+__webpack.js.org__
 
 ```js
 module.exports = {
@@ -35,6 +34,11 @@ module.exports = {
   stats: 'errors-only'
 };
 ```
+
+## Stats Presets
+
+webpack comes with certain presets available for the stats output:
+
 
 | Preset              | Alternative | Description                                                    |
 | ------------------- | ----------- | -------------------------------------------------------------- |
@@ -46,7 +50,11 @@ module.exports = {
 | `'verbose'`         | _none_      | Output everything                                              |
 | `'detailed'`        | _none_      | Output everything except `chunkModules` and `chunkRootModules` |
 
-For more granular control, it is possible to specify exactly what information you want. Please note that all of the options in this object are optional.
+## Stats Options
+
+It is possible to specify which information you want to see in the stats output.
+
+T> All of the options in the stats configuration object are optional.
 
 ### `stats.all`
 
@@ -102,6 +110,21 @@ module.exports = {
   //...
   stats: {
     builtAt: false
+  }
+};
+```
+
+### `stats.moduleAssets`
+
+`boolean = true`
+
+Tells `stats` whether to add information about assets inside modules. Set `stats.moduleAssets` to `false` to hide it.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    moduleAssets: false
   }
 };
 ```
@@ -192,6 +215,21 @@ module.exports = {
   //...
   stats: {
     chunkModules: false
+  }
+};
+```
+
+### `stats.chunkRootModules`
+
+`boolean = true`
+
+Tells `stats` whether to add information about the root modules of chunks. Applied if `stats.chunks = true`.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkRootModules: false
   }
 };
 ```
@@ -598,7 +636,7 @@ module.exports = {
 
 `string` `boolean: false`
 
-Sets the [preset](/configuration/stats/#stats) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
+Sets the [preset](/configuration/stats/#stats-presets) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
 
 ```javascript
 module.exports = {
@@ -609,7 +647,7 @@ module.exports = {
 };
 ```
 
-Setting value of `stats.preset` to `false` tells webpack to use `'none'` [stats preset](/configuration/stats/#stats).
+Setting value of `stats.preset` to `false` tells webpack to use `'none'` [stats preset](/configuration/stats/#stats-presets).
 
 ### `stats.providedExports`
 
@@ -652,6 +690,21 @@ module.exports = {
   //...
   stats: {
     reasons: false
+  }
+};
+```
+
+### `stats.relatedAssets`
+
+`boolean = false`
+
+Tells `stats` whether to add information about assets that are related to other assets (like SourceMaps for assets).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    relatedAssets: true
   }
 };
 ```

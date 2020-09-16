@@ -16,7 +16,7 @@ This index lists common terms used throughout the webpack ecosystem.
 
 ## A
 
-- [__Asset__](/guides/asset-management/): This a general term for the images, fonts, media, and any other kind of files that are typically used in websites and other applications. These typically end up as individual files within the [output](/glossary/#o) but can also be inlined via things like the [style-loader](/loaders/style-loader) or [url-loader](/loaders/url-loader).
+- [__Asset__](/guides/asset-management/): This is a general term for the images, fonts, media, and any other kind of files that are typically used in websites and other applications. These typically end up as individual files within the [output](/glossary/#o) but can also be inlined via things like the [style-loader](/loaders/style-loader) or [url-loader](/loaders/url-loader).
 
 
 ## B
@@ -79,6 +79,7 @@ This index lists common terms used throughout the webpack ecosystem.
 ## S
 
 - [__Scaffolding__](/guides/scaffolding/): This feature allows creating a webpack configuration by using customizable third-party initialization packages.
+- [__Shimming__](/guides/shimming/): Not all JS files can be used directly with webpack. The file maybe in an unsupported module format, or not even in any module format. It is here where `shimming` comes into play.
 
 
 ## T

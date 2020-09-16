@@ -10,6 +10,9 @@ $someExtraHeight: 10px;
 $topHeightDesktop: $navigationHeight + $navigationSubHeight + $someExtraHeight;
 $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
 
+$topHeightMobile: $navigationHeight;
+$topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
+
 .markdown {
   line-height: 1.5em;
 
@@ -32,21 +35,38 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
     font-size: getFontSize(-1);
   }
 
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    &:before {
+      content: '';
+      display: block;
+      visibility: hidden;
+      pointer-events: none;
+      height: $topHeightMobile;
+      margin-top: -#{$topHeightMobile};
+      @include break {
+        height: $topHeightDesktop;
+        margin-top: -#{$topHeightDesktop};
+      }
+    }
+  }
+
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    display: flex;
-    align-items: center;
+    display: block;
     font-family: $font-stack-heading;
     font-weight: 600;
     line-height: 1.4;
-    margin: 1.5em 0 0.25em;
+    margin: 0 0 0.25em;
     color: getColor(fiord);
-    word-break: break-all;
-    scroll-margin-top: $topHeightDesktop;
+    word-break: break-word;
 
     tt,
     code {
@@ -213,7 +233,7 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
     border-right: 1px solid #cccccc;
 
     &:last-child {
-      border-right:none;
+      border-right: none;
     }
   }
 
@@ -245,7 +265,7 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
     border-right: 1px solid #cccccc;
 
     &:last-child {
-      border-right:none;
+      border-right: none;
     }
 
     @include break {
@@ -271,7 +291,7 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
     flex-direction: column;
     justify-content: baseline;
     margin: 10px 0;
-    padding: 0 10px
+    padding: 0 10px;
   }
 
   .description.desktop {
@@ -380,8 +400,6 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
       line-height: initial;
       overflow: auto;
       margin: 0;
-      vertical-align: middle;
-      white-space: normal;
     }
   }
 
@@ -394,7 +412,23 @@ $topHeightDesktopWithBanner: $bannerHeight + $topHeightDesktop;
 }
 
 .notification-bar-visible .markdown {
-  h1,h2,h3,h4,h5,h6{
-    scroll-margin-top: $topHeightDesktopWithBanner;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    &:before {
+      content: '';
+      display: block;
+      visibility: hidden;
+      pointer-events: none;
+      height: $topHeightMobileWithBanner;
+      margin-top: -#{$topHeightMobileWithBanner};
+      @include break {
+        height: $topHeightDesktopWithBanner;
+        margin-top: -#{$topHeightDesktopWithBanner};
+      }
+    }
   }
 }

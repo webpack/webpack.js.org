@@ -10,6 +10,8 @@ contributors:
   - debs-obrien
   - wizardofhogwarts
   - EugeneHlushko
+  - chenxsan
+  - jamesgeorge007
 related:
   - title: CommonJS Wikipedia
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -38,6 +40,12 @@ import { NamedExport } from './other-module.js';
 
 W> The keyword here is __statically__. A normal `import` statement cannot be used dynamically within other logic or contain variables. See the [spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) for more information and `import()` below for dynamic usage.
 
+You can also `import` Data URI:
+
+```javascript
+import 'data:text/javascript;charset=utf-8;base64,Y29uc29sZS5sb2coJ2lubGluZSAxJyk7';
+import { number, fn } from 'data:text/javascript;charset=utf-8;base64,ZXhwb3J0IGNvbnN0IG51bWJlciA9IDQyOwpleHBvcnQgY29uc3QgZm4gPSAoKSA9PiAiSGVsbG8gd29ybGQiOw==';
+```
 
 ### `export`
 
@@ -103,6 +111,7 @@ Inline comments to make features work. By adding comments to the import, we can 
 import(
   /* webpackChunkName: "my-chunk-name" */
   /* webpackMode: "lazy" */
+  /* webpackExports: ["default", "named"] */
   'module'
 );
 
@@ -147,7 +156,7 @@ T> Note that all options can be combined like so `/* webpackMode: "lazy-once", w
 
 T> Note that `webpackInclude` and `webpackExclude` options do not interfere with the prefix. eg: `./locale`.
 
-W> The use of `System.import` in webpack [did not fit the proposed spec](https://github.com/webpack/webpack/issues/2163), so it was deprecated in webpack [2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`.
+`webpackExports`: tells webpack to only bundle the used exports of a module when using dynamic imports. It can decrease the output size of a chunk. Available since [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18).
 
 
 ## CommonJS
@@ -157,7 +166,7 @@ The goal of CommonJS is to specify an ecosystem for JavaScript outside the brows
 
 ### `require`
 
-``` javascript
+```typescript
 require(dependency: String);
 ```
 
@@ -173,7 +182,7 @@ W> Using it asynchronously may not have the expected effect.
 
 ### `require.resolve`
 
-``` javascript
+```typescript
 require.resolve(dependency: String);
 ```
 
