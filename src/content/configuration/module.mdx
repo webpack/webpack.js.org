@@ -697,7 +697,7 @@ When creating a bundle with updated configuration, `console.log(footer)` will ou
 
 `boolean = true`
 
-When using `import`s in `.mjs` files or any other `.js` files when their nearest parent `package.json` file contains a `"type"` field with a value of `"module"`, webpack won't resolve against the [`resolve.mainFiles`](/configuration/resolve/#resolvemainfiles), and it's required to provide the file extension, otherwise webpack would fail the compiling with a `Module not found` error.
+When enabled, you should provide the file extension when `import`ing a module in `.mjs` files or any other `.js` files when their nearest parent `package.json` file contains a `"type"` field with a value of `"module"`, otherwise webpack would fail the compiling with a `Module not found` error. And webpack won't resolve directories with filenames defined in the [`resolve.mainFiles`](/configuration/resolve/#resolvemainfiles), you have to specify the filename yourself.
 
 __webpack.config.js__
 
