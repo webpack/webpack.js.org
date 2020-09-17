@@ -697,7 +697,7 @@ When creating a bundle with updated configuration, `console.log(footer)` will ou
 
 `boolean = true`
 
-When using `import`s in `.mjs` files or any `.js` files when their nearest parent `package.json` file contains a `"type"` field with a value of `"module"`, you're required to provide file extension, otherwise webpack would fail the compiling with `Module not found` error.
+When using `import`s in `.mjs` files or any other `.js` files when their nearest parent `package.json` file contains a `"type"` field with a value of `"module"`, webpack won't resolve against the [`resolve.mainFiles`](/configuration/resolve/#resolvemainfiles), and it's required to provide the file extension, otherwise webpack would fail the compiling with a `Module not found` error.
 
 __webpack.config.js__
 
@@ -709,7 +709,7 @@ module.exports = {
       {
         test: /\.m?js/,
         resolve: {
-          fullySpecified: false // disable the enforcement
+          fullySpecified: false // disable the behaviour
         }
       }
     ]
@@ -717,6 +717,7 @@ module.exports = {
 };
 ```
 
+W> `resolve.fullySpecified` doesn't affect requests from [mainFields](/configuration/resolve/#resolvemainfields), [aliasFields](/configuration/resolve/#resolvealiasfields) or [aliases](/configuration/resolve/#resolvealias).
 
 ## `Condition`
 
