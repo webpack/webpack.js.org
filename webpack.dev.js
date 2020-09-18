@@ -13,7 +13,9 @@ module.exports = env => merge(common(env), {
     new webpack.HotModuleReplacementPlugin(),
     new HTMLPlugin({
       template: 'index.html',
-      favicon: 'favicon.ico'
+      favicon: 'favicon.ico',
+      chunks: ['vendor', 'index'],
+      chunksSortMode: 'manual'
     }),
     new DirectoryTreePlugin({
       dir: 'src/content',

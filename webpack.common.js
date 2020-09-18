@@ -39,15 +39,15 @@ const mdPlugins = [
 module.exports = (env = {}) => ({
   context: path.resolve(__dirname, './src'),
   entry: {
+    index: {
+      import: './index.jsx',
+      dependOn: 'vendor',
+    },
     vendor: [
       'react', // Replace with preact or inferno
       'react-dom', // Replace with preact or inferno
       'react-router-dom',
     ],
-    index: {
-      import: './index.jsx',
-      dependOn: 'vendor',
-    },
   },
   resolve: {
     symlinks: false,
