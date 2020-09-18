@@ -136,8 +136,8 @@ module.exports = (env = {}) => ({
         }
       },
       {
-        test: /\.(jpg|png|svg|ico)$/,
-        use: 'file-loader'
+        test: /\.(jpg|jpeg|png|svg|ico)$/i,
+        type: 'asset'
       }
     ]
   },
