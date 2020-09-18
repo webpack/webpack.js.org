@@ -18,7 +18,7 @@ const mdPlugins = [
   [
     require('remark-autolink-headings'),
     {
-      behaviour: 'append'
+      behavior: 'append'
     }
   ],
   [
