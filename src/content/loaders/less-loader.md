@@ -205,64 +205,6 @@ module.exports = {
 };
 ```
 
-#### `String`
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.less$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'less-loader',
-            options: {
-              appendData: `@env: ${process.env.NODE_ENV};`,
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
-```
-
-#### `Function`
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.less$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'less-loader',
-            options: {
-              appendData: (loaderContext) => {
-                // More information about available properties https://webpack.js.org/api/loaders/
-                const { resourcePath, rootContext } = loaderContext;
-                const relativePath = path.relative(rootContext, resourcePath);
-
-                if (relativePath === 'styles/foo.less') {
-                  return '@value: 100px;';
-                }
-
-                return '@value: 200px;';
-              },
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
-```
-
 ### `sourceMap`
 
 Type: `Boolean`

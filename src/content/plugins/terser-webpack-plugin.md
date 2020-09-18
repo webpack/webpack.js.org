@@ -306,8 +306,13 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
+        terserOptions: {
+          myCustomOption: true,
+        },
         // Can be async
-        minify: (file, sourceMap) => {
+        minify: (file, sourceMap, minimizerOptions) => {
+          // The `minimizerOptions` option contains option from the `terserOptions` option
+          // You can use `minimizerOptions.myCustomOption`
           const extractedComments = [];
 
           // Custom logic for extract comments
