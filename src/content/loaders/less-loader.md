@@ -205,6 +205,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 #### `String` {#string}
 
 ```js
@@ -264,6 +265,9 @@ module.exports = {
 ```
 
 ### `sourceMap` {#sourcemap}
+=======
+### `sourceMap`
+>>>>>>> e41654708d918922b274a6ba065ba432f54ddbc5
 
 类型: `Boolean`
 默认值: 取决于 `compiler.devtool` 的值
