@@ -16,6 +16,7 @@ contributors:
   - lukasgeiter
   - EugeneHlushko
   - bigdawggi
+  - anshumanv
 ---
 
 Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index.js` and will output the result in `dist/main.js` minified and optimized for production.
@@ -124,7 +125,7 @@ module.exports = {
       chunkFilename: "[id].js",
       chunkFilename: "[chunkhash].js", // for long term caching
       // the filename template for additional chunks
-      jsonpFunction: "myWebpackJsonp", // string
+      chunkLoadingGlobal: "myWebpackJsonp", // string
       // name of the JSONP function used to load chunks
       sourceMapFilename: "[file].map", // string
       sourceMapFilename: "sourcemaps/[file].map", // string
