@@ -4,15 +4,25 @@ source: https://raw.githubusercontent.com/webpack-contrib/thread-loader/master/R
 edit: https://github.com/webpack-contrib/thread-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/thread-loader
 ---
-Runs the following loaders in a worker pool.
 
-## 安装 {#install}
+
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![deps][deps]][deps-url]
+[![tests][tests]][tests-url]
+[![coverage][cover]][cover-url]
+[![chat][chat]][chat-url]
+[![size][size]][size-url]
+
+
+
+运行以下 loader 在 worker pool 中。
+
+## 快速开始 {#getting-started}
 
 ```bash
 npm install --save-dev thread-loader
 ```
-
-## 用法 {#usage}
 
 使用时，需将此 loader 放置在其他 loader 之前。放置在此 loader 之后的 loader 会在一个独立的 worker 池中运行。
 
@@ -26,7 +36,7 @@ npm install --save-dev thread-loader
 
 请仅在耗时的操作中使用此 loader！
 
-## 示例 {#examples}
+### 示例 {#examples}
 
 **webpack.config.js**
 
@@ -36,15 +46,15 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve("src"),
+        include: path.resolve('src'),
         use: [
           "thread-loader",
           // 耗时的 loader （例如 babel-loader）
-        ]
-      }
-    ]
-  }
-}
+        ],
+      },
+    ],
+  },
+};
 ```
 
 **with options**
@@ -84,10 +94,10 @@ use: [
       // 池的名称
       // 可以修改名称来创建其余选项都一样的池
       name: "my-pool"
-    }
+    },
   },
-  // 耗时的 loader （例如 babel-loader）
-]
+  // 耗时的 loader（例如 babel-loader）
+];
 ```
 
 **预警**
@@ -96,50 +106,45 @@ use: [
 
 这会启动池内最大数量的 worker 并把指定的模块加载到 node.js 的模块缓存中。
 
-``` js
+```js
 const threadLoader = require('thread-loader');
 
-threadLoader.warmup({
-  // 池选项，例如传递给 loader 选项
-  // 必须匹配 loader 选项才能启动正确的池
-}, [
-  // 加载模块
-  // 可以是任意模块，例如
-  'babel-loader',
-  'babel-preset-es2015',
-  'sass-loader',
-]);
+threadLoader.warmup(
+  {
+    // 池选项，例如传递给 loader 选项
+    // 必须匹配 loader 选项才能启动正确的池
+  },
+  [
+    // 加载模块
+    // 可以是任意模块，例如
+    'babel-loader',
+    'babel-preset-es2015',
+    'sass-loader',
+  ]
+);
 ```
 
+## 贡献 {#contributing}
 
-## Maintainers {#maintainers}
+如果还未阅读贡献指南，请抽时间进行阅读。
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/sokra">
-          <img width="150" height="150" src="https://github.com/sokra.png?size=150">
-          </br>
-          sokra
-        </a>
-      </td>
-    </tr>
-  <tbody>
-</table>
+[CONTRIBUTING](https://github.com/webpack-contrib/thread-loader/blob/master/.github/CONTRIBUTING.md)
 
+## License {#license}
+
+[MIT](https://github.com/webpack-contrib/thread-loader/blob/master/LICENSE)
 
 [npm]: https://img.shields.io/npm/v/thread-loader.svg
 [npm-url]: https://npmjs.com/package/thread-loader
-
+[node]: https://img.shields.io/node/v/thread-loader.svg
+[node-url]: https://nodejs.org/
 [deps]: https://david-dm.org/webpack-contrib/thread-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/thread-loader
-
-[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
-[chat-url]: https://gitter.im/webpack/webpack
-
-[test]: http://img.shields.io/travis/webpack-contrib/thread-loader.svg
-[test-url]: https://travis-ci.org/webpack-contrib/thread-loader
-
+[tests]: https://github.com/webpack-contrib/thread-loader/workflows/thread-loader/badge.svg
+[tests-url]: https://github.com/webpack-contrib/thread-loader/actions
 [cover]: https://codecov.io/gh/webpack-contrib/thread-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/thread-loader
+[chat]: https://badges.gitter.im/webpack/webpack.svg
+[chat-url]: https://gitter.im/webpack/webpack
+[size]: https://packagephobia.now.sh/badge?p=thread-loader
+[size-url]: https://packagephobia.now.sh/result?p=thread-loader

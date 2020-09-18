@@ -54,7 +54,7 @@ module.exports = {
             options: {
               postcssOptions: {
                 plugins: [
-                  'postcss-present-env',
+                  'postcss-preset-env',
                   {
                     // Options
                   },
@@ -318,7 +318,7 @@ module.exports = {
                 parser: 'sugarss',
                 plugins: [
                   ['postcss-short', { prefix: 'x' }],
-                  'postcss-present-env',
+                  'postcss-preset-env',
                 ],
               };
             }
@@ -326,7 +326,7 @@ module.exports = {
             return {
               plugins: [
                 ['postcss-short', { prefix: 'x' }],
-                'postcss-present-env',
+                'postcss-preset-env',
               ],
             };
           },
@@ -367,7 +367,7 @@ module.exports = {
   plugins: [
     // Plugins for PostCSS
     ['postcss-short', { prefix: 'x' }],
-    'postcss-present-env',
+    'postcss-preset-env',
   ],
 };
 ```
@@ -389,7 +389,7 @@ module.exports = (api) => {
       plugins: [
         // Plugins for PostCSS
         ['postcss-short', { prefix: 'x' }],
-        'postcss-present-env',
+        'postcss-preset-env',
       ],
     };
   }
@@ -399,7 +399,7 @@ module.exports = (api) => {
     plugins: [
       // Plugins for PostCSS
       ['postcss-short', { prefix: 'x' }],
-      'postcss-present-env',
+      'postcss-preset-env',
     ],
   };
 };
@@ -414,7 +414,7 @@ module.exports = {
   plugins: {
     // Plugins for PostCSS
     'postcss-short': { prefix: 'x' },
-    'postcss-present-env': {},
+    'postcss-preset-env': {},
   },
 };
 ```
