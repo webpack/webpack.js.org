@@ -10,6 +10,14 @@ const common = require('./webpack.common.js');
 module.exports = env => merge(common(env), {
   mode: 'production',
   target: 'web',
+  entry: {
+    index: './index.jsx',
+    vendor: [
+      'react', // Replace with preact or inferno
+      'react-dom', // Replace with preact or inferno
+      'react-router-dom',
+    ],
+  },
   optimization: {
     minimizer: [
       new TerserJSPlugin({}),

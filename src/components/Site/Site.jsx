@@ -1,7 +1,6 @@
 // Import External Dependencies
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { hot as Hot } from 'react-hot-loader';
 import DocumentTitle from 'react-document-title';
 
 // Import Utilities
@@ -188,4 +187,4 @@ class Site extends React.Component {
   };
 }
 
-export default Hot(module)(Site);
+export default Site;

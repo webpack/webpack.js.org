@@ -5,17 +5,20 @@ const HTMLPlugin = require('html-webpack-plugin');
 const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
 const common = require('./webpack.common.js');
 const { enhance, filter, sort } = require('./src/utilities/content-tree-enhancers.js');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = env => merge(common(env), {
   mode: 'development',
   devtool: 'source-map',
+  entry: {
+    index: './index.jsx'
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin(),
     new HTMLPlugin({
       template: 'index.html',
       favicon: 'favicon.ico',
-      chunks: ['vendor', 'index'],
-      chunksSortMode: 'manual'
     }),
     new DirectoryTreePlugin({
       dir: 'src/content',
