@@ -328,7 +328,7 @@ module.exports = {
 
 ### `stats.entrypoints`
 
-`boolean = true`
+`boolean = true` `string = 'auto'`
 
 Tells `stats` whether to display the entry points with the corresponding bundles.
 
@@ -340,6 +340,8 @@ module.exports = {
   }
 };
 ```
+
+T> If `entrypoints: 'auto'` is set then it is decided automatically if displaying of entrypoints make sense.
 
 ### `stats.env`
 
@@ -765,6 +767,51 @@ module.exports = {
   //...
   stats: {
     version: false
+  }
+};
+```
+
+### `stats.chunkGroupAuxiliary`
+
+`boolean = true`
+
+Display auxiliary assets in chunk groups.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupAuxiliary: false
+  }
+};
+```
+
+### `stats.chunkGroupChildren`
+
+`boolean = true`
+
+Display children of chunk groups. (e. g. prefetched, preloaded chunks and assets).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupChildren: false
+  }
+};
+```
+
+### `stats.chunkGroupMaxAssets`
+
+`number`
+
+Limit of assets displayed in chunk groups.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupMaxAssets: 5
   }
 };
 ```
