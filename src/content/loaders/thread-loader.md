@@ -16,7 +16,7 @@ repo: https://github.com/webpack-contrib/thread-loader
 
 
 
-Runs the following loaders in a worker pool.
+运行以下 loader 在 worker pool 中。
 
 ## 快速开始 {#getting-started}
 
