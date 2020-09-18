@@ -16,7 +16,7 @@ module.exports = env => merge(common(env), {
       new OptimizeCSSAssetsPlugin({})
     ]
   },
-  cache: 'true',
+  cache: true,
   plugins: [
     new GenerateSW({
       swDest: 'sw.js',
