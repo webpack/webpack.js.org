@@ -553,9 +553,7 @@ Likes tater tots and beer.",
 Install `toml`, `yamljs` and `json5` packages first:
 
 ```bash
-npm install toml --save-dev
-npm install yamljs --save-dev
-npm install json5 --save-dev
+npm install toml yamljs json5 --save-dev
 ```
 
 And configure them in your webpack configuration:
