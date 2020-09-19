@@ -1,5 +1,5 @@
 // Import External Dependencies
-import React from 'react';
+import React, { createRef } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { hot as Hot } from 'react-hot-loader';
 import DocumentTitle from 'react-document-title';
@@ -38,14 +38,35 @@ if (isClient) {
   require('offline-plugin/runtime').install();
 }
 
+const keydownHandler = (eventData, toggleSidebar) => {
+  // Trigger on Cmd + K or Ctrl + K
+  if(eventData.keyCode === 75 && (eventData.metaKey || eventData.ctrlKey)) {
+    toggleSidebar();
+  }
+};
+
 class Site extends React.Component {
   state = {
-    mobileSidebarOpen: false
+    mobileSidebarOpen: false,
+    showSidebar: true,
   };
+
+  toggleSidebar = () => {
+    this.setState(state => ({showSidebar: !state.showSidebar}));
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', (e) => keydownHandler(e, this.toggleSidebar));
+  }
+
+  // Cleanup the registered event on the document object
+  componentDidUnmount() {
+    document.removeEventListener('keydown', (e) => keydownHandler(e, this.toggleSidebar));
+  }
 
   render() {
     let { location } = this.props;
-    let { mobileSidebarOpen } = this.state;
+    let { mobileSidebarOpen, showSidebar } = this.state;
     let sections = extractSections(Content);
     let section = sections.find(({ url }) => location.pathname.startsWith(url));
     let pages = extractPages(Content);
@@ -110,11 +131,14 @@ class Site extends React.Component {
                         return (
                           <React.Fragment>
                             <Sponsors />
-                            <Sidebar
-                              className="site__sidebar"
-                              currentPage={location.pathname}
-                              pages={sidebarPages}
-                            />
+                            {
+                              showSidebar &&
+                                <Sidebar
+                                  className="site__sidebar"
+                                  currentPage={location.pathname}
+                                  pages={sidebarPages}
+                                />
+                            }
                             <Page
                               {...page}
                               content={content}
