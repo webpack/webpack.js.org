@@ -674,7 +674,7 @@ Add errors count.
 module.exports = {
   //...
   stats: {
-    errorsCount: true
+    errorsCount: false
   }
 };
 ```
