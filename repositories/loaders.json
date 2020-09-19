@@ -27,5 +27,6 @@
   "babel/babel-loader",
   "webpack-contrib/postcss-loader",
   "peerigon/extract-loader",
-  "webpack-contrib/remark-loader"
+  "webpack-contrib/remark-loader",
+  "webpack-contrib/stylus-loader"
 ]
