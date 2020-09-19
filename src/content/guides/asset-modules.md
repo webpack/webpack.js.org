@@ -268,7 +268,7 @@ __src/index.js__
 const logo = new URL('./logo.svg', import.meta.url);
 ```
 
-Depending on the [`target`](/configuration/target) in your configuration, webpack would compile the above code into different result:
+Depending on the [`target`](/configuration/target/) in your configuration, webpack would compile the above code into a different result:
 
 ```js
 // target: web
