@@ -689,7 +689,7 @@ Add warnings count.
 module.exports = {
   //...
   stats: {
-    warningsCount: true
+    warningsCount: false
   }
 };
 ```
