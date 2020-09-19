@@ -23,11 +23,9 @@ Since version 4 webpack runs optimizations for you depending on the chosen  [`mo
 
 ## `optimization.minimize`
 
-`boolean`
+`boolean = true`
 
 Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
-
-This is `true` by default in `production` mode.
 
 __webpack.config.js__
 
@@ -570,6 +568,23 @@ module.exports = {
   //...
   optimization: {
     innerGraph: false
+  }
+};
+```
+
+## `optimization.realContentHash`
+
+`boolean = true`
+
+Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    realContentHash: false
   }
 };
 ```
