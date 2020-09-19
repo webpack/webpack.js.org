@@ -1,5 +1,5 @@
 // Import External Dependencies
-import React, { createRef } from 'react';
+import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { hot as Hot } from 'react-hot-loader';
 import DocumentTitle from 'react-document-title';
