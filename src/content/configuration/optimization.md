@@ -329,7 +329,7 @@ module.exports = {
 };
 ```
 
-T> When [mode](/configuration/mode/) is to `none`, `optimization.nodeEnv` defaults to `false`. 
+T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` defaults to `false`. 
 
 ## `optimization.mangleWasmImports`
 
