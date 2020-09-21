@@ -664,7 +664,41 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `stats.publicPath` {#statspublicpath}
+=======
+### `stats.errorsCount`
+
+`boolean = true`
+
+Add errors count.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    errorsCount: false
+  }
+};
+```
+
+### `stats.warningsCount`
+
+`boolean = true`
+
+Add warnings count.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    warningsCount: false
+  }
+};
+```
+
+### `stats.publicPath`
+>>>>>>> 422ff0adfd1f147d5872897760d9c7e7027c4f1d
 
 `boolean = true`
 

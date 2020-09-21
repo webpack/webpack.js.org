@@ -5,6 +5,7 @@ contributors:
   - smelukov
   - EugeneHlushko
   - chenxsan
+  - anshumanv
 related:
   - title: webpack 5 - 资源模块
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
@@ -25,6 +26,7 @@ related:
 - `asset/source` 导出资源的源代码。之前通过使用 `raw-loader` 实现。
 - `asset` 在导出一个 data URI 和发送一个单独的文件之间自动选择。之前通过使用 `url-loader`，并且配置资源体积限制实现。
 
+<<<<<<< HEAD
 W> 这是一项实验功能。通过在 webpack 配置的 [experiments](/configuration/experiments/) 选项中设置 `experiments.asset: true` 来开启资源模块。
 
 __webpack.config.js__
@@ -45,6 +47,9 @@ module.exports = {
 ```
 
 ## resource 资源(resource asset) {#resource-assets}
+=======
+## Resource assets
+>>>>>>> 422ff0adfd1f147d5872897760d9c7e7027c4f1d
 
 __webpack.config.js__
 
@@ -56,9 +61,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
 + module: {
 +   rules: [
@@ -83,7 +85,11 @@ img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 
 ### 自定义输出文件名 {#custom-output-filename}
 
+<<<<<<< HEAD
 默认情况下，`asset/resource` 模块以 `[hash][ext][query]` 文件名发送到输出目录。
+=======
+By default, `asset/resource` modules are emitting with `[hash][ext][query]` filename into output directory. You can also use `[contenthash]` and `[modulehash]`, otherwise it defaults to `[hash]`.
+>>>>>>> 422ff0adfd1f147d5872897760d9c7e7027c4f1d
 
 可以通过在 webpack 配置中设置 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 来修改此模板字符串：
 
@@ -98,9 +104,6 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
 +   assetModuleFilename: 'images/[hash][ext][query]'
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -124,9 +127,6 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
 +   assetModuleFilename: 'images/[hash][ext][query]'
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -164,9 +164,6 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
 -   assetModuleFilename: 'images/[hash][ext][query]'
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -219,9 +216,6 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
   },
-  experiments: {
-    asset: true
-  },
   module: {
     rules: [
       {
@@ -254,9 +248,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -295,7 +286,34 @@ __src/index.js__
 
 所有 `.txt` 文件将原样注入到 bundle 中。
 
+<<<<<<< HEAD
 ## 通用资源类型(general asset type) {#general-asset-type}
+=======
+## URL assets
+
+When using `new URL('./path/to/asset', import.meta.url)`, webpack creates an asset module too.
+
+__src/index.js__
+
+```js
+const logo = new URL('./logo.svg', import.meta.url);
+```
+
+Depending on the [`target`](/configuration/target/) in your configuration, webpack would compile the above code into a different result:
+
+```js
+// target: web
+new URL(__webpack_public_path__ + 'logo.svg', document.baseURI || self.location.href);
+
+// target: webworker
+new URL(__webpack_public_path__ + 'logo.svg', self.location);
+
+// target: node, node-webkit, nwjs, electron-main, electron-renderer, electron-preload, async-node
+new URL(__webpack_public_path__ + 'logo.svg', require('url').pathToFileUrl(__filename));
+```
+
+## General asset type
+>>>>>>> 422ff0adfd1f147d5872897760d9c7e7027c4f1d
 
 __webpack.config.js__
 
@@ -307,9 +325,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -336,9 +351,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [

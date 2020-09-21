@@ -11,6 +11,7 @@ contributors:
   - EugeneHlushko
   - wizardofhogwarts
   - anikethsaha
+  - chenxsan
 
 related:
   - title: CommonJS
@@ -89,6 +90,25 @@ exports.aFunction = function doSomething() {
 
 如果在一个被 Parser 解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
+### `import.meta.url`
+
+Returns the absolute `file:` URL of the module.
+
+__src/index.js__
+
+```javascript
+console.log(import.meta.url); // output something like `file:///path/to/your/project/src/index.js`
+```
+
+### `import.meta.webpack`
+
+Returns the webpack version.
+
+__src/index.js__
+
+```javascript
+console.log(import.meta.webpack); // output `5` for webpack 5
+```
 
 ### `__filename` (NodeJS) {#__filename-nodejs}
 

@@ -340,7 +340,13 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `optimization.mangleWasmImports` {#optimizationmanglewasmimports}
+=======
+T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` defaults to `false`. 
+
+## `optimization.mangleWasmImports`
+>>>>>>> 422ff0adfd1f147d5872897760d9c7e7027c4f1d
 
 `boolean = false`
 
