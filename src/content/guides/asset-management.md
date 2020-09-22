@@ -503,11 +503,11 @@ import data from './data.json';
 import { foo } from './data.json';
 ```
 
-### Customize parser of JSON modules
+### 自定义 JSON 模块 parser {#customize-parser-of-json-modules}
 
-It's possible to import any `toml`, `yaml` or `json5` files as a JSON module by using a [custom parser](/configuration/module/#ruleparserparse) instead of a specific webpack loader.
+通过使用 [自定义 parser](/configuration/module/#ruleparserparse) 替代特定的 webpack loader，可以将任何 `toml`、`yaml` 或 `json5` 文件作为 JSON 模块导入。
 
-Let's say you have a `data.toml`, a `data.yaml` and a `data.json5` files under `src` folder:
+假设你在 `src` 文件夹下有一个 `data.toml`、一个 `data.yaml` 以及一个 `data.json5` 文件：
 
 __src/data.toml__
 
@@ -550,13 +550,13 @@ Likes tater tots and beer.",
 }
 ```
 
-Install `toml`, `yamljs` and `json5` packages first:
+首先安装 `toml`，`yamljs` 和 `json5` 的 packages：
 
 ```bash
 npm install toml yamljs json5 --save-dev
 ```
 
-And configure them in your webpack configuration:
+并在你的 webpack 中配置它们：
 
 __webpack.config.js__
 

@@ -31,7 +31,6 @@ export default class SidebarItem extends React.Component {
     );
   }
 
-<<<<<<< HEAD
   _handleAnchor(anchor) {
     let id = anchor.id;
     let title = anchor.title;
@@ -41,10 +40,10 @@ export default class SidebarItem extends React.Component {
     anchor.id = id;
     anchor.title = title;
     return anchor;
-=======
+  }
+
   scrollTop() {
     window.scrollTo(0, 0);
->>>>>>> 422ff0adfd1f147d5872897760d9c7e7027c4f1d
   }
 
   render() {

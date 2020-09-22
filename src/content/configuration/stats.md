@@ -664,14 +664,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `stats.publicPath` {#statspublicpath}
-=======
-### `stats.errorsCount`
+### `stats.errorsCount` {#statserrorscount}
 
 `boolean = true`
 
-Add errors count.
+添加展示 errors 个数。
 
 ```javascript
 module.exports = {
@@ -682,11 +679,11 @@ module.exports = {
 };
 ```
 
-### `stats.warningsCount`
+### `stats.warningsCount` {#statswarningscount}
 
 `boolean = true`
 
-Add warnings count.
+添加展示 warnings 个数。
 
 ```javascript
 module.exports = {
@@ -697,8 +694,7 @@ module.exports = {
 };
 ```
 
-### `stats.publicPath`
->>>>>>> 422ff0adfd1f147d5872897760d9c7e7027c4f1d
+### `stats.publicPath` {#statspublicpath}
 
 `boolean = true`
 

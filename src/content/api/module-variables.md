@@ -90,19 +90,19 @@ exports.aFunction = function doSomething() {
 
 如果在一个被 Parser 解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
-### `import.meta.url`
+### `import.meta.url` {#import-meta-url}
 
-Returns the absolute `file:` URL of the module.
+返回模块以 `fike:` 开头绝对路径的 URL。
 
 __src/index.js__
 
 ```javascript
-console.log(import.meta.url); // output something like `file:///path/to/your/project/src/index.js`
+console.log(import.meta.url); // 输出结果类似于 `file:///path/to/your/project/src/index.js`
 ```
 
-### `import.meta.webpack`
+### `import.meta.webpack` {#import-meta-webpack}
 
-Returns the webpack version.
+返回 webpack 的版本
 
 __src/index.js__
 

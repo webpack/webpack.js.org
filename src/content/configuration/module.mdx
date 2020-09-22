@@ -710,11 +710,11 @@ module.exports = {
 
 当用该配置创建一个包，`console.log(footer)` 会输出 'overridden footer'。
 
-### `resolve.fullySpecified`
+### `resolve.fullySpecified` {#resolve-fully-specified}
 
 `boolean = true`
 
-When enabled, you should provide the file extension when `import`ing a module in `.mjs` files or any other `.js` files when their nearest parent `package.json` file contains a `"type"` field with a value of `"module"`, otherwise webpack would fail the compiling with a `Module not found` error. And webpack won't resolve directories with filenames defined in the [`resolve.mainFiles`](/configuration/resolve/#resolvemainfiles), you have to specify the filename yourself.
+启用后，你若在 `.mjs` 文件或其他 `.js` 文件中导入模块，并且它们最近的 `package.json` 中包含 `"type"` 字段，其值为 `"module"`时，你应为此文件提供扩展名，否则 webpack 会提示 `Module not found` 的错误且编译失败。并且 webpack 不会解析 [`resolve.mainFiles`](/configuration/resolve/#resolvemainfiles) 中定义的文件目录，你必须自己指定文件名。
 
 __webpack.config.js__
 
@@ -734,7 +734,7 @@ module.exports = {
 };
 ```
 
-W> `resolve.fullySpecified` doesn't affect requests from [mainFields](/configuration/resolve/#resolvemainfields), [aliasFields](/configuration/resolve/#resolvealiasfields) or [aliases](/configuration/resolve/#resolvealias).
+W> `resolve.fullySpecified` 不影响来自 [mainFields](/configuration/resolve/#resolvemainfields)，[aliasFields](/configuration/resolve/#resolvealiasfields) 或 [aliases](/configuration/resolve/#resolvealias) 的请求。
 
 ## `条件` {#condition}
 

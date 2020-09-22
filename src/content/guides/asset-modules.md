@@ -26,30 +26,7 @@ related:
 - `asset/source` 导出资源的源代码。之前通过使用 `raw-loader` 实现。
 - `asset` 在导出一个 data URI 和发送一个单独的文件之间自动选择。之前通过使用 `url-loader`，并且配置资源体积限制实现。
 
-<<<<<<< HEAD
-W> 这是一项实验功能。通过在 webpack 配置的 [experiments](/configuration/experiments/) 选项中设置 `experiments.asset: true` 来开启资源模块。
-
-__webpack.config.js__
-
-```diff
-const path = require('path');
-
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-+ experiments: {
-+   asset: true
-+ },
-};
-```
-
-## resource 资源(resource asset) {#resource-assets}
-=======
-## Resource assets
->>>>>>> 422ff0adfd1f147d5872897760d9c7e7027c4f1d
+## Resource 资源 {#resource-assets}
 
 __webpack.config.js__
 
@@ -85,11 +62,7 @@ img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 
 ### 自定义输出文件名 {#custom-output-filename}
 
-<<<<<<< HEAD
-默认情况下，`asset/resource` 模块以 `[hash][ext][query]` 文件名发送到输出目录。
-=======
-By default, `asset/resource` modules are emitting with `[hash][ext][query]` filename into output directory. You can also use `[contenthash]` and `[modulehash]`, otherwise it defaults to `[hash]`.
->>>>>>> 422ff0adfd1f147d5872897760d9c7e7027c4f1d
+默认情况下，`asset/resource` 模块以 `[hash][ext][query]` 文件名发送到输出目录。你还可以使用 `[contenthash]` 和 `[modulehash]` 重写 `[hash]` 的默认值。
 
 可以通过在 webpack 配置中设置 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 来修改此模板字符串：
 
@@ -286,12 +259,9 @@ __src/index.js__
 
 所有 `.txt` 文件将原样注入到 bundle 中。
 
-<<<<<<< HEAD
-## 通用资源类型(general asset type) {#general-asset-type}
-=======
-## URL assets
+## URL 资源
 
-When using `new URL('./path/to/asset', import.meta.url)`, webpack creates an asset module too.
+当使用 `new URL('./path/to/asset', import.meta.url)`，webpack 也会创建资源模块。
 
 __src/index.js__
 
@@ -299,7 +269,7 @@ __src/index.js__
 const logo = new URL('./logo.svg', import.meta.url);
 ```
 
-Depending on the [`target`](/configuration/target/) in your configuration, webpack would compile the above code into a different result:
+根据你配置中 [`target`](/configuration/target/) 的不同，webpack 会将上述代码编译成不同结果：
 
 ```js
 // target: web
@@ -312,8 +282,7 @@ new URL(__webpack_public_path__ + 'logo.svg', self.location);
 new URL(__webpack_public_path__ + 'logo.svg', require('url').pathToFileUrl(__filename));
 ```
 
-## General asset type
->>>>>>> 422ff0adfd1f147d5872897760d9c7e7027c4f1d
+## 通用资源类型 {#general-asset-type}
 
 __webpack.config.js__
 
