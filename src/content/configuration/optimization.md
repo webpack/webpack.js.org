@@ -340,6 +340,8 @@ module.exports = {
 };
 ```
 
+T> 当 [mode](/configuration/mode/) 设置为 `'none'` 时，`optimization.nodeEnv` 的默认值为 `false`。
+
 ## `optimization.mangleWasmImports` {#optimizationmanglewasmimports}
 
 `boolean = false`

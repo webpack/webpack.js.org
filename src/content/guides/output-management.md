@@ -8,6 +8,7 @@ contributors:
   - JGJP
   - EugeneHlushko
   - AnayaDesign
+  - chenxsan
 ---
 
 T> 本指南继续沿用 [`管理资源`](/guides/asset-management) 指南中的代码示例。
@@ -166,9 +167,6 @@ __webpack.config.js__
 如果在代码编辑器中打开 `index.html`，你会看到 `HtmlWebpackPlugin` 创建了一个全新的文件，所有的 bundle 会自动添加到 html 中。
 
 如果你想要了解 `HtmlWebpackPlugin` 插件提供的全部的功能和选项，你就应该阅读 [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) 仓库中的源码。
-
-还可以看下 [`html-webpack-template`](https://github.com/jaketrent/html-webpack-template)，除了提供默认模板之外，还提供了一些额外的功能。
-
 
 ## 清理 `/dist` 文件夹 {#cleaning-up-the-dist-folder}
 

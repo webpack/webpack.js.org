@@ -503,6 +503,113 @@ import data from './data.json';
 import { foo } from './data.json';
 ```
 
+### 自定义 JSON 模块 parser {#customize-parser-of-json-modules}
+
+通过使用 [自定义 parser](/configuration/module/#ruleparserparse) 替代特定的 webpack loader，可以将任何 `toml`、`yaml` 或 `json5` 文件作为 JSON 模块导入。
+
+假设你在 `src` 文件夹下有一个 `data.toml`、一个 `data.yaml` 以及一个 `data.json5` 文件：
+
+__src/data.toml__
+
+```toml
+title = "TOML Example"
+
+[owner]
+name = "Tom Preston-Werner"
+organization = "GitHub"
+bio = "GitHub Cofounder & CEO\nLikes tater tots and beer."
+dob = 1979-05-27T07:32:00Z
+```
+
+__src/data.yaml__
+
+```yaml
+title: YAML Example
+owner:
+  name: Tom Preston-Werner
+  organization: GitHub
+  bio: |-
+    GitHub Cofounder & CEO
+    Likes tater tots and beer.
+  dob: 1979-05-27T07:32:00.000Z
+```
+
+__src/data.json5__
+
+```json5
+{
+  // comment
+  title: "JSON5 Example",
+  owner: {
+    name: "Tom Preston-Werner",
+    organization: "GitHub",
+    bio: "GitHub Cofounder & CEO\n\
+Likes tater tots and beer.",
+    dob: "1979-05-27T07:32:00.000Z"
+  }
+}
+```
+
+首先安装 `toml`，`yamljs` 和 `json5` 的 packages：
+
+```bash
+npm install toml yamljs json5 --save-dev
+```
+
+并在你的 webpack 中配置它们：
+
+__webpack.config.js__
+
+```javascript
+const toml = require('toml'); 
+const yaml = require('yamljs');
+const json5 = require('json5');
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.toml$/,
+        type: 'json',
+        parser: {
+          parse: toml.parse
+        }
+      },
+      {
+        test: /\.yaml$/,
+        type: 'json',
+        parser: {
+          parse: yaml.parse
+        }
+      },
+      {
+        test: /\.json5$/,
+        type: 'json',
+        parser: {
+          parse: json5.parse
+        }
+      }
+    ]
+  }
+};
+```
+
+__src/index.js__
+
+```javascript
+import toml from './data.toml';
+import yaml from './data.yaml';
+import json from './data.json5';
+
+console.log(toml.title); // output `TOML Example`
+console.log(toml.owner.name); // output `Tom Preston-Werner`
+
+console.log(yaml.title); // output `YAML Example`
+console.log(yaml.owner.name); // output `Tom Preston-Werner`
+
+console.log(json.title); // output `JSON5 Example`
+console.log(json.owner.name); // output `Tom Preston-Werner`
+```
 
 ## 全局资源 {#global-assets}
 

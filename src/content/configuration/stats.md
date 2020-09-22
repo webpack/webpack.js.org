@@ -664,6 +664,36 @@ module.exports = {
 };
 ```
 
+### `stats.errorsCount` {#statserrorscount}
+
+`boolean = true`
+
+添加展示 errors 个数。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    errorsCount: false
+  }
+};
+```
+
+### `stats.warningsCount` {#statswarningscount}
+
+`boolean = true`
+
+添加展示 warnings 个数。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    warningsCount: false
+  }
+};
+```
+
 ### `stats.publicPath` {#statspublicpath}
 
 `boolean = true`

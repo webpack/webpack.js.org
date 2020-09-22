@@ -5,6 +5,7 @@ contributors:
   - smelukov
   - EugeneHlushko
   - chenxsan
+  - anshumanv
 related:
   - title: webpack 5 - 资源模块
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
@@ -25,26 +26,7 @@ related:
 - `asset/source` 导出资源的源代码。之前通过使用 `raw-loader` 实现。
 - `asset` 在导出一个 data URI 和发送一个单独的文件之间自动选择。之前通过使用 `url-loader`，并且配置资源体积限制实现。
 
-W> 这是一项实验功能。通过在 webpack 配置的 [experiments](/configuration/experiments/) 选项中设置 `experiments.asset: true` 来开启资源模块。
-
-__webpack.config.js__
-
-```diff
-const path = require('path');
-
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-+ experiments: {
-+   asset: true
-+ },
-};
-```
-
-## resource 资源(resource asset) {#resource-assets}
+## Resource 资源 {#resource-assets}
 
 __webpack.config.js__
 
@@ -56,9 +38,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
 + module: {
 +   rules: [
@@ -83,7 +62,7 @@ img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 
 ### 自定义输出文件名 {#custom-output-filename}
 
-默认情况下，`asset/resource` 模块以 `[hash][ext][query]` 文件名发送到输出目录。
+默认情况下，`asset/resource` 模块以 `[hash][ext][query]` 文件名发送到输出目录。你还可以使用 `[contenthash]` 和 `[modulehash]` 重写 `[hash]` 的默认值。
 
 可以通过在 webpack 配置中设置 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 来修改此模板字符串：
 
@@ -98,9 +77,6 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
 +   assetModuleFilename: 'images/[hash][ext][query]'
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -124,9 +100,6 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
 +   assetModuleFilename: 'images/[hash][ext][query]'
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -164,9 +137,6 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
 -   assetModuleFilename: 'images/[hash][ext][query]'
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -219,9 +189,6 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
   },
-  experiments: {
-    asset: true
-  },
   module: {
     rules: [
       {
@@ -254,9 +221,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -295,7 +259,30 @@ __src/index.js__
 
 所有 `.txt` 文件将原样注入到 bundle 中。
 
-## 通用资源类型(general asset type) {#general-asset-type}
+## URL 资源
+
+当使用 `new URL('./path/to/asset', import.meta.url)`，webpack 也会创建资源模块。
+
+__src/index.js__
+
+```js
+const logo = new URL('./logo.svg', import.meta.url);
+```
+
+根据你配置中 [`target`](/configuration/target/) 的不同，webpack 会将上述代码编译成不同结果：
+
+```js
+// target: web
+new URL(__webpack_public_path__ + 'logo.svg', document.baseURI || self.location.href);
+
+// target: webworker
+new URL(__webpack_public_path__ + 'logo.svg', self.location);
+
+// target: node, node-webkit, nwjs, electron-main, electron-renderer, electron-preload, async-node
+new URL(__webpack_public_path__ + 'logo.svg', require('url').pathToFileUrl(__filename));
+```
+
+## 通用资源类型 {#general-asset-type}
 
 __webpack.config.js__
 
@@ -307,9 +294,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -336,9 +320,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
