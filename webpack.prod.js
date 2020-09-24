@@ -28,6 +28,7 @@ module.exports = env => merge(common(env), {
   plugins: [
     new GenerateSW({
       skipWaiting: true,
+      clientsClaim: true,
       swDest: 'sw.js',
       exclude: [/icon_.*\.png/, /printable/, '/robots.txt'],
       additionalManifestEntries: ['/app-shell/index.html', '/manifest.json'],
