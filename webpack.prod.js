@@ -45,6 +45,10 @@ module.exports = env => merge(common(env), {
         {
           urlPattern: /\/$/, // cache html at runtime
           handler: 'NetworkFirst',
+        },
+        {
+          urlPattern: /\.css$/,
+          handler: 'NetworkFirst'
         }
       ],
     })
