@@ -147,6 +147,7 @@ module.exports = (env = {}) => ({
     }),
     new ESLintPlugin({fix: true, extensions: ['js', 'jsx']}),
     new webpack.DefinePlugin({
+      // https://github.com/algolia/algoliasearch-client-javascript/issues/764
       'process.env.RESET_APP_DATA_TIMER': JSON.stringify('') // fix for algoliasearch
     })
   ],
