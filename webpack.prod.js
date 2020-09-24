@@ -34,7 +34,20 @@ module.exports = env => merge(common(env), {
       clientsClaim: true,
       swDest: 'sw.js',
       exclude: [/icon_.*\.png/, /printable/, '/robots.txt'],
-      additionalManifestEntries: ['/app-shell/index.html', '/manifest.json', ...hashedAssetsBySSGRun],
+      additionalManifestEntries: [
+        {
+          url: '/app-shell/index.html',
+          revision: '1'
+        },
+        {
+          url: '/manifest.json',
+          revision: '1'
+        },
+        ...hashedAssetsBySSGRun.map(url => ({
+          url,
+          revision: null
+        }))
+      ],
       navigateFallback: '/app-shell/index.html',
       runtimeCaching: [
         {
