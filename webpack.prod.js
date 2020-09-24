@@ -30,6 +30,8 @@ module.exports = env => merge(common(env), {
       skipWaiting: true,
       swDest: 'sw.js',
       exclude: [/icon_.*\.png/, /printable/, '/robots.txt'],
+      additionalManifestEntries: ['/app-shell/index.html', '/manifest.json'],
+      navigateFallback: '/app-shell/index.html',
       runtimeCaching: [
         {
           urlPattern: /https:\/\/fonts\.gstatic\.com/, // cache google fonts for one year
