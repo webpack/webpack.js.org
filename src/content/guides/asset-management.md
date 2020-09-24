@@ -503,6 +503,113 @@ import data from './data.json';
 import { foo } from './data.json';
 ```
 
+### Customize parser of JSON modules
+
+It's possible to import any `toml`, `yaml` or `json5` files as a JSON module by using a [custom parser](/configuration/module/#ruleparserparse) instead of a specific webpack loader.
+
+Let's say you have a `data.toml`, a `data.yaml` and a `data.json5` files under `src` folder:
+
+__src/data.toml__
+
+```toml
+title = "TOML Example"
+
+[owner]
+name = "Tom Preston-Werner"
+organization = "GitHub"
+bio = "GitHub Cofounder & CEO\nLikes tater tots and beer."
+dob = 1979-05-27T07:32:00Z
+```
+
+__src/data.yaml__
+
+```yaml
+title: YAML Example
+owner:
+  name: Tom Preston-Werner
+  organization: GitHub
+  bio: |-
+    GitHub Cofounder & CEO
+    Likes tater tots and beer.
+  dob: 1979-05-27T07:32:00.000Z
+```
+
+__src/data.json5__
+
+```json5
+{
+  // comment
+  title: "JSON5 Example",
+  owner: {
+    name: "Tom Preston-Werner",
+    organization: "GitHub",
+    bio: "GitHub Cofounder & CEO\n\
+Likes tater tots and beer.",
+    dob: "1979-05-27T07:32:00.000Z"
+  }
+}
+```
+
+Install `toml`, `yamljs` and `json5` packages first:
+
+```bash
+npm install toml yamljs json5 --save-dev
+```
+
+And configure them in your webpack configuration:
+
+__webpack.config.js__
+
+```javascript
+const toml = require('toml'); 
+const yaml = require('yamljs');
+const json5 = require('json5');
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.toml$/,
+        type: 'json',
+        parser: {
+          parse: toml.parse
+        }
+      },
+      {
+        test: /\.yaml$/,
+        type: 'json',
+        parser: {
+          parse: yaml.parse
+        }
+      },
+      {
+        test: /\.json5$/,
+        type: 'json',
+        parser: {
+          parse: json5.parse
+        }
+      }
+    ]
+  }
+};
+```
+
+__src/index.js__
+
+```javascript
+import toml from './data.toml';
+import yaml from './data.yaml';
+import json from './data.json5';
+
+console.log(toml.title); // output `TOML Example`
+console.log(toml.owner.name); // output `Tom Preston-Werner`
+
+console.log(yaml.title); // output `YAML Example`
+console.log(yaml.owner.name); // output `Tom Preston-Werner`
+
+console.log(json.title); // output `JSON5 Example`
+console.log(json.owner.name); // output `Tom Preston-Werner`
+```
 
 ## Global Assets
 
