@@ -7,6 +7,9 @@ const { GenerateSW } = require('workbox-webpack-plugin');
 // Load Common Configuration
 const common = require('./webpack.common.js');
 
+// find [css, ico, svg] versioned (hashed) files emitted by SSG run
+const hashedAssetsBySSGRun = require('./src/utilities/find-files-in-dist')(['.css', '.ico', '.svg']);
+
 module.exports = env => merge(common(env), {
   mode: 'production',
   target: 'web',
@@ -31,7 +34,7 @@ module.exports = env => merge(common(env), {
       clientsClaim: true,
       swDest: 'sw.js',
       exclude: [/icon_.*\.png/, /printable/, '/robots.txt'],
-      additionalManifestEntries: ['/app-shell/index.html', '/manifest.json'],
+      additionalManifestEntries: ['/app-shell/index.html', '/manifest.json', ...hashedAssetsBySSGRun],
       navigateFallback: '/app-shell/index.html',
       runtimeCaching: [
         {
