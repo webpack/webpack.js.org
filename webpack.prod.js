@@ -27,6 +27,7 @@ module.exports = env => merge(common(env), {
   cache: true,
   plugins: [
     new GenerateSW({
+      skipWaiting: true,
       swDest: 'sw.js',
       exclude: [/icon_.*\.png/, /printable/, '/robots.txt'],
       runtimeCaching: [
@@ -44,7 +45,7 @@ module.exports = env => merge(common(env), {
         {
           urlPattern: /\/$/, // cache html at runtime
           handler: 'NetworkFirst',
-        },
+        }
       ],
     })
   ]
