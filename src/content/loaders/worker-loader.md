@@ -68,14 +68,14 @@ And run `webpack` via your preferred method.
 
 ## Options
 
-|                 Name                  |             Type             |             Default             | Description                                                                       |
-| :-----------------------------------: | :--------------------------: | :-----------------------------: | :-------------------------------------------------------------------------------- |
-|        **[`worker`](#worker)**        |      `{String\|Object}`      |            `Worker`             | Allows to set web worker constructor name and options                             |
-|    **[`publicPath`](#publicpath)**    |     `{String\|Function}`     |  based on `output.publicPath`   | specifies the public URL address of the output files when referenced in a browser |
-|      **[`filename`](#filename)**      |     `{String\|Function}`     |   based on `output.filename`    | The filename of entry chunks for web workers                                      |
-| **[`chunkFilename`](#chunkfilename)** |          `{String}`          | based on `output.chunkFilename` | The filename of non-entry chunks for web workers                                  |
-|        **[`inline`](#inline)**        | `'no-fallback'\|'fallback'`  |           `undefined`           | Allow to inline the worker as a `BLOB`                                            |
-|      **[`esModule`](#esmodule)**      |         `{Boolean}`          |             `true`              | Use ES modules syntax                                                             |
+|                 Name                  |            Type             |             Default             | Description                                                                       |
+| :-----------------------------------: | :-------------------------: | :-----------------------------: | :-------------------------------------------------------------------------------- |
+|        **[`worker`](#worker)**        |     `{String\|Object}`      |            `Worker`             | Allows to set web worker constructor name and options                             |
+|    **[`publicPath`](#publicpath)**    |    `{String\|Function}`     |  based on `output.publicPath`   | specifies the public URL address of the output files when referenced in a browser |
+|      **[`filename`](#filename)**      |    `{String\|Function}`     |   based on `output.filename`    | The filename of entry chunks for web workers                                      |
+| **[`chunkFilename`](#chunkfilename)** |         `{String}`          | based on `output.chunkFilename` | The filename of non-entry chunks for web workers                                  |
+|        **[`inline`](#inline)**        | `'no-fallback'\|'fallback'` |           `undefined`           | Allow to inline the worker as a `BLOB`                                            |
+|      **[`esModule`](#esmodule)**      |         `{Boolean}`         |             `true`              | Use ES modules syntax                                                             |
 
 ### `worker`
 
