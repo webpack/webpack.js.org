@@ -54,10 +54,12 @@ module.exports = {
             options: {
               postcssOptions: {
                 plugins: [
-                  'postcss-preset-env',
-                  {
-                    // Options
-                  },
+                  [
+                    'postcss-preset-env',
+                    {
+                      // Options
+                    },
+                  ],
                 ],
               },
             },

@@ -68,6 +68,7 @@ worker.addEventListener('message', function (event) {});
 
 ## 选项 {#options}
 
+<<<<<<< HEAD
 |                 选项名                  |             类型             |             默认值             | 描述                                                                       |
 | :-----------------------------------: | :--------------------------: | :-----------------------------: | :-------------------------------------------------------------------------------- |
 |        **[`worker`](#worker)**        |      `{String\|Object}`      |            `Worker`             | 允许设置 web worker 构造函数的名称和选项                             |
@@ -76,6 +77,16 @@ worker.addEventListener('message', function (event) {});
 | **[`chunkFilename`](#chunkfilename)** |          `{String}`          | 与 `output.chunkFilename` 相同 | web worker 非入口 chunk 的文件名                                  |
 |        **[`inline`](#inline)**        | `'no-fallback'\|'fallback'`  |           `undefined`           | 允许将内联的 web worker 作为 `BLOB`                                            |
 |      **[`esModule`](#esmodule)**      |         `{Boolean}`          |             `true`              | 使用 ES 模块语法                                                             |
+=======
+|                 Name                  |            Type             |             Default             | Description                                                                       |
+| :-----------------------------------: | :-------------------------: | :-----------------------------: | :-------------------------------------------------------------------------------- |
+|        **[`worker`](#worker)**        |     `{String\|Object}`      |            `Worker`             | Allows to set web worker constructor name and options                             |
+|    **[`publicPath`](#publicpath)**    |    `{String\|Function}`     |  based on `output.publicPath`   | specifies the public URL address of the output files when referenced in a browser |
+|      **[`filename`](#filename)**      |    `{String\|Function}`     |   based on `output.filename`    | The filename of entry chunks for web workers                                      |
+| **[`chunkFilename`](#chunkfilename)** |         `{String}`          | based on `output.chunkFilename` | The filename of non-entry chunks for web workers                                  |
+|        **[`inline`](#inline)**        | `'no-fallback'\|'fallback'` |           `undefined`           | Allow to inline the worker as a `BLOB`                                            |
+|      **[`esModule`](#esmodule)**      |         `{Boolean}`         |             `true`              | Use ES modules syntax                                                             |
+>>>>>>> 994fc24ed8650a67b78cf6ddff445172e29eb91d
 
 ### `worker` {#worker}
 
