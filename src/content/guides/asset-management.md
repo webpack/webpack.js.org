@@ -657,6 +657,7 @@ __project__
     |- index.html
   |- /src
 -   |- data.xml
+-   |- data.csv
 -   |- my-font.woff
 -   |- my-font.woff2
 -   |- icon.png
@@ -721,6 +722,7 @@ __src/index.js__
 - import './style.css';
 - import Icon from './icon.png';
 - import Data from './data.xml';
+- import Notes from './data.csv';
 -
   function component() {
     const element = document.createElement('div');
@@ -736,6 +738,7 @@ __src/index.js__
 -   element.appendChild(myIcon);
 -
 -   console.log(Data);
+-   console.log(Notes);
 
     return element;
   }
