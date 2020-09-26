@@ -219,21 +219,6 @@ module.exports = {
 };
 ```
 
-### `stats.chunkRootModules`
-
-`boolean = true`
-
-Tells `stats` whether to add information about the root modules of chunks. Applied if `stats.chunks = true`.
-
-```javascript
-module.exports = {
-  //...
-  stats: {
-    chunkRootModules: false
-  }
-};
-```
-
 ### `stats.chunkOrigins`
 
 `boolean = true`
@@ -538,21 +523,6 @@ module.exports = {
   //...
   stats: {
     loggingTrace: false
-  }
-};
-```
-
-### `stats.maxModules`
-
-`number = 15`
-
-Set the maximum number of modules to be shown.
-
-```javascript
-module.exports = {
-  //...
-  stats: {
-    maxModules: 5
   }
 };
 ```
