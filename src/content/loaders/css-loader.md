@@ -846,7 +846,9 @@ module.exports = {
 默认：`undefined`
 
 可以指定自定义 `getLocalIdent` 函数的绝对路径，以基于不同的架构生成类名。
-默认情况下，我们使用内置函数来生成类名。
+默认情况下，我们使用内置函数来生成 classname。
+如果自定义函数返回 `null` 或者 `undefined`，
+我们将降级使用内置函数来生成 classname。
 
 **webpack.config.js**
 
