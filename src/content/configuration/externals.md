@@ -412,7 +412,7 @@ T> Options like `output.chunkLoadTimeout`, `output.crossOriginLoading` and `outp
 
 Enable presets of externals for specific targets.
 
-W> Previously the following functionality was be achieved using `target`.
+W> In earlier webpack versions, the following functionality was achieved by using [`target`](/configuration/target/).
 
 
 
