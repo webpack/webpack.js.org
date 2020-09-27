@@ -60,10 +60,6 @@ module.exports = env => merge(common(env), {
               maxEntries: 30
             }
           }
-        },
-        {
-          urlPattern: /\.css$/,
-          handler: 'NetworkFirst'
         }
       ],
     })
