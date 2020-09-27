@@ -37,7 +37,7 @@ module.exports = env => merge(common(env), {
       additionalManifestEntries: [
         {
           url: '/app-shell/index.html',
-          revision: '1'
+          revision: new Date().getTime().toString() // dirty hack
         },
         {
           url: '/manifest.json',
