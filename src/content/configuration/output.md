@@ -1209,7 +1209,7 @@ Option to set the method of loading WebAssembly Modules. Methods included by def
 
 The defaults are as following:
 
-- Defaults to `fetch` if target is `web`, `webworker`, `electron-renderer` or `node-webkit`.
+- Defaults to `'fetch'` if [`target`](/configuration/target/) is set to `'web'`, `'webworker'`, `'electron-renderer'` or `'node-webkit'`.
 - Defaults to `'async-node'` if [`target`](/configuration/target/) is set to `'node'`, `'async-node'`, `'electron-main'` or `'electron-preload'`.
 
 ```javascript
