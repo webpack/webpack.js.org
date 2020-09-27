@@ -1205,7 +1205,7 @@ module.exports = {
 
 `boolean = false` `string`
 
-Option to set the method of loading WebAssembly Modules. Methods included by default are 'fetch' (web/WebWorker), 'async-node' (node.js), but others might be added by plugins.
+Option to set the method of loading WebAssembly Modules. Methods included by default are `'fetch'` (web/WebWorker), `'async-node'` (Node.js), but others might be added by plugins.
 
 The defaults are as following:
 
