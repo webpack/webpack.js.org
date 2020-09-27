@@ -1201,6 +1201,41 @@ module.exports = {
 };
 ```
 
+## `output.wasmLoading`
+
+`boolean = false` `string`
+
+Option to set the method of loading WebAssembly Modules. Methods included by default are `'fetch'` (web/WebWorker), `'async-node'` (Node.js), but others might be added by plugins.
+
+The default value can be affected by different [`target`](/configuration/target/):
+
+- Defaults to `'fetch'` if [`target`](/configuration/target/) is set to `'web'`, `'webworker'`, `'electron-renderer'` or `'node-webkit'`.
+- Defaults to `'async-node'` if [`target`](/configuration/target/) is set to `'node'`, `'async-node'`, `'electron-main'` or `'electron-preload'`.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    wasmLoading: 'fetch'
+  }
+};
+```
+
+## `output.enabledWasmLoadingTypes`
+
+`[string]`
+
+List of wasm loading types enabled for use by entry points.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledWasmLoadingTypes: ['fetch']
+  }
+};
+```
+
 ## `output.iife`
 
 `boolean = true`
