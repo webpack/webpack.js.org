@@ -143,7 +143,8 @@ module.exports = (env = {}) => ({
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[chunkhash].css'
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[id].[contenthash].css'
     }),
     new ESLintPlugin({fix: true, extensions: ['js', 'jsx']}),
     new webpack.DefinePlugin({
