@@ -21,8 +21,15 @@ related:
 
 This section covers all methods available in code compiled with webpack. When using webpack to bundle your application, you can pick from a variety of module syntax styles including [ES6](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015), [CommonJS](https://en.wikipedia.org/wiki/CommonJS), and [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition).
 
-W> While webpack supports multiple module syntaxes, we recommend following a single syntax for consistency and to avoid odd behaviors/bugs. Here's [one example](https://github.com/webpack/webpack.js.org/issues/552) of mixing ES6 and CommonJS, but there are surely others.
+While webpack supports multiple module syntaxes, we recommend following a single syntax for consistency and to avoid odd behaviors/bugs. Actually webpack would enforce the recommendation for `.mjs` files, `.cjs` files or `.js` files when their nearest parent `package.json` file contains a `"type"` field with a value of either `"module"` or `"commonjs"`. Please pay attention to these enforcements before you read on:
 
+- `.mjs` or `.js` with `"type": "module"` in `package.json`
+    - No CommonJS allowed, for example, you can't use `require`, `module.exports` or `exports`
+    - File extensions are required when importing, e.g, you should use `import './src/App.mjs'` instead of `import './src/App'` (you can disable this enforcement with [`Rule.resolve.fullySpecified`](/configuration/module/#resolvefullyspecified))
+- `.cjs` or `.js` with `"type": "commonjs"` in `package.json`
+    - Neither `import` nor `export` is available
+- `.wasm` with `"type": "module"` in `package.json`
+    - File extensions are required when importing wasm file
 
 ## ES6 (Recommended)
 
