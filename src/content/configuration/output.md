@@ -1211,7 +1211,6 @@ The defaults are as following:
 
 - Defaults to `fetch` if target is `web`, `webworker`, `electron-renderer` or `node-webkit`.
 - Defaults to `'async-node'` if [`target`](/configuration/target/) is set to `'node'`, `'async-node'`, `'electron-main'` or `'electron-preload'`.
-- `false` in all other cases.
 
 ```javascript
 module.exports = {
