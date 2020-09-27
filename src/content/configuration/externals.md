@@ -430,7 +430,7 @@ Option   | Description                                      | Input Type
 
 __Example__
 
-Using `node` preset will not bundle built-in modules and treats them as external and loads them externally.
+Using `node` preset will not bundle built-in modules and treats them as external and loads them via `require()` when used.
 
 __webpack.config.js__
 
