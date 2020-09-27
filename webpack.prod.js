@@ -44,7 +44,7 @@ module.exports = env => merge(common(env), {
           revision: '1'
         },
         ...hashedAssetsBySSGRun.map(url => ({
-          url,
+          url: '/' + url, // prepend the publicPath
           revision: null
         }))
       ],
