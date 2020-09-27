@@ -438,7 +438,7 @@ __webpack.config.js__
 module.exports = {
   // ...
   externalsPresets:{
-    node:true
+    node: true
   }
 };
 ```
