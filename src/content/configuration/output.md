@@ -1188,7 +1188,7 @@ T> 在 webpack 4 中  `output.ecmaVersion` 的默认值是 `5`.
 
 `boolean = true`
 
-告诉webpack在写入输出文件系统(output file system)之前检查要发出的文件是否已经存在并且具有相同的内容。
+告诉 webpack 在写入输出文件系统（output file system）之前检查要发出的文件是否已经存在并且具有相同的内容。
 
 W> 当文件存在并且内容没有变更时，webpack 不会输出该文件。
 
@@ -1201,19 +1201,16 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `output.iife` {#outputiife}
-=======
-## `output.wasmLoading`
+## `output.wasmLoading` {#output-wasm-loading}
 
 `boolean = false` `string`
 
-Option to set the method of loading WebAssembly Modules. Methods included by default are `'fetch'` (web/WebWorker), `'async-node'` (Node.js), but others might be added by plugins.
+此选项用于设置加载 WebAssembly 模块的方式。默认可使用的方式有 `'fetch'`（web/WebWorker），`'async-node'`（Node.js），其他额外方式可由插件提供。
 
-The default value can be affected by different [`target`](/configuration/target/):
+其默认值会根据 [`target`](/configuration/target/) 的变化而变化：
 
-- Defaults to `'fetch'` if [`target`](/configuration/target/) is set to `'web'`, `'webworker'`, `'electron-renderer'` or `'node-webkit'`.
-- Defaults to `'async-node'` if [`target`](/configuration/target/) is set to `'node'`, `'async-node'`, `'electron-main'` or `'electron-preload'`.
+- 如果 [`target`](/configuration/target/) 设置为 `'web'`，`'webworker'`，`'electron-renderer'` 或 `'node-webkit'` 其中之一，其默认值为 `'fetch'`。
+- 如果 [`target`](/configuration/target/) 设置为 `'node'`，`'async-node'`，`'electron-main'` 或 `'electron-preload'`，其默认值为 `'async-node'`。
 
 ```javascript
 module.exports = {
@@ -1224,11 +1221,11 @@ module.exports = {
 };
 ```
 
-## `output.enabledWasmLoadingTypes`
+## `output.enabledWasmLoadingTypes` {#output-enabled-wasm-loading-types}
 
 `[string]`
 
-List of wasm loading types enabled for use by entry points.
+用于设置入口支持的 wasm 加载类型的列表。
 
 ```javascript
 module.exports = {
@@ -1239,8 +1236,7 @@ module.exports = {
 };
 ```
 
-## `output.iife`
->>>>>>> 09994d9b831951a647ee41086fb97fbfd7ada2c8
+## `output.iife` {#output-iife}
 
 `boolean = true`
 

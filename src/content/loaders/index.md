@@ -57,21 +57,12 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 
 ## 样式 {#styling}
 
-<<<<<<< HEAD
 - [`style-loader`](/loaders/style-loader) 将模块导出的内容作为样式并添加到 DOM 中
 - [`css-loader`](/loaders/css-loader) 加载 CSS 文件并解析 import 的 CSS 文件，最终返回 CSS 代码
 - [`less-loader`](/loaders/less-loader) 加载并编译 LESS 文件
 - [`sass-loader`](/loaders/sass-loader) 加载并编译 SASS/SCSS 文件
 - [`postcss-loader`](/loaders/postcss-loader) 使用 [PostCSS](http://postcss.org) 加载并转换 CSS/SSS 文件
-- [`stylus-loader`](https://github.com/shama/stylus-loader) 加载并编译 Stylus 文件
-=======
-- [`style-loader`](/loaders/style-loader) Add exports of a module as style to DOM
-- [`css-loader`](/loaders/css-loader) Loads CSS file with resolved imports and returns CSS code
-- [`less-loader`](/loaders/less-loader) Loads and compiles a LESS file
-- [`sass-loader`](/loaders/sass-loader) Loads and compiles a SASS/SCSS file
-- [`postcss-loader`](/loaders/postcss-loader) Loads and transforms a CSS/SSS file using [PostCSS](http://postcss.org)
-- [`stylus-loader`](/loaders/stylus-loader/) Loads and compiles a Stylus file
->>>>>>> 09994d9b831951a647ee41086fb97fbfd7ada2c8
+- [`stylus-loader`](/loaders/stylus-loader/) 加载并编译 Stylus 文件
 
 
 ## Linting 和测试 {#linting--testing}

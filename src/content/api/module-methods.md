@@ -21,20 +21,15 @@ related:
 
 本章节涵盖了使用 webpack 编译代码的所有方法。在 webpack 打包应用程序时，你可以选择各种模块语法风格，包括 [ES6](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015)，[CommonJS](https://en.wikipedia.org/wiki/CommonJS) 和 [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition)。
 
-<<<<<<< HEAD
-W> 虽然 webpack 支持多种模块语法，但我们建议尽量遵循一致的语法，以此避免一些奇怪的行为和 bug。这是一个混合使用了 ES6 和 CommonJS 的[示例](https://github.com/webpack/webpack.js.org/issues/552)，但肯定还会有其他的 bug 产生。
+尽管 webpack 支持多种模块语法，但我们还是建议尽量使用一致的语法，以此避免一些奇怪的行为和 bug。事实上，当距离最近的 `package.json` 文件中包含 `"type"` 字段，其值为 `"module"` 或 `"commonjs"` 时，webpack 会为 `.mjs` 文件，`.cjs` 文件或 `.js` 文件强制启用此方案。请大家在阅读前，注意此情况：
 
-=======
-While webpack supports multiple module syntaxes, we recommend following a single syntax for consistency and to avoid odd behaviors/bugs. Actually webpack would enforce the recommendation for `.mjs` files, `.cjs` files or `.js` files when their nearest parent `package.json` file contains a `"type"` field with a value of either `"module"` or `"commonjs"`. Please pay attention to these enforcements before you read on:
-
-- `.mjs` or `.js` with `"type": "module"` in `package.json`
-    - No CommonJS allowed, for example, you can't use `require`, `module.exports` or `exports`
-    - File extensions are required when importing, e.g, you should use `import './src/App.mjs'` instead of `import './src/App'` (you can disable this enforcement with [`Rule.resolve.fullySpecified`](/configuration/module/#resolvefullyspecified))
-- `.cjs` or `.js` with `"type": "commonjs"` in `package.json`
-    - Neither `import` nor `export` is available
-- `.wasm` with `"type": "module"` in `package.json`
-    - File extensions are required when importing wasm file
->>>>>>> 09994d9b831951a647ee41086fb97fbfd7ada2c8
+- 在 `package.json` 中为 `.mjs` 或 `.js` 设置 `"type": "module"`
+    - 不允许使用 CommonJS，例如，你不能使用 `require`，`module.exports` 或 `exports`
+    - 当引入文件时，强制编写扩展名，例如，你应使用 `import './src/App.mjs'`，而非 `import './src/App'`（你可以通过设置 [`Rule.resolve.fullySpecified`](/configuration/module/#resolvefullyspecified) 来禁用此规则)
+- 在 `package.json` 中为 `.cjs` 或 `.js` 设置 `"type": "commonjs"`
+    - `import` 和 `export` 均不可用
+- 在 `package.json` 中为 `.wasm` 设置 `"type": "module"`
+    - 引入 wasm 文件时，必须编写文件扩展名
 
 ## ES6 (推荐) {#es6-recommended}
 
