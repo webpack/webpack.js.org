@@ -15,6 +15,7 @@ contributors:
   - beejunk
   - EugeneHlushko
   - chenxsan
+  - pranshuchittora
 ---
 
 `externals` 配置选项提供了「从输出的 bundle 中排除依赖」的方法。相反，所创建的 bundle 依赖于那些存在于用户环境(consumer's environment)中的依赖。此功能通常对 __library 开发人员__来说是最有用的，然而也会有各种各样的应用程序用到它。
@@ -401,6 +402,43 @@ console.log(head([1, 2, 3])); // logs 1 here
 console.log(window._.head(['a', 'b'])); // logs a here
 ```
 
-T> When loading code with HTML `<script>` tags, the webpack runtime will try to find an existing `<script>` tag that matches the `src` attribute or has a specific `data-webpack` attribute. For chunk loading `data-webpack` attribute would have value of `'[output.uniqueName]:chunk-[chunkId]'` while external script has value of `'[output.uniqueName]:[global]'`. 
+T> When loading code with HTML `<script>` tags, the webpack runtime will try to find an existing `<script>` tag that matches the `src` attribute or has a specific `data-webpack` attribute. For chunk loading `data-webpack` attribute would have value of `'[output.uniqueName]:chunk-[chunkId]'` while external script has value of `'[output.uniqueName]:[global]'`.
 
 T> Options like `output.chunkLoadTimeout`, `output.crossOriginLoading` and `output.scriptType` will also have effect on the external scripts loaded this way.
+
+## `externalsPresets`
+
+`object`
+
+Enable presets of externals for specific targets.
+
+W> In earlier webpack versions, the following functionality was achieved by using [`target`](/configuration/target/).
+
+
+
+Option   | Description                                      | Input Type
+----------- | ------------------------------------------------ | ----------
+`electron`     | Treat common electron built-in modules in main and preload context like `electron`, `ipc` or `shell` as external and load them via `require()` when used.                     | boolean
+`electronMain`     | Treat electron built-in modules in the main context like `app`, `ipc-main` or `shell` as external and load them via `require()` when used.                     | boolean
+`electronPreload`     | Treat electron built-in modules in the preload context like `web-frame`, `ipc-renderer` or `shell` as external and load them via require() when used.                     | boolean
+`electronRenderer`     | Treat electron built-in modules in the renderer context like `web-frame`, `ipc-renderer` or `shell` as external and load them via `require()` when used.                     | boolean
+`node`     | Treat node.js built-in modules like `fs`, `path` or `vm` as external and load them via `require()` when used.| boolean
+`nwjs`    | Treat `NW.js` legacy `nw.gui` module as external and load it via `require()` when used.| boolean
+`web`     | Treat references to `http(s)://...` and `std:...` as external and load them via `import` when used. __(Note that this changes execution order as externals are executed before any other code in the chunk)__.| boolean
+`webAsync`     | Treat references to 'http(s)://...' and 'std:...' as external and load them via `async import()` when used __(Note that this external type is an `async` module, which has various effects on the execution)__.| boolean
+
+
+__Example__
+
+Using `node` preset will not bundle built-in modules and treats them as external and loads them via `require()` when used.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  // ...
+  externalsPresets:{
+    node: true
+  }
+};
+```

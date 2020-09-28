@@ -4,8 +4,8 @@
   min-height: 100vh;
   background: #ffffff;
 
-  &__header{
-    z-index:100;
+  &__header {
+    z-index: 100;
     position: fixed;
     width: 100%;
   }
@@ -15,6 +15,10 @@
     position: relative;
     display: flex;
     margin-top: 110px;
+
+    @media print {
+      margin-top: 0px;
+    }
   }
 
   &__sidebar {
