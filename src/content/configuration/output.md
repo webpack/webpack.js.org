@@ -1140,7 +1140,7 @@ module.exports = {
 
 The new option `workerChunkLoading` controls the chunk loading of workers. 
 
-T> The default value of this option changes when `target` is different. For more details, see [`output.workerChunkLoading` default value](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js#L604) and [`target.js`](https://github.com/webpack/webpack/blob/master/lib/config/target.js#L64).
+T> The default value of this option is depending on the `target` setting. For more details, search for `"workerChunkLoading"`: [in the webpack defaults](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js).
 
 __webpack.config.js__
 
