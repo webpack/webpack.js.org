@@ -19,7 +19,6 @@
   "webpack-contrib/source-map-loader",
   "webpack-contrib/null-loader",
   "webpack-contrib/istanbul-instrumenter-loader",
-  "webpack-contrib/eslint-loader",
   "webpack-contrib/svg-inline-loader",
   "webpack-contrib/cache-loader",
   "webpack-contrib/thread-loader",
