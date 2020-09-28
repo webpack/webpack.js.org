@@ -790,7 +790,7 @@ module.exports = {
 
 `boolean = true`
 
-Display children of chunk groups. (e. g. prefetched, preloaded chunks and assets).
+Display children of the chunk groups (e. g. prefetched, preloaded chunks and assets).
 
 ```javascript
 module.exports = {
