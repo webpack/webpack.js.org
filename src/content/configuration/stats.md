@@ -341,7 +341,7 @@ module.exports = {
 };
 ```
 
-T> If `entrypoints: 'auto'` is set then it is decided automatically if displaying of entrypoints make sense.
+When `stats.entrypoints` is set to  `'auto'`, webpack will decide automatically whether to display the entry points in the stats output.
 
 ### `stats.env`
 
