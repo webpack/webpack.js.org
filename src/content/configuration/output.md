@@ -102,7 +102,7 @@ T> Although `charset` attribute for `<script>` tag was [deprecated](https://deve
 
 ## `output.chunkFilename`
 
-`string = '[id].js'`
+`string = '[id].js'` `function (pathData, assetInfo) => string`
 
 This option determines the name of non-entry chunk files. See [`output.filename`](#outputfilename) option for details on the possible values.
 
@@ -118,6 +118,21 @@ module.exports = {
   output: {
     //...
     chunkFilename: '[id].js'
+  }
+};
+```
+
+Usage as a function:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    chunkFilename: (pathData) => {
+      return pathData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
+    },
   }
 };
 ```
