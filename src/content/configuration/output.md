@@ -1136,7 +1136,7 @@ module.exports = {
 
 ## `output.workerChunkLoading`
 
-`string = 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false` 
+`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false` 
 
 The new option `workerChunkLoading` controls the chunk loading of workers. 
 
