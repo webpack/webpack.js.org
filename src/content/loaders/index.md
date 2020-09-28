@@ -62,7 +62,7 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 - [`less-loader`](/loaders/less-loader) 加载并编译 LESS 文件
 - [`sass-loader`](/loaders/sass-loader) 加载并编译 SASS/SCSS 文件
 - [`postcss-loader`](/loaders/postcss-loader) 使用 [PostCSS](http://postcss.org) 加载并转换 CSS/SSS 文件
-- [`stylus-loader`](https://github.com/shama/stylus-loader) 加载并编译 Stylus 文件
+- [`stylus-loader`](/loaders/stylus-loader/) 加载并编译 Stylus 文件
 
 
 ## Linting 和测试 {#linting--testing}

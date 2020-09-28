@@ -1188,7 +1188,7 @@ T> 在 webpack 4 中  `output.ecmaVersion` 的默认值是 `5`.
 
 `boolean = true`
 
-告诉webpack在写入输出文件系统(output file system)之前检查要发出的文件是否已经存在并且具有相同的内容。
+告诉 webpack 在写入输出文件系统（output file system）之前检查要发出的文件是否已经存在并且具有相同的内容。
 
 W> 当文件存在并且内容没有变更时，webpack 不会输出该文件。
 
@@ -1201,7 +1201,42 @@ module.exports = {
 };
 ```
 
-## `output.iife` {#outputiife}
+## `output.wasmLoading` {#output-wasm-loading}
+
+`boolean = false` `string`
+
+此选项用于设置加载 WebAssembly 模块的方式。默认可使用的方式有 `'fetch'`（web/WebWorker），`'async-node'`（Node.js），其他额外方式可由插件提供。
+
+其默认值会根据 [`target`](/configuration/target/) 的变化而变化：
+
+- 如果 [`target`](/configuration/target/) 设置为 `'web'`，`'webworker'`，`'electron-renderer'` 或 `'node-webkit'` 其中之一，其默认值为 `'fetch'`。
+- 如果 [`target`](/configuration/target/) 设置为 `'node'`，`'async-node'`，`'electron-main'` 或 `'electron-preload'`，其默认值为 `'async-node'`。
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    wasmLoading: 'fetch'
+  }
+};
+```
+
+## `output.enabledWasmLoadingTypes` {#output-enabled-wasm-loading-types}
+
+`[string]`
+
+用于设置入口支持的 wasm 加载类型的列表。
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledWasmLoadingTypes: ['fetch']
+  }
+};
+```
+
+## `output.iife` {#output-iife}
 
 `boolean = true`
 
