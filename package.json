@@ -120,7 +120,7 @@
     "minimist": "1.2.3",
     "mkdirp": "^0.5.1",
     "modularscale-sass": "^3.0.3",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.14.1",
     "npm-run-all": "^4.1.1",
     "offline-plugin": "^5.0.7",
     "optimize-css-assets-webpack-plugin": "^5.0.1",

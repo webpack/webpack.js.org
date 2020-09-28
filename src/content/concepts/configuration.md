@@ -6,6 +6,7 @@ contributors:
   - simon04
   - EugeneHlushko
   - byzyk
+  - Cronus1007
 ---
 
 You may have noticed that a few webpack configurations look exactly alike. This is because of the **webpack's configuration file is the JavaScript file that exports the webpack [configuration](/configuration/).** This configuration is then processed by webpack based upon its defined properties.
@@ -14,9 +15,9 @@ Because it's a standard Node.js CommonJS module, you **can do the following**:
 
 - import other files via `require(...)`
 - use utilities on npm via `require(...)`
-- use JavaScript control flow expressions, e.g. the `?:` operator
+- use JavaScript for the control flow of expressions, e.g. the `?:` operator
 - use constants or variables for often used values
-- write and execute functions to generate a part of the configuration
+- write and execute functions to generate the configuration files
 
 Use these features when appropriate.
 
