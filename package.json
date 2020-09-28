@@ -173,5 +173,8 @@
     "webpack-pwa-manifest": "^4.0.0",
     "webpack.vote": "https://github.com/webpack/voting-app.git",
     "whatwg-fetch": "^2.0.3"
+  },
+  "resolutions": {
+    "remark-responsive-tables": "git://github.com/chenxsan/remark-responsive-tables.git#bugfix/fix-empty-head"
   }
 }
