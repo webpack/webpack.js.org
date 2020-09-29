@@ -13,7 +13,6 @@ const fetch = {
       hides: excludedLoaders
     },
     'babel/babel-loader',
-    'postcss/postcss-loader',
     'peerigon/extract-loader'
   ],
   plugins: [
