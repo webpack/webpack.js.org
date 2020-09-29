@@ -11,6 +11,8 @@ contributors:
   - jamesgeorge007
   - anikethsaha
   - snitin315
+  - pixel-ray
+  - chenxsan
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -21,11 +23,9 @@ Since version 4 webpack runs optimizations for you depending on the chosen  [`mo
 
 ## `optimization.minimize`
 
-`boolean`
+`boolean = true`
 
 Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
-
-This is `true` by default in `production` mode.
 
 __webpack.config.js__
 
@@ -83,6 +83,16 @@ module.exports = {
 };
 ```
 
+`'...'` can be used in `optimization.minimizer` to access the defaults.
+
+```js
+module.exports = {
+  optimization: {
+    minimizer: [new CssMinimizer(), '...'],
+  }
+};
+```
+
 ## `optimization.splitChunks`
 
 `object`
@@ -93,7 +103,7 @@ By default webpack v4+ provides new common chunks strategies out of the box for 
 
 `object` `string` `boolean`
 
-Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk to each entrypoint containing only the runtime. This setting is an alias for:
+Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk containing only the runtime to each entrypoint. This setting is an alias for:
 
 __webpack.config.js__
 
@@ -277,6 +287,24 @@ module.exports = {
 };
 ```
 
+By default, a minimum length of 3 digits is used when `optimization.chunkIds` is set to `'deterministic'`. To override the default behaviour, set `optimization.chunkIds` to `false` and use the `webpack.ids.DeterministicChunkIdsPlugin`.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    chunkIds: false
+  },
+  plugins: [
+    new webpack.ids.DeterministicChunkIdsPlugin({
+      maxLength: 5
+    })
+  ]
+};
+```
+
 ## `optimization.nodeEnv`
 
 `boolean = false` `string`
@@ -298,6 +326,8 @@ module.exports = {
   }
 };
 ```
+
+T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` defaults to `false`. 
 
 ## `optimization.mangleWasmImports`
 
@@ -538,6 +568,23 @@ module.exports = {
   //...
   optimization: {
     innerGraph: false
+  }
+};
+```
+
+## `optimization.realContentHash`
+
+`boolean = true`
+
+Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    realContentHash: false
   }
 };
 ```

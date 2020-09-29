@@ -84,7 +84,7 @@ This will bundle your source code with entry as `index.js`, and the output bundl
 ```
 
 ```bash
-webpack index=./src/index.js entry2=./src/index2.js -o dist/bundle.js
+webpack ./src/index.js ./src.index2.js -o dist/bundle.js
 ```
 
 This will form the bundle with both the files as separate entry points.
@@ -92,7 +92,7 @@ This will form the bundle with both the files as separate entry points.
 ```bash
 	| Asset     | Size    | Chunks        | Chunk Names   |
 	|-----------|---------|---------------|---------------|
-	| bundle.js | 1.55 kB | 0,1 [emitted] | index, entry2 |
+	| bundle.js | 1.55 kB | 0,1 [emitted] | index, index2 |
 	[0] ./src/index.js 51 bytes {0} [built]
 	[0] ./src/index2.js 54 bytes {1} [built]
 	[1] ./src/others.js 29 bytes {0} {1} [built]

@@ -50,28 +50,34 @@ Since webpack 3.0.0, the `node` option may be set to `false` to completely turn 
 
 ## `node.global`
 
-`boolean = false`
+`boolean = true`
+
+Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` and `electron-main`.
 
 See [the source](https://nodejs.org/api/globals.html) for the exact behavior of this object.
 
 
 ## `node.__filename`
 
-`string` `boolean = false`
+`boolean` `string = mock`
+
+Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` and `electron-main`.
 
 Options:
 
-- `true`: The filename of the __input__ file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
+- `true`: The filename of the __input__ file relative to the [`context` option](/configuration/entry-context/#context).
 - `false`: The regular Node.js `__filename` behavior. The filename of the __output__ file when run in a Node.js environment.
 - `'mock'`: The fixed value `'index.js'`.
 
 
 ## `node.__dirname`
 
-`string` `boolean = false`
+`boolean` `string = mock`
+
+Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` and `electron-main`.
 
 Options:
 
-- `true`: The dirname of the __input__ file relative to the [`context` option](https://webpack.js.org/configuration/entry-context/#context).
+- `true`: The dirname of the __input__ file relative to the [`context` option](/configuration/entry-context/#context).
 - `false`: The regular Node.js `__dirname` behavior. The dirname of the __output__ file when run in a Node.js environment.
 - `'mock'`: The fixed value `'/'`.

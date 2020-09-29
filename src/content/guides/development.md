@@ -168,7 +168,7 @@ __package.json__
   }
 ```
 
-Change your configuration file to tell `CleanWebpackPlugin` we dont want to remove `index.html` file after incremental build triggered by watch, we do it via using the [`cleanStaleWebpackAssets` option](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional):
+Tell `CleanWebpackPlugin` that we don't want to remove the `index.html` file after the incremental build triggered by watch. We do this with the [`cleanStaleWebpackAssets` option](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional):
 
 __webpack.config.js__
 
@@ -184,9 +184,6 @@ __webpack.config.js__
       print: './src/print.js',
     },
     devtool: 'inline-source-map',
-+   devServer: {
-+     contentBase: './dist',
-+   },
     plugins: [
 -     new CleanWebpackPlugin(),
 +     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
@@ -454,4 +451,4 @@ To disable this feature in some common editors, see the list below:
 
 ## Conclusion
 
-Now that you've learned how to automatically compile your code and run a simple development server, you can check out the next guide, which will cover [Hot Module Replacement](/guides/hot-module-replacement).
+Now that you've learned how to automatically compile your code and run a simple development server, you can check out the next guide, which will cover [Code Splitting](/guides/code-splitting/).
