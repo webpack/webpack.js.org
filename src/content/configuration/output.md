@@ -24,6 +24,7 @@ contributors:
   - hiroppy
   - chenxsan
   - snitin315
+  - QC-L
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -1144,6 +1145,25 @@ module.exports = {
   //...
   output: {
     umdNamedDefine: true
+  }
+};
+```
+
+## `output.workerChunkLoading`
+
+`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false` 
+
+The new option `workerChunkLoading` controls the chunk loading of workers. 
+
+T> The default value of this option is depending on the `target` setting. For more details, search for `"workerChunkLoading"`: [in the webpack defaults](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    workerChunkLoading: false
   }
 };
 ```
