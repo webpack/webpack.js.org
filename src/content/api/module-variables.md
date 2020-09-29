@@ -11,6 +11,7 @@ contributors:
   - EugeneHlushko
   - wizardofhogwarts
   - anikethsaha
+  - chenxsan
 
 related:
   - title: CommonJS
@@ -89,6 +90,25 @@ Depending on the configuration option `node.__dirname`:
 
 If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
 
+### `import.meta.url`
+
+Returns the absolute `file:` URL of the module.
+
+__src/index.js__
+
+```javascript
+console.log(import.meta.url); // output something like `file:///path/to/your/project/src/index.js`
+```
+
+### `import.meta.webpack`
+
+Returns the webpack version.
+
+__src/index.js__
+
+```javascript
+console.log(import.meta.webpack); // output `5` for webpack 5
+```
 
 ### `__filename` (NodeJS)
 

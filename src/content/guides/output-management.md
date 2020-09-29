@@ -8,6 +8,7 @@ contributors:
   - JGJP
   - EugeneHlushko
   - AnayaDesign
+  - chenxsan
 ---
 
 T> This guide extends on code examples found in the [`Asset Management`](/guides/asset-management) guide.
@@ -166,9 +167,6 @@ Before we do a build, you should know that the `HtmlWebpackPlugin` by default wi
 If you open `index.html` in your code editor, you'll see that the `HtmlWebpackPlugin` has created an entirely new file for you and that all the bundles are automatically added.
 
 If you want to learn more about all the features and options that the `HtmlWebpackPlugin` provides, then you should read up on it on the [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) repo.
-
-You can also take a look at [`html-webpack-template`](https://github.com/jaketrent/html-webpack-template) which provides a couple of extra features in addition to the default template.
-
 
 ## Cleaning up the `/dist` folder
 

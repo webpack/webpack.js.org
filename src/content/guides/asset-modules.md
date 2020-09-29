@@ -4,6 +4,8 @@ sort: 24
 contributors:
   - smelukov
   - EugeneHlushko
+  - chenxsan
+  - anshumanv
 related:
   - title: webpack 5 - Asset Modules
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
@@ -24,25 +26,6 @@ Asset Modules type replaces all of these loaders by adding 4 new module types:
 - `asset/source` exports the source code of the asset. Previously achievable by using `raw-loader`.
 - `asset` automatically chooses between exporting a data URI and emitting a separate file. Previously achievable by using `url-loader` with asset size limit.
 
-W> This is an experimental feature. Enable Asset Modules by setting `experiments.asset: true` in [experiments](/configuration/experiments/) option of your webpack configuration.
-
-__webpack.config.js__
-
-```diff
-const path = require('path');
-
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-+ experiments: {
-+   asset: true
-+ },
-};
-```
-
 ## Resource assets
 
 __webpack.config.js__
@@ -55,9 +38,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
 + module: {
 +   rules: [
@@ -82,7 +62,7 @@ All `.png` files will be emitted to the output directory and their paths will be
 
 ### Custom output filename
 
-By default, `asset/resource` modules are emitting with `[hash][ext]` filename into output directory.
+By default, `asset/resource` modules are emitting with `[hash][ext][query]` filename into output directory. You can also use `[contenthash]` and `[modulehash]`, otherwise it defaults to `[hash]`.
 
 You can modify this template by setting [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) in your webpack configuration:
 
@@ -96,10 +76,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-+   assetModuleFilename: 'images/[hash][ext]'
-  },
-  experiments: {
-    asset: true
++   assetModuleFilename: 'images/[hash][ext][query]'
   },
   module: {
     rules: [
@@ -122,10 +99,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
-+   assetModuleFilename: 'images/[hash][ext]'
-  },
-  experiments: {
-    asset: true
++   assetModuleFilename: 'images/[hash][ext][query]'
   },
   module: {
     rules: [
@@ -138,7 +112,7 @@ module.exports = {
 +       test: /\.html/,
 +       type: 'asset/resource',
 +       generator: {
-+         filename: 'static/[hash][ext]'
++         filename: 'static/[hash][ext][query]'
 +       }
 +     }
     ]
@@ -162,10 +136,7 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
--   assetModuleFilename: 'images/[hash][ext]'
-  },
-  experiments: {
-    asset: true
+-   assetModuleFilename: 'images/[hash][ext][query]'
   },
   module: {
     rules: [
@@ -180,7 +151,7 @@ module.exports = {
 -       test: /\.html/,
 -       type: 'asset/resource',
 -       generator: {
--         filename: 'static/[hash][ext]'
+-         filename: 'static/[hash][ext][query]'
 -       }
 -     }
     ]
@@ -195,7 +166,7 @@ __src/index.js__
 + import metroMap from './images/matro.svg';
 
 - img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
-+ block.style.background = `url(${metroMap}); // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
++ block.style.background = `url(${metroMap})`; // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
 ```
 
 All `.svg` files will be injected into the bundles as data URI.
@@ -217,9 +188,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -253,9 +221,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -294,6 +259,29 @@ __src/index.js__
 
 All `.txt` files will be injected into the bundles as is.
 
+## URL assets
+
+When using `new URL('./path/to/asset', import.meta.url)`, webpack creates an asset module too.
+
+__src/index.js__
+
+```js
+const logo = new URL('./logo.svg', import.meta.url);
+```
+
+Depending on the [`target`](/configuration/target/) in your configuration, webpack would compile the above code into a different result:
+
+```js
+// target: web
+new URL(__webpack_public_path__ + 'logo.svg', document.baseURI || self.location.href);
+
+// target: webworker
+new URL(__webpack_public_path__ + 'logo.svg', self.location);
+
+// target: node, node-webkit, nwjs, electron-main, electron-renderer, electron-preload, async-node
+new URL(__webpack_public_path__ + 'logo.svg', require('url').pathToFileUrl(__filename));
+```
+
 ## General asset type
 
 __webpack.config.js__
@@ -306,9 +294,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [
@@ -335,9 +320,6 @@ module.exports = {
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
-  },
-  experiments: {
-    asset: true
   },
   module: {
     rules: [

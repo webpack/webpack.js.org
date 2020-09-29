@@ -14,6 +14,7 @@ contributors:
   - plr108
   - NicolasLetellier
   - wizardofhogwarts
+  - snitin315
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
@@ -452,10 +453,6 @@ Node built-ins, like `process`, can be polyfilled right directly from your confi
 ## Other Utilities
 
 There are a few other tools that can help when dealing with legacy modules.
-
-The [`script-loader`](/loaders/script-loader/) evaluates code in the global context, similar to inclusion via a `script` tag. In this mode, every normal library should work. `require`, `module`, etc. are undefined.
-
-W> When using the `script-loader`, the module is added as a string to the bundle. It is not minimized by `webpack`, so use a minimized version. There is also no `devtool` support for libraries added by this loader.
 
 When there is no AMD/CommonJS version of the module and you want to include the `dist`, you can flag this module in [`noParse`](/configuration/module/#modulenoparse). This will cause webpack to include the module without parsing it or resolving `require()` and `import` statements. This practice is also used to improve the build performance.
 

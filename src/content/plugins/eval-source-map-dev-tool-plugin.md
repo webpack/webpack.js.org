@@ -8,6 +8,8 @@ contributors:
   - madhavarshney
   - koke
   - jamesgeorge007
+  - anshumanv
+  - EugeneHlushko
 related:
   - title: Building Eval Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin
@@ -27,7 +29,6 @@ The following options are supported:
 - `test` (`string|RegExp|array`): Include source maps for modules based on their extension (defaults to `.js` and `.css`).
 - `include` (`string|RegExp|array`): Include source maps for module paths that match the given value.
 - `exclude` (`string|RegExp|array`): Exclude modules that match the given value from source map generation.
-- `filename` (`string`): Defines the output filename of the SourceMap (will be inlined if no value is provided).
 - `append` (`string`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. `false` disables the appending.
 - `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate).
 - `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
@@ -62,7 +63,6 @@ The following code would exclude source maps for any modules in the `vendor.js` 
 
 ``` js
 new webpack.EvalSourceMapDevToolPlugin({
-  filename: '[name].js.map',
   exclude: ['vendor.js']
 });
 ```

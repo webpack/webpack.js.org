@@ -328,7 +328,7 @@ module.exports = {
 
 ### `stats.entrypoints`
 
-`boolean = true`
+`boolean = true` `string = 'auto'`
 
 Tells `stats` whether to display the entry points with the corresponding bundles.
 
@@ -340,6 +340,8 @@ module.exports = {
   }
 };
 ```
+
+When `stats.entrypoints` is set to  `'auto'`, webpack will decide automatically whether to display the entry points in the stats output.
 
 ### `stats.env`
 
@@ -664,6 +666,36 @@ module.exports = {
 };
 ```
 
+### `stats.errorsCount`
+
+`boolean = true`
+
+Add errors count.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    errorsCount: false
+  }
+};
+```
+
+### `stats.warningsCount`
+
+`boolean = true`
+
+Add warnings count.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    warningsCount: false
+  }
+};
+```
+
 ### `stats.publicPath`
 
 `boolean = true`
@@ -690,6 +722,21 @@ module.exports = {
   //...
   stats: {
     reasons: false
+  }
+};
+```
+
+### `stats.relatedAssets`
+
+`boolean = false`
+
+Tells `stats` whether to add information about assets that are related to other assets (like SourceMaps for assets).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    relatedAssets: true
   }
 };
 ```
@@ -750,6 +797,51 @@ module.exports = {
   //...
   stats: {
     version: false
+  }
+};
+```
+
+### `stats.chunkGroupAuxiliary`
+
+`boolean = true`
+
+Display auxiliary assets in chunk groups.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupAuxiliary: false
+  }
+};
+```
+
+### `stats.chunkGroupChildren`
+
+`boolean = true`
+
+Display children of the chunk groups (e. g. prefetched, preloaded chunks and assets).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupChildren: false
+  }
+};
+```
+
+### `stats.chunkGroupMaxAssets`
+
+`number`
+
+Limit of assets displayed in chunk groups.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupMaxAssets: 5
   }
 };
 ```

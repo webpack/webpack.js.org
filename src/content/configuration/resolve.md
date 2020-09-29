@@ -15,6 +15,8 @@ contributors:
   - Aghassi
   - myshov
   - anikethsaha
+  - chenxsan
+  - jamesgeorge007
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -120,7 +122,34 @@ The following table explains other cases:
 
 W> `resolve.alias` takes precedence over other module resolutions.
 
-W> [`null-loader`](https://github.com/webpack-contrib/null-loader) will be deprecated in `webpack@5`. use `alias: { xyz$: false }` or absolute path `alias: {[path.resolve(__dirname, "....")]: false }`
+W> [`null-loader`](https://github.com/webpack-contrib/null-loader) is deprecated in webpack 5. use `alias: { xyz$: false }` or absolute path `alias: {[path.resolve(__dirname, './path/to/module')]: false }`
+
+W> `[string]` values are supported since webpack 5.
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      _: [path.resolve(__dirname, 'src/utilities/'), path.resolve(__dirname, 'src/templates/')]
+    }
+  }
+};
+```
+
+Setting `resolve.alias` to `false` will tell webpack to ignore a module.
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      'ignored-module': false,
+      './ignored-module': false,
+    }
+  }
+};
+```
 
 ### `resolve.aliasFields`
 
@@ -420,6 +449,77 @@ module.exports = {
     cachePredicate: (module) => {
       // additional logic
       return true;
+    }
+  }
+};
+```
+
+### `resolve.restrictions`
+
+`[string, RegExp]`
+
+A list of resolve restrictions to restrict the paths that a request can be resolved on.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    restrictions: [/\.(sass|scss|css)$/]
+  }
+};
+```
+
+### `resolve.roots`
+
+`[string]`
+
+A list of directories where requests of server-relative URLs (starting with '/') are resolved, defaults to [`context` configuration option](/configuration/entry-context/#context). On non-Windows systems these requests are resolved as an absolute path first.
+
+__webpack.config.js__
+
+```js
+const fixtures = path.resolve(__dirname, 'fixtures');
+module.exports = {
+  //...
+  resolve: {
+    roots: [__dirname, fixtures]
+  }
+};
+```
+
+### `resolve.importsFields`
+
+`[string]`
+
+Fields from `package.json` which are used to provide the internal requests of a package (requests starting with `#` are considered internal).
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    importsFields: ['browser', 'module', 'main']
+  }
+};
+```
+
+### `resolve.fallback`
+
+`boolean`
+
+Redirect module requests when normal resolving fails.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    fallback: {
+      xyz: path.resolve(__dirname, 'path/to/file.js')
     }
   }
 };

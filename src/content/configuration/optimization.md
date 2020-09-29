@@ -12,6 +12,7 @@ contributors:
   - anikethsaha
   - snitin315
   - pixel-ray
+  - chenxsan
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -22,11 +23,9 @@ Since version 4 webpack runs optimizations for you depending on the chosen  [`mo
 
 ## `optimization.minimize`
 
-`boolean`
+`boolean = true`
 
 Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
-
-This is `true` by default in `production` mode.
 
 __webpack.config.js__
 
@@ -84,6 +83,16 @@ module.exports = {
 };
 ```
 
+`'...'` can be used in `optimization.minimizer` to access the defaults.
+
+```js
+module.exports = {
+  optimization: {
+    minimizer: [new CssMinimizer(), '...'],
+  }
+};
+```
+
 ## `optimization.splitChunks`
 
 `object`
@@ -94,7 +103,7 @@ By default webpack v4+ provides new common chunks strategies out of the box for 
 
 `object` `string` `boolean`
 
-Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk to each entrypoint containing only the runtime. This setting is an alias for:
+Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk containing only the runtime to each entrypoint. This setting is an alias for:
 
 __webpack.config.js__
 
@@ -317,6 +326,8 @@ module.exports = {
   }
 };
 ```
+
+T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` defaults to `false`. 
 
 ## `optimization.mangleWasmImports`
 
@@ -557,6 +568,23 @@ module.exports = {
   //...
   optimization: {
     innerGraph: false
+  }
+};
+```
+
+## `optimization.realContentHash`
+
+`boolean = true`
+
+Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    realContentHash: false
   }
 };
 ```
