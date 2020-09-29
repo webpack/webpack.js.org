@@ -144,6 +144,51 @@ module.exports = {
 };
 ```
 
+### `stats.assetsSpace`
+
+`number`
+
+Tells `stats`  how many items of assets should be displayed (groups will be collapsed to fit this space)  .
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    assetsSpace: 15
+  }
+};
+```
+
+### `stats.modulesSpace`
+
+`number`
+
+Tells `stats`  how many items of modules should be displayed(groups will be collapsed to fit this space)  .
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    modulesSpace: 15
+  }
+};
+```
+
+### `stats.chunkModulesSpace`
+
+`number`
+
+Tells `stats`  how many items of chunk modules should be displayed(groups will be collapsed to fit this space)  .
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkModulesSpace: 15
+  }
+};
+```
+
 ### `stats.cachedAssets`
 
 `boolean = true`
