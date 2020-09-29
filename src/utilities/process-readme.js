@@ -104,7 +104,7 @@ module.exports = function processREADME(body, options = {}) {
     // dont make relative links for excluded loaders
     loaderMatches.forEach((match) => {
       if (!excludedLoaders.includes(`${match[1]}/${match[2]}`)) {
-        processingString = body.replace(match[0], `/loaders/${match[2]}`);
+        processingString = processingString.replace(match[0], `/loaders/${match[2]}`);
       }
     });
 
@@ -112,7 +112,7 @@ module.exports = function processREADME(body, options = {}) {
     // dont make relative links for excluded loaders
     pluginMatches.forEach((match) => {
       if (!excludedPlugins.includes(`${match[1]}/${match[2]}`)) {
-        processingString = body.replace(match[0], `/plugins/${match[2]}`);
+        processingString = processingString.replace(match[0], `/plugins/${match[2]}`);
       }
     });
 
