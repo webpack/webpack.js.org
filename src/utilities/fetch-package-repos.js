@@ -13,7 +13,8 @@ const fetch = {
       hides: excludedLoaders
     },
     'babel/babel-loader',
-    'peerigon/extract-loader'
+    'peerigon/extract-loader',
+    'Banno/polymer-webpack-loader'
   ],
   plugins: [
     {
