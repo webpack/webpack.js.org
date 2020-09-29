@@ -438,7 +438,7 @@ __src/index.js__
 import logo1 from 'logo.svg'; // this is viable when `preferRelative` enabled
 import logo2 from './logo.svg'; // otherwise you can only use relative path to resolve logo.svg
 
-// `preferRelative` are enabled by default for `new URL()` case
+// `preferRelative` is enabled by default for `new URL()` case
 const b = new URL('module/path', import.meta.url);
 const a = new URL('./module/path', import.meta.url);
 ```
