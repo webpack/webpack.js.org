@@ -21,7 +21,7 @@ related:
 
 本章节涵盖了使用 webpack 编译代码的所有方法。在 webpack 打包应用程序时，你可以选择各种模块语法风格，包括 [ES6](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015)，[CommonJS](https://en.wikipedia.org/wiki/CommonJS) 和 [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition)。
 
-尽管 webpack 支持多种模块语法，但我们还是建议尽量使用一致的语法，以此避免一些奇怪的行为和 bug。事实上，当距离最近的 `package.json` 文件中包含 `"type"` 字段，其值为 `"module"` 或 `"commonjs"` 时，webpack 会为 `.mjs` 文件，`.cjs` 文件或 `.js` 文件强制启用此方案。请大家在阅读前，注意此情况：
+尽管 webpack 支持多种模块语法，但我们还是建议尽量使用一致的语法，以此避免一些奇怪的行为和 bug。事实上，当距离最近的 `package.json` 文件中包含值为 `"module"` 或 `"commonjs"` 的 `"type"` 字段时，webpack 会启用语法一致性检查。请大家在阅读前，注意此情况：
 
 - 在 `package.json` 中为 `.mjs` 或 `.js` 设置 `"type": "module"`
     - 不允许使用 CommonJS，例如，你不能使用 `require`，`module.exports` 或 `exports`
