@@ -9,9 +9,9 @@ contributors:
   - Cronus1007
 ---
 
-You may have noticed that a few webpack configurations look exactly alike. This is because of the **webpack's configuration file is the JavaScript file that exports the webpack [configuration](/configuration/).** This configuration is then processed by webpack based upon its defined properties.
+You may have noticed that a few webpack configurations look exactly alike. This is because of the \_\ _webpack's configuration file is the JavaScript file that exports the webpack [configuration](/configuration/).\ _\ \_ This configuration is then processed by webpack based upon its defined properties.
 
-Because it's a standard Node.js CommonJS module, you **can do the following**:
+Because it's a standard Node.js CommonJS module, you \_\ _can do the following\ _\ \_:
 
 - import other files via `require(...)`
 - use utilities on npm via `require(...)`
@@ -21,7 +21,7 @@ Because it's a standard Node.js CommonJS module, you **can do the following**:
 
 Use these features when appropriate.
 
-While they are technically feasible, **the following practices should be avoided**:
+While they are technically feasible, \_\ _the following practices should be avoided\ _\ \_:
 
 - Access CLI arguments, when using the webpack CLI (instead write your own CLI, or [use `--env`](/configuration/configuration-types/))
 - Export non-deterministic values (calling webpack twice should result in the same output files)
@@ -33,7 +33,7 @@ The examples below describe how webpack's configuration can be both expressive a
 
 ## Simple Configuration
 
-**webpack.config.js**
+\_ _webpack.config.js _ \_
 
 ```javascript
 var path = require('path');
