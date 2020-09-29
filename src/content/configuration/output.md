@@ -102,7 +102,7 @@ T> Although `charset` attribute for `<script>` tag was [deprecated](https://deve
 
 ## `output.chunkFilename`
 
-`string = '[id].js'`
+`string = '[id].js'` `function (pathData, assetInfo) => string`
 
 This option determines the name of non-entry chunk files. See [`output.filename`](#outputfilename) option for details on the possible values.
 
@@ -118,6 +118,21 @@ module.exports = {
   output: {
     //...
     chunkFilename: '[id].js'
+  }
+};
+```
+
+Usage as a function:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    chunkFilename: (pathData) => {
+      return pathData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
+    },
   }
 };
 ```
@@ -1197,6 +1212,41 @@ module.exports = {
   //...
   output: {
     compareBeforeEmit: false
+  }
+};
+```
+
+## `output.wasmLoading`
+
+`boolean = false` `string`
+
+Option to set the method of loading WebAssembly Modules. Methods included by default are `'fetch'` (web/WebWorker), `'async-node'` (Node.js), but others might be added by plugins.
+
+The default value can be affected by different [`target`](/configuration/target/):
+
+- Defaults to `'fetch'` if [`target`](/configuration/target/) is set to `'web'`, `'webworker'`, `'electron-renderer'` or `'node-webkit'`.
+- Defaults to `'async-node'` if [`target`](/configuration/target/) is set to `'node'`, `'async-node'`, `'electron-main'` or `'electron-preload'`.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    wasmLoading: 'fetch'
+  }
+};
+```
+
+## `output.enabledWasmLoadingTypes`
+
+`[string]`
+
+List of wasm loading types enabled for use by entry points.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledWasmLoadingTypes: ['fetch']
   }
 };
 ```

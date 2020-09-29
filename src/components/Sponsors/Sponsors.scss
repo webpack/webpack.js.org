@@ -7,6 +7,12 @@
   width: 250px;
   margin-left: -250px;
 
+  &__content-cont {
+    margin-top: 1rem;
+    font-size: 2em;
+    text-align: center;
+    color: #535353;
+  }
   &__content {
     position: sticky;
     display: none;
@@ -27,6 +33,11 @@
 
     &:hover {
       background-color: getColor(concrete);
+    }
+  }
+  &__img {
+    &__webpack {
+      width: 100px;
     }
   }
 }

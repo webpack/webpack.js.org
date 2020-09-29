@@ -10,23 +10,18 @@ import WebpackIcon from '../../assets/icon-square-small.svg';
 import '../Sponsors/Sponsors.scss';
 
 // Create and export the component
-export default props => {
+export default (props) => {
   return (
     <div className="sponsors">
       <Link
         className="sponsors__content"
-        to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship">
-        <img src={ AGLogo } />
-        <img src={ WebpackIcon } style={{ width: '100px' }} />
-        <div style={{
-          marginTop: '1em',
-          fontSize: '2em',
-          textAlign: 'center',
-          color: '#535353'
-        }}>
+        to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship"
+      >
+        <img src={AGLogo} />
+        <img className="sponsors__img__webpack" src={WebpackIcon} />
+        <div className="sponsors__content-cont">
           ag-grid is proud to partner with webpack
         </div>
-
       </Link>
     </div>
   );
