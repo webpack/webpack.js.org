@@ -22,7 +22,7 @@ contributors:
 ## B {#b}
 
 - [__Bundle__](/guides/getting-started/#creating-a-bundle): bundle 由许多不同的模块生成，包含已经经过加载和编译过程的源文件的最终版本。
-- [__Bundle Splitting__](/guides/code-splitting): 这个过程提供了一种优化构建的方法，允许 webpack 为单个应用程序生成多个 bundle 文件。因此，可以将每个 bundle 文件与影响其他文件的更改进行分离，从而减少重新发布并由此被客户端重新下载的代码量，并且运用览器缓存。
+- [__Bundle Splitting__](/guides/code-splitting): 这个过程提供了一种优化构建的方法，允许 webpack 为单个应用程序生成多个 bundle 文件。因此，可以将每个 bundle 文件与影响其他文件的更改进行分离，从而减少重新发布并由此被客户端重新下载的代码量，并且运用浏览器缓存。
 
 
 ## C {#c}
