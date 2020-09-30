@@ -418,7 +418,7 @@ module.exports = {
 
 `boolean`
 
-When enabled, webpack would prefer to resolve module requests as relative requests than modules from `node_modules` directories.
+When enabled, webpack would prefer to resolve module requests as relative requests instead of using modules from `node_modules` directories.
 
 __webpack.config.js__
 
