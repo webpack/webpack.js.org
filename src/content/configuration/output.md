@@ -1151,9 +1151,9 @@ module.exports = {
 
 ## `output.workerChunkLoading`
 
-`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false` 
+`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
 
-The new option `workerChunkLoading` controls the chunk loading of workers. 
+The new option `workerChunkLoading` controls the chunk loading of workers.
 
 T> The default value of this option is depending on the `target` setting. For more details, search for `"workerChunkLoading"`: [in the webpack defaults](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js).
 
@@ -1200,24 +1200,32 @@ module.exports = {
 };
 ```
 
-## `output.ecmaVersion`
+## `output.environment`
 
-`number = 6`
-
-Tell webpack the maximum EcmaScript version of the webpack generated code. It should be one of these:
-
-- should be >= 5, should be <= 11
-- should be >= 2009, should be <= 2020
+Tell webpack what kind of ES-features may be used in the generated runtime-code.
 
 ```javascript
 module.exports = {
   output: {
-    ecmaVersion: 6
+    environment: {
+      // The environment supports arrow functions ('() => { ... }').
+      arrowFunction: true,
+      // The environment supports BigInt as literal (123n).
+      bigIntLiteral: false,
+      // The environment supports const and let for variable declarations.
+      const: true,
+      // The environment supports destructuring ('{ a, b } = obj').
+      destructuring: true,
+      // The environment supports an async import() function to import EcmaScript modules.
+      dynamicImport: false,
+      // The environment supports 'for of' iteration ('for (const x of array) { ... }').
+      forOf: true,
+      // The environment supports EcmaScript Module syntax to import EcmaScript modules (import ... from '...').
+      module: false,
+    }
   }
 };
 ```
-
-T> The default value of `output.ecmaVersion` in webpack 4 is `5`.
 
 ## `output.compareBeforeEmit`
 
