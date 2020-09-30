@@ -12205,10 +12205,9 @@ remark-react@^4.0.0:
     refractor "^3.1.0"
     unist-util-visit "1.3.1"
 
-remark-responsive-tables@1.0.0:
+remark-responsive-tables@1.0.0, "remark-responsive-tables@git://github.com/chenxsan/remark-responsive-tables.git#bugfix/fix-empty-head":
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/remark-responsive-tables/-/remark-responsive-tables-1.0.0.tgz#4827a1a516ee3b902d2b70bb2179313e03be7d2d"
-  integrity sha512-fcjcn83o2p2YxHq/AQ33Daypcency42MrY4ccCf7leWzZAYJ1wibPTaji23zt0S+R02rab2AQLwx84I4OY5rDA==
+  resolved "git://github.com/chenxsan/remark-responsive-tables.git#6d363c396d21ac6150e24bf414050865befbe591"
   dependencies:
     unist-util-visit "1.3.1"
 

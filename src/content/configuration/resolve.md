@@ -16,6 +16,7 @@ contributors:
   - myshov
   - anikethsaha
   - chenxsan
+  - jamesgeorge007
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -484,6 +485,42 @@ module.exports = {
   //...
   resolve: {
     roots: [__dirname, fixtures]
+  }
+};
+```
+
+### `resolve.importsFields`
+
+`[string]`
+
+Fields from `package.json` which are used to provide the internal requests of a package (requests starting with `#` are considered internal).
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    importsFields: ['browser', 'module', 'main']
+  }
+};
+```
+
+### `resolve.fallback`
+
+`boolean`
+
+Redirect module requests when normal resolving fails.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    fallback: {
+      xyz: path.resolve(__dirname, 'path/to/file.js')
+    }
   }
 };
 ```

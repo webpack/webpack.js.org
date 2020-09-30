@@ -24,6 +24,7 @@ contributors:
   - hiroppy
   - chenxsan
   - snitin315
+  - QC-L
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -102,7 +103,7 @@ T> Although `charset` attribute for `<script>` tag was [deprecated](https://deve
 
 ## `output.chunkFilename`
 
-`string = '[id].js'`
+`string = '[id].js'` `function (pathData, assetInfo) => string`
 
 This option determines the name of non-entry chunk files. See [`output.filename`](#outputfilename) option for details on the possible values.
 
@@ -118,6 +119,21 @@ module.exports = {
   output: {
     //...
     chunkFilename: '[id].js'
+  }
+};
+```
+
+Usage as a function:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    chunkFilename: (pathData) => {
+      return pathData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
+    },
   }
 };
 ```
@@ -1129,6 +1145,25 @@ module.exports = {
   //...
   output: {
     umdNamedDefine: true
+  }
+};
+```
+
+## `output.workerChunkLoading`
+
+`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false` 
+
+The new option `workerChunkLoading` controls the chunk loading of workers. 
+
+T> The default value of this option is depending on the `target` setting. For more details, search for `"workerChunkLoading"`: [in the webpack defaults](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    workerChunkLoading: false
   }
 };
 ```
