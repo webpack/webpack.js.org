@@ -18,6 +18,10 @@ repo: https://github.com/webpack-contrib/eslint-loader
 
 > A ESlint loader for webpack
 
+## :warning: DEPRECATED
+
+`eslint-loader` has been deprecated. Please use [`eslint-webpack-plugin`](/plugins/eslint-webpack-plugin/).
+
 ## Install
 
 ```bash
