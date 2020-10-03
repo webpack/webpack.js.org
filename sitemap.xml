@@ -145,6 +145,9 @@
         <loc>https://webpack.js.org/concepts/output</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/concepts/plugins</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/concepts/targets</loc>
     </url>
     <url>
@@ -175,9 +178,6 @@
         <loc>https://webpack.js.org/configuration/externals</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/plugins</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/configuration/mode</loc>
     </url>
     <url>
@@ -185,6 +185,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/node</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/optimization</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/other-options</loc>
@@ -206,9 +209,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/target</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/optimization</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/watch</loc>
@@ -247,10 +247,10 @@
         <loc>https://webpack.js.org/development/release-process</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/get-started/why-webpack</loc>
+        <loc>https://webpack.js.org/get-started/install-webpack</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/get-started/install-webpack</loc>
+        <loc>https://webpack.js.org/get-started/why-webpack</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/asset-management</loc>
@@ -310,10 +310,10 @@
         <loc>https://webpack.js.org/guides/hot-module-replacement</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/integrations</loc>
+        <loc>https://webpack.js.org/guides/installation</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/installation</loc>
+        <loc>https://webpack.js.org/guides/integrations</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/lazy-loading</loc>
@@ -349,6 +349,9 @@
         <loc>https://webpack.js.org/guides/why-webpack</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/babel-loader</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/cache-loader</loc>
     </url>
     <url>
@@ -359,9 +362,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/exports-loader</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/babel-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/expose-loader</loc>
