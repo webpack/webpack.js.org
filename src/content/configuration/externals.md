@@ -301,9 +301,9 @@ W> [Default type](/configuration/externals/#externalstype) will be used if you s
 
 `string = 'var'`
 
-Specifies the default type of externals. `amd`, `umd`, `system` and `jsonp` externals __depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)__ being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
+指定 externals 的默认类型。当 external 被设置为 `amd`，`umd`，`system` 以及 `jsonp` 时，**[`output.libraryTarget`](/configuration/output/#outputlibrarytarget)** 的值也应相同。例如，你只能在 `amd` 库中使用 `amd` 的 externals。
 
-Supported types:
+支持的类型如下：
 
 - `'var'`
 - `'module'`
@@ -320,9 +320,9 @@ Supported types:
 - `'umd2'`
 - `'jsonp'`
 - `'system'`
-- `'promise'` - same as `'var'` but awaits the result (async module)
-- `'import'` - uses `import()` to load a native EcmaScript module (async module)
-- `'script'` - load script exposing predefined global variables with HTML `<script>` element
+- `'promise'` - 与 `'var'` 相同，但会 awaits 结果（适用于 async 模块）
+- `'import'` - 使用 `import()` 加载原生的 EcmaScript 模块（适用于 async 模块）
+- `'script'` - 使用 HTML 的 `<script>` 元素加载 script，用于暴露预定义的全局变量
 
 __webpack.config.js__
 
@@ -347,7 +347,7 @@ module.exports = {
 };
 ```
 
-You can also use the shortcut syntax if you're not going to specify any properties:
+如果你不打算定义任何熟悉，你可以使用简写形式：
 
 ```javascript
 module.exports = {
@@ -357,11 +357,11 @@ module.exports = {
 };
 ```
 
-T> [`output.publicPath`](/configuration/output/#outputpublicpath) won't be added to the provided URL.
+T> [`output.publicPath`](/configuration/output/#outputpublicpath) 不会被添加到提供的 URL 中。
 
-#### Example {#example}
+#### 示例 {#example}
 
-Let's load a `lodash` from CDN:
+从 CDN 加载 `lodash`：
 
 __webpack.config.js__
 
@@ -375,14 +375,14 @@ module.exports = {
 };
 ```
 
-Then use it in code:
+然后，代码中使用方式如下：
 
 ```js
 import _ from 'lodash';
 console.log(_.head([1, 2, 3]));
 ```
 
-Here's how we specify properties for the above example:
+下面示例是针对上面示例新增了属性配置：
 
 ```js
 module.exports = {
@@ -394,7 +394,7 @@ module.exports = {
 };
 ```
 
-Both local variable `head` and global `window._` will be exposed when you `import` `lodash`:
+当你 `import 'loadsh'` 时，局部变量 `head` 和全局变量 `window._` 都会被暴露：
 
 ```js
 import head from 'lodash';
@@ -402,35 +402,35 @@ console.log(head([1, 2, 3])); // logs 1 here
 console.log(window._.head(['a', 'b'])); // logs a here
 ```
 
-T> When loading code with HTML `<script>` tags, the webpack runtime will try to find an existing `<script>` tag that matches the `src` attribute or has a specific `data-webpack` attribute. For chunk loading `data-webpack` attribute would have value of `'[output.uniqueName]:chunk-[chunkId]'` while external script has value of `'[output.uniqueName]:[global]'`.
+T> 当加载带有 HTML `<script>` 标签的代码时，webpack 的 runtime 将试图寻找一个已经存在的 `<script>` 标签，此标签需与 `src` 的属性相匹配，或者具有特定的 `data-webpack` 属性。对于 chunk 加载来说，`data-webpack` 属性的值为 `'[output.uniqueName]:chunk-[chunkId]'`，而 external 脚本的值为 `'[output.uniqueName]:[global]'`。
 
-T> Options like `output.chunkLoadTimeout`, `output.crossOriginLoading` and `output.scriptType` will also have effect on the external scripts loaded this way.
+T> 像 `output.chunkLoadTimeout`，`output.crossOriginLoading` 以及 `output.scriptType` 等选项也会对这种方式加载的 external 脚本产生影响。
 
-## `externalsPresets`
+## `externalsPresets` {#externals-presets}
 
 `object`
 
-Enable presets of externals for specific targets.
+为特定的 target 启用 externals 的 preset。
 
-W> In earlier webpack versions, the following functionality was achieved by using [`target`](/configuration/target/).
+W> 在早期的 webpack 版本中，通过使用 [`target`](/configuration/target/) 实现以下功能。
 
 
 
-Option   | Description                                      | Input Type
+选项   | 描述                                      | 输入类型
 ----------- | ------------------------------------------------ | ----------
-`electron`     | Treat common electron built-in modules in main and preload context like `electron`, `ipc` or `shell` as external and load them via `require()` when used.                     | boolean
-`electronMain`     | Treat electron built-in modules in the main context like `app`, `ipc-main` or `shell` as external and load them via `require()` when used.                     | boolean
-`electronPreload`     | Treat electron built-in modules in the preload context like `web-frame`, `ipc-renderer` or `shell` as external and load them via require() when used.                     | boolean
-`electronRenderer`     | Treat electron built-in modules in the renderer context like `web-frame`, `ipc-renderer` or `shell` as external and load them via `require()` when used.                     | boolean
-`node`     | Treat node.js built-in modules like `fs`, `path` or `vm` as external and load them via `require()` when used.| boolean
-`nwjs`    | Treat `NW.js` legacy `nw.gui` module as external and load it via `require()` when used.| boolean
-`web`     | Treat references to `http(s)://...` and `std:...` as external and load them via `import` when used. __(Note that this changes execution order as externals are executed before any other code in the chunk)__.| boolean
-`webAsync`     | Treat references to 'http(s)://...' and 'std:...' as external and load them via `async import()` when used __(Note that this external type is an `async` module, which has various effects on the execution)__.| boolean
+`electron`     | 将 main 和预加载上下文中常见的 electron 内置模块视为 external 模块（如 `electron`，`ipc` 或 `shell`），使用时通过 `require()` 加载。                     | boolean
+`electronMain`     | 将 main 上下文中的 electron 内置模块视为 external 模块（如 `app`，`ipc-main` 或 `shell`），使用时通过 `require()` 加载。                     | boolean
+`electronPreload`     | 将预加载上下文的 electron 内置模块视为 external 模块（如 `web-frame`，`ipc-renderer` 或 `shell`），使用时通过 `require()` 加载。                     | boolean
+`electronRenderer`     | 将 renderer 上下文的 electron 内置模块视为 external 模块（如 `web-frame`、`ipc-renderer` 或 `shell`），使用时通过 `require()` 加载。                     | boolean
+`node`     | 将 node.js 的内置模块视为 external 模块（如 `fs`，`path` 或 `vm`），使用时通过 `require()` 加载。| boolean
+`nwjs`    | 将 `NW.js` 遗留的 `nw.gui` 模块视为 external 模块，使用时通过 `require()` 加载。| boolean
+`web`     | 将 `http(s)://...` 以及 `std:...` 视为 external 模块，使用时通过 `import` 加载。__（注意，这将改变执行顺序，因为 external 代码会在该块中的其他代码执行前被执行）__。| boolean
+`webAsync`     | 将 `http(s)://...` 以及 `std:...` 的引用视为 external 模块，使用时通过 `async import()` 加载。__（注意，此 external 类型为 `async` 模块，它对执行会产生各种副作用）__。| boolean
 
 
-__Example__
+__示例__
 
-Using `node` preset will not bundle built-in modules and treats them as external and loads them via `require()` when used.
+使用 `node` 的 preset 不会构建内置模块，而会将其视为 external 模块，使用时通过 `require()` 加载。
 
 __webpack.config.js__
 
