@@ -184,6 +184,28 @@ webpack 将尝试读取 `babel` package 而不是 `babel-loader`。
   }
 ```
 
+### 排除不应参与转码的库 {#exclude-libraries-that-should-not-be-transpiled}
+
+`core-js` 和 `webpack/buildin` 如果被 Babel 转码会发生错误。
+
+你需要在 `babel-loader` 中排除它们：
+
+```js
+{
+  "loader": "babel-loader",
+  "options": {
+    "exclude": [
+      // \\ for Windows, \/ for Mac OS and Linux
+      /node_modules[\\\/]core-js/,
+      /node_modules[\\\/]webpack[\\\/]buildin/,
+    ],
+    "presets": [
+      "@babel/preset-env"
+    ]
+  }
+}
+```
+
 ## 根据 webpack 部署目标(target)的自定义配置 {#customize-config-based-on-webpack-target}
 
 Webpack 支持打包成多种 [部署目标](/concepts/targets/) 。例如，当需要为不同的部署目标（例如 `web` _和_ `node`）指定不同的 Babel 配置时， babel-loader 通过 Babel 的[caller](https://babeljs.io/docs/en/config-files#apicallercb) API 提供了 `target`属性。

@@ -18,6 +18,10 @@ repo: https://github.com/webpack-contrib/eslint-loader
 
 > 用于 Webpack 的 ESlint loader
 
+## :warning: DEPRECATED
+
+`eslint-loader` 已被弃用。请使用 [`eslint-webpack-plugin`](/plugins/eslint-webpack-plugin/) 替代。
+
 ## 安装 {#install}
 
 ```bash
