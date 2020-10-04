@@ -2,7 +2,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Details } from './components';
 
-const detailComponentsList = ['link', 'mode', 'entry', 'filename', 'publicPath', 'advancedOutput', 'expert', 'advancedModule', 'alias', 'advancedResolve', 'hints', 'devtool', 'target', 'externals', 'stats', 'advanced', 'libraryTarget'];
+const detailComponentsList = ['link', 'mode', 'entry', 'path', 'filename', 'publicPath', 'library', 'libraryType', 'libraryName', 'advancedLibrary', 'advancedOutput', 'expert', 'advancedConditions', 'moduleType', 'advancedActions', 'advancedModule', 'modules', 'alias', 'advancedResolve', 'hints', 'devtool', 'target', 'externals', 'externalsPresets', 'ignoreWarnings', 'stats', 'preset', 'advancedGlobal', 'advancedAssets', 'advancedChunkGroups', 'advancedChunks', 'advancedModules', 'advancedOptimization', 'advancedOptimization', 'cacheGroupAdvancedSelectors', 'cacheGroupAdvancedEffects', 'advancedSelectors', 'advancedEffects', 'fallbackCacheGroup', 'advanced', 'advancedCaching', 'advancedBuild'];
 
 const Pre = props => {
   const newChildren = React.Children.map(props.children.props.children, child => {
