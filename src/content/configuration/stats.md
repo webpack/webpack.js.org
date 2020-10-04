@@ -148,7 +148,7 @@ module.exports = {
 
 `number`
 
-Tells `stats`  how many items of assets should be displayed (groups will be collapsed to fit this space)  .
+Tells `stats`  how many items of assets should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
 module.exports = {
@@ -163,7 +163,7 @@ module.exports = {
 
 `number`
 
-Tells `stats`  how many items of modules should be displayed(groups will be collapsed to fit this space)  .
+Tells `stats`  how many items of modules should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
 module.exports = {
@@ -178,13 +178,58 @@ module.exports = {
 
 `number`
 
-Tells `stats`  how many items of chunk modules should be displayed(groups will be collapsed to fit this space)  .
+Tells `stats`  how many items of chunk modules should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
 module.exports = {
   //...
   stats: {
     chunkModulesSpace: 15
+  }
+};
+```
+
+### `stats.nestedModulesSpace`
+
+`number`
+
+Tells `stats`  how many items of nested modules should be displayed (groups will be collapsed to fit this space).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    nestedModulesSpace: 15
+  }
+};
+```
+
+### `stats.cachedModules`
+
+`boolean = true`
+
+Tells `stats` whether to add information about cached (not built) modules.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    cachedModules: false
+  }
+};
+```
+
+### `stats.runtimeModules`
+
+`boolean = true`
+
+Tells `stats` whether to add information about runtime modules
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    runtimeModules: false
   }
 };
 ```
