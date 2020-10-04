@@ -223,13 +223,58 @@ module.exports = {
 
 `boolean = true`
 
-Tells `stats` whether to add information about runtime modules
+Tells `stats` whether to add information about runtime modules.
 
 ```javascript
 module.exports = {
   //...
   stats: {
     runtimeModules: false
+  }
+};
+```
+
+### `stats.dependentModules`
+
+`boolean`
+
+Tells `stats` whether to show chunk modules that are dependencies of other modules of the chunk.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    dependentModules: false
+  }
+};
+```
+
+### `stats.groupAssetsByChunk`
+
+`boolean`
+
+Tells `stats` whether to group assets by how their are related to chunks.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    dependentModules: false
+  }
+};
+```
+
+### `stats.groupAssetsByEmitStatus`
+
+`boolean`
+
+Tells `stats` whether to group assets by their status (emitted, compared for emit or cached).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    dependentModules: false
   }
 };
 ```
