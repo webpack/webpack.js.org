@@ -328,7 +328,7 @@ module.exports = {
 
 ### `stats.entrypoints` {#statsentrypoints}
 
-`boolean = true`
+`boolean = true` `string = 'auto'`
 
 告知 `stats` 是否展示入口文件与对应的文件 bundles。
 
@@ -341,7 +341,13 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `stats.env` {#statsenv}
+=======
+When `stats.entrypoints` is set to  `'auto'`, webpack will decide automatically whether to display the entry points in the stats output.
+
+### `stats.env`
+>>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
 
 `boolean = false`
 
@@ -799,7 +805,56 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `stats.warnings` {#statswarnings}
+=======
+### `stats.chunkGroupAuxiliary`
+
+`boolean = true`
+
+Display auxiliary assets in chunk groups.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupAuxiliary: false
+  }
+};
+```
+
+### `stats.chunkGroupChildren`
+
+`boolean = true`
+
+Display children of the chunk groups (e. g. prefetched, preloaded chunks and assets).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupChildren: false
+  }
+};
+```
+
+### `stats.chunkGroupMaxAssets`
+
+`number`
+
+Limit of assets displayed in chunk groups.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupMaxAssets: 5
+  }
+};
+```
+
+### `stats.warnings`
+>>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
 
 `boolean = true`
 

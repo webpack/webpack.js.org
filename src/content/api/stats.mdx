@@ -8,6 +8,7 @@ contributors:
   - EugeneHlushko
   - superburrito
   - chenxsan
+  - rahul3v
 ---
 
 When compiling source code with webpack, users can generate a JSON file containing statistics about modules. These statistics can be used to analyze an application's dependency graph as well as to optimize compilation speed. The file is typically generated with the following CLI command:
@@ -29,7 +30,7 @@ The top-level structure of the output JSON file is fairly straightforward but th
   'hash': '11593e3b3ac85436984a', // Compilation specific hash
   'time': 2469, // Compilation time in milliseconds
   'filteredModules': 0, // A count of excluded modules when [`exclude`](/configuration/stats/#statsexclude) is passed to the [`toJson`](/api/node/#statstojsonoptions) method
-  'outputPath': ''/', // path to webpack output directory
+  'outputPath': '/', // path to webpack output directory
   'assetsByChunkName': {
     // Chunk name to emitted asset(s) mapping
     'main': [
@@ -224,7 +225,7 @@ The `errors` and `warnings` properties each contain a list of objects. Each obje
       "moduleId": 32582
     }
   ],
-  "details": "    at RequireContextDependency.getWarnings (C:\\Repos\\webpack\\lib\\dependencies\\ContextDependency.js:79:5)\n    at Compilation.reportDependencyErrorsAndWarnings (C:\\Repos\\webpack\\lib\\Compilation.js:1727:24)\n    at C:\\Repos\\webpack\\lib\\Compilation.js:1467:10\n    at _next2 (<anonymous>:16:1)\n    at eval (<anonymous>:42:1)\n    at C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2830:7\n    at Object.each (C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2850:39)\n    at C:\\Repos\\webpack\\lib\\FlagDependencyExportsPlugin.js:219:18\n    at C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2830:7\n    at Object.each (C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2850:39)\n    at C:\\Repos\\webpack\\lib\\FlagDependencyExportsPlugin.js:40:16\n    at Hook.eval [as callAsync] (<anonymous>:38:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (C:\\Repos\\tapable\\lib\\Hook.js:18:14)\n    at Compilation.finish (C:\\Repos\\webpack\\lib\\Compilation.js:1462:28)\n    at C:\\Repos\\webpack\\lib\\Compiler.js:909:18\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)\n",
+  "details": "at RequireContextDependency.getWarnings (C:\\Repos\\webpack\\lib\\dependencies\\ContextDependency.js:79:5)\n    at Compilation.reportDependencyErrorsAndWarnings (C:\\Repos\\webpack\\lib\\Compilation.js:1727:24)\n    at C:\\Repos\\webpack\\lib\\Compilation.js:1467:10\n    at _next2 (<anonymous>:16:1)\n    at eval (<anonymous>:42:1)\n    at C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2830:7\n    at Object.each (C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2850:39)\n    at C:\\Repos\\webpack\\lib\\FlagDependencyExportsPlugin.js:219:18\n    at C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2830:7\n    at Object.each (C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2850:39)\n    at C:\\Repos\\webpack\\lib\\FlagDependencyExportsPlugin.js:40:16\n    at Hook.eval [as callAsync] (<anonymous>:38:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (C:\\Repos\\tapable\\lib\\Hook.js:18:14)\n    at Compilation.finish (C:\\Repos\\webpack\\lib\\Compilation.js:1462:28)\n    at C:\\Repos\\webpack\\lib\\Compiler.js:909:18\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)\n",
   "stack": "ModuleDependencyWarning: Critical dependency: Contexts can't use RegExps with the 'g' or 'y' flags.\n    at Compilation.reportDependencyErrorsAndWarnings (C:\\Repos\\webpack\\lib\\Compilation.js:1732:23)\n    at C:\\Repos\\webpack\\lib\\Compilation.js:1467:10\n    at _next2 (<anonymous>:16:1)\n    at eval (<anonymous>:42:1)\n    at C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2830:7\n    at Object.each (C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2850:39)\n    at C:\\Repos\\webpack\\lib\\FlagDependencyExportsPlugin.js:219:18\n    at C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2830:7\n    at Object.each (C:\\Repos\\webpack\\node_modules\\neo-async\\async.js:2850:39)\n    at C:\\Repos\\webpack\\lib\\FlagDependencyExportsPlugin.js:40:16\n    at Hook.eval [as callAsync] (<anonymous>:38:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (C:\\Repos\\tapable\\lib\\Hook.js:18:14)\n    at Compilation.finish (C:\\Repos\\webpack\\lib\\Compilation.js:1462:28)\n    at C:\\Repos\\webpack\\lib\\Compiler.js:909:18\n    at processTicksAndRejections (internal/process/task_queues.js:75:11)\n"
 }
 ```
