@@ -44,6 +44,8 @@ Click on the name of each option in the configuration code below to jump to the 
 
 W> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
 
+W> Notice that many array configurations allow to reference the default value via `"..."`.
+
 __webpack.config.js__
 
 ```js-with-links-details
@@ -68,6 +70,18 @@ module.exports = {
       a: "./app/entry-a",
       b: ["./app/entry-b1", "./app/entry-b2"]
     },
+    entry: {
+      a: {
+        import: "./app/entry-a",
+        library: { type: "commonjs-module" },
+        dependOn: ["vendors"],
+        filename: "entries/a.js",
+        runtime: "dashboard",
+        chunkLoading: "jsonp",
+        wasmLoading: "fetch-streaming"
+      },
+      vendors: ["react", "react-dom"]
+    }
   </entry>
   // defaults to ./src
   // Here the application starts executing
@@ -78,54 +92,102 @@ module.exports = {
     </default>
   </link>
     // options related to how webpack emits results
-    path: path.resolve(__dirname, "dist"), // string
+    <path "/configuration/output/#outputpath">
+      <default>
+        path: path.resolve(__dirname, "dist"), // string (default)
+      </default>
+    </path>
     // the target directory for all output files
     // must be an absolute path (use the Node.js path module)
     <filename "/configuration/output/#outputfilename">
       <default>
-        filename: "bundle.js", // string
+        filename: "[name].js", // string (default)
       </default>
-      filename: "[name].js", // for multiple entry points
-      filename: "[chunkhash].js", // for long term caching
+      filename: "[contenthash].js", // for long term caching
     </filename>
     // the filename template for entry chunks
     <publicPath "/configuration/output/#outputpublicpath">
       <default>
         publicPath: "/assets/", // string
       </default>
-      publicPath: "",
-      publicPath: "https://cdn.example.com/",
+      publicPath: "auto", // determined automatically from script tag (default)
+      publicPath: "", // relative to HTML file
+      publicPath: "/", // relative to server root
+      publicPath: "https://cdn.example.com/", // absolute URL
     </publicPath>
     // the url to the output directory resolved relative to the HTML page
-    library: "MyLibrary", // string,
-    // the name of the exported library
-    <libraryTarget "/configuration/output/#outputlibrarytarget">
+    <library "/configuration/output/#outputlibrary">
       <default>
-        libraryTarget: "umd", // universal module definition
+        library: { // There is also an old syntax for this available (click to show)
       </default>
-      libraryTarget: "umd2", // universal module definition
-      libraryTarget: "commonjs2", // exported with module.exports
-      libraryTarget: "commonjs", // exported as properties to exports
-      libraryTarget: "amd", // defined with AMD defined method
-      libraryTarget: "this", // property set on this
-      libraryTarget: "var", // variable defined in root scope
-      libraryTarget: "assign", // blind assignment
-      libraryTarget: "window", // property set to window object
-      libraryTarget: "global", // property set to global object
-      libraryTarget: "jsonp", // jsonp wrapper
-    </libraryTarget>
-    // the type of the exported library
+      // Old syntax:
+      library: "MyLibrary", // string,
+      libraryTarget: "umd", // = library.type
+      auxiliaryComment: "comment", // = library.auxiliaryComment
+      libraryExport: "default", // = library.export
+    </library>
+      <libraryType "/configuration/output/#outputlibrarytype">
+        <default>
+          type: "umd", // universal module definition
+        </default>
+        type: "umd2", // universal module definition (but optional externals will use globals)
+        type: "commonjs-module", // exported with module.exports
+        type: "commonjs2", // old name for "commonjs-module"
+        type: "commonjs", // exported as properties to exports
+        type: "amd", // defined with AMD define() method
+        type: "amd-require", // defined with AMD require() method (can't have exports)
+        type: "system", // exported to System.js
+        type: "this", // property set on this
+        type: "var", // variable defined in root scope (default)
+        type: "assign", // blind assignment
+        type: "global", // property set to global object as specified in output.globalObject
+        type: "window", // property set to window object
+        type: "self", // property set to self object
+        type: "jsonp", // jsonp wrapper
+        type: "module", // EcmaScript Module (not implemented yet)
+      </libraryType>
+      // the type of the exported library
+      <libraryName "/configuration/output/#outputlibraryname">
+        <default>
+          name: "MyLibrary", // string | string[]
+        </default>
+        name: ["MyCompany", "MyLibrary"], // Some types support creating nested objects
+        name: undefined, // Some types support unnamed library (default)
+      </libraryName>
+      // the name of the exported library
+
+      <advancedLibrary "#">
+        <default>
+          /* Advanced output.library configuration (click to show) */
+        </default>
+        export: "default", // string | string[]
+        export: undefined, // expose the whole namespace object resp. module.exports value (default)
+        export: "named", // expose named exports
+        export: ["named", "property"], // expose nested properties
+        // the export of the entry module that should be exposed
+        auxiliaryComment: "comment",
+        auxiliaryComment: { amd: "comment", commonjs: "comment", commonjs2: "comment", root: "comment" },
+        // Add a comment in the UMD wrapper
+        umdNamedDefine: false,
+        // Use a named define() for the AMD part of the UMD wrapper
+      </advancedLibrary>
+    },
+    uniqueName: "my-application", // (defaults to package.json "name")
+    // unique name for this build to avoid conflicts with other builds in the same HTML
+    name: "my-config",
+    // name of the configuration, shown in output
     <advancedOutput "#">
       <default>
         /* Advanced output configuration (click to show) */
       </default>
-      pathinfo: true, // boolean
-      // include useful path info about modules, exports, requests, etc. into the generated cod
+      chunkFilename: "[name].js",
       chunkFilename: "[id].js",
-      chunkFilename: "[chunkhash].js", // for long term caching
+      chunkFilename: "[contenthash].js", // for long term caching
       // the filename template for additional chunks
-      jsonpFunction: "myWebpackJsonp", // string
-      // name of the JSONP function used to load chunks
+      assetModuleFilename: "[hash][ext][query]", // string
+      // the filename template for asset modules
+      webassemblyModuleFilename: "[hash].module.wasm", // string
+      // the filename template for wasm modules
       sourceMapFilename: "[file].map", // string
       sourceMapFilename: "sourcemaps/[file].map", // string
       // the filename template of the source map location
@@ -133,34 +195,91 @@ module.exports = {
       // the name template for modules in a devtool
       devtoolFallbackModuleFilenameTemplate: "webpack:///[resource-path]?[hash]", // string
       // the name template for modules in a devtool (used for conflicts)
-      umdNamedDefine: true, // boolean
-      // use a named AMD module in UMD library
       crossOriginLoading: "use-credentials", // enum
       crossOriginLoading: "anonymous",
       crossOriginLoading: false,
       // specifies how cross origin request are issued by the runtime
     </advancedOutput>
-    <expert "#">
+    <expertOutput "#">
       <default>
         /* Expert output configuration (on own risk) */
       </default>
-      devtoolLineToLine: {
-        test: /\\.jsx$/
-      },
-      // use a simple 1:1 mapped SourceMaps for these modules (faster)
+      pathinfo: true, // boolean
+      // include useful path info about modules, exports, requests, etc. into the generated code
+      charset: true, // string
+      // add charset attribute to injected script tags
+      chunkLoadTimeout: 120000, // number (default)
+      // timeout for loading chunks
+      chunkLoading: "jsonp" // "jsonp" | "import-scripts" | "require" | "async-node" | false
+      // method of loading chunks
+      chunkLoadingGlobal: "myWebpackJsonp", // string
+      // name of the global variable used to load chunks
+      enabledChunkLoadingTypes: ["jsonp"], // string[]
+      // the chunk loading methods that are available
+      enabledLibraryTypes: ["var"], // string[]
+      // the library types that are available
+      enabledWasmLoadingTypes: ["var"], // string[]
+      // the wasm loading methods that are available
+      compareBeforeEmit: true, // boolean (default)
+      // compare the generated asset with the asset on disk before writing to disk
+      chunkFormat: "array-push",
+      chunkFormat: "commonjs",
+      chunkFormat: false,
+      // the format of chunks
       hotUpdateMainFilename: "[hash].hot-update.json", // string
       // filename template for HMR manifest
       hotUpdateChunkFilename: "[id].[hash].hot-update.js", // string
       // filename template for HMR chunks
+      hotUpdateGlobal: "hmrUpdateFunction", // string
+      // the name of the global variable used to load hot update chunks
       sourcePrefix: "\\t", // string
       // prefix module sources in bundle for better readablitity
-    </expert>
+      // but breaks multi-line template strings
+      strictModuleExceptionHandling: true, // boolean
+      // handle errors in module evaluation correctly, but for a performance cost
+      devtoolNamespace: "MyLibrary", // string
+      // prefix in the source names for devtools
+      // defaults to output.uniqueName
+      environment: {
+        // Properties about the environment
+        arrowFunction: true,
+        bigIntLiteral: true,
+        const: true,
+        destructuring: true,
+        dynamicImport: true,
+        forOf: true,
+        module: true
+      },
+      iife: true, // boolean (default)
+      // wrap the bundle in a IIFE for isolation
+      module: false, // boolean (default)
+      // generate a module type javascript file instead of a classic script
+      scriptType: "module"
+      // adds a type attribute to injected script tags
+      globalObject: "self", // string (default),
+      // expression that points to the global object
+      importFunctionName: "import", // string (default)
+      // expression that is called when using import()
+      // can be replaced to use polyfills
+      importMetaName: "import.meta", // string (default)
+      // expression that is used when using import.meta
+      // can be replaced to use polyfills
+      hashFunction: "md4", // string (default)
+      // hash function used in general
+      hashDigest: "hex", // string (default)
+      // hash digest type used
+      hashDigestLength: 20, // number (default)
+      // length of hashes
+      hashSalt: "salt", // string | Buffer
+      // an additional hash salt to fix hash related issues or change the hash in general
+    </expertOutput>
   },
   module: {
     // configuration regarding modules
     rules: [
       // rules for modules (configure loaders, parser options, etc.)
       {
+        // Conditions:
         test: /\\.jsx?$/,
         include: [
           path.resolve(__dirname, "app")
@@ -173,24 +292,54 @@ module.exports = {
         // exclude must not be matched (takes preferrence over test and include)
         // Best practices:
         // - Use RegExp only in test and for filename matching
-        // - Use arrays of absolute paths in include and exclude
+        // - Use arrays of absolute paths in include and exclude to match the full path
         // - Try to avoid exclude and prefer include
-        issuer: { test, include, exclude },
+        // Each condition can also receive an object with "and", "or" or "not" properties
+        // which are an array of conditions.
+        issuer: /\\.css$/,
+        issuer: path.resolve(__dirname, "app"),
+        issuer: { and: [ /\\.css$/, path.resolve(__dirname, "app") ] },
+        issuer: { or: [ /\\.css$/, path.resolve(__dirname, "app") ] },
+        issuer: { not: [ /\\.css$/ ] },
+        issuer: [ /\\.css$/, path.resolve(__dirname, "app") ], // like "or"
         // conditions for the issuer (the origin of the import)
-        enforce: "pre",
-        enforce: "post",
-        // flags to apply these rules, even if they are overridden (advanced option)
+        <advancedConditions "#">
+          <default>
+            /* Advanced conditions (click to show) */
+          </default>
+          resource: /\\.css$/,
+          // matches the resource of the module, behaves equal to "test" and "include"
+          compiler: /html-webpack-plugin/,
+          // matches the name of the child compilation
+          dependency: "esm", // import-style dependencies
+          dependency: "commonjs", // require-style dependencies
+          dependency: "amd", // AMD-style dependency
+          dependency: "wasm", // WebAssembly imports section
+          dependency: "url", // new URL(), url() and similar
+          dependency: "worker", // new Worker() and similar
+          dependency: "loader", // this.loadModule in loaders
+          // matches the type of dependency
+          descriptionData: { type: "module" },
+          // matches information from the package.json
+          mimetype: "text/javascript",
+          // matches the mimetype in DataUris
+          realResource: /\\.css$/,
+          // matches the resource but ignores when resource was been renamed
+          resourceFragment: "#blah",
+          // matches the fragment part of the resource request
+          resourceQuery: "?blah"
+          // matches the query part of the resource request
+        </advancedConditions>
+
+        // Actions:
         loader: "babel-loader",
         // the loader which should be applied, it'll be resolved relative to the context
         options: {
           presets: ["es2015"]
         },
         // options for the loader
-      },
-      {
-        test: /\\.html$/,
         use: [
-          // apply multiple loaders and options
+          // apply multiple loaders and options instead
           "htmllint-loader",
           {
             loader: "html-loader",
@@ -199,18 +348,44 @@ module.exports = {
             }
           }
         ]
+        <moduleType "#">
+          <default>
+            type: "javascript/auto",
+          </default>
+          type: "javascript/auto", // JS with all features
+          type: "javascript/esm", // JS enforced to strict ESM
+          type: "javascript/dynamic", // JS enforced to non-ESM
+          type: "json", // JSON data
+          type: "webassembly/async", // WebAssembly as async module
+          type: "webassembly/sync", // WebAssembly as sync module
+        </moduleType>
+        // specifies the module type
+        <advancedActions "#">
+          <default>
+            /* Advanced actions (click to show) */
+          </default>
+          enforce: "pre",
+          enforce: "post",
+          // flags to apply these rules, even if they are overridden
+          generator: { /* ... */ },
+          // Options for the generator (depends on module type)
+          parser: { /* ... */ },
+          // Options for the parser (depends on module type)
+          resolve: { /* ... */ },
+          // Resolve options (same as "resolve" in configuration)
+          sideEffects: false, // boolean
+          // Overrides "sideEffects" from package.json
+        </advancedActions>
       },
-      { oneOf: [ /* rules */ ] },
-      // only use one of these nested rules
-      { rules: [ /* rules */ ] },
-      // use all of these nested rules (combine with conditions to be useful)
-      { resource: { and: [ /* conditions */ ] } },
-      // matches only if all conditions are matched
-      { resource: { or: [ /* conditions */ ] } },
-      { resource: [ /* conditions */ ] },
-      // matches if any condition is matched (default for arrays)
-      { resource: { not: /* condition */ } }
-      // matches if the condition is not matched
+      {
+        oneOf: [ /* rules */ ]
+        // only use one of these nested rules
+      },
+      {
+        /* conditions */
+        rules: [ /* rules */ ]
+        // use all of these nested rules (combine with conditions to be useful)
+      },
     ],
     <advancedModule "#">
       <default>
@@ -236,23 +411,36 @@ module.exports = {
   },
   resolve: {
     // options for resolving module requests
-    // (does not apply to resolving to loaders)
-    modules: [
-      "node_modules",
-      path.resolve(__dirname, "app")
-    ],
-    // directories where to look for modules
+    // (does not apply to resolving of loaders)
+    <modules "#">
+      <default>
+        modules: [
+          "node_modules",
+          path.resolve(__dirname, "app")
+        ],
+      </default>
+      modules: [ "node_modules" ],
+      // A filename (non-absolute) means this folder is looked up
+      // in all parent directories
+      modules: [ path.resolve(__dirname, "app") ],
+      // An absolute path means exactly this folder
+    </modules>
+    // directories where to look for modules (in order)
     extensions: [".js", ".json", ".jsx", ".css"],
     // extensions that are used
     alias: {
       // a list of module name aliases
+      // aliases are imported relative to the current context
       "module": "new-module",
       // alias "module" -> "new-module" and "module/path/file" -> "new-module/path/file"
       "only-module$": "new-module",
       // alias "only-module" -> "new-module", but not "only-module/path/file" -> "new-module/path/file"
       "module": path.resolve(__dirname, "app/third/module.js"),
       // alias "module" -> "./app/third/module.js" and "module/file" results in error
-      // modules aliases are imported relative to the current context
+      "module": path.resolve(__dirname, "app/third"),
+      // alias "module" -> "./app/third" and "module/file" -> "./app/third/file"
+      [path.resolve(__dirname, "app/module.js")]: path.resolve(__dirname, "app/alternative-module.js"),
+      // alias "./app/module.js" -> "./app/alternative-module.js"
     },
     <alias "/configuration/resolve/#resolvealias">
       <default>
@@ -274,9 +462,9 @@ module.exports = {
       <default>
         /* Advanced resolve configuration (click to show) */
       </default>
-      symlinks: true,
+      symlinks: true, // (default)
       // follow symlinks to new location
-      descriptionFiles: ["package.json"],
+      descriptionFiles: ["package.json"], // (default)
       // files that are read for package description
       mainFields: ["main"],
       // properties that are read from description file
@@ -284,19 +472,47 @@ module.exports = {
       aliasFields: ["browser"],
       // properties that are read from description file
       // to alias requests in this package
+      exportsFields: ["exports"], // (default)
+      // fields in description file that are used for external module request
+      importsFields: ["imports"], // (default)
+      // fields in description file that are used for internal request
+      conditionNames: ["myCompanyCondition", "..."],
+      // conditions used for the "exports" and "imports" field in description file
+      mainFiles: ["index"],
+      // files that are used when resolving in a directory and no mainField applies
+      roots: [path.resolve(__dirname, "app/root")],
+      // locations where to resolve server-relative requests (starting with "/")
+      // This behavior is only applied when the request doesn't resolve as absolute path
+      fallback: { "events": path.resolve(__dirname, "events.js") },
+      // Similar to alias, but only applied when the normal resolving fails
+      fullySpecified: true, // boolean
+      // Input request is already full specified (it includes filename and extension)
+      // Module requests are still resolved as usual
+      preferRelative: true, // boolean
+      // Try to resolve module requests also a relative request
+      restrictions: [ /\\.js$/, path.resolve(__dirname, "app") ],
+      // To successful resolve the result must match these criteria
       enforceExtension: false,
       // if true request must not include an extension
       // if false request may already include an extension
-      moduleExtensions: ["-module"],
-      enforceModuleExtension: false,
-      // like extensions/enforceExtension but for module names instead of files
+      cache: true, // boolean
+      // enable safe caching of resolving
+      // this is safe as it tracks and validates all resolving dependencies
       unsafeCache: true,
       unsafeCache: {},
-      // enables caching for resolved requests
-      // this is unsafe as folder structure may change
+      // enables unsafe caching for resolved requests
+      // this is unsafe as there is no validation
       // but performance improvement is really big
-      cachePredicate: (path, request) => true,
+      cachePredicate: ({ path, request }) => true,
       // predicate function which selects requests for caching
+      cacheWithContext: false, // (default)
+      // include context information in cache key
+      // This must be set to true when custom plugins resolve depending on
+      // those information
+      useSyncFileSystemCalls: false, // (default)
+      // use sync fs calls instead of async fs calls
+      byDependency: { commonjs: { extensions: [".js", "..."] } },
+      // change resolving depending on issuer dependency
       plugins: [
         // ...
       ]
@@ -323,11 +539,13 @@ module.exports = {
       devtool: "source-map", // enum
     </default>
     devtool: "inline-source-map", // inlines SourceMap into original file
-    devtool: "eval-source-map", // inlines SourceMap per module
     devtool: "hidden-source-map", // SourceMap without reference in original file
+    devtool: "eval-source-map", // inlines SourceMap per module
     devtool: "cheap-source-map", // cheap-variant of SourceMap without module mappings
     devtool: "cheap-module-source-map", // cheap-variant of SourceMap with module mappings
+    devtool: "eval-cheap-module-source-map", // like above but per module
     devtool: "eval", // no SourceMap, but named modules. Fastest at the expense of detail.
+    devtool: false, // no SourceMap
   </devtool>
   // enhance debugging by adding meta info for the browser devtools
   // source-map most detailed at the expense of build speed.
@@ -339,16 +557,26 @@ module.exports = {
     <default>
       target: "web", // enum
     </default>
+    target: "browserslist", // use browserslist
+    target: "browserslist:modern", // use browserslist "modern" preset
+    target: "browserslist:Chrome >= 43", // use browserslist query
+    target: `browserslist:${path.resolve(__dirname, "browserslist.json")}`,
+    target: `browserslist:${path.resolve(__dirname, "browserslist.json")}:modern`,
     target: "webworker", // WebWorker
     target: "node", // Node.js via require
-    target: "async-node", // Node.js via fs and vm
-    target: "node-webkit", // nw.js
-    target: "electron-main", // electron, main process
-    target: "electron-renderer", // electron, renderer process
-    target: (compiler) => { /* ... */ }, // custom
+    target: "node10.13", // Node.js via require
+    target: "async-node10.13", // Node.js via fs and vm
+    target: "nwjs0.43", // nw.js
+    target: "electron11.0-main", // electron, main process
+    target: "electron11-renderer", // electron, renderer process
+    target: "electron-preload", // electron, preload script
+    target: ["web", "es5"], // combining targets
+    target: ["web", "es2020"],
+    target: false, // custom target, via plugin
   </target>
   // the environment in which the bundle should run
-  // changes chunk loading behavior and available modules
+  // changes chunk loading behavior, available external modules
+  // and generated code style
   <externals "/configuration/externals">
     <default>
       externals: ["react", /^@angular/],
@@ -364,23 +592,252 @@ module.exports = {
         root: "React"
       }
     },
-    externals: ({request}) => { /* ... */ return "commonjs " + request }
+    externals: ({ context, request }, callback) => { /* ... */ callback(null, "commonjs " + request); }
   </externals>
   // Don't follow/bundle these modules, but request them at runtime from the environment
+  <externals "/configuration/externals">
+    <default>
+      externalsType: "var", // (defaults to output.library.type)
+    </default>
+    externalsType: "this", // this["EXTERNAL"]
+    externalsType: "window", // window["EXTERNAL"]
+    externalsType: "self", // self["EXTERNAL"]
+    externalsType: "global", // property from output.globalObject
+    externalsType: "commonjs", // require("EXTERNAL")
+    externalsType: "amd", // define(["EXTERNAL"], ...), only with AMD library
+    externalsType: "umd", // only with UMD library
+    externalsType: "system", // only with System.js library
+    externalsType: "jsonp", // only with jsonp library
+    externalsType: "import", // import("EXTERNAL")
+    externalsType: "module", // import X from "EXTERNAL"
+    externalsType: "var", // EXTERNAL (name is an expression)
+    externalsType: "promise", // await EXTERNAL (name is an expression giving a Promise)
+  </externals>
+  // Type of externals, when not specified inline in externals
+  <externalsPresets "#">
+    <default>
+      externalsPresets: { /* ... */ },
+    </default>
+    externalsPresets: {
+      electron: true,
+      electronMain: true,
+      electronPreload: true,
+      electronRenderer: true,
+      node: true,
+      nwjs: true,
+      web: true,
+      webAsync: true,
+    }
+  </externalsPresets>
+  // presets of externals
+  <ignoreWarnings "#">
+    <default>
+      ignoreWarnings: [/warning/],
+    </default>
+    ignoreWarnings: [
+      /warning/,
+      {
+        file: /asset/,
+        module: /module/,
+        message: /warning/,
+      },
+      (warning, compilation) => true
+    ],
+  </ignoreWarnings>
   <stats "/configuration/stats">
     <default>
       stats: "errors-only",
     </default>
-    stats: { //object
-      assets: true,
-      colors: true,
-      errors: true,
-      errorDetails: true,
-      hash: true,
-      // ...
-    },
   </stats>
-  // lets you precisely control what bundle information gets displayed
+  stats: {
+    // lets you precisely control what bundle information gets displayed
+    <preset "/configuration/stats/#stats-presets">
+      <default>
+        stats: "errors-only",
+      </default>
+      preset: "verbose", // nearly all information
+      preset: "detailed", // much information
+      preset: "minimal", // summarized information
+      preset: "errors-warnings", // only errors and warnings
+      preset: "errors-only", // only errors
+      preset: "summary", // only one line summary
+      preset: "none", // none at all
+    </preset>
+    // A stats preset
+
+    <advancedGlobal "/configuration/stats/">
+      <default>
+        /* advanced global settings */
+      </default>
+      all: false,
+      // switch all flags on or off
+      colors: true,
+      // switch colors on and off
+      context: __dirname,
+      // all paths will be relative to this directory
+      ids: true,
+      // include module and chunk ids in the output
+    </advancedGlobal>
+
+    env: true,
+    // include value of --env in the output
+    outputPath: true,
+    // include absolute output path in the output
+    publicPath: true,
+    // include public path in the output
+
+    assets: true,
+    // show list of assets in output
+    <advancedAssets "/configuration/stats/">
+      <default>
+        /* advanced assets settings */
+      </default>
+      assetsSort: "size",
+      // sorting of assets
+      assetsSpace: 50,
+      // number of asset lines to display
+      cachedAssets: false,
+      // show assets that are caching in output
+      excludeAssets: /\\.png$/,
+      // hide some assets
+      groupAssetsByPath: true,
+      // group assets by their path in the output directory
+      groupAssetsByExtension: true,
+      // group assets by their extension
+      groupAssetsByEmitStatus: true,
+      // group assets depending if they are cached, emitted or compared
+      groupAssetsByChunk: true,
+      // group assets by how they relate to chunks
+      groupAssetsByInfo: true,
+      // group assets by meta information like immutable, development, etc.
+      relatedAssets: true,
+      // show assets that are related to other assets, like SourceMaps, compressed version, etc.
+      performance: true,
+      // show performance hints next to assets and modules
+    </advancedAssets>
+
+    entrypoints: true,
+    // show entrypoints list
+    chunkGroups: true,
+    // show named chunk group list
+    <advancedChunkGroups "/configuration/stats/">
+      <default>
+        /* advanced chunk group settings */
+      </default>
+      chunkGroupAuxiliary: true,
+      // show auxiliary assets for entrypoints/chunk groups
+      chunkGroupChildren
+      // show child chunk groups for entrypoints/chunk groups
+      chunkGroupMaxAssets: 5,
+      // collapse chunk group assets lists when this limit has been reached
+    </advancedChunkGroups>
+
+    chunks: true,
+    // show list of chunks in output
+    <advancedChunks "/configuration/stats/">
+      <default>
+        /* advanced chunk group settings */
+      </default>
+      chunksSort: "size",
+      // sort chunks list
+      chunkModules: true,
+      // show modules contained in each chunk
+      chunkOrigins: true,
+      // show the origin of a chunk (why was this chunk created)
+      chunkRelations: true,
+      // show relations to other chunks (parents, children, sibilings)
+      dependentModules: true,
+      // show modules that are dependencies of other modules in that chunk
+    </advancedChunks>
+
+    modules: true,
+    // show list of modules in output
+    <advancedModules "/configuration/stats/">
+      <default>
+        /* advanced module settings */
+      </default>
+      modulesSort: "size",
+      // sort modules list
+      modulesSpace: 50,
+      // number of modules lines to display
+      nestedModules: true,
+      // show nested modules (when concatenated)
+      groupModulesByPath: true,
+      // group modules by their resource path
+      groupModulesByExtension: true
+      // group modules by their extension
+      groupModulesByAttributes: true
+      // group modules by attributes like if the have errors/warnings/assets
+      // or are optional
+      groupModulesByCacheStatus: true,
+      // group modules depending if they are built, code was generated or if
+      // they are cacheable in general
+      cachedModules: true,
+      // show modules that were cached
+      depth: true,
+      // show depth in the module graph of modules
+      excludeModules: /\\.css$/,
+      // hide some modules
+      moduleAssets: true,
+      // show assets emitted by modules in module list
+      orphanModules: true,
+      // show modules that are not referenced in optimized graph anymore
+      reasons: true,
+      // show the reasons why modules are included
+      runtimeModules: true,
+      // show runtime modules in the modules list
+      source: true,
+      // include the Source Code of modules (only in JSON)
+    </advancedModules>
+
+    <advancedOptimization "/configuration/stats/">
+      <default>
+        /* advanced optimization settings */
+      </default>
+      providedExports: true,
+      // show exports provided by modules
+      usedExports: true,
+      // show which exports are used by modules
+      optimizationBailout: true,
+      // show information why optimizations bailed out for modules
+    </advancedOptimization>
+
+    children: true
+    // show stats for child compilations
+
+    logging: true,
+    // show logging in output
+    loggingDebug: /webpack/,
+    // show debug type logging for some loggers
+    loggingTrace: true,
+    // show stack traces for warnings and errors in logging output
+
+    warnings: true
+    // show warnings
+
+    errors: true,
+    // show errors
+    errorDetails: true,
+    // show details for errors
+    errorStack: true,
+    // show internal stack trace for errors
+    moduleTrace: true,
+    // show module trace for errors
+    // (why was causing module referenced)
+
+    builtAt: true,
+    // show timestamp in summary
+    errorsCount: true,
+    // show errors count in summary
+    warningsCount: true,
+    // show warnings count in summary
+    timings: true,
+    // show build timing in summary
+    version: true,
+    // show webpack version in summary
+    hash: true,
+    // show build hash in summary
+  },
   devServer: {
     proxy: { // proxy URLs to backend development server
       '/api': 'http://localhost:3000'
@@ -393,24 +850,220 @@ module.exports = {
     noInfo: true, // only errors & warns on hot reload
     // ...
   },
+  experiments: {
+    asyncWebAssembly: true,
+    // WebAssembly as async module (Proposal)
+    syncWebAssembly: true,
+    // WebAssembly as sync module (deprecated)
+    outputModule: true,
+    // Allow to output ESM
+    topLevelAwait: true,
+    // Allow to use await on module evaluation (Proposal)
+  }
   plugins: [
     // ...
   ],
   // list of additional plugins
+  optimization: {
+    chunkIds: "size",
+    // method of generating ids for chunks
+    moduleIds: "size",
+    // method of generating ids for modules
+    mangleExports: "size",
+    // rename export names to shorter names
+    minimize: true,
+    // minimize the output files
+    minimizer: [new CssMinimizer(), "..."],
+    // minimizers to use for the output files
+
+    <advancedOptimization "#">
+      <default>
+        /* advanced optimizations (click to show) */
+      </default>
+      concatenateModules: true,
+      // concatenate multiple modules into a single one
+      emitOnErrors: true,
+      // emit output files even if there are build errors
+      flagIncludedChunks: true,
+      // avoid downloading a chunk if it's fully contained in
+      // an already loaded chunk
+      innerGraph: true,
+      // determine references without modules between symbols
+      mergeDuplicateChunks: true,
+      // merge chunks if they are equal
+      nodeEnv: "production",
+      // value of process.env.NODE_ENV inside of modules
+      portableRecords: true,
+      // use relative paths in records
+      providedExports: true,
+      // determine which exports are exposed by modules
+      usedExports: true,
+      // determine which exports are used by modules and
+      // remove the unused ones
+      realContentHash: true,
+      // caculcate a contenthash for assets based on the content
+      removeAvailableModules: true,
+      // run extra pass to determine modules that are already in
+      // parent chunks and remove them
+      removeEmptyChunks: true,
+      // remove chunks that are empty
+      runtimeChunk: "single",
+      // change placement of runtime code
+      sideEffects: true,
+      // skip modules that are side effect free when using reexports
+    </advancedOptimization>
+
+    splitChunks: {
+      cacheGroups: {
+        "my-name": {
+          // define groups of modules with specific
+          // caching behavior
+          test: /\\.sass$/,
+          type: "css/mini-extract",
+
+          <cacheGroupAdvancedSelectors "#">
+            <default>
+              /* advanced selectors (click to show) */
+            </default>
+            chunks: "async",
+            minChunks: 1,
+            enforceSizeThreshold: 100000,
+            minSize: 0,
+            minRemainingSize: 0,
+            usedExports: true,
+            maxAsyncRequests: 30,
+            maxInitialRequests: 30,
+          </cacheGroupAdvancedSelectors>
+
+          <cacheGroupAdvancedEffects "#">
+            <default>
+              /* advanced effects (click to show) */
+            </default>
+            maxAsyncSize: 200000,
+            maxInitialSize: 100000,
+            maxSize: 200000,
+            filename: "my-name-[contenthash].js",
+            idHint: "my-name",
+            name: false,
+            hidePathInfo: true,
+            automaticNameDelimiter: "-",
+          </cacheGroupAdvancedEffects>
+        }
+      },
+
+      <fallbackCacheGroup "#">
+        <default>
+          fallbackCacheGroup: { /* advanced (click to show) */ }
+        </default>
+        fallbackCacheGroup: {
+          automaticNameDelimiter: "-"
+          minSize: 20000,
+          maxAsyncSize: 200000,
+          maxInitialSize: 100000,
+          maxSize: 200000,
+        },
+      </fallbackCacheGroup>
+
+      <advancedSelectors "#">
+        <default>
+          /* advanced selectors (click to show) */
+        </default>
+        chunks: "all",
+        // select which chunks should be optimized
+        usedExports: true,
+        // treat modules as equal only when used exports are equal
+        minChunks: 1,
+        // minimum number of chunks a module must be in
+        enforceSizeThreshold: 100000,
+        // ignore when following criterias when size of modules
+        // is above this threshold
+        minSize: 20000,
+        // size of modules must be above this threshold
+        minRemainingSize: 20000,
+        // when modules are removed from a single chunk
+        // the size of the modules that are remaining
+        // must be above this threshold
+        maxAsyncRequests: 30,
+        maxInitialRequests: 30,
+        // number of parallel requests for a single on demand loading
+        // resp. entrypoint but be above this threshold
+      </advancedSelectors>
+
+      <advancedEffects "#">
+        <default>
+          /* advanced effects (click to show) */
+        </default>
+        maxAsyncSize: 200000,
+        maxInitialSize: 100000,
+        maxSize: 200000,
+        // when size of modules in the new chunk is above this
+        // threshold, split it further
+        filename: "[contenthash].js",
+        // give the new chunk a different filename
+        name: false, // false | string | (module, chunks, key) => string
+        // give the new chunk a different name
+        // when an existing name is used, chunks are merged
+        // non-splitChunks chunks can only be selected, when they are
+        // a parent or sibling chunk of all selected modules
+        hidePathInfo: true,
+        // hide path info when splitting via "maxSize"
+        automaticNameDelimiter: "-",
+        // use this separator to separate original name from path info
+        // when splitting via "maxSize"
+      </advancedEffects>
+
+      <expert "#">
+        <default>
+          /* expert settings (click to show) */
+        </default>
+        defaultSizeTypes: ["javascript", "..."]
+        // when using numbers for sizes measure these size types
+        // minSize: { javascript: 10000 } allows to be more specific
+      </expert>
+    }
+  },
   <advanced "#">
     <default>
       /* Advanced configuration (click to show) */
     </default>
+    loader: { /* ... */ },
+    // add custom API or properties to loader context
     resolveLoader: { /* same as resolve */ }
     // separate resolve options for loaders
-    parallelism: 1, // number
-    // limit the number of parallel processed modules
-    profile: true, // boolean
-    // capture timing information
-    bail: true, //boolean
-    // fail out on the first error instead of tolerating it.
+    node: {
+      // Polyfills and mocks to run Node.js-
+      // environment code in non-Node environments.
+      global: true, // boolean
+      // replace "global" with the output.globalObject
+      __filename: "mock", // boolean | "mock" | "eval-only"
+      __dirname: "mock", // boolean | "mock" | "eval-only"
+      // true: includes the real path
+      // "mock": includes a fake path
+      // "eval-only": only defines it at compile-time
+      // false: disables all handling
+    },
+    recordsPath: path.resolve(__dirname, "build/records.json"),
+    recordsInputPath: path.resolve(__dirname, "build/records.json"),
+    recordsOutputPath: path.resolve(__dirname, "build/records.json"),
+    // store ids into a file to make the build even more deterministic
+  </advanced>
+  <advancedCaching "#">
+    <default>
+      /* Advanced caching configuration (click to show) */
+    </default>
     cache: false, // boolean
     // disable/enable caching
+    snapshot: {
+      managedPaths: [ path.resolve(__dirname, "node_modules") ],
+      // paths that are snapshot using only package.json name and version
+      immutablePaths: [ path.resolve(__dirname, ".yarn/cache") ],
+      // paths that doesn't need to be snapshot as they are immutable
+      module: { timestamp: true, hash: true },
+      resolve: { timestamp: true, hash: false },
+      resolveBuildDependencies: { timestamp: true, hash: false },
+      buildDependencies: { timestamp: true, hash: true },
+      // snapshot method for different operations
+    },
     watch: true, // boolean
     // enables watching
     watchOptions: {
@@ -422,32 +1075,39 @@ module.exports = {
       // must be used on filesystems that doesn't notify on change
       // i. e. nfs shares
     },
-    node: {
-      // Polyfills and mocks to run Node.js-
-      // environment code in non-Node environments.
-      console: false, // boolean | "mock"
-      global: true, // boolean | "mock"
-      process: true, // boolean
-      __filename: "mock", // boolean | "mock"
-      __dirname: "mock", // boolean | "mock"
-      Buffer: true, // boolean | "mock"
-      setImmediate: true // boolean | "mock" | "empty"
+  </advancedCaching>
+  <advancedBuild "#">
+    <default>
+      /* Advanced build configuration (click to show) */
+    </default>
+    infrastructureLogging: {
+      level: "none",
+      level: "error",
+      level: "warn",
+      level: "info", // (default)
+      level: "log",
+      level: "verbose",
+      debug: true,
+      debug: /webpack/,
+      debug: [ "MyPlugin", /webpack/ ]
     },
-    recordsPath: path.resolve(__dirname, "build/records.json"),
-    recordsInputPath: path.resolve(__dirname, "build/records.json"),
-    recordsOutputPath: path.resolve(__dirname, "build/records.json"),
-    // TODO
-  </advanced>
+    parallelism: 1, // number
+    // limit the number of parallel processed modules
+    profile: true, // boolean
+    // capture timing information
+    bail: true, //boolean
+    // fail out on the first error instead of tolerating it.
+    dependencies: ["name"],
+    // When using an array of configs this can be used to reference other
+    // configs and let this config run after the other config at initial build
+  </advancedBuild>
 ```
 
 W> webpack applies configuration defaults after [plugins defaults](/contribute/writing-a-plugin/#configuration-defaults) are applied.
 
 T> Want to rapidly generate webpack configuration file for your project requirements with few clicks away.
 
-[Generate Custom Webpack Configuration](https://generatewebpackconfig.netlify.com/) is an interactive portal you can play around by selecting custom webpack configuration options tailored for your frontend project. It automatically generates
-a minimal webpack configuration based on your selection of loaders/plugins, etc.
-
-Or use [webpack-cli's `init` command](https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli) that will ask you a couple of questions before creating a configuration file.
+Use [webpack-cli's `init` command](https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli) that will ask you a couple of questions before creating a configuration file.
 
 ```bash
 npx webpack-cli init
