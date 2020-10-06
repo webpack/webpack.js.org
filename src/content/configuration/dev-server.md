@@ -968,7 +968,7 @@ module.exports = {
 
 `string`
 
-When used via the CLI, a path to an SSL .pfx file. If used in options, it should be the bytestream of the .pfx file.
+When used in options, a path to an SSL .pfx file. If used via the CLI, it should be the bytestream of the .pfx file.
 
 __webpack.config.js__
 
