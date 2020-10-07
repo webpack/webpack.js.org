@@ -6,6 +6,7 @@ contributors:
   - byzyk
   - mrichmond
   - Fental
+  - snitin315
 related:
   - title: 'webpack default options (source code)'
     url: https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js
@@ -73,7 +74,7 @@ module.exports = {
 -     maxAsyncRequests: Infinity,
 -     maxInitialRequests: Infinity,
 -   },
--   noEmitOnErrors: false,
+-   emitOnErrors: true,
 -   checkWasmTypes: false,
 -   minimize: false,
 -   removeAvailableModules: false
@@ -113,7 +114,7 @@ module.exports = {
 -     maxAsyncRequests: 5,
 -     maxInitialRequests: 3,
 -   },
--   noEmitOnErrors: true,
+-   emitOnErrors: false,
 -   checkWasmTypes: true,
 -   minimize: true,
 - },
@@ -147,7 +148,7 @@ module.exports = {
 -     maxAsyncRequests: Infinity,
 -     maxInitialRequests: Infinity,
 -   },
--   noEmitOnErrors: false,
+-   emitOnErrors: true,
 -   checkWasmTypes: false,
 -   minimize: false,
 - },
