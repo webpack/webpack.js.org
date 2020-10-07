@@ -23,11 +23,9 @@ Since version 4 webpack runs optimizations for you depending on the chosen  [`mo
 
 ## `optimization.minimize`
 
-`boolean`
+`boolean = true`
 
 Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
-
-This is `true` by default in `production` mode.
 
 __webpack.config.js__
 
@@ -328,6 +326,8 @@ module.exports = {
   }
 };
 ```
+
+T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` defaults to `false`. 
 
 ## `optimization.mangleWasmImports`
 
