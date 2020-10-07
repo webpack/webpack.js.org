@@ -341,13 +341,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `stats.env` {#statsenv}
-=======
-When `stats.entrypoints` is set to  `'auto'`, webpack will decide automatically whether to display the entry points in the stats output.
+当 `stats.entrypoints` 被设置为 `'auto'` 时，webpack 将自动决定是否在 stats 输出中展示入口信息。
 
-### `stats.env`
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
+### `stats.env` {#statsenv}
 
 `boolean = false`
 
@@ -805,14 +801,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `stats.warnings` {#statswarnings}
-=======
-### `stats.chunkGroupAuxiliary`
+### `stats.chunkGroupAuxiliary` {#statschunkgroupauxiliary}
 
 `boolean = true`
 
-Display auxiliary assets in chunk groups.
+在 chunk 组中展示辅助 asset。
 
 ```javascript
 module.exports = {
@@ -823,11 +816,11 @@ module.exports = {
 };
 ```
 
-### `stats.chunkGroupChildren`
+### `stats.chunkGroupChildren` {#statschunkgroupchildren}
 
 `boolean = true`
 
-Display children of the chunk groups (e. g. prefetched, preloaded chunks and assets).
+显示 chunk 组的子 chunk。（例如，预置（prefetched），预加载（preloaded）的 chunk 和 asset)。
 
 ```javascript
 module.exports = {
@@ -838,11 +831,11 @@ module.exports = {
 };
 ```
 
-### `stats.chunkGroupMaxAssets`
+### `stats.chunkGroupMaxAssets` {#statschunkgroupmaxassets}
 
 `number`
 
-Limit of assets displayed in chunk groups.
+chunk 组中的 asset 数上限。
 
 ```javascript
 module.exports = {
@@ -853,8 +846,7 @@ module.exports = {
 };
 ```
 
-### `stats.warnings`
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
+### `stats.warnings` {#statswarnings}
 
 `boolean = true`
 

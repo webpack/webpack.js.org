@@ -375,8 +375,4 @@ W> webpack 4.40.0 后可用。
 
 参数：
 
-<<<<<<< HEAD
-`name` - 要返回的资源名称。
-=======
-- `name` - the name of the asset to return
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
+- `name` - 要返回的资源名称。

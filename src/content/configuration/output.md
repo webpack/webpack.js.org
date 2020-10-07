@@ -1149,16 +1149,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `output.enabledLibraryTypes` {#outputenabledlibrarytypes}
-=======
-## `output.workerChunkLoading`
+## `output.workerChunkLoading` {#outputworkerchunkloading}
 
 `string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false` 
 
-The new option `workerChunkLoading` controls the chunk loading of workers. 
+新选项 `workerChunkLoading` 用于控制 workder 的 chunk 加载。
 
-T> The default value of this option is depending on the `target` setting. For more details, search for `"workerChunkLoading"`: [in the webpack defaults](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js).
+T> 此选项默认值取决于 `target` 的设置。欲了解更多详情，请在 [webpack 默认值文件中搜索](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js) `"workerChunkLoading"`。
 
 __webpack.config.js__
 
@@ -1172,7 +1169,6 @@ module.exports = {
 ```
 
 ## `output.enabledLibraryTypes`
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
 
 `[string]`
 

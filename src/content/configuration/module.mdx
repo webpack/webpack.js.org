@@ -55,10 +55,10 @@ module.exports = {
 
 `boolean` `function (module)`
 
-Cache the resolution of module requests. There are couple of defaults for `module.unsafeCache`:
+缓存模块请求的解析。`module.unsafeCache` 包含如下几个默认值：
 
-- `false` if [`cache`](/configuration/other-options/#cache) is disabled.
-- `true` if [`cache`](/configuration/other-options/#cache) is enabled and the module appears to come from node modules, `false` otherwise.
+- 如果 [`cache`](/configuration/other-options/#cache) 未被启用，则默认值为 `false`。
+- 如果 [`cache`](/configuration/other-options/#cache) 被启用，并且此模块的来自 node_modules，则值为 `true`，否则为 `false`。
 
 __webpack.config.js__
 
@@ -71,7 +71,7 @@ module.exports = {
 };
 ```
 
-W> The default value is `true` in webpack 4.
+W> 在 webpack 4 中其默认值为 `true`。
 
 ## `module.rules` {#modulerules}
 
@@ -270,7 +270,7 @@ T> 详情请参阅 [`嵌套规则`](#nested-rules)。
 `Rule.options` 和 `Rule.query` 是 `Rule.use: [ { options } ]` 的简写。详细请查看 [`Rule.use`](#rule-use) 
 和 [`UseEntry.options`](#useentry)。
 
-W> 由于需要支持 `Rule.options` 和 `UseEntry.options`，`Rule.use`，`Rule.query` 已废弃。
+W> 由于需要支持 `Rule.options`，`UseEntry.options` 以及 `Rule.use`，因此 `Rule.query` 已废弃。
 
 
 ## `Rule.parser` {#ruleparser}
@@ -296,7 +296,6 @@ module.exports = {
       {
         //...
         parser: {
-<<<<<<< HEAD
           amd: false, // 禁用 AMD
           commonjs: false, // 禁用 CommonJS
           system: false, // 禁用 SystemJS
@@ -307,21 +306,8 @@ module.exports = {
           browserify: false, // 禁用特殊处理的 browserify bundle
           requireJs: false, // 禁用 requirejs.*
           node: false, // 禁用 __dirname, __filename, module, require.extensions, require.main, 等。
-          node: {...} // 在模块级别(module level)上重新配置 [node](/configuration/node) 层(layer)
-=======
-          amd: false, // disable AMD
-          commonjs: false, // disable CommonJS
-          system: false, // disable SystemJS
-          harmony: false, // disable ES2015 Harmony import/export
-          requireInclude: false, // disable require.include
-          requireEnsure: false, // disable require.ensure
-          requireContext: false, // disable require.context
-          browserify: false, // disable special handling of Browserify bundles
-          requireJs: false, // disable requirejs.*
-          node: false, // disable __dirname, __filename, module, require.extensions, require.main, etc.
-          node: {...}, // reconfigure [node](/configuration/node) layer on module level
-          worker: ["default from web-worker", "..."] // Customize the WebWorker handling for javascript files, "..." refers to the defaults.
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
+          node: {...}, // 在模块级别(module level)上重新配置 [node](/configuration/node) 层(layer)
+          worker: ["default from web-worker", "..."] // 自定义 WebWorker 对 JavaScript 的处理，其中 "..." 为默认值。
         }
       }
     ]
@@ -329,11 +315,11 @@ module.exports = {
 }
 ```
 
-If `Rule.type` is an `asset` then `Rules.parser` option may be an object or a function that describes a condition whether to encode file contents to Base64 or emit it as a separate file into the output directory.
+如果 `Rule.type` 的值为 `asset`，那么 `Rules.parser` 选项可能是一个对象或一个函数，其作用可能是将文件内容编码为 Base64，还可能是将其当做单独文件 emit 到输出目录。
 
-If `Rule.type` is an `asset` or `asset/inline` then `Rule.generator` option may be an object that describes the encoding of the module source or a function that encodes module's source by a custom algorithm.
+如果 `Rule.type` 的值为 `asset` 或 `asset/inline`，那么 `Rule.generator` 选项可能是一个描述模块源编码方式的对象，还可能是一个通过自定义算法对模块源代码进行编码的函数。
 
-See [Asset Modules guide](/guides/asset-modules/) for additional information and use cases.
+更多信息及用例请查阅 [Asset 模块指南](/guides/asset-modules/)。
 
 ## `Rule.parser.dataUrlCondition` {#ruleparserdataurlcondition}
 

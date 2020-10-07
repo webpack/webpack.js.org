@@ -91,31 +91,19 @@ module.exports = {
       output: {
     </default>
   </link>
-<<<<<<< HEAD
     // webpack 如何输出结果的相关选项
-    path: path.resolve(__dirname, "dist"), // string
-    // 所有输出文件的目标路径
-    // 必须是绝对路径（使用 Node.js 的 path 模块）
-=======
-    // options related to how webpack emits results
     <path "/configuration/output/#outputpath">
       <default>
         path: path.resolve(__dirname, "dist"), // string (default)
       </default>
     </path>
-    // the target directory for all output files
-    // must be an absolute path (use the Node.js path module)
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
+    // 所有输出文件的目标路径
+    // 必须是绝对路径（使用 Node.js 的 path 模块）
     <filename "/configuration/output/#outputfilename">
       <default>
         filename: "[name].js", // string (default)
       </default>
-<<<<<<< HEAD
-      filename: "[name].js", // 用于多个入口起点(entry point)
-      filename: "[chunkhash].js", // 用于长效缓存
-=======
-      filename: "[contenthash].js", // for long term caching
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
+      filename: "[contenthash].js", // 用于长效缓存
     </filename>
     // entry chunk 的文件名模板
     <publicPath "/configuration/output/#outputpublicpath">
@@ -127,33 +115,12 @@ module.exports = {
       publicPath: "/", // relative to server root
       publicPath: "https://cdn.example.com/", // absolute URL
     </publicPath>
-<<<<<<< HEAD
     // 输出解析文件的目录，url 相对于 HTML 页面
-    library: "MyLibrary", // string,
-    // 导出库(export library)的名称
-    <libraryTarget "/configuration/output/#outputlibrarytarget">
-      <default>
-        libraryTarget: "umd", // 通用模块定义
-      </default>
-      libraryTarget: "umd2", // 通用模块定义
-      libraryTarget: "commonjs2", // 使用 module.exports 导出
-      libraryTarget: "commonjs", // 作为 exports 的属性导出
-      libraryTarget: "amd", // 使用 AMD 定义方法来定义
-      libraryTarget: "this", // 在 this 上设置属性
-      libraryTarget: "var", // 变量定义于根作用域下
-      libraryTarget: "assign", // 盲分配(blind assignment)
-      libraryTarget: "window", // 在 window 对象上设置属性
-      libraryTarget: "global", // 在 global 对象上设置属性
-      libraryTarget: "jsonp", // jsonp 包裹
-    </libraryTarget>
-    // 导出库(export library)的类型
-=======
-    // the url to the output directory resolved relative to the HTML page
     <library "/configuration/output/#outputlibrary">
       <default>
-        library: { // There is also an old syntax for this available (click to show)
+        library: { // 这里有一种旧的语法形式可以使用（点击显示）
       </default>
-      // Old syntax:
+      // 旧语法：
       library: "MyLibrary", // string,
       libraryTarget: "umd", // = library.type
       auxiliaryComment: "comment", // = library.auxiliaryComment
@@ -161,9 +128,9 @@ module.exports = {
     </library>
       <libraryType "/configuration/output/#outputlibrarytype">
         <default>
-          type: "umd", // universal module definition
+          type: "umd", // 通用模块定义
         </default>
-        type: "umd2", // universal module definition (but optional externals will use globals)
+        type: "umd2", // 通用模块定义 (but optional externals will use globals)
         type: "commonjs-module", // exported with module.exports
         type: "commonjs2", // old name for "commonjs-module"
         type: "commonjs", // exported as properties to exports
@@ -209,44 +176,26 @@ module.exports = {
     // unique name for this build to avoid conflicts with other builds in the same HTML
     name: "my-config",
     // name of the configuration, shown in output
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
     <advancedOutput "#">
       <default>
         /* 高级输出配置（点击显示） */
       </default>
-<<<<<<< HEAD
-      pathinfo: true, // boolean
-      // 包括一些有帮助的路径信息，例如在生成代码时的 module(模块), export(导出), request 等路径信息。
-      chunkFilename: "[id].js",
-      chunkFilename: "[chunkhash].js", // 长效缓存
-      // 附加 chunk(additional chunk) 的文件名模板
-      jsonpFunction: "myWebpackJsonp", // string
-      // 用于加载 chunk 的 JSONP 函数名
-=======
       chunkFilename: "[name].js",
       chunkFilename: "[id].js",
-      chunkFilename: "[contenthash].js", // for long term caching
+      chunkFilename: "[contenthash].js", // 长效缓存
       // the filename template for additional chunks
       assetModuleFilename: "[hash][ext][query]", // string
       // the filename template for asset modules
       webassemblyModuleFilename: "[hash].module.wasm", // string
       // the filename template for wasm modules
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
       sourceMapFilename: "[file].map", // string
       sourceMapFilename: "sourcemaps/[file].map", // string
       // source map location 的文件名模板
       devtoolModuleFilenameTemplate: "webpack:///[resource-path]", // string
       // devtool 模块的文件名模板
       devtoolFallbackModuleFilenameTemplate: "webpack:///[resource-path]?[hash]", // string
-<<<<<<< HEAD
       // devtool 模块的文件名模板（用于冲突）
-      umdNamedDefine: true, // boolean
-      // 在 UMD 库中使用命名的 AMD 模块
-      crossOriginLoading: "use-credentials", // 枚举
-=======
-      // the name template for modules in a devtool (used for conflicts)
       crossOriginLoading: "use-credentials", // enum
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
       crossOriginLoading: "anonymous",
       crossOriginLoading: false,
       // 指定 runtime 如何处理跨域请求问题
@@ -255,12 +204,6 @@ module.exports = {
       <default>
         /* 专家级输出配置（自行承担风险） */
       </default>
-<<<<<<< HEAD
-      devtoolLineToLine: {
-        test: /\\.jsx$/
-      },
-      // 为这些模块使用 1:1 映射 SourceMaps（快速）
-=======
       pathinfo: true, // boolean
       // include useful path info about modules, exports, requests, etc. into the generated code
       charset: true, // string
@@ -283,16 +226,9 @@ module.exports = {
       chunkFormat: "commonjs",
       chunkFormat: false,
       // the format of chunks
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
       hotUpdateMainFilename: "[hash].hot-update.json", // string
       // HMR manifest 的文件名模板
       hotUpdateChunkFilename: "[id].[hash].hot-update.js", // string
-<<<<<<< HEAD
-      // HMR chunk 的文件名模板
-      sourcePrefix: "\\t", // string
-      // 使 bundle 内前置式模块资源具有更好可读性
-    </expert>
-=======
       // filename template for HMR chunks
       hotUpdateGlobal: "hmrUpdateFunction", // string
       // the name of the global variable used to load hot update chunks
@@ -337,7 +273,6 @@ module.exports = {
       hashSalt: "salt", // string | Buffer
       // an additional hash salt to fix hash related issues or change the hash in general
     </expertOutput>
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
   },
   module: {
     // 模块配置相关
@@ -352,20 +287,6 @@ module.exports = {
         exclude: [
           path.resolve(__dirname, "app/demo-files")
         ],
-<<<<<<< HEAD
-        // 这里是匹配条件，每个选项都接收一个正则表达式或字符串
-        // test 和 include 具有相同的行为，都是必定匹配
-        // exclude 必定不匹配（优先于 test 和 include）
-        // 最佳实践：
-        // - 只在 test 和 文件名匹配 中使用正则表达式
-        // - 在 include 和 exclude 中使用绝对路径数组
-        // - 尽量避免 exclude，更倾向于使用 include
-        issuer: { test, include, exclude },
-        // issuer 条件（导入源）
-        enforce: "pre",
-        enforce: "post",
-        // 标识应用这些规则，即使规则覆盖（高级选项）
-=======
         // these are matching conditions, each accepting a regular expression or string
         // test and include have the same behavior, both must be matched
         // exclude must not be matched (takes preferrence over test and include)
@@ -411,24 +332,14 @@ module.exports = {
         </advancedConditions>
 
         // Actions:
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
         loader: "babel-loader",
         // 应该应用的 loader，它相对上下文解析
         options: {
           presets: ["es2015"]
         },
-<<<<<<< HEAD
-        // loader 选项
-      },
-      {
-        test: /\\.html$/,
-        use: [
-          // 应用多个 loader 和 option
-=======
         // options for the loader
         use: [
           // apply multiple loaders and options instead
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
           "htmllint-loader",
           {
             loader: "html-loader",
@@ -475,20 +386,6 @@ module.exports = {
         rules: [ /* rules */ ]
         // use all of these nested rules (combine with conditions to be useful)
       },
-<<<<<<< HEAD
-      { oneOf: [ /* rules */ ] },
-      // 只使用这些嵌套规则之一
-      { rules: [ /* rules */ ] },
-      // 使用所有这些嵌套规则（合并可用条件）
-      { resource: { and: [ /* 条件 */ ] } },
-      // 仅当所有条件都匹配时才匹配
-      { resource: { or: [ /* 条件 */ ] } },
-      { resource: [ /* 条件 */ ] },
-      // 任意条件匹配时匹配（默认为数组）
-      { resource: { not: /* 条件 */ } }
-      // 条件不匹配时匹配
-=======
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
     ],
     <advancedModule "#">
       <default>
@@ -513,15 +410,6 @@ module.exports = {
     </advancedModule>
   },
   resolve: {
-<<<<<<< HEAD
-    // 解析模块 request 的选项
-    // （不会应用于 loader 解析）
-    modules: [
-      "node_modules",
-      path.resolve(__dirname, "app")
-    ],
-    // 用于查找模块的目录
-=======
     // options for resolving module requests
     // (does not apply to resolving of loaders)
     <modules "#">
@@ -538,31 +426,21 @@ module.exports = {
       // An absolute path means exactly this folder
     </modules>
     // directories where to look for modules (in order)
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
     extensions: [".js", ".json", ".jsx", ".css"],
     // 使用的扩展名
     alias: {
-<<<<<<< HEAD
-      // 模块别名列表
-=======
       // a list of module name aliases
       // aliases are imported relative to the current context
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
       "module": "new-module",
       // 别名："module" -> "new-module" 和 "module/path/file" -> "new-module/path/file"
       "only-module$": "new-module",
       // 别名 "only-module" -> "new-module"，但不匹配 "only-module/path/file" -> "new-module/path/file"
       "module": path.resolve(__dirname, "app/third/module.js"),
-<<<<<<< HEAD
-      // 别名 "module" -> "./app/third/module.js" 和 "module/file" 会导致错误
-      // 模块别名相对于当前上下文导入
-=======
       // alias "module" -> "./app/third/module.js" and "module/file" results in error
       "module": path.resolve(__dirname, "app/third"),
       // alias "module" -> "./app/third" and "module/file" -> "./app/third/file"
       [path.resolve(__dirname, "app/module.js")]: path.resolve(__dirname, "app/alternative-module.js"),
       // alias "./app/module.js" -> "./app/alternative-module.js"
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
     },
     <alias "/configuration/resolve/#resolvealias">
       <default>
@@ -584,37 +462,14 @@ module.exports = {
       <default>
         /* 高级解析选项（点击展示） */
       </default>
-<<<<<<< HEAD
-      symlinks: true,
-      // 循着符号链接(symlinks)到新位置
-      descriptionFiles: ["package.json"],
-      // 从 package 描述中读取的文件
-=======
       symlinks: true, // (default)
       // follow symlinks to new location
       descriptionFiles: ["package.json"], // (default)
       // files that are read for package description
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
       mainFields: ["main"],
       // 当 request 一个文件夹时
       // 从描述文件中读取的属性
       aliasFields: ["browser"],
-<<<<<<< HEAD
-      // 从描述文件中读取的属性
-      // 为此 package 的 request 起别名
-      enforceExtension: false,
-      // 如果为 true，request 必不包括扩展名
-      // 如果为 false，request 可以包括扩展名
-      moduleExtensions: ["-module"],
-      enforceModuleExtension: false,
-      // 类似 extensions/enforceExtension，但是用模块名替换文件
-      unsafeCache: true,
-      unsafeCache: {},
-      // 为解析过的 request 启用缓存
-      // 这是不安全，因为文件夹结构可能会改动
-      // 但是性能改善是很大的
-      cachePredicate: (path, request) => true,
-=======
       // properties that are read from description file
       // to alias requests in this package
       exportsFields: ["exports"], // (default)
@@ -649,7 +504,6 @@ module.exports = {
       // this is unsafe as there is no validation
       // but performance improvement is really big
       cachePredicate: ({ path, request }) => true,
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
       // predicate function which selects requests for caching
       cacheWithContext: false, // (default)
       // include context information in cache key
@@ -709,17 +563,6 @@ module.exports = {
     target: `browserslist:${path.resolve(__dirname, "browserslist.json")}`,
     target: `browserslist:${path.resolve(__dirname, "browserslist.json")}:modern`,
     target: "webworker", // WebWorker
-<<<<<<< HEAD
-    target: "node", // Node.js 通过 require
-    target: "async-node", // Node.js 通过 fs 和 vm
-    target: "node-webkit", // nw.js
-    target: "electron-main", // electron, main process
-    target: "electron-renderer", // electron, renderer process
-    target: (compiler) => { /* ... */ }, // 自定义
-  </target>
-  // bundle 应该运行的环境
-  // 更改 chunk 加载行为和可用模块
-=======
     target: "node", // Node.js via require
     target: "node10.13", // Node.js via require
     target: "async-node10.13", // Node.js via fs and vm
@@ -734,7 +577,6 @@ module.exports = {
   // the environment in which the bundle should run
   // changes chunk loading behavior, available external modules
   // and generated code style
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
   <externals "/configuration/externals">
     <default>
       externals: ["react", /^@angular/],
@@ -752,9 +594,6 @@ module.exports = {
     },
     externals: ({ context, request }, callback) => { /* ... */ callback(null, "commonjs " + request); }
   </externals>
-<<<<<<< HEAD
-  // 不要寻找/打包这些模块，而是在运行时从环境中 request 他们
-=======
   // Don't follow/bundle these modules, but request them at runtime from the environment
   <externals "/configuration/externals">
     <default>
@@ -805,15 +644,11 @@ module.exports = {
       (warning, compilation) => true
     ],
   </ignoreWarnings>
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
   <stats "/configuration/stats">
     <default>
       stats: "errors-only",
     </default>
   </stats>
-<<<<<<< HEAD
-  // 精确控制要显示的 bundle 信息
-=======
   stats: {
     // lets you precisely control what bundle information gets displayed
     <preset "/configuration/stats/#stats-presets">
@@ -1003,7 +838,6 @@ module.exports = {
     hash: true,
     // show build hash in summary
   },
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
   devServer: {
     proxy: { // proxy URLs to backend development server
       '/api': 'http://localhost:3000'
@@ -1029,9 +863,6 @@ module.exports = {
   plugins: [
     // ...
   ],
-<<<<<<< HEAD
-  // 附加插件列表
-=======
   // list of additional plugins
   optimization: {
     chunkIds: "size",
@@ -1191,23 +1022,10 @@ module.exports = {
       </expert>
     }
   },
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
   <advanced "#">
     <default>
       /* 高级配置（点击展示） */
     </default>
-<<<<<<< HEAD
-    resolveLoader: { /* 等同于 resolve */ }
-    // 用于 loader 的独立解析选项
-    parallelism: 1, // number
-    // 限制并行处理模块的数量
-    profile: true, // boolean
-    // 捕获时机信息
-    bail: true, //boolean
-    // 在第一个错误出错时抛出，而不是无视错误。
-    cache: false, // boolean
-    // 禁用/启用缓存
-=======
     loader: { /* ... */ },
     // add custom API or properties to loader context
     resolveLoader: { /* same as resolve */ }
@@ -1246,7 +1064,6 @@ module.exports = {
       buildDependencies: { timestamp: true, hash: true },
       // snapshot method for different operations
     },
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
     watch: true, // boolean
     // 启用 watch 模式
     watchOptions: {
@@ -1258,18 +1075,6 @@ module.exports = {
       // 必须用在不通知更改的文件系统中
       // 即 nfs shares
     },
-<<<<<<< HEAD
-    node: {
-      // polyfill 和 mock，
-      // 用于在非 Node 环境中运行 Node.js 环境代码。
-      console: false, // boolean | "mock"
-      global: true, // boolean | "mock"
-      process: true, // boolean
-      __filename: "mock", // boolean | "mock"
-      __dirname: "mock", // boolean | "mock"
-      Buffer: true, // boolean | "mock"
-      setImmediate: true // boolean | "mock" | "empty"
-=======
   </advancedCaching>
   <advancedBuild "#">
     <default>
@@ -1285,7 +1090,6 @@ module.exports = {
       debug: true,
       debug: /webpack/,
       debug: [ "MyPlugin", /webpack/ ]
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
     },
     parallelism: 1, // number
     // limit the number of parallel processed modules
@@ -1303,14 +1107,7 @@ W> 在应用 [插件默认值](/contribute/writing-a-plugin/#configuration-defau
 
 T> 无需几次鼠标点击，而是想要快速生成 webpack 配置文件来满足项目需求。
 
-<<<<<<< HEAD
-[Generate Custom Webpack Configuration]（https://generatewebpackconfig.netlify.com/）是一个交互式站点，针对你的前端项目，可以自定义选择 webpack 配置选项。
-它会根据你选择的 loader/plugin 等，自动生成最小化 webpack 配置。
-
 或者使用 [webpack-cli 的 `init` 命令](https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli)，会在创建配置文件之前会询问你几个问题。
-=======
-Use [webpack-cli's `init` command](https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli) that will ask you a couple of questions before creating a configuration file.
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
 
 ```bash
 npx webpack-cli init

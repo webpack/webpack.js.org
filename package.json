@@ -37,11 +37,7 @@
     "fetch:supporters": "node src/utilities/fetch-supporters.js",
     "fetch:starter-kits": "node src/utilities/fetch-starter-kits.js",
     "prebuild": "npm run clean",
-<<<<<<< HEAD
-    "build": "run-s fetch:supporters fetch:starter-kits printable content && cross-env NODE_ENV=production webpack --config webpack.ssg.js && run-s clean-printable content && cross-env NODE_ENV=production webpack --config webpack.prod.js",
-=======
     "build": "run-s fetch-repos fetch printable content && cross-env NODE_ENV=production webpack --config webpack.ssg.js && run-s clean-printable content && cross-env NODE_ENV=production webpack --config webpack.prod.js",
->>>>>>> 46d0ed3ed5380ee1cbc27eaffcfc4744c6a78d0c
     "postbuild": "npm run sitemap",
     "build-test": "npm run build && http-server dist/",
     "test": "npm run lint",
