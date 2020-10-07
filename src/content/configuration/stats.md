@@ -295,6 +295,21 @@ module.exports = {
 };
 ```
 
+### `stats.groupModulesByAttributes`
+
+`boolean`
+
+Tells `stats` whether to group modules by their attributes (errors, warnings, assets, optional, orphan, or dependent).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupModulesByAttributes: false
+  }
+};
+```
+
 ### `stats.cachedAssets`
 
 `boolean = true`
