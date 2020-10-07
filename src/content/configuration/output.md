@@ -476,7 +476,7 @@ A unique name of the webpack build to avoid multiple webpack runtimes to conflic
 
 `output.uniqueName` will be used to generate unique globals for:
 
-- [`output.chunkLoadingGlobal`](/configuration/output/#outputChunkLoadingGlobal)
+- [`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal)
 
 __webpack.config.js__
 
@@ -555,7 +555,7 @@ Only used when [`target`](/configuration/target/) is set to `'web'`, which uses 
 
 A JSONP function used to asynchronously load hot-update chunks.
 
-For details see [`output.chunkLoadingGlobal`](#outputChunkLoadingGlobal).
+For details see [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
 
 
 ## `output.hotUpdateMainFilename`
