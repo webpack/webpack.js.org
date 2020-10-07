@@ -414,6 +414,35 @@ module.exports = {
 ```
 
 
+### `resolve.preferRelative`
+
+`boolean`
+
+When enabled, webpack would prefer to resolve module requests as relative requests instead of using modules from `node_modules` directories.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    preferRelative: true
+  }
+};
+```
+
+__src/index.js__
+
+```js
+// let's say `src/logo.svg` exists
+import logo1 from 'logo.svg'; // this is viable when `preferRelative` enabled
+import logo2 from './logo.svg'; // otherwise you can only use relative path to resolve logo.svg
+
+// `preferRelative` is enabled by default for `new URL()` case
+const b = new URL('module/path', import.meta.url);
+const a = new URL('./module/path', import.meta.url);
+```
+
 ### `resolve.symlinks`
 
 `boolean = true`
