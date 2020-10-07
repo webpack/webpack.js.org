@@ -14,6 +14,7 @@ contributors:
   - grgur
   - anshumanv
   - pixel-ray
+  - snitin315
 ---
 
 `object` `string`
@@ -874,6 +875,39 @@ module.exports = {
     warningsFilter: [
       'filter',
       /filter/,
+      (warning) => true
+    ]
+  }
+};
+```
+
+
+W> `stats.warningsFilter` is deprecated in favor of `[stats.ignoreWarnings](#statsignoreWarnings)`.
+
+### `stats.ignoreWarnings`
+
+`RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`
+
+Tells `stats` to ignore specific warnings. This can be done with a `RegExp`, a custom `function` to select warnings based on the raw warning instance which is getting `WebpackError` and `Compilation` as arguments and returns a `boolean`, an `object` with the following properties:
+
+- `file` : A RegExp to select the origin file for the warning.
+- `message` : A RegExp to select the warning message.
+- `module` : A RegExp to select the origin module for the warning.
+
+`stats.ignoreWarnings` can be an `array` of any of the above.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    ignoreWarnings: [
+      {
+        module: /module2\.js\?[34]/ // A RegExp
+      },
+      {
+        module: /[13]/,
+        message: /homepage/
+      },
       (warning) => true
     ]
   }
