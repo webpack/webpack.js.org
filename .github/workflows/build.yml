@@ -1,0 +1,29 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-and-build:
+    name: Lint and Build
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [10.x]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        use: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn
+      - run: yarn cypress install
+      - run: yarn cypress verify
+      - run: yarn lint:js
+      - run: yarn lint:markdown
+      - run: yarn lint:social
+      - run: yarn cypress:ci
+      - run: yarn build
+      - run: yarn lint:links
