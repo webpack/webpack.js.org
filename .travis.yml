@@ -44,6 +44,8 @@ jobs:
         - yarn cypress install
         - yarn cypress verify
       script:
+        - yarn fetch:supporters
+        - yarn fetch:starter-kits
         - yarn cypress:ci || travis_terminate 1
 
     - stage: Build
