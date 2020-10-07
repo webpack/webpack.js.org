@@ -19,7 +19,7 @@ webpack can compile for multiple environments or _targets_. To understand what a
 
 `string` `function (compiler) => string`
 
-Instructs webpack to target a specific environment. Defaults to `'browserslist'` or to `'web'` when no browserslist-config was found.
+Instructs webpack to target a specific environment. Defaults to `'browserslist'` or to `'web'` when no browserslist configuration was found.
 
 
 ### `string`
@@ -44,8 +44,8 @@ For example, when the `target` is set to `"electron-main"`, webpack includes mul
 
 If a project has a browserslist config, then webpack will use it for:
 
-- determinate ES-features that may be used to generate a runtime-code (all the chunks and modules are wrapped by runtime code).
-- infer an environment (e.g: `last 2 node versions` the same as `target: "node"` with some [`output.environment`](/configuration/output/#outputenvironment) settings)
+- Determinate ES-features that may be used to generate a runtime-code (all the chunks and modules are wrapped by runtime code).
+- Infer an environment (e.g: `last 2 node versions` the same as `target: "node"` with some [`output.environment`](/configuration/output/#outputenvironment) settings).
 
 Supported browserslist values:
 

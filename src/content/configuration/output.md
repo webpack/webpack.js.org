@@ -1220,7 +1220,7 @@ module.exports = {
       dynamicImport: false,
       // The environment supports 'for of' iteration ('for (const x of array) { ... }').
       forOf: true,
-      // The environment supports EcmaScript Module syntax to import EcmaScript modules (import ... from '...').
+      // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
       module: false,
     }
   }
