@@ -1,13 +1,13 @@
+dist: trusty
 language: node_js
 node_js:
-  - "10.18.0"
+  - "12"
 
 cache:
   yarn: true
   directories:
-    - node_modules
-    - dist
     - .cache
+    - repositories
 
 stages:
   - Build
@@ -19,7 +19,6 @@ jobs:
   include:
     - stage: Build
       name: Lint and Build
-      before_install: npm install --global yarn
       install:
         - yarn
         - yarn cypress install
