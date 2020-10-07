@@ -281,7 +281,7 @@ module.exports = {
 };
 ```
 
-W> `cache.idleTimeout` is only available when [`cache.store`](#cachestore) is set to either `'pack'` or `'idle'`
+W> `cache.idleTimeout` is only available when [`cache.store`](#cachestore) is set to `'pack'`
 
 ### `cache.idleTimeoutForInitialStore`
 
@@ -300,7 +300,7 @@ module.exports = {
 };
 ```
 
-W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#cachestore) is set to either `'pack'` or `'idle'`
+W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#cachestore) is set to `'pack'`
 
 ## `loader`
 

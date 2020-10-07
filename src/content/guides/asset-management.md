@@ -438,6 +438,7 @@ __project__
     |- index.html
   |- /src
 +   |- data.xml
++   |- data.csv
     |- my-font.woff
     |- my-font.woff2
     |- icon.png
@@ -458,6 +459,15 @@ __src/data.xml__
 </note>
 ```
 
+__src/data.csv__
+
+``` csv
+to,from,heading,body
+Mary,John,Reminder,Call Cindy on Tuesday
+Zoe,Bill,Reminder,Buy orange juice
+Autumn,Lindsey,Letter,I miss you
+```
+
 Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import, will contain parsed JSON for easy consumption:
 
 __src/index.js__
@@ -467,6 +477,7 @@ __src/index.js__
   import './style.css';
   import Icon from './icon.png';
 + import Data from './data.xml';
++ import Notes from './data.csv';
 
   function component() {
     const element = document.createElement('div');
@@ -482,6 +493,7 @@ __src/index.js__
     element.appendChild(myIcon);
 
 +   console.log(Data);
++   console.log(Notes);
 
     return element;
   }
@@ -645,6 +657,7 @@ __project__
     |- index.html
   |- /src
 -   |- data.xml
+-   |- data.csv
 -   |- my-font.woff
 -   |- my-font.woff2
 -   |- icon.png
@@ -709,6 +722,7 @@ __src/index.js__
 - import './style.css';
 - import Icon from './icon.png';
 - import Data from './data.xml';
+- import Notes from './data.csv';
 -
   function component() {
     const element = document.createElement('div');
@@ -724,6 +738,7 @@ __src/index.js__
 -   element.appendChild(myIcon);
 -
 -   console.log(Data);
+-   console.log(Notes);
 
     return element;
   }
