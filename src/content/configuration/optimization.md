@@ -153,11 +153,11 @@ module.exports = {
 };
 ```
 
-## `optimization.noEmitOnErrors`
+## `optimization.emitOnErrors`
 
-`boolean`
+`boolean = false`
 
-Use the `optimization.noEmitOnErrors` to skip the emitting phase whenever there are errors while compiling. This ensures that no erroring assets are emitted. The `emitted` flag in the stats is `false` for all assets.
+Use the `optimization.emitOnErrors` to emit assets whenever there are errors while compiling. This ensures that erroring assets are emitted. Critical errors are emitted into the generated code and will cause errors at runtime.
 
 __webpack.config.js__
 
@@ -165,7 +165,7 @@ __webpack.config.js__
 module.exports = {
   //...
   optimization: {
-    noEmitOnErrors: true
+    emitOnErrors: true
   }
 };
 ```
@@ -326,6 +326,8 @@ module.exports = {
   }
 };
 ```
+
+T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` defaults to `false`. 
 
 ## `optimization.mangleWasmImports`
 
