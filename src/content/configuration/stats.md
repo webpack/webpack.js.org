@@ -149,7 +149,7 @@ module.exports = {
 
 `number = 15`
 
-Tells `stats`  how many items of assets should be displayed (groups will be collapsed to fit this space).
+Tells `stats` how many items of assets should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
 module.exports = {
@@ -164,7 +164,7 @@ module.exports = {
 
 `number = 15`
 
-Tells `stats`  how many items of modules should be displayed (groups will be collapsed to fit this space).
+Tells `stats` how many items of modules should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
 module.exports = {
@@ -179,7 +179,7 @@ module.exports = {
 
 `number = 10`
 
-Tells `stats`  how many items of chunk modules should be displayed (groups will be collapsed to fit this space).
+Tells `stats` how many items of chunk modules should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
 module.exports = {
@@ -194,7 +194,7 @@ module.exports = {
 
 `number = 10`
 
-Tells `stats`  how many items of nested modules should be displayed (groups will be collapsed to fit this space).
+Tells `stats` how many items of nested modules should be displayed (groups will be collapsed to fit this space).
 
 ```javascript
 module.exports = {
