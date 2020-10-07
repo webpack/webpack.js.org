@@ -33,7 +33,7 @@ Name                                                     | Description
 [`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin) | Set min/max limits for chunking to better control chunking
 [`MinChunkSizePlugin`](/plugins/min-chunk-size-plugin)       | Keep chunk size above the specified limit
 [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin)       | creates a CSS file per JS file which requires CSS
-[`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimizationnoemitonerrors)  | Skip the emitting phase when there are compilation errors
+[`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimizationemitonerrors)  | Skip the emitting phase when there are compilation errors
 [`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin) | Replace resource(s) that matches a regexp
 [`NpmInstallWebpackPlugin`](/plugins/npm-install-webpack-plugin) | Auto-install missing dependencies during development
 [`ProgressPlugin`](/plugins/progress-plugin)                     | Report compilation progress
