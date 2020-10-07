@@ -24,6 +24,7 @@ contributors:
   - hiroppy
   - chenxsan
   - snitin315
+  - QC-L
 ---
 
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
@@ -102,7 +103,7 @@ T> 尽管 `<script>` [已弃用](https://developer.mozilla.org/en-US/docs/Web/HT
 
 ## `output.chunkFilename` {#outputchunkfilename}
 
-`string = '[id].js'`
+`string = '[id].js'` `function (pathData, assetInfo) => string`
 
 此选项决定了非入口(non-entry) chunk 文件的名称。有关可取的值的详细信息，请查看 [`output.filename`](#outputfilename) 选项。
 
@@ -118,6 +119,21 @@ module.exports = {
   output: {
     //...
     chunkFilename: '[id].js'
+  }
+};
+```
+
+Usage as a function:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    chunkFilename: (pathData) => {
+      return pathData.chunk.name === 'main' ? '[name].js': '[name]/[name].js';
+    },
   }
 };
 ```
@@ -1133,7 +1149,26 @@ module.exports = {
 };
 ```
 
-## `output.enabledLibraryTypes` {#outputenabledlibrarytypes}
+## `output.workerChunkLoading` {#outputworkerchunkloading}
+
+`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false` 
+
+新选项 `workerChunkLoading` 用于控制 workder 的 chunk 加载。
+
+T> 此选项默认值取决于 `target` 的设置。欲了解更多详情，请在 [webpack 默认值文件中搜索](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js) `"workerChunkLoading"`。
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    workerChunkLoading: false
+  }
+};
+```
+
+## `output.enabledLibraryTypes`
 
 `[string]`
 

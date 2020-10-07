@@ -3,23 +3,24 @@ const path = require('path');
 const mkdirp = require('mkdirp');
 const _ = require('lodash');
 const GithubAPI = require('@octokit/rest');
+const { excludedLoaders, excludedPlugins } = require('./constants');
 
 const fetch = {
   loaders: [
     {
       organization: 'webpack-contrib',
       suffixes: ['-loader'],
-      hides: ['webpack-contrib/config-loader']
+      hides: excludedLoaders
     },
     'babel/babel-loader',
-    'postcss/postcss-loader',
-    'peerigon/extract-loader'
+    'peerigon/extract-loader',
+    'Banno/polymer-webpack-loader'
   ],
   plugins: [
     {
       organization: 'webpack-contrib',
       suffixes: ['-webpack-plugin', '-extract-plugin'],
-      hides: ['webpack-contrib/component-webpack-plugin']
+      hides: excludedPlugins
     }
   ]
 };

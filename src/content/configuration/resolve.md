@@ -16,6 +16,7 @@ contributors:
   - myshov
   - anikethsaha
   - chenxsan
+  - jamesgeorge007
 ---
 
 这些选项能设置模块如何被解析。webpack 提供合理的默认值，但是还是可能会修改一些解析的细节。
@@ -482,6 +483,42 @@ module.exports = {
   //...
   resolve: {
     roots: [__dirname, fixtures]
+  }
+};
+```
+
+### `resolve.importsFields`
+
+`[string]`
+
+Fields from `package.json` which are used to provide the internal requests of a package (requests starting with `#` are considered internal).
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    importsFields: ['browser', 'module', 'main']
+  }
+};
+```
+
+### `resolve.fallback`
+
+`boolean`
+
+Redirect module requests when normal resolving fails.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    fallback: {
+      xyz: path.resolve(__dirname, 'path/to/file.js')
+    }
   }
 };
 ```

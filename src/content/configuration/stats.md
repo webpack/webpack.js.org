@@ -328,7 +328,7 @@ module.exports = {
 
 ### `stats.entrypoints` {#statsentrypoints}
 
-`boolean = true`
+`boolean = true` `string = 'auto'`
 
 告知 `stats` 是否展示入口文件与对应的文件 bundles。
 
@@ -340,6 +340,8 @@ module.exports = {
   }
 };
 ```
+
+当 `stats.entrypoints` 被设置为 `'auto'` 时，webpack 将自动决定是否在 stats 输出中展示入口信息。
 
 ### `stats.env` {#statsenv}
 
@@ -795,6 +797,51 @@ module.exports = {
   //...
   stats: {
     version: false
+  }
+};
+```
+
+### `stats.chunkGroupAuxiliary` {#statschunkgroupauxiliary}
+
+`boolean = true`
+
+在 chunk 组中展示辅助 asset。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupAuxiliary: false
+  }
+};
+```
+
+### `stats.chunkGroupChildren` {#statschunkgroupchildren}
+
+`boolean = true`
+
+显示 chunk 组的子 chunk。（例如，预置（prefetched），预加载（preloaded）的 chunk 和 asset)。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupChildren: false
+  }
+};
+```
+
+### `stats.chunkGroupMaxAssets` {#statschunkgroupmaxassets}
+
+`number`
+
+chunk 组中的 asset 数上限。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupMaxAssets: 5
   }
 };
 ```
