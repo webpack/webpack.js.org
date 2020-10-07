@@ -17,9 +17,9 @@ webpack can compile for multiple environments or _targets_. To understand what a
 
 ## `target`
 
-`string` `function (compiler)` = `"browserslist"` or `"web"` if no browserslist-config found
+`string` `function (compiler) => string`
 
-Instructs webpack to target a specific environment.
+Instructs webpack to target a specific environment. Defaults to `'browserslist'` or to `'web'` when no browserslist-config was found.
 
 
 ### `string`
