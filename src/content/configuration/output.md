@@ -164,9 +164,9 @@ module.exports = {
 
 ## `output.chunkLoading`
 
-`boolean = false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>`
+`false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>`
 
-The method of loading chunks (methods included by default are 'jsonp' (web), 'importScripts' (WebWorker), 'require' (sync node.js), 'async-node' (async node.js), but others might be added by plugins).
+The method to load chunks (methods included by default are 'jsonp' (web), 'importScripts' (WebWorker), 'require' (sync node.js), 'async-node' (async node.js), but others might be added by plugins).
 
 __webpack.config.js__
 
@@ -183,7 +183,7 @@ module.exports = {
 
 ## `output.chunkFormat`
 
-`boolean = false` `string: 'array-push' | 'commonjs' | <any string>`
+`false` `string: 'array-push' | 'commonjs' | <any string>`
 
 The format of chunks (formats included by default are 'array-push' (web/WebWorker), 'commonjs' (node.js), but others might be added by plugins).
 
@@ -202,7 +202,7 @@ module.exports = {
 
 ## `output.enabledChunkLoadingTypes`
 
-`[string]` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>`
+`[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
 
 List of chunk loading types enabled for use by entry points. Will be automatically filled by webpack. Only needed when using a function as entry option and returning chunkLoading option from there.
 
@@ -434,7 +434,7 @@ The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides
 
 `string = 'window'`
 
-When targeting a library, especially when `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`. Defaults to `self` for web-like targets.
+When targeting a library, especially when `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`. Defaults to `self` for Web-like targets.
 
 For example:
 
@@ -460,7 +460,6 @@ A unique name of the webpack build to avoid multiple webpack runtimes to conflic
 
 `output.uniqueName` will be used to generate unique globals for:
 
-- [`output.chunkLoadingGlobal`](/configuration/output/#outputChunkLoadingGlobal)
 - [`output.chunkLoadingGlobal`](/configuration/output/#outputChunkLoadingGlobal)
 
 __webpack.config.js__

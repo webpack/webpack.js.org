@@ -79,7 +79,7 @@ module.exports = {
     personal: {
       import: './personal.js',
       filename: 'pages/personal.js',
-      dependOn:'shared',
+      dependOn: 'shared',
       chunkLoading: 'jsonp',
     }
   }
