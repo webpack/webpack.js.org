@@ -332,6 +332,23 @@ Parameters: `chunks`
 Parameters: `chunks`
 
 
+### `beforeChunkIds`
+
+`SyncHook`
+
+...
+
+Parameters: `chunks`
+
+
+### `chunkIds`
+
+`SyncHook`
+
+...
+
+Parameters: `chunks`
+
 ### `reviveChunks`
 
 `SyncHook`
@@ -339,15 +356,6 @@ Parameters: `chunks`
 Restore chunk information from records.
 
 Parameters: `modules` `records`
-
-
-### `optimizeChunkOrder`
-
-`SyncHook`
-
-Sort the chunks in from most to least important.
-
-Parameters: `chunks`
 
 
 ### `beforeOptimizeChunkIds`
