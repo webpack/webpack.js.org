@@ -130,7 +130,7 @@ When only a single entry (`"."`) into the package should be supported the `{ "."
 
 ## Notes about ordering
 
-In an object where each key in an condition, order of properties is significant. Conditions are handled in the order they are specified.
+In an object where each key is a condition, order of properties is significant. Conditions are handled in the order they are specified.
 
 In an object where each key is a subpath, order of properties is not significant. More specific properties are preferred over less specific ones.
 
@@ -398,7 +398,7 @@ Providing `"type": "commonjs"` helps to statically detect CommonJs files.
 }
 ```
 
-Note that desprite using `"type": "module"` and `.js` for `dist-bundle.js` this file is not in ESM format.
+Note that despite using `"type": "module"` and `.js` for `dist-bundle.js` this file is not in ESM format.
 It should use globals to allow direct consumption as script tag.
 
 ### Providing devtools or production optimizations
