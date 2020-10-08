@@ -8,6 +8,8 @@ src/**/_*.md
 npm-debug.log
 yarn-error.log
 package-lock.json
+yarn.lock
+.travis.yml
 .cache
 internal-links.tap
 stats.json

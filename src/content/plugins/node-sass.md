@@ -1,5 +1,6 @@
 ---
 title: Plugins
+sort: -1
 ---
 
 webpack has a rich plugin interface. Most of the features within webpack itself use this plugin interface. This makes webpack flexible.
