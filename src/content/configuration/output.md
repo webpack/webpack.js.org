@@ -422,14 +422,14 @@ Note this option does not affect output files for on-demand-loaded chunks. For t
 
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
-Substituions available on Compilation-level:
+Substitutions available on Compilation-level:
 
 | Template   | Description                  |
 | ---------- | ---------------------------- |
 | [fullhash] | The full hash of compilation |
 | [hash]     | Same, but deprecated         |
 
-Substituions available on Chunk-level:
+Substitutions available on Chunk-level:
 
 | Template      | Description                                                                                                      |
 | ------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -469,7 +469,7 @@ Substituions available on URL-level:
 
 T> `[file]` equals `[path][base]`. `[base]` equals `[name][ext]`. The full path is `[path][name][ext][query][fragment]` or `[path][base][query][fragment]` or `[file][query][fragment]`.
 
-The lengths of hashes (`[hash]`, `[contenthash]` or `[chunkhash]`) can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
+The length of hashes (`[hash]`, `[contenthash]` or `[chunkhash]`) can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
 
 It is possible to filter out placeholder replacement when you want to use one of the placeholders in the actual file name. For example, to output a file `[name].js`, you have to escape the `[name]` placeholder by adding backslashes between the brackets. So that `[\name\]` generates `[name]` instead of getting replaced with the `name` of the asset.
 
@@ -508,7 +508,7 @@ type ModulePathData = {
 }
 ```
 
-T> In some context properties will use javascript code expressions instead of raw values. In these cases the `WithLength` variant is available and should be used instead of slicing the original value.
+T> In some context properties will use JavaScript code expressions instead of raw values. In these cases the `WithLength` variant is available and should be used instead of slicing the original value.
 
 ## `output.assetModuleFilename`
 
