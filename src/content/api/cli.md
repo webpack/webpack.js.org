@@ -181,7 +181,7 @@ Parameter                 | Explanation                                 | Input 
 #### Example Usage
 
 ```bash
-webpack index=./src/index.js index2=./src/index2.js --output-path='./dist' --output-filename='[name][hash].bundle.js'
+webpack index=./src/index.js index2=./src/index2.js --output-path='./dist' --output-filename='[name][fullhash].bundle.js'
 
 | Asset                                | Size    | Chunks      | Chunk Names   |
 |--------------------------------------|---------|-------------|---------------|
@@ -193,7 +193,7 @@ webpack index=./src/index.js index2=./src/index2.js --output-path='./dist' --out
 ```
 
 ```bash
-webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --output-filename='[name][hash].bundle.js' --devtool source-map --output-source-map-filename='[name]123.map'
+webpack.js index=./src/index.js index2=./src/index2.js --output-path='./dist' --output-filename='[name][fullhash].bundle.js' --devtool source-map --output-source-map-filename='[name]123.map'
 
 | Asset                                | Size    | Chunks      | Chunk Names   |
 |--------------------------------------|---------|-------------|---------------|
