@@ -14273,7 +14273,7 @@ webpack-sources@^2.0.1:
     react-textarea-autosize "^5.2.1"
     uuid "^3.1.0"
 
-webpack@^5.0.0-rc.0:
+webpack@^5.0.0-rc.4:
   version "5.0.0-rc.4"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.0.0-rc.4.tgz#713b5431414610a3719252f07c78a64acc31470a"
   integrity sha512-xR10QF2UkPAOsy1Eqm59QPX1C5huX3+u9N3KIdpSxtKhyz7+w/eyL8KKDLqfPaOAcp6Lou7oaO1Nd1t4qv9e5w==

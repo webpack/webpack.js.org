@@ -145,7 +145,7 @@
     "style-loader": "^1.2.1",
     "tap-spot": "^1.1.1",
     "terser-webpack-plugin": "^4.1.0",
-    "webpack": "^5.0.0-rc.0",
+    "webpack": "^5.0.0-rc.4",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1",
