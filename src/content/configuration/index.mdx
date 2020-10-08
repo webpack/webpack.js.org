@@ -243,7 +243,7 @@ module.exports = {
       scriptType: "module"
       // adds a type attribute to injected script tags
     </expertOutput>
-    <expertOutput2 "#">
+    <expertOutputB "#">
       <default>
         /* Expert output configuration 2 (on own risk) */
       </default>
@@ -278,7 +278,7 @@ module.exports = {
       // length of hashes
       hashSalt: "salt", // string | Buffer
       // an additional hash salt to fix hash related issues or change the hash in general
-    </expertOutput2>
+    </expertOutputB>
   },
   module: {
     // configuration regarding modules
@@ -350,7 +350,7 @@ module.exports = {
           {
             loader: "html-loader",
             options: {
-              /* ... */
+              // ...
             }
           }
         ]
@@ -384,12 +384,16 @@ module.exports = {
         </advancedActions>
       },
       {
-        oneOf: [ /* rules */ ]
+        oneOf: [
+          // ... (rules)
+        ]
         // only use one of these nested rules
       },
       {
-        /* conditions */
-        rules: [ /* rules */ ]
+        // ... (conditions)
+        rules: [
+          // ... (rules)
+        ]
         // use all of these nested rules (combine with conditions to be useful)
       },
     ],
