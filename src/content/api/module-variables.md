@@ -74,10 +74,7 @@ exports.aFunction = function doSomething() {
 
 See [node.js global](https://nodejs.org/api/globals.html#globals_global).
 
-
-### `process` (NodeJS)
-
-See [node.js process](https://nodejs.org/api/process.html).
+For compatibility reasons webpack polyfills the `global` variable by default.
 
 
 ### `__dirname` (NodeJS)
