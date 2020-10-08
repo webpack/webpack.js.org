@@ -72,7 +72,7 @@ Supported browserslist values:
 
 ### `[string]`
 
-Some targets may be mixed:
+When multiple targets are passed, then common subset of features will be used:
 
 __webpack.config.js__
 
@@ -83,7 +83,7 @@ module.exports = {
 };
 ```
 
-It means that webpack will generate a runtime code for web platform and will use only ES5 features.
+Webpack will generate a runtime code for web platform and will use only ES5 features.
 
 Not all targets may be mixed for now.
 
@@ -127,3 +127,5 @@ module.exports = {
   ]
 };
 ```
+
+When no information about the target or the [environment](/configuration/output/#outputenvironment) features is provided, then ES2015 will be used.
