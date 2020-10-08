@@ -34,7 +34,15 @@ In contrast to [Node.js modules](https://nodejs.org/api/modules.html), webpack _
 
 ## Supported Module Types
 
-webpack supports modules written in a variety of languages and preprocessors, via _loaders_. _Loaders_ describe to webpack __how__ to process non-JavaScript _modules_ and include these _dependencies_ into your _bundles_.
+webpack supports to following module types natively:
+
+- [ECMAScript modules](/guides/ecma-script-modules)
+- CommonJS modules
+- AMD modules
+- [Assets](/guides/asset-modules)
+- WebAssembly modules
+
+In addition to that webpack supports modules written in a variety of languages and preprocessors via _loaders_. _Loaders_ describe to webpack __how__ to process non-native _modules_ and include these _dependencies_ into your _bundles_.
 The webpack community has built _loaders_ for a wide variety of popular languages and language processors, including:
 
 - [CoffeeScript](http://coffeescript.org)

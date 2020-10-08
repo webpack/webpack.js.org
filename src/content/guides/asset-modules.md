@@ -1,6 +1,6 @@
 ---
 title: Asset Modules
-sort: 24
+sort: 25
 contributors:
   - smelukov
   - EugeneHlushko
