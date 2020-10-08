@@ -438,7 +438,7 @@ Substitutions available on Chunk-level:
 | [chunkhash]   | The hash of the chunk, including all elements of the chunk                                                       |
 | [contenthash] | The hash of the chunk, including only elements of this content type (affected by `optimization.realContentHash`) |
 
-Substituions available on Module-level:
+Substitutions available on Module-level:
 
 | Template      | Description                           |
 | ------------- | ------------------------------------- |
@@ -448,7 +448,7 @@ Substituions available on Module-level:
 | [modulehash]  | Same, but deprecated                  |
 | [contenthash] | The hash of the content of the module |
 
-Substituions available on File-level:
+Substitutions available on File-level:
 
 | Template   | Description                                        |
 | ---------- | -------------------------------------------------- |
@@ -461,7 +461,7 @@ Substituions available on File-level:
 | [name]     | Only filename without extension or path            |
 | [ext]      | Extension with leading `.`                         |
 
-Substituions available on URL-level:
+Substitutions available on URL-level:
 
 | Template | Description |
 | -------- | ----------- |
