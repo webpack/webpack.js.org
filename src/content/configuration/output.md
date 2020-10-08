@@ -25,6 +25,7 @@ contributors:
   - chenxsan
   - snitin315
   - QC-L
+  - anshumanv
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -158,11 +159,11 @@ module.exports = {
 ```
 
 
-## `output.chunkCallbackName`
+## `output.chunkLoadingGlobal`
 
 `string = 'webpackChunkwebpack'`
 
-The callback function name used by webpack for loading of chunks in Web Workers.
+The global variable used by webpack for loading of chunks.
 
 __webpack.config.js__
 
@@ -171,7 +172,64 @@ module.exports = {
   //...
   output: {
     //...
-    chunkCallbackName: 'myCustomFunc'
+    chunkLoadingGlobal: 'myCustomFunc'
+  }
+};
+```
+
+
+## `output.chunkLoading`
+
+`false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>`
+
+The method to load chunks (methods included by default are 'jsonp' (web), 'importScripts' (WebWorker), 'require' (sync node.js), 'async-node' (async node.js), but others might be added by plugins).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkLoading: 'async-node'
+  }
+};
+```
+
+
+## `output.chunkFormat`
+
+`false` `string: 'array-push' | 'commonjs' | <any string>`
+
+The format of chunks (formats included by default are 'array-push' (web/WebWorker), 'commonjs' (node.js), but others might be added by plugins).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkFormat: 'commonjs'
+  }
+};
+```
+
+
+## `output.enabledChunkLoadingTypes`
+
+`[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
+
+List of chunk loading types enabled for use by entry points. Will be automatically filled by webpack. Only needed when using a function as entry option and returning chunkLoading option from there.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    enabledChunkLoadingTypes: ['jsonp', 'require']
   }
 };
 ```
@@ -364,23 +422,93 @@ Note this option does not affect output files for on-demand-loaded chunks. For t
 
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
-| Template      | Description                                                                         |
-| ------------- | ----------------------------------------------------------------------------------- |
-| [hash]        | The hash of the module identifier                                                   |
-| [contenthash] | the hash of the content of a file, which is different for each asset                |
-| [chunkhash]   | The hash of the chunk content                                                       |
-| [name]        | The module name                                                                     |
-| [id]          | The module identifier                                                               |
-| [query]       | The module query, i.e., the string following `?` in the filename                    |
-| [function]    | The function, which can return filename [string]                                    |
+Substitutions available on Compilation-level:
 
-The lengths of `[hash]` and `[chunkhash]` can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
+| Template   | Description                  |
+| ---------- | ---------------------------- |
+| [fullhash] | The full hash of compilation |
+| [hash]     | Same, but deprecated         |
+
+Substitutions available on Chunk-level:
+
+| Template      | Description                                                                                                      |
+| ------------- | ---------------------------------------------------------------------------------------------------------------- |
+| [id]          | The ID of the chunk                                                                                              |
+| [name]        | The name of the chunk, if set, otherwise the ID of the chunk                                                     |
+| [chunkhash]   | The hash of the chunk, including all elements of the chunk                                                       |
+| [contenthash] | The hash of the chunk, including only elements of this content type (affected by `optimization.realContentHash`) |
+
+Substitutions available on Module-level:
+
+| Template      | Description                           |
+| ------------- | ------------------------------------- |
+| [id]          | The ID of the module                  |
+| [moduleid]    | Same, but deprecated                  |
+| [hash]        | The hash of the module                |
+| [modulehash]  | Same, but deprecated                  |
+| [contenthash] | The hash of the content of the module |
+
+Substitutions available on File-level:
+
+| Template   | Description                                        |
+| ---------- | -------------------------------------------------- |
+| [file]     | Filename and path, without query or fragment       |
+| [query]    | Query with leading `?`                             |
+| [fragment] | Fragment with leading `#`                          |
+| [base]     | Only filename (including extensions), without path |
+| [filebase] | Same, but deprecated                               |
+| [path]     | Only path, without filename                        |
+| [name]     | Only filename without extension or path            |
+| [ext]      | Extension with leading `.`                         |
+
+Substitutions available on URL-level:
+
+| Template | Description |
+| -------- | ----------- |
+| [url]    | URL         |
+
+T> `[file]` equals `[path][base]`. `[base]` equals `[name][ext]`. The full path is `[path][name][ext][query][fragment]` or `[path][base][query][fragment]` or `[file][query][fragment]`.
+
+The length of hashes (`[hash]`, `[contenthash]` or `[chunkhash]`) can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
 
 It is possible to filter out placeholder replacement when you want to use one of the placeholders in the actual file name. For example, to output a file `[name].js`, you have to escape the `[name]` placeholder by adding backslashes between the brackets. So that `[\name\]` generates `[name]` instead of getting replaced with the `name` of the asset.
 
 Example: `[\id\]` generates `[id]` instead of getting replaced with the `id`.
 
-If using a function for this option, the function will be passed an object containing the substitutions in the table above.
+If using a function for this option, the function will be passed an object containing data for the substitutions in the table above.
+Substituions will be applied to the returned string too.
+The passed object will have this type: (properties available depending on context)
+
+``` typescript
+type PathData = {
+  hash: string,
+  hashWithLength: (number) => string,
+  chunk: Chunk | ChunkPathData,
+  module: Module | ModulePathData,
+  contentHashType: string,
+  contentHash: string,
+  contentHashWithLength: (number) => string,
+  filename: string,
+  url: string,
+  runtime: string | SortableSet<string>,
+  chunkGraph: ChunkGraph
+}
+type ChunkPathData = {
+  id: string | number,
+  name: string,
+  hash: string,
+  hashWithLength: (number) => string,
+  contentHash: Record<string, string>,
+  contentHashWithLength: Record<string, (number) => string>
+}
+type ModulePathData = {
+  id: string | number,
+  hash: string,
+  hashWithLength: (number) => string
+}
+```
+
+T> In some context properties will use JavaScript code expressions instead of raw values. In these cases the `WithLength` variant is available and should be used instead of slicing the original value.
 
 ## `output.assetModuleFilename`
 
@@ -392,7 +520,7 @@ The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides
 
 `string = 'window'`
 
-When targeting a library, especially when `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`.
+When targeting a library, especially when `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`. Defaults to `self` for Web-like targets.
 
 For example:
 
@@ -418,8 +546,7 @@ A unique name of the webpack build to avoid multiple webpack runtimes to conflic
 
 `output.uniqueName` will be used to generate unique globals for:
 
-- [`output.jsonpFunction`](/configuration/output/#outputjsonpfunction)
-- [`output.chunkCallbackName`](/configuration/output/#outputchunkcallbackname)
+- [`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal)
 
 __webpack.config.js__
 
@@ -490,7 +617,7 @@ module.exports = {
 
 T> Typically you don't need to change `output.hotUpdateChunkFilename`.
 
-## `output.hotUpdateFunction`
+## `output.hotUpdateGlobal`
 
 `string`
 
@@ -498,7 +625,7 @@ Only used when [`target`](/configuration/target/) is set to `'web'`, which uses 
 
 A JSONP function used to asynchronously load hot-update chunks.
 
-For details see [`output.jsonpFunction`](#outputjsonpfunction).
+For details see [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
 
 
 ## `output.hotUpdateMainFilename`
@@ -509,46 +636,6 @@ Customize the main hot update filename. `[hash]` is the only available placehold
 
 T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
-## `output.jsonpFunction`
-
-`string = 'webpackJsonp'`
-
-Only used when [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading on-demand chunks.
-
-A JSONP function name used to asynchronously load chunks or join multiple initial chunks (SplitChunksPlugin, AggressiveSplittingPlugin).
-
-If using the [`output.library`](#outputlibrary) option, the library name is automatically concatenated with `output.jsonpFunction`'s value.
-
-W> If multiple webpack runtimes (from different compilations) are used on the same webpage, there is a risk of conflicts of on-demand chunks in the global namespace.
-
-By default, on-demand chunk's output starts with:
-
-__example-on-demand-chunk.js__
-
-```javascript
-(window.webpackJsonp = window.webpackJsonp || []).push(/* ... */);
-```
-
-Change `output.jsonpFunction` for safe usage of multiple webpack runtimes on the same webpage:
-
-__webpack.config.flight-widget.js__
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    jsonpFunction: 'wpJsonpFlightsWidget'
-  }
-};
-```
-
-On-demand chunks content would now change to:
-
-__example-on-demand-chunk.js__
-
-```javascript
-(window.wpJsonpFlightsWidget = window.wpJsonpFlightsWidget || []).push(/* ... */);
-```
 
 ## `output.library`
 
@@ -1151,9 +1238,9 @@ module.exports = {
 
 ## `output.workerChunkLoading`
 
-`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false` 
+`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
 
-The new option `workerChunkLoading` controls the chunk loading of workers. 
+The new option `workerChunkLoading` controls the chunk loading of workers.
 
 T> The default value of this option is depending on the `target` setting. For more details, search for `"workerChunkLoading"`: [in the webpack defaults](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js).
 
@@ -1200,24 +1287,32 @@ module.exports = {
 };
 ```
 
-## `output.ecmaVersion`
+## `output.environment`
 
-`number = 6`
-
-Tell webpack the maximum EcmaScript version of the webpack generated code. It should be one of these:
-
-- should be >= 5, should be <= 11
-- should be >= 2009, should be <= 2020
+Tell webpack what kind of ES-features may be used in the generated runtime-code.
 
 ```javascript
 module.exports = {
   output: {
-    ecmaVersion: 6
+    environment: {
+      // The environment supports arrow functions ('() => { ... }').
+      arrowFunction: true,
+      // The environment supports BigInt as literal (123n).
+      bigIntLiteral: false,
+      // The environment supports const and let for variable declarations.
+      const: true,
+      // The environment supports destructuring ('{ a, b } = obj').
+      destructuring: true,
+      // The environment supports an async import() function to import EcmaScript modules.
+      dynamicImport: false,
+      // The environment supports 'for of' iteration ('for (const x of array) { ... }').
+      forOf: true,
+      // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
+      module: false,
+    }
   }
 };
 ```
-
-T> The default value of `output.ecmaVersion` in webpack 4 is `5`.
 
 ## `output.compareBeforeEmit`
 

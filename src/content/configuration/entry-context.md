@@ -9,6 +9,7 @@ contributors:
   - madhavarshney
   - EugeneHlushko
   - smelukov
+  - anshumanv
 ---
 
 The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
@@ -78,7 +79,8 @@ module.exports = {
     personal: {
       import: './personal.js',
       filename: 'pages/personal.js',
-      dependOn:'shared'
+      dependOn: 'shared',
+      chunkLoading: 'jsonp',
     }
   }
 };
