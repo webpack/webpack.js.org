@@ -422,7 +422,7 @@ module.exports = {
   resolve: {
     // options for resolving module requests
     // (does not apply to resolving of loaders)
-    <modules "#">
+    <modules "/configuration/resolve/#resolvemodules">
       <default>
         modules: [
           "node_modules",
@@ -468,7 +468,7 @@ module.exports = {
         }
       ],
     </alias>
-    <advancedResolve "#">
+    <advancedResolve "/configuration/resolve/">
       <default>
         /* Advanced resolve configuration (click to show) */
       </default>
@@ -497,7 +497,7 @@ module.exports = {
       ],
       // additional plugins applied to the resolver
     </advancedResolve>
-    <expertResolve "#">
+    <expertResolve "/configuration/resolve/">
       <default>
         /* Expert resolve configuration (click to show) */
       </default>
