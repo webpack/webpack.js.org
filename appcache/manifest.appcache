@@ -1,5 +1,5 @@
 CACHE MANIFEST
-#ver:10/8/2020, 1:16:43 PM
+#ver:10/8/2020, 1:20:39 PM
 #plugin:5.0.7
 
 CACHE:
@@ -14,7 +14,7 @@ CACHE:
 /1ebd0482aadade65f20ec178219fe012.woff2
 /314bbcd238d458622bbf32427346774f.woff
 /92e7246d53b5483113e2d66d4ac750b4.png
-/142d680f170055984d57.css
+/ccc0ed59b4da049257fe.css
 /index.bundle.js
 /vendor.bundle.js
 /2.f538a669b2a4b27d616e.chunk.js
@@ -198,9 +198,9 @@ CACHE:
 /96ccbfac58b65e83657a220603e00abe.svg
 /aad9d51e01a0dcc2caf5bee43dc8e647.svg
 /bc3effb418df77da9e04825c48a58a49.ico
+/cb23d82fdc9556dfe142.css
 /d19378a95ebe6b15d5ddea281138dcf4.svg
 /e0b5805d423a4ec9473ee315250968b2.svg
-/e66ff8b9810aef533bcc.css
 
 NETWORK:
 *
