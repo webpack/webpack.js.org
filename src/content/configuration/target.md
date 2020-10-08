@@ -49,7 +49,7 @@ If a project has a browserslist config, then webpack will use it for:
 
 Supported browserslist values:
 
-- `browserslist` - use automatically resolved browserslist config and environment (from the nearest `package.json` or `BROWSERLIST` environment variable)
+- `browserslist` - use automatically resolved browserslist config and environment (from the nearest `package.json` or `BROWSERSLIST` environment variable)
 - `browserslist:modern` - use `modern` environment from automatically resolved browserslist config
 - `browserslist:last 2 versions` - use an explicit browserslist query (config will be ignored)
 - `browserslist:/path/to/config` - explicitly specify browserslist config
