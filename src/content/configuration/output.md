@@ -25,6 +25,7 @@ contributors:
   - chenxsan
   - snitin315
   - QC-L
+  - anshumanv
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -158,11 +159,11 @@ module.exports = {
 ```
 
 
-## `output.chunkCallbackName`
+## `output.chunkLoadingGlobal`
 
 `string = 'webpackChunkwebpack'`
 
-The callback function name used by webpack for loading of chunks in Web Workers.
+The global variable used by webpack for loading of chunks.
 
 __webpack.config.js__
 
@@ -171,7 +172,64 @@ module.exports = {
   //...
   output: {
     //...
-    chunkCallbackName: 'myCustomFunc'
+    chunkLoadingGlobal: 'myCustomFunc'
+  }
+};
+```
+
+
+## `output.chunkLoading`
+
+`false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>`
+
+The method to load chunks (methods included by default are 'jsonp' (web), 'importScripts' (WebWorker), 'require' (sync node.js), 'async-node' (async node.js), but others might be added by plugins).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkLoading: 'async-node'
+  }
+};
+```
+
+
+## `output.chunkFormat`
+
+`false` `string: 'array-push' | 'commonjs' | <any string>`
+
+The format of chunks (formats included by default are 'array-push' (web/WebWorker), 'commonjs' (node.js), but others might be added by plugins).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkFormat: 'commonjs'
+  }
+};
+```
+
+
+## `output.enabledChunkLoadingTypes`
+
+`[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
+
+List of chunk loading types enabled for use by entry points. Will be automatically filled by webpack. Only needed when using a function as entry option and returning chunkLoading option from there.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    enabledChunkLoadingTypes: ['jsonp', 'require']
   }
 };
 ```
@@ -392,7 +450,7 @@ The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides
 
 `string = 'window'`
 
-When targeting a library, especially when `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`.
+When targeting a library, especially when `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`. Defaults to `self` for Web-like targets.
 
 For example:
 
@@ -418,8 +476,7 @@ A unique name of the webpack build to avoid multiple webpack runtimes to conflic
 
 `output.uniqueName` will be used to generate unique globals for:
 
-- [`output.jsonpFunction`](/configuration/output/#outputjsonpfunction)
-- [`output.chunkCallbackName`](/configuration/output/#outputchunkcallbackname)
+- [`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal)
 
 __webpack.config.js__
 
@@ -490,7 +547,7 @@ module.exports = {
 
 T> Typically you don't need to change `output.hotUpdateChunkFilename`.
 
-## `output.hotUpdateFunction`
+## `output.hotUpdateGlobal`
 
 `string`
 
@@ -498,7 +555,7 @@ Only used when [`target`](/configuration/target/) is set to `'web'`, which uses 
 
 A JSONP function used to asynchronously load hot-update chunks.
 
-For details see [`output.jsonpFunction`](#outputjsonpfunction).
+For details see [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
 
 
 ## `output.hotUpdateMainFilename`
@@ -509,46 +566,6 @@ Customize the main hot update filename. `[hash]` is the only available placehold
 
 T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
-## `output.jsonpFunction`
-
-`string = 'webpackJsonp'`
-
-Only used when [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading on-demand chunks.
-
-A JSONP function name used to asynchronously load chunks or join multiple initial chunks (SplitChunksPlugin, AggressiveSplittingPlugin).
-
-If using the [`output.library`](#outputlibrary) option, the library name is automatically concatenated with `output.jsonpFunction`'s value.
-
-W> If multiple webpack runtimes (from different compilations) are used on the same webpage, there is a risk of conflicts of on-demand chunks in the global namespace.
-
-By default, on-demand chunk's output starts with:
-
-__example-on-demand-chunk.js__
-
-```javascript
-(window.webpackJsonp = window.webpackJsonp || []).push(/* ... */);
-```
-
-Change `output.jsonpFunction` for safe usage of multiple webpack runtimes on the same webpage:
-
-__webpack.config.flight-widget.js__
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    jsonpFunction: 'wpJsonpFlightsWidget'
-  }
-};
-```
-
-On-demand chunks content would now change to:
-
-__example-on-demand-chunk.js__
-
-```javascript
-(window.wpJsonpFlightsWidget = window.wpJsonpFlightsWidget || []).push(/* ... */);
-```
 
 ## `output.library`
 
