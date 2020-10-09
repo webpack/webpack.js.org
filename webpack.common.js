@@ -1,6 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
 const webpack = require('webpack');
 const mdPlugins = [
   require('remark-slug'),
@@ -150,10 +149,6 @@ module.exports = (env = {}) => ({
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css'
-    }),
-    new ESLintPlugin({
-      fix: true,
-      extensions: ['js', 'jsx']
     }),
     new webpack.DefinePlugin({
       // https://github.com/algolia/algoliasearch-client-javascript/issues/764
