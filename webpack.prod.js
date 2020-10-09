@@ -47,7 +47,7 @@ module.exports = env => merge(common(env), {
       skipWaiting: true,
       clientsClaim: true,
       swDest: 'sw.js',
-      exclude: [/icon_.*\.png/, /printable/, '/robots.txt'],
+      exclude: [/icon_.*\.png/, /printable/, '/robots.txt', ...hashedAssetsBySSGRun],
       additionalManifestEntries: [
         {
           url: '/app-shell/index.html',
