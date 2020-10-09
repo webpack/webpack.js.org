@@ -623,10 +623,7 @@ import $ from 'jquery';
 }.call(window, myVariable, myOtherVariable));
 ```
 
-<<<<<<< HEAD
-### `additionalCode` {#additionalcode}
-=======
-#### `Object` with different parameter names
+#### `Object` with different parameter names {#object-with-different-parameter-names}
 
 **webpack.config.js**
 
@@ -672,8 +669,7 @@ import $ from 'jquery';
 }.call(window, myVariable, myOtherVariable));
 ```
 
-### `additionalCode`
->>>>>>> 06dde12e0dcb0fb856662e1e9055d06ab7644628
+### `additionalCode` {#additionalcode}
 
 Type: `String`
 Default: `undefined`

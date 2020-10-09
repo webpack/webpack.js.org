@@ -73,66 +73,56 @@ module.exports = {
 
 ## 选项 {#options}
 
-<<<<<<< HEAD
-### `publicPath` {#publicpath}
-=======
-### Plugin Options
+### Plugin Options {#plugin-options}
 
-|                 Name                  |         Type         |       Default       | Description                                              |
+|                 选项名                  |         类型         |       默认值       | 描述                                              |
 | :-----------------------------------: | :------------------: | :-----------------: | :------------------------------------------------------- |
-|      **[`filename`](#filename)**      | `{String\|Function}` |    `[name].css`     | This option determines the name of each output CSS file  |
-| **[`chunkFilename`](#chunkfilename)** | `{String\|Function}` | `based on filename` | This option determines the name of non-entry chunk files |
-|   **[`ignoreOrder`](#ignoreorder)**   |     `{Boolean}`      |       `false`       | Remove Order Warnings                                    |
+|      **[`filename`](#filename)**      | `{String\|Function}` |    `[name].css`     | 此选项决定了输出的每个 CSS 文件的名称  |
+| **[`chunkFilename`](#chunkfilename)** | `{String\|Function}` | `based on filename` | 此选项决定了非入口的 chunk 文件名称 |
+|   **[`ignoreOrder`](#ignoreorder)**   |     `{Boolean}`      |       `false`       | 移除 Order 警告                                    |
 
-#### `filename`
+#### `filename` {#filename}
 
-Type: `String|Function`
-Default: `[name].css`
+类型：`String|Function`
+默认值：`[name].css`
 
-This option determines the name of each output CSS file.
+此选项决定了输出的每个 CSS 文件的名称。
 
-Works like [`output.filename`](/configuration/output/#outputfilename)
+机制类似于 [`output.filename`](/configuration/output/#outputfilename)。
 
-#### `chunkFilename`
+#### `chunkFilename` {#chunkfilename}
 
-Type: `String|Function`
-Default: `based on filename`
+类型：`String|Function`
+默认值：`based on filename`
 
-This option determines the name of non-entry chunk files.
+此选项决定了非入口的 chunk 文件名称
 
-Works like [`output.chunkFilename`](/configuration/output/#outputchunkfilename)
+机制类似于 [`output.chunkFilename`](/configuration/output/#outputchunkfilename)
 
-#### `ignoreOrder`
+#### `ignoreOrder` {#ignoreorder}
 
-Type: `Boolean`
-Default: `false`
+类型：`Boolean`
+默认值：`false`
 
-Remove Order Warnings
+移除 Order 警告
 
-### Loader Options
+### Loader 选项 {#loader-options}
 
-|              Name               |         Type         |              Default               | Description                                                                       |
+|              名称               |         类型         |              默认值               | 描述                                                                       |
 | :-----------------------------: | :------------------: | :--------------------------------: | :-------------------------------------------------------------------------------- |
-| **[`publicPath`](#publicpath)** | `{String\|Function}` | `webpackOptions.output.publicPath` | Specifies a custom public path for the external resources like images, files, etc |
-|   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | Use ES modules syntax                                                             |
-|    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | Configuration CSS Modules                                                         |
+| **[`publicPath`](#publicpath)** | `{String\|Function}` | `webpackOptions.output.publicPath` | 为图片、文件等外部资源指定一个自定义的公共路径。 |
+|   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | 使用 ES modules 语法                                                             |
+|    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | 配置 CSS 模块                                                         |
 
-#### `publicPath`
->>>>>>> 06dde12e0dcb0fb856662e1e9055d06ab7644628
+#### `publicPath` {#publicpath}
 
 类型：`String|Function`
 默认值：`webpackOptions.output` 选项中的 `publicPath`
 
-<<<<<<< HEAD
-自定义目标文件的公共路径。
+为 CSS 内的图片、文件等外部资源指定一个自定义的公共路径。
+机制类似于 [`output.publicPath`](/configuration/output/#outputpublicpath)。
 
-#### `String` {#string}
-=======
-Specifies a custom public path for the external resources like images, files, etc inside `CSS`.
-Works like [`output.publicPath`](/configuration/output/#outputpublicpath)
-
-##### `String`
->>>>>>> 06dde12e0dcb0fb856662e1e9055d06ab7644628
+##### `String` {#string}
 
 **webpack.config.js**
 
@@ -167,11 +157,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-#### `Function` {#function}
-=======
-##### `Function`
->>>>>>> 06dde12e0dcb0fb856662e1e9055d06ab7644628
+##### `Function` {#function}
 
 **webpack.config.js**
 
@@ -208,27 +194,15 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 ### `esModule` {#esmodule}
 
 类型：`Boolean`
-默认值：`false`
+默认值：`true`
 
-默认情况下  `mini-css-extract-plugin` 将会生成使用 CommonJS 模块语法的 JS 模块。
-在某些情况下，使用 ES 模块是有益的，比如： [module concatenation](/plugins/module-concatenation-plugin/) 和 [tree shaking](/guides/tree-shaking/)。
+默认情况下  `mini-css-extract-plugin` 将会生成使用 ES 模块语法的 JS 模块。
+在某些情况下，使用 ES 模块是有益的，比如：[module concatenation](/plugins/module-concatenation-plugin/) 和 [tree shaking](/guides/tree-shaking/)。
 
-你可以使用以下方式启用 ES 模块语法：
-=======
-#### `esModule`
-
-Type: `Boolean`
-Default: `true`
-
-By default, `mini-css-extract-plugin` generates JS modules that use the ES modules syntax.
-There are some cases in which using ES modules is beneficial, like in the case of [module concatenation](/plugins/module-concatenation-plugin/) and [tree shaking](/guides/tree-shaking/).
-
-You can enable a CommonJS syntax using:
->>>>>>> 06dde12e0dcb0fb856662e1e9055d06ab7644628
+你可以使用以下方式启用 CommonJS 语法：
 
 **webpack.config.js**
 
@@ -256,22 +230,14 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `modules` {#modules}
-=======
-#### `modules`
->>>>>>> 06dde12e0dcb0fb856662e1e9055d06ab7644628
+#### `modules` {#modules}
 
 类型：`Object`
 默认值：`undefined`
 
 用于配置 CSS Modules。
 
-<<<<<<< HEAD
-#### `namedExport` {#namedexport}
-=======
-##### `namedExport`
->>>>>>> 06dde12e0dcb0fb856662e1e9055d06ab7644628
+##### `namedExport` {#namedexport}
 
 类型：`Boolean`
 类型：`false`
@@ -455,18 +421,7 @@ if (devMode) {
 }
 
 module.exports = {
-<<<<<<< HEAD
-  plugins: [
-    new MiniCssExtractPlugin({
-      // 类似于 webpackOptions.output 中的选项
-      // 所有选项都是可选的
-      filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
-    }),
-  ],
-=======
   plugins,
->>>>>>> 06dde12e0dcb0fb856662e1e9055d06ab7644628
   module: {
     rules: [
       {
@@ -485,24 +440,14 @@ module.exports = {
 
 ### 模块热更新 (HMR) {#hot-module-reloading-hmr}
 
-<<<<<<< HEAD
+注意：在 webpack 5 中 HMR 已自动支持。无需配置。你可以跳过以下内容：
+
 `mini-css-extract-plugin` 支持在开发中热重载实际的 CSS 文件。
 我们提供了一些选项来启动标准 stylesheets 和本地范围内 CSS 和 CSS modules 的 HMR 支持。
 以下是 mini-css 用于启动 HMR CSS modules 的示例配置。
 
-当我们尝试 hmr css-modules 时，使用自定义的 chunk 名称进行代码分割是不容易的。
-只有在 HMR 不能正常工作时，我们才需要打开 `reloadAll` 这个选项。
-css-modules 的核心挑战在于进行代码分割时，不同于文件名每次都相同，chunk id 可以并且每次确实会有所不同。
-=======
-Note: HMR is automatically supported in webpack 5. No need to configure it. Skip the following:
-
-The `mini-css-extract-plugin` supports hot reloading of actual css files in development.
-Some options are provided to enable HMR of both standard stylesheets and locally scoped CSS or CSS modules.
-Below is an example configuration of mini-css for HMR use with CSS modules.
-
-You should not use `HotModuleReplacementPlugin` plugin if you are using a `webpack-dev-server`.
-`webpack-dev-server` enables / disables HMR using `hot` option.
->>>>>>> 06dde12e0dcb0fb856662e1e9055d06ab7644628
+如果你使用的是 `webpack-dev-server`，那么你无需使用 `HotModuleReplacementPlugin` 插件。
+`webpack-dev-server` 使用 `hot` 选项来控制启用/禁用 HMR。
 
 **webpack.config.js**
 
@@ -524,18 +469,7 @@ if (devMode) {
 }
 
 module.exports = {
-<<<<<<< HEAD
-  plugins: [
-    new MiniCssExtractPlugin({
-      // 类似于 webpackOptions.output 中的选项
-      // 所有选项都是可选的
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
-  ],
-=======
   plugins,
->>>>>>> 06dde12e0dcb0fb856662e1e9055d06ab7644628
   module: {
     rules: [
       {
@@ -543,16 +477,7 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-<<<<<<< HEAD
-            options: {
-              // 仅仅在 development 模式下开启 hmr
-              hmr: process.env.NODE_ENV === 'development',
-              // 如果 hmr 不工作, 请开启强制选项
-              reloadAll: true,
-            },
-=======
             options: {},
->>>>>>> 06dde12e0dcb0fb856662e1e9055d06ab7644628
           },
           'css-loader',
         ],
@@ -702,17 +627,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### 模块文件名选项 {#module-filename-option}
+### 文件名选项设置为函数 {#filename-option-as-function}
 
-通过 `moduleFilename` 选项你能够基于 chunk 数据自定义文件名。当处理多个入口点并希望可以更好的控制给定的入口点 / chunk 的文件名时，这相当有用。在下面这个例子中，我们将会使用 `moduleFilename` 将生成的 css 文件输出到不同的目录中。
-=======
-### Filename Option as function
-
-With the `filename` option you can use chunk data to customize the filename.
-This is particularly useful when dealing with multiple entry points and wanting to get more control out of the filename for a given entry point/chunk.
-In the example below, we'll use `filename` to output the generated css into a different directory.
->>>>>>> 06dde12e0dcb0fb856662e1e9055d06ab7644628
+使用 `filename` 选项，你可以使用 chunk 数据来定制文件名。
+这点在处理多个入口，并且希望对给定的 入口/chunk 文件进行更多处理时，非常有用。
+下面示例中，我们使用 `filename` 将生成的 css 输出到不同的目录中。
 
 **webpack.config.js**
 
@@ -765,7 +684,7 @@ module.exports = {
 
 ### 移除 Order 警告 {#remove-order-warnings}
 
-对于通过使用 scoping 或命名约定来解决 css order 的项目，可以通过将插件的 ignoreOrder 选项设置为 true 来禁用css order 警告。
+对于通过使用 scoping 或命名约定来解决 css order 的项目，可以通过将插件的 ignoreOrder 选项设置为 true 来禁用 css order 警告。
 
 **webpack.config.js**
 
