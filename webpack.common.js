@@ -1,7 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const isDev = process.env.NODE_ENV !== 'production';
 const webpack = require('webpack');
 const mdPlugins = [
   require('remark-slug'),
@@ -38,11 +37,17 @@ const mdPlugins = [
 
 module.exports = (env = {}) => ({
   context: path.resolve(__dirname, './src'),
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: [__filename],
+    },
+    cacheDirectory: path.resolve(__dirname, '.cache/webpack')
+  },
   resolve: {
-    symlinks: false,
     extensions: ['.js', '.jsx', '.scss'],
-    alias: {
-      path: 'path-browserify'
+    fallback: {
+      path: require.resolve('path-browserify')
     }
   },
   module: {
@@ -78,7 +83,7 @@ module.exports = (env = {}) => ({
       {
         test: /\.font.js$/,
         use: [
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'fontgen-loader',
@@ -96,14 +101,14 @@ module.exports = (env = {}) => ({
       {
         test: /\.css$/,
         use: [
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           'css-loader'
         ]
       },
       {
         test: /\.scss$/,
         use: [
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -128,6 +133,7 @@ module.exports = (env = {}) => ({
       {
         test: /\.woff2?$/,
         use: {
+          // TODO use type: asset/resource when mini-css bug regarding asset modules is fixed
           loader: 'file-loader',
           options: {
             outputPath: 'font',
@@ -137,28 +143,26 @@ module.exports = (env = {}) => ({
       },
       {
         test: /\.(jpg|jpeg|png|svg|ico)$/i,
-        type: 'asset'
+        type: 'asset/resource'
       }
     ]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-      chunkFilename: '[id].[contenthash].css'
+      filename: '[name].[contenthash].css'
     }),
-    new ESLintPlugin({fix: true, extensions: ['js', 'jsx']}),
+    new ESLintPlugin({
+      fix: true,
+      extensions: ['js', 'jsx']
+    }),
     new webpack.DefinePlugin({
       // https://github.com/algolia/algoliasearch-client-javascript/issues/764
       'process.env.RESET_APP_DATA_TIMER': JSON.stringify('') // fix for algoliasearch
     })
   ],
-  stats: {
-    children: false
-  },
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].[chunkhash].chunk.js'
+    filename: '[name].bundle.js'
   }
 });

@@ -2,6 +2,7 @@
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { merge } = require('webpack-merge');
+const OptimizeCSSAssetsPlugin = require('css-minimizer-webpack-plugin');
 const SSGPlugin = require('static-site-generator-webpack-plugin');
 const RedirectWebpackPlugin = require('redirect-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -21,17 +22,25 @@ const paths = [
 ];
 
 module.exports = env => merge(common(env), {
+    name: 'ssg',
     mode: 'production',
     target: 'node',
+    cache: {
+      buildDependencies: {
+        config: [__filename],
+      }
+    },
     entry: {
       index: './server.jsx'
     },
     output: {
-      filename: 'server.[name].js',
+      filename: '.server/[name].js',
       libraryTarget: 'umd'
     },
     optimization: {
-      splitChunks: false
+      minimizer: [
+        new OptimizeCSSAssetsPlugin({})
+      ]
     },
     plugins: [
       new SSGPlugin({

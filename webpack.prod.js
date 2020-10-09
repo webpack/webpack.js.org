@@ -1,7 +1,6 @@
 // Import External Dependencies
 const { merge } = require('webpack-merge');
 const OptimizeCSSAssetsPlugin = require('css-minimizer-webpack-plugin');
-const TerserJSPlugin = require('terser-webpack-plugin');
 const { GenerateSW } = require('workbox-webpack-plugin');
 
 // Load Common Configuration
@@ -13,21 +12,36 @@ const hashedAssetsBySSGRun = require('./src/utilities/find-files-in-dist')(['.cs
 module.exports = env => merge(common(env), {
   mode: 'production',
   target: 'web',
+  cache: {
+    buildDependencies: {
+      config: [__filename],
+    }
+  },
   entry: {
-    index: './index.jsx',
-    vendor: [
-      'react', // Replace with preact or inferno
-      'react-dom', // Replace with preact or inferno
-      'react-router-dom',
-    ],
+    index: {
+      import: './index.jsx',
+      filename: 'index.bundle.js'
+    }
+  },
+  output: {
+    filename: '[name].[contenthash].js'
   },
   optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /node_modules/,
+          chunks: 'initial',
+          enforce: true,
+          filename: 'vendor.bundle.js'
+        }
+      }
+    },
     minimizer: [
-      new TerserJSPlugin({}),
+      '...',
       new OptimizeCSSAssetsPlugin({})
     ]
   },
-  cache: true,
   plugins: [
     new GenerateSW({
       skipWaiting: true,
