@@ -20,7 +20,7 @@ repo: https://github.com/webpack-contrib/eslint-webpack-plugin
 
 ## About plugin
 
-The plugin was born with the purpose of solving some problems of the [eslint-loader](/loaders/eslint-loader/).
+The plugin was born with the purpose of solving some problems of the [eslint-loader](https://github.com/webpack-contrib/eslint-loader).
 
 |                                  | eslint-webpack-plugin |      eslint-loader       |
 | -------------------------------- | :-------------------: | :----------------------: |

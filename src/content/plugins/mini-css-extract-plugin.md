@@ -95,7 +95,13 @@ module.exports = {
 类型：`String|Function`
 默认值：`based on filename`
 
+<<<<<<< HEAD
 此选项决定了非入口的 chunk 文件名称
+=======
+> i Specifying `chunkFilename` as a `function` is only available in webpack@5
+
+This option determines the name of non-entry chunk files.
+>>>>>>> b5abab720120d6291b3f5215df2c0e7baa7ad1ae
 
 机制类似于 [`output.chunkFilename`](/configuration/output/#outputchunkfilename)
 
@@ -104,7 +110,12 @@ module.exports = {
 类型：`Boolean`
 默认值：`false`
 
+<<<<<<< HEAD
 移除 Order 警告
+=======
+Remove Order Warnings.
+See [examples](#remove-order-warnings) below for details.
+>>>>>>> b5abab720120d6291b3f5215df2c0e7baa7ad1ae
 
 ### Loader 选项 {#loader-options}
 
@@ -391,7 +402,11 @@ module.exports = {
 
 ### 高级配置示例 {#advanced-configuration-example}
 
+<<<<<<< HEAD
 本插件仅仅应该在 `production` 模式下使用，并且 loader 链中不应含有 `style-loader`，尤其是你需要在 `development` 构建中使用 HMR。
+=======
+This plugin should not be used with `style-loader` in the loaders chain.
+>>>>>>> b5abab720120d6291b3f5215df2c0e7baa7ad1ae
 
 这是一个在 `development` 构建中使用 HMR 并且在 `production` 构建中将样式文件提取到独立文件中的示例。
 
@@ -411,8 +426,8 @@ const plugins = [
   new MiniCssExtractPlugin({
     // Options similar to the same options in webpackOptions.output
     // both options are optional
-    filename: devMode ? '[name].css' : '[name].[hash].css',
-    chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+    filename: devMode ? '[name].css' : '[name].[contenthash].css',
+    chunkFilename: devMode ? '[id].css' : '[id].[contenthash].css',
   }),
 ];
 if (devMode) {
@@ -459,8 +474,8 @@ const plugins = [
   new MiniCssExtractPlugin({
     // Options similar to the same options in webpackOptions.output
     // both options are optional
-    filename: devMode ? '[name].css' : '[name].[hash].css',
-    chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+    filename: devMode ? '[name].css' : '[name].[contenthash].css',
+    chunkFilename: devMode ? '[id].css' : '[id].[contenthash].css',
   }),
 ];
 if (devMode) {
