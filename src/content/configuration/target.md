@@ -10,15 +10,16 @@ contributors:
   - tbroadley
   - byzyk
   - EugeneHlushko
+  - smelukov
 ---
 
 webpack can compile for multiple environments or _targets_. To understand what a `target` is in detail, read through [the targets concept page](/concepts/targets/).
 
 ## `target`
 
-`string` `function (compiler)`
+`string` `function (compiler) => string`
 
-Instructs webpack to target a specific environment.
+Instructs webpack to target a specific environment. Defaults to `'browserslist'` or to `'web'` when no browserslist configuration was found.
 
 
 ### `string`
@@ -35,9 +36,24 @@ Option                | Description
 `node-webkit`         | Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)
 `web`                 | Compile for usage in a browser-like environment __(default)__
 `webworker`           | Compile as WebWorker
+`browserslist`        | Infer a platform and the ES-features from a browserslist-config
 
 For example, when the `target` is set to `"electron-main"`, webpack includes multiple electron specific variables. For more information on which templates and externals are used, you can refer to webpack's [source code](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L148-L183).
 
+#### `browserslist`
+
+If a project has a browserslist config, then webpack will use it for:
+
+- Determinate ES-features that may be used to generate a runtime-code (all the chunks and modules are wrapped by runtime code).
+- Infer an environment (e.g: `last 2 node versions` the same as `target: "node"` with some [`output.environment`](/configuration/output/#outputenvironment) settings).
+
+Supported browserslist values:
+
+- `browserslist` - use automatically resolved browserslist config and environment (from the nearest `package.json` or `BROWSERSLIST` environment variable)
+- `browserslist:modern` - use `modern` environment from automatically resolved browserslist config
+- `browserslist:last 2 versions` - use an explicit browserslist query (config will be ignored)
+- `browserslist:/path/to/config` - explicitly specify browserslist config
+- `browserslist:/path/to/config:modern` - explicitly specify browserslist config and an environment
 
 ### `function`
 

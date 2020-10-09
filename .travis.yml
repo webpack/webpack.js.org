@@ -1,7 +1,6 @@
-dist: trusty
+dist: bionic
 language: node_js
-node_js:
-  - "12"
+node_js: "12"
 
 cache:
   yarn: true
@@ -21,6 +20,7 @@ jobs:
   include:
     - stage: Lint
       name: Lint
+      env: CACHE_TYPE=lint
       script:
         - yarn lint:js || travis_terminate 1
         - yarn lint:markdown || travis_terminate 1
@@ -29,8 +29,11 @@ jobs:
     - stage: Lint
       name: Proselint
       language: python
+      env: CACHE_TYPE=proselint
       python: 3.6
       cache:
+        yarn: false
+        npm: false
         pip: true
         directories:
           - $HOME/.cache
@@ -39,6 +42,8 @@ jobs:
 
     - stage: Test
       name: Cypress
+      env: CACHE_TYPE=lint
+      node_js: "10"
       install:
         - yarn
         - yarn cypress install
@@ -51,6 +56,7 @@ jobs:
     - stage: Build
       name: Build
       if: branch != master OR type NOT IN (push, cron)
+      env: CACHE_TYPE=build
       script:
         - yarn build || travis_terminate 1
         - yarn lint:links || travis_terminate 1
@@ -58,6 +64,7 @@ jobs:
     - stage: Build
       name: Build and Deploy
       if: branch = master AND type IN (push, cron)
+      env: CACHE_TYPE=build
       script:
         - yarn build || travis_terminate 1
         - yarn lint:links || travis_terminate 1
