@@ -67,7 +67,8 @@ module.exports = {
 | [**`attributes`**](#attributes) |      `{Object}`      |    `{}`    | 添加自定义属性到插入的标签中              |
 |     [**`insert`**](#insert)     | `{String\|Function}` |   `head`   | 在指定的位置插入标签 |
 |       [**`base`**](#base)       |      `{Number}`      |   `true`   | 基于 (DLLPlugin) 设置 module ID |
-|   [**`esModule`**](#esmodule)   |     `{Boolean}`      |  `false`   | 使用 ES modules 语法                    |
+|   [**`esModule`**](#esmodule)   |     `{Boolean}`      |  `false`   | 使用 ES modules 语法                                       |
+|    [**`modules`**](#modules)    |      `{Object}`      | `undefined`| 配置 CSS Modules                                |
 
 ### `injectType` {#injecttype}
 
@@ -563,13 +564,11 @@ module.exports = {
 ### `esModule` {#esmodule}
 
 Type: `Boolean`
-Default: `false`
+Default: `true`
 
-默认情况下，`style-loader` 生成使用 Common JS 模块语法的 JS 模块。
+默认情况下，`style-loader` 生成使用 ES 模块语法的 JS 模块。在某些情况下使用 ES 模块语法更好，比如：[module concatenation](/plugins/module-concatenation-plugin/) 和 [tree shaking](/guides/tree-shaking/) 时。
 
-某些情况下使用 ES modules 更好，比如：[module concatenation](/plugins/module-concatenation-plugin/) 和 [tree shaking](/guides/tree-shaking/) 时。
-
-你可以使用下面的配置启用 ES module 语法：
+你可以使用下面的配置启用 CommonJS 模块语法：
 
 **webpack.config.js**
 
@@ -581,7 +580,7 @@ module.exports = {
         test: /\.css$/i,
         loader: 'style-loader',
         options: {
-          esModule: true,
+          esModule: false,
         },
       },
     ],
@@ -589,9 +588,82 @@ module.exports = {
 };
 ```
 
-## 示例 {#getting-started}
+### `modules` {#modules}
 
-### Source maps {#source-maps}
+类型：`Object`
+默认值：`undefined`
+
+配置 CSS 模块。
+
+#### `namedExport` {#namedexport}
+
+类型：`Boolean`
+默认值：`false`
+
+启用/禁用本地 ES 模块的命名导出功能。
+
+> ⚠ 本地命名导出时，会将其名称转换为 `camelCase` 的形式。
+
+> ⚠ 并且不允许在 css 的 class 名中使用 JavaScript 的保留字。
+
+> ⚠ 在 `css-loader` 和 `style-loader` 中，选项 `esModule` 和 `modules.namedExport` 应启用。
+
+**styles.css**
+
+```css
+.foo-baz {
+  color: red;
+}
+.bar {
+  color: blue;
+}
+```
+
+**index.js**
+
+```js
+import { fooBaz, bar } from './styles.css';
+
+console.log(fooBaz, bar);
+```
+
+你可以使用如下方法为 ES 模块启用命名导出功能：
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              esModule: true,
+              modules: {
+                namedExport: true,
+              },
+            },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              esModule: true,
+              modules: {
+                namedExport: true,
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+## 示例 {#examples}
 
 当前面的 loader 生成 source map 时，此 loader 会向 source map 中自动注入。
 

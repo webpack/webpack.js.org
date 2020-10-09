@@ -623,6 +623,52 @@ import $ from 'jquery';
 }.call(window, myVariable, myOtherVariable));
 ```
 
+#### `Object` with different parameter names {#object-with-different-parameter-names}
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: require.resolve('example.js'),
+        use: [
+          {
+            loader: 'imports-loader',
+            options: {
+              imports: {
+                moduleName: 'jquery',
+                name: '$',
+              },
+              wrapper: {
+                thisArg: 'window',
+                args: {
+                  myVariable: 'var1',
+                  myOtherVariable: 'var2',
+                },
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+Generate output:
+
+```js
+import $ from 'jquery';
+
+(function (var1, var2) {
+  // ...
+  // Code
+  // ...
+}.call(window, myVariable, myOtherVariable));
+```
+
 ### `additionalCode` {#additionalcode}
 
 Type: `String`

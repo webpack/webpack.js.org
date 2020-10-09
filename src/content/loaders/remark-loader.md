@@ -16,16 +16,21 @@ repo: https://github.com/webpack-contrib/remark-loader
 
 
 
-Load markdown through `remark` with built-in image resolution.
+Load markdown through `remark`.
 
 ## Usage {#usage}
 
 Simply add the loader to your configuration, and pass options.
 
+```js
+import md from 'markdown-file.md';
+console.log(md);
+```
+
 **webpack.config.js**
 
 ```js
-import RemarkFrontmatter from 'remark-frontmatter';
+import RemarkHTML from 'remark-html';
 
 module.exports = {
   // ...
@@ -35,14 +40,13 @@ module.exports = {
         test: /\.md$/,
         use: [
           {
+            loader: 'html-loader',
+          },
+          {
             loader: 'remark-loader',
             options: {
               remarkOptions: {
-                plugins: [RemarkFrontmatter],
-                settings: {
-                  bullet: '+',
-                  listItemIndent: '1',
-                },
+                plugins: [RemarkHTML],
               },
             },
           },
@@ -278,7 +282,8 @@ This project was inspired the following open source work:
 To get html, need to add [`remark-html`](https://github.com/wooorm/remark-html) to the remark plugins and add [`html-loader`](/loaders/html-loader/) to the `webpack.config`
 
 ```js
-import 'markdown-file.md';
+import md from 'markdown-file.md';
+console.log(md);
 ```
 
 **webpack.config.js**
@@ -316,7 +321,8 @@ module.exports = {
 **index.js**
 
 ```js
-import 'markdown-file.md';
+import md from 'markdown-file.md';
+console.log(md);
 ```
 
 **webpack.config.js**

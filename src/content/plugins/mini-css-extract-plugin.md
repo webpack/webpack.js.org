@@ -73,14 +73,56 @@ module.exports = {
 
 ## 选项 {#options}
 
-### `publicPath` {#publicpath}
+### Plugin Options {#plugin-options}
+
+|                 选项名                  |         类型         |       默认值       | 描述                                              |
+| :-----------------------------------: | :------------------: | :-----------------: | :------------------------------------------------------- |
+|      **[`filename`](#filename)**      | `{String\|Function}` |    `[name].css`     | 此选项决定了输出的每个 CSS 文件的名称  |
+| **[`chunkFilename`](#chunkfilename)** | `{String\|Function}` | `based on filename` | 此选项决定了非入口的 chunk 文件名称 |
+|   **[`ignoreOrder`](#ignoreorder)**   |     `{Boolean}`      |       `false`       | 移除 Order 警告                                    |
+
+#### `filename` {#filename}
+
+类型：`String|Function`
+默认值：`[name].css`
+
+此选项决定了输出的每个 CSS 文件的名称。
+
+机制类似于 [`output.filename`](/configuration/output/#outputfilename)。
+
+#### `chunkFilename` {#chunkfilename}
+
+类型：`String|Function`
+默认值：`based on filename`
+
+此选项决定了非入口的 chunk 文件名称
+
+机制类似于 [`output.chunkFilename`](/configuration/output/#outputchunkfilename)
+
+#### `ignoreOrder` {#ignoreorder}
+
+类型：`Boolean`
+默认值：`false`
+
+移除 Order 警告
+
+### Loader 选项 {#loader-options}
+
+|              名称               |         类型         |              默认值               | 描述                                                                       |
+| :-----------------------------: | :------------------: | :--------------------------------: | :-------------------------------------------------------------------------------- |
+| **[`publicPath`](#publicpath)** | `{String\|Function}` | `webpackOptions.output.publicPath` | 为图片、文件等外部资源指定一个自定义的公共路径。 |
+|   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | 使用 ES modules 语法                                                             |
+|    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | 配置 CSS 模块                                                         |
+
+#### `publicPath` {#publicpath}
 
 类型：`String|Function`
 默认值：`webpackOptions.output` 选项中的 `publicPath`
 
-自定义目标文件的公共路径。
+为 CSS 内的图片、文件等外部资源指定一个自定义的公共路径。
+机制类似于 [`output.publicPath`](/configuration/output/#outputpublicpath)。
 
-#### `String` {#string}
+##### `String` {#string}
 
 **webpack.config.js**
 
@@ -115,7 +157,7 @@ module.exports = {
 };
 ```
 
-#### `Function` {#function}
+##### `Function` {#function}
 
 **webpack.config.js**
 
@@ -155,12 +197,12 @@ module.exports = {
 ### `esModule` {#esmodule}
 
 类型：`Boolean`
-默认值：`false`
+默认值：`true`
 
-默认情况下  `mini-css-extract-plugin` 将会生成使用 CommonJS 模块语法的 JS 模块。
-在某些情况下，使用 ES 模块是有益的，比如： [module concatenation](/plugins/module-concatenation-plugin/) 和 [tree shaking](/guides/tree-shaking/)。
+默认情况下  `mini-css-extract-plugin` 将会生成使用 ES 模块语法的 JS 模块。
+在某些情况下，使用 ES 模块是有益的，比如：[module concatenation](/plugins/module-concatenation-plugin/) 和 [tree shaking](/guides/tree-shaking/)。
 
-你可以使用以下方式启用 ES 模块语法：
+你可以使用以下方式启用 CommonJS 语法：
 
 **webpack.config.js**
 
@@ -177,7 +219,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              esModule: true,
+              esModule: false,
             },
           },
           'css-loader',
@@ -188,14 +230,14 @@ module.exports = {
 };
 ```
 
-### `modules` {#modules}
+#### `modules` {#modules}
 
 类型：`Object`
 默认值：`undefined`
 
 用于配置 CSS Modules。
 
-#### `namedExport` {#namedexport}
+##### `namedExport` {#namedexport}
 
 类型：`Boolean`
 类型：`false`
@@ -297,7 +339,6 @@ module.exports = {
               // 你可以在这里指定特定的 publicPath
               // 默认情况下使用 webpackOptions.output 中的 publicPath
               publicPath: '../',
-              hmr: process.env.NODE_ENV === 'development',
             },
           },
           'css-loader',
@@ -356,32 +397,37 @@ module.exports = {
 
 （为了更加清楚的表达，省略了 Loader 的选项，以适应需要。）
 
+You should not use `HotModuleReplacementPlugin` plugin if you are using a `webpack-dev-server`.
+`webpack-dev-server` enables / disables HMR using `hot` option.
+
 **webpack.config.js**
 
 ```js
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 
+const plugins = [
+  new MiniCssExtractPlugin({
+    // Options similar to the same options in webpackOptions.output
+    // both options are optional
+    filename: devMode ? '[name].css' : '[name].[hash].css',
+    chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+  }),
+];
+if (devMode) {
+  // only enable hot in development
+  plugins.push(new webpack.HotModuleReplacementPlugin());
+}
+
 module.exports = {
-  plugins: [
-    new MiniCssExtractPlugin({
-      // 类似于 webpackOptions.output 中的选项
-      // 所有选项都是可选的
-      filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
-    }),
-  ],
+  plugins,
   module: {
     rules: [
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-            },
-          },
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
           'sass-loader',
@@ -394,28 +440,36 @@ module.exports = {
 
 ### 模块热更新 (HMR) {#hot-module-reloading-hmr}
 
+注意：在 webpack 5 中 HMR 已自动支持。无需配置。你可以跳过以下内容：
+
 `mini-css-extract-plugin` 支持在开发中热重载实际的 CSS 文件。
 我们提供了一些选项来启动标准 stylesheets 和本地范围内 CSS 和 CSS modules 的 HMR 支持。
 以下是 mini-css 用于启动 HMR CSS modules 的示例配置。
 
-当我们尝试 hmr css-modules 时，使用自定义的 chunk 名称进行代码分割是不容易的。
-只有在 HMR 不能正常工作时，我们才需要打开 `reloadAll` 这个选项。
-css-modules 的核心挑战在于进行代码分割时，不同于文件名每次都相同，chunk id 可以并且每次确实会有所不同。
+如果你使用的是 `webpack-dev-server`，那么你无需使用 `HotModuleReplacementPlugin` 插件。
+`webpack-dev-server` 使用 `hot` 选项来控制启用/禁用 HMR。
 
 **webpack.config.js**
 
 ```js
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const plugins = [
+  new MiniCssExtractPlugin({
+    // Options similar to the same options in webpackOptions.output
+    // both options are optional
+    filename: devMode ? '[name].css' : '[name].[hash].css',
+    chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+  }),
+];
+if (devMode) {
+  // only enable hot in development
+  plugins.push(new webpack.HotModuleReplacementPlugin());
+}
+
 module.exports = {
-  plugins: [
-    new MiniCssExtractPlugin({
-      // 类似于 webpackOptions.output 中的选项
-      // 所有选项都是可选的
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
-  ],
+  plugins,
   module: {
     rules: [
       {
@@ -423,12 +477,7 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              // 仅仅在 development 模式下开启 hmr
-              hmr: process.env.NODE_ENV === 'development',
-              // 如果 hmr 不工作, 请开启强制选项
-              reloadAll: true,
-            },
+            options: {},
           },
           'css-loader',
         ],
@@ -578,9 +627,11 @@ module.exports = {
 };
 ```
 
-### 模块文件名选项 {#module-filename-option}
+### 文件名选项设置为函数 {#filename-option-as-function}
 
-通过 `moduleFilename` 选项你能够基于 chunk 数据自定义文件名。当处理多个入口点并希望可以更好的控制给定的入口点 / chunk 的文件名时，这相当有用。在下面这个例子中，我们将会使用 `moduleFilename` 将生成的 css 文件输出到不同的目录中。
+使用 `filename` 选项，你可以使用 chunk 数据来定制文件名。
+这点在处理多个入口，并且希望对给定的 入口/chunk 文件进行更多处理时，非常有用。
+下面示例中，我们使用 `filename` 将生成的 css 输出到不同的目录中。
 
 **webpack.config.js**
 
@@ -590,7 +641,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
-      moduleFilename: ({ name }) => `${name.replace('/js/', '/css/')}.css`,
+      filename: ({ chunk }) => `${chunk.name.replace('/js/', '/css/')}.css`,
     }),
   ],
   module: {
@@ -633,7 +684,7 @@ module.exports = {
 
 ### 移除 Order 警告 {#remove-order-warnings}
 
-对于通过使用 scoping 或命名约定来解决 css order 的项目，可以通过将插件的 ignoreOrder 选项设置为 true 来禁用css order 警告。
+对于通过使用 scoping 或命名约定来解决 css order 的项目，可以通过将插件的 ignoreOrder 选项设置为 true 来禁用 css order 警告。
 
 **webpack.config.js**
 
