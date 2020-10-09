@@ -1028,7 +1028,7 @@ module.exports = {
 };
 ```
 
-Note that `[fullhash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching/) for details.
+Note that `[fullhash]` in this parameter will be replaced with a hash of the compilation. See the [Caching guide](/guides/caching/) for details.
 
 
 ## `output.pathinfo`
@@ -1109,7 +1109,7 @@ background-image: url(/assets/spinner.gif);
 
 The webpack-dev-server also takes a hint from `publicPath`, using it to determine where to serve the output files from.
 
-Note that `[fullhash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
+Note that `[fullhash]` in this parameter will be replaced with a hash of the compilation. See the [Caching guide](/guides/caching) for details.
 
 Examples:
 
