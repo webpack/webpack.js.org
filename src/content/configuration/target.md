@@ -83,7 +83,7 @@ module.exports = {
 };
 ```
 
-Webpack will generate a runtime code for web platform and will use only ES5 features.
+webpack will generate a runtime code for web platform and will use only ES5 features.
 
 Not all targets may be mixed for now.
 
@@ -96,7 +96,7 @@ module.exports = {
 };
 ```
 
-Will cause an error. Webpack does not support universal target for now.
+Will cause an error. webpack does not support universal target for now.
 
 ### `false`
 
