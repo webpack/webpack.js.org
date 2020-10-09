@@ -38,11 +38,11 @@ Option                     | Description
 `web`                      | Compile for usage in a browser-like environment __(default)__
 `webworker`                | Compile as WebWorker
 `esX`                      | Compile for specified ECMAScript version. Examples: es5, es2020.
-`browserslist`             | Infer a platform and the ES-features from a browserslist-config
+`browserslist`             | Infer a platform and the ES-features from a browserslist-config __(default if browserlist config is available)__
 
-For example, when the `target` is set to `"electron-main"`, webpack includes multiple electron specific variables. For more information on which templates and externals are used, you can refer to webpack's [source code](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L78-L98).
+For example, when the `target` is set to `"electron-main"`, webpack includes multiple electron specific variables.
 
-A version of `node` or `electron` may be optionally specified.
+A version of `node` or `electron` may be optionally specified. This is denoted by the `[[X].Y]` in the table above.
 
 __webpack.config.js__
 
@@ -64,7 +64,7 @@ If a project has a browserslist config, then webpack will use it for:
 
 Supported browserslist values:
 
-- `browserslist` - use automatically resolved browserslist config and environment (from the nearest `package.json` or `BROWSERLIST` environment variable)
+- `browserslist` - use automatically resolved browserslist config and environment (from the nearest `package.json` or `BROWSERSLIST` environment variable, see [browserslist documentation](https://github.com/browserslist/browserslist#queries) for details)
 - `browserslist:modern` - use `modern` environment from automatically resolved browserslist config
 - `browserslist:last 2 versions` - use an explicit browserslist query (config will be ignored)
 - `browserslist:/path/to/config` - explicitly specify browserslist config
