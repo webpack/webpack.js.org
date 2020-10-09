@@ -1,7 +1,8 @@
 // Import External Dependencies
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
+const OptimizeCSSAssetsPlugin = require('css-minimizer-webpack-plugin');
 const SSGPlugin = require('static-site-generator-webpack-plugin');
 const RedirectWebpackPlugin = require('redirect-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -21,17 +22,25 @@ const paths = [
 ];
 
 module.exports = env => merge(common(env), {
+    name: 'ssg',
     mode: 'production',
     target: 'node',
+    cache: {
+      buildDependencies: {
+        config: [__filename],
+      }
+    },
     entry: {
       index: './server.jsx'
     },
     output: {
-      filename: 'server.[name].js',
+      filename: '.server/[name].js',
       libraryTarget: 'umd'
     },
     optimization: {
-        splitChunks: false
+      minimizer: [
+        new OptimizeCSSAssetsPlugin({})
+      ]
     },
     plugins: [
       new SSGPlugin({
@@ -80,21 +89,23 @@ module.exports = env => merge(common(env), {
           'concepts/mode': '/configuration/mode'
         }
       }),
-      new CopyWebpackPlugin([
-        {
-          from: './assets/icon-square-small-slack.png',
-          to: './assets/'
-        },
-        {
-          from: './assets/icon-square-big.svg',
-          to: './assets/'
-        },
-        {
-          from: './assets/robots.txt',
-          to: './'
-        },
-        'CNAME'
-      ]),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: './assets/icon-square-small-slack.png',
+            to: './assets/'
+          },
+          {
+            from: './assets/icon-square-big.svg',
+            to: './assets/'
+          },
+          {
+            from: './assets/robots.txt',
+            to: './'
+          },
+          'CNAME'
+        ]
+      }),
       new WebpackPwaManifest({
         name: 'webpack Documentation',
         short_name: 'webpack',
