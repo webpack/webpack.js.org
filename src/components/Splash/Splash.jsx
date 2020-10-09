@@ -48,7 +48,7 @@ const Splash = () => (
               <h2>Latest Sponsors</h2>
               <Support rank="latest" />
 
-              <h2>Platinum Sponsors</h2>
+              <h2 id="sponsors">Platinum Sponsors</h2>
               <Support rank="platinum" />
 
               <h2>Gold Sponsors</h2>

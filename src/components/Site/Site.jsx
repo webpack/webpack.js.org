@@ -84,7 +84,7 @@ class Site extends React.Component {
             },
             { content: 'Contribute', url: '/contribute/' },
             { content: 'Vote', url: '/vote/' },
-            { content: 'Blog', url: 'https://medium.com/webpack' }
+            { content: 'Blog', url: '/blog/' }
           ]}
           />
         </div>
