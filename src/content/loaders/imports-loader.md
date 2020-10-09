@@ -623,7 +623,57 @@ import $ from 'jquery';
 }.call(window, myVariable, myOtherVariable));
 ```
 
+<<<<<<< HEAD
 ### `additionalCode` {#additionalcode}
+=======
+#### `Object` with different parameter names
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: require.resolve('example.js'),
+        use: [
+          {
+            loader: 'imports-loader',
+            options: {
+              imports: {
+                moduleName: 'jquery',
+                name: '$',
+              },
+              wrapper: {
+                thisArg: 'window',
+                args: {
+                  myVariable: 'var1',
+                  myOtherVariable: 'var2',
+                },
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+Generate output:
+
+```js
+import $ from 'jquery';
+
+(function (var1, var2) {
+  // ...
+  // Code
+  // ...
+}.call(window, myVariable, myOtherVariable));
+```
+
+### `additionalCode`
+>>>>>>> 06dde12e0dcb0fb856662e1e9055d06ab7644628
 
 Type: `String`
 Default: `undefined`
