@@ -4735,9 +4735,9 @@ dnserrors@2.1.2:
     lodash.omit "^4.5.0"
 
 docschina-remark-slugger@^0.1.4:
-  version "0.1.1"
-  resolved "https://registry.npmjs.org/docschina-remark-slugger/-/docschina-remark-slugger-0.1.1.tgz#b70e8d5b595d7cba863fa38ba65b6ec49c3874bb"
-  integrity sha512-DDKeH8aPg8mN6pg8si4Vwwjd3oCvS16keJnp7oYfF7+mRJCwJI2t3uqEunVQ+eiKsDAnkCFfm8Jsw2/PZ/TpOQ==
+  version "0.1.4"
+  resolved "https://registry.npmjs.org/docschina-remark-slugger/-/docschina-remark-slugger-0.1.4.tgz#4d2438fc9a0be3cbc4e99a5a9292e96b9781a083"
+  integrity sha512-fuaE6fCDn8en9sr/OCYlns0h8NZjzXtWNXCGHB9Gcr58Lzj1mypBkAd54wR+OxedkmYzxvgHjqrM5/qQnyUlPg==
   dependencies:
     github-slugger "^1.3.0"
     mdast-util-to-string "^1.1.0"

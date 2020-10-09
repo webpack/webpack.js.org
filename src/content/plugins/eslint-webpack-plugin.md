@@ -22,7 +22,7 @@ repo: https://github.com/webpack-contrib/eslint-webpack-plugin
 
 The plugin was born with the purpose of solving some problems of the [eslint-loader](https://github.com/webpack-contrib/eslint-loader).
 
-|                                  | eslint-webpack-plugin |      eslint-loader       |
+|              info                | eslint-webpack-plugin |      eslint-loader       |
 | -------------------------------- | :-------------------: | :----------------------: |
 | Easy configuration               |  :heavy_check_mark:   | :heavy_multiplication_x: |
 | Generate unique an output report |  :heavy_check_mark:   | :heavy_multiplication_x: |
