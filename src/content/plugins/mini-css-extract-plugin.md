@@ -73,14 +73,56 @@ module.exports = {
 
 ## Options
 
-### `publicPath`
+### Plugin Options
+
+|                 Name                  |         Type         |       Default       | Description                                              |
+| :-----------------------------------: | :------------------: | :-----------------: | :------------------------------------------------------- |
+|      **[`filename`](#filename)**      | `{String\|Function}` |    `[name].css`     | This option determines the name of each output CSS file  |
+| **[`chunkFilename`](#chunkfilename)** | `{String\|Function}` | `based on filename` | This option determines the name of non-entry chunk files |
+|   **[`ignoreOrder`](#ignoreorder)**   |     `{Boolean}`      |       `false`       | Remove Order Warnings                                    |
+
+#### `filename`
+
+Type: `String|Function`
+Default: `[name].css`
+
+This option determines the name of each output CSS file.
+
+Works like [`output.filename`](/configuration/output/#outputfilename)
+
+#### `chunkFilename`
+
+Type: `String|Function`
+Default: `based on filename`
+
+This option determines the name of non-entry chunk files.
+
+Works like [`output.chunkFilename`](/configuration/output/#outputchunkfilename)
+
+#### `ignoreOrder`
+
+Type: `Boolean`
+Default: `false`
+
+Remove Order Warnings
+
+### Loader Options
+
+|              Name               |         Type         |              Default               | Description                                                                       |
+| :-----------------------------: | :------------------: | :--------------------------------: | :-------------------------------------------------------------------------------- |
+| **[`publicPath`](#publicpath)** | `{String\|Function}` | `webpackOptions.output.publicPath` | Specifies a custom public path for the external resources like images, files, etc |
+|   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | Use ES modules syntax                                                             |
+|    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | Configuration CSS Modules                                                         |
+
+#### `publicPath`
 
 Type: `String|Function`
 Default: the `publicPath` in `webpackOptions.output`
 
-Specifies a custom public path for the target file(s).
+Specifies a custom public path for the external resources like images, files, etc inside `CSS`.
+Works like [`output.publicPath`](/configuration/output/#outputpublicpath)
 
-#### `String`
+##### `String`
 
 **webpack.config.js**
 
@@ -115,7 +157,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+##### `Function`
 
 **webpack.config.js**
 
@@ -152,15 +194,15 @@ module.exports = {
 };
 ```
 
-### `esModule`
+#### `esModule`
 
 Type: `Boolean`
-Default: `false`
+Default: `true`
 
-By default, `mini-css-extract-plugin` generates JS modules that use the CommonJS modules syntax.
+By default, `mini-css-extract-plugin` generates JS modules that use the ES modules syntax.
 There are some cases in which using ES modules is beneficial, like in the case of [module concatenation](/plugins/module-concatenation-plugin/) and [tree shaking](/guides/tree-shaking/).
 
-You can enable a ES module syntax using:
+You can enable a CommonJS syntax using:
 
 **webpack.config.js**
 
@@ -177,7 +219,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              esModule: true,
+              esModule: false,
             },
           },
           'css-loader',
@@ -188,14 +230,14 @@ module.exports = {
 };
 ```
 
-### `modules`
+#### `modules`
 
 Type: `Object`
 Default: `undefined`
 
 Configuration CSS Modules.
 
-#### `namedExport`
+##### `namedExport`
 
 Type: `Boolean`
 Default: `false`
@@ -297,7 +339,6 @@ module.exports = {
               // you can specify a publicPath here
               // by default it uses publicPath in webpackOptions.output
               publicPath: '../',
-              hmr: process.env.NODE_ENV === 'development', // webpack 4 only
             },
           },
           'css-loader',
@@ -356,32 +397,37 @@ Here is an example to have both HMR in `development` and your styles extracted i
 
 (Loaders options left out for clarity, adapt accordingly to your needs.)
 
+You should not use `HotModuleReplacementPlugin` plugin if you are using a `webpack-dev-server`.
+`webpack-dev-server` enables / disables HMR using `hot` option.
+
 **webpack.config.js**
 
 ```js
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const devMode = process.env.NODE_ENV !== 'production';
 
+const plugins = [
+  new MiniCssExtractPlugin({
+    // Options similar to the same options in webpackOptions.output
+    // both options are optional
+    filename: devMode ? '[name].css' : '[name].[hash].css',
+    chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+  }),
+];
+if (devMode) {
+  // only enable hot in development
+  plugins.push(new webpack.HotModuleReplacementPlugin());
+}
+
 module.exports = {
-  plugins: [
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
-    }),
-  ],
+  plugins,
   module: {
     rules: [
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development', // webpack 4 only
-            },
-          },
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
           'sass-loader',
@@ -400,24 +446,30 @@ The `mini-css-extract-plugin` supports hot reloading of actual css files in deve
 Some options are provided to enable HMR of both standard stylesheets and locally scoped CSS or CSS modules.
 Below is an example configuration of mini-css for HMR use with CSS modules.
 
-While we attempt to hmr css-modules. It is not easy to perform when code-splitting with custom chunk names.
-`reloadAll` is an option that should only be enabled if HMR isn't working correctly.
-The core challenge with css-modules is that when code-split, the chunk ids can and do end up different compared to the filename.
+You should not use `HotModuleReplacementPlugin` plugin if you are using a `webpack-dev-server`.
+`webpack-dev-server` enables / disables HMR using `hot` option.
 
 **webpack.config.js**
 
 ```js
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const plugins = [
+  new MiniCssExtractPlugin({
+    // Options similar to the same options in webpackOptions.output
+    // both options are optional
+    filename: devMode ? '[name].css' : '[name].[hash].css',
+    chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+  }),
+];
+if (devMode) {
+  // only enable hot in development
+  plugins.push(new webpack.HotModuleReplacementPlugin());
+}
+
 module.exports = {
-  plugins: [
-    new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
-  ],
+  plugins,
   module: {
     rules: [
       {
@@ -425,12 +477,7 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              // only enable hot in development (webpack 4 only)
-              hmr: process.env.NODE_ENV === 'development',
-              // if hmr does not work, this is a forceful method.
-              reloadAll: true,
-            },
+            options: {},
           },
           'css-loader',
         ],
@@ -580,9 +627,11 @@ module.exports = {
 };
 ```
 
-### Module Filename Option
+### Filename Option as function
 
-With the `moduleFilename` option you can use chunk data to customize the filename. This is particularly useful when dealing with multiple entry points and wanting to get more control out of the filename for a given entry point/chunk. In the example below, we'll use `moduleFilename` to output the generated css into a different directory.
+With the `filename` option you can use chunk data to customize the filename.
+This is particularly useful when dealing with multiple entry points and wanting to get more control out of the filename for a given entry point/chunk.
+In the example below, we'll use `filename` to output the generated css into a different directory.
 
 **webpack.config.js**
 
@@ -592,7 +641,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
-      moduleFilename: ({ name }) => `${name.replace('/js/', '/css/')}.css`,
+      filename: ({ chunk }) => `${chunk.name.replace('/js/', '/css/')}.css`,
     }),
   ],
   module: {

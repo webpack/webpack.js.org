@@ -1,8 +1,8 @@
 ---
 title: polymer-webpack-loader
-source: https://raw.githubusercontent.com/webpack-contrib/polymer-webpack-loader/master/README.md
-edit: https://github.com/webpack-contrib/polymer-webpack-loader/edit/master/README.md
-repo: https://github.com/webpack-contrib/polymer-webpack-loader
+source: https://raw.githubusercontent.com/Banno/polymer-webpack-loader/master/README.md
+edit: https://github.com/Banno/polymer-webpack-loader/edit/master/README.md
+repo: https://github.com/Banno/polymer-webpack-loader
 ---
 
 [![npm version](https://badge.fury.io/js/polymer-webpack-loader.svg)](https://badge.fury.io/js/polymer-webpack-loader)
