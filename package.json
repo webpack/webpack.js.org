@@ -143,7 +143,7 @@
     "sitemap-static": "^0.4.2",
     "start-server-and-test": "^1.11.0",
     "static-site-generator-webpack-plugin": "^3.4.1",
-    "style-loader": "^1.2.1",
+    "style-loader": "^2.0.0",
     "tap-spot": "^1.1.1",
     "terser-webpack-plugin": "^4.1.0",
     "webpack": "^5.0.0-rc.4",
