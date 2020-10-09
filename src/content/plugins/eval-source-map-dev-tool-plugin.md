@@ -15,37 +15,37 @@ related:
     url: https://survivejs.com/webpack/building/source-maps/#sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin
 ---
 
-This plugin enables more fine grained control of source map generation. It is also enabled automatically by certain settings of the [`devtool`](/configuration/devtool/) configuration option.
+本插件可以为 source map 的生成提供更好更细粒度的控制。[`devtool`](/configuration/devtool/) 中的某些配置会自动使用它。
 
 ``` js
 new webpack.EvalSourceMapDevToolPlugin(options);
 ```
 
 
-## Options {#options}
+## 选项 {#options}
 
-The following options are supported:
+支持以下选项：
 
-- `test` (`string|RegExp|array`): Include source maps for modules based on their extension (defaults to `.js` and `.css`).
-- `include` (`string|RegExp|array`): Include source maps for module paths that match the given value.
-- `exclude` (`string|RegExp|array`): Exclude modules that match the given value from source map generation.
-- `append` (`string`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. `false` disables the appending.
-- `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate).
-- `module` (`boolean`): Indicates whether loaders should generate source maps (defaults to `true`).
-- `columns` (`boolean`): Indicates whether column mappings should be used (defaults to `true`).
-- `protocol` (`string`): Allows user to override default protocol (`webpack-internal://`)
+- `test` (`string|RegExp|array`): 默认值为 `.js` 和 `.css`，为与给定的模块扩展名相匹配的模块，添加 source map。
+- `include` (`string|RegExp|array`): 为与给定路径相匹配的模块，添加 source map。
+- `exclude` (`string|RegExp|array`): 排除一些与给定值相匹配的模块，不会为它们生成映射关系。
+- `append` (`string`): 将给定的值添加到源代码中，通常是 `#sourceMappingURL` 注释，`[url]` 在 source map 文件中将会被替换成 url，值为 `false` 表示不添加。
+- `moduleFilenameTemplate` (`string`): 查看 [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate)。
+- `module` (`boolean`): 默认值为 `true`，表示是否为 loaders 添加 source map。
+- `columns` (`boolean`): 默认值为 `true`，表示是否使用列映射(column mapping)。
+- `protocol` (`string`): 默认协议名为 `webpack-internal://`，允许用户重新定义协议。
 
-T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
+T> 将 `module` 或者 `columns` 设置为 `false` 将产生较不精确的源映射，但会明显提高编译性能。
 
-T> If you want to use a custom configuration for this plugin in [development mode](/configuration/mode/#mode-development), make sure to disable the default one. I.e. set `devtool: false`.
+T> 如果要在 [开发模式](/configuration/mode/#mode-development) 下对此插件使用自定义配置，请确保禁用默认配置。 即设置 `devtool: false`。 
 
-## Examples {#examples}
+## 示例 {#examples}
 
-The following examples demonstrate some common use cases for this plugin.
+以下示例演示了此插件的一些常见用例。
 
-### Basic Use Case {#basic-use-case}
+### 基本用例 {#basic-use-case}
 
-You can use the following code to replace the configuration option `devtool: eval-source-map` with an equivalent custom plugin configuration:
+可以使用以下代码替换配置选项 `devtool: eval-source-map`，并使用等效的自定义插件配置：
 
 ```js
 module.exports = {
@@ -57,9 +57,9 @@ module.exports = {
 };
 ```
 
-### Exclude Vendor Maps {#exclude-vendor-maps}
+### 排除 Vendor(第三方库) Maps {#exclude-vendor-maps}
 
-The following code would exclude source maps for any modules in the `vendor.js` bundle:
+下面的代码将排除 `vendor.js` 包中任何模块 source map 的生成：
 
 ``` js
 new webpack.EvalSourceMapDevToolPlugin({
