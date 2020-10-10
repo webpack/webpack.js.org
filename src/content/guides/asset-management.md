@@ -10,11 +10,12 @@ contributors:
   - EugeneHlushko
   - AnayaDesign
   - wizardofhogwarts
+  - astonizer
 ---
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
 
-Prior to webpack, front-end developers would use tools like grunt and gulp to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. The same idea was used for JavaScript modules, but tools like webpack will __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is great because every module now _explicitly states its dependencies_ and we'll avoid bundling modules that aren't in use.
+Prior to webpack, front-end developers would use tools like [grunt](https://gruntjs.com/) and [gulp](https://gulpjs.com/) to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. The same idea was used for JavaScript modules, but tools like webpack will __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is great because every module now _explicitly states its dependencies_ and we'll avoid bundling modules that aren't in use.
 
 One of the coolest webpack features is that you can also _include any other type of file_, besides JavaScript, for which there is a loader. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) can be applied to everything used in building a website or web app. Let's start with CSS, as you may already be familiar with that setup.
 
@@ -438,6 +439,7 @@ __project__
     |- index.html
   |- /src
 +   |- data.xml
++   |- data.csv
     |- my-font.woff
     |- my-font.woff2
     |- icon.png
@@ -458,6 +460,15 @@ __src/data.xml__
 </note>
 ```
 
+__src/data.csv__
+
+``` csv
+to,from,heading,body
+Mary,John,Reminder,Call Cindy on Tuesday
+Zoe,Bill,Reminder,Buy orange juice
+Autumn,Lindsey,Letter,I miss you
+```
+
 Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import, will contain parsed JSON for easy consumption:
 
 __src/index.js__
@@ -467,6 +478,7 @@ __src/index.js__
   import './style.css';
   import Icon from './icon.png';
 + import Data from './data.xml';
++ import Notes from './data.csv';
 
   function component() {
     const element = document.createElement('div');
@@ -482,6 +494,7 @@ __src/index.js__
     element.appendChild(myIcon);
 
 +   console.log(Data);
++   console.log(Notes);
 
     return element;
   }
@@ -645,6 +658,7 @@ __project__
     |- index.html
   |- /src
 -   |- data.xml
+-   |- data.csv
 -   |- my-font.woff
 -   |- my-font.woff2
 -   |- icon.png
@@ -709,6 +723,7 @@ __src/index.js__
 - import './style.css';
 - import Icon from './icon.png';
 - import Data from './data.xml';
+- import Notes from './data.csv';
 -
   function component() {
     const element = document.createElement('div');
@@ -724,6 +739,7 @@ __src/index.js__
 -   element.appendChild(myIcon);
 -
 -   console.log(Data);
+-   console.log(Notes);
 
     return element;
   }

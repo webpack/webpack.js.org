@@ -61,6 +61,6 @@ Since webpack 2.5.0, placeholders are evaluated in the `banner` string:
 import webpack from 'webpack';
 
 new webpack.BannerPlugin({
-  banner: 'hash:[hash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]'
+  banner: 'fullhash:[fullhash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]'
 });
 ```

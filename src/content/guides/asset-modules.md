@@ -1,6 +1,6 @@
 ---
 title: Asset Modules
-sort: 24
+sort: 25
 contributors:
   - smelukov
   - EugeneHlushko
@@ -62,7 +62,7 @@ All `.png` files will be emitted to the output directory and their paths will be
 
 ### Custom output filename
 
-By default, `asset/resource` modules are emitting with `[hash][ext][query]` filename into output directory. You can also use `[contenthash]` and `[modulehash]`, otherwise it defaults to `[hash]`.
+By default, `asset/resource` modules are emitting with `[hash][ext][query]` filename into output directory.
 
 You can modify this template by setting [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) in your webpack configuration:
 
