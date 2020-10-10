@@ -22,16 +22,20 @@ So today (2020-10-10) webpack 5.0.0 is released, but this doesn't mean it's done
 As with webpack 4 we continue development by fixing problems and adding features.
 In the next days there will probably a lot bugfixes. Features will come later.
 
-So what does the release mean?
+## Common Questions
+
+### So what does the release mean?
+
 It means we finished doing breaking changes.
 Many refactorings have been done to up-level the architecture and create a good base for future features (and current features).
 
-So when is the time to upgrade?
+### So when is the time to upgrade?
+
 It depends. There is a good chance that upgrading fails and you would need to give it a second or 3rd try.
 If you are open to that, try to upgrade now and provide feedback to webpack, plugins and loaders.
 We are eager to fix those problems. Someone has to start and you would be one of the first ones benefiting from it.
 
-## Sponsoring situation
+## Sponsoring Update
 
 webpack is fully based upon [sponsoring](https://opencollective.com/webpack).
 It's not tied to (and paid by) a big company like some other Open Source projects.
@@ -56,16 +60,16 @@ Thanks to [all the sponsors](/#sponsors).
 
 This release focus on the following:
 
-- We try to improve build performance with Persistent Caching.
-- We try to improve Long Term Caching with better algorithms and defaults.
-- We try to improve bundle size with better Tree Shaking and Code Generation.
-- We try to improve compatibility with the web platform.
-- We try to clean up internal structures that were left in a weird state while implementing features in v4 without introducing any breaking changes.
-- We try to prepare for future features by introducing breaking changes now, allowing us to stay on v5 for as long as possible.
+- Improve build performance with Persistent Caching.
+- Improve Long Term Caching with better algorithms and defaults.
+- Improve bundle size with better Tree Shaking and Code Generation.
+- Improve compatibility with the web platform.
+- Clean up internal structures that were left in a weird state while implementing features in v4 without introducing any breaking changes.
+- Prepare for future features by introducing breaking changes now, allowing us to stay on v5 for as long as possible.
 
-## Migration Guide
+## __Migration__ Guide
 
-[See here for a migration guide](/migrate/5)
+[See here for a __migration__ guide](/migrate/5)
 
 ## Major Changes: Removals
 
@@ -73,7 +77,7 @@ This release focus on the following:
 
 All items deprecated in v4 were removed.
 
-MIGRATION: Make sure that your webpack 4 build does not print deprecation warnings.
+__MIGRATION__: Make sure that your webpack 4 build does not print deprecation warnings.
 
 Here are a few things that were removed but did not have deprecation warnings in v4:
 
@@ -97,7 +101,7 @@ While this makes using modules written for Node.js easy, it adds these huge poly
 
 webpack 5 stops automatically polyfilling these core modules and focus on frontend-compatible modules. Our goal is to improve compatibility with the web platform, where Node.js core modules are not available.
 
-MIGRATION:
+__MIGRATION__:
 
 - Try to use frontend-compatible modules whenever possible.
 - It's possible to manually add a polyfill for a Node.js core module. An error message will give a hint on how to achieve that.
@@ -118,7 +122,7 @@ This is a trade-off between bundle size and long term caching.
 
 `moduleIds/chunkIds/mangleExports: false` disables the default behavior and one can provide a custom algorithm via plugin. Note that in webpack 4 `moduleIds/chunkIds: false` without custom plugin resulted in a working build, while in webpack 5 you must provide a custom plugin.
 
-MIGRATION: Best use the default values for `chunkIds`, `moduleIds` and `mangleExports`. You can also opt-in to the old defaults `chunkIds: "size", moduleIds: "size", mangleExports: "size"`, this will generate smaller bundles, but invalidate them more often for caching.
+__MIGRATION__: Best use the default values for `chunkIds`, `moduleIds` and `mangleExports`. You can also opt-in to the old defaults `chunkIds: "size", moduleIds: "size", mangleExports: "size"`, this will generate smaller bundles, but invalidate them more often for caching.
 
 Note: In webpack 4 hashed module ids yielded reduced gzip performance. This was related to changed module order and has been fixed.
 
@@ -142,7 +146,7 @@ But it would still make sense if you want to control the filenames for productio
 
 It's possible to use `chunkIds: "named"` in production, but make sure not to accidentally expose sensitive information about module names.
 
-MIGRATION: If you dislike the filenames being changed in development, you can pass `chunkIds: "natural"` to use the old numeric mode.
+__MIGRATION__: If you dislike the filenames being changed in development, you can pass `chunkIds: "natural"` to use the old numeric mode.
 
 ### Module Federation
 
@@ -159,7 +163,7 @@ For more details see [this separate guide](/concepts/module-federation).
 JSON modules now align with the proposal and emit a warning when a non-default export is used.
 JSON modules no longer have named exports when importing from a strict ECMAScript module.
 
-MIGRATION: Use the default export.
+__MIGRATION__: Use the default export.
 
 Even when using the default export, unused properties are dropped by the `optimization.usedExports` optimization and properties are mangled by the `optimization.mangleExports` optimization.
 
@@ -300,7 +304,7 @@ Webpack 5 does automatically infer a unique name for the build from `package.jso
 
 This value is used to make all potential conflicting globals unique.
 
-MIGRATION: Remove `output.jsonpFunction` in favor of a unique name in your `package.json`.
+__MIGRATION__: Remove `output.jsonpFunction` in favor of a unique name in your `package.json`.
 
 ### Automatic public path
 
@@ -310,7 +314,7 @@ Webpack 5 will determine the `output.publicPath` automatically when possible.
 
 Webpack 5 generates typescript typings from source code and exposes them via the npm package.
 
-MIGRATION: Remove `@types/webpack`. Update references when names differ.
+__MIGRATION__: Remove `@types/webpack`. Update references when names differ.
 
 ## Major Changes: Optimization
 
@@ -370,7 +374,7 @@ The following symbols can be analysed:
     - local variables
     - imported bindings
 
-FEEDBACK: If you find something missing in this analysis, please report an issue and we consider adding it.
+__FEEDBACK__: If you find something missing in this analysis, please report an issue and we consider adding it.
 
 Using `eval()` will bail-out this optimization for a module, because evaled code could reference any symbol in scope.
 
@@ -557,7 +561,7 @@ Plugins and their respective authors should expect that some users may forget to
 
 The `webpack()` façade automatically calls `close` when being passed a callback.
 
-MIGRATION: While using the Node.js API, make sure to call `Compiler.close` when done.
+__MIGRATION__: While using the Node.js API, make sure to call `Compiler.close` when done.
 
 ### File Emitting
 
@@ -627,7 +631,7 @@ Note that this also means WebAssembly support is now disabled by default.
 
 The minimum supported Node.js version has increased from 6 to 10.13.0(LTS).
 
-MIGRATION: Upgrade to the latest Node.js version available.
+__MIGRATION__: Upgrade to the latest Node.js version available.
 
 ## Changes to the Configuration
 
@@ -662,7 +666,7 @@ MIGRATION: Upgrade to the latest Node.js version available.
     - `node.console` removed
     - `node.process` removed
     - `node.*` (Node.js native module) removed
-    - MIGRATION: `resolve.alias` and `ProvidePlugin`. Errors will give hints. (Refer to [node-libs-browser](https://github.com/webpack/node-libs-browser) for polyfills & mocks used in v4)
+    - __MIGRATION__: `resolve.alias` and `ProvidePlugin`. Errors will give hints. (Refer to [node-libs-browser](https://github.com/webpack/node-libs-browser) for polyfills & mocks used in v4)
 - `output.filename` can now be a function
 - `output.assetModuleFilename` added
 - `output.jsonpScriptType` renamed to `output.scriptType`
@@ -677,9 +681,9 @@ MIGRATION: Upgrade to the latest Node.js version available.
     - `optimization.namedChunks` removed (`NamedChunksPlugin` too)
     - `optimization.namedModules` removed (`NamedModulesPlugin` too)
     - `optimization.occurrenceOrder` removed
-    - MIGRATION: Use `chunkIds` and `moduleIds`
+    - __MIGRATION__: Use `chunkIds` and `moduleIds`
 - `optimization.splitChunks` `test` no longer matches chunk name
-    - MIGRATION: Use a test function
+    - __MIGRATION__: Use a test function
     `(module, { chunkGraph }) => chunkGraph.getModuleChunks(module).some(chunk => chunk.name === "name")`
 - `optimization.splitChunks` `minRemainingSize` was added
 - `optimization.splitChunks` `filename` can now be a function
@@ -691,10 +695,10 @@ MIGRATION: Upgrade to the latest Node.js version available.
     - `maxInitialSize`
 - `optimization.splitChunks` `maxAsyncSize` and `maxInitialSize` added next to `maxSize`: allows to specify different max sizes for initial and async chunks
 - `optimization.splitChunks` `name: true` removed: Automatic names are no longer supported
-    - MIGRATION: Use the default. `chunkIds: "named"` will give your files useful names for debugging
+    - __MIGRATION__: Use the default. `chunkIds: "named"` will give your files useful names for debugging
 - `optimization.splitChunks.cacheGroups[].idHint` added: Gives a hint how the named chunk id should be chosen
 - `optimization.splitChunks` `automaticNamePrefix` removed
-    - MIGRATION: Use `idHint` instead
+    - __MIGRATION__: Use `idHint` instead
 - `optimization.splitChunks` `filename` is no longer restricted to initial chunks
 - `optimization.splitChunks` `usedExports` added to include used exports when comparing modules
 - `optimization.splitChunks.defaultSizeTypes` added: Specified the size types when using numbers for sizes
@@ -704,7 +708,7 @@ MIGRATION: Upgrade to the latest Node.js version available.
 - `optimization.noEmitOnErrors` renamed to `optimization.emitOnErrors` and logic inverted
 - `optimization.realContentHash` added
 - `output.devtoolLineToLine` removed
-    - MIGRATION: No replacement
+    - __MIGRATION__: No replacement
 - `output.chunkFilename: Function` is now allowed
 - `output.hotUpdateChunkFilename: Function` is now forbidden: It never worked anyway.
 - `output.hotUpdateMainFilename: Function` is now forbidden: It never worked anyway.
@@ -720,7 +724,7 @@ MIGRATION: Upgrade to the latest Node.js version available.
 - `module.rules` `parser.worker` added: Allows to configure the worker supported
 - `module.rules` `query` and `loaders` were removed
 - `module.rules` `options` passing a string is deprecated
-    - MIGRATION: Pass an options object instead, open an issue on the loader when this is not supported
+    - __MIGRATION__: Pass an options object instead, open an issue on the loader when this is not supported
 - `module.rules` `mimetype` added: allows to match a mimetype of a DataURI
 - `module.rules` `descriptionData` added: allows to match a data from package.json
 - `module.defaultRules` `"..."` can be used to reference the defaults
@@ -735,24 +739,24 @@ MIGRATION: Upgrade to the latest Node.js version available.
 - `BannerPlugin.banner` signature changed
     - `data.basename` removed
     - `data.query` removed
-    - MIGRATION: extract from `filename`
+    - __MIGRATION__: extract from `filename`
 - `SourceMapDevToolPlugin` `lineToLine` removed
-    - MIGRATION: No replacement
+    - __MIGRATION__: No replacement
 - `[hash]` as hash for the full compilation is now deprecated
-    - MIGRATION: Use `[fullhash]` instead or better use another hash option
+    - __MIGRATION__: Use `[fullhash]` instead or better use another hash option
 - `[modulehash]` is deprecated
-    - MIGRATION: Use `[hash]` instead
+    - __MIGRATION__: Use `[hash]` instead
 - `[moduleid]` is deprecated
-    - MIGRATION: Use `[id]` instead
+    - __MIGRATION__: Use `[id]` instead
 - `[filebase]` removed
-    - MIGRATION: Use `[base]` instead
+    - __MIGRATION__: Use `[base]` instead
 - New placeholders for file-based templates (i. e. SourceMapDevToolPlugin)
     - `[name]`
     - `[base]`
     - `[path]`
     - `[ext]`
 - `externals` when passing a function, it has now a different signature `({ context, request }, callback)`
-    - MIGRATION: Change signature
+    - __MIGRATION__: Change signature
 - `externalsPresets` added
 - `experiments` added (see Experiments section above)
 - `watchOptions.followSymlinks` added
@@ -792,7 +796,7 @@ See [PR](https://github.com/webpack/webpack/pull/10017) for details
 
 This has been removed from loader context
 
-MIGRATION: This can be implemented in the loader itself
+__MIGRATION__: This can be implemented in the loader itself
 
 ### `this.getResolve`
 
@@ -813,7 +817,7 @@ This allows plugins to apply their own defaults, or act as configuration presets
 
 But this is also a breaking change as plugins can't rely on configuration values to be set when they are applied.
 
-MIGRATION: Access configuration only in plugin hooks. Or best avoid accessing configuration at all and take options via constructor.
+__MIGRATION__: Access configuration only in plugin hooks. Or best avoid accessing configuration at all and take options via constructor.
 
 ### Runtime Modules
 
@@ -823,13 +827,13 @@ In most cases, the core runtime allows to inline the entry module instead of cal
 
 In the best case, no runtime code is needed at all.
 
-MIGRATION: If you are injecting runtime code into the webpack runtime in a plugin, consider using RuntimeModules instead.
+__MIGRATION__: If you are injecting runtime code into the webpack runtime in a plugin, consider using RuntimeModules instead.
 
 ### Serialization
 
 A serialization mechanism was added to allow serialization of complex objects in webpack. It has an opt-in semantic, so classes that should be serialized need to be explicitly flagged (and their serialization implemented). This has been done for most Modules, all Dependencies and some Errors.
 
-MIGRATION: When using custom Modules or Dependencies, it is recommended to make them serializable to benefit from persistent caching.
+__MIGRATION__: When using custom Modules or Dependencies, it is recommended to make them serializable to benefit from persistent caching.
 
 ### Plugins for Caching
 
@@ -841,7 +845,7 @@ The `FileCachePlugin` uses the serialization mechanism to persist and restore ca
 
 Classes with `hooks` have their `hooks` object frozen, so adding custom hooks is no longer possible this way.
 
-MIGRATION: The recommended way to add custom hooks is using a WeakMap and a static `getXXXHooks(XXX)` (i. e. `getCompilationHook(compilation)`) method. Internal classes use the same mechanism used for custom hooks.
+__MIGRATION__: The recommended way to add custom hooks is using a WeakMap and a static `getXXXHooks(XXX)` (i. e. `getCompilationHook(compilation)`) method. Internal classes use the same mechanism used for custom hooks.
 
 ### Tapable Upgrade
 
@@ -849,13 +853,13 @@ The compat layer for webpack 3 plugins has been removed. It had already been dep
 
 Some less used tapable APIs were removed or deprecated.
 
-MIGRATION: Use the new tapable API.
+__MIGRATION__: Use the new tapable API.
 
 ### Staged Hooks
 
 For several steps in the sealing process, there had been multiple hooks for different stages. i. e. `optimizeDependenciesBasic` `optimizeDependencies` and `optimizeDependenciesAdvanced`. These have been removed in favor of a single hook which can be used with a `stage` option. See `OptimizationStages` for possible stage values.
 
-MIGRATION: Hook into the remaining hook instead. You may add a `stage` option.
+__MIGRATION__: Hook into the remaining hook instead. You may add a `stage` option.
 
 ### Main/Chunk/ModuleTemplate deprecation
 
@@ -867,7 +871,7 @@ It's still possible to hook into parts of the templating. The hooks are in Javas
 
 There is a compat-layer, so Main/Chunk/ModuleTemplate still exist, but only delegate tap calls to the new hook locations.
 
-MIGRATION: Follow the advice in the deprecation messages. Mostly pointing to hooks at different locations.
+__MIGRATION__: Follow the advice in the deprecation messages. Mostly pointing to hooks at different locations.
 
 ### Entry point descriptor
 
@@ -978,7 +982,7 @@ webpack used to order modules and chunks in the Compilation phase, in a specific
 
 Hooks to optimize the order of module and chunks have been removed.
 
-MIGRATION: You cannot rely on the order of modules and chunks in the compilation phase no more.
+__MIGRATION__: You cannot rely on the order of modules and chunks in the compilation phase no more.
 
 ### Arrays to Sets
 
@@ -988,7 +992,7 @@ MIGRATION: You cannot rely on the order of modules and chunks in the compilation
 
 There is a compat-layer which prints deprecation warnings.
 
-MIGRATION: Use Set methods instead of Array methods.
+__MIGRATION__: Use Set methods instead of Array methods.
 
 ### Compilation.fileSystemInfo
 
@@ -996,7 +1000,7 @@ This new class can be used to access information about the filesystem in a cache
 
 In the future, asking for file content hashes will be added and modules will be able to check validity with file contents instead of file hashes.
 
-MIGRATION: Instead of using `file/contextTimestamps` use the `compilation.fileSystemInfo` API instead.
+__MIGRATION__: Instead of using `file/contextTimestamps` use the `compilation.fileSystemInfo` API instead.
 
 Timestamping for directories is possible now, which allows serialization of ContextModules.
 
@@ -1014,7 +1018,7 @@ HMR runtime has been refactored to Runtime Modules. `HotUpdateChunkTemplate` has
 
 The javascript part of HMR runtime has been separated from the core HMR runtime. Other module types can now also handle HMR in their own way. In the future, this will allow i. e. HMR for the mini-css-extract-plugin or for WASM modules.
 
-MIGRATION: As this is a newly introduced functionality, there is nothing to migrate.
+__MIGRATION__: As this is a newly introduced functionality, there is nothing to migrate.
 
 `import.meta.webpackHot` exposes the same API as `module.hot`. This is also usable from strict ESM modules (.mjs, type: "module" in package.json) which do not have access to `module`.
 
@@ -1032,7 +1036,7 @@ These queues have some hooks to watch and intercept job processing.
 
 In the future, multiple compilers may work together and job orchestration can be done by intercepting these queues.
 
-MIGRATION: As this is a newly introduced functionality, there is nothing to migrate.
+__MIGRATION__: As this is a newly introduced functionality, there is nothing to migrate.
 
 ### Logging
 
@@ -1066,13 +1070,13 @@ webpack used to disconnect modules from the graph when restored from the cache. 
 
 There is a compat-layer for most of these changes, which prints a deprecation warning when used.
 
-MIGRATION: Use the new APIs on ModuleGraph and ChunkGraph
+__MIGRATION__: Use the new APIs on ModuleGraph and ChunkGraph
 
 ### Init Fragments
 
 `DependenciesBlockVariables` has been removed in favor of InitFragments. `DependencyTemplates` can now add `InitFragments` to inject code to the top of the module's source. `InitFragments` allows deduplication.
 
-MIGRATION: Use `InitFragments` instead of inserting something at a negative index into the source.
+__MIGRATION__: Use `InitFragments` instead of inserting something at a negative index into the source.
 
 ### Module Source Types
 
@@ -1080,13 +1084,13 @@ Modules now have to define which source types they support via `Module.getSource
 
 There is no relationship between module type and source type. i. e. module type `json` also uses source type `javascript` and module type `webassembly/experimental` uses source types `javascript` and `webassembly`.
 
-MIGRATION: Custom modules need to implement these new interface methods.
+__MIGRATION__: Custom modules need to implement these new interface methods.
 
 ### Plugins for Stats
 
 Stats `preset`, `default`, `json` and `toString` are now baked in by a plugin system. Converted the current Stats into plugins.
 
-MIGRATION: Instead of replacing the whole Stats functionality, you can now customize it. Extra information can now be added to the stats json instead of writing a separate file.
+__MIGRATION__: Instead of replacing the whole Stats functionality, you can now customize it. Extra information can now be added to the stats json instead of writing a separate file.
 
 ### New Watching
 
@@ -1122,7 +1126,7 @@ The Compilation features Code Generation as separate compilation phase now. It n
 
 This should make the flow much cleaner. It also allows to report progress for this phase and makes Code Generation more visible when profiling.
 
-MIGRATION: `Module.source()` and `Module.getRuntimeRequirements()` are deprecated now. Use `Module.codeGeneration()` instead.
+__MIGRATION__: `Module.source()` and `Module.getRuntimeRequirements()` are deprecated now. Use `Module.codeGeneration()` instead.
 
 ### DependencyReference
 
@@ -1181,23 +1185,23 @@ These dependencies are cheaper to process and webpack uses them when possible
     - Using space as a separator is now deprecated. (Paths could contain spaces)
     - Hint: `|` is replaced with space in Stats string output.
 - `SystemPlugin` is now disabled by default.
-    - MIGRATION: Avoid using it as the spec has been removed. You can re-enable it with `Rule.parser.system: true`
+    - __MIGRATION__: Avoid using it as the spec has been removed. You can re-enable it with `Rule.parser.system: true`
 - `ModuleConcatenationPlugin`: concatenation is no longer prevented by `DependencyVariables` as they have been removed
     - This means it can now concatenate in cases of `module`, `global`, `process` or the ProvidePlugin
 - `Stats.presetToOptions` removed
-    - MIGRATION: Use `compilation.createStatsOptions` instead
+    - __MIGRATION__: Use `compilation.createStatsOptions` instead
 - `SingleEntryPlugin` and `SingleEntryDependency` removed
-    - MIGRATION: use `EntryPlugin` and `EntryDependency`
+    - __MIGRATION__: use `EntryPlugin` and `EntryDependency`
 - Chunks can now have multiple entry modules
 - `ExtendedAPIPlugin` removed
-    - MIGRATION: No longer needed, `__webpack_hash__` and `__webpack_chunkname__` can always be used and runtime code is injected where needed.
+    - __MIGRATION__: No longer needed, `__webpack_hash__` and `__webpack_chunkname__` can always be used and runtime code is injected where needed.
 - `ProgressPlugin` no longer uses tapable context for `reportProgress`
-    - MIGRATION: Use `ProgressPlugin.getReporter(compiler)` instead
+    - __MIGRATION__: Use `ProgressPlugin.getReporter(compiler)` instead
 - `ProvidePlugin` is now re-enabled for `.mjs` files
 - `Stats` json `errors` and `warnings` no longer contain strings but objects with information splitted into properties.
-    - MIGRATION: Access the information on the properties. i. e. `message`
+    - __MIGRATION__: Access the information on the properties. i. e. `message`
 - `Compilation.hooks.normalModuleLoader` is deprecated
-    - MIGRATION: Use `NormalModule.getCompilationHooks(compilation).loader` instead
+    - __MIGRATION__: Use `NormalModule.getCompilationHooks(compilation).loader` instead
 - Changed hooks in `NormalModuleFactory` from waterfall to bailing, changed and renamed hooks that return waterfall functions
 - Removed `compilationParams.compilationDependencies`
     - Plugins can add dependencies to the compilation by adding to `compilation.file/context/missingDependencies`
@@ -1276,27 +1280,27 @@ These dependencies are cheaper to process and webpack uses them when possible
 - `Compilation.hooks.statsPrinter` added
 - `Compilation.fileDependencies`, `Compilation.contextDependencies` and `Compilation.missingDependencies` are now LazySets
 - `Compilation.entries` removed
-    - MIGRATION: Use `Compilation.entryDependencies` instead
+    - __MIGRATION__: Use `Compilation.entryDependencies` instead
 - `Compilation._preparedEntrypoints` removed
 - `dependencyTemplates` is now a `DependencyTemplates` class instead of a raw `Map`
 - `Compilation.fileTimestamps` and `contextTimestamps` removed
-    - MIGRATION: Use `Compilation.fileSystemInfo` instead
+    - __MIGRATION__: Use `Compilation.fileSystemInfo` instead
 - `Compilation.waitForBuildingFinished` removed
-    - MIGRATION: Use the new queues
+    - __MIGRATION__: Use the new queues
 - `Compilation.addModuleDependencies` removed
 - `Compilation.prefetch` removed
 - `Compilation.hooks.beforeHash` is now called after the hashes of modules are created
-    - MIGRATION: Use `Compiliation.hooks.beforeModuleHash` instead
+    - __MIGRATION__: Use `Compiliation.hooks.beforeModuleHash` instead
 - `Compilation.applyModuleIds` removed
 - `Compilation.applyChunkIds` removed
 - `Compiler.root` added, which points to the root compiler
     - it can be used to cache data in WeakMaps instead of statically scoped
 - `Compiler.hooks.afterDone` added
 - `Source.emitted` is no longer set by the Compiler
-    - MIGRATION: Check `Compilation.emittedAssets` instead
+    - __MIGRATION__: Check `Compilation.emittedAssets` instead
 - `Compiler/Compilation.compilerPath` added: It's a unique name of the compiler in the compiler tree. (Unique to the root compiler scope)
 - `Module.needRebuild` deprecated
-    - MIGRATION: use `Module.needBuild` instead
+    - __MIGRATION__: use `Module.needBuild` instead
 - `Dependency.getReference` signature changed
 - `Dependency.getExports` signature changed
 - `Dependency.getWarnings` signature changed
@@ -1335,9 +1339,9 @@ These dependencies are cheaper to process and webpack uses them when possible
 - `Module.prefetched` removed
 - `Module.built` removed
 - `Module.used` removed
-    - MIGRATION: Use `Module.getUsedExports` instead
+    - __MIGRATION__: Use `Module.getUsedExports` instead
 - Module.usedExports deprecated
-    - MIGRATION: Use `Module.getUsedExports` instead
+    - __MIGRATION__: Use `Module.getUsedExports` instead
 - `Module.optimizationBailout` deprecated
 - `Module.exportsArgument` removed
 - `Module.optional` deprecated
@@ -1357,11 +1361,11 @@ These dependencies are cheaper to process and webpack uses them when possible
 - `Module.removeReason` removed
 - `Module.rewriteChunkInReasons` removed
 - `Module.isUsed` removed
-    - MIGRATION: Use `isModuleUsed`, `isExportUsed` and `getUsedName` instead
+    - __MIGRATION__: Use `isModuleUsed`, `isExportUsed` and `getUsedName` instead
 - `Module.updateHash` signature changed
 - `Module.sortItems` removed
 - `Module.unbuild` removed
-    - MIGRATION: Use `invalidateBuild` instead
+    - __MIGRATION__: Use `invalidateBuild` instead
 - `Module.getSourceTypes` added
 - `Module.getRuntimeRequirements` added
 - `Module.size` signature changed
@@ -1371,7 +1375,7 @@ These dependencies are cheaper to process and webpack uses them when possible
 - `ModuleTemplate.hooks` signatures changed
 - `ModuleTemplate.render` signature changed
 - `Compiler.dependencies` removed
-    - MIGRATION: Use `MultiCompiler.setDependencies` instead
+    - __MIGRATION__: Use `MultiCompiler.setDependencies` instead
 - `MultiModule` removed
 - `MultiModuleFactory` removed
 - `NormalModuleFactory.fileDependencies`, `NormalModuleFactory.contextDependencies` and `NormalModuleFactory.missingDependencies` are now LazySets
@@ -1385,10 +1389,10 @@ These dependencies are cheaper to process and webpack uses them when possible
 - `ExternalModule.external` removed
 - `HarmonyInitDependency` removed
 - `Dependency.getInitFragments` deprecated
-    - MIGRATION: Use `apply` `initFragements` instead
+    - __MIGRATION__: Use `apply` `initFragements` instead
 - DependencyReference now takes a function to a module instead of a Module
 - HarmonyImportSpecifierDependency.redirectedId removed
-    - MIGRATION: Use `setId` instead
+    - __MIGRATION__: Use `setId` instead
 - acorn 5 -> 7
 - Testing
     - HotTestCases now runs for multiple targets `async-node` `node` `web` `webworker`
