@@ -23,7 +23,7 @@ const SponsorsPlaceholder = () => (
     <h2>Latest Sponsors</h2>
     <PlaceholderComponent />
 
-    <h2 id="sponsors">Platinum Sponsors</h2>
+    <h2>Platinum Sponsors</h2>
     <PlaceholderComponent />
 
     <h2>Gold Sponsors</h2>
@@ -42,6 +42,7 @@ const SponsorsPlaceholder = () => (
 
 const Splash = () => {
   const [showSponsors, setShowSponsors] = useState(false);
+  const [supportType, setSupportType] = useState(() => Math.random() < 0.33 ? 'monthly' : 'total');
   useEffect(() => {
     if(isClient) setShowSponsors(true);
   }, []);
@@ -62,7 +63,7 @@ const Splash = () => {
       <div className="splash__section page__content">
         <Container>
           <Markdown>
-            <h1>Support the Team</h1>
+            <h1 id="sponsors">Support the Team</h1>
 
             <p>
               Through contributions, donations, and sponsorship, you allow webpack to thrive. Your
@@ -72,23 +73,19 @@ const Splash = () => {
 
             { showSponsors ? (
               <React.Suspense fallback={<SponsorsPlaceholder />}>
-                <h2>Latest Sponsors</h2>
-                <Support rank="latest" />
+                <p><input type="checkbox" checked={supportType === 'monthly'} onChange={e => setSupportType(e.target.checked ? 'monthly' : 'total')} /> Show sponsors by their average monthly amount of sponsoring in the last year.</p>
 
-                <h2 id="sponsors">Platinum Sponsors</h2>
-                <Support rank="platinum" />
+                <Support type={supportType} rank="latest" />
 
-                <h2>Gold Sponsors</h2>
-                <Support rank="gold" />
+                <Support type={supportType} rank="platinum" />
 
-                <h2>Silver Sponsors</h2>
-                <Support rank="silver" />
+                <Support type={supportType} rank="gold" />
 
-                <h2>Bronze Sponsors</h2>
-                <Support rank="bronze" />
+                <Support type={supportType} rank="silver" />
 
-                <h2>Backers</h2>
-                <Support rank="backer" />
+                <Support type={supportType} rank="bronze" />
+
+                <Support type={supportType} rank="backer" />
               </React.Suspense>
             ) : (
               <SponsorsPlaceholder />
