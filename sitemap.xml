@@ -220,10 +220,10 @@
         <loc>https://webpack.js.org/contribute/plugin-patterns</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/contribute/release-process</loc>
+        <loc>https://webpack.js.org/contribute/writers-guide</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/contribute/writers-guide</loc>
+        <loc>https://webpack.js.org/contribute/release-process</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/writing-a-loader</loc>
@@ -296,6 +296,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/development-vagrant</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/ecma-script-modules</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/entry-advanced</loc>
