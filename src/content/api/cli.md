@@ -224,7 +224,6 @@ __List all of the commands and flags available on the cli__
 
 ```bash
 webpack --help
-webpack -h
 ```
 
 __Show help for a single command or flag__
