@@ -43,6 +43,9 @@ module.exports = (env = {}) => ({
     },
     cacheDirectory: path.resolve(__dirname, '.cache/webpack')
   },
+  infrastructureLogging: process.env.CI ? {
+    level: 'verbose'
+  } : {},
   resolve: {
     extensions: ['.js', '.jsx', '.scss'],
     fallback: {
