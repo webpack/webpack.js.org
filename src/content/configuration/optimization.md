@@ -172,40 +172,6 @@ module.exports = {
 
 W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
 
-## `optimization.namedModules`
-
-`boolean = false`
-
-Tells webpack to use readable module identifiers for better debugging. When `optimization.namedModules` is not set in webpack config, webpack will enable it by default for [mode](/configuration/mode/) `development` and disable for [mode](/configuration/mode/) `production`.
-
-__webpack.config.js__
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    namedModules: true
-  }
-};
-```
-
-## `optimization.namedChunks`
-
-`boolean = false`
-
-Tells webpack to use readable chunk identifiers for better debugging. This option is enabled by default for [mode](/configuration/mode/) `development` and disabled for [mode](/configuration/mode/) `production` if no option is provided in webpack config.
-
-__webpack.config.js__
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    namedChunks: true
-  }
-};
-```
-
 ## `optimization.moduleIds`
 
 `boolean = false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
@@ -260,8 +226,6 @@ W> `moduleIds: total-size` has been removed in webpack 5.
 
 Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are couple of defaults for `optimization.chunkIds`:
 
-- if [`optimization.occurrenceOrder`](#optimizationoccurrenceorder) is enabled `optimization.chunkIds` is set to `'total-size'`
-- Disregarding previous if, if [`optimization.namedChunks`](#optimizationnamedchunks) is enabled `optimization.chunkIds` is set to `'named'`
 - Also if the environment is development then `optimization.chunkIds` is set to `'named'`, while in production it is set to `'deterministic'`
 - if none of the above, `optimization.chunkIds` will be defaulted to `'natural'`
 
@@ -271,7 +235,7 @@ Option                  | Description
 ----------------------- | -----------------------
 `'natural'`             | Numeric ids in order of usage.
 `'named'`               | Readable ids for better debugging.
-`'deterministic'`       | Short numeric ids which will not be changing between compilation. Good for long term caching. Enable by default for production mode.
+`'deterministic'`       | Short numeric ids which will not be changing between compilation. Good for long term caching. Enabled by default for production mode.
 `'size'`                | Numeric ids focused on minimal initial download size.
 `'total-size'`          | numeric ids focused on minimal total download size.
 
@@ -327,7 +291,7 @@ module.exports = {
 };
 ```
 
-T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` defaults to `false`. 
+T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` defaults to `false`.
 
 ## `optimization.mangleWasmImports`
 
@@ -549,11 +513,20 @@ module.exports = {
 
 ## `optimization.mangleExports`
 
-`boolean`
+`boolean` `string: 'deterministic' | 'size'`
 
 `optimization.mangleExports` allows to control export mangling.
 
-By default `optimization.mangleExports` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+By default `optimization.mangleExports: 'deterministic'` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+
+The following values are supported:
+
+Option                  | Description
+----------------------- | -----------------------
+`'size'`                | Short names - usually a single char - focused on minimal download size.
+`'deterministic'`       | Short names - usually two chars - which will not change when adding or removing exports. Good for long term caching.
+`true`                  | Same as `'deterministic'`
+`false`                 | Keep original name. Good for readablility and debugging.
 
 __webpack.config.js__
 
