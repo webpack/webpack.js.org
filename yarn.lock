@@ -14201,10 +14201,10 @@ webpack-sources@^2.0.1:
     react-textarea-autosize "^5.2.1"
     uuid "^3.1.0"
 
-webpack@^5.0.0-rc.4:
-  version "5.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.0.0-rc.4.tgz#713b5431414610a3719252f07c78a64acc31470a"
-  integrity sha512-xR10QF2UkPAOsy1Eqm59QPX1C5huX3+u9N3KIdpSxtKhyz7+w/eyL8KKDLqfPaOAcp6Lou7oaO1Nd1t4qv9e5w==
+webpack@^5.0.0-rc.5:
+  version "5.0.0-rc.5"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.0.0-rc.5.tgz#0414565638ffdd977ac89be5c8a3dbbe222930c4"
+  integrity sha512-I0VE47M678nRbHzBfExSLHZFYrT7zbixM9sUU2f9/cRybMsEPHLXyZepRp3RGPBfjCjR29IsysN5a80dCCJ8aQ==
   dependencies:
     "@types/eslint-scope" "^3.7.0"
     "@types/estree" "^0.0.45"
