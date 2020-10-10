@@ -505,7 +505,7 @@ module.exports = {
 
 T> Note that [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin/) is required to fully enable HMR. If `webpack` or `webpack-dev-server` are launched with the `--hot` option, this plugin will be added automatically, so you may not need to add this to your `webpack.config.js`. See the [HMR concepts page](/concepts/hot-module-replacement/) for more information.
 
-When set to  `'only'`, HMR will work without page refresh as a fallback when build errors.
+When set to `'only'`, HMR will ignore any update that would lead to a full page refresh and only applies updates that can cleanly integrated.
 
 
 ## `devServer.http2`
@@ -1644,7 +1644,7 @@ module.exports = {
 };
 ```
 
-T> It is possible to set any Node.js flags via `NODE_OPTIONS`, for example, to configure `HTTP_MAX_HEADER_SIZE`: 
+T> It is possible to set any Node.js flags via `NODE_OPTIONS`, for example, to configure `HTTP_MAX_HEADER_SIZE`:
 
 __package.json__
 
