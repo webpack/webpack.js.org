@@ -127,6 +127,7 @@ The names of the output files are affected by the two fields in the config:
 
 - [`output.filename`](/configuration/output/#outputfilename) - for `initial` chunk files
 - [`output.chunkFilename`](/configuration/output/#outputchunkfilename) - for `non-initial` chunk files
+- In some cases chunks are used `initial` and `non-initial`. In those cases `output.filename` is used.
 
 A [few placeholders](/configuration/output/#template-strings) are available in these fields. Most often:
 

@@ -259,11 +259,13 @@ Running webpack with following `splitChunks` configuration would also output a c
 
 W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
 
-### `splitChunks.automaticNamePrefix`
+### `splitChunks.idHint`
+
+#### `splitChunks.cacheGroups{cacheGroup}.idHint`
 
 `string = ''`
 
-Sets the name prefix for created chunks.
+Sets the id prefix for created chunks. It affects `chunkIds: 'named'`.
 
 ```js
 module.exports = {
@@ -273,7 +275,7 @@ module.exports = {
       cacheGroups: {
         react: {
           // ...
-          automaticNamePrefix: 'react-chunks-prefix'
+          idHint: 'react-chunks-prefix'
         }
       }
     }
@@ -282,6 +284,15 @@ module.exports = {
 ```
 
 T>  The option is only allowed within cacheGroups.
+
+### `splitChunks.usedExports`
+
+#### `splitChunks.cacheGroups{cacheGroup}.usedExports`
+
+`boolean = true`
+
+Figure out which exports are used by modules to mangle export names, omit unused exports and generate more efficient code.
+When it is `true`: analyse used exports for each runtime, when it is `"global"`: analyse exports globally for all runtimes combined).
 
 ### `splitChunks.cacheGroups`
 

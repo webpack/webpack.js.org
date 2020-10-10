@@ -2,7 +2,7 @@ const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
-const mkdirp = promisify(require('mkdirp'));
+const mkdirp = require('mkdirp');
 const request = require('request-promise');
 
 const yamlHeadmatter = require('./yaml-headmatter.js');
