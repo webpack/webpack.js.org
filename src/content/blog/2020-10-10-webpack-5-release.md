@@ -6,13 +6,13 @@ contributors:
 ---
 
 webpack 4 was released in February 2018.
-Since then we shipped a lot features without breaking changes.
+Since then we shipped a lot of features without breaking changes.
 We know that people dislike major changes with breaking changes.
-Especially with webpack, which people usually only touch twice a year and the remaining time it "just works".
+Especially with webpack, which people usually only touch twice a year, and the remaining time it "just works".
 But shipping features without breaking changes also has a cost:
 We can't do major API or architectural improvements.
 
-So from time to time there is a point where the difficulties pile up and we are forced to do breaking changes to not mess everything up.
+So from time to time, there is a point where the difficulties pile up and we are forced to do breaking changes to not mess everything up.
 That's the time for a new major version.
 So webpack 5 contains these architectural improvements and the features that where not possible to implement without them.
 
@@ -24,7 +24,7 @@ In the next days there will probably a lot bugfixes. Features will come later.
 
 So what does the release mean?
 It means we finished doing breaking changes.
-Many refactorings has been done to up-level the architecture and create a good base for future features (and current features).
+Many refactorings have been done to up-level the architecture and create a good base for future features (and current features).
 
 So when is the time to upgrade?
 It depends. There is a good chance that upgrading fails and you would need to give it a second or 3rd try.
@@ -34,7 +34,7 @@ We are eager to fix those problems. Someone has to start and you would be one of
 ## Sponsoring situation
 
 webpack is fully based upon [sponsoring](https://opencollective.com/webpack).
-It's not tied to (and payed by) a big company like some other Open Source projects.
+It's not tied to (and paid by) a big company like some other Open Source projects.
 99% of the earnings from sponsoring are distributed towards contributors and maintainers based on the contributions they do.
 We believe in investing the money towards making webpack better.
 
@@ -43,8 +43,8 @@ Webpack is suffering under these circumstances too (like many other companies an
 
 We were never able to pay our contributors the amount we think they deserve, but now we only have half of the money available, so we need to make a more serious cut.
 Until the situation improves we will only pay contributors and maintainers the first 10 days of each month.
-The remaining days they could work voluntary, paid by their employer, work on something else or take some days off.
-This allows us to pay the work in the first 10 days more equivalent to the invested time.
+The remaining days they could work voluntarily, paid by their employer, work on something else, or take some days off.
+This allows us to pay for their work in the first 10 days more equivalent to the invested time.
 
 The biggest "Thank You" goes to [trivago](https://tech.trivago.com/opensource) which has been sponsoring webpack a huge amount for the last 3 years.
 Sadly they are unable to continue their sponsorship this year, as they have been hit hard by Covid-19.
@@ -59,7 +59,7 @@ This release focus on the following:
 - We try to improve build performance with Persistent Caching.
 - We try to improve Long Term Caching with better algorithms and defaults.
 - We try to improve bundle size with better Tree Shaking and Code Generation.
-- We try to improve compatibility to the web platform.
+- We try to improve compatibility with the web platform.
 - We try to clean up internal structures that were left in a weird state while implementing features in v4 without introducing any breaking changes.
 - We try to prepare for future features by introducing breaking changes now, allowing us to stay on v5 for as long as possible.
 
@@ -95,7 +95,7 @@ In the early days, webpack's aim was to allow running most Node.js modules in th
 
 While this makes using modules written for Node.js easy, it adds these huge polyfills to the bundle. In many cases these polyfills are unnecessary.
 
-webpack 5 stops automatically polyfilling these core modules and focus on frontend-compatible modules. Our goal it to improve compatibility with the web platform, where Node.js core modules are not available.
+webpack 5 stops automatically polyfilling these core modules and focus on frontend-compatible modules. Our goal is to improve compatibility with the web platform, where Node.js core modules are not available.
 
 MIGRATION:
 
