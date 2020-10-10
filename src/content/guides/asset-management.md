@@ -10,11 +10,12 @@ contributors:
   - EugeneHlushko
   - AnayaDesign
   - wizardofhogwarts
+  - astonizer
 ---
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
 
-Prior to webpack, front-end developers would use tools like grunt and gulp to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. The same idea was used for JavaScript modules, but tools like webpack will __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is great because every module now _explicitly states its dependencies_ and we'll avoid bundling modules that aren't in use.
+Prior to webpack, front-end developers would use tools like [grunt](https://gruntjs.com/) and [gulp](https://gulpjs.com/) to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. The same idea was used for JavaScript modules, but tools like webpack will __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is great because every module now _explicitly states its dependencies_ and we'll avoid bundling modules that aren't in use.
 
 One of the coolest webpack features is that you can also _include any other type of file_, besides JavaScript, for which there is a loader. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) can be applied to everything used in building a website or web app. Let's start with CSS, as you may already be familiar with that setup.
 
@@ -86,6 +87,10 @@ __webpack.config.js__
 +   },
   };
 ```
+
+Module loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order. The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, webpack expects JavaScript to be returned by the last loader in the chain. 
+
+The above order of loaders should be maintained: 'style-loader' comes first and followed by 'css-loader'. If this convention is not followed, webpack is likely to throw errors.
 
 T> webpack uses a regular expression to determine which files it should look for and serve to a specific loader. In this case, any file that ends with `.css` will be served to the `style-loader` and the `css-loader`.
 
@@ -434,6 +439,7 @@ __project__
     |- index.html
   |- /src
 +   |- data.xml
++   |- data.csv
     |- my-font.woff
     |- my-font.woff2
     |- icon.png
@@ -454,6 +460,15 @@ __src/data.xml__
 </note>
 ```
 
+__src/data.csv__
+
+``` csv
+to,from,heading,body
+Mary,John,Reminder,Call Cindy on Tuesday
+Zoe,Bill,Reminder,Buy orange juice
+Autumn,Lindsey,Letter,I miss you
+```
+
 Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import, will contain parsed JSON for easy consumption:
 
 __src/index.js__
@@ -463,6 +478,7 @@ __src/index.js__
   import './style.css';
   import Icon from './icon.png';
 + import Data from './data.xml';
++ import Notes from './data.csv';
 
   function component() {
     const element = document.createElement('div');
@@ -478,6 +494,7 @@ __src/index.js__
     element.appendChild(myIcon);
 
 +   console.log(Data);
++   console.log(Notes);
 
     return element;
   }
@@ -499,6 +516,113 @@ import data from './data.json';
 import { foo } from './data.json';
 ```
 
+### Customize parser of JSON modules
+
+It's possible to import any `toml`, `yaml` or `json5` files as a JSON module by using a [custom parser](/configuration/module/#ruleparserparse) instead of a specific webpack loader.
+
+Let's say you have a `data.toml`, a `data.yaml` and a `data.json5` files under `src` folder:
+
+__src/data.toml__
+
+```toml
+title = "TOML Example"
+
+[owner]
+name = "Tom Preston-Werner"
+organization = "GitHub"
+bio = "GitHub Cofounder & CEO\nLikes tater tots and beer."
+dob = 1979-05-27T07:32:00Z
+```
+
+__src/data.yaml__
+
+```yaml
+title: YAML Example
+owner:
+  name: Tom Preston-Werner
+  organization: GitHub
+  bio: |-
+    GitHub Cofounder & CEO
+    Likes tater tots and beer.
+  dob: 1979-05-27T07:32:00.000Z
+```
+
+__src/data.json5__
+
+```json5
+{
+  // comment
+  title: "JSON5 Example",
+  owner: {
+    name: "Tom Preston-Werner",
+    organization: "GitHub",
+    bio: "GitHub Cofounder & CEO\n\
+Likes tater tots and beer.",
+    dob: "1979-05-27T07:32:00.000Z"
+  }
+}
+```
+
+Install `toml`, `yamljs` and `json5` packages first:
+
+```bash
+npm install toml yamljs json5 --save-dev
+```
+
+And configure them in your webpack configuration:
+
+__webpack.config.js__
+
+```javascript
+const toml = require('toml'); 
+const yaml = require('yamljs');
+const json5 = require('json5');
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /\.toml$/,
+        type: 'json',
+        parser: {
+          parse: toml.parse
+        }
+      },
+      {
+        test: /\.yaml$/,
+        type: 'json',
+        parser: {
+          parse: yaml.parse
+        }
+      },
+      {
+        test: /\.json5$/,
+        type: 'json',
+        parser: {
+          parse: json5.parse
+        }
+      }
+    ]
+  }
+};
+```
+
+__src/index.js__
+
+```javascript
+import toml from './data.toml';
+import yaml from './data.yaml';
+import json from './data.json5';
+
+console.log(toml.title); // output `TOML Example`
+console.log(toml.owner.name); // output `Tom Preston-Werner`
+
+console.log(yaml.title); // output `YAML Example`
+console.log(yaml.owner.name); // output `Tom Preston-Werner`
+
+console.log(json.title); // output `JSON5 Example`
+console.log(json.owner.name); // output `Tom Preston-Werner`
+```
 
 ## Global Assets
 
@@ -534,6 +658,7 @@ __project__
     |- index.html
   |- /src
 -   |- data.xml
+-   |- data.csv
 -   |- my-font.woff
 -   |- my-font.woff2
 -   |- icon.png
@@ -598,6 +723,7 @@ __src/index.js__
 - import './style.css';
 - import Icon from './icon.png';
 - import Data from './data.xml';
+- import Notes from './data.csv';
 -
   function component() {
     const element = document.createElement('div');
@@ -613,6 +739,7 @@ __src/index.js__
 -   element.appendChild(myIcon);
 -
 -   console.log(Data);
+-   console.log(Notes);
 
     return element;
   }

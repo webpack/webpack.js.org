@@ -70,7 +70,7 @@ export default locals => {
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
           <meta name="apple-mobile-web-app-title" content="webpack" />
-          <link rel="apple-touch-icon-precomposed" href="/icon_180x180.png" />
+          <link rel="apple-touch-icon" href="/icon_180x180.png" />
           <link rel="mask-icon" href={ Logo } color="#465e69" />
           <meta name="msapplication-TileImage" content="/icon_150x150.png" />
           <meta name="msapplication-TileColor" content="#465e69" />

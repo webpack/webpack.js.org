@@ -1,9 +1,11 @@
 ---
 title: Under The Hood
-sort: 13
+sort: 14
 contributors:
   - smelukov
   - EugeneHlushko
+  - chenxsan
+  - amirsaeed671
 ---
 
 > This section describes webpack internals and can be useful for plugin developers
@@ -80,7 +82,7 @@ module.exports = {
 };
 ```
 
-__./src/index.js__
+__./src/index.jsx__
 
 ```js
 import React from 'react';
@@ -125,9 +127,10 @@ The names of the output files are affected by the two fields in the config:
 
 - [`output.filename`](/configuration/output/#outputfilename) - for `initial` chunk files
 - [`output.chunkFilename`](/configuration/output/#outputchunkfilename) - for `non-initial` chunk files
+- In some cases chunks are used `initial` and `non-initial`. In those cases `output.filename` is used.
 
 A [few placeholders](/configuration/output/#template-strings) are available in these fields. Most often:
 
 - `[id]` - chunk id (e.g. `[id].js` -> `485.js`)
-- `[name]` - chunk name (e.g. `[name].js` -> `app.js`). If a chunk has no name, then its id will used
+- `[name]` - chunk name (e.g. `[name].js` -> `app.js`). If a chunk has no name, then its id will be used
 - `[contenthash]` - md4-hash of the output file content (e.g. `[contenthash].js` -> `4ea6ff1de66c537eb9b2.js`)

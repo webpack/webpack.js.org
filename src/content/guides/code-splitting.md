@@ -30,6 +30,7 @@ contributors:
   - wizardofhogwarts
   - maximilianschmelzer
   - smelukov
+  - chenxsan
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -140,6 +141,13 @@ The [`dependOn` option](/configuration/entry-context/#dependencies) allows to sh
   };
 ```
 
+#### `optimization.runtimeChunk`
+
+`optimization.runtimeChunk: 'single'` is needed when multiple entry points are being used on a single HTML page.
+
+Using multiple entry points per page should be avoided when possible in favor of an entry point with multiple imports: `entry: { page: ['./analytics', './app'] }`. This results in a better optimization and consistent execution order when using `async` script tags.
+
+T> Multiple entry points per page could be used in scenarios where HTML is generated in a dynamic matter, e. g. when components on page are unknown at compile-time and HTML page is composed dynamically depending on the data.
 
 ### `SplitChunksPlugin`
 
@@ -186,8 +194,6 @@ Entrypoint another = vendors~another~index.bundle.js another.bundle.js
 Here are some other useful plugins and loaders provided by the community for splitting code:
 
 - [`mini-css-extract-plugin`](/plugins/mini-css-extract-plugin): Useful for splitting CSS out from the main application.
-- [`bundle-loader`](/loaders/bundle-loader): Used to split code and lazy load the resulting bundles.
-- [`promise-loader`](https://github.com/gaearon/promise-loader): Similar to the `bundle-loader` but uses promises.
 
 
 ## Dynamic Imports
@@ -211,8 +217,6 @@ __webpack.config.js__
     },
     output: {
       filename: '[name].bundle.js',
-+     chunkFilename: '[name].bundle.js',
-      publicPath: 'dist/',
       path: path.resolve(__dirname, 'dist'),
     },
 -   optimization: {
@@ -223,7 +227,7 @@ __webpack.config.js__
   };
 ```
 
-Note the use of `chunkFilename`, which determines the name of non-entry chunk files. For more information on `chunkFilename`, see [output documentation](/configuration/output/#outputchunkfilename). We'll also update our project to remove the now unused files:
+We'll also update our project to remove the now unused files:
 
 __project__
 
@@ -251,7 +255,7 @@ __src/index.js__
 -
 -   // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
++   return import('lodash').then(({ default: _ }) => {
 +     const element = document.createElement('div');
 +
 +     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -269,7 +273,7 @@ __src/index.js__
 
 The reason we need `default` is that since webpack 4, when importing a CommonJS module, the import will no longer resolve to the value of `module.exports`, it will instead create an artificial namespace object for the CommonJS module. For more information on the reason behind this, read [webpack 4: import() and CommonJs](https://medium.com/webpack/webpack-4-import-and-commonjs-d619d626b655)
 
-Note the use of `webpackChunkName` in the comment. This will cause our separate bundle to be named `lodash.bundle.js` instead of just `[id].bundle.js`. For more information on `webpackChunkName` and the other available options, see the [`import()` documentation](/api/module-methods/#import-1). Let's run webpack to see `lodash` separated out to a separate bundle:
+Let's run webpack to see `lodash` separated out to a separate bundle:
 
 ``` bash
 ...
@@ -287,7 +291,7 @@ __src/index.js__
 ``` diff
 - function getComponent() {
 + async function getComponent() {
--   return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
+-   return import('lodash').then(({ default: _ }) => {
 -     const element = document.createElement('div');
 -
 -     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -296,7 +300,7 @@ __src/index.js__
 -
 -   }).catch(error => 'An error occurred while loading the component');
 +   const element = document.createElement('div');
-+   const { default: _ } = await import(/* webpackChunkName: "lodash" */ 'lodash');
++   const { default: _ } = await import('lodash');
 +
 +   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +
@@ -318,7 +322,7 @@ webpack 4.6.0+ adds support for prefetching and preloading.
 Using these inline directives while declaring your imports allows webpack to output “Resource Hint” which tells the browser that for:
 
 - prefetch: resource is probably needed for some navigation in the future
-- preload: resource might be needed during the current navigation
+- preload: resource will also be needed during the current navigation
 
 Simple prefetch example can be having a `HomePage` component, which renders a `LoginButton` component which then on demand loads a `LoginModal` component after being clicked.
 

@@ -1,6 +1,6 @@
 ---
 title: Public Path
-sort: 22
+sort: 23
 contributors:
   - rafaelrinaldi
   - chrisVillanueva

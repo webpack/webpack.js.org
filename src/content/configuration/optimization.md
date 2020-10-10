@@ -12,6 +12,7 @@ contributors:
   - anikethsaha
   - snitin315
   - pixel-ray
+  - chenxsan
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -22,11 +23,9 @@ Since version 4 webpack runs optimizations for you depending on the chosen  [`mo
 
 ## `optimization.minimize`
 
-`boolean`
+`boolean = true`
 
 Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
-
-This is `true` by default in `production` mode.
 
 __webpack.config.js__
 
@@ -84,6 +83,16 @@ module.exports = {
 };
 ```
 
+`'...'` can be used in `optimization.minimizer` to access the defaults.
+
+```js
+module.exports = {
+  optimization: {
+    minimizer: [new CssMinimizer(), '...'],
+  }
+};
+```
+
 ## `optimization.splitChunks`
 
 `object`
@@ -94,7 +103,7 @@ By default webpack v4+ provides new common chunks strategies out of the box for 
 
 `object` `string` `boolean`
 
-Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk to each entrypoint containing only the runtime. This setting is an alias for:
+Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk containing only the runtime to each entrypoint. This setting is an alias for:
 
 __webpack.config.js__
 
@@ -144,11 +153,11 @@ module.exports = {
 };
 ```
 
-## `optimization.noEmitOnErrors`
+## `optimization.emitOnErrors`
 
-`boolean`
+`boolean = false`
 
-Use the `optimization.noEmitOnErrors` to skip the emitting phase whenever there are errors while compiling. This ensures that no erroring assets are emitted. The `emitted` flag in the stats is `false` for all assets.
+Use the `optimization.emitOnErrors` to emit assets whenever there are errors while compiling. This ensures that erroring assets are emitted. Critical errors are emitted into the generated code and will cause errors at runtime.
 
 __webpack.config.js__
 
@@ -156,46 +165,12 @@ __webpack.config.js__
 module.exports = {
   //...
   optimization: {
-    noEmitOnErrors: true
+    emitOnErrors: true
   }
 };
 ```
 
 W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
-
-## `optimization.namedModules`
-
-`boolean = false`
-
-Tells webpack to use readable module identifiers for better debugging. When `optimization.namedModules` is not set in webpack config, webpack will enable it by default for [mode](/configuration/mode/) `development` and disable for [mode](/configuration/mode/) `production`.
-
-__webpack.config.js__
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    namedModules: true
-  }
-};
-```
-
-## `optimization.namedChunks`
-
-`boolean = false`
-
-Tells webpack to use readable chunk identifiers for better debugging. This option is enabled by default for [mode](/configuration/mode/) `development` and disabled for [mode](/configuration/mode/) `production` if no option is provided in webpack config.
-
-__webpack.config.js__
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    namedChunks: true
-  }
-};
-```
 
 ## `optimization.moduleIds`
 
@@ -251,8 +226,6 @@ W> `moduleIds: total-size` has been removed in webpack 5.
 
 Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are couple of defaults for `optimization.chunkIds`:
 
-- if [`optimization.occurrenceOrder`](#optimizationoccurrenceorder) is enabled `optimization.chunkIds` is set to `'total-size'`
-- Disregarding previous if, if [`optimization.namedChunks`](#optimizationnamedchunks) is enabled `optimization.chunkIds` is set to `'named'`
 - Also if the environment is development then `optimization.chunkIds` is set to `'named'`, while in production it is set to `'deterministic'`
 - if none of the above, `optimization.chunkIds` will be defaulted to `'natural'`
 
@@ -262,7 +235,7 @@ Option                  | Description
 ----------------------- | -----------------------
 `'natural'`             | Numeric ids in order of usage.
 `'named'`               | Readable ids for better debugging.
-`'deterministic'`       | Short numeric ids which will not be changing between compilation. Good for long term caching. Enable by default for production mode.
+`'deterministic'`       | Short numeric ids which will not be changing between compilation. Good for long term caching. Enabled by default for production mode.
 `'size'`                | Numeric ids focused on minimal initial download size.
 `'total-size'`          | numeric ids focused on minimal total download size.
 
@@ -317,6 +290,8 @@ module.exports = {
   }
 };
 ```
+
+T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` defaults to `false`.
 
 ## `optimization.mangleWasmImports`
 
@@ -441,7 +416,7 @@ module.exports = {
 
 ## `optimization.usedExports`
 
-`boolean = true`
+`boolean = true`  `string: 'global'`
 
 Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimizationoccurrenceorder). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
 Dead code elimination in minimizers will benefit from this and can remove unused exports.
@@ -453,6 +428,17 @@ module.exports = {
   //...
   optimization: {
     usedExports: false
+  }
+};
+```
+
+To opt-out from used exports analysis per runtime:
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    usedExports: 'global'
   }
 };
 ```
@@ -527,11 +513,20 @@ module.exports = {
 
 ## `optimization.mangleExports`
 
-`boolean`
+`boolean` `string: 'deterministic' | 'size'`
 
 `optimization.mangleExports` allows to control export mangling.
 
-By default `optimization.mangleExports` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+By default `optimization.mangleExports: 'deterministic'` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+
+The following values are supported:
+
+Option                  | Description
+----------------------- | -----------------------
+`'size'`                | Short names - usually a single char - focused on minimal download size.
+`'deterministic'`       | Short names - usually two chars - which will not change when adding or removing exports. Good for long term caching.
+`true`                  | Same as `'deterministic'`
+`false`                 | Keep original name. Good for readablility and debugging.
 
 __webpack.config.js__
 
@@ -557,6 +552,23 @@ module.exports = {
   //...
   optimization: {
     innerGraph: false
+  }
+};
+```
+
+## `optimization.realContentHash`
+
+`boolean = true`
+
+Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    realContentHash: false
   }
 };
 ```

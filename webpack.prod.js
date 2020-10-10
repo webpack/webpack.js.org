@@ -1,8 +1,7 @@
 // Import External Dependencies
-const merge = require('webpack-merge');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserJSPlugin = require('terser-webpack-plugin');
-const OfflinePlugin = require('offline-plugin');
+const { merge } = require('webpack-merge');
+const OptimizeCSSAssetsPlugin = require('css-minimizer-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 // Load Common Configuration
 const common = require('./webpack.common.js');
@@ -13,25 +12,70 @@ const hashedAssetsBySSGRun = require('./src/utilities/find-files-in-dist')(['.cs
 module.exports = env => merge(common(env), {
   mode: 'production',
   target: 'web',
+  cache: {
+    buildDependencies: {
+      config: [__filename],
+    }
+  },
+  entry: {
+    index: {
+      import: './index.jsx',
+      filename: 'index.bundle.js'
+    }
+  },
+  output: {
+    filename: '[name].[contenthash].js'
+  },
   optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /node_modules/,
+          chunks: 'initial',
+          enforce: true,
+          filename: 'vendor.bundle.js'
+        }
+      }
+    },
     minimizer: [
-      new TerserJSPlugin({}),
+      '...',
       new OptimizeCSSAssetsPlugin({})
     ]
   },
   plugins: [
-    new OfflinePlugin({
-      autoUpdate: true,
-      publicPath: '/',
-      appShell: '/app-shell/',
-      responseStrategy: 'network-first',
-      // make sure to cache homepage and app shell as app shell for the rest of the pages.
-      // externals also re-validate on sw update (releases)
-      externals: ['/app-shell/', '/', '/manifest.json', ...hashedAssetsBySSGRun],
-      excludes: ['/icon_*.png', '/**/printable/', '/robots.txt'],
-      AppCache: {
-        publicPath: '/'
-      }
+    new GenerateSW({
+      skipWaiting: true,
+      clientsClaim: true,
+      swDest: 'sw.js',
+      exclude: [/icon_.*\.png/, /printable/, '/robots.txt', ...hashedAssetsBySSGRun],
+      additionalManifestEntries: [
+        {
+          url: '/app-shell/index.html',
+          revision: new Date().getTime().toString() // dirty hack
+        },
+        {
+          url: '/manifest.json',
+          revision: '1'
+        },
+        ...hashedAssetsBySSGRun.map(url => ({
+          url: '/' + url, // prepend the publicPath
+          revision: null
+        }))
+      ],
+      navigateFallback: '/app-shell/index.html',
+      runtimeCaching: [
+        {
+          urlPattern: /https:\/\/fonts\.gstatic\.com/, // cache google fonts for one year
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'google-fonts',
+            expiration: {
+              maxAgeSeconds: 60 * 60 * 24 * 365,
+              maxEntries: 30
+            }
+          }
+        }
+      ],
     })
   ]
 });

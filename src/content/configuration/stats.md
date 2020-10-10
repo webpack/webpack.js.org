@@ -14,6 +14,7 @@ contributors:
   - grgur
   - anshumanv
   - pixel-ray
+  - snitin315
 ---
 
 `object` `string`
@@ -144,6 +145,171 @@ module.exports = {
 };
 ```
 
+### `stats.assetsSpace`
+
+`number = 15`
+
+Tells `stats` how many items of assets should be displayed (groups will be collapsed to fit this space).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    assetsSpace: 15
+  }
+};
+```
+
+### `stats.modulesSpace`
+
+`number = 15`
+
+Tells `stats` how many items of modules should be displayed (groups will be collapsed to fit this space).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    modulesSpace: 15
+  }
+};
+```
+
+### `stats.chunkModulesSpace`
+
+`number = 10`
+
+Tells `stats` how many items of chunk modules should be displayed (groups will be collapsed to fit this space).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkModulesSpace: 15
+  }
+};
+```
+
+### `stats.nestedModulesSpace`
+
+`number = 10`
+
+Tells `stats` how many items of nested modules should be displayed (groups will be collapsed to fit this space).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    nestedModulesSpace: 15
+  }
+};
+```
+
+### `stats.cachedModules`
+
+`boolean = true`
+
+Tells `stats` whether to add information about cached (not built) modules.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    cachedModules: false
+  }
+};
+```
+
+### `stats.runtimeModules`
+
+`boolean = true`
+
+Tells `stats` whether to add information about runtime modules.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    runtimeModules: false
+  }
+};
+```
+
+### `stats.dependentModules`
+
+`boolean`
+
+Tells `stats` whether to show chunk modules that are dependencies of other modules of the chunk.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    dependentModules: false
+  }
+};
+```
+
+### `stats.groupAssetsByChunk`
+
+`boolean`
+
+Tells `stats` whether to group assets by how their are related to chunks.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupAssetsByChunk: false
+  }
+};
+```
+
+### `stats.groupAssetsByEmitStatus`
+
+`boolean`
+
+Tells `stats` whether to group assets by their status (emitted, compared for emit or cached).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupAssetsByEmitStatus: false
+  }
+};
+```
+
+### `stats.groupAssetsByInfo`
+
+`boolean`
+
+Tells `stats` whether to group assets by their asset info (immutable, development, hotModuleReplacement, etc).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupAssetsByInfo: false
+  }
+};
+```
+
+### `stats.groupModulesByAttributes`
+
+`boolean`
+
+Tells `stats` whether to group modules by their attributes (errors, warnings, assets, optional, orphan, or dependent).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupModulesByAttributes: false
+  }
+};
+```
+
 ### `stats.cachedAssets`
 
 `boolean = true`
@@ -215,21 +381,6 @@ module.exports = {
   //...
   stats: {
     chunkModules: false
-  }
-};
-```
-
-### `stats.chunkRootModules`
-
-`boolean = true`
-
-Tells `stats` whether to add information about the root modules of chunks. Applied if `stats.chunks = true`.
-
-```javascript
-module.exports = {
-  //...
-  stats: {
-    chunkRootModules: false
   }
 };
 ```
@@ -328,7 +479,7 @@ module.exports = {
 
 ### `stats.entrypoints`
 
-`boolean = true`
+`boolean = true` `string = 'auto'`
 
 Tells `stats` whether to display the entry points with the corresponding bundles.
 
@@ -340,6 +491,8 @@ module.exports = {
   }
 };
 ```
+
+When `stats.entrypoints` is set to  `'auto'`, webpack will decide automatically whether to display the entry points in the stats output.
 
 ### `stats.env`
 
@@ -542,21 +695,6 @@ module.exports = {
 };
 ```
 
-### `stats.maxModules`
-
-`number = 15`
-
-Set the maximum number of modules to be shown.
-
-```javascript
-module.exports = {
-  //...
-  stats: {
-    maxModules: 5
-  }
-};
-```
-
 ### `stats.modules`
 
 `boolean = true`
@@ -664,6 +802,36 @@ module.exports = {
 };
 ```
 
+### `stats.errorsCount`
+
+`boolean = true`
+
+Add errors count.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    errorsCount: false
+  }
+};
+```
+
+### `stats.warningsCount`
+
+`boolean = true`
+
+Add warnings count.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    warningsCount: false
+  }
+};
+```
+
 ### `stats.publicPath`
 
 `boolean = true`
@@ -690,6 +858,21 @@ module.exports = {
   //...
   stats: {
     reasons: false
+  }
+};
+```
+
+### `stats.relatedAssets`
+
+`boolean = false`
+
+Tells `stats` whether to add information about assets that are related to other assets (like SourceMaps for assets).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    relatedAssets: true
   }
 };
 ```
@@ -754,6 +937,51 @@ module.exports = {
 };
 ```
 
+### `stats.chunkGroupAuxiliary`
+
+`boolean = true`
+
+Display auxiliary assets in chunk groups.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupAuxiliary: false
+  }
+};
+```
+
+### `stats.chunkGroupChildren`
+
+`boolean = true`
+
+Display children of the chunk groups (e. g. prefetched, preloaded chunks and assets).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupChildren: false
+  }
+};
+```
+
+### `stats.chunkGroupMaxAssets`
+
+`number`
+
+Limit of assets displayed in chunk groups.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupMaxAssets: 5
+  }
+};
+```
+
 ### `stats.warnings`
 
 `boolean = true`
@@ -782,6 +1010,39 @@ module.exports = {
     warningsFilter: [
       'filter',
       /filter/,
+      (warning) => true
+    ]
+  }
+};
+```
+
+
+W> `stats.warningsFilter` is deprecated in favor of `[stats.ignoreWarnings](#statsignoreWarnings)`.
+
+### `stats.ignoreWarnings`
+
+`RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`
+
+Tells `stats` to ignore specific warnings. This can be done with a `RegExp`, a custom `function` to select warnings based on the raw warning instance which is getting `WebpackError` and `Compilation` as arguments and returns a `boolean`, an `object` with the following properties:
+
+- `file` : A RegExp to select the origin file for the warning.
+- `message` : A RegExp to select the warning message.
+- `module` : A RegExp to select the origin module for the warning.
+
+`stats.ignoreWarnings` can be an `array` of any of the above.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    ignoreWarnings: [
+      {
+        module: /module2\.js\?[34]/ // A RegExp
+      },
+      {
+        module: /[13]/,
+        message: /homepage/
+      },
       (warning) => true
     ]
   }

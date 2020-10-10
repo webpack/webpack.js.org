@@ -153,7 +153,7 @@ Be aware of the performance differences between the different `devtool` settings
 - The `cheap-source-map` variants are more performant if you can live with the slightly worse mapping quality.
 - Use a `eval-source-map` variant for incremental builds.
 
-=> In most cases, `cheap-module-eval-source-map` is the best option.
+=> In most cases, `eval-cheap-module-source-map` is the best option.
 
 
 ### Avoid Production Specific Tooling
@@ -161,8 +161,7 @@ Be aware of the performance differences between the different `devtool` settings
 Certain utilities, plugins, and loaders only make sense when building for production. For example, it usually doesn't make sense to minify and mangle your code with the `TerserPlugin` while in development. These tools should typically be excluded in development:
 
 - `TerserPlugin`
-- `ExtractTextPlugin`
-- `[hash]`/`[chunkhash]`
+- `[fullhash]`/`[chunkhash]`/`[contenthash]`
 - `AggressiveSplittingPlugin`
 - `AggressiveMergingPlugin`
 - `ModuleConcatenationPlugin`
@@ -170,15 +169,17 @@ Certain utilities, plugins, and loaders only make sense when building for produc
 
 ### Minimal Entry Chunk
 
-webpack only emits updated chunks to the filesystem. For some configuration options, (HMR, `[name]`/`[chunkhash]` in `output.chunkFilename`, `[hash]`) the entry chunk is invalidated in addition to the changed chunks.
+webpack only emits updated chunks to the filesystem. For some configuration options, (HMR, `[name]`/`[chunkhash]`/`[contenthash]` in `output.chunkFilename`, `[fullhash]`) the entry chunk is invalidated in addition to the changed chunks.
 
-Make sure the entry chunk is cheap to emit by keeping it small. The following code block extracts a chunk containing only the runtime with _all other chunks as children_:
+Make sure the entry chunk is cheap to emit by keeping it small. The following configuration creates an additional chunk for the runtime code, so it's cheap to generate:
 
 ```js
-new CommonsChunkPlugin({
-  name: 'manifest',
-  minChunks: Infinity,
-});
+module.exports = {
+  // ...
+  optimization: {
+    runtimeChunk: true
+  }
+};
 ```
 
 ### Avoid Extra Optimization Steps
@@ -219,7 +220,8 @@ Earlier and later Node.js versions are not affected.
 
 ### TypeScript Loader
 
-Recently, `ts-loader` has started to consume the internal TypeScript watch mode APIs which dramatically decreases the number of modules to be rebuilt on each iteration. This `experimentalWatchApi` shares the same logic as the normal TypeScript watch mode itself and is quite stable for development use. Turn on `transpileOnly`, as well, for even faster incremental builds.
+To improve the build time when using `ts-loader`, use the `transpileOnly` loader option. On its own, this option turns off type checking. To gain type checking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin). This speeds up TypeScript type checking and ESLint linting by moving each to a separate process.
+
 
 ```js
 module.exports = {
@@ -229,19 +231,14 @@ module.exports = {
     {
       loader: 'ts-loader',
       options: {
-        transpileOnly: true,
-        experimentalWatchApi: true,
+        transpileOnly: true
       },
     },
   ],
 };
 ```
 
-Note: the `ts-loader` documentation suggests the use of `cache-loader`, but this actually slows the incremental builds down with disk writes.
-
-To gain typechecking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin).
-
-There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin) on the ts-loader github repository.
+T> There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin) on the `ts-loader` GitHub repository.
 
 ---
 

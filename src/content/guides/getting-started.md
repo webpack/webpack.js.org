@@ -22,6 +22,7 @@ contributors:
   - byzyk
   - wizardofhogwarts
   - myshov
+  - anshumanv
 ---
 
 webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
@@ -155,6 +156,7 @@ __src/index.js__
     const element = document.createElement('div');
 
 -   // Lodash, currently included via a script, is required for this line to work
++   // Lodash, now imported by this script
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
     return element;
@@ -201,7 +203,7 @@ You can also set it to 'none' to disable any default behavior. Learn more: https
 
 T> Your output may vary a bit, but if the build is successful then you are good to go. Also, don't worry about the warning, we'll tackle that later.
 
-Open `index.html` in your browser and, if everything went right, you should see the following text: 'Hello webpack'.
+Open `index.html` from the `dist` directory in your browser and, if everything went right, you should see the following text: 'Hello webpack'.
 
 W> If you are getting a syntax error in the middle of minified JavaScript when opening `index.html` in the browser, set [`development mode`](/configuration/mode/#mode-development) and run `npx webpack` again. This is related to running `npx webpack` on latest Node.js (v12.5+) instead of [LTS version](https://nodejs.org/en/).
 
@@ -333,5 +335,7 @@ webpack-demo
 ```
 
 T> If you're using npm 5, you'll probably also see a `package-lock.json` file in your directory.
+
+W> Do not compile untrusted code with webpack. It could lead to execution of malicious code on your computer, remote servers, or in the Web browsers of the end users of your application.
 
 If you want to learn more about webpack's design, you can check out the [basic concepts](/concepts) and [configuration](/configuration) pages. Furthermore, the [API](/api) section digs into the various interfaces webpack offers.
