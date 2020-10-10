@@ -16,7 +16,7 @@ So from time to time there is a point where the difficulties pile up and we are 
 That's the time for a new major version.
 So webpack 5 contains these architectural improvements and the features that where not possible to implement without them.
 
-The major version was also the chance to revist some of the defaults and to align with proposals and specifications that come up in the meantime.
+The major version was also the chance to revise some of the defaults and to align with proposals and specifications that come up in the meantime.
 
 So today (2020-10-10) webpack 5.0.0 is released, but this doesn't mean it's done, bugfree or even feature-complete.
 As with webpack 4 we continue development by fixing problems and adding features.
@@ -27,28 +27,28 @@ It means we finished doing breaking changes.
 Many refactorings has been done to up-level the architecture and create a good base for future features (and current features).
 
 So when is the time to upgrade?
-It depend. There is a good chance that upgrading fails and you would need to give it a second or 3rd try.
+It depends. There is a good chance that upgrading fails and you would need to give it a second or 3rd try.
 If you are open to that, try to upgrade now and provide feedback to webpack, plugins and loaders.
 We are eager to fix those problems. Someone has to start and you would be one of the first ones benefiting from it.
 
-## Sponoring situation
+## Sponsoring situation
 
 webpack is fully based upon [sponsoring](https://opencollective.com/webpack).
 It's not tied to (and payed by) a big company like some other Open Source projects.
 99% of the earnings from sponsoring are distributed towards contributors and maintainers based on the contributions they do.
-We belive in investing the money towards making webpack better.
+We believe in investing the money towards making webpack better.
 
 But there is a pandemic, and companies ain't that much open to sponsoring anymore.
 Webpack is suffering under these circumstances too (like many other companies and people).
 
 We were never able to pay our contributors the amount we think they deserve, but now we only have half of the money available, so we need to make a more serious cut.
-Until the situation improves we will only pay contributors and maintainers the first 10 days or each month.
+Until the situation improves we will only pay contributors and maintainers the first 10 days of each month.
 The remaining days they could work voluntary, paid by their employer, work on something else or take some days off.
 This allows us to pay the work in the first 10 days more equivalent to the invested time.
 
 The biggest "Thank You" goes to [trivago](https://tech.trivago.com/opensource) which has been sponsoring webpack a huge amount for the last 3 years.
 Sadly they are unable to continue their sponsorship this year, as they have been hit hard by Covid-19.
-I hope some other company steps up and follows these (gigant) footsteps.
+I hope some other company steps up and follows these (gigantic) footsteps.
 
 Thanks to [all the sponsors](/#sponsors).
 
@@ -59,7 +59,7 @@ This release focus on the following:
 - We try to improve build performance with Persistent Caching.
 - We try to improve Long Term Caching with better algorithms and defaults.
 - We try to improve bundle size with better Tree Shaking and Code Generation.
-- We try to improve compatiblity to the web platform.
+- We try to improve compatibility to the web platform.
 - We try to clean up internal structures that were left in a weird state while implementing features in v4 without introducing any breaking changes.
 - We try to prepare for future features by introducing breaking changes now, allowing us to stay on v5 for as long as possible.
 
@@ -95,7 +95,7 @@ In the early days, webpack's aim was to allow running most Node.js modules in th
 
 While this makes using modules written for Node.js easy, it adds these huge polyfills to the bundle. In many cases these polyfills are unnecessary.
 
-webpack 5 stops automatically polyfilling these core modules and focus on frontend-compatible modules. Our goal it to improve compatiblity with the web platform, where Node.js core modules are not available.
+webpack 5 stops automatically polyfilling these core modules and focus on frontend-compatible modules. Our goal it to improve compatibility with the web platform, where Node.js core modules are not available.
 
 MIGRATION:
 
@@ -147,8 +147,8 @@ MIGRATION: If you dislike the filenames being changed in development, you can pa
 ### Module Federation
 
 Webpack 5 adds a new feature called "Module Federation", which allows multiple webpack builds to work together.
-From runtime perspective modules form multiple builds will behave like a huge connected module graph.
-From developer persepective modules can be imported from specified remote builds and used with minimal restrictions.
+From runtime perspective modules from multiple builds will behave like a huge connected module graph.
+From developer perspective modules can be imported from specified remote builds and used with minimal restrictions.
 
 For more details see [this separate guide](/concepts/module-federation).
 
@@ -250,12 +250,12 @@ Examples: `target: "node14"` `target: ["web", "es2020"]`
 
 This is a simple way to provide webpack all the information it needs to determine:
 
-- chunk loading mechnism, and
+- chunk loading mechanism, and
 - supported syntax like arrow functions
 
 ### Stats
 
-The Stats test format has been improved regarding readablility and verbosity. The defaults has been improved to be less verbose and also suitable for large builds.
+The Stats test format has been improved regarding readability and verbosity. The defaults have been improved to be less verbose and also suitable for large builds.
 
 - Chunk relations are hidden by default now. This can be toggled with `stats.chunkRelations`.
 - Stats differentiate between `files` and `auxiliaryFiles` now.
@@ -298,7 +298,7 @@ In webpack 4 multiple webpack runtimes could conflict on the same HTML page, bec
 
 Webpack 5 does automatically infer a unique name for the build from `package.json` `name` and uses this as default for `output.uniqueName`.
 
-This value is used to make all potentical conflicting globals unique.
+This value is used to make all potential conflicting globals unique.
 
 MIGRATION: Remove `output.jsonpFunction` in favor of a unique name in your `package.json`.
 
@@ -485,7 +485,7 @@ Some combinations and features are not yet implemented and will result in errors
 
 ### SplitChunks and Module Sizes
 
-Modules now express size in a better way than a single number. Tthere are different types of sizes now.
+Modules now express size in a better way than a single number. There are different types of sizes now.
 
 The SplitChunksPlugin now knows how to handle these different sizes and uses them for `minSize` and `maxSize`.
 By default, only `javascript` size is handled, but you can now pass multiple values to manage them:
@@ -546,7 +546,7 @@ Many internal plugins will use the Persistent Cache too. Examples: `SourceMapDev
 
 The Persistent Cache will automatically create multiple cache files depending on usage to optimize read and write access to and from the cache.
 
-By default timestamps will be used for snapshoting in development mode and file hashes in production mode.
+By default timestamps will be used for snapshotting in development mode and file hashes in production mode.
 File hashes allow to use Persistent Caching on CI too.
 
 #### Compiler Idle and Close
@@ -607,7 +607,7 @@ This allows to have chunks that contain only CSS.
 
 Not all features are stable from the beginning. In webpack 4 we added experimental features and noted in the changelog that they are experimental, but it was not always clear from the configuration that these features are experimental.
 
-In webpack 5 there is a new `experiments` config option which allows to enabled experimental features. This makes it clear which ones are enabled/used.
+In webpack 5 there is a new `experiments` config option which allows to enable experimental features. This makes it clear which ones are enabled/used.
 
 While webpack follows semantic versioning, it will make an exception for experimental features. Experimental features might contain breaking changes in minor webpack versions. When this happens we will add a clear note into the changelog. This will allow us to iterate faster for experimental features, while also allowing us to stay longer on a major version for stable features.
 
@@ -644,7 +644,7 @@ MIGRATION: Upgrade to the latest Node.js version available.
     - `cache.store`
     - `cache.hashAlgorithm`
     - `cache.idleTimeout`
-    - `cache.idleTimeoutForIntialStore`
+    - `cache.idleTimeoutForInitialStore`
     - `cache.buildDependencies`
 - `snapshot.resolveBuildDependencies` added
 - `snapshot.resolve` added
