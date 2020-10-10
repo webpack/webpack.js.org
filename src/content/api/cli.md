@@ -34,7 +34,7 @@ Read the [installation guide](/guides/installation) if you don't already have we
 
 ## Commands
 
-webpack-cli offers a variety of commands to make working with webpack easy.
+webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with
 
 | Command   | Alias | Description                                            |
 | --------- | ----- | ------------------------------------------------------ |
@@ -90,32 +90,41 @@ If your project structure is as follows -
 ```
 
 ```bash
-webpack src/index.js -o dist
+webpack ./src/index.js -o dist
 ```
 
 This will bundle your source code with entry as `index.js`, and the output bundle file will have a path of `dist`.
 
 ```bash
-	| Asset     | Size    | Chunks      | Chunk Names |
-	|-----------|---------|-------------|-------------|
-	| main.js | 1.54 kB | 0 [emitted] | index       |
-	[0] ./src/index.js 51 bytes {0} [built]
-	[1] ./src/others.js 29 bytes {0} [built]
+Hash: 07a1c2d056e28ff1cab2
+Version: webpack 4.44.2
+Time: 174ms
+Built at: 10/10/2020 11:37:09 AM
+  Asset       Size  Chunks             Chunk Names
+main.js  952 bytes       0  [emitted]  main
+Entrypoint main = main.js
+[0] ./src/index.js 30 bytes {0} [built]
+[1] ./src/others.js 0 bytes {0} [built]
 ```
 
 ```bash
-webpack ./src/index.js ./src.index2.js -o dist/
+webpack ./src/index.js ./src/others2.js -o dist/
 ```
 
 This will form the bundle with both the files as separate entry points.
 
 ```bash
-	| Asset     | Size    | Chunks        | Chunk Names   |
-	|-----------|---------|---------------|---------------|
-	| main.js | 1.55 kB | 0,1 [emitted] | index, index2 |
-	[0] ./src/index.js 51 bytes {0} [built]
-	[0] ./src/index2.js 54 bytes {1} [built]
-	[1] ./src/others.js 29 bytes {0} {1} [built]
+Hash: fad168056241c7181505
+Version: webpack 4.44.2
+Time: 175ms
+Built at: 10/10/2020 11:38:28 AM
+  Asset        Size  Chunks             Chunk Names
+main.js  1010 bytes       0  [emitted]  main
+Entrypoint main = main.js
+[0] multi ./src/index.js ./src/others2.js 40 bytes {0} [built]
+[1] ./src/index.js 30 bytes {0} [built]
+[2] ./src/others.js 0 bytes {0} [built]
+[3] ./src/others2.js 0 bytes {0} [built]
 ```
 
 ## Default Configurations
@@ -160,7 +169,7 @@ __Show help for a single command or flag__
 
 ```bash
 webpack <command> --help
-webpack --<flag> --h
+webpack --<flag> --help
 ```
 
 __Build source using a configuration file__
@@ -175,6 +184,11 @@ __Print result of webpack as a JSON__
 
 ```bash
 webpack --json
+```
+
+__If you want to store stats as json instead of printing it, you can use -__
+
+```bash
 webpack --json stats.json
 ```
 
@@ -188,11 +202,11 @@ When the webpack configuration [exports a function](/configuration/configuration
 webpack --env production    # sets env.production == true
 ```
 
-The `--env` argument accepts accepts multiple values:
+The `--env` argument accepts multiple values:
 
 | Invocation                     | Resulting environment       |
 | ------------------------------ | --------------------------- |
-| `webpack --env prod`           | `{ prod: true`              |
+| `webpack --env prod`           | `{ prod: true }`            |
 | `webpack --env prod --env min` | `{ prod: true, min: true }` |
 
 T> See the [environment variables](/guides/environment-variables/) guide for more information on its usage.
@@ -337,6 +351,12 @@ These options allow webpack to display various [stats](/configuration/stats/) an
 | --no-hot   | Disabled hot reloading if you have it enabled via your config |
 | --no-stats | Disables any compilation stats emitted by webpack             |
 
+## Core Flags
+
+Starting CLI v4 and webpack v5, CLI imports the entire configuration schema from webpack core to alow tuning almost every property from the command line.
+
+Here's the list of all the core flags supported by webpack v5 with CLI v4 - [link](https://github.com/webpack/webpack-cli/tree/next/packages/webpack-cli#webpack-5)
+
 ## Analyzing Bundle
 
 You can also use `webpack-bundle-analyzer` to analyze your output bundles emitted by webpack. You can use `--analyze` flag to invoke it via CLI.
@@ -349,63 +369,20 @@ W> Make sure you have `webpack-bundle-analyzer` installed in your project else C
 
 ## Aliases
 
-We've set certain aliases for commonly used command and flags
+We've set certain aliases for commonly used flags to make it convenient to work with webpack.
 
-| Shortcut | Replaces                                                                |
-| -------- | ----------------------------------------------------------------------- |
-| -d       | `--debug --devtool cheap-module-eval-source-map --output-pathinfo`      |
-| -p       | `--mode production`, see [building for production](/guides/production/) |
-
-## Profiling
-
-The `--profile` option captures timing information for each step of the compilation and includes this in the output.
-
-```bash
-webpack --profile
-
-⋮
-[0] ./src/index.js 90 bytes {0} [built]
-    factory:22ms building:16ms = 38ms
-```
-
-For each module, the following details are included in the output as applicable:
-
-- `factory`: time to collect module metadata (e.g. resolving the filename)
-- `building`: time to build the module (e.g. loaders and parsing)
-- `dependencies`: time to identify and connect the module’s dependencies
-
-Paired with `--progress`, `--profile` gives you an in-depth idea of which step in the compilation is taking how long. This can help you optimize your build in a more informed manner.
-
-```bash
-webpack --progress --profile
-
-30ms building modules
-1ms sealing
-1ms optimizing
-0ms basic module optimization
-1ms module optimization
-1ms advanced module optimization
-0ms basic chunk optimization
-0ms chunk optimization
-1ms advanced chunk optimization
-0ms module and chunk tree optimization
-1ms module reviving
-0ms module order optimization
-1ms module id optimization
-1ms chunk reviving
-0ms chunk order optimization
-1ms chunk id optimization
-10ms hashing
-0ms module assets processing
-13ms chunk assets processing
-1ms additional chunk assets processing
-0ms recording
-0ms additional asset processing
-26ms chunk asset optimization
-1ms asset optimization
-6ms emitting
-⋮
-```
+| Shortcut | Replaces        |
+| -------- | --------------- |
+| -c       | `--config`      |
+| -m       | `--merge`       |
+| -o       | `--output-path` |
+| -t       | `--target`      |
+| -w       | `--watch`       |
+| -h       | `--hot`         |
+| -d       | `--devtool`     |
+| -j       | `--json`        |
+| -v       | `--version`     |
+| -v       | `--version`     |
 
 ## Pass CLI arguments to Node.js
 
