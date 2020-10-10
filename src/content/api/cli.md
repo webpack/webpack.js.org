@@ -105,7 +105,7 @@ We've set certain aliases for commonly used flags to make it convenient to work 
 
 Starting CLI v4 and webpack v5, CLI imports the entire configuration schema from webpack core to alow tuning almost every property from the command line.
 
-Here's the list of all the core flags supported by webpack v5 with CLI v4 -
+Here's the list of all the core flags supported by webpack v5 with CLI v4 - [link](https://github.com/webpack/webpack-cli/tree/next/packages/webpack-cli#webpack-5)
 
 ## Usage
 
