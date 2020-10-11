@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy dist
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -35,7 +35,4 @@ jobs:
 
       - run: yarn
       - run: yarn build
-
-      - name: Deploy
-        run: |
-        bash ./src/scripts/deploy.sh
+      - run: bash ./src/scripts/deploy.sh
