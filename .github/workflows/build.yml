@@ -64,4 +64,4 @@ jobs:
           pip install -r requirements.txt
 
       - run: cp .proselintrc ~/
-      - run: time proselint src/content
+      - run: proselint src/content
