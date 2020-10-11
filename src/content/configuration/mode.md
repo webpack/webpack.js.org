@@ -6,6 +6,7 @@ contributors:
   - byzyk
   - mrichmond
   - Fental
+  - snitin315
 related:
   - title: 'webpack default options (source code)'
     url: https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js
@@ -36,8 +37,8 @@ webpack --mode=development
 
 选项                  | 描述
 --------------------- | -----------------------
-`development`         | 会将 `DefinePlugin` 中 `process.env.NODE_ENV` 的值设置为 `development`. 启用 `NamedChunksPlugin` 和 `NamedModulesPlugin` 。
-`production`          | 会将 `DefinePlugin` 中 `process.env.NODE_ENV` 的值设置为 `production`. 启用 `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` 和 `TerserPlugin` 。
+`development`         | 会将 `DefinePlugin` 中 `process.env.NODE_ENV` 的值设置为 `development`. 为模块和 chunk 启用有效的名。
+`production`          | 会将 `DefinePlugin` 中 `process.env.NODE_ENV` 的值设置为 `production`。为模块和 chunk 启用确定性的混淆名称，`FlagDependencyUsagePlugin`，`FlagIncludedChunksPlugin`，`ModuleConcatenationPlugin`，`NoEmitOnErrorsPlugin` 和 `TerserPlugin` 。
 `none`                | 不使用任何默认优化选项
 
 如果没有设置，webpack 会给 `mode` 的默认值设置为 `production`。
@@ -61,8 +62,9 @@ module.exports = {
 -   pathinfo: true
 - },
 - optimization: {
--   namedModules: true,
--   namedChunks: true,
+-   moduleIds: 'named',
+-   chunkIds: 'named',
+-   mangleExports: false,
 -   nodeEnv: 'development',
 -   flagIncludedChunks: false,
 -   occurrenceOrder: false,
@@ -73,14 +75,12 @@ module.exports = {
 -     maxAsyncRequests: Infinity,
 -     maxInitialRequests: Infinity,
 -   },
--   noEmitOnErrors: false,
+-   emitOnErrors: true,
 -   checkWasmTypes: false,
 -   minimize: false,
 -   removeAvailableModules: false
 - },
 - plugins: [
--   new webpack.NamedModulesPlugin(),
--   new webpack.NamedChunksPlugin(),
 -   new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("development") }),
 - ]
 }
@@ -101,8 +101,9 @@ module.exports = {
 -   pathinfo: false
 - },
 - optimization: {
--   namedModules: false,
--   namedChunks: false,
+-   moduleIds: 'deterministic',
+-   chunkIds: 'deterministic',
+-   mangleExports: 'deterministic',
 -   nodeEnv: 'production',
 -   flagIncludedChunks: true,
 -   occurrenceOrder: true,
@@ -113,7 +114,7 @@ module.exports = {
 -     maxAsyncRequests: 5,
 -     maxInitialRequests: 3,
 -   },
--   noEmitOnErrors: true,
+-   emitOnErrors: false,
 -   checkWasmTypes: true,
 -   minimize: true,
 - },
@@ -147,7 +148,7 @@ module.exports = {
 -     maxAsyncRequests: Infinity,
 -     maxInitialRequests: Infinity,
 -   },
--   noEmitOnErrors: false,
+-   emitOnErrors: true,
 -   checkWasmTypes: false,
 -   minimize: false,
 - },

@@ -1,6 +1,6 @@
 ---
 title: Shimming 预置依赖
-sort: 19
+sort: 20
 contributors:
   - pksjce
   - jhnns

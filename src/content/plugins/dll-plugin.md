@@ -23,7 +23,7 @@ related:
 
 - `context`（可选）： manifest 文件中请求的 context (默认值为 webpack 的 context)
 - `format` (boolean = false)：如果为 `true`，则 manifest json 文件 (输出文件) 将被格式化。
-- `name`：暴露出的 DLL 的函数名（[TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)：`[hash]` & `[name]` ）
+- `name`：暴露出的 DLL 的函数名（[TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)：`[fullhash]` & `[name]` ）
 - `path`：manifest.json 文件的 __绝对路径__（输出文件）
 - `entryOnly` (boolean = true)：如果为 `true`，则仅暴露入口
 - `type`：dll bundle 的类型
@@ -88,7 +88,7 @@ const path = require('path');
 
 new webpack.DllPlugin({
   context: __dirname,
-  name: '[name]_[hash]',
+  name: '[name]_[fullhash]',
   path: path.join(__dirname, 'manifest.json'),
 });
 ```

@@ -217,7 +217,6 @@ __webpack.config.js__
     },
     output: {
       filename: '[name].bundle.js',
-+     chunkFilename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
     },
 -   optimization: {
@@ -228,7 +227,7 @@ __webpack.config.js__
   };
 ```
 
-注意，这里使用了 `chunkFilename`，它决定 non-entry chunk(非入口 chunk) 的名称。关于 `chunkFilename` 更多信息，请查看 [输出](/configuration/output/#outputchunkfilename) 文档。更新我们的项目，移除现在不会用到的文件：
+我们将更新我们的项目，移除现在未使用的文件：
 
 __project__
 
@@ -256,7 +255,7 @@ __src/index.js__
 -
 -   // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
++   return import('lodash').then(({ default: _ }) => {
 +     const element = document.createElement('div');
 +
 +     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -274,7 +273,7 @@ __src/index.js__
 
 我们之所以需要 `default`，是因为 webpack 4 在导入 CommonJS 模块时，将不再解析为 `module.exports` 的值，而是为 CommonJS 模块创建一个 artificial namespace 对象，更多有关背后原因的信息，请阅读 [webpack 4: import() and CommonJs](https://medium.com/webpack/webpack-4-import-and-commonjs-d619d626b655)
 
-注意，在注释中使用了 `webpackChunkName`。这样做会导致我们的 bundle 被命名为 `lodash.bundle.js` ，而不是 `[id].bundle.js` 。想了解更多关于 `webpackChunkName` 和其他可用选项，请查看 [`import()` 相关文档](/api/module-methods/#import-1)。让我们执行 webpack，查看 `lodash` 是否会分离到一个单独的 bundle：
+让我们执行 webpack，查看 `lodash` 是否会分离到一个单独的 bundle：
 
 ``` bash
 ...
@@ -292,7 +291,7 @@ __src/index.js__
 ``` diff
 - function getComponent() {
 + async function getComponent() {
--   return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
+-   return import('lodash').then(({ default: _ }) => {
 -     const element = document.createElement('div');
 -
 -     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -301,7 +300,7 @@ __src/index.js__
 -
 -   }).catch(error => 'An error occurred while loading the component');
 +   const element = document.createElement('div');
-+   const { default: _ } = await import(/* webpackChunkName: "lodash" */ 'lodash');
++   const { default: _ } = await import('lodash');
 +
 +   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +

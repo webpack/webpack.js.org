@@ -3,7 +3,7 @@ import Container from '../Container/Container';
 import testLocalStorage from '../../utilities/test-local-storage';
 import './NotificationBar.scss';
 
-const version = '2';
+const version = '3';
 const localStorageIsEnabled = testLocalStorage() !== false;
 
 const barDismissed = () => {
@@ -19,8 +19,7 @@ class MessageBar extends React.Component {
       <div className="notification-bar">
         <Container className="notification-bar__inner">
           <p>
-            Sponsor webpack and get apparel from the <a href="https://webpack.threadless.com">official shop</a>! All
-            proceeds go to our <a href="https://opencollective.com/webpack">open collective</a>!
+            Webpack 5 现已正式发布。请阅读我们的 <a href="/blog/2020-10-10-webpack-5-release/">发布公告</a>。如还未准备升级，请阅读 <a href="https://v4.webpack.docschina.org/">webpack 4 文档</a>。
           </p>
           {localStorageIsEnabled ? (
             <button

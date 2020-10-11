@@ -1,6 +1,6 @@
 ---
 title: 资源模块
-sort: 24
+sort: 25
 contributors:
   - smelukov
   - EugeneHlushko
@@ -62,7 +62,7 @@ img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 
 ### 自定义输出文件名 {#custom-output-filename}
 
-默认情况下，`asset/resource` 模块以 `[hash][ext][query]` 文件名发送到输出目录。你还可以使用 `[contenthash]` 和 `[modulehash]` 重写 `[hash]` 的默认值。
+默认情况下，`asset/resource` 模块以 `[hash][ext][query]` 文件名发送到输出目录。
 
 可以通过在 webpack 配置中设置 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 来修改此模板字符串：
 

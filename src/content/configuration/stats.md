@@ -14,6 +14,7 @@ contributors:
   - grgur
   - anshumanv
   - pixel-ray
+  - snitin315
 ---
 
 `object` `string`
@@ -144,6 +145,171 @@ module.exports = {
 };
 ```
 
+### `stats.assetsSpace` {#statsassetsspace}
+
+`number = 15`
+
+告诉 `stats` 应该显示多少个 asset 项目（将以组的方式折叠，以适应这个空间）。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    assetsSpace: 15
+  }
+};
+```
+
+### `stats.modulesSpace` {#statsmodulesspace}
+
+`number = 15`
+
+告诉 `stats` 应该显示多少个模块项目（将以组的方式折叠，以适应这个空间）。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    modulesSpace: 15
+  }
+};
+```
+
+### `stats.chunkModulesSpace` {#statschunkmodulesspace}
+
+`number = 10`
+
+告诉 `stats` 显示多少个 chunk 模块项目（将以组的方式折叠，以适应这个空间）。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkModulesSpace: 15
+  }
+};
+```
+
+### `stats.nestedModulesSpace` {#statsnestedmodulesspace}
+
+`number = 10`
+
+告诉 `stats` 应该显示多少个嵌套模块的项目（将以组的方式折叠，以适应这个空间）。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    nestedModulesSpace: 15
+  }
+};
+```
+
+### `stats.cachedModules` {#statscachedmodules}
+
+`boolean = true`
+
+告诉 `stats` 是否要缓存（非内置）模块的信息。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    cachedModules: false
+  }
+};
+```
+
+### `stats.runtimeModules` {#statsruntimemodules}
+
+`boolean = true`
+
+告诉 `stats` 是否要添加运行时模块的信息。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    runtimeModules: false
+  }
+};
+```
+
+### `stats.dependentModules` {#statsdependentmodules}
+
+`boolean`
+
+告诉 `stats` 是否要展示该 chunk 依赖的其他模块的 chunk 模块。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    dependentModules: false
+  }
+};
+```
+
+### `stats.groupAssetsByChunk` {#statsgroupassetsbychunk}
+
+`boolean`
+
+告诉 `stats` 是否按照 asset 与 chunk 的关系进行分组。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupAssetsByChunk: false
+  }
+};
+```
+
+### `stats.groupAssetsByEmitStatus` {#statsgroupassetsbyemitstatus}
+
+`boolean`
+
+告诉 `stats` 是否按照 asset 的状态进行分组（emitted，对比 emit 或缓存）.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupAssetsByEmitStatus: false
+  }
+};
+```
+
+### `stats.groupAssetsByInfo` {#statsgroupassetsbyinfo}
+
+`boolean`
+
+告诉 `stats` 是否按照 asset 信息对 asset 进行分组（immutable，development。hotModuleReplacement 等）。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupAssetsByInfo: false
+  }
+};
+```
+
+### `stats.groupModulesByAttributes` {#statsgroupmodulesbyattributes}
+
+`boolean`
+
+告诉 `stats` 是否按模块的属性进行分组（errors，warnings，assets，optional，orphan 或者 dependent）。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupModulesByAttributes: false
+  }
+};
+```
+
 ### `stats.cachedAssets` {#statscachedassets}
 
 `boolean = true`
@@ -215,21 +381,6 @@ module.exports = {
   //...
   stats: {
     chunkModules: false
-  }
-};
-```
-
-### `stats.chunkRootModules` {#statschunkrootmodules}
-
-`boolean = true`
-
-告知 `stats` 是否添加关于 chunks 的根模块信息。 如果 `stats.chunks = true` 则会应用该配置.
-
-```javascript
-module.exports = {
-  //...
-  stats: {
-    chunkRootModules: false
   }
 };
 ```
@@ -540,21 +691,6 @@ module.exports = {
   //...
   stats: {
     loggingTrace: false
-  }
-};
-```
-
-### `stats.maxModules` {#statsmaxmodules}
-
-`number = 15`
-
-设置最大的模块显示数量。
-
-```javascript
-module.exports = {
-  //...
-  stats: {
-    maxModules: 5
   }
 };
 ```
@@ -874,6 +1010,39 @@ module.exports = {
     warningsFilter: [
       'filter',
       /filter/,
+      (warning) => true
+    ]
+  }
+};
+```
+
+
+W> `stats.warningsFilter` 已被弃用，请改用 [`stats.ignoreWarnings`](#statsignoreWarnings)。
+
+### `stats.ignoreWarnings` {#statsignorewarnings}
+
+`RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`
+
+告诉 `stats` 忽略特定的警告。这可以通过一个 `RegExp` 来完成，这是一个自定义的 `function`，用于根据原始 warning 实例来选择 warning，该实例的参数为 `WebpackError` 和 `Compilation`，并会返回一个 `boolean`，一个具有以下属性的 `object`：
+
+- `file`：一个正则表达式，用于匹配 warning 的源文件。
+- `message`：一个正则表达式，用于匹配 warning 信息。
+- `module`：一个正则表达式，用于匹配 warning 的源模块。
+
+`stats.ignoreWarnings` 可以是上述任何一种的 `arrau`：
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    ignoreWarnings: [
+      {
+        module: /module2\.js\?[34]/ // A RegExp
+      },
+      {
+        module: /[13]/,
+        message: /homepage/
+      },
       (warning) => true
     ]
   }

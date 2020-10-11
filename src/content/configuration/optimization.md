@@ -158,32 +158,11 @@ module.exports = {
 };
 ```
 
-## `optimization.noEmitOnErrors` {#optimizationnoemitonerrors}
-
-`boolean`
-
-在编译出错时，使用 `optimization.noEmitOnErrors` 来跳过生成阶段(emitting phase)。这可以确保没有生成出错误资源，
-但是 stats 中所有 assets 属性中的 `emitted` 都会标记为 `false`。
-
-__webpack.config.js__
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    noEmitOnErrors: true
-  }
-};
-```
-
-W>如果你正在使用 webpack [CLI](/api/cli/)，在此插件开启时，webpack 处理过程不会因为错误代码而退出。如果你希望在使用 CLI 时 webpack "失败(fail)"，
-请查看 [`bail` 选项](/api/cli/#advanced-options)。
-
-## `optimization.namedModules` {#optimizationnamedmodules}
+## `optimization.emitOnErrors`
 
 `boolean = false`
 
-告知 webpack 使用可读取模块标识符(readable module identifiers)，来帮助更好地调试。webpack 配置中如果没有设置此选项，默认会在 [mode](/concepts/mode/) `development` 启用，在 [mode](/concepts/mode/) `production` 禁用。
+使用 `optimization.emitOnErrors` 在编译时每当有错误时，就会 emit asset。这样可以确保出错的 asset 被 emit 出来。关键错误会被 emit 到生成的代码中，并会在运行时报错。
 
 __webpack.config.js__
 
@@ -191,27 +170,12 @@ __webpack.config.js__
 module.exports = {
   //...
   optimization: {
-    namedModules: true
+    emitOnErrors: true
   }
 };
 ```
 
-## `optimization.namedChunks` {#optimizationnamedchunks}
-
-`boolean = false`
-
-告知 webpack 使用可读取 chunk 标识符(readable chunk identifiers)，来帮助更好地调试。webpack 配置中如果没有设置此选项，默认会在 [mode](/concepts/mode/) `development` 启用，在 [mode](/concepts/mode/) `production` 禁用。
-
-__webpack.config.js__
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    namedChunks: true
-  }
-};
-```
+W> 如果你使用的是 webpack 的 [CLI](/api/cli/)，当这个插件被启用时，webpack 进程不会以错误代码退出。如果你想让 webpack 在使用 CLI 时 "fail"，请查阅 [`bail` 选项](/api/cli/#advanced-options)。
 
 ## `optimization.moduleIds` {#optimizationmoduleids}
 
@@ -270,8 +234,6 @@ W> `moduleIds: total-size` 在 webpack 5 中被废弃。
 
 告知 webpack 当选择模块 id 时需要使用哪种算法。将 `optimization.chunkIds` 设置为  `false` 会告知 webpack 没有任何内置的算法会被使用，但自定义的算法会由插件提供。`optimization.chunkIds` 的默认值是 `false`：
 
-- 如果 [`optimization.occurrenceOrder`](#optimizationoccurrenceorder) 被启用 `optimization.chunkIds` 会被设置成 `'total-size'`
-- 不考虑上一条的条件，如果 [`optimization.namedChunks`](#optimizationnamedchunks) 被启用 `optimization.chunkIds` 会被设置成 `'named'`
 - 如果环境是开发环境，那么 `optimization.chunkIds` 会被设置成 `'named'`, 
 但当在生产环境中时，它会被设置成 `'deterministic'`
 - 如果上述的条件都不符合, `optimization.chunkIds` 会被默认设置为 `'natural'`
@@ -282,7 +244,7 @@ W> `moduleIds: total-size` 在 webpack 5 中被废弃。
 ----------------------- | -----------------------
 `'natural'`             | 按使用顺序的数字 id。
 `'named'`               | 对调试更友好的可读的 id。
-`'deterministic'`       | 在不同的编译中不变的短数字 id。有益于长期昏村。
+`'deterministic'`       | 在不同的编译中不变的短数字 id。有益于长期缓存。
 在生产模式中会默认开启。
 `'size'`                | 专注于让初始下载包大小更小的数字 id。
 `'total-size'`          | 专注于让总下载包大小更小的数字 id。
@@ -468,7 +430,7 @@ module.exports = {
 
 ## `optimization.usedExports` {#optimizationusedexports}
 
-`boolean = true`
+`boolean = true`  `string: 'global'`
 
 告知 webpack 去决定每个模块使用的导出内容。这取决于 [`optimization.providedExports`](#optimizationoccurrenceorder) 选项。由 `optimization.usedExports` 收集的信息会被其它优化手段或者代码生成使用，比如未使用的导出内容不会被生成，
 当所有的使用都适配，导出名称会被处理做单个标记字符。
@@ -481,6 +443,17 @@ module.exports = {
   //...
   optimization: {
     usedExports: false
+  }
+};
+```
+
+选择退出每次运行时使用 export 分享：
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    usedExports: 'global'
   }
 };
 ```
@@ -558,11 +531,20 @@ module.exports = {
 
 ## `optimization.mangleExports` {#optimizationmangleexports}
 
-`boolean`
+`boolean` `string: 'deterministic' | 'size'`
 
 `optimization.mangleExports` 允许控制导出处理(export mangling)。
 
-默认 `optimization.mangleExports` 会在 `生产` [模式下](/configuration/mode/) 启用而其它情况会被禁用。
+默认 `optimization.mangleExports: 'deterministic'` 会在 `production` [模式下](/configuration/mode/) 启用而其它情况会被禁用。
+
+此选项支持以下选项：
+
+选项                  | 描述
+----------------------- | -----------------------
+`'size'`                | 简写形式 — 通常只有一个字符 — 专注于最小的下载 size。
+`'deterministic'`       | 简写形式 - 通常两个字符 — 在添加或移除 export 时不会改变。适用于长效缓存。
+`true`                  | 等价于 `'deterministic'`
+`false`                 | 保留原名，有利于阅读和调试。
 
 __webpack.config.js__
 

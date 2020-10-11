@@ -281,7 +281,7 @@ module.exports = {
 };
 ```
 
-W> `cache.idleTimeout` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 或 `'idle'` 才可配置。
+W> `cache.idleTimeout` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 才可配置。
 
 ### `cache.idleTimeoutForInitialStore` {#cacheidletimeoutforinitialstore}
 
@@ -300,16 +300,40 @@ module.exports = {
 };
 ```
 
-W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 或 `'idle'` 才可配置。
+W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 才可配置。
 
 ## `loader` {#loader}
 
 `object`
 
-在 loader 上下文中暴露自定义值。
+在 [loader 上下文](/api/loaders/#the-loader-context)中暴露自定义值。
 
-?> 添加一个例子...
+例如，你可以在 loader 上下文中定义一个新变量：
 
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  // ...
+  loader: {
+    answer: 42
+  }
+};
+```
+
+然后使用 `this.answer` 在 loader 中获取该值：
+
+__custom-loader.js__
+
+```javascript
+module.exports = function (source) {
+  // ...
+  console.log(this.answer); // will log `42` here
+  return source;
+};
+```
+
+T> 你可以覆盖 loader 上下文中的属性，因为 webpack 会将所有定义在 `loader` 中的属性负责到 loader 上下文中。
 
 ## `parallelism` {#parallelism}
 

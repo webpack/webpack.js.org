@@ -10,11 +10,12 @@ contributors:
   - EugeneHlushko
   - AnayaDesign
   - wizardofhogwarts
+  - astonizer
 ---
 
 如果你是从开始一直在沿用指南的示例，现在会有一个小项目，显示 "Hello webpack"。现在我们尝试混合一些其他资源，比如 images，看看 webpack 如何处理。
 
-在 webpack 出现之前，前端开发人员会使用 grunt 和 gulp 等工具来处理资源，并将它们从 `/src` 文件夹移动到 `/dist` 或 `/build` 目录中。JavaScript 模块也遵循同样方式，但是，像 webpack 这样的工具，将__动态打包__所有依赖（创建所谓的 [依赖图(dependency graph)](/concepts/dependency-graph)）。这是极好的创举，因为现在每个模块都可以_明确表述它自身的依赖_，可以避免打包未使用的模块。
+在 webpack 出现之前，前端开发人员会使用 [grunt](https://gruntjs.com/) 和 [gulp](https://gulpjs.com/) 等工具来处理资源，并将它们从 `/src` 文件夹移动到 `/dist` 或 `/build` 目录中。JavaScript 模块也遵循同样方式，但是，像 webpack 这样的工具，将__动态打包__所有依赖（创建所谓的 [依赖图(dependency graph)](/concepts/dependency-graph)）。这是极好的创举，因为现在每个模块都可以_明确表述它自身的依赖_，可以避免打包未使用的模块。
 
 webpack 最出色的功能之一就是，除了引入 JavaScript，还可以通过 loader _引入任何其他类型的文件_。也就是说，以上列出的那些 JavaScript 的优点（例如显式依赖），同样可以用来构建 web 站点或 web 应用程序中的所有非 JavaScript 内容。让我们从 CSS 开始起步，或许你可能已经熟悉了下面这些设置。
 
@@ -438,6 +439,7 @@ __project__
     |- index.html
   |- /src
 +   |- data.xml
++   |- data.csv
     |- my-font.woff
     |- my-font.woff2
     |- icon.png
@@ -458,6 +460,15 @@ __src/data.xml__
 </note>
 ```
 
+__src/data.csv__
+
+``` csv
+to,from,heading,body
+Mary,John,Reminder,Call Cindy on Tuesday
+Zoe,Bill,Reminder,Buy orange juice
+Autumn,Lindsey,Letter,I miss you
+```
+
 现在，你可以 `import` 这四种类型的数据(JSON, CSV, TSV, XML)中的任何一种，所导入的 `Data` 变量，将包含可直接使用的已解析 JSON：
 
 __src/index.js__
@@ -467,6 +478,7 @@ __src/index.js__
   import './style.css';
   import Icon from './icon.png';
 + import Data from './data.xml';
++ import Notes from './data.csv';
 
   function component() {
     const element = document.createElement('div');
@@ -482,6 +494,7 @@ __src/index.js__
     element.appendChild(myIcon);
 
 +   console.log(Data);
++   console.log(Notes);
 
     return element;
   }
@@ -645,6 +658,7 @@ __project__
     |- index.html
   |- /src
 -   |- data.xml
+-   |- data.csv
 -   |- my-font.woff
 -   |- my-font.woff2
 -   |- icon.png
@@ -709,6 +723,7 @@ __src/index.js__
 - import './style.css';
 - import Icon from './icon.png';
 - import Data from './data.xml';
+- import Notes from './data.csv';
 -
   function component() {
     const element = document.createElement('div');
@@ -724,6 +739,7 @@ __src/index.js__
 -   element.appendChild(myIcon);
 -
 -   console.log(Data);
+-   console.log(Notes);
 
     return element;
   }

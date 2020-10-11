@@ -161,8 +161,7 @@ webpack 4 默认使用 `stats.toJson()` 输出大量数据。除非在增量步�
 某些 utility, plugin 和 loader 都只用于生产环境。例如，在开发环境下使用 `TerserPlugin` 来 minify(压缩) 和 mangle(混淆破坏) 代码是没有意义的。通常在开发环境下，应该排除以下这些工具：
 
 - `TerserPlugin`
-- `ExtractTextPlugin`
-- `[hash]`/`[chunkhash]`
+- `[fullhash]`/`[chunkhash]`/`[contenthash]`
 - `AggressiveSplittingPlugin`
 - `AggressiveMergingPlugin`
 - `ModuleConcatenationPlugin`
@@ -170,15 +169,17 @@ webpack 4 默认使用 `stats.toJson()` 输出大量数据。除非在增量步�
 
 ### 最小化 entry chunk  {#minimal-entry-chunk}
 
-webpack 只会在文件系统中输出已经更新的 chunk。某些配置选项（HMR, `output.chunkFilename` 的 `[name]`/`[chunkhash]`, `[hash]`）来说，除了对已经更新的 chunk 无效之外，对于 entry chunk 也不会生效。
+webpack 只会在文件系统中输出已经更新的 chunk。某些配置选项（HMR, `output.chunkFilename` 的 `[name]`/`[chunkhash]/[contenthash]`，`[fullhash]`）来说，除了对已经更新的 chunk 无效之外，对于 entry chunk 也不会生效。
 
-确保在生成 entry chunk 时，尽量减少其体积以提高性能。下面的代码块将只提取包含 runtime 的 chunk，_其他 chunk 都作为其子 chunk_:
+确保在生成 entry chunk 时，尽量减少其体积以提高性能。下面的配置为运行时代码创建了一个额外的 chunk，所以它的生成代价较低：
 
 ```js
-new CommonsChunkPlugin({
-  name: 'manifest',
-  minChunks: Infinity,
-});
+module.exports = {
+  // ...
+  optimization: {
+    runtimeChunk: true
+  }
+};
 ```
 
 ### 避免额外的优化步骤 {#avoid-extra-optimization-steps}

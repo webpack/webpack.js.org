@@ -127,6 +127,7 @@ __Output:__
 
 - [`output.filename`](/configuration/output/#outputfilename) - 用于 `initial` chunk 文件
 - [`output.chunkFilename`](/configuration/output/#outputchunkfilename) - 用于 `non-initial` chunk 文件
+- 在某些情况下，使用 `initial` 和 `non-initial` 的 chunk 时，可以使用 `output.filename`。
 
 这些字段中会有一些 [占位符](/configuration/output/#template-strings)。常用的占位符如下：
 

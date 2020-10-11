@@ -1,6 +1,6 @@
 ---
 title: entry 高级用法
-sort: 24
+sort: 25
 contributors:
   - EugeneHlushko
 ---

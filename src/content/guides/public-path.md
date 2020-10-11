@@ -1,6 +1,6 @@
 ---
 title: 公共路径
-sort: 22
+sort: 23
 contributors:
   - rafaelrinaldi
   - chrisVillanueva

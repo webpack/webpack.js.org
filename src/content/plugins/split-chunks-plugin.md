@@ -282,6 +282,16 @@ module.exports = {
 };
 ```
 
+### `splitChunks.usedExports` {#splitchunksusedexports}
+
+#### `splitChunks.cacheGroups{cacheGroup}.usedExports` {#splitchunkscachegroupscachegroupusedexports}
+
+`boolean = true`
+
+弄清哪些 export 被模块使用，以混淆 export 名称，省略未使用的 export，并生成有效的代码。
+当它为 `true` 时：分析每个运行时使用的出口，当它为 `"global"` 时：分析所有运行时的全局 export 组合）。
+
+
 ### `splitChunks.cacheGroups` {#splitchunkscachegroups}
 
 Cache groups can inherit and/or override any options from `splitChunks.*`; but `test`, `priority` and `reuseExistingChunk` can only be configured on cache group level. To disable any of the default cache groups, set them to `false`.

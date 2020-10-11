@@ -74,10 +74,7 @@ exports.aFunction = function doSomething() {
 
 见 [node.js global](https://nodejs.org/api/globals.html#globals_global).
 
-
-### `process` (NodeJS) {#process-nodejs}
-
-见 [node.js process](https://nodejs.org/api/process.html).
+出于兼容性考虑，webpack 默认填充了 `global` 变量。
 
 
 ### `__dirname` (NodeJS) {#__dirname-nodejs}

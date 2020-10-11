@@ -1,6 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const webpack = require('webpack');
 const mdPlugins = [
   require('docschina-remark-slugger'),
   [
@@ -16,7 +16,7 @@ const mdPlugins = [
   [
     require('remark-autolink-headings'),
     {
-      behaviour: 'append'
+      behavior: 'append'
     }
   ],
   [
@@ -36,17 +36,18 @@ const mdPlugins = [
 
 module.exports = (env = {}) => ({
   context: path.resolve(__dirname, './src'),
-  entry: {
-    index: './index.jsx',
-    vendor: [
-      'react', // Replace with preact or inferno
-      'react-dom', // Replace with preact or inferno
-      'react-router-dom'
-    ]
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: [__filename],
+    },
+    cacheDirectory: path.resolve(__dirname, '.cache/webpack')
   },
   resolve: {
-    symlinks: false,
-    extensions: ['.js', '.jsx', '.scss']
+    extensions: ['.js', '.jsx', '.scss'],
+    fallback: {
+      path: require.resolve('path-browserify')
+    }
   },
   module: {
     rules: [
@@ -57,19 +58,26 @@ module.exports = (env = {}) => ({
           {
             loader: '@mdx-js/loader',
             options: {
-              mdPlugins
+              remarkPlugins: mdPlugins
             }
           }
         ]
       },
       {
         test: /\.md$/,
-        use: {
-          loader: 'remark-loader',
-          options: {
-            plugins: mdPlugins
+        use: [
+          {
+            loader: 'html-loader'
+          },
+          {
+            loader: 'remark-loader',
+            options: {
+              remarkOptions: {
+                plugins: [...mdPlugins, require('remark-html')]
+              }
+            }
           }
-        }
+        ]
       },
       {
         test: /\.font.js$/,
@@ -86,11 +94,7 @@ module.exports = (env = {}) => ({
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: [
-          'babel-loader',
-          {
-            loader: 'eslint-loader',
-            options: { fix: true }
-          }
+          'babel-loader'
         ]
       },
       {
@@ -108,15 +112,19 @@ module.exports = (env = {}) => ({
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [
-                require('autoprefixer')
-              ],
+              postcssOptions: {
+                plugins: () => [
+                  require('autoprefixer')
+                ],
+              }
             }
           },
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [ path.join('./src/styles/partials') ]
+              sassOptions: {
+                includePaths: [ path.join('./src/styles/partials') ]
+              }
             }
           }
         ]
@@ -124,30 +132,32 @@ module.exports = (env = {}) => ({
       {
         test: /\.woff2?$/,
         use: {
+          // TODO use type: asset/resource when mini-css bug regarding asset modules is fixed
           loader: 'file-loader',
           options: {
-            prefix: 'font/'
+            outputPath: 'font',
+            esModule: false
           }
         }
       },
       {
-        test: /\.(jpg|png|svg|ico)$/,
-        use: 'file-loader'
+        test: /\.(jpg|jpeg|png|svg|ico)$/i,
+        type: 'asset/resource'
       }
     ]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[chunkhash].css'
+      filename: '[name].[contenthash].css'
+    }),
+    new webpack.DefinePlugin({
+      // https://github.com/algolia/algoliasearch-client-javascript/issues/764
+      'process.env.RESET_APP_DATA_TIMER': JSON.stringify('') // fix for algoliasearch
     })
   ],
-  stats: {
-    children: false
-  },
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].[chunkhash].chunk.js'
+    filename: '[name].bundle.js'
   }
 });

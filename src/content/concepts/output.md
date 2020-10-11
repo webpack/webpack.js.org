@@ -59,8 +59,8 @@ __config.js__
 module.exports = {
   //...
   output: {
-    path: '/home/proj/cdn/assets/[hash]',
-    publicPath: 'https://cdn.example.com/assets/[hash]/'
+    path: '/home/proj/cdn/assets/[fullhash]',
+    publicPath: 'https://cdn.example.com/assets/[fullhash]/'
   }
 };
 ```
