@@ -32,6 +32,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
+      - run: bash ./src/scripts/deploy-github.sh
       - run: yarn --frozen-lockfile
       - run: yarn lint:js
       - run: yarn lint:markdown
