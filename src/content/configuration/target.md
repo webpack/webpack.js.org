@@ -20,11 +20,7 @@ webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `
 
 `string` `[string]` `false`
 
-<<<<<<< HEAD
-告知 webpack 为目标(target)指定一个环境。
-=======
-Instructs webpack to target a specific environment. Defaults to `'browserslist'` or to `'web'` when no browserslist configuration was found.
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+告知 webpack 为目标(target)指定一个环境。默认值为 `"browserslist"`，如果没有找到 browserslist 的配置，则默认为 `"web"`
 
 
 ### `string` {#string}
@@ -32,7 +28,6 @@ Instructs webpack to target a specific environment. Defaults to `'browserslist'`
 通过 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js) ，
 可以支持以下字符串值：
 
-<<<<<<< HEAD
 选项                | 描述
 --------------------- | -----------------------
 `async-node`          | 编译为类 Node.js 环境可用（使用 fs 和 vm 异步加载分块）
@@ -45,40 +40,16 @@ Instructs webpack to target a specific environment. Defaults to `'browserslist'`
 `node`                | 编译为类 Node.js 环境可用（使用 Node.js `require` 加载 chunks）
 `node-webkit`         | 编译为 Webkit 可用，并且使用 jsonp 去加载分块。支持 Node.js 内置模块和 [`nw.gui`](http://docs.nwjs.io/en/latest/) 
 导入（实验性质）
+`nwjs[[X].Y]`         | 等价于 `node-webkit`
 `web`                 | 编译为类浏览器环境里可用 __（默认）__
 `webworker`           | 编译成一个 WebWorker
+`esX`                 | 编译为指定版本的 ECMAScript。例如，es5，es2020
+`browserslist`        | 从 browserslist-config 中推断出平台和 ES 特性 **（如果 browserlist 可用，其值则为默认）**
 
 例如，当 `target` 设置为 `"electron-main"`，webpack 引入多个 electron 特定的变量。
-有关使用哪些模板和 externals 的更多信息，
-你可以 [直接参考 webpack 源码](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js#L148-L183)。
-=======
-Option                     | Description
--------------------------- | -----------------------
-`async-node[[X].Y]`        | Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)
-`electron[[X].Y]-main`     | Compile for [Electron](https://electronjs.org/) for main process.
-`electron[[X].Y]-renderer` | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.
-`electron[[X].Y]-preload`  | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `NodeTemplatePlugin` with `asyncChunkLoading` set to `true`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.
-`node[[X].Y]`              | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)
-`node-webkit[[X].Y]`       | Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)
-`nwjs[[X].Y]`              | The same as `node-webkit`
-`web`                      | Compile for usage in a browser-like environment __(default)__
-`webworker`                | Compile as WebWorker
-`esX`                      | Compile for specified ECMAScript version. Examples: es5, es2020.
-`browserslist`             | Infer a platform and the ES-features from a browserslist-config __(default if browserlist config is available)__
 
-For example, when the `target` is set to `"electron-main"`, webpack includes multiple electron specific variables.
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+可指定 `node` 或者 `electron` 的版本。上表中使用 `[[X].Y]` 表示。
 
-A version of `node` or `electron` may be optionally specified. This is denoted by the `[[X].Y]` in the table above.
-
-<<<<<<< HEAD
-### `function` {#function}
-
-如果传入一个函数，此函数调用时会传入一个 编译器（compiler） 作为参数。如果以上列表中没有一个预定义的目标(target)符合你的要求，
-请将其设置为一个函数。
-
-例如，如果你不需要使用以上任何插件：
-=======
 __webpack.config.js__
 
 ```js
@@ -88,27 +59,26 @@ module.exports = {
 };
 ```
 
-It helps determinate ES-features that may be used to generate a runtime-code (all the chunks and modules are wrapped by runtime code).
+它有助于确定可能用于生成运行时代码的 ES 特性（所有的 chunk 和模块都被运行时代码所包裹）
 
 #### `browserslist`
 
-If a project has a browserslist config, then webpack will use it for:
+如果一个项目有 browserslist 配置，那么 webpack 将会使用它：
 
-- Determinate ES-features that may be used to generate a runtime-code.
-- Infer an environment (e.g: `last 2 node versions` the same as `target: "node"` with some [`output.environment`](/configuration/output/#outputenvironment) settings).
+- 确定可用于运行时代码的 ES 特性。
+- 推断环境（例如：`last 2 node versions` 等价于 `target: node`，并会进行一些 [`output.environment`](/configuration/output/#outputenvironment) 设置).
 
-Supported browserslist values:
+支持的 browserslist 值：
 
-- `browserslist` - use automatically resolved browserslist config and environment (from the nearest `package.json` or `BROWSERSLIST` environment variable, see [browserslist documentation](https://github.com/browserslist/browserslist#queries) for details)
-- `browserslist:modern` - use `modern` environment from automatically resolved browserslist config
-- `browserslist:last 2 versions` - use an explicit browserslist query (config will be ignored)
-- `browserslist:/path/to/config` - explicitly specify browserslist config
-- `browserslist:/path/to/config:modern` - explicitly specify browserslist config and an environment
+- `browserslist` - 使用自动解析的 browserslist 配置和环境（从最近的 `package.json` 或 `BROWSERSLIST` 环境变量中获取，具体请查阅 [browserslist 文档](https://github.com/browserslist/browserslist#queries)）
+- `browserslist:modern` - 使用自动解析的 browserslist 配置中的 `modern` 环境
+- `browserslist:last 2 versions` - 使用显式 browserslist 查询（配置将被忽略）
+- `browserslist:/path/to/config` - 明确指定 browserslist 配置路径
+- `browserslist:/path/to/config:modern` - 明确指定 browserslist 的配置路径和环境
 
-### `[string]`
+### `[string]` {#string}
 
-When multiple targets are passed, then common subset of features will be used:
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+当传递多个目标时，将使用共同的特性子集：
 
 __webpack.config.js__
 
@@ -119,9 +89,9 @@ module.exports = {
 };
 ```
 
-webpack will generate a runtime code for web platform and will use only ES5 features.
+webpack 将生成 web 平台的运行时代码，并且只使用 ES5 相关的特性。
 
-Not all targets may be mixed for now.
+目前并不是所有的 target 都可以进行混合。
 
 __webpack.config.js__
 
@@ -132,11 +102,11 @@ module.exports = {
 };
 ```
 
-Will cause an error. webpack does not support universal target for now.
+此时会导致错误。webpack 暂时不支持 universal 的 target。
 
-### `false`
+### `false` {#false}
 
-Set `target` to `false` if none of the predefined targets from the list above meet your needs, no plugins will be applied.
+如果上述列表中的预设 target 都不符合你的需求，你可以将 `target` 设置为 `false`，这将告诉 webpack 不使用任何插件。
 
 __webpack.config.js__
 
@@ -164,4 +134,4 @@ module.exports = {
 };
 ```
 
-When no information about the target or the [environment](/configuration/output/#outputenvironment) features is provided, then ES2015 will be used.
+当没有提供 target 或 [environment](/configuration/output/#outputenvironment) 特性的信息时，将默认使用 ES2015。

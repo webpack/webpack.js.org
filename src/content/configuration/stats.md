@@ -145,14 +145,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `stats.cachedAssets` {#statscachedassets}
-=======
-### `stats.assetsSpace`
+### `stats.assetsSpace` {#statsassetsspace}
 
 `number = 15`
 
-Tells `stats` how many items of assets should be displayed (groups will be collapsed to fit this space).
+告诉 `stats` 应该显示多少个 asset 项目（将以组的方式折叠，以适应这个空间）。
 
 ```javascript
 module.exports = {
@@ -163,11 +160,11 @@ module.exports = {
 };
 ```
 
-### `stats.modulesSpace`
+### `stats.modulesSpace` {#statsmodulesspace}
 
 `number = 15`
 
-Tells `stats` how many items of modules should be displayed (groups will be collapsed to fit this space).
+告诉 `stats` 应该显示多少个模块项目（将以组的方式折叠，以适应这个空间）。
 
 ```javascript
 module.exports = {
@@ -178,11 +175,11 @@ module.exports = {
 };
 ```
 
-### `stats.chunkModulesSpace`
+### `stats.chunkModulesSpace` {#statschunkmodulesspace}
 
 `number = 10`
 
-Tells `stats` how many items of chunk modules should be displayed (groups will be collapsed to fit this space).
+告诉 `stats` 显示多少个 chunk 模块项目（将以组的方式折叠，以适应这个空间）。
 
 ```javascript
 module.exports = {
@@ -193,11 +190,11 @@ module.exports = {
 };
 ```
 
-### `stats.nestedModulesSpace`
+### `stats.nestedModulesSpace` {#statsnestedmodulesspace}
 
 `number = 10`
 
-Tells `stats` how many items of nested modules should be displayed (groups will be collapsed to fit this space).
+告诉 `stats` 应该显示多少个嵌套模块的项目（将以组的方式折叠，以适应这个空间）。
 
 ```javascript
 module.exports = {
@@ -208,11 +205,11 @@ module.exports = {
 };
 ```
 
-### `stats.cachedModules`
+### `stats.cachedModules` {#statscachedmodules}
 
 `boolean = true`
 
-Tells `stats` whether to add information about cached (not built) modules.
+告诉 `stats` 是否要缓存（非内置）模块的信息。
 
 ```javascript
 module.exports = {
@@ -223,11 +220,11 @@ module.exports = {
 };
 ```
 
-### `stats.runtimeModules`
+### `stats.runtimeModules` {#statsruntimemodules}
 
 `boolean = true`
 
-Tells `stats` whether to add information about runtime modules.
+告诉 `stats` 是否要添加运行时模块的信息。
 
 ```javascript
 module.exports = {
@@ -238,11 +235,11 @@ module.exports = {
 };
 ```
 
-### `stats.dependentModules`
+### `stats.dependentModules` {#statsdependentmodules}
 
 `boolean`
 
-Tells `stats` whether to show chunk modules that are dependencies of other modules of the chunk.
+告诉 `stats` 是否要展示该 chunk 依赖的其他模块的 chunk 模块。
 
 ```javascript
 module.exports = {
@@ -253,11 +250,11 @@ module.exports = {
 };
 ```
 
-### `stats.groupAssetsByChunk`
+### `stats.groupAssetsByChunk` {#statsgroupassetsbychunk}
 
 `boolean`
 
-Tells `stats` whether to group assets by how their are related to chunks.
+告诉 `stats` 是否按照 asset 与 chunk 的关系进行分组。
 
 ```javascript
 module.exports = {
@@ -268,11 +265,11 @@ module.exports = {
 };
 ```
 
-### `stats.groupAssetsByEmitStatus`
+### `stats.groupAssetsByEmitStatus` {#statsgroupassetsbyemitstatus}
 
 `boolean`
 
-Tells `stats` whether to group assets by their status (emitted, compared for emit or cached).
+告诉 `stats` 是否按照 asset 的状态进行分组（emitted，对比 emit 或缓存）.
 
 ```javascript
 module.exports = {
@@ -283,11 +280,11 @@ module.exports = {
 };
 ```
 
-### `stats.groupAssetsByInfo`
+### `stats.groupAssetsByInfo` {#statsgroupassetsbyinfo}
 
 `boolean`
 
-Tells `stats` whether to group assets by their asset info (immutable, development, hotModuleReplacement, etc).
+告诉 `stats` 是否按照 asset 信息对 asset 进行分组（immutable，development。hotModuleReplacement 等）。
 
 ```javascript
 module.exports = {
@@ -298,11 +295,11 @@ module.exports = {
 };
 ```
 
-### `stats.groupModulesByAttributes`
+### `stats.groupModulesByAttributes` {#statsgroupmodulesbyattributes}
 
 `boolean`
 
-Tells `stats` whether to group modules by their attributes (errors, warnings, assets, optional, orphan, or dependent).
+告诉 `stats` 是否按模块的属性进行分组（errors，warnings，assets，optional，orphan 或者 dependent）。
 
 ```javascript
 module.exports = {
@@ -313,8 +310,7 @@ module.exports = {
 };
 ```
 
-### `stats.cachedAssets`
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+### `stats.cachedAssets` {#statscachedassets}
 
 `boolean = true`
 
@@ -389,26 +385,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `stats.chunkRootModules` {#statschunkrootmodules}
-
-`boolean = true`
-
-告知 `stats` 是否添加关于 chunks 的根模块信息。 如果 `stats.chunks = true` 则会应用该配置.
-
-```javascript
-module.exports = {
-  //...
-  stats: {
-    chunkRootModules: false
-  }
-};
-```
-
 ### `stats.chunkOrigins` {#statschunkorigins}
-=======
-### `stats.chunkOrigins`
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 `boolean = true`
 
@@ -718,26 +695,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `stats.maxModules` {#statsmaxmodules}
-
-`number = 15`
-
-设置最大的模块显示数量。
-
-```javascript
-module.exports = {
-  //...
-  stats: {
-    maxModules: 5
-  }
-};
-```
-
 ### `stats.modules` {#statsmodules}
-=======
-### `stats.modules`
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 `boolean = true`
 
@@ -1058,23 +1016,20 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `stats.chunkRelations` {#statschunkrelations}
-=======
 
-W> `stats.warningsFilter` is deprecated in favor of `[stats.ignoreWarnings](#statsignoreWarnings)`.
+W> `stats.warningsFilter` 已被弃用，请改用 [`stats.ignoreWarnings`](#statsignoreWarnings)。
 
-### `stats.ignoreWarnings`
+### `stats.ignoreWarnings` {#statsignorewarnings}
 
 `RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`
 
-Tells `stats` to ignore specific warnings. This can be done with a `RegExp`, a custom `function` to select warnings based on the raw warning instance which is getting `WebpackError` and `Compilation` as arguments and returns a `boolean`, an `object` with the following properties:
+告诉 `stats` 忽略特定的警告。这可以通过一个 `RegExp` 来完成，这是一个自定义的 `function`，用于根据原始 warning 实例来选择 warning，该实例的参数为 `WebpackError` 和 `Compilation`，并会返回一个 `boolean`，一个具有以下属性的 `object`：
 
-- `file` : A RegExp to select the origin file for the warning.
-- `message` : A RegExp to select the warning message.
-- `module` : A RegExp to select the origin module for the warning.
+- `file`：一个正则表达式，用于匹配 warning 的源文件。
+- `message`：一个正则表达式，用于匹配 warning 信息。
+- `module`：一个正则表达式，用于匹配 warning 的源模块。
 
-`stats.ignoreWarnings` can be an `array` of any of the above.
+`stats.ignoreWarnings` 可以是上述任何一种的 `arrau`：
 
 ```javascript
 module.exports = {
@@ -1094,8 +1049,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunkRelations`
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+### `stats.chunkRelations` {#statschunkrelations}
 
 `boolean = false`
 

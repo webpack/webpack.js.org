@@ -1,11 +1,6 @@
 ---
-<<<<<<< HEAD
 title: 集成
-sort: 23
-=======
-title: Integrations
 sort: 24
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 contributors:
   - pksjce
   - bebraw

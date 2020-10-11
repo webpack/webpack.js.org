@@ -322,15 +322,12 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.modules` {#resolvemodules}
-=======
 
-### `resolve.exportsFields`
+### `resolve.exportsFields` {#resolveexportsfields}
 
 `[string] = ['exports']`
 
-Fields in package.json that are used for resolving module requests. See [package-exports guideline](/guides/package-exports/) for more information.
+在 package.json 中用于解析模块请求的字段。欲了解更多信息，请查阅 [package-exports guideline](/guides/package-exports/) 文档。
 
 __webpack.config.js__
 
@@ -344,8 +341,7 @@ module.exports = {
 ```
 
 
-### `resolve.modules`
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+### `resolve.modules` {#resolvemodules}
 
 `[string] = ['node_modules']`
 
@@ -435,15 +431,12 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.symlinks` {#resolvesymlinks}
-=======
 
-### `resolve.preferRelative`
+### `resolve.preferRelative` {#resolvepreferrelative}
 
 `boolean`
 
-When enabled, webpack would prefer to resolve module requests as relative requests instead of using modules from `node_modules` directories.
+当启用此选项时，webpack 更倾向于将模块请求解析为相对请求，而不使用来自 `node_modules` 目录下的模块。
 
 __webpack.config.js__
 
@@ -468,8 +461,7 @@ const b = new URL('module/path', import.meta.url);
 const a = new URL('./module/path', import.meta.url);
 ```
 
-### `resolve.symlinks`
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+### `resolve.symlinks` {#resolvesymlinks}
 
 `boolean = true`
 

@@ -82,16 +82,10 @@ class Site extends React.Component {
               isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
               children: this._strip(sections.filter(item => item.name !== 'contribute'))
             },
-<<<<<<< HEAD
             { content: '参与贡献', url: '/contribute/' },
             { content: '投票', url: '/vote/' },
-            { content: '博客', url: 'https://medium.com/webpack' },
+            { content: '博客', url: '/blog/' },
             { content: '印记中文', url: 'https://docschina.org' }
-=======
-            { content: 'Contribute', url: '/contribute/' },
-            { content: 'Vote', url: '/vote/' },
-            { content: 'Blog', url: '/blog/' }
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
           ]}
           />
         </div>

@@ -1,11 +1,6 @@
 ---
-<<<<<<< HEAD
 title: entry 高级用法
-sort: 24
-=======
-title: Advanced entry
 sort: 25
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 contributors:
   - EugeneHlushko
 ---

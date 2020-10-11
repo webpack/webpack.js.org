@@ -1,11 +1,6 @@
 ---
-<<<<<<< HEAD
 title: 渐进式网络应用程序
-sort: 21
-=======
-title: Progressive Web Application
 sort: 22
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 contributors:
   - johnnyreilly
   - chenxsan

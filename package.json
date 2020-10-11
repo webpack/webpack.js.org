@@ -48,13 +48,9 @@
     "lint-markdown": "markdownlint --rules markdownlint-rule-emphasis-style --config ./.markdownlint.json --ignore './src/content/**/_*.md'",
     "lint:social": "alex . -q",
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
-<<<<<<< HEAD
-    "lint:links": "hyperlink -c 8 -r dist/index.html --canonicalroot https://webpack.js.org/ -i --skip https://img.shields.io --skip /plugins/extract-text-webpack-plugin/ --skip **/printable** --skip https://david-dm.org --skip https://codecov.io/gh --skip 'content-type-mismatch https://travis-ci.org' > internal-links.tap; cat internal-links.tap | tap-spot",
+    "lint:links": "hyperlink -c 8 --root dist -r dist/index.html --canonicalroot https://webpack.js.org/ --internal --skip /plugins/extract-text-webpack-plugin/ --skip /printable --skip https:// --skip http:// --skip sw.js > internal-links.tap; cat internal-links.tap | tap-spot",
     "lint:heading": "textlint --fix src/content/*",
     "lint:headingMDX": "textlint --fix src/content/**/*.mdx",
-=======
-    "lint:links": "hyperlink -c 8 --root dist -r dist/index.html --canonicalroot https://webpack.js.org/ --internal --skip /plugins/extract-text-webpack-plugin/ --skip /printable --skip https:// --skip http:// --skip sw.js > internal-links.tap; cat internal-links.tap | tap-spot",
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
     "sitemap": "cd dist && sitemap-static --ignore-file=../sitemap-ignore.json --pretty --prefix=https://webpack.js.org/ > sitemap.xml",
     "serve": "npm run build && sirv start ./dist --port 4000",
     "deploy": "gh-pages -d dist",
@@ -71,16 +67,11 @@
     }
   },
   "lint-staged": {
-<<<<<<< HEAD
-    "*.{js,jsx}": [
-      "npm run lint:js"
-=======
     "*.{js,jsx,md}": [
       "npm run lint-js"
     ],
     "*.md": [
       "npm run lint-markdown"
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
     ]
   },
   "bundlesize": [
@@ -101,16 +92,6 @@
     "alex": "^5.1.0",
     "autoprefixer": "^9.8.6",
     "babel-loader": "^8.1.0",
-<<<<<<< HEAD
-    "bundlesize": "^0.17.1",
-    "copy-webpack-plugin": "4.5.2",
-    "cross-env": "5.2.0",
-    "css-loader": "^0.28.10",
-    "cypress": "^4.5.0",
-    "directory-tree": "2.2.0",
-    "directory-tree-webpack-plugin": "0.3",
-    "docschina-remark-slugger": "^0.1.4",
-=======
     "bundlesize": "^0.18.0",
     "copy-webpack-plugin": "^6.1.0",
     "cross-env": "^7.0.2",
@@ -119,7 +100,7 @@
     "cypress": "^5.3.0",
     "directory-tree": "^2.2.4",
     "directory-tree-webpack-plugin": "^1.0.2",
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+    "docschina-remark-slugger": "^0.1.4",
     "duplexer": "^0.1.1",
     "eslint": "^7.8.1",
     "eslint-plugin-cypress": "^2.10.3",
@@ -167,17 +148,12 @@
     "static-site-generator-webpack-plugin": "^3.4.1",
     "style-loader": "^2.0.0",
     "tap-spot": "^1.1.1",
-<<<<<<< HEAD
-    "terser-webpack-plugin": "^2.3.5",
+    "terser-webpack-plugin": "^4.1.0",
     "textlint": "^11.6.3",
     "textlint-rule-heading": "^1.0.10",
     "through2": "^2.0.3",
     "uglifyjs-webpack-plugin": "^1.1.6",
-    "webpack": "^4.42.0",
-=======
-    "terser-webpack-plugin": "^4.1.0",
     "webpack": "^5.0.0-rc.5",
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1",

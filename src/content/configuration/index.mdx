@@ -199,13 +199,6 @@ module.exports = {
       crossOriginLoading: "use-credentials", // enum
       crossOriginLoading: "anonymous",
       crossOriginLoading: false,
-<<<<<<< HEAD
-      // 指定 runtime 如何处理跨域请求问题
-    </advancedOutput>
-    <expertOutput "#">
-      <default>
-        /* 专家级输出配置（自行承担风险） */
-=======
       // specifies how cross origin request are issued by the runtime
       importFunctionName: "import", // string (default)
       // expression that is called when using import()
@@ -217,7 +210,6 @@ module.exports = {
     <expertOutput "#">
       <default>
         /* Expert output configuration 1 (on own risk) */
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
       </default>
       pathinfo: true, // boolean
       // include useful path info about modules, exports, requests, etc. into the generated code
@@ -227,22 +219,6 @@ module.exports = {
       // timeout for loading chunks
       compareBeforeEmit: true, // boolean (default)
       // compare the generated asset with the asset on disk before writing to disk
-<<<<<<< HEAD
-      chunkFormat: "array-push",
-      chunkFormat: "commonjs",
-      chunkFormat: false,
-      // the format of chunks
-      hotUpdateMainFilename: "[hash].hot-update.json", // string
-      // HMR manifest 的文件名模板
-      hotUpdateChunkFilename: "[id].[hash].hot-update.js", // string
-      // filename template for HMR chunks
-      hotUpdateGlobal: "hmrUpdateFunction", // string
-      // the name of the global variable used to load hot update chunks
-      sourcePrefix: "\\t", // string
-      // prefix module sources in bundle for better readablitity
-      // but breaks multi-line template strings
-=======
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
       strictModuleExceptionHandling: true, // boolean
       // handle errors in module evaluation correctly, but for a performance cost
       devtoolNamespace: "MyLibrary", // string
@@ -529,12 +505,6 @@ module.exports = {
       // follow symlinks to new location
       descriptionFiles: ["package.json"], // (default)
       // files that are read for package description
-<<<<<<< HEAD
-      mainFields: ["main"],
-      // 当 request 一个文件夹时
-      // 从描述文件中读取的属性
-=======
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
       aliasFields: ["browser"],
       // properties that are read from description file
       // to alias requests in this package
@@ -562,15 +532,7 @@ module.exports = {
       // use sync fs calls instead of async fs calls
       byDependency: { commonjs: { extensions: [".js", "..."] } },
       // change resolving depending on issuer dependency
-<<<<<<< HEAD
-      plugins: [
-        // ...
-      ]
-      // 应用于 resolver 的附加插件
-    </advancedResolve>
-=======
     </expertResolve>
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
   },
   performance: {
     <hints "/configuration/performance/#performancehints">
@@ -1170,25 +1132,13 @@ module.exports = {
 
 W> 在应用 [插件默认值](/contribute/writing-a-plugin/#configuration-defaults) 之后，webpack 将应用配置默认值。
 
-<<<<<<< HEAD
-T> 无需几次鼠标点击，而是想要快速生成 webpack 配置文件来满足项目需求。
-
-或者使用 [webpack-cli 的 `init` 命令](https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli)，会在创建配置文件之前会询问你几个问题。
-=======
-Use [webpack-cli's `init` command](https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli) to rapidly generate webpack configuration file for your project requirements, it will ask you a couple of questions before creating a configuration file.
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+为了快速生成符合项目要求的 webpack 配置文件，在使用 [webpack-cli 的 `init` 命令](https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli)时，会在创建配置文件之前会询问你几个问题。
 
 ```bash
 npx webpack-cli init
 ```
 
-<<<<<<< HEAD
-W> 如果尚未在项目或全局安装 `@webpack-cli/init`，则可能会提示安装。
-
-T> 运行 `npx webpack-cli init` 之后，你可能会根据在配置生成过程中做出的选择，将更多的 package 安装到项目中。
-=======
-npx might prompt you to install `@webpack-cli/init` if it is not yet installed in the project or globally. You might also get additional packages installed to your project depending on the choices you've made during the configuration generation.
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+如果尚未在项目或全局安装 `@webpack-cli/init`，npx 可能会提示你安装。根据你在配置生成过程中的选择，你也可能会安装额外的 package 到你的项目中。
 
 ```bash
 npx webpack-cli init

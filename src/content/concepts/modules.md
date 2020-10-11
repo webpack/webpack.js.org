@@ -34,21 +34,16 @@ webpack 从这些系统中汲取了经验和教训，并将_模块_的概念应�
 
 ## 支持的模块类型 {#supported-module-types}
 
-<<<<<<< HEAD
-通过 _loader_ 可以使 webpack 支持多种语言和预处理器语法编写的模块。_loader_ 描述了 webpack __如何__ 处理非 JavaScript _模块_，并将相关_依赖_引入你的 _bundle_ 中。
-webpack 社区已经为各种流行的语言和预处理器创建了 _loader_，其中包括：
-=======
-webpack supports to following module types natively:
+webpack 天生支持如下模块类型：
 
-- [ECMAScript modules](/guides/ecma-script-modules)
-- CommonJS modules
-- AMD modules
+- [ECMAScript 模块](/guides/ecma-script-modules)
+- CommonJS 模块
+- AMD 模块
 - [Assets](/guides/asset-modules)
-- WebAssembly modules
+- WebAssembly 模块
 
-In addition to that webpack supports modules written in a variety of languages and preprocessors via _loaders_. _Loaders_ describe to webpack __how__ to process non-native _modules_ and include these _dependencies_ into your _bundles_.
-The webpack community has built _loaders_ for a wide variety of popular languages and language processors, including:
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+通过 **loader** 可以使 webpack 支持多种语言和预处理器语法编写的模块。**loader** 向 webpack 描述了如何处理非原生*模块*，并将相关**依赖**引入到你的 **bundles**中。
+webpack 社区已经为各种流行的语言和预处理器创建了 _loader_，其中包括：
 
 - [CoffeeScript](http://coffeescript.org)
 - [TypeScript](https://www.typescriptlang.org)

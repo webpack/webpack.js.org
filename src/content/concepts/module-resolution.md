@@ -59,13 +59,9 @@ import 'module/lib/file';
 在 [`resolve.modules`](/configuration/resolve/#resolvemodules) 中指定的所有目录检索模块。
 你可以通过配置别名的方式来替换初始模块路径，具体请参照 [`resolve.alias`](/configuration/resolve/#resolvealias) 配置选项。
 
-<<<<<<< HEAD
-一旦根据上述规则解析路径后，resolver 将会检查路径是指向文件还是文件夹。如果路径指向文件：
-=======
-- If the package contains a `package.json` file, then fields specified in [`resolve.exportsFields`](/configuration/resolve/#resolveexportsfields) configuration options are looked up in order, and the first such field in `package.json` determines the available exports from the package according to the [package exports guideline](/guides/package-exports/).
+- 如果 package 中包含 `package.json` 文件，那么在 [`resolve.exportsFields`](/configuration/resolve/#resolveexportsfields) 配置选项中指定的字段会被依次查找，`package.json` 中的第一个字段会根据 [package 导出指南](/guides/package-exports/)确定 package 中可用的 export。
 
-Once the path is resolved based on the above rule, the resolver checks to see if the path points to a file or a directory. If the path points to a file:
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+一旦根据上述规则解析路径后，resolver 将会检查路径是指向文件还是文件夹。如果路径指向文件：
 
 - 如果文件具有扩展名，则直接将文件打包。
 - 否则，将使用 [`resolve.extensions`](/configuration/resolve/#resolveextensions) 选项作为文件扩展名来解析，此选项会告诉解析器在解析中能够接受那些扩展名（例如 `.js`，`.jsx`）。

@@ -21,21 +21,12 @@ related:
 
 此插件用于在单独的 webpack 配置中创建一个 dll-only-bundle。 此插件会生成一个名为 `manifest.json` 的文件，这个文件是用于让 [`DllReferencePlugin`](#dllreferenceplugin) 能够映射到相应的依赖上。
 
-<<<<<<< HEAD
 - `context`（可选）： manifest 文件中请求的 context (默认值为 webpack 的 context)
 - `format` (boolean = false)：如果为 `true`，则 manifest json 文件 (输出文件) 将被格式化。
-- `name`：暴露出的 DLL 的函数名（[TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)：`[hash]` & `[name]` ）
+- `name`：暴露出的 DLL 的函数名（[TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)：`[fullhash]` & `[name]` ）
 - `path`：manifest.json 文件的 __绝对路径__（输出文件）
 - `entryOnly` (boolean = true)：如果为 `true`，则仅暴露入口
 - `type`：dll bundle 的类型
-=======
-- `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
-- `format` (boolean = false): If `true`, manifest json file (output) will be formatted.
-- `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[fullhash]` & `[name]` )
-- `path`: __absolute path__ to the manifest json file (output)
-- `entryOnly` (boolean = true): if `true`, only entry points will be exposed
-- `type`: type of the dll bundle
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 ```javascript
 new webpack.DllPlugin(options);

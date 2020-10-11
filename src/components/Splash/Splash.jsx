@@ -18,37 +18,10 @@ import './Splash.scss';
 
 const Support = React.lazy(() => import('../Support/Support'));
 
-<<<<<<< HEAD
-const Splash = () => (
-  <div className="splash">
-    <SplashViz />
-
-    <div className="splash__section splash__section--dark page__content">
-      <Container>
-        <Markdown>
-          <div dangerouslySetInnerHTML={{
-            __html: SplashContent
-          }} />
-        </Markdown>
-      </Container>
-    </div>
-
-    {/* <div className="splash__section page__content">
-      <Container>
-        <Markdown>
-          <h1>Support the Team</h1>
-
-          <p>
-            Through contributions, donations, and sponsorship, you allow webpack to thrive. Your
-            donations directly support office hours, continued enhancements, and most importantly,
-            great documentation and learning material!
-          </p>
-=======
 const SponsorsPlaceholder = () => (
   <>
     <h2>Latest Sponsors</h2>
     <PlaceholderComponent />
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
     <h2 id="sponsors">Platinum Sponsors</h2>
     <PlaceholderComponent />
@@ -67,17 +40,6 @@ const SponsorsPlaceholder = () => (
   </>
 );
 
-<<<<<<< HEAD
-              <h2>Backers</h2>
-              <Support rank="backer" />
-            </React.Suspense>
-          ) : null }
-        </Markdown>
-      </Container>
-    </div> */}
-  </div>
-);
-=======
 const Splash = () => {
   const [showSponsors, setShowSponsors] = useState(false);
   useEffect(() => {
@@ -137,6 +99,5 @@ const Splash = () => {
     </div>
   );
 };
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 export default Splash;

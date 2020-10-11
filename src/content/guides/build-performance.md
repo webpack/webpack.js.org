@@ -169,15 +169,9 @@ webpack 4 默认使用 `stats.toJson()` 输出大量数据。除非在增量步�
 
 ### 最小化 entry chunk  {#minimal-entry-chunk}
 
-<<<<<<< HEAD
-webpack 只会在文件系统中输出已经更新的 chunk。某些配置选项（HMR, `output.chunkFilename` 的 `[name]`/`[chunkhash]`, `[hash]`）来说，除了对已经更新的 chunk 无效之外，对于 entry chunk 也不会生效。
+webpack 只会在文件系统中输出已经更新的 chunk。某些配置选项（HMR, `output.chunkFilename` 的 `[name]`/`[chunkhash]/[contenthash]`，`[fullhash]`）来说，除了对已经更新的 chunk 无效之外，对于 entry chunk 也不会生效。
 
-确保在生成 entry chunk 时，尽量减少其体积以提高性能。下面的代码块将只提取包含 runtime 的 chunk，_其他 chunk 都作为其子 chunk_:
-=======
-webpack only emits updated chunks to the filesystem. For some configuration options, (HMR, `[name]`/`[chunkhash]`/`[contenthash]` in `output.chunkFilename`, `[fullhash]`) the entry chunk is invalidated in addition to the changed chunks.
-
-Make sure the entry chunk is cheap to emit by keeping it small. The following configuration creates an additional chunk for the runtime code, so it's cheap to generate:
->>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+确保在生成 entry chunk 时，尽量减少其体积以提高性能。下面的配置为运行时代码创建了一个额外的 chunk，所以它的生成代价较低：
 
 ```js
 module.exports = {
