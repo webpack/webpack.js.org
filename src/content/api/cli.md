@@ -49,7 +49,7 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 
 webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with
 
-Note: These are the flags with webpack v4, starting v5 CLI also supports [core flags]('/api/cli#core-flags')
+Note: These are the flags with webpack v4, starting v5 CLI also supports [core flags](/api/cli#core-flags)
 
 | Flag            | Type            | Description                                                                                                    |
 | --------------- | --------------- | -------------------------------------------------------------------------------------------------------------- |
