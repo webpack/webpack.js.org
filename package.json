@@ -153,7 +153,7 @@
     "textlint-rule-heading": "^1.0.10",
     "through2": "^2.0.3",
     "uglifyjs-webpack-plugin": "^1.1.6",
-    "webpack": "^5.0.0-rc.5",
+    "webpack": "^5.0.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1",
