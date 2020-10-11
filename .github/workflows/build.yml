@@ -65,3 +65,26 @@ jobs:
 
       - run: cp .proselintrc ~/
       - run: proselint src/content
+
+  e2e:
+    name: End to End Testing
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [12.x]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: |
+          yarn
+          yarn cypress install
+          yarn cypress verify
+          yarn fetch:supporters
+          yarn fetch:starter-kits
+          yarn cypress:ci
