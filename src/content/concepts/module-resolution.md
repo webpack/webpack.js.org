@@ -59,6 +59,8 @@ import 'module/lib/file';
 Modules are searched for inside all directories specified in [`resolve.modules`](/configuration/resolve/#resolvemodules).
 You can replace the original module path by an alternate path by creating an alias for it using the [`resolve.alias`](/configuration/resolve/#resolvealias) configuration option.
 
+- If the package contains a `package.json` file, then fields specified in [`resolve.exportsFields`](/configuration/resolve/#resolveexportsfields) configuration options are looked up in order, and the first such field in `package.json` determines the available exports from the package according to the [package exports guideline](/guides/package-exports/).
+
 Once the path is resolved based on the above rule, the resolver checks to see if the path points to a file or a directory. If the path points to a file:
 
 - If the path has a file extension, then the file is bundled straightaway.

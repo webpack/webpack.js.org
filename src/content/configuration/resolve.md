@@ -322,6 +322,24 @@ module.exports = {
 ```
 
 
+### `resolve.exportsFields`
+
+`[string] = ['exports']`
+
+Fields in package.json that are used for resolving module requests. See [package-exports guideline](/guides/package-exports/) for more information.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    exportsFields: ['exports', 'myCompanyExports']
+  }
+};
+```
+
+
 ### `resolve.modules`
 
 `[string] = ['node_modules']`

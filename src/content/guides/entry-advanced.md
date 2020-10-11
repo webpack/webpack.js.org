@@ -1,6 +1,6 @@
 ---
 title: Advanced entry
-sort: 24
+sort: 25
 contributors:
   - EugeneHlushko
 ---

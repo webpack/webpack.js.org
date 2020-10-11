@@ -23,7 +23,7 @@ This plugin is used in a separate webpack configuration exclusively to create a 
 
 - `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
 - `format` (boolean = false): If `true`, manifest json file (output) will be formatted.
-- `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[hash]` & `[name]` )
+- `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[fullhash]` & `[name]` )
 - `path`: __absolute path__ to the manifest json file (output)
 - `entryOnly` (boolean = true): if `true`, only entry points will be exposed
 - `type`: type of the dll bundle
@@ -88,7 +88,7 @@ const path = require('path');
 
 new webpack.DllPlugin({
   context: __dirname,
-  name: '[name]_[hash]',
+  name: '[name]_[fullhash]',
   path: path.join(__dirname, 'manifest.json'),
 });
 ```

@@ -1,7 +1,6 @@
 // Import External Dependencies
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { hot as Hot } from 'react-hot-loader';
 import DocumentTitle from 'react-document-title';
 
 // Import Utilities
@@ -33,9 +32,21 @@ import './Site.scss';
 // Load Content Tree
 import Content from '../../_content.json';
 
-// call offline plugin so it can build
 if (isClient) {
-  require('offline-plugin/runtime').install();
+  if (process.env.NODE_ENV === 'production') { // only register sw.js in production
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then((registration) => {
+            console.log('SW registered: ', registration);
+          })
+          .catch((registrationError) => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+  }
 }
 
 class Site extends React.Component {
@@ -73,7 +84,7 @@ class Site extends React.Component {
             },
             { content: 'Contribute', url: '/contribute/' },
             { content: 'Vote', url: '/vote/' },
-            { content: 'Blog', url: 'https://medium.com/webpack' }
+            { content: 'Blog', url: '/blog/' }
           ]}
           />
         </div>
@@ -176,4 +187,4 @@ class Site extends React.Component {
   };
 }
 
-export default Hot(module)(Site);
+export default Site;
