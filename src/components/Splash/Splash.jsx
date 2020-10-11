@@ -73,7 +73,7 @@ const Splash = () => {
 
             { showSponsors ? (
               <React.Suspense fallback={<SponsorsPlaceholder />}>
-                <p><input type="checkbox" checked={supportType === 'monthly'} onChange={e => setSupportType(e.target.checked ? 'monthly' : 'total')} /> Show sponsors by their average monthly amount of sponsoring in the last year.</p>
+                <p><label><input type="checkbox" checked={supportType === 'monthly'} onChange={e => setSupportType(e.target.checked ? 'monthly' : 'total')} /> Show sponsors by their average monthly amount of sponsoring in the last year.</label></p>
 
                 <Support type={supportType} rank="latest" />
 
