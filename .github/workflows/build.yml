@@ -5,8 +5,8 @@ on:
   pull_request:
 
 jobs:
-  lint-and-build:
-    name: Lint and Build
+  lint:
+    name: Lint
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -19,11 +19,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn
-      - run: yarn cypress install
-      - run: yarn cypress verify
       - run: yarn lint:js
       - run: yarn lint:markdown
       - run: yarn lint:social
-      - run: yarn cypress:ci
-      - run: yarn build
-      - run: yarn lint:links
