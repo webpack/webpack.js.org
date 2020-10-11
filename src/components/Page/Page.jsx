@@ -6,7 +6,7 @@ import PageLinks from '../PageLinks/PageLinks';
 import Markdown from '../Markdown/Markdown';
 import Contributors from '../Contributors/Contributors';
 import {PlaceholderString} from '../Placeholder/Placeholder';
-import Configuration from '../Configuration/Configuration';
+import { Pre } from '../Configuration/Configuration';
 import AdjacentPages from './AdjacentPages';
 
 // Load Styling
@@ -45,7 +45,7 @@ class Page extends React.Component {
             } else {
               window.scrollTo(0, 0);
             }
-            
+
           })
         )
         .catch(error =>
@@ -69,7 +69,16 @@ class Page extends React.Component {
     let contentRender;
 
     if (typeof content === 'function') {
-      contentRender = content(Configuration).props.children.slice(4); // Cut frontmatter information
+      contentRender = content({}).props.children.slice(4); // Cut frontmatter information
+      contentRender = React.Children.map(contentRender, child => {
+        if (React.isValidElement(child)) {
+          if (child.props.mdxType === 'pre') {
+            return <Pre children={child.props.children} />;
+          }
+        }
+
+        return child;
+      });
     } else {
       contentRender = (
         <div
@@ -88,7 +97,7 @@ class Page extends React.Component {
           <h1>{title}</h1>
 
           {contentRender}
-          
+
           {
             (previous || next) && <AdjacentPages previous={previous} next={next} />
           }

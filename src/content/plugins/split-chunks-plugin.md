@@ -282,7 +282,21 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `splitChunks.cacheGroups` {#splitchunkscachegroups}
+=======
+### `splitChunks.usedExports`
+
+#### `splitChunks.cacheGroups{cacheGroup}.usedExports`
+
+`boolean = true`
+
+Figure out which exports are used by modules to mangle export names, omit unused exports and generate more efficient code.
+When it is `true`: analyse used exports for each runtime, when it is `"global"`: analyse exports globally for all runtimes combined).
+
+
+### `splitChunks.cacheGroups`
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 Cache groups can inherit and/or override any options from `splitChunks.*`; but `test`, `priority` and `reuseExistingChunk` can only be configured on cache group level. To disable any of the default cache groups, set them to `false`.
 

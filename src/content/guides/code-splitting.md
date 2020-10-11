@@ -217,7 +217,6 @@ __webpack.config.js__
     },
     output: {
       filename: '[name].bundle.js',
-+     chunkFilename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
     },
 -   optimization: {
@@ -228,7 +227,11 @@ __webpack.config.js__
   };
 ```
 
+<<<<<<< HEAD
 注意，这里使用了 `chunkFilename`，它决定 non-entry chunk(非入口 chunk) 的名称。关于 `chunkFilename` 更多信息，请查看 [输出](/configuration/output/#outputchunkfilename) 文档。更新我们的项目，移除现在不会用到的文件：
+=======
+We'll also update our project to remove the now unused files:
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 __project__
 
@@ -256,7 +259,7 @@ __src/index.js__
 -
 -   // Lodash, now imported by this script
 -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
++   return import('lodash').then(({ default: _ }) => {
 +     const element = document.createElement('div');
 +
 +     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -274,7 +277,11 @@ __src/index.js__
 
 我们之所以需要 `default`，是因为 webpack 4 在导入 CommonJS 模块时，将不再解析为 `module.exports` 的值，而是为 CommonJS 模块创建一个 artificial namespace 对象，更多有关背后原因的信息，请阅读 [webpack 4: import() and CommonJs](https://medium.com/webpack/webpack-4-import-and-commonjs-d619d626b655)
 
+<<<<<<< HEAD
 注意，在注释中使用了 `webpackChunkName`。这样做会导致我们的 bundle 被命名为 `lodash.bundle.js` ，而不是 `[id].bundle.js` 。想了解更多关于 `webpackChunkName` 和其他可用选项，请查看 [`import()` 相关文档](/api/module-methods/#import-1)。让我们执行 webpack，查看 `lodash` 是否会分离到一个单独的 bundle：
+=======
+Let's run webpack to see `lodash` separated out to a separate bundle:
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 ``` bash
 ...
@@ -292,7 +299,7 @@ __src/index.js__
 ``` diff
 - function getComponent() {
 + async function getComponent() {
--   return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
+-   return import('lodash').then(({ default: _ }) => {
 -     const element = document.createElement('div');
 -
 -     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -301,7 +308,7 @@ __src/index.js__
 -
 -   }).catch(error => 'An error occurred while loading the component');
 +   const element = document.createElement('div');
-+   const { default: _ } = await import(/* webpackChunkName: "lodash" */ 'lodash');
++   const { default: _ } = await import('lodash');
 +
 +   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +
@@ -322,8 +329,13 @@ webpack v4.6.0+ 增加了对预获取和预加载的支持。
 
 在声明 import 时，使用下面这些内置指令，可以让 webpack 输出 "resource hint(资源提示)"，来告知浏览器：
 
+<<<<<<< HEAD
 - prefetch(预获取)：将来某些导航下可能需要的资源
 - preload(预加载)：当前导航下可能需要资源
+=======
+- prefetch: resource is probably needed for some navigation in the future
+- preload: resource will also be needed during the current navigation
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 下面这个 prefetch 的简单示例中，有一个 `HomePage` 组件，其内部渲染一个 `LoginButton` 组件，然后在点击后按需加载 `LoginModal` 组件。
 

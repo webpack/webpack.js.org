@@ -125,8 +125,14 @@ __Output:__
 
 输出文件的名称会受配置中的两个字段的影响：
 
+<<<<<<< HEAD
 - [`output.filename`](/configuration/output/#outputfilename) - 用于 `initial` chunk 文件
 - [`output.chunkFilename`](/configuration/output/#outputchunkfilename) - 用于 `non-initial` chunk 文件
+=======
+- [`output.filename`](/configuration/output/#outputfilename) - for `initial` chunk files
+- [`output.chunkFilename`](/configuration/output/#outputchunkfilename) - for `non-initial` chunk files
+- In some cases chunks are used `initial` and `non-initial`. In those cases `output.filename` is used.
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 这些字段中会有一些 [占位符](/configuration/output/#template-strings)。常用的占位符如下：
 

@@ -9,6 +9,7 @@ contributors:
   - madhavarshney
   - EugeneHlushko
   - smelukov
+  - anshumanv
 ---
 
 入口对象是用于 webpack 查找开始构建 bundle 的地方。上下文是入口文件所处的目录的绝对路径的字符串。
@@ -78,7 +79,8 @@ module.exports = {
     personal: {
       import: './personal.js',
       filename: 'pages/personal.js',
-      dependOn:'shared'
+      dependOn: 'shared',
+      chunkLoading: 'jsonp',
     }
   }
 };

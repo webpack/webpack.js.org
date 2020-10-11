@@ -1,7 +1,6 @@
 // Import External Dependencies
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { hot as Hot } from 'react-hot-loader';
 import DocumentTitle from 'react-document-title';
 
 // Import Utilities
@@ -33,9 +32,21 @@ import './Site.scss';
 // Load Content Tree
 import Content from '../../_content.json';
 
-// call offline plugin so it can build
 if (isClient) {
-  require('offline-plugin/runtime').install();
+  if (process.env.NODE_ENV === 'production') { // only register sw.js in production
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then((registration) => {
+            console.log('SW registered: ', registration);
+          })
+          .catch((registrationError) => {
+            console.log('SW registration failed: ', registrationError);
+          });
+      });
+    }
+  }
 }
 
 class Site extends React.Component {
@@ -71,10 +82,16 @@ class Site extends React.Component {
               isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
               children: this._strip(sections.filter(item => item.name !== 'contribute'))
             },
+<<<<<<< HEAD
             { content: '参与贡献', url: '/contribute/' },
             { content: '投票', url: '/vote/' },
             { content: '博客', url: 'https://medium.com/webpack' },
             { content: '印记中文', url: 'https://docschina.org' }
+=======
+            { content: 'Contribute', url: '/contribute/' },
+            { content: 'Vote', url: '/vote/' },
+            { content: 'Blog', url: '/blog/' }
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
           ]}
           />
         </div>
@@ -188,4 +205,4 @@ class Site extends React.Component {
   };
 }
 
-export default Hot(module)(Site);
+export default Site;

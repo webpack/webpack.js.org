@@ -25,6 +25,7 @@ contributors:
   - chenxsan
   - snitin315
   - QC-L
+  - anshumanv
 ---
 
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
@@ -105,7 +106,11 @@ T> 尽管 `<script>` [已弃用](https://developer.mozilla.org/en-US/docs/Web/HT
 
 `string = '[id].js'` `function (pathData, assetInfo) => string`
 
+<<<<<<< HEAD
 此选项决定了非入口(non-entry) chunk 文件的名称。有关可取的值的详细信息，请查看 [`output.filename`](#outputfilename) 选项。
+=======
+This option determines the name of non-initial chunk files. See [`output.filename`](#outputfilename) option for details on the possible values.
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 注意，这些文件名需要在运行时根据 chunk 发送的请求去生成。因此，需要在 webpack runtime 输出 bundle 值时，将 chunk id 的值对应映射到占位符(如 `[name]` 和 `[chunkhash]`)。这会增加文件大小，并且在任何 chunk 的占位符值修改后，都会使 bundle 失效。
 
@@ -158,11 +163,19 @@ module.exports = {
 ```
 
 
+<<<<<<< HEAD
 ## `output.chunkCallbackName` {#outputchunkcallbackname}
 
 `string = 'webpackChunkwebpack'`
 
 回调函数的名称在 Web Workers 环境中 webpack 加载 chunks 时使用。
+=======
+## `output.chunkLoadingGlobal`
+
+`string = 'webpackChunkwebpack'`
+
+The global variable used by webpack for loading of chunks.
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 __webpack.config.js__
 
@@ -171,7 +184,64 @@ module.exports = {
   //...
   output: {
     //...
-    chunkCallbackName: 'myCustomFunc'
+    chunkLoadingGlobal: 'myCustomFunc'
+  }
+};
+```
+
+
+## `output.chunkLoading`
+
+`false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>`
+
+The method to load chunks (methods included by default are 'jsonp' (web), 'importScripts' (WebWorker), 'require' (sync node.js), 'async-node' (async node.js), but others might be added by plugins).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkLoading: 'async-node'
+  }
+};
+```
+
+
+## `output.chunkFormat`
+
+`false` `string: 'array-push' | 'commonjs' | <any string>`
+
+The format of chunks (formats included by default are 'array-push' (web/WebWorker), 'commonjs' (node.js), but others might be added by plugins).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkFormat: 'commonjs'
+  }
+};
+```
+
+
+## `output.enabledChunkLoadingTypes`
+
+`[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
+
+List of chunk loading types enabled for use by entry points. Will be automatically filled by webpack. Only needed when using a function as entry option and returning chunkLoading option from there.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    enabledChunkLoadingTypes: ['jsonp', 'require']
   }
 };
 ```
@@ -300,6 +370,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 使用每次构建过程中，唯一的 hash 生成
 
 __webpack.config.js__
@@ -314,6 +385,9 @@ module.exports = {
 ```
 
 使用基于每个 chunk 内容的 hash：
+=======
+Using hashes generated from the generated content:
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 __webpack.config.js__
 
@@ -321,12 +395,12 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    filename: '[chunkhash].bundle.js'
+    filename: '[contenthash].bundle.js'
   }
 };
 ```
 
-Using hashes generated for extracted content:
+Combining multiple substitutions:
 
 __webpack.config.js__
 
@@ -334,7 +408,7 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    filename: '[contenthash].bundle.css'
+    filename: '[name].[contenthash].bundle.js'
   }
 };
 ```
@@ -358,12 +432,17 @@ module.exports = {
 
 注意此选项被称为文件名，但是你还是可以使用像 `'js/[name]/bundle.js'` 这样的文件夹结构。
 
+<<<<<<< HEAD
 注意，此选项不会影响那些「按需加载 chunk」的输出文件。对于这些文件，请使用 [`output.chunkFilename`](#outputchunkfilename) 选项来控制输出。通过 loader 创建的文件也不受影响。在这种情况下，你必须尝试 loader 特定的可用选项。
+=======
+Note this option does not affect output files for on-demand-loaded chunks. It only affects output files that are initially loaded. For on-demand-loaded chunk files the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case you would have to try the specific loader's available options.
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 ## Template strings {#template-strings}
 
 可以使用以下替换模板字符串（通过 webpack 内部的[`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)）:
 
+<<<<<<< HEAD
 | 模板        | 描述                                                                         |
 | ------------- | ----------------------------------------------------------------------------------- |
 | [hash]        | 模块标识符(module identifier)的 hash                                                   |
@@ -375,12 +454,99 @@ module.exports = {
 | [function]    | The function, which can return filename [string]                                    |
 
 `[hash]` 和 `[chunkhash]` 的长度可以使用 `[hash:16]`（默认为 20）来指定。或者，通过指定[`output.hashDigestLength`](#outputhashdigestlength) 在全局配置长度。
+=======
+Substitutions available on Compilation-level:
+
+| Template   | Description                  |
+| ---------- | ---------------------------- |
+| [fullhash] | The full hash of compilation |
+| [hash]     | Same, but deprecated         |
+
+Substitutions available on Chunk-level:
+
+| Template      | Description                                                                                                      |
+| ------------- | ---------------------------------------------------------------------------------------------------------------- |
+| [id]          | The ID of the chunk                                                                                              |
+| [name]        | The name of the chunk, if set, otherwise the ID of the chunk                                                     |
+| [chunkhash]   | The hash of the chunk, including all elements of the chunk                                                       |
+| [contenthash] | The hash of the chunk, including only elements of this content type (affected by `optimization.realContentHash`) |
+
+Substitutions available on Module-level:
+
+| Template      | Description                           |
+| ------------- | ------------------------------------- |
+| [id]          | The ID of the module                  |
+| [moduleid]    | Same, but deprecated                  |
+| [hash]        | The hash of the module                |
+| [modulehash]  | Same, but deprecated                  |
+| [contenthash] | The hash of the content of the module |
+
+Substitutions available on File-level:
+
+| Template   | Description                                        |
+| ---------- | -------------------------------------------------- |
+| [file]     | Filename and path, without query or fragment       |
+| [query]    | Query with leading `?`                             |
+| [fragment] | Fragment with leading `#`                          |
+| [base]     | Only filename (including extensions), without path |
+| [filebase] | Same, but deprecated                               |
+| [path]     | Only path, without filename                        |
+| [name]     | Only filename without extension or path            |
+| [ext]      | Extension with leading `.`                         |
+
+Substitutions available on URL-level:
+
+| Template | Description |
+| -------- | ----------- |
+| [url]    | URL         |
+
+T> `[file]` equals `[path][base]`. `[base]` equals `[name][ext]`. The full path is `[path][name][ext][query][fragment]` or `[path][base][query][fragment]` or `[file][query][fragment]`.
+
+The length of hashes (`[hash]`, `[contenthash]` or `[chunkhash]`) can be specified using `[hash:16]` (defaults to 20). Alternatively, specify [`output.hashDigestLength`](#outputhashdigestlength) to configure the length globally.
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 当你要在实际文件名中使用占位符时，webpack 会过滤出需要替换的占位符。例如，输出一个文件 `[name].js`， 你必须通过在括号之间添加反斜杠来转义`[name]`占位符。 因此，`[\name\]` 生成 `[name]` 而不是 `name`。
 
 例如：`[\id\]` 生成 `[id]` 而不是 `id`。
 
+<<<<<<< HEAD
 如果将这个选项设为一个函数，函数将返回一个包含上面表格中替换信息的对象。
+=======
+If using a function for this option, the function will be passed an object containing data for the substitutions in the table above.
+Substituions will be applied to the returned string too.
+The passed object will have this type: (properties available depending on context)
+
+``` typescript
+type PathData = {
+  hash: string,
+  hashWithLength: (number) => string,
+  chunk: Chunk | ChunkPathData,
+  module: Module | ModulePathData,
+  contentHashType: string,
+  contentHash: string,
+  contentHashWithLength: (number) => string,
+  filename: string,
+  url: string,
+  runtime: string | SortableSet<string>,
+  chunkGraph: ChunkGraph
+}
+type ChunkPathData = {
+  id: string | number,
+  name: string,
+  hash: string,
+  hashWithLength: (number) => string,
+  contentHash: Record<string, string>,
+  contentHashWithLength: Record<string, (number) => string>
+}
+type ModulePathData = {
+  id: string | number,
+  hash: string,
+  hashWithLength: (number) => string
+}
+```
+
+T> In some context properties will use JavaScript code expressions instead of raw values. In these cases the `WithLength` variant is available and should be used instead of slicing the original value.
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 ## `output.assetModuleFilename` {#outputassetmodulefilename}
 
@@ -392,7 +558,11 @@ module.exports = {
 
 `string = 'window'`
 
+<<<<<<< HEAD
 当输出为 library 时，尤其是当 `libraryTarget` 为 `'umd'`时，此选项将决定使用哪个全局对象来挂载 library。为了使 UMD 构建在浏览器和 Node.js 上均可用，应将 `output.globalObject` 选项设置为 `'this'`。
+=======
+When targeting a library, especially when `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`. Defaults to `self` for Web-like targets.
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 示例：
 
@@ -418,8 +588,7 @@ module.exports = {
 
 `output.uniqueName` 将用于生成唯一全局变量:
 
-- [`output.jsonpFunction`](/configuration/output/#outputjsonpfunction)
-- [`output.chunkCallbackName`](/configuration/output/#outputchunkcallbackname)
+- [`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal)
 
 __webpack.config.js__
 
@@ -490,7 +659,11 @@ module.exports = {
 
 T> 通常，你不需要修改 `output.hotUpdateChunkFilename`.
 
+<<<<<<< HEAD
 ## `output.hotUpdateFunction` {#outputhotupdatefunction}
+=======
+## `output.hotUpdateGlobal`
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 `string`
 
@@ -498,7 +671,11 @@ T> 通常，你不需要修改 `output.hotUpdateChunkFilename`.
 
 JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
+<<<<<<< HEAD
 详细请查看 [`output.jsonpFunction`](#outputjsonpfunction)。
+=======
+For details see [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 
 ## `output.hotUpdateMainFilename` {#outputhotupdatemainfilename}
@@ -509,6 +686,7 @@ JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
 T> 通常，你不需要修改 `output.hotUpdateMainFilename`.
 
+<<<<<<< HEAD
 ## `output.jsonpFunction` {#outputjsonpfunction}
 
 `string = 'webpackJsonp'`
@@ -549,6 +727,8 @@ __example-on-demand-chunk.js__
 ```javascript
 (window.wpJsonpFlightsWidget = window.wpJsonpFlightsWidget || []).push(/* ... */);
 ```
+=======
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 ## `output.library` {#outputlibrary}
 
@@ -954,7 +1134,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 注意，`[hash]` 在参数中被替换为编译过程(compilation)的 hash。详细信息请查看[指南 - 缓存](/guides/caching/)。
+=======
+Note that `[fullhash]` in this parameter will be replaced with a hash of the compilation. See the [Caching guide](/guides/caching/) for details.
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 
 ## `output.pathinfo` {#outputpathinfo}
@@ -1035,7 +1219,11 @@ background-image: url(/assets/spinner.gif);
 
 webpack-dev-server 也会默认从 `publicPath` 为基准，使用它来决定在哪个目录下启用服务，来访问 webpack 输出的文件。
 
+<<<<<<< HEAD
 注意，参数中的 `[hash]` 将会被替换为编译过程(compilation) 的 hash。详细信息请查看[指南 - 缓存](/guides/caching)。
+=======
+Note that `[fullhash]` in this parameter will be replaced with a hash of the compilation. See the [Caching guide](/guides/caching) for details.
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 示例：
 
@@ -1071,12 +1259,16 @@ __webpack_public_path__ = myRuntimePublicPath;
 
 仅在 [`devtool`](/configuration/devtool/) 设置为 `'source-map'` 时有效，此选项会向硬盘写入一个输出文件。
 
+<<<<<<< HEAD
 可以使用 [#output-filename](#output-filename) 中的 `[name]`, `[id]`, `[hash]` 和 `[chunkhash]` 替换符号。除此之外，还可以使用以下替换符号。`[file]` 占位符会被替换为原始文件的文件名。我们建议__只使用 `[file]` 占位符__，因为其他占位符在非 chunk 文件(non-chunk files)生成的 SourceMap 时不起作用。
 
 |  Template                   | 描述                                                                         |
 | -------------------------- | ----------------------------------------------------------------------------------- |
 | [file]                     | 模块文件名称                                                                  |
 | [filebase]                 | 模块 [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) |
+=======
+The `[name]`, `[id]`, `[fullhash]` and `[chunkhash]` substitutions from [`output.filename`](#outputfilename) can be used. In addition to those, you can use substitutions listed under Filename-level in [Template strings](/configuration/output/#template-strings).
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 
 ## `output.sourcePrefix` {#outputsourceprefix}
@@ -1151,9 +1343,13 @@ module.exports = {
 
 ## `output.workerChunkLoading` {#outputworkerchunkloading}
 
-`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false` 
+`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
 
+<<<<<<< HEAD
 新选项 `workerChunkLoading` 用于控制 workder 的 chunk 加载。
+=======
+The new option `workerChunkLoading` controls the chunk loading of workers.
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 T> 此选项默认值取决于 `target` 的设置。欲了解更多详情，请在 [webpack 默认值文件中搜索](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js) `"workerChunkLoading"`。
 
@@ -1200,6 +1396,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.ecmaVersion` {#outputecmaversion}
 
 `number = 6`
@@ -1208,18 +1405,42 @@ module.exports = {
 
 - 应该 >= 5, 应该 <= 11
 - 应该 >= 2009, 应该 <= 2020
+=======
+## `output.environment`
+
+Tell webpack what kind of ES-features may be used in the generated runtime-code.
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 ```javascript
 module.exports = {
   output: {
-    ecmaVersion: 6
+    environment: {
+      // The environment supports arrow functions ('() => { ... }').
+      arrowFunction: true,
+      // The environment supports BigInt as literal (123n).
+      bigIntLiteral: false,
+      // The environment supports const and let for variable declarations.
+      const: true,
+      // The environment supports destructuring ('{ a, b } = obj').
+      destructuring: true,
+      // The environment supports an async import() function to import EcmaScript modules.
+      dynamicImport: false,
+      // The environment supports 'for of' iteration ('for (const x of array) { ... }').
+      forOf: true,
+      // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
+      module: false,
+    }
   }
 };
 ```
 
+<<<<<<< HEAD
 T> 在 webpack 4 中  `output.ecmaVersion` 的默认值是 `5`.
 
 ## `output.compareBeforeEmit` {#outputcomparebeforeemit}
+=======
+## `output.compareBeforeEmit`
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 `boolean = true`
 

@@ -281,7 +281,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 W> `cache.idleTimeout` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 或 `'idle'` 才可配置。
+=======
+W> `cache.idleTimeout` is only available when [`cache.store`](#cachestore) is set to `'pack'`
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 ### `cache.idleTimeoutForInitialStore` {#cacheidletimeoutforinitialstore}
 
@@ -300,16 +304,50 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 或 `'idle'` 才可配置。
+=======
+W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#cachestore) is set to `'pack'`
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
 
 ## `loader` {#loader}
 
 `object`
 
+<<<<<<< HEAD
 在 loader 上下文中暴露自定义值。
 
 ?> 添加一个例子...
+=======
+Expose custom values into the [loader context](/api/loaders/#the-loader-context).
 
+For example, you can define a new variable in the loader context:
+>>>>>>> ef81ee1f2d496c6a49e61e34ffb7692db1ba54e7
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  // ...
+  loader: {
+    answer: 42
+  }
+};
+```
+
+Then use `this.answer` to get its value in the loader:
+
+__custom-loader.js__
+
+```javascript
+module.exports = function (source) {
+  // ...
+  console.log(this.answer); // will log `42` here
+  return source;
+};
+```
+
+T> You can override properties in the loader context as webpack copies all properties that are defined in the `loader` to the loader context.
 
 ## `parallelism` {#parallelism}
 
