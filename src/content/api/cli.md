@@ -49,7 +49,7 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 
 webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with
 
-Note: These are the flags with webpack v4, starting v5 CLI also supports [core flags](/api/cli#core-flags)
+Note: These are the flags with webpack v4, starting v5 CLI also supports [core flags](/api/cli/#core-flags)
 
 | Flag            | Type            | Description                                                                                                    |
 | --------------- | --------------- | -------------------------------------------------------------------------------------------------------------- |
@@ -276,7 +276,7 @@ T> See the [environment variables](/guides/environment-variables/) guide for mor
 
 | Parameter       | Explanation                                                    | Input type | Default                                            |
 | --------------- | -------------------------------------------------------------- | ---------- | -------------------------------------------------- |
-| `--config`      | Path to the configuration file                                 | string     | [Default Configs](/api/cli#default-configurations) |
+| `--config`      | Path to the configuration file                                 | string     | [Default Configs](/api/cli/#default-configurations) |
 | `--config-name` | Name of the configuration to use                               | string     |
 | `--env`         | Environment passed to the configuration, when it is a function |            |
 | `--mode`        | Mode to use                                                    | string     | `'production'`                                     |
