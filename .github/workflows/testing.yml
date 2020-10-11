@@ -1,4 +1,4 @@
-name: Build
+name: Lint and Test
 
 on:
   push:
