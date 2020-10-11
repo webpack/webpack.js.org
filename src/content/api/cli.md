@@ -95,7 +95,7 @@ We've set certain aliases for commonly used flags to make it convenient to work 
 
 ### Negated Flags
 
-| Shortcut   | Replaces                                                      |
+| Flag       | Description                                                   |
 | ---------- | ------------------------------------------------------------- |
 | --no-color | Disabled any color on the console                             |
 | --no-hot   | Disabled hot reloading if you have it enabled via your config |
@@ -229,8 +229,8 @@ webpack --help
 __Show help for a single command or flag__
 
 ```bash
-webpack <command> --help
-webpack --<flag> --help
+webpack --help <command>
+webpack --help --<flag>
 ```
 
 __Build source using a configuration file__
