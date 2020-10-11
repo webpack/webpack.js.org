@@ -38,7 +38,9 @@ jobs:
         directories:
           - $HOME/.cache
       install: pip install -r requirements.txt
-      script: cp .proselintrc ~/ && proselint src/content
+      script: 
+        - cp .proselintrc ~/
+        - proselint src/content
 
     - stage: Test
       name: Cypress
