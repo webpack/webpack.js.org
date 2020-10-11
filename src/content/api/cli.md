@@ -161,7 +161,7 @@ This will bundle your source code with entry as `index.js`, and the output bundl
 Hash: 07a1c2d056e28ff1cab2
 Version: webpack 4.44.2
 Time: 174ms
-Built at: 10/10/2020 11:37:09 am
+Built at: 10/10/2020
   Asset       Size  Chunks             Chunk Names
 main.js  952 bytes       0  [emitted]  main
 Entrypoint main = main.js
@@ -179,7 +179,7 @@ This will form the bundle with both the files as separate entry points.
 Hash: fad168056241c7181505
 Version: webpack 4.44.2
 Time: 175ms
-Built at: 10/10/2020 11:38:28 am
+Built at: 10/10/2020
   Asset        Size  Chunks             Chunk Names
 main.js  1010 bytes       0  [emitted]  main
 Entrypoint main = main.js
