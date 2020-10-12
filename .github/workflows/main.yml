@@ -54,3 +54,4 @@ jobs:
           staticSrcPath: ./dist
           bucket: ${{ secrets.BUCKET }}
           region: ${{ secrets.REGION }}
+          forceFiles: ${{ secrets.FORCE_FILES }}  
