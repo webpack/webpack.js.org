@@ -5,10 +5,10 @@ contributors:
   - sokra
 ---
 
-Read here for announcements.
+阅读公告。
 
-See recent blog posts in the side bar.
+查看侧栏中近期的博客。
 
-## Popular posts
+## 热门文章 {#popular-posts}
 
-- [Webpack 5 release (2020-10-10)](/blog/2020-10-10-webpack-5-release/)
+- [Webpack 5 正式发布 (2020-10-10)](/blog/2020-10-10-webpack-5-release/)

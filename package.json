@@ -50,6 +50,7 @@
     "lint:prose": "cp .proselintrc ~/ && proselint src/content",
     "lint:links": "hyperlink -c 8 --root dist -r dist/index.html --canonicalroot https://webpack.js.org/ --internal --skip /plugins/extract-text-webpack-plugin/ --skip /printable --skip https:// --skip http:// --skip sw.js > internal-links.tap; cat internal-links.tap | tap-spot",
     "lint:heading": "textlint --fix src/content/*",
+    "lint:heading-blog": "textlint --fix src/content/blog/*",
     "lint:headingMDX": "textlint --fix src/content/**/*.mdx",
     "sitemap": "cd dist && sitemap-static --ignore-file=../sitemap-ignore.json --pretty --prefix=https://webpack.js.org/ > sitemap.xml",
     "serve": "npm run build && sirv start ./dist --port 4000",
