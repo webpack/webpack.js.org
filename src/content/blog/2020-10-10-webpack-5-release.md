@@ -20,7 +20,7 @@ The major version was also the chance to revise some of the defaults and to alig
 
 So today (2020-10-10) webpack 5.0.0 is released, but this doesn't mean it's done, bugfree or even feature-complete.
 As with webpack 4 we continue development by fixing problems and adding features.
-In the next days there will probably a lot bugfixes. Features will come later.
+In the next days there will probably be a lot bugfixes. Features will come later.
 
 ## Common Questions
 
