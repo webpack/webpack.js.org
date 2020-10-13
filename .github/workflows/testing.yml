@@ -67,7 +67,7 @@ jobs:
       - run: proselint src/content
 
   lintLinks:
-    name: Lint Links
+    name: Check Links
     strategy:
       matrix:
         os: [ubuntu-latest]
