@@ -10,8 +10,11 @@ export default ({
   // mimick the `NavLink` API
   if ( url ) to = url;
 
+  const {isActive, ...others} = props;
   if ( to.startsWith('http') || to.startsWith('//') )
-    return <a href={ to } target="_blank" rel="noopener" { ...props } />;
-
-  else return <Link to={ to } { ...props } />;
+    {
+      return <a href={ to } target="_blank" rel="noopener noreferrer" { ...others } />;
+    } else {
+      return <Link to={ to } { ...others } />;
+    }
 };

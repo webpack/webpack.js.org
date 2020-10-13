@@ -106,7 +106,7 @@ T> Although `charset` attribute for `<script>` tag was [deprecated](https://deve
 
 `string = '[id].js'` `function (pathData, assetInfo) => string`
 
-This option determines the name of non-entry chunk files. See [`output.filename`](#outputfilename) option for details on the possible values.
+This option determines the name of non-initial chunk files. See [`output.filename`](#outputfilename) option for details on the possible values.
 
 Note that these filenames need to be generated at runtime to send the requests for chunks. Because of this, placeholders like `[name]` and `[chunkhash]` need to add a mapping from chunk id to placeholder value to the output bundle with the webpack runtime. This increases the size and may invalidate the bundle when placeholder value for any chunk changes.
 
@@ -358,7 +358,7 @@ module.exports = {
 };
 ```
 
-Using the unique hash generated for every build:
+Using hashes generated from the generated content:
 
 __webpack.config.js__
 
@@ -366,12 +366,12 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    filename: '[name].[hash].bundle.js'
+    filename: '[contenthash].bundle.js'
   }
 };
 ```
 
-Using hashes based on each chunks' content:
+Combining multiple substitutions:
 
 __webpack.config.js__
 
@@ -379,20 +379,7 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    filename: '[chunkhash].bundle.js'
-  }
-};
-```
-
-Using hashes generated for extracted content:
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    filename: '[contenthash].bundle.css'
+    filename: '[name].[contenthash].bundle.js'
   }
 };
 ```
@@ -416,7 +403,7 @@ Make sure to read the [Caching guide](/guides/caching) for details. There are mo
 
 Note this option is called filename but you are still allowed to use something like `'js/[name]/bundle.js'` to create a folder structure.
 
-Note this option does not affect output files for on-demand-loaded chunks. For these files the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case you would have to try the specific loader's available options.
+Note this option does not affect output files for on-demand-loaded chunks. It only affects output files that are initially loaded. For on-demand-loaded chunk files the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case you would have to try the specific loader's available options.
 
 ## Template strings
 
@@ -1041,7 +1028,7 @@ module.exports = {
 };
 ```
 
-Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching/) for details.
+Note that `[fullhash]` in this parameter will be replaced with a hash of the compilation. See the [Caching guide](/guides/caching/) for details.
 
 
 ## `output.pathinfo`
@@ -1122,7 +1109,7 @@ background-image: url(/assets/spinner.gif);
 
 The webpack-dev-server also takes a hint from `publicPath`, using it to determine where to serve the output files from.
 
-Note that `[hash]` in this parameter will be replaced with an hash of the compilation. See the [Caching guide](/guides/caching) for details.
+Note that `[fullhash]` in this parameter will be replaced with a hash of the compilation. See the [Caching guide](/guides/caching) for details.
 
 Examples:
 
@@ -1158,12 +1145,7 @@ See [this discussion](https://github.com/webpack/webpack/issues/2776#issuecommen
 
 Configure how source maps are named. Only takes effect when [`devtool`](/configuration/devtool/) is set to `'source-map'`, which writes an output file.
 
-The `[name]`, `[id]`, `[hash]` and `[chunkhash]` substitutions from [`output.filename`](#outputfilename) can be used. In addition to those, you can use substitutions listed below. The `[file]` placeholder is replaced with the filename of the original file. We recommend __only using the `[file]` placeholder__, as the other placeholders won't work when generating SourceMaps for non-chunk files.
-
-| Template                   | Description                                                                         |
-| -------------------------- | ----------------------------------------------------------------------------------- |
-| [file]                     | The module filename                                                                 |
-| [filebase]                 | The module [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) |
+The `[name]`, `[id]`, `[fullhash]` and `[chunkhash]` substitutions from [`output.filename`](#outputfilename) can be used. In addition to those, you can use substitutions listed under Filename-level in [Template strings](/configuration/output/#template-strings).
 
 
 ## `output.sourcePrefix`

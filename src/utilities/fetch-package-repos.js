@@ -3,7 +3,7 @@ const path = require('path');
 const mkdirp = require('mkdirp');
 const { promisify } = require('util');
 const _ = require('lodash');
-const GithubAPI = require('@octokit/rest');
+const { Octokit: GithubAPI } = require('@octokit/rest');
 const { excludedLoaders, excludedPlugins } = require('./constants');
 
 const writeFile = promisify(fs.writeFile);
@@ -31,17 +31,14 @@ const fetch = {
 
 const api = new GithubAPI();
 
-async function paginate (org) {
-  let response = await api.repos.listForOrg({ org, type: 'public', per_page: 100});
-  let {data} = response;
-
-  while (api.hasNextPage(response)) {
-    response = await api.getNextPage(response);
-    data = data.concat(response.data);
-  }
-
+async function paginate(org) {
+  const data = await api.paginate('GET /orgs/:org/repos', {
+    org: org,
+    type: 'public',
+  });
   return data;
 }
+
 
 async function main() {
   mkdirp.sync(path.resolve(__dirname, '../../repositories/'));

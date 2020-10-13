@@ -261,9 +261,9 @@ module.exports = {
       chunkFormat: "commonjs",
       chunkFormat: false,
       // the format of chunks
-      hotUpdateMainFilename: "[hash].hot-update.json", // string
+      hotUpdateMainFilename: "[fullhash].hot-update.json", // string
       // filename template for HMR manifest
-      hotUpdateChunkFilename: "[id].[hash].hot-update.js", // string
+      hotUpdateChunkFilename: "[id].[fullhash].hot-update.js", // string
       // filename template for HMR chunks
       hotUpdateGlobal: "hmrUpdateFunction", // string
       // the name of the global variable used to load hot update chunks
@@ -422,7 +422,7 @@ module.exports = {
   resolve: {
     // options for resolving module requests
     // (does not apply to resolving of loaders)
-    <modules "#">
+    <modules "/configuration/resolve/#resolvemodules">
       <default>
         modules: [
           "node_modules",
@@ -468,7 +468,7 @@ module.exports = {
         }
       ],
     </alias>
-    <advancedResolve "#">
+    <advancedResolve "/configuration/resolve/">
       <default>
         /* Advanced resolve configuration (click to show) */
       </default>
@@ -497,7 +497,7 @@ module.exports = {
       ],
       // additional plugins applied to the resolver
     </advancedResolve>
-    <expertResolve "#">
+    <expertResolve "/configuration/resolve/">
       <default>
         /* Expert resolve configuration (click to show) */
       </default>
@@ -535,7 +535,7 @@ module.exports = {
     </expertResolve>
   },
   performance: {
-    <hints "/configuration/performance/#performance-hints">
+    <hints "/configuration/performance/#performancehints">
       <default>
         hints: "warning", // enum
       </default>

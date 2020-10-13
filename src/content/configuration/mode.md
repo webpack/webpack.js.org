@@ -37,8 +37,8 @@ The following string values are supported:
 
 Option                | Description
 --------------------- | -----------------------
-`development`         | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `development`. Enables `NamedChunksPlugin` and `NamedModulesPlugin`.
-`production`          | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `production`. Enables `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin`, `OccurrenceOrderPlugin`, `SideEffectsFlagPlugin` and `TerserPlugin`.
+`development`         | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `development`. Enables useful names for modules and chunks.
+`production`          | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `production`. Enables determinstic mangled names for modules and chunks, `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin` and `TerserPlugin`.
 `none`                | Opts out of any default optimization options
 
 If not set, webpack sets `production` as the default value for `mode`.
@@ -62,8 +62,9 @@ module.exports = {
 -   pathinfo: true
 - },
 - optimization: {
--   namedModules: true,
--   namedChunks: true,
+-   moduleIds: 'named',
+-   chunkIds: 'named',
+-   mangleExports: false,
 -   nodeEnv: 'development',
 -   flagIncludedChunks: false,
 -   occurrenceOrder: false,
@@ -80,8 +81,6 @@ module.exports = {
 -   removeAvailableModules: false
 - },
 - plugins: [
--   new webpack.NamedModulesPlugin(),
--   new webpack.NamedChunksPlugin(),
 -   new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("development") }),
 - ]
 }
@@ -102,8 +101,9 @@ module.exports = {
 -   pathinfo: false
 - },
 - optimization: {
--   namedModules: false,
--   namedChunks: false,
+-   moduleIds: 'deterministic',
+-   chunkIds: 'deterministic',
+-   mangleExports: 'deterministic',
 -   nodeEnv: 'production',
 -   flagIncludedChunks: true,
 -   occurrenceOrder: true,
