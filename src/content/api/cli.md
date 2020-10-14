@@ -148,15 +148,10 @@ webpack ./src/index.js -o dist
 This will bundle your source code with entry as `index.js`, and the output bundle file will have a path of `dist`.
 
 ```bash
-Hash: 07a1c2d056e28ff1cab2
-Version: webpack 4.44.2
-Time: 174ms
-Built at: 10/10/2020
-  Asset       Size  Chunks             Chunk Names
-main.js  952 bytes       0  [emitted]  main
-Entrypoint main = main.js
-[0] ./src/index.js 30 bytes {0} [built]
-[1] ./src/others.js 0 bytes {0} [built]
+asset main.js 142 bytes [compared for emit] [minimized] (name: main)
+./src/index.js 30 bytes [built] [code generated]
+./src/others.js 1 bytes [built] [code generated]
+webpack 5.1.0 compiled successfully in 187 ms
 ```
 
 ```bash
@@ -166,17 +161,11 @@ webpack ./src/index.js ./src/others2.js -o dist/
 This will form the bundle with both the files as separate entry points.
 
 ```bash
-Hash: fad168056241c7181505
-Version: webpack 4.44.2
-Time: 175ms
-Built at: 10/10/2020
-  Asset        Size  Chunks             Chunk Names
-main.js  1010 bytes       0  [emitted]  main
-Entrypoint main = main.js
-[0] multi ./src/index.js ./src/others2.js 40 bytes {0} [built]
-[1] ./src/index.js 30 bytes {0} [built]
-[2] ./src/others.js 0 bytes {0} [built]
-[3] ./src/others2.js 0 bytes {0} [built]
+asset main.js 142 bytes [compared for emit] [minimized] (name: main)
+./src/index.js 30 bytes [built] [code generated]
+./src/others2.js 1 bytes [built] [code generated]
+./src/others.js 1 bytes [built] [code generated]
+webpack 5.1.0 compiled successfully in 198 ms
 ```
 
 ## Default Configurations
