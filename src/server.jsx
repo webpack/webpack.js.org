@@ -9,6 +9,7 @@ import { getPageTitle } from './utilities/content-utils';
 // Import Components
 import Site from './components/Site/Site';
 import PrintScript from './components/Print/PrintScript';
+import StatsScript from './components/Stats/StatsScript';
 
 // Import Images
 import Favicon from './favicon.ico';
@@ -90,6 +91,9 @@ export default locals => {
             (isPrintPage(locals.path))
               ? <PrintScript />
               : bundles.map(path => <script key={ path } src={ path } />)
+          }
+          {
+            <StatsScript/>
           }
         </body>
       </html>
