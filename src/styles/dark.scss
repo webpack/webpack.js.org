@@ -66,8 +66,12 @@
   .navigation-sub__link--active {
     color: #dcdcdc;
   }
+  .sponsors__content,
   .footer__inner {
     border-color: #252525;
+  }
+  .sponsors__content:hover {
+    background-color: #272727;
   }
   a,
   .navigation-sub__link,
@@ -84,7 +88,7 @@
     color: #82b7f6;
   }
   .site {
-    background-color: #121212;
+    background: #121212 !important;
   }
   .sidebar__docs-version {
     border-color: #252525;
