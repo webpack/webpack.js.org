@@ -47,7 +47,7 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 
 ## Flags
 
-webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with
+webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with the following flags:
 
 Note: These are the flags with webpack v4, starting v5 CLI also supports [core flags](/api/cli/#core-flags)
 
@@ -87,7 +87,7 @@ Note: These are the flags with webpack v4, starting v5 CLI also supports [core f
 
 ### Core Flags
 
-Starting CLI v4 and webpack v5, CLI imports the entire configuration schema from webpack core to alow tuning almost every property from the command line.
+Starting CLI v4 and webpack v5, CLI imports the entire configuration schema from webpack core to allow tuning almost every configuration option from the command line.
 
 __Here's the list of all the core flags supported by webpack v5 with CLI v4 - [link](https://github.com/webpack/webpack-cli/tree/next/packages/webpack-cli#webpack-5)__
 
