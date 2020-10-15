@@ -3,11 +3,16 @@
     background-color: #121212;
     color: #e0e0e0;
   }
-  .splash__section--dark {
-    background-color: #242424;
+  .navigation,
+  .navigation__inner,
+  .splash-viz {
+    background-color: #101619;
   }
   .navigation-sub {
-    background-color: #252525;
+    background-color: #222;
+  }
+  .splash__section--dark {
+    background-color: #202020;
   }
   .markdown {
     h1, h2, h3, h4, h5, h6 {
@@ -66,6 +71,9 @@
   .navigation-sub__link--active {
     color: #dcdcdc;
   }
+  .gitter__button {
+    background: #1c3b39;
+  }
   .sponsors__content,
   .footer__inner {
     border-color: #252525;
@@ -77,6 +85,9 @@
   .navigation-sub__link,
   button.as-link {
     color: #69a8ee;
+  }
+  .page-links__gap {
+    color: #999;
   }
   .sidebar-item__toggle,
   .sidebar-item--disabled .sidebar-item__toggle {
