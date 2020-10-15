@@ -105,4 +105,71 @@
       background: linear-gradient(90deg, #252525, #121212, #252525);
     }
   }
+  
+  // Search
+  .algolia-autocomplete {
+    .ds-dropdown-menu [class^="ds-dataset-"] {
+      background: #121212;
+    }
+    .algolia-docsearch-suggestion {
+      background-color: #121212;
+      .algolia-docsearch-suggestion--content:before {
+        background: #343434;
+      }
+    }
+    .algolia-docsearch-suggestion--category-header {
+      background: #121212;
+      color: #dfdfdf;
+    }
+    .algolia-docsearch-suggestion--title {
+      color: #dfdfdf;
+    }
+    .ds-suggestion:nth-child(n + 2)
+      .algolia-docsearch-suggestion--category-header,
+    .algolia-docsearch-suggestion__secondary,
+    .algolia-docsearch-suggestion--category-header {
+      border-color: #343434;
+    }
+
+    .algolia-docsearch-suggestion__secondary
+      .algolia-docsearch-suggestion--subcategory-column {
+      color: #a3a3a3;
+      .algolia-docsearch-suggestion--highlight {
+        color: #69a8ee;
+      }
+    }
+
+    .ds-dropdown-menu
+      .ds-suggestion.ds-cursor
+      .algolia-docsearch-suggestion--content {
+      background-color: #1f2629 !important;
+    }
+    .algolia-docsearch-suggestion--highlight {
+      background-color: #2b353e;
+      color: #7791bf;
+    }
+    .algolia-autocomplete .aa-suggestion-title-separator {
+      color: #929191;
+    }
+  }
+
+  // Mobile
+  .sidebar-mobile__content {
+    background-color: #121212;
+  }
+  .sidebar-mobile__section-header {
+    color: #cadbe6;
+  }
+  .sidebar-mobile__page {
+    color: #a3a3a3;
+  }
+  .sidebar-mobile__page--active,
+  .sidebar-mobile__page:active {
+    background-color: #222424;
+  }
+  .sidebar-mobile__content
+    div:not(:first-of-type)
+    .sidebar-mobile__section-header {
+    border-color: #343434;
+  }
 }
