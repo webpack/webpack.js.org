@@ -161,7 +161,7 @@ module.exports = {
 
 ## `output.chunkLoadingGlobal`
 
-`string = 'webpackChunkwebpack'`
+`string = 'webpackChunkwebpack5'`
 
 The global variable used by webpack for loading of chunks.
 
