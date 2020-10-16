@@ -43,7 +43,22 @@ module.exports = {
 
 接下来，按照你习惯的方式运行 `webpack`。
 
+<<<<<<< HEAD
 ## 选项 {#options}
+=======
+## Note about source maps
+
+**Works only with `source-map`, `inline-source-map`, `hidden-source-map` and `nosources-source-map` values for the [`devtool`](/configuration/devtool/) option.**
+
+Why?
+
+- `eval` wraps modules in `eval("string")` and the minimizer does not handle strings.
+- `cheap` has not column information and minimizer generate only a single line, which leave only a single mapping.
+
+Using supported `devtool` values enable source map generation.
+
+## Options
+>>>>>>> 75b0dffa7b946dbca0d840d5ceb305ac2193e883
 
 ### `test` {#test}
 
@@ -111,6 +126,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `cache` {#cache}
 
 > ⚠ 此配置在 Webpack 5 已弃用！请使用 https://webpack.js.org/configuration/other-options/#cache 代替。
@@ -204,6 +220,9 @@ module.exports = {
 ```
 
 ### `parallel` {#parallel}
+=======
+### `parallel`
+>>>>>>> 75b0dffa7b946dbca0d840d5ceb305ac2193e883
 
 类型： `Boolean|Number`
 默认值： `true`
@@ -253,6 +272,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `sourceMap` {#sourcemap}
 
 类型： `Boolean`
@@ -288,6 +308,9 @@ module.exports = {
 ```
 
 ### `minify` {#minify}
+=======
+### `minify`
+>>>>>>> 75b0dffa7b946dbca0d840d5ceb305ac2193e883
 
 类型： `Function`
 默认值： `undefined`
@@ -644,17 +667,6 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        // Uncomment lines below for cache invalidation correctly
-        // cache: true,
-        // cacheKeys: (defaultCacheKeys) => {
-        //   delete defaultCacheKeys.terser;
-        //
-        //   return Object.assign(
-        //     {},
-        //     defaultCacheKeys,
-        //     { 'uglify-js': require('uglify-js/package.json').version },
-        //   );
-        // },
         minify: (file, sourceMap) => {
           // https://github.com/mishoo/UglifyJS2#minify-options
           const uglifyJsOptions = {
