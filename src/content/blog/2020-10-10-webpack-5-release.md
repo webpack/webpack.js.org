@@ -12,27 +12,15 @@ webpack 4 于 2018 年 2 月发布。
 但是，在不做突破性改动的情况下推出功能也是有成本的：
 我们不能做重大的 API 或架构改进。
 
-<<<<<<< HEAD
 所以时不时就会有一个点，困难堆积起来，我们不得不做突破性的改动，才不至于把一切都搞乱。
 这时候就需要一个新的主要版本了。
 所以 webpack 5 包含了这些架构上的改进，以及没有这些改进就不可能实现的功能。
-=======
-So from time to time, there is a point where the difficulties pile up and we are forced to do breaking changes to not mess everything up.
-That's the time for a new major version.
-So webpack 5 contains these architectural improvements and the features that were not possible to implement without them.
->>>>>>> 425606a70e1b0953a82a7f1218ff777198aec885
 
 这个主要版本也是修改一些默认值的机会，并与此同时出现的建议和规范保持一致。
 
-<<<<<<< HEAD
 所以今天（2020-10-10）webpack 5.0.0 发布了，但这并不意味着它已经完成了，没有 bug，甚至功能完整。
-就像 webpack 4 一样，我们通过修复问题和增加功能来继续开发。
-在接下来的日子里，可能会有很多 bug 修复。功能会在以后出现。
-=======
-So today (2020-10-10) webpack 5.0.0 is released, but this doesn't mean it's done, bugfree or even feature-complete.
-As with webpack 4 we continue development by fixing problems and adding features.
-In the next days there will probably be a lot bugfixes. Features will come later.
->>>>>>> 425606a70e1b0953a82a7f1218ff777198aec885
+就像 webpack 4 一样，我们通过修复问题以及增加新特性来延续开发。
+在接下来的日子里，可能会有很多 bug 修复。新特性可能也会出现。
 
 ## 疑问解答 {#common-questions}
 
