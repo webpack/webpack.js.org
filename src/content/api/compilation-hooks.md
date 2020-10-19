@@ -273,7 +273,20 @@ chunk 优化完成之后触发。
 - 回调参数：`chunks`
 
 
+<<<<<<< HEAD
 ### `optimizeChunkIds` {#optimizechunkids}
+=======
+### `chunkIds`
+
+`SyncHook`
+
+Called to assign an `id` to each chunk.
+
+- Callback Parameters: `chunks`
+
+
+### `optimizeChunkIds`
+>>>>>>> 425606a70e1b0953a82a7f1218ff777198aec885
 
 `SyncHook`
 

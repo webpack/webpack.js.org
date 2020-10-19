@@ -5,6 +5,7 @@ const excludedLoaders = [
   'webpack-contrib/json-loader',
   'webpack-contrib/script-loader',
   'webpack-contrib/bundle-loader',
+  'webpack-contrib/svg-inline-loader',
   'webpack-contrib/i18n-loader',
   'webpack-contrib/jshint-loader',
   'webpack-contrib/coverjs-loader',
