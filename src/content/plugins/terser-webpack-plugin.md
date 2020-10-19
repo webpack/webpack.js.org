@@ -43,6 +43,17 @@ module.exports = {
 
 接下来，按照你习惯的方式运行 `webpack`。
 
+## 关于 source maps 说明 {#note-about-source-maps}
+
+**Works only with `source-map`, `inline-source-map`, `hidden-source-map` and `nosources-source-map` values for the [`devtool`](/configuration/devtool/) option.**
+
+Why?
+
+- `eval` wraps modules in `eval("string")` and the minimizer does not handle strings.
+- `cheap` has not column information and minimizer generate only a single line, which leave only a single mapping.
+
+Using supported `devtool` values enable source map generation.
+
 ## 选项 {#options}
 
 ### `test` {#test}
@@ -111,98 +122,6 @@ module.exports = {
 };
 ```
 
-### `cache` {#cache}
-
-> ⚠ 此配置在 Webpack 5 已弃用！请使用 https://webpack.js.org/configuration/other-options/#cache 代替。
-
-类型： `Boolean|String`
-默认值： `true`
-
-启用文件缓存。
-缓存目录的默认路径： `node_modules/.cache/terser-webpack-plugin`。
-
-> ℹ️ 如果你使用自己的 `minify` 函数，请务必阅读 `minify` 部分以了解缓存失效策略。
-
-#### `Boolean` {#boolean}
-
-启用/禁用文件缓存。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        cache: true,
-      }),
-    ],
-  },
-};
-```
-
-#### `String` {#string}
-
-启用文件缓存功能并设置缓存目录的路径。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        cache: 'path/to/cache',
-      }),
-    ],
-  },
-};
-```
-
-### `cacheKeys` {#cachekeys}
-
-> ⚠ 此配置在 Webpack 5 已弃用！请使用 https://webpack.js.org/configuration/other-options/#cache 代替。
-
-类型： `Function<(defaultCacheKeys, file) -> Object>`
-默认值： `defaultCacheKeys => defaultCacheKeys`
-
-你可以指定自定义的缓存键，用来覆盖默认的缓存键。
-
-默认缓存键：
-
-```js
-({
-  terser: require('terser/package.json').version, // terser version
-  'terser-webpack-plugin': require('../package.json').version, // plugin version
-  'terser-webpack-plugin-options': this.options, // plugin options
-  nodeVersion: process.version, // Node.js version
-  name: file, // asset path
-  contentHash: crypto.createHash('md4').update(input).digest('hex'), // source file hash
-});
-```
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        cache: true,
-        cacheKeys: (defaultCacheKeys, file) => {
-          defaultCacheKeys.myCacheKey = 'myCacheKeyValue';
-
-          return defaultCacheKeys;
-        },
-      }),
-    ],
-  },
-};
-```
-
 ### `parallel` {#parallel}
 
 类型： `Boolean|Number`
@@ -247,40 +166,6 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         parallel: 4,
-      }),
-    ],
-  },
-};
-```
-
-### `sourceMap` {#sourcemap}
-
-类型： `Boolean`
-默认值： `false` （有关 `devtool` 值和 `SourceMapDevToolPlugin` 插件的详细信息，请参见下文）
-
-**仅适用于当 [`devtool`](/configuration/devtool/) 选项的值为：`source-map`、`inline-source-map`、`hidden-source-map` 以及 `nosources-source-map` 时。**
-
-为什么？
-
-- `eval` 将模块包装在 `eval("string")`，并且压缩程序 (minimizer) 不处理字符串。
-- `cheap` 没有列信息，并且压缩程序 (minimizer) 最终仅生成单行代码，仅单个映射。
-
-该插件遵循 [`devtool`](/configuration/devtool/) 选项并使用 `SourceMapDevToolPlugin` 插件。
-使用受支持的 `devtool` 值可生成 source maps。
-将 `SourceMapDevToolPlugin` 与 `columns` 选项一起使用也可以生成 source maps。
-
-使用 source maps 能够将错误消息位置映射到其在模块中的对应位置（但生成 source maps 会降低编译速度）。
-如果你使用了自己的 `minify` 函数，请阅读 `minify` 部分确保正确处理 source maps。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        sourceMap: true,
       }),
     ],
   },
@@ -644,17 +529,6 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        // Uncomment lines below for cache invalidation correctly
-        // cache: true,
-        // cacheKeys: (defaultCacheKeys) => {
-        //   delete defaultCacheKeys.terser;
-        //
-        //   return Object.assign(
-        //     {},
-        //     defaultCacheKeys,
-        //     { 'uglify-js': require('uglify-js/package.json').version },
-        //   );
-        // },
         minify: (file, sourceMap) => {
           // https://github.com/mishoo/UglifyJS2#minify-options
           const uglifyJsOptions = {

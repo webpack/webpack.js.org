@@ -80,6 +80,8 @@ module.exports = {
 |      **[`filename`](#filename)**      | `{String\|Function}` |    `[name].css`     | 此选项决定了输出的每个 CSS 文件的名称  |
 | **[`chunkFilename`](#chunkfilename)** | `{String\|Function}` | `based on filename` | 此选项决定了非入口的 chunk 文件名称 |
 |   **[`ignoreOrder`](#ignoreorder)**   |     `{Boolean}`      |       `false`       | 移除 Order 警告                                    |
+|        **[`insert`](#insert)**        | `{String\|Function}` | `var head = document.getElementsByTagName("head")[0];head.appendChild(linkTag);` | 在指定位置插入 `<link>`                   |
+|    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 给标签添加自定义属性                            |
 
 #### `filename` {#filename}
 
@@ -108,6 +110,91 @@ module.exports = {
 
 移除 Order 警告
 具体细节请参阅[示例](#remove-order-warnings)。
+
+#### `insert` {#insert}
+
+Type: `String|Function`
+Default: `var head = document.getElementsByTagName("head")[0]; head.appendChild(linkTag);`
+
+By default, the `extract-css-chunks-plugin` appends styles (`<link>` elements) to `document.head` of the current `window`.
+
+However in some circumstances it might be necessary to have finer control over the append target or even delay `link` elements instertion.
+For example this is the case when you asynchronously load styles for an application that runs inside of an iframe.
+In such cases `insert` can be configured to be a function or a custom selector.
+
+If you target an [iframe](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement) make sure that the parent document has sufficient access rights to reach into the frame document and append elements to it.
+
+##### `String` {#string}
+
+Allows to setup custom [query selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector).
+A new `<link>` element will be inserted after the found item.
+
+**webpack.config.js**
+
+```js
+new MiniCssExtractPlugin({
+  insert: '#some-element',
+});
+```
+
+A new `<link>` element will be inserted after the element with id `some-element`.
+
+##### `Function` {#function}
+
+Allows to override default behavior and insert styles at any position.
+
+> ⚠ Do not forget that this code will run in the browser alongside your application. Since not all browsers support latest ECMA features like `let`, `const`, `arrow function expression` and etc we recommend you to use only ECMA 5 features and syntax.
+
+> > ⚠ The `insert` function is serialized to string and passed to the plugin. This means that it won't have access to the scope of the webpack configuration module.
+
+**webpack.config.js**
+
+```js
+new MiniCssExtractPlugin({
+  insert: function (linkTag) {
+    var reference = document.querySelector('#some-element');
+    if (reference) {
+      reference.parentNode.insertBefore(linkTag, reference);
+    }
+  },
+});
+```
+
+A new `<link>` element will be inserted before the element with id `some-element`.
+
+#### `attributes`
+
+Type: `Object`
+Default: `{}`
+
+If defined, the `mini-css-extract-plugin` will attach given attributes with their values on <link> element.
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  plugins: [
+    new MiniCssExtractPlugin({
+      attributes: {
+        id: 'target',
+        'data-target': 'example',
+      },
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+};
+```
+
+Note: It's only applied to dynamically loaded css chunks, if you want to modify link attributes inside html file, please using [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
 
 ### Loader 选项 {#loader-options}
 
@@ -345,6 +432,43 @@ module.exports = {
             },
           },
           'css-loader',
+        ],
+      },
+    ],
+  },
+};
+```
+
+### 通用用例 {#common-use-case}
+
+`mini-css-extract-plugin` is more often used in `production` mode to get separate css files.
+For `development` mode (including `webpack-dev-server`) you can use `style-loader`, because it injects CSS into the DOM using multiple <style></style> and works faster.
+
+> i Do not use together `style-loader` and `mini-css-extract-plugin`.
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
+
+const plugins = [];
+if (!devMode) {
+  // enable in production only
+  plugins.push(new MiniCssExtractPlugin());
+}
+
+module.exports = {
+  plugins,
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
         ],
       },
     ],
