@@ -75,21 +75,13 @@ module.exports = {
 
 ### Plugin Options {#plugin-options}
 
-<<<<<<< HEAD
 |                 选项名                  |         类型         |       默认值       | 描述                                              |
 | :-----------------------------------: | :------------------: | :-----------------: | :------------------------------------------------------- |
 |      **[`filename`](#filename)**      | `{String\|Function}` |    `[name].css`     | 此选项决定了输出的每个 CSS 文件的名称  |
 | **[`chunkFilename`](#chunkfilename)** | `{String\|Function}` | `based on filename` | 此选项决定了非入口的 chunk 文件名称 |
 |   **[`ignoreOrder`](#ignoreorder)**   |     `{Boolean}`      |       `false`       | 移除 Order 警告                                    |
-=======
-|                 Name                  |         Type         |                                     Default                                      | Description                                              |
-| :-----------------------------------: | :------------------: | :------------------------------------------------------------------------------: | :------------------------------------------------------- |
-|      **[`filename`](#filename)**      | `{String\|Function}` |                                   `[name].css`                                   | This option determines the name of each output CSS file  |
-| **[`chunkFilename`](#chunkfilename)** | `{String\|Function}` |                               `based on filename`                                | This option determines the name of non-entry chunk files |
-|   **[`ignoreOrder`](#ignoreorder)**   |     `{Boolean}`      |                                     `false`                                      | Remove Order Warnings                                    |
-|        **[`insert`](#insert)**        | `{String\|Function}` | `var head = document.getElementsByTagName("head")[0];head.appendChild(linkTag);` | Inserts `<link>` at the given position                   |
-|    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | Adds custom attributes to tag                            |
->>>>>>> 75b0dffa7b946dbca0d840d5ceb305ac2193e883
+|        **[`insert`](#insert)**        | `{String\|Function}` | `var head = document.getElementsByTagName("head")[0];head.appendChild(linkTag);` | 在指定位置插入 `<link>`                   |
+|    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 给标签添加自定义属性                            |
 
 #### `filename` {#filename}
 
@@ -119,10 +111,7 @@ module.exports = {
 移除 Order 警告
 具体细节请参阅[示例](#remove-order-warnings)。
 
-<<<<<<< HEAD
-### Loader 选项 {#loader-options}
-=======
-#### `insert`
+#### `insert` {#insert}
 
 Type: `String|Function`
 Default: `var head = document.getElementsByTagName("head")[0]; head.appendChild(linkTag);`
@@ -135,7 +124,7 @@ In such cases `insert` can be configured to be a function or a custom selector.
 
 If you target an [iframe](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement) make sure that the parent document has sufficient access rights to reach into the frame document and append elements to it.
 
-##### `String`
+##### `String` {#string}
 
 Allows to setup custom [query selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector).
 A new `<link>` element will be inserted after the found item.
@@ -150,7 +139,7 @@ new MiniCssExtractPlugin({
 
 A new `<link>` element will be inserted after the element with id `some-element`.
 
-##### `Function`
+##### `Function` {#function}
 
 Allows to override default behavior and insert styles at any position.
 
@@ -207,8 +196,7 @@ module.exports = {
 
 Note: It's only applied to dynamically loaded css chunks, if you want to modify link attributes inside html file, please using [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
 
-### Loader Options
->>>>>>> 75b0dffa7b946dbca0d840d5ceb305ac2193e883
+### Loader 选项 {#loader-options}
 
 |              名称               |         类型         |              默认值               | 描述                                                                       |
 | :-----------------------------: | :------------------: | :--------------------------------: | :-------------------------------------------------------------------------------- |
@@ -451,10 +439,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `publicPath` 选项为函数 {#the-publicpath-option-as-function}
-=======
-### Common use case
+### 通用用例 {#common-use-case}
 
 `mini-css-extract-plugin` is more often used in `production` mode to get separate css files.
 For `development` mode (including `webpack-dev-server`) you can use `style-loader`, because it injects CSS into the DOM using multiple <style></style> and works faster.
@@ -491,8 +476,7 @@ module.exports = {
 };
 ```
 
-### The `publicPath` option as function
->>>>>>> 75b0dffa7b946dbca0d840d5ceb305ac2193e883
+### `publicPath` 选项为函数 {#the-publicpath-option-as-function}
 
 **webpack.config.js**
 
