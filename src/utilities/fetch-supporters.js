@@ -13,14 +13,11 @@ const absoluteFilename = path.resolve(__dirname, '..', 'components', 'Support', 
 
 const graphqlEndpoint = 'https://api.opencollective.com/graphql/v2';
 
-const graphqlQuery = `query account($limit: Int, $offset: Int) {
+const membersGraphqlQuery = `query account($limit: Int, $offset: Int) {
   account(slug: "webpack") {
-    orders(limit: $limit, offset: $offset) {
-      limit
-      offset
-      totalCount
+    members(limit: $limit, offset: $offset) {
       nodes {
-        fromAccount {
+        account {
           name
           slug
           website
@@ -35,18 +32,38 @@ const graphqlQuery = `query account($limit: Int, $offset: Int) {
   }
 }`;
 
-const graphqlPageSize = 1000;
+const transactionsGraphqlQuery = `query account($limit: Int, $offset: Int) {
+  account(slug: "webpack") {
+    transactions(limit: $limit, offset: $offset, includeIncognitoTransactions: false) {
+      nodes {
+        amountInHostCurrency {
+          value
+        }
+        fromAccount {
+          name
+          slug
+          website
+          imageUrl
+        }
+        createdAt
+      }
+    }
+  }
+}`;
+
+const graphqlPageSize = 5000;
 
 const nodeToSupporter = node => ({
-  name: node.fromAccount.name,
-  slug: node.fromAccount.slug,
-  website: node.fromAccount.website,
-  avatar: node.fromAccount.imageUrl,
+  name: node.account.name,
+  slug: node.account.slug,
+  website: node.account.website,
+  avatar: node.account.imageUrl,
   firstDonation: node.createdAt,
-  totalDonations: node.totalDonations.value * 100
+  totalDonations: node.totalDonations.value * 100,
+  monthlyDonations: 0
 });
 
-const getAllOrders = async () => {
+const getAllNodes = async (graphqlQuery, getNodes) => {
   const requestOptions = {
     method: 'POST',
     uri: graphqlEndpoint,
@@ -54,48 +71,65 @@ const getAllOrders = async () => {
     json: true
   };
 
-  let allOrders = [];
+  let allNodes = [];
 
-  // Handling pagination if necessary (2 pages for ~1400 results in May 2019)
+  // Handling pagination if necessary
   // eslint-disable-next-line
   while (true) {
     const result = await request(requestOptions);
-    const orders = result.data.account.orders.nodes;
-    allOrders = [...allOrders, ...orders];
+    const nodes = getNodes(result.data);
+    allNodes = [...allNodes, ...nodes];
     requestOptions.body.variables.offset += graphqlPageSize;
-    if (orders.length < graphqlPageSize) {
-      return allOrders;
+    if (nodes.length < graphqlPageSize) {
+      return allNodes;
     }
   }
 };
 
-getAllOrders()
-  .then(orders => {
-    let supporters = orders.map(nodeToSupporter).sort((a, b) => b.totalDonations - a.totalDonations);
+const oneYearAgo = Date.now() - 365 * 24 * 60 * 60 * 1000;
 
-    // Deduplicating supporters with multiple orders
-    supporters = uniqBy(supporters, 'slug');
+(async () => {
+  const members = await getAllNodes(membersGraphqlQuery, data => data.account.members.nodes);
+  let supporters = members.map(nodeToSupporter).sort((a, b) => b.totalDonations - a.totalDonations);
 
-    if (!Array.isArray(supporters)) {
-      throw new Error('Supporters data is not an array.');
-    }
+  // Deduplicating supporters with multiple orders
+  supporters = uniqBy(supporters, 'slug');
 
-    for (const item of supporters) {
-      for (const key of REQUIRED_KEYS) {
-        if (!item || typeof item !== 'object') {
-          throw new Error(`Supporters: ${JSON.stringify(item)} is not an object.`);
-        }
-        if (!(key in item)) {
-          throw new Error(`Supporters: ${JSON.stringify(item)} doesn't include ${key}.`);
-        }
+  const supportersBySlug = new Map();
+  for (const supporter of supporters) {
+    for (const key of REQUIRED_KEYS) {
+      if (!supporter || typeof supporter !== 'object') {
+        throw new Error(`Supporters: ${JSON.stringify(supporter)} is not an object.`);
+      }
+      if (!(key in supporter)) {
+        throw new Error(`Supporters: ${JSON.stringify(supporter)} doesn't include ${key}.`);
       }
     }
+    supportersBySlug.set(supporter.slug, supporter);
+  }
 
-    // Write the file
-    return asyncWriteFile(absoluteFilename, JSON.stringify(supporters, null, 2)).then(() =>
-      console.log(`Fetched 1 file: ${filename}`)
-    );
-  })
-  .catch(error => {
-    console.error('utilities/fetch-supporters:', error);
-  });
+  // Calculate monthly amount from transactions
+  const transactions = await getAllNodes(transactionsGraphqlQuery, data => data.account.transactions.nodes);
+  for (const transaction of transactions) {
+    if (!transaction.amountInHostCurrency) continue;
+    const amount = transaction.amountInHostCurrency.value;
+    if (!amount || amount <= 0) continue;
+    const date = +new Date(transaction.createdAt);
+    if (date < oneYearAgo) continue;
+    const supporter = supportersBySlug.get(transaction.fromAccount.slug);
+    if (!supporter) continue;
+    supporter.monthlyDonations += amount * 100 / 12;
+  }
+
+  for (const supporter of supporters) {
+    supporter.monthlyDonations = Math.round(supporter.monthlyDonations);
+  }
+
+  // Write the file
+  return asyncWriteFile(absoluteFilename, JSON.stringify(supporters, null, 2)).then(() =>
+    console.log(`Fetched 1 file: ${filename}`)
+  );
+})().catch(error => {
+  console.error('utilities/fetch-supporters:', error);
+  process.exitCode = 1;
+});

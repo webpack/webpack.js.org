@@ -273,6 +273,15 @@ chunk 优化完成之后触发。
 - 回调参数：`chunks`
 
 
+### `chunkIds` {#chunkids}
+
+`SyncHook`
+
+调用时，会为每个 chunk 分配一个 `id`。
+
+- 回调函数的参数为：`chunks`
+
+
 ### `optimizeChunkIds` {#optimizechunkids}
 
 `SyncHook`
