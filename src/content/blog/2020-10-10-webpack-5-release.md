@@ -1429,4 +1429,4 @@ These dependencies are cheaper to process and webpack uses them when possible
 - add `Compilation.deleteAsset` to correctly delete an assets and non-shared related assets
 - expose `require("webpack-sources")` as `require("webpack").sources`
 - terser 5
-- Webpack can be written with an capital W when at the start of a sentence
+- Webpack can be written with a capital W when at the start of a sentence
