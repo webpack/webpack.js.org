@@ -158,7 +158,7 @@ If your code did have some side effects though, an array can be provided instead
 }
 ```
 
-The array accepts relative, absolute, and glob patterns to the relevant files. It uses [micromatch](https://github.com/micromatch/micromatch#matching-features) under the hood.
+The array accepts simple glob patterns to the relevant files. It uses [glob-to-regexp](https://github.com/fitzgen/glob-to-regexp) under the hood (Supports: `*`, `**`, `{a,b}`, `[a-z]`). Patterns like `*.css`, which do not include a `/`, will be treated like `**/*.css`.
 
 T> Note that any imported file is subject to tree shaking. This means if you use something like `css-loader` in your project and import a CSS file, it needs to be added to the side effect list so it will not be unintentionally dropped in production mode:
 
