@@ -361,6 +361,7 @@ webpack 提供了一种 [解析文件的高级机制](/configuration/resolve/)�
 
 在其前面加上 `〜` 很关键，因为 `〜/` 会解析到根目录。webpack 需要区分 `bootstrap` 和 `〜bootstrap`，因为 CSS 和 Less 文件没有用于导入相对路径文件的特殊语法。写 `@import“ file”` 等同于 `@import“ ./file”;`
 
+<<<<<<< HEAD
 ##### 非 Less 导入 {#non-less-imports}
 
 使用 webpack 解析器，您可以导入任何文件类型。你只需要一个导出有效的 Less 代码的 loader。通常，您还需要设置 `issuer` 条件，以确保此规则仅适用于源自 Less 文件的导入：
@@ -385,6 +386,9 @@ module.exports = {
 ```
 
 #### Less 解析器 {#less-resolver}
+=======
+#### Less resolver
+>>>>>>> c947159fab753930e88ad26347cc07736d417955
 
 如果指定 `paths` 选项，将从指定的 `paths` 中搜索模块，这是 Less 的默认行为。`paths` 应该是具有绝对路径的数组。
 

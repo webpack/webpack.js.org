@@ -75,6 +75,7 @@ module.exports = {
 
 ### Plugin Options {#plugin-options}
 
+<<<<<<< HEAD
 |                 选项名                  |         类型         |       默认值       | 描述                                              |
 | :-----------------------------------: | :------------------: | :-----------------: | :------------------------------------------------------- |
 |      **[`filename`](#filename)**      | `{String\|Function}` |    `[name].css`     | 此选项决定了输出的每个 CSS 文件的名称  |
@@ -82,6 +83,16 @@ module.exports = {
 |   **[`ignoreOrder`](#ignoreorder)**   |     `{Boolean}`      |       `false`       | 移除 Order 警告                                    |
 |        **[`insert`](#insert)**        | `{String\|Function}` | `var head = document.getElementsByTagName("head")[0];head.appendChild(linkTag);` | 在指定位置插入 `<link>`                   |
 |    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 给标签添加自定义属性                            |
+=======
+|                 Name                  |         Type         |                Default                | Description                                                |
+| :-----------------------------------: | :------------------: | :-----------------------------------: | :--------------------------------------------------------- |
+|      **[`filename`](#filename)**      | `{String\|Function}` |             `[name].css`              | This option determines the name of each output CSS file    |
+| **[`chunkFilename`](#chunkfilename)** | `{String\|Function}` |          `based on filename`          | This option determines the name of non-entry chunk files   |
+|   **[`ignoreOrder`](#ignoreorder)**   |     `{Boolean}`      |                `false`                | Remove Order Warnings                                      |
+|        **[`insert`](#insert)**        | `{String\|Function}` | `document.head.appendChild(linkTag);` | Inserts `<link>` at the given position                     |
+|    **[`attributes`](#attributes)**    |      `{Object}`      |                 `{}`                  | Adds custom attributes to tag                              |
+|      **[`linkType`](#linktype)**      | `{String\|Boolean}`  |              `text/css`               | Allows loading asynchronous chunks with a custom link type |
+>>>>>>> c947159fab753930e88ad26347cc07736d417955
 
 #### `filename` {#filename}
 
@@ -114,7 +125,7 @@ module.exports = {
 #### `insert` {#insert}
 
 Type: `String|Function`
-Default: `var head = document.getElementsByTagName("head")[0]; head.appendChild(linkTag);`
+Default: `document.head.appendChild(linkTag);`
 
 By default, the `extract-css-chunks-plugin` appends styles (`<link>` elements) to `document.head` of the current `window`.
 
@@ -196,7 +207,70 @@ module.exports = {
 
 Note: It's only applied to dynamically loaded css chunks, if you want to modify link attributes inside html file, please using [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
 
+<<<<<<< HEAD
 ### Loader 选项 {#loader-options}
+=======
+#### `linkType`
+
+Type: `String|Boolean`
+Default: `text/css`
+
+This option allows loading asynchronous chunks with a custom link type, such as <link type="text/css" ...>.
+
+##### `String`
+
+Possible values: `text/css`
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  plugins: [
+    new MiniCssExtractPlugin({
+      linkType: 'text/css',
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+};
+```
+
+##### `Boolean`
+
+`false` disables the link `type` attribute
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  plugins: [
+    new MiniCssExtractPlugin({
+      linkType: false,
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+};
+```
+
+### Loader Options
+>>>>>>> c947159fab753930e88ad26347cc07736d417955
 
 |              名称               |         类型         |              默认值               | 描述                                                                       |
 | :-----------------------------: | :------------------: | :--------------------------------: | :-------------------------------------------------------------------------------- |
@@ -616,20 +690,20 @@ module.exports = {
 
 ### 生产模式压缩 {#minimizing-for-production}
 
+<<<<<<< HEAD
 为了压缩输出文件，请使用类似于 [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) 这样的插件。
 设置 `optimization.minimizer` 选项会覆盖 webpack 默认提供的优化器，所以你还需要提供一个 JS 的优化器：
+=======
+To minify the output, use a plugin like [css-minimizer-webpack-plugin](/plugins/css-minimizer-webpack-plugin/).
+>>>>>>> c947159fab753930e88ad26347cc07736d417955
 
 **webpack.config.js**
 
 ```js
-const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
-  optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
-  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
@@ -644,10 +718,23 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimizer: [
+      // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
+      // `...`
+      new CssMinimizerPlugin(),
+    ],
+  },
 };
 ```
 
+<<<<<<< HEAD
 ### 使用预加载或内联 CSS {#using-preloaded-or-inlined-css}
+=======
+This will enable CSS optimization only in production mode. If you want to run it also in development set the `optimization.minimize` option to true.
+
+### Using preloaded or inlined CSS
+>>>>>>> c947159fab753930e88ad26347cc07736d417955
 
 运行时代码通过 `<link>` 或者`<style>` 标签检测已经添加的 CSS。
 当在服务端注入 CSS 代码 以及做 SSR 时将会很有用。
@@ -706,11 +793,16 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 function recursiveIssuer(m) {
   if (m.issuer) {
     return recursiveIssuer(m.issuer);
-  } else if (m.name) {
-    return m.name;
-  } else {
-    return false;
   }
+
+  const chunks = m.getChunks();
+  // For webpack@4 chunks = m._chunks
+
+  for (const chunk of chunks) {
+    return chunk.name;
+  }
+
+  return false;
 }
 
 module.exports = {
@@ -722,14 +814,14 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         fooStyles: {
-          name: 'foo',
+          name: 'styles_foo',
           test: (m, c, entry = 'foo') =>
             m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
           chunks: 'all',
           enforce: true,
         },
         barStyles: {
-          name: 'bar',
+          name: 'styles_bar',
           test: (m, c, entry = 'bar') =>
             m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
           chunks: 'all',

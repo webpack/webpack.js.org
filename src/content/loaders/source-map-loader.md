@@ -133,15 +133,17 @@ module.exports = {
       },
     ],
   },
-  stats: {
-    warningsFilter: [/Failed to parse source map/],
-  },
+  ignoreWarnings: [/Failed to parse source map/],
 };
 ```
 
+<<<<<<< HEAD
 有关 `warningsFilters` 选项的详细信息请[参阅](/configuration/stats/#statswarningsfilter)；
 
 ## 贡献 {#contributing}
+=======
+## Contributing
+>>>>>>> c947159fab753930e88ad26347cc07736d417955
 
 如果您尚未了解，建议您阅读以下贡献指引。
 
