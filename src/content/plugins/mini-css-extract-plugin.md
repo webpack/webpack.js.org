@@ -75,13 +75,14 @@ module.exports = {
 
 ### Plugin Options
 
-|                 Name                  |         Type         |                                     Default                                      | Description                                              |
-| :-----------------------------------: | :------------------: | :------------------------------------------------------------------------------: | :------------------------------------------------------- |
-|      **[`filename`](#filename)**      | `{String\|Function}` |                                   `[name].css`                                   | This option determines the name of each output CSS file  |
-| **[`chunkFilename`](#chunkfilename)** | `{String\|Function}` |                               `based on filename`                                | This option determines the name of non-entry chunk files |
-|   **[`ignoreOrder`](#ignoreorder)**   |     `{Boolean}`      |                                     `false`                                      | Remove Order Warnings                                    |
-|        **[`insert`](#insert)**        | `{String\|Function}` | `var head = document.getElementsByTagName("head")[0];head.appendChild(linkTag);` | Inserts `<link>` at the given position                   |
-|    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | Adds custom attributes to tag                            |
+|                 Name                  |         Type         |                Default                | Description                                                |
+| :-----------------------------------: | :------------------: | :-----------------------------------: | :--------------------------------------------------------- |
+|      **[`filename`](#filename)**      | `{String\|Function}` |             `[name].css`              | This option determines the name of each output CSS file    |
+| **[`chunkFilename`](#chunkfilename)** | `{String\|Function}` |          `based on filename`          | This option determines the name of non-entry chunk files   |
+|   **[`ignoreOrder`](#ignoreorder)**   |     `{Boolean}`      |                `false`                | Remove Order Warnings                                      |
+|        **[`insert`](#insert)**        | `{String\|Function}` | `document.head.appendChild(linkTag);` | Inserts `<link>` at the given position                     |
+|    **[`attributes`](#attributes)**    |      `{Object}`      |                 `{}`                  | Adds custom attributes to tag                              |
+|      **[`linkType`](#linktype)**      | `{String\|Boolean}`  |              `text/css`               | Allows loading asynchronous chunks with a custom link type |
 
 #### `filename`
 
@@ -114,7 +115,7 @@ See [examples](#remove-order-warnings) below for details.
 #### `insert`
 
 Type: `String|Function`
-Default: `var head = document.getElementsByTagName("head")[0]; head.appendChild(linkTag);`
+Default: `document.head.appendChild(linkTag);`
 
 By default, the `extract-css-chunks-plugin` appends styles (`<link>` elements) to `document.head` of the current `window`.
 
@@ -195,6 +196,65 @@ module.exports = {
 ```
 
 Note: It's only applied to dynamically loaded css chunks, if you want to modify link attributes inside html file, please using [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
+
+#### `linkType`
+
+Type: `String|Boolean`
+Default: `text/css`
+
+This option allows loading asynchronous chunks with a custom link type, such as <link type="text/css" ...>.
+
+##### `String`
+
+Possible values: `text/css`
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  plugins: [
+    new MiniCssExtractPlugin({
+      linkType: 'text/css',
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+};
+```
+
+##### `Boolean`
+
+`false` disables the link `type` attribute
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  plugins: [
+    new MiniCssExtractPlugin({
+      linkType: false,
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+};
+```
 
 ### Loader Options
 
@@ -616,20 +676,15 @@ module.exports = {
 
 ### Minimizing For Production
 
-To minify the output, use a plugin like [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin).
-Setting `optimization.minimizer` overrides the defaults provided by webpack, so make sure to also specify a JS minimizer:
+To minify the output, use a plugin like [css-minimizer-webpack-plugin](/plugins/css-minimizer-webpack-plugin/).
 
 **webpack.config.js**
 
 ```js
-const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
-  optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
-  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
@@ -644,8 +699,17 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimizer: [
+      // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
+      // `...`
+      new CssMinimizerPlugin(),
+    ],
+  },
 };
 ```
+
+This will enable CSS optimization only in production mode. If you want to run it also in development set the `optimization.minimize` option to true.
 
 ### Using preloaded or inlined CSS
 
@@ -706,11 +770,16 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 function recursiveIssuer(m) {
   if (m.issuer) {
     return recursiveIssuer(m.issuer);
-  } else if (m.name) {
-    return m.name;
-  } else {
-    return false;
   }
+
+  const chunks = m.getChunks();
+  // For webpack@4 chunks = m._chunks
+
+  for (const chunk of chunks) {
+    return chunk.name;
+  }
+
+  return false;
 }
 
 module.exports = {
@@ -722,14 +791,14 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         fooStyles: {
-          name: 'foo',
+          name: 'styles_foo',
           test: (m, c, entry = 'foo') =>
             m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
           chunks: 'all',
           enforce: true,
         },
         barStyles: {
-          name: 'bar',
+          name: 'styles_bar',
           test: (m, c, entry = 'bar') =>
             m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
           chunks: 'all',

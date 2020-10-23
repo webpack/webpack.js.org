@@ -133,13 +133,9 @@ module.exports = {
       },
     ],
   },
-  stats: {
-    warningsFilter: [/Failed to parse source map/],
-  },
+  ignoreWarnings: [/Failed to parse source map/],
 };
 ```
-
-More information about the `warningsFilters` option you can find [here](/configuration/stats/#statswarningsfilter);
 
 ## Contributing
 

@@ -361,29 +361,6 @@ webpack provides an [advanced mechanism to resolve files](/configuration/resolve
 
 It's important to only prepend it with `~`, because `~/` resolves to the home-directory. webpack needs to distinguish between `bootstrap` and `~bootstrap`, because CSS and Less files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
 
-##### Non-Less imports
-
-Using webpack's resolver, you can import any file type. You just need a loader that exports valid Less code. Often, you will also want to set the `issuer` condition to ensure that this rule is only applied on imports originating from Less files:
-
-```js
-// webpack.config.js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        issuer: /\.less$/,
-        use: [
-          {
-            loader: 'js-to-less-loader',
-          },
-        ],
-      },
-    ],
-  },
-};
-```
-
 #### Less resolver
 
 If you specify the `paths` option, modules will be searched in the given `paths`. This is Less' default behavior. `paths` should be an array with absolute paths:
