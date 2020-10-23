@@ -1315,30 +1315,6 @@ module.exports = {
 ```
 
 
-## `devServer.socket`
-
-`string`
-
-The Unix socket to listen to (instead of a host).
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    socket: 'socket'
-  }
-};
-```
-
-Usage via the CLI
-
-```bash
-webpack serve --socket socket
-```
-
-
 ## `devServer.sockHost`
 
 `string`
