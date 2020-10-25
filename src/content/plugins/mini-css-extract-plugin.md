@@ -82,6 +82,7 @@ module.exports = {
 |   **[`ignoreOrder`](#ignoreorder)**   |     `{Boolean}`      |       `false`       | 移除 Order 警告                                    |
 |        **[`insert`](#insert)**        | `{String\|Function}` | `var head = document.getElementsByTagName("head")[0];head.appendChild(linkTag);` | 在指定位置插入 `<link>`                   |
 |    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 给标签添加自定义属性                            |
+|      **[`linkType`](#linktype)**      | `{String\|Boolean}`  |              `text/css`               | 允许使用自定义 link 类型加载异步 chunk |
 
 #### `filename` {#filename}
 
@@ -113,21 +114,21 @@ module.exports = {
 
 #### `insert` {#insert}
 
-Type: `String|Function`
-Default: `var head = document.getElementsByTagName("head")[0]; head.appendChild(linkTag);`
+类型：`String|Function`
+默认值：`document.head.appendChild(linkTag);`
 
-By default, the `extract-css-chunks-plugin` appends styles (`<link>` elements) to `document.head` of the current `window`.
+默认情况下，`extract-css-chunks-plugin` 会将 styles（`<link>` 元素）附加到当前 `window` 的 `document.head` 中。
 
-However in some circumstances it might be necessary to have finer control over the append target or even delay `link` elements instertion.
-For example this is the case when you asynchronously load styles for an application that runs inside of an iframe.
-In such cases `insert` can be configured to be a function or a custom selector.
+但在某些情况下，可能需要对附加的目标进行精细化管理，甚至延迟 `link` 元素的插入。
+例如，当你在 iframe 中运行应用程序异步加载样式时，就属于此情况。
+对于此类情况，`insert` 可被配置为函数或自定义的选择器。
 
-If you target an [iframe](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement) make sure that the parent document has sufficient access rights to reach into the frame document and append elements to it.
+如果附加目标为 [iframe](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement)，请确保父文档有足够的访问权限进入 frame document，并将元素附加到它上面。
 
 ##### `String` {#string}
 
-Allows to setup custom [query selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector).
-A new `<link>` element will be inserted after the found item.
+允许设置自定义的 [query selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)。
+新的 `<link>` 元素将被插入到找到的 item 之后。
 
 **webpack.config.js**
 
@@ -137,15 +138,15 @@ new MiniCssExtractPlugin({
 });
 ```
 
-A new `<link>` element will be inserted after the element with id `some-element`.
+找到 id 为 `some-element` 的元素，在它之后插入新的 `<link>` 元素。
 
 ##### `Function` {#function}
 
-Allows to override default behavior and insert styles at any position.
+允许覆盖默认行为，并在任意位置插入样式。
 
-> ⚠ Do not forget that this code will run in the browser alongside your application. Since not all browsers support latest ECMA features like `let`, `const`, `arrow function expression` and etc we recommend you to use only ECMA 5 features and syntax.
+> ⚠ 注意，这段代码将与你的应用程序一起在浏览器中运行。由于并非所有浏览器都支持 ESMA 特性，如 `let`，`const`，`arrow function expression` 等，我们建议只使用 ECMA 5 的特性和语法。
 
-> > ⚠ The `insert` function is serialized to string and passed to the plugin. This means that it won't have access to the scope of the webpack configuration module.
+> > ⚠ `insert` 函数被序列化为字符串并传递给插件。这意味着它将无法访问 webpack 配置模块的作用域。
 
 **webpack.config.js**
 
@@ -160,14 +161,14 @@ new MiniCssExtractPlugin({
 });
 ```
 
-A new `<link>` element will be inserted before the element with id `some-element`.
+找到 id 为 `some-element` 的元素，在它之后插入新的 `<link>` 元素。
 
-#### `attributes`
+#### `attributes` {#attributes}
 
-Type: `Object`
-Default: `{}`
+类型：`Object`
+默认值：`{}`
 
-If defined, the `mini-css-extract-plugin` will attach given attributes with their values on <link> element.
+如果定义了此选项，`mini-css-extract-plugin` 将把指定的属性和值附加到 `<link>` 元素上。
 
 **webpack.config.js**
 
@@ -194,7 +195,66 @@ module.exports = {
 };
 ```
 
-Note: It's only applied to dynamically loaded css chunks, if you want to modify link attributes inside html file, please using [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
+注意：它只适用于动态加载的 css chunk，如果你想修改 html 文件内的链接属性，请使用 [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)。
+
+#### `linkType` {#linktype}
+
+类型：`String|Boolean`
+默认值：`text/css`
+
+此选项运行使用自定义链接类型加载异步 chunk，例如 `<link type="text/css" ...>`。
+
+##### `String` {#string}
+
+可选值：`text/css`
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  plugins: [
+    new MiniCssExtractPlugin({
+      linkType: 'text/css',
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+};
+```
+
+##### `Boolean` {#boolean}
+
+`false` 禁用 link 的 `type` 属性
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  plugins: [
+    new MiniCssExtractPlugin({
+      linkType: false,
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+};
+```
 
 ### Loader 选项 {#loader-options}
 
@@ -524,8 +584,8 @@ module.exports = {
 
 （为了更加清楚的表达，省略了 Loader 的选项，以适应需要。）
 
-You should not use `HotModuleReplacementPlugin` plugin if you are using a `webpack-dev-server`.
-`webpack-dev-server` enables / disables HMR using `hot` option.
+如果你使用的是 `webpack-dev-server`，那么就无需使用 `HotModuleReplacementPlugin` plugin。
+`webpack-dev-server` 使用 `hot` 选项决定是否启用/禁用 HMR。
 
 **webpack.config.js**
 
@@ -616,20 +676,15 @@ module.exports = {
 
 ### 生产模式压缩 {#minimizing-for-production}
 
-为了压缩输出文件，请使用类似于 [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) 这样的插件。
-设置 `optimization.minimizer` 选项会覆盖 webpack 默认提供的优化器，所以你还需要提供一个 JS 的优化器：
+为了压缩输出文件，请使用类似于 [css-minimizer-webpack-plugin](/plugins/css-minimizer-webpack-plugin/) 这样的插件。
 
 **webpack.config.js**
 
 ```js
-const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
-  optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
-  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
@@ -644,8 +699,17 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimizer: [
+      // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
+      // `...`
+      new CssMinimizerPlugin(),
+    ],
+  },
 };
 ```
+
+这将只在生产模式下启用 CSS 压缩优化。如果你需要在开发模式下使用，请设置 `optimization.minimize` 选项为 true。
 
 ### 使用预加载或内联 CSS {#using-preloaded-or-inlined-css}
 
@@ -706,11 +770,16 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 function recursiveIssuer(m) {
   if (m.issuer) {
     return recursiveIssuer(m.issuer);
-  } else if (m.name) {
-    return m.name;
-  } else {
-    return false;
   }
+
+  const chunks = m.getChunks();
+  // For webpack@4 chunks = m._chunks
+
+  for (const chunk of chunks) {
+    return chunk.name;
+  }
+
+  return false;
 }
 
 module.exports = {
@@ -722,14 +791,14 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         fooStyles: {
-          name: 'foo',
+          name: 'styles_foo',
           test: (m, c, entry = 'foo') =>
             m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
           chunks: 'all',
           enforce: true,
         },
         barStyles: {
-          name: 'bar',
+          name: 'styles_bar',
           test: (m, c, entry = 'bar') =>
             m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
           chunks: 'all',
