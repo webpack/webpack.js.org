@@ -87,11 +87,11 @@ webpack-cli 提供了许多 flag 来使 webpack 的工作变得简单。默认�
 
 ### 核心 Flags {#core-flags}
 
-从 CLI v4 和 webpack v5 开始，CLI 将从 webpack 的 core 中导入整个配置模式，允许从 CLI 调整几乎所有配置项。
+从 CLI v4 和 webpack v5 开始，CLI 将采用从 webpack 的 core 中导入整个配置的模式，允许 CLI 调整几乎所有配置项。
 
 __链接中是 webpack v5 和 CLI v4 支持的所有核心 flag 列表 - [详戳](https://github.com/webpack/webpack-cli/tree/next/packages/webpack-cli#webpack-5)__
 
-例如，如果你想在项目中医用性能提升，你需在配置中使用[此](/configuration/performance/#performancehints)选项，而如果使用核心 flag，你可以这样做：
+例如，如果你想在项目中启用性能提示，你需在配置中使用[此](/configuration/performance/#performancehints)选项，而如果使用核心 flag，你可以这样做：
 
 ```bash
 webpack --performance-hints warning`
@@ -232,7 +232,7 @@ __如果你想把 stats 数据存储为 JSON 而非输出，你可以使用：__
 webpack --json stats.json
 ```
 
-In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option, the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.io/analyse/), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
+在其他情况下，webpack 会打印出 bundle、chunk 以及 timing 细节的 stats 信息。使用此选项，会输出 JSON 对象。这个输出结果可以被 webpack 的 [analyse 工具](https://webpack.github.io/analyse/)，或者 chrisbateman 的 [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/)，再或者 th0r 的 [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) 所识别。analyse 工具会接收 JSON，并以图形的形式展示所有构建的细节。
 
 ## Environment 选项 {#environment-options}
 
