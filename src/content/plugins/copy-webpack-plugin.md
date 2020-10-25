@@ -49,13 +49,9 @@ module.exports = {
 
 > ℹ️ If you want `webpack-dev-server` to write files to the output directory during development, you can force it with the [`writeToDisk`](https://github.com/webpack/webpack-dev-middleware#writetodisk) option or the [`write-file-webpack-plugin`](https://github.com/gajus/write-file-webpack-plugin).
 
-<<<<<<< HEAD
-## Options {#options}
-=======
 > ℹ️ You can get the original source filename from [Asset Objects](/api/stats/#asset-objects).
 
-## Options
->>>>>>> c947159fab753930e88ad26347cc07736d417955
+## Options {#options}
 
 The plugin's signature:
 
