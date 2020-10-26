@@ -389,7 +389,7 @@ npm install --save-dev csv-loader xml-loader
 __webpack.config.js__
 
 ``` diff
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   entry: './src/index.js',
