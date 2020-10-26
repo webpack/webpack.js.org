@@ -25,7 +25,7 @@ contributors:
   - anshumanv
 ---
 
-webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interface with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
+webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interact with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
 
 W> Since webpack v5.0.0-beta.1 the minimum Node.js version to run webpack is 10.13.0 (LTS)
 
@@ -75,8 +75,9 @@ __index.html__
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8" />
     <title>Getting Started</title>
-    <script src="https://unpkg.com/lodash@4.16.6"></script>
+    <script src="https://unpkg.com/lodash@4.17.20"></script>
   </head>
   <body>
     <script src="./src/index.js"></script>
@@ -104,10 +105,9 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "webpack": "^4.20.2",
-      "webpack-cli": "^3.1.2"
-    },
-    "dependencies": {}
+      "webpack": "^5.2.0",
+      "webpack-cli": "^4.1.0"
+    }
   }
 ```
 
@@ -174,7 +174,7 @@ __dist/index.html__
   <html>
    <head>
      <title>Getting Started</title>
--    <script src="https://unpkg.com/lodash@4.16.6"></script>
+-    <script src="https://unpkg.com/lodash@4.17.20"></script>
    </head>
    <body>
 -    <script src="./src/index.js"></script>
@@ -189,11 +189,13 @@ With that said, let's run `npx webpack`, which will take our script at `src/inde
 
 ``` bash
 npx webpack
-
-...
-Built at: 13/06/2018 11:52:07
-  Asset      Size  Chunks             Chunk Names
-main.js  70.4 KiB       0  [emitted]  main
+[webpack-cli] Compilation finished
+asset main.js 69.3 KiB [emitted] [minimized] (name: main) 1 related asset
+runtime modules 1000 bytes 5 modules
+cacheable modules 530 KiB
+  ./src/index.js 257 bytes [built] [code generated]
+  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+webpack 5.2.0 compiled successfully in 2499 ms
 ...
 
 WARNING in configuration
@@ -287,11 +289,11 @@ __package.json__
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "webpack": "^4.20.2",
-      "webpack-cli": "^3.1.2"
+      "webpack": "^5.2.0",
+      "webpack-cli": "^4.1.0"
     },
     "dependencies": {
-      "lodash": "^4.17.5"
+      "lodash": "^4.17.20"
     }
   }
 ```
@@ -301,19 +303,20 @@ Now the `npm run build` command can be used in place of the `npx` command we use
 Now run the following command and see if your script alias works:
 
 ``` bash
-npm run build
+$ npm run build
 
 ...
-  Asset      Size  Chunks             Chunk Names
-main.js  70.4 KiB       0  [emitted]  main
-...
 
-WARNING in configuration
-The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/.
+[webpack-cli] Compilation finished
+asset main.js 69.3 KiB [compared for emit] [minimized] (name: main) 1 related asset
+runtime modules 1000 bytes 5 modules
+cacheable modules 530 KiB
+  ./src/index.js 257 bytes [built] [code generated]
+  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+webpack 5.2.0 compiled successfully in 2255 ms
 ```
 
-T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --colors`.
+T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --color`.
 
 
 ## Conclusion
