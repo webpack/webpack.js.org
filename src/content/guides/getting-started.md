@@ -72,7 +72,7 @@ document.body.appendChild(component());
 __index.html__
 
 ``` html
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -92,23 +92,14 @@ T> If you want to learn more about the inner workings of `package.json`, then we
 __package.json__
 
 ``` diff
-  {
-    "name": "webpack-demo",
-    "version": "1.0.0",
-    "description": "",
-+   "private": true,
--   "main": "index.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-      "webpack": "^5.2.0",
-      "webpack-cli": "^4.1.0"
-    }
-  }
+   "name": "webpack-demo",
+   "version": "1.0.0",
+   "description": "",
+-  "main": "index.js",
++  "private": true,
+   "scripts": {
+     "test": "echo \"Error: no test specified\" && exit 1"
+   },
 ```
 
 In this example, there are implicit dependencies between the `<script>` tags. Our `index.js` file depends on `lodash` being included in the page before it runs. This is because `index.js` never explicitly declared a need for `lodash`; it just assumes that the global variable `_` exists.
@@ -150,19 +141,16 @@ Now, lets import `lodash` in our script:
 __src/index.js__
 
 ``` diff
-+ import _ from 'lodash';
++import _ from 'lodash';
 +
-  function component() {
-    const element = document.createElement('div');
-
--   // Lodash, currently included via a script, is required for this line to work
-+   // Lodash, now imported by this script
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-    return element;
-  }
-
-  document.body.appendChild(component());
+ function component() {
+   const element = document.createElement('div');
+ 
+-  // Lodash, currently included via a script, is required for this line to work
++  // Lodash, now imported by this script
+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+ 
+   return element;
 ```
 
 Now, since we'll be bundling our scripts, we have to update our `index.html` file. Let's remove the lodash `<script>`, as we now `import` it, and modify the other `<script>` tag to load the bundle, instead of the raw `/src` file:
@@ -170,9 +158,8 @@ Now, since we'll be bundling our scripts, we have to update our `index.html` fil
 __dist/index.html__
 
 ``` diff
-  <!doctype html>
-  <html>
    <head>
+     <meta charset="utf-8" />
      <title>Getting Started</title>
 -    <script src="https://unpkg.com/lodash@4.17.20"></script>
    </head>
@@ -180,7 +167,7 @@ __dist/index.html__
 -    <script src="./src/index.js"></script>
 +    <script src="main.js"></script>
    </body>
-  </html>
+ </html>
 ```
 
 In this setup, `index.js` explicitly requires `lodash` to be present, and binds it as `_` (no global scope pollution). By stating what dependencies a module needs, webpack can use this information to build a dependency graph. It then uses the graph to generate an optimized bundle where scripts will be executed in the correct order.
@@ -188,14 +175,15 @@ In this setup, `index.js` explicitly requires `lodash` to be present, and binds 
 With that said, let's run `npx webpack`, which will take our script at `src/index.js` as the [entry point](/concepts/entry-points), and will generate `dist/main.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2/npm 5.2.0 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
 
 ``` bash
-npx webpack
+$ npx webpack
+...
 [webpack-cli] Compilation finished
 asset main.js 69.3 KiB [emitted] [minimized] (name: main) 1 related asset
 runtime modules 1000 bytes 5 modules
 cacheable modules 530 KiB
-  ./src/index.js 257 bytes [built] [code generated]
+  ./src/index.js 258 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.2.0 compiled successfully in 2499 ms
+webpack 5.2.0 compiled successfully in 2419 ms
 ...
 
 WARNING in configuration
@@ -252,16 +240,14 @@ module.exports = {
 Now, let's run the build again but instead using our new configuration file:
 
 ``` bash
-npx webpack --config webpack.config.js
-
-...
-  Asset      Size  Chunks             Chunk Names
-main.js  70.4 KiB       0  [emitted]  main
-...
-
-WARNING in configuration
-The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/
+$ npx webpack --config webpack.config.js
+[webpack-cli] Compilation finished
+asset main.js 69.3 KiB [compared for emit] [minimized] (name: main) 1 related asset
+runtime modules 1000 bytes 5 modules
+cacheable modules 530 KiB
+  ./src/index.js 258 bytes [built] [code generated]
+  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+webpack 5.2.0 compiled successfully in 2448 ms
 ```
 
 T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a configuration of any name. This will be useful for more complex configurations that need to be split into multiple files.
@@ -276,26 +262,15 @@ Given it's not particularly fun to run a local copy of webpack from the CLI, we 
 __package.json__
 
 ``` diff
-  {
-    "name": "webpack-demo",
-    "version": "1.0.0",
-    "description": "",
-    "scripts": {
--      "test": "echo \"Error: no test specified\" && exit 1"
-+      "test": "echo \"Error: no test specified\" && exit 1",
-+      "build": "webpack"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-      "webpack": "^5.2.0",
-      "webpack-cli": "^4.1.0"
-    },
-    "dependencies": {
-      "lodash": "^4.17.20"
-    }
-  }
+   "description": "",
+   "private": true,
+   "scripts": {
+-    "test": "echo \"Error: no test specified\" && exit 1"
++    "test": "echo \"Error: no test specified\" && exit 1",
++    "build": "webpack"
+   },
+   "repository": {
+     "type": "git",
 ```
 
 Now the `npm run build` command can be used in place of the `npx` command we used earlier. Note that within `scripts` we can reference locally installed npm packages by name the same way we did with `npx`. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts (each with flags like `--config` if necessary).
