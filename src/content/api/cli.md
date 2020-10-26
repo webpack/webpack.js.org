@@ -94,7 +94,7 @@ __链接中是 webpack v5 和 CLI v4 支持的所有核心 flag 列表 - [详戳
 例如，如果你想在项目中启用性能提示，你需在配置中使用[此](/configuration/performance/#performancehints)选项，而如果使用核心 flag，你可以这样做：
 
 ```bash
-webpack --performance-hints warning`
+webpack --performance-hints warning
 ```
 
 ## 用法 {#usage}
