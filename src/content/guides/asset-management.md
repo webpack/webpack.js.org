@@ -78,10 +78,7 @@ __webpack.config.js__
 +     rules: [
 +       {
 +         test: /\.css$/,
-+         use: [
-+           'style-loader',
-+           'css-loader',
-+         ],
++         use: ['style-loader', 'css-loader'],
 +       },
 +     ],
 +   },
@@ -90,7 +87,7 @@ __webpack.config.js__
 
 Module loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order. The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, webpack expects JavaScript to be returned by the last loader in the chain. 
 
-The above order of loaders should be maintained: 'style-loader' comes first and followed by 'css-loader'. If this convention is not followed, webpack is likely to throw errors.
+The above order of loaders should be maintained: `'style-loader'` comes first and followed by `'css-loader'`. If this convention is not followed, webpack is likely to throw errors.
 
 T> webpack uses a regular expression to determine which files it should look for and serve to a specific loader. In this case, any file that ends with `.css` will be served to the `style-loader` and the `css-loader`.
 
@@ -143,27 +140,32 @@ __src/index.js__
 Now run your build command:
 
 ``` bash
-npm run build
+$ npm run build
 
 ...
-    Asset      Size  Chunks             Chunk Names
-bundle.js  76.4 KiB       0  [emitted]  main
-Entrypoint main = bundle.js
-...
+[webpack-cli] Compilation finished
+asset bundle.js 72.6 KiB [emitted] [minimized] (name: main) 1 related asset
+runtime modules 1000 bytes 5 modules
+orphan modules 326 bytes [orphan] 1 module
+cacheable modules 539 KiB
+  modules by path ./node_modules/ 538 KiB
+    ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+    ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
+    ./node_modules/css-loader/dist/runtime/api.js 1.57 KiB [built] [code generated]
+  modules by path ./src/ 963 bytes
+    ./src/index.js + 1 modules 639 bytes [built] [code generated]
+    ./node_modules/css-loader/dist/cjs.js!./src/style.css 324 bytes [built] [code generated]
+webpack 5.2.0 compiled successfully in 3365 ms
 ```
 
-Open up `index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result, because the `<style>` tag is dynamically created by JavaScript) and look at the page's head tags. It should contain the style block that we imported in `index.js`.
+Open up `dist/index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result, because the `<style>` tag is dynamically created by JavaScript) and look at the page's head tags. It should contain the style block that we imported in `index.js`.
 
 Note that you can, and in most cases should, [minimize css](/plugins/mini-css-extract-plugin/#minimizing-for-production) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
 
 
 ## Loading Images
 
-So now we're pulling in our CSS, but what about our images like backgrounds and icons? Using the [file-loader](/loaders/file-loader) we can easily incorporate those in our system as well:
-
-``` bash
-npm install --save-dev file-loader
-```
+So now we're pulling in our CSS, but what about our images like backgrounds and icons? As of webpack 5, using the [Asset Modules](/guides/asset-modules/) we can easily incorporate those in our system as well:
 
 __webpack.config.js__
 
@@ -180,16 +182,11 @@ __webpack.config.js__
       rules: [
         {
           test: /\.css$/,
-          use: [
-            'style-loader',
-            'css-loader'
-          ],
+          use: ['style-loader', 'css-loader'],
         },
 +       {
-+         test: /\.(png|svg|jpg|gif)$/,
-+         use: [
-+           'file-loader',
-+         ],
++         test: /\.(png|svg|jpg|jpeg|gif)$/i,
++         type: 'asset/resource',
 +       },
       ],
     },
@@ -254,24 +251,34 @@ __src/style.css__
 Let's create a new build and open up the index.html file again:
 
 ``` bash
-npm run build
+$ npm run build
 
 ...
-                               Asset      Size  Chunks                    Chunk Names
-da4574bb234ddc4bb47cbe1ca4b20303.png  3.01 MiB          [emitted]  [big]
-                           bundle.js  76.7 KiB       0  [emitted]         main
-Entrypoint main = bundle.js
-...
+[webpack-cli] Compilation finished
+asset bundle.js 73.4 KiB [emitted] [compared for emit] [minimized] (name: main) 1 related asset
+asset bc67ebaf980e8f20b8c3.png 8.29 KiB [emitted] [immutable] [from: src/icon.png] (auxiliary name: main)
+runtime modules 1.82 KiB 6 modules
+orphan modules 326 bytes [orphan] 1 module
+cacheable modules 540 KiB (javascript) 8.29 KiB (asset)
+  modules by path ./node_modules/ 539 KiB
+    modules by path ./node_modules/css-loader/dist/runtime/*.js 2.38 KiB
+      ./node_modules/css-loader/dist/runtime/api.js 1.57 KiB [built] [code generated]
+      ./node_modules/css-loader/dist/runtime/getUrl.js 830 bytes [built] [code generated]
+    ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+    ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
+  modules by path ./src/ 1.45 KiB (javascript) 8.29 KiB (asset)
+    ./src/index.js + 1 modules 794 bytes [built] [code generated]
+    ./src/icon.png 42 bytes (javascript) 8.29 KiB (asset) [built] [code generated]
+    ./node_modules/css-loader/dist/cjs.js!./src/style.css 646 bytes [built] [code generated]
+webpack 5.2.0 compiled successfully in 2671 ms
 ```
 
-If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `5c999da72346a995e7e2718865d019c8.png`. This means webpack found our file in the `src` folder and processed it!
-
-T> A logical next step from here is minifying and optimizing your images. Check out the [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) and [url-loader](/loaders/url-loader) for more on how you can enhance your image loading process.
+If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `bc67ebaf980e8f20b8c3.png`. This means webpack found our file in the `src` folder and processed it!
 
 
 ## Loading Fonts
 
-So what about other assets like fonts? The file and url loaders will take any file you load through them and output it to your build directory. This means we can use them for any kind of file, including fonts. Let's update our `webpack.config.js` to handle font files:
+So what about other assets like fonts? The Asset Modules will take any file you load through them and output it to your build directory. This means we can use them for any kind of file, including fonts. Let's update our `webpack.config.js` to handle font files:
 
 __webpack.config.js__
 
@@ -288,22 +295,15 @@ __webpack.config.js__
       rules: [
         {
           test: /\.css$/,
-          use: [
-            'style-loader',
-            'css-loader'
-          ],
+          use: ['style-loader', 'css-loader'],
         },
         {
-          test: /\.(png|svg|jpg|gif)$/,
-          use: [
-            'file-loader',
-          ],
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
         },
 +       {
 +         test: /\.(woff|woff2|eot|ttf|otf)$/,
-+         use: [
-+           'file-loader',
-+         ],
++         type: 'asset/resource'
 +       },
       ],
     },
@@ -323,8 +323,7 @@ __project__
     |- bundle.js
     |- index.html
   |- /src
-+   |- my-font.woff
-+   |- my-font.woff2
++   |- google-fonts.woff2
     |- icon.png
     |- style.css
     |- index.js
@@ -337,16 +336,15 @@ __src/style.css__
 
 ``` diff
 + @font-face {
-+   font-family: 'MyFont';
-+   src:  url('./my-font.woff2') format('woff2'),
-+         url('./my-font.woff') format('woff');
++   font-family: 'GoogleFont';
++   src:  url('./google-font.woff2') format('woff2');
 +   font-weight: 600;
 +   font-style: normal;
 + }
 
   .hello {
     color: red;
-+   font-family: 'MyFont';
++   font-family: 'GoogleFont';
     background: url('./icon.png');
   }
 ```
@@ -354,16 +352,27 @@ __src/style.css__
 Now run a new build and let's see if webpack handled our fonts:
 
 ``` bash
-npm run build
+$ npm run build
 
 ...
-                                 Asset      Size  Chunks                    Chunk Names
-5439466351d432b73fdb518c6ae9654a.woff2  19.5 KiB          [emitted]
- 387c65cc923ad19790469cfb5b7cb583.woff  23.4 KiB          [emitted]
-  da4574bb234ddc4bb47cbe1ca4b20303.png  3.01 MiB          [emitted]  [big]
-                             bundle.js    77 KiB       0  [emitted]         main
-Entrypoint main = bundle.js
-...
+[webpack-cli] Compilation finished
+assets by status 21.3 KiB [cached] 2 assets
+asset bundle.js 73.6 KiB [emitted] [minimized] (name: main) 1 related asset
+runtime modules 1.82 KiB 6 modules
+orphan modules 326 bytes [orphan] 1 module
+cacheable modules 541 KiB (javascript) 21.3 KiB (asset)
+  javascript modules 541 KiB
+    modules by path ./node_modules/ 539 KiB
+      modules by path ./node_modules/css-loader/dist/runtime/*.js 2.38 KiB 2 modules
+      ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+      ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
+    modules by path ./src/ 1.76 KiB
+      ./src/index.js + 1 modules 794 bytes [built] [code generated]
+      ./node_modules/css-loader/dist/cjs.js!./src/style.css 1010 bytes [built] [code generated]
+  asset modules 84 bytes (javascript) 21.3 KiB (asset)
+    ./src/icon.png 42 bytes (javascript) 8.29 KiB (asset) [built] [code generated]
+    ./src/google-font.woff2 42 bytes (javascript) 13 KiB (asset) [built] [code generated]
+webpack 5.2.0 compiled successfully in 2622 ms
 ```
 
 Open up `index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes.
@@ -380,50 +389,39 @@ npm install --save-dev csv-loader xml-loader
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
+const path = require('path')
 
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          use: [
-            'style-loader',
-            'css-loader'
-          ],
-        },
-        {
-          test: /\.(png|svg|jpg|gif)$/,
-          use: [
-            'file-loader',
-          ],
-        },
-        {
-          test: /\.(woff|woff2|eot|ttf|otf)$/,
-          use: [
-            'file-loader',
-          ],
-        },
-+       {
-+         test: /\.(csv|tsv)$/,
-+         use: [
-+           'csv-loader',
-+         ],
-+       },
-+       {
-+         test: /\.xml$/,
-+         use: [
-+           'xml-loader',
-+         ],
-+       },
-      ],
-    },
-  };
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource'
+      },
++     {
++       test: /\.(csv|tsv)$/,
++       use: ['csv-loader'],
++     },
++     {
++       test: /\.xml$/,
++       use: ['xml-loader'],
++     },
+    ],
+  },
+};
 ```
 
 Add some data files to your project:
@@ -502,7 +500,7 @@ __src/index.js__
   document.body.appendChild(component());
 ```
 
-Re-run the `npm run build` command and open `index.html`. If you look at the console in your developer tools, you should be able to see your imported data being logged to the console!
+Re-run the `npm run build` command and open `dist/index.html`. If you look at the console in your developer tools, you should be able to see your imported data being logged to the console!
 
 T> This can be especially helpful when implementing some sort of data visualization using a tool like [d3](https://github.com/d3). Instead of making an ajax request and parsing the data at runtime you can load it into your module during the build process so that the parsed data is ready to go as soon as the module hits the browser.
 
@@ -573,56 +571,66 @@ And configure them in your webpack configuration:
 
 __webpack.config.js__
 
-```javascript
-const toml = require('toml'); 
-const yaml = require('yamljs');
-const json5 = require('json5');
-module.exports = {
-  // ...
-  module: {
-    rules: [
-      {
-        test: /\.toml$/,
-        type: 'json',
-        parser: {
-          parse: toml.parse
-        }
-      },
-      {
-        test: /\.yaml$/,
-        type: 'json',
-        parser: {
-          parse: yaml.parse
-        }
-      },
-      {
-        test: /\.json5$/,
-        type: 'json',
-        parser: {
-          parse: json5.parse
-        }
-      }
-    ]
-  }
-};
+```diff
++ const toml = require('toml'); 
++ const yaml = require('yamljs');
++ const json5 = require('json5');
+  module.exports = {
+    // ...
+    module: {
+      rules: [
+        // ...
++       {
++         test: /\.toml$/,
++         type: 'json',
++         parser: {
++           parse: toml.parse,
++         },
++       },
++       {
++         test: /\.yaml$/,
++         type: 'json',
++         parser: {
++           parse: yaml.parse,
++         },
++       },
++       {
++         test: /\.json5$/,
++         type: 'json',
++         parser: {
++           parse: json5.parse,
++         },
++       },
+      ]
+    }
+  };
 ```
 
 __src/index.js__
 
-```javascript
-import toml from './data.toml';
-import yaml from './data.yaml';
-import json from './data.json5';
-
-console.log(toml.title); // output `TOML Example`
-console.log(toml.owner.name); // output `Tom Preston-Werner`
-
-console.log(yaml.title); // output `YAML Example`
-console.log(yaml.owner.name); // output `Tom Preston-Werner`
-
-console.log(json.title); // output `JSON5 Example`
-console.log(json.owner.name); // output `Tom Preston-Werner`
+```diff
+  // ...
+  import Notes from './data.csv';
++ import toml from './data.toml';
++ import yaml from './data.yaml';
++ import json from './data.json5';
++ 
++ console.log(toml.title); // output `TOML Example`
++ console.log(toml.owner.name); // output `Tom Preston-Werner`
++ 
++ console.log(yaml.title); // output `YAML Example`
++ console.log(yaml.owner.name); // output `Tom Preston-Werner`
++ 
++ console.log(json.title); // output `JSON5 Example`
++ console.log(json.owner.name); // output `Tom Preston-Werner`
+  function component() {
+    const element = document.createElement('div');
+    // ...
+  }
+  // ...
 ```
+
+Re-run the `npm run build` command and open `dist/index.html`. You should be able to see your imported data being logged to the console!
 
 ## Global Assets
 
@@ -659,8 +667,10 @@ __project__
   |- /src
 -   |- data.xml
 -   |- data.csv
--   |- my-font.woff
--   |- my-font.woff2
+-   |- data.toml
+-   |- data.yaml
+-   |- data.json5
+-   |- google-font.woff2
 -   |- icon.png
 -   |- style.css
     |- index.js
@@ -669,9 +679,11 @@ __project__
 
 __webpack.config.js__
 
-``` diff
+```diff
   const path = require('path');
-
+- const toml = require('toml'); 
+- const yaml = require('yamljs');
+- const json5 = require('json5');
   module.exports = {
     entry: './src/index.js',
     output: {
@@ -682,38 +694,48 @@ __webpack.config.js__
 -     rules: [
 -       {
 -         test: /\.css$/,
--         use: [
--           'style-loader',
--           'css-loader',
--         ],
+-         use: ['style-loader', 'css-loader'],
 -       },
 -       {
--         test: /\.(png|svg|jpg|gif)$/,
--         use: [
--           'file-loader',
--         ],
+-         test: /\.(png|svg|jpg|jpeg|gif)$/i,
+-         type: 'asset/resource',
 -       },
 -       {
--         test: /\.(woff|woff2|eot|ttf|otf)$/,
--         use: [
--           'file-loader',
--         ],
+-         test: /\.(woff|woff2|eot|ttf|otf)$/i,
+-         type: 'asset/resource',
 -       },
 -       {
 -         test: /\.(csv|tsv)$/,
--         use: [
--           'csv-loader',
--         ],
+-         use: ['csv-loader'],
 -       },
 -       {
 -         test: /\.xml$/,
--         use: [
--           'xml-loader',
--         ],
+-         use: ['xml-loader'],
+-       },
+-       {
+-         test: /\.toml$/,
+-         type: 'json',
+-         parser: {
+-           parse: toml.parse,
+-         },
+-       },
+-       {
+-         test: /\.yaml$/,
+-         type: 'json',
+-         parser: {
+-           parse: yaml.parse,
+-         },
+-       },
+-       {
+-         test: /\.json5$/,
+-         type: 'json',
+-         parser: {
+-           parse: json5.parse,
+-         },
 -       },
 -     ],
 -   },
-  };
+  }
 ```
 
 __src/index.js__
