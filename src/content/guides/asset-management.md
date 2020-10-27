@@ -26,32 +26,30 @@ Let's make a minor change to our project before we get started:
 __dist/index.html__
 
 ``` diff
-  <!doctype html>
-  <html>
-    <head>
+ <html>
+   <head>
+     <meta charset="utf-8" />
 -    <title>Getting Started</title>
 +    <title>Asset Management</title>
-    </head>
-    <body>
--     <script src="main.js"></script>
-+     <script src="bundle.js"></script>
-    </body>
-  </html>
+   </head>
+   <body>
+-    <script src="main.js"></script>
++    <script src="bundle.js"></script>
+   </body>
+ </html>
 ```
 
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
--     filename: 'main.js',
-+     filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-  };
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+-    filename: 'main.js',
++    filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+ };
 ```
 
 
@@ -66,23 +64,18 @@ npm install --save-dev style-loader css-loader
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-+   module: {
-+     rules: [
-+       {
-+         test: /\.css$/,
-+         use: ['style-loader', 'css-loader'],
-+       },
-+     ],
-+   },
-  };
+     filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
++  module: {
++    rules: [
++      {
++        test: /\.css$/i,
++        use: ['style-loader', 'css-loader'],
++      },
++    ],
++  },
+ };
 ```
 
 Module loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order. The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, webpack expects JavaScript to be returned by the last loader in the chain. 
@@ -121,20 +114,18 @@ __src/style.css__
 __src/index.js__
 
 ``` diff
-  import _ from 'lodash';
-+ import './style.css';
-
-  function component() {
-    const element = document.createElement('div');
-
-    // Lodash, now imported by this script
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   element.classList.add('hello');
-
-    return element;
-  }
-
-  document.body.appendChild(component());
+ import _ from 'lodash';
++import './style.css';
+ 
+ function component() {
+   const element = document.createElement('div');
+ 
+   // Lodash, now imported by this script
+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
++  element.classList.add('hello');
+ 
+   return element;
+ }
 ```
 
 Now run your build command:
@@ -152,10 +143,10 @@ cacheable modules 539 KiB
     ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
     ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
     ./node_modules/css-loader/dist/runtime/api.js 1.57 KiB [built] [code generated]
-  modules by path ./src/ 963 bytes
-    ./src/index.js + 1 modules 639 bytes [built] [code generated]
+  modules by path ./src/ 964 bytes
+    ./src/index.js + 1 modules 640 bytes [built] [code generated]
     ./node_modules/css-loader/dist/cjs.js!./src/style.css 324 bytes [built] [code generated]
-webpack 5.2.0 compiled successfully in 3365 ms
+webpack 5.2.0 compiled successfully in 2605 ms
 ```
 
 Open up `dist/index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result, because the `<style>` tag is dynamically created by JavaScript) and look at the page's head tags. It should contain the style block that we imported in `index.js`.
@@ -170,27 +161,16 @@ So now we're pulling in our CSS, but what about our images like backgrounds and 
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader'],
-        },
-+       {
-+         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-+         type: 'asset/resource',
-+       },
-      ],
-    },
-  };
+         test: /\.css$/i,
+         use: ['style-loader', 'css-loader'],
+       },
++      {
++        test: /\.(png|svg|jpg|jpeg|gif)$/i,
++        type: 'asset/resource',
++      },
+     ],
+   },
+ };
 ```
 
 Now, when you `import MyImage from './my-image.png'`, that image will be processed and added to your `output` directory _and_ the `MyImage` variable will contain the final url of that image after processing. When using the [css-loader](/loaders/css-loader), as shown above, a similar process will occur for `url('./my-image.png')` within your CSS. The loader will recognize this is a local file, and replace the `'./my-image.png'` path with the final path to the image in your `output` directory. The [html-loader](/loaders/html-loader) handles `<img src="./my-image.png" />` in the same manner.
@@ -216,36 +196,33 @@ __project__
 __src/index.js__
 
 ``` diff
-  import _ from 'lodash';
-  import './style.css';
-+ import Icon from './icon.png';
+ import _ from 'lodash';
+ import './style.css';
++import Icon from './icon.png';
+ 
+ function component() {
+   const element = document.createElement('div');
 
-  function component() {
-    const element = document.createElement('div');
-
-    // Lodash, now imported by this script
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-    element.classList.add('hello');
-
-+   // Add the image to our existing div.
-+   const myIcon = new Image();
-+   myIcon.src = Icon;
+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+   element.classList.add('hello');
+ 
++  // Add the image to our existing div.
++  const myIcon = new Image();
++  myIcon.src = Icon;
 +
-+   element.appendChild(myIcon);
-
-    return element;
-  }
-
-  document.body.appendChild(component());
++  element.appendChild(myIcon);
++
+   return element;
+ }
 ```
 
 __src/style.css__
 
 ``` diff
-  .hello {
-    color: red;
-+   background: url('./icon.png');
-  }
+ .hello {
+   color: red;
++  background: url('./icon.png');
+ }
 ```
 
 Let's create a new build and open up the index.html file again:
@@ -255,7 +232,7 @@ $ npm run build
 
 ...
 [webpack-cli] Compilation finished
-asset bundle.js 73.4 KiB [emitted] [compared for emit] [minimized] (name: main) 1 related asset
+asset bundle.js 73.4 KiB [emitted] [minimized] (name: main) 1 related asset
 asset bc67ebaf980e8f20b8c3.png 8.29 KiB [emitted] [immutable] [from: src/icon.png] (auxiliary name: main)
 runtime modules 1.82 KiB 6 modules
 orphan modules 326 bytes [orphan] 1 module
@@ -267,10 +244,10 @@ cacheable modules 540 KiB (javascript) 8.29 KiB (asset)
     ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
     ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
   modules by path ./src/ 1.45 KiB (javascript) 8.29 KiB (asset)
-    ./src/index.js + 1 modules 794 bytes [built] [code generated]
+    ./src/index.js + 1 modules 795 bytes [built] [code generated]
     ./src/icon.png 42 bytes (javascript) 8.29 KiB (asset) [built] [code generated]
-    ./node_modules/css-loader/dist/cjs.js!./src/style.css 646 bytes [built] [code generated]
-webpack 5.2.0 compiled successfully in 2671 ms
+    ./node_modules/css-loader/dist/cjs.js!./src/style.css 648 bytes [built] [code generated]
+webpack 5.2.0 compiled successfully in 2703 ms
 ```
 
 If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `bc67ebaf980e8f20b8c3.png`. This means webpack found our file in the `src` folder and processed it!
@@ -283,31 +260,16 @@ So what about other assets like fonts? The Asset Modules will take any file you 
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          use: ['style-loader', 'css-loader'],
-        },
-        {
-          test: /\.(png|svg|jpg|jpeg|gif)$/i,
-          type: 'asset/resource',
-        },
-+       {
-+         test: /\.(woff|woff2|eot|ttf|otf)$/,
-+         type: 'asset/resource'
-+       },
-      ],
-    },
-  };
+         test: /\.(png|svg|jpg|jpeg|gif)$/i,
+         type: 'asset/resource',
+       },
++      {
++        test: /\.(woff|woff2|eot|ttf|otf)$/i,
++        type: 'asset/resource',
++      },
+     ],
+   },
+ };
 ```
 
 Add some font files to your project:
@@ -335,18 +297,17 @@ With the loader configured and fonts in place, you can incorporate them via an `
 __src/style.css__
 
 ``` diff
-+ @font-face {
-+   font-family: 'GoogleFont';
-+   src:  url('./google-font.woff2') format('woff2');
-+   font-weight: 600;
-+   font-style: normal;
-+ }
-
-  .hello {
-    color: red;
-+   font-family: 'GoogleFont';
-    background: url('./icon.png');
-  }
++@font-face {
++  font-family: 'GoogleFont';
++  src: url('./google-font.woff2') format('woff2');
++  font-weight: 600;
++  font-style: normal;
++}
+ .hello {
+   color: red;
++  font-family: 'GoogleFont';
+   background: url('./icon.png');
+ }
 ```
 
 Now run a new build and let's see if webpack handled our fonts:
@@ -356,8 +317,9 @@ $ npm run build
 
 ...
 [webpack-cli] Compilation finished
-assets by status 21.3 KiB [cached] 2 assets
+assets by status 8.29 KiB [cached] 1 asset
 asset bundle.js 73.6 KiB [emitted] [minimized] (name: main) 1 related asset
+asset 8d763566e205be31fe8e.woff2 13 KiB [emitted] [immutable] [from: src/google-font.woff2] (auxiliary name: main)
 runtime modules 1.82 KiB 6 modules
 orphan modules 326 bytes [orphan] 1 module
 cacheable modules 541 KiB (javascript) 21.3 KiB (asset)
@@ -367,15 +329,15 @@ cacheable modules 541 KiB (javascript) 21.3 KiB (asset)
       ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
       ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
     modules by path ./src/ 1.76 KiB
-      ./src/index.js + 1 modules 794 bytes [built] [code generated]
+      ./src/index.js + 1 modules 795 bytes [built] [code generated]
       ./node_modules/css-loader/dist/cjs.js!./src/style.css 1010 bytes [built] [code generated]
   asset modules 84 bytes (javascript) 21.3 KiB (asset)
     ./src/icon.png 42 bytes (javascript) 8.29 KiB (asset) [built] [code generated]
     ./src/google-font.woff2 42 bytes (javascript) 13 KiB (asset) [built] [code generated]
-webpack 5.2.0 compiled successfully in 2622 ms
+webpack 5.2.0 compiled successfully in 2680 ms
 ```
 
-Open up `index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes.
+Open up `dist/index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes.
 
 
 ## Loading Data
@@ -389,39 +351,20 @@ npm install --save-dev csv-loader xml-loader
 __webpack.config.js__
 
 ``` diff
-const path = require('path');
-
-module.exports = {
-  entry: './src/index.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource'
-      },
-+     {
-+       test: /\.(csv|tsv)$/,
-+       use: ['csv-loader'],
-+     },
-+     {
-+       test: /\.xml$/,
-+       use: ['xml-loader'],
-+     },
-    ],
-  },
-};
+         test: /\.(woff|woff2|eot|ttf|otf)$/i,
+         type: 'asset/resource',
+       },
++      {
++        test: /\.(csv|tsv)$/i,
++        use: ['csv-loader'],
++      },
++      {
++        test: /\.xml$/i,
++        use: ['xml-loader'],
++      },
+     ],
+   },
+ };
 ```
 
 Add some data files to your project:
@@ -472,32 +415,23 @@ Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) a
 __src/index.js__
 
 ``` diff
-  import _ from 'lodash';
-  import './style.css';
-  import Icon from './icon.png';
-+ import Data from './data.xml';
-+ import Notes from './data.csv';
+ import _ from 'lodash';
+ import './style.css';
+ import Icon from './icon.png';
++import Data from './data.xml';
++import Notes from './data.csv';
+ 
+ function component() {
+   const element = document.createElement('div');
 
-  function component() {
-    const element = document.createElement('div');
-
-    // Lodash, now imported by this script
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-    element.classList.add('hello');
-
-    // Add the image to our existing div.
-    const myIcon = new Image();
-    myIcon.src = Icon;
-
-    element.appendChild(myIcon);
-
-+   console.log(Data);
-+   console.log(Notes);
-
-    return element;
-  }
-
-  document.body.appendChild(component());
+   // ...
+   element.appendChild(myIcon);
+ 
++  console.log(Data);
++  console.log(Notes);
++
+   return element;
+ }
 ```
 
 Re-run the `npm run build` command and open `dist/index.html`. If you look at the console in your developer tools, you should be able to see your imported data being logged to the console!
@@ -572,62 +506,59 @@ And configure them in your webpack configuration:
 __webpack.config.js__
 
 ```diff
-+ const toml = require('toml'); 
-+ const yaml = require('yamljs');
-+ const json5 = require('json5');
-  module.exports = {
-    // ...
-    module: {
-      rules: [
-        // ...
-+       {
-+         test: /\.toml$/,
-+         type: 'json',
-+         parser: {
-+           parse: toml.parse,
-+         },
-+       },
-+       {
-+         test: /\.yaml$/,
-+         type: 'json',
-+         parser: {
-+           parse: yaml.parse,
-+         },
-+       },
-+       {
-+         test: /\.json5$/,
-+         type: 'json',
-+         parser: {
-+           parse: json5.parse,
-+         },
-+       },
-      ]
-    }
-  };
+ const path = require('path');
++const toml = require('toml');
++const yaml = require('yamljs');
++const json5 = require('json5');
+ 
+ // ...
+         test: /\.xml$/i,
+         use: ['xml-loader'],
+       },
++      {
++        test: /\.toml$/i,
++        type: 'json',
++        parser: {
++          parse: toml.parse,
++        },
++      },
++      {
++        test: /\.yaml$/i,
++        type: 'json',
++        parser: {
++          parse: yaml.parse,
++        },
++      },
++      {
++        test: /\.json5$/i,
++        type: 'json',
++        parser: {
++          parse: json5.parse,
++        },
++      },
+     ],
+   },
+ };
 ```
 
 __src/index.js__
 
 ```diff
-  // ...
-  import Notes from './data.csv';
-+ import toml from './data.toml';
-+ import yaml from './data.yaml';
-+ import json from './data.json5';
-+ 
-+ console.log(toml.title); // output `TOML Example`
-+ console.log(toml.owner.name); // output `Tom Preston-Werner`
-+ 
-+ console.log(yaml.title); // output `YAML Example`
-+ console.log(yaml.owner.name); // output `Tom Preston-Werner`
-+ 
-+ console.log(json.title); // output `JSON5 Example`
-+ console.log(json.owner.name); // output `Tom Preston-Werner`
-  function component() {
-    const element = document.createElement('div');
-    // ...
-  }
-  // ...
+ import Icon from './icon.png';
+ import Data from './data.xml';
+ import Notes from './data.csv';
++import toml from './data.toml';
++import yaml from './data.yaml';
++import json from './data.json5';
++
++console.log(toml.title); // output `TOML Example`
++console.log(toml.owner.name); // output `Tom Preston-Werner`
++
++console.log(yaml.title); // output `YAML Example`
++console.log(yaml.owner.name); // output `Tom Preston-Werner`
++
++console.log(json.title); // output `JSON5 Example`
++console.log(json.owner.name); // output `Tom Preston-Werner`
 ```
 
 Re-run the `npm run build` command and open `dist/index.html`. You should be able to see your imported data being logged to the console!
@@ -680,105 +611,101 @@ __project__
 __webpack.config.js__
 
 ```diff
-  const path = require('path');
-- const toml = require('toml'); 
-- const yaml = require('yamljs');
-- const json5 = require('json5');
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
--   module: {
--     rules: [
--       {
--         test: /\.css$/,
--         use: ['style-loader', 'css-loader'],
--       },
--       {
--         test: /\.(png|svg|jpg|jpeg|gif)$/i,
--         type: 'asset/resource',
--       },
--       {
--         test: /\.(woff|woff2|eot|ttf|otf)$/i,
--         type: 'asset/resource',
--       },
--       {
--         test: /\.(csv|tsv)$/,
--         use: ['csv-loader'],
--       },
--       {
--         test: /\.xml$/,
--         use: ['xml-loader'],
--       },
--       {
--         test: /\.toml$/,
--         type: 'json',
--         parser: {
--           parse: toml.parse,
--         },
--       },
--       {
--         test: /\.yaml$/,
--         type: 'json',
--         parser: {
--           parse: yaml.parse,
--         },
--       },
--       {
--         test: /\.json5$/,
--         type: 'json',
--         parser: {
--           parse: json5.parse,
--         },
--       },
--     ],
--   },
-  }
+ const path = require('path');
+-const toml = require('toml');
+-const yaml = require('yamljs');
+-const json5 = require('json5');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   // ...
+-  module: {
+-    rules: [
+-      {
+-        test: /\.css$/i,
+-        use: ['style-loader', 'css-loader'],
+-      },
+-      {
+-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+-        type: 'asset/resource',
+-      },
+-      {
+-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+-        type: 'asset/resource',
+-      },
+-      {
+-        test: /\.(csv|tsv)$/i,
+-        use: ['csv-loader'],
+-      },
+-      {
+-        test: /\.xml$/i,
+-        use: ['xml-loader'],
+-      },
+-      {
+-        test: /\.toml$/i,
+-        type: 'json',
+-        parser: {
+-          parse: toml.parse,
+-        },
+-      },
+-      {
+-        test: /\.yaml$/i,
+-        type: 'json',
+-        parser: {
+-          parse: yaml.parse,
+-        },
+-      },
+-      {
+-        test: /\.json5$/i,
+-        type: 'json',
+-        parser: {
+-          parse: json5.parse,
+-        },
+-      },
+-    ],
+-  },
+ };
 ```
 
 __src/index.js__
 
 ``` diff
-  import _ from 'lodash';
-- import './style.css';
-- import Icon from './icon.png';
-- import Data from './data.xml';
-- import Notes from './data.csv';
-- import toml from './data.toml';
-- import yaml from './data.yaml';
-- import json from './data.json5';
-- 
-- console.log(toml.title); // output `TOML Example`
-- console.log(toml.owner.name); // output `Tom Preston-Werner`
-- 
-- console.log(yaml.title); // output `YAML Example`
-- console.log(yaml.owner.name); // output `Tom Preston-Werner`
-- 
-- console.log(json.title); // output `JSON5 Example`
-- console.log(json.owner.name); // output `Tom Preston-Werner`
+ import _ from 'lodash';
+-import './style.css';
+-import Icon from './icon.png';
+-import Data from './data.xml';
+-import Notes from './data.csv';
+-import toml from './data.toml';
+-import yaml from './data.yaml';
+-import json from './data.json5';
 -
-  function component() {
-    const element = document.createElement('div');
+-console.log(toml.title); // output `TOML Example`
+-console.log(toml.owner.name); // output `Tom Preston-Werner`
 -
--   // Lodash, now imported by this script
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
--   element.classList.add('hello');
+-console.log(yaml.title); // output `YAML Example`
+-console.log(yaml.owner.name); // output `Tom Preston-Werner`
 -
--   // Add the image to our existing div.
--   const myIcon = new Image();
--   myIcon.src = Icon;
+-console.log(json.title); // output `JSON5 Example`
+-console.log(json.owner.name); // output `Tom Preston-Werner`
+ 
+ function component() {
+   const element = document.createElement('div');
+ 
+-  // Lodash, now imported by this script
+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+-  element.classList.add('hello');
 -
--   element.appendChild(myIcon);
+-  // Add the image to our existing div.
+-  const myIcon = new Image();
+-  myIcon.src = Icon;
 -
--   console.log(Data);
--   console.log(Notes);
-
-    return element;
-  }
-
-  document.body.appendChild(component());
+-  element.appendChild(myIcon);
+-
+-  console.log(Data);
+-  console.log(Notes);
+ 
+   return element;
+ }
 ```
 
 
