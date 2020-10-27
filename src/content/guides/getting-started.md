@@ -40,7 +40,20 @@ npm init -y
 npm install webpack webpack-cli --save-dev
 ```
 
-T> Throughout the Guides we will use `diff` blocks to show you what changes we're making to directories, files, and code.
+Throughout the Guides we will use __`diff` blocks__ to show you what changes we're making to directories, files, and code. For instance:
+
+```diff
++ this is a new line you should copy into your code
+- and this line should be removed from your code
+
+As the code might get very long,
+  1. sometimes we only show part of it,
+  2. sometimes we use `// ...` to indicate those code folded
+
+Which means you should only care about those lines prefixing with `+`, `-` characters.
+
+Avoid copying the whole code block, otherwise your code might not work as expected
+```
 
 Now we'll create the following directory structure, files and their contents:
 
@@ -312,7 +325,7 @@ webpack-demo
 |- /node_modules
 ```
 
-T> If you're using npm 5, you'll probably also see a `package-lock.json` file in your directory.
+T> If you're using npm 5+, you'll probably also see a `package-lock.json` file in your directory.
 
 W> Do not compile untrusted code with webpack. It could lead to execution of malicious code on your computer, remote servers, or in the Web browsers of the end users of your application.
 
