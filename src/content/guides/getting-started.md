@@ -46,7 +46,7 @@ Throughout the Guides we will use __`diff` blocks__ to show you what changes we'
 + this is a new line you should copy into your code
 - and this line should be removed from your code
 
-As the code might get very long,
+As the code might get long,
   1. sometimes we only show part of it,
   2. sometimes we use `// ...` to indicate those code folded
 
