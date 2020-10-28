@@ -136,7 +136,7 @@ module.exports = {
 To use this option with the CLI pass the `--allowed-hosts` option a comma-delimited string.
 
 ```bash
-webpack serve --entry ./entry/file --output-path /output/path --allowed-hosts .host.com,host2.com
+webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com,host2.com
 ```
 
 ## `devServer.before`
@@ -278,7 +278,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --content-base /path/to/content/dir
+webpack serve --content-base ./path/to/content/dir
 ```
 
 
@@ -568,7 +568,7 @@ webpack serve --http2
 To pass your own certificate via CLI, use the following options
 
 ```bash
-webpack serve --http2 --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
+webpack serve --http2 --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
 ```
 
 
@@ -616,7 +616,7 @@ webpack serve --https
 To pass your own certificate via the CLI use the following options
 
 ```bash
-webpack serve --https --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
+webpack serve --https --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
 ```
 
 ## `devServer.index`
@@ -965,7 +965,7 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    pfx: '/path/to/file.pfx'
+    pfx: './path/to/file.pfx'
   }
 };
 ```
@@ -973,7 +973,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --pfx /path/to/file.pfx
+webpack serve --pfx ./path/to/file.pfx
 ```
 
 
