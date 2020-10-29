@@ -94,7 +94,7 @@ __Here's the list of all the core flags supported by webpack v5 with CLI v4 - [l
 For example if you want to enable performance hints in your project you'd use [this](https://webpack.js.org/configuration/performance/#performancehints) option in configuration, with core flags you can do -
 
 ```bash
-webpack --performance-hints warning`
+webpack --performance-hints warning
 ```
 
 ## Usage
