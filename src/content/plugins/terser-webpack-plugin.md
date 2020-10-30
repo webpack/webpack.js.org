@@ -20,7 +20,13 @@ repo: https://github.com/webpack-contrib/terser-webpack-plugin
 
 ## 入门 {#getting-started}
 
+<<<<<<< HEAD
 首先，你需要安装 `terser-webpack-plugin`：
+=======
+If you are using webpack v5 or above you do not need to install this plugin. Webpack v5 comes with the latest `terser-webpack-plugin` out of the box.
+
+To begin, you'll need to install `terser-webpack-plugin`:
+>>>>>>> 63af6c005cd45bcc7d3e3b21e179d9e64c34ab07
 
 ```console
 $ npm install terser-webpack-plugin --save-dev
@@ -236,7 +242,9 @@ module.exports = {
           compress: {},
           mangle: true, // Note `mangle.properties` is `false` by default.
           module: false,
+          // Deprecated
           output: null,
+          format: null,
           toplevel: false,
           nameCache: null,
           ie8: false,
@@ -255,10 +263,17 @@ module.exports = {
 类型： `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>|Object`
 默认值： `true`
 
+<<<<<<< HEAD
 是否将注释剥离到单独的文件中（请参阅[详细信息](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a)）。
 默认情况下，仅剥离 `/^\**!|@preserve|@license|@cc_on/i` 正则表达式匹配的注释，其余注释会删除。
 如果原始文件名为 `foo.js` ，则注释将存储到 `foo.js.LICENSE.txt` 。
 `terserOptions.output.comments` 选项指定是否保留注释，即可以在剥离其他注释时保留一些注释，甚至保留已剥离的注释。
+=======
+Whether comments shall be extracted to a separate file, (see [details](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a)).
+By default extract only comments using `/^\**!|@preserve|@license|@cc_on/i` regexp condition and remove remaining comments.
+If the original file is named `foo.js`, then the comments will be stored to `foo.js.LICENSE.txt`.
+The `terserOptions.format.comments` option specifies whether the comment will be preserved, i.e. it is possible to preserve some comments (e.g. annotations) while extracting others or even preserving comments that have been extracted.
+>>>>>>> 63af6c005cd45bcc7d3e3b21e179d9e64c34ab07
 
 #### `Boolean` {#boolean}
 
@@ -482,7 +497,7 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         terserOptions: {
-          output: {
+          format: {
             comments: /@license/i,
           },
         },
@@ -506,7 +521,7 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         terserOptions: {
-          output: {
+          format: {
             comments: false,
           },
         },
