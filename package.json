@@ -102,7 +102,6 @@
     "eslint": "^7.8.1",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-markdown": "^1.0.2",
-    "file-loader": "^6.1.0",
     "fontgen-loader": "git://github.com/chenxsan/fontgen-loader.git#bugfix/fix-this-exec",
     "front-matter": "^4.0.2",
     "gh-pages": "^3.1.0",
