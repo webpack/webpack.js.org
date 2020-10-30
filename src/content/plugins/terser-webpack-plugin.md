@@ -20,6 +20,8 @@ This plugin uses [terser](https://github.com/terser-js/terser) to minify your Ja
 
 ## Getting Started
 
+If you are using webpack v5 or above you do not need to install this plugin. Webpack v5 comes with the latest `terser-webpack-plugin` out of the box.
+
 To begin, you'll need to install `terser-webpack-plugin`:
 
 ```console
@@ -236,7 +238,9 @@ module.exports = {
           compress: {},
           mangle: true, // Note `mangle.properties` is `false` by default.
           module: false,
+          // Deprecated
           output: null,
+          format: null,
           toplevel: false,
           nameCache: null,
           ie8: false,
@@ -258,7 +262,7 @@ Default: `true`
 Whether comments shall be extracted to a separate file, (see [details](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a)).
 By default extract only comments using `/^\**!|@preserve|@license|@cc_on/i` regexp condition and remove remaining comments.
 If the original file is named `foo.js`, then the comments will be stored to `foo.js.LICENSE.txt`.
-The `terserOptions.output.comments` option specifies whether the comment will be preserved, i.e. it is possible to preserve some comments (e.g. annotations) while extracting others or even preserving comments that have been extracted.
+The `terserOptions.format.comments` option specifies whether the comment will be preserved, i.e. it is possible to preserve some comments (e.g. annotations) while extracting others or even preserving comments that have been extracted.
 
 #### `Boolean`
 
@@ -481,7 +485,7 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         terserOptions: {
-          output: {
+          format: {
             comments: /@license/i,
           },
         },
@@ -505,7 +509,7 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         terserOptions: {
-          output: {
+          format: {
             comments: false,
           },
         },
