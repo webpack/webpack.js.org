@@ -75,6 +75,7 @@ __index.html__
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8"/>
     <title>Getting Started</title>
     <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
@@ -173,6 +174,7 @@ __dist/index.html__
   <!doctype html>
   <html>
    <head>
+     <meta charset="utf-8"/>
      <title>Getting Started</title>
 -    <script src="https://unpkg.com/lodash@4.16.6"></script>
    </head>
