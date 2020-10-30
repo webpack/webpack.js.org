@@ -63,6 +63,7 @@ module.exports = env => merge(common(env), {
         }))
       ],
       navigateFallback: '/app-shell/index.html',
+      navigateFallbackDenylist: [/printable/],
       runtimeCaching: [
         {
           urlPattern: /https:\/\/fonts\.gstatic\.com/, // cache google fonts for one year
