@@ -38,7 +38,7 @@ Option                     | Description
 `web`                      | Compile for usage in a browser-like environment __(default)__
 `webworker`                | Compile as WebWorker
 `esX`                      | Compile for specified ECMAScript version. Examples: es5, es2020.
-`browserslist`             | Infer a platform and the ES-features from a browserslist-config __(default if browserlist config is available)__
+`browserslist`             | Infer a platform and the ES-features from a browserslist-config __(default if browserslist config is available)__
 
 For example, when the `target` is set to `"electron-main"`, webpack includes multiple electron specific variables.
 
