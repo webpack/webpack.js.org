@@ -117,6 +117,7 @@
     "markdownlint-cli": "^0.24.0",
     "markdownlint-rule-emphasis-style": "^1.0.0",
     "mini-css-extract-plugin": "^1.2.1",
+    "minimist": "1.2.3",
     "mkdirp": "^1.0.4",
     "modularscale-sass": "^3.0.3",
     "node-sass": "^4.5.3",
@@ -169,8 +170,6 @@
     "webpack.vote": "https://github.com/webpack/voting-app.git"
   },
   "resolutions": {
-    "remark-responsive-tables": "git://github.com/chenxsan/remark-responsive-tables.git#bugfix/fix-empty-head",
-    "sitemap-static/minimist": "1.2.5",
-    "webpack-pwa-manifest/**/minimist": "1.2.5"
+    "remark-responsive-tables": "git://github.com/chenxsan/remark-responsive-tables.git#bugfix/fix-empty-head"
   }
 }
