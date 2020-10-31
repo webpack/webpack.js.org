@@ -1018,7 +1018,7 @@ module.exports = {
 ```
 
 
-W> `stats.warningsFilter` is deprecated in favor of [`ignoreWarnings`](https://webpack.js.org/configuration/other-options/#ignorewarnings).
+W> `stats.warningsFilter` is deprecated in favor of [`ignoreWarnings`](/configuration/other-options/#ignorewarnings).
 
 ### `stats.chunkRelations`
 
