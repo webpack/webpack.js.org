@@ -38,7 +38,7 @@ The following string values are supported:
 Option                | Description
 --------------------- | -----------------------
 `development`         | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `development`. Enables useful names for modules and chunks.
-`production`          | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `production`. Enables determinstic mangled names for modules and chunks, `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin` and `TerserPlugin`.
+`production`          | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `production`. Enables deterministic mangled names for modules and chunks, `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin` and `TerserPlugin`.
 `none`                | Opts out of any default optimization options
 
 If not set, webpack sets `production` as the default value for `mode`.

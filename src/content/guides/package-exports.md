@@ -132,7 +132,11 @@ When only a single entry (`"."`) into the package should be supported the `{ "."
 
 In an object where each key is a condition, order of properties is significant. Conditions are handled in the order they are specified.
 
-In an object where each key is a subpath, order of properties is not significant. More specific properties are preferred over less specific ones.
+Example: `{ "red": "./stop.js", "green": "./drive.js" }` != `{ "green": "./drive.js", "red": "./stop.js" }` (when both `red` and `green` conditions are set, first property will be used)
+
+In an object where each key is a subpath, order of properties (subpaths) is not significant. More specific paths are preferred over less specific ones.
+
+Example: `{ "./a/": "./x/", "./a/b/": "./y/", "./a/b/c": "./z" }` == `{ "./a/b/c": "./z", "./a/b/": "./y/", "./a/": "./x/" }` (order will always be: `./a/b/c` > `./a/b/` > `./a/`)
 
 `exports` field is preferred over other package entry fields like `main`, `module`, `browser` or custom ones.
 
