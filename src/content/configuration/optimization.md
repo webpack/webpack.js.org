@@ -463,7 +463,7 @@ module.exports = {
 
 ## `optimization.sideEffects`
 
-`boolean = true`
+`boolean = true`  `string: 'flag'` 
 
 Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used.
 
@@ -491,6 +491,19 @@ module.exports = {
   }
 };
 ```
+
+To only use the manual flag and do not analyse source code:
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    sideEffects: 'flag'
+  }
+};
+```
+
+It is used by default in non-production builds.
 
 ## `optimization.portableRecords`
 
