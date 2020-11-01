@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
-const request = require('request-promise');
+const fetch = require('node-fetch');
 const { uniqBy } = require('lodash');
 
 const asyncWriteFile = promisify(fs.writeFile);
@@ -64,22 +64,23 @@ const nodeToSupporter = node => ({
 });
 
 const getAllNodes = async (graphqlQuery, getNodes) => {
-  const requestOptions = {
-    method: 'POST',
-    uri: graphqlEndpoint,
-    body: { query: graphqlQuery, variables: { limit: graphqlPageSize, offset: 0 } },
-    json: true
-  };
+  const body = { query: graphqlQuery, variables: { limit: graphqlPageSize, offset: 0 } };
 
   let allNodes = [];
 
   // Handling pagination if necessary
   // eslint-disable-next-line
   while (true) {
-    const result = await request(requestOptions);
+    const result = await fetch(graphqlEndpoint, {
+      method: 'POST',
+      body: JSON.stringify(body),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(r => r.json());
     const nodes = getNodes(result.data);
     allNodes = [...allNodes, ...nodes];
-    requestOptions.body.variables.offset += graphqlPageSize;
+    body.variables.offset += graphqlPageSize;
     if (nodes.length < graphqlPageSize) {
       return allNodes;
     }
