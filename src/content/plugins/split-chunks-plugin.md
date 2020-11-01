@@ -209,11 +209,11 @@ The difference between `maxInitialSize` and `maxSize` is that `maxInitialSize` w
 
 ### `splitChunks.name`
 
-`boolean = true` `function (module, chunks, cacheGroupKey) => string` `string`
+`boolean = false` `function (module, chunks, cacheGroupKey) => string` `string`
 
 Also available for each cacheGroup: `splitChunks.cacheGroups.{cacheGroup}.name`.
 
-The name of the split chunk. Providing `true` will automatically generate a name based on chunks and cache group key.
+The name of the split chunk. Providing `false` will keep the same name of the chunks so it doesn't change names unnecessarily.
 
 Providing a string or a function allows you to use a custom name. Specifying either a string or a function that always returns the same string will merge all common modules and vendors into a single chunk. This might lead to bigger initial downloads and slow down page loads.
 
