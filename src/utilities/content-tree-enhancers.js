@@ -5,6 +5,7 @@ const remark = require('remark');
 const slug = require('remark-slug');
 const extractAnchors = require('remark-extract-anchors');
 const remarkHtml = require('remark-html');
+const frontmatter = require('remark-frontmatter');
 
 const enhance = (tree, options) => {
 
@@ -40,6 +41,7 @@ const enhance = (tree, options) => {
 
     remark()
       .use(slug)
+      .use(frontmatter)
       .use(extractAnchors, { anchors, levels: 3 })
       .use(remarkHtml)
       .process(content, err => {
