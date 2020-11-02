@@ -77,8 +77,7 @@ __webpack.config.js__
   };
 ```
 
-T> 你可以通过以下命令来修改 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 
-的配置：`webpack-dev-server --hotOnly`。
+T> 你可以通过以下命令来修改 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的配置：`webpack-dev-server --hotOnly`。
 
 现在，我们来修改 `index.js` 文件，以便当 `print.js` 内部发生变更时可以告诉 webpack 接受更新的模块。
 

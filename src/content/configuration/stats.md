@@ -15,6 +15,7 @@ contributors:
   - anshumanv
   - pixel-ray
   - snitin315
+  - u01jmg3
 ---
 
 `object` `string`
@@ -1017,37 +1018,7 @@ module.exports = {
 ```
 
 
-W> `stats.warningsFilter` 已被弃用，请改用 [`stats.ignoreWarnings`](#statsignoreWarnings)。
-
-### `stats.ignoreWarnings` {#statsignorewarnings}
-
-`RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`
-
-告诉 `stats` 忽略特定的警告。这可以通过一个 `RegExp` 来完成，这是一个自定义的 `function`，用于根据原始 warning 实例来选择 warning，该实例的参数为 `WebpackError` 和 `Compilation`，并会返回一个 `boolean`，一个具有以下属性的 `object`：
-
-- `file`：一个正则表达式，用于匹配 warning 的源文件。
-- `message`：一个正则表达式，用于匹配 warning 信息。
-- `module`：一个正则表达式，用于匹配 warning 的源模块。
-
-`stats.ignoreWarnings` 可以是上述任何一种的 `arrau`：
-
-```javascript
-module.exports = {
-  //...
-  stats: {
-    ignoreWarnings: [
-      {
-        module: /module2\.js\?[34]/ // A RegExp
-      },
-      {
-        module: /[13]/,
-        message: /homepage/
-      },
-      (warning) => true
-    ]
-  }
-};
-```
+W> `stats.warningsFilter` 已被弃用，请改用 [`ignoreWarnings`](/configuration/other-options/#ignorewarnings)。
 
 ### `stats.chunkRelations` {#statschunkrelations}
 

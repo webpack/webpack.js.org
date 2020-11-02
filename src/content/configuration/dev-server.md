@@ -136,7 +136,7 @@ module.exports = {
 要将这个选项与 CLI 一起使用，请将 `--allowed-hosts` 的转换为用逗号分割的字符串并传入。
 
 ```bash
-webpack-dev-server --entry /entry/file --output-path /output/path --allowed-hosts .host.com,host2.com
+webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com,host2.com
 ```
 
 ## `devServer.before` {#devserverbefore}
@@ -182,7 +182,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --bonjour
+webpack serve --bonjour
 ```
 
 
@@ -210,19 +210,8 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --client-log-level silent
+webpack serve --client-log-level silent
 ```
-
-## `devServer.color` - CLI only {#devservercolor---cli-only}
-
-`boolean`
-
-开启/关闭命令行颜色显示。
-
-```bash
-webpack-dev-server --color
-```
-
 
 ## `devServer.compress` {#devservercompress}
 
@@ -244,7 +233,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --compress
+webpack serve --compress
 ```
 
 
@@ -289,7 +278,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --content-base /path/to/content/dir
+webpack serve --content-base ./path/to/content/dir
 ```
 
 
@@ -350,7 +339,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --disable-host-check
+webpack serve --disable-host-check
 ```
 
 
@@ -457,7 +446,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --history-api-fallback
+webpack serve --history-api-fallback
 ```
 
 有关更多选项和信息，请参见 [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) 文档。
@@ -483,7 +472,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --host 0.0.0.0
+webpack serve --host 0.0.0.0
 ```
 
 
@@ -527,7 +516,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --hot-only
+webpack serve --hot only
 ```
 
 
@@ -573,13 +562,13 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --http2
+webpack serve --http2
 ```
 
 要通过CLI使用自己的证书，请使用以下选项
 
 ```bash
-webpack-dev-server --http2 --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
+webpack serve --http2 --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
 ```
 
 
@@ -621,13 +610,13 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --https
+webpack serve --https
 ```
 
 要通过 CLI 使用自己的证书，请使用以下选项
 
 ```bash
-webpack-dev-server --https --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
+webpack serve --https --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
 ```
 
 ## `devServer.index` {#devserverindex}
@@ -655,7 +644,7 @@ module.exports = {
 输出 cli 信息。默认情况下启用。
 
 ```bash
-webpack-dev-server --info=false
+webpack serve --info false
 ```
 
 
@@ -718,7 +707,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --inline=false
+webpack serve --inline false
 ```
 
 T> 对于 [Hot Module Replacement](/plugins/hot-module-replacement-plugin/) ，建议使用串联模式，因为它包含来自 websocket 的 HMR 触发器。 轮询模式可以用作替代方法，但需要附加的入口点`'webpack/hot/poll?1000'`。
@@ -744,7 +733,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --lazy
+webpack serve --lazy
 ```
 
 T> [`watchOptions`](#devserverwatchoptions-) 不会有任何副作用当使用 __lazy mode__ 时。
@@ -772,7 +761,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --no-live-reload
+webpack serve --no-live-reload
 ```
 
 
@@ -881,7 +870,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --open 'Google Chrome'
+webpack serve --open 'Google Chrome'
 ```
 
 T> 浏览器应用程序名称取决于平台。 不要在可重用模块中对其进行硬编码。 例如，`'Chrome'` 在macOS上是 `'Google Chrome'` ，在Linux上是 `'Google Chrome'` 在Windows上是 `'Chrome'` 。
@@ -907,7 +896,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --open-page "/different/page"
+webpack serve --open-page /different/page
 ```
 
 如果希望指定多个页面在浏览器中打开。
@@ -926,7 +915,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --open-page "/different/page1,/different/page2"
+webpack serve --open-page /different/page1,/different/page2
 ```
 
 
@@ -976,7 +965,7 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    pfx: '/path/to/file.pfx'
+    pfx: './path/to/file.pfx'
   }
 };
 ```
@@ -984,7 +973,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --pfx /path/to/file.pfx
+webpack serve --pfx ./path/to/file.pfx
 ```
 
 
@@ -1008,7 +997,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --pfx-passphrase passphrase
+webpack serve --pfx-passphrase passphrase
 ```
 
 
@@ -1032,7 +1021,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --port 8080
+webpack serve --port 8080
 ```
 
 
@@ -1188,7 +1177,7 @@ module.exports = {
 将运行进度输出到控制台。
 
 ```bash
-webpack-dev-server --progress
+webpack serve --progress
 ```
 
 
@@ -1214,7 +1203,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --public myapp.test:80
+webpack serve --public myapp.test:80
 ```
 
 
@@ -1281,7 +1270,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --quiet
+webpack serve --quiet
 ```
 
 ## `devServer.serveIndex` {#devserverserveindex}
@@ -1326,30 +1315,6 @@ module.exports = {
 ```
 
 
-## `devServer.socket` {#devserversocket}
-
-`string`
-
-要监听的 Unix 套接字（而不是主机）。
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    socket: 'socket'
-  }
-};
-```
-
-通过命令行使用
-
-```bash
-webpack-dev-server --socket socket
-```
-
-
 ## `devServer.sockHost` {#devserversockhost}
 
 `string`
@@ -1388,7 +1353,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --sockPath /socket
+webpack serve --sock-path /socket
 ```
 
 ## `devServer.sockPort` {#devserversockport}
@@ -1461,7 +1426,7 @@ T> 与 `quiet` 或 `noInfo` 一起使用时，该选项无效。
 当stdin结束时，此选项将关闭服务器。
 
 ```bash
-webpack-dev-server --stdin
+webpack serve --stdin
 ```
 
 
@@ -1581,7 +1546,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --useLocalIp
+webpack serve --use-local-ip
 ```
 
 
@@ -1605,7 +1570,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack-dev-server --watch-content-base
+webpack serve --watch-content-base
 ```
 
 
@@ -1673,6 +1638,6 @@ __package.json__
 
 ```json
 {
-  "scripts": "NODE_OPTIONS='--max-http-header-size=100000' webpack-dev-server"
+  "scripts": "NODE_OPTIONS='--max-http-header-size=100000' webpack serve"
 }
 ```

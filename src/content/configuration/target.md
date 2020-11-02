@@ -44,7 +44,7 @@ webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `
 `web`                 | 编译为类浏览器环境里可用 __（默认）__
 `webworker`           | 编译成一个 WebWorker
 `esX`                 | 编译为指定版本的 ECMAScript。例如，es5，es2020
-`browserslist`        | 从 browserslist-config 中推断出平台和 ES 特性 **（如果 browserlist 可用，其值则为默认）**
+`browserslist`        | 从 browserslist-config 中推断出平台和 ES 特性 __（如果 browserslist 可用，其值则为默认）__
 
 例如，当 `target` 设置为 `"electron-main"`，webpack 引入多个 electron 特定的变量。
 

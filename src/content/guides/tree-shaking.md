@@ -61,6 +61,7 @@ export function cube(x) {
   return x * x * x;
 }
 ```
+
 需要将 `mode` 配置设置成[development](/configuration/mode/#mode-development)，以确定 bundle 不会被压缩：
 
 __webpack.config.js__
@@ -157,7 +158,7 @@ T> "side effect(副作用)" 的定义是，在导入时会执行特殊行为的�
 }
 ```
 
-数组方式支持相对路径、绝对路径和 glob 模式匹配相关文件。它在内部使用 [micromatch](https://github.com/micromatch/micromatch#matching-features)。
+此数组支持简单的 glob 模式匹配相关文件。其内部使用了 [glob-to-regexp](https://github.com/fitzgen/glob-to-regexp)（支持：`*`，`**`，`{a,b}`，`[a-z]`）。如果匹配模式为 `*.css`，如果不包含 `/`，将被视为 `**/*.css`。
 
 T> 注意，所有导入文件都会受到 tree shaking 的影响。这意味着，如果在项目中使用类似 `css-loader` 并 import 一个 CSS 文件，则需要将其添加到 side effect 列表中，以免在生产模式中无意中将它删除：
 
