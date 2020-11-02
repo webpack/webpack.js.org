@@ -213,15 +213,13 @@ The difference between `maxInitialSize` and `maxSize` is that `maxInitialSize` w
 
 Also available for each cacheGroup: `splitChunks.cacheGroups.{cacheGroup}.name`.
 
-The name of the split chunk. Providing `false` will keep the same name of the chunks so it doesn't change names unnecessarily.
+The name of the split chunk. Providing `false` will keep the same name of the chunks so it doesn't change names unnecessarily. It is the recommended value for production builds.
 
 Providing a string or a function allows you to use a custom name. Specifying either a string or a function that always returns the same string will merge all common modules and vendors into a single chunk. This might lead to bigger initial downloads and slow down page loads.
 
 If you choose to specify a function, you may find the `chunk.name` and `chunk.hash` properties (where `chunk` is an element of the `chunks` array) particularly useful in choosing a name for your chunk.
 
 If the `splitChunks.name` matches an [entry point](/configuration/entry-context/#entry) name, the entry point will be removed.
-
-T> It is recommended to set `splitChunks.name` to `false` for production builds so that it doesn't change names unnecessarily.
 
 __main.js__
 
