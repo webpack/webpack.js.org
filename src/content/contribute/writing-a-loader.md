@@ -370,9 +370,9 @@ import compiler from './compiler.js';
 
 test('Inserts name and outputs JavaScript', async () => {
   const stats = await compiler('example.txt', { name: 'Alice' });
-  const output = stats.toJson().modules[0].source;
+  const output = stats.toJson({source: true}).modules[0].source;
 
-  expect(output).toBe('export default "Hey Alice!\"');
+  expect(output).toBe('export default "Hey Alice!\\n"');
 });
 ```
 
