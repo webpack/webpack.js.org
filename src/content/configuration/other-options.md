@@ -14,6 +14,7 @@ contributors:
   - niravasher
   - Neob91
   - chenxsan
+  - u01jmg3
 related:
   - title: 使用 Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -302,7 +303,39 @@ module.exports = {
 
 W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 才可配置。
 
+<<<<<<< HEAD
 ## `loader` {#loader}
+=======
+## `ignoreWarnings`
+
+`RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`
+
+Tells webpack to ignore specific warnings. This can be done with a `RegExp`, a custom `function` to select warnings based on the raw warning instance which is getting `WebpackError` and `Compilation` as arguments and returns a `boolean`, an `object` with the following properties:
+
+- `file` : A RegExp to select the origin file for the warning.
+- `message` : A RegExp to select the warning message.
+- `module` : A RegExp to select the origin module for the warning.
+
+`ignoreWarnings` can be an `array` of any of the above.
+
+```javascript
+module.exports = {
+  //...
+  ignoreWarnings: [
+    {
+      module: /module2\.js\?[34]/ // A RegExp
+    },
+    {
+      module: /[13]/,
+      message: /homepage/
+    },
+    (warning) => true
+  ]
+};
+```
+
+## `loader`
+>>>>>>> c2878ffc74a43d99767e30fb9da42f61520d44b7
 
 `object`
 

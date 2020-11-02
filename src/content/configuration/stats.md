@@ -15,6 +15,7 @@ contributors:
   - anshumanv
   - pixel-ray
   - snitin315
+  - u01jmg3
 ---
 
 `object` `string`
@@ -1017,6 +1018,7 @@ module.exports = {
 ```
 
 
+<<<<<<< HEAD
 W> `stats.warningsFilter` 已被弃用，请改用 [`stats.ignoreWarnings`](#statsignoreWarnings)。
 
 ### `stats.ignoreWarnings` {#statsignorewarnings}
@@ -1048,6 +1050,9 @@ module.exports = {
   }
 };
 ```
+=======
+W> `stats.warningsFilter` is deprecated in favor of [`ignoreWarnings`](/configuration/other-options/#ignorewarnings).
+>>>>>>> c2878ffc74a43d99767e30fb9da42f61520d44b7
 
 ### `stats.chunkRelations` {#statschunkrelations}
 

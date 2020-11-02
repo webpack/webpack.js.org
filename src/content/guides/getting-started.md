@@ -75,7 +75,12 @@ __index.html__
 <!doctype html>
 <html>
   <head>
+<<<<<<< HEAD
     <title>起步</title>
+=======
+    <meta charset="utf-8"/>
+    <title>Getting Started</title>
+>>>>>>> c2878ffc74a43d99767e30fb9da42f61520d44b7
     <script src="https://unpkg.com/lodash@4.16.6"></script>
   </head>
   <body>
@@ -173,7 +178,12 @@ __dist/index.html__
   <!doctype html>
   <html>
    <head>
+<<<<<<< HEAD
      <title>起步</title>
+=======
+     <meta charset="utf-8"/>
+     <title>Getting Started</title>
+>>>>>>> c2878ffc74a43d99767e30fb9da42f61520d44b7
 -    <script src="https://unpkg.com/lodash@4.16.6"></script>
    </head>
    <body>

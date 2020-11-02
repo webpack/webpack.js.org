@@ -274,7 +274,7 @@ __package.json__
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "watch": "webpack --watch",
-+     "start": "webpack-dev-server --open",
++     "start": "webpack serve --open",
       "build": "webpack"
     },
     "keywords": [],
@@ -397,7 +397,7 @@ __package.json__
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "watch": "webpack --watch",
-      "start": "webpack-dev-server --open",
+      "start": "webpack serve --open",
 +     "server": "node server.js",
       "build": "webpack"
     },

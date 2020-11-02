@@ -157,7 +157,11 @@ T> "side effect(副作用)" 的定义是，在导入时会执行特殊行为的�
 }
 ```
 
+<<<<<<< HEAD
 数组方式支持相对路径、绝对路径和 glob 模式匹配相关文件。它在内部使用 [micromatch](https://github.com/micromatch/micromatch#matching-features)。
+=======
+The array accepts simple glob patterns to the relevant files. It uses [glob-to-regexp](https://github.com/fitzgen/glob-to-regexp) under the hood (Supports: `*`, `**`, `{a,b}`, `[a-z]`). Patterns like `*.css`, which do not include a `/`, will be treated like `**/*.css`.
+>>>>>>> c2878ffc74a43d99767e30fb9da42f61520d44b7
 
 T> 注意，所有导入文件都会受到 tree shaking 的影响。这意味着，如果在项目中使用类似 `css-loader` 并 import 一个 CSS 文件，则需要将其添加到 side effect 列表中，以免在生产模式中无意中将它删除：
 
