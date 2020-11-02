@@ -20,11 +20,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-<<<<<<< HEAD
-然后，在项目中安装 webpack 和 webpack-dev-server。
-=======
-Next, install `webpack` and `webpack-dev-server` in your project;
->>>>>>> c2878ffc74a43d99767e30fb9da42f61520d44b7
+然后，在项目中安装 `webpack` 和 `webpack-dev-server`；
 
 ```bash
 npm install --save-dev webpack webpack-dev-server
@@ -66,14 +62,8 @@ webpack serve --host 0.0.0.0 --public 10.10.10.61:8080 --watch-poll
 默认只允许从 localhost 访问服务器。所以我们需要修改 `--host` 参数，
 以允许在我们的宿主 PC 上访问。
 
-<<<<<<< HEAD
-webpack-dev-server 会在包中引入一个脚本，此脚本连接到 WebSocket，这样可以在任何文件修改时，触发重新加载应用程序。
-`--public` 标记可以确保脚本知道从哪里查找 WebSocket。默认情况下，服务器会使用 `8080` 端口，
-因此也需要在这里指定。
-=======
-`webpack-dev-server` will include a script in your bundle that connects to a WebSocket to reload when a change in any of your files occurs.
-The `--public` flag makes sure the script knows where to look for the WebSocket. The server will use port `8080` by default, so we should also specify that here.
->>>>>>> c2878ffc74a43d99767e30fb9da42f61520d44b7
+`webpack-dev-server` 会在包中引入一个脚本，此脚本连接到 WebSocket，这样可以在任何文件修改时，触发重新加载应用程序。
+`--public` 标记可以确保脚本知道从哪里查找 WebSocket。默认情况下，服务器会使用 `8080` 端口，因此也需要在这里指定。
 
 `--watch-poll` 可以确保 webpack 能够检测到文件更改。webpack 默认会监听文件系统触发的相关事件，
 但是 VirtualBox 使用默认配置会有许多问题。
@@ -82,11 +72,7 @@ The `--public` flag makes sure the script knows where to look for the WebSocket.
 
 ## 配合 nginx 的高级用法 {#advanced-usage-with-nginx}
 
-<<<<<<< HEAD
-为了更好的模拟类生产环境(production-like environment)，还可以用 nginx 来代理 webpack-dev-server。
-=======
-To mimic a more production-like environment, it is also possible to proxy the `webpack-dev-server` with nginx.
->>>>>>> c2878ffc74a43d99767e30fb9da42f61520d44b7
+为了更好的模拟类生产环境（production-like environment），还可以用 nginx 来代理 `webpack-dev-server`。
 
 在你的 nginx 配置文件中，加入下面代码：
 
@@ -109,11 +95,7 @@ server {
 
 `proxy_set_header` 这几行配置很重要，因为它们能够使 WebSocket 正常运行。
 
-<<<<<<< HEAD
-然后 webpack-dev-server 启动命令可以修改为：
-=======
-The command to start `webpack-dev-server` can then be changed to this:
->>>>>>> c2878ffc74a43d99767e30fb9da42f61520d44b7
+然后 `webpack-dev-server` 启动命令可以修改为：
 
 ```bash
 webpack serve --public 10.10.10.61 --watch-poll
@@ -123,8 +105,4 @@ webpack serve --public 10.10.10.61 --watch-poll
 
 ## 结论 {#conclusion}
 
-<<<<<<< HEAD
-我们能够从静态 IP 访问 Vagrant box，然后使 webpack-dev-server 可以公开访问，以便浏览器可以访问到它。然后，我们解决了 VirtualBox 不发送到文件系统事件的常见问题，此问题会导致服务器无法重新加载文件更改。
-=======
-We made the Vagrant box accessible from a static IP, and then made `webpack-dev-server` publicly accessible so it is reachable from a browser. We then tackled a common problem that VirtualBox doesn't send out filesystem events, causing the server to not reload on file changes.
->>>>>>> c2878ffc74a43d99767e30fb9da42f61520d44b7
+我们能够从静态 IP 访问 Vagrant box，然后使 `webpack-dev-server` 可以公开访问，以便浏览器可以访问到它。然后，我们解决了 VirtualBox 不发送到文件系统事件的常见问题，此问题会导致服务器无法重新加载文件更改。

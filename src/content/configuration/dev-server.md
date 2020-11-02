@@ -213,22 +213,7 @@ module.exports = {
 webpack serve --client-log-level silent
 ```
 
-<<<<<<< HEAD
-## `devServer.color` - CLI only {#devservercolor---cli-only}
-
-`boolean`
-
-开启/关闭命令行颜色显示。
-
-```bash
-webpack-dev-server --color
-```
-
-
 ## `devServer.compress` {#devservercompress}
-=======
-## `devServer.compress`
->>>>>>> c2878ffc74a43d99767e30fb9da42f61520d44b7
 
 `boolean`
 
@@ -1330,35 +1315,7 @@ module.exports = {
 ```
 
 
-<<<<<<< HEAD
-## `devServer.socket` {#devserversocket}
-
-`string`
-
-要监听的 Unix 套接字（而不是主机）。
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    socket: 'socket'
-  }
-};
-```
-
-通过命令行使用
-
-```bash
-webpack-dev-server --socket socket
-```
-
-
 ## `devServer.sockHost` {#devserversockhost}
-=======
-## `devServer.sockHost`
->>>>>>> c2878ffc74a43d99767e30fb9da42f61520d44b7
 
 `string`
 

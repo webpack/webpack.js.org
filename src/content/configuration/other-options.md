@@ -303,20 +303,17 @@ module.exports = {
 
 W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 才可配置。
 
-<<<<<<< HEAD
-## `loader` {#loader}
-=======
-## `ignoreWarnings`
+## `ignoreWarnings` {#ignorewarnings}
 
 `RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`
 
-Tells webpack to ignore specific warnings. This can be done with a `RegExp`, a custom `function` to select warnings based on the raw warning instance which is getting `WebpackError` and `Compilation` as arguments and returns a `boolean`, an `object` with the following properties:
+告诉 webpack 忽略掉特定的警告。类型可以是 `RegExp`，可以是自定义 `function`。如果类型为函数，可基于原始 warning 来选择性展示警告，其参数分别为 `WebpackError` 和 `Compilation`，且返回值为 `boolean`。还可以包含以下属性的 `object`：
 
-- `file` : A RegExp to select the origin file for the warning.
-- `message` : A RegExp to select the warning message.
-- `module` : A RegExp to select the origin module for the warning.
+- `file`： 类型为 `RegExp`，用于选择出现警告的源文件。
+- `message`： 类型为 `RegExp`，用于选择警告的内容。
+- `module`： 类型为 `RegExp`，用于选择警告来源的模块。
 
-`ignoreWarnings` can be an `array` of any of the above.
+`ignoreWarnings` 可以是上述任意类型组成的 `array`。
 
 ```javascript
 module.exports = {
@@ -334,8 +331,7 @@ module.exports = {
 };
 ```
 
-## `loader`
->>>>>>> c2878ffc74a43d99767e30fb9da42f61520d44b7
+## `loader` {#loader}
 
 `object`
 
