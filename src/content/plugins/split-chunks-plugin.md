@@ -73,6 +73,7 @@ module.exports = {
         defaultVendors: {
           test: /[\\/]node_modules[\\/]/,
           priority: -10
+          reuseExistingChunk: true
         },
         default: {
           minChunks: 2,
@@ -311,13 +312,13 @@ module.exports = {
 
 #### `splitChunks.cacheGroups.{cacheGroup}.priority`
 
-`number`
+`number = -20`
 
 A module can belong to multiple cache groups. The optimization will prefer the cache group with a higher `priority`. The default groups have a negative priority to allow custom groups to take higher priority (default value is `0` for custom groups).
 
 #### `splitChunks.cacheGroups.{cacheGroup}.reuseExistingChunk`
 
-`boolean`
+`boolean = true`
 
 If the current chunk contains modules already split out from the main bundle, it will be reused instead of a new one being generated. This can impact the resulting file name of the chunk.
 
