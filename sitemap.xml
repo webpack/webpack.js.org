@@ -208,13 +208,13 @@
         <loc>https://webpack.js.org/configuration/performance</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/plugins</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/configuration/resolve</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/stats</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/plugins</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/target</loc>
