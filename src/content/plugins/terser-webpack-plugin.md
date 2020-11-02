@@ -20,6 +20,8 @@ repo: https://github.com/webpack-contrib/terser-webpack-plugin
 
 ## 入门 {#getting-started}
 
+如果你使用的是 webpack v5 或以上版本，你不需要安装这个插件。webpack v5 自带最新的 `terser-webpack-plugin`。
+
 首先，你需要安装 `terser-webpack-plugin`：
 
 ```console
@@ -236,7 +238,9 @@ module.exports = {
           compress: {},
           mangle: true, // Note `mangle.properties` is `false` by default.
           module: false,
+          // Deprecated
           output: null,
+          format: null,
           toplevel: false,
           nameCache: null,
           ie8: false,
@@ -258,7 +262,7 @@ module.exports = {
 是否将注释剥离到单独的文件中（请参阅[详细信息](https://github.com/webpack/webpack/commit/71933e979e51c533b432658d5e37917f9e71595a)）。
 默认情况下，仅剥离 `/^\**!|@preserve|@license|@cc_on/i` 正则表达式匹配的注释，其余注释会删除。
 如果原始文件名为 `foo.js` ，则注释将存储到 `foo.js.LICENSE.txt` 。
-`terserOptions.output.comments` 选项指定是否保留注释，即可以在剥离其他注释时保留一些注释，甚至保留已剥离的注释。
+`terserOptions.format.comments` 选项指定是否保留注释，即可以在剥离其他注释时保留一些注释，甚至保留已剥离的注释。
 
 #### `Boolean` {#boolean}
 
@@ -482,7 +486,7 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         terserOptions: {
-          output: {
+          format: {
             comments: /@license/i,
           },
         },
@@ -506,7 +510,7 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         terserOptions: {
-          output: {
+          format: {
             comments: false,
           },
         },
