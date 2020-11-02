@@ -503,7 +503,7 @@ module.exports = {
 };
 ```
 
-It is used by default in non-production builds.
+The `'flag'` value is used by default in non-production builds.
 
 ## `optimization.portableRecords`
 
