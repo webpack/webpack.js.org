@@ -136,13 +136,17 @@ module.exports = (env = {}) => ({
           loader: 'file-loader',
           options: {
             outputPath: 'font',
-            esModule: false
+            esModule: false,
+            name: '[name].[md4:hash:hex:20].[ext]'
           }
         }
       },
       {
         test: /\.(jpg|jpeg|png|svg|ico)$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        generator: {
+          filename: '[name].[hash][ext][query]'
+        }
       }
     ]
   },

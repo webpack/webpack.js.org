@@ -34,7 +34,7 @@ module.exports = env => merge(common(env), {
       index: './server.jsx'
     },
     output: {
-      filename: '.server/[name].js',
+      filename: '.server/[name].[contenthash].js',
       libraryTarget: 'umd'
     },
     optimization: {
