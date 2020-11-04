@@ -7,9 +7,6 @@ const path = require('path');
 // Load Common Configuration
 const common = require('./webpack.common.js');
 
-// find [css, ico, svg] versioned (hashed) files emitted by SSG run
-const hashedAssetsBySSGRun = require('./src/utilities/find-files-in-dist')(['.css', '.ico', '.svg']);
-
 module.exports = env => merge(common(env), {
   mode: 'production',
   target: 'web',

@@ -1,10 +1,16 @@
 import { precacheAndRoute } from 'workbox-precaching/precacheAndRoute';
 import { registerRoute } from 'workbox-routing/registerRoute';
-import { CacheFirst } from 'workbox-strategies';
+import { CacheFirst, NetworkOnly } from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration/ExpirationPlugin';
+import { NavigationRoute } from 'workbox-routing/NavigationRoute';
+import { createHandlerBoundToURL } from 'workbox-precaching/createHandlerBoundToURL';
+import { setDefaultHandler, setCatchHandler } from 'workbox-routing';
+import ssgManifest from '../dist/ssg-manifest.json';
 
 // Precache assets built with webpack
 precacheAndRoute(self.__WB_MANIFEST);
+
+precacheAndRoute(ssgManifest);
 
 // Cache Google Fonts
 registerRoute(
@@ -21,6 +27,12 @@ registerRoute(
   })
 );
 
-// TODO Cache /app-shell/index.html
-
-// TODO Cache /index.html, /concepts/index.html, etc.
+setDefaultHandler(new NetworkOnly());
+setCatchHandler(({ event }) => {
+  switch (event.request.destination) {
+    case 'document':
+      return caches.match('/app-shell/index.html');
+    default:
+      return Response.error();
+  }
+});
