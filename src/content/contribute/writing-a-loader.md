@@ -152,7 +152,7 @@ __loader.js__
 
 ```js
 import { getOptions } from 'loader-utils';
-import validateOptions from 'schema-utils';
+import { validate } from 'schema-utils';
 
 const schema = {
   type: 'object',
@@ -166,7 +166,10 @@ const schema = {
 export default function(source) {
   const options = getOptions(this);
 
-  validateOptions(schema, options, 'Example Loader');
+  validate(schema, options, {
+    name: 'Example Loader',
+    baseDataPath: 'options'
+  });
 
   // Apply some transformations to the source...
 
