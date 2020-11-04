@@ -1,8 +1,8 @@
-import React from 'react';
+import { Component } from 'react';
 import LanguageIcon from '../../assets/language-icon.svg';
 import './Dropdown.scss';
 
-export default class Dropdown extends React.Component {
+export default class Dropdown extends Component {
   state = {
     active: false
   };

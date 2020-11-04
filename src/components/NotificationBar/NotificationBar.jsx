@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component, Fragment } from 'react';
 import Container from '../Container/Container';
 import testLocalStorage from '../../utilities/test-local-storage';
 import './NotificationBar.scss';
@@ -13,7 +13,7 @@ const barDismissed = () => {
   return false;
 };
 
-class MessageBar extends React.Component {
+class MessageBar extends Component {
   render() {
     return (
       <div className="notification-bar">
@@ -44,7 +44,7 @@ class MessageBar extends React.Component {
   }
 }
 
-export default class NotificationBar extends React.Component {
+export default class NotificationBar extends Component {
   constructor(props) {
     super(props);
     this.onClose = this.onClose.bind(this);
@@ -70,6 +70,6 @@ export default class NotificationBar extends React.Component {
   render() {
     const { dismissed } = this.state;
 
-    return <React.Fragment>{!dismissed ? <MessageBar onClose={this.onClose} /> : null}</React.Fragment>;
+    return <Fragment>{!dismissed ? <MessageBar onClose={this.onClose} /> : null}</Fragment>;
   }
 }

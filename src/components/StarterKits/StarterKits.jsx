@@ -1,4 +1,4 @@
-import React from 'react';
+import { lazy, Suspense } from 'react';
 import Container from '../Container/Container';
 import Link from '../Link/Link';
 import { PlaceholderComponent } from '../Placeholder/Placeholder';
@@ -11,7 +11,7 @@ import isClient from '../../utilities/is-client';
 // can use. This component could even use something like griddle
 // to allow sorting and such.
 
-const StarterKitsTable = React.lazy(() => import('./StarterKitsTable'));
+const StarterKitsTable = lazy(() => import('./StarterKitsTable'));
 
 const StarterKits = props => (
   <Container className="starter-kits page__content markdown">
@@ -49,9 +49,9 @@ const StarterKits = props => (
       </thead>
 
       {isClient ? (
-        <React.Suspense fallback={<PlaceholderComponent />}>
+        <Suspense fallback={<PlaceholderComponent />}>
           <StarterKitsTable />
-        </React.Suspense>
+        </Suspense>
       ) : null}
     </table>
   </Container>

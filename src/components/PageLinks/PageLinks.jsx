@@ -1,4 +1,3 @@
-import React from 'react';
 import Url from 'url';
 import './PageLinks.scss';
 import icon from '../../assets/icon-print.svg';

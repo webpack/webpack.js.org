@@ -1,9 +1,9 @@
-import React from 'react';
+import { Component } from 'react';
 import Link from '../Link/Link';
 import './SidebarMobile.scss';
 
 // TODO: Check to make sure all pages are shown and properly sorted
-export default class SidebarMobile extends React.Component {
+export default class SidebarMobile extends Component {
   _container = null
   _initialTouchPosition = {}
   _lastTouchPosition = {}

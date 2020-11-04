@@ -1,5 +1,5 @@
 // Import External Dependencies
-import React from 'react';
+import { Component } from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
 
 // Import Data
@@ -87,7 +87,7 @@ function formatMoney(number) {
   return str;
 }
 
-export default class Support extends React.Component {
+export default class Support extends Component {
   state = {
     inView: false
   }

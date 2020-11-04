@@ -1,5 +1,5 @@
 // Import External Dependencies
-import React from 'react';
+import { Component } from 'react';
 import Banner from 'react-banner';
 
 // Import Components
@@ -17,7 +17,7 @@ import './Search.scss';
 
 const onSearch = () => {};
 
-export default class Navigation extends React.Component {
+export default class Navigation extends Component {
   render() {
     let { pathname, links, toggleSidebar } = this.props;
 

@@ -1,11 +1,11 @@
-import React from 'react';
+import { Component } from 'react';
 import Link from '../Link/Link';
 import './SidebarItem.scss';
 import list2Tree from '../../utilities/list2Tree';
 
 const block = 'sidebar-item';
 
-export default class SidebarItem extends React.Component {
+export default class SidebarItem extends Component {
   state = {
     open: this._isOpen(this.props)
   };

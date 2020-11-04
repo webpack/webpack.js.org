@@ -1,5 +1,5 @@
 // Import External Dependencies
-import React from 'react';
+import { Component } from 'react';
 
 // Import Utilities
 import isClient from '../../utilities/is-client';
@@ -11,7 +11,7 @@ let sidecar = null;
 let sidecarLoadTriggered = false;
 
 // Create and export component
-export default class Gitter extends React.Component {
+export default class Gitter extends Component {
   render() {
     return (
       <div className="gitter">
