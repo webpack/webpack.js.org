@@ -27,6 +27,9 @@ Asset Modules type replaces all of these loaders by adding 4 new module types:
 - `asset` automatically chooses between exporting a data URI and emitting a separate file. Previously achievable by using `url-loader` with asset size limit.
 
 When using the old assets loaders (i.e. `file-loader`/`url-loader`/`raw-loader`) along with Asset Module in webpack 5, you might want to stop Asset Module from processing your assets again as that would result in asset duplication. This can be done by setting asset's module type to `'javascript/auto'`.
+
+__webpack.config.js__
+
 ``` diff
 module.exports = {
   module: {
@@ -48,6 +51,9 @@ module.exports = {
 }
 ```
 To exclude assets that came from new URL calls from the asset loaders add `dependency: { not: ['url'] }` to the loader configuration.
+
+__webpack.config.js__
+
 ``` diff
 module.exports = {
   module: {
