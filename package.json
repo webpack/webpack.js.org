@@ -39,7 +39,7 @@
     "prebuild": "npm run clean",
     "build": "run-s fetch-repos fetch printable content && cross-env NODE_ENV=production webpack --config webpack.ssg.js && run-s clean-printable content && cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "postbuild": "npm run sitemap",
-    "build-test": "npm run build && http-server dist/",
+    "build-test": "npm run build && http-server --port 4200 dist/",
     "test": "npm run lint",
     "lint": "run-s lint:*",
     "lint:js": "npm run lint-js src",
