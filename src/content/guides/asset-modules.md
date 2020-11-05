@@ -50,6 +50,7 @@ module.exports = {
   },
 }
 ```
+
 To exclude assets that came from new URL calls from the asset loaders add `dependency: { not: ['url'] }` to the loader configuration.
 
 __webpack.config.js__
