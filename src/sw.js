@@ -12,6 +12,14 @@ precacheAndRoute(self.__WB_MANIFEST);
 
 precacheAndRoute(ssgManifest);
 
+// Precache manifest.json as ssgManifest couldn't catch it
+precacheAndRoute([
+  {
+    url: '/manifest.json',
+    revision: '1', // manually update needed when content changed
+  },
+]);
+
 // Cache Google Fonts
 registerRoute(
   /https:\/\/fonts\.gstatic\.com/,
