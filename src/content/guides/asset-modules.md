@@ -26,7 +26,51 @@ Asset Modules type replaces all of these loaders by adding 4 new module types:
 - `asset/source` exports the source code of the asset. Previously achievable by using `raw-loader`.
 - `asset` automatically chooses between exporting a data URI and emitting a separate file. Previously achievable by using `url-loader` with asset size limit.
 
-W>When using the old assets loaders in webpack 5 you might want to exclude them from the assets module processing to prevent asset duplication. This can be done by overriding the asset configuration for that asset type by setting it's module type to "javascript/auto". To exclude assets that came from new URL calls from the asset loaders add dependency: { not: "url" } to the loader configuration.
+When using the old assets loaders (i.e. `file-loader`/`url-loader`/`raw-loader`) in webpack 5 you might want to exclude them from the assets module processing to prevent asset duplication. This can be done by overriding the asset configuration for that asset type by setting it's module type to 'javascript/auto'.
+``` diff
+module.exports = {
+  module: {
+   rules: [
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            }
+          },
+        ],
+      },
++     {
++       test: /\.png/,
++       type: 'javascript/auto'
++     }
+   ]
+  },
+}
+```
+To exclude assets that came from new URL calls from the asset loaders add `dependency: { not: 'url' }` to the loader configuration.
+``` diff
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
++           dependency: { not: 'url' }
+          },
+        ],
+      },
+    ],
+  }
+}
+```
 
 ## Resource assets
 
