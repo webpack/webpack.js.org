@@ -3,6 +3,7 @@ title: Webpack 5 release (2020-10-10)
 sort: -202010100
 contributors:
     - sokra
+    - chenxsan
 ---
 
 webpack 4 was released in February 2018.
@@ -712,7 +713,7 @@ __MIGRATION__: Upgrade to the latest Node.js version available.
 - `output.chunkFilename: Function` is now allowed
 - `output.hotUpdateChunkFilename: Function` is now forbidden: It never worked anyway.
 - `output.hotUpdateMainFilename: Function` is now forbidden: It never worked anyway.
-- `output.importFunctionName: string` specifies the name used as replacement for `import()` to allow polyfilling for non-suppored environments
+- `output.importFunctionName: string` specifies the name used as replacement for `import()` to allow polyfilling for non-supported environments
 - `output.charset` added: setting it to false omit the `charset` property on script tags
 - `output.hotUpdateFunction` renamed to `output.hotUpdateGlobal`
 - `output.jsonpFunction` renamed to `output.chunkLoadingGlobal`
@@ -1094,7 +1095,7 @@ __MIGRATION__: Instead of replacing the whole Stats functionality, you can now c
 
 ### New Watching
 
-The watcher used by webpack was refactored. It was previously using `chokidar` and the native dependency `fsevents` (only on OSX). Now it's only based on native Node.js `fs`. This means there is no native dependency left in webpack.
+The watcher used by webpack was refactored. It was previously using `chokidar` and the native dependency `fsevents` (only on macOS). Now it's only based on native Node.js `fs`. This means there is no native dependency left in webpack.
 
 It also captures more information about filesystem while watching. It now captures mtimes and watches event times, as well as information about missing files. For this, the `WatchFileSystem` API changed a little bit. While on it we also converted Arrays to Sets and Objects to Maps.
 
@@ -1218,7 +1219,7 @@ These dependencies are cheaper to process and webpack uses them when possible
 
 ## Other Minor Changes
 
-- removed buildin directory and replaced buildins with runtime modules
+- removed builtin directory and replaced builtins with runtime modules
 - Removed deprecated features
     - BannerPlugin now only support one argument that can be an object, string or function
 - removed `CachePlugin`
@@ -1393,7 +1394,7 @@ These dependencies are cheaper to process and webpack uses them when possible
 - DependencyReference now takes a function to a module instead of a Module
 - HarmonyImportSpecifierDependency.redirectedId removed
     - __MIGRATION__: Use `setId` instead
-- acorn 5 -> 7
+- acorn 5 -> 8
 - Testing
     - HotTestCases now runs for multiple targets `async-node` `node` `web` `webworker`
     - TestCases now also runs for filesystem caching with `store: "instant"` and `store: "pack"`
@@ -1405,7 +1406,7 @@ These dependencies are cheaper to process and webpack uses them when possible
 - loader-runner was upgraded: https://github.com/webpack/loader-runner/releases/tag/v3.0.0
 - `file/context/missingDependencies` in `Compilation` are no longer sorted for performance reasons
     - Do not rely on the order
-- webpack-sources was upgraded: https://github.com/webpack/webpack-sources/releases/tag/v2.0.0-beta.0
+- webpack-sources was upgraded to version 2: https://github.com/webpack/webpack-sources/releases/tag/v2.0.1
 - webpack-command support was removed
 - Use schema-utils@2 for schema validation
 - `Compiler.assetEmitted` has an improved second argument with more information
@@ -1428,4 +1429,4 @@ These dependencies are cheaper to process and webpack uses them when possible
 - add `Compilation.deleteAsset` to correctly delete an assets and non-shared related assets
 - expose `require("webpack-sources")` as `require("webpack").sources`
 - terser 5
-- Webpack can be written with an capital W when at the start of a sentence
+- Webpack can be written with a capital W when at the start of a sentence

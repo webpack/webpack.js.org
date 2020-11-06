@@ -3,6 +3,7 @@ title: Command Line Interface
 sort: 1
 contributors:
   - anshumanv
+  - snitin315
   - evenstensberg
   - simon04
   - tbroadley
@@ -244,10 +245,11 @@ webpack --env production    # sets env.production == true
 
 The `--env` argument accepts multiple values:
 
-| Invocation                     | Resulting environment       |
-| ------------------------------ | --------------------------- |
-| `webpack --env prod`           | `{ prod: true }`            |
-| `webpack --env prod --env min` | `{ prod: true, min: true }` |
+| Invocation                                    | Resulting environment                   |
+| --------------------------------------------- | --------------------------------------- |
+| `webpack --env prod`                          | `{ prod: true }`                        |
+| `webpack --env prod --env min`                | `{ prod: true, min: true }`             |
+| `webpack --env platform=app --env production` | `{ platform: "app", production: true }` |
 
 T> See the [environment variables](/guides/environment-variables/) guide for more information on its usage.
 
