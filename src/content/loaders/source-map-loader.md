@@ -137,7 +137,13 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## 贡献 {#contributing}
+=======
+More information about the `ignoreWarnings` option can be found [here](/configuration/other-options/#ignorewarnings)
+
+## Contributing
+>>>>>>> 23b7535e295929d606f591e5bc121e7371e55b56
 
 如果您尚未了解，建议您阅读以下贡献指引。
 
