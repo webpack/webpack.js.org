@@ -28,13 +28,13 @@ npm i -D source-map-loader
 
 添加 plugin 至 `webpack` 配置。例：
 
-**file.js**
+__file.js__
 
 ```js
 import css from 'file.css';
 ```
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -64,7 +64,7 @@ module.exports = {
 
 |                          选项名                           |     类型     |   默认值   | 描述                                    |
 | :-----------------------------------------------------: | :----------: | :---------: | :--------------------------------------------- |
-| **[`filterSourceMappingUrl`](#filtersourcemappingurl)** | `{Function}` | `undefined` | 允许控制 `SourceMappingURL` 的行为 |
+| __[`filterSourceMappingUrl`](#filtersourcemappingurl)__ | `{Function}` | `undefined` | 允许控制 `SourceMappingURL` 的行为 |
 
 ### filterSourceMappingUrl {#filter-source-mapping-url}
 
@@ -81,7 +81,7 @@ module.exports = {
 
 示例配置：
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -120,7 +120,7 @@ module.exports = {
 
 忽略警告可以使用以下配置：
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -136,6 +136,8 @@ module.exports = {
   ignoreWarnings: [/Failed to parse source map/],
 };
 ```
+
+欲了解 `ignoreWarnings` 的更多信息，请查阅[此文](/configuration/other-options/#ignorewarnings)。
 
 ## 贡献 {#contributing}
 

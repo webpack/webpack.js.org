@@ -147,7 +147,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 {
   "devDependencies": {
     "sass-loader": "^7.2.0",
-    "node-sass": "^4.0.0"
+    "node-sass": "^5.0.0"
   }
 }
 ```
