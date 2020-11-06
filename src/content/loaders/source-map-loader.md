@@ -28,13 +28,13 @@ npm i -D source-map-loader
 
 添加 plugin 至 `webpack` 配置。例：
 
-**file.js**
+__file.js__
 
 ```js
 import css from 'file.css';
 ```
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -64,7 +64,7 @@ module.exports = {
 
 |                          选项名                           |     类型     |   默认值   | 描述                                    |
 | :-----------------------------------------------------: | :----------: | :---------: | :--------------------------------------------- |
-| **[`filterSourceMappingUrl`](#filtersourcemappingurl)** | `{Function}` | `undefined` | 允许控制 `SourceMappingURL` 的行为 |
+| __[`filterSourceMappingUrl`](#filtersourcemappingurl)__ | `{Function}` | `undefined` | 允许控制 `SourceMappingURL` 的行为 |
 
 ### filterSourceMappingUrl {#filter-source-mapping-url}
 
@@ -81,7 +81,7 @@ module.exports = {
 
 示例配置：
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -120,7 +120,7 @@ module.exports = {
 
 忽略警告可以使用以下配置：
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -137,13 +137,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## 贡献 {#contributing}
-=======
-More information about the `ignoreWarnings` option can be found [here](/configuration/other-options/#ignorewarnings)
+欲了解 `ignoreWarnings` 的更多信息，请查阅[此文](/configuration/other-options/#ignorewarnings)。
 
-## Contributing
->>>>>>> 23b7535e295929d606f591e5bc121e7371e55b56
+## 贡献 {#contributing}
 
 如果您尚未了解，建议您阅读以下贡献指引。
 
