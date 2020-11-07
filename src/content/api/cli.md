@@ -276,7 +276,7 @@ W> Make sure you have `webpack-bundle-analyzer` installed in your project else C
 
 To check the progress of any webpack compilation you can use the `--progress` flag.
 
-```sh
+```bash
 webpack --progress
 ```
 
