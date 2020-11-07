@@ -120,7 +120,7 @@ module.exports = {
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   ]
 </span><span class="token prefix unchanged"> </span><span class="token line"> }
 </span></span>};</code></pre> <p><strong>src/index.js</strong></p> <pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> import mainImage from './images/main.png';
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import metroMap from './images/matro.svg';
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import metroMap from './images/metro.svg';
 </span></span>
 <span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> block.style.background = `url(${metroMap})`; // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)</span></span></code></pre> <p>All <code>.svg</code> files will be injected into the bundles as data URI.</p> <h3 id="custom-data-uri-generator">Custom data URI generator<a href="#custom-data-uri-generator" aria-hidden="true" tabindex="-1"><span class="icon icon-link"></span></a></h3> <p>By default, data URI emitted by webpack represents file contents encoded by using Base64 algorithm.</p> <p>If you want to use a custom encoding algorithm, you may specify a custom function to encode a file content:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff">const path = require('path');
@@ -172,7 +172,7 @@ module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   ]
 </span><span class="token prefix unchanged"> </span><span class="token line"> },
 </span></span>};</code></pre> <p><strong>src/example.txt</strong></p> <pre><code class="hljs language-text">Hello world
-</code></pre> <p><strong>src/index.js</strong></p> <pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> import metroMap from './images/matro.svg';
+</code></pre> <p><strong>src/index.js</strong></p> <pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> import metroMap from './images/metro.svg';
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> import exampleText from './example.txt';
 </span></span>
 <span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> block.style.background = `url(${metroMap}); // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
