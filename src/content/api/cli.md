@@ -282,7 +282,7 @@ webpack --progress
 
 To collect profile data for progress steps you can pass `profile` as value to `--progress` flag.
 
-```sh
+```bash
 webpack --progress=profile
 ```
 
