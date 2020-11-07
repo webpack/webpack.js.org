@@ -26,6 +26,7 @@ Let's make a minor change to our project before we get started:
 __dist/index.html__
 
 ``` diff
+ <!DOCTYPE html>
  <html>
    <head>
      <meta charset="utf-8" />
@@ -42,6 +43,8 @@ __dist/index.html__
 __webpack.config.js__
 
 ``` diff
+ const path = require('path');
+ 
  module.exports = {
    entry: './src/index.js',
    output: {
@@ -64,6 +67,11 @@ npm install --save-dev style-loader css-loader
 __webpack.config.js__
 
 ``` diff
+ const path = require('path');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
      filename: 'bundle.js',
      path: path.resolve(__dirname, 'dist'),
    },
@@ -126,6 +134,8 @@ __src/index.js__
  
    return element;
  }
+ 
+ document.body.appendChild(component());
 ```
 
 Now run your build command:
@@ -135,7 +145,7 @@ $ npm run build
 
 ...
 [webpack-cli] Compilation finished
-asset bundle.js 72.6 KiB [emitted] [minimized] (name: main) 1 related asset
+asset bundle.js 72.6 KiB [compared for emit] [minimized] (name: main) 1 related asset
 runtime modules 1000 bytes 5 modules
 orphan modules 326 bytes [orphan] 1 module
 cacheable modules 539 KiB
@@ -143,10 +153,10 @@ cacheable modules 539 KiB
     ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
     ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
     ./node_modules/css-loader/dist/runtime/api.js 1.57 KiB [built] [code generated]
-  modules by path ./src/ 964 bytes
+  modules by path ./src/ 966 bytes
     ./src/index.js + 1 modules 640 bytes [built] [code generated]
-    ./node_modules/css-loader/dist/cjs.js!./src/style.css 324 bytes [built] [code generated]
-webpack 5.2.0 compiled successfully in 2605 ms
+    ./node_modules/css-loader/dist/cjs.js!./src/style.css 326 bytes [built] [code generated]
+webpack 5.4.0 compiled successfully in 2900 ms
 ```
 
 Open up `dist/index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result, because the `<style>` tag is dynamically created by JavaScript) and look at the page's head tags. It should contain the style block that we imported in `index.js`.
@@ -161,6 +171,17 @@ So now we're pulling in our CSS, but what about our images like backgrounds and 
 __webpack.config.js__
 
 ``` diff
+ const path = require('path');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+   module: {
+     rules: [
+       {
          test: /\.css$/i,
          use: ['style-loader', 'css-loader'],
        },
@@ -202,7 +223,8 @@ __src/index.js__
  
  function component() {
    const element = document.createElement('div');
-
+ 
+   // Lodash, now imported by this script
    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
    element.classList.add('hello');
  
@@ -214,6 +236,8 @@ __src/index.js__
 +
    return element;
  }
+ 
+ document.body.appendChild(component());
 ```
 
 __src/style.css__
@@ -232,25 +256,25 @@ $ npm run build
 
 ...
 [webpack-cli] Compilation finished
+asset 3b7bf087cbac835e6f7d.png 233 KiB [emitted] [immutable] [from: src/icon.png] (auxiliary name: main)
 asset bundle.js 73.4 KiB [emitted] [minimized] (name: main) 1 related asset
-asset bc67ebaf980e8f20b8c3.png 8.29 KiB [emitted] [immutable] [from: src/icon.png] (auxiliary name: main)
 runtime modules 1.82 KiB 6 modules
 orphan modules 326 bytes [orphan] 1 module
-cacheable modules 540 KiB (javascript) 8.29 KiB (asset)
+cacheable modules 540 KiB (javascript) 233 KiB (asset)
   modules by path ./node_modules/ 539 KiB
     modules by path ./node_modules/css-loader/dist/runtime/*.js 2.38 KiB
       ./node_modules/css-loader/dist/runtime/api.js 1.57 KiB [built] [code generated]
       ./node_modules/css-loader/dist/runtime/getUrl.js 830 bytes [built] [code generated]
     ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
     ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
-  modules by path ./src/ 1.45 KiB (javascript) 8.29 KiB (asset)
+  modules by path ./src/ 1.45 KiB (javascript) 233 KiB (asset)
     ./src/index.js + 1 modules 795 bytes [built] [code generated]
-    ./src/icon.png 42 bytes (javascript) 8.29 KiB (asset) [built] [code generated]
+    ./src/icon.png 42 bytes (javascript) 233 KiB (asset) [built] [code generated]
     ./node_modules/css-loader/dist/cjs.js!./src/style.css 648 bytes [built] [code generated]
-webpack 5.2.0 compiled successfully in 2703 ms
+webpack 5.4.0 compiled successfully in 5879 ms
 ```
 
-If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `bc67ebaf980e8f20b8c3.png`. This means webpack found our file in the `src` folder and processed it!
+If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `3b7bf087cbac835e6f7d.png`. This means webpack found our file in the `src` folder and processed it!
 
 
 ## Loading Fonts
@@ -260,6 +284,21 @@ So what about other assets like fonts? The Asset Modules will take any file you 
 __webpack.config.js__
 
 ``` diff
+ const path = require('path');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+   module: {
+     rules: [
+       {
+         test: /\.css$/i,
+         use: ['style-loader', 'css-loader'],
+       },
+       {
          test: /\.(png|svg|jpg|jpeg|gif)$/i,
          type: 'asset/resource',
        },
@@ -285,7 +324,8 @@ __project__
     |- bundle.js
     |- index.html
   |- /src
-+   |- google-fonts.woff2
++   |- my-fonts.woff
++   |- my-fonts.woff2
     |- icon.png
     |- style.css
     |- index.js
@@ -298,14 +338,16 @@ __src/style.css__
 
 ``` diff
 +@font-face {
-+  font-family: 'GoogleFont';
-+  src: url('./google-font.woff2') format('woff2');
++  font-family: 'MyFont';
++  src: url('./my-font.woff2') format('woff2'),
++    url('./my-font.woff') format('woff');
 +  font-weight: 600;
 +  font-style: normal;
 +}
++
  .hello {
    color: red;
-+  font-family: 'GoogleFont';
++  font-family: 'MyFont';
    background: url('./icon.png');
  }
 ```
@@ -317,24 +359,27 @@ $ npm run build
 
 ...
 [webpack-cli] Compilation finished
-assets by status 8.29 KiB [cached] 1 asset
-asset bundle.js 73.6 KiB [emitted] [minimized] (name: main) 1 related asset
-asset 8d763566e205be31fe8e.woff2 13 KiB [emitted] [immutable] [from: src/google-font.woff2] (auxiliary name: main)
+assets by status 233 KiB [cached] 1 asset
+assets by info 33.2 KiB [immutable]
+  asset 55055dbfc7c6a83f60ba.woff 18.8 KiB [emitted] [immutable] [from: src/my-font.woff] (auxiliary name: main)
+  asset 8f717b802eaab4d7fb94.woff2 14.5 KiB [emitted] [immutable] [from: src/my-font.woff2] (auxiliary name: main)
+asset bundle.js 73.7 KiB [emitted] [minimized] (name: main) 1 related asset
 runtime modules 1.82 KiB 6 modules
 orphan modules 326 bytes [orphan] 1 module
-cacheable modules 541 KiB (javascript) 21.3 KiB (asset)
+cacheable modules 541 KiB (javascript) 266 KiB (asset)
   javascript modules 541 KiB
     modules by path ./node_modules/ 539 KiB
       modules by path ./node_modules/css-loader/dist/runtime/*.js 2.38 KiB 2 modules
       ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
       ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
-    modules by path ./src/ 1.76 KiB
+    modules by path ./src/ 1.98 KiB
       ./src/index.js + 1 modules 795 bytes [built] [code generated]
-      ./node_modules/css-loader/dist/cjs.js!./src/style.css 1010 bytes [built] [code generated]
-  asset modules 84 bytes (javascript) 21.3 KiB (asset)
-    ./src/icon.png 42 bytes (javascript) 8.29 KiB (asset) [built] [code generated]
-    ./src/google-font.woff2 42 bytes (javascript) 13 KiB (asset) [built] [code generated]
-webpack 5.2.0 compiled successfully in 2680 ms
+      ./node_modules/css-loader/dist/cjs.js!./src/style.css 1.21 KiB [built] [code generated]
+  asset modules 126 bytes (javascript) 266 KiB (asset)
+    ./src/icon.png 42 bytes (javascript) 233 KiB (asset) [built] [code generated]
+    ./src/my-font.woff2 42 bytes (javascript) 14.5 KiB (asset) [built] [code generated]
+    ./src/my-font.woff 42 bytes (javascript) 18.8 KiB (asset) [built] [code generated]
+webpack 5.4.0 compiled successfully in 3763 ms
 ```
 
 Open up `dist/index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes.
@@ -351,6 +396,25 @@ npm install --save-dev csv-loader xml-loader
 __webpack.config.js__
 
 ``` diff
+ const path = require('path');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+   module: {
+     rules: [
+       {
+         test: /\.css$/i,
+         use: ['style-loader', 'css-loader'],
+       },
+       {
+         test: /\.(png|svg|jpg|jpeg|gif)$/i,
+         type: 'asset/resource',
+       },
+       {
          test: /\.(woff|woff2|eot|ttf|otf)$/i,
          type: 'asset/resource',
        },
@@ -423,8 +487,15 @@ __src/index.js__
  
  function component() {
    const element = document.createElement('div');
-
-   // ...
+ 
+   // Lodash, now imported by this script
+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+   element.classList.add('hello');
+ 
+   // Add the image to our existing div.
+   const myIcon = new Image();
+   myIcon.src = Icon;
+ 
    element.appendChild(myIcon);
  
 +  console.log(Data);
@@ -432,6 +503,8 @@ __src/index.js__
 +
    return element;
  }
+ 
+ document.body.appendChild(component());
 ```
 
 Re-run the `npm run build` command and open `dist/index.html`. If you look at the console in your developer tools, you should be able to see your imported data being logged to the console!
@@ -511,7 +584,31 @@ __webpack.config.js__
 +const yaml = require('yamljs');
 +const json5 = require('json5');
  
- // ...
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+   module: {
+     rules: [
+       {
+         test: /\.css$/i,
+         use: ['style-loader', 'css-loader'],
+       },
+       {
+         test: /\.(png|svg|jpg|jpeg|gif)$/i,
+         type: 'asset/resource',
+       },
+       {
+         test: /\.(woff|woff2|eot|ttf|otf)$/i,
+         type: 'asset/resource',
+       },
+       {
+         test: /\.(csv|tsv)$/i,
+         use: ['csv-loader'],
+       },
+       {
          test: /\.xml$/i,
          use: ['xml-loader'],
        },
@@ -544,6 +641,8 @@ __webpack.config.js__
 __src/index.js__
 
 ```diff
+ import _ from 'lodash';
+ import './style.css';
  import Icon from './icon.png';
  import Data from './data.xml';
  import Notes from './data.csv';
@@ -559,6 +658,27 @@ __src/index.js__
 +
 +console.log(json.title); // output `JSON5 Example`
 +console.log(json.owner.name); // output `Tom Preston-Werner`
+ 
+ function component() {
+   const element = document.createElement('div');
+ 
+   // Lodash, now imported by this script
+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+   element.classList.add('hello');
+ 
+   // Add the image to our existing div.
+   const myIcon = new Image();
+   myIcon.src = Icon;
+ 
+   element.appendChild(myIcon);
+ 
+   console.log(Data);
+   console.log(Notes);
+ 
+   return element;
+ }
+ 
+ document.body.appendChild(component());
 ```
 
 Re-run the `npm run build` command and open `dist/index.html`. You should be able to see your imported data being logged to the console!
@@ -601,7 +721,8 @@ __project__
 -   |- data.toml
 -   |- data.yaml
 -   |- data.json5
--   |- google-font.woff2
+-   |- my-font.woff
+-   |- my-font.woff2
 -   |- icon.png
 -   |- style.css
     |- index.js
@@ -618,7 +739,10 @@ __webpack.config.js__
  
  module.exports = {
    entry: './src/index.js',
-   // ...
+   output: {
+     filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
 -  module: {
 -    rules: [
 -      {
@@ -706,6 +830,8 @@ __src/index.js__
  
    return element;
  }
+ 
+ document.body.appendChild(component());
 ```
 
 
