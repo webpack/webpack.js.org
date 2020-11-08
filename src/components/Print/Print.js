@@ -2,6 +2,7 @@ import React from 'react';
 // Load Styling
 import './Print.scss';
 import icon from '../../assets/icon-print.svg';
+import BarIcon from '../../styles/icons/vertical-bar.svg';
 
 const PRINTABLE_SECTIONS = [
   'api',
@@ -25,7 +26,7 @@ export default function Print (props) {
 
   return (
     <div className="sidebar-item sidebar-item--disabled`">
-      <i className="sidebar-item__toggle icon-vertical-bar" />
+      <BarIcon className="sidebar-item__toggle" width={15} fill='#175d96' />
       <a className="sidebar-item__title sidebar-link__print"
         href={printUrl}
         rel="nofollow"

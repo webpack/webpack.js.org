@@ -61,7 +61,8 @@
 
 .navigation__item {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-size: getFontSize(-1);
   padding-bottom: 0.1em;
   margin-right: 18px;

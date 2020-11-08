@@ -26,18 +26,6 @@ button.as-link {
   text-decoration: none;
   transition: color 250ms;
 
-  &.icon-link {
-    display: inline-block;
-    font-size: 0.7em;
-    margin-left: 16px;
-    transform: rotate(-45deg);
-    color: lighten(getColor(dusty-grey), 10%);
-
-    &:hover {
-      color: $text-color-highlight;
-    }
-  }
-
   &:hover {
     color: darken(getColor(denim), 5%);
   }

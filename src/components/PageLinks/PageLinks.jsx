@@ -2,6 +2,7 @@ import React from 'react';
 import Url from 'url';
 import './PageLinks.scss';
 import icon from '../../assets/icon-print.svg';
+import EditIcon from '../../styles/icons/edit.svg';
 
 const baseURL = 'https://github.com/webpack/webpack.js.org/edit/master/';
 
@@ -26,7 +27,7 @@ export default ({
 
       <a className="page-links__link" href={ editLink }>
         Edit Document
-        <i className="page-links__icon icon-edit" />
+        <EditIcon className="page-links__icon" width={12} fill='#1a6bac' />
       </a>
       <span className="page-links__gap">|</span>
       <button className="page-links__link page-links__print as-link" onClick={_handlePrintClick} title="Print this page">

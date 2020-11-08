@@ -80,17 +80,6 @@ module.exports = (env = {}) => ({
         ]
       },
       {
-        test: /\.font.js$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: 'fontgen-loader',
-            options: { embed: true }
-          }
-        ]
-      },
-      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: [
@@ -142,7 +131,13 @@ module.exports = (env = {}) => ({
       },
       {
         test: /\.(jpg|jpeg|png|svg|ico)$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        exclude: [path.join(__dirname, 'src/styles/icons')]
+      },
+      {
+        test: /\.svg$/i,
+        use: ['@svgr/webpack'],
+        include: [path.join(__dirname, 'src/styles/icons')]
       }
     ]
   },

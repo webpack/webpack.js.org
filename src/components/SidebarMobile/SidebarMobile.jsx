@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from '../Link/Link';
 import './SidebarMobile.scss';
+import CloseIcon from '../../styles/icons/cross.svg';
 
 // TODO: Check to make sure all pages are shown and properly sorted
 export default class SidebarMobile extends React.Component {
@@ -29,9 +30,13 @@ export default class SidebarMobile extends React.Component {
           onTouchEnd={this._handleTouchEnd} />
 
         <div className="sidebar-mobile__content">
-          <i
-            className="sidebar-mobile__close icon-cross"
-            onClick={toggle.bind(null, false)} />
+          <span role="button" className="sidebar-mobile__close"
+          onClick={toggle.bind(null, false)}>
+            <CloseIcon
+              fill="#fff"
+              width={20}
+               />
+          </span>
 
           {this._getSections()}
         </div>
