@@ -590,7 +590,7 @@ module.exports = {
       },
       {
         test: /\.yaml$/,
-        type: 'json',
+        type: 'yaml',
         parser: {
           parse: yaml.parse
         }
