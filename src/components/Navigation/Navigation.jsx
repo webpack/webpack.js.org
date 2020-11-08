@@ -2,6 +2,9 @@
 import React from 'react';
 import Banner from 'react-banner';
 
+import LanguageIcon from '../../assets/language-icon.svg';
+import ThemeIcon from '../../assets/theme-icon.svg';
+
 // Import Components
 import Link from '../Link/Link';
 import Logo from '../Logo/Logo';
@@ -10,16 +13,20 @@ import Dropdown from '../Dropdown/Dropdown';
 // Import helpers
 import isClient from '../../utilities/is-client';
 
+// Import constants
+import { THEME  } from '../../constants/theme';
+
 // Load Styling
 import 'docsearch.js/dist/cdn/docsearch.css';
 import './Navigation.scss';
 import './Search.scss';
 
 const onSearch = () => {};
+const { DEVICE, DARK, LIGHT } = THEME;
 
 export default class Navigation extends React.Component {
   render() {
-    let { pathname, links, toggleSidebar } = this.props;
+    const { pathname, links, toggleSidebar, theme, switchTheme } = this.props;
 
     return (
       <Banner
@@ -48,13 +55,27 @@ export default class Navigation extends React.Component {
             content: <i aria-hidden="true" className="icon-stack-overflow" />
           },
           {
-            className: 'navigation__item--icon',
+            className: 'navigation__item--icon navigation__item--dropdown',
             content: (
               <Dropdown
-                className="navigation__languages"
+                icon={LanguageIcon}
+                alt="Select language"
                 items={[
                   { title: 'English', url: 'https://webpack.js.org/' },
                   { lang: 'zh', title: '中文', url: 'https://webpack.docschina.org/' }
+                ]} />
+            )
+          },
+          {
+            className: 'navigation__item--icon navigation__item--dropdown',
+            content: (
+              <Dropdown
+                icon={ThemeIcon}
+                alt="Select theme"
+                items={[
+                  { title: 'Device theme', active: theme === DEVICE, onClick: () => switchTheme(DEVICE) },
+                  { title: 'Dark theme', active: theme === DARK, onClick: () => switchTheme(DARK) },
+                  { title: 'Light theme', active: theme === LIGHT, onClick: () => switchTheme(LIGHT) }
                 ]} />
             )
           }

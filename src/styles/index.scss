@@ -53,4 +53,11 @@ button.as-link {
   }
 }
 
-@import 'dark';
+[data-theme="device"] {
+  @media (prefers-color-scheme: dark) {
+    @import 'dark';
+  }
+}
+[data-theme="dark"] {
+  @import 'dark';
+}

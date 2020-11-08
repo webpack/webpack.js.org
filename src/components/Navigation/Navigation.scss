@@ -77,8 +77,13 @@
 
   &--icon {
     font-size: 16px;
-    margin-top: 2px;
+    margin-top: 4px;
     -webkit-font-smoothing: antialiased;
+  }
+
+  &--dropdown {
+    margin-top: -2px;
+    margin-right: 14px;
   }
 
   &--active {

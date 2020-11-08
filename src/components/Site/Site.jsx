@@ -7,6 +7,7 @@ import DocumentTitle from 'react-document-title';
 import { extractPages, extractSections, getPageTitle } from '../../utilities/content-utils';
 import isClient from '../../utilities/is-client';
 import getAdjacentPages from '../../utilities/get-adjacent-pages';
+import safeLocalStorage from '../../utilities/safe-local-storage';
 
 // Import Components
 import NotificationBar from '../NotificationBar/NotificationBar';
@@ -23,6 +24,9 @@ import Gitter from '../Gitter/Gitter';
 import Vote from '../Vote/Vote';
 import Organization from '../Organization/Organization';
 import StarterKits from '../StarterKits/StarterKits';
+
+// Import Constants
+import { THEME, THEME_LOCAL_STORAGE_KEY } from '../../constants/theme';
 
 // Load Styling
 import '../../styles/index';
@@ -51,8 +55,13 @@ if (isClient) {
 
 class Site extends React.Component {
   state = {
-    mobileSidebarOpen: false
+    mobileSidebarOpen: false,
+    theme: safeLocalStorage.getItem(THEME_LOCAL_STORAGE_KEY) || THEME.DEVICE,
   };
+
+  componentDidMount() {
+    this._applyTheme(this.state.theme);
+  }
 
   render() {
     let { location } = this.props;
@@ -73,19 +82,21 @@ class Site extends React.Component {
         <div className="site__header">
           <NotificationBar />
           <Navigation
-          pathname={location.pathname}
-          toggleSidebar={this._toggleSidebar}
-          links={[
-            {
-              content: 'Documentation',
-              url: '/concepts/',
-              isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
-              children: this._strip(sections.filter(item => item.name !== 'contribute'))
-            },
-            { content: 'Contribute', url: '/contribute/' },
-            { content: 'Vote', url: '/vote/' },
-            { content: 'Blog', url: '/blog/' }
-          ]}
+            pathname={location.pathname}
+            toggleSidebar={this._toggleSidebar}
+            theme={this.state.theme}
+            switchTheme={this._switchTheme}
+            links={[
+              {
+                content: 'Documentation',
+                url: '/concepts/',
+                isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
+                children: this._strip(sections.filter(item => item.name !== 'contribute'))
+              },
+              { content: 'Contribute', url: '/contribute/' },
+              { content: 'Vote', url: '/vote/' },
+              { content: 'Blog', url: '/blog/' }
+            ]}
           />
         </div>
 
@@ -159,6 +170,17 @@ class Site extends React.Component {
       mobileSidebarOpen: open
     });
   };
+
+  _switchTheme = theme => {
+    this.setState({ theme }, () => {
+      safeLocalStorage.setItem(THEME_LOCAL_STORAGE_KEY, theme);
+      this._applyTheme(theme);
+    });
+  };
+
+  _applyTheme = theme => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
 
   /**
    * Strip any non-applicable properties
