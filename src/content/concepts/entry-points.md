@@ -39,8 +39,7 @@ module.exports = {
 };
 ```
 
-T> __What happens when you pass an array to `entry`?__ Passing an array of file paths to the `entry` property creates what is known as a __"multi-main entry"__. This is useful when you would like to inject multiple dependent files together and graph their dependencies into one "chunk".
-
+We can also pass an array of file paths to the `entry` property which creates what is known as a __"multi-main entry"__. This is useful when you would like to inject multiple dependent files together and graph their dependencies into one "chunk".
 
 __webpack.config.js__
 
@@ -50,16 +49,13 @@ module.exports = {
     './src/file_1.js',
     './src/file_2.js'
   ],
-
   output: {
     filename: 'bundle.js'
   }
 };
 ```
 
-The example above shows that array syntax can easily combine multiple entries to one bundle.js file
-
-This is a great choice when you are looking to quickly setup a webpack configuration for an application or tool with one entry point (i.e. a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.
+Single Entry Syntax is a great choice when you are looking to quickly setup a webpack configuration for an application or tool with one entry point (i.e. a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.
 
 
 ## Object Syntax
