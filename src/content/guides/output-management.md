@@ -63,6 +63,8 @@ __src/index.js__
 +
    return element;
  }
+ 
+ document.body.appendChild(component());
 ```
 
 Let's also update our `dist/index.html` file, in preparation for webpack to split out entries:
@@ -70,6 +72,7 @@ Let's also update our `dist/index.html` file, in preparation for webpack to spli
 __dist/index.html__
 
 ``` diff
+ <!DOCTYPE html>
  <html>
    <head>
      <meta charset="utf-8" />
@@ -115,9 +118,9 @@ asset print.bundle.js 316 bytes [emitted] [minimized] (name: print)
 runtime modules 1.36 KiB 7 modules
 cacheable modules 530 KiB
   ./src/index.js 407 bytes [built] [code generated]
-  ./src/print.js 84 bytes [built] [code generated]
+  ./src/print.js 83 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.2.0 compiled successfully in 2245 ms
+webpack 5.4.0 compiled successfully in 3410 ms
 ```
 
 We can see that webpack generates our `print.bundle.js` and `app.bundle.js` files, which we also specified in our `index.html` file. if you open `index.html` in your browser, you can see what happens when you click the button.
@@ -152,6 +155,8 @@ __webpack.config.js__
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
+   },
+ };
 ```
 
 Before we do a build, you should know that the `HtmlWebpackPlugin` by default will generate its own `index.html` file, even though we already have one in the `dist/` folder. This means that it will replace our `index.html` file with a newly generated one. Let's see what happens when we do an `npm run build`:
@@ -165,9 +170,9 @@ asset index.html 251 bytes [emitted]
 runtime modules 1.36 KiB 7 modules
 cacheable modules 530 KiB
   ./src/index.js 407 bytes [built] [code generated]
-  ./src/print.js 84 bytes [built] [code generated]
+  ./src/print.js 83 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.2.0 compiled successfully in 2397 ms
+webpack 5.4.0 compiled successfully in 5761 ms
 ```
 
 If you open `index.html` in your code editor, you'll see that the `HtmlWebpackPlugin` has created an entirely new file for you and that all the bundles are automatically added.
@@ -195,13 +200,20 @@ __webpack.config.js__
  
  module.exports = {
    entry: {
-   // ...
+     app: './src/index.js',
+     print: './src/print.js',
+   },
    plugins: [
 +    new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({
        title: 'Output Management',
      }),
-
+   ],
+   output: {
+     filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+ };
 ```
 
 Now run an `npm run build` and inspect the `/dist` folder. If everything went well you should now only see the files generated from the build and no more old files!
