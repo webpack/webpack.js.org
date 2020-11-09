@@ -3,6 +3,7 @@ title: Webpack 5 发布 (2020-10-10)
 sort: -202010100
 contributors:
     - sokra
+    - chenxsan
 ---
 
 webpack 4 于 2018 年 2 月发布。
@@ -1096,7 +1097,7 @@ Stats 的 `preset`，`default`，`json` 和 `toString` 现已由插件系统内�
 
 ### 全新的监听 {#new-watching}
 
-webpack 所使用的监听已重构。它之前使用的是 `chokidar` 和原生依赖 `fsevents`（仅在 OSX 上）。现在它在只基于原生的 Node.js 中的 `fs`。这意味着在 webpack 中已经没有原生依赖了。
+webpack 所使用的监听已重构。它之前使用的是 `chokidar` 和原生依赖 `fsevents`（仅在 macOS 上）。现在它在只基于原生的 Node.js 中的 `fs`。这意味着在 webpack 中已经没有原生依赖了。
 
 它还能在监听时捕捉更多关于文件系统的信息。目前，它还可以捕获 mtimes 和监视事件时间，以及丢失文件的信息。为此，`WatchFileSystem` API 做了一点小改动。在修改的同时，我们还将 Arrays 转换为 Sets，Objects 转换为 Maps。
 
@@ -1220,7 +1221,7 @@ webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（
 
 ## 其他微小改动 {#other-minor-changes}
 
-- 移除 build 目录，用运行时代替 build
+- 移除内置目录，用运行时代替内置目录
 - 移除不适用的特性
     - BannerPlugin 目前只支持一个参数，这个参数可以是对象，字符串或函数
 - 移除 `CachePlugin`
@@ -1395,7 +1396,7 @@ webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（
 - DependencyReference 现将函数传递给模块，而非模块。
 - 移除了 `HarmonyImportSpecifierDependency.redirectedId`
     - 迁移：使用 `setId` 代替
-- acorn 5 -> 7
+- acorn 5 -> 8
 - 测试
     - HotTestCases 现可为多个目标运行，包括 `async-node` `node` `web` `webworker`
     - TestCases 现在可以用 `store: "instant"` 和 `store: "pack"` 来运行系统缓存。
@@ -1407,7 +1408,7 @@ webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（
 - loader-runner 已升级：https://github.com/webpack/loader-runner/releases/tag/v3.0.0
 - `Compilation` 中的 `file/context/missingDependencies` 因性能问题不再排序
     - 不要依赖排序
-- webpack-sources 已升级：https://github.com/webpack/webpack-sources/releases/tag/v2.0.0-beta.0
+- webpack-sources 升级至 version 2：https://github.com/webpack/webpack-sources/releases/tag/v2.0.1
 - 删除了对 webpack-command 的支持
 - 使用 schema-utils@2 进行模式校验
 - `Compiler.assetEmitted` 改进了参数二，增加了更多信息

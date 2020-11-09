@@ -15,6 +15,7 @@ contributors:
   - NicolasLetellier
   - wizardofhogwarts
   - snitin315
+  - chenxsan
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
@@ -44,6 +45,7 @@ webpack-demo
 |- package.json
 |- webpack.config.js
 |- /dist
+  |- index.html
 |- /src
   |- index.js
 |- /node_modules
@@ -56,38 +58,38 @@ webpack-demo
 __src/index.js__
 
 ``` diff
-- import _ from 'lodash';
+-import _ from 'lodash';
 -
-  function component() {
-    const element = document.createElement('div');
-
--   // Lodash, now imported by this script
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-    return element;
-  }
-
-  document.body.appendChild(component());
+ function component() {
+   const element = document.createElement('div');
+ 
+-  // Lodash, now imported by this script
+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+ 
+   return element;
+ }
+ 
+ document.body.appendChild(component());
 ```
 
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-+ const webpack = require('webpack');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-+   plugins: [
-+     new webpack.ProvidePlugin({
-+       _: 'lodash',
-+     }),
-+   ],
-  };
+ const path = require('path');
++const webpack = require('webpack');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'main.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
++  plugins: [
++    new webpack.ProvidePlugin({
++      _: 'lodash',
++    }),
++  ],
+ };
 ```
 
 我们本质上所做的，就是告诉 webpack……
@@ -97,10 +99,17 @@ __webpack.config.js__
 运行我们的构建脚本，将会看到同样的输出：
 
 ``` bash
-...
-    Asset    Size  Chunks                    Chunk Names
-bundle.js  544 kB       0  [emitted]  [big]  main
-...
+$ npm run build
+
+..
+
+[webpack-cli] Compilation finished
+asset main.js 69.1 KiB [emitted] [minimized] (name: main) 1 related asset
+runtime modules 344 bytes 2 modules
+cacheable modules 530 KiB
+  ./src/index.js 191 bytes [built] [code generated]
+  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+webpack 5.4.0 compiled successfully in 2910 ms
 ```
 
 还可以使用 `ProvidePlugin` 暴露出某个模块中单个导出，通过配置一个“数组路径”（例如 `[module, child, ...children?]`）实现此功能。所以，我们假想如下，无论 `join` 方法在何处调用，我们都只会获取到 `lodash` 中提供的 `join` 方法。
@@ -108,37 +117,37 @@ bundle.js  544 kB       0  [emitted]  [big]  main
 __src/index.js__
 
 ``` diff
-  function component() {
-    const element = document.createElement('div');
-
--   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   element.innerHTML = join(['Hello', 'webpack'], ' ');
-
-    return element;
-  }
-
-  document.body.appendChild(component());
+ function component() {
+   const element = document.createElement('div');
+ 
+-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
++  element.innerHTML = join(['Hello', 'webpack'], ' ');
+ 
+   return element;
+ }
+ 
+ document.body.appendChild(component());
 ```
 
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-  const webpack = require('webpack');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-    plugins: [
-      new webpack.ProvidePlugin({
--       _: 'lodash',
-+       join: ['lodash', 'join'],
-      }),
-    ],
-  };
+ const path = require('path');
+ const webpack = require('webpack');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'main.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+   plugins: [
+     new webpack.ProvidePlugin({
+-      _: 'lodash',
++      join: ['lodash', 'join'],
+     }),
+   ],
+ };
 ```
 
 这样就能很好的与 [tree shaking](/guides/tree-shaking) 配合，将 `lodash` library 中的其余没有用到的导出去除。
@@ -149,18 +158,18 @@ __webpack.config.js__
 一些遗留模块依赖的 `this` 指向的是 `window` 对象。在接下来的用例中，调整我们的 `index.js`：
 
 ``` diff
-  function component() {
-    const element = document.createElement('div');
-
-    element.innerHTML = join(['Hello', 'webpack'], ' ');
-+
+ function component() {
+   const element = document.createElement('div');
+ 
+   element.innerHTML = join(['Hello', 'webpack'], ' ');
+ 
 +   // 假设我们处于 `window` 上下文
 +   this.alert('Hmmm, this probably isn\'t a great idea...')
-
-    return element;
-  }
-
-  document.body.appendChild(component());
++
+   return element;
+ }
+ 
+ document.body.appendChild(component());
 ```
 
 当模块运行在 CommonJS 上下文中，这将会变成一个问题，也就是说此时的 `this` 指向的是 `module.exports`。在这种情况下，你可以通过使用 [`imports-loader`](/loaders/imports-loader/) 覆盖 `this` 指向：
@@ -168,29 +177,29 @@ __webpack.config.js__
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-  const webpack = require('webpack');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-+   module: {
-+     rules: [
-+       {
-+         test: require.resolve('./src/index.js'),
-+         use: 'imports-loader?this=>window',
-+       },
-+     ],
-+   },
-    plugins: [
-      new webpack.ProvidePlugin({
-        join: ['lodash', 'join'],
-      }),
-    ],
-  };
+ const path = require('path');
+ const webpack = require('webpack');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'main.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
++  module: {
++    rules: [
++      {
++        test: require.resolve('./src/index.js'),
++        use: 'imports-loader?wrapper=window',
++      },
++    ],
++  },
+   plugins: [
+     new webpack.ProvidePlugin({
+       join: ['lodash', 'join'],
+     }),
+   ],
+ };
 ```
 
 
@@ -216,8 +225,12 @@ __src/globals.js__
 ``` js
 const file = 'blah.txt';
 const helpers = {
-  test: function() { console.log('test something'); },
-  parse: function() { console.log('parse something'); },
+  test: function () {
+    console.log('test something');
+  },
+  parse: function () {
+    console.log('parse something');
+  },
 };
 ```
 
@@ -226,36 +239,37 @@ const helpers = {
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-  const webpack = require('webpack');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-    module: {
-      rules: [
-        {
-          test: require.resolve('./src/index.js'),
-          use: 'imports-loader?this=>window',
-        },
-+       {
-+         test: require.resolve('./src/globals.js'),
-+         use: 'exports-loader?file,parse=helpers.parse',
-+       },
-      ],
-    },
-    plugins: [
-      new webpack.ProvidePlugin({
-        join: ['lodash', 'join'],
-      }),
-    ],
-  };
+ const path = require('path');
+ const webpack = require('webpack');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'main.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+   module: {
+     rules: [
+       {
+         test: require.resolve('./src/index.js'),
+         use: 'imports-loader?wrapper=window',
+       },
++      {
++        test: require.resolve('./src/globals.js'),
++        use:
++          'exports-loader?type=commonjs&exports[]=file&exports[]=multiple|helpers.parse|parse',
++      },
+     ],
+   },
+   plugins: [
+     new webpack.ProvidePlugin({
+       join: ['lodash', 'join'],
+     }),
+   ],
+ };
 ```
 
-现在，在我们的 entry 入口文件中（即 `src/index.js`），我们能 `import { file, parse } from './globals.js';` ，然后一切将顺利运行。
+此时，在我们的 entry 入口文件中（即 `src/index.js`），可以使用 `const { file, parse } = require('./globals.js');`，可以保证一切将顺利运行。
 
 
 ## 加载 Polyfills {#loading-polyfills}
@@ -273,17 +287,20 @@ npm install --save babel-polyfill
 __src/index.js__
 
 ``` diff
-+ import 'babel-polyfill';
++import 'babel-polyfill';
 +
-  function component() {
-    const element = document.createElement('div');
-
-    element.innerHTML = join(['Hello', 'webpack'], ' ');
-
-    return element;
-  }
-
-  document.body.appendChild(component());
+ function component() {
+   const element = document.createElement('div');
+ 
+   element.innerHTML = join(['Hello', 'webpack'], ' ');
+ 
+   // Assume we are in the context of `window`
+   this.alert("Hmmm, this probably isn't a great idea...");
+ 
+   return element;
+ }
+ 
+ document.body.appendChild(component());
 ```
 
 T> 注意，我们没有将 `import` 绑定到某个变量。这是因为 polyfill 直接基于自身执行，并且是在基础代码执行之前，这样通过这些预置，我们就可以假定已经具有某些原生功能。
@@ -302,17 +319,20 @@ npm install --save whatwg-fetch
 __src/index.js__
 
 ``` diff
-- import 'babel-polyfill';
+-import 'babel-polyfill';
 -
-  function component() {
-    const element = document.createElement('div');
-
-    element.innerHTML = join(['Hello', 'webpack'], ' ');
-
-    return element;
-  }
-
-  document.body.appendChild(component());
+ function component() {
+   const element = document.createElement('div');
+ 
+   element.innerHTML = join(['Hello', 'webpack'], ' ');
+ 
+   // Assume we are in the context of `window`
+   this.alert("Hmmm, this probably isn't a great idea...");
+ 
+   return element;
+ }
+ 
+ document.body.appendChild(component());
 ```
 
 __project__
@@ -339,38 +359,39 @@ import 'whatwg-fetch';
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-  const webpack = require('webpack');
-
-  module.exports = {
--   entry: './src/index.js',
-+   entry: {
-+     polyfills: './src/polyfills.js',
-+     index: './src/index.js',
-+   },
-    output: {
--     filename: 'bundle.js',
-+     filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-    module: {
-      rules: [
-        {
-          test: require.resolve('./src/index.js'),
-          use: 'imports-loader?this=>window',
-        },
-        {
-          test: require.resolve('./src/globals.js'),
-          use: 'exports-loader?file,parse=helpers.parse',
-        },
-      ],
-    },
-    plugins: [
-      new webpack.ProvidePlugin({
-        join: ['lodash', 'join'],
-      }),
-    ],
-  };
+ const path = require('path');
+ const webpack = require('webpack');
+ 
+ module.exports = {
+-  entry: './src/index.js',
++  entry: {
++    polyfills: './src/polyfills',
++    index: './src/index.js',
++  },
+   output: {
+-    filename: 'main.js',
++    filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+   module: {
+     rules: [
+       {
+         test: require.resolve('./src/index.js'),
+         use: 'imports-loader?wrapper=window',
+       },
+       {
+         test: require.resolve('./src/globals.js'),
+         use:
+           'exports-loader?type=commonjs&exports[]=file&exports[]=multiple|helpers.parse|parse',
+       },
+     ],
+   },
+   plugins: [
+     new webpack.ProvidePlugin({
+       join: ['lodash', 'join'],
+     }),
+   ],
+ };
 ```
 
 如上配置之后，我们可以在代码中添加一些逻辑，有条件地加载新的 `polyfills.bundle.js` 文件。根据需要支持的技术和浏览器来决定是否加载。我们将做一些简单的试验，来确定是否需要引入这些 polyfill：
@@ -378,29 +399,28 @@ __webpack.config.js__
 __dist/index.html__
 
 ``` diff
-  <!doctype html>
-  <html>
-    <head>
-      <title>Getting Started</title>
-+     <script>
-+       const modernBrowser = (
-+         'fetch' in window &&
-+         'assign' in Object
-+       );
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="utf-8" />
+     <title>Getting Started</title>
++    <script>
++      const modernBrowser = 'fetch' in window && 'assign' in Object;
 +
-+       if ( !modernBrowser ) {
-+         const scriptElement = document.createElement('script');
++      if (!modernBrowser) {
++        const scriptElement = document.createElement('script');
 +
-+         scriptElement.async = false;
-+         scriptElement.src = '/polyfills.bundle.js';
-+         document.head.appendChild(scriptElement);
-+       }
-+     </script>
-    </head>
-    <body>
-      <script src="index.bundle.js"></script>
-    </body>
-  </html>
++        scriptElement.async = false;
++        scriptElement.src = '/polyfills.bundle.js';
++        document.head.appendChild(scriptElement);
++      }
++    </script>
+   </head>
+   <body>
+-    <script src="main.js"></script>
++    <script src="index.bundle.js"></script>
+   </body>
+ </html>
 ```
 
 现在，在 entry 入口文件中，可以通过 `fetch` 获取一些数据：
@@ -408,23 +428,30 @@ __dist/index.html__
 __src/index.js__
 
 ``` diff
-  function component() {
-    const element = document.createElement('div');
-
-    element.innerHTML = join(['Hello', 'webpack'], ' ');
-
-    return element;
-  }
-
-  document.body.appendChild(component());
+ function component() {
+   const element = document.createElement('div');
+ 
+   element.innerHTML = join(['Hello', 'webpack'], ' ');
+ 
+   // Assume we are in the context of `window`
+   this.alert("Hmmm, this probably isn't a great idea...");
+ 
+   return element;
+ }
+ 
+ document.body.appendChild(component());
 +
-+ fetch('https://jsonplaceholder.typicode.com/users')
-+   .then(response => response.json())
-+   .then(json => {
-+     console.log('We retrieved some data! AND we\'re confident it will work on a variety of browser distributions.')
-+     console.log(json)
-+   })
-+   .catch(error => console.error('Something went wrong when fetching this data: ', error))
++fetch('https://jsonplaceholder.typicode.com/users')
++  .then((response) => response.json())
++  .then((json) => {
++    console.log(
++      "We retrieved some data! AND we're confident it will work on a variety of browser distributions."
++    );
++    console.log(json);
++  })
++  .catch((error) =>
++    console.error('Something went wrong when fetching this data: ', error)
++  );
 ```
 
 执行构建脚本，可以看到，浏览器发送了额外的 `polyfills.bundle.js` 文件请求，然后所有代码顺利执行。注意，以上的这些设定可能还会有所改进，这里我们向你提供一个很棒的想法：将 polyfill 提供给需要引入它的用户。
@@ -458,7 +485,7 @@ See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset
 
 W> 任何需要 AST 的功能（例如 `ProvidePlugin`）都不起作用。
 
-最后，一些模块支持多种 [模块格式](/concepts/modules)，例如一个混合有 AMD、CommonJS 和 legacy(遗留) 的模块。在大多数这样的模块中，会首先检查 `define`，然后使用一些怪异代码导出一些属性。在这些情况下，可以通过 [`imports-loader`](/loaders/imports-loader/) 设置 `define=>false` 来强制 CommonJS 路径。
+最后，一些模块支持多种 [模块格式](/concepts/modules)，例如一个混合有 AMD、CommonJS 和 legacy(遗留) 的模块。在大多数这样的模块中，会首先检查 `define`，然后使用一些怪异代码导出一些属性。在这些情况下，可以通过 [`imports-loader`](/loaders/imports-loader/) 设置 `additionalCode=var%define%20=%20false;` 来强制 CommonJS 路径。
 
 ***
 

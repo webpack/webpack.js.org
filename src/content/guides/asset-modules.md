@@ -26,6 +26,56 @@ related:
 - `asset/source` 导出资源的源代码。之前通过使用 `raw-loader` 实现。
 - `asset` 在导出一个 data URI 和发送一个单独的文件之间自动选择。之前通过使用 `url-loader`，并且配置资源体积限制实现。
 
+当在 webpack 5 中使用旧的 assets loader（如 `file-loader`/`url-loader`/`raw-loader` 等）和 asset 模块时，你可能想停止当前 asset 模块的处理，并再次启动处理，这可能会导致 asset 重复，你可以通过将 asset 模块的类型设置为 `'javascript/auto'` 来解决。
+
+__webpack.config.js__
+
+``` diff
+module.exports = {
+  module: {
+   rules: [
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            }
+          },
+        ],
++       type: 'javascript/auto'
+      },
+   ]
+  },
+}
+```
+
+如需从 asset loader 中排除来自新 URL 处理的 asset，请添加 `dependency: { not: ['url'] }` 到 loader 配置中。
+
+__webpack.config.js__
+
+``` diff
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|gif)$/i,
++       dependency: { not: ['url'] }, 
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
+    ],
+  }
+}
+```
+
 ## Resource 资源 {#resource-assets}
 
 __webpack.config.js__
@@ -163,7 +213,7 @@ __src/index.js__
 
 ```diff
 - import mainImage from './images/main.png';
-+ import metroMap from './images/matro.svg';
++ import metroMap from './images/metro.svg';
 
 - img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 + block.style.background = `url(${metroMap})`; // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
@@ -250,7 +300,7 @@ Hello world
 __src/index.js__
 
 ```diff
-- import metroMap from './images/matro.svg';
+- import metroMap from './images/metro.svg';
 + import exampleText from './example.txt';
 
 - block.style.background = `url(${metroMap}); // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)

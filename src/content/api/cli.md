@@ -3,6 +3,7 @@ title: 命令行接口（CLI）
 sort: 1
 contributors:
   - anshumanv
+  - snitin315
   - evenstensberg
   - simon04
   - tbroadley
@@ -61,7 +62,7 @@ webpack-cli 提供了许多 flag 来使 webpack 的工作变得简单。默认�
 | `--no-color`        | boolean         | 禁用控制台颜色                                                         |
 | `--merge, -m`       | boolean         | 使用 webpack-merge 合并两个配置文件，例如 `-c ./webpack.config.js -c ./webpack.test.config.js` |
 | `--env`             | string[]        | 当它是一个函数时，传递给配置的环境变量                                     |
-| `--progress`        | boolean         | 在构建过程中打印编译进度                                                 |
+| `--progress`        | boolean, string | 在构建过程中打印编译进度                                                 |
 | `--help`            | boolean         | 输出所有支持的 flag 和命令                                              |
 | `--output-path, -o` | string          | webpack 生成文件的输出位置，例如 `./dist`                                |
 | `--target, -t`      | string          | 设置要构建的 target                                                    |
@@ -244,10 +245,11 @@ webpack --env production    # sets env.production == true
 
 `--env` 参数可以接收多个值：
 
-| Invocation                     | Resulting environment       |
-| ------------------------------ | --------------------------- |
-| `webpack --env prod`           | `{ prod: true }`            |
-| `webpack --env prod --env min` | `{ prod: true, min: true }` |
+| Invocation                                    | Resulting environment                   |
+| --------------------------------------------- | --------------------------------------- |
+| `webpack --env prod`                          | `{ prod: true }`                        |
+| `webpack --env prod --env min`                | `{ prod: true, min: true }`             |
+| `webpack --env platform=app --env production` | `{ platform: "app", production: true }` |
 
 T> 请查阅 [environment 变量指南](/guides/environment-variables/)了解更多信息及用法。
 
@@ -269,6 +271,20 @@ webpack --analyze
 ```
 
 W> 请确保你的项目中安装了 `webpack-bundle-analyzer`，否则 CLI 会提示你安装它。
+
+## Progress {#progress}
+
+如需查看 webpack 的编译进度，你可以使用 `--progress` flag。
+
+```bash
+webpack --progress
+```
+
+如需收集编译过程中每一步的 profile 数据，你可以将 `profile` 作为值传递给 `--progress` flag。
+
+```bash
+webpack --progress=profile
+```
 
 ## 将 CLI 参数传递给 Node.js {#pass-cli-arguments-to-nodejs}
 

@@ -4,6 +4,7 @@ group: Plugins
 sort: 13
 contributors:
   - EugeneHlushko
+  - chenxsan
 ---
 
 解析器是使用 `enhanced-resolve` 库创建的。`Resolver` 类
@@ -28,17 +29,17 @@ contributors:
 可以通过插件进行定制：
 
 ``` js
-compiler.resolverFactory.plugin('resolver [type]', resolver => {
-  resolver.hooks.resolve.tapAsync('MyPlugin', params => {
-    // ...
+compiler.resolverFactory.hooks.resolver.for('[type]').tap('name', resolver => {
+  // you can tap into resolver.hooks now
+  resolver.hooks.result.tap('MyPlugin', result => {
+    return result;
   });
 });
 ```
 
 其中，`[type]` 是上述三个解析器之一。
 
-请参阅 [`enhanced-resolve` documentation](https://github.com/webpack/enhanced-resolve) 以获得钩子的完整列表以及它们的
-介绍。
+请参阅 [`enhanced-resolve` documentation](https://github.com/webpack/enhanced-resolve) 以获得钩子的完整列表以及它们的介绍。
 
 
 ## 配置选项 {#configuration-options}
