@@ -26,6 +26,7 @@ contributors:
   - snitin315
   - QC-L
   - anshumanv
+  - mrzalyaul
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -1055,7 +1056,7 @@ T> It also adds some info about tree shaking to the generated bundle.
 
 ## `output.publicPath`
 
-`string = ''` `function`
+`string` `function`
 
 This is an important option when using on-demand-loading or loading external resources like images, files, etc. If an incorrect value is specified you'll receive 404 errors while loading these resources.
 
