@@ -1056,7 +1056,7 @@ T> It also adds some info about tree shaking to the generated bundle.
 
 ## `output.publicPath`
 
-`string = 'auto'` `function`
+`string` `function`
 
 This is an important option when using on-demand-loading or loading external resources like images, files, etc. If an incorrect value is specified you'll receive 404 errors while loading these resources.
 
