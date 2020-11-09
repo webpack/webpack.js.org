@@ -478,7 +478,7 @@ module.exports = {
 
 ## `optimization.sideEffects` {#optimizationsideeffects}
 
-`boolean = true`
+`boolean = true`  `string: 'flag'` 
 
 告知 webpack 去辨识 `package.json` 中的  [`副作用`](https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md) 标记或规则，以跳过那些当导出不被使用且被标记不包含副作用的模块。
 
@@ -509,7 +509,24 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `optimization.portableRecords` {#optimizationportablerecords}
+=======
+To only use the manual flag and do not analyse source code:
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    sideEffects: 'flag'
+  }
+};
+```
+
+The `'flag'` value is used by default in non-production builds.
+
+## `optimization.portableRecords`
+>>>>>>> 0f751edcec1a5a85990b784dda1dd39c9e17a85c
 
 `boolean`
 

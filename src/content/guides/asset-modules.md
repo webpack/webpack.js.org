@@ -26,7 +26,61 @@ related:
 - `asset/source` 导出资源的源代码。之前通过使用 `raw-loader` 实现。
 - `asset` 在导出一个 data URI 和发送一个单独的文件之间自动选择。之前通过使用 `url-loader`，并且配置资源体积限制实现。
 
+<<<<<<< HEAD
 ## Resource 资源 {#resource-assets}
+=======
+When using the old assets loaders (i.e. `file-loader`/`url-loader`/`raw-loader`) along with Asset Module in webpack 5, you might want to stop Asset Module from processing your assets again as that would result in asset duplication. This can be done by setting asset's module type to `'javascript/auto'`.
+
+__webpack.config.js__
+
+``` diff
+module.exports = {
+  module: {
+   rules: [
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            }
+          },
+        ],
++       type: 'javascript/auto'
+      },
+   ]
+  },
+}
+```
+
+To exclude assets that came from new URL calls from the asset loaders add `dependency: { not: ['url'] }` to the loader configuration.
+
+__webpack.config.js__
+
+``` diff
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|gif)$/i,
++       dependency: { not: ['url'] }, 
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
+    ],
+  }
+}
+```
+
+## Resource assets
+>>>>>>> 0f751edcec1a5a85990b784dda1dd39c9e17a85c
 
 __webpack.config.js__
 
@@ -163,7 +217,7 @@ __src/index.js__
 
 ```diff
 - import mainImage from './images/main.png';
-+ import metroMap from './images/matro.svg';
++ import metroMap from './images/metro.svg';
 
 - img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 + block.style.background = `url(${metroMap})`; // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
@@ -250,7 +304,7 @@ Hello world
 __src/index.js__
 
 ```diff
-- import metroMap from './images/matro.svg';
+- import metroMap from './images/metro.svg';
 + import exampleText from './example.txt';
 
 - block.style.background = `url(${metroMap}); // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
