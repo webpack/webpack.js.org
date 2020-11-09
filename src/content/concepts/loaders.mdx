@@ -36,8 +36,8 @@ __webpack.config.js__
 module.exports = {
   module: {
     rules: [
-      { test: /\\.css$/, use: 'css-loader' },
-      { test: /\\.ts$/, use: 'ts-loader' }
+      { test: /\.css$/, use: 'css-loader' },
+      { test: /\.ts$/, use: 'ts-loader' }
     ]
   }
 };
@@ -65,7 +65,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.css$/,
+        test: /\.css$/,
         use: [
           // [style-loader](/loaders/style-loader)
           { loader: 'style-loader' },

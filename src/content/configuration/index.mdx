@@ -145,7 +145,7 @@ module.exports = {
         /* Expert output configuration (on own risk) */
       </default>
       devtoolLineToLine: {
-        test: /\\.jsx$/
+        test: /\.jsx$/
       },
       // use a simple 1:1 mapped SourceMaps for these modules (faster)
       hotUpdateMainFilename: "[hash].hot-update.json", // string
@@ -161,7 +161,7 @@ module.exports = {
     rules: [
       // rules for modules (configure loaders, parser options, etc.)
       {
-        test: /\\.jsx?$/,
+        test: /\.jsx?$/,
         include: [
           path.resolve(__dirname, "app")
         ],
@@ -188,7 +188,7 @@ module.exports = {
         // options for the loader
       },
       {
-        test: /\\.html$/,
+        test: /\.html$/,
         use: [
           // apply multiple loaders and options
           "htmllint-loader",

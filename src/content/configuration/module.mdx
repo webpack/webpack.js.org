@@ -239,7 +239,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.css$/,
+        test: /\.css$/,
         oneOf: [
           {
             resourceQuery: /inline/, // foo.css?inline
@@ -459,7 +459,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.css$/,
+        test: /\.css$/,
         resourceQuery: /inline/,
         use: 'url-loader'
       }
@@ -531,7 +531,7 @@ module.exports = {
     rules: [
       //...
       {
-        test: /\\.json$/,
+        test: /\.json$/,
         type: 'javascript/auto',
         loader: 'custom-json-loader'
       }
@@ -720,7 +720,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.css$/,
+        test: /\.css$/,
         include: [
           path.resolve(__dirname, 'app/styles'),
           path.resolve(__dirname, 'vendor/styles')
