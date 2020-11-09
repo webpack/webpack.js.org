@@ -509,10 +509,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `optimization.portableRecords` {#optimizationportablerecords}
-=======
-To only use the manual flag and do not analyse source code:
+只使用手动 flag，并且不对源码进行分析：
 
 ```js
 module.exports = {
@@ -523,10 +520,9 @@ module.exports = {
 };
 ```
 
-The `'flag'` value is used by default in non-production builds.
+此处的 `'flag'` 值在非生产环境默认使用。
 
-## `optimization.portableRecords`
->>>>>>> 0f751edcec1a5a85990b784dda1dd39c9e17a85c
+## `optimization.portableRecords` {#optimizationportablerecords}
 
 `boolean`
 

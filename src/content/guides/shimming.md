@@ -163,23 +163,13 @@ __webpack.config.js__
  
    element.innerHTML = join(['Hello', 'webpack'], ' ');
  
-+  // Assume we are in the context of `window`
-+  this.alert("Hmmm, this probably isn't a great idea...");
-+
-<<<<<<< HEAD
 +   // 假设我们处于 `window` 上下文
 +   this.alert('Hmmm, this probably isn\'t a great idea...')
-
-    return element;
-  }
-
-  document.body.appendChild(component());
-=======
++
    return element;
  }
  
  document.body.appendChild(component());
->>>>>>> 0f751edcec1a5a85990b784dda1dd39c9e17a85c
 ```
 
 当模块运行在 CommonJS 上下文中，这将会变成一个问题，也就是说此时的 `this` 指向的是 `module.exports`。在这种情况下，你可以通过使用 [`imports-loader`](/loaders/imports-loader/) 覆盖 `this` 指向：
@@ -279,11 +269,7 @@ __webpack.config.js__
  };
 ```
 
-<<<<<<< HEAD
-现在，在我们的 entry 入口文件中（即 `src/index.js`），我们能 `import { file, parse } from './globals.js';` ，然后一切将顺利运行。
-=======
-Now from within our entry script (i.e. `src/index.js`), we could use `const { file, parse } = require('./globals.js');` and all should work smoothly.
->>>>>>> 0f751edcec1a5a85990b784dda1dd39c9e17a85c
+此时，在我们的 entry 入口文件中（即 `src/index.js`），可以使用 `const { file, parse } = require('./globals.js');`，可以保证一切将顺利运行。
 
 
 ## 加载 Polyfills {#loading-polyfills}
@@ -499,12 +485,8 @@ See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset
 
 W> 任何需要 AST 的功能（例如 `ProvidePlugin`）都不起作用。
 
-<<<<<<< HEAD
-最后，一些模块支持多种 [模块格式](/concepts/modules)，例如一个混合有 AMD、CommonJS 和 legacy(遗留) 的模块。在大多数这样的模块中，会首先检查 `define`，然后使用一些怪异代码导出一些属性。在这些情况下，可以通过 [`imports-loader`](/loaders/imports-loader/) 设置 `define=>false` 来强制 CommonJS 路径。
+最后，一些模块支持多种 [模块格式](/concepts/modules)，例如一个混合有 AMD、CommonJS 和 legacy(遗留) 的模块。在大多数这样的模块中，会首先检查 `define`，然后使用一些怪异代码导出一些属性。在这些情况下，可以通过 [`imports-loader`](/loaders/imports-loader/) 设置 `additionalCode=var%define%20=%20false;` 来强制 CommonJS 路径。
 
 ***
 
 T> 译者注：shimming 是一个库(library)，它将一个新的 API 引入到一个旧的环境中，而且仅靠旧的环境中已有的手段实现。polyfill 就是一个用在浏览器 API 上的 shimming。我们通常的做法是先检查当前浏览器是否支持某个 API，如果不支持的话就按需加载对应的 polyfill。然后新旧浏览器就都可以使用这个 API 了。
-=======
-Lastly, there are some modules that support multiple [module styles](/concepts/modules); e.g. a combination of AMD, CommonJS, and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `additionalCode=var%define%20=%20false;` via the [`imports-loader`](/loaders/imports-loader/).
->>>>>>> 0f751edcec1a5a85990b784dda1dd39c9e17a85c

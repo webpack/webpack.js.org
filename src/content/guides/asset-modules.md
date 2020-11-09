@@ -26,10 +26,7 @@ related:
 - `asset/source` 导出资源的源代码。之前通过使用 `raw-loader` 实现。
 - `asset` 在导出一个 data URI 和发送一个单独的文件之间自动选择。之前通过使用 `url-loader`，并且配置资源体积限制实现。
 
-<<<<<<< HEAD
-## Resource 资源 {#resource-assets}
-=======
-When using the old assets loaders (i.e. `file-loader`/`url-loader`/`raw-loader`) along with Asset Module in webpack 5, you might want to stop Asset Module from processing your assets again as that would result in asset duplication. This can be done by setting asset's module type to `'javascript/auto'`.
+当在 webpack 5 中使用旧的 assets loader（如 `file-loader`/`url-loader`/`raw-loader` 等）和 asset 模块时，你可能想停止当前 asset 模块的处理，并再次启动处理，这可能会导致 asset 重复，你可以通过将 asset 模块的类型设置为 `'javascript/auto'` 来解决。
 
 __webpack.config.js__
 
@@ -54,7 +51,7 @@ module.exports = {
 }
 ```
 
-To exclude assets that came from new URL calls from the asset loaders add `dependency: { not: ['url'] }` to the loader configuration.
+如需从 asset loader 中排除来自新 URL 处理的 asset，请添加 `dependency: { not: ['url'] }` 到 loader 配置中。
 
 __webpack.config.js__
 
@@ -79,8 +76,7 @@ module.exports = {
 }
 ```
 
-## Resource assets
->>>>>>> 0f751edcec1a5a85990b784dda1dd39c9e17a85c
+## Resource 资源 {#resource-assets}
 
 __webpack.config.js__
 

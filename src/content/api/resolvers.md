@@ -39,12 +39,7 @@ compiler.resolverFactory.hooks.resolver.for('[type]').tap('name', resolver => {
 
 其中，`[type]` 是上述三个解析器之一。
 
-<<<<<<< HEAD
-请参阅 [`enhanced-resolve` documentation](https://github.com/webpack/enhanced-resolve) 以获得钩子的完整列表以及它们的
-介绍。
-=======
-See the [`enhanced-resolve` documentation](https://github.com/webpack/enhanced-resolve) for a full list of hooks and their description.
->>>>>>> 0f751edcec1a5a85990b784dda1dd39c9e17a85c
+请参阅 [`enhanced-resolve` documentation](https://github.com/webpack/enhanced-resolve) 以获得钩子的完整列表以及它们的介绍。
 
 
 ## 配置选项 {#configuration-options}
