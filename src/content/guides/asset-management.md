@@ -834,6 +834,11 @@ __src/index.js__
  document.body.appendChild(component());
 ```
 
+And remove those dependencies we added before:
+
+```bash
+npm rm csv-loader xml-loader toml yamljs json5
+```
 
 ## Next guide
 
