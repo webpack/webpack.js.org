@@ -301,3 +301,11 @@ Also, you can pass multiple options to Node.js process
 ```bash
 NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 ```
+
+## Exit codes and their meanings
+
+| Exit Code | Description                                        |
+| --------- | -------------------------------------------------- |
+| `0`       | Success                                            |
+| `1`       | Errors from webpack                                |
+| `2`       | Configuration/options problem or an internal error |
