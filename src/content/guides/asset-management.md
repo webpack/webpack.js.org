@@ -324,8 +324,8 @@ __project__
     |- bundle.js
     |- index.html
   |- /src
-+   |- my-fonts.woff
-+   |- my-fonts.woff2
++   |- my-font.woff
++   |- my-font.woff2
     |- icon.png
     |- style.css
     |- index.js
