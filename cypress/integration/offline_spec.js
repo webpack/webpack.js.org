@@ -56,9 +56,6 @@ describe('offline', () => {
       cy.visit(url);
       cy.get('h1').contains(text);
 
-      // service worker needs some time to cache
-      cy.wait(200);
-
       // has a bug https://github.com/cypress-io/cypress/issues/4742
       cy.window().then((win) => {
         win.caches.keys().then((cacheNames) => {
