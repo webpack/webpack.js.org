@@ -87,14 +87,14 @@ if ('false') { // <-- 'false' from DEBUG is taken
 The following `EnvironmentPlugin` configuration provides `process.env.GIT_VERSION` (such as "v5.4.0-2-g25139f57f") and `process.env.GIT_AUTHOR_DATE` (such as "2020-11-04T12:25:16+01:00") corresponding to the last Git commit of the repository:
 
 ```javascript
-const child_process = require("child_process");
+const child_process = require('child_process');
 function git(command) {
-  return child_process.execSync(`git ${command}`, { encoding: "utf8" }).trim();
+  return child_process.execSync(`git ${command}`, { encoding: 'utf8' }).trim();
 }
 
 new webpack.EnvironmentPlugin({
-  GIT_VERSION: git("describe --always"),
-  GIT_AUTHOR_DATE: git("log -1 --format=%aI"),
+  GIT_VERSION: git('describe --always'),
+  GIT_AUTHOR_DATE: git('log -1 --format=%aI'),
 });
 ```
 
