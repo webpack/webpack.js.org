@@ -744,7 +744,7 @@ These options assign the return value of the entry point (e.g. whatever the entr
 If `output.library` is not assigned a non-empty string, the default behavior is that all properties returned by the entry point will be assigned to the object as defined for the particular `output.libraryTarget`, via the following code fragment:
 
 ```javascript
-(function(e, a) { for(var i in a) { e[i] = a[i]; } }(output.libraryTarget, _entry_return_));
+(function(e, a) { Object.assign(e, a); } }(output.libraryTarget, _entry_return_));
 ```
 
 W> Note that not setting a `output.library` will cause all properties returned by the entry point to be assigned to the given object; there are no checks against existing property names.
