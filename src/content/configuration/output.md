@@ -903,10 +903,10 @@ The output will be:
     module.exports = factory();
   else if(typeof define === 'function' && define.amd)
     define([], factory);
-  else {
-    var a = factory();
-    for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-  }
+  else if(typeof exports === 'object')
+    Object.assign(exports, factory());
+  else
+    Object.assign(root, factory());
 })(typeof self !== 'undefined' ? self : this, function() {
   return _entry_return_;
 });
