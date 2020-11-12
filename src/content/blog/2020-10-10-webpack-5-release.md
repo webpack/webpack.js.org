@@ -167,7 +167,7 @@ __MIGRATION__: Use the default export.
 
 Even when using the default export, unused properties are dropped by the `optimization.usedExports` optimization and properties are mangled by the `optimization.mangleExports` optimization.
 
-It's possible to specify a custom JSON parser in `Rule.parser.parse` to import JSON-like files (e. g. for toml, yaml, json5, etc.).
+It's possible to specify a custom JSON parser in `Rule.parser.parse` to import JSON-like files (e.g. for toml, yaml, json5, etc.).
 
 ### import.meta
 
@@ -474,7 +474,7 @@ The `target` option now influences more things about the generated code than bef
 - Some loaders might change behavior based on that
 
 For some of these things the choice between `"web"` and `"node"` is too rough and we need more information.
-Therefore we allow to specify the minimum version e. g. like `"node10.13"` and infer more properties about the target environment.
+Therefore we allow to specify the minimum version e.g. like `"node10.13"` and infer more properties about the target environment.
 
 It's now also allowed to combined multiple targets with an array and webpack will determine the minimum properties of all targets. Using an array is also useful when using targets that doesn't give full information like `"web"` or `"node"` (without version number). E. g. `["web", "es2020"]` combines these two partial targets.
 
@@ -734,7 +734,7 @@ __MIGRATION__: Upgrade to the latest Node.js version available.
 - `stats.chunkRelations` added: Show parent/children/sibling chunks
 - `stats.errorStack` added: Show webpack-internal stack trace of errors
 - `stats.preset` added: select a preset
-- `stats.relatedAssets` added: show assets that are related to other assets (e. g. SourceMaps)
+- `stats.relatedAssets` added: show assets that are related to other assets (e.g. SourceMaps)
 - `stats.warningsFilter` deprecated in favor of `ignoreWarnings`
 - `BannerPlugin.banner` signature changed
     - `data.basename` removed
@@ -802,7 +802,7 @@ __MIGRATION__: This can be implemented in the loader itself
 
 `getResolve(options)` in the loader API will merge options in a different way, see `module.rules` `resolve`.
 
-As webpack 5 differs between different issuing dependencies so it might make sense to pass a `dependencyType` as option (e. g. `"esm"`, `"commonjs"`, or others).
+As webpack 5 differs between different issuing dependencies so it might make sense to pass a `dependencyType` as option (e.g. `"esm"`, `"commonjs"`, or others).
 
 ## Major Internal Changes
 
