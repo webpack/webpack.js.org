@@ -274,7 +274,7 @@ __package.json__
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "watch": "webpack --watch",
-+     "start": "webpack serve --open",
++     "start": "webpack serve",
       "build": "webpack"
     },
     "keywords": [],
@@ -295,7 +295,7 @@ __package.json__
   }
 ```
 
-Now we can run `npm start` from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!
+Now we can run `npm start --` from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!
 
 The `webpack-dev-server` comes with many configurable options. Head over to the [documentation](/configuration/dev-server) to learn more.
 
