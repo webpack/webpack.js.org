@@ -36,6 +36,7 @@
     "fetch:readmes": "node src/utilities/fetch-package-readmes.js",
     "fetch:supporters": "node src/utilities/fetch-supporters.js",
     "fetch:starter-kits": "node src/utilities/fetch-starter-kits.js",
+    "postinstall": "npm run fetch",
     "prebuild": "npm run clean",
     "build": "run-s fetch-repos fetch printable content && cross-env NODE_ENV=production webpack --config webpack.ssg.js && run-s clean-printable content && cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "postbuild": "npm run sitemap",
