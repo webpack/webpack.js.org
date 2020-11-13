@@ -108,7 +108,7 @@ const myLib = require(`imports-loader?type=commonjs&imports[]=single|jquery|$&im
 ```
 
 ```js
-const myLib = require(`imports-loader?type=commonjs&imports=single|myLib|myMethod&&wrapper=window&!./example.js`);
+const myLib = require(`imports-loader?type=commonjs&imports=single|myLib|myMethod&wrapper=window&!./example.js`);
 // `|` is separator in a query string, equivalently `single|myLib|myMethod` and `angular`
 // Adds the following code to the example.js:
 //

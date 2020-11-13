@@ -41,7 +41,7 @@ Then add the loader to your Webpack configuration. For example:
 **app.js**
 
 ```js
-import './style.scss';
+import "./style.scss";
 ```
 
 **style.scss**
@@ -64,11 +64,11 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
-          'style-loader',
+          "style-loader",
           // Translates CSS into CommonJS
-          'css-loader',
+          "css-loader",
           // Compiles Sass to CSS
-          'sass-loader',
+          "sass-loader",
         ],
       },
     ],
@@ -85,7 +85,7 @@ Webpack provides an [advanced mechanism to resolve files](/concepts/module-resol
 The `sass-loader` uses Sass's custom importer feature to pass all queries to the Webpack resolving engine. Thus you can import your Sass modules from `node_modules`. Just prepend them with a `~` to tell Webpack that this is not a relative import:
 
 ```scss
-@import '~bootstrap';
+@import "~bootstrap";
 ```
 
 It's important to only prepend it with `~`, because `~/` resolves to the home directory.
@@ -166,13 +166,13 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
               // Prefer `dart-sass`
-              implementation: require('sass'),
+              implementation: require("sass"),
             },
           },
         ],
@@ -210,12 +210,12 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
-              implementation: require('sass'),
+              implementation: require("sass"),
               sassOptions: {
                 fiber: false,
               },
@@ -239,14 +239,14 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
-              implementation: require('sass'),
+              implementation: require("sass"),
               sassOptions: {
-                fiber: require('fibers'),
+                fiber: require("fibers"),
               },
             },
           },
@@ -292,14 +292,14 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
               sassOptions: {
                 indentWidth: 4,
-                includePaths: ['absolute/path/a', 'absolute/path/b'],
+                includePaths: ["absolute/path/a", "absolute/path/b"],
               },
             },
           },
@@ -321,24 +321,24 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
               sassOptions: (loaderContext) => {
                 // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
-                if (relativePath === 'styles/foo.scss') {
+                if (relativePath === "styles/foo.scss") {
                   return {
-                    includePaths: ['absolute/path/c', 'absolute/path/d'],
+                    includePaths: ["absolute/path/c", "absolute/path/d"],
                   };
                 }
 
                 return {
-                  includePaths: ['absolute/path/a', 'absolute/path/b'],
+                  includePaths: ["absolute/path/a", "absolute/path/b"],
                 };
               },
             },
@@ -371,15 +371,15 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
               sourceMap: true,
             },
@@ -404,14 +404,14 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
               sourceMap: true,
               sassOptions: {
-                outputStyle: 'compressed',
+                outputStyle: "compressed",
               },
             },
           },
@@ -441,12 +441,12 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
-              additionalData: '$env: ' + process.env.NODE_ENV + ';',
+              additionalData: "$env: " + process.env.NODE_ENV + ";",
             },
           },
         ],
@@ -458,6 +458,8 @@ module.exports = {
 
 #### `Function`
 
+##### Sync
+
 ```js
 module.exports = {
   module: {
@@ -465,21 +467,55 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
               additionalData: (content, loaderContext) => {
                 // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
-                if (relativePath === 'styles/foo.scss') {
-                  return '$value: 100px;' + content;
+                if (relativePath === "styles/foo.scss") {
+                  return "$value: 100px;" + content;
                 }
 
-                return '$value: 200px;' + content;
+                return "$value: 200px;" + content;
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+##### Async
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              additionalData: async (content, loaderContext) => {
+                // More information about available properties https://webpack.js.org/api/loaders/
+                const { resourcePath, rootContext } = loaderContext;
+                const relativePath = path.relative(rootContext, resourcePath);
+
+                if (relativePath === "styles/foo.scss") {
+                  return "$value: 100px;" + content;
+                }
+
+                return "$value: 200px;" + content;
               },
             },
           },
@@ -509,10 +545,10 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
               webpackImporter: false,
             },
@@ -538,7 +574,7 @@ There are two possibilities to extract a style sheet from the bundle:
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   module: {
@@ -547,11 +583,11 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           // fallback to style-loader in development
-          process.env.NODE_ENV !== 'production'
-            ? 'style-loader'
+          process.env.NODE_ENV !== "production"
+            ? "style-loader"
             : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader',
+          "css-loader",
+          "sass-loader",
         ],
       },
     ],
@@ -560,8 +596,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: "[name].css",
+      chunkFilename: "[id].css",
     }),
   ],
 };
@@ -577,21 +613,21 @@ To enable CSS source maps, you'll need to pass the `sourceMap` option to the `sa
 
 ```javascript
 module.exports = {
-  devtool: 'source-map', // any "source-map"-like devtool is possible
+  devtool: "source-map", // any "source-map"-like devtool is possible
   module: {
     rules: [
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
               sourceMap: true,
             },

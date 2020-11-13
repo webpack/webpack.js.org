@@ -36,7 +36,7 @@ module.exports = {
     rules: [
       {
         test: /\.less$/,
-        loader: 'less-loader', // compiles Less to CSS
+        loader: "less-loader", // compiles Less to CSS
       },
     ],
   },
@@ -75,13 +75,13 @@ module.exports = {
         test: /\.less$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
           },
           {
-            loader: 'less-loader',
+            loader: "less-loader",
             options: {
               lessOptions: {
                 strictMath: true,
@@ -106,24 +106,24 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'less-loader',
+            loader: "less-loader",
             options: {
               lessOptions: (loaderContext) => {
                 // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
-                if (relativePath === 'styles/foo.less') {
+                if (relativePath === "styles/foo.less") {
                   return {
-                    paths: ['absolute/path/c', 'absolute/path/d'],
+                    paths: ["absolute/path/c", "absolute/path/d"],
                   };
                 }
 
                 return {
-                  paths: ['absolute/path/a', 'absolute/path/b'],
+                  paths: ["absolute/path/a", "absolute/path/b"],
                 };
               },
             },
@@ -156,10 +156,10 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'less-loader',
+            loader: "less-loader",
             options: {
               additionalData: `@env: ${process.env.NODE_ENV};`,
             },
@@ -173,6 +173,8 @@ module.exports = {
 
 #### `Function`
 
+##### Sync
+
 ```js
 module.exports = {
   module: {
@@ -180,21 +182,55 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'less-loader',
+            loader: "less-loader",
             options: {
               additionalData: (content, loaderContext) => {
                 // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
-                if (relativePath === 'styles/foo.less') {
-                  return '@value: 100px;' + content;
+                if (relativePath === "styles/foo.less") {
+                  return "@value: 100px;" + content;
                 }
 
-                return '@value: 200px;' + content;
+                return "@value: 200px;" + content;
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+##### Async
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.less$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              additionalData: async (content, loaderContext) => {
+                // More information about available properties https://webpack.js.org/api/loaders/
+                const { resourcePath, rootContext } = loaderContext;
+                const relativePath = path.relative(rootContext, resourcePath);
+
+                if (relativePath === "styles/foo.less") {
+                  return "@value: 100px;" + content;
+                }
+
+                return "@value: 200px;" + content;
               },
             },
           },
@@ -221,15 +257,15 @@ module.exports = {
       {
         test: /\.less$/i,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: 'less-loader',
+            loader: "less-loader",
             options: {
               sourceMap: true,
             },
@@ -259,10 +295,10 @@ module.exports = {
       {
         test: /\.less$/i,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'less-loader',
+            loader: "less-loader",
             options: {
               webpackImporter: false,
             },
@@ -290,13 +326,13 @@ module.exports = {
         test: /\.less$/,
         use: [
           {
-            loader: 'style-loader', // creates style nodes from JS strings
+            loader: "style-loader", // creates style nodes from JS strings
           },
           {
-            loader: 'css-loader', // translates CSS into CommonJS
+            loader: "css-loader", // translates CSS into CommonJS
           },
           {
-            loader: 'less-loader', // compiles Less to CSS
+            loader: "less-loader", // compiles Less to CSS
           },
         ],
       },
@@ -315,21 +351,21 @@ To enable sourcemaps for CSS, you'll need to pass the `sourceMap` property in th
 
 ```javascript
 module.exports = {
-  devtool: 'source-map', // any "source-map"-like devtool is possible
+  devtool: "source-map", // any "source-map"-like devtool is possible
   module: {
     rules: [
       {
         test: /\.less$/,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: 'less-loader',
+            loader: "less-loader",
             options: {
               sourceMap: true,
             },
@@ -356,7 +392,7 @@ Starting with `less-loader` 4, you can now choose between Less' builtin resolver
 webpack provides an [advanced mechanism to resolve files](/configuration/resolve/). The `less-loader` applies a Less plugin that passes all queries to the webpack resolver. Thus you can import your Less modules from `node_modules`. Just prepend them with a `~` which tells webpack to look up the [`modules`](/configuration/resolve/#resolvemodules).
 
 ```css
-@import '~bootstrap/less/bootstrap';
+@import "~bootstrap/less/bootstrap";
 ```
 
 It's important to only prepend it with `~`, because `~/` resolves to the home-directory. webpack needs to distinguish between `bootstrap` and `~bootstrap`, because CSS and Less files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
@@ -375,16 +411,16 @@ module.exports = {
         test: /\.less$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
           },
           {
-            loader: 'less-loader',
+            loader: "less-loader",
             options: {
               lessOptions: {
-                paths: [path.resolve(__dirname, 'node_modules')],
+                paths: [path.resolve(__dirname, "node_modules")],
               },
             },
           },
@@ -424,7 +460,7 @@ module.exports = {
 ```js
 module.exports = {
   install: function (less, pluginManager, functions) {
-    functions.add('pi', function () {
+    functions.add("pi", function () {
       // Loader context is available in `less.webpackLoaderContext`
 
       return Math.PI;
