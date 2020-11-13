@@ -2,6 +2,8 @@ name: Lint and Test
 
 on:
   push:
+    branches-ignore:
+      - master # don't run this action against master branch
   pull_request:
 
 jobs:
