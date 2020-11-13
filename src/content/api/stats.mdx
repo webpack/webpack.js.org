@@ -81,7 +81,9 @@ Each `assets` object represents an `output` file emitted from the compilation. T
     'immutable': true, // A flag telling whether the asset can be long term cached (contains a hash)
     'size': 1058, // The size in bytes, only becomes available after asset has been emitted
     'development': true, // A flag telling whether the asset is only used for development and doesn't count towards user-facing assets
-    'hotModuleReplacement': true // A flag telling whether the asset ships data for updating an existing application (HMR)
+    'hotModuleReplacement': true, // A flag telling whether the asset ships data for updating an existing application (HMR)
+    'sourceFilename': 'originalfile.js', // sourceFilename when asset was created from a source file (potentially transformed)
+    'javascriptModule': true // true, when asset is javascript and an ESM
   }
 }
 ```
