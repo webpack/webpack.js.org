@@ -33,7 +33,7 @@ $ npm install terser-webpack-plugin --save-dev
 **webpack.config.js**
 
 ```js
-const TerserPlugin = require('terser-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   optimization: {
@@ -204,7 +204,7 @@ module.exports = {
 
           // Custom logic for extract comments
 
-          const { map, code } = require('uglify-module') // Or require('./path/to/uglify-module')
+          const { map, code } = require("uglify-module") // Or require('./path/to/uglify-module')
             .minify(file, {
               /* Your options for minification */
             });
@@ -295,7 +295,7 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        extractComments: 'all',
+        extractComments: "all",
       }),
     ],
   },
@@ -389,7 +389,7 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         extractComments: {
-          condition: 'some',
+          condition: "some",
           filename: (fileData) => {
             // The "fileData" argument contains object with "filename", "basename", "query" and "hash"
             return `${fileData.filename}.LICENSE.txt${fileData.query}`;
@@ -427,7 +427,7 @@ module.exports = {
       new TerserPlugin({
         extractComments: {
           condition: /^\**!|@preserve|@license|@cc_on/i,
-          filename: 'extracted-comments.js',
+          filename: "extracted-comments.js",
           banner: (licenseFile) => {
             return `License information can be found in ${licenseFile}`;
           },
@@ -545,7 +545,7 @@ module.exports = {
             };
           }
 
-          return require('uglify-js').minify(file, uglifyJsOptions);
+          return require("uglify-js").minify(file, uglifyJsOptions);
         },
       }),
     ],

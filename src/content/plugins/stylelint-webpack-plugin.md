@@ -67,7 +67,7 @@ A string indicating the root of your files.
 ### `files` {#files}
 
 - Type: `String|Array[String]`
-- Default: `'**/*.s?(a|c)ss'`
+- Default: `'**/*.(s(c|a)ss|css)'`
 
 Specify the glob pattern for finding files. Must be relative to `options.context`.
 

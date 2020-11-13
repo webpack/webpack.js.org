@@ -36,7 +36,7 @@ module.exports = {
     rules: [
       {
         test: /\.styl$/,
-        loader: 'stylus-loader', // compiles Styl to CSS
+        loader: "stylus-loader", // compiles Styl to CSS
       },
     ],
   },
@@ -77,13 +77,13 @@ module.exports = {
         test: /\.styl$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
           },
           {
-            loader: 'stylus-loader',
+            loader: "stylus-loader",
             options: {
               stylusOptions: {
                 /**
@@ -93,7 +93,7 @@ module.exports = {
                  * @type {(string|Function)[]}
                  * @default []
                  */
-                use: ['nib'],
+                use: ["nib"],
 
                 /**
                  * Add path(s) to the import lookup paths.
@@ -101,7 +101,7 @@ module.exports = {
                  * @type {string[]}
                  * @default []
                  */
-                include: [path.join(__dirname, 'src/styl/config')],
+                include: [path.join(__dirname, "src/styl/config")],
 
                 /**
                  * Import the specified Stylus files/paths.
@@ -109,7 +109,7 @@ module.exports = {
                  * @type {string[]}
                  * @default []
                  */
-                import: ['nib', path.join(__dirname, 'src/styl/mixins')],
+                import: ["nib", path.join(__dirname, "src/styl/mixins")],
 
                 /**
                  * Define Stylus variables or functions.
@@ -119,8 +119,8 @@ module.exports = {
                  */
                 // Array is the recommended syntax: [key, value, raw]
                 define: [
-                  ['$development', process.env.NODE_ENV === 'development'],
-                  ['rawVar', 42, true],
+                  ["$development", process.env.NODE_ENV === "development"],
+                  ["rawVar", 42, true],
                 ],
                 // Object is deprecated syntax (there is no possibility to specify "raw')
                 // define: {
@@ -198,24 +198,24 @@ module.exports = {
       {
         test: /\.styl/,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'stylus-loader',
+            loader: "stylus-loader",
             options: {
               stylusOptions: (loaderContext) => {
                 // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
-                if (relativePath === 'styles/foo.styl') {
+                if (relativePath === "styles/foo.styl") {
                   return {
-                    paths: ['absolute/path/c', 'absolute/path/d'],
+                    paths: ["absolute/path/c", "absolute/path/d"],
                   };
                 }
 
                 return {
-                  paths: ['absolute/path/a', 'absolute/path/b'],
+                  paths: ["absolute/path/a", "absolute/path/b"],
                 };
               },
             },
@@ -240,15 +240,15 @@ module.exports = {
       {
         test: /\.styl$/i,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: 'stylus-loader',
+            loader: "stylus-loader",
             options: {
               sourceMap: true,
             },
@@ -279,10 +279,10 @@ module.exports = {
       {
         test: /\.styl/i,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'stylus-loader',
+            loader: "stylus-loader",
             options: {
               webpackImporter: false,
             },
@@ -315,10 +315,10 @@ module.exports = {
       {
         test: /\.styl/,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'stylus-loader',
+            loader: "stylus-loader",
             options: {
               additionalData: `@env: ${process.env.NODE_ENV};`,
             },
@@ -332,6 +332,8 @@ module.exports = {
 
 #### `Function`
 
+##### Sync
+
 ```js
 module.exports = {
   module: {
@@ -339,21 +341,55 @@ module.exports = {
       {
         test: /\.styl/,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'stylus-loader',
+            loader: "stylus-loader",
             options: {
               additionalData: (content, loaderContext) => {
                 // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
-                if (relativePath === 'styles/foo.styl') {
-                  return 'value = 100px' + content;
+                if (relativePath === "styles/foo.styl") {
+                  return "value = 100px" + content;
                 }
 
-                return 'value 200px' + content;
+                return "value 200px" + content;
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+##### Async
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.styl/,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "stylus-loader",
+            options: {
+              additionalData: async (content, loaderContext) => {
+                // More information about available properties https://webpack.js.org/api/loaders/
+                const { resourcePath, rootContext } = loaderContext;
+                const relativePath = path.relative(rootContext, resourcePath);
+
+                if (relativePath === "styles/foo.styl") {
+                  return "value = 100px" + content;
+                }
+
+                return "value 200px" + content;
               },
             },
           },
@@ -380,13 +416,13 @@ module.exports = {
         test: /\.styl$/,
         use: [
           {
-            loader: 'style-loader', // creates style nodes from JS strings
+            loader: "style-loader", // creates style nodes from JS strings
           },
           {
-            loader: 'css-loader', // translates CSS into CommonJS
+            loader: "css-loader", // translates CSS into CommonJS
           },
           {
-            loader: 'stylus-loader', // compiles Stylus to CSS
+            loader: "stylus-loader", // compiles Stylus to CSS
           },
         ],
       },
@@ -403,21 +439,21 @@ To enable sourcemaps for CSS, you'll need to pass the `sourceMap` property in th
 
 ```javascript
 module.exports = {
-  devtool: 'source-map', // any "source-map"-like devtool is possible
+  devtool: "source-map", // any "source-map"-like devtool is possible
   module: {
     rules: [
       {
         test: /\.styl$/,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: 'stylus-loader',
+            loader: "stylus-loader",
             options: {
               sourceMap: true,
             },
@@ -441,17 +477,17 @@ module.exports = {
         test: /\.styl$/,
         use: [
           {
-            loader: 'style-loader', // creates style nodes from JS strings
+            loader: "style-loader", // creates style nodes from JS strings
           },
           {
-            loader: 'css-loader', // translates CSS into CommonJS
+            loader: "css-loader", // translates CSS into CommonJS
           },
           {
-            loader: 'stylus-loader', // compiles Stylus to CSS
+            loader: "stylus-loader", // compiles Stylus to CSS
             options: {
               stylusOptions: {
-                use: [require('nib')()],
-                import: ['nib'],
+                use: [require("nib")()],
+                import: ["nib"],
               },
             },
           },
@@ -489,14 +525,14 @@ module.exports = {
       {
         test: /\.styl$/,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'stylus-loader',
+            loader: "stylus-loader",
             options: {
               stylusOptions: {
                 // Specify the path. where to find files
-                paths: ['node_modules/vars'],
+                paths: ["node_modules/vars"],
               },
             },
           },
@@ -541,16 +577,16 @@ module.exports = {
         test: /\.styl/,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
           },
           {
-            loader: 'stylus-loader',
+            loader: "stylus-loader",
             options: {
               stylusOptions: {
-                paths: [path.resolve(__dirname, 'node_modules')],
+                paths: [path.resolve(__dirname, "node_modules")],
               },
             },
           },
