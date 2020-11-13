@@ -27,7 +27,7 @@ for(const additional of Additional) {
 SUPPORTERS.sort((a, b) => b.totalDonations - a.totalDonations);
 
 // Define ranks
-const ranks = {
+const totalRanks = {
   backer: {
     maximum: 200,
     random: 100
@@ -52,6 +52,31 @@ const ranks = {
     minimum: 50000
   }
 };
+const monthlyRanks = {
+  backer: {
+    maximum: 10,
+    random: 100
+  },
+  latest: {
+    maxAge: 14 * 24 * 60 * 60 * 1000,
+    limit: 10
+  },
+  bronze: {
+    minimum: 10,
+    maximum: 100
+  },
+  silver: {
+    minimum: 100,
+    maximum: 500
+  },
+  gold: {
+    minimum: 500,
+    maximum: 2500
+  },
+  platinum: {
+    minimum: 2500
+  }
+};
 
 function formatMoney(number) {
   let str = Math.round(number) + '';
@@ -68,19 +93,22 @@ export default class Support extends React.Component {
   }
 
   handleInView = (inView) => {
-    if (!inView) {
+    if (!inView || this.state.inView) {
       return;
     }
     this.setState({ inView });
   };
 
   render() {
-    let { rank } = this.props;
+    let { rank, type } = this.props;
 
     const { inView } = this.state;
 
     let supporters = SUPPORTERS;
     let minimum, maximum, maxAge, limit, random;
+
+    const ranks = type === 'monthly' ? monthlyRanks : totalRanks;
+    const getAmount = type === 'monthly' ? item => item.monthlyDonations : item => item.totalDonations;
 
     if (rank && ranks[rank]) {
       minimum = ranks[rank].minimum;
@@ -91,11 +119,11 @@ export default class Support extends React.Component {
     }
 
     if (typeof minimum === 'number') {
-      supporters = supporters.filter(item => item.totalDonations >= minimum * 100);
+      supporters = supporters.filter(item => getAmount(item) >= minimum * 100);
     }
 
     if (typeof maximum === 'number') {
-      supporters = supporters.filter(item => item.totalDonations < maximum * 100);
+      supporters = supporters.filter(item => getAmount(item) < maximum * 100);
     }
 
     if (typeof maxAge === 'number') {
@@ -116,12 +144,13 @@ export default class Support extends React.Component {
         supporters[i] = temp;
       }
       supporters = supporters.slice(0, random);
-
-      // resort to keep order
-      supporters.sort((a, b) => b.totalDonations - a.totalDonations);
     }
 
-    return (
+    // resort to keep order
+    supporters.sort((a, b) => getAmount(b) - getAmount(a));
+
+    return <>
+      <h2>{ rank === 'backer' ? 'Backers' : rank === 'latest' ? 'Latest Sponsors' : `${rank[0].toUpperCase()}${rank.slice(1)} ${type === 'monthly' ? 'Monthly ' : ''}Sponsors`}</h2>
       <VisibilitySensor delayedCall
         partialVisibility
         intervalDelay={ 300 }
@@ -136,8 +165,12 @@ export default class Support extends React.Component {
               <p>The following persons/organizations made their first donation in the last {Math.round(maxAge / (1000 * 60 * 60 * 24))} days (limited to the top {limit}).</p>
             ) : (
               <p>
-                <b className="support__rank">{ rank } sponsors</b>
-                <span>are those who have pledged { minimum ? `$${formatMoney(minimum)}` : 'up' } { maximum ? `to $${formatMoney(maximum)}` : 'or more' } to webpack.</span>
+                <b className="support__rank">{ type === 'monthly' ? rank + ' monthly': rank } sponsors</b>
+                { type === 'monthly' ? (
+                  <span>are those who are currently pledging { minimum ? `$${formatMoney(minimum)}` : 'up' } { maximum ? `to $${formatMoney(maximum)}` : 'or more' } monthly to webpack.</span>
+                ) : (
+                  <span>are those who have pledged { minimum ? `$${formatMoney(minimum)}` : 'up' } { maximum ? `to $${formatMoney(maximum)}` : 'or more' } to webpack.</span>
+                ) }
               </p>
             )}
           </div>
@@ -146,7 +179,7 @@ export default class Support extends React.Component {
             supporters.map((supporter, index) => (
               <a key={ supporter.slug || index }
                 className="support__item"
-                title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.slug}` }
+                title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.slug} ($${formatMoney(supporter.monthlyDonations / 100)} monthly)` }
                 target="_blank"
                 rel="noopener nofollow"
                 href={ supporter.website || `https://opencollective.com/${supporter.slug}` }>
@@ -166,7 +199,7 @@ export default class Support extends React.Component {
           </div>
         </div>
       </VisibilitySensor>
-    );
+    </>;
   }
 
   /**
@@ -176,6 +209,7 @@ export default class Support extends React.Component {
    */
   _handleImgError(e) {
     const imgNode = e.target;
-    imgNode.src = SmallIcon;
+    if (imgNode.getAttribute('src') === SmallIcon) return;
+    imgNode.setAttribute('src', SmallIcon);
   }
 }

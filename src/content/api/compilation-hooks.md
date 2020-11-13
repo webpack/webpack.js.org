@@ -273,6 +273,15 @@ Executed before assigning an `id` to each chunk.
 - Callback Parameters: `chunks`
 
 
+### `chunkIds`
+
+`SyncHook`
+
+Called to assign an `id` to each chunk.
+
+- Callback Parameters: `chunks`
+
+
 ### `optimizeChunkIds`
 
 `SyncHook`
