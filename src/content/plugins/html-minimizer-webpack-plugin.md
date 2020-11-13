@@ -31,8 +31,8 @@ Then add the plugin to your `webpack` configuration. For example:
 **webpack.config.js**
 
 ```js
-const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const HtmlMinimizerPlugin = require("html-minimizer-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   module: {
@@ -41,9 +41,9 @@ module.exports = {
         test: /\.html$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
-              name: '[name].[ext]',
+              name: "[name].[ext]",
             },
           },
         ],
@@ -54,8 +54,8 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          context: path.resolve(__dirname, 'dist'),
-          from: './src/*.html',
+          context: path.resolve(__dirname, "dist"),
+          from: "./src/*.html",
         },
       ],
     }),
@@ -141,98 +141,6 @@ module.exports = {
 };
 ```
 
-### `cache`
-
-> ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
-
-Type: `Boolean|String`
-Default: `true`
-
-Enable file caching.
-Default path to cache directory: `node_modules/.cache/html-minimizer-webpack-plugin`.
-
-> ℹ️ If you use your own `minify` function please read the `minify` section for cache invalidation correctly.
-
-#### `Boolean`
-
-Enable/disable file caching.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new HtmlMinimizerPlugin({
-        cache: true,
-      }),
-    ],
-  },
-};
-```
-
-#### `String`
-
-Enable file caching and set path to cache directory.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new HtmlMinimizerPlugin({
-        cache: 'path/to/cache',
-      }),
-    ],
-  },
-};
-```
-
-### `cacheKeys`
-
-> ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
-
-Type: `Function<(defaultCacheKeys, file) -> Object>`
-Default: `defaultCacheKeys => defaultCacheKeys`
-
-Allows you to override default cache keys.
-
-Default cache keys:
-
-```js
-({
-  htmlMinimizer: require('html-minifier-terser/package.json').version, // html-minifier-terser version
-  'html-minimizer-webpack-plugin': require('../package.json').version, // plugin version
-  'html-minimizer-webpack-plugin-options': this.options, // plugin options
-  nodeVersion: process.version, // Node.js version
-  assetName: file, // asset path
-  contentHash: crypto.createHash('md4').update(input).digest('hex'), // source file hash
-});
-```
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new HtmlMinimizerPlugin({
-        cache: true,
-        cacheKeys: (defaultCacheKeys, file) => {
-          defaultCacheKeys.myCacheKey = 'myCacheKeyValue';
-
-          return defaultCacheKeys;
-        },
-      }),
-    ],
-  },
-};
-```
-
 ### `parallel`
 
 Type: `Boolean|Number`
@@ -304,7 +212,7 @@ module.exports = {
           collapseWhitespace: true,
         },
         minify: (data, minimizerOptions) => {
-          const htmlMinifier = require('html-minifier-terser');
+          const htmlMinifier = require("html-minifier-terser");
           const [[filename, input]] = Object.entries(data);
 
           return htmlMinifier.minify(input, minimizerOptions);

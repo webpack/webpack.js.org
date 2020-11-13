@@ -31,7 +31,7 @@ Then add the plugin to your `webpack` config. For example:
 **webpack.config.js**
 
 ```js
-const CompressionPlugin = require('compression-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
   plugins: [new CompressionPlugin()],
@@ -52,7 +52,7 @@ And run `webpack` via your preferred method.
 |            **[`threshold`](#threshold)**            |                `{Number}`                 |                              `0`                              | Only assets bigger than this size are processed (in bytes)                                                    |
 |             **[`minRatio`](#minratio)**             |                `{Number}`                 |                             `0.8`                             | Only assets that compress better than this ratio are processed (`minRatio = Compressed Size / Original Size`) |
 |             **[`filename`](#filename)**             |           `{String\|Function}`            |                       `[path][base].gz`                       | The target asset filename                                                                                     |
-| **[`deleteOriginalAssets`](#deleteoriginalassets)** |                `{Boolean}`                |                            `false`                            | Whether to delete the original assets or not                                                                  |
+| **[`deleteOriginalAssets`](#deleteoriginalassets)** |      `{Boolean\|'keep-source-map'}`       |                            `false`                            | Whether to delete the original assets or not                                                                  |
 |                **[`cache`](#cache)**                |                `{Boolean}`                |                            `true`                             | Enable file caching                                                                                           |
 
 ### `test` {#test}
@@ -131,7 +131,7 @@ The algorithm is taken from [zlib](https://nodejs.org/api/zlib.html).
 module.exports = {
   plugins: [
     new CompressionPlugin({
-      algorithm: 'gzip',
+      algorithm: "gzip",
     }),
   ],
 };
@@ -261,7 +261,7 @@ For example we have `assets/images/image.png?foo=bar#hash`:
 module.exports = {
   plugins: [
     new CompressionPlugin({
-      filename: '[path][base].gz',
+      filename: "[path][base].gz",
     }),
   ],
 };
@@ -279,10 +279,10 @@ module.exports = {
         // The `pathData` argument contains all placeholders - `path`/`name`/`ext`/etc
         // Available properties described above, for the `String` notation
         if (/\.svg$/.test(pathData.file)) {
-          return 'assets/svg/[path][base].gz';
+          return "assets/svg/[path][base].gz";
         }
 
-        return 'assets/js/[path][base].gz';
+        return "assets/js/[path][base].gz";
       },
     }),
   ],
@@ -291,7 +291,7 @@ module.exports = {
 
 ### `deleteOriginalAssets` {#deleteoriginalassets}
 
-Type: `Boolean`
+Type: `Boolean | 'keep-source-map'`
 Default: `false`
 
 Whether to delete the original assets or not.
@@ -303,6 +303,19 @@ module.exports = {
   plugins: [
     new CompressionPlugin({
       deleteOriginalAssets: true,
+    }),
+  ],
+};
+```
+
+To exclude sourcemaps from compression
+
+```js
+module.exports = {
+  plugins: [
+    new CompressionPlugin({
+      exclude: /.map$/
+      deleteOriginalAssets: 'keep-source-map',
     }),
   ],
 };
@@ -344,7 +357,7 @@ Enable file caching and set path to cache directory.
 module.exports = {
   plugins: [
     new CompressionPlugin({
-      cache: 'path/to/cache',
+      cache: "path/to/cache",
     }),
   ],
 };
@@ -367,7 +380,7 @@ $ npm install @gfx/zopfli --save-dev
 **webpack.config.js**
 
 ```js
-const zopfli = require('@gfx/zopfli');
+const zopfli = require("@gfx/zopfli");
 
 module.exports = {
   plugins: [
@@ -394,13 +407,13 @@ We can take advantage of this built-in support for Brotli in Node 10.16.0 and la
 **webpack.config.js**
 
 ```js
-const zlib = require('zlib');
+const zlib = require("zlib");
 
 module.exports = {
   plugins: [
     new CompressionPlugin({
-      filename: '[path][base].br',
-      algorithm: 'brotliCompress',
+      filename: "[path][base].br",
+      algorithm: "brotliCompress",
       test: /\.(js|css|html|svg)$/,
       compressionOptions: {
         params: {
@@ -423,20 +436,20 @@ You can find all Brotli’s options in [the relevant part of the zlib module doc
 **webpack.config.js**
 
 ```js
-const zlib = require('zlib');
+const zlib = require("zlib");
 
 module.exports = {
   plugins: [
     new CompressionPlugin({
-      filename: '[path][base].gz',
-      algorithm: 'gzip',
+      filename: "[path][base].gz",
+      algorithm: "gzip",
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
       minRatio: 0.8,
     }),
     new CompressionPlugin({
-      filename: '[path][base].br',
-      algorithm: 'brotliCompress',
+      filename: "[path][base].br",
+      algorithm: "brotliCompress",
       test: /\.(js|css|html|svg)$/,
       compressionOptions: {
         params: {
