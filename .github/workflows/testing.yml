@@ -3,7 +3,7 @@ name: Ensure PR
 on:
   push:
     branches-ignore:
-      - master # don't run this action against master branch
+      - master
   pull_request:
 
 jobs:
