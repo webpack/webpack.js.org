@@ -63,21 +63,12 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-<<<<<<< HEAD
           // 将 JS 字符串生成为 style 节点
-          'style-loader',
-          // 将 CSS 转化成 CommonJS 模块
-          'css-loader',
-          // 将 Sass 编译成 CSS
-          'sass-loader',
-=======
-          // Creates `style` nodes from JS strings
           "style-loader",
-          // Translates CSS into CommonJS
+          // 将 CSS 转化成 CommonJS 模块
           "css-loader",
-          // Compiles Sass to CSS
+          // 将 Sass 编译成 CSS
           "sass-loader",
->>>>>>> 3317d089dff3dff623a7490fb1d26462b20ef252
         ],
       },
     ],
@@ -180,13 +171,8 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
-<<<<<<< HEAD
               // `dart-sass` 是首选
-              implementation: require('sass'),
-=======
-              // Prefer `dart-sass`
               implementation: require("sass"),
->>>>>>> 3317d089dff3dff623a7490fb1d26462b20ef252
             },
           },
         ],
@@ -596,15 +582,9 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-<<<<<<< HEAD
           // 在开发过程中回退到 style-loader
-          process.env.NODE_ENV !== 'production'
-            ? 'style-loader'
-=======
-          // fallback to style-loader in development
           process.env.NODE_ENV !== "production"
             ? "style-loader"
->>>>>>> 3317d089dff3dff623a7490fb1d26462b20ef252
             : MiniCssExtractPlugin.loader,
           "css-loader",
           "sass-loader",
@@ -614,17 +594,10 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-<<<<<<< HEAD
       // 与 webpackOptions.output 中的选项相似
       // 所有的选项都是可选的
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-=======
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
       filename: "[name].css",
       chunkFilename: "[id].css",
->>>>>>> 3317d089dff3dff623a7490fb1d26462b20ef252
     }),
   ],
 };
@@ -640,11 +613,7 @@ module.exports = {
 
 ```javascript
 module.exports = {
-<<<<<<< HEAD
-  devtool: 'source-map', // 任何类似于 "source-map" 的选项都是支持的
-=======
-  devtool: "source-map", // any "source-map"-like devtool is possible
->>>>>>> 3317d089dff3dff623a7490fb1d26462b20ef252
+  devtool: "source-map", // 任何类似于 "source-map" 的选项都是支持的
   module: {
     rules: [
       {

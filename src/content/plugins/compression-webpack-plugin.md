@@ -308,9 +308,6 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `cache` {#cache}
-=======
 To exclude sourcemaps from compression
 
 ```js
@@ -324,8 +321,7 @@ module.exports = {
 };
 ```
 
-### `cache`
->>>>>>> 3317d089dff3dff623a7490fb1d26462b20ef252
+### `cache` {#cache}
 
 > ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
 

@@ -36,11 +36,7 @@ module.exports = {
     rules: [
       {
         test: /\.less$/,
-<<<<<<< HEAD
-        loader: 'less-loader', // 将 Less 文件编译为 CSS 文件
-=======
-        loader: "less-loader", // compiles Less to CSS
->>>>>>> 3317d089dff3dff623a7490fb1d26462b20ef252
+        loader: "less-loader", // 将 Less 文件编译为 CSS 文件
       },
     ],
   },
@@ -330,23 +326,13 @@ module.exports = {
         test: /\.less$/,
         use: [
           {
-<<<<<<< HEAD
-            loader: 'style-loader', // 从 JS 中创建样式节点
+            loader: "style-loader", // 从 JS 中创建样式节点
           },
           {
-            loader: 'css-loader', // 转化 CSS 为 CommonJS
+            loader: "css-loader", // 转化 CSS 为 CommonJS
           },
           {
-            loader: 'less-loader', // 编译 Less 为 CSS
-=======
-            loader: "style-loader", // creates style nodes from JS strings
-          },
-          {
-            loader: "css-loader", // translates CSS into CommonJS
-          },
-          {
-            loader: "less-loader", // compiles Less to CSS
->>>>>>> 3317d089dff3dff623a7490fb1d26462b20ef252
+            loader: "less-loader", // 编译 Less 为 CSS
           },
         ],
       },
@@ -365,11 +351,7 @@ module.exports = {
 
 ```javascript
 module.exports = {
-<<<<<<< HEAD
-  devtool: 'source-map', // 任何类似于 "source-map" 的  devtool 值都可以
-=======
-  devtool: "source-map", // any "source-map"-like devtool is possible
->>>>>>> 3317d089dff3dff623a7490fb1d26462b20ef252
+  devtool: "source-map", // 任何类似于 "source-map" 的  devtool 值都可以
   module: {
     rules: [
       {
