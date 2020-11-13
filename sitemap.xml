@@ -187,13 +187,13 @@
         <loc>https://webpack.js.org/configuration/externals</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/configuration/mode</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/configuration/module</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/node</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/mode</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/optimization</loc>
@@ -226,10 +226,10 @@
         <loc>https://webpack.js.org/contribute/debugging</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/contribute/release-process</loc>
+        <loc>https://webpack.js.org/contribute/plugin-patterns</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/contribute/plugin-patterns</loc>
+        <loc>https://webpack.js.org/contribute/release-process</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/writers-guide</loc>
@@ -322,13 +322,13 @@
         <loc>https://webpack.js.org/guides/hot-module-replacement</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/installation</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/integrations</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/lazy-loading</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/installation</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/output-management</loc>
@@ -457,13 +457,13 @@
         <loc>https://webpack.js.org/migrate/5</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/NoEmitOnErrorsPlugin</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins/automatic-prefetch-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/banner-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/NoEmitOnErrorsPlugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/closure-webpack-plugin</loc>
@@ -586,6 +586,9 @@
         <loc>https://webpack.js.org/api/plugins/compiler</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/api/plugins/module-factories</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/api/plugins/parser</loc>
     </url>
     <url>
@@ -593,9 +596,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/tapable</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api/plugins/module-factories</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/template</loc>
