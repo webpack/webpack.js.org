@@ -60,52 +60,52 @@ __project__
 __webpack.common.js__
 
 ``` javascript
-  const path = require('path');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
- 
-  module.exports = {
-    entry: {
-      app: './src/index.js',
-    },
-    plugins: [
-      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(),
-      new HtmlWebpackPlugin({
-        title: 'Production',
-      }),
-    ],
-    output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-  };
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: {
+    app: './src/index.js',
+  },
+  plugins: [
+    // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'Production',
+    }),
+  ],
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
 ```
 
 __webpack.dev.js__
 
 ``` javascript
-  const { merge } = require('webpack-merge');
-  const common = require('./webpack.common.js');
- 
-  module.exports = merge(common, {
-    mode: 'development',
-    devtool: 'inline-source-map',
-    devServer: {
-      contentBase: './dist',
-    },
-  });
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
+
+module.exports = merge(common, {
+  mode: 'development',
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './dist',
+  },
+});
 ```
 
 __webpack.prod.js__
 
 ``` javascript
-  const { merge } = require('webpack-merge');
-  const common = require('./webpack.common.js');
- 
-  module.exports = merge(common, {
-    mode: 'production',
-  });
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
+
+module.exports = merge(common, {
+  mode: 'production',
+});
 ```
 
 In `webpack.common.js`, we now have setup our `entry` and `output` configuration and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've set `mode` to `development`. Also, we've added the recommended `devtool` for that environment (strong source mapping), as well as our simple `devServer` configuration. Finally, in `webpack.prod.js`,`mode` is set to `production` which loads [`TerserPlugin`](/plugins/terser-webpack-plugin/), which was first introduced by the [tree shaking](/guides/tree-shaking/) guide.
@@ -159,12 +159,12 @@ Many libraries will key off the `process.env.NODE_ENV` variable to determine wha
 __webpack.prod.js__
 
 ``` javascript
-  const { merge } = require('webpack-merge');
-  const common = require('./webpack.common.js');
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
 
-  module.exports = merge(common, {
-    mode: 'production',
-  });
+module.exports = merge(common, {
+  mode: 'production',
+});
 ```
 
 T> Technically, `NODE_ENV` is a system environment variable that Node.js exposes into running scripts. It is used by convention to determine dev-vs-prod behavior by server tools, build scripts, and client-side libraries. Contrary to expectations, `process.env.NODE_ENV` is not set to `'production'` __within__ the build script `webpack.config.js`, see [#2537](https://github.com/webpack/webpack/issues/2537). Thus, conditionals like `process.env.NODE_ENV === 'production' ? '[name].[contenthash].bundle.js' : '[name].bundle.js'` within webpack configurations do not work as expected.
