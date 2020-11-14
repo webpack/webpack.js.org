@@ -13,3 +13,4 @@ internal-links.tap
 stats.json
 printable.md
 repositories/*.json
+/.vs
