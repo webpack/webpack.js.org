@@ -81,7 +81,7 @@ In addition to the module format, flagging modules as ESM also affect the resolv
 
 Imports in ESM are resolved more stictly. Relative requests must include a filename and file extension.
 
-T> Requests to packages e. g. `import "lodash"` are still supported.
+T> Requests to packages e.g. `import "lodash"` are still supported.
 
 Only the "default" export can be imported from non-ESM. Named exports are not available.
 

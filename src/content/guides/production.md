@@ -125,8 +125,8 @@ __package.json__
     "description": "",
     "main": "src/index.js",
     "scripts": {
--     "start": "webpack-dev-server --open",
-+     "start": "webpack-dev-server --open --config webpack.dev.js",
+-     "start": "webpack serve --open",
++     "start": "webpack serve --open --config webpack.dev.js",
 -     "build": "webpack"
 +     "build": "webpack --config webpack.prod.js"
     },
