@@ -202,7 +202,7 @@ cacheable modules 530 KiB
 webpack 5.4.0 compiled successfully in 249 ms
 ```
 
-As you can see there's anther `runtime.bundle.js` file generated besides `shared.bundle.js`, `index.bundle.js` and `another.bundle.js`.
+As you can see there's another `runtime.bundle.js` file generated besides `shared.bundle.js`, `index.bundle.js` and `another.bundle.js`.
 
 Although using multiple entry points per page is allowed in webpack, it should be avoided when possible in favor of an entry point with multiple imports: `entry: { page: ['./analytics', './app'] }`. This results in a better optimization and consistent execution order when using `async` script tags.
 
