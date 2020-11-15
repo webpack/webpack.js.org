@@ -27,11 +27,11 @@ contributors:
 
 webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interact with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
 
-W> The minimum Node.js version to run webpack 5 is 10.13.0 (LTS)
+W> The minimum supported Node.js version to run webpack 5 is 10.13.0 (LTS)
 
 ## Basic Setup
 
-First let's create a directory, initialize npm, [install webpack locally](/guides/installation/#local-installation), and install the webpack-cli (the tool used to run webpack on the command line):
+First let's create a directory, initialize npm, [install webpack locally](/guides/installation/#local-installation), and install the [`webpack-cli`](https://github.com/webpack/webpack-cli) (the tool used to run webpack on the command line):
 
 ``` bash
 mkdir webpack-demo
@@ -129,7 +129,7 @@ Let's use webpack to manage these scripts instead.
 
 ## Creating a Bundle
 
-First we'll tweak our directory structure slightly, separating the "source" code (`/src`) from our "distribution" code (`/dist`). The "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser. Tweak the directory structure as follows:
+First we'll tweak our directory structure slightly, separating the "source" code (`./src`) from our "distribution" code (`./dist`). The "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser. Tweak the directory structure as follows:
 
 __project__
 
@@ -151,7 +151,7 @@ npm install --save lodash
 
 T> When installing a package that will be bundled into your production bundle, you should use `npm install --save`. If you're installing a package for development purposes (e.g. a linter, testing libraries, etc.) then you should use `npm install --save-dev`. More information can be found in the [npm documentation](https://docs.npmjs.com/cli/install).
 
-Now, lets import `lodash` in our script:
+Now, let's import `lodash` in our script:
 
 __src/index.js__
 
@@ -171,7 +171,7 @@ __src/index.js__
  document.body.appendChild(component());
 ```
 
-Now, since we'll be bundling our scripts, we have to update our `index.html` file. Let's remove the lodash `<script>`, as we now `import` it, and modify the other `<script>` tag to load the bundle, instead of the raw `/src` file:
+Now, since we'll be bundling our scripts, we have to update our `index.html` file. Let's remove the lodash `<script>`, as we now `import` it, and modify the other `<script>` tag to load the bundle, instead of the raw `./src` file:
 
 __dist/index.html__
 
@@ -202,15 +202,12 @@ runtime modules 1000 bytes 5 modules
 cacheable modules 530 KiB
   ./src/index.js 257 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.4.0 compiled successfully in 3619 ms
+webpack 5.4.0 compiled successfully in 1851 ms
 ```
 
-T> Your output may vary a bit, but if the build is successful then you are good to go. Also, don't worry about the warning, we'll tackle that later.
+T> Your output may vary a bit, but if the build is successful then you are good to go.
 
 Open `index.html` from the `dist` directory in your browser and, if everything went right, you should see the following text: `'Hello webpack'`.
-
-W> If you are getting a syntax error in the middle of minified JavaScript when opening `index.html` in the browser, set [`development mode`](/configuration/mode/#mode-development) and run `npx webpack` again. This is related to running `npx webpack` on latest Node.js (v12.5+) instead of [LTS version](https://nodejs.org/en/).
-
 
 ## Modules
 
@@ -261,7 +258,7 @@ runtime modules 1000 bytes 5 modules
 cacheable modules 530 KiB
   ./src/index.js 257 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.4.0 compiled successfully in 3516 ms
+webpack 5.4.0 compiled successfully in 1934 ms
 ```
 
 T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a configuration of any name. This will be useful for more complex configurations that need to be split into multiple files.
@@ -276,7 +273,7 @@ Given it's not particularly fun to run a local copy of webpack from the CLI, we 
 __package.json__
 
 ``` diff
-{
+ {
    "name": "webpack-demo",
    "version": "1.0.0",
    "description": "",
@@ -299,7 +296,7 @@ __package.json__
  }
 ```
 
-Now the `npm run build` command can be used in place of the `npx` command we used earlier. Note that within `scripts` we can reference locally installed npm packages by name the same way we did with `npx`. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts (each with flags like `--config` if necessary).
+Now the `npm run build` command can be used in place of the `npx` command we used earlier. Note that within `scripts` we can reference locally installed npm packages by name the same way we did with `npx`. This convention is the standard in most npm-based projects because it allows all contributors to use the same set of common scripts.
 
 Now run the following command and see if your script alias works:
 
@@ -314,7 +311,7 @@ runtime modules 1000 bytes 5 modules
 cacheable modules 530 KiB
   ./src/index.js 257 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.4.0 compiled successfully in 3764 ms
+webpack 5.4.0 compiled successfully in 1940 ms
 ```
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --color`.
