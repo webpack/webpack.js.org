@@ -241,7 +241,9 @@ export {
 
 但我们可以通过 `/*#__PURE__*/` 注释来帮忙 terser。它给一个语句标记为没有副作用。就这样一个简单的改变就能够使下面的代码被 tree-shake:
 
-`var Button$1 = /*#__PURE__*/ withAppProvider()(Button);`
+```javascript
+var Button$1 = /*#__PURE__*/ withAppProvider()(Button);
+```
 
 这会使得这段代码被过滤，但仍然会有一些引入的问题，需要对其进行评估，因为它们产生了副作用。
 

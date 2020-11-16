@@ -26,6 +26,7 @@ contributors:
   - snitin315
   - QC-L
   - anshumanv
+  - mrzalyaul
 ---
 
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
@@ -1055,7 +1056,7 @@ T> 这些注释也会被添加至经过 tree shaking 后生成的 bundle 中。
 
 ## `output.publicPath` {#outputpublicpath}
 
-`string = ''` `function`
+`string` `function`
 
 对于按需加载(on-demand-load)或加载外部资源(external resources)（如图片、文件等）来说，output.publicPath 是很重要的选项。如果指定了一个错误的值，则在加载这些资源时会收到 404 错误。
 

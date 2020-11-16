@@ -65,7 +65,7 @@ webpack-cli 提供了许多 flag 来使 webpack 的工作变得简单。默认�
 | `--progress`        | boolean, string | 在构建过程中打印编译进度                                                 |
 | `--help`            | boolean         | 输出所有支持的 flag 和命令                                              |
 | `--output-path, -o` | string          | webpack 生成文件的输出位置，例如 `./dist`                                |
-| `--target, -t`      | string          | 设置要构建的 target                                                    |
+| `--target, -t`      | string[]          | 设置要构建的 target                                                    |
 | `--watch, -w`       | boolean         | 监听文件变化                                                           |
 | `--hot, -h`         | boolean         | 启用 HMR                                                              |
 | `--no-hot`          | boolean         | 禁用 HMR                                                              |
@@ -301,3 +301,11 @@ NODE_OPTIONS="--max-old-space-size=4096" webpack
 ```bash
 NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 ```
+
+## Exit codes and their meanings
+
+| Exit Code | Description                                        |
+| --------- | -------------------------------------------------- |
+| `0`       | Success                                            |
+| `1`       | Errors from webpack                                |
+| `2`       | Configuration/options problem or an internal error |

@@ -803,7 +803,7 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 
 loader API 中的 `getResolve(options)` 将以另一种方式合并选项，参见` module.rule``resolve `。
 
-由于 webpack 5 在不同的发布依赖关系之间存在差异，所以传递一个 `dependencyType` 作为选项可能是有意义的（例如`"esm"`，`"commonjs"`，或者其他）。
+由于 webpack 5 在不同的发布依赖关系之间存在差异，所以传递一个 `dependencyType` 作为选项可能是有意义的（例如 `"esm"`，`"commonjs"`，或者其他）。
 
 ## 重大内部变更 {#major-internal-changes}
 

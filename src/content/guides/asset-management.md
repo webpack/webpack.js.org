@@ -26,32 +26,33 @@ webpack 最出色的功能之一就是，除了引入 JavaScript，还可以通�
 __dist/index.html__
 
 ``` diff
-  <!doctype html>
-  <html>
-    <head>
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="utf-8" />
 -    <title>起步</title>
 +    <title>管理资源</title>
-    </head>
-    <body>
--     <script src="main.js"></script>
-+     <script src="bundle.js"></script>
-    </body>
-  </html>
+   </head>
+   <body>
+-    <script src="main.js"></script>
++    <script src="bundle.js"></script>
+   </body>
+ </html>
 ```
 
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
--     filename: 'main.js',
-+     filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-  };
+ const path = require('path');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+-    filename: 'main.js',
++    filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+ };
 ```
 
 
@@ -66,31 +67,28 @@ npm install --save-dev style-loader css-loader
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-+   module: {
-+     rules: [
-+       {
-+         test: /\.css$/,
-+         use: [
-+           'style-loader',
-+           'css-loader',
-+         ],
-+       },
-+     ],
-+   },
-  };
+ const path = require('path');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
++  module: {
++    rules: [
++      {
++        test: /\.css$/i,
++        use: ['style-loader', 'css-loader'],
++      },
++    ],
++  },
+ };
 ```
 
 模块 loader 可以链式调用。链中的每个 loader 都将对资源进行转换。链会逆序执行。第一个 loader 将其结果（被转换后的资源）传递给下一个 loader，依此类推。最后，webpack 期望链中的最后的 loader 返回 JavaScript。
 
-应保证 loader 的先后顺序：'style-loader' 在前，而 'css-loader' 在后。如果不遵守此约定，webpack 可能会抛出错误。
+应保证 loader 的先后顺序：[`'style-loader'`](/loaders/style-loader) 在前，而 [`'css-loader'`](/loaders/css-loader) 在后。如果不遵守此约定，webpack 可能会抛出错误。
 
 T> webpack 根据正则表达式，来确定应该查找哪些文件，并将其提供给指定的 loader。在这个示例中，所有以 `.css` 结尾的文件，都将被提供给 `style-loader` 和 `css-loader`。
 
@@ -124,76 +122,76 @@ __src/style.css__
 __src/index.js__
 
 ``` diff
-  import _ from 'lodash';
-+ import './style.css';
-
-  function component() {
-    const element = document.createElement('div');
-
-    // lodash 是由当前 script 脚本 import 导入进来的
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   element.classList.add('hello');
-
-    return element;
-  }
-
-  document.body.appendChild(component());
+ import _ from 'lodash';
++import './style.css';
+ 
+ function component() {
+   const element = document.createElement('div');
+ 
+   // Lodash, now imported by this script
+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
++  element.classList.add('hello');
+ 
+   return element;
+ }
+ 
+ document.body.appendChild(component());
 ```
 
 现在运行 build 命令：
 
 ``` bash
-npm run build
+$ npm run build
 
 ...
-    Asset      Size  Chunks             Chunk Names
-bundle.js  76.4 KiB       0  [emitted]  main
-Entrypoint main = bundle.js
-...
+[webpack-cli] Compilation finished
+asset bundle.js 72.6 KiB [compared for emit] [minimized] (name: main) 1 related asset
+runtime modules 1000 bytes 5 modules
+orphan modules 326 bytes [orphan] 1 module
+cacheable modules 539 KiB
+  modules by path ./node_modules/ 538 KiB
+    ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+    ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
+    ./node_modules/css-loader/dist/runtime/api.js 1.57 KiB [built] [code generated]
+  modules by path ./src/ 966 bytes
+    ./src/index.js + 1 modules 640 bytes [built] [code generated]
+    ./node_modules/css-loader/dist/cjs.js!./src/style.css 326 bytes [built] [code generated]
+webpack 5.4.0 compiled successfully in 2900 ms
 ```
 
-再次在浏览器中打开 `index.html`，你应该看到 `Hello webpack` 现在的样式是红色。要查看 webpack 做了什么，请检查页面（不要查看页面源代码，它不会显示结果，因为 `<style>` 标签是由 JavaScript 动态创建的），并查看页面的 head 标签。它应该包含 style 块元素，也就是我们在 `index.js` 中 import 的 css 文件中的样式。
+再次在浏览器中打开 `dist/index.html`，你应该看到 `Hello webpack` 现在的样式是红色。要查看 webpack 做了什么，请检查页面（不要查看页面源代码，它不会显示结果，因为 `<style>` 标签是由 JavaScript 动态创建的），并查看页面的 head 标签。它应该包含 style 块元素，也就是我们在 `index.js` 中 import 的 css 文件中的样式。
 
 注意，在多数情况下，你也可以进行 [压缩 CSS](/plugins/mini-css-extract-plugin/#minimizing-for-production)，以便在生产环境中节省加载时间。最重要的是，现有的 loader 可以支持任何你可以想到的 CSS 风格 - [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader) 和 [less](/loaders/less-loader) 等。
 
 
 ## 加载 images 图像 {#loading-images}
 
-假想，现在我们正在下载 CSS，但是像 background 和 icon 这样的图像，要如何处理呢？使用 [file-loader](/loaders/file-loader)，我们可以轻松地将这些内容混合到 CSS 中：
-
-``` bash
-npm install --save-dev file-loader
-```
+假如，现在我们正在下载 CSS，但是像 background 和 icon 这样的图像，要如何处理呢？在 webpack 5 中，可以使用 [Asset Modules](/guides/asset-modules/)，我们可以轻松地将这些内容混入我们的系统中：
 
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          use: [
-            'style-loader',
-            'css-loader'
-          ],
-        },
-+       {
-+         test: /\.(png|svg|jpg|gif)$/,
-+         use: [
-+           'file-loader',
-+         ],
-+       },
-      ],
-    },
-  };
+ const path = require('path');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+   module: {
+     rules: [
+       {
+         test: /\.css$/i,
+         use: ['style-loader', 'css-loader'],
+       },
++      {
++        test: /\.(png|svg|jpg|jpeg|gif)$/i,
++        type: 'asset/resource',
++      },
+     ],
+   },
+ };
 ```
 
 现在，在 `import MyImage from './my-image.png'` 时，此图像将被处理并添加到 `output` 目录，_并且_ `MyImage` 变量将包含该图像在处理后的最终 url。在使用 [css-loader](/loaders/css-loader) 时，如前所示，会使用类似过程处理你的 CSS 中的 `url('./my-image.png')`。loader 会识别这是一个本地文件，并将 `'./my-image.png'` 路径，替换为 `output` 目录中图像的最终路径。而 [html-loader](/loaders/html-loader) 以相同的方式处理 `<img src="./my-image.png" />`。
@@ -219,95 +217,98 @@ __project__
 __src/index.js__
 
 ``` diff
-  import _ from 'lodash';
-  import './style.css';
-+ import Icon from './icon.png';
-
-  function component() {
-    const element = document.createElement('div');
-
-    // lodash，现在由此脚本导入
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-    element.classList.add('hello');
-
-+   // 将图像添加到我们已经存在的 div 中。
-+   const myIcon = new Image();
-+   myIcon.src = Icon;
+ import _ from 'lodash';
+ import './style.css';
++import Icon from './icon.png';
+ 
+ function component() {
+   const element = document.createElement('div');
+ 
+   // Lodash, now imported by this script
+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+   element.classList.add('hello');
+ 
++  // 将图像添加到我们已经存在的 div 中。
++  const myIcon = new Image();
++  myIcon.src = Icon;
 +
-+   element.appendChild(myIcon);
-
-    return element;
-  }
-
-  document.body.appendChild(component());
++  element.appendChild(myIcon);
++
+   return element;
+ }
+ 
+ document.body.appendChild(component());
 ```
 
 __src/style.css__
 
 ``` diff
-  .hello {
-    color: red;
-+   background: url('./icon.png');
-  }
+ .hello {
+   color: red;
++  background: url('./icon.png');
+ }
 ```
 
 重新构建并再次打开 index.html 文件：
 
 ``` bash
-npm run build
+$ npm run build
 
 ...
-                               Asset      Size  Chunks                    Chunk Names
-da4574bb234ddc4bb47cbe1ca4b20303.png  3.01 MiB          [emitted]  [big]
-                           bundle.js  76.7 KiB       0  [emitted]         main
-Entrypoint main = bundle.js
-...
+[webpack-cli] Compilation finished
+asset 3b7bf087cbac835e6f7d.png 233 KiB [emitted] [immutable] [from: src/icon.png] (auxiliary name: main)
+asset bundle.js 73.4 KiB [emitted] [minimized] (name: main) 1 related asset
+runtime modules 1.82 KiB 6 modules
+orphan modules 326 bytes [orphan] 1 module
+cacheable modules 540 KiB (javascript) 233 KiB (asset)
+  modules by path ./node_modules/ 539 KiB
+    modules by path ./node_modules/css-loader/dist/runtime/*.js 2.38 KiB
+      ./node_modules/css-loader/dist/runtime/api.js 1.57 KiB [built] [code generated]
+      ./node_modules/css-loader/dist/runtime/getUrl.js 830 bytes [built] [code generated]
+    ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+    ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
+  modules by path ./src/ 1.45 KiB (javascript) 233 KiB (asset)
+    ./src/index.js + 1 modules 795 bytes [built] [code generated]
+    ./src/icon.png 42 bytes (javascript) 233 KiB (asset) [built] [code generated]
+    ./node_modules/css-loader/dist/cjs.js!./src/style.css 648 bytes [built] [code generated]
+webpack 5.4.0 compiled successfully in 5879 ms
 ```
 
-如果一切顺利，你现在应该看到你的 icon 图标成为了重复的背景图，以及 `Hello webpack` 文本旁边的 `img` 元素。如果检查此元素，你将看到实际的文件名已更改为 `5c999da72346a995e7e2718865d019c8.png`。这意味着 webpack 在 `src` 文件夹中找到我们的文件，并对其进行了处理！
-
-T> 合乎逻辑下一步是，压缩和优化你的图像。查看 [image-webpack-loader](https://github.com/tcoopman/image-webpack-loader) 和 [url-loader](/loaders/url-loader)，以了解更多关于如何增强加载处理图像功能。
+如果一切顺利，你现在应该看到你的 icon 图标成为了重复的背景图，以及 `Hello webpack` 文本旁边的 `img` 元素。如果检查此元素，你将看到实际的文件名已更改为 `3b7bf087cbac835e6f7d.png`。这意味着 webpack 在 `src` 文件夹中找到我们的文件，并对其进行了处理！
 
 
 ## 加载 fonts 字体 {#loading-fonts}
 
-那么，像字体这样的其他资源如何处理呢？file-loader 和 url-loader 可以接收并加载任何文件，然后将其输出到构建目录。这就是说，我们可以将它们用于任何类型的文件，也包括字体。让我们更新 `webpack.config.js` 来处理字体文件：
+那么，像字体这样的其他资源如何处理呢？使用 Asset Modules 可以接收并加载任何文件，然后将其输出到构建目录。这就是说，我们可以将它们用于任何类型的文件，也包括字体。让我们更新 `webpack.config.js` 来处理字体文件：
 
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          use: [
-            'style-loader',
-            'css-loader'
-          ],
-        },
-        {
-          test: /\.(png|svg|jpg|gif)$/,
-          use: [
-            'file-loader',
-          ],
-        },
-+       {
-+         test: /\.(woff|woff2|eot|ttf|otf)$/,
-+         use: [
-+           'file-loader',
-+         ],
-+       },
-      ],
-    },
-  };
+ const path = require('path');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+   module: {
+     rules: [
+       {
+         test: /\.css$/i,
+         use: ['style-loader', 'css-loader'],
+       },
+       {
+         test: /\.(png|svg|jpg|jpeg|gif)$/i,
+         type: 'asset/resource',
+       },
++      {
++        test: /\.(woff|woff2|eot|ttf|otf)$/i,
++        type: 'asset/resource',
++      },
+     ],
+   },
+ };
 ```
 
 在项目中添加一些字体文件：
@@ -336,37 +337,52 @@ __project__
 __src/style.css__
 
 ``` diff
-+ @font-face {
-+   font-family: 'MyFont';
-+   src:  url('./my-font.woff2') format('woff2'),
-+         url('./my-font.woff') format('woff');
-+   font-weight: 600;
-+   font-style: normal;
-+ }
-
-  .hello {
-    color: red;
-+   font-family: 'MyFont';
-    background: url('./icon.png');
-  }
++@font-face {
++  font-family: 'MyFont';
++  src: url('./my-font.woff2') format('woff2'),
++    url('./my-font.woff') format('woff');
++  font-weight: 600;
++  font-style: normal;
++}
++
+ .hello {
+   color: red;
++  font-family: 'MyFont';
+   background: url('./icon.png');
+ }
 ```
 
 现在，让我们重新构建，然后看下 webpack 是否处理了我们的字体：
 
 ``` bash
-npm run build
+$ npm run build
 
 ...
-                                 Asset      Size  Chunks                    Chunk Names
-5439466351d432b73fdb518c6ae9654a.woff2  19.5 KiB          [emitted]
- 387c65cc923ad19790469cfb5b7cb583.woff  23.4 KiB          [emitted]
-  da4574bb234ddc4bb47cbe1ca4b20303.png  3.01 MiB          [emitted]  [big]
-                             bundle.js    77 KiB       0  [emitted]         main
-Entrypoint main = bundle.js
-...
+[webpack-cli] Compilation finished
+assets by status 233 KiB [cached] 1 asset
+assets by info 33.2 KiB [immutable]
+  asset 55055dbfc7c6a83f60ba.woff 18.8 KiB [emitted] [immutable] [from: src/my-font.woff] (auxiliary name: main)
+  asset 8f717b802eaab4d7fb94.woff2 14.5 KiB [emitted] [immutable] [from: src/my-font.woff2] (auxiliary name: main)
+asset bundle.js 73.7 KiB [emitted] [minimized] (name: main) 1 related asset
+runtime modules 1.82 KiB 6 modules
+orphan modules 326 bytes [orphan] 1 module
+cacheable modules 541 KiB (javascript) 266 KiB (asset)
+  javascript modules 541 KiB
+    modules by path ./node_modules/ 539 KiB
+      modules by path ./node_modules/css-loader/dist/runtime/*.js 2.38 KiB 2 modules
+      ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+      ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
+    modules by path ./src/ 1.98 KiB
+      ./src/index.js + 1 modules 795 bytes [built] [code generated]
+      ./node_modules/css-loader/dist/cjs.js!./src/style.css 1.21 KiB [built] [code generated]
+  asset modules 126 bytes (javascript) 266 KiB (asset)
+    ./src/icon.png 42 bytes (javascript) 233 KiB (asset) [built] [code generated]
+    ./src/my-font.woff2 42 bytes (javascript) 14.5 KiB (asset) [built] [code generated]
+    ./src/my-font.woff 42 bytes (javascript) 18.8 KiB (asset) [built] [code generated]
+webpack 5.4.0 compiled successfully in 3763 ms
 ```
 
-重新打开 `index.html` 看看我们的 `Hello webpack` 文本显示是否换上了新的字体。如果一切顺利，你应该能看到变化。
+重新打开 `dist/index.html` 看看我们的 `Hello webpack` 文本显示是否换上了新的字体。如果一切顺利，你应该能看到变化。
 
 
 ## 加载数据 {#loading-data}
@@ -380,50 +396,39 @@ npm install --save-dev csv-loader xml-loader
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          use: [
-            'style-loader',
-            'css-loader'
-          ],
-        },
-        {
-          test: /\.(png|svg|jpg|gif)$/,
-          use: [
-            'file-loader',
-          ],
-        },
-        {
-          test: /\.(woff|woff2|eot|ttf|otf)$/,
-          use: [
-            'file-loader',
-          ],
-        },
-+       {
-+         test: /\.(csv|tsv)$/,
-+         use: [
-+           'csv-loader',
-+         ],
-+       },
-+       {
-+         test: /\.xml$/,
-+         use: [
-+           'xml-loader',
-+         ],
-+       },
-      ],
-    },
-  };
+ const path = require('path');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+   module: {
+     rules: [
+       {
+         test: /\.css$/i,
+         use: ['style-loader', 'css-loader'],
+       },
+       {
+         test: /\.(png|svg|jpg|jpeg|gif)$/i,
+         type: 'asset/resource',
+       },
+       {
+         test: /\.(woff|woff2|eot|ttf|otf)$/i,
+         type: 'asset/resource',
+       },
++      {
++        test: /\.(csv|tsv)$/i,
++        use: ['csv-loader'],
++      },
++      {
++        test: /\.xml$/i,
++        use: ['xml-loader'],
++      },
+     ],
+   },
+ };
 ```
 
 在项目中添加一些数据文件：
@@ -474,35 +479,35 @@ Autumn,Lindsey,Letter,I miss you
 __src/index.js__
 
 ``` diff
-  import _ from 'lodash';
-  import './style.css';
-  import Icon from './icon.png';
-+ import Data from './data.xml';
-+ import Notes from './data.csv';
-
-  function component() {
-    const element = document.createElement('div');
-
-    // lodash，现在通过 script 标签导入
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-    element.classList.add('hello');
-
-    // 将图像添加到我们已经存在的 div 中。
-    const myIcon = new Image();
-    myIcon.src = Icon;
-
-    element.appendChild(myIcon);
-
-+   console.log(Data);
-+   console.log(Notes);
-
-    return element;
-  }
-
-  document.body.appendChild(component());
+ import _ from 'lodash';
+ import './style.css';
+ import Icon from './icon.png';
++import Data from './data.xml';
++import Notes from './data.csv';
+ 
+ function component() {
+   const element = document.createElement('div');
+ 
+   // Lodash, now imported by this script
+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+   element.classList.add('hello');
+ 
+   // Add the image to our existing div.
+   const myIcon = new Image();
+   myIcon.src = Icon;
+ 
+   element.appendChild(myIcon);
+ 
++  console.log(Data);
++  console.log(Notes);
++
+   return element;
+ }
+ 
+ document.body.appendChild(component());
 ```
 
-重新执行 `npm run build` 命令，然后打开 `index.html`。查看开发者工具中的控制台，你应该能够看到导入的数据会被打印出来！
+重新执行 `npm run build` 命令，然后打开 `dist/index.html`。查看开发者工具中的控制台，你应该能够看到导入的数据会被打印出来！
 
 T> 在使用 [d3](https://github.com/d3) 等工具实现某些数据可视化时，这个功能极其有用。可以不用在运行时再去发送一个 ajax 请求获取和解析数据，而是在构建过程中将其提前加载到模块中，以便浏览器加载模块后，直接就可以访问解析过的数据。
 
@@ -573,56 +578,110 @@ npm install toml yamljs json5 --save-dev
 
 __webpack.config.js__
 
-```javascript
-const toml = require('toml'); 
-const yaml = require('yamljs');
-const json5 = require('json5');
-module.exports = {
-  // ...
-  module: {
-    rules: [
-      {
-        test: /\.toml$/,
-        type: 'json',
-        parser: {
-          parse: toml.parse
-        }
-      },
-      {
-        test: /\.yaml$/,
-        type: 'json',
-        parser: {
-          parse: yaml.parse
-        }
-      },
-      {
-        test: /\.json5$/,
-        type: 'json',
-        parser: {
-          parse: json5.parse
-        }
-      }
-    ]
-  }
-};
+```diff
+ const path = require('path');
++const toml = require('toml');
++const yaml = require('yamljs');
++const json5 = require('json5');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+   module: {
+     rules: [
+       {
+         test: /\.css$/i,
+         use: ['style-loader', 'css-loader'],
+       },
+       {
+         test: /\.(png|svg|jpg|jpeg|gif)$/i,
+         type: 'asset/resource',
+       },
+       {
+         test: /\.(woff|woff2|eot|ttf|otf)$/i,
+         type: 'asset/resource',
+       },
+       {
+         test: /\.(csv|tsv)$/i,
+         use: ['csv-loader'],
+       },
+       {
+         test: /\.xml$/i,
+         use: ['xml-loader'],
+       },
++      {
++        test: /\.toml$/i,
++        type: 'json',
++        parser: {
++          parse: toml.parse,
++        },
++      },
++      {
++        test: /\.yaml$/i,
++        type: 'json',
++        parser: {
++          parse: yaml.parse,
++        },
++      },
++      {
++        test: /\.json5$/i,
++        type: 'json',
++        parser: {
++          parse: json5.parse,
++        },
++      },
+     ],
+   },
+ };
 ```
 
 __src/index.js__
 
-```javascript
-import toml from './data.toml';
-import yaml from './data.yaml';
-import json from './data.json5';
-
-console.log(toml.title); // output `TOML Example`
-console.log(toml.owner.name); // output `Tom Preston-Werner`
-
-console.log(yaml.title); // output `YAML Example`
-console.log(yaml.owner.name); // output `Tom Preston-Werner`
-
-console.log(json.title); // output `JSON5 Example`
-console.log(json.owner.name); // output `Tom Preston-Werner`
+```diff
+ import _ from 'lodash';
+ import './style.css';
+ import Icon from './icon.png';
+ import Data from './data.xml';
+ import Notes from './data.csv';
++import toml from './data.toml';
++import yaml from './data.yaml';
++import json from './data.json5';
++
++console.log(toml.title); // output `TOML Example`
++console.log(toml.owner.name); // output `Tom Preston-Werner`
++
++console.log(yaml.title); // output `YAML Example`
++console.log(yaml.owner.name); // output `Tom Preston-Werner`
++
++console.log(json.title); // output `JSON5 Example`
++console.log(json.owner.name); // output `Tom Preston-Werner`
+ 
+ function component() {
+   const element = document.createElement('div');
+ 
+   // Lodash, now imported by this script
+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+   element.classList.add('hello');
+ 
+   // Add the image to our existing div.
+   const myIcon = new Image();
+   myIcon.src = Icon;
+ 
+   element.appendChild(myIcon);
+ 
+   console.log(Data);
+   console.log(Notes);
+ 
+   return element;
+ }
+ 
+ document.body.appendChild(component());
 ```
+
+Re-run the `npm run build` command and open `dist/index.html`. You should be able to see your imported data being logged to the console!
 
 ## 全局资源 {#global-assets}
 
@@ -659,6 +718,9 @@ __project__
   |- /src
 -   |- data.xml
 -   |- data.csv
+-   |- data.toml
+-   |- data.yaml
+-   |- data.json5
 -   |- my-font.woff
 -   |- my-font.woff2
 -   |- icon.png
@@ -669,84 +731,114 @@ __project__
 
 __webpack.config.js__
 
-``` diff
-  const path = require('path');
-
-  module.exports = {
-    entry: './src/index.js',
-    output: {
-      filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
--   module: {
--     rules: [
--       {
--         test: /\.css$/,
--         use: [
--           'style-loader',
--           'css-loader',
--         ],
--       },
--       {
--         test: /\.(png|svg|jpg|gif)$/,
--         use: [
--           'file-loader',
--         ],
--       },
--       {
--         test: /\.(woff|woff2|eot|ttf|otf)$/,
--         use: [
--           'file-loader',
--         ],
--       },
--       {
--         test: /\.(csv|tsv)$/,
--         use: [
--           'csv-loader',
--         ],
--       },
--       {
--         test: /\.xml$/,
--         use: [
--           'xml-loader',
--         ],
--       },
--     ],
--   },
-  };
+```diff
+ const path = require('path');
+-const toml = require('toml');
+-const yaml = require('yamljs');
+-const json5 = require('json5');
+ 
+ module.exports = {
+   entry: './src/index.js',
+   output: {
+     filename: 'bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+-  module: {
+-    rules: [
+-      {
+-        test: /\.css$/i,
+-        use: ['style-loader', 'css-loader'],
+-      },
+-      {
+-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+-        type: 'asset/resource',
+-      },
+-      {
+-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+-        type: 'asset/resource',
+-      },
+-      {
+-        test: /\.(csv|tsv)$/i,
+-        use: ['csv-loader'],
+-      },
+-      {
+-        test: /\.xml$/i,
+-        use: ['xml-loader'],
+-      },
+-      {
+-        test: /\.toml$/i,
+-        type: 'json',
+-        parser: {
+-          parse: toml.parse,
+-        },
+-      },
+-      {
+-        test: /\.yaml$/i,
+-        type: 'json',
+-        parser: {
+-          parse: yaml.parse,
+-        },
+-      },
+-      {
+-        test: /\.json5$/i,
+-        type: 'json',
+-        parser: {
+-          parse: json5.parse,
+-        },
+-      },
+-    ],
+-  },
+ };
 ```
 
 __src/index.js__
 
 ``` diff
-  import _ from 'lodash';
-- import './style.css';
-- import Icon from './icon.png';
-- import Data from './data.xml';
-- import Notes from './data.csv';
+ import _ from 'lodash';
+-import './style.css';
+-import Icon from './icon.png';
+-import Data from './data.xml';
+-import Notes from './data.csv';
+-import toml from './data.toml';
+-import yaml from './data.yaml';
+-import json from './data.json5';
 -
-  function component() {
-    const element = document.createElement('div');
+-console.log(toml.title); // output `TOML Example`
+-console.log(toml.owner.name); // output `Tom Preston-Werner`
 -
--   // lodash，现在通过 script 标签导入
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
--   element.classList.add('hello');
+-console.log(yaml.title); // output `YAML Example`
+-console.log(yaml.owner.name); // output `Tom Preston-Werner`
 -
--   // 将图像添加到我们已经存在的 div 中。
--   const myIcon = new Image();
--   myIcon.src = Icon;
+-console.log(json.title); //  `JSON5 Example`
+-console.log(json.owner.name); // output `Tom Preston-Werner`
+ 
+ function component() {
+   const element = document.createElement('div');
+ 
+-  // lodash，现在通过 script 标签导入
+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+-  element.classList.add('hello');
 -
--   element.appendChild(myIcon);
+-  // Add the image to our existing div.
+-  const myIcon = new Image();
+-  myIcon.src = Icon;
 -
--   console.log(Data);
--   console.log(Notes);
-
-    return element;
-  }
-
-  document.body.appendChild(component());
+-  element.appendChild(myIcon);
+-
+-  console.log(Data);
+-  console.log(Notes);
+ 
+   return element;
+ }
+ 
+ document.body.appendChild(component());
 ```
 
+And remove those dependencies we added before:
+
+```bash
+npm rm csv-loader xml-loader toml yamljs json5
+```
 
 ## 下篇指南 {#next-guide}
 
