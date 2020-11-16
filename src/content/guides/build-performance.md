@@ -108,7 +108,7 @@ W> Don't use too many workers, as there is a boot overhead for the Node.js runti
 Enable persistent caching with the `cache-loader`. Clear cache directory on `"postinstall"` in `package.json`.
 
 
-T> We support yarn PnP version 3 [`yarn 2 berry`](https://next.yarnpkg.com/features/pnp) for persistent caching
+T> We support yarn PnP version 3 [`yarn 2 berry`](https://next.yarnpkg.com/features/pnp) for persistent caching.
 
 ### Custom plugins/loaders
 
