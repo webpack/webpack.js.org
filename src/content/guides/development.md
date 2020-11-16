@@ -34,7 +34,7 @@ __webpack.config.js__
  module.exports = {
 +  mode: 'development',
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
    plugins: [
@@ -71,7 +71,7 @@ __webpack.config.js__
  module.exports = {
    mode: 'development',
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
 +  devtool: 'inline-source-map',
@@ -104,15 +104,15 @@ Run an `npm run build`, it should compile to something like this:
 ``` bash
 ...
 [webpack-cli] Compilation finished
-asset app.bundle.js 1.38 MiB [emitted] (name: app)
+asset index.bundle.js 1.38 MiB [emitted] (name: index)
 asset print.bundle.js 6.25 KiB [emitted] (name: print)
-asset index.html 276 bytes [emitted]
+asset index.html 272 bytes [emitted]
 runtime modules 1.9 KiB 9 modules
 cacheable modules 530 KiB
-  ./src/index.js 407 bytes [built] [code generated]
+  ./src/index.js 406 bytes [built] [code generated]
   ./src/print.js 83 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.4.0 compiled successfully in 759 ms
+webpack 5.4.0 compiled successfully in 706 ms
 ```
 
 Now open the resulting `index.html` file in your browser. Click the button and look in your console where the error is displayed. The error should say something like this:
@@ -134,8 +134,8 @@ It quickly becomes a hassle to manually run `npm run build` every time you want 
 There are a couple of different options available in webpack that help you automatically compile your code whenever it changes:
 
  1. webpack's [Watch Mode](/configuration/watch/#watch)
- 2. webpack-dev-server
- 3. webpack-dev-middleware
+ 2. [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+ 3. [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
 
 In most cases, you probably would want to use `webpack-dev-server`, but let's explore all of the above options.
 
@@ -164,9 +164,7 @@ __package.json__
    "license": "ISC",
    "devDependencies": {
      "clean-webpack-plugin": "^3.0.0",
-     "css-loader": "^5.0.1",
      "html-webpack-plugin": "^4.5.0",
-     "style-loader": "^2.0.0",
      "webpack": "^5.4.0",
      "webpack-cli": "^4.2.0"
    },
@@ -188,7 +186,7 @@ __webpack.config.js__
  module.exports = {
    mode: 'development',
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
    devtool: 'inline-source-map',
@@ -245,7 +243,7 @@ __webpack.config.js__
  module.exports = {
    mode: 'development',
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
    devtool: 'inline-source-map',
@@ -290,9 +288,7 @@ __package.json__
    "license": "ISC",
    "devDependencies": {
      "clean-webpack-plugin": "^3.0.0",
-     "css-loader": "^5.0.1",
      "html-webpack-plugin": "^4.5.0",
-     "style-loader": "^2.0.0",
      "webpack": "^5.4.0",
      "webpack-cli": "^4.2.0",
      "webpack-dev-server": "^3.11.0"
@@ -332,7 +328,7 @@ __webpack.config.js__
  module.exports = {
    mode: 'development',
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
    devtool: 'inline-source-map',
@@ -416,13 +412,11 @@ __package.json__
    "license": "ISC",
    "devDependencies": {
      "clean-webpack-plugin": "^3.0.0",
-     "css-loader": "^5.0.1",
      "express": "^4.17.1",
      "html-webpack-plugin": "^4.5.0",
-     "style-loader": "^2.0.0",
      "webpack": "^5.4.0",
      "webpack-cli": "^4.2.0",
-     "webpack-dev-middleware": "^4.0.0",
+     "webpack-dev-middleware": "^4.0.2",
      "webpack-dev-server": "^3.11.0"
    },
    "dependencies": {
@@ -436,20 +430,20 @@ Now in your terminal run `npm run server`, it should give you an output similar 
 ``` bash
 Example app listening on port 3000!
 ...
-<i> [webpack-dev-middleware] asset app.bundle.js 1.38 MiB [emitted] (name: app)
+<i> [webpack-dev-middleware] asset index.bundle.js 1.38 MiB [emitted] (name: index)
 <i> asset print.bundle.js 6.25 KiB [emitted] (name: print)
-<i> asset index.html 278 bytes [emitted]
+<i> asset index.html 274 bytes [emitted]
 <i> runtime modules 1.9 KiB 9 modules
 <i> cacheable modules 530 KiB
-<i>   ./src/index.js 407 bytes [built] [code generated]
+<i>   ./src/index.js 406 bytes [built] [code generated]
 <i>   ./src/print.js 83 bytes [built] [code generated]
 <i>   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-<i> webpack 5.4.0 compiled successfully in 672 ms
+<i> webpack 5.4.0 compiled successfully in 709 ms
 <i> [webpack-dev-middleware] Compiled successfully.
 <i> [webpack-dev-middleware] Compiling...
 <i> [webpack-dev-middleware] assets by status 1.38 MiB [cached] 2 assets
 <i> cached modules 530 KiB (javascript) 1.9 KiB (runtime) [cached] 12 modules
-<i> webpack 5.4.0 compiled successfully in 14 ms
+<i> webpack 5.4.0 compiled successfully in 19 ms
 <i> [webpack-dev-middleware] Compiled successfully.
 ```
 

@@ -82,7 +82,7 @@ __dist/index.html__
    </head>
    <body>
 -    <script src="bundle.js"></script>
-+    <script src="./app.bundle.js"></script>
++    <script src="./index.bundle.js"></script>
    </body>
  </html>
 ```
@@ -97,7 +97,7 @@ __webpack.config.js__
  module.exports = {
 -  entry: './src/index.js',
 +  entry: {
-+    app: './src/index.js',
++    index: './src/index.js',
 +    print: './src/print.js',
 +  },
    output: {
@@ -113,17 +113,17 @@ Let's run `npm run build` and see what this generates:
 ``` bash
 ...
 [webpack-cli] Compilation finished
-asset app.bundle.js 69.5 KiB [emitted] [minimized] (name: app) 1 related asset
+asset index.bundle.js 69.5 KiB [emitted] [minimized] (name: index) 1 related asset
 asset print.bundle.js 316 bytes [emitted] [minimized] (name: print)
 runtime modules 1.36 KiB 7 modules
 cacheable modules 530 KiB
-  ./src/index.js 407 bytes [built] [code generated]
+  ./src/index.js 406 bytes [built] [code generated]
   ./src/print.js 83 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.4.0 compiled successfully in 3410 ms
+webpack 5.4.0 compiled successfully in 1996 ms
 ```
 
-We can see that webpack generates our `print.bundle.js` and `app.bundle.js` files, which we also specified in our `index.html` file. if you open `index.html` in your browser, you can see what happens when you click the button.
+We can see that webpack generates our `print.bundle.js` and `index.bundle.js` files, which we also specified in our `index.html` file. if you open `index.html` in your browser, you can see what happens when you click the button.
 
 But what would happen if we changed the name of one of our entry points, or even added a new one? The generated bundles would be renamed on a build, but our `index.html` file would still reference the old names. Let's fix that with the [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin).
 
@@ -144,7 +144,7 @@ __webpack.config.js__
  
  module.exports = {
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
 +  plugins: [
@@ -164,15 +164,15 @@ Before we do a build, you should know that the `HtmlWebpackPlugin` by default wi
 ``` bash
 ...
 [webpack-cli] Compilation finished
-asset app.bundle.js 69.5 KiB [compared for emit] [minimized] (name: app) 1 related asset
+asset index.bundle.js 69.5 KiB [compared for emit] [minimized] (name: index) 1 related asset
 asset print.bundle.js 316 bytes [compared for emit] [minimized] (name: print)
-asset index.html 251 bytes [emitted]
+asset index.html 253 bytes [emitted]
 runtime modules 1.36 KiB 7 modules
 cacheable modules 530 KiB
-  ./src/index.js 407 bytes [built] [code generated]
+  ./src/index.js 406 bytes [built] [code generated]
   ./src/print.js 83 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.4.0 compiled successfully in 5761 ms
+webpack 5.4.0 compiled successfully in 2189 ms
 ```
 
 If you open `index.html` in your code editor, you'll see that the `HtmlWebpackPlugin` has created an entirely new file for you and that all the bundles are automatically added.
@@ -200,7 +200,7 @@ __webpack.config.js__
  
  module.exports = {
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
    plugins: [

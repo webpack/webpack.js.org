@@ -17,7 +17,7 @@ If you've been following the guides from the start, you will now have a small pr
 
 Prior to webpack, front-end developers would use tools like [grunt](https://gruntjs.com/) and [gulp](https://gulpjs.com/) to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. The same idea was used for JavaScript modules, but tools like webpack will __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is great because every module now _explicitly states its dependencies_ and we'll avoid bundling modules that aren't in use.
 
-One of the coolest webpack features is that you can also _include any other type of file_, besides JavaScript, for which there is a loader. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) can be applied to everything used in building a website or web app. Let's start with CSS, as you may already be familiar with that setup.
+One of the coolest webpack features is that you can also _include any other type of file_, besides JavaScript, for which there is a loader or built-in [Asset Modules](/guides/asset-modules/) support. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) can be applied to everything used in building a website or web app. Let's start with CSS, as you may already be familiar with that setup.
 
 ## Setup
 
@@ -145,7 +145,7 @@ $ npm run build
 
 ...
 [webpack-cli] Compilation finished
-asset bundle.js 72.6 KiB [compared for emit] [minimized] (name: main) 1 related asset
+asset bundle.js 72.6 KiB [emitted] [minimized] (name: main) 1 related asset
 runtime modules 1000 bytes 5 modules
 orphan modules 326 bytes [orphan] 1 module
 cacheable modules 539 KiB
@@ -153,10 +153,10 @@ cacheable modules 539 KiB
     ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
     ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
     ./node_modules/css-loader/dist/runtime/api.js 1.57 KiB [built] [code generated]
-  modules by path ./src/ 966 bytes
-    ./src/index.js + 1 modules 640 bytes [built] [code generated]
+  modules by path ./src/ 965 bytes
+    ./src/index.js + 1 modules 639 bytes [built] [code generated]
     ./node_modules/css-loader/dist/cjs.js!./src/style.css 326 bytes [built] [code generated]
-webpack 5.4.0 compiled successfully in 2900 ms
+webpack 5.4.0 compiled successfully in 2231 ms
 ```
 
 Open up `dist/index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result, because the `<style>` tag is dynamically created by JavaScript) and look at the page's head tags. It should contain the style block that we imported in `index.js`.
@@ -166,7 +166,7 @@ Note that you can, and in most cases should, [minimize css](/plugins/mini-css-ex
 
 ## Loading Images
 
-So now we're pulling in our CSS, but what about our images like backgrounds and icons? As of webpack 5, using the [Asset Modules](/guides/asset-modules/) we can easily incorporate those in our system as well:
+So now we're pulling in our CSS, but what about our images like backgrounds and icons? As of webpack 5, using the built-in [Asset Modules](/guides/asset-modules/) we can easily incorporate those in our system as well:
 
 __webpack.config.js__
 
@@ -249,32 +249,32 @@ __src/style.css__
  }
 ```
 
-Let's create a new build and open up the index.html file again:
+Let's create a new build and open up the `index.html` file again:
 
 ``` bash
 $ npm run build
 
 ...
 [webpack-cli] Compilation finished
-asset 3b7bf087cbac835e6f7d.png 233 KiB [emitted] [immutable] [from: src/icon.png] (auxiliary name: main)
+assets by status 9.88 KiB [cached] 1 asset
 asset bundle.js 73.4 KiB [emitted] [minimized] (name: main) 1 related asset
 runtime modules 1.82 KiB 6 modules
 orphan modules 326 bytes [orphan] 1 module
-cacheable modules 540 KiB (javascript) 233 KiB (asset)
+cacheable modules 540 KiB (javascript) 9.88 KiB (asset)
   modules by path ./node_modules/ 539 KiB
     modules by path ./node_modules/css-loader/dist/runtime/*.js 2.38 KiB
       ./node_modules/css-loader/dist/runtime/api.js 1.57 KiB [built] [code generated]
       ./node_modules/css-loader/dist/runtime/getUrl.js 830 bytes [built] [code generated]
     ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
     ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
-  modules by path ./src/ 1.45 KiB (javascript) 233 KiB (asset)
-    ./src/index.js + 1 modules 795 bytes [built] [code generated]
-    ./src/icon.png 42 bytes (javascript) 233 KiB (asset) [built] [code generated]
+  modules by path ./src/ 1.45 KiB (javascript) 9.88 KiB (asset)
+    ./src/index.js + 1 modules 794 bytes [built] [code generated]
+    ./src/icon.png 42 bytes (javascript) 9.88 KiB (asset) [built] [code generated]
     ./node_modules/css-loader/dist/cjs.js!./src/style.css 648 bytes [built] [code generated]
-webpack 5.4.0 compiled successfully in 5879 ms
+webpack 5.4.0 compiled successfully in 1972 ms
 ```
 
-If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `3b7bf087cbac835e6f7d.png`. This means webpack found our file in the `src` folder and processed it!
+If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `29822eaa871e8eadeaa4.png`. This means webpack found our file in the `src` folder and processed it!
 
 
 ## Loading Fonts
@@ -359,27 +359,27 @@ $ npm run build
 
 ...
 [webpack-cli] Compilation finished
-assets by status 233 KiB [cached] 1 asset
+assets by status 9.88 KiB [cached] 1 asset
 assets by info 33.2 KiB [immutable]
   asset 55055dbfc7c6a83f60ba.woff 18.8 KiB [emitted] [immutable] [from: src/my-font.woff] (auxiliary name: main)
   asset 8f717b802eaab4d7fb94.woff2 14.5 KiB [emitted] [immutable] [from: src/my-font.woff2] (auxiliary name: main)
 asset bundle.js 73.7 KiB [emitted] [minimized] (name: main) 1 related asset
 runtime modules 1.82 KiB 6 modules
 orphan modules 326 bytes [orphan] 1 module
-cacheable modules 541 KiB (javascript) 266 KiB (asset)
+cacheable modules 541 KiB (javascript) 43.1 KiB (asset)
   javascript modules 541 KiB
     modules by path ./node_modules/ 539 KiB
       modules by path ./node_modules/css-loader/dist/runtime/*.js 2.38 KiB 2 modules
       ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
       ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
     modules by path ./src/ 1.98 KiB
-      ./src/index.js + 1 modules 795 bytes [built] [code generated]
+      ./src/index.js + 1 modules 794 bytes [built] [code generated]
       ./node_modules/css-loader/dist/cjs.js!./src/style.css 1.21 KiB [built] [code generated]
-  asset modules 126 bytes (javascript) 266 KiB (asset)
-    ./src/icon.png 42 bytes (javascript) 233 KiB (asset) [built] [code generated]
+  asset modules 126 bytes (javascript) 43.1 KiB (asset)
+    ./src/icon.png 42 bytes (javascript) 9.88 KiB (asset) [built] [code generated]
     ./src/my-font.woff2 42 bytes (javascript) 14.5 KiB (asset) [built] [code generated]
     ./src/my-font.woff 42 bytes (javascript) 18.8 KiB (asset) [built] [code generated]
-webpack 5.4.0 compiled successfully in 3763 ms
+webpack 5.4.0 compiled successfully in 2142 ms
 ```
 
 Open up `dist/index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes.
@@ -716,14 +716,14 @@ __project__
     |- bundle.js
     |- index.html
   |- /src
--   |- data.xml
 -   |- data.csv
--   |- data.toml
--   |- data.yaml
 -   |- data.json5
+-   |- data.toml
+-   |- data.xml
+-   |- data.yaml
+-   |- icon.png
 -   |- my-font.woff
 -   |- my-font.woff2
--   |- icon.png
 -   |- style.css
     |- index.js
   |- /node_modules
@@ -837,7 +837,7 @@ __src/index.js__
 And remove those dependencies we added before:
 
 ```bash
-npm rm csv-loader xml-loader toml yamljs json5
+npm uninstall css-loader csv-loader json5 style-loader toml xml-loader yamljs
 ```
 
 ## Next guide
