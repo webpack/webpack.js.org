@@ -82,10 +82,7 @@ if ('false') { // <-- 'false' from DEBUG is taken
 }
 ```
 
-<<<<<<< HEAD
-## `DotenvPlugin` {#dotenvplugin}
-=======
-## Use Case: Git Version
+## Use Case: Git Version {#use-case-git-version}
 
 The following `EnvironmentPlugin` configuration provides `process.env.GIT_VERSION` (such as "v5.4.0-2-g25139f57f") and `process.env.GIT_AUTHOR_DATE` (such as "2020-11-04T12:25:16+01:00") corresponding to the last Git commit of the repository:
 
@@ -102,8 +99,7 @@ new webpack.EnvironmentPlugin({
 ```
 
 
-## `DotenvPlugin`
->>>>>>> 464684806057e791b807666a08465a7e929d002e
+## `DotenvPlugin` {#dotenvplugin}
 
 The third-party [`DotenvPlugin`](https://github.com/mrsteele/dotenv-webpack) (`dotenv-webpack`) allows you to expose (a subset of) [dotenv variables](https://www.npmjs.com/package/dotenv):
 

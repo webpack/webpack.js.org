@@ -147,11 +147,7 @@ Entrypoint another = another.bundle.js
 
 应避免使用每页多个入口，而应使用多个引入的入口：`entry: { page: ['./analytics', './app'] }`。当在 script 标签中使用 `async` 时，会有更易于优化，且执行顺序一致。
 
-<<<<<<< HEAD
 T> 在使用脚本动态生成  HTML 的场景中，可以使用每页多个入口，例如：当页面上的组件编译时间未知，且 HTML 的页面数据动态获取时。
-=======
-T> Multiple entry points per page could be used in scenarios where HTML is generated in a dynamic matter, e.g. when components on page are unknown at compile-time and HTML page is composed dynamically depending on the data.
->>>>>>> 464684806057e791b807666a08465a7e929d002e
 
 ### `SplitChunksPlugin` {#splitchunksplugin}
 

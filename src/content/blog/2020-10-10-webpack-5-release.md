@@ -168,11 +168,7 @@ JSON 模块现在与提案保持一致，并在使用非默认导出时发出警
 
 即使使用默认导出，未使用的属性也会被 `optimization.usedExports` 优化丢弃，属性会被 `optimization.mangleExports` 优化打乱。
 
-<<<<<<< HEAD
 可以在 `Rule.parser.parse` 中指定一个自定义的 JSON 解析器来导入类似 JSON 的文件（例如针对 toml、yaml、json5 等）。
-=======
-It's possible to specify a custom JSON parser in `Rule.parser.parse` to import JSON-like files (e.g. for toml, yaml, json5, etc.).
->>>>>>> 464684806057e791b807666a08465a7e929d002e
 
 ### import.meta {#importmeta}
 
@@ -478,13 +474,8 @@ Webpack 5 给你更多的选择。
 - 模块解析(`browser` 字段、`exports` 和 `imports` 条件)
 - 一些加载器可能会基于此改变行为
 
-<<<<<<< HEAD
 对于其中的一些情况，在 `"web"` 和 `"node"` 之间的选择过于粗略，我们需要更多的信息。
 因此，我们允许指定最低版本，例如 `"node10.13"`，并推断出更多关于目标环境的属性。
-=======
-For some of these things the choice between `"web"` and `"node"` is too rough and we need more information.
-Therefore we allow to specify the minimum version e.g. like `"node10.13"` and infer more properties about the target environment.
->>>>>>> 464684806057e791b807666a08465a7e929d002e
 
 现在也允许用一个数组组合多个目标，webpack 将确定所有目标的最小属性。使用数组也很有用，当使用像 `"web"` 或 `"node"` 这样没有提供完整信息的目标时（没有版本号）。例如，`["web", "es2020"]` 结合了这两个部分目标。
 
@@ -703,7 +694,6 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
     - `maxSize`
     - `maxAsyncSize`
     - `maxInitialSize`
-<<<<<<< HEAD
 - `optimization.splitChunks` 中的 `maxAsyncSize` 和 `maxInitialSize` 添加了 `maxSize`：允许为初始和异步 chunk 指定不同的 maxSize
 - 移除了 `optimization.splitChunks` 的 `name: true`：不再支持自动命名
     - 迁移：使用默认值。`chunkIds: "named"` 会为你的文件取一个有用的名字，以便于调试
@@ -762,66 +752,6 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 - 移除了 `[filebase]`
     - 迁移：使用 `[base]` 代替
 - 基于文件模板的新 placeholders（例如 SourceMapDevToolPlugin）
-=======
-- `optimization.splitChunks` `maxAsyncSize` and `maxInitialSize` added next to `maxSize`: allows to specify different max sizes for initial and async chunks
-- `optimization.splitChunks` `name: true` removed: Automatic names are no longer supported
-    - __MIGRATION__: Use the default. `chunkIds: "named"` will give your files useful names for debugging
-- `optimization.splitChunks.cacheGroups[].idHint` added: Gives a hint how the named chunk id should be chosen
-- `optimization.splitChunks` `automaticNamePrefix` removed
-    - __MIGRATION__: Use `idHint` instead
-- `optimization.splitChunks` `filename` is no longer restricted to initial chunks
-- `optimization.splitChunks` `usedExports` added to include used exports when comparing modules
-- `optimization.splitChunks.defaultSizeTypes` added: Specified the size types when using numbers for sizes
-- `optimization.mangleExports` added
-- `optimization.minimizer` `"..."` can be used to reference the defaults
-- `optimization.usedExports` `"global"` value added to allow to disable the analysis per runtime and instead do it globally (better performance)
-- `optimization.noEmitOnErrors` renamed to `optimization.emitOnErrors` and logic inverted
-- `optimization.realContentHash` added
-- `output.devtoolLineToLine` removed
-    - __MIGRATION__: No replacement
-- `output.chunkFilename: Function` is now allowed
-- `output.hotUpdateChunkFilename: Function` is now forbidden: It never worked anyway.
-- `output.hotUpdateMainFilename: Function` is now forbidden: It never worked anyway.
-- `output.importFunctionName: string` specifies the name used as replacement for `import()` to allow polyfilling for non-supported environments
-- `output.charset` added: setting it to false omit the `charset` property on script tags
-- `output.hotUpdateFunction` renamed to `output.hotUpdateGlobal`
-- `output.jsonpFunction` renamed to `output.chunkLoadingGlobal`
-- `output.chunkCallbackFunction` renamed to `output.chunkLoadingGlobal`
-- `output.chunkLoading` added
-- `output.enabledChunkLoadingTypes` added
-- `output.chunkFormat` added
-- `module.rules` `resolve` and `parser` will merge in a different way (objects are deeply merged, array may include `"..."` to reference to prev value)
-- `module.rules` `parser.worker` added: Allows to configure the worker supported
-- `module.rules` `query` and `loaders` were removed
-- `module.rules` `options` passing a string is deprecated
-    - __MIGRATION__: Pass an options object instead, open an issue on the loader when this is not supported
-- `module.rules` `mimetype` added: allows to match a mimetype of a DataURI
-- `module.rules` `descriptionData` added: allows to match a data from package.json
-- `module.defaultRules` `"..."` can be used to reference the defaults
-- `stats.chunkRootModules` added: Show root modules for chunks
-- `stats.orphanModules` added: Show modules which are not emitted
-- `stats.runtime` added: Show runtime modules
-- `stats.chunkRelations` added: Show parent/children/sibling chunks
-- `stats.errorStack` added: Show webpack-internal stack trace of errors
-- `stats.preset` added: select a preset
-- `stats.relatedAssets` added: show assets that are related to other assets (e.g. SourceMaps)
-- `stats.warningsFilter` deprecated in favor of `ignoreWarnings`
-- `BannerPlugin.banner` signature changed
-    - `data.basename` removed
-    - `data.query` removed
-    - __MIGRATION__: extract from `filename`
-- `SourceMapDevToolPlugin` `lineToLine` removed
-    - __MIGRATION__: No replacement
-- `[hash]` as hash for the full compilation is now deprecated
-    - __MIGRATION__: Use `[fullhash]` instead or better use another hash option
-- `[modulehash]` is deprecated
-    - __MIGRATION__: Use `[hash]` instead
-- `[moduleid]` is deprecated
-    - __MIGRATION__: Use `[id]` instead
-- `[filebase]` removed
-    - __MIGRATION__: Use `[base]` instead
-- New placeholders for file-based templates (i. e. SourceMapDevToolPlugin)
->>>>>>> 464684806057e791b807666a08465a7e929d002e
     - `[name]`
     - `[base]`
     - `[path]`
@@ -873,11 +803,7 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 
 loader API 中的 `getResolve(options)` 将以另一种方式合并选项，参见` module.rule``resolve `。
 
-<<<<<<< HEAD
-由于 webpack 5 在不同的发布依赖关系之间存在差异，所以传递一个 `dependencyType` 作为选项可能是有意义的（例如`"esm"`，`"commonjs"`，或者其他）。
-=======
-As webpack 5 differs between different issuing dependencies so it might make sense to pass a `dependencyType` as option (e.g. `"esm"`, `"commonjs"`, or others).
->>>>>>> 464684806057e791b807666a08465a7e929d002e
+由于 webpack 5 在不同的发布依赖关系之间存在差异，所以传递一个 `dependencyType` 作为选项可能是有意义的（例如 `"esm"`，`"commonjs"`，或者其他）。
 
 ## 重大内部变更 {#major-internal-changes}
 

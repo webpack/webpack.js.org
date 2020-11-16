@@ -25,15 +25,9 @@ contributors:
   - anshumanv
 ---
 
-<<<<<<< HEAD
 webpack 用于编译 JavaScript 模块。一旦完成 [安装](/guides/installation)，你就可以通过 webpack [CLI](/api/cli) 或 [API](/api/node) 与其配合交互。如果你还不熟悉 webpack，请阅读 [核心概念](/concepts) 和 [对比](/comparison)，了解为什么要使用 webpack，而不是社区中的其他工具。
 
-W> 从 webpack v5.0.0-beta.1 开始，需要运行的 Node.js 最低版本是 10.13.0 (LTS)
-=======
-webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interact with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
-
-W> The minimum Node.js version to run webpack 5 is 10.13.0 (LTS)
->>>>>>> 464684806057e791b807666a08465a7e929d002e
+W> 运行 webpack 5 的 Node.js 版本最低是 10.13.0 (LTS)。
 
 ## 基本安装 {#basic-setup}
 
@@ -46,17 +40,13 @@ npm init -y
 npm install webpack webpack-cli --save-dev
 ```
 
-<<<<<<< HEAD
-T> 贯穿整个指南的是，我们将使用 `diff` 块，来展示对目录、文件和代码所做的修改。
-=======
-Throughout the Guides we will use __`diff`__  blocks to show you what changes we're making to directories, files, and code. For instance:
+在整个指南中，我们将使用 `diff` 块，来展示对目录、文件和代码所做的修改。例如：
 
 ```diff
 + this is a new line you shall copy into your code
 - and this is a line to be removed from your code
   and this is a line not to touch. 
 ```
->>>>>>> 464684806057e791b807666a08465a7e929d002e
 
 现在，我们将创建以下目录结构、文件和内容：
 
@@ -91,14 +81,9 @@ __index.html__
 <!DOCTYPE html>
 <html>
   <head>
-<<<<<<< HEAD
-    <title>起步</title>
-    <script src="https://unpkg.com/lodash@4.16.6"></script>
-=======
     <meta charset="utf-8" />
-    <title>Getting Started</title>
+    <title>起步</title>
     <script src="https://unpkg.com/lodash@4.17.20"></script>
->>>>>>> 464684806057e791b807666a08465a7e929d002e
   </head>
   <body>
     <script src="./src/index.js"></script>
@@ -173,31 +158,17 @@ __src/index.js__
 ``` diff
 +import _ from 'lodash';
 +
-<<<<<<< HEAD
-  function component() {
-    const element = document.createElement('div');
-
--   // lodash（目前通过一个 script 引入）对于执行这一行是必需的
-+   // lodash，现在通过一个 script 引入
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-
-    return element;
-  }
-
-  document.body.appendChild(component());
-=======
  function component() {
    const element = document.createElement('div');
  
--  // Lodash, currently included via a script, is required for this line to work
-+  // Lodash, now imported by this script
+-  // lodash（目前通过一个 script 引入）对于执行这一行是必需的
++  // lodash，现在通过一个 script 引入
    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
  
    return element;
  }
  
  document.body.appendChild(component());
->>>>>>> 464684806057e791b807666a08465a7e929d002e
 ```
 
 现在，我们将会打包所有脚本，我们必须更新 `index.html` 文件。由于现在是通过 `import` 引入 lodash，所以要将 lodash `<script>` 删除，然后修改另一个 `<script>` 标签来加载 bundle，而不是原始的 `/src` 文件：
@@ -208,15 +179,9 @@ __dist/index.html__
  <!DOCTYPE html>
  <html>
    <head>
-<<<<<<< HEAD
-     <meta charset="utf-8"/>
-     <title>起步</title>
--    <script src="https://unpkg.com/lodash@4.16.6"></script>
-=======
      <meta charset="utf-8" />
-     <title>Getting Started</title>
+     <title>起步</title>
 -    <script src="https://unpkg.com/lodash@4.17.20"></script>
->>>>>>> 464684806057e791b807666a08465a7e929d002e
    </head>
    <body>
 -    <script src="./src/index.js"></script>
@@ -230,19 +195,6 @@ __dist/index.html__
 可以这样说，执行 `npx webpack`，会将我们的脚本 `src/index.js` 作为 [入口起点](/concepts/entry-points)，也会生成 `dist/main.js` 作为 [输出](/concepts/output)。Node 8.2/npm 5.2.0 以上版本提供的 `npx` 命令，可以运行在初次安装的 webpack package 中的 webpack 二进制文件（即 `./node_modules/.bin/webpack`）：
 
 ``` bash
-<<<<<<< HEAD
-npx webpack
-
-...
-Built at: 13/06/2018 11:52:07
-  Asset      Size  Chunks             Chunk Names
-main.js  70.4 KiB       0  [emitted]  main
-...
-
-WARNING in configuration (配置警告)
-The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment. ('mode' 选项还未设置，webpack 会将其值回退至 'production'。将 'mode' 选项设置为 'development' 或 'production'，来启用对应环境的默认优化设置)
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/ (也可以将其设置为 'none'，以禁用所有默认行为。了解更多 https://webpack.js.org/configuration/mode/)
-=======
 $ npx webpack
 [webpack-cli] Compilation finished
 asset main.js 69.3 KiB [emitted] [minimized] (name: main) 1 related asset
@@ -251,16 +203,11 @@ cacheable modules 530 KiB
   ./src/index.js 257 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
 webpack 5.4.0 compiled successfully in 3619 ms
->>>>>>> 464684806057e791b807666a08465a7e929d002e
 ```
 
 T> 输出可能会稍有不同，但是只要构建成功，那么你就可以放心继续。并且不要担心警告，稍后我们就会解决。
 
-<<<<<<< HEAD
-在浏览器中打开 `dist` 目录下的 `index.html`，如果一切正常，你应该能看到以下文本：'Hello webpack'。
-=======
-Open `index.html` from the `dist` directory in your browser and, if everything went right, you should see the following text: `'Hello webpack'`.
->>>>>>> 464684806057e791b807666a08465a7e929d002e
+在浏览器中打开 `dist` 目录下的 `index.html`，如果一切正常，你应该能看到以下文本：`'Hello webpack'`。
 
 W> 在浏览器中打开 `index.html`，如果在压缩过后的 JavaScript 中出现语法错误，请设置 [`development 模式`](/configuration/mode/#mode-development)，并再次运行 `npx webpack`。这与最新版本 Node.js (v12.5+) 上运行 `npx webpack` 有关，和 [LTS 版本](https://nodejs.org/en/) 无关。
 
@@ -269,11 +216,7 @@ W> 在浏览器中打开 `index.html`，如果在压缩过后的 JavaScript 中�
 
 [ES2015](https://babeljs.io/learn-es2015/) 中的 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 和 [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) 语句已经被标准化。虽然大多数浏览器还无法支持它们，但是 webpack 却能够提供开箱即用般的支持。
 
-<<<<<<< HEAD
-事实上，webpack 在幕后会将代码“转译”，以便旧版本浏览器可以执行。如果你检查 `dist/main.js`，你可以看到 webpack 具体如何实现，这是独创精巧的设计！除了 `import` 和 `export`，webpack 还能够很好地支持多种其他模块语法，更多信息请查看 [模块 API](/api/module-methods)。
-=======
-Behind the scenes, webpack actually "__transpiles__" the code so that older browsers can also run it. If you inspect `dist/main.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
->>>>>>> 464684806057e791b807666a08465a7e929d002e
+事实上，webpack 在幕后会将代码“__转译__”，以便旧版本浏览器可以执行。如果你检查 `dist/main.js`，你可以看到 webpack 具体如何实现，这是独创精巧的设计！除了 `import` 和 `export`，webpack 还能够很好地支持多种其他模块语法，更多信息请查看 [模块 API](/api/module-methods)。
 
 注意，webpack 不会更改代码中除 `import` 和 `export` 语句以外的部分。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你在 webpack [loader 系统](/concepts/loaders/) 中使用了一个像是 [Babel](https://babel.docschina.org/) 或 [Bublé](https://buble.surge.sh/guide/) 的 [transpiler(转译器)](/loaders/#transpiling)。
 
@@ -311,18 +254,6 @@ module.exports = {
 现在，让我们通过新的配置文件再次执行构建：
 
 ``` bash
-<<<<<<< HEAD
-npx webpack --config webpack.config.js
-
-...
-  Asset      Size  Chunks             Chunk Names
-main.js  70.4 KiB       0  [emitted]  main
-...
-
-WARNING in configuration (配置警告)
-The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment. ('mode' 选项还未设置，webpack 会将其值回退至 'production'。将 'mode' 选项设置为 'development' 或 'production'，来启用对应环境的默认优化设置)
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/ (也可以将其设置为 'none'，以禁用所有默认行为。了解更多 https://webpack.js.org/configuration/mode/)
-=======
 $ npx webpack --config webpack.config.js 
 [webpack-cli] Compilation finished
 asset main.js 69.3 KiB [compared for emit] [minimized] (name: main) 1 related asset
@@ -331,7 +262,6 @@ cacheable modules 530 KiB
   ./src/index.js 257 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
 webpack 5.4.0 compiled successfully in 3516 ms
->>>>>>> 464684806057e791b807666a08465a7e929d002e
 ```
 
 T> 如果 `webpack.config.js` 存在，则 `webpack` 命令将默认选择使用它。我们在这里使用 `--config` 选项只是向你表明，可以传递任何名称的配置文件。这对于需要拆分成多个文件的复杂配置是非常有用的。
@@ -378,14 +308,6 @@ $ npm run build
 
 ...
 
-<<<<<<< HEAD
-WARNING in configuration (配置警告)
-The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment. ('mode' 选项还未设置，webpack 会将其值回退至 'production'。将 'mode' 选项设置为 'development' 或 'production'，来启用对应环境的默认优化设置)
-You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/configuration/mode/ (也可以将其设置为 'none'，以禁用所有默认行为。了解更多 https://webpack.js.org/configuration/mode/)
-```
-
-T> 通过在 `npm run build` 命令和你的参数之间添加两个中横线，可以将自定义参数传递给 webpack，例如：`npm run build -- --colors`。
-=======
 [webpack-cli] Compilation finished
 asset main.js 69.3 KiB [compared for emit] [minimized] (name: main) 1 related asset
 runtime modules 1000 bytes 5 modules
@@ -396,7 +318,6 @@ webpack 5.4.0 compiled successfully in 3764 ms
 ```
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --color`.
->>>>>>> 464684806057e791b807666a08465a7e929d002e
 
 
 ## 结论 {#conclusion}
@@ -417,11 +338,7 @@ webpack-demo
 |- /node_modules
 ```
 
-<<<<<<< HEAD
-T> 如果你使用的是 npm 5，你可能还会在目录中看到一个 `package-lock.json` 文件。
-=======
-T> If you're using npm 5+, you'll probably also see a `package-lock.json` file in your directory.
->>>>>>> 464684806057e791b807666a08465a7e929d002e
+T> 如果你使用的是 npm 5+，你可能还会在目录中看到一个 `package-lock.json` 文件。
 
 W> 不要使用 webpack 编译不可信的代码。它可能会在你的计算机，远程服务器或者在你 web 应用程序使用者的浏览器中执行恶意代码。
 

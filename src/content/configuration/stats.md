@@ -957,11 +957,7 @@ module.exports = {
 
 `boolean = true`
 
-<<<<<<< HEAD
 显示 chunk 组的子 chunk。（例如，预置（prefetched），预加载（preloaded）的 chunk 和 asset)。
-=======
-Display children of the chunk groups (e.g. prefetched, preloaded chunks and assets).
->>>>>>> 464684806057e791b807666a08465a7e929d002e
 
 ```javascript
 module.exports = {

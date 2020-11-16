@@ -22,39 +22,11 @@ T> 本指南继续沿用 [管理输出](/guides/output-management) 指南中的�
 
 W> 本指南中的工具__仅用于开发环境__，请__不要__在生产环境中使用它们！
 
-<<<<<<< HEAD
-在开始前，我们先将 [`mode` 设置为 `'development'`](/configuration/mode/#mode-development)。
-=======
-Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-development) and `title` to `'Development'`.
->>>>>>> 464684806057e791b807666a08465a7e929d002e
+在开始前，我们先将 [`mode` 设置为 `'development'`](/configuration/mode/#mode-development)，并将 `title` 设置为 `'Development'`。
 
 __webpack.config.js__
 
 ``` diff
-<<<<<<< HEAD
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
-  module.exports = {
-+   mode: 'development',
-    entry: {
-      app: './src/index.js',
-      print: './src/print.js',
-    },
-    plugins: [
-      // 对于 CleanWebpackPlugin 的 v2 versions 以下版本，使用 new CleanWebpackPlugin(['dist/*'])
-      new CleanWebpackPlugin(),
-      new HtmlWebpackPlugin({
-        title: '开发环境',
-      }),
-    ],
-    output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-  };
-=======
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -77,7 +49,6 @@ __webpack.config.js__
      path: path.resolve(__dirname, 'dist'),
    },
  };
->>>>>>> 464684806057e791b807666a08465a7e929d002e
 ```
 
 ## 使用 source map {#using-source-maps}
@@ -162,11 +133,7 @@ W> 某些文本编辑器具有 "safe write(安全写入)" 功能，可能会干�
 
 webpack 提供几种可选方式，帮助你在代码发生变化后自动编译代码：
 
-<<<<<<< HEAD
- 1. webpack watch mode(webpack 观察模式)
-=======
- 1. webpack's [Watch Mode](/configuration/watch/#watch)
->>>>>>> 464684806057e791b807666a08465a7e929d002e
+ 1. webpack [watch mode](/configuration/watch/#watch)(webpack 观察模式)
  2. webpack-dev-server
  3. webpack-dev-middleware
 
@@ -358,34 +325,6 @@ npm install --save-dev express webpack-dev-middleware
 __webpack.config.js__
 
 ``` diff
-<<<<<<< HEAD
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
-  module.exports = {
-    mode: 'development',
-    entry: {
-      app: './src/index.js',
-      print: './src/print.js',
-    },
-    devtool: 'inline-source-map',
-    devServer: {
-      contentBase: './dist',
-    },
-    plugins: [
-      new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-      new HtmlWebpackPlugin({
-        title: '管理输出',
-      }),
-    ],
-    output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-+     publicPath: '/',
-    },
-  };
-=======
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -412,7 +351,6 @@ __webpack.config.js__
 +    publicPath: '/',
    },
  };
->>>>>>> 464684806057e791b807666a08465a7e929d002e
 ```
 
 我们将会在 server 脚本使用 `publicPath`，以确保文件资源能够正确地 serve 在 `http://localhost:3000` 下，稍后我们会指定 port number(端口号)。接下来是设置自定义 `express` server：
@@ -442,21 +380,13 @@ const app = express();
 const config = require('./webpack.config.js');
 const compiler = webpack(config);
 
-<<<<<<< HEAD
 // 告知 express 使用 webpack-dev-middleware，
 // 以及将 webpack.config.js 配置文件作为基础配置。
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath,
-}));
-=======
-// Tell express to use the webpack-dev-middleware and use the webpack.config.js
-// configuration file as a base.
 app.use(
   webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
   })
 );
->>>>>>> 464684806057e791b807666a08465a7e929d002e
 
 // 将文件 serve 到 port 3000。
 app.listen(3000, function () {
