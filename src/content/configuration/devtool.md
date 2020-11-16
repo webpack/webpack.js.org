@@ -9,6 +9,7 @@ contributors:
   - madhavarshney
   - wizardofhogwarts
   - anikethsaha
+  - snitin315
 related:
   - title: 启用 Source Maps
     url: https://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/
@@ -23,7 +24,7 @@ related:
 
 ## `devtool` {#devtool}
 
-`string` `false`
+`string = 'eval'` `false`
 
 选择一种 [source map](http://blog.teamtreehouse.com/introduction-source-maps) 格式来增强调试过程。不同的值会明显影响到构建(build)和重新构建(rebuild)的速度。
 

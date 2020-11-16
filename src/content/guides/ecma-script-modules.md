@@ -63,7 +63,7 @@ import theDefaultValue from './module.js';
 
 By default webpack will automatically detect whether a file is an ESM or a different module system.
 
-Node.js estabilished a way of explicitly setting the module type of files by using a property in the `package.json`.
+Node.js established a way of explicitly setting the module type of files by using a property in the `package.json`.
 Setting `"type": "module"` in a package.json does force all files below this package.json to be ECMAScript Modules.
 Setting `"type": "commonjs"` will instead force them to be CommonJS Modules.
 
@@ -75,13 +75,13 @@ Setting `"type": "commonjs"` will instead force them to be CommonJS Modules.
 
 In addition to that, files can set the module type by using `.mjs` or `.cjs` extension. `.mjs` will force them to be ESM, `.cjs` force them to be CommonJs.
 
-In DataURIs using the `text/javascript` or `application/javascript` mimetype will also force module type to ESM.
+In DataURIs using the `text/javascript` or `application/javascript` mime type will also force module type to ESM.
 
 In addition to the module format, flagging modules as ESM also affect the resolving logic, interop logic and the available symbols in modules.
 
-Imports in ESM are resolved more stictly. Relative requests must include a filename and file extension.
+Imports in ESM are resolved more strictly. Relative requests must include a filename and file extension.
 
-T> Requests to packages e. g. `import "lodash"` are still supported.
+T> Requests to packages e.g. `import "lodash"` are still supported.
 
 Only the "default" export can be imported from non-ESM. Named exports are not available.
 

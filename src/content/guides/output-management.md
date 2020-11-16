@@ -47,6 +47,7 @@ export default function printMe() {
 __src/index.js__
 
 ``` diff
+<<<<<<< HEAD
   import _ from 'lodash';
 + import printMe from './print.js';
 
@@ -58,13 +59,26 @@ __src/index.js__
 
 +   btn.innerHTML = '点击这里，然后查看 console！';
 +   btn.onclick = printMe;
+=======
+ import _ from 'lodash';
++import printMe from './print.js';
+ 
+ function component() {
+   const element = document.createElement('div');
++  const btn = document.createElement('button');
+ 
+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+ 
++  btn.innerHTML = 'Click me and check the console!';
++  btn.onclick = printMe;
+>>>>>>> 464684806057e791b807666a08465a7e929d002e
 +
-+   element.appendChild(btn);
-
-    return element;
-  }
-
-  document.body.appendChild(component());
++  element.appendChild(btn);
++
+   return element;
+ }
+ 
+ document.body.appendChild(component());
 ```
 
 还要更新 `dist/index.html` 文件，来为 webpack 分离入口做好准备：
@@ -72,6 +86,7 @@ __src/index.js__
 __dist/index.html__
 
 ``` diff
+<<<<<<< HEAD
   <!doctype html>
   <html>
     <head>
@@ -84,6 +99,21 @@ __dist/index.html__
 +     <script src="./app.bundle.js"></script>
     </body>
   </html>
+=======
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="utf-8" />
+-    <title>Asset Management</title>
++    <title>Output Management</title>
++    <script src="./print.bundle.js"></script>
+   </head>
+   <body>
+-    <script src="bundle.js"></script>
++    <script src="./app.bundle.js"></script>
+   </body>
+ </html>
+>>>>>>> 464684806057e791b807666a08465a7e929d002e
 ```
 
 现在调整配置。我们将在 entry 添加 `src/print.js` 作为新的入口起点（`print`），然后修改 output，以便根据入口起点定义的名称，动态地产生 bundle 名称：
@@ -91,30 +121,35 @@ __dist/index.html__
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-
-  module.exports = {
--   entry: './src/index.js',
-+   entry: {
-+     app: './src/index.js',
-+     print: './src/print.js',
-+   },
-    output: {
--     filename: 'bundle.js',
-+     filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-  };
+ const path = require('path');
+ 
+ module.exports = {
+-  entry: './src/index.js',
++  entry: {
++    app: './src/index.js',
++    print: './src/print.js',
++  },
+   output: {
+-    filename: 'bundle.js',
++    filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+ };
 ```
 
 执行 `npm run build`，然后看到生成如下：
 
 ``` bash
 ...
-          Asset     Size  Chunks                    Chunk Names
-  app.bundle.js   545 kB    0, 1  [emitted]  [big]  app
-print.bundle.js  2.74 kB       1  [emitted]         print
-...
+[webpack-cli] Compilation finished
+asset app.bundle.js 69.5 KiB [emitted] [minimized] (name: app) 1 related asset
+asset print.bundle.js 316 bytes [emitted] [minimized] (name: print)
+runtime modules 1.36 KiB 7 modules
+cacheable modules 530 KiB
+  ./src/index.js 407 bytes [built] [code generated]
+  ./src/print.js 83 bytes [built] [code generated]
+  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+webpack 5.4.0 compiled successfully in 3410 ms
 ```
 
 我们可以看到，webpack 生成 `print.bundle.js` 和 `app.bundle.js` 文件，这也和我们在 `index.html` 文件中指定的文件名称相对应。如果你在浏览器中打开 `index.html`，就可以看到在点击按钮时会发生什么。
@@ -133,6 +168,7 @@ npm install --save-dev html-webpack-plugin
 __webpack.config.js__
 
 ``` diff
+<<<<<<< HEAD
   const path = require('path');
 + const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -151,17 +187,42 @@ __webpack.config.js__
       path: path.resolve(__dirname, 'dist'),
     },
   };
+=======
+ const path = require('path');
++const HtmlWebpackPlugin = require('html-webpack-plugin');
+ 
+ module.exports = {
+   entry: {
+     app: './src/index.js',
+     print: './src/print.js',
+   },
++  plugins: [
++    new HtmlWebpackPlugin({
++      title: 'Output Management',
++    }),
++  ],
+   output: {
+     filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+ };
+>>>>>>> 464684806057e791b807666a08465a7e929d002e
 ```
 
 在我们构建之前，你应该了解，虽然在 `dist/` 文件夹我们已经有了 `index.html` 这个文件，然而 `HtmlWebpackPlugin` 还是会默认生成它自己的 `index.html` 文件。也就是说，它会用新生成的 `index.html` 文件，替换我们的原有文件。我们看下执行 `npm run build` 后会发生什么：
 
 ``` bash
 ...
-           Asset       Size  Chunks                    Chunk Names
- print.bundle.js     544 kB       0  [emitted]  [big]  print
-   app.bundle.js    2.81 kB       1  [emitted]         app
-      index.html  249 bytes          [emitted]
-...
+[webpack-cli] Compilation finished
+asset app.bundle.js 69.5 KiB [compared for emit] [minimized] (name: app) 1 related asset
+asset print.bundle.js 316 bytes [compared for emit] [minimized] (name: print)
+asset index.html 251 bytes [emitted]
+runtime modules 1.36 KiB 7 modules
+cacheable modules 530 KiB
+  ./src/index.js 407 bytes [built] [code generated]
+  ./src/print.js 83 bytes [built] [code generated]
+  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+webpack 5.4.0 compiled successfully in 5761 ms
 ```
 
 如果在代码编辑器中打开 `index.html`，你会看到 `HtmlWebpackPlugin` 创建了一个全新的文件，所有的 bundle 会自动添加到 html 中。
@@ -183,6 +244,7 @@ npm install --save-dev clean-webpack-plugin
 __webpack.config.js__
 
 ``` diff
+<<<<<<< HEAD
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 + const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -203,6 +265,28 @@ __webpack.config.js__
       path: path.resolve(__dirname, 'dist'),
     },
   };
+=======
+ const path = require('path');
+ const HtmlWebpackPlugin = require('html-webpack-plugin');
++const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+ 
+ module.exports = {
+   entry: {
+     app: './src/index.js',
+     print: './src/print.js',
+   },
+   plugins: [
++    new CleanWebpackPlugin(),
+     new HtmlWebpackPlugin({
+       title: 'Output Management',
+     }),
+   ],
+   output: {
+     filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+ };
+>>>>>>> 464684806057e791b807666a08465a7e929d002e
 ```
 
 现在，执行 `npm run build`，检查 `/dist` 文件夹。如果一切顺利，现在只会看到构建后生成的文件，而没有旧文件！
@@ -212,7 +296,11 @@ __webpack.config.js__
 
 你可能会很感兴趣，webpack 和 webpack 插件似乎“知道”应该生成哪些文件。答案是，webpack 通过 manifest，可以追踪所有模块到输出 bundle 之间的映射。如果你想要知道如何以其他方式来控制 webpack [`输出`](/configuration/output)，了解 manifest 是个好的开始。
 
+<<<<<<< HEAD
 通过 [`WebpackManifestPlugin`](https://github.com/danethurber/webpack-manifest-plugin) 插件，可以将 manifest 数据提取为一个容易使用的 json 文件。
+=======
+The manifest data can be extracted into a json file for easy consumption using the [`WebpackManifestPlugin`](https://github.com/shellscape/webpack-manifest-plugin).
+>>>>>>> 464684806057e791b807666a08465a7e929d002e
 
 我们不会在此展示一个如何在项目中使用此插件的完整示例，你可以在 [manifest](/concepts/manifest) 概念页面深入阅读，以及在 [缓存](/guides/caching) 指南中，了解它与长效缓存有何关系。
 

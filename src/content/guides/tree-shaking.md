@@ -180,7 +180,11 @@ T> 注意，所有导入文件都会受到 tree shaking 的影响。这意味着
 
 __`sideEffects` 更为有效__ 是因为它允许跳过整个模块/文件和整个文件子树。
 
+<<<<<<< HEAD
 `usedExports` 依赖于 [terser](https://github.com/terser-js/terser) 去检测语句中的副作用。它是一个 JavaScript 任务而且没有像 `sideEffects` 一样简单直接。而且它不能跳转子树/依赖由于细则中说副作用需要被评估。尽管导出函数能运作如常，但 React 框架的高阶函数（HOC）在这种情况下是会出问题的。
+=======
+`usedExports` relies on [terser](https://github.com/terser-js/terser) to detect side effects in statements. It is a difficult task in JavaScript and not as effective as straightforward `sideEffects` flag. It also can't skip subtree/dependencies since the spec says that side effects need to be evaluated. While exporting function works fine, React's Higher Order Components (HOC) are problematic in this regard.
+>>>>>>> 464684806057e791b807666a08465a7e929d002e
 
 让我们来看一个例子：
 
@@ -241,7 +245,9 @@ export {
 
 但我们可以通过 `/*#__PURE__*/` 注释来帮忙 terser。它给一个语句标记为没有副作用。就这样一个简单的改变就能够使下面的代码被 tree-shake:
 
-`var Button$1 = /*#__PURE__*/ withAppProvider()(Button);`
+```javascript
+var Button$1 = /*#__PURE__*/ withAppProvider()(Button);
+```
 
 这会使得这段代码被过滤，但仍然会有一些引入的问题，需要对其进行评估，因为它们产生了副作用。
 

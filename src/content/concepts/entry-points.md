@@ -9,6 +9,7 @@ contributors:
   - EugeneHlushko
   - Zearin
   - chenxsan
+  - adyjs
 ---
 
 正如我们在 [起步](/guides/getting-started/#using-a-configuration) 中提到的，在 webpack 配置中有多种方式定义 `entry` 属性。除了解释为什么它可能非常有用，我们还将向你展示__如何去__配置 `entry` 属性。
@@ -38,9 +39,29 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 T> __当你向 `entry` 传入一个数组时会发生什么？__向 `entry` 属性传入文件路径数组，将创建出一个 __多主入口(multi-main entry)__。在你想要一次注入多个依赖文件，并且将它们的依赖导向(graph)到一个 chunk 时，这种方式就很有用。
 
 当你正在寻找为「只有一个入口起点的应用程序或工具（即 library）」快速设置 webpack 配置的时候，这会是个很不错的选择。然而，使用此语法在扩展配置时有失灵活性。
+=======
+We can also pass an array of file paths to the `entry` property which creates what is known as a __"multi-main entry"__. This is useful when you would like to inject multiple dependent files together and graph their dependencies into one "chunk".
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  entry: [ 
+    './src/file_1.js',
+    './src/file_2.js'
+  ],
+  output: {
+    filename: 'bundle.js'
+  }
+};
+```
+
+Single Entry Syntax is a great choice when you are looking to quickly setup a webpack configuration for an application or tool with one entry point (i.e. a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.
+>>>>>>> 464684806057e791b807666a08465a7e929d002e
 
 
 ## 对象语法 {#object-syntax}
@@ -64,7 +85,12 @@ T> __“webpack 配置的可扩展”__是指，这些配置可以重复使用�
 
 T> 当你通过插件生成入口时，你可以传递空对象 `{}` 给 `entry`。
 
+<<<<<<< HEAD
 ## 常见场景 {#scenarios}
+=======
+
+## Scenarios
+>>>>>>> 464684806057e791b807666a08465a7e929d002e
 
 以下列出一些入口配置和它们的实际用例：
 
@@ -86,7 +112,7 @@ __webpack.prod.js__
 ```javascript
 module.exports = {
   output: {
-    filename: '[name].[contentHash].bundle.js'
+    filename: '[name].[contenthash].bundle.js'
   }
 };
 ```

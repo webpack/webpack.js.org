@@ -22,6 +22,9 @@
   &__item {
     position: relative;
     margin: 0 2px 2px 2px;
+    @media (prefers-color-scheme: dark) {
+      background-color: #fff;
+    }
   }
 
   &__latest-avatar {
