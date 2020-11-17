@@ -25,7 +25,7 @@ webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `
 
 ### `string` {#string}
 
-通过 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js) ，
+通过 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js)，
 可以支持以下字符串值：
 
 选项                | 描述
