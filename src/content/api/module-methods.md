@@ -164,7 +164,7 @@ T> Note that all options can be combined like so `/* webpackMode: "lazy-once", w
 
 T> Note that `webpackInclude` and `webpackExclude` options do not interfere with the prefix. eg: `./locale`.
 
-`webpackExports`: tells webpack to only bundle the specified exports of a module. It can decrease the output size of a chunk. Available since [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18).
+`webpackExports`: tells webpack to only bundle the specified exports of a dynamically `import()`ed module. It can decrease the output size of a chunk. Available since [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18).
 
 
 ## CommonJS
