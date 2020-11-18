@@ -9,6 +9,7 @@ contributors:
   - wizardofhogwarts
   - EugeneHlushko
   - chenxsan
+  - liorgreenb
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -494,7 +495,7 @@ Here's an example:
 compilation.hooks.processAssets.tap(
   {
     name: 'MyPlugin',
-    stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
+    stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL,
   },
   (assets) => {
     // code here
