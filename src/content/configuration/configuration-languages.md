@@ -98,7 +98,7 @@ W> We had been getting reports that `TS_NODE_PROJECT` might not work with `"TS_N
 Similarly, to use [CoffeeScript](https://coffeescript.org/), you would first install the necessary dependencies:
 
 ``` bash
-npm install --save-dev coffee-script
+npm install --save-dev coffeescript
 ```
 
 and then proceed to write your configuration:
