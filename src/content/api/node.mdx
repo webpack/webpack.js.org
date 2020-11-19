@@ -11,6 +11,7 @@ contributors:
   - toshihidetagami
   - chenxsan
   - jamesgeorge007
+  - textbook
 ---
 
 webpack provides a Node.js API which can be used directly in Node.js runtime.
@@ -278,7 +279,7 @@ webpack([
   { entry: './index1.js', output: { filename: 'bundle1.js' } },
   { entry: './index2.js', output: { filename: 'bundle2.js' } }
 ], (err, stats) => { // [Stats Object](#stats-object)
-  process.stdout.write(stats.toString() + '\\n');
+  process.stdout.write(stats.toString() + '\n');
 })
 ```
 
