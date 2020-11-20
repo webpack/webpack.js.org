@@ -31,14 +31,14 @@ Then add the plugin to your `webpack` config. For example:
 **webpack.config.js**
 
 ```js
-const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: 'source', to: 'dest' },
-        { from: 'other', to: 'public' },
+        { from: "source", to: "dest" },
+        { from: "other", to: "public" },
       ],
     }),
   ],
@@ -58,14 +58,14 @@ The plugin's signature:
 **webpack.config.js**
 
 ```js
-const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: 'source', to: 'dest' },
-        { from: 'other', to: 'public' },
+        { from: "source", to: "dest" },
+        { from: "other", to: "public" },
       ],
       options: {
         concurrency: 100,
@@ -112,18 +112,18 @@ module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [
-        'relative/path/to/file.ext',
-        'relative/path/to/dir',
-        path.resolve(__dirname, 'src', 'file.ext'),
-        path.resolve(__dirname, 'src', 'dir'),
-        '**/*',
+        "relative/path/to/file.ext",
+        "relative/path/to/dir",
+        path.resolve(__dirname, "src", "file.ext"),
+        path.resolve(__dirname, "src", "dir"),
+        "**/*",
         {
-          from: '**/*',
+          from: "**/*",
         },
         // If absolute path is a `glob` we replace backslashes with forward slashes, because only forward slashes can be used in the `glob`
         path.posix.join(
-          path.resolve(__dirname, 'src').replace(/\\/g, '/'),
-          '*.txt'
+          path.resolve(__dirname, "src").replace(/\\/g, "/"),
+          "*.txt"
         ),
       ],
     }),
@@ -141,7 +141,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, 'file.txt'),
+          from: path.resolve(__dirname, "file.txt"),
         },
       ],
     }),
@@ -160,8 +160,8 @@ module.exports = {
         {
           // If absolute path is a `glob` we replace backslashes with forward slashes, because only forward slashes can be used in the `glob`
           from: path.posix.join(
-            path.resolve(__dirname, 'fixtures').replace(/\\/g, '/'),
-            '*.txt'
+            path.resolve(__dirname, "fixtures").replace(/\\/g, "/"),
+            "*.txt"
           ),
         },
       ],
@@ -192,16 +192,16 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: '**/*',
-          to: 'relative/path/to/dest/',
+          from: "**/*",
+          to: "relative/path/to/dest/",
         },
         {
-          from: '**/*',
-          to: '/absolute/path/to/dest/',
+          from: "**/*",
+          to: "/absolute/path/to/dest/",
         },
         {
-          from: '**/*',
-          to: '[path][name].[contenthash].[ext]',
+          from: "**/*",
+          to: "[path][name].[contenthash].[ext]",
         },
       ],
     }),
@@ -228,9 +228,9 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/*.txt',
-          to: 'dest/',
-          context: 'app/',
+          from: "src/*.txt",
+          to: "dest/",
+          context: "app/",
         },
       ],
     }),
@@ -268,11 +268,11 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'public/**/*',
+          from: "public/**/*",
           globOptions: {
             dot: true,
             gitignore: true,
-            ignore: ['**/file.*', '**/ignored-directory/**'],
+            ignore: ["**/file.*", "**/ignored-directory/**"],
           },
         },
       ],
@@ -291,19 +291,19 @@ Default: `undefined`
 **webpack.config.js**
 
 ```js
-const fs = require('fs').promise;
+const fs = require("fs").promise;
 
 module.exports = {
   plugins: [
     new CopyPlugin({
       patterns: [
         {
-          from: 'public/**/*',
+          from: "public/**/*",
           filter: async (resourcePath) => {
             const data = await fs.promises.readFile(resourcePath);
             const content = data.toString();
 
-            if (content === 'my-custom-content') {
+            if (content === "my-custom-content") {
               return false;
             }
 
@@ -342,9 +342,9 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'path/to/file.txt',
-          to: 'directory/with/extension.ext',
-          toType: 'dir',
+          from: "path/to/file.txt",
+          to: "directory/with/extension.ext",
+          toType: "dir",
         },
       ],
     }),
@@ -362,9 +362,9 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'path/to/file.txt',
-          to: 'file/without/extension',
-          toType: 'file',
+          from: "path/to/file.txt",
+          to: "file/without/extension",
+          toType: "file",
         },
       ],
     }),
@@ -382,9 +382,9 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/',
-          to: 'dest/[name].[hash].[ext]',
-          toType: 'template',
+          from: "src/",
+          to: "dest/[name].[hash].[ext]",
+          toType: "template",
         },
       ],
     }),
@@ -407,8 +407,8 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/**/*',
-          to: 'dest/',
+          from: "src/**/*",
+          to: "dest/",
           force: true,
         },
       ],
@@ -434,8 +434,8 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/**/*',
-          to: 'dest/',
+          from: "src/**/*",
+          to: "dest/",
           flatten: true,
         },
       ],
@@ -459,8 +459,8 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/*.png',
-          to: 'dest/',
+          from: "src/*.png",
+          to: "dest/",
           // The `content` argument is a [`Buffer`](https://nodejs.org/api/buffer.html) object, it could be converted to a `String` to be processed using `content.toString()`
           // The `absoluteFrom` argument is a `String`, it is absolute path from where the file is being copied
           transform(content, absoluteFrom) {
@@ -481,8 +481,8 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/*.png',
-          to: 'dest/',
+          from: "src/*.png",
+          to: "dest/",
           transform(content, path) {
             return Promise.resolve(optimize(content));
           },
@@ -513,8 +513,8 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/*.png',
-          to: 'dest/',
+          from: "src/*.png",
+          to: "dest/",
           transform(content, path) {
             return optimize(content);
           },
@@ -538,13 +538,13 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/*.png',
-          to: 'dest/',
+          from: "src/*.png",
+          to: "dest/",
           transform(content, path) {
             return optimize(content);
           },
           // Should be absolute
-          cacheTransform: path.resolve(__dirname, 'cache-directory'),
+          cacheTransform: path.resolve(__dirname, "cache-directory"),
         },
       ],
     }),
@@ -564,17 +564,17 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/*.png',
-          to: 'dest/',
+          from: "src/*.png",
+          to: "dest/",
           transform(content, path) {
             return optimize(content);
           },
           cacheTransform: {
-            directory: path.resolve(__dirname, 'cache-directory'),
+            directory: path.resolve(__dirname, "cache-directory"),
             keys: {
               // May be useful for invalidating cache based on external values
               // For example, you can invalid cache based on `process.version` - { node: process.version }
-              key: 'value',
+              key: "value",
             },
           },
         },
@@ -596,13 +596,13 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/*.png',
-          to: 'dest/',
+          from: "src/*.png",
+          to: "dest/",
           transform(content, path) {
             return optimize(content);
           },
           cacheTransform: {
-            directory: path.resolve(__dirname, 'cache-directory'),
+            directory: path.resolve(__dirname, "cache-directory"),
             keys: (defaultCacheKeys, absoluteFrom) => {
               const keys = getCustomCacheInvalidationKeysSync();
 
@@ -629,13 +629,13 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/*.png',
-          to: 'dest/',
+          from: "src/*.png",
+          to: "dest/",
           transform(content, path) {
             return optimize(content);
           },
           cacheTransform: {
-            directory: path.resolve(__dirname, 'cache-directory'),
+            directory: path.resolve(__dirname, "cache-directory"),
             keys: async (defaultCacheKeys, absoluteFrom) => {
               const keys = await getCustomCacheInvalidationKeysAsync();
 
@@ -671,10 +671,10 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/*.png',
-          to: 'dest/',
+          from: "src/*.png",
+          to: "dest/",
           transformPath(targetPath, absolutePath) {
-            return 'newPath';
+            return "newPath";
           },
         },
       ],
@@ -691,10 +691,10 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/*.png',
-          to: 'dest/',
+          from: "src/*.png",
+          to: "dest/",
           transformPath(targetPath, absolutePath) {
-            return Promise.resolve('newPath');
+            return Promise.resolve("newPath");
           },
         },
       ],
@@ -716,7 +716,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, 'missing-file.txt'),
+          from: path.resolve(__dirname, "missing-file.txt"),
           noErrorOnMissing: true,
         },
       ],
@@ -771,7 +771,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'src/directory-nested/**/*',
+          from: "src/directory-nested/**/*",
         },
       ],
     }),
@@ -796,8 +796,8 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: '**/*',
-          context: path.resolve(__dirname, 'src', 'directory-nested'),
+          from: "**/*",
+          context: path.resolve(__dirname, "src", "directory-nested"),
         },
       ],
     }),
@@ -822,7 +822,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, 'src', 'directory-nested'),
+          from: path.resolve(__dirname, "src", "directory-nested"),
         },
       ],
     }),
@@ -847,8 +847,8 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: '**/*',
-          context: path.resolve(__dirname, 'src', 'directory-nested'),
+          from: "**/*",
+          context: path.resolve(__dirname, "src", "directory-nested"),
         },
       ],
     }),
@@ -873,9 +873,9 @@ module.exports = {
         {
           from: path.resolve(
             __dirname,
-            'src',
-            'directory-nested',
-            'nested-file.txt'
+            "src",
+            "directory-nested",
+            "nested-file.txt"
           ),
         },
       ],
@@ -900,8 +900,8 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: 'nested-file.txt',
-          context: path.resolve(__dirname, 'src', 'directory-nested'),
+          from: "nested-file.txt",
+          context: path.resolve(__dirname, "src", "directory-nested"),
         },
       ],
     }),
@@ -926,15 +926,15 @@ module.exports = {
       patterns: [
         {
           from: path.posix.join(
-            path.resolve(__dirname, 'src').replace(/\\/g, '/'),
-            '**/*'
+            path.resolve(__dirname, "src").replace(/\\/g, "/"),
+            "**/*"
           ),
           globOptions: {
             ignore: [
               // Ignore all `txt` files
-              '**/*.txt',
+              "**/*.txt",
               // Ignore all files in all subdirectories
-              '**/subdir/**',
+              "**/subdir/**",
             ],
           },
         },
