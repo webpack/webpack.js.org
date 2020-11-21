@@ -72,7 +72,7 @@ module.exports = {
       cacheGroups: {
         defaultVendors: {
           test: /[\\/]node_modules[\\/]/,
-          priority: -10
+          priority: -10,
           reuseExistingChunk: true
         },
         default: {
