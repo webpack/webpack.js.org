@@ -70,9 +70,9 @@ module.exports = {
 
 ## `watchOptions.ignored`
 
-`RegExp` [`anymatch`](https://github.com/micromatch/anymatch)
+`RegExp` `string` [`string`]
 
-For some systems, watching many file systems can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules`:
+For some systems, watching many files can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules` using a regular expression:
 
 __webpack.config.js__
 
@@ -85,7 +85,20 @@ module.exports = {
 };
 ```
 
-It is also possible to have and use multiple [anymatch](https://github.com/micromatch/anymatch) patterns:
+Alternatively, a glob pattern may be used:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  watchOptions: {
+    ignored: 'node_modules/**'
+  }
+};
+```
+
+It is also possible to use multiple glob patterns:
 
 __webpack.config.js__
 
