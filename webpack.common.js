@@ -80,17 +80,6 @@ module.exports = (env = {}) => ({
         ]
       },
       {
-        test: /\.font.js$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: 'fontgen-loader',
-            options: { embed: true }
-          }
-        ]
-      },
-      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: [
