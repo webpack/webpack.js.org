@@ -70,7 +70,7 @@ module.exports = {
 
 ## `watchOptions.ignored`
 
-`RegExp` `string` [`string`]
+`RegExp` `string` `[string]`
 
 For some systems, watching many files can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules` using a regular expression:
 
