@@ -14,6 +14,7 @@ import isClient from '../../utilities/is-client';
 import 'docsearch.js/dist/cdn/docsearch.css';
 import './Navigation.scss';
 import './Search.scss';
+
 import GithubIcon from '../../styles/icons/github.svg';
 import TwitterIcon from '../../styles/icons/twitter.svg';
 import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
