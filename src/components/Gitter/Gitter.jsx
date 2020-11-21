@@ -20,7 +20,7 @@ export default class Gitter extends React.Component {
         <div
           className="gitter__button"
           onClick={this._handleIconClick}>
-          <GitterIcon className="gitter__icon" fill='white' />
+          <GitterIcon className="gitter__icon" fill='#fff' />
         </div>
       </div>
     );
