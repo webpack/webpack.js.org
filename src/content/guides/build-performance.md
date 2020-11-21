@@ -105,7 +105,7 @@ W> Don't use too many workers, as there is a boot overhead for the Node.js runti
 
 ### Persistent cache
 
-Enable persistent caching with the `cache-loader`. Clear cache directory on `"postinstall"` in `package.json`.
+Use [cache](https://webpack.js.org/configuration/other-options/#cache) option in webpack configuration. Clear cache directory on `"postinstall"` in `package.json`.
 
 
 T> We support yarn PnP version 3 [`yarn 2 berry`](https://next.yarnpkg.com/features/pnp) for persistent caching.
