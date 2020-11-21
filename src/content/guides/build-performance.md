@@ -108,7 +108,7 @@ W> Don't use too many workers, as there is a boot overhead for the Node.js runti
 Enable persistent caching with the `cache-loader`. Clear cache directory on `"postinstall"` in `package.json`.
 
 
-T> We support yarn PnP version 3 [`yarn 2 berry`](https://next.yarnpkg.com/features/pnp) for persistent caching
+T> We support yarn PnP version 3 [`yarn 2 berry`](https://next.yarnpkg.com/features/pnp) for persistent caching.
 
 ### Custom plugins/loaders
 
@@ -153,7 +153,7 @@ Be aware of the performance differences between the different `devtool` settings
 - The `cheap-source-map` variants are more performant if you can live with the slightly worse mapping quality.
 - Use a `eval-source-map` variant for incremental builds.
 
-=> In most cases, `eval-cheap-module-source-map` is the best option.
+T> In most cases, `eval-cheap-module-source-map` is the best option.
 
 
 ### Avoid Production Specific Tooling

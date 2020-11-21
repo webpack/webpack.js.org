@@ -11,7 +11,7 @@ related:
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
 ---
 
-Asset Modules is a type of module that allows to use asset files (fonts, icons, etc) without configuring additional loaders.
+Asset Modules is a type of module that allows one to use asset files (fonts, icons, etc) without configuring additional loaders.
 
 Prior to webpack 5 it was common to use:
 
@@ -213,7 +213,7 @@ __src/index.js__
 
 ```diff
 - import mainImage from './images/main.png';
-+ import metroMap from './images/matro.svg';
++ import metroMap from './images/metro.svg';
 
 - img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 + block.style.background = `url(${metroMap})`; // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
@@ -300,7 +300,7 @@ Hello world
 __src/index.js__
 
 ```diff
-- import metroMap from './images/matro.svg';
+- import metroMap from './images/metro.svg';
 + import exampleText from './example.txt';
 
 - block.style.background = `url(${metroMap}); // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
