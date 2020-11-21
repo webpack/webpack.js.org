@@ -87,6 +87,7 @@
     "@mdx-js/loader": "^1.6.16",
     "@octokit/rest": "^18.0.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.2",
+    "@svgr/webpack": "^5.5.0",
     "alex": "^5.1.0",
     "autoprefixer": "^9.8.6",
     "babel-loader": "^8.1.0",

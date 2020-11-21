@@ -141,8 +141,18 @@ module.exports = (env = {}) => ({
         }
       },
       {
-        test: /\.(jpg|jpeg|png|svg|ico)$/i,
+        test: /\.(jpg|jpeg|png|ico)$/i,
         type: 'asset/resource'
+      },
+      {
+        test: /\.svg$/i,
+        type: 'asset/resource',
+        exclude: [path.resolve(__dirname, 'src/styles/icons')]
+      },
+      {
+        test: /\.svg$/i,
+        use: ['@svgr/webpack'],
+        include: [path.resolve(__dirname, 'src/styles/icons')]
       }
     ]
   },
