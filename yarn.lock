@@ -2840,7 +2840,7 @@ acorn@^6.0.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.2.tgz#35866fd710528e92de10cf06016498e47e39e1e6"
   integrity sha512-XtGIhXwF8YM8bJhGxG5kXgjkEuNGLTkoYqVE+KMR+aspr4KGYmKYg7yUe3KghyQ9yheNwLnjmzh/7+gfDBmHCQ==
 
-acorn@^7.0.0, acorn@^7.1.0, acorn@^7.1.1, acorn@^7.4.0:
+acorn@^7.1.0, acorn@^7.1.1, acorn@^7.4.0:
   version "7.4.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
@@ -3153,12 +3153,12 @@ assert-plus@1.0.0, assert-plus@^1.0.0:
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-1.0.0.tgz#f12e0f3c5d77b0b1cdd9146942e4e96c1e4dd525"
   integrity sha1-8S4PPF13sLHN2RRpQuTpbB5N1SU=
 
-assetgraph@^6.2.0:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/assetgraph/-/assetgraph-6.2.1.tgz#77cfcdb0e9d646ff4ad0c01c9a89b47c23f0ac18"
-  integrity sha512-FOcAoe+Wu+7qns7/WDXGVc9v6xNbrTbqjU1aR0YgeEAtyEM9Az1Kt11JRmp1ISOJCmHxduVUDOk+tYZIltfgyw==
+assetgraph@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/assetgraph/-/assetgraph-6.3.0.tgz#724594c43eb560622904e152866a9d4d889359d5"
+  integrity sha512-DTTNLr2mOAkyJS15jsc+A5MgOkraKyOO5KfSYuyWS8iUhsDrzwCrnWaB4lNzs9OesJo4c0ch6Dtv+6/ar5VF0A==
   dependencies:
-    acorn "^7.0.0"
+    acorn "^8.0.4"
     acorn-jsx "^5.0.1"
     bluebird "^3.5.1"
     chalk "^2.0.1"
@@ -3168,9 +3168,9 @@ assetgraph@^6.2.0:
     data-urls "^1.0.0"
     domspace "^1.2.1"
     esanimate "^1.1.0"
-    escodegen "^1.12.0"
+    escodegen "^2.0.0"
     espurify "^2.0.1"
-    estraverse "^4.3.0"
+    estraverse "^5.2.0"
     estraverse-fb "^1.3.2"
     gettemporaryfilepath "^1.0.0"
     glob "^7.0.5"
@@ -5583,13 +5583,25 @@ escape-string-regexp@^2.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-2.0.0.tgz#a30304e99daa32e23b2fd20f51babd07cffca344"
   integrity sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==
 
-escodegen@^1.11.1, escodegen@^1.12.0, escodegen@^1.14.1:
+escodegen@^1.11.1, escodegen@^1.14.1:
   version "1.14.3"
   resolved "https://registry.yarnpkg.com/escodegen/-/escodegen-1.14.3.tgz#4e7b81fba61581dc97582ed78cab7f0e8d63f503"
   integrity sha512-qFcX0XJkdg+PB3xjZZG/wKSuT1PnQWx57+TVSjIMmILd2yC/6ByYElPwJnslDsuWuSAp4AwJGumarAAmJch5Kw==
   dependencies:
     esprima "^4.0.1"
     estraverse "^4.2.0"
+    esutils "^2.0.2"
+    optionator "^0.8.1"
+  optionalDependencies:
+    source-map "~0.6.1"
+
+escodegen@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/escodegen/-/escodegen-2.0.0.tgz#5e32b12833e8aa8fa35e1bf0befa89380484c7dd"
+  integrity sha512-mmHKys/C8BFUGI+MAWNcSYoORYLMdPzjrknd2Vc+bUsjN5bXcr8EhrNB+UTqfL1y3I9c4fw2ihgtMPQLBRiQxw==
+  dependencies:
+    esprima "^4.0.1"
+    estraverse "^5.2.0"
     esutils "^2.0.2"
     optionator "^0.8.1"
   optionalDependencies:
@@ -5735,7 +5747,7 @@ estraverse-fb@^1.3.2:
   resolved "https://registry.yarnpkg.com/estraverse-fb/-/estraverse-fb-1.3.2.tgz#d323a4cb5e5ac331cea033413a9253e1643e07c4"
   integrity sha1-0yOky15awzHOoDNBOpJT4WQ+B8Q=
 
-estraverse@^4.1.1, estraverse@^4.2.0, estraverse@^4.3.0:
+estraverse@^4.1.1, estraverse@^4.2.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-4.3.0.tgz#398ad3f3c5a24948be7725e83d11a7de28cdbd1d"
   integrity sha512-39nnKffWz8xN1BU/2c79n9nB9HDzo0niYUqx6xyqUnyoAnQyyWpOTdZEeiCch8BBu515t4wp9ZmgVfVhn9EBpw==
@@ -7347,13 +7359,13 @@ husky@^4.3.0:
     slash "^3.0.0"
     which-pm-runs "^1.0.0"
 
-hyperlink@^4.5.3:
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/hyperlink/-/hyperlink-4.5.3.tgz#821aa64df090f81f62649106732f1932b11118c6"
-  integrity sha512-LM3vznTbCbhf6vVvoNdwycQDQtLSfHNRXpWl0f6CWq40lJlqqja/O7LZHOxkf8McEgW5cmB1n2fSOoth/vyzRw==
+hyperlink@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/hyperlink/-/hyperlink-4.6.0.tgz#9392c0ac1f497ede9ab3b88f8df853b76d3e9bb2"
+  integrity sha512-chDZy57M29kdLIdqXlZJ2Og/IGO23KWt8aq1o7Zqw3OPLi18x0W/lmc6pmDmbLfx5vnPRH6TKVvl1UyM0P4oXQ==
   dependencies:
     "@munter/tap-render" "^0.2.0"
-    assetgraph "^6.2.0"
+    assetgraph "^6.3.0"
     async "^3.1.0"
     hreftypes "^1.0.1"
     pretty-bytes "^5.2.0"
