@@ -99,7 +99,7 @@
     "directory-tree": "^2.2.4",
     "directory-tree-webpack-plugin": "^1.0.2",
     "duplexer": "^0.1.1",
-    "eslint": "^7.8.1",
+    "eslint": "^7.14.0",
     "eslint-plugin-cypress": "^2.10.3",
     "eslint-plugin-markdown": "^1.0.2",
     "fontgen-loader": "git://github.com/chenxsan/fontgen-loader.git#bugfix/fix-this-exec",
