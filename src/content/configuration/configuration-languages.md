@@ -98,7 +98,7 @@ __package.json__
 与 `Typescript` 类似，在使用 CoffeeScript 前需要先安装其依赖，如下所示:
 
 ``` bash
-npm install --save-dev coffee-script
+npm install --save-dev coffeescript
 ```
 
 完成安装之后便可以开始编写 webpack 配置，示例如下:
