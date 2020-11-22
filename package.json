@@ -166,7 +166,7 @@
     "react-router-dom": "^5.2.0",
     "react-tiny-popover": "5",
     "react-visibility-sensor": "^5.0.2",
-    "webpack-pwa-manifest": "^4.0.0",
+    "webpack-pwa-manifest": "^4.3.0",
     "webpack.vote": "https://github.com/webpack/voting-app.git"
   },
   "resolutions": {
