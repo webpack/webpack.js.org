@@ -114,7 +114,7 @@
     "lint-staged": "^10.3.0",
     "lodash": "^4.17.19",
     "markdownlint": "^0.21.1",
-    "markdownlint-cli": "^0.24.0",
+    "markdownlint-cli": "^0.25.0",
     "markdownlint-rule-emphasis-style": "^1.0.0",
     "mini-css-extract-plugin": "^1.2.1",
     "mkdirp": "^1.0.4",
