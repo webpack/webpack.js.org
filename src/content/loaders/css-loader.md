@@ -31,7 +31,7 @@ npm install --save-dev css-loader
 **file.js**
 
 ```js
-import css from 'file.css';
+import css from "file.css";
 ```
 
 **webpack.config.js**
@@ -42,7 +42,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
@@ -65,7 +65,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['to-string-loader', 'css-loader'],
+        use: ["to-string-loader", "css-loader"],
       },
     ],
   },
@@ -75,7 +75,7 @@ module.exports = {
 or
 
 ```js
-const css = require('./test.css').toString();
+const css = require("./test.css").toString();
 
 console.log(css); // {String}
 ```
@@ -96,9 +96,9 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          'handlebars-loader', // handlebars-loader 需要原始资源字符串 
-          'extract-loader',
-          'css-loader',
+          "handlebars-loader", // handlebars-loader 需要原始资源字符串
+          "extract-loader",
+          "css-loader",
         ],
       },
     ],
@@ -156,7 +156,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           url: true,
         },
@@ -178,13 +178,13 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           url: (url, resourcePath) => {
             // resourcePath - css 文件的路径
 
             // 不处理 `img.png` url
-            if (url.includes('img.png')) {
+            if (url.includes("img.png")) {
               return false;
             }
 
@@ -237,7 +237,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           import: true,
         },
@@ -259,13 +259,13 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           import: (url, media, resourcePath) => {
             // resourcePath - css 文件路径
 
             // 不处理 `style.css` 的导入
-            if (url.includes('style.css')) {
+            if (url.includes("style.css")) {
               return false;
             }
 
@@ -297,7 +297,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: true,
         },
@@ -361,8 +361,8 @@ loader 会用唯一的标识符 (identifier) 来替换局部选择器。所选�
 
 ```js
 exports.locals = {
-  className: '_23_aKvs-b8bW2Vg3fwHozO',
-  subClass: '_13LGdX8RMStbBE9w-t0gZ1',
+  className: "_23_aKvs-b8bW2Vg3fwHozO",
+  subClass: "_13LGdX8RMStbBE9w-t0gZ1",
 };
 ```
 
@@ -390,8 +390,8 @@ exports.locals = {
 
 ```js
 exports.locals = {
-  className: '_23_aKvs-b8bW2Vg3fwHozO',
-  subClass: '_13LGdX8RMStbBE9w-t0gZ1 _23_aKvs-b8bW2Vg3fwHozO',
+  className: "_23_aKvs-b8bW2Vg3fwHozO",
+  subClass: "_13LGdX8RMStbBE9w-t0gZ1 _23_aKvs-b8bW2Vg3fwHozO",
 };
 ```
 
@@ -414,14 +414,14 @@ exports.locals = {
 
 ```css
 :local(.continueButton) {
-  composes: button from 'library/button.css';
+  composes: button from "library/button.css";
   background: red;
 }
 ```
 
 ```css
 :local(.nameEdit) {
-  composes: edit highlight from './edit.css';
+  composes: edit highlight from "./edit.css";
   background: red;
 }
 ```
@@ -430,8 +430,8 @@ exports.locals = {
 
 ```css
 :local(.className) {
-  composes: edit hightlight from './edit.css';
-  composes: button from 'module/button.css';
+  composes: edit hightlight from "./edit.css";
+  composes: button from "module/button.css";
   composes: classFromThisModule;
   background: red;
 }
@@ -476,7 +476,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: true,
         },
@@ -498,10 +498,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           // 使用 `local` 同使用 `modules: true` 的效果是一样的
-          modules: 'global',
+          modules: "global",
         },
       },
     ],
@@ -521,18 +521,18 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
-            compileType: 'module',
-            mode: 'local',
+            compileType: "module",
+            mode: "local",
             auto: true,
             exportGlobals: true,
-            localIdentName: '[path][name]__[local]--[hash:base64:5]',
-            localIdentContext: path.resolve(__dirname, 'src'),
-            localIdentHashPrefix: 'my-custom-hash',
+            localIdentName: "[path][name]__[local]--[hash:base64:5]",
+            localIdentContext: path.resolve(__dirname, "src"),
+            localIdentHashPrefix: "my-custom-hash",
             namedExport: true,
-            exportLocalsConvention: 'camelCase',
+            exportLocalsConvention: "camelCase",
             exportOnlyLocals: false,
           },
         },
@@ -562,10 +562,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
-            compileType: 'icss',
+            compileType: "icss",
           },
         },
       },
@@ -596,7 +596,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
             auto: true,
@@ -620,7 +620,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
             auto: /\.custom-module\.\w+$/i,
@@ -644,10 +644,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
-            auto: (resourcePath) => resourcePath.endsWith('.custom-module.css'),
+            auto: (resourcePath) => resourcePath.endsWith(".custom-module.css"),
           },
         },
       },
@@ -675,10 +675,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
-            mode: 'global',
+            mode: "global",
           },
         },
       },
@@ -701,20 +701,20 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
             // 回调必须返回 `local`，`global`，或者 `pure`
             mode: (resourcePath) => {
               if (/pure.css$/i.test(resourcePath)) {
-                return 'pure';
+                return "pure";
               }
 
               if (/global.css$/i.test(resourcePath)) {
-                return 'global';
+                return "global";
               }
 
-              return 'local';
+              return "local";
             },
           },
         },
@@ -749,10 +749,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
-            localIdentName: '[path][name]__[local]--[hash:base64:5]',
+            localIdentName: "[path][name]__[local]--[hash:base64:5]",
           },
         },
       },
@@ -776,10 +776,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
-            localIdentContext: path.resolve(__dirname, 'src'),
+            localIdentContext: path.resolve(__dirname, "src"),
           },
         },
       },
@@ -803,10 +803,10 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
-            localIdentHashPrefix: 'hash',
+            localIdentHashPrefix: "hash",
           },
         },
       },
@@ -828,7 +828,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
             localIdentRegExp: /page-(.*)\.css/i,
@@ -858,11 +858,11 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
             getLocalIdent: (context, localIdentName, localName, options) => {
-              return 'whatever_random_class_name';
+              return "whatever_random_class_name";
             },
           },
         },
@@ -897,7 +897,7 @@ module.exports = {
 **index.js**
 
 ```js
-import { fooBaz, bar } from './styles.css';
+import { fooBaz, bar } from "./styles.css";
 
 console.log(fooBaz, bar);
 ```
@@ -912,7 +912,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           esModule: true,
           modules: {
@@ -940,7 +940,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
             exportGlobals: true,
@@ -981,7 +981,7 @@ module.exports = {
 **file.js**
 
 ```js
-import { className } from 'file.css';
+import { className } from "file.css";
 ```
 
 **webpack.config.js**
@@ -992,10 +992,11 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
-          mode: 'local',
-          localsConvention: 'camelCase',
+          modules: {
+            exportLocalsConvention: "camelCase",
+          },
         },
       },
     ],
@@ -1022,7 +1023,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           modules: {
             exportOnlyLocals: true,
@@ -1049,7 +1050,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           sourceMap: true,
         },
@@ -1077,9 +1078,9 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               importLoaders: 2,
               // 0 => no loaders (default);
@@ -1087,8 +1088,8 @@ module.exports = {
               // 2 => postcss-loader, sass-loader
             },
           },
-          'postcss-loader',
-          'sass-loader',
+          "postcss-loader",
+          "sass-loader",
         ],
       },
     ],
@@ -1116,7 +1117,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'css-loader',
+        loader: "css-loader",
         options: {
           esModule: false,
         },
@@ -1140,11 +1141,11 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-        loader: 'url-loader',
+        loader: "url-loader",
         options: {
           limit: 8192,
         },
@@ -1178,9 +1179,9 @@ module.exports = {
         // 对于 Less - /\.((c|le)ss)$/i,
         test: /\.((c|sa|sc)ss)$/i,
         use: [
-          'style-loader',
+          "style-loader",
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               // 每一个 CSS 的 `@import` 都运行 `postcss-loader`，不要忘了 `sass-loader` 将不属于 CSS 的 `@import` 编译到一个文件中 
               // 如果您需要在每个 CSS 的 `@import` 上运行 `sass-loader` 和 `postcss-loader`，请将其设置为 `2`。
@@ -1190,18 +1191,18 @@ module.exports = {
             },
           },
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: { plugins: () => [postcssPresetEnv({ stage: 0 })] },
           },
           // 也可能是 `less-loader`
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
           },
         ],
       },
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-        loader: 'url-loader',
+        loader: "url-loader",
         options: {
           limit: 8192,
         },
@@ -1229,15 +1230,15 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
   resolve: {
     alias: {
-      '/assets/unresolved/img.png': path.resolve(
+      "/assets/unresolved/img.png": path.resolve(
         __dirname,
-        'assets/real-path-to-img/img.png'
+        "assets/real-path-to-img/img.png"
       ),
     },
   },
@@ -1325,7 +1326,7 @@ $colorBackground: red;
 文件被视为 `CSS Module`。
 
 ```scss
-@import 'variables.scss';
+@import "variables.scss";
 .componentClass {
   background-color: $colorBackground;
 }
@@ -1336,8 +1337,8 @@ $colorBackground: red;
 在 JavaScript 中直接使用 `CSS Module` 的特性以及 SCSS 声明的变量。
 
 ```jsx
-import svars from 'variables.scss';
-import styles from 'Component.module.scss';
+import svars from "variables.scss";
+import styles from "Component.module.scss";
 
 // Render DOM with CSS modules class name
 // <div className={styles.componentClass}>

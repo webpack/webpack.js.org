@@ -85,6 +85,8 @@ module.exports = {
 - `image` 标签的 `href` 属性
 - `use` 标签的 `xlink:href` 属性
 - `use` 标签的 `href` 属性
+- 当 `rel` 属性值为 `stylesheet`，`icon`，`shortcut icon`，`mask-icon`，`apple-touch-icon`，`apple-touch-icon-precomposed` 或 `apple-touch-startup-image` 时，`link` 标签的 `href` 属性
+- 当 `name` 属性为 `msapplication-tileimage`，`msapplication-square70x70logo`，`msapplication-square150x150logo`，`msapplication-wide310x150logo`，`msapplication-square310x310logo`，`msapplication-config` 时，支持 `meta` 标签的 `content` 属性。或当 `property` 属性为 `og:image`，`og:image:url`，`og:image:secure_url`，`og:audio`，`og:audio:secure_url`，`og:video`，`og:video:secure_url`，`vk:image` 时。
 
 #### `Boolean` {#boolean}
 
