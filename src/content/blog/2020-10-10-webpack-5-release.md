@@ -2,8 +2,8 @@
 title: Webpack 5 release (2020-10-10)
 sort: -202010100
 contributors:
-    - sokra
-    - chenxsan
+  - sokra
+  - chenxsan
 ---
 
 webpack 4 was released in February 2018.
