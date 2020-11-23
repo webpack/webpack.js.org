@@ -198,7 +198,7 @@ __webpack.config.js__
 module.exports = {
   //...
   optimization: {
-    moduleIds: 'hashed'
+    moduleIds: 'deterministic'
   }
 };
 ```

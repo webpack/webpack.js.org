@@ -84,7 +84,11 @@ require.context(directory, useSubdirectories = true, regExp = /^\.\/.*$/, mode =
 
 ```javascript
 require.context('./test', false, /\.test\.js$/);
+<<<<<<< HEAD
 //（创建出）一个 context，其中文件来自 test 目录，request 以 `.test.js` 结尾。
+=======
+// a context with files from the test directory that can be required with a request ending with `.test.js`.
+>>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
 ```
 
 ```javascript

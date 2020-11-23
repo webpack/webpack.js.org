@@ -82,7 +82,7 @@ __dist/index.html__
    </head>
    <body>
 -    <script src="bundle.js"></script>
-+    <script src="./app.bundle.js"></script>
++    <script src="./index.bundle.js"></script>
    </body>
  </html>
 ```
@@ -97,7 +97,7 @@ __webpack.config.js__
  module.exports = {
 -  entry: './src/index.js',
 +  entry: {
-+    app: './src/index.js',
++    index: './src/index.js',
 +    print: './src/print.js',
 +  },
    output: {
@@ -113,17 +113,21 @@ __webpack.config.js__
 ``` bash
 ...
 [webpack-cli] Compilation finished
-asset app.bundle.js 69.5 KiB [emitted] [minimized] (name: app) 1 related asset
+asset index.bundle.js 69.5 KiB [emitted] [minimized] (name: index) 1 related asset
 asset print.bundle.js 316 bytes [emitted] [minimized] (name: print)
 runtime modules 1.36 KiB 7 modules
 cacheable modules 530 KiB
-  ./src/index.js 407 bytes [built] [code generated]
+  ./src/index.js 406 bytes [built] [code generated]
   ./src/print.js 83 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.4.0 compiled successfully in 3410 ms
+webpack 5.4.0 compiled successfully in 1996 ms
 ```
 
+<<<<<<< HEAD
 我们可以看到，webpack 生成 `print.bundle.js` 和 `app.bundle.js` 文件，这也和我们在 `index.html` 文件中指定的文件名称相对应。如果你在浏览器中打开 `index.html`，就可以看到在点击按钮时会发生什么。
+=======
+We can see that webpack generates our `print.bundle.js` and `index.bundle.js` files, which we also specified in our `index.html` file. if you open `index.html` in your browser, you can see what happens when you click the button.
+>>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
 
 但是，如果我们更改了我们的一个入口起点的名称，甚至添加了一个新的入口，会发生什么？会在构建时重新命名生成的 bundle，但是我们的 `index.html` 文件仍然引用旧的名称。让我们用 [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin) 来解决这个问题。
 
@@ -144,7 +148,7 @@ __webpack.config.js__
  
  module.exports = {
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
 +  plugins: [
@@ -164,15 +168,15 @@ __webpack.config.js__
 ``` bash
 ...
 [webpack-cli] Compilation finished
-asset app.bundle.js 69.5 KiB [compared for emit] [minimized] (name: app) 1 related asset
+asset index.bundle.js 69.5 KiB [compared for emit] [minimized] (name: index) 1 related asset
 asset print.bundle.js 316 bytes [compared for emit] [minimized] (name: print)
-asset index.html 251 bytes [emitted]
+asset index.html 253 bytes [emitted]
 runtime modules 1.36 KiB 7 modules
 cacheable modules 530 KiB
-  ./src/index.js 407 bytes [built] [code generated]
+  ./src/index.js 406 bytes [built] [code generated]
   ./src/print.js 83 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.4.0 compiled successfully in 5761 ms
+webpack 5.4.0 compiled successfully in 2189 ms
 ```
 
 如果在代码编辑器中打开 `index.html`，你会看到 `HtmlWebpackPlugin` 创建了一个全新的文件，所有的 bundle 会自动添加到 html 中。
@@ -200,7 +204,7 @@ __webpack.config.js__
  
  module.exports = {
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
    plugins: [

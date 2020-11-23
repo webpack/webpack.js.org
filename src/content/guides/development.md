@@ -34,7 +34,7 @@ __webpack.config.js__
  module.exports = {
 +  mode: 'development',
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
    plugins: [
@@ -71,7 +71,7 @@ __webpack.config.js__
  module.exports = {
    mode: 'development',
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
 +  devtool: 'inline-source-map',
@@ -104,15 +104,15 @@ __src/print.js__
 ``` bash
 ...
 [webpack-cli] Compilation finished
-asset app.bundle.js 1.38 MiB [emitted] (name: app)
+asset index.bundle.js 1.38 MiB [emitted] (name: index)
 asset print.bundle.js 6.25 KiB [emitted] (name: print)
-asset index.html 276 bytes [emitted]
+asset index.html 272 bytes [emitted]
 runtime modules 1.9 KiB 9 modules
 cacheable modules 530 KiB
-  ./src/index.js 407 bytes [built] [code generated]
+  ./src/index.js 406 bytes [built] [code generated]
   ./src/print.js 83 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.4.0 compiled successfully in 759 ms
+webpack 5.4.0 compiled successfully in 706 ms
 ```
 
 现在，在浏览器中打开生成的 `index.html` 文件，点击按钮，并且在控制台查看显示的错误。错误应该如下：
@@ -133,9 +133,15 @@ W> 某些文本编辑器具有 "safe write(安全写入)" 功能，可能会干�
 
 webpack 提供几种可选方式，帮助你在代码发生变化后自动编译代码：
 
+<<<<<<< HEAD
  1. webpack [watch mode](/configuration/watch/#watch)(webpack 观察模式)
  2. webpack-dev-server
  3. webpack-dev-middleware
+=======
+ 1. webpack's [Watch Mode](/configuration/watch/#watch)
+ 2. [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+ 3. [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
+>>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
 
 多数场景中，你可能需要使用 `webpack-dev-server`，但是不妨探讨一下以上的所有选项。
 
@@ -164,9 +170,7 @@ __package.json__
    "license": "ISC",
    "devDependencies": {
      "clean-webpack-plugin": "^3.0.0",
-     "css-loader": "^5.0.1",
      "html-webpack-plugin": "^4.5.0",
-     "style-loader": "^2.0.0",
      "webpack": "^5.4.0",
      "webpack-cli": "^4.2.0"
    },
@@ -188,7 +192,7 @@ __webpack.config.js__
  module.exports = {
    mode: 'development',
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
    devtool: 'inline-source-map',
@@ -245,7 +249,7 @@ __webpack.config.js__
  module.exports = {
    mode: 'development',
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
    devtool: 'inline-source-map',
@@ -290,9 +294,7 @@ __package.json__
    "license": "ISC",
    "devDependencies": {
      "clean-webpack-plugin": "^3.0.0",
-     "css-loader": "^5.0.1",
      "html-webpack-plugin": "^4.5.0",
-     "style-loader": "^2.0.0",
      "webpack": "^5.4.0",
      "webpack-cli": "^4.2.0",
      "webpack-dev-server": "^3.11.0"
@@ -332,7 +334,7 @@ __webpack.config.js__
  module.exports = {
    mode: 'development',
    entry: {
-     app: './src/index.js',
+     index: './src/index.js',
      print: './src/print.js',
    },
    devtool: 'inline-source-map',
@@ -416,13 +418,11 @@ __package.json__
    "license": "ISC",
    "devDependencies": {
      "clean-webpack-plugin": "^3.0.0",
-     "css-loader": "^5.0.1",
      "express": "^4.17.1",
      "html-webpack-plugin": "^4.5.0",
-     "style-loader": "^2.0.0",
      "webpack": "^5.4.0",
      "webpack-cli": "^4.2.0",
-     "webpack-dev-middleware": "^4.0.0",
+     "webpack-dev-middleware": "^4.0.2",
      "webpack-dev-server": "^3.11.0"
    },
    "dependencies": {
@@ -436,20 +436,20 @@ __package.json__
 ``` bash
 Example app listening on port 3000!
 ...
-<i> [webpack-dev-middleware] asset app.bundle.js 1.38 MiB [emitted] (name: app)
+<i> [webpack-dev-middleware] asset index.bundle.js 1.38 MiB [emitted] (name: index)
 <i> asset print.bundle.js 6.25 KiB [emitted] (name: print)
-<i> asset index.html 278 bytes [emitted]
+<i> asset index.html 274 bytes [emitted]
 <i> runtime modules 1.9 KiB 9 modules
 <i> cacheable modules 530 KiB
-<i>   ./src/index.js 407 bytes [built] [code generated]
+<i>   ./src/index.js 406 bytes [built] [code generated]
 <i>   ./src/print.js 83 bytes [built] [code generated]
 <i>   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-<i> webpack 5.4.0 compiled successfully in 672 ms
+<i> webpack 5.4.0 compiled successfully in 709 ms
 <i> [webpack-dev-middleware] Compiled successfully.
 <i> [webpack-dev-middleware] Compiling...
 <i> [webpack-dev-middleware] assets by status 1.38 MiB [cached] 2 assets
 <i> cached modules 530 KiB (javascript) 1.9 KiB (runtime) [cached] 12 modules
-<i> webpack 5.4.0 compiled successfully in 14 ms
+<i> webpack 5.4.0 compiled successfully in 19 ms
 <i> [webpack-dev-middleware] Compiled successfully.
 ```
 

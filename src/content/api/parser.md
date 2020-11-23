@@ -7,6 +7,7 @@ contributors:
   - DeTeam
   - misterdev
   - EugeneHlushko
+  - chenxsan
 ---
 
 `parser` 实例，在 `compiler` 中被发现，是用来解析由 webpack
@@ -515,9 +516,10 @@ Called when parsing an expression.
 ```js
 const a = this;
 
-parser.hooks.new.for('this').tap('MyPlugin', expression => {});
+parser.hooks.expression.for('this').tap('MyPlugin', expression => {});
 ```
 
+<<<<<<< HEAD
 
 ### expressionAnyMember {#expressionanymember}
 
@@ -536,6 +538,9 @@ parser.hooks.new.for('process').tap('MyPlugin', expression => {});
 
 
 ### expressionConditionalOperator {#expressionconditionaloperator}
+=======
+### expressionConditionalOperator
+>>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
 
 `SyncBailHook`
 

@@ -17,7 +17,11 @@ contributors:
 
 在 webpack 出现之前，前端开发人员会使用 [grunt](https://gruntjs.com/) 和 [gulp](https://gulpjs.com/) 等工具来处理资源，并将它们从 `/src` 文件夹移动到 `/dist` 或 `/build` 目录中。JavaScript 模块也遵循同样方式，但是，像 webpack 这样的工具，将__动态打包__所有依赖（创建所谓的 [依赖图(dependency graph)](/concepts/dependency-graph)）。这是极好的创举，因为现在每个模块都可以_明确表述它自身的依赖_，可以避免打包未使用的模块。
 
+<<<<<<< HEAD
 webpack 最出色的功能之一就是，除了引入 JavaScript，还可以通过 loader _引入任何其他类型的文件_。也就是说，以上列出的那些 JavaScript 的优点（例如显式依赖），同样可以用来构建 web 站点或 web 应用程序中的所有非 JavaScript 内容。让我们从 CSS 开始起步，或许你可能已经熟悉了下面这些设置。
+=======
+One of the coolest webpack features is that you can also _include any other type of file_, besides JavaScript, for which there is a loader or built-in [Asset Modules](/guides/asset-modules/) support. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) can be applied to everything used in building a website or web app. Let's start with CSS, as you may already be familiar with that setup.
+>>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
 
 ## 设置 {#setup}
 
@@ -145,7 +149,7 @@ $ npm run build
 
 ...
 [webpack-cli] Compilation finished
-asset bundle.js 72.6 KiB [compared for emit] [minimized] (name: main) 1 related asset
+asset bundle.js 72.6 KiB [emitted] [minimized] (name: main) 1 related asset
 runtime modules 1000 bytes 5 modules
 orphan modules 326 bytes [orphan] 1 module
 cacheable modules 539 KiB
@@ -153,10 +157,10 @@ cacheable modules 539 KiB
     ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
     ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
     ./node_modules/css-loader/dist/runtime/api.js 1.57 KiB [built] [code generated]
-  modules by path ./src/ 966 bytes
-    ./src/index.js + 1 modules 640 bytes [built] [code generated]
+  modules by path ./src/ 965 bytes
+    ./src/index.js + 1 modules 639 bytes [built] [code generated]
     ./node_modules/css-loader/dist/cjs.js!./src/style.css 326 bytes [built] [code generated]
-webpack 5.4.0 compiled successfully in 2900 ms
+webpack 5.4.0 compiled successfully in 2231 ms
 ```
 
 再次在浏览器中打开 `dist/index.html`，你应该看到 `Hello webpack` 现在的样式是红色。要查看 webpack 做了什么，请检查页面（不要查看页面源代码，它不会显示结果，因为 `<style>` 标签是由 JavaScript 动态创建的），并查看页面的 head 标签。它应该包含 style 块元素，也就是我们在 `index.js` 中 import 的 css 文件中的样式。
@@ -166,7 +170,11 @@ webpack 5.4.0 compiled successfully in 2900 ms
 
 ## 加载 images 图像 {#loading-images}
 
+<<<<<<< HEAD
 假如，现在我们正在下载 CSS，但是像 background 和 icon 这样的图像，要如何处理呢？在 webpack 5 中，可以使用 [Asset Modules](/guides/asset-modules/)，我们可以轻松地将这些内容混入我们的系统中：
+=======
+So now we're pulling in our CSS, but what about our images like backgrounds and icons? As of webpack 5, using the built-in [Asset Modules](/guides/asset-modules/) we can easily incorporate those in our system as well:
+>>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
 
 __webpack.config.js__
 
@@ -249,32 +257,40 @@ __src/style.css__
  }
 ```
 
+<<<<<<< HEAD
 重新构建并再次打开 index.html 文件：
+=======
+Let's create a new build and open up the `index.html` file again:
+>>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
 
 ``` bash
 $ npm run build
 
 ...
 [webpack-cli] Compilation finished
-asset 3b7bf087cbac835e6f7d.png 233 KiB [emitted] [immutable] [from: src/icon.png] (auxiliary name: main)
+assets by status 9.88 KiB [cached] 1 asset
 asset bundle.js 73.4 KiB [emitted] [minimized] (name: main) 1 related asset
 runtime modules 1.82 KiB 6 modules
 orphan modules 326 bytes [orphan] 1 module
-cacheable modules 540 KiB (javascript) 233 KiB (asset)
+cacheable modules 540 KiB (javascript) 9.88 KiB (asset)
   modules by path ./node_modules/ 539 KiB
     modules by path ./node_modules/css-loader/dist/runtime/*.js 2.38 KiB
       ./node_modules/css-loader/dist/runtime/api.js 1.57 KiB [built] [code generated]
       ./node_modules/css-loader/dist/runtime/getUrl.js 830 bytes [built] [code generated]
     ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
     ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
-  modules by path ./src/ 1.45 KiB (javascript) 233 KiB (asset)
-    ./src/index.js + 1 modules 795 bytes [built] [code generated]
-    ./src/icon.png 42 bytes (javascript) 233 KiB (asset) [built] [code generated]
+  modules by path ./src/ 1.45 KiB (javascript) 9.88 KiB (asset)
+    ./src/index.js + 1 modules 794 bytes [built] [code generated]
+    ./src/icon.png 42 bytes (javascript) 9.88 KiB (asset) [built] [code generated]
     ./node_modules/css-loader/dist/cjs.js!./src/style.css 648 bytes [built] [code generated]
-webpack 5.4.0 compiled successfully in 5879 ms
+webpack 5.4.0 compiled successfully in 1972 ms
 ```
 
+<<<<<<< HEAD
 如果一切顺利，你现在应该看到你的 icon 图标成为了重复的背景图，以及 `Hello webpack` 文本旁边的 `img` 元素。如果检查此元素，你将看到实际的文件名已更改为 `3b7bf087cbac835e6f7d.png`。这意味着 webpack 在 `src` 文件夹中找到我们的文件，并对其进行了处理！
+=======
+If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `29822eaa871e8eadeaa4.png`. This means webpack found our file in the `src` folder and processed it!
+>>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
 
 
 ## 加载 fonts 字体 {#loading-fonts}
@@ -359,27 +375,27 @@ $ npm run build
 
 ...
 [webpack-cli] Compilation finished
-assets by status 233 KiB [cached] 1 asset
+assets by status 9.88 KiB [cached] 1 asset
 assets by info 33.2 KiB [immutable]
   asset 55055dbfc7c6a83f60ba.woff 18.8 KiB [emitted] [immutable] [from: src/my-font.woff] (auxiliary name: main)
   asset 8f717b802eaab4d7fb94.woff2 14.5 KiB [emitted] [immutable] [from: src/my-font.woff2] (auxiliary name: main)
 asset bundle.js 73.7 KiB [emitted] [minimized] (name: main) 1 related asset
 runtime modules 1.82 KiB 6 modules
 orphan modules 326 bytes [orphan] 1 module
-cacheable modules 541 KiB (javascript) 266 KiB (asset)
+cacheable modules 541 KiB (javascript) 43.1 KiB (asset)
   javascript modules 541 KiB
     modules by path ./node_modules/ 539 KiB
       modules by path ./node_modules/css-loader/dist/runtime/*.js 2.38 KiB 2 modules
       ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
       ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js 6.67 KiB [built] [code generated]
     modules by path ./src/ 1.98 KiB
-      ./src/index.js + 1 modules 795 bytes [built] [code generated]
+      ./src/index.js + 1 modules 794 bytes [built] [code generated]
       ./node_modules/css-loader/dist/cjs.js!./src/style.css 1.21 KiB [built] [code generated]
-  asset modules 126 bytes (javascript) 266 KiB (asset)
-    ./src/icon.png 42 bytes (javascript) 233 KiB (asset) [built] [code generated]
+  asset modules 126 bytes (javascript) 43.1 KiB (asset)
+    ./src/icon.png 42 bytes (javascript) 9.88 KiB (asset) [built] [code generated]
     ./src/my-font.woff2 42 bytes (javascript) 14.5 KiB (asset) [built] [code generated]
     ./src/my-font.woff 42 bytes (javascript) 18.8 KiB (asset) [built] [code generated]
-webpack 5.4.0 compiled successfully in 3763 ms
+webpack 5.4.0 compiled successfully in 2142 ms
 ```
 
 重新打开 `dist/index.html` 看看我们的 `Hello webpack` 文本显示是否换上了新的字体。如果一切顺利，你应该能看到变化。
@@ -716,14 +732,14 @@ __project__
     |- bundle.js
     |- index.html
   |- /src
--   |- data.xml
 -   |- data.csv
--   |- data.toml
--   |- data.yaml
 -   |- data.json5
+-   |- data.toml
+-   |- data.xml
+-   |- data.yaml
+-   |- icon.png
 -   |- my-font.woff
 -   |- my-font.woff2
--   |- icon.png
 -   |- style.css
     |- index.js
   |- /node_modules
@@ -837,7 +853,7 @@ __src/index.js__
 And remove those dependencies we added before:
 
 ```bash
-npm rm csv-loader xml-loader toml yamljs json5
+npm uninstall css-loader csv-loader json5 style-loader toml xml-loader yamljs
 ```
 
 ## 下篇指南 {#next-guide}
