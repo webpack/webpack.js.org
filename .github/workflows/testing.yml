@@ -44,29 +44,16 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        python-version: [3.6]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+      - name: Vale
+        uses: errata-ai/vale-action@v1.3.0
         with:
-          python-version: ${{ matrix.python-version }}
-      - uses: actions/cache@v2
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - run: cp .proselintrc ~/
-      - run: proselint src/content
+          files: src/content
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   lintLinks:
     name: Check Links
