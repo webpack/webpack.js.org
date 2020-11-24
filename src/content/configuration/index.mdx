@@ -17,6 +17,7 @@ contributors:
   - EugeneHlushko
   - bigdawggi
   - anshumanv
+  - textbook
 ---
 
 webpack 开箱即用，可以无需使用任何配置文件。然而，webpack 会假定项目的入口起点为 `src/index.js`，然后会在 `dist/main.js` 输出结果，并且在生产环境开启压缩和优化。
@@ -267,7 +268,7 @@ module.exports = {
       // filename template for HMR chunks
       hotUpdateGlobal: "hmrUpdateFunction", // string
       // the name of the global variable used to load hot update chunks
-      sourcePrefix: "\\t", // string
+      sourcePrefix: "\t", // string
       // prefix module sources in bundle for better readablitity
       // but breaks multi-line template strings
       hashFunction: "md4", // string (default)
@@ -286,7 +287,7 @@ module.exports = {
       // 模块规则（配置 loader、解析器等选项）
       {
         // Conditions:
-        test: /\\.jsx?$/,
+        test: /\.jsx?$/,
         include: [
           path.resolve(__dirname, "app")
         ],
@@ -302,18 +303,18 @@ module.exports = {
         // - Try to avoid exclude and prefer include
         // Each condition can also receive an object with "and", "or" or "not" properties
         // which are an array of conditions.
-        issuer: /\\.css$/,
+        issuer: /\.css$/,
         issuer: path.resolve(__dirname, "app"),
-        issuer: { and: [ /\\.css$/, path.resolve(__dirname, "app") ] },
-        issuer: { or: [ /\\.css$/, path.resolve(__dirname, "app") ] },
-        issuer: { not: [ /\\.css$/ ] },
-        issuer: [ /\\.css$/, path.resolve(__dirname, "app") ], // like "or"
+        issuer: { and: [ /\.css$/, path.resolve(__dirname, "app") ] },
+        issuer: { or: [ /\.css$/, path.resolve(__dirname, "app") ] },
+        issuer: { not: [ /\.css$/ ] },
+        issuer: [ /\.css$/, path.resolve(__dirname, "app") ], // like "or"
         // conditions for the issuer (the origin of the import)
         <advancedConditions "#">
           <default>
             /* Advanced conditions (click to show) */
           </default>
-          resource: /\\.css$/,
+          resource: /\.css$/,
           // matches the resource of the module, behaves equal to "test" and "include"
           compiler: /html-webpack-plugin/,
           // matches the name of the child compilation
@@ -329,7 +330,7 @@ module.exports = {
           // matches information from the package.json
           mimetype: "text/javascript",
           // matches the mimetype in DataUris
-          realResource: /\\.css$/,
+          realResource: /\.css$/,
           // matches the resource but ignores when resource was been renamed
           resourceFragment: "#blah",
           // matches the fragment part of the resource request
@@ -402,15 +403,15 @@ module.exports = {
         /* 高级模块配置（点击展示） */
       </default>
       noParse: [
-        /special-library\\.js$/
+        /special-library\.js$/
       ],
       // 不解析这里的模块
       unknownContextRequest: ".",
       unknownContextRecursive: true,
-      unknownContextRegExp: /^\\.\\/.*$/,
+      unknownContextRegExp: /^\.\/.*$/,
       unknownContextCritical: true,
       exprContextRequest: ".",
-      exprContextRegExp: /^\\.\\/.*$/,
+      exprContextRegExp: /^\.\/.*$/,
       exprContextRecursive: true,
       exprContextCritical: true,
       wrappedContextRegExp: /.*/,
@@ -482,7 +483,7 @@ module.exports = {
       mainFields: ["main"],
       // properties that are read from description file
       // when a folder is requested
-      restrictions: [ /\\.js$/, path.resolve(__dirname, "app") ],
+      restrictions: [ /\.js$/, path.resolve(__dirname, "app") ],
       // To successful resolve the result must match these criteria
       cache: true, // boolean
       // enable safe caching of resolving
@@ -596,9 +597,9 @@ module.exports = {
     <default>
       externals: ["react", /^@angular/],
     </default>
-    externals: "react", // string（精确匹配）
-    externals: /^[a-z\\-]+($|\\/)/, // 正则
-    externals: { // 对象
+    externals: "react", // string (exact match)
+    externals: /^[a-z\-]+($|\/)/, // Regex
+    externals: { // object
       angular: "this angular", // this["angular"]
       react: { // UMD
         commonjs: "react",
@@ -720,7 +721,7 @@ module.exports = {
       // number of asset lines to display
       cachedAssets: false,
       // show assets that are caching in output
-      excludeAssets: /\\.png$/,
+      excludeAssets: /\.png$/,
       // hide some assets
       groupAssetsByPath: true,
       // group assets by their path in the output directory
@@ -786,7 +787,7 @@ module.exports = {
       // show modules that were cached
       orphanModules: true,
       // show modules that are not referenced in optimized graph anymore
-      excludeModules: /\\.css$/,
+      excludeModules: /\.css$/,
       // hide some modules
       reasons: true,
       // show the reasons why modules are included
@@ -945,7 +946,7 @@ module.exports = {
         "my-name": {
           // define groups of modules with specific
           // caching behavior
-          test: /\\.sass$/,
+          test: /\.sass$/,
           type: "css/mini-extract",
 
           <cacheGroupAdvancedSelectors "#">

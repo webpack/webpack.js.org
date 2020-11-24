@@ -9,29 +9,18 @@ contributors:
   - byzyk
   - EugeneHlushko
   - anikethsaha
+  - chenxsan
 ---
 
-这些选项可以配置是否 polyfill 或 mock 某些 [Node.js 全局变量](https://nodejs.org/docs/latest/api/globals.html)和模块。这可以使最初为 Node.js 环境编写的代码，在其他环境（如浏览器）中运行。
+这些选项可以配置是否 polyfill 或 mock 某些 [Node.js 全局变量](https://nodejs.org/docs/latest/api/globals.html)。
 
-此功能由 webpack 内部的 [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js) 插件提供。如果 target 是 "web"（默认）或 "webworker"，那么 [`NodeSourcePlugin`](https://github.com/webpack/webpack/blob/master/lib/node/NodeSourcePlugin.js) 插件也会被激活。
+此功能由 webpack 内部的 [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js) 插件提供。
 
+W> 从 webpack 5 开始，你只能在 `node` 选项下配置 `global`、`__filename` 或 `__dirname`。如果需要在 webpack 5 下的 Node.js 中填充 `fs`，请查阅 [resolve.fallback](/configuration/resolve/#resolvefallback) 获取相关帮助。
 
 ## `node` {#node}
 
-`boolean = false` `object`
-
-是一个对象，其中每个属性都是 Node.js 全局变量或模块的名称，每个 value 是以下其中之一……
-
-- `true`：提供 polyfill。
-- `"mock"`：提供 mock 实现预期接口，但功能很少或没有。
-- `"empty"`：提供空对象。
-- `false`: 什么都不提供。预期获取此对象的代码，可能会因为获取不到此对象，触发 `ReferenceError` 而崩溃。尝试使用 `require('modulename')` 导入模块的代码，可能会触发 `Cannot find module "modulename"` 错误。
-
-W> 注意，不是每个 Node 全局变量都支持所有选项。对于不支持的键值组合(property-value combination)，compiler 会抛出错误。更多细节请查看接下来的章节。
-
-T> 如果你正在使用一个需要全局变量的模块，请使用 `ProvidePlugin` 而非 `global`。
-
-这里是默认值：
+`boolean: false` `object`
 
 __webpack.config.js__
 
@@ -46,38 +35,39 @@ module.exports = {
 };
 ```
 
-从 webpack 3.0.0 开始，`node` 选项可能被设置为 `false`，以完全关闭 `NodeStuffPlugin` 和 `NodeSourcePlugin` 插件。
+从 webpack 3.0.0 开始，`node` 选项可能被设置为 `false`，以完全关闭 `NodeStuffPlugin` 插件。
 
 ## `node.global` {#nodeglobal}
 
-`boolean = true`
+`boolean`
 
-Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` and `electron-main`.
+T> 如果你正在使用一个需要全局变量的模块，请使用 `ProvidePlugin` 替代 `global`。
 
-关于此对象的准确行为，请查看[源码](https://github.com/webpack/webpack/blob/master/buildin/global.js)。
+关于此对象的准确行为，请查看[Node.js 文档](https://nodejs.org/api/globals.html#globals_global)。
 
+选项：
+
+- `true`: 提供 polyfill.
+- `false`: 不提供任何 polyfill。代码可能会出现 `ReferenceError` 的崩溃。
 
 ## `node.__filename` {#node__filename}
 
-`boolean` `string = mock`
-
-Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` and `electron-main`.
+`boolean` `string: 'mock' | 'eval-only'`
 
 选项：
 
 - `true`: __输入__ 文件的文件名，是相对于 [`context` 选项](/configuration/entry-context/#context)。
-- `false`: 常规的 Node.js `__filename` 行为。在 Node.js 环境中运行时，__输出__ 文件的文件名。
+- `false`: webpack 不会更改 `__filename` 的代码。在 Node.js 环境中运行时，__输出__ 文件的文件名。
 - `'mock'`: value 填充为 `'index.js'`.
 
 
 ## `node.__dirname` {#node__dirname}
 
-`boolean` `string = mock`
-
-Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` and `electron-main`.
+`boolean` `string: 'mock' | 'eval-only'`
 
 选项：
 
 - `true`: __输入__ 文件的目录名，是相对于 [`context` 选项](/configuration/entry-context/#context)。
-- `false`: 常规的 Node.js `__dirname` 行为。在 Node.js 环境中运行时，__输出__ 文件的目录名。
+- `false`: webpack 不会更改 `__dirname` 的代码，这意味着你有常规 Node.js 中的 `__dirname` 的行为。在 Node.js 环境中运行时，__输出__ 文件的目录名。
 - `'mock'`: value 填充为 `'/'`。
+- `'eval-only'`

@@ -40,15 +40,15 @@ related:
     url: https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
 ---
 
-T> 本指南继续沿用 [起步](/guides/getting-started) 和 [管理输出](/guides/output-management) 中的示例代码。请确保你已熟悉这些指南中提供的示例。
+T> 本指南继续沿用 [起步](/guides/getting-started) 中的示例代码。请确保你已熟悉这些指南中提供的示例以及[输出管理](/guides/output-management/)章节。
 
 代码分离是 webpack 中最引人注目的特性之一。此特性能够把代码分离到不同的 bundle 中，然后可以按需加载或并行加载这些文件。代码分离可以用于获取更小的 bundle，以及控制资源加载优先级，如果使用合理，会极大影响加载时间。
 
 常用的代码分离方法有三种：
 
-- 入口起点：使用 [`entry`](/configuration/entry-context) 配置手动地分离代码。
-- 防止重复：使用 [`SplitChunksPlugin`](/plugins/split-chunks-plugin) 去重和分离 chunk。
-- 动态导入：通过模块的内联函数调用来分离代码。
+- __入口起点__：使用 [`entry`](/configuration/entry-context) 配置手动地分离代码。
+- __防止重复__：使用 [Entry dependencies](/configuration/entry-context/#dependencies) 或者 [`SplitChunksPlugin`](/plugins/split-chunks-plugin) 去重和分离 chunk。
+- __动态导入__：通过模块的内联函数调用来分离代码。
 
 
 ## 入口起点(entry point) {#entry-points}
@@ -73,39 +73,42 @@ __another-module.js__
 ``` js
 import _ from 'lodash';
 
-console.log(
-  _.join(['Another', 'module', 'loaded!'], ' ')
-);
+console.log(_.join(['Another', 'module', 'loaded!'], ' '));
 ```
 
 __webpack.config.js__
 
 ``` diff
-const path = require('path');
-
-module.exports = {
-  mode: 'development',
-  entry: {
-    index: './src/index.js',
-+   another: './src/another-module.js',
-  },
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-  },
-};
+ const path = require('path');
+ 
+ module.exports = {
+-  entry: './src/index.js',
++  mode: 'development',
++  entry: {
++    index: './src/index.js',
++    another: './src/another-module.js',
++  },
+   output: {
+-    filename: 'main.js',
++    filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+ };
 ```
 
 这将生成如下构建结果：
 
 ``` bash
 ...
-            Asset     Size   Chunks             Chunk Names
-another.bundle.js  550 KiB  another  [emitted]  another
-  index.bundle.js  550 KiB    index  [emitted]  index
-Entrypoint index = index.bundle.js
-Entrypoint another = another.bundle.js
-...
+[webpack-cli] Compilation finished
+asset index.bundle.js 553 KiB [emitted] (name: index)
+asset another.bundle.js 553 KiB [emitted] (name: another)
+runtime modules 2.49 KiB 12 modules
+cacheable modules 530 KiB
+  ./src/index.js 257 bytes [built] [code generated]
+  ./src/another-module.js 84 bytes [built] [code generated]
+  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+webpack 5.4.0 compiled successfully in 245 ms
 ```
 
 正如前面提到的，这种方式存在一些隐患：
@@ -113,47 +116,99 @@ Entrypoint another = another.bundle.js
 - 如果入口 chunk 之间包含一些重复的模块，那些重复模块都会被引入到各个 bundle 中。
 - 这种方法不够灵活，并且不能动态地将核心应用程序逻辑中的代码拆分出来。
 
-以上两点中，第一点对我们的示例来说无疑是个问题，因为之前我们在 `./src/index.js` 中也引入过 `lodash`，这样就在两个 bundle 中造成重复引用。接着，我们通过使用 [`SplitChunksPlugin`](/plugins/split-chunks-plugin) 来移除重复的模块。
+以上两点中，第一点对我们的示例来说无疑是个问题，因为之前我们在 `./src/index.js` 中也引入过 `lodash`，这样就在两个 bundle 中造成重复引用。在下一章节会移除重复的模块。
 
 
 ## 防止重复(prevent duplication) {#prevent-duplication}
 
 ### 入口依赖 {#entry-dependencies}
 
-配置 [`dependOn` option](/configuration/entry-context/#dependencies) 选项，这样可以在多个 chunk 之间共享模块。
+配置 [`dependOn` option](/configuration/entry-context/#dependencies) 选项，这样可以在多个 chunk 之间共享模块：
+
+__webpack.config.js__
 
 ``` diff
-  const path = require('path');
-
-  module.exports = {
-    mode: 'development',
-    entry: {
--     index: './src/index.js',
--     another: './src/another-module.js',
-+     index: { import: './src/index.js', dependOn: 'shared' },
-+     another: { import: './src/another-module.js', dependOn: 'shared' },
-+     shared: 'lodash',
-    },
-    output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-  };
+ const path = require('path');
+ 
+ module.exports = {
+   mode: 'development',
+   entry: {
+-    index: './src/index.js',
+-    another: './src/another-module.js',
++    index: {
++      import: './src/index.js',
++      dependOn: 'shared',
++    },
++    another: {
++      import: './src/another-module.js',
++      dependOn: 'shared',
++    },
++    shared: 'lodash',
+   },
+   output: {
+     filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+ };
 ```
 
-#### `optimization.runtimeChunk` {#optimizationruntimechunk}
+如果我们要在一个 HTML 页面上使用多个入口时，还需设置 `optimization.runtimeChunk: 'single'`，否则还会遇到[这里](https://bundlers.tooling.report/code-splitting/multi-entry/)所述的麻烦。
 
-在单个 HTML 页面上使用多个入口时，需设置 `optimization.runtimeChunk: 'single'`。
+__webpack.config.js__
 
-应避免使用每页多个入口，而应使用多个引入的入口：`entry: { page: ['./analytics', './app'] }`。当在 script 标签中使用 `async` 时，会有更易于优化，且执行顺序一致。
+```diff
+ const path = require('path');
+ 
+ module.exports = {
+   mode: 'development',
+   entry: {
+     index: {
+       import: './src/index.js',
+       dependOn: 'shared',
+     },
+     another: {
+       import: './src/another-module.js',
+       dependOn: 'shared',
+     },
+     shared: 'lodash',
+   },
+   output: {
+     filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
++  optimization: {
++    runtimeChunk: 'single',
++  },
+ };
+```
 
-T> 在使用脚本动态生成  HTML 的场景中，可以使用每页多个入口，例如：当页面上的组件编译时间未知，且 HTML 的页面数据动态获取时。
+构建结果如下：
+
+```bash
+...
+[webpack-cli] Compilation finished
+asset shared.bundle.js 549 KiB [compared for emit] (name: shared)
+asset runtime.bundle.js 7.79 KiB [compared for emit] (name: runtime)
+asset index.bundle.js 1.77 KiB [compared for emit] (name: index)
+asset another.bundle.js 1.65 KiB [compared for emit] (name: another)
+Entrypoint index 1.77 KiB = index.bundle.js
+Entrypoint another 1.65 KiB = another.bundle.js
+Entrypoint shared 557 KiB = runtime.bundle.js 7.79 KiB shared.bundle.js 549 KiB
+runtime modules 3.76 KiB 7 modules
+cacheable modules 530 KiB
+  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+  ./src/another-module.js 84 bytes [built] [code generated]
+  ./src/index.js 257 bytes [built] [code generated]
+webpack 5.4.0 compiled successfully in 249 ms
+```
+
+由上可知，除了生成 `shared.bundle.js`，`index.bundle.js` 和 `another.bundle.js` 之外，还生成了一个 `runtime.bundle.js` 文件。
+
+尽管可以在 webpack 中允许每个页面使用多入口，应尽可能避免使用多入口的入口：`entry: { page: ['./analytics', './app'] }`。如此，在使用 `async` 脚本标签时，会有更好的优化以及一致的执行顺序。
 
 ### `SplitChunksPlugin` {#splitchunksplugin}
 
 [`SplitChunksPlugin`](/plugins/split-chunks-plugin) 插件可以将公共的依赖模块提取到已有的入口 chunk 中，或者提取到一个新生成的 chunk。让我们使用这个插件，将之前的示例中重复的 `lodash` 模块去除：
-
-W> CommonsChunkPlugin 已经从 webpack v4 legato 中移除。想要了解在最新版本中如何处理 chunks，请查看 [`SplitChunksPlugin`](/plugins/split-chunks-plugin) 。
 
 __webpack.config.js__
 
@@ -182,13 +237,18 @@ __webpack.config.js__
 
 ``` bash
 ...
-                          Asset      Size                 Chunks             Chunk Names
-              another.bundle.js  5.95 KiB                another  [emitted]  another
-                index.bundle.js  5.89 KiB                  index  [emitted]  index
-vendors~another~index.bundle.js   547 KiB  vendors~another~index  [emitted]  vendors~another~index
-Entrypoint index = vendors~another~index.bundle.js index.bundle.js
-Entrypoint another = vendors~another~index.bundle.js another.bundle.js
-...
+[webpack-cli] Compilation finished
+asset vendors-node_modules_lodash_lodash_js.bundle.js 549 KiB [compared for emit] (id hint: vendors)
+asset index.bundle.js 8.92 KiB [compared for emit] (name: index)
+asset another.bundle.js 8.8 KiB [compared for emit] (name: another)
+Entrypoint index 558 KiB = vendors-node_modules_lodash_lodash_js.bundle.js 549 KiB index.bundle.js 8.92 KiB
+Entrypoint another 558 KiB = vendors-node_modules_lodash_lodash_js.bundle.js 549 KiB another.bundle.js 8.8 KiB
+runtime modules 7.64 KiB 14 modules
+cacheable modules 530 KiB
+  ./src/index.js 257 bytes [built] [code generated]
+  ./src/another-module.js 84 bytes [built] [code generated]
+  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+webpack 5.4.0 compiled successfully in 241 ms
 ```
 
 以下是由社区提供，一些对于代码分离很有帮助的 plugin 和 loader：
@@ -200,31 +260,31 @@ Entrypoint another = vendors~another~index.bundle.js another.bundle.js
 
 当涉及到动态代码拆分时，webpack 提供了两个类似的技术。第一种，也是推荐选择的方式是，使用符合 [ECMAScript 提案](https://github.com/tc39/proposal-dynamic-import) 的 [`import()` 语法](/api/module-methods/#import-1) 来实现动态导入。第二种，则是 webpack 的遗留功能，使用 webpack 特定的 [`require.ensure`](/api/module-methods/#requireensure)。让我们先尝试使用第一种……
 
-W> `import()` 调用会在内部用到 [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)。如果在旧版本浏览器中使用 `import()`，记得使用一个 polyfill 库（例如 [es6-promise](https://github.com/stefanpenner/es6-promise) 或 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill)），来 shim `Promise`。
+W> `import()` 调用会在内部用到 [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)。如果在旧版本浏览器中（例如，IE 11）使用 `import()`，记得使用一个 polyfill 库（例如 [es6-promise](https://github.com/stefanpenner/es6-promise) 或 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill)），来 shim `Promise`。
 
-在我们开始之前，先从配置中移除掉多余的 [`entry`](/concepts/entry-points/) 和 [`optimization.splitChunks`](/plugins/split-chunks-plugin/#optimization-splitchunks)，因为接下来的演示中并不需要它们：
+在我们开始之前，先从上述示例的配置中移除掉多余的 [`entry`](/concepts/entry-points/) 和 [`optimization.splitChunks`](/plugins/split-chunks-plugin/#optimization-splitchunks)，因为接下来的演示中并不需要它们：
 
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-
-  module.exports = {
-    mode: 'development',
-    entry: {
-      index: './src/index.js',
--     another: './src/another-module.js',
-    },
-    output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
--   optimization: {
--     splitChunks: {
--       chunks: 'all',
--     },
--   },
-  };
+ const path = require('path');
+ 
+ module.exports = {
+   mode: 'development',
+   entry: {
+     index: './src/index.js',
+-    another: './src/another-module.js',
+   },
+   output: {
+     filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+-  optimization: {
+-    splitChunks: {
+-      chunks: 'all',
+-    },
+-  },
+ };
 ```
 
 我们将更新我们的项目，移除现在未使用的文件：
@@ -247,69 +307,74 @@ webpack-demo
 __src/index.js__
 
 ``` diff
-- import _ from 'lodash';
+-import _ from 'lodash';
 -
-- function component() {
-+ function getComponent() {
--   const element = document.createElement('div');
--
--   // Lodash, now imported by this script
--   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+   return import('lodash').then(({ default: _ }) => {
-+     const element = document.createElement('div');
+-function component() {
++function getComponent() {
+   const element = document.createElement('div');
+ 
+-  // Lodash, now imported by this script
+-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
++  return import('lodash')
++    .then(({ default: _ }) => {
++      const element = document.createElement('div');
 +
-+     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+
-+     return element;
-+
-+   }).catch(error => 'An error occurred while loading the component');
-  }
-
-- document.body.appendChild(component());
-+ getComponent().then(component => {
-+   document.body.appendChild(component);
-+ })
++      element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+ 
+-  return element;
++      return element;
++    })
++    .catch((error) => 'An error occurred while loading the component');
+ }
+ 
+-document.body.appendChild(component());
++getComponent().then((component) => {
++  document.body.appendChild(component);
++});
 ```
 
-我们之所以需要 `default`，是因为 webpack 4 在导入 CommonJS 模块时，将不再解析为 `module.exports` 的值，而是为 CommonJS 模块创建一个 artificial namespace 对象，更多有关背后原因的信息，请阅读 [webpack 4: import() and CommonJs](https://medium.com/webpack/webpack-4-import-and-commonjs-d619d626b655)
+我们之所以需要 `default`，是因为 webpack 4 在导入 CommonJS 模块时，将不再解析为 `module.exports` 的值，而是为 CommonJS 模块创建一个 artificial namespace 对象，更多有关背后原因的信息，请阅读 [webpack 4: import() and CommonJs](https://medium.com/webpack/webpack-4-import-and-commonjs-d619d626b655)。
 
 让我们执行 webpack，查看 `lodash` 是否会分离到一个单独的 bundle：
 
 ``` bash
 ...
-                   Asset      Size          Chunks             Chunk Names
-         index.bundle.js  7.88 KiB           index  [emitted]  index
-vendors~lodash.bundle.js   547 KiB  vendors~lodash  [emitted]  vendors~lodash
-Entrypoint index = index.bundle.js
-...
+[webpack-cli] Compilation finished
+asset vendors-node_modules_lodash_lodash_js.bundle.js 549 KiB [compared for emit] (id hint: vendors)
+asset index.bundle.js 13.5 KiB [compared for emit] (name: index)
+runtime modules 7.37 KiB 11 modules
+cacheable modules 530 KiB
+  ./src/index.js 434 bytes [built] [code generated]
+  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+webpack 5.4.0 compiled successfully in 268 ms
 ```
 
-由于 `import()` 会返回一个 promise，因此它可以和 [`async` 函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)一起使用。但是，需要使用像 Babel 这样的预处理器和 [Syntax Dynamic Import Babel Plugin](https://babel.docschina.org/docs/plugins/syntax-dynamic-import/#installation)。下面是如何通过 async 函数简化代码：
+由于 `import()` 会返回一个 promise，因此它可以和 [`async` 函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)一起使用。下面是如何通过 async 函数简化代码：
 
 __src/index.js__
 
 ``` diff
-- function getComponent() {
-+ async function getComponent() {
--   return import('lodash').then(({ default: _ }) => {
--     const element = document.createElement('div');
+-function getComponent() {
++async function getComponent() {
+   const element = document.createElement('div');
++  const { default: _ } = await import('lodash');
+ 
+-  return import('lodash')
+-    .then(({ default: _ }) => {
+-      const element = document.createElement('div');
++  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+ 
+-      element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 -
--     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
--
--     return element;
--
--   }).catch(error => 'An error occurred while loading the component');
-+   const element = document.createElement('div');
-+   const { default: _ } = await import('lodash');
-+
-+   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-+
-+   return element;
-  }
-
-  getComponent().then(component => {
-    document.body.appendChild(component);
-  });
+-      return element;
+-    })
+-    .catch((error) => 'An error occurred while loading the component');
++  return element;
+ }
+ 
+ getComponent().then((component) => {
+   document.body.appendChild(component);
+ });
 ```
 
 T> 在稍后示例中，可能会根据计算后的变量(computed variable)导入特定模块时，可以通过向 `import()` 传入一个 [动态表达式](/api/module-methods/#dynamic-expressions-in-import)。
@@ -321,8 +386,8 @@ webpack v4.6.0+ 增加了对预获取和预加载的支持。
 
 在声明 import 时，使用下面这些内置指令，可以让 webpack 输出 "resource hint(资源提示)"，来告知浏览器：
 
-- prefetch(预获取)：将来某些导航下可能需要的资源
-- preload(预加载)：当前导航下可能需要资源
+- __prefetch__(预获取)：将来某些导航下可能需要的资源
+- __preload__(预加载)：当前导航下可能需要资源
 
 下面这个 prefetch 的简单示例中，有一个 `HomePage` 组件，其内部渲染一个 `LoginButton` 组件，然后在点击后按需加载 `LoginModal` 组件。
 
@@ -330,7 +395,7 @@ __LoginButton.js__
 
 ```js
 //...
-import(/* webpackPrefetch: true */ 'LoginModal');
+import(/* webpackPrefetch: true */ './path/to/LoginModal.js');
 ```
 
 这会生成 `<link rel="prefetch" href="login-modal-chunk.js">` 并追加到页面头部，指示着浏览器在闲置时间预取 `login-modal-chunk.js` 文件。
@@ -357,7 +422,7 @@ import(/* webpackPreload: true */ 'ChartingLibrary');
 
 在页面中使用 `ChartComponent` 时，在请求 ChartComponent.js 的同时，还会通过 `<link rel="preload">` 请求 charting-library-chunk。假定 page-chunk 体积很小，很快就被加载好，页面此时就会显示 `LoadingIndicator(加载进度条)` ，等到 `charting-library-chunk` 请求完成，LoadingIndicator 组件才消失。启动仅需要很少的加载时间，因为只进行单次往返，而不是两次往返。尤其是在高延迟环境下。
 
-T> 不正确地使用 webpackPreload 会有损性能，请谨慎使用。
+T> 不正确地使用 `webpackPreload` 会有损性能，请谨慎使用。
 
 
 ## bundle 分析(bundle analysis) {#bundle-analysis}

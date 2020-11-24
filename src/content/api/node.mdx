@@ -11,6 +11,7 @@ contributors:
   - toshihidetagami
   - chenxsan
   - jamesgeorge007
+  - textbook
 ---
 
 webpack 提供了 Node.js API，可以在 Node.js 运行时下直接使用。
@@ -277,7 +278,7 @@ webpack([
   { entry: './index1.js', output: { filename: 'bundle1.js' } },
   { entry: './index2.js', output: { filename: 'bundle2.js' } }
 ], (err, stats) => { // [Stats Object](#stats-object)
-  process.stdout.write(stats.toString() + '\\n');
+  process.stdout.write(stats.toString() + '\n');
 })
 ```
 

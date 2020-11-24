@@ -16,6 +16,7 @@ contributors:
   - pixel-ray
   - snitin315
   - u01jmg3
+  - grrizzly
 ---
 
 `object` `string`
@@ -23,8 +24,6 @@ contributors:
 `stats` 选项让你更精确地控制 bundle 信息该怎么显示。 如果你不希望使用 `quiet` 或 `noInfo` 这样的不显示信息，而是又不想得到全部的信息，只是想要获取某部分 bundle 的信息，使用 stats 选项是比较好的折衷方式。
 
 T> 对于 webpack-dev-server，这个属性要放在 [`devServer` 配置对象](/configuration/dev-server/#devserverstats-).
-
-T> 对于 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware), 该属性需要在webpack-dev-middleware 的 `options` 对象中.
 
 W> 在使用 Node.js API 时，此选项无效。
 

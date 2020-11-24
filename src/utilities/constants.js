@@ -14,7 +14,8 @@ const excludedLoaders = [
   'webpack-contrib/multi-loader',
   'webpack-contrib/yaml-frontmatter-loader',
   'webpack-contrib/restyle-loader',
-  'webpack-contrib/gzip-loader'
+  'webpack-contrib/gzip-loader',
+  'webpack-contrib/cache-loader'
 ];
 const excludedPlugins = [
   'webpack-contrib/component-webpack-plugin',

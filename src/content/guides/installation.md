@@ -48,11 +48,11 @@ npm install --save-dev webpack-cli
 
 ```json
 "scripts": {
-	"build": "webpack --config webpack.config.js"
+  "build": "webpack --config webpack.config.js"
 }
 ```
 
-T> 想要运行本地安装的 webpack，你可以通过 `node_modules/.bin/webpack` 来访问它的二进制版本。另外，如果你使用的是 npm v5.2.0 或更高版本，则可以运行 'npx webpack' 来执行。
+T> 想要运行本地安装的 webpack，你可以通过 `node_modules/.bin/webpack` 来访问它的二进制版本。另外，如果你使用的是 npm v5.2.0 或更高版本，则可以运行 `npx webpack` 来执行。
 
 
 ## 全局安装 {#global-installation}

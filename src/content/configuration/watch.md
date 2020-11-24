@@ -70,9 +70,9 @@ module.exports = {
 
 ## `watchOptions.ignored` {#watchoptionsignored}
 
-`RegExp` [`anymatch`](https://github.com/micromatch/anymatch)
+`RegExp` `string` `[string]`
 
-对于某些系统，监听大量文件系统会导致大量的 CPU 或内存占用。这个选项可以排除一些巨大的文件夹，例如 `node_modules`：
+对于某些系统，监听大量文件会导致大量的 CPU 或内存占用。可以使用正则排除像 `node_modules` 如此庞大的文件夹：
 
 __webpack.config.js__
 
@@ -85,7 +85,20 @@ module.exports = {
 };
 ```
 
-也可以使用多种 [anymatch](https://github.com/micromatch/anymatch) 模式：
+此外，还可以使用 glob 模式：
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  watchOptions: {
+    ignored: 'node_modules/**'
+  }
+};
+```
+
+也可以使用多 glob 匹配模式：
 
 __webpack.config.js__
 

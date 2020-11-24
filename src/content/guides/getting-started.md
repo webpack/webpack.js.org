@@ -27,11 +27,11 @@ contributors:
 
 webpack 用于编译 JavaScript 模块。一旦完成 [安装](/guides/installation)，你就可以通过 webpack [CLI](/api/cli) 或 [API](/api/node) 与其配合交互。如果你还不熟悉 webpack，请阅读 [核心概念](/concepts) 和 [对比](/comparison)，了解为什么要使用 webpack，而不是社区中的其他工具。
 
-W> 运行 webpack 5 的 Node.js 版本最低是 10.13.0 (LTS)。
+W> 运行 webpack 5 的 Node.js 最低版本是 10.13.0 (LTS)。
 
 ## 基本安装 {#basic-setup}
 
-首先我们创建一个目录，初始化 npm，然后 [在本地安装 webpack](/guides/installation#local-installation)，接着安装 webpack-cli（此工具用于在命令行中运行 webpack）：
+首先我们创建一个目录，初始化 npm，然后 [在本地安装 webpack](/guides/installation#local-installation)，接着安装 [`webpack-cli`](https://github.com/webpack/webpack-cli)（此工具用于在命令行中运行 webpack）：
 
 ``` bash
 mkdir webpack-demo
@@ -129,7 +129,7 @@ __package.json__
 
 ## 创建一个 bundle {#creating-a-bundle}
 
-首先，我们稍微调整下目录结构，创建分发代码(`/dist`)文件夹用于存放分发代码，源代码(`/src`)文件夹仍存放源代码。源代码是指用于书写和编辑的代码。分发代码是指在构建过程中，经过最小化和优化后产生的输出结果，最终将在浏览器中加载。调整后目录结构如下：
+首先，我们稍微调整下目录结构，创建分发代码(`./dist`)文件夹用于存放分发代码，源代码(`./src`)文件夹仍存放源代码。源代码是指用于书写和编辑的代码。分发代码是指在构建过程中，经过最小化和优化后产生的输出结果，最终将在浏览器中加载。调整后目录结构如下：
 
 __project__
 
@@ -171,7 +171,7 @@ __src/index.js__
  document.body.appendChild(component());
 ```
 
-现在，我们将会打包所有脚本，我们必须更新 `index.html` 文件。由于现在是通过 `import` 引入 lodash，所以要将 lodash `<script>` 删除，然后修改另一个 `<script>` 标签来加载 bundle，而不是原始的 `/src` 文件：
+现在，我们将会打包所有脚本，我们必须更新 `index.html` 文件。由于现在是通过 `import` 引入 lodash，所以要将 lodash `<script>` 删除，然后修改另一个 `<script>` 标签来加载 bundle，而不是原始的 `./src` 文件：
 
 __dist/index.html__
 
@@ -202,15 +202,12 @@ runtime modules 1000 bytes 5 modules
 cacheable modules 530 KiB
   ./src/index.js 257 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.4.0 compiled successfully in 3619 ms
+webpack 5.4.0 compiled successfully in 1851 ms
 ```
 
-T> 输出可能会稍有不同，但是只要构建成功，那么你就可以放心继续。并且不要担心警告，稍后我们就会解决。
+T> 输出可能会稍有不同，但是只要构建成功，那么你就可以放心继续。
 
 在浏览器中打开 `dist` 目录下的 `index.html`，如果一切正常，你应该能看到以下文本：`'Hello webpack'`。
-
-W> 在浏览器中打开 `index.html`，如果在压缩过后的 JavaScript 中出现语法错误，请设置 [`development 模式`](/configuration/mode/#mode-development)，并再次运行 `npx webpack`。这与最新版本 Node.js (v12.5+) 上运行 `npx webpack` 有关，和 [LTS 版本](https://nodejs.org/en/) 无关。
-
 
 ## 模块 {#modules}
 
@@ -261,7 +258,7 @@ runtime modules 1000 bytes 5 modules
 cacheable modules 530 KiB
   ./src/index.js 257 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.4.0 compiled successfully in 3516 ms
+webpack 5.4.0 compiled successfully in 1934 ms
 ```
 
 T> 如果 `webpack.config.js` 存在，则 `webpack` 命令将默认选择使用它。我们在这里使用 `--config` 选项只是向你表明，可以传递任何名称的配置文件。这对于需要拆分成多个文件的复杂配置是非常有用的。
@@ -276,7 +273,7 @@ T> 如果 `webpack.config.js` 存在，则 `webpack` 命令将默认选择使用
 __package.json__
 
 ``` diff
-{
+ {
    "name": "webpack-demo",
    "version": "1.0.0",
    "description": "",
@@ -299,7 +296,7 @@ __package.json__
  }
 ```
 
-现在，可以使用 `npm run build` 命令，来替代我们之前使用的 `npx` 命令。注意，使用 npm `scripts`，我们可以像使用 `npx` 那样通过模块名引用本地安装的 npm packages。这是大多数基于 npm 的项目遵循的标准，因为它允许所有贡献者使用同一组通用脚本（如果必要，每个命令都需要添加 `--config` flag）。
+现在，可以使用 `npm run build` 命令，来替代我们之前使用的 `npx` 命令。注意，使用 npm `scripts`，我们可以像使用 `npx` 那样通过模块名引用本地安装的 npm packages。这是大多数基于 npm 的项目遵循的标准，因为它允许所有贡献者使用同一组通用脚本。
 
 现在运行以下命令，然后看看你的脚本别名是否正常运行：
 
@@ -314,7 +311,7 @@ runtime modules 1000 bytes 5 modules
 cacheable modules 530 KiB
   ./src/index.js 257 bytes [built] [code generated]
   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
-webpack 5.4.0 compiled successfully in 3764 ms
+webpack 5.4.0 compiled successfully in 1940 ms
 ```
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --color`.
