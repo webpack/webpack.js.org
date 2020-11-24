@@ -105,17 +105,10 @@ W> 不要使用太多的 worker，因为 Node.js 的 runtime 和 loader 都有�
 
 ### 持久化缓存 {#persistent-cache}
 
-<<<<<<< HEAD
-使用 `cache-loader` 启用持久化缓存。使用 `package.json` 中的 `"postinstall"` 清除缓存目录。
+在 webpack 配置中使用 [`cache`](/configuration/other-options/#cache) 选项。使用 `package.json` 中的 `"postinstall"` 清除缓存目录。
 
 
-T> 我们支持 yarn PnP v3 [`yarn 2 berry`](https://next.yarnpkg.com/features/pnp)，来进行持久缓存。
-=======
-Use [`cache`](/configuration/other-options/#cache) option in webpack configuration. Clear cache directory on `"postinstall"` in `package.json`.
-
-
-T> We support yarn PnP version 3 [`yarn 2 berry`](https://yarnpkg.com/features/pnp) for persistent caching.
->>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
+T> 我们支持 yarn PnP v3 [`yarn 2 berry`](https://yarnpkg.com/features/pnp)，来进行持久缓存。
 
 ### 自定义 plugin/loader {#custom-pluginsloaders}
 

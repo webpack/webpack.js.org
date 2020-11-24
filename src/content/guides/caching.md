@@ -252,11 +252,7 @@ __src/index.js__
 - `vendor` bundle 会随着自身的 `module.id` 的变化，而发生变化。
 - `manifest` runtime 会因为现在包含一个新模块的引用，而发生变化。
 
-<<<<<<< HEAD
-第一个和最后一个都是符合预期的行为，`vendor` hash 发生变化是我们要修复的。我们将 [`optimization.moduleIds`](/configuration/optimization/#optimizationmoduleids) 设置为 `'hashed'`：
-=======
-The first and last are expected, it's the `vendor` hash we want to fix. Let's use [`optimization.moduleIds`](/configuration/optimization/#optimizationmoduleids) with `'deterministic'` option:
->>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
+第一个和最后一个都是符合预期的行为，`vendor` hash 发生变化是我们要修复的。我们将 [`optimization.moduleIds`](/configuration/optimization/#optimizationmoduleids) 设置为 `'deterministic'`：
 
 __webpack.config.js__
 

@@ -25,13 +25,7 @@ contributors:
 
 T> 对于 webpack-dev-server，这个属性要放在 [`devServer` 配置对象](/configuration/dev-server/#devserverstats-).
 
-<<<<<<< HEAD
-T> 对于 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware), 该属性需要在webpack-dev-middleware 的 `options` 对象中.
-
 W> 在使用 Node.js API 时，此选项无效。
-=======
-W> This option does not have any effect when using the Node.js API.
->>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
 
 __webpack.js.org__
 

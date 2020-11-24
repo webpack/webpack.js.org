@@ -519,28 +519,7 @@ const a = this;
 parser.hooks.expression.for('this').tap('MyPlugin', expression => {});
 ```
 
-<<<<<<< HEAD
-
-### expressionAnyMember {#expressionanymember}
-
-`SyncBailHook`
-
-Executed when parsing a `MemberExpression`.
-
-- Hook Parameters: `identifier`
-- Callback Parameters: `expression`
-
-```js
-const a = process.env;
-
-parser.hooks.new.for('process').tap('MyPlugin', expression => {});
-```
-
-
 ### expressionConditionalOperator {#expressionconditionaloperator}
-=======
-### expressionConditionalOperator
->>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
 
 `SyncBailHook`
 

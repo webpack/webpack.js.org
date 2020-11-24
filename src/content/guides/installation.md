@@ -52,11 +52,7 @@ npm install --save-dev webpack-cli
 }
 ```
 
-<<<<<<< HEAD
-T> 想要运行本地安装的 webpack，你可以通过 `node_modules/.bin/webpack` 来访问它的二进制版本。另外，如果你使用的是 npm v5.2.0 或更高版本，则可以运行 'npx webpack' 来执行。
-=======
-T> To run the local installation of webpack you can access its binary version as `node_modules/.bin/webpack`. Alternatively, if you are using npm v5.2.0 or greater, you can run `npx webpack` to do it.
->>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
+T> 想要运行本地安装的 webpack，你可以通过 `node_modules/.bin/webpack` 来访问它的二进制版本。另外，如果你使用的是 npm v5.2.0 或更高版本，则可以运行 `npx webpack` 来执行。
 
 
 ## 全局安装 {#global-installation}

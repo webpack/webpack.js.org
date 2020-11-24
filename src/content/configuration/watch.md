@@ -72,11 +72,7 @@ module.exports = {
 
 `RegExp` `string` `[string]`
 
-<<<<<<< HEAD
-对于某些系统，监听大量文件系统会导致大量的 CPU 或内存占用。这个选项可以排除一些巨大的文件夹，例如 `node_modules`：
-=======
-For some systems, watching many files can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules` using a regular expression:
->>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
+对于某些系统，监听大量文件会导致大量的 CPU 或内存占用。可以使用正则排除像 `node_modules` 如此庞大的文件夹：
 
 __webpack.config.js__
 
@@ -89,10 +85,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-也可以使用多种 [anymatch](https://github.com/micromatch/anymatch) 模式：
-=======
-Alternatively, a glob pattern may be used:
+此外，还可以使用 glob 模式：
 
 __webpack.config.js__
 
@@ -105,8 +98,7 @@ module.exports = {
 };
 ```
 
-It is also possible to use multiple glob patterns:
->>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
+也可以使用多 glob 匹配模式：
 
 __webpack.config.js__
 

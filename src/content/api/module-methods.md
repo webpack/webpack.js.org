@@ -164,11 +164,7 @@ T> 注意：所有选项都可以像这样组合 `/* webpackMode: "lazy-once", w
 
 T> 注意，`webpackInclude` 和 `webpackExclude` 不会影响到前缀，例如 `./locale`。
 
-<<<<<<< HEAD
-`webpackExports`: 告诉 webpack 在使用动态导入时，只打包这个模块使用的导出项。它可以减小 chunk 的大小。从 [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18) 起可用。
-=======
-`webpackExports`: tells webpack to only bundle the specified exports of a dynamically `import()`ed module. It can decrease the output size of a chunk. Available since [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18).
->>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
+`webpackExports`: 告知 webpack 只构建指定出口的动态 `import()` 模块。它可以减小 chunk 的大小。从 [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18) 起可用。
 
 
 ## CommonJS {#commonjs}

@@ -123,11 +123,7 @@ cacheable modules 530 KiB
 webpack 5.4.0 compiled successfully in 1996 ms
 ```
 
-<<<<<<< HEAD
-我们可以看到，webpack 生成 `print.bundle.js` 和 `app.bundle.js` 文件，这也和我们在 `index.html` 文件中指定的文件名称相对应。如果你在浏览器中打开 `index.html`，就可以看到在点击按钮时会发生什么。
-=======
-We can see that webpack generates our `print.bundle.js` and `index.bundle.js` files, which we also specified in our `index.html` file. if you open `index.html` in your browser, you can see what happens when you click the button.
->>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
+我们可以看到，webpack 生成 `print.bundle.js` 和 `index.bundle.js` 文件，这也和我们在 `index.html` 文件中指定的文件名称相对应。如果你在浏览器中打开 `index.html`，就可以看到在点击按钮时会发生什么。
 
 但是，如果我们更改了我们的一个入口起点的名称，甚至添加了一个新的入口，会发生什么？会在构建时重新命名生成的 bundle，但是我们的 `index.html` 文件仍然引用旧的名称。让我们用 [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin) 来解决这个问题。
 

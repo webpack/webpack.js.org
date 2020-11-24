@@ -133,15 +133,9 @@ W> 某些文本编辑器具有 "safe write(安全写入)" 功能，可能会干�
 
 webpack 提供几种可选方式，帮助你在代码发生变化后自动编译代码：
 
-<<<<<<< HEAD
- 1. webpack [watch mode](/configuration/watch/#watch)(webpack 观察模式)
- 2. webpack-dev-server
- 3. webpack-dev-middleware
-=======
  1. webpack's [Watch Mode](/configuration/watch/#watch)
  2. [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
  3. [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
->>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
 
 多数场景中，你可能需要使用 `webpack-dev-server`，但是不妨探讨一下以上的所有选项。
 

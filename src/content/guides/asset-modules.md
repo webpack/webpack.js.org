@@ -11,11 +11,7 @@ related:
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
 ---
 
-<<<<<<< HEAD
 资源模块(asset module)是一种模块类型，它允许使用资源文件（字体，图标等）而无需配置额外 loader。
-=======
-Asset Modules is a type of module that allows one to use asset files (fonts, icons, etc) without configuring additional loaders.
->>>>>>> 3ade0b38baba75fdd46e283eafd478842267ef35
 
 在 webpack 5 之前，通常使用：
 
