@@ -26,7 +26,6 @@ import StarterKits from '../StarterKits/StarterKits';
 
 // Load Styling
 import '../../styles/index';
-import '../../styles/icon.font.js';
 import './Site.scss';
 
 // Load Content Tree
