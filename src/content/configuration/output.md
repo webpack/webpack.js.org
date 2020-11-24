@@ -787,7 +787,7 @@ require('MyLibrary').doSomething();
 
 ### Module Definition Systems
 
-These options will result in a bundle that comes with a more complete header to ensure compatibility with various module systems. The `output.library` option will take on a different meaning under the following `output.libraryTarget` options.
+These options will result in a bundle that comes with a complete header to ensure compatibility with various module systems. The `output.library` option will take on a different meaning under the following `output.libraryTarget` options.
 
 
 `libraryTarget: 'commonjs2'` - The __return value of your entry point__ will be assigned to the `module.exports`. As the name implies, this is used in CommonJS environments:
@@ -1038,7 +1038,7 @@ Note that `[fullhash]` in this parameter will be replaced with a hash of the com
 
 Tells webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` [mode](/configuration/mode/) respectively.
 
-W> While the data this comments can provide is very useful during development when reading the generated code, it __should not__ be used in production.
+W> While the data this comments can provide is useful during development when reading the generated code, it __should not__ be used in production.
 
 __webpack.config.js__
 

@@ -13,6 +13,7 @@ contributors:
   - byzyk
   - trivikr
   - aholzner
+  - chenxsan
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -21,33 +22,33 @@ If you've been following the guides, you should have a solid understanding of so
 
 W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!
 
-Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-development).
+Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-development) and `title` to `'Development'`.
 
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
-  module.exports = {
-+   mode: 'development',
-    entry: {
-      app: './src/index.js',
-      print: './src/print.js',
-    },
-    plugins: [
-      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(),
-      new HtmlWebpackPlugin({
-        title: 'Development',
-      }),
-    ],
-    output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-  };
+ const path = require('path');
+ const HtmlWebpackPlugin = require('html-webpack-plugin');
+ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+ 
+ module.exports = {
++  mode: 'development',
+   entry: {
+     index: './src/index.js',
+     print: './src/print.js',
+   },
+   plugins: [
+     new CleanWebpackPlugin(),
+     new HtmlWebpackPlugin({
+-      title: 'Output Management',
++      title: 'Development',
+     }),
+   ],
+   output: {
+     filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+ };
 ```
 
 ## Using source maps
@@ -63,28 +64,28 @@ For this guide, let's use the `inline-source-map` option, which is good for illu
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
-  module.exports = {
-    mode: 'development',
-    entry: {
-      app: './src/index.js',
-      print: './src/print.js',
-    },
-+   devtool: 'inline-source-map',
-    plugins: [
-      new CleanWebpackPlugin(),
-      new HtmlWebpackPlugin({
-        title: 'Development',
-      }),
-    ],
-    output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-  };
+ const path = require('path');
+ const HtmlWebpackPlugin = require('html-webpack-plugin');
+ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+ 
+ module.exports = {
+   mode: 'development',
+   entry: {
+     index: './src/index.js',
+     print: './src/print.js',
+   },
++  devtool: 'inline-source-map',
+   plugins: [
+     new CleanWebpackPlugin(),
+     new HtmlWebpackPlugin({
+       title: 'Development',
+     }),
+   ],
+   output: {
+     filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+ };
 ```
 
 Now let's make sure we have something to debug, so let's create an error in our `print.js` file:
@@ -92,21 +93,26 @@ Now let's make sure we have something to debug, so let's create an error in our 
 __src/print.js__
 
 ``` diff
-  export default function printMe() {
--   console.log('I get called from print.js!');
-+   cosnole.log('I get called from print.js!');
-  }
+ export default function printMe() {
+-  console.log('I get called from print.js!');
++  cosnole.log('I get called from print.js!');
+ }
 ```
 
 Run an `npm run build`, it should compile to something like this:
 
 ``` bash
 ...
-          Asset       Size  Chunks                    Chunk Names
-  app.bundle.js    1.44 MB    0, 1  [emitted]  [big]  app
-print.bundle.js    6.43 kB       1  [emitted]         print
-     index.html  248 bytes          [emitted]
-...
+[webpack-cli] Compilation finished
+asset index.bundle.js 1.38 MiB [emitted] (name: index)
+asset print.bundle.js 6.25 KiB [emitted] (name: print)
+asset index.html 272 bytes [emitted]
+runtime modules 1.9 KiB 9 modules
+cacheable modules 530 KiB
+  ./src/index.js 406 bytes [built] [code generated]
+  ./src/print.js 83 bytes [built] [code generated]
+  ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+webpack 5.4.0 compiled successfully in 706 ms
 ```
 
 Now open the resulting `index.html` file in your browser. Click the button and look in your console where the error is displayed. The error should say something like this:
@@ -127,9 +133,9 @@ It quickly becomes a hassle to manually run `npm run build` every time you want 
 
 There are a couple of different options available in webpack that help you automatically compile your code whenever it changes:
 
- 1. webpack's Watch Mode
- 2. webpack-dev-server
- 3. webpack-dev-middleware
+ 1. webpack's [Watch Mode](/configuration/watch/#watch)
+ 2. [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+ 3. [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
 
 In most cases, you probably would want to use `webpack-dev-server`, but let's explore all of the above options.
 
@@ -143,29 +149,29 @@ Let's add an npm script that will start webpack's Watch Mode:
 __package.json__
 
 ``` diff
-  {
-    "name": "webpack-demo",
-    "version": "1.0.0",
-    "description": "",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-+     "watch": "webpack --watch",
-      "build": "webpack"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-      "clean-webpack-plugin": "^2.0.0",
-      "css-loader": "^0.28.4",
-      "csv-loader": "^2.1.1",
-      "file-loader": "^0.11.2",
-      "html-webpack-plugin": "^2.29.0",
-      "style-loader": "^0.18.2",
-      "webpack": "^4.30.0",
-      "xml-loader": "^1.2.1"
-    }
-  }
+ {
+   "name": "webpack-demo",
+   "version": "1.0.0",
+   "description": "",
+   "private": true,
+   "scripts": {
+     "test": "echo \"Error: no test specified\" && exit 1",
++    "watch": "webpack --watch",
+     "build": "webpack"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "devDependencies": {
+     "clean-webpack-plugin": "^3.0.0",
+     "html-webpack-plugin": "^4.5.0",
+     "webpack": "^5.4.0",
+     "webpack-cli": "^4.2.0"
+   },
+   "dependencies": {
+     "lodash": "^4.17.20"
+   }
+ }
 ```
 
 Tell `CleanWebpackPlugin` that we don't want to remove the `index.html` file after the incremental build triggered by watch. We do this with the [`cleanStaleWebpackAssets` option](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional):
@@ -173,29 +179,29 @@ Tell `CleanWebpackPlugin` that we don't want to remove the `index.html` file aft
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
-  module.exports = {
-    mode: 'development',
-    entry: {
-      app: './src/index.js',
-      print: './src/print.js',
-    },
-    devtool: 'inline-source-map',
-    plugins: [
--     new CleanWebpackPlugin(),
-+     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-      new HtmlWebpackPlugin({
-        title: 'Development',
-      }),
-    ],
-    output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-  };
+ const path = require('path');
+ const HtmlWebpackPlugin = require('html-webpack-plugin');
+ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+ 
+ module.exports = {
+   mode: 'development',
+   entry: {
+     index: './src/index.js',
+     print: './src/print.js',
+   },
+   devtool: 'inline-source-map',
+   plugins: [
+-    new CleanWebpackPlugin(),
++    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+     new HtmlWebpackPlugin({
+       title: 'Development',
+     }),
+   ],
+   output: {
+     filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+ };
 ```
 
 Now run `npm run watch` from the command line and see how webpack compiles your code.
@@ -206,10 +212,10 @@ Now, while webpack is watching your files, let's remove the error we introduced 
 __src/print.js__
 
 ``` diff
-  export default function printMe() {
--   cosnole.log('I get called from print.js!');
-+   console.log('I get called from print.js!');
-  }
+ export default function printMe() {
+-  cosnole.log('I get called from print.js!');
++  console.log('I get called from print.js!');
+ }
 ```
 
 Now save your file and check the terminal window. You should see that webpack automatically recompiles the changed module!
@@ -230,31 +236,31 @@ Change your configuration file to tell the dev server where to look for files:
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
-  module.exports = {
-    mode: 'development',
-    entry: {
-      app: './src/index.js',
-      print: './src/print.js',
-    },
-    devtool: 'inline-source-map',
-+   devServer: {
-+     contentBase: './dist',
-+   },
-    plugins: [
-      new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-      new HtmlWebpackPlugin({
-        title: 'Development',
-      }),
-    ],
-    output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-    },
-  };
+ const path = require('path');
+ const HtmlWebpackPlugin = require('html-webpack-plugin');
+ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+ 
+ module.exports = {
+   mode: 'development',
+   entry: {
+     index: './src/index.js',
+     print: './src/print.js',
+   },
+   devtool: 'inline-source-map',
++  devServer: {
++    contentBase: './dist',
++  },
+   plugins: [
+     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+     new HtmlWebpackPlugin({
+       title: 'Development',
+     }),
+   ],
+   output: {
+     filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
+   },
+ };
 ```
 
 This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080`.
@@ -266,33 +272,31 @@ Let's add a script to easily run the dev server as well:
 __package.json__
 
 ``` diff
-  {
-    "name": "development",
-    "version": "1.0.0",
-    "description": "",
-    "private": true,
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "watch": "webpack --watch",
-+     "start": "webpack serve --open",
-      "build": "webpack"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-      "clean-webpack-plugin": "^2.0.0",
-      "css-loader": "^0.28.4",
-      "csv-loader": "^2.1.1",
-      "express": "^4.15.3",
-      "file-loader": "^0.11.2",
-      "html-webpack-plugin": "^2.29.0",
-      "style-loader": "^0.18.2",
-      "webpack": "^4.30.0",
-      "webpack-dev-server": "^3.8.0",
-      "xml-loader": "^1.2.1"
-    }
-  }
+ {
+   "name": "webpack-demo",
+   "version": "1.0.0",
+   "description": "",
+   "private": true,
+   "scripts": {
+     "test": "echo \"Error: no test specified\" && exit 1",
+     "watch": "webpack --watch",
++    "start": "webpack serve --open",
+     "build": "webpack"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "devDependencies": {
+     "clean-webpack-plugin": "^3.0.0",
+     "html-webpack-plugin": "^4.5.0",
+     "webpack": "^5.4.0",
+     "webpack-cli": "^4.2.0",
+     "webpack-dev-server": "^3.11.0"
+   },
+   "dependencies": {
+     "lodash": "^4.17.20"
+   }
+ }
 ```
 
 Now we can run `npm start` from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!
@@ -317,32 +321,32 @@ Now we need to make some adjustments to our webpack configuration file in order 
 __webpack.config.js__
 
 ``` diff
-  const path = require('path');
-  const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
-  module.exports = {
-    mode: 'development',
-    entry: {
-      app: './src/index.js',
-      print: './src/print.js',
-    },
-    devtool: 'inline-source-map',
-    devServer: {
-      contentBase: './dist',
-    },
-    plugins: [
-      new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-      new HtmlWebpackPlugin({
-        title: 'Output Management',
-      }),
-    ],
-    output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
-+     publicPath: '/',
-    },
-  };
+ const path = require('path');
+ const HtmlWebpackPlugin = require('html-webpack-plugin');
+ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+ 
+ module.exports = {
+   mode: 'development',
+   entry: {
+     index: './src/index.js',
+     print: './src/print.js',
+   },
+   devtool: 'inline-source-map',
+   devServer: {
+     contentBase: './dist',
+   },
+   plugins: [
+     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+     new HtmlWebpackPlugin({
+       title: 'Development',
+     }),
+   ],
+   output: {
+     filename: '[name].bundle.js',
+     path: path.resolve(__dirname, 'dist'),
++    publicPath: '/',
+   },
+ };
 ```
 
 The `publicPath` will be used within our server script as well in order to make sure files are served correctly on `http://localhost:3000`. We'll specify the port number later. The next step is setting up our custom `express` server:
@@ -374,9 +378,11 @@ const compiler = webpack(config);
 
 // Tell express to use the webpack-dev-middleware and use the webpack.config.js
 // configuration file as a base.
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: config.output.publicPath,
-}));
+app.use(
+  webpackDevMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+  })
+);
 
 // Serve the files on port 3000.
 app.listen(3000, function () {
@@ -389,35 +395,34 @@ Now add an npm script to make it a little easier to run the server:
 __package.json__
 
 ``` diff
-  {
-    "name": "development",
-    "version": "1.0.0",
-    "description": "",
-    "private": true,
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "watch": "webpack --watch",
-      "start": "webpack serve --open",
-+     "server": "node server.js",
-      "build": "webpack"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-      "clean-webpack-plugin": "^2.0.0",
-      "css-loader": "^0.28.4",
-      "csv-loader": "^2.1.1",
-      "express": "^4.15.3",
-      "file-loader": "^0.11.2",
-      "html-webpack-plugin": "^2.29.0",
-      "style-loader": "^0.18.2",
-      "webpack": "^4.30.0",
-      "webpack-dev-middleware": "^1.12.0",
-      "webpack-dev-server": "^3.8.0",
-      "xml-loader": "^1.2.1"
-    }
-  }
+ {
+   "name": "webpack-demo",
+   "version": "1.0.0",
+   "description": "",
+   "private": true,
+   "scripts": {
+     "test": "echo \"Error: no test specified\" && exit 1",
+     "watch": "webpack --watch",
+     "start": "webpack serve --open",
++    "server": "node server.js",
+     "build": "webpack"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "devDependencies": {
+     "clean-webpack-plugin": "^3.0.0",
+     "express": "^4.17.1",
+     "html-webpack-plugin": "^4.5.0",
+     "webpack": "^5.4.0",
+     "webpack-cli": "^4.2.0",
+     "webpack-dev-middleware": "^4.0.2",
+     "webpack-dev-server": "^3.11.0"
+   },
+   "dependencies": {
+     "lodash": "^4.17.20"
+   }
+ }
 ```
 
 Now in your terminal run `npm run server`, it should give you an output similar to this:
@@ -425,12 +430,21 @@ Now in your terminal run `npm run server`, it should give you an output similar 
 ``` bash
 Example app listening on port 3000!
 ...
-          Asset       Size  Chunks                    Chunk Names
-  app.bundle.js    1.44 MB    0, 1  [emitted]  [big]  app
-print.bundle.js    6.57 kB       1  [emitted]         print
-     index.html  306 bytes          [emitted]
-...
-webpack: Compiled successfully.
+<i> [webpack-dev-middleware] asset index.bundle.js 1.38 MiB [emitted] (name: index)
+<i> asset print.bundle.js 6.25 KiB [emitted] (name: print)
+<i> asset index.html 274 bytes [emitted]
+<i> runtime modules 1.9 KiB 9 modules
+<i> cacheable modules 530 KiB
+<i>   ./src/index.js 406 bytes [built] [code generated]
+<i>   ./src/print.js 83 bytes [built] [code generated]
+<i>   ./node_modules/lodash/lodash.js 530 KiB [built] [code generated]
+<i> webpack 5.4.0 compiled successfully in 709 ms
+<i> [webpack-dev-middleware] Compiled successfully.
+<i> [webpack-dev-middleware] Compiling...
+<i> [webpack-dev-middleware] assets by status 1.38 MiB [cached] 2 assets
+<i> cached modules 530 KiB (javascript) 1.9 KiB (runtime) [cached] 12 modules
+<i> webpack 5.4.0 compiled successfully in 19 ms
+<i> [webpack-dev-middleware] Compiled successfully.
 ```
 
 Now fire up your browser and go to `http://localhost:3000`. You should see your webpack app running and functioning!

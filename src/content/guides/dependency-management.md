@@ -84,7 +84,7 @@ Examples:
 
 ```javascript
 require.context('./test', false, /\.test\.js$/);
-// a context with files from the test directory that can be required with a request endings with `.test.js`.
+// a context with files from the test directory that can be required with a request ending with `.test.js`.
 ```
 
 ```javascript

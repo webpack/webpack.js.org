@@ -102,7 +102,7 @@ __webpack.prod.js__
 ```javascript
 module.exports = {
   output: {
-    filename: '[name].[contentHash].bundle.js'
+    filename: '[name].[contenthash].bundle.js'
   }
 };
 ```
