@@ -73,6 +73,7 @@ async function main() {
       const json = JSON.stringify(_.flatten(result), undefined, 2);
 
       await writeFile(jsonPath, json);
+      console.log(`Fetched file: ${jsonPath}`);
     } catch(e) {
       try {
         const info = await stat(jsonPath);
