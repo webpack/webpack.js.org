@@ -90,7 +90,7 @@ module.exports = {
 
 `string: 'memory' | 'filesystem'`
 
-Sets the `cache` type to either in memory or on the file system. The `memory` option is very straightforward, it tells webpack to store cache in memory and doesn't allow additional configuration:
+Sets the `cache` type to either in memory or on the file system. The `memory` option is straightforward, it tells webpack to store cache in memory and doesn't allow additional configuration:
 
 __webpack.config.js__
 
