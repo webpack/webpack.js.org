@@ -117,6 +117,4 @@ jobs:
           yarn
           yarn cypress install
           yarn cypress verify
-          yarn fetch:supporters
-          yarn fetch:starter-kits
           yarn cypress:ci
