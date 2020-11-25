@@ -120,13 +120,9 @@ module.exports = (env = {}) => ({
       },
       {
         test: /\.woff2?$/,
-        use: {
-          // TODO use type: asset/resource when mini-css bug regarding asset modules is fixed
-          loader: 'file-loader',
-          options: {
-            outputPath: 'font',
-            esModule: false
-          }
+        type: 'asset/resource',
+        generator: {
+          filename: 'font/[hash][ext][query]'
         }
       },
       {
