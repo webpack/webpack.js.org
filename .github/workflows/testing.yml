@@ -83,7 +83,10 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - run: yarn
-      - run: yarn build
+      - name: Build site
+        run: yarn build
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: yarn lint:links
 
   e2e:

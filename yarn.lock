@@ -2295,6 +2295,14 @@
   dependencies:
     mkdirp "^1.0.4"
 
+"@octokit/auth-action@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-action/-/auth-action-1.3.0.tgz#fbe83d4573a1e91a1ea891c60ee076b53d5e5595"
+  integrity sha512-PLC7cQsFJIVnfhvV2QTbwzEO6GBxWpWxxxOroN5Z+g3maMpuTZIexBMLBE6iq94mlFN7AzI349L0HjbMFt/6NQ==
+  dependencies:
+    "@octokit/auth-token" "^2.4.0"
+    "@octokit/types" "^5.0.0"
+
 "@octokit/auth-token@^2.4.0":
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/@octokit/auth-token/-/auth-token-2.4.2.tgz#10d0ae979b100fa6b72fa0e8e63e27e6d0dbff8a"
