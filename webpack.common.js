@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const mdPlugins = [
+  require('remark-gfm'),
   require('remark-slug'),
   [
     require('remark-custom-blockquotes'),

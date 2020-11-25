@@ -8,6 +8,7 @@ const remarkHtml = require('remark-html');
 // why we have remark-frontmatter now
 // see https://github.com/webpack/webpack.js.org/pull/4111/files#r517309746
 const frontmatter = require('remark-frontmatter');
+const gfm = require('remark-gfm');
 
 const enhance = (tree, options) => {
 
@@ -44,6 +45,7 @@ const enhance = (tree, options) => {
     remark()
       .use(slug)
       .use(frontmatter)
+      .use(gfm)
       .use(extractAnchors, { anchors, levels: 3 })
       .use(remarkHtml)
       .process(content, err => {
