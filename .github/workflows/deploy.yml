@@ -1,9 +1,8 @@
 name: Deploy
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+
 jobs:
   deploy:
     name: Deploy Site
@@ -42,7 +41,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
+          BRANCH: test-github-action-deploy
           FOLDER: dist
           CLEAN: true
 
