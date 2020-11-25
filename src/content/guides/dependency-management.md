@@ -20,7 +20,7 @@ contributors:
 
 如果你的 request 含有表达式(expressions)，就会创建一个上下文(context)，因为在编译时(compile time)并不清楚 __具体__ 导入哪个模块。
 
-示例，考虑到我们有包含 `.esj` 文件的如下目录结构：
+示例，考虑到我们有包含 `.ejs` 文件的如下目录结构：
 
 ```bash
 example_directory
