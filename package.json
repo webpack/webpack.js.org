@@ -140,6 +140,7 @@
     "remark-slug": "^6.0.0",
     "request-promise": "4.2.4",
     "rimraf": "^3.0.2",
+    "sass": "^1.29.0",
     "sass-loader": "^10.0.2",
     "sirv-cli": "^1.0.6",
     "sitemap-static": "^0.4.2",
