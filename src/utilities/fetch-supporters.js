@@ -14,7 +14,7 @@ const absoluteFilename = path.resolve(__dirname, '..', 'components', 'Support', 
 let graphqlEndpoint = 'https://api.opencollective.com/graphql/v2';
 // defaults to a small size
 // see https://github.com/webpack/webpack.js.org/issues/4211
-let graphqlPageSize = 1000;
+let graphqlPageSize = 500;
 
 if (process.env && process.env.OPENCOLLECTIVE_API_KEY) {
   // use api key when deploying
