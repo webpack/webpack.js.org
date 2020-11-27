@@ -11,7 +11,11 @@ const REQUIRED_KEYS = ['totalDonations', 'slug', 'name'];
 const filename = '_supporters.json';
 const absoluteFilename = path.resolve(__dirname, '..', 'components', 'Support', filename);
 
-const graphqlEndpoint = 'https://api.opencollective.com/graphql/v2';
+let graphqlEndpoint = 'https://api.opencollective.com/graphql/v2';
+
+if (process.env && process.env.OPENCOLLECTIVEAPIKEY) {
+  graphqlEndpoint = graphqlEndpoint + `/${process.env.OPENCOLLECTIVEAPIKEY}`;
+}
 
 const membersGraphqlQuery = `query account($limit: Int, $offset: Int) {
   account(slug: "webpack") {
