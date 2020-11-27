@@ -156,7 +156,11 @@ module.exports = {
 类型：`Object|Function`
 默认值：`undefined`
 
+<<<<<<< HEAD
 允许设置 [`PostCSS 选项`](http://api.postcss.org/global.html#processoptions) 和插件。
+=======
+Allows to set [`PostCSS options`](https://postcss.org/api/#processoptions) and plugins.
+>>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
 
 支持所有的 `PostCSS` 选项。
 这是配置文件中特殊的 `配置` 选项。它如何工作、如何配置再接下来的部分将会有详细的描述。
@@ -186,7 +190,11 @@ module.exports = {
               ["postcss-short", { prefix: "x" }],
               require.resolve("my-postcss-plugin"),
               myOtherPostcssPlugin({ myOption: true }),
+<<<<<<< HEAD
               // 废弃的，将会在下一个主要版本中移除
+=======
+              // Deprecated and will be removed in the next major release
+>>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
               { "postcss-nested": { preserveEmpty: true } },
             ],
           },
@@ -233,9 +241,15 @@ module.exports = {
         loader: "postcss-loader",
         options: {
           postcssOptions: {
+<<<<<<< HEAD
             // 可以是 `String`
             syntax: "sugarss",
             // 可以是 `Object`
+=======
+            // Can be `String`
+            syntax: "sugarss",
+            // Can be `Object`
+>>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
             syntax: require("sugarss"),
           },
         },
@@ -258,11 +272,19 @@ module.exports = {
         loader: "postcss-loader",
         options: {
           postcssOptions: {
+<<<<<<< HEAD
             // 可以是 `String`
             parser: "sugarss",
             // 可以是 `Object`
             parser: require("sugarss"),
             // 可以是 `Function`
+=======
+            // Can be `String`
+            parser: "sugarss",
+            // Can be `Object`
+            parser: require("sugarss"),
+            // Can be `Function`
+>>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
             parser: require("sugarss").parse,
           },
         },
@@ -288,11 +310,19 @@ module.exports = {
         loader: "postcss-loader",
         options: {
           postcssOptions: {
+<<<<<<< HEAD
             // 可以是 `String`
             stringifier: "sugarss",
             // 可以是 `Object`
             stringifier: require("sugarss"),
             // 可以是 `Function`
+=======
+            // Can be `String`
+            stringifier: "sugarss",
+            // Can be `Object`
+            stringifier: require("sugarss"),
+            // Can be `Function`
+>>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
             stringifier: midas.stringifier,
           },
         },
@@ -351,10 +381,17 @@ module.exports = {
 
 Loader 将会从下面几个地方搜索目录树来寻找配置文件：
 
+<<<<<<< HEAD
 - `package.json` 中的 `postcss` 属性
 - JSON 或者 YAML 格式的 `.postcssrc` 文件
 - `.postcss.json`、`.postcss.yaml`、`.postcss.yml`、`.postcss.js` 或者 `.postcss.cjs` 文件
 - `postcss.config.js` 或者 `postcss.config.cjs` 导出一个对象的 CommonJS 模块（**推荐**）
+=======
+- a `postcss` property in `package.json`
+- a `.postcssrc` file in JSON or YAML format
+- a `.postcssrc.json`, `.postcssrc.yaml`, `.postcssrc.yml`, `.postcssrc.js`, or `.postcssrc.cjs` file
+- a `postcss.config.js` or `postcss.config.cjs` CommonJS module exporting an object (**recommended**)
+>>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
 
 ##### 配置文件示例 {#examples-of-config-files}
 
@@ -364,10 +401,17 @@ Loader 将会从下面几个地方搜索目录树来寻找配置文件：
 
 ```js
 module.exports = {
+<<<<<<< HEAD
   // 你可以指定下面提到的所有选项 http://api.postcss.org/global.html#processOptions
   // parser: 'sugarss',
   plugins: [
     // PostCSS 插件
+=======
+  // You can specify any options from https://postcss.org/api/#processoptions here
+  // parser: 'sugarss',
+  plugins: [
+    // Plugins for PostCSS
+>>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
     ["postcss-short", { prefix: "x" }],
     "postcss-preset-env",
   ],
@@ -380,6 +424,7 @@ module.exports = {
 
 ```js
 module.exports = (api) => {
+<<<<<<< HEAD
   // `api.file` - 文件路径
   // `api.mode` - webpack 的 `mode` 属性值，请查阅 https://webpack.js.org/configuration/mode/
   // `api.webpackLoaderContext` - 在复杂情况下使用的 loader 上下文
@@ -390,6 +435,20 @@ module.exports = (api) => {
       parser: "sugarss",
       plugins: [
         // PostCSS 插件
+=======
+  // `api.file` - path to the file
+  // `api.mode` - `mode` value of webpack, please read https://webpack.js.org/configuration/mode/
+  // `api.webpackLoaderContext` - loader context for complex use cases
+  // `api.env` - alias `api.mode` for compatibility with `postcss-cli`
+  // `api.options` - the `postcssOptions` options
+
+  if (/\.sss$/.test(api.file)) {
+    return {
+      // You can specify any options from https://postcss.org/api/#processoptions here
+      parser: "sugarss",
+      plugins: [
+        // Plugins for PostCSS
+>>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
         ["postcss-short", { prefix: "x" }],
         "postcss-preset-env",
       ],
@@ -397,9 +456,15 @@ module.exports = (api) => {
   }
 
   return {
+<<<<<<< HEAD
     // 你可以指定下面提到的所有选项 http://api.postcss.org/global.html#processOptions
     plugins: [
       // PostCSS 插件
+=======
+    // You can specify any options from https://postcss.org/api/#processoptions here
+    plugins: [
+      // Plugins for PostCSS
+>>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
       ["postcss-short", { prefix: "x" }],
       "postcss-preset-env",
     ],
@@ -411,10 +476,17 @@ module.exports = (api) => {
 
 ```js
 module.exports = {
+<<<<<<< HEAD
   // 你可以指定下面提到的所有选项 http://api.postcss.org/global.html#processOptions
   // parser: 'sugarss',
   plugins: {
     // PostCSS 插件
+=======
+  // You can specify any options from https://postcss.org/api/#processoptions here
+  // parser: 'sugarss',
+  plugins: {
+    // Plugins for PostCSS
+>>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
     "postcss-short": { prefix: "x" },
     "postcss-preset-env": {},
   },
