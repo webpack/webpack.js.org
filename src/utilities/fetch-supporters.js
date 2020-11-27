@@ -12,12 +12,14 @@ const filename = '_supporters.json';
 const absoluteFilename = path.resolve(__dirname, '..', 'components', 'Support', filename);
 
 let graphqlEndpoint = 'https://api.opencollective.com/graphql/v2';
+// defaults to a small size
+// see https://github.com/webpack/webpack.js.org/issues/4211
 let graphqlPageSize = 1000;
 
 if (process.env && process.env.OPENCOLLECTIVE_API_KEY) {
   // use api key when deploying
   graphqlEndpoint = graphqlEndpoint + `/${process.env.OPENCOLLECTIVE_API_KEY}`;
-  graphqlPageSize = 5000;
+  graphqlPageSize = 5000; // use a large size only for production
 }
 
 const membersGraphqlQuery = `query account($limit: Int, $offset: Int) {
