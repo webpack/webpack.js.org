@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const h = require('hastscript');
 const mdPlugins = [
   require('remark-gfm'),
   require('remark-slug'),
@@ -17,7 +18,12 @@ const mdPlugins = [
   [
     require('remark-autolink-headings'),
     {
-      behavior: 'append'
+      behavior: 'append',
+      content(node) {
+        return [
+          h('span.header-link')
+        ];
+      }
     }
   ],
   [
