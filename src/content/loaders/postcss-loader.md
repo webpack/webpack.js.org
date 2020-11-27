@@ -156,7 +156,7 @@ module.exports = {
 Type: `Object|Function`
 Default: `undefined`
 
-Allows to set [`PostCSS options`](http://api.postcss.org/global.html#processoptions) and plugins.
+Allows to set [`PostCSS options`](https://postcss.org/api/#processoptions) and plugins.
 
 All `PostCSS` options are supported.
 There is the special `config` option for config files. How it works and how it can be configured is described below.
@@ -353,7 +353,7 @@ The loader will search up the directory tree for configuration in the following 
 
 - a `postcss` property in `package.json`
 - a `.postcssrc` file in JSON or YAML format
-- a `.postcss.json`, `.postcss.yaml`, `.postcss.yml`, `.postcss.js`, or `.postcss.cjs` file
+- a `.postcssrc.json`, `.postcssrc.yaml`, `.postcssrc.yml`, `.postcssrc.js`, or `.postcssrc.cjs` file
 - a `postcss.config.js` or `postcss.config.cjs` CommonJS module exporting an object (**recommended**)
 
 ##### Examples of Config Files
@@ -364,7 +364,7 @@ Using `Object` notation:
 
 ```js
 module.exports = {
-  // You can specify any options from http://api.postcss.org/global.html#processOptions here
+  // You can specify any options from https://postcss.org/api/#processoptions here
   // parser: 'sugarss',
   plugins: [
     // Plugins for PostCSS
@@ -388,7 +388,7 @@ module.exports = (api) => {
 
   if (/\.sss$/.test(api.file)) {
     return {
-      // You can specify any options from http://api.postcss.org/global.html#processOptions here
+      // You can specify any options from https://postcss.org/api/#processoptions here
       parser: "sugarss",
       plugins: [
         // Plugins for PostCSS
@@ -399,7 +399,7 @@ module.exports = (api) => {
   }
 
   return {
-    // You can specify any options from http://api.postcss.org/global.html#processOptions here
+    // You can specify any options from https://postcss.org/api/#processoptions here
     plugins: [
       // Plugins for PostCSS
       ["postcss-short", { prefix: "x" }],
@@ -413,7 +413,7 @@ module.exports = (api) => {
 
 ```js
 module.exports = {
-  // You can specify any options from http://api.postcss.org/global.html#processOptions here
+  // You can specify any options from https://postcss.org/api/#processoptions here
   // parser: 'sugarss',
   plugins: {
     // Plugins for PostCSS
