@@ -12,9 +12,12 @@ const filename = '_supporters.json';
 const absoluteFilename = path.resolve(__dirname, '..', 'components', 'Support', filename);
 
 let graphqlEndpoint = 'https://api.opencollective.com/graphql/v2';
+let graphqlPageSize = 1000;
 
-if (process.env && process.env.OPENCOLLECTIVEAPIKEY) {
-  graphqlEndpoint = graphqlEndpoint + `/${process.env.OPENCOLLECTIVEAPIKEY}`;
+if (process.env && process.env.OPENCOLLECTIVE_API_KEY) {
+  // use api key when deploying
+  graphqlEndpoint = graphqlEndpoint + `/${process.env.OPENCOLLECTIVE_API_KEY}`;
+  graphqlPageSize = 5000;
 }
 
 const membersGraphqlQuery = `query account($limit: Int, $offset: Int) {
@@ -54,8 +57,6 @@ const transactionsGraphqlQuery = `query account($limit: Int, $offset: Int) {
     }
   }
 }`;
-
-const graphqlPageSize = 5000;
 
 const nodeToSupporter = node => ({
   name: node.account.name,
