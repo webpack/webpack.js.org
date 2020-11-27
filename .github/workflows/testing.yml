@@ -87,7 +87,6 @@ jobs:
         run: yarn build
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          OPENCOLLECTIVEAPIKEY: ${{secrets.OPENCOLLECTIVEAPIKEY}}
       - run: yarn lint:links
 
   e2e:
