@@ -17,16 +17,11 @@ const absoluteFilename = path.resolve(
   filename
 );
 
-let graphqlEndpoint =
+const graphqlEndpoint =
   'https://api.opencollective.com/graphql/v2';
 
 // https://github.com/opencollective/opencollective-api/blob/master/server/graphql/v2/query/TransactionsQuery.ts#L81
 const graphqlPageSize = 1000;
-
-if (process.env && process.env.CI && process.env.OPENCOLLECTIVE_API_KEY) {
-  // use api key when deploying to production
-  graphqlEndpoint = graphqlEndpoint + `/${process.env.OPENCOLLECTIVE_API_KEY}`;
-}
 
 const membersGraphqlQuery = `query account($limit: Int, $offset: Int) {
   account(slug: "webpack") {
