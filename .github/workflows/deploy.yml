@@ -42,6 +42,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENCOLLECTIVE_API_KEY: ${{ secrets.OPENCOLLECTIVE_API_KEY }}
           BRANCH: gh-pages
           FOLDER: dist
           CLEAN: true
