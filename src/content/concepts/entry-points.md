@@ -141,4 +141,4 @@ __What does this do?__ We are telling webpack that we would like 3 separate depe
 
 __Why?__ In a multi-page application, the server is going to fetch a new HTML document for you. The page reloads this new document and assets are redownloaded. However, this gives us the unique opportunity to do things like using [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the number of entry points increases.
 
-T> As a rule of thumb: Use exactly one entry point for each HTML document.
+T> As a rule of thumb: Use exactly one entry point for each HTML document. See the issue [described here](https://bundlers.tooling.report/code-splitting/multi-entry/) for more details.
