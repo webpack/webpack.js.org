@@ -38,13 +38,13 @@ The documentation and syntax examples can be read [here](#syntax).
 > ⚠ `%20` is space in a query string, because you can't use spaces in URLs
 
 ```js
-import $ from 'expose-loader?exposes[]=$&exposes[]=jQuery!jquery';
+import $ from "expose-loader?exposes[]=$&exposes[]=jQuery!jquery";
 //
 // Adds the `jquery` to the global object under the names `$` and `jQuery`
 ```
 
 ```js
-import { concat } from 'expose-loader?exposes=_.concat!lodash/concat';
+import { concat } from "expose-loader?exposes=_.concat!lodash/concat";
 //
 // Adds the `lodash/concat` to the global object under the name `_.concat`
 ```
@@ -53,7 +53,7 @@ import { concat } from 'expose-loader?exposes=_.concat!lodash/concat';
 import {
   map,
   reduce,
-} from 'expose-loader?exposes[]=_.map|map&exposes[]=_.reduce|reduce!underscore';
+} from "expose-loader?exposes[]=_.map|map&exposes[]=_.reduce|reduce!underscore";
 //
 // Adds the `map` and `reduce` method from `underscore` to the global object under the name `_.map` and `_.reduce`
 ```
@@ -63,7 +63,7 @@ import {
 **src/index.js**
 
 ```js
-import $ from 'jquery';
+import $ from "jquery";
 ```
 
 **webpack.config.js**
@@ -73,25 +73,25 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('jquery'),
-        loader: 'expose-loader',
+        test: require.resolve("jquery"),
+        loader: "expose-loader",
         options: {
-          exposes: ['$', 'jQuery'],
+          exposes: ["$", "jQuery"],
         },
       },
       {
-        test: require.resolve('underscore'),
-        loader: 'expose-loader',
+        test: require.resolve("underscore"),
+        loader: "expose-loader",
         options: {
           exposes: [
-            '_.map|map',
+            "_.map|map",
             {
-              globalName: '_.reduce',
-              moduleLocalName: 'reduce',
+              globalName: "_.reduce",
+              moduleLocalName: "reduce",
             },
             {
-              globalName: ['_', 'filter'],
-              moduleLocalName: 'filter',
+              globalName: ["_", "filter"],
+              moduleLocalName: "filter",
             },
           ],
         },
@@ -139,7 +139,7 @@ If `moduleLocalName` is not specified, it exposes the entire module to the globa
 **src/index.js**
 
 ```js
-import _ from 'underscore';
+import _ from "underscore";
 ```
 
 **webpack.config.js**
@@ -149,11 +149,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('jquery'),
-        loader: 'expose-loader',
+        test: require.resolve("jquery"),
+        loader: "expose-loader",
         options: {
           // For `underscore` library, it can be `_.map map` or `_.map|map`
-          exposes: 'jquery',
+          exposes: "jquery",
         },
       },
     ],
@@ -175,7 +175,7 @@ The name in the global object. (**required**).
 **src/index.js**
 
 ```js
-import _ from 'underscore';
+import _ from "underscore";
 ```
 
 **webpack.config.js**
@@ -185,13 +185,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('underscore'),
-        loader: 'expose-loader',
+        test: require.resolve("underscore"),
+        loader: "expose-loader",
         options: {
           exposes: {
             // Can be `['_', 'filter']`
-            globalName: '_.filter',
-            moduleLocalName: 'filter',
+            globalName: "_.filter",
+            moduleLocalName: "filter",
           },
         },
       },
@@ -211,7 +211,7 @@ If `moduleLocalName` is specified, it exposes only the value of `moduleLocalName
 **src/index.js**
 
 ```js
-import _ from 'underscore';
+import _ from "underscore";
 ```
 
 **webpack.config.js**
@@ -221,12 +221,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('underscore'),
-        loader: 'expose-loader',
+        test: require.resolve("underscore"),
+        loader: "expose-loader",
         options: {
           exposes: {
-            globalName: '_.filter',
-            moduleLocalName: 'filter',
+            globalName: "_.filter",
+            moduleLocalName: "filter",
           },
         },
       },
@@ -249,7 +249,7 @@ To force override the value that is already present in the global object you can
 **src/index.js**
 
 ```js
-import $ from 'jquery';
+import $ from "jquery";
 ```
 
 **webpack.config.js**
@@ -259,11 +259,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('jquery'),
-        loader: 'expose-loader',
+        test: require.resolve("jquery"),
+        loader: "expose-loader",
         options: {
           exposes: {
-            globalName: '$',
+            globalName: "$",
             override: true,
           },
         },
@@ -278,7 +278,7 @@ module.exports = {
 **src/index.js**
 
 ```js
-import _ from 'underscore';
+import _ from "underscore";
 ```
 
 **webpack.config.js**
@@ -288,18 +288,18 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('underscore'),
-        loader: 'expose-loader',
+        test: require.resolve("underscore"),
+        loader: "expose-loader",
         options: {
           exposes: [
-            '_.map map',
+            "_.map map",
             {
-              globalName: '_.filter',
-              moduleLocalName: 'filter',
+              globalName: "_.filter",
+              moduleLocalName: "filter",
             },
             {
-              globalName: ['_', 'find'],
-              moduleLocalName: 'myNameForFind',
+              globalName: ["_", "find"],
+              moduleLocalName: "myNameForFind",
             },
           ],
         },

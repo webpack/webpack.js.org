@@ -96,7 +96,7 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          "handlebars-loader", // handlebars-loader 需要原始资源字符串
+          "handlebars-loader", // handlebars loader 需要原始资源字符串
           "extract-loader",
           "css-loader",
         ],

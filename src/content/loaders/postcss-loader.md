@@ -364,7 +364,7 @@ Loader 将会从下面几个地方搜索目录树来寻找配置文件：
 
 ```js
 module.exports = {
-  // 你可以指定下面提到的所有选项 http://api.postcss.org/global.html#processOptions
+  // 你可以指定下面提到的所有选项 https://postcss.org/api/#processoptions
   // parser: 'sugarss',
   plugins: [
     // PostCSS 插件
@@ -383,10 +383,12 @@ module.exports = (api) => {
   // `api.file` - 文件路径
   // `api.mode` - webpack 的 `mode` 属性值，请查阅 https://webpack.js.org/configuration/mode/
   // `api.webpackLoaderContext` - 在复杂情况下使用的 loader 上下文
+  // `api.env` - `api.mode` 的别名，与 `postcss-cli` 兼容
+  // `api.options` - `postcssOptions` 的选项
 
   if (/\.sss$/.test(api.file)) {
     return {
-      //你可以指定下面提到的所有选项 http://api.postcss.org/global.html#processOptions
+      //你可以指定下面提到的所有选项 https://postcss.org/api/#processoptions here
       parser: "sugarss",
       plugins: [
         // PostCSS 插件
@@ -397,7 +399,7 @@ module.exports = (api) => {
   }
 
   return {
-    // 你可以指定下面提到的所有选项 http://api.postcss.org/global.html#processOptions
+    // 你可以指定下面提到的所有选项 https://postcss.org/api/#processoptions
     plugins: [
       // PostCSS 插件
       ["postcss-short", { prefix: "x" }],
@@ -411,7 +413,7 @@ module.exports = (api) => {
 
 ```js
 module.exports = {
-  // 你可以指定下面提到的所有选项 http://api.postcss.org/global.html#processOptions
+  // 你可以指定下面提到的所有选项 https://postcss.org/api/#processoptions
   // parser: 'sugarss',
   plugins: {
     // PostCSS 插件
