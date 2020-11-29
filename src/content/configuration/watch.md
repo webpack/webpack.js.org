@@ -134,17 +134,6 @@ module.exports = {
 T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
 
 
-## `info-verbosity`
-
-`string = 'info': 'none' | 'info' | 'verbose'`
-
-Controls verbosity of the lifecycle messaging, e.g. the `Started watching files...` log. Setting `info-verbosity` to `verbose` will also message to console at the beginning and the end of incremental build.
-
-```bash
-webpack --watch --info-verbosity verbose
-```
-
-
 ## Troubleshooting
 
 If you are experiencing any issues, please see the following notes. There are a variety of reasons why webpack might miss a file change.
