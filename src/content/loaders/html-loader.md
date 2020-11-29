@@ -68,7 +68,6 @@ module.exports = {
 
 支持的标签和属性：
 
-<<<<<<< HEAD
 - `audio` 标签的 `src` 属性
 - `embed` 标签的 `src` 属性
 - `img` 标签的 `src` 属性
@@ -88,28 +87,6 @@ module.exports = {
 - `use` 标签的 `href` 属性
 - 当 `rel` 属性值为 `stylesheet`，`icon`，`shortcut icon`，`mask-icon`，`apple-touch-icon`，`apple-touch-icon-precomposed` 或 `apple-touch-startup-image` 时，`link` 标签的 `href` 属性
 - 当 `name` 属性为 `msapplication-tileimage`，`msapplication-square70x70logo`，`msapplication-square150x150logo`，`msapplication-wide310x150logo`，`msapplication-square310x310logo`，`msapplication-config` 时，支持 `meta` 标签的 `content` 属性。或当 `property` 属性为 `og:image`，`og:image:url`，`og:image:secure_url`，`og:audio`，`og:audio:secure_url`，`og:video`，`og:video:secure_url`，`vk:image` 时。
-=======
-- the `src` attribute of the `audio` tag
-- the `src` attribute of the `embed` tag
-- the `src` attribute of the `img` tag
-- the `srcset` attribute of the `img` tag
-- the `src` attribute of the `input` tag
-- the `data` attribute of the `object` tag
-- the `src` attribute of the `script` tag
-- the `href` attribute of the `script` tag
-- the `xlink:href` attribute of the `script` tag
-- the `src` attribute of the `source` tag
-- the `srcset` attribute of the `source` tag
-- the `src` attribute of the `track` tag
-- the `poster` attribute of the `video` tag
-- the `src` attribute of the `video` tag
-- the `xlink:href` attribute of the `image` tag
-- the `href` attribute of the `image` tag
-- the `xlink:href` attribute of the `use` tag
-- the `href` attribute of the `use` tag
-- the `href` attribute of the `link` tag when the `rel` attribute contains `stylesheet`, `icon`, `shortcut icon`, `mask-icon`, `apple-touch-icon`, `apple-touch-icon-precomposed`, `apple-touch-startup-image`
-- the `content` attribute of the `meta` tag when the `name` attribute is `msapplication-tileimage`, `msapplication-square70x70logo`, `msapplication-square150x150logo`, `msapplication-wide310x150logo`, `msapplication-square310x310logo`, `msapplication-config` or when the `property` attribute is `og:image`, `og:image:url`, `og:image:secure_url`, `og:audio`, `og:audio:secure_url`, `og:video`, `og:video:secure_url`, `vk:image`
->>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
 
 #### `Boolean` {#boolean}
 

@@ -96,11 +96,7 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-<<<<<<< HEAD
-          "handlebars-loader", // handlebars-loader 需要原始资源字符串
-=======
-          "handlebars-loader", // handlebars loader expects raw resource string
->>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
+          "handlebars-loader", // handlebars loader 需要原始资源字符串
           "extract-loader",
           "css-loader",
         ],
@@ -187,11 +183,7 @@ module.exports = {
           url: (url, resourcePath) => {
             // resourcePath - css 文件的路径
 
-<<<<<<< HEAD
             // 不处理 `img.png` url
-=======
-            // Don't handle `img.png` urls
->>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
             if (url.includes("img.png")) {
               return false;
             }
@@ -272,11 +264,7 @@ module.exports = {
           import: (url, media, resourcePath) => {
             // resourcePath - css 文件路径
 
-<<<<<<< HEAD
             // 不处理 `style.css` 的导入
-=======
-            // Don't handle `style.css` import
->>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
             if (url.includes("style.css")) {
               return false;
             }
@@ -512,11 +500,7 @@ module.exports = {
         test: /\.css$/i,
         loader: "css-loader",
         options: {
-<<<<<<< HEAD
           // 使用 `local` 同使用 `modules: true` 的效果是一样的
-=======
-          // Using `local` value has same effect like using `modules: true`
->>>>>>> 9b2e60ffa99f009b005ec8a07b266abcf6239d57
           modules: "global",
         },
       },
