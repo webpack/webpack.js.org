@@ -7,6 +7,8 @@ import isClient from '../../utilities/is-client';
 // Load Styling
 import '../Gitter/Gitter.scss';
 
+import GitterIcon from '../../styles/icons/gitter.svg';
+
 let sidecar = null;
 let sidecarLoadTriggered = false;
 
@@ -18,7 +20,7 @@ export default class Gitter extends React.Component {
         <div
           className="gitter__button"
           onClick={this._handleIconClick}>
-          <i className="gitter__icon icon-gitter" />
+          <GitterIcon className="gitter__icon" fill="#fff" />
         </div>
       </div>
     );

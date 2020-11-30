@@ -787,7 +787,11 @@ require('MyLibrary').doSomething();
 
 ### 模块定义系统 {#module-definition-systems}
 
+<<<<<<< HEAD
 这些选项将导致 bundle 带有更完整的模块头部，以确保与各种模块系统的兼容性。根据 `output.libraryTarget` 选项不同，`output.library` 选项将具有不同的含义。
+=======
+These options will result in a bundle that comes with a complete header to ensure compatibility with various module systems. The `output.library` option will take on a different meaning under the following `output.libraryTarget` options.
+>>>>>>> dd7ed89d8b31bdb342fee26173d0b3c81266a292
 
 
 `libraryTarget: 'commonjs2'` - __入口起点的返回值__将分配给 `module.exports` 对象。这个名称也意味着模块用于 CommonJS 环境：
@@ -1038,7 +1042,11 @@ module.exports = {
 
 告知 webpack 在 bundle 中引入「所包含模块信息」的相关注释。此选项在 `development` [模式](/concepts/mode/)时的默认值是 `true`，而在 `production` [模式](/configuration/mode/)时的默认值是 `false`。
 
+<<<<<<< HEAD
 W> 对于在开发环境(development)下阅读生成代码时，虽然通过这些注释可以提供非常有用的数据信息，但在生产环境(production)下，__不应该__使用。
+=======
+W> While the data this comments can provide is useful during development when reading the generated code, it __should not__ be used in production.
+>>>>>>> dd7ed89d8b31bdb342fee26173d0b3c81266a292
 
 __webpack.config.js__
 

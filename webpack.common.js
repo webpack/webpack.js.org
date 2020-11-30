@@ -1,8 +1,14 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const h = require('hastscript');
 const mdPlugins = [
+<<<<<<< HEAD
   require('docschina-remark-slugger'),
+=======
+  require('remark-gfm'),
+  require('remark-slug'),
+>>>>>>> dd7ed89d8b31bdb342fee26173d0b3c81266a292
   [
     require('remark-custom-blockquotes'),
     {
@@ -16,7 +22,12 @@ const mdPlugins = [
   [
     require('remark-autolink-headings'),
     {
-      behavior: 'append'
+      behavior: 'append',
+      content(node) {
+        return [
+          h('span.header-link')
+        ];
+      }
     }
   ],
   [
@@ -80,17 +91,6 @@ module.exports = (env = {}) => ({
         ]
       },
       {
-        test: /\.font.js$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: 'fontgen-loader',
-            options: { embed: true }
-          }
-        ]
-      },
-      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: [
@@ -131,18 +131,24 @@ module.exports = (env = {}) => ({
       },
       {
         test: /\.woff2?$/,
-        use: {
-          // TODO use type: asset/resource when mini-css bug regarding asset modules is fixed
-          loader: 'file-loader',
-          options: {
-            outputPath: 'font',
-            esModule: false
-          }
+        type: 'asset/resource',
+        generator: {
+          filename: 'font/[hash][ext][query]'
         }
       },
       {
-        test: /\.(jpg|jpeg|png|svg|ico)$/i,
+        test: /\.(jpg|jpeg|png|ico)$/i,
         type: 'asset/resource'
+      },
+      {
+        test: /\.svg$/i,
+        type: 'asset/resource',
+        exclude: [path.resolve(__dirname, 'src/styles/icons')]
+      },
+      {
+        test: /\.svg$/i,
+        use: ['@svgr/webpack'],
+        include: [path.resolve(__dirname, 'src/styles/icons')]
       }
     ]
   },

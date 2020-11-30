@@ -2,6 +2,7 @@ import React from 'react';
 import Url from 'url';
 import './PageLinks.scss';
 import icon from '../../assets/icon-print.svg';
+import EditIcon from '../../styles/icons/edit.svg';
 
 const baseURL = 'https://github.com/docschina/webpack.js.org/edit/cn/';
 
@@ -25,6 +26,7 @@ export default ({
       ) : null }
 
       <a className="page-links__link" href={ editLink }>
+<<<<<<< HEAD
         编辑此页
         <i className="page-links__icon icon-edit" />
       </a>
@@ -32,6 +34,15 @@ export default ({
       <button className="page-links__link page-links__print as-link" onClick={_handlePrintClick} title="Print this page">
         打印文档
         <img src={icon} />
+=======
+        Edit Document
+        <EditIcon className="page-links__icon" width={12} fill="#1a6bac" />
+      </a>
+      <span className="page-links__gap">|</span>
+      <button className="page-links__link page-links__print as-link" onClick={_handlePrintClick} title="Print this page">
+        Print Document
+        <img src={icon} alt="" />
+>>>>>>> dd7ed89d8b31bdb342fee26173d0b3c81266a292
       </button>
     </div>
   );
