@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from '../Link/Link';
 import './AdjacentPages.scss';
 import PropTypes from 'prop-types';

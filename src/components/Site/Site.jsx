@@ -1,5 +1,5 @@
 // Import External Dependencies
-import React from 'react';
+import { Component, Fragment } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 
@@ -48,7 +48,7 @@ if (isClient) {
   }
 }
 
-class Site extends React.Component {
+class Site extends Component {
   state = {
     mobileSidebarOpen: false
   };
@@ -103,7 +103,7 @@ class Site extends React.Component {
                   <Route path="/vote" component={Vote} />
                   <Route path="/organization" component={Organization} />
                   <Route path="/starter-kits" component={StarterKits} />
-                  <Route path="/app-shell" component={() => <React.Fragment />} />
+                  <Route path="/app-shell" component={() => <Fragment />} />
                   {pages.map(page => (
                     <Route
                       key={page.url}
@@ -118,7 +118,7 @@ class Site extends React.Component {
                           'url'
                         );
                         return (
-                          <React.Fragment>
+                          <Fragment>
                             <Sponsors />
                             <Sidebar
                               className="site__sidebar"
@@ -132,7 +132,7 @@ class Site extends React.Component {
                               next={next}
                             />
                             <Gitter />
-                          </React.Fragment>
+                          </Fragment>
                         );
                       }}
                     />

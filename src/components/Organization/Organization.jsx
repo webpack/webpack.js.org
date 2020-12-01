@@ -1,4 +1,3 @@
-import React from 'react';
 import Container from '../Container/Container';
 import Contributors from '../Contributors/Contributors';
 import Link from '../Link/Link';

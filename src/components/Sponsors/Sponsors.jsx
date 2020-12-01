@@ -1,5 +1,4 @@
 // Import External Dependencies
-import React from 'react';
 import Link from '../Link/Link';
 
 // Imports for Ad Content

@@ -1,5 +1,3 @@
-import React from 'react';
-// Load Styling
 import './Print.scss';
 import icon from '../../assets/icon-print.svg';
 import BarIcon from '../../styles/icons/vertical-bar.svg';

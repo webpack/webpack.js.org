@@ -1,9 +1,9 @@
-import React from 'react';
+import { Component } from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
 import SmallIcon from '../../assets/icon-square-small-slack.png';
 import './Contributors.scss';
 
-export default class Contributors extends React.Component {
+export default class Contributors extends Component {
   state = {
     inView: false
   }

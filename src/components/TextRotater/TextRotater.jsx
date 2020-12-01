@@ -1,11 +1,11 @@
 // Import External Dependencies
-import React from 'react';
+import { Children, cloneElement, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // Load Styling
 import './TextRotater.scss';
 
-export default class TextRotater extends React.PureComponent {
+export default class TextRotater extends PureComponent {
   static defaultProps = {
     delay: 0,
     repeatDelay: 3000
@@ -28,15 +28,15 @@ export default class TextRotater extends React.PureComponent {
   render() {
     const { children, maxWidth } = this.props;
     const { currentIndex, contentHeight } = this.state;
-    const childrenCount = React.Children.count(children);
+    const childrenCount = Children.count(children);
 
-    const currentChild = React.cloneElement(
+    const currentChild = cloneElement(
       children[currentIndex], {
         ref: c => (this.content = c)
       }
     );
 
-    const nextChild = React.cloneElement(
+    const nextChild = cloneElement(
       children[
         (currentIndex + 1) % childrenCount
       ]
@@ -95,7 +95,7 @@ export default class TextRotater extends React.PureComponent {
       this.textRotatorWrap.classList.remove('text-rotater--slide-up');
 
       this.setState({
-        currentIndex: (this.state.currentIndex + 1) % React.Children.count(children),
+        currentIndex: (this.state.currentIndex + 1) % Children.count(children),
       }, () => {
         setTimeout(() => {
           if (this.textRotatorWrap) {

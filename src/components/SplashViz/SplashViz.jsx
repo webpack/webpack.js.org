@@ -1,5 +1,5 @@
 // Import External Dependencies
-import React from 'react';
+import { Component } from 'react';
 
 // Load Images
 import HomeSVG from './SplashVizSVG';
@@ -11,7 +11,7 @@ import TextRotator from '../TextRotater/TextRotater';
 // Load Styling
 import './SplashViz.scss';
 
-export default class SplashViz extends React.Component {
+export default class SplashViz extends Component {
 
   render() {
     return (
