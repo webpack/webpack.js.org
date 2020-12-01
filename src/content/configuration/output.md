@@ -798,7 +798,7 @@ module.exports = _entry_return_;
 require('MyLibrary').doSomething();
 ```
 
-Note that `output.library` can't be used with this particular `output.libraryTarget`. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/11800).)
+Note that `output.library` can't be used with this particular `output.libraryTarget`, for further details, please [read this issue](https://github.com/webpack/webpack/issues/11800).
 
 T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
 
