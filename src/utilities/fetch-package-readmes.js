@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
 const mkdirp = require('mkdirp');
-const request = require('request-promise');
+const fetch = require('node-fetch');
 
 const yamlHeadmatter = require('./yaml-headmatter.js');
 const processReadme = require('./process-readme.js');
@@ -50,17 +50,11 @@ async function main() {
         repo: htmlUrl
       });
 
-      request(url)
-        .then(async content => {
-          const body = processReadme(content, { source: url });
-
-          await writeFile(fileName, headmatter + body);
-
-          console.log('Generated:', path.relative(cwd, fileName));
-        })
-        .catch(err => {
-          throw err;
-        });
+      const response = await fetch(url);
+      const content = await response.text();
+      const body = processReadme(content, { source: url });
+      await writeFile(fileName, headmatter + body);
+      console.log('Generated:', path.relative(cwd, fileName));
     }
   }
 }
