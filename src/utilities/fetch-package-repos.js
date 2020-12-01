@@ -4,6 +4,7 @@ const mkdirp = require('mkdirp');
 const { promisify } = require('util');
 const _ = require('lodash');
 const { Octokit: GithubAPI } = require('@octokit/rest');
+const { createActionAuth } = require('@octokit/auth-action');
 const { excludedLoaders, excludedPlugins } = require('./constants');
 
 const writeFile = promisify(fs.writeFile);
@@ -29,18 +30,26 @@ const fetch = {
   ]
 };
 
-const api = new GithubAPI();
-
-async function paginate(org) {
-  const data = await api.paginate('GET /orgs/:org/repos', {
-    org: org,
-    type: 'public',
-  });
-  return data;
-}
-
 
 async function main() {
+  let api;
+  if (process.env.CI && process.env.CI === true) {
+    const auth = createActionAuth();
+    const authentication = await auth();
+    api = new GithubAPI({
+      auth: authentication
+    });
+  } else {
+    api = new GithubAPI();
+  }
+
+  async function paginate(org) {
+    const data = await api.paginate('GET /orgs/:org/repos', {
+      org: org,
+      type: 'public',
+    });
+    return data;
+  }
   mkdirp.sync(path.resolve(__dirname, '../../repositories/'));
 
   for (const [type, collection] of Object.entries(fetch)) {
@@ -64,6 +73,7 @@ async function main() {
       const json = JSON.stringify(_.flatten(result), undefined, 2);
 
       await writeFile(jsonPath, json);
+      console.log(`Fetched file: ${jsonPath}`);
     } catch(e) {
       try {
         const info = await stat(jsonPath);

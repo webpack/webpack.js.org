@@ -675,20 +675,20 @@ module.exports = {
 
 支持以下配置：
 
-`libraryExport: 'default'` - **入口的默认导出**将分配给 library target：
+`libraryExport: 'default'` - __入口的默认导出__将分配给 library target：
 
 ```javascript
 // if your entry has a default export of `MyDefaultModule`
 var MyDefaultModule = _entry_return_.default;
 ```
 
-`libraryExport: 'MyModule'` - 这个**确定的模块**将被分配给 library target：
+`libraryExport: 'MyModule'` - 这个 __确定的模块__ 将被分配给 library target：
 
 ```javascript
 var MyModule = _entry_return_.MyModule;
 ```
 
-`libraryExport: ['MyModule', 'MySubModule']` - 数组将被解析为要分配给 library target 的**模块路径**：
+`libraryExport: ['MyModule', 'MySubModule']` - 数组将被解析为要分配给 library target 的 __模块路径__：
 
 ```javascript
 var MySubModule = _entry_return_.MyModule.MySubModule;
@@ -787,7 +787,7 @@ require('MyLibrary').doSomething();
 
 ### 模块定义系统 {#module-definition-systems}
 
-这些选项将导致 bundle 带有更完整的模块头部，以确保与各种模块系统的兼容性。根据 `output.libraryTarget` 选项不同，`output.library` 选项将具有不同的含义。
+这些选项将使得 bundle 带有更完整的模块头，以确保与各种模块系统的兼容性。根据 `output.libraryTarget` 选项不同，`output.library` 选项将具有不同的含义。
 
 
 `libraryTarget: 'commonjs2'` - __入口起点的返回值__将分配给 `module.exports` 对象。这个名称也意味着模块用于 CommonJS 环境：
@@ -1038,7 +1038,7 @@ module.exports = {
 
 告知 webpack 在 bundle 中引入「所包含模块信息」的相关注释。此选项在 `development` [模式](/concepts/mode/)时的默认值是 `true`，而在 `production` [模式](/configuration/mode/)时的默认值是 `false`。
 
-W> 对于在开发环境(development)下阅读生成代码时，虽然通过这些注释可以提供非常有用的数据信息，但在生产环境(production)下，__不应该__使用。
+W> 对于在开发环境(development)下阅读生成代码时，虽然通过这些注释可以提供有用的数据信息，但在生产环境(production)下，__不应该__使用。
 
 __webpack.config.js__
 

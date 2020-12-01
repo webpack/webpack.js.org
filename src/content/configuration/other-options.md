@@ -90,7 +90,7 @@ module.exports = {
 
 `string: 'memory' | 'filesystem'`
 
-将 `cache` 类型设置成内存或者文件系统。 `memory` 选项是非常直白的，它告诉 webpack 将内存存放在内存中并且不允许额外的配置：
+将 `cache` 类型设置成内存或者文件系统。`memory` 选项很简单，它会告诉 webpack 将内容存放在内存中并且不允许额外的配置：
 
 __webpack.config.js__
 

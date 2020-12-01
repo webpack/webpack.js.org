@@ -2,6 +2,7 @@ import React from 'react';
 import Container from '../Container/Container';
 import testLocalStorage from '../../utilities/test-local-storage';
 import './NotificationBar.scss';
+import CloseIcon from '../../styles/icons/cross.svg';
 
 const version = '3';
 const localStorageIsEnabled = testLocalStorage() !== false;
@@ -22,11 +23,14 @@ class MessageBar extends React.Component {
             Webpack 5 现已正式发布。请阅读我们的 <a href="/blog/2020-10-10-webpack-5-release/">发布公告</a>。如还未准备升级，请阅读 <a href="https://v4.webpack.docschina.org/">webpack 4 文档</a>。
           </p>
           {localStorageIsEnabled ? (
-            <button
+            <CloseIcon
               aria-label="Dismiss"
-              className="notification-bar__close icon-cross"
+              className="notification-bar__close"
+              fill="#fff"
+              width={16}
               onClick={this.close.bind(this)}
-            />
+              role="button"
+              />
           ) : null}
         </Container>
       </div>
