@@ -23,7 +23,11 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['src/content/**/*.md'],
+      files: ['src/content/**/*.{md,mdx}'],
+      processor: 'markdown/markdown',
+    },
+    {
+      files: ['src/content/**/*.{md,mdx}/*.{js,javascript}'],
       rules: {
         indent: ['error', 2],
         quotes: ['error', 'single'],
