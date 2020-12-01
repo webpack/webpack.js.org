@@ -16,6 +16,7 @@ contributors:
   - EslamHiko
   - smelukov
   - anikethsaha
+  - jamesgeorge007
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -79,8 +80,8 @@ Note: These are the flags with webpack v4, starting v5 CLI also supports [core f
 
 | Flag       | Description                                                   |
 | ---------- | ------------------------------------------------------------- |
-| --no-color | Disabled any color on the console                             |
-| --no-hot   | Disabled hot reloading if you have it enabled via your config |
+| --no-color | Disables any color on the console                             |
+| --no-hot   | Disables hot reloading if you have it enabled via your config |
 | --no-stats | Disables any compilation stats emitted by webpack             |
 | --no-watch | Do not watch for file changes                                 |
 | --no-devtool | Do not generate source maps                                 |
