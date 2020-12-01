@@ -15,7 +15,7 @@ contributors:
 When compiling source code with webpack, users can generate a JSON file containing statistics about modules. These statistics can be used to analyze an application's dependency graph as well as to optimize compilation speed. The file is typically generated with the following CLI command:
 
 ``` bash
-webpack --profile --json=compilation-stats.json
+npx webpack --profile --json=compilation-stats.json
 ```
 
 The `--json=compilation-stats.json` flag indicates to webpack that it should emit the `compilation-stats.json` containing the dependency graph and various other build information. Typically, the `--profile` flag is also added so that a `profile` section is added to each [`modules` object](#module-objects) containing module-specific compilation stats.
