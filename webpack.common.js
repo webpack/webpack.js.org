@@ -3,12 +3,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const h = require('hastscript');
 const mdPlugins = [
-<<<<<<< HEAD
-  require('docschina-remark-slugger'),
-=======
   require('remark-gfm'),
-  require('remark-slug'),
->>>>>>> dd7ed89d8b31bdb342fee26173d0b3c81266a292
+  require('docschina-remark-slugger'),
   [
     require('remark-custom-blockquotes'),
     {
