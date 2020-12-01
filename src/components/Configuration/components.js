@@ -1,4 +1,4 @@
-import React from 'react';
+import { isValidElement, Component } from 'react';
 import Popover from 'react-tiny-popover';
 import './Configuration.scss';
 import { timeout } from 'q';
@@ -29,7 +29,7 @@ const Card = ({ body }) => {
   );
 };
 
-export class Details extends React.Component {
+export class Details extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +50,7 @@ export class Details extends React.Component {
 
     // Find the index of </default>
     const closeDefaultTagIndex = children.findIndex(child => {
-      if (React.isValidElement(child)) {
+      if (isValidElement(child)) {
         return (
           child.props.className.includes('tag') &&
           child.props.children.length === DEFAULT_CHILDREN_SIZE

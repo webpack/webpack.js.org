@@ -1,11 +1,11 @@
 // Import External Dependencies
-import React from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Load Styling
 import './Cube.scss';
 
-export default class Cube extends React.Component {
+export default class Cube extends Component {
   static propTypes = {
     hover: PropTypes.bool,
     theme: PropTypes.string,

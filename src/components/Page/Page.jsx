@@ -1,5 +1,5 @@
 // Import External Dependencies
-import React from 'react';
+import { Children, isValidElement, Component } from 'react';
 
 // Import Components
 import PageLinks from '../PageLinks/PageLinks';
@@ -12,7 +12,7 @@ import AdjacentPages from './AdjacentPages';
 // Load Styling
 import './Page.scss';
 
-class Page extends React.Component {
+class Page extends Component {
   constructor(props) {
     super(props);
 
@@ -69,8 +69,8 @@ class Page extends React.Component {
 
     if (typeof content === 'function') {
       contentRender = content({}).props.children.slice(4); // Cut frontmatter information
-      contentRender = React.Children.map(contentRender, child => {
-        if (React.isValidElement(child)) {
+      contentRender = Children.map(contentRender, child => {
+        if (isValidElement(child)) {
           if (child.props.mdxType === 'pre') {
             return <Pre children={child.props.children} />;
           }

@@ -1,7 +1,4 @@
 // Import External Dependencies
-import React from 'react';
-
-// Import Local Components
 import Shield from '../Shield/Shield';
 import SidebarItem from '../SidebarItem/SidebarItem';
 import Print from '../Print/Print';

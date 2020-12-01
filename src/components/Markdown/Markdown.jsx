@@ -1,4 +1,3 @@
-import React from 'react';
 import './Markdown.scss';
 
 const Markdown = props => (
