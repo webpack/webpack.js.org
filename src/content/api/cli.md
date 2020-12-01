@@ -177,7 +177,7 @@ If no `mode` is supplied via flags or config then this is the lookup order in in
 
 > example - config file lookup will be in order of .webpack/webpack.config.development.js > webpack.config.development.js > webpack.config.js
 
-```md
+```txt
 'webpack.config',
 'webpack.config.dev',
 'webpack.config.development',
