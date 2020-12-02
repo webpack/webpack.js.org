@@ -3,9 +3,6 @@ import { Details } from './components';
 import PropTypes from 'prop-types';
 
 const detailComponentsList = ['link', 'mode', 'entry', 'path', 'filename', 'publicPath', 'library', 'libraryType', 'libraryName', 'advancedLibrary', 'advancedOutput', 'expertOutput', 'expertOutputB', 'expert', 'advancedConditions', 'moduleType', 'advancedActions', 'advancedModule', 'modules', 'alias', 'advancedResolve', 'expertResolve', 'hints', 'devtool', 'target', 'externals', 'externalsType', 'externalsPresets', 'ignoreWarnings', 'stats', 'preset', 'advancedGlobal', 'advancedAssets', 'advancedChunkGroups', 'advancedChunks', 'advancedModules', 'expertModules', 'advancedStatsOptimization', 'advancedOptimization', 'cacheGroupAdvancedSelectors', 'cacheGroupAdvancedEffects', 'advancedSelectors', 'advancedEffects', 'fallbackCacheGroup', 'advanced', 'advancedCaching', 'advancedBuild'];
-Pre.propTypes = {
-
-};
 export const Pre = props => {
   // eslint-disable-next-line
   const newChildren = Children.map(props.children.props.children, child => {
@@ -29,4 +26,7 @@ export const Pre = props => {
       <code {...newProps} />
     </pre>
   );
+};
+Pre.propTypes = {
+
 };

@@ -19,9 +19,6 @@ const addLink = (child, i, url) => {
     child
   );
 };
-Card.propTypes = {
-  body: PropTypes.string
-};
 const Card = ({ body }) => {
   return (
     <div className="markdown">
@@ -31,7 +28,9 @@ const Card = ({ body }) => {
     </div>
   );
 };
-
+Card.propTypes = {
+  body: PropTypes.string
+};
 export class Details extends Component {
   static propTypes = {
     url: PropTypes.string,
