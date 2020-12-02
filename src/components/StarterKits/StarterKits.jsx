@@ -1,4 +1,4 @@
-import React from 'react';
+import { lazy, Suspense } from 'react';
 import Container from '../Container/Container';
 import Link from '../Link/Link';
 import { PlaceholderComponent } from '../Placeholder/Placeholder';
@@ -11,7 +11,7 @@ import isClient from '../../utilities/is-client';
 // can use. This component could even use something like griddle
 // to allow sorting and such.
 
-const StarterKitsTable = React.lazy(() => import('./StarterKitsTable'));
+const StarterKitsTable = lazy(() => import('./StarterKitsTable'));
 
 const StarterKits = props => (
   <Container className="starter-kits page__content markdown">
@@ -30,12 +30,14 @@ const StarterKits = props => (
 
     <blockquote className="warning">
       <div className="tip-content">
-        Boilerplates should be used as <strong>Proof of Concepts</strong> to
-        help you learn different webpack techniques for various frameworks. Make
-        sure you understand what's going on in them and avoid copy and paste
-        coding. Also note that none of these are officially supported by
-        webpack. If you run into an issue, please report that to the
-        maintainer(s) of the repository.
+        {
+          `Boilerplates should be used as <strong>Proof of Concepts</strong> to
+          help you learn different webpack techniques for various frameworks. Make
+          sure you understand what's going on in them and avoid copy and paste
+          coding. Also note that none of these are officially supported by
+          webpack. If you run into an issue, please report that to the
+          maintainer(s) of the repository.`
+        }
       </div>
     </blockquote>
 
@@ -49,9 +51,9 @@ const StarterKits = props => (
       </thead>
 
       {isClient ? (
-        <React.Suspense fallback={<PlaceholderComponent />}>
+        <Suspense fallback={<PlaceholderComponent />}>
           <StarterKitsTable />
-        </React.Suspense>
+        </Suspense>
       ) : null}
     </table>
   </Container>

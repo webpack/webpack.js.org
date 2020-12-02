@@ -1,4 +1,3 @@
-import React from 'react';
 import Kits from './_starter-kits.json';
 import Link from '../Link/Link';
 

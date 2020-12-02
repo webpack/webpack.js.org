@@ -1,7 +1,9 @@
-import React from 'react';
+import { Component, Fragment } from 'react';
 import Container from '../Container/Container';
 import testLocalStorage from '../../utilities/test-local-storage';
 import './NotificationBar.scss';
+import CloseIcon from '../../styles/icons/cross.svg';
+import PropTypes from 'prop-types';
 
 const version = '3';
 const localStorageIsEnabled = testLocalStorage() !== false;
@@ -13,7 +15,10 @@ const barDismissed = () => {
   return false;
 };
 
-class MessageBar extends React.Component {
+class MessageBar extends Component {
+  static propTypes = {
+    onClose: PropTypes.func
+  }
   render() {
     return (
       <div className="notification-bar">
@@ -22,11 +27,14 @@ class MessageBar extends React.Component {
             Webpack 5 has been officially released. Read our <a href="/blog/2020-10-10-webpack-5-release/">announcement</a>. Not ready yet? Read <a href="https://v4.webpack.js.org/">webpack 4 documentation here</a>.
           </p>
           {localStorageIsEnabled ? (
-            <button
+            <CloseIcon
               aria-label="Dismiss"
-              className="notification-bar__close icon-cross"
+              className="notification-bar__close"
+              fill="#fff"
+              width={16}
               onClick={this.close.bind(this)}
-            />
+              role="button"
+              />
           ) : null}
         </Container>
       </div>
@@ -44,7 +52,7 @@ class MessageBar extends React.Component {
   }
 }
 
-export default class NotificationBar extends React.Component {
+export default class NotificationBar extends Component {
   constructor(props) {
     super(props);
     this.onClose = this.onClose.bind(this);
@@ -70,6 +78,6 @@ export default class NotificationBar extends React.Component {
   render() {
     const { dismissed } = this.state;
 
-    return <React.Fragment>{!dismissed ? <MessageBar onClose={this.onClose} /> : null}</React.Fragment>;
+    return <Fragment>{!dismissed ? <MessageBar onClose={this.onClose} /> : null}</Fragment>;
   }
 }

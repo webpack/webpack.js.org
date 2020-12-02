@@ -16,6 +16,7 @@ contributors:
   - EslamHiko
   - smelukov
   - anikethsaha
+  - jamesgeorge007
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -59,7 +60,6 @@ Note: These are the flags with webpack v4, starting v5 CLI also supports [core f
 | `--config-name`     | string[]        | Name of the configuration to use                                                                               |
 | `--name`            | string[]        | Name of the configuration. Used when loading multiple configurations                                           |
 | `--color`           | boolean         | Enable colors on console                                                                                       |
-| `--no-color`        | boolean         | Disables colors on console                                                                                     |
 | `--merge, -m`       | boolean         | Merge two or more configurations using webpack-merge e.g. `-c ./webpack.config.js -c ./webpack.test.config.js` |
 | `--env`             | string[]        | Environment passed to the configuration when it is a function                                                  |
 | `--progress`        | boolean, string | Print compilation progress during build                                                                        |
@@ -68,23 +68,23 @@ Note: These are the flags with webpack v4, starting v5 CLI also supports [core f
 | `--target, -t`      | string[]        | Sets the build target                                                                                          |
 | `--watch, -w`       | boolean         | Watch for file changes                                                                                         |
 | `--hot, -h`         | boolean         | Enables Hot Module Replacement                                                                                 |
-| `--no-hot`          | boolean         | Disables Hot Module Replacement                                                                                |
 | `--devtool, -d`     | string          | Controls if and how source maps are generated.                                                                 |
 | `--prefetch`        | string          | Prefetch this request                                                                                          |
 | `--json, -j`        | boolean, string | Prints result as JSON or store it in a file                                                                    |
 | `--mode`            | string          | Defines the mode to pass to webpack                                                                            |
 | `--version, -v`     | boolean         | Get current version                                                                                            |
 | `--stats`           | boolean, string | It instructs webpack on how to treat the stats                                                                 |
-| `--no-stats`        | boolean         | Disables stats output                                                                                          |
 | `--analyze`         | boolean         | It invokes `webpack-bundle-analyzer` plugin to get bundle information                                          |
 
 ### Negated Flags
 
 | Flag       | Description                                                   |
 | ---------- | ------------------------------------------------------------- |
-| --no-color | Disabled any color on the console                             |
-| --no-hot   | Disabled hot reloading if you have it enabled via your config |
+| --no-color | Disables any color on the console                             |
+| --no-hot   | Disables hot reloading if you have it enabled via your config |
 | --no-stats | Disables any compilation stats emitted by webpack             |
+| --no-watch | Do not watch for file changes                                 |
+| --no-devtool | Do not generate source maps                                 |
 
 ### Core Flags
 
@@ -177,7 +177,7 @@ If no `mode` is supplied via flags or config then this is the lookup order in in
 
 > example - config file lookup will be in order of .webpack/webpack.config.development.js > webpack.config.development.js > webpack.config.js
 
-```md
+```txt
 'webpack.config',
 'webpack.config.dev',
 'webpack.config.development',

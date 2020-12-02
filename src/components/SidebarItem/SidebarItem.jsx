@@ -1,11 +1,20 @@
-import React from 'react';
+import { Component } from 'react';
 import Link from '../Link/Link';
 import './SidebarItem.scss';
 import list2Tree from '../../utilities/list2Tree';
+import ChevronRightIcon from '../../styles/icons/chevron-right.svg';
+import BarIcon from '../../styles/icons/vertical-bar.svg';
+import PropTypes from 'prop-types';
 
 const block = 'sidebar-item';
 
-export default class SidebarItem extends React.Component {
+export default class SidebarItem extends Component {
+  static propTypes = {
+    title: PropTypes.string,
+    anchors: PropTypes.array,
+    url: PropTypes.string,
+    currentPage: PropTypes.string
+  }
   state = {
     open: this._isOpen(this.props)
   };
@@ -38,15 +47,17 @@ export default class SidebarItem extends React.Component {
 
     const filteredAnchors = anchors.filter(anchor => anchor.level > 1);
     const tree = list2Tree(filteredAnchors);
-    
+
     return (
       <div className={`${block} ${openMod} ${disabledMod}`}>
         {anchors.length > 0 ? (
-          <i
-            className={`${block}__toggle icon-chevron-right`}
+          <ChevronRightIcon
+            width={15}
+            fill="#175d96"
+            className={`${block}__toggle`}
             onClick={this._toggle.bind(this)} />
         ) : (
-          <i className={`${block}__toggle icon-vertical-bar`} />
+          <BarIcon className={`${block}__toggle`} width={15} fill="#175d96" />
         )}
 
         <Link
@@ -62,7 +73,7 @@ export default class SidebarItem extends React.Component {
     );
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if ( nextProps.currentPage !== this.props.currentPage ) {
       this.setState({
         open: this._isOpen(nextProps)

@@ -1,11 +1,11 @@
-import React from 'react';
+import { Component } from 'react';
 import Container from '../Container/Container';
 import 'webpack.vote/dist/style.min.css';
 
 // Load Styling
 import './Vote.scss';
 
-export default class Vote extends React.Component {
+export default class Vote extends Component {
   state = {
     VoteApp: null
   }

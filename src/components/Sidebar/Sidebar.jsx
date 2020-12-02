@@ -1,10 +1,8 @@
 // Import External Dependencies
-import React from 'react';
-
-// Import Local Components
 import Shield from '../Shield/Shield';
 import SidebarItem from '../SidebarItem/SidebarItem';
 import Print from '../Print/Print';
+import PropTypes from 'prop-types';
 
 // Load Styling
 import './Sidebar.scss';
@@ -21,7 +19,11 @@ const docs = [
 ];
 
 const currentDocsVersion = 5;
-
+Sidebar.propTypes = {
+  className: PropTypes.string,
+  pages: PropTypes.array,
+  currentPage: PropTypes.string
+};
 // Create and export the component
 export default function Sidebar({
   className = '',
