@@ -494,7 +494,7 @@ Here's an example:
 compilation.hooks.processAssets.tap(
   {
     name: 'MyPlugin',
-    stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
+    stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS, // see below for more stages
   },
   (assets) => {
     // code here
@@ -502,7 +502,25 @@ compilation.hooks.processAssets.tap(
 );
 ```
 
-There're many stages to use:
+In addition to `name` and `stage`, you can pass a `additionalAssets` option which accepts either a value of `true` or a function with `assets` as parameter:
+
+1. `true` -
+2. `(assets) => {}` -
+
+```js
+compilation.hooks.processAssets.tap(
+  {
+    name: 'MyPlugin',
+    stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
+    additionalAssets: true
+  },
+  (assets) => {
+    // code here
+  }
+);
+```
+
+Here's a list of stages we can use:
 
 - `PROCESS_ASSETS_STAGE_ADDITIONAL` - Add additional assets to the compilation.
 - `PROCESS_ASSETS_STAGE_PRE_PROCESS` - Basic preprocessing of the assets.
@@ -520,23 +538,6 @@ There're many stages to use:
 - `PROCESS_ASSETS_STAGE_ANALYSE` - Analyze the existing assets.
 - `PROCESS_ASSETS_STAGE_REPORT` - Creating assets for the reporting purposes.
 
-In addition to `name` and `stage`, you can pass a `additionalAssets` as well. It accepts either a `true` or a function with `assets` as its parameter:
-
-1. `true` -
-2. `(assets) => {}` -
-
-```js
-compilation.hooks.processAssets.tap(
-  {
-    name: 'MyPlugin',
-    stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
-    additionalAssets: true
-  },
-  (assets) => {
-    // code here
-  }
-);
-```
 
 ### `afterProcessAssets`
 
