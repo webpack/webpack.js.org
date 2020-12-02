@@ -520,6 +520,24 @@ There're many stages to use:
 - `PROCESS_ASSETS_STAGE_ANALYSE` - Analyze the existing assets.
 - `PROCESS_ASSETS_STAGE_REPORT` - Creating assets for the reporting purposes.
 
+In addition to `name` and `stage`, you can pass a `additionalAssets` as well. It accepts either a `true` or a function with `assets` as its parameter:
+
+1. `true` -
+2. `(assets) => {}` -
+
+```js
+compilation.hooks.processAssets.tap(
+  {
+    name: 'MyPlugin',
+    stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
+    additionalAssets: true
+  },
+  (assets) => {
+    // code here
+  }
+);
+```
+
 ### `afterProcessAssets`
 
 `SyncHook`
