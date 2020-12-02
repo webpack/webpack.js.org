@@ -2,6 +2,7 @@
 import { Component, Fragment } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
+import PropTypes from 'prop-types';
 
 // Import Utilities
 import { extractPages, extractSections, getPageTitle } from '../../utilities/content-utils';
@@ -49,6 +50,12 @@ if (isClient) {
 }
 
 class Site extends Component {
+  static propTypes = {
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired
+    }),
+    import: PropTypes.func
+  }
   state = {
     mobileSidebarOpen: false
   };

@@ -3,6 +3,7 @@ import Container from '../Container/Container';
 import testLocalStorage from '../../utilities/test-local-storage';
 import './NotificationBar.scss';
 import CloseIcon from '../../styles/icons/cross.svg';
+import PropTypes from 'prop-types';
 
 const version = '3';
 const localStorageIsEnabled = testLocalStorage() !== false;
@@ -15,6 +16,9 @@ const barDismissed = () => {
 };
 
 class MessageBar extends Component {
+  static propTypes = {
+    onClose: PropTypes.func
+  }
   render() {
     return (
       <div className="notification-bar">

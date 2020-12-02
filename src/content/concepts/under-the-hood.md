@@ -88,7 +88,9 @@ __./src/index.jsx__
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import('./app.jsx').then(App => ReactDOM.render(<App />, root));
+import('./app.jsx').then(App => {
+  ReactDOM.render(<App />, root);
+});
 ```
 
 Initial chunk with name `main` is created. It contains:
@@ -113,7 +115,9 @@ When using dynamic import we may specify a chunk name explicitly by using a ["ma
 import(
   /* webpackChunkName: "app" */
   './app.jsx'
-).then(App => ReactDOM.render(<App />, root));
+).then(App => {
+  ReactDOM.render(<App />, root);
+});
 ```
 
 __Output:__

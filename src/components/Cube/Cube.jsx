@@ -10,7 +10,9 @@ export default class Cube extends Component {
     hover: PropTypes.bool,
     theme: PropTypes.string,
     depth: PropTypes.number,
-    repeatDelay: PropTypes.number
+    repeatDelay: PropTypes.number,
+    className: PropTypes.string,
+    continuous: PropTypes.bool
   };
 
   static defaultProps = {

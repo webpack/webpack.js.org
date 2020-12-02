@@ -2,6 +2,7 @@ import { isValidElement, Component } from 'react';
 import Popover from 'react-tiny-popover';
 import './Configuration.scss';
 import { timeout } from 'q';
+import PropTypes from 'prop-types';
 
 const DEFAULT_CHILDREN_SIZE = 4;
 
@@ -18,7 +19,6 @@ const addLink = (child, i, url) => {
     child
   );
 };
-
 const Card = ({ body }) => {
   return (
     <div className="markdown">
@@ -28,8 +28,14 @@ const Card = ({ body }) => {
     </div>
   );
 };
-
+Card.propTypes = {
+  body: PropTypes.string
+};
 export class Details extends Component {
+  static propTypes = {
+    url: PropTypes.string,
+    children: PropTypes.arrayOf(PropTypes.node)
+  }
   constructor(props) {
     super(props);
     this.state = {

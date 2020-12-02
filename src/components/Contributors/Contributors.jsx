@@ -2,8 +2,12 @@ import { Component } from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
 import SmallIcon from '../../assets/icon-square-small-slack.png';
 import './Contributors.scss';
+import PropTypes from 'prop-types';
 
 export default class Contributors extends Component {
+  static propTypes = {
+    contributors: PropTypes.array
+  }
   state = {
     inView: false
   }
@@ -18,11 +22,11 @@ export default class Contributors extends Component {
   render() {
     const { inView } = this.state;
     const { contributors } = this.props;
-    
+
     if (!contributors.length) {
       return <noscript />;
     }
-  
+
     return (
       <VisibilitySensor delayedCall
         partialVisibility
