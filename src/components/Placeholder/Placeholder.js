@@ -1,6 +1,3 @@
-import React from 'react';
-
-// Import Styling
 import './Placeholder.scss';
 
 // Placeholder string
