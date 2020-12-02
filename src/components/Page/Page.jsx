@@ -1,5 +1,6 @@
 // Import External Dependencies
 import { Children, isValidElement, Component } from 'react';
+import PropTypes from 'prop-types';
 
 // Import Components
 import PageLinks from '../PageLinks/PageLinks';
@@ -13,6 +14,19 @@ import AdjacentPages from './AdjacentPages';
 import './Page.scss';
 
 class Page extends Component {
+  static propTypes = {
+    title: PropTypes.string,
+    contributors: PropTypes.array,
+    related: PropTypes.array,
+    previous: PropTypes.object,
+    next: PropTypes.object,
+    content: PropTypes.oneOfType([
+      PropTypes.shape({
+        then: PropTypes.func.isRequired,
+        default: PropTypes.string
+      })
+    ])
+  }
   constructor(props) {
     super(props);
 
@@ -72,6 +86,7 @@ class Page extends Component {
       contentRender = Children.map(contentRender, child => {
         if (isValidElement(child)) {
           if (child.props.mdxType === 'pre') {
+            // eslint-disable-next-line
             return <Pre children={child.props.children} />;
           }
         }

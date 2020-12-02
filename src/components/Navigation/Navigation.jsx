@@ -1,6 +1,7 @@
 // Import External Dependencies
 import { Component } from 'react';
 import Banner from 'react-banner';
+import PropTypes from 'prop-types';
 
 // Import Components
 import Link from '../Link/Link';
@@ -22,6 +23,11 @@ import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
 const onSearch = () => {};
 
 export default class Navigation extends Component {
+  static propTypes = {
+    pathname: PropTypes.string,
+    links: PropTypes.array,
+    toggleSidebar: PropTypes.func
+  }
   render() {
     let { pathname, links, toggleSidebar } = this.props;
 

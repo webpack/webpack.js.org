@@ -4,10 +4,17 @@ import './SidebarItem.scss';
 import list2Tree from '../../utilities/list2Tree';
 import ChevronRightIcon from '../../styles/icons/chevron-right.svg';
 import BarIcon from '../../styles/icons/vertical-bar.svg';
+import PropTypes from 'prop-types';
 
 const block = 'sidebar-item';
 
 export default class SidebarItem extends Component {
+  static propTypes = {
+    title: PropTypes.string,
+    anchors: PropTypes.array,
+    url: PropTypes.string,
+    currentPage: PropTypes.string
+  }
   state = {
     open: this._isOpen(this.props)
   };
@@ -40,7 +47,7 @@ export default class SidebarItem extends Component {
 
     const filteredAnchors = anchors.filter(anchor => anchor.level > 1);
     const tree = list2Tree(filteredAnchors);
-    
+
     return (
       <div className={`${block} ${openMod} ${disabledMod}`}>
         {anchors.length > 0 ? (
@@ -66,7 +73,7 @@ export default class SidebarItem extends Component {
     );
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if ( nextProps.currentPage !== this.props.currentPage ) {
       this.setState({
         open: this._isOpen(nextProps)

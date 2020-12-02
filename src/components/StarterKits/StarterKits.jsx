@@ -30,12 +30,14 @@ const StarterKits = props => (
 
     <blockquote className="warning">
       <div className="tip-content">
-        Boilerplates should be used as <strong>Proof of Concepts</strong> to
-        help you learn different webpack techniques for various frameworks. Make
-        sure you understand what's going on in them and avoid copy and paste
-        coding. Also note that none of these are officially supported by
-        webpack. If you run into an issue, please report that to the
-        maintainer(s) of the repository.
+        {
+          `Boilerplates should be used as <strong>Proof of Concepts</strong> to
+          help you learn different webpack techniques for various frameworks. Make
+          sure you understand what's going on in them and avoid copy and paste
+          coding. Also note that none of these are officially supported by
+          webpack. If you run into an issue, please report that to the
+          maintainer(s) of the repository.`
+        }
       </div>
     </blockquote>
 
