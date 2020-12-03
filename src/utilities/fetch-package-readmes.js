@@ -28,7 +28,7 @@ async function main() {
     const repos = JSON.parse(await readFile(path.resolve(__dirname, `../../repositories/${type}.json`)));
 
     for (const repo of repos) {
-      const [org, packageName] = repo.split('/');
+      const [, packageName] = repo.split('/');
       const url = `https://raw.githubusercontent.com/${repo}/master/README.md`;
       const htmlUrl = `https://github.com/${repo}`;
       const editUrl = `${htmlUrl}/edit/master/README.md`;

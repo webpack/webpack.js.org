@@ -1,7 +1,6 @@
 import { isValidElement, Component } from 'react';
 import Popover from 'react-tiny-popover';
 import './Configuration.scss';
-import { timeout } from 'q';
 import PropTypes from 'prop-types';
 
 const DEFAULT_CHILDREN_SIZE = 4;

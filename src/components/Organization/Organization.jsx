@@ -5,7 +5,7 @@ import Shield from '../Shield/Shield';
 import Items from './projects.json';
 import './Organization.scss';
 
-const Organization = props => {
+const Organization = () => {
   return (
     <Container className='organization page__content markdown'>
       <h1>The Organization</h1>

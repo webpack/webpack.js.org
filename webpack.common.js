@@ -19,7 +19,7 @@ const mdPlugins = [
     require('remark-autolink-headings'),
     {
       behavior: 'append',
-      content(node) {
+      content() {
         return [
           h('span.header-link')
         ];
@@ -41,7 +41,7 @@ const mdPlugins = [
   require('remark-refractor')
 ];
 
-module.exports = (env = {}) => ({
+module.exports = () => ({
   context: path.resolve(__dirname, './src'),
   cache: {
     type: 'filesystem',

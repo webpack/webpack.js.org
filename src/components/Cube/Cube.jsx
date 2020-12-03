@@ -208,7 +208,7 @@ export default class Cube extends Component {
    *
    * @param {object} e - Native event
    */
-  _spin = e => {
+  _spin = () => {
     let obj = {};
     let axis = this._getRandomAxis();
     let sign = Math.random() < 0.5 ? -1 : 1;
@@ -223,7 +223,7 @@ export default class Cube extends Component {
    *
    * @param {object} e - Native event
    */
-  _reset = e => {
+  _reset = () => {
     this.setState({
       x: 0,
       y: 0,

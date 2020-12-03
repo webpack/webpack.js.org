@@ -104,7 +104,7 @@ class Site extends Component {
           <Route exact strict path="/:url*" render={props => <Redirect to={`${props.location.pathname}/`}/>} />
           <Route path="/" exact component={Splash} />
           <Route
-            render={props => (
+            render={() => (
               <Container className="site__content">
                 <Switch>
                   <Route path="/vote" component={Vote} />
@@ -116,7 +116,7 @@ class Site extends Component {
                       key={page.url}
                       exact={true}
                       path={page.url}
-                      render={props => {
+                      render={() => {
                         let path = page.path.replace('src/content/', '');
                         let content = this.props.import(path);
                         const { previous, next } = getAdjacentPages(
@@ -144,7 +144,7 @@ class Site extends Component {
                       }}
                     />
                   ))}
-                  <Route render={props => <PageNotFound />} />
+                  <Route render={() => <PageNotFound />} />
                 </Switch>
               </Container>
             )}
