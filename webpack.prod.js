@@ -44,8 +44,6 @@ module.exports = env => merge(common(env), {
     new InjectManifest({
       swSrc: path.join(__dirname, 'src/sw.js'),
       swDest: 'sw.js',
-      // match [name].[contenthash].[ext]
-      dontCacheBustURLsMatching: /\.[0-9a-f]{20}\./,
       // exclude license
       exclude: [
         /license\.txt/i

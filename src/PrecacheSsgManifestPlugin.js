@@ -12,7 +12,7 @@ module.exports = class PrecacheSsgManifestPlugin {
         compilation.hooks.processAssets.tapPromise(
           {
             name: 'PrecacheSsgManifestPlugin',
-            stage: Compilation.PROCESS_ASSETS_STAGE_SUMMARIZE,
+            stage: Compilation.PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER - 10,
           },
           async () => {
             const { sortedEntries } = await getManifestEntriesFromCompilation(

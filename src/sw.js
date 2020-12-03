@@ -1,9 +1,8 @@
-import { precacheAndRoute } from 'workbox-precaching/precacheAndRoute';
-import { registerRoute } from 'workbox-routing/registerRoute';
+import { precacheAndRoute, matchPrecache } from 'workbox-precaching';
+import { registerRoute } from 'workbox-routing';
+import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { CacheFirst, NetworkOnly } from 'workbox-strategies';
-import { ExpirationPlugin } from 'workbox-expiration/ExpirationPlugin';
-import { NavigationRoute } from 'workbox-routing/NavigationRoute';
-import { createHandlerBoundToURL } from 'workbox-precaching/createHandlerBoundToURL';
+import { ExpirationPlugin } from 'workbox-expiration';
 import { setDefaultHandler, setCatchHandler } from 'workbox-routing';
 import ssgManifest from '../dist/ssg-manifest.json';
 
@@ -26,6 +25,10 @@ registerRoute(
   new CacheFirst({
     cacheName: 'google-fonts-cache',
     plugins: [
+      // Ensure that only requests that result in a 200 status are cached
+      new CacheableResponsePlugin({
+        statuses: [200],
+      }),
       new ExpirationPlugin({
         // Cache for one year
         maxAgeSeconds: 60 * 60 * 24 * 365,
@@ -36,11 +39,9 @@ registerRoute(
 );
 
 setDefaultHandler(new NetworkOnly());
-setCatchHandler(({ event }) => {
-  switch (event.request.destination) {
-    case 'document':
-      return caches.match('/app-shell/index.html');
-    default:
-      return Response.error();
+setCatchHandler(async ({ event }) => {
+  if (event.request.destination === 'document') {
+    return matchPrecache('/app-shell/index.html');
   }
+  return Response.error();
 });

@@ -151,7 +151,7 @@
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.2.1",
     "webpack-merge": "^5.1.4",
-    "workbox-webpack-plugin": "^6.0.0-alpha.3"
+    "workbox-webpack-plugin": "^6.0.0"
   },
   "dependencies": {
     "docsearch.js": "^2.5.2",
