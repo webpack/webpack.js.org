@@ -56,12 +56,10 @@ describe('offline', () => {
       cy.visit(url);
       cy.get('h1').contains(text);
 
-      // has a bug https://github.com/cypress-io/cypress/issues/4742
-      cy.window().then((win) => {
-        win.caches.keys().then((cacheNames) => {
-          const cacheName = 'workbox-precache-v2-http://localhost:4200/';
-          expect(cacheName).to.be.oneOf(cacheNames);
-        });
+      cy.window().then(async (win) => {
+        const cacheNames = await win.caches.keys();
+        const cacheName = 'workbox-precache-v2-http://localhost:4200/';
+        expect(cacheName).to.be.oneOf(cacheNames);
       });
 
       goOffline();
