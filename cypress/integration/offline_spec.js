@@ -56,12 +56,6 @@ describe('offline', () => {
       cy.visit(url);
       cy.get('h1').contains(text);
 
-      cy.window().then(async (win) => {
-        const cacheNames = await win.caches.keys();
-        const cacheName = 'workbox-precache-v2-http://localhost:4200/';
-        expect(cacheName).to.be.oneOf(cacheNames);
-      });
-
       goOffline();
 
       cy.visit(url);
