@@ -39,9 +39,11 @@ registerRoute(
 );
 
 setDefaultHandler(new NetworkOnly());
-setCatchHandler(async ({ event }) => {
-  if (event.request.destination === 'document') {
-    return matchPrecache('/app-shell/index.html');
+setCatchHandler(({ event }) => {
+  switch (event.request.destination) {
+    case 'document':
+      return matchPrecache('/app-shell/index.html');
+    default:
+      return Response.error();
   }
-  return Response.error();
 });
