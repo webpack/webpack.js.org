@@ -129,17 +129,23 @@ module.exports = () => ({
         test: /\.woff2?$/,
         type: 'asset/resource',
         generator: {
-          filename: 'font/[hash][ext][query]'
+          filename: 'font/[name].[hash][ext][query]'
         }
       },
       {
         test: /\.(jpg|jpeg|png|ico)$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        generator: {
+          filename: '[name].[hash][ext][query]'
+        }
       },
       {
         test: /\.svg$/i,
         type: 'asset/resource',
-        exclude: [path.resolve(__dirname, 'src/styles/icons')]
+        exclude: [path.resolve(__dirname, 'src/styles/icons')],
+        generator: {
+          filename: '[name].[hash][ext][query]'
+        }
       },
       {
         test: /\.svg$/i,
