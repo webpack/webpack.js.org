@@ -14,10 +14,7 @@ module.exports = {
     __DEV__: true,
   },
   rules: {
-    'no-undef': 2,
-    'no-unreachable': 2,
-    'no-unused-vars': 0,
-    'no-console': 0,
+    'no-console': 'off',
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
     'react/jsx-uses-react': 'off', // no longer needed with new jsx transform
@@ -31,18 +28,19 @@ module.exports = {
   overrides: [
     { files: ['src/**/*.jsx'] }, // eslint would lint .js only by default
     {
-      files: ['src/content/**/*.{md,mdx}'],
+      files: ['**/*.{md,mdx}'],
       processor: 'markdown/markdown',
     },
     {
-      files: ['src/content/**/*.{md,mdx}/*.{js,javascript}'], // we don't lint ts at the moment
+      files: ['**/*.{md,mdx}/*.{js,javascript}'], // we don't lint ts at the moment
       rules: {
         indent: ['error', 2],
         quotes: ['error', 'single'],
-        'no-undef': 0,
-        'no-constant-condition': 0,
-        'no-useless-escape': 0,
-        'no-dupe-keys': 0,
+        'no-undef': 'off',
+        'no-unused-vars': 'off',
+        'no-constant-condition': 'off',
+        'no-useless-escape': 'off',
+        'no-dupe-keys': 'off',
       },
     },
   ],

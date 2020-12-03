@@ -46,7 +46,7 @@ class MessageBar extends Component {
    *
    * @param {object} e - Click event
    */
-  close(e) {
+  close() {
     localStorage.setItem('notification-dismissed', version);
     this.props.onClose();
   }

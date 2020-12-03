@@ -13,7 +13,7 @@ import isClient from '../../utilities/is-client';
 
 const StarterKitsTable = lazy(() => import('./StarterKitsTable'));
 
-const StarterKits = props => (
+const StarterKits = () => (
   <Container className="starter-kits page__content markdown">
     <h1>Starter Kits</h1>
 
