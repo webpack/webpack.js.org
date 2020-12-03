@@ -26,7 +26,7 @@ var Link = __webpack_require__(3103);
 
 
 
-var StarterKitsTable = function StarterKitsTable(props) {
+var StarterKitsTable = function StarterKitsTable() {
   return /*#__PURE__*/(0,jsx_runtime.jsx)("tbody", {
     className: "table-body",
     children: _starter_kits_namespaceObject.map(function (kit, i) {
