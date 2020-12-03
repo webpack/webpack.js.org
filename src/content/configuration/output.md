@@ -618,9 +618,9 @@ For details see [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
 
 ## `output.hotUpdateMainFilename`
 
-`string = '[runtime].[hash].hot-update.json'` `function`
+`string = '[runtime].[fullhash].hot-update.json'` `function`
 
-Customize the main hot update filename. `[hash]` and `[runtime]` are available as placeholder.
+Customize the main hot update filename. `[fullhash]` and `[runtime]` are available as placeholder.
 
 T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
