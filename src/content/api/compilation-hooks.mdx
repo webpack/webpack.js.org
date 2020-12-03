@@ -502,23 +502,39 @@ compilation.hooks.processAssets.tap(
 );
 ```
 
-In addition to `name` and `stage`, you can pass a `additionalAssets` option which accepts either a value of `true` or a function with `assets` as parameter:
+In addition to `name` and `stage`, you can pass a `additionalAssets` <Badge text='5.8.0+' /> option which accepts either a value of `true` or a function with `assets` as parameter:
 
-1. `true` -
-2. `(assets) => {}` -
+1. `true` - Run callback against assets added later by plugins.
 
-```js
-compilation.hooks.processAssets.tap(
-  {
-    name: 'MyPlugin',
-    stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
-    additionalAssets: true
-  },
-  (assets) => {
-    // code here
-  }
-);
-```
+    ```js
+    compilation.hooks.processAssets.tap(
+      {
+        name: 'MyPlugin',
+        stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
+        additionalAssets: true
+      },
+      (assets) => {
+        // this callback will run against assets added later by plugins.
+      }
+    );
+    ```
+
+2. `(assets) => {}` - Run this specified callback against assets added later by plugins.
+
+    ```js
+    compilation.hooks.processAssets.tap(
+      {
+        name: 'MyPlugin',
+        stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS,
+        additionalAssets: (assets) => {
+          // this callback will run against assets added later by plugins.
+        }
+      },
+      (assets) => {
+        // code
+      }
+    );
+    ```
 
 Here's a list of stages we can use:
 
