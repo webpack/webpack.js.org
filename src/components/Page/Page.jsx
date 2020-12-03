@@ -61,7 +61,7 @@ class Page extends Component {
 
           })
         )
-        .catch(error =>
+        .catch(() =>
           this.setState({
             content: 'Error loading content.'
           })

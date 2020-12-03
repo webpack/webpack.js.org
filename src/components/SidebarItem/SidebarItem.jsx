@@ -22,7 +22,7 @@ export default class SidebarItem extends Component {
   renderAnchors(anchors) {
     return (
       <ul className={`${block}__anchors`}>
-        {anchors.map((anchor, i) => (
+        {anchors.map((anchor) => (
           <li
             key={this._generateAnchorURL(anchor)}
             className={`${block}__anchor`}
@@ -95,7 +95,7 @@ export default class SidebarItem extends Component {
    *
    * @param {object} e - Click event
    */
-  _toggle(e) {
+  _toggle() {
     this.setState({
       open: !this.state.open
     });

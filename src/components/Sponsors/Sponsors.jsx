@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 // Import External Dependencies
 import Link from '../Link/Link';
 
@@ -10,7 +9,7 @@ import WebpackIcon from '../../assets/icon-square-small.svg';
 import '../Sponsors/Sponsors.scss';
 
 // Create and export the component
-const Sponsors = (props) => {
+const Sponsors = () => {
   return (
     <div className="sponsors">
       <Link

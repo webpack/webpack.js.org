@@ -62,7 +62,7 @@ const enhance = (tree, options) => {
   }
 };
 
-const filter = item => true;
+const filter = () => true;
 
 const sort = (a, b) => {
   let group1 = (a.group || '').toLowerCase();
