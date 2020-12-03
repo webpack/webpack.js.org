@@ -47,6 +47,8 @@ start working on the site locally.
 
 The content is available under the [Creative Commons BY 4.0][license-url] license.
 
+<!--alex ignore-->
+
 ## Special Thanks
 
 _BrowserStack_ has graciously allowed us to do cross-browser and cross-os
