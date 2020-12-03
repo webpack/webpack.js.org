@@ -1,5 +1,6 @@
 // Import External Dependencies
-import React from 'react';
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 import VisibilitySensor from 'react-visibility-sensor';
 
 // Import Data
@@ -87,7 +88,11 @@ function formatMoney(number) {
   return str;
 }
 
-export default class Support extends React.Component {
+export default class Support extends Component {
+  static propTypes = {
+    rank: PropTypes.string,
+    type: PropTypes.string
+  }
   state = {
     inView: false
   }
@@ -181,7 +186,7 @@ export default class Support extends React.Component {
                 className="support__item"
                 title={ `$${formatMoney(supporter.totalDonations / 100)} by ${supporter.name || supporter.slug} ($${formatMoney(supporter.monthlyDonations / 100)} monthly)` }
                 target="_blank"
-                rel="noopener nofollow"
+                rel="noopener noreferrer nofollow"
                 href={ supporter.website || `https://opencollective.com/${supporter.slug}` }>
                 {<img
                   className={ `support__${rank}-avatar` }

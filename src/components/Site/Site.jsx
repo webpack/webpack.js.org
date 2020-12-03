@@ -1,7 +1,8 @@
 // Import External Dependencies
-import React from 'react';
+import { Component, Fragment } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
+import PropTypes from 'prop-types';
 
 // Import Utilities
 import { extractPages, extractSections, getPageTitle } from '../../utilities/content-utils';
@@ -30,7 +31,6 @@ import { THEME, THEME_LOCAL_STORAGE_KEY } from '../../constants/theme';
 
 // Load Styling
 import '../../styles/index';
-import '../../styles/icon.font.js';
 import './Site.scss';
 
 // Load Content Tree
@@ -53,7 +53,13 @@ if (isClient) {
   }
 }
 
-class Site extends React.Component {
+class Site extends Component {
+  static propTypes = {
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired
+    }),
+    import: PropTypes.func
+  }
   state = {
     mobileSidebarOpen: false,
     theme: safeLocalStorage.getItem(THEME_LOCAL_STORAGE_KEY) || THEME.DEVICE,
@@ -109,19 +115,19 @@ class Site extends React.Component {
           <Route exact strict path="/:url*" render={props => <Redirect to={`${props.location.pathname}/`}/>} />
           <Route path="/" exact component={Splash} />
           <Route
-            render={props => (
+            render={() => (
               <Container className="site__content">
                 <Switch>
                   <Route path="/vote" component={Vote} />
                   <Route path="/organization" component={Organization} />
                   <Route path="/starter-kits" component={StarterKits} />
-                  <Route path="/app-shell" component={() => <React.Fragment />} />
+                  <Route path="/app-shell" component={() => <Fragment />} />
                   {pages.map(page => (
                     <Route
                       key={page.url}
                       exact={true}
                       path={page.url}
-                      render={props => {
+                      render={() => {
                         let path = page.path.replace('src/content/', '');
                         let content = this.props.import(path);
                         const { previous, next } = getAdjacentPages(
@@ -130,7 +136,7 @@ class Site extends React.Component {
                           'url'
                         );
                         return (
-                          <React.Fragment>
+                          <Fragment>
                             <Sponsors />
                             <Sidebar
                               className="site__sidebar"
@@ -144,12 +150,12 @@ class Site extends React.Component {
                               next={next}
                             />
                             <Gitter />
-                          </React.Fragment>
+                          </Fragment>
                         );
                       }}
                     />
                   ))}
-                  <Route render={props => <PageNotFound />} />
+                  <Route render={() => <PageNotFound />} />
                 </Switch>
               </Container>
             )}

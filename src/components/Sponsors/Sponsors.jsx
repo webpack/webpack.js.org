@@ -1,5 +1,4 @@
 // Import External Dependencies
-import React from 'react';
 import Link from '../Link/Link';
 
 // Imports for Ad Content
@@ -10,7 +9,7 @@ import WebpackIcon from '../../assets/icon-square-small.svg';
 import '../Sponsors/Sponsors.scss';
 
 // Create and export the component
-export default (props) => {
+const Sponsors = () => {
   return (
     <div className="sponsors">
       <Link
@@ -26,3 +25,4 @@ export default (props) => {
     </div>
   );
 };
+export default Sponsors;

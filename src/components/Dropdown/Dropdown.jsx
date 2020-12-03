@@ -1,7 +1,14 @@
-import React from 'react';
+import { Component } from 'react';
 import './Dropdown.scss';
+import PropTypes from 'prop-types';
 
-export default class Dropdown extends React.Component {
+export default class Dropdown extends Component {
+  static propTypes = {
+    className: PropTypes.string,
+    items: PropTypes.array,
+    icon: PropTypes.string,
+    alt: PropTypes.string
+  }
   state = {
     active: false
   };

@@ -20,6 +20,18 @@ body {
   color: getColor(elephant);
 }
 
+.header-link {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('../assets/link.svg');
+  background-size: contain;
+}
+[aria-hidden='true']:hover .header-link {
+  visibility: visible;
+}
 a,
 button.as-link {
   color: $text-color-highlight;

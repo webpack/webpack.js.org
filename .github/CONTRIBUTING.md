@@ -31,8 +31,6 @@ See the `package.json` for the full list of `scripts`.
 
 > Note that __Node 6.9.x__ or above is required for the build process to run properly.
 
-> Note that a __Python version between v2.5.0 and 3.0.0__ is required for the [proselint][12] dependency.
-
 > Although __Yarn__ is not required to work with webpack docs, the core team is using it more extensively. If you prefer to use Yarn make sure that you [get it installed][13] and run `yarn` to pull all dependencies, `yarn build` to build the project, or `yarn start` to start the development server.
 
 > On Debian and Ubuntu operating systems you may have to use `node >= 7.0.0` to avoid build errors with `node-sass`. Please note that we don't officially support building on these systems.
@@ -129,5 +127,4 @@ any time spent fixing typos or clarifying sections in the documentation.
 [9]: https://help.github.com/articles/proposing-changes-to-your-work-with-pull-requests/
 [10]: http://conventionalcommits.org/
 [11]: https://github.com/conventional-changelog/standard-version
-[12]: https://github.com/amperser/proselint
 [13]: https://yarnpkg.com/lang/en/docs/install

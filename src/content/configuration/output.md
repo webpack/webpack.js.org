@@ -26,6 +26,7 @@ contributors:
   - snitin315
   - QC-L
   - anshumanv
+  - mrzalyaul
 ---
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
@@ -617,9 +618,9 @@ For details see [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
 
 ## `output.hotUpdateMainFilename`
 
-`string = '[hash].hot-update.json'` `function`
+`string = '[runtime].[fullhash].hot-update.json'` `function`
 
-Customize the main hot update filename. `[hash]` is the only available placeholder.
+Customize the main hot update filename. `[fullhash]` and `[runtime]` are available as placeholder.
 
 T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
@@ -786,7 +787,7 @@ require('MyLibrary').doSomething();
 
 ### Module Definition Systems
 
-These options will result in a bundle that comes with a more complete header to ensure compatibility with various module systems. The `output.library` option will take on a different meaning under the following `output.libraryTarget` options.
+These options will result in a bundle that comes with a complete header to ensure compatibility with various module systems. The `output.library` option will take on a different meaning under the following `output.libraryTarget` options.
 
 
 `libraryTarget: 'commonjs2'` - The __return value of your entry point__ will be assigned to the `module.exports`. As the name implies, this is used in CommonJS environments:
@@ -797,7 +798,7 @@ module.exports = _entry_return_;
 require('MyLibrary').doSomething();
 ```
 
-Note that `output.library` is omitted, thus it is not required for this particular `output.libraryTarget`.
+Note that `output.library` can't be used with this particular `output.libraryTarget`, for further details, please [read this issue](https://github.com/webpack/webpack/issues/11800).
 
 T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
 
@@ -1037,7 +1038,7 @@ Note that `[fullhash]` in this parameter will be replaced with a hash of the com
 
 Tells webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` [mode](/configuration/mode/) respectively.
 
-W> While the data this comments can provide is very useful during development when reading the generated code, it __should not__ be used in production.
+W> While the data this comments can provide is useful during development when reading the generated code, it __should not__ be used in production.
 
 __webpack.config.js__
 
@@ -1055,7 +1056,7 @@ T> It also adds some info about tree shaking to the generated bundle.
 
 ## `output.publicPath`
 
-`string = ''` `function`
+`string` `function`
 
 This is an important option when using on-demand-loading or loading external resources like images, files, etc. If an incorrect value is specified you'll receive 404 errors while loading these resources.
 

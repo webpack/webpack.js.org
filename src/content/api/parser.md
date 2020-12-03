@@ -7,6 +7,7 @@ contributors:
   - DeTeam
   - misterdev
   - EugeneHlushko
+  - chenxsan
 ---
 
 The `parser` instance, found in the `compiler`, is used to parse each module
@@ -516,25 +517,8 @@ Called when parsing an expression.
 ```js
 const a = this;
 
-parser.hooks.new.for('this').tap('MyPlugin', expression => {});
+parser.hooks.expression.for('this').tap('MyPlugin', expression => {});
 ```
-
-
-### expressionAnyMember
-
-`SyncBailHook`
-
-Executed when parsing a `MemberExpression`.
-
-- Hook Parameters: `identifier`
-- Callback Parameters: `expression`
-
-```js
-const a = process.env;
-
-parser.hooks.new.for('process').tap('MyPlugin', expression => {});
-```
-
 
 ### expressionConditionalOperator
 
