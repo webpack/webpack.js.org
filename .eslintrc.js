@@ -28,11 +28,11 @@ module.exports = {
   overrides: [
     { files: ['src/**/*.jsx'] }, // eslint would lint .js only by default
     {
-      files: ['src/content/**/*.{md,mdx}'],
+      files: ['**/*.{md,mdx}'],
       processor: 'markdown/markdown',
     },
     {
-      files: ['src/content/**/*.{md,mdx}/*.{js,javascript}'], // we don't lint ts at the moment
+      files: ['**/*.{md,mdx}/*.{js,javascript}'], // we don't lint ts at the moment
       rules: {
         indent: ['error', 2],
         quotes: ['error', 'single'],
