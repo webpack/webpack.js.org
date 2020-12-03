@@ -103,7 +103,7 @@ export default class Dropdown extends Component {
     this.links[newIndex].focus();
   }
 
-  _handleClick(e) {
+  _handleClick() {
     this.setState({active: !this.state.active}, () => {
       if (this.state.active) {
         this.links[0].focus();

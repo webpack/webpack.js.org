@@ -1,7 +1,7 @@
 import Kits from './_starter-kits.json';
 import Link from '../Link/Link';
 
-const StarterKitsTable = props => (
+const StarterKitsTable = () => (
   <tbody className="table-body">
     {Kits.map((kit, i) => (
       <tr className="table-tr" key={i}>

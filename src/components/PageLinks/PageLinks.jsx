@@ -7,7 +7,6 @@ const baseURL = 'https://github.com/webpack/webpack.js.org/edit/master/';
 
 export default function PageLinks({
   page = {},
-  ...props
 }) {
   const editLink = page.edit || Url.resolve(baseURL, page.path);
 

@@ -14,10 +14,7 @@ module.exports = {
     __DEV__: true,
   },
   rules: {
-    'no-undef': 2,
-    'no-unreachable': 2,
-    'no-unused-vars': 0,
-    'no-console': 0,
+    'no-console': 'off',
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
     'react/jsx-uses-react': 'off', // no longer needed with new jsx transform
@@ -39,10 +36,11 @@ module.exports = {
       rules: {
         indent: ['error', 2],
         quotes: ['error', 'single'],
-        'no-undef': 0,
-        'no-constant-condition': 0,
-        'no-useless-escape': 0,
-        'no-dupe-keys': 0,
+        'no-undef': 'off',
+        'no-unused-vars': 'off',
+        'no-constant-condition': 'off',
+        'no-useless-escape': 'off',
+        'no-dupe-keys': 'off',
       },
     },
   ],
