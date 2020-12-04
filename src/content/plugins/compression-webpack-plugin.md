@@ -53,7 +53,6 @@ And run `webpack` via your preferred method.
 |             **[`minRatio`](#minratio)**             |                `{Number}`                 |                             `0.8`                             | Only assets that compress better than this ratio are processed (`minRatio = Compressed Size / Original Size`) |
 |             **[`filename`](#filename)**             |           `{String\|Function}`            |                       `[path][base].gz`                       | The target asset filename                                                                                     |
 | **[`deleteOriginalAssets`](#deleteoriginalassets)** |      `{Boolean\|'keep-source-map'}`       |                            `false`                            | Whether to delete the original assets or not                                                                  |
-|                **[`cache`](#cache)**                |                `{Boolean}`                |                            `true`                             | Enable file caching                                                                                           |
 
 ### `test` {#test}
 
@@ -321,6 +320,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `cache` {#cache}
 
 > ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
@@ -364,6 +364,9 @@ module.exports = {
 ```
 
 ## Examples {#examples}
+=======
+## Examples
+>>>>>>> fcb67980e0583555bd78a75d2130db23c3f3d318
 
 ### Using Zopfli {#using-zopfli}
 

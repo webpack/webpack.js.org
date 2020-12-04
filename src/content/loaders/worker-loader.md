@@ -31,7 +31,7 @@ $ npm install worker-loader --save-dev
 **App.js**
 
 ```js
-import Worker from 'worker-loader!./Worker.js';
+import Worker from "worker-loader!./Worker.js";
 ```
 
 ### 配置 {#config}
@@ -44,7 +44,7 @@ module.exports = {
     rules: [
       {
         test: /\.worker\.js$/,
-        use: { loader: 'worker-loader' },
+        use: { loader: "worker-loader" },
       },
     ],
   },
@@ -54,14 +54,14 @@ module.exports = {
 **App.js**
 
 ```js
-import Worker from './file.worker.js';
+import Worker from "./file.worker.js";
 
 const worker = new Worker();
 
 worker.postMessage({ a: 1 });
 worker.onmessage = function (event) {};
 
-worker.addEventListener('message', function (event) {});
+worker.addEventListener("message", function (event) {});
 ```
 
 然后，通过你的首选方式去运行 `webpack`。
@@ -96,9 +96,9 @@ module.exports = {
     rules: [
       {
         test: /\.worker\.(c|m)?js$/i,
-        loader: 'worker-loader',
+        loader: "worker-loader",
         options: {
-          worker: 'SharedWorker',
+          worker: "SharedWorker",
         },
       },
     ],
@@ -118,14 +118,14 @@ module.exports = {
     rules: [
       {
         test: /\.worker\.(c|m)?js$/i,
-        loader: 'worker-loader',
+        loader: "worker-loader",
         options: {
           worker: {
-            type: 'SharedWorker',
+            type: "SharedWorker",
             options: {
-              type: 'classic',
-              credentials: 'omit',
-              name: 'my-custom-worker-name',
+              type: "classic",
+              credentials: "omit",
+              name: "my-custom-worker-name",
             },
           },
         },
@@ -153,9 +153,9 @@ module.exports = {
     rules: [
       {
         test: /\.worker\.(c|m)?js$/i,
-        loader: 'worker-loader',
+        loader: "worker-loader",
         options: {
-          publicPath: '/scripts/workers/',
+          publicPath: "/scripts/workers/",
         },
       },
     ],
@@ -173,7 +173,7 @@ module.exports = {
     rules: [
       {
         test: /\.worker\.(c|m)?js$/i,
-        loader: 'worker-loader',
+        loader: "worker-loader",
         options: {
           publicPath: (pathData, assetInfo) => {
             return `/scripts/${pathData.hash}/workers/`;
@@ -202,9 +202,9 @@ module.exports = {
     rules: [
       {
         test: /\.worker\.(c|m)?js$/i,
-        loader: 'worker-loader',
+        loader: "worker-loader",
         options: {
-          filename: '[name].[contenthash].worker.js',
+          filename: "[name].[contenthash].worker.js",
         },
       },
     ],
@@ -222,16 +222,16 @@ module.exports = {
     rules: [
       {
         test: /\.worker\.(c|m)?js$/i,
-        loader: 'worker-loader',
+        loader: "worker-loader",
         options: {
           filename: (pathData) => {
             if (
               /\.worker\.(c|m)?js$/i.test(pathData.chunk.entryModule.resource)
             ) {
-              return '[name].custom.worker.js';
+              return "[name].custom.worker.js";
             }
 
-            return '[name].js';
+            return "[name].js";
           },
         },
       },
@@ -255,9 +255,9 @@ module.exports = {
     rules: [
       {
         test: /\.worker\.(c|m)?js$/i,
-        loader: 'worker-loader',
+        loader: "worker-loader",
         options: {
-          chunkFilename: '[id].[contenthash].worker.js',
+          chunkFilename: "[id].[contenthash].worker.js",
         },
       },
     ],
@@ -282,9 +282,9 @@ module.exports = {
     rules: [
       {
         test: /\.worker\.(c|m)?js$/i,
-        loader: 'worker-loader',
+        loader: "worker-loader",
         options: {
-          inline: 'fallback',
+          inline: "fallback",
         },
       },
     ],
@@ -309,7 +309,7 @@ module.exports = {
     rules: [
       {
         test: /\.worker\.(c|m)?js$/i,
-        loader: 'worker-loader',
+        loader: "worker-loader",
         options: {
           esModule: false,
         },
@@ -328,7 +328,7 @@ worker 文件可以像其他文件导入依赖那样来导入依赖：
 **index.js**
 
 ```js
-import Worker from './my.worker.js';
+import Worker from "./my.worker.js";
 
 var worker = new Worker();
 
@@ -336,8 +336,8 @@ var result;
 
 worker.onmessage = function (event) {
   if (!result) {
-    result = document.createElement('div');
-    result.setAttribute('id', 'result');
+    result = document.createElement("div");
+    result.setAttribute("id", "result");
 
     document.body.append(result);
   }
@@ -345,9 +345,9 @@ worker.onmessage = function (event) {
   result.innerText = JSON.stringify(event.data);
 };
 
-const button = document.getElementById('button');
+const button = document.getElementById("button");
 
-button.addEventListener('click', function () {
+button.addEventListener("click", function () {
   worker.postMessage({ postMessage: true });
 });
 ```
@@ -372,7 +372,7 @@ module.exports = {
     rules: [
       {
         test: /\.worker\.(c|m)?js$/i,
-        loader: 'worker-loader',
+        loader: "worker-loader",
         options: {
           esModule: false,
         },
@@ -389,7 +389,7 @@ module.exports = {
 **index.js**
 
 ```js
-import Worker from './my.worker.js';
+import Worker from "./my.worker.js";
 
 const worker = new Worker();
 
@@ -397,8 +397,8 @@ let result;
 
 worker.onmessage = (event) => {
   if (!result) {
-    result = document.createElement('div');
-    result.setAttribute('id', 'result');
+    result = document.createElement("div");
+    result.setAttribute("id", "result");
 
     document.body.append(result);
   }
@@ -406,9 +406,9 @@ worker.onmessage = (event) => {
   result.innerText = JSON.stringify(event.data);
 };
 
-const button = document.getElementById('button');
+const button = document.getElementById("button");
 
-button.addEventListener('click', () => {
+button.addEventListener("click", () => {
   worker.postMessage({ postMessage: true });
 });
 ```
@@ -435,12 +435,12 @@ module.exports = {
         test: /\.worker\.(c|m)?js$/i,
         use: [
           {
-            loader: 'worker-loader',
+            loader: "worker-loader",
           },
           {
-            loader: 'babel-loader',
+            loader: "babel-loader",
             options: {
-              presets: ['@babel/preset-env'],
+              presets: ["@babel/preset-env"],
             },
           },
         ],
@@ -457,7 +457,7 @@ module.exports = {
 **typings/worker-loader.d.ts**
 
 ```typescript
-declare module 'worker-loader!*' {
+declare module "worker-loader!*" {
   // You need to change `Worker`, if you specified a different value for the `workerType` option
   class WebpackWorker extends Worker {
     constructor();
@@ -474,24 +474,32 @@ declare module 'worker-loader!*' {
 ```typescript
 const ctx: Worker = self as any;
 
+<<<<<<< HEAD
 // 发送数据到父线程
 ctx.postMessage({ foo: 'foo' });
 
 // 响应父线程的消息
 ctx.addEventListener('message', (event) => console.log(event));
+=======
+// Post data to parent thread
+ctx.postMessage({ foo: "foo" });
+
+// Respond to message from parent thread
+ctx.addEventListener("message", (event) => console.log(event));
+>>>>>>> fcb67980e0583555bd78a75d2130db23c3f3d318
 ```
 
 **index.ts**
 
 ```typescript
-import Worker from 'worker-loader!./Worker';
+import Worker from "worker-loader!./Worker";
 
 const worker = new Worker();
 
 worker.postMessage({ a: 1 });
 worker.onmessage = (event) => {};
 
-worker.addEventListener('message', (event) => {});
+worker.addEventListener("message", (event) => {});
 ```
 
 ### 跨域策略 {#cross-origin-policy}
@@ -507,7 +515,7 @@ worker.addEventListener('message', (event) => {});
 **App.js**
 
 ```js
-import Worker from './file.worker.js';
+import Worker from "./file.worker.js";
 ```
 
 **webpack.config.js**
@@ -517,8 +525,8 @@ module.exports = {
   module: {
     rules: [
       {
-        loader: 'worker-loader',
-        options: { inline: 'fallback' },
+        loader: "worker-loader",
+        options: { inline: "fallback" },
       },
     ],
   },
@@ -530,8 +538,13 @@ module.exports = {
 **App.js**
 
 ```js
+<<<<<<< HEAD
 // 这会使 worker 从 `/workers/file.worker.js` 下载
 import Worker from './file.worker.js';
+=======
+// This will cause the worker to be downloaded from `/workers/file.worker.js`
+import Worker from "./file.worker.js";
+>>>>>>> fcb67980e0583555bd78a75d2130db23c3f3d318
 ```
 
 **webpack.config.js**
@@ -541,8 +554,8 @@ module.exports = {
   module: {
     rules: [
       {
-        loader: 'worker-loader',
-        options: { publicPath: '/workers/' },
+        loader: "worker-loader",
+        options: { publicPath: "/workers/" },
       },
     ],
   },
