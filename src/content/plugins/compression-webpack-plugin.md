@@ -320,53 +320,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `cache` {#cache}
-
-> ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
-
-Type: `Boolean|String`
-Default: `true`
-
-Enable file caching.
-The default path to cache directory: `node_modules/.cache/compression-webpack-plugin`.
-
-#### `Boolean` {#boolean}
-
-Enable/disable file caching.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  plugins: [
-    new CompressionPlugin({
-      cache: true,
-    }),
-  ],
-};
-```
-
-#### `String` {#string}
-
-Enable file caching and set path to cache directory.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  plugins: [
-    new CompressionPlugin({
-      cache: "path/to/cache",
-    }),
-  ],
-};
-```
-
 ## Examples {#examples}
-=======
-## Examples
->>>>>>> fcb67980e0583555bd78a75d2130db23c3f3d318
 
 ### Using Zopfli {#using-zopfli}
 

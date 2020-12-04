@@ -28,7 +28,7 @@ $ npm install worker-loader --save-dev
 
 ### 内敛 {#inlined}
 
-**App.js**
+__App.js__
 
 ```js
 import Worker from "worker-loader!./Worker.js";
@@ -36,7 +36,7 @@ import Worker from "worker-loader!./Worker.js";
 
 ### 配置 {#config}
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -51,7 +51,7 @@ module.exports = {
 };
 ```
 
-**App.js**
+__App.js__
 
 ```js
 import Worker from "./file.worker.js";
@@ -70,12 +70,12 @@ worker.addEventListener("message", function (event) {});
 
 |                 选项名                  |             类型             |             默认值             | 描述                                                                       |
 | :-----------------------------------: | :--------------------------: | :-----------------------------: | :-------------------------------------------------------------------------------- |
-|        **[`worker`](#worker)**        |      `{String\|Object}`      |            `Worker`             | 允许设置 web worker 构造函数的名称和选项                             |
-|    **[`publicPath`](#publicpath)**    |     `{String\|Function}`     |  与 `output.publicPath` 相同   | 在浏览器中引用时，指定输出文件的 public url 地址 |
-|      **[`filename`](#filename)**      |     `{String\|Function}`     |   与 `output.filename` 相同    | web worker 入口 chunk 的文件名                                      |
-| **[`chunkFilename`](#chunkfilename)** |          `{String}`          | 与 `output.chunkFilename` 相同 | web worker 非入口 chunk 的文件名                                  |
-|        **[`inline`](#inline)**        | `'no-fallback'\|'fallback'`  |           `undefined`           | 允许将内联的 web worker 作为 `BLOB`                                            |
-|      **[`esModule`](#esmodule)**      |         `{Boolean}`          |             `true`              | 使用 ES 模块语法                                                             |
+|        __[`worker`](#worker)__        |      `{String\|Object}`      |            `Worker`             | 允许设置 web worker 构造函数的名称和选项                             |
+|    __[`publicPath`](#publicpath)__    |     `{String\|Function}`     |  与 `output.publicPath` 相同   | 在浏览器中引用时，指定输出文件的 public url 地址 |
+|      __[`filename`](#filename)__      |     `{String\|Function}`     |   与 `output.filename` 相同    | web worker 入口 chunk 的文件名                                      |
+| __[`chunkFilename`](#chunkfilename)__ |          `{String}`          | 与 `output.chunkFilename` 相同 | web worker 非入口 chunk 的文件名                                  |
+|        __[`inline`](#inline)__        | `'no-fallback'\|'fallback'`  |           `undefined`           | 允许将内联的 web worker 作为 `BLOB`                                            |
+|      __[`esModule`](#esmodule)__      |         `{Boolean}`          |             `true`              | 使用 ES 模块语法                                                             |
 
 ### `worker` {#worker}
 
@@ -88,7 +88,7 @@ worker.addEventListener("message", function (event) {});
 
 允许为 web worker 设置 constructor 的名字。
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -110,7 +110,7 @@ module.exports = {
 
 为 web worker 设置 constructor 的名字和选项。
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -145,7 +145,7 @@ module.exports = {
 
 #### `String` {#string}
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -165,7 +165,7 @@ module.exports = {
 
 #### `Function` {#function}
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -194,7 +194,7 @@ web worker 入口 chunk 的文件名。
 
 #### `String` {#string}
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -214,7 +214,7 @@ module.exports = {
 
 #### `Function` {#function}
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -247,7 +247,7 @@ module.exports = {
 
 web worker 非入口 chunk 的文件名。
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -274,7 +274,7 @@ module.exports = {
 
 当 inline 模式设置为 `fallback` 时，会为不支持 web worker 的浏览器创建文件，要禁用此行为，只需将其设置为 `no-fallback` 即可。
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -301,7 +301,7 @@ module.exports = {
 
 如果想启用 CommonJS 模块语法，可使用如下配置:
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -325,7 +325,7 @@ module.exports = {
 
 worker 文件可以像其他文件导入依赖那样来导入依赖：
 
-**index.js**
+__index.js__
 
 ```js
 import Worker from "./my.worker.js";
@@ -352,7 +352,7 @@ button.addEventListener("click", function () {
 });
 ```
 
-**my.worker.js**
+__my.worker.js__
 
 ```js
 onmessage = function (event) {
@@ -364,7 +364,7 @@ onmessage = function (event) {
 };
 ```
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -386,7 +386,7 @@ module.exports = {
 
 如果使用 [`babel-loader`](https://github.com/babel/babel-loader) 配置，甚至可以使用 ES6+ 的特性。
 
-**index.js**
+__index.js__
 
 ```js
 import Worker from "./my.worker.js";
@@ -413,7 +413,7 @@ button.addEventListener("click", () => {
 });
 ```
 
-**my.worker.js**
+__my.worker.js__
 
 ```js
 onmessage = function (event) {
@@ -425,7 +425,7 @@ onmessage = function (event) {
 };
 ```
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -454,7 +454,7 @@ module.exports = {
 
 要与 TypeScript 集成，你需要为 worker 导出一个自定义模块。
 
-**typings/worker-loader.d.ts**
+__typings/worker-loader.d.ts__
 
 ```typescript
 declare module "worker-loader!*" {
@@ -469,27 +469,19 @@ declare module "worker-loader!*" {
 }
 ```
 
-**my.worker.ts**
+__my.worker.ts__
 
 ```typescript
 const ctx: Worker = self as any;
 
-<<<<<<< HEAD
 // 发送数据到父线程
-ctx.postMessage({ foo: 'foo' });
-
-// 响应父线程的消息
-ctx.addEventListener('message', (event) => console.log(event));
-=======
-// Post data to parent thread
 ctx.postMessage({ foo: "foo" });
 
-// Respond to message from parent thread
+// 响应父线程的消息
 ctx.addEventListener("message", (event) => console.log(event));
->>>>>>> fcb67980e0583555bd78a75d2130db23c3f3d318
 ```
 
-**index.ts**
+__index.ts__
 
 ```typescript
 import Worker from "worker-loader!./Worker";
@@ -512,13 +504,13 @@ worker.addEventListener("message", (event) => {});
 
 第一种，通过配置 [`inline`](#inline) 参数，将 worker 作为 blob 内联， 而不是将其作为外部脚本下载
 
-**App.js**
+__App.js__
 
 ```js
 import Worker from "./file.worker.js";
 ```
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
@@ -535,19 +527,14 @@ module.exports = {
 
 第二种，通过配置 [`publicPath`](#publicpath) 选项， 重写 worker 脚本的基础下载 URL
 
-**App.js**
+__App.js__
 
 ```js
-<<<<<<< HEAD
 // 这会使 worker 从 `/workers/file.worker.js` 下载
-import Worker from './file.worker.js';
-=======
-// This will cause the worker to be downloaded from `/workers/file.worker.js`
 import Worker from "./file.worker.js";
->>>>>>> fcb67980e0583555bd78a75d2130db23c3f3d318
 ```
 
-**webpack.config.js**
+__webpack.config.js__
 
 ```js
 module.exports = {
