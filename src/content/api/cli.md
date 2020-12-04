@@ -179,16 +179,7 @@ If no `mode` is supplied via flags or config then this is the lookup order in in
 
 ```txt
 'webpack.config',
-'webpack.config.dev',
-'webpack.config.development',
-'webpack.config.prod',
-'webpack.config.production',
 '.webpack/webpack.config',
-'.webpack/webpack.config.none',
-'.webpack/webpack.config.dev',
-'.webpack/webpack.config.development',
-'.webpack/webpack.config.prod',
-'.webpack/webpack.config.production',
 '.webpack/webpackfile',
 ```
 
