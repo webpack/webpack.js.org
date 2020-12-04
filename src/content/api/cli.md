@@ -173,19 +173,15 @@ webpack 5.1.0 compiled successfully in 198 ms
 
 CLI will look for some default configurations in the path of your project, here are the config files picked up by CLI.
 
-If no `mode` is supplied via flags or config then this is the lookup order in increasing order
+This is the lookup priority in increasing order
 
-> example - config file lookup will be in order of .webpack/webpack.config.development.js > webpack.config.development.js > webpack.config.js
+> example - config file lookup will be in order of .webpack/webpackfile > .webpack/webpack.config.js > webpack.config.js
 
 ```txt
 'webpack.config',
 '.webpack/webpack.config',
 '.webpack/webpackfile',
 ```
-
-If `mode` is supplied, say `production` then config looking order will be -
-
-`.webpack/webpack.config.production.* > .webpack/webpack.config.prod.* > webpack.config.production.* > webpack.config.prod.* > webpack.config.*`
 
 ## Common Options
 
