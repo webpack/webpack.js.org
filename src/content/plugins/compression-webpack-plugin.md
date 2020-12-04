@@ -53,7 +53,6 @@ And run `webpack` via your preferred method.
 |             **[`minRatio`](#minratio)**             |                `{Number}`                 |                             `0.8`                             | Only assets that compress better than this ratio are processed (`minRatio = Compressed Size / Original Size`) |
 |             **[`filename`](#filename)**             |           `{String\|Function}`            |                       `[path][base].gz`                       | The target asset filename                                                                                     |
 | **[`deleteOriginalAssets`](#deleteoriginalassets)** |      `{Boolean\|'keep-source-map'}`       |                            `false`                            | Whether to delete the original assets or not                                                                  |
-|                **[`cache`](#cache)**                |                `{Boolean}`                |                            `true`                             | Enable file caching                                                                                           |
 
 ### `test` {#test}
 
@@ -316,48 +315,6 @@ module.exports = {
     new CompressionPlugin({
       exclude: /.map$/
       deleteOriginalAssets: 'keep-source-map',
-    }),
-  ],
-};
-```
-
-### `cache` {#cache}
-
-> ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
-
-Type: `Boolean|String`
-Default: `true`
-
-Enable file caching.
-The default path to cache directory: `node_modules/.cache/compression-webpack-plugin`.
-
-#### `Boolean` {#boolean}
-
-Enable/disable file caching.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  plugins: [
-    new CompressionPlugin({
-      cache: true,
-    }),
-  ],
-};
-```
-
-#### `String` {#string}
-
-Enable file caching and set path to cache directory.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  plugins: [
-    new CompressionPlugin({
-      cache: "path/to/cache",
     }),
   ],
 };

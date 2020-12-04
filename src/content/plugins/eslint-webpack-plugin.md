@@ -162,6 +162,13 @@ Accepts a function that will have one argument: an array of eslint messages (obj
 
 Lint only changed files, skip lint on start.
 
+#### `threads`
+
+- Type: `Boolean | Number`
+- Default: `false`
+
+Will run lint tasks across a thread pool. The pool size is automatic unless you specify a number.
+
 ### Errors and Warning
 
 **By default the plugin will auto adjust error reporting depending on eslint errors/warnings counts.**
