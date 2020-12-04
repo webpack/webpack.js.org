@@ -586,11 +586,11 @@ An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.
 
 ## `output.hotUpdateChunkFilename`
 
-`string = '[id].[hash].hot-update.js'`
+`string = '[id].[fullhash].hot-update.js'`
 
 Customize the filenames of hot update chunks. See [`output.filename`](#outputfilename) option for details on the possible values.
 
-The only placeholders allowed here are `[id]` and `[hash]`, the default being:
+The only placeholders allowed here are `[id]` and `[fullhash]`, the default being:
 
 __webpack.config.js__
 
@@ -598,7 +598,7 @@ __webpack.config.js__
 module.exports = {
   //...
   output: {
-    hotUpdateChunkFilename: '[id].[hash].hot-update.js'
+    hotUpdateChunkFilename: '[id].[fullhash].hot-update.js'
   }
 };
 ```
