@@ -8,7 +8,7 @@ export default function Badge(props) {
   return (
     <span
       style={{
-        backgroundColor: ' #1d78c1',
+        backgroundColor: '#1d78c1',
         padding: '0 6px',
         borderRadius: '2px',
         color: '#fff',
