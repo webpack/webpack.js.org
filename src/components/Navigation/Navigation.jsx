@@ -12,7 +12,7 @@ import Dropdown from '../Dropdown/Dropdown';
 import isClient from '../../utilities/is-client';
 
 // Load Styling
-import 'docsearch.js/dist/cdn/docsearch.css';
+import 'docsearch.js/dist/cdn/docsearch.min.css';
 import './Navigation.scss';
 import './Search.scss';
 
@@ -76,12 +76,12 @@ export default class Navigation extends Component {
 
   componentDidMount() {
     if (isClient) {
-      const DocSearch = require('docsearch.js');
-
-      DocSearch({
-        apiKey: 'fac401d1a5f68bc41f01fb6261661490',
-        indexName: 'webpack-js-org',
-        inputSelector: '.navigation-search__input'
+      import('docsearch.js').then(({default: DocSearch}) => {
+        DocSearch({
+          apiKey: 'fac401d1a5f68bc41f01fb6261661490',
+          indexName: 'webpack-js-org',
+          inputSelector: '.navigation-search__input'
+        });
       });
     }
   }
