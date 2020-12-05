@@ -12,9 +12,9 @@ import Dropdown from '../Dropdown/Dropdown';
 import isClient from '../../utilities/is-client';
 
 // Load Styling
-import 'docsearch.js/dist/cdn/docsearch.css';
 import './Navigation.scss';
-import './Search.scss';
+import '@docsearch/css/dist/style.css';
+import 'prismjs/themes/prism-okaidia.css';
 
 import GithubIcon from '../../styles/icons/github.svg';
 import TwitterIcon from '../../styles/icons/twitter.svg';
@@ -76,12 +76,12 @@ export default class Navigation extends Component {
 
   componentDidMount() {
     if (isClient) {
-      const DocSearch = require('docsearch.js');
+      const DocSearch = require('@docsearch/js').default;
 
       DocSearch({
         apiKey: 'fac401d1a5f68bc41f01fb6261661490',
         indexName: 'webpack-js-org',
-        inputSelector: '.navigation-search__input'
+        container: '.navigation-search__search'
       });
     }
   }
