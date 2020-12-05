@@ -130,11 +130,11 @@ The `app` chunk will not contain the modules that `react-vendors` has.
 module.exports = {
   //...
   entry: {
-    moment: { import: "moment-mini", runtime: "runtime" },
-    reactvendors: { import: ["react", "react-dom"], runtime: "runtime" },
+    moment: { import: 'moment-mini', runtime: 'runtime' },
+    reactvendors: { import: ['react', 'react-dom'], runtime: 'runtime' },
     testapp: {
-      import: "./wwwroot/component/TestApp.tsx",
-      dependOn: ["reactvendors", "moment"],
+      import: './wwwroot/component/TestApp.tsx',
+      dependOn: ['reactvendors', 'moment'],
     },
   },
 };
