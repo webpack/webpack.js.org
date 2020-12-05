@@ -27,7 +27,7 @@ export default function Print (props) {
 
   return (
     <div className="sidebar-item sidebar-item--disabled`">
-      <BarIcon className="sidebar-item__toggle" width={15} fill="#175d96" />
+      <BarIcon className="sidebar-item__toggle" width={15} height={17} fill="#175d96" />
       <a className="sidebar-item__title sidebar-link__print"
         href={printUrl}
         rel="nofollow noopener noreferrer"

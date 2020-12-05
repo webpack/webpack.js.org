@@ -53,11 +53,12 @@ export default class SidebarItem extends Component {
         {anchors.length > 0 ? (
           <ChevronRightIcon
             width={15}
+            height={17}
             fill="#175d96"
             className={`${block}__toggle`}
             onClick={this._toggle.bind(this)} />
         ) : (
-          <BarIcon className={`${block}__toggle`} width={15} fill="#175d96" />
+          <BarIcon className={`${block}__toggle`} width={15} height={17} fill="#175d96" />
         )}
 
         <Link
