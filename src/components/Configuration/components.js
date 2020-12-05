@@ -28,7 +28,7 @@ const Card = ({ body }) => {
   );
 };
 Card.propTypes = {
-  body: PropTypes.string
+  body: PropTypes.node
 };
 export class Details extends Component {
   static propTypes = {
