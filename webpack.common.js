@@ -91,7 +91,8 @@ module.exports = () => ({
         include: [
           path.resolve(__dirname, 'src'),
           path.resolve(__dirname, 'node_modules/punycode'),
-          path.resolve(__dirname, 'node_modules/react-banner')
+          path.resolve(__dirname, 'node_modules/react-banner'),
+          path.resolve(__dirname, 'node_modules/react-tiny-popover')
         ],
         use: [
           'babel-loader'
