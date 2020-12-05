@@ -1034,9 +1034,9 @@ Note that `[fullhash]` in this parameter will be replaced with a hash of the com
 
 ## `output.pathinfo`
 
-`boolean`
+`boolean=true` `string : 'verbose'`
 
-Tells webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` [mode](/configuration/mode/) respectively.
+Tells webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` [mode](/configuration/mode/) respectively. `'verbose'` shows more addition information.
 
 W> While the data this comments can provide is useful during development when reading the generated code, it __should not__ be used in production.
 
