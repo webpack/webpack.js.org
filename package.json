@@ -153,6 +153,7 @@
     "workbox-webpack-plugin": "^6.0.0"
   },
   "dependencies": {
+    "@docsearch/js": "^3.0.0-alpha.32",
     "docsearch.js": "^2.5.2",
     "gitter-sidecar": "^1.2.3",
     "javascriptstuff-db": "^1.12.0",
