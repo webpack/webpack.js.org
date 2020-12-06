@@ -57,7 +57,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "cypress:ci": "start-server-and-test build-test http://localhost:4200 cypress:run",
-    "size": "npm run build && size-limit"
+    "size": "size-limit"
   },
   "husky": {
     "hooks": {
