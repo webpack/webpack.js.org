@@ -71,12 +71,6 @@
       "npm run lint-markdown"
     ]
   },
-  "bundlesize": [
-    {
-      "path": "./dist/index.bundle.js",
-      "maxSize": "200 kB"
-    }
-  ],
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/eslint-parser": "^7.12.1",
@@ -91,7 +85,6 @@
     "alex": "^5.1.0",
     "autoprefixer": "^10.0.4",
     "babel-loader": "^8.2.2",
-    "bundlesize": "^0.18.0",
     "copy-webpack-plugin": "^6.3.2",
     "cross-env": "^7.0.2",
     "css-loader": "^5.0.1",
