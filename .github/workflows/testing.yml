@@ -123,7 +123,6 @@ jobs:
           yarn cypress:ci
 
       - name: Watch built JS size
-        uses: actions/checkout@v2
         uses: andresz1/size-limit-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
