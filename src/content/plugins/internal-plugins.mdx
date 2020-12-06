@@ -291,12 +291,12 @@ When [`optimization.realContentHash`](/configuration/optimization/#optimizationr
 `RealContentHashPlugin` provides a `updateHash` <Badge text='5.8.0+' /> hook for customizing hash updating:
 
 ```js
-const webpack = require("webpack");
+const webpack = require('webpack');
 const RealContentHashPlugin = webpack.optimize.RealContentHashPlugin;
 // ...
-compiler.hooks.compilation.tap("MyPlugin", (compilation) => {
+compiler.hooks.compilation.tap('MyPlugin', (compilation) => {
   const hooks = RealContentHashPlugin.getCompilationHooks(compilation);
-  hooks.updateHash.tap("MyPlugin", (content, oldHash) => {
+  hooks.updateHash.tap('MyPlugin', (content, oldHash) => {
     // you can calculate the hash here as you wish
   });
 });
