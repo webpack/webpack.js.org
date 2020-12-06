@@ -200,7 +200,7 @@ webpack --help <command>
 webpack --help --<flag>
 ```
 
-__Show version of packeges__
+__Show version of installed packeges__
 
 To see the version of `webpack` and `webpack-cli` you are using you can run -
 
