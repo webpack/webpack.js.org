@@ -207,6 +207,7 @@ To see the version of `webpack` and `webpack-cli` you are using you can run -
 ```bash
 webpack --version
 ```
+
 This will output the following result -
 
 ```bash
@@ -219,6 +220,7 @@ To see version of any external package (like `@webpack-cli/init`) you can run -
 ```bash
 webpack --version init
 ```
+
 This will output the following result -
 
 ```bash
