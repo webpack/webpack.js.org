@@ -200,6 +200,35 @@ webpack --help <command>
 webpack --help --<flag>
 ```
 
+__Show version of installed packages and sub-packages__
+
+To inspect the version of `webpack` and `webpack-cli` you are using just run command:
+
+```bash
+npx webpack --version
+```
+
+This will output the following result:
+
+```bash
+webpack-cli 4.2.0
+webpack 5.4.0
+```
+
+To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/init`) just run command similar to the following: 
+
+```bash
+npx webpack init --version
+```
+
+This will output the following result:
+
+```bash
+@webpack-cli/init 1.0.3
+webpack-cli 4.2.0
+webpack 5.4.0
+```
+
 __Build source using a configuration file__
 
 Specifies a different [configuration](/configuration) file to pick up. Use this if you want to specify something different from `webpack.config.js`, which is one of the default.
