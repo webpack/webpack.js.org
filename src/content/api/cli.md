@@ -200,7 +200,7 @@ webpack --help <command>
 webpack --help --<flag>
 ```
 
-__Show version of installed packages__
+__Show version of installed packages and sub-packages__
 
 To inspect the version of `webpack` and `webpack-cli` you are using just run command:
 
@@ -215,10 +215,10 @@ webpack-cli 4.2.0
 webpack 5.4.0
 ```
 
-To see version of any external package (like `@webpack-cli/init`) you can run - 
+To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/init`) just run following command: 
 
 ```bash
-npx webpack --version init
+npx webpack init --version
 ```
 
 This will output the following result:
