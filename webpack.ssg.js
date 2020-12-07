@@ -11,6 +11,7 @@ const contentTree = require('./src/_content.json');
 
 // Load Common Configuration
 const common = require('./webpack.common.js');
+const PrecacheSsgManifestPlugin = require('./src/PrecacheSsgManifestPlugin');
 
 // content tree to path array
 const paths = [
@@ -34,7 +35,7 @@ module.exports = env => merge(common(env), {
       index: './server.jsx'
     },
     output: {
-      filename: '.server/[name].js',
+      filename: '.server/[name].[contenthash].js',
       libraryTarget: 'umd'
     },
     optimization: {
@@ -131,5 +132,6 @@ module.exports = env => merge(common(env), {
           },
         ],
       }),
+      new PrecacheSsgManifestPlugin()
     ]
   });

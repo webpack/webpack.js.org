@@ -1,8 +1,13 @@
-import React from 'react';
+import { Component } from 'react';
 import LanguageIcon from '../../assets/language-icon.svg';
 import './Dropdown.scss';
+import PropTypes from 'prop-types';
 
-export default class Dropdown extends React.Component {
+export default class Dropdown extends Component {
+  static propTypes = {
+    className: PropTypes.string,
+    items: PropTypes.array
+  }
   state = {
     active: false
   };
@@ -32,7 +37,7 @@ export default class Dropdown extends React.Component {
     let activeMod = this.state.active ? 'dropdown__list--active' : '';
 
     return (
-      <nav 
+      <nav
         className={ `dropdown ${className}` }
         ref={ el => this.dropdown = el }
         onMouseOver={ this._toggle.bind(this, true) }
@@ -59,9 +64,9 @@ export default class Dropdown extends React.Component {
               items.map((item, i) => {
                 return (
                   <li key={ item.title }>
-                    <a 
+                    <a
                       onKeyDown={this._handleArrowKeys.bind(this, i, items.length - 1)}
-                      ref={ node => this.links ? this.links.push(node) : this.links = [node] } 
+                      ref={ node => this.links ? this.links.push(node) : this.links = [node] }
                       href={ item.url }>
                       <span lang={ item.lang }>{ item.title }</span>
                     </a>
@@ -98,7 +103,7 @@ export default class Dropdown extends React.Component {
     this.links[newIndex].focus();
   }
 
-  _handleClick(e) {
+  _handleClick() {
     this.setState({active: !this.state.active}, () => {
       if (this.state.active) {
         this.links[0].focus();

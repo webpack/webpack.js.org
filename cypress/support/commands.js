@@ -1,5 +1,3 @@
-const windowInnerWidth = Cypress.config('viewportWidth');
-const windowInnerHeight = Cypress.config('viewportHeight');
 Cypress.Commands.add('isNotInViewport', element => {
   cy.get(element).then($el => {
     // we won't have horizontal scollbar

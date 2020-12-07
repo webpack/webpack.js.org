@@ -141,4 +141,8 @@ __这是什么？__我们告诉 webpack 需要三个独立分离的依赖图（�
 
 __为什么？__在多页面应用程序中，server 会拉取一个新的 HTML 文档给你的客户端。页面重新加载此新文档，并且资源被重新下载。然而，这给了我们特殊的机会去做很多事，例如使用 [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) 为页面间共享的应用程序代码创建 bundle。由于入口起点数量的增多，多页应用能够复用多个入口起点之间的大量代码/模块，从而可以极大地从这些技术中受益。
 
+<<<<<<< HEAD
 T> 根据经验：每个 HTML 文档只使用一个入口起点。
+=======
+T> As a rule of thumb: Use exactly one entry point for each HTML document. See the issue [described here](https://bundlers.tooling.report/code-splitting/multi-entry/#webpack) for more details.
+>>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453

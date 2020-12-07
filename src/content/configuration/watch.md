@@ -134,6 +134,7 @@ module.exports = {
 T> 如果监听没生效，试试这个选项吧。Watch 在 NFS 和 VirtualBox 机器上不适用。
 
 
+<<<<<<< HEAD
 ## `info-verbosity` {#info-verbosity}
 
 `string = 'info': 'none' | 'info' | 'verbose'`
@@ -146,6 +147,9 @@ webpack --watch --info-verbosity verbose
 
 
 ## 故障排除 {#troubleshooting}
+=======
+## Troubleshooting
+>>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
 
 如果您遇到任何问题，请查看以下注意事项。对于 webpack 为何会忽略文件修改，这里有多种原因。
 
