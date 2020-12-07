@@ -50,9 +50,6 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 ## Flags
 
 By default webpack ships with the following flags:
-
-Note: These are the flags with webpack v4, starting v5 CLI also supports [core flags](/api/cli/#core-flags)
-
 | Flag / Alias        | Type            | Description                                                                                                    |
 | ------------------- | --------------- | -------------------------------------------------------------------------------------------------------------- |
 | `--entry`           | string[]        | The entry point(s) of your application e.g. `./src/main.js`                                                    |
