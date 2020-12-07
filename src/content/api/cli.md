@@ -49,7 +49,7 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 
 ## Flags
 
-webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with the following flags:
+By default webpack ships with the following flags:
 
 Note: These are the flags with webpack v4, starting v5 CLI also supports [core flags](/api/cli/#core-flags)
 
@@ -215,7 +215,7 @@ webpack-cli 4.2.0
 webpack 5.4.0
 ```
 
-To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/init`) just run command similar to the following: 
+To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/init`) just run command similar to the following:
 
 ```bash
 npx webpack init --version
