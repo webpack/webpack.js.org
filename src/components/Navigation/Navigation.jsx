@@ -2,6 +2,7 @@
 import { Component } from 'react';
 import Banner from 'react-banner';
 import PropTypes from 'prop-types';
+import { DocSearch } from '@docsearch/react';
 
 // Import Components
 import Link from '../Link/Link';
@@ -13,13 +14,11 @@ import isClient from '../../utilities/is-client';
 
 // Load Styling
 import './Navigation.scss';
-import '@docsearch/css/dist/style.css';
-import 'prismjs/themes/prism-okaidia.css';
+import '@docsearch/css';
 
 import GithubIcon from '../../styles/icons/github.svg';
 import TwitterIcon from '../../styles/icons/twitter.svg';
 import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
-
 const onSearch = () => {};
 
 export default class Navigation extends Component {
@@ -32,6 +31,7 @@ export default class Navigation extends Component {
     let { pathname, links, toggleSidebar } = this.props;
 
     return (
+      <>
       <Banner
         onSearch={onSearch}
         blockName="navigation"
@@ -71,18 +71,8 @@ export default class Navigation extends Component {
         ]}
         link={ Link }
         onMenuClick={ toggleSidebar } />
+        <DocSearch apiKey={'fac401d1a5f68bc41f01fb6261661490'} indexName='webpack-js-org' />
+        </>
     );
-  }
-
-  componentDidMount() {
-    if (isClient) {
-      const DocSearch = require('@docsearch/js').default;
-
-      DocSearch({
-        apiKey: 'fac401d1a5f68bc41f01fb6261661490',
-        indexName: 'webpack-js-org',
-        container: '.navigation-search__search'
-      });
-    }
   }
 }
