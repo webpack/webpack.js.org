@@ -215,7 +215,7 @@ webpack-cli 4.2.0
 webpack 5.4.0
 ```
 
-To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/init`) just run command similar to the following: 
+To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/init`) just run command similar to the following:
 
 ```bash
 npx webpack init --version
@@ -263,11 +263,12 @@ webpack --env production    # sets env.production == true
 
 The `--env` argument accepts multiple values:
 
-| Invocation                                    | Resulting environment                   |
-| --------------------------------------------- | --------------------------------------- |
-| `webpack --env prod`                          | `{ prod: true }`                        |
-| `webpack --env prod --env min`                | `{ prod: true, min: true }`             |
-| `webpack --env platform=app --env production` | `{ platform: "app", production: true }` |
+| Invocation                                                   | Resulting environment                          |
+| ------------------------------------------------------------ | ---------------------------------------------- |
+| `webpack --env prod`                                         | `{ prod: true }`                               |
+| `webpack --env prod --env min`                               | `{ prod: true, min: true }`                    |
+| `webpack --env platform=app --env production`                | `{ platform: "app", production: true }`        |
+| `webpack --env app.platform="staging" --env app.name="test"` | `{ app: { platform: "staging", name: "test" }` |
 
 T> See the [environment variables](/guides/environment-variables/) guide for more information on its usage.
 
