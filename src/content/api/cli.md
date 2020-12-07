@@ -110,13 +110,13 @@ See [configuration](/configuration) for the options in the configuration file.
 
 ### Without configuration file
 
-```sh
+```bash
 webpack <entry> [<entry>] -o <output-path>
 ```
 
 __example__
 
-```sh
+```bash
 webpack --entry ./first.js --entry ./second.js --output-path /build
 ```
 
@@ -284,7 +284,7 @@ T> See the [environment variables](/guides/environment-variables/) guide for mor
 
 You can also use `webpack-bundle-analyzer` to analyze your output bundles emitted by webpack. You can use `--analyze` flag to invoke it via CLI.
 
-```sh
+```bash
 webpack --analyze
 ```
 
