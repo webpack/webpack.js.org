@@ -215,7 +215,7 @@ webpack-cli 4.2.0
 webpack 5.4.0
 ```
 
-To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/init`) just run following command: 
+To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/init`) just run command similar to the following: 
 
 ```bash
 npx webpack init --version
