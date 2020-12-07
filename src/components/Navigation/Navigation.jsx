@@ -9,9 +9,6 @@ import Link from '../Link/Link';
 import Logo from '../Logo/Logo';
 import Dropdown from '../Dropdown/Dropdown';
 
-// Import helpers
-import isClient from '../../utilities/is-client';
-
 // Load Styling
 import './Navigation.scss';
 import '@docsearch/css';
