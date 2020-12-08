@@ -505,6 +505,8 @@ module.exports = {
 
 The `'flag'` value is used by default in non-production builds.
 
+T> `optimization.sideEffects` will also flag modules as side effect free when they contain only side effect free statements.
+
 ## `optimization.portableRecords`
 
 `boolean`
