@@ -1,4 +1,3 @@
-import React from 'react';
 import Container from '../Container/Container';
 import Contributors from '../Contributors/Contributors';
 import Link from '../Link/Link';
@@ -6,7 +5,7 @@ import Shield from '../Shield/Shield';
 import Items from './projects.json';
 import './Organization.scss';
 
-const Organization = props => {
+const Organization = () => {
   return (
     <Container className='organization page__content markdown'>
       <h1>The Organization</h1>

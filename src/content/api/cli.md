@@ -16,6 +16,7 @@ contributors:
   - EslamHiko
   - smelukov
   - anikethsaha
+  - jamesgeorge007
 related:
   - title: Analyzing Build Statistics
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -48,18 +49,14 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 
 ## Flags
 
-webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with the following flags:
-
-Note: These are the flags with webpack v4, starting v5 CLI also supports [core flags](/api/cli/#core-flags)
-
+By default webpack ships with the following flags:
 | Flag / Alias        | Type            | Description                                                                                                    |
 | ------------------- | --------------- | -------------------------------------------------------------------------------------------------------------- |
 | `--entry`           | string[]        | The entry point(s) of your application e.g. `./src/main.js`                                                    |
 | `--config, -c`      | string[]        | Provide path to a webpack configuration file e.g. `./webpack.config.js`                                        |
 | `--config-name`     | string[]        | Name of the configuration to use                                                                               |
-| `--name`            | string[]        | Name of the configuration. Used when loading multiple configurations                                           |
+| `--name`            | string          | Name of the configuration. Used when loading multiple configurations                                           |
 | `--color`           | boolean         | Enable colors on console                                                                                       |
-| `--no-color`        | boolean         | Disables colors on console                                                                                     |
 | `--merge, -m`       | boolean         | Merge two or more configurations using webpack-merge e.g. `-c ./webpack.config.js -c ./webpack.test.config.js` |
 | `--env`             | string[]        | Environment passed to the configuration when it is a function                                                  |
 | `--progress`        | boolean, string | Print compilation progress during build                                                                        |
@@ -68,23 +65,23 @@ Note: These are the flags with webpack v4, starting v5 CLI also supports [core f
 | `--target, -t`      | string[]        | Sets the build target                                                                                          |
 | `--watch, -w`       | boolean         | Watch for file changes                                                                                         |
 | `--hot, -h`         | boolean         | Enables Hot Module Replacement                                                                                 |
-| `--no-hot`          | boolean         | Disables Hot Module Replacement                                                                                |
 | `--devtool, -d`     | string          | Controls if and how source maps are generated.                                                                 |
 | `--prefetch`        | string          | Prefetch this request                                                                                          |
 | `--json, -j`        | boolean, string | Prints result as JSON or store it in a file                                                                    |
 | `--mode`            | string          | Defines the mode to pass to webpack                                                                            |
 | `--version, -v`     | boolean         | Get current version                                                                                            |
 | `--stats`           | boolean, string | It instructs webpack on how to treat the stats                                                                 |
-| `--no-stats`        | boolean         | Disables stats output                                                                                          |
 | `--analyze`         | boolean         | It invokes `webpack-bundle-analyzer` plugin to get bundle information                                          |
 
 ### Negated Flags
 
 | Flag       | Description                                                   |
 | ---------- | ------------------------------------------------------------- |
-| --no-color | Disabled any color on the console                             |
-| --no-hot   | Disabled hot reloading if you have it enabled via your config |
+| --no-color | Disables any color on the console                             |
+| --no-hot   | Disables hot reloading if you have it enabled via your config |
 | --no-stats | Disables any compilation stats emitted by webpack             |
+| --no-watch | Do not watch for file changes                                 |
+| --no-devtool | Do not generate source maps                                 |
 
 ### Core Flags
 
@@ -110,13 +107,13 @@ See [configuration](/configuration) for the options in the configuration file.
 
 ### Without configuration file
 
-```sh
+```bash
 webpack <entry> [<entry>] -o <output-path>
 ```
 
 __example__
 
-```sh
+```bash
 webpack --entry ./first.js --entry ./second.js --output-path /build
 ```
 
@@ -173,28 +170,15 @@ webpack 5.1.0 compiled successfully in 198 ms
 
 CLI will look for some default configurations in the path of your project, here are the config files picked up by CLI.
 
-If no `mode` is supplied via flags or config then this is the lookup order in increasing order
+This is the lookup priority in increasing order
 
-> example - config file lookup will be in order of .webpack/webpack.config.development.js > webpack.config.development.js > webpack.config.js
+> example - config file lookup will be in order of .webpack/webpackfile > .webpack/webpack.config.js > webpack.config.js
 
-```md
+```txt
 'webpack.config',
-'webpack.config.dev',
-'webpack.config.development',
-'webpack.config.prod',
-'webpack.config.production',
 '.webpack/webpack.config',
-'.webpack/webpack.config.none',
-'.webpack/webpack.config.dev',
-'.webpack/webpack.config.development',
-'.webpack/webpack.config.prod',
-'.webpack/webpack.config.production',
 '.webpack/webpackfile',
 ```
-
-If `mode` is supplied, say `production` then config looking order will be -
-
-`.webpack/webpack.config.production.* > .webpack/webpack.config.prod.* > webpack.config.production.* > webpack.config.prod.* > webpack.config.*`
 
 ## Common Options
 
@@ -211,6 +195,35 @@ __Show help for a single command or flag__
 ```bash
 webpack --help <command>
 webpack --help --<flag>
+```
+
+__Show version of installed packages and sub-packages__
+
+To inspect the version of `webpack` and `webpack-cli` you are using just run command:
+
+```bash
+npx webpack --version
+```
+
+This will output the following result:
+
+```bash
+webpack-cli 4.2.0
+webpack 5.4.0
+```
+
+To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/init`) just run command similar to the following:
+
+```bash
+npx webpack init --version
+```
+
+This will output the following result:
+
+```bash
+@webpack-cli/init 1.0.3
+webpack-cli 4.2.0
+webpack 5.4.0
 ```
 
 __Build source using a configuration file__
@@ -235,6 +248,8 @@ webpack --json stats.json
 
 In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option, the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.io/analyse/), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
 
+T> See the [stats data api](/api/stats) to read more about the stats generated here.
+
 ## Environment Options
 
 When the webpack configuration [exports a function](/configuration/configuration-types/#exporting-a-function), an "environment" may be passed to it.
@@ -245,11 +260,12 @@ webpack --env production    # sets env.production == true
 
 The `--env` argument accepts multiple values:
 
-| Invocation                                    | Resulting environment                   |
-| --------------------------------------------- | --------------------------------------- |
-| `webpack --env prod`                          | `{ prod: true }`                        |
-| `webpack --env prod --env min`                | `{ prod: true, min: true }`             |
-| `webpack --env platform=app --env production` | `{ platform: "app", production: true }` |
+| Invocation                                                   | Resulting environment                          |
+| ------------------------------------------------------------ | ---------------------------------------------- |
+| `webpack --env prod`                                         | `{ prod: true }`                               |
+| `webpack --env prod --env min`                               | `{ prod: true, min: true }`                    |
+| `webpack --env platform=app --env production`                | `{ platform: "app", production: true }`        |
+| `webpack --env app.platform="staging" --env app.name="test"` | `{ app: { platform: "staging", name: "test" }` |
 
 T> See the [environment variables](/guides/environment-variables/) guide for more information on its usage.
 
@@ -266,7 +282,7 @@ T> See the [environment variables](/guides/environment-variables/) guide for mor
 
 You can also use `webpack-bundle-analyzer` to analyze your output bundles emitted by webpack. You can use `--analyze` flag to invoke it via CLI.
 
-```sh
+```bash
 webpack --analyze
 ```
 

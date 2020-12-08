@@ -18,6 +18,7 @@ contributors:
   - LukeMwila
   - Jalitha
   - muhmushtaha
+  - chenxsan
 ---
 
 At its core, __webpack__ is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a [dependency graph](/concepts/dependency-graph/) which maps every module your project needs and generates one or more _bundles_.
@@ -178,4 +179,4 @@ webpack supports all browsers that are [ES5-compliant](https://kangax.github.io/
 
 ## Environment
 
-webpack runs on Node.js version 8.x and higher.
+webpack 5 runs on Node.js version 10.13.0+.
