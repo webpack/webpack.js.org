@@ -11,7 +11,7 @@ import Dropdown from '../Dropdown/Dropdown';
 
 // Load Styling
 import './Navigation.scss';
-import '@docsearch/css';
+// import '@docsearch/css';
 
 import GithubIcon from '../../styles/icons/github.svg';
 import TwitterIcon from '../../styles/icons/twitter.svg';
