@@ -23,7 +23,6 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import Gitter from '../Gitter/Gitter';
 import Vote from '../Vote/Vote';
 import Organization from '../Organization/Organization';
-import StarterKits from '../StarterKits/StarterKits';
 
 // Load Styling
 import '../../styles/index';
@@ -109,7 +108,6 @@ class Site extends Component {
                 <Switch>
                   <Route path="/vote" component={Vote} />
                   <Route path="/organization" component={Organization} />
-                  <Route path="/starter-kits" component={StarterKits} />
                   <Route path="/app-shell" component={() => <Fragment />} />
                   {pages.map(page => (
                     <Route

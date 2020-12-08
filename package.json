@@ -35,7 +35,6 @@
     "fetch": "run-p fetch:*",
     "fetch:readmes": "node src/utilities/fetch-package-readmes.js",
     "fetch:supporters": "node src/utilities/fetch-supporters.js",
-    "fetch:starter-kits": "node src/utilities/fetch-starter-kits.js",
     "prebuild": "npm run clean",
     "build": "run-s fetch-repos fetch printable content && cross-env NODE_ENV=production webpack --config webpack.ssg.js && run-s clean-printable content && cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "postbuild": "npm run sitemap",
@@ -156,7 +155,6 @@
   "dependencies": {
     "docsearch.js": "^2.5.2",
     "gitter-sidecar": "^1.2.3",
-    "javascriptstuff-db": "^1.12.0",
     "lodash.throttle": "^4.1.1",
     "path-browserify": "^1.0.1",
     "prop-types": "^15.7.2",
