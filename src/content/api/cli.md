@@ -55,7 +55,7 @@ By default webpack ships with the following flags:
 | `--entry`           | string[]        | The entry point(s) of your application e.g. `./src/main.js`                                                    |
 | `--config, -c`      | string[]        | Provide path to a webpack configuration file e.g. `./webpack.config.js`                                        |
 | `--config-name`     | string[]        | Name of the configuration to use                                                                               |
-| `--name`            | string[]        | Name of the configuration. Used when loading multiple configurations                                           |
+| `--name`            | string          | Name of the configuration. Used when loading multiple configurations                                           |
 | `--color`           | boolean         | Enable colors on console                                                                                       |
 | `--merge, -m`       | boolean         | Merge two or more configurations using webpack-merge e.g. `-c ./webpack.config.js -c ./webpack.test.config.js` |
 | `--env`             | string[]        | Environment passed to the configuration when it is a function                                                  |
