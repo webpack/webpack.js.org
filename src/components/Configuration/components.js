@@ -1,5 +1,5 @@
 import { isValidElement, Component } from 'react';
-import {Popover} from 'react-tiny-popover';
+import Popover from 'react-tiny-popover';
 import './Configuration.scss';
 import PropTypes from 'prop-types';
 
