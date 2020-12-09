@@ -1,0 +1,18 @@
+.notifyBox {
+  position: fixed;
+  z-index: 1000;
+  border: 1px solid #dedede;
+  background-color: #fff;
+  box-shadow: 1px 1px 2px 1px #465E69;
+  border-radius: 3px;
+  padding: 10px;
+  bottom: 3px;
+  right: 3px;
+  color: #333333;
+  button {
+    background: #1d78c1;
+    border: 1px solid #1d78c1;
+    color: #fff;
+    cursor: pointer;
+  }
+}

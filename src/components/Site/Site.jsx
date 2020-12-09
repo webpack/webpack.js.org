@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import PropTypes from 'prop-types';
 import {MDXProvider} from '@mdx-js/react';
+import { Workbox } from 'workbox-window/Workbox.mjs';
 
 // Import Utilities
 import { extractPages, extractSections, getPageTitle } from '../../utilities/content-utils';
@@ -32,6 +33,7 @@ import './Site.scss';
 
 // Load Content Tree
 import Content from '../../_content.json';
+import NotifyBox from '../NotifyBox/NotifyBox';
 
 class Site extends Component {
   static propTypes = {
@@ -42,40 +44,48 @@ class Site extends Component {
   }
   state = {
     mobileSidebarOpen: false,
-    showUpdateBox: true,
+    showUpdateBox: false,
+    wb: undefined,
   };
 
   componentDidMount() {
     if (isClient) {
-      if (process.env.NODE_ENV === 'production') { // only register sw.js in production
+      if (process.env.NODE_ENV === 'production') {
+        // only register sw.js in production
         if ('serviceWorker' in navigator) {
-          import('workbox-window/Workbox.mjs').then(({Workbox}) => {
-            const wb = new Workbox('/sw.js');
-            this.setState({
-              wb
-            });
-
-            function handleWaiting () {
-              console.log('A new service worker has installed, but it can\'t activate until all tabs running the current version have been unloaded');
-              this.setState({showUpdateBox: true});
-            }
-            // listen to waiting
-            wb.addEventListener('waiting', handleWaiting);
-
-            // register the service worker
-            wb.register();
+          const wb = new Workbox('/sw.js');
+          this.setState({
+            wb,
           });
+
+          // listen to `waiting` event
+          wb.addEventListener('waiting', () => {
+            // log and show updateBox
+            console.log(
+              'A new service worker has installed, but it can\'t activate until all tabs running the current version have been unloaded'
+            );
+            this.setState({ showUpdateBox: true });
+          });
+
+          // listen to `controlling`
+          // https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-window.Workbox#event:controlling
+          wb.addEventListener('controlling', () => {
+            console.log('new service worker in charge now');
+            window.location.reload();
+          });
+
+          // register the service worker
+          wb.register();
         }
       }
     }
   }
 
-  skip() {
-    if (!this.state.wb) return;
-    this.state.wb.addEventListener('controlling', () => {
-      window.location.reload();
-    });
-    this.state.wb.messageSkipWaiting();
+  skip = () => {
+    const { wb } = this.state;
+    if (!wb) return;
+
+    wb.messageSkipWaiting();
   }
 
   render() {
@@ -174,7 +184,7 @@ class Site extends Component {
           </Switch>
           <Footer />
           {
-            this.state.showUpdateBox ? <div>An update is available. <button onClick={() => this.skip()}>Click to update</button></div> : undefined
+            this.state.showUpdateBox ? <NotifyBox skip={this.skip} /> : undefined
           }
         </div>
       </MDXProvider>
