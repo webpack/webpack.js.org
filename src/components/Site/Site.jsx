@@ -42,7 +42,7 @@ class Site extends Component {
   }
   state = {
     mobileSidebarOpen: false,
-    showUpdateBox: false,
+    showUpdateBox: true,
   };
 
   componentDidMount() {
@@ -71,6 +71,7 @@ class Site extends Component {
   }
 
   skip() {
+    if (!this.state.wb) return;
     this.state.wb.addEventListener('controlling', () => {
       window.location.reload();
     });
@@ -173,7 +174,7 @@ class Site extends Component {
           </Switch>
           <Footer />
           {
-            this.state.showUpdateBox ? <div>An update is available. <button onClick={() => this.skip}>Click to update</button></div> : undefined
+            this.state.showUpdateBox ? <div>An update is available. <button onClick={() => this.skip()}>Click to update</button></div> : undefined
           }
         </div>
       </MDXProvider>
