@@ -166,7 +166,8 @@
     "react-tiny-popover": "5",
     "react-visibility-sensor": "^5.0.2",
     "webpack-pwa-manifest": "^4.3.0",
-    "webpack.vote": "https://github.com/webpack/voting-app.git"
+    "webpack.vote": "https://github.com/webpack/voting-app.git",
+    "workbox-window": "^6.0.2"
   },
   "resolutions": {
     "remark-responsive-tables": "git://github.com/chenxsan/remark-responsive-tables.git#bugfix/fix-empty-head",

@@ -36,15 +36,19 @@ import Content from '../../_content.json';
 if (isClient) {
   if (process.env.NODE_ENV === 'production') { // only register sw.js in production
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker
-          .register('/sw.js')
-          .then((registration) => {
-            console.log('SW registered: ', registration);
-          })
-          .catch((registrationError) => {
-            console.log('SW registration failed: ', registrationError);
-          });
+      import('workbox-window/Workbox.mjs').then(({Workbox}) => {
+        const wb = new Workbox('/sw.js');
+
+        function handleWaiting () {
+          console.log('A new service worker has installed, but it can\'t activate until all tabs running the current version have been unloaded');
+          // TODO show a banner ask user whether to active the new service worker
+          // if yes, call wb.messageSkipWaiting();
+        }
+        // listen to waiting
+        wb.addEventListener('waiting', handleWaiting);
+
+        // register the service worker
+        wb.register();
       });
     }
   }
