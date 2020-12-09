@@ -33,27 +33,6 @@ import './Site.scss';
 // Load Content Tree
 import Content from '../../_content.json';
 
-if (isClient) {
-  if (process.env.NODE_ENV === 'production') { // only register sw.js in production
-    if ('serviceWorker' in navigator) {
-      import('workbox-window/Workbox.mjs').then(({Workbox}) => {
-        const wb = new Workbox('/sw.js');
-
-        function handleWaiting () {
-          console.log('A new service worker has installed, but it can\'t activate until all tabs running the current version have been unloaded');
-          // TODO show a banner ask user whether to active the new service worker
-          // if yes, call wb.messageSkipWaiting();
-        }
-        // listen to waiting
-        wb.addEventListener('waiting', handleWaiting);
-
-        // register the service worker
-        wb.register();
-      });
-    }
-  }
-}
-
 class Site extends Component {
   static propTypes = {
     location: PropTypes.shape({
@@ -62,8 +41,41 @@ class Site extends Component {
     import: PropTypes.func
   }
   state = {
-    mobileSidebarOpen: false
+    mobileSidebarOpen: false,
+    showUpdateBox: false,
   };
+
+  componentDidMount() {
+    if (isClient) {
+      if (process.env.NODE_ENV === 'production') { // only register sw.js in production
+        if ('serviceWorker' in navigator) {
+          import('workbox-window/Workbox.mjs').then(({Workbox}) => {
+            const wb = new Workbox('/sw.js');
+            this.setState({
+              wb
+            });
+
+            function handleWaiting () {
+              console.log('A new service worker has installed, but it can\'t activate until all tabs running the current version have been unloaded');
+              this.setState({showUpdateBox: true});
+            }
+            // listen to waiting
+            wb.addEventListener('waiting', handleWaiting);
+
+            // register the service worker
+            wb.register();
+          });
+        }
+      }
+    }
+  }
+
+  skip() {
+    this.state.wb.addEventListener('controlling', () => {
+      window.location.reload();
+    });
+    this.state.wb.messageSkipWaiting();
+  }
 
   render() {
     let { location } = this.props;
@@ -160,6 +172,9 @@ class Site extends Component {
             />
           </Switch>
           <Footer />
+          {
+            this.state.showUpdateBox ? <div>An update is available. <button onClick={() => this.skip}>Click to update</button></div> : undefined
+          }
         </div>
       </MDXProvider>
     );
