@@ -1,4 +1,0 @@
-/*!
- * Gitter Sidecar v1.5.0
- * https://sidecar.gitter.im/
- */
