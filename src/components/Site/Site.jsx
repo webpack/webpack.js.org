@@ -4,7 +4,6 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import PropTypes from 'prop-types';
 import {MDXProvider} from '@mdx-js/react';
-import { Workbox } from 'workbox-window/Workbox.mjs';
 
 // Import Utilities
 import { extractPages, extractSections, getPageTitle } from '../../utilities/content-utils';
@@ -43,7 +42,7 @@ class Site extends Component {
   }
   state = {
     mobileSidebarOpen: false,
-    showUpdateBox: false,
+    showUpdateBox: true,
     wb: undefined,
   };
 
@@ -52,29 +51,31 @@ class Site extends Component {
       if (process.env.NODE_ENV === 'production') {
         // only register sw.js in production
         if ('serviceWorker' in navigator) {
-          const wb = new Workbox('/sw.js');
-          this.setState({
-            wb,
-          });
+          // dynamic load sw
+          import('workbox-window/Workbox.mjs').then(({ Workbox }) => {
+            const wb = new Workbox('/sw.js');
+            this.setState({
+              wb,
+            });
 
-          // listen to `waiting` event
-          wb.addEventListener('waiting', () => {
-            // log and show updateBox
-            console.log(
-              'A new service worker has installed, but it can\'t activate until all tabs running the current version have been unloaded'
-            );
-            this.setState({ showUpdateBox: true });
-          });
+            // listen to `waiting` event
+            wb.addEventListener('waiting', () => {
+              // log and show updateBox
+              console.log(
+                'A new service worker has installed, but it can\'t activate until all tabs running the current version have been unloaded'
+              );
+              this.setState({ showUpdateBox: true });
+            });
 
-          // listen to `controlling`
-          // https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-window.Workbox#event:controlling
-          wb.addEventListener('controlling', () => {
-            console.log('new service worker in charge now');
-            window.location.reload();
-          });
+            // listen to `controlling`
+            // https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-window.Workbox#event:controlling
+            wb.addEventListener('controlling', () => {
+              window.location.reload();
+            });
 
-          // register the service worker
-          wb.register();
+            // register the service worker
+            wb.register();
+          });
         }
       }
     }
