@@ -11,7 +11,7 @@ sort: -1
 __src/index.js__
 
 ```js
-import bar from './bar.js';
+import bar from './bar';
 
 bar();
 ```
