@@ -1,12 +1,16 @@
 // Import External Dependencies
-import { Component, Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import PropTypes from 'prop-types';
-import {MDXProvider} from '@mdx-js/react';
+import { MDXProvider } from '@mdx-js/react';
 
 // Import Utilities
-import { extractPages, extractSections, getPageTitle } from '../../utilities/content-utils';
+import {
+  extractPages,
+  extractSections,
+  getPageTitle,
+} from '../../utilities/content-utils';
 import isClient from '../../utilities/is-client';
 import getAdjacentPages from '../../utilities/get-adjacent-pages';
 
@@ -33,20 +37,62 @@ import './Site.scss';
 import Content from '../../_content.json';
 import NotifyBox from '../NotifyBox/NotifyBox';
 
-class Site extends Component {
-  static propTypes = {
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired
-    }),
-    import: PropTypes.func
-  }
-  state = {
-    mobileSidebarOpen: false,
-    showUpdateBox: true,
-    wb: undefined,
+Site.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }),
+  import: PropTypes.func,
+};
+function Site(props) {
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [showUpdateBox, setShowUpdateBox] = useState(false);
+  const [wb, setWb] = useState(undefined);
+  const skip = () => {
+    if (!wb) return;
+    wb.messageSkipWaiting();
+  };
+  /**
+   * Toggle the mobile sidebar
+   *
+   */
+  const _toggleSidebar = () => {
+    setMobileSidebarOpen(!mobileSidebarOpen);
   };
 
-  componentDidMount() {
+  /**
+   * Strip any non-applicable properties
+   *
+   * @param  {array} array - ...
+   * @return {array}       - ...
+   */
+  const _strip = (array) => {
+    let anchorTitleIndex = array.findIndex(
+      (item) => item.name.toLowerCase() === 'index.md'
+    );
+
+    if (anchorTitleIndex !== -1) {
+      array.unshift(array[anchorTitleIndex]);
+
+      array.splice(anchorTitleIndex + 1, 1);
+    }
+
+    return array
+      .map(({ title, name, url, group, sort, anchors, children }) => ({
+        title: title || name,
+        content: title || name,
+        url,
+        group,
+        sort,
+        anchors,
+        children: children ? _strip(children) : [],
+      }))
+      .filter(
+        (page) =>
+          page.title !== 'printable.md' && !page.content.includes('Printable')
+      );
+  };
+
+  useEffect(() => {
     if (isClient) {
       if (process.env.NODE_ENV === 'production') {
         // only register sw.js in production
@@ -54,17 +100,16 @@ class Site extends Component {
           // dynamic load sw
           import('workbox-window/Workbox.mjs').then(({ Workbox }) => {
             const wb = new Workbox('/sw.js');
-            this.setState({
-              wb,
-            });
+            setWb(wb);
 
             // listen to `waiting` event
             wb.addEventListener('waiting', () => {
               // log and show updateBox
               console.log(
-                'A new service worker has installed, but it can\'t activate until all tabs running the current version have been unloaded'
+                // eslint-disable-next-line
+                "A new service worker has installed, but it can't activate until all tabs running the current version have been unloaded"
               );
-              this.setState({ showUpdateBox: true });
+              setShowUpdateBox(true);
             });
 
             // listen to `controlling`
@@ -79,153 +124,119 @@ class Site extends Component {
         }
       }
     }
-  }
+  }, []);
 
-  skip = () => {
-    const { wb } = this.state;
-    if (!wb) return;
-
-    wb.messageSkipWaiting();
-  }
-
-  render() {
-    let { location } = this.props;
-    let { mobileSidebarOpen } = this.state;
-    let sections = extractSections(Content);
-    let section = sections.find(({ url }) => location.pathname.startsWith(url));
-    let pages = extractPages(Content);
-    const sidebarPages = this._strip(
-      section
-        ? section.children
-        : Content.children.filter(
-            item => item.type !== 'directory' && item.url !== '/'
-          )
-    );
-    return (
-      <MDXProvider components={{
-        Badge: function Comp (props) {
+  let { location } = props;
+  let sections = extractSections(Content);
+  let section = sections.find(({ url }) => location.pathname.startsWith(url));
+  let pages = extractPages(Content);
+  const sidebarPages = _strip(
+    section
+      ? section.children
+      : Content.children.filter(
+          (item) => item.type !== 'directory' && item.url !== '/'
+        )
+  );
+  return (
+    <MDXProvider
+      components={{
+        Badge: function Comp(props) {
           return <Badge {...props} />;
-        }
-      }}>
-        <div className="site">
-          <DocumentTitle title={getPageTitle(Content, location.pathname)} />
-          <div className="site__header">
-            <NotificationBar />
-            <Navigation
+        },
+      }}
+    >
+      <div className="site">
+        <DocumentTitle title={getPageTitle(Content, location.pathname)} />
+        <div className="site__header">
+          <NotificationBar />
+          <Navigation
             pathname={location.pathname}
-            toggleSidebar={this._toggleSidebar}
+            toggleSidebar={_toggleSidebar}
             links={[
               {
                 content: 'Documentation',
                 url: '/concepts/',
-                isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
-                children: this._strip(sections.filter(item => item.name !== 'contribute'))
+                isActive: (url) =>
+                  /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
+                    url
+                  ),
+                children: _strip(
+                  sections.filter((item) => item.name !== 'contribute')
+                ),
               },
               { content: 'Contribute', url: '/contribute/' },
               { content: 'Vote', url: '/vote/' },
-              { content: 'Blog', url: '/blog/' }
+              { content: 'Blog', url: '/blog/' },
             ]}
-            />
-          </div>
-
-          {isClient ? <SidebarMobile
-            isOpen={mobileSidebarOpen}
-            sections={this._strip(Content.children)}
-            toggle={this._toggleSidebar} /> : null}
-
-          <Switch>
-            <Route exact strict path="/:url*" render={props => <Redirect to={`${props.location.pathname}/`}/>} />
-            <Route path="/" exact component={Splash} />
-            <Route
-              render={() => (
-                <Container className="site__content">
-                  <Switch>
-                    <Route path="/vote" component={Vote} />
-                    <Route path="/organization" component={Organization} />
-                    <Route path="/app-shell" component={() => <Fragment />} />
-                    {pages.map(page => (
-                      <Route
-                        key={page.url}
-                        exact={true}
-                        path={page.url}
-                        render={() => {
-                          let path = page.path.replace('src/content/', '');
-                          let content = this.props.import(path);
-                          const { previous, next } = getAdjacentPages(
-                            sidebarPages,
-                            page,
-                            'url'
-                          );
-                          return (
-                            <Fragment>
-                              <Sponsors />
-                              <Sidebar
-                                className="site__sidebar"
-                                currentPage={location.pathname}
-                                pages={sidebarPages}
-                              />
-                              <Page
-                                {...page}
-                                content={content}
-                                previous={previous}
-                                next={next}
-                              />
-                            </Fragment>
-                          );
-                        }}
-                      />
-                    ))}
-                    <Route render={() => <PageNotFound />} />
-                  </Switch>
-                </Container>
-              )}
-            />
-          </Switch>
-          <Footer />
-          {
-            this.state.showUpdateBox ? <NotifyBox skip={this.skip} /> : undefined
-          }
+          />
         </div>
-      </MDXProvider>
-    );
-  }
 
-  /**
-   * Toggle the mobile sidebar
-   *
-   * @param {boolean} open - Indicates whether the menu should be open or closed
-   */
-  _toggleSidebar = (open = !this.state.mobileSidebarOpen) => {
-    this.setState({
-      mobileSidebarOpen: open
-    });
-  };
+        {isClient ? (
+          <SidebarMobile
+            isOpen={mobileSidebarOpen}
+            sections={_strip(Content.children)}
+            toggle={_toggleSidebar}
+          />
+        ) : null}
 
-  /**
-   * Strip any non-applicable properties
-   *
-   * @param  {array} array - ...
-   * @return {array}       - ...
-   */
-  _strip = array => {
-    let anchorTitleIndex = array.findIndex(item => item.name.toLowerCase() === 'index.md');
-
-    if (anchorTitleIndex !== -1) {
-      array.unshift(array[anchorTitleIndex]);
-
-      array.splice(anchorTitleIndex + 1, 1);
-    }
-
-    return array.map(({ title, name, url, group, sort, anchors, children }) => ({
-      title: title || name,
-      content: title || name,
-      url,
-      group,
-      sort,
-      anchors,
-      children: children ? this._strip(children) : []
-    })).filter(page => (page.title !== 'printable.md' && !page.content.includes('Printable')));
-  };
+        <Switch>
+          <Route
+            exact
+            strict
+            path="/:url*"
+            render={(props) => <Redirect to={`${props.location.pathname}/`} />}
+          />
+          <Route path="/" exact component={Splash} />
+          <Route
+            render={() => (
+              <Container className="site__content">
+                <Switch>
+                  <Route path="/vote" component={Vote} />
+                  <Route path="/organization" component={Organization} />
+                  <Route path="/app-shell" component={() => <Fragment />} />
+                  {pages.map((page) => (
+                    <Route
+                      key={page.url}
+                      exact={true}
+                      path={page.url}
+                      render={() => {
+                        let path = page.path.replace('src/content/', '');
+                        let content = props.import(path);
+                        const { previous, next } = getAdjacentPages(
+                          sidebarPages,
+                          page,
+                          'url'
+                        );
+                        return (
+                          <Fragment>
+                            <Sponsors />
+                            <Sidebar
+                              className="site__sidebar"
+                              currentPage={location.pathname}
+                              pages={sidebarPages}
+                            />
+                            <Page
+                              {...page}
+                              content={content}
+                              previous={previous}
+                              next={next}
+                            />
+                          </Fragment>
+                        );
+                      }}
+                    />
+                  ))}
+                  <Route render={() => <PageNotFound />} />
+                </Switch>
+              </Container>
+            )}
+          />
+        </Switch>
+        <Footer />
+        {showUpdateBox ? <NotifyBox skip={skip} /> : undefined}
+      </div>
+    </MDXProvider>
+  );
 }
 
 export default Site;
