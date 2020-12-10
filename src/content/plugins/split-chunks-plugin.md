@@ -158,6 +158,12 @@ Sets the size types which are used when a number is used for sizes.
 
 Minimum number of chunks that must share a module before splitting.
 
+### `splitChunks.hidePathInfo`
+
+`boolean = true`
+
+Prevents exposing path info when creating names for parts splitted by maxSize.
+
 ### `splitChunks.minSize`
 
 `number = 20000`
