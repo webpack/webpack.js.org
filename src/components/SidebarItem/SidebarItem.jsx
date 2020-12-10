@@ -22,9 +22,8 @@ export default class SidebarItem extends Component {
   renderAnchors(anchors) {
     return (
       <ul className={`${block}__anchors`}>
-<<<<<<< HEAD
         {
-          anchors.map((anchor, i) => {
+          anchors.map((anchor) => {
             anchor = this._handleAnchor(anchor);
             return (<li
               key={this._generateAnchorURL(anchor)}
@@ -37,18 +36,6 @@ export default class SidebarItem extends Component {
             );
           })
         }
-=======
-        {anchors.map((anchor) => (
-          <li
-            key={this._generateAnchorURL(anchor)}
-            className={`${block}__anchor`}
-            title={anchor.title}
-          >
-            <a href={this._generateAnchorURL(anchor)}>{anchor.title}</a>
-            {anchor.children && this.renderAnchors(anchor.children)}
-          </li>
-        ))}
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
       </ul>
     );
   }

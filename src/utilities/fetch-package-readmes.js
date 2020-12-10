@@ -52,25 +52,11 @@ async function main() {
         repo: htmlUrl,
       });
 
-<<<<<<< HEAD
-      request(url)
-        .then(async (content) => {
-          const body = processReadme(content, { source: url });
-
-          await writeFile(fileName, headmatter + body);
-
-          console.log('Generated:', path.relative(cwd, fileName));
-        })
-        .catch((err) => {
-          throw err;
-        });
-=======
       const response = await fetch(url);
       const content = await response.text();
       const body = processReadme(content, { source: url });
       await writeFile(fileName, headmatter + body);
       console.log('Generated:', path.relative(cwd, fileName));
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
     }
   }
 }
