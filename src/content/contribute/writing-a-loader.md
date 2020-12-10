@@ -60,7 +60,7 @@ module.exports = {
 };
 ```
 
-Last but not least, if you've already created a separate repository and package for your loader, you could [`npm link`](https://docs.npmjs.com/cli/link) it to the project in which you'd like to test it out.
+By the way, if you've already created a separate repository and package for your loader, you could [`npm link`](https://docs.npmjs.com/cli/link) it to the project in which you'd like to test it out.
 
 
 T> You can use [`webpack-defaults` package](https://github.com/webpack-contrib/webpack-defaults) to generate boilerplate code necessary to start writing your loader.
@@ -152,7 +152,7 @@ __loader.js__
 
 ```js
 import { getOptions } from 'loader-utils';
-import validateOptions from 'schema-utils';
+import { validate } from 'schema-utils';
 
 const schema = {
   type: 'object',
@@ -166,7 +166,10 @@ const schema = {
 export default function(source) {
   const options = getOptions(this);
 
-  validateOptions(schema, options, 'Example Loader');
+  validate(schema, options, {
+    name: 'Example Loader',
+    baseDataPath: 'options'
+  });
 
   // Apply some transformations to the source...
 
@@ -370,9 +373,9 @@ import compiler from './compiler.js';
 
 test('Inserts name and outputs JavaScript', async () => {
   const stats = await compiler('example.txt', { name: 'Alice' });
-  const output = stats.toJson().modules[0].source;
+  const output = stats.toJson({source: true}).modules[0].source;
 
-  expect(output).toBe('export default "Hey Alice!\"');
+  expect(output).toBe('export default "Hey Alice!\\n"');
 });
 ```
 

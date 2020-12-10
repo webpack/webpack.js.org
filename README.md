@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://github.com/webpack/webpack">
-    <img width="200" height="200" src="https://webpack.js.org/assets/icon-square-big.svg">
+    <img width="200" height="200" src="https://webpack.js.org/assets/icon-square-big.svg" />
   </a>
   <h1>webpack.js.org</h1>
 
@@ -59,8 +59,8 @@ _Vercel_ has given us a Pro account.
 [![VercelLogo][vercel]][vercel-url]
 
 [webpack5-milestone-url]: https://github.com/webpack/webpack.js.org/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22webpack+5%22
-[build-status]: https://secure.travis-ci.org/webpack/webpack.js.org.svg
-[build-status-url]: http://travis-ci.org/webpack/webpack.js.org
+[build-status]: https://github.com/webpack/webpack.js.org/workflows/Deploy/badge.svg
+[build-status-url]: https://github.com/webpack/webpack.js.org/actions
 [browserstack]: ./browserstack-logo.png
 [vercel]: ./src/assets/powered-by-vercel.svg
 [browserstack-url]: http://browserstack.com/

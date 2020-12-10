@@ -1,5 +1,3 @@
-import React from 'react';
-
 const printScript = `
 window.matchMedia('print').addListener(function(mql) {
   if (!mql.matches) {

@@ -3,7 +3,6 @@ const { excludedLoaders, excludedPlugins } = require('./constants');
 
 const beginsWithDocsDomainRegex = /^(?:https?:)\/\/webpack\.js\.org/;
 const inlineLinkRegex = /\[[^\]]*\]\(([^)]+)\)/g;
-const externalLinkRegex = /^[ \t]*\[[^\]]+\]:[ \t]+([^ \n]+)/gm;
 
 const fragmentLinkMap = {
   '/api/module-variables/#__webpack_public_path__-webpack-specific-': '/api/module-variables/#__webpack_public_path__-webpack-specific',
@@ -92,7 +91,6 @@ module.exports = function processREADME(body, options = {}) {
     // EXAMPLE: [Contributing](CONTRIBUTING.md)
     // EXAMPLE: [line-identifier]: https://webpack.js.org/loaders/
     .replace(inlineLinkRegex, linkFixerFactory(options.source))
-    .replace(externalLinkRegex, linkFixerFactory(options.source))
     // Replace any <h2> with `##`
     .replace(/<h2[^>]*>/g, '## ')
     .replace(/<\/h2>/g, '')

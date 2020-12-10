@@ -1,7 +1,9 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const h = require('hastscript');
 const mdPlugins = [
+  require('remark-gfm'),
   require('remark-slug'),
   [
     require('remark-custom-blockquotes'),
@@ -16,7 +18,12 @@ const mdPlugins = [
   [
     require('remark-autolink-headings'),
     {
-      behavior: 'append'
+      behavior: 'append',
+      content() {
+        return [
+          h('span.header-link')
+        ];
+      }
     }
   ],
   [
@@ -34,7 +41,7 @@ const mdPlugins = [
   require('remark-refractor')
 ];
 
-module.exports = (env = {}) => ({
+module.exports = () => ({
   context: path.resolve(__dirname, './src'),
   cache: {
     type: 'filesystem',
@@ -80,17 +87,6 @@ module.exports = (env = {}) => ({
         ]
       },
       {
-        test: /\.font.js$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: 'fontgen-loader',
-            options: { embed: true }
-          }
-        ]
-      },
-      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: [
@@ -101,7 +97,8 @@ module.exports = (env = {}) => ({
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader'
+          'css-loader',
+          'postcss-loader'
         ]
       },
       {
@@ -109,16 +106,7 @@ module.exports = (env = {}) => ({
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: () => [
-                  require('autoprefixer')
-                ],
-              }
-            }
-          },
+          'postcss-loader',
           {
             loader: 'sass-loader',
             options: {
@@ -131,18 +119,30 @@ module.exports = (env = {}) => ({
       },
       {
         test: /\.woff2?$/,
-        use: {
-          // TODO use type: asset/resource when mini-css bug regarding asset modules is fixed
-          loader: 'file-loader',
-          options: {
-            outputPath: 'font',
-            esModule: false
-          }
+        type: 'asset/resource',
+        generator: {
+          filename: 'font/[name].[hash][ext][query]'
         }
       },
       {
-        test: /\.(jpg|jpeg|png|svg|ico)$/i,
-        type: 'asset/resource'
+        test: /\.(jpg|jpeg|png|ico)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: '[name].[hash][ext][query]'
+        }
+      },
+      {
+        test: /\.svg$/i,
+        type: 'asset/resource',
+        exclude: [path.resolve(__dirname, 'src/styles/icons')],
+        generator: {
+          filename: '[name].[hash][ext][query]'
+        }
+      },
+      {
+        test: /\.svg$/i,
+        use: ['@svgr/webpack'],
+        include: [path.resolve(__dirname, 'src/styles/icons')]
       }
     ]
   },

@@ -16,6 +16,7 @@ contributors:
   - pixel-ray
   - snitin315
   - u01jmg3
+  - grrizzly
 ---
 
 `object` `string`
@@ -23,8 +24,6 @@ contributors:
 The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
 
 T> For webpack-dev-server, this property needs to be in the [`devServer` configuration object](/configuration/dev-server/#devserverstats-).
-
-T> For [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware), this property needs to be in the webpack-dev-middleware's `options` object.
 
 W> This option does not have any effect when using the Node.js API.
 
@@ -957,7 +956,7 @@ module.exports = {
 
 `boolean = true`
 
-Display children of the chunk groups (e. g. prefetched, preloaded chunks and assets).
+Display children of the chunk groups (e.g. prefetched, preloaded chunks and assets).
 
 ```javascript
 module.exports = {

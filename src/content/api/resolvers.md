@@ -4,6 +4,7 @@ group: Plugins
 sort: 13
 contributors:
   - EugeneHlushko
+  - chenxsan
 ---
 
 Resolvers are created using the `enhanced-resolve` package. The `Resolver`
@@ -28,17 +29,17 @@ Depending on need, any one of these built-in resolvers, that are used by the `co
 can be customized via plugins:
 
 ``` js
-compiler.resolverFactory.plugin('resolver [type]', resolver => {
-  resolver.hooks.resolve.tapAsync('MyPlugin', params => {
-    // ...
+compiler.resolverFactory.hooks.resolver.for('[type]').tap('name', resolver => {
+  // you can tap into resolver.hooks now
+  resolver.hooks.result.tap('MyPlugin', result => {
+    return result;
   });
 });
 ```
 
 Where `[type]` is one of the three resolvers mentioned above.
 
-See the [`enhanced-resolve` documentation](https://github.com/webpack/enhanced-resolve) for a full list of hooks and their
-description.
+See the [`enhanced-resolve` documentation](https://github.com/webpack/enhanced-resolve) for a full list of hooks and their description.
 
 
 ## Configuration Options

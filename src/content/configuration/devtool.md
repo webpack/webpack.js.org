@@ -9,6 +9,7 @@ contributors:
   - madhavarshney
   - wizardofhogwarts
   - anikethsaha
+  - snitin315
 related:
   - title: Enabling Source Maps
     url: https://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/
@@ -23,7 +24,7 @@ Use the [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin) for a mo
 
 ## `devtool`
 
-`string` `false`
+`string = 'eval'` `false`
 
 Choose a style of [source mapping](http://blog.teamtreehouse.com/introduction-source-maps) to enhance the debugging process. These values can affect build and rebuild speed dramatically.
 

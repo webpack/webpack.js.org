@@ -11,7 +11,7 @@ related:
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
 ---
 
-Asset Modules is a type of module that allows to use asset files (fonts, icons, etc) without configuring additional loaders.
+Asset Modules is a type of module that allows one to use asset files (fonts, icons, etc) without configuring additional loaders.
 
 Prior to webpack 5 it was common to use:
 
@@ -25,6 +25,56 @@ Asset Modules type replaces all of these loaders by adding 4 new module types:
 - `asset/inline` exports a data URI of the asset. Previously achievable by using `url-loader`.
 - `asset/source` exports the source code of the asset. Previously achievable by using `raw-loader`.
 - `asset` automatically chooses between exporting a data URI and emitting a separate file. Previously achievable by using `url-loader` with asset size limit.
+
+When using the old assets loaders (i.e. `file-loader`/`url-loader`/`raw-loader`) along with Asset Module in webpack 5, you might want to stop Asset Module from processing your assets again as that would result in asset duplication. This can be done by setting asset's module type to `'javascript/auto'`.
+
+__webpack.config.js__
+
+``` diff
+module.exports = {
+  module: {
+   rules: [
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            }
+          },
+        ],
++       type: 'javascript/auto'
+      },
+   ]
+  },
+}
+```
+
+To exclude assets that came from new URL calls from the asset loaders add `dependency: { not: ['url'] }` to the loader configuration.
+
+__webpack.config.js__
+
+``` diff
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(png|jpg|gif)$/i,
++       dependency: { not: ['url'] }, 
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
+    ],
+  }
+}
+```
 
 ## Resource assets
 
@@ -163,7 +213,7 @@ __src/index.js__
 
 ```diff
 - import mainImage from './images/main.png';
-+ import metroMap from './images/matro.svg';
++ import metroMap from './images/metro.svg';
 
 - img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 + block.style.background = `url(${metroMap})`; // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)
@@ -250,7 +300,7 @@ Hello world
 __src/index.js__
 
 ```diff
-- import metroMap from './images/matro.svg';
+- import metroMap from './images/metro.svg';
 + import exampleText from './example.txt';
 
 - block.style.background = `url(${metroMap}); // url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDo...vc3ZnPgo=)

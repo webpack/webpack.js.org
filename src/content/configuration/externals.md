@@ -16,6 +16,7 @@ contributors:
   - EugeneHlushko
   - chenxsan
   - pranshuchittora
+  - kinetifex
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
@@ -146,14 +147,15 @@ This syntax is used to describe all the possible ways that an external library c
 
 ### function
 
-`function (context, request, callback)`
+`function ({ context, request }, callback)`
 
 It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides options to whitelist packages.
 
-The function receives three arguments:
+The function receives two arguments:
 
-- `context` (`string`): The directory of the file which contains the import.
-- `request` (`string`): The import path being requested.
+- `ctx` (`object`): Object containing details of the file.
+    - `ctx.context` (`string`): The directory of the file which contains the import.
+    - `ctx.request` (`string`): The import path being requested.
 - `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
 
 The callback function takes three arguments:
@@ -170,7 +172,7 @@ __webpack.config.js__
 module.exports = {
   //...
   externals: [
-    function(context, request, callback) {
+    function({ context, request }, callback) {
       if (/^yourregex$/.test(request)){
         // Externalize to a commonjs module using the request path
         return callback(null, 'commonjs ' + request);
@@ -190,7 +192,7 @@ __webpack.config.js__
 ```javascript
 module.exports = {
   externals: [
-    function(context, request, callback) {
+    function(ctx, callback) {
       // The external is a `commonjs2` module located in `@scope/library`
       callback(null, '@scope/library', 'commonjs2');
     }
@@ -203,7 +205,7 @@ __webpack.config.js__
 ```javascript
 module.exports = {
   externals: [
-    function(context, request, callback) {
+    function(ctx, callback) {
       // The external is a global variable called `nameOfGlobal`.
       callback(null, 'nameOfGlobal');
     }
@@ -216,7 +218,7 @@ __webpack.config.js__
 ```javascript
 module.exports = {
   externals: [
-    function(context, request, callback) {
+    function(ctx, callback) {
       // The external is a named export in the `@scope/library` module.
       callback(null, ['@scope/library', 'namedexport'], 'commonjs');
     }
@@ -229,7 +231,7 @@ __webpack.config.js__
 ```javascript
 module.exports = {
   externals: [
-    function(context, request, callback) {
+    function(ctx, callback) {
       // The external is a UMD module
       callback(null, {
         root: 'componentsGlobal',
@@ -280,7 +282,7 @@ module.exports = {
       subtract: ['./math', 'subtract']
     },
     // Function
-    function(context, request, callback) {
+    function({ context, request }, callback) {
       if (/^yourregex$/.test(request)){
         return callback(null, 'commonjs ' + request);
       }

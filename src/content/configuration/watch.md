@@ -70,9 +70,9 @@ module.exports = {
 
 ## `watchOptions.ignored`
 
-`RegExp` [`anymatch`](https://github.com/micromatch/anymatch)
+`RegExp` `string` `[string]`
 
-For some systems, watching many file systems can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules`:
+For some systems, watching many files can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules` using a regular expression:
 
 __webpack.config.js__
 
@@ -85,7 +85,20 @@ module.exports = {
 };
 ```
 
-It is also possible to have and use multiple [anymatch](https://github.com/micromatch/anymatch) patterns:
+Alternatively, a glob pattern may be used:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  watchOptions: {
+    ignored: 'node_modules/**'
+  }
+};
+```
+
+It is also possible to use multiple glob patterns:
 
 __webpack.config.js__
 
@@ -119,17 +132,6 @@ module.exports = {
 ```
 
 T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
-
-
-## `info-verbosity`
-
-`string = 'info': 'none' | 'info' | 'verbose'`
-
-Controls verbosity of the lifecycle messaging, e.g. the `Started watching files...` log. Setting `info-verbosity` to `verbose` will also message to console at the beginning and the end of incremental build.
-
-```bash
-webpack --watch --info-verbosity verbose
-```
 
 
 ## Troubleshooting
