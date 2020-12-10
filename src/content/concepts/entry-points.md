@@ -131,11 +131,11 @@ T> As a rule of thumb: Use exactly one entry point for each HTML document.
 
 An object with entry point description. You can specify the following properties.
 
-- `dependOn` :  The entrypoints that the current entrypoint depend on.They must be loaded when this entrypoint is loaded.
+- `dependOn` :  The entrypoints that the current entrypoint depends on.They must be loaded before this entrypoint is loaded.
 - `filename` :  Specifies the name of each output file on disk.
 - `import`   :  Module(s) that are loaded upon startup.
 - `library`  :  Options for library.
-- `runtime`  :  The name of the runtime chunk. If set, a runtime chunk with this name is created else an existing entrypoint is used as runtime.
+- `runtime`  :  The name of the runtime chunk. If set, a runtime chunk with this name is created otherwise an existing entrypoint is used as runtime.
 
 __webpack.config.js__
 
@@ -143,14 +143,14 @@ __webpack.config.js__
 module.exports = {
   entry: {
     b2: {
-      dependOn: "depedningfile.js",
+      dependOn: "dependingfile.js",
       import: "./src/app.js"
     }
   }
 };
 ```
 
-W> `runtime` and `dependOn` can not be specified both on a single entry, so the following config is invalid and would throw an error:
+`runtime` and `dependOn` should not be used together on a single entry, so the following config is invalid and would throw an error:
 
 __webpack.config.js__
 
@@ -167,7 +167,7 @@ module.exports = {
 };
 ```
 
-W> Make sure `runtime` must not point to an existing entrypoint name for example the below config would throw an error:
+Make sure `runtime` must not point to an existing entrypoint name, for example the below config would throw an error:
 
 ```javascript
 module.exports = {
@@ -181,7 +181,7 @@ module.exports = {
 };
 ```
 
-W> Also `dependOn` must not be circular, follwing example again would throuw an error:
+Also `dependOn` must not be circular, the following example again would throw an error:
 
 ```javascript
 module.exports = {
