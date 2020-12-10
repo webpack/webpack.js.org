@@ -146,6 +146,12 @@ Maximum number of parallel requests when on-demand loading.
 
 Maximum number of parallel requests at an entry point.
 
+### `splitChunks.defaultSizeTypes`
+
+`[string] = 'javascript'`
+
+Sets the size types which are used when a number is used for sizes.
+
 ### `splitChunks.minChunks`
 
 `number = 1`
