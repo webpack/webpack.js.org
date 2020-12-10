@@ -14,6 +14,7 @@ contributors:
   - niravasher
   - Neob91
   - chenxsan
+  - u01jmg3
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -89,7 +90,7 @@ module.exports = {
 
 `string: 'memory' | 'filesystem'`
 
-Sets the `cache` type to either in memory or on the file system. The `memory` option is very straightforward, it tells webpack to store cache in memory and doesn't allow additional configuration:
+Sets the `cache` type to either in memory or on the file system. The `memory` option is straightforward, it tells webpack to store cache in memory and doesn't allow additional configuration:
 
 __webpack.config.js__
 
@@ -173,6 +174,8 @@ module.exports = {
 ### `cache.managedPaths`
 
 `[string] = ['./node_modules']`
+
+W> Moved to [snapshot.managedPaths](#managedpaths)
 
 `cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
 
@@ -279,7 +282,7 @@ module.exports = {
 };
 ```
 
-W> `cache.idleTimeout` is only available when [`cache.store`](#cachestore) is set to either `'pack'` or `'idle'`
+W> `cache.idleTimeout` is only available when [`cache.store`](#cachestore) is set to `'pack'`
 
 ### `cache.idleTimeoutForInitialStore`
 
@@ -298,16 +301,68 @@ module.exports = {
 };
 ```
 
-W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#cachestore) is set to either `'pack'` or `'idle'`
+W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#cachestore) is set to `'pack'`
+
+## `ignoreWarnings`
+
+`RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`
+
+Tells webpack to ignore specific warnings. This can be done with a `RegExp`, a custom `function` to select warnings based on the raw warning instance which is getting `WebpackError` and `Compilation` as arguments and returns a `boolean`, an `object` with the following properties:
+
+- `file` : A RegExp to select the origin file for the warning.
+- `message` : A RegExp to select the warning message.
+- `module` : A RegExp to select the origin module for the warning.
+
+`ignoreWarnings` can be an `array` of any of the above.
+
+```javascript
+module.exports = {
+  //...
+  ignoreWarnings: [
+    {
+      module: /module2\.js\?[34]/ // A RegExp
+    },
+    {
+      module: /[13]/,
+      message: /homepage/
+    },
+    (warning) => true
+  ]
+};
+```
 
 ## `loader`
 
 `object`
 
-Expose custom values into the loader context.
+Expose custom values into the [loader context](/api/loaders/#the-loader-context).
 
-?> Add an example...
+For example, you can define a new variable in the loader context:
 
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  // ...
+  loader: {
+    answer: 42
+  }
+};
+```
+
+Then use `this.answer` to get its value in the loader:
+
+__custom-loader.js__
+
+```javascript
+module.exports = function (source) {
+  // ...
+  console.log(this.answer); // will log `42` here
+  return source;
+};
+```
+
+T> You can override properties in the loader context as webpack copies all properties that are defined in the `loader` to the loader context.
 
 ## `parallelism`
 
@@ -446,3 +501,90 @@ module.exports = {
   }
 };
 ```
+
+## `snapshot`
+
+`object`
+
+`snapshot` options decide how the file system snapshots are created and invalidated.
+
+__webpack.config.js__
+
+```javascript
+const path = require('path');
+module.exports = {
+  // ...
+  snapshot: {
+    managedPaths: [path.resolve(__dirname, '../node_modules')],
+    immutablePaths: [],
+    buildDependencies: {
+      hash: true,
+      timestamp: true
+    },
+    module: {
+      timestamp: true
+    },
+    resolve: {
+      timestamp: true
+    },
+    resolveBuildDependencies: {
+      hash: true,
+      timestamp: true
+    }
+  }
+};
+```
+
+### `managedPaths`
+
+`[string]`
+
+An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
+
+### `immutablePaths`
+
+`[string]`
+
+An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
+
+### `buildDependencies`
+
+`object = { hash boolean = true, timestamp boolean = true }`
+
+Snapshots for build dependencies when using the persistent cache.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
+
+Both `hash` and `timestamp` are optional.
+
+- `{ hash: true }`: Good for CI caching with a fresh checkout which doesn't keep timestamps and uses hashes.
+- `{ timestamp: true }`: Good for local development caching.
+- `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps are the same, which leads to a small performance hit for the initial build.
+
+### `module`
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+Snapshots for building modules.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
+
+### `resolve`
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+Snapshots for resolving of requests.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
+
+### `resolveBuildDependencies`
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+Snapshots for resolving of build dependencies when using the persistent cache.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.

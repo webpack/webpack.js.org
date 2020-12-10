@@ -1,8 +1,8 @@
 const url = require('url');
+const { excludedLoaders, excludedPlugins } = require('./constants');
 
 const beginsWithDocsDomainRegex = /^(?:https?:)\/\/webpack\.js\.org/;
 const inlineLinkRegex = /\[[^\]]*\]\(([^)]+)\)/g;
-const externalLinkRegex = /^[ \t]*\[[^\]]+\]:[ \t]+([^ \n]+)/gm;
 
 const fragmentLinkMap = {
   '/api/module-variables/#__webpack_public_path__-webpack-specific-': '/api/module-variables/#__webpack_public_path__-webpack-specific',
@@ -66,8 +66,18 @@ function linkFixerFactory(sourceUrl) {
   };
 }
 
+function getMatches(string, regex) {
+  const matches = [];
+  let match;
+  // eslint-disable-next-line
+  while (match = regex.exec(string)) {
+    matches.push(match);
+  }
+  return matches;
+}
+
 module.exports = function processREADME(body, options = {}) {
-  return body
+  let processingString = body
     .replace(/[^]*?<div align="center">([^]*?)<\/div>/, (match, content) => {
       let parsed = content.match(/<p>([^]*?)<\/?p>/);
       return parsed ? parsed[1] : '';
@@ -81,13 +91,28 @@ module.exports = function processREADME(body, options = {}) {
     // EXAMPLE: [Contributing](CONTRIBUTING.md)
     // EXAMPLE: [line-identifier]: https://webpack.js.org/loaders/
     .replace(inlineLinkRegex, linkFixerFactory(options.source))
-    .replace(externalLinkRegex, linkFixerFactory(options.source))
-    // Modify links to keep them within the site
-    .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g, '/loaders/$2/$3')
-    .replace(/https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g, '/plugins/$2/$3')
     // Replace any <h2> with `##`
     .replace(/<h2[^>]*>/g, '## ')
     .replace(/<\/h2>/g, '')
     // Drop any comments
     .replace(/<!--[\s\S]*?-->/g, '');
+
+    // find the laoders links
+    const loaderMatches = getMatches(processingString, /https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g);
+    // dont make relative links for excluded loaders
+    loaderMatches.forEach((match) => {
+      if (!excludedLoaders.includes(`${match[1]}/${match[2]}`)) {
+        processingString = processingString.replace(match[0], `/loaders/${match[2]}/)`);
+      }
+    });
+
+    const pluginMatches = getMatches(processingString, /https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g);
+    // dont make relative links for excluded loaders
+    pluginMatches.forEach((match) => {
+      if (!excludedPlugins.includes(`${match[1]}/${match[2]}`)) {
+        processingString = processingString.replace(match[0], `/plugins/${match[2]}/)`);
+      }
+    });
+
+    return processingString;
 };

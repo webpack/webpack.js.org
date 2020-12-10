@@ -16,9 +16,8 @@ contributors:
   - EugeneHlushko
   - AnayaDesign
   - torifat
+  - rahul3v
 related:
-  - title: "webpack 4 beta — try it today!"
-    url: https://medium.com/webpack/webpack-4-beta-try-it-today-6b1d27d7d7e2#9a67
   - title: Debugging Optimization Bailouts
     url: https://webpack.js.org/plugins/module-concatenation-plugin/#debugging-optimization-bailouts
   - title: Issue 6074 - Add support for more complex selectors for sideEffects
@@ -159,7 +158,7 @@ If your code did have some side effects though, an array can be provided instead
 }
 ```
 
-The array accepts relative, absolute, and glob patterns to the relevant files. It uses [micromatch](https://github.com/micromatch/micromatch#matching-features) under the hood.
+The array accepts simple glob patterns to the relevant files. It uses [glob-to-regexp](https://github.com/fitzgen/glob-to-regexp) under the hood (Supports: `*`, `**`, `{a,b}`, `[a-z]`). Patterns like `*.css`, which do not include a `/`, will be treated like `**/*.css`.
 
 T> Note that any imported file is subject to tree shaking. This means if you use something like `css-loader` in your project and import a CSS file, it needs to be added to the side effect list so it will not be unintentionally dropped in production mode:
 
@@ -181,7 +180,7 @@ The [`sideEffects`](/configuration/optimization/#optimizationsideeffects) and [`
 
 __`sideEffects` is much more effective__ since it allows to skip whole modules/files and the complete subtree.
 
-`usedExports` relies on [terser](https://github.com/terser-js/terser) to detect side effects in statements. It is a difficult task in JavaScript and not as effective as straighforward `sideEffects` flag. It also can't skip subtree/dependencies since the spec says that side effects need to be evaluated. While exporting function works fine, React's Higher Order Components (HOC) are problematic in this regard.
+`usedExports` relies on [terser](https://github.com/terser-js/terser) to detect side effects in statements. It is a difficult task in JavaScript and not as effective as straightforward `sideEffects` flag. It also can't skip subtree/dependencies since the spec says that side effects need to be evaluated. While exporting function works fine, React's Higher Order Components (HOC) are problematic in this regard.
 
 Let's make an example:
 
@@ -242,7 +241,9 @@ Terser actually tries to figure it out, but it doesn't know for sure in many cas
 
 But we can help terser by using the `/*#__PURE__*/` annotation. It flags a statement as side effect free. So a simple change would make it possible to tree-shake the code:
 
-`var Button$1 = /*#__PURE__*/ withAppProvider()(Button);`
+```javascript
+var Button$1 = /*#__PURE__*/ withAppProvider()(Button);
+```
 
 This would allow to remove this piece of code. But there are still questions with the imports which need to be included/evaluated because they could contain side effects.
 

@@ -390,7 +390,7 @@ loadModule(request: string, callback: function(err, source, sourceMap, module))
 
 Resolves the given request to a module, applies all configured loaders and calls back with the generated source, the sourceMap and the module instance (usually an instance of [`NormalModule`](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js)). Use this function if you need to know the source code of another module to generate the result.
 
-`this.loadModule` in a loader context uses CommonJS resolve rules by default. Use `this.getResolve` with an appropriate `dependencyType`, e. g. `'esm'`, `'commonjs'` or a custom one before using a different semantic.
+`this.loadModule` in a loader context uses CommonJS resolve rules by default. Use `this.getResolve` with an appropriate `dependencyType`, e.g. `'esm'`, `'commonjs'` or a custom one before using a different semantic.
 
 
 ### `this.resolve`
@@ -465,15 +465,6 @@ Possible values: `'production'`, `'development'`, `'none'`
 ## Deprecated context properties
 
 W> The usage of these properties is highly discouraged since we are planning to remove them from the context. They are still listed here for documentation purposes.
-
-
-### `this.exec`
-
-``` typescript
-exec(code: string, filename: string)
-```
-
-Execute some code fragment like a module. See [this comment](https://github.com/webpack/webpack.js.org/issues/1268#issuecomment-313513988) for a replacement method if needed.
 
 
 ### `this.value`
