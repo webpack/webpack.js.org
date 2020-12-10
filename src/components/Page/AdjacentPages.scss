@@ -1,0 +1,17 @@
+.adjacent-links {
+  display: flex;
+  padding: 30px 10px;
+  justify-content: space-between;
+  &__prev {
+    margin-right: auto;
+  }
+  &__next {
+    margin-left: auto;
+  }
+  &__link {
+    font-size: 1.125rem;
+  }
+  &__label--next {
+    text-align: right;
+  }
+}

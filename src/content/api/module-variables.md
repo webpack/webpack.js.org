@@ -10,6 +10,9 @@ contributors:
   - byzyk
   - EugeneHlushko
   - wizardofhogwarts
+  - anikethsaha
+  - chenxsan
+
 related:
   - title: CommonJS
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -71,32 +74,48 @@ exports.aFunction = function doSomething() {
 
 See [node.js global](https://nodejs.org/api/globals.html#globals_global).
 
-
-### `process` (NodeJS)
-
-See [node.js process](https://nodejs.org/api/process.html).
+For compatibility reasons webpack polyfills the `global` variable by default.
 
 
 ### `__dirname` (NodeJS)
 
-Depending on the config option `node.__dirname`:
+Depending on the configuration option `node.__dirname`:
 
 - `false`: Not defined
-- `mock`: equal "/"
+- `mock`: equal to `'/'`
 - `true`: [node.js __dirname](https://nodejs.org/api/globals.html#globals_dirname)
 
-If used inside an expression that is parsed by the Parser, the config option is treated as `true`.
+If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
 
+### `import.meta.url`
+
+Returns the absolute `file:` URL of the module.
+
+__src/index.js__
+
+```javascript
+console.log(import.meta.url); // output something like `file:///path/to/your/project/src/index.js`
+```
+
+### `import.meta.webpack`
+
+Returns the webpack version.
+
+__src/index.js__
+
+```javascript
+console.log(import.meta.webpack); // output `5` for webpack 5
+```
 
 ### `__filename` (NodeJS)
 
-Depending on the config option `node.__filename`:
+Depending on the configuration option `node.__filename`:
 
 - `false`: Not defined
-- `mock`: equal "/index.js"
+- `mock`: equal to `'/index.js'`
 - `true`: [node.js __filename](https://nodejs.org/api/globals.html#globals_filename)
 
-If used inside an expression that is parsed by the Parser, the config option is treated as `true`.
+If used inside an expression that is parsed by the Parser, the configuration option is treated as `true`.
 
 
 ### `__resourceQuery` (webpack-specific)
@@ -116,7 +135,7 @@ __resourceQuery === '?test';
 
 ### `__webpack_public_path__` (webpack-specific)
 
-Equals the config option's `output.publicPath`.
+Equals the configuration option's `output.publicPath`.
 
 
 ### `__webpack_require__` (webpack-specific)
@@ -147,6 +166,30 @@ This variable is only available with the `HotModuleReplacementPlugin` or the `Ex
 Generates a `require` function that is not parsed by webpack. Can be used to do cool stuff with a global require function if available.
 
 
+### `__webpack_exports_info__` (webpack-specific)
+
+In modules, `__webpack_exports_info__` is available to allow exports introspection:
+
+- `__webpack_exports_info__` is always `true`
+
+- `__webpack_exports_info__.<exportName>.used` is `false` when the export is known to be unused, `true` otherwise
+
+- `__webpack_exports_info__.<exportName>.useInfo` is
+
+    - `false` when the export is known to be unused
+    - `true` when the export is known to be used
+    - `null` when the export usage could depend on runtime conditions
+    - `undefined` when no info is available
+
+- `__webpack_exports_info__.<exportName>.provideInfo` is
+
+    - `false` when the export is known to be not provided
+    - `true` when the export is known to be provided
+    - `null` when the export provision could depend on runtime conditions
+    - `undefined` when no info is available
+
+- Accessing the info from nested exports is possible: i. e. `__webpack_exports_info__.<exportName>.<exportName>.<exportName>.used`
+
 ### `DEBUG`  (webpack-specific)
 
-Equals the config option `debug`.
+Equals the configuration option `debug`.

@@ -7,6 +7,9 @@ contributors:
   - iamakulov
   - byzyk
   - franjohn21
+  - EugeneHlushko
+  - snitin315
+  - rahul3v
 ---
 
 Plugins expose the full potential of the webpack engine to third-party developers. Using staged build callbacks, developers can introduce their own behaviors into the webpack build process. Building plugins is a bit more advanced than building loaders, because you'll need to understand some of the webpack low-level internals to hook into them. Be prepared to read some source code!
@@ -51,7 +54,7 @@ Plugins are instantiated objects with an `apply` method on their prototype. This
 class HelloWorldPlugin {
   apply(compiler) {
     compiler.hooks.done.tap('Hello World Plugin', (
-      stats /* stats is passed as argument when done hook is tapped.  */
+      stats /* stats is passed as an argument when done hook is tapped.  */
     ) => {
       console.log('Hello World!');
     });
@@ -61,17 +64,46 @@ class HelloWorldPlugin {
 module.exports = HelloWorldPlugin;
 ```
 
-Then to use the plugin, include an instance in your webpack config `plugins` array:
+Then to use the plugin, include an instance in your webpack configuration `plugins` array:
 
 ```javascript
 // webpack.config.js
 var HelloWorldPlugin = require('hello-world');
 
 module.exports = {
-  // ... config settings here ...
+  // ... configuration settings here ...
   plugins: [new HelloWorldPlugin({ options: true })]
 };
 ```
+
+
+Use [`schema-utils`](https://github.com/webpack/schema-utils) in order to validate the options being passed through the plugin options. Here is an example:
+
+```javascript
+
+import validateOptions from 'schema-utils';
+
+// schema for options object
+const schema = {
+  type: 'object',
+  properties: {
+    test: {
+      type: 'string'
+    }
+  }
+};
+
+export default class HelloWorldPlugin {
+
+  constructor(options = {}){
+    validateOptions(schema, options, 'Hello World Plugin');
+  }
+
+  apply(compiler) {}
+}
+```
+
+W> The [`schema-utils`](https://github.com/webpack/schema-utils) API has changed in recent versions. webpack still uses the v1.0.0 release, and we ask that you do the same until further notice.
 
 ## Compiler and Compilation
 
@@ -215,7 +247,7 @@ Various types of hooks supported are :
 
     - Defined using `SyncWaterfallHook[params]`
     - Tapped into using `tap` method.
-    - Called using `call( ... params)` method
+    - Called using `call(...params)` method
 
   Here each of the plugins are called one after the other with the arguments from the return value of the previous plugin. The plugin must take the order of its execution into account.
   It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence at least 1 param must be supplied for waterfall hooks. This pattern is used in the Tapable instances which are related to the webpack templates like `ModuleTemplate`, `ChunkTemplate` etc.
@@ -226,7 +258,7 @@ Various types of hooks supported are :
 
     - Defined using `AsyncSeriesHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-    - Called using `callAsync( ... params)` method
+    - Called using `callAsync(...params)` method
 
   The plugin handler functions are called with all arguments and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration. `callback` is called after all the handlers are called.
   This is also a commonly used pattern for events like `emit`, `run`.
@@ -235,7 +267,7 @@ Various types of hooks supported are :
 
     - Defined using `AsyncWaterfallHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-    - Called using `callAsync( ... params)` method
+    - Called using `callAsync(...params)` method
 
   The plugin handler functions are called with the current value and a callback function with the signature `(err: Error, nextValue: any) -> void.` When called `nextValue` is the current value for the next handler. The current value for the first handler is `init`. After all handlers are applied, callback is called with the last value. If any handler passes a value for `err`, the callback is called with this error and no more handlers are called.
   This plugin pattern is expected for events like `before-resolve` and `after-resolve`.
@@ -244,10 +276,14 @@ Various types of hooks supported are :
 
     - Defined using `AsyncSeriesBailHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-    - Called using `callAsync( ... params)` method
+    - Called using `callAsync(...params)` method
 
 - __Async Parallel__
 
     - Defined using `AsyncParallelHook[params]`
     - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-    - Called using `callAsync( ... params)` method
+    - Called using `callAsync(...params)` method
+
+### Configuration defaults
+
+webpack applies configuration defaults after plugins defaults are applied. This allows plugins to feature their own defaults and provides a way to create configuration preset plugins.

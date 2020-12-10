@@ -8,6 +8,9 @@ contributors:
   - byzyk
   - madhavarshney
   - EugeneHlushko
+  - smelukov
+  - anshumanv
+  - snitin315
 ---
 
 The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
@@ -20,6 +23,8 @@ The entry object is where webpack looks to start building the bundle. The contex
 The base directory, an __absolute path__, for resolving entry points and loaders from configuration.
 
 ``` js
+const path = require('path');
+
 module.exports = {
   //...
   context: path.resolve(__dirname, 'app')
@@ -33,7 +38,7 @@ By default the current directory is used, but it's recommended to pass a value i
 
 ## `entry`
 
-`string` `[string]` `object = { <key> string | [string] }` `(function() => string | [string] | object = { <key> string | [string] })`
+`string` `[string]` `object = { <key> string | [string] | object = { import string | [string], dependOn string | [string], filename string }}` `(function() => string | [string] | object = { <key> string | [string] } | object = { import string | [string], dependOn string | [string], filename string })`
 
 The point or points where to start the application bundling process. If an array is passed then all items will be processed.
 
@@ -57,6 +62,95 @@ module.exports = {
 
 If a string or array of strings is passed, the chunk is named `main`. If an object is passed, each key is the name of a chunk, and the value describes the entry point for the chunk.
 
+### Entry descriptor
+
+If an object is passed the value might be a string, array of strings or a descriptor:
+
+```js
+module.exports = {
+  //...
+  entry: {
+    home: './home.js',
+    shared: ['react', 'react-dom', 'redux', 'react-redux'],
+    catalog: {
+      import: './catalog.js',
+      filename: 'pages/catalog.js',
+      dependOn:'shared'
+    },
+    personal: {
+      import: './personal.js',
+      filename: 'pages/personal.js',
+      dependOn: 'shared',
+      chunkLoading: 'jsonp',
+    }
+  }
+};
+```
+
+Descriptor syntax might be used to pass additional options to an entry point.
+
+
+### Output filename
+
+By default, the output filename for the entry chunk is extracted from [`output.filename`](/configuration/output/#outputfilename) but you can specify a custom output filename for a specific entry:
+
+```js
+module.exports = {
+  //...
+  entry: {
+    app: './app.js',
+    home: { import: './contact.js', filename: 'pages/[name][ext]' },
+    about: { import: './about.js', filename: 'pages/[name][ext]' }
+  }
+};
+```
+
+Descriptor syntax was used here to pass `filename`-option to the specific entry points.
+
+
+### Dependencies
+
+By default, every entry chunk stores all the modules that it uses. With `dependOn` option you can share the modules from one entry chunk to another:
+
+```js
+module.exports = {
+  //...
+  entry: {
+    app: { import: './app.js', dependOn: 'react-vendors' },
+    'react-vendors': ['react', 'react-dom', 'prop-types']
+  }
+};
+```
+
+The `app` chunk will not contain the modules that `react-vendors` has.
+
+`dependOn` option can also accept an array of strings:
+
+```js
+module.exports = {
+  //...
+  entry: {
+    moment: { import: 'moment-mini', runtime: 'runtime' },
+    reactvendors: { import: ['react', 'react-dom'], runtime: 'runtime' },
+    testapp: {
+      import: './wwwroot/component/TestApp.tsx',
+      dependOn: ['reactvendors', 'moment'],
+    },
+  },
+};
+```
+
+Also, you can specify multiple files per entry using an array:
+
+```js
+module.exports = {
+  //...
+  entry: {
+    app: { import: ['./app.js', './app2.js'], dependOn: 'react-vendors' },
+    'react-vendors': ['react', 'react-dom', 'prop-types']
+  }
+};
+```
 
 ### Dynamic entry
 

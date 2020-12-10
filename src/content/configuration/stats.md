@@ -12,21 +12,22 @@ contributors:
   - Raiondesu
   - EugeneHlushko
   - grgur
+  - anshumanv
+  - pixel-ray
+  - snitin315
+  - u01jmg3
+  - grrizzly
 ---
-
-The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
-
-T> For webpack-dev-server, this property needs to be in the `devServer` object.
-
-T> For webpack-dev-middleware, this property needs to be in the webpack-dev-middleware's `options` object.
-
-W> This option does not have any effect when using the Node.js API.
-
-## `stats`
 
 `object` `string`
 
-There are some presets available to use as a shortcut. Use them like this:
+The `stats` option lets you precisely control what bundle information gets displayed. This can be a nice middle ground if you don't want to use `quiet` or `noInfo` because you want some bundle information, but not all of it.
+
+T> For webpack-dev-server, this property needs to be in the [`devServer` configuration object](/configuration/dev-server/#devserverstats-).
+
+W> This option does not have any effect when using the Node.js API.
+
+__webpack.js.org__
 
 ```js
 module.exports = {
@@ -35,16 +36,26 @@ module.exports = {
 };
 ```
 
-| Preset              | Alternative | Description                                       |
-|---------------------|-------------|---------------------------------------------------|
-| `'errors-only'`     | _none_      | Only output when errors happen                    |
-| `'errors-warnings'` | _none_      | Only output errors and warnings happen            |
-| `'minimal'`         | _none_      | Only output when errors or new compilation happen |
-| `'none'`            | `false`     | Output nothing                                    |
-| `'normal'`          | `true`      | Standard output                                   |
-| `'verbose'`         | _none_      | Output everything                                 |
+## Stats Presets
 
-For more granular control, it is possible to specify exactly what information you want. Please note that all of the options in this object are optional.
+webpack comes with certain presets available for the stats output:
+
+
+| Preset              | Alternative | Description                                                    |
+| ------------------- | ----------- | -------------------------------------------------------------- |
+| `'errors-only'`     | _none_      | Only output when errors happen                                 |
+| `'errors-warnings'` | _none_      | Only output errors and warnings happen                         |
+| `'minimal'`         | _none_      | Only output when errors or new compilation happen              |
+| `'none'`            | `false`     | Output nothing                                                 |
+| `'normal'`          | `true`      | Standard output                                                |
+| `'verbose'`         | _none_      | Output everything                                              |
+| `'detailed'`        | _none_      | Output everything except `chunkModules` and `chunkRootModules` |
+
+## Stats Options
+
+It is possible to specify which information you want to see in the stats output.
+
+T> All of the options in the stats configuration object are optional.
 
 ### `stats.all`
 
@@ -104,6 +115,21 @@ module.exports = {
 };
 ```
 
+### `stats.moduleAssets`
+
+`boolean = true`
+
+Tells `stats` whether to add information about assets inside modules. Set `stats.moduleAssets` to `false` to hide it.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    moduleAssets: false
+  }
+};
+```
+
 ### `stats.cached`
 
 `boolean = true`
@@ -115,6 +141,171 @@ module.exports = {
   //...
   stats: {
     cached: false
+  }
+};
+```
+
+### `stats.assetsSpace`
+
+`number = 15`
+
+Tells `stats` how many items of assets should be displayed (groups will be collapsed to fit this space).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    assetsSpace: 15
+  }
+};
+```
+
+### `stats.modulesSpace`
+
+`number = 15`
+
+Tells `stats` how many items of modules should be displayed (groups will be collapsed to fit this space).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    modulesSpace: 15
+  }
+};
+```
+
+### `stats.chunkModulesSpace`
+
+`number = 10`
+
+Tells `stats` how many items of chunk modules should be displayed (groups will be collapsed to fit this space).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkModulesSpace: 15
+  }
+};
+```
+
+### `stats.nestedModulesSpace`
+
+`number = 10`
+
+Tells `stats` how many items of nested modules should be displayed (groups will be collapsed to fit this space).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    nestedModulesSpace: 15
+  }
+};
+```
+
+### `stats.cachedModules`
+
+`boolean = true`
+
+Tells `stats` whether to add information about cached (not built) modules.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    cachedModules: false
+  }
+};
+```
+
+### `stats.runtimeModules`
+
+`boolean = true`
+
+Tells `stats` whether to add information about runtime modules.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    runtimeModules: false
+  }
+};
+```
+
+### `stats.dependentModules`
+
+`boolean`
+
+Tells `stats` whether to show chunk modules that are dependencies of other modules of the chunk.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    dependentModules: false
+  }
+};
+```
+
+### `stats.groupAssetsByChunk`
+
+`boolean`
+
+Tells `stats` whether to group assets by how their are related to chunks.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupAssetsByChunk: false
+  }
+};
+```
+
+### `stats.groupAssetsByEmitStatus`
+
+`boolean`
+
+Tells `stats` whether to group assets by their status (emitted, compared for emit or cached).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupAssetsByEmitStatus: false
+  }
+};
+```
+
+### `stats.groupAssetsByInfo`
+
+`boolean`
+
+Tells `stats` whether to group assets by their asset info (immutable, development, hotModuleReplacement, etc).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupAssetsByInfo: false
+  }
+};
+```
+
+### `stats.groupModulesByAttributes`
+
+`boolean`
+
+Tells `stats` whether to group modules by their attributes (errors, warnings, assets, optional, orphan, or dependent).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupModulesByAttributes: false
   }
 };
 ```
@@ -288,7 +479,7 @@ module.exports = {
 
 ### `stats.entrypoints`
 
-`boolean = true`
+`boolean = true` `string = 'auto'`
 
 Tells `stats` whether to display the entry points with the corresponding bundles.
 
@@ -300,6 +491,8 @@ module.exports = {
   }
 };
 ```
+
+When `stats.entrypoints` is set to  `'auto'`, webpack will decide automatically whether to display the entry points in the stats output.
 
 ### `stats.env`
 
@@ -502,21 +695,6 @@ module.exports = {
 };
 ```
 
-### `stats.maxModules`
-
-`number = 15`
-
-Set the maximum number of modules to be shown.
-
-```javascript
-module.exports = {
-  //...
-  stats: {
-    maxModules: 5
-  }
-};
-```
-
 ### `stats.modules`
 
 `boolean = true`
@@ -596,7 +774,7 @@ module.exports = {
 
 `string` `boolean: false`
 
-Sets the [preset](/configuration/stats/#stats) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
+Sets the [preset](/configuration/stats/#stats-presets) for the type of information that gets displayed. It is useful for [extending stats behaviours](/configuration/stats/#extending-stats-behaviours).
 
 ```javascript
 module.exports = {
@@ -607,7 +785,7 @@ module.exports = {
 };
 ```
 
-Setting value of `stats.preset` to `false` tells webpack to use `'none'` [stats preset](/configuration/stats/#stats).
+Setting value of `stats.preset` to `false` tells webpack to use `'none'` [stats preset](/configuration/stats/#stats-presets).
 
 ### `stats.providedExports`
 
@@ -620,6 +798,36 @@ module.exports = {
   //...
   stats: {
     providedExports: true
+  }
+};
+```
+
+### `stats.errorsCount`
+
+`boolean = true`
+
+Add errors count.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    errorsCount: false
+  }
+};
+```
+
+### `stats.warningsCount`
+
+`boolean = true`
+
+Add warnings count.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    warningsCount: false
   }
 };
 ```
@@ -650,6 +858,21 @@ module.exports = {
   //...
   stats: {
     reasons: false
+  }
+};
+```
+
+### `stats.relatedAssets`
+
+`boolean = false`
+
+Tells `stats` whether to add information about assets that are related to other assets (like SourceMaps for assets).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    relatedAssets: true
   }
 };
 ```
@@ -714,6 +937,51 @@ module.exports = {
 };
 ```
 
+### `stats.chunkGroupAuxiliary`
+
+`boolean = true`
+
+Display auxiliary assets in chunk groups.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupAuxiliary: false
+  }
+};
+```
+
+### `stats.chunkGroupChildren`
+
+`boolean = true`
+
+Display children of the chunk groups (e.g. prefetched, preloaded chunks and assets).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupChildren: false
+  }
+};
+```
+
+### `stats.chunkGroupMaxAssets`
+
+`number`
+
+Limit of assets displayed in chunk groups.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    chunkGroupMaxAssets: 5
+  }
+};
+```
+
 ### `stats.warnings`
 
 `boolean = true`
@@ -747,6 +1015,9 @@ module.exports = {
   }
 };
 ```
+
+
+W> `stats.warningsFilter` is deprecated in favor of [`ignoreWarnings`](/configuration/other-options/#ignorewarnings).
 
 ### `stats.chunkRelations`
 

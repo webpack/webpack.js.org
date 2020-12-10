@@ -9,6 +9,7 @@ contributors:
   - peterblazejewicz
   - youta1119
   - byzyk
+  - Nek-
 ---
 
 webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
@@ -29,8 +30,8 @@ and then proceed to write your configuration:
 __webpack.config.ts__
 
 ```typescript
-import path from 'path';
-import webpack from 'webpack';
+import * as path from 'path';
+import * as webpack from 'webpack';
 
 const config: webpack.Configuration = {
   mode: 'production',
@@ -97,7 +98,7 @@ W> We had been getting reports that `TS_NODE_PROJECT` might not work with `"TS_N
 Similarly, to use [CoffeeScript](https://coffeescript.org/), you would first install the necessary dependencies:
 
 ``` bash
-npm install --save-dev coffee-script
+npm install --save-dev coffeescript
 ```
 
 and then proceed to write your configuration:

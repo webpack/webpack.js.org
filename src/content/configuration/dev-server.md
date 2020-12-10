@@ -14,6 +14,12 @@ contributors:
   - dmohns
   - EslamHiko
   - digitaljohn
+  - bhavya9107
+  - wizardofhogwarts
+  - jamesgeorge007
+  - g100g
+  - anikethsaha
+  - snitin315
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -61,6 +67,8 @@ W> You cannot use the second `compiler` argument (a callback) when using `Webpac
 W> Be aware that when [exporting multiple configurations](/configuration/configuration-types/#exporting-multiple-configurations) only the `devServer` options for the first configuration will be taken into account and used for all the configurations in the array.
 
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
+
+T> If you want to manually recompile the bundle, navigating to the `/invalidate` route will [invalidate](/api/node/#invalidate-watching) the current compilation of the bundle and recompile it for you via [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate). Depending on your configuration, URL may look like `http://localhost:9000/invalidate`.
 
 T> HTML template is required to serve the bundle, usually it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
 
@@ -128,7 +136,7 @@ module.exports = {
 To use this option with the CLI pass the `--allowed-hosts` option a comma-delimited string.
 
 ```bash
-webpack-dev-server --entry /entry/file --output-path /output/path --allowed-hosts .host.com,host2.com
+webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com,host2.com
 ```
 
 ## `devServer.before`
@@ -174,7 +182,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --bonjour
+webpack serve --bonjour
 ```
 
 
@@ -202,19 +210,8 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --client-log-level silent
+webpack serve --client-log-level silent
 ```
-
-## `devServer.color` - CLI only
-
-`boolean`
-
-Enables/Disables colors on the console.
-
-```bash
-webpack-dev-server --color
-```
-
 
 ## `devServer.compress`
 
@@ -236,7 +233,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --compress
+webpack serve --compress
 ```
 
 
@@ -248,11 +245,13 @@ Tell the server where to serve content from. This is only necessary if you want 
 
 T> It is recommended to use an absolute path.
 
-By default it will use your current working directory to serve content. To disable `contentBase` set it to `false`.
+By default, it will use your current working directory to serve content. To disable `contentBase` set it to `false`.
 
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   devServer: {
@@ -261,11 +260,13 @@ module.exports = {
 };
 ```
 
-It is also possible to serve from multiple directories:
+It is also possible to serve from multiple directories in case you want to serve static content at multiple URLs with [`contentBasePublicPath`](#devservercontentbasepublicpath):
 
 __webpack.config.js__
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   devServer: {
@@ -277,9 +278,46 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --content-base /path/to/content/dir
+webpack serve --content-base ./path/to/content/dir
 ```
 
+
+## `devServer.contentBasePublicPath`
+
+`string = '/'` `[string]`
+
+Tell the server at what URL to serve `devServer.contentBase` static content. If there was a file `assets/manifest.json`, it would be served at `/serve-content-base-at-this-url/manifest.json`
+
+__webpack.config.js__
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  devServer: {
+    contentBase: path.join(__dirname, 'assets'),
+    contentBasePublicPath: '/serve-content-base-at-this-url'
+  }
+};
+```
+
+Provide an array of strings in case you have multiple static folders set in [`contentBase`](#devservercontentbase).
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    contentBase: [contentBasePublic, contentBaseOther],
+    contentBasePublicPath: [
+      contentBasePublicPath,
+      contentBasePublicOtherPath
+    ]
+  }
+};
+```
 
 ## `devServer.disableHostCheck`
 
@@ -301,7 +339,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --disable-host-check
+webpack serve --disable-host-check
 ```
 
 
@@ -408,7 +446,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --history-api-fallback
+webpack serve --history-api-fallback
 ```
 
 For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
@@ -434,7 +472,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --host 0.0.0.0
+webpack serve --host 0.0.0.0
 ```
 
 
@@ -462,7 +500,7 @@ T> Note that [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacem
 
 `boolean`
 
-Enables Hot Module Replacement (see [`devServer.hot`](#devserverhot)) without page refresh as fallback in case of build failures.
+Enables Hot Module Replacement (see [`devServer.hot`](#devserverhot)) without page refresh as a fallback in case of build failures.
 
 __webpack.config.js__
 
@@ -478,7 +516,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --hot-only
+webpack serve --hot only
 ```
 
 
@@ -524,13 +562,13 @@ module.exports = {
 Usage via CLI
 
 ```bash
-webpack-dev-server --http2
+webpack serve --http2
 ```
 
 To pass your own certificate via CLI, use the following options
 
 ```bash
-webpack-dev-server --http2 --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
+webpack serve --http2 --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
 ```
 
 
@@ -538,7 +576,7 @@ webpack-dev-server --http2 --key /path/to/server.key --cert /path/to/server.crt 
 
 `boolean` `object`
 
-By default dev-server will be served over HTTP. It can optionally be served over HTTP/2 with HTTPS:
+By default, dev-server will be served over HTTP. It can optionally be served over HTTP/2 with HTTPS:
 
 __webpack.config.js__
 
@@ -551,7 +589,7 @@ module.exports = {
 };
 ```
 
-With the above setting a self-signed certificate is used, but you can provide your own:
+With the above setting, a self-signed certificate is used, but you can provide your own:
 
 __webpack.config.js__
 
@@ -559,11 +597,10 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    https: {
-      key: fs.readFileSync('/path/to/server.key'),
-      cert: fs.readFileSync('/path/to/server.crt'),
-      ca: fs.readFileSync('/path/to/ca.pem'),
-    }
+    https: true,
+    key: fs.readFileSync('/path/to/server.key'),
+    cert: fs.readFileSync('/path/to/server.crt'),
+    ca: fs.readFileSync('/path/to/ca.pem'),
   }
 };
 ```
@@ -573,13 +610,13 @@ This object is passed straight to Node.js HTTPS module, so see the [HTTPS docume
 Usage via the CLI
 
 ```bash
-webpack-dev-server --https
+webpack serve --https
 ```
 
 To pass your own certificate via the CLI use the following options
 
 ```bash
-webpack-dev-server --https --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
+webpack serve --https --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
 ```
 
 ## `devServer.index`
@@ -607,7 +644,7 @@ module.exports = {
 Output cli information. It is enabled by default.
 
 ```bash
-webpack-dev-server --info=false
+webpack serve --info false
 ```
 
 
@@ -652,7 +689,7 @@ W> Make sure that [`devServer.hot`](#devserverhot) is set to `true` because `dev
 
 `boolean`
 
-Toggle between the dev-server's two different modes. By default the application will be served with _inline mode_ enabled. This means that a script will be inserted in your bundle to take care of live reloading, and build messages will appear in the browser console.
+Toggle between the dev-server's two different modes. By default, the application will be served with _inline mode_ enabled. This means that a script will be inserted in your bundle to take care of live reloading, and build messages will appear in the browser console.
 
 It is also possible to use __iframe mode__, which uses an `<iframe>` under a notification bar with messages about the build. To switch to __iframe mode__:
 
@@ -670,7 +707,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --inline=false
+webpack serve --inline false
 ```
 
 T> Inline mode is recommended for [Hot Module Replacement](/plugins/hot-module-replacement-plugin/) as it includes an HMR trigger from the websocket. Polling mode can be used as an alternative, but requires an additional entry point, `'webpack/hot/poll?1000'`.
@@ -696,7 +733,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --lazy
+webpack serve --lazy
 ```
 
 T> [`watchOptions`](#devserverwatchoptions-) will have no effect when used with __lazy mode__.
@@ -724,7 +761,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --no-live-reload
+webpack serve --no-live-reload
 ```
 
 
@@ -752,7 +789,7 @@ module.exports = {
 
 `boolean = false`
 
-Tells dev-server to supress messages like the webpack bundle information. Errors and warnings will still be shown.
+Tells dev-server to suppress messages like the webpack bundle information. Errors and warnings will still be shown.
 
 __webpack.config.js__
 
@@ -787,7 +824,7 @@ module.exports = {
 
 ## `devServer.open`
 
-`boolean: false` `string`
+`boolean = false` `string` `object`
 
 Tells dev-server to open the browser after server had been started. Set it to `true` to open your default browser.
 
@@ -815,10 +852,25 @@ module.exports = {
 };
 ```
 
+If you want to use flags when opening the browser like opening an incognito window (`--incognito` flag), you can set `open` to an object. The object accepts all [open](https://www.npmjs.com/package/open) options, `app` property must be an array. The first element in the array must be the browser name and the other following elements are the flags you want to use. For example:
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    open: {
+      app: ['Google Chrome', '--incognito', '--other-flag']
+    }
+  }
+};
+```
+
 Usage via the CLI
 
 ```bash
-webpack-dev-server --open 'Google Chrome'
+webpack serve --open 'Google Chrome'
 ```
 
 T> The browser application name is platform dependent. Don't hard code it in reusable modules. For example, `'Chrome'` is `'Google Chrome'` on macOS, `'google-chrome'` on Linux and `'chrome'` on Windows.
@@ -844,7 +896,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --open-page "/different/page"
+webpack serve --open-page /different/page
 ```
 
 If you wish to specify multiple pages to open in the browser.
@@ -863,7 +915,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --open-page "/different/page1,/different/page2"
+webpack serve --open-page /different/page1,/different/page2
 ```
 
 
@@ -913,7 +965,7 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    pfx: '/path/to/file.pfx'
+    pfx: './path/to/file.pfx'
   }
 };
 ```
@@ -921,7 +973,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --pfx /path/to/file.pfx
+webpack serve --pfx ./path/to/file.pfx
 ```
 
 
@@ -945,7 +997,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --pfx-passphrase passphrase
+webpack serve --pfx-passphrase passphrase
 ```
 
 
@@ -969,7 +1021,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --port 8080
+webpack serve --port 8080
 ```
 
 
@@ -979,7 +1031,7 @@ webpack-dev-server --port 8080
 
 Proxying some URLs can be useful when you have a separate API backend development server and you want to send API requests on the same domain.
 
-The dev-server makes use of the powerful [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) package. Check out its [documentation](https://github.com/chimurai/http-proxy-middleware#options) for more advanced usages. Note that some of `http-proxy-middleware`'s features do not require a `target` key, e.g. its `router` feature, but you will still need to include a `target` key in your config here, otherwise `webpack-dev-server` won't pass it along to `http-proxy-middleware`).
+The dev-server makes use of the powerful [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) package. Check out its [documentation](https://github.com/chimurai/http-proxy-middleware#options) for more advanced usages. Note that some of `http-proxy-middleware`'s features do not require a `target` key, e.g. its `router` feature, but you will still need to include a `target` key in your configuration here, otherwise `webpack-dev-server` won't pass it along to `http-proxy-middleware`).
 
 With a backend on `localhost:3000`, you can use this to enable proxying:
 
@@ -1016,7 +1068,7 @@ module.exports = {
 };
 ```
 
-A backend server running on HTTPS with an invalid certificate will not be accepted by default. If you want to, modify your config like this:
+A backend server running on HTTPS with an invalid certificate will not be accepted by default. If you want to, modify your configuration like this:
 
 __webpack.config.js__
 
@@ -1036,13 +1088,13 @@ module.exports = {
 
 Sometimes you don't want to proxy everything. It is possible to bypass the proxy based on the return value of a function.
 
-In the function you get access to the request, response and proxy options.
+In the function you get access to the request, response, and proxy options.
 
 - Return `null` or `undefined` to continue processing the request with proxy.
 - Return `false` to produce a 404 error for the request.
 - Return a path to serve from, instead of continuing to proxy the request.
 
-E.g. for a browser request, you want to serve a HTML page, but for an API request you want to proxy it. You could do something like this:
+E.g. for a browser request, you want to serve an HTML page, but for an API request you want to proxy it. You could do something like this:
 
 __webpack.config.js__
 
@@ -1125,7 +1177,7 @@ module.exports = {
 Output running progress to console.
 
 ```bash
-webpack-dev-server --progress
+webpack serve --progress
 ```
 
 
@@ -1151,7 +1203,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --public myapp.test:80
+webpack serve --public myapp.test:80
 ```
 
 
@@ -1218,7 +1270,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --quiet
+webpack serve --quiet
 ```
 
 ## `devServer.serveIndex`
@@ -1263,30 +1315,6 @@ module.exports = {
 ```
 
 
-## `devServer.socket`
-
-`string`
-
-The Unix socket to listen to (instead of a host).
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    socket: 'socket'
-  }
-};
-```
-
-Usage via the CLI
-
-```bash
-webpack-dev-server --socket socket
-```
-
-
 ## `devServer.sockHost`
 
 `string`
@@ -1325,7 +1353,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --sockPath /socket
+webpack serve --sock-path /socket
 ```
 
 ## `devServer.sockPort`
@@ -1346,6 +1374,8 @@ module.exports = {
 ```
 
 ## `devServer.staticOptions`
+
+`object`
 
 It is possible to configure advanced options for serving static files from `contentBase`. See the [Express documentation](http://expressjs.com/en/4x/api.html#express.static) for the possible options.
 
@@ -1396,7 +1426,7 @@ T> This option has no effect when used with `quiet` or `noInfo`.
 This option closes the server when stdin ends.
 
 ```bash
-webpack-dev-server --stdin
+webpack serve --stdin
 ```
 
 
@@ -1516,7 +1546,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --useLocalIp
+webpack serve --use-local-ip
 ```
 
 
@@ -1540,7 +1570,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --watch-content-base
+webpack serve --watch-content-base
 ```
 
 
@@ -1550,7 +1580,7 @@ webpack-dev-server --watch-content-base
 
 Control options related to watching the files.
 
-webpack uses the file system to get notified of file changes. In some cases this does not work. For example, when using Network File System (NFS). [Vagrant](https://www.vagrantup.com/) also has a lot of problems with this. In these cases, use polling:
+webpack uses the file system to get notified of file changes. In some cases, this does not work. For example, when using Network File System (NFS). [Vagrant](https://www.vagrantup.com/) also has a lot of problems with this. In these cases, use polling:
 
 __webpack.config.js__
 
@@ -1572,7 +1602,7 @@ See [WatchOptions](/configuration/watch/) for more options.
 
 ## `devServer.writeToDisk` 🔑
 
-`boolean = false` `function (filePath)`
+`boolean = false` `function (filePath) => boolean`
 
 Tells `devServer` to write generated assets to the disk. The output is written to the [output.path](/configuration/output/#outputpath) directory.
 
@@ -1600,4 +1630,14 @@ module.exports = {
     }
   }
 };
+```
+
+T> It is possible to set any Node.js flags via `NODE_OPTIONS`, for example, to configure `HTTP_MAX_HEADER_SIZE`: 
+
+__package.json__
+
+```json
+{
+  "scripts": "NODE_OPTIONS='--max-http-header-size=100000' webpack serve"
+}
 ```

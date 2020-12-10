@@ -6,6 +6,7 @@ contributors:
   - pastelsky
   - byzyk
   - EugeneHlushko
+  - wizardofhogwarts
 ---
 
 A resolver is a library which helps in locating a module by its absolute path.
@@ -58,6 +59,8 @@ import 'module/lib/file';
 Modules are searched for inside all directories specified in [`resolve.modules`](/configuration/resolve/#resolvemodules).
 You can replace the original module path by an alternate path by creating an alias for it using the [`resolve.alias`](/configuration/resolve/#resolvealias) configuration option.
 
+- If the package contains a `package.json` file, then fields specified in [`resolve.exportsFields`](/configuration/resolve/#resolveexportsfields) configuration options are looked up in order, and the first such field in `package.json` determines the available exports from the package according to the [package exports guideline](/guides/package-exports/).
+
 Once the path is resolved based on the above rule, the resolver checks to see if the path points to a file or a directory. If the path points to a file:
 
 - If the path has a file extension, then the file is bundled straightaway.
@@ -66,7 +69,7 @@ Once the path is resolved based on the above rule, the resolver checks to see if
 If the path points to a folder, then the following steps are taken to find the right file with the right extension:
 
 - If the folder contains a `package.json` file, then fields specified in [`resolve.mainFields`](/configuration/resolve/#resolvemainfields) configuration option are looked up in order, and the first such field in `package.json` determines the file path.
-- If there is no `package.json` or if the [`resolve.mainFields`](/configuration/resolve/#resolvemainfields) do not return a valid path, file names specified in the [`resolve.mainFiles`](/configuration/resolve/#resolvemainfiles) configuration option are looked for in order, to see if a matching filename exists in the imported/required directory .
+- If there is no `package.json` or if the [`resolve.mainFields`](/configuration/resolve/#resolvemainfields) do not return a valid path, file names specified in the [`resolve.mainFiles`](/configuration/resolve/#resolvemainfiles) configuration option are looked for in order, to see if a matching filename exists in the imported/required directory.
 - The file extension is then resolved in a similar way using the [`resolve.extensions`](/configuration/resolve/#resolveextensions) option.
 
 webpack provides reasonable [defaults](/configuration/resolve) for these options depending on your build target.
@@ -79,7 +82,7 @@ This follows the same rules as those specified for file resolution. But the [`re
 
 ## Caching
 
-Every filesystem access is cached, so that multiple parallel or serial requests to the same file occur faster. In [watch mode](/configuration/watch/#watch), only modified files are evicted from the cache. If watch mode is off, then the cache gets purged before every compilation.
+Every filesystem access is cached so that multiple parallel or serial requests to the same file occur faster. In [watch mode](/configuration/watch/#watch), only modified files are evicted from the cache. If watch mode is off, then the cache gets purged before every compilation.
 
 
-See [Resolve API](/configuration/resolve) to learn more on the configuration options mentioned above.
+See [Resolve API](/configuration/resolve) to learn more about the configuration options mentioned above.

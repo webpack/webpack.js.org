@@ -7,6 +7,7 @@ contributors:
   - byzyk
   - madhavarshney
   - wizardofhogwarts
+  - anikethsaha
 ---
 
 This guide contains some useful tips for improving build/compilation performance.
@@ -20,9 +21,9 @@ The following best practices should help, whether you're running build scripts i
 
 ### Stay Up to Date
 
-Use the latest webpack version. We are always making performance improvements. The latest stable version of webpack is:
+Use the latest webpack version. We are always making performance improvements. The latest recommended version of webpack is:
 
-[![latest webpack version](https://img.shields.io/npm/v/webpack.svg?label=webpack&style=flat-square&maxAge=3600)](https://github.com/webpack/webpack/releases)
+[![latest webpack version](https://img.shields.io/github/package-json/v/webpack/webpack.svg?label=webpack&style=flat-square&maxAge=3600)](https://github.com/webpack/webpack/releases)
 
 Staying up-to-date with __Node.js__  can also help with performance. On top of this, keeping your package manager (e.g. `npm` or `yarn`) up-to-date can also help. Newer versions create more efficient module trees and increase resolving speed.
 
@@ -48,6 +49,8 @@ module.exports = {
 Use the `include` field to only apply the loader modules that actually need to be transformed by it:
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   module: {
@@ -102,8 +105,10 @@ W> Don't use too many workers, as there is a boot overhead for the Node.js runti
 
 ### Persistent cache
 
-Enable persistent caching with the `cache-loader`. Clear cache directory on `"postinstall"` in `package.json`.
+Use [`cache`](/configuration/other-options/#cache) option in webpack configuration. Clear cache directory on `"postinstall"` in `package.json`.
 
+
+T> We support yarn PnP version 3 [`yarn 2 berry`](https://yarnpkg.com/features/pnp) for persistent caching.
 
 ### Custom plugins/loaders
 
@@ -148,7 +153,7 @@ Be aware of the performance differences between the different `devtool` settings
 - The `cheap-source-map` variants are more performant if you can live with the slightly worse mapping quality.
 - Use a `eval-source-map` variant for incremental builds.
 
-=> In most cases, `cheap-module-eval-source-map` is the best option.
+T> In most cases, `eval-cheap-module-source-map` is the best option.
 
 
 ### Avoid Production Specific Tooling
@@ -156,8 +161,7 @@ Be aware of the performance differences between the different `devtool` settings
 Certain utilities, plugins, and loaders only make sense when building for production. For example, it usually doesn't make sense to minify and mangle your code with the `TerserPlugin` while in development. These tools should typically be excluded in development:
 
 - `TerserPlugin`
-- `ExtractTextPlugin`
-- `[hash]`/`[chunkhash]`
+- `[fullhash]`/`[chunkhash]`/`[contenthash]`
 - `AggressiveSplittingPlugin`
 - `AggressiveMergingPlugin`
 - `ModuleConcatenationPlugin`
@@ -165,15 +169,17 @@ Certain utilities, plugins, and loaders only make sense when building for produc
 
 ### Minimal Entry Chunk
 
-webpack only emits updated chunks to the filesystem. For some configuration options, (HMR, `[name]`/`[chunkhash]` in `output.chunkFilename`, `[hash]`) the entry chunk is invalidated in addition to the changed chunks.
+webpack only emits updated chunks to the filesystem. For some configuration options, (HMR, `[name]`/`[chunkhash]`/`[contenthash]` in `output.chunkFilename`, `[fullhash]`) the entry chunk is invalidated in addition to the changed chunks.
 
-Make sure the entry chunk is cheap to emit by keeping it small. The following code block extracts a chunk containing only the runtime with _all other chunks as children_:
+Make sure the entry chunk is cheap to emit by keeping it small. The following configuration creates an additional chunk for the runtime code, so it's cheap to generate:
 
 ```js
-new CommonsChunkPlugin({
-  name: 'manifest',
-  minChunks: Infinity,
-});
+module.exports = {
+  // ...
+  optimization: {
+    runtimeChunk: true
+  }
+};
 ```
 
 ### Avoid Extra Optimization Steps
@@ -214,7 +220,8 @@ Earlier and later Node.js versions are not affected.
 
 ### TypeScript Loader
 
-Recently, `ts-loader` has started to consume the internal TypeScript watch mode APIs which dramatically decreases the number of modules to be rebuilt on each iteration. This `experimentalWatchApi` shares the same logic as the normal TypeScript watch mode itself and is quite stable for development use. Turn on `transpileOnly`, as well, for even faster incremental builds.
+To improve the build time when using `ts-loader`, use the `transpileOnly` loader option. On its own, this option turns off type checking. To gain type checking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin). This speeds up TypeScript type checking and ESLint linting by moving each to a separate process.
+
 
 ```js
 module.exports = {
@@ -224,19 +231,14 @@ module.exports = {
     {
       loader: 'ts-loader',
       options: {
-        transpileOnly: true,
-        experimentalWatchApi: true,
+        transpileOnly: true
       },
     },
   ],
 };
 ```
 
-Note: the `ts-loader` documentation suggests the use of `cache-loader`, but this actually slows the incremental builds down with disk writes.
-
-To gain typechecking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin).
-
-There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin) on the ts-loader github repository.
+T> There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master/examples/fork-ts-checker-webpack-plugin) on the `ts-loader` GitHub repository.
 
 ---
 

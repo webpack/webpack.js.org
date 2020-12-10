@@ -33,7 +33,7 @@ function getDirectoryRecursive(basePath) {
 			if (fs.statSync(fullPath).isDirectory()) {
 				getDirectoryRecursive(fullPath);
 			} else if (fullPath.endsWith('.md') || fullPath.endsWith('.mdx')) {
-				let fc = fileContents[fileContents.length] = front(fs.readFileSync(fullPath).toString());
+				fileContents[fileContents.length] = front(fs.readFileSync(fullPath).toString());
 			}
 		}
 

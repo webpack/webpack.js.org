@@ -10,6 +10,9 @@ contributors:
   - debs-obrien
   - wizardofhogwarts
   - EugeneHlushko
+  - chenxsan
+  - jamesgeorge007
+  - WofWca
 related:
   - title: CommonJS Wikipedia
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -19,8 +22,15 @@ related:
 
 This section covers all methods available in code compiled with webpack. When using webpack to bundle your application, you can pick from a variety of module syntax styles including [ES6](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015), [CommonJS](https://en.wikipedia.org/wiki/CommonJS), and [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition).
 
-W> While webpack supports multiple module syntaxes, we recommend following a single syntax for consistency and to avoid odd behaviors/bugs. Here's [one example](https://github.com/webpack/webpack.js.org/issues/552) of mixing ES6 and CommonJS, but there are surely others.
+While webpack supports multiple module syntaxes, we recommend following a single syntax for consistency and to avoid odd behaviors/bugs. Actually webpack would enforce the recommendation for `.mjs` files, `.cjs` files or `.js` files when their nearest parent `package.json` file contains a `"type"` field with a value of either `"module"` or `"commonjs"`. Please pay attention to these enforcements before you read on:
 
+- `.mjs` or `.js` with `"type": "module"` in `package.json`
+    - No CommonJS allowed, for example, you can't use `require`, `module.exports` or `exports`
+    - File extensions are required when importing, e.g, you should use `import './src/App.mjs'` instead of `import './src/App'` (you can disable this enforcement with [`Rule.resolve.fullySpecified`](/configuration/module/#resolvefullyspecified))
+- `.cjs` or `.js` with `"type": "commonjs"` in `package.json`
+    - Neither `import` nor `export` is available
+- `.wasm` with `"type": "module"` in `package.json`
+    - File extensions are required when importing wasm file
 
 ## ES6 (Recommended)
 
@@ -38,6 +48,12 @@ import { NamedExport } from './other-module.js';
 
 W> The keyword here is __statically__. A normal `import` statement cannot be used dynamically within other logic or contain variables. See the [spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) for more information and `import()` below for dynamic usage.
 
+You can also `import` Data URI:
+
+```javascript
+import 'data:text/javascript;charset=utf-8;base64,Y29uc29sZS5sb2coJ2lubGluZSAxJyk7';
+import { number, fn } from 'data:text/javascript;charset=utf-8;base64,ZXhwb3J0IGNvbnN0IG51bWJlciA9IDQyOwpleHBvcnQgY29uc3QgZm4gPSAoKSA9PiAiSGVsbG8gd29ybGQiOw==';
+```
 
 ### `export`
 
@@ -103,6 +119,7 @@ Inline comments to make features work. By adding comments to the import, we can 
 import(
   /* webpackChunkName: "my-chunk-name" */
   /* webpackMode: "lazy" */
+  /* webpackExports: ["default", "named"] */
   'module'
 );
 
@@ -130,10 +147,10 @@ W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
 
 `webpackMode`: Since webpack 2.6.0, different modes for resolving dynamic imports can be specified. The following options are supported:
 
-- `"lazy"` (default): Generates a lazy-loadable chunk for each `import()`ed module.
-- `"lazy-once"`: Generates a single lazy-loadable chunk that can satisfy all calls to `import()`. The chunk will be fetched on the first call to `import()`, and subsequent calls to `import()` will use the same network response. Note that this only makes sense in the case of a partially dynamic statement, e.g. ``import(`./locales/${language}.json`)``, where there are multiple module paths that could potentially be requested.
-- `"eager"`: Generates no extra chunk. All modules are included in the current chunk and no additional network requests are made. A `Promise` is still returned but is already resolved. In contrast to a static import, the module isn't executed until the call to `import()` is made.
-- `"weak"`: Tries to load the module if the module function has already been loaded in some other way (e.g. another chunk imported it or a script containing the module was loaded). A `Promise` is still returned, but only successfully resolves if the chunks are already on the client. If the module is not available, the `Promise` is rejected. A network request will never be performed. This is useful for universal rendering when required chunks are always manually served in initial requests (embedded within the page), but not in cases where app navigation will trigger an import not initially served.
+- `'lazy'` (default): Generates a lazy-loadable chunk for each `import()`ed module.
+- `'lazy-once'`: Generates a single lazy-loadable chunk that can satisfy all calls to `import()`. The chunk will be fetched on the first call to `import()`, and subsequent calls to `import()` will use the same network response. Note that this only makes sense in the case of a partially dynamic statement, e.g. ``import(`./locales/${language}.json`)``, where multiple module paths that can potentially be requested.
+- `'eager'`: Generates no extra chunk. All modules are included in the current chunk and no additional network requests are made. A `Promise` is still returned but is already resolved. In contrast to a static import, the module isn't executed until the call to `import()` is made.
+- `'weak'`: Tries to load the module if the module function has already been loaded in some other way (e.g. another chunk imported it or a script containing the module was loaded). A `Promise` is still returned, but only successfully resolves if the chunks are already on the client. If the module is not available, the `Promise` is rejected. A network request will never be performed. This is useful for universal rendering when required chunks are always manually served in initial requests (embedded within the page), but not in cases where app navigation will trigger an import not initially served.
 
 `webpackPrefetch`: Tells the browser that the resource is probably needed for some navigation in the future. Check out the guide for more information on [how webpackPrefetch works](/guides/code-splitting/#prefetchingpreloading-modules).
 
@@ -147,7 +164,7 @@ T> Note that all options can be combined like so `/* webpackMode: "lazy-once", w
 
 T> Note that `webpackInclude` and `webpackExclude` options do not interfere with the prefix. eg: `./locale`.
 
-W> The use of `System.import` in webpack [did not fit the proposed spec](https://github.com/webpack/webpack/issues/2163), so it was deprecated in webpack [2.1.0-beta.28](https://github.com/webpack/webpack/releases/tag/v2.1.0-beta.28) in favor of `import()`.
+`webpackExports`: tells webpack to only bundle the specified exports of a dynamically `import()`ed module. It can decrease the output size of a chunk. Available since [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18).
 
 
 ## CommonJS
@@ -157,7 +174,7 @@ The goal of CommonJS is to specify an ecosystem for JavaScript outside the brows
 
 ### `require`
 
-``` javascript
+```typescript
 require(dependency: String);
 ```
 
@@ -173,7 +190,7 @@ W> Using it asynchronously may not have the expected effect.
 
 ### `require.resolve`
 
-``` javascript
+```typescript
 require.resolve(dependency: String);
 ```
 
@@ -393,7 +410,7 @@ var context = require.context('components', true, /\.html$/);
 var componentA = context.resolve('componentA');
 ```
 
-If `mode` is specified as "lazy", the underlying modules will be loaded asynchronously:
+If `mode` is set to `'lazy'`, the underlying modules will be loaded asynchronously:
 
 ```javascript
 var context = require.context('locales', true, /\.json$/, 'lazy');
@@ -402,7 +419,7 @@ context('localeA').then(locale => {
 });
 ```
 
-The full list of available modes and its behavior is described in [`import()`](#import-1) documentation.
+The full list of available modes and their behavior is described in [`import()`](#import-1) documentation.
 
 ### `require.include`
 

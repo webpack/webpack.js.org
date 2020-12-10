@@ -14,6 +14,9 @@ contributors:
   - EugeneHlushko
   - Aghassi
   - myshov
+  - anikethsaha
+  - chenxsan
+  - jamesgeorge007
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
@@ -46,6 +49,8 @@ Create aliases to `import` or `require` certain modules more easily. For example
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   resolve: {
@@ -74,6 +79,8 @@ A trailing `$` can also be added to the given object's keys to signify an exact 
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   resolve: {
@@ -96,8 +103,8 @@ The following table explains other cases:
 | `alias:`                            | `import 'xyz'`                        | `import 'xyz/file.js'`              |
 | ----------------------------------- | ------------------------------------- | ----------------------------------- |
 | `{}`                                | `/abc/node_modules/xyz/index.js`      | `/abc/node_modules/xyz/file.js`     |
-| `{ xyz: '/abs/path/to/file.js' }`   | `/abs/path/to/file.js`                | error                               |
-| `{ xyz$: '/abs/path/to/file.js' }`  | `/abs/path/to/file.js`                | `/abc/node_modules/xyz/file.js`     |
+| `{ xyz: '/abc/path/to/file.js' }`   | `/abc/path/to/file.js`                | error                               |
+| `{ xyz$: '/abc/path/to/file.js' }`  | `/abc/path/to/file.js`                | `/abc/node_modules/xyz/file.js`     |
 | `{ xyz: './dir/file.js' }`          | `/abc/dir/file.js`                    | error                               |
 | `{ xyz$: './dir/file.js' }`         | `/abc/dir/file.js`                    | `/abc/node_modules/xyz/file.js`     |
 | `{ xyz: '/some/dir' }`              | `/some/dir/index.js`                  | `/some/dir/file.js`                 |
@@ -115,6 +122,34 @@ The following table explains other cases:
 
 W> `resolve.alias` takes precedence over other module resolutions.
 
+W> [`null-loader`](https://github.com/webpack-contrib/null-loader) is deprecated in webpack 5. use `alias: { xyz$: false }` or absolute path `alias: {[path.resolve(__dirname, './path/to/module')]: false }`
+
+W> `[string]` values are supported since webpack 5.
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      _: [path.resolve(__dirname, 'src/utilities/'), path.resolve(__dirname, 'src/templates/')]
+    }
+  }
+};
+```
+
+Setting `resolve.alias` to `false` will tell webpack to ignore a module.
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    alias: {
+      'ignored-module': false,
+      './ignored-module': false,
+    }
+  }
+};
+```
 
 ### `resolve.aliasFields`
 
@@ -287,6 +322,24 @@ module.exports = {
 ```
 
 
+### `resolve.exportsFields`
+
+`[string] = ['exports']`
+
+Fields in package.json that are used for resolving module requests. See [package-exports guideline](/guides/package-exports/) for more information.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    exportsFields: ['exports', 'myCompanyExports']
+  }
+};
+```
+
+
 ### `resolve.modules`
 
 `[string] = ['node_modules']`
@@ -315,6 +368,8 @@ If you want to add a directory to search in that takes precedence over `node_mod
 __webpack.config.js__
 
 ```js
+const path = require('path');
+
 module.exports = {
   //...
   resolve: {
@@ -377,6 +432,35 @@ module.exports = {
 ```
 
 
+### `resolve.preferRelative`
+
+`boolean`
+
+When enabled, webpack would prefer to resolve module requests as relative requests instead of using modules from `node_modules` directories.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    preferRelative: true
+  }
+};
+```
+
+__src/index.js__
+
+```js
+// let's say `src/logo.svg` exists
+import logo1 from 'logo.svg'; // this is viable when `preferRelative` enabled
+import logo2 from './logo.svg'; // otherwise you can only use relative path to resolve logo.svg
+
+// `preferRelative` is enabled by default for `new URL()` case
+const b = new URL('module/path', import.meta.url);
+const a = new URL('./module/path', import.meta.url);
+```
+
 ### `resolve.symlinks`
 
 `boolean = true`
@@ -412,6 +496,77 @@ module.exports = {
     cachePredicate: (module) => {
       // additional logic
       return true;
+    }
+  }
+};
+```
+
+### `resolve.restrictions`
+
+`[string, RegExp]`
+
+A list of resolve restrictions to restrict the paths that a request can be resolved on.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    restrictions: [/\.(sass|scss|css)$/]
+  }
+};
+```
+
+### `resolve.roots`
+
+`[string]`
+
+A list of directories where requests of server-relative URLs (starting with '/') are resolved, defaults to [`context` configuration option](/configuration/entry-context/#context). On non-Windows systems these requests are resolved as an absolute path first.
+
+__webpack.config.js__
+
+```js
+const fixtures = path.resolve(__dirname, 'fixtures');
+module.exports = {
+  //...
+  resolve: {
+    roots: [__dirname, fixtures]
+  }
+};
+```
+
+### `resolve.importsFields`
+
+`[string]`
+
+Fields from `package.json` which are used to provide the internal requests of a package (requests starting with `#` are considered internal).
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    importsFields: ['browser', 'module', 'main']
+  }
+};
+```
+
+### `resolve.fallback`
+
+`boolean`
+
+Redirect module requests when normal resolving fails.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    fallback: {
+      xyz: path.resolve(__dirname, 'path/to/file.js')
     }
   }
 };

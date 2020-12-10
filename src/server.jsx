@@ -1,5 +1,4 @@
 // Import External Dependencies
-import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter, Route } from 'react-router-dom';
 
@@ -13,6 +12,7 @@ import PrintScript from './components/Print/PrintScript';
 // Import Images
 import Favicon from './favicon.ico';
 import Logo from './assets/logo-on-white-bg.svg';
+import OgImage from './assets/icon-pwa-512x512.png';
 
 // Define bundles (previously used `Object.values(locals.assets)`) but
 // can't retrieve from there anymore due to separate compilation.
@@ -52,7 +52,7 @@ export default locals => {
           <meta property="og:type" content="website" />
           <meta property="og:title" content={ title } />
           <meta property="og:description" name="description" content={ description } />
-          <meta property="og:image" content={ Logo } />
+          <meta property="og:image" content={ `https://webpack.js.org${OgImage}` } />
           <meta property="twitter:card" content="summary" />
           <meta property="twitter:site" content="@webpack" />
           <meta property="twitter:creator" content="@webpack" />
@@ -69,7 +69,7 @@ export default locals => {
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
           <meta name="apple-mobile-web-app-title" content="webpack" />
-          <link rel="apple-touch-icon-precomposed" href="/icon_180x180.png" />
+          <link rel="apple-touch-icon" href="/icon_180x180.png" />
           <link rel="mask-icon" href={ Logo } color="#465e69" />
           <meta name="msapplication-TileImage" content="/icon_150x150.png" />
           <meta name="msapplication-TileColor" content="#465e69" />

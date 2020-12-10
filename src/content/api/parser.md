@@ -7,6 +7,7 @@ contributors:
   - DeTeam
   - misterdev
   - EugeneHlushko
+  - chenxsan
 ---
 
 The `parser` instance, found in the `compiler`, is used to parse each module
@@ -345,7 +346,7 @@ Called for every specifier of every `export`-import statement.
 
 Called when parsing a variable declaration.
 
-- Callbak Parameters: `declaration`
+- Callback Parameters: `declaration`
 
 
 ### varDeclarationLet
@@ -354,7 +355,7 @@ Called when parsing a variable declaration.
 
 Called when parsing a variable declaration defined using `let`
 
-- Callbak Parameters: `declaration`
+- Callback Parameters: `declaration`
 
 
 ### varDeclarationConst
@@ -363,7 +364,7 @@ Called when parsing a variable declaration defined using `let`
 
 Called when parsing a variable declaration defined using `const`
 
-- Callbak Parameters: `declaration`
+- Callback Parameters: `declaration`
 
 
 ### varDeclarationVar
@@ -372,7 +373,7 @@ Called when parsing a variable declaration defined using `const`
 
 Called when parsing a variable declaration defined using `var`
 
-- Callbak Parameters: `declaration`
+- Callback Parameters: `declaration`
 
 
 ### canRename
@@ -516,25 +517,8 @@ Called when parsing an expression.
 ```js
 const a = this;
 
-parser.hooks.new.for('this').tap('MyPlugin', expression => {});
+parser.hooks.expression.for('this').tap('MyPlugin', expression => {});
 ```
-
-
-### expressionAnyMember
-
-`SyncBailHook`
-
-Executed when parsing a `MemberExpression`.
-
-- Hook Parameters: `identifier`
-- Callback Parameters: `expression`
-
-```js
-const a = process.env;
-
-parser.hooks.new.for('process').tap('MyPlugin', expression => {});
-```
-
 
 ### expressionConditionalOperator
 
@@ -551,4 +535,4 @@ Called when parsing a `ConditionalExpression` e.g. `condition ? a : b`
 
 Get access to the abstract syntax tree (AST) of a code fragment
 
-Parameters: `ast` `comments`
+- Parameters: `ast` `comments`

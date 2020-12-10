@@ -6,9 +6,10 @@ contributors:
   - DullReferenceException
   - EugeneHlushko
   - FadySamirSadek
+  - iamakulov
 ---
 
-IgnorePlugin prevents generation of modules for `import` or `require` calls matching the regular expressions or filter functions:
+IgnorePlugin prevents the generation of modules for `import` or `require` calls matching the regular expressions or filter functions:
 
 ## Using regular expressions
 
@@ -17,7 +18,7 @@ IgnorePlugin prevents generation of modules for `import` or `require` calls matc
 
 ```javascript
 new webpack.IgnorePlugin({resourceRegExp, contextRegExp});
-// old way, deprecated in webpack v5
+// Supported in webpack 4 and earlier, unsupported in webpack 5:
 new webpack.IgnorePlugin(resourceRegExp, [contextRegExp]);
 ```
 

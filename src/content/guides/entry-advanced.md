@@ -1,6 +1,6 @@
 ---
 title: Advanced entry
-sort: 24
+sort: 25
 contributors:
   - EugeneHlushko
 ---
@@ -72,7 +72,7 @@ module.exports = {
 };
 ```
 
-Running webpack with above config will output into `./dist` as we did not specify different output path. `./dist` directory will now contain four files:
+Running webpack with above configuration will output into `./dist` as we did not specify different output path. `./dist` directory will now contain four files:
 
 - home.js
 - home.css

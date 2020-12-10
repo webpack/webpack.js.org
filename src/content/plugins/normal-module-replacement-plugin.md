@@ -21,7 +21,7 @@ new webpack.NormalModuleReplacementPlugin(
 
 Replace a specific module when building for a [development environment](/guides/production).
 
-Say you have a config file `some/path/config.development.module.js` and a special version for production in `some/path/config.production.module.js`
+Say you have a configuration file `some/path/config.development.module.js` and a special version for production in `some/path/config.production.module.js`
 
 Just add the following plugin when building for production:
 
@@ -53,7 +53,7 @@ module.exports = function(env) {
 };
 ```
 
-Create the two config files:
+Create the two configuration files:
 
 __app/config-VERSION_A.js__
 
@@ -71,14 +71,14 @@ export default {
 };
 ```
 
-Then import that config using the keyword you're looking for in the regexp:
+Then import that configuration using the keyword you're looking for in the regexp:
 
 ``` javascript
 import config from 'app/config-APP_TARGET';
 console.log(config.title);
 ```
 
-And now you just get the right config imported depending on which target you're building for:
+And now you just get the right configuration imported depending on which target you're building for:
 
 ```bash
 webpack --env.APP_TARGET VERSION_A

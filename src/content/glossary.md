@@ -8,6 +8,7 @@ contributors:
   - skipjack
   - byzyk
   - pranshuchittora
+  - jamesgeorge007
 ---
 
 This index lists common terms used throughout the webpack ecosystem.
@@ -15,7 +16,7 @@ This index lists common terms used throughout the webpack ecosystem.
 
 ## A
 
-- [__Asset__](/guides/asset-management/): This a general term for the images, fonts, media, and any other kind of files that are typically used in websites and other applications. These typically end up as individual files within the [output](/glossary/#o) but can also be inlined via things like the [style-loader](/loaders/style-loader) or [url-loader](/loaders/url-loader).
+- [__Asset__](/guides/asset-management/): This is a general term for the images, fonts, media, and any other kind of files that are typically used in websites and other applications. These typically end up as individual files within the [output](/glossary/#o) but can also be inlined via things like the [style-loader](/loaders/style-loader) or [url-loader](/loaders/url-loader).
 
 
 ## B
@@ -28,7 +29,7 @@ This index lists common terms used throughout the webpack ecosystem.
 
 - __Chunk__: This webpack-specific term is used internally to manage the bundling process. Bundles are composed out of chunks, of which there are several types (e.g. entry and child). Typically, _chunks_ directly correspond with the output _bundles_ however, there are some configurations that don't yield a one-to-one relationship.
 - [__Code Splitting__](/guides/code-splitting/): Refers to dividing your code into various bundles/chunks which you can then load on demand instead of loading a single bundle containing everything.
-- [__Configuration__](/concepts/configuration/): webpack config file is a plain old JavaScript file that exports an object. This object is then processed by webpack based upon its defined properties.
+- [__Configuration__](/concepts/configuration/): webpack configuration file is a plain old JavaScript file that exports an object. This object is then processed by webpack based upon its defined properties.
 
 
 ## D
@@ -49,12 +50,14 @@ This index lists common terms used throughout the webpack ecosystem.
 ## L
 
 - [__Loaders__](/concepts/loaders): Transformations that are applied on the source code of a module. They allow you to pre-process files as you `require()` or "load" them. Similar to a 'task-runner'.
+- [__Lazy Loading__](/guides/lazy-loading): A process of loading parts (chunks) of your application lazily. In other words loading them only when we really need them.
 
 
 ## M
 
 - [__Module__](/concepts/modules): Discrete chunks of functionality that provide a smaller surface area than a full program. Well-written modules provide solid abstractions and encapsulation boundaries which make up a coherent design and clear purpose.
 - [__Module Resolution__](/concepts/module-resolution/): A module can be required as a dependency from another module and a resolver is a library which helps in locating a module by its absolute path. Modules are searched for inside all directories specified in `resolve.modules`.
+- [__Manifest__](/concepts/manifest): The runtime will use it to resolve and load modules once they've been bundled and shipped to the browser.
 
 
 ## O
@@ -71,6 +74,12 @@ This index lists common terms used throughout the webpack ecosystem.
 ## R
 
 - [__Request__](/guides/dependency-management/): Refers to the expression in the require/import statement, e.g. _require("./template/" + name + ".ejs")_, the request is _"./template/" + name + ".ejs"_.
+
+
+## S
+
+- [__Scaffolding__](/guides/scaffolding/): This feature allows creating a webpack configuration by using customizable third-party initialization packages.
+- [__Shimming__](/guides/shimming/): Not all JS files can be used directly with webpack. The file maybe in an unsupported module format, or not even in any module format. It is here where `shimming` comes into play.
 
 
 ## T
