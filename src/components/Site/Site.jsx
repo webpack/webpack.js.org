@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import PropTypes from 'prop-types';
 import { MDXProvider } from '@mdx-js/react';
+import { useTransition, animated, config } from 'react-spring';
 
 // Import Utilities
 import {
@@ -45,8 +46,15 @@ Site.propTypes = {
 };
 function Site(props) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [showUpdateBox, setShowUpdateBox] = useState(false);
+  const [list, setList] = useState([]);
   const [wb, setWb] = useState(undefined);
+
+  const listTransitions = useTransition(list, {
+    config: config.gentle,
+    from: { opacity: 0, transform: 'translate3d(25%, 0px, 0px)' },
+    enter: { opacity: 1, transform: 'translate3d(0%, 0px, 0px)' },
+    keys: list.map((item, index) => index),
+  });
   const skip = () => {
     if (!wb) return;
     wb.messageSkipWaiting();
@@ -109,7 +117,7 @@ function Site(props) {
                 // eslint-disable-next-line
                 "A new service worker has installed, but it can't activate until all tabs running the current version have been unloaded"
               );
-              setShowUpdateBox(true);
+              setList([true]);
             });
 
             // listen to `controlling`
@@ -233,7 +241,11 @@ function Site(props) {
           />
         </Switch>
         <Footer />
-        {showUpdateBox ? <NotifyBox skip={skip} /> : undefined}
+        {listTransitions((styles) => (
+          <animated.div style={styles} className='notifyBox'>
+            <NotifyBox skip={skip} />
+          </animated.div>
+        ))}
       </div>
     </MDXProvider>
   );
