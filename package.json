@@ -154,7 +154,6 @@
   },
   "dependencies": {
     "docsearch.js": "^2.5.2",
-    "gitter-sidecar": "^1.2.3",
     "path-browserify": "^1.0.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
