@@ -105,10 +105,10 @@ W> Don't use too many workers, as there is a boot overhead for the Node.js runti
 
 ### Persistent cache
 
-Enable persistent caching with the `cache-loader`. Clear cache directory on `"postinstall"` in `package.json`.
+Use [`cache`](/configuration/other-options/#cache) option in webpack configuration. Clear cache directory on `"postinstall"` in `package.json`.
 
 
-T> We support yarn PnP version 3 [`yarn 2 berry`](https://next.yarnpkg.com/features/pnp) for persistent caching
+T> We support yarn PnP version 3 [`yarn 2 berry`](https://yarnpkg.com/features/pnp) for persistent caching.
 
 ### Custom plugins/loaders
 
@@ -153,7 +153,7 @@ Be aware of the performance differences between the different `devtool` settings
 - The `cheap-source-map` variants are more performant if you can live with the slightly worse mapping quality.
 - Use a `eval-source-map` variant for incremental builds.
 
-=> In most cases, `eval-cheap-module-source-map` is the best option.
+T> In most cases, `eval-cheap-module-source-map` is the best option.
 
 
 ### Avoid Production Specific Tooling
@@ -161,8 +161,7 @@ Be aware of the performance differences between the different `devtool` settings
 Certain utilities, plugins, and loaders only make sense when building for production. For example, it usually doesn't make sense to minify and mangle your code with the `TerserPlugin` while in development. These tools should typically be excluded in development:
 
 - `TerserPlugin`
-- `ExtractTextPlugin`
-- `[hash]`/`[chunkhash]`
+- `[fullhash]`/`[chunkhash]`/`[contenthash]`
 - `AggressiveSplittingPlugin`
 - `AggressiveMergingPlugin`
 - `ModuleConcatenationPlugin`
@@ -170,15 +169,17 @@ Certain utilities, plugins, and loaders only make sense when building for produc
 
 ### Minimal Entry Chunk
 
-webpack only emits updated chunks to the filesystem. For some configuration options, (HMR, `[name]`/`[chunkhash]` in `output.chunkFilename`, `[hash]`) the entry chunk is invalidated in addition to the changed chunks.
+webpack only emits updated chunks to the filesystem. For some configuration options, (HMR, `[name]`/`[chunkhash]`/`[contenthash]` in `output.chunkFilename`, `[fullhash]`) the entry chunk is invalidated in addition to the changed chunks.
 
-Make sure the entry chunk is cheap to emit by keeping it small. The following code block extracts a chunk containing only the runtime with _all other chunks as children_:
+Make sure the entry chunk is cheap to emit by keeping it small. The following configuration creates an additional chunk for the runtime code, so it's cheap to generate:
 
 ```js
-new CommonsChunkPlugin({
-  name: 'manifest',
-  minChunks: Infinity,
-});
+module.exports = {
+  // ...
+  optimization: {
+    runtimeChunk: true
+  }
+};
 ```
 
 ### Avoid Extra Optimization Steps

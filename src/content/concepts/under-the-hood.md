@@ -88,7 +88,9 @@ __./src/index.jsx__
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import('./app.jsx').then(App => ReactDOM.render(<App />, root));
+import('./app.jsx').then(App => {
+  ReactDOM.render(<App />, root);
+});
 ```
 
 Initial chunk with name `main` is created. It contains:
@@ -113,7 +115,9 @@ When using dynamic import we may specify a chunk name explicitly by using a ["ma
 import(
   /* webpackChunkName: "app" */
   './app.jsx'
-).then(App => ReactDOM.render(<App />, root));
+).then(App => {
+  ReactDOM.render(<App />, root);
+});
 ```
 
 __Output:__
@@ -127,6 +131,7 @@ The names of the output files are affected by the two fields in the config:
 
 - [`output.filename`](/configuration/output/#outputfilename) - for `initial` chunk files
 - [`output.chunkFilename`](/configuration/output/#outputchunkfilename) - for `non-initial` chunk files
+- In some cases chunks are used `initial` and `non-initial`. In those cases `output.filename` is used.
 
 A [few placeholders](/configuration/output/#template-strings) are available in these fields. Most often:
 

@@ -136,7 +136,7 @@ module.exports = {
 To use this option with the CLI pass the `--allowed-hosts` option a comma-delimited string.
 
 ```bash
-webpack-dev-server --entry /entry/file --output-path /output/path --allowed-hosts .host.com,host2.com
+webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com,host2.com
 ```
 
 ## `devServer.before`
@@ -182,7 +182,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --bonjour
+webpack serve --bonjour
 ```
 
 
@@ -210,19 +210,8 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --client-log-level silent
+webpack serve --client-log-level silent
 ```
-
-## `devServer.color` - CLI only
-
-`boolean`
-
-Enables/Disables colors on the console.
-
-```bash
-webpack-dev-server --color
-```
-
 
 ## `devServer.compress`
 
@@ -244,7 +233,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --compress
+webpack serve --compress
 ```
 
 
@@ -289,7 +278,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --content-base /path/to/content/dir
+webpack serve --content-base ./path/to/content/dir
 ```
 
 
@@ -350,7 +339,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --disable-host-check
+webpack serve --disable-host-check
 ```
 
 
@@ -457,7 +446,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --history-api-fallback
+webpack serve --history-api-fallback
 ```
 
 For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
@@ -483,7 +472,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --host 0.0.0.0
+webpack serve --host 0.0.0.0
 ```
 
 
@@ -527,7 +516,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --hot-only
+webpack serve --hot only
 ```
 
 
@@ -573,13 +562,13 @@ module.exports = {
 Usage via CLI
 
 ```bash
-webpack-dev-server --http2
+webpack serve --http2
 ```
 
 To pass your own certificate via CLI, use the following options
 
 ```bash
-webpack-dev-server --http2 --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
+webpack serve --http2 --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
 ```
 
 
@@ -621,13 +610,13 @@ This object is passed straight to Node.js HTTPS module, so see the [HTTPS docume
 Usage via the CLI
 
 ```bash
-webpack-dev-server --https
+webpack serve --https
 ```
 
 To pass your own certificate via the CLI use the following options
 
 ```bash
-webpack-dev-server --https --key /path/to/server.key --cert /path/to/server.crt --cacert /path/to/ca.pem
+webpack serve --https --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
 ```
 
 ## `devServer.index`
@@ -655,7 +644,7 @@ module.exports = {
 Output cli information. It is enabled by default.
 
 ```bash
-webpack-dev-server --info=false
+webpack serve --info false
 ```
 
 
@@ -718,7 +707,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --inline=false
+webpack serve --inline false
 ```
 
 T> Inline mode is recommended for [Hot Module Replacement](/plugins/hot-module-replacement-plugin/) as it includes an HMR trigger from the websocket. Polling mode can be used as an alternative, but requires an additional entry point, `'webpack/hot/poll?1000'`.
@@ -744,7 +733,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --lazy
+webpack serve --lazy
 ```
 
 T> [`watchOptions`](#devserverwatchoptions-) will have no effect when used with __lazy mode__.
@@ -772,7 +761,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --no-live-reload
+webpack serve --no-live-reload
 ```
 
 
@@ -881,7 +870,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --open 'Google Chrome'
+webpack serve --open 'Google Chrome'
 ```
 
 T> The browser application name is platform dependent. Don't hard code it in reusable modules. For example, `'Chrome'` is `'Google Chrome'` on macOS, `'google-chrome'` on Linux and `'chrome'` on Windows.
@@ -907,7 +896,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --open-page "/different/page"
+webpack serve --open-page /different/page
 ```
 
 If you wish to specify multiple pages to open in the browser.
@@ -926,7 +915,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --open-page "/different/page1,/different/page2"
+webpack serve --open-page /different/page1,/different/page2
 ```
 
 
@@ -976,7 +965,7 @@ __webpack.config.js__
 module.exports = {
   //...
   devServer: {
-    pfx: '/path/to/file.pfx'
+    pfx: './path/to/file.pfx'
   }
 };
 ```
@@ -984,7 +973,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --pfx /path/to/file.pfx
+webpack serve --pfx ./path/to/file.pfx
 ```
 
 
@@ -1008,7 +997,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --pfx-passphrase passphrase
+webpack serve --pfx-passphrase passphrase
 ```
 
 
@@ -1032,7 +1021,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --port 8080
+webpack serve --port 8080
 ```
 
 
@@ -1188,7 +1177,7 @@ module.exports = {
 Output running progress to console.
 
 ```bash
-webpack-dev-server --progress
+webpack serve --progress
 ```
 
 
@@ -1214,7 +1203,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --public myapp.test:80
+webpack serve --public myapp.test:80
 ```
 
 
@@ -1281,7 +1270,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --quiet
+webpack serve --quiet
 ```
 
 ## `devServer.serveIndex`
@@ -1326,30 +1315,6 @@ module.exports = {
 ```
 
 
-## `devServer.socket`
-
-`string`
-
-The Unix socket to listen to (instead of a host).
-
-__webpack.config.js__
-
-```javascript
-module.exports = {
-  //...
-  devServer: {
-    socket: 'socket'
-  }
-};
-```
-
-Usage via the CLI
-
-```bash
-webpack-dev-server --socket socket
-```
-
-
 ## `devServer.sockHost`
 
 `string`
@@ -1388,7 +1353,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --sockPath /socket
+webpack serve --sock-path /socket
 ```
 
 ## `devServer.sockPort`
@@ -1461,7 +1426,7 @@ T> This option has no effect when used with `quiet` or `noInfo`.
 This option closes the server when stdin ends.
 
 ```bash
-webpack-dev-server --stdin
+webpack serve --stdin
 ```
 
 
@@ -1581,7 +1546,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --useLocalIp
+webpack serve --use-local-ip
 ```
 
 
@@ -1605,7 +1570,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack-dev-server --watch-content-base
+webpack serve --watch-content-base
 ```
 
 
@@ -1673,6 +1638,6 @@ __package.json__
 
 ```json
 {
-  "scripts": "NODE_OPTIONS='--max-http-header-size=100000' webpack-dev-server"
+  "scripts": "NODE_OPTIONS='--max-http-header-size=100000' webpack serve"
 }
 ```

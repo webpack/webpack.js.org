@@ -9,7 +9,7 @@ contributors:
 This plugin will cause hashes to be based on the relative path of the module, generating a four character string as the module id. Suggested for use in production.
 
 ``` js
-new webpack.HashedModuleIdsPlugin({
+new webpack.ids.HashedModuleIdsPlugin({
   // Options...
 });
 ```
@@ -30,7 +30,7 @@ This plugin supports the following options:
 Here's an example of how this plugin might be used:
 
 ``` js
-new webpack.HashedModuleIdsPlugin({
+new webpack.ids.HashedModuleIdsPlugin({
   context: __dirname,
   hashFunction: 'sha256',
   hashDigest: 'hex',

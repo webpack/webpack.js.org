@@ -364,4 +364,4 @@ W> Available since webpack 4.40.0
 
 Parameters:
 
-`name` - the name of the asset to return
+- `name` - the name of the asset to return

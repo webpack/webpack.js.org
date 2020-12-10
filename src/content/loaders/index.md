@@ -62,7 +62,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 - [`less-loader`](/loaders/less-loader) Loads and compiles a LESS file
 - [`sass-loader`](/loaders/sass-loader) Loads and compiles a SASS/SCSS file
 - [`postcss-loader`](/loaders/postcss-loader) Loads and transforms a CSS/SSS file using [PostCSS](http://postcss.org)
-- [`stylus-loader`](https://github.com/shama/stylus-loader) Loads and compiles a Stylus file
+- [`stylus-loader`](/loaders/stylus-loader/) Loads and compiles a Stylus file
 
 
 ## Linting && Testing

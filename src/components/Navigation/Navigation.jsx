@@ -1,6 +1,7 @@
 // Import External Dependencies
-import React from 'react';
+import { Component } from 'react';
 import Banner from 'react-banner';
+import PropTypes from 'prop-types';
 
 // Import Components
 import Link from '../Link/Link';
@@ -15,9 +16,18 @@ import 'docsearch.js/dist/cdn/docsearch.css';
 import './Navigation.scss';
 import './Search.scss';
 
+import GithubIcon from '../../styles/icons/github.svg';
+import TwitterIcon from '../../styles/icons/twitter.svg';
+import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
+
 const onSearch = () => {};
 
-export default class Navigation extends React.Component {
+export default class Navigation extends Component {
+  static propTypes = {
+    pathname: PropTypes.string,
+    links: PropTypes.array,
+    toggleSidebar: PropTypes.func
+  }
   render() {
     let { pathname, links, toggleSidebar } = this.props;
 
@@ -33,19 +43,19 @@ export default class Navigation extends React.Component {
             title: 'GitHub Repository',
             url: 'https://github.com/webpack/webpack',
             className: 'navigation__item--icon',
-            content: <i aria-hidden="true" className="icon-github" />
+            content: <GithubIcon aria-hidden="true" fill="#fff" width={16} />
           },
           {
             title: 'webpack on Twitter',
             url: 'https://twitter.com/webpack',
             className: 'navigation__item--icon',
-            content: <i aria-hidden="true" className="icon-twitter" />
+            content: <TwitterIcon aria-hidden="true" fill="#fff" width={16} />
           },
           {
             title: 'webpack on Stack Overflow',
             url: 'https://stackoverflow.com/questions/tagged/webpack',
             className: 'navigation__item--icon',
-            content: <i aria-hidden="true" className="icon-stack-overflow" />
+            content: <StackOverflowIcon aria-hidden="true" fill="#fff" width={16} />
           },
           {
             className: 'navigation__item--icon',

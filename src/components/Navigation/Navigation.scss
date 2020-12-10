@@ -61,7 +61,8 @@
 
 .navigation__item {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-size: getFontSize(-1);
   padding-bottom: 0.1em;
   margin-right: 18px;
@@ -77,8 +78,8 @@
 
   &--icon {
     font-size: 16px;
-    margin-top: 2px;
     -webkit-font-smoothing: antialiased;
+    padding-bottom: 0;
   }
 
   &--active {

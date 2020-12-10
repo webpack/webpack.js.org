@@ -1,5 +1,4 @@
 // Import External Dependencies
-import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { BrowserRouter as AnalyticsRouter } from 'react-g-analytics';
@@ -18,7 +17,7 @@ const render = isProduction ? ReactDOM.hydrate : ReactDOM.render;
 // Client Side Rendering
 if (isClient) {
   render((
-    <Router id="UA-46921629-2">
+      <Router id="UA-46921629-2">
       <Route
         path="/"
         render={ props => (

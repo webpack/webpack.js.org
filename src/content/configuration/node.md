@@ -9,29 +9,18 @@ contributors:
   - byzyk
   - EugeneHlushko
   - anikethsaha
+  - chenxsan
 ---
 
-The following Node.js options configure whether to polyfill or mock certain [Node.js globals](https://nodejs.org/docs/latest/api/globals.html) and modules. This allows code originally written for the Node.js environment to run in other environments like the browser.
+The following Node.js options configure whether to polyfill or mock certain [Node.js globals](https://nodejs.org/docs/latest/api/globals.html).
 
-This feature is provided by webpack's internal [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js) plugin. If the target is "web" (default) or "webworker", the [`NodeSourcePlugin`](https://github.com/webpack/webpack/blob/master/lib/node/NodeSourcePlugin.js) plugin is also activated.
+This feature is provided by webpack's internal [`NodeStuffPlugin`](https://github.com/webpack/webpack/blob/master/lib/NodeStuffPlugin.js) plugin.
 
+W> As of webpack 5, You can configure only `global`, `__filename` or `__dirname` under `node` option. If you're looking for how to polyfill `fs` alike in Node.js under webpack 5, please check [resolve.fallback](/configuration/resolve/#resolvefallback) for help.
 
 ## `node`
 
-`boolean = false` `object`
-
-This is an object where each property is the name of a Node global or module and each value may be one of the following...
-
-- `true`: Provide a polyfill.
-- `'mock'`: Provide a mock that implements the expected interface but has little or no functionality.
-- `'empty'`: Provide an empty object.
-- `false`: Provide nothing. Code that expects this object may crash with a `ReferenceError`. Code that attempts to import the module using `require('modulename')` may trigger a `Cannot find module "modulename"` error.
-
-W> Not every Node global supports all four options. The compiler will throw an error for property-value combinations that aren't supported (e.g. `global: 'empty'`). See the sections below for more details.
-
-T> If you are using a module which needs global variables in it, use `ProvidePlugin` instead of `global`.
-
-These are the defaults:
+`boolean: false` `object`
 
 __webpack.config.js__
 
@@ -46,38 +35,40 @@ module.exports = {
 };
 ```
 
-Since webpack 3.0.0, the `node` option may be set to `false` to completely turn off the `NodeStuffPlugin` and `NodeSourcePlugin` plugins.
+Since webpack 3.0.0, the `node` option may be set to `false` to completely turn off the `NodeStuffPlugin` plugin.
 
 ## `node.global`
 
-`boolean = true`
+`boolean`
 
-Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` and `electron-main`.
+T> If you are using a module which needs global variables in it, use `ProvidePlugin` instead of `global`.
 
-See [the source](https://nodejs.org/api/globals.html) for the exact behavior of this object.
+See [the Node.js documentation](https://nodejs.org/api/globals.html#globals_global) for the exact behavior of this object.
 
+Options:
+
+- `true`: Provide a polyfill.
+- `false`: Provide nothing. Code that expects this object may crash with a `ReferenceError`.
 
 ## `node.__filename`
 
-`boolean` `string = mock`
-
-Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` and `electron-main`.
+`boolean` `string: 'mock' | 'eval-only'`
 
 Options:
 
 - `true`: The filename of the __input__ file relative to the [`context` option](/configuration/entry-context/#context).
-- `false`: The regular Node.js `__filename` behavior. The filename of the __output__ file when run in a Node.js environment.
-- `'mock'`: The fixed value `'index.js'`.
+- `false`: Webpack won't touch your `__filename` code, which means you have the regular Node.js `__filename` behavior. The filename of the __output__ file when run in a Node.js environment.
+- `'mock'`: The fixed value `'/index.js'`.
+- `'eval-only'`
 
 
 ## `node.__dirname`
 
-`boolean` `string = mock`
-
-Defaults to `false` for [targets](/configuration/target/) `node`, `async-node` and `electron-main`.
+`boolean` `string: 'mock' | 'eval-only'`
 
 Options:
 
 - `true`: The dirname of the __input__ file relative to the [`context` option](/configuration/entry-context/#context).
-- `false`: The regular Node.js `__dirname` behavior. The dirname of the __output__ file when run in a Node.js environment.
+- `false`:  Webpack won't touch your `__dirname` code, which means you have the regular Node.js `__dirname` behavior. The dirname of the __output__ file when run in a Node.js environment.
 - `'mock'`: The fixed value `'/'`.
+- `'eval-only'`

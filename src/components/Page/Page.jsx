@@ -1,18 +1,32 @@
 // Import External Dependencies
-import React from 'react';
+import { Children, isValidElement, Component } from 'react';
+import PropTypes from 'prop-types';
 
 // Import Components
 import PageLinks from '../PageLinks/PageLinks';
 import Markdown from '../Markdown/Markdown';
 import Contributors from '../Contributors/Contributors';
 import {PlaceholderString} from '../Placeholder/Placeholder';
-import Configuration from '../Configuration/Configuration';
+import { Pre } from '../Configuration/Configuration';
 import AdjacentPages from './AdjacentPages';
 
 // Load Styling
 import './Page.scss';
 
-class Page extends React.Component {
+class Page extends Component {
+  static propTypes = {
+    title: PropTypes.string,
+    contributors: PropTypes.array,
+    related: PropTypes.array,
+    previous: PropTypes.object,
+    next: PropTypes.object,
+    content: PropTypes.oneOfType([
+      PropTypes.shape({
+        then: PropTypes.func.isRequired,
+        default: PropTypes.string
+      })
+    ])
+  }
   constructor(props) {
     super(props);
 
@@ -44,10 +58,10 @@ class Page extends React.Component {
             } else {
               window.scrollTo(0, 0);
             }
-            
+
           })
         )
-        .catch(error =>
+        .catch(() =>
           this.setState({
             content: 'Error loading content.'
           })
@@ -68,7 +82,17 @@ class Page extends React.Component {
     let contentRender;
 
     if (typeof content === 'function') {
-      contentRender = content(Configuration).props.children.slice(4); // Cut frontmatter information
+      contentRender = content({}).props.children.slice(4); // Cut frontmatter information
+      contentRender = Children.map(contentRender, child => {
+        if (isValidElement(child)) {
+          if (child.props.mdxType === 'pre') {
+            // eslint-disable-next-line
+            return <Pre children={child.props.children} />;
+          }
+        }
+
+        return child;
+      });
     } else {
       contentRender = (
         <div
@@ -87,7 +111,7 @@ class Page extends React.Component {
           <h1>{title}</h1>
 
           {contentRender}
-          
+
           {
             (previous || next) && <AdjacentPages previous={previous} next={next} />
           }

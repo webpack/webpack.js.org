@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from '../Link/Link';
 import Container from '../Container/Container';
 import Icon from '../../assets/icon-square-small.svg';
@@ -12,7 +11,6 @@ const Footer = () => (
       <section className="footer__left">
         <Link className="footer__link" to="/guides/getting-started/">Get Started</Link>
         <Link className="footer__link" to="/organization/">Organization</Link>
-        <Link className="footer__link" to="/starter-kits/">Starter Kits</Link>
         <Link className="footer__link" to="/comparison/">Comparison</Link>
       </section>
 

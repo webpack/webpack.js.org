@@ -11,6 +11,7 @@ contributors:
   - byzyk
   - EugeneHlushko
   - snitin315
+  - chenxsan
 ---
 
 webpack has a rich plugin interface. Most of the features within webpack itself use this plugin interface. This makes webpack __flexible__.
@@ -25,13 +26,14 @@ Name                                                     | Description
 [`DefinePlugin`](/plugins/define-plugin)           | Allow global constants configured at compile time
 [`DllPlugin`](/plugins/dll-plugin)                 | Split bundles in order to drastically improve build time
 [`EnvironmentPlugin`](/plugins/environment-plugin) | Shorthand for using the [`DefinePlugin`](/plugins/define-plugin) on `process.env` keys
+[`EslintWebpackPlugin`](/plugins/eslint-webpack-plugin) | A ESLint plugin for webpack
 [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) | Enable Hot Module Replacement (HMR)
 [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin)          | Easily create HTML files to serve your bundles
 [`IgnorePlugin`](/plugins/ignore-plugin)                     | Exclude certain modules from bundles
 [`LimitChunkCountPlugin`](/plugins/limit-chunk-count-plugin) | Set min/max limits for chunking to better control chunking
 [`MinChunkSizePlugin`](/plugins/min-chunk-size-plugin)       | Keep chunk size above the specified limit
 [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin)       | creates a CSS file per JS file which requires CSS
-[`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimizationnoemitonerrors)  | Skip the emitting phase when there are compilation errors
+[`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimizationemitonerrors)  | Skip the emitting phase when there are compilation errors
 [`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin) | Replace resource(s) that matches a regexp
 [`NpmInstallWebpackPlugin`](/plugins/npm-install-webpack-plugin) | Auto-install missing dependencies during development
 [`ProgressPlugin`](/plugins/progress-plugin)                     | Report compilation progress
