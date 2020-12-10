@@ -21,7 +21,6 @@ import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import Gitter from '../Gitter/Gitter';
 import Vote from '../Vote/Vote';
 import Organization from '../Organization/Organization';
 import Badge from '../Badge/Badge.js';
@@ -143,7 +142,6 @@ class Site extends Component {
                                 previous={previous}
                                 next={next}
                               />
-                              <Gitter />
                             </Fragment>
                           );
                         }}
