@@ -590,11 +590,7 @@ module.exports = {
 
 自定义热更新 chunk 的文件名。可选的值的详细信息，请查看 [`output.filename`](#outputfilename) 选项。
 
-<<<<<<< HEAD
-占位符只能是 `[id]` 和 `[hash]`，默认值是：
-=======
-The only placeholders allowed here are `[id]` and `[fullhash]`, the default being:
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
+其中值唯一的占位符是 `[id]` 和 `[fullhash]`，其默认为：
 
 __webpack.config.js__
 
@@ -624,11 +620,7 @@ JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
 `string = '[runtime].[fullhash].hot-update.json'` `function`
 
-<<<<<<< HEAD
-自定义热更新的主文件名(main filename)。`[hash]` 是唯一可用的占位符。
-=======
-Customize the main hot update filename. `[fullhash]` and `[runtime]` are available as placeholder.
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
+自定义热更新的主文件名(main filename)。`[fullhash]` 和 `[runtime]` 均可作为占位符。
 
 T> 通常，你不需要修改 `output.hotUpdateMainFilename`.
 
@@ -806,11 +798,7 @@ module.exports = _entry_return_;
 require('MyLibrary').doSomething();
 ```
 
-<<<<<<< HEAD
-注意，`output.library` 会被省略，因此对于此特定的 `output.libraryTarget`，无需再设置 `output.library` 。
-=======
-Note that `output.library` can't be used with this particular `output.libraryTarget`, for further details, please [read this issue](https://github.com/webpack/webpack/issues/11800).
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
+注意，`output.library` 不能与 `output.libraryTarget` 一起使用，具体原因请参照[此 issue](https://github.com/webpack/webpack/issues/11800)。
 
 T> 想要弄清楚 CommonJS 和 CommonJS2 之间的区别？虽然它们很相似，但二者之间存在一些微妙的差异，这通常与 webpack 上下文没有关联。（更多详细信息，请[阅读此 issue](https://github.com/webpack/webpack/issues/1114)。）
 
@@ -1048,11 +1036,7 @@ module.exports = {
 
 `boolean=true` `string: 'verbose'`
 
-<<<<<<< HEAD
-告知 webpack 在 bundle 中引入「所包含模块信息」的相关注释。此选项在 `development` [模式](/concepts/mode/)时的默认值是 `true`，而在 `production` [模式](/configuration/mode/)时的默认值是 `false`。
-=======
-Tells webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` [mode](/configuration/mode/) respectively. `'verbose'` shows more information like exports, runtime requirements and bailouts.
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
+告知 webpack 在 bundle 中引入「所包含模块信息」的相关注释。此选项在 `development` [模式](/configuration/mode/)时的默认值为 `true`，而在 `production` [模式](/configuration/mode/)时的默认值为 `false`。当值为 `'verbose'` 时，会显示更多信息，如 export，运行时依赖以及 bailouts。
 
 W> 对于在开发环境(development)下阅读生成代码时，虽然通过这些注释可以提供有用的数据信息，但在生产环境(production)下，__不应该__使用。
 

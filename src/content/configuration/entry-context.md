@@ -110,11 +110,7 @@ module.exports = {
 
 ### Dependencies {#dependencies}
 
-<<<<<<< HEAD
-默认情况下，每个入口 chunk 保存了全部其用的模块(modules)。使用 `dependOn`—选项你可以与另一个入口 chunk 共享模块:
-=======
-By default, every entry chunk stores all the modules that it uses. With `dependOn` option you can share the modules from one entry chunk to another:
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
+默认情况下，每个入口 chunk 保存了全部其用的模块(modules)。使用 `dependOn` 选项你可以与另一个入口 chunk 共享模块:
 
 ```js
 module.exports = {
@@ -128,10 +124,7 @@ module.exports = {
 
 `app` 这个 chunk 就不会包含 `react-vendors` 拥有的模块了.
 
-<<<<<<< HEAD
-你也可以使用数组为一个入口指定多个文件：
-=======
-`dependOn` option can also accept an array of strings:
+`dependOn` 选项的也可以为字符串数组：
 
 ```js
 module.exports = {
@@ -147,8 +140,7 @@ module.exports = {
 };
 ```
 
-Also, you can specify multiple files per entry using an array:
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
+此外，你还可以使用数组为每个入口指定多个文件：
 
 ```js
 module.exports = {

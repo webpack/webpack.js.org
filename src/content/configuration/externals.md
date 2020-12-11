@@ -151,20 +151,12 @@ module.exports = {
 
 对于 webpack 外部化，通过定义函数来控制行为，可能会很有帮助。例如，[webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals) 能够排除 `node_modules` 目录中所有模块，还提供一些选项，比如白名单 package(whitelist package)。
 
-<<<<<<< HEAD
-函数接收三个入参：
+函数接收两个入参：
 
-- `context` (`string`): 包含引用的文件目录。
-- `request` (`string`): 被请求引入的路径。
+- `ctx` (`object`)：包含文件详情的对象。
+  - `ctx.context` (`string`): 包含引用的文件目录。
+  - `ctc.request` (`string`): 被请求引入的路径。
 - `callback` (`function (err, result, type)`): 用于指明模块如何被外部化的回调函数
-=======
-The function receives two arguments:
-
-- `ctx` (`object`): Object containing details of the file.
-    - `ctx.context` (`string`): The directory of the file which contains the import.
-    - `ctx.request` (`string`): The import path being requested.
-- `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
 
 回调函数接收三个入参：
 
@@ -200,13 +192,8 @@ __webpack.config.js__
 ```javascript
 module.exports = {
   externals: [
-<<<<<<< HEAD
-    function(context, request, callback) {
-      // 该外部化的模块，是一个 `commonjs2` 的模块，且放在 `@scope/library` 目录中
-=======
     function(ctx, callback) {
-      // The external is a `commonjs2` module located in `@scope/library`
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
+      // 该外部化的模块，是一个 `commonjs2` 的模块，且放在 `@scope/library` 目录中
       callback(null, '@scope/library', 'commonjs2');
     }
   ]
@@ -218,13 +205,8 @@ __webpack.config.js__
 ```javascript
 module.exports = {
   externals: [
-<<<<<<< HEAD
-    function(context, request, callback) {
-      // 该外部化模块是一个全局变量叫作 `nameOfGlobal`.
-=======
     function(ctx, callback) {
-      // The external is a global variable called `nameOfGlobal`.
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
+      // 该外部化模块是一个全局变量叫作 `nameOfGlobal`.
       callback(null, 'nameOfGlobal');
     }
   ]
@@ -236,13 +218,8 @@ __webpack.config.js__
 ```javascript
 module.exports = {
   externals: [
-<<<<<<< HEAD
-    function(context, request, callback) {
-      // 该外部化模块是一个在`@scope/library`模块里的命名导出（named export）。
-=======
     function(ctx, callback) {
-      // The external is a named export in the `@scope/library` module.
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
+      // 该外部化模块是一个在`@scope/library`模块里的命名导出（named export）。
       callback(null, ['@scope/library', 'namedexport'], 'commonjs');
     }
   ]
@@ -254,13 +231,8 @@ __webpack.config.js__
 ```javascript
 module.exports = {
   externals: [
-<<<<<<< HEAD
-    function(context, request, callback) {
-      // 外部化模块是一个 UMD 模块
-=======
     function(ctx, callback) {
-      // The external is a UMD module
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
+      // 外部化模块是一个 UMD 模块
       callback(null, {
         root: 'componentsGlobal',
         commonjs: '@scope/components',
@@ -309,13 +281,8 @@ module.exports = {
       // 字符串数组
       subtract: ['./math', 'subtract']
     },
-<<<<<<< HEAD
     // 函数
-    function(context, request, callback) {
-=======
-    // Function
     function({ context, request }, callback) {
->>>>>>> a57458cccb7b30be619b376a1519d81ceb53b453
       if (/^yourregex$/.test(request)){
         return callback(null, 'commonjs ' + request);
       }
