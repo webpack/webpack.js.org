@@ -176,7 +176,7 @@ More [`examples`](#examples)
 Type: `String|Function`
 Default: `compiler.options.output`
 
-##### String
+##### String {#string}
 
 Output path.
 
@@ -209,10 +209,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-#### `context` {#context}
-=======
-##### Function
+##### Function {#function}
 
 Allows to modify the writing path.
 
@@ -258,8 +255,7 @@ module.exports = {
 };
 ```
 
-#### `context`
->>>>>>> e0bbf1424d25b5a3bef7b5e55d22d789689e6672
+#### `context` {#context}
 
 Type: `String`
 Default: `options.context|compiler.options.context`
@@ -467,11 +463,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-#### `flatten` {#flatten}
-=======
-#### `transform`
->>>>>>> e0bbf1424d25b5a3bef7b5e55d22d789689e6672
+#### `transform` {#transform}
 
 Type: `Function|Object`
 Default: `undefined`
@@ -502,18 +494,14 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-#### `transform` {#transform}
-=======
-##### `Object`
+##### `Object` {#object}
 
 |               Name                |        Type         |   Default   | Description                                                                                                      |
 | :-------------------------------: | :-----------------: | :---------: | :--------------------------------------------------------------------------------------------------------------- |
 | **[`transformer`](#transformer)** |    `{Function}`     | `undefined` | Allows to modify the file contents.                                                                              |
 |       **[`cache`](#cache)**       | `{Boolean\|Object}` |   `false`   | Enable `transform` caching. You can use `transform: { cache: { key: 'my-cache-key' } }` to invalidate the cache. |
 
-###### `transformer`
->>>>>>> e0bbf1424d25b5a3bef7b5e55d22d789689e6672
+###### `transformer` {#transformer}
 
 Type: `Function`
 Default: `undefined`
@@ -564,11 +552,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-#### `cacheTransform` {#cachetransform}
-=======
-###### `cache`
->>>>>>> e0bbf1424d25b5a3bef7b5e55d22d789689e6672
+###### `cache` {#cache}
 
 Type: `Boolean|Object`
 Default: `false`
@@ -578,11 +562,7 @@ Default: `false`
 Enable/disable and configure caching.
 Default path to cache directory: `node_modules/.cache/copy-webpack-plugin`.
 
-<<<<<<< HEAD
-##### `Boolean` {#boolean}
-=======
-###### `Boolean`
->>>>>>> e0bbf1424d25b5a3bef7b5e55d22d789689e6672
+###### `Boolean` {#boolean}
 
 Enables/Disable `transform` caching.
 
@@ -596,41 +576,11 @@ module.exports = {
         {
           from: "src/*.png",
           to: "dest/",
-<<<<<<< HEAD
-          transform(content, path) {
-            return optimize(content);
-          },
-          cacheTransform: true,
-        },
-      ],
-    }),
-  ],
-};
-```
-
-##### `String` {#string}
-
-Enables `transform` caching and setup cache directory.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  plugins: [
-    new CopyPlugin({
-      patterns: [
-        {
-          from: "src/*.png",
-          to: "dest/",
-          transform(content, path) {
-            return optimize(content);
-=======
           transform: {
             transformer(content, path) {
               return optimize(content);
             },
             cache: true,
->>>>>>> e0bbf1424d25b5a3bef7b5e55d22d789689e6672
           },
         },
       ],
@@ -745,16 +695,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-#### `transformPath` {#transformpath}
-
-Type: `Function`
-Default: `undefined`
-
-Allows to modify the writing path.
-=======
-### `noErrorOnMissing`
->>>>>>> e0bbf1424d25b5a3bef7b5e55d22d789689e6672
+### `noErrorOnMissing` {#noerroronmissing}
 
 Type: `Boolean`
 Default: `false`
@@ -802,16 +743,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `noErrorOnMissing` {#noerroronmissing}
-
-Type: `Boolean`
-Default: `false`
-
-Doesn't generate an error on missing file(s);
-=======
 **webpack.config.js**
->>>>>>> e0bbf1424d25b5a3bef7b5e55d22d789689e6672
 
 ```js
 module.exports = {
@@ -1049,10 +981,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## Contributing {#contributing}
-=======
-#### Flatten copy
+#### Flatten copy {#flatten-copy}
 
 Removes all directory references and only copies file names.
 
@@ -1083,7 +1012,7 @@ file-2.txt
 nested-file.txt
 ```
 
-#### Copy in new directory
+#### Copy in new directory {#copy-in-new-directory}
 
 **webpack.config.js**
 
@@ -1115,8 +1044,7 @@ Result:
 "newdirectory/nested/nestedfile.txt",
 ```
 
-## Contributing
->>>>>>> e0bbf1424d25b5a3bef7b5e55d22d789689e6672
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
