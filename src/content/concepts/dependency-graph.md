@@ -16,4 +16,10 @@ Any time one file depends on another, webpack treats this as a _dependency_. Thi
 When webpack processes your application, it starts from a list of modules defined on the command line or in its configuration file.
 Starting from these [_entry points_](/concepts/entry-points/), webpack recursively builds a _dependency graph_ that includes every module your application needs, then bundles all of those modules into a small number of _bundles_ - often, just one - to be loaded by the browser.
 
+Sometimes it is very helpful to visualize the dependency graph using tools like `webpack-visualizer`. You can install it by:
+
+``` bash
+npm install webpack-visualizer-plugin
+```
+
 T> Bundling your application is especially powerful for _HTTP/1.1_ clients, as it minimizes the number of times your app has to wait while the browser starts a new request. For _HTTP/2_, you can also use [Code Splitting](/guides/code-splitting/) to achieve best results.
