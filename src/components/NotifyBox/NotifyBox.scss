@@ -9,10 +9,19 @@
   bottom: 10px;
   right: 10px;
   color: #333333;
+  &__container {
+    display: flex;
+    align-items: center;
+  }
   button {
+    margin-left: 5px;
     background: #1d78c1;
     border: 1px solid #1d78c1;
     color: #fff;
     cursor: pointer;
+    &:disabled {
+      cursor: not-allowed;
+      background: #535353;
+    }
   }
 }

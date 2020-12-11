@@ -47,8 +47,10 @@ function Site(props) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [showUpdateBox, setShowUpdateBox] = useState(false);
   const [wb, setWb] = useState(undefined);
+  const [loading, setLoading] = useState(false);
   const skip = () => {
     if (!wb) return;
+    setLoading(true);
     wb.messageSkipWaiting();
   };
   /**
@@ -233,7 +235,7 @@ function Site(props) {
           />
         </Switch>
         <Footer />
-        {showUpdateBox ? <NotifyBox skip={skip} /> : undefined}
+        {showUpdateBox ? <NotifyBox skip={skip} loading={loading} /> : undefined}
       </div>
     </MDXProvider>
   );
