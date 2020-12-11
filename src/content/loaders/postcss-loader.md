@@ -109,11 +109,19 @@ module.exports = {
 
 ## 选项 {#options}
 
+<<<<<<< HEAD
 |                名称                 |         类型         |          默认值           | 描述                                      |
 | :---------------------------------: | :------------------: | :-----------------------: | :---------------------------------------- |
 |        [`execute`](#execute)        |     `{Boolean}`      |        `undefined`        | 在 `CSS-in-JS` 中启动 PostCSS Parser 支持 |
 | [`postcssOptions`](#postcssoptions) | `{Object\/Function}` | `Postcss.process的默认值` | 设置 `PostCSS` 选项与插件                 |
 |      [`sourceMap`](#sourcemap)      |     `{Boolean}`      |    `compiler.devtool`     | 开启 / 关闭 source map 的生成             |
+=======
+|                Name                 |         Type         |                Default                | Description                                  |
+| :---------------------------------: | :------------------: | :-----------------------------------: | :------------------------------------------- |
+|        [`execute`](#execute)        |     `{Boolean}`      |              `undefined`              | Enable PostCSS Parser support in `CSS-in-JS` |
+| [`postcssOptions`](#postcssoptions) | `{Object\|Function}` | `defaults values for Postcss.process` | Set `PostCSS` options and plugins            |
+|      [`sourceMap`](#sourcemap)      |     `{Boolean}`      |          `compiler.devtool`           | Enables/Disables generation of source maps   |
+>>>>>>> e0bbf1424d25b5a3bef7b5e55d22d789689e6672
 
 ### `execute`
 
