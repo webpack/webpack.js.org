@@ -10,6 +10,7 @@ contributors:
   - EugeneHlushko
   - smelukov
   - anshumanv
+  - snitin315
 ---
 
 入口对象是用于 webpack 查找开始构建 bundle 的地方。上下文是入口文件所处的目录的绝对路径的字符串。
@@ -109,7 +110,7 @@ module.exports = {
 
 ### Dependencies {#dependencies}
 
-默认情况下，每个入口 chunk 保存了全部其用的模块(modules)。使用 `dependOn`—选项你可以与另一个入口 chunk 共享模块:
+默认情况下，每个入口 chunk 保存了全部其用的模块(modules)。使用 `dependOn` 选项你可以与另一个入口 chunk 共享模块:
 
 ```js
 module.exports = {
@@ -123,7 +124,23 @@ module.exports = {
 
 `app` 这个 chunk 就不会包含 `react-vendors` 拥有的模块了.
 
-你也可以使用数组为一个入口指定多个文件：
+`dependOn` 选项的也可以为字符串数组：
+
+```js
+module.exports = {
+  //...
+  entry: {
+    moment: { import: 'moment-mini', runtime: 'runtime' },
+    reactvendors: { import: ['react', 'react-dom'], runtime: 'runtime' },
+    testapp: {
+      import: './wwwroot/component/TestApp.tsx',
+      dependOn: ['reactvendors', 'moment'],
+    },
+  },
+};
+```
+
+此外，你还可以使用数组为每个入口指定多个文件：
 
 ```js
 module.exports = {

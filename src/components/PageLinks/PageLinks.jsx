@@ -1,4 +1,3 @@
-import React from 'react';
 import Url from 'url';
 import './PageLinks.scss';
 import icon from '../../assets/icon-print.svg';
@@ -6,10 +5,9 @@ import EditIcon from '../../styles/icons/edit.svg';
 
 const baseURL = 'https://github.com/docschina/webpack.js.org/edit/cn/';
 
-export default ({
+export default function PageLinks({
   page = {},
-  ...props
-}) => {
+}) {
   const editLink = page.edit || Url.resolve(baseURL, page.path);
 
   // TODO: Make sure we add `repo` / `edit` and address `type` (above)
@@ -36,7 +34,7 @@ export default ({
       </button>
     </div>
   );
-};
+}
 
 function _handlePrintClick (e) {
   e.preventDefault();

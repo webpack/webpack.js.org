@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default ({
@@ -10,6 +9,7 @@ export default ({
   // mimick the `NavLink` API
   if ( url ) to = url;
 
+  // eslint-disable-next-line
   const {isActive, ...others} = props;
   if ( to.startsWith('http') || to.startsWith('//') )
     {

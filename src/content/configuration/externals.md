@@ -16,6 +16,7 @@ contributors:
   - EugeneHlushko
   - chenxsan
   - pranshuchittora
+  - kinetifex
 ---
 
 `externals` 配置选项提供了「从输出的 bundle 中排除依赖」的方法。相反，所创建的 bundle 依赖于那些存在于用户环境(consumer's environment)中的依赖。此功能通常对 __library 开发人员__来说是最有用的，然而也会有各种各样的应用程序用到它。
@@ -146,14 +147,15 @@ module.exports = {
 
 ### 函数 {#function}
 
-`function (context, request, callback)`
+`function ({ context, request }, callback)`
 
 对于 webpack 外部化，通过定义函数来控制行为，可能会很有帮助。例如，[webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals) 能够排除 `node_modules` 目录中所有模块，还提供一些选项，比如白名单 package(whitelist package)。
 
-函数接收三个入参：
+函数接收两个入参：
 
-- `context` (`string`): 包含引用的文件目录。
-- `request` (`string`): 被请求引入的路径。
+- `ctx` (`object`)：包含文件详情的对象。
+  - `ctx.context` (`string`): 包含引用的文件目录。
+  - `ctc.request` (`string`): 被请求引入的路径。
 - `callback` (`function (err, result, type)`): 用于指明模块如何被外部化的回调函数
 
 回调函数接收三个入参：
@@ -170,7 +172,7 @@ __webpack.config.js__
 module.exports = {
   //...
   externals: [
-    function(context, request, callback) {
+    function({ context, request }, callback) {
       if (/^yourregex$/.test(request)){
         // 使用 request 路径，将一个 commonjs 模块外部化
         return callback(null, 'commonjs ' + request);
@@ -190,7 +192,7 @@ __webpack.config.js__
 ```javascript
 module.exports = {
   externals: [
-    function(context, request, callback) {
+    function(ctx, callback) {
       // 该外部化的模块，是一个 `commonjs2` 的模块，且放在 `@scope/library` 目录中
       callback(null, '@scope/library', 'commonjs2');
     }
@@ -203,7 +205,7 @@ __webpack.config.js__
 ```javascript
 module.exports = {
   externals: [
-    function(context, request, callback) {
+    function(ctx, callback) {
       // 该外部化模块是一个全局变量叫作 `nameOfGlobal`.
       callback(null, 'nameOfGlobal');
     }
@@ -216,7 +218,7 @@ __webpack.config.js__
 ```javascript
 module.exports = {
   externals: [
-    function(context, request, callback) {
+    function(ctx, callback) {
       // 该外部化模块是一个在`@scope/library`模块里的命名导出（named export）。
       callback(null, ['@scope/library', 'namedexport'], 'commonjs');
     }
@@ -229,7 +231,7 @@ __webpack.config.js__
 ```javascript
 module.exports = {
   externals: [
-    function(context, request, callback) {
+    function(ctx, callback) {
       // 外部化模块是一个 UMD 模块
       callback(null, {
         root: 'componentsGlobal',
@@ -280,7 +282,7 @@ module.exports = {
       subtract: ['./math', 'subtract']
     },
     // 函数
-    function(context, request, callback) {
+    function({ context, request }, callback) {
       if (/^yourregex$/.test(request)){
         return callback(null, 'commonjs ' + request);
       }

@@ -134,17 +134,6 @@ module.exports = {
 T> 如果监听没生效，试试这个选项吧。Watch 在 NFS 和 VirtualBox 机器上不适用。
 
 
-## `info-verbosity` {#info-verbosity}
-
-`string = 'info': 'none' | 'info' | 'verbose'`
-
-控制生命周期消息的详细程度，例如 `Started watching files(开始监听文件)...` 日志。将 `info-verbosity` 设置为 `verbose`，还会额外在增量构建的开始和结束时，向控制台发送消息。
-
-```bash
-webpack --watch --info-verbosity verbose
-```
-
-
 ## 故障排除 {#troubleshooting}
 
 如果您遇到任何问题，请查看以下注意事项。对于 webpack 为何会忽略文件修改，这里有多种原因。

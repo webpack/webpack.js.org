@@ -44,7 +44,7 @@ module.exports = {
 
 ### `minChunkSize` {#minchunksize}
 
-Keeping chunk size above the specified limit is no longer a feature of this plugin. Use [MinChunkSizePlugin)[/plugins/min-chunk-size-plugin] instead.
+Keeping chunk size above the specified limit is no longer a feature of this plugin. Use [MinChunkSizePlugin](/plugins/min-chunk-size-plugin) instead.
 
 
 ## Usage via CLI {#usage-via-cli}

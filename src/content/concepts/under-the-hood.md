@@ -88,7 +88,9 @@ __./src/index.jsx__
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import('./app.jsx').then(App => ReactDOM.render(<App />, root));
+import('./app.jsx').then(App => {
+  ReactDOM.render(<App />, root);
+});
 ```
 
 这会创建出一个名为 `main` 的 initial chunk。其中包含：
@@ -113,7 +115,9 @@ __Output:__
 import(
   /* webpackChunkName: "app" */
   './app.jsx'
-).then(App => ReactDOM.render(<App />, root));
+).then(App => {
+  ReactDOM.render(<App />, root);
+});
 ```
 
 __Output:__

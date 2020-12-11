@@ -1,5 +1,5 @@
 // Import External Dependencies
-import React, { useState, useEffect } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 
 // Import Components
 import Container from '../Container/Container';
@@ -16,7 +16,7 @@ import SplashContent from '../../content/index.md';
 // Load Styling
 import './Splash.scss';
 
-const Support = React.lazy(() => import('../Support/Support'));
+const Support = lazy(() => import('../Support/Support'));
 
 const SponsorsPlaceholder = () => (
   <>
@@ -72,7 +72,7 @@ const Splash = () => {
             </p>
 
             { showSponsors ? (
-              <React.Suspense fallback={<SponsorsPlaceholder />}>
+              <Suspense fallback={<SponsorsPlaceholder />}>
                 <p><label><input type="checkbox" checked={supportType === 'monthly'} onChange={e => setSupportType(e.target.checked ? 'monthly' : 'total')} /> Show sponsors by their average monthly amount of sponsoring in the last year.</label></p>
 
                 <Support type={supportType} rank="latest" />
@@ -86,7 +86,7 @@ const Splash = () => {
                 <Support type={supportType} rank="bronze" />
 
                 <Support type={supportType} rank="backer" />
-              </React.Suspense>
+              </Suspense>
             ) : (
               <SponsorsPlaceholder />
             ) }

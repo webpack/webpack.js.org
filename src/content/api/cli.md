@@ -16,6 +16,7 @@ contributors:
   - EslamHiko
   - smelukov
   - anikethsaha
+  - jamesgeorge007
 related:
   - title: 分析构建的统计数据
     url: https://survivejs.com/webpack/optimizing-build/analyzing-build-statistics/
@@ -59,7 +60,6 @@ webpack-cli 提供了许多 flag 来使 webpack 的工作变得简单。默认�
 | `--config-name`     | string[]        | 要使用的配置名                                                         |
 | `--name`            | string[]        | 配置名称，在加载多个配置时使用                                            |
 | `--color`           | boolean         | 启用控制台颜色                                                         |
-| `--no-color`        | boolean         | 禁用控制台颜色                                                         |
 | `--merge, -m`       | boolean         | 使用 webpack-merge 合并两个配置文件，例如 `-c ./webpack.config.js -c ./webpack.test.config.js` |
 | `--env`             | string[]        | 当它是一个函数时，传递给配置的环境变量                                     |
 | `--progress`        | boolean, string | 在构建过程中打印编译进度                                                 |
@@ -68,14 +68,12 @@ webpack-cli 提供了许多 flag 来使 webpack 的工作变得简单。默认�
 | `--target, -t`      | string[]          | 设置要构建的 target                                                    |
 | `--watch, -w`       | boolean         | 监听文件变化                                                           |
 | `--hot, -h`         | boolean         | 启用 HMR                                                              |
-| `--no-hot`          | boolean         | 禁用 HMR                                                              |
 | `--devtool, -d`     | string          | 控制是否生成 source map，以及如何生成                                     |
 | `--prefetch`        | string          | 预先发生请求                                                            |
 | `--json, -j`        | boolean, string | 将结果打印成 JSON 格式或存储在文件中                                       |
 | `--mode`            | string          | 定义 webpack 所需的 mode                                                |
 | `--version, -v`     | boolean         | 获取当前 cli 版本                                                       |
 | `--stats`           | boolean, string | 它告诉 webpack 如何处理 stats                                            |
-| `--no-stats`        | boolean         | 禁用 stats 输出                                                         |
 | `--analyze`         | boolean         | 它调用 `webpack-bundle-analyzer` 插件来获取 bundle 信息                   |
 
 ### Negated Flags {#negated-flags}
@@ -85,6 +83,8 @@ webpack-cli 提供了许多 flag 来使 webpack 的工作变得简单。默认�
 | --no-color | 禁用控制台颜色                                                   |
 | --no-hot   | 如果你通过配置启用了 HMR，则禁用它                                 |
 | --no-stats | 禁用任何由 webpack emit 出来的 stats                             |
+| --no-watch | 禁用文件变更的监听                                               |
+| --no-devtool | 禁止生成 source maps                                         |
 
 ### 核心 Flags {#core-flags}
 
@@ -173,28 +173,15 @@ webpack 5.1.0 compiled successfully in 198 ms
 
 CLI 会在你的项目路径中寻找默认配置，以下是 CLI 采集到的配置文件。
 
-如果没有通过 flag 或 config 提供 `mode`，那么 CLI 会按以下顺序，从下往上递增查找。
+此处按顺序递增进行优先级查询：
 
-> 示例 —— 配置文件的查找顺序 .webpack/webpack.config.development.js > webpack.config.development.js > webpack.config.js
+> 示例 —— 配置文件的查找顺序 .webpack/webpackfile > .webpack/webpack.config.js > webpack.config.js
 
-```md
+```txt
 'webpack.config',
-'webpack.config.dev',
-'webpack.config.development',
-'webpack.config.prod',
-'webpack.config.production',
 '.webpack/webpack.config',
-'.webpack/webpack.config.none',
-'.webpack/webpack.config.dev',
-'.webpack/webpack.config.development',
-'.webpack/webpack.config.prod',
-'.webpack/webpack.config.production',
 '.webpack/webpackfile',
 ```
-
-如果提供了 `mode`，例如 mode 为 `production`，那么配置的查找顺序为：
-
-`.webpack/webpack.config.production.* > .webpack/webpack.config.prod.* > webpack.config.production.* > webpack.config.prod.* > webpack.config.*`
 
 ## 通用配置 {#common-options}
 
@@ -234,6 +221,8 @@ webpack --json stats.json
 ```
 
 在其他情况下，webpack 会打印出 bundle、chunk 以及 timing 细节的 stats 信息。使用此选项，会输出 JSON 对象。这个输出结果可以被 webpack 的 [analyse 工具](https://webpack.github.io/analyse/)，或者 chrisbateman 的 [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/)，再或者 th0r 的 [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) 所识别。analyse 工具会接收 JSON，并以图形的形式展示所有构建的细节。
+
+T> 请查阅 [stats 数据 api](/api/stats)，了解更多关于生成的 stats 数据。
 
 ## Environment 选项 {#environment-options}
 

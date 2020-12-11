@@ -19,7 +19,7 @@ const mdPlugins = [
     require('remark-autolink-headings'),
     {
       behavior: 'append',
-      content(node) {
+      content() {
         return [
           h('span.header-link')
         ];
@@ -41,7 +41,7 @@ const mdPlugins = [
   require('remark-refractor')
 ];
 
-module.exports = (env = {}) => ({
+module.exports = () => ({
   context: path.resolve(__dirname, './src'),
   cache: {
     type: 'filesystem',
@@ -97,7 +97,8 @@ module.exports = (env = {}) => ({
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader'
+          'css-loader',
+          'postcss-loader'
         ]
       },
       {
@@ -105,16 +106,7 @@ module.exports = (env = {}) => ({
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: () => [
-                  require('autoprefixer')
-                ],
-              }
-            }
-          },
+          'postcss-loader',
           {
             loader: 'sass-loader',
             options: {
@@ -129,17 +121,23 @@ module.exports = (env = {}) => ({
         test: /\.woff2?$/,
         type: 'asset/resource',
         generator: {
-          filename: 'font/[hash][ext][query]'
+          filename: 'font/[name].[hash][ext][query]'
         }
       },
       {
         test: /\.(jpg|jpeg|png|ico)$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        generator: {
+          filename: '[name].[hash][ext][query]'
+        }
       },
       {
         test: /\.svg$/i,
         type: 'asset/resource',
-        exclude: [path.resolve(__dirname, 'src/styles/icons')]
+        exclude: [path.resolve(__dirname, 'src/styles/icons')],
+        generator: {
+          filename: '[name].[hash][ext][query]'
+        }
       },
       {
         test: /\.svg$/i,

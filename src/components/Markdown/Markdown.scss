@@ -409,6 +409,19 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
       white-space: pre-line;
     }
   }
+
+  h2 {
+    margin-top: 2em;
+  }
+  h2:first-child {
+    margin-top: 1em;
+  }
+  h2 + h3 {
+    margin-top: 0.5em;
+  }
+  h3 {
+    margin-top: 1.5em;
+  }
 }
 
 .notification-bar-visible .markdown {

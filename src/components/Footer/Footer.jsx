@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from '../Link/Link';
 import Container from '../Container/Container';
 import Icon from '../../assets/icon-square-small.svg';

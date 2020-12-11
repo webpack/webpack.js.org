@@ -1,5 +1,4 @@
 // Import External Dependencies
-import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter, Route } from 'react-router-dom';
 
