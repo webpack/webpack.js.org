@@ -1251,7 +1251,7 @@ These dependencies are cheaper to process and webpack uses them when possible
 - `ChunkGraph` added
 - `ChunkGroup.setParents` removed
 - `ChunkGroup.containsModule` removed
-- `compilation.cache` is deprecated now
+- `Compilation.cache` was removed in favor of `Compilation.getCache()`
 - `ChunkGroup.remove` no longer disconnected the group from block
 - `ChunkGroup.compareTo` signature changed
 - `ChunkGroup.getChildrenByOrders` signature changed
