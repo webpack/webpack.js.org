@@ -15,7 +15,7 @@ export default function NotifyBox(props = { loading: false }) {
       clamp: true,
       tension: 200,
     },
-    width: collapse ? 0 : 250,
+    width: collapse ? 0 : 270,
     opacity: collapse ? 0 : 1,
   });
   return (
