@@ -77,6 +77,7 @@ module.exports = {
 };
 ```
 
+The `ProgressPlugin` is used to customize how progress should be reported during compilation, and `HtmlWebpackPlugin` will generate a HTML file including the `my-first-webpack.bundle.js` file using a `script` tag.
 
 ### Node API
 

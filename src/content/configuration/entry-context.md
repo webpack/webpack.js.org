@@ -10,6 +10,7 @@ contributors:
   - EugeneHlushko
   - smelukov
   - anshumanv
+  - snitin315
 ---
 
 The entry object is where webpack looks to start building the bundle. The context is an absolute string to the directory that contains the entry files.
@@ -109,7 +110,7 @@ Descriptor syntax was used here to pass `filename`-option to the specific entry 
 
 ### Dependencies
 
-By default, every entry chunk stores all the modules that it uses. With `dependOn`-option you can share the modules from one entry chunk to another:
+By default, every entry chunk stores all the modules that it uses. With `dependOn` option you can share the modules from one entry chunk to another:
 
 ```js
 module.exports = {
@@ -123,7 +124,23 @@ module.exports = {
 
 The `app` chunk will not contain the modules that `react-vendors` has.
 
-Also you can specify multiple files per entry using array:
+`dependOn` option can also accept an array of strings:
+
+```js
+module.exports = {
+  //...
+  entry: {
+    moment: { import: 'moment-mini', runtime: 'runtime' },
+    reactvendors: { import: ['react', 'react-dom'], runtime: 'runtime' },
+    testapp: {
+      import: './wwwroot/component/TestApp.tsx',
+      dependOn: ['reactvendors', 'moment'],
+    },
+  },
+};
+```
+
+Also, you can specify multiple files per entry using an array:
 
 ```js
 module.exports = {
