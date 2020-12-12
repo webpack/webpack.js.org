@@ -77,7 +77,7 @@ module.exports = {
 };
 ```
 
-The ProgressPlugin created above can be used to customize how progress is reported during compilation. The HtmlWebpackPlugin will generate a file (specified in template) that includes all webpack bundles generated.
+The `ProgressPlugin` is used to customize how progress should be reported during compilation, and `HtmlWebpackPlugin` will generate a HTML file including the `my-first-webpack.bundle.js` file using a `script` tag.
 
 ### Node API
 
