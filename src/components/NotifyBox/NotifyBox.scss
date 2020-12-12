@@ -6,7 +6,7 @@
   box-shadow: 1px 1px 2px 1px #465E69;
   border-radius: 3px;
   padding: 10px;
-  bottom: 10px;
+  bottom: max(10px, calc(env(safe-area-inset-left) + 10px));
   right: 10px;
   color: #333333;
   &__container {
