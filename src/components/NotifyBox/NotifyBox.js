@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import ChevronRightIcon from '../../styles/icons/chevron-right.svg';
 import './NotifyBox.scss';
-import { animated, config, useSpring } from 'react-spring';
+import { animated, useSpring } from 'react-spring';
 NotifyBox.propTypes = {
   skip: PropTypes.func.isRequired,
   loading: PropTypes.bool,
@@ -13,7 +13,7 @@ export default function NotifyBox(props = { loading: false }) {
   const slideStyles = useSpring({
     config: {
       clamp: true,
-      tension: 200
+      tension: 200,
     },
     width: collapse ? 0 : 250,
     opacity: collapse ? 0 : 1,
