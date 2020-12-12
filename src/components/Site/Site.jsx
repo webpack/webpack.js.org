@@ -46,7 +46,7 @@ Site.propTypes = {
 };
 function Site(props) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [list, setList] = useState(['']);
+  const [list, setList] = useState([]);
   const [wb, setWb] = useState(undefined);
   const [loading, setLoading] = useState(false);
 
