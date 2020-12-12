@@ -15,7 +15,7 @@ export default function NotifyBox(props = { loading: false }) {
       clamp: true,
       tension: 200,
     },
-    width: collapse ? 0 : 270,
+    width: collapse ? 0 : 265,
     opacity: collapse ? 0 : 1,
   });
   return (
@@ -47,6 +47,10 @@ export default function NotifyBox(props = { loading: false }) {
             title="click to update"
             onClick={props.skip}
             disabled={props.loading}
+            style={{
+              width: 77,
+              textAlign: 'center'
+            }}
           >
             {props.loading ? 'UPDATING' : 'UPDATE'}
           </button>
