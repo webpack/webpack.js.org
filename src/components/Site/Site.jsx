@@ -244,7 +244,7 @@ function Site(props) {
         </Switch>
         <Footer />
         {listTransitions((styles) => (
-          <animated.div style={styles} className='notifyBox'>
+          <animated.div style={styles} className="notifyBox">
             <NotifyBox skip={skip} loading={loading} />
           </animated.div>
         ))}
