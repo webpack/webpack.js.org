@@ -58,7 +58,7 @@ webpack-cli 提供了许多 flag 来使 webpack 的工作变得简单。默认�
 | `--entry`           | string[]        | 应用程序的入口文件，例如 `./src/main.js`                                 |
 | `--config, -c`      | string[]        | 提供 webpack 配置文件的路径，例如 `./webpack.config.js`                  |
 | `--config-name`     | string[]        | 要使用的配置名                                                         |
-| `--name`            | string[]        | 配置名称，在加载多个配置时使用                                            |
+| `--name`            | string        | 配置名称，在加载多个配置时使用                                            |
 | `--color`           | boolean         | 启用控制台颜色                                                         |
 | `--merge, -m`       | boolean         | 使用 webpack-merge 合并两个配置文件，例如 `-c ./webpack.config.js -c ./webpack.test.config.js` |
 | `--env`             | string[]        | 当它是一个函数时，传递给配置的环境变量                                     |
@@ -95,7 +95,7 @@ __链接中是 webpack v5 和 CLI v4 支持的所有核心 flag 列表 - [详戳
 例如，如果你想在项目中启用性能提示，你需在配置中使用[此](/configuration/performance/#performancehints)选项，而如果使用核心 flag，你可以这样做：
 
 ```bash
-webpack --performance-hints warning
+npx webpack --performance-hints warning
 ```
 
 ## 用法 {#usage}
@@ -103,21 +103,21 @@ webpack --performance-hints warning
 ### 使用配置文件 {#with-configuration-file}
 
 ```bash
-webpack [--config webpack.config.js]
+npx webpack [--config webpack.config.js]
 ```
 
 配置文件中的相关选项，请参阅[配置](/configuration)。
 
 ### 不使用配置文件 {#without-configuration-file}
 
-```sh
-webpack <entry> [<entry>] -o <output-path>
+```bash
+npx webpack <entry> [<entry>] -o <output-path>
 ```
 
 __example__
 
-```sh
-webpack --entry ./first.js --entry ./second.js --output-path /build
+```bash
+npx webpack --entry ./first.js --entry ./second.js --output-path /build
 ```
 
 __`<entry>`__
@@ -143,7 +143,7 @@ __示例__
 ```
 
 ```bash
-webpack ./src/index.js -o dist
+npx webpack ./src/index.js -o dist
 ```
 
 这将对源码进行打包，其入口为 `index.js`，且 bundle 文件的输出路径为 `dist`。
@@ -156,7 +156,7 @@ webpack 5.1.0 compiled successfully in 187 ms
 ```
 
 ```bash
-webpack ./src/index.js ./src/others2.js -o dist/
+npx webpack ./src/index.js ./src/others2.js -o dist/
 ```
 
 以多个入口的方式打包文件
@@ -190,14 +190,43 @@ W> 注意，命令行接口（Command Line Interface）参数的优先级，高�
 __列出命令行所有可用的命令和 flag__
 
 ```bash
-webpack --help
+npx webpack --help
 ```
 
 __显示单个命令或标志的帮助提示__
 
 ```bash
-webpack --help <command>
-webpack --help --<flag>
+npx webpack --help <command>
+npx webpack --help --<flag>
+```
+
+__显示已安装的 package 以及子 package 的版本__。
+
+如需检查你正在使用的 `webpack` 和 `webpack-cli` 的版本，只需运行如下命令：
+
+```bash
+npx webpack --version
+```
+
+运行结果如下：
+
+```bash
+webpack-cli 4.2.0
+webpack 5.4.0
+```
+
+如需检查 `webpack-cli` 子包的版本（如 `@webpack-cli/init`），只需运行如下命令：
+
+```bash
+npx webpack init --version
+```
+
+运行结果如下：
+
+```bash
+@webpack-cli/init 1.0.3
+webpack-cli 4.2.0
+webpack 5.4.0
 ```
 
 __使用配置文件进行构建__
@@ -205,19 +234,19 @@ __使用配置文件进行构建__
 指定其它的[配置](/configuration)文件。配置文件默认为 `webpack.config.js`，如果你想使用其它配置文件，可以加入这个参数。
 
 ```bash
-webpack --config example.config.js
+npx webpack --config example.config.js
 ```
 
 __以 JSON 格式输出 webpack 的运行结果__
 
 ```bash
-webpack --json
+npx webpack --json
 ```
 
 __如果你想把 stats 数据存储为 JSON 而非输出，你可以使用：__
 
 ```bash
-webpack --json stats.json
+npx webpack --json stats.json
 ```
 
 在其他情况下，webpack 会打印出 bundle、chunk 以及 timing 细节的 stats 信息。使用此选项，会输出 JSON 对象。这个输出结果可以被 webpack 的 [analyse 工具](https://webpack.github.io/analyse/)，或者 chrisbateman 的 [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/)，再或者 th0r 的 [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) 所识别。analyse 工具会接收 JSON，并以图形的形式展示所有构建的细节。
@@ -229,16 +258,17 @@ T> 请查阅 [stats 数据 api](/api/stats)，了解更多关于生成的 stats 
 当 webpack 配置[导出为函数时](/configuration/configuration-types/#exporting-a-function)，会接收到一个 "environment" 的参数。
 
 ```bash
-webpack --env production    # sets env.production == true
+npx webpack --env production    # sets env.production == true
 ```
 
 `--env` 参数可以接收多个值：
 
-| Invocation                                    | Resulting environment                   |
-| --------------------------------------------- | --------------------------------------- |
-| `webpack --env prod`                          | `{ prod: true }`                        |
-| `webpack --env prod --env min`                | `{ prod: true, min: true }`             |
-| `webpack --env platform=app --env production` | `{ platform: "app", production: true }` |
+| Invocation                                                   | Resulting environment                          |
+| ------------------------------------------------------------ | ---------------------------------------------- |
+| `npx webpack --env prod`                                         | `{ prod: true }`                               |
+| `npx webpack --env prod --env min`                               | `{ prod: true, min: true }`                    |
+| `npx webpack --env platform=app --env production`                | `{ platform: "app", production: true }`        |
+| `npx webpack --env app.platform="staging" --env app.name="test"` | `{ app: { platform: "staging", name: "test" }` |
 
 T> 请查阅 [environment 变量指南](/guides/environment-variables/)了解更多信息及用法。
 
@@ -255,8 +285,8 @@ T> 请查阅 [environment 变量指南](/guides/environment-variables/)了解更
 
 你可以使用 `webpack-bundle-analyzer` 插件来分析你 webpack 输出的 bundle。你还可以通过 CLI 的 `--analyze` flag 调用它
 
-```sh
-webpack --analyze
+```bash
+npx webpack --analyze
 ```
 
 W> 请确保你的项目中安装了 `webpack-bundle-analyzer`，否则 CLI 会提示你安装它。
@@ -266,13 +296,13 @@ W> 请确保你的项目中安装了 `webpack-bundle-analyzer`，否则 CLI 会�
 如需查看 webpack 的编译进度，你可以使用 `--progress` flag。
 
 ```bash
-webpack --progress
+npx webpack --progress
 ```
 
 如需收集编译过程中每一步的 profile 数据，你可以将 `profile` 作为值传递给 `--progress` flag。
 
 ```bash
-webpack --progress=profile
+npx webpack --progress=profile
 ```
 
 ## 将 CLI 参数传递给 Node.js {#pass-cli-arguments-to-nodejs}

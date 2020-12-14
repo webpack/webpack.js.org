@@ -77,6 +77,7 @@ module.exports = {
 };
 ```
 
+`ProgressPlugin` 用于自定义编译过程中的进度报告，`HtmlWebpackPlugin` 将生成一个 HTML 文件，并在其中使用 `script` 引入一个名为 `my-first-webpack.bundle.js` 的 JS 文件。
 
 ### Node API 方式 {#node-api}
 

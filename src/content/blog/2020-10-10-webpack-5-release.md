@@ -1253,6 +1253,7 @@ webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（
 - 添加了 `ChunkGraph`
 - 移除了 `ChunkGroup.setParents`
 - 移除了 `ChunkGroup.containsModule`
+- 移除了 `Compilation.cache`，改用 `Compilation.getCache()`
 - `ChunkGroup.remove` 不再断开该 Group 与 block 的连接
 - `ChunkGroup.compareTo` 签名已变更
 - `ChunkGroup.getChildrenByOrders` 签名已变更
