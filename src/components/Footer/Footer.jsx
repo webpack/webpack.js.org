@@ -9,16 +9,9 @@ const Footer = () => (
   <footer className="footer">
     <Container className="footer__inner">
       <section className="footer__left">
-<<<<<<< HEAD
         <Link className="footer__link" to="/guides/getting-started/">起步</Link>
         <Link className="footer__link" to="/organization/">组织</Link>
-        <Link className="footer__link" to="/starter-kits/">配套工具</Link>
         <Link className="footer__link" to="/comparison/">比较</Link>
-=======
-        <Link className="footer__link" to="/guides/getting-started/">Get Started</Link>
-        <Link className="footer__link" to="/organization/">Organization</Link>
-        <Link className="footer__link" to="/comparison/">Comparison</Link>
->>>>>>> abeed1dadc38e43100b8af6e2e598670076e53e7
       </section>
 
       <section className="footer__middle">

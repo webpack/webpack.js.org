@@ -74,29 +74,6 @@ class Site extends Component {
           )
     );
     return (
-<<<<<<< HEAD
-      <div className="site">
-        <DocumentTitle title={getPageTitle(Content, location.pathname)} />
-        <div className="site__header">
-          <NotificationBar />
-          <Navigation
-          pathname={location.pathname}
-          toggleSidebar={this._toggleSidebar}
-          links={[
-            {
-              content: '中文文档',
-              url: '/concepts/',
-              isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
-              children: this._strip(sections.filter(item => item.name !== 'contribute'))
-            },
-            { content: '参与贡献', url: '/contribute/' },
-            { content: '投票', url: '/vote/' },
-            { content: '博客', url: '/blog/' },
-            { content: '印记中文', url: 'https://docschina.org' }
-          ]}
-          />
-        </div>
-=======
       <MDXProvider components={{
         Badge: function Comp (props) {
           return <Badge {...props} />;
@@ -111,18 +88,18 @@ class Site extends Component {
             toggleSidebar={this._toggleSidebar}
             links={[
               {
-                content: 'Documentation',
+                content: '中文文档',
                 url: '/concepts/',
                 isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
                 children: this._strip(sections.filter(item => item.name !== 'contribute'))
               },
-              { content: 'Contribute', url: '/contribute/' },
-              { content: 'Vote', url: '/vote/' },
-              { content: 'Blog', url: '/blog/' }
+              { content: '参与贡献', url: '/contribute/' },
+              { content: '投票', url: '/vote/' },
+              { content: '博客', url: '/blog/' },
+              { content: '印记中文', url: 'https://docschina.org' }
             ]}
             />
           </div>
->>>>>>> abeed1dadc38e43100b8af6e2e598670076e53e7
 
           {isClient ? <SidebarMobile
             isOpen={mobileSidebarOpen}

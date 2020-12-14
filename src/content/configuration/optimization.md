@@ -522,13 +522,9 @@ module.exports = {
 
 此处的 `'flag'` 值在非生产环境默认使用。
 
-<<<<<<< HEAD
-## `optimization.portableRecords` {#optimizationportablerecords}
-=======
-T> `optimization.sideEffects` will also flag modules as side effect free when they contain only side effect free statements.
+T> 设置为 `optimization.sideEffects` 时，当模块只包含无副作用的语句时，此模块也会被标记为无副作用。
 
-## `optimization.portableRecords`
->>>>>>> abeed1dadc38e43100b8af6e2e598670076e53e7
+## `optimization.portableRecords` {#optimizationportablerecords}
 
 `boolean`
 
