@@ -18,6 +18,7 @@ contributors:
   - LukeMwila
   - Jalitha
   - muhmushtaha
+  - chenxsan
 ---
 
 本质上，__webpack__ 是一个用于现代 JavaScript 应用程序的_静态模块打包工具_。当 webpack 处理应用程序时，它会在内部构建一个 [依赖图(dependency graph)](/concepts/dependency-graph/)，此依赖图对应映射到项目所需的每个模块，并生成一个或多个 _bundle_。
@@ -179,4 +180,8 @@ webpack 支持所有符合 [ES5 标准](https://kangax.github.io/compat-table/es
 
 ## 环境(environment) {#environment}
 
+<<<<<<< HEAD
 webpack 运行于 Node.js v8.x+ 版本。
+=======
+webpack 5 runs on Node.js version 10.13.0+.
+>>>>>>> abeed1dadc38e43100b8af6e2e598670076e53e7

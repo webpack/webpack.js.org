@@ -18,7 +18,6 @@ const paths = [
   ...flattenContentTree(contentTree),
   '/vote',
   '/organization',
-  '/starter-kits',
   '/app-shell'
 ];
 
