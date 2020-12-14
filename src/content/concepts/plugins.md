@@ -77,7 +77,7 @@ module.exports = {
 };
 ```
 
-The `ProgressPlugin` is used to customize how progress should be reported during compilation, and `HtmlWebpackPlugin` will generate a HTML file including the `my-first-webpack.bundle.js` file using a `script` tag.
+`ProgressPlugin` 用于自定义编译过程中的进度报告，`HtmlWebpackPlugin` 将生成一个 HTML 文件，并在其中使用 `script` 引入一个名为 `my-first-webpack.bundle.js` 的 JS 文件。
 
 ### Node API 方式 {#node-api}
 
