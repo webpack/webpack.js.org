@@ -30,7 +30,9 @@ module.exports = function responsiveTable() {
             hProperties: {
               dataTh:
                 // td in th could be empty
-                th.children.length > 0 ? th.children[0].value : '-',
+                th.children.length > 0 ? th.children[0].value : '',
+              // FIXME what if td in th contains complex markdown??
+              // e.g. "`code` and something else", then data-th would be wrong.
             },
           };
         });
