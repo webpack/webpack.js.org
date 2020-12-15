@@ -21,3 +21,25 @@ exports[`responsive table should add data-th 1`] = `
 </table>
 "
 `;
+
+exports[`responsive table should handle empty thead 1`] = `
+"<table>
+<thead>
+<tr>
+<th></th>
+<th>bar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-th=\\"-\\"><span>baz</span></td>
+<td data-th=\\"bar\\"><span>-</span></td>
+</tr>
+<tr>
+<td data-th=\\"-\\"><span>sam</span></td>
+<td data-th=\\"bar\\"><span>chen</span></td>
+</tr>
+</tbody>
+</table>
+"
+`;

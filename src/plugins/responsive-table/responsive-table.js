@@ -25,9 +25,12 @@ module.exports = function responsiveTable() {
             },
           ];
           // set data-th
+          const th = thead.children[index];
           td.data = {
             hProperties: {
-              dataTh: thead.children[index].children[0].value || '-',
+              dataTh:
+                // td in th could be empty
+                th.children.length > 0 ? th.children[0].value : '-',
             },
           };
         });
