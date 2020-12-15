@@ -270,6 +270,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     border-bottom: 1px solid #f2f2f2;
+    text-align: left;
     &::before {
       content: attr(data-th);
       font-weight: bold;
@@ -280,6 +281,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     @include break {
       display: table-cell;
       padding: 14px 22px;
+      text-align: unset;
       &::before {
         content: none;
       }
