@@ -52,7 +52,7 @@ function Site(props) {
 
   const listTransitions = useTransition(list, {
     config: config.gentle,
-    from: { opacity: 0, transform: 'translate3d(25%, 0px, 0px)' },
+    from: { opacity: 0, transform: 'translate3d(50%, 0px, 0px)' },
     enter: { opacity: 1, transform: 'translate3d(0%, 0px, 0px)' },
     keys: list.map((item, index) => index),
   });

@@ -7,32 +7,32 @@ NotifyBox.propTypes = {
   skip: PropTypes.func.isRequired,
   loading: PropTypes.bool,
 };
+const AnimatedChevron = animated(ChevronRightIcon);
 export default function NotifyBox(props = { loading: false }) {
   const [collapse, setCollapse] = useState(false);
   const toggle = () => setCollapse(!collapse);
-  const slideStyles = useSpring({
-    config: {
-      clamp: true,
-      tension: 200,
-    },
-    width: collapse ? 0 : 265,
+  const rotateStyles = useSpring({
+    transform: collapse ? 'rotate(180deg)' : 'rotate(0deg)',
+  });
+  const fadeStyles = useSpring({
+    display: collapse ? 'none' : 'inline-block',
     opacity: collapse ? 0 : 1,
   });
   return (
     <div className="notifyBox__container">
-      <ChevronRightIcon
+      <AnimatedChevron
         fill="#333"
         width={20}
         role="button"
         style={{
+          ...rotateStyles,
           cursor: 'pointer',
-          transform: collapse ? 'rotate(180deg)' : '',
         }}
         onClick={toggle}
       />
       <animated.div
         style={{
-          ...slideStyles,
+          ...fadeStyles,
           overflow: 'hidden',
           height: 21,
         }}
@@ -49,7 +49,7 @@ export default function NotifyBox(props = { loading: false }) {
             disabled={props.loading}
             style={{
               width: 77,
-              textAlign: 'center'
+              textAlign: 'center',
             }}
           >
             {props.loading ? 'UPDATING' : 'UPDATE'}
