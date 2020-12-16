@@ -3,6 +3,7 @@ import { Component, Fragment } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import PropTypes from 'prop-types';
+import {MDXProvider} from '@mdx-js/react';
 
 // Import Utilities
 import { extractPages, extractSections, getPageTitle } from '../../utilities/content-utils';
@@ -20,10 +21,9 @@ import Sidebar from '../Sidebar/Sidebar';
 import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import Gitter from '../Gitter/Gitter';
 import Vote from '../Vote/Vote';
 import Organization from '../Organization/Organization';
-import StarterKits from '../StarterKits/StarterKits';
+import Badge from '../Badge/Badge.js';
 
 // Load Styling
 import '../../styles/index';
@@ -74,84 +74,88 @@ class Site extends Component {
           )
     );
     return (
-      <div className="site">
-        <DocumentTitle title={getPageTitle(Content, location.pathname)} />
-        <div className="site__header">
-          <NotificationBar />
-          <Navigation
-          pathname={location.pathname}
-          toggleSidebar={this._toggleSidebar}
-          links={[
-            {
-              content: 'Documentation',
-              url: '/concepts/',
-              isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
-              children: this._strip(sections.filter(item => item.name !== 'contribute'))
-            },
-            { content: 'Contribute', url: '/contribute/' },
-            { content: 'Vote', url: '/vote/' },
-            { content: 'Blog', url: '/blog/' }
-          ]}
-          />
+      <MDXProvider components={{
+        Badge: function Comp (props) {
+          return <Badge {...props} />;
+        }
+      }}>
+        <div className="site">
+          <DocumentTitle title={getPageTitle(Content, location.pathname)} />
+          <div className="site__header">
+            <NotificationBar />
+            <Navigation
+            pathname={location.pathname}
+            toggleSidebar={this._toggleSidebar}
+            links={[
+              {
+                content: 'Documentation',
+                url: '/concepts/',
+                isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
+                children: this._strip(sections.filter(item => item.name !== 'contribute'))
+              },
+              { content: 'Contribute', url: '/contribute/' },
+              { content: 'Vote', url: '/vote/' },
+              { content: 'Blog', url: '/blog/' }
+            ]}
+            />
+          </div>
+
+          {isClient ? <SidebarMobile
+            isOpen={mobileSidebarOpen}
+            sections={this._strip(Content.children)}
+            toggle={this._toggleSidebar} /> : null}
+
+          <Switch>
+            <Route exact strict path="/:url*" render={props => <Redirect to={`${props.location.pathname}/`}/>} />
+            <Route path="/" exact component={Splash} />
+            <Route
+              render={() => (
+                <Container className="site__content">
+                  <Switch>
+                    <Route path="/vote" component={Vote} />
+                    <Route path="/organization" component={Organization} />
+                    <Route path="/app-shell" component={() => <Fragment />} />
+                    {pages.map(page => (
+                      <Route
+                        key={page.url}
+                        exact={true}
+                        path={page.url}
+                        render={() => {
+                          let path = page.path.replace('src/content/', '');
+                          let content = this.props.import(path);
+                          const { previous, next } = getAdjacentPages(
+                            sidebarPages,
+                            page,
+                            'url'
+                          );
+                          return (
+                            <Fragment>
+                              <Sponsors />
+                              <Sidebar
+                                className="site__sidebar"
+                                currentPage={location.pathname}
+                                pages={sidebarPages}
+                              />
+                              <Page
+                                {...page}
+                                content={content}
+                                previous={previous}
+                                next={next}
+                              />
+                            </Fragment>
+                          );
+                        }}
+                      />
+                    ))}
+                    <Route render={() => <PageNotFound />} />
+                  </Switch>
+                </Container>
+              )}
+            />
+          </Switch>
+          <Footer />
         </div>
-
-        {isClient ? <SidebarMobile
-          isOpen={mobileSidebarOpen}
-          sections={this._strip(Content.children)}
-          toggle={this._toggleSidebar} /> : null}
-
-        <Switch>
-          <Route exact strict path="/:url*" render={props => <Redirect to={`${props.location.pathname}/`}/>} />
-          <Route path="/" exact component={Splash} />
-          <Route
-            render={() => (
-              <Container className="site__content">
-                <Switch>
-                  <Route path="/vote" component={Vote} />
-                  <Route path="/organization" component={Organization} />
-                  <Route path="/starter-kits" component={StarterKits} />
-                  <Route path="/app-shell" component={() => <Fragment />} />
-                  {pages.map(page => (
-                    <Route
-                      key={page.url}
-                      exact={true}
-                      path={page.url}
-                      render={() => {
-                        let path = page.path.replace('src/content/', '');
-                        let content = this.props.import(path);
-                        const { previous, next } = getAdjacentPages(
-                          sidebarPages,
-                          page,
-                          'url'
-                        );
-                        return (
-                          <Fragment>
-                            <Sponsors />
-                            <Sidebar
-                              className="site__sidebar"
-                              currentPage={location.pathname}
-                              pages={sidebarPages}
-                            />
-                            <Page
-                              {...page}
-                              content={content}
-                              previous={previous}
-                              next={next}
-                            />
-                            <Gitter />
-                          </Fragment>
-                        );
-                      }}
-                    />
-                  ))}
-                  <Route render={() => <PageNotFound />} />
-                </Switch>
-              </Container>
-            )}
-          />
-        </Switch>
-        <Footer />
-      </div>
+      </MDXProvider>
     );
   }
 

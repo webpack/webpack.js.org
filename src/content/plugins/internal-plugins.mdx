@@ -279,3 +279,25 @@ Merges chunks until each chunk has the minimum size of `minChunkSize`.
 `optimize/FlagIncludedChunksPlugin()`
 
 Adds chunk ids of chunks which are included in the chunk. This eliminates unnecessary chunk loads.
+
+### RealContentHashPlugin
+
+`optimize/RealContentHashPlugin()`
+
+When [`optimization.realContentHash`](/configuration/optimization/#optimizationrealcontenthash) option is enabled, webpack will apply `RealContentHashPlugin` to compiler internally.
+
+#### Hook
+
+`RealContentHashPlugin` provides a `updateHash` <Badge text='5.8.0+' /> hook for customizing hash updating:
+
+```js
+const webpack = require('webpack');
+const RealContentHashPlugin = webpack.optimize.RealContentHashPlugin;
+// ...
+compiler.hooks.compilation.tap('MyPlugin', (compilation) => {
+  const hooks = RealContentHashPlugin.getCompilationHooks(compilation);
+  hooks.updateHash.tap('MyPlugin', (content, oldHash) => {
+    // you can calculate the hash here as you wish
+  });
+});
+```
