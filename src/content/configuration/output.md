@@ -464,7 +464,7 @@ It is possible to filter out placeholder replacement when you want to use one of
 Example: `[\id\]` generates `[id]` instead of getting replaced with the `id`.
 
 If using a function for this option, the function will be passed an object containing data for the substitutions in the table above.
-Substituions will be applied to the returned string too.
+Substitutions will be applied to the returned string too.
 The passed object will have this type: (properties available depending on context)
 
 ``` typescript
