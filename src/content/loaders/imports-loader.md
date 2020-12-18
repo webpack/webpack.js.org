@@ -359,7 +359,7 @@ module.exports = {
         loader: 'imports-loader',
         options: {
           type: 'commonjs',
-          exports: 'single lib myName',
+          imports: 'single lib myName',
         },
       },
     ],

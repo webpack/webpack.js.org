@@ -186,7 +186,6 @@ module.exports = {
 |       **`include`**        | `{String\/RegExp\|Array<String\|RegExp>}` |                         `undefined`                         | Files to `include`                                                                                                        |
 |       **`exclude`**        | `{String\/RegExp\|Array<String\|RegExp>}` |                         `undefined`                         | Files to `exclude`                                                                                                        |
 |        **`filter`**        |               `{Function}`                |                        `() => true`                         | Allows filtering of images for optimization                                                                               |
-|        **`cache`**         |            `{Boolean\|String}`            |                           `true`                            | Enable file caching                                                                                                       |
 |    **`severityError`**     |            `{Boolean\|String}`            |                          `'auto'`                           | Allows to choose how errors are displayed                                                                                 |
 |   **`minimizerOptions`**   |                `{Object}`                 |                      `{ plugins: [] }`                      | Options for `imagemin`                                                                                                    |
 |        **`loader`**        |                `{Boolean}`                |                           `true`                            | Automatically adding `imagemin-loader` (require for minification images using in `url-loader`, `svg-url-loader` or other) |
@@ -285,51 +284,6 @@ module.exports = {
 
         return true;
       },
-    }),
-  ],
-};
-```
-
-#### `cache`
-
-> ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
-
-Type: `Boolean|String`
-Default: `true`
-
-Enable/disable file caching. Default path to cache directory: `node_modules/.cache/image-minimizer-webpack-plugin`.
-
-##### `{Boolean}`
-
-Enable/disable file caching.
-
-**webpack.config.js**
-
-```js
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
-
-module.exports = {
-  plugins: [
-    new ImageMinimizerPlugin({
-      cache: false,
-    }),
-  ],
-};
-```
-
-##### `{String}`
-
-Enable file caching and set path to cache directory.
-
-**webpack.config.js**
-
-```js
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
-
-module.exports = {
-  plugins: [
-    new ImageMinimizerPlugin({
-      cache: 'path/to/cache',
     }),
   ],
 };
@@ -538,7 +492,6 @@ module.exports = {
 |            Name            |        Type         |        Default        | Description                                                                                       |
 | :------------------------: | :-----------------: | :-------------------: | :------------------------------------------------------------------------------------------------ |
 |        **`filter`**        |    `{Function}`     |      `undefined`      | Allows filtering of images for optimization                                                       |
-|        **`cache`**         | `{Boolean\|String}` |        `true`         | Enable file caching                                                                               |
 |    **`severityError`**     | `{Boolean\|String}` |       `'auto'`        | Allows to choose how errors are displayed                                                         |
 |   **`minimizerOptions`**   |     `{Object}`      |   `{ plugins: [] }`   | Options for `imagemin`                                                                            |
 |       **`filename`**       |     `{string}`      | `'[path][name][ext]'` | Allows to set the filename for the generated asset. Useful for converting to a `webp`             |
@@ -580,81 +533,6 @@ module.exports = {
 
                 return true;
               },
-              minimizerOptions: {
-                plugins: ['gifsicle'],
-              },
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
-```
-
-#### `cache`
-
-Type: `Boolean\|String`
-Default: `true`
-
-Enable file caching. Default path to cache directory: `node_modules/.cache/image-minimizer-webpack-plugin`.
-
-##### `{Boolean}`
-
-Enable/disable file caching.
-
-**webpack.config.js**
-
-```js
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
-
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        use: [
-          {
-            loader: 'file-loader', // Or `url-loader` or your other loader
-          },
-          {
-            loader: ImageMinimizerPlugin.loader,
-            options: {
-              cache: false,
-              minimizerOptions: {
-                plugins: ['gifsicle'],
-              },
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
-```
-
-##### `{String}`
-
-Enable file caching and set path to cache directory.
-
-**webpack.config.js**
-
-```js
-const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
-
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        use: [
-          {
-            loader: 'file-loader', // Or `url-loader` or your other loader
-          },
-          {
-            loader: ImageMinimizerPlugin.loader,
-            options: {
-              cache: 'path/to/cache',
               minimizerOptions: {
                 plugins: ['gifsicle'],
               },
