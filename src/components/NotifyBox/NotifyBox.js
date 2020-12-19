@@ -49,8 +49,10 @@ export default function NotifyBox(props = { loading: false }) {
           style={{
             width: 90,
             textAlign: 'center',
-            paddingTop: 8,
-            paddingBottom: 8
+            paddingTop: 5,
+            paddingBottom: 5,
+            fontSize: 14,
+            lineHeight: 1,
           }}
         >
           {props.loading ? 'UPDATING' : 'UPDATE'}
