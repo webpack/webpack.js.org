@@ -37,8 +37,6 @@ export default function NotifyBox(props = { loading: false }) {
       <animated.div
         style={{
           ...fadeStyles,
-          overflow: 'hidden',
-          height: 21,
           alignItems: 'center',
           paddingRight: 20,
         }}
@@ -51,6 +49,8 @@ export default function NotifyBox(props = { loading: false }) {
           style={{
             width: 90,
             textAlign: 'center',
+            paddingTop: 8,
+            paddingBottom: 8
           }}
         >
           {props.loading ? 'UPDATING' : 'UPDATE'}
