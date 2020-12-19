@@ -280,7 +280,7 @@ __package.json__
    "scripts": {
      "test": "echo \"Error: no test specified\" && exit 1",
      "watch": "webpack --watch",
-+    "start": "webpack serve --open",
++    "start": "webpack serve",
      "build": "webpack"
    },
    "keywords": [],
