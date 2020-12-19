@@ -148,7 +148,7 @@ Maximum number of parallel requests at an entry point.
 
 ### `splitChunks.defaultSizeTypes`
 
-`[string] = 'javascript'`
+`[string] = ['javascript', 'unknown']`
 
 Sets the size types which are used when a number is used for sizes.
 
@@ -156,7 +156,7 @@ Sets the size types which are used when a number is used for sizes.
 
 `number = 1`
 
-Minimum number of chunks that must share a module before splitting.
+The minimum times must a module be shared among chunks before splitting.
 
 ### `splitChunks.hidePathInfo`
 
