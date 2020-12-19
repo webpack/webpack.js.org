@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import ChevronRightIcon from '../../styles/icons/chevron-right.svg';
 import './NotifyBox.scss';
 import { animated, useSpring } from 'react-spring';
+import { useLocalStorage } from 'react-use';
 NotifyBox.propTypes = {
   skip: PropTypes.func.isRequired,
   loading: PropTypes.bool,
 };
 const AnimatedChevron = animated(ChevronRightIcon);
 export default function NotifyBox(props = { loading: false }) {
-  const [collapse, setCollapse] = useState(false);
+  const [collapse, setCollapse] = useLocalStorage('app-update-button', false);
   const toggle = () => setCollapse(!collapse);
   const rotateStyles = useSpring({
     transform: collapse ? 'rotate(180deg)' : 'rotate(0deg)',
