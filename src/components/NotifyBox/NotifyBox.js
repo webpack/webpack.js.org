@@ -47,7 +47,7 @@ export default function NotifyBox(props = { loading: false }) {
           onClick={props.skip}
           disabled={props.loading}
           style={{
-            width: 90,
+            width: 100,
             textAlign: 'center',
             paddingTop: 5,
             paddingBottom: 5,
