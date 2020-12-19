@@ -15,46 +15,46 @@ export default function NotifyBox(props = { loading: false }) {
     transform: collapse ? 'rotate(180deg)' : 'rotate(0deg)',
   });
   const fadeStyles = useSpring({
-    display: collapse ? 'none' : 'inline-block',
+    display: collapse ? 'none' : 'inline-flex',
     opacity: collapse ? 0 : 1,
   });
   return (
     <div className="notifyBox__container">
-      <AnimatedChevron
-        fill="#333"
-        width={20}
+      <span
         role="button"
         style={{
-          ...rotateStyles,
+          display: 'inline-flex',
+          height: 44,
+          width: 44,
           cursor: 'pointer',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
         onClick={toggle}
-      />
+      >
+        <AnimatedChevron fill="#333" width={20} style={rotateStyles} />
+      </span>
       <animated.div
         style={{
           ...fadeStyles,
           overflow: 'hidden',
           height: 21,
+          alignItems: 'center',
+          paddingRight: 20,
         }}
       >
-        <div
+        <span>A new version is available</span>
+        <button
+          title="click to update"
+          onClick={props.skip}
+          disabled={props.loading}
           style={{
-            marginLeft: 5,
+            width: 90,
+            textAlign: 'center',
           }}
         >
-          A new version is available
-          <button
-            title="click to update"
-            onClick={props.skip}
-            disabled={props.loading}
-            style={{
-              width: 77,
-              textAlign: 'center',
-            }}
-          >
-            {props.loading ? 'UPDATING' : 'UPDATE'}
-          </button>
-        </div>
+          {props.loading ? 'UPDATING' : 'UPDATE'}
+        </button>
       </animated.div>
     </div>
   );
