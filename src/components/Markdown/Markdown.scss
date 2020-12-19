@@ -225,6 +225,13 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     }
   }
 
+  thead {
+    display: none;
+    @include break {
+      display: table-header-group;
+    }
+  }
+
   th {
     font-weight: bold;
     text-align: left;
@@ -247,64 +254,42 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     &:last-child {
       border-bottom: 1px solid #cccccc;
     }
-  }
 
-  thead {
-    display: none;
+    display: block;
+    margin-bottom: 10px;
 
     @include break {
-      display: table-header-group;
+      margin-bottom: 0;
+      display: table-row;
     }
   }
 
   td {
-    display: flex;
-    flex-basis: 100%;
-    align-self: stretch;
     padding: 4px 12px;
-    border-right: 1px solid #cccccc;
-
-    &:last-child {
-      border-right: none;
+    border-right: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-bottom: 1px solid #f2f2f2;
+    text-align: left;
+    &::before {
+      content: attr(data-th);
+      font-weight: bold;
     }
-
+    &:last-child {
+      border-bottom: none;
+    }
     @include break {
       display: table-cell;
-    }
-  }
-
-  .title {
-    width: unset;
-    display: flex;
-    flex-direction: column;
-    justify-content: baseline;
-    margin: 10px 0;
-
-    @include break {
-      display: none;
-    }
-  }
-
-  .content {
-    width: unset;
-    display: flex;
-    flex-direction: column;
-    justify-content: baseline;
-    margin: 10px 0;
-    padding: 0 10px;
-  }
-
-  .description.desktop {
-    display: none;
-
-    @include break {
-      display: block;
-    }
-  }
-
-  .description.mobile {
-    @include break {
-      display: none;
+      padding: 14px 22px;
+      text-align: unset;
+      &::before {
+        content: none;
+      }
+      border-right: 1px solid #cccccc;
+      border-bottom: none;
+      &:last-child {
+        border-right: none;
+      }
     }
   }
 
