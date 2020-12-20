@@ -160,7 +160,7 @@ The minimum times must a module be shared among chunks before splitting.
 
 ### `splitChunks.hidePathInfo`
 
-`boolean = true`
+`boolean`
 
 Prevents exposing path info when creating names for parts splitted by maxSize.
 
