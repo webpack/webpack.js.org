@@ -28,7 +28,12 @@ module.exports = {
   overrides: [
     { files: ['src/**/*.jsx'] }, // eslint would lint .js only by default
     {
-      files: ['**/*.{md,mdx}'],
+      files: ['**/*.mdx'],
+      processor: 'markdown/markdown',
+      extends: ['plugin:mdx/recommended'],
+    },
+    {
+      files: ['**/*.md'],
       processor: 'markdown/markdown',
     },
     {
