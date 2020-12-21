@@ -12,6 +12,7 @@ module.exports = {
   plugins: ['markdown', 'cypress'],
   globals: {
     __DEV__: true,
+    Badge: true, // global MDX component
   },
   rules: {
     'no-console': 'off',
@@ -29,15 +30,17 @@ module.exports = {
     { files: ['src/**/*.jsx'] }, // eslint would lint .js only by default
     {
       files: ['**/*.mdx'],
-      processor: 'markdown/markdown',
       extends: ['plugin:mdx/recommended'],
+      rules: {
+        semi: ['off'],
+      },
     },
     {
       files: ['**/*.md'],
       processor: 'markdown/markdown',
     },
     {
-      files: ['**/*.{md,mdx}/*.{js,javascript}'], // we don't lint ts at the moment
+      files: ['**/*.md/*.{js,javascript}'], // we don't lint ts at the moment
       rules: {
         indent: ['error', 2],
         quotes: ['error', 'single'],
