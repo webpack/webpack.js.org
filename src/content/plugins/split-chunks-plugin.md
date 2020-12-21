@@ -146,11 +146,27 @@ Maximum number of parallel requests when on-demand loading.
 
 Maximum number of parallel requests at an entry point.
 
+<<<<<<< HEAD
 ### `splitChunks.minChunks` {#splitchunksminchunks}
+=======
+### `splitChunks.defaultSizeTypes`
+
+`[string] = ['javascript', 'unknown']`
+
+Sets the size types which are used when a number is used for sizes.
+
+### `splitChunks.minChunks`
+>>>>>>> ee0cdc322379141c1bfde44fd434daace4b9f633
 
 `number = 1`
 
-Minimum number of chunks that must share a module before splitting.
+The minimum times must a module be shared among chunks before splitting.
+
+### `splitChunks.hidePathInfo`
+
+`boolean`
+
+Prevents exposing path info when creating names for parts splitted by maxSize.
 
 ### `splitChunks.minSize` {#splitchunksminsize}
 

@@ -2,9 +2,18 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const h = require('hastscript');
+// FIXME
+// why updating source code in responsive-table.js won't invalidate the webpack cache???
+// see https://github.com/webpack/changelog-v5/blob/master/guides/persistent-caching.md#build-dependencies
+const responsiveTable = require('./src/plugins/responsive-table/responsive-table.js');
 const mdPlugins = [
   require('remark-gfm'),
+<<<<<<< HEAD
   require('docschina-remark-slugger'),
+=======
+  require('remark-slug'),
+  responsiveTable,
+>>>>>>> ee0cdc322379141c1bfde44fd434daace4b9f633
   [
     require('remark-custom-blockquotes'),
     {
@@ -23,18 +32,6 @@ const mdPlugins = [
         return [
           h('span.header-link')
         ];
-      }
-    }
-  ],
-  [
-    require('remark-responsive-tables'),
-    {
-      classnames: {
-        title: 'title',
-        description: 'description',
-        content: 'content',
-        mobile: 'mobile',
-        desktop: 'desktop'
       }
     }
   ],
