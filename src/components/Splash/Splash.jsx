@@ -16,7 +16,7 @@ import SplashContent from '../../content/index.md';
 // Load Styling
 import './Splash.scss';
 
-const Support = lazy(() => import('../Support/Support'));
+// const Support = lazy(() => import('../Support/Support'));
 
 const SponsorsPlaceholder = () => (
   <>
@@ -56,40 +56,6 @@ const Splash = () => {
             <div dangerouslySetInnerHTML={{
               __html: SplashContent
             }} />
-          </Markdown>
-        </Container>
-      </div>
-
-      <div className="splash__section page__content">
-        <Container>
-          <Markdown>
-            <h1 id="sponsors">Support the Team</h1>
-
-            <p>
-              Through contributions, donations, and sponsorship, you allow webpack to thrive. Your
-              donations directly support office hours, continued enhancements, and most importantly,
-              great documentation and learning material!
-            </p>
-
-            { showSponsors ? (
-              <Suspense fallback={<SponsorsPlaceholder />}>
-                <p><label><input type="checkbox" checked={supportType === 'monthly'} onChange={e => setSupportType(e.target.checked ? 'monthly' : 'total')} /> Show sponsors by their average monthly amount of sponsoring in the last year.</label></p>
-
-                <Support type={supportType} rank="latest" />
-
-                <Support type={supportType} rank="platinum" />
-
-                <Support type={supportType} rank="gold" />
-
-                <Support type={supportType} rank="silver" />
-
-                <Support type={supportType} rank="bronze" />
-
-                <Support type={supportType} rank="backer" />
-              </Suspense>
-            ) : (
-              <SponsorsPlaceholder />
-            ) }
           </Markdown>
         </Container>
       </div>
