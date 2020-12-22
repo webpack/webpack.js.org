@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import VisibilitySensor from 'react-visibility-sensor';
 
 // Import Data
-import Backers from './_supporters.json';
+// import Backers from './_supporters.json';
 import Additional from './AdditionalSupporters';
 import SmallIcon from '../../assets/icon-square-small-slack.png';
 
 // Load Styling
 import './Support.scss';
 
-const SUPPORTERS = [ ...Backers ];
+const SUPPORTERS = [];
 
 // Merge or add additional backers/sponsors
 for(const additional of Additional) {

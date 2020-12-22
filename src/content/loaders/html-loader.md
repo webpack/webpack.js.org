@@ -51,12 +51,12 @@ module.exports = {
 
 ## 选项 {#options}
 
-| 名称 | 类型 | 默认 | 描述 |
-| :-: | :-: | :-: | :-- |
-| **[`attributes`](#attributes)** | `{Boolean|Object}` | `true` | 启用 / 禁用属性处理 |
-| **[`preprocessor`](#preprocessor)** | `{Function}` | `undefined` | 允许在处理之前对内容进行预处理 |
-| **[`minimize`](#minimize)** | `{Boolean|Object}` | 在生产环境下为 `true` ，否则为 `false` | 告诉 `html-loader` 压缩 HTML |
-| **[`esModule`](#esmodule)** | `{Boolean}` | `false` | 使用 ES 模块语法 |
+|                名称                 |        类型         |                   默认值                    | 描述                                      |
+| :---------------------------------: | :-----------------: | :------------------------------------------: | :----------------------------------------------- |
+|   __[`attributes`](#attributes)__   | `{Boolean\|Object}` |                    `true`                    | 启用/禁用 attributes 处理             |
+| __[`preprocessor`](#preprocessor)__ |    `{Function}`     |                 `undefined`                  | 允许在处理前对内容进行预处理 |
+|     __[`minimize`](#minimize)__     | `{Boolean\|Object}` | 在生产模式下为 `true`，其他情况为 `false` | 告知 `html-loader` 压缩 HTML              |
+|     __[`esModule`](#esmodule)__     |     `{Boolean}`     |                   `false`                    | 使用 ES modules 语法                            |
 
 ### `attributes` {#attributes}
 
