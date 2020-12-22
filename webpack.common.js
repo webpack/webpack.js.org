@@ -52,6 +52,10 @@ module.exports = () => ({
   module: {
     rules: [
       {
+        test: /react-spring/,
+        sideEffects: true
+      },
+      {
         test: /\.mdx$/,
         use: [
           'babel-loader',
