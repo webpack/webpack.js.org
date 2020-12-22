@@ -8,12 +8,8 @@ const h = require('hastscript');
 const responsiveTable = require('./src/plugins/responsive-table/responsive-table.js');
 const mdPlugins = [
   require('remark-gfm'),
-<<<<<<< HEAD
   require('docschina-remark-slugger'),
-=======
-  require('remark-slug'),
   responsiveTable,
->>>>>>> ee0cdc322379141c1bfde44fd434daace4b9f633
   [
     require('remark-custom-blockquotes'),
     {

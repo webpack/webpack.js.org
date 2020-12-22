@@ -463,15 +463,9 @@ T> `[file]` 等价于 `[path][base]`。`[base]` 等价于 `[name][ext]`。完整
 
 例如：`[\id\]` 生成 `[id]` 而不是 `id`。
 
-<<<<<<< HEAD
 如果将这个选项设为一个函数，函数将返回一个包含上面表格中含有替换信息数据的对象。
 替换也会被应用到返回的字符串中。
 传递的对象将具有如下类型（取决于上下文的属性）：
-=======
-If using a function for this option, the function will be passed an object containing data for the substitutions in the table above.
-Substitutions will be applied to the returned string too.
-The passed object will have this type: (properties available depending on context)
->>>>>>> ee0cdc322379141c1bfde44fd434daace4b9f633
 
 ``` typescript
 type PathData = {

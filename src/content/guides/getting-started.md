@@ -143,14 +143,10 @@ __project__
     |- index.js
 ```
 
-<<<<<<< HEAD
+T> 细心的小伙伴可能不难发现，尽管 `index.html` 目前放在 `dist` 目录下，但它是手动创建的。在本指南接下来的章节中，我们会教你如何生成 `index.html` 而非手动编辑它。如此做，便可安全地清空 `dist` 目录并重新生成目录中的所有文件。
+
+
 要在 `index.js` 中打包 `lodash` 依赖，我们需要在本地安装 library：
-=======
-T> The observant among you may have noticed that `index.html` is created manually, even though it is now placed in the `dist` directory. Later on in this guide, we will generate `index.html` rather than edit it manually. Once this is done, it should be safe to empty the `dist` directory and to regenerate all the files within it.
-
-
-To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally:
->>>>>>> ee0cdc322379141c1bfde44fd434daace4b9f633
 
 ``` bash
 npm install --save lodash
