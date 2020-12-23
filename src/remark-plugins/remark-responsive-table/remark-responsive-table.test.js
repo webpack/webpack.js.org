@@ -2,7 +2,7 @@ import remark from 'remark';
 describe('responsive table', () => {
   const processor = remark()
     .use(require('remark-gfm'))
-    .use(require('./responsive-table.js'))
+    .use(require('./remark-responsive-table.js'))
     .use(require('remark-html'));
   it('should add data-th', () => {
     processor.process(
