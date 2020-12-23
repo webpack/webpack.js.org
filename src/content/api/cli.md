@@ -108,7 +108,7 @@ See [configuration](/configuration) for the options in the configuration file.
 ### Without configuration file
 
 ```bash
-npx webpack <entry> [<entry>] -o <output-path>
+npx webpack --entry <entry> -o <output-path>
 ```
 
 __example__
@@ -194,7 +194,6 @@ __Show help for a single command or flag__
 
 ```bash
 npx webpack --help <command>
-npx webpack --help --<flag>
 ```
 
 __Show version of installed packages and sub-packages__
@@ -276,7 +275,6 @@ T> See the [environment variables](/guides/environment-variables/) guide for mor
 | `--config`      | Path to the configuration file                                 | string     | [Default Configs](/api/cli/#default-configurations) |
 | `--config-name` | Name of the configuration to use                               | string     |
 | `--env`         | Environment passed to the configuration, when it is a function |            |
-| `--mode`        | Mode to use                                                    | string     | `'production'`                                      |
 
 ## Analyzing Bundle
 
