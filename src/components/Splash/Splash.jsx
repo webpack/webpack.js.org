@@ -59,6 +59,53 @@ const Splash = () => {
           </Markdown>
         </Container>
       </div>
+<<<<<<< HEAD
+=======
+
+      <div className="splash__section page__content">
+        <Container>
+          <Markdown>
+            <h1 id="sponsors">Support the Team</h1>
+
+            <p>
+              Through contributions, donations, and sponsorship, you allow webpack to thrive. Your
+              donations directly support office hours, continued enhancements, and most importantly,
+              great documentation and learning material!
+            </p>
+
+            { showSponsors ? (
+              <Suspense fallback={<SponsorsPlaceholder />}>
+                <p>
+                  <label htmlFor="support-type">
+                    <input
+                      id="support-type"
+                      type="checkbox"
+                      checked={supportType === 'monthly'}
+                      onChange={e => setSupportType(e.target.checked ? 'monthly' : 'total')}
+                    />
+                    Show sponsors by their average monthly amount of sponsoring in the last year.
+                  </label>
+                </p>
+
+                <Support type={supportType} rank="latest" />
+
+                <Support type={supportType} rank="platinum" />
+
+                <Support type={supportType} rank="gold" />
+
+                <Support type={supportType} rank="silver" />
+
+                <Support type={supportType} rank="bronze" />
+
+                <Support type={supportType} rank="backer" />
+              </Suspense>
+            ) : (
+              <SponsorsPlaceholder />
+            ) }
+          </Markdown>
+        </Container>
+      </div>
+>>>>>>> a0ec1daa1f0b6e5f5f0bf0eabf2b472e1b32d13a
     </div>
   );
 };
