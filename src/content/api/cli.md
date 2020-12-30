@@ -111,7 +111,7 @@ npx webpack [--config webpack.config.js]
 ### 不使用配置文件 {#without-configuration-file}
 
 ```bash
-npx webpack <entry> [<entry>] -o <output-path>
+npx webpack --entry <entry> -o <output-path>
 ```
 
 __example__
@@ -197,7 +197,6 @@ __显示单个命令或标志的帮助提示__
 
 ```bash
 npx webpack --help <command>
-npx webpack --help --<flag>
 ```
 
 __显示已安装的 package 以及子 package 的版本__。
@@ -279,7 +278,6 @@ T> 请查阅 [environment 变量指南](/guides/environment-variables/)了解更
 | `--config`      | 配置文件的路径                                 | string     | [默认配置](/api/cli/#default-configurations) |
 | `--config-name` | 要使用的配置名                               | string     |
 | `--env`         | 当配置文件为函数时，environment 将作为参数传递给配置  |            |
-| `--mode`        | 要使用的 mode                                                    | string     | `'production'`                                      |
 
 ## 分析 Bundle {#analyzing-bundle}
 
