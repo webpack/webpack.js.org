@@ -61,110 +61,6 @@ function Site(props) {
     setLoading(true);
     wb.messageSkipWaiting();
   };
-<<<<<<< HEAD
-
-  render() {
-    let { location } = this.props;
-    let { mobileSidebarOpen } = this.state;
-    let sections = extractSections(Content);
-    let section = sections.find(({ url }) => location.pathname.startsWith(url));
-    let pages = extractPages(Content);
-    const sidebarPages = this._strip(
-      section
-        ? section.children
-        : Content.children.filter(
-            item => item.type !== 'directory' && item.url !== '/'
-          )
-    );
-    return (
-      <MDXProvider components={{
-        Badge: function Comp (props) {
-          return <Badge {...props} />;
-        }
-      }}>
-        <div className="site">
-          <DocumentTitle title={getPageTitle(Content, location.pathname)} />
-          <div className="site__header">
-            <NotificationBar />
-            <Navigation
-            pathname={location.pathname}
-            toggleSidebar={this._toggleSidebar}
-            links={[
-              {
-                content: '中文文档',
-                url: '/concepts/',
-                isActive: url => /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(url),
-                children: this._strip(sections.filter(item => item.name !== 'contribute'))
-              },
-              { content: '参与贡献', url: '/contribute/' },
-              { content: '投票', url: '/vote/' },
-              { content: '博客', url: '/blog/' },
-              { content: '印记中文', url: 'https://docschina.org' }
-            ]}
-            />
-          </div>
-
-          {isClient ? <SidebarMobile
-            isOpen={mobileSidebarOpen}
-            sections={this._strip(Content.children)}
-            toggle={this._toggleSidebar} /> : null}
-
-          <Switch>
-            <Route exact strict path="/:url*" render={props => <Redirect to={`${props.location.pathname}/`}/>} />
-            <Route path="/" exact component={Splash} />
-            <Route
-              render={() => (
-                <Container className="site__content">
-                  <Switch>
-                    <Route path="/vote" component={Vote} />
-                    <Route path="/organization" component={Organization} />
-                    <Route path="/app-shell" component={() => <Fragment />} />
-                    {pages.map(page => (
-                      <Route
-                        key={page.url}
-                        exact={true}
-                        path={page.url}
-                        render={() => {
-                          let path = page.path.replace('src/content/', '');
-                          let content = this.props.import(path);
-                          const { previous, next } = getAdjacentPages(
-                            sidebarPages,
-                            page,
-                            'url'
-                          );
-                          return (
-                            <Fragment>
-                              <Sponsors />
-                              <Sidebar
-                                className="site__sidebar"
-                                currentPage={location.pathname}
-                                pages={sidebarPages}
-                              />
-                              <Page
-                                {...page}
-                                content={content}
-                                previous={previous}
-                                next={next}
-                              />
-                            </Fragment>
-                          );
-                        }}
-                      />
-                    ))}
-                    <Route render={() => <PageNotFound />} />
-                  </Switch>
-                </Container>
-              )}
-            />
-          </Switch>
-          <Footer />
-        </div>
-      </MDXProvider>
-    );
-  }
-
-=======
->>>>>>> a0ec1daa1f0b6e5f5f0bf0eabf2b472e1b32d13a
   /**
    * Toggle the mobile sidebar
    *
@@ -190,7 +86,6 @@ function Site(props) {
       array.splice(anchorTitleIndex + 1, 1);
     }
 
-<<<<<<< HEAD
     const map = new Map([
       ['concepts', '概念'],
       ['configuration', '配置'],
@@ -204,28 +99,16 @@ function Site(props) {
       return {
         title: cnTitle || title || name,
         content: cnTitle || title || name,
-=======
-    return array
-      .map(({ title, name, url, group, sort, anchors, children }) => ({
-        title: title || name,
-        content: title || name,
->>>>>>> a0ec1daa1f0b6e5f5f0bf0eabf2b472e1b32d13a
         url,
         group,
         sort,
         anchors,
-<<<<<<< HEAD
-        children: children ? this._strip(children) : []
-      };
-    }).filter(page => (page.title !== 'printable.md' && !page.content.includes('Printable')));
-=======
         children: children ? _strip(children) : [],
-      }))
+      }})
       .filter(
         (page) =>
           page.title !== 'printable.md' && !page.content.includes('Printable')
       );
->>>>>>> a0ec1daa1f0b6e5f5f0bf0eabf2b472e1b32d13a
   };
 
   useEffect(() => {
@@ -290,7 +173,7 @@ function Site(props) {
             toggleSidebar={_toggleSidebar}
             links={[
               {
-                content: 'Documentation',
+                content: '中文文档',
                 url: '/concepts/',
                 isActive: (url) =>
                   /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
@@ -300,9 +183,10 @@ function Site(props) {
                   sections.filter((item) => item.name !== 'contribute')
                 ),
               },
-              { content: 'Contribute', url: '/contribute/' },
-              { content: 'Vote', url: '/vote/' },
-              { content: 'Blog', url: '/blog/' },
+              { content: '参与贡献', url: '/contribute/' },
+              { content: '投票', url: '/vote/' },
+              { content: '博客', url: '/blog/' },
+              { content: '印记中文', url: 'https://docschina.org' }
             ]}
           />
         </div>

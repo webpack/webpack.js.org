@@ -41,7 +41,7 @@ export default function NotifyBox(props = { loading: false }) {
           paddingRight: 20,
         }}
       >
-        <span>A new version is available</span>
+        <span>检测到文档有更新</span>
         <button
           title="click to update"
           onClick={props.skip}
@@ -55,7 +55,7 @@ export default function NotifyBox(props = { loading: false }) {
             lineHeight: 1,
           }}
         >
-          {props.loading ? 'UPDATING' : 'UPDATE'}
+          {props.loading ? '更新中' : '更新'}
         </button>
       </animated.div>
     </div>

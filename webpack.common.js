@@ -5,13 +5,8 @@ const h = require('hastscript');
 const remarkResponsiveTable = require('./src/remark-plugins/remark-responsive-table/remark-responsive-table.js');
 const mdPlugins = [
   require('remark-gfm'),
-<<<<<<< HEAD
   require('docschina-remark-slugger'),
-  responsiveTable,
-=======
-  require('remark-slug'),
   remarkResponsiveTable,
->>>>>>> a0ec1daa1f0b6e5f5f0bf0eabf2b472e1b32d13a
   [
     require('remark-custom-blockquotes'),
     {
