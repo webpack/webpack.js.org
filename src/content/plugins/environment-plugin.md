@@ -43,7 +43,7 @@ W> Variables coming from `process.env` are always strings.
 
 T> Unlike [`DefinePlugin`](/plugins/define-plugin), default values are applied to `JSON.stringify` by the `EnvironmentPlugin`.
 
-T> To specify an unset default value, use `null` instead of `undefined`.
+T> Default values of `null` and `undefined` behave differently. Use `undefined` for variables that _must_ be provided during bundling, or `null` if they are optional.
 
 W> If an environment variable is not found during bundling and no default value was provided, webpack will throw an error instead of a warning.
 
