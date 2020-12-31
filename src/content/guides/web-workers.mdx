@@ -10,7 +10,7 @@ As of webpack 5, you can use [web workers](https://developer.mozilla.org/en-US/d
 ## Syntax
 
 ```js
-new Worker(new URL("./worker.js", import.meta.url));
+new Worker(new URL('./worker.js', import.meta.url));
 ```
 
 The syntax was chosen to allow running code without bundler, it is also available in native ECMAScript modules in the browser.
@@ -20,10 +20,10 @@ The syntax was chosen to allow running code without bundler, it is also availabl
 **src/index.js**
 
 ```js
-const worker = new Worker(new URL("./deep-thought.js", import.meta.url));
+const worker = new Worker(new URL('./deep-thought.js', import.meta.url));
 worker.postMessage({
   question:
-    "The Answer to the Ultimate Question of Life, The Universe, and Everything.",
+    'The Answer to the Ultimate Question of Life, The Universe, and Everything.',
 });
 worker.onmessage = ({ data: { answer } }) => {
   console.log(answer);
