@@ -92,7 +92,7 @@ __Here's the list of all the core flags supported by webpack v5 with CLI v4 - [l
 For example if you want to enable performance hints in your project you'd use [this](https://webpack.js.org/configuration/performance/#performancehints) option in configuration, with core flags you can do -
 
 ```bash
-webpack --performance-hints warning
+npx webpack --performance-hints warning
 ```
 
 ## Usage
@@ -100,7 +100,7 @@ webpack --performance-hints warning
 ### With configuration file
 
 ```bash
-webpack [--config webpack.config.js]
+npx webpack [--config webpack.config.js]
 ```
 
 See [configuration](/configuration) for the options in the configuration file.
@@ -108,13 +108,13 @@ See [configuration](/configuration) for the options in the configuration file.
 ### Without configuration file
 
 ```bash
-webpack <entry> [<entry>] -o <output-path>
+npx webpack --entry <entry> -o <output-path>
 ```
 
 __example__
 
 ```bash
-webpack --entry ./first.js --entry ./second.js --output-path /build
+npx webpack --entry ./first.js --entry ./second.js --output-path /build
 ```
 
 __`<entry>`__
@@ -140,7 +140,7 @@ If your project structure is as follows -
 ```
 
 ```bash
-webpack ./src/index.js -o dist
+npx webpack ./src/index.js -o dist
 ```
 
 This will bundle your source code with entry as `index.js`, and the output bundle file will have a path of `dist`.
@@ -153,7 +153,7 @@ webpack 5.1.0 compiled successfully in 187 ms
 ```
 
 ```bash
-webpack ./src/index.js ./src/others2.js -o dist/
+npx webpack ./src/index.js ./src/others2.js -o dist/
 ```
 
 This will form the bundle with both the files as separate entry points.
@@ -199,8 +199,7 @@ npx webpack --help=verbose
 __Show help for a single command or flag__
 
 ```bash
-webpack --help <command>
-webpack --help --<flag>
+npx webpack --help <command>
 ```
 
 __Show version of installed packages and sub-packages__
@@ -237,19 +236,19 @@ __Build source using a configuration file__
 Specifies a different [configuration](/configuration) file to pick up. Use this if you want to specify something different from `webpack.config.js`, which is one of the default.
 
 ```bash
-webpack --config example.config.js
+npx webpack --config example.config.js
 ```
 
 __Print result of webpack as a JSON__
 
 ```bash
-webpack --json
+npx webpack --json
 ```
 
 __If you want to store stats as json instead of printing it, you can use -__
 
 ```bash
-webpack --json stats.json
+npx webpack --json stats.json
 ```
 
 In every other case, webpack prints out a set of stats showing bundle, chunk and timing details. Using this option, the output can be a JSON object. This response is accepted by webpack's [analyse tool](https://webpack.github.io/analyse/), or chrisbateman's [webpack-visualizer](https://chrisbateman.github.io/webpack-visualizer/), or th0r's [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer). The analyse tool will take in the JSON and provide all the details of the build in graphical form.
@@ -261,16 +260,17 @@ T> See the [stats data api](/api/stats) to read more about the stats generated h
 When the webpack configuration [exports a function](/configuration/configuration-types/#exporting-a-function), an "environment" may be passed to it.
 
 ```bash
-webpack --env production    # sets env.production == true
+npx webpack --env production    # sets env.production == true
 ```
 
 The `--env` argument accepts multiple values:
 
-| Invocation                                    | Resulting environment                   |
-| --------------------------------------------- | --------------------------------------- |
-| `webpack --env prod`                          | `{ prod: true }`                        |
-| `webpack --env prod --env min`                | `{ prod: true, min: true }`             |
-| `webpack --env platform=app --env production` | `{ platform: "app", production: true }` |
+| Invocation                                                   | Resulting environment                          |
+| ------------------------------------------------------------ | ---------------------------------------------- |
+| `npx webpack --env prod`                                         | `{ prod: true }`                               |
+| `npx webpack --env prod --env min`                               | `{ prod: true, min: true }`                    |
+| `npx webpack --env platform=app --env production`                | `{ platform: "app", production: true }`        |
+| `npx webpack --env app.platform="staging" --env app.name="test"` | `{ app: { platform: "staging", name: "test" }` |
 
 T> See the [environment variables](/guides/environment-variables/) guide for more information on its usage.
 
@@ -281,14 +281,13 @@ T> See the [environment variables](/guides/environment-variables/) guide for mor
 | `--config`      | Path to the configuration file                                 | string     | [Default Configs](/api/cli/#default-configurations) |
 | `--config-name` | Name of the configuration to use                               | string     |
 | `--env`         | Environment passed to the configuration, when it is a function |            |
-| `--mode`        | Mode to use                                                    | string     | `'production'`                                      |
 
 ## Analyzing Bundle
 
 You can also use `webpack-bundle-analyzer` to analyze your output bundles emitted by webpack. You can use `--analyze` flag to invoke it via CLI.
 
 ```bash
-webpack --analyze
+npx webpack --analyze
 ```
 
 W> Make sure you have `webpack-bundle-analyzer` installed in your project else CLI will prompt you to install it.
@@ -298,13 +297,13 @@ W> Make sure you have `webpack-bundle-analyzer` installed in your project else C
 To check the progress of any webpack compilation you can use the `--progress` flag.
 
 ```bash
-webpack --progress
+npx webpack --progress
 ```
 
 To collect profile data for progress steps you can pass `profile` as value to `--progress` flag.
 
 ```bash
-webpack --progress=profile
+npx webpack --progress=profile
 ```
 
 ## Pass CLI arguments to Node.js

@@ -2,9 +2,11 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const h = require('hastscript');
+const remarkResponsiveTable = require('./src/remark-plugins/remark-responsive-table/remark-responsive-table.js');
 const mdPlugins = [
   require('remark-gfm'),
   require('remark-slug'),
+  remarkResponsiveTable,
   [
     require('remark-custom-blockquotes'),
     {
@@ -23,18 +25,6 @@ const mdPlugins = [
         return [
           h('span.header-link')
         ];
-      }
-    }
-  ],
-  [
-    require('remark-responsive-tables'),
-    {
-      classnames: {
-        title: 'title',
-        description: 'description',
-        content: 'content',
-        mobile: 'mobile',
-        desktop: 'desktop'
       }
     }
   ],
@@ -58,6 +48,10 @@ module.exports = () => ({
   },
   module: {
     rules: [
+      {
+        test: /react-spring/,
+        sideEffects: true
+      },
       {
         test: /\.mdx$/,
         use: [

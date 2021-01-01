@@ -11,7 +11,7 @@ sort: -1
 __src/index.js__
 
 ```js
-import bar from './bar';
+import bar from './bar.js';
 
 bar();
 ```
@@ -59,6 +59,7 @@ __page.html__
 <!doctype html>
 <html>
   <head>
+    <meta charset='utf-8' />
     ...
   </head>
   <body>
