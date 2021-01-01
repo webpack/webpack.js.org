@@ -48,7 +48,7 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 | `serve`   | s     | Run the webpack Dev Server                                                                  |
 | `bundle`  | b     | Run webpack (default command, can be omitted)                                               |
 | `help`    | h     | Display help for commands and options                                                       |
-| `version` | v     | Output the version number of 'webpack', 'webpack-cli' and 'webpack-dev-server' and commands |
+| `version` | v     | Output the version of `webpack`, `webpack-cli` and `webpack-dev-server` |
 
 ## Flags
 
