@@ -184,10 +184,16 @@ This is the lookup priority in increasing order
 
 W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/configuration/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
 
-__List all of the commands and flags available on the cli__
+__List basic commands and flags available on the cli__
 
 ```bash
 npx webpack --help
+```
+
+__List all supported commands and flags by cli__
+
+```bash
+npx webpack --help=verbose
 ```
 
 __Show help for a single command or flag__
