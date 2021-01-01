@@ -44,7 +44,7 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 | `migrate` | m     | Migrate a configuration to a new version                                                    |
 | `loader`  | l     | Scaffold a loader repository                                                                |
 | `plugin`  | p     | Scaffold a plugin repository                                                                |
-| `info`    | i     | Outputs information about your system and dependencies                                      |
+| `info`    | i     | Output information about your system and dependencies                                      |
 | `serve`   | s     | Run the webpack Dev Server                                                                  |
 | `bundle`  | b     | Run webpack (default command, can be omitted)                                               |
 | `help`    | h     | Display help for commands and options                                                       |
