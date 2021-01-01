@@ -196,12 +196,6 @@ __List all supported commands and flags by cli__
 npx webpack --help=verbose
 ```
 
-__Show help for a single command or flag__
-
-```bash
-npx webpack --help <command>
-```
-
 __Show version of installed packages and sub-packages__
 
 To inspect the version of `webpack` and `webpack-cli` you are using just run command:
