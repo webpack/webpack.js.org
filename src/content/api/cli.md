@@ -187,13 +187,13 @@ W> Note that Command Line Interface has a higher precedence for the arguments yo
 __List basic commands and flags available on the cli__
 
 ```bash
-webpack --help
+npx webpack --help
 ```
 
 __List all supported commands and flags by cli__
 
 ```bash
-webpack --help=verbose
+npx webpack --help=verbose
 ```
 
 __Show help for a single command or flag__
