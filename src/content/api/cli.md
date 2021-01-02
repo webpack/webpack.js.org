@@ -38,14 +38,17 @@ Read the [installation guide](/guides/installation) if you don't already have we
 
 webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with
 
-| Command   | Alias | Description                                            |
-| --------- | ----- | ------------------------------------------------------ |
-| `init`    | c     | Initialize a new webpack configuration                 |
-| `migrate` | m     | Migrate a configuration to a new version               |
-| `loader`  | l     | Scaffold a loader repository                           |
-| `plugin`  | p     | Scaffold a plugin repository                           |
-| `info`    | i     | Outputs information about your system and dependencies |
-| `serve`   | s     | Run the webpack Dev Server                             |
+| Command   | Alias | Description                                                                                 |
+| --------- | ----- | ------------------------------------------------------------------------------------------- |
+| `init`    | c     | Initialize a new webpack configuration                                                      |
+| `migrate` | m     | Migrate a configuration to a new version                                                    |
+| `loader`  | l     | Scaffold a loader repository                                                                |
+| `plugin`  | p     | Scaffold a plugin repository                                                                |
+| `info`    | i     | Output information about your system and dependencies                                      |
+| `serve`   | s     | Run the webpack Dev Server                                                                  |
+| `bundle`  | b     | Run webpack (default command, can be omitted)                                               |
+| `help`    | h     | Display help for commands and options                                                       |
+| `version` | v     | Output the version of `webpack`, `webpack-cli` and `webpack-dev-server` |
 
 ## Flags
 
