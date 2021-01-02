@@ -119,7 +119,7 @@ npx webpack --entry ./first.js --entry ./second.js --output-path /build
 
 __`<entry>`__
 
-A filename or a set of named filenames which act as the entry point to build your project. You can pass multiple entries (every entry is loaded on startup). If you pass a pair in the form `<name>=<request>`, you can create an additional entry point. It will be mapped to the configuration option `entry`.
+A filename or a set of named filenames which act as the entry point to build your project. You can pass multiple entries (every entry is loaded on startup).
 
 __`<output>`__
 
