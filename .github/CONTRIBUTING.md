@@ -11,27 +11,26 @@ page please create an issue first.
 Start by ensuring that you have Node.js installed and forking the repository:
 
 - Install [Node.js][1] if you have not already.
+- Install [Yarn][13] if you have not already. Yarn is an alternative to npm, and it is required for building the site.
 - Fork the **webpack.js.org** repo from [the main repository][2].
 - `git clone <your-clone-url> && cd webpack.js.org`
 
 Once you are in the project directory, run the following commands:
 
-- `npm install` to pull all dependencies. Make sure to check notes below if you prefer Yarn.
-- `npm run build` to create a production version of the site.
-- `npm start` to develop on a local webpack-dev-server: [localhost:3000][3].
+- `yarn` to pull all dependencies.
+- `yarn build` to create a production version of the site.
+- `yarn start` to develop on a local webpack-dev-server: [localhost:3000][3].
 
-> NOTE: run `npm fetch` before running `npm start` command for the first time
+> NOTE: run `yarn fetch` before running `yarn start` command for the first time
 
-- `npm run fetch` to retrieve external documentation/data.
+- `yarn fetch` to retrieve external documentation/data.
 
-The final command, `npm run fetch`, is optional as both `npm run build` and `npm start`
+The final command, `yarn fetch`, is optional as both `yarn build` and `yarn start`
 will do this automatically. This step pulls in documentation for loaders/plugins hosted
 in separate repositories such as the ones found in the [webpack-contrib][4] organization.
 See the `package.json` for the full list of `scripts`.
 
 > Note that __Node 6.9.x__ or above is required for the build process to run properly.
-
-> Although __Yarn__ is not required to work with webpack docs, the core team is using it more extensively. If you prefer to use Yarn make sure that you [get it installed][13] and run `yarn` to pull all dependencies, `yarn build` to build the project, or `yarn start` to start the development server.
 
 > On Debian and Ubuntu operating systems you may have to use `node >= 7.0.0` to avoid build errors with `node-sass`. Please note that we don't officially support building on these systems.
 
