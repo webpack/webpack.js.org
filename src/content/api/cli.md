@@ -210,8 +210,15 @@ npx webpack --version
 This will output the following result:
 
 ```bash
-webpack-cli 4.2.0
-webpack 5.4.0
+webpack 5.11.1
+webpack-cli 4.3.1
+```
+If installed it will output the version of `webpack-dev-server` as well:
+
+```bash
+webpack 5.11.1
+webpack-cli 4.3.1
+webpack-dev-server 3.11.1
 ```
 
 To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/init`) just run command similar to the following:
