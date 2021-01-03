@@ -103,9 +103,11 @@ function Site(props) {
   };
 
   useEffect(() => {
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      window.location.reload();
-    });
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        window.location.reload();
+      });
+    }
   }, []);
 
   useEffect(() => {
