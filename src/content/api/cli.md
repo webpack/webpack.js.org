@@ -213,6 +213,7 @@ This will output the following result:
 webpack 5.11.1
 webpack-cli 4.3.1
 ```
+
 If installed it will output the version of `webpack-dev-server` as well:
 
 ```bash
