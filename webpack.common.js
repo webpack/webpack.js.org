@@ -7,6 +7,7 @@ const mdPlugins = [
   require('remark-gfm'),
   require('remark-slug'),
   remarkResponsiveTable,
+  require('remark-emoji'),
   [
     require('remark-custom-blockquotes'),
     {
