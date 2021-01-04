@@ -10,6 +10,7 @@ contributors:
   - Zearin
   - chenxsan
   - adyjs
+  - MananTank
 ---
 
 As mentioned in [Getting Started](/guides/getting-started/#using-a-configuration), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you __can__ configure the `entry` property, in addition to explaining why it may be useful to you.
@@ -39,6 +40,8 @@ module.exports = {
 };
 ```
 
+## Multi-Entry (Shorthand) Syntax
+
 We can also pass an array of file paths to the `entry` property which creates what is known as a __"multi-main entry"__. This is useful when you would like to inject multiple dependent files together and graph their dependencies into one "chunk".
 
 __webpack.config.js__
@@ -55,7 +58,7 @@ module.exports = {
 };
 ```
 
-Single Entry Syntax is a great choice when you are looking to quickly setup a webpack configuration for an application or tool with one entry point (i.e. a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.
+Shorthand Syntax is a great choice when you are looking to quickly setup a webpack configuration for an application or tool with one entry point (i.e. a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.
 
 
 ## Object Syntax
