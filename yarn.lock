@@ -11218,10 +11218,10 @@ remark-autolink-headings@^6.0.1:
     extend "^3.0.0"
     unist-util-visit "^2.0.0"
 
-remark-custom-blockquotes@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/remark-custom-blockquotes/-/remark-custom-blockquotes-1.0.0.tgz#82ed4cebf45255a0d07ba81696f909c23b1d749d"
-  integrity sha512-R6/tiD4RE7rIaPAmZcVdbddH35DJraxNiVWo8nwF4QIhjwthClAkrzDzKcRHzf2sHL3OlG5jOBtwvZX7Dwww/w==
+remark-custom-blockquotes@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/remark-custom-blockquotes/-/remark-custom-blockquotes-1.0.1.tgz#4b1e2ee844d75a6b76d64710c96b575821886ca3"
+  integrity sha512-Fqnl7vN1d5Gvxx5lc/C/XoPaLVJ2A0Jw+gGkJqO/pQ8qBp4DLuuLb3iUb+7wiOFpRTopAqGRe4fW7qx8omrJ+w==
   dependencies:
     unist-util-visit "1.3.1"
 
