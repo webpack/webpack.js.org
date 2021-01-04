@@ -140,13 +140,17 @@
     "static-site-generator-webpack-plugin": "^3.4.1",
     "style-loader": "^2.0.0",
     "tap-spot": "^1.1.1",
+<<<<<<< HEAD
     "textlint": "^11.6.3",
     "textlint-rule-heading": "^1.0.10",
     "webpack": "^5.11.0",
+=======
+    "webpack": "^5.11.1",
+>>>>>>> 43e6917d15ab68faeb8b4c8d9eb3627947b0d212
     "webpack-bundle-analyzer": "^4.3.0",
-    "webpack-cli": "^4.2.0",
+    "webpack-cli": "^4.3.1",
     "webpack-dev-server": "^4.0.0-beta.0",
-    "webpack-merge": "^5.7.2",
+    "webpack-merge": "^5.7.3",
     "workbox-webpack-plugin": "^6.0.0"
   },
   "dependencies": {

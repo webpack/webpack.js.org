@@ -67,7 +67,6 @@ module.exports = {
       minChunks: 1,
       maxAsyncRequests: 30,
       maxInitialRequests: 30,
-      automaticNameDelimiter: '~',
       enforceSizeThreshold: 50000,
       cacheGroups: {
         defaultVendors: {
@@ -270,6 +269,7 @@ Running webpack with following `splitChunks` configuration would also output a c
 
 W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
 
+<<<<<<< HEAD
 ### `splitChunks.automaticNamePrefix` {#splitchunksautomaticnameprefix}
 
 `string = ''`
@@ -292,6 +292,8 @@ module.exports = {
   }
 };
 ```
+=======
+>>>>>>> 43e6917d15ab68faeb8b4c8d9eb3627947b0d212
 
 ### `splitChunks.usedExports` {#splitchunksusedexports}
 

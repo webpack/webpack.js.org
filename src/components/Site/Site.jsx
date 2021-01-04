@@ -112,6 +112,14 @@ function Site(props) {
   };
 
   useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        window.location.reload();
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     if (isClient) {
       if (process.env.NODE_ENV === 'production') {
         // only register sw.js in production
@@ -129,12 +137,6 @@ function Site(props) {
                 "A new service worker has installed, but it can't activate until all tabs running the current version have been unloaded"
               );
               setList([true]);
-            });
-
-            // listen to `controlling`
-            // https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-window.Workbox#event:controlling
-            wb.addEventListener('controlling', () => {
-              window.location.reload();
             });
 
             // register the service worker

@@ -38,6 +38,7 @@ related:
 
 webpack-cli 提供了许多命令来使 webpack 的工作变得简单。默认情况下，webpack 提供了以下命令：
 
+<<<<<<< HEAD
 | 命令   | 别名 | 描述                                            |
 | --------- | ----- | ------------------------------------------------------ |
 | `init`    | c     | 初始化一个新的 webpack 配置                               |
@@ -46,6 +47,19 @@ webpack-cli 提供了许多命令来使 webpack 的工作变得简单。默认�
 | `plugin`  | p     | 生成一个 plugin 仓库                                     |
 | `info`    | i     | 输出有关系统和依赖的信息                                   |
 | `serve`   | s     | 运行 webpack Dev Server                                 |
+=======
+| Command   | Alias | Description                                                                                 |
+| --------- | ----- | ------------------------------------------------------------------------------------------- |
+| `init`    | c     | Initialize a new webpack configuration                                                      |
+| `migrate` | m     | Migrate a configuration to a new version                                                    |
+| `loader`  | l     | Scaffold a loader repository                                                                |
+| `plugin`  | p     | Scaffold a plugin repository                                                                |
+| `info`    | i     | Output information about your system and dependencies                                      |
+| `serve`   | s     | Run the webpack Dev Server                                                                  |
+| `bundle`  | b     | Run webpack (default command, can be omitted)                                               |
+| `help`    | h     | Display help for commands and options                                                       |
+| `version` | v     | Output the version of `webpack`, `webpack-cli` and `webpack-dev-server` |
+>>>>>>> 43e6917d15ab68faeb8b4c8d9eb3627947b0d212
 
 ## Flags {#flags}
 
@@ -122,7 +136,11 @@ npx webpack --entry ./first.js --entry ./second.js --output-path /build
 
 __`<entry>`__
 
+<<<<<<< HEAD
 构建项目时入口可以配置一个文件名或一组被命名过的文件名。你可以传递多个入口（每个入口在启动时加载）。如果传递一个形式为 `<name> = <request>` 的键值对，则可以创建一个额外的入口起点。它将被映射到配置选项（configuration option）的 `entry` 属性中。
+=======
+A filename or a set of named filenames which act as the entry point to build your project. You can pass multiple entries (every entry is loaded on startup).
+>>>>>>> 43e6917d15ab68faeb8b4c8d9eb3627947b0d212
 
 __`<output>`__
 
@@ -187,16 +205,24 @@ CLI 会在你的项目路径中寻找默认配置，以下是 CLI 采集到的�
 
 W> 注意，命令行接口（Command Line Interface）参数的优先级，高于配置文件参数。例如，如果将 [`--mode="production"`](/configuration/mode/#usage) 传入 webpack CLI，而配置文件使用的是 `development`，最终会使用 `production`。
 
+<<<<<<< HEAD
 __列出命令行所有可用的命令和 flag__
+=======
+__List basic commands and flags available on the cli__
+>>>>>>> 43e6917d15ab68faeb8b4c8d9eb3627947b0d212
 
 ```bash
 npx webpack --help
 ```
 
+<<<<<<< HEAD
 __显示单个命令或标志的帮助提示__
+=======
+__List all supported commands and flags by cli__
+>>>>>>> 43e6917d15ab68faeb8b4c8d9eb3627947b0d212
 
 ```bash
-npx webpack --help <command>
+npx webpack --help=verbose
 ```
 
 __显示已安装的 package 以及子 package 的版本__。
@@ -210,8 +236,16 @@ npx webpack --version
 运行结果如下：
 
 ```bash
-webpack-cli 4.2.0
-webpack 5.4.0
+webpack 5.11.1
+webpack-cli 4.3.1
+```
+
+It will output the version of `webpack-dev-server` as well if you have it installed:
+
+```bash
+webpack 5.11.1
+webpack-cli 4.3.1
+webpack-dev-server 3.11.1
 ```
 
 如需检查 `webpack-cli` 子包的版本（如 `@webpack-cli/init`），只需运行如下命令：
