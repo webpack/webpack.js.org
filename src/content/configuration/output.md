@@ -724,8 +724,6 @@ var MyLibrary = _entry_return_;
 MyLibrary.doSomething();
 ```
 
-W> An empty string for `output.library` is invalid. You must specify a valid identifier that should be assigned.
-
 `libraryTarget: 'assign'` - This will generate an implied global which has the potential to reassign an existing value (use with caution).
 
 ```javascript
@@ -734,7 +732,7 @@ MyLibrary = _entry_return_;
 
 Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
 
-W> When using this option, an empty `output.library` will result in a broken output bundle.
+W> An empty string for `output.library` is invalid. You must specify a valid identifier that should be assigned.
 
 
 ### Expose Via Object Assignment
