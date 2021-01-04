@@ -238,7 +238,7 @@ webpack 5.4.0
 
 __Build source using a configuration file__
 
-Specifies a different [configuration](/configuration) file to pick up. Use this if you want to specify something different from `webpack.config.js`, which is one of the default.
+Specify a different [configuration](/configuration) file other than `webpack.config.js`, which is one of the defaults.
 
 ```bash
 npx webpack --config example.config.js
