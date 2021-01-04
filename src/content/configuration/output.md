@@ -713,7 +713,7 @@ T> Note that `_entry_return_` in the example code below is the value returned by
 
 ### Expose a Variable
 
-These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by `output.library` at whatever scope the bundle was included at.
+These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library`](#outputlibrary) at whatever scope the bundle was included at.
 
 `libraryTarget: 'var'` - (default) When your library is loaded, the __return value of your entry point__ will be assigned to a variable:
 
@@ -724,7 +724,7 @@ var MyLibrary = _entry_return_;
 MyLibrary.doSomething();
 ```
 
-W> When using this option, an empty `output.library` will result in no assignment.
+W> An empty string for `output.library` is invalid. You must specify a valid identifier that should be assigned.
 
 `libraryTarget: 'assign'` - This will generate an implied global which has the potential to reassign an existing value (use with caution).
 
