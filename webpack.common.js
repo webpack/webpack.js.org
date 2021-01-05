@@ -9,14 +9,14 @@ const mdPlugins = [
   remarkResponsiveTable,
   require('remark-emoji'),
   [
-    require('remark-custom-blockquotes'),
+    require('./src/remark-plugins/remark-custom-asides/index.js'),
     {
       mapping: {
         'T>': 'tip',
         'W>': 'warning',
-        '?>': 'todo'
-      }
-    }
+        '?>': 'todo',
+      },
+    },
   ],
   [
     require('remark-autolink-headings'),

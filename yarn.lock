@@ -11218,13 +11218,6 @@ remark-autolink-headings@^6.0.1:
     extend "^3.0.0"
     unist-util-visit "^2.0.0"
 
-remark-custom-blockquotes@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/remark-custom-blockquotes/-/remark-custom-blockquotes-1.0.0.tgz#82ed4cebf45255a0d07ba81696f909c23b1d749d"
-  integrity sha512-R6/tiD4RE7rIaPAmZcVdbddH35DJraxNiVWo8nwF4QIhjwthClAkrzDzKcRHzf2sHL3OlG5jOBtwvZX7Dwww/w==
-  dependencies:
-    unist-util-visit "1.3.1"
-
 remark-emoji@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/remark-emoji/-/remark-emoji-2.1.0.tgz#69165d1181b98a54ad5d9ef811003d53d7ebc7db"
