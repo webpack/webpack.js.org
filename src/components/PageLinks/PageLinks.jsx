@@ -2,9 +2,15 @@ import Url from 'url';
 import './PageLinks.scss';
 import icon from '../../assets/icon-print.svg';
 import EditIcon from '../../styles/icons/edit.svg';
+import PropTypes from 'prop-types';
 
 const baseURL = 'https://github.com/webpack/webpack.js.org/edit/master/';
 
+PageLinks.propTypes = {
+  page: PropTypes.shape({
+    repo: PropTypes.string
+  })
+};
 export default function PageLinks({
   page = {},
 }) {
