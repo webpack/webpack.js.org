@@ -732,7 +732,7 @@ MyLibrary = _entry_return_;
 
 Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
 
-W> An empty string for [`output.library`](#outputlibrary) is invalid. You must specify a valid identifier that should be assigned.
+W> An empty string for [`output.library`](#outputlibrary) is invalid, make sure you specify a valid identifier that could be assigned.
 
 
 ### Expose Via Object Assignment
