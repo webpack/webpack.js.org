@@ -38,7 +38,7 @@ By default the current directory is used, but it's recommended to pass a value i
 
 ## `entry`
 
-`string` `[string]` `object = { <key> string | [string] | object = { import string | [string], dependOn string | [string], filename string }}` `(function() => string | [string] | object = { <key> string | [string] } | object = { import string | [string], dependOn string | [string], filename string })`
+`string` `[string]` `object = { <key> string | [string] | object = { import string | [string], dependOn string | [string], filename string, layer string }}` `(function() => string | [string] | object = { <key> string | [string] } | object = { import string | [string], dependOn string | [string], filename string })`
 
 The point or points where to start the application bundling process. If an array is passed then all items will be processed.
 
@@ -82,6 +82,7 @@ module.exports = {
       filename: 'pages/personal.js',
       dependOn: 'shared',
       chunkLoading: 'jsonp',
+      layer: 'name of layer',
     }
   }
 };

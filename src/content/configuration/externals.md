@@ -17,6 +17,7 @@ contributors:
   - chenxsan
   - pranshuchittora
   - kinetifex
+  - anshumanv
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
@@ -144,6 +145,21 @@ module.exports = {
 
 This syntax is used to describe all the possible ways that an external library can be made available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
 
+### `byLayer`
+
+`string` `RegExp`
+
+W> Specify externals depending on the layer.
+
+```javascript
+module.exports = {
+  externals : {
+    byLayer : {
+      root: 'test-layer',
+    }
+  }
+};
+```
 
 ### function
 
@@ -156,6 +172,7 @@ The function receives two arguments:
 - `ctx` (`object`): Object containing details of the file.
     - `ctx.context` (`string`): The directory of the file which contains the import.
     - `ctx.request` (`string`): The import path being requested.
+    - `ctx.contextInfo` (`string`): Contains information about the issuer (e.g. the layer)
 - `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
 
 The callback function takes three arguments:

@@ -193,6 +193,45 @@ import A from './a.js';
 This option can be used to apply loaders to the dependencies of a specific module or set of modules.
 
 
+## `Rule.issuerLayer`
+
+Allows to filter/match by layer of issuer.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        issuerLayer: [`Condition`](#condition),
+      }
+    ]
+  }
+};
+```
+
+
+## `Rule.layer`
+
+Name of layer.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        layer: 'test-layer',
+      }
+    ]
+  }
+};
+```
+
 ## `Rule.loader`
 
 `Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.loader`](#useentry) for details.
