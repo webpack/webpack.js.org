@@ -95,6 +95,12 @@ Triggered after resolver setup is complete.
 
 - Callback Parameters: `compiler`
 
+### `initialize`
+
+`SyncHook`
+
+Called when a compiler object is initialized.
+
 
 ### `beforeRun`
 
@@ -145,13 +151,6 @@ Called after a `NormalModuleFactory` is created.
 Runs a plugin after a `ContextModuleFactory` is created.
 
 - Callback Parameters: `contextModuleFactory`
-
-
-### `initialize`
-
-`SyncHook`
-
-Called when a compiler object is initialized.
 
 
 ### `beforeCompile`
