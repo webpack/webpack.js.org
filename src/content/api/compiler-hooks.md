@@ -50,6 +50,19 @@ Depending on the hook type, `tapAsync` and `tapPromise` may also be available.
 
 For the description of hook types, see [the Tapable docs](https://github.com/webpack/tapable#tapable).
 
+### `environment`
+
+`SyncHook`
+
+Called while preparing the compiler environment, right after initializing the plugins in the configuration file.
+
+
+### `afterEnvironment`
+
+`SyncHook`
+
+Called right after the `environment` hook, when the compiler environment setup is complete.
+
 
 ### `entryOption`
 
@@ -64,8 +77,6 @@ compiler.hooks.entryOption.tap('MyPlugin', (context, entry) => {
   /* ... */
 });
 ```
-
-Parameters: `context`, `entry`
 
 ### `afterPlugins`
 
@@ -83,20 +94,6 @@ Called after setting up initial set of internal plugins.
 Triggered after resolver setup is complete.
 
 - Callback Parameters: `compiler`
-
-
-### `environment`
-
-`SyncHook`
-
-Called while preparing the compiler environment, right after initializing the plugins in the configuration file.
-
-
-### `afterEnvironment`
-
-`SyncHook`
-
-Called right after the `environment` hook, when the compiler environment setup is complete.
 
 
 ### `beforeRun`
