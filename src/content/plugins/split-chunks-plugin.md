@@ -269,31 +269,6 @@ Running webpack with following `splitChunks` configuration would also output a c
 
 W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
 
-<<<<<<< HEAD
-### `splitChunks.automaticNamePrefix` {#splitchunksautomaticnameprefix}
-
-`string = ''`
-
-Sets the name prefix for created chunks.
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    splitChunks: {
-      automaticNamePrefix: 'general-prefix',
-      cacheGroups: {
-        react: {
-          // ...
-          automaticNamePrefix: 'react-chunks-prefix'
-        }
-      }
-    }
-  }
-};
-```
-=======
->>>>>>> 43e6917d15ab68faeb8b4c8d9eb3627947b0d212
 
 ### `splitChunks.usedExports` {#splitchunksusedexports}
 
