@@ -24,6 +24,82 @@ contributors:
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
 
+## `module.generator`
+
+It's possible to configure all generators' options in one place with `module.generator` <Badge text='5.x.x' />.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  module: {
+    generator: {
+      asset: {
+        // Generator options for asset modules
+      },
+      'asset/inline': {
+        // Generator options for asset/inline modules
+      },
+      'asset/resource': {
+        // Generator options for asset/resource modules
+      },
+      javascript: {
+        // No generator options are supported for this module type yet
+      },
+      'javascript/auto': {
+        // ditto
+      },
+      'javascript/dynamic': {
+        // ditto
+      },
+      'javascript/esm': {
+        // ditto
+      },
+      // others…
+    }
+  }
+}
+```
+
+## `module.parser`
+
+Similar to [`module.generator`](#modulegenerator), you can configure all parsers' options in one place with `module.parser` <Badge text='5.x.x' />.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      asset: {
+        // Parser options for asset modules
+      },
+      'asset/inline': {
+        // No parser options are supported for this module type yet
+      },
+      'asset/resource': {
+        // ditto
+      },
+      'asset/source': {
+        // ditto
+      },
+      javascript: {
+        // Parser options for javascript modules
+      },
+      'javascript/auto': {
+        // ditto
+      },
+      'javascript/dynamic': {
+        // ditto
+      },
+      'javascript/esm': {
+        // ditto
+      },
+      // others…
+    }
+  }
+}
+```
 
 ## `module.noParse`
 
