@@ -46,6 +46,7 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 | `plugin`  | p     | Scaffold a plugin repository                                                                |
 | `info`    | i     | Output information about your system and dependencies                                      |
 | `serve`   | s     | Run the webpack Dev Server                                                                  |
+| `configtest` | t  | Tests webpack configuration against validation errors                                       |
 | `bundle`  | b     | Run webpack (default command, can be omitted)                                               |
 | `help`    | h     | Display help for commands and options                                                       |
 | `version` | v     | Output the version of `webpack`, `webpack-cli` and `webpack-dev-server` |
