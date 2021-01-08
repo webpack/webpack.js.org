@@ -244,6 +244,52 @@ Specify a different [configuration](/configuration) file other than `webpack.con
 npx webpack --config example.config.js
 ```
 
+In case your configuration file exports multiple configurations you can use `--config-name` to specify the [name](configuration/other-options/#name) of configuration to use.
+
+Consider the following `webpack.config.js`:
+
+```js
+module.exports = [
+  {
+    output: {
+      filename: './dist-first.js',
+    },
+    name: 'first',
+    entry: './src/first.js',
+    mode: 'development',
+  },
+  {
+    output: {
+      filename: './dist-second.js',
+    },
+    name: 'second',
+    entry: './src/second.js',
+    mode: 'development',
+  },
+  {
+    output: {
+      filename: './dist-third.js',
+    },
+    name: 'third',
+    entry: './src/third.js',
+    mode: 'none',
+    stats: 'verbose',
+  },
+];
+```
+
+To run webpack with only using the `second` config:
+
+```bash
+npx webpack --config-name second
+```
+
+You can also pass multiple values:
+
+```bash
+npx webpack-cli --config-name first --config-name second
+```
+
 __Print result of webpack as a JSON__
 
 ```bash
