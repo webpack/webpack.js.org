@@ -196,7 +196,7 @@ W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remai
 
 `RegExp` `string` `Function`
 
-Allows to select modules by layer.
+Assign modules to a cache group by module layer.
 
 ### `splitChunks.maxSize`
 

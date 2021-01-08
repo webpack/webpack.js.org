@@ -82,7 +82,7 @@ module.exports = {
       filename: 'pages/personal.js',
       dependOn: 'shared',
       chunkLoading: 'jsonp',
-      layer: 'name of layer',
+      layer: 'name of layer', // set the layer for an entry point
     }
   }
 };

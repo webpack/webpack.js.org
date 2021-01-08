@@ -205,7 +205,7 @@ module.exports = {
   module: {
     rules: [
       {
-        issuerLayer: RuleCondition,
+        issuerLayer: "other-layer",
       }
     ]
   }
@@ -215,7 +215,7 @@ module.exports = {
 
 ## `Rule.layer`
 
-Name of layer.
+Specify the layer in which the module should be placed in.
 
 __webpack.config.js__
 
@@ -225,7 +225,8 @@ module.exports = {
   module: {
     rules: [
       {
-        layer: 'test-layer',
+        test: /module-layer-change/,
+				layer: "layer"
       }
     ]
   }

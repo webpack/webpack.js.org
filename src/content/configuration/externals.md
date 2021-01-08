@@ -147,15 +147,17 @@ This syntax is used to describe all the possible ways that an external library c
 
 ### `byLayer`
 
-`string` `RegExp`
+`function` `object = { <key> string}: string | RegExp }`
 
-W> Specify externals depending on the layer.
+Specify externals by layer.
 
 ```javascript
 module.exports = {
   externals : {
     byLayer : {
-      root: 'test-layer',
+      layer: {
+        external1: 'var 43'
+      }
     }
   }
 };
