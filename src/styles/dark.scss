@@ -1,186 +1,190 @@
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #121212;
-    color: #e0e0e0;
-  }
-  .navigation,
-  .navigation__inner,
-  .splash-viz {
-    background-color: #101619;
-  }
-  .navigation-sub {
-    background-color: #222;
-  }
-  .splash__section--dark {
-    background-color: #202020;
-  }
-  .markdown {
-    h1, h2, h3, h4, h5, h6 {
-      color: #9ab3c0;
-    }
-    code, tt {
-      text-shadow: none;
-    }
-    blockquote {
-      border-left-color: #343434;
-      color: #a3a3a3;
-    }
-    blockquote.tip {
-      background-color: #192429;
-      color: #7da2b4;
-    }
-    blockquote.warning {
-      background-color: #27220a;
-      color: #a49d83;
-    }
-    blockquote.todo {
-      background-color: #402b1f;
-      color: #998478;
-    }
-    hr {
-      background-color: #343434;
-    }
-    th {
-      background-color: #121212;
-      border-color: #252525;
-    }
-    tr,
-    tr:last-child {
-      border-color: #252525;
-    }
-    tr:nth-child(2n) {
-      background-color: #202020;
-    }
-    td {
-      border-color: #252525;
-    }
-    pre {
-      background-color: #131b1f;
-    }
-    a code {
-      color: #69a8ee;
-      &:hover {
-        color: #82b7f6;
-      }
-    }
-  }
-  .sidebar-item__title,
-  .sidebar-item__anchor a {
-    color: #b8b8b8;
-  }
-  .navigation-sub__link--active {
-    color: #dcdcdc;
-  }
-  .gitter__button {
-    background: #1c3b39;
-  }
-  .sponsors__content,
-  .footer__inner {
-    border-color: #252525;
-  }
-  .sponsors__content:hover {
-    background-color: #272727;
-  }
-  a,
-  .navigation-sub__link,
-  button.as-link {
-    color: #69a8ee;
-  }
-  .page-links__gap {
-    color: #999;
-  }
-  .sidebar-item__toggle,
-  .sidebar-item--disabled .sidebar-item__toggle {
-    color: #69a8ee;
-  }
-  .sidebar-item__anchor a:hover,
-  .navigation-sub__link:hover,
-  a:hover {
-    color: #82b7f6;
-  }
-  .site {
-    background: #121212 !important;
-  }
-  .sidebar__docs-version {
-    border-color: #252525;
-    color: #b8b8b8;
-  }
-  .contributor .contributor__name {
-    background-color: #121212;
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+.navigation,
+.navigation__inner,
+.splash-viz {
+  background-color: #101619;
+}
+.navigation-sub {
+  background-color: #222;
+}
+.splash__section--dark {
+  background-color: #202020;
+}
+.markdown {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     color: #9ab3c0;
   }
-  .placeholder h2,
-  .placeholder p {
-    background-color: #252525;
-    &:after {
-      background: linear-gradient(90deg, #252525, #121212, #252525);
-    }
+  code,
+  tt {
+    text-shadow: none;
   }
-  
-  // Search
-  .algolia-autocomplete {
-    .ds-dropdown-menu [class^="ds-dataset-"] {
-      background: #121212;
-    }
-    .algolia-docsearch-suggestion {
-      background-color: #121212;
-      .algolia-docsearch-suggestion--content:before {
-        background: #343434;
-      }
-    }
-    .algolia-docsearch-suggestion--category-header {
-      background: #121212;
-      color: #dfdfdf;
-    }
-    .algolia-docsearch-suggestion--title {
-      color: #dfdfdf;
-    }
-    .ds-suggestion:nth-child(n + 2)
-      .algolia-docsearch-suggestion--category-header,
-    .algolia-docsearch-suggestion__secondary,
-    .algolia-docsearch-suggestion--category-header {
-      border-color: #343434;
-    }
-
-    .algolia-docsearch-suggestion__secondary
-      .algolia-docsearch-suggestion--subcategory-column {
-      color: #a3a3a3;
-      .algolia-docsearch-suggestion--highlight {
-        color: #69a8ee;
-      }
-    }
-
-    .ds-dropdown-menu
-      .ds-suggestion.ds-cursor
-      .algolia-docsearch-suggestion--content {
-      background-color: #1f2629 !important;
-    }
-    .algolia-docsearch-suggestion--highlight {
-      background-color: #2b353e;
-      color: #7791bf;
-    }
-    .algolia-autocomplete .aa-suggestion-title-separator {
-      color: #929191;
-    }
-  }
-
-  // Mobile
-  .sidebar-mobile__content {
-    background-color: #121212;
-  }
-  .sidebar-mobile__section-header {
-    color: #cadbe6;
-  }
-  .sidebar-mobile__page {
+  blockquote {
+    border-left-color: #343434;
     color: #a3a3a3;
   }
-  .sidebar-mobile__page--active,
-  .sidebar-mobile__page:active {
-    background-color: #222424;
+  blockquote.tip {
+    background-color: #192429;
+    color: #7da2b4;
   }
-  .sidebar-mobile__content
-    div:not(:first-of-type)
-    .sidebar-mobile__section-header {
+  blockquote.warning {
+    background-color: #27220a;
+    color: #a49d83;
+  }
+  blockquote.todo {
+    background-color: #402b1f;
+    color: #998478;
+  }
+  hr {
+    background-color: #343434;
+  }
+  th {
+    background-color: #121212;
+    border-color: #252525;
+  }
+  tr,
+  tr:last-child {
+    border-color: #252525;
+  }
+  tr:nth-child(2n) {
+    background-color: #202020;
+  }
+  td {
+    border-color: #252525;
+  }
+  pre {
+    background-color: #131b1f;
+  }
+  a code {
+    color: #69a8ee;
+    &:hover {
+      color: #82b7f6;
+    }
+  }
+}
+.sidebar-item__title,
+.sidebar-item__anchor a {
+  color: #b8b8b8;
+}
+.navigation-sub__link--active {
+  color: #dcdcdc;
+}
+.gitter__button {
+  background: #1c3b39;
+}
+.sponsors__content,
+.footer__inner {
+  border-color: #252525;
+}
+.sponsors__content:hover {
+  background-color: #272727;
+}
+a,
+.navigation-sub__link,
+button.as-link {
+  color: #69a8ee;
+}
+.page-links__gap {
+  color: #999;
+}
+.sidebar-item__toggle,
+.sidebar-item--disabled .sidebar-item__toggle {
+  color: #69a8ee;
+}
+.sidebar-item__anchor a:hover,
+.navigation-sub__link:hover,
+a:hover {
+  color: #82b7f6;
+}
+.site {
+  background: #121212 !important;
+}
+.sidebar__docs-version {
+  border-color: #252525;
+  color: #b8b8b8;
+}
+.contributor .contributor__name {
+  background-color: #121212;
+  color: #9ab3c0;
+}
+.placeholder h2,
+.placeholder p {
+  background-color: #252525;
+  &:after {
+    background: linear-gradient(90deg, #252525, #121212, #252525);
+  }
+}
+
+// Search
+.algolia-autocomplete {
+  .ds-dropdown-menu [class^='ds-dataset-'] {
+    background: #121212;
+  }
+  .algolia-docsearch-suggestion {
+    background-color: #121212;
+    .algolia-docsearch-suggestion--content:before {
+      background: #343434;
+    }
+  }
+  .algolia-docsearch-suggestion--category-header {
+    background: #121212;
+    color: #dfdfdf;
+  }
+  .algolia-docsearch-suggestion--title {
+    color: #dfdfdf;
+  }
+  .ds-suggestion:nth-child(n + 2)
+    .algolia-docsearch-suggestion--category-header,
+  .algolia-docsearch-suggestion__secondary,
+  .algolia-docsearch-suggestion--category-header {
     border-color: #343434;
   }
+
+  .algolia-docsearch-suggestion__secondary
+    .algolia-docsearch-suggestion--subcategory-column {
+    color: #a3a3a3;
+    .algolia-docsearch-suggestion--highlight {
+      color: #69a8ee;
+    }
+  }
+
+  .ds-dropdown-menu
+    .ds-suggestion.ds-cursor
+    .algolia-docsearch-suggestion--content {
+    background-color: #1f2629 !important;
+  }
+  .algolia-docsearch-suggestion--highlight {
+    background-color: #2b353e;
+    color: #7791bf;
+  }
+  .algolia-autocomplete .aa-suggestion-title-separator {
+    color: #929191;
+  }
+}
+
+// Mobile
+.sidebar-mobile__content {
+  background-color: #121212;
+}
+.sidebar-mobile__section-header {
+  color: #cadbe6;
+}
+.sidebar-mobile__page {
+  color: #a3a3a3;
+}
+.sidebar-mobile__page--active,
+.sidebar-mobile__page:active {
+  background-color: #222424;
+}
+.sidebar-mobile__content
+  div:not(:first-of-type)
+  .sidebar-mobile__section-header {
+  border-color: #343434;
 }

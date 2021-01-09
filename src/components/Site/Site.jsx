@@ -56,7 +56,7 @@ function Site(props) {
   const [loading, setLoading] = useState(false);
   const [theme, setTheme] = useLocalStorage(
     THEME_LOCAL_STORAGE_KEY,
-    THEME.DEVICE
+    THEME.LIGHT
   );
 
   const applyTheme = (theme) => {

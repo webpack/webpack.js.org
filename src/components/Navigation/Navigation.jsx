@@ -4,7 +4,6 @@ import Banner from 'react-banner';
 import PropTypes from 'prop-types';
 
 import LanguageIcon from '../../assets/language-icon.svg';
-import ThemeIcon from '../../assets/theme-icon.svg';
 
 // Import Components
 import Link from '../Link/Link';
@@ -15,7 +14,7 @@ import Dropdown from '../Dropdown/Dropdown';
 import isClient from '../../utilities/is-client';
 
 // Import constants
-import { THEME  } from '../../constants/theme';
+import { THEME } from '../../constants/theme';
 
 // Load Styling
 import 'docsearch.js/dist/cdn/docsearch.css';
@@ -27,7 +26,7 @@ import TwitterIcon from '../../styles/icons/twitter.svg';
 import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
 
 const onSearch = () => {};
-const { DEVICE, DARK, LIGHT } = THEME;
+const { DARK, LIGHT } = THEME;
 
 export default class Navigation extends Component {
   static propTypes = {
@@ -35,17 +34,18 @@ export default class Navigation extends Component {
     links: PropTypes.array,
     toggleSidebar: PropTypes.func,
     theme: PropTypes.string,
-    switchTheme: PropTypes.func
-  }
+    switchTheme: PropTypes.func,
+  };
   render() {
     const { pathname, links, toggleSidebar, theme, switchTheme } = this.props;
+    const themeSwitcher = () => switchTheme(theme === DARK ? LIGHT : DARK);
 
     return (
       <Banner
         onSearch={onSearch}
         blockName="navigation"
-        logo={ <Logo light={ true } /> }
-        url={ pathname }
+        logo={<Logo light={true} />}
+        url={pathname}
         items={[
           ...links,
           {
@@ -64,7 +64,9 @@ export default class Navigation extends Component {
             title: 'webpack on Stack Overflow',
             url: 'https://stackoverflow.com/questions/tagged/webpack',
             className: 'navigation__item--icon',
-            content: <StackOverflowIcon aria-hidden="true" fill="#fff" width={16} />
+            content: (
+              <StackOverflowIcon aria-hidden="true" fill="#fff" width={16} />
+            )
           },
           {
             className: 'navigation__item--icon navigation__item--dropdown',
@@ -74,26 +76,34 @@ export default class Navigation extends Component {
                 alt="Select language"
                 items={[
                   { title: 'English', url: 'https://webpack.js.org/' },
-                  { lang: 'zh', title: '中文', url: 'https://webpack.docschina.org/' }
-                ]} />
-            )
+                  {
+                    lang: 'zh',
+                    title: '中文',
+                    url: 'https://webpack.docschina.org/',
+                  },
+                ]}
+              />
+            ),
           },
           {
-            className: 'navigation__item--icon navigation__item--dropdown',
+            className: 'navigation__item--icon',
             content: (
-              <Dropdown
-                icon={ThemeIcon}
-                alt="Select theme"
-                items={[
-                  { title: 'Device theme', active: theme === DEVICE, onClick: () => switchTheme(DEVICE) },
-                  { title: 'Dark theme', active: theme === DARK, onClick: () => switchTheme(DARK) },
-                  { title: 'Light theme', active: theme === LIGHT, onClick: () => switchTheme(LIGHT) }
-                ]} />
-            )
-          }
+              <button
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
+                onClick={themeSwitcher}
+              >
+                {theme === DARK ? '🌙' : '☀️'}
+              </button>
+            ),
+          },
         ]}
-        link={ Link }
-        onMenuClick={ toggleSidebar } />
+        link={Link}
+        onMenuClick={toggleSidebar}
+      />
     );
   }
 

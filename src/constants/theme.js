@@ -1,5 +1,4 @@
 export const THEME = {
-  DEVICE: 'device',
   DARK: 'dark',
   LIGHT: 'light',
 };

@@ -63,12 +63,6 @@ button.as-link {
     user-select: none;
   }
 }
-
-[data-theme="device"] {
-  @media (prefers-color-scheme: dark) {
-    @import 'dark';
-  }
-}
 [data-theme="dark"] {
   @import 'dark';
 }
