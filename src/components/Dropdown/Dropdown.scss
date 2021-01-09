@@ -11,11 +11,10 @@
     margin: 0;
     padding: 0;
     font-size: inherit;
-    outline: none;
   }
 }
 
-.dropdown__icon {
+.dropdown__language {
   width: 20px;
   height: 20px;
   vertical-align: middle;
@@ -39,38 +38,27 @@
 
   ul {
     padding-top: 0.25em;
+  }
 
-    li {
-      list-style: none;
-      transition: all 250ms;
+  ul li {
+    padding: 0.25em 0.5em;
+    list-style: none;
+    color: #fff;
+    transition: all 250ms;
 
-      &:hover {
-        background: getColor(denim);
-      }
+    a:link,
+    a:visited,
+    a:hover {
+      color: #fff;
+    }
 
-      a {
-        display: block;
-        padding: 0.25em 0.5em;
-        cursor: pointer;
-      }
+    &:hover {
+      background: getColor(denim);
+    }
 
-      a,
-      a:visited,
-      a:hover {
-        color: #fff;
-      }
-
-      span {
-        vertical-align: top;
-        text-align: left;
-        white-space: nowrap;
-      }
-
-      &.dropdown__item--active {
-        a {
-          color: getColor(malibu);
-        }
-      }
+    span {
+      vertical-align: top;
+      text-align: left;
     }
   }
 }
