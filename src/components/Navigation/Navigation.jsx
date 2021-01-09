@@ -3,8 +3,6 @@ import { Component } from 'react';
 import Banner from 'react-banner';
 import PropTypes from 'prop-types';
 
-import LanguageIcon from '../../assets/language-icon.svg';
-
 // Import Components
 import Link from '../Link/Link';
 import Logo from '../Logo/Logo';
@@ -64,16 +62,13 @@ export default class Navigation extends Component {
             title: 'webpack on Stack Overflow',
             url: 'https://stackoverflow.com/questions/tagged/webpack',
             className: 'navigation__item--icon',
-            content: (
-              <StackOverflowIcon aria-hidden="true" fill="#fff" width={16} />
-            )
+            content: <StackOverflowIcon aria-hidden="true" fill="#fff" width={16} />
           },
           {
-            className: 'navigation__item--icon navigation__item--dropdown',
+            className: 'navigation__item--icon',
             content: (
               <Dropdown
-                icon={LanguageIcon}
-                alt="Select language"
+                className="navigation__languages"
                 items={[
                   { title: 'English', url: 'https://webpack.js.org/' },
                   {
@@ -101,9 +96,8 @@ export default class Navigation extends Component {
             ),
           },
         ]}
-        link={Link}
-        onMenuClick={toggleSidebar}
-      />
+        link={ Link }
+        onMenuClick={ toggleSidebar } />
     );
   }
 
