@@ -67,7 +67,6 @@ module.exports = {
       minChunks: 1,
       maxAsyncRequests: 30,
       maxInitialRequests: 30,
-      automaticNameDelimiter: '~',
       enforceSizeThreshold: 50000,
       cacheGroups: {
         defaultVendors: {
@@ -146,11 +145,23 @@ Maximum number of parallel requests when on-demand loading.
 
 Maximum number of parallel requests at an entry point.
 
+### `splitChunks.defaultSizeTypes`
+
+`[string] = ['javascript', 'unknown']`
+
+Sets the size types which are used when a number is used for sizes.
+
 ### `splitChunks.minChunks`
 
 `number = 1`
 
-Minimum number of chunks that must share a module before splitting.
+The minimum times must a module be shared among chunks before splitting.
+
+### `splitChunks.hidePathInfo`
+
+`boolean`
+
+Prevents exposing path info when creating names for parts splitted by maxSize.
 
 ### `splitChunks.minSize`
 
@@ -258,28 +269,6 @@ Running webpack with following `splitChunks` configuration would also output a c
 
 W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
 
-### `splitChunks.automaticNamePrefix`
-
-`string = ''`
-
-Sets the name prefix for created chunks.
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    splitChunks: {
-      automaticNamePrefix: 'general-prefix',
-      cacheGroups: {
-        react: {
-          // ...
-          automaticNamePrefix: 'react-chunks-prefix'
-        }
-      }
-    }
-  }
-};
-```
 
 ### `splitChunks.usedExports`
 

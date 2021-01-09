@@ -46,6 +46,7 @@ const enhance = (tree, options) => {
       .use(slug)
       .use(frontmatter)
       .use(gfm)
+      .use(require('remark-emoji'))
       .use(extractAnchors, { anchors, levels: 3 })
       .use(remarkHtml)
       .process(content, err => {

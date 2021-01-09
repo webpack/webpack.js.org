@@ -1,3 +1,4 @@
+@use "sass:color";
 @import 'vars';
 @import 'functions';
 @import 'prism-theme';
@@ -65,7 +66,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     font-weight: 600;
     line-height: 1.4;
     margin: 0 0 0.25em;
-    color: getColor(fiord);
+    color: color.adjust(getColor(fiord), $lightness: -10);
     word-break: break-word;
 
     tt,
@@ -96,6 +97,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
 
   p,
   blockquote,
+  aside,
   table,
   pre {
     margin: 1em 0;
@@ -158,6 +160,64 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     }
   }
 
+  aside {
+    border-left: 4px solid #dddddd;
+    padding: 0.75em 1em;
+    color: getColor(dove-grey);
+    > :first-child {
+      margin-top: 0;
+    }
+    > :last-child {
+      margin-bottom: 0;
+    }
+    &.tip,
+    &.warning,
+    &.todo {
+      border-left-width: 3px;
+      border-left-style: solid;
+
+      .tip-content {
+        font-style: italic;
+      }
+
+      code {
+        color: inherit;
+      }
+
+      > .tip__prefix,
+      > .warning__prefix,
+      > .todo__prefix {
+        text-transform: capitalize;
+        font-weight: 700;
+        color: #000;
+        font-size: getFontSize(1);
+      }
+    }
+
+    &.tip {
+      background-color: #eaf8ff;
+      color: #4e7182;
+      border-left-color: darken(#eaf8ff, 40%);
+    }
+
+    &.warning {
+      background-color: #fdf5d8;
+      color: #716b53;
+      border-left-color: darken(#fdf5d8, 40%);
+    }
+
+    &.todo {
+      background-color: #fbddcd;
+      color: #907a6e;
+      border-left-color: darken(#fbddcd, 40%);
+
+      .tip-content::before {
+        content: '[TODO]: ';
+        font-style: normal;
+      }
+    }
+  }
+
   blockquote {
     border-left: 4px solid #dddddd;
     padding: 0.75em 1em;
@@ -169,41 +229,6 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     }
     > :last-child {
       margin-bottom: 0;
-    }
-
-    &.tip,
-    &.warning,
-    &.todo {
-      border-left: none;
-      border-radius: 3px;
-
-      .tip-content {
-        font-style: italic;
-      }
-
-      code {
-        color: inherit;
-      }
-    }
-
-    &.tip {
-      background-color: #eaf8ff;
-      color: #4e7182;
-    }
-
-    &.warning {
-      background-color: #fdf5d8;
-      color: #716b53;
-    }
-
-    &.todo {
-      background-color: #fbddcd;
-      color: #907a6e;
-
-      .tip-content::before {
-        content: '[TODO]: ';
-        font-style: normal;
-      }
     }
   }
 
@@ -222,6 +247,13 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
 
     code {
       padding-top: 0;
+    }
+  }
+
+  thead {
+    display: none;
+    @include break {
+      display: table-header-group;
     }
   }
 
@@ -247,64 +279,42 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     &:last-child {
       border-bottom: 1px solid #cccccc;
     }
-  }
 
-  thead {
-    display: none;
+    display: block;
+    margin-bottom: 10px;
 
     @include break {
-      display: table-header-group;
+      margin-bottom: 0;
+      display: table-row;
     }
   }
 
   td {
-    display: flex;
-    flex-basis: 100%;
-    align-self: stretch;
     padding: 4px 12px;
-    border-right: 1px solid #cccccc;
-
-    &:last-child {
-      border-right: none;
+    border-right: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-bottom: 1px solid #f2f2f2;
+    text-align: left;
+    &::before {
+      content: attr(data-th);
+      font-weight: bold;
     }
-
+    &:last-child {
+      border-bottom: none;
+    }
     @include break {
       display: table-cell;
-    }
-  }
-
-  .title {
-    width: unset;
-    display: flex;
-    flex-direction: column;
-    justify-content: baseline;
-    margin: 10px 0;
-
-    @include break {
-      display: none;
-    }
-  }
-
-  .content {
-    width: unset;
-    display: flex;
-    flex-direction: column;
-    justify-content: baseline;
-    margin: 10px 0;
-    padding: 0 10px;
-  }
-
-  .description.desktop {
-    display: none;
-
-    @include break {
-      display: block;
-    }
-  }
-
-  .description.mobile {
-    @include break {
-      display: none;
+      padding: 14px 22px;
+      text-align: unset;
+      &::before {
+        content: none;
+      }
+      border-right: 1px solid #cccccc;
+      border-bottom: none;
+      &:last-child {
+        border-right: none;
+      }
     }
   }
 

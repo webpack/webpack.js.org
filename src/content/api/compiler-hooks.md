@@ -50,6 +50,19 @@ Depending on the hook type, `tapAsync` and `tapPromise` may also be available.
 
 For the description of hook types, see [the Tapable docs](https://github.com/webpack/tapable#tapable).
 
+### `environment`
+
+`SyncHook`
+
+Called while preparing the compiler environment, right after initializing the plugins in the configuration file.
+
+
+### `afterEnvironment`
+
+`SyncHook`
+
+Called right after the `environment` hook, when the compiler environment setup is complete.
+
 
 ### `entryOption`
 
@@ -64,8 +77,6 @@ compiler.hooks.entryOption.tap('MyPlugin', (context, entry) => {
   /* ... */
 });
 ```
-
-Parameters: `context`, `entry`
 
 ### `afterPlugins`
 
@@ -84,19 +95,11 @@ Triggered after resolver setup is complete.
 
 - Callback Parameters: `compiler`
 
-
-### `environment`
-
-`SyncHook`
-
-Called while preparing the compiler environment, right after initializing the plugins in the configuration file.
-
-
-### `afterEnvironment`
+### `initialize`
 
 `SyncHook`
 
-Called right after the `environment` hook, when the compiler environment setup is complete.
+Called when a compiler object is initialized.
 
 
 ### `beforeRun`
@@ -106,12 +109,6 @@ Called right after the `environment` hook, when the compiler environment setup i
 Adds a hook right before running the compiler.
 
 - Callback Parameters: `compiler`
-
-### `additionalPass`
-
-`AsyncSeriesHook`
-
-This hook allows you to do a one more additional pass of the build.
 
 
 ### `run`
@@ -148,13 +145,6 @@ Called after a `NormalModuleFactory` is created.
 Runs a plugin after a `ContextModuleFactory` is created.
 
 - Callback Parameters: `contextModuleFactory`
-
-
-### `initialize`
-
-`SyncHook`
-
-Called when a compiler object is initialized.
 
 
 ### `beforeCompile`
@@ -289,6 +279,12 @@ compiler.hooks.assetEmitted.tap(
 Executed when the compilation has completed.
 
 - Callback Parameters: `stats`
+
+### `additionalPass`
+
+`AsyncSeriesHook`
+
+This hook allows you to do a one more additional pass of the build.
 
 
 ### `failed`

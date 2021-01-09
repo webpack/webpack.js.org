@@ -38,14 +38,17 @@ Read the [installation guide](/guides/installation) if you don't already have we
 
 webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with
 
-| Command   | Alias | Description                                            |
-| --------- | ----- | ------------------------------------------------------ |
-| `init`    | c     | Initialize a new webpack configuration                 |
-| `migrate` | m     | Migrate a configuration to a new version               |
-| `loader`  | l     | Scaffold a loader repository                           |
-| `plugin`  | p     | Scaffold a plugin repository                           |
-| `info`    | i     | Outputs information about your system and dependencies |
-| `serve`   | s     | Run the webpack Dev Server                             |
+| Command   | Alias | Description                                                                                 |
+| --------- | ----- | ------------------------------------------------------------------------------------------- |
+| `init`    | c     | Initialize a new webpack configuration                                                      |
+| `migrate` | m     | Migrate a configuration to a new version                                                    |
+| `loader`  | l     | Scaffold a loader repository                                                                |
+| `plugin`  | p     | Scaffold a plugin repository                                                                |
+| `info`    | i     | Output information about your system and dependencies                                      |
+| `serve`   | s     | Run the webpack Dev Server                                                                  |
+| `bundle`  | b     | Run webpack (default command, can be omitted)                                               |
+| `help`    | h     | Display help for commands and options                                                       |
+| `version` | v     | Output the version of `webpack`, `webpack-cli` and `webpack-dev-server` |
 
 ## Flags
 
@@ -87,7 +90,7 @@ By default webpack ships with the following flags:
 
 Starting CLI v4 and webpack v5, CLI imports the entire configuration schema from webpack core to allow tuning almost every configuration option from the command line.
 
-__Here's the list of all the core flags supported by webpack v5 with CLI v4 - [link](https://github.com/webpack/webpack-cli/tree/next/packages/webpack-cli#webpack-5)__
+__Here's the list of all the core flags supported by webpack v5 with CLI v4 - [link](https://github.com/webpack/webpack-cli/blob/master/OPTIONS.md)__
 
 For example if you want to enable performance hints in your project you'd use [this](https://webpack.js.org/configuration/performance/#performancehints) option in configuration, with core flags you can do -
 
@@ -108,7 +111,7 @@ See [configuration](/configuration) for the options in the configuration file.
 ### Without configuration file
 
 ```bash
-npx webpack <entry> [<entry>] -o <output-path>
+npx webpack --entry <entry> -o <output-path>
 ```
 
 __example__
@@ -119,7 +122,7 @@ npx webpack --entry ./first.js --entry ./second.js --output-path /build
 
 __`<entry>`__
 
-A filename or a set of named filenames which act as the entry point to build your project. You can pass multiple entries (every entry is loaded on startup). If you pass a pair in the form `<name>=<request>`, you can create an additional entry point. It will be mapped to the configuration option `entry`.
+A filename or a set of named filenames which act as the entry point to build your project. You can pass multiple entries (every entry is loaded on startup).
 
 __`<output>`__
 
@@ -184,17 +187,16 @@ This is the lookup priority in increasing order
 
 W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/configuration/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
 
-__List all of the commands and flags available on the cli__
+__List basic commands and flags available on the cli__
 
 ```bash
 npx webpack --help
 ```
 
-__Show help for a single command or flag__
+__List all supported commands and flags by cli__
 
 ```bash
-npx webpack --help <command>
-npx webpack --help --<flag>
+npx webpack --help=verbose
 ```
 
 __Show version of installed packages and sub-packages__
@@ -208,8 +210,16 @@ npx webpack --version
 This will output the following result:
 
 ```bash
-webpack-cli 4.2.0
-webpack 5.4.0
+webpack 5.11.1
+webpack-cli 4.3.1
+```
+
+It will output the version of `webpack-dev-server` as well if you have it installed:
+
+```bash
+webpack 5.11.1
+webpack-cli 4.3.1
+webpack-dev-server 3.11.1
 ```
 
 To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/init`) just run command similar to the following:
@@ -228,7 +238,7 @@ webpack 5.4.0
 
 __Build source using a configuration file__
 
-Specifies a different [configuration](/configuration) file to pick up. Use this if you want to specify something different from `webpack.config.js`, which is one of the default.
+Specify a different [configuration](/configuration) file other than `webpack.config.js`, which is one of the defaults.
 
 ```bash
 npx webpack --config example.config.js
@@ -276,7 +286,6 @@ T> See the [environment variables](/guides/environment-variables/) guide for mor
 | `--config`      | Path to the configuration file                                 | string     | [Default Configs](/api/cli/#default-configurations) |
 | `--config-name` | Name of the configuration to use                               | string     |
 | `--env`         | Environment passed to the configuration, when it is a function |            |
-| `--mode`        | Mode to use                                                    | string     | `'production'`                                      |
 
 ## Analyzing Bundle
 

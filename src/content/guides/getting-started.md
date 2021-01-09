@@ -143,6 +143,9 @@ __project__
     |- index.js
 ```
 
+T> The observant among you may have noticed that `index.html` is created manually, even though it is now placed in the `dist` directory. Later on in this guide, we will generate `index.html` rather than edit it manually. Once this is done, it should be safe to empty the `dist` directory and to regenerate all the files within it.
+
+
 To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally:
 
 ``` bash

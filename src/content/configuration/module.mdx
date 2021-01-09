@@ -55,7 +55,7 @@ module.exports = {
 
 `boolean` `function (module)`
 
-Cache the resolution of module requests. There are couple of defaults for `module.unsafeCache`:
+Cache the resolution of module requests. There are a couple of defaults for `module.unsafeCache`:
 
 - `false` if [`cache`](/configuration/other-options/#cache) is disabled.
 - `true` if [`cache`](/configuration/other-options/#cache) is enabled and the module appears to come from node modules, `false` otherwise.
@@ -167,7 +167,7 @@ import { b } from  '-!./file2.js';
 import { c } from  '!!./file3.js';
 ```
 
-Inline loaders and `!` prefixes should not be used as they are non-standard. They may be use by loader generated code.
+Inline loaders and `!` prefixes should not be used as they are non-standard. They may be used by loader generated code.
 
 
 ## `Rule.exclude`
@@ -380,8 +380,10 @@ module.exports = {
       {
         //...
         generator: {
-          encoding: 'base64',
-          mimetype: 'mimetype/png'
+          dataUrl: {
+            encoding: 'base64',
+            mimetype: 'mimetype/png'
+          }
         }
       }
     ]
