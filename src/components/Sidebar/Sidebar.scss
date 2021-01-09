@@ -28,11 +28,12 @@
 }
 
 .sidebar__group {
-  margin-top: 1em;
+  margin-top: 1.5em;
   margin-left: 0.15em;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: getColor(dusty-grey);
+  text-transform: capitalize;
+  font-size: getFontSize(1);
+  font-family: $font-stack-heading;
+  color: getColor(elephant);
 }
 
 .sidebar__shields {

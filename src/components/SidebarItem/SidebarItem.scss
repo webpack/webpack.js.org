@@ -23,8 +23,7 @@
 
   &__title {
     flex: 1 1 auto;
-    font-weight: 600;
-    color: getColor(dove-grey);
+    color: getColor(elephant);
     max-width: 85%;
     @include control-overflow;
   }
@@ -73,7 +72,7 @@
     }
 
     a {
-      color: getColor(emperor);
+      color: getColor(elephant);
 
       &:hover {
         color: getColor(denim);
