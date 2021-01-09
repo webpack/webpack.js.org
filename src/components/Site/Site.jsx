@@ -29,6 +29,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import Vote from '../Vote/Vote';
 import Organization from '../Organization/Organization';
 import Badge from '../Badge/Badge.js';
+import {default as LinkComponent} from '../mdxComponents/Link';
 
 // Import Constants
 import { THEME, THEME_LOCAL_STORAGE_KEY } from '../../constants/theme';
@@ -171,9 +172,8 @@ function Site(props) {
   return (
     <MDXProvider
       components={{
-        Badge: function Comp(props) {
-          return <Badge {...props} />;
-        },
+        Badge: Badge,
+        a: LinkComponent
       }}
     >
       <div className="site">
