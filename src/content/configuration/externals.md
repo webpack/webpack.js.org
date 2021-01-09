@@ -145,24 +145,6 @@ module.exports = {
 
 This syntax is used to describe all the possible ways that an external library can be made available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
 
-### `byLayer`
-
-`function` `object = { <key> string}: string | RegExp }`
-
-Specify externals by layer.
-
-```javascript
-module.exports = {
-  externals : {
-    byLayer : {
-      layer: {
-        external1: 'var 43'
-      }
-    }
-  }
-};
-```
-
 ### function
 
 `function ({ context, request }, callback)`
@@ -317,6 +299,25 @@ W> [Default type](/configuration/externals/#externalstype) will be used if you s
 
 For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
 
+### `byLayer`
+
+`function` `object`
+
+Specify externals by layer.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  externals : {
+    byLayer : {
+      layer: {
+        external1: 'var 43'
+      }
+    }
+  }
+};
+```
 
 ## `externalsType`
 

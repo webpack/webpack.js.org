@@ -194,7 +194,7 @@ W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remai
 
 #### `splitChunks.cacheGroups.{cacheGroup}.layer`
 
-`RegExp` `string` `Function`
+`RegExp` `string` `function`
 
 Assign modules to a cache group by module layer.
 
