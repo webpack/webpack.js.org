@@ -17,7 +17,6 @@ module.exports = {
     'no-console': 'off',
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
-    'no-empty': ['error', { allowEmptyCatch: true }],
     'react/jsx-uses-react': 'off', // no longer needed with new jsx transform
     'react/react-in-jsx-scope': 'off', // ditto
   },
