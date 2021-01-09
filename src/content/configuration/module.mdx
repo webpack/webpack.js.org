@@ -26,7 +26,9 @@ These options determine how the [different types of modules](/concepts/modules) 
 
 ## `module.generator`
 
-It's possible to configure all generators' options in one place with `module.generator` <Badge text='5.12.0+' />.
+<Badge text='5.12.0+' />
+
+It's possible to configure all generators' options in one place with a `module.generator`.
 
 __webpack.config.js__
 
@@ -34,7 +36,7 @@ __webpack.config.js__
 module.exports = {
   module: {
     generator: {
-      asset: {
+      'asset': {
         // Generator options for asset modules
       },
       'asset/inline': {
@@ -43,7 +45,7 @@ module.exports = {
       'asset/resource': {
         // Generator options for asset/resource modules
       },
-      javascript: {
+      'javascript': {
         // No generator options are supported for this module type yet
       },
       'javascript/auto': {
@@ -63,7 +65,9 @@ module.exports = {
 
 ## `module.parser`
 
-Similar to [`module.generator`](#modulegenerator), you can configure all parsers' options in one place with `module.parser` <Badge text='5.12.0+' />.
+<Badge text='5.12.0+' />
+
+Similar to the [`module.generator`](#modulegenerator), you can configure all parsers' options in one place with a `module.parser`.
 
 __webpack.config.js__
 
@@ -71,7 +75,7 @@ __webpack.config.js__
 module.exports = {
   module: {
     parser: {
-      asset: {
+      'asset': {
         // Parser options for asset modules
       },
       'asset/inline': {
@@ -83,7 +87,7 @@ module.exports = {
       'asset/source': {
         // ditto
       },
-      javascript: {
+      'javascript': {
         // Parser options for javascript modules
       },
       'javascript/auto': {
