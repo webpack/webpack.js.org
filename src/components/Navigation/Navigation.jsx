@@ -42,7 +42,7 @@ export default class Navigation extends Component {
       <Banner
         onSearch={onSearch}
         blockName="navigation"
-        logo={ <Logo light={true} /> }
+        logo={ <Logo light={ true } /> }
         url={ pathname }
         items={[
           ...links,
