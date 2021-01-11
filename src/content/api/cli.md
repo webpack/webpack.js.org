@@ -278,7 +278,7 @@ module.exports = [
 ];
 ```
 
-To run webpack with only using the `second` config:
+To run only the `second` configuration:
 
 ```bash
 npx webpack --config-name second
