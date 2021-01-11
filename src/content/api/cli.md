@@ -244,7 +244,7 @@ Specify a different [configuration](/configuration) file other than `webpack.con
 npx webpack --config example.config.js
 ```
 
-In case your configuration file exports multiple configurations you can use `--config-name` to specify the [name](configuration/other-options/) of configuration to use.
+In case your configuration file exports multiple configurations you can use `--config-name` to specify the name of configuration to use.
 
 Consider the following `webpack.config.js`:
 
