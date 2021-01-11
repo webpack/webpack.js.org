@@ -287,7 +287,7 @@ npx webpack --config-name second
 You can also pass multiple values:
 
 ```bash
-npx webpack-cli --config-name first --config-name second
+npx webpack --config-name first --config-name second
 ```
 
 __Print result of webpack as a JSON__
