@@ -17,6 +17,7 @@ contributors:
   - chenxsan
   - pranshuchittora
   - kinetifex
+  - anshumanv
 ---
 
 `externals` 配置选项提供了「从输出的 bundle 中排除依赖」的方法。相反，所创建的 bundle 依赖于那些存在于用户环境(consumer's environment)中的依赖。此功能通常对 __library 开发人员__来说是最有用的，然而也会有各种各样的应用程序用到它。
@@ -144,8 +145,12 @@ module.exports = {
 
 此语法用于描述外部 library 所有可用的访问方式。这里 `lodash` 这个外部 library 可以在 AMD 和 CommonJS 模块系统中通过 `lodash` 访问，但在全局变量形式下用 `_` 访问。`subtract` 可以通过全局 `math` 对象下的属性 `subtract` 访问（例如 `window['math']['subtract']`）。
 
+<<<<<<< HEAD
 
 ### 函数 {#function}
+=======
+### function
+>>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 `function ({ context, request }, callback)`
 
@@ -153,10 +158,18 @@ module.exports = {
 
 函数接收两个入参：
 
+<<<<<<< HEAD
 - `ctx` (`object`)：包含文件详情的对象。
   - `ctx.context` (`string`): 包含引用的文件目录。
   - `ctc.request` (`string`): 被请求引入的路径。
 - `callback` (`function (err, result, type)`): 用于指明模块如何被外部化的回调函数
+=======
+- `ctx` (`object`): Object containing details of the file.
+    - `ctx.context` (`string`): The directory of the file which contains the import.
+    - `ctx.request` (`string`): The import path being requested.
+    - `ctx.contextInfo` (`string`): Contains information about the issuer (e.g. the layer)
+- `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
+>>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 回调函数接收三个入参：
 
@@ -298,6 +311,25 @@ W> [Default type](/configuration/externals/#externalstype) will be used if you s
 
 关于如何使用此 externals 配置的更多信息，请参考 [如何编写 library](/guides/author-libraries)。
 
+### `byLayer`
+
+`function` `object`
+
+Specify externals by layer.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  externals : {
+    byLayer : {
+      layer: {
+        external1: 'var 43'
+      }
+    }
+  }
+};
+```
 
 ## `externalsType` {#externalstype}
 
@@ -420,6 +452,7 @@ W> 在早期的 webpack 版本中，通过使用 [`target`](/configuration/targe
 
 选项   | 描述                                      | 输入类型
 ----------- | ------------------------------------------------ | ----------
+<<<<<<< HEAD
 `electron`     | 将 main 和预加载上下文中常见的 electron 内置模块视为 external 模块（如 `electron`，`ipc` 或 `shell`），使用时通过 `require()` 加载。                     | boolean
 `electronMain`     | 将 main 上下文中的 electron 内置模块视为 external 模块（如 `app`，`ipc-main` 或 `shell`），使用时通过 `require()` 加载。                     | boolean
 `electronPreload`     | 将预加载上下文的 electron 内置模块视为 external 模块（如 `web-frame`，`ipc-renderer` 或 `shell`），使用时通过 `require()` 加载。                     | boolean
@@ -428,6 +461,16 @@ W> 在早期的 webpack 版本中，通过使用 [`target`](/configuration/targe
 `nwjs`    | 将 `NW.js` 遗留的 `nw.gui` 模块视为 external 模块，使用时通过 `require()` 加载。| boolean
 `web`     | 将 `http(s)://...` 以及 `std:...` 视为 external 模块，使用时通过 `import` 加载。__（注意，这将改变执行顺序，因为 external 代码会在该块中的其他代码执行前被执行）__。| boolean
 `webAsync`     | 将 `http(s)://...` 以及 `std:...` 的引用视为 external 模块，使用时通过 `async import()` 加载。__（注意，此 external 类型为 `async` 模块，它对执行会产生各种副作用）__。| boolean
+=======
+`electron`     | Treat common electron built-in modules in main and preload context like `electron`, `ipc` or `shell` as external and load them via `require()` when used.                     | boolean
+`electronMain`     | Treat electron built-in modules in the main context like `app`, `ipc-main` or `shell` as external and load them via `require()` when used.                     | boolean
+`electronPreload`     | Treat electron built-in modules in the preload context like `web-frame`, `ipc-renderer` or `shell` as external and load them via require() when used.                     | boolean
+`electronRenderer`     | Treat electron built-in modules in the renderer context like `web-frame`, `ipc-renderer` or `shell` as external and load them via `require()` when used.                     | boolean
+`node`     | Treat node.js built-in modules like `fs`, `path` or `vm` as external and load them via `require()` when used.| boolean
+`nwjs`    | Treat `NW.js` legacy `nw.gui` module as external and load it via `require()` when used.| boolean
+`web`     | Treat references to `http(s)://...` and `std:...` as external and load them via `import` when used. __(Note that this changes execution order as externals are executed before any other code in the chunk)__.| boolean
+`webAsync`     | Treat references to `http(s)://...` and `std:...` as external and load them via `async import()` when used __(Note that this external type is an `async` module, which has various effects on the execution)__.| boolean
+>>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 
 __示例__

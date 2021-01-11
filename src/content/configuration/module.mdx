@@ -24,6 +24,88 @@ contributors:
 
 这些选项决定了如何处理项目中的[不同类型的模块](/concepts/modules)。
 
+## `module.generator`
+
+<Badge text='5.12.0+' />
+
+It's possible to configure all generators' options in one place with a `module.generator`.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  module: {
+    generator: {
+      'asset': {
+        // Generator options for asset modules
+      },
+      'asset/inline': {
+        // Generator options for asset/inline modules
+      },
+      'asset/resource': {
+        // Generator options for asset/resource modules
+      },
+      'javascript': {
+        // No generator options are supported for this module type yet
+      },
+      'javascript/auto': {
+        // ditto
+      },
+      'javascript/dynamic': {
+        // ditto
+      },
+      'javascript/esm': {
+        // ditto
+      },
+      // others…
+    }
+  }
+};
+```
+
+## `module.parser`
+
+<Badge text='5.12.0+' />
+
+Similar to the [`module.generator`](#modulegenerator), you can configure all parsers' options in one place with a `module.parser`.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      'asset': {
+        // Parser options for asset modules
+      },
+      'asset/inline': {
+        // No parser options are supported for this module type yet
+      },
+      'asset/resource': {
+        // ditto
+      },
+      'asset/source': {
+        // ditto
+      },
+      'javascript': {
+        // Parser options for javascript modules
+        // e.g, enable parsing of require.ensure syntax
+        requireEnsure: true
+      },
+      'javascript/auto': {
+        // ditto
+      },
+      'javascript/dynamic': {
+        // ditto
+      },
+      'javascript/esm': {
+        // ditto
+      },
+      // others…
+    }
+  }
+};
+```
 
 ## `module.noParse` {#modulenoparse}
 
@@ -55,7 +137,11 @@ module.exports = {
 
 `boolean` `function (module)`
 
+<<<<<<< HEAD
 缓存模块请求的解析。`module.unsafeCache` 包含如下几个默认值：
+=======
+Cache the resolution of module requests. There are a couple of defaults for `module.unsafeCache`:
+>>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 - 如果 [`cache`](/configuration/other-options/#cache) 未被启用，则默认值为 `false`。
 - 如果 [`cache`](/configuration/other-options/#cache) 被启用，并且此模块的来自 node_modules，则值为 `true`，否则为 `false`。
@@ -172,7 +258,7 @@ import { b } from  '-!./file2.js';
 import { c } from  '!!./file3.js';
 ```
 
-Inline loaders and `!` prefixes should not be used as they are non-standard. They may be use by loader generated code.
+Inline loaders and `!` prefixes should not be used as they are non-standard. They may be used by loader generated code.
 
 
 ## `Rule.exclude` {#ruleexclude}
@@ -199,7 +285,53 @@ import A from './a.js';
 这个选项可以用来将 loader 应用到一个特定模块或一组模块的依赖中。
 
 
+<<<<<<< HEAD
 ## `Rule.loader` {#ruleloader}
+=======
+## `Rule.issuerLayer`
+
+Allows to filter/match by layer of the issuer.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        issuerLayer: 'other-layer',
+      }
+    ]
+  }
+};
+```
+
+
+## `Rule.layer`
+
+`string`
+
+Specify the layer in which the module should be placed in.
+
+__webpack.config.js__
+
+```js
+module.exports = {
+  // ...
+  module: {
+    rules: [
+      {
+        test: /module-layer-change/,
+        layer: 'layer',
+      }
+    ]
+  }
+};
+```
+
+## `Rule.loader`
+>>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 `Rule.loader` 是 `Rule.use: [ { loader } ]` 的简写。详细请查看 [`Rule.use`](#rule-use) 和 [`UseEntry.loader`](#useentry)。
 

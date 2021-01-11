@@ -38,7 +38,7 @@ module.exports = {
 
 ## `entry` {#entry}
 
-`string` `[string]` `object = { <key> string | [string] | object = { import string | [string], dependOn string | [string], filename string }}` `(function() => string | [string] | object = { <key> string | [string] } | object = { import string | [string], dependOn string | [string], filename string })`
+`string` `[string]` `object = { <key> string | [string] | object = { import string | [string], dependOn string | [string], filename string, layer string }}` `(function() => string | [string] | object = { <key> string | [string] } | object = { import string | [string], dependOn string | [string], filename string })`
 
 开始应用程序打包过程的一个或多个起点。如果传入数组，则会处理所有条目。
 
@@ -82,6 +82,7 @@ module.exports = {
       filename: 'pages/personal.js',
       dependOn: 'shared',
       chunkLoading: 'jsonp',
+      layer: 'name of layer', // set the layer for an entry point
     }
   }
 };

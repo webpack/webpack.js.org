@@ -232,7 +232,11 @@ W> `moduleIds: total-size` 在 webpack 5 中被废弃。
 
 `boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic' `
 
+<<<<<<< HEAD
 告知 webpack 当选择模块 id 时需要使用哪种算法。将 `optimization.chunkIds` 设置为  `false` 会告知 webpack 没有任何内置的算法会被使用，但自定义的算法会由插件提供。`optimization.chunkIds` 的默认值是 `false`：
+=======
+Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are a couple of defaults for `optimization.chunkIds`:
+>>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 - 如果环境是开发环境，那么 `optimization.chunkIds` 会被设置成 `'named'`, 
 但当在生产环境中时，它会被设置成 `'deterministic'`

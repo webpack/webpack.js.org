@@ -50,6 +50,19 @@ compiler.hooks.someHook.tap('MyPlugin', (params) => {
 
 关于钩子类型的描述，请查看 [Tapable 文档](https://github.com/webpack/tapable#tapable).
 
+### `environment`
+
+`SyncHook`
+
+Called while preparing the compiler environment, right after initializing the plugins in the configuration file.
+
+
+### `afterEnvironment`
+
+`SyncHook`
+
+Called right after the `environment` hook, when the compiler environment setup is complete.
+
 
 ### `entryOption` {#entryoption}
 
@@ -65,9 +78,13 @@ compiler.hooks.entryOption.tap('MyPlugin', (context, entry) => {
 });
 ```
 
+<<<<<<< HEAD
 参数：`context`, `entry`
 
 ### `afterPlugins` {#afterplugins}
+=======
+### `afterPlugins`
+>>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 `SyncHook`
 
@@ -84,6 +101,7 @@ resolver 设置完成之后触发。
 
 - 回调参数：`compiler`
 
+<<<<<<< HEAD
 
 ### `environment` {#environment}
 
@@ -97,6 +115,13 @@ resolver 设置完成之后触发。
 `SyncHook`
 
 在 `environment` 钩子之后立即调用，在 compiler environment 完成设置时调用。
+=======
+### `initialize`
+
+`SyncHook`
+
+Called when a compiler object is initialized.
+>>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 
 ### `beforeRun` {#beforerun}
@@ -107,12 +132,15 @@ resolver 设置完成之后触发。
 
 - 回调参数：`compiler`
 
+<<<<<<< HEAD
 ### `additionalPass` {#additionalpass}
 
 `AsyncSeriesHook`
 
 This hook allows you to do a one more additional pass of the build.
 
+=======
+>>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 ### `run` {#run}
 
@@ -150,6 +178,7 @@ This hook allows you to do a one more additional pass of the build.
 - 回调参数：`contextModuleFactory`
 
 
+<<<<<<< HEAD
 ### `initialize` {#initialize}
 
 `SyncHook`
@@ -158,6 +187,9 @@ This hook allows you to do a one more additional pass of the build.
 
 
 ### `beforeCompile` {#beforecompile}
+=======
+### `beforeCompile`
+>>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 `AsyncSeriesHook`
 
@@ -289,6 +321,12 @@ compiler.hooks.assetEmitted.tap(
 在 compilation 完成时执行。
 
 - 回调参数：`stats`
+
+### `additionalPass`
+
+`AsyncSeriesHook`
+
+This hook allows you to do a one more additional pass of the build.
 
 
 ### `failed` {#failed}
