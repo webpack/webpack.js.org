@@ -145,22 +145,22 @@ Example: `{ "./a/": "./x/", "./a/b/": "./y/", "./a/b/c": "./z" }` == `{ "./a/b/c
 
 ## Support
 
-| Feature                                | Supported by                                                               |
-| -------------------------------------- | -------------------------------------------------------------------------- |
-| `"."` property                         | Node.js, webpack, esinstall, wmr                                           |
-| normal property                        | Node.js, webpack, esinstall, wmr                                           |
-| property ending with `/`               | Node.js<sup>(1)</sup>, webpack, esinstall<sup>(2)</sup>, wmr<sup>(3)</sup> |
-| property ending with `*`               | Node.js, rollup, esinstall                                                 |
-| Alternatives                           | Node.js, webpack, rollup, <strike>esinstall</strike><sup>(4)</sup>         |
-| Abbreviation only path                 | Node.js, webpack, rollup, esinstall, wmr                                   |
-| Abbreviation only conditions           | Node.js, webpack, rollup, esinstall, wmr                                   |
-| Conditional syntax                     | Node.js, webpack, rollup, esinstall, wmr                                   |
-| Nested conditional syntax              | Node.js, webpack, rollup, wmr<sup>(5)</sup>                                |
-| Conditions Order                       | Node.js, webpack, rollup, wmr<sup>(6)</sup>                                |
-| `"default"` condition                  | Node.js, webpack, rollup, esinstall, wmr                                   |
-| Path Order                             | Node.js, webpack, rollup                                                   |
-| Error when not mapped                  | Node.js, webpack, rollup, esinstall, wmr<sup>(7)</sup>                     |
-| Error when mixing conditions and paths | Node.js, webpack, rollup                                                   |
+| Feature                                | Supported by                                                                       |
+| -------------------------------------- | ---------------------------------------------------------------------------------- |
+| `"."` property                         | Node.js, webpack, rollup, esinstall, wmr                                           |
+| normal property                        | Node.js, webpack, rollup, esinstall, wmr                                           |
+| property ending with `/`               | Node.js<sup>(1)</sup>, webpack, rollup, esinstall<sup>(2)</sup>, wmr<sup>(3)</sup> |
+| property ending with `*`               | Node.js, webpack, rollup, esinstall                                                |
+| Alternatives                           | Node.js, webpack, rollup, <strike>esinstall</strike><sup>(4)</sup>                 |
+| Abbreviation only path                 | Node.js, webpack, rollup, esinstall, wmr                                           |
+| Abbreviation only conditions           | Node.js, webpack, rollup, esinstall, wmr                                           |
+| Conditional syntax                     | Node.js, webpack, rollup, esinstall, wmr                                           |
+| Nested conditional syntax              | Node.js, webpack, rollup, wmr<sup>(5)</sup>                                        |
+| Conditions Order                       | Node.js, webpack, rollup, wmr<sup>(6)</sup>                                        |
+| `"default"` condition                  | Node.js, webpack, rollup, esinstall, wmr                                           |
+| Path Order                             | Node.js, webpack, rollup                                                           |
+| Error when not mapped                  | Node.js, webpack, rollup, esinstall, wmr<sup>(7)</sup>                             |
+| Error when mixing conditions and paths | Node.js, webpack, rollup                                                           |
 
 (1) deprecated in Node.js, `*` should be preferred.
 
