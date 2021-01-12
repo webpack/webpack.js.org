@@ -59,7 +59,7 @@ import theDefaultValue from './module.js';
 // shortcut to import the "default" export
 ```
 
-## Flagging modules are ESM
+## Flagging modules as ESM
 
 By default webpack will automatically detect whether a file is an ESM or a different module system.
 

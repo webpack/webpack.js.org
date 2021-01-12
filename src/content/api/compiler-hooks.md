@@ -50,6 +50,19 @@ compiler.hooks.someHook.tap('MyPlugin', (params) => {
 
 关于钩子类型的描述，请查看 [Tapable 文档](https://github.com/webpack/tapable#tapable).
 
+### `environment`
+
+`SyncHook`
+
+Called while preparing the compiler environment, right after initializing the plugins in the configuration file.
+
+
+### `afterEnvironment`
+
+`SyncHook`
+
+Called right after the `environment` hook, when the compiler environment setup is complete.
+
 
 ### `entryOption` {#entryoption}
 
@@ -64,8 +77,6 @@ compiler.hooks.entryOption.tap('MyPlugin', (context, entry) => {
   /* ... */
 });
 ```
-
-参数：`context`, `entry`
 
 ### `afterPlugins` {#afterplugins}
 
@@ -84,19 +95,11 @@ resolver 设置完成之后触发。
 
 - 回调参数：`compiler`
 
-
-### `environment` {#environment}
-
-`SyncHook`
-
-在初始化配置文件中的插件之后立即调用，在 compiler environment 准备时调用。
-
-
-### `afterEnvironment` {#afterenvironment}
+### `initialize` {#initialize}
 
 `SyncHook`
 
-在 `environment` 钩子之后立即调用，在 compiler environment 完成设置时调用。
+当编译器对象被初始化时调用。
 
 
 ### `beforeRun` {#beforerun}
@@ -106,12 +109,6 @@ resolver 设置完成之后触发。
 在开始执行一次构建之前调用，compiler.run 方法开始执行后立刻进行调用。
 
 - 回调参数：`compiler`
-
-### `additionalPass` {#additionalpass}
-
-`AsyncSeriesHook`
-
-This hook allows you to do a one more additional pass of the build.
 
 
 ### `run` {#run}
@@ -148,13 +145,6 @@ This hook allows you to do a one more additional pass of the build.
 `ContextModuleFactory` 创建之后调用。
 
 - 回调参数：`contextModuleFactory`
-
-
-### `initialize` {#initialize}
-
-`SyncHook`
-
-在初始化 compiler 对象时调用。
 
 
 ### `beforeCompile` {#beforecompile}
@@ -289,6 +279,12 @@ compiler.hooks.assetEmitted.tap(
 在 compilation 完成时执行。
 
 - 回调参数：`stats`
+
+### `additionalPass`
+
+`AsyncSeriesHook`
+
+This hook allows you to do a one more additional pass of the build.
 
 
 ### `failed` {#failed}
