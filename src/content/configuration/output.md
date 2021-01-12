@@ -713,11 +713,7 @@ T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回�
 
 ### 暴露为一个变量 {#expose-a-variable}
 
-<<<<<<< HEAD
-这些选项将入口起点的返回值（例如，入口起点的任何导出值），在 bundle 包所引入的位置，赋值给 output.library 提供的变量名。
-=======
-These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library`](#outputlibrary) at whatever scope the bundle was included at.
->>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
+这些选项将入口起点的返回值（例如，入口起点的任何导出值），在 bundle 包所引入的位置，赋值给 [`output.library`](#outputlibrary) 提供的变量名。
 
 `libraryTarget: 'var'` - （默认值）当 library 加载完成，__入口起点的返回值__将分配给一个变量：
 
@@ -728,13 +724,7 @@ var MyLibrary = _entry_return_;
 MyLibrary.doSomething();
 ```
 
-<<<<<<< HEAD
-W> 当使用此选项时，将 `output.library` 设置为空，会因为没有变量导致无法赋值。
-
-`libraryTarget: 'assign'` - 这将产生一个隐含的全局变量，可能会潜在地重新分配到全局中已存在的值（谨慎使用）。.
-=======
-`libraryTarget: 'assign'` - This will generate an implied global which has the potential to reassign an existing value (use with caution).
->>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
+`libraryTarget: 'assign'` - 这将产生一个隐含的全局变量，可能会潜在地重新分配到全局中已存在的值（谨慎使用）。
 
 ```javascript
 MyLibrary = _entry_return_;
@@ -742,11 +732,7 @@ MyLibrary = _entry_return_;
 
 注意，如果 `MyLibrary` 在作用域中未在前面代码进行定义，则你的 library 将被设置在全局作用域内。
 
-<<<<<<< HEAD
-W> 当使用此选项时，将 `output.library` 设置为空，将产生一个破损的输出 bundle。
-=======
-W> An empty string for [`output.library`](#outputlibrary) is invalid, make sure you specify a valid identifier that could be assigned.
->>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
+W> 当使用此选项时，将 [`output.library`](#outputlibrary) 设置为空，将产生一个破损的输出 bundle。
 
 
 ### 通过在对象上赋值暴露 {#expose-via-object-assignment}

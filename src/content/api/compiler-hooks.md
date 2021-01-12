@@ -78,13 +78,7 @@ compiler.hooks.entryOption.tap('MyPlugin', (context, entry) => {
 });
 ```
 
-<<<<<<< HEAD
-参数：`context`, `entry`
-
 ### `afterPlugins` {#afterplugins}
-=======
-### `afterPlugins`
->>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 `SyncHook`
 
@@ -101,27 +95,11 @@ resolver 设置完成之后触发。
 
 - 回调参数：`compiler`
 
-<<<<<<< HEAD
-
-### `environment` {#environment}
+### `initialize` {#initialize}
 
 `SyncHook`
 
-在初始化配置文件中的插件之后立即调用，在 compiler environment 准备时调用。
-
-
-### `afterEnvironment` {#afterenvironment}
-
-`SyncHook`
-
-在 `environment` 钩子之后立即调用，在 compiler environment 完成设置时调用。
-=======
-### `initialize`
-
-`SyncHook`
-
-Called when a compiler object is initialized.
->>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
+当编译器对象被初始化时调用。
 
 
 ### `beforeRun` {#beforerun}
@@ -132,15 +110,6 @@ Called when a compiler object is initialized.
 
 - 回调参数：`compiler`
 
-<<<<<<< HEAD
-### `additionalPass` {#additionalpass}
-
-`AsyncSeriesHook`
-
-This hook allows you to do a one more additional pass of the build.
-
-=======
->>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 ### `run` {#run}
 
@@ -178,18 +147,7 @@ This hook allows you to do a one more additional pass of the build.
 - 回调参数：`contextModuleFactory`
 
 
-<<<<<<< HEAD
-### `initialize` {#initialize}
-
-`SyncHook`
-
-在初始化 compiler 对象时调用。
-
-
 ### `beforeCompile` {#beforecompile}
-=======
-### `beforeCompile`
->>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 `AsyncSeriesHook`
 

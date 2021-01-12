@@ -137,11 +137,7 @@ module.exports = {
 
 `boolean` `function (module)`
 
-<<<<<<< HEAD
 缓存模块请求的解析。`module.unsafeCache` 包含如下几个默认值：
-=======
-Cache the resolution of module requests. There are a couple of defaults for `module.unsafeCache`:
->>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
 
 - 如果 [`cache`](/configuration/other-options/#cache) 未被启用，则默认值为 `false`。
 - 如果 [`cache`](/configuration/other-options/#cache) 被启用，并且此模块的来自 node_modules，则值为 `true`，否则为 `false`。
@@ -258,7 +254,7 @@ import { b } from  '-!./file2.js';
 import { c } from  '!!./file3.js';
 ```
 
-Inline loaders and `!` prefixes should not be used as they are non-standard. They may be used by loader generated code.
+不应使用内联 loader 和 `!` 前缀，因为它是非标准的。它们可能会被 loader 生成代码使用。
 
 
 ## `Rule.exclude` {#ruleexclude}
@@ -285,12 +281,9 @@ import A from './a.js';
 这个选项可以用来将 loader 应用到一个特定模块或一组模块的依赖中。
 
 
-<<<<<<< HEAD
-## `Rule.loader` {#ruleloader}
-=======
-## `Rule.issuerLayer`
+## `Rule.issuerLayer` {#ruleissuerlayer}
 
-Allows to filter/match by layer of the issuer.
+允许按 issuer 的 layer 进行过滤/匹配。
 
 __webpack.config.js__
 
@@ -308,11 +301,11 @@ module.exports = {
 ```
 
 
-## `Rule.layer`
+## `Rule.layer` {#rulelayer}
 
 `string`
 
-Specify the layer in which the module should be placed in.
+指定模块应放置在哪个 layer。
 
 __webpack.config.js__
 
@@ -330,8 +323,7 @@ module.exports = {
 };
 ```
 
-## `Rule.loader`
->>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
+## `Rule.loader` {#ruleloader}
 
 `Rule.loader` 是 `Rule.use: [ { loader } ]` 的简写。详细请查看 [`Rule.use`](#rule-use) 和 [`UseEntry.loader`](#useentry)。
 
@@ -595,7 +587,7 @@ module.exports = {
 
 ## `Rule.resourceQuery` {#ruleresourcequery}
 
-A [`Condition`](#condition) matched with the resource query. This option is used to test against the query section of a request string (i.e. from the question mark onwards). If you were to `import Foo from './foo.css?inline'`, the following condition would match:
+与资源查询相匹配的 [`Condition`](#condition)。此选项用于测试请求字符串的查询部分（即从问号开始）。如果你需要通过 `import Foo from './foo.css?inline'` 导入 Foo，则需符合以下条件：
 
 __webpack.config.js__
 

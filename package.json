@@ -140,12 +140,9 @@
     "static-site-generator-webpack-plugin": "^3.4.1",
     "style-loader": "^2.0.0",
     "tap-spot": "^1.1.1",
-<<<<<<< HEAD
     "textlint": "^11.6.3",
     "textlint-rule-heading": "^1.0.10",
-=======
     "unist-util-visit": "^2.0.3",
->>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
     "webpack": "^5.11.1",
     "webpack-bundle-analyzer": "^4.3.0",
     "webpack-cli": "^4.3.1",

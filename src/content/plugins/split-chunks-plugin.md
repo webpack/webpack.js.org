@@ -189,20 +189,16 @@ Size threshold at which splitting is enforced and other restrictions (minRemaini
 
 W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remaining.
 
-<<<<<<< HEAD
-### `splitChunks.maxSize` {#splitchunksmaxsize}
-=======
 
-### `splitChunks.layer`
+### `splitChunks.layer` {#splitchunkslayer}
 
-#### `splitChunks.cacheGroups.{cacheGroup}.layer`
+#### `splitChunks.cacheGroups.{cacheGroup}.layer` {#splitchunkscachegroupscachegrouplayer}
 
 `RegExp` `string` `function`
 
 Assign modules to a cache group by module layer.
 
-### `splitChunks.maxSize`
->>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
+### `splitChunks.maxSize` {#splitchunksmaxsize}
 
 `number = 0`
 

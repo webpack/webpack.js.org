@@ -93,11 +93,7 @@ webpack-cli 提供了许多 flag 来使 webpack 的工作变得简单。默认�
 
 从 CLI v4 和 webpack v5 开始，CLI 将采用从 webpack 的 core 中导入整个配置的模式，允许 CLI 调整几乎所有配置项。
 
-<<<<<<< HEAD
-__链接中是 webpack v5 和 CLI v4 支持的所有核心 flag 列表 - [详戳](https://github.com/webpack/webpack-cli/tree/next/packages/webpack-cli#webpack-5)__
-=======
-__Here's the list of all the core flags supported by webpack v5 with CLI v4 - [link](https://github.com/webpack/webpack-cli/blob/master/OPTIONS.md)__
->>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
+__链接中是 webpack v5 和 CLI v4 支持的所有核心 flag 列表 - [详戳](https://github.com/webpack/webpack-cli/blob/master/OPTIONS.md)__
 
 例如，如果你想在项目中启用性能提示，你需在配置中使用[此](/configuration/performance/#performancehints)选项，而如果使用核心 flag，你可以这样做：
 
@@ -245,11 +241,7 @@ webpack 5.4.0
 
 __使用配置文件进行构建__
 
-<<<<<<< HEAD
-指定其它的[配置](/configuration)文件。配置文件默认为 `webpack.config.js`，如果你想使用其它配置文件，可以加入这个参数。
-=======
-Specify a different [configuration](/configuration) file other than `webpack.config.js`, which is one of the defaults.
->>>>>>> 5df85270694c1e52eefcf3f23b8924d5ef4e12f5
+配置文件默认为 `webpack.config.js`，还可以指定其它的[配置](/configuration)文件。
 
 ```bash
 npx webpack --config example.config.js
