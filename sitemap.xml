@@ -73,9 +73,6 @@
         <loc>https://webpack.js.org/api/compilation-hooks</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/compilation-object</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/api/compiler-hooks</loc>
     </url>
     <url>
@@ -86,6 +83,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/api/logging</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/api/compilation-object</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/module-methods</loc>
@@ -121,9 +121,6 @@
         <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/configuration</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/concepts/dependency-graph</loc>
     </url>
     <url>
@@ -131,6 +128,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/configuration</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/loaders</loc>
@@ -181,10 +181,10 @@
         <loc>https://webpack.js.org/configuration/entry-context</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/experiments</loc>
+        <loc>https://webpack.js.org/configuration/externals</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/externals</loc>
+        <loc>https://webpack.js.org/configuration/experiments</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/mode</loc>
@@ -202,13 +202,13 @@
         <loc>https://webpack.js.org/configuration/other-options</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/output</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/configuration/performance</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/plugins</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/output</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/resolve</loc>
@@ -367,13 +367,13 @@
         <loc>https://webpack.js.org/guides/why-webpack</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/babel-loader</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/loaders/coffee-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/css-loader</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/loaders/babel-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/exports-loader</loc>
@@ -409,10 +409,10 @@
         <loc>https://webpack.js.org/loaders/node-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/polymer-webpack-loader</loc>
+        <loc>https://webpack.js.org/loaders/null-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/null-loader</loc>
+        <loc>https://webpack.js.org/loaders/polymer-webpack-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/postcss-loader</loc>
@@ -424,10 +424,10 @@
         <loc>https://webpack.js.org/loaders/remark-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/source-map-loader</loc>
+        <loc>https://webpack.js.org/loaders/sass-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/sass-loader</loc>
+        <loc>https://webpack.js.org/loaders/source-map-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/style-loader</loc>
@@ -439,10 +439,10 @@
         <loc>https://webpack.js.org/loaders/stylus-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/url-loader</loc>
+        <loc>https://webpack.js.org/loaders/val-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/val-loader</loc>
+        <loc>https://webpack.js.org/loaders/url-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/worker-loader</loc>
@@ -547,9 +547,6 @@
         <loc>https://webpack.js.org/plugins/npm-install-webpack-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/prefetch-plugin</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/profiling-plugin</loc>
     </url>
     <url>
@@ -575,6 +572,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/pluginsapi/compiler</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/prefetch-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/pluginsapi/template</loc>
