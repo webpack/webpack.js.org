@@ -16,7 +16,6 @@ import isClient from '../../utilities/is-client';
 import getAdjacentPages from '../../utilities/get-adjacent-pages';
 
 // Import Components
-import NotificationBar from '../NotificationBar/NotificationBar';
 import Navigation from '../Navigation/Navigation';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
 import Container from '../Container/Container';
@@ -29,7 +28,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import Vote from '../Vote/Vote';
 import Organization from '../Organization/Organization';
 import Badge from '../Badge/Badge.js';
-import {default as LinkComponent} from '../mdxComponents/Link';
+import { default as LinkComponent } from '../mdxComponents/Link';
 
 // Load Styling
 import '../../styles/index';
@@ -50,6 +49,8 @@ function Site(props) {
   const [list, setList] = useState([]);
   const [wb, setWb] = useState(undefined);
   const [loading, setLoading] = useState(false);
+  const [NotificationBar, setNotificationBar] = useState(undefined);
+  const [barLoaded, setBarLoaded] = useState(false);
 
   const listTransitions = useTransition(list, {
     config: config.gentle,
@@ -112,6 +113,16 @@ function Site(props) {
   }, []);
 
   useEffect(() => {
+    import(
+      '../NotificationBar/NotificationBar'
+    ).then(({default: NotificationBar}) => {
+      // we are storing a component, not passing an updater function
+      setNotificationBar(() => NotificationBar);
+      setBarLoaded(true);
+    });
+  }, []);
+
+  useEffect(() => {
     if (isClient) {
       if (process.env.NODE_ENV === 'production') {
         // only register sw.js in production
@@ -154,13 +165,15 @@ function Site(props) {
     <MDXProvider
       components={{
         Badge: Badge,
-        a: LinkComponent
+        a: LinkComponent,
       }}
     >
       <div className="site">
         <DocumentTitle title={getPageTitle(Content, location.pathname)} />
         <div className="site__header">
-          <NotificationBar />
+          {
+            barLoaded === true ? <NotificationBar /> : undefined
+          }
           <Navigation
             pathname={location.pathname}
             toggleSidebar={_toggleSidebar}

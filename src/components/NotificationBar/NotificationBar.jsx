@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react';
+import { Component, useState, useEffect } from 'react';
 import Container from '../Container/Container';
 import testLocalStorage from '../../utilities/test-local-storage';
 import './NotificationBar.scss';
@@ -52,32 +52,28 @@ class MessageBar extends Component {
   }
 }
 
-export default class NotificationBar extends Component {
-  constructor(props) {
-    super(props);
-    this.onClose = this.onClose.bind(this);
-    this.state = {
-      dismissed: barDismissed()
-    };
-    if (!this.state.dismissed && typeof document !== 'undefined') {
-      document.body.classList.add('notification-bar-visible');
-    }
-  }
+export default function NotificationBar () {
+  // hide the bar in the beginning
+  const [dismissed, setDismissed] = useState(true);
+  const onClose = () => {
+    setDismissed(true);
+  };
+  useEffect(() => {
+    // update dismissed value when component mounted
+    setDismissed(() => barDismissed());
+  }, []);
 
-  onClose() {
-    this.setState(state => {
-      if (!state.dismissed && typeof document !== 'undefined') {
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      // client side
+      if (dismissed === false) {
+        document.body.classList.add('notification-bar-visible');
+      } else {
         document.body.classList.remove('notification-bar-visible');
       }
-      return {
-        dismissed: !state.dismissed
-      };
-    });
-  }
+    }
 
-  render() {
-    const { dismissed } = this.state;
-
-    return <Fragment>{!dismissed ? <MessageBar onClose={this.onClose} /> : null}</Fragment>;
-  }
+  }, [dismissed]);
+  return <>{dismissed === false ? <MessageBar onClose={onClose} /> : undefined}</>;
 }
+
