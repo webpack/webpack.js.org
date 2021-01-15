@@ -36,8 +36,10 @@ export default class SidebarItem extends Component {
     );
   }
 
-  scrollTop() {
-    window.scrollTo(0, 0);
+  scrollTop(event) {
+    if (!event.metaKey && !event.ctrlKey) {
+        window.scrollTo(0, 0);
+    }
   }
 
   render() {
