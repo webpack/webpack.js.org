@@ -60,7 +60,7 @@ myFunction('Hello world');
 import {
   myVariable,
   myFunction,
-} from 'exports-loader?exports[]=myVariable&exports[]=myFunction!./file.js';
+} from 'exports-loader?exports=myVariable,myFunction!./file.js';
 // Adds the following code to the file's source:
 //
 // ...
@@ -74,19 +74,6 @@ const newVariable = myVariable + '!!!';
 console.log(newVariable);
 
 myFunction('Hello world');
-```
-
-```js
-import { file } from 'exports-loader?[name]!./file.js';
-// Adds the following code to the file's source:
-//
-// ...
-// Code
-// ...
-//
-// export { file };
-
-file('string');
 ```
 
 ```js
@@ -286,7 +273,6 @@ Examples:
 - `[single Foo]` - generates `module.exports = Foo;`.
 - `[multiple Foo]` - generates `module.exports = { Foo };`.
 - `[multiple Foo FooA]` - generates `module.exports = { 'FooA': Foo };`.
-- `[[name]]` - generates ES module named exports and exports a variable equal to the filename, for `single.js` it will be `single`, generates `export { single };`.
 - `[named [name] [name]Alias]` - generates ES module named exports and exports a value equal to the filename under other name., for `single.js` it will be `single` and `singleAlias`, generates `export { single as singleAlias };`.
 
 > ⚠ You need to set `type: "commonjs"` to use `single` or `multiple` syntaxes.
