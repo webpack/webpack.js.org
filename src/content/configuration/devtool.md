@@ -35,13 +35,13 @@ T> Instead of using the `devtool` option you can also use `SourceMapDevToolPlugi
 devtool                                    | build   | rebuild | production | quality        | comment |
 ------------------------------------------ | ------- | ------- | ---------- | -------------- | ------- |
 (none)                                     | fastest | fastest | yes        | bundle         |
-**`eval`**                                 | fastest | fastest | no         | generated      | Recommended choice for development builds with maximum performance.
+__`eval`__                                 | fastest | fastest | no         | generated      | Recommended choice for development builds with maximum performance.
 `eval-cheap-source-map`                    | fast    | faster  | no         | transformed    | Tradeoff choice for development builds.
 `eval-cheap-module-source-map`             | slow    | faster  | no         | original lines | Tradeoff choice for development builds.
-**`eval-source-map`**                      | slowest | fast    | no         | original       | Recommended choice for development builds with high quality SourceMaps.
+__`eval-source-map`__                      | slowest | fast    | no         | original       | Recommended choice for development builds with high quality SourceMaps.
 `cheap-source-map`                         | fast    | slow    | yes        | transformed    | Tradeoff choice for production builds.
 `cheap-module-source-map`                  | slow    | slower  | yes        | original lines | Tradeoff choice for production builds.
-**`source-map`**                           | slowest | slowest | yes        | original       | Recommended choice for production builds with high quality SourceMaps.
+__`source-map`__                           | slowest | slowest | yes        | original       | Recommended choice for production builds with high quality SourceMaps.
 `inline-cheap-source-map`                  | fast    | slow    | no         | transformed    |
 `inline-cheap-module-source-map`           | slow    | slower  | no         | original lines |
 `inline-source-map`                        | slowest | slowest | no         | original       | Possible choice when publishing a single file
