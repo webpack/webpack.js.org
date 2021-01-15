@@ -1,7 +1,7 @@
 // set scrollBehavior to false
 // because we don't want cypress to scroll itself
 describe('Open page in new tab', { scrollBehavior: false }, () => {
-  it('', () => {
+  it('should not scroll to top', () => {
     cy.visit('/concepts/plugins/', {
       onBeforeLoad: (win) => {
         cy.stub(win, 'scrollTo');
