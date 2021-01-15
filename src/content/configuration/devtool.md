@@ -32,39 +32,39 @@ T> The webpack repository contains an [example showing the effect of all `devtoo
 
 T> Instead of using the `devtool` option you can also use `SourceMapDevToolPlugin`/`EvalSourceMapDevToolPlugin` directly as it has more options. Never use both the `devtool` option and plugin together. The `devtool` option adds the plugin internally so you would end up with the plugin applied twice.
 
-devtool                                    | build   | rebuild | production | quality        | comment |
------------------------------------------- | ------- | ------- | ---------- | -------------- | ------- |
-(none)                                     | fastest | fastest | yes        | bundle         |
-__`eval`__                                 | fastest | fastest | no         | generated      | Recommended choice for development builds with maximum performance.
-`eval-cheap-source-map`                    | fast    | faster  | no         | transformed    | Tradeoff choice for development builds.
-`eval-cheap-module-source-map`             | slow    | faster  | no         | original lines | Tradeoff choice for development builds.
-__`eval-source-map`__                      | slowest | fast    | no         | original       | Recommended choice for development builds with high quality SourceMaps.
-`cheap-source-map`                         | fast    | slow    | yes        | transformed    | Tradeoff choice for production builds.
-`cheap-module-source-map`                  | slow    | slower  | yes        | original lines | Tradeoff choice for production builds.
-__`source-map`__                           | slowest | slowest | yes        | original       | Recommended choice for production builds with high quality SourceMaps.
-`inline-cheap-source-map`                  | fast    | slow    | no         | transformed    |
-`inline-cheap-module-source-map`           | slow    | slower  | no         | original lines |
-`inline-source-map`                        | slowest | slowest | no         | original       | Possible choice when publishing a single file
-`eval-nosources-cheap-source-map`          | fast    | faster  | no         | transformed    | source code not included
-`eval-nosources-cheap-module-source-map`   | slow    | faster  | no         | original lines | source code not included
-`eval-nosources-source-map`                | slowest | fast    | no         | original       | source code not included
-`inline-nosources-cheap-source-map`        | fast    | faster  | no         | transformed    | source code not included
-`inline-nosources-cheap-module-source-map` | slow    | faster  | no         | original lines | source code not included
-`inline-nosources-source-map`              | slowest | fast    | no         | original       | source code not included
-`nosources-cheap-source-map`               | fast    | slow    | yes        | transformed    | source code not included
-`nosources-cheap-module-source-map`        | slow    | slower  | yes        | original lines | source code not included
-`nosources-source-map`                     | slowest | slowest | yes        | original       | source code not included
-`hidden-nosources-cheap-source-map`        | fast    | faster  | yes        | transformed    | no reference, source code not included
-`hidden-nosources-cheap-module-source-map` | slow    | faster  | yes        | original lines | no reference, source code not included
-`hidden-nosources-source-map`              | slowest | fast    | yes        | original       | no reference, source code not included
-`hidden-cheap-source-map`                  | fast    | faster  | yes        | transformed    | no reference
-`hidden-cheap-module-source-map`           | slow    | faster  | yes        | original lines | no reference
-`hidden-source-map`                        | slowest | slowest | yes        | original       | no reference. Possible choice when using SourceMap only for error reporting purposes.
+devtool                                    | performance                        | production | quality        | comment |
+------------------------------------------ | ---------------------------------- | ---------- | -------------- | ------- |
+(none)                                     | build: fastest<br>rebuild: fastest | yes        | bundle         |
+__`eval`__                                 | build: fast<br>rebuild: fastest    | no         | generated      | Recommended choice for development builds with maximum performance.
+`eval-cheap-source-map`                    | build: ok<br>rebuild: fast         | no         | transformed    | Tradeoff choice for development builds.
+`eval-cheap-module-source-map`             | build: slow<br>rebuild: fast       | no         | original lines | Tradeoff choice for development builds.
+__`eval-source-map`__                      | build: slowest<br>rebuild: ok      | no         | original       | Recommended choice for development builds with high quality SourceMaps.
+`cheap-source-map`                         | build: ok<br>rebuild: slow         | yes        | transformed    | Tradeoff choice for production builds.
+`cheap-module-source-map`                  | build: slow<br>rebuild: slow       | yes        | original lines | Tradeoff choice for production builds.
+__`source-map`__                           | build: slowest, rebuild: slowest   | yes        | original       | Recommended choice for production builds with high quality SourceMaps.
+`inline-cheap-source-map`                  | build: ok<br>rebuild: slow         | no         | transformed    |
+`inline-cheap-module-source-map`           | build: slow<br>rebuild: slow       | no         | original lines |
+`inline-source-map`                        | build: slowest, rebuild: slowest   | no         | original       | Possible choice when publishing a single file
+`eval-nosources-cheap-source-map`          | build: ok<br>rebuild: fast         | no         | transformed    | source code not included
+`eval-nosources-cheap-module-source-map`   | build: slow<br>rebuild: fast       | no         | original lines | source code not included
+`eval-nosources-source-map`                | build: slowest<br>rebuild: ok      | no         | original       | source code not included
+`inline-nosources-cheap-source-map`        | build: ok<br>rebuild: slow         | no         | transformed    | source code not included
+`inline-nosources-cheap-module-source-map` | build: slow<br>rebuild: slow       | no         | original lines | source code not included
+`inline-nosources-source-map`              | build: slowest<br>rebuild: slowest | no         | original       | source code not included
+`nosources-cheap-source-map`               | build: ok<br>rebuild: slow         | yes        | transformed    | source code not included
+`nosources-cheap-module-source-map`        | build: slow<br>rebuild: slow       | yes        | original lines | source code not included
+`nosources-source-map`                     | build: slowest, rebuild: slowest   | yes        | original       | source code not included
+`hidden-nosources-cheap-source-map`        | build: ok<br>rebuild: slow         | yes        | transformed    | no reference, source code not included
+`hidden-nosources-cheap-module-source-map` | build: slow<br>rebuild: slow       | yes        | original lines | no reference, source code not included
+`hidden-nosources-source-map`              | build: slowest<br>rebuild: slowest | yes        | original       | no reference, source code not included
+`hidden-cheap-source-map`                  | build: ok<br>rebuild: slow         | yes        | transformed    | no reference
+`hidden-cheap-module-source-map`           | build: slow<br>rebuild: slow       | yes        | original lines | no reference
+`hidden-source-map`                        | build: slowest, rebuild: slowest   | yes        | original       | no reference. Possible choice when using SourceMap only for error reporting purposes.
 
 shortcut                  | explanation
 ------------------------- | -----------
-build                     | How is the performance of the initial build affected by the devtool setting?
-rebuild                   | How is the performance of the incremental build affected by the devtool setting? Slow devtools might reduce development feedback loop in watch mode.
+performance: build        | How is the performance of the initial build affected by the devtool setting?
+performance: rebuild      | How is the performance of the incremental build affected by the devtool setting? Slow devtools might reduce development feedback loop in watch mode. The scale is different compared to the build performance, as one would expect rebuilds to be faster then builds.
 production                | Does it make sense to use this devtool for production builds? It's usually `no` when the devtool has a negative effect on user experience.
 quality: bundled          | You will see all generated code of a chunk in a single blob of code. This is the raw output file without any devtooling support
 quality: generated        | You will see the generated code, but each module is shown as separate code file in browser devtools.
