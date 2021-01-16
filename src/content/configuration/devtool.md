@@ -64,14 +64,14 @@ __`source-map`__                           | build: slowest, rebuild: slowest   
 shortcut                  | explanation
 ------------------------- | -----------
 performance: build        | How is the performance of the initial build affected by the devtool setting?
-performance: rebuild      | How is the performance of the incremental build affected by the devtool setting? Slow devtools might reduce development feedback loop in watch mode. The scale is different compared to the build performance, as one would expect rebuilds to be faster then builds.
+performance: rebuild      | How is the performance of the incremental build affected by the devtool setting? Slow devtools might reduce development feedback loop in watch mode. The scale is different compared to the build performance, as one would expect rebuilds to be faster than builds.
 production                | Does it make sense to use this devtool for production builds? It's usually `no` when the devtool has a negative effect on user experience.
 quality: bundled          | You will see all generated code of a chunk in a single blob of code. This is the raw output file without any devtooling support
 quality: generated        | You will see the generated code, but each module is shown as separate code file in browser devtools.
 quality: transformed      | You will see generated code after the preprocessing by loaders but before additional webpack transformations.
 quality: original lines   | You will see the original code that you wrote, assuming all loaders support SourceMapping. Only source lines will be mapped and column information will be discarded resp. not generated. This prevents setting breakpoints in the middle of lines.
 quality: original         | You will see the original code that you wrote, assuming all loaders support SourceMapping.
-`eval-*` addition         | generate SourceMap per module and attach it via eval. Recommended for development, because of improved rebuild preformance. Note that there is a windows defender issue, which causes huge slowdown due to virus scanning.
+`eval-*` addition         | generate SourceMap per module and attach it via eval. Recommended for development, because of improved rebuild performance. Note that there is a windows defender issue, which causes huge slowdown due to virus scanning.
 `inline-*` addition       | inline the SourceMap to the original file instead of creating a separate file.
 `hidden-*` addition       | no reference to the SourceMap added. When SourceMap is not deployed, but should still be generated, e. g. for error reporting purposes.
 `nosources-*` addition    | source code is not included in SourceMap. This can be useful when the original files should be referenced (further config options needed).
