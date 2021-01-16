@@ -147,7 +147,8 @@ This syntax is used to describe all the possible ways that an external library c
 
 ### function
 
-`function ({ context, request }, callback)`
+- `function ({ context, request, contextInfo, getResolve }, callback)`
+- `function ({ context, request, contextInfo, getResolve }) => promise`
 
 It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides options to whitelist packages.
 
@@ -156,7 +157,8 @@ The function receives two arguments:
 - `ctx` (`object`): Object containing details of the file.
     - `ctx.context` (`string`): The directory of the file which contains the import.
     - `ctx.request` (`string`): The import path being requested.
-    - `ctx.contextInfo` (`string`): Contains information about the issuer (e.g. the layer)
+    - `ctx.contextInfo` (`string`): Contains information about the issuer (e.g. the layer).
+    - `ctx.getResolve`: Get a resolve function with the current resolver options.
 - `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
 
 The callback function takes three arguments:
