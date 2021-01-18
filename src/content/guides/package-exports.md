@@ -23,6 +23,7 @@ where each properties specifies a sub path of the module request.
 For the examples above the following properties could be used:
 `"."` for `import "package"` and `"./sub/path"` for `import "package/sub/path"`.
 Properties ending with a `/` will forward a request with this prefix to the old file system lookup algorithm.
+For properties ending with `*`, `*` may take any value and any `*` in the property value is replaced with the taken value.
 
 An example:
 
@@ -32,18 +33,20 @@ An example:
     ".": "./main.js",
     "./sub/path": "./secondary.js",
     "./prefix/": "./directory/",
-    "./prefix/deep/": "./other-directory/"
+    "./prefix/deep/": "./other-directory/",
+    "./other-prefix/*": "./yet-another/*/*.js"
   }
 }
 ```
 
-| Module request                | Result                                |
-| ----------------------------- | ------------------------------------- |
-| `package`                     | `.../package/main.js`                 |
-| `package/sub/path`            | `.../package/secondary.js`            |
-| `package/prefix/some/file.js` | `.../package/directory/some/file.js`  |
-| `package/prefix/deep/file.js` | `.../package/other-directory/file.js` |
-| `package/main.js`             | Error                                 |
+| Module request                      | Result                                           |
+| ----------------------------------- | ------------------------------------------------ |
+| `package`                           | `.../package/main.js`                            |
+| `package/sub/path`                  | `.../package/secondary.js`                       |
+| `package/prefix/some/file.js`       | `.../package/directory/some/file.js`             |
+| `package/prefix/deep/file.js`       | `.../package/other-directory/file.js`            |
+| `package/other-prefix/deep/file.js` | `.../package/yet-another/deep/file/deep/file.js` |
+| `package/main.js`                   | Error                                            |
 
 ## Alternatives
 
@@ -140,16 +143,49 @@ Example: `{ "./a/": "./x/", "./a/b/": "./y/", "./a/b/c": "./z" }` == `{ "./a/b/c
 
 `exports` field is preferred over other package entry fields like `main`, `module`, `browser` or custom ones.
 
+## Support
+
+| Feature                                | Supported by                                                                       |
+| -------------------------------------- | ---------------------------------------------------------------------------------- |
+| `"."` property                         | Node.js, webpack, rollup, esinstall, wmr                                           |
+| normal property                        | Node.js, webpack, rollup, esinstall, wmr                                           |
+| property ending with `/`               | Node.js<sup>(1)</sup>, webpack, rollup, esinstall<sup>(2)</sup>, wmr<sup>(3)</sup> |
+| property ending with `*`               | Node.js, webpack, rollup, esinstall                                                |
+| Alternatives                           | Node.js, webpack, rollup, <strike>esinstall</strike><sup>(4)</sup>                 |
+| Abbreviation only path                 | Node.js, webpack, rollup, esinstall, wmr                                           |
+| Abbreviation only conditions           | Node.js, webpack, rollup, esinstall, wmr                                           |
+| Conditional syntax                     | Node.js, webpack, rollup, esinstall, wmr                                           |
+| Nested conditional syntax              | Node.js, webpack, rollup, wmr<sup>(5)</sup>                                        |
+| Conditions Order                       | Node.js, webpack, rollup, wmr<sup>(6)</sup>                                        |
+| `"default"` condition                  | Node.js, webpack, rollup, esinstall, wmr                                           |
+| Path Order                             | Node.js, webpack, rollup                                                           |
+| Error when not mapped                  | Node.js, webpack, rollup, esinstall, wmr<sup>(7)</sup>                             |
+| Error when mixing conditions and paths | Node.js, webpack, rollup                                                           |
+
+(1) deprecated in Node.js, `*` should be preferred.
+
+(2) `"./"` is intentionally ignored as key.
+
+(3) The property value is ignored and property key is used as target. Effectively only allowing mappings with key and value are identical.
+
+(4) The syntax is supported, but always the first entry is used, which makes it unusable for any practical use case.
+
+(5) Fallback to alternative sibling parent conditions is handling incorrectly.
+
+(6) For the `require` condition object order is handled incorrectly. This is intentionally as wmr doesn't differ between referencing syntax.
+
+(7) When using `"exports": "./file.js"` abbreviation, any request e. g. `package/not-existing` will resolve to that. When not using the abbreviation, direct file access e. g. `package/file.js` will not lead to an error.
+
 ## Conditions
 
 ### Reference syntax
 
 One of these conditions is set depending on the syntax used to reference the module:
 
-| Condition | Description                                                       | Supported by     |
-| --------- | ----------------------------------------------------------------- | ---------------- |
-| `import`  | Request is issued from ESM syntax or similar.                     | webpack, Node.js |
-| `require` | Request is issued from CommonJs/AMD syntax or similar.            | webpack, Node.js |
+| Condition | Description                                                       | Supported by                                                         |
+| --------- | ----------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `import`  | Request is issued from ESM syntax or similar.                     | Node.js, webpack, rollup, esinstall<sup>(1)</sup>, wmr<sup>(1)</sup> |
+| `require` | Request is issued from CommonJs/AMD syntax or similar.            | Node.js, webpack, rollup, esinstall<sup>(1)</sup>, wmr<sup>(1)</sup> |
 | `style`   | Request is issued from a stylesheet reference.                    |
 | `sass`    | Request is issued from a sass stylesheet reference.               |
 | `asset`   | Request is issued from a asset reference.                         |
@@ -157,10 +193,13 @@ One of these conditions is set depending on the syntax used to reference the mod
 
 These conditions might also be set additionally:
 
-| Condition | Description                                                                                                       | Supported by |
-| --------- | ----------------------------------------------------------------------------------------------------------------- | ------------ |
-| `module`  | All module syntax that allows to reference javascript supports ESM.<br>(only combined with `import` or `require`) | webpack      |
-| `types`   | Request is issued from typescript that is interested in type declarations.                                        |
+| Condition   | Description                                                                                                       | Supported by         |
+| ----------- | ----------------------------------------------------------------------------------------------------------------- | -------------------- |
+| `module`    | All module syntax that allows to reference javascript supports ESM.<br>(only combined with `import` or `require`) | webpack, rollup, wmr |
+| `esmodules` | Always set by supported tools.                                                                                    | wmr                  |
+| `types`     | Request is issued from typescript that is interested in type declarations.                                        |
+
+(1) `import` and `require` are both set independent of referencing syntax. `require` has always lower priority.
 
 #### `import`
 
@@ -232,17 +271,19 @@ Note: Since `production` and `development` is not supported by everyone, no assu
 
 The following conditions are set depending on the target environment:
 
-| Condition      | Description                     | Supported by     |
-| -------------- | ------------------------------- | ---------------- |
-| `browser`      | Code will run in a browser.     | webpack          |
-| `electron`     | Code will run in electron.      | webpack          |
-| `worker`       | Code will run in a (Web)Worker. | webpack          |
-| `worklet`      | Code will run in a Worklet.     |                  |
-| `node`         | Code will run in Node.js.       | webpack, Node.js |
-| `deno`         | Code will run in Deno.          |                  |
-| `react-native` | Code will run in react-native.  |                  |
+| Condition      | Description                                   | Supported by                        |
+| -------------- | --------------------------------------------- | ----------------------------------- |
+| `browser`      | Code will run in a browser.                   | webpack, esinstall, wmr             |
+| `electron`     | Code will run in electron.<sup>(1)</sup>      | webpack                             |
+| `worker`       | Code will run in a (Web)Worker.<sup>(1)</sup> | webpack                             |
+| `worklet`      | Code will run in a Worklet.<sup>(1)</sup>     |                                     |
+| `node`         | Code will run in Node.js.                     | Node.js, webpack, wmr<sup>(2)</sup> |
+| `deno`         | Code will run in Deno.                        |                                     |
+| `react-native` | Code will run in react-native.                |                                     |
 
-Note: `electron`, `worker` and `worklet` comes combined with either `node` or `browser`, depending on the context.
+(1) `electron`, `worker` and `worklet` comes combined with either `node` or `browser`, depending on the context.
+
+(2) This is set for browser target environment.
 
 Since there are multiple versions of each environment the following guidelines apply:
 
@@ -267,10 +308,13 @@ This would simplify creating exceptions for Node.js.
 
 The following tools support custom conditions:
 
-| Tool    | Supported | Notes                                              |
-| ------- | --------- | -------------------------------------------------- |
-| Node.js | no        |
-| webpack | yes       | Use `resolve.conditionNames` configuration option. |
+| Tool      | Supported | Notes                                                           |
+| --------- | --------- | --------------------------------------------------------------- |
+| Node.js   | yes       | Use `--conditions` CLI argument.                                |
+| webpack   | yes       | Use `resolve.conditionNames` configuration option.              |
+| rollup    | yes       | Use `exportConditions` option for `@rollup/plugin-node-resolve` |
+| esinstall | no        |
+| wmr       | no        |
 
 For custom conditions the following naming schema is recommended:
 

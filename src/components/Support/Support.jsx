@@ -141,14 +141,16 @@ export default class Support extends Component {
     }
 
     if (typeof random === 'number') {
-      // Pick n random items
-      for (let i = 0; i < random; i++) {
-        const other = Math.floor(Math.random() * (supporters.length - i));
-        const temp = supporters[other];
-        supporters[other] = supporters[i];
-        supporters[i] = temp;
+      if (supporters.length >= random) {
+        // Pick n random items
+        for (let i = 0; i < random; i++) {
+          const other = Math.floor(Math.random() * (supporters.length - i));
+          const temp = supporters[other];
+          supporters[other] = supporters[i];
+          supporters[i] = temp;
+        }
+        supporters = supporters.slice(0, random);
       }
-      supporters = supporters.slice(0, random);
     }
 
     // resort to keep order

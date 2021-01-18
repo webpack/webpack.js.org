@@ -10,6 +10,7 @@ contributors:
   - youta1119
   - byzyk
   - Nek-
+  - liyiming22
 ---
 
 webpack 支持使用多种编程语言和数据描述格式来编写配置文件。在 [node-interpret](https://github.com/gulpjs/interpret) 中你可以找到当前所支持的文件类型列表，通过 [node-interpret](https://github.com/gulpjs/interpret)，webpack 能够处理这些类型的配置文件。
@@ -47,7 +48,11 @@ export default config;
 
 该示例需要 typescript 版本在 2.7 及以上，并在 `tsconfig.json` 文件的 compilerOptions 中添加 `esModuleInterop` 和 `allowSyntheticDefaultImports` 两个配置项。
 
+<<<<<<< HEAD
 值得注意的是你需要确保 `tsconfig.json` 的 `compilerOptions` 中 module 选项的值为 `commonjs`,否则 webpack 的运行会失败报错，因为 `ts-node` 不支持 `commonjs` 以外的其他模块规范。
+=======
+Note that you'll also need to check your `tsconfig.json` file. If the `module` in `compilerOptions` in `tsconfig.json` is `commonjs`, the setting is complete, else webpack will fail with an error. This occurs because `ts-node` does not support any module syntax other than `commonjs`.
+>>>>>>> afa176c16e4ef32a1ab372a8abaf52652c593750
 
 你可以通过两个途径来完成 module 的设置:
 

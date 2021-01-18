@@ -147,10 +147,12 @@ module.exports = {
 
 ### 函数 {#function}
 
-`function ({ context, request }, callback)`
+- `function ({ context, request, contextInfo, getResolve }, callback)`
+- `function ({ context, request, contextInfo, getResolve }) => promise` <Badge text='5.15.0+' />
 
 对于 webpack 外部化，通过定义函数来控制行为，可能会很有帮助。例如，[webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals) 能够排除 `node_modules` 目录中所有模块，还提供一些选项，比如白名单 package(whitelist package)。
 
+<<<<<<< HEAD:src/content/configuration/externals.md
 函数接收两个入参：
 
 - `ctx` (`object`)：包含文件详情的对象。
@@ -158,6 +160,16 @@ module.exports = {
   - `ctc.request` (`string`): 被请求引入的路径。
   - `ctx.contextInfo` (`string`): 包含 issuer 的信息（如，layer）
 - `callback` (`function (err, result, type)`): 用于指明模块如何被外部化的回调函数
+=======
+Here're arguments the function can receive:
+
+- `ctx` (`object`): Object containing details of the file.
+    - `ctx.context` (`string`): The directory of the file which contains the import.
+    - `ctx.request` (`string`): The import path being requested.
+    - `ctx.contextInfo` (`string`): Contains information about the issuer (e.g. the layer).
+    - `ctx.getResolve` <Badge text='5.15.0+' />: Get a resolve function with the current resolver options.
+- `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
+>>>>>>> afa176c16e4ef32a1ab372a8abaf52652c593750:src/content/configuration/externals.mdx
 
 回调函数接收三个入参：
 

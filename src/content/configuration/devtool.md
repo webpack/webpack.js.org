@@ -21,8 +21,12 @@ related:
 
 使用 [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin) 进行更细粒度的配置。查看 [`source-map-loader`](/loaders/source-map-loader) 来处理已有的 source map。
 
+<<<<<<< HEAD
 
 ## `devtool` {#devtool}
+=======
+## `devtool`
+>>>>>>> afa176c16e4ef32a1ab372a8abaf52652c593750
 
 `string = 'eval'` `false`
 
@@ -32,6 +36,7 @@ T> webpack 仓库中包含一个 [显示所有 `devtool` 变体效果的示例](
 
 T> 你可以直接使用 `SourceMapDevToolPlugin`/`EvalSourceMapDevToolPlugin` 来替代使用 `devtool` 选项，因为它有更多的选项。切勿同时使用 `devtool` 选项和 `SourceMapDevToolPlugin`/`EvalSourceMapDevToolPlugin` 插件。`devtool` 选项在内部添加过这些插件，所以你最终将应用两次插件。
 
+<<<<<<< HEAD
 devtool                                  | 构建速度 | 重新构建速度 | 生产环境 | 品质(quality)
 ---------------------------------------- | ------- | ------- | ---------- | -----------------------------
 (none)                                   | 非常快速 | 非常快速  | yes        | 打包后的代码
@@ -60,6 +65,51 @@ hidden-cheap-module-source-map           |         |         |            |
 nosources-source-map                     | 慢      | 慢       | yes        | 无源代码内容
 nosources-cheap-source-map               |         |         |            |
 nosources-cheap-module-source-map        |         |         |            |
+=======
+| devtool                                    | performance                                        | production | quality        | comment                                                                               |
+| ------------------------------------------ | -------------------------------------------------- | ---------- | -------------- | ------------------------------------------------------------------------------------- |
+| (none)                                     | __build__: fastest<br /><br />__rebuild__: fastest | yes        | bundle         |
+| __`eval`__                                 | __build__: fast<br /><br />__rebuild__: fastest    | no         | generated      | Recommended choice for development builds with maximum performance.                   |
+| `eval-cheap-source-map`                    | __build__: ok<br /><br />__rebuild__: fast         | no         | transformed    | Tradeoff choice for development builds.                                               |
+| `eval-cheap-module-source-map`             | __build__: slow<br /><br />__rebuild__: fast       | no         | original lines | Tradeoff choice for development builds.                                               |
+| __`eval-source-map`__                      | __build__: slowest<br /><br />__rebuild__: ok      | no         | original       | Recommended choice for development builds with high quality SourceMaps.               |
+| `cheap-source-map`                         | __build__: ok<br /><br />__rebuild__: slow         | yes        | transformed    | Tradeoff choice for production builds.                                                |
+| `cheap-module-source-map`                  | __build__: slow<br /><br />__rebuild__: slow       | yes        | original lines | Tradeoff choice for production builds.                                                |
+| __`source-map`__                           | __build__: slowest<br /><br />__rebuild__: slowest | yes        | original       | Recommended choice for production builds with high quality SourceMaps.                |
+| `inline-cheap-source-map`                  | __build__: ok<br /><br />__rebuild__: slow         | no         | transformed    |
+| `inline-cheap-module-source-map`           | __build__: slow<br /><br />__rebuild__: slow       | no         | original lines |
+| `inline-source-map`                        | __build__: slowest<br /><br />__rebuild__: slowest | no         | original       | Possible choice when publishing a single file                                         |
+| `eval-nosources-cheap-source-map`          | __build__: ok<br /><br />__rebuild__: fast         | no         | transformed    | source code not included                                                              |
+| `eval-nosources-cheap-module-source-map`   | __build__: slow<br /><br />__rebuild__: fast       | no         | original lines | source code not included                                                              |
+| `eval-nosources-source-map`                | __build__: slowest<br /><br />__rebuild__: ok      | no         | original       | source code not included                                                              |
+| `inline-nosources-cheap-source-map`        | __build__: ok<br /><br />__rebuild__: slow         | no         | transformed    | source code not included                                                              |
+| `inline-nosources-cheap-module-source-map` | __build__: slow<br /><br />__rebuild__: slow       | no         | original lines | source code not included                                                              |
+| `inline-nosources-source-map`              | __build__: slowest<br /><br />__rebuild__: slowest | no         | original       | source code not included                                                              |
+| `nosources-cheap-source-map`               | __build__: ok<br /><br />__rebuild__: slow         | yes        | transformed    | source code not included                                                              |
+| `nosources-cheap-module-source-map`        | __build__: slow<br /><br />__rebuild__: slow       | yes        | original lines | source code not included                                                              |
+| `nosources-source-map`                     | __build__: slowest<br /><br />__rebuild__: slowest | yes        | original       | source code not included                                                              |
+| `hidden-nosources-cheap-source-map`        | __build__: ok<br /><br />__rebuild__: slow         | yes        | transformed    | no reference, source code not included                                                |
+| `hidden-nosources-cheap-module-source-map` | __build__: slow<br /><br />__rebuild__: slow       | yes        | original lines | no reference, source code not included                                                |
+| `hidden-nosources-source-map`              | __build__: slowest<br /><br />__rebuild__: slowest | yes        | original       | no reference, source code not included                                                |
+| `hidden-cheap-source-map`                  | __build__: ok<br /><br />__rebuild__: slow         | yes        | transformed    | no reference                                                                          |
+| `hidden-cheap-module-source-map`           | __build__: slow<br /><br />__rebuild__: slow       | yes        | original lines | no reference                                                                          |
+| `hidden-source-map`                        | __build__: slowest<br /><br />__rebuild__: slowest | yes        | original       | no reference. Possible choice when using SourceMap only for error reporting purposes. |
+
+shortcut                  | explanation
+------------------------- | -----------
+performance: build        | How is the performance of the initial build affected by the devtool setting?
+performance: rebuild      | How is the performance of the incremental build affected by the devtool setting? Slow devtools might reduce development feedback loop in watch mode. The scale is different compared to the build performance, as one would expect rebuilds to be faster than builds.
+production                | Does it make sense to use this devtool for production builds? It's usually `no` when the devtool has a negative effect on user experience.
+quality: bundled          | You will see all generated code of a chunk in a single blob of code. This is the raw output file without any devtooling support
+quality: generated        | You will see the generated code, but each module is shown as separate code file in browser devtools.
+quality: transformed      | You will see generated code after the preprocessing by loaders but before additional webpack transformations.
+quality: original lines   | You will see the original code that you wrote, assuming all loaders support SourceMapping. Only source lines will be mapped and column information will be discarded resp. not generated. This prevents setting breakpoints in the middle of lines.
+quality: original         | You will see the original code that you wrote, assuming all loaders support SourceMapping.
+`eval-*` addition         | generate SourceMap per module and attach it via eval. Recommended for development, because of improved rebuild performance. Note that there is a windows defender issue, which causes huge slowdown due to virus scanning.
+`inline-*` addition       | inline the SourceMap to the original file instead of creating a separate file.
+`hidden-*` addition       | no reference to the SourceMap added. When SourceMap is not deployed, but should still be generated, e. g. for error reporting purposes.
+`nosources-*` addition    | source code is not included in SourceMap. This can be useful when the original files should be referenced (further config options needed).
+>>>>>>> afa176c16e4ef32a1ab372a8abaf52652c593750
 
 T> 验证 devtool 名称时， 我们期望使用某种模式， 注意不要混淆 devtool 字符串的顺序， 模式是： `[inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map`.
 
@@ -69,8 +119,12 @@ W> Chrome 中的 source map 有一些问题。[我们需要你的帮助！](http
 
 T> 查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) 自定义生成的 source map 的文件名。
 
+<<<<<<< HEAD
 
 ### 品质说明(quality) {#qualities}
+=======
+### Qualities
+>>>>>>> afa176c16e4ef32a1ab372a8abaf52652c593750
 
 `打包后的代码` - 将所有生成的代码视为一大块代码。你看不到相互分离的模块。
 
@@ -84,8 +138,12 @@ T> 查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfil
 
 `（仅限行）` - source map 被简化为每行一个映射。这通常意味着每个语句只有一个映射（假设你使用这种方式）。这会妨碍你在语句级别上调试执行，也会妨碍你在每行的一些列上设置断点。与压缩后的代码组合后，映射关系是不可能实现的，因为压缩工具通常只会输出一行。
 
+<<<<<<< HEAD
 
 ### 对于开发环境 {#development}
+=======
+### Development
+>>>>>>> afa176c16e4ef32a1ab372a8abaf52652c593750
 
 以下选项非常适合开发环境：
 
@@ -111,8 +169,12 @@ T> 查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfil
 
 `inline-cheap-module-source-map` - 类似 `cheap-module-source-map`，但是 source mapp 转换为 DataUrl 添加到 bundle 中。
 
+<<<<<<< HEAD
 
 ### 对于生产环境 {#production}
+=======
+### Production
+>>>>>>> afa176c16e4ef32a1ab372a8abaf52652c593750
 
 这些选项通常用于生产环境中：
 

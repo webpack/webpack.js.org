@@ -40,6 +40,7 @@ export default class SidebarItem extends Component {
     );
   }
 
+<<<<<<< HEAD
   _handleAnchor(anchor) {
     let id = anchor.id;
     let title = anchor.title;
@@ -53,6 +54,12 @@ export default class SidebarItem extends Component {
 
   scrollTop() {
     window.scrollTo(0, 0);
+=======
+  scrollTop(event) {
+    if (!event.metaKey && !event.ctrlKey) {
+        window.scrollTo(0, 0);
+    }
+>>>>>>> afa176c16e4ef32a1ab372a8abaf52652c593750
   }
 
   render() {
