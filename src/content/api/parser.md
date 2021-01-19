@@ -472,11 +472,7 @@ parser.hooks.call.for('eval').tap('MyPlugin', expression => {});
 ```
 
 
-<<<<<<< HEAD
-### callAnyMember {#callanymember}
-=======
-### callMemberChain
->>>>>>> afa176c16e4ef32a1ab372a8abaf52652c593750
+### callMemberChain {#callmemberchain}
 
 `SyncBailHook`
 

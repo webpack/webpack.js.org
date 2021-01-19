@@ -461,16 +461,13 @@ const b = new URL('module/path', import.meta.url);
 const a = new URL('./module/path', import.meta.url);
 ```
 
-<<<<<<< HEAD:src/content/configuration/resolve.md
-### `resolve.symlinks` {#resolvesymlinks}
-=======
 ### `resolve.preferAbsolute`
 
 `boolean`
 
 <Badge text='5.13.0+' />
 
-Prefer absolute paths to [`resolve.roots`](#resolveroots) when resolving.
+解析时，首选的绝对路径为 [`resolve.roots`](#resolveroots)。
 
 __wepack.config.js__
 
@@ -483,8 +480,7 @@ module.exports = {
 };
 ```
 
-### `resolve.symlinks`
->>>>>>> afa176c16e4ef32a1ab372a8abaf52652c593750:src/content/configuration/resolve.mdx
+### `resolve.symlinks` {#resolvesymlinks}
 
 `boolean = true`
 
