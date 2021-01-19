@@ -33,13 +33,13 @@ T> Instead of using the `devtool` option you can also use `SourceMapDevToolPlugi
 
 | devtool                                    | performance                                        | production | quality        | comment                                                                               |
 | ------------------------------------------ | -------------------------------------------------- | ---------- | -------------- | ------------------------------------------------------------------------------------- |
-| (none)                                     | __build__: fastest<br /><br />__rebuild__: fastest | yes        | bundle         |
+| (none)                                     | __build__: fastest<br /><br />__rebuild__: fastest | yes        | bundle         | Recommended choice for production builds with maximum performance.                    |
 | __`eval`__                                 | __build__: fast<br /><br />__rebuild__: fastest    | no         | generated      | Recommended choice for development builds with maximum performance.                   |
 | `eval-cheap-source-map`                    | __build__: ok<br /><br />__rebuild__: fast         | no         | transformed    | Tradeoff choice for development builds.                                               |
 | `eval-cheap-module-source-map`             | __build__: slow<br /><br />__rebuild__: fast       | no         | original lines | Tradeoff choice for development builds.                                               |
 | __`eval-source-map`__                      | __build__: slowest<br /><br />__rebuild__: ok      | no         | original       | Recommended choice for development builds with high quality SourceMaps.               |
-| `cheap-source-map`                         | __build__: ok<br /><br />__rebuild__: slow         | yes        | transformed    | Tradeoff choice for production builds.                                                |
-| `cheap-module-source-map`                  | __build__: slow<br /><br />__rebuild__: slow       | yes        | original lines | Tradeoff choice for production builds.                                                |
+| `cheap-source-map`                         | __build__: ok<br /><br />__rebuild__: slow         | no         | transformed    |
+| `cheap-module-source-map`                  | __build__: slow<br /><br />__rebuild__: slow       | no         | original lines |
 | __`source-map`__                           | __build__: slowest<br /><br />__rebuild__: slowest | yes        | original       | Recommended choice for production builds with high quality SourceMaps.                |
 | `inline-cheap-source-map`                  | __build__: ok<br /><br />__rebuild__: slow         | no         | transformed    |
 | `inline-cheap-module-source-map`           | __build__: slow<br /><br />__rebuild__: slow       | no         | original lines |
@@ -50,14 +50,14 @@ T> Instead of using the `devtool` option you can also use `SourceMapDevToolPlugi
 | `inline-nosources-cheap-source-map`        | __build__: ok<br /><br />__rebuild__: slow         | no         | transformed    | source code not included                                                              |
 | `inline-nosources-cheap-module-source-map` | __build__: slow<br /><br />__rebuild__: slow       | no         | original lines | source code not included                                                              |
 | `inline-nosources-source-map`              | __build__: slowest<br /><br />__rebuild__: slowest | no         | original       | source code not included                                                              |
-| `nosources-cheap-source-map`               | __build__: ok<br /><br />__rebuild__: slow         | yes        | transformed    | source code not included                                                              |
-| `nosources-cheap-module-source-map`        | __build__: slow<br /><br />__rebuild__: slow       | yes        | original lines | source code not included                                                              |
+| `nosources-cheap-source-map`               | __build__: ok<br /><br />__rebuild__: slow         | no         | transformed    | source code not included                                                              |
+| `nosources-cheap-module-source-map`        | __build__: slow<br /><br />__rebuild__: slow       | no         | original lines | source code not included                                                              |
 | `nosources-source-map`                     | __build__: slowest<br /><br />__rebuild__: slowest | yes        | original       | source code not included                                                              |
-| `hidden-nosources-cheap-source-map`        | __build__: ok<br /><br />__rebuild__: slow         | yes        | transformed    | no reference, source code not included                                                |
-| `hidden-nosources-cheap-module-source-map` | __build__: slow<br /><br />__rebuild__: slow       | yes        | original lines | no reference, source code not included                                                |
+| `hidden-nosources-cheap-source-map`        | __build__: ok<br /><br />__rebuild__: slow         | no         | transformed    | no reference, source code not included                                                |
+| `hidden-nosources-cheap-module-source-map` | __build__: slow<br /><br />__rebuild__: slow       | no         | original lines | no reference, source code not included                                                |
 | `hidden-nosources-source-map`              | __build__: slowest<br /><br />__rebuild__: slowest | yes        | original       | no reference, source code not included                                                |
-| `hidden-cheap-source-map`                  | __build__: ok<br /><br />__rebuild__: slow         | yes        | transformed    | no reference                                                                          |
-| `hidden-cheap-module-source-map`           | __build__: slow<br /><br />__rebuild__: slow       | yes        | original lines | no reference                                                                          |
+| `hidden-cheap-source-map`                  | __build__: ok<br /><br />__rebuild__: slow         | no         | transformed    | no reference                                                                          |
+| `hidden-cheap-module-source-map`           | __build__: slow<br /><br />__rebuild__: slow       | no         | original lines | no reference                                                                          |
 | `hidden-source-map`                        | __build__: slowest<br /><br />__rebuild__: slowest | yes        | original       | no reference. Possible choice when using SourceMap only for error reporting purposes. |
 
 shortcut                  | explanation
@@ -67,8 +67,8 @@ performance: rebuild      | How is the performance of the incremental build affe
 production                | Does it make sense to use this devtool for production builds? It's usually `no` when the devtool has a negative effect on user experience.
 quality: bundled          | You will see all generated code of a chunk in a single blob of code. This is the raw output file without any devtooling support
 quality: generated        | You will see the generated code, but each module is shown as separate code file in browser devtools.
-quality: transformed      | You will see generated code after the preprocessing by loaders but before additional webpack transformations.
-quality: original lines   | You will see the original code that you wrote, assuming all loaders support SourceMapping. Only source lines will be mapped and column information will be discarded resp. not generated. This prevents setting breakpoints in the middle of lines.
+quality: transformed      | You will see generated code after the preprocessing by loaders but before additional webpack transformations. Only source lines will be mapped and column information will be discarded resp. not generated. This prevents setting breakpoints in the middle of lines which doesn't work together with minimizer.
+quality: original lines   | You will see the original code that you wrote, assuming all loaders support SourceMapping. Only source lines will be mapped and column information will be discarded resp. not generated. This prevents setting breakpoints in the middle of lines which doesn't work together with minimizer.
 quality: original         | You will see the original code that you wrote, assuming all loaders support SourceMapping.
 `eval-*` addition         | generate SourceMap per module and attach it via eval. Recommended for development, because of improved rebuild performance. Note that there is a windows defender issue, which causes huge slowdown due to virus scanning.
 `inline-*` addition       | inline the SourceMap to the original file instead of creating a separate file.
