@@ -472,19 +472,19 @@ parser.hooks.call.for('eval').tap('MyPlugin', expression => {});
 ```
 
 
-### callAnyMember {#callanymember}
+### callMemberChain {#callmemberchain}
 
 `SyncBailHook`
 
 Triggered when parsing a call to a member function of an object.
 
 - Hook Parameters: `objectIdentifier`
-- Callback Parameters: `expression`
+- Callback Parameters: `expression, properties`
 
 ```js
 myObj.anyFunc();
 
-parser.hooks.callAnyMember.for('myObj').tap('MyPlugin', expression => {});
+parser.hooks.callMemberChain.for('myObj').tap('MyPlugin', (expression, properties) => {});
 ```
 
 

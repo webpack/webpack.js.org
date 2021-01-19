@@ -70,6 +70,7 @@ webpack-cli 提供了许多 flag 来使 webpack 的工作变得简单。默认�
 | `--output-path, -o` | string          | webpack 生成文件的输出位置，例如 `./dist`                                |
 | `--target, -t`      | string[]          | 设置要构建的 target                                                    |
 | `--watch, -w`       | boolean         | 监听文件变化                                                           |
+| `--watch-options-stdin` | boolean     | stdin stream 结束时，停止监听                                                                  |
 | `--hot, -h`         | boolean         | 启用 HMR                                                              |
 | `--devtool, -d`     | string          | 控制是否生成 source map，以及如何生成                                     |
 | `--prefetch`        | string          | 预先发生请求                                                            |
@@ -245,6 +246,52 @@ __使用配置文件进行构建__
 
 ```bash
 npx webpack --config example.config.js
+```
+
+如果你的配置文件导出了多个配置，你可以使用 `--config-name` 来指定要运行的配置。
+
+如果你的 `webpack.config.js` 如下：
+
+```js
+module.exports = [
+  {
+    output: {
+      filename: './dist-first.js',
+    },
+    name: 'first',
+    entry: './src/first.js',
+    mode: 'development',
+  },
+  {
+    output: {
+      filename: './dist-second.js',
+    },
+    name: 'second',
+    entry: './src/second.js',
+    mode: 'development',
+  },
+  {
+    output: {
+      filename: './dist-third.js',
+    },
+    name: 'third',
+    entry: './src/third.js',
+    mode: 'none',
+    stats: 'verbose',
+  },
+];
+```
+
+并且只想运行第二个配置项：
+
+```bash
+npx webpack --config-name second
+```
+
+你也可以传递多个值来实现：
+
+```bash
+npx webpack --config-name first --config-name second
 ```
 
 __以 JSON 格式输出 webpack 的运行结果__

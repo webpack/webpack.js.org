@@ -147,16 +147,18 @@ module.exports = {
 
 ### 函数 {#function}
 
-`function ({ context, request }, callback)`
+- `function ({ context, request, contextInfo, getResolve }, callback)`
+- `function ({ context, request, contextInfo, getResolve }) => promise` <Badge text='5.15.0+' />
 
 对于 webpack 外部化，通过定义函数来控制行为，可能会很有帮助。例如，[webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals) 能够排除 `node_modules` 目录中所有模块，还提供一些选项，比如白名单 package(whitelist package)。
 
 函数接收两个入参：
 
 - `ctx` (`object`)：包含文件详情的对象。
-  - `ctx.context` (`string`): 包含引用的文件目录。
-  - `ctc.request` (`string`): 被请求引入的路径。
-  - `ctx.contextInfo` (`string`): 包含 issuer 的信息（如，layer）
+    - `ctx.context` (`string`): 包含引用的文件目录。
+    - `ctc.request` (`string`): 被请求引入的路径。
+    - `ctx.contextInfo` (`string`): 包含 issuer 的信息（如，layer）
+    - `ctx.getResolve` <Badge text='5.15.0+' />: 获取当前解析器选项的解析函数。
 - `callback` (`function (err, result, type)`): 用于指明模块如何被外部化的回调函数
 
 回调函数接收三个入参：
