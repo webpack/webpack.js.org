@@ -401,6 +401,30 @@ resolve(context: string, request: string, callback: function(err, result: string
 
 Resolve a request like a require expression.
 
+- `context` must be an absolute path to a directory. This directory is used as the starting location for the resolving.
+- `request` is the request to be resolved. Usually either relative requests like `./relative` or module requests like `module/path` are used, but absolute paths like `/some/path` are also possible as requests.
+- `callback` is a normal Node.js-style callback function giving the resolved path.
+
+All dependencies of the resolving operation are automatically added as dependencies to the current module.
+
+
+### `this.getResolve`
+
+```typescript
+getResolve(options: ResolveOptions): resolve
+
+resolve(context: string, request: string, callback: function(err, result: string))
+resolve(context: string, request: string): Promise<string>
+```
+
+Creates a resolve function similar to [`this.resolve`](#thisresolve).
+
+Any options under webpack [`resolve` options](/configuration/resolve/#resolve) are possible. They are merged with the configured `resolve` options. Note that `"..."` can be used in arrays to extend the value from `resolve` options, e.g. `{ extensions: [".sass", "..."] }`.
+
+`options.dependencyType` is an additional option. It allows us to specify the type of dependency, which is used to resolve `byDependency` from the `resolve` options.
+
+All dependencies of the resolving operation are automatically added as dependencies to the current module.
+
 
 ### `this.addDependency`
 

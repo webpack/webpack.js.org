@@ -461,6 +461,25 @@ const b = new URL('module/path', import.meta.url);
 const a = new URL('./module/path', import.meta.url);
 ```
 
+### `resolve.preferAbsolute`
+
+`boolean`
+
+<Badge text='5.13.0+' />
+
+Prefer absolute paths to [`resolve.roots`](#resolveroots) when resolving.
+
+__wepack.config.js__
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    preferAbsolute: true
+  }
+};
+```
+
 ### `resolve.symlinks`
 
 `boolean = true`
