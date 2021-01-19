@@ -33,7 +33,7 @@ When Node.js was released a new era started, and it came with new challenges. No
 CommonJS came out and introduced `require`, which allows you to load and use a module in the current file. This solved scope issues out of the box by importing each module as it was needed.
 
 
-## npm + Node.js + modules — mass distribution
+## npm + Node.js + modules – mass distribution
 
 JavaScript is taking over the world as a language, as a platform and as a way to rapidly develop and create fast applications.
 

@@ -70,7 +70,7 @@ You can also encourage your developers to contribute to the ecosystem by open-so
 
 ### Anyone Else
 
-To anyone else who is interested in helping our mission — e.g. venture capitalists, government entities, digital agencies, etc. — we would love for you to work with us, one of the top npm packages, to improve your product! Please don't hesitate to reach out with questions.
+To anyone else who is interested in helping our mission – e.g. venture capitalists, government entities, digital agencies, etc. – we would love for you to work with us, one of the top npm packages, to improve your product! Please don't hesitate to reach out with questions.
 
 <!-- add slides here -->
 

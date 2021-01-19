@@ -24,8 +24,8 @@ file and a few flags (e.g. `--env`).
 ## Module
 
 When processing modules with webpack, it is important to understand the
-different module syntaxes — specifically the [methods](/api/module-methods)
-and [variables](/api/module-variables) — that are supported.
+different module syntaxes – specifically the [methods](/api/module-methods)
+and [variables](/api/module-variables) – that are supported.
 
 [Learn more about modules!](/api/module-methods)
 
