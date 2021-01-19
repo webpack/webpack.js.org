@@ -63,5 +63,6 @@ button.as-link {
     user-select: none;
   }
 }
-
-@import 'dark';
+[data-theme="dark"] {
+  @import 'dark';
+}
