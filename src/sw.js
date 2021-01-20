@@ -15,7 +15,7 @@ precacheAndRoute(ssgManifest);
 precacheAndRoute([
   {
     url: '/manifest.json',
-    revision: '1', // manually update needed when content changed
+    revision: '2', // manually update needed when content changed
   },
 ]);
 
