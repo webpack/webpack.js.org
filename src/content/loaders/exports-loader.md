@@ -16,36 +16,36 @@ repo: https://github.com/webpack-contrib/exports-loader
 
 
 
-Allow to setup exports `module.exports`/`export` for source files.
+允许对源文件设置 `module.exports`/`export`。
 
-Useful when a source file does not contain exports or something does not export.
+当源文件不包含 exports 或者有一些内容没有 export 时是有用的。
 
-For further hints on compatibility issues, check out [Shimming](/guides/shimming/) of the official docs.
+想要获取有关兼容性的进一步提示，请查看官方文档中的 [Shimming](/guides/shimming/)。
 
-> ⚠ By default loader generate ES module named syntax.
+> ⚠ 默认情况下，loader 生成具名的 ES module。
 >
-> ⚠ Be careful, existing exports (`export`/`module.exports`/`exports`) in the original code and exporting new values can cause a failure.
+> ⚠ 请注意，原始代码中现有的 exports（`export`/`module.exports`/`exports`）和导出新值可能会导致失败。
 
-## Getting Started {#getting-started}
+## 快速开始 {#getting-started}
 
-To begin, you'll need to install `exports-loader`:
+首先，你需要安装 `exports-loader`：
 
 ```console
 $ npm install exports-loader --save-dev
 ```
 
-### Inline {#inline}
+### 内联 {#inline}
 
-The `|` or `%20` (space) allow to separate the `syntax`, `name` and `alias` of export.
-The documentation and syntax examples can be read [here](#syntax).
+可以使用 `|` 或者 `%20`（空格）分隔 export 中的 `syntax`，`name` 和 `alias`。
+可以在[这里](#syntax)获取文档和语法实例。
 
-> ⚠ `%20` is space in a query string, because you can't use spaces in URLs
+> ⚠ `%20` 是查询字符串中的空格，因为你不能在 URL 中使用空格
 
-Then add the loader to the desired `import` statement or `require` calls. For example:
+然后将 loader 添加到所需的 `import` 语句或 `require` 调用中。例如：
 
 ```js
 import { myFunction } from 'exports-loader?exports=myFunction!./file.js';
-// Adds the following code to the file's source:
+// 向源文件中添加如下代码：
 //
 // ...
 // Code
@@ -61,7 +61,7 @@ import {
   myVariable,
   myFunction,
 } from 'exports-loader?exports=myVariable,myFunction!./file.js';
-// Adds the following code to the file's source:
+// 向源文件中添加如下代码：
 //
 // ...
 // Code
@@ -80,7 +80,7 @@ myFunction('Hello world');
 const {
   myFunction,
 } = require('exports-loader?type=commonjs&exports=myFunction!./file.js');
-// Adds the following code to the file's source:
+// 向源文件中添加如下代码：
 //
 // ...
 // Code
@@ -92,11 +92,11 @@ myFunction('Hello world');
 ```
 
 ```js
-// Alternative syntax:
+// 替换语法：
 // import myFunction from 'exports-loader?exports=default%20myFunction!./file.js';
 import myFunction from 'exports-loader?exports=default|myFunction!./file.js';
-// `%20` is space in a query string, equivalently `default myFunction`
-// Adds the following code to the file's source:
+// `%20` 是查询字符串中的空格，等同于 `default myFunction`
+// 向源文件中添加如下代码：
 //
 // ...
 // Code
@@ -109,8 +109,8 @@ myFunction('Hello world');
 
 ```js
 const myFunction = require('exports-loader?type=commonjs&exports=single|myFunction!./file.js');
-// `|` is separator in a query string, equivalently `single|myFunction`
-// Adds the following code to the file's source:
+// `|` 是查询字符串中的分隔符， 等同于 `single|myFunction`
+// 向源文件中添加如下代码：
 //
 // ...
 // Code
@@ -123,8 +123,8 @@ myFunction('Hello world');
 
 ```js
 import { myFunctionAlias } from 'exports-loader?exports=named|myFunction|myFunctionAlias!./file.js';
-// `|` is separator in a query string, equivalently `named|myFunction|myFunctionAlias`
-// Adds the following code to the file's source:
+// `|` 是查询字符串中的分隔符， 等同于 `named|myFunction|myFunctionAlias`
+// 向源文件中添加如下代码：
 //
 // ...
 // Code
@@ -135,9 +135,9 @@ import { myFunctionAlias } from 'exports-loader?exports=named|myFunction|myFunct
 myFunctionAlias('Hello world');
 ```
 
-Description of string values can be found in the documentation below.
+可以在下面的文档中找到字段值的含义。
 
-### Using Configuration {#using-configuration}
+### 使用配置文件 {#using-configuration}
 
 **webpack.config.js**
 
@@ -146,7 +146,7 @@ module.exports = {
   module: {
     rules: [
       {
-        // You can use `regexp`
+        // 你可以使用 `regexp`
         // test: /vendor\.js/$
         test: require.resolve('./path/to/vendor.js'),
         loader: 'exports-loader',
@@ -159,23 +159,23 @@ module.exports = {
 };
 ```
 
-And run `webpack` via your preferred method.
+然后用你喜欢的方式运行 `webpack`。
 
-## Options {#options}
+## 配置项 {#options}
 
 |           Name            |                   Type                    |   Default   | Description                 |
 | :-----------------------: | :---------------------------------------: | :---------: | :-------------------------- |
-|    **[`type`](#type)**    |                `{String}`                 |  `module`   | Format of generated exports |
-| **[`exports`](#exports)** | `{String\|Object\|Array<String\|Object>}` | `undefined` | List of exports             |
+|    **[`type`](#type)**    |                `{String}`                 |  `module`   | 生成导出的格式 |
+| **[`exports`](#exports)** | `{String\|Object\|Array<String\|Object>}` | `undefined` | 导出的列表             |
 
 ### `type` {#type}
 
-Type: `String`
-Default: `module`
+类型：`String`
+默认值：`module`
 
-Format of generated exports.
+生成导出的格式
 
-Possible values - `commonjs` (CommonJS module syntax) and `module` (ES module syntax).
+可选值 - `commonjs`（CommonJS 模块语法）和 `module`（ES 模块语法）。
 
 #### `commonjs` {#commonjs}
 
@@ -198,7 +198,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成的输出结果：
 
 ```js
 // ...
@@ -229,7 +229,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成的输出结果：
 
 ```js
 // ...
@@ -241,45 +241,45 @@ export { Foo };
 
 ### `exports` {#exports}
 
-Type: `String|Array`
-Default: `undefined`
+类型：`String|Array`
+默认值：`undefined`
 
-List of exports.
+导出的列表。
 
 #### `String` {#string}
 
-Allows to use a string to describe an export.
+允许使用一个字符串来描述导出。
 
 ##### `Syntax` {#syntax}
 
-The `|` or `%20` (space) allow to separate the `syntax`, `name` and `alias` of export.
+可以使用 `|` 或者 `%20`（空格）分隔 export 中的 `syntax`，`name` 和 `alias`。
 
-String syntax - `[[syntax] [name] [alias]]` or `[[syntax]|[name]|[alias]]`, where:
+字符串语法 - `[[syntax] [name] [alias]]` 或者 `[[syntax]|[name]|[alias]]`，含义如下：
 
-- `[syntax]` (**may be omitted**) -
+- `[syntax]` (**可以省略**) -
 
-  - if `type` is `module`- can be `default` and `named`,
-  - if `type` is `commonjs`- can be `single` and `multiple`
+  - 如果 `type` 为 `module`- 可以是 `default` 和 `named`,
+  - 如果 `type` 为 `commonjs`- 可以使 `single` 和 `multiple`
 
-- `[name]` - name of an exported value (**required**)
-- `[alias]` - alias of an exported value (**may be omitted**)
+- `[name]` - 导出值的名称 (**必填项**)
+- `[alias]` - 导出值的别名 (**可以省略**)
 
 Examples:
 
-- `[Foo]` - generates `export { Foo };`.
-- `[default Foo]` - generates `export default Foo;`.
-- `[named Foo]` - generates `export { Foo };`.
-- `[named Foo FooA]` - generates `export { Foo as FooA };`.
-- `[single Foo]` - generates `module.exports = Foo;`.
-- `[multiple Foo]` - generates `module.exports = { Foo };`.
-- `[multiple Foo FooA]` - generates `module.exports = { 'FooA': Foo };`.
-- `[named [name] [name]Alias]` - generates ES module named exports and exports a value equal to the filename under other name., for `single.js` it will be `single` and `singleAlias`, generates `export { single as singleAlias };`.
+- `[Foo]` - 生成 `export { Foo };`.
+- `[default Foo]` - 生成 `export default Foo;`.
+- `[named Foo]` - 生成 `export { Foo };`.
+- `[named Foo FooA]` - 生成 `export { Foo as FooA };`.
+- `[single Foo]` - 生成 `module.exports = Foo;`.
+- `[multiple Foo]` - 生成 `module.exports = { Foo };`.
+- `[multiple Foo FooA]` - 生成 `module.exports = { 'FooA': Foo };`.
+- `[named [name] [name]Alias]` - 生成名为 exports 的 ES 模块，并导出等于另一个名称下的文件名的值., 对于 `single.js` 将会是 `single` and 和`singleAlias`, 生成 `export { single as singleAlias };`.
 
-> ⚠ You need to set `type: "commonjs"` to use `single` or `multiple` syntaxes.
+> ⚠ 你需要设置 `type: "commonjs"` 才能使用 `single` 或者 `multiple` 语法。
 
-> ⚠ Aliases can't be used together with `default` or `single` syntaxes.
+> ⚠ 别名不能与 `default` 或者 `single` 语法一起使用。
 
-##### Examples {#examples}
+##### 示例 {#examples}
 
 ###### ES Module Default Export {#es-module-default-export}
 
@@ -301,7 +301,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成的输出结果：
 
 ```js
 // ...
@@ -331,7 +331,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成的输出结果：
 
 ```js
 // ...
@@ -362,7 +362,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成的输出结果：
 
 ```js
 // ...
@@ -372,7 +372,7 @@ Generate output:
 module.exports = Foo;
 ```
 
-###### CommonJS Multiple Exports {#commonjs-multiple-exports}
+###### CommonJS 导出多个 {#commonjs-multiple-exports}
 
 **webpack.config.js**
 
@@ -393,7 +393,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成的输出结果：
 
 ```js
 // ...
@@ -405,17 +405,17 @@ module.exports = { FooA: Foo };
 
 #### `Object` {#object}
 
-Allows to use an object to describe an export.
+允许使用对象来描述导出。
 
-Properties:
+属性：
 
-- `syntax` - can be `default` or `named` for the `module` type (`ES modules` module format), and `single` or `multiple` for the `commonjs` type (`CommonJS` module format) (**may be omitted**)
-- `name` - name of an exported value (**required**)
-- `alias` - alias of an exported value (**may be omitted**)
+- `syntax` - 对于 `module` 类型（`ES modules` 模块格式）可以是 `default` 或者 `named`，对于 `commonjs` 类型（`CommonJS` 模块格式）可以是 `single` 或者 `multiple`（**可以省略**）
+- `name` - 导出值的名称 (**required**)
+- `alias` - 导出值的别名 (**may be omitted**)
 
-##### Examples {#examples}
+##### 示例 {#examples}
 
-###### ES Module Default Export {#es-module-default-export}
+###### ES Module 默认导出 {#es-module-default-export}
 
 **webpack.config.js**
 
@@ -438,7 +438,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成的输出结果：
 
 ```js
 // ...
@@ -448,7 +448,7 @@ Generate output:
 export default Foo;
 ```
 
-###### ES Module Named Exports {#es-module-named-exports}
+###### ES Module 重命名导出 {#es-module-named-exports}
 
 **webpack.config.js**
 
@@ -472,7 +472,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成的输出结果：
 
 ```js
 // ...
@@ -482,7 +482,7 @@ Generate output:
 export { Foo as FooA };
 ```
 
-###### CommonJS Single Export {#commonjs-single-export}
+###### CommonJS 单个导出 {#commonjs-single-export}
 
 **webpack.config.js**
 
@@ -506,7 +506,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成的输出结果：
 
 ```js
 // ...
@@ -516,7 +516,7 @@ Generate output:
 module.exports = Foo;
 ```
 
-###### CommonJS Multiple Exports {#commonjs-multiple-exports}
+###### CommonJS 导出多个 {#commonjs-multiple-exports}
 
 **webpack.config.js**
 
@@ -541,7 +541,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成的输出结果：
 
 ```js
 // ...
@@ -553,17 +553,17 @@ module.exports = { FooA: Foo };
 
 #### `Array` {#array}
 
-Allow to specify multiple exports. Each item can be a [`string`](https://github.com/webpack-contrib/exports-loader#string) or an [`object`](https://github.com/webpack-contrib/exports-loader#object).
+允许指定多个导出。 每一个可以是 [`string`](https://github.com/webpack-contrib/exports-loader#string) 或者 [`object`](https://github.com/webpack-contrib/exports-loader#object).
 
-> ⚠ Not possible to use `single` and `multiple` syntaxes together due to CommonJS format limitations.
+> ⚠ 因为 CommonJS 格式限制，不能将 `single` 与 `multiple` 语法一起使用。
 
-> ⚠ Not possible to use multiple `default` values due to ES module format limitations.
+> ⚠ 因为 ES module 格式限制，不能导出多个 `default` 值。
 
-> ⚠ Not possible to use multiple `single` values due to CommonJS format limitations.
+> ⚠ 因为 CommonJS 格式限制，不能导出多个 `single` 值。
 
-##### Examples {#examples}
+##### 示例 {#examples}
 
-###### CommonJS Multiple Exports {#commonjs-multiple-exports}
+###### CommonJS 导出多个 {#commonjs-multiple-exports}
 
 **webpack.config.js**
 
@@ -584,7 +584,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成的输出结果：
 
 ```js
 // ...
@@ -594,7 +594,7 @@ Generate output:
 module.exports = { Foo, Bar, BazA: Bar };
 ```
 
-###### ES Module Default Export And Named Exports Together {#es-module-default-export-and-named-exports-together}
+###### ES 默认导出与导出重命名 {#es-module-default-export-and-named-exports-together}
 
 **webpack.config.js**
 
@@ -614,7 +614,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成的输出结果：
 
 ```js
 // ...
@@ -625,7 +625,7 @@ export default Foo;
 export { Bar as BarA };
 ```
 
-###### Named Exports {#named-exports}
+###### 导出重命名 {#named-exports}
 
 **webpack.config.js**
 
@@ -649,7 +649,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成的输出结果：
 
 ```js
 // ...
@@ -659,9 +659,9 @@ Generate output:
 export { Foo as FooA, Bar, Baz };
 ```
 
-## Contributing {#contributing}
+## 贡献 {#contributing}
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+如果您还没有阅读，请花一点时间阅读我们的贡献指南。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/exports-loader/blob/master/.github/CONTRIBUTING.md)
 
