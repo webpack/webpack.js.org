@@ -228,6 +228,6 @@ It is crucial to minimize your CSS for production. Please see the [Minimizing fo
 
 ## CLI Alternatives
 
-Some of what has been described above can also be achieved by using the command line. For example, the `--optimize-minimize` flag will include the `TerserPlugin` behind the scenes. The `--define process.env.NODE_ENV="'production'"` will do the same for the `DefinePlugin` instance described above. And, `webpack -p` will automatically invoke both those flags and thus the plugins to be included.
+Many of the options described above can be set as command line arguments. For example, [`optimization.minimize`](https://webpack.js.org/configuration/optimization/#optimizationminimize) can be set with `--optimization-minimize`, and [`mode`](https://webpack.js.org/configuration/mode/) can be set with `--mode`. Run `webpack --help=verbose` for a full list of CLI arguments.
 
-While these shorthand methods are nice, we usually recommend just using the configuration as it's better to understand exactly what is being done for you in both cases. The configuration also gives you more control on fine-tuning other options within both plugins.
+While these shorthand methods are useful, we recommend setting these options in a webpack configuration file for more configurability.
