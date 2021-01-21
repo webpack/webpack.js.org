@@ -228,6 +228,6 @@ It is crucial to minimize your CSS for production. Please see the [Minimizing fo
 
 ## CLI Alternatives
 
-Many of the options described above can be set as command line arguments. For example, [`optimization.minimize`](https://webpack.js.org/configuration/optimization/#optimizationminimize) can be set with `--optimization-minimize`, and [`mode`](https://webpack.js.org/configuration/mode/) can be set with `--mode`. Run `webpack --help=verbose` for a full list of CLI arguments.
+Many of the options described above can be set as command line arguments. For example, [`optimization.minimize`](/configuration/optimization/#optimizationminimize) can be set with `--optimization-minimize`, and [`mode`](/configuration/mode/) can be set with `--mode`. Run `webpack --help=verbose` for a full list of CLI arguments.
 
 While these shorthand methods are useful, we recommend setting these options in a webpack configuration file for more configurability.
