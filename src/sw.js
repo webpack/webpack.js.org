@@ -3,7 +3,7 @@ import { registerRoute } from 'workbox-routing';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration';
-import { setDefaultHandler, setCatchHandler } from 'workbox-routing';
+import { setCatchHandler } from 'workbox-routing';
 import ssgManifest from '../dist/ssg-manifest.json';
 
 const cacheName = cacheNames.runtime;
@@ -30,6 +30,8 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', () => {
   // TODO clean up old caches
+  // - [ ] clean up workbox precached data
+  // - [ ] clean up outdated runtime cache
 });
 
 registerRoute(
@@ -57,9 +59,6 @@ registerRoute(
     ],
   })
 );
-
-// use StaleWhileRevalidate for others
-setDefaultHandler(new StaleWhileRevalidate());
 
 // fallback to app-shell for document request
 setCatchHandler(({ event }) => {
