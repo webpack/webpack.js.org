@@ -1,28 +1,48 @@
-import { precacheAndRoute, matchPrecache } from 'workbox-precaching';
+import { cacheNames } from 'workbox-core';
 import { registerRoute } from 'workbox-routing';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
-import { CacheFirst, NetworkOnly } from 'workbox-strategies';
+import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { setDefaultHandler, setCatchHandler } from 'workbox-routing';
 import ssgManifest from '../dist/ssg-manifest.json';
 
-// Precache assets built with webpack
-precacheAndRoute(self.__WB_MANIFEST);
+const cacheName = cacheNames.runtime;
 
-precacheAndRoute(ssgManifest);
-
-// Precache manifest.json as ssgManifest couldn't catch it
-precacheAndRoute([
+const manifest = self.__WB_MANIFEST;
+const otherManifest = [
   {
     url: '/manifest.json',
-    revision: '2', // manually update needed when content changed
   },
-]);
+];
+const manifestURLs = [...manifest, ...ssgManifest, ...otherManifest].map(
+  (entry) => {
+    const url = new URL(entry.url, self.location);
+    return url.href;
+  }
+);
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(cacheName).then((cache) => {
+      return cache.addAll(manifestURLs);
+    })
+  );
+});
+
+self.addEventListener('activate', () => {
+  // TODO clean up old caches
+});
+
+registerRoute(
+  ({ url }) => manifestURLs.includes(url.href),
+  new NetworkFirst({
+    cacheName,
+  })
+);
 
 // Cache Google Fonts
 registerRoute(
   /https:\/\/fonts\.gstatic\.com/,
-  new CacheFirst({
+  new StaleWhileRevalidate({
     cacheName: 'google-fonts-cache',
     plugins: [
       // Ensure that only requests that result in a 200 status are cached
@@ -38,11 +58,14 @@ registerRoute(
   })
 );
 
-setDefaultHandler(new NetworkOnly());
+// use StaleWhileRevalidate for others
+setDefaultHandler(new StaleWhileRevalidate());
+
+// fallback to app-shell for document request
 setCatchHandler(({ event }) => {
   switch (event.request.destination) {
     case 'document':
-      return matchPrecache('/app-shell/index.html');
+      return caches.match('/app-shell/index.html');
     default:
       return Response.error();
   }
