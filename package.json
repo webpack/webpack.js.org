@@ -155,7 +155,7 @@
     "react-g-analytics": "0.4.2",
     "react-router-dom": "^5.2.0",
     "react-spring": "next",
-    "react-tiny-popover": "5",
+    "react-tiny-popover": "6",
     "react-use": "^15.3.8",
     "react-visibility-sensor": "^5.0.2",
     "unist-util-visit": "^2.0.3",
