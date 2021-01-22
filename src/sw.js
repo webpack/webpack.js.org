@@ -1,9 +1,9 @@
 import { cacheNames } from 'workbox-core';
 import { registerRoute } from 'workbox-routing';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
-import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
+import { NetworkFirst, StaleWhileRevalidate, NetworkOnly } from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration';
-import { setCatchHandler } from 'workbox-routing';
+import { setCatchHandler, setDefaultHandler } from 'workbox-routing';
 import ssgManifest from '../dist/ssg-manifest.json';
 
 const cacheName = cacheNames.runtime;
@@ -59,6 +59,8 @@ registerRoute(
     ],
   })
 );
+
+setDefaultHandler(new NetworkOnly());
 
 // fallback to app-shell for document request
 setCatchHandler(({ event }) => {
