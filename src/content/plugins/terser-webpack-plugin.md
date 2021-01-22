@@ -20,7 +20,11 @@ repo: https://github.com/webpack-contrib/terser-webpack-plugin
 
 ## 入门 {#getting-started}
 
+<<<<<<< HEAD
 如果你使用的是 webpack v5 或以上版本，你不需要安装这个插件。webpack v5 自带最新的 `terser-webpack-plugin`。
+=======
+If you are using webpack v5 or above you do not need to install this plugin. Webpack v5 comes with the latest `terser-webpack-plugin` out of the box. Using Webpack v4, you have to install `terser-webpack-plugin` v4.
+>>>>>>> e28e1b45121f38adaf8578995d024c73ecbf673f
 
 首先，你需要安装 `terser-webpack-plugin`：
 

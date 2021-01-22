@@ -35,8 +35,13 @@ module.exports = {
   module: {
     rules: [
       {
+<<<<<<< HEAD
         test: /\.less$/,
         loader: "less-loader", // 将 Less 文件编译为 CSS 文件
+=======
+        test: /\.less$/i,
+        loader: "less-loader", // compiles Less to CSS
+>>>>>>> e28e1b45121f38adaf8578995d024c73ecbf673f
       },
     ],
   },
@@ -47,12 +52,22 @@ module.exports = {
 
 ## 可选项 {#options}
 
+<<<<<<< HEAD
 |                  名称                   |         类型         |         默认值          | 描述                                      |
 | :-------------------------------------: | :------------------: | :----------------------: | :----------------------------------------------- |
 |    **[`lessOptions`](#lessoptions)**    | `{Object\|Function}` | `{ relativeUrls: true }` | Less 的可选项。                                |
 |     **[`additionalData`](#additionaldata)**     | `{String\|Function}` |       `undefined`        | 在入口文件起始或末尾添加 Less 代码。  |
 |      **[`sourceMap`](#sourcemap)**      |     `{Boolean}`      |    `compiler.devtool`    | 是否生成 source map。       |
 | **[`implementation`](#implementation)** |      `{Object}`      |          `less`          | 配置 Less 使用的实现库                |
+=======
+|                   Name                    |         Type         |         Default          | Description                                            |
+| :---------------------------------------: | :------------------: | :----------------------: | :----------------------------------------------------- |
+|     **[`lessOptions`](#lessoptions)**     | `{Object\|Function}` | `{ relativeUrls: true }` | Options for Less.                                      |
+|  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |       `undefined`        | Prepends/Appends `Less` code to the actual entry file. |
+|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |    `compiler.devtool`    | Enables/Disables generation of source maps.            |
+| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |          `true`          | Enables/Disables the default Webpack importer.         |
+|  **[`implementation`](#implementation)**  |      `{Object}`      |          `less`          | Setup Less implementation to use.                      |
+>>>>>>> e28e1b45121f38adaf8578995d024c73ecbf673f
 
 ### `lessOptions` {#lessoptions}
 
@@ -72,7 +87,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           {
             loader: "style-loader",
@@ -104,7 +119,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           "style-loader",
           "css-loader",
@@ -154,7 +169,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           "style-loader",
           "css-loader",
@@ -180,7 +195,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           "style-loader",
           "css-loader",
@@ -214,7 +229,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           "style-loader",
           "css-loader",
@@ -310,7 +325,45 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## 示例 {#examples}
+=======
+### `implementation`
+
+Type: `Object`
+
+> ⚠ less-loader compatible with Less 3 and 4 versions
+
+The special `implementation` option determines which implementation of Less to use. Overrides the locally installed `peerDependency` version of `less`.
+
+**This option is only really useful for downstream tooling authors to ease the Less 3-to-4 transition.**
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.less$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              implementation: require("less"),
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+## Examples
+>>>>>>> e28e1b45121f38adaf8578995d024c73ecbf673f
 
 ### 常规用法 {#normal-usage}
 
@@ -323,7 +376,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           {
             loader: "style-loader", // 从 JS 中创建样式节点
@@ -355,7 +408,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           "style-loader",
           {
@@ -408,7 +461,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           {
             loader: "style-loader",

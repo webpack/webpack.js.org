@@ -576,7 +576,42 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## 例子 {#examples}
+=======
+### `implementation`
+
+Type: `Function`
+
+The special `implementation` option determines which implementation of PostCSS to use. Overrides the locally installed `peerDependency` version of `postcss`.
+
+**This option is only really useful for downstream tooling authors to ease the PostCSS 7-to-8 transition.**
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          {
+            loader: "postcss-loader",
+            options: { implementation: require("postcss") },
+          },
+          { loader: "sass-loader" },
+        ],
+      },
+    ],
+  },
+};
+```
+
+## Examples
+>>>>>>> e28e1b45121f38adaf8578995d024c73ecbf673f
 
 ### SugarSS {#sugarss}
 
