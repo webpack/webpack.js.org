@@ -114,7 +114,7 @@
     "node-fetch": "^2.6.1",
     "npm-run-all": "^4.1.1",
     "postcss": "^8.2.4",
-    "postcss-loader": "^4.1.0",
+    "postcss-loader": "^4.2.0",
     "react-refresh": "^0.9.0",
     "redirect-webpack-plugin": "^1.0.0",
     "remark": "^13.0.0",
