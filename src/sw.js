@@ -53,7 +53,7 @@ self.addEventListener('activate', (event) => {
       // clean up those who are not listed in manifestURLs
       cache.keys().then((keys) => {
         keys.forEach((request) => {
-          if (!manifestURLs.includes(request)) {
+          if (!manifestURLs.includes(request.url)) {
             console.log(request);
             cache.delete(request);
           }
