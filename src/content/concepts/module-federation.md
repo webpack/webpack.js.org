@@ -37,7 +37,7 @@ A container is created through a container entry, which exposes asynchronous acc
 
 Step 1 will be done during the chunk loading. Step 2 will be done during the module evaluation interleaved with other (local and remote) modules. This way, evaluation order is unaffected by converting a module from local to remote or the other way around.
 
-It is possible to nest a container. Containers can use modules from other containers. Circular dependencies between container are also possible.
+It is possible to nest a container. Containers can use modules from other containers. Circular dependencies between containers are also possible.
 
 ### Overriding
 
