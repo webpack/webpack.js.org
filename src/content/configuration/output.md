@@ -732,6 +732,24 @@ These options assign the return value of the entry point (e.g. whatever the entr
 
     Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
 
+- `libraryTarget: 'assign-properties'` – Copy the return value to an object if it exists, otherwise create it before copy:
+
+    ```js
+    // create an object if it doesn't exist
+    MyLibrary = typeof MyLibrary === 'undefined' ? {} : MyLibrary;
+    // then copy the return value to MyLibrary
+    // just like what Object.assign does
+
+    // e.g., you define a `hello` function in your entry as follow
+    export function hello(name) {
+      console.log(`Hello ${name}`);
+    }
+
+    // In another script running MyLibrary
+    // you can run `hello` function like so
+    MyLibrary.hello('World');
+    ```
+
 W> An empty string for [`output.library`](#outputlibrary) is invalid, make sure you specify a valid identifier that could be assigned.
 
 
