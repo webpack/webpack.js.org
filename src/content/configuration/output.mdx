@@ -732,15 +732,15 @@ These options assign the return value of the entry point (e.g. whatever the entr
 
     Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
 
-- `libraryTarget: 'assign-properties'` – Copy the return value to an object if it exists, otherwise create it before copy:
+- `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' /> – Copy the return value to a target object if it exists, otherwise create the target object first:
 
     ```js
-    // create an object if it doesn't exist
+    // create the target object if it doesn't exist
     MyLibrary = typeof MyLibrary === 'undefined' ? {} : MyLibrary;
     // then copy the return value to MyLibrary
     // just like what Object.assign does
 
-    // e.g., you define a `hello` function in your entry as follow
+    // for instance, you export a `hello` function in your entry as follow
     export function hello(name) {
       console.log(`Hello ${name}`);
     }
