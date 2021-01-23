@@ -108,7 +108,7 @@ class Page extends Component {
         <PageLinks page={rest} />
 
         <Markdown>
-          <h1>{title} will have stale caches then +1</h1>
+          <h1>{title} 189 items in cache</h1>
 
           {contentRender}
 
