@@ -1,13 +1,16 @@
 import { cacheNames } from 'workbox-core';
 import { registerRoute } from 'workbox-routing';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
-import { NetworkFirst, StaleWhileRevalidate, NetworkOnly } from 'workbox-strategies';
+import {
+  NetworkFirst,
+  StaleWhileRevalidate,
+  NetworkOnly,
+} from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { setCatchHandler, setDefaultHandler } from 'workbox-routing';
 import ssgManifest from '../dist/ssg-manifest.json';
 
 const cacheName = cacheNames.runtime;
-console.log(cacheNames.precache);
 
 const manifest = self.__WB_MANIFEST;
 const otherManifest = [
@@ -29,10 +32,19 @@ self.addEventListener('install', (event) => {
   );
 });
 
-self.addEventListener('activate', () => {
-  // TODO clean up old caches
-  // - [ ] clean up workbox precached data
+self.addEventListener('activate', (event) => {
+  // - [x] clean up workbox precached data
   // - [ ] clean up outdated runtime cache
+
+  // TODO to be removed after maybe two months?
+  // i.e., 2021-03-23
+  event.waitUntil(
+    caches.delete(cacheNames.precache).then((result) => {
+      if (result) {
+        console.log('Precached data removed');
+      }
+    })
+  );
 });
 
 registerRoute(
