@@ -54,7 +54,6 @@ self.addEventListener('activate', (event) => {
       cache.keys().then((keys) => {
         keys.forEach((request) => {
           if (!manifestURLs.includes(request.url)) {
-            console.log(request);
             cache.delete(request);
           }
         });
