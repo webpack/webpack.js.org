@@ -7,6 +7,7 @@ import { setCatchHandler, setDefaultHandler } from 'workbox-routing';
 import ssgManifest from '../dist/ssg-manifest.json';
 
 const cacheName = cacheNames.runtime;
+console.log(cacheNames.precache);
 
 const manifest = self.__WB_MANIFEST;
 const otherManifest = [
