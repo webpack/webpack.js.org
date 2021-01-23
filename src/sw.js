@@ -100,6 +100,9 @@ setCatchHandler(({ event }) => {
   }
 });
 
+// TODO remove this in the future
+// as we are using NetworkFirst strategy now
+// TODO remove NotifyBox as well
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
