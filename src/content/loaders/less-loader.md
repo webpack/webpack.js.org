@@ -35,7 +35,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         loader: "less-loader", // 将 Less 文件编译为 CSS 文件
       },
     ],
@@ -52,6 +52,7 @@ module.exports = {
 |    **[`lessOptions`](#lessoptions)**    | `{Object\|Function}` | `{ relativeUrls: true }` | Less 的可选项。                                |
 |     **[`additionalData`](#additionaldata)**     | `{String\|Function}` |       `undefined`        | 在入口文件起始或末尾添加 Less 代码。  |
 |      **[`sourceMap`](#sourcemap)**      |     `{Boolean}`      |    `compiler.devtool`    | 是否生成 source map。       |
+| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |          `true`          | 是否启用默认的 webpack importer。         |
 | **[`implementation`](#implementation)** |      `{Object}`      |          `less`          | 配置 Less 使用的实现库                |
 
 ### `lessOptions` {#lessoptions}
@@ -72,7 +73,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           {
             loader: "style-loader",
@@ -104,7 +105,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           "style-loader",
           "css-loader",
@@ -154,7 +155,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           "style-loader",
           "css-loader",
@@ -180,7 +181,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           "style-loader",
           "css-loader",
@@ -214,7 +215,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           "style-loader",
           "css-loader",
@@ -310,6 +311,40 @@ module.exports = {
 };
 ```
 
+### `implementation` {#implementation}
+
+类型：`Object`
+
+> ⚠ less-loader 已兼容 Less 3 和 Less 4。
+
+特殊的 `implementation` 选项决定使用 Less 的哪个实现。重载本地安装的 `less` 的 `peerDependency` 版本。
+
+**此选项只对下游的工具作者有效，以便于 Less 3 到 Less 4 的过渡。**
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.less$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              implementation: require("less"),
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
 ## 示例 {#examples}
 
 ### 常规用法 {#normal-usage}
@@ -323,7 +358,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           {
             loader: "style-loader", // 从 JS 中创建样式节点
@@ -355,7 +390,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           "style-loader",
           {
@@ -408,7 +443,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           {
             loader: "style-loader",

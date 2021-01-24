@@ -576,6 +576,37 @@ module.exports = {
 };
 ```
 
+### `implementation` {#implementation}
+
+类型：`Function`
+
+特殊的 `implementation` 选项决定使用 PostCSS 哪个实现。重载本地安装的 `postcss` 的 `peerDependency` 版本。
+
+**此选项只对下游的工具作者有效，以便于 PostCSS 7 到 PostCSS 8 的过渡。**
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          {
+            loader: "postcss-loader",
+            options: { implementation: require("postcss") },
+          },
+          { loader: "sass-loader" },
+        ],
+      },
+    ],
+  },
+};
+```
+
 ## 例子 {#examples}
 
 ### SugarSS {#sugarss}
