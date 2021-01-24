@@ -7,21 +7,21 @@ contributors:
   - EugeneHlushko
 ---
 
-The [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) simplifies creation of HTML files to serve your webpack bundles. This is especially useful for webpack bundles that include a hash in the filename which changes every compilation. You can either let the plugin generate an HTML file for you, supply your own template using [lodash templates](https://lodash.com/docs#template), or use your own [loader](/loaders).
+[`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) 简化了 HTML 文件的创建，以便为你的 webpack 包提供服务。这对于那些文件名中包含哈希值，并且哈希值会随着每次编译而改变的 webpack 包特别有用。你可以让该插件为你生成一个 HTML 文件，使用 [lodash 模板](https://lodash.com/docs#template)提供模板，或者使用你自己的 [loader](/loaders)。
 
 
-## Installation {#installation}
+## 安装 {#installation}
 
 ``` bash
 npm install --save-dev html-webpack-plugin
 ```
 
 
-## Basic Usage {#basic-usage}
+## 基本用法 {#basic-usage}
 
-The plugin will generate an HTML5 file for you that includes all your webpack
-bundles in the body using `script` tags. Just add the plugin to your webpack
-configuration as follows:
+该插件将为你生成一个 HTML5 文件，
+在 body 中使用 `script` 标签引入你所有 webpack 生成的 bundle。
+只需添加该插件到你的 webpack 配置中，如下所示：
 
 ```javascript
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -37,7 +37,7 @@ module.exports = {
 };
 ```
 
-This will generate a file `dist/index.html` containing the following:
+这将会生成一个包含以下内容的 `dist/index.html` 文件：
 
 ```html
 <!DOCTYPE html>
@@ -52,16 +52,16 @@ This will generate a file `dist/index.html` containing the following:
 </html>
 ```
 
-If you have multiple webpack entry points, they will all be included with `<script>` tags in the generated HTML.
+如果你有多个 webpack 入口，他们都会在已生成 HTML 文件中的 `<script>` 标签内引入。
 
-If you have any CSS assets in webpack's output (for example, CSS extracted with the [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/)) then these will be included with `<link>` tags in the `<head>` element of generated HTML.
-
-
-## Configuration {#configuration}
-
-For all configuration options, please see the [plugin documentation](https://github.com/jantimon/html-webpack-plugin#options).
+如果在 webpack 的输出中有任何 CSS 资源（例如，使用 [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) 提取的 CSS），那么这些资源也会在 HTML 文件 `<head>` 元素中的 `<link>` 标签内引入。
 
 
-## Third party addons {#third-party-addons}
+## 配置 {#configuration}
 
-The plugin supports addons. For a list see the [documentation](https://github.com/jantimon/html-webpack-plugin#plugins).
+获取所有的配置选项，请浏览[插件文档](https://github.com/jantimon/html-webpack-plugin#options)。
+
+
+## 第三方插件 {#third-party-addons}
+
+该插件支持第三方插件。详细列表参阅[文档](https://github.com/jantimon/html-webpack-plugin#plugins)。
