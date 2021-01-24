@@ -63,7 +63,7 @@ module.exports = {
 };
 ```
 
-## `module.parser`
+## module.parser
 
 <Badge text='5.12.0+' />
 
@@ -105,6 +105,49 @@ module.exports = {
     }
   }
 };
+```
+
+
+### module.parser.javascript
+
+Configure options for JavaScript parser.
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      javascript: {
+        // ...
+        commonjsMagicComments: true,
+      },
+    },
+  },
+};
+```
+
+#### module.parser.javascript.commonjsMagicComments
+
+Enable [magic comments](/api/module-methods/#magic-comments) support for CommonJS.
+
+- Type: `boolean`
+- Available: 5.17.0+
+- Example:
+    ```js
+    module.exports = {
+      module: {
+        parser: {
+          javascript: {
+            commonjsMagicComments: true,
+          },
+        }
+      },
+    };
+    ```
+
+Note that only `webpackIgnore` comment is supported at the moment:
+
+```js
+const x = require(/* webpackIgnore: true */ 'x');
 ```
 
 ## `module.noParse`
