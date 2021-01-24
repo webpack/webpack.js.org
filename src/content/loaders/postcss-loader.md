@@ -576,16 +576,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## 例子 {#examples}
-=======
-### `implementation`
+### `implementation` {#implementation}
 
-Type: `Function`
+类型：`Function`
 
-The special `implementation` option determines which implementation of PostCSS to use. Overrides the locally installed `peerDependency` version of `postcss`.
+特殊的 `implementation` 选项决定使用 PostCSS 哪个实现。重载本地安装的 `postcss` 的 `peerDependency` 版本。
 
-**This option is only really useful for downstream tooling authors to ease the PostCSS 7-to-8 transition.**
+**此选项只对下游的工具作者有效，以便于 PostCSS 7 到 PostCSS 8 的过渡。**
 
 **webpack.config.js**
 
@@ -610,8 +607,7 @@ module.exports = {
 };
 ```
 
-## Examples
->>>>>>> e28e1b45121f38adaf8578995d024c73ecbf673f
+## 例子 {#examples}
 
 ### SugarSS {#sugarss}
 
