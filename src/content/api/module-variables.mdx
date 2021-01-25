@@ -189,14 +189,11 @@ __resourceQuery === '?test';
 
 - 可以从嵌套的 exports 中得到相关信息: 例如 `__webpack_exports_info__.<exportName>.<exportName>.<exportName>.used`
 
-<<<<<<< HEAD:src/content/api/module-variables.md
-### `DEBUG`  (webpack 特有变量) {#debug--webpack-specific}
-=======
-### `__webpack_is_included__` (webpack-specific)
+### `__webpack_is_included__` (webpack-specific) {#webpack-is-included}
 
 <Badge text='5.16.0+' />
 
-Test whether or not the given module is bundled by webpack.
+测试给定的模块是否被 webpack 打包。
 
 ```js
 if (__webpack_is_included__('./module-a.js')) {
@@ -204,7 +201,6 @@ if (__webpack_is_included__('./module-a.js')) {
 }
 ```
 
-### `DEBUG`  (webpack-specific)
->>>>>>> 5c00973b146f353548380643e6555bfb847079bd:src/content/api/module-variables.mdx
+### `DEBUG`  (webpack 特有变量) {#debug--webpack-specific}
 
 等同于 `debug` 配置选项。

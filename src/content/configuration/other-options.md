@@ -387,11 +387,7 @@ T> 与 `parallelism: 1` 混用以达到更好的结果。
 
 `string`
 
-<<<<<<< HEAD
 开启这个选项可以生成一个 JSON 文件，其中含有 webpack 的 "records" 记录 - 即「用于存储跨多次构建(across multiple builds)的模块标识符」的数据片段。可以使用此文件来跟踪在每次构建之间的模块变化。只要简单的设置一下路径,就可以生成这个 JSON 文件：
-=======
-Use this option to generate a JSON file containing webpack "records" – pieces of data used to store module identifiers across multiple builds. You can use this file to track how modules change between builds. To generate one, simply specify a location:
->>>>>>> 5c00973b146f353548380643e6555bfb847079bd
 
 __webpack.config.js__
 
