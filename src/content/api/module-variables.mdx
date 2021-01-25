@@ -12,7 +12,6 @@ contributors:
   - wizardofhogwarts
   - anikethsaha
   - chenxsan
-
 related:
   - title: CommonJS
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -189,6 +188,18 @@ __resourceQuery === '?test';
     - `undefined` 当没有可用信息时
 
 - 可以从嵌套的 exports 中得到相关信息: 例如 `__webpack_exports_info__.<exportName>.<exportName>.<exportName>.used`
+
+### `__webpack_is_included__` (webpack-specific) {#webpack-is-included}
+
+<Badge text='5.16.0+' />
+
+测试给定的模块是否被 webpack 打包。
+
+```js
+if (__webpack_is_included__('./module-a.js')) {
+  // do something
+}
+```
 
 ### `DEBUG`  (webpack 特有变量) {#debug--webpack-specific}
 

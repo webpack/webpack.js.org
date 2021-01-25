@@ -24,7 +24,7 @@ CLI 只是用于通过配置文件和一些标志（例如`--env`）来启动进
 ## 模块 {#module}
 
 使用 webpack 处理模块时，
-最重要的是理解不同的模块语法 --
+最重要的是理解不同的模块语法 -
 特别是受支持的[方法](/api/module-methods)和[变量](/api/module-variables)。
 
 [了解更多关于模块的知识！](/api/module-methods)
