@@ -1,7 +1,7 @@
 ---
 title: Resolvers
 group: Plugins
-sort: 13
+sort: 15
 contributors:
   - EugeneHlushko
   - chenxsan
