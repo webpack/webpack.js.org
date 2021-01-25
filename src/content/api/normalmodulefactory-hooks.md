@@ -25,81 +25,81 @@ As with the `compiler`, `tapAsync` and `tapPromise` may also be available
 depending on the type of hook.
 
 
-### `beforeResolve`
+### beforeResolve
 
 `AsyncSeriesBailHook`
 
-Fired when a new dependency request is encountered. A dependency can be ignored by returning `false`. Otherwise, it should return undefined to proceed.
+Called when a new dependency request is encountered. A dependency can be ignored by returning `false`. Otherwise, it should return `undefined` to proceed.
 
 - Callback Parameters: `ResolveData`
 
 
-### `factorize`
+### factorize
 
 `AsyncSeriesBailHook`
 
-Fired before initiating resolve. It should return undefined to proceed.
+Called before initiating resolve. It should return `undefined` to proceed.
 
 - Callback Parameters: `resolveData`
 
 
-### `resolve`
+### resolve
 
 `AsyncSeriesBailHook`
 
-Fired before the request is resolved. A dependency can be ignored by returning `false`. Returning a Module instance would finalize the process. Otherwise, it should return undefined to proceed.
+Called before the request is resolved. A dependency can be ignored by returning `false`. Returning a Module instance would finalize the process. Otherwise, it should return `undefined` to proceed.
 
 - Callback Parameters: `resolveData`
 
 
-### `resolveForScheme`
+### resolveForScheme
 
 `AsyncSeriesBailHook`
 
-Fired before a request with scheme (URI) is resolved.
+Called before a request with scheme (URI) is resolved.
 
 - Callback Parameters: `resolveData`
 
 
-### `afterResolve`
+### afterResolve
 
 `AsyncSeriesBailHook`
 
-Fired after the request is resolved.
+Called after the request is resolved.
 
 - Callback Parameters: `resolveData`
 
 
-### `createModule`
+### createModule
 
 `AsyncSeriesBailHook`
 
-Fired before a `Module` instance is created.
+Called before a `NormalModule` instance is created.
 
 - Callback Parameters: `createData` `resolveData`
 
 
-### `module`
+### module
 
 `SyncWaterfallHook`
 
-Fired after a `Module` instance is created.
+Called after a `NormalModule` instance is created.
 
 - Callback Parameters: `module` `createData` `resolveData`
 
 
-### `createParser`
+### createParser
 
 `HookMap<SyncBailHook>`
 
-Fired before a `Parser` instance is created. `parserOptions` is options in [module.parser](/configuration/module/#moduleparser) for the corresponding identifier or an empty object.
+Called before a `Parser` instance is created. `parserOptions` is options in [module.parser](/configuration/module/#moduleparser) for the corresponding identifier or an empty object.
 
 - Hook Parameters: `identifier`
 
 - Callback Parameters: `parserOptions`
 
 
-### `parser`
+### parser
 
 `HookMap<SyncHook>`
 
@@ -109,28 +109,44 @@ Fired after a `Parser` instance is created.
 
 - Callback Parameters: `parser` `parserOptions`
 
-Possible default identifiers: `javascript/auto` `javascript/dynamic` `javascript/esm` `json` `webassembly/sync` `webassembly/async` `asset`
+Possible default identifiers: 
+
+1. `javascript/auto`
+2. `javascript/dynamic`
+3. `javascript/esm`
+4. `json`
+5. `webassembly/sync`
+6. `webassembly/async`
+7. `asset`
 
 
-### `createGenerator`
+### createGenerator
 
 `HookMap<SyncBailHook>`
 
-Fired before a `Generator` instance is created. `generatorOptions` is options in [module.parser](/configuration/module/#modulegenerator) for the corresponding identifier or an empty object.
+Called before a `Generator` instance is created. `generatorOptions` is options in [module.parser](/configuration/module/#modulegenerator) for the corresponding identifier or an empty object.
 
 - Hook Parameters: `identifier`
 
 - Callback Parameters: `generatorOptions`
 
 
-### `generator`
+### generator
 
 `HookMap<SyncHook>`
 
-Fired after a `Generator` instance is created.
+Called after a `Generator` instance is created.
 
 - Hook Parameters: `identifier`
 
 - Callback Parameters: `generator` `generatorOptions`
 
-Possible default identifiers: `json` `webassembly/sync` `webassembly/async` `asset` `asset/source` `asset/resource` `asset/inline`
+Possible default identifiers:
+
+1. `json`
+2. `webassembly/sync`
+3. `webassembly/async`
+4. `asset`
+5. `asset/source`
+6. `asset/resource`
+7. `asset/inline`

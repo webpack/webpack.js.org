@@ -19,37 +19,37 @@ As with the `compiler`, `tapAsync` and `tapPromise` may also be available
 depending on the type of hook.
 
 
-### `beforeResolve`
+### beforeResolve
 
 `AsyncSeriesWaterfallHook`
 
-Fired before resolving the requested directory. The request can be ignored by returning `false`.
+Called before resolving the requested directory. The request can be ignored by returning `false`.
 
 - Callback Parameters: `data`
 
 
-### `afterResolve`
+### afterResolve
 
 `AsyncSeriesWaterfallHook`
 
-Fired after resolving the requested directory.
+Called after the requested directory resolved.
 
 - Callback Parameters: `data`
 
 
-### `contextModuleFiles`
+### contextModuleFiles
 
 `SyncWaterfallHook`
 
-Fired after directory contents are read. On recursive mode, fires for each sub-directory as well. Callback parameter is an array of all file and folder names in each directory.
+Called after directory contents are read. On recursive mode, calls for each sub-directory as well. Callback parameter is an array of all file and folder names in each directory.
 
 - Callback Parameters: `fileNames`
 
 
-### `alternativeRequests`
+### alternativeRequests
 
 `AsyncSeriesWaterfallHook`
 
-Fired for each file after the request is created but before filtering against regExp.
+Called for each file after the request is created but before filtering against regExp.
 
 - Callback Parameters: `request` `options`
