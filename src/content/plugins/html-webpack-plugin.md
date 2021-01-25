@@ -24,8 +24,8 @@ bundles in the body using `script` tags. Just add the plugin to your webpack
 configuration as follows:
 
 ```javascript
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: 'index.js',
