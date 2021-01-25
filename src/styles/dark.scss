@@ -1,4 +1,3 @@
-@media (prefers-color-scheme: dark) {
   body {
     background-color: #121212;
     color: #e0e0e0;
@@ -10,6 +9,9 @@
   }
   .navigation-sub {
     background-color: #222;
+  }
+  .navigation__item {
+    color: #fff;
   }
   .splash__section--dark {
     background-color: #202020;
@@ -68,8 +70,8 @@
   .sidebar-item__anchor a {
     color: #b8b8b8;
   }
-  .navigation-sub__link--active {
-    color: #dcdcdc;
+  .navigation-sub__link.navigation-sub__link--active {
+    color: #fff;
   }
   .gitter__button {
     background: #1c3b39;
@@ -116,7 +118,7 @@
       background: linear-gradient(90deg, #252525, #121212, #252525);
     }
   }
-  
+
   // Search
   .algolia-autocomplete {
     .ds-dropdown-menu [class^="ds-dataset-"] {
@@ -183,4 +185,3 @@
     .sidebar-mobile__section-header {
     border-color: #343434;
   }
-}

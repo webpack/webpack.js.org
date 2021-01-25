@@ -31,6 +31,9 @@ import Organization from '../Organization/Organization';
 import Badge from '../Badge/Badge.js';
 import {default as LinkComponent} from '../mdxComponents/Link';
 
+// Import Constants
+import { THEME, THEME_LOCAL_STORAGE_KEY } from '../../constants/theme';
+
 // Load Styling
 import '../../styles/index';
 import './Site.scss';
@@ -38,6 +41,7 @@ import './Site.scss';
 // Load Content Tree
 import Content from '../../_content.json';
 import NotifyBox from '../NotifyBox/NotifyBox';
+import { useLocalStorage } from 'react-use';
 
 Site.propTypes = {
   location: PropTypes.shape({
@@ -50,6 +54,21 @@ function Site(props) {
   const [list, setList] = useState([]);
   const [wb, setWb] = useState(undefined);
   const [loading, setLoading] = useState(false);
+  const [theme, setTheme] = useLocalStorage(
+    THEME_LOCAL_STORAGE_KEY,
+    THEME.LIGHT
+  );
+
+  const applyTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+  };
+  useEffect(() => {
+    applyTheme(theme);
+  }, [theme]);
+
+  const switchTheme = (theme) => {
+    setTheme(theme);
+  };
 
   const listTransitions = useTransition(list, {
     config: config.gentle,
@@ -173,6 +192,8 @@ function Site(props) {
           <Navigation
             pathname={location.pathname}
             toggleSidebar={_toggleSidebar}
+            theme={theme}
+            switchTheme={switchTheme}
             links={[
               {
                 content: '中文文档',

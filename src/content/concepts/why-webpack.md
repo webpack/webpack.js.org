@@ -33,7 +33,11 @@ Node.js 是一个 JavaScript 运行时，可以在浏览器环境之外的计算
 CommonJS 问世并引入了 `require` 机制，它允许你在当前文件中加载和使用某个模块。导入需要的每个模块，这一开箱即用的功能，帮助我们解决了作用域问题。
 
 
+<<<<<<< HEAD
 ## npm + Node.js + modules - 大规模分发模块 {#npm--nodejs--modules----mass-distribution}
+=======
+## npm + Node.js + modules – mass distribution
+>>>>>>> 5c00973b146f353548380643e6555bfb847079bd
 
 JavaScript 已经成为一种语言、一个平台和一种快速开发和创建快速应用程序的方式，接管了整个 JavaScript 世界。
 

@@ -37,7 +37,11 @@ chunk 的加载操作通常是通过调用 `import()` 实现的，但也支持�
 
 步骤 1 将在 chunk 加载期间完成。步骤 2 将在与其他（本地和远程）的模块交错执行期间完成。这样一来，执行顺序不受模块从本地转换为远程或从远程转为本地的影响。
 
+<<<<<<< HEAD
 容器可以嵌套使用，容器可以使用来自其他容器的模块。容器之间也可以循环依赖。
+=======
+It is possible to nest a container. Containers can use modules from other containers. Circular dependencies between containers are also possible.
+>>>>>>> 5c00973b146f353548380643e6555bfb847079bd
 
 ### 重载（Overriding） {#overriding}
 

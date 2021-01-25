@@ -228,6 +228,12 @@ T> 避免在生产中使用 `inline-***` 和 `eval-***`，因为它们会增加 
 
 ## CLI 替代选项 {#cli-alternatives}
 
+<<<<<<< HEAD
 以上所述也可以通过命令行实现。例如，`--optimize-minimize` 标记将在幕后引用 `TerserPlugin`。和以上描述的 `DefinePlugin` 实例相同，`--define process.env.NODE_ENV="'production'"` 也会做同样的事情。而且，`webpack -p` 将自动地配置上述这两个标记，从而调用需要引入的插件。
 
 虽然这种简写方式很好，但通常我们建议只使用配置方式，因为在这两种方式中，配置方式能够更准确地理解现在正在做的事情。配置方式还为可以让你更加细微地控制这两个插件中的其他选项。
+=======
+Many of the options described above can be set as command line arguments. For example, [`optimization.minimize`](/configuration/optimization/#optimizationminimize) can be set with `--optimization-minimize`, and [`mode`](/configuration/mode/) can be set with `--mode`. Run `npx webpack --help=verbose` for a full list of CLI arguments.
+
+While these shorthand methods are useful, we recommend setting these options in a webpack configuration file for more configurability.
+>>>>>>> 5c00973b146f353548380643e6555bfb847079bd
