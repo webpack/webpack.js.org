@@ -33,7 +33,7 @@ module.exports = {
 T> In [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) watch mode is enabled by default.
 
 
-## `watchOptions`
+## watchOptions
 
 `object`
 
@@ -52,7 +52,7 @@ module.exports = {
 ```
 
 
-## `watchOptions.aggregateTimeout`
+### watchOptions.aggregateTimeout
 
 `number = 200`
 
@@ -68,7 +68,7 @@ module.exports = {
 ```
 
 
-## `watchOptions.ignored`
+### watchOptions.ignored
 
 `RegExp` `string` `[string]`
 
@@ -114,7 +114,7 @@ module.exports = {
 T> If you use `require.context`, webpack will watch your entire directory. You will need to ignore files and/or directories so that unwanted changes will not trigger a rebuild.
 
 
-## `watchOptions.poll`
+### watchOptions.poll
 
 `boolean = false` `number`
 
@@ -133,7 +133,7 @@ module.exports = {
 
 T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
 
-## watchOptions.followSymlinks
+### watchOptions.followSymlinks
 
 Resolve symlinks and watch symlink and real file. This is usually not needed as webpack already resolves symlinks with [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks).
 
