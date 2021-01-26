@@ -133,6 +133,22 @@ module.exports = {
 
 T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
 
+## watchOptions.followSymlinks
+
+Resolve symlinks and watch symlink and real file. This is usually not needed as webpack already resolves symlinks with [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks).
+
+- Type: `boolean`
+- Example:
+
+    ```js
+    module.exports = {
+      //...
+      watchOptions: {
+        followSymlinks: true
+      }
+    };
+    ```
+
 
 ## Troubleshooting
 
