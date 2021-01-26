@@ -68,7 +68,7 @@ module.exports = {
 ```
 
 
-## `watchOptions.ignored`
+## watchOptions.ignored
 
 `RegExp` `string` `[string]`
 
@@ -93,7 +93,7 @@ __webpack.config.js__
 module.exports = {
   //...
   watchOptions: {
-    ignored: 'node_modules/**'
+    ignored: '**/node_modules'
   }
 };
 ```
@@ -106,10 +106,26 @@ __webpack.config.js__
 module.exports = {
   //...
   watchOptions: {
-    ignored: ['files/**/*.js', 'node_modules/**']
+    ignored: ['**/files/**/*.js', '**/node_modules']
   }
 };
 ```
+
+In addition, you can specify an absolute path:
+
+```js
+const path = require('path');
+module.exports = {
+  //...
+  watchOptions: {
+    ignored: [
+      path.posix.resolve(__dirname, './ignored-dir')
+    ]
+  }
+};
+```
+
+When using glob patterns, we convert them to regular expressions with [`glob-to-regexp`](https://github.com/fitzgen/glob-to-regexp), so make sure to get yourself familiar with it before you use glob patterns for `watchOptions.ignored`.
 
 T> If you use `require.context`, webpack will watch your entire directory. You will need to ignore files and/or directories so that unwanted changes will not trigger a rebuild.
 
