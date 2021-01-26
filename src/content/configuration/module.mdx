@@ -466,6 +466,7 @@ module.exports = {
           browserify: false, // disable special handling of Browserify bundles
           requireJs: false, // disable requirejs.*
           node: false, // disable __dirname, __filename, module, require.extensions, require.main, etc.
+          commonjsMagicComments: false, // disable magic comments support for CommonJS
           node: {...}, // reconfigure [node](/configuration/node) layer on module level
           worker: ["default from web-worker", "..."] // Customize the WebWorker handling for javascript files, "..." refers to the defaults.
         }
