@@ -11,6 +11,9 @@ import Dropdown from '../Dropdown/Dropdown';
 // Import helpers
 import isClient from '../../utilities/is-client';
 
+// Import constants
+import { THEME } from '../../constants/theme';
+
 // Load Styling
 import 'docsearch.js/dist/cdn/docsearch.css';
 import './Navigation.scss';
@@ -21,15 +24,19 @@ import TwitterIcon from '../../styles/icons/twitter.svg';
 import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
 
 const onSearch = () => {};
+const { DARK, LIGHT } = THEME;
 
 export default class Navigation extends Component {
   static propTypes = {
     pathname: PropTypes.string,
     links: PropTypes.array,
-    toggleSidebar: PropTypes.func
-  }
+    toggleSidebar: PropTypes.func,
+    theme: PropTypes.string,
+    switchTheme: PropTypes.func,
+  };
   render() {
-    let { pathname, links, toggleSidebar } = this.props;
+    const { pathname, links, toggleSidebar, theme, switchTheme } = this.props;
+    const themeSwitcher = () => switchTheme(theme === DARK ? LIGHT : DARK);
 
     return (
       <Banner
@@ -67,7 +74,22 @@ export default class Navigation extends Component {
                   { lang: 'zh', title: '中文', url: 'https://webpack.docschina.org/' }
                 ]} />
             )
-          }
+          },
+          {
+            className: 'navigation__item--icon',
+            content: (
+              <button
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
+                onClick={themeSwitcher}
+              >
+                {theme === DARK ? '🌙' : '☀️'}
+              </button>
+            ),
+          },
         ]}
         link={ Link }
         onMenuClick={ toggleSidebar } />

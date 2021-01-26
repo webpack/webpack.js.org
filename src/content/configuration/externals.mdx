@@ -17,6 +17,7 @@ contributors:
   - chenxsan
   - pranshuchittora
   - kinetifex
+  - anshumanv
 ---
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
@@ -144,18 +145,20 @@ module.exports = {
 
 This syntax is used to describe all the possible ways that an external library can be made available. `lodash` here is available as `lodash` under AMD and CommonJS module systems but available as `_` in a global variable form. `subtract` here is available via the property `subtract` under the global `math` object (e.g. `window['math']['subtract']`).
 
-
 ### function
 
-`function ({ context, request }, callback)`
+- `function ({ context, request, contextInfo, getResolve }, callback)`
+- `function ({ context, request, contextInfo, getResolve }) => promise` <Badge text='5.15.0+' />
 
 It might be useful to define your own function to control the behavior of what you want to externalize from webpack. [webpack-node-externals](https://www.npmjs.com/package/webpack-node-externals), for example, excludes all modules from the `node_modules` directory and provides options to whitelist packages.
 
-The function receives two arguments:
+Here're arguments the function can receive:
 
 - `ctx` (`object`): Object containing details of the file.
     - `ctx.context` (`string`): The directory of the file which contains the import.
     - `ctx.request` (`string`): The import path being requested.
+    - `ctx.contextInfo` (`string`): Contains information about the issuer (e.g. the layer).
+    - `ctx.getResolve` <Badge text='5.15.0+' />: Get a resolve function with the current resolver options.
 - `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
 
 The callback function takes three arguments:
@@ -298,6 +301,25 @@ W> [Default type](/configuration/externals/#externalstype) will be used if you s
 
 For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
 
+### `byLayer`
+
+`function` `object`
+
+Specify externals by layer.
+
+__webpack.config.js__
+
+```javascript
+module.exports = {
+  externals : {
+    byLayer : {
+      layer: {
+        external1: 'var 43'
+      }
+    }
+  }
+};
+```
 
 ## `externalsType`
 

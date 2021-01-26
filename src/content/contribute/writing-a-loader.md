@@ -68,7 +68,7 @@ T> You can use [`webpack-defaults` package](https://github.com/webpack-contrib/w
 
 ## Simple Usage
 
-When a single loader is applied to the resource, the loader is called with only one parameter -- a string containing the content of the resource file.
+When a single loader is applied to the resource, the loader is called with only one parameter – a string containing the content of the resource file.
 
 Synchronous loaders can simply `return` a single value representing the transformed module. In more complex cases, the loader can return any number of values by using the `this.callback(err, values...)` function. Errors are either passed to the `this.callback` function or thrown in a sync loader.
 
@@ -77,7 +77,7 @@ The loader is expected to give back one or two values. The first value is a resu
 
 ## Complex Usage
 
-When multiple loaders are chained, it is important to remember that they are executed in reverse order -- either right to left or bottom to top depending on array format.
+When multiple loaders are chained, it is important to remember that they are executed in reverse order – either right to left or bottom to top depending on array format.
 
 - The last loader, called first, will be passed the contents of the raw resource.
 - The first loader, called last, is expected to return JavaScript and an optional source map.
@@ -351,7 +351,7 @@ export default (fixture, options = {}) => {
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) reject(err);
-      if (stats.hasErrors()) reject(new Error(stats.toJson().errors));
+      if (stats.hasErrors()) reject(stats.toJson().errors);
 
       resolve(stats);
     });

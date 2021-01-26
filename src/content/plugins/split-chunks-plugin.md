@@ -16,6 +16,7 @@ contributors:
   - chenxsan
   - rohrlaf
   - jamesgeorge007
+  - anshumanv
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
@@ -187,6 +188,15 @@ Size threshold at which splitting is enforced and other restrictions (minRemaini
 `splitChunks.minRemainingSize` option was introduced in webpack 5 to avoid zero sized modules by ensuring that the minimum size of the chunk which remains after splitting is above a limit. Defaults to `0` in ['development' mode](/configuration/mode/#mode-development). For other cases `splitChunks.minRemainingSize` defaults to the value of `splitChunks.minSize` so it doesn't need to be specified manually except for the rare cases where deep control is required.
 
 W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remaining.
+
+
+### `splitChunks.layer`
+
+#### `splitChunks.cacheGroups.{cacheGroup}.layer`
+
+`RegExp` `string` `function`
+
+Assign modules to a cache group by module layer.
 
 ### `splitChunks.maxSize`
 
