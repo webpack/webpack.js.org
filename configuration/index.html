@@ -81,7 +81,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
               <span class="token comment">// ...</span>
             <span class="token punctuation">}</span>
           <span class="token punctuation">}</span>
-        <span class="token punctuation">]</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
         <span class="code-details-summary-span"><a href="#">type</a><span class="token operator">:</span> <span class="token string">&quot;javascript/auto&quot;</span><span class="token punctuation">,</span></span>
         <span class="token comment">// specifies the module type</span>
         <span class="code-details-summary-span"><a href="#"></a><span class="token comment">/* Advanced actions (click to show) */</span></span>
@@ -190,7 +190,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 
     <span class="code-details-summary-span"><a href="/configuration/stats/"></a><span class="token comment">/* Advanced optimization settings (click to show) */</span></span>
 
-    children<span class="token operator">:</span> <span class="token boolean">true</span>
+    children<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token comment">// show stats for child compilations</span>
 
     logging<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -200,7 +200,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     loggingTrace<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token comment">// show stack traces for warnings and errors in logging output</span>
 
-    warnings<span class="token operator">:</span> <span class="token boolean">true</span>
+    warnings<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token comment">// show warnings</span>
 
     errors<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -247,7 +247,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token comment">// Allow to output ESM</span>
     topLevelAwait<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token comment">// Allow to use await on module evaluation (Proposal)</span>
-  <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token comment">// ...</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -291,7 +291,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="code-details-summary-span"><a href="#"></a><span class="token comment">/* Advanced configuration (click to show) */</span></span>
   <span class="code-details-summary-span"><a href="#"></a><span class="token comment">/* Advanced caching configuration (click to show) */</span></span>
-  <span class="code-details-summary-span"><a href="#"></a><span class="token comment">/* Advanced build configuration (click to show) */</span></span></code></pre><aside class="warning"><h6 class="warning__prefix">warning</h6><p>webpack applies configuration defaults after <a href="/contribute/writing-a-plugin/#configuration-defaults">plugins defaults</a> are applied.</p></aside><p>Use <a href="https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli">webpack-cli&#x27;s <code>init</code> command</a> to rapidly generate webpack configuration file for your project requirements, it will ask you a couple of questions before creating a configuration file.</p><pre><code>npx webpack-cli init</code></pre><p>npx might prompt you to install <code>@webpack-cli/init</code> if it is not yet installed in the project or globally. You might also get additional packages installed to your project depending on the choices you&#x27;ve made during the configuration generation.</p><pre><code>npx webpack-cli init
+  <span class="code-details-summary-span"><a href="#"></a><span class="token comment">/* Advanced build configuration (click to show) */</span></span>
+<span class="token punctuation">}</span></code></pre><aside class="warning"><h6 class="warning__prefix">warning</h6><p>webpack applies configuration defaults after <a href="/contribute/writing-a-plugin/#configuration-defaults">plugins defaults</a> are applied.</p></aside><p>Use <a href="https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli">webpack-cli&#x27;s <code>init</code> command</a> to rapidly generate webpack configuration file for your project requirements, it will ask you a couple of questions before creating a configuration file.</p><pre><code>npx webpack-cli init</code></pre><p>npx might prompt you to install <code>@webpack-cli/init</code> if it is not yet installed in the project or globally. You might also get additional packages installed to your project depending on the choices you&#x27;ve made during the configuration generation.</p><pre><code>npx webpack-cli init
 
 ℹ INFO For <span class="token function">more</span> information and a detailed description of each question, have a <span class="token function">look</span> at https://github.com/webpack/webpack-cli/blob/master/INIT.md
 ℹ INFO Alternatively, run <span class="token variable"><span class="token variable">`</span>webpack<span class="token punctuation">(</span>-cli<span class="token punctuation">)</span> --help<span class="token variable">`</span></span> <span class="token keyword">for</span> usage info.

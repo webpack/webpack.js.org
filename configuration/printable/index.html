@@ -303,7 +303,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
               <span class="token comment">// ...</span>
             <span class="token punctuation">}</span>
           <span class="token punctuation">}</span>
-        <span class="token punctuation">]</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
         <span class="token keyword" componentname="moduleType" url="#"><span class="token operator">&#x3C;</span>moduleType <span class="token string">"#"</span><span class="token operator">></span>
           <span class="token tag"><span class="token operator">&#x3C;</span><span class="token keyword">default</span><span class="token operator">></span></span>
             type<span class="token operator">:</span> <span class="token string">"javascript/auto"</span><span class="token punctuation">,</span>
@@ -779,7 +779,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token comment">// show information why optimizations bailed out for modules</span>
     <span class="token operator">&#x3C;</span><span class="token operator">/</span>advancedStatsOptimization<span class="token operator">></span></span>
 
-    children<span class="token operator">:</span> <span class="token boolean">true</span>
+    children<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token comment">// show stats for child compilations</span>
 
     logging<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -789,7 +789,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     loggingTrace<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token comment">// show stack traces for warnings and errors in logging output</span>
 
-    warnings<span class="token operator">:</span> <span class="token boolean">true</span>
+    warnings<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token comment">// show warnings</span>
 
     errors<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -836,7 +836,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token comment">// Allow to output ESM</span>
     topLevelAwait<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token comment">// Allow to use await on module evaluation (Proposal)</span>
-  <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token comment">// ...</span>
   <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1077,7 +1077,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     dependencies<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token comment">// When using an array of configs this can be used to reference other</span>
     <span class="token comment">// configs and let this config run after the other config at initial build</span>
-  <span class="token operator">&#x3C;</span><span class="token operator">/</span>advancedBuild<span class="token operator">></span></span></code></pre> <aside class="warning"><h6 class="warning__prefix">warning</h6><p>webpack applies configuration defaults after <a href="/contribute/writing-a-plugin/#configuration-defaults">plugins defaults</a> are applied.</p></aside> <p>Use <a href="https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli">webpack-cli's <code>init</code> command</a> to rapidly generate webpack configuration file for your project requirements, it will ask you a couple of questions before creating a configuration file.</p> <pre><code class="hljs language-bash">npx webpack-cli init</code></pre> <p>npx might prompt you to install <code>@webpack-cli/init</code> if it is not yet installed in the project or globally. You might also get additional packages installed to your project depending on the choices you've made during the configuration generation.</p> <pre><code class="hljs language-bash">npx webpack-cli init
+  <span class="token operator">&#x3C;</span><span class="token operator">/</span>advancedBuild<span class="token operator">></span></span>
+<span class="token punctuation">}</span></code></pre> <aside class="warning"><h6 class="warning__prefix">warning</h6><p>webpack applies configuration defaults after <a href="/contribute/writing-a-plugin/#configuration-defaults">plugins defaults</a> are applied.</p></aside> <p>Use <a href="https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli">webpack-cli's <code>init</code> command</a> to rapidly generate webpack configuration file for your project requirements, it will ask you a couple of questions before creating a configuration file.</p> <pre><code class="hljs language-bash">npx webpack-cli init</code></pre> <p>npx might prompt you to install <code>@webpack-cli/init</code> if it is not yet installed in the project or globally. You might also get additional packages installed to your project depending on the choices you've made during the configuration generation.</p> <pre><code class="hljs language-bash">npx webpack-cli init
 
 ℹ INFO For <span class="token function">more</span> information and a detailed description of each question, have a <span class="token function">look</span> at https://github.com/webpack/webpack-cli/blob/master/INIT.md
 ℹ INFO Alternatively, run <span class="token variable"><span class="token variable">`</span>webpack<span class="token punctuation">(</span>-cli<span class="token punctuation">)</span> --help<span class="token variable">`</span></span> <span class="token keyword">for</span> usage info.
