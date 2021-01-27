@@ -79,6 +79,9 @@
         <loc>https://webpack.js.org/api/compiler-hooks</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/api/contextmodulefactory-hooks</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/api/hot-module-replacement</loc>
     </url>
     <url>
@@ -95,6 +98,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/api/node</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/api/normalmodulefactory-hooks</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/parser</loc>
