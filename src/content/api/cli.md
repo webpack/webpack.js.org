@@ -37,18 +37,19 @@ Read the [installation guide](/guides/installation) if you don't already have we
 ## Commands
 
 webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with
-
-| Command      | Alias          | Description                                                             |
-| ------------ | -------------- | ----------------------------------------------------------------------- |
-| `build`      | `bundle`, `b`  | Run webpack (default command, can be omitted).                          |
-| `watch`      | `--watch`, `w` | Run webpack and watch for files changes.                                |
-| `loader`     | `l`            | Scaffold a loader repository                                            |
-| `plugin`     | `p`            | Scaffold a plugin repository                                            |
-| `info`       | `i`            | Output information about your system and dependencies                   |
-| `serve`      | `s`            | Run the webpack Dev Server                                              |
-| `configtest` | `t`            | Tests webpack configuration against validation errors                   |
-| `help`       | `h`            | Display help for commands and options                                   |
-| `version`    | `v`            | Output the version of `webpack`, `webpack-cli` and `webpack-dev-server` |
+ 
+| Command      | Usage                                     | Description                                                                     |
+| ------------ | ----------------------------------------- | ------------------------------------------------------------------------------- |
+| `build`      | build|bundle|b [entries...] [options]     | Run webpack (default command, can be omitted).                                  |
+| `configtest` | configtest|t [config-path]                | Validate a webpack configuration.                                               |
+| `help`       | help|h [command] [option]                 | Display help for commands and options.                                          |
+| `info`       | info|i [options]                          | Outputs information about your system.                                          |
+| `init`       | init|c [scaffold...] [options]            | Initialize a new webpack configuration.                                         |
+| `loader`     | loader|l [output-path]                    | Scaffold a loader.                                                              |
+| `plugin`     | plugin|p [output-path]                    | Scaffold a plugin.                                                              |
+| `serve`      | serve|s [options]                         | Run the `webpack-dev-server`.                                                   |
+| `version`    | version|v [commands...]                   | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
+| `watch`      | watch|w [entries...] [options]            | Run webpack and watch for files changes.                                        |
 
 ## Flags
 
