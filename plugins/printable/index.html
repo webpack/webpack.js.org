@@ -2369,7 +2369,9 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       cacheGroups<span class="token operator">:</span> <span class="token punctuation">{</span>
         styles<span class="token operator">:</span> <span class="token punctuation">{</span>
           name<span class="token operator">:</span> <span class="token string">'styles'</span><span class="token punctuation">,</span>
-          test<span class="token operator">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
+          type<span class="token operator">:</span> <span class="token string">'css/mini-extract'</span><span class="token punctuation">,</span>
+          <span class="token comment">// For webpack@4</span>
+          <span class="token comment">// test: /\.css$/,</span>
           chunks<span class="token operator">:</span> <span class="token string">'all'</span><span class="token punctuation">,</span>
           enforce<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
