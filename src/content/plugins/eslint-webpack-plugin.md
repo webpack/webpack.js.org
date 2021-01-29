@@ -162,7 +162,7 @@ Accepts a function that will have one argument: an array of eslint messages (obj
 
 Lint only changed files, skip lint on start.
 
-#### `threads`
+### `threads`
 
 - Type: `Boolean | Number`
 - Default: `false`
