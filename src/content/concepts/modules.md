@@ -34,7 +34,7 @@ In contrast to [Node.js modules](https://nodejs.org/api/modules.html), webpack _
 
 ## Supported Module Types
 
-webpack supports to following module types natively:
+webpack supports the following module types natively:
 
 - [ECMAScript modules](/guides/ecma-script-modules)
 - CommonJS modules
