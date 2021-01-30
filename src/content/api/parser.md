@@ -1,7 +1,7 @@
 ---
 title: JavascriptParser Hooks
 group: Plugins
-sort: 11
+sort: 12
 contributors:
   - byzyk
   - DeTeam
@@ -15,7 +15,7 @@ being processed by webpack. The `parser` is yet another webpack class that
 extends `tapable` and provides a variety of `tapable` hooks that can be used by
 plugin authors to customize the parsing process.
 
-The `parser` is found within [module factories](/api/compiler-hooks/#normalmodulefactory) and therefore takes little
+The `parser` is found within [NormalModuleFactory](/api/compiler-hooks/#normalmodulefactory) and therefore takes little
 more work to access:
 
 ``` js
