@@ -5191,10 +5191,10 @@ eslint-plugin-cypress@^2.11.2:
   dependencies:
     globals "^11.12.0"
 
-eslint-plugin-markdown@^2.0.0-rc.1:
-  version "2.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-markdown/-/eslint-plugin-markdown-2.0.0-rc.1.tgz#14d25ba567eb3cd0022f4795274f886932a22460"
-  integrity sha512-nR3yM8M7v6vWn1MJ3DCrmU1A2oqRCautjSuCUwev6CiqinUSM8nDP05yeQA6SUIMnP4FjedJpTkhcyyFHkA0/A==
+eslint-plugin-markdown@^2.0.0-rc.2:
+  version "2.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-markdown/-/eslint-plugin-markdown-2.0.0-rc.2.tgz#0826da576df004f9823453fc8e66bd8cab8477d3"
+  integrity sha512-wAxyQrvO86besEKriqGteceBxRtm1IEBn+Ci5i2hwchU1PYLnLxO73NroY74JpbzinER0zDOeZQeqwiuGTmdsA==
   dependencies:
     remark-parse "^5.0.0"
     unified "^6.1.2"
