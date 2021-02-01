@@ -161,7 +161,7 @@
     "unist-util-visit": "^2.0.3",
     "webpack-pwa-manifest": "^4.3.0",
     "webpack.vote": "https://github.com/webpack/voting-app.git",
-    "workbox-window": "^6.0.2"
+    "workbox-window": "^6.1.0"
   },
   "resolutions": {
     "sitemap-static/minimist": "1.2.5",
