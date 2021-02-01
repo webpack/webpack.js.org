@@ -33,7 +33,11 @@ module.exports = {
 T> [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 和 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 里 Watch 模式默认开启。
 
 
+<<<<<<< HEAD:src/content/configuration/watch.md
 ## `watchOptions` {#watchoptions}
+=======
+## watchOptions
+>>>>>>> 03502e733043812ad25ebed56fb43b61dc7e359e:src/content/configuration/watch.mdx
 
 `object`
 
@@ -52,7 +56,11 @@ module.exports = {
 ```
 
 
+<<<<<<< HEAD:src/content/configuration/watch.md
 ## `watchOptions.aggregateTimeout` {#watchoptionsaggregatetimeout}
+=======
+### watchOptions.aggregateTimeout
+>>>>>>> 03502e733043812ad25ebed56fb43b61dc7e359e:src/content/configuration/watch.mdx
 
 `number = 200`
 
@@ -68,7 +76,11 @@ module.exports = {
 ```
 
 
+<<<<<<< HEAD:src/content/configuration/watch.md
 ## `watchOptions.ignored` {#watchoptionsignored}
+=======
+### watchOptions.ignored
+>>>>>>> 03502e733043812ad25ebed56fb43b61dc7e359e:src/content/configuration/watch.mdx
 
 `RegExp` `string` `[string]`
 
@@ -93,7 +105,7 @@ __webpack.config.js__
 module.exports = {
   //...
   watchOptions: {
-    ignored: 'node_modules/**'
+    ignored: '**/node_modules'
   }
 };
 ```
@@ -106,15 +118,38 @@ __webpack.config.js__
 module.exports = {
   //...
   watchOptions: {
-    ignored: ['files/**/*.js', 'node_modules/**']
+    ignored: ['**/files/**/*.js', '**/node_modules']
   }
 };
 ```
 
+<<<<<<< HEAD:src/content/configuration/watch.md
 T> 如果你使用 `require.context`，webpack 会观察你的整个目录。你应该忽略一些文件和/或(and/or)目录，以便那些不需要监听的文件修改，不会触发重新构建。
 
 
 ## `watchOptions.poll` {#watchoptionspoll}
+=======
+In addition, you can specify an absolute path:
+
+```js
+const path = require('path');
+module.exports = {
+  //...
+  watchOptions: {
+    ignored: [
+      path.posix.resolve(__dirname, './ignored-dir')
+    ]
+  }
+};
+```
+
+When using glob patterns, we convert them to regular expressions with [`glob-to-regexp`](https://github.com/fitzgen/glob-to-regexp), so make sure to get yourself familiar with it before you use glob patterns for `watchOptions.ignored`.
+
+T> If you use `require.context`, webpack will watch your entire directory. You will need to ignore files and/or directories so that unwanted changes will not trigger a rebuild.
+
+
+### watchOptions.poll
+>>>>>>> 03502e733043812ad25ebed56fb43b61dc7e359e:src/content/configuration/watch.mdx
 
 `boolean = false` `number`
 
@@ -132,6 +167,21 @@ module.exports = {
 ```
 
 T> 如果监听没生效，试试这个选项吧。Watch 在 NFS 和 VirtualBox 机器上不适用。
+
+### watchOptions.followSymlinks
+
+Follow symbolic links while looking for a file. This is usually not needed as webpack already resolves symlinks with [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks).
+
+- Type: `boolean`
+- Example:
+    ```js
+    module.exports = {
+      //...
+      watchOptions: {
+        followSymlinks: true
+      }
+    };
+    ```
 
 
 ## 故障排除 {#troubleshooting}

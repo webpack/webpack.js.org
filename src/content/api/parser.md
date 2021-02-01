@@ -1,7 +1,7 @@
 ---
 title: JavascriptParser Hooks
 group: Plugins
-sort: 11
+sort: 12
 contributors:
   - byzyk
   - DeTeam
@@ -14,8 +14,13 @@ contributors:
 处理过的每个模块。`parser` 也是扩展自 `tapable` 的 webpack 类
 并且提供多种 `tapable` 钩子，
 
+<<<<<<< HEAD
 以下示例中，`parser` 位于 [module factories](/api/compiler-hooks/#normalmodulefactory) 中，因此需要调用额外钩子
 来进行获取：
+=======
+The `parser` is found within [NormalModuleFactory](/api/compiler-hooks/#normalmodulefactory) and therefore takes little
+more work to access:
+>>>>>>> 03502e733043812ad25ebed56fb43b61dc7e359e
 
 ``` js
 compiler.hooks.normalModuleFactory.tap('MyPlugin', factory => {
