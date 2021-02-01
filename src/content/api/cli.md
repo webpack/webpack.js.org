@@ -36,36 +36,20 @@ related:
 
 ## 命令 {#commands}
 
-<<<<<<< HEAD
 webpack-cli 提供了许多命令来使 webpack 的工作变得简单。默认情况下，webpack 提供了以下命令：
 
-| 命令   | 别名 | 描述                                            |
-| --------- | ----- | ------------------------------------------------------ |
-| `init`    | c     | 初始化一个新的 webpack 配置                               |
-| `migrate` | m     | 将配置迁移到新版本                                        |
-| `loader`  | l     | 生成一个 loader 仓库                                     |
-| `plugin`  | p     | 生成一个 plugin 仓库                                     |
-| `info`    | i     | 输出有关系统和依赖的信息                                   |
-| `serve`   | s     | 运行 webpack Dev Server                                 |
-| `bundle`  | b     | 运行 webpack（默认指令，可忽略）                           |
-| `help`    | h     | 展示所有命令和选项的帮助                                   |
-| `version` | v     | 输出 `webpack`，`webpack-cli` 以及 `webpack-dev-server` 的版本信息 |
-=======
-webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with
- 
-| Command      | Usage                                     | Description                                                                     |
+| 命令          | 使用                                      | 描述                                                                     |
 | ------------ | ----------------------------------------- | ------------------------------------------------------------------------------- |
-| `build`      | `build\|bundle\|b [entries...] [options]` | Run webpack (default command, can be omitted).                                  |
-| `configtest` | `configtest\|t [config-path]`             | Validate a webpack configuration.                                               |
-| `help`       | `help\|h [command] [option]`              | Display help for commands and options.                                          |
-| `info`       | `info\|i [options]`                       | Outputs information about your system.                                          |
-| `init`       | `init\|c [scaffold...] [options]`         | Initialize a new webpack configuration.                                         |
-| `loader`     | `loader\|l [output-path]`                 | Scaffold a loader.                                                              |
-| `plugin`     | `plugin\|p [output-path]`                 | Scaffold a plugin.                                                              |
-| `serve`      | `serve\|s [options]`                      | Run the `webpack-dev-server`.                                                   |
-| `version`    | `version\|v [commands...]`                | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
-| `watch`      | `watch\|w [entries...] [options]`         | Run webpack and watch for files changes.                                        |
->>>>>>> 03502e733043812ad25ebed56fb43b61dc7e359e
+| `build`      | `build\|bundle\|b [entries...] [options]` | 运行 webpack（默认命令，可以被省略）。                                               |
+| `configtest` | `configtest\|t [config-path]`             | 校验 webpack 配置。                                                               |
+| `help`       | `help\|h [command] [option]`              | 展示所有命令和选项的帮助。                                                          |
+| `info`       | `info\|i [options]`                       | 输出有关系统的信息。                                                                |
+| `init`       | `init\|c [scaffold...] [options]`         | 初始化一个新的 webpack 配置。                                                       |
+| `loader`     | `loader\|l [output-path]`                 | 生成一个 loader 仓库。                                                             |
+| `plugin`     | `plugin\|p [output-path]`                 | 生成一个 plugin 仓库。                                                             |
+| `serve`      | `serve\|s [options]`                      | 运行 `webpack-dev-server`.                                                       |
+| `version`    | `version\|v [commands...]`                | 输出 `webpack`，`webpack-cli` 以及 `webpack-dev-server` 的版本信息。                |
+| `watch`      | `watch\|w [entries...] [options]`         | 运行 webpack 并监听文件变化。                                                       |
 
 ## Flags {#flags}
 

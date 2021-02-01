@@ -133,11 +133,7 @@ resolver 设置完成之后触发。
 
 `SyncHook`
 
-<<<<<<< HEAD
-`NormalModuleFactory` 创建之后调用。
-=======
-Called after a [NormalModuleFactory](/api/normalmodulefactory-hooks) is created.
->>>>>>> 03502e733043812ad25ebed56fb43b61dc7e359e
+[NormalModuleFactory](/api/normalmodulefactory-hooks) 创建之后调用。
 
 - 回调参数：`normalModuleFactory`
 
@@ -146,11 +142,7 @@ Called after a [NormalModuleFactory](/api/normalmodulefactory-hooks) is created.
 
 `SyncHook`
 
-<<<<<<< HEAD
-`ContextModuleFactory` 创建之后调用。
-=======
-Runs a plugin after a [ContextModuleFactory](/api/contextmodulefactory-hooks) is created.
->>>>>>> 03502e733043812ad25ebed56fb43b61dc7e359e
+[ContextModuleFactory](/api/contextmodulefactory-hooks) 创建之后调用。
 
 - 回调参数：`contextModuleFactory`
 

@@ -34,11 +34,7 @@ webpack 从这些系统中汲取了经验和教训，并将_模块_的概念应�
 
 ## 支持的模块类型 {#supported-module-types}
 
-<<<<<<< HEAD
 webpack 天生支持如下模块类型：
-=======
-webpack supports the following module types natively:
->>>>>>> 03502e733043812ad25ebed56fb43b61dc7e359e
 
 - [ECMAScript 模块](/guides/ecma-script-modules)
 - CommonJS 模块
