@@ -62,13 +62,13 @@ __src/index.js__
 -
  function component() {
    const element = document.createElement('div');
- 
+
 -  // Lodash, now imported by this script
    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
- 
+
    return element;
  }
- 
+
  document.body.appendChild(component());
 ```
 
@@ -77,7 +77,7 @@ __webpack.config.js__
 ``` diff
  const path = require('path');
 +const webpack = require('webpack');
- 
+
  module.exports = {
    entry: './src/index.js',
    output: {
@@ -119,13 +119,13 @@ __src/index.js__
 ``` diff
  function component() {
    const element = document.createElement('div');
- 
+
 -  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +  element.innerHTML = join(['Hello', 'webpack'], ' ');
- 
+
    return element;
  }
- 
+
  document.body.appendChild(component());
 ```
 
@@ -134,7 +134,7 @@ __webpack.config.js__
 ``` diff
  const path = require('path');
  const webpack = require('webpack');
- 
+
  module.exports = {
    entry: './src/index.js',
    output: {
@@ -160,15 +160,15 @@ Some legacy modules rely on `this` being the `window` object. Let's update our `
 ``` diff
  function component() {
    const element = document.createElement('div');
- 
+
    element.innerHTML = join(['Hello', 'webpack'], ' ');
- 
+
 +  // Assume we are in the context of `window`
 +  this.alert("Hmmm, this probably isn't a great idea...");
 +
    return element;
  }
- 
+
  document.body.appendChild(component());
 ```
 
@@ -179,7 +179,7 @@ __webpack.config.js__
 ``` diff
  const path = require('path');
  const webpack = require('webpack');
- 
+
  module.exports = {
    entry: './src/index.js',
    output: {
@@ -241,7 +241,7 @@ __webpack.config.js__
 ``` diff
  const path = require('path');
  const webpack = require('webpack');
- 
+
  module.exports = {
    entry: './src/index.js',
    output: {
@@ -257,7 +257,7 @@ __webpack.config.js__
 +      {
 +        test: require.resolve('./src/globals.js'),
 +        use:
-+          'exports-loader?type=commonjs&exports[]=file&exports[]=multiple|helpers.parse|parse',
++          'exports-loader?type=commonjs&exports=file,multiple|helpers.parse|parse',
 +      },
      ],
    },
@@ -291,15 +291,15 @@ __src/index.js__
 +
  function component() {
    const element = document.createElement('div');
- 
+
    element.innerHTML = join(['Hello', 'webpack'], ' ');
- 
+
    // Assume we are in the context of `window`
    this.alert("Hmmm, this probably isn't a great idea...");
- 
+
    return element;
  }
- 
+
  document.body.appendChild(component());
 ```
 
@@ -323,15 +323,15 @@ __src/index.js__
 -
  function component() {
    const element = document.createElement('div');
- 
+
    element.innerHTML = join(['Hello', 'webpack'], ' ');
- 
+
    // Assume we are in the context of `window`
    this.alert("Hmmm, this probably isn't a great idea...");
- 
+
    return element;
  }
- 
+
  document.body.appendChild(component());
 ```
 
@@ -361,7 +361,7 @@ __webpack.config.js__
 ``` diff
  const path = require('path');
  const webpack = require('webpack');
- 
+
  module.exports = {
 -  entry: './src/index.js',
 +  entry: {
@@ -430,15 +430,15 @@ __src/index.js__
 ``` diff
  function component() {
    const element = document.createElement('div');
- 
+
    element.innerHTML = join(['Hello', 'webpack'], ' ');
- 
+
    // Assume we are in the context of `window`
    this.alert("Hmmm, this probably isn't a great idea...");
- 
+
    return element;
  }
- 
+
  document.body.appendChild(component());
 +
 +fetch('https://jsonplaceholder.typicode.com/users')
