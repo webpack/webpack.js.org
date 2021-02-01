@@ -591,6 +591,32 @@ module.exports = {
 };
 ```
 
+### resolve.byDependency
+
+Configure resolve options by the type of module request.
+
+- Type: `[type: string]: ResolveOptions`
+- Example:
+    ```js
+    module.exports = {
+      // ...
+      resolve: {
+        byDependency: {
+          // ...
+          esm: {
+            mainFields: ['browser', 'module']
+          },
+          commonjs: {
+            aliasFields: ['browser']
+          },
+          url: {
+            preferRelative: true
+          }
+        }
+      }
+    };
+    ```
+
 
 ## `resolveLoader`
 
