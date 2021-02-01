@@ -354,7 +354,7 @@ module.exports = {
               // ...
             }
           }
-        ]
+        ],
         <moduleType "#">
           <default>
             type: "javascript/auto",
@@ -830,7 +830,7 @@ module.exports = {
       // show information why optimizations bailed out for modules
     </advancedStatsOptimization>
 
-    children: true
+    children: true,
     // show stats for child compilations
 
     logging: true,
@@ -840,7 +840,7 @@ module.exports = {
     loggingTrace: true,
     // show stack traces for warnings and errors in logging output
 
-    warnings: true
+    warnings: true,
     // show warnings
 
     errors: true,
@@ -887,7 +887,7 @@ module.exports = {
     // Allow to output ESM
     topLevelAwait: true,
     // Allow to use await on module evaluation (Proposal)
-  }
+  },
   plugins: [
     // ...
   ],
@@ -1129,6 +1129,7 @@ module.exports = {
     // When using an array of configs this can be used to reference other
     // configs and let this config run after the other config at initial build
   </advancedBuild>
+}
 ```
 
 W> webpack applies configuration defaults after [plugins defaults](/contribute/writing-a-plugin/#configuration-defaults) are applied.
