@@ -33,7 +33,7 @@ module.exports = {
 T> In [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) watch mode is enabled by default.
 
 
-## `watchOptions`
+## watchOptions
 
 `object`
 
@@ -52,7 +52,7 @@ module.exports = {
 ```
 
 
-## `watchOptions.aggregateTimeout`
+### watchOptions.aggregateTimeout
 
 `number = 200`
 
@@ -68,7 +68,7 @@ module.exports = {
 ```
 
 
-## watchOptions.ignored
+### watchOptions.ignored
 
 `RegExp` `string` `[string]`
 
@@ -130,7 +130,7 @@ When using glob patterns, we convert them to regular expressions with [`glob-to-
 T> If you use `require.context`, webpack will watch your entire directory. You will need to ignore files and/or directories so that unwanted changes will not trigger a rebuild.
 
 
-## `watchOptions.poll`
+### watchOptions.poll
 
 `boolean = false` `number`
 
@@ -148,6 +148,21 @@ module.exports = {
 ```
 
 T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
+
+### watchOptions.followSymlinks
+
+Follow symbolic links while looking for a file. This is usually not needed as webpack already resolves symlinks with [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks).
+
+- Type: `boolean`
+- Example:
+    ```js
+    module.exports = {
+      //...
+      watchOptions: {
+        followSymlinks: true
+      }
+    };
+    ```
 
 
 ## Troubleshooting

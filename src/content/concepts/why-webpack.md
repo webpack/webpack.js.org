@@ -13,7 +13,7 @@ To understand why you should use webpack, let's recap how we used JavaScript on 
 There are two ways to run JavaScript in a browser. First, include a script for each functionality; this solution is hard to scale because loading too many scripts can cause a network bottleneck. The second option is to use a big `.js` file containing all your project code, but this leads to problems in scope, size, readability and maintainability.
 
 
-## IIFE's - Immediately invoked function expressions
+## IIFEs - Immediately invoked function expressions
 
 IIFEs solve scoping issues for large projects; when script files are wrapped by an IIFE, you can safely concatenate or safely combine files without worrying about scope collision.
 

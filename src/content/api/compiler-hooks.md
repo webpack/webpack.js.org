@@ -133,7 +133,7 @@ Executes a plugin during watch mode after a new compilation is triggered but bef
 
 `SyncHook`
 
-Called after a `NormalModuleFactory` is created.
+Called after a [NormalModuleFactory](/api/normalmodulefactory-hooks) is created.
 
 - Callback Parameters: `normalModuleFactory`
 
@@ -142,7 +142,7 @@ Called after a `NormalModuleFactory` is created.
 
 `SyncHook`
 
-Runs a plugin after a `ContextModuleFactory` is created.
+Runs a plugin after a [ContextModuleFactory](/api/contextmodulefactory-hooks) is created.
 
 - Callback Parameters: `contextModuleFactory`
 
