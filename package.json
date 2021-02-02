@@ -71,7 +71,7 @@
       "npm run lint-markdown"
     ],
     "*.{js,jsx,css,scss,md,mdx,json}": [
-      "npm run prettier"
+      "prettier --write"
     ]
   },
   "devDependencies": {
