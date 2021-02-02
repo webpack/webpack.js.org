@@ -17,10 +17,9 @@ related:
 
 This plugin enables more fine grained control of source map generation. It is also enabled automatically by certain settings of the [`devtool`](/configuration/devtool/) configuration option.
 
-``` js
+```js
 new webpack.EvalSourceMapDevToolPlugin(options);
 ```
-
 
 ## Options
 
@@ -51,9 +50,7 @@ You can use the following code to replace the configuration option `devtool: eva
 module.exports = {
   // ...
   devtool: false,
-  plugins: [
-    new webpack.EvalSourceMapDevToolPlugin({})
-  ]
+  plugins: [new webpack.EvalSourceMapDevToolPlugin({})],
 };
 ```
 
@@ -61,8 +58,8 @@ module.exports = {
 
 The following code would exclude source maps for any modules in the `vendor.js` bundle:
 
-``` js
+```js
 new webpack.EvalSourceMapDevToolPlugin({
-  exclude: ['vendor.js']
+  exclude: ['vendor.js'],
 });
 ```

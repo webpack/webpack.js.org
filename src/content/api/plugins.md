@@ -23,7 +23,6 @@ T> For a high-level introduction to writing plugins, start with
 Let's start by going over `tapable` utility, which provides the backbone of
 webpack's plugin interface.
 
-
 ## Tapable
 
 This small library is a core utility in webpack but can also be used elsewhere
@@ -38,7 +37,6 @@ provide them, is crucial. The objects that extend `Tapable` (e.g. the compiler),
 the hooks they provide, and each hook's type (e.g. the `SyncHook`) will be
 noted.
 
-
 ## Plugin Types
 
 Depending on the hooks used and `tap` methods applied, plugins can function in
@@ -51,8 +49,8 @@ So depending on which event you `tap` into, the plugin may run differently. For
 example, when hooking into the `compile` stage, only the synchronous `tap` method
 can be used:
 
-``` js
-compiler.hooks.compile.tap('MyPlugin', params => {
+```js
+compiler.hooks.compile.tap('MyPlugin', (params) => {
   console.log('Synchronously tapping the compile hook.');
 });
 ```
@@ -60,34 +58,39 @@ compiler.hooks.compile.tap('MyPlugin', params => {
 However, for `run` which utilizes the `AsyncHook`, we can utilize `tapAsync`
 or `tapPromise` (as well as `tap`):
 
-``` js
-compiler.hooks.run.tapAsync('MyPlugin', (source, target, routesList, callback) => {
-  console.log('Asynchronously tapping the run hook.');
-  callback();
-});
+```js
+compiler.hooks.run.tapAsync(
+  'MyPlugin',
+  (source, target, routesList, callback) => {
+    console.log('Asynchronously tapping the run hook.');
+    callback();
+  }
+);
 
 compiler.hooks.run.tapPromise('MyPlugin', (source, target, routesList) => {
-  return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
+  return new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
     console.log('Asynchronously tapping the run hook with a delay.');
   });
 });
 
-compiler.hooks.run.tapPromise('MyPlugin', async (source, target, routesList) => {
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  console.log('Asynchronously tapping the run hook with a delay.');
-});
+compiler.hooks.run.tapPromise(
+  'MyPlugin',
+  async (source, target, routesList) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log('Asynchronously tapping the run hook with a delay.');
+  }
+);
 ```
 
 The moral of the story is that there are a variety of ways to `hook` into the
 `compiler`, each one allowing your plugin to run as it sees fit.
-
 
 ## Custom Hooks
 
 In order to add a new hook to the compilation for other plugins to `tap` into,
 simply `require` the necessary hook class from `tapable` and create one:
 
-``` js
+```js
 const SyncHook = require('tapable').SyncHook;
 
 if (compiler.hooks.myCustomHook) throw new Error('Already in use');
@@ -109,17 +112,20 @@ It is possible to customize the printed output by passing different arguments to
 To report progress, a plugin must `tap` into a hook using the `context: true` option:
 
 ```js
-compiler.hooks.emit.tapAsync({
-  name: 'MyPlugin',
-  context: true
-}, (context, compiler, callback) => {
-  const reportProgress = context && context.reportProgress;
-  if (reportProgress) reportProgress(0.95, 'Starting work');
-  setTimeout(() => {
-    if (reportProgress) reportProgress(0.95, 'Done work');
-    callback();
-  }, 1000);
-});
+compiler.hooks.emit.tapAsync(
+  {
+    name: 'MyPlugin',
+    context: true,
+  },
+  (context, compiler, callback) => {
+    const reportProgress = context && context.reportProgress;
+    if (reportProgress) reportProgress(0.95, 'Starting work');
+    setTimeout(() => {
+      if (reportProgress) reportProgress(0.95, 'Done work');
+      callback();
+    }, 1000);
+  }
+);
 ```
 
 The `reportProgress` function may be called with these arguments:

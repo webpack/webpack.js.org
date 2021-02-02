@@ -100,7 +100,6 @@ Parameters:
 - `recursive` - whether it is a recursive traversal.
 - `callback` - function to invoke after adding the module dependencies.
 
-
 ### addEntry
 
 `function (context, entry, name, callback)`

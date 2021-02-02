@@ -22,7 +22,7 @@ This is equivalent to the following `DefinePlugin` application:
 ```javascript
 new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-  'process.env.DEBUG': JSON.stringify(process.env.DEBUG)
+  'process.env.DEBUG': JSON.stringify(process.env.DEBUG),
 });
 ```
 
@@ -35,7 +35,7 @@ Alternatively, the `EnvironmentPlugin` supports an object, which maps keys to th
 ```javascript
 new webpack.EnvironmentPlugin({
   NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined
-  DEBUG: false
+  DEBUG: false,
 });
 ```
 
@@ -47,7 +47,7 @@ T> Default values of `null` and `undefined` behave differently. Use `undefined` 
 
 W> If an environment variable is not found during bundling and no default value was provided, webpack will throw an error instead of a warning.
 
-__Example:__
+**Example:**
 
 Let's investigate the result when running the previous `EnvironmentPlugin` configuration on a test file `entry.js`:
 
@@ -63,10 +63,12 @@ if (process.env.DEBUG) {
 When executing `NODE_ENV=production webpack` in the terminal to build, `entry.js` becomes this:
 
 ```javascript
-if ('production' === 'production') { // <-- 'production' from NODE_ENV is taken
+if ('production' === 'production') {
+  // <-- 'production' from NODE_ENV is taken
   console.log('Welcome to production');
 }
-if (false) { // <-- default value is taken
+if (false) {
+  // <-- default value is taken
   console.log('Debugging output');
 }
 ```
@@ -74,10 +76,12 @@ if (false) { // <-- default value is taken
 Running `DEBUG=false webpack` yields:
 
 ```javascript
-if ('development' === 'production') { // <-- default value is taken
+if ('development' === 'production') {
+  // <-- default value is taken
   console.log('Welcome to production');
 }
-if ('false') { // <-- 'false' from DEBUG is taken
+if ('false') {
+  // <-- 'false' from DEBUG is taken
   console.log('Debugging output');
 }
 ```
@@ -98,12 +102,11 @@ new webpack.EnvironmentPlugin({
 });
 ```
 
-
 ## `DotenvPlugin`
 
 The third-party [`DotenvPlugin`](https://github.com/mrsteele/dotenv-webpack) (`dotenv-webpack`) allows you to expose (a subset of) [dotenv variables](https://www.npmjs.com/package/dotenv):
 
-``` bash
+```bash
 // .env
 DB_HOST=127.0.0.1
 DB_PASS=foobar
@@ -113,6 +116,6 @@ S3_API=mysecretkey
 ```javascript
 new Dotenv({
   path: './.env', // Path to .env file (this is the default)
-  safe: true // load .env.example (defaults to "false" which does not use dotenv-safe)
+  safe: true, // load .env.example (defaults to "false" which does not use dotenv-safe)
 });
 ```

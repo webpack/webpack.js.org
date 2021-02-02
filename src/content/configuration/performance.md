@@ -18,7 +18,6 @@ This feature was inspired by the idea of [webpack Performance Budgets](https://g
 
 Configure how performance hints are shown. For example if you have an asset that is over 250kb, webpack will emit a warning notifying you of this.
 
-
 ## `performance.hints`
 
 `string = 'warning': 'error' | 'warning'` `boolean: false`
@@ -31,8 +30,8 @@ Given an asset is created that is over 250kb:
 module.exports = {
   //...
   performance: {
-    hints: false
-  }
+    hints: false,
+  },
 };
 ```
 
@@ -42,8 +41,8 @@ No hint warnings or errors are shown.
 module.exports = {
   //...
   performance: {
-    hints: 'warning'
-  }
+    hints: 'warning',
+  },
 };
 ```
 
@@ -53,8 +52,8 @@ A warning will be displayed notifying you of a large asset. We recommend somethi
 module.exports = {
   //...
   performance: {
-    hints: 'error'
-  }
+    hints: 'error',
+  },
 };
 ```
 
@@ -70,8 +69,8 @@ An entry point represents all assets that would be utilized during initial load 
 module.exports = {
   //...
   performance: {
-    maxEntrypointSize: 400000
-  }
+    maxEntrypointSize: 400000,
+  },
 };
 ```
 
@@ -81,13 +80,12 @@ module.exports = {
 
 An asset is any emitted file from webpack. This option controls when webpack emits a performance hint based on individual asset size in bytes.
 
-
 ```js
 module.exports = {
   //...
   performance: {
-    maxAssetSize: 100000
-  }
+    maxAssetSize: 100000,
+  },
 };
 ```
 
@@ -99,7 +97,7 @@ This property allows webpack to control what files are used to calculate perform
 
 ```js
 function assetFilter(assetFilename) {
-  return !(/\.map$/.test(assetFilename));
+  return !/\.map$/.test(assetFilename);
 }
 ```
 
@@ -109,10 +107,10 @@ You can override this property by passing your own function in:
 module.exports = {
   //...
   performance: {
-    assetFilter: function(assetFilename) {
+    assetFilter: function (assetFilename) {
       return assetFilename.endsWith('.js');
-    }
-  }
+    },
+  },
 };
 ```
 

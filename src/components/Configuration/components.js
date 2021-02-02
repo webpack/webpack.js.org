@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 
 const DEFAULT_CHILDREN_SIZE = 4;
 
-const isFirstChild = child => typeof child === 'string' && child !== ' ';
+const isFirstChild = (child) => typeof child === 'string' && child !== ' ';
 
-const removeSpaces = child => (isFirstChild(child) ? child.trim() : child);
+const removeSpaces = (child) => (isFirstChild(child) ? child.trim() : child);
 
 const addLink = (child, i, url) => {
   return isFirstChild(child) ? (
@@ -28,17 +28,17 @@ const Card = ({ body }) => {
   );
 };
 Card.propTypes = {
-  body: PropTypes.node
+  body: PropTypes.node,
 };
 export class Details extends Component {
   static propTypes = {
     url: PropTypes.string,
-    children: PropTypes.arrayOf(PropTypes.node)
-  }
+    myChild: PropTypes.arrayOf(PropTypes.node),
+  };
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
     };
   }
 
@@ -51,10 +51,10 @@ export class Details extends Component {
   };
 
   render() {
-    const { children, url } = this.props;
+    const { myChild, url } = this.props;
 
     // Find the index of </default>
-    const closeDefaultTagIndex = children.findIndex(child => {
+    const closeDefaultTagIndex = myChild.findIndex((child) => {
       if (isValidElement(child)) {
         return (
           child.props.className.includes('tag') &&
@@ -63,7 +63,7 @@ export class Details extends Component {
       }
     });
 
-    const content = children.slice();
+    const content = myChild.slice();
 
     // Summary is the part of the snippet that would be shown in the code snippet,
     // to get it we need to cut the <default></default> enclosing tags
@@ -85,7 +85,7 @@ export class Details extends Component {
         content={<Card body={content} />}
       >
         <span
-          className='code-details-summary-span'
+          className="code-details-summary-span"
           onClick={this.toggleVisibility}
         >
           {summary}

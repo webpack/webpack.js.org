@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import PageLinks from '../PageLinks/PageLinks';
 import Markdown from '../Markdown/Markdown';
 import Contributors from '../Contributors/Contributors';
-import {PlaceholderString} from '../Placeholder/Placeholder';
+import { PlaceholderString } from '../Placeholder/Placeholder';
 import { Pre } from '../Configuration/Configuration';
 import AdjacentPages from './AdjacentPages';
 
@@ -23,10 +23,10 @@ class Page extends Component {
     content: PropTypes.oneOfType([
       PropTypes.shape({
         then: PropTypes.func.isRequired,
-        default: PropTypes.string
-      })
-    ])
-  }
+        default: PropTypes.string,
+      }),
+    ]),
+  };
   constructor(props) {
     super(props);
 
@@ -34,8 +34,10 @@ class Page extends Component {
     const isDynamicContent = content instanceof Promise;
 
     this.state = {
-      content: isDynamicContent ? PlaceholderString() : content.default || content,
-      contentLoaded: isDynamicContent ? false : true
+      content: isDynamicContent
+        ? PlaceholderString()
+        : content.default || content,
+      contentLoaded: isDynamicContent ? false : true,
     };
   }
 
@@ -44,33 +46,42 @@ class Page extends Component {
 
     if (content instanceof Promise) {
       content
-        .then(module =>
-          this.setState({
-            content: module.default || module,
-            contentLoaded: true
-          }, () => {
-            const hash = window.location.hash;
-            if (hash) {
-              const element = document.querySelector(hash);
-              if (element) {
-                element.scrollIntoView();
+        .then((module) =>
+          this.setState(
+            {
+              content: module.default || module,
+              contentLoaded: true,
+            },
+            () => {
+              const hash = window.location.hash;
+              if (hash) {
+                const element = document.querySelector(hash);
+                if (element) {
+                  element.scrollIntoView();
+                }
+              } else {
+                window.scrollTo(0, 0);
               }
-            } else {
-              window.scrollTo(0, 0);
             }
-
-          })
+          )
         )
         .catch(() =>
           this.setState({
-            content: 'Error loading content.'
+            content: 'Error loading content.',
           })
         );
     }
   }
 
   render() {
-    const { title, contributors = [], related = [], previous, next, ...rest } = this.props;
+    const {
+      title,
+      contributors = [],
+      related = [],
+      previous,
+      next,
+      ...rest
+    } = this.props;
 
     const { contentLoaded } = this.state;
     const loadRelated = contentLoaded && related && related.length !== 0;
@@ -83,7 +94,7 @@ class Page extends Component {
 
     if (typeof content === 'function') {
       contentRender = content({}).props.children.slice(4); // Cut frontmatter information
-      contentRender = Children.map(contentRender, child => {
+      contentRender = Children.map(contentRender, (child) => {
         if (isValidElement(child)) {
           if (child.props.mdxType === 'pre') {
             // eslint-disable-next-line
@@ -97,7 +108,7 @@ class Page extends Component {
       contentRender = (
         <div
           dangerouslySetInnerHTML={{
-            __html: this.state.content
+            __html: this.state.content,
           }}
         />
       );
@@ -112,9 +123,9 @@ class Page extends Component {
 
           {contentRender}
 
-          {
-            (previous || next) && <AdjacentPages previous={previous} next={next} />
-          }
+          {(previous || next) && (
+            <AdjacentPages previous={previous} next={next} />
+          )}
 
           {loadRelated && (
             <div className="related__section">

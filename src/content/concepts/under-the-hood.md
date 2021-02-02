@@ -18,13 +18,13 @@ But between input and output, it also has [modules](/concepts/modules/), [entry 
 
 Every file used in your project is a [Module](/concepts/modules/)
 
-__./index.js__
+**./index.js**
 
 ```js
 import app from './app.js';
 ```
 
-__./app.js__
+**./app.js**
 
 ```js
 export default 'the app';
@@ -36,11 +36,11 @@ During the bundling process, modules are combined into chunks.
 Chunks combine into chunk groups and form a graph (`ChunkGraph`) interconnected through modules.
 When you describe an entry point - under the hood, you create a chunk group with one chunk.
 
-__./webpack.config.js__
+**./webpack.config.js**
 
 ```js
 module.exports = {
-  entry: './index.js'
+  entry: './index.js',
 };
 ```
 
@@ -49,14 +49,14 @@ This chunk group contains `./index.js` module. As the parser handles imports ins
 
 Another example:
 
-__./webpack.config.js__
+**./webpack.config.js**
 
 ```js
 module.exports = {
   entry: {
     home: './home.js',
-    about: './about.js'
-  }
+    about: './about.js',
+  },
 };
 ```
 
@@ -72,23 +72,23 @@ Chunks come in two forms:
 - `initial` is the main chunk for the entry point. This chunk contains all the modules and its dependencies that you specify for an entry point.
 - `non-initial` is a chunk that may be lazy-loaded. It may appear when [dynamic import](/guides/code-splitting/#dynamic-imports) or [SplitChunksPlugin](/plugins/split-chunks-plugin/) is being used.
 
-Each chunk has a corresponding __asset__. The assets are the output files - the result of bundling.
+Each chunk has a corresponding **asset**. The assets are the output files - the result of bundling.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
-  entry: './src/index.jsx'
+  entry: './src/index.jsx',
 };
 ```
 
-__./src/index.jsx__
+**./src/index.jsx**
 
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import('./app.jsx').then(App => {
+import('./app.jsx').then((App) => {
   ReactDOM.render(<App />, root);
 });
 ```
@@ -103,7 +103,7 @@ and all their dependencies, except `./app.jsx`
 
 Non-initial chunk for `./app.jsx` is created as this module is imported dynamically.
 
-__Output:__
+**Output:**
 
 - `/dist/main.js` - an `initial` chunk
 - `/dist/394.js` - `non-initial` chunk
@@ -115,12 +115,12 @@ When using dynamic import we may specify a chunk name explicitly by using a ["ma
 import(
   /* webpackChunkName: "app" */
   './app.jsx'
-).then(App => {
+).then((App) => {
   ReactDOM.render(<App />, root);
 });
 ```
 
-__Output:__
+**Output:**
 
 - `/dist/main.js` - an `initial` chunk
 - `/dist/app.js` - `non-initial` chunk

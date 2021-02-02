@@ -8,13 +8,10 @@ contributors:
 
 The `NoEmitOnErrorsPlugin` allows you to avoid emitting assets when there are any errors. Enabled by default, you can disable using [`optimization.emitOnErrors`](/configuration/optimization/#optimizationemitonerrors)
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` javascript
+```javascript
 module.exports = {
-  plugins: [
-    new webpack.NoEmitOnErrorsPlugin()
-  ]
+  plugins: [new webpack.NoEmitOnErrorsPlugin()],
 };
-
 ```

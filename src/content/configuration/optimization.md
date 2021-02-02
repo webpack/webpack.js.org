@@ -18,8 +18,7 @@ related:
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-Since version 4 webpack runs optimizations for you depending on the chosen  [`mode`](/configuration/mode/), still all optimizations are available for manual configuration and overrides.
-
+Since version 4 webpack runs optimizations for you depending on the chosen [`mode`](/configuration/mode/), still all optimizations are available for manual configuration and overrides.
 
 ## `optimization.minimize`
 
@@ -27,15 +26,14 @@ Since version 4 webpack runs optimizations for you depending on the chosen  [`mo
 
 Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
 
-__webpack.config.js__
-
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    minimize: false
-  }
+    minimize: false,
+  },
 };
 ```
 
@@ -47,7 +45,7 @@ T> Learn how [mode](/configuration/mode/) works.
 
 Allows you to override the default minimizer by providing a different one or more customized [TerserPlugin](/plugins/terser-webpack-plugin/) instances.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 const TerserPlugin = require('terser-webpack-plugin');
@@ -61,10 +59,10 @@ module.exports = {
         sourceMap: true, // Must be set to true if using source-maps in production
         terserOptions: {
           // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
-        }
+        },
       }),
     ],
-  }
+  },
 };
 ```
 
@@ -76,10 +74,12 @@ module.exports = {
     minimizer: [
       (compiler) => {
         const TerserPlugin = require('terser-webpack-plugin');
-        new TerserPlugin({ /* your config */ }).apply(compiler);
-      }
+        new TerserPlugin({
+          /* your config */
+        }).apply(compiler);
+      },
     ],
-  }
+  },
 };
 ```
 
@@ -89,7 +89,7 @@ module.exports = {
 module.exports = {
   optimization: {
     minimizer: [new CssMinimizer(), '...'],
-  }
+  },
 };
 ```
 
@@ -105,31 +105,31 @@ By default webpack v4+ provides new common chunks strategies out of the box for 
 
 Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk containing only the runtime to each entrypoint. This setting is an alias for:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
     runtimeChunk: {
-      name: entrypoint => `runtime~${entrypoint.name}`
-    }
-  }
+      name: (entrypoint) => `runtime~${entrypoint.name}`,
+    },
+  },
 };
 ```
 
 The value `'single'` instead creates a runtime file to be shared for all generated chunks. This setting is an alias for:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
     runtimeChunk: {
-      name: 'runtime'
-    }
-  }
+      name: 'runtime',
+    },
+  },
 };
 ```
 
@@ -139,17 +139,16 @@ Default is `false`: each entry chunk embeds runtime.
 
 W> Imported modules are initialized for each runtime chunk separately, so if you include multiple entry points on a page, beware of this behavior. You will probably want to set it to `single` or use another configuration that allows you to only have one runtime instance.
 
-__webpack.config.js__
-
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
     runtimeChunk: {
-      name: entrypoint => `runtimechunk~${entrypoint.name}`
-    }
-  }
+      name: (entrypoint) => `runtimechunk~${entrypoint.name}`,
+    },
+  },
 };
 ```
 
@@ -159,14 +158,14 @@ module.exports = {
 
 Use the `optimization.emitOnErrors` to emit assets whenever there are errors while compiling. This ensures that erroring assets are emitted. Critical errors are emitted into the generated code and will cause errors at runtime.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    emitOnErrors: true
-  }
+    emitOnErrors: true,
+  },
 };
 ```
 
@@ -180,39 +179,39 @@ Tells webpack which algorithm to use when choosing module ids. Setting `optimiza
 
 The following string values are supported:
 
-Option                | Description
---------------------- | -----------------------
-`natural`             | Numeric ids in order of usage.
-`named`               | Readable ids for better debugging.
-`deterministic`       | Module names are hashed into small numeric values.
-`size`                | Numeric ids focused on minimal initial download size.
+| Option          | Description                                           |
+| --------------- | ----------------------------------------------------- |
+| `natural`       | Numeric ids in order of usage.                        |
+| `named`         | Readable ids for better debugging.                    |
+| `deterministic` | Module names are hashed into small numeric values.    |
+| `size`          | Numeric ids focused on minimal initial download size. |
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    moduleIds: 'deterministic'
-  }
+    moduleIds: 'deterministic',
+  },
 };
 ```
 
 `deterministic` option is useful for long term caching, but still results in smaller bundles compared to `hashed`. Length of the numeric value is chosen to fill a maximum of 80% of the id space. By default a minimum length of 3 digits is used when `optimization.moduleIds` is set to `deterministic`. To override the default behaviour set `optimization.moduleIds` to `false` and use the `webpack.ids.DeterministicModuleIdsPlugin`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    moduleIds: false
+    moduleIds: false,
   },
   plugins: [
     new webpack.ids.DeterministicModuleIdsPlugin({
-      maxLength: 5
-    })
-  ]
+      maxLength: 5,
+    }),
+  ],
 };
 ```
 
@@ -231,41 +230,40 @@ Tells webpack which algorithm to use when choosing chunk ids. Setting `optimizat
 
 The following string values are supported:
 
-Option                  | Description
------------------------ | -----------------------
-`'natural'`             | Numeric ids in order of usage.
-`'named'`               | Readable ids for better debugging.
-`'deterministic'`       | Short numeric ids which will not be changing between compilation. Good for long term caching. Enabled by default for production mode.
-`'size'`                | Numeric ids focused on minimal initial download size.
-`'total-size'`          | numeric ids focused on minimal total download size.
+| Option            | Description                                                                                                                           |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `'natural'`       | Numeric ids in order of usage.                                                                                                        |
+| `'named'`         | Readable ids for better debugging.                                                                                                    |
+| `'deterministic'` | Short numeric ids which will not be changing between compilation. Good for long term caching. Enabled by default for production mode. |
+| `'size'`          | Numeric ids focused on minimal initial download size.                                                                                 |
+| `'total-size'`    | numeric ids focused on minimal total download size.                                                                                   |
 
-
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    chunkIds: 'named'
-  }
+    chunkIds: 'named',
+  },
 };
 ```
 
 By default, a minimum length of 3 digits is used when `optimization.chunkIds` is set to `'deterministic'`. To override the default behaviour, set `optimization.chunkIds` to `false` and use the `webpack.ids.DeterministicChunkIdsPlugin`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    chunkIds: false
+    chunkIds: false,
   },
   plugins: [
     new webpack.ids.DeterministicChunkIdsPlugin({
-      maxLength: 5
-    })
-  ]
+      maxLength: 5,
+    }),
+  ],
 };
 ```
 
@@ -273,21 +271,21 @@ module.exports = {
 
 `boolean = false` `string`
 
-Tells webpack to set `process.env.NODE_ENV` to a given string value. `optimization.nodeEnv` uses [DefinePlugin](/plugins/define-plugin/) unless set to `false`. `optimization.nodeEnv` __defaults__ to [mode](/configuration/mode/) if set, else falls back to `'production'`.
+Tells webpack to set `process.env.NODE_ENV` to a given string value. `optimization.nodeEnv` uses [DefinePlugin](/plugins/define-plugin/) unless set to `false`. `optimization.nodeEnv` **defaults** to [mode](/configuration/mode/) if set, else falls back to `'production'`.
 
 Possible values:
 
 - any string: the value to set `process.env.NODE_ENV` to.
 - false: do not modify/set the value of `process.env.NODE_ENV`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    nodeEnv: 'production'
-  }
+    nodeEnv: 'production',
+  },
 };
 ```
 
@@ -299,14 +297,14 @@ T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` 
 
 When set to `true` tells webpack to reduce the size of WASM by changing imports to shorter strings. It mangles module and export names.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    mangleWasmImports: true
-  }
+    mangleWasmImports: true,
+  },
 };
 ```
 
@@ -316,14 +314,14 @@ module.exports = {
 
 Tells webpack to detect and remove modules from chunks when these modules are already included in all parents. Setting `optimization.removeAvailableModules` to `true` will enable this optimization. Enabled by default in [`production` mode](/configuration/mode/).
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    removeAvailableModules: true
-  }
+    removeAvailableModules: true,
+  },
 };
 ```
 
@@ -335,14 +333,14 @@ W> `optimization.removeAvailableModules` reduces the performance of webpack, and
 
 Tells webpack to detect and remove chunks which are empty. Setting `optimization.removeEmptyChunks` to `false` will disable this optimization.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    removeEmptyChunks: false
-  }
+    removeEmptyChunks: false,
+  },
 };
 ```
 
@@ -352,14 +350,14 @@ module.exports = {
 
 Tells webpack to merge chunks which contain the same modules. Setting `optimization.mergeDuplicateChunks` to `false` will disable this optimization.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    mergeDuplicateChunks: false
-  }
+    mergeDuplicateChunks: false,
+  },
 };
 ```
 
@@ -369,14 +367,14 @@ module.exports = {
 
 Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don’t have to be loaded when the bigger chunk has been already loaded. By default `optimization.flagIncludedChunks` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    flagIncludedChunks: true
-  }
+    flagIncludedChunks: true,
+  },
 };
 ```
 
@@ -386,14 +384,14 @@ module.exports = {
 
 Tells webpack to figure out an order of modules which will result in the smallest initial bundle. By default `optimization.occurrenceOrder` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    occurrenceOrder: false
-  }
+    occurrenceOrder: false,
+  },
 };
 ```
 
@@ -401,34 +399,34 @@ module.exports = {
 
 `boolean`
 
-Tells webpack to figure out which exports are provided by modules to generate more efficient code for `export * from ...`. By default  `optimization.providedExports` is enabled.
+Tells webpack to figure out which exports are provided by modules to generate more efficient code for `export * from ...`. By default `optimization.providedExports` is enabled.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    providedExports: false
-  }
+    providedExports: false,
+  },
 };
 ```
 
 ## `optimization.usedExports`
 
-`boolean = true`  `string: 'global'`
+`boolean = true` `string: 'global'`
 
 Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimizationoccurrenceorder). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
 Dead code elimination in minimizers will benefit from this and can remove unused exports.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    usedExports: false
-  }
+    usedExports: false,
+  },
 };
 ```
 
@@ -438,8 +436,8 @@ To opt-out from used exports analysis per runtime:
 module.exports = {
   //...
   optimization: {
-    usedExports: 'global'
-  }
+    usedExports: 'global',
+  },
 };
 ```
 
@@ -450,26 +448,26 @@ module.exports = {
 Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on [`optimization.providedExports`](#optimizationprovidedexports) and [`optimization.usedExports`](#optimizationusedexports).
 By default `optimization.concatenateModules` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    concatenateModules: true
-  }
+    concatenateModules: true,
+  },
 };
 ```
 
 ## `optimization.sideEffects`
 
-`boolean = true`  `string: 'flag'` 
+`boolean = true` `string: 'flag'`
 
 Tells webpack to recognise the [`sideEffects`](https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md) flag in `package.json` or rules to skip over modules which are flagged to contain no side effects when exports are not used.
 
-__package.json__
+**package.json**
 
-``` json
+```json
 {
   "name": "awesome npm module",
   "version": "1.0.0",
@@ -481,14 +479,14 @@ T> Please note that `sideEffects` should be in the npm module's `package.json` f
 
 `optimization.sideEffects` depends on [`optimization.providedExports`](#optimizationprovidedexports) to be enabled. This dependency has a build time cost, but eliminating modules has positive impact on performance because of less code generation. Effect of this optimization depends on your codebase, try it for possible performance wins.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    sideEffects: true
-  }
+    sideEffects: true,
+  },
 };
 ```
 
@@ -498,8 +496,8 @@ To only use the manual flag and do not analyse source code:
 module.exports = {
   //...
   optimization: {
-    sideEffects: 'flag'
-  }
+    sideEffects: 'flag',
+  },
 };
 ```
 
@@ -515,14 +513,14 @@ T> `optimization.sideEffects` will also flag modules as side effect free when th
 
 By default `optimization.portableRecords` is disabled. Automatically enabled if at least one of the records options provided to webpack config: [`recordsPath`](/configuration/other-options/#recordspath), [`recordsInputPath`](/configuration/other-options/#recordsinputpath), [`recordsOutputPath`](/configuration/other-options/#recordsoutputpath).
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    portableRecords: true
-  }
+    portableRecords: true,
+  },
 };
 ```
 
@@ -536,21 +534,21 @@ By default `optimization.mangleExports: 'deterministic'` is enabled in `producti
 
 The following values are supported:
 
-Option                  | Description
------------------------ | -----------------------
-`'size'`                | Short names - usually a single char - focused on minimal download size.
-`'deterministic'`       | Short names - usually two chars - which will not change when adding or removing exports. Good for long term caching.
-`true`                  | Same as `'deterministic'`
-`false`                 | Keep original name. Good for readablility and debugging.
+| Option            | Description                                                                                                          |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `'size'`          | Short names - usually a single char - focused on minimal download size.                                              |
+| `'deterministic'` | Short names - usually two chars - which will not change when adding or removing exports. Good for long term caching. |
+| `true`            | Same as `'deterministic'`                                                                                            |
+| `false`           | Keep original name. Good for readablility and debugging.                                                             |
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    mangleExports: true
-  }
+    mangleExports: true,
+  },
 };
 ```
 
@@ -560,14 +558,14 @@ module.exports = {
 
 `optimization.innerGraph` tells webpack whether to conduct inner graph analysis for unused exports.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    innerGraph: false
-  }
+    innerGraph: false,
+  },
 };
 ```
 
@@ -577,13 +575,13 @@ module.exports = {
 
 Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   optimization: {
-    realContentHash: false
-  }
+    realContentHash: false,
+  },
 };
 ```
