@@ -295,14 +295,10 @@ npx webpack --config-name first --config-name second
 
 __Merge two or more different webpack configurations__
 
-You can merge two or more different webpack configuration with the help of `--merge`: 
+You can merge two or more different webpack configurations with the help of `--merge`: 
 
 ```bash
 npx webpack --config ./first.js --config ./second.js --merge
-```
-
-```bash
-npx webpack --config ./first.js --config ./second.js --config ./third.js --merge
 ```
 
 __Print result of webpack as a JSON__
