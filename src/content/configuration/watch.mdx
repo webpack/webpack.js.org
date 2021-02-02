@@ -33,7 +33,7 @@ module.exports = {
 T> [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 和 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 里 Watch 模式默认开启。
 
 
-## watchOptions
+## `watchOptions` {#watchoptions}
 
 `object`
 
@@ -52,7 +52,7 @@ module.exports = {
 ```
 
 
-### watchOptions.aggregateTimeout
+### `watchOptions.aggregateTimeout` {#watchoptionsaggregatetimeout}
 
 `number = 200`
 
@@ -68,7 +68,7 @@ module.exports = {
 ```
 
 
-### watchOptions.ignored
+### `watchOptions.ignored` {#watchoptionsignored}
 
 `RegExp` `string` `[string]`
 
@@ -130,7 +130,7 @@ module.exports = {
 T> 如果你使用 `require.context`，webpack 会监听你的整个目录。你应该忽略一些文件和/或(and/or)目录，以便那些不需要监听的文件修改后不会触发重新构建。
 
 
-### watchOptions.poll
+### `watchOptions.poll` {#watchoptionspoll}
 
 `boolean = false` `number`
 
@@ -149,9 +149,9 @@ module.exports = {
 
 T> 如果监听没生效，试试这个选项吧。Watch 在 NFS 和 VirtualBox 机器上不适用。
 
-### watchOptions.followSymlinks
+### `watchOptions.followSymlinks` {#watchoptionsfollowsymlinks}
 
-Follow symbolic links while looking for a file. This is usually not needed as webpack already resolves symlinks with [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks).
+根据软链接查找文件。这通常是不需要的，因为 webpack 已经使用 [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks) 解析了软链接。
 
 - Type: `boolean`
 - Example:
