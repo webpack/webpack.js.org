@@ -293,6 +293,14 @@ You can also pass multiple values:
 npx webpack --config-name first --config-name second
 ```
 
+**Merge two or more different webpack configurations**
+
+You can merge two or more different webpack configurations with the help of `--merge`:
+
+```bash
+npx webpack --config ./first.js --config ./second.js --merge
+```
+
 **Print result of webpack as a JSON**
 
 ```bash
