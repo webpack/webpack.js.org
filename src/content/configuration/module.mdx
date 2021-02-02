@@ -63,7 +63,7 @@ module.exports = {
 };
 ```
 
-## `module.parser`
+## module.parser
 
 <Badge text='5.12.0+' />
 
@@ -105,6 +105,51 @@ module.exports = {
     }
   }
 };
+```
+
+
+### module.parser.javascript
+
+Configure options for JavaScript parser.
+
+```js
+module.exports = {
+  module: {
+    parser: {
+      javascript: {
+        // ...
+        commonjsMagicComments: true,
+      },
+    },
+  },
+};
+```
+
+It's allowed to configure those options in [`Rule.parser`](/configuration/module/#ruleparser) as well to target specific modules.
+
+#### module.parser.javascript.commonjsMagicComments
+
+Enable [magic comments](/api/module-methods/#magic-comments) support for CommonJS.
+
+- Type: `boolean`
+- Available: 5.17.0+
+- Example:
+    ```js
+    module.exports = {
+      module: {
+        parser: {
+          javascript: {
+            commonjsMagicComments: true,
+          },
+        }
+      },
+    };
+    ```
+
+Note that only `webpackIgnore` comment is supported at the moment:
+
+```js
+const x = require(/* webpackIgnore: true */ 'x');
 ```
 
 ## `module.noParse`
@@ -421,6 +466,7 @@ module.exports = {
           browserify: false, // disable special handling of Browserify bundles
           requireJs: false, // disable requirejs.*
           node: false, // disable __dirname, __filename, module, require.extensions, require.main, etc.
+          commonjsMagicComments: false, // disable magic comments support for CommonJS
           node: {...}, // reconfigure [node](/configuration/node) layer on module level
           worker: ["default from web-worker", "..."] // Customize the WebWorker handling for javascript files, "..." refers to the defaults.
         }
