@@ -20,11 +20,14 @@ contributors:
   - g100g
   - anikethsaha
   - snitin315
+  - maxloh
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
 
 This page describes the options that affect the behavior of webpack-dev-server (short: dev-server).
+
+T> dev-server uses `output.path` instead of current working directory to be the root path for serving generated files, which might not work on your project structure (e.g. if you reference output files with relative path). See the [development guide](/guides/development#using-webpack-dev-server) for more information on adjusting webpack configuration to work with dev-server.
 
 T> Options that are compatible with [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) have 🔑 next to them.
 
