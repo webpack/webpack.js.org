@@ -1,10 +1,10 @@
 import { Component } from 'react';
-import Link from '../Link/Link';
 import './SidebarItem.scss';
 import list2Tree from '../../utilities/list2Tree';
 import ChevronRightIcon from '../../styles/icons/chevron-right.svg';
 import BarIcon from '../../styles/icons/vertical-bar.svg';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 const block = 'sidebar-item';
 
@@ -63,13 +63,14 @@ export default class SidebarItem extends Component {
           <BarIcon className={`${block}__toggle`} width={15} height={17} fill="#175d96" />
         )}
 
-        <Link
+        <NavLink
+          exact
           key={this.props.url}
           className={`${block}__title`}
           to={this.props.url}
           onClick={this.scrollTop}>
           {title}
-        </Link>
+        </NavLink>
 
         {anchors.length > 0 ? this.renderAnchors(tree) : null}
       </div>
