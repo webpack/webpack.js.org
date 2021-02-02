@@ -88,7 +88,7 @@
     "cross-env": "^7.0.2",
     "css-loader": "^5.0.1",
     "css-minimizer-webpack-plugin": "^1.2.0",
-    "cypress": "^6.3.0",
+    "cypress": "^6.4.0",
     "directory-tree": "^2.2.4",
     "directory-tree-webpack-plugin": "^1.0.2",
     "duplexer": "^0.1.1",
