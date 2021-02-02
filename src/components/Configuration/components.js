@@ -33,7 +33,7 @@ Card.propTypes = {
 export class Details extends Component {
   static propTypes = {
     url: PropTypes.string,
-    myChild: PropTypes.arrayOf(PropTypes.node),
+    myChilds: PropTypes.arrayOf(PropTypes.node),
   };
   constructor(props) {
     super(props);
@@ -51,10 +51,10 @@ export class Details extends Component {
   };
 
   render() {
-    const { myChild, url } = this.props;
+    const { myChilds, url } = this.props;
 
     // Find the index of </default>
-    const closeDefaultTagIndex = myChild.findIndex((child) => {
+    const closeDefaultTagIndex = myChilds.findIndex((child) => {
       if (isValidElement(child)) {
         return (
           child.props.className.includes('tag') &&
@@ -63,7 +63,7 @@ export class Details extends Component {
       }
     });
 
-    const content = myChild.slice();
+    const content = myChilds.slice();
 
     // Summary is the part of the snippet that would be shown in the code snippet,
     // to get it we need to cut the <default></default> enclosing tags
