@@ -13,7 +13,7 @@ contributors:
 在浏览器中运行 JavaScript 有两种方法。第一种方式，引用一些脚本来存放每个功能；此解决方案很难扩展，因为加载太多脚本会导致网络瓶颈。第二种方式，使用一个包含所有项目代码的大型 `.js` 文件，但是这会导致作用域、文件大小、可读性和可维护性方面的问题。
 
 
-## 立即调用函数表达式(IIFE) - Immediately invoked function expressions
+## 立即调用函数表达式(IIFE) - Immediately invoked function expressions {#iifes---immediately-invoked-function-expressions}
 
 IIFE 解决大型项目的作用域问题；当脚本文件被封装在 IIFE 内部时，你可以安全地拼接或安全地组合所有文件，而不必担心作用域冲突。
 
