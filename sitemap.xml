@@ -67,6 +67,9 @@
         <loc>https://webpack.js.org/writers-guide</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/api/cli</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/api/compilation-hooks</loc>
     </url>
     <url>
@@ -80,9 +83,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/api/hot-module-replacement</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api/cli</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/loaders</loc>
@@ -208,6 +208,9 @@
         <loc>https://webpack.js.org/configuration/other-options</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/configuration/output</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/configuration/performance</loc>
     </url>
     <url>
@@ -227,9 +230,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/debugging</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/output</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/plugin-patterns</loc>
@@ -337,13 +337,16 @@
         <loc>https://webpack.js.org/guides/lazy-loading</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/output-management</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/package-exports</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/production-build</loc>
+        <loc>https://webpack.js.org/guides/production</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/production</loc>
+        <loc>https://webpack.js.org/guides/production-build</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/progressive-web-application</loc>
@@ -370,9 +373,6 @@
         <loc>https://webpack.js.org/guides/why-webpack</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/output-management</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/loaders/babel-loader</loc>
     </url>
     <url>
@@ -382,6 +382,9 @@
         <loc>https://webpack.js.org/loaders/css-loader</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/exports-loader</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/expose-loader</loc>
     </url>
     <url>
@@ -389,9 +392,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/file-loader</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/exports-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/html-loader</loc>
@@ -586,10 +586,10 @@
         <loc>https://webpack.js.org/pluginsapi/template</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/compiler</loc>
+        <loc>https://webpack.js.org/api/plugins/compilation</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/compilation</loc>
+        <loc>https://webpack.js.org/api/plugins/compiler</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/module-factories</loc>
