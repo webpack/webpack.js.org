@@ -11134,15 +11134,13 @@ remark-html@^13.0.1:
     hast-util-to-html "^7.0.0"
     mdast-util-to-hast "^10.0.0"
 
-remark-loader@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/remark-loader/-/remark-loader-2.0.0.tgz#276dac836b62b8490885c8b8201f57cbf257e431"
-  integrity sha512-zpmTpuSWmEFVAh38JRLHhKAbInsjzlT4y/0L6KM7K/R/bi3K6t+eYMj81sXVIacLbJHluCS/ZaQadjFkwCpY0g==
+remark-loader@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/remark-loader/-/remark-loader-3.0.0.tgz#b97a3a656e0a92e0f06cad06f1f58511cbca68e0"
+  integrity sha512-dULSTgxNS2eaPfstWxfUgerBkjrVla4qY3JPPH0wG4mPPCRpO5t1KA9UIt3OvMcMmzhQmQ2rUSJVvkT68MlM5A==
   dependencies:
     front-matter "^4.0.2"
-    loader-utils "^2.0.0"
-    schema-utils "^3.0.0"
-    vfile-reporter "^6.0.1"
+    vfile-reporter "^6.0.2"
 
 remark-mdx@1.6.22:
   version "1.6.22"
@@ -13682,10 +13680,10 @@ vfile-reporter@^4.0.0:
     unist-util-stringify-position "^1.0.0"
     vfile-statistics "^1.1.0"
 
-vfile-reporter@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/vfile-reporter/-/vfile-reporter-6.0.1.tgz#45d4dc11df2e312196ea2ceb95e42a67fc8ce814"
-  integrity sha512-0OppK9mo8G2XUpv+hIKLVSDsoxJrXnOy73+vIm0jQUOUFYRduqpFHX+QqAQfvRHyX9B0UFiRuNJnBOjQCIsw1g==
+vfile-reporter@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/vfile-reporter/-/vfile-reporter-6.0.2.tgz#cbddaea2eec560f27574ce7b7b269822c191a676"
+  integrity sha512-GN2bH2gs4eLnw/4jPSgfBjo+XCuvnX9elHICJZjVD4+NM0nsUrMTvdjGY5Sc/XG69XVTgLwj7hknQVc6M9FukA==
   dependencies:
     repeat-string "^1.5.0"
     string-width "^4.0.0"
