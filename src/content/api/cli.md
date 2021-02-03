@@ -141,9 +141,10 @@ npx webpack ./first-entry.js ./other-entry.js
 ```
 
 ```bash
-npx webpack --entry ./first-entry.js --entry ./other-entry.js
+npx webpack --entry ./first-entry.js ./other-entry.js
 ```
 
+T> Use `webpack [command] [entries...] [option]` syntax because some options can accept multiple values so `webpack --target node ./entry.js` means `target: ['node', './file.js']`
 
 __`<output>`__
 
