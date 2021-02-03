@@ -127,6 +127,25 @@ npx webpack --entry ./first.js --entry ./second.js --output-path /build
 __`<entry>`__
 
 A filename or a set of named filenames which act as the entry point to build your project. You can pass multiple entries (every entry is loaded on startup).
+Following are the multiple ways of specifying entry file(s) via CLI -
+
+```bash
+npx webpack ./first-entry.js
+```
+
+```bash
+npx webpack --entry ./first-entry.js
+```
+
+```bash
+npx webpack ./first-entry.js ./other-entry.js
+```
+
+```bash
+npx webpack --entry ./first-entry.js ./other-entry.js
+```
+
+T> Use `webpack [command] [entries...] [option]` syntax because some options can accept multiple values so `webpack --target node ./entry.js` means `target: ['node', './file.js']`
 
 __`<output>`__
 
