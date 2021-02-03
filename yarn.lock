@@ -4490,15 +4490,10 @@ directory-tree-webpack-plugin@^1.0.2:
   dependencies:
     directory-tree "^2.0.0"
 
-directory-tree@^2.0.0:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/directory-tree/-/directory-tree-2.2.4.tgz#6d5bd7d82e48378e256a1e87b678a43c50076e2e"
-  integrity sha512-2N43msQptKbi3WMfIs+U09yi6bfyKL+MWyj5VMj8t1F/Tx04bt1cn/EEIU3o1JBltlJk7NQnzOEuTNa/KQvbWA==
-
-directory-tree@^2.2.4:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/directory-tree/-/directory-tree-2.2.5.tgz#43d167eeb87b57640cc832f794f88431ebd47300"
-  integrity sha512-qmeuql8N7hQB5b+cnlvbcHSjKBNpRjLY5KcvyFd9CTC5uTN7sJshEQ/ExZidAcEUEYcC/76i8ikLtbBMG81YRg==
+directory-tree@^2.0.0, directory-tree@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/directory-tree/-/directory-tree-2.2.6.tgz#7ba77554d30993ead67cb03d415faffd363b0816"
+  integrity sha512-0xF1t4fRkd2vYCremWjhcP4xWTnshzfPZpTCH3F1yJTXhW84YQQM1MasAMnnqyMAkNwGuUEdg9UzuuUo1uoHtA==
 
 dns-equal@^1.0.0:
   version "1.0.0"
