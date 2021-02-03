@@ -23,6 +23,7 @@ Available options:
 - `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level
 - `outputModule`: enables the use of [`output.module`](/configuration/output/#outputmodule) configuration option and sets it to `true`. Enables the use of `output.libraryTarget` as `'module'` and sets it to `'module'`.
 - `layers`: Enable module and chunk layers.
+- `lazyCompilation`: Compile entrypoints and dynamic `import`s only when they are in use.
 
 __webpack.config.js__
 
@@ -42,7 +43,7 @@ module.exports = {
 
 ### experiments.lazyCompilation
 
-Compile entrypoints and dynamic `import`s only when they are accessed.
+Compile entrypoints and dynamic `import`s only when they are in use. It can be used for either Web or Node.
 
 - Type
   - `boolean`
@@ -58,11 +59,18 @@ Compile entrypoints and dynamic `import`s only when they are accessed.
       | ((
           compiler: webpack.Compiler,
           client: string
-        ) => Promise<any>),
-      client?: string, // define a custom client
-      entries?: boolean // enable lazy compilation for entries
+        ) => Promise<any>)
+      client?: string,
+      entries?: boolean,
+      imports?: boolean,
+      test?: RegExp | string | ((module: import("../lib/Module")) => boolean)
     }
     ```
+    - `client`: Path to a custom client, defaults to `webpack/hot/lazy-compilation-{node|web}.js`.
+    - `backend`: Customize the backend, defaults to `webpack/lib/hmr/lazyCompilationBackend`.
+    - `entries`: Enable lazy compilation for entries.
+    - `imports`: Enable lazy compilation for dynamic imports.
+    - `test`: Specify which imported modules should be lazily compiled.
 - Available: 5.17.0+
 - Example:
   ```js
