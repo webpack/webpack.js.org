@@ -376,11 +376,11 @@ Limit the number of parallel processed modules. Can be used to fine tune perform
 
 `boolean`
 
-Capture a "profile" of the application, including statistics and hints, which can then be dissected using the [Analyze](https://webpack.github.io/analyse/) tool.
+Capture a "profile" of the application, including statistics and hints, which can then be dissected using the [Analyze](https://webpack.github.io/analyse/) tool. It will also log out a summary of module timings.
 
 T> Use the [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) for more control over the generated profile.
 
-T> Combine with `parallelism: 1` for better results.
+T> Combine `profile: true` with `parallelism: 1` to get correct timings. Note that this will slow down the build as well.
 
 
 ## `recordsPath`
