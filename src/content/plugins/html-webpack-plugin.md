@@ -24,8 +24,8 @@ npm install --save-dev html-webpack-plugin
 只需添加该插件到你的 webpack 配置中，如下所示：
 
 ```javascript
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: 'index.js',

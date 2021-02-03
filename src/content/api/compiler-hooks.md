@@ -133,7 +133,7 @@ resolver 设置完成之后触发。
 
 `SyncHook`
 
-`NormalModuleFactory` 创建之后调用。
+[NormalModuleFactory](/api/normalmodulefactory-hooks) 创建之后调用。
 
 - 回调参数：`normalModuleFactory`
 
@@ -142,7 +142,7 @@ resolver 设置完成之后触发。
 
 `SyncHook`
 
-`ContextModuleFactory` 创建之后调用。
+[ContextModuleFactory](/api/contextmodulefactory-hooks) 创建之后调用。
 
 - 回调参数：`contextModuleFactory`
 

@@ -52,7 +52,7 @@ module.exports = {
 ```
 
 
-## `watchOptions.aggregateTimeout` {#watchoptionsaggregatetimeout}
+### `watchOptions.aggregateTimeout` {#watchoptionsaggregatetimeout}
 
 `number = 200`
 
@@ -68,7 +68,7 @@ module.exports = {
 ```
 
 
-## `watchOptions.ignored` {#watchoptionsignored}
+### `watchOptions.ignored` {#watchoptionsignored}
 
 `RegExp` `string` `[string]`
 
@@ -93,7 +93,7 @@ __webpack.config.js__
 module.exports = {
   //...
   watchOptions: {
-    ignored: 'node_modules/**'
+    ignored: '**/node_modules'
   }
 };
 ```
@@ -106,15 +106,31 @@ __webpack.config.js__
 module.exports = {
   //...
   watchOptions: {
-    ignored: ['files/**/*.js', 'node_modules/**']
+    ignored: ['**/files/**/*.js', '**/node_modules']
   }
 };
 ```
 
-T> 如果你使用 `require.context`，webpack 会观察你的整个目录。你应该忽略一些文件和/或(and/or)目录，以便那些不需要监听的文件修改，不会触发重新构建。
+此外，你还可以指定一个绝对路径：
+
+```js
+const path = require('path');
+module.exports = {
+  //...
+  watchOptions: {
+    ignored: [
+      path.posix.resolve(__dirname, './ignored-dir')
+    ]
+  }
+};
+```
+
+当使用 glob 模式时，我们使用 [`glob-to-regexp`](https://github.com/fitzgen/glob-to-regexp) 将其转为正则表达式，因此，在使用 `watchOptions.ignored` 的 glob 模式之前，请确保自己熟悉它。
+
+T> 如果你使用 `require.context`，webpack 会监听你的整个目录。你应该忽略一些文件和/或(and/or)目录，以便那些不需要监听的文件修改后不会触发重新构建。
 
 
-## `watchOptions.poll` {#watchoptionspoll}
+### `watchOptions.poll` {#watchoptionspoll}
 
 `boolean = false` `number`
 
@@ -132,6 +148,21 @@ module.exports = {
 ```
 
 T> 如果监听没生效，试试这个选项吧。Watch 在 NFS 和 VirtualBox 机器上不适用。
+
+### `watchOptions.followSymlinks` {#watchoptionsfollowsymlinks}
+
+根据软链接查找文件。这通常是不需要的，因为 webpack 已经使用 [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks) 解析了软链接。
+
+- Type: `boolean`
+- Example:
+    ```js
+    module.exports = {
+      //...
+      watchOptions: {
+        followSymlinks: true
+      }
+    };
+    ```
 
 
 ## 故障排除 {#troubleshooting}
