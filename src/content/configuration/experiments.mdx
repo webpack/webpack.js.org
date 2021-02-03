@@ -69,8 +69,8 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
     - `client`: Path to a custom client, defaults to `webpack/hot/lazy-compilation-{node|web}.js`.
     - `backend`: Customize the backend, defaults to `webpack/lib/hmr/lazyCompilationBackend`.
     - `entries`: Enable lazy compilation for entries.
-    - `imports`: Enable lazy compilation for dynamic imports.
-    - `test`: Specify which imported modules should be lazily compiled.
+    - `imports` <Badge text='5.20.0+' />: Enable lazy compilation for dynamic imports.
+    - `test` <Badge text='5.20.0+' />: Specify which imported modules should be lazily compiled.
 - Available: 5.17.0+
 - Example:
   ```js
