@@ -43,7 +43,7 @@ module.exports = {
 
 ### experiments.lazyCompilation
 
-Compile entrypoints and dynamic `import`s only when they are in use. It can be used for either Web or Node.
+Compile entrypoints and dynamic `import`s only when they are in use. It can be used for either Web or Node.js.
 
 - Type
   - `boolean`
@@ -72,7 +72,7 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
     - `imports` <Badge text='5.20.0+' />: Enable lazy compilation for dynamic imports.
     - `test` <Badge text='5.20.0+' />: Specify which imported modules should be lazily compiled.
 - Available: 5.17.0+
-- Example:
+- Example 1:
   ```js
   module.exports = {
     // …
@@ -81,3 +81,22 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
     },
   };
   ```
+- Example 2:
+    ```js
+    module.exports = {
+      // …
+      experiments: {
+        lazyCompilation: {
+
+          // disable lazy compilation for dynamic imports
+          imports: false,
+
+          // disable lazy compilation for entries
+          entries: false,
+
+          // do not lazily compile moduleB
+          test: module => !/moduleB/.test(module.nameForCondition()),
+        },
+      },
+    };
+    ```
