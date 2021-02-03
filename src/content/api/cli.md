@@ -345,7 +345,7 @@ you can use `--node-env` option to set `process.env.NODE_ENV`:
 webpack-cli --node-env production   # process.env.NODE_ENV = 'production'
 ```
 
-T> the `mode` option respect the `--node-env` option if you don't set the `mode` option explicitly using CLI options or in configuration(s), i.e. `--node-env production` set `process.env.NODE_ENV` and `mode` to `'production'`
+T> The `mode` option respect the `--node-env` option if you don't set the `mode` option explicitly using CLI options or in configuration(s), i.e. `--node-env production` set `process.env.NODE_ENV` and `mode` to `'production'`
 
 ## Configuration Options
 
