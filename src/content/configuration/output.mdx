@@ -1135,6 +1135,7 @@ module.exports = {
   //...
   output: {
     // One of the below
+    publicPath: 'auto', // It automatically determines the publicPath from <script> tag. Only works with web and web-worker targets.
     publicPath: 'https://cdn.example.com/assets/', // CDN (always HTTPS)
     publicPath: '//cdn.example.com/assets/', // CDN (same protocol)
     publicPath: '/assets/', // server-relative
