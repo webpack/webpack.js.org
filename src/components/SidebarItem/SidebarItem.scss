@@ -26,6 +26,10 @@
     color: getColor(elephant);
     max-width: 85%;
     @include control-overflow;
+    &.active {
+      font-weight: 600;
+      color: #333;
+    }
   }
 
   &__anchors {

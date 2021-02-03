@@ -254,7 +254,7 @@ Now, while you'd likely never do this in your own source code, you may encounter
 +      {
 +        test: require.resolve('./src/globals.js'),
 +        use:
-+          'exports-loader?type=commonjs&exports[]=file&exports[]=multiple|helpers.parse|parse',
++          'exports-loader?type=commonjs&exports=file,multiple|helpers.parse|parse',
 +      },
      ],
    },

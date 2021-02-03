@@ -76,6 +76,9 @@ body {
 .sidebar-item__anchor a {
   color: #b8b8b8;
 }
+.sidebar-item__title.active {
+  color: #fff;
+}
 .navigation-sub__link.navigation-sub__link--active {
   color: #fff;
 }
