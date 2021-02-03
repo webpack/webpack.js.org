@@ -7,7 +7,7 @@ contributors:
   - smelukov
 ---
 
-` object = { boolean activeModules = true, boolean entries = false, function (number percentage, string message, [string] ...args) handler, boolean modules = true, number modulesCount = 500, boolean profile = false }`
+`object = { boolean activeModules = true, boolean entries = false, function (number percentage, string message, [string] ...args) handler, boolean modules = true, number modulesCount = 500, boolean profile = false }`
 
 `function (number percentage, string message, [string] ...args)`
 

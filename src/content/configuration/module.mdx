@@ -107,7 +107,6 @@ module.exports = {
 };
 ```
 
-
 ### module.parser.javascript
 
 Configure options for JavaScript parser.
@@ -134,17 +133,17 @@ Enable [magic comments](/api/module-methods/#magic-comments) support for CommonJ
 - Type: `boolean`
 - Available: 5.17.0+
 - Example:
-    ```js
-    module.exports = {
-      module: {
-        parser: {
-          javascript: {
-            commonjsMagicComments: true,
-          },
-        }
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          commonjsMagicComments: true,
+        },
       },
-    };
-    ```
+    },
+  };
+  ```
 
 Note that only `webpackIgnore` comment is supported at the moment:
 

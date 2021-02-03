@@ -221,7 +221,7 @@ W> `moduleIds: total-size` has been removed in webpack 5.
 
 ## `optimization.chunkIds`
 
-`boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic' `
+`boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic'`
 
 Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are a couple of defaults for `optimization.chunkIds`:
 
