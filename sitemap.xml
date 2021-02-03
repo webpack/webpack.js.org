@@ -37,10 +37,10 @@
         <loc>https://webpack.js.org/guides</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/license</loc>
+        <loc>https://webpack.js.org/loaders</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders</loc>
+        <loc>https://webpack.js.org/license</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/migrate</loc>
@@ -118,13 +118,13 @@
         <loc>https://webpack.js.org/api/stats</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/blog/2020-12-08-roadmap-2021</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/blog/printable</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/dependency-graph</loc>
@@ -146,9 +146,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/mode</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/module-federation</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/module-resolution</loc>
@@ -187,10 +184,13 @@
         <loc>https://webpack.js.org/configuration/entry-context</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/configuration/externals</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/configuration/experiments</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/externals</loc>
+        <loc>https://webpack.js.org/concepts/module-federation</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/mode</loc>
@@ -313,10 +313,10 @@
         <loc>https://webpack.js.org/guides/development-vagrant</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/ecma-script-modules</loc>
+        <loc>https://webpack.js.org/guides/entry-advanced</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/entry-advanced</loc>
+        <loc>https://webpack.js.org/guides/ecma-script-modules</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/environment-variables</loc>
@@ -472,9 +472,6 @@
         <loc>https://webpack.js.org/plugins/NoEmitOnErrorsPlugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/automatic-prefetch-plugin</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/banner-plugin</loc>
     </url>
     <url>
@@ -524,6 +521,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/html-webpack-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/automatic-prefetch-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/ignore-plugin</loc>
