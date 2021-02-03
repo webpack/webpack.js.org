@@ -2216,17 +2216,17 @@ module<span class="token punctuation">.</span><span class="token function">fun</
 </span><span class="token prefix deleted">-</span><span class="token line">
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">function component() {
 </span><span class="token prefix unchanged"> </span><span class="token line">  const element = document.createElement('div');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  // Lodash, now imported by this script
+</span></span>
+<span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  // Lodash, now imported by this script
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">  return element;
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  return element;
 </span><span class="token prefix unchanged"> </span><span class="token line">}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">const webpack = require('webpack');
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: './src/index.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: 'main.js',
@@ -2249,17 +2249,17 @@ cacheable modules <span class="token number">530</span> KiB
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
 webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">2910</span> ms</code></pre> <p>We can also use the <code>ProvidePlugin</code> to expose a single export of a module by configuring it with an "array path" (e.g. <code>[module, child, ...children?]</code>). So let's imagine we only wanted to provide the <code>join</code> method from <code>lodash</code> wherever it's invoked:</p> <p><strong>src/index.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">function component() {
 </span><span class="token prefix unchanged"> </span><span class="token line">  const element = document.createElement('div');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+</span></span>
+<span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  element.innerHTML = join(['Hello', 'webpack'], ' ');
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">  return element;
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  return element;
 </span><span class="token prefix unchanged"> </span><span class="token line">}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
 </span><span class="token prefix unchanged"> </span><span class="token line">const webpack = require('webpack');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: './src/index.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: 'main.js',
@@ -2273,19 +2273,19 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  ],
 </span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre> <p>This would go nicely with <a href="/guides/tree-shaking">Tree Shaking</a> as the rest of the <code>lodash</code> library should get dropped.</p> <h2 id="granular-shimming">Granular Shimming<a href="#granular-shimming" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>Some legacy modules rely on <code>this</code> being the <code>window</code> object. Let's update our <code>index.js</code> so this is the case:</p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">function component() {
 </span><span class="token prefix unchanged"> </span><span class="token line">  const element = document.createElement('div');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">  element.innerHTML = join(['Hello', 'webpack'], ' ');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  // Assume we are in the context of `window`
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  element.innerHTML = join(['Hello', 'webpack'], ' ');
+</span></span>
+<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  // Assume we are in the context of `window`
 </span><span class="token prefix inserted">+</span><span class="token line">  this.alert("Hmmm, this probably isn't a great idea...");
 </span><span class="token prefix inserted">+</span><span class="token line">
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  return element;
 </span><span class="token prefix unchanged"> </span><span class="token line">}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre> <p>This becomes a problem when the module is executed in a CommonJS context where <code>this</code> is equal to <code>module.exports</code>. In this case you can override <code>this</code> using the <a href="/loaders/imports-loader/"><code>imports-loader</code></a>:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre> <p>This becomes a problem when the module is executed in a CommonJS context where <code>this</code> is equal to <code>module.exports</code>. In this case you can override <code>this</code> using the <a href="/loaders/imports-loader/"><code>imports-loader</code></a>:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
 </span><span class="token prefix unchanged"> </span><span class="token line">const webpack = require('webpack');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: './src/index.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: 'main.js',
@@ -2321,8 +2321,8 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Now, while you'd likely never do this in your own source code, you may encounter a dated library you'd like to use that contains similar code to what's shown above. In this case, we can use <a href="/loaders/exports-loader/"><code>exports-loader</code></a>, to export that global variable as a normal module export. For instance, in order to export <code>file</code> as <code>file</code> and <code>helpers.parse</code> as <code>parse</code>:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
 </span><span class="token prefix unchanged"> </span><span class="token line">const webpack = require('webpack');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: './src/index.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: 'main.js',
@@ -2337,7 +2337,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">      {
 </span><span class="token prefix inserted">+</span><span class="token line">        test: require.resolve('./src/globals.js'),
 </span><span class="token prefix inserted">+</span><span class="token line">        use:
-</span><span class="token prefix inserted">+</span><span class="token line">          'exports-loader?type=commonjs&#x26;exports[]=file&#x26;exports[]=multiple|helpers.parse|parse',
+</span><span class="token prefix inserted">+</span><span class="token line">          'exports-loader?type=commonjs&#x26;exports=file,multiple|helpers.parse|parse',
 </span><span class="token prefix inserted">+</span><span class="token line">      },
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">    ],
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
@@ -2350,29 +2350,29 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix inserted">+</span><span class="token line">
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">function component() {
 </span><span class="token prefix unchanged"> </span><span class="token line">  const element = document.createElement('div');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">  element.innerHTML = join(['Hello', 'webpack'], ' ');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">  // Assume we are in the context of `window`
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  element.innerHTML = join(['Hello', 'webpack'], ' ');
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  // Assume we are in the context of `window`
 </span><span class="token prefix unchanged"> </span><span class="token line">  this.alert("Hmmm, this probably isn't a great idea...");
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">  return element;
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  return element;
 </span><span class="token prefix unchanged"> </span><span class="token line">}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre> <aside class="tip"><h6 class="tip__prefix">tip</h6><p>Note that we aren't binding the <code>import</code> to a variable. This is because polyfills simply run on their own, prior to the rest of the code base, allowing us to then assume certain native functionality exists.</p></aside> <p>Note that this approach prioritizes correctness over bundle size. To be safe and robust, polyfills/shims must run <strong>before all other code</strong>, and thus either need to load synchronously, or, all app code needs to load after all polyfills/shims load. There are many misconceptions in the community, as well, that modern browsers "don't need" polyfills, or that polyfills/shims merely serve to add missing features - in fact, they often <em>repair broken implementations</em>, even in the most modern of browsers. The best practice thus remains to unconditionally and synchronously load all polyfills/shims, despite the bundle size cost this incurs.</p> <p>If you feel that you have mitigated these concerns and wish to incur the risk of brokenness, here's one way you might do it: Let's move our <code>import</code> to a new file and add the <a href="https://github.com/github/fetch"><code>whatwg-fetch</code></a> polyfill:</p> <pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save whatwg-fetch</code></pre> <p><strong>src/index.js</strong></p> <pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">import 'babel-polyfill';
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre> <aside class="tip"><h6 class="tip__prefix">tip</h6><p>Note that we aren't binding the <code>import</code> to a variable. This is because polyfills simply run on their own, prior to the rest of the code base, allowing us to then assume certain native functionality exists.</p></aside> <p>Note that this approach prioritizes correctness over bundle size. To be safe and robust, polyfills/shims must run <strong>before all other code</strong>, and thus either need to load synchronously, or, all app code needs to load after all polyfills/shims load. There are many misconceptions in the community, as well, that modern browsers "don't need" polyfills, or that polyfills/shims merely serve to add missing features - in fact, they often <em>repair broken implementations</em>, even in the most modern of browsers. The best practice thus remains to unconditionally and synchronously load all polyfills/shims, despite the bundle size cost this incurs.</p> <p>If you feel that you have mitigated these concerns and wish to incur the risk of brokenness, here's one way you might do it: Let's move our <code>import</code> to a new file and add the <a href="https://github.com/github/fetch"><code>whatwg-fetch</code></a> polyfill:</p> <pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save whatwg-fetch</code></pre> <p><strong>src/index.js</strong></p> <pre><code class="hljs language-diff"><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">import 'babel-polyfill';
 </span><span class="token prefix deleted">-</span><span class="token line">
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">function component() {
 </span><span class="token prefix unchanged"> </span><span class="token line">  const element = document.createElement('div');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">  element.innerHTML = join(['Hello', 'webpack'], ' ');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">  // Assume we are in the context of `window`
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  element.innerHTML = join(['Hello', 'webpack'], ' ');
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  // Assume we are in the context of `window`
 </span><span class="token prefix unchanged"> </span><span class="token line">  this.alert("Hmmm, this probably isn't a great idea...");
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">  return element;
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  return element;
 </span><span class="token prefix unchanged"> </span><span class="token line">}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre> <p><strong>project</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());</span></span></code></pre> <p><strong>project</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
 </span><span class="token prefix unchanged"> </span><span class="token line"> |- package.json
 </span><span class="token prefix unchanged"> </span><span class="token line"> |- webpack.config.js
 </span><span class="token prefix unchanged"> </span><span class="token line"> |- /dist
@@ -2383,8 +2383,8 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre> <p><strong>src/polyfills.js</strong></p> <pre><code class="hljs language-javascript"><span class="token keyword">import</span> <span class="token string">'babel-polyfill'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token string">'whatwg-fetch'</span><span class="token punctuation">;</span></code></pre> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
 </span><span class="token prefix unchanged"> </span><span class="token line">const webpack = require('webpack');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  entry: './src/index.js',
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  entry: {
 </span><span class="token prefix inserted">+</span><span class="token line">    polyfills: './src/polyfills',
@@ -2436,16 +2436,16 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  &#x3C;/body>
 </span><span class="token prefix unchanged"> </span><span class="token line">&#x3C;/html></span></span></code></pre> <p>Now we can <code>fetch</code> some data within our entry script:</p> <p><strong>src/index.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">function component() {
 </span><span class="token prefix unchanged"> </span><span class="token line">  const element = document.createElement('div');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">  element.innerHTML = join(['Hello', 'webpack'], ' ');
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">  // Assume we are in the context of `window`
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  element.innerHTML = join(['Hello', 'webpack'], ' ');
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  // Assume we are in the context of `window`
 </span><span class="token prefix unchanged"> </span><span class="token line">  this.alert("Hmmm, this probably isn't a great idea...");
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">  return element;
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  return element;
 </span><span class="token prefix unchanged"> </span><span class="token line">}
-</span><span class="token prefix unchanged"> </span><span class="token line">
-</span><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">document.body.appendChild(component());
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">
 </span><span class="token prefix inserted">+</span><span class="token line">fetch('https://jsonplaceholder.typicode.com/users')
 </span><span class="token prefix inserted">+</span><span class="token line">  .then((response) => response.json())
