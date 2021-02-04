@@ -128,25 +128,6 @@ module.exports = {
 };
 ```
 
-### `stats.cached`
-
-Old version of `stats.cachedModules`.
-
-### `stats.cachedModules`
-
-`boolean = true`
-
-Tells `stats` whether to add information about the cached modules (not the ones that were built).
-
-```javascript
-module.exports = {
-  //...
-  stats: {
-    cached: false
-  }
-};
-```
-
 ### `stats.assetsSpace`
 
 `number = 15`
@@ -206,6 +187,10 @@ module.exports = {
   }
 };
 ```
+
+### `stats.cached`
+
+Old version of `stats.cachedModules`.
 
 ### `stats.cachedModules`
 
