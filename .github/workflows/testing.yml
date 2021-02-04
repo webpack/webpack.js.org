@@ -87,8 +87,10 @@ jobs:
       - uses: actions/cache@v2
         id: build-cache
         with:
-          path: node_modules/.cache
-          key: build-${{ hashFiles('webpack.*.js') }}
+          path: .cache
+          key: build-${{ hashFiles('webpack.*.js') }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            build-${{ hashFiles('webpack.*.js') }}-
 
       - name: Build site
         run: yarn build
@@ -122,6 +124,14 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
+      - uses: actions/cache@v2
+        id: build-cache
+        with:
+          path: .cache
+          key: build-e2e-${{ hashFiles('webpack.*.js') }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            build-e2e-${{ hashFiles('webpack.*.js') }}-
 
       - run: |
           yarn
