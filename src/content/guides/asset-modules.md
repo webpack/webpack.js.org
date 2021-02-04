@@ -6,6 +6,7 @@ contributors:
   - EugeneHlushko
   - chenxsan
   - anshumanv
+  - spence-s
 related:
   - title: webpack 5 - Asset Modules
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
@@ -388,3 +389,45 @@ module.exports = {
 ```
 
 Also you can [specify a function](/configuration/module/#ruleparserdataurlcondition) to decide to inlining a module or not.
+
+### Replacing Inline Loader Syntax
+
+Before Asset Modules and Webpack 5, it was possible to use [inline syntax](https://webpack.js.org/concepts/loaders/#inline) with the legacy loaders mentioned above.
+
+It is now reccomended to remove all inline loader syntax and use a resourceQuery condition to mimic the functionality of the inline syntax. 
+
+For example, in the case of replacing `raw-loader` with `asset/source` type:
+
+```diff
+- import myModule from 'raw-loader!my-module';
++ import myModule from 'my-module?raw';
+```
+and in the webpack config. 
+```diff
+module: {
+    rules: [
+    ...
++     {
++       resouceQuery: /raw/
++       type: 'asset/source'      
++     }
+    ]
+  },
+```
+and if you'd like to exclude raw assets from being parsed by other loaders, use a negative lookahead. 
+```diff
+module: {
+    rules: [
+    ...
++     {
++       test: /\.m?js$/,
++       resourceQuery: /^(?!raw$).*/,
++     },
+      {
+        resouceQuery: /raw/
+        type: 'asset/source'      
+      }
+    ]
+  },
+```
+
