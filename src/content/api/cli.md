@@ -279,6 +279,8 @@ webpack-cli 4.2.0
 webpack 5.4.0
 ```
 
+### config
+
 **Build source using a configuration file**
 
 Specify a different [configuration](/configuration) file other than `webpack.config.js`, which is one of the defaults.
@@ -286,6 +288,8 @@ Specify a different [configuration](/configuration) file other than `webpack.con
 ```bash
 npx webpack --config example.config.js
 ```
+
+### config-name
 
 In case your configuration file exports multiple configurations, you can use `--config-name` to specify which configuration to run.
 
@@ -333,7 +337,7 @@ You can also pass multiple values:
 npx webpack --config-name first --config-name second
 ```
 
-**Merge two or more different webpack configurations**
+### merge
 
 You can merge two or more different webpack configurations with the help of `--merge`:
 
@@ -341,7 +345,9 @@ You can merge two or more different webpack configurations with the help of `--m
 npx webpack --config ./first.js --config ./second.js --merge
 ```
 
-**Print result of webpack as a JSON**
+### `json`
+
+**Print result of webpack as JSON**
 
 ```bash
 npx webpack --json
