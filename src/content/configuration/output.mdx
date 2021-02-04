@@ -1135,7 +1135,7 @@ module.exports = {
   //...
   output: {
     // One of the below
-    publicPath: 'auto', // It automatically determines the publicPath from `import.meta.url`, `document.currentScript`, `<script/>` or `self.location`.
+    publicPath: 'auto', // It automatically determines the public path from either `import.meta.url`, `document.currentScript`, `<script />` or `self.location`.
     publicPath: 'https://cdn.example.com/assets/', // CDN (always HTTPS)
     publicPath: '//cdn.example.com/assets/', // CDN (same protocol)
     publicPath: '/assets/', // server-relative
@@ -1156,7 +1156,7 @@ __webpack_public_path__ = myRuntimePublicPath;
 
 See [this discussion](https://github.com/webpack/webpack/issues/2776#issuecomment-233208623) for more information on `__webpack_public_path__`.
 
-T> output.publicPath defaults to `'auto'` with `web` and `web-worker` targets.
+T> `output.publicPath` defaults to `'auto'` with `web` and `web-worker` targets.
 
 ## `output.sourceMapFilename`
 

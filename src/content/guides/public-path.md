@@ -60,4 +60,4 @@ import './public-path';
 import './app';
 ```
 
-T> You can also set `publicPath: 'auto'`. It automatically determines the publicPath from `import.meta.url`, `document.currentScript`, `<script/>` or `self.location`. It only works with `web` and `web-worker` targets.
+T> When using `web` or `web-worker` target, `publicPath` defaults to `'auto'` which will automatically determines the public path from either `import.meta.url`, `document.currentScript`, `<script />` or `self.location`.
