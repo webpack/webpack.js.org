@@ -210,10 +210,18 @@ This is the lookup priority in increasing order
 
 W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/configuration/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
 
+### `help`
+
 **List basic commands and flags available on the cli**
+
+Valid syntax for help is `webpack help [command] [option]'` or `'webpack [command] --help`
 
 ```bash
 npx webpack --help
+
+# or
+
+npx webpack help
 ```
 
 **List all supported commands and flags by cli**
@@ -222,12 +230,24 @@ npx webpack --help
 npx webpack --help=verbose
 ```
 
+**See help for a specific command or option**
+
+```bash
+npx webpack help --mode
+```
+
+### version
+
 **Show version of installed packages and sub-packages**
 
 To inspect the version of `webpack` and `webpack-cli` you are using just run command:
 
 ```bash
 npx webpack --version
+
+# or
+
+npx webpack version
 ```
 
 This will output the following result:
