@@ -8,7 +8,7 @@
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Good loaders for requiring your assets are the <a href="/loaders/file-loader/">file-loader</a> and the <a href="/loaders/url-loader/">url-loader</a> which you should specify in your config (see <a href="https://github.com/webpack-contrib/css-loader#assets">below</a>).</p> <p>And run <code>webpack</code> via your preferred method.</p> <h3 id="tostring"><code>toString</code><a href="#tostring" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>You can also use the css-loader results directly as a string, such as in Angular's component style.</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p><strong>Only for webpack v4:</strong></p> <p>Good loaders for requiring your assets are the <a href="/loaders/file-loader/">file-loader</a> and the <a href="/loaders/url-loader/">url-loader</a> which you should specify in your config (see <a href="https://github.com/webpack-contrib/css-loader#assets">below</a>).</p> <p>And run <code>webpack</code> via your preferred method.</p> <h3 id="tostring"><code>toString</code><a href="#tostring" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>You can also use the css-loader results directly as a string, such as in Angular's component style.</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -526,7 +526,21 @@ console<span class="token punctuation">.</span><span class="token function">log<
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h2 id="examples">Examples<a href="#examples" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <h3 id="assets">Assets<a href="#assets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>The following <code>webpack.config.js</code> can load CSS files, embed small PNG/JPG/GIF/SVG images as well as fonts as <a href="https://tools.ietf.org/html/rfc2397">Data URLs</a> and copy larger files to the output directory.</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h2 id="examples">Examples<a href="#examples" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <h3 id="assets">Assets<a href="#assets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>The following <code>webpack.config.js</code> can load CSS files, embed small PNG/JPG/GIF/SVG images as well as fonts as <a href="https://tools.ietf.org/html/rfc2397">Data URLs</a> and copy larger files to the output directory.</p> <p><strong>For webpack v5:</strong></p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.css$/i</span><span class="token punctuation">,</span>
+        use<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"style-loader"</span><span class="token punctuation">,</span> <span class="token string">"css-loader"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i</span><span class="token punctuation">,</span>
+        <span class="token comment">// More information here https://webpack.js.org/guides/asset-modules/</span>
+        type<span class="token operator">:</span> <span class="token string">"asset"</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p><strong>For webpack v4:</strong></p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -558,8 +572,6 @@ console<span class="token punctuation">.</span><span class="token function">log<
               <span class="token comment">// Run `postcss-loader` on each CSS `@import`, do not forget that `sass-loader` compile non CSS `@import`'s into a single file</span>
               <span class="token comment">// If you need run `sass-loader` and `postcss-loader` on each CSS `@import` please set it to `2`</span>
               importLoaders<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
-              <span class="token comment">// Automatically enable css modules for files satisfying `/\.module\.\w+$/i` RegExp.</span>
-              modules<span class="token operator">:</span> <span class="token punctuation">{</span> auto<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">{</span>
@@ -572,13 +584,20 @@ console<span class="token punctuation">.</span><span class="token function">log<
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token comment">// For webpack v5</span>
       <span class="token punctuation">{</span>
         test<span class="token operator">:</span> <span class="token regex">/\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">"url-loader"</span><span class="token punctuation">,</span>
-        options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          limit<span class="token operator">:</span> <span class="token number">8192</span><span class="token punctuation">,</span>
-        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token comment">// More information here https://webpack.js.org/guides/asset-modules/</span>
+        type<span class="token operator">:</span> <span class="token string">"asset"</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token comment">// For webpack v4</span>
+      <span class="token comment">// {</span>
+      <span class="token comment">//  test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,</span>
+      <span class="token comment">//  loader: "url-loader",</span>
+      <span class="token comment">//  options: {</span>
+      <span class="token comment">//    limit: 8192,</span>
+      <span class="token comment">//  },</span>
+      <span class="token comment">// },</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h3 id="resolve-unresolved-urls-using-an-alias">Resolve unresolved URLs using an alias<a href="#resolve-unresolved-urls-using-an-alias" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p><strong>index.css</strong></p> <pre><code class="hljs language-css"><span class="token selector">.class</span> <span class="token punctuation">{</span>
