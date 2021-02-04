@@ -97,7 +97,7 @@ For more information, please visit the [repository](https://github.com/zinserjan
 
 ## Karma
 
-The [`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) package allows you to use webpack to pre-process files in [Karma](https://karma-runner.github.io/1.0/index.html). It also makes use of [`webpack-dev-middleware`](https://github.com/webpack/webpack-dev-middleware) and allows passing configurations for both. A simple example may look something like this:
+The [`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) package allows you to use webpack to pre-process files in [Karma](https://karma-runner.github.io/1.0/index.html).
 
 ``` bash
 npm install --save-dev webpack karma karma-webpack
@@ -108,6 +108,7 @@ __karma.conf.js__
 ``` js
 module.exports = function(config) {
   config.set({
+    frameworks: [ 'webpack' ],
     files: [
       { pattern: 'test/*_test.js', watched: false },
       { pattern: 'test/**/*_test.js', watched: false },
@@ -119,9 +120,7 @@ module.exports = function(config) {
     webpack: {
       // Any custom webpack configuration...
     },
-    webpackMiddleware: {
-      // Any custom webpack-dev-middleware configuration...
-    },
+    plugins: [ 'karma-webpack' ],
   });
 };
 ```
