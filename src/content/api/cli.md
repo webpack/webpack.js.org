@@ -370,9 +370,9 @@ T> The `mode` option would respect the `--node-env` option if you don't set it e
 
 | Parameter       | Explanation                                                    | Input type | Default                                             |
 | --------------- | -------------------------------------------------------------- | ---------- | --------------------------------------------------- |
-| `--config`      | Path to the configuration file                                 | string     | [Default Configs](/api/cli/#default-configurations) |
-| `--config-name` | Name of the configuration to use                               | string     |
-| `--env`         | Environment passed to the configuration, when it is a function |            |
+| `--config`      | Path to the configuration file                                 | string[]   | [Default Configs](/api/cli/#default-configurations) |
+| `--config-name` | Name of the configuration to use                               | string[]   |                                                     |
+| `--env`         | Environment passed to the configuration, when it is a function | string[]   |                                                     |
 
 ## Analyzing Bundle
 
