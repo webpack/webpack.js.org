@@ -214,7 +214,7 @@ W> Note that Command Line Interface has a higher precedence for the arguments yo
 
 **List basic commands and flags available on the cli**
 
-Valid syntax for help is `webpack help [command] [option]'` or `'webpack [command] --help`
+Both `webpack help [command] [option]` and `webpack [command] --help` are valid to get help:
 
 ```bash
 npx webpack --help
