@@ -402,11 +402,13 @@ For example, in the case of replacing `raw-loader` with `asset/source` type:
 - import myModule from 'raw-loader!my-module';
 + import myModule from 'my-module?raw';
 ```
-and in the webpack config. 
+
+and in the webpack configuration:
+
 ```diff
 module: {
     rules: [
-    ...
+    // ...
 +     {
 +       resouceQuery: /raw/
 +       type: 'asset/source'      
@@ -414,11 +416,13 @@ module: {
     ]
   },
 ```
-and if you'd like to exclude raw assets from being parsed by other loaders, use a negative lookahead. 
+
+and if you'd like to exclude raw assets from being parsed by other loaders, use a negative lookahead:
+
 ```diff
 module: {
     rules: [
-    ...
+    // ...
 +     {
 +       test: /\.m?js$/,
 +       resourceQuery: /^(?!raw$).*/,
@@ -430,4 +434,3 @@ module: {
     ]
   },
 ```
-
