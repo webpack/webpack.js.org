@@ -1,5 +1,6 @@
 ---
 title: ProfilingPlugin
+group: webpack
 contributors:
   - EugeneHlushko
   - byzyk

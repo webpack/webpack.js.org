@@ -47,6 +47,7 @@ async function main() {
       // generate yaml matter for file
       let headmatter = yamlHeadmatter({
         title: title,
+        group: 'webpack contrib',
         source: url,
         edit: editUrl,
         repo: htmlUrl,

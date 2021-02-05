@@ -1,5 +1,6 @@
 ---
 title: WatchIgnorePlugin
+group: webpack
 contributors:
   - skipjack
   - byzyk

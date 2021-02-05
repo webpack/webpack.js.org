@@ -1,5 +1,6 @@
 ---
 title: SplitChunksPlugin
+group: webpack
 contributors:
   - sokra
   - jeremenichelli

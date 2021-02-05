@@ -1,5 +1,6 @@
 ---
 title: ProvidePlugin
+group: webpack
 contributors:
   - sokra
   - simon04

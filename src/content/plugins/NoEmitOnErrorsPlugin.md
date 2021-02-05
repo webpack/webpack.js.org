@@ -1,5 +1,6 @@
 ---
 title: NoEmitOnErrorsPlugin
+group: webpack
 contributors:
   - jeffin
   - chenxsan
