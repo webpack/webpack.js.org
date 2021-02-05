@@ -15,11 +15,7 @@ repo: https://github.com/webpack-contrib/url-loader
 
 
 
-<<<<<<< HEAD
 **v5 后弃用**：请考虑使用 [`asset modules`](/guides/asset-modules/) 代替。
-=======
-**DEPREACTED for v5**: please consider migrating to [`asset modules`](/guides/asset-modules/).
->>>>>>> e4a02c65ef99e0d6fb696500b5fdce3e2b212530
 
 用于将文件转换为 base64 URI 的 loader。
 

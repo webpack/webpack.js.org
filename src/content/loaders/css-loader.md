@@ -49,13 +49,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-[file-loader](/loaders/file-loader/) 和 [url-loader](/loaders/file-loader/) 能够非常好的处理资源文件，需在配置文件中进行配置，相关配置请[参阅](https://github.com/webpack-contrib/css-loader#assets)。
-=======
-**Only for webpack v4:**
+**仅针对 webpack v4：**
 
-Good loaders for requiring your assets are the [file-loader](/loaders/file-loader/) and the [url-loader](/loaders/url-loader/) which you should specify in your config (see [below](https://github.com/webpack-contrib/css-loader#assets)).
->>>>>>> e4a02c65ef99e0d6fb696500b5fdce3e2b212530
+[file-loader](/loaders/file-loader/) 和 [url-loader](/loaders/url-loader/) 能够非常好的处理资源文件，需在配置文件中进行配置，相关配置请[参阅](https://github.com/webpack-contrib/css-loader#assets)。
 
 然后运行 `webpack`。
 
@@ -90,7 +86,7 @@ console.log(css); // {String}
 
 如果由于某种原因，你需要将 CSS 提取为纯粹的
 字符串资源（即不包含在 JS 模块中），则可能需要
-查看 [extract-loader](https://github.com/peerigon/extract-loader)。 
+查看 [extract-loader](https://github.com/peerigon/extract-loader)。
 比如，当你需要对 CSS 进行后处理时，会非常有用。
 
 **webpack.config.js**
@@ -1213,14 +1209,9 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
-              // 每一个 CSS 的 `@import` 都运行 `postcss-loader`，不要忘了 `sass-loader` 将不属于 CSS 的 `@import` 编译到一个文件中 
+              // 每一个 CSS 的 `@import` 都运行 `postcss-loader`，不要忘了 `sass-loader` 将不属于 CSS 的 `@import` 编译到一个文件中
               // 如果您需要在每个 CSS 的 `@import` 上运行 `sass-loader` 和 `postcss-loader`，请将其设置为 `2`。
               importLoaders: 1,
-<<<<<<< HEAD
-              // 对于满足 `/\.module\.\w+$/i` 正则匹配发热文件自动启用 css 模块。
-              modules: { auto: true },
-=======
->>>>>>> e4a02c65ef99e0d6fb696500b5fdce3e2b212530
             },
           },
           {
