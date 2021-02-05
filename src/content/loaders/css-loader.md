@@ -49,7 +49,13 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 [file-loader](/loaders/file-loader/) 和 [url-loader](/loaders/file-loader/) 能够非常好的处理资源文件，需在配置文件中进行配置，相关配置请[参阅](https://github.com/webpack-contrib/css-loader#assets)。
+=======
+**Only for webpack v4:**
+
+Good loaders for requiring your assets are the [file-loader](/loaders/file-loader/) and the [url-loader](/loaders/url-loader/) which you should specify in your config (see [below](https://github.com/webpack-contrib/css-loader#assets)).
+>>>>>>> e4a02c65ef99e0d6fb696500b5fdce3e2b212530
 
 然后运行 `webpack`。
 
@@ -1133,6 +1139,30 @@ module.exports = {
 
 如下配置的 `webpack.config.js` 可以加载 CSS 文件，嵌入小的 PNG/JPG/GIF/SVG 图片以及字体作为[数据 URL](https://tools.ietf.org/html/rfc2397)，并将较大的文件复制到输出目录。
 
+**For webpack v5:**
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+        // More information here https://webpack.js.org/guides/asset-modules/
+        type: "asset",
+      },
+    ],
+  },
+};
+```
+
+**For webpack v4:**
+
 **webpack.config.js**
 
 ```js
@@ -1186,8 +1216,11 @@ module.exports = {
               // 每一个 CSS 的 `@import` 都运行 `postcss-loader`，不要忘了 `sass-loader` 将不属于 CSS 的 `@import` 编译到一个文件中 
               // 如果您需要在每个 CSS 的 `@import` 上运行 `sass-loader` 和 `postcss-loader`，请将其设置为 `2`。
               importLoaders: 1,
+<<<<<<< HEAD
               // 对于满足 `/\.module\.\w+$/i` 正则匹配发热文件自动启用 css 模块。
               modules: { auto: true },
+=======
+>>>>>>> e4a02c65ef99e0d6fb696500b5fdce3e2b212530
             },
           },
           {
@@ -1200,13 +1233,20 @@ module.exports = {
           },
         ],
       },
+      // For webpack v5
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-        loader: "url-loader",
-        options: {
-          limit: 8192,
-        },
+        // More information here https://webpack.js.org/guides/asset-modules/
+        type: "asset",
       },
+      // For webpack v4
+      // {
+      //  test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+      //  loader: "url-loader",
+      //  options: {
+      //    limit: 8192,
+      //  },
+      // },
     ],
   },
 };
