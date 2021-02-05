@@ -26,17 +26,17 @@ These options determine how the [different types of modules](/concepts/modules) 
 
 ## `module.generator`
 
-<Badge text='5.12.0+' />
+<Badge text="5.12.0+" />
 
 It's possible to configure all generators' options in one place with a `module.generator`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   module: {
     generator: {
-      'asset': {
+      asset: {
         // Generator options for asset modules
       },
       'asset/inline': {
@@ -45,7 +45,7 @@ module.exports = {
       'asset/resource': {
         // Generator options for asset/resource modules
       },
-      'javascript': {
+      javascript: {
         // No generator options are supported for this module type yet
       },
       'javascript/auto': {
@@ -58,24 +58,24 @@ module.exports = {
         // ditto
       },
       // others…
-    }
-  }
+    },
+  },
 };
 ```
 
 ## module.parser
 
-<Badge text='5.12.0+' />
+<Badge text="5.12.0+" />
 
 Similar to the [`module.generator`](#modulegenerator), you can configure all parsers' options in one place with a `module.parser`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   module: {
     parser: {
-      'asset': {
+      asset: {
         // Parser options for asset modules
       },
       'asset/inline': {
@@ -87,10 +87,10 @@ module.exports = {
       'asset/source': {
         // ditto
       },
-      'javascript': {
+      javascript: {
         // Parser options for javascript modules
         // e.g, enable parsing of require.ensure syntax
-        requireEnsure: true
+        requireEnsure: true,
       },
       'javascript/auto': {
         // ditto
@@ -102,11 +102,10 @@ module.exports = {
         // ditto
       },
       // others…
-    }
-  }
+    },
+  },
 };
 ```
-
 
 ### module.parser.javascript
 
@@ -134,17 +133,17 @@ Enable [magic comments](/api/module-methods/#magic-comments) support for CommonJ
 - Type: `boolean`
 - Available: 5.17.0+
 - Example:
-    ```js
-    module.exports = {
-      module: {
-        parser: {
-          javascript: {
-            commonjsMagicComments: true,
-          },
-        }
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          commonjsMagicComments: true,
+        },
       },
-    };
-    ```
+    },
+  };
+  ```
 
 Note that only `webpackIgnore` comment is supported at the moment:
 
@@ -156,16 +155,16 @@ const x = require(/* webpackIgnore: true */ 'x');
 
 `RegExp` `[RegExp]` `function(resource)` `string` `[string]`
 
-Prevent webpack from parsing any files matching the given regular expression(s). Ignored files __should not__ have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
+Prevent webpack from parsing any files matching the given regular expression(s). Ignored files **should not** have calls to `import`, `require`, `define` or any other importing mechanism. This can boost build performance when ignoring large libraries.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   module: {
     noParse: /jquery|lodash/,
-  }
+  },
 };
 ```
 
@@ -173,8 +172,8 @@ module.exports = {
 module.exports = {
   //...
   module: {
-    noParse: (content) => /jquery|lodash/.test(content)
-  }
+    noParse: (content) => /jquery|lodash/.test(content),
+  },
 };
 ```
 
@@ -187,14 +186,14 @@ Cache the resolution of module requests. There are a couple of defaults for `mod
 - `false` if [`cache`](/configuration/other-options/#cache) is disabled.
 - `true` if [`cache`](/configuration/other-options/#cache) is enabled and the module appears to come from node modules, `false` otherwise.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   module: {
     unsafeCache: false,
-  }
+  },
 };
 ```
 
@@ -206,13 +205,11 @@ W> The default value is `true` in webpack 4.
 
 An array of [Rules](#rule) which are matched to requests when modules are created. These rules can modify how the module is created. They can apply loaders to the module, or modify the parser.
 
-
 ## Rule
 
 `object`
 
 A Rule can be separated into three parts — Conditions, Results and nested Rules.
-
 
 ### Rule Conditions
 
@@ -222,14 +219,13 @@ There are two input values for the conditions:
 
 2. The issuer: An absolute path to the file of the module which requested the resource. It's the location of the import.
 
-__Example:__ When we `import './style.css'` within `app.js`, the resource is `/path/to/style.css` and the issuer is `/path/to/app.js`.
+**Example:** When we `import './style.css'` within `app.js`, the resource is `/path/to/style.css` and the issuer is `/path/to/app.js`.
 
 In a Rule the properties [`test`](#ruletest), [`include`](#ruleinclude), [`exclude`](#ruleexclude) and [`resource`](#ruleresource) are matched with the resource and the property [`issuer`](#ruleissuer) is matched with the issuer.
 
 When using multiple conditions, all conditions must match.
 
 W> Be careful! The resource is the _resolved_ path of the file, which means symlinked resources are the real path _not_ the symlink location. This is good to remember when using tools that symlink packages (like `npm link`), common conditions like `/node_modules/` may inadvertently miss symlinked files. Note that you can turn off symlink resolving (so that resources are resolved to the symlink path) via [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks).
-
 
 ### Rule results
 
@@ -248,7 +244,6 @@ The [`enforce`](#ruleenforce) property affects the loader category. Whether it's
 
 The [`parser`](#ruleparser) property affects the parser options.
 
-
 ## Nested rules
 
 Nested rules can be specified under the properties [`rules`](#rulerules) and [`oneOf`](#ruleoneof).
@@ -260,7 +255,6 @@ The order of evaluation is as follows:
 1. The parent rule
 2. [`rules`](#rulerules)
 3. [`oneOf`](#ruleoneof)
-
 
 ## `Rule.enforce`
 
@@ -274,8 +268,8 @@ There is also an additional category "inlined loader" which are loaders applied 
 
 There are two phases that all loaders enter one after the other:
 
-1. __Pitching__ phase: the pitch method on loaders is called in the order `post, inline, normal, pre`. See [Pitching Loader](/api/loaders/#pitching-loader) for details.
-2. __Normal__ phase: the normal method on loaders is executed in the order `pre, normal, inline, post`. Transformation on the source code of a module happens in this phase.
+1. **Pitching** phase: the pitch method on loaders is called in the order `post, inline, normal, pre`. See [Pitching Loader](/api/loaders/#pitching-loader) for details.
+2. **Normal** phase: the normal method on loaders is executed in the order `pre, normal, inline, post`. Transformation on the source code of a module happens in this phase.
 
 All normal loaders can be omitted (overridden) by prefixing `!` in the request.
 
@@ -283,35 +277,32 @@ All normal and pre loaders can be omitted (overridden) by prefixing `-!` in the 
 
 All normal, post and pre loaders can be omitted (overridden) by prefixing `!!` in the request.
 
-``` javascript
+```javascript
 // Disable normal loaders
 import { a } from '!./file1.js';
 
 // Disable preloaders and normal loaders
-import { b } from  '-!./file2.js';
+import { b } from '-!./file2.js';
 
 // Disable all loaders
-import { c } from  '!!./file3.js';
+import { c } from '!!./file3.js';
 ```
 
 Inline loaders and `!` prefixes should not be used as they are non-standard. They may be used by loader generated code.
-
 
 ## `Rule.exclude`
 
 Exclude all modules matching any of these conditions. If you supply a `Rule.exclude` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.exclude`](#condition) for details.
 
-
 ## `Rule.include`
 
 Include all modules matching any of these conditions. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.include`](#condition) for details.
-
 
 ## `Rule.issuer`
 
 A [`Condition`](#condition) to match against the module that issued the request. In the following example, the `issuer` for the `a.js` request would be the path to the `index.js` file.
 
-__index.js__
+**index.js**
 
 ```javascript
 import A from './a.js';
@@ -319,12 +310,11 @@ import A from './a.js';
 
 This option can be used to apply loaders to the dependencies of a specific module or set of modules.
 
-
 ## `Rule.issuerLayer`
 
 Allows to filter/match by layer of the issuer.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -333,12 +323,11 @@ module.exports = {
     rules: [
       {
         issuerLayer: 'other-layer',
-      }
-    ]
-  }
+      },
+    ],
+  },
 };
 ```
-
 
 ## `Rule.layer`
 
@@ -346,7 +335,7 @@ module.exports = {
 
 Specify the layer in which the module should be placed in.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -356,9 +345,9 @@ module.exports = {
       {
         test: /module-layer-change/,
         layer: 'layer',
-      }
-    ]
-  }
+      },
+    ],
+  },
 };
 ```
 
@@ -366,19 +355,17 @@ module.exports = {
 
 `Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.loader`](#useentry) for details.
 
-
 ## `Rule.loaders`
 
-W> This option is __deprecated__ in favor of `Rule.use`.
+W> This option is **deprecated** in favor of `Rule.use`.
 
 `Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#ruleuse) for details.
-
 
 ## `Rule.mimetype`
 
 You can match config rules to data uri with `mimetype`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -388,9 +375,9 @@ module.exports = {
       {
         mimetype: 'application/json',
         type: 'json',
-      }
-    ]
-  }
+      },
+    ],
+  },
 };
 ```
 
@@ -400,7 +387,7 @@ module.exports = {
 
 An array of [`Rules`](#rule) from which only the first matching Rule is used when the Rule matches.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -412,28 +399,26 @@ module.exports = {
         oneOf: [
           {
             resourceQuery: /inline/, // foo.css?inline
-            use: 'url-loader'
+            use: 'url-loader',
           },
           {
             resourceQuery: /external/, // foo.css?external
-            use: 'file-loader'
-          }
-        ]
-      }
-    ]
-  }
+            use: 'file-loader',
+          },
+        ],
+      },
+    ],
+  },
 };
 ```
 
 T> See [`Nested rules`](#nested-rules) for more information.
-
 
 ## `Rule.options` / `Rule.query`
 
 `Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.options`](#useentry) for details.
 
 W> `Rule.query` is deprecated in favor of `Rule.options` and `UseEntry.options`.
-
 
 ## `Rule.parser`
 
@@ -446,7 +431,7 @@ Parsers may inspect these options and disable or reconfigure themselves accordin
 
 However, parser plugins may accept more than just a boolean. For example, the internal `NodeStuffPlugin` can accept an object instead of `true` to add additional options for a particular Rule.
 
-__Examples__ (parser options by the default plugins):
+**Examples** (parser options by the default plugins):
 
 ```js-with-links
 module.exports = {
@@ -488,7 +473,7 @@ See [Asset Modules guide](/guides/asset-modules/) for additional information and
 
 If a module source size is less than `maxSize` then module will be injected into the bundle as a Base64-encoded string, otherwise module file will be emitted into the output directory.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -499,18 +484,18 @@ module.exports = {
         //...
         parser: {
           dataUrlCondition: {
-            maxSize: 4 * 1024
-          }
-        }
-      }
-    ]
-  }
+            maxSize: 4 * 1024,
+          },
+        },
+      },
+    ],
+  },
 };
 ```
 
 When a function is given, returning `true` tells webpack to inject the module into the bundle as Base64-encoded string, otherwise module file will be emitted into the output directory.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -523,11 +508,11 @@ module.exports = {
           dataUrlCondition: (source, { filename, module }) => {
             const content = source.toString();
             return content.includes('some marker');
-          }
-        }
-      }
-    ]
-  }
+          },
+        },
+      },
+    ],
+  },
 };
 ```
 
@@ -540,7 +525,7 @@ When `Rule.generator.dataUrl` is used as an object, you can configure two proper
 - encoding: When set to `'base64'`, module source will be encoded using Base64 algorithm. Setting `encoding` to false will disable encoding.
 - mimetype: A mimetype for data URI. Resolves from module resource extension by default.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -552,12 +537,12 @@ module.exports = {
         generator: {
           dataUrl: {
             encoding: 'base64',
-            mimetype: 'mimetype/png'
-          }
-        }
-      }
-    ]
-  }
+            mimetype: 'mimetype/png',
+          },
+        },
+      },
+    ],
+  },
 };
 ```
 
@@ -571,17 +556,17 @@ module.exports = {
       {
         //...
         generator: {
-          dataUrl: content => {
+          dataUrl: (content) => {
             const svgToMiniDataURI = require('mini-svg-data-uri');
             if (typeof content !== 'string') {
               content = content.toString();
             }
             return svgToMiniDataURI(content);
-          }
-        }
-      }
-    ]
-  }
+          },
+        },
+      },
+    ],
+  },
 };
 ```
 
@@ -589,29 +574,29 @@ module.exports = {
 
 The same as [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) but for specific rule. Overrides `output.assetModuleFilename` and works only with `asset` and `asset/resource` module types.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   output: {
-    assetModuleFilename: 'images/[hash][ext][query]'
+    assetModuleFilename: 'images/[hash][ext][query]',
   },
   module: {
     rules: [
       {
         test: /\.png/,
-        type: 'asset/resource'
+        type: 'asset/resource',
       },
       {
         test: /\.html/,
         type: 'asset/resource',
         generator: {
-          filename: 'static/[hash][ext]'
-        }
-      }
-    ]
-  }
+          filename: 'static/[hash][ext]',
+        },
+      },
+    ],
+  },
 };
 ```
 
@@ -619,12 +604,11 @@ module.exports = {
 
 A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
 
-
 ## `Rule.resourceQuery`
 
 A [`Condition`](#condition) matched with the resource query. This option is used to test against the query section of a request string (i.e. from the question mark onwards). If you were to `import Foo from './foo.css?inline'`, the following condition would match:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -634,10 +618,10 @@ module.exports = {
       {
         test: /\\.css$/,
         resourceQuery: /inline/,
-        use: 'url-loader'
-      }
-    ]
-  }
+        use: 'url-loader',
+      },
+    ],
+  },
 };
 ```
 
@@ -647,7 +631,7 @@ module.exports = {
 
 If `Rule.type` is set to `'json'` then `Rules.parser.parse` option may be a function that implements custom logic to parse module's source and convert it to a JavaScript `object`. It may be useful to import `toml`, `yaml` and other non-JSON files as JSON, without specific loaders:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const toml = require('toml');
@@ -660,11 +644,11 @@ module.exports = {
         test: /\.toml/,
         type: 'json',
         parser: {
-          parse: toml.parse
-        }
-      }
-    ]
-  }
+          parse: toml.parse,
+        },
+      },
+    ],
+  },
 };
 ```
 
@@ -674,18 +658,15 @@ An array of [`Rules`](#rule) that is also used when the Rule matches.
 
 T> See [`Nested rules`](#nested-rules) for more information.
 
-
 ## `Rule.sideEffects`
 
 `bool`
 
 Indicate what parts of the module contain side effects. See [Tree Shaking](/guides/tree-shaking/#mark-the-file-as-side-effect-free) for details.
 
-
 ## `Rule.test`
 
 Include all modules that pass test assertion. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.test`](#condition) for details.
-
 
 ## `Rule.type`
 
@@ -695,7 +676,7 @@ Possible values: `'javascript/auto' | 'javascript/dynamic' | 'javascript/esm' | 
 
 `Rule.type` sets the type for a matching module. This prevents defaultRules and their default importing behaviors from occurring. For example, if you want to load a `.json` file through a custom loader, you'd need to set the `type` to `javascript/auto` to bypass webpack's built-in json importing. (See [v4.0 changelog](https://github.com/webpack/webpack/releases/tag/v4.0.0) for more details)
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -706,10 +687,10 @@ module.exports = {
       {
         test: /\\.json$/,
         type: 'javascript/auto',
-        loader: 'custom-json-loader'
-      }
-    ]
-  }
+        loader: 'custom-json-loader',
+      },
+    ],
+  },
 };
 ```
 
@@ -719,7 +700,7 @@ module.exports = {
 
 `[UseEntry]` `function(info)`
 
-__`[UseEntry]`__
+**`[UseEntry]`**
 
 `Rule.use` can be an array of [UseEntry](#useentry) which are applied to modules. Each entry specifies a loader to be used.
 
@@ -727,7 +708,7 @@ Passing a string (i.e. `use: [ 'style-loader' ]`) is a shortcut to the loader pr
 
 Loaders can be chained by passing multiple loaders, which will be applied from right to left (last to first configured).
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -741,23 +722,23 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1
-            }
+              importLoaders: 1,
+            },
           },
           {
             loader: 'less-loader',
             options: {
-              noIeCompat: true
-            }
-          }
-        ]
-      }
-    ]
-  }
+              noIeCompat: true,
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
 ```
 
-__`function(info)`__
+**`function(info)`**
 
 `Rule.use` can also be a function which receives the object argument describing the module being loaded, and must return an array of `UseEntry` items.
 
@@ -770,7 +751,7 @@ The `info` object parameter has the following fields:
 
 The same shortcut as an array can be used for the return value (i.e. `use: [ 'style-loader' ]`).
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -778,22 +759,26 @@ module.exports = {
   module: {
     rules: [
       {
-        use: (info) => ([
+        use: (info) => [
           {
-            loader: 'custom-svg-loader'
+            loader: 'custom-svg-loader',
           },
           {
             loader: 'svgo-loader',
             options: {
-              plugins: [{
-                cleanupIDs: { prefix: basename(info.resource) }
-              }]
-            }
-          }
-        ])
-      }
-    ]
-  }
+              plugins: [
+                {
+                  cleanupIDs: {
+                    prefix: basename(info.resource),
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
 ```
 
@@ -808,59 +793,59 @@ All applied resolve options get deeply merged with higher level [resolve](/confi
 
 For example, let's imagine we have an entry in `./src/index.js`, `./src/footer/default.js` and a `./src/footer/overridden.js` to demonstrate the module level resolve.
 
-__./src/index.js__
+**./src/index.js**
 
 ```javascript
 import footer from 'footer';
 console.log(footer);
 ```
 
-__./src/footer/default.js__
+**./src/footer/default.js**
 
 ```javascript
 export default 'default footer';
 ```
 
-__./src/footer/overridden.js__
+**./src/footer/overridden.js**
 
 ```javascript
 export default 'overridden footer';
 ```
 
-__webpack.js.org__
+**webpack.js.org**
 
 ```javascript
 module.exports = {
   resolve: {
     alias: {
-      'footer': './footer/default.js'
-    }
-  }
+      footer: './footer/default.js',
+    },
+  },
 };
 ```
 
 When creating a bundle with this configuration, `console.log(footer)` will output 'default footer'. Let's set `Rule.resolve` for `.js` files, and alias `footer` to `overridden.js`.
 
-__webpack.js.org__
+**webpack.js.org**
 
 ```javascript
 module.exports = {
   resolve: {
     alias: {
-      'footer': './footer/default.js'
-    }
+      footer: './footer/default.js',
+    },
   },
   module: {
     rules: [
       {
         resolve: {
           alias: {
-            'footer': './footer/overridden.js'
-          }
-        }
-      }
-    ]
-  }
+            footer: './footer/overridden.js',
+          },
+        },
+      },
+    ],
+  },
 };
 ```
 
@@ -872,7 +857,7 @@ When creating a bundle with updated configuration, `console.log(footer)` will ou
 
 When enabled, you should provide the file extension when `import`ing a module in `.mjs` files or any other `.js` files when their nearest parent `package.json` file contains a `"type"` field with a value of `"module"`, otherwise webpack would fail the compiling with a `Module not found` error. And webpack won't resolve directories with filenames defined in the [`resolve.mainFiles`](/configuration/resolve/#resolvemainfiles), you have to specify the filename yourself.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -882,11 +867,11 @@ module.exports = {
       {
         test: /\.m?js$/,
         resolve: {
-          fullySpecified: false // disable the behaviour
-        }
-      }
-    ]
-  }
+          fullySpecified: false, // disable the behaviour
+        },
+      },
+    ],
+  },
 };
 ```
 
@@ -908,7 +893,7 @@ Conditions can be one of these:
 
 `{ not: [Condition] }`: All Conditions must NOT match.
 
-__Example:__
+**Example:**
 
 ```javascript
 const path = require('path');
@@ -921,20 +906,19 @@ module.exports = {
         test: /\\.css$/,
         include: [
           path.resolve(__dirname, 'app/styles'),
-          path.resolve(__dirname, 'vendor/styles')
-        ]
-      }
-    ]
-  }
+          path.resolve(__dirname, 'vendor/styles'),
+        ],
+      },
+    ],
+  },
 };
 ```
-
 
 ## `UseEntry`
 
 `object` `function(info)`
 
-__`object`__
+**`object`**
 
 It must have a `loader` property being a string. It is resolved relative to the configuration [`context`](/configuration/entry-context/#context) with the loader resolving options ([resolveLoader](/configuration/resolve/#resolveloader)).
 
@@ -946,7 +930,7 @@ Note that webpack needs to generate a unique module identifier from the resource
 
 It also breaks if the options object cannot be stringified (i.e. circular JSON). Because of this you can have a `ident` property in the options object which is used as unique identifier.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -956,15 +940,15 @@ module.exports = {
       {
         loader: 'css-loader',
         options: {
-          modules: true
-        }
-      }
-    ]
-  }
+          modules: true,
+        },
+      },
+    ],
+  },
 };
 ```
 
-__`function(info)`__
+**`function(info)`**
 
 A `UseEntry` can also be a function which receives the object argument describing the module being loaded, and must return an options object. This can be used to vary the loader options on a per-module basis.
 
@@ -975,7 +959,7 @@ The `info` object parameter has the following fields:
 - `realResource`: Always the path to the module being loaded
 - `resource`: The path to the module being loaded, it is usually equal to `realResource` except when the resource name is overwritten via `!=!` in request string
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -985,26 +969,27 @@ module.exports = {
       {
         loader: 'file-loader',
         options: {
-          outputPath: 'svgs'
-        }
+          outputPath: 'svgs',
+        },
       },
       (info) => ({
         loader: 'svgo-loader',
         options: {
-          plugins: [{
-            cleanupIDs: { prefix: basename(info.resource) }
-          }]
-        }
-      })
-    ]
-  }
+          plugins: [
+            {
+              cleanupIDs: { prefix: basename(info.resource) },
+            },
+          ],
+        },
+      }),
+    ],
+  },
 };
 ```
 
-
 ## Module Contexts
 
-> Avoid using these options as they are __deprecated__ and will soon be removed.
+> Avoid using these options as they are **deprecated** and will soon be removed.
 
 These options describe the default settings for the context created when a dynamic dependency is encountered.
 
@@ -1016,7 +1001,7 @@ Example for an `wrapped` dynamic dependency: `require('./templates/' + expr)`.
 
 Here are the available options with their [defaults](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js):
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -1033,8 +1018,8 @@ module.exports = {
     wrappedContextCritical: false,
     wrappedContextRecursive: true,
     wrappedContextRegExp: /.*/,
-    strictExportPresence: false // since webpack 2.3.0
-  }
+    strictExportPresence: false, // since webpack 2.3.0
+  },
 };
 ```
 

@@ -8,8 +8,8 @@ contributors:
   - EugeneHlushko
   - byzyk
 related:
-   - title: JavaScript Module Systems Showdown
-     url: https://auth0.com/blog/javascript-module-systems-showdown/
+  - title: JavaScript Module Systems Showdown
+    url: https://auth0.com/blog/javascript-module-systems-showdown/
 ---
 
 In [modular programming](https://en.wikipedia.org/wiki/Modular_programming), developers break programs up into discrete chunks of functionality called a _module_.
@@ -42,7 +42,7 @@ webpack supports the following module types natively:
 - [Assets](/guides/asset-modules)
 - WebAssembly modules
 
-In addition to that webpack supports modules written in a variety of languages and preprocessors via _loaders_. _Loaders_ describe to webpack __how__ to process non-native _modules_ and include these _dependencies_ into your _bundles_.
+In addition to that webpack supports modules written in a variety of languages and preprocessors via _loaders_. _Loaders_ describe to webpack **how** to process non-native _modules_ and include these _dependencies_ into your _bundles_.
 The webpack community has built _loaders_ for a wide variety of popular languages and language processors, including:
 
 - [CoffeeScript](http://coffeescript.org)
@@ -53,6 +53,6 @@ The webpack community has built _loaders_ for a wide variety of popular language
 - [Stylus](http://stylus-lang.com)
 - [Elm](https://elm-lang.org/)
 
-And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for __any stack__, while staying __non-opinionated__ about your development, testing, and production workflows.
+And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for **any stack**, while staying **non-opinionated** about your development, testing, and production workflows.
 
-For a full list, see [__the list of loaders__](/loaders) or [__write your own__](/api/loaders).
+For a full list, see [**the list of loaders**](/loaders) or [**write your own**](/api/loaders).

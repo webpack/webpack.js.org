@@ -20,11 +20,9 @@ related:
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
 ---
 
-
 These are the remaining configuration options supported by webpack.
 
 W> Help Wanted: This page is still a work in progress. If you are familiar with any of the options for which the description or examples are incomplete, please create an issue and submit a PR at the [docs repo](https://github.com/webpack/webpack.js.org)!
-
 
 ## `amd`
 
@@ -32,14 +30,14 @@ W> Help Wanted: This page is still a work in progress. If you are familiar with 
 
 Set the value of `require.amd` or `define.amd`. Setting `amd` to `false` will disable webpack's AMD support.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   amd: {
-    jQuery: true
-  }
+    jQuery: true,
+  },
 };
 ```
 
@@ -50,25 +48,22 @@ The allowances were the ability to restrict registrations to a specific version 
 This option allows you to set the key your module looks for to a truthy value.
 As it happens, the AMD support in webpack ignores the defined name anyways.
 
-
-
 ## `bail`
 
 `boolean = false`
 
 Fail out on the first error instead of tolerating it. By default webpack will log these errors in red in the terminal, as well as the browser console when using HMR, but continue bundling. To enable it:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
-  bail: true
+  bail: true,
 };
 ```
 
 This will force webpack to exit its bundling process.
-
 
 ## `cache`
 
@@ -76,15 +71,14 @@ This will force webpack to exit its bundling process.
 
 Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/configuration/mode/#mode-development) and disabled in [`production` mode](/configuration/mode/#mode-production). `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
-  cache: false
+  cache: false,
 };
 ```
-
 
 ### `cache.type`
 
@@ -92,14 +86,14 @@ module.exports = {
 
 Sets the `cache` type to either in memory or on the file system. The `memory` option is straightforward, it tells webpack to store cache in memory and doesn't allow additional configuration:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   cache: {
-    type: 'memory'
-  }
+    type: 'memory',
+  },
 };
 ```
 
@@ -113,7 +107,7 @@ Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
 
 `cache.cacheDirectory` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const path = require('path');
@@ -122,8 +116,8 @@ module.exports = {
   //...
   cache: {
     type: 'filesystem',
-    cacheDirectory: path.resolve(__dirname, '.temp_cache')
-  }
+    cacheDirectory: path.resolve(__dirname, '.temp_cache'),
+  },
 };
 ```
 
@@ -135,7 +129,7 @@ W> The final location of the cache is a combination of `cache.cacheDirectory` + 
 
 Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.name)`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const path = require('path');
@@ -144,8 +138,8 @@ module.exports = {
   //...
   cache: {
     type: 'filesystem',
-    cacheLocation: path.resolve(__dirname, '.test_cache')
-  }
+    cacheLocation: path.resolve(__dirname, '.test_cache'),
+  },
 };
 ```
 
@@ -164,10 +158,10 @@ module.exports = {
   cache: {
     buildDependencies: {
       // This makes all dependencies of this file - build dependencies
-      config: [__filename]
+      config: [__filename],
       // By default webpack and loaders are build dependencies
-    }
-  }
+    },
+  },
 };
 ```
 
@@ -187,15 +181,15 @@ Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/
 
 `cache.hashAlgorithm` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   cache: {
     type: 'filesystem',
-    hashAlgorithm: 'md4'
-  }
+    hashAlgorithm: 'md4',
+  },
 };
 ```
 
@@ -207,15 +201,15 @@ Name for the cache. Different names will lead to different coexisting caches. De
 
 `cache.name` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   cache: {
     type: 'filesystem',
-    name: 'AppBuildCache'
-  }
+    name: 'AppBuildCache',
+  },
 };
 ```
 
@@ -231,15 +225,15 @@ module.exports = {
 
 W> `pack` is the only supported mode since webpack 5.0.x
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   cache: {
     type: 'filesystem',
-    store: 'pack'
-  }
+    store: 'pack',
+  },
 };
 ```
 
@@ -251,15 +245,15 @@ Version of the cache data. Different versions won't allow to reuse the cache and
 
 `cache.version` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   cache: {
     type: 'filesystem',
-    version: 'your_version'
-  }
+    version: 'your_version',
+  },
 };
 ```
 
@@ -271,14 +265,14 @@ W> Don't share the cache between calls with different options.
 
 Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //..
   cache: {
-    idleTimeout: 10000
-  }
+    idleTimeout: 10000,
+  },
 };
 ```
 
@@ -290,14 +284,14 @@ W> `cache.idleTimeout` is only available when [`cache.store`](#cachestore) is se
 
 Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period after which the initial cache storing should happen.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //..
   cache: {
-    idleTimeoutForInitialStore: 0
-  }
+    idleTimeoutForInitialStore: 0,
+  },
 };
 ```
 
@@ -320,14 +314,14 @@ module.exports = {
   //...
   ignoreWarnings: [
     {
-      module: /module2\.js\?[34]/ // A RegExp
+      module: /module2\.js\?[34]/, // A RegExp
     },
     {
       module: /[13]/,
-      message: /homepage/
+      message: /homepage/,
     },
-    (warning) => true
-  ]
+    (warning) => true,
+  ],
 };
 ```
 
@@ -339,20 +333,20 @@ Expose custom values into the [loader context](/api/loaders/#the-loader-context)
 
 For example, you can define a new variable in the loader context:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   // ...
   loader: {
-    answer: 42
-  }
+    answer: 42,
+  },
 };
 ```
 
 Then use `this.answer` to get its value in the loader:
 
-__custom-loader.js__
+**custom-loader.js**
 
 ```javascript
 module.exports = function (source) {
@@ -370,8 +364,6 @@ T> You can override properties in the loader context as webpack copies all prope
 
 Limit the number of parallel processed modules. Can be used to fine tune performance or to get more reliable profiling results.
 
-
-
 ## `profile`
 
 `boolean`
@@ -382,21 +374,20 @@ T> Use the [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) for
 
 T> Combine `profile: true` with `parallelism: 1` to get correct timings. Note that this will slow down the build as well.
 
-
 ## `recordsPath`
 
 `string`
 
 Use this option to generate a JSON file containing webpack "records" – pieces of data used to store module identifiers across multiple builds. You can use this file to track how modules change between builds. To generate one, simply specify a location:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const path = require('path');
 
 module.exports = {
   //...
-  recordsPath: path.join(__dirname, 'records.json')
+  recordsPath: path.join(__dirname, 'records.json'),
 };
 ```
 
@@ -406,13 +397,11 @@ T> Note that although this file is generated by the compiler, you may still want
 
 W> Setting `recordsPath` will essentially set `recordsInputPath` and `recordsOutputPath` to the same location. This is usually all that's necessary unless you decide to change the name of the file containing the records. See below for an example.
 
-
 ## `recordsInputPath`
 
 `string`
 
 Specify the file from which to read the last set of records. This can be used to rename a records file. See the example below.
-
 
 ## `recordsOutputPath`
 
@@ -420,7 +409,7 @@ Specify the file from which to read the last set of records. This can be used to
 
 Specify where the records should be written. The following example shows how you might use this option in combination with `recordsInputPath` to rename a records file:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const path = require('path');
@@ -428,10 +417,9 @@ const path = require('path');
 module.exports = {
   //...
   recordsInputPath: path.join(__dirname, 'records.json'),
-  recordsOutputPath: path.join(__dirname, 'newRecords.json')
+  recordsOutputPath: path.join(__dirname, 'newRecords.json'),
 };
 ```
-
 
 ## `name`
 
@@ -439,12 +427,12 @@ module.exports = {
 
 Name of the configuration. Used when loading multiple configurations.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
-  name: 'admin-app'
+  name: 'admin-app',
 };
 ```
 
@@ -469,14 +457,14 @@ Possible values:
 - `'log'` - errors, warnings, info messages, log messages, groups, clears. Collapsed groups are displayed in a collapsed state.
 - `'verbose'` - log everything except debug and trace. Collapsed groups are displayed in expanded state.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   infrastructureLogging: {
-    level: 'info'
-  }
+    level: 'info',
+  },
 };
 ```
 
@@ -486,19 +474,15 @@ module.exports = {
 
 Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) option but for infrastructure. No default value is given.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   infrastructureLogging: {
     level: 'info',
-    debug: [
-      'MyPlugin',
-      /MyPlugin/,
-      (name) => name.contains('MyPlugin')
-    ]
-  }
+    debug: ['MyPlugin', /MyPlugin/, (name) => name.contains('MyPlugin')],
+  },
 };
 ```
 
@@ -508,7 +492,7 @@ module.exports = {
 
 `snapshot` options decide how the file system snapshots are created and invalidated.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const path = require('path');
@@ -519,19 +503,19 @@ module.exports = {
     immutablePaths: [],
     buildDependencies: {
       hash: true,
-      timestamp: true
+      timestamp: true,
     },
     module: {
-      timestamp: true
+      timestamp: true,
     },
     resolve: {
-      timestamp: true
+      timestamp: true,
     },
     resolveBuildDependencies: {
       hash: true,
-      timestamp: true
-    }
-  }
+      timestamp: true,
+    },
+  },
 };
 ```
 

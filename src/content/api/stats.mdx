@@ -14,18 +14,17 @@ contributors:
 
 When compiling source code with webpack, users can generate a JSON file containing statistics about modules. These statistics can be used to analyze an application's dependency graph as well as to optimize compilation speed. The file is typically generated with the following CLI command:
 
-``` bash
+```bash
 npx webpack --profile --json=compilation-stats.json
 ```
 
 The `--json=compilation-stats.json` flag indicates to webpack that it should emit the `compilation-stats.json` containing the dependency graph and various other build information. Typically, the `--profile` flag is also added so that a `profile` section is added to each [`modules` object](#module-objects) containing module-specific compilation stats.
 
-
 ## Structure
 
 The top-level structure of the output JSON file is fairly straightforward but there are a few nested data structures as well. Each nested structure has a dedicated section below to make this document more consumable. Note that you can click links within the top-level structure below to jump to relevant sections and documentation:
 
-``` js-with-links
+```js-with-links
 {
   'version': '5.9.0', // Version of webpack used for the compilation
   'hash': '11593e3b3ac85436984a', // Compilation specific hash
@@ -68,7 +67,6 @@ The top-level structure of the output JSON file is fairly straightforward but th
 }
 ```
 
-
 ### Asset Objects
 
 Each `assets` object represents an `output` file emitted from the compilation. They all follow a similar structure:
@@ -95,7 +93,6 @@ Each `assets` object represents an `output` file emitted from the compilation. T
 ```
 
 T> Asset's `info` property is available since webpack v4.40.0
-
 
 ### Chunk Objects
 
@@ -141,7 +138,6 @@ The `chunks` object will also contain a list of `origins` describing how the giv
   ]
 }
 ```
-
 
 ### Module Objects
 

@@ -196,5 +196,5 @@ module.exports = {
             </text>
         </g>
     </g>
-  </svg>`
+  </svg>`,
 };

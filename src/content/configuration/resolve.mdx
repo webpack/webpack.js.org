@@ -21,24 +21,22 @@ contributors:
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
 
-
 ## `resolve`
 
 `object`
 
 Configure how modules are resolved. For example, when calling `import 'lodash'` in ES2015, the `resolve` options can change where webpack goes to look for `'lodash'` (see [`modules`](#resolvemodules)).
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
     // configuration options
-  }
+  },
 };
 ```
-
 
 ### `resolve.alias`
 
@@ -46,7 +44,7 @@ module.exports = {
 
 Create aliases to `import` or `require` certain modules more easily. For example, to alias a bunch of commonly used `src/` folders:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 const path = require('path');
@@ -56,9 +54,9 @@ module.exports = {
   resolve: {
     alias: {
       Utilities: path.resolve(__dirname, 'src/utilities/'),
-      Templates: path.resolve(__dirname, 'src/templates/')
-    }
-  }
+      Templates: path.resolve(__dirname, 'src/templates/'),
+    },
+  },
 };
 ```
 
@@ -76,7 +74,7 @@ import Utility from 'Utilities/utility';
 
 A trailing `$` can also be added to the given object's keys to signify an exact match:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 const path = require('path');
@@ -85,9 +83,9 @@ module.exports = {
   //...
   resolve: {
     alias: {
-      xyz$: path.resolve(__dirname, 'path/to/file.js')
-    }
-  }
+      xyz$: path.resolve(__dirname, 'path/to/file.js'),
+    },
+  },
 };
 ```
 
@@ -100,21 +98,21 @@ import Test2 from 'xyz/file.js'; // Not an exact match, normal resolution takes 
 
 The following table explains other cases:
 
-| `alias:`                            | `import 'xyz'`                        | `import 'xyz/file.js'`              |
-| ----------------------------------- | ------------------------------------- | ----------------------------------- |
-| `{}`                                | `/abc/node_modules/xyz/index.js`      | `/abc/node_modules/xyz/file.js`     |
-| `{ xyz: '/abc/path/to/file.js' }`   | `/abc/path/to/file.js`                | error                               |
-| `{ xyz$: '/abc/path/to/file.js' }`  | `/abc/path/to/file.js`                | `/abc/node_modules/xyz/file.js`     |
-| `{ xyz: './dir/file.js' }`          | `/abc/dir/file.js`                    | error                               |
-| `{ xyz$: './dir/file.js' }`         | `/abc/dir/file.js`                    | `/abc/node_modules/xyz/file.js`     |
-| `{ xyz: '/some/dir' }`              | `/some/dir/index.js`                  | `/some/dir/file.js`                 |
-| `{ xyz$: '/some/dir' }`             | `/some/dir/index.js`                  | `/abc/node_modules/xyz/file.js`     |
-| `{ xyz: './dir' }`                  | `/abc/dir/index.js`                   | `/abc/dir/file.js`                  |
-| `{ xyz: 'modu' }`                   | `/abc/node_modules/modu/index.js`     | `/abc/node_modules/modu/file.js`    |
-| `{ xyz$: 'modu' }`                  | `/abc/node_modules/modu/index.js`     | `/abc/node_modules/xyz/file.js`     |
-| `{ xyz: 'modu/some/file.js' }`      | `/abc/node_modules/modu/some/file.js` | error                               |
-| `{ xyz: 'modu/dir' }`               | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/modu/dir/file.js`|
-| `{ xyz$: 'modu/dir' }`              | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/xyz/file.js`     |
+| `alias:`                           | `import 'xyz'`                        | `import 'xyz/file.js'`               |
+| ---------------------------------- | ------------------------------------- | ------------------------------------ |
+| `{}`                               | `/abc/node_modules/xyz/index.js`      | `/abc/node_modules/xyz/file.js`      |
+| `{ xyz: '/abc/path/to/file.js' }`  | `/abc/path/to/file.js`                | error                                |
+| `{ xyz$: '/abc/path/to/file.js' }` | `/abc/path/to/file.js`                | `/abc/node_modules/xyz/file.js`      |
+| `{ xyz: './dir/file.js' }`         | `/abc/dir/file.js`                    | error                                |
+| `{ xyz$: './dir/file.js' }`        | `/abc/dir/file.js`                    | `/abc/node_modules/xyz/file.js`      |
+| `{ xyz: '/some/dir' }`             | `/some/dir/index.js`                  | `/some/dir/file.js`                  |
+| `{ xyz$: '/some/dir' }`            | `/some/dir/index.js`                  | `/abc/node_modules/xyz/file.js`      |
+| `{ xyz: './dir' }`                 | `/abc/dir/index.js`                   | `/abc/dir/file.js`                   |
+| `{ xyz: 'modu' }`                  | `/abc/node_modules/modu/index.js`     | `/abc/node_modules/modu/file.js`     |
+| `{ xyz$: 'modu' }`                 | `/abc/node_modules/modu/index.js`     | `/abc/node_modules/xyz/file.js`      |
+| `{ xyz: 'modu/some/file.js' }`     | `/abc/node_modules/modu/some/file.js` | error                                |
+| `{ xyz: 'modu/dir' }`              | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/modu/dir/file.js` |
+| `{ xyz$: 'modu/dir' }`             | `/abc/node_modules/modu/dir/index.js` | `/abc/node_modules/xyz/file.js`      |
 
 `index.js` may resolve to another file if defined in the `package.json`.
 
@@ -131,9 +129,12 @@ module.exports = {
   //...
   resolve: {
     alias: {
-      _: [path.resolve(__dirname, 'src/utilities/'), path.resolve(__dirname, 'src/templates/')]
-    }
-  }
+      _: [
+        path.resolve(__dirname, 'src/utilities/'),
+        path.resolve(__dirname, 'src/templates/'),
+      ],
+    },
+  },
 };
 ```
 
@@ -146,8 +147,8 @@ module.exports = {
     alias: {
       'ignored-module': false,
       './ignored-module': false,
-    }
-  }
+    },
+  },
 };
 ```
 
@@ -157,17 +158,16 @@ module.exports = {
 
 Specify a field, such as `browser`, to be parsed according to [this specification](https://github.com/defunctzombie/package-browser-field-spec).
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    aliasFields: ['browser']
-  }
+    aliasFields: ['browser'],
+  },
 };
 ```
-
 
 ### `resolve.cacheWithContext`
 
@@ -175,24 +175,22 @@ module.exports = {
 
 If unsafe cache is enabled, includes `request.context` in the cache key. This option is taken into account by the [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) module. Since webpack 3.1.0 context in resolve caching is ignored when resolve or resolveLoader plugins are provided. This addresses a performance regression.
 
-
 ### `resolve.descriptionFiles`
 
 `[string] = ['package.json']`
 
 The JSON files to use for descriptions.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    descriptionFiles: ['package.json']
-  }
+    descriptionFiles: ['package.json'],
+  },
 };
 ```
-
 
 ### `resolve.enforceExtension`
 
@@ -200,17 +198,16 @@ module.exports = {
 
 If `true`, it will not allow extension-less files. So by default `require('./foo')` works if `./foo` has a `.js` extension, but with this enabled only `require('./foo.js')` will work.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    enforceExtension: false
-  }
+    enforceExtension: false,
+  },
 };
 ```
-
 
 ### `resolve.enforceModuleExtension`
 
@@ -220,17 +217,16 @@ W> Removed in webpack 5
 
 Tells webpack whether to require to use an extension for modules (e.g. loaders).
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    enforceModuleExtension: false
-  }
+    enforceModuleExtension: false,
+  },
 };
 ```
-
 
 ### `resolve.extensions`
 
@@ -240,14 +236,14 @@ Attempt to resolve these extensions in order.
 
 W> If multiple files share the same name but have different extensions, webpack will resolve the one with the extension listed first in the array and skip the rest.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    extensions: ['.wasm', '.mjs', '.js', '.json']
-  }
+    extensions: ['.wasm', '.mjs', '.js', '.json'],
+  },
 };
 ```
 
@@ -257,8 +253,7 @@ which is what enables users to leave off the extension when importing:
 import File from '../path/to/file';
 ```
 
-W> Using this will __override the default array__, meaning that webpack will no longer try to resolve modules using the default extensions.
-
+W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions.
 
 ### `resolve.mainFields`
 
@@ -268,27 +263,27 @@ When importing from an npm package, e.g. `import * as D3 from 'd3'`, this option
 
 When the `target` property is set to `webworker`, `web`, or left unspecified:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    mainFields: ['browser', 'module', 'main']
-  }
+    mainFields: ['browser', 'module', 'main'],
+  },
 };
 ```
 
 For any other target (including `node`):
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    mainFields: ['module', 'main']
-  }
+    mainFields: ['module', 'main'],
+  },
 };
 ```
 
@@ -303,24 +298,22 @@ For example, consider an arbitrary library called `upstream` with a `package.jso
 
 When we `import * as Upstream from 'upstream'` this will actually resolve to the file in the `browser` property. The `browser` property takes precedence because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will first try to resolve using the file in the `module` field.
 
-
 ### `resolve.mainFiles`
 
 `[string] = ['index']`
 
 The filename to be used while resolving directories.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    mainFiles: ['index']
-  }
+    mainFiles: ['index'],
+  },
 };
 ```
-
 
 ### `resolve.exportsFields`
 
@@ -328,17 +321,16 @@ module.exports = {
 
 Fields in package.json that are used for resolving module requests. See [package-exports guideline](/guides/package-exports/) for more information.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    exportsFields: ['exports', 'myCompanyExports']
-  }
+    exportsFields: ['exports', 'myCompanyExports'],
+  },
 };
 ```
-
 
 ### `resolve.modules`
 
@@ -352,20 +344,20 @@ A relative path will be scanned similarly to how Node scans for `node_modules`, 
 
 With an absolute path, it will only search in the given directory.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    modules: ['node_modules']
-  }
+    modules: ['node_modules'],
+  },
 };
 ```
 
 If you want to add a directory to search in that takes precedence over `node_modules/`:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 const path = require('path');
@@ -373,44 +365,42 @@ const path = require('path');
 module.exports = {
   //...
   resolve: {
-    modules: [path.resolve(__dirname, 'src'), 'node_modules']
-  }
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+  },
 };
 ```
-
 
 ### `resolve.unsafeCache`
 
 `RegExp` `[RegExp]` `boolean: true`
 
-Enable aggressive, but __unsafe__, caching of modules. Passing `true` will cache everything.
+Enable aggressive, but **unsafe**, caching of modules. Passing `true` will cache everything.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    unsafeCache: true
-  }
+    unsafeCache: true,
+  },
 };
 ```
 
 A regular expression, or an array of regular expressions, can be used to test file paths and only cache certain modules. For example, to only cache utilities:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    unsafeCache: /src\/utilities/
-  }
+    unsafeCache: /src\/utilities/,
+  },
 };
 ```
 
 W> Changes to cached paths may cause failure in rare cases.
-
 
 ### `resolve.plugins`
 
@@ -418,19 +408,16 @@ W> Changes to cached paths may cause failure in rare cases.
 
 A list of additional resolve plugins which should be applied. It allows plugins such as [`DirectoryNamedWebpackPlugin`](https://www.npmjs.com/package/directory-named-webpack-plugin).
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    plugins: [
-      new DirectoryNamedWebpackPlugin()
-    ]
-  }
+    plugins: [new DirectoryNamedWebpackPlugin()],
+  },
 };
 ```
-
 
 ### `resolve.preferRelative`
 
@@ -438,18 +425,18 @@ module.exports = {
 
 When enabled, webpack would prefer to resolve module requests as relative requests instead of using modules from `node_modules` directories.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    preferRelative: true
-  }
+    preferRelative: true,
+  },
 };
 ```
 
-__src/index.js__
+**src/index.js**
 
 ```js
 // let's say `src/logo.svg` exists
@@ -465,18 +452,18 @@ const a = new URL('./module/path', import.meta.url);
 
 `boolean`
 
-<Badge text='5.13.0+' />
+<Badge text="5.13.0+" />
 
 Prefer absolute paths to [`resolve.roots`](#resolveroots) when resolving.
 
-__wepack.config.js__
+**wepack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    preferAbsolute: true
-  }
+    preferAbsolute: true,
+  },
 };
 ```
 
@@ -488,17 +475,16 @@ Whether to resolve symlinks to their symlinked location.
 
 When enabled, symlinked resources are resolved to their _real_ path, not their symlinked location. Note that this may cause module resolution to fail when using tools that symlink packages (like `npm link`).
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    symlinks: true
-  }
+    symlinks: true,
+  },
 };
 ```
-
 
 ### `resolve.cachePredicate`
 
@@ -506,7 +492,7 @@ module.exports = {
 
 A function which decides whether a request should be cached or not. An object is passed to the function with `path` and `request` properties. It must return a boolean.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -515,8 +501,8 @@ module.exports = {
     cachePredicate: (module) => {
       // additional logic
       return true;
-    }
-  }
+    },
+  },
 };
 ```
 
@@ -526,14 +512,14 @@ module.exports = {
 
 A list of resolve restrictions to restrict the paths that a request can be resolved on.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    restrictions: [/\.(sass|scss|css)$/]
-  }
+    restrictions: [/\.(sass|scss|css)$/],
+  },
 };
 ```
 
@@ -543,15 +529,15 @@ module.exports = {
 
 A list of directories where requests of server-relative URLs (starting with '/') are resolved, defaults to [`context` configuration option](/configuration/entry-context/#context). On non-Windows systems these requests are resolved as an absolute path first.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 const fixtures = path.resolve(__dirname, 'fixtures');
 module.exports = {
   //...
   resolve: {
-    roots: [__dirname, fixtures]
-  }
+    roots: [__dirname, fixtures],
+  },
 };
 ```
 
@@ -561,14 +547,14 @@ module.exports = {
 
 Fields from `package.json` which are used to provide the internal requests of a package (requests starting with `#` are considered internal).
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    importsFields: ['browser', 'module', 'main']
-  }
+    importsFields: ['browser', 'module', 'main'],
+  },
 };
 ```
 
@@ -578,16 +564,16 @@ module.exports = {
 
 Redirect module requests when normal resolving fails.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
     fallback: {
-      xyz: path.resolve(__dirname, 'path/to/file.js')
-    }
-  }
+      xyz: path.resolve(__dirname, 'path/to/file.js'),
+    },
+  },
 };
 ```
 
@@ -597,26 +583,25 @@ Configure resolve options by the type of module request.
 
 - Type: `[type: string]: ResolveOptions`
 - Example:
-    ```js
-    module.exports = {
-      // ...
-      resolve: {
-        byDependency: {
-          // ...
-          esm: {
-            mainFields: ['browser', 'module']
-          },
-          commonjs: {
-            aliasFields: ['browser']
-          },
-          url: {
-            preferRelative: true
-          }
-        }
-      }
-    };
-    ```
-
+  ```js
+  module.exports = {
+    // ...
+    resolve: {
+      byDependency: {
+        // ...
+        esm: {
+          mainFields: ['browser', 'module'],
+        },
+        commonjs: {
+          aliasFields: ['browser'],
+        },
+        url: {
+          preferRelative: true,
+        },
+      },
+    },
+  };
+  ```
 
 ## `resolveLoader`
 
@@ -624,7 +609,7 @@ Configure resolve options by the type of module request.
 
 This set of options is identical to the `resolve` property set above, but is used only to resolve webpack's [loader](/concepts/loaders) packages.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -632,13 +617,12 @@ module.exports = {
   resolveLoader: {
     modules: ['node_modules'],
     extensions: ['.js', '.json'],
-    mainFields: ['loader', 'main']
-  }
+    mainFields: ['loader', 'main'],
+  },
 };
 ```
 
 T> Note that you can use alias here and other features familiar from resolve. For example `{ txt: 'raw-loader' }` would shim `txt!templates/demo.txt` to use `raw-loader`.
-
 
 ### `resolveLoader.moduleExtensions`
 
@@ -648,13 +632,13 @@ W> Removed in webpack 5
 
 The extensions/suffixes that are used when resolving loaders. Since version two, we [strongly recommend](/migrate/3/#automatic--loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. just use `example`, you can use this option to do so:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolveLoader: {
-    moduleExtensions: ['-loader']
-  }
+    moduleExtensions: ['-loader'],
+  },
 };
 ```

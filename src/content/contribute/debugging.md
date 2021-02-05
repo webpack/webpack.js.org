@@ -19,8 +19,7 @@ related:
 When contributing to the core repo, writing a loader/plugin, or even just working on a complex project, debugging tools can be central to your workflow. Whether the problem is slow performance on a large project or an unhelpful traceback, the following utilities can make figuring it out less painful.
 
 - The [`stats` data](/api/stats) made available through [Node](/api/node/#stats-object) and the [CLI](/api/cli/#common-options).
-- Chrome __DevTools__ via `node-nightly` and the latest Node.js versions.
-
+- Chrome **DevTools** via `node-nightly` and the latest Node.js versions.
 
 ## Stats
 
@@ -35,7 +34,6 @@ Whether you want to sift through [this data](/api/stats) manually or use a tool 
 
 On top of that, the official [analyze tool](https://github.com/webpack/analyse) and [various others](/guides/code-splitting/#bundle-analysis) will accept this data and visualize it in various ways.
 
-
 ## DevTools
 
 While [`console`](https://nodejs.org/api/console.html) statements may work well in simpler scenarios, sometimes a more robust solution is needed. As most front-end developers already know, Chrome DevTools are a life saver when debugging web applications, _but they don’t have to stop there_. As of Node v6.3.0+, developers can use the built-in `--inspect` flag to debug a node program in DevTools.
@@ -46,25 +44,25 @@ W> The `--inspect` interface has been available since v6.3.0 so feel free to try
 
 Let's start by installing it globally:
 
-``` bash
+```bash
 npm install --global node-nightly
 ```
 
 Now, we'll need to run it once to finish the installation:
 
-``` bash
+```bash
 node-nightly
 ```
 
 Now, we can simply use `node-nightly` along with the `--inspect` flag to start our build in any webpack-based project. Note that we cannot run NPM `scripts`, e.g. `npm run build`, so we'll have to specify the full `node_modules` path:
 
-``` bash
+```bash
 node-nightly --inspect ./node_modules/webpack/bin/webpack.js
 ```
 
 Which should output something like:
 
-``` bash
+```bash
 Debugger listening on ws://127.0.0.1:9229/c624201a-250f-416e-a018-300bbec7be2c
 For help see https://nodejs.org/en/docs/inspector
 ```

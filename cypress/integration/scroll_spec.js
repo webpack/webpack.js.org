@@ -1,6 +1,6 @@
 const sizes = ['iphone-6', 'macbook-15'];
 describe('Scroll Test', () => {
-  sizes.forEach(size => {
+  sizes.forEach((size) => {
     it(`scroll to top when accessing new page on ${size}`, () => {
       cy.viewport(size);
       cy.visit('/guides/getting-started');

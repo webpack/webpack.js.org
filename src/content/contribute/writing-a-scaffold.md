@@ -29,7 +29,7 @@ Before writing a `webpack-cli` scaffold, think about what you're trying to achie
 
 Let's create our skeleton. In order for the webpack CLI to detect our options, we have to define some properties in the constructor.
 
-__generator.js__
+**generator.js**
 
 ```js
 const Generator = require('yeoman-generator');
@@ -38,7 +38,7 @@ module.exports = class WebpackGenerator extends Generator {
   constructor(args, opts) {
     super(args, opts);
     opts.env.configuration = {
-      dev: {}
+      dev: {},
     };
   }
 };
@@ -50,7 +50,6 @@ module.exports = class WebpackGenerator extends Generator {
 
 In order for us to interact with the users, we make use of the [`prompting`](http://yeoman.io/authoring/user-interactions.html) method yeoman has. In this method, we can get various answers from the user, like asking for entry points or plugins. You can either manually create each object representing a question or you can make good use of our utilities from [`webpack-scaffold`](https://github.com/webpack/webpack-cli/tree/master/packages/webpack-scaffold). We are in a good mood today, so let's build a configuration only if the user chooses `Pengwings`.
 
-
 ```js
 const Generator = require('yeoman-generator');
 const List = require('@webpack-cli/webpack-scaffold').List;
@@ -59,14 +58,18 @@ module.exports = class WebpackGenerator extends Generator {
   constructor(args, opts) {
     super(args, opts);
     opts.env.configuration = {
-      dev: {}
+      dev: {},
     };
   }
 
   prompting() {
     return this.prompt([
-      List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings'])
-    ]).then(answer => {
+      List('confirm', 'Welcome to the demo scaffold! Are you ready?', [
+        'Yes',
+        'No',
+        'Pengwings',
+      ]),
+    ]).then((answer) => {
       if (answer['confirm'] === 'Pengwings') {
         // build the configuration
       }
@@ -90,15 +93,19 @@ module.exports = class WebpackGenerator extends Generator {
     super(args, opts);
     opts.env.configuration = {
       dev: {
-        webpackOptions: {}
-      }
+        webpackOptions: {},
+      },
     };
   }
 
   prompting() {
     return this.prompt([
-      List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings'])
-    ]).then(answer => {
+      List('confirm', 'Welcome to the demo scaffold! Are you ready?', [
+        'Yes',
+        'No',
+        'Pengwings',
+      ]),
+    ]).then((answer) => {
       if (answer['confirm'] === 'Pengwings') {
         // build the configuration
       }
@@ -107,13 +114,12 @@ module.exports = class WebpackGenerator extends Generator {
 };
 ```
 
-
 ## Dev Configurations
 
 Congratulations! You've now created the base of a `webpack-scaffold`! Let's now add some more stuff to our future configuration file!
 We are going to follow good convention, and extract our configuration into another file, named `dev-config.js`. As this is just regular JavaScript, we can make the module a function, and supply our `entry` as a parameter for us to build up a configuration file from.
 
-__dev-config.js__
+**dev-config.js**
 
 ```js
 module.exports = function createDevConfig(answer) {
@@ -121,7 +127,7 @@ module.exports = function createDevConfig(answer) {
 };
 ```
 
-__generator.js__
+**generator.js**
 
 ```js
 const Generator = require('yeoman-generator');
@@ -133,17 +139,23 @@ module.exports = class WebpackGenerator extends Generator {
     super(args, opts);
     opts.env.configuration = {
       dev: {
-        webpackOptions: {}
-      }
+        webpackOptions: {},
+      },
     };
   }
 
   prompting() {
     return this.prompt([
-      List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings'])
-    ]).then(answer => {
+      List('confirm', 'Welcome to the demo scaffold! Are you ready?', [
+        'Yes',
+        'No',
+        'Pengwings',
+      ]),
+    ]).then((answer) => {
       if (answer['confirm'] === 'Pengwings') {
-        this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);
+        this.options.env.configuration.dev.webpackOptions = createDevConfig(
+          answer
+        );
       }
     });
   }
@@ -163,18 +175,24 @@ module.exports = class WebpackGenerator extends Generator {
     super(args, opts);
     opts.env.configuration = {
       dev: {
-        webpackOptions: {}
-      }
+        webpackOptions: {},
+      },
     };
   }
 
   prompting() {
     return this.prompt([
-      List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings']),
-      Input('entry', 'What is the entry point in your app?')
-    ]).then(answer => {
+      List('confirm', 'Welcome to the demo scaffold! Are you ready?', [
+        'Yes',
+        'No',
+        'Pengwings',
+      ]),
+      Input('entry', 'What is the entry point in your app?'),
+    ]).then((answer) => {
       if (answer['confirm'] === 'Pengwings') {
-        this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);
+        this.options.env.configuration.dev.webpackOptions = createDevConfig(
+          answer
+        );
       }
     });
   }
@@ -187,20 +205,19 @@ Let's look at `dev-config.js`. We have access to user's answers, use them to ass
 
 T> String values must be quoted twice. This is to preserve our ability to add other functionality, using only " ", while " 'Mystring' " resolves to a string.
 
-__dev-config.js__
+**dev-config.js**
 
 ```js
 module.exports = function createDevConfig(answer) {
-  let entryProp = answer.entry ? ( '\'' + answer.entry + '\'') : '\'index.js\'';
+  let entryProp = answer.entry ? '"' + answer.entry + '"' : '"index.js"';
   let devConfig = {
     entry: entryProp,
     output: {
-      filename: '\'[name].js\''
-    }
+      filename: '"[name].js"',
+    },
   };
   return devConfig;
 };
-
 ```
 
 Run `webpack init webpack-scaffold-demo`, and you should see scaffold working.
@@ -211,13 +228,13 @@ Now that we've got our initial scaffold. Let's add the rest of our options! For 
 
 ```js
 module.exports = function createDevConfig(answer) {
-  let entryProp = answer.entry ? ( '\'' + answer.entry + '\'') : '\'index.js\'';
+  let entryProp = answer.entry ? '"' + answer.entry + '"' : '"index.js"';
   let devConfig = {
     entry: entryProp,
     output: {
-      filename: '\'[name].js\''
+      filename: '"[name].js"',
     },
-    context: 'path.join(__dirname, "src")'
+    context: 'path.join(__dirname, "src")',
   };
   return devConfig;
 };
@@ -238,19 +255,25 @@ module.exports = class WebpackGenerator extends Generator {
     super(args, opts);
     opts.env.configuration = {
       dev: {
-        webpackOptions: {}
-      }
+        webpackOptions: {},
+      },
     };
   }
 
   prompting() {
     return this.prompt([
-      List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings']),
+      List('confirm', 'Welcome to the demo scaffold! Are you ready?', [
+        'Yes',
+        'No',
+        'Pengwings',
+      ]),
       Input('entry', 'What is the entry point in your app?'),
-      Input('plugin', 'What do you want to name your html file?')
-    ]).then(answer => {
+      Input('plugin', 'What do you want to name your html file?'),
+    ]).then((answer) => {
       if (answer['confirm'] === 'Pengwings') {
-        this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);
+        this.options.env.configuration.dev.webpackOptions = createDevConfig(
+          answer
+        );
       }
     });
   }
@@ -263,9 +286,7 @@ Now, we've got to create a string with our answer. This is how it looks.
 
 ```js
 module.exports = function createHtmlPlugin(name) {
-  return (
-    ` new HtmlWebpackPlugin({filename: "${name}.html" }) `
-  );
+  return ` new HtmlWebpackPlugin({filename: "${name}.html" }) `;
 };
 ```
 
@@ -275,7 +296,7 @@ We've now created a scaffold with `entry`, `output`, `context` and a `plugin`. I
 
 In order for webpack to compile, we've got to import `path`. For this, we've got to define something called `topScope`. This is where our code before `module.exports` is going to, where you can add everything from imports and variables to functions. The syntax is the same as with the plugins, except for that the `topScope` property must be an array. In `topScope` you can define and import what's needed for your specific use case.
 
-__generator.js__
+**generator.js**
 
 ```js
 const Generator = require('yeoman-generator');
@@ -288,22 +309,28 @@ module.exports = class WebpackGenerator extends Generator {
     super(args, opts);
     opts.env.configuration = {
       dev: {
-        webpackOptions: {}
-      }
+        webpackOptions: {},
+      },
     };
   }
 
   prompting() {
     return this.prompt([
-      List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings']),
+      List('confirm', 'Welcome to the demo scaffold! Are you ready?', [
+        'Yes',
+        'No',
+        'Pengwings',
+      ]),
       Input('entry', 'What is the entry point in your app?'),
-      Input('plugin', 'What do you want to name your html file?')
-    ]).then(answer => {
+      Input('plugin', 'What do you want to name your html file?'),
+    ]).then((answer) => {
       if (answer['confirm'] === 'Pengwings') {
-        this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);
+        this.options.env.configuration.dev.webpackOptions = createDevConfig(
+          answer
+        );
         this.options.env.configuration.dev.topScope = [
           'const path = require("path")',
-          'const webpack = require("webpack")'
+          'const webpack = require("webpack")',
         ];
       }
     });
@@ -326,22 +353,28 @@ module.exports = class WebpackGenerator extends Generator {
     super(args, opts);
     opts.env.configuration = {
       dev: {
-        webpackOptions: {}
-      }
+        webpackOptions: {},
+      },
     };
   }
 
   prompting() {
     return this.prompt([
-      List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings']),
+      List('confirm', 'Welcome to the demo scaffold! Are you ready?', [
+        'Yes',
+        'No',
+        'Pengwings',
+      ]),
       Input('entry', 'What is the entry point in your app?'),
-      Input('plugin', 'What do you want to name your html file?')
-    ]).then(answer => {
-      if(answer['confirm'] === 'Pengwings') {
-        this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);
+      Input('plugin', 'What do you want to name your html file?'),
+    ]).then((answer) => {
+      if (answer['confirm'] === 'Pengwings') {
+        this.options.env.configuration.dev.webpackOptions = createDevConfig(
+          answer
+        );
         this.options.env.configuration.dev.topScope = [
           'const path = require("path")',
-          'const webpack = require("webpack")'
+          'const webpack = require("webpack")',
         ];
         this.options.env.configuration.dev.configName = 'pengwings';
       }
@@ -354,7 +387,6 @@ module.exports = class WebpackGenerator extends Generator {
 
 To write the actual configuration, [webpack CLI](/api/cli/) creates a `.yo-rc.json` file for it to parse the AST. In order for the CLI to understand how to parse the configuration, we need to write to the `.yo-rc.json`. This is done using the `writing` lifecycle method built-in by yeoman.
 
-
 ```js
 const Generator = require('yeoman-generator');
 const List = require('@webpack-cli/webpack-scaffold').List;
@@ -366,22 +398,28 @@ module.exports = class WebpackGenerator extends Generator {
     super(args, opts);
     opts.env.configuration = {
       dev: {
-        webpackOptions: {}
-      }
+        webpackOptions: {},
+      },
     };
   }
 
   prompting() {
     return this.prompt([
-      List('confirm', 'Welcome to the demo scaffold! Are you ready?', ['Yes', 'No', 'Pengwings']),
+      List('confirm', 'Welcome to the demo scaffold! Are you ready?', [
+        'Yes',
+        'No',
+        'Pengwings',
+      ]),
       Input('entry', 'What is the entry point in your app?'),
-      Input('plugin', 'What do you want to name your html file?')
-    ]).then (answer => {
-      if(answer['confirm'] === 'Pengwings') {
-        this.options.env.configuration.dev.webpackOptions = createDevConfig(answer);
+      Input('plugin', 'What do you want to name your html file?'),
+    ]).then((answer) => {
+      if (answer['confirm'] === 'Pengwings') {
+        this.options.env.configuration.dev.webpackOptions = createDevConfig(
+          answer
+        );
         this.options.env.configuration.dev.topScope = [
           'const path = require("path")',
-          'const webpack = require("webpack")'
+          'const webpack = require("webpack")',
         ];
         this.options.env.configuration.dev.configName = 'pengwings';
       }
@@ -392,6 +430,5 @@ module.exports = class WebpackGenerator extends Generator {
   }
 };
 ```
-
 
 Congratulations 🎉 on completing your first scaffold! If you need help, submit an [issue](https://github.com/evenstensberg/webpack-scaffold-demo/issues), or reach out on [Twitter](https://twitter.com/evenstensberg)!

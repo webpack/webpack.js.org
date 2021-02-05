@@ -22,10 +22,9 @@ Provide the `mode` option in the config:
 
 ```javascript
 module.exports = {
-  mode: 'development'
+  mode: 'development',
 };
 ```
-
 
 or pass it as a [CLI](/api/cli/) argument:
 
@@ -35,19 +34,17 @@ webpack --mode=development
 
 The following string values are supported:
 
-Option                | Description
---------------------- | -----------------------
-`development`         | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `development`. Enables useful names for modules and chunks.
-`production`          | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `production`. Enables deterministic mangled names for modules and chunks, `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin` and `TerserPlugin`.
-`none`                | Opts out of any default optimization options
+| Option        | Description                                                                                                                                                                                                                                                       |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `development` | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `development`. Enables useful names for modules and chunks.                                                                                                                                                |
+| `production`  | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `production`. Enables deterministic mangled names for modules and chunks, `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin` and `TerserPlugin`. |
+| `none`        | Opts out of any default optimization options                                                                                                                                                                                                                      |
 
 If not set, webpack sets `production` as the default value for `mode`.
 
 T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
 
-
 ### Mode: development
-
 
 ```diff
 // webpack.development.config.js
@@ -86,9 +83,7 @@ module.exports = {
 }
 ```
 
-
 ### Mode: production
-
 
 ```diff
 // webpack.production.config.js
@@ -127,9 +122,7 @@ module.exports = {
 }
 ```
 
-
 ### Mode: none
-
 
 ```diff
 // webpack.custom.config.js
@@ -156,16 +149,15 @@ module.exports = {
 }
 ```
 
-If you want to change the behavior according to the __mode__ variable inside the _webpack.config.js_, you have to export a function instead of an object:
+If you want to change the behavior according to the **mode** variable inside the _webpack.config.js_, you have to export a function instead of an object:
 
 ```javascript
 var config = {
-  entry: './app.js'
+  entry: './app.js',
   //...
 };
 
 module.exports = (env, argv) => {
-
   if (argv.mode === 'development') {
     config.devtool = 'source-map';
   }

@@ -18,15 +18,13 @@ This guide contains some useful tips for improving build/compilation performance
 
 The following best practices should help, whether you're running build scripts in [development](/guides/development) or [production](/guides/production).
 
-
 ### Stay Up to Date
 
 Use the latest webpack version. We are always making performance improvements. The latest recommended version of webpack is:
 
 [![latest webpack version](https://img.shields.io/github/package-json/v/webpack/webpack.svg?label=webpack&style=flat-square&maxAge=3600)](https://github.com/webpack/webpack/releases)
 
-Staying up-to-date with __Node.js__  can also help with performance. On top of this, keeping your package manager (e.g. `npm` or `yarn`) up-to-date can also help. Newer versions create more efficient module trees and increase resolving speed.
-
+Staying up-to-date with **Node.js** can also help with performance. On top of this, keeping your package manager (e.g. `npm` or `yarn`) up-to-date can also help. Newer versions create more efficient module trees and increase resolving speed.
 
 ### Loaders
 
@@ -65,11 +63,9 @@ module.exports = {
 };
 ```
 
-
 ### Bootstrap
 
 Each additional loader/plugin has a bootup time. Try to use as few tools as possible.
-
 
 ### Resolving
 
@@ -79,11 +75,9 @@ The following steps can increase resolving speed:
 - Set `resolve.symlinks: false` if you don't use symlinks (e.g. `npm link` or `yarn link`).
 - Set `resolve.cacheWithContext: false` if you use custom resolving plugins, that are not context specific.
 
-
 ### Dlls
 
 Use the `DllPlugin` to move code that is changed less often into a separate compilation. This will improve the application's compilation speed, although it does increase complexity of the build process.
-
 
 ### Smaller = Faster
 
@@ -95,18 +89,15 @@ Decrease the total size of the compilation to increase build performance. Try to
 - Remove unused code.
 - Only compile the part of the code you are currently developing on.
 
-
 ### Worker Pool
 
 The `thread-loader` can be used to offload expensive loaders to a worker pool.
 
 W> Don't use too many workers, as there is a boot overhead for the Node.js runtime and the loader. Minimize the module transfers between worker and main process. IPC is expensive.
 
-
 ### Persistent cache
 
 Use [`cache`](/configuration/other-options/#cache) option in webpack configuration. Clear cache directory on `"postinstall"` in `package.json`.
-
 
 T> We support yarn PnP version 3 [`yarn 2 berry`](https://yarnpkg.com/features/pnp) for persistent caching.
 
@@ -120,18 +111,15 @@ It is possible to shorten build times by removing `ProgressPlugin` from webpack'
 
 ---
 
-
 ## Development
 
 The following steps are especially useful in _development_.
-
 
 ### Incremental Builds
 
 Use webpack's watch mode. Don't use other tools to watch your files and invoke webpack. The built-in watch mode will keep track of timestamps and passes this information to the compilation for cache invalidation.
 
 In some setups, watching falls back to polling mode. With many watched files, this can cause a lot of CPU load. In these cases, you can increase the polling interval with `watchOptions.poll`.
-
 
 ### Compile in Memory
 
@@ -155,7 +143,6 @@ Be aware of the performance differences between the different `devtool` settings
 
 T> In most cases, `eval-cheap-module-source-map` is the best option.
 
-
 ### Avoid Production Specific Tooling
 
 Certain utilities, plugins, and loaders only make sense when building for production. For example, it usually doesn't make sense to minify and mangle your code with the `TerserPlugin` while in development. These tools should typically be excluded in development:
@@ -165,7 +152,6 @@ Certain utilities, plugins, and loaders only make sense when building for produc
 - `AggressiveSplittingPlugin`
 - `AggressiveMergingPlugin`
 - `ModuleConcatenationPlugin`
-
 
 ### Minimal Entry Chunk
 
@@ -177,8 +163,8 @@ Make sure the entry chunk is cheap to emit by keeping it small. The following co
 module.exports = {
   // ...
   optimization: {
-    runtimeChunk: true
-  }
+    runtimeChunk: true,
+  },
 };
 ```
 
@@ -212,16 +198,13 @@ module.exports = {
 
 ### Node.js Versions 8.9.10-9.11.1
 
-
 There was a [performance regression](https://github.com/nodejs/node/issues/19769) in Node.js versions 8.9.10 - 9.11.1 in the ES2015 `Map` and `Set` implementations. webpack uses those data structures liberally, so this regression affects compile times.
 
 Earlier and later Node.js versions are not affected.
 
-
 ### TypeScript Loader
 
 To improve the build time when using `ts-loader`, use the `transpileOnly` loader option. On its own, this option turns off type checking. To gain type checking again, use the [`ForkTsCheckerWebpackPlugin`](https://www.npmjs.com/package/fork-ts-checker-webpack-plugin). This speeds up TypeScript type checking and ESLint linting by moving each to a separate process.
-
 
 ```js
 module.exports = {
@@ -231,7 +214,7 @@ module.exports = {
     {
       loader: 'ts-loader',
       options: {
-        transpileOnly: true
+        transpileOnly: true,
       },
     },
   ],
@@ -242,13 +225,11 @@ T> There is a [full example](https://github.com/TypeStrong/ts-loader/tree/master
 
 ---
 
-
 ## Production
 
 The following steps are especially useful in _production_.
 
-W> __Don't sacrifice the quality of your application for small performance gains!__ Keep in mind that optimization quality is, in most cases, more important than build performance.
-
+W> **Don't sacrifice the quality of your application for small performance gains!** Keep in mind that optimization quality is, in most cases, more important than build performance.
 
 ### Multiple Compilations
 
@@ -257,30 +238,25 @@ When using multiple compilations, the following tools can help:
 - [`parallel-webpack`](https://github.com/trivago/parallel-webpack): It allows for compilation in a worker pool.
 - `cache-loader`: The cache can be shared between multiple compilations.
 
-
 ### Source Maps
 
 Source maps are really expensive. Do you really need them?
 
 ---
 
-
 ## Specific Tooling Issues
 
 The following tools have certain problems that can degrade build performance:
 
-
 ### Babel
 
 - Minimize the number of preset/plugins
-
 
 ### TypeScript
 
 - Use the `fork-ts-checker-webpack-plugin` for typechecking in a separate process.
 - Configure loaders to skip typechecking.
 - Use the `ts-loader` in `happyPackMode: true` / `transpileOnly: true`.
-
 
 ### Sass
 

@@ -24,7 +24,7 @@ Available options:
 - `outputModule`: enables the use of [`output.module`](/configuration/output/#outputmodule) configuration option and sets it to `true`. Enables the use of `output.libraryTarget` as `'module'` and sets it to `'module'`.
 - `layers`: Enable module and chunk layers.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {

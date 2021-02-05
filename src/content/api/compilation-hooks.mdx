@@ -21,13 +21,12 @@ hashed and restored.
 The `Compilation` class also extends `Tapable` and provides the following
 lifecycle hooks. They can be tapped the same way as compiler hooks:
 
-``` js
+```js
 compilation.hooks.someHook.tap(/* ... */);
 ```
 
 As with the `compiler`, `tapAsync` and `tapPromise` may also be available
 depending on the type of hook.
-
 
 ### `buildModule`
 
@@ -37,15 +36,14 @@ Triggered before a module build has started, can be used to modify the module.
 
 - Callback Parameters: `module`
 
-
 ```js
-compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
-  module => {
+compilation.hooks.buildModule.tap(
+  'SourceMapDevToolModuleOptionsPlugin',
+  (module) => {
     module.useSourceMap = true;
   }
 );
 ```
-
 
 ### `rebuildModule`
 
@@ -55,7 +53,6 @@ Fired before rebuilding a module.
 
 - Callback Parameters: `module`
 
-
 ### `failedModule`
 
 `SyncHook`
@@ -63,7 +60,6 @@ Fired before rebuilding a module.
 Run when a module build has failed.
 
 - Callback Parameters: `module` `error`
-
 
 ### `succeedModule`
 
@@ -73,7 +69,6 @@ Executed when a module has been built successfully.
 
 - Callback Parameters: `module`
 
-
 ### `finishModules`
 
 `AsyncSeriesHook`
@@ -81,7 +76,6 @@ Executed when a module has been built successfully.
 Called when all modules have been built without errors.
 
 - Callback Parameters: `modules`
-
 
 ### `finishRebuildingModule`
 
@@ -91,20 +85,17 @@ Executed when a module has been rebuilt, in case of both success or with errors.
 
 - Callback Parameters: `module`
 
-
 ### `seal`
 
 `SyncHook`
 
 Fired when the compilation stops accepting new modules.
 
-
 ### `unseal`
 
 `SyncHook`
 
 Fired when a compilation begins accepting new modules.
-
 
 ### `optimizeDependencies`
 
@@ -114,7 +105,6 @@ Fired at the beginning of dependency optimization.
 
 - Callback Parameters: `modules`
 
-
 ### `afterOptimizeDependencies`
 
 `SyncHook`
@@ -123,13 +113,11 @@ Fired after the dependency optimization.
 
 - Callback Parameters: `modules`
 
-
 ### `optimize`
 
 `SyncHook`
 
 Triggered at the beginning of the optimization phase.
-
 
 ### `optimizeModules`
 
@@ -139,7 +127,6 @@ Called at the beginning of the module optimization phase. A plugin can tap into 
 
 - Callback Parameters: `modules`
 
-
 ### `afterOptimizeModules`
 
 `SyncHook`
@@ -147,7 +134,6 @@ Called at the beginning of the module optimization phase. A plugin can tap into 
 Called after modules optimization has completed.
 
 - Callback Parameters: `modules`
-
 
 ### `optimizeChunks`
 
@@ -157,7 +143,6 @@ Called at the beginning of the chunk optimization phase. A plugin can tap into t
 
 - Callback Parameters: `chunks`
 
-
 ### `afterOptimizeChunks`
 
 `SyncHook`
@@ -165,7 +150,6 @@ Called at the beginning of the chunk optimization phase. A plugin can tap into t
 Fired after chunk optimization has completed.
 
 - Callback Parameters: `chunks`
-
 
 ### `optimizeTree`
 
@@ -175,7 +159,6 @@ Called before optimizing the dependency tree. A plugin can tap into this hook to
 
 - Callback Parameters: `chunks` `modules`
 
-
 ### `afterOptimizeTree`
 
 `SyncHook`
@@ -183,7 +166,6 @@ Called before optimizing the dependency tree. A plugin can tap into this hook to
 Called after the dependency tree optimization has completed with success.
 
 - Callback Parameters: `chunks` `modules`
-
 
 ### `optimizeChunkModules`
 
@@ -193,7 +175,6 @@ Called after the tree optimization, at the beginning of the chunk modules optimi
 
 - Callback Parameters: `chunks` `modules`
 
-
 ### `afterOptimizeChunkModules`
 
 `SyncHook`
@@ -202,13 +183,11 @@ Called after the chunkmodules optimization has completed successfully.
 
 - Callback Parameters: `chunks` `modules`
 
-
 ### `shouldRecord`
 
 `SyncBailHook`
 
 Called to determine whether or not to store records. Returning anything `!== false` will prevent every other "record" hook from being executed ([`record`](#record), [`recordModules`](#recordmodules), [`recordChunks`](#recordchunks) and [`recordHash`](#recordhash)).
-
 
 ### `reviveModules`
 
@@ -218,7 +197,6 @@ Restore module information from records.
 
 - Callback Parameters: `modules` `records`
 
-
 ### `beforeModuleIds`
 
 `SyncHook`
@@ -226,7 +204,6 @@ Restore module information from records.
 Executed before assigning an `id` to each module.
 
 - Callback Parameters: `modules`
-
 
 ### `moduleIds`
 
@@ -236,7 +213,6 @@ Called to assign an `id` to each module.
 
 - Callback Parameters: `modules`
 
-
 ### `optimizeModuleIds`
 
 `SyncHook`
@@ -244,7 +220,6 @@ Called to assign an `id` to each module.
 Called at the beginning of the modules `id` optimization.
 
 - Callback Parameters: `modules`
-
 
 ### `afterOptimizeModuleIds`
 
@@ -254,7 +229,6 @@ Called when the modules `id` optimization phase has completed.
 
 - Callback Parameters: `modules`
 
-
 ### `reviveChunks`
 
 `SyncHook`
@@ -262,7 +236,6 @@ Called when the modules `id` optimization phase has completed.
 Restore chunk information from records.
 
 - Callback Parameters: `chunks` `records`
-
 
 ### `beforeChunkIds`
 
@@ -272,7 +245,6 @@ Executed before assigning an `id` to each chunk.
 
 - Callback Parameters: `chunks`
 
-
 ### `chunkIds`
 
 `SyncHook`
@@ -280,7 +252,6 @@ Executed before assigning an `id` to each chunk.
 Called to assign an `id` to each chunk.
 
 - Callback Parameters: `chunks`
-
 
 ### `optimizeChunkIds`
 
@@ -290,7 +261,6 @@ Called at the beginning of the chunks `id` optimization phase.
 
 - Callback Parameters: `chunks`
 
-
 ### `afterOptimizeChunkIds`
 
 `SyncHook`
@@ -298,7 +268,6 @@ Called at the beginning of the chunks `id` optimization phase.
 Triggered after chunk `id` optimization has finished.
 
 - Callback Parameters: `chunks`
-
 
 ### `recordModules`
 
@@ -308,7 +277,6 @@ Store module info to the records. This is triggered if [`shouldRecord`](#shouldr
 
 - Callback Parameters: `modules` `records`
 
-
 ### `recordChunks`
 
 `SyncHook`
@@ -317,20 +285,17 @@ Store chunk info to the records. This is only triggered if [`shouldRecord`](#sho
 
 - Callback Parameters: `chunks` `records`
 
-
 ### `beforeHash`
 
 `SyncHook`
 
 Called before the compilation is hashed.
 
-
 ### `afterHash`
 
 `SyncHook`
 
 Called after the compilation is hashed.
-
 
 ### `recordHash`
 
@@ -340,7 +305,6 @@ Store information about record hash to the `records`. This is only triggered if 
 
 - Callback Parameters: `records`
 
-
 ### `record`
 
 `SyncHook`
@@ -349,24 +313,21 @@ Store information about the `compilation` to the `records`. This is only trigger
 
 - Callback Parameters: `compilation` `records`
 
-
 ### `beforeModuleAssets`
 
 `SyncHook`
 
 Executed before module assets creation.
 
-
 ### `additionalChunkAssets`
 
 `SyncHook`
 
-W> `additionalChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
+W> `additionalChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS*ASSETS_STAGE*\* as a stage option)
 
 Create additional assets for the chunks.
 
 - Callback Parameters: `chunks`
-
 
 ### `shouldGenerateChunkAssets`
 
@@ -374,14 +335,11 @@ Create additional assets for the chunks.
 
 Called to determine whether or not generate chunks assets. Returning anything `!== false` will allow chunk assets generation.
 
-
 ### `beforeChunkAssets`
 
 `SyncHook`
 
 Executed before creating the chunks assets.
-
-
 
 ### `additionalAssets`
 
@@ -390,14 +348,16 @@ Executed before creating the chunks assets.
 Create additional assets for the compilation. This hook can be used to download
 an image, for example:
 
-``` js
-compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
-  download('https://img.shields.io/npm/v/webpack.svg', function(resp) {
-    if(resp.status === 200) {
+```js
+compilation.hooks.additionalAssets.tapAsync('MyPlugin', (callback) => {
+  download('https://img.shields.io/npm/v/webpack.svg', function (resp) {
+    if (resp.status === 200) {
       compilation.assets['webpack-version.svg'] = toAsset(resp);
       callback();
     } else {
-      callback(new Error('[webpack-example-plugin] Unable to download the image'));
+      callback(
+        new Error('[webpack-example-plugin] Unable to download the image')
+      );
     }
   });
 });
@@ -407,7 +367,7 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
 
 `AsyncSeriesHook`
 
-W> `optimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
+W> `optimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS*ASSETS_STAGE*\* as a stage option)
 
 Optimize any chunk assets. The assets are stored in `compilation.assets`. A
 `Chunk` has a property `files` which points to all files created by a chunk.
@@ -417,14 +377,14 @@ Any additional chunk assets are stored in `compilation.additionalChunkAssets`.
 
 Here's an example that simply adds a banner to each chunk.
 
-``` js
-compilation.hooks
-  .optimizeChunkAssets
-  .tapAsync('MyPlugin', (chunks, callback) => {
-    chunks.forEach(chunk => {
-      chunk.files.forEach(file => {
+```js
+compilation.hooks.optimizeChunkAssets.tapAsync(
+  'MyPlugin',
+  (chunks, callback) => {
+    chunks.forEach((chunk) => {
+      chunk.files.forEach((file) => {
         compilation.assets[file] = new ConcatSource(
-          '\/**Sweet Banner**\/',
+          '/**Sweet Banner**/',
           '\n',
           compilation.assets[file]
         );
@@ -432,15 +392,15 @@ compilation.hooks
     });
 
     callback();
-  });
+  }
+);
 ```
-
 
 ### `afterOptimizeChunkAssets`
 
 `SyncHook`
 
-W> `afterOptimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE_* as a stage option)
+W> `afterOptimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS*ASSETS_STAGE*\* as a stage option)
 
 The chunk assets have been optimized.
 
@@ -448,19 +408,17 @@ The chunk assets have been optimized.
 
 Here's an example plugin from [@boopathi](https://github.com/boopathi) that outputs exactly what went into each chunk.
 
-``` js
-compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
-  chunks.forEach(chunk => {
+```js
+compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', (chunks) => {
+  chunks.forEach((chunk) => {
     console.log({
       id: chunk.id,
       name: chunk.name,
-      includes: chunk.getModules().map(module => module.request)
+      includes: chunk.getModules().map((module) => module.request),
     });
   });
 });
 ```
-
-
 
 ### `optimizeAssets`
 
@@ -470,7 +428,6 @@ Optimize all assets stored in `compilation.assets`.
 
 - Callback Parameters: `assets`
 
-
 ### `afterOptimizeAssets`
 
 `SyncHook`
@@ -478,7 +435,6 @@ Optimize all assets stored in `compilation.assets`.
 The assets have been optimized.
 
 - Callback Parameters: `assets`
-
 
 ### `processAssets`
 
@@ -506,35 +462,35 @@ In addition to `name` and `stage`, you can pass a `additionalAssets` <Badge text
 
 1. `true` - Run callback against assets added later by plugins.
 
-    ```js
-    compilation.hooks.processAssets.tap(
-      {
-        name: 'MyPlugin',
-        stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
-        additionalAssets: true
-      },
-      (assets) => {
-        // this callback will run against assets added later by plugins.
-      }
-    );
-    ```
+   ```js
+   compilation.hooks.processAssets.tap(
+     {
+       name: 'MyPlugin',
+       stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
+       additionalAssets: true,
+     },
+     (assets) => {
+       // this callback will run against assets added later by plugins.
+     }
+   );
+   ```
 
 2. `(assets) => {}` - Run this specified callback against assets added later by plugins.
 
-    ```js
-    compilation.hooks.processAssets.tap(
-      {
-        name: 'MyPlugin',
-        stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
-        additionalAssets: (assets) => {
-          // this callback will run against assets added later by plugins.
-        }
-      },
-      (assets) => {
-        // code
-      }
-    );
-    ```
+   ```js
+   compilation.hooks.processAssets.tap(
+     {
+       name: 'MyPlugin',
+       stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
+       additionalAssets: (assets) => {
+         // this callback will run against assets added later by plugins.
+       },
+     },
+     (assets) => {
+       // code
+     }
+   );
+   ```
 
 Here's a list of stages we can use:
 
@@ -554,7 +510,6 @@ Here's a list of stages we can use:
 - `PROCESS_ASSETS_STAGE_ANALYSE` - Analyze the existing assets.
 - `PROCESS_ASSETS_STAGE_REPORT` - Creating assets for the reporting purposes.
 
-
 ### `afterProcessAssets`
 
 `SyncHook`
@@ -567,13 +522,11 @@ Called after the [`processAssets`](#processassets) hook had finished without err
 
 Called to determine if the compilation needs to be unsealed to include other files.
 
-
 ### `afterSeal`
 
 `AsyncSeriesHook`
 
 Executed right after `needAdditionalSeal`.
-
 
 ### `chunkHash`
 
@@ -583,7 +536,6 @@ Triggered to emit the hash for each chunk.
 
 - Callback Parameters: `chunk` `chunkHash`
 
-
 ### `moduleAsset`
 
 `SyncHook`
@@ -591,7 +543,6 @@ Triggered to emit the hash for each chunk.
 Called when an asset from a module was added to the compilation.
 
 - Callback Parameters: `module` `filename`
-
 
 ### `chunkAsset`
 
@@ -601,7 +552,6 @@ Triggered when an asset from a chunk was added to the compilation.
 
 - Callback Parameters: `chunk` `filename`
 
-
 ### `assetPath`
 
 `SyncWaterfallHook`
@@ -610,13 +560,11 @@ Called to determine the path of an asset.
 
 - Callback Parameters: `path` `options`
 
-
 ### `needAdditionalPass`
 
 `SyncBailHook`
 
 Called to determine if an asset needs to be processed further after being emitted.
-
 
 ### `childCompiler`
 
@@ -625,7 +573,6 @@ Called to determine if an asset needs to be processed further after being emitte
 Executed after setting up a child compiler.
 
 - Callback Parameters: `childCompiler` `compilerName` `compilerIndex`
-
 
 ### `normalModuleLoader`
 

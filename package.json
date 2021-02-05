@@ -44,7 +44,7 @@
     "lint:js": "npm run lint-js .",
     "lint-js": "eslint --cache --cache-location .cache/.eslintcache",
     "lint:markdown": "npm run lint-markdown *.md ./src/content/**/*.md",
-    "lint-markdown": "markdownlint --rules markdownlint-rule-emphasis-style --config ./.markdownlint.json --ignore './src/content/**/_*.md' --ignore '.vale/**/*.md' --ignore '.github/**/*.md'",
+    "lint-markdown": "markdownlint --config ./.markdownlint.json --ignore './src/content/**/_*.md' --ignore '.vale/**/*.md' --ignore '.github/**/*.md'",
     "lint:social": "alex . -q",
     "lint:prose": "vale --config='.vale.ini' src/content",
     "lint:links": "hyperlink -c 8 --root dist -r dist/index.html --canonicalroot https://webpack.js.org/ --internal --skip /plugins/extract-text-webpack-plugin/ --skip /printable --skip https:// --skip http:// --skip sw.js > internal-links.tap; cat internal-links.tap | tap-spot",
@@ -55,7 +55,8 @@
     "jest": "jest",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "cypress:ci": "start-server-and-test build-test http://localhost:4200 cypress:run"
+    "cypress:ci": "start-server-and-test build-test http://localhost:4200 cypress:run",
+    "prettier": "prettier --write 'src/**/*.{js,jsx,css,scss,md,mdx}' '**/*.{js,json}'"
   },
   "husky": {
     "hooks": {
@@ -68,6 +69,9 @@
     ],
     "*.md": [
       "npm run lint-markdown"
+    ],
+    "*.{js,jsx,css,scss,md,mdx,json}": [
+      "prettier --write"
     ]
   },
   "devDependencies": {
@@ -92,6 +96,7 @@
     "directory-tree-webpack-plugin": "^1.0.2",
     "duplexer": "^0.1.1",
     "eslint": "^7.19.0",
+    "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-markdown": "^2.0.0-rc.2",
     "eslint-plugin-react": "^7.22.0",
@@ -106,7 +111,6 @@
     "lodash": "^4.17.19",
     "markdownlint": "^0.22.0",
     "markdownlint-cli": "^0.26.0",
-    "markdownlint-rule-emphasis-style": "^1.0.0",
     "mini-css-extract-plugin": "^1.3.5",
     "mkdirp": "^1.0.4",
     "modularscale-sass": "^3.0.3",
@@ -114,6 +118,7 @@
     "npm-run-all": "^4.1.1",
     "postcss": "^8.2.4",
     "postcss-loader": "^5.0.0",
+    "prettier": "^2.2.1",
     "react-refresh": "^0.9.0",
     "redirect-webpack-plugin": "^1.0.0",
     "remark": "^13.0.0",

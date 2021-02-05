@@ -16,16 +16,15 @@ contributors:
 
 Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
 
-
 ## Authoring a Library
 
 Let's assume that you are writing a small library ,`webpack-numbers`, that allows users to convert the numbers 1 through 5 from their numeric representation to a textual one and vice-versa, e.g. 2 to 'two'.
 
 The basic project structure may look like this:
 
-__project__
+**project**
 
-``` diff
+```diff
 +  |- webpack.config.js
 +  |- package.json
 +  |- /src
@@ -35,12 +34,12 @@ __project__
 
 Initialize npm, install webpack and lodash:
 
-``` bash
+```bash
 npm init -y
 npm install --save-dev webpack lodash
 ```
 
-__src/ref.json__
+**src/ref.json**
 
 ```json
 [
@@ -71,46 +70,54 @@ __src/ref.json__
 ]
 ```
 
-__src/index.js__
+**src/index.js**
 
-``` js
+```js
 import _ from 'lodash';
 import numRef from './ref.json';
 
 export function numToWord(num) {
-  return _.reduce(numRef, (accum, ref) => {
-    return ref.num === num ? ref.word : accum;
-  }, '');
+  return _.reduce(
+    numRef,
+    (accum, ref) => {
+      return ref.num === num ? ref.word : accum;
+    },
+    ''
+  );
 }
 
 export function wordToNum(word) {
-  return _.reduce(numRef, (accum, ref) => {
-    return ref.word === word && word.toLowerCase() ? ref.num : accum;
-  }, -1);
+  return _.reduce(
+    numRef,
+    (accum, ref) => {
+      return ref.word === word && word.toLowerCase() ? ref.num : accum;
+    },
+    -1
+  );
 }
 ```
 
 The usage specification for the library use will be as follows:
 
-- __ES2015 module import:__
+- **ES2015 module import:**
 
-``` js
+```js
 import * as webpackNumbers from 'webpack-numbers';
 // ...
 webpackNumbers.wordToNum('Two');
 ```
 
-- __CommonJS module require:__
+- **CommonJS module require:**
 
-``` js
+```js
 const webpackNumbers = require('webpack-numbers');
 // ...
 webpackNumbers.wordToNum('Two');
 ```
 
-- __AMD module require:__
+- **AMD module require:**
 
-``` js
+```js
 require(['webpackNumbers'], function (webpackNumbers) {
   // ...
   webpackNumbers.wordToNum('Two');
@@ -119,17 +126,17 @@ require(['webpackNumbers'], function (webpackNumbers) {
 
 The consumer also can use the library by loading it via a script tag:
 
-``` html
-<!doctype html>
+```html
+<!DOCTYPE html>
 <html>
   ...
   <script src="https://unpkg.com/webpack-numbers"></script>
   <script>
     // ...
     // Global variable
-    webpackNumbers.wordToNum('Five')
+    webpackNumbers.wordToNum('Five');
     // Property in the window object
-    window.webpackNumbers.wordToNum('Five')
+    window.webpackNumbers.wordToNum('Five');
     // ...
   </script>
 </html>
@@ -141,7 +148,6 @@ Note that we can also configure it to expose the library in the following ways:
 - Property in the `this` object.
 
 For full library configuration and code please refer to [webpack-library-example](https://github.com/kalcifer/webpack-library-example).
-
 
 ## Base Configuration
 
@@ -158,13 +164,11 @@ Also, the consumer should be able to access the library in the following ways:
 - CommonJS module. i.e. `require('webpack-numbers')`.
 - Global variable when included through `script` tag.
 
-
-
 We can start with this basic webpack configuration:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` js
+```js
 const path = require('path');
 
 module.exports = {
@@ -178,30 +182,28 @@ module.exports = {
 
 ## Base Configuration with source map
 
- Source maps is a useful debugging tool that allows you to view where the minified code originated from.
+Source maps is a useful debugging tool that allows you to view where the minified code originated from.
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` js
+```js
 const path = require('path');
 
-module.exports = [
-  'source-map'
-].map(devtool => ({
+module.exports = ['source-map'].map((devtool) => ({
   mode: 'development',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'webpack-numbers.js'
+    filename: 'webpack-numbers.js',
   },
   devtool,
   optimization: {
-    runtimeChunk: true
-  }
+    runtimeChunk: true,
+  },
 }));
- ```
+```
 
->  For more information about getting source maps setup and available options please refer to [Devtool configuration](https://webpack.js.org/configuration/devtool/)
+> For more information about getting source maps setup and available options please refer to [Devtool configuration](https://webpack.js.org/configuration/devtool/)
 
 > To see code examples please refer to [webpack repository](https://github.com/webpack/webpack/tree/master/examples/source-map)
 
@@ -211,9 +213,9 @@ Now, if you run `webpack`, you will find that a largish bundle is created. If yo
 
 This can be done using the `externals` configuration:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
   const path = require('path');
 
   module.exports = {
@@ -237,12 +239,11 @@ This means that your library expects a dependency named `lodash` to be available
 
 T> Note that if you only plan on using your library as a dependency in another webpack bundle, you may specify `externals` as an array.
 
-
 ## External Limitations
 
 For libraries that use several files from a dependency:
 
-``` js
+```js
 import A from 'library/one';
 import B from 'library/two';
 
@@ -251,7 +252,7 @@ import B from 'library/two';
 
 You won't be able to exclude them from the bundle by specifying `library` in the externals. You'll either need to exclude them one by one or by using a regular expression.
 
-``` js
+```js
 module.exports = {
   //...
   externals: [
@@ -263,14 +264,13 @@ module.exports = {
 };
 ```
 
-
 ## Expose the Library
 
 For widespread use of the library, we would like it to be compatible in different environments, i.e. CommonJS, AMD, Node.js and as a global variable. To make your library available for consumption, add the `library` property inside `output`:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
   const path = require('path');
 
   module.exports = {
@@ -291,13 +291,13 @@ __webpack.config.js__
   };
 ```
 
-T> Note that the `library` setup is tied to the `entry` configuration. For most libraries, specifying a single entry point is sufficient. While [multi-part libraries](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) are possible, it is simpler to expose partial exports through an [index script](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file) that serves as a single entry point. Using an `array` as an `entry` point for a library is __not recommended__.
+T> Note that the `library` setup is tied to the `entry` configuration. For most libraries, specifying a single entry point is sufficient. While [multi-part libraries](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) are possible, it is simpler to expose partial exports through an [index script](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file) that serves as a single entry point. Using an `array` as an `entry` point for a library is **not recommended**.
 
 This exposes your library bundle available as a global variable named `webpackNumbers` when imported. To make the library compatible with other environments, add `libraryTarget` property to the config. This will add various options about how the library can be exposed.
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
   const path = require('path');
 
   module.exports = {
@@ -330,14 +330,13 @@ If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var
 
 W> With webpack 3.5.5, using `libraryTarget: { root:'_' }` doesn't work properly (as stated in [issue 4824](https://github.com/webpack/webpack/issues/4824)). However, you can set `libraryTarget: { var: '_' }` to expect the library as a global variable.
 
-
 ### Final Steps
 
 Optimize your output for production by following the steps mentioned in the [production guide](/guides/production). Let's also add the path to your generated bundle as the package's `main` field in with the `package.json`
 
-__package.json__
+**package.json**
 
-``` json
+```json
 {
   ...
   "main": "dist/webpack-numbers.js",
@@ -347,7 +346,7 @@ __package.json__
 
 Or, to add it as a standard module as per [this guide](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage):
 
-``` json
+```json
 {
   ...
   "module": "src/index.js",

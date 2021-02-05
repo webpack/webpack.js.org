@@ -4888,6 +4888,11 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
+eslint-config-prettier@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-7.2.0.tgz#f4a4bd2832e810e8cc7c1411ec85b3e85c0c53f9"
+  integrity sha512-rV4Qu0C3nfJKPOAhFujFxB7RMP+URFyQqqOZW9DMRD7ZDTFyjaIlETU3xzHELt++4ugC0+Jm084HQYkkJe+Ivg==
+
 eslint-plugin-cypress@^2.11.2:
   version "2.11.2"
   resolved "https://registry.yarnpkg.com/eslint-plugin-cypress/-/eslint-plugin-cypress-2.11.2.tgz#a8f3fe7ec840f55e4cea37671f93293e6c3e76a0"
@@ -8342,11 +8347,6 @@ markdownlint-cli@^0.26.0:
     minimist "~1.2.5"
     rc "~1.2.8"
 
-markdownlint-rule-emphasis-style@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/markdownlint-rule-emphasis-style/-/markdownlint-rule-emphasis-style-1.0.1.tgz#06ccffc0953fc18a4a91efbc18f1aa69dda9e598"
-  integrity sha512-OAbuFT4xKq3zVkfBv34qV672rtip+r+QGSY8DCTZaP9wpQTsDW8WlPY01TSUHGxTv8HOfYwoU47bblNk7FCZAA==
-
 markdownlint-rule-helpers@~0.13.0:
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/markdownlint-rule-helpers/-/markdownlint-rule-helpers-0.13.0.tgz#7cc6553bc7f8c4c8a43cf66fb2a3a652124f46f9"
@@ -10158,6 +10158,11 @@ prepend-http@^1.0.1:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
+
+prettier@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.2.1.tgz#795a1a78dd52f073da0cd42b21f9c91381923ff5"
+  integrity sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
 
 pretty-bytes@^4.0.2:
   version "4.0.2"
