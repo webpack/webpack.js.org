@@ -59,3 +59,5 @@ W> Be aware that if you use ES6 module imports in your entry file the `__webpack
 import './public-path';
 import './app';
 ```
+
+T> When using `web` or `web-worker` target, `publicPath` defaults to `'auto'` which will automatically determine the public path from either `import.meta.url`, `document.currentScript`, `<script />` or `self.location`.
