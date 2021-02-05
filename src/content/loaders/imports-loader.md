@@ -69,7 +69,7 @@ import myLib from 'imports-loader?imports=default|jquery|$!./example.js';
 ```
 
 ```js
-import myLib from 'imports-loader?imports[]=default|jquery|$&imports[]=angular!./example.js';
+import myLib from 'imports-loader?imports=default|jquery|$,angular!./example.js';
 // `|` is separator in a query string, equivalently `default|jquery|$` and `angular`
 // Adds the following code to the beginning of example.js:
 //
@@ -82,7 +82,7 @@ import myLib from 'imports-loader?imports[]=default|jquery|$&imports[]=angular!.
 ```
 
 ```js
-import myLib from 'imports-loader?imports[]=named|library|myMethod&imports[]=angular!./example.js';
+import myLib from 'imports-loader?imports=named|library|myMethod,angular!./example.js';
 // `|` is separator in a query string, equivalently `named|library|myMethod` and `angular`
 // Adds the following code to the beginning of example.js:
 //
@@ -95,7 +95,7 @@ import myLib from 'imports-loader?imports[]=named|library|myMethod&imports[]=ang
 ```
 
 ```js
-const myLib = require(`imports-loader?type=commonjs&imports[]=single|jquery|$&imports[]=angular!./example.js`);
+const myLib = require(`imports-loader?type=commonjs&imports=single|jquery|$,angular!./example.js`);
 // `|` is separator in a query string, equivalently `single|jquery|$` and `angular`
 // Adds the following code to the beginning of example.js:
 //

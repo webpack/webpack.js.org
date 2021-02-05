@@ -283,7 +283,7 @@ module.exports = {
 Type: `Boolean`
 Default: `true`
 
-Enables/Disables the default Webpack importer.
+Enables/Disables the default `webpack` importer.
 
 This can improve performance in some cases. Use it with caution because aliases and `@import` at-rules starting with `~` will not work.
 
@@ -384,7 +384,7 @@ To enable sourcemaps for CSS, you'll need to pass the `sourceMap` property in th
 
 **webpack.config.js**
 
-```javascript
+```js
 module.exports = {
   devtool: "source-map", // any "source-map"-like devtool is possible
   module: {
@@ -420,21 +420,57 @@ Usually, it's recommended to extract the style sheets into a dedicated file in p
 
 ### Imports
 
-Starting with `less-loader` 4, you can now choose between Less' builtin resolver and webpack's resolver. By default, webpack's resolver is used.
+First we try to use built-in `less` resolve logic, then `webpack` resolve logic (aliases and `~`).
 
-#### webpack resolver
+#### Webpack Resolver
 
-webpack provides an [advanced mechanism to resolve files](/configuration/resolve/). The `less-loader` applies a Less plugin that passes all queries to the webpack resolver. Thus you can import your Less modules from `node_modules`. Just prepend them with a `~` which tells webpack to look up the [`modules`](/configuration/resolve/#resolvemodules).
+`webpack` provides an [advanced mechanism to resolve files](/configuration/resolve/).
+`less-loader` applies a Less plugin that passes all queries to the webpack resolver if `less` could not resolve `@import`.
+Thus you can import your Less modules from `node_modules`.
+
+```css
+@import "bootstrap/less/bootstrap";
+```
+
+Using `~` is deprecated and can be removed from your code (**we recommend it**), but we still support it for historical reasons.
+Why you can removed it? The loader will first try to resolve `@import` as relative, if it cannot be resolved, the loader will try to resolve `@import` inside [`node_modules`](/configuration/resolve/#resolvemodules).
+Just prepend them with a `~` which tells webpack to look up the [`modules`](/configuration/resolve/#resolvemodules).
 
 ```css
 @import "~bootstrap/less/bootstrap";
 ```
 
+Default resolver options can be modified by [`resolve.byDependency`](/configuration/resolve/#resolvebydependency):
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  devtool: "source-map", // any "source-map"-like devtool is possible
+  module: {
+    rules: [
+      {
+        test: /\.less$/i,
+        use: ["style-loader", "css-loader", "less-loader"],
+      },
+    ],
+  },
+  resolve: {
+    byDependency: {
+      // More options can be found here https://webpack.js.org/configuration/resolve/
+      less: {
+        mainFiles: ["custom"],
+      },
+    },
+  },
+};
+```
+
 It's important to only prepend it with `~`, because `~/` resolves to the home-directory. webpack needs to distinguish between `bootstrap` and `~bootstrap`, because CSS and Less files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
 
-#### Less resolver
+#### Less Resolver
 
-If you specify the `paths` option, modules will be searched in the given `paths`. This is Less' default behavior. `paths` should be an array with absolute paths:
+If you specify the `paths` option, modules will be searched in the given `paths`. This is `less` default behavior. `paths` should be an array with absolute paths:
 
 **webpack.config.js**
 
@@ -470,8 +506,9 @@ module.exports = {
 
 In order to use [plugins](http://lesscss.org/usage/#plugins), simply set the `plugins` option like this:
 
+**webpack.config.js**
+
 ```js
-// webpack.config.js
 const CleanCSSPlugin = require('less-plugin-clean-css');
 
 module.exports = {
