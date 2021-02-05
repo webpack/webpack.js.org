@@ -283,11 +283,7 @@ module.exports = {
 类型：`Boolean`
 默认值：`true`
 
-<<<<<<< HEAD
 启用/禁用 webpack 默认的 importer。
-=======
-Enables/Disables the default `webpack` importer.
->>>>>>> e4a02c65ef99e0d6fb696500b5fdce3e2b212530
 
 在某些情况下，这样做可以提高性能，但是请慎用，因为可能会使得 aliases 和以 `~` 开头的 `@import` 规则失效。
 
@@ -424,48 +420,33 @@ module.exports = {
 
 ### 导入 {#imports}
 
-<<<<<<< HEAD
-从 `less-loader` v4 版本起，你有两种解析器可用，Less 内置解析器和 webpack 解析器。默认情况使用 webpack 解析器。
+首先我们会尝试使用内置 `less` 解析逻辑，然后再使用 `webpack` 解析逻辑（alias 和 `~`）。
 
-#### webpack 解析器 {#webpack-resolver}
+#### Webpack 解析器 {#webpack-resolver}
 
-webpack 提供了一种 [解析文件的高级机制](/configuration/resolve/)。`less-loader` 作为 Less 的插件，该插件将所有的查询结果传递给 webpack 解析器，因此你可以从 `node_modules` 中导入 Less 模块，只需要在它们前面加上 `~` 符号告诉 webpack 从 [`modules`](/configuration/resolve/#resolvemodules) 中去查找。
-=======
-First we try to use built-in `less` resolve logic, then `webpack` resolve logic (aliases and `~`).
-
-#### Webpack Resolver
-
-`webpack` provides an [advanced mechanism to resolve files](/configuration/resolve/).
-`less-loader` applies a Less plugin that passes all queries to the webpack resolver if `less` could not resolve `@import`.
-Thus you can import your Less modules from `node_modules`.
+`webpack` 提供了一种 [解析文件的高级机制](/configuration/resolve/)。
+如果 `less` 不能解析 `@import` 的话，`less-loader` 作为 Less 的插件将所有的查询结果传递给 webpack 解析器。
+因此你可以从 `node_modules` 中导入 Less 模块。
 
 ```css
 @import "bootstrap/less/bootstrap";
 ```
 
-Using `~` is deprecated and can be removed from your code (**we recommend it**), but we still support it for historical reasons.
-Why you can removed it? The loader will first try to resolve `@import` as relative, if it cannot be resolved, the loader will try to resolve `@import` inside [`node_modules`](/configuration/resolve/#resolvemodules).
-Just prepend them with a `~` which tells webpack to look up the [`modules`](/configuration/resolve/#resolvemodules).
->>>>>>> e4a02c65ef99e0d6fb696500b5fdce3e2b212530
+`~` 用法已被废弃，可以从代码中删除（**我们建议这么做**），但是我们会因为一些历史原因一直支持这种写法。
+为什么你可以移除它呢？loader 首先会尝试以相对路径解析 `@import`，如果它不能被解析，loader 将会尝试在 [`node_modules`](/configuration/resolve/#resolvemodules) 中解析 `@import`。
+只要在包名前加上 `~`，告诉 Webpack 在 [`modules`](/configuration/resolve/#resolvemodules) 中进行查找。
 
 ```css
 @import "~bootstrap/less/bootstrap";
 ```
 
-<<<<<<< HEAD
-在其前面加上 `〜` 很关键，因为 `〜/` 会解析到根目录。webpack 需要区分 `bootstrap` 和 `〜bootstrap`，因为 CSS 和 Less 文件没有用于导入相对路径文件的特殊语法。写 `@import“ file”` 等同于 `@import“ ./file”;`
-
-#### Less 解析器 {#less-resolver}
-
-如果指定 `paths` 选项，将从指定的 `paths` 中搜索模块，这是 Less 的默认行为。`paths` 应该是具有绝对路径的数组。
-=======
-Default resolver options can be modified by [`resolve.byDependency`](/configuration/resolve/#resolvebydependency):
+可以通过 [`resolve.byDependency`](/configuration/resolve/#resolvebydependency) 修改默认解析器配置：
 
 **webpack.config.js**
 
 ```js
 module.exports = {
-  devtool: "source-map", // any "source-map"-like devtool is possible
+  devtool: "source-map", // "source-map" 类的 devtool 都是可以的
   module: {
     rules: [
       {
@@ -476,7 +457,7 @@ module.exports = {
   },
   resolve: {
     byDependency: {
-      // More options can be found here https://webpack.js.org/configuration/resolve/
+      // 更多的配置项可以在这里找到 https://webpack.js.org/configuration/resolve/
       less: {
         mainFiles: ["custom"],
       },
@@ -485,12 +466,11 @@ module.exports = {
 };
 ```
 
-It's important to only prepend it with `~`, because `~/` resolves to the home-directory. webpack needs to distinguish between `bootstrap` and `~bootstrap`, because CSS and Less files have no special syntax for importing relative files. Writing `@import "file"` is the same as `@import "./file";`
+在其前面加上 `〜` 很关键，因为 `〜/` 会解析到根目录。webpack 需要区分 `bootstrap` 和 `〜bootstrap`，因为 CSS 和 Less 文件没有用于导入相对路径文件的特殊语法。写 `@import“ file”` 等同于 `@import“ ./file”;`
 
-#### Less Resolver
+#### Less Resolver {#less-resolver}
 
-If you specify the `paths` option, modules will be searched in the given `paths`. This is `less` default behavior. `paths` should be an array with absolute paths:
->>>>>>> e4a02c65ef99e0d6fb696500b5fdce3e2b212530
+如果指定 `paths` 选项，将从指定的 `paths` 中搜索模块，这是 `less` 的默认行为。`paths` 应该是具有绝对路径的数组：
 
 **webpack.config.js**
 
