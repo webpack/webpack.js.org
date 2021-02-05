@@ -390,7 +390,7 @@ module.exports = {
 
 Also you can [specify a function](/configuration/module/#ruleparserdataurlcondition) to decide to inlining a module or not.
 
-### Replacing Inline Loader Syntax
+## Replacing Inline Loader Syntax
 
 Before Asset Modules and Webpack 5, it was possible to use [inline syntax](https://webpack.js.org/concepts/loaders/#inline) with the legacy loaders mentioned above.
 
