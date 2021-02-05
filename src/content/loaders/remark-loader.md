@@ -79,7 +79,7 @@ Please see the wonderful [MDX](https://mdxjs.com/) project if you're interested 
 
 #### plugins {#plugins}
 
-Type: `Array<String\|Array>`
+Type: `Array<String|Array>`
 Default: `[]`
 
 Allows to connect [`remark` plugins](https://github.com/wooorm/remark/blob/master/doc/plugins.md)

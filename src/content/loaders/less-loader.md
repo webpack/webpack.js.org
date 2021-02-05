@@ -384,7 +384,7 @@ module.exports = {
 
 **webpack.config.js**
 
-```javascript
+```js
 module.exports = {
   devtool: "source-map", // 任何类似于 "source-map" 的  devtool 值都可以
   module: {
@@ -420,21 +420,57 @@ module.exports = {
 
 ### 导入 {#imports}
 
-从 `less-loader` v4 版本起，你有两种解析器可用，Less 内置解析器和 webpack 解析器。默认情况使用 webpack 解析器。
+首先我们会尝试使用内置 `less` 解析逻辑，然后再使用 `webpack` 解析逻辑（alias 和 `~`）。
 
-#### webpack 解析器 {#webpack-resolver}
+#### Webpack 解析器 {#webpack-resolver}
 
-webpack 提供了一种 [解析文件的高级机制](/configuration/resolve/)。`less-loader` 作为 Less 的插件，该插件将所有的查询结果传递给 webpack 解析器，因此你可以从 `node_modules` 中导入 Less 模块，只需要在它们前面加上 `~` 符号告诉 webpack 从 [`modules`](/configuration/resolve/#resolvemodules) 中去查找。
+`webpack` 提供了一种 [解析文件的高级机制](/configuration/resolve/)。
+如果 `less` 不能解析 `@import` 的话，`less-loader` 作为 Less 的插件将所有的查询结果传递给 webpack 解析器。
+因此你可以从 `node_modules` 中导入 Less 模块。
+
+```css
+@import "bootstrap/less/bootstrap";
+```
+
+`~` 用法已被废弃，可以从代码中删除（**我们建议这么做**），但是我们会因为一些历史原因一直支持这种写法。
+为什么你可以移除它呢？loader 首先会尝试以相对路径解析 `@import`，如果它不能被解析，loader 将会尝试在 [`node_modules`](/configuration/resolve/#resolvemodules) 中解析 `@import`。
+只要在包名前加上 `~`，告诉 Webpack 在 [`modules`](/configuration/resolve/#resolvemodules) 中进行查找。
 
 ```css
 @import "~bootstrap/less/bootstrap";
 ```
 
+可以通过 [`resolve.byDependency`](/configuration/resolve/#resolvebydependency) 修改默认解析器配置：
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  devtool: "source-map", // "source-map" 类的 devtool 都是可以的
+  module: {
+    rules: [
+      {
+        test: /\.less$/i,
+        use: ["style-loader", "css-loader", "less-loader"],
+      },
+    ],
+  },
+  resolve: {
+    byDependency: {
+      // 更多的配置项可以在这里找到 https://webpack.js.org/configuration/resolve/
+      less: {
+        mainFiles: ["custom"],
+      },
+    },
+  },
+};
+```
+
 在其前面加上 `〜` 很关键，因为 `〜/` 会解析到根目录。webpack 需要区分 `bootstrap` 和 `〜bootstrap`，因为 CSS 和 Less 文件没有用于导入相对路径文件的特殊语法。写 `@import“ file”` 等同于 `@import“ ./file”;`
 
-#### Less 解析器 {#less-resolver}
+#### Less Resolver {#less-resolver}
 
-如果指定 `paths` 选项，将从指定的 `paths` 中搜索模块，这是 Less 的默认行为。`paths` 应该是具有绝对路径的数组。
+如果指定 `paths` 选项，将从指定的 `paths` 中搜索模块，这是 `less` 的默认行为。`paths` 应该是具有绝对路径的数组：
 
 **webpack.config.js**
 
@@ -471,8 +507,9 @@ module.exports = {
 想要使用 [插件](http://lesscss.org/usage/#plugins)，只需要简单设置下 `plugins` 选项即可，
 具体配置如下：
 
+**webpack.config.js**
+
 ```js
-// webpack.config.js
 const CleanCSSPlugin = require('less-plugin-clean-css');
 
 module.exports = {

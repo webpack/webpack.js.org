@@ -82,7 +82,15 @@ module.exports = {
 
 Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)。
 
-`sass-loader` 使用 Sass 提供的 custom importer 特性，将所有 query 传递给 Webpack 解析引擎。只要在包名前加上 `~` ，告诉 Webpack 这不是一个相对路径，这样就可以从 `node_modules` 中 import 自己的 Sass 模块了：
+`sass-loader` 使用 Sass 提供的 custom importer 特性，将所有 query 传递给 Webpack 解析引擎。
+因此你可以从 `node_modules` 中引入 Sass modules。
+
+```scss
+@import "bootstrap";
+```
+`~` 用法已被废弃，可以从代码中删除（**我们建议这么做**），但是我们会因为一些历史原因一直支持这种写法。
+为什么你可以移除它呢？loader 首先会尝试以相对路径解析 `@import`，如果它不能被解析，loader 将会尝试在 [`node_modules`](/configuration/resolve/#resolvemodules) 中解析 `@import`。
+只要在包名前加上 `~`，告诉 Webpack 在 [`modules`](/configuration/resolve/#resolvemodules) 中进行查找。
 
 ```scss
 @import "~bootstrap";
@@ -121,7 +129,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 类型： `Object`
 默认值： `sass`
 
-特殊的 `implementation` 选项确定要使用的 Sass 实现。 
+特殊的 `implementation` 选项确定要使用的 Sass 实现。
 
 默认情况下，loader 将会根据你的依赖解析需要使用的实现。
 只需将必需的实现添加到 `package.json`（`sass` 或 `node-sass` 包）中并安装依赖项即可。
@@ -568,8 +576,8 @@ module.exports = {
 
 从 bundle 中提取样式表，有 2 种实用的方式：
 
-- [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/)（在使用 webpack 4 时使用此 plugin，它将适用于所有用例）
-- [extract-loader](https://github.com/peerigon/extract-loader)（简单，专门针对 css-loader 的输出）
+- [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/)
+- [extract-loader](https://github.com/peerigon/extract-loader) (简单，专门针对 css-loader 的输出)
 
 **webpack.config.js**
 
