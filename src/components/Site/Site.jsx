@@ -169,6 +169,9 @@ function Site(props) {
           (item) => item.type !== 'directory' && item.url !== '/'
         )
   );
+
+  // not to show in sub navbar
+  const excludeItems = ['contribute', 'blog'];
   return (
     <MDXProvider
       components={{
@@ -194,7 +197,9 @@ function Site(props) {
                     url
                   ),
                 children: _strip(
-                  sections.filter((item) => item.name !== 'contribute')
+                  sections.filter(
+                    ({ name }) => excludeItems.includes(name) === false
+                  )
                 ),
               },
               { content: 'Contribute', url: '/contribute/' },
