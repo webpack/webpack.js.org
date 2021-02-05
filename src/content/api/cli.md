@@ -210,7 +210,7 @@ This is the lookup priority in increasing order
 
 W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/configuration/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
 
-### `help`
+### help
 
 **List basic commands and flags available on the cli**
 
@@ -345,7 +345,7 @@ You can merge two or more different webpack configurations with the help of `--m
 npx webpack --config ./first.js --config ./second.js --merge
 ```
 
-### `json`
+### json
 
 **Print result of webpack as JSON**
 
