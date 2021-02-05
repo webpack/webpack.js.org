@@ -25,9 +25,7 @@ The `stats` option lets you precisely control what bundle information gets displ
 
 T> For webpack-dev-server, this property needs to be in the [`devServer` configuration object](/configuration/dev-server/#devserverstats-).
 
-W> This option does not have any effect when using the Node.js API.
-
-**webpack.js.org**
+W> This option does not have any effect when using the Node.js API. You need to pass the stats options to the `stats.toString()` resp. `stats.toJson()` calls instead.
 
 ```js
 module.exports = {
@@ -129,21 +127,6 @@ module.exports = {
 };
 ```
 
-### `stats.cached`
-
-`boolean = true`
-
-Tells `stats` whether to add information about the cached modules (not the ones that were built).
-
-```javascript
-module.exports = {
-  //...
-  stats: {
-    cached: false,
-  },
-};
-```
-
 ### `stats.assetsSpace`
 
 `number = 15`
@@ -203,6 +186,10 @@ module.exports = {
   },
 };
 ```
+
+### `stats.cached`
+
+Old version of `stats.cachedModules`.
 
 ### `stats.cachedModules`
 
@@ -897,6 +884,21 @@ module.exports = {
   //...
   stats: {
     timings: false,
+  },
+};
+```
+
+### `stats.ids`
+
+`boolean = false`
+
+Tells `stats` to add IDs of modules and chunks.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    ids: true,
   },
 };
 ```
