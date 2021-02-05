@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 // Import Components
 import PageLinks from '../PageLinks/PageLinks';
 import Markdown from '../Markdown/Markdown';
-import Contributors from '../Contributors/Contributors';
 import {PlaceholderString} from '../Placeholder/Placeholder';
 import { Pre } from '../Configuration/Configuration';
 import AdjacentPages from './AdjacentPages';
@@ -70,12 +69,10 @@ class Page extends Component {
   }
 
   render() {
-    const { title, contributors = [], related = [], previous, next, ...rest } = this.props;
+    const { title, related = [], previous, next, ...rest } = this.props;
 
     const { contentLoaded } = this.state;
     const loadRelated = contentLoaded && related && related.length !== 0;
-    const loadContributors =
-      contentLoaded && contributors && contributors.length !== 0;
 
     const { content } = this.state;
 
@@ -127,14 +124,6 @@ class Page extends Component {
                   </li>
                 ))}
               </ul>
-            </div>
-          )}
-
-          {loadContributors && (
-            <div className="contributors__section">
-              <hr />
-              <h3>Contributors</h3>
-              <Contributors contributors={contributors} />
             </div>
           )}
         </Markdown>
