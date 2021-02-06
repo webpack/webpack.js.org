@@ -266,34 +266,7 @@ __webpack.config.js__
 
 This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080`.
 
-`webpack-dev-server` uses `output.path` as the root path for serving generated files. Generated files will be available under `http://localhost:[devServer.port]/[output.publicPath]/[output.filename]`. If you want to serve generated files under a specific directory on dev server, e.g. under the `assets` directory (`http://localhost:8080/assets/bundle.js`), you will need to set output directory with `output.filename` instead of `output.path`, or configure `output.publicPath`.
-
-__webpack.config.js__
-
-``` diff
- const path = require('path');
-
- module.exports = {
-   // Set output directory with output.filename instead of output.path
-   output: {
--    filename: 'bundle.js',
-+    filename: 'assets/bundle.js',
--    path: path.resolve('assets'),
-+    path: path.resolve(),
-   },
- };
-
- // Or
-
- module.exports = {
-   output: {
-     filename: 'bundle.js',
-     path: path.resolve('assets'), // Keep this line intact to specify output directory for building
-+    publicPath: '/assets/', // Tell webpack-dev-server to serve generated files under assets directory
-   },
- };
-```
-
+>T `webpack-dev-server` serves bundled files from the directory of [`output.path`](/configuration/output/#outputpath), i.e., files will be available under `http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]`.
 W> webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files on a different path, you can change this with the [`publicPath`](/configuration/dev-server/#devserverpublicpath-) option in the dev server's configuration.
 
 Let's add a script to easily run the dev server as well:
