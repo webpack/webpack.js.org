@@ -266,7 +266,8 @@ __webpack.config.js__
 
 This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080`.
 
->T `webpack-dev-server` serves bundled files from the directory of [`output.path`](/configuration/output/#outputpath), i.e., files will be available under `http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]`.
+T> `webpack-dev-server` serves bundled files from the directory defined in [`output.path`](/configuration/output/#outputpath), i.e., files will be available under `http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]`.
+
 W> webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files on a different path, you can change this with the [`publicPath`](/configuration/dev-server/#devserverpublicpath-) option in the dev server's configuration.
 
 Let's add a script to easily run the dev server as well:
