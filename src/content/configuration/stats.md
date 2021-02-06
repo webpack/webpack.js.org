@@ -529,9 +529,7 @@ module.exports = {
 
 `boolean` `string = "auto"`
 
-Tells `stats` whether to add the details to the errors.
-
-Show error details automatically when only 2 or less errors are there.
+Tells `stats` whether to add the details to the errors. It defaults to `'auto'` which will show error details when there're only 2 or less errors.
 
 ```javascript
 module.exports = {
