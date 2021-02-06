@@ -20,17 +20,17 @@ T> This guide extends on code examples found in the [Output Management](/guides/
 
 If you've been following the guides, you should have a solid understanding of some of the webpack basics. Before we continue, let's look into setting up a development environment to make our lives a little easier.
 
-W> The tools in this guide are __only meant for development__, please __avoid__ using them in production!
+W> The tools in this guide are **only meant for development**, please **avoid** using them in production!
 
 Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-development) and `title` to `'Development'`.
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
- 
+
  module.exports = {
 +  mode: 'development',
    entry: {
@@ -61,13 +61,13 @@ There are a lot of [different options](/configuration/devtool) available when it
 
 For this guide, let's use the `inline-source-map` option, which is good for illustrative purposes (though not for production):
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
- 
+
  module.exports = {
    mode: 'development',
    entry: {
@@ -90,9 +90,9 @@ __webpack.config.js__
 
 Now let's make sure we have something to debug, so let's create an error in our `print.js` file:
 
-__src/print.js__
+**src/print.js**
 
-``` diff
+```diff
  export default function printMe() {
 -  console.log('I get called from print.js!');
 +  cosnole.log('I get called from print.js!');
@@ -101,7 +101,7 @@ __src/print.js__
 
 Run an `npm run build`, it should compile to something like this:
 
-``` bash
+```bash
 ...
 [webpack-cli] Compilation finished
 asset index.bundle.js 1.38 MiB [emitted] (name: index)
@@ -117,13 +117,12 @@ webpack 5.4.0 compiled successfully in 706 ms
 
 Now open the resulting `index.html` file in your browser. Click the button and look in your console where the error is displayed. The error should say something like this:
 
- ``` bash
- Uncaught ReferenceError: cosnole is not defined
-    at HTMLButtonElement.printMe (print.js:2)
- ```
+```bash
+Uncaught ReferenceError: cosnole is not defined
+   at HTMLButtonElement.printMe (print.js:2)
+```
 
 We can see that the error also contains a reference to the file (`print.js`) and line number (2) where the error occurred. This is great because now we know exactly where to look in order to fix the issue.
-
 
 ## Choosing a Development Tool
 
@@ -133,12 +132,11 @@ It quickly becomes a hassle to manually run `npm run build` every time you want 
 
 There are a couple of different options available in webpack that help you automatically compile your code whenever it changes:
 
- 1. webpack's [Watch Mode](/configuration/watch/#watch)
- 2. [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
- 3. [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
+1.  webpack's [Watch Mode](/configuration/watch/#watch)
+2.  [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+3.  [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware)
 
 In most cases, you probably would want to use `webpack-dev-server`, but let's explore all of the above options.
-
 
 ### Using Watch Mode
 
@@ -146,9 +144,9 @@ You can instruct webpack to "watch" all files within your dependency graph for c
 
 Let's add an npm script that will start webpack's Watch Mode:
 
-__package.json__
+**package.json**
 
-``` diff
+```diff
  {
    "name": "webpack-demo",
    "version": "1.0.0",
@@ -176,13 +174,13 @@ __package.json__
 
 Tell `CleanWebpackPlugin` that we don't want to remove the `index.html` file after the incremental build triggered by watch. We do this with the [`cleanStaleWebpackAssets` option](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional):
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
- 
+
  module.exports = {
    mode: 'development',
    entry: {
@@ -209,9 +207,9 @@ You can see that it doesn't exit the command line because the script is currentl
 
 Now, while webpack is watching your files, let's remove the error we introduced earlier:
 
-__src/print.js__
+**src/print.js**
 
-``` diff
+```diff
  export default function printMe() {
 -  cosnole.log('I get called from print.js!');
 +  console.log('I get called from print.js!');
@@ -222,24 +220,23 @@ Now save your file and check the terminal window. You should see that webpack au
 
 The only downside is that you have to refresh your browser in order to see the changes. It would be much nicer if that would happen automatically as well, so let's try `webpack-dev-server` which will do exactly that.
 
-
 ### Using webpack-dev-server
 
 The `webpack-dev-server` provides you with a simple web server and the ability to use live reloading. Let's set it up:
 
-``` bash
+```bash
 npm install --save-dev webpack-dev-server
 ```
 
 Change your configuration file to tell the dev server where to look for files:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
- 
+
  module.exports = {
    mode: 'development',
    entry: {
@@ -269,9 +266,9 @@ W> webpack-dev-server doesn't write any output files after compiling. Instead, i
 
 Let's add a script to easily run the dev server as well:
 
-__package.json__
+**package.json**
 
-``` diff
+```diff
  {
    "name": "webpack-demo",
    "version": "1.0.0",
@@ -305,26 +302,25 @@ The `webpack-dev-server` comes with many configurable options. Head over to the 
 
 T> Now that your server is working, you might want to give [Hot Module Replacement](/guides/hot-module-replacement) a try!
 
-
 ### Using webpack-dev-middleware
 
 `webpack-dev-middleware` is a wrapper that will emit files processed by webpack to a server. This is used in `webpack-dev-server` internally, however it's available as a separate package to allow more custom setups if desired. We'll take a look at an example that combines `webpack-dev-middleware` with an express server.
 
 Let's install `express` and `webpack-dev-middleware` so we can get started:
 
-``` bash
+```bash
 npm install --save-dev express webpack-dev-middleware
 ```
 
 Now we need to make some adjustments to our webpack configuration file in order to make sure the middleware will function correctly:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
- 
+
  module.exports = {
    mode: 'development',
    entry: {
@@ -351,9 +347,9 @@ __webpack.config.js__
 
 The `publicPath` will be used within our server script as well in order to make sure files are served correctly on `http://localhost:3000`. We'll specify the port number later. The next step is setting up our custom `express` server:
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
   |- webpack.config.js
@@ -365,7 +361,7 @@ __project__
   |- /node_modules
 ```
 
-__server.js__
+**server.js**
 
 ```javascript
 const express = require('express');
@@ -392,9 +388,9 @@ app.listen(3000, function () {
 
 Now add an npm script to make it a little easier to run the server:
 
-__package.json__
+**package.json**
 
-``` diff
+```diff
  {
    "name": "webpack-demo",
    "version": "1.0.0",
@@ -427,7 +423,7 @@ __package.json__
 
 Now in your terminal run `npm run server`, it should give you an output similar to this:
 
-``` bash
+```bash
 Example app listening on port 3000!
 ...
 <i> [webpack-dev-middleware] asset index.bundle.js 1.38 MiB [emitted] (name: index)
@@ -451,17 +447,15 @@ Now fire up your browser and go to `http://localhost:3000`. You should see your 
 
 T> If you would like to know more about how Hot Module Replacement works, we recommend you read the [Hot Module Replacement](/guides/hot-module-replacement/) guide.
 
-
 ## Adjusting Your Text Editor
 
 When using automatic compilation of your code, you could run into issues when saving your files. Some editors have a "safe write" feature that can potentially interfere with recompilation.
 
 To disable this feature in some common editors, see the list below:
 
-- __Sublime Text 3__: Add `atomic_save: 'false'` to your user preferences.
-- __JetBrains IDEs (e.g. WebStorm)__: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
-- __Vim__: Add `:set backupcopy=yes` to your settings.
-
+- **Sublime Text 3**: Add `atomic_save: 'false'` to your user preferences.
+- **JetBrains IDEs (e.g. WebStorm)**: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
+- **Vim**: Add `:set backupcopy=yes` to your settings.
 
 ## Conclusion
 

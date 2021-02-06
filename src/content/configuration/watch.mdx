@@ -14,45 +14,42 @@ contributors:
 
 webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
 
-
 ## `watch`
 
 `boolean = false`
 
 Turn on watch mode. This means that after the initial build, webpack will continue to watch for changes in any of the resolved files.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
-  watch: true
+  watch: true,
 };
 ```
 
 T> In [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) watch mode is enabled by default.
 
-
-## `watchOptions`
+## watchOptions
 
 `object`
 
 A set of options used to customize watch mode:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   watchOptions: {
     aggregateTimeout: 200,
-    poll: 1000
-  }
+    poll: 1000,
+  },
 };
 ```
 
-
-## `watchOptions.aggregateTimeout`
+### watchOptions.aggregateTimeout
 
 `number = 200`
 
@@ -62,52 +59,51 @@ Add a delay before rebuilding once the first file changed. This allows webpack t
 module.exports = {
   //...
   watchOptions: {
-    aggregateTimeout: 600
-  }
+    aggregateTimeout: 600,
+  },
 };
 ```
 
-
-## watchOptions.ignored
+### watchOptions.ignored
 
 `RegExp` `string` `[string]`
 
 For some systems, watching many files can result in a lot of CPU or memory usage. It is possible to exclude a huge folder like `node_modules` using a regular expression:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   watchOptions: {
-    ignored: /node_modules/
-  }
+    ignored: /node_modules/,
+  },
 };
 ```
 
 Alternatively, a glob pattern may be used:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   watchOptions: {
-    ignored: '**/node_modules'
-  }
+    ignored: '**/node_modules',
+  },
 };
 ```
 
 It is also possible to use multiple glob patterns:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   watchOptions: {
-    ignored: ['**/files/**/*.js', '**/node_modules']
-  }
+    ignored: ['**/files/**/*.js', '**/node_modules'],
+  },
 };
 ```
 
@@ -118,10 +114,8 @@ const path = require('path');
 module.exports = {
   //...
   watchOptions: {
-    ignored: [
-      path.posix.resolve(__dirname, './ignored-dir')
-    ]
-  }
+    ignored: [path.posix.resolve(__dirname, './ignored-dir')],
+  },
 };
 ```
 
@@ -129,26 +123,39 @@ When using glob patterns, we convert them to regular expressions with [`glob-to-
 
 T> If you use `require.context`, webpack will watch your entire directory. You will need to ignore files and/or directories so that unwanted changes will not trigger a rebuild.
 
-
-## `watchOptions.poll`
+### watchOptions.poll
 
 `boolean = false` `number`
 
-Turn on [polling](https://en.wikipedia.org/wiki/Polling_(computer_science)) by passing `true`, or specifying a poll interval in milliseconds:
+Turn on [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) by passing `true`, or specifying a poll interval in milliseconds:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   watchOptions: {
-    poll: 1000 // Check for changes every second
-  }
+    poll: 1000, // Check for changes every second
+  },
 };
 ```
 
 T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
 
+### watchOptions.followSymlinks
+
+Follow symbolic links while looking for a file. This is usually not needed as webpack already resolves symlinks with [`resolve.symlinks`](/configuration/resolve/#resolvesymlinks).
+
+- Type: `boolean`
+- Example:
+  ```js
+  module.exports = {
+    //...
+    watchOptions: {
+      followSymlinks: true,
+    },
+  };
+  ```
 
 ## Troubleshooting
 

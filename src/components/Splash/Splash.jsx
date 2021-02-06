@@ -5,7 +5,7 @@ import { lazy, Suspense, useState, useEffect } from 'react';
 import Container from '../Container/Container';
 import SplashViz from '../SplashViz/SplashViz';
 import Markdown from '../Markdown/Markdown';
-import {PlaceholderComponent} from '../Placeholder/Placeholder';
+import { PlaceholderComponent } from '../Placeholder/Placeholder';
 
 // Import helpers
 import isClient from '../../utilities/is-client';
@@ -42,9 +42,11 @@ const SponsorsPlaceholder = () => (
 
 const Splash = () => {
   const [showSponsors, setShowSponsors] = useState(false);
-  const [supportType, setSupportType] = useState(() => Math.random() < 0.33 ? 'monthly' : 'total');
+  const [supportType, setSupportType] = useState(() =>
+    Math.random() < 0.33 ? 'monthly' : 'total'
+  );
   useEffect(() => {
-    if(isClient) setShowSponsors(true);
+    if (isClient) setShowSponsors(true);
   }, []);
   return (
     <div className="splash">
@@ -53,9 +55,11 @@ const Splash = () => {
       <div className="splash__section splash__section--dark page__content">
         <Container>
           <Markdown>
-            <div dangerouslySetInnerHTML={{
-              __html: SplashContent
-            }} />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: SplashContent,
+              }}
+            />
           </Markdown>
         </Container>
       </div>
@@ -66,12 +70,13 @@ const Splash = () => {
             <h1 id="sponsors">Support the Team</h1>
 
             <p>
-              Through contributions, donations, and sponsorship, you allow webpack to thrive. Your
-              donations directly support office hours, continued enhancements, and most importantly,
-              great documentation and learning material!
+              Through contributions, donations, and sponsorship, you allow
+              webpack to thrive. Your donations directly support office hours,
+              continued enhancements, and most importantly, great documentation
+              and learning material!
             </p>
 
-            { showSponsors ? (
+            {showSponsors ? (
               <Suspense fallback={<SponsorsPlaceholder />}>
                 <p>
                   <label htmlFor="support-type">
@@ -79,9 +84,12 @@ const Splash = () => {
                       id="support-type"
                       type="checkbox"
                       checked={supportType === 'monthly'}
-                      onChange={e => setSupportType(e.target.checked ? 'monthly' : 'total')}
+                      onChange={(e) =>
+                        setSupportType(e.target.checked ? 'monthly' : 'total')
+                      }
                     />
-                    Show sponsors by their average monthly amount of sponsoring in the last year.
+                    Show sponsors by their average monthly amount of sponsoring
+                    in the last year.
                   </label>
                 </p>
 
@@ -99,7 +107,7 @@ const Splash = () => {
               </Suspense>
             ) : (
               <SponsorsPlaceholder />
-            ) }
+            )}
           </Markdown>
         </Container>
       </div>

@@ -15,12 +15,11 @@ contributors:
 
 webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
 
-
 ## TypeScript
 
 To write the webpack configuration in [TypeScript](http://www.typescriptlang.org/), you would first install the necessary dependencies, i.e., TypeScript and the relevant type definitions from the [DefinitelyTyped](https://definitelytyped.org/) project:
 
-``` bash
+```bash
 npm install --save-dev typescript ts-node @types/node @types/webpack
 # and, if using webpack-dev-server
 npm install --save-dev @types/webpack-dev-server
@@ -28,7 +27,7 @@ npm install --save-dev @types/webpack-dev-server
 
 and then proceed to write your configuration:
 
-__webpack.config.ts__
+**webpack.config.ts**
 
 ```typescript
 import * as path from 'path';
@@ -39,8 +38,8 @@ const config: webpack.Configuration = {
   entry: './foo.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'foo.bundle.js'
-  }
+    filename: 'foo.bundle.js',
+  },
 };
 
 export default config;
@@ -55,19 +54,19 @@ There are two solutions to this issue:
 - Modify `tsconfig.json`.
 - Install `tsconfig-paths`.
 
-The __first option__ is to open your `tsconfig.json` file and look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
+The **first option** is to open your `tsconfig.json` file and look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
 
-The __second option__ is to install the `tsconfig-paths` package:
+The **second option** is to install the `tsconfig-paths` package:
 
-``` bash
+```bash
 npm install --save-dev tsconfig-paths
 ```
 
 And create a separate TypeScript configuration specifically for your webpack configs:
 
-__tsconfig-for-webpack-config.json__
+**tsconfig-for-webpack-config.json**
 
-``` json
+```json
 {
   "compilerOptions": {
     "module": "commonjs",
@@ -81,7 +80,7 @@ T> `ts-node` can resolve a `tsconfig.json` file using the environment variable p
 
 Then set the environment variable `process.env.TS_NODE_PROJECT` provided by `tsconfig-paths` like so:
 
-__package.json__
+**package.json**
 
 ```json
 {
@@ -93,18 +92,17 @@ __package.json__
 
 W> We had been getting reports that `TS_NODE_PROJECT` might not work with `"TS_NODE_PROJECT" unrecognized command` error. Therefore running it with `cross-env` seems to fix the issue, for more info [see this issue](https://github.com/webpack/webpack.js.org/issues/2733).
 
-
 ## CoffeeScript
 
 Similarly, to use [CoffeeScript](https://coffeescript.org/), you would first install the necessary dependencies:
 
-``` bash
+```bash
 npm install --save-dev coffeescript
 ```
 
 and then proceed to write your configuration:
 
-__webpack.config.coffee__
+**webpack.config.coffee**
 
 <!-- eslint-skip -->
 
@@ -130,7 +128,6 @@ config =
 module.exports = config
 ```
 
-
 ## Babel and JSX
 
 In the example below JSX (React JavaScript Markup) and Babel are used to create a JSON Configuration that webpack can understand.
@@ -139,37 +136,39 @@ In the example below JSX (React JavaScript Markup) and Babel are used to create 
 
 First install the necessary dependencies:
 
-``` bash
+```bash
 npm install --save-dev babel-register jsxobj babel-preset-es2015
 ```
 
-__.babelrc__
+**.babelrc**
 
-``` json
+```json
 {
-  "presets": [ "es2015" ]
+  "presets": ["es2015"]
 }
 ```
 
-__webpack.config.babel.js__
+**webpack.config.babel.js**
 
-``` js
+```js
 import jsxobj from 'jsxobj';
 
 // example of an imported plugin
-const CustomPlugin = config => ({
+const CustomPlugin = (config) => ({
   ...config,
-  name: 'custom-plugin'
+  name: 'custom-plugin',
 });
 
 export default (
   <webpack target="web" watch mode="production">
     <entry path="src/index.js" />
     <resolve>
-      <alias {...{
-        react: 'preact-compat',
-        'react-dom': 'preact-compat'
-      }} />
+      <alias
+        {...{
+          react: 'preact-compat',
+          'react-dom': 'preact-compat',
+        }}
+      />
     </resolve>
     <plugins>
       <CustomPlugin foo="bar" />

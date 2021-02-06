@@ -20,35 +20,34 @@ contributors:
   - anshumanv
 ---
 
-The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to __library developers__, however there are a variety of applications for it.
-
+The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to **library developers**, however there are a variety of applications for it.
 
 ## `externals`
 
-`string` `[string]` `object` `function`  `RegExp`
+`string` `[string]` `object` `function` `RegExp`
 
-__Prevent bundling__ of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
+**Prevent bundling** of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
 
 For example, to include [jQuery](https://jquery.com/) from a CDN instead of bundling it:
 
-__index.html__
+**index.html**
 
-``` html
+```html
 <script
   src="https://code.jquery.com/jquery-3.1.0.js"
   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="
-  crossorigin="anonymous">
-</script>
+  crossorigin="anonymous"
+></script>
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   externals: {
-    jquery: 'jQuery'
-  }
+    jquery: 'jQuery',
+  },
 };
 ```
 
@@ -62,13 +61,12 @@ $('.my-element').animate(/* ... */);
 
 The bundle with external dependencies can be used in various module contexts, such as [CommonJS, AMD, global and ES2015 modules](/concepts/modules). The external library may be available in any of these forms:
 
-- __root__: The library should be available as a global variable (e.g. via a script tag).
-- __commonjs__: The library should be available as a CommonJS module.
-- __commonjs2__: Similar to the above but where the export is `module.exports.default`.
-- __amd__: Similar to `commonjs` but using AMD module system.
+- **root**: The library should be available as a global variable (e.g. via a script tag).
+- **commonjs**: The library should be available as a CommonJS module.
+- **commonjs2**: Similar to the above but where the export is `module.exports.default`.
+- **amd**: Similar to `commonjs` but using AMD module system.
 
 The following syntaxes are accepted...
-
 
 ### string
 
@@ -83,7 +81,7 @@ module.exports = {
   // ...
   externals: {
     'fs-extra': 'commonjs2 fs-extra',
-  }
+  },
 };
 ```
 
@@ -105,8 +103,8 @@ const fs = require('fs-extra');
 module.exports = {
   //...
   externals: {
-    subtract: ['./math', 'subtract']
-  }
+    subtract: ['./math', 'subtract'],
+  },
 };
 ```
 
@@ -119,27 +117,27 @@ W> An object with `{ root, amd, commonjs, ... }` is only allowed for [`libraryTa
 ```javascript
 module.exports = {
   //...
-  externals : {
-    react: 'react'
+  externals: {
+    react: 'react',
   },
 
   // or
 
-  externals : {
-    lodash : {
+  externals: {
+    lodash: {
       commonjs: 'lodash',
       amd: 'lodash',
-      root: '_' // indicates global variable
-    }
+      root: '_', // indicates global variable
+    },
   },
 
   // or
 
-  externals : {
-    subtract : {
-      root: ['math', 'subtract']
-    }
-  }
+  externals: {
+    subtract: {
+      root: ['math', 'subtract'],
+    },
+  },
 };
 ```
 
@@ -155,10 +153,10 @@ It might be useful to define your own function to control the behavior of what y
 Here're arguments the function can receive:
 
 - `ctx` (`object`): Object containing details of the file.
-    - `ctx.context` (`string`): The directory of the file which contains the import.
-    - `ctx.request` (`string`): The import path being requested.
-    - `ctx.contextInfo` (`string`): Contains information about the issuer (e.g. the layer).
-    - `ctx.getResolve` <Badge text='5.15.0+' />: Get a resolve function with the current resolver options.
+  - `ctx.context` (`string`): The directory of the file which contains the import.
+  - `ctx.request` (`string`): The import path being requested.
+  - `ctx.contextInfo` (`string`): Contains information about the issuer (e.g. the layer).
+  - `ctx.getResolve` <Badge text='5.15.0+' />: Get a resolve function with the current resolver options.
 - `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
 
 The callback function takes three arguments:
@@ -169,81 +167,81 @@ The callback function takes three arguments:
 
 As an example, to externalize all imports where the import path matches a regular expression you could do the following:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   externals: [
-    function({ context, request }, callback) {
-      if (/^yourregex$/.test(request)){
+    function ({ context, request }, callback) {
+      if (/^yourregex$/.test(request)) {
         // Externalize to a commonjs module using the request path
         return callback(null, 'commonjs ' + request);
       }
 
       // Continue without externalizing the import
       callback();
-    }
-  ]
+    },
+  ],
 };
 ```
 
 Other examples using different module formats:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   externals: [
-    function(ctx, callback) {
+    function (ctx, callback) {
       // The external is a `commonjs2` module located in `@scope/library`
       callback(null, '@scope/library', 'commonjs2');
-    }
-  ]
+    },
+  ],
 };
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   externals: [
-    function(ctx, callback) {
+    function (ctx, callback) {
       // The external is a global variable called `nameOfGlobal`.
       callback(null, 'nameOfGlobal');
-    }
-  ]
+    },
+  ],
 };
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   externals: [
-    function(ctx, callback) {
+    function (ctx, callback) {
       // The external is a named export in the `@scope/library` module.
       callback(null, ['@scope/library', 'namedexport'], 'commonjs');
-    }
-  ]
+    },
+  ],
 };
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   externals: [
-    function(ctx, callback) {
+    function (ctx, callback) {
       // The external is a UMD module
       callback(null, {
         root: 'componentsGlobal',
         commonjs: '@scope/components',
         commonjs2: '@scope/components',
-        amd: 'components'
+        amd: 'components',
       });
-    }
-  ]
+    },
+  ],
 };
 ```
 
@@ -251,12 +249,12 @@ module.exports = {
 
 Every dependency that matches the given regular expression will be excluded from the output bundles.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
-  externals: /^(jquery|\$)$/i
+  externals: /^(jquery|\$)$/i,
 };
 ```
 
@@ -266,7 +264,7 @@ In this case, any dependency named `jQuery`, capitalized or not, or `$` would be
 
 Sometimes you may want to use a combination of the above syntaxes. This can be done in the following manner:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -276,24 +274,24 @@ module.exports = {
       // String
       react: 'react',
       // Object
-      lodash : {
+      lodash: {
         commonjs: 'lodash',
         amd: 'lodash',
-        root: '_' // indicates global variable
+        root: '_', // indicates global variable
       },
       // [string]
-      subtract: ['./math', 'subtract']
+      subtract: ['./math', 'subtract'],
     },
     // Function
-    function({ context, request }, callback) {
-      if (/^yourregex$/.test(request)){
+    function ({ context, request }, callback) {
+      if (/^yourregex$/.test(request)) {
         return callback(null, 'commonjs ' + request);
       }
       callback();
     },
     // Regex
-    /^(jquery|\$)$/i
-  ]
+    /^(jquery|\$)$/i,
+  ],
 };
 ```
 
@@ -307,17 +305,17 @@ For more information on how to use this configuration, please refer to the artic
 
 Specify externals by layer.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
-  externals : {
-    byLayer : {
+  externals: {
+    byLayer: {
       layer: {
-        external1: 'var 43'
-      }
-    }
-  }
+        external1: 'var 43',
+      },
+    },
+  },
 };
 ```
 
@@ -325,7 +323,7 @@ module.exports = {
 
 `string = 'var'`
 
-Specifies the default type of externals. `amd`, `umd`, `system` and `jsonp` externals __depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)__ being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
+Specifies the default type of externals. `amd`, `umd`, `system` and `jsonp` externals **depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)** being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
 
 Supported types:
 
@@ -348,12 +346,12 @@ Supported types:
 - `'import'` - uses `import()` to load a native EcmaScript module (async module)
 - `'script'` - load script exposing predefined global variables with HTML `<script>` element
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
-  externalsType: 'promise'
+  externalsType: 'promise',
 };
 ```
 
@@ -366,8 +364,13 @@ External script can be loaded from any URL when [`externalsType`](#externalstype
 ```javascript
 module.exports = {
   externals: {
-    packageName: ['http://example.com/script.js', 'global', 'property', 'property'] // properties are optional
-  }
+    packageName: [
+      'http://example.com/script.js',
+      'global',
+      'property',
+      'property',
+    ], // properties are optional
+  },
 };
 ```
 
@@ -376,8 +379,8 @@ You can also use the shortcut syntax if you're not going to specify any properti
 ```javascript
 module.exports = {
   externals: {
-    packageName: 'global@http://example.com/script.js' // no properties here
-  }
+    packageName: 'global@http://example.com/script.js', // no properties here
+  },
 };
 ```
 
@@ -387,7 +390,7 @@ T> [`output.publicPath`](/configuration/output/#outputpublicpath) won't be added
 
 Let's load a `lodash` from CDN:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -395,7 +398,7 @@ module.exports = {
   externalsType: 'script',
   externals: {
     lodash: ['https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js', '_'],
-  }
+  },
 };
 ```
 
@@ -413,8 +416,12 @@ module.exports = {
   // ...
   externalsType: 'script',
   externals: {
-    lodash: ['https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js', '_', 'head'],
-  }
+    lodash: [
+      'https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js',
+      '_',
+      'head',
+    ],
+  },
 };
 ```
 
@@ -438,31 +445,28 @@ Enable presets of externals for specific targets.
 
 W> In earlier webpack versions, the following functionality was achieved by using [`target`](/configuration/target/).
 
+| Option             | Description                                                                                                                                                                                                     | Input Type |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `electron`         | Treat common electron built-in modules in main and preload context like `electron`, `ipc` or `shell` as external and load them via `require()` when used.                                                       | boolean    |
+| `electronMain`     | Treat electron built-in modules in the main context like `app`, `ipc-main` or `shell` as external and load them via `require()` when used.                                                                      | boolean    |
+| `electronPreload`  | Treat electron built-in modules in the preload context like `web-frame`, `ipc-renderer` or `shell` as external and load them via require() when used.                                                           | boolean    |
+| `electronRenderer` | Treat electron built-in modules in the renderer context like `web-frame`, `ipc-renderer` or `shell` as external and load them via `require()` when used.                                                        | boolean    |
+| `node`             | Treat node.js built-in modules like `fs`, `path` or `vm` as external and load them via `require()` when used.                                                                                                   | boolean    |
+| `nwjs`             | Treat `NW.js` legacy `nw.gui` module as external and load it via `require()` when used.                                                                                                                         | boolean    |
+| `web`              | Treat references to `http(s)://...` and `std:...` as external and load them via `import` when used. **(Note that this changes execution order as externals are executed before any other code in the chunk)**.  | boolean    |
+| `webAsync`         | Treat references to `http(s)://...` and `std:...` as external and load them via `async import()` when used **(Note that this external type is an `async` module, which has various effects on the execution)**. | boolean    |
 
-
-Option   | Description                                      | Input Type
------------ | ------------------------------------------------ | ----------
-`electron`     | Treat common electron built-in modules in main and preload context like `electron`, `ipc` or `shell` as external and load them via `require()` when used.                     | boolean
-`electronMain`     | Treat electron built-in modules in the main context like `app`, `ipc-main` or `shell` as external and load them via `require()` when used.                     | boolean
-`electronPreload`     | Treat electron built-in modules in the preload context like `web-frame`, `ipc-renderer` or `shell` as external and load them via require() when used.                     | boolean
-`electronRenderer`     | Treat electron built-in modules in the renderer context like `web-frame`, `ipc-renderer` or `shell` as external and load them via `require()` when used.                     | boolean
-`node`     | Treat node.js built-in modules like `fs`, `path` or `vm` as external and load them via `require()` when used.| boolean
-`nwjs`    | Treat `NW.js` legacy `nw.gui` module as external and load it via `require()` when used.| boolean
-`web`     | Treat references to `http(s)://...` and `std:...` as external and load them via `import` when used. __(Note that this changes execution order as externals are executed before any other code in the chunk)__.| boolean
-`webAsync`     | Treat references to `http(s)://...` and `std:...` as external and load them via `async import()` when used __(Note that this external type is an `async` module, which has various effects on the execution)__.| boolean
-
-
-__Example__
+**Example**
 
 Using `node` preset will not bundle built-in modules and treats them as external and loads them via `require()` when used.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   // ...
-  externalsPresets:{
-    node: true
-  }
+  externalsPresets: {
+    node: true,
+  },
 };
 ```
