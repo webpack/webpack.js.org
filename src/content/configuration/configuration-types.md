@@ -89,4 +89,4 @@ module.exports = [
 ];
 ```
 
-T> If you pass a name to [`--config-name`](/api/cli/#configuration-options) flag, webpack will only build that specific configuration.
+T> If you pass a name to [`--config-name`](/api/cli/#config-name) flag, webpack will only build that specific configuration.
