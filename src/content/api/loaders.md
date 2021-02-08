@@ -456,11 +456,15 @@ Possible values: `'production'`, `'development'`, `'none'`
 
 ## Webpack specific properties
 
-The loader interface provides all module relate information. However in rare cases you might need access to the compiler api itself. 
+The loader interface provides all module relate information. However in rare cases you might need access to the compiler api itself.
 
 W> Please note that using these webpack specific properties will have a negative impact on your loaders compatibility.
 
-Therefore you should only use them as a last resort. Using them will reduce the portability of your loader. 
+Therefore you should only use them as a last resort. Using them will reduce the portability of your loader.
+
+### `this._compiler`
+
+Access to the current Compiler object of webpack.
 
 ### `this._compilation`
 
@@ -485,10 +489,6 @@ A boolean flag. It is set when in debug mode.
 ### `this.minimize`
 
 Tells if result should be minimized.
-
-### `this._compiler`
-
-Hacky access to the Compiler object of webpack.
 
 ### `this._module`
 
