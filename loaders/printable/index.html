@@ -1974,6 +1974,35 @@ https://cache-dev.myserver.net/web/static/assets/image.somehash.png</code></pre>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Filter can also be used to extend the supported elements and attributes. For example, filter can help process meta tags that reference assets:</p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.html$/i</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">'html-loader'</span><span class="token punctuation">,</span>
+        options<span class="token operator">:</span> <span class="token punctuation">{</span>
+          attributes<span class="token operator">:</span> <span class="token punctuation">{</span>
+            list<span class="token operator">:</span> <span class="token punctuation">[</span>
+              <span class="token punctuation">{</span>
+                tag<span class="token operator">:</span> <span class="token string">'meta'</span><span class="token punctuation">,</span>
+                attribute<span class="token operator">:</span> <span class="token string">'content'</span><span class="token punctuation">,</span>
+                type<span class="token operator">:</span> <span class="token string">'src'</span><span class="token punctuation">,</span>
+                <span class="token function-variable function">filter</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">tag<span class="token punctuation">,</span> attribute<span class="token punctuation">,</span> attributes<span class="token punctuation">,</span> resourcePath</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+                  <span class="token keyword">if</span> <span class="token punctuation">(</span>
+                    attributes<span class="token punctuation">.</span>property <span class="token operator">===</span> <span class="token string">'og:image'</span> <span class="token operator">||</span>
+                    attributes<span class="token punctuation">.</span>name <span class="token operator">===</span> <span class="token string">'twitter:image'</span>
+                  <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                  <span class="token punctuation">}</span>
+                  <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h4 id="urlfilter"><code>urlFilter</code><a href="#urlfilter" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4> <p>Type: <code>Function</code> Default: <code>undefined</code></p> <p>Allow to filter urls. All filtered urls will not be resolved (left in the code as they were written). All non requestable sources (for example <code>&#x3C;img src="javascript:void(0)"></code>) do not handle by default.</p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
