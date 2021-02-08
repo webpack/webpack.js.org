@@ -22,7 +22,7 @@ W> 从 webpack 5 开始，你只能在 `node` 选项下配置 `global`、`__file
 
 `boolean: false` `object`
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -31,7 +31,7 @@ module.exports = {
     global: false,
     __filename: false,
     __dirname: false,
-  }
+  },
 };
 ```
 
@@ -56,18 +56,33 @@ T> 如果你正在使用一个需要全局变量的模块，请使用 `ProvidePl
 
 选项：
 
+<<<<<<< HEAD
 - `true`: __输入__ 文件的文件名，是相对于 [`context` 选项](/configuration/entry-context/#context)。
 - `false`: webpack 不会更改 `__filename` 的代码。在 Node.js 环境中运行时，__输出__ 文件的文件名。
 - `'mock'`: value 填充为 `'index.js'`.
 
 
 ## `node.__dirname` {#node__dirname}
+=======
+- `true`: The filename of the **input** file relative to the [`context` option](/configuration/entry-context/#context).
+- `false`: Webpack won't touch your `__filename` code, which means you have the regular Node.js `__filename` behavior. The filename of the **output** file when run in a Node.js environment.
+- `'mock'`: The fixed value `'/index.js'`.
+- `'eval-only'`
+
+## `node.__dirname`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean` `string: 'mock' | 'eval-only'`
 
 选项：
 
+<<<<<<< HEAD
 - `true`: __输入__ 文件的目录名，是相对于 [`context` 选项](/configuration/entry-context/#context)。
 - `false`: webpack 不会更改 `__dirname` 的代码，这意味着你有常规 Node.js 中的 `__dirname` 的行为。在 Node.js 环境中运行时，__输出__ 文件的目录名。
 - `'mock'`: value 填充为 `'/'`。
+=======
+- `true`: The dirname of the **input** file relative to the [`context` option](/configuration/entry-context/#context).
+- `false`: Webpack won't touch your `__dirname` code, which means you have the regular Node.js `__dirname` behavior. The dirname of the **output** file when run in a Node.js environment.
+- `'mock'`: The fixed value `'/'`.
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 - `'eval-only'`

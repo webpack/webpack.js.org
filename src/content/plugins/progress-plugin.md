@@ -7,8 +7,7 @@ contributors:
   - smelukov
 ---
 
-`
-object = { boolean activeModules = true, boolean entries = false, function (number percentage, string message, [string] ...args) handler, boolean modules = true, number modulesCount = 500, boolean profile = false }`
+`object = { boolean activeModules = true, boolean entries = false, function (number percentage, string message, [string] ...args) handler, boolean modules = true, number modulesCount = 500, boolean profile = false }`
 
 `function (number percentage, string message, [string] ...args)`
 
@@ -25,7 +24,6 @@ Provide a handler function which will be called when hooks report progress. `han
 - `percentage`: a number between 0 and 1 indicating the completion percentage of the compilation
 - `message`: a short description of the currently-executing hook
 - `...args`: zero or more additional strings describing the current progress
-
 
 ```js
 const handler = (percentage, message, ...args) => {
@@ -62,7 +60,7 @@ new webpack.ProgressPlugin({
   profile: false,
   dependencies: true,
   dependenciesCount: 10000,
-  percentBy: null
+  percentBy: null,
 });
 ```
 
@@ -80,68 +78,68 @@ To solve this problem `ProgressPlugin` caches the last known total modules count
 
 The following hooks report progress information to `ProgressPlugin`.
 
-T> _Hooks marked with * allow plugins to report progress information using `reportProgress`. For more, see [Plugin API: Reporting Progress](/api/plugins/#reporting-progress)_
+T> _Hooks marked with \* allow plugins to report progress information using `reportProgress`. For more, see [Plugin API: Reporting Progress](/api/plugins/#reporting-progress)_
 
-__Compiler__
+**Compiler**
 
 - compilation
-- emit*
-- afterEmit*
+- emit\*
+- afterEmit\*
 - done
 
-__Compilation__
+**Compilation**
 
 - buildModule
 - failedModule
 - succeedModule
-- finishModules*
-- seal*
-- optimizeDependenciesBasic*
-- optimizeDependencies*
-- optimizeDependenciesAdvanced*
-- afterOptimizeDependencies*
-- optimize*
-- optimizeModulesBasic*
-- optimizeModules*
-- optimizeModulesAdvanced*
-- afterOptimizeModules*
-- optimizeChunksBasic*
-- optimizeChunks*
-- optimizeChunksAdvanced*
-- afterOptimizeChunks*
-- optimizeTree*
-- afterOptimizeTree*
-- optimizeChunkModulesBasic*
-- optimizeChunkModules*
-- optimizeChunkModulesAdvanced*
-- afterOptimizeChunkModules*
-- reviveModules*
-- optimizeModuleOrder*
-- advancedOptimizeModuleOrder*
-- beforeModuleIds*
-- moduleIds*
-- optimizeModuleIds*
-- afterOptimizeModuleIds*
-- reviveChunks*
-- optimizeChunkOrder*
-- beforeChunkIds*
-- optimizeChunkIds*
-- afterOptimizeChunkIds*
-- recordModules*
-- recordChunks*
-- beforeHash*
-- afterHash*
-- recordHash*
-- beforeModuleAssets*
-- beforeChunkAssets*
-- additionalChunkAssets*
-- record*
-- additionalAssets*
-- optimizeChunkAssets*
-- afterOptimizeChunkAssets*
-- optimizeAssets*
-- afterOptimizeAssets*
-- afterSeal*
+- finishModules\*
+- seal\*
+- optimizeDependenciesBasic\*
+- optimizeDependencies\*
+- optimizeDependenciesAdvanced\*
+- afterOptimizeDependencies\*
+- optimize\*
+- optimizeModulesBasic\*
+- optimizeModules\*
+- optimizeModulesAdvanced\*
+- afterOptimizeModules\*
+- optimizeChunksBasic\*
+- optimizeChunks\*
+- optimizeChunksAdvanced\*
+- afterOptimizeChunks\*
+- optimizeTree\*
+- afterOptimizeTree\*
+- optimizeChunkModulesBasic\*
+- optimizeChunkModules\*
+- optimizeChunkModulesAdvanced\*
+- afterOptimizeChunkModules\*
+- reviveModules\*
+- optimizeModuleOrder\*
+- advancedOptimizeModuleOrder\*
+- beforeModuleIds\*
+- moduleIds\*
+- optimizeModuleIds\*
+- afterOptimizeModuleIds\*
+- reviveChunks\*
+- optimizeChunkOrder\*
+- beforeChunkIds\*
+- optimizeChunkIds\*
+- afterOptimizeChunkIds\*
+- recordModules\*
+- recordChunks\*
+- beforeHash\*
+- afterHash\*
+- recordHash\*
+- beforeModuleAssets\*
+- beforeChunkAssets\*
+- additionalChunkAssets\*
+- record\*
+- additionalAssets\*
+- optimizeChunkAssets\*
+- afterOptimizeChunkAssets\*
+- optimizeAssets\*
+- afterOptimizeAssets\*
+- afterSeal\*
 
 ## Source {#source}
 

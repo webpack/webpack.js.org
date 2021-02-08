@@ -18,13 +18,13 @@ contributors:
 
 项目中使用的每个文件都是一个 [模块](/concepts/modules/)
 
-__./index.js__
+**./index.js**
 
 ```js
 import app from './app.js';
 ```
 
-__./app.js__
+**./app.js**
 
 ```js
 export default 'the app';
@@ -36,11 +36,11 @@ export default 'the app';
 chunk 合并成 chunk 组，并形成一个通过模块互相连接的图(`ModuleGraph`)。
 那么如何通过以上来描述一个入口起点：在其内部，会创建一个只有一个 chunk 的 chunk 组。
 
-__./webpack.config.js__
+**./webpack.config.js**
 
 ```js
 module.exports = {
-  entry: './index.js'
+  entry: './index.js',
 };
 ```
 
@@ -49,14 +49,14 @@ module.exports = {
 
 另外的一个示例：
 
-__./webpack.config.js__
+**./webpack.config.js**
 
 ```js
 module.exports = {
   entry: {
     home: './home.js',
-    about: './about.js'
-  }
+    about: './about.js',
+  },
 };
 ```
 
@@ -72,23 +72,27 @@ chunk 有两种形式：
 - `initial(初始化)` 是入口起点的 main chunk。此 chunk 包含为入口起点指定的所有模块及其依赖项。
 - `non-initial` 是可以延迟加载的块。可能会出现在使用 [动态导入(dynamic imports)](/guides/code-splitting/#dynamic-imports) 或者 [SplitChunksPlugin](/plugins/split-chunks-plugin/) 时。
 
+<<<<<<< HEAD
 每个 chunk 都有对应的 __asset(资源)__。资源，是指输出文件（即打包结果）。
+=======
+Each chunk has a corresponding **asset**. The assets are the output files - the result of bundling.
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
-  entry: './src/index.jsx'
+  entry: './src/index.jsx',
 };
 ```
 
-__./src/index.jsx__
+**./src/index.jsx**
 
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import('./app.jsx').then(App => {
+import('./app.jsx').then((App) => {
   ReactDOM.render(<App />, root);
 });
 ```
@@ -103,7 +107,7 @@ import('./app.jsx').then(App => {
 
 然后会为 `./app.jsx` 创建 non-initial chunk，这是因为 `./app.jsx` 是动态导入的。
 
-__Output:__
+**Output:**
 
 - `/dist/main.js` - 一个 `initial` chunk
 - `/dist/394.js` - `non-initial` chunk
@@ -115,12 +119,12 @@ __Output:__
 import(
   /* webpackChunkName: "app" */
   './app.jsx'
-).then(App => {
+).then((App) => {
   ReactDOM.render(<App />, root);
 });
 ```
 
-__Output:__
+**Output:**
 
 - `/dist/main.js` - 一个 `initial` chunk
 - `/dist/app.js` - `non-initial` chunk

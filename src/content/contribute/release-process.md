@@ -9,6 +9,7 @@ contributors:
 
 The release process for deploying webpack is actually quite painless. Read through the following steps, so you have a clear understanding of how it's done.
 
+<<<<<<< HEAD
 
 ## Pull Requests {#pull-requests}
 
@@ -16,6 +17,13 @@ When merging pull requests into the `master` branch, select the _Create Merge Co
 
 
 ## Releasing {#releasing}
+=======
+## Pull Requests
+
+When merging pull requests into the `master` branch, select the _Create Merge Commit_ option.
+
+## Releasing
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```bash
 npm version patch && git push --follow-tags && npm publish
@@ -23,6 +31,6 @@ npm version minor && git push --follow-tags && npm publish
 npm version major && git push --follow-tags && npm publish
 ```
 
-_This will increment the package version, commits the changes, cuts a __local tag__, push to github & publish the npm package._
+_This will increment the package version, commits the changes, cuts a **local tag**, push to github & publish the npm package._
 
 After that go to the github [releases page](https://github.com/webpack/webpack/releases) and write a Changelog for the new tag.

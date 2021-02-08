@@ -20,8 +20,12 @@ The people who contribute to webpack do so for the love of open source, our user
 
 But what is the return on the investment?
 
+<<<<<<< HEAD
 
 ## Developers {#developers}
+=======
+## Developers
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 The biggest core feature we'd like to provide is an enjoyable development experience. Developers like you can help by contributing to rich and vibrant documentation, issuing pull requests to help us cover niche use cases, and to help sustain what you love about webpack.
 
@@ -50,8 +54,12 @@ The remainder of this section of the site is dedicated to developers such as you
 - [Plugin Patterns](/contribute/plugin-patterns)
 - [Release Process](/contribute/release-process)
 
+<<<<<<< HEAD
 
 ## Executives {#executives}
+=======
+## Executives
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 CTO's, VPs, and owners can help too!
 

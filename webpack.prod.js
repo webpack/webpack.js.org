@@ -7,46 +7,42 @@ const path = require('path');
 // Load Common Configuration
 const common = require('./webpack.common.js');
 
-module.exports = env => merge(common(env), {
-  mode: 'production',
-  cache: {
-    buildDependencies: {
-      config: [__filename],
-    }
-  },
-  entry: {
-    index: {
-      import: './index.jsx',
-      filename: 'index.bundle.js'
-    }
-  },
-  output: {
-    filename: '[name].[contenthash].js'
-  },
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendors: {
-          test: /node_modules/,
-          chunks: 'initial',
-          enforce: true,
-          filename: 'vendor.bundle.js'
-        }
-      }
+module.exports = (env) =>
+  merge(common(env), {
+    mode: 'production',
+    cache: {
+      buildDependencies: {
+        config: [__filename],
+      },
     },
-    minimizer: [
-      '...',
-      new OptimizeCSSAssetsPlugin({})
-    ]
-  },
-  plugins: [
-    new InjectManifest({
-      swSrc: path.join(__dirname, 'src/sw.js'),
-      swDest: 'sw.js',
-      // exclude license
-      exclude: [
-        /license\.txt/i
-      ]
-    })
-  ]
-});
+    entry: {
+      index: {
+        import: './index.jsx',
+        filename: 'index.bundle.js',
+      },
+    },
+    output: {
+      filename: '[name].[contenthash].js',
+    },
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          vendors: {
+            test: /node_modules/,
+            chunks: 'initial',
+            enforce: true,
+            filename: 'vendor.bundle.js',
+          },
+        },
+      },
+      minimizer: ['...', new OptimizeCSSAssetsPlugin({})],
+    },
+    plugins: [
+      new InjectManifest({
+        swSrc: path.join(__dirname, 'src/sw.js'),
+        swDest: 'sw.js',
+        // exclude license
+        exclude: [/license\.txt/i],
+      }),
+    ],
+  });

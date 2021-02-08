@@ -18,8 +18,12 @@ contributors:
 
 配置如何展示性能提示。例如，如果一个资源超过 250kb，webpack 会对此输出一个警告来通知你。
 
+<<<<<<< HEAD
 
 ## `performance.hints` {#performancehints}
+=======
+## `performance.hints`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string = 'warning': 'error' | 'warning'` `boolean: false`
 
@@ -31,8 +35,8 @@ contributors:
 module.exports = {
   //...
   performance: {
-    hints: false
-  }
+    hints: false,
+  },
 };
 ```
 
@@ -42,8 +46,8 @@ module.exports = {
 module.exports = {
   //...
   performance: {
-    hints: 'warning'
-  }
+    hints: 'warning',
+  },
 };
 ```
 
@@ -53,8 +57,8 @@ module.exports = {
 module.exports = {
   //...
   performance: {
-    hints: 'error'
-  }
+    hints: 'error',
+  },
 };
 ```
 
@@ -70,8 +74,8 @@ module.exports = {
 module.exports = {
   //...
   performance: {
-    maxEntrypointSize: 400000
-  }
+    maxEntrypointSize: 400000,
+  },
 };
 ```
 
@@ -81,13 +85,12 @@ module.exports = {
 
 资源(asset)是从 webpack 生成的任何文件。此选项根据单个资源体积(单位: bytes)，控制 webpack 何时生成性能提示。
 
-
 ```js
 module.exports = {
   //...
   performance: {
-    maxAssetSize: 100000
-  }
+    maxAssetSize: 100000,
+  },
 };
 ```
 
@@ -99,7 +102,7 @@ module.exports = {
 
 ```js
 function assetFilter(assetFilename) {
-  return !(/\.map$/.test(assetFilename));
+  return !/\.map$/.test(assetFilename);
 }
 ```
 
@@ -109,10 +112,10 @@ function assetFilter(assetFilename) {
 module.exports = {
   //...
   performance: {
-    assetFilter: function(assetFilename) {
+    assetFilter: function (assetFilename) {
       return assetFilename.endsWith('.js');
-    }
-  }
+    },
+  },
 };
 ```
 

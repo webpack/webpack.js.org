@@ -15,19 +15,27 @@ contributors:
 
 入口对象是用于 webpack 查找开始构建 bundle 的地方。上下文是入口文件所处的目录的绝对路径的字符串。
 
+<<<<<<< HEAD
 
 ## `context` {#context}
 
 `string`
 
 基础目录，__绝对路径__，用于从配置中解析入口点(entry point)和 加载器(loader)。
+=======
+## `context`
 
-``` js
+`string`
+
+The base directory, an **absolute path**, for resolving entry points and loaders from configuration.
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+
+```js
 const path = require('path');
 
 module.exports = {
   //...
-  context: path.resolve(__dirname, 'app')
+  context: path.resolve(__dirname, 'app'),
 };
 ```
 
@@ -35,14 +43,22 @@ module.exports = {
 
 ---
 
+<<<<<<< HEAD
 
 ## `entry` {#entry}
+=======
+## `entry`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string` `[string]` `object = { <key> string | [string] | object = { import string | [string], dependOn string | [string], filename string, layer string }}` `(function() => string | [string] | object = { <key> string | [string] } | object = { import string | [string], dependOn string | [string], filename string })`
 
 开始应用程序打包过程的一个或多个起点。如果传入数组，则会处理所有条目。
 
+<<<<<<< HEAD
 动态加载的模块 __不是__ 入口起点。
+=======
+A dynamically loaded module is **not** an entry point.
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 简单规则：每个 HTML 页面都有一个入口起点。单页应用(SPA)：一个入口起点，多页应用(MPA)：多个入口起点。
 
@@ -52,13 +68,17 @@ module.exports = {
   entry: {
     home: './home.js',
     about: './about.js',
-    contact: './contact.js'
-  }
+    contact: './contact.js',
+  },
 };
 ```
 
+<<<<<<< HEAD
 
 ### Naming {#naming}
+=======
+### Naming
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 如果传入一个字符串或字符串数组，chunk 会被命名为 `main`。如果传入一个对象，则每个属性的键(key)会是 chunk 的名称，该属性的值描述了 chunk 的入口点。
 
@@ -75,7 +95,7 @@ module.exports = {
     catalog: {
       import: './catalog.js',
       filename: 'pages/catalog.js',
-      dependOn:'shared'
+      dependOn: 'shared',
     },
     personal: {
       import: './personal.js',
@@ -83,15 +103,19 @@ module.exports = {
       dependOn: 'shared',
       chunkLoading: 'jsonp',
       layer: 'name of layer', // set the layer for an entry point
-    }
-  }
+    },
+  },
 };
 ```
 
 描述符语法可以用来传入额外的选项给入口。
 
+<<<<<<< HEAD
 
 ### Output filename {#output-filename}
+=======
+### Output filename
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 默认情况下，入口 chunk 的输出文件名是从 [`output.filename`](/configuration/output/#outputfilename) 中提取出来的，但你可以为特定的入口指定一个自定义的输出文件名。
 
@@ -101,15 +125,19 @@ module.exports = {
   entry: {
     app: './app.js',
     home: { import: './contact.js', filename: 'pages/[name][ext]' },
-    about: { import: './about.js', filename: 'pages/[name][ext]' }
-  }
+    about: { import: './about.js', filename: 'pages/[name][ext]' },
+  },
 };
 ```
 
 描述符语法在这里被用来将 `filename`—选项传递给指定的入口点。
 
+<<<<<<< HEAD
 
 ### Dependencies {#dependencies}
+=======
+### Dependencies
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 默认情况下，每个入口 chunk 保存了全部其用的模块(modules)。使用 `dependOn` 选项你可以与另一个入口 chunk 共享模块:
 
@@ -118,8 +146,8 @@ module.exports = {
   //...
   entry: {
     app: { import: './app.js', dependOn: 'react-vendors' },
-    'react-vendors': ['react', 'react-dom', 'prop-types']
-  }
+    'react-vendors': ['react', 'react-dom', 'prop-types'],
+  },
 };
 ```
 
@@ -148,8 +176,8 @@ module.exports = {
   //...
   entry: {
     app: { import: ['./app.js', './app2.js'], dependOn: 'react-vendors' },
-    'react-vendors': ['react', 'react-dom', 'prop-types']
-  }
+    'react-vendors': ['react', 'react-dom', 'prop-types'],
+  },
 };
 ```
 
@@ -162,7 +190,7 @@ module.exports = {
 ```js
 module.exports = {
   //...
-  entry: () => './demo'
+  entry: () => './demo',
 };
 ```
 
@@ -171,19 +199,24 @@ module.exports = {
 ```js
 module.exports = {
   //...
-  entry: () => new Promise((resolve) => resolve(['./demo', './demo2']))
+  entry: () => new Promise((resolve) => resolve(['./demo', './demo2'])),
 };
 ```
 
 例如，你可以使用动态入口来从外部来源（远程服务器，文件系统内容或者数据库）获取真正的入口：
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` js
+```js
 module.exports = {
   entry() {
+<<<<<<< HEAD
     return fetchPathsFromSomeExternalSource(); // 返回一个会被用像 ['src/main-layout.js', 'src/admin-layout.js'] 的东西 resolve 的 promise
   }
+=======
+    return fetchPathsFromSomeExternalSource(); // returns a promise that will be resolved with something like ['src/main-layout.js', 'src/admin-layout.js']
+  },
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 };
 ```
 

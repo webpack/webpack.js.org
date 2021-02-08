@@ -25,11 +25,15 @@ Webpack Logger 可以用在 [loader](/loaders/) 和 [plugin](/api/plugins/#loggi
 
 通过引入 Webpack Logger API，我们希望统一 Webpack plugins 和 loaders 生成日志的方式，并提供更好的方法来检查构建问题。 集成的 Logging 解决方案可以帮助 plugins 和 loader 的开发人员提升他们的开发经验。同时为非 CLI 形式的 Webpack 解决方案构建铺平了道路，例如 dashboard 或其他 UI。
 
+<<<<<<< HEAD
 W> __避免在日志中输出无效信息！__请记住，多个 plugin 和 loader 经常一起使用。loader 通常处理多个文件，并且每个文件都会调用，所以尽可能选择较低的日志级别以保证 log 的信息量。
+=======
+W> **Avoid noise in the log!** Keep in mind that multiple plugins and loaders are used together. Loaders are usually processing multiple files and are invoked for every file. Choose a logging level as low as possible to keep the log output informative.
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ## Examples of how to get and use webpack logger in loaders and plugins {#examples-of-how-to-get-and-use-webpack-logger-in-loaders-and-plugins}
 
-__my-webpack-plugin.js__
+**my-webpack-plugin.js**
 
 ```js
 const PLUGIN_NAME = 'my-webpack-plugin';
@@ -39,7 +43,7 @@ export class MyWebpackPlugin {
     const logger = compiler.getInfrastructureLogger(PLUGIN_NAME);
     logger.log('log from compiler');
 
-    compiler.hooks.compilation.tap(PLUGIN_NAME, compilation => {
+    compiler.hooks.compilation.tap(PLUGIN_NAME, (compilation) => {
       // you can also access Logger from compilation
       const logger = compilation.getLogger(PLUGIN_NAME);
       logger.info('log from compilation');
@@ -48,7 +52,7 @@ export class MyWebpackPlugin {
 }
 ```
 
-__my-webpack-loader.js__
+**my-webpack-loader.js**
 
 ```js
 module.exports = function (source) {
@@ -61,6 +65,7 @@ module.exports = function (source) {
 
 ## Logger methods {#logger-methods}
 
+<<<<<<< HEAD
 - `logger.error(...)`：用于输出错误信息
 - `logger.warn(...)`：用于输出警告信息
 - `logger.info(...)`：用于输出__重要__信息。默认情况下会显示这些信息，所以仅用于输出用户真正需要查看的消息
@@ -73,6 +78,20 @@ module.exports = function (source) {
 - `logger.status`：写入一条临时消息，并且设置新状态，覆盖上一个状态
 - `logger.clear()`：打印水平线。展示形式类似于 `logger.log`
 - `logger.profile(...)`，`logger.profileEnd(...)`：捕获配置文件。当支持 `console.profile` API 时，使用其进行输出
+=======
+- `logger.error(...)`: for error messages
+- `logger.warn(...)`: for warnings
+- `logger.info(...)`: for **important** information messages. These messages are displayed by default. Only use this for messages that the user really needs to see
+- `logger.log(...)`: for **unimportant** information messages. These messages are displayed only when user had opted-in to see them
+- `logger.debug(...)`: for debugging information. These messages are displayed only when user had opted-in to see debug logging for specific modules
+- `logger.trace()`: to display a stack trace. Displayed like `logger.debug`
+- `logger.group(...)`: to group messages. Displayed collapsed like `logger.log`
+- `logger.groupEnd()`: to end a logging group
+- `logger.groupCollapsed(...)`: to group messages together. Displayed collapsed like `logger.log`. Displayed expanded when logging level is set to `'verbose'` or `'debug'`.
+- `logger.status`: writes a temporary message, setting a new status, overrides the previous one
+- `logger.clear()`: to print a horizontal line. Displayed like `logger.log`
+- `logger.profile(...)`, `logger.profileEnd(...)`: to capture a profile. Delegated to `console.profile` when supported
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ## Runtime Logger API {#runtime-logger-api}
 
@@ -86,7 +105,7 @@ Runtime logger API 仅应该用作开发工具，不应该包含在 [生产模�
 const logging = require('webpack/lib/logging/runtime');
 logging.configureDefaultLogger({
   level: 'log',
-  debug: /something/
+  debug: /something/,
 });
 ```
 

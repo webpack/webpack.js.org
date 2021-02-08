@@ -15,12 +15,16 @@ contributors:
 
 webpack 支持使用多种编程语言和数据描述格式来编写配置文件。在 [node-interpret](https://github.com/gulpjs/interpret) 中你可以找到当前所支持的文件类型列表，通过 [node-interpret](https://github.com/gulpjs/interpret)，webpack 能够处理这些类型的配置文件。
 
+<<<<<<< HEAD
 
 ## TypeScript {#typescript}
+=======
+## TypeScript
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 要使用 [Typescript](https://www.typescriptlang.org/) 来编写 webpack 配置，你需要先安装必要的依赖，比如 Typescript 以及其相应的类型声明，类型声明可以从 [DefinitelyTyped](https://definitelytyped.org/) 项目中获取，依赖安装如下所示：
 
-``` bash
+```bash
 npm install --save-dev typescript ts-node @types/node @types/webpack
 # 如果使用 webpack-dev-server，还需要安装以下依赖
 npm install --save-dev @types/webpack-dev-server
@@ -28,7 +32,7 @@ npm install --save-dev @types/webpack-dev-server
 
 完成依赖安装后便可以开始编写配置文件，示例如下：
 
-__webpack.config.ts__
+**webpack.config.ts**
 
 ```typescript
 import * as path from 'path';
@@ -39,8 +43,8 @@ const config: webpack.Configuration = {
   entry: './foo.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'foo.bundle.js'
-  }
+    filename: 'foo.bundle.js',
+  },
 };
 
 export default config;
@@ -55,19 +59,25 @@ export default config;
 * 直接修改 `tsconfig.json` 文件
 * 使用 `tsconfig-paths`
 
+<<<<<<< HEAD
 第一种方法就是打开你的 `tsconfig.json` 文件，找到 `compilerOptions` 的配置，然后设置 `target` 和 `module` 的选项分别为 `"ES5"` 和 `"CommonJs"` (在 `target` 设置为 `es5` 时你也可以不显示编写 `module` 配置)。
 
 第二种方法需要先安装 `tsconfig-paths` 这个 npm 包，如下所示：
+=======
+The **first option** is to open your `tsconfig.json` file and look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
 
-``` bash
+The **second option** is to install the `tsconfig-paths` package:
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+
+```bash
 npm install --save-dev tsconfig-paths
 ```
 
 安装后你可以为 webpack 配置创建一个单独的 TypeScript 配置文件，示例如下：
 
-__tsconfig-for-webpack-config.json__
+**tsconfig-for-webpack-config.json**
 
-``` json
+```json
 {
   "compilerOptions": {
     "module": "commonjs",
@@ -81,7 +91,7 @@ T> ts-node 可以根据 `tsconfig-paths` 提供的环境变量 `process.env.TS_N
 
 `process.env.TS_NODE_PROJECT` 变量的设置如下所示:
 
-__package.json__
+**package.json**
 
 ```json
 {
@@ -93,18 +103,22 @@ __package.json__
 
 之所以要添加 `cross-env`，是因为我们在直接使用 `TS_NODE_PROJECT` 时遇到过 `"TS_NODE_PROJECT" unrecognized command` 报错的反馈，添加 `cross-env` 之后该问题也似乎得到了解决，你可以查看[这个 issue](https://github.com/webpack/webpack.js.org/issues/2733)获取到关于该问题的更多信息。
 
+<<<<<<< HEAD
 
 ## CoffeeScript {#coffeescript}
+=======
+## CoffeeScript
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 与 `Typescript` 类似，在使用 CoffeeScript 前需要先安装其依赖，如下所示:
 
-``` bash
+```bash
 npm install --save-dev coffeescript
 ```
 
 完成安装之后便可以开始编写 webpack 配置，示例如下:
 
-__webpack.config.coffee__
+**webpack.config.coffee**
 
 <!-- eslint-skip -->
 
@@ -130,8 +144,12 @@ config =
 module.exports = config
 ```
 
+<<<<<<< HEAD
 
 ## Babel and JSX {#babel-and-jsx}
+=======
+## Babel and JSX
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 下述的示例中使用了 JSX（用于 React 的 JavaScript 标记语言）和 babel 来创建格式为 json 的 webpack 配置文件。
 
@@ -139,37 +157,44 @@ module.exports = config
 
 首先需要安装一些必要依赖，如下所示:
 
-``` bash
+```bash
 npm install --save-dev babel-register jsxobj babel-preset-es2015
 ```
 
-__.babelrc__
+**.babelrc**
 
-``` json
+```json
 {
-  "presets": [ "es2015" ]
+  "presets": ["es2015"]
 }
 ```
 
-__webpack.config.babel.js__
+**webpack.config.babel.js**
 
-``` js
+```js
 import jsxobj from 'jsxobj';
 
+<<<<<<< HEAD
 // 插件引入示例
 const CustomPlugin = config => ({
+=======
+// example of an imported plugin
+const CustomPlugin = (config) => ({
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
   ...config,
-  name: 'custom-plugin'
+  name: 'custom-plugin',
 });
 
 export default (
   <webpack target="web" watch mode="production">
     <entry path="src/index.js" />
     <resolve>
-      <alias {...{
-        react: 'preact-compat',
-        'react-dom': 'preact-compat'
-      }} />
+      <alias
+        {...{
+          react: 'preact-compat',
+          'react-dom': 'preact-compat',
+        }}
+      />
     </resolve>
     <plugins>
       <CustomPlugin foo="bar" />

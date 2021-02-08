@@ -21,15 +21,19 @@ contributors:
 `Compilation` 类扩展(extend)自 `Tapable`，并提供了以下生命周期钩子。
 可以按照 compiler 钩子的相同方式来调用 tap：
 
-``` js
+```js
 compilation.hooks.someHook.tap(/* ... */);
 ```
 
 和 `compiler` 用法相同，取决于不同的钩子类型，
 所以也可以在某些钩子上访问 `tapAsync` 和 `tapPromise`。
 
+<<<<<<< HEAD
 
 ### `buildModule` {#buildmodule}
+=======
+### `buildModule`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -37,17 +41,21 @@ compilation.hooks.someHook.tap(/* ... */);
 
 - 回调参数：`module`
 
-
 ```js
-compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
-  module => {
+compilation.hooks.buildModule.tap(
+  'SourceMapDevToolModuleOptionsPlugin',
+  (module) => {
     module.useSourceMap = true;
   }
 );
 ```
 
+<<<<<<< HEAD
 
 ### `rebuildModule` {#rebuildmodule}
+=======
+### `rebuildModule`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -55,8 +63,12 @@ compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
 
 - 回调参数：`module`
 
+<<<<<<< HEAD
 
 ### `failedModule` {#failedmodule}
+=======
+### `failedModule`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -64,8 +76,12 @@ compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
 
 - 回调参数：`module` `error`
 
+<<<<<<< HEAD
 
 ### `succeedModule` {#succeedmodule}
+=======
+### `succeedModule`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -73,8 +89,12 @@ compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
 
 - 回调参数：`module`
 
+<<<<<<< HEAD
 
 ### `finishModules` {#finishmodules}
+=======
+### `finishModules`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `AsyncSeriesHook`
 
@@ -82,8 +102,12 @@ compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
 
 - 回调参数：`modules`
 
+<<<<<<< HEAD
 
 ### `finishRebuildingModule` {#finishrebuildingmodule}
+=======
+### `finishRebuildingModule`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -91,22 +115,34 @@ compilation.hooks.buildModule.tap('SourceMapDevToolModuleOptionsPlugin',
 
 - 回调参数：`module`
 
+<<<<<<< HEAD
 
 ### `seal` {#seal}
+=======
+### `seal`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
 compilation 对象停止接收新的模块时触发。
 
+<<<<<<< HEAD
 
 ### `unseal` {#unseal}
+=======
+### `unseal`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
 compilation 对象开始接收新模块时触发。
 
+<<<<<<< HEAD
 
 ### `optimizeDependencies` {#optimizedependencies}
+=======
+### `optimizeDependencies`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -114,8 +150,12 @@ compilation 对象开始接收新模块时触发。
 
 - 回调参数：`modules`
 
+<<<<<<< HEAD
 
 ### `afterOptimizeDependencies` {#afteroptimizedependencies}
+=======
+### `afterOptimizeDependencies`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -123,15 +163,23 @@ compilation 对象开始接收新模块时触发。
 
 - 回调参数：`modules`
 
+<<<<<<< HEAD
 
 ### `optimize` {#optimize}
+=======
+### `optimize`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
 优化阶段开始时触发。
 
+<<<<<<< HEAD
 
 ### `optimizeModules` {#optimizemodules}
+=======
+### `optimizeModules`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -139,8 +187,12 @@ compilation 对象开始接收新模块时触发。
 
 - 回调参数：`modules`
 
+<<<<<<< HEAD
 
 ### `afterOptimizeModules` {#afteroptimizemodules}
+=======
+### `afterOptimizeModules`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -148,8 +200,12 @@ compilation 对象开始接收新模块时触发。
 
 - 回调参数：`modules`
 
+<<<<<<< HEAD
 
 ### `optimizeChunks` {#optimizechunks}
+=======
+### `optimizeChunks`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -157,8 +213,12 @@ compilation 对象开始接收新模块时触发。
 
 - 回调参数：`chunks`
 
+<<<<<<< HEAD
 
 ### `afterOptimizeChunks` {#afteroptimizechunks}
+=======
+### `afterOptimizeChunks`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -166,8 +226,12 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks`
 
+<<<<<<< HEAD
 
 ### `optimizeTree` {#optimizetree}
+=======
+### `optimizeTree`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `AsyncSeriesHook`
 
@@ -175,8 +239,12 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks` `modules`
 
+<<<<<<< HEAD
 
 ### `afterOptimizeTree` {#afteroptimizetree}
+=======
+### `afterOptimizeTree`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -184,8 +252,12 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks` `modules`
 
+<<<<<<< HEAD
 
 ### `optimizeChunkModules` {#optimizechunkmodules}
+=======
+### `optimizeChunkModules`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -193,8 +265,12 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks` `modules`
 
+<<<<<<< HEAD
 
 ### `afterOptimizeChunkModules` {#afteroptimizechunkmodules}
+=======
+### `afterOptimizeChunkModules`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -202,15 +278,23 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks` `modules`
 
+<<<<<<< HEAD
 
 ### `shouldRecord` {#shouldrecord}
+=======
+### `shouldRecord`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
 调用来决定是否存储 record。返回任何内容 `!== false` 将阻止执行所有其他 "record" 钩子（[`record`](#record), [`recordModules`](#recordmodules), [`recordChunks`](#recordchunks) 和 [`recordHash`](#recordhash)）。
 
+<<<<<<< HEAD
 
 ### `reviveModules` {#revivemodules}
+=======
+### `reviveModules`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -218,8 +302,12 @@ chunk 优化完成之后触发。
 
 - 回调参数：`modules` `records`
 
+<<<<<<< HEAD
 
 ### `beforeModuleIds` {#beforemoduleids}
+=======
+### `beforeModuleIds`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -227,8 +315,12 @@ chunk 优化完成之后触发。
 
 - 回调参数：`modules`
 
+<<<<<<< HEAD
 
 ### `moduleIds` {#moduleids}
+=======
+### `moduleIds`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -236,8 +328,12 @@ chunk 优化完成之后触发。
 
 - 回调参数：`modules`
 
+<<<<<<< HEAD
 
 ### `optimizeModuleIds` {#optimizemoduleids}
+=======
+### `optimizeModuleIds`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -245,8 +341,12 @@ chunk 优化完成之后触发。
 
 - 回调参数：`modules`
 
+<<<<<<< HEAD
 
 ### `afterOptimizeModuleIds` {#afteroptimizemoduleids}
+=======
+### `afterOptimizeModuleIds`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -254,8 +354,12 @@ chunk 优化完成之后触发。
 
 - 回调参数：`modules`
 
+<<<<<<< HEAD
 
 ### `reviveChunks` {#revivechunks}
+=======
+### `reviveChunks`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -263,8 +367,12 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks` `records`
 
+<<<<<<< HEAD
 
 ### `beforeChunkIds` {#beforechunkids}
+=======
+### `beforeChunkIds`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -272,8 +380,12 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks`
 
+<<<<<<< HEAD
 
 ### `chunkIds` {#chunkids}
+=======
+### `chunkIds`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -281,8 +393,12 @@ chunk 优化完成之后触发。
 
 - 回调函数的参数为：`chunks`
 
+<<<<<<< HEAD
 
 ### `optimizeChunkIds` {#optimizechunkids}
+=======
+### `optimizeChunkIds`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -290,8 +406,12 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks`
 
+<<<<<<< HEAD
 
 ### `afterOptimizeChunkIds` {#afteroptimizechunkids}
+=======
+### `afterOptimizeChunkIds`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -299,8 +419,12 @@ chunk `id` 优化结束之后触发。
 
 - 回调参数：`chunks`
 
+<<<<<<< HEAD
 
 ### `recordModules` {#recordmodules}
+=======
+### `recordModules`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -308,8 +432,12 @@ chunk `id` 优化结束之后触发。
 
 - 回调参数：`modules` `records`
 
+<<<<<<< HEAD
 
 ### `recordChunks` {#recordchunks}
+=======
+### `recordChunks`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -317,22 +445,34 @@ chunk `id` 优化结束之后触发。
 
 - 回调参数：`chunks` `records`
 
+<<<<<<< HEAD
 
 ### `beforeHash` {#beforehash}
+=======
+### `beforeHash`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
 在 compilation 添加哈希(hash)之前。
 
+<<<<<<< HEAD
 
 ### `afterHash` {#afterhash}
+=======
+### `afterHash`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
 在 compilation 添加哈希(hash)之后。
 
+<<<<<<< HEAD
 
 ### `recordHash` {#recordhash}
+=======
+### `recordHash`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -340,8 +480,12 @@ chunk `id` 优化结束之后触发。
 
 - 回调参数：`records`
 
+<<<<<<< HEAD
 
 ### `record` {#record}
+=======
+### `record`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -349,55 +493,81 @@ chunk `id` 优化结束之后触发。
 
 - 回调参数：`compilation` `records`
 
+<<<<<<< HEAD
 
 ### `beforeModuleAssets` {#beforemoduleassets}
+=======
+### `beforeModuleAssets`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
 在创建模块 asset 之前执行。
 
+<<<<<<< HEAD
 
 ### `additionalChunkAssets` {#additionalchunkassets}
 
 `SyncHook`
 
 W> `additionalChunkAssets` 已弃用（可使用 [Compilation.hook.processAssets](#processassets) 来代替，并且可使用 Compilation.PROCESS_ASSETS_STAGE_* 作为其选项参数。）
+=======
+### `additionalChunkAssets`
+
+`SyncHook`
+
+W> `additionalChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS*ASSETS_STAGE*\* as a stage option)
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 为这些 chunk 创建其他 asset。
 
 - 回调参数：`chunks`
 
+<<<<<<< HEAD
 
 ### `shouldGenerateChunkAssets` {#shouldgeneratechunkassets}
+=======
+### `shouldGenerateChunkAssets`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
 调用以确定是否生成 chunk asset。返回任何 `!== false` 将允许生成 chunk asset。
 
+<<<<<<< HEAD
 
 ### `beforeChunkAssets` {#beforechunkassets}
+=======
+### `beforeChunkAssets`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
 在创建 chunk asset 之前。
 
+<<<<<<< HEAD
 
 
 ### `additionalAssets` {#additionalassets}
+=======
+### `additionalAssets`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `AsyncSeriesHook`
 
 为 compilation 创建额外 asset。
 这个钩子可以用来下载图像，例如：
 
-``` js
-compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
-  download('https://img.shields.io/npm/v/webpack.svg', function(resp) {
-    if(resp.status === 200) {
+```js
+compilation.hooks.additionalAssets.tapAsync('MyPlugin', (callback) => {
+  download('https://img.shields.io/npm/v/webpack.svg', function (resp) {
+    if (resp.status === 200) {
       compilation.assets['webpack-version.svg'] = toAsset(resp);
       callback();
     } else {
-      callback(new Error('[webpack-example-plugin] Unable to download the image'));
+      callback(
+        new Error('[webpack-example-plugin] Unable to download the image')
+      );
     }
   });
 });
@@ -407,7 +577,11 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', callback => {
 
 `AsyncSeriesHook`
 
+<<<<<<< HEAD
 W> `optimizeChunkAssets` 已弃用。（可使用 [Compilation.hook.processAssets](#processassets) 来代替，并且可使用 Compilation.PROCESS_ASSETS_STAGE_* 作为其选项参数。
+=======
+W> `optimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS*ASSETS_STAGE*\* as a stage option)
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 优化所有 chunk asset。asset 存储在 `compilation.assets` 中。
 每个 `Chunk` 都具有一个 `files` 属性，其指向由一个 chunk 创建的所有文件。
@@ -417,14 +591,14 @@ W> `optimizeChunkAssets` 已弃用。（可使用 [Compilation.hook.processAsset
 
 Here's an example that simply adds a banner to each chunk.
 
-``` js
-compilation.hooks
-  .optimizeChunkAssets
-  .tapAsync('MyPlugin', (chunks, callback) => {
-    chunks.forEach(chunk => {
-      chunk.files.forEach(file => {
+```js
+compilation.hooks.optimizeChunkAssets.tapAsync(
+  'MyPlugin',
+  (chunks, callback) => {
+    chunks.forEach((chunk) => {
+      chunk.files.forEach((file) => {
         compilation.assets[file] = new ConcatSource(
-          '\/**Sweet Banner**\/',
+          '/**Sweet Banner**/',
           '\n',
           compilation.assets[file]
         );
@@ -432,15 +606,24 @@ compilation.hooks
     });
 
     callback();
-  });
+  }
+);
 ```
 
+<<<<<<< HEAD
 
 ### `afterOptimizeChunkAssets` {#afteroptimizechunkassets}
 
 `SyncHook`
 
 W> `afterOptimizeChunkAssets` 已弃用。（可使用 [Compilation.hook.processAssets](#processassets) 来代替，并且可使用 Compilation.PROCESS_ASSETS_STAGE_* 作为其选项参数。
+=======
+### `afterOptimizeChunkAssets`
+
+`SyncHook`
+
+W> `afterOptimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS*ASSETS_STAGE*\* as a stage option)
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 chunk asset 已经被优化。
 
@@ -448,21 +631,25 @@ chunk asset 已经被优化。
 
 这里是一个来自 [@boopathi](https://github.com/boopathi) 的示例插件，详细地输出每个 chunk 里有什么。
 
-``` js
-compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
-  chunks.forEach(chunk => {
+```js
+compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', (chunks) => {
+  chunks.forEach((chunk) => {
     console.log({
       id: chunk.id,
       name: chunk.name,
-      includes: chunk.getModules().map(module => module.request)
+      includes: chunk.getModules().map((module) => module.request),
     });
   });
 });
 ```
 
+<<<<<<< HEAD
 
 
 ### `optimizeAssets` {#optimizeassets}
+=======
+### `optimizeAssets`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `AsyncSeriesHook`
 
@@ -470,8 +657,12 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', chunks => {
 
 - 回调参数：`assets`
 
+<<<<<<< HEAD
 
 ### `afterOptimizeAssets` {#afteroptimizeassets}
+=======
+### `afterOptimizeAssets`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -479,8 +670,12 @@ asset 已经优化。
 
 - 回调参数：`assets`
 
+<<<<<<< HEAD
 
 ### `processAssets` {#processassets}
+=======
+### `processAssets`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `AsyncSeriesHook`
 
@@ -506,35 +701,35 @@ In addition to `name` and `stage`, you can pass a `additionalAssets` <Badge text
 
 1. `true` - Run callback against assets added later by plugins.
 
-    ```js
-    compilation.hooks.processAssets.tap(
-      {
-        name: 'MyPlugin',
-        stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
-        additionalAssets: true
-      },
-      (assets) => {
-        // this callback will run against assets added later by plugins.
-      }
-    );
-    ```
+   ```js
+   compilation.hooks.processAssets.tap(
+     {
+       name: 'MyPlugin',
+       stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
+       additionalAssets: true,
+     },
+     (assets) => {
+       // this callback will run against assets added later by plugins.
+     }
+   );
+   ```
 
 2. `(assets) => {}` - Run this specified callback against assets added later by plugins.
 
-    ```js
-    compilation.hooks.processAssets.tap(
-      {
-        name: 'MyPlugin',
-        stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
-        additionalAssets: (assets) => {
-          // this callback will run against assets added later by plugins.
-        }
-      },
-      (assets) => {
-        // code
-      }
-    );
-    ```
+   ```js
+   compilation.hooks.processAssets.tap(
+     {
+       name: 'MyPlugin',
+       stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
+       additionalAssets: (assets) => {
+         // this callback will run against assets added later by plugins.
+       },
+     },
+     (assets) => {
+       // code
+     }
+   );
+   ```
 
 Here's a list of stages we can use:
 
@@ -554,7 +749,11 @@ Here's a list of stages we can use:
 - `PROCESS_ASSETS_STAGE_ANALYSE` - Analyze the existing assets.
 - `PROCESS_ASSETS_STAGE_REPORT` - Creating assets for the reporting purposes.
 
+<<<<<<< HEAD
 ### `afterProcessAssets` {#afterprocessassets}
+=======
+### `afterProcessAssets`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -566,15 +765,23 @@ Called after the [`processAssets`](#processassets) hook had finished without err
 
 调用来决定 compilation 是否需要解除 seal 以引入其他文件。
 
+<<<<<<< HEAD
 
 ### `afterSeal` {#afterseal}
+=======
+### `afterSeal`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `AsyncSeriesHook`
 
 在 `needAdditionalSeal` 之后立即执行。
 
+<<<<<<< HEAD
 
 ### `chunkHash` {#chunkhash}
+=======
+### `chunkHash`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -582,8 +789,12 @@ Called after the [`processAssets`](#processassets) hook had finished without err
 
 - 回调参数：`chunk` `chunkHash`
 
+<<<<<<< HEAD
 
 ### `moduleAsset` {#moduleasset}
+=======
+### `moduleAsset`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -591,8 +802,12 @@ Called after the [`processAssets`](#processassets) hook had finished without err
 
 - 回调参数：`module` `filename`
 
+<<<<<<< HEAD
 
 ### `chunkAsset` {#chunkasset}
+=======
+### `chunkAsset`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -600,8 +815,12 @@ Called after the [`processAssets`](#processassets) hook had finished without err
 
 - 回调参数：`chunk` `filename`
 
+<<<<<<< HEAD
 
 ### `assetPath` {#assetpath}
+=======
+### `assetPath`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncWaterfallHook`
 
@@ -609,15 +828,23 @@ Called after the [`processAssets`](#processassets) hook had finished without err
 
 - 回调参数：`path` `options`
 
+<<<<<<< HEAD
 
 ### `needAdditionalPass` {#needadditionalpass}
+=======
+### `needAdditionalPass`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
 调用以决定 asset 在输出后是否需要进一步处理。
 
+<<<<<<< HEAD
 
 ### `childCompiler` {#childcompiler}
+=======
+### `childCompiler`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncHook`
 
@@ -625,7 +852,11 @@ Called after the [`processAssets`](#processassets) hook had finished without err
 
 - 回调参数：`childCompiler` `compilerName` `compilerIndex`
 
+<<<<<<< HEAD
 
 ### `normalModuleLoader` {#normalmoduleloader}
+=======
+### `normalModuleLoader`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 从 webpack v5 开始，`normalModuleLoader` 钩子已经删除。现在要访问loader 请改用 `NormalModule.getCompilationHooks(compilation).loader`。

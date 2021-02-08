@@ -17,14 +17,24 @@ const barDismissed = () => {
 
 class MessageBar extends Component {
   static propTypes = {
-    onClose: PropTypes.func
-  }
+    onClose: PropTypes.func,
+  };
   render() {
     return (
       <div className="notification-bar">
         <Container className="notification-bar__inner">
           <p>
+<<<<<<< HEAD
             Webpack 5 现已正式发布。请阅读我们的 <a href="/blog/2020-10-10-webpack-5-release/">发布公告</a>。如还未准备升级，请阅读 <a href="https://v4.webpack.docschina.org/">webpack 4 文档</a>。
+=======
+            Webpack 5 has been officially released. Read our{' '}
+            <a href="/blog/2020-10-10-webpack-5-release/">announcement</a>. Not
+            ready yet? Read{' '}
+            <a href="https://v4.webpack.js.org/">
+              webpack 4 documentation here
+            </a>
+            .
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
           </p>
           {localStorageIsEnabled ? (
             <CloseIcon
@@ -34,7 +44,7 @@ class MessageBar extends Component {
               width={16}
               onClick={this.close.bind(this)}
               role="button"
-              />
+            />
           ) : null}
         </Container>
       </div>
@@ -57,7 +67,7 @@ export default class NotificationBar extends Component {
     super(props);
     this.onClose = this.onClose.bind(this);
     this.state = {
-      dismissed: barDismissed()
+      dismissed: barDismissed(),
     };
     if (!this.state.dismissed && typeof document !== 'undefined') {
       document.body.classList.add('notification-bar-visible');
@@ -65,12 +75,12 @@ export default class NotificationBar extends Component {
   }
 
   onClose() {
-    this.setState(state => {
+    this.setState((state) => {
       if (!state.dismissed && typeof document !== 'undefined') {
         document.body.classList.remove('notification-bar-visible');
       }
       return {
-        dismissed: !state.dismissed
+        dismissed: !state.dismissed,
       };
     });
   }
@@ -78,6 +88,10 @@ export default class NotificationBar extends Component {
   render() {
     const { dismissed } = this.state;
 
-    return <Fragment>{!dismissed ? <MessageBar onClose={this.onClose} /> : null}</Fragment>;
+    return (
+      <Fragment>
+        {!dismissed ? <MessageBar onClose={this.onClose} /> : null}
+      </Fragment>
+    );
   }
 }

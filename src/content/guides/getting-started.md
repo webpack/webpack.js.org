@@ -33,26 +33,30 @@ W> 运行 webpack 5 的 Node.js 最低版本是 10.13.0 (LTS)。
 
 首先我们创建一个目录，初始化 npm，然后 [在本地安装 webpack](/guides/installation#local-installation)，接着安装 [`webpack-cli`](https://github.com/webpack/webpack-cli)（此工具用于在命令行中运行 webpack）：
 
-``` bash
+```bash
 mkdir webpack-demo
 cd webpack-demo
 npm init -y
 npm install webpack webpack-cli --save-dev
 ```
 
+<<<<<<< HEAD
 在整个指南中，我们将使用 `diff` 块，来展示对目录、文件和代码所做的修改。例如：
+=======
+Throughout the Guides we will use **`diff`** blocks to show you what changes we're making to directories, files, and code. For instance:
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```diff
 + this is a new line you shall copy into your code
 - and this is a line to be removed from your code
-  and this is a line not to touch. 
+  and this is a line not to touch.
 ```
 
 现在，我们将创建以下目录结构、文件和内容：
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
 + |- index.html
@@ -60,9 +64,9 @@ __project__
 +   |- index.js
 ```
 
-__src/index.js__
+**src/index.js**
 
-``` javascript
+```javascript
 function component() {
   const element = document.createElement('div');
 
@@ -75,9 +79,9 @@ function component() {
 document.body.appendChild(component());
 ```
 
-__index.html__
+**index.html**
 
-``` html
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -95,9 +99,9 @@ __index.html__
 
 T> 如果你想要了解 `package.json` 内在机制的更多信息，我们推荐阅读 [npm 文档](https://docs.npmjs.com/files/package.json)。
 
-__package.json__
+**package.json**
 
-``` diff
+```diff
  {
    "name": "webpack-demo",
    "version": "1.0.0",
@@ -131,9 +135,9 @@ __package.json__
 
 首先，我们稍微调整下目录结构，创建分发代码(`./dist`)文件夹用于存放分发代码，源代码(`./src`)文件夹仍存放源代码。源代码是指用于书写和编辑的代码。分发代码是指在构建过程中，经过最小化和优化后产生的输出结果，最终将在浏览器中加载。调整后目录结构如下：
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
 + |- /dist
@@ -145,10 +149,14 @@ __project__
 
 T> 细心的小伙伴可能不难发现，尽管 `index.html` 目前放在 `dist` 目录下，但它是手动创建的。在本指南接下来的章节中，我们会教你如何生成 `index.html` 而非手动编辑它。如此做，便可安全地清空 `dist` 目录并重新生成目录中的所有文件。
 
+<<<<<<< HEAD
 
 要在 `index.js` 中打包 `lodash` 依赖，我们需要在本地安装 library：
+=======
+To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally:
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
-``` bash
+```bash
 npm install --save lodash
 ```
 
@@ -156,29 +164,35 @@ T> 在安装一个 package，而此 package 要打包到生产环境 bundle 中�
 
 现在，在我们的 script 中 import `lodash`：
 
-__src/index.js__
+**src/index.js**
 
-``` diff
+```diff
 +import _ from 'lodash';
 +
  function component() {
    const element = document.createElement('div');
+<<<<<<< HEAD
  
 -  // lodash（目前通过一个 script 引入）对于执行这一行是必需的
 +  // lodash，现在通过一个 script 引入
+=======
+
+-  // Lodash, currently included via a script, is required for this line to work
++  // Lodash, now imported by this script
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
- 
+
    return element;
  }
- 
+
  document.body.appendChild(component());
 ```
 
 现在，我们将会打包所有脚本，我们必须更新 `index.html` 文件。由于现在是通过 `import` 引入 lodash，所以要将 lodash `<script>` 删除，然后修改另一个 `<script>` 标签来加载 bundle，而不是原始的 `./src` 文件：
 
-__dist/index.html__
+**dist/index.html**
 
-``` diff
+```diff
  <!DOCTYPE html>
  <html>
    <head>
@@ -197,7 +211,7 @@ __dist/index.html__
 
 可以这样说，执行 `npx webpack`，会将我们的脚本 `src/index.js` 作为 [入口起点](/concepts/entry-points)，也会生成 `dist/main.js` 作为 [输出](/concepts/output)。Node 8.2/npm 5.2.0 以上版本提供的 `npx` 命令，可以运行在初次安装的 webpack package 中的 webpack 二进制文件（即 `./node_modules/.bin/webpack`）：
 
-``` bash
+```bash
 $ npx webpack
 [webpack-cli] Compilation finished
 asset main.js 69.3 KiB [emitted] [minimized] (name: main) 1 related asset
@@ -216,18 +230,26 @@ T> 输出可能会稍有不同，但是只要构建成功，那么你就可以�
 
 [ES2015](https://babeljs.io/learn-es2015/) 中的 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 和 [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) 语句已经被标准化。虽然大多数浏览器还无法支持它们，但是 webpack 却能够提供开箱即用般的支持。
 
+<<<<<<< HEAD
 事实上，webpack 在幕后会将代码“__转译__”，以便旧版本浏览器可以执行。如果你检查 `dist/main.js`，你可以看到 webpack 具体如何实现，这是独创精巧的设计！除了 `import` 和 `export`，webpack 还能够很好地支持多种其他模块语法，更多信息请查看 [模块 API](/api/module-methods)。
+=======
+Behind the scenes, webpack actually "**transpiles**" the code so that older browsers can also run it. If you inspect `dist/main.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 注意，webpack 不会更改代码中除 `import` 和 `export` 语句以外的部分。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你在 webpack [loader 系统](/concepts/loaders/) 中使用了一个像是 [Babel](https://babel.docschina.org/) 或 [Bublé](https://buble.surge.sh/guide/) 的 [transpiler(转译器)](/loaders/#transpiling)。
 
+<<<<<<< HEAD
 
 ## 使用一个配置文件 {#using-a-configuration}
+=======
+## Using a Configuration
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 在 webpack v4 中，可以无须任何配置，然而大多数项目会需要很复杂的设置，这就是为什么 webpack 仍然要支持 [配置文件](/concepts/configuration)。这比在 terminal(终端) 中手动输入大量命令要高效的多，所以让我们创建一个配置文件：
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
 + |- webpack.config.js
@@ -237,9 +259,9 @@ __project__
     |- index.js
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` javascript
+```javascript
 const path = require('path');
 
 module.exports = {
@@ -253,8 +275,8 @@ module.exports = {
 
 现在，让我们通过新的配置文件再次执行构建：
 
-``` bash
-$ npx webpack --config webpack.config.js 
+```bash
+$ npx webpack --config webpack.config.js
 [webpack-cli] Compilation finished
 asset main.js 69.3 KiB [compared for emit] [minimized] (name: main) 1 related asset
 runtime modules 1000 bytes 5 modules
@@ -268,14 +290,18 @@ T> 如果 `webpack.config.js` 存在，则 `webpack` 命令将默认选择使用
 
 比起 CLI 这种简单直接的使用方式，配置文件具有更多的灵活性。我们可以通过配置方式指定 loader 规则(loader rule)、plugin(插件)、resolve 选项，以及许多其他增强功能。更多详细信息请查看 [配置文档](/configuration)。
 
+<<<<<<< HEAD
 
 ## npm scripts {#npm-scripts}
+=======
+## NPM Scripts
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 考虑到用 CLI 这种方式来运行本地的 webpack 副本并不是特别方便，我们可以设置一个快捷方式。调整 _package.json_ 文件，添加一个 [npm script](https://docs.npmjs.com/misc/scripts)：
 
-__package.json__
+**package.json**
 
-``` diff
+```diff
  {
    "name": "webpack-demo",
    "version": "1.0.0",
@@ -303,7 +329,7 @@ __package.json__
 
 现在运行以下命令，然后看看你的脚本别名是否正常运行：
 
-``` bash
+```bash
 $ npm run build
 
 ...
@@ -319,14 +345,18 @@ webpack 5.4.0 compiled successfully in 1940 ms
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --color`.
 
+<<<<<<< HEAD
 
 ## 结论 {#conclusion}
+=======
+## Conclusion
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 现在，你已经有了一个基础构建配置，你应该移至下一章节 [`资源管理`](/guides/asset-management) 指南，以了解如何通过 webpack 来管理资源，例如 images、fonts。此刻你的项目看起来应该如下：
 
-__project__
+**project**
 
-``` diff
+```diff
 webpack-demo
 |- package.json
 |- webpack.config.js

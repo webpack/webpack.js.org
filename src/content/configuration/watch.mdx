@@ -14,45 +14,57 @@ contributors:
 
 webpack 可以监听文件变化，当它们修改后会重新编译。这个页面介绍了如何启用这个功能，以及当 watch 无法正常运行的时候你可以做的一些调整。
 
+<<<<<<< HEAD
 
 ## `watch` {#watch}
+=======
+## `watch`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = false`
 
 启用 Watch 模式。这意味着在初始构建之后，webpack 将继续监听任何已解析文件的更改。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
-  watch: true
+  watch: true,
 };
 ```
 
 T> [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 和 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 里 Watch 模式默认开启。
 
+<<<<<<< HEAD
 
 ## `watchOptions` {#watchoptions}
+=======
+## watchOptions
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `object`
 
 一组用来定制 watch 模式的选项：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   watchOptions: {
     aggregateTimeout: 200,
-    poll: 1000
-  }
+    poll: 1000,
+  },
 };
 ```
 
+<<<<<<< HEAD
 
 ### `watchOptions.aggregateTimeout` {#watchoptionsaggregatetimeout}
+=======
+### watchOptions.aggregateTimeout
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `number = 200`
 
@@ -62,52 +74,56 @@ module.exports = {
 module.exports = {
   //...
   watchOptions: {
-    aggregateTimeout: 600
-  }
+    aggregateTimeout: 600,
+  },
 };
 ```
 
+<<<<<<< HEAD
 
 ### `watchOptions.ignored` {#watchoptionsignored}
+=======
+### watchOptions.ignored
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `RegExp` `string` `[string]`
 
 对于某些系统，监听大量文件会导致大量的 CPU 或内存占用。可以使用正则排除像 `node_modules` 如此庞大的文件夹：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   watchOptions: {
-    ignored: /node_modules/
-  }
+    ignored: /node_modules/,
+  },
 };
 ```
 
 此外，还可以使用 glob 模式：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   watchOptions: {
-    ignored: '**/node_modules'
-  }
+    ignored: '**/node_modules',
+  },
 };
 ```
 
 也可以使用多 glob 匹配模式：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   watchOptions: {
-    ignored: ['**/files/**/*.js', '**/node_modules']
-  }
+    ignored: ['**/files/**/*.js', '**/node_modules'],
+  },
 };
 ```
 
@@ -118,10 +134,8 @@ const path = require('path');
 module.exports = {
   //...
   watchOptions: {
-    ignored: [
-      path.posix.resolve(__dirname, './ignored-dir')
-    ]
-  }
+    ignored: [path.posix.resolve(__dirname, './ignored-dir')],
+  },
 };
 ```
 
@@ -129,21 +143,34 @@ module.exports = {
 
 T> 如果你使用 `require.context`，webpack 会监听你的整个目录。你应该忽略一些文件和/或(and/or)目录，以便那些不需要监听的文件修改后不会触发重新构建。
 
+<<<<<<< HEAD
 
 ### `watchOptions.poll` {#watchoptionspoll}
 
 `boolean = false` `number`
 
 通过传递 `true` 开启 [polling](https://whatis.techtarget.com/definition/polling)，或者指定毫秒为单位进行轮询。
+=======
+### watchOptions.poll
 
-__webpack.config.js__
+`boolean = false` `number`
+
+Turn on [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) by passing `true`, or specifying a poll interval in milliseconds:
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   watchOptions: {
+<<<<<<< HEAD
     poll: 1000 // 每秒检查一次变动
   }
+=======
+    poll: 1000, // Check for changes every second
+  },
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 };
 ```
 
@@ -155,15 +182,14 @@ T> 如果监听没生效，试试这个选项吧。Watch 在 NFS 和 VirtualBox 
 
 - Type: `boolean`
 - Example:
-    ```js
-    module.exports = {
-      //...
-      watchOptions: {
-        followSymlinks: true
-      }
-    };
-    ```
-
+  ```js
+  module.exports = {
+    //...
+    watchOptions: {
+      followSymlinks: true,
+    },
+  };
+  ```
 
 ## 故障排除 {#troubleshooting}
 

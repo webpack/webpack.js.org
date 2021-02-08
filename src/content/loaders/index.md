@@ -15,8 +15,12 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 
 在 `require()` 语句中使用 `loadername!` 作为前缀的方式来使用 loader，或者在 webpack 配置中配置 regex 来自动应用它们 - 请参阅 [配置](/concepts/loaders/#configuration) 。
 
+<<<<<<< HEAD
 
 ## 文件 {#files}
+=======
+## Files
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 - [`raw-loader`](/loaders/raw-loader) 用于加载文件的原始内容（utf-8）
 - [`val-loader`](/loaders/val-loader) 将代码作为模块执行，并将其导出为 JS 代码
@@ -24,14 +28,22 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 - [`file-loader`](/loaders/file-loader) 将文件保存至输出文件夹中并返回（相对）URL
 - [`ref-loader`](https://www.npmjs.com/package/ref-loader) 用于手动建立文件之间的依赖关系
 
+<<<<<<< HEAD
 
 ## JSON {#json}
+=======
+## JSON
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 - [`json5-loader`](/loaders/json5-loader) 加载并转换 [JSON 5](https://json5.org/) 文件
 - [`cson-loader`](https://github.com/awnist/cson-loader) 加载并转换 [CSON](https://github.com/bevry/cson#what-is-cson) 文件
 
+<<<<<<< HEAD
 
 ## 语法转换 {#transpiling}
+=======
+## Transpiling
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 - [`babel-loader`](/loaders/babel-loader) 使用 [Babel](https://babeljs.io/) 加载 ES2015+ 代码并将其转换为 ES5
 - [`buble-loader`](https://github.com/sairion/buble-loader) 使用 [Bublé](https://buble.surge.sh/guide/) 加载 ES2015+ 代码并将其转换为 ES5
@@ -41,8 +53,12 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 - [`fengari-loader`](https://github.com/fengari-lua/fengari-loader/) 使用 [fengari](https://fengari.io/) 加载 Lua 代码
 - [`elm-webpack-loader`](https://github.com/elm-community/elm-webpack-loader) 像加载 JavaScript 一样加载 [Elm](https://elm-lang.org/)
 
+<<<<<<< HEAD
 
 ## 模板 {#templating}
+=======
+## Templating
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 - [`html-loader`](/loaders/html-loader) 将 HTML 导出为字符串，需要传入静态资源的引用路径
 - [`pug-loader`](https://github.com/pugjs/pug-loader) 加载 Pug 和 Jade 模板并返回一个函数
@@ -54,8 +70,12 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 - [`twig-loader`](https://github.com/zimmo-be/twig-loader) 编译 Twig 模板并返回一个函数
 - [`remark-loader`](https://github.com/webpack-contrib/remark-loader) 通过 `remark` 加载 markdown，且支持解析内容中的图片
 
+<<<<<<< HEAD
 
 ## 样式 {#styling}
+=======
+## Styling
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 - [`style-loader`](/loaders/style-loader) 将模块导出的内容作为样式并添加到 DOM 中
 - [`css-loader`](/loaders/css-loader) 加载 CSS 文件并解析 import 的 CSS 文件，最终返回 CSS 代码
@@ -64,8 +84,12 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 - [`postcss-loader`](/loaders/postcss-loader) 使用 [PostCSS](http://postcss.org) 加载并转换 CSS/SSS 文件
 - [`stylus-loader`](/loaders/stylus-loader/) 加载并编译 Stylus 文件
 
+<<<<<<< HEAD
 
 ## Linting 和测试 {#linting--testing}
+=======
+## Linting && Testing
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 - [`mocha-loader`](/loaders/mocha-loader) 使用 [mocha](https://mochajs.org/) (Browser/NodeJS) 进行测试
 - [`eslint-loader`](https://github.com/webpack-contrib/eslint-loader) 使用 [ESLint](https://eslint.org/) 对代码进行格式化

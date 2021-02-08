@@ -8,8 +8,12 @@ contributors:
   - smonusbonus
 ---
 
+<<<<<<< HEAD
 
 `DefinePlugin` 允许在 __编译时__ 创建配置的全局常量，这在需要区分开发模式与生产模式进行不同的操作时，非常有用。例如，如果想在开发构建中进行日志记录，而不在生产构建中进行，就可以定义一个全局常量去判断是否记录日志。这就是 `DefinePlugin` 的发光之处，设置好它，就可以忘掉开发环境和生产环境的构建规则。
+=======
+The `DefinePlugin` allows you to create global constants which can be configured at **compile** time. This can be useful for allowing different behavior between development builds and production builds. If you perform logging in your development build but not in the production build you might use a global constant to determine whether logging takes place. That's where `DefinePlugin` shines, set it and forget it rules for development and production builds.
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```javascript
 new webpack.DefinePlugin({
@@ -17,8 +21,12 @@ new webpack.DefinePlugin({
 });
 ```
 
+<<<<<<< HEAD
 
 ## Usage {#usage}
+=======
+## Usage
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 传递给 `DefinePlugin` 的每个键都是一个标识符或多个以 `.` 连接的标识符。
 
@@ -36,19 +44,25 @@ new webpack.DefinePlugin({
   BROWSER_SUPPORTS_HTML5: true,
   TWO: '1+1',
   'typeof window': JSON.stringify('object'),
-  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 });
 ```
 
 ```javascript
 console.log('Running App version ' + VERSION);
-if(!BROWSER_SUPPORTS_HTML5) require('html5shiv');
+if (!BROWSER_SUPPORTS_HTML5) require('html5shiv');
 ```
 
+<<<<<<< HEAD
 
 W> 在为 `process` 定义值时，`'process.env.NODE_ENV': JSON.stringify('production')` 会比 `process: { env: { NODE_ENV: JSON.stringify('production') } }` 更好，后者会覆盖 `process` 对象，这可能会破坏与某些模块的兼容性，因为这些模块会在 process 对象上定义其他值。
 
 T> 请注意，由于本插件会直接替换文本，因此提供的值必须在字符串本身中再包含一个 __实际的引号__ 。通常，可以使用类似 `'"production"'` 这样的替换引号，或者直接用 `JSON.stringify('production')`。
+=======
+W> When defining values for `process` prefer `'process.env.NODE_ENV': JSON.stringify('production')` over `process: { env: { NODE_ENV: JSON.stringify('production') } }`. Using the latter will overwrite the `process` object which can break compatibility with some modules that expect other values on the process object to be defined.
+
+T> Note that because the plugin does a direct text replacement, the value given to it must include **actual quotes** inside of the string itself. Typically, this is done either with alternate quotes, such as `'"production"'`, or by using `JSON.stringify('production')`.
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```javascript
 if (!PRODUCTION) {
@@ -77,26 +91,34 @@ if (true) {
 console.log('Production log');
 ```
 
+<<<<<<< HEAD
 
 ## Feature Flags {#feature-flags}
+=======
+## Feature Flags
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 使用 [feature flags](https://en.wikipedia.org/wiki/Feature_toggle) 在生产/开发构建中可以启用/禁用项目的不同特性。
 
 ```javascript
 new webpack.DefinePlugin({
-  'NICE_FEATURE': JSON.stringify(true),
-  'EXPERIMENTAL_FEATURE': JSON.stringify(false)
+  NICE_FEATURE: JSON.stringify(true),
+  EXPERIMENTAL_FEATURE: JSON.stringify(false),
 });
 ```
 
+<<<<<<< HEAD
 
 ## Service URL {#service-urls}
+=======
+## Service URLs
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 在生产或开发构建中使用不同的服务 URL：
 
 ```javascript
 new webpack.DefinePlugin({
-  'SERVICE_URL': JSON.stringify('https://dev.example.com')
+  SERVICE_URL: JSON.stringify('https://dev.example.com'),
 });
 ```
 
@@ -115,7 +137,7 @@ Arguments:
 const fileDep = path.resolve(__dirname, 'sample.txt');
 
 new webpack.DefinePlugin({
-  BUILT_AT: webpack.DefinePlugin.runtimeValue(Date.now, [fileDep])
+  BUILT_AT: webpack.DefinePlugin.runtimeValue(Date.now, [fileDep]),
 });
 ```
 

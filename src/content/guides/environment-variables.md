@@ -27,12 +27,12 @@ T> 如果设置 `env` 变量，却没有赋值，`--env production` 默认表示
 
 对于我们的 webpack 配置，有一个必须要修改之处。通常，`module.exports` 指向配置对象。要使用 `env` 变量，你必须将 `module.exports` 转换成一个函数：
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` js
+```js
 const path = require('path');
 
-module.exports = env => {
+module.exports = (env) => {
   // Use env.<YOUR VARIABLE> here:
   console.log('NODE_ENV: ', env.NODE_ENV); // 'local'
   console.log('Production: ', env.production); // true

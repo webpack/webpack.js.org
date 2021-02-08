@@ -16,17 +16,30 @@ related:
 
 `DllPlugin` 和 `DllReferencePlugin` 用某种方法实现了拆分 bundles，同时还大幅度提升了构建的速度。"DLL" 一词代表微软最初引入的动态链接库。
 
+<<<<<<< HEAD
 
 ## `DllPlugin` {#dllplugin}
+=======
+## `DllPlugin`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 此插件用于在单独的 webpack 配置中创建一个 dll-only-bundle。 此插件会生成一个名为 `manifest.json` 的文件，这个文件是用于让 [`DllReferencePlugin`](#dllreferenceplugin) 能够映射到相应的依赖上。
 
+<<<<<<< HEAD
 - `context`（可选）： manifest 文件中请求的 context (默认值为 webpack 的 context)
 - `format` (boolean = false)：如果为 `true`，则 manifest json 文件 (输出文件) 将被格式化。
 - `name`：暴露出的 DLL 的函数名（[TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)：`[fullhash]` & `[name]` ）
 - `path`：manifest.json 文件的 __绝对路径__（输出文件）
 - `entryOnly` (boolean = true)：如果为 `true`，则仅暴露入口
 - `type`：dll bundle 的类型
+=======
+- `context` (optional): context of requests in the manifest file (defaults to the webpack context.)
+- `format` (boolean = false): If `true`, manifest json file (output) will be formatted.
+- `name`: name of the exposed dll function ([TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js): `[fullhash]` & `[name]` )
+- `path`: **absolute path** to the manifest json file (output)
+- `entryOnly` (boolean = true): if `true`, only entry points will be exposed
+- `type`: type of the dll bundle
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```javascript
 new webpack.DllPlugin(options);
@@ -38,11 +51,16 @@ W> 我们建议 DllPlugin 只在 `entryOnly: true` 时使用，否则 DLL 中的
 
 此插件与 [`output.library`](/configuration/output/#outputlibrary) 的选项相结合可以暴露出（也称为放入全局作用域）dll 函数。
 
+<<<<<<< HEAD
 
 ## `DllReferencePlugin` {#dllreferenceplugin}
+=======
+## `DllReferencePlugin`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 此插件配置在 webpack 的主配置文件中，此插件会把 dll-only-bundles 引用到需要的预编译的依赖中。
 
+<<<<<<< HEAD
 - `context`：（__绝对路径__） manifest (或者是内容属性)中请求的上下文
 - `extensions`：用于解析 dll bundle 中模块的扩展名 (仅在使用 'scope' 时使用)。
 - `manifest` ：包含 `content` 和 `name` 的对象，或者是一个字符串 —— 编译时用于加载 JSON manifest 的绝对路径
@@ -50,6 +68,15 @@ W> 我们建议 DllPlugin 只在 `entryOnly: true` 时使用，否则 DLL 中的
 - `name` (可选)：dll 暴露地方的名称（默认值为 `manifest.name`）（可参考[`externals`](/configuration/externals/)）
 - `scope` (可选)：dll 中内容的前缀
 - `sourceType` (可选)：dll 是如何暴露的 ([libraryTarget](/configuration/output/#outputlibrarytarget))
+=======
+- `context`: (**absolute path**) context of requests in the manifest (or content property)
+- `extensions`: Extensions used to resolve modules in the dll bundle (only used when using 'scope').
+- `manifest` : an object containing `content` and `name` or a string to the absolute path of the JSON manifest to be loaded upon compilation
+- `content` (optional): the mappings from request to module id (defaults to `manifest.content`)
+- `name` (optional): an identifier where the dll is exposed (defaults to `manifest.name`) (see also [`externals`](/configuration/externals/))
+- `scope` (optional): prefix which is used for accessing the content of the dll
+- `sourceType` (optional): how the dll is exposed ([libraryTarget](/configuration/output/#outputlibrarytarget))
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```javascript
 new webpack.DllReferencePlugin(options);
@@ -59,8 +86,12 @@ new webpack.DllReferencePlugin(options);
 
 W> 保持 `name` 与 [`output.library`](/configuration/output/#outputlibrary) 一致。
 
+<<<<<<< HEAD
 
 ### 模式(Modes) {#modes}
+=======
+### Modes
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 这个插件支持两种模式，分别是作用域（_scoped_）和映射（_mapped_）。
 
@@ -76,12 +107,16 @@ dll 中的内容会被映射到当前目录下。如果被 `require` 的文件�
 
 由于这是在解析了 dll 中每个文件之后才触发的，因此相同的路径必须能够确保这个 dll bundle 的使用者（不一定是人，可指某些代码）有权限访问。 举例来说， 假如一个 dll bundle 中含有 `loadash` 库以及文件 `abc`， 那么 `require("lodash")` 和 `require("./abc")` 都不会被编译进主 bundle 文件中，而是会被 dll 所使用。
 
+<<<<<<< HEAD
 
 ## 用法(Usage) {#usage}
+=======
+## Usage
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 W> `DllReferencePlugin` 和 `DllPlugin` 都是在 _单独的_ webpack 配置中使用的。
 
-__webpack.vendor.config.js__
+**webpack.vendor.config.js**
 
 ```javascript
 const path = require('path');
@@ -93,19 +128,23 @@ new webpack.DllPlugin({
 });
 ```
 
-__webpack.app.config.js__
+**webpack.app.config.js**
 
 ```javascript
 new webpack.DllReferencePlugin({
   context: __dirname,
   manifest: require('./manifest.json'),
   scope: 'xyz',
-  sourceType: 'commonjs2'
+  sourceType: 'commonjs2',
 });
 ```
 
+<<<<<<< HEAD
 
 ## 示例 {#examples}
+=======
+## Examples
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 [Vendor](https://github.com/webpack/webpack/tree/master/examples/dll) 和 [User](https://github.com/webpack/webpack/tree/master/examples/dll-user)
 
@@ -113,8 +152,12 @@ _两个单独的用例，用来分别演示作用域（scope）和上下文（co
 
 T> 多个 `DllPlugins` 和 `DllReferencePlugins`。
 
+<<<<<<< HEAD
 
 ## 参考 {#references}
+=======
+## References
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ### Source {#source}
 

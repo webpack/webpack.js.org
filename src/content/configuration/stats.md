@@ -25,14 +25,18 @@ contributors:
 
 T> 对于 webpack-dev-server，这个属性要放在 [`devServer` 配置对象](/configuration/dev-server/#devserverstats-).
 
+<<<<<<< HEAD
 W> 在使用 Node.js API 时，此选项无效。
 
 __webpack.js.org__
+=======
+W> This option does not have any effect when using the Node.js API. You need to pass the stats options to the `stats.toString()` resp. `stats.toJson()` calls instead.
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```js
 module.exports = {
   //...
-  stats: 'errors-only'
+  stats: 'errors-only',
 };
 ```
 
@@ -40,8 +44,12 @@ module.exports = {
 
 webpack 有一些特定的预设选项给统计信息输出：
 
+<<<<<<< HEAD
 
 | 预设              | 可选值 | 描述                                                    |
+=======
+| Preset              | Alternative | Description                                                    |
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 | ------------------- | ----------- | -------------------------------------------------------------- |
 | `'errors-only'`     | _none_      | 只在发生错误时输出                                                |
 | `'errors-warnings'` | _none_      | 只在发生错误或有新的编译时输出                                      |
@@ -65,8 +73,8 @@ T> 所有在统计信息配置里的选项都是可选的。
 module.exports = {
   //...
   stats: {
-    all: undefined
-  }
+    all: undefined,
+  },
 };
 ```
 
@@ -80,8 +88,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    assets: false
-  }
+    assets: false,
+  },
 };
 ```
 
@@ -95,8 +103,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    assetsSort: '!size'
-  }
+    assetsSort: '!size',
+  },
 };
 ```
 
@@ -110,8 +118,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    builtAt: false
-  }
+    builtAt: false,
+  },
 };
 ```
 
@@ -125,6 +133,7 @@ module.exports = {
 module.exports = {
   //...
   stats: {
+<<<<<<< HEAD
     moduleAssets: false
   }
 };
@@ -142,6 +151,10 @@ module.exports = {
   stats: {
     cached: false
   }
+=======
+    moduleAssets: false,
+  },
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 };
 ```
 
@@ -155,8 +168,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    assetsSpace: 15
-  }
+    assetsSpace: 15,
+  },
 };
 ```
 
@@ -170,8 +183,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    modulesSpace: 15
-  }
+    modulesSpace: 15,
+  },
 };
 ```
 
@@ -185,8 +198,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    chunkModulesSpace: 15
-  }
+    chunkModulesSpace: 15,
+  },
 };
 ```
 
@@ -200,12 +213,20 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    nestedModulesSpace: 15
-  }
+    nestedModulesSpace: 15,
+  },
 };
 ```
 
+<<<<<<< HEAD
 ### `stats.cachedModules` {#statscachedmodules}
+=======
+### `stats.cached`
+
+Old version of `stats.cachedModules`.
+
+### `stats.cachedModules`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = true`
 
@@ -215,8 +236,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    cachedModules: false
-  }
+    cachedModules: false,
+  },
 };
 ```
 
@@ -230,8 +251,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    runtimeModules: false
-  }
+    runtimeModules: false,
+  },
 };
 ```
 
@@ -245,8 +266,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    dependentModules: false
-  }
+    dependentModules: false,
+  },
 };
 ```
 
@@ -260,8 +281,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    groupAssetsByChunk: false
-  }
+    groupAssetsByChunk: false,
+  },
 };
 ```
 
@@ -275,8 +296,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    groupAssetsByEmitStatus: false
-  }
+    groupAssetsByEmitStatus: false,
+  },
 };
 ```
 
@@ -290,8 +311,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    groupAssetsByInfo: false
-  }
+    groupAssetsByInfo: false,
+  },
 };
 ```
 
@@ -305,8 +326,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    groupModulesByAttributes: false
-  }
+    groupModulesByAttributes: false,
+  },
 };
 ```
 
@@ -320,8 +341,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    cachedAssets: false
-  }
+    cachedAssets: false,
+  },
 };
 ```
 
@@ -335,8 +356,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    children: false
-  }
+    children: false,
+  },
 };
 ```
 
@@ -350,8 +371,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    chunks: false
-  }
+    chunks: false,
+  },
 };
 ```
 
@@ -365,8 +386,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    chunkGroups: false
-  }
+    chunkGroups: false,
+  },
 };
 ```
 
@@ -380,8 +401,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    chunkModules: false
-  }
+    chunkModules: false,
+  },
 };
 ```
 
@@ -395,8 +416,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    chunkOrigins: false
-  }
+    chunkOrigins: false,
+  },
 };
 ```
 
@@ -410,8 +431,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    chunksSort: 'name'
-  }
+    chunksSort: 'name',
+  },
 };
 ```
 
@@ -425,8 +446,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    context: '../src/components/'
-  }
+    context: '../src/components/',
+  },
 };
 ```
 
@@ -440,18 +461,26 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    colors: true
-  }
+    colors: true,
+  },
 };
 ```
 
+<<<<<<< HEAD
 它也可用通过命令行的参数实现：
+=======
+It is also available as a CLI flag:
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```bash
 webpack-cli --colors
 ```
 
+<<<<<<< HEAD
 你可以通过使用 [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code) 指定你自己的命令行终端颜色。
+=======
+You can specify your own terminal output colors using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code)
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```js
 module.exports = {
@@ -472,8 +501,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    depth: true
-  }
+    depth: true,
+  },
 };
 ```
 
@@ -487,12 +516,16 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    entrypoints: false
-  }
+    entrypoints: false,
+  },
 };
 ```
 
+<<<<<<< HEAD
 当 `stats.entrypoints` 被设置为 `'auto'` 时，webpack 将自动决定是否在 stats 输出中展示入口信息。
+=======
+When `stats.entrypoints` is set to `'auto'`, webpack will decide automatically whether to display the entry points in the stats output.
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ### `stats.env` {#statsenv}
 
@@ -504,8 +537,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    env: true
-  }
+    env: true,
+  },
 };
 ```
 
@@ -519,8 +552,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    orphanModules: true
-  }
+    orphanModules: true,
+  },
 };
 ```
 
@@ -534,23 +567,27 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    errors: false
-  }
+    errors: false,
+  },
 };
 ```
 
 ### `stats.errorDetails` {#statserrordetails}
 
-`boolean = true`
+`boolean` `string = "auto"`
 
+<<<<<<< HEAD
 告知 `stats` 是否添加错误的详情。
+=======
+Tells `stats` whether to add the details to the errors. It defaults to `'auto'` which will show error details when there're only 2 or less errors.
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```javascript
 module.exports = {
   //...
   stats: {
-    errorDetails: false
-  }
+    errorDetails: false,
+  },
 };
 ```
 
@@ -564,8 +601,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    errorStack: false
-  }
+    errorStack: false,
+  },
 };
 ```
 
@@ -582,9 +619,9 @@ module.exports = {
     excludeAssets: [
       'filter',
       /filter/,
-      (assetName) => assetName.contains('moduleA')
-    ]
-  }
+      (assetName) => assetName.contains('moduleA'),
+    ],
+  },
 };
 ```
 
@@ -598,12 +635,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    excludeModules: [
-      'filter',
-      /filter/,
-      (moduleSource) => true
-    ]
-  }
+    excludeModules: ['filter', /filter/, (moduleSource) => true],
+  },
 };
 ```
 
@@ -613,8 +646,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    excludeModules: false
-  }
+    excludeModules: false,
+  },
 };
 ```
 
@@ -632,8 +665,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    hash: false
-  }
+    hash: false,
+  },
 };
 ```
 
@@ -654,8 +687,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    logging: 'verbose'
-  }
+    logging: 'verbose',
+  },
 };
 ```
 
@@ -673,9 +706,9 @@ module.exports = {
       'MyPlugin',
       /MyPlugin/,
       /webpack/, // To get core logging
-      (name) => name.contains('MyPlugin')
-    ]
-  }
+      (name) => name.contains('MyPlugin'),
+    ],
+  },
 };
 ```
 
@@ -685,13 +718,12 @@ module.exports = {
 
 启用错误，告警与追踪的日志输出中的堆栈追踪。将 `stats.loggingTrace` 设置为 `false` 隐藏追踪。
 
-
 ```javascript
 module.exports = {
   //...
   stats: {
-    loggingTrace: false
-  }
+    loggingTrace: false,
+  },
 };
 ```
 
@@ -705,8 +737,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    modules: false
-  }
+    modules: false,
+  },
 };
 ```
 
@@ -720,8 +752,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    modulesSort: 'size'
-  }
+    modulesSort: 'size',
+  },
 };
 ```
 
@@ -735,8 +767,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    moduleTrace: false
-  }
+    moduleTrace: false,
+  },
 };
 ```
 
@@ -750,8 +782,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    outputPath: false
-  }
+    outputPath: false,
+  },
 };
 ```
 
@@ -765,8 +797,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    performance: false
-  }
+    performance: false,
+  },
 };
 ```
 
@@ -780,8 +812,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    preset: 'minimal'
-  }
+    preset: 'minimal',
+  },
 };
 ```
 
@@ -797,8 +829,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    providedExports: true
-  }
+    providedExports: true,
+  },
 };
 ```
 
@@ -812,8 +844,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    errorsCount: false
-  }
+    errorsCount: false,
+  },
 };
 ```
 
@@ -827,8 +859,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    warningsCount: false
-  }
+    warningsCount: false,
+  },
 };
 ```
 
@@ -842,8 +874,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    publicPath: false
-  }
+    publicPath: false,
+  },
 };
 ```
 
@@ -857,8 +889,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    reasons: false
-  }
+    reasons: false,
+  },
 };
 ```
 
@@ -872,8 +904,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    relatedAssets: true
-  }
+    relatedAssets: true,
+  },
 };
 ```
 
@@ -887,8 +919,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    source: true
-  }
+    source: true,
+  },
 };
 ```
 
@@ -902,8 +934,23 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    timings: false
-  }
+    timings: false,
+  },
+};
+```
+
+### `stats.ids`
+
+`boolean = false`
+
+Tells `stats` to add IDs of modules and chunks.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    ids: true,
+  },
 };
 ```
 
@@ -917,8 +964,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    usedExports: true
-  }
+    usedExports: true,
+  },
 };
 ```
 
@@ -932,8 +979,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    version: false
-  }
+    version: false,
+  },
 };
 ```
 
@@ -947,8 +994,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    chunkGroupAuxiliary: false
-  }
+    chunkGroupAuxiliary: false,
+  },
 };
 ```
 
@@ -962,8 +1009,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    chunkGroupChildren: false
-  }
+    chunkGroupChildren: false,
+  },
 };
 ```
 
@@ -977,8 +1024,8 @@ chunk 组中的 asset 数上限。
 module.exports = {
   //...
   stats: {
-    chunkGroupMaxAssets: 5
-  }
+    chunkGroupMaxAssets: 5,
+  },
 };
 ```
 
@@ -992,8 +1039,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    warnings: false
-  }
+    warnings: false,
+  },
 };
 ```
 
@@ -1007,17 +1054,17 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-    warningsFilter: [
-      'filter',
-      /filter/,
-      (warning) => true
-    ]
-  }
+    warningsFilter: ['filter', /filter/, (warning) => true],
+  },
 };
 ```
 
+<<<<<<< HEAD
 
 W> `stats.warningsFilter` 已被弃用，请改用 [`ignoreWarnings`](/configuration/other-options/#ignorewarnings)。
+=======
+W> `stats.warningsFilter` is deprecated in favor of [`ignoreWarnings`](/configuration/other-options/#ignorewarnings).
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ### `stats.chunkRelations` {#statschunkrelations}
 
@@ -1053,7 +1100,7 @@ W> `stats.warningsFilter` 已被弃用，请改用 [`ignoreWarnings`](/configura
 
 如果你想使用其中一个预定义的行为，例如 `'minimal'`，但仍想重载一个或更多的规则：请指定想要设置的 `stats.preset` 同时在后面添加自定义或额外的规则。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -1061,7 +1108,7 @@ module.exports = {
   stats: {
     preset: 'minimal',
     moduleTrace: true,
-    errorDetails: true
-  }
+    errorDetails: true,
+  },
 };
 ```

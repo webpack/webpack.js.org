@@ -16,8 +16,12 @@ contributors:
 在继续阅读之前，请确保你已经读过
  [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve) 和 [`tapable`](/api/plugins/#tapable) 文档。
 
+<<<<<<< HEAD
 
 ## 类型 {#types}
+=======
+## Types
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 在 `compiler` 类中，提供了三种类型的内置解析器：
 
@@ -28,21 +32,27 @@ contributors:
 根据需要，任一个被使用在 `compiler` 中的内置解析器，
 可以通过插件进行定制：
 
-``` js
-compiler.resolverFactory.hooks.resolver.for('[type]').tap('name', resolver => {
-  // you can tap into resolver.hooks now
-  resolver.hooks.result.tap('MyPlugin', result => {
-    return result;
+```js
+compiler.resolverFactory.hooks.resolver
+  .for('[type]')
+  .tap('name', (resolver) => {
+    // you can tap into resolver.hooks now
+    resolver.hooks.result.tap('MyPlugin', (result) => {
+      return result;
+    });
   });
-});
 ```
 
 其中，`[type]` 是上述三个解析器之一。
 
 请参阅 [`enhanced-resolve` documentation](https://github.com/webpack/enhanced-resolve) 以获得钩子的完整列表以及它们的介绍。
 
+<<<<<<< HEAD
 
 ## 配置选项 {#configuration-options}
+=======
+## Configuration Options
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 上述解析器也可以
 利用 [`resolve`](/configuration/resolve/) or [`resolveLoader`](/configuration/resolve/#resolveloader) 选项，通过配置文件进行定制。这些选项允许

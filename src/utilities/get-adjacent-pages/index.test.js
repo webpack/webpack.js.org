@@ -17,7 +17,7 @@ describe('getAdjacentPages', () => {
     const pages = [
       { url: '/previous-webpack' },
       needle,
-      { url: '/next-webpack' }
+      { url: '/next-webpack' },
     ];
     const { previous, next } = getAdjacentPages(pages, needle, 'url');
     expect(next).toEqual({ url: '/next-webpack' });

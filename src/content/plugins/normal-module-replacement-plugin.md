@@ -9,15 +9,16 @@ The `NormalModuleReplacementPlugin` allows you to replace resources that match `
 
 This can be useful for allowing different behaviour between builds.
 
-``` js
-new webpack.NormalModuleReplacementPlugin(
-  resourceRegExp,
-  newResource
-);
+```js
+new webpack.NormalModuleReplacementPlugin(resourceRegExp, newResource);
 ```
 
+<<<<<<< HEAD
 
 ## Basic Example {#basic-example}
+=======
+## Basic Example
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Replace a specific module when building for a [development environment](/guides/production).
 
@@ -25,55 +26,64 @@ Say you have a configuration file `some/path/config.development.module.js` and a
 
 Just add the following plugin when building for production:
 
-``` javascript
+```javascript
 new webpack.NormalModuleReplacementPlugin(
   /some\/path\/config\.development\.js/,
   './config.production.js'
 );
 ```
 
+<<<<<<< HEAD
 
 ## Advanced Example {#advanced-example}
+=======
+## Advanced Example
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Conditional build depending on an [specified environment](/configuration/configuration-types).
 
 Say you want a configuration with specific values for different build targets.
 
-``` javascript
-module.exports = function(env) {
+```javascript
+module.exports = function (env) {
   var appTarget = env.APP_TARGET || 'VERSION_A';
   return {
     plugins: [
-      new webpack.NormalModuleReplacementPlugin(/(.*)-APP_TARGET(\.*)/, function(resource) {
-        resource.request = resource.request.replace(/-APP_TARGET/, `-${appTarget}`);
-      })
-    ]
+      new webpack.NormalModuleReplacementPlugin(
+        /(.*)-APP_TARGET(\.*)/,
+        function (resource) {
+          resource.request = resource.request.replace(
+            /-APP_TARGET/,
+            `-${appTarget}`
+          );
+        }
+      ),
+    ],
   };
-
 };
 ```
 
 Create the two configuration files:
 
-__app/config-VERSION_A.js__
+**app/config-VERSION_A.js**
 
-``` javascript
+```javascript
 export default {
-  title : 'I am version A'
+  title: 'I am version A',
 };
 ```
 
-__app/config-VERSION_B.js__
+**app/config-VERSION_B.js**
 
-``` javascript
+```javascript
 export default {
-  title : 'I am version B'
+  title: 'I am version B',
 };
 ```
 
 Then import that configuration using the keyword you're looking for in the regexp:
 
-``` javascript
+```javascript
 import config from 'app/config-APP_TARGET';
 console.log(config.title);
 ```

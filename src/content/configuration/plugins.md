@@ -16,15 +16,19 @@ contributors:
 T> 注意：本页面仅讨论使用插件，如果你有兴趣编写自己的插件，
 请访问 [编写一个插件](/contribute/writing-a-plugin/) 页面。
 
+<<<<<<< HEAD
 
 ## `plugins` {#plugins}
+=======
+## `plugins`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 [`[Plugin]`](/plugins/)
 
 一组 webpack 插件。例如，[`DefinePlugin`](/plugins/define-plugin/) 允许你创建可在编译时配置的全局常量。这对需要再开发环境构建和生产环境构建之间产生不同行为来说非常有用。
 An array of webpack plugins. For example, [`DefinePlugin`](/plugins/define-plugin/) allows you to create global constants which can be configured at compile time. This can be useful for allowing different behavior between development builds and release builds.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -32,14 +36,14 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       // Definitions...
-    })
-  ]
+    }),
+  ],
 };
 ```
 
 一个复杂示例，使用多个插件，可能看起来就像这样：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 var webpack = require('webpack');
@@ -58,6 +62,6 @@ module.exports = {
    // webpack-dev-server 强化插件
     new DashboardPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-  ]
+  ],
 };
 ```

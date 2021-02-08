@@ -19,8 +19,12 @@ new webpack.BannerPlugin(banner);
 new webpack.BannerPlugin(options);
 ```
 
+<<<<<<< HEAD
 
 ## Options {#options}
+=======
+## Options
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 <!-- eslint-skip -->
 
@@ -37,23 +41,28 @@ new webpack.BannerPlugin(options);
 
 ## Usage {#usage}
 
-
 ```javascript
 import webpack from 'webpack';
 
 // string
 new webpack.BannerPlugin({
-  banner: 'hello world'
+  banner: 'hello world',
 });
 
 // function
 new webpack.BannerPlugin({
-  banner: (yourVariable) => { return `yourVariable: ${yourVariable}`; }
+  banner: (yourVariable) => {
+    return `yourVariable: ${yourVariable}`;
+  },
 });
 ```
 
+<<<<<<< HEAD
 
 ## Placeholders {#placeholders}
+=======
+## Placeholders
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Since webpack 2.5.0, placeholders are evaluated in the `banner` string:
 
@@ -61,6 +70,7 @@ Since webpack 2.5.0, placeholders are evaluated in the `banner` string:
 import webpack from 'webpack';
 
 new webpack.BannerPlugin({
-  banner: 'fullhash:[fullhash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]'
+  banner:
+    'fullhash:[fullhash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]',
 });
 ```

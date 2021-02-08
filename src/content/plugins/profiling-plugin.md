@@ -16,15 +16,15 @@ Generate Chrome profile file which includes timings of plugins execution. Output
 
 ## Usage: default {#usage-default}
 
-``` js
+```js
 new webpack.debug.ProfilingPlugin();
 ```
 
 ## Usage: custom `outputPath` {#usage-custom-outputpath}
 
-``` js
+```js
 new webpack.debug.ProfilingPlugin({
-  outputPath: path.join(__dirname, 'profiling/profileEvents.json')
+  outputPath: path.join(__dirname, 'profiling/profileEvents.json'),
 });
 ```
 

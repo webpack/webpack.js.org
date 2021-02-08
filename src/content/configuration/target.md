@@ -22,12 +22,17 @@ webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `
 
 告知 webpack 为目标(target)指定一个环境。默认值为 `"browserslist"`，如果没有找到 browserslist 的配置，则默认为 `"web"`
 
+<<<<<<< HEAD
 
 ### `string` {#string}
+=======
+### `string`
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 通过 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js)，
 可以支持以下字符串值：
 
+<<<<<<< HEAD
 选项                | 描述
 --------------------- | -----------------------
 `async-node`          | 编译为类 Node.js 环境可用（使用 fs 和 vm 异步加载分块）
@@ -45,17 +50,32 @@ webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `
 `webworker`           | 编译成一个 WebWorker
 `esX`                 | 编译为指定版本的 ECMAScript。例如，es5，es2020
 `browserslist`        | 从 browserslist-config 中推断出平台和 ES 特性 __（如果 browserslist 可用，其值则为默认）__
+=======
+| Option                     | Description                                                                                                                                                                                                                                                                                          |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `async-node[[X].Y]`        | Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)                                                                                                                                                                                                   |
+| `electron[[X].Y]-main`     | Compile for [Electron](https://electronjs.org/) for main process.                                                                                                                                                                                                                                    |
+| `electron[[X].Y]-renderer` | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.                                       |
+| `electron[[X].Y]-preload`  | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `NodeTemplatePlugin` with `asyncChunkLoading` set to `true`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules. |
+| `node[[X].Y]`              | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)                                                                                                                                                                                                              |
+| `node-webkit[[X].Y]`       | Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)                                                                                                                             |
+| `nwjs[[X].Y]`              | The same as `node-webkit`                                                                                                                                                                                                                                                                            |
+| `web`                      | Compile for usage in a browser-like environment **(default)**                                                                                                                                                                                                                                        |
+| `webworker`                | Compile as WebWorker                                                                                                                                                                                                                                                                                 |
+| `esX`                      | Compile for specified ECMAScript version. Examples: es5, es2020.                                                                                                                                                                                                                                     |
+| `browserslist`             | Infer a platform and the ES-features from a browserslist-config **(default if browserslist config is available)**                                                                                                                                                                                    |
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 例如，当 `target` 设置为 `"electron-main"`，webpack 引入多个 electron 特定的变量。
 
 可指定 `node` 或者 `electron` 的版本。上表中使用 `[[X].Y]` 表示。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   // ...
-  target: 'node12.18'
+  target: 'node12.18',
 };
 ```
 
@@ -80,12 +100,12 @@ module.exports = {
 
 当传递多个目标时，将使用共同的特性子集：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   // ...
-  target: ['web', 'es5']
+  target: ['web', 'es5'],
 };
 ```
 
@@ -93,12 +113,12 @@ webpack 将生成 web 平台的运行时代码，并且只使用 ES5 相关的�
 
 目前并不是所有的 target 都可以进行混合。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   // ...
-  target: ['web', 'node']
+  target: ['web', 'node'],
 };
 ```
 
@@ -108,18 +128,18 @@ module.exports = {
 
 如果上述列表中的预设 target 都不符合你的需求，你可以将 `target` 设置为 `false`，这将告诉 webpack 不使用任何插件。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   // ...
-  target: false
+  target: false,
 };
 ```
 
 或者可以使用你想要指定的插件
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 const webpack = require('webpack');
@@ -129,8 +149,8 @@ module.exports = {
   target: false,
   plugins: [
     new webpack.JsonpTemplatePlugin(options.output),
-    new webpack.LoaderTargetPlugin('web')
-  ]
+    new webpack.LoaderTargetPlugin('web'),
+  ],
 };
 ```
 

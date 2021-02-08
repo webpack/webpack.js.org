@@ -15,8 +15,12 @@ contributors:
 
 除了导出单个配置外，还有一些能满足更多需求的使用方式。
 
+<<<<<<< HEAD
 
 ## 导出函数 {#exporting-a-function}
+=======
+## Exporting a Function
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 你可能会遇到需要区分[开发](/guides/development)环境和[生产](/guides/production)环境的情况。你（至少）有两种选择：
 
@@ -42,8 +46,12 @@ contributors:
 };
 ```
 
+<<<<<<< HEAD
 
 ## 导出 Promise {#exporting-a-promise}
+=======
+## Exporting a Promise
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 当需要异步加载配置变量时，webpack 将执行函数并导出一个配置文件，同时返回一个 Promise。
 
@@ -64,29 +72,40 @@ module.exports = () => {
 
 W> 只有通过 webpack 命令行工具返回的 `Promise` 才生效。[`webpack()`](/api/node/#webpack) 只接受对象。
 
+<<<<<<< HEAD
 
 ## 导出多种配置 {#exporting-multiple-configurations}
+=======
+## Exporting multiple configurations
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 除了导出单个配置对象/函数，你可能也会需要导出多种配置（webpack 3.1.0 起支持）。当运行 webpack 时，所有配置项都会构建。比如，对于多 [targets](/configuration/output/#outputlibrarytarget)（如 AMD 和 CommonJS）[构建 library](/guides/author-libraries) 时会非常有用。
 
 ```js
-module.exports = [{
-  output: {
-    filename: './dist-amd.js',
-    libraryTarget: 'amd'
+module.exports = [
+  {
+    output: {
+      filename: './dist-amd.js',
+      libraryTarget: 'amd',
+    },
+    name: 'amd',
+    entry: './app.js',
+    mode: 'production',
   },
-  name: 'amd',
-  entry: './app.js',
-  mode: 'production',
-}, {
-  output: {
-    filename: './dist-commonjs.js',
-    libraryTarget: 'commonjs'
+  {
+    output: {
+      filename: './dist-commonjs.js',
+      libraryTarget: 'commonjs',
+    },
+    name: 'commonjs',
+    entry: './app.js',
+    mode: 'production',
   },
-  name: 'commonjs',
-  entry: './app.js',
-  mode: 'production',
-}];
+];
 ```
 
+<<<<<<< HEAD
 T> 如果你只传了一个 [`--config-name`](/api/cli/#configuration-options) 名字标识，webpack 将只会构建指定的配置项。
+=======
+T> If you pass a name to [`--config-name`](/api/cli/#config-name) flag, webpack will only build that specific configuration.
+>>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
