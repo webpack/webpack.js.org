@@ -30,22 +30,12 @@ compiler.hooks.normalModuleFactory.tap('MyPlugin', (factory) => {
 和 `compiler` 用法相同，取决于不同的钩子类型，
 也可以在某些钩子上访问 `tapAsync` 和 `tapPromise`。
 
-<<<<<<< HEAD
-
 ## 钩子 {#hooks}
-=======
-## Hooks
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 以下生命周期钩子函数，是由 `parser` 暴露，可以通过
 如下方式访问：
 
-<<<<<<< HEAD
-
 ### evaluateTypeof {#evaluatetypeof}
-=======
-### evaluateTypeof
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -76,12 +66,7 @@ const myIdentifier = 0;
 const b = typeof myIdentifier;
 ```
 
-<<<<<<< HEAD
-
 ### evaluate {#evaluate}
-=======
-### evaluate
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -130,12 +115,7 @@ Where the expressions types are:
 - `'UnaryExpression'`
 - `'UpdateExpression'`
 
-<<<<<<< HEAD
-
 ### evaluateIdentifier {#evaluateidentifier}
-=======
-### evaluateIdentifier
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -144,12 +124,7 @@ Called when evaluating an identifier that is a free variable.
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
 
-<<<<<<< HEAD
-
 ### evaluateDefinedIdentifier {#evaluatedefinedidentifier}
-=======
-### evaluateDefinedIdentifier
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -158,12 +133,7 @@ Called when evaluating an identifier that is a defined variable.
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
 
-<<<<<<< HEAD
-
 ### evaluateCallExpressionMember {#evaluatecallexpressionmember}
-=======
-### evaluateCallExpressionMember
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -191,12 +161,7 @@ parser.hooks.evaluateCallExpressionMember
   });
 ```
 
-<<<<<<< HEAD
-
 ### statement {#statement}
-=======
-### statement
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -234,12 +199,7 @@ Where the `statement.type` could be:
 - `'LabeledStatement'`
 - `'WithStatement'`
 
-<<<<<<< HEAD
-
 ### statementIf {#statementif}
-=======
-### statementIf
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -247,12 +207,7 @@ Called when parsing an if statement. Same as the `statement` hook, but triggered
 
 - Callback Parameters: `statement`
 
-<<<<<<< HEAD
-
 ### label {#label}
-=======
-### label
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -261,12 +216,7 @@ Called when parsing statements with a [label](https://developer.mozilla.org/en-U
 - Hook Parameters: `labelName`
 - Callback Parameters: `statement`
 
-<<<<<<< HEAD
-
 ### import {#import}
-=======
-### import
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -290,12 +240,7 @@ parser.hooks.import.tap('MyPlugin', (statement, source) => {
 });
 ```
 
-<<<<<<< HEAD
-
 ### importSpecifier {#importspecifier}
-=======
-### importSpecifier
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -331,12 +276,7 @@ parser.hooks.importSpecifier.tap(
 );
 ```
 
-<<<<<<< HEAD
-
 ### export {#export}
-=======
-### export
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -344,12 +284,7 @@ Called for every `export` statement in a code fragment.
 
 - Callback Parameters: `statement`
 
-<<<<<<< HEAD
-
 ### exportImport {#exportimport}
-=======
-### exportImport
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -357,12 +292,7 @@ Called for every `export`-import statement eg: `export * from 'otherModule';`.
 
 - Callback Parameters: `statement` `source`
 
-<<<<<<< HEAD
-
 ### exportDeclaration {#exportdeclaration}
-=======
-### exportDeclaration
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -378,12 +308,7 @@ export function FunctionName() {}
 export class ClassName {}
 ```
 
-<<<<<<< HEAD
-
 ### exportExpression {#exportexpression}
-=======
-### exportExpression
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -391,12 +316,7 @@ Called for every `export` statement exporting an expression e.g.`export default 
 
 - Callback Parameters: `statement` `declaration`
 
-<<<<<<< HEAD
-
 ### exportSpecifier {#exportspecifier}
-=======
-### exportSpecifier
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -404,12 +324,7 @@ Called for every specifier of every `export` statement.
 
 - Callback Parameters: `statement` `identifierName` `exportName` `index`
 
-<<<<<<< HEAD
-
 ### exportImportSpecifier {#exportimportspecifier}
-=======
-### exportImportSpecifier
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -417,12 +332,7 @@ Called for every specifier of every `export`-import statement.
 
 - Callback Parameters: `statement` `source` `identifierName` `exportName` `index`
 
-<<<<<<< HEAD
-
 ### varDeclaration {#vardeclaration}
-=======
-### varDeclaration
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -430,12 +340,7 @@ Called when parsing a variable declaration.
 
 - Callback Parameters: `declaration`
 
-<<<<<<< HEAD
-
 ### varDeclarationLet {#vardeclarationlet}
-=======
-### varDeclarationLet
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -443,12 +348,7 @@ Called when parsing a variable declaration defined using `let`
 
 - Callback Parameters: `declaration`
 
-<<<<<<< HEAD
-
 ### varDeclarationConst {#vardeclarationconst}
-=======
-### varDeclarationConst
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -456,12 +356,7 @@ Called when parsing a variable declaration defined using `const`
 
 - Callback Parameters: `declaration`
 
-<<<<<<< HEAD
-
 ### varDeclarationVar {#vardeclarationvar}
-=======
-### varDeclarationVar
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -469,12 +364,7 @@ Called when parsing a variable declaration defined using `var`
 
 - Callback Parameters: `declaration`
 
-<<<<<<< HEAD
-
 ### canRename {#canrename}
-=======
-### canRename
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -492,12 +382,7 @@ parser.hooks.canRename.for('b').tap('MyPlugin', (expression) => {
 });
 ```
 
-<<<<<<< HEAD
-
 ### rename {#rename}
-=======
-### rename
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -512,12 +397,7 @@ var a = b;
 parser.hooks.rename.for('b').tap('MyPlugin', (expression) => {});
 ```
 
-<<<<<<< HEAD
-
 ### assigned {#assigned}
-=======
-### assigned
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -534,12 +414,7 @@ parser.hooks.assigned.for('a').tap('MyPlugin', (expression) => {
 });
 ```
 
-<<<<<<< HEAD
-
 ### assign {#assign}
-=======
-### assign
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -556,12 +431,7 @@ parser.hooks.assigned.for('a').tap('MyPlugin', (expression) => {
 });
 ```
 
-<<<<<<< HEAD
-
 ### typeof {#typeof}
-=======
-### typeof
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -570,12 +440,7 @@ Triggered when parsing the `typeof` of an identifier
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
 
-<<<<<<< HEAD
-
 ### call {#call}
-=======
-### call
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -590,12 +455,7 @@ eval(/* something */);
 parser.hooks.call.for('eval').tap('MyPlugin', (expression) => {});
 ```
 
-<<<<<<< HEAD
-
 ### callMemberChain {#callmemberchain}
-=======
-### callMemberChain
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -612,12 +472,7 @@ parser.hooks.callMemberChain
   .tap('MyPlugin', (expression, properties) => {});
 ```
 
-<<<<<<< HEAD
-
 ### new {#new}
-=======
-### new
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -632,12 +487,7 @@ new MyClass();
 parser.hooks.new.for('MyClass').tap('MyPlugin', (expression) => {});
 ```
 
-<<<<<<< HEAD
-
 ### expression {#expression}
-=======
-### expression
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 
@@ -660,12 +510,7 @@ Called when parsing a `ConditionalExpression` e.g. `condition ? a : b`
 
 - Callback Parameters: `expression`
 
-<<<<<<< HEAD
-
 ### program {#program}
-=======
-### program
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `SyncBailHook`
 

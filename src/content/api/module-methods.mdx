@@ -24,34 +24,19 @@ related:
 
 尽管 webpack 支持多种模块语法，但我们还是建议尽量使用一致的语法，以此避免一些奇怪的行为和 bug。事实上，当距离最近的 `package.json` 文件中包含值为 `"module"` 或 `"commonjs"` 的 `"type"` 字段时，webpack 会启用语法一致性检查。请大家在阅读前，注意此情况：
 
-<<<<<<< HEAD:src/content/api/module-methods.md
 - 在 `package.json` 中为 `.mjs` 或 `.js` 设置 `"type": "module"`
-    - 不允许使用 CommonJS，例如，你不能使用 `require`，`module.exports` 或 `exports`
-    - 当引入文件时，强制编写扩展名，例如，你应使用 `import './src/App.mjs'`，而非 `import './src/App'`（你可以通过设置 [`Rule.resolve.fullySpecified`](/configuration/module/#resolvefullyspecified) 来禁用此规则)
+  - 不允许使用 CommonJS，例如，你不能使用 `require`，`module.exports` 或 `exports`
+  - 当引入文件时，强制编写扩展名，例如，你应使用 `import './src/App.mjs'`，而非 `import './src/App'`（你可以通过设置 [`Rule.resolve.fullySpecified`](/configuration/module/#resolvefullyspecified) 来禁用此规则)
 - 在 `package.json` 中为 `.cjs` 或 `.js` 设置 `"type": "commonjs"`
-    - `import` 和 `export` 均不可用
+  - `import` 和 `export` 均不可用
 - 在 `package.json` 中为 `.wasm` 设置 `"type": "module"`
-    - 引入 wasm 文件时，必须编写文件扩展名
-=======
-- `.mjs` or `.js` with `"type": "module"` in `package.json`
-  - No CommonJS allowed, for example, you can't use `require`, `module.exports` or `exports`
-  - File extensions are required when importing, e.g, you should use `import './src/App.mjs'` instead of `import './src/App'` (you can disable this enforcement with [`Rule.resolve.fullySpecified`](/configuration/module/#resolvefullyspecified))
-- `.cjs` or `.js` with `"type": "commonjs"` in `package.json`
-  - Neither `import` nor `export` is available
-- `.wasm` with `"type": "module"` in `package.json`
-  - File extensions are required when importing wasm file
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
+  - 引入 wasm 文件时，必须编写文件扩展名
 
 ## ES6 (推荐) {#es6-recommended}
 
 webpack 2 支持原生的 ES6 模块语法，意味着你无须额外引入 babel 这样的工具，就可以使用 `import` 和 `export`。但是注意，如果使用其他的 ES6+ 特性，仍然需要引入 babel。webpack 支持以下的方法：
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ### `import` {#import}
-=======
-### `import`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 通过 `import` 以静态的方式导入另一个通过 `export` 导出的模块。
 
@@ -60,11 +45,7 @@ import MyModule from './my-module.js';
 import { NamedExport } from './other-module.js';
 ```
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-W> 这里的关键词是__静态的__。标准的 `import` 语句中，模块语句中不能以「具有逻辑或含有变量」的动态方式去引入其他模块。关于 import 的更多信息和 `import()` 动态用法，请查看这里的[说明](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)。
-=======
-W> The keyword here is **statically**. A normal `import` statement cannot be used dynamically within other logic or contain variables. See the [spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) for more information and `import()` below for dynamic usage.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
+W> 这里的关键词是**静态的**。标准的 `import` 语句中，模块语句中不能以「具有逻辑或含有变量」的动态方式去引入其他模块。关于 import 的更多信息和 `import()` 动态用法，请查看这里的[说明](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)。
 
 你也通过 `import` 来引入 Data URI：
 
@@ -80,13 +61,8 @@ import {
 
 `默认`导出整个模块或具名导出模块。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
 ``` javascript
 // 具名导出
-=======
-```javascript
-// Named exports
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 export var Count = 5;
 export function Multiply(a, b) {
   return a * b;
@@ -98,12 +74,7 @@ export default {
 };
 ```
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ### `import()` {#import}
-=======
-### `import()`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 `function(string path):Promise`
 
@@ -121,21 +92,11 @@ if (module.hot) {
 
 W> import() 特性依赖于内置的 [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)。如果想在低版本浏览器中使用 `import()`，记得使用像 [es6-promise](https://github.com/stefanpenner/es6-promise) 或者 [promise-polyfill](https://github.com/taylorhakes/promise-polyfill) 这样 polyfill 库，来预先填充(shim) `Promise` 环境。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ### import() 中的表达式 {#dynamic-expressions-in-import}
-=======
-### Dynamic expressions in import()
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 不能使用完全动态的 import 语句，例如 `import(foo)`。是因为 `foo` 可能是系统或项目中任何文件的任何路径。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
 `import()` 必须至少包含一些关于模块的路径信息。打包可以限定于一个特定的目录或文件集，以便于在使用动态表达式时 - 包括可能在 `import()` 调用中请求的每个模块。例如， ``import(`./locale/${language}.json`)`` 会把 `.locale` 目录中的每个 `.json` 文件打包到新的 chunk 中。在运行时，计算完变量 `language` 后，就可以使用像 `english.json` 或 `german.json` 的任何文件。
-
-=======
-The `import()` must contain at least some information about where the module is located. Bundling can be limited to a specific directory or set of files so that when you are using a dynamic expression - every module that could potentially be requested on an `import()` call is included. For example, `` import(`./locale/${language}.json`) `` will cause every `.json` file in the `./locale` directory to be bundled into the new chunk. At run time, when the variable `language` has been computed, any file like `english.json` or `german.json` will be available for consumption.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 ```javascript
 // 想象我们有一个从 cookies 或其他存储中获取语言的方法
@@ -151,13 +112,8 @@ T> 使用 [`webpackInclude` and `webpackExclude`](/api/module-methods/#magic-com
 
 内联注释使这一特性得以实现。通过在 import 中添加注释，我们可以进行诸如给 chunk 命名或选择不同模式的操作。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
 ``` js
 // 单个目标
-=======
-```js
-// Single target
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 import(
   /* webpackChunkName: "my-chunk-name" */
   /* webpackMode: "lazy" */
@@ -189,17 +145,10 @@ W> 注意：将 `webpackIgnore` 设置为 `true` 则不进行代码分割。
 
 `webpackMode`：从 webpack 2.6.0 开始，可以指定以不同的模式解析动态导入。支持以下选项：
 
-<<<<<<< HEAD:src/content/api/module-methods.md
 - `'lazy'` (默认值)：为每个 `import()` 导入的模块生成一个可延迟加载（lazy-loadable）的 chunk。
 - `'lazy-once'`：生成一个可以满足所有 `import()` 调用的单个可延迟加载（lazy-loadable）的 chunk。此 chunk 将在第一次 `import()` 时调用时获取，随后的 `import()` 则使用相同的网络响应。注意，这种模式仅在部分动态语句中有意义，例如 ``import(`./locales/${language}.json`)``，其中可能含有多个被请求的模块路径。
 - `'eager'`：不会生成额外的 chunk。所有的模块都被当前的 chunk 引入，并且没有额外的网络请求。但是仍会返回一个 resolved 状态的 `Promise`。与静态导入相比，在调用 `import()` 完成之前，该模块不会被执行。
 - `'weak'`：尝试加载模块，如果该模块函数已经以其他方式加载，（即另一个 chunk 导入过此模块，或包含模块的脚本被加载）。仍会返回 `Promise`， 但是只有在客户端上已经有该 chunk 时才会成功解析。如果该模块不可用，则返回 rejected 状态的 `Promise`，且网络请求永远都不会执行。当需要的 chunks 始终在（嵌入在页面中的）初始请求中手动提供，而不是在应用程序导航在最初没有提供的模块导入的情况下触发，这对于通用渲染（SSR）是非常有用的。
-=======
-- `'lazy'` (default): Generates a lazy-loadable chunk for each `import()`ed module.
-- `'lazy-once'`: Generates a single lazy-loadable chunk that can satisfy all calls to `import()`. The chunk will be fetched on the first call to `import()`, and subsequent calls to `import()` will use the same network response. Note that this only makes sense in the case of a partially dynamic statement, e.g. `` import(`./locales/${language}.json`) ``, where multiple module paths that can potentially be requested.
-- `'eager'`: Generates no extra chunk. All modules are included in the current chunk and no additional network requests are made. A `Promise` is still returned but is already resolved. In contrast to a static import, the module isn't executed until the call to `import()` is made.
-- `'weak'`: Tries to load the module if the module function has already been loaded in some other way (e.g. another chunk imported it or a script containing the module was loaded). A `Promise` is still returned, but only successfully resolves if the chunks are already on the client. If the module is not available, the `Promise` is rejected. A network request will never be performed. This is useful for universal rendering when required chunks are always manually served in initial requests (embedded within the page), but not in cases where app navigation will trigger an import not initially served.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 `webpackPrefetch`：告诉浏览器将来可能需要该资源来进行某些导航跳转。查看指南，了解有关更多信息 [how webpackPrefetch works](/guides/code-splitting/#prefetchingpreloading-modules)。
 
@@ -207,35 +156,19 @@ W> 注意：将 `webpackIgnore` 设置为 `true` 则不进行代码分割。
 
 T> 注意：所有选项都可以像这样组合 `/* webpackMode: "lazy-once", webpackChunkName: "all-i18n-data" */`。这会按没有花括号的 JSON5 对象去解析。它会被包裹在 JavaScript 对象中，并使用 [node VM](https://nodejs.org/dist/latest-v8.x/docs/api/vm.html) 执行。所以你不需要添加花括号。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-`webpackInclude`：在导入解析（import resolution）过程中，用于匹配的正则表达式。只有匹配到的模块__才会被打包__。
+`webpackInclude`：在导入解析（import resolution）过程中，用于匹配的正则表达式。只有匹配到的模块**才会被打包**。
 
-`webpackExclude`：在导入解析（import resolution）过程中，用于匹配的正则表达式。所有匹配到的模块__都不会被打包__。
-=======
-`webpackInclude`: A regular expression that will be matched against during import resolution. Only modules that match **will be bundled**.
-
-`webpackExclude`: A regular expression that will be matched against during import resolution. Any module that matches **will not be bundled**.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
+`webpackExclude`：在导入解析（import resolution）过程中，用于匹配的正则表达式。所有匹配到的模块**都不会被打包**。
 
 T> 注意，`webpackInclude` 和 `webpackExclude` 不会影响到前缀，例如 `./locale`。
 
 `webpackExports`: 告知 webpack 只构建指定出口的动态 `import()` 模块。它可以减小 chunk 的大小。从 [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18) 起可用。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ## CommonJS {#commonjs}
-=======
-## CommonJS
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 CommonJS 的目标是为浏览器之外的 JavaScript 指定一个生态系统。webpack 支持以下 CommonJS 的方法：
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ### `require` {#require}
-=======
-### require
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 ```typescript
 require(dependency: String);
@@ -248,13 +181,9 @@ var $ = require('jquery');
 var myModule = require('my-module');
 ```
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-W> 以异步的方式使用，可能不会达到预期效果。
-=======
-It's possible to enable magic comments for `require` as well, see [`module.parser.javascript.commonjsMagicComments`](/configuration/module/#moduleparserjavascriptcommonjsmagiccomments) for more.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
+也可以为 `require` 启用魔法注释，请参阅 [`module.parser.javascript.commonjsMagicComments`](/configuration/module/#moduleparserjavascriptcommonjsmagiccomments) 了解更多。
 
-W> Using it asynchronously may not have the expected effect.
+W> 以异步的方式使用，可能不会达到预期效果。
 
 ### `require.resolve` {#requireresolve}
 
@@ -268,12 +197,7 @@ W> 模块 ID 的类型可以是 `number` 或 `string`，具体取决于 [`optimi
 
 有关更多模块的信息，详见 [`module.id`](/api/module-variables/#moduleid-commonjs)。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ### `require.cache` {#requirecache}
-=======
-### `require.cache`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 多处引用同一模块，最终只会产生一次模块执行和一次导出。所以，会在运行时（runtime）中会保存一份缓存。删除此缓存，则会产生新的模块执行和新的导出。
 
@@ -296,12 +220,7 @@ require('./file.js') !== module.exports; // 理论上是不相等的；实际运
 require.cache[module.id] !== module;
 ```
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ### `require.ensure` {#requireensure}
-=======
-### `require.ensure`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 W> `require.ensure()` 是 webpack 特有的，已被 `import()` 取代。
 
@@ -341,22 +260,11 @@ if (module.hot) {
 
 W> 虽然将 `require` 的实现作为参数（可以使用任意名称）传递给 `callback` 函数，例如，`require.ensure([], function(request) { request('someModule'); })` 则不能被 webpack 静态解析器处理，因此还是使用 `require` 作为参数名，例如，`require.ensure([], function(require) { require('someModule') })`。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
-
 ## AMD {#amd}
-=======
-## AMD
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 AMD（Asynchronous Module Definition）是一种定义了用于编写和加载模块接口的 JavaScript 规范。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ### `define` (通过 factory 方法导出) {#define-with-factory}
-=======
-### `define` (with factory)
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 <!-- eslint-skip -->
 
@@ -368,15 +276,9 @@ define([name: String], [dependencies: String[]], factoryMethod: function(...))
 
 W> 注意：webpack 会忽略 `name` 参数。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
 ``` javascript
-define(['jquery', 'my-module'], function($, myModule) {
-  // 使用 $ 和 myModule 做一些操作...
-=======
-```javascript
 define(['jquery', 'my-module'], function ($, myModule) {
-  // Do something with $ and myModule...
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
+  // 使用 $ 和 myModule 做一些操作...
 
   // 导出一个函数
   return function doSomething() {
@@ -387,12 +289,7 @@ define(['jquery', 'my-module'], function ($, myModule) {
 
 W> 上面的写法不能在异步函数中使用。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ### `define` (通过 value 导出) {#define-with-value}
-=======
-### `define` (with value)
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 <!-- eslint-skip -->
 
@@ -410,12 +307,7 @@ define({
 
 W> 上面的写法不能在异步函数中使用。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ### `require` (AMD 版本) {#require-amd-version}
-=======
-### `require` (amd-version)
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 <!-- eslint-skip -->
 
@@ -435,22 +327,11 @@ require(['b'], function (b) {
 
 W> 这里没有提供命名 bundle 名称的选项。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
-
 ## 标签模块(Labeled Modules) {#labeled-modules}
-=======
-## Labeled Modules
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 webpack 内置的 `LabeledModulesPlugin` 插件，允许你使用下面的方法导出和导入模块：
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ### `export` 标签 {#export-label}
-=======
-### `export` label
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 导出给定的 `value`。标签可以出现在函数声明或变量声明之前。函数名或变量名是导出值的标识符。
 
@@ -465,12 +346,7 @@ export: function method(value) {
 
 W> 在异步函数中使用，可能不会达到预期的效果。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ### `require` 标签 {#require-label}
-=======
-### `require` label
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 在当前作用域下，依赖项的所有导出均可用。`require` 标签可以放置在一个字符串之前。依赖模块必须使用 `export` 标签导出值。CommonJS 或 AMD 模块无法通过这种方式使用。
 
@@ -493,40 +369,21 @@ console.log(answer);
 method(...);
 ```
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
-
 ## Webpack {#webpack}
-=======
-## Webpack
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 除了上述模块语法之外，还允许使用一些 webpack 特定的方法：
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ### `require.context` {#requirecontext}
-=======
-### `require.context`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 <!-- eslint-skip -->
 
 ```js
 require.context(
-<<<<<<< HEAD:src/content/api/module-methods.md
-  directory: String,
-  includeSubdirs: Boolean /* 可选的，默认值是 true */,
-  filter: RegExp /* 可选的，默认值是 /^\.\/.*$/，所有文件 */,
-  mode: String  /* 可选的， 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once'，默认值是 'sync' */
-)
-=======
   (directory: String),
-  (includeSubdirs: Boolean) /* optional, default true */,
-  (filter: RegExp) /* optional, default /^\.\/.*$/, any file */,
-  (mode: String) /* optional, 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once', default 'sync' */
-);
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
+  (includeSubdirs: Boolean) /* 可选的，默认值是 true */,
+  (filter: RegExp) /* 可选的，默认值是 /^\.\/.*$/，所有文件 */,
+  (mode: String)  /* 可选的， 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once'，默认值是 'sync' */
+)
 ```
 
 指定一系列依赖项，通过使用 `directory` 的路径，以及 `includeSubdirs` ，`filter` 选项，进行更细粒度的模块引入，使用 `mode` 定义加载方式。以此可以很容易的解析模块：
@@ -575,30 +432,16 @@ require.ensure(['a', 'c'], function (require) {
 
 不使用 `require.include('a')`，输出的两个匿名 chunk 都会有模块 a。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
-
 ### `require.resolveWeak` {#requireresolveweak}
-=======
-### `require.resolveWeak`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
 
 与 `require.resolve` 类似，但是不会把 `module` 引入到 bundle 中。这就是所谓的“弱（weak）”依赖。
 
-<<<<<<< HEAD:src/content/api/module-methods.md
 ``` javascript
-if(__webpack_modules__[require.resolveWeak('module')]) {
+if (__webpack_modules__[require.resolveWeak('module')]) {
   // 当模块可用时，执行一些操作……
 }
-if(require.cache[require.resolveWeak('module')]) {
-  // 在模块加载完成之前，执行一些操作……
-=======
-```javascript
-if (__webpack_modules__[require.resolveWeak('module')]) {
-  // Do something when module is available...
-}
 if (require.cache[require.resolveWeak('module')]) {
-  // Do something when module was loaded before...
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/api/module-methods.mdx
+  // 在模块加载完成之前，执行一些操作……
 }
 
 // 你可以像执行其他 require/import 方法一样，

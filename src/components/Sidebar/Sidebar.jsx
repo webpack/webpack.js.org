@@ -14,13 +14,8 @@ const docs = [
   },
   {
     version: 4,
-<<<<<<< HEAD
     url: 'https://v4.webpack.docschina.org',
   }
-=======
-    url: 'https://v4.webpack.js.org',
-  },
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 ];
 
 const currentDocsVersion = 5;

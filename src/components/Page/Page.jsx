@@ -46,19 +46,6 @@ class Page extends Component {
 
     if (content instanceof Promise) {
       content
-<<<<<<< HEAD
-        .then(module =>
-          this.setState({
-            content: module.default || module,
-            contentLoaded: true
-          }, () => {
-            const hash = window.location.hash;
-            if (hash) {
-              const newHash = decodeURIComponent(hash);
-              const element = document.querySelector(newHash);
-              if (element) {
-                element.scrollIntoView();
-=======
         .then((module) =>
           this.setState(
             {
@@ -68,13 +55,13 @@ class Page extends Component {
             () => {
               const hash = window.location.hash;
               if (hash) {
-                const element = document.querySelector(hash);
+                const newHash = decodeURIComponent(hash);
+                const element = document.querySelector(newHash);
                 if (element) {
                   element.scrollIntoView();
                 }
               } else {
                 window.scrollTo(0, 0);
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
               }
             }
           )

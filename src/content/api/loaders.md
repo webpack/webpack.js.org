@@ -20,12 +20,7 @@ loader 本质上是导出为函数的 JavaScript 模块。[loader runner](https:
 
 起始 loader 只有一个入参：资源文件的内容。compiler 预期得到最后一个 loader 产生的处理结果。这个处理结果应该为 `String` 或者 `Buffer`（能够被转换为 string）类型，代表了模块的 JavaScript 源码。另外，还可以传递一个可选的 SourceMap 结果（格式为 JSON 对象）。
 
-<<<<<<< HEAD
-如果是单个处理结果，可以在 __同步模式__ 中直接返回。如果有多个处理结果，则必须调用 `this.callback()`。在 __异步模式__ 中，必须调用 `this.async()` 来告知 [loader runner](https://github.com/webpack/loader-runner) 等待异步结果，它会返回 `this.callback()` 回调函数。随后 loader 必须返回 `undefined` 并且调用该回调函数。
-
-=======
-A single result can be returned in **sync mode**. For multiple results the `this.callback()` must be called. In **async mode** `this.async()` must be called to indicate that the [loader runner](https://github.com/webpack/loader-runner) should wait for an asynchronous result. It returns `this.callback()`. Then the loader must return `undefined` and call that callback.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+如果是单个处理结果，可以在 **同步模式** 中直接返回。如果有多个处理结果，则必须调用 `this.callback()`。在 **异步模式** 中，必须调用 `this.async()` 来告知 [loader runner](https://github.com/webpack/loader-runner) 等待异步结果，它会返回 `this.callback()` 回调函数。随后 loader 必须返回 `undefined` 并且调用该回调函数。
 
 ## 示例 {#examples}
 
@@ -84,12 +79,7 @@ module.exports = function (content, map, meta) {
 
 T> loader 最初被设计为可以在同步 loader pipelines（如 Node.js ，使用 [enhanced-require](https://github.com/webpack/enhanced-require))，_以及_ 在异步 pipelines（如 webpack）中运行。然而，由于同步计算过于耗时，在 Node.js 这样的单线程环境下进行此操作并不是好的方案，我们建议尽可能地使你的 loader 异步化。但如果计算量很小，同步 loader 也是可以的。
 
-<<<<<<< HEAD
-
 ### "Raw" Loader {#raw-loader}
-=======
-### "Raw" Loader
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 默认情况下，资源文件会被转化为 UTF-8 字符串，然后传给 loader。通过设置 `raw` 为 `true`，loader 可以接收原始的 `Buffer`。每一个 loader 都可以用 `String` 或者 `Buffer` 的形式传递它的处理结果。complier 将会把它们在 loader 之间相互转换。
 
@@ -105,16 +95,9 @@ module.exports = function (content) {
 module.exports.raw = true;
 ```
 
-<<<<<<< HEAD
-
 ### Pitching Loader {#pitching-loader}
 
-loader __总是__ 从右到左被调用。有些情况下，loader 只关心 request 后面的 __元数据(metadata)__，并且忽略前一个 loader 的结果。在实际（从右到左）执行 loader 之前，会先 __从左到右__ 调用 loader 上的 `pitch` 方法。
-=======
-### Pitching Loader
-
-Loaders are **always** called from right to left. There are some instances where the loader only cares about the **metadata** behind a request and can ignore the results of the previous loader. The `pitch` method on loaders is called from **left to right** before the loaders are actually executed (from right to left).
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+loader **总是** 从右到左被调用。有些情况下，loader 只关心 request 后面的 **元数据(metadata)**，并且忽略前一个 loader 的结果。在实际（从右到左）执行 loader 之前，会先 **从左到右** 调用 loader 上的 `pitch` 方法。
 
 T> loader 可以通过 request 添加或者禁用内联前缀，这将影响到 pitch 和执行的顺序。更多详情请查阅 [`Rule.enforce`](/configuration/module/#ruleenforce)。
 
@@ -198,75 +181,38 @@ loader context 表示在 loader 内使用 `this` 可以访问的一些方法或�
 require('./loader1?xyz!loader2!./resource?rrr');
 ```
 
-<<<<<<< HEAD
-
 ### `this.version` {#thisversion}
 
-__loader API 的版本号__ 目前是 `2`。这对于向后兼容性有一些用处。通过这个版本号，你可以自定义逻辑或者降级处理。
-
-=======
-### `this.version`
-
-**Loader API version.** Currently `2`. This is useful for providing backwards compatibility. Using the version you can specify custom logic or fallbacks for breaking changes.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**loader API 的版本号** 目前是 `2`。这对于向后兼容性有一些用处。通过这个版本号，你可以自定义逻辑或者降级处理。
 
 ### `this.context` {#thiscontext}
 
-<<<<<<< HEAD
-__模块所在的目录__ 可以用作解析其他模块成员的上下文。
-=======
-**The directory of the module.** Can be used as a context for resolving other stuff.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**模块所在的目录** 可以用作解析其他模块成员的上下文。
 
 在我们的例子中：因为 `resource.js` 在这个目录中，这个属性的值为 `/abc`
 
-<<<<<<< HEAD
-
 ### `this.rootContext` {#thisrootcontext}
-=======
-### `this.rootContext`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 从 webpack 4 开始，原先的 `this.options.context` 被改为 `this.rootContext`。
 
-<<<<<<< HEAD
-
 ### `this.request` {#thisrequest}
-=======
-### `this.request`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 被解析出来的 request 字符串。
 
 在我们的例子中：`'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
 
-<<<<<<< HEAD
-
 ### `this.query` {#thisquery}
-=======
-### `this.query`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 1. 如果这个 loader 配置了 [`options`](/configuration/module/#useentry) 对象的话，this 就指向这个对象。
 2. 如果 loader 中没有 `options`，而是以 query 字符串作为参数调用时，this.query 就是一个以 `?` 开头的字符串。
 
-<<<<<<< HEAD
-
 ### `this.getOptions(schema)` {#thisgetoptionsschema}
-=======
-### `this.getOptions(schema)`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 提取给定的 loader 选项，接受一个可选的 JSON schema 作为参数
 
 T> 从 webpack 5 开始，`this.getOptions` 可以获取到 loader 上下文对象。它用来替代来自 [loader-utils](https://github.com/webpack/loader-utils#getoptions) 中的 `getOptions` 方法。
 
-<<<<<<< HEAD
-
 ### `this.callback` {#thiscallback}
-=======
-### `this.callback`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 可以同步或者异步调用的并返回多个结果的函数。预期的参数是：
 
@@ -290,30 +236,15 @@ T> 如果希望在 loader 之间共享公共的AST，可以将抽象语法树AST
 
 如果这个函数被调用的话，你应该返回 undefined 从而避免含糊的 loader 结果。
 
-<<<<<<< HEAD
-
 ### `this.async` {#thisasync}
-=======
-### `this.async`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 告诉 [loader-runner](https://github.com/webpack/loader-runner) 这个 loader 将会异步地回调。返回 `this.callback`。
 
-<<<<<<< HEAD
-
 ### `this.data` {#thisdata}
-=======
-### `this.data`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 在 pitch 阶段和 normal 阶段之间共享的 data 对象。
 
-<<<<<<< HEAD
-
 ### `this.cacheable` {#thiscacheable}
-=======
-### `this.cacheable`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 设置是否可缓存标志的函数：
 
@@ -325,12 +256,7 @@ cacheable(flag = true: boolean)
 
 一个可缓存的 loader 在输入和相关依赖没有变化时，必须返回相同的结果。这意味着 loader 除了 `this.addDependency` 里指定的以外，不应该有其它任何外部依赖。
 
-<<<<<<< HEAD
-
 ### `this.loaders` {#thisloaders}
-=======
-### `this.loaders`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 所有 loader 组成的数组。它在 pitch 阶段的时候是可以写入的。
 
@@ -359,87 +285,47 @@ loaders = [{request: string, path: string, query: string, module: function}]
 ];
 ```
 
-<<<<<<< HEAD
-
 ### `this.loaderIndex` {#thisloaderindex}
-=======
-### `this.loaderIndex`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 当前 loader 在 loader 数组中的索引。
 
 在示例中：loader1 中得到：`0`，loader2 中得到：`1`
 
-<<<<<<< HEAD
-
 ### `this.resource` {#thisresource}
-=======
-### `this.resource`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 request 中的资源部分，包括 query 参数。
 
 在示例中：`'/abc/resource.js?rrr'`
 
-<<<<<<< HEAD
-
 ### `this.resourcePath` {#thisresourcepath}
-=======
-### `this.resourcePath`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 资源文件的路径。
 
 在示例中：`'/abc/resource.js'`
 
-<<<<<<< HEAD
-
 ### `this.resourceQuery` {#thisresourcequery}
-=======
-### `this.resourceQuery`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 资源的 query 参数。
 
 在示例中：`'?rrr'`
 
-<<<<<<< HEAD
-
 ### `this.target` {#thistarget}
-=======
-### `this.target`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 compilation 的目标。从配置选项中传递。
 
 示例：'`web'`, `'node'`
 
-<<<<<<< HEAD
-
 ### `this.webpack` {#thiswebpack}
-=======
-### `this.webpack`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 如果是由 webpack 编译的，这个布尔值会被设置为 true。
 
 T> loader 最初被设计为可以同时当 Babel transform 用。如果你编写了一个 loader 可以同时兼容二者，那么可以使用这个属性了解是否存在可用的 loaderContext 和 webpack 特性。
 
-<<<<<<< HEAD
-
 ### `this.sourceMap` {#thissourcemap}
-=======
-### `this.sourceMap`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 是否应该生成一个 source map。因为生成 source map 可能会非常耗时，你应该确认 source map 确实需要。
 
-<<<<<<< HEAD
-
 ### `this.emitWarning` {#thisemitwarning}
-=======
-### `this.emitWarning`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```typescript
 emitWarning(warning: Error)
@@ -473,12 +359,7 @@ Here is an Error!
 
 T> 与抛出错误中断运行不同，它不会中断当前模块的编译过程。
 
-<<<<<<< HEAD
-
 ### `this.loadModule` {#thisloadmodule}
-=======
-### `this.loadModule`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```typescript
 loadModule(request: string, callback: function(err, source, sourceMap, module))
@@ -488,12 +369,7 @@ loadModule(request: string, callback: function(err, source, sourceMap, module))
 
 `this.loadModule` 在 loader 上下文中默认使用 CommonJS 来解析规则。用一个合适的 `dependencyType` 使用 `this.getResolve`。例如，在使用不同的语义之前使用 `'esm'`、`'commonjs'` 或者一个自定义的。
 
-<<<<<<< HEAD
-
 ### `this.resolve` {#thisresolve}
-=======
-### `this.resolve`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```typescript
 resolve(context: string, request: string, callback: function(err, result: string))
@@ -524,12 +400,7 @@ resolve(context: string, request: string): Promise<string>
 
 解析操作的所有依赖项都会自动作为依赖项添加到当前模块中。
 
-<<<<<<< HEAD
-
 ### `this.addDependency` {#thisadddependency}
-=======
-### `this.addDependency`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```typescript
 addDependency(file: string)
@@ -538,12 +409,7 @@ dependency(file: string) // shortcut
 
 加入一个文件作为产生 loader 结果的依赖，使它们的任何变化可以被监听到。例如，[`sass-loader`](https://github.com/webpack-contrib/sass-loader), [`less-loader`](https://github.com/webpack-contrib/less-loader) 就使用了这个技巧，当它发现无论何时导入的 `css` 文件发生变化时就会重新编译。
 
-<<<<<<< HEAD
-
 ### `this.addContextDependency` {#thisaddcontextdependency}
-=======
-### `this.addContextDependency`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```typescript
 addContextDependency(directory: string)
@@ -551,12 +417,7 @@ addContextDependency(directory: string)
 
 添加目录作为 loader 结果的依赖。
 
-<<<<<<< HEAD
-
 ### `this.clearDependencies` {#thiscleardependencies}
-=======
-### `this.clearDependencies`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```typescript
 clearDependencies();
@@ -564,12 +425,7 @@ clearDependencies();
 
 移除 loader 结果的所有依赖，甚至自己和其它 loader 的初始依赖。考虑使用 `pitch`。
 
-<<<<<<< HEAD
-
 ### `this.emitFile` {#thisemitfile}
-=======
-### `this.emitFile`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```typescript
 emitFile(name: string, content: Buffer|string, sourceMap: {...})
@@ -577,12 +433,7 @@ emitFile(name: string, content: Buffer|string, sourceMap: {...})
 
 产生一个文件。这是 webpack 特有的。
 
-<<<<<<< HEAD
-
 ### `this.hot` {#thishot}
-=======
-### `this.hot`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 loaders 的 HMR（热模块替换）相关信息。
 
@@ -597,12 +448,7 @@ module.exports = function (source) {
 
 用于访问 compilation 的 inputFileSystem 属性。
 
-<<<<<<< HEAD
-
 ### `this.mode` {#thismode}
-=======
-### `this.mode`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 当 webpack 运行时读取 [`mode`](/configuration/mode/) 的值
 
@@ -628,67 +474,27 @@ Access to the current Compilation object of webpack.
 
 由于我们计划将这些属性从上下文中移除，因此不鼓励使用这些属性。它们仍然列在这里，以备参考。
 
-<<<<<<< HEAD
-
 ### `this.value` {#thisvalue}
-=======
-### `this.value`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 向下一个 loader 传值。如果你知道了作为模块执行后的结果，请在这里赋值（以元素数组的形式）。
 
-<<<<<<< HEAD
-
 ### `this.inputValue` {#thisinputvalue}
-=======
-### `this.inputValue`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 从上一个 loader 那里传递过来的值。如果你会以模块的方式处理输入参数，建议预先读入这个变量（为了性能因素）。
 
-<<<<<<< HEAD
-
 ### `this.debug` {#thisdebug}
-=======
-### `this.debug`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 一个布尔值，当处于 debug 模式时为 true。
 
-<<<<<<< HEAD
-
 ### `this.minimize` {#thisminimize}
-=======
-### `this.minimize`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 决定处理结果是否应该被压缩。
 
-<<<<<<< HEAD
-
-### `this._compilation` {#this_compilation}
-
-一种 hack 写法。用于访问 webpack 的 Compilation 对象。
-
-
-### `this._compiler` {#this_compiler}
-
-一种 hack 写法。用于访问 webpack 的 Compiler 对象。
-
-
 ### `this._module` {#this_module}
-=======
-### `this._module`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 一种 hack 写法。用于访问当前加载的 Module 对象。
 
-<<<<<<< HEAD
-
 ## 错误报告 {#error-reporting}
-=======
-## Error Reporting
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 您可以通过以下方式从 loader 内部报告错误：
 
@@ -764,12 +570,7 @@ W> 从 webpack 4.12 开始，loader 路径将在报错信息中显示。
 
 T> 所有的报错和警告信息将被记录到 `stats` 当中。详情请查看 [Stats Data](/api/stats/#errors-and-warnngs)。
 
-<<<<<<< HEAD
-
 ### Inline matchResource {#inline-matchresource}
-=======
-### Inline matchResource
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 在 webpack v4 中引入了一种新的内联请求语法。前缀为 `<match-resource>!=!` 将为此请求设置  `matchResource`。
 

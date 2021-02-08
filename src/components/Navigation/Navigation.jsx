@@ -112,15 +112,9 @@ export default class Navigation extends Component {
       const DocSearch = require('docsearch.js');
 
       DocSearch({
-<<<<<<< HEAD
         apiKey: 'cccb861b286b414d0f820013f3f70b84',
         indexName: 'webpack_china',
-        inputSelector: '.navigation-search__input'
-=======
-        apiKey: 'fac401d1a5f68bc41f01fb6261661490',
-        indexName: 'webpack-js-org',
         inputSelector: '.navigation-search__input',
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
       });
     }
   }

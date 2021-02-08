@@ -27,17 +27,8 @@ export default function PageLinks({ page = {} }) {
         </span>
       ) : null}
 
-<<<<<<< HEAD
-      <a className="page-links__link" href={ editLink }>
-        编辑此页
-        <EditIcon className="page-links__icon" width={12} fill="#1a6bac" />
-      </a>
-      <span className="page-links__gap">|</span>
-      <button className="page-links__link page-links__print as-link" onClick={_handlePrintClick} title="Print this page">
-        打印文档
-=======
       <a className="page-links__link" href={editLink}>
-        Edit Document
+        编辑此页
         <EditIcon className="page-links__icon" width={12} fill="#1a6bac" />
       </a>
       <span className="page-links__gap">|</span>
@@ -46,8 +37,7 @@ export default function PageLinks({ page = {} }) {
         onClick={_handlePrintClick}
         title="Print this page"
       >
-        Print Document
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+        打印文档
         <img src={icon} alt="" />
       </button>
     </div>

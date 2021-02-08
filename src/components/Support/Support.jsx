@@ -11,11 +11,7 @@ import SmallIcon from '../../assets/icon-square-small-slack.png';
 // Load Styling
 import './Support.scss';
 
-<<<<<<< HEAD
 const SUPPORTERS = [];
-=======
-const SUPPORTERS = [...Backers];
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 // Merge or add additional backers/sponsors
 for (const additional of Additional) {
