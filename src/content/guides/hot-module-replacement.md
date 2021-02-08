@@ -30,18 +30,10 @@ related:
 
 T> 本指南继续沿用 [开发环境](/guides/development) 指南中的代码示例。
 
-<<<<<<< HEAD
-模块热替换(hot module replacement 或 HMR)是 webpack 提供的最有用的功能之一。它允许在运行时更新所有类型的模块，
-而无需完全刷新。本页面重点介绍其 __实现__，而 [概念](/concepts/hot-module-replacement) 页面提供了更多关于
-它的工作原理以及为什么它有用的细节。
+模块热替换(hot module replacement 或 HMR)是 webpack 提供的最有用的功能之一。它允许在运行时更新所有类型的模块，而无需完全刷新。本页面重点介绍其**实现**，而 [概念](/concepts/hot-module-replacement) 页面提供了更多关于它的工作原理以及为什么它有用的细节。
 
-W> __HMR__ 不适用于生产环境，这意味着它应当用于开发环境。更多详细信息，
+W> **HMR** 不适用于生产环境，这意味着它应当用于开发环境。更多详细信息，
 请查看 [生产环境](/guides/production) 指南。
-=======
-Hot Module Replacement (or HMR) is one of the most useful features offered by webpack. It allows all kinds of modules to be updated at runtime without the need for a full refresh. This page focuses on **implementation** while the [concepts page](/concepts/hot-module-replacement) gives more details on how it works and why it's useful.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
-
-W> **HMR** is not intended for use in production, meaning it should only be used in development. See the [building for production guide](/guides/production) for more information.
 
 ## 启用 HMR {#enabling-hmr}
 
@@ -142,12 +134,7 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 + main.js:4330 [HMR]  - 20
 ```
 
-<<<<<<< HEAD
-
 ## 通过 Node.js API {#via-the-nodejs-api}
-=======
-## Via the Node.js API
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 在 Node.js API 中使用 webpack dev server 时，不要将 dev server 选项放在 webpack 配置对象中。而是在创建时，
 将其作为第二个参数传递。例如：
@@ -180,12 +167,7 @@ server.listen(5000, 'localhost', () => {
 
 T> 如果你正在使用 [`webpack-dev-middleware`](/guides/development#using-webpack-dev-middleware)，可以通过 [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) 依赖包，在自定义 dev server 中启用 HMR。
 
-<<<<<<< HEAD
-
 ## 问题 {#gotchas}
-=======
-## Gotchas
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 模块热替换可能比较难以掌握。为了说明这一点，我们回到刚才的示例中。如果你继续点击示例页面上的按钮，
 你会发现控制台仍在打印旧的 `printMe` 函数。
@@ -232,12 +214,7 @@ T> 如果你正在使用 [`webpack-dev-middleware`](/guides/development#using-we
 这仅仅是一个示例，还有很多让人易于犯错的情况。
 幸运的是，有很多 loader（下面会提到一些）可以使得模块热替换变得更加容易。
 
-<<<<<<< HEAD
-
 ## HMR 加载样式 {#hmr-with-stylesheets}
-=======
-## HMR with Stylesheets
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 借助于 `style-loader`，使用模块热替换来加载 CSS 实际上极其简单。此 loader 在幕后使用了 `module.hot.accept`，在 CSS 依赖模块更新之后，会将其 patch(修补) 到 `<style>` 标签中。
 
@@ -357,12 +334,7 @@ body {
   }
 ```
 
-<<<<<<< HEAD
-
 ## 其他代码和框架 {#other-code-and-frameworks}
-=======
-## Other Code and Frameworks
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 社区还提供许多其他 loader 和示例，可以使 HMR 与各种框架和库平滑地进行交互……
 

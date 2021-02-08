@@ -394,25 +394,22 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 还可以 [指定一个函数](/configuration/module/#ruleparserdataurlcondition) 来决定是否 inline 模块。
-=======
-Also you can [specify a function](/configuration/module/#ruleparserdataurlcondition) to decide to inlining a module or not.
 
-## Replacing Inline Loader Syntax
+## 变更内联 loader 的语法 {#replacing-inline-loader-syntax}
 
-Before Asset Modules and Webpack 5, it was possible to use [inline syntax](https://webpack.js.org/concepts/loaders/#inline) with the legacy loaders mentioned above.
+在 asset 模块和 webpack 5 之前，可以使用[内联语法](/concepts/loaders/#inline)与上述传统的 loader 结合使用。
 
-It is now reccomended to remove all inline loader syntax and use a resourceQuery condition to mimic the functionality of the inline syntax.
+现在建议去掉所有的 loader 的语法，使用资源查询条件来魔法内联语法的功能。
 
-For example, in the case of replacing `raw-loader` with `asset/source` type:
+示例，将 `raw-loader` 替换为 `asset/source` 类型：
 
 ```diff
 - import myModule from 'raw-loader!my-module';
 + import myModule from 'my-module?raw';
 ```
 
-and in the webpack configuration:
+webpack 相关配置：
 
 ```diff
 module: {
@@ -426,7 +423,7 @@ module: {
   },
 ```
 
-and if you'd like to exclude raw assets from being parsed by other loaders, use a negative lookahead:
+如果你想把原始资源排除在其他 loader 的解析范围以外，请使用取反的符合：
 
 ```diff
 module: {
@@ -443,4 +440,3 @@ module: {
     ]
   },
 ```
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5

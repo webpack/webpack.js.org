@@ -13,12 +13,7 @@ T> 本指南继续沿用 [_起步_](/guides/getting-started/) 中的代码示例
 
 [TypeScript](https://www.typescriptlang.org) 是 JavaScript 的超集，为其增加了类型系统，可以编译为普通 JavaScript 代码。这篇指南里我们将会学习是如何将 webpack 和 TypeScript 进行集成。
 
-<<<<<<< HEAD
-
 ## 基础配置 {#basic-setup}
-=======
-## Basic Setup
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 首先，执行以下命令安装 TypeScript compiler 和 loader：
 
@@ -115,11 +110,7 @@ module.exports = {
   document.body.appendChild(component());
 ```
 
-<<<<<<< HEAD
-T> 如果想在 TypeScript 中保留如`import _ from 'lodash';`的语法被让它作为一种默认的导入方式，需要在文件 __tsconfig.json__ 中设置`"allowSyntheticDefaultImports" : true` 和 `"esModuleInterop" : true` 。这个是与 TypeScript 相关的配置，在本文档中提及仅供参考。
-=======
-T> To make imports do this by default and keep `import _ from 'lodash';` syntax in TypeScript, set `"allowSyntheticDefaultImports" : true` and `"esModuleInterop" : true` in your **tsconfig.json** file. This is related to TypeScript configuration and mentioned in our guide only for your information.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+T> 如果想在 TypeScript 中保留如`import _ from 'lodash';`的语法被让它作为一种默认的导入方式，需要在文件 **tsconfig.json** 中设置 `"allowSyntheticDefaultImports" : true` 和 `"esModuleInterop" : true` 。这个是与 TypeScript 相关的配置，在本文档中提及仅供参考。
 
 ## Loader {#loader}
 
@@ -184,12 +175,7 @@ Note that if you're already using [`babel-loader`](https://github.com/babel/babe
 
 查看 [devtool](/configuration/devtool/) 文档以了解更多信息。
 
-<<<<<<< HEAD
-
 ## 使用第三方类库 {#using-third-party-libraries}
-=======
-## Using Third Party Libraries
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 在从 npm 安装 third party library(第三方库) 时，一定要记得同时安装此 library 的类型声明文件(typing definition)。你可以从 [TypeSearch](https://microsoft.github.io/TypeSearch/) 中找到并安装这些第三方库的类型声明文件。
 
@@ -201,12 +187,7 @@ npm install --save-dev @types/lodash
 
 想了解更多，可以查看 [这篇文章](https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/)。
 
-<<<<<<< HEAD
-
 ## 导入其他资源 {#importing-other-assets}
-=======
-## Importing Other Assets
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 想要在 TypeScript 中使用非代码资源(non-code asset)，我们需要告诉 TypeScript 推断导入资源的类型。在项目里创建一个 `custom.d.ts` 文件，这个文件用来表示项目中 TypeScript 的自定义类型声明。我们为 `.svg` 文件设置一个声明：
 
@@ -221,12 +202,7 @@ declare module '*.svg' {
 
 H这里，我们通过指定任何以 `.svg` 结尾的导入(import)，将 SVG 声明(declare) 为一个新的模块(module)，并将模块的 `content` 定义为 `any`。我们可以通过将类型定义为字符串，来更加显式地将它声明为一个 url。同样的概念适用于其他资源，包括 CSS, SCSS, JSON 等。
 
-<<<<<<< HEAD
-
 ## 构建性能 {#build-performance}
-=======
-## Build Performance
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 W> 这可能会降低构建性能。
 

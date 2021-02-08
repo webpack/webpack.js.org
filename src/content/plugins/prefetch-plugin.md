@@ -11,12 +11,7 @@ Prefetch normal module requests, causing them to be resolved and built before th
 new webpack.PrefetchPlugin([context], request);
 ```
 
-<<<<<<< HEAD
-
 ## Options {#options}
-=======
-## Options
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 - `context`: An absolute path to a directory
 - `request`: A request string for a normal module

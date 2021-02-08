@@ -25,13 +25,7 @@ contributors:
 
 T> 对于 webpack-dev-server，这个属性要放在 [`devServer` 配置对象](/configuration/dev-server/#devserverstats-).
 
-<<<<<<< HEAD
-W> 在使用 Node.js API 时，此选项无效。
-
-__webpack.js.org__
-=======
-W> This option does not have any effect when using the Node.js API. You need to pass the stats options to the `stats.toString()` resp. `stats.toJson()` calls instead.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+W> 在使用 Node.js API 时，此选项无效。你需要将统计选项传递给 `stats.toString()` 和 `stats.toJson()` 调用。
 
 ```js
 module.exports = {
@@ -44,12 +38,7 @@ module.exports = {
 
 webpack 有一些特定的预设选项给统计信息输出：
 
-<<<<<<< HEAD
-
 | 预设              | 可选值 | 描述                                                    |
-=======
-| Preset              | Alternative | Description                                                    |
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 | ------------------- | ----------- | -------------------------------------------------------------- |
 | `'errors-only'`     | _none_      | 只在发生错误时输出                                                |
 | `'errors-warnings'` | _none_      | 只在发生错误或有新的编译时输出                                      |
@@ -133,28 +122,8 @@ module.exports = {
 module.exports = {
   //...
   stats: {
-<<<<<<< HEAD
-    moduleAssets: false
-  }
-};
-```
-
-### `stats.cached` {#statscached}
-
-`boolean = true`
-
-告知 `stats` 是否添加关于缓存模块的信息 (并非被构建的模块)。
-
-```javascript
-module.exports = {
-  //...
-  stats: {
-    cached: false
-  }
-=======
     moduleAssets: false,
   },
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 };
 ```
 
@@ -218,15 +187,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
+### `stats.cached` {#statscached}
+
+旧版的 `stats.cachedModules`.
+
 ### `stats.cachedModules` {#statscachedmodules}
-=======
-### `stats.cached`
-
-Old version of `stats.cachedModules`.
-
-### `stats.cachedModules`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = true`
 
@@ -466,21 +431,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 它也可用通过命令行的参数实现：
-=======
-It is also available as a CLI flag:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```bash
 webpack-cli --colors
 ```
 
-<<<<<<< HEAD
 你可以通过使用 [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code) 指定你自己的命令行终端颜色。
-=======
-You can specify your own terminal output colors using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code)
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```js
 module.exports = {
@@ -521,11 +478,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 当 `stats.entrypoints` 被设置为 `'auto'` 时，webpack 将自动决定是否在 stats 输出中展示入口信息。
-=======
-When `stats.entrypoints` is set to `'auto'`, webpack will decide automatically whether to display the entry points in the stats output.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ### `stats.env` {#statsenv}
 
@@ -576,11 +529,7 @@ module.exports = {
 
 `boolean` `string = "auto"`
 
-<<<<<<< HEAD
-告知 `stats` 是否添加错误的详情。
-=======
-Tells `stats` whether to add the details to the errors. It defaults to `'auto'` which will show error details when there're only 2 or less errors.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+告知 `stats` 是否添加错误的详情。如果默认值为 `'auto'`，当只有 2 个或更少的错误时，它将显示错误详情。
 
 ```javascript
 module.exports = {
@@ -1059,12 +1008,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 W> `stats.warningsFilter` 已被弃用，请改用 [`ignoreWarnings`](/configuration/other-options/#ignorewarnings)。
-=======
-W> `stats.warningsFilter` is deprecated in favor of [`ignoreWarnings`](/configuration/other-options/#ignorewarnings).
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ### `stats.chunkRelations` {#statschunkrelations}
 

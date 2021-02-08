@@ -127,12 +127,7 @@ webpack 5.4.0 compiled successfully in 1996 ms
 
 但是，如果我们更改了我们的一个入口起点的名称，甚至添加了一个新的入口，会发生什么？会在构建时重新命名生成的 bundle，但是我们的 `index.html` 文件仍然引用旧的名称。让我们用 [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin) 来解决这个问题。
 
-<<<<<<< HEAD
-
 ## 设置 HtmlWebpackPlugin {#setting-up-htmlwebpackplugin}
-=======
-## Setting up HtmlWebpackPlugin
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 首先安装插件，并且调整 `webpack.config.js` 文件：
 
@@ -222,12 +217,7 @@ npm install --save-dev clean-webpack-plugin
 
 现在，执行 `npm run build`，检查 `/dist` 文件夹。如果一切顺利，现在只会看到构建后生成的文件，而没有旧文件！
 
-<<<<<<< HEAD
-
 ## manifest {#the-manifest}
-=======
-## The Manifest
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 你可能会很感兴趣，webpack 和 webpack 插件似乎“知道”应该生成哪些文件。答案是，webpack 通过 manifest，可以追踪所有模块到输出 bundle 之间的映射。如果你想要知道如何以其他方式来控制 webpack [`输出`](/configuration/output)，了解 manifest 是个好的开始。
 
@@ -235,11 +225,6 @@ npm install --save-dev clean-webpack-plugin
 
 我们不会在此展示一个如何在项目中使用此插件的完整示例，你可以在 [manifest](/concepts/manifest) 概念页面深入阅读，以及在 [缓存](/guides/caching) 指南中，了解它与长效缓存有何关系。
 
-<<<<<<< HEAD
-
 ## 结论 {#conclusion}
-=======
-## Conclusion
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 现在，你已经了解如何向 HTML 动态添加 bundle，让我们深入 [开发环境](/guides/development) 指南。或者如果你想要深入更多相关高级话题，我们推荐你前往 [代码分离](/guides/code-splitting) 指南。

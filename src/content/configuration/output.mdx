@@ -31,12 +31,7 @@ contributors:
 
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.auxiliaryComment` {#outputauxiliarycomment}
-=======
-## `output.auxiliaryComment`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `string` `object`
 
@@ -97,12 +92,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.charset` {#outputcharset}
-=======
-## `output.charset`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `boolean = true`
 
@@ -147,12 +137,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.chunkLoadTimeout` {#outputchunkloadtimeout}
-=======
-## `output.chunkLoadTimeout`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `number = 120000`
 
@@ -170,12 +155,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.chunkLoadingGlobal` {#outputchunkloadingglobal}
-=======
-## `output.chunkLoadingGlobal`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `string = 'webpackChunkwebpack'`
 
@@ -193,12 +173,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.chunkLoading` {#outputchunkloading}
-=======
-## `output.chunkLoading`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>`
 
@@ -216,12 +191,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.chunkFormat` {#outputchunkformat}
-=======
-## `output.chunkFormat`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `false` `string: 'array-push' | 'commonjs' | <any string>`
 
@@ -239,12 +209,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.enabledChunkLoadingTypes` {#outputenabledchunkloadingtypes}
-=======
-## `output.enabledChunkLoadingTypes`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
 
@@ -262,25 +227,14 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.crossOriginLoading` {#outputcrossoriginloading}
-=======
-## `output.crossOriginLoading`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
 
 告诉 webpack 启用 [cross-origin 属性](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) 加载 chunk。仅在 [`target`](/configuration/target/) 设置为 `'web'` 时生效，通过使用 JSONP 来添加脚本标签，实现按需加载模块。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-- `'anonymous'` - __不带凭据(credential)__ 启用跨域加载
-- `'use-credentials'` - __携带凭据(credential)__ 启用跨域加载
-
-=======
-- `'anonymous'` - Enable cross-origin loading **without credentials**
-- `'use-credentials'` - Enable cross-origin loading **with credentials**
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+- `'anonymous'` - **不带凭据(credential)** 启用跨域加载
+- `'use-credentials'` - **携带凭据(credential)** 启用跨域加载
 
 ## `output.devtoolFallbackModuleFilenameTemplate` {#outputdevtoolfallbackmodulefilenametemplate}
 
@@ -290,12 +244,7 @@ module.exports = {
 
 查看 [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate)。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.devtoolModuleFilenameTemplate` {#outputdevtoolmodulefilenametemplate}
-=======
-## `output.devtoolModuleFilenameTemplate`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `string = 'webpack://[namespace]/[resource-path]?[loaders]'` `function (info) => string`
 
@@ -317,7 +266,6 @@ module.exports = {
 
 模板字符串(template string)中做以下替换（通过 webpack 内部的 [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js)）：
 
-<<<<<<< HEAD:src/content/configuration/output.md
 | Template                 | Description |
 | ------------------------ | ----------- |
 | [absolute-resource-path] | 绝对路径文件名|
@@ -328,18 +276,6 @@ module.exports = {
 | [resource]               | 用于解析文件的路径和用于第一个 loader 的任意查询参数|
 | [resource-path]          | 不带任何查询参数，用于解析文件的路径|
 | [namespace]              | 模块命名空间。在构建成为一个 library 之后，通常也是 library 名称，否则为空|
-=======
-| Template                 | Description                                                                                         |
-| ------------------------ | --------------------------------------------------------------------------------------------------- |
-| [absolute-resource-path] | The absolute filename                                                                               |
-| [all-loaders]            | Automatic and explicit loaders and params up to the name of the first loader                        |
-| [hash]                   | The hash of the module identifier                                                                   |
-| [id]                     | The module identifier                                                                               |
-| [loaders]                | Explicit loaders and params up to the name of the first loader                                      |
-| [resource]               | The path used to resolve the file and any query params used on the first loader                     |
-| [resource-path]          | The path used to resolve the file without any query params                                          |
-| [namespace]              | The modules namespace. This is usually the library name when building as a library, empty otherwise |
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 当使用一个函数，同样的选项要通过 `info` 参数并使用驼峰式(camel-cased)：
 
@@ -356,12 +292,7 @@ module.exports = {
 
 如果多个模块产生相同的名称，使用 [`output.devtoolFallbackModuleFilenameTemplate`](#outputdevtoolfallbackmodulefilenametemplate) 来代替这些模块。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.devtoolNamespace` {#outputdevtoolnamespace}
-=======
-## `output.devtoolNamespace`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `string`
 
@@ -369,12 +300,7 @@ module.exports = {
 
 例如，如果你有两个 library，分别使用命名空间 `library1` 和 `library2`，并且都有一个文件 `./src/index.js`（可能具有不同内容），它们会将这些文件暴露为 `webpack://library1/./src/index.js` 和 `webpack://library2/./src/index.js`。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.filename` {#outputfilename}
-=======
-## `output.filename`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `string` `function (pathData, assetInfo) => string`
 
@@ -609,34 +535,19 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.hashDigest` {#outputhashdigest}
-=======
-## `output.hashDigest`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `string = 'hex'`
 
 在生成 hash 时使用的编码方式。支持 Node.js [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) 的所有编码。对文件名使用 `'base64'`，可能会出现问题，因为 base64 字母表中具有 `/` 这个字符(character)。同样的，`'latin1'` 规定可以含有任何字符(character)。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.hashDigestLength` {#outputhashdigestlength}
-=======
-## `output.hashDigestLength`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `number = 20`
 
 散列摘要的前缀长度。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.hashFunction` {#outputhashfunction}
-=======
-## `output.hashFunction`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `string = 'md4'` `function`
 
@@ -657,12 +568,7 @@ module.exports = {
 
 一个可选的加盐值，通过 Node.JS [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding) 来更新哈希。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.hotUpdateChunkFilename` {#outputhotupdatechunkfilename}
-=======
-## `output.hotUpdateChunkFilename`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `string = '[id].[fullhash].hot-update.js'`
 
@@ -693,12 +599,7 @@ JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
 欲了解详情，请查阅 [`output.chunkLoadingGlobal`](#outputchunkloadingglobal)。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.hotUpdateMainFilename` {#outputhotupdatemainfilename}
-=======
-## `output.hotUpdateMainFilename`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `string = '[runtime].[fullhash].hot-update.json'` `function`
 
@@ -706,12 +607,7 @@ JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
 T> 通常，你不需要修改 `output.hotUpdateMainFilename`.
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.library` {#outputlibrary}
-=======
-## `output.library`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `string` `object`
 
@@ -761,32 +657,20 @@ module.exports = {
 
 支持以下配置：
 
-<<<<<<< HEAD:src/content/configuration/output.md
-`libraryExport: 'default'` - __入口的默认导出__将分配给 library target：
-=======
-`libraryExport: 'default'` - The **default export of your entry point** will be assigned to the library target:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+`libraryExport: 'default'` - **入口的默认导出**将分配给 library target：
 
 ```javascript
 // if your entry has a default export of `MyDefaultModule`
 var MyDefaultModule = _entry_return_.default;
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-`libraryExport: 'MyModule'` - 这个 __确定的模块__ 将被分配给 library target：
-=======
-`libraryExport: 'MyModule'` - The **specified module** will be assigned to the library target:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+`libraryExport: 'MyModule'` - 这个 **确定的模块** 将被分配给 library target：
 
 ```javascript
 var MyModule = _entry_return_.MyModule;
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-`libraryExport: ['MyModule', 'MySubModule']` - 数组将被解析为要分配给 library target 的 __模块路径__：
-=======
-`libraryExport: ['MyModule', 'MySubModule']` - The array is interpreted as a **path to a module** to be assigned to the library target:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+`libraryExport: ['MyModule', 'MySubModule']` - 数组将被解析为要分配给 library target 的 **模块路径**：
 
 ```javascript
 var MySubModule = _entry_return_.MyModule.MySubModule;
@@ -800,20 +684,11 @@ MyModule.doSomething();
 MySubModule.doSomething();
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.libraryTarget` {#outputlibrarytarget}
 
 `string = 'var'`
 
-配置如何暴露 library。可以使用下面的选项中的任意一个。注意，此选项与分配给 [`output.library`](#outputlibrary) 的值一同使用。对于下面的所有示例，都假定将 `output.library` 的值配置为 `MyLibrary`。
-=======
-## output.libraryTarget
-
-`string = 'var'`
-
-Configure how the library will be exposed. Any one of the following options can be used. Please note that this option works in conjunction with the value assigned to [`output.library`](#outputlibrary). For the following examples, it is assumed that the value of [`output.library`](#outputlibrary) is configured as `MyLibrary`.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+配置如何暴露 library。可以使用下面的选项中的任意一个。注意，此选项与分配给 [`output.library`](#outputlibrary) 的值一同使用。对于下面的所有示例，都假定将 [`output.library`](#outputlibrary) 的值配置为 `MyLibrary`。
 
 T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回的值。在 bundle 本身中，它是从入口起点、由 webpack 生成的函数的输出结果。
 
@@ -821,42 +696,24 @@ T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回�
 
 这些选项将入口起点的返回值（例如，入口起点的任何导出值），在 bundle 包所引入的位置，赋值给 [`output.library`](#outputlibrary) 提供的变量名。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-`libraryTarget: 'var'` - （默认值）当 library 加载完成，__入口起点的返回值__将分配给一个变量：
-=======
-- `libraryTarget: 'var'` – When your library is loaded, the **return value of your entry point** will be assigned to a variable:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+`libraryTarget: 'var'` - （默认值）当 library 加载完成，**入口起点的返回值**将分配给一个变量：
 
   ```javascript
   var MyLibrary = _entry_return_;
 
-<<<<<<< HEAD:src/content/configuration/output.md
-// 在一个单独的 script...
-MyLibrary.doSomething();
-```
-
-`libraryTarget: 'assign'` - 这将产生一个隐含的全局变量，可能会潜在地重新分配到全局中已存在的值（谨慎使用）。
-=======
-  // In a separate script...
+  // 在一个单独的 script...
   MyLibrary.doSomething();
   ```
 
-- `libraryTarget: 'assign'` – This will generate an implied global which has the potential to reassign an existing value (use with caution):
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+- `libraryTarget: 'assign'` - 这将产生一个隐含的全局变量，可能会潜在地重新分配到全局中已存在的值（谨慎使用）：
 
   ```javascript
   MyLibrary = _entry_return_;
   ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-注意，如果 `MyLibrary` 在作用域中未在前面代码进行定义，则你的 library 将被设置在全局作用域内。
+  注意，如果 `MyLibrary` 在作用域中未在前面代码进行定义，则你的 library 将被设置在全局作用域内。
 
-W> 当使用此选项时，将 [`output.library`](#outputlibrary) 设置为空，将产生一个破损的输出 bundle。
-=======
-  Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
-
-- `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' /> – Copy the return value to a target object if it exists, otherwise create the target object first:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+- `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' /> – 如果目标对象存在，则将返回值 copy 到目标对象，否则先创建目标对象：
 
   ```js
   // create the target object if it doesn't exist
@@ -874,7 +731,7 @@ W> 当使用此选项时，将 [`output.library`](#outputlibrary) 设置为空�
   MyLibrary.hello('World');
   ```
 
-W> An empty string for [`output.library`](#outputlibrary) is invalid, make sure you specify a valid identifier that could be assigned.
+W> 当使用此选项时，将 [`output.library`](#outputlibrary) 设置为空，将产生一个破损的输出 bundle。
 
 ### 通过在对象上赋值暴露 {#expose-via-object-assignment}
 
@@ -892,11 +749,7 @@ W> An empty string for [`output.library`](#outputlibrary) is invalid, make sure 
 
 W> 注意，不设置 `output.library` 将导致由入口起点返回的所有属性，都会被赋值给给定的对象；这里并不会检查现有的属性名是否存在。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-`libraryTarget: "this"` - __入口起点的返回值__将分配给 this 的一个属性（此名称由 `output.library` 定义）下，`this` 的含义取决于你：
-=======
-`libraryTarget: "this"` - The **return value of your entry point** will be assigned to this under the property named by `output.library`. The meaning of `this` is up to you:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+`libraryTarget: "this"` - **入口起点的返回值**将分配给 this 的一个属性（此名称由 `output.library` 定义）下，`this` 的含义取决于你：
 
 ```javascript
 this['MyLibrary'] = _entry_return_;
@@ -906,11 +759,7 @@ this.MyLibrary.doSomething();
 MyLibrary.doSomething(); // 如果 this 是 window
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-`libraryTarget: 'window'` - __入口起点的返回值__将使用 `output.library` 中定义的值，分配给 `window` 对象的这个属性下。
-=======
-`libraryTarget: 'window'` - The **return value of your entry point** will be assigned to the `window` object using the `output.library` value.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+`libraryTarget: 'window'` - **入口起点的返回值**将使用 `output.library` 中定义的值，分配给 `window` 对象的这个属性下。
 
 ```javascript
 window['MyLibrary'] = _entry_return_;
@@ -918,12 +767,7 @@ window['MyLibrary'] = _entry_return_;
 window.MyLibrary.doSomething();
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
-`libraryTarget: 'global'` - __入口起点的返回值__将使用 `output.library` 中定义的值，分配给 `global` 对象的这个属性下。
-=======
-`libraryTarget: 'global'` - The **return value of your entry point** will be assigned to the `global` object using the `output.library` value.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+`libraryTarget: 'global'` - **入口起点的返回值**将使用 `output.library` 中定义的值，分配给 `global` 对象的这个属性下。
 
 ```javascript
 global['MyLibrary'] = _entry_return_;
@@ -931,12 +775,7 @@ global['MyLibrary'] = _entry_return_;
 global.MyLibrary.doSomething();
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
-`libraryTarget: 'commonjs'` - __入口起点的返回值__将使用 `output.library` 中定义的值，分配给 exports 对象。这个名称也意味着，模块用于 CommonJS 环境：
-=======
-`libraryTarget: 'commonjs'` - The **return value of your entry point** will be assigned to the `exports` object using the `output.library` value. As the name implies, this is used in CommonJS environments.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+`libraryTarget: 'commonjs'` - **入口起点的返回值**将使用 `output.library` 中定义的值，分配给 exports 对象。这个名称也意味着，模块用于 CommonJS 环境：
 
 ```javascript
 exports['MyLibrary'] = _entry_return_;
@@ -948,12 +787,7 @@ require('MyLibrary').doSomething();
 
 这些选项将使得 bundle 带有更完整的模块头，以确保与各种模块系统的兼容性。根据 `output.libraryTarget` 选项不同，`output.library` 选项将具有不同的含义。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
-`libraryTarget: 'commonjs2'` - __入口起点的返回值__将分配给 `module.exports` 对象。这个名称也意味着模块用于 CommonJS 环境：
-=======
-`libraryTarget: 'commonjs2'` - The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in CommonJS environments:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+`libraryTarget: 'commonjs2'` - **入口起点的返回值**将分配给 `module.exports` 对象。这个名称也意味着模块用于 CommonJS 环境：
 
 ```javascript
 module.exports = _entry_return_;
@@ -965,12 +799,7 @@ require('MyLibrary').doSomething();
 
 T> 想要弄清楚 CommonJS 和 CommonJS2 之间的区别？虽然它们很相似，但二者之间存在一些微妙的差异，这通常与 webpack 上下文没有关联。（更多详细信息，请[阅读此 issue](https://github.com/webpack/webpack/issues/1114)。）
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 `libraryTarget: 'amd'` - 将你的 library 暴露为 AMD 模块。
-=======
-`libraryTarget: 'amd'` - This will expose your library as an AMD module.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 AMD 模块要求入口 chunk（例如使用 `<script>` 标签加载的第一个脚本）通过特定的属性定义，例如 `define` 和 `require`，它们通常由 RequireJS 或任何兼容的模块加载器提供（例如 almond）。否则，直接加载生成的 AMD bundle 将导致报错，如 `define is not defined`。
 
@@ -998,46 +827,27 @@ define('MyLibrary', [], function () {
 
 ```javascript
 require(['MyLibrary'], function (MyLibrary) {
-<<<<<<< HEAD:src/content/configuration/output.md
   // 使用 library 做一些事……
-=======
-  // Do something with the library...
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 });
 ```
 
 如果 `output.library` 未定义，将会生成以下内容。
 
 ```javascript
-<<<<<<< HEAD:src/content/configuration/output.md
-define([], function() {
-  return _entry_return_; // 此模块返回值，是入口 chunk 返回的值
-=======
 define([], function () {
-  return _entry_return_;
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+  return _entry_return_; // 此模块返回值，是入口 chunk 返回的值
 });
 ```
 
 如果直接加载 `<script>` 标签，此 bundle 无法按预期运行，或者根本无法正常运行（在 almond loader 中）。只能通过文件的实际路径，在 RequireJS 兼容的异步模块加载器中运行，因此在这种情况下，如果这些设置直接暴露在服务器上，那么 `output.path` 和 `output.filename` 对于这个特定的设置可能变得很重要。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 `libraryTarget: 'amd-require'` - 这将使用立即执行的AMD `require(dependencies, factory)` 包装器包装您的输出。
-=======
-`libraryTarget: 'amd-require'` - This packages your output with an immediately-executed AMD `require(dependencies, factory)` wrapper.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
  `'amd-require'` 目标（target）允许使用AMD依赖项，而无需单独的后续调用。与 `'amd'` 目标（target）一样, 这取决于在加载 webpack 输出的环境中适当可用的 [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) 。
 
 对于此目标，库名称将被忽略。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 `libraryTarget: 'umd'` - 将你的 library 暴露为所有的模块定义下都可运行的方式。它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。了解更多请查看 [UMD 仓库](https://github.com/umdjs/umd)。
-=======
-`libraryTarget: 'umd'` - This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 在这个例子中，你需要 `library` 属性来命名你的模块：
 
@@ -1154,13 +964,8 @@ System.register('my-library', [], function (_export) {
 // 记录当前系统模块的 URL
 console.log(__system_context__.meta.url);
 
-<<<<<<< HEAD:src/content/configuration/output.md
 // 导入一个系统模块，通过将当前的系统模块的 url 作为 parentUrl
-__system_context__.import('./other-file.js').then(m => {
-=======
-// Import a SystemJS module, with the current SystemJS module's url as the parentUrl
 __system_context__.import('./other-file.js').then((m) => {
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
   console.log(m);
 });
 ```
@@ -1175,12 +980,7 @@ MyLibrary(_entry_return_);
 
 你的 library 的依赖将由 [`externals`](/configuration/externals/) 配置定义。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.importFunctionName` {#outputimportfunctionname}
-=======
-## `output.importFunctionName`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `string = 'import'`
 
@@ -1197,20 +997,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.path` {#outputpath}
 
 `string = path.join(process.cwd(), 'dist')`
 
-output 目录对应一个__绝对路径__。
-=======
-## `output.path`
-
-`string = path.join(process.cwd(), 'dist')`
-
-The output directory as an **absolute** path.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+output 目录对应一个**绝对路径**。
 
 **webpack.config.js**
 
@@ -1227,22 +1018,13 @@ module.exports = {
 
 注意，`[fullhash]` 在参数中被替换为编译过程(compilation)的 hash。详细信息请查看[指南 - 缓存](/guides/caching/)。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.pathinfo` {#outputpathinfo}
-=======
-## `output.pathinfo`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `boolean=true` `string: 'verbose'`
 
 告知 webpack 在 bundle 中引入「所包含模块信息」的相关注释。此选项在 `development` [模式](/configuration/mode/)时的默认值为 `true`，而在 `production` [模式](/configuration/mode/)时的默认值为 `false`。当值为 `'verbose'` 时，会显示更多信息，如 export，运行时依赖以及 bailouts。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-W> 对于在开发环境(development)下阅读生成代码时，虽然通过这些注释可以提供有用的数据信息，但在生产环境(production)下，__不应该__使用。
-=======
-W> While the data this comments can provide is useful during development when reading the generated code, it **should not** be used in production.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+W> 对于在开发环境(development)下阅读生成代码时，虽然通过这些注释可以提供有用的数据信息，但在生产环境(production)下，**不应该**使用。
 
 **webpack.config.js**
 
@@ -1257,26 +1039,15 @@ module.exports = {
 
 T> 这些注释也会被添加至经过 tree shaking 后生成的 bundle 中。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.publicPath` {#outputpublicpath}
-=======
-## `output.publicPath`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `string` `function`
 
 对于按需加载(on-demand-load)或加载外部资源(external resources)（如图片、文件等）来说，output.publicPath 是很重要的选项。如果指定了一个错误的值，则在加载这些资源时会收到 404 错误。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-此选项指定在浏览器中所引用的「此输出目录对应的__公开 URL__」。相对 URL(relative URL) 会被相对于 HTML 页面（或 `<base>` 标签）解析。相对于服务的 URL(Server-relative URL)，相对于协议的 URL(protocol-relative URL) 或绝对 URL(absolute URL) 也可是可能用到的，或者有时必须用到，例如：当将资源托管到 CDN 时。
+此选项指定在浏览器中所引用的「此输出目录对应的**公开 URL**」。相对 URL(relative URL) 会被相对于 HTML 页面（或 `<base>` 标签）解析。相对于服务的 URL(Server-relative URL)，相对于协议的 URL(protocol-relative URL) 或绝对 URL(absolute URL) 也可是可能用到的，或者有时必须用到，例如：当将资源托管到 CDN 时。
 
-该选项的值是以 runtime(运行时) 或 loader(载入时) 所创建的每个 URL 为前缀。因此，在多数情况下，__此选项的值都会以 `/` 结束__。
-=======
-This option specifies the **public URL** of the output directory when referenced in a browser. A relative URL is resolved relative to the HTML page (or `<base>` tag). Server-relative URLs, protocol-relative URLs or absolute URLs are also possible and sometimes required, i. e. when hosting assets on a CDN.
-
-The value of the option is prefixed to every URL created by the runtime or loaders. Because of this **the value of this option ends with `/`** in most cases.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
+该选项的值是以 runtime(运行时) 或 loader(载入时) 所创建的每个 URL 为前缀。因此，在多数情况下，**此选项的值都会以 `/` 结束**。
 
 简单规则如下：[`output.path`](#outputpath) 中的 URL 以 HTML 页面为基准。
 
@@ -1333,7 +1104,7 @@ module.exports = {
   //...
   output: {
     // One of the below
-<<<<<<< HEAD:src/content/configuration/output.md
+    publicPath: 'auto', // It automatically determines the public path from either `import.meta.url`, `document.currentScript`, `<script />` or `self.location`.
     publicPath: 'https://cdn.example.com/assets/', // CDN（总是 HTTPS 协议）
     publicPath: '//cdn.example.com/assets/', // CDN（协议相同）
     publicPath: '/assets/', // 相对于服务(server-relative)
@@ -1341,16 +1112,6 @@ module.exports = {
     publicPath: '../assets/', // 相对于 HTML 页面
     publicPath: '', // 相对于 HTML 页面（目录相同）
   }
-=======
-    publicPath: 'auto', // It automatically determines the public path from either `import.meta.url`, `document.currentScript`, `<script />` or `self.location`.
-    publicPath: 'https://cdn.example.com/assets/', // CDN (always HTTPS)
-    publicPath: '//cdn.example.com/assets/', // CDN (same protocol)
-    publicPath: '/assets/', // server-relative
-    publicPath: 'assets/', // relative to HTML page
-    publicPath: '../assets/', // relative to HTML page
-    publicPath: '', // relative to HTML page (same directory)
-  },
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 };
 ```
 
@@ -1374,12 +1135,7 @@ T> `output.publicPath` defaults to `'auto'` with `web` and `web-worker` targets.
 
 可以使用 [#output-filename](#output-filename) 中的 `[name]`, `[id]`, `[hash]` 和 `[chunkhash]` 替换符号。除此之外，还可以使用 [Template strings](/configuration/output/#template-strings) 在 Filename-level 下替换。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.sourcePrefix` {#outputsourceprefix}
-=======
-## `output.sourcePrefix`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `string = ''`
 
@@ -1400,12 +1156,7 @@ T> 使用一些缩进会使 bundle 看起来更美观，但会导致多行字符
 
 T> 通常，你不需要修改 `output.sourcePrefix`。
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.strictModuleExceptionHandling` {#outputstrictmoduleexceptionhandling}
-=======
-## `output.strictModuleExceptionHandling`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `boolean = false`
 
@@ -1437,12 +1188,7 @@ require('module'); // <- 抛出
 require('module'); // <- 仍然抛出
 ```
 
-<<<<<<< HEAD:src/content/configuration/output.md
-
 ## `output.umdNamedDefine` {#outputumdnameddefine}
-=======
-## `output.umdNamedDefine`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5:src/content/configuration/output.mdx
 
 `boolean`
 

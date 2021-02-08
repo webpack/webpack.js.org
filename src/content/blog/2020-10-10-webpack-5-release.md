@@ -68,15 +68,9 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 - 尝试在不引入任何破坏性变化的情况下，清理那些在实现 v4 功能时处于奇怪状态的内部结构。
 - 试图通过现在引入突破性的变化来为未来的功能做准备，使其能够尽可能长时间地保持在 v5 版本上。
 
-<<<<<<< HEAD
-## __迁移__指南 {#__migration__-guide}
+## **迁移**指南 {#migration-guide}
 
-[在这里可查阅迁移指南](/migrate/5)
-=======
-## **Migration** Guide
-
-[See here for a **migration** guide](/migrate/5)
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+[在这里可查阅**迁移**指南](/migrate/5)
 
 ## 重大变更: 功能清除 {#major-changes-removals}
 
@@ -84,11 +78,7 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 所有在 v4 中被废弃的能力都被移除。
 
-<<<<<<< HEAD
-迁移: 确保你的 webpack 4 构建没有打印废弃警告。
-=======
-**MIGRATION**: Make sure that your webpack 4 build does not print deprecation warnings.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**: 确保你的 webpack 4 构建没有打印废弃警告。
 
 以下是一些被移除但在 v4 中没有废弃警告的东西：
 
@@ -112,11 +102,7 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 从 webpack 5 开始不再自动填充这些 polyfills，而会专注于前端模块兼容。我们的目标是提高 web 平台的兼容性。
 
-<<<<<<< HEAD
-迁移：
-=======
-**MIGRATION**:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：
 
 - 尽量使用前端兼容的模块。
 - 可以手动为 Node.js 核心模块添加 polyfill。错误提示会告诉你如何实现。
@@ -137,11 +123,7 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 `moduleIds/chunkIds/mangleExports: false` 禁用默认行为，你可以通过插件提供一个自定义算法。请注意，在 webpack 4 中，`moduleIds/chunkIds: false` 如果没有自定义插件，则可以正常运行，而在 webpack 5 中，你必须提供一个自定义插件。
 
-<<<<<<< HEAD
-__迁移__：最好使用 `chunkIds`、`moduleIds` 和 `mangleExports` 的默认值。你也可以选择使用旧的默认值`chunkIds: "size"，moduleIds: "size", mangleExports: "size"`，这将会生成更小的包，但为了缓存，会更频繁地将其失效。
-=======
-**MIGRATION**: Best use the default values for `chunkIds`, `moduleIds` and `mangleExports`. You can also opt-in to the old defaults `chunkIds: "size", moduleIds: "size", mangleExports: "size"`, this will generate smaller bundles, but invalidate them more often for caching.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：最好使用 `chunkIds`、`moduleIds` 和 `mangleExports` 的默认值。你也可以选择使用旧的默认值`chunkIds: "size"，moduleIds: "size", mangleExports: "size"`，这将会生成更小的包，但为了缓存，会更频繁地将其失效。
 
 注意：在 webpack 4 中，散列的模块 id 会导致 gzip 性能降低。这与模块顺序的改变有关，已经被修正。
 
@@ -165,11 +147,7 @@ __迁移__：最好使用 `chunkIds`、`moduleIds` 和 `mangleExports` 的默认
 
 可以在生产环境中使用 `chunkIds: "named"` 在生产环境中使用，但要确保不要不小心暴露模块名的敏感信息。
 
-<<<<<<< HEAD
-迁移：如果你不喜欢在开发中改变文件名，你可以通过 `chunkIds: "natural"` 来使用旧的数字模式。
-=======
-**MIGRATION**: If you dislike the filenames being changed in development, you can pass `chunkIds: "natural"` to use the old numeric mode.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：如果你不喜欢在开发中改变文件名，你可以通过 `chunkIds: "natural"` 来使用旧的数字模式。
 
 ### 模块联邦 {#module-federation}
 
@@ -186,11 +164,7 @@ Webpack 5 增加了一个新的功能 "模块联邦"，它允许多个 webpack �
 JSON 模块现在与提案保持一致，并在使用非默认导出时发出警告。
 当从严格的 ECMAScript 模块导入时，JSON 模块不再有命名的导出。
 
-<<<<<<< HEAD
-迁移: 使用默认导出。
-=======
-**MIGRATION**: Use the default export.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**: 使用默认导出。
 
 即使使用默认导出，未使用的属性也会被 `optimization.usedExports` 优化丢弃，属性会被 `optimization.mangleExports` 优化打乱。
 
@@ -227,17 +201,10 @@ Webpack 5 现在已经对表示资源的模块提供了内置支持。
 
 Webpack 5 支持在请求中处理协议。
 
-<<<<<<< HEAD
 - 支持`data:`。支持 Base64 或原始编码。Mimetype 可以在`module.rule`中被映射到加载器和模块类型。例如：`import x from "data:text/javascript,export default 42"`。
 - 支持`file:`。
 - 支持`http(s):`，但需要通过`new webpack.experiments.s schemesHttp(s)UriPlugin()`选择加入。
-    - 默认情况下，当目标为 "web "时，这些 URI 会导致对外部资源的请求（它们是外部资源）。
-=======
-- `data:` is supported. Base64 or raw encoding is supported. Mimetype can be mapped to loaders and module type in `module.rules`. Example: `import x from "data:text/javascript,export default 42"`
-- `file:` is supported.
-- `http(s):` is supported, but requires opt-in via `new webpack.experiments.schemesHttp(s)UriPlugin()`
-  - By default when targeting "web", these URIs result in requests to external resource (they are externals)
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+  - 默认情况下，当目标为 "web "时，这些 URI 会导致对外部资源的请求（它们是外部资源）。
 
 支持请求中的片段。例如：`./file.js#fragment`。
 
@@ -338,11 +305,7 @@ Webpack 5 确实会从 `package.json` `name` 中自动推断出一个唯一的�
 
 这个值用于使所有潜在的冲突的全局变量成为唯一。
 
-<<<<<<< HEAD
-迁移: 由于 `package.json` 中有唯一的名称，可将 `output.jsonpFunction` 删除。
-=======
-**MIGRATION**: Remove `output.jsonpFunction` in favor of a unique name in your `package.json`.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**: 由于 `package.json` 中有唯一的名称，可将 `output.jsonpFunction` 删除。
 
 ### 自动添加公共路径 {#automatic-public-path}
 
@@ -352,11 +315,7 @@ Webpack 5 会在可能的情况下自动确定 `output.publicPath`。
 
 Webpack 5 从源码中生成 typescript 类型，并通过 npm 包暴露它们。
 
-<<<<<<< HEAD
-迁移：删除`@types/webpack`。当名称不同时更新引用。
-=======
-**MIGRATION**: Remove `@types/webpack`. Update references when names differ.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：删除`@types/webpack`。当名称不同时更新引用。
 
 ## 重大变更: 构建优化 {#major-changes-optimization}
 
@@ -406,31 +365,17 @@ export function test() {
 
 可以分析以下标记。
 
-<<<<<<< HEAD
 - 函数声明
 - 类声明
 - `默认导出export default` 或定义变量以下的：
-    - 函数表达式
-    - 类表达式
-    - 顺序表达式
-    - `/*#__PURE__*/` 表达式
-    - 局部变量
-    - 引入的捆绑(bindings)
+  - 函数表达式
+  - 类表达式
+  - 顺序表达式
+  - `/*#__PURE__*/` 表达式
+  - 局部变量
+  - 引入的捆绑(bindings)
 
-反馈：如果你发现这个分析中缺少什么，请报告一个问题，我们会考虑增加它。
-=======
-- function declarations
-- class declarations
-- `export default` with or variable declarations with
-  - function expressions
-  - class expressions
-  - sequence expressions
-  - `/*#__PURE__*/` expressions
-  - local variables
-  - imported bindings
-
-**FEEDBACK**: If you find something missing in this analysis, please report an issue and we consider adding it.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**反馈**：如果你发现这个分析中缺少什么，请报告一个问题，我们会考虑增加它。
 
 使用 `eval()` 将为一个模块放弃这个优化，因为经过 eval 的代码可以引用范围内的任何标记。
 
@@ -450,21 +395,12 @@ webpack 5 增加了对一些 CommonJs 构造的支持，允许消除未使用的
 - `Object.defineProperty(exports|this|module.exports, "xxx", ...)`
 - `require("abc").xxx`
 - `require("abc").xxx()`
-<<<<<<< HEAD
 - 从 ESM 导入
 - `require()` 一个 ESM 模块
 - 被标记的导出类型 (对非严格 ESM 导入做特殊处理):
-    - `Object.defineProperty(exports|this|module.exports, "__esModule", { value: true|!0 })`
-    - `exports|this|module.exports.__esModule = true|!0`
-- 未来计划支持更多的构造
-=======
-- importing from ESM
-- `require()` a ESM
-- flagged exportType (special handling for non-strict ESM import):
   - `Object.defineProperty(exports|this|module.exports, "__esModule", { value: true|!0 })`
   - `exports|this|module.exports.__esModule = true|!0`
-- It's planned to support more constructs in future
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+- 未来计划支持更多的构造
 
 当检测到不可分析的代码时，webpack 会放弃，并且完全不跟踪这些模块的导出信息（出于性能考虑）。
 
@@ -589,19 +525,11 @@ module.exports = {
     type: 'filesystem',
 
     buildDependencies: {
-<<<<<<< HEAD
       // 2. 将你的 config 添加为 buildDependency，以便在改变 config 时获得缓存无效
       config: [__filename],
 
       // 3. 如果你有其他的东西被构建依赖，你可以在这里添加它们
       // 注意，webpack、加载器和所有从你的配置中引用的模块都会被自动添加
-=======
-      // 2. Add your config as buildDependency to get cache invalidation on config change
-      config: [__filename],
-
-      // 3. If you have other things the build depends on you can add them here
-      // Note that webpack, loaders and all modules referenced from your config are automatically added
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
     },
   },
 };
@@ -609,21 +537,12 @@ module.exports = {
 
 重要说明：
 
-<<<<<<< HEAD
-默认情况下，webpack 假定 webpack 所在的 `node_modules` 目录只被包管理器修改。对 `node_modules` 来说，哈希值和时间戳会被跳过。
+默认情况下，webpack 假定 webpack 所在的 `node_modules` 目录**只会**被包管理器修改。对 `node_modules` 来说，哈希值和时间戳会被跳过。
 出于性能考虑，只使用包名和版本。
 只要不指定`resolve.symlinks: false`，Symlinks(即`npm/yarn link`)就没有问题(无论如何都要避免)。
 不要直接编辑 `node_modules` 中的文件，除非你用 `snapshot.managedPaths: []`以剔除该优化。
 当使用 Yarn PnP 时，webpack 假设 yarn 缓存是不可改变的（通常是这样）。
 你可以使用 `snapshot.immutablePaths: []` 来退出这个优化。
-=======
-By default, webpack assumes that the `node_modules` directory, which webpack is inside of, is **only** modified by a package manager. Hashing and timestamping is skipped for `node_modules`.
-Instead, only the package name and version is used for performance reasons.
-Symlinks (i. e. `npm/yarn link`) are fine as long `resolve.symlinks: false` is not specified (avoid that anyway).
-Do not edit files in `node_modules` directly unless you opt-out of this optimization with `snapshot.managedPaths: []`.
-When using Yarn PnP webpack assumes that the yarn cache is immutable (which it usually is).
-You can opt-out of this optimization with `snapshot.immutablePaths: []`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 缓存将默认存储在 `node_modules/.cache/webpack`（当使用 node_modules 时）或 `.yarn/.cache/webpack`（当使用 Yarn PnP 时）中。
 当所有的插件都正确处理缓存时，你可能永远都不需要手动删除它。
@@ -643,11 +562,7 @@ You can opt-out of this optimization with `snapshot.immutablePaths: []`
 
 `webpack()` 用法在被传递回调时自动调用`close`。
 
-<<<<<<< HEAD
-迁移：在使用 Node.js API 时，一定要在完成工作后调用 `Compiler.close`。
-=======
-**MIGRATION**: While using the Node.js API, make sure to call `Compiler.close` when done.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：在使用 Node.js API 时，一定要在完成工作后调用 `Compiler.close`。
 
 ### 文件生成 {#file-emitting}
 
@@ -703,23 +618,13 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 
 以下的实验功能将随 webpack 5 一起发布。
 
-<<<<<<< HEAD
 - 旧的 WebAssembly 支持，就像 webpack 4 一样 (`experiments.syncWebAssembly`)
 - 根据[更新的规范](https://github.com/WebAssembly/esm-integration)(`experiments.asyncWebAssembly`)，新增 WebAssembly 支持。
-    - 这使得一个 WebAssembly 模块成为一个异步模块。
+  - 这使得一个 WebAssembly 模块成为一个异步模块。
 - [顶层的 Await](https://github.com/tc39/proposal-top-level-await)第三阶段提案(`experiments.topLevelAwait`)
-    - 在顶层使用 `await` 使该模块成为一个异步模块。
+  - 在顶层使用 `await` 使该模块成为一个异步模块。
 - 以模块的形式生成代码包 (`experiments.outputModule`)
-    - 这就从代码包中移除了包装器 IIFE，执行严格模式，通过 `<script type="module">` 进行懒惰加载，并在模块模式下最小化压缩。
-=======
-- Old WebAssembly support like in webpack 4 (`experiments.syncWebAssembly`)
-- New WebAssembly support according to the [updated spec](https://github.com/WebAssembly/esm-integration) (`experiments.asyncWebAssembly`)
-  - This makes a WebAssembly module an async module
-- [Top Level Await](https://github.com/tc39/proposal-top-level-await) Stage 3 proposal (`experiments.topLevelAwait`)
-  - Using `await` on top-level makes the module an async module
-- Emitting bundle as module (`experiments.outputModule`)
-  - This removed the wrapper IIFE from the bundle, enforces strict mode, lazy loads via `<script type="module">` and minimized in module mode
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+  - 这就从代码包中移除了包装器 IIFE，执行严格模式，通过 `<script type="module">` 进行懒惰加载，并在模块模式下最小化压缩。
 
 请注意，这也意味着 WebAssembly 的支持现在被默认禁用。
 
@@ -727,17 +632,12 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 
 最低支持的 Node.js 版本从 6 增加到 10.13.0(LTS)。
 
-<<<<<<< HEAD
-迁移：升级到最新的 Node.js 版本。
-=======
-**MIGRATION**: Upgrade to the latest Node.js version available.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：升级到最新的 Node.js 版本。
 
 ## 配置变更 {#changes-to-the-configuration}
 
 ### 结构的变化 {#changes-to-the-structure}
 
-<<<<<<< HEAD
 - `entry: {}` 现在可以赋值一个空对象（允许使用插件来修改入口）。
 - `target` 支持数组，版本及 browserslist
 - 移除了 `cache: Object`：不能再设置内存缓存对象
@@ -863,137 +763,9 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 - 添加了 `watchOptions.followSymlinks`
 - `watchOptions.ignored` 可以使用正则匹配
 - 暴露了 `webpack.util.serialization`
-=======
-- `entry: {}` allows an empty object now (to allow to use plugins to add entries)
-- `target` supports an array, versions and browserslist
-- `cache: Object` removed: Setting to a memory-cache object is no longer possible
-- `cache.type` added: It's now possible to choose between `"memory"` and `"filesystem"`
-- New configuration options for `cache.type = "filesystem"` added:
-  - `cache.cacheDirectory`
-  - `cache.name`
-  - `cache.version`
-  - `cache.store`
-  - `cache.hashAlgorithm`
-  - `cache.idleTimeout`
-  - `cache.idleTimeoutForInitialStore`
-  - `cache.buildDependencies`
-- `snapshot.resolveBuildDependencies` added
-- `snapshot.resolve` added
-- `snapshot.module` added
-- `snapshot.managedPaths` added
-- `snapshot.immutablePaths` added
-- `resolve.cache` added: Allows to disable/enable the safe resolve cache
-- `resolve.concord` removed
-- `resolve.alias` values can be arrays or `false` now
-- `resolve.restrictions` added: Allows to restrict potential resolve results
-- `resolve.fallback` added: Allow to alias requests that failed to resolve
-- `resolve.preferRelative` added: Allows to resolve modules requests are relative requests too
-- Automatic polyfills for native Node.js modules were removed
-  - `node.Buffer` removed
-  - `node.console` removed
-  - `node.process` removed
-  - `node.*` (Node.js native module) removed
-  - **MIGRATION**: `resolve.alias` and `ProvidePlugin`. Errors will give hints. (Refer to [node-libs-browser](https://github.com/webpack/node-libs-browser) for polyfills & mocks used in v4)
-- `output.filename` can now be a function
-- `output.assetModuleFilename` added
-- `output.jsonpScriptType` renamed to `output.scriptType`
-- `devtool` is more strict
-  - Format: `false | eval | [inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map`
-- `optimization.chunkIds: "deterministic"` added
-- `optimization.moduleIds: "deterministic"` added
-- `optimization.moduleIds: "hashed"` deprecated
-- `optimization.moduleIds: "total-size"` removed
-- Deprecated flags for module and chunk ids were removed
-  - `optimization.hashedModuleIds` removed
-  - `optimization.namedChunks` removed (`NamedChunksPlugin` too)
-  - `optimization.namedModules` removed (`NamedModulesPlugin` too)
-  - `optimization.occurrenceOrder` removed
-  - **MIGRATION**: Use `chunkIds` and `moduleIds`
-- `optimization.splitChunks` `test` no longer matches chunk name
-  - **MIGRATION**: Use a test function
-    `(module, { chunkGraph }) => chunkGraph.getModuleChunks(module).some(chunk => chunk.name === "name")`
-- `optimization.splitChunks` `minRemainingSize` was added
-- `optimization.splitChunks` `filename` can now be a function
-- `optimization.splitChunks` sizes can now be objects with a size per source type
-  - `minSize`
-  - `minRemainingSize`
-  - `maxSize`
-  - `maxAsyncSize`
-  - `maxInitialSize`
-- `optimization.splitChunks` `maxAsyncSize` and `maxInitialSize` added next to `maxSize`: allows to specify different max sizes for initial and async chunks
-- `optimization.splitChunks` `name: true` removed: Automatic names are no longer supported
-  - **MIGRATION**: Use the default. `chunkIds: "named"` will give your files useful names for debugging
-- `optimization.splitChunks.cacheGroups[].idHint` added: Gives a hint how the named chunk id should be chosen
-- `optimization.splitChunks` `automaticNamePrefix` removed
-  - **MIGRATION**: Use `idHint` instead
-- `optimization.splitChunks` `filename` is no longer restricted to initial chunks
-- `optimization.splitChunks` `usedExports` added to include used exports when comparing modules
-- `optimization.splitChunks.defaultSizeTypes` added: Specified the size types when using numbers for sizes
-- `optimization.mangleExports` added
-- `optimization.minimizer` `"..."` can be used to reference the defaults
-- `optimization.usedExports` `"global"` value added to allow to disable the analysis per runtime and instead do it globally (better performance)
-- `optimization.noEmitOnErrors` renamed to `optimization.emitOnErrors` and logic inverted
-- `optimization.realContentHash` added
-- `output.devtoolLineToLine` removed
-  - **MIGRATION**: No replacement
-- `output.chunkFilename: Function` is now allowed
-- `output.hotUpdateChunkFilename: Function` is now forbidden: It never worked anyway.
-- `output.hotUpdateMainFilename: Function` is now forbidden: It never worked anyway.
-- `output.importFunctionName: string` specifies the name used as replacement for `import()` to allow polyfilling for non-supported environments
-- `output.charset` added: setting it to false omit the `charset` property on script tags
-- `output.hotUpdateFunction` renamed to `output.hotUpdateGlobal`
-- `output.jsonpFunction` renamed to `output.chunkLoadingGlobal`
-- `output.chunkCallbackFunction` renamed to `output.chunkLoadingGlobal`
-- `output.chunkLoading` added
-- `output.enabledChunkLoadingTypes` added
-- `output.chunkFormat` added
-- `module.rules` `resolve` and `parser` will merge in a different way (objects are deeply merged, array may include `"..."` to reference to prev value)
-- `module.rules` `parser.worker` added: Allows to configure the worker supported
-- `module.rules` `query` and `loaders` were removed
-- `module.rules` `options` passing a string is deprecated
-  - **MIGRATION**: Pass an options object instead, open an issue on the loader when this is not supported
-- `module.rules` `mimetype` added: allows to match a mimetype of a DataURI
-- `module.rules` `descriptionData` added: allows to match a data from package.json
-- `module.defaultRules` `"..."` can be used to reference the defaults
-- `stats.chunkRootModules` added: Show root modules for chunks
-- `stats.orphanModules` added: Show modules which are not emitted
-- `stats.runtime` added: Show runtime modules
-- `stats.chunkRelations` added: Show parent/children/sibling chunks
-- `stats.errorStack` added: Show webpack-internal stack trace of errors
-- `stats.preset` added: select a preset
-- `stats.relatedAssets` added: show assets that are related to other assets (e.g. SourceMaps)
-- `stats.warningsFilter` deprecated in favor of `ignoreWarnings`
-- `BannerPlugin.banner` signature changed
-  - `data.basename` removed
-  - `data.query` removed
-  - **MIGRATION**: extract from `filename`
-- `SourceMapDevToolPlugin` `lineToLine` removed
-  - **MIGRATION**: No replacement
-- `[hash]` as hash for the full compilation is now deprecated
-  - **MIGRATION**: Use `[fullhash]` instead or better use another hash option
-- `[modulehash]` is deprecated
-  - **MIGRATION**: Use `[hash]` instead
-- `[moduleid]` is deprecated
-  - **MIGRATION**: Use `[id]` instead
-- `[filebase]` removed
-  - **MIGRATION**: Use `[base]` instead
-- New placeholders for file-based templates (i. e. SourceMapDevToolPlugin)
-  - `[name]`
-  - `[base]`
-  - `[path]`
-  - `[ext]`
-- `externals` when passing a function, it has now a different signature `({ context, request }, callback)`
-  - **MIGRATION**: Change signature
-- `externalsPresets` added
-- `experiments` added (see Experiments section above)
-- `watchOptions.followSymlinks` added
-- `watchOptions.ignored` can now be a RegExp
-- `webpack.util.serialization` is now exposed.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ### 默认值变更 {#changes-to-the-defaults}
 
-<<<<<<< HEAD
 - 当 browserslist 配置可用时，`target` 默认为 `"browserslist"`
 - `module.unsafeCache` 现默认只对 `node_modules` 启用
 - `optimization.moduleIds` 在生产环境下默认为 `deterministic`，而不再是 `size`
@@ -1002,7 +774,7 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 - `optimization.splitChunks.minSize` 在生产环境下默认为 `20k`
 - `optimization.splitChunks.enforceSizeThreshold` 在生产环境下默认为 `50k`
 - `optimization.splitChunks` 中的 `minRemainingSize` 在生产环境下默认为 `minSize`
-    - 这将导致在剩余部分过小的情况下，创建更少的 chunk
+  - 这将导致在剩余部分过小的情况下，创建更少的 chunk
 - `optimization.splitChunks` 中的 `maxAsyncRequests` 和 `maxInitialRequests` 默认值增加到了 30
 - `optimization.splitChunks.cacheGroups.vendors` 更名为 `optimization.splitChunks.cacheGroups.defaultVendors`
 - `optimization.splitChunks.cacheGroups.defaultVendors.reuseExistingChunk` 默认为 `true`
@@ -1012,26 +784,6 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 - `resolveLoader.extensions` 移除了 `.json`
 - `node.global` 中的 `node.__filename` 和 `node.__dirname` 默认为 `false`
 - `stats.errorStack` 默认为 `false`
-=======
-- `target` is now `"browserslist"` by default when a browserslist config is available
-- `module.unsafeCache` is now only enabled for `node_modules` by default
-- `optimization.moduleIds` defaults to `deterministic` in production mode, instead of `size`
-- `optimization.chunkIds` defaults to `deterministic` in production mode, instead of `total-size`
-- `optimization.nodeEnv` defaults to `false` in `none` mode
-- `optimization.splitChunks.minSize` defaults to `20k` in production
-- `optimization.splitChunks.enforceSizeThreshold` defaults to `50k` in production
-- `optimization.splitChunks` `minRemainingSize` defaults to `minSize`
-  - This will lead to less splitted chunks created in cases where the remaining part would be too small
-- `optimization.splitChunks` `maxAsyncRequests` and `maxInitialRequests` defaults was been increased to 30
-- `optimization.splitChunks.cacheGroups.vendors` has be renamed to `optimization.splitChunks.cacheGroups.defaultVendors`
-- `optimization.splitChunks.cacheGroups.defaultVendors.reuseExistingChunk` now defaults to `true`
-- `optimization.minimizer` target default uses `compress.passes: 2` in terser options now
-- `resolve(Loader).cache` defaults to `true` when `cache` is used
-- `resolve(Loader).cacheWithContext` defaults to `false`
-- `resolveLoader.extensions` remove `.json`
-- `node.global` `node.__filename` and `node.__dirname` defaults to `false` in node-`target`s
-- `stats.errorStack` defaults to `false`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ## 加载器相关变更 {#loader-related-changes}
 
@@ -1045,11 +797,7 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 
 这一点已从加载器上下文中删除
 
-<<<<<<< HEAD
-迁移：这可以在加载器本身实现。
-=======
-**MIGRATION**: This can be implemented in the loader itself
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：这可以在加载器本身实现。
 
 ### `this.getResolve` {#thisgetresolve}
 
@@ -1065,21 +813,12 @@ loader API 中的 `getResolve(options)` 将以另一种方式合并选项，参�
 
 ### 新的插件运行顺序 {#new-plugin-order}
 
-<<<<<<< HEAD
-现在 webpack 5 中的插件在应用配置默认值 __之前__ 就会被应用。
+现在 webpack 5 中的插件在应用配置默认值 **之前** 就会被应用。
 这使得插件可以应用自己的默认值，或者作为配置预设。
-=======
-Plugins in webpack 5 are now applies **before** the configuration defaults has been applied.
-This allows plugins to apply their own defaults, or act as configuration presets.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 但这也是一个突破性的变化，因为插件在应用时不能依赖配置值的设置。
 
-<<<<<<< HEAD
-迁移：只在插件钩子中访问配置。或者最好完全避免访问配置，并通过构造函数获取选项。
-=======
-**MIGRATION**: Access configuration only in plugin hooks. Or best avoid accessing configuration at all and take options via constructor.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：只在插件钩子中访问配置。或者最好完全避免访问配置，并通过构造函数获取选项。
 
 ### 运行时模块 {#runtime-modules}
 
@@ -1089,21 +828,13 @@ This allows plugins to apply their own defaults, or act as configuration presets
 
 在最好的情况下，根本不需要运行时代码。
 
-<<<<<<< HEAD
-迁移：如果你在插件中注入运行时代码到 webpack 运行时，可以考虑使用 RuntimeModules 来代替。instead.
-=======
-**MIGRATION**: If you are injecting runtime code into the webpack runtime in a plugin, consider using RuntimeModules instead.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：如果你在插件中注入运行时代码到 webpack 运行时，可以考虑使用 RuntimeModules 来代替。instead.
 
 ### 序列化 {#serialization}
 
 我们添加了一个序列化机制，以允许在 webpack 中对复杂对象进行序列化。它有一个可选的语义，所以那些应该被序列化的类需要被明确地标记出来（并且实现它们的序列化）。大多数模块、所有的依赖关系和一些错误都已经这样做了。
 
-<<<<<<< HEAD
-迁移：当使用自定义模块或依赖关系时，建议将它们实现成可序列化的，以便从持久化缓存中获益。
-=======
-**MIGRATION**: When using custom Modules or Dependencies, it is recommended to make them serializable to benefit from persistent caching.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：当使用自定义模块或依赖关系时，建议将它们实现成可序列化的，以便从持久化缓存中获益。
 
 ### 用于缓存的插件 {#plugins-for-caching}
 
@@ -1115,11 +846,7 @@ This allows plugins to apply their own defaults, or act as configuration presets
 
 有 `hooks` 的类会冻结其 `hooks` 对象，所以通过这种方式添加自定义钩子已经不可能了。
 
-<<<<<<< HEAD
-迁移：推荐的添加自定义钩子的方式是使用 WeakMap 和一个静态的 `getXXXHooks(XXX)`(即`getCompilationHook(compilation)`)方法。内部类使用与自定义钩子相同的机制。
-=======
-**MIGRATION**: The recommended way to add custom hooks is using a WeakMap and a static `getXXXHooks(XXX)` (i. e. `getCompilationHook(compilation)`) method. Internal classes use the same mechanism used for custom hooks.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：推荐的添加自定义钩子的方式是使用 WeakMap 和一个静态的 `getXXXHooks(XXX)`(即`getCompilationHook(compilation)`)方法。内部类使用与自定义钩子相同的机制。
 
 ### Tapable 插件升级 {#tapable-upgrade}
 
@@ -1127,21 +854,13 @@ webpack 3 插件的 compat 层已经被移除。它在 webpack 4 中已经被取
 
 一些较少使用的 tapable API 被删除或废弃。
 
-<<<<<<< HEAD
-迁移：使用新的 tapable API。
-=======
-**MIGRATION**: Use the new tapable API.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：使用新的 tapable API。
 
 ### Stage 钩子 {#staged-hooks}
 
 在封装代码包过程的几个步骤中，不同阶段有多个钩子，即 `optimizeDependenciesBasic`, `optimizeDependencies` 和 `optimizeDependenciesAdvanced`。这些已经被删除，改为一个单一的钩子，它可以与 `stage` 选项一起使用。参见 `OptimizationStages`了解可能的 `stage` 选项值。
 
-<<<<<<< HEAD
-MIGRATION: 侵入剩余的钩子。你可以添加一个 `stage` 选项。
-=======
-**MIGRATION**: Hook into the remaining hook instead. You may add a `stage` option.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**: 侵入剩余的钩子。你可以添加一个 `stage` 选项。
 
 ### Main/Chunk/ModuleTemplate 废弃 {#mainchunkmoduletemplate-deprecation}
 
@@ -1153,11 +872,7 @@ MIGRATION: 侵入剩余的钩子。你可以添加一个 `stage` 选项。
 
 有一个兼容层，所以 Main/Chunk/ModuleTemplate 仍然存在，但只是将 tap 调用委托给新的钩子位置。
 
-<<<<<<< HEAD
-迁移：按照 deprecation 消息中的建议。主要是指向不同位置的钩子。
-=======
-**MIGRATION**: Follow the advice in the deprecation messages. Mostly pointing to hooks at different locations.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：按照 deprecation 消息中的建议。主要是指向不同位置的钩子。
 
 ### 入口文件描述符 {#entry-point-descriptor}
 
@@ -1270,11 +985,7 @@ webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序
 
 优化模块和代码块顺序的钩子已经被移除。
 
-<<<<<<< HEAD
-迁移：在编译阶段，你不能再依赖模块和代码块的顺序了。
-=======
-**MIGRATION**: You cannot rely on the order of modules and chunks in the compilation phase no more.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：在编译阶段，你不能再依赖模块和代码块的顺序了。
 
 ### 从数组到集合(Set) {#arrays-to-sets}
 
@@ -1284,11 +995,7 @@ webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序
 
 存在一个适配层但会打印废弃的警告。
 
-<<<<<<< HEAD
-迁移: 使用集合方法代替数组方法。
-=======
-**MIGRATION**: Use Set methods instead of Array methods.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**: 使用集合方法代替数组方法。
 
 ### Compilation.fileSystemInfo {#compilationfilesysteminfo}
 
@@ -1296,11 +1003,7 @@ webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序
 
 后续，会增加访问文件内容 hash 值的功能，模块可以用文件内容代替文件 hash 来检查有效性。
 
-<<<<<<< HEAD
-迁移：使用 `compilation.fileSystemInfo` API，替代 `file/contextTimestamps`。
-=======
-**MIGRATION**: Instead of using `file/contextTimestamps` use the `compilation.fileSystemInfo` API instead.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：使用 `compilation.fileSystemInfo` API，替代 `file/contextTimestamps`。
 
 现在可以对目录进行时间戳管理，允许对 ContextModules 进行序列化。
 
@@ -1318,11 +1021,7 @@ HMR 运行时已被重构为运行时模块。`HotUpdateChunkTemplate` 已被合
 
 HMR 运行时的 javascript 部分已从核心 HMR 运行时钟分离了出来。其他模块类型现在也可以使用它们自己的方式处理 HMR。在未来，这将使得 HMR 处理诸如 mini-css-extract-plugin 或 WASM 模块。
 
-<<<<<<< HEAD
-迁移：此为新功能，无需迁移。
-=======
-**MIGRATION**: As this is a newly introduced functionality, there is nothing to migrate.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：此为新功能，无需迁移。
 
 `import.meta.webpackHot` 公开了与 `module.hot` 相同的 API。当然可以在 ESM 模块（.mjs，package.json 中的 type: "module"）中使用，这些模块不能访问 `module`。
 
@@ -1340,11 +1039,7 @@ webpack 曾经通过函数调用函数的形式来进行模块处理，还有一
 
 未来，多个编译器会同时工作，可以通过拦截这些队列来进行编译工作的编排。
 
-<<<<<<< HEAD
-迁移：此为新功能，无需迁移。
-=======
-**MIGRATION**: As this is a newly introduced functionality, there is nothing to migrate.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：此为新功能，无需迁移。
 
 ### Logging {#logging}
 
@@ -1378,21 +1073,13 @@ webpack 曾经在依赖关系中存储了已解析的模块，并在 chunk 中�
 
 这部分变化中大多数都有一个 compat-layer，当使用时，它会打印一个弃用警告。
 
-<<<<<<< HEAD
-迁移：在 ModuleGraph 和 ChunkGraph 上使用新的 API。
-=======
-**MIGRATION**: Use the new APIs on ModuleGraph and ChunkGraph
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：在 ModuleGraph 和 ChunkGraph 上使用新的 API。
 
 ### Init Fragments {#init-fragments}
 
 `DependenciesBlockVariables` 已被移除，改为 `InitFragments`。`DependencyTemplates` 现在可以添加 `InitFragments`，以将代码注入模块源的起始位置。`InitFragments` 允许删除重复数据。
 
-<<<<<<< HEAD
-迁移：使用 `InitFragments` 代替，而无需在源文件的负索引出插入。
-=======
-**MIGRATION**: Use `InitFragments` instead of inserting something at a negative index into the source.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：使用 `InitFragments` 代替，而无需在源文件的负索引出插入。
 
 ### 模块 Source Types {#module-source-types}
 
@@ -1400,21 +1087,13 @@ Modules 现在必须通过 `Module.getSourceTypes()` 来定义它们支持的源
 
 模块类型与源类型间没有关系。即使模块类型为 `json`，也可以使用源类型为 `javascript` 和模块类型为 `webassembly/experimental` 的 `javascript` 和 `webassembly`。
 
-<<<<<<< HEAD
-迁移：自定义模块需要实现这些新的接口方法。
-=======
-**MIGRATION**: Custom modules need to implement these new interface methods.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：自定义模块需要实现这些新的接口方法。
 
 ### Stats 的插件 {#plugins-for-stats}
 
 Stats 的 `preset`，`default`，`json` 和 `toString` 现已由插件系统内置。将当前的 Stats 转换为插件。
 
-<<<<<<< HEAD
-迁移：你现在可以自定义它，而无需替换整个 Stats 功能。额外的信息现在可以添加到 stats json 中，而不是单独编写文件。
-=======
-**MIGRATION**: Instead of replacing the whole Stats functionality, you can now customize it. Extra information can now be added to the stats json instead of writing a separate file.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：你现在可以自定义它，而无需替换整个 Stats 功能。额外的信息现在可以添加到 stats json 中，而不是单独编写文件。
 
 ### 全新的监听 {#new-watching}
 
@@ -1436,23 +1115,13 @@ webpack 现在使用 `SizeOnlySource` 替换 `Compilation.assets` 中的 Sources
 
 对于每个 export，都会存储以下信息：
 
-<<<<<<< HEAD
 - 是否使用 export? 是否使用并不确定。（详见 `optimization.usedExports`）
 - 是否提供 export? 是否提供并不确定。（详见 `optimization.providedExports`）
 - 能否重命名 export 名? 是否重命名，也不确定
 - 如果 export 已重新命名，则为新名称。（详见 `optimization.mangleExports`）
 - 嵌套的 ExportsInfo，如果 export 是一个含有附加信息的对象，那么它本身就是一个对象
-    - 用于重新导出命名空间对象：`import * as X from "..."; export { X };`
-    - 用于表示 JSON 模块中的结构
-=======
-- Is the export used? yes, no, not statically known, not determined. (see also `optimization.usedExports`)
-- Is the export provided? yes, no, not statically known, not determined. (see also `optimization.providedExports`)
-- Can be export name be renamed? yes, no, not determined.
-- The new name, if the export has been renamed. (see also `optimization.mangleExports`)
-- Nested ExportsInfo, if the export is an object with information attached itself
-  - Used for reexporting namespace objects: `import * as X from "..."; export { X };`
-  - Used for representing structure in JSON modules
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+  - 用于重新导出命名空间对象：`import * as X from "..."; export { X };`
+  - 用于表示 JSON 模块中的结构
 
 ### 代码生成阶段 {#code-generation-phase}
 
@@ -1460,11 +1129,7 @@ webpack 现在使用 `SizeOnlySource` 替换 `Compilation.assets` 中的 Sources
 
 这应该会使得流程更加简洁。它还运行报告该阶段的进度。并使得代码生成在剖析时更加清晰可见。
 
-<<<<<<< HEAD
-迁移：`Module.source()` 和 `Module.getRuntimeRequirements()` 已弃用。使用 `Module.codeGeneration()` 代替。
-=======
-**MIGRATION**: `Module.source()` and `Module.getRuntimeRequirements()` are deprecated now. Use `Module.codeGeneration()` instead.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**迁移**：`Module.source()` 和 `Module.getRuntimeRequirements()` 已弃用。使用 `Module.codeGeneration()` 代替。
 
 ### 依赖关系参考 {#dependencyreference}
 
@@ -1517,7 +1182,6 @@ webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（
   };
   ```
 
-<<<<<<< HEAD
 ## 微小改动 {#minor-changes}
 
 - `Compiler.name`：当生成带有绝对路径的编译器名称时，请确保名称使用 `|` 或 `!` 分隔。
@@ -1767,256 +1431,5 @@ webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（
 - 当基于 `filename` 生成路径时，`[query]` 是一个有效占位符，如 asset
 - 添加了 `Compilation.deleteAsset`，用于正确删除 asset 和非公用的相关资源
 - 将 `require("webpack-sources")` 暴露为 `require("webpack").sources`
-=======
-## Minor Changes
-
-- `Compiler.name`: When generating a compiler name with absolute paths, make sure to separate them with `|` or `!` on both parts of the name.
-  - Using space as a separator is now deprecated. (Paths could contain spaces)
-  - Hint: `|` is replaced with space in Stats string output.
-- `SystemPlugin` is now disabled by default.
-  - **MIGRATION**: Avoid using it as the spec has been removed. You can re-enable it with `Rule.parser.system: true`
-- `ModuleConcatenationPlugin`: concatenation is no longer prevented by `DependencyVariables` as they have been removed
-  - This means it can now concatenate in cases of `module`, `global`, `process` or the ProvidePlugin
-- `Stats.presetToOptions` removed
-  - **MIGRATION**: Use `compilation.createStatsOptions` instead
-- `SingleEntryPlugin` and `SingleEntryDependency` removed
-  - **MIGRATION**: use `EntryPlugin` and `EntryDependency`
-- Chunks can now have multiple entry modules
-- `ExtendedAPIPlugin` removed
-  - **MIGRATION**: No longer needed, `__webpack_hash__` and `__webpack_chunkname__` can always be used and runtime code is injected where needed.
-- `ProgressPlugin` no longer uses tapable context for `reportProgress`
-  - **MIGRATION**: Use `ProgressPlugin.getReporter(compiler)` instead
-- `ProvidePlugin` is now re-enabled for `.mjs` files
-- `Stats` json `errors` and `warnings` no longer contain strings but objects with information splitted into properties.
-  - **MIGRATION**: Access the information on the properties. i. e. `message`
-- `Compilation.hooks.normalModuleLoader` is deprecated
-  - **MIGRATION**: Use `NormalModule.getCompilationHooks(compilation).loader` instead
-- Changed hooks in `NormalModuleFactory` from waterfall to bailing, changed and renamed hooks that return waterfall functions
-- Removed `compilationParams.compilationDependencies`
-  - Plugins can add dependencies to the compilation by adding to `compilation.file/context/missingDependencies`
-  - Compat layer will delegate `compilationDependencies.add` to `fileDependencies.add`
-- `stats.assetsByChunkName[x]` is now always an array
-- `__webpack_get_script_filename__` function added to get the filename of a script file
-- `"sideEffects"` in package.json will be handled by `glob-to-regex` instead of `micromatch`
-  - This may have changed semantics in edge-cases
-- `checkContext` was removed from `IgnorePlugin`
-- New `__webpack_exports_info__` API allows export usage introspection
-- SourceMapDevToolPlugin applies to non-chunk assets too now
-- EnvironmentPlugin shows an error now when referenced env variable is missing and has no fallback
-- Remove `serve` property from schema
-
-## Other Minor Changes
-
-- removed builtin directory and replaced builtins with runtime modules
-- Removed deprecated features
-  - BannerPlugin now only support one argument that can be an object, string or function
-- removed `CachePlugin`
-- `Chunk.entryModule` is deprecated, use ChunkGraph instead
-- `Chunk.hasEntryModule` is deprecated
-- `Chunk.addModule` is deprecated
-- `Chunk.removeModule` is deprecated
-- `Chunk.getNumberOfModules` is deprecated
-- `Chunk.modulesIterable` is deprecated
-- `Chunk.compareTo` is deprecated
-- `Chunk.containsModule` is deprecated
-- `Chunk.getModules` is deprecated
-- `Chunk.remove` is deprecated
-- `Chunk.moveModule` is deprecated
-- `Chunk.integrate` is deprecated
-- `Chunk.canBeIntegrated` is deprecated
-- `Chunk.isEmpty` is deprecated
-- `Chunk.modulesSize` is deprecated
-- `Chunk.size` is deprecated
-- `Chunk.integratedSize` is deprecated
-- `Chunk.getChunkModuleMaps` is deprecated
-- `Chunk.hasModuleInGraph` is deprecated
-- `Chunk.updateHash` signature changed
-- `Chunk.getChildIdsByOrders` signature changed (TODO: consider moving to `ChunkGraph`)
-- `Chunk.getChildIdsByOrdersMap` signature changed (TODO: consider moving to `ChunkGraph`)
-- `Chunk.getChunkModuleMaps` removed
-- `Chunk.setModules` removed
-- deprecated Chunk methods removed
-- `ChunkGraph` added
-- `ChunkGroup.setParents` removed
-- `ChunkGroup.containsModule` removed
-- `Compilation.cache` was removed in favor of `Compilation.getCache()`
-- `ChunkGroup.remove` no longer disconnected the group from block
-- `ChunkGroup.compareTo` signature changed
-- `ChunkGroup.getChildrenByOrders` signature changed
-- `ChunkGroup` index and index renamed to pre/post order index
-  - old getter is deprecated
-- `ChunkTemplate.hooks.modules` signature changed
-- `ChunkTemplate.hooks.render` signature changed
-- `ChunkTemplate.updateHashForChunk` signature changed
-- `Compilation.hooks.optimizeChunkOrder` removed
-- `Compilation.hooks.optimizeModuleOrder` removed
-- `Compilation.hooks.advancedOptimizeModuleOrder` removed
-- `Compilation.hooks.optimizeDependenciesBasic` removed
-- `Compilation.hooks.optimizeDependenciesAdvanced` removed
-- `Compilation.hooks.optimizeModulesBasic` removed
-- `Compilation.hooks.optimizeModulesAdvanced` removed
-- `Compilation.hooks.optimizeChunksBasic` removed
-- `Compilation.hooks.optimizeChunksAdvanced` removed
-- `Compilation.hooks.optimizeChunkModulesBasic` removed
-- `Compilation.hooks.optimizeChunkModulesAdvanced` removed
-- `Compilation.hooks.optimizeExtractedChunksBasic` removed
-- `Compilation.hooks.optimizeExtractedChunks` removed
-- `Compilation.hooks.optimizeExtractedChunksAdvanced` removed
-- `Compilation.hooks.afterOptimizeExtractedChunks` removed
-- `Compilation.hooks.stillValidModule` added
-- `Compilation.hooks.statsPreset` added
-- `Compilation.hooks.statsNormalize` added
-- `Compilation.hooks.statsFactory` added
-- `Compilation.hooks.statsPrinter` added
-- `Compilation.fileDependencies`, `Compilation.contextDependencies` and `Compilation.missingDependencies` are now LazySets
-- `Compilation.entries` removed
-  - **MIGRATION**: Use `Compilation.entryDependencies` instead
-- `Compilation._preparedEntrypoints` removed
-- `dependencyTemplates` is now a `DependencyTemplates` class instead of a raw `Map`
-- `Compilation.fileTimestamps` and `contextTimestamps` removed
-  - **MIGRATION**: Use `Compilation.fileSystemInfo` instead
-- `Compilation.waitForBuildingFinished` removed
-  - **MIGRATION**: Use the new queues
-- `Compilation.addModuleDependencies` removed
-- `Compilation.prefetch` removed
-- `Compilation.hooks.beforeHash` is now called after the hashes of modules are created
-  - **MIGRATION**: Use `Compiliation.hooks.beforeModuleHash` instead
-- `Compilation.applyModuleIds` removed
-- `Compilation.applyChunkIds` removed
-- `Compiler.root` added, which points to the root compiler
-  - it can be used to cache data in WeakMaps instead of statically scoped
-- `Compiler.hooks.afterDone` added
-- `Source.emitted` is no longer set by the Compiler
-  - **MIGRATION**: Check `Compilation.emittedAssets` instead
-- `Compiler/Compilation.compilerPath` added: It's a unique name of the compiler in the compiler tree. (Unique to the root compiler scope)
-- `Module.needRebuild` deprecated
-  - **MIGRATION**: use `Module.needBuild` instead
-- `Dependency.getReference` signature changed
-- `Dependency.getExports` signature changed
-- `Dependency.getWarnings` signature changed
-- `Dependency.getErrors` signature changed
-- `Dependency.updateHash` signature changed
-- `Dependency.module` removed
-- There is now a base class for `DependencyTemplate`
-- `MultiEntryDependency` removed
-- `EntryDependency` added
-- `EntryModuleNotFoundError` removed
-- `SingleEntryPlugin` removed
-- `EntryPlugin` added
-- `Generator.getTypes` added
-- `Generator.getSize` added
-- `Generator.generate` signature changed
-- `HotModuleReplacementPlugin.getParserHooks` added
-- `Parser` was moved to `JavascriptParser`
-- `ParserHelpers` was moved to `JavascriptParserHelpers`
-- `MainTemplate.hooks.moduleObj` removed
-- `MainTemplate.hooks.currentHash` removed
-- `MainTemplate.hooks.addModule` removed
-- `MainTemplate.hooks.requireEnsure` removed
-- `MainTemplate.hooks.globalHashPaths` removed
-- `MainTemplate.hooks.globalHash` removed
-- `MainTemplate.hooks.hotBootstrap` removed
-- `MainTemplate.hooks` some signatures changed
-- `Module.hash` deprecated
-- `Module.renderedHash` deprecated
-- `Module.reasons` removed
-- `Module.id` deprecated
-- `Module.index` deprecated
-- `Module.index2` deprecated
-- `Module.depth` deprecated
-- `Module.issuer` deprecated
-- `Module.profile` removed
-- `Module.prefetched` removed
-- `Module.built` removed
-- `Module.used` removed
-  - **MIGRATION**: Use `Module.getUsedExports` instead
-- Module.usedExports deprecated
-  - **MIGRATION**: Use `Module.getUsedExports` instead
-- `Module.optimizationBailout` deprecated
-- `Module.exportsArgument` removed
-- `Module.optional` deprecated
-- `Module.disconnect` removed
-- `Module.unseal` removed
-- `Module.setChunks` removed
-- `Module.addChunk` deprecated
-- `Module.removeChunk` deprecated
-- `Module.isInChunk` deprecated
-- `Module.isEntryModule` deprecated
-- `Module.getChunks` deprecated
-- `Module.getNumberOfChunks` deprecated
-- `Module.chunksIterable` deprecated
-- `Module.hasEqualsChunks` removed
-- `Module.useSourceMap` moved to `NormalModule`
-- `Module.addReason` removed
-- `Module.removeReason` removed
-- `Module.rewriteChunkInReasons` removed
-- `Module.isUsed` removed
-  - **MIGRATION**: Use `isModuleUsed`, `isExportUsed` and `getUsedName` instead
-- `Module.updateHash` signature changed
-- `Module.sortItems` removed
-- `Module.unbuild` removed
-  - **MIGRATION**: Use `invalidateBuild` instead
-- `Module.getSourceTypes` added
-- `Module.getRuntimeRequirements` added
-- `Module.size` signature changed
-- `ModuleFilenameHelpers.createFilename` signature changed
-- `ModuleProfile` class added with more data
-- `ModuleReason` removed
-- `ModuleTemplate.hooks` signatures changed
-- `ModuleTemplate.render` signature changed
-- `Compiler.dependencies` removed
-  - **MIGRATION**: Use `MultiCompiler.setDependencies` instead
-- `MultiModule` removed
-- `MultiModuleFactory` removed
-- `NormalModuleFactory.fileDependencies`, `NormalModuleFactory.contextDependencies` and `NormalModuleFactory.missingDependencies` are now LazySets
-- `RuntimeTemplate` methods now take `runtimeRequirements` arguments
-- `serve` property is removed
-- `Stats.jsonToString` removed
-- `Stats.filterWarnings` removed
-- `Stats.getChildOptions` removed
-- `Stats` helper methods removed
-- `Stats.toJson` signature changed (second argument removed)
-- `ExternalModule.external` removed
-- `HarmonyInitDependency` removed
-- `Dependency.getInitFragments` deprecated
-  - **MIGRATION**: Use `apply` `initFragements` instead
-- DependencyReference now takes a function to a module instead of a Module
-- HarmonyImportSpecifierDependency.redirectedId removed
-  - **MIGRATION**: Use `setId` instead
-- acorn 5 -> 8
-- Testing
-  - HotTestCases now runs for multiple targets `async-node` `node` `web` `webworker`
-  - TestCases now also runs for filesystem caching with `store: "instant"` and `store: "pack"`
-  - TestCases now also runs for deterministic module ids
-- Tooling added to order the imports (checked in CI)
-- Chunk name mapping in runtime no longer contains entries when chunk name equals chunk id
-- add `resolvedModuleId` `resolvedModuleIdentifier` and `resolvedModule` to reasons in Stats which point to the module before optimizations like scope hoisting
-- show `resolvedModule` in Stats toString output
-- loader-runner was upgraded: https://github.com/webpack/loader-runner/releases/tag/v3.0.0
-- `file/context/missingDependencies` in `Compilation` are no longer sorted for performance reasons
-  - Do not rely on the order
-- webpack-sources was upgraded to version 2: https://github.com/webpack/webpack-sources/releases/tag/v2.0.1
-- webpack-command support was removed
-- Use schema-utils@2 for schema validation
-- `Compiler.assetEmitted` has an improved second argument with more information
-- BannerPlugin omits trailing whitespace
-- removed `minChunkSize` option from `LimitChunkCountPlugin`
-- reorganize from javascript related files into sub-directory
-  - `webpack.JavascriptModulesPlugin` -> `webpack.javascript.JavascriptModulesPlugin`
-- Logger.getChildLogger added
-- change the default of entryOnly of the DllPlugin to true
-- remove special request shortening logic and use single relative paths for readable module names
-- allow webpack:// urls in SourceMaps to provided paths relative to webpack root context
-- add API to generate and process CLI arguments targeting webpack configuration
-- add `__system_context__` as context from System.js when using System.js as libraryTarget
-- add bigint support for the DefinePlugin
-- add bigint support for basic evaluations like maths
-- remove ability to modify the compilation hash after the hash has been created
-- remove HotModuleReplacementPlugin multiStep mode
-- `assetInfo` from `emitAsset` will now merge when nested objects or arrays are used
-- `[query]` is now a valid placeholder when for paths based on a `filename` like assets
-- add `Compilation.deleteAsset` to correctly delete an assets and non-shared related assets
-- expose `require("webpack-sources")` as `require("webpack").sources`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 - terser 5
 - 当 Webpack 作为句首时，Webpack 的 W 应该大写

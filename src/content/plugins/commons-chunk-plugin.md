@@ -22,12 +22,7 @@ By separating common modules from bundles, the resulting chunked file can be loa
 new webpack.optimize.CommonsChunkPlugin(options);
 ```
 
-<<<<<<< HEAD
-
 ## Options {#options}
-=======
-## Options
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 <!-- eslint-skip -->
 
@@ -74,12 +69,7 @@ new webpack.optimize.CommonsChunkPlugin(options);
 }
 ```
 
-<<<<<<< HEAD
-
 ## Examples {#examples}
-=======
-## Examples
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ### Commons chunk for entries {#commons-chunk-for-entries}
 
@@ -108,12 +98,7 @@ You must load the generated chunk before the entry point:
 <script src="entry.bundle.js" charset="utf-8"></script>
 ```
 
-<<<<<<< HEAD
-
 ### Explicit vendor chunk {#explicit-vendor-chunk}
-=======
-### Explicit vendor chunk
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Split your code into vendor and application.
 
@@ -145,12 +130,7 @@ module.exports = {
 
 T> In combination with long term caching you may need to use the [`ChunkManifestWebpackPlugin`](https://github.com/soundcloud/chunk-manifest-webpack-plugin) to avoid the vendor chunk changes. You should also use records to ensure stable module ids, e.g. using `NamedModulesPlugin` or [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin).
 
-<<<<<<< HEAD
-
 ### Move common modules into the parent chunk {#move-common-modules-into-the-parent-chunk}
-=======
-### Move common modules into the parent chunk
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 With [Code Splitting](/guides/code-splitting), multiple child chunks of an entry chunk can have common dependencies. To prevent duplication these can be moved into the parent. This reduces overall size, but does have a negative effect on the initial load time. If it is expected that users will need to download many sibling chunks, i.e. children of the entry chunk, then this should improve load time overall.
 
@@ -167,12 +147,7 @@ new webpack.optimize.CommonsChunkPlugin({
 });
 ```
 
-<<<<<<< HEAD
-
 ### Extra async commons chunk {#extra-async-commons-chunk}
-=======
-### Extra async commons chunk
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Similar to the above one, but instead of moving common modules into the parent (which increases initial load time) a new async-loaded additional commons chunk is used. This is automatically downloaded in parallel when the additional chunk is downloaded.
 
@@ -195,12 +170,7 @@ new webpack.optimize.CommonsChunkPlugin({
 });
 ```
 
-<<<<<<< HEAD
-
 ### Passing the `minChunks` property a function {#passing-the-minchunks-property-a-function}
-=======
-### Passing the `minChunks` property a function
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 You also have the ability to pass the `minChunks` property a function. This function is called by the `CommonsChunkPlugin` and calls the function with `module` and `count` arguments.
 

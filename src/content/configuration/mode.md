@@ -26,12 +26,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 或者从 [CLI](/api/cli/) 参数中传递：
-=======
-or pass it as a [CLI](/api/cli/) argument:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```bash
 webpack --mode=development
@@ -39,30 +34,17 @@ webpack --mode=development
 
 支持以下字符串值：
 
-<<<<<<< HEAD
 选项                  | 描述
 --------------------- | -----------------------
 `development`         | 会将 `DefinePlugin` 中 `process.env.NODE_ENV` 的值设置为 `development`. 为模块和 chunk 启用有效的名。
 `production`          | 会将 `DefinePlugin` 中 `process.env.NODE_ENV` 的值设置为 `production`。为模块和 chunk 启用确定性的混淆名称，`FlagDependencyUsagePlugin`，`FlagIncludedChunksPlugin`，`ModuleConcatenationPlugin`，`NoEmitOnErrorsPlugin` 和 `TerserPlugin` 。
 `none`                | 不使用任何默认优化选项
-=======
-| Option        | Description                                                                                                                                                                                                                                                       |
-| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `development` | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `development`. Enables useful names for modules and chunks.                                                                                                                                                |
-| `production`  | Sets `process.env.NODE_ENV` on `DefinePlugin` to value `production`. Enables deterministic mangled names for modules and chunks, `FlagDependencyUsagePlugin`, `FlagIncludedChunksPlugin`, `ModuleConcatenationPlugin`, `NoEmitOnErrorsPlugin` and `TerserPlugin`. |
-| `none`        | Opts out of any default optimization options                                                                                                                                                                                                                      |
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 如果没有设置，webpack 会给 `mode` 的默认值设置为 `production`。
 
 T> 请注意，设置 `NODE_ENV` 并不会自动地设置 `mode`。
 
-<<<<<<< HEAD
-
 ### Mode: development {#mode-development}
-=======
-### Mode: development
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```diff
 // webpack.development.config.js
@@ -101,12 +83,7 @@ module.exports = {
 }
 ```
 
-<<<<<<< HEAD
-
 ### Mode: production {#mode-production}
-=======
-### Mode: production
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```diff
 // webpack.production.config.js
@@ -145,12 +122,7 @@ module.exports = {
 }
 ```
 
-<<<<<<< HEAD
-
 ### Mode: none {#mode-none}
-=======
-### Mode: none
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```diff
 // webpack.custom.config.js
@@ -177,11 +149,7 @@ module.exports = {
 }
 ```
 
-<<<<<<< HEAD
-如果要根据 _webpack.config.js_ 中的 __mode__ 变量更改打包行为，则必须将配置导出为函数，而不是导出对象：
-=======
-If you want to change the behavior according to the **mode** variable inside the _webpack.config.js_, you have to export a function instead of an object:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+如果要根据 *webpack.config.js* 中的 **mode** 变量更改打包行为，则必须将配置导出为函数，而不是导出对象：
 
 ```javascript
 var config = {

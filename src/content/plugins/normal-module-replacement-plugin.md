@@ -13,12 +13,7 @@ This can be useful for allowing different behaviour between builds.
 new webpack.NormalModuleReplacementPlugin(resourceRegExp, newResource);
 ```
 
-<<<<<<< HEAD
-
 ## Basic Example {#basic-example}
-=======
-## Basic Example
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Replace a specific module when building for a [development environment](/guides/production).
 
@@ -33,12 +28,7 @@ new webpack.NormalModuleReplacementPlugin(
 );
 ```
 
-<<<<<<< HEAD
-
 ## Advanced Example {#advanced-example}
-=======
-## Advanced Example
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Conditional build depending on an [specified environment](/configuration/configuration-types).
 

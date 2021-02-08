@@ -22,17 +22,11 @@ webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `
 
 告知 webpack 为目标(target)指定一个环境。默认值为 `"browserslist"`，如果没有找到 browserslist 的配置，则默认为 `"web"`
 
-<<<<<<< HEAD
-
 ### `string` {#string}
-=======
-### `string`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 通过 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js)，
 可以支持以下字符串值：
 
-<<<<<<< HEAD
 选项                | 描述
 --------------------- | -----------------------
 `async-node`          | 编译为类 Node.js 环境可用（使用 fs 和 vm 异步加载分块）
@@ -46,25 +40,10 @@ webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `
 `node-webkit`         | 编译为 Webkit 可用，并且使用 jsonp 去加载分块。支持 Node.js 内置模块和 [`nw.gui`](http://docs.nwjs.io/en/latest/) 
 导入（实验性质）
 `nwjs[[X].Y]`         | 等价于 `node-webkit`
-`web`                 | 编译为类浏览器环境里可用 __（默认）__
+`web`                 | 编译为类浏览器环境里可用 **（默认）**
 `webworker`           | 编译成一个 WebWorker
 `esX`                 | 编译为指定版本的 ECMAScript。例如，es5，es2020
-`browserslist`        | 从 browserslist-config 中推断出平台和 ES 特性 __（如果 browserslist 可用，其值则为默认）__
-=======
-| Option                     | Description                                                                                                                                                                                                                                                                                          |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `async-node[[X].Y]`        | Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)                                                                                                                                                                                                   |
-| `electron[[X].Y]-main`     | Compile for [Electron](https://electronjs.org/) for main process.                                                                                                                                                                                                                                    |
-| `electron[[X].Y]-renderer` | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.                                       |
-| `electron[[X].Y]-preload`  | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `NodeTemplatePlugin` with `asyncChunkLoading` set to `true`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules. |
-| `node[[X].Y]`              | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)                                                                                                                                                                                                              |
-| `node-webkit[[X].Y]`       | Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)                                                                                                                             |
-| `nwjs[[X].Y]`              | The same as `node-webkit`                                                                                                                                                                                                                                                                            |
-| `web`                      | Compile for usage in a browser-like environment **(default)**                                                                                                                                                                                                                                        |
-| `webworker`                | Compile as WebWorker                                                                                                                                                                                                                                                                                 |
-| `esX`                      | Compile for specified ECMAScript version. Examples: es5, es2020.                                                                                                                                                                                                                                     |
-| `browserslist`             | Infer a platform and the ES-features from a browserslist-config **(default if browserslist config is available)**                                                                                                                                                                                    |
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+`browserslist`        | 从 browserslist-config 中推断出平台和 ES 特性 **（如果 browserslist 可用，其值则为默认）**
 
 例如，当 `target` 设置为 `"electron-main"`，webpack 引入多个 electron 特定的变量。
 

@@ -21,12 +21,7 @@ related:
 new webpack.EvalSourceMapDevToolPlugin(options);
 ```
 
-<<<<<<< HEAD
-
 ## 选项 {#options}
-=======
-## Options
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 支持以下选项：
 

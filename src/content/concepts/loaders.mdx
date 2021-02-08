@@ -44,29 +44,15 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ## 使用 loader {#using-loaders}
-=======
-## Using Loaders
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 在你的应用程序中，有三种使用 loader 的方式：
 
-<<<<<<< HEAD
-- [配置方式](#configuration)（推荐）：在 __webpack.config.js__ 文件中指定 loader。
+- [配置方式](#configuration)（推荐）：在 **webpack.config.js** 文件中指定 loader。
 - [内联方式](#inline)：在每个 `import` 语句中显式指定 loader。
 - [CLI 方式](#cli)：在 shell 命令中指定它们。
 
-
 ### 配置方式 {#configuration}
-=======
-- [Configuration](#configuration) (recommended): Specify them in your **webpack.config.js** file.
-- [Inline](#inline): Specify them explicitly in each `import` statement.
-- [CLI](#cli): Specify them within a shell command.
-
-### Configuration
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 [`module.rules`](/configuration/module/#modulerules) 允许你在 webpack 配置中指定多个 loader。
 这种方式是展示 loader 的一种简明方式，并且有助于使代码变得简洁和易于维护。同时让你对各个 loader 有个全局概览：
@@ -98,12 +84,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ### 内联方式 {#inline}
-=======
-### Inline
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 可以在 `import` 语句或任何 [与 "import" 方法同等的引用方式](/api/module-methods) 中指定 loader。使用 `!` 将资源中的 loader 分开。每个部分都会相对于当前目录解析。
 
@@ -135,12 +116,7 @@ import Styles from '-!style-loader!css-loader?modules!./styles.css';
 
 T> 尽可能使用 `module.rules`，因为这样可以减少源码中样板文件的代码量，并且可以在出错时，更快地调试和定位 loader 中的问题。
 
-<<<<<<< HEAD
-
 ### CLI 方式 {#cli}
-=======
-### CLI
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 还可以通过 CLI 使用 loader：
 
@@ -150,12 +126,7 @@ webpack --module-bind pug-loader --module-bind 'css=style-loader!css-loader'
 
 这会对 `.jade` 文件使用 `pug-loader`，以及对 `.css` 文件使用 [`style-loader`](/loaders/style-loader) 和 [`css-loader`](/loaders/css-loader)。
 
-<<<<<<< HEAD
-
 ## loader 特性 {#loader-features}
-=======
-## Loader Features
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 - loader 支持链式调用。链中的每个 loader 会将转换应用在已处理过的资源上。一组链式的 loader 将按照相反的顺序执行。链中的第一个 loader 将其结果（也就是应用过转换后的资源）传递给下一个 loader，依此类推。最后，链中的最后一个 loader，返回 webpack 所期望的 JavaScript。
 - loader 可以是同步的，也可以是异步的。
@@ -167,12 +138,7 @@ webpack --module-bind pug-loader --module-bind 'css=style-loader!css-loader'
 
 可以通过 loader 的预处理函数，为 JavaScript 生态系统提供更多能力。用户现在可以更加灵活地引入细粒度逻辑，例如：压缩、打包、语言翻译和 [更多其他特性](/loaders)。
 
-<<<<<<< HEAD
-
 ## 解析 loader {#resolving-loaders}
-=======
-## Resolving Loaders
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 loader 遵循标准 [模块解析](/concepts/module-resolution/) 规则。多数情况下，loader 将从 [模块路径](/concepts/module-resolution/#module-paths) 加载（通常是从 `npm install`, `node_modules` 进行加载）。
 

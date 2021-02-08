@@ -22,21 +22,11 @@ require('path/to/module');
 resolver 帮助 webpack 从每个 `require`/`import` 语句中，找到需要引入到 bundle 中的模块代码。
 当打包模块时，webpack 使用 [enhanced-resolve](https://github.com/webpack/enhanced-resolve) 来解析文件路径。
 
-<<<<<<< HEAD
-
 ## webpack 中的解析规则 {#resolving-rules-in-webpack}
-=======
-## Resolving rules in webpack
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 使用 `enhanced-resolve`，webpack 能解析三种文件路径：
 
-<<<<<<< HEAD
-
 ### 绝对路径 {#absolute-paths}
-=======
-### Absolute paths
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```js
 import '/home/me/file';
@@ -46,12 +36,7 @@ import 'C:\\Users\\me\\file';
 
 由于已经获得文件的绝对路径，因此不需要再做进一步解析。
 
-<<<<<<< HEAD
-
 ### 相对路径 {#relative-paths}
-=======
-### Relative paths
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```js
 import '../src/file1';
@@ -60,12 +45,7 @@ import './file2';
 
 在这种情况下，使用 `import` 或 `require` 的资源文件所处的目录，被认为是上下文目录。在 `import/require` 中给定的相对路径，会拼接此上下文路径，来生成模块的绝对路径。
 
-<<<<<<< HEAD
-
 ### 模块路径 {#module-paths}
-=======
-### Module paths
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```js
 import 'module';
@@ -90,27 +70,12 @@ import 'module/lib/file';
 
 webpack 会根据构建目标，为这些选项提供合理的[默认](/configuration/resolve)配置。
 
-<<<<<<< HEAD
-
 ## 解析 loader {#resolving-loaders}
-=======
-## Resolving Loaders
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 loader 的解析规则也遵循特定的规范。但是 [`resolveLoader`](/configuration/resolve/#resolveloader) 配置项可以为 loader 设置独立的解析规则。
 
-<<<<<<< HEAD
-
 ## 缓存 {#caching}
-=======
-## Caching
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 每次文件系统访问文件都会被缓存，以便于更快触发对同一文件的多个并行或串行请求。在 [watch 模式](/configuration/watch/#watch) 下，只有修改过的文件会被从缓存中移出。如果关闭 watch 模式，则会在每次编译前清理缓存。
 
-<<<<<<< HEAD
-
 欲了解更多上述配置信息，请查阅 [Resolve API](/configuration/resolve)。
-=======
-See [Resolve API](/configuration/resolve) to learn more about the configuration options mentioned above.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5

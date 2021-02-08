@@ -18,13 +18,8 @@ related:
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-<<<<<<< HEAD
 从 webpack 4 开始，会根据你选择的 [`mode`](/concepts/mode/) 来执行不同的优化，
 不过所有的优化还是可以手动配置和重写。
-
-=======
-Since version 4 webpack runs optimizations for you depending on the chosen [`mode`](/configuration/mode/), still all optimizations are available for manual configuration and overrides.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ## `optimization.minimize` {#optimizationminimize}
 
@@ -82,15 +77,10 @@ module.exports = {
     minimizer: [
       (compiler) => {
         const TerserPlugin = require('terser-webpack-plugin');
-<<<<<<< HEAD
-        new TerserPlugin({ /* 你的选项 */ }).apply(compiler);
-      }
-=======
         new TerserPlugin({
-          /* your config */
+          /* 你的配置 */
         }).apply(compiler);
       },
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
     ],
   },
 };
@@ -194,21 +184,12 @@ W> 如果你使用的是 webpack 的 [CLI](/api/cli/)，当这个插件被启用
 
 下面的字符串值均被支持：
 
-<<<<<<< HEAD
 选荐值                | 描述
 --------------------- | -----------------------
 `natural`             | 按使用顺序的数字 id。
 `named`               | 对调试更友好的可读的 id。
 `deterministic`       | 被哈希转化成的小位数值模块名。
 `size`                | 专注于让初始下载包大小更小的数字 id。
-=======
-| Option          | Description                                           |
-| --------------- | ----------------------------------------------------- |
-| `natural`       | Numeric ids in order of usage.                        |
-| `named`         | Readable ids for better debugging.                    |
-| `deterministic` | Module names are hashed into small numeric values.    |
-| `size`          | Numeric ids focused on minimal initial download size. |
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 **webpack.config.js**
 
@@ -258,7 +239,6 @@ W> `moduleIds: total-size` 在 webpack 5 中被废弃。
 
 下述选项字符串值均为被支持:
 
-<<<<<<< HEAD
 选项值                  | 描述
 ----------------------- | -----------------------
 `'natural'`             | 按使用顺序的数字 id。
@@ -267,15 +247,6 @@ W> `moduleIds: total-size` 在 webpack 5 中被废弃。
 在生产模式中会默认开启。
 `'size'`                | 专注于让初始下载包大小更小的数字 id。
 `'total-size'`          | 专注于让总下载包大小更小的数字 id。
-=======
-| Option            | Description                                                                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `'natural'`       | Numeric ids in order of usage.                                                                                                        |
-| `'named'`         | Readable ids for better debugging.                                                                                                    |
-| `'deterministic'` | Short numeric ids which will not be changing between compilation. Good for long term caching. Enabled by default for production mode. |
-| `'size'`          | Numeric ids focused on minimal initial download size.                                                                                 |
-| `'total-size'`    | numeric ids focused on minimal total download size.                                                                                   |
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 **webpack.config.js**
 
@@ -311,11 +282,7 @@ module.exports = {
 
 `boolean = false` `string`
 
-<<<<<<< HEAD
-告知 webpack 将 `process.env.NODE_ENV` 设置为一个给定字符串。如果 `optimization.nodeEnv` 不是 `false`，则会使用 [DefinePlugin](/plugins/define-plugin/)，`optimization.nodeEnv` __默认值__取决于 [mode](/concepts/mode/)，如果为 falsy 值，则会回退到 `"production"`。
-=======
-Tells webpack to set `process.env.NODE_ENV` to a given string value. `optimization.nodeEnv` uses [DefinePlugin](/plugins/define-plugin/) unless set to `false`. `optimization.nodeEnv` **defaults** to [mode](/configuration/mode/) if set, else falls back to `'production'`.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+告知 webpack 将 `process.env.NODE_ENV` 设置为一个给定字符串。如果 `optimization.nodeEnv` 不是 `false`，则会使用 [DefinePlugin](/plugins/define-plugin/)，`optimization.nodeEnv` **默认值**取决于 [mode](/concepts/mode/)，如果为 falsy 值，则会回退到 `"production"`。
 
 可能的值有：
 
@@ -445,12 +412,7 @@ module.exports = {
 
 `boolean`
 
-<<<<<<< HEAD
-告知 webpack 去确定那些由模块提供的导出内容，为 `export * from ...` 生成更多高效的代码。
-默认 `optimization.providedExports` 会被启用。
-=======
-Tells webpack to figure out which exports are provided by modules to generate more efficient code for `export * from ...`. By default `optimization.providedExports` is enabled.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+告知 webpack 去确定那些由模块提供的导出内容，为 `export * from ...` 生成更多高效的代码。默认 `optimization.providedExports` 会被启用。
 
 **webpack.config.js**
 
@@ -589,21 +551,12 @@ module.exports = {
 
 此选项支持以下选项：
 
-<<<<<<< HEAD
 选项                  | 描述
 ----------------------- | -----------------------
 `'size'`                | 简写形式 — 通常只有一个字符 — 专注于最小的下载 size。
 `'deterministic'`       | 简写形式 - 通常两个字符 — 在添加或移除 export 时不会改变。适用于长效缓存。
 `true`                  | 等价于 `'deterministic'`
 `false`                 | 保留原名，有利于阅读和调试。
-=======
-| Option            | Description                                                                                                          |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `'size'`          | Short names - usually a single char - focused on minimal download size.                                              |
-| `'deterministic'` | Short names - usually two chars - which will not change when adding or removing exports. Good for long term caching. |
-| `true`            | Same as `'deterministic'`                                                                                            |
-| `false`           | Keep original name. Good for readablility and debugging.                                                             |
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 **webpack.config.js**
 

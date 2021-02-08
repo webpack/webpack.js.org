@@ -34,12 +34,7 @@ Whether you want to sift through [this data](/api/stats) manually or use a tool 
 
 On top of that, the official [analyze tool](https://github.com/webpack/analyse) and [various others](/guides/code-splitting/#bundle-analysis) will accept this data and visualize it in various ways.
 
-<<<<<<< HEAD
-
 ## DevTools {#devtools}
-=======
-## DevTools
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 While [`console`](https://nodejs.org/api/console.html) statements may work well in simpler scenarios, sometimes a more robust solution is needed. As most front-end developers already know, Chrome DevTools are a life saver when debugging web applications, _but they don’t have to stop there_. As of Node v6.3.0+, developers can use the built-in `--inspect` flag to debug a node program in DevTools.
 

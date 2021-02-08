@@ -42,13 +42,8 @@ webpack 天生支持如下模块类型：
 - [Assets](/guides/asset-modules)
 - WebAssembly 模块
 
-<<<<<<< HEAD
 通过 **loader** 可以使 webpack 支持多种语言和预处理器语法编写的模块。**loader** 向 webpack 描述了如何处理非原生*模块*，并将相关**依赖**引入到你的 **bundles**中。
 webpack 社区已经为各种流行的语言和预处理器创建了 _loader_，其中包括：
-=======
-In addition to that webpack supports modules written in a variety of languages and preprocessors via _loaders_. _Loaders_ describe to webpack **how** to process non-native _modules_ and include these _dependencies_ into your _bundles_.
-The webpack community has built _loaders_ for a wide variety of popular languages and language processors, including:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 - [CoffeeScript](http://coffeescript.org)
 - [TypeScript](https://www.typescriptlang.org)
@@ -58,12 +53,6 @@ The webpack community has built _loaders_ for a wide variety of popular language
 - [Stylus](http://stylus-lang.com)
 - [Elm](https://elm-lang.org/)
 
-<<<<<<< HEAD
-当然还有更多！总得来说，webpack 提供了可定制，强大且丰富的 API，允许在 __任何技术栈__ 中使用，同时支持在开发、测试和生产环境的工作流中做到 __无侵入性__。
+当然还有更多！总得来说，webpack 提供了可定制，强大且丰富的 API，允许在 **任何技术栈** 中使用，同时支持在开发、测试和生产环境的工作流中做到 **无侵入性**。
 
-关于 loader 的相关信息，请参考 [__loader 列表__](/loaders) 或 [__自定义 loader__](/api/loaders)。
-=======
-And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for **any stack**, while staying **non-opinionated** about your development, testing, and production workflows.
-
-For a full list, see [**the list of loaders**](/loaders) or [**write your own**](/api/loaders).
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+关于 loader 的相关信息，请参考 [**loader 列表**](/loaders) 或 [**自定义 loader**](/api/loaders)。

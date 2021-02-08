@@ -111,45 +111,24 @@ __webpack_override__({
 
 ## 概念目标 {#concept-goals}
 
-<<<<<<< HEAD
 - 它既可以暴露，又可以使用 webpack 支持的任何模块类型
 - 代码块加载应该并行加载所需的所有内容(web:到服务器的单次往返)
 - 从使用者到容器的控制
-   - 重写模块是一种单向操作
-   - 同级容器不能重写彼此的模块。
+  - 重写模块是一种单向操作
+  - 同级容器不能重写彼此的模块。
 - 概念适用于独立于环境
-   - 可用于 web、Node.js 等
+  - 可用于 web、Node.js 等
 - 共享中的相对和绝对请求
-   - 会一直提供，即使不使用
-   - 会将相对路径解析到 `config.context` 
-   - 默认不会使用 `requiredVersion` 
+  - 会一直提供，即使不使用
+  - 会将相对路径解析到 `config.context` 
+  - 默认不会使用 `requiredVersion` 
 - 共享中的模块请求
-   - 只在使用时提供
-   - 会匹配构建中所有使用的相等模块请求
-   - 将提供所有匹配模块
-   - 将从图中这个位置的 package.json 提取 `requiredVersion` 
-   - 当你有嵌套的 node_modules 时，可以提供和使用多个不同的版本
+  - 只在使用时提供
+  - 会匹配构建中所有使用的相等模块请求
+  - 将提供所有匹配模块
+  - 将从图中这个位置的 package.json 提取 `requiredVersion` 
+  - 当你有嵌套的 node_modules 时，可以提供和使用多个不同的版本
 - 共享中尾部带有 `/` 的模块请求将匹配所有具有这个前缀的模块请求
-=======
-- It should be possible to expose and use any module type that webpack supports.
-- Chunk loading should load everything needed in parallel (web: single round-trip to server).
-- Control from consumer to container
-  - Overriding modules is a one-directional operation.
-  - Sibling containers cannot override each other's modules.
-- Concept should be environment-independent.
-  - Usable in web, Node.js, etc.
-- Relative and absolute request in shared:
-  - Will always be provided, even if not used.
-  - Will resolve relative to `config.context`.
-  - Does not use a `requiredVersion` by default.
-- Module requests in shared:
-  - Are only provided when they are used.
-  - Will match all used equal module requests in your build.
-  - Will provide all matching modules.
-  - Will extract `requiredVersion` from package.json at this position in the graph.
-  - Could provide and consume multiple different version when you have nested node_modules.
-- Module requests with trailing `/` in shared will match all module requests with this prefix.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ## 用例 {#use-cases}
 

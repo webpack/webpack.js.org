@@ -16,12 +16,7 @@ _Context_ refers to a [require with an expression](/guides/dependency-management
 
 The `ContextReplacementPlugin` allows you to override the inferred information. There are various ways to configure the plugin:
 
-<<<<<<< HEAD
-
 ## Usage {#usage}
-=======
-## Usage
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```typescript
 new webpack.ContextReplacementPlugin(
@@ -42,12 +37,7 @@ new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /de|fr|hu/);
 
 The `moment/locale` context is restricted to files matching `/de|fr|hu/`. Thus only those locales are included (see [this issue](https://github.com/moment/moment/issues/2373) for more information).
 
-<<<<<<< HEAD
-
 ## Content Callback {#content-callback}
-=======
-## Content Callback
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```typescript
 new webpack.ContextReplacementPlugin(
@@ -71,12 +61,7 @@ new webpack.ContextReplacementPlugin(/^\.\/locale$/, (context) => {
 });
 ```
 
-<<<<<<< HEAD
-
 ## Other Options {#other-options}
-=======
-## Other Options
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 The `newContentResource` and `newContentCreateContextMap` parameters are also available:
 

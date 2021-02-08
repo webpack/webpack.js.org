@@ -21,11 +21,7 @@ T> 本指南继续沿用 [管理输出](/guides/output-management) 指南中的�
 
 如果你一直跟随之前的指南，应该对一些 webpack 基础知识有着很扎实的理解。在我们继续之前，先来看看如何设置一个开发环境，使我们的开发体验变得更轻松一些。
 
-<<<<<<< HEAD
-W> 本指南中的工具__仅用于开发环境__，请__不要__在生产环境中使用它们！
-=======
-W> The tools in this guide are **only meant for development**, please **avoid** using them in production!
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+W> 本指南中的工具**仅用于开发环境**，请**不要**在生产环境中使用它们！
 
 在开始前，我们先将 [`mode` 设置为 `'development'`](/configuration/mode/#mode-development)，并将 `title` 设置为 `'Development'`。
 
@@ -129,12 +125,7 @@ Uncaught ReferenceError: cosnole is not defined
 
 我们可以看到，此错误包含有发生错误的文件（`print.js`）和行号（2）的引用。这是非常有帮助的，因为现在我们可以确切地知道，所要解决问题的位置。
 
-<<<<<<< HEAD
-
 ## 选择一个开发工具 {#choosing-a-development-tool}
-=======
-## Choosing a Development Tool
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 W> 某些文本编辑器具有 "safe write(安全写入)" 功能，可能会干扰下面一些工具。阅读 [调整文本编辑器](#adjusting-your-text-editor) 以解决这些问题。
 
@@ -148,12 +139,7 @@ webpack 提供几种可选方式，帮助你在代码发生变化后自动编译
 
 多数场景中，你可能需要使用 `webpack-dev-server`，但是不妨探讨一下以上的所有选项。
 
-<<<<<<< HEAD
-
 ### 使用 watch mode(观察模式) {#using-watch-mode}
-=======
-### Using Watch Mode
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 你可以指示 webpack "watch" 依赖图中所有文件的更改。如果其中一个文件被更新，代码将被重新编译，所以你不必再去手动运行整个构建。
 
@@ -235,12 +221,7 @@ webpack 提供几种可选方式，帮助你在代码发生变化后自动编译
 
 唯一的缺点是，为了看到修改后的实际效果，你需要刷新浏览器。如果能够自动刷新浏览器就更好了，因此接下来我们会尝试通过 `webpack-dev-server` 实现此功能。
 
-<<<<<<< HEAD
-
 ### 使用 webpack-dev-server {#using-webpack-dev-server}
-=======
-### Using webpack-dev-server
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `webpack-dev-server` 为你提供了一个简单的 web server，并且具有 live reloading(实时重新加载) 功能。设置如下：
 
@@ -282,13 +263,9 @@ npm install --save-dev webpack-dev-server
 
 以上配置告知 `webpack-dev-server`，将 `dist` 目录下的文件 serve 到 `localhost:8080` 下。（译注：serve，将资源作为 server 的可访问文件）
 
-<<<<<<< HEAD
-W> webpack-dev-server 在编译之后不会写入到任何输出文件。而是将 bundle 文件保留在内存中，然后将它们 serve 到 server 中，就好像它们是挂载在 server 根路径上的真实文件一样。如果你的页面希望在其他不同路径中找到 bundle 文件，则可以通过 dev server 配置中的 [`publicPath`](/configuration/dev-server/#devserverpublicpath-) 选项进行修改。
-=======
-T> `webpack-dev-server` serves bundled files from the directory defined in [`output.path`](/configuration/output/#outputpath), i.e., files will be available under `http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]`.
+T> `webpack-dev-server` 会从 `output.path` 中定义的目录为服务提供 bundle 文件，即，文件将可以通过 `http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]` 进行访问。
 
-W> webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files on a different path, you can change this with the [`publicPath`](/configuration/dev-server/#devserverpublicpath-) option in the dev server's configuration.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+W> webpack-dev-server 在编译之后不会写入到任何输出文件。而是将 bundle 文件保留在内存中，然后将它们 serve 到 server 中，就好像它们是挂载在 server 根路径上的真实文件一样。如果你的页面希望在其他不同路径中找到 bundle 文件，则可以通过 dev server 配置中的 [`publicPath`](/configuration/dev-server/#devserverpublicpath-) 选项进行修改。
 
 我们添加一个可以直接运行 dev server 的 script：
 
@@ -328,12 +305,7 @@ W> webpack-dev-server doesn't write any output files after compiling. Instead, i
 
 T> 现在，server 正在运行，你可能需要尝试 [模块热替换(hot module replacement)](/guides/hot-module-replacement)！
 
-<<<<<<< HEAD
-
 ### 使用 webpack-dev-middleware {#using-webpack-dev-middleware}
-=======
-### Using webpack-dev-middleware
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `webpack-dev-middleware` 是一个封装器(wrapper)，它可以把 webpack 处理过的文件发送到一个 server。  `webpack-dev-server` 在内部使用了它，然而它也可以作为一个单独的 package 来使用，以便根据需求进行更多自定义设置。下面是一个 webpack-dev-middleware 配合 express server 的示例。
 
@@ -478,27 +450,15 @@ Example app listening on port 3000!
 
 T> 如果想要了解更多关于模块热替换(hot module replacement)的运行机制，我们推荐你查看 [模块热替换(hot module replacement)](/guides/hot-module-replacement/) 指南。
 
-<<<<<<< HEAD
-
 ## 调整文本编辑器 {#adjusting-your-text-editor}
-=======
-## Adjusting Your Text Editor
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 使用自动编译代码时，可能会在保存文件时遇到一些问题。某些编辑器具有 "safe write(安全写入)" 功能，会影响重新编译。
 
 在一些常见的编辑器中禁用此功能，查看以下列表：
 
-<<<<<<< HEAD
-- __Sublime Text 3__：在用户首选项(user preferences)中添加 `atomic_save: 'false'`。
-- __JetBrains IDEs (e.g. WebStorm)__：在 `Preferences > Appearance & Behavior > System Settings` 中取消选中 "Use safe write"。
-- __Vim__：在设置(settings)中增加 `:set backupcopy=yes`。
-
-=======
-- **Sublime Text 3**: Add `atomic_save: 'false'` to your user preferences.
-- **JetBrains IDEs (e.g. WebStorm)**: Uncheck "Use safe write" in `Preferences > Appearance & Behavior > System Settings`.
-- **Vim**: Add `:set backupcopy=yes` to your settings.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+- **Sublime Text 3**：在用户首选项(user preferences)中添加 `atomic_save: 'false'`。
+- **JetBrains IDEs (e.g. WebStorm)**：在 `Preferences > Appearance & Behavior > System Settings` 中取消选中 "Use safe write"。
+- **Vim**：在设置(settings)中增加 `:set backupcopy=yes`。
 
 ## 结论 {#conclusion}
 

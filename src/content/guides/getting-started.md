@@ -40,11 +40,7 @@ npm init -y
 npm install webpack webpack-cli --save-dev
 ```
 
-<<<<<<< HEAD
 在整个指南中，我们将使用 `diff` 块，来展示对目录、文件和代码所做的修改。例如：
-=======
-Throughout the Guides we will use **`diff`** blocks to show you what changes we're making to directories, files, and code. For instance:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```diff
 + this is a new line you shall copy into your code
@@ -149,12 +145,7 @@ T> 如果你想要了解 `package.json` 内在机制的更多信息，我们推�
 
 T> 细心的小伙伴可能不难发现，尽管 `index.html` 目前放在 `dist` 目录下，但它是手动创建的。在本指南接下来的章节中，我们会教你如何生成 `index.html` 而非手动编辑它。如此做，便可安全地清空 `dist` 目录并重新生成目录中的所有文件。
 
-<<<<<<< HEAD
-
 要在 `index.js` 中打包 `lodash` 依赖，我们需要在本地安装 library：
-=======
-To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```bash
 npm install --save lodash
@@ -171,15 +162,9 @@ T> 在安装一个 package，而此 package 要打包到生产环境 bundle 中�
 +
  function component() {
    const element = document.createElement('div');
-<<<<<<< HEAD
- 
+
 -  // lodash（目前通过一个 script 引入）对于执行这一行是必需的
 +  // lodash，现在通过一个 script 引入
-=======
-
--  // Lodash, currently included via a script, is required for this line to work
-+  // Lodash, now imported by this script
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 
    return element;
@@ -230,20 +215,11 @@ T> 输出可能会稍有不同，但是只要构建成功，那么你就可以�
 
 [ES2015](https://babeljs.io/learn-es2015/) 中的 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 和 [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) 语句已经被标准化。虽然大多数浏览器还无法支持它们，但是 webpack 却能够提供开箱即用般的支持。
 
-<<<<<<< HEAD
-事实上，webpack 在幕后会将代码“__转译__”，以便旧版本浏览器可以执行。如果你检查 `dist/main.js`，你可以看到 webpack 具体如何实现，这是独创精巧的设计！除了 `import` 和 `export`，webpack 还能够很好地支持多种其他模块语法，更多信息请查看 [模块 API](/api/module-methods)。
-=======
-Behind the scenes, webpack actually "**transpiles**" the code so that older browsers can also run it. If you inspect `dist/main.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+事实上，webpack 在幕后会将代码 “**转译**”，以便旧版本浏览器可以执行。如果你检查 `dist/main.js`，你可以看到 webpack 具体如何实现，这是独创精巧的设计！除了 `import` 和 `export`，webpack 还能够很好地支持多种其他模块语法，更多信息请查看 [模块 API](/api/module-methods)。
 
 注意，webpack 不会更改代码中除 `import` 和 `export` 语句以外的部分。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你在 webpack [loader 系统](/concepts/loaders/) 中使用了一个像是 [Babel](https://babel.docschina.org/) 或 [Bublé](https://buble.surge.sh/guide/) 的 [transpiler(转译器)](/loaders/#transpiling)。
 
-<<<<<<< HEAD
-
 ## 使用一个配置文件 {#using-a-configuration}
-=======
-## Using a Configuration
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 在 webpack v4 中，可以无须任何配置，然而大多数项目会需要很复杂的设置，这就是为什么 webpack 仍然要支持 [配置文件](/concepts/configuration)。这比在 terminal(终端) 中手动输入大量命令要高效的多，所以让我们创建一个配置文件：
 
@@ -290,12 +266,7 @@ T> 如果 `webpack.config.js` 存在，则 `webpack` 命令将默认选择使用
 
 比起 CLI 这种简单直接的使用方式，配置文件具有更多的灵活性。我们可以通过配置方式指定 loader 规则(loader rule)、plugin(插件)、resolve 选项，以及许多其他增强功能。更多详细信息请查看 [配置文档](/configuration)。
 
-<<<<<<< HEAD
-
 ## npm scripts {#npm-scripts}
-=======
-## NPM Scripts
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 考虑到用 CLI 这种方式来运行本地的 webpack 副本并不是特别方便，我们可以设置一个快捷方式。调整 _package.json_ 文件，添加一个 [npm script](https://docs.npmjs.com/misc/scripts)：
 
@@ -345,12 +316,7 @@ webpack 5.4.0 compiled successfully in 1940 ms
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --color`.
 
-<<<<<<< HEAD
-
 ## 结论 {#conclusion}
-=======
-## Conclusion
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 现在，你已经有了一个基础构建配置，你应该移至下一章节 [`资源管理`](/guides/asset-management) 指南，以了解如何通过 webpack 来管理资源，例如 images、fonts。此刻你的项目看起来应该如下：
 

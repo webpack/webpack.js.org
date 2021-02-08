@@ -20,21 +20,11 @@ related:
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
 ---
 
-<<<<<<< HEAD
-
 这里是 webpack 支持的其它选项。
-=======
-These are the remaining configuration options supported by webpack.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 W> 寻求帮助：这个页面还在更新中，如果你发现本页面内有描述不准确或者不完整，请在 [webpack 的文档仓库](https://github.com/webpack/webpack.js.org)中创建 issue 或者 pull request
 
-<<<<<<< HEAD
-
 ## `amd` {#amd}
-=======
-## `amd`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `object` `boolean: false`
 
@@ -58,13 +48,7 @@ module.exports = {
 此选项允许将模块查找的键(key)设置为真值(truthy value)。
 发生这种情况时，webpack 中的 AMD 支持将忽略定义的名称。
 
-<<<<<<< HEAD
-
-
 ## `bail` {#bail}
-=======
-## `bail`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = false`
 
@@ -81,12 +65,7 @@ module.exports = {
 
 这将迫使 webpack 退出其打包过程。
 
-<<<<<<< HEAD
-
 ## `cache` {#cache}
-=======
-## `cache`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean` `object`
 
@@ -101,12 +80,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ### `cache.type` {#cachetype}
-=======
-### `cache.type`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string: 'memory' | 'filesystem'`
 
@@ -390,30 +364,16 @@ T> 你可以覆盖 loader 上下文中的属性，因为 webpack 会将所有定
 
 限制并行处理的模块数量。可以用于调优性能或获取更可靠的性能分析结果。
 
-<<<<<<< HEAD
-
-
 ## `profile` {#profile}
 
 `boolean`
 
 捕获一个应用程序"配置文件"，包括统计和提示，然后可以使用 [Analyze](https://webpack.github.io/analyse/) 分析工具进行详细分析。
-=======
-## `profile`
-
-`boolean`
-
-Capture a "profile" of the application, including statistics and hints, which can then be dissected using the [Analyze](https://webpack.github.io/analyse/) tool. It will also log out a summary of module timings.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 T> 使用 [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) 可以更好地控制生成的配置文件。
 
-<<<<<<< HEAD
 T> 与 `parallelism: 1` 混用以达到更好的结果。
-
-=======
-T> Combine `profile: true` with `parallelism: 1` to get correct timings. Note that this will slow down the build as well.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+需要注意的是，这样做也会减慢建造速度。
 
 ## `recordsPath` {#recordspath}
 
@@ -438,23 +398,13 @@ T> 注意，虽然这个文件是由编译器(compiler)生成的，但你可能�
 
 W> 设置 `recordsPath` 本质上会把 `recordsInputPath` 和 `recordsOutputPath` 都设置成相同的路径。通常来讲这也是符合逻辑的，除非你决定改变记录文件的名称。可以查看下面的实例：
 
-<<<<<<< HEAD
-
 ## `recordsInputPath` {#recordsinputpath}
-=======
-## `recordsInputPath`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string`
 
 指定读取最后一条记录的文件的名称。这可以用来重命名一个记录文件，可以查看下面的实例：
 
-<<<<<<< HEAD
-
 ## `recordsOutputPath` {#recordsoutputpath}
-=======
-## `recordsOutputPath`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string`
 
@@ -472,12 +422,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ## `name` {#name}
-=======
-## `name`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string`
 
@@ -542,7 +487,7 @@ module.exports = {
 };
 ```
 
-## `snapshot`
+## `snapshot` {#snapshot}
 
 `object`
 
@@ -575,19 +520,19 @@ module.exports = {
 };
 ```
 
-### `managedPaths`
+### `managedPaths` {#managed-paths}
 
 `[string]`
 
 An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
 
-### `immutablePaths`
+### `immutablePaths` {#immutable-paths}
 
 `[string]`
 
 An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
 
-### `buildDependencies`
+### `buildDependencies` {#build-dependencies}
 
 `object = { hash boolean = true, timestamp boolean = true }`
 
@@ -602,7 +547,7 @@ Both `hash` and `timestamp` are optional.
 - `{ timestamp: true }`: Good for local development caching.
 - `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps are the same, which leads to a small performance hit for the initial build.
 
-### `module`
+### `module` {#module}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
@@ -611,7 +556,7 @@ Snapshots for building modules.
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
 
-### `resolve`
+### `resolve` {#resolve}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
@@ -620,7 +565,7 @@ Snapshots for resolving of requests.
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
 
-### `resolveBuildDependencies`
+### `resolveBuildDependencies` {#resolve-build-dependencies}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 

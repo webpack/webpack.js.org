@@ -16,12 +16,7 @@ contributors:
 T> 注意：本页面仅讨论使用插件，如果你有兴趣编写自己的插件，
 请访问 [编写一个插件](/contribute/writing-a-plugin/) 页面。
 
-<<<<<<< HEAD
-
 ## `plugins` {#plugins}
-=======
-## `plugins`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 [`[Plugin]`](/plugins/)
 

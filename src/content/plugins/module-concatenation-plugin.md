@@ -22,12 +22,7 @@ new webpack.optimize.ModuleConcatenationPlugin();
 
 W> Keep in mind that this plugin will only be applied to [ES6 modules](/api/module-methods/#es6-recommended) processed directly by webpack. When using a transpiler, you'll need to disable module processing (e.g. the [`modules`](https://babeljs.io/docs/en/babel-preset-env#modules) option in Babel).
 
-<<<<<<< HEAD
-
 ## Optimization Bailouts {#optimization-bailouts}
-=======
-## Optimization Bailouts
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 As the article explains, webpack attempts to achieve partial scope hoisting. It will merge modules into a single scope but cannot do so in every case. If webpack cannot merge a module, the two alternatives are Prevent and Root. Prevent means the module must be in its own scope. Root means a new module group will be created. The following conditions determine the outcome:
 
@@ -88,12 +83,7 @@ function tryToAdd(group, module) {
 }
 ```
 
-<<<<<<< HEAD
-
 ### Debugging Optimization Bailouts {#debugging-optimization-bailouts}
-=======
-### Debugging Optimization Bailouts
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 When using the webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the webpack config, just add the following to the `stats` object:
 

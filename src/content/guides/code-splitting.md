@@ -46,16 +46,9 @@ T> 本指南继续沿用 [起步](/guides/getting-started) 中的示例代码。
 
 常用的代码分离方法有三种：
 
-<<<<<<< HEAD
-- __入口起点__：使用 [`entry`](/configuration/entry-context) 配置手动地分离代码。
-- __防止重复__：使用 [Entry dependencies](/configuration/entry-context/#dependencies) 或者 [`SplitChunksPlugin`](/plugins/split-chunks-plugin) 去重和分离 chunk。
-- __动态导入__：通过模块的内联函数调用来分离代码。
-
-=======
-- **Entry Points**: Manually split code using [`entry`](/configuration/entry-context) configuration.
-- **Prevent Duplication**: Use [Entry dependencies](/configuration/entry-context/#dependencies) or [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) to dedupe and split chunks.
-- **Dynamic Imports**: Split code via inline function calls within modules.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+- **入口起点**：使用 [`entry`](/configuration/entry-context) 配置手动地分离代码。
+- **防止重复**：使用 [Entry dependencies](/configuration/entry-context/#dependencies) 或者 [`SplitChunksPlugin`](/plugins/split-chunks-plugin) 去重和分离 chunk。
+- **动态导入**：通过模块的内联函数调用来分离代码。
 
 ## 入口起点(entry point) {#entry-points}
 
@@ -124,12 +117,7 @@ webpack 5.4.0 compiled successfully in 245 ms
 
 以上两点中，第一点对我们的示例来说无疑是个问题，因为之前我们在 `./src/index.js` 中也引入过 `lodash`，这样就在两个 bundle 中造成重复引用。在下一章节会移除重复的模块。
 
-<<<<<<< HEAD
-
 ## 防止重复(prevent duplication) {#prevent-duplication}
-=======
-## Prevent Duplication
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ### 入口依赖 {#entry-dependencies}
 
@@ -265,12 +253,7 @@ webpack 5.4.0 compiled successfully in 241 ms
 
 - [`mini-css-extract-plugin`](plugins/mini-css-extract-plugin): 用于将 CSS 从主应用程序中分离。
 
-<<<<<<< HEAD
-
 ## 动态导入(dynamic import) {#dynamic-imports}
-=======
-## Dynamic Imports
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 当涉及到动态代码拆分时，webpack 提供了两个类似的技术。第一种，也是推荐选择的方式是，使用符合 [ECMAScript 提案](https://github.com/tc39/proposal-dynamic-import) 的 [`import()` 语法](/api/module-methods/#import-1) 来实现动态导入。第二种，则是 webpack 的遗留功能，使用 webpack 特定的 [`require.ensure`](/api/module-methods/#requireensure)。让我们先尝试使用第一种……
 
@@ -393,24 +376,14 @@ webpack 5.4.0 compiled successfully in 268 ms
 
 T> 在稍后示例中，可能会根据计算后的变量(computed variable)导入特定模块时，可以通过向 `import()` 传入一个 [动态表达式](/api/module-methods/#dynamic-expressions-in-import)。
 
-<<<<<<< HEAD
-
 ## 预获取/预加载模块(prefetch/preload module) {#prefetchingpreloading-modules}
-=======
-## Prefetching/Preloading modules
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 webpack v4.6.0+ 增加了对预获取和预加载的支持。
 
 在声明 import 时，使用下面这些内置指令，可以让 webpack 输出 "resource hint(资源提示)"，来告知浏览器：
 
-<<<<<<< HEAD
-- __prefetch__(预获取)：将来某些导航下可能需要的资源
-- __preload__(预加载)：当前导航下可能需要资源
-=======
-- **prefetch**: resource is probably needed for some navigation in the future
-- **preload**: resource will also be needed during the current navigation
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+- **prefetch**(预获取)：将来某些导航下可能需要的资源
+- **preload**(预加载)：当前导航下可能需要资源
 
 下面这个 prefetch 的简单示例中，有一个 `HomePage` 组件，其内部渲染一个 `LoginButton` 组件，然后在点击后按需加载 `LoginModal` 组件。
 
@@ -447,12 +420,7 @@ import(/* webpackPreload: true */ 'ChartingLibrary');
 
 T> 不正确地使用 `webpackPreload` 会有损性能，请谨慎使用。
 
-<<<<<<< HEAD
-
 ## bundle 分析(bundle analysis) {#bundle-analysis}
-=======
-## Bundle Analysis
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 一旦开始分离代码，一件很有帮助的事情是，分析输出结果来检查模块在何处结束。 [官方分析工具](https://github.com/webpack/analyse) 是一个不错的开始。还有一些其他社区支持的可选项：
 

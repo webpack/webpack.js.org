@@ -17,12 +17,7 @@ This plugin enables more fine grained control of source map generation. It is al
 new webpack.SourceMapDevToolPlugin(options);
 ```
 
-<<<<<<< HEAD
-
 ## Options {#options}
-=======
-## Options
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 The following options are supported:
 

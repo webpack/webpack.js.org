@@ -20,24 +20,13 @@ related:
 
 T> 本指南继续沿用 [起步](/guides/getting-started)、[管理输出](/guides/output-management) 和 [代码分离](/guides/code-splitting) 中的代码示例。
 
-<<<<<<< HEAD
-以上，我们使用 webpack 来打包我们的模块化后的应用程序，webpack 会生成一个可部署的 `/dist` 目录，然后把打包后的内容放置在此目录中。只要 `/dist` 目录中的内容部署到 server 上，client（通常是浏览器）就能够访问此 server 的网站及其资源。而最后一步获取资源是比较耗费时间的，这就是为什么浏览器使用一种名为 [缓存](https://searchstorage.techtarget.com/definition/cache) 的技术。可以通过命中缓存，以降低网络流量，使网站加载速度更快，然而，如果我们在部署新版本时不更改资源的文件名，浏览器可能会认为它没有被更新，就会使用它的缓存版本。由于缓存的存在，当你需要获取新的代码时，就会显得很棘手。
-=======
-So we're using webpack to bundle our modular application which yields a deployable `/dist` directory. Once the contents of `/dist` have been deployed to a server, clients (typically browsers) will hit that server to grab the site and its assets. The last step can be time consuming, which is why browsers use a technique called [caching](<https://en.wikipedia.org/wiki/Cache_(computing)>). This allows sites to load faster with less unnecessary network traffic. However, it can also cause headaches when you need new code to be picked up.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+以上，我们使用 webpack 来打包我们的模块化后的应用程序，webpack 会生成一个可部署的 `/dist` 目录，然后把打包后的内容放置在此目录中。只要 `/dist` 目录中的内容部署到 server 上，client（通常是浏览器）就能够访问此 server 的网站及其资源。而最后一步获取资源是比较耗费时间的，这就是为什么浏览器使用一种名为 [缓存](<https://en.wikipedia.org/wiki/Cache_(computing)>) 的技术。可以通过命中缓存，以降低网络流量，使网站加载速度更快，然而，如果我们在部署新版本时不更改资源的文件名，浏览器可能会认为它没有被更新，就会使用它的缓存版本。由于缓存的存在，当你需要获取新的代码时，就会显得很棘手。
 
 此指南的重点在于通过必要的配置，以确保 webpack 编译生成的文件能够被客户端缓存，而在文件内容变化后，能够请求到新的文件。
 
-<<<<<<< HEAD
-
 ## 输出文件的文件名(output filename) {#output-filenames}
 
-我们可以通过替换 `output.filename` 中的 [substitutions](/configuration/output/#outputfilename) 设置，来定义输出文件的名称。webpack 提供了一种使用称为 __substitution(可替换模板字符串)__ 的方式，通过带括号字符串来模板化文件名。其中，`[contenthash]` substitution 将根据资源内容创建出唯一 hash。当资源内容发生变化时，`[contenthash]` 也会发生变化。
-=======
-## Output Filenames
-
-We can use the `output.filename` [substitutions](/configuration/output/#outputfilename) setting to define the names of our output files. webpack provides a method of templating the filenames using bracketed strings called **substitutions**. The `[contenthash]` substitution will add a unique hash based on the content of an asset. When the asset's content changes, `[contenthash]` will change as well.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+我们可以通过替换 `output.filename` 中的 [substitutions](/configuration/output/#outputfilename) 设置，来定义输出文件的名称。webpack 提供了一种使用称为 **substitution(可替换模板字符串)** 的方式，通过带括号字符串来模板化文件名。其中，`[contenthash]` substitution 将根据资源内容创建出唯一 hash。当资源内容发生变化时，`[contenthash]` 也会发生变化。
 
 这里使用 [起步](/guides/getting-started) 中的示例和 [管理输出](/guides/output-management) 中的 `plugins` 插件来作为项目基础，所以我们依然不必手动地维护 `index.html` 文件：
 
@@ -351,11 +340,6 @@ Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.j
 
 我们可以看到，这两次构建中，`vendor` bundle 文件名称，都是 `55e79e5927a639d21a1b`。
 
-<<<<<<< HEAD
-
 ## 结论 {#conclusion}
-=======
-## Conclusion
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 缓存可能很复杂，但是从应用程序或站点用户可以获得的收益来看，这值得付出努力。想要了解更多信息，请查看下面_进一步阅读_部分。

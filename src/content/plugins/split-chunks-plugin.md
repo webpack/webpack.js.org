@@ -28,12 +28,7 @@ Originally, chunks (and modules imported inside them) were connected by a parent
 
 Since webpack v4, the `CommonsChunkPlugin` was removed in favor of `optimization.splitChunks`.
 
-<<<<<<< HEAD
-
 ## Defaults {#defaults}
-=======
-## Defaults
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Out of the box `SplitChunksPlugin` should work well for most users.
 
@@ -182,12 +177,7 @@ Minimum size, in bytes, for a chunk to be generated.
 
 Size threshold at which splitting is enforced and other restrictions (minRemainingSize, maxAsyncRequests, maxInitialRequests) are ignored.
 
-<<<<<<< HEAD
-
 ### `splitChunks.minRemainingSize` {#splitchunksminremainingsize}
-=======
-### `splitChunks.minRemainingSize`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 #### `splitChunks.cacheGroups.{cacheGroup}.minRemainingSize` {#splitchunkscachegroupscachegroupminremainingsize}
 
@@ -197,12 +187,7 @@ Size threshold at which splitting is enforced and other restrictions (minRemaini
 
 W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remaining.
 
-<<<<<<< HEAD
-
 ### `splitChunks.layer` {#splitchunkslayer}
-=======
-### `splitChunks.layer`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 #### `splitChunks.cacheGroups.{cacheGroup}.layer` {#splitchunkscachegroupscachegrouplayer}
 
@@ -294,12 +279,7 @@ Running webpack with following `splitChunks` configuration would also output a c
 
 W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
 
-<<<<<<< HEAD
-
 ### `splitChunks.usedExports` {#splitchunksusedexports}
-=======
-### `splitChunks.usedExports`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 #### `splitChunks.cacheGroups{cacheGroup}.usedExports` {#splitchunkscachegroupscachegroupusedexports}
 
@@ -308,12 +288,7 @@ W> When assigning equal names to different split chunks, all vendor modules are 
 弄清哪些 export 被模块使用，以混淆 export 名称，省略未使用的 export，并生成有效的代码。
 当它为 `true` 时：分析每个运行时使用的出口，当它为 `"global"` 时：分析所有运行时的全局 export 组合）。
 
-<<<<<<< HEAD
-
 ### `splitChunks.cacheGroups` {#splitchunkscachegroups}
-=======
-### `splitChunks.cacheGroups`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Cache groups can inherit and/or override any options from `splitChunks.*`; but `test`, `priority` and `reuseExistingChunk` can only be configured on cache group level. To disable any of the default cache groups, set them to `false`.
 
@@ -514,12 +489,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 #### `splitChunks.cacheGroups.{cacheGroup}.enforce` {#splitchunkscachegroupscachegroupenforce}
-=======
-#### `splitChunks.cacheGroups.{cacheGroup}.enforce`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = false`
 

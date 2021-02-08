@@ -8,23 +8,13 @@ contributors:
 
 The following sections contain all you need to know about editing and formatting the content within this site. Make sure to do some research before starting your edits or additions. Sometimes the toughest part is finding where the content should live and determining whether or not it already exists.
 
-<<<<<<< HEAD
-
 ## Process {#process}
-=======
-## Process
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 1. Check related issue if an article links to one.
 2. Hit `edit` and expand on the structure.
 3. PR changes.
 
-<<<<<<< HEAD
-
 ## YAML Frontmatter {#yaml-frontmatter}
-=======
-## YAML Frontmatter
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Each article contains a small section at the top written in [YAML Frontmatter](https://jekyllrb.com/docs/frontmatter/):
 
@@ -59,12 +49,7 @@ Note that `related` will generate a **Further Reading** section at the bottom of
 3. Main Content - tell what you promised to tell.
 4. Conclusion - tell what you told and recap the main points.
 
-<<<<<<< HEAD
-
 ## Typesetting {#typesetting}
-=======
-## Typesetting
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 - webpack should always be written in lower-case letters. Even at the beginning of a sentence. ([source](https://github.com/webpack/media#name))
 - loaders are enclosed in backticks and [kebab-cased](https://en.wikipedia.org/w/index.php?title=Kebab_case): `css-loader`, `ts-loader`, …
@@ -72,12 +57,7 @@ Note that `related` will generate a **Further Reading** section at the bottom of
 - Use "webpack 2" to refer to a specific webpack version (~~"webpack v2"~~)
 - Use ES5; ES2015, ES2016, … to refer to the ECMAScript standards (~~ES6~~, ~~ES7~~)
 
-<<<<<<< HEAD
-
 ## Formatting {#formatting}
-=======
-## Formatting
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ### Code {#code}
 
@@ -110,12 +90,7 @@ Set value to `'index.md'`...
 
 Set value to `"index.md"`...
 
-<<<<<<< HEAD
-
 ### Lists {#lists}
-=======
-### Lists
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 - Boo
 - Foo

@@ -102,12 +102,7 @@ new webpack.EnvironmentPlugin({
 });
 ```
 
-<<<<<<< HEAD
-
 ## `DotenvPlugin` {#dotenvplugin}
-=======
-## `DotenvPlugin`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 The third-party [`DotenvPlugin`](https://github.com/mrsteele/dotenv-webpack) (`dotenv-webpack`) allows you to expose (a subset of) [dotenv variables](https://www.npmjs.com/package/dotenv):
 

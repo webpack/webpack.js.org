@@ -63,12 +63,7 @@ jQuery('#item'); // <= just works
 // $ is automatically set to the exports of module "jquery"
 ```
 
-<<<<<<< HEAD
-
 ## Usage: jQuery with Angular 1 {#usage-jquery-with-angular-1}
-=======
-## Usage: jQuery with Angular 1
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Angular looks for `window.jQuery` in order to determine whether jQuery is present, see the [source code](https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823).
 
@@ -78,12 +73,7 @@ new webpack.ProvidePlugin({
 });
 ```
 
-<<<<<<< HEAD
-
 ## Usage: Lodash Map {#usage-lodash-map}
-=======
-## Usage: Lodash Map
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ```javascript
 new webpack.ProvidePlugin({

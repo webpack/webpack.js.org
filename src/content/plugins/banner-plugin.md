@@ -19,12 +19,7 @@ new webpack.BannerPlugin(banner);
 new webpack.BannerPlugin(options);
 ```
 
-<<<<<<< HEAD
-
 ## Options {#options}
-=======
-## Options
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 <!-- eslint-skip -->
 
@@ -57,12 +52,7 @@ new webpack.BannerPlugin({
 });
 ```
 
-<<<<<<< HEAD
-
 ## Placeholders {#placeholders}
-=======
-## Placeholders
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Since webpack 2.5.0, placeholders are evaluated in the `banner` string:
 

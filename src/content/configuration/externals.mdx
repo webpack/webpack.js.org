@@ -20,22 +20,13 @@ contributors:
   - anshumanv
 ---
 
-<<<<<<< HEAD
-`externals` 配置选项提供了「从输出的 bundle 中排除依赖」的方法。相反，所创建的 bundle 依赖于那些存在于用户环境(consumer's environment)中的依赖。此功能通常对 __library 开发人员__来说是最有用的，然而也会有各种各样的应用程序用到它。
-
-=======
-The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to **library developers**, however there are a variety of applications for it.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+`externals` 配置选项提供了「从输出的 bundle 中排除依赖」的方法。相反，所创建的 bundle 依赖于那些存在于用户环境(consumer's environment)中的依赖。此功能通常对 **library 开发人员**来说是最有用的，然而也会有各种各样的应用程序用到它。
 
 ## `externals` {#externals}
 
 `string` `[string]` `object` `function` `RegExp`
 
-<<<<<<< HEAD
-__防止__将某些 `import` 的包(package)__打包__到 bundle 中，而是在运行时(runtime)再去从外部获取这些_扩展依赖(external dependencies)_。
-=======
-**Prevent bundling** of certain `import`ed packages and instead retrieve these _external dependencies_ at runtime.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+**防止**将某些 `import` 的包(package)**打包**到 bundle 中，而是在运行时(runtime)再去从外部获取这些*扩展依赖(external dependencies)*。
 
 例如，从 CDN 引入 [jQuery](https://jquery.com/)，而不是把它打包：
 
@@ -70,26 +61,14 @@ $('.my-element').animate(/* ... */);
 
 具有外部依赖(external dependency)的 bundle 可以在各种模块上下文(module context)中使用，例如 [CommonJS, AMD, 全局变量和 ES2015 模块](/concepts/modules)。外部 library 可能是以下任何一种形式：
 
-<<<<<<< HEAD
-- __root__：可以通过一个全局变量访问 library（例如，通过 script 标签）。
-- __commonjs__：可以将 library 作为一个 CommonJS 模块访问。
-- __commonjs2__：和上面的类似，但导出的是 `module.exports.default`.
-- __amd__：类似于 `commonjs`，但使用 AMD 模块系统。
-=======
-- **root**: The library should be available as a global variable (e.g. via a script tag).
-- **commonjs**: The library should be available as a CommonJS module.
-- **commonjs2**: Similar to the above but where the export is `module.exports.default`.
-- **amd**: Similar to `commonjs` but using AMD module system.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+- **root**：可以通过一个全局变量访问 library（例如，通过 script 标签）。
+- **commonjs**：可以将 library 作为一个 CommonJS 模块访问。
+- **commonjs2**：和上面的类似，但导出的是 `module.exports.default`.
+- **amd**：类似于 `commonjs`，但使用 AMD 模块系统。
 
 可以接受以下语法……
 
-<<<<<<< HEAD
-
 ### 字符串 {#string}
-=======
-### string
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 请查看上面的例子。属性名称是 `jquery`，表示应该排除 `import $ from 'jquery'` 中的 `jquery` 模块。为了替换这个模块，`jQuery` 的值将被用来检索一个全局的 `jQuery` 变量。换句话说，当设置为一个字符串时，它将被视为`全局的`（定义在上面和下面）。
 
@@ -148,13 +127,8 @@ module.exports = {
     lodash: {
       commonjs: 'lodash',
       amd: 'lodash',
-<<<<<<< HEAD
       root: '_' // 指向全局变量
-    }
-=======
-      root: '_', // indicates global variable
     },
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
   },
 
   // 或者
@@ -178,21 +152,12 @@ module.exports = {
 
 函数接收两个入参：
 
-<<<<<<< HEAD
 - `ctx` (`object`)：包含文件详情的对象。
-    - `ctx.context` (`string`): 包含引用的文件目录。
-    - `ctc.request` (`string`): 被请求引入的路径。
-    - `ctx.contextInfo` (`string`): 包含 issuer 的信息（如，layer）
-    - `ctx.getResolve` <Badge text='5.15.0+' />: 获取当前解析器选项的解析函数。
+  - `ctx.context` (`string`): 包含引用的文件目录。
+  - `ctc.request` (`string`): 被请求引入的路径。
+  - `ctx.contextInfo` (`string`): 包含 issuer 的信息（如，layer）
+  - `ctx.getResolve` <Badge text='5.15.0+' />: 获取当前解析器选项的解析函数。
 - `callback` (`function (err, result, type)`): 用于指明模块如何被外部化的回调函数
-=======
-- `ctx` (`object`): Object containing details of the file.
-  - `ctx.context` (`string`): The directory of the file which contains the import.
-  - `ctx.request` (`string`): The import path being requested.
-  - `ctx.contextInfo` (`string`): Contains information about the issuer (e.g. the layer).
-  - `ctx.getResolve` <Badge text='5.15.0+' />: Get a resolve function with the current resolver options.
-- `callback` (`function (err, result, type)`): Callback function used to indicate how the module should be externalized.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 回调函数接收三个入参：
 
@@ -208,15 +173,9 @@ module.exports = {
 module.exports = {
   //...
   externals: [
-<<<<<<< HEAD
-    function({ context, request }, callback) {
+    function ({ context, request }, callback) {
       if (/^yourregex$/.test(request)){
         // 使用 request 路径，将一个 commonjs 模块外部化
-=======
-    function ({ context, request }, callback) {
-      if (/^yourregex$/.test(request)) {
-        // Externalize to a commonjs module using the request path
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
         return callback(null, 'commonjs ' + request);
       }
 
@@ -234,13 +193,8 @@ module.exports = {
 ```javascript
 module.exports = {
   externals: [
-<<<<<<< HEAD
-    function(ctx, callback) {
-      // 该外部化的模块，是一个 `commonjs2` 的模块，且放在 `@scope/library` 目录中
-=======
     function (ctx, callback) {
-      // The external is a `commonjs2` module located in `@scope/library`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+      // 该外部化的模块，是一个 `commonjs2` 的模块，且放在 `@scope/library` 目录中
       callback(null, '@scope/library', 'commonjs2');
     },
   ],
@@ -252,13 +206,8 @@ module.exports = {
 ```javascript
 module.exports = {
   externals: [
-<<<<<<< HEAD
-    function(ctx, callback) {
-      // 该外部化模块是一个全局变量叫作 `nameOfGlobal`.
-=======
     function (ctx, callback) {
-      // The external is a global variable called `nameOfGlobal`.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+      // 该外部化模块是一个全局变量叫作 `nameOfGlobal`.
       callback(null, 'nameOfGlobal');
     },
   ],
@@ -270,13 +219,8 @@ module.exports = {
 ```javascript
 module.exports = {
   externals: [
-<<<<<<< HEAD
-    function(ctx, callback) {
-      // 该外部化模块是一个在`@scope/library`模块里的命名导出（named export）。
-=======
     function (ctx, callback) {
-      // The external is a named export in the `@scope/library` module.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+      // 该外部化模块是一个在`@scope/library`模块里的命名导出（named export）。
       callback(null, ['@scope/library', 'namedexport'], 'commonjs');
     },
   ],
@@ -288,13 +232,8 @@ module.exports = {
 ```javascript
 module.exports = {
   externals: [
-<<<<<<< HEAD
-    function(ctx, callback) {
-      // 外部化模块是一个 UMD 模块
-=======
     function (ctx, callback) {
-      // The external is a UMD module
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+      // 外部化模块是一个 UMD 模块
       callback(null, {
         root: 'componentsGlobal',
         commonjs: '@scope/components',
@@ -334,57 +273,37 @@ module.exports = {
     {
       // 字符串
       react: 'react',
-<<<<<<< HEAD
       // 对象
-      lodash : {
-=======
-      // Object
       lodash: {
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
         commonjs: 'lodash',
         amd: 'lodash',
         root: '_', // indicates global variable
       },
-<<<<<<< HEAD
       // 字符串数组
-      subtract: ['./math', 'subtract']
-    },
-    // 函数
-    function({ context, request }, callback) {
-      if (/^yourregex$/.test(request)){
-=======
-      // [string]
       subtract: ['./math', 'subtract'],
     },
-    // Function
+    // 函数
     function ({ context, request }, callback) {
       if (/^yourregex$/.test(request)) {
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
         return callback(null, 'commonjs ' + request);
       }
       callback();
     },
-<<<<<<< HEAD
     // 正则表达式
-    /^(jquery|\$)$/i
-  ]
-=======
-    // Regex
     /^(jquery|\$)$/i,
   ],
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 };
 ```
 
-W> [Default type](/configuration/externals/#externalstype) will be used if you specify `externals` without a type e.g. `externals: { react: 'react' }` instead of `externals: { react: 'commonjs-module react' }`.
+W> 如果你指定的 `externals` 未使用类型，则会使用[默认类型](/configuration/externals/#externalstype)。例如 `externals: { react: 'react' }` 会被替换成 `externals: { react: 'commonjs-module react' }`。
 
 关于如何使用此 externals 配置的更多信息，请参考 [如何编写 library](/guides/author-libraries)。
 
-### `byLayer`
+### `byLayer` {#bylayer}
 
 `function` `object`
 
-Specify externals by layer.
+按层指定 externals：
 
 **webpack.config.js**
 
@@ -404,11 +323,7 @@ module.exports = {
 
 `string = 'var'`
 
-<<<<<<< HEAD
 指定 externals 的默认类型。当 external 被设置为 `amd`，`umd`，`system` 以及 `jsonp` 时，**[`output.libraryTarget`](/configuration/output/#outputlibrarytarget)** 的值也应相同。例如，你只能在 `amd` 库中使用 `amd` 的 externals。
-=======
-Specifies the default type of externals. `amd`, `umd`, `system` and `jsonp` externals **depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)** being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 支持的类型如下：
 
@@ -530,19 +445,6 @@ T> 像 `output.chunkLoadTimeout`，`output.crossOriginLoading` 以及 `output.sc
 
 W> 在早期的 webpack 版本中，通过使用 [`target`](/configuration/target/) 实现以下功能。
 
-| Option             | Description                                                                                                                                                                                                     | Input Type |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| `electron`         | Treat common electron built-in modules in main and preload context like `electron`, `ipc` or `shell` as external and load them via `require()` when used.                                                       | boolean    |
-| `electronMain`     | Treat electron built-in modules in the main context like `app`, `ipc-main` or `shell` as external and load them via `require()` when used.                                                                      | boolean    |
-| `electronPreload`  | Treat electron built-in modules in the preload context like `web-frame`, `ipc-renderer` or `shell` as external and load them via require() when used.                                                           | boolean    |
-| `electronRenderer` | Treat electron built-in modules in the renderer context like `web-frame`, `ipc-renderer` or `shell` as external and load them via `require()` when used.                                                        | boolean    |
-| `node`             | Treat node.js built-in modules like `fs`, `path` or `vm` as external and load them via `require()` when used.                                                                                                   | boolean    |
-| `nwjs`             | Treat `NW.js` legacy `nw.gui` module as external and load it via `require()` when used.                                                                                                                         | boolean    |
-| `web`              | Treat references to `http(s)://...` and `std:...` as external and load them via `import` when used. **(Note that this changes execution order as externals are executed before any other code in the chunk)**.  | boolean    |
-| `webAsync`         | Treat references to `http(s)://...` and `std:...` as external and load them via `async import()` when used **(Note that this external type is an `async` module, which has various effects on the execution)**. | boolean    |
-
-<<<<<<< HEAD
-
 选项   | 描述                                      | 输入类型
 ----------- | ------------------------------------------------ | ----------
 `electron`     | 将 main 和预加载上下文中常见的 electron 内置模块视为 external 模块（如 `electron`，`ipc` 或 `shell`），使用时通过 `require()` 加载。                     | boolean
@@ -551,14 +453,10 @@ W> 在早期的 webpack 版本中，通过使用 [`target`](/configuration/targe
 `electronRenderer`     | 将 renderer 上下文的 electron 内置模块视为 external 模块（如 `web-frame`、`ipc-renderer` 或 `shell`），使用时通过 `require()` 加载。                     | boolean
 `node`     | 将 node.js 的内置模块视为 external 模块（如 `fs`，`path` 或 `vm`），使用时通过 `require()` 加载。| boolean
 `nwjs`    | 将 `NW.js` 遗留的 `nw.gui` 模块视为 external 模块，使用时通过 `require()` 加载。| boolean
-`web`     | 将 `http(s)://...` 以及 `std:...` 视为 external 模块，使用时通过 `import` 加载。__（注意，这将改变执行顺序，因为 external 代码会在该块中的其他代码执行前被执行）__。| boolean
-`webAsync`     | 将 'http(s)://...' 以及 'std:...' 的引用视为 external 模块，使用时通过 `async import()` 加载。__（注意，此 external 类型为 `async` 模块，它对执行会产生各种副作用）__。| boolean
+`web`     | 将 `http(s)://...` 以及 `std:...` 视为 external 模块，使用时通过 `import` 加载。**（注意，这将改变执行顺序，因为 external 代码会在该块中的其他代码执行前被执行）**。| boolean
+`webAsync`     | 将 'http(s)://...' 以及 'std:...' 的引用视为 external 模块，使用时通过 `async import()` 加载。**（注意，此 external 类型为 `async` 模块，它对执行会产生各种副作用）**。| boolean
 
-
-__示例__
-=======
 **Example**
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 使用 `node` 的 preset 不会构建内置模块，而会将其视为 external 模块，使用时通过 `require()` 加载。
 

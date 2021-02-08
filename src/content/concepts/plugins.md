@@ -11,28 +11,15 @@ contributors:
   - chenxsan
 ---
 
-<<<<<<< HEAD
-__插件__是 webpack 的 [支柱](https://github.com/webpack/tapable) 功能。webpack 自身也是构建于你在 webpack 配置中用到的__相同的插件系统__之上！
+**插件**是 webpack 的 [支柱](https://github.com/webpack/tapable) 功能。webpack 自身也是构建于你在 webpack 配置中用到的**相同的插件系统**之上！
 
-插件目的在于解决 [loader](/concepts/loaders) 无法实现的__其他事__。
-=======
-**Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!
-
-They also serve the purpose of doing **anything else** that a [loader](/concepts/loaders) cannot do.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+插件目的在于解决 [loader](/concepts/loaders) 无法实现的**其他事**。
 
 T> 如果在插件中使用了 [`webpack-sources`](https://github.com/webpack/webpack-sources) 的 package，请使用 `require('webpack').sources` 替代 `require('webpack-sources')`，以避免持久缓存的版本冲突。
 
-<<<<<<< HEAD
-
 ## 剖析 {#anatomy}
 
-webpack __插件__是一个具有 [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 方法的 JavaScript 对象。`apply` 方法会被 webpack compiler 调用，并且在__整个__编译生命周期都可以访问 compiler 对象。
-=======
-## Anatomy
-
-A webpack **plugin** is a JavaScript object that has an [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) method. This `apply` method is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+webpack **插件**是一个具有 [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 方法的 JavaScript 对象。`apply` 方法会被 webpack compiler 调用，并且在__整个__编译生命周期都可以访问 compiler 对象。
 
 **ConsoleLogOnBuildWebpackPlugin.js**
 
@@ -41,13 +28,8 @@ const pluginName = 'ConsoleLogOnBuildWebpackPlugin';
 
 class ConsoleLogOnBuildWebpackPlugin {
   apply(compiler) {
-<<<<<<< HEAD
-    compiler.hooks.run.tap(pluginName, compilation => {
-      console.log('webpack 构建过程开始！');
-=======
     compiler.hooks.run.tap(pluginName, (compilation) => {
-      console.log('The webpack build process is starting!!!');
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+      console.log('webpack 构建过程开始！');
     });
   }
 }
@@ -59,20 +41,11 @@ compiler hook 的 tap 方法的第一个参数，应该是驼峰式命名的插�
 
 ## 用法 {#usage}
 
-<<<<<<< HEAD
-由于__插件__可以携带参数/选项，你必须在 webpack 配置中，向 `plugins` 属性传入一个 `new` 实例。
-=======
-Since **plugins** can take arguments/options, you must pass a `new` instance to the `plugins` property in your webpack configuration.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+由于**插件**可以携带参数/选项，你必须在 webpack 配置中，向 `plugins` 属性传入一个 `new` 实例。
 
 取决于你的 webpack 用法，对应有多种使用插件的方式。
 
-<<<<<<< HEAD
-
 ### 配置方式 {#configuration}
-=======
-### Configuration
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 **webpack.config.js**
 

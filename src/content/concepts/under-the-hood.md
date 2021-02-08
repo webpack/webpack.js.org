@@ -72,11 +72,7 @@ chunk 有两种形式：
 - `initial(初始化)` 是入口起点的 main chunk。此 chunk 包含为入口起点指定的所有模块及其依赖项。
 - `non-initial` 是可以延迟加载的块。可能会出现在使用 [动态导入(dynamic imports)](/guides/code-splitting/#dynamic-imports) 或者 [SplitChunksPlugin](/plugins/split-chunks-plugin/) 时。
 
-<<<<<<< HEAD
-每个 chunk 都有对应的 __asset(资源)__。资源，是指输出文件（即打包结果）。
-=======
-Each chunk has a corresponding **asset**. The assets are the output files - the result of bundling.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+每个 chunk 都有对应的 **asset(资源)**。资源，是指输出文件（即打包结果）。
 
 **webpack.config.js**
 

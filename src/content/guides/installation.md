@@ -12,23 +12,13 @@ contributors:
 
 本指南介绍了安装 webpack 的各种方法。
 
-<<<<<<< HEAD
-
 ## 前提条件 {#prerequisites}
-=======
-## Prerequisites
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 在开始之前，请确保安装了 [Node.js](https://nodejs.org/en/) 的最新版本。使用 Node.js 最新的长期支持版本(LTS - Long Term Support)，是理想的起步。
 使用旧版本，你可能遇到各种问题，因为它们可能缺少 webpack 功能，
 或者缺少相关 package。
 
-<<<<<<< HEAD
-
 ## 本地安装 {#local-installation}
-=======
-## Local Installation
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 最新的 webpack 正式版本是：
 
@@ -62,12 +52,7 @@ npm install --save-dev webpack-cli
 
 T> 想要运行本地安装的 webpack，你可以通过 `node_modules/.bin/webpack` 来访问它的二进制版本。另外，如果你使用的是 npm v5.2.0 或更高版本，则可以运行 `npx webpack` 来执行。
 
-<<<<<<< HEAD
-
 ## 全局安装 {#global-installation}
-=======
-## Global Installation
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 通过以下 NPM 安装方式，可以使 `webpack` 在全局环境下可用：
 
@@ -75,13 +60,8 @@ T> 想要运行本地安装的 webpack，你可以通过 `node_modules/.bin/webp
 npm install --global webpack
 ```
 
-<<<<<<< HEAD
-W> __不推荐__ 全局安装 webpack。这会将你项目中的 webpack 锁定到指定版本，并且在使用不同的 webpack 版本的项目中，
+W> **不推荐** 全局安装 webpack。这会将你项目中的 webpack 锁定到指定版本，并且在使用不同的 webpack 版本的项目中，
 可能会导致构建失败。
-
-=======
-W> Note that this is **not a recommended practice**. Installing globally locks you down to a specific version of webpack and could fail in projects that use a different version.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ## 最新体验版本 {#bleeding-edge}
 

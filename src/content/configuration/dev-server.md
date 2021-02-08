@@ -28,12 +28,7 @@ contributors:
 
 T> 与 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 兼容的配置项后面 🔑 标记。
 
-<<<<<<< HEAD
-
 ## 开发服务器(`devServer`) {#devserver}
-=======
-## `devServer`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `object`
 
@@ -186,12 +181,7 @@ module.exports = {
 webpack serve --bonjour
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.clientLogLevel` {#devserverclientloglevel}
-=======
-## `devServer.clientLogLevel`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string = 'info': 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'`
 
@@ -199,11 +189,7 @@ W> `none` 和 `warning` 将在下一个主要版本中弃用。
 
 当使用 _inline mode_ 时， DevTools 会输出信息，例如：重新加载之前，出错之前或 [Hot Module Replacement](/concepts/hot-module-replacement/) 被开启时。
 
-<<<<<<< HEAD
 `devServer.clientLogLevel` 可能会导致日志过于冗余，你可以通过将其设置为 `'silent'` 来关闭日志。
-=======
-`devServer.clientLogLevel` may be too verbose, you can turn logging off by setting it to `'silent'`.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 **webpack.config.js**
 
@@ -245,12 +231,7 @@ module.exports = {
 webpack serve --compress
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.contentBase` {#devservercontentbase}
-=======
-## `devServer.contentBase`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean: false` `string` `[string]` `number`
 
@@ -297,12 +278,7 @@ module.exports = {
 webpack serve --content-base ./path/to/content/dir
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.contentBasePublicPath` {#devservercontentbasepublicpath}
-=======
-## `devServer.contentBasePublicPath`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string = '/'` `[string]`
 
@@ -340,11 +316,7 @@ module.exports = {
 
 `boolean`
 
-<<<<<<< HEAD
-当将此项配置设置为 `true` 时，将会跳过 host 检查. __这是不推荐的__ 因为不检查host的应用容易受到DNS重新绑定攻击。
-=======
-When set to `true` this option bypasses host checking. **THIS IS NOT RECOMMENDED** as apps that do not check the host are vulnerable to DNS rebinding attacks.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+当将此项配置设置为 `true` 时，将会跳过 host 检查。**这是不推荐的**因为不检查host的应用容易受到DNS重新绑定攻击。
 
 **webpack.config.js**
 
@@ -363,12 +335,7 @@ module.exports = {
 webpack serve --disable-host-check
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.filename` 🔑 {#devserverfilename-}
-=======
-## `devServer.filename` 🔑
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string`
 
@@ -396,12 +363,7 @@ module.exports = {
 
 T> 当不使用 [lazy 模式](#devserverlazy-)时，`filename` 不会生效.
 
-<<<<<<< HEAD
-
 ## `devServer.headers` 🔑 {#devserverheaders-}
-=======
-## `devServer.headers` 🔑
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `object`
 
@@ -420,12 +382,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.historyApiFallback` {#devserverhistoryapifallback}
-=======
-## `devServer.historyApiFallback`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = false` `object`
 
@@ -484,12 +441,7 @@ webpack serve --history-api-fallback
 
 有关更多选项和信息，请参见 [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) 文档。
 
-<<<<<<< HEAD
-
 ## `devServer.host` {#devserverhost}
-=======
-## `devServer.host`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string = 'localhost'`
 
@@ -512,12 +464,7 @@ module.exports = {
 webpack serve --host 0.0.0.0
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.hot` {#devserverhot}
-=======
-## `devServer.hot`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean`
 
@@ -536,12 +483,7 @@ module.exports = {
 
 T> 请注意，要完全启用 HMR ，需要 [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin/)。如果使用 --hot 选项启动 `webpack` 或 `webpack-dev-server`，该插件将自动添加，因此你可能不需要将其添加到 `webpack.config.js` 中。有关更多信息，请参见 [HMR 概览章节](/concepts/hot-module-replacement/)。
 
-<<<<<<< HEAD
-
 ## `devServer.hotOnly` {#devserverhotonly}
-=======
-## `devServer.hotOnly`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean`
 
@@ -564,12 +506,7 @@ module.exports = {
 webpack serve --hot only
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.http2` {#devserverhttp2}
-=======
-## `devServer.http2`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = false`
 
@@ -620,12 +557,7 @@ webpack serve --http2
 webpack serve --http2 --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.https` {#devserverhttps}
-=======
-## `devServer.https`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean` `object`
 
@@ -689,12 +621,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.info` - CLI only {#devserverinfo---cli-only}
-=======
-## `devServer.info` - CLI only
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean`
 
@@ -704,12 +631,7 @@ module.exports = {
 webpack serve --info false
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.injectClient` {#devserverinjectclient}
-=======
-## `devServer.injectClient`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = false` `function (compilerConfig) => boolean`
 
@@ -724,12 +646,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.injectHot` {#devserverinjecthot}
-=======
-## `devServer.injectHot`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = false` `function (compilerConfig) => boolean`
 
@@ -747,22 +664,13 @@ module.exports = {
 
 W> 使用前请确保 [`devServer.hot`](#devserverhot) 的值设置为 `true`，因为 `devServer.injectHot` 仅适用于 HMR。
 
-<<<<<<< HEAD
-
 ## `devServer.inline` {#devserverinline}
-=======
-## `devServer.inline`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean`
 
 在开发服务器的两种不同模式之间切换。默认情况下，应用程序将启用 __inline模式__。这意味着将在 bundle 中插入脚本以进行实时重新加载，并且构建消息将出现在浏览器控制台中。
 
-<<<<<<< HEAD
-也可以使用 __iframe模式__，它在通知栏下使用带有有关构建消息的`<iframe>`。 切换到 __iframe模式__：
-=======
-It is also possible to use **iframe mode**, which uses an `<iframe>` under a notification bar with messages about the build. To switch to **iframe mode**:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+也可以使用 **iframe模式**，它在通知栏下使用带有有关构建消息的`<iframe>`。 切换到 **iframe模式**：
 
 **webpack.config.js**
 
@@ -783,20 +691,11 @@ webpack serve --inline false
 
 T> 对于 [Hot Module Replacement](/plugins/hot-module-replacement-plugin/) ，建议使用串联模式，因为它包含来自 websocket 的 HMR 触发器。 轮询模式可以用作替代方法，但需要附加的入口点`'webpack/hot/poll?1000'`。
 
-<<<<<<< HEAD
-
 ## `devServer.lazy` 🔑 {#devserverlazy-}
 
 `boolean`
 
-启用 `devServer.lazy` 时，开发服务器仅在收到请求时才编译捆绑软件。 这意味着webpack将不会监视任何文件更改。 我们称这种方式为“懒惰模式(__lazy mode__)”。
-=======
-## `devServer.lazy` 🔑
-
-`boolean`
-
-When `devServer.lazy` is enabled, the dev-server will only compile the bundle when it gets requested. This means that webpack will not watch any file changes. We call this **lazy mode**.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+启用 `devServer.lazy` 时，开发服务器仅在收到请求时才编译捆绑软件。 这意味着webpack将不会监视任何文件更改。 我们称这种方式为“懒惰模式(**lazy mode**)”。
 
 **webpack.config.js**
 
@@ -815,15 +714,9 @@ module.exports = {
 webpack serve --lazy
 ```
 
-<<<<<<< HEAD
-T> [`watchOptions`](#devserverwatchoptions-) 不会有任何副作用当使用 __lazy mode__ 时。
+T> [`watchOptions`](#devserverwatchoptions-) 不会有任何副作用当使用 **lazy mode** 时。
 
-T> 如果是通过命令行使用, 请确保 __inline mode__ 处于禁用状态。
-=======
-T> [`watchOptions`](#devserverwatchoptions-) will have no effect when used with **lazy mode**.
-
-T> If you use the CLI, make sure **inline mode** is disabled.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+T> 如果是通过命令行使用, 请确保 **inline mode** 处于禁用状态。
 
 ## `devServer.liveReload` {#devserverlivereload}
 
@@ -848,12 +741,7 @@ module.exports = {
 webpack serve --no-live-reload
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.mimeTypes` 🔑 {#devservermimetypes-}
-=======
-## `devServer.mimeTypes` 🔑
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `object`
 
@@ -872,12 +760,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.noInfo` 🔑 {#devservernoinfo-}
-=======
-## `devServer.noInfo` 🔑
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = false`
 
@@ -967,12 +850,7 @@ webpack serve --open 'Google Chrome'
 
 T> 浏览器应用程序名称取决于平台。 不要在可重用模块中对其进行硬编码。 例如，`'Chrome'` 在macOS上是 `'Google Chrome'` ，在Linux上是 `'Google Chrome'` 在Windows上是 `'Chrome'` 。
 
-<<<<<<< HEAD
-
 ## `devServer.openPage` {#devserveropenpage}
-=======
-## `devServer.openPage`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string` `[string]`
 
@@ -1014,12 +892,7 @@ module.exports = {
 webpack serve --open-page /different/page1,/different/page2
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.overlay` {#devserveroverlay}
-=======
-## `devServer.overlay`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = false` `object: { errors boolean = false, warnings boolean = false }`
 
@@ -1052,12 +925,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.pfx` {#devserverpfx}
-=======
-## `devServer.pfx`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string`
 
@@ -1080,12 +948,7 @@ module.exports = {
 webpack serve --pfx ./path/to/file.pfx
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.pfxPassphrase` {#devserverpfxpassphrase}
-=======
-## `devServer.pfxPassphrase`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string`
 
@@ -1108,12 +971,7 @@ module.exports = {
 webpack serve --pfx-passphrase passphrase
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.port` {#devserverport}
-=======
-## `devServer.port`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `number`
 
@@ -1136,12 +994,7 @@ module.exports = {
 webpack serve --port 8080
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.proxy` {#devserverproxy}
-=======
-## `devServer.proxy`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `object` `[object, function]`
 
@@ -1298,12 +1151,7 @@ module.exports = {
 webpack serve --progress
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.public` {#devserverpublic}
-=======
-## `devServer.public`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string`
 
@@ -1328,12 +1176,7 @@ module.exports = {
 webpack serve --public myapp.test:80
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.publicPath` 🔑 {#devserverpublicpath-}
-=======
-## `devServer.publicPath` 🔑
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string = '/'`
 
@@ -1375,12 +1218,7 @@ module.exports = {
 
 T> 建议 `devServer.publicPath` 与 [`output.publicPath`](/configuration/output/#outputpublicpath) 相同。
 
-<<<<<<< HEAD
-
 ## `devServer.quiet` 🔑 {#devserverquiet-}
-=======
-## `devServer.quiet` 🔑
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean`
 
@@ -1424,11 +1262,7 @@ module.exports = {
 
 `function (app, server)`
 
-<<<<<<< HEAD
-W> 这个选项将被 [`devServer.before`](#devserverbefore) 所支持，并将在v3.0.0中删除。
-=======
-W> This option is **deprecated** in favor of [`devServer.before`](#devserverbefore) and will be removed in v3.0.0.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+W> 这个选项将被 [`devServer.before`](#devserverbefore) 所**替代**，并将在 v3.0.0 中**删除**。
 
 在这里，可以访问 Express 应用程序对象，并向其中添加自己的自定义中间件。
 例如，为某些路径定义自定义处理程序：
@@ -1448,12 +1282,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.sockHost` {#devserversockhost}
-=======
-## `devServer.sockHost`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string`
 
@@ -1470,12 +1299,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.sockPath` {#devserversockpath}
-=======
-## `devServer.sockPath`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string = '/sockjs-node'`
 
@@ -1536,12 +1360,7 @@ module.exports = {
 
 T> 这仅在将 [`devServer.contentBase`](#devservercontentbase) 用作字符串时有效。
 
-<<<<<<< HEAD
-
 ## `devServer.stats` 🔑 {#devserverstats-}
-=======
-## `devServer.stats` 🔑
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string: 'none' | 'errors-only' | 'minimal' | 'normal' | 'verbose'` `object`
 
@@ -1560,20 +1379,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-有关更多信息，请参见 [__stats documentation__](/configuration/stats/)。
-=======
-For more information, see the [**stats documentation**](/configuration/stats/).
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+有关更多信息，请参见 [**stats documentation**](/configuration/stats/)。
 
 T> 与 `quiet` 或 `noInfo` 一起使用时，该选项无效。
 
-<<<<<<< HEAD
-
 ## `devServer.stdin` - CLI only {#devserverstdin---cli-only}
-=======
-## `devServer.stdin` - CLI only
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean`
 
@@ -1583,12 +1393,7 @@ T> 与 `quiet` 或 `noInfo` 一起使用时，该选项无效。
 webpack serve --stdin
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.transportMode` {#devservertransportmode}
-=======
-## `devServer.transportMode`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string = 'sockjs': 'sockjs' | 'ws'` `object`
 
@@ -1683,12 +1488,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.useLocalIp` {#devserveruselocalip}
-=======
-## `devServer.useLocalIp`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean`
 
@@ -1711,12 +1511,7 @@ module.exports = {
 webpack serve --use-local-ip
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.watchContentBase` {#devserverwatchcontentbase}
-=======
-## `devServer.watchContentBase`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean`
 
@@ -1739,12 +1534,7 @@ module.exports = {
 webpack serve --watch-content-base
 ```
 
-<<<<<<< HEAD
-
 ## `devServer.watchOptions` 🔑 {#devserverwatchoptions-}
-=======
-## `devServer.watchOptions` 🔑
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `object`
 
@@ -1769,12 +1559,7 @@ module.exports = {
 
 查阅 [WatchOptions](/configuration/watch/) 了解更多。
 
-<<<<<<< HEAD
-
 ## `devServer.writeToDisk` 🔑 {#devserverwritetodisk-}
-=======
-## `devServer.writeToDisk` 🔑
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = false` `function (filePath) => boolean`
 
@@ -1806,11 +1591,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-T> 有可能需要通过 `NODE_OPTIONS` 设置一些 Node.js 的标记，例如，配置 `HTTP_MAX_HEADER_SIZE`:
-=======
-T> It is possible to set any Node.js flags via `NODE_OPTIONS`, for example, to configure `HTTP_MAX_HEADER_SIZE`:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+T> 有可能需要通过 `NODE_OPTIONS` 设置一些 Node.js 的标记，例如，配置 `HTTP_MAX_HEADER_SIZE`：
 
 **package.json**
 

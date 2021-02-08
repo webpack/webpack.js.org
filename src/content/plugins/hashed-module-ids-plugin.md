@@ -14,12 +14,7 @@ new webpack.ids.HashedModuleIdsPlugin({
 });
 ```
 
-<<<<<<< HEAD
-
 ## Options {#options}
-=======
-## Options
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 This plugin supports the following options:
 
@@ -28,12 +23,7 @@ This plugin supports the following options:
 - `hashDigest`: The encoding to use when generating the hash, defaults to `'base64'`. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported.
 - `hashDigestLength`: The prefix length of the hash digest to use, defaults to `4`. Note that some generated ids might be longer than specified here, to avoid module id collisions.
 
-<<<<<<< HEAD
-
 ## Usage {#usage}
-=======
-## Usage
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Here's an example of how this plugin might be used:
 

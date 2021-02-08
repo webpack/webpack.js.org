@@ -23,12 +23,7 @@ T> 关于编写插件的高级介绍，请移步：
 让我们首先从 tapable 工具开始，
 它为 webpack 插件接口提供了核心能力的。
 
-<<<<<<< HEAD
-
 ## Tapable {#tapable}
-=======
-## Tapable
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 这个小型库是 webpack 的一个核心工具，但也可用于其他地方，
 以提供类似的插件接口。
@@ -42,12 +37,7 @@ T> 关于编写插件的高级介绍，请移步：
 那些扩展自 `Tapable` 的对象（例如：compiler），
 以及其提供的钩子(hooks)和每个钩子的类型（例如：`同步钩子(SyncHook)`）值得关注。
 
-<<<<<<< HEAD
-
 ## 插件类型 {#plugin-types}
-=======
-## Plugin Types
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 根据使用不同的钩子(hooks)和 `tap` 方法，
 插件可以以多种不同的方式运行。
@@ -59,15 +49,9 @@ T> 关于编写插件的高级介绍，请移步：
 插件可能会以不同的方式运行。
 例如：当你钩入到 `编译(compile)` 阶段时，只有同步的 `tap` 方法可以使用。
 
-<<<<<<< HEAD
 ``` js
-compiler.hooks.compile.tap('MyPlugin', params => {
-  console.log('以同步方式触及 compile 钩子。');
-=======
-```js
 compiler.hooks.compile.tap('MyPlugin', (params) => {
-  console.log('Synchronously tapping the compile hook.');
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+  console.log('以同步方式触及 compile 钩子。');
 });
 ```
 
@@ -75,34 +59,17 @@ compiler.hooks.compile.tap('MyPlugin', (params) => {
 则需使用 `tapAsync` 或 `tapPromise`（以及 `tap`）方法。
 
 ```js
-<<<<<<< HEAD
-compiler.hooks.run.tapAsync('MyPlugin', (source, target, routesList, callback) => {
-  console.log('以异步方式触及 run 钩子。');
-  callback();
-});
-
-compiler.hooks.run.tapPromise('MyPlugin', (source, target, routesList) => {
-  return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
-    console.log('以具有延迟的异步方式触及 run 钩子。');
-  });
-});
-
-compiler.hooks.run.tapPromise('MyPlugin', async (source, target, routesList) => {
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  console.log('以具有延迟的异步方式触及 run 钩子。');
-});
-=======
 compiler.hooks.run.tapAsync(
   'MyPlugin',
   (source, target, routesList, callback) => {
-    console.log('Asynchronously tapping the run hook.');
+    console.log('以异步方式触及运行钩子。');
     callback();
   }
 );
 
 compiler.hooks.run.tapPromise('MyPlugin', (source, target, routesList) => {
   return new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
-    console.log('Asynchronously tapping the run hook with a delay.');
+    console.log('以异步的方式触发具有延迟操作的钩子。');
   });
 });
 
@@ -110,21 +77,15 @@ compiler.hooks.run.tapPromise(
   'MyPlugin',
   async (source, target, routesList) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log('Asynchronously tapping the run hook with a delay.');
+    console.log('以异步的方式触发具有延迟操作的钩子。');
   }
 );
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 ```
 
 这些需求(story)的含义在于，
 我们可以有多种方式 hook 到 compiler 中，可以让各种插件都以合适的方式去运行。
 
-<<<<<<< HEAD
-
 ## 自定义钩子 {#custom-hooks}
-=======
-## Custom Hooks
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 为了便于其他插件的编译过程中可以 `tap` 到，则需要创建一个新的 hook，
 我们只需要简单的从 `tapable` 中 `require` 所需的 hook 类，并创建：

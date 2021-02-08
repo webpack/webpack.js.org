@@ -14,12 +14,7 @@ contributors:
 
 webpack 可以监听文件变化，当它们修改后会重新编译。这个页面介绍了如何启用这个功能，以及当 watch 无法正常运行的时候你可以做的一些调整。
 
-<<<<<<< HEAD
-
 ## `watch` {#watch}
-=======
-## `watch`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = false`
 
@@ -36,12 +31,7 @@ module.exports = {
 
 T> [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 和 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 里 Watch 模式默认开启。
 
-<<<<<<< HEAD
-
 ## `watchOptions` {#watchoptions}
-=======
-## watchOptions
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `object`
 
@@ -59,12 +49,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
-### `watchOptions.aggregateTimeout` {#watchoptionsaggregatetimeout}
-=======
-### watchOptions.aggregateTimeout
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+### watchOptions.aggregateTimeout {#watchoptionsaggregatetimeout}
 
 `number = 200`
 
@@ -79,12 +64,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
-### `watchOptions.ignored` {#watchoptionsignored}
-=======
-### watchOptions.ignored
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+### watchOptions.ignored {#watchoptionsignored}
 
 `RegExp` `string` `[string]`
 
@@ -143,20 +123,11 @@ module.exports = {
 
 T> 如果你使用 `require.context`，webpack 会监听你的整个目录。你应该忽略一些文件和/或(and/or)目录，以便那些不需要监听的文件修改后不会触发重新构建。
 
-<<<<<<< HEAD
-
-### `watchOptions.poll` {#watchoptionspoll}
+### watchOptions.poll {#watchoptionspoll}
 
 `boolean = false` `number`
 
 通过传递 `true` 开启 [polling](https://whatis.techtarget.com/definition/polling)，或者指定毫秒为单位进行轮询。
-=======
-### watchOptions.poll
-
-`boolean = false` `number`
-
-Turn on [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) by passing `true`, or specifying a poll interval in milliseconds:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 **webpack.config.js**
 
@@ -164,13 +135,8 @@ Turn on [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) by
 module.exports = {
   //...
   watchOptions: {
-<<<<<<< HEAD
-    poll: 1000 // 每秒检查一次变动
+    poll: 1000, // 每秒检查一次变动
   }
-=======
-    poll: 1000, // Check for changes every second
-  },
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 };
 ```
 

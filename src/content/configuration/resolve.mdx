@@ -22,11 +22,7 @@ contributors:
 这些选项能设置模块如何被解析。webpack 提供合理的默认值，但是还是可能会修改一些解析的细节。
 关于 resolver 具体如何工作的更多解释说明，请查看[模块解析](/concepts/module-resolution)。
 
-<<<<<<< HEAD
 ## `resolve` {#resolve}
-=======
-## `resolve`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `object`
 
@@ -43,11 +39,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 ### `resolve.alias` {#resolvealias}
-=======
-### `resolve.alias`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `object`
 
@@ -179,24 +171,14 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 ### `resolve.cacheWithContext` {#resolvecachewithcontext}
-
-`boolean` (从 webpack 3.1.0起支持)
-=======
-### `resolve.cacheWithContext`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 如果启用了不安全缓存，请在缓存键(cache key)中引入 `request.context`。这个选项被 [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) 模块考虑在内。从 webpack 3.1.0 开始，在配置了 resolve 或 resolveLoader 插件时，解析缓存(resolve caching)中的上下文(context)会被忽略。
 这解决了性能衰退的问题。
 
-<<<<<<< HEAD
-### `resolve.descriptionFiles` {#resolvedescriptionfiles}
-=======
 If unsafe cache is enabled, includes `request.context` in the cache key. This option is taken into account by the [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) module. Since webpack 3.1.0 context in resolve caching is ignored when resolve or resolveLoader plugins are provided. This addresses a performance regression.
 
-### `resolve.descriptionFiles`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+### `resolve.descriptionFiles` {#resolvedescriptionfiles}
 
 `[string] = ['package.json']`
 
@@ -213,11 +195,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 ### `resolve.enforceExtension` {#resolveenforceextension}
-=======
-### `resolve.enforceExtension`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = false`
 
@@ -235,11 +213,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 ### `resolve.enforceModuleExtension` {#resolveenforcemoduleextension}
-=======
-### `resolve.enforceModuleExtension`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean = false`
 
@@ -258,11 +232,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 ### `resolve.extensions` {#resolveextensions}
-=======
-### `resolve.extensions`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `[string] = ['.wasm', '.mjs', '.js', '.json']`
 
@@ -288,11 +258,7 @@ module.exports = {
 import File from '../path/to/file';
 ```
 
-<<<<<<< HEAD
 W> 使用此选项会 **覆盖默认数组**，这就意味着 webpack 将不再尝试使用默认扩展来解析模块。
-=======
-W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 ### `resolve.mainFields` {#resolvemainfields}
 
@@ -335,17 +301,9 @@ module.exports = {
 }
 ```
 
-<<<<<<< HEAD
-在我们 `import * as Upstream from 'upstream'` 时，这实际上会从 `browser` 属性解析文件。
-在这里 `browser` 属性是最优先选择的，因为它是 `mainFields` 的第一项。同时，由 webpack 打包的 Node.js 应用程序首先会尝试
-从 `module` 字段中解析文件。
+在我们 `import * as Upstream from 'upstream'` 时，这实际上会从 `browser` 属性解析文件。在这里 `browser` 属性是最优先选择的，因为它是 `mainFields` 的第一项。同时，由 webpack 打包的 Node.js 应用程序首先会尝试从 `module` 字段中解析文件。
 
 ### `resolve.mainFiles` {#resolvemainfiles}
-=======
-When we `import * as Upstream from 'upstream'` this will actually resolve to the file in the `browser` property. The `browser` property takes precedence because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will first try to resolve using the file in the `module` field.
-
-### `resolve.mainFiles`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `[string] = ['index']`
 
@@ -362,12 +320,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ### `resolve.exportsFields` {#resolveexportsfields}
-=======
-### `resolve.exportsFields`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `[string] = ['exports']`
 
@@ -384,12 +337,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ### `resolve.modules` {#resolvemodules}
-=======
-### `resolve.modules`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `[string] = ['node_modules']`
 
@@ -428,19 +376,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 ### `resolve.unsafeCache` {#resolveunsafecache}
 
 `RegExp` `[RegExp]` `boolean: true`
 
 启用，会主动缓存模块，但并 **不安全**。传递 `true` 将缓存一切。
-=======
-### `resolve.unsafeCache`
-
-`RegExp` `[RegExp]` `boolean: true`
-
-Enable aggressive, but **unsafe**, caching of modules. Passing `true` will cache everything.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 **webpack.config.js**
 
@@ -467,15 +407,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 W> 修改缓存路径可能在极少数情况下导致失败。
 
 ### `resolve.plugins` {#resolveplugins}
-=======
-W> Changes to cached paths may cause failure in rare cases.
-
-### `resolve.plugins`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 [`[Plugin]`](/plugins/)
 
@@ -493,12 +427,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ### `resolve.preferRelative` {#resolvepreferrelative}
-=======
-### `resolve.preferRelative`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `boolean`
 
@@ -565,11 +494,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 ### `resolve.cachePredicate` {#resolvecachepredicate}
-=======
-### `resolve.cachePredicate`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `function(module) => boolean`
 
@@ -709,11 +634,7 @@ module.exports = {
 
 T> 注意，这里你可以使用别名，并且其他特性类似于 resolve 对象。例如，`{ txt: 'raw-loader' }` 会使用 `raw-loader` 去 shim(填充) `txt!templates/demo.txt`。
 
-<<<<<<< HEAD
 ### `resolveLoader.moduleExtensions` {#resolveloadermoduleextensions}
-=======
-### `resolveLoader.moduleExtensions`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `[string]`
 

@@ -34,11 +34,7 @@ module.exports = {
 
 ## 多 target {#multiple-targets}
 
-<<<<<<< HEAD
-虽然 webpack __不支持__ 向 `target` 属性传入多个字符串，但是可以通过设置两个独立配置，来构建对 library 进行同构：
-=======
-Although webpack does **not** support multiple strings being passed into the `target` property, you can create an isomorphic library by bundling two separate configurations:
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+虽然 webpack **不支持** 向 `target` 属性传入多个字符串，但是可以通过设置两个独立配置，来构建对 library 进行同构：
 
 **webpack.config.js**
 
@@ -71,12 +67,7 @@ module.exports = [serverConfig, clientConfig];
 
 从上面选项可以看出，你可以选择部署不同的 _target_。下面是可以参考的示例和资源：
 
-<<<<<<< HEAD
--  __[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)__：测试并查看 webpack _target_ 的绝佳资源。同样包含错误上报。
-- __[Boilerplate of Electron-React Application](https://github.com/chentsulin/electron-react-boilerplate)__: 一个关于 electron 主进程和渲染进程构建过程的优秀示例。
-=======
-- **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**: A great resource for testing and viewing different webpack _targets_. Also great for bug reporting.
-- **[Boilerplate of Electron-React Application](https://github.com/chentsulin/electron-react-boilerplate)**: A good example of a build process for electron's main process and renderer process.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+-  **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**：测试并查看 webpack _target_ 的绝佳资源。同样包含错误上报。
+- **[Boilerplate of Electron-React Application](https://github.com/chentsulin/electron-react-boilerplate)**: 一个关于 electron 主进程和渲染进程构建过程的优秀示例。
 
 ?> 需要你查看在线代码或样本中 webpack 配置中使用的 target 示例。

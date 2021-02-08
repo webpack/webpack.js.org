@@ -16,12 +16,7 @@ contributors:
 - 只更新变更内容，以节省宝贵的开发时间。
 - 在源代码中 CSS/JS 产生修改时，会立刻在浏览器中进行更新，这几乎相当于在浏览器 devtools 直接更改样式。
 
-<<<<<<< HEAD
-
 ## 这一切是如何运行的？ {#how-it-works}
-=======
-## How It Works
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 让我们从一些不同的角度观察，以了解 HMR 的工作原理……
 
@@ -36,12 +31,7 @@ contributors:
 
 你可以设置 HMR，以使此进程自动触发更新，或者你可以选择要求在用户交互时进行更新。
 
-<<<<<<< HEAD
-
 ### 在 compiler 中 {#in-the-compiler}
-=======
-### In the Compiler
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 除了普通资源，compiler 需要发出 "update"，将之前的版本更新到新的版本。"update" 由两部分组成：
 
@@ -52,12 +42,7 @@ manifest 包括新的 compilation hash 和所有的 updated chunk 列表。每�
 
 compiler 会确保在这些构建之间的模块 ID 和 chunk ID 保持一致。通常将这些 ID 存储在内存中（例如，使用 [webpack-dev-server](/configuration/dev-server/) 时），但是也可能会将它们存储在一个 JSON 文件中。
 
-<<<<<<< HEAD
-
 ### 在模块中 {#in-a-module}
-=======
-### In a Module
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 HMR 是可选功能，只会影响包含 HMR 代码的模块。举个例子，通过 [`style-loader`](https://github.com/webpack-contrib/style-loader) 为 style 追加补丁。为了运行追加补丁，`style-loader` 实现了 HMR 接口；当它通过 HMR 接收到更新，它会使用新的样式替换旧的样式。
 
@@ -65,12 +50,7 @@ HMR 是可选功能，只会影响包含 HMR 代码的模块。举个例子，�
 
 有关 `module.hot` 接口的详细信息，请查看 [HMR API 页面](/api/hot-module-replacement)。
 
-<<<<<<< HEAD
-
 ### 在 runtime 中 {#in-the-runtime}
-=======
-### In the Runtime
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 这件事情比较有技术性……如果你对其内部不感兴趣，可以随时跳到 [HMR API 页面](/api/hot-module-replacement) 或 [HMR 指南](/guides/hot-module-replacement)。
 
@@ -82,12 +62,7 @@ HMR 是可选功能，只会影响包含 HMR 代码的模块。举个例子，�
 
 之后，所有无效 module 都会被（通过 dispose handler）处理和解除加载。然后更新当前 hash，并且调用所有 `accept` handler。runtime 切换回 `idle` 状态，一切照常继续。
 
-<<<<<<< HEAD
-
 ## 起步 {#get-started}
-=======
-## Get Started
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 在开发环境，可以将 HMR 作为 LiveReload 的替代。[webpack-dev-server](/configuration/dev-server/) 支持 `hot` 模式，在试图重新加载整个页面之前，`hot` 模式会尝试使用 HMR 来更新。更多细节请查看 [模块热替换](/guides/hot-module-replacement) 指南。
 

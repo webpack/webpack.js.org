@@ -15,16 +15,9 @@ contributors:
 
 > amd
 
-<<<<<<< HEAD
-
 ## 带表达式的 require 语句 {#require-with-expression}
 
-如果你的 request 含有表达式(expressions)，就会创建一个上下文(context)，因为在编译时(compile time)并不清楚 __具体__ 导入哪个模块。
-=======
-## require with expression
-
-A context is created if your request contains expressions, so the **exact** module is not known on compile time.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+如果你的 request 含有表达式(expressions)，就会创建一个上下文(context)，因为在编译时(compile time)并不清楚 **具体** 导入哪个模块。
 
 示例，考虑到我们有包含 `.ejs` 文件的如下目录结构：
 
@@ -54,11 +47,7 @@ Regular expression: /^.*\.ejs$/
 
 **context module**
 
-<<<<<<< HEAD
-会生成一个 context module(上下文模块)。会生成一个 context module(上下文模块)。它包含 __目录下的所有模块__ 的引用，如果一个 request 符合正则表达式，就能 require 进来。该context module包含一个map（映射）对象，会把requests翻译成对应的模块id。（译者注：request参考[概念术语](https://webpack.docschina.org/glossary/) ）
-=======
-A context module is generated. It contains references to **all modules in that directory** that can be required with a request matching the regular expression. The context module contains a map which translates requests to module ids.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+会生成一个 context module(上下文模块)。会生成一个 context module(上下文模块)。它包含 **目录下的所有模块** 的引用，如果一个 request 符合正则表达式，就能 require 进来。该 context module 包含一个map（映射）对象，会把 requests 翻译成对应的模块 id。（译者注：request 参考[概念术语](https://webpack.docschina.org/glossary/) ）
 
 示例map（映射）:
 
@@ -74,12 +63,7 @@ A context module is generated. It contains references to **all modules in that d
 
 这意味着 webpack 能够支持动态地 require，但会导致所有可能用到的模块都包含在 bundle 中。
 
-<<<<<<< HEAD
-
 ## `require.context` {#requirecontext}
-=======
-## `require.context`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 你还可以通过 `require.context()` 函数来创建自己的 context。
 
@@ -113,12 +97,7 @@ require.context('../', true, /\.stories\.js$/);
 
 W> 传递给 `require.context` 的参数必须是字面量(literal)！
 
-<<<<<<< HEAD
-
 ### context module API {#context-module-api}
-=======
-### context module API
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 一个 context module 会导出一个（require）函数，此函数可以接收一个参数：request。
 

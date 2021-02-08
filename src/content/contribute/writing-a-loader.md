@@ -12,12 +12,7 @@ contributors:
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
 
-<<<<<<< HEAD
-
 ## Setup {#setup}
-=======
-## Setup
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 Before we dig into the different types of loaders, their usage, and examples, let's take a look at the three ways you can develop and test a loader locally.
 
@@ -67,12 +62,7 @@ By the way, if you've already created a separate repository and package for your
 
 T> You can use [`webpack-defaults` package](https://github.com/webpack-contrib/webpack-defaults) to generate boilerplate code necessary to start writing your loader.
 
-<<<<<<< HEAD
-
 ## Simple Usage {#simple-usage}
-=======
-## Simple Usage
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 When a single loader is applied to the resource, the loader is called with only one parameter – a string containing the content of the resource file.
 
@@ -80,12 +70,7 @@ Synchronous loaders can simply `return` a single value representing the transfor
 
 The loader is expected to give back one or two values. The first value is a resulting JavaScript code as string or buffer. The second optional value is a SourceMap as JavaScript object.
 
-<<<<<<< HEAD
-
 ## Complex Usage {#complex-usage}
-=======
-## Complex Usage
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 When multiple loaders are chained, it is important to remember that they are executed in reverse order – either right to left or bottom to top depending on array format.
 
@@ -111,12 +96,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-
 ## Guidelines {#guidelines}
-=======
-## Guidelines
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 The following guidelines should be followed when writing a loader. They are ordered in terms of importance and some only apply in certain scenarios, read the detailed sections that follow for more information.
 
@@ -274,12 +254,7 @@ For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpa
 }
 ```
 
-<<<<<<< HEAD
-
 ## Testing {#testing}
-=======
-## Testing
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a simple unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest](https://jestjs.io/) framework to do this. We'll also install `babel-jest` and some presets that will allow us to use the `import` / `export` and `async` / `await`. Let's start by installing and saving these as a `devDependencies`:
 

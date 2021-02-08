@@ -11,24 +11,13 @@ contributors:
 
 T> 本指南继续沿用 [管理输出](/guides/output-management) 中的代码示例。
 
-<<<<<<< HEAD
-渐进式网络应用程序(progressive web application - PWA)，是一种可以提供类似于native app(原生应用程序) 体验的 web app(网络应用程序)。PWA 可以用来做很多事。其中最重要的是，在__离线(offline)__时应用程序能够继续运行功能。这是通过使用名为 [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/) 的 web 技术来实现的。
-=======
-Progressive Web Applications (or PWAs) are web apps that deliver an experience similar to native applications. There are many things that can contribute to that. Of these, the most significant is the ability for an app to be able to function when **offline**. This is achieved through the use of a web technology called [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/).
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+渐进式网络应用程序(progressive web application - PWA)，是一种可以提供类似于native app(原生应用程序) 体验的 web app(网络应用程序)。PWA 可以用来做很多事。其中最重要的是，在**离线(offline)**时应用程序能够继续运行功能。这是通过使用名为 [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/) 的 web 技术来实现的。
 
 本章将重点介绍，如何为我们的应用程序添加离线体验。我们将使用名为 [Workbox](https://github.com/GoogleChrome/workbox) 的 Google 项目来实现此目的，该项目提供的工具可帮助我们更简单地为 web app 提供离线支持。
 
-<<<<<<< HEAD
-
 ## 现在，我们并没有运行在离线环境下 {#we-dont-work-offline-now}
 
-到目前为止，我们一直是直接查看本地文件系统的输出结果。通常情况下，真正的用户是通过网络访问 web app；用户的浏览器会与一个提供所需资源（例如，`.html`, `.js` 和 `.css` 文件）的 __server__ 通讯。
-=======
-## We Don't Work Offline Now
-
-So far, we've been viewing the output by going directly to the local file system. Typically though, a real user accesses a web app over a network; their browser talking to a **server** which will serve up the required assets (e.g. `.html`, `.js`, and `.css` files).
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+到目前为止，我们一直是直接查看本地文件系统的输出结果。通常情况下，真正的用户是通过网络访问 web app；用户的浏览器会与一个提供所需资源（例如，`.html`, `.js` 和 `.css` 文件）的 **server** 通讯。
 
 我们通过搭建一个简易 server 下，测试下这种离线体验。这里使用 [http-server](https://www.npmjs.com/package/http-server) package：`npm install http-server --save-dev`。还要修改 `package.json` 的 `scripts` 部分，来添加一个 `start` script：
 
@@ -65,12 +54,7 @@ Hit CTRL-C to stop the server
 
 这就是我们为实现离线体验所需要的改变。在本章结束时，我们应该要实现的是，停止 server 然后刷新，仍然可以看到应用程序正常运行。
 
-<<<<<<< HEAD
-
 ## 添加 Workbox {#adding-workbox}
-=======
-## Adding Workbox
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 添加 workbox-webpack-plugin 插件，然后调整 `webpack.config.js` 文件：
 
@@ -129,12 +113,7 @@ precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js  268 bytes          [emitt
 
 所以，值得高兴的是，我们现在已经创建出一个 Service Worker。接下来该做什么？
 
-<<<<<<< HEAD
-
 ## 注册 Service Worker {#registering-our-service-worker}
-=======
-## Registering Our Service Worker
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 接下来我们注册 Service Worker，使其出场并开始表演。通过添加以下注册代码来完成此操作：
 
@@ -161,12 +140,7 @@ precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js  268 bytes          [emitt
 SW registered
 ```
 
-<<<<<<< HEAD
-现在来进行测试。停止 server 并刷新页面。如果浏览器能够支持 Service Worker，应该可以看到你的应用程序还在正常运行。然而，server 已经__停止__ serve 整个 dist 文件夹，此刻是 Service Worker 在进行 serve。
-
-=======
-Now to test it. Stop your server and refresh your page. If your browser supports Service Workers then you should still be looking at your application. However, it has been served up by your Service Worker and **not** by the server.
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
+现在来进行测试。停止 server 并刷新页面。如果浏览器能够支持 Service Worker，应该可以看到你的应用程序还在正常运行。然而，server 已经**停止** serve 整个 dist 文件夹，此刻是 Service Worker 在进行 serve。
 
 ## 结论 {#conclusion}
 

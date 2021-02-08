@@ -18,12 +18,7 @@ contributors:
 
 配置如何展示性能提示。例如，如果一个资源超过 250kb，webpack 会对此输出一个警告来通知你。
 
-<<<<<<< HEAD
-
 ## `performance.hints` {#performancehints}
-=======
-## `performance.hints`
->>>>>>> 2a79b6b70d9af5bbff0bb3f044dcb2d575090ce5
 
 `string = 'warning': 'error' | 'warning'` `boolean: false`
 
