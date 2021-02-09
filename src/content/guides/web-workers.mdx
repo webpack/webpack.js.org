@@ -39,3 +39,15 @@ self.onmessage = ({ data: { question } }) => {
   });
 };
 ```
+
+## Node.js
+
+Similar syntax is supported in Node.js (>= 12.17.0):
+
+```js
+import { Worker } from 'worker_threads';
+
+new Worker(new URL('./worker.js', import.meta.url));
+```
+
+Note that this is only available in ESM. CommonJS is not supported by neither webpack nor Node.js.
