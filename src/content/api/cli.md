@@ -447,3 +447,11 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 | `0`       | Success                                            |
 | `1`       | Errors from webpack                                |
 | `2`       | Configuration/options problem or an internal error |
+
+## Environment Variables
+
+| Environment Variable              | Description                             |
+| --------------------------------- | --------------------------------------- |
+| `WEBPACK_SERVE`                   | `true` if `serve` command is being used |
+| `WEBPACK_BUILD`, `WEBPACK_BUNDLE` | `true` if `build` command is being used |
+| `WEBPACK_WATCH`                   | `true` if `watch` command is being used |
