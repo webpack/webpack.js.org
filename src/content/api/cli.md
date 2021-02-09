@@ -450,8 +450,8 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 
 ## Environment Variables
 
-| Environment Variable              | Description                             |
-| --------------------------------- | --------------------------------------- |
-| `WEBPACK_SERVE`                   | `true` if `serve` command is being used |
-| `WEBPACK_BUILD`, `WEBPACK_BUNDLE` | `true` if `build` command is being used |
-| `WEBPACK_WATCH`                   | `true` if `watch` command is being used |
+| Environment Variable | Description                                  |
+| -------------------- | -------------------------------------------- |
+| `WEBPACK_SERVE`      | `true` if `serve\|s` command is being used.  |
+| `WEBPACK_BUILD`      | `true` if `build\|bundle\|b` is being used.  |
+| `WEBPACK_WATCH`      | `true` if `--watch\|watch\|w` is being used. |
