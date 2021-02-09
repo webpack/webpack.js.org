@@ -716,18 +716,18 @@ T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回�
 - `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' /> – 如果目标对象存在，则将返回值 copy 到目标对象，否则先创建目标对象：
 
   ```js
-  // create the target object if it doesn't exist
+  // 如果不存在的话就创建目标对象
   MyLibrary = typeof MyLibrary === 'undefined' ? {} : MyLibrary;
-  // then copy the return value to MyLibrary
-  // just like what Object.assign does
+  // 然后复制返回值到 MyLibrary
+  // 就像是 Object.assign
 
-  // for instance, you export a `hello` function in your entry as follow
+  // 例如，你在入口导出了一个 `hello` 函数
   export function hello(name) {
     console.log(`Hello ${name}`);
   }
 
-  // In another script running MyLibrary
-  // you can run `hello` function like so
+  // 在另一个脚本中运行 MyLibrary
+  // 你可以像这样运行 `hello` 函数
   MyLibrary.hello('World');
   ```
 
