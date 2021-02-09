@@ -59,4 +59,4 @@ import './public-path';
 import './app';
 ```
 
-T> When using `web` or `web-worker` target, `publicPath` defaults to `'auto'` which will automatically determine the public path from either `import.meta.url`, `document.currentScript`, `<script />` or `self.location`.
+T> 当使用 `web` 或者 `web-worker` 时，`publicPath` 默认为 `'auto'`，将会自动从 `import.meta.url`、`document.currentScript`、`<script />` 或者 `self.location` 中确定公共路径。

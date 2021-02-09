@@ -888,11 +888,11 @@ module.exports = {
 };
 ```
 
-### `stats.ids`
+### `stats.ids` {#statsids}
 
 `boolean = false`
 
-Tells `stats` to add IDs of modules and chunks.
+通知 `stats` 给 module 和 chunk 添加 id。
 
 ```javascript
 module.exports = {

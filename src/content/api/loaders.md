@@ -454,21 +454,21 @@ module.exports = function (source) {
 
 可能的值为：`'production'`, `'development'`, `'none'`
 
-## Webpack specific properties
+## Webpack specific properties {#webpack-specific-properties}
 
-The loader interface provides all module relate information. However in rare cases you might need access to the compiler api itself.
+loader 接口提供所有模块的相关信息。然而，在极少数情况下，你可能需要访问 compiler api 本身。
 
-W> Please note that using these webpack specific properties will have a negative impact on your loaders compatibility.
+W> 请注意，使用这些 webpack 特定的属性会对 loader 的兼容性产生负面影响。
 
-Therefore you should only use them as a last resort. Using them will reduce the portability of your loader.
+因此，你应该把它们作为最后的手段。使用它们将降低 loader 的可移植性。
 
-### `this._compiler`
+### `this._compiler` {#this_compiler}
 
-Access to the current Compiler object of webpack.
+用于访问 webpack 的当前 Compiler 对象。
 
-### `this._compilation`
+### `this._compilation` {#this_compilation}
 
-Access to the current Compilation object of webpack.
+用于访问 webpack 的当前 Compilation 对象。
 
 ## 过时的上下文属性 {#deprecated-context-properties}
 
