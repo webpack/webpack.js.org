@@ -27,7 +27,6 @@ import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Vote from '../Vote/Vote';
-import Organization from '../Organization/Organization';
 import Badge from '../Badge/Badge.js';
 import { default as LinkComponent } from '../mdxComponents/Link';
 
@@ -230,7 +229,6 @@ function Site(props) {
               <Container className="site__content">
                 <Switch>
                   <Route path="/vote" component={Vote} />
-                  <Route path="/organization" component={Organization} />
                   <Route path="/app-shell" component={() => <Fragment />} />
                   {pages.map((page) => (
                     <Route
