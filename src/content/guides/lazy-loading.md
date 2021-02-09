@@ -19,16 +19,15 @@ T> 本指南继承自[代码分离](/guides/code-splitting)。如果你尚未阅
 
 懒加载或者按需加载，是一种很好的优化网页或应用的方式。这种方式实际上是先把你的代码在一些逻辑断点处分离开，然后在一些代码块中完成某些操作后，立即引用或即将引用另外一些新的代码块。这样加快了应用的初始加载速度，减轻了它的总体体积，因为某些代码块可能永远不会被加载。
 
-
 ## 示例 {#example}
 
 我们在[代码分离](/guides/code-splitting#dynamic-imports)中的例子基础上，进一步做些调整来说明这个概念。那里的代码确实会在脚本运行的时候产生一个分离的代码块 `lodash.bundle.js` ，在技术概念上“懒加载”它。问题是加载这个包并不需要用户的交互 - 意思是每次加载页面的时候都会请求它。这样做并没有对我们有很多帮助，还会对性能产生负面影响。
 
 我们试试不同的做法。我们增加一个交互，当用户点击按钮的时候用 console 打印一些文字。但是会等到第一次交互的时候再加载那个代码块（`print.js`）。为此，我们返回到代码分离的例子中，把 `lodash` 放到主代码块中，重新运行_代码分离_中的代码 [final _Dynamic Imports_ example](/guides/code-splitting#dynamic-imports)。
 
-__project__
+**project**
 
-``` diff
+```diff
 webpack-demo
 |- package.json
 |- webpack.config.js
@@ -39,19 +38,21 @@ webpack-demo
 |- /node_modules
 ```
 
-__src/print.js__
+**src/print.js**
 
-``` js
-console.log('The print.js module has loaded! See the network tab in dev tools...');
+```js
+console.log(
+  'The print.js module has loaded! See the network tab in dev tools...'
+);
 
 export default () => {
   console.log('Button Clicked: Here\'s "some text"!');
 };
 ```
 
-__src/index.js__
+**src/index.js**
 
-``` diff
+```diff
 + import _ from 'lodash';
 +
 - async function getComponent() {
@@ -87,7 +88,7 @@ W> 注意当调用 ES6 模块的 `import()` 方法（引入模块）时，必须
 
 现在运行 webpack 来验证一下我们的懒加载功能：
 
-``` bash
+```bash
 ...
           Asset       Size  Chunks                    Chunk Names
 print.bundle.js  417 bytes       0  [emitted]         print
@@ -95,7 +96,6 @@ index.bundle.js     548 kB       1  [emitted]  [big]  index
      index.html  189 bytes          [emitted]
 ...
 ```
-
 
 ## 框架 {#frameworks}
 

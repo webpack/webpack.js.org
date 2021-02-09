@@ -31,19 +31,19 @@ T> 以下示例来源于 [tree shaking](/guides/tree-shaking) 和 [开发环境]
 
 ## 配置 {#setup}
 
-_development(开发环境)_ 和 _production(生产环境)_ 这两个环境下的构建目标存在着巨大差异。在_开发环境_中，我们需要：强大的 source map 和一个有着 live reloading(实时重新加载) 或 hot module replacement(热模块替换) 能力的 localhost server。而_生产环境_目标则转移至其他方面，关注点在于压缩 bundle、更轻量的 source map、资源优化等，通过这些优化方式改善加载时间。由于要遵循逻辑分离，我们通常建议为每个环境编写__彼此独立的 webpack 配置__。
+**development(开发环境)** 和 **production(生产环境)** 这两个环境下的构建目标存在着巨大差异。在**开发环境**中，我们需要：强大的 source map 和一个有着 live reloading(实时重新加载) 或 hot module replacement(热模块替换) 能力的 localhost server。而**生产环境**目标则转移至其他方面，关注点在于压缩 bundle、更轻量的 source map、资源优化等，通过这些优化方式改善加载时间。由于要遵循逻辑分离，我们通常建议为每个环境编写**彼此独立的 webpack 配置**。
 
 虽然，以上我们将_生产环境_和_开发环境_做了略微区分，但是，请注意，我们还是会遵循不重复原则(Don't repeat yourself - DRY)，保留一个 "common(通用)" 配置。为了将这些配置合并在一起，我们将使用一个名为 [`webpack-merge`](https://github.com/survivejs/webpack-merge) 的工具。此工具会引用 "common" 配置，因此我们不必再在环境特定(environment-specific)的配置中编写重复代码。
 
 我们先从安装 `webpack-merge` 开始，并将之前指南中已经成型的那些代码进行分离：
 
-``` bash
+```bash
 npm install --save-dev webpack-merge
 ```
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
 - |- webpack.config.js
@@ -57,9 +57,9 @@ __project__
   |- /node_modules
 ```
 
-__webpack.common.js__
+**webpack.common.js**
 
-``` diff
+```diff
 + const path = require('path');
 + const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 + const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -82,9 +82,9 @@ __webpack.common.js__
 + };
 ```
 
-__webpack.dev.js__
+**webpack.dev.js**
 
-``` diff
+```diff
 + const { merge } = require('webpack-merge');
 + const common = require('./webpack.common.js');
 +
@@ -97,9 +97,9 @@ __webpack.dev.js__
 + });
 ```
 
-__webpack.prod.js__
+**webpack.prod.js**
 
-``` diff
+```diff
 + const { merge } = require('webpack-merge');
 + const common = require('./webpack.common.js');
 +
@@ -116,9 +116,9 @@ __webpack.prod.js__
 
 现在，我们把 `scripts` 重新指向到新配置。让 `npm start` script 中 `webpack-dev-server`, 使用 `webpack.dev.js`, 而让 `npm run build` script 使用 `webpack.prod.js`:
 
-__package.json__
+**package.json**
 
-``` diff
+```diff
   {
     "name": "development",
     "version": "1.0.0",
@@ -156,9 +156,9 @@ __package.json__
 
 许多 library 通过与 `process.env.NODE_ENV` 环境变量关联，以决定 library 中应该引用哪些内容。例如，当`process.env.NODE_ENV` 没有被设置为 `'production'` 时，某些 library 为了使调试变得容易，可能会添加额外的 log(日志记录) 和 test(测试) 功能。并且，在使用 `process.env.NODE_ENV === 'production'` 时，一些 library 可能针对具体用户的环境，删除或添加一些重要代码，以进行代码执行方面的优化。从 webpack v4 开始, 指定 [`mode`](/configuration/mode/) 会自动地配置 [`DefinePlugin`](/plugins/define-plugin)：
 
-__webpack.prod.js__
+**webpack.prod.js**
 
-``` diff
+```diff
   const { merge } = require('webpack-merge');
   const common = require('./webpack.common.js');
 
@@ -167,11 +167,11 @@ __webpack.prod.js__
   });
 ```
 
-T> 技术上讲，`NODE_ENV` 是一个由 Node.js 暴露给执行脚本的系统环境变量。通常用于决定在开发环境与生产环境(dev-vs-prod)下，server tools(服务期工具)、build scripts(构建脚本) 和 client-side libraries(客户端库) 的行为。然而，与预期相反，在构建脚本 `webpack.config.js` 中`process.env.NODE_ENV` 并没有被设置为 `"production"`，请查看 [#2537](https://github.com/webpack/webpack/issues/2537)。因此，在 webpack 配置文件中，`process.env.NODE_ENV === 'production' ? '[name].[contenthash].bundle.js' : '[name].bundle.js'` 这样的条件语句，无法按照预期运行。
+T> 技术上讲，`NODE_ENV` 是一个由 Node.js 暴露给执行脚本的系统环境变量。通常用于决定在开发环境与生产环境(dev-vs-prod)下，server tools(服务期工具)、build scripts(构建脚本) 和 client-side libraries(客户端库) 的行为。然而，与预期相反，在构建脚本 `webpack.config.js` 中 `process.env.NODE_ENV` 并没有被设置为 `"production"`，请查看 [#2537](https://github.com/webpack/webpack/issues/2537)。因此，在 webpack 配置文件中，`process.env.NODE_ENV === 'production' ? '[name].[contenthash].bundle.js' : '[name].bundle.js'` 这样的条件语句，无法按照预期运行。
 
 如果你正在使用像 [`react`](https://react.docchina.org/) 这样的 library，那么在添加此 DefinePlugin 插件后，你应该看到 bundle 大小显著下降。还要注意，任何位于 `/src` 的本地代码都可以关联到 process.env.NODE_ENV 环境变量，所以以下检查也是有效的：
 
-__src/index.js__
+**src/index.js**
 
 ```diff
   import { cube } from './math.js';
@@ -208,9 +208,9 @@ webpack v4+ will minify your code by default in [`production mode`](/configurati
 
 我们鼓励你在生产环境中启用 source map，因为它们对 debug(调试源码) 和运行 benchmark tests(基准测试) 很有帮助。虽然有着如此强大的功能，然而还是应该针对生产环境用途，选择一个可以快速构建的推荐配置（更多选项请查看 [`devtool`](/configuration/devtool)）。对于本指南，我们将在_生产环境_中使用 `source-map` 选项，而不是我们在_开发环境_中用到的 `inline-source-map`：
 
-__webpack.prod.js__
+**webpack.prod.js**
 
-``` diff
+```diff
   const { merge } = require('webpack-merge');
   const common = require('./webpack.common.js');
 

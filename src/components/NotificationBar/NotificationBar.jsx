@@ -17,8 +17,8 @@ const barDismissed = () => {
 
 class MessageBar extends Component {
   static propTypes = {
-    onClose: PropTypes.func
-  }
+    onClose: PropTypes.func,
+  };
   render() {
     return (
       <div className="notification-bar">
@@ -34,7 +34,7 @@ class MessageBar extends Component {
               width={16}
               onClick={this.close.bind(this)}
               role="button"
-              />
+            />
           ) : null}
         </Container>
       </div>
@@ -57,7 +57,7 @@ export default class NotificationBar extends Component {
     super(props);
     this.onClose = this.onClose.bind(this);
     this.state = {
-      dismissed: barDismissed()
+      dismissed: barDismissed(),
     };
     if (!this.state.dismissed && typeof document !== 'undefined') {
       document.body.classList.add('notification-bar-visible');
@@ -65,12 +65,12 @@ export default class NotificationBar extends Component {
   }
 
   onClose() {
-    this.setState(state => {
+    this.setState((state) => {
       if (!state.dismissed && typeof document !== 'undefined') {
         document.body.classList.remove('notification-bar-visible');
       }
       return {
-        dismissed: !state.dismissed
+        dismissed: !state.dismissed,
       };
     });
   }
@@ -78,6 +78,10 @@ export default class NotificationBar extends Component {
   render() {
     const { dismissed } = this.state;
 
-    return <Fragment>{!dismissed ? <MessageBar onClose={this.onClose} /> : null}</Fragment>;
+    return (
+      <Fragment>
+        {!dismissed ? <MessageBar onClose={this.onClose} /> : null}
+      </Fragment>
+    );
   }
 }

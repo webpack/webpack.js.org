@@ -16,16 +16,15 @@ contributors:
 
 除了打包应用程序，webpack 还可以用于打包 JavaScript library。以下指南适用于希望简化打包策略的 library 作者。
 
-
 ## 创建一个 library {#authoring-a-library}
 
 假设你正在编写一个名为 `webpack-numbers` 的小的 library，可以将数字 1 到 5 转换为文本表示，反之亦然，例如将 2 转换为 'two'。
 
 基本的项目结构可能如下所示：
 
-__project__
+**project**
 
-``` diff
+```diff
 +  |- webpack.config.js
 +  |- package.json
 +  |- /src
@@ -35,12 +34,12 @@ __project__
 
 初始化 npm，安装 webpack 和 lodash：
 
-``` bash
+```bash
 npm init -y
 npm install --save-dev webpack lodash
 ```
 
-__src/ref.json__
+**src/ref.json**
 
 ```json
 [
@@ -71,46 +70,54 @@ __src/ref.json__
 ]
 ```
 
-__src/index.js__
+**src/index.js**
 
-``` js
+```js
 import _ from 'lodash';
 import numRef from './ref.json';
 
 export function numToWord(num) {
-  return _.reduce(numRef, (accum, ref) => {
-    return ref.num === num ? ref.word : accum;
-  }, '');
+  return _.reduce(
+    numRef,
+    (accum, ref) => {
+      return ref.num === num ? ref.word : accum;
+    },
+    ''
+  );
 }
 
 export function wordToNum(word) {
-  return _.reduce(numRef, (accum, ref) => {
-    return ref.word === word && word.toLowerCase() ? ref.num : accum;
-  }, -1);
+  return _.reduce(
+    numRef,
+    (accum, ref) => {
+      return ref.word === word && word.toLowerCase() ? ref.num : accum;
+    },
+    -1
+  );
 }
 ```
 
 这个 library 的调用规范如下：
 
-- __ES2015 module import:__
+- **ES2015 module import:**
 
-``` js
+```js
 import * as webpackNumbers from 'webpack-numbers';
 // ...
 webpackNumbers.wordToNum('Two');
 ```
 
-- __CommonJS module require:__
+- **CommonJS module require:**
 
-``` js
+```js
 const webpackNumbers = require('webpack-numbers');
 // ...
 webpackNumbers.wordToNum('Two');
 ```
 
-- __AMD module require:__
+- **AMD module require:**
 
-``` js
+```js
 require(['webpackNumbers'], function (webpackNumbers) {
   // ...
   webpackNumbers.wordToNum('Two');
@@ -119,17 +126,17 @@ require(['webpackNumbers'], function (webpackNumbers) {
 
 consumer(使用者) 还可以通过一个 script 标签来加载和使用此 library：
 
-``` html
-<!doctype html>
+```html
+<!DOCTYPE html>
 <html>
   ...
   <script src="https://unpkg.com/webpack-numbers"></script>
   <script>
     // ...
     // 全局变量
-    webpackNumbers.wordToNum('Five')
+    webpackNumbers.wordToNum('Five');
     // window 对象中的属性
-    window.webpackNumbers.wordToNum('Five')
+    window.webpackNumbers.wordToNum('Five');
     // ...
   </script>
 </html>
@@ -141,7 +148,6 @@ consumer(使用者) 还可以通过一个 script 标签来加载和使用此 lib
 - `this` 对象中的属性。
 
 完整的 library 配置和代码，请查看 [webpack-library-example](https://github.com/kalcifer/webpack-library-example)。
-
 
 ## 基本配置 {#base-configuration}
 
@@ -158,13 +164,11 @@ consumer(使用者) 还可以通过一个 script 标签来加载和使用此 lib
 - CommonJS 模块。例如 `require('webpack-numbers')`.
 - 全局变量，在通过 `script` 标签引入时。
 
-
-
 我们可以从如下 webpack 基本配置开始：
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` js
+```js
 const path = require('path');
 
 module.exports = {
@@ -180,28 +184,26 @@ module.exports = {
 
 source map 是有用的调试工具，可以查看压缩代码对应的原始代码。
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` js
+```js
 const path = require('path');
 
-module.exports = [
-  'source-map'
-].map(devtool => ({
+module.exports = ['source-map'].map((devtool) => ({
   mode: 'development',
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'webpack-numbers.js'
+    filename: 'webpack-numbers.js',
   },
   devtool,
   optimization: {
-    runtimeChunk: true
-  }
+    runtimeChunk: true,
+  },
 }));
- ```
+```
 
->  关于 source map 配置和可用选项的更多信息，请参考 [devtool 配置](https://webpack.js.org/configuration/devtool/)
+> 关于 source map 配置和可用选项的更多信息，请参考 [devtool 配置](/configuration/devtool/)
 
 > 查看代码示例， 请参考 [webpack 仓库](https://github.com/webpack/webpack/tree/master/examples/source-map)
 
@@ -211,9 +213,9 @@ module.exports = [
 
 这可以使用 `externals` 配置来完成：
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
   const path = require('path');
 
   module.exports = {
@@ -237,12 +239,11 @@ __webpack.config.js__
 
 T> 注意，如果你仅计划将 library 用作另一个 webpack bundle 中的依赖模块，则可以直接将 `externals` 指定为一个数组。
 
-
 ## 外部化的限制 {#external-limitations}
 
 对于想要实现从一个依赖中调用多个文件的那些 library：
 
-``` js
+```js
 import A from 'library/one';
 import B from 'library/two';
 
@@ -251,7 +252,7 @@ import B from 'library/two';
 
 无法通过在 externals 中指定整个 `library` 的方式，将它们从 bundle 中排除。而是需要逐个或者使用一个正则表达式，来排除它们。
 
-``` js
+```js
 module.exports = {
   //...
   externals: [
@@ -263,14 +264,13 @@ module.exports = {
 };
 ```
 
-
 ## 暴露 library {#expose-the-library}
 
 对于用法广泛的 library，我们希望它能够兼容不同的环境，例如 CommonJS，AMD，Node.js 或者作为一个全局变量。为了让你的 library 能够在各种使用环境中可用，需要在 `output` 中添加 `library` 属性：
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
   const path = require('path');
 
   module.exports = {
@@ -291,13 +291,13 @@ __webpack.config.js__
   };
 ```
 
-T> 注意，`library` 设置绑定到 `entry` 配置。对于大多数 library，指定一个入口起点就足够了。虽然 [一次打包暴露多个库](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) 也是也可以的，然而，通过 [index script(索引脚本)（仅用于访问一个入口起点）](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file) 暴露部分导出则更为简单。我们__不推荐__使用`数组`作为 library 的 `entry`。
+T> 注意，`library` 设置绑定到 `entry` 配置。对于大多数 library，指定一个入口起点就足够了。虽然 [一次打包暴露多个库](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) 也是也可以的，然而，通过 [index script(索引脚本)（仅用于访问一个入口起点）](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file) 暴露部分导出则更为简单。我们**不推荐**使用`数组`作为 library 的 `entry`。
 
 这会将你的 library bundle 暴露为名为 `webpackNumbers` 的全局变量，consumer 通过此名称来 import。为了让 library 和其他环境兼容，则需要在配置中添加 `libraryTarget` 属性。这个选项可以控制以多种形式暴露 library。
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
   const path = require('path');
 
   module.exports = {
@@ -330,14 +330,13 @@ __webpack.config.js__
 
 W> 在 webpack v3.5.5 中，使用 `libraryTarget: { root:'_' }` 将无法正常工作（参考 [issue 4824](https://github.com/webpack/webpack/issues/4824)) 所述）。然而，可以设置 `libraryTarget: { var: '_' }` 来将 library 作为全局变量。
 
-
 ### 最终步骤 {#final-steps}
 
 遵循 [生产环境](/guides/production) 指南中提到的步骤，来优化生产环境下的输出结果。那么，我们还需要将生成 bundle 的文件路径，添加到 `package.json` 中的 `main` 字段中。
 
-__package.json__
+**package.json**
 
-``` json
+```json
 {
   ...
   "main": "dist/webpack-numbers.js",
@@ -347,7 +346,7 @@ __package.json__
 
 或者，按照这个 [指南](https://github.com/dherman/defense-of-dot-js/blob/master/proposal.md#typical-usage)，将其添加为标准模块：
 
-``` json
+```json
 {
   ...
   "module": "src/index.js",

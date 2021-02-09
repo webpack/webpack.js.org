@@ -23,7 +23,6 @@ T> 关于编写插件的高级介绍，请移步：
 让我们首先从 tapable 工具开始，
 它为 webpack 插件接口提供了核心能力的。
 
-
 ## Tapable {#tapable}
 
 这个小型库是 webpack 的一个核心工具，但也可用于其他地方，
@@ -38,7 +37,6 @@ T> 关于编写插件的高级介绍，请移步：
 那些扩展自 `Tapable` 的对象（例如：compiler），
 以及其提供的钩子(hooks)和每个钩子的类型（例如：`同步钩子(SyncHook)`）值得关注。
 
-
 ## 插件类型 {#plugin-types}
 
 根据使用不同的钩子(hooks)和 `tap` 方法，
@@ -52,7 +50,7 @@ T> 关于编写插件的高级介绍，请移步：
 例如：当你钩入到 `编译(compile)` 阶段时，只有同步的 `tap` 方法可以使用。
 
 ``` js
-compiler.hooks.compile.tap('MyPlugin', params => {
+compiler.hooks.compile.tap('MyPlugin', (params) => {
   console.log('以同步方式触及 compile 钩子。');
 });
 ```
@@ -61,33 +59,38 @@ compiler.hooks.compile.tap('MyPlugin', params => {
 则需使用 `tapAsync` 或 `tapPromise`（以及 `tap`）方法。
 
 ```js
-compiler.hooks.run.tapAsync('MyPlugin', (source, target, routesList, callback) => {
-  console.log('以异步方式触及 run 钩子。');
-  callback();
-});
+compiler.hooks.run.tapAsync(
+  'MyPlugin',
+  (source, target, routesList, callback) => {
+    console.log('以异步方式触及运行钩子。');
+    callback();
+  }
+);
 
 compiler.hooks.run.tapPromise('MyPlugin', (source, target, routesList) => {
-  return new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
-    console.log('以具有延迟的异步方式触及 run 钩子。');
+  return new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+    console.log('以异步的方式触发具有延迟操作的钩子。');
   });
 });
 
-compiler.hooks.run.tapPromise('MyPlugin', async (source, target, routesList) => {
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  console.log('以具有延迟的异步方式触及 run 钩子。');
-});
+compiler.hooks.run.tapPromise(
+  'MyPlugin',
+  async (source, target, routesList) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log('以异步的方式触发具有延迟操作的钩子。');
+  }
+);
 ```
 
 这些需求(story)的含义在于，
 我们可以有多种方式 hook 到 compiler 中，可以让各种插件都以合适的方式去运行。
-
 
 ## 自定义钩子 {#custom-hooks}
 
 为了便于其他插件的编译过程中可以 `tap` 到，则需要创建一个新的 hook，
 我们只需要简单的从 `tapable` 中 `require` 所需的 hook 类，并创建：
 
-``` js
+```js
 const SyncHook = require('tapable').SyncHook;
 
 if (compiler.hooks.myCustomHook) throw new Error('已存在该钩子');
@@ -109,17 +112,20 @@ compiler.hooks.myCustomHook.call(a, b, c);
 如果想要报告进度，插件必须在 `tap` 到 hook 的时候使用 `context: true` 选项。
 
 ```js
-compiler.hooks.emit.tapAsync({
-  name: 'MyPlugin',
-  context: true
-}, (context, compiler, callback) => {
-  const reportProgress = context && context.reportProgress;
-  if (reportProgress) reportProgress(0.95, 'Starting work');
-  setTimeout(() => {
-    if (reportProgress) reportProgress(0.95, 'Done work');
-    callback();
-  }, 1000);
-});
+compiler.hooks.emit.tapAsync(
+  {
+    name: 'MyPlugin',
+    context: true,
+  },
+  (context, compiler, callback) => {
+    const reportProgress = context && context.reportProgress;
+    if (reportProgress) reportProgress(0.95, 'Starting work');
+    setTimeout(() => {
+      if (reportProgress) reportProgress(0.95, 'Done work');
+      callback();
+    }, 1000);
+  }
+);
 ```
 
 `reportProgress` 方法在被调用的时候会传入以下的参数：

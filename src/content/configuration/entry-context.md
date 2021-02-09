@@ -15,19 +15,18 @@ contributors:
 
 入口对象是用于 webpack 查找开始构建 bundle 的地方。上下文是入口文件所处的目录的绝对路径的字符串。
 
-
 ## `context` {#context}
 
 `string`
 
-基础目录，__绝对路径__，用于从配置中解析入口点(entry point)和 加载器(loader)。
+基础目录，**绝对路径**，用于从配置中解析入口点(entry point)和 加载器(loader)。
 
-``` js
+```js
 const path = require('path');
 
 module.exports = {
   //...
-  context: path.resolve(__dirname, 'app')
+  context: path.resolve(__dirname, 'app'),
 };
 ```
 
@@ -35,14 +34,13 @@ module.exports = {
 
 ---
 
-
 ## `entry` {#entry}
 
 `string` `[string]` `object = { <key> string | [string] | object = { import string | [string], dependOn string | [string], filename string, layer string }}` `(function() => string | [string] | object = { <key> string | [string] } | object = { import string | [string], dependOn string | [string], filename string })`
 
 开始应用程序打包过程的一个或多个起点。如果传入数组，则会处理所有条目。
 
-动态加载的模块 __不是__ 入口起点。
+动态加载的模块 **不是** 入口起点。
 
 简单规则：每个 HTML 页面都有一个入口起点。单页应用(SPA)：一个入口起点，多页应用(MPA)：多个入口起点。
 
@@ -52,11 +50,10 @@ module.exports = {
   entry: {
     home: './home.js',
     about: './about.js',
-    contact: './contact.js'
-  }
+    contact: './contact.js',
+  },
 };
 ```
-
 
 ### Naming {#naming}
 
@@ -75,7 +72,7 @@ module.exports = {
     catalog: {
       import: './catalog.js',
       filename: 'pages/catalog.js',
-      dependOn:'shared'
+      dependOn: 'shared',
     },
     personal: {
       import: './personal.js',
@@ -83,13 +80,12 @@ module.exports = {
       dependOn: 'shared',
       chunkLoading: 'jsonp',
       layer: 'name of layer', // set the layer for an entry point
-    }
-  }
+    },
+  },
 };
 ```
 
 描述符语法可以用来传入额外的选项给入口。
-
 
 ### Output filename {#output-filename}
 
@@ -101,13 +97,12 @@ module.exports = {
   entry: {
     app: './app.js',
     home: { import: './contact.js', filename: 'pages/[name][ext]' },
-    about: { import: './about.js', filename: 'pages/[name][ext]' }
-  }
+    about: { import: './about.js', filename: 'pages/[name][ext]' },
+  },
 };
 ```
 
 描述符语法在这里被用来将 `filename`—选项传递给指定的入口点。
-
 
 ### Dependencies {#dependencies}
 
@@ -118,8 +113,8 @@ module.exports = {
   //...
   entry: {
     app: { import: './app.js', dependOn: 'react-vendors' },
-    'react-vendors': ['react', 'react-dom', 'prop-types']
-  }
+    'react-vendors': ['react', 'react-dom', 'prop-types'],
+  },
 };
 ```
 
@@ -148,8 +143,8 @@ module.exports = {
   //...
   entry: {
     app: { import: ['./app.js', './app2.js'], dependOn: 'react-vendors' },
-    'react-vendors': ['react', 'react-dom', 'prop-types']
-  }
+    'react-vendors': ['react', 'react-dom', 'prop-types'],
+  },
 };
 ```
 
@@ -162,7 +157,7 @@ module.exports = {
 ```js
 module.exports = {
   //...
-  entry: () => './demo'
+  entry: () => './demo',
 };
 ```
 
@@ -171,19 +166,19 @@ module.exports = {
 ```js
 module.exports = {
   //...
-  entry: () => new Promise((resolve) => resolve(['./demo', './demo2']))
+  entry: () => new Promise((resolve) => resolve(['./demo', './demo2'])),
 };
 ```
 
 例如，你可以使用动态入口来从外部来源（远程服务器，文件系统内容或者数据库）获取真正的入口：
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` js
+```js
 module.exports = {
   entry() {
     return fetchPathsFromSomeExternalSource(); // 返回一个会被用像 ['src/main-layout.js', 'src/admin-layout.js'] 的东西 resolve 的 promise
-  }
+  },
 };
 ```
 

@@ -12,14 +12,13 @@ contributors:
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
 
-
 ## Setup {#setup}
 
 Before we dig into the different types of loaders, their usage, and examples, let's take a look at the three ways you can develop and test a loader locally.
 
 To test a single loader, you can simply use `path` to `resolve` a local file within a rule object:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 const path = require('path');
@@ -33,18 +32,20 @@ module.exports = {
         use: [
           {
             loader: path.resolve('path/to/loader.js'),
-            options: {/* ... */}
-          }
-        ]
-      }
-    ]
-  }
+            options: {
+              /* ... */
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
 ```
 
 To test multiple, you can utilize the `resolveLoader.modules` configuration to update where webpack will search for loaders. For example, if you had a local `/loaders` directory in your project:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 const path = require('path');
@@ -52,19 +53,14 @@ const path = require('path');
 module.exports = {
   //...
   resolveLoader: {
-    modules: [
-      'node_modules',
-      path.resolve(__dirname, 'loaders')
-    ]
-  }
+    modules: ['node_modules', path.resolve(__dirname, 'loaders')],
+  },
 };
 ```
 
 By the way, if you've already created a separate repository and package for your loader, you could [`npm link`](https://docs.npmjs.com/cli/link) it to the project in which you'd like to test it out.
 
-
 T> You can use [`webpack-defaults` package](https://github.com/webpack-contrib/webpack-defaults) to generate boilerplate code necessary to start writing your loader.
-
 
 ## Simple Usage {#simple-usage}
 
@@ -73,7 +69,6 @@ When a single loader is applied to the resource, the loader is called with only 
 Synchronous loaders can simply `return` a single value representing the transformed module. In more complex cases, the loader can return any number of values by using the `this.callback(err, values...)` function. Errors are either passed to the `this.callback` function or thrown in a sync loader.
 
 The loader is expected to give back one or two values. The first value is a resulting JavaScript code as string or buffer. The second optional value is a SourceMap as JavaScript object.
-
 
 ## Complex Usage {#complex-usage}
 
@@ -85,7 +80,7 @@ When multiple loaders are chained, it is important to remember that they are exe
 
 So, in the following example, the `foo-loader` would be passed the raw resource and the `bar-loader` would receive the output of the `foo-loader` and return the final transformed module and a source map if necessary.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -94,31 +89,27 @@ module.exports = {
     rules: [
       {
         test: /\.js/,
-        use: [
-          'bar-loader',
-          'foo-loader'
-        ]
-      }
-    ]
-  }
+        use: ['bar-loader', 'foo-loader'],
+      },
+    ],
+  },
 };
 ```
-
 
 ## Guidelines {#guidelines}
 
 The following guidelines should be followed when writing a loader. They are ordered in terms of importance and some only apply in certain scenarios, read the detailed sections that follow for more information.
 
-- Keep them __simple__.
-- Utilize __chaining__.
-- Emit __modular__ output.
-- Make sure they're __stateless__.
-- Employ __loader utilities__.
-- Mark __loader dependencies__.
-- Resolve __module dependencies__.
-- Extract __common code__.
-- Avoid __absolute paths__.
-- Use __peer dependencies__.
+- Keep them **simple**.
+- Utilize **chaining**.
+- Emit **modular** output.
+- Make sure they're **stateless**.
+- Employ **loader utilities**.
+- Mark **loader dependencies**.
+- Resolve **module dependencies**.
+- Extract **common code**.
+- Avoid **absolute paths**.
+- Use **peer dependencies**.
 
 ### Simple {#simple}
 
@@ -148,7 +139,7 @@ Make sure the loader does not retain state between module transformations. Each 
 
 Take advantage of the [`loader-utils`](https://github.com/webpack/loader-utils) package. It provides a variety of useful tools but one of the most common is retrieving the options passed to the loader. Along with `loader-utils`, the [`schema-utils`](https://github.com/webpack-contrib/schema-utils) package should be used for consistent JSON Schema based validation of loader options. Here's a brief example that utilizes both:
 
-__loader.js__
+**loader.js**
 
 ```js
 import { getOptions } from 'loader-utils';
@@ -158,42 +149,42 @@ const schema = {
   type: 'object',
   properties: {
     test: {
-      type: 'string'
-    }
-  }
+      type: 'string',
+    },
+  },
 };
 
-export default function(source) {
+export default function (source) {
   const options = getOptions(this);
 
   validate(schema, options, {
     name: 'Example Loader',
-    baseDataPath: 'options'
+    baseDataPath: 'options',
   });
 
   // Apply some transformations to the source...
 
-  return `export default ${ JSON.stringify(source) }`;
+  return `export default ${JSON.stringify(source)}`;
 }
 ```
 
 ### Loader Dependencies {#loader-dependencies}
 
-If a loader uses external resources (i.e. by reading from filesystem), they __must__ indicate it. This information is used to invalidate cacheable loaders and recompile in watch mode. Here's a brief example of how to accomplish this using the `addDependency` method:
+If a loader uses external resources (i.e. by reading from filesystem), they **must** indicate it. This information is used to invalidate cacheable loaders and recompile in watch mode. Here's a brief example of how to accomplish this using the `addDependency` method:
 
-__loader.js__
+**loader.js**
 
 ```js
 import path from 'path';
 
-export default function(source) {
+export default function (source) {
   var callback = this.async();
   var headerPath = path.resolve('header.js');
 
   this.addDependency(headerPath);
 
-  fs.readFile(headerPath, 'utf-8', function(err, header) {
-    if(err) return callback(err);
+  fs.readFile(headerPath, 'utf-8', function (err, header) {
+    if (err) return callback(err);
     callback(null, header + '\n' + source);
   });
 }
@@ -218,10 +209,10 @@ T> If the language only accepts relative urls (e.g. `url(file)` always refers to
 
 Avoid generating common code in every module the loader processes. Instead, create a runtime file in the loader and generate a `require` to that shared module:
 
-__src/loader-runtime.js__
+**src/loader-runtime.js**
 
 ```js
-const {someOtherModule} = require('./some-other-module');
+const { someOtherModule } = require('./some-other-module');
 
 module.exports = function runtime(params) {
   const x = params.y * 2;
@@ -230,7 +221,7 @@ module.exports = function runtime(params) {
 };
 ```
 
-__src/loader.js__
+**src/loader.js**
 
 ```js
 import runtime from './loader-runtime.js';
@@ -240,7 +231,7 @@ export default function loader(source) {
 
   return `${runtime({
     source,
-    y: Math.random()
+    y: Math.random(),
   })}`;
 }
 ```
@@ -263,16 +254,15 @@ For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpa
 }
 ```
 
-
 ## Testing {#testing}
 
 So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a simple unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest](https://jestjs.io/) framework to do this. We'll also install `babel-jest` and some presets that will allow us to use the `import` / `export` and `async` / `await`. Let's start by installing and saving these as a `devDependencies`:
 
-``` bash
+```bash
 npm install --save-dev jest babel-jest @babel/core @babel/preset-env
 ```
 
-__babel.config.js__
+**babel.config.js**
 
 ```js
 module.exports = {
@@ -291,7 +281,7 @@ module.exports = {
 
 Our loader will process `.txt` files and simply replace any instance of `[name]` with the `name` option given to the loader. Then it will output a valid JavaScript module containing the text as its default export:
 
-__src/loader.js__
+**src/loader.js**
 
 ```js
 import { getOptions } from 'loader-utils';
@@ -301,13 +291,13 @@ export default function loader(source) {
 
   source = source.replace(/\[name\]/g, options.name);
 
-  return `export default ${ JSON.stringify(source) }`;
+  return `export default ${JSON.stringify(source)}`;
 }
 ```
 
 We'll use this loader to process the following file:
 
-__test/example.txt__
+**test/example.txt**
 
 ```bash
 Hey [name]!
@@ -315,11 +305,11 @@ Hey [name]!
 
 Pay close attention to this next step as we'll be using the [Node.js API](/api/node) and [`memfs`](https://github.com/streamich/memfs) to execute webpack. This lets us avoid emitting `output` to disk and will give us access to the `stats` data which we can use to grab our transformed module:
 
-``` bash
+```bash
 npm install --save-dev webpack memfs
 ```
 
-__test/compiler.js__
+**test/compiler.js**
 
 ```js
 import path from 'path';
@@ -335,14 +325,16 @@ export default (fixture, options = {}) => {
       filename: 'bundle.js',
     },
     module: {
-      rules: [{
-        test: /\.txt$/,
-        use: {
-          loader: path.resolve(__dirname, '../src/loader.js'),
-          options,
-        }
-      }]
-    }
+      rules: [
+        {
+          test: /\.txt$/,
+          use: {
+            loader: path.resolve(__dirname, '../src/loader.js'),
+            options,
+          },
+        },
+      ],
+    },
   });
 
   compiler.outputFileSystem = createFsFromVolume(new Volume());
@@ -363,7 +355,7 @@ T> In this case, we've inlined our webpack configuration but you can also accept
 
 And now, finally, we can write our test and add an npm script to run it:
 
-__test/loader.test.js__
+**test/loader.test.js**
 
 ```js
 /**
@@ -373,13 +365,13 @@ import compiler from './compiler.js';
 
 test('Inserts name and outputs JavaScript', async () => {
   const stats = await compiler('example.txt', { name: 'Alice' });
-  const output = stats.toJson({source: true}).modules[0].source;
+  const output = stats.toJson({ source: true }).modules[0].source;
 
   expect(output).toBe('export default "Hey Alice!\\n"');
 });
 ```
 
-__package.json__
+**package.json**
 
 ```json
 {
@@ -394,7 +386,7 @@ __package.json__
 
 With everything in place, we can run it and see if our new loader passes the test:
 
-``` bash
+```bash
  PASS  test/loader.test.js
   ✓ Inserts name and outputs JavaScript (229ms)
 

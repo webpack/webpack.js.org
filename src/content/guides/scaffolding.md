@@ -128,7 +128,7 @@ class MyScaffold extends Generator {
 
 ```js
 this.options.env.configuration.dev.webpackOptions = {
-  entry: '\'app.js\'',
+  entry: 'app.js',
   output: {},
 };
 ```

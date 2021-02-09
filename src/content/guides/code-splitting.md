@@ -46,18 +46,17 @@ T> 本指南继续沿用 [起步](/guides/getting-started) 中的示例代码。
 
 常用的代码分离方法有三种：
 
-- __入口起点__：使用 [`entry`](/configuration/entry-context) 配置手动地分离代码。
-- __防止重复__：使用 [Entry dependencies](/configuration/entry-context/#dependencies) 或者 [`SplitChunksPlugin`](/plugins/split-chunks-plugin) 去重和分离 chunk。
-- __动态导入__：通过模块的内联函数调用来分离代码。
-
+- **入口起点**：使用 [`entry`](/configuration/entry-context) 配置手动地分离代码。
+- **防止重复**：使用 [Entry dependencies](/configuration/entry-context/#dependencies) 或者 [`SplitChunksPlugin`](/plugins/split-chunks-plugin) 去重和分离 chunk。
+- **动态导入**：通过模块的内联函数调用来分离代码。
 
 ## 入口起点(entry point) {#entry-points}
 
 这是迄今为止最简单直观的分离代码的方式。不过，这种方式手动配置较多，并有一些隐患，我们将会解决这些问题。先来看看如何从 main bundle 中分离 another module(另一个模块)：
 
-__project__
+**project**
 
-``` diff
+```diff
 webpack-demo
 |- package.json
 |- webpack.config.js
@@ -68,19 +67,19 @@ webpack-demo
 |- /node_modules
 ```
 
-__another-module.js__
+**another-module.js**
 
-``` js
+```js
 import _ from 'lodash';
 
 console.log(_.join(['Another', 'module', 'loaded!'], ' '));
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
- 
+
  module.exports = {
 -  entry: './src/index.js',
 +  mode: 'development',
@@ -98,7 +97,7 @@ __webpack.config.js__
 
 这将生成如下构建结果：
 
-``` bash
+```bash
 ...
 [webpack-cli] Compilation finished
 asset index.bundle.js 553 KiB [emitted] (name: index)
@@ -118,18 +117,17 @@ webpack 5.4.0 compiled successfully in 245 ms
 
 以上两点中，第一点对我们的示例来说无疑是个问题，因为之前我们在 `./src/index.js` 中也引入过 `lodash`，这样就在两个 bundle 中造成重复引用。在下一章节会移除重复的模块。
 
-
 ## 防止重复(prevent duplication) {#prevent-duplication}
 
 ### 入口依赖 {#entry-dependencies}
 
 配置 [`dependOn` option](/configuration/entry-context/#dependencies) 选项，这样可以在多个 chunk 之间共享模块：
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
- 
+
  module.exports = {
    mode: 'development',
    entry: {
@@ -154,11 +152,11 @@ __webpack.config.js__
 
 如果我们要在一个 HTML 页面上使用多个入口时，还需设置 `optimization.runtimeChunk: 'single'`，否则还会遇到[这里](https://bundlers.tooling.report/code-splitting/multi-entry/)所述的麻烦。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```diff
  const path = require('path');
- 
+
  module.exports = {
    mode: 'development',
    entry: {
@@ -210,9 +208,9 @@ webpack 5.4.0 compiled successfully in 249 ms
 
 [`SplitChunksPlugin`](/plugins/split-chunks-plugin) 插件可以将公共的依赖模块提取到已有的入口 chunk 中，或者提取到一个新生成的 chunk。让我们使用这个插件，将之前的示例中重复的 `lodash` 模块去除：
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
   const path = require('path');
 
   module.exports = {
@@ -235,7 +233,7 @@ __webpack.config.js__
 
 使用 [`optimization.splitChunks`](/plugins/split-chunks-plugin/#optimization-splitchunks) 配置选项之后，现在应该可以看出，`index.bundle.js` 和 `another.bundle.js` 中已经移除了重复的依赖模块。需要注意的是，插件将 `lodash` 分离到单独的 chunk，并且将其从 main bundle 中移除，减轻了大小。执行 `npm run build` 查看效果：
 
-``` bash
+```bash
 ...
 [webpack-cli] Compilation finished
 asset vendors-node_modules_lodash_lodash_js.bundle.js 549 KiB [compared for emit] (id hint: vendors)
@@ -255,7 +253,6 @@ webpack 5.4.0 compiled successfully in 241 ms
 
 - [`mini-css-extract-plugin`](plugins/mini-css-extract-plugin): 用于将 CSS 从主应用程序中分离。
 
-
 ## 动态导入(dynamic import) {#dynamic-imports}
 
 当涉及到动态代码拆分时，webpack 提供了两个类似的技术。第一种，也是推荐选择的方式是，使用符合 [ECMAScript 提案](https://github.com/tc39/proposal-dynamic-import) 的 [`import()` 语法](/api/module-methods/#import-1) 来实现动态导入。第二种，则是 webpack 的遗留功能，使用 webpack 特定的 [`require.ensure`](/api/module-methods/#requireensure)。让我们先尝试使用第一种……
@@ -264,11 +261,11 @@ W> `import()` 调用会在内部用到 [promises](https://developer.mozilla.org/
 
 在我们开始之前，先从上述示例的配置中移除掉多余的 [`entry`](/concepts/entry-points/) 和 [`optimization.splitChunks`](/plugins/split-chunks-plugin/#optimization-splitchunks)，因为接下来的演示中并不需要它们：
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
- 
+
  module.exports = {
    mode: 'development',
    entry: {
@@ -289,9 +286,9 @@ __webpack.config.js__
 
 我们将更新我们的项目，移除现在未使用的文件：
 
-__project__
+**project**
 
-``` diff
+```diff
 webpack-demo
 |- package.json
 |- webpack.config.js
@@ -304,15 +301,15 @@ webpack-demo
 
 现在，我们不再使用 statically import(静态导入) `lodash`，而是通过 dynamic import(动态导入) 来分离出一个 chunk：
 
-__src/index.js__
+**src/index.js**
 
-``` diff
+```diff
 -import _ from 'lodash';
 -
 -function component() {
 +function getComponent() {
    const element = document.createElement('div');
- 
+
 -  // Lodash, now imported by this script
 -  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +  return import('lodash')
@@ -320,13 +317,13 @@ __src/index.js__
 +      const element = document.createElement('div');
 +
 +      element.innerHTML = _.join(['Hello', 'webpack'], ' ');
- 
+
 -  return element;
 +      return element;
 +    })
 +    .catch((error) => 'An error occurred while loading the component');
  }
- 
+
 -document.body.appendChild(component());
 +getComponent().then((component) => {
 +  document.body.appendChild(component);
@@ -337,7 +334,7 @@ __src/index.js__
 
 让我们执行 webpack，查看 `lodash` 是否会分离到一个单独的 bundle：
 
-``` bash
+```bash
 ...
 [webpack-cli] Compilation finished
 asset vendors-node_modules_lodash_lodash_js.bundle.js 549 KiB [compared for emit] (id hint: vendors)
@@ -351,19 +348,19 @@ webpack 5.4.0 compiled successfully in 268 ms
 
 由于 `import()` 会返回一个 promise，因此它可以和 [`async` 函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)一起使用。下面是如何通过 async 函数简化代码：
 
-__src/index.js__
+**src/index.js**
 
-``` diff
+```diff
 -function getComponent() {
 +async function getComponent() {
    const element = document.createElement('div');
 +  const { default: _ } = await import('lodash');
- 
+
 -  return import('lodash')
 -    .then(({ default: _ }) => {
 -      const element = document.createElement('div');
 +  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
- 
+
 -      element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 -
 -      return element;
@@ -371,7 +368,7 @@ __src/index.js__
 -    .catch((error) => 'An error occurred while loading the component');
 +  return element;
  }
- 
+
  getComponent().then((component) => {
    document.body.appendChild(component);
  });
@@ -379,19 +376,18 @@ __src/index.js__
 
 T> 在稍后示例中，可能会根据计算后的变量(computed variable)导入特定模块时，可以通过向 `import()` 传入一个 [动态表达式](/api/module-methods/#dynamic-expressions-in-import)。
 
-
 ## 预获取/预加载模块(prefetch/preload module) {#prefetchingpreloading-modules}
 
 webpack v4.6.0+ 增加了对预获取和预加载的支持。
 
 在声明 import 时，使用下面这些内置指令，可以让 webpack 输出 "resource hint(资源提示)"，来告知浏览器：
 
-- __prefetch__(预获取)：将来某些导航下可能需要的资源
-- __preload__(预加载)：当前导航下可能需要资源
+- **prefetch**(预获取)：将来某些导航下可能需要的资源
+- **preload**(预加载)：当前导航下可能需要资源
 
 下面这个 prefetch 的简单示例中，有一个 `HomePage` 组件，其内部渲染一个 `LoginButton` 组件，然后在点击后按需加载 `LoginModal` 组件。
 
-__LoginButton.js__
+**LoginButton.js**
 
 ```js
 //...
@@ -413,7 +409,7 @@ T> 只要父 chunk 完成加载，webpack 就会添加 prefetch hint(预取提�
 
 我们假想这里的图表组件 `ChartComponent` 组件需要依赖体积巨大的 `ChartingLibrary` 库。它会在渲染时显示一个 `LoadingIndicator(加载进度条)` 组件，然后立即按需导入 `ChartingLibrary`：
 
-__ChartComponent.js__
+**ChartComponent.js**
 
 ```js
 //...
@@ -423,7 +419,6 @@ import(/* webpackPreload: true */ 'ChartingLibrary');
 在页面中使用 `ChartComponent` 时，在请求 ChartComponent.js 的同时，还会通过 `<link rel="preload">` 请求 charting-library-chunk。假定 page-chunk 体积很小，很快就被加载好，页面此时就会显示 `LoadingIndicator(加载进度条)` ，等到 `charting-library-chunk` 请求完成，LoadingIndicator 组件才消失。启动仅需要很少的加载时间，因为只进行单次往返，而不是两次往返。尤其是在高延迟环境下。
 
 T> 不正确地使用 `webpackPreload` 会有损性能，请谨慎使用。
-
 
 ## bundle 分析(bundle analysis) {#bundle-analysis}
 

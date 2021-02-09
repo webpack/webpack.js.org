@@ -9,7 +9,6 @@ contributors:
 
 `publicPath` 配置选项在各种场景中都非常有用。你可以通过它来指定应用程序中所有资源的基础路径。
 
-
 ## 示例 {#use-cases}
 
 下面提供一些用于实际应用程序的示例，通过这些示例，此功能显得极其简单。实质上，发送到 `output.path` 目录的每个文件，都将从 `output.publicPath` 位置引用。这也包括（通过 [代码分离](/guides/code-splitting/) 创建的）子 chunk 和作为依赖图一部分的所有其他资源（例如 image, font 等）。
@@ -20,7 +19,7 @@ contributors:
 
 想要解决这个问题，可以直接使用一个有着悠久历史的 environment variable(环境变量)。假设我们有一个变量 `ASSET_PATH`：
 
-``` js
+```js
 import webpack from 'webpack';
 
 // 尝试使用环境变量，否则使用根路径
@@ -59,3 +58,5 @@ W> 注意，如果在 entry 文件中使用 ES2015 module import，则会在 imp
 import './public-path';
 import './app';
 ```
+
+T> 当使用 `web` 或者 `web-worker` 时，`publicPath` 默认为 `'auto'`，将会自动从 `import.meta.url`、`document.currentScript`、`<script />` 或者 `self.location` 中确定公共路径。

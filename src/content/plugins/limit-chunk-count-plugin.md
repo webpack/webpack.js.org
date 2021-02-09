@@ -11,12 +11,11 @@ contributors:
 
 While writing your code, you may have already added many code split points to load stuff on demand. After compiling you might notice that some chunks are too small - creating larger HTTP overhead. `LimitChunkCountPlugin` can post-process your chunks by merging them.
 
-``` js
+```js
 new webpack.optimize.LimitChunkCountPlugin({
   // Options...
 });
 ```
-
 
 ## Options {#options}
 
@@ -28,7 +27,7 @@ The following options are supported:
 
 Limit the maximum number of chunks using a value greater than or equal to `1`. Using `1` will prevent any additional chunks from being added as the entry/main chunk is also included in the count.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const webpack = require('webpack');
@@ -36,16 +35,15 @@ module.exports = {
   // ...
   plugins: [
     new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 5
-    })
-  ]
+      maxChunks: 5,
+    }),
+  ],
 };
 ```
 
 ### `minChunkSize` {#minchunksize}
 
 Keeping chunk size above the specified limit is no longer a feature of this plugin. Use [MinChunkSizePlugin](/plugins/min-chunk-size-plugin) instead.
-
 
 ## Usage via CLI {#usage-via-cli}
 

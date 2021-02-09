@@ -24,7 +24,7 @@ W> 由于实验特性具有相对 宽松的语义版本，可能会有重大的�
 - `outputModule`: enables the use of [`output.module`](/configuration/output/#outputmodule) configuration option and sets it to `true`. Enables the use of `output.libraryTarget` as `'module'` and sets it to `'module'`.
 - `layers`: Enable module and chunk layers.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {

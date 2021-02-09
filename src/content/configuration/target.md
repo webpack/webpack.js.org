@@ -22,7 +22,6 @@ webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `
 
 告知 webpack 为目标(target)指定一个环境。默认值为 `"browserslist"`，如果没有找到 browserslist 的配置，则默认为 `"web"`
 
-
 ### `string` {#string}
 
 通过 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js)，
@@ -41,21 +40,21 @@ webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `
 `node-webkit`         | 编译为 Webkit 可用，并且使用 jsonp 去加载分块。支持 Node.js 内置模块和 [`nw.gui`](http://docs.nwjs.io/en/latest/) 
 导入（实验性质）
 `nwjs[[X].Y]`         | 等价于 `node-webkit`
-`web`                 | 编译为类浏览器环境里可用 __（默认）__
+`web`                 | 编译为类浏览器环境里可用 **（默认）**
 `webworker`           | 编译成一个 WebWorker
 `esX`                 | 编译为指定版本的 ECMAScript。例如，es5，es2020
-`browserslist`        | 从 browserslist-config 中推断出平台和 ES 特性 __（如果 browserslist 可用，其值则为默认）__
+`browserslist`        | 从 browserslist-config 中推断出平台和 ES 特性 **（如果 browserslist 可用，其值则为默认）**
 
 例如，当 `target` 设置为 `"electron-main"`，webpack 引入多个 electron 特定的变量。
 
 可指定 `node` 或者 `electron` 的版本。上表中使用 `[[X].Y]` 表示。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   // ...
-  target: 'node12.18'
+  target: 'node12.18',
 };
 ```
 
@@ -80,12 +79,12 @@ module.exports = {
 
 当传递多个目标时，将使用共同的特性子集：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   // ...
-  target: ['web', 'es5']
+  target: ['web', 'es5'],
 };
 ```
 
@@ -93,12 +92,12 @@ webpack 将生成 web 平台的运行时代码，并且只使用 ES5 相关的�
 
 目前并不是所有的 target 都可以进行混合。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   // ...
-  target: ['web', 'node']
+  target: ['web', 'node'],
 };
 ```
 
@@ -108,18 +107,18 @@ module.exports = {
 
 如果上述列表中的预设 target 都不符合你的需求，你可以将 `target` 设置为 `false`，这将告诉 webpack 不使用任何插件。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   // ...
-  target: false
+  target: false,
 };
 ```
 
 或者可以使用你想要指定的插件
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 const webpack = require('webpack');
@@ -129,8 +128,8 @@ module.exports = {
   target: false,
   plugins: [
     new webpack.JsonpTemplatePlugin(options.output),
-    new webpack.LoaderTargetPlugin('web')
-  ]
+    new webpack.LoaderTargetPlugin('web'),
+  ],
 };
 ```
 

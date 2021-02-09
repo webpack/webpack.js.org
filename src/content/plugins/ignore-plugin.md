@@ -17,7 +17,7 @@ IgnorePlugin prevents the generation of modules for `import` or `require` calls 
 - `contextRegExp`: (optional) A RegExp to test the context (directory) against.
 
 ```javascript
-new webpack.IgnorePlugin({resourceRegExp, contextRegExp});
+new webpack.IgnorePlugin({ resourceRegExp, contextRegExp });
 // Supported in webpack 4 and earlier, unsupported in webpack 5:
 new webpack.IgnorePlugin(resourceRegExp, [contextRegExp]);
 ```
@@ -25,14 +25,14 @@ new webpack.IgnorePlugin(resourceRegExp, [contextRegExp]);
 ## Using filter functions {#using-filter-functions}
 
 - `checkResource (resource, context)` A Filter function that receives `resource` and `context` as arguments, must return boolean.
-- `checkContext (context)` was __removed in webpack 5__ as `checkResource` already gets context.
+- `checkContext (context)` was **removed in webpack 5** as `checkResource` already gets context.
 
 ```javascript
 new webpack.IgnorePlugin({
-  checkResource (resource) {
+  checkResource(resource) {
     // do something with resource
-    return true|false;
-  }
+    return true | false;
+  },
 });
 ```
 
@@ -57,7 +57,7 @@ require('./locale/' + name);
 ```javascript
 new webpack.IgnorePlugin({
   resourceRegExp: /^\.\/locale$/,
-  contextRegExp: /moment$/
+  contextRegExp: /moment$/,
 });
 ```
 

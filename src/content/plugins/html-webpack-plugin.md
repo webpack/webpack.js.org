@@ -9,13 +9,11 @@ contributors:
 
 [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) 简化了 HTML 文件的创建，以便为你的 webpack 包提供服务。这对于那些文件名中包含哈希值，并且哈希值会随着每次编译而改变的 webpack 包特别有用。你可以让该插件为你生成一个 HTML 文件，使用 [lodash 模板](https://lodash.com/docs#template)提供模板，或者使用你自己的 [loader](/loaders)。
 
-
 ## 安装 {#installation}
 
-``` bash
+```bash
 npm install --save-dev html-webpack-plugin
 ```
-
 
 ## 基本用法 {#basic-usage}
 
@@ -31,9 +29,9 @@ module.exports = {
   entry: 'index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'index_bundle.js'
+    filename: 'index_bundle.js',
   },
-  plugins: [new HtmlWebpackPlugin()]
+  plugins: [new HtmlWebpackPlugin()],
 };
 ```
 
@@ -43,7 +41,7 @@ module.exports = {
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>webpack App</title>
   </head>
   <body>
@@ -56,11 +54,9 @@ module.exports = {
 
 如果在 webpack 的输出中有任何 CSS 资源（例如，使用 [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) 提取的 CSS），那么这些资源也会在 HTML 文件 `<head>` 元素中的 `<link>` 标签内引入。
 
-
 ## 配置 {#configuration}
 
 获取所有的配置选项，请浏览[插件文档](https://github.com/jantimon/html-webpack-plugin#options)。
-
 
 ## 第三方插件 {#third-party-addons}
 

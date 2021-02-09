@@ -16,7 +16,6 @@ _Context_ refers to a [require with an expression](/guides/dependency-management
 
 The `ContextReplacementPlugin` allows you to override the inferred information. There are various ways to configure the plugin:
 
-
 ## Usage {#usage}
 
 ```typescript
@@ -33,14 +32,10 @@ If the resource (directory) matches `resourceRegExp`, the plugin replaces the de
 Here's a small example to restrict module usage:
 
 ```javascript
-new webpack.ContextReplacementPlugin(
-  /moment[/\\]locale$/,
-  /de|fr|hu/
-);
+new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /de|fr|hu/);
 ```
 
 The `moment/locale` context is restricted to files matching `/de|fr|hu/`. Thus only those locales are included (see [this issue](https://github.com/moment/moment/issues/2373) for more information).
-
 
 ## Content Callback {#content-callback}
 
@@ -57,15 +52,14 @@ Using this callback we can dynamically redirect requests to a new location:
 
 ```javascript
 new webpack.ContextReplacementPlugin(/^\.\/locale$/, (context) => {
-  if ( !/\/moment\//.test(context.context) ) return;
+  if (!/\/moment\//.test(context.context)) return;
 
   Object.assign(context, {
     regExp: /^\.\/\w+/,
-    request: '../../locale' // resolved relatively
+    request: '../../locale', // resolved relatively
   });
 });
 ```
-
 
 ## Other Options {#other-options}
 
@@ -84,6 +78,6 @@ These two parameters can be used together to redirect requests in a more targete
 ```javascript
 new ContextReplacementPlugin(/selector/, './folder', {
   './request': './request',
-  './other-request': './new-request'
+  './other-request': './new-request',
 });
 ```

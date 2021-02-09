@@ -16,7 +16,6 @@ related:
 
 `DllPlugin` 和 `DllReferencePlugin` 用某种方法实现了拆分 bundles，同时还大幅度提升了构建的速度。"DLL" 一词代表微软最初引入的动态链接库。
 
-
 ## `DllPlugin` {#dllplugin}
 
 此插件用于在单独的 webpack 配置中创建一个 dll-only-bundle。 此插件会生成一个名为 `manifest.json` 的文件，这个文件是用于让 [`DllReferencePlugin`](#dllreferenceplugin) 能够映射到相应的依赖上。
@@ -24,7 +23,7 @@ related:
 - `context`（可选）： manifest 文件中请求的 context (默认值为 webpack 的 context)
 - `format` (boolean = false)：如果为 `true`，则 manifest json 文件 (输出文件) 将被格式化。
 - `name`：暴露出的 DLL 的函数名（[TemplatePaths](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)：`[fullhash]` & `[name]` ）
-- `path`：manifest.json 文件的 __绝对路径__（输出文件）
+- `path`：manifest.json 文件的 **绝对路径**（输出文件）
 - `entryOnly` (boolean = true)：如果为 `true`，则仅暴露入口
 - `type`：dll bundle 的类型
 
@@ -38,12 +37,11 @@ W> 我们建议 DllPlugin 只在 `entryOnly: true` 时使用，否则 DLL 中的
 
 此插件与 [`output.library`](/configuration/output/#outputlibrary) 的选项相结合可以暴露出（也称为放入全局作用域）dll 函数。
 
-
 ## `DllReferencePlugin` {#dllreferenceplugin}
 
 此插件配置在 webpack 的主配置文件中，此插件会把 dll-only-bundles 引用到需要的预编译的依赖中。
 
-- `context`：（__绝对路径__） manifest (或者是内容属性)中请求的上下文
+- `context`：（**绝对路径**） manifest (或者是内容属性)中请求的上下文
 - `extensions`：用于解析 dll bundle 中模块的扩展名 (仅在使用 'scope' 时使用)。
 - `manifest` ：包含 `content` 和 `name` 的对象，或者是一个字符串 —— 编译时用于加载 JSON manifest 的绝对路径
 - `content` (可选)： 请求到模块 id 的映射（默认值为 `manifest.content`）
@@ -58,7 +56,6 @@ new webpack.DllReferencePlugin(options);
 通过引用 dll 的 manifest 文件来把依赖的名称映射到模块的 id 上，之后再在需要的时候通过内置的 `__webpack_require__` 函数来 `require` 对应的模块
 
 W> 保持 `name` 与 [`output.library`](/configuration/output/#outputlibrary) 一致。
-
 
 ### 模式(Modes) {#modes}
 
@@ -76,12 +73,11 @@ dll 中的内容会被映射到当前目录下。如果被 `require` 的文件�
 
 由于这是在解析了 dll 中每个文件之后才触发的，因此相同的路径必须能够确保这个 dll bundle 的使用者（不一定是人，可指某些代码）有权限访问。 举例来说， 假如一个 dll bundle 中含有 `loadash` 库以及文件 `abc`， 那么 `require("lodash")` 和 `require("./abc")` 都不会被编译进主 bundle 文件中，而是会被 dll 所使用。
 
-
 ## 用法(Usage) {#usage}
 
 W> `DllReferencePlugin` 和 `DllPlugin` 都是在 _单独的_ webpack 配置中使用的。
 
-__webpack.vendor.config.js__
+**webpack.vendor.config.js**
 
 ```javascript
 const path = require('path');
@@ -93,17 +89,16 @@ new webpack.DllPlugin({
 });
 ```
 
-__webpack.app.config.js__
+**webpack.app.config.js**
 
 ```javascript
 new webpack.DllReferencePlugin({
   context: __dirname,
   manifest: require('./manifest.json'),
   scope: 'xyz',
-  sourceType: 'commonjs2'
+  sourceType: 'commonjs2',
 });
 ```
-
 
 ## 示例 {#examples}
 
@@ -112,7 +107,6 @@ new webpack.DllReferencePlugin({
 _两个单独的用例，用来分别演示作用域（scope）和上下文（context）。_
 
 T> 多个 `DllPlugins` 和 `DllReferencePlugins`。
-
 
 ## 参考 {#references}
 

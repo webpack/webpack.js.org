@@ -16,12 +16,11 @@ related:
 
 W> HMR **绝对不能**被用在生产环境。
 
-
 ## 基本使用 {#basic-usage}
 
 启用 HMR 很容易，且在大多数情况下不需要任何配置。
 
-``` javascript
+```javascript
 new webpack.HotModuleReplacementPlugin({
   // Options...
 });

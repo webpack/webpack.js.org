@@ -100,7 +100,6 @@ Compilation 对象有很多可用的方法和钩子。在此页面，我们将�
 - `recursive` - 是否要递归遍历。
 - `callback` - 添加模块依赖之后回调的函数。
 
-
 ### addEntry {#addentry}
 
 `function (context, entry, name, callback)`

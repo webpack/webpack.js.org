@@ -2,8 +2,8 @@
 title: Webpack 5 发布 (2020-10-10)
 sort: -202010100
 contributors:
-    - sokra
-    - chenxsan
+  - sokra
+  - chenxsan
 ---
 
 webpack 4 于 2018 年 2 月发布。
@@ -68,9 +68,9 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 - 尝试在不引入任何破坏性变化的情况下，清理那些在实现 v4 功能时处于奇怪状态的内部结构。
 - 试图通过现在引入突破性的变化来为未来的功能做准备，使其能够尽可能长时间地保持在 v5 版本上。
 
-## __迁移__指南 {#__migration__-guide}
+## **迁移**指南 {#migration-guide}
 
-[在这里可查阅迁移指南](/migrate/5)
+[在这里可查阅**迁移**指南](/migrate/5)
 
 ## 重大变更: 功能清除 {#major-changes-removals}
 
@@ -78,7 +78,7 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 所有在 v4 中被废弃的能力都被移除。
 
-迁移: 确保你的 webpack 4 构建没有打印废弃警告。
+**迁移**: 确保你的 webpack 4 构建没有打印废弃警告。
 
 以下是一些被移除但在 v4 中没有废弃警告的东西：
 
@@ -102,7 +102,7 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 从 webpack 5 开始不再自动填充这些 polyfills，而会专注于前端模块兼容。我们的目标是提高 web 平台的兼容性。
 
-迁移：
+**迁移**：
 
 - 尽量使用前端兼容的模块。
 - 可以手动为 Node.js 核心模块添加 polyfill。错误提示会告诉你如何实现。
@@ -123,7 +123,7 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 `moduleIds/chunkIds/mangleExports: false` 禁用默认行为，你可以通过插件提供一个自定义算法。请注意，在 webpack 4 中，`moduleIds/chunkIds: false` 如果没有自定义插件，则可以正常运行，而在 webpack 5 中，你必须提供一个自定义插件。
 
-__迁移__：最好使用 `chunkIds`、`moduleIds` 和 `mangleExports` 的默认值。你也可以选择使用旧的默认值`chunkIds: "size"，moduleIds: "size", mangleExports: "size"`，这将会生成更小的包，但为了缓存，会更频繁地将其失效。
+**迁移**：最好使用 `chunkIds`、`moduleIds` 和 `mangleExports` 的默认值。你也可以选择使用旧的默认值`chunkIds: "size"，moduleIds: "size", mangleExports: "size"`，这将会生成更小的包，但为了缓存，会更频繁地将其失效。
 
 注意：在 webpack 4 中，散列的模块 id 会导致 gzip 性能降低。这与模块顺序的改变有关，已经被修正。
 
@@ -147,7 +147,7 @@ __迁移__：最好使用 `chunkIds`、`moduleIds` 和 `mangleExports` 的默认
 
 可以在生产环境中使用 `chunkIds: "named"` 在生产环境中使用，但要确保不要不小心暴露模块名的敏感信息。
 
-迁移：如果你不喜欢在开发中改变文件名，你可以通过 `chunkIds: "natural"` 来使用旧的数字模式。
+**迁移**：如果你不喜欢在开发中改变文件名，你可以通过 `chunkIds: "natural"` 来使用旧的数字模式。
 
 ### 模块联邦 {#module-federation}
 
@@ -164,7 +164,7 @@ Webpack 5 增加了一个新的功能 "模块联邦"，它允许多个 webpack �
 JSON 模块现在与提案保持一致，并在使用非默认导出时发出警告。
 当从严格的 ECMAScript 模块导入时，JSON 模块不再有命名的导出。
 
-迁移: 使用默认导出。
+**迁移**: 使用默认导出。
 
 即使使用默认导出，未使用的属性也会被 `optimization.usedExports` 优化丢弃，属性会被 `optimization.mangleExports` 优化打乱。
 
@@ -204,7 +204,7 @@ Webpack 5 支持在请求中处理协议。
 - 支持`data:`。支持 Base64 或原始编码。Mimetype 可以在`module.rule`中被映射到加载器和模块类型。例如：`import x from "data:text/javascript,export default 42"`。
 - 支持`file:`。
 - 支持`http(s):`，但需要通过`new webpack.experiments.s schemesHttp(s)UriPlugin()`选择加入。
-    - 默认情况下，当目标为 "web "时，这些 URI 会导致对外部资源的请求（它们是外部资源）。
+  - 默认情况下，当目标为 "web "时，这些 URI 会导致对外部资源的请求（它们是外部资源）。
 
 支持请求中的片段。例如：`./file.js#fragment`。
 
@@ -305,7 +305,7 @@ Webpack 5 确实会从 `package.json` `name` 中自动推断出一个唯一的�
 
 这个值用于使所有潜在的冲突的全局变量成为唯一。
 
-迁移: 由于 `package.json` 中有唯一的名称，可将 `output.jsonpFunction` 删除。
+**迁移**: 由于 `package.json` 中有唯一的名称，可将 `output.jsonpFunction` 删除。
 
 ### 自动添加公共路径 {#automatic-public-path}
 
@@ -315,7 +315,7 @@ Webpack 5 会在可能的情况下自动确定 `output.publicPath`。
 
 Webpack 5 从源码中生成 typescript 类型，并通过 npm 包暴露它们。
 
-迁移：删除`@types/webpack`。当名称不同时更新引用。
+**迁移**：删除`@types/webpack`。当名称不同时更新引用。
 
 ## 重大变更: 构建优化 {#major-changes-optimization}
 
@@ -368,14 +368,14 @@ export function test() {
 - 函数声明
 - 类声明
 - `默认导出export default` 或定义变量以下的：
-    - 函数表达式
-    - 类表达式
-    - 顺序表达式
-    - `/*#__PURE__*/` 表达式
-    - 局部变量
-    - 引入的捆绑(bindings)
+  - 函数表达式
+  - 类表达式
+  - 顺序表达式
+  - `/*#__PURE__*/` 表达式
+  - 局部变量
+  - 引入的捆绑(bindings)
 
-反馈：如果你发现这个分析中缺少什么，请报告一个问题，我们会考虑增加它。
+**反馈**：如果你发现这个分析中缺少什么，请报告一个问题，我们会考虑增加它。
 
 使用 `eval()` 将为一个模块放弃这个优化，因为经过 eval 的代码可以引用范围内的任何标记。
 
@@ -398,8 +398,8 @@ webpack 5 增加了对一些 CommonJs 构造的支持，允许消除未使用的
 - 从 ESM 导入
 - `require()` 一个 ESM 模块
 - 被标记的导出类型 (对非严格 ESM 导入做特殊处理):
-    - `Object.defineProperty(exports|this|module.exports, "__esModule", { value: true|!0 })`
-    - `exports|this|module.exports.__esModule = true|!0`
+  - `Object.defineProperty(exports|this|module.exports, "__esModule", { value: true|!0 })`
+  - `exports|this|module.exports.__esModule = true|!0`
 - 未来计划支持更多的构造
 
 当检测到不可分析的代码时，webpack 会放弃，并且完全不跟踪这些模块的导出信息（出于性能考虑）。
@@ -537,7 +537,7 @@ module.exports = {
 
 重要说明：
 
-默认情况下，webpack 假定 webpack 所在的 `node_modules` 目录只被包管理器修改。对 `node_modules` 来说，哈希值和时间戳会被跳过。
+默认情况下，webpack 假定 webpack 所在的 `node_modules` 目录**只会**被包管理器修改。对 `node_modules` 来说，哈希值和时间戳会被跳过。
 出于性能考虑，只使用包名和版本。
 只要不指定`resolve.symlinks: false`，Symlinks(即`npm/yarn link`)就没有问题(无论如何都要避免)。
 不要直接编辑 `node_modules` 中的文件，除非你用 `snapshot.managedPaths: []`以剔除该优化。
@@ -562,7 +562,7 @@ module.exports = {
 
 `webpack()` 用法在被传递回调时自动调用`close`。
 
-迁移：在使用 Node.js API 时，一定要在完成工作后调用 `Compiler.close`。
+**迁移**：在使用 Node.js API 时，一定要在完成工作后调用 `Compiler.close`。
 
 ### 文件生成 {#file-emitting}
 
@@ -620,11 +620,11 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 
 - 旧的 WebAssembly 支持，就像 webpack 4 一样 (`experiments.syncWebAssembly`)
 - 根据[更新的规范](https://github.com/WebAssembly/esm-integration)(`experiments.asyncWebAssembly`)，新增 WebAssembly 支持。
-    - 这使得一个 WebAssembly 模块成为一个异步模块。
+  - 这使得一个 WebAssembly 模块成为一个异步模块。
 - [顶层的 Await](https://github.com/tc39/proposal-top-level-await)第三阶段提案(`experiments.topLevelAwait`)
-    - 在顶层使用 `await` 使该模块成为一个异步模块。
+  - 在顶层使用 `await` 使该模块成为一个异步模块。
 - 以模块的形式生成代码包 (`experiments.outputModule`)
-    - 这就从代码包中移除了包装器 IIFE，执行严格模式，通过 `<script type="module">` 进行懒惰加载，并在模块模式下最小化压缩。
+  - 这就从代码包中移除了包装器 IIFE，执行严格模式，通过 `<script type="module">` 进行懒惰加载，并在模块模式下最小化压缩。
 
 请注意，这也意味着 WebAssembly 的支持现在被默认禁用。
 
@@ -632,7 +632,7 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 
 最低支持的 Node.js 版本从 6 增加到 10.13.0(LTS)。
 
-迁移：升级到最新的 Node.js 版本。
+**迁移**：升级到最新的 Node.js 版本。
 
 ## 配置变更 {#changes-to-the-configuration}
 
@@ -774,7 +774,7 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 - `optimization.splitChunks.minSize` 在生产环境下默认为 `20k`
 - `optimization.splitChunks.enforceSizeThreshold` 在生产环境下默认为 `50k`
 - `optimization.splitChunks` 中的 `minRemainingSize` 在生产环境下默认为 `minSize`
-    - 这将导致在剩余部分过小的情况下，创建更少的 chunk
+  - 这将导致在剩余部分过小的情况下，创建更少的 chunk
 - `optimization.splitChunks` 中的 `maxAsyncRequests` 和 `maxInitialRequests` 默认值增加到了 30
 - `optimization.splitChunks.cacheGroups.vendors` 更名为 `optimization.splitChunks.cacheGroups.defaultVendors`
 - `optimization.splitChunks.cacheGroups.defaultVendors.reuseExistingChunk` 默认为 `true`
@@ -797,7 +797,7 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 
 这一点已从加载器上下文中删除
 
-迁移：这可以在加载器本身实现。
+**迁移**：这可以在加载器本身实现。
 
 ### `this.getResolve` {#thisgetresolve}
 
@@ -813,12 +813,12 @@ loader API 中的 `getResolve(options)` 将以另一种方式合并选项，参�
 
 ### 新的插件运行顺序 {#new-plugin-order}
 
-现在 webpack 5 中的插件在应用配置默认值 __之前__ 就会被应用。
+现在 webpack 5 中的插件在应用配置默认值 **之前** 就会被应用。
 这使得插件可以应用自己的默认值，或者作为配置预设。
 
 但这也是一个突破性的变化，因为插件在应用时不能依赖配置值的设置。
 
-迁移：只在插件钩子中访问配置。或者最好完全避免访问配置，并通过构造函数获取选项。
+**迁移**：只在插件钩子中访问配置。或者最好完全避免访问配置，并通过构造函数获取选项。
 
 ### 运行时模块 {#runtime-modules}
 
@@ -828,13 +828,13 @@ loader API 中的 `getResolve(options)` 将以另一种方式合并选项，参�
 
 在最好的情况下，根本不需要运行时代码。
 
-迁移：如果你在插件中注入运行时代码到 webpack 运行时，可以考虑使用 RuntimeModules 来代替。instead.
+**迁移**：如果你在插件中注入运行时代码到 webpack 运行时，可以考虑使用 RuntimeModules 来代替。instead.
 
 ### 序列化 {#serialization}
 
 我们添加了一个序列化机制，以允许在 webpack 中对复杂对象进行序列化。它有一个可选的语义，所以那些应该被序列化的类需要被明确地标记出来（并且实现它们的序列化）。大多数模块、所有的依赖关系和一些错误都已经这样做了。
 
-迁移：当使用自定义模块或依赖关系时，建议将它们实现成可序列化的，以便从持久化缓存中获益。
+**迁移**：当使用自定义模块或依赖关系时，建议将它们实现成可序列化的，以便从持久化缓存中获益。
 
 ### 用于缓存的插件 {#plugins-for-caching}
 
@@ -846,7 +846,7 @@ loader API 中的 `getResolve(options)` 将以另一种方式合并选项，参�
 
 有 `hooks` 的类会冻结其 `hooks` 对象，所以通过这种方式添加自定义钩子已经不可能了。
 
-迁移：推荐的添加自定义钩子的方式是使用 WeakMap 和一个静态的 `getXXXHooks(XXX)`(即`getCompilationHook(compilation)`)方法。内部类使用与自定义钩子相同的机制。
+**迁移**：推荐的添加自定义钩子的方式是使用 WeakMap 和一个静态的 `getXXXHooks(XXX)`(即`getCompilationHook(compilation)`)方法。内部类使用与自定义钩子相同的机制。
 
 ### Tapable 插件升级 {#tapable-upgrade}
 
@@ -854,13 +854,13 @@ webpack 3 插件的 compat 层已经被移除。它在 webpack 4 中已经被取
 
 一些较少使用的 tapable API 被删除或废弃。
 
-迁移：使用新的 tapable API。
+**迁移**：使用新的 tapable API。
 
 ### Stage 钩子 {#staged-hooks}
 
 在封装代码包过程的几个步骤中，不同阶段有多个钩子，即 `optimizeDependenciesBasic`, `optimizeDependencies` 和 `optimizeDependenciesAdvanced`。这些已经被删除，改为一个单一的钩子，它可以与 `stage` 选项一起使用。参见 `OptimizationStages`了解可能的 `stage` 选项值。
 
-MIGRATION: 侵入剩余的钩子。你可以添加一个 `stage` 选项。
+**迁移**: 侵入剩余的钩子。你可以添加一个 `stage` 选项。
 
 ### Main/Chunk/ModuleTemplate 废弃 {#mainchunkmoduletemplate-deprecation}
 
@@ -872,7 +872,7 @@ MIGRATION: 侵入剩余的钩子。你可以添加一个 `stage` 选项。
 
 有一个兼容层，所以 Main/Chunk/ModuleTemplate 仍然存在，但只是将 tap 调用委托给新的钩子位置。
 
-迁移：按照 deprecation 消息中的建议。主要是指向不同位置的钩子。
+**迁移**：按照 deprecation 消息中的建议。主要是指向不同位置的钩子。
 
 ### 入口文件描述符 {#entry-point-descriptor}
 
@@ -985,7 +985,7 @@ webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序
 
 优化模块和代码块顺序的钩子已经被移除。
 
-迁移：在编译阶段，你不能再依赖模块和代码块的顺序了。
+**迁移**：在编译阶段，你不能再依赖模块和代码块的顺序了。
 
 ### 从数组到集合(Set) {#arrays-to-sets}
 
@@ -995,7 +995,7 @@ webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序
 
 存在一个适配层但会打印废弃的警告。
 
-迁移: 使用集合方法代替数组方法。
+**迁移**: 使用集合方法代替数组方法。
 
 ### Compilation.fileSystemInfo {#compilationfilesysteminfo}
 
@@ -1003,7 +1003,7 @@ webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序
 
 后续，会增加访问文件内容 hash 值的功能，模块可以用文件内容代替文件 hash 来检查有效性。
 
-迁移：使用 `compilation.fileSystemInfo` API，替代 `file/contextTimestamps`。
+**迁移**：使用 `compilation.fileSystemInfo` API，替代 `file/contextTimestamps`。
 
 现在可以对目录进行时间戳管理，允许对 ContextModules 进行序列化。
 
@@ -1021,7 +1021,7 @@ HMR 运行时已被重构为运行时模块。`HotUpdateChunkTemplate` 已被合
 
 HMR 运行时的 javascript 部分已从核心 HMR 运行时钟分离了出来。其他模块类型现在也可以使用它们自己的方式处理 HMR。在未来，这将使得 HMR 处理诸如 mini-css-extract-plugin 或 WASM 模块。
 
-迁移：此为新功能，无需迁移。
+**迁移**：此为新功能，无需迁移。
 
 `import.meta.webpackHot` 公开了与 `module.hot` 相同的 API。当然可以在 ESM 模块（.mjs，package.json 中的 type: "module"）中使用，这些模块不能访问 `module`。
 
@@ -1039,7 +1039,7 @@ webpack 曾经通过函数调用函数的形式来进行模块处理，还有一
 
 未来，多个编译器会同时工作，可以通过拦截这些队列来进行编译工作的编排。
 
-迁移：此为新功能，无需迁移。
+**迁移**：此为新功能，无需迁移。
 
 ### Logging {#logging}
 
@@ -1073,13 +1073,13 @@ webpack 曾经在依赖关系中存储了已解析的模块，并在 chunk 中�
 
 这部分变化中大多数都有一个 compat-layer，当使用时，它会打印一个弃用警告。
 
-迁移：在 ModuleGraph 和 ChunkGraph 上使用新的 API。
+**迁移**：在 ModuleGraph 和 ChunkGraph 上使用新的 API。
 
 ### Init Fragments {#init-fragments}
 
 `DependenciesBlockVariables` 已被移除，改为 `InitFragments`。`DependencyTemplates` 现在可以添加 `InitFragments`，以将代码注入模块源的起始位置。`InitFragments` 允许删除重复数据。
 
-迁移：使用 `InitFragments` 代替，而无需在源文件的负索引出插入。
+**迁移**：使用 `InitFragments` 代替，而无需在源文件的负索引出插入。
 
 ### 模块 Source Types {#module-source-types}
 
@@ -1087,13 +1087,13 @@ Modules 现在必须通过 `Module.getSourceTypes()` 来定义它们支持的源
 
 模块类型与源类型间没有关系。即使模块类型为 `json`，也可以使用源类型为 `javascript` 和模块类型为 `webassembly/experimental` 的 `javascript` 和 `webassembly`。
 
-迁移：自定义模块需要实现这些新的接口方法。
+**迁移**：自定义模块需要实现这些新的接口方法。
 
 ### Stats 的插件 {#plugins-for-stats}
 
 Stats 的 `preset`，`default`，`json` 和 `toString` 现已由插件系统内置。将当前的 Stats 转换为插件。
 
-迁移：你现在可以自定义它，而无需替换整个 Stats 功能。额外的信息现在可以添加到 stats json 中，而不是单独编写文件。
+**迁移**：你现在可以自定义它，而无需替换整个 Stats 功能。额外的信息现在可以添加到 stats json 中，而不是单独编写文件。
 
 ### 全新的监听 {#new-watching}
 
@@ -1120,8 +1120,8 @@ webpack 现在使用 `SizeOnlySource` 替换 `Compilation.assets` 中的 Sources
 - 能否重命名 export 名? 是否重命名，也不确定
 - 如果 export 已重新命名，则为新名称。（详见 `optimization.mangleExports`）
 - 嵌套的 ExportsInfo，如果 export 是一个含有附加信息的对象，那么它本身就是一个对象
-    - 用于重新导出命名空间对象：`import * as X from "..."; export { X };`
-    - 用于表示 JSON 模块中的结构
+  - 用于重新导出命名空间对象：`import * as X from "..."; export { X };`
+  - 用于表示 JSON 模块中的结构
 
 ### 代码生成阶段 {#code-generation-phase}
 
@@ -1129,7 +1129,7 @@ webpack 现在使用 `SizeOnlySource` 替换 `Compilation.assets` 中的 Sources
 
 这应该会使得流程更加简洁。它还运行报告该阶段的进度。并使得代码生成在剖析时更加清晰可见。
 
-迁移：`Module.source()` 和 `Module.getRuntimeRequirements()` 已弃用。使用 `Module.codeGeneration()` 代替。
+**迁移**：`Module.source()` 和 `Module.getRuntimeRequirements()` 已弃用。使用 `Module.codeGeneration()` 代替。
 
 ### 依赖关系参考 {#dependencyreference}
 

@@ -25,34 +25,32 @@ loader 用于对模块的源代码进行转换。loader 可以使你在 `import`
 
 例如，你可以使用 loader 告诉 webpack 加载 CSS 文件，或者将 TypeScript 转为 JavaScript。为此，首先安装相对应的 loader：
 
-``` bash
+```bash
 npm install --save-dev css-loader ts-loader
 ```
 
 然后指示 webpack 对每个 `.css` 使用 [`css-loader`](/loaders/css-loader)，以及对所有 `.ts` 文件使用 [`ts-loader`](https://github.com/TypeStrong/ts-loader)：
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` js
+```js
 module.exports = {
   module: {
     rules: [
       { test: /\.css$/, use: 'css-loader' },
-      { test: /\.ts$/, use: 'ts-loader' }
-    ]
-  }
+      { test: /\.ts$/, use: 'ts-loader' },
+    ],
+  },
 };
 ```
-
 
 ## 使用 loader {#using-loaders}
 
 在你的应用程序中，有三种使用 loader 的方式：
 
-- [配置方式](#configuration)（推荐）：在 __webpack.config.js__ 文件中指定 loader。
+- [配置方式](#configuration)（推荐）：在 **webpack.config.js** 文件中指定 loader。
 - [内联方式](#inline)：在每个 `import` 语句中显式指定 loader。
 - [CLI 方式](#cli)：在 shell 命令中指定它们。
-
 
 ### 配置方式 {#configuration}
 
@@ -61,7 +59,7 @@ module.exports = {
 
 loader 从右到左（或从下到上）地取值(evaluate)/执行(execute)。在下面的示例中，从 sass-loader 开始执行，然后继续执行 css-loader，最后以 style-loader 为结束。查看 [loader 功能](/concepts/loaders/#loader-features) 章节，了解有关 loader 顺序的更多信息。
 
-``` js-with-links
+```js-with-links
 module.exports = {
   module: {
     rules: [
@@ -85,7 +83,6 @@ module.exports = {
   }
 };
 ```
-
 
 ### 内联方式 {#inline}
 
@@ -119,7 +116,6 @@ import Styles from '-!style-loader!css-loader?modules!./styles.css';
 
 T> 尽可能使用 `module.rules`，因为这样可以减少源码中样板文件的代码量，并且可以在出错时，更快地调试和定位 loader 中的问题。
 
-
 ### CLI 方式 {#cli}
 
 还可以通过 CLI 使用 loader：
@@ -129,7 +125,6 @@ webpack --module-bind pug-loader --module-bind 'css=style-loader!css-loader'
 ```
 
 这会对 `.jade` 文件使用 `pug-loader`，以及对 `.css` 文件使用 [`style-loader`](/loaders/style-loader) 和 [`css-loader`](/loaders/css-loader)。
-
 
 ## loader 特性 {#loader-features}
 
@@ -142,7 +137,6 @@ webpack --module-bind pug-loader --module-bind 'css=style-loader!css-loader'
 - loader 能够产生额外的任意文件。
 
 可以通过 loader 的预处理函数，为 JavaScript 生态系统提供更多能力。用户现在可以更加灵活地引入细粒度逻辑，例如：压缩、打包、语言翻译和 [更多其他特性](/loaders)。
-
 
 ## 解析 loader {#resolving-loaders}
 

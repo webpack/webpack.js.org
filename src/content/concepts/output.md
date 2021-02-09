@@ -11,23 +11,21 @@ contributors:
 
 可以通过配置 `output` 选项，告知 webpack 如何向硬盘写入编译文件。注意，即使可以存在多个 `entry` 起点，但只能指定一个 `output` 配置。
 
-
 ## 用法 {#usage}
 
 在 webpack 配置中，`output` 属性的最低要求是，将它的值设置为一个对象，然后为将输出文件的文件名配置为一个 [`output.filename`](/configuration/output/#outputfilename)：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   output: {
     filename: 'bundle.js',
-  }
+  },
 };
 ```
 
 此配置将一个单独的 `bundle.js` 文件输出到 `dist` 目录中。
-
 
 ## 多个入口起点 {#multiple-entry-points}
 
@@ -37,31 +35,30 @@ module.exports = {
 module.exports = {
   entry: {
     app: './src/app.js',
-    search: './src/search.js'
+    search: './src/search.js',
   },
   output: {
     filename: '[name].js',
-    path: __dirname + '/dist'
-  }
+    path: __dirname + '/dist',
+  },
 };
 
 // 写入到硬盘：./dist/app.js, ./dist/search.js
 ```
 
-
 ## 高级进阶 {#advanced}
 
 以下是对资源使用 CDN 和 hash 的复杂示例：
 
-__config.js__
+**config.js**
 
 ```javascript
 module.exports = {
   //...
   output: {
     path: '/home/proj/cdn/assets/[fullhash]',
-    publicPath: 'https://cdn.example.com/assets/[fullhash]/'
-  }
+    publicPath: 'https://cdn.example.com/assets/[fullhash]/',
+  },
 };
 ```
 

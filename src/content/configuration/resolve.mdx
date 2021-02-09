@@ -173,10 +173,7 @@ module.exports = {
 
 ### `resolve.cacheWithContext` {#resolvecachewithcontext}
 
-`boolean` (从 webpack 3.1.0起支持)
-
-如果启用了不安全缓存，请在缓存键(cache key)中引入 `request.context`。这个选项被 [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) 模块考虑在内。从 webpack 3.1.0 开始，在配置了 resolve 或 resolveLoader 插件时，解析缓存(resolve caching)中的上下文(context)会被忽略。
-这解决了性能衰退的问题。
+如果启用了不安全缓存，请在缓存键(cache key)中引入 `request.context`。这个选项被 [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) 模块考虑在内。从 webpack 3.1.0 开始，在配置了 resolve 或 resolveLoader 插件时，解析缓存(resolve caching)中的上下文(context)会被忽略。这解决了性能衰退的问题。
 
 ### `resolve.descriptionFiles` {#resolvedescriptionfiles}
 
@@ -301,9 +298,7 @@ module.exports = {
 }
 ```
 
-在我们 `import * as Upstream from 'upstream'` 时，这实际上会从 `browser` 属性解析文件。
-在这里 `browser` 属性是最优先选择的，因为它是 `mainFields` 的第一项。同时，由 webpack 打包的 Node.js 应用程序首先会尝试
-从 `module` 字段中解析文件。
+在我们 `import * as Upstream from 'upstream'` 时，这实际上会从 `browser` 属性解析文件。在这里 `browser` 属性是最优先选择的，因为它是 `mainFields` 的第一项。同时，由 webpack 打包的 Node.js 应用程序首先会尝试从 `module` 字段中解析文件。
 
 ### `resolve.mainFiles` {#resolvemainfiles}
 
@@ -322,24 +317,22 @@ module.exports = {
 };
 ```
 
-
 ### `resolve.exportsFields` {#resolveexportsfields}
 
 `[string] = ['exports']`
 
 在 package.json 中用于解析模块请求的字段。欲了解更多信息，请查阅 [package-exports guideline](/guides/package-exports/) 文档。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    exportsFields: ['exports', 'myCompanyExports']
-  }
+    exportsFields: ['exports', 'myCompanyExports'],
+  },
 };
 ```
-
 
 ### `resolve.modules` {#resolvemodules}
 
@@ -431,25 +424,24 @@ module.exports = {
 };
 ```
 
-
 ### `resolve.preferRelative` {#resolvepreferrelative}
 
 `boolean`
 
 当启用此选项时，webpack 更倾向于将模块请求解析为相对请求，而不使用来自 `node_modules` 目录下的模块。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    preferRelative: true
-  }
+    preferRelative: true,
+  },
 };
 ```
 
-__src/index.js__
+**src/index.js**
 
 ```js
 // let's say `src/logo.svg` exists
@@ -465,18 +457,18 @@ const a = new URL('./module/path', import.meta.url);
 
 `boolean`
 
-<Badge text='5.13.0+' />
+<Badge text="5.13.0+" />
 
 解析时，首选的绝对路径为 [`resolve.roots`](#resolveroots)。
 
-__wepack.config.js__
+**wepack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    preferAbsolute: true
-  }
+    preferAbsolute: true,
+  },
 };
 ```
 
@@ -526,14 +518,14 @@ module.exports = {
 
 解析限制列表，用于限制可以解析请求的路径。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    restrictions: [/\.(sass|scss|css)$/]
-  }
+    restrictions: [/\.(sass|scss|css)$/],
+  },
 };
 ```
 
@@ -543,15 +535,15 @@ module.exports = {
 
 A list of directories where requests of server-relative URLs (starting with '/') are resolved, defaults to [`context` configuration option](/configuration/entry-context/#context). On non-Windows systems these requests are resolved as an absolute path first.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 const fixtures = path.resolve(__dirname, 'fixtures');
 module.exports = {
   //...
   resolve: {
-    roots: [__dirname, fixtures]
-  }
+    roots: [__dirname, fixtures],
+  },
 };
 ```
 
@@ -561,14 +553,14 @@ module.exports = {
 
 Fields from `package.json` which are used to provide the internal requests of a package (requests starting with `#` are considered internal).
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
-    importsFields: ['browser', 'module', 'main']
-  }
+    importsFields: ['browser', 'module', 'main'],
+  },
 };
 ```
 
@@ -578,19 +570,44 @@ module.exports = {
 
 Redirect module requests when normal resolving fails.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   //...
   resolve: {
     fallback: {
-      xyz: path.resolve(__dirname, 'path/to/file.js')
-    }
-  }
+      xyz: path.resolve(__dirname, 'path/to/file.js'),
+    },
+  },
 };
 ```
 
+### resolve.byDependency {#resolvebydependency}
+
+通过 module 请求类型来配置 resolve 选项。
+
+- Type: `[type: string]: ResolveOptions`
+- Example:
+  ```js
+  module.exports = {
+    // ...
+    resolve: {
+      byDependency: {
+        // ...
+        esm: {
+          mainFields: ['browser', 'module'],
+        },
+        commonjs: {
+          aliasFields: ['browser'],
+        },
+        url: {
+          preferRelative: true,
+        },
+      },
+    },
+  };
+  ```
 
 ## `resolveLoader` {#resolveloader}
 

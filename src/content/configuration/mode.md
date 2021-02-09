@@ -22,10 +22,9 @@ related:
 
 ```javascript
 module.exports = {
-  mode: 'development'
+  mode: 'development',
 };
 ```
-
 
 或者从 [CLI](/api/cli/) 参数中传递：
 
@@ -45,9 +44,7 @@ webpack --mode=development
 
 T> 请注意，设置 `NODE_ENV` 并不会自动地设置 `mode`。
 
-
 ### Mode: development {#mode-development}
-
 
 ```diff
 // webpack.development.config.js
@@ -86,9 +83,7 @@ module.exports = {
 }
 ```
 
-
 ### Mode: production {#mode-production}
-
 
 ```diff
 // webpack.production.config.js
@@ -127,9 +122,7 @@ module.exports = {
 }
 ```
 
-
 ### Mode: none {#mode-none}
-
 
 ```diff
 // webpack.custom.config.js
@@ -156,16 +149,15 @@ module.exports = {
 }
 ```
 
-如果要根据 _webpack.config.js_ 中的 __mode__ 变量更改打包行为，则必须将配置导出为函数，而不是导出对象：
+如果要根据 *webpack.config.js* 中的 **mode** 变量更改打包行为，则必须将配置导出为函数，而不是导出对象：
 
 ```javascript
 var config = {
-  entry: './app.js'
+  entry: './app.js',
   //...
 };
 
 module.exports = (env, argv) => {
-
   if (argv.mode === 'development') {
     config.devtool = 'source-map';
   }

@@ -11,25 +11,25 @@ contributors:
 
 举个例子。我们有一个具有两种页面类型的 PHP 应用程序：home(首页) 和 account(帐户)。home 与应用程序其余部分（account 页面）具有不同的布局和不可共享的 JavaScript。我们想要从应用程序文件中输出 home 页面的 `home.js` 和 `home.css`，为 account 页面输出 `account.js` 和 `account.css`。
 
-__home.js__
+**home.js**
 
 ```javascript
 console.log('home page type');
 ```
 
-__home.scss__
+**home.scss**
 
 ```scss
 // home page individual styles
 ```
 
-__account.js__
+**account.js**
 
 ```javascript
 console.log('account page type');
 ```
 
-__account.scss__
+**account.scss**
 
 ```scss
 // account page individual styles
@@ -37,7 +37,7 @@ __account.scss__
 
 我们将在 `production(生产)` 模式中使用 [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin/) 作为 CSS 的一个最佳实践。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -57,7 +57,9 @@ module.exports = {
         test: /\.scss$/,
         use: [
           // fallback to style-loader in development
-          process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
+          process.env.NODE_ENV !== 'production'
+            ? 'style-loader'
+            : MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',
         ],

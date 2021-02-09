@@ -5,7 +5,7 @@ import { lazy, Suspense, useState, useEffect } from 'react';
 import Container from '../Container/Container';
 import SplashViz from '../SplashViz/SplashViz';
 import Markdown from '../Markdown/Markdown';
-import {PlaceholderComponent} from '../Placeholder/Placeholder';
+import { PlaceholderComponent } from '../Placeholder/Placeholder';
 
 // Import helpers
 import isClient from '../../utilities/is-client';
@@ -42,9 +42,11 @@ const SponsorsPlaceholder = () => (
 
 const Splash = () => {
   const [showSponsors, setShowSponsors] = useState(false);
-  const [supportType, setSupportType] = useState(() => Math.random() < 0.33 ? 'monthly' : 'total');
+  const [supportType, setSupportType] = useState(() =>
+    Math.random() < 0.33 ? 'monthly' : 'total'
+  );
   useEffect(() => {
-    if(isClient) setShowSponsors(true);
+    if (isClient) setShowSponsors(true);
   }, []);
   return (
     <div className="splash">
@@ -53,9 +55,11 @@ const Splash = () => {
       <div className="splash__section splash__section--dark page__content">
         <Container>
           <Markdown>
-            <div dangerouslySetInnerHTML={{
-              __html: SplashContent
-            }} />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: SplashContent,
+              }}
+            />
           </Markdown>
         </Container>
       </div>

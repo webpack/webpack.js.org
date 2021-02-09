@@ -17,7 +17,6 @@ This plugin enables more fine grained control of source map generation. It is al
 new webpack.SourceMapDevToolPlugin(options);
 ```
 
-
 ## Options {#options}
 
 The following options are supported:
@@ -57,9 +56,7 @@ You can use the following code to replace the configuration option `devtool: inl
 module.exports = {
   // ...
   devtool: false,
-  plugins: [
-    new webpack.SourceMapDevToolPlugin({})
-  ]
+  plugins: [new webpack.SourceMapDevToolPlugin({})],
 };
 ```
 
@@ -70,7 +67,7 @@ The following code would exclude source maps for any modules in the `vendor.js` 
 ```js
 new webpack.SourceMapDevToolPlugin({
   filename: '[name].js.map',
-  exclude: ['vendor.js']
+  exclude: ['vendor.js'],
 });
 ```
 
@@ -81,7 +78,7 @@ Set a URL for source maps. Useful for hosting them on a host that requires autho
 ```js
 new webpack.SourceMapDevToolPlugin({
   append: '\n//# sourceMappingURL=https://example.com/sourcemap/[url]',
-  filename: '[name].map'
+  filename: '[name].map',
 });
 ```
 
@@ -102,7 +99,7 @@ With next config:
 new webpack.SourceMapDevToolPlugin({
   filename: 'sourcemaps/[file].map',
   publicPath: 'https://example.com/project/',
-  fileContext: 'public'
+  fileContext: 'public',
 });
 ```
 

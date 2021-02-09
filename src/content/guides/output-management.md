@@ -19,9 +19,9 @@ T> 本指南继续沿用 [`管理资源`](/guides/asset-management) 指南中的
 
 首先，调整一下我们的项目：
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
   |- webpack.config.js
@@ -34,9 +34,9 @@ __project__
 
 我们在 `src/print.js` 文件中添加一些逻辑：
 
-__src/print.js__
+**src/print.js**
 
-``` js
+```js
 export default function printMe() {
   console.log('I get called from print.js!');
 }
@@ -44,18 +44,18 @@ export default function printMe() {
 
 并且在 `src/index.js` 文件中使用这个函数：
 
-__src/index.js__
+**src/index.js**
 
-``` diff
+```diff
  import _ from 'lodash';
 +import printMe from './print.js';
- 
+
  function component() {
    const element = document.createElement('div');
 +  const btn = document.createElement('button');
- 
+
    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
- 
+
 +  btn.innerHTML = 'Click me and check the console!';
 +  btn.onclick = printMe;
 +
@@ -63,15 +63,15 @@ __src/index.js__
 +
    return element;
  }
- 
+
  document.body.appendChild(component());
 ```
 
 还要更新 `dist/index.html` 文件，来为 webpack 分离入口做好准备：
 
-__dist/index.html__
+**dist/index.html**
 
-``` diff
+```diff
  <!DOCTYPE html>
  <html>
    <head>
@@ -89,11 +89,11 @@ __dist/index.html__
 
 现在调整配置。我们将在 entry 添加 `src/print.js` 作为新的入口起点（`print`），然后修改 output，以便根据入口起点定义的名称，动态地产生 bundle 名称：
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
- 
+
  module.exports = {
 -  entry: './src/index.js',
 +  entry: {
@@ -110,7 +110,7 @@ __webpack.config.js__
 
 执行 `npm run build`，然后看到生成如下：
 
-``` bash
+```bash
 ...
 [webpack-cli] Compilation finished
 asset index.bundle.js 69.5 KiB [emitted] [minimized] (name: index) 1 related asset
@@ -127,21 +127,20 @@ webpack 5.4.0 compiled successfully in 1996 ms
 
 但是，如果我们更改了我们的一个入口起点的名称，甚至添加了一个新的入口，会发生什么？会在构建时重新命名生成的 bundle，但是我们的 `index.html` 文件仍然引用旧的名称。让我们用 [`HtmlWebpackPlugin`](/plugins/html-webpack-plugin) 来解决这个问题。
 
-
 ## 设置 HtmlWebpackPlugin {#setting-up-htmlwebpackplugin}
 
 首先安装插件，并且调整 `webpack.config.js` 文件：
 
-``` bash
+```bash
 npm install --save-dev html-webpack-plugin
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
 +const HtmlWebpackPlugin = require('html-webpack-plugin');
- 
+
  module.exports = {
    entry: {
      index: './src/index.js',
@@ -161,7 +160,7 @@ __webpack.config.js__
 
 在我们构建之前，你应该了解，虽然在 `dist/` 文件夹我们已经有了 `index.html` 这个文件，然而 `HtmlWebpackPlugin` 还是会默认生成它自己的 `index.html` 文件。也就是说，它会用新生成的 `index.html` 文件，替换我们的原有文件。我们看下执行 `npm run build` 后会发生什么：
 
-``` bash
+```bash
 ...
 [webpack-cli] Compilation finished
 asset index.bundle.js 69.5 KiB [compared for emit] [minimized] (name: index) 1 related asset
@@ -187,17 +186,17 @@ webpack 5.4.0 compiled successfully in 2189 ms
 
 [`clean-webpack-plugin`](https://www.npmjs.com/package/clean-webpack-plugin) 是一个流行的清理插件，安装和配置它。
 
-``` bash
+```bash
 npm install --save-dev clean-webpack-plugin
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
 +const { CleanWebpackPlugin } = require('clean-webpack-plugin');
- 
+
  module.exports = {
    entry: {
      index: './src/index.js',
@@ -218,7 +217,6 @@ __webpack.config.js__
 
 现在，执行 `npm run build`，检查 `/dist` 文件夹。如果一切顺利，现在只会看到构建后生成的文件，而没有旧文件！
 
-
 ## manifest {#the-manifest}
 
 你可能会很感兴趣，webpack 和 webpack 插件似乎“知道”应该生成哪些文件。答案是，webpack 通过 manifest，可以追踪所有模块到输出 bundle 之间的映射。如果你想要知道如何以其他方式来控制 webpack [`输出`](/configuration/output)，了解 manifest 是个好的开始。
@@ -226,7 +224,6 @@ __webpack.config.js__
 通过 [`WebpackManifestPlugin`](https://github.com/shellscape/webpack-manifest-plugin) 插件，可以将 manifest 数据提取为一个容易使用的 json 文件。
 
 我们不会在此展示一个如何在项目中使用此插件的完整示例，你可以在 [manifest](/concepts/manifest) 概念页面深入阅读，以及在 [缓存](/guides/caching) 指南中，了解它与长效缓存有何关系。
-
 
 ## 结论 {#conclusion}
 

@@ -95,7 +95,7 @@ webpack-cli 提供了许多 flag 来使 webpack 的工作变得简单。默认�
 
 从 CLI v4 和 webpack v5 开始，CLI 将采用从 webpack 的 core 中导入整个配置的模式，允许 CLI 调整几乎所有配置项。
 
-__链接中是 webpack v5 和 CLI v4 支持的所有核心 flag 列表 - [详戳](https://github.com/webpack/webpack-cli/blob/master/OPTIONS.md)__
+**链接中是 webpack v5 和 CLI v4 支持的所有核心 flag 列表 - [详戳](https://github.com/webpack/webpack-cli/blob/master/OPTIONS.md)**
 
 例如，如果你想在项目中启用性能提示，你需在配置中使用[此](/configuration/performance/#performancehints)选项，而如果使用核心 flag，你可以这样做：
 
@@ -119,21 +119,40 @@ npx webpack [--config webpack.config.js]
 npx webpack --entry <entry> -o <output-path>
 ```
 
-__example__
+**example**
 
 ```bash
 npx webpack --entry ./first.js --entry ./second.js --output-path /build
 ```
 
-__`<entry>`__
+**`<entry>`**
 
 构建项目时入口可以配置一个文件名或一组被命名过的文件名。你可以传递多个入口（每个入口在启动时加载）。
+如下是通过 CLI 指定 entry 的多种方式：
 
-__`<output>`__
+```bash
+npx webpack ./first-entry.js
+```
+
+```bash
+npx webpack --entry ./first-entry.js
+```
+
+```bash
+npx webpack ./first-entry.js ./other-entry.js
+```
+
+```bash
+npx webpack --entry ./first-entry.js ./other-entry.js
+```
+
+T> 使用 `webpack [command] [entries...] [option]` 语法，主要是因为某些选项支持接受多个值。因此，你可以用 `webpack --target node ./entry.js` 表示 `target: ['node', './file.js']`。
+
+**`<output>`**
 
 用于存储构建后的文件路径。它将映射到配置选项 `output.path`。
 
-__示例__
+**示例**
 
 假设你的项目结构像下面这样：
 
@@ -192,24 +211,44 @@ CLI 会在你的项目路径中寻找默认配置，以下是 CLI 采集到的�
 
 W> 注意，命令行接口（Command Line Interface）参数的优先级，高于配置文件参数。例如，如果将 [`--mode="production"`](/configuration/mode/#usage) 传入 webpack CLI，而配置文件使用的是 `development`，最终会使用 `production`。
 
-__列出命令行可用的基础命令和 flag__
+### help {#help}
+
+**列出命令行可用的基础命令和 flag**
+
+通过 `webpack help [command] [option]` 以及 `webpack [command] --help` 均可获得帮助信息：
 
 ```bash
 npx webpack --help
+
+# or
+
+npx webpack help
 ```
 
-__列出所有 cli 支持的命令和 flag__
+**列出所有 cli 支持的命令和 flag**
 
 ```bash
 npx webpack --help=verbose
 ```
 
-__显示已安装的 package 以及子 package 的版本__。
+**查看特定命令或选项的帮助**：
+
+```bash
+npx webpack help --mode
+```
+
+### version {#version}
+
+**显示已安装的 package 以及子 package 的版本**。
 
 如需检查你正在使用的 `webpack` 和 `webpack-cli` 的版本，只需运行如下命令：
 
 ```bash
 npx webpack --version
+
+# or
+
+npx webpack version
 ```
 
 运行结果如下：
@@ -241,13 +280,17 @@ webpack-cli 4.2.0
 webpack 5.4.0
 ```
 
-__使用配置文件进行构建__
+### config {#config}
+
+**使用配置文件进行构建**
 
 配置文件默认为 `webpack.config.js`，还可以指定其它的[配置](/configuration)文件。
 
 ```bash
 npx webpack --config example.config.js
 ```
+
+### config-name {#config-name}
 
 如果你的配置文件导出了多个配置，你可以使用 `--config-name` 来指定要运行的配置。
 
@@ -295,13 +338,23 @@ npx webpack --config-name second
 npx webpack --config-name first --config-name second
 ```
 
-__以 JSON 格式输出 webpack 的运行结果__
+### merge {#merge}
+
+你可以通过 `--merge` 选项来合并两个或多个不同的 webpack 配置：
+
+```bash
+npx webpack --config ./first.js --config ./second.js --merge
+```
+
+### json {#json}
+
+**以 JSON 格式输出 webpack 的运行结果**
 
 ```bash
 npx webpack --json
 ```
 
-__如果你想把 stats 数据存储为 JSON 而非输出，你可以使用：__
+**如果你想把 stats 数据存储为 JSON 而非输出，你可以使用：**
 
 ```bash
 npx webpack --json stats.json
@@ -316,13 +369,13 @@ T> 请查阅 [stats 数据 api](/api/stats)，了解更多关于生成的 stats 
 当 webpack 配置[导出为函数时](/configuration/configuration-types/#exporting-a-function)，会接收到一个 "environment" 的参数。
 
 ```bash
-npx webpack --env production    # sets env.production == true
+npx webpack --env production    # env.production = true
 ```
 
 `--env` 参数可以接收多个值：
 
-| Invocation                                                   | Resulting environment                          |
-| ------------------------------------------------------------ | ---------------------------------------------- |
+| Invocation                                                       | Resulting environment                          |
+| ---------------------------------------------------------------- | ---------------------------------------------- |
 | `npx webpack --env prod`                                         | `{ prod: true }`                               |
 | `npx webpack --env prod --env min`                               | `{ prod: true, min: true }`                    |
 | `npx webpack --env platform=app --env production`                | `{ platform: "app", production: true }`        |
@@ -330,13 +383,23 @@ npx webpack --env production    # sets env.production == true
 
 T> 请查阅 [environment 变量指南](/guides/environment-variables/)了解更多信息及用法。
 
+### NODE_ENV {#node-env}
+
+你可以使用 `--node-env` 选项来设置 `process.env.NODE_ENV`:
+
+```bash
+npx webpack --node-env production   # process.env.NODE_ENV = 'production'
+```
+
+T> 如果你不明确的设置 mode，`mode` 选项的值会被 `--node-env` 覆盖。例如 `--node-env production` 时，会把 `process.env.NODE_ENV` 和 `mode` 均设置为 `'production'`。
+
 ## 配置选项 {#configuration-options}
 
 | 参数       | 说明                                                    | 输入类型 | 默认值                                             |
 | --------------- | -------------------------------------------------------------- | ---------- | --------------------------------------------------- |
-| `--config`      | 配置文件的路径                                 | string     | [默认配置](/api/cli/#default-configurations) |
-| `--config-name` | 要使用的配置名                               | string     |
-| `--env`         | 当配置文件为函数时，environment 将作为参数传递给配置  |            |
+| `--config`      | 配置文件的路径                                 | string[]     | [默认配置](/api/cli/#default-configurations) |
+| `--config-name` | 要使用的配置名                               | string[]     |
+| `--env`         | 当配置文件为函数时，environment 将作为参数传递给配置  | string[]        |
 
 ## 分析 Bundle {#analyzing-bundle}
 
@@ -378,10 +441,10 @@ NODE_OPTIONS="--max-old-space-size=4096" webpack
 NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 ```
 
-## Exit codes and their meanings
+## 退出代码及其含义 {#exit-codes-and-their-meanings}
 
-| Exit Code | Description                                        |
+| 退出代码 | 描述                                        |
 | --------- | -------------------------------------------------- |
-| `0`       | Success                                            |
-| `1`       | Errors from webpack                                |
-| `2`       | Configuration/options problem or an internal error |
+| `0`       | 成功                                            |
+| `1`       | webpack Error                                |
+| `2`       | 配置/选项问题，或者内部错误 |

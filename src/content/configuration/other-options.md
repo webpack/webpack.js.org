@@ -20,11 +20,9 @@ related:
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
 ---
 
-
 这里是 webpack 支持的其它选项。
 
 W> 寻求帮助：这个页面还在更新中，如果你发现本页面内有描述不准确或者不完整，请在 [webpack 的文档仓库](https://github.com/webpack/webpack.js.org)中创建 issue 或者 pull request
-
 
 ## `amd` {#amd}
 
@@ -32,14 +30,14 @@ W> 寻求帮助：这个页面还在更新中，如果你发现本页面内有�
 
 设置 `require.amd` 或 `define.amd` 的值。设置 `amd` 为 `false` 会禁用 webpack 的 AMD 支持。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   amd: {
-    jQuery: true
-  }
+    jQuery: true,
+  },
 };
 ```
 
@@ -50,25 +48,22 @@ module.exports = {
 此选项允许将模块查找的键(key)设置为真值(truthy value)。
 发生这种情况时，webpack 中的 AMD 支持将忽略定义的名称。
 
-
-
 ## `bail` {#bail}
 
 `boolean = false`
 
 在第一个错误出现时抛出失败结果，而不是容忍它。默认情况下，当使用 HMR 时，webpack 会将在终端以及浏览器控制台中，以红色文字记录这些错误，但仍然继续进行打包。要启用它：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
-  bail: true
+  bail: true,
 };
 ```
 
 这将迫使 webpack 退出其打包过程。
-
 
 ## `cache` {#cache}
 
@@ -76,15 +71,14 @@ module.exports = {
 
 缓存生成的 webpack 模块和 chunk，来改善构建速度。`cache` 会在[`开发` 模式](/configuration/mode/#mode-development)被设置成 `type: 'memory'` 而且在 [`生产` 模式](/configuration/mode/#mode-production) 中被禁用。 `cache: true` 与 `cache: { type: 'memory' }` 配置作用一致。 传入  `false` 会禁用缓存:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
-  cache: false
+  cache: false,
 };
 ```
-
 
 ### `cache.type` {#cachetype}
 
@@ -92,14 +86,14 @@ module.exports = {
 
 将 `cache` 类型设置成内存或者文件系统。`memory` 选项很简单，它会告诉 webpack 将内容存放在内存中并且不允许额外的配置：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   cache: {
-    type: 'memory'
-  }
+    type: 'memory',
+  },
 };
 ```
 
@@ -113,7 +107,7 @@ module.exports = {
 
 `cache.cacheDirectory` 选项仅当 [`cache.type`](#cachetype) 被设置成 `filesystem` 才可用。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const path = require('path');
@@ -122,8 +116,8 @@ module.exports = {
   //...
   cache: {
     type: 'filesystem',
-    cacheDirectory: path.resolve(__dirname, '.temp_cache')
-  }
+    cacheDirectory: path.resolve(__dirname, '.temp_cache'),
+  },
 };
 ```
 
@@ -135,7 +129,7 @@ W> 最终的缓存目标是 `cache.cacheDirectory` + `cache.name` 的混合.
 
 缓存的路径。默认值为 `path.resolve(cache.cacheDirectory, cache.name)`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const path = require('path');
@@ -144,8 +138,8 @@ module.exports = {
   //...
   cache: {
     type: 'filesystem',
-    cacheLocation: path.resolve(__dirname, '.test_cache')
-  }
+    cacheLocation: path.resolve(__dirname, '.test_cache'),
+  },
 };
 ```
 
@@ -164,10 +158,10 @@ module.exports = {
   cache: {
     buildDependencies: {
       // This makes all dependencies of this file - build dependencies
-      config: [__filename]
+      config: [__filename],
       // By default webpack and loaders are build dependencies
-    }
-  }
+    },
+  },
 };
 ```
 
@@ -187,15 +181,15 @@ W> Moved to [snapshot.managedPaths](#managedpaths)
 
 `cache.hashAlgorithm` 选项仅当 [`cache.type`](#cachetype) 设置成 `filesystem` 才可配置。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   cache: {
     type: 'filesystem',
-    hashAlgorithm: 'md4'
-  }
+    hashAlgorithm: 'md4',
+  },
 };
 ```
 
@@ -207,15 +201,15 @@ module.exports = {
 
 `cache.name` 选项仅当 [`cache.type`](#cachetype) 被设置成 `filesystem` 的时候可进行配置。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   cache: {
     type: 'filesystem',
-    name: 'AppBuildCache'
-  }
+    name: 'AppBuildCache',
+  },
 };
 ```
 
@@ -231,15 +225,15 @@ module.exports = {
 
 W> `pack` 是 webpack 5.0.x 起唯一支持的类型
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   cache: {
     type: 'filesystem',
-    store: 'pack'
-  }
+    store: 'pack',
+  },
 };
 ```
 
@@ -251,15 +245,15 @@ module.exports = {
 
 `cache.version` 选项仅当 [`cache.type`](#cachetype) 设置成 `filesystem` 才可配置。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   cache: {
     type: 'filesystem',
-    version: 'your_version'
-  }
+    version: 'your_version',
+  },
 };
 ```
 
@@ -271,14 +265,14 @@ W> 在具有不同选项的调用之间不要共享缓存。
 
 单位毫秒。 `cache.idleTimeout` 表示缓存存储发生后的时间段。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //..
   cache: {
-    idleTimeout: 10000
-  }
+    idleTimeout: 10000,
+  },
 };
 ```
 
@@ -290,14 +284,14 @@ W> `cache.idleTimeout` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` �
 
 单位毫秒。 `cache.idleTimeoutForInitialStore` 是在初始缓存存储发生后的时间段。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //..
   cache: {
-    idleTimeoutForInitialStore: 0
-  }
+    idleTimeoutForInitialStore: 0,
+  },
 };
 ```
 
@@ -320,14 +314,14 @@ module.exports = {
   //...
   ignoreWarnings: [
     {
-      module: /module2\.js\?[34]/ // A RegExp
+      module: /module2\.js\?[34]/, // A RegExp
     },
     {
       module: /[13]/,
-      message: /homepage/
+      message: /homepage/,
     },
-    (warning) => true
-  ]
+    (warning) => true,
+  ],
 };
 ```
 
@@ -339,20 +333,20 @@ module.exports = {
 
 例如，你可以在 loader 上下文中定义一个新变量：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   // ...
   loader: {
-    answer: 42
-  }
+    answer: 42,
+  },
 };
 ```
 
 然后使用 `this.answer` 在 loader 中获取该值：
 
-__custom-loader.js__
+**custom-loader.js**
 
 ```javascript
 module.exports = function (source) {
@@ -370,8 +364,6 @@ T> 你可以覆盖 loader 上下文中的属性，因为 webpack 会将所有定
 
 限制并行处理的模块数量。可以用于调优性能或获取更可靠的性能分析结果。
 
-
-
 ## `profile` {#profile}
 
 `boolean`
@@ -381,7 +373,7 @@ T> 你可以覆盖 loader 上下文中的属性，因为 webpack 会将所有定
 T> 使用 [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) 可以更好地控制生成的配置文件。
 
 T> 与 `parallelism: 1` 混用以达到更好的结果。
-
+需要注意的是，这样做也会减慢建造速度。
 
 ## `recordsPath` {#recordspath}
 
@@ -389,14 +381,14 @@ T> 与 `parallelism: 1` 混用以达到更好的结果。
 
 开启这个选项可以生成一个 JSON 文件，其中含有 webpack 的 "records" 记录 - 即「用于存储跨多次构建(across multiple builds)的模块标识符」的数据片段。可以使用此文件来跟踪在每次构建之间的模块变化。只要简单的设置一下路径,就可以生成这个 JSON 文件：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const path = require('path');
 
 module.exports = {
   //...
-  recordsPath: path.join(__dirname, 'records.json')
+  recordsPath: path.join(__dirname, 'records.json'),
 };
 ```
 
@@ -406,13 +398,11 @@ T> 注意，虽然这个文件是由编译器(compiler)生成的，但你可能�
 
 W> 设置 `recordsPath` 本质上会把 `recordsInputPath` 和 `recordsOutputPath` 都设置成相同的路径。通常来讲这也是符合逻辑的，除非你决定改变记录文件的名称。可以查看下面的实例：
 
-
 ## `recordsInputPath` {#recordsinputpath}
 
 `string`
 
 指定读取最后一条记录的文件的名称。这可以用来重命名一个记录文件，可以查看下面的实例：
-
 
 ## `recordsOutputPath` {#recordsoutputpath}
 
@@ -420,7 +410,7 @@ W> 设置 `recordsPath` 本质上会把 `recordsInputPath` 和 `recordsOutputPat
 
 指定记录要写入的位置。以下示例描述了如何用这个选项和 `recordsInptuPaht` 来重命名一个记录文件：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const path = require('path');
@@ -428,10 +418,9 @@ const path = require('path');
 module.exports = {
   //...
   recordsInputPath: path.join(__dirname, 'records.json'),
-  recordsOutputPath: path.join(__dirname, 'newRecords.json')
+  recordsOutputPath: path.join(__dirname, 'newRecords.json'),
 };
 ```
-
 
 ## `name` {#name}
 
@@ -439,12 +428,12 @@ module.exports = {
 
 配置的名称。当加载不同的配置时会被使用。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
-  name: 'admin-app'
+  name: 'admin-app',
 };
 ```
 
@@ -469,14 +458,14 @@ module.exports = {
 - `'log'` - 显示错误、告警，信息，日志信息，组别，清楚。 收缩的组别会在收缩的状态中被显示。
 - `'verbose'` - 输出所有日志除了调试与追踪。收缩的组别会在扩展的状态中被显示。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   infrastructureLogging: {
-    level: 'info'
-  }
+    level: 'info',
+  },
 };
 ```
 
@@ -486,29 +475,25 @@ module.exports = {
 
 开启特定日志比如插件(plugins)和加载器(loaders)的调试信息。 与 [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) 选项类似但仅仅对于基础设施而言。没有默认配置提供。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   infrastructureLogging: {
     level: 'info',
-    debug: [
-      'MyPlugin',
-      /MyPlugin/,
-      (name) => name.contains('MyPlugin')
-    ]
-  }
+    debug: ['MyPlugin', /MyPlugin/, (name) => name.contains('MyPlugin')],
+  },
 };
 ```
 
-## `snapshot`
+## `snapshot` {#snapshot}
 
 `object`
 
 `snapshot` options decide how the file system snapshots are created and invalidated.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const path = require('path');
@@ -519,35 +504,35 @@ module.exports = {
     immutablePaths: [],
     buildDependencies: {
       hash: true,
-      timestamp: true
+      timestamp: true,
     },
     module: {
-      timestamp: true
+      timestamp: true,
     },
     resolve: {
-      timestamp: true
+      timestamp: true,
     },
     resolveBuildDependencies: {
       hash: true,
-      timestamp: true
-    }
-  }
+      timestamp: true,
+    },
+  },
 };
 ```
 
-### `managedPaths`
+### `managedPaths` {#managed-paths}
 
 `[string]`
 
 An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
 
-### `immutablePaths`
+### `immutablePaths` {#immutable-paths}
 
 `[string]`
 
 An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
 
-### `buildDependencies`
+### `buildDependencies` {#build-dependencies}
 
 `object = { hash boolean = true, timestamp boolean = true }`
 
@@ -562,7 +547,7 @@ Both `hash` and `timestamp` are optional.
 - `{ timestamp: true }`: Good for local development caching.
 - `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps are the same, which leads to a small performance hit for the initial build.
 
-### `module`
+### `module` {#module}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
@@ -571,7 +556,7 @@ Snapshots for building modules.
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
 
-### `resolve`
+### `resolve` {#resolve}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
@@ -580,7 +565,7 @@ Snapshots for resolving of requests.
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
 
-### `resolveBuildDependencies`
+### `resolveBuildDependencies` {#resolve-build-dependencies}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 

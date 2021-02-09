@@ -17,7 +17,7 @@ related:
 
 如果已经通过 [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) 启用了 [Hot Module Replacement](/concepts/hot-module-replacement), 则它的接口将被暴露在 [`module.hot` 属性](/api/module-variables/#modulehot-webpack-specific) 下面。通常，用户先要检查这个接口是否可访问, 再使用它。你可以这样使用 `accept` 操作一个更新的模块：
 
-``` js
+```js
 if (module.hot) {
   module.hot.accept('./library.js', function() {
     // 对更新过的 library 模块做些事情...
@@ -33,7 +33,7 @@ if (module.hot) {
 
 接受(accept)给定 `依赖模块(dependencies)` 的更新，并触发一个 `回调函数` 来响应更新。
 
-``` js
+```js
 module.hot.accept(
   dependencies, // 可以是一个字符串或字符串数组
   callback // 用于在模块更新后触发的函数
@@ -48,7 +48,7 @@ module.hot.accept(
 
 接受自身更新。
 
-``` js
+```js
 module.hot.accept(
   errorHandler // 在计算新版本时处理错误的函数
 );
@@ -62,7 +62,7 @@ module.hot.accept(
 
 拒绝给定`依赖模块`的更新，使用 `'decline'` 方法强制更新失败。
 
-``` js
+```js
 module.hot.decline(
   dependencies // 可以是一个字符串或字符串数组
 );
@@ -74,7 +74,7 @@ module.hot.decline(
 
 拒绝自身更新。
 
-``` js
+```js
 module.hot.decline();
 ```
 
@@ -90,7 +90,6 @@ module.hot.dispose(data => {
 });
 ```
 
-
 ### `invalidate` {#invalidate}
 
 调用此方法将使当前模块无效，而当前模块将在应用 HMR 更新时进行部署并重新创建。这个模块的更新像冒泡一样，拒绝自身更新。
@@ -105,7 +104,7 @@ module.hot.dispose(data => {
 
 ### 用例 {#use-cases}
 
-__Conditional Accepting__
+**Conditional Accepting**
 
 一个模块可以接受一个依赖，但是当依赖的改变无法处理时，可以调用 `invalidate`：
 
@@ -119,7 +118,7 @@ processX(x);
 export default processY(y);
 
 module.hot.accept('./dep', () => {
-  if(y !== oldY) {
+  if (y !== oldY) {
     // 无法处理，冒泡给父级
     module.hot.invalidate();
     return;
@@ -129,7 +128,7 @@ module.hot.accept('./dep', () => {
 });
 ```
 
-__Conditional self accept__
+**Conditional self accept**
 
 模块可以自我接受，但是当更改无法处理时可以使自身失效：
 
@@ -138,23 +137,27 @@ const VALUE = 'constant';
 
 export default VALUE;
 
-if(module.hot.data && module.hot.data.value && module.hot.data.value !== VALUE) {
+if (
+  module.hot.data &&
+  module.hot.data.value &&
+  module.hot.data.value !== VALUE
+) {
   module.hot.invalidate();
 } else {
-  module.hot.dispose(data => {
+  module.hot.dispose((data) => {
     data.value = VALUE;
   });
   module.hot.accept();
 }
 ```
 
-__Triggering custom HMR updates__
+**Triggering custom HMR updates**
 
 ```javascript
 const moduleId = chooseAModule();
 const code = __webpack_modules__[moduleId].toString();
 __webpack_modules__[moduleId] = eval(`(${makeChanges(code)})`);
-if(require.cache[moduleId]) {
+if (require.cache[moduleId]) {
   require.cache[moduleId].hot.invalidate();
   module.hot.apply();
 }
@@ -168,7 +171,7 @@ W> 通过一次次的调用 `invalidate`，不要陷入 `invalidate` 循环。�
 
 删除由 `dispose` 或 `addDisposeHandler` 添加的回调函数。
 
-``` js
+```js
 module.hot.removeDisposeHandler(callback);
 ```
 
@@ -198,27 +201,32 @@ module.hot.status(); // 返回以下字符串之一...
 
 测试所有加载的模块以进行更新，如果有更新，则 `apply` 它们。
 
-``` js
-module.hot.check(autoApply).then(outdatedModules => {
-  // 超时的模块...
-}).catch(error => {
-  // 捕获错误
-});
+```js
+module.hot
+  .check(autoApply)
+  .then((outdatedModules) => {
+    // 超时的模块...
+  })
+  .catch((error) => {
+    // 捕获错误
+  });
 ```
 
 当被调用时，传递给 `apply` 方法的 `autoApply` 参数可以是布尔值，也可以是 `options`，
-
 
 ### `apply` {#apply}
 
 继续更新进程（当 `module.hot.status() === 'ready'` 时）。
 
-``` js
-module.hot.apply(options).then(outdatedModules => {
-  // 超时的模块...
-}).catch(error => {
-  // 捕获错误
-});
+```js
+module.hot
+  .apply(options)
+  .then((outdatedModules) => {
+    // 超时的模块...
+  })
+  .catch((error) => {
+    // 捕获错误
+  });
 ```
 
 可选的 `options` 对象可以包含以下属性：
@@ -256,22 +264,20 @@ module.hot.apply(options).then(outdatedModules => {
 }
 ```
 
-
 ### `addStatusHandler` {#addstatushandler}
 
 注册一个函数来监听 `status` 的变化。
 
 ``` js
-module.hot.addStatusHandler(status => {
+module.hot.addStatusHandler((status) => {
   // 响应当前状态...
 });
 ```
-
 
 ### `removeStatusHandler` {#removestatushandler}
 
 移除一个注册的状态处理函数。
 
-``` js
+```js
 module.hot.removeStatusHandler(callback);
 ```

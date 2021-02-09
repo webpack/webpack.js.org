@@ -6,6 +6,7 @@ contributors:
   - EugeneHlushko
   - chenxsan
   - anshumanv
+  - spence-s
 related:
   - title: webpack 5 - 资源模块
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
@@ -28,9 +29,9 @@ related:
 
 当在 webpack 5 中使用旧的 assets loader（如 `file-loader`/`url-loader`/`raw-loader` 等）和 asset 模块时，你可能想停止当前 asset 模块的处理，并再次启动处理，这可能会导致 asset 重复，你可以通过将 asset 模块的类型设置为 `'javascript/auto'` 来解决。
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
 module.exports = {
   module: {
    rules: [
@@ -53,15 +54,15 @@ module.exports = {
 
 如需从 asset loader 中排除来自新 URL 处理的 asset，请添加 `dependency: { not: ['url'] }` 到 loader 配置中。
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
 module.exports = {
   module: {
     rules: [
       {
         test: /\.(png|jpg|gif)$/i,
-+       dependency: { not: ['url'] }, 
++       dependency: { not: ['url'] },
         use: [
           {
             loader: 'url-loader',
@@ -78,9 +79,9 @@ module.exports = {
 
 ## Resource 资源 {#resource-assets}
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
 const path = require('path');
 
 module.exports = {
@@ -100,7 +101,7 @@ module.exports = {
 };
 ```
 
-__src/index.js__
+**src/index.js**
 
 ```js
 import mainImage from './images/main.png';
@@ -116,7 +117,7 @@ img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 
 可以通过在 webpack 配置中设置 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 来修改此模板字符串：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```diff
 const path = require('path');
@@ -176,9 +177,9 @@ module.exports = {
 
 ## inline 资源(inlining asset) {#inlining-assets}
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
 const path = require('path');
 
 module.exports = {
@@ -209,7 +210,7 @@ module.exports = {
 };
 ```
 
-__src/index.js__
+**src/index.js**
 
 ```diff
 - import mainImage from './images/main.png';
@@ -227,7 +228,7 @@ webpack 输出的 data URI，默认是呈现为使用 Base64 算法编码的文�
 
 如果要使用自定义编码算法，则可以指定一个自定义函数来编码文件内容：
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```diff
 const path = require('path');
@@ -260,7 +261,7 @@ module.exports = {
 
 ## source 资源(source asset) {#source-assets}
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```diff
 const path = require('path');
@@ -291,13 +292,13 @@ module.exports = {
 };
 ```
 
-__src/example.txt__
+**src/example.txt**
 
 ```text
 Hello world
 ```
 
-__src/index.js__
+**src/index.js**
 
 ```diff
 - import metroMap from './images/metro.svg';
@@ -313,7 +314,7 @@ __src/index.js__
 
 当使用 `new URL('./path/to/asset', import.meta.url)`，webpack 也会创建资源模块。
 
-__src/index.js__
+**src/index.js**
 
 ```js
 const logo = new URL('./logo.svg', import.meta.url);
@@ -323,20 +324,26 @@ const logo = new URL('./logo.svg', import.meta.url);
 
 ```js
 // target: web
-new URL(__webpack_public_path__ + 'logo.svg', document.baseURI || self.location.href);
+new URL(
+  __webpack_public_path__ + 'logo.svg',
+  document.baseURI || self.location.href
+);
 
 // target: webworker
 new URL(__webpack_public_path__ + 'logo.svg', self.location);
 
 // target: node, node-webkit, nwjs, electron-main, electron-renderer, electron-preload, async-node
-new URL(__webpack_public_path__ + 'logo.svg', require('url').pathToFileUrl(__filename));
+new URL(
+  __webpack_public_path__ + 'logo.svg',
+  require('url').pathToFileUrl(__filename)
+);
 ```
 
 ## 通用资源类型 {#general-asset-type}
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
 const path = require('path');
 
 module.exports = {
@@ -360,9 +367,9 @@ module.exports = {
 
 可以通过在 webpack 配置的 module rule 层级中，设置 [`Rule.parser.dataUrlCondition.maxSize`](/configuration/module/#ruleparserdataurlcondition) 选项来修改此条件：
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
 const path = require('path');
 
 module.exports = {
@@ -388,3 +395,48 @@ module.exports = {
 ```
 
 还可以 [指定一个函数](/configuration/module/#ruleparserdataurlcondition) 来决定是否 inline 模块。
+
+## 变更内联 loader 的语法 {#replacing-inline-loader-syntax}
+
+在 asset 模块和 webpack 5 之前，可以使用[内联语法](/concepts/loaders/#inline)与上述传统的 loader 结合使用。
+
+现在建议去掉所有的 loader 的语法，使用资源查询条件来魔法内联语法的功能。
+
+示例，将 `raw-loader` 替换为 `asset/source` 类型：
+
+```diff
+- import myModule from 'raw-loader!my-module';
++ import myModule from 'my-module?raw';
+```
+
+webpack 相关配置：
+
+```diff
+module: {
+    rules: [
+    // ...
++     {
++       resouceQuery: /raw/
++       type: 'asset/source'
++     }
+    ]
+  },
+```
+
+如果你想把原始资源排除在其他 loader 的解析范围以外，请使用取反的符合：
+
+```diff
+module: {
+    rules: [
+    // ...
++     {
++       test: /\.m?js$/,
++       resourceQuery: /^(?!raw$).*/,
++     },
+      {
+        resouceQuery: /raw/
+        type: 'asset/source'
+      }
+    ]
+  },
+```

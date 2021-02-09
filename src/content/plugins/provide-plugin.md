@@ -10,7 +10,7 @@ contributors:
 
 Automatically load modules instead of having to `import` or `require` them everywhere.
 
-``` js
+```js
 new webpack.ProvidePlugin({
   identifier: 'module1',
   // ...
@@ -19,7 +19,7 @@ new webpack.ProvidePlugin({
 
 or
 
-``` js
+```js
 new webpack.ProvidePlugin({
   identifier: ['module1', 'property1'],
   // ...
@@ -34,7 +34,7 @@ It is also possible to specify full path:
 const path = require('path');
 
 new webpack.ProvidePlugin({
-  identifier: path.resolve(path.join(__dirname, 'src/module1'))
+  identifier: path.resolve(path.join(__dirname, 'src/module1')),
   // ...
 });
 ```
@@ -50,7 +50,7 @@ To automatically load `jquery` we can simply point both variables it exposes to 
 ```javascript
 new webpack.ProvidePlugin({
   $: 'jquery',
-  jQuery: 'jquery'
+  jQuery: 'jquery',
 });
 ```
 
@@ -63,23 +63,21 @@ jQuery('#item'); // <= just works
 // $ is automatically set to the exports of module "jquery"
 ```
 
-
 ## Usage: jQuery with Angular 1 {#usage-jquery-with-angular-1}
 
 Angular looks for `window.jQuery` in order to determine whether jQuery is present, see the [source code](https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823).
 
 ```javascript
 new webpack.ProvidePlugin({
-  'window.jQuery': 'jquery'
+  'window.jQuery': 'jquery',
 });
 ```
-
 
 ## Usage: Lodash Map {#usage-lodash-map}
 
 ```javascript
 new webpack.ProvidePlugin({
-  _map: ['lodash', 'map']
+  _map: ['lodash', 'map'],
 });
 ```
 
@@ -87,6 +85,6 @@ new webpack.ProvidePlugin({
 
 ```javascript
 new webpack.ProvidePlugin({
-  Vue: ['vue/dist/vue.esm.js', 'default']
+  Vue: ['vue/dist/vue.esm.js', 'default'],
 });
 ```

@@ -72,7 +72,7 @@ packageName 选项允许通过设置包名来查找所需的版本。默认情�
 
 这个插件使得特定模块“可重载”。一个本地 API ( `__webpack_override__` ) 允许提供重载。
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const OverridablesPlugin = require('webpack/lib/container/OverridablesPlugin');
@@ -88,7 +88,7 @@ module.exports = {
 };
 ```
 
-__src/index.js__
+**src/index.js**
 
 ```javascript
 __webpack_override__({
@@ -114,20 +114,20 @@ __webpack_override__({
 - 它既可以暴露，又可以使用 webpack 支持的任何模块类型
 - 代码块加载应该并行加载所需的所有内容(web:到服务器的单次往返)
 - 从使用者到容器的控制
-   - 重写模块是一种单向操作
-   - 同级容器不能重写彼此的模块。
+  - 重写模块是一种单向操作
+  - 同级容器不能重写彼此的模块。
 - 概念适用于独立于环境
-   - 可用于 web、Node.js 等
+  - 可用于 web、Node.js 等
 - 共享中的相对和绝对请求
-   - 会一直提供，即使不使用
-   - 会将相对路径解析到 `config.context` 
-   - 默认不会使用 `requiredVersion` 
+  - 会一直提供，即使不使用
+  - 会将相对路径解析到 `config.context` 
+  - 默认不会使用 `requiredVersion` 
 - 共享中的模块请求
-   - 只在使用时提供
-   - 会匹配构建中所有使用的相等模块请求
-   - 将提供所有匹配模块
-   - 将从图中这个位置的 package.json 提取 `requiredVersion` 
-   - 当你有嵌套的 node_modules 时，可以提供和使用多个不同的版本
+  - 只在使用时提供
+  - 会匹配构建中所有使用的相等模块请求
+  - 将提供所有匹配模块
+  - 将从图中这个位置的 package.json 提取 `requiredVersion` 
+  - 当你有嵌套的 node_modules 时，可以提供和使用多个不同的版本
 - 共享中尾部带有 `/` 的模块请求将匹配所有具有这个前缀的模块请求
 
 ## 用例 {#use-cases}
@@ -146,7 +146,7 @@ __webpack_override__({
 `init` 是一个兼容 `async` 的方法，调用时，只含有一个参数：共享作用域对象(shared scope object)。此对象在远程容器中用作共享作用域，并由 host 提供的模块填充。
 可以利用它在运行时动态地将远程容器连接到 host 容器。
 
-__init.js__
+**init.js**
 
 ```javascript
 (async () => {
@@ -167,7 +167,7 @@ T> 在尝试动态连接远程容器之前，确保已加载容器。
 
 例子：
 
-__init.js__
+**init.js**
 
 ```javascript
 function loadComponent(scope, module) {
@@ -190,7 +190,7 @@ loadComponent('abtests', 'test123');
 
 ## 故障排除 {#troubleshooting}
 
-__`Uncaught Error: Shared module is not available for eager consumption`__
+**`Uncaught Error: Shared module is not available for eager consumption`**
 
 应用程序正急切地执行一个作为全局主机运行的应用程序。有如下选项可供选择:
 
@@ -200,7 +200,7 @@ __`Uncaught Error: Shared module is not available for eager consumption`__
 
 例如，你的入口看起来是这样的：
 
-__index.js__
+**index.js**
 
 ```javascript
 import React from 'react';
@@ -211,7 +211,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 让我们创建 bootstrap.js 文件，并将入口文件的内容放到里面，然后将 bootstrap 引入到入口文件中:
 
-__index.js__
+**index.js**
 
 ```diff
 + import('./bootstrap');
@@ -221,7 +221,7 @@ __index.js__
 - ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-__bootstrap.js__
+**bootstrap.js**
 
 ```diff
 + import React from 'react';
@@ -234,7 +234,7 @@ __bootstrap.js__
 
 通过 `ModuleFederationPlugin` 将依赖的 `eager` 属性设置为 `true` 
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 // ...
@@ -243,12 +243,12 @@ new ModuleFederationPlugin({
     ...deps,
     react: {
       eager: true,
-    }
-  }
+    },
+  },
 });
 ```
 
-__`Uncaught Error: Module "./Button" does not exist in container.`__
+**`Uncaught Error: Module "./Button" does not exist in container.`**
 
 错误提示中可能不会显示 `"./Button"`，但是信息看起来差不多。这个问题通常会出现在将 webpack beta.16 升级到 webpack beta.17 中。
 
@@ -263,7 +263,7 @@ new ModuleFederationPlugin({
 });
 ```
 
-__`Uncaught TypeError: fn is not a function`__
+**`Uncaught TypeError: fn is not a function`**
 
 此处错误可能是丢失了远程容器，请确保在使用前添加它。
 如果已为试图使用远程服务器的容器加载了容器，但仍然看到此错误，则需将主机容器的远程容器文件也添加到 HTML 中。

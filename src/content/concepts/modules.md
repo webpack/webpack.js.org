@@ -8,8 +8,8 @@ contributors:
   - EugeneHlushko
   - byzyk
 related:
-   - title: JavaScript Module Systems Showdown
-     url: https://auth0.com/blog/javascript-module-systems-showdown/
+  - title: JavaScript Module Systems Showdown
+    url: https://auth0.com/blog/javascript-module-systems-showdown/
 ---
 
 在[模块化编程](https://en.wikipedia.org/wiki/Modular_programming)中，开发者将程序分解为功能离散的 chunk，并称之为 __模块__。
@@ -53,6 +53,6 @@ webpack 社区已经为各种流行的语言和预处理器创建了 _loader_，
 - [Stylus](http://stylus-lang.com)
 - [Elm](https://elm-lang.org/)
 
-当然还有更多！总得来说，webpack 提供了可定制，强大且丰富的 API，允许在 __任何技术栈__ 中使用，同时支持在开发、测试和生产环境的工作流中做到 __无侵入性__。
+当然还有更多！总得来说，webpack 提供了可定制，强大且丰富的 API，允许在 **任何技术栈** 中使用，同时支持在开发、测试和生产环境的工作流中做到 **无侵入性**。
 
-关于 loader 的相关信息，请参考 [__loader 列表__](/loaders) 或 [__自定义 loader__](/api/loaders)。
+关于 loader 的相关信息，请参考 [**loader 列表**](/loaders) 或 [**自定义 loader**](/api/loaders)。

@@ -8,9 +8,7 @@
   "issues": "https://github.com/errata-ai/proselint/issues/new",
   "license": "BSD-3-Clause",
   "name": "proselint",
-  "sources": [
-    "https://github.com/amperser/proselint"
-  ],
+  "sources": ["https://github.com/amperser/proselint"],
   "vale_version": ">=1.0.0",
   "coverage": 0.0,
   "version": "0.1.0"

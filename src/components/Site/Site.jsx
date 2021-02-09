@@ -29,7 +29,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import Vote from '../Vote/Vote';
 import Organization from '../Organization/Organization';
 import Badge from '../Badge/Badge.js';
-import {default as LinkComponent} from '../mdxComponents/Link';
+import { default as LinkComponent } from '../mdxComponents/Link';
 
 // Import Constants
 import { THEME, THEME_LOCAL_STORAGE_KEY } from '../../constants/theme';
@@ -178,11 +178,14 @@ function Site(props) {
           (item) => item.type !== 'directory' && item.url !== '/'
         )
   );
+
+  // not to show in sub navbar
+  const excludeItems = ['contribute', 'blog'];
   return (
     <MDXProvider
       components={{
         Badge: Badge,
-        a: LinkComponent
+        a: LinkComponent,
       }}
     >
       <div className="site">
@@ -203,7 +206,9 @@ function Site(props) {
                     url
                   ),
                 children: _strip(
-                  sections.filter((item) => item.name !== 'contribute')
+                  sections.filter(
+                    ({ name }) => excludeItems.includes(name) === false
+                  )
                 ),
               },
               { content: '参与贡献', url: '/contribute/' },

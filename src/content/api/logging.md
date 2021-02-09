@@ -25,11 +25,11 @@ Webpack Logger 可以用在 [loader](/loaders/) 和 [plugin](/api/plugins/#loggi
 
 通过引入 Webpack Logger API，我们希望统一 Webpack plugins 和 loaders 生成日志的方式，并提供更好的方法来检查构建问题。 集成的 Logging 解决方案可以帮助 plugins 和 loader 的开发人员提升他们的开发经验。同时为非 CLI 形式的 Webpack 解决方案构建铺平了道路，例如 dashboard 或其他 UI。
 
-W> __避免在日志中输出无效信息！__请记住，多个 plugin 和 loader 经常一起使用。loader 通常处理多个文件，并且每个文件都会调用，所以尽可能选择较低的日志级别以保证 log 的信息量。
+W> **避免在日志中输出无效信息！** 请记住，多个 plugin 和 loader 经常一起使用。loader 通常处理多个文件，并且每个文件都会调用，所以尽可能选择较低的日志级别以保证 log 的信息量。
 
 ## Examples of how to get and use webpack logger in loaders and plugins {#examples-of-how-to-get-and-use-webpack-logger-in-loaders-and-plugins}
 
-__my-webpack-plugin.js__
+**my-webpack-plugin.js**
 
 ```js
 const PLUGIN_NAME = 'my-webpack-plugin';
@@ -39,7 +39,7 @@ export class MyWebpackPlugin {
     const logger = compiler.getInfrastructureLogger(PLUGIN_NAME);
     logger.log('log from compiler');
 
-    compiler.hooks.compilation.tap(PLUGIN_NAME, compilation => {
+    compiler.hooks.compilation.tap(PLUGIN_NAME, (compilation) => {
       // you can also access Logger from compilation
       const logger = compilation.getLogger(PLUGIN_NAME);
       logger.info('log from compilation');
@@ -48,7 +48,7 @@ export class MyWebpackPlugin {
 }
 ```
 
-__my-webpack-loader.js__
+**my-webpack-loader.js**
 
 ```js
 module.exports = function (source) {
@@ -63,8 +63,8 @@ module.exports = function (source) {
 
 - `logger.error(...)`：用于输出错误信息
 - `logger.warn(...)`：用于输出警告信息
-- `logger.info(...)`：用于输出__重要__信息。默认情况下会显示这些信息，所以仅用于输出用户真正需要查看的消息
-- `logger.log(...)`：用于输出__不重要__的信息。只有当用户选择查看时，才会显示
+- `logger.info(...)`：用于输出**重要**信息。默认情况下会显示这些信息，所以仅用于输出用户真正需要查看的消息
+- `logger.log(...)`：用于输出**不重要**的信息。只有当用户选择查看时，才会显示
 - `logger.debug(...)`：用于输出调试信息。只有当用户选择查看特定模块的调试日志时，才会显示
 - `logger.trace()`：显示堆栈跟踪信息，展示形式类似于 `logger.debug`
 - `logger.group(...)`：将消息进行分组，展示形式类似于 `logger.log`
@@ -86,7 +86,7 @@ Runtime logger API 仅应该用作开发工具，不应该包含在 [生产模�
 const logging = require('webpack/lib/logging/runtime');
 logging.configureDefaultLogger({
   level: 'log',
-  debug: /something/
+  debug: /something/,
 });
 ```
 

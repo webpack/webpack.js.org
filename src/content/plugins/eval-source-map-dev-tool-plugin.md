@@ -17,10 +17,9 @@ related:
 
 本插件可以为 source map 的生成提供更好更细粒度的控制。[`devtool`](/configuration/devtool/) 中的某些配置会自动使用它。
 
-``` js
+```js
 new webpack.EvalSourceMapDevToolPlugin(options);
 ```
-
 
 ## 选项 {#options}
 
@@ -51,9 +50,7 @@ T> 如果要在 [开发模式](/configuration/mode/#mode-development) 下对此�
 module.exports = {
   // ...
   devtool: false,
-  plugins: [
-    new webpack.EvalSourceMapDevToolPlugin({})
-  ]
+  plugins: [new webpack.EvalSourceMapDevToolPlugin({})],
 };
 ```
 
@@ -61,8 +58,8 @@ module.exports = {
 
 下面的代码将排除 `vendor.js` 包中任何模块 source map 的生成：
 
-``` js
+```js
 new webpack.EvalSourceMapDevToolPlugin({
-  exclude: ['vendor.js']
+  exclude: ['vendor.js'],
 });
 ```

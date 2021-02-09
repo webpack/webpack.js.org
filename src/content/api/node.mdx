@@ -18,33 +18,31 @@ webpack 提供了 Node.js API，可以在 Node.js 运行时下直接使用。
 
 当你需要自定义构建或开发流程时，Node.js API 非常有用，因为此时所有的报告和错误处理都必须自行实现，webpack 仅仅负责编译的部分。所以 [`stats`](/configuration/stats) 配置选项不会在 `webpack()` 调用中生效。
 
-
 ## 安装(Installation) {#installation}
 
 开始使用 webpack 的 Node.js API 之前，首先你需要安装 webpack：
 
-``` bash
+```bash
 npm install --save-dev webpack
 ```
 
 在 Node.js 文件中，引入 webpack 模块:
 
-``` js
+```js
 const webpack = require('webpack');
 ```
 
 或者如果你更喜欢 ES2015:
 
-``` js
+```js
 import webpack from 'webpack';
 ```
-
 
 ## `webpack()` {#webpack}
 
 导入的 `webpack` 函数会将 [配置对象](/configuration/) 传给 webpack，如果同时传入回调函数会在 webpack compiler 运行时被执行:
 
-``` js-with-links
+```js-with-links
 const webpack = require('webpack');
 
 webpack({
@@ -57,10 +55,9 @@ webpack({
 });
 ```
 
-T> `err`对象 __不包含__ 编译错误，必须使用 `stats.hasErrors()` 单独处理，文档的 [错误处理](#error-handling) 将对这部分将对此进行详细介绍。`err` 对象只包含 webpack 相关的问题，例如配置错误等。
+T> `err`对象 **不包含** 编译错误，必须使用 `stats.hasErrors()` 单独处理，文档的 [错误处理](#error-handling) 将对这部分将对此进行详细介绍。`err` 对象只包含 webpack 相关的问题，例如配置错误等。
 
 T> 你也可以为 `webpack` 函数提供一个配置数组。更多详细信息，请查看 [MultiCompiler](#multicompiler) 章节。
-
 
 ## Compiler 实例（Compiler Instance） {#compiler-instance}
 
@@ -94,13 +91,12 @@ W> 这个 API 一次仅支持一个编译。当使用 `run` 时，
 当使用 `watch` 时，调用 `close`，并等待它完成后，
 然后才能再次调用 `run` 或 `watch`。并发编译将破坏输出文件。
 
-
 ## 执行（Run） {#run}
 
 调用 `Compiler` 实例的 `run` 方法跟上文提到的
 快速执行方法很类似：
 
-``` js-with-links
+```js-with-links
 const webpack = require('webpack');
 
 const compiler = webpack({
@@ -112,18 +108,17 @@ compiler.run((err, stats) => { // [Stats Object](#stats-object)
 });
 ```
 
-
 ## 监听(Watching) {#watching}
 
 调用 `watch` 方法会触发 webpack 执行，但之后会监听变更（很像 CLI 命令: `webpack --watch`），
 一旦 webpack 检测到文件变更，就会重新执行编译。
 该方法返回一个 `Watching` 实例。
 
-``` js
+```js
 watch(watchOptions, callback);
 ```
 
-``` js-with-links
+```js-with-links
 const webpack = require('webpack');
 
 const compiler = webpack({
@@ -148,13 +143,12 @@ W> 文件系统不正确的问题，可能会对单次修改触发多次构建�
 用户应该预知此行为，
 并且可能需要检查 `stats.hash` 来查看文件哈希是否确实变更。
 
-
 ### 关闭 `Watching` (Close `Watching`) {#close-watching}
 
 `watch` 方法返回一个 `Watching` 实例，该实例会暴露一个 `.close(callback)` 方法。
 调用该方法将会结束监听:
 
-``` js
+```js
 watching.close(() => {
   console.log('Watching Ended.');
 });
@@ -163,16 +157,14 @@ watching.close(() => {
 W> 不允许在监听器关闭或者失效前
 再次监听或执行。
 
-
 ### Invalidate `Watching` {#invalidate-watching}
 
 使用 `watching.invalidate`，你可以手动使当前编译循环（compiling round）无效，
 而不会停止监听进程（process）：
 
-``` js
+```js
 watching.invalidate();
 ```
-
 
 ## Stats 对象(Stats Object) {#stats-object}
 
@@ -193,18 +185,15 @@ T> 当使用 [`MultiCompiler`](#multicompiler) 时，
 
 `stats` 对象暴露了以下方法:
 
-
 ### `stats.hasErrors()` {#statshaserrors}
 
 可以用来检查编译期是否有错误，
 返回值为 `true` 或 `false`。
 
-
 ### `stats.hasWarnings()` {#statshaswarnings}
 
 可以用来检查编译期是否有警告，
 返回值为 `true` 或 `false`。
-
 
 ### `stats.toJson(options)` {#statstojsonoptions}
 
@@ -212,13 +201,13 @@ T> 当使用 [`MultiCompiler`](#multicompiler) 时，
 `options` 可以是一个字符串（预设值）或是颗粒化控制的对象:
 
 ``` js-with-links
-stats.toJson('minimal'); // [更多选项如: "verbose" 等](/configuration/stats).
+stats.toJson('minimal'); // [更多选项如: 'verbose' 等](/configuration/stats).
 ```
 
-``` js
+```js
 stats.toJson({
   assets: false,
-  hash: true
+  hash: true,
 });
 ```
 
@@ -226,8 +215,7 @@ stats.toJson({
 
 > 这里有
 该函数输出的
-[示例](https://raw.githubusercontent.com/webpack/analyse/master/app/pages/upload/example2.json)。
-
+> [示例](https://raw.githubusercontent.com/webpack/analyse/master/app/pages/upload/example2.json)。
 
 ### `stats.toString(options)` {#statstostringoptions}
 
@@ -236,16 +224,16 @@ stats.toJson({
 
 配置对象与 [`stats.toJson(options)`](/api/node/#statstojsonoptions) 一致，除了额外增加的一个选项:
 
-``` js
+```js
 stats.toString({
   // 增加控制台颜色开关
-  colors: true
+  colors: true,
 });
 ```
 
 下面是 `stats.toString()` 用法的示例:
 
-``` js-with-links
+```js-with-links
 const webpack = require('webpack');
 
 webpack({
@@ -263,7 +251,6 @@ webpack({
 });
 ```
 
-
 ## MultiCompiler {#multicompiler}
 
 `MultiCompiler` 模块可以让 webpack 同时执行多个配置。
@@ -271,7 +258,7 @@ webpack({
 该参数由是由多个配置对象构成的数组，webpack 会相应地创建多个 compiler 实例，
 并且在每次 compiler 执行结束时，都会调用 `callback` 方法。
 
-``` js-with-links
+```js-with-links
 var webpack = require('webpack');
 
 webpack([
@@ -282,11 +269,10 @@ webpack([
 })
 ```
 
-W> 多个配置对象在执行时，__不会并行执行__。
+W> 多个配置对象在执行时，**不会并行执行**。
 每个配置都只会在前一个处理结束后，才进行处理。
 想要并行处理，你可以使用第三方解决方案，
 例如 [parallel-webpack](https://www.npmjs.com/package/parallel-webpack)。
-
 
 ## 错误处理(Error Handling) {#error-handling}
 
@@ -298,7 +284,7 @@ W> 多个配置对象在执行时，__不会并行执行__。
 
 下面是一个覆盖这些场景的示例:
 
-``` js-with-links
+```js-with-links
 const webpack = require('webpack');
 
 webpack({
@@ -326,7 +312,6 @@ webpack({
 });
 ```
 
-
 ## 自定义文件系统(Custom File Systems) {#custom-file-systems}
 
 默认情况下，webpack 使用普通文件系统来读取文件并将文件写入磁盘。
@@ -337,12 +322,14 @@ webpack({
 以将文件写入到内存中，
 而不是写入到磁盘:
 
-``` js
+```js
 const { createFsFromVolume, Volume } = require('memfs');
 const webpack = require('webpack');
 
 const fs = createFsFromVolume(new Volume());
-const compiler = webpack({ /* options */ });
+const compiler = webpack({
+  /* options */
+});
 
 compiler.outputFileSystem = fs;
 compiler.run((err, stats) => {
