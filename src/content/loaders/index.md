@@ -25,7 +25,6 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 
 ## JSON
 
-- [`json5-loader`](/loaders/json5-loader) Loads and transpiles a [JSON 5](https://json5.org/) file
 - [`cson-loader`](https://github.com/awnist/cson-loader) Loads and transpiles a [CSON](https://github.com/bevry/cson#what-is-cson) file
 
 ## Transpiling
