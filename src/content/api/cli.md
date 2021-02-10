@@ -258,7 +258,7 @@ webpack 5.11.1
 webpack-cli 4.3.1
 ```
 
-It will output the version of `webpack-dev-server` as well if you have it installed:
+若已安装 `webpack-dev-server`，其版本信息会一并输出：
 
 ```bash
 webpack 5.11.1
