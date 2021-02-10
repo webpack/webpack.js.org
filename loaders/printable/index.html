@@ -1989,7 +1989,7 @@ https://cache-dev.myserver.net/web/static/assets/image.somehash.png</code></pre>
                 type<span class="token operator">:</span> <span class="token string">'src'</span><span class="token punctuation">,</span>
                 <span class="token function-variable function">filter</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">tag<span class="token punctuation">,</span> attribute<span class="token punctuation">,</span> attributes<span class="token punctuation">,</span> resourcePath</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
                   <span class="token keyword">if</span> <span class="token punctuation">(</span>
-                    attributes<span class="token punctuation">.</span>property <span class="token operator">===</span> <span class="token string">'og:image'</span> <span class="token operator">||</span>
+                    attributes<span class="token punctuation">.</span>value <span class="token operator">===</span> <span class="token string">'og:image'</span> <span class="token operator">||</span>
                     attributes<span class="token punctuation">.</span>name <span class="token operator">===</span> <span class="token string">'twitter:image'</span>
                   <span class="token punctuation">)</span> <span class="token punctuation">{</span>
                     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
