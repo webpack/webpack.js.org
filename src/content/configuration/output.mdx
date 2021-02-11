@@ -1406,7 +1406,7 @@ module.exports = {
   output: {
     clean: {
       keep(asset) {
-        return asset.includes("ignored/dir");
+        return asset.includes('ignored/dir');
       }
     },
   },
@@ -1417,7 +1417,7 @@ You can also use it with hook:
 
 ```javascript
 webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
-  "Test",
+  'Test',
   asset => {
     if(/\/ignored\/dir\//.test(asset)) return true;
   }
