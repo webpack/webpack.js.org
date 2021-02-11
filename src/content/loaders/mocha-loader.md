@@ -26,7 +26,7 @@ repo: https://github.com/webpack-contrib/mocha-loader
 npm install --save-dev mocha-loader mocha
 ```
 
-然后将该 loader 添加到 `webpack` 的配置中去，例如:
+然后将该 loader 添加到 `webpack` 的配置中去，例如：
 
 **file.js**
 
