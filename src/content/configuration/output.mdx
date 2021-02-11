@@ -1394,8 +1394,32 @@ module.exports = {
   //...
   output: {
     clean: {
-      dry: true, // Log the assets that should be removed instead of deleting them.
+      keep: /\/ignored\/dir\//, // Keep these assets.
     },
   },
 };
+
+// or
+
+module.exports = {
+  //...
+  output: {
+    clean: {
+      keep(asset) {
+        return asset.includes("ignored/dir");
+      }
+    },
+  },
+};
+```
+
+You can also use it with hook:
+
+```javascript
+webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
+  "Test",
+  asset => {
+    if(/\/ignored\/dir\//.test(asset)) return true;
+  }
+);
 ```
