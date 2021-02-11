@@ -16,7 +16,7 @@ repo: https://github.com/webpack-contrib/mocha-loader
 
 
 
-允许[Mocha](https://mochajs.org/) 通过 webpack 加载并运行
+允许 [Mocha](https://mochajs.org/) 通过 webpack 加载并运行
 
 ## 快速开始 {#getting-started}
 
