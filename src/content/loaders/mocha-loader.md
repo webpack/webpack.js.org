@@ -20,7 +20,7 @@ repo: https://github.com/webpack-contrib/mocha-loader
 
 ## 快速开始 {#getting-started}
 
-首先，你需要先安装 `mocha-loader` and `mocha`:
+首先，你需要先安装 `mocha-loader` 与 `mocha`：
 
 ```console
 npm install --save-dev mocha-loader mocha
