@@ -1364,3 +1364,38 @@ module.exports = {
   },
 };
 ```
+
+## `output.clean`
+
+`boolean` `{ dry?: boolean, keep?: RegExp | string | ((filename: string) => boolean) }`
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    clean: true, // Clean the output directory before emit.
+  },
+};
+```
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    clean: {
+      dry: true, // Log the assets that should be removed instead of deleting them.
+    },
+  },
+};
+```
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    clean: {
+      dry: true, // Log the assets that should be removed instead of deleting them.
+    },
+  },
+};
+```
