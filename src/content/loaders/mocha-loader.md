@@ -65,7 +65,7 @@ import test from 'mocha-loader!./test.js';
 
 无 loader 选项。
 
-## 例子 {#examples}
+## 示例 {#examples}
 
 ### 基础 {#basic}
 
