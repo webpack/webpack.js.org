@@ -156,7 +156,7 @@
     "react-router-dom": "^5.2.0",
     "react-spring": "next",
     "react-tiny-popover": "5",
-    "react-use": "^17.1.0",
+    "react-use": "^17.1.1",
     "react-visibility-sensor": "^5.0.2",
     "unist-util-visit": "^2.0.3",
     "webpack-pwa-manifest": "^4.3.0",
