@@ -145,9 +145,9 @@ module.exports = {
               },
             ],
             urlFilter: (attribute, value, resourcePath) => {
-              // The `attribute` argument contains a name of the HTML attribute.
-              // The `value` argument contains a value of the HTML attribute.
-              // The `resourcePath` argument contains a path to the loaded HTML file.
+              // `attribute` 参数包含一个 HTML 属性的名称。
+              // `value` 参数包含一个 HTML 属性的值。
+              // `resourcePath` 参数包含一个已加载 HTML 文件的路径。
 
               if (/example\.pdf$/.test(value)) {
                 return false;
