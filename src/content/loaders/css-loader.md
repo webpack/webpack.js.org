@@ -124,13 +124,8 @@ module.exports = {
 类型: `Boolean|Function`
 默认值: `true`
 
-<<<<<<< HEAD
 启用/禁用 `url`/`image-set` 函数进行处理。
-控制 `url()` 函数的解析。 绝对 URL 和 根目录的相对 URL 都不会去解析。
-=======
-Enables/Disables `url`/`image-set` functions handling.
-Control `url()` resolving. Absolute paths and root-relative URLs now resolving(Version [4.0.0](https://github.com/webpack-contrib/css-loader/blob/master/CHANGELOG.md#400-2020-07-25) and above).
->>>>>>> f77eb9b2cf89cc3d0fa0b7bbd7366d9bd1e56ee8
+控制 `url()` 函数的解析。绝对路径和根目录的相对 URL 现在会被解析(版本 [4.0.0](https://github.com/webpack-contrib/css-loader/blob/master/CHANGELOG.md#400-2020-07-25)。
 
 示例解决方案:
 
@@ -592,13 +587,8 @@ module.exports = {
 
 可能的值：
 
-<<<<<<< HEAD
-- `true` - 为所有 `/\.module\.\w+$/i.test(filename)` 返回 true 的文件启用 css 模块
-- `false` - 禁用 css 模块
-=======
-- `true` - enables CSS modules or interoperable CSS format, sets the [`modules.compileType`](#compiletype) option to `module` value for all files which satisfy `/\.module(s)?\.\w+$/i.test(filename)` condition or sets the [`modules.compileType`](#compiletype) option to `icss` value for all files which satisfy `/\.icss\.\w+$/i.test(filename)` condition
-- `false` - disables CSS modules or interoperable CSS format based on filename
->>>>>>> f77eb9b2cf89cc3d0fa0b7bbd7366d9bd1e56ee8
+- `true` - 启用 CSS 模块或者可交互 CSS 格式，为所有满足 `/\.module(s)?\.\w+$/i.test(filename)` 条件的文件设置 [`modules.compileType`](#compiletype) 选项为 `module`，或者为所有满足 `/\.icss\.\w+$/i.test(filename)` 条件的文件设置 [`modules.compileType`](#compiletype) 选项为 `icss`
+- `false` - 禁用 css 模块或者预计文件名的可交互 CSS 格式
 
 **webpack.config.js**
 
