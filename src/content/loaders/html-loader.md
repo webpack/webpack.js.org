@@ -552,7 +552,7 @@ module.exports = {
 
 ## 示例 {#examples}
 
-### roots
+### roots {#roots}
 
 使用 [`resolve.roots`](/configuration/resolve/#resolveroots) 可以指定解析相对服务端的 URL（以 '/' 开头）请求的目录列表。
 
