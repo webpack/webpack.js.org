@@ -125,7 +125,7 @@ Type: `Boolean|Function`
 Default: `true`
 
 Enables/Disables `url`/`image-set` functions handling.
-Control `url()` resolving. Absolute URLs are not resolving.
+Control `url()` resolving. Absolute paths and root-relative URLs now resolving(Version [4.0.0](https://github.com/webpack-contrib/css-loader/blob/master/CHANGELOG.md#400-2020-07-25) and above).
 
 Examples resolutions:
 
@@ -587,8 +587,8 @@ Allows auto enable CSS modules based on filename.
 
 Possible values:
 
-- `true` - enable css modules for all files for which `/\.module\.\w+$/i.test(filename)` return true
-- `false` - disable css modules
+- `true` - enables CSS modules or interoperable CSS format, sets the [`modules.compileType`](#compiletype) option to `module` value for all files which satisfy `/\.module(s)?\.\w+$/i.test(filename)` condition or sets the [`modules.compileType`](#compiletype) option to `icss` value for all files which satisfy `/\.icss\.\w+$/i.test(filename)` condition
+- `false` - disables CSS modules or interoperable CSS format based on filename
 
 **webpack.config.js**
 

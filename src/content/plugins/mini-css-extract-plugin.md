@@ -117,7 +117,7 @@ See [examples](#remove-order-warnings) below for details.
 Type: `String|Function`
 Default: `document.head.appendChild(linkTag);`
 
-By default, the `extract-css-chunks-plugin` appends styles (`<link>` elements) to `document.head` of the current `window`.
+By default, the `mini-css-extract-plugin` appends styles (`<link>` elements) to `document.head` of the current `window`.
 
 However in some circumstances it might be necessary to have finer control over the append target or even delay `link` elements instertion.
 For example this is the case when you asynchronously load styles for an application that runs inside of an iframe.
@@ -771,7 +771,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 function recursiveIssuer(m, c) {
   const issuer = c.moduleGraph.getIssuer(m);
-  // For webpack@4 chunks = m.issuer
+  // For webpack@4 issuer = m.issuer
 
   if (issuer) {
     return recursiveIssuer(issuer, c);

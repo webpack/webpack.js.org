@@ -53,18 +53,18 @@ module.exports = {
 
 |                Name                 |        Type         |                   Default                    | Description                                      |
 | :---------------------------------: | :-----------------: | :------------------------------------------: | :----------------------------------------------- |
-|   **[`attributes`](#attributes)**   | `{Boolean\|Object}` |                    `true`                    | Enables/Disables attributes handling             |
+|      **[`sources`](#sources)**      | `{Boolean\|Object}` |                    `true`                    | Enables/Disables sources handling                |
 | **[`preprocessor`](#preprocessor)** |    `{Function}`     |                 `undefined`                  | Allows pre-processing of content before handling |
 |     **[`minimize`](#minimize)**     | `{Boolean\|Object}` | `true` in production mode, otherwise `false` | Tell `html-loader` to minimize HTML              |
-|     **[`esModule`](#esmodule)**     |     `{Boolean}`     |                   `false`                    | Use ES modules syntax                            |
+|     **[`esModule`](#esmodule)**     |     `{Boolean}`     |                    `true`                    | Enable/disable ES modules syntax                 |
 
-### `attributes`
+### `sources`
 
 Type: `Boolean|Object`
 Default: `true`
 
 By default every loadable attributes (for example - `<img src="image.png">`) is imported (`const img = require('./image.png')` or `import img from "./image.png""`).
-You may need to specify loaders for images in your configuration (recommended `file-loader` or `url-loader`).
+You may need to specify loaders for images in your configuration (recommended [`asset modules`](/guides/asset-modules/)).
 
 Supported tags and attributes:
 
@@ -86,8 +86,9 @@ Supported tags and attributes:
 - the `href` attribute of the `image` tag
 - the `xlink:href` attribute of the `use` tag
 - the `href` attribute of the `use` tag
-- the `href` attribute of the `link` tag when the `rel` attribute contains `stylesheet`, `icon`, `shortcut icon`, `mask-icon`, `apple-touch-icon`, `apple-touch-icon-precomposed`, `apple-touch-startup-image`
-- the `content` attribute of the `meta` tag when the `name` attribute is `msapplication-tileimage`, `msapplication-square70x70logo`, `msapplication-square150x150logo`, `msapplication-wide310x150logo`, `msapplication-square310x310logo`, `msapplication-config` or when the `property` attribute is `og:image`, `og:image:url`, `og:image:secure_url`, `og:audio`, `og:audio:secure_url`, `og:video`, `og:video:secure_url`, `vk:image`
+- the `href` attribute of the `link` tag when the `rel` attribute contains `stylesheet`, `icon`, `shortcut icon`, `mask-icon`, `apple-touch-icon`, `apple-touch-icon-precomposed`, `apple-touch-startup-image`, `manifest`, `prefetch`, `preload` or when the `itemprop` attribute is `image`, `logo`, `screenshot`, `thumbnailurl`, `contenturl`, `downloadurl`, `duringmedia`, `embedurl`, `installurl`, `layoutimage`
+- the `imagesrcset` attribute of the `link` tag when the `rel` attribute contains `stylesheet`, `icon`, `shortcut icon`, `mask-icon`, `apple-touch-icon`, `apple-touch-icon-precomposed`, `apple-touch-startup-image`, `manifest`, `prefetch`, `preload`
+- the `content` attribute of the `meta` tag when the `name` attribute is `msapplication-tileimage`, `msapplication-square70x70logo`, `msapplication-square150x150logo`, `msapplication-wide310x150logo`, `msapplication-square310x310logo`, `msapplication-config`, `twitter:image` or when the `property` attribute is `og:image`, `og:image:url`, `og:image:secure_url`, `og:audio`, `og:audio:secure_url`, `og:video`, `og:video:secure_url`, `vk:image` or when the `itemprop` attribute is `image`, `logo`, `screenshot`, `thumbnailurl`, `contenturl`, `downloadurl`, `duringmedia`, `embedurl`, `installurl`, `layoutimage`
 
 #### `Boolean`
 
@@ -104,7 +105,7 @@ module.exports = {
         loader: 'html-loader',
         options: {
           // Disables attributes processing
-          attributes: false,
+          sources: false,
         },
       },
     ],
@@ -128,7 +129,7 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
         options: {
-          attributes: {
+          sources: {
             list: [
               // All default supported tags and attributes
               '...',
@@ -154,7 +155,6 @@ module.exports = {
 
               return true;
             },
-            root: '.',
           },
         },
       },
@@ -166,11 +166,11 @@ module.exports = {
 #### `list`
 
 Type: `Array`
-Default: [supported tags and attributes](#attributes).
+Default: [supported tags and attributes](#sources).
 
 Allows to setup which tags and attributes to process and how, and the ability to filter some of them.
 
-Using `...` syntax allows you to extend [default supported tags and attributes](#attributes).
+Using `...` syntax allows you to extend [default supported tags and attributes](#sources).
 
 For example:
 
@@ -184,7 +184,7 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
         options: {
-          attributes: {
+          sources: {
             list: [
               // All default supported tags and attributes
               '...',
@@ -255,7 +255,7 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
         options: {
-          attributes: {
+          sources: {
             list: [
               {
                 // Attribute name
@@ -271,6 +271,41 @@ module.exports = {
 
                   // choose all HTML tags except img tag
                   return tag.toLowerCase() !== 'img';
+                },
+              },
+            ],
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+Filter can also be used to extend the supported elements and attributes. For example, filter can help process meta tags that reference assets:
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+        options: {
+          sources: {
+            list: [
+              {
+                tag: 'meta',
+                attribute: 'content',
+                type: 'src',
+                filter: (tag, attribute, attributes, resourcePath) => {
+                  if (
+                    attributes.value === 'og:image' ||
+                    attributes.name === 'twitter:image'
+                  ) {
+                    return true;
+                  }
+                  return false;
                 },
               },
             ],
@@ -298,7 +333,7 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
         options: {
-          attributes: {
+          sources: {
             urlFilter: (attribute, value, resourcePath) => {
               // The `attribute` argument contains a name of the HTML attribute.
               // The `value` argument contains a value of the HTML attribute.
@@ -310,34 +345,6 @@ module.exports = {
 
               return true;
             },
-          },
-        },
-      },
-    ],
-  },
-};
-```
-
-#### `root`
-
-Type: `String`
-Default: `undefined`
-
-For urls that start with a `/`, the default behavior is to not translate them.
-If a `root` query parameter is set, however, it will be prepended to the url and then translated.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.html$/i,
-        loader: 'html-loader',
-        options: {
-          attributes: {
-            root: '.',
           },
         },
       },
@@ -518,12 +525,12 @@ module.exports = {
 ### `esModule`
 
 Type: `Boolean`
-Default: `false`
+Default: `true`
 
-By default, `html-loader` generates JS modules that use the CommonJS modules syntax.
+By default, `html-loader` generates JS modules that use the ES modules syntax.
 There are some cases in which using ES modules is beneficial, like in the case of [module concatenation](/plugins/module-concatenation-plugin/) and [tree shaking](/guides/tree-shaking/).
 
-You can enable a ES module syntax using:
+You can enable a CommonJS modules syntax using:
 
 **webpack.config.js**
 
@@ -535,7 +542,7 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
         options: {
-          esModule: true,
+          esModule: false,
         },
       },
     ],
@@ -545,6 +552,44 @@ module.exports = {
 
 ## Examples
 
+### roots
+
+With [`resolve.roots`](/configuration/resolve/#resolveroots) can specify a list of directories where requests of server-relative URLs (starting with '/') are resolved.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  context: __dirname,
+  module: {
+    rules: [
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+        options: {},
+      },
+      {
+        test: /\.jpg$/,
+        type: 'asset/resource',
+      },
+    ],
+  },
+  resolve: {
+    roots: [path.resolve(__dirname, 'fixtures')],
+  },
+};
+```
+
+**file.html**
+
+```html
+<img src="/image.jpg" />
+```
+
+```js
+// => image.jpg in __dirname/fixtures will be resolved
+```
+
 ### CDN
 
 **webpack.config.js**
@@ -553,8 +598,14 @@ module.exports = {
 module.exports = {
   module: {
     rules: [
-      { test: /\.jpg$/, loader: 'file-loader' },
-      { test: /\.png$/, loader: 'url-loader' },
+      {
+        test: /\.jpg$/,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.png$/,
+        type: 'asset/inline',
+      },
     ],
   },
   output: {
@@ -578,24 +629,24 @@ require('html-loader!./file.html');
 ```
 
 ```js
-require('html-loader?{"attributes":{"list":[{"tag":"img","attribute":"data-src","type":"src"}]}}!./file.html');
+require('html-loader?{"sources":{"list":[{"tag":"img","attribute":"data-src","type":"src"}]}}!./file.html');
 
 // => '<img src="image.jpg" data-src="data:image/png;base64,..." >'
 ```
 
 ```js
-require('html-loader?{"attributes":{"list":[{"tag":"img","attribute":"src","type":"src"},{"tag":"img","attribute":"data-src","type":"src"}]}}!./file.html');
+require('html-loader?{"sources":{"list":[{"tag":"img","attribute":"src","type":"src"},{"tag":"img","attribute":"data-src","type":"src"}]}}!./file.html');
 
 // => '<img src="http://cdn.example.com/49eba9f/a992ca.jpg" data-src="data:image/png;base64,..." >'
 ```
 
 ```js
-require('html-loader?-attributes!./file.html');
+require('html-loader?-sources!./file.html');
 
 // => '<img src="image.jpg"  data-src="image2x.png" >'
 ```
 
-> :warning: `-attributes` sets `attributes: false`.
+> :warning: `-sources` sets `sources: false`.
 
 ### Process `script` and `link` tags
 
@@ -637,8 +688,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.html$/,
+        type: 'asset/resource',
+        generator: {
+          filename: '[name][ext]',
+        },
+      },
+      {
         test: /\.html$/i,
-        use: ['file-loader?name=[name].[ext]', 'extract-loader', 'html-loader'],
+        use: ['extract-loader', 'html-loader'],
       },
       {
         test: /\.js$/i,
@@ -647,7 +705,7 @@ module.exports = {
       },
       {
         test: /\.file.js$/i,
-        loader: 'file-loader',
+        type: 'asset/resource',
       },
       {
         test: /\.css$/i,
@@ -656,37 +714,11 @@ module.exports = {
       },
       {
         test: /\.file.css$/i,
-        loader: 'file-loader',
+        type: 'asset/resource',
       },
     ],
   },
 };
-```
-
-### 'Root-relative' URLs
-
-With the same configuration as in the CDN example:
-
-**file.html**
-
-```html
-<img src="/image.jpg" />
-```
-
-**scripts.js**
-
-```js
-require('html-loader!./file.html');
-
-// => '<img src="/image.jpg">'
-```
-
-**other-scripts.js**
-
-```js
-require('html-loader?{"attributes":{"root":"."}}!./file.html');
-
-// => '<img src="http://cdn.example.com/49eba9f/a992ca.jpg">'
 ```
 
 ### Templating
@@ -784,26 +816,37 @@ module.exports = {
 
 A very common scenario is exporting the HTML into their own _.html_ file, to
 serve them directly instead of injecting with javascript. This can be achieved
-with a combination of 3 loaders:
+with a combination of 2 loaders:
 
-- [file-loader](/loaders/file-loader/)
 - [extract-loader](https://github.com/peerigon/extract-loader)
 - html-loader
 
+and [`asset modules`](/guides/asset-modules/)
+
 The html-loader will parse the URLs, require the images and everything you
 expect. The extract loader will parse the javascript back into a proper html
-file, ensuring images are required and point to proper path, and the file loader
+file, ensuring images are required and point to proper path, and the [`asset modules`](/guides/asset-modules/)
 will write the _.html_ file for you. Example:
 
 **webpack.config.js**
 
 ```js
 module.exports = {
+  output: {
+    assetModuleFilename: '[name][ext]',
+  },
   module: {
     rules: [
       {
+        test: /\.html$/,
+        type: 'asset/resource',
+        generator: {
+          filename: '[name][ext]',
+        },
+      },
+      {
         test: /\.html$/i,
-        use: ['file-loader?name=[name].[ext]', 'extract-loader', 'html-loader'],
+        use: ['extract-loader', 'html-loader'],
       },
     ],
   },
