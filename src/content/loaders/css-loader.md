@@ -124,8 +124,13 @@ module.exports = {
 类型: `Boolean|Function`
 默认值: `true`
 
+<<<<<<< HEAD
 启用/禁用 `url`/`image-set` 函数进行处理。
 控制 `url()` 函数的解析。 绝对 URL 和 根目录的相对 URL 都不会去解析。
+=======
+Enables/Disables `url`/`image-set` functions handling.
+Control `url()` resolving. Absolute paths and root-relative URLs now resolving(Version [4.0.0](https://github.com/webpack-contrib/css-loader/blob/master/CHANGELOG.md#400-2020-07-25) and above).
+>>>>>>> f77eb9b2cf89cc3d0fa0b7bbd7366d9bd1e56ee8
 
 示例解决方案:
 
@@ -587,8 +592,13 @@ module.exports = {
 
 可能的值：
 
+<<<<<<< HEAD
 - `true` - 为所有 `/\.module\.\w+$/i.test(filename)` 返回 true 的文件启用 css 模块
 - `false` - 禁用 css 模块
+=======
+- `true` - enables CSS modules or interoperable CSS format, sets the [`modules.compileType`](#compiletype) option to `module` value for all files which satisfy `/\.module(s)?\.\w+$/i.test(filename)` condition or sets the [`modules.compileType`](#compiletype) option to `icss` value for all files which satisfy `/\.icss\.\w+$/i.test(filename)` condition
+- `false` - disables CSS modules or interoperable CSS format based on filename
+>>>>>>> f77eb9b2cf89cc3d0fa0b7bbd7366d9bd1e56ee8
 
 **webpack.config.js**
 
