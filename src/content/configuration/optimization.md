@@ -378,23 +378,6 @@ module.exports = {
 };
 ```
 
-## `optimization.occurrenceOrder`
-
-`boolean`
-
-Tells webpack to figure out an order of modules which will result in the smallest initial bundle. By default `optimization.occurrenceOrder` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    occurrenceOrder: false,
-  },
-};
-```
-
 ## `optimization.providedExports`
 
 `boolean`
