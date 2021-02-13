@@ -131,12 +131,33 @@ Equals the configuration option's `output.publicPath`.
 
 The raw require function. This expression isn't parsed by the Parser for dependencies.
 
-### `__webpack_chunk_load__` (webpack-specific)
+### \_\_webpack_chunk_load\_\_ (webpack-specific)
 
-The internal chunk loading function. Takes two arguments:
+The internal chunk loading function. Takes one argument:
 
 - `chunkId` The id for the chunk to load.
-- `callback(require)` A callback function called once the chunk is loaded.
+
+Example to load chunks from alternate public path when one failed:
+
+```js
+const originalLoad = __webpack_chunk_load__;
+const publicPaths = ['a', 'b', 'c'];
+__webpack_chunk_load__ = async (id) => {
+  let error;
+  for (const path of publicPaths) {
+    __webpack_public_path__ = path;
+    try {
+      return await originalLoad(id);
+    } catch (e) {
+      error = e;
+    }
+  }
+  throw error;
+};
+import('./module-a').then((moduleA) => {
+  // now webpack will use the custom __webpack_chunk_load__ to load chunk
+});
+```
 
 ### `__webpack_modules__` (webpack-specific)
 
