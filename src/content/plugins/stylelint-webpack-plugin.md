@@ -16,23 +16,23 @@ repo: https://github.com/webpack-contrib/stylelint-webpack-plugin
 
 
 
-> A Stylelint plugin for webpack
+> 一个为 webpack 提供的 Stylelint 插件
 
-## Install {#install}
+## 安装 {#install}
 
 ```bash
 npm install stylelint-webpack-plugin --save-dev
 ```
 
-**Note**: You also need to install `stylelint` from npm, if you haven't already:
+**注意**：如果你还没有安装 `stylelint`，请先用 npm 进行安装：
 
 ```bash
 npm install stylelint --save-dev
 ```
 
-## Usage {#usage}
+## 用法 {#usage}
 
-In your webpack configuration:
+在你的 webpack 配置中：
 
 ```js
 const StylelintPlugin = require('stylelint-webpack-plugin');
@@ -44,100 +44,100 @@ module.exports = {
 };
 ```
 
-## Options {#options}
+## 选项 {#options}
 
-See [stylelint's options](http://stylelint.io/user-guide/node-api/#options) for the complete list of options available. These options are passed through to the `stylelint` directly.
+有关可用选项的完整列表请参阅 [styleint 的选项](http://stylelint.io/user-guide/node-api/#options)，这些选项直接传递给 `stylelint`。
 
 ### `configFile` {#configfile}
 
-- Type: `String`
-- Default: `undefined`
+- 类型：`String`
+- 默认值：`undefined`
 
-Specify the config file location to be used by `stylelint`.
+指定 `stylelint` 配置文件的位置。
 
-**Note:** By default this is [handled by `stylelint`](http://stylelint.io/user-guide/configuration/).
+**注意：** 默认情况下由 [`stylelint` 处理](http://stylelint.io/user-guide/configuration/)。
 
 ### `context` {#context}
 
-- Type: `String`
-- Default: `compiler.context`
+- 类型：`String`
+- 默认值：`compiler.context`
 
-A string indicating the root of your files.
+指定文件根目录的字符串。
 
 ### `files` {#files}
 
-- Type: `String|Array[String]`
-- Default: `'**/*.(s(c|a)ss|css)'`
+- 类型：`String|Array[String]`
+- 默认值：`'**/*.(s(c|a)ss|css)'`
 
-Specify the glob pattern for finding files. Must be relative to `options.context`.
+指定查找文件的全局模式。必须相对于 `options.context`。
 
 ### `fix` {#fix}
 
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-If `true`, `stylelint` will fix as many errors as possible. The fixes are made to the actual source files. All unfixed errors will be reported. See [Autofixing errors](https://stylelint.io/user-guide/cli#autofixing-errors) docs.
+如果值为 `true`，`stylelint` 将修复尽可能多的 error。修复真实的源文件。报告所有未修复的 errors。请参阅 [自动修复错误](https://stylelint.io/user-guide/cli#autofixing-errors) 文档。
 
 ### `formatter` {#formatter}
 
-- Type: `String|Function`
-- Default: `'string'`
+- 类型：`String|Function`
+- 默认值：`'string'`
 
-Specify the formatter that you would like to use to format your results. See [formatter option](https://stylelint.io/user-guide/node-api#formatter).
+指定要用于格式化结果的 formatter。请参阅 [formatter 选项](https://stylelint.io/user-guide/node-api#formatter)。
 
 ### `lintDirtyModulesOnly` {#lintdirtymodulesonly}
 
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-Lint only changed files, skip lint on start.
+仅检查有变化的文件，启动时跳过检查。
 
 ### `stylelintPath` {#stylelintpath}
 
-- Type: `String`
-- Default: `stylelint`
+- 类型：`String`
+- 默认值：`stylelint`
 
-Path to `stylelint` instance that will be used for linting.
+将要用来做检查的 `stylelint` 实例的路径。
 
-### Errors and Warning {#errors-and-warning}
+### Errors 和 Warning {#errors-and-warning}
 
-**By default the plugin will auto adjust error reporting depending on stylelint errors/warnings counts.**
-You can still force this behavior by using `emitError` **or** `emitWarning` options:
+**默认情况下，插件将根据 stylelint 错误/警告数量自动调整错误报告。**
+你仍然可以使用 `emitError` **或** `emitWarning` 选项来强制改变这种默认行为。
 
 #### `emitError` {#emiterror}
 
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-Will always return errors, if set to `true`.
+如果设置为 `true`，将总是返回 errors。
 
 #### `emitWarning` {#emitwarning}
 
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-Will always return warnings, if set to `true`.
+如果设置为 `true`，将总是返回 warnings。
 
 #### `failOnError` {#failonerror}
 
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-Will cause the module build to fail if there are any errors, if set to `true`.
+如果设置为 `true`，出现任何 errors 都将会导致模块构建失败。
 
 #### `failOnWarning` {#failonwarning}
 
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-Will cause the module build to fail if there are any warnings, if set to `true`.
+如果设置为 `true`，出现任何 warnings 都将会导致模块构建失败。
 
 #### `quiet` {#quiet}
 
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-Will process and report errors only and ignore warnings, if set to `true`.
+如果设置为 `true`，则仅处理和报告 errors，并忽略 warnings。
 
 ## Changelog {#changelog}
 
