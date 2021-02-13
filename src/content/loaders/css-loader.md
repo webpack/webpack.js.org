@@ -588,7 +588,7 @@ module.exports = {
 可能的值：
 
 - `true` - 启用 CSS 模块或者可交互 CSS 格式，为所有满足 `/\.module(s)?\.\w+$/i.test(filename)` 条件的文件设置 [`modules.compileType`](#compiletype) 选项为 `module`，或者为所有满足 `/\.icss\.\w+$/i.test(filename)` 条件的文件设置 [`modules.compileType`](#compiletype) 选项为 `icss`
-- `false` - 禁用 css 模块或者预计文件名的可交互 CSS 格式
+- `false` - 禁用 css 模块或者基于文件名的可交互 CSS 格式
 
 **webpack.config.js**
 
