@@ -16,7 +16,7 @@ repo: https://github.com/webpack-contrib/stylelint-webpack-plugin
 
 
 
-> A Stylelint plugin for webpack
+> 一个为 webpack 提供的 Stylelint 插件
 
 ## 安装 {#install}
 
@@ -97,7 +97,7 @@ module.exports = {
 - 类型：`String`
 - 默认值：`stylelint`
 
-将要用来 linting 的 `stylelint` 实例的路径。
+将要用来做检查的 `stylelint` 实例的路径。
 
 ### Errors 和 Warning {#errors-and-warning}
 
