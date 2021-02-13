@@ -117,7 +117,7 @@ module.exports = {
 类型：`String|Function`
 默认值：`document.head.appendChild(linkTag);`
 
-默认情况下，`extract-css-chunks-plugin` 会将 styles（`<link>` 元素）附加到当前 `window` 的 `document.head` 中。
+默认情况下，`mini-css-extract-plugin` 会将 styles（`<link>` 元素）附加到当前 `window` 的 `document.head` 中。
 
 但在某些情况下，可能需要对附加的目标进行精细化管理，甚至延迟 `link` 元素的插入。
 例如，当你在 iframe 中运行应用程序异步加载样式时，就属于此情况。
@@ -771,7 +771,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 function recursiveIssuer(m, c) {
   const issuer = c.moduleGraph.getIssuer(m);
-  // For webpack@4 chunks = m.issuer
+  // For webpack@4 issuer = m.issuer
 
   if (issuer) {
     return recursiveIssuer(issuer, c);

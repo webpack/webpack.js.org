@@ -125,7 +125,7 @@ module.exports = {
 默认值: `true`
 
 启用/禁用 `url`/`image-set` 函数进行处理。
-控制 `url()` 函数的解析。 绝对 URL 和 根目录的相对 URL 都不会去解析。
+控制 `url()` 函数的解析。绝对路径和根目录的相对 URL 现在会被解析(版本 [4.0.0](https://github.com/webpack-contrib/css-loader/blob/master/CHANGELOG.md#400-2020-07-25)。
 
 示例解决方案:
 
@@ -587,8 +587,8 @@ module.exports = {
 
 可能的值：
 
-- `true` - 为所有 `/\.module\.\w+$/i.test(filename)` 返回 true 的文件启用 css 模块
-- `false` - 禁用 css 模块
+- `true` - 启用 CSS 模块或者可交互 CSS 格式，为所有满足 `/\.module(s)?\.\w+$/i.test(filename)` 条件的文件设置 [`modules.compileType`](#compiletype) 选项为 `module`，或者为所有满足 `/\.icss\.\w+$/i.test(filename)` 条件的文件设置 [`modules.compileType`](#compiletype) 选项为 `icss`
+- `false` - 禁用 css 模块或者基于文件名的可交互 CSS 格式
 
 **webpack.config.js**
 

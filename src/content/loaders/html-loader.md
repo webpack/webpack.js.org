@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/html-loader
 
 将 HTML 导出为字符串。当编译器需要时，将压缩 HTML 字符串。
 
-## 入门 {#getting-started}
+## 快速开始 {#getting-started}
 
 首先，你需要安装 `html-loader` ：
 
@@ -53,18 +53,18 @@ module.exports = {
 
 |                名称                 |        类型         |                   默认值                    | 描述                                      |
 | :---------------------------------: | :-----------------: | :------------------------------------------: | :----------------------------------------------- |
-|   __[`attributes`](#attributes)__   | `{Boolean\|Object}` |                    `true`                    | 启用/禁用 attributes 处理             |
-| __[`preprocessor`](#preprocessor)__ |    `{Function}`     |                 `undefined`                  | 允许在处理前对内容进行预处理 |
-|     __[`minimize`](#minimize)__     | `{Boolean\|Object}` | 在生产模式下为 `true`，其他情况为 `false` | 告知 `html-loader` 压缩 HTML              |
-|     __[`esModule`](#esmodule)__     |     `{Boolean}`     |                   `false`                    | 使用 ES modules 语法                            |
+|   **[`sources`](#sources)**   | `{Boolean\|Object}` |                    `true`                    | 启用/禁用 sources 处理             |
+| **[`preprocessor`](#preprocessor)** |    `{Function}`     |                 `undefined`                  | 允许在处理前对内容进行预处理 |
+|     **[`minimize`](#minimize)**     | `{Boolean\|Object}` | 在生产模式下为 `true`，其他情况为 `false` | 告知 `html-loader` 压缩 HTML              |
+|     **[`esModule`](#esmodule)**     |     `{Boolean}`     |                   `true`                    | 启用/禁用 ES modules 语法                            |
 
-### `attributes` {#attributes}
+### `sources` {#sources}
 
 类型： `Boolean|Object`
 默认值： `true`
 
 默认情况下，每个可加载属性（例如 - `<img src="image.png">` ）都将被导入（ `const img = require ('./image.png')` 或 `import img from "./image.png""` ）。
-你可能需要为配置中的图片指定 loader（推荐使用 `file-loader` 或 `url-loader` ）。
+你可能需要为配置中的图片指定 loader（推荐使用 [`asset modules`](/guides/asset-modules/)）。
 
 支持的标签和属性：
 
@@ -73,9 +73,10 @@ module.exports = {
 - `img` 标签的 `src` 属性
 - `img` 标签的 `srcset` 属性
 - `input` 标签的 `src` 属性
-- `link` 标记的 `href` 属性（仅适用于样式表）
 - `object` 标签的 `data` 属性
 - `script` 标签的 `src` 属性
+- `script` 标签的 `href` 属性
+- `script` 标签的 `xlink:href` 属性
 - `source` 标签的 `src` 属性
 - `source` 标签的 `srcset` 属性
 - `track` 标签的 `src` 属性
@@ -85,8 +86,9 @@ module.exports = {
 - `image` 标签的 `href` 属性
 - `use` 标签的 `xlink:href` 属性
 - `use` 标签的 `href` 属性
-- 当 `rel` 属性值为 `stylesheet`，`icon`，`shortcut icon`，`mask-icon`，`apple-touch-icon`，`apple-touch-icon-precomposed` 或 `apple-touch-startup-image` 时，`link` 标签的 `href` 属性
-- 当 `name` 属性为 `msapplication-tileimage`，`msapplication-square70x70logo`，`msapplication-square150x150logo`，`msapplication-wide310x150logo`，`msapplication-square310x310logo`，`msapplication-config` 时，支持 `meta` 标签的 `content` 属性。或当 `property` 属性为 `og:image`，`og:image:url`，`og:image:secure_url`，`og:audio`，`og:audio:secure_url`，`og:video`，`og:video:secure_url`，`vk:image` 时。
+- 当 `rel` 属性值包含 `stylesheet`、`icon`、`shortcut icon`、`mask-icon`、`apple-touch-icon`、`apple-touch-icon-precomposed`、`apple-touch-startup-image`、`manifest`、`prefetch`、`preload` 或者当 `itemprop` 属性为 `image`、`logo`、`screenshot`、`thumbnailurl`、`contenturl`、`downloadurl`、`duringmedia`、`embedurl`、`installurl`、`layoutimage` 时，支持 `link` 标签的 `href` 属性
+- 当 `rel` 属性值包含 `stylesheet`、`icon`、`shortcut icon`、`mask-icon`、`apple-touch-icon`、`apple-touch-icon-precomposed`、`apple-touch-startup-image`、`manifest`、`prefetch`、`preload`时，支持 `link` 标签的 `imagesrcset` 属性
+- 当 `name` 属性为 `msapplication-tileimage`、`msapplication-square70x70logo`、`msapplication-square150x150logo`、`msapplication-wide310x150logo`、`msapplication-square310x310logo`、`msapplication-config`、`twitter:image` 或者当 `property` 属性为 `og:image`、`og:image:url`、`og:image:secure_url`、`og:audio`、`og:audio:secure_url`、`og:video`、`og:video:secure_url`、`vk:image`，支持 `meta` 标签的 `content` 属性。
 
 #### `Boolean` {#boolean}
 
@@ -103,7 +105,7 @@ module.exports = {
         loader: 'html-loader',
         options: {
           // Disables attributes processing
-          attributes: false,
+          sources: false,
         },
       },
     ],
@@ -127,7 +129,7 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
         options: {
-          attributes: {
+          sources: {
             list: [
               // All default supported tags and attributes
               '...',
@@ -143,9 +145,9 @@ module.exports = {
               },
             ],
             urlFilter: (attribute, value, resourcePath) => {
-              // The `attribute` argument contains a name of the HTML attribute.
-              // The `value` argument contains a value of the HTML attribute.
-              // The `resourcePath` argument contains a path to the loaded HTML file.
+              // `attribute` 参数包含一个 HTML 属性的名称。
+              // `value` 参数包含一个 HTML 属性的值。
+              // `resourcePath` 参数包含一个已加载 HTML 文件的路径。
 
               if (/example\.pdf$/.test(value)) {
                 return false;
@@ -153,7 +155,6 @@ module.exports = {
 
               return true;
             },
-            root: '.',
           },
         },
       },
@@ -165,11 +166,11 @@ module.exports = {
 #### `list` {#list}
 
 类型：`Array`
-默认值：[支持的标签和属性列表](#attributes)
+默认值：[支持的标签和属性列表](#sources)
 
 允许设置要处理的标签和属性以及处理方式，以及过滤其中一些标签和属性的能力。
 
-使用 `...` 语法可以使用所有[默认支持的标签和属性](#attributes)。
+使用 `...` 语法可以使用所有[默认支持的标签和属性](#sources)。
 
 例如：
 
@@ -183,7 +184,7 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
         options: {
-          attributes: {
+          sources: {
             list: [
               // All default supported tags and attributes
               '...',
@@ -254,7 +255,7 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
         options: {
-          attributes: {
+          sources: {
             list: [
               {
                 // Attribute name
@@ -270,6 +271,41 @@ module.exports = {
 
                   // choose all HTML tags except img tag
                   return tag.toLowerCase() !== 'img';
+                },
+              },
+            ],
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+filter 也可以用来扩展支持的元素和属性。例如，filter 可以帮助处理引用资源的 meta 标签：
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+        options: {
+          sources: {
+            list: [
+              {
+                tag: 'meta',
+                attribute: 'content',
+                type: 'src',
+                filter: (tag, attribute, attributes, resourcePath) => {
+                  if (
+                    attributes.value === 'og:image' ||
+                    attributes.name === 'twitter:image'
+                  ) {
+                    return true;
+                  }
+                  return false;
                 },
               },
             ],
@@ -297,7 +333,7 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
         options: {
-          attributes: {
+          sources: {
             urlFilter: (attribute, value, resourcePath) => {
               // The `attribute` argument contains a name of the HTML attribute.
               // The `value` argument contains a value of the HTML attribute.
@@ -309,34 +345,6 @@ module.exports = {
 
               return true;
             },
-          },
-        },
-      },
-    ],
-  },
-};
-```
-
-#### `root` {#root}
-
-类型：`String`
-默认值： `undefined`
-
-对于 `/` 开头的 url，默认不进行转换。
-但是，如果设置了 `root` 查询参数，它将被放在 URL 之前进行转换。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.html$/i,
-        loader: 'html-loader',
-        options: {
-          attributes: {
-            root: '.',
           },
         },
       },
@@ -517,12 +525,12 @@ module.exports = {
 ### `esModule` {#esmodule}
 
 类型：`Boolean`
-值默认值：`false`
+默认值：`false`
 
-默认情况下， `html-loader` 生成使用 CommonJS 模块语法的 JS 模块。
-在某些情况下，使用 ES 模块会更好，例如在进行[模块合并](/plugins/module-concatenation-plugin/)和 [tree shaking](/guides/tree-shaking/) 时。
+默认情况下， `html-loader` 生成使用 ES modules 语法的 JS 模块。
+在某些情况下，使用 ES modules 会更好，例如在进行[模块合并](/plugins/module-concatenation-plugin/)和 [tree shaking](/guides/tree-shaking/) 时。
 
-你可以使用以下方法启用 ES 模块语法：
+你可以使用以下方法启用 CommonJS 模块语法：
 
 **webpack.config.js**
 
@@ -534,7 +542,7 @@ module.exports = {
         test: /\.html$/i,
         loader: 'html-loader',
         options: {
-          esModule: true,
+          esModule: false,
         },
       },
     ],
@@ -544,6 +552,44 @@ module.exports = {
 
 ## 示例 {#examples}
 
+### roots {#roots}
+
+使用 [`resolve.roots`](/configuration/resolve/#resolveroots) 可以指定解析相对服务端的 URL（以 '/' 开头）请求的目录列表。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  context: __dirname,
+  module: {
+    rules: [
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+        options: {},
+      },
+      {
+        test: /\.jpg$/,
+        type: 'asset/resource',
+      },
+    ],
+  },
+  resolve: {
+    roots: [path.resolve(__dirname, 'fixtures')],
+  },
+};
+```
+
+**file.html**
+
+```html
+<img src="/image.jpg" />
+```
+
+```js
+// => image.jpg in __dirname/fixtures will be resolved
+```
+
 ### CDN {#cdn}
 
 **webpack.config.js**
@@ -552,8 +598,14 @@ module.exports = {
 module.exports = {
   module: {
     rules: [
-      { test: /\.jpg$/, loader: 'file-loader' },
-      { test: /\.png$/, loader: 'url-loader' },
+      {
+        test: /\.jpg$/,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.png$/,
+        type: 'asset/inline',
+      },
     ],
   },
   output: {
@@ -577,24 +629,24 @@ require('html-loader!./file.html');
 ```
 
 ```js
-require('html-loader?{"attributes":{"list":[{"tag":"img","attribute":"data-src","type":"src"}]}}!./file.html');
+require('html-loader?{"sources":{"list":[{"tag":"img","attribute":"data-src","type":"src"}]}}!./file.html');
 
 // => '<img src="image.jpg" data-src="data:image/png;base64,..." >'
 ```
 
 ```js
-require('html-loader?{"attributes":{"list":[{"tag":"img","attribute":"src","type":"src"},{"tag":"img","attribute":"data-src","type":"src"}]}}!./file.html');
+require('html-loader?{"sources":{"list":[{"tag":"img","attribute":"src","type":"src"},{"tag":"img","attribute":"data-src","type":"src"}]}}!./file.html');
 
 // => '<img src="http://cdn.example.com/49eba9f/a992ca.jpg" data-src="data:image/png;base64,..." >'
 ```
 
 ```js
-require('html-loader?-attributes!./file.html');
+require('html-loader?-sources!./file.html');
 
 // => '<img src="image.jpg"  data-src="image2x.png" >'
 ```
 
-> ：warning： `-attributes` 设置 `attributes: false` 。
+> :warning: `-sources` 设置 `sources: false`。
 
 ### 处理 `script` 和 `link` 标签 {#process-script-and-link-tags}
 
@@ -636,8 +688,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.html$/,
+        type: 'asset/resource',
+        generator: {
+          filename: '[name][ext]',
+        },
+      },
+      {
         test: /\.html$/i,
-        use: ['file-loader?name=[name].[ext]', 'extract-loader', 'html-loader'],
+        use: ['extract-loader', 'html-loader'],
       },
       {
         test: /\.js$/i,
@@ -646,7 +705,7 @@ module.exports = {
       },
       {
         test: /\.file.js$/i,
-        loader: 'file-loader',
+        type: 'asset/resource',
       },
       {
         test: /\.css$/i,
@@ -655,37 +714,11 @@ module.exports = {
       },
       {
         test: /\.file.css$/i,
-        loader: 'file-loader',
+        type: 'asset/resource',
       },
     ],
   },
 };
-```
-
-### “相对根” 的 URL {#root-relative-urls}
-
-与 CDN 示例中的配置相同：
-
-**file.html**
-
-```html
-<img src="/image.jpg" />
-```
-
-**scripts.js**
-
-```js
-require('html-loader!./file.html');
-
-// => '<img src="/image.jpg">'
-```
-
-**other-scripts.js**
-
-```js
-require('html-loader?{"attributes":{"root":"."}}!./file.html');
-
-// => '<img src="http://cdn.example.com/49eba9f/a992ca.jpg">'
 ```
 
 ### 模板 {#templating}
@@ -781,28 +814,39 @@ module.exports = {
 
 ### 导出为 HTML 文件 {#export-into-html-files}
 
-一种非常常见的情况是将 HTML 导出到自己的 *.html* 文件中，
-以直接使用，而非注入到 javascript。
-可以使用以下 3 种 loader 来实现：
+一种非常常见的情况是将 HTML 导出到自己的 _.html_ 文件中，以直接使用，
+而非注入到 javascript。
+可以使用以下 2 种 loader 的组合来实现：
 
-- [file-loader](/loaders/file-loader/)
 - [extract-loader](https://github.com/peerigon/extract-loader)
 - html-loader
 
+还有 [`asset modules`](/guides/asset-modules/)
+
 html-loader 将解析 URL，同时引入图片以及你需要的所有内容。
-extract-loader 会将 javascript 解析为正确的 html 文件，
+extract loader 会将 javascript 解析为正确的 html 文件，
 然后确保图片被引入且路径正确，
-file-loader 会为你生成 *.html* 文件。例如：
+[`asset modules`](/guides/asset-modules/) 会为你生成 _.html_ 文件。例如：
 
 **webpack.config.js**
 
 ```js
 module.exports = {
+  output: {
+    assetModuleFilename: '[name][ext]',
+  },
   module: {
     rules: [
       {
+        test: /\.html$/,
+        type: 'asset/resource',
+        generator: {
+          filename: '[name][ext]',
+        },
+      },
+      {
         test: /\.html$/i,
-        use: ['file-loader?name=[name].[ext]', 'extract-loader', 'html-loader'],
+        use: ['extract-loader', 'html-loader'],
       },
     ],
   },
