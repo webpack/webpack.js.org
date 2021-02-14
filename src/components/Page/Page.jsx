@@ -27,7 +27,7 @@ export default function Page(props) {
   const [content, setContent] = useState(
     isDynamicContent
       ? PlaceholderString()
-      : props.content.default || props.content
+      : () => props.content.default || props.content
   );
   const [contentLoaded, setContentLoaded] = useState(
     isDynamicContent ? false : true
@@ -48,7 +48,7 @@ export default function Page(props) {
 
   useEffect(() => {
     if (contentLoaded) {
-      const hash = window.location.hash;
+      const hash = location.hash;
       if (hash) {
         const element = document.querySelector(hash);
         if (element) {
