@@ -11,46 +11,46 @@ related:
     url: https://survivejs.com/webpack/building/source-maps/#-sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin-
 ---
 
-This plugin enables more fine grained control of source map generation. It is also enabled automatically by certain settings of the [`devtool`](/configuration/devtool/) configuration option.
+本插件实现了对 source map 生成内容进行更细粒度的控制。它也可以根据 [`devtool`](/configuration/devtool/) 配置选项的某些设置来自动启用。
 
 ```js
 new webpack.SourceMapDevToolPlugin(options);
 ```
 
-## Options {#options}
+## 配置项 {#options}
 
-The following options are supported:
+支持以下配置项：
 
-- `test` (`string` `RegExp` `[string, RegExp]`): Include source maps for modules based on their extension (defaults to `.js`, `.mjs`, and `.css`).
-- `include` (`string` `RegExp` `[string, RegExp]`): Include source maps for module paths that match the given value.
-- `exclude` (`string` `RegExp` `[string, RegExp]`): Exclude modules that match the given value from source map generation.
-- `filename` (`string`): Defines the output filename of the SourceMap (will be inlined if no value is provided).
-- `append` (`string`): Appends the given value to the original asset. Usually the `#sourceMappingURL` comment. `[url]` is replaced with a URL to the source map file. Since webpack v4.36.0, path parameters are supported: `[chunk]`, `[filename]` and `[contenthash]`. Setting `append` to `false` disables the appending.
-- `moduleFilenameTemplate` (`string`): See [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate).
-- `fallbackModuleFilenameTemplate` (`string`): See link above.
-- `namespace` (`string`): See [`output.devtoolNamespace`](/configuration/output/#outputdevtoolnamespace).
-- `module = true` (`boolean`): Indicates whether loaders should generate source maps.
-- `columns = true` (`boolean`): Indicates whether column mappings should be used.
-- `noSources = false` (`boolean`): Prevents the source file content from being included in the source map.
-- `publicPath` (`string`): Emits absolute URLs with public path prefix, e.g. `https://example.com/project/`.
-- `fileContext` (`string`): Makes the `[file]` argument relative to this directory.
-- `sourceRoot` (`string`): Provide a custom value for the `sourceRoot` property in the SourceMap.
+- `test`（`string` `RegExp` `[string, RegExp]`）：包含基于扩展名的模块的 source map（默认是 `.js`, `.mjs` 和 `.css`）。
+- `include`（`string` `RegExp` `[string, RegExp]`）：使路径与该值匹配的模块生成 source map。
+- `exclude`（`string` `RegExp` `[string, RegExp]`）：使匹配该值的模块不生成 source map。
+- `filename`（`string`）：定义生成的 SourceMap 的名称（不设置将默认置为 inlined）。
+- `append`（`string`）：在原始资源后追加给定值。通常是 `#sourceMappingURL` 注释。`[url]` 被替换成 source map 文件的 URL。webpack v4.36.0 之后支持 path 参数：`[chunk]`、`[filename]` 和 `[contenthash]`。设置 `append` 为 `false` 会禁止追加。
+- `moduleFilenameTemplate`（`string`）：查看 [`output.devtoolModuleFilenameTemplate`](/configuration/output/#outputdevtoolmodulefilenametemplate)。
+- `fallbackModuleFilenameTemplate`（`string`）：查看上面的链接。
+- `namespace`（`string`）：查看 [`output.devtoolNamespace`](/configuration/output/#outputdevtoolnamespace)。
+- `module = true`（`boolean`）：表示 loader 是否生成 source map。
+- `columns = true`（`boolean`）：表示是否应该使用 column mapping。
+- `noSources = false`（`boolean`）：防止源文件的内容被包含在 source map 中。
+- `publicPath` (`string`)：生成带 public path 前缀的绝对 URL，例如：`https://example.com/project/`。
+- `fileContext` (`string`)：使得 `[file]` 参数作为本目录的相对路径。
+- `sourceRoot`（`string`）：给 SourceMap 中的 `sourceRoot` 属性提供一个自定义值。
 
-The `fileContext` option is useful when you want to store source maps in an upper level directory to avoid `../../` appearing in the absolute `[url]`.
+`fileContext` 配置在你想要将 source map 存储到上层目录，以避免 `../../` 出现在绝对路径 `[url]` 里面时是有用的。
 
-T> Setting `module` and/or `columns` to `false` will yield less accurate source maps but will also improve compilation performance significantly.
+T> 设置 `module` 和/或 `columns` 为 `false` 将会生成不太精确的 source map，但同时会显著地提升编译性能。
 
-T> If you want to use a custom configuration for this plugin in [development mode](/configuration/mode/#mode-development), make sure to disable the default one. I.e. set `devtool: false`.
+T> 如果你想在[开发模式](/configuration/mode/#mode-development)中使用该插件的自定义配置，请确保禁用默认配置。即设置 `devtool: false`。
 
-W> If the default webpack `minimizer` has been overridden (such as to customise the `TerserPlugin` options), make sure to configure its replacement with `sourceMap: true` to enable SourceMap support.
+W> 如果默认的 webpack `minimizer` 已经被覆盖（比如自定义 `TerserPlugin` 配置），请确保将其替换为 `sourceMap: true` 以启动 SourceMap 支持。
 
-## Examples {#examples}
+## 示例 {#examples}
 
-The following examples demonstrate some common use cases for this plugin.
+下面的示例展示了本插件的一些常见用例。
 
-### Basic Use Case {#basic-use-case}
+### 基本使用 {#basic-use-case}
 
-You can use the following code to replace the configuration option `devtool: inline-source-map` with an equivalent custom plugin configuration:
+你可以使用以下代码将配置项 `devtool: inline-source-map` 替换为等效的自定义插件配置：
 
 ```js
 module.exports = {
@@ -60,9 +60,9 @@ module.exports = {
 };
 ```
 
-### Exclude Vendor Maps {#exclude-vendor-maps}
+### 排除 Vendor Maps {#exclude-vendor-maps}
 
-The following code would exclude source maps for any modules in the `vendor.js` bundle:
+以下代码会排除 `vendor.js` bundle 内模块的 source map。
 
 ```js
 new webpack.SourceMapDevToolPlugin({
@@ -71,9 +71,9 @@ new webpack.SourceMapDevToolPlugin({
 });
 ```
 
-### Host Source Maps Externally {#host-source-maps-externally}
+### 在宿主环境外部化 source map {#host-source-maps-externally}
 
-Set a URL for source maps. Useful for hosting them on a host that requires authorization.
+设置 source map 的 URL。在宿主环境需要授权的情况下很有用。
 
 ```js
 new webpack.SourceMapDevToolPlugin({
@@ -82,7 +82,7 @@ new webpack.SourceMapDevToolPlugin({
 });
 ```
 
-And for cases when source maps are stored in the upper level directory:
+还有一种场景，source map 存储在上层目录中时：
 
 ```code
 project
@@ -93,7 +93,7 @@ project
     |- bundle-[hash].js.map
 ```
 
-With next config:
+如下设置：
 
 ```js
 new webpack.SourceMapDevToolPlugin({
@@ -103,7 +103,7 @@ new webpack.SourceMapDevToolPlugin({
 });
 ```
 
-Will produce the following URL:
+将会生成以下 URL：
 
 ```code
 https://example.com/project/sourcemaps/bundle-[hash].js.map
