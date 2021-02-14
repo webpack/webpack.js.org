@@ -28,7 +28,9 @@ export default class SidebarItem extends Component {
             className={`${block}__anchor`}
             title={anchor.title}
           >
-            <a href={this._generateAnchorURL(anchor)}>{anchor.title}</a>
+            <NavLink to={this._generateAnchorURL(anchor)}>
+              {anchor.title}
+            </NavLink>
             {anchor.children && this.renderAnchors(anchor.children)}
           </li>
         ))}
