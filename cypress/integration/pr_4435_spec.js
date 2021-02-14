@@ -17,7 +17,6 @@ describe('Open page in new tab', { scrollBehavior: false }, () => {
     // we click the menu
     cy.get(selector).click();
     cy.window().then((win) => {
-      console.log('click the menu');
       expect(win.scrollTo).to.be.calledTwice;
     });
 

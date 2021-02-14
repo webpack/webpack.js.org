@@ -38,12 +38,6 @@ export default class SidebarItem extends Component {
     );
   }
 
-  scrollTop(event) {
-    if (!event.metaKey && !event.ctrlKey) {
-      window.scrollTo(0, 0);
-    }
-  }
-
   render() {
     let { title, anchors = [] } = this.props;
     let openMod = this.state.open ? `${block}--open` : '';
@@ -76,7 +70,6 @@ export default class SidebarItem extends Component {
           key={this.props.url}
           className={`${block}__title`}
           to={this.props.url}
-          onClick={this.scrollTop}
         >
           {title}
         </NavLink>
