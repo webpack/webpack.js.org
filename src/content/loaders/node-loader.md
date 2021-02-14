@@ -16,21 +16,21 @@ repo: https://github.com/webpack-contrib/node-loader
 
 
 
-A [Node.js add-ons](https://nodejs.org/dist/latest/docs/api/addons.html) loader.
+处理 [Node.js 插件（add-ons）](https://nodejs.org/dist/latest/docs/api/addons.html) 的 loader。
 
-Allows to connect native node modules with `.node` extension.
+允许使用 `.node` 拓展名与原生 node module 相关联。
 
-> ⚠ `node-loader` only works on the `node`/`electron-main`/`electron-main` targets.
+> ⚠ `node-loader` 只对 `node`/`electron-main`/`electron-main` 生效。
 
-## Getting Started {#getting-started}
+## 快速开始 {#getting-started}
 
-To begin, you'll need to install `node-loader`:
+首先，你需要安装 `node-loader`：
 
 ```console
 $ npm install node-loader --save-dev
 ```
 
-Setup the `target` option to `node`/`electron-main`/`electron-main` value and do not mock the `__dirname` global variable.
+设置 `target` 配置项为 `node`/`electron-main`/`electron-main`，并且需禁用 `__dirname` 全局变量。
 
 **webpack.config.js**
 
@@ -51,7 +51,7 @@ module.exports = {
 };
 ```
 
-### Inline {#inline}
+### 内联 {#inline}
 
 **index.js**
 
@@ -59,9 +59,9 @@ module.exports = {
 import node from 'node-loader!./file.node';
 ```
 
-And run `webpack` via your preferred method.
+然后通过你喜欢的方式运行 `webpack`。
 
-### Configuration {#configuration}
+### 配置 {#configuration}
 
 **index.js**
 
@@ -69,7 +69,7 @@ And run `webpack` via your preferred method.
 import node from 'file.node';
 ```
 
-Then add the loader to your `webpack` config. For example:
+然后在你的 `webpack` 配置中添加该 loader。例如：
 
 **webpack.config.js**
 
@@ -90,22 +90,22 @@ module.exports = {
 };
 ```
 
-And run `webpack` via your preferred method.
+然后通过你喜欢的方式运行 `webpack`。
 
-## Options {#options}
+## 选项 {#options}
 
 |         Name          |         Type         |         Default         | Description                                                  |
 | :-------------------: | :------------------: | :---------------------: | :----------------------------------------------------------- |
-| **[`flags`](#flags)** |      `{Number}`      |       `undefined`       | Enables/Disables `url`/`image-set` functions handling        |
-|  **[`name`](#name)**  | `{String\|Function}` | `'[contenthash].[ext]'` | Specifies a custom filename template for the target file(s). |
+| **[`flags`](#flags)** |      `{Number}`      |       `undefined`       | 启用/禁用 `url`/`image-set` 函数处理       |
+|  **[`name`](#name)**  | `{String\|Function}` | `'[contenthash].[ext]'` | 指定一个或多个目标文件的自定义文件名模板。 |
 
 ### `flags` {#flags}
 
-Type: `Number`
-Default: `undefined`
+类型：`Number`
+默认值：`undefined`
 
-The `flags` argument is an integer that allows to specify dlopen behavior.
-See the [`process.dlopen`][https://nodejs.org/api/process.html#process_process_dlopen_module_filename_flags] documentation for details.
+`flags` 参数是一个允许指定 dlopen 行为的整数。
+请查阅 [`process.dlopen`][https://nodejs.org/api/process.html#process_process_dlopen_module_filename_flags] 文档了解更多。
 
 **index.js**
 
@@ -139,10 +139,10 @@ module.exports = {
 
 ### `name` {#name}
 
-Type: `String|Function`
-Default: `'[contenthash].[ext]'`
+类型：`String|Function`
+默认值：`'[contenthash].[ext]'`
 
-Specifies a custom filename template for the target file(s).
+指定一个或多个目标文件的自定义文件名模板。
 
 #### `String` {#string}
 
@@ -201,11 +201,11 @@ module.exports = {
 };
 ```
 
-## Contributing {#contributing}
+## 贡献 {#contributing}
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+如果你还未阅读贡献指南，请抽时间进行阅读。
 
-[CONTRIBUTING](https://github.com/webpack-contrib/node-loader/blob/master/.github/CONTRIBUTING.md)
+[贡献指南](https://github.com/webpack-contrib/node-loader/blob/master/.github/CONTRIBUTING.md)
 
 ## License {#license}
 
