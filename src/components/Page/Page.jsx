@@ -36,8 +36,8 @@ export default function Page(props) {
   useEffect(() => {
     if (props.content instanceof Promise) {
       props.content
-        .then((module) => {
-          setContent(() => module.default || module);
+        .then((mod) => {
+          setContent(() => mod.default || mod);
           setContentLoaded(true);
         })
         .catch(() => setContent('Error loading content.'));
