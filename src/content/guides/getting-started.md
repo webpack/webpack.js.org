@@ -314,7 +314,7 @@ cacheable modules 530 KiB
 webpack 5.4.0 compiled successfully in 1940 ms
 ```
 
-T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --color`.
+T> 可以通过在 `npm run build` 命令与参数之间添加两个连接符的方式向 webpack 传递自定义参数，例如：`npm run build -- --color`。
 
 ## 结论 {#conclusion}
 

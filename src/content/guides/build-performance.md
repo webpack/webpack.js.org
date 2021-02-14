@@ -113,7 +113,7 @@ T> 我们支持 yarn PnP v3 [`yarn 2 berry`](https://yarnpkg.com/features/pnp)�
 
 ## 开发环境 {#development}
 
-以下步骤对于_开发环境_特别有帮助。
+以下步骤对于 _开发环境_ 特别有帮助。
 
 ### 增量编译 {#incremental-builds}
 
@@ -227,7 +227,7 @@ T> 这是一个关于 `ts-loader` [完整示例](https://github.com/TypeStrong/t
 
 ## 生产环境 {#production}
 
-以下步骤对于_生产环境_特别有帮助。
+以下步骤对于 _生产环境_ 特别有帮助。
 
 W> **不要为了很小的性能收益，牺牲应用程序的质量！**注意，在大多数情况下，优化代码质量比构建性能更重要。
 

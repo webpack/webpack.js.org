@@ -1135,7 +1135,7 @@ module.exports = {
 
 如下配置的 `webpack.config.js` 可以加载 CSS 文件，嵌入小的 PNG/JPG/GIF/SVG 图片以及字体作为[数据 URL](https://tools.ietf.org/html/rfc2397)，并将较大的文件复制到输出目录。
 
-**For webpack v5:**
+**对于 webpack v5：**
 
 **webpack.config.js**
 
@@ -1149,7 +1149,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-        // More information here https://webpack.js.org/guides/asset-modules/
+        // 更多信息请点击这里 https://webpack.js.org/guides/asset-modules/
         type: "asset",
       },
     ],
@@ -1157,7 +1157,7 @@ module.exports = {
 };
 ```
 
-**For webpack v4:**
+**对于 webpack v4：**
 
 **webpack.config.js**
 
@@ -1224,13 +1224,13 @@ module.exports = {
           },
         ],
       },
-      // For webpack v5
+      // 对于 webpack v5
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
         // More information here https://webpack.js.org/guides/asset-modules/
         type: "asset",
       },
-      // For webpack v4
+      // 对于 webpack v4
       // {
       //  test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
       //  loader: "url-loader",
