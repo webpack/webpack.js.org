@@ -90,3 +90,17 @@ module.exports = [
 ```
 
 T> If you pass a name to [`--config-name`](/api/cli/#config-name) flag, webpack will only build that specific configuration.
+
+### parallelism
+
+`number`
+
+In case you export multiple configurations, you can use `parallelism` option on the configuration array to specify the maximum number of compilers that will compile in parallel.
+
+```javascript
+  module.exports = [
+    { ... },
+    { ... }
+  ];
+  module.exports.parallelism = 1;
+```
