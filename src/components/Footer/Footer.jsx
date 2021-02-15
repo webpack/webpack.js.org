@@ -12,9 +12,12 @@ const Footer = () => (
         <Link className="footer__link" to="/guides/getting-started/">
           快速开始
         </Link>
+<<<<<<< HEAD
         <Link className="footer__link" to="/organization/">
           组织
         </Link>
+=======
+>>>>>>> 19284b8444002d8a5a7ee857ab0709cacf357b65
         <Link className="footer__link" to="/comparison/">
           对比
         </Link>

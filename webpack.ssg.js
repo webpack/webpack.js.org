@@ -14,12 +14,7 @@ const common = require('./webpack.common.js');
 const PrecacheSsgManifestPlugin = require('./src/PrecacheSsgManifestPlugin');
 
 // content tree to path array
-const paths = [
-  ...flattenContentTree(contentTree),
-  '/vote',
-  '/organization',
-  '/app-shell',
-];
+const paths = [...flattenContentTree(contentTree), '/vote', '/app-shell'];
 
 module.exports = (env) =>
   merge(common(env), {

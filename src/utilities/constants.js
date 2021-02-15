@@ -16,6 +16,7 @@ const excludedLoaders = [
   'webpack-contrib/restyle-loader',
   'webpack-contrib/gzip-loader',
   'webpack-contrib/cache-loader',
+  'webpack-contrib/json5-loader',
 ];
 const excludedPlugins = [
   'webpack-contrib/component-webpack-plugin',

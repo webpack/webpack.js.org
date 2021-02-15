@@ -25,8 +25,12 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 
 ## JSON {#json}
 
+<<<<<<< HEAD
 - [`json5-loader`](/loaders/json5-loader) 加载并转换 [JSON 5](https://json5.org/) 文件
 - [`cson-loader`](https://github.com/awnist/cson-loader) 加载并转换 [CSON](https://github.com/bevry/cson#what-is-cson) 文件
+=======
+- [`cson-loader`](https://github.com/awnist/cson-loader) Loads and transpiles a [CSON](https://github.com/bevry/cson#what-is-cson) file
+>>>>>>> 19284b8444002d8a5a7ee857ab0709cacf357b65
 
 ## 语法转换 {#transpiling}
 
