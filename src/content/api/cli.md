@@ -462,7 +462,7 @@ You can use the above environment variables inside your webpack configuration:
 module.exports = (env, argv) => {
   return {
     mode: env.WEBPACK_SERVE ? 'development' : 'production',
-  }
+  };
 };
 ```
 
