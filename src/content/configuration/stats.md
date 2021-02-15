@@ -47,6 +47,7 @@ webpack comes with certain presets available for the stats output:
 | `'normal'`          | `true`      | Standard output                                                |
 | `'verbose'`         | _none_      | Output everything                                              |
 | `'detailed'`        | _none_      | Output everything except `chunkModules` and `chunkRootModules` |
+| `'summary'`         | _none_      | Output `version`, `warningsCount` and `errorsCount` only       |
 
 ## Stats Options
 
