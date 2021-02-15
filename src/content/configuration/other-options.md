@@ -303,7 +303,12 @@ W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#ca
 
 A list of [`name`](#name) defining all sibling configurations it depends on. Dependent configurations need to be compiled first.
 
-In watch mode dependencies will invalidate the compiler when the dependency has changed and when a dependency is currently compiling or invalid this config will not compile until the dependency is done.
+In watch mode dependencies will invalidate the compiler when:
+
+ 1. the dependency has changed
+ 2. a dependency is currently compiling or invalid
+ 
+Remember that this configuration will not compile until the dependency is done.
 
 ## ignoreWarnings
 
