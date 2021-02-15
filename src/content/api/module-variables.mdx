@@ -131,21 +131,13 @@ __resourceQuery === '?test';
 
 原始 require 函数。这个表达式不会被解析器解析为依赖。
 
-<<<<<<< HEAD
 ### `__webpack_chunk_load__` (webpack 特有变量) {#__webpack_chunk_load__-webpack-specific}
 
-内部 chunk 载入函数，有两个输入参数：
+内部 chunk 载入函数，有一个输入参数：
 
 - `chunkId` 需要载入的 chunk id。
-- `callback(require)` chunk 载入后调用的回调函数。
-=======
-### \_\_webpack_chunk_load\_\_ (webpack-specific)
 
-The internal chunk loading function. Takes one argument:
-
-- `chunkId` The id for the chunk to load.
-
-Example to load chunks from alternate public path when one failed:
+当一个 chunk 加载失败时，从备用公共路径加载 chunk 的示例：
 
 ```js
 const originalLoad = __webpack_chunk_load__;
@@ -166,7 +158,6 @@ import('./module-a').then((moduleA) => {
   // now webpack will use the custom __webpack_chunk_load__ to load chunk
 });
 ```
->>>>>>> 19284b8444002d8a5a7ee857ab0709cacf357b65
 
 ### `__webpack_modules__` (webpack 特有变量) {#__webpack_modules__-webpack-specific}
 
