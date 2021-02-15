@@ -462,7 +462,7 @@ You can use the above environment variables inside your webpack configuration:
 module.exports = {
   // ...
   mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
-}
+};
 ```
 
 W> You can not access these environment variables inside bundled code.
