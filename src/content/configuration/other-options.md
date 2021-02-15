@@ -299,7 +299,7 @@ W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#ca
 
 ## dependencies
 
-`string` `[string]`
+`[string]`
 
 It is an array of [`name`](#name) of other configurations in the same array of configuration. All dependencies need to be compiled before this configuration starts compiling.
 
