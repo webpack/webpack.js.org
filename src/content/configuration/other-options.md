@@ -301,7 +301,7 @@ W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#ca
 
 `[string]`
 
-It is an array of [`name`](#name) of other configurations in the same array of configuration. All dependencies need to be compiled before this configuration starts compiling.
+A list of [`name`](#name) defining all sibling configurations it depends on. Dependent configurations need to be compiled first.
 
 In watch mode dependencies will invalidate the compiler when the dependency has changed and when a dependency is currently compiling or invalid this config will not compile until the dependency is done.
 
