@@ -25,7 +25,7 @@ related:
 
 `boolean = true`
 
-告知 webpack 使用 [TerserPlugin](/plugins/terser-webpack-plugin/) 或其它在 [`optimization.minimizer`](#optimizationminimizer) 
+告知 webpack 使用 [TerserPlugin](/plugins/terser-webpack-plugin/) 或其它在 [`optimization.minimizer`](#optimizationminimizer)
 定义的插件压缩 bundle。
 
 **webpack.config.js**
@@ -100,7 +100,7 @@ module.exports = {
 
 `object`
 
-对于动态导入模块，默认使用 webpack v4+ 提供的全新的通用分块策略(common chunk strategy)。请在 [SplitChunksPlugin](/plugins/split-chunks-plugin/) 
+对于动态导入模块，默认使用 webpack v4+ 提供的全新的通用分块策略(common chunk strategy)。请在 [SplitChunksPlugin](/plugins/split-chunks-plugin/)
 页面中查看配置其行为的可用选项。
 
 ## `optimization.runtimeChunk` {#optimizationruntimechunk}
@@ -233,7 +233,7 @@ W> `moduleIds: total-size` 在 webpack 5 中被废弃。
 
 告知 webpack 当选择模块 id 时需要使用哪种算法。将 `optimization.chunkIds` 设置为  `false` 会告知 webpack 没有任何内置的算法会被使用，但自定义的算法会由插件提供。`optimization.chunkIds` 的默认值是 `false`：
 
-- 如果环境是开发环境，那么 `optimization.chunkIds` 会被设置成 `'named'`, 
+- 如果环境是开发环境，那么 `optimization.chunkIds` 会被设置成 `'named'`,
 但当在生产环境中时，它会被设置成 `'deterministic'`
 - 如果上述的条件都不符合, `optimization.chunkIds` 会被默认设置为 `'natural'`
 
@@ -390,24 +390,6 @@ module.exports = {
 };
 ```
 
-## `optimization.occurrenceOrder` {#optimizationoccurrenceorder}
-
-`boolean`
-
-告知 webpack 去确定那些会引致更小的初始化文件 bundle 的模块顺序。`optimization.occurrenceOrder` 
-默认会在 `生产` [模式](/concepts/mode/) 中启用，其他情况禁用。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    occurrenceOrder: false,
-  },
-};
-```
-
 ## `optimization.providedExports` {#optimizationprovidedexports}
 
 `boolean`
@@ -429,8 +411,7 @@ module.exports = {
 
 `boolean = true` `string: 'global'`
 
-告知 webpack 去决定每个模块使用的导出内容。这取决于 [`optimization.providedExports`](#optimizationoccurrenceorder) 选项。由 `optimization.usedExports` 收集的信息会被其它优化手段或者代码生成使用，比如未使用的导出内容不会被生成，
-当所有的使用都适配，导出名称会被处理做单个标记字符。
+告知 webpack 去决定每个模块使用的导出内容。这取决于 [`optimization.providedExports`](#optimizationoccurrenceorder) 选项。由 `optimization.usedExports` 收集的信息会被其它优化手段或者代码生成使用，比如未使用的导出内容不会被生成，当所有的使用都适配，导出名称会被处理做单个标记字符。
 在压缩工具中的无用代码清除会受益于该选项，而且能够去除未使用的导出内容。
 
 **webpack.config.js**
@@ -527,7 +508,7 @@ T> 设置为 `optimization.sideEffects` 时，当模块只包含无副作用的�
 
 `optimization.portableRecords` 告知 webpack 生成带有相对路径的记录(records)使得可以移动上下文目录。
 
-默认 `optimization.portableRecords` 被禁用。如果下列至少一个选项在 webpack 中被设置，该选项也会自动启用：[`recordsPath`](/configuration/other-options/#recordspath), [`recordsInputPath`](/configuration/other-options/#recordsinputpath), 
+默认 `optimization.portableRecords` 被禁用。如果下列至少一个选项在 webpack 中被设置，该选项也会自动启用：[`recordsPath`](/configuration/other-options/#recordspath), [`recordsInputPath`](/configuration/other-options/#recordsinputpath),
 [`recordsOutputPath`](/configuration/other-options/#recordsoutputpath)。
 
 **webpack.config.js**

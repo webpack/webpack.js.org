@@ -376,7 +376,7 @@ module.exports = {
 };
 ```
 
-不幸的是，Less 并没有将所有选项 1 对 1 映射为 camelCase（驼峰值）。如有疑问，请[检查执行文件]（https://github.com/less/less.js/blob/3.x/bin/lessc）并搜索破折号选项。
+不幸的是，Less 并没有将所有选项 1 对 1 映射为 camelCase（驼峰值）。如有疑问，请[检查执行文件](https://github.com/less/less.js/blob/3.x/bin/lessc)并搜索破折号选项。
 
 ### Source maps {#source-maps}
 

@@ -12,9 +12,6 @@ const Footer = () => (
         <Link className="footer__link" to="/guides/getting-started/">
           快速开始
         </Link>
-        <Link className="footer__link" to="/organization/">
-          组织
-        </Link>
         <Link className="footer__link" to="/comparison/">
           对比
         </Link>
