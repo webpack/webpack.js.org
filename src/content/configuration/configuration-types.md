@@ -100,13 +100,13 @@ In case you export multiple configurations, you can use `parallelism` option on 
 **webpack.config.js**
 
 ```javascript
-  module.exports = [
-    { 
-      //config-1 
-    },
-    { 
-      //config-2 
-    }
-  ];
-  module.exports.parallelism = 1;
+module.exports = [
+  { 
+    //config-1 
+  },
+  { 
+    //config-2 
+  }
+];
+module.exports.parallelism = 1;
 ```
