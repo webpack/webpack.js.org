@@ -97,10 +97,16 @@ T> If you pass a name to [`--config-name`](/api/cli/#config-name) flag, webpack 
 
 In case you export multiple configurations, you can use `parallelism` option on the configuration array to specify the maximum number of compilers that will compile in parallel.
 
+**webpack.config.js**
+
 ```javascript
   module.exports = [
-    { ... },
-    { ... }
+    { 
+      //config-1 
+    },
+    { 
+      //config-2 
+    }
   ];
   module.exports.parallelism = 1;
 ```
