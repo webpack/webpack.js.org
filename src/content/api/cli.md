@@ -459,10 +459,10 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 You can use the above environment variables inside your webpack configuration:
 
 ```javascript
-   module.exports = {
-     // ...
-     mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
-   }
+module.exports = {
+  // ...
+  mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
+}
 ```
 
 W> You can not access these environment variables inside bundled code.
