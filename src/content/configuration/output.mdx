@@ -803,6 +803,10 @@ These options will result in a bundle that comes with a complete header to ensur
 
 - #### `libraryTarget: 'module'`
 
+  Output ES Module. Make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand.
+
+  Note that this feature is not fully supported yet, please track the progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
+
 - #### `libraryTarget: 'commonjs2'`
 
   The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in CommonJS environments:
