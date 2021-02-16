@@ -42,7 +42,7 @@ The following string values are supported:
 
 If not set, webpack sets `production` as the default value for `mode`.
 
-T> Please remember that setting `NODE_ENV` doesn't automatically set `mode`.
+T> If `mode` is not provided via configuration or CLI, CLI will check if `NODE_ENV` is set to any of the accepted values for `mode` and will use it to set `mode`.
 
 ### Mode: development
 
