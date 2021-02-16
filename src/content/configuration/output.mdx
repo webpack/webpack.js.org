@@ -1352,7 +1352,9 @@ module.exports = {
 
 `boolean = true`
 
-Allow outputting JavaScript files as module type. It sets `output.iife` to `false`, `output.libraryTarget` to `'module'`, `output.scriptType` to `'module'` and `terserOptions.module` to `true`
+Output JavaScript files as module type.
+
+When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output.scriptType`](#outputscripttype) to `'module'` and `terserOptions.module` to `true` internally. In addition, if you have [`output.library`](#outputlibrary) set, i.e., you're using webpack to compile a library to be consumed by others, webpack will also set [`output.libraryTarget`](#outputlibrarytarget) to `'module'`.
 
 W> `output.module` is an experimental feature and can be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
 
@@ -1367,7 +1369,7 @@ module.exports = {
 
 ## output.clean
 
-<Badge text='5.20.0+' />
+<Badge text="5.20.0+" />
 
 `boolean` `{ dry?: boolean, keep?: RegExp | string | ((filename: string) => boolean) }`
 
@@ -1409,7 +1411,7 @@ module.exports = {
     clean: {
       keep(asset) {
         return asset.includes('ignored/dir');
-      }
+      },
     },
   },
 };
@@ -1420,8 +1422,8 @@ You can also use it with hook:
 ```javascript
 webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
   'Test',
-  asset => {
-    if(/\/ignored\/dir\//.test(asset)) return true;
+  (asset) => {
+    if (/\/ignored\/dir\//.test(asset)) return true;
   }
 );
 ```
