@@ -16,19 +16,19 @@ repo: https://github.com/webpack-contrib/css-minimizer-webpack-plugin
 
 
 
-This plugin uses [cssnano](https://cssnano.co/) to optimize and minify your CSS.
+这个插件使用 [cssnano](https://cssnano.co/) 优化和压缩 CSS。
 
-Just like [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) but more accurate with source maps and assets using query string, allows to cache and works in parallel mode.
+就像 [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) 一样，但在 source maps 和 assets 中使用查询字符串会更加准确，支持缓存和并发模式下运行。
 
-## Getting Started {#getting-started}
+## 起步 {#getting-started}
 
-To begin, you'll need to install `css-minimizer-webpack-plugin`:
+首先，你需要安装 `css-minimizer-webpack-plugin`：
 
 ```console
 $ npm install css-minimizer-webpack-plugin --save-dev
 ```
 
-Then add the plugin to your `webpack` configuration. For example:
+接着在 `webpack` 配置中加入该插件。示例：
 
 **webpack.config.js**
 
@@ -48,7 +48,7 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [
-      // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
+      // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释
       // `...`,
       new CssMinimizerPlugin(),
     ],
@@ -56,18 +56,18 @@ module.exports = {
 };
 ```
 
-This will enable CSS optimization only in production mode.
-If you want to run it also in development set the `optimization.minimize` option to `true`.
+这将仅在生产环境开启 CSS 优化。
+如果还想在开发环境下启用 CSS 优化，请将 `optimization.minimize` 设置为 `true`。
 
-And run `webpack` via your preferred method.
+然后通过你喜欢的方式运行 `webpack`。
 
-## Options {#options}
+## 选项 {#options}
 
 ### `test` {#test}
 
-Type: `String|RegExp|Array<String|RegExp>` - default: `/\.css(\?.*)?$/i`
+类型：`String|RegExp|Array<String|RegExp>` - 默认值：`/\.css(\?.*)?$/i`
 
-Test to match files against.
+用来匹配文件。
 
 ```js
 module.exports = {
@@ -84,10 +84,10 @@ module.exports = {
 
 ### `include` {#include}
 
-Type: `String|RegExp|Array<String|RegExp>`
-Default: `undefined`
+类型：`String|RegExp|Array<String|RegExp>`
+默认值：`undefined`
 
-Files to include.
+要包含的文件。
 
 **webpack.config.js**
 
@@ -106,10 +106,10 @@ module.exports = {
 
 ### `exclude` {#exclude}
 
-Type: `String|RegExp|Array<String|RegExp>`
-Default: `undefined`
+类型：`String|RegExp|Array<String|RegExp>`
+默认值：`undefined`
 
-Files to exclude.
+要排除的文件。
 
 **webpack.config.js**
 
@@ -128,19 +128,19 @@ module.exports = {
 
 ### `cache` {#cache}
 
-> ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
+> ⚠ 在 webpack 5 中已被忽略！请使用 https://webpack.docschina.org/configuration/other-options/#cache。
 
-Type: `Boolean|String`
-Default: `true`
+类型：`Boolean|String`
+默认值：`true`
 
-Enable file caching.
-Default path to cache directory: `node_modules/.cache/css-minimizer-webpack-plugin`.
+启用文件缓存。
+缓存目录的默认路径：`node_modules/.cache/css-minimizer-webpack-plugin`。
 
-> ℹ️ If you use your own `minify` function please read the `minify` section for cache invalidation correctly.
+> ℹ️ 如果使用自己的 `minify` 函数，为缓存正确无效请先阅读 `minify` 部分。
 
 #### `Boolean` {#boolean}
 
-Enable/disable file caching.
+启用/禁用文件缓存。
 
 **webpack.config.js**
 
@@ -159,7 +159,7 @@ module.exports = {
 
 #### `String` {#string}
 
-Enable file caching and set path to cache directory.
+启用文件缓存并设置缓存目录的路径。
 
 **webpack.config.js**
 
@@ -178,14 +178,14 @@ module.exports = {
 
 ### `cacheKeys` {#cachekeys}
 
-> ⚠ Ignored in webpack 5! Please use https://webpack.js.org/configuration/other-options/#cache.
+> ⚠ 在 webpack 5 中已被忽略！请使用 https://webpack.docschina.org/configuration/other-options/#cache。
 
-Type: `Function<(defaultCacheKeys, file) -> Object>`
-Default: `defaultCacheKeys => defaultCacheKeys`
+类型：`Function<(defaultCacheKeys, file) -> Object>`
+默认值：`defaultCacheKeys => defaultCacheKeys`
 
-Allows you to override default cache keys.
+允许覆盖默认的缓存键。
 
-Default cache keys:
+默认缓存键：
 
 ```js
 ({
@@ -219,17 +219,17 @@ module.exports = {
 
 ### `parallel` {#parallel}
 
-Type: `Boolean|Number`
-Default: `true`
+类型：`Boolean|Number`
+默认值：`true`
 
-Use multi-process parallel running to improve the build speed.
-Default number of concurrent runs: `os.cpus().length - 1`.
+使用多进程并发执行，提升构建速度。
+运行时默认的并发数：`os.cpus().length - 1`。
 
-> ℹ️ Parallelization can speedup your build significantly and is therefore **highly recommended**.
+> ℹ️ 并行化可以显著提升构建速度，所以**强烈建议**使用。
 
 #### `Boolean` {#boolean}
 
-Enable/disable multi-process parallel running.
+启用/禁用多进程并发执行。
 
 **webpack.config.js**
 
@@ -248,7 +248,7 @@ module.exports = {
 
 #### `Number` {#number}
 
-Enable multi-process parallel running and set number of concurrent runs.
+启用多进程并发执行且设置并发数。
 
 **webpack.config.js**
 
@@ -267,22 +267,22 @@ module.exports = {
 
 ### `sourceMap` {#sourcemap}
 
-Type: `Boolean|Object`
-Default: `false` (see below for details around `devtool` value and `SourceMapDevToolPlugin` plugin)
+类型：`Boolean|Object`
+默认值：`false`（关于 `devtool`  和 `SourceMapDevToolPlugin` 插件的详细信息请参见下文）
 
-Enable (and configure) source map support. Use [PostCss SourceMap options](https://github.com/postcss/postcss-loader#sourcemap).
-Default configuration when enabled: `{ inline: false }`.
+启用（配置）source map 支持。使用 [PostCss SourceMap 选项](https://github.com/postcss/postcss-loader#sourcemap)。
+启用时的默认配置：`{ inline: false }`。
 
-**Works only with `source-map`, `inline-source-map`, `hidden-source-map` and `nosources-source-map` values for the [`devtool`](/configuration/devtool/) option.**
+**仅适用于 [`devtool`](/configuration/devtool/) 选项中的 `source-map`，`inline-source-map`，`hidden-source-map` 和 `nosources-source-map`。**
 
-Why? Because CSS support only these source map types.
+为什么？因为 CSS 仅支持这些 source map 类型。
 
-The plugin respect the [`devtool`](/configuration/devtool/) and using the `SourceMapDevToolPlugin` plugin.
-Using supported `devtool` values enable source map generation.
-Using `SourceMapDevToolPlugin` with enabled the `columns` option enables source map generation.
+该插件遵循 [`devtool`](/configuration/devtool/) 并使用 `SourceMapDevToolPlugin` 插件。 
+使用受支持的 `devtool` 值可以生成 source map。
+使用了开启 `columns` 选项的 `SourceMapDevToolPlugin` 可以生成 source map。
 
-Use source maps to map error message locations to modules (this slows down the compilation).
-If you use your own `minify` function please read the `minify` section for handling source maps correctly.
+使用 source map 在模块中映射错误信息（这会减慢编译速度）。
+如果要使用自定义的 `minify` 函数，为了能准确处理 source maps，请先阅读 `minify` 部分。
 
 **webpack.config.js**
 
@@ -301,14 +301,14 @@ module.exports = {
 
 ### `minify` {#minify}
 
-Type: `Function`
-Default: `undefined`
+类型：`Function`
+默认值：`undefined`
 
-Allows you to override default minify function.
-By default plugin uses [cssnano](https://github.com/cssnano/cssnano) package.
-Useful for using and testing unpublished versions or forks.
+允许覆盖默认的 minify 函数。
+默认情况下，插件使用 [cssnano](https://github.com/cssnano/cssnano) 包。
+对于使用和测试未发布或版本衍生版本很有用。
 
-> ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**.
+> ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
 
 **webpack.config.js**
 
@@ -325,7 +325,7 @@ module.exports = {
           const plugin = postcss.plugin(
             'custom-plugin',
             () => (css, result) => {
-              // custom code
+              // 自定义代码
             }
           );
 
@@ -357,10 +357,10 @@ module.exports = {
 
 ### `minimizerOptions` {#minimizeroptions}
 
-Type: `Object`
-Default: `{ preset: 'default' }`
+类型：`Object`
+默认值：`{ preset: 'default' }`
 
-Cssnano optimisations [options](https://cssnano.co/docs/optimisations).
+Cssnano 优化 [选项](https://cssnano.co/docs/optimisations).
 
 ```js
 module.exports = {
@@ -384,13 +384,13 @@ module.exports = {
 
 ### `warningsFilter` {#warningsfilter}
 
-Type: `Function<(warning, file, source) -> Boolean>`
-Default: `() => true`
+类型：`Function<(warning, file, source) -> Boolean>`
+默认值：`() => true`
 
-Allow to filter css-minimizer warnings (By default [cssnano](https://github.com/cssnano/cssnano)).
-Return `true` to keep the warning, a falsy value (`false`/`null`/`undefined`) otherwise.
+允许过滤 css-minimizer warnings（默认使用 [cssnano](https://github.com/cssnano/cssnano)）。
+返回 `true` 将保留 warning，否则返回假值（`false`/`null`/`undefined`）。
 
-> ⚠️ The `source` argument will contain `undefined` if you don't use source maps.
+> ⚠️ 如果没有使用 source maps，`source` 参数将包含 `undefined`。
 
 **webpack.config.js**
 
@@ -421,11 +421,11 @@ module.exports = {
 };
 ```
 
-## Examples {#examples}
+## 示例 {#examples}
 
-### Use sourcemaps {#use-sourcemaps}
+### 使用 sourcemaps {#use-sourcemaps}
 
-Don't forget to enable `sourceMap` options for all loaders.
+不要忘记为所有 loader 启用 `sourceMap` 选项。
 
 ```js
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -453,9 +453,9 @@ module.exports = {
 };
 ```
 
-### Remove all comments {#remove-all-comments}
+### 移除所有注释 {#remove-all-comments}
 
-Remove all comments (including comments starting with `/*!`).
+移除所有注释（包括以 `/*!` 开头的注释）。
 
 ```js
 module.exports = {
@@ -476,12 +476,12 @@ module.exports = {
 };
 ```
 
-### Using custom minifier [csso](https://github.com/css/csso) {#using-custom-minifier-cssohttpsgithubcomcsscsso}
+### 使用自定义 minifier [csso](https://github.com/css/csso) {#using-custom-minifier-cssohttpsgithubcomcsscsso}
 
-By default plugin uses [cssnano](https://github.com/cssnano/cssnano) package.
-It is possible to use another minify function.
+默认情况下，插件使用 [cssnano](https://github.com/cssnano/cssnano) 包。
+可以使用其他提供压缩功能的依赖包。
 
-> ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**.
+> ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
 
 **webpack.config.js**
 
@@ -521,12 +521,12 @@ module.exports = {
 };
 ```
 
-### Using custom minifier [clean-css](https://github.com/jakubpawlowicz/clean-css) {#using-custom-minifier-clean-csshttpsgithubcomjakubpawlowiczclean-css}
+### 使用自定义 minifier [clean-css](https://github.com/jakubpawlowicz/clean-css) {#using-custom-minifier-clean-csshttpsgithubcomjakubpawlowiczclean-css}
 
-By default plugin uses [cssnano](https://github.com/cssnano/cssnano) package.
-It is possible to use another minify function.
+默认情况下，插件使用 [cssnano](https://github.com/cssnano/cssnano) 包。
+可以使用其他提供压缩功能的依赖包。
 
-> ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**.
+> ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
 
 **webpack.config.js**
 
@@ -562,9 +562,9 @@ module.exports = {
 };
 ```
 
-## Contributing {#contributing}
+## 贡献 {#contributing}
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+如果你还没有阅读，请花一点时间阅读我们的贡献指南。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/css-minimizer-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
 
