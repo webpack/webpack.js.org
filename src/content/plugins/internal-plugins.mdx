@@ -57,9 +57,9 @@ Saves and restores module and chunk ids from records.
 
 Plugins, which add entry chunks to the compilation.
 
-### SingleEntryPlugin
+### EntryPlugin
 
-`SingleEntryPlugin(context, request, chunkName)`
+`EntryPlugin(context, request, chunkName)`
 
 Adds an entry chunk on compilation. The chunk is named `chunkName` and contains only one module (plus dependencies). The module is resolved from `request` in `context` (absolute path).
 
