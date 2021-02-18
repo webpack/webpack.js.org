@@ -1,4 +1,4 @@
-import { Component, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Container from '../Container/Container';
 import testLocalStorage from '../../utilities/test-local-storage';
 import './NotificationBar.scss';
@@ -15,47 +15,37 @@ const barDismissed = () => {
   return false;
 };
 
-class MessageBar extends Component {
-  static propTypes = {
-    onClose: PropTypes.func,
-  };
-  render() {
-    return (
-      <div className="notification-bar">
-        <Container className="notification-bar__inner">
-          <p>
-            Webpack 5 has been officially released. Read our{' '}
-            <a href="/blog/2020-10-10-webpack-5-release/">announcement</a>. Not
-            ready yet? Read{' '}
-            <a href="https://v4.webpack.js.org/">
-              webpack 4 documentation here
-            </a>
-            .
-          </p>
-          {localStorageIsEnabled ? (
-            <CloseIcon
-              aria-label="Dismiss"
-              className="notification-bar__close"
-              fill="#fff"
-              width={16}
-              onClick={this.close.bind(this)}
-              role="button"
-            />
-          ) : null}
-        </Container>
-      </div>
-    );
-  }
+MessageBar.propTypes = {
+  onClose: PropTypes.func,
+};
 
-  /**
-   * Update the notification-dismissed state
-   *
-   * @param {object} e - Click event
-   */
-  close() {
+function MessageBar(props) {
+  const close = () => {
     localStorage.setItem('notification-dismissed', version);
-    this.props.onClose();
-  }
+    props.onClose();
+  };
+  return (
+    <div className="notification-bar">
+      <Container className="notification-bar__inner">
+        <p>
+          Webpack 5 has been officially released. Read our{' '}
+          <a href="/blog/2020-10-10-webpack-5-release/">announcement</a>. Not
+          ready yet? Read{' '}
+          <a href="https://v4.webpack.js.org/">webpack 4 documentation here</a>.
+        </p>
+        {localStorageIsEnabled ? (
+          <CloseIcon
+            aria-label="Dismiss"
+            className="notification-bar__close"
+            fill="#fff"
+            width={16}
+            onClick={close}
+            role="button"
+          />
+        ) : null}
+      </Container>
+    </div>
+  );
 }
 
 export default function NotificationBar() {
