@@ -696,7 +696,9 @@ T> Note that `_entry_return_` in the example code below is the value returned by
 
 These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library`](#outputlibrary) at whatever scope the bundle was included at.
 
-- `libraryTarget: 'var'` – When your library is loaded, the **return value of your entry point** will be assigned to a variable:
+- #### `libraryTarget: 'var'`
+
+  When your library is loaded, the **return value of your entry point** will be assigned to a variable:
 
   ```javascript
   var MyLibrary = _entry_return_;
@@ -705,7 +707,9 @@ These options assign the return value of the entry point (e.g. whatever the entr
   MyLibrary.doSomething();
   ```
 
-- `libraryTarget: 'assign'` – This will generate an implied global which has the potential to reassign an existing value (use with caution):
+- #### `libraryTarget: 'assign'`
+
+  This will generate an implied global which has the potential to reassign an existing value (use with caution):
 
   ```javascript
   MyLibrary = _entry_return_;
@@ -713,7 +717,9 @@ These options assign the return value of the entry point (e.g. whatever the entr
 
   Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
 
-- `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' /> – Copy the return value to a target object if it exists, otherwise create the target object first:
+- #### `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' />
+
+  Copy the return value to a target object if it exists, otherwise create the target object first:
 
   ```js
   // create the target object if it doesn't exist
@@ -749,236 +755,261 @@ If `output.library` is not assigned a non-empty string, the default behavior is 
 
 W> Note that not setting a `output.library` will cause all properties returned by the entry point to be assigned to the given object; there are no checks against existing property names.
 
-`libraryTarget: "this"` - The **return value of your entry point** will be assigned to this under the property named by `output.library`. The meaning of `this` is up to you:
+- #### `libraryTarget: 'this'`
 
-```javascript
-this['MyLibrary'] = _entry_return_;
+  The **return value of your entry point** will be assigned to this under the property named by `output.library`. The meaning of `this` is up to you:
 
-// In a separate script...
-this.MyLibrary.doSomething();
-MyLibrary.doSomething(); // if this is window
-```
+  ```javascript
+  this['MyLibrary'] = _entry_return_;
 
-`libraryTarget: 'window'` - The **return value of your entry point** will be assigned to the `window` object using the `output.library` value.
+  // In a separate script...
+  this.MyLibrary.doSomething();
+  MyLibrary.doSomething(); // if this is window
+  ```
 
-```javascript
-window['MyLibrary'] = _entry_return_;
+- #### `libraryTarget: 'window'`
 
-window.MyLibrary.doSomething();
-```
+  The **return value of your entry point** will be assigned to the `window` object using the `output.library` value.
 
-`libraryTarget: 'global'` - The **return value of your entry point** will be assigned to the `global` object using the `output.library` value.
+  ```javascript
+  window['MyLibrary'] = _entry_return_;
 
-```javascript
-global['MyLibrary'] = _entry_return_;
+  window.MyLibrary.doSomething();
+  ```
 
-global.MyLibrary.doSomething();
-```
+- #### `libraryTarget: 'global'`
 
-`libraryTarget: 'commonjs'` - The **return value of your entry point** will be assigned to the `exports` object using the `output.library` value. As the name implies, this is used in CommonJS environments.
+  The **return value of your entry point** will be assigned to the `global` object using the `output.library` value.
 
-```javascript
-exports['MyLibrary'] = _entry_return_;
+  ```javascript
+  global['MyLibrary'] = _entry_return_;
 
-require('MyLibrary').doSomething();
-```
+  global.MyLibrary.doSomething();
+  ```
+
+- #### `libraryTarget: 'commonjs'`
+
+  The **return value of your entry point** will be assigned to the `exports` object using the `output.library` value. As the name implies, this is used in CommonJS environments.
+
+  ```javascript
+  exports['MyLibrary'] = _entry_return_;
+
+  require('MyLibrary').doSomething();
+  ```
 
 ### Module Definition Systems
 
 These options will result in a bundle that comes with a complete header to ensure compatibility with various module systems. The `output.library` option will take on a different meaning under the following `output.libraryTarget` options.
 
-`libraryTarget: 'commonjs2'` - The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in CommonJS environments:
+- #### `libraryTarget: 'module'`
 
-```javascript
-module.exports = _entry_return_;
+  Output ES Module. Make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand.
 
-require('MyLibrary').doSomething();
-```
+  Note that this feature is not fully supported yet, please track the progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
 
-Note that `output.library` can't be used with this particular `output.libraryTarget`, for further details, please [read this issue](https://github.com/webpack/webpack/issues/11800).
+- #### `libraryTarget: 'commonjs2'`
 
-T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
+  The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in CommonJS environments:
 
-`libraryTarget: 'amd'` - This will expose your library as an AMD module.
+  ```javascript
+  module.exports = _entry_return_;
 
-AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
+  require('MyLibrary').doSomething();
+  ```
 
-So, with the following configuration...
+  Note that `output.library` can't be used with this particular `output.libraryTarget`, for further details, please [read this issue](https://github.com/webpack/webpack/issues/11800).
 
-```javascript
-module.exports = {
-  //...
-  output: {
-    library: 'MyLibrary',
-    libraryTarget: 'amd',
-  },
-};
-```
+  T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
 
-The generated output will be defined with the name "MyLibrary", i.e.
+- #### `libraryTarget: 'amd'`
 
-```javascript
-define('MyLibrary', [], function () {
-  return _entry_return_;
-});
-```
+  This will expose your library as an AMD module.
 
-The bundle can be included as part of a script tag, and the bundle can be invoked like so:
+  AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
 
-```javascript
-require(['MyLibrary'], function (MyLibrary) {
-  // Do something with the library...
-});
-```
+  So, with the following configuration...
 
-If `output.library` is undefined, the following is generated instead.
-
-```javascript
-define([], function () {
-  return _entry_return_;
-});
-```
-
-This bundle will not work as expected, or not work at all (in the case of the almond loader) if loaded directly with a `<script>` tag. It will only work through a RequireJS compatible asynchronous module loader through the actual path to that file, so in this case, the `output.path` and `output.filename` may become important for this particular setup if these are exposed directly on the server.
-
-`libraryTarget: 'amd-require'` - This packages your output with an immediately-executed AMD `require(dependencies, factory)` wrapper.
-
-The `'amd-require'` target allows for the use of AMD dependencies without needing a separate later invocation. As with the `'amd'` target, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
-
-With this target, the library name is ignored.
-
-`libraryTarget: 'umd'` - This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
-
-In this case, you need the `library` property to name your module:
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    library: 'MyLibrary',
-    libraryTarget: 'umd',
-  },
-};
-```
-
-And finally the output is:
-
-```javascript
-(function webpackUniversalModuleDefinition(root, factory) {
-  if (typeof exports === 'object' && typeof module === 'object')
-    module.exports = factory();
-  else if (typeof define === 'function' && define.amd) define([], factory);
-  else if (typeof exports === 'object') exports['MyLibrary'] = factory();
-  else root['MyLibrary'] = factory();
-})(typeof self !== 'undefined' ? self : this, function () {
-  return _entry_return_;
-});
-```
-
-Note that omitting `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    libraryTarget: 'umd',
-  },
-};
-```
-
-The output will be:
-
-```javascript
-(function webpackUniversalModuleDefinition(root, factory) {
-  if (typeof exports === 'object' && typeof module === 'object')
-    module.exports = factory();
-  else if (typeof define === 'function' && define.amd) define([], factory);
-  else {
-    var a = factory();
-    for (var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-  }
-})(typeof self !== 'undefined' ? self : this, function () {
-  return _entry_return_;
-});
-```
-
-Since webpack 3.1.0, you may specify an object for `library` for differing names per targets:
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    library: {
-      root: 'MyLibrary',
-      amd: 'my-library',
-      commonjs: 'my-common-library',
-    },
-    libraryTarget: 'umd',
-  },
-};
-```
-
-`libraryTarget: 'system'` - This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md)
-module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
-
-System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and have your webpack bundle loaded into the System module registry.
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    libraryTarget: 'system',
-  },
-};
-```
-
-Output:
-
-```javascript
-System.register([], function (_export) {
-  return {
-    setters: [],
-    execute: function () {
-      // ...
+  ```javascript
+  module.exports = {
+    //...
+    output: {
+      library: 'MyLibrary',
+      libraryTarget: 'amd',
     },
   };
-});
-```
+  ```
 
-By adding `output.library` to configuration in addition to having `output.libraryTarget` set to `system`, the output bundle will have the library name as an argument to `System.register`:
+  The generated output will be defined with the name "MyLibrary", i.e.
 
-```javascript
-System.register('my-library', [], function (_export) {
-  return {
-    setters: [],
-    execute: function () {
-      // ...
+  ```javascript
+  define('MyLibrary', [], function () {
+    return _entry_return_;
+  });
+  ```
+
+  The bundle can be included as part of a script tag, and the bundle can be invoked like so:
+
+  ```javascript
+  require(['MyLibrary'], function (MyLibrary) {
+    // Do something with the library...
+  });
+  ```
+
+  If `output.library` is undefined, the following is generated instead.
+
+  ```javascript
+  define([], function () {
+    return _entry_return_;
+  });
+  ```
+
+  This bundle will not work as expected, or not work at all (in the case of the almond loader) if loaded directly with a `<script>` tag. It will only work through a RequireJS compatible asynchronous module loader through the actual path to that file, so in this case, the `output.path` and `output.filename` may become important for this particular setup if these are exposed directly on the server.
+
+- #### `libraryTarget: 'amd-require'`
+
+  This packages your output with an immediately-executed AMD `require(dependencies, factory)` wrapper.
+
+  The `'amd-require'` target allows for the use of AMD dependencies without needing a separate later invocation. As with the `'amd'` target, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
+
+  With this target, the library name is ignored.
+
+- #### `libraryTarget: 'umd'`
+
+  This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
+
+  In this case, you need the `library` property to name your module:
+
+  ```javascript
+  module.exports = {
+    //...
+    output: {
+      library: 'MyLibrary',
+      libraryTarget: 'umd',
     },
   };
-});
-```
+  ```
 
-You can access [SystemJS context](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md#format-definition) via `__system_context__`:
+  And finally the output is:
 
-```javascript
-// Log the URL of the current SystemJS module
-console.log(__system_context__.meta.url);
+  ```javascript
+  (function webpackUniversalModuleDefinition(root, factory) {
+    if (typeof exports === 'object' && typeof module === 'object')
+      module.exports = factory();
+    else if (typeof define === 'function' && define.amd) define([], factory);
+    else if (typeof exports === 'object') exports['MyLibrary'] = factory();
+    else root['MyLibrary'] = factory();
+  })(typeof self !== 'undefined' ? self : this, function () {
+    return _entry_return_;
+  });
+  ```
 
-// Import a SystemJS module, with the current SystemJS module's url as the parentUrl
-__system_context__.import('./other-file.js').then((m) => {
-  console.log(m);
-});
-```
+  Note that omitting `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
+
+  ```javascript
+  module.exports = {
+    //...
+    output: {
+      libraryTarget: 'umd',
+    },
+  };
+  ```
+
+  The output will be:
+
+  ```javascript
+  (function webpackUniversalModuleDefinition(root, factory) {
+    if (typeof exports === 'object' && typeof module === 'object')
+      module.exports = factory();
+    else if (typeof define === 'function' && define.amd) define([], factory);
+    else {
+      var a = factory();
+      for (var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+    }
+  })(typeof self !== 'undefined' ? self : this, function () {
+    return _entry_return_;
+  });
+  ```
+
+  Since webpack 3.1.0, you may specify an object for `library` for differing names per targets:
+
+  ```javascript
+  module.exports = {
+    //...
+    output: {
+      library: {
+        root: 'MyLibrary',
+        amd: 'my-library',
+        commonjs: 'my-common-library',
+      },
+      libraryTarget: 'umd',
+    },
+  };
+  ```
+
+- #### `libraryTarget: 'system'`
+
+  This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
+
+  System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and have your webpack bundle loaded into the System module registry.
+
+  ```javascript
+  module.exports = {
+    //...
+    output: {
+      libraryTarget: 'system',
+    },
+  };
+  ```
+
+  Output:
+
+  ```javascript
+  System.register([], function (_export) {
+    return {
+      setters: [],
+      execute: function () {
+        // ...
+      },
+    };
+  });
+  ```
+
+  By adding `output.library` to configuration in addition to having `output.libraryTarget` set to `system`, the output bundle will have the library name as an argument to `System.register`:
+
+  ```javascript
+  System.register('my-library', [], function (_export) {
+    return {
+      setters: [],
+      execute: function () {
+        // ...
+      },
+    };
+  });
+  ```
+
+  You can access [SystemJS context](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md#format-definition) via `__system_context__`:
+
+  ```javascript
+  // Log the URL of the current SystemJS module
+  console.log(__system_context__.meta.url);
+
+  // Import a SystemJS module, with the current SystemJS module's url as the parentUrl
+  __system_context__.import('./other-file.js').then((m) => {
+    console.log(m);
+  });
+  ```
 
 ### Other Targets
 
-`libraryTarget: 'jsonp'` - This will wrap the return value of your entry point into a jsonp wrapper.
+- #### `libraryTarget: 'jsonp'`
 
-```javascript
-MyLibrary(_entry_return_);
-```
+  This will wrap the return value of your entry point into a jsonp wrapper.
 
-The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
+  ```javascript
+  MyLibrary(_entry_return_);
+  ```
+
+  The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
 
 ## `output.importFunctionName`
 
@@ -1367,7 +1398,7 @@ module.exports = {
 
 ## output.clean
 
-<Badge text='5.20.0+' />
+<Badge text="5.20.0+" />
 
 `boolean` `{ dry?: boolean, keep?: RegExp | string | ((filename: string) => boolean) }`
 
@@ -1409,7 +1440,7 @@ module.exports = {
     clean: {
       keep(asset) {
         return asset.includes('ignored/dir');
-      }
+      },
     },
   },
 };
@@ -1420,8 +1451,8 @@ You can also use it with hook:
 ```javascript
 webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
   'Test',
-  asset => {
-    if(/\/ignored\/dir\//.test(asset)) return true;
+  (asset) => {
+    if (/\/ignored\/dir\//.test(asset)) return true;
   }
 );
 ```
