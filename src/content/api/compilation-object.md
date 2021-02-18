@@ -50,17 +50,6 @@ Parameters:
 
 - `module` - module to be searched for. The identifier is extracted from the module by the compilation using `module.identifier()` method.
 
-### waitForBuildingFinished
-
-`function (module, callback)`
-
-Runs a given `callback` function when the given module was built.
-
-Parameters:
-
-- `module` - the module at question.
-- `callback` - the function to be invoked.
-
 ### buildModule
 
 `function (module, optional, origin, dependencies)`
@@ -85,21 +74,6 @@ Parameters:
 - `module` - module to be processed for the dependencies.
 - `callback` - function to be invoked when dependencies of the module had been processed.
 
-### addModuleDependencies
-
-`function (module, dependencies, bail, cacheGroup, recursive, callback)`
-
-Adds dependencies to the module. Automatically called by `processModuleDependencies` after processing dependencies.
-
-Parameters:
-
-- `module` - module to add dependencies to.
-- `dependencies` - set of sorted dependencies to iterate through and add to the module.
-- `bail` - whether to bail or not when an error occurs.
-- `cacheGroup` - `cacheGroup` of the module.
-- `recursive` - whether it is a recursive traversal.
-- `callback` - function to invoke after adding the module dependencies.
-
 ### addEntry
 
 `function (context, entry, name, callback)`
@@ -112,18 +86,6 @@ Parameters:
 - `entry` - entry dependency.
 - `name` - the name of entry.
 - `callback` - function to be invoked when addEntry finishes.
-
-### prefetch
-
-`function (context, dependency, callback)`
-
-Creates a module from a given dependency.
-
-Parameters:
-
-- `context` - context path.
-- `dependency` - the dependency that was used to create the module.
-- `callback` - module callback that sends a module up one level.
 
 ### rebuildModule
 
