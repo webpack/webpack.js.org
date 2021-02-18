@@ -25,41 +25,43 @@ This section covers all methods available in code compiled with webpack. When us
 While webpack supports multiple module syntaxes, we recommend following a single syntax for consistency and to avoid odd behaviors/bugs. Actually webpack would enforce the recommendation for `.mjs` files, `.cjs` files or `.js` files when their nearest parent `package.json` file contains a `"type"` field with a value of either `"module"` or `"commonjs"`. Please pay attention to these enforcements before you read on:
 
 - `.mjs` or `.js` with `"type": "module"` in `package.json`
-    - No CommonJS allowed, for example, you can't use `require`, `module.exports` or `exports`
-    - File extensions are required when importing, e.g, you should use `import './src/App.mjs'` instead of `import './src/App'` (you can disable this enforcement with [`Rule.resolve.fullySpecified`](/configuration/module/#resolvefullyspecified))
+  - No CommonJS allowed, for example, you can't use `require`, `module.exports` or `exports`
+  - File extensions are required when importing, e.g, you should use `import './src/App.mjs'` instead of `import './src/App'` (you can disable this enforcement with [`Rule.resolve.fullySpecified`](/configuration/module/#resolvefullyspecified))
 - `.cjs` or `.js` with `"type": "commonjs"` in `package.json`
-    - Neither `import` nor `export` is available
+  - Neither `import` nor `export` is available
 - `.wasm` with `"type": "module"` in `package.json`
-    - File extensions are required when importing wasm file
+  - File extensions are required when importing wasm file
 
 ## ES6 (Recommended)
 
 Version 2 of webpack supports ES6 module syntax natively, meaning you can use `import` and `export` without a tool like babel to handle this for you. Keep in mind that you will still probably need babel for other ES6+ features. The following methods are supported by webpack:
 
-
 ### `import`
 
 Statically `import` the `export`s of another module.
 
-``` javascript
+```javascript
 import MyModule from './my-module.js';
 import { NamedExport } from './other-module.js';
 ```
 
-W> The keyword here is __statically__. A normal `import` statement cannot be used dynamically within other logic or contain variables. See the [spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) for more information and `import()` below for dynamic usage.
+W> The keyword here is **statically**. A normal `import` statement cannot be used dynamically within other logic or contain variables. See the [spec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) for more information and `import()` below for dynamic usage.
 
 You can also `import` Data URI:
 
 ```javascript
 import 'data:text/javascript;charset=utf-8;base64,Y29uc29sZS5sb2coJ2lubGluZSAxJyk7';
-import { number, fn } from 'data:text/javascript;charset=utf-8;base64,ZXhwb3J0IGNvbnN0IG51bWJlciA9IDQyOwpleHBvcnQgY29uc3QgZm4gPSAoKSA9PiAiSGVsbG8gd29ybGQiOw==';
+import {
+  number,
+  fn,
+} from 'data:text/javascript;charset=utf-8;base64,ZXhwb3J0IGNvbnN0IG51bWJlciA9IDQyOwpleHBvcnQgY29uc3QgZm4gPSAoKSA9PiAiSGVsbG8gd29ybGQiOw==';
 ```
 
 ### `export`
 
 Export anything as a `default` or named export.
 
-``` javascript
+```javascript
 // Named exports
 export var Count = 5;
 export function Multiply(a, b) {
@@ -72,7 +74,6 @@ export default {
 };
 ```
 
-
 ### `import()`
 
 `function(string path):Promise`
@@ -81,10 +82,9 @@ Dynamically load modules. Calls to `import()` are treated as split points, meani
 
 T> The [ES2015 Loader spec](https://whatwg.github.io/loader/) defines `import()` as method to load ES2015 modules dynamically on runtime.
 
-
-``` javascript
-if ( module.hot ) {
-  import('lodash').then(_ => {
+```javascript
+if (module.hot) {
+  import('lodash').then((_) => {
     // Do something with lodash (a.k.a '_')...
   });
 }
@@ -92,18 +92,16 @@ if ( module.hot ) {
 
 W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `import()` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
-
 ### Dynamic expressions in import()
 
 It is not possible to use a fully dynamic import statement, such as `import(foo)`. Because `foo` could potentially be any path to any file in your system or project.
 
-The `import()` must contain at least some information about where the module is located. Bundling can be limited to a specific directory or set of files so that when you are using a dynamic expression - every module that could potentially be requested on an `import()` call is included. For example, ``import(`./locale/${language}.json`)`` will cause every `.json` file in the `./locale` directory to be bundled into the new chunk. At run time, when the variable `language` has been computed, any file like `english.json` or `german.json` will be available for consumption.
-
+The `import()` must contain at least some information about where the module is located. Bundling can be limited to a specific directory or set of files so that when you are using a dynamic expression - every module that could potentially be requested on an `import()` call is included. For example, `` import(`./locale/${language}.json`) `` will cause every `.json` file in the `./locale` directory to be bundled into the new chunk. At run time, when the variable `language` has been computed, any file like `english.json` or `german.json` will be available for consumption.
 
 ```javascript
 // imagine we had a method to get language from cookies or other storage
 const language = detectVisitorLanguage();
-import(`./locale/${language}.json`).then(module => {
+import(`./locale/${language}.json`).then((module) => {
   // do something with the translations
 });
 ```
@@ -114,7 +112,7 @@ T> Using the [`webpackInclude` and `webpackExclude`](/api/module-methods/#magic-
 
 Inline comments to make features work. By adding comments to the import, we can do things such as name our chunk or select different modes. For a full list of these magic comments see the code below followed by an explanation of what these comments do.
 
-``` js
+```js
 // Single target
 import(
   /* webpackChunkName: "my-chunk-name" */
@@ -148,7 +146,7 @@ W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
 `webpackMode`: Since webpack 2.6.0, different modes for resolving dynamic imports can be specified. The following options are supported:
 
 - `'lazy'` (default): Generates a lazy-loadable chunk for each `import()`ed module.
-- `'lazy-once'`: Generates a single lazy-loadable chunk that can satisfy all calls to `import()`. The chunk will be fetched on the first call to `import()`, and subsequent calls to `import()` will use the same network response. Note that this only makes sense in the case of a partially dynamic statement, e.g. ``import(`./locales/${language}.json`)``, where multiple module paths that can potentially be requested.
+- `'lazy-once'`: Generates a single lazy-loadable chunk that can satisfy all calls to `import()`. The chunk will be fetched on the first call to `import()`, and subsequent calls to `import()` will use the same network response. Note that this only makes sense in the case of a partially dynamic statement, e.g. `` import(`./locales/${language}.json`) ``, where multiple module paths that can potentially be requested.
 - `'eager'`: Generates no extra chunk. All modules are included in the current chunk and no additional network requests are made. A `Promise` is still returned but is already resolved. In contrast to a static import, the module isn't executed until the call to `import()` is made.
 - `'weak'`: Tries to load the module if the module function has already been loaded in some other way (e.g. another chunk imported it or a script containing the module was loaded). A `Promise` is still returned, but only successfully resolves if the chunks are already on the client. If the module is not available, the `Promise` is rejected. A network request will never be performed. This is useful for universal rendering when required chunks are always manually served in initial requests (embedded within the page), but not in cases where app navigation will trigger an import not initially served.
 
@@ -158,21 +156,19 @@ W> Note that setting `webpackIgnore` to `true` opts out of code splitting.
 
 T> Note that all options can be combined like so `/* webpackMode: "lazy-once", webpackChunkName: "all-i18n-data" */`. This is wrapped in a JavaScript object and executed using [node VM](https://nodejs.org/dist/latest-v8.x/docs/api/vm.html). You do not need to add curly brackets.
 
-`webpackInclude`: A regular expression that will be matched against during import resolution. Only modules that match __will be bundled__.
+`webpackInclude`: A regular expression that will be matched against during import resolution. Only modules that match **will be bundled**.
 
-`webpackExclude`: A regular expression that will be matched against during import resolution. Any module that matches __will not be bundled__.
+`webpackExclude`: A regular expression that will be matched against during import resolution. Any module that matches **will not be bundled**.
 
 T> Note that `webpackInclude` and `webpackExclude` options do not interfere with the prefix. eg: `./locale`.
 
 `webpackExports`: tells webpack to only bundle the specified exports of a dynamically `import()`ed module. It can decrease the output size of a chunk. Available since [webpack 5.0.0-beta.18](https://github.com/webpack/webpack/releases/tag/v5.0.0-beta.18).
 
-
 ## CommonJS
 
 The goal of CommonJS is to specify an ecosystem for JavaScript outside the browser. The following CommonJS methods are supported by webpack:
 
-
-### `require`
+### require
 
 ```typescript
 require(dependency: String);
@@ -180,13 +176,14 @@ require(dependency: String);
 
 Synchronously retrieve the exports from another module. The compiler will ensure that the dependency is available in the output bundle.
 
-``` javascript
+```javascript
 var $ = require('jquery');
 var myModule = require('my-module');
 ```
 
-W> Using it asynchronously may not have the expected effect.
+It's possible to enable magic comments for `require` as well, see [`module.parser.javascript.commonjsMagicComments`](/configuration/module/#moduleparserjavascriptcommonjsmagiccomments) for more.
 
+W> Using it asynchronously may not have the expected effect.
 
 ### `require.resolve`
 
@@ -200,21 +197,20 @@ W> Module ID's type can be a `number` or a `string` depending on the [`optimizat
 
 See [`module.id`](/api/module-variables/#moduleid-commonjs) for more information.
 
-
 ### `require.cache`
 
 Multiple requires of the same module result in only one module execution and only one export. Therefore a cache in the runtime exists. Removing values from this cache causes new module execution and a new export.
 
 W> This is only needed in rare cases for compatibility!
 
-``` javascript
+```javascript
 var d1 = require('dependency');
 require('dependency') === d1;
 delete require.cache[require.resolve('dependency')];
 require('dependency') !== d1;
 ```
 
-``` javascript
+```javascript
 // in file.js
 require.cache[module.id] === module;
 require('./file.js') === module.exports;
@@ -223,7 +219,6 @@ require.cache[module.id] === undefined;
 require('./file.js') !== module.exports; // in theory; in praxis this causes a stack overflow
 require.cache[module.id] !== module;
 ```
-
 
 ### `require.ensure`
 
@@ -244,11 +239,11 @@ Split out the given `dependencies` to a separate bundle that will be loaded asyn
 
 W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use `require.ensure` with older browsers, remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
-``` javascript
+```javascript
 var a = require('normal-dep');
 
-if ( module.hot ) {
-  require.ensure(['b'], function(require) {
+if (module.hot) {
+  require.ensure(['b'], function (require) {
     var c = require('c');
 
     // Do something special...
@@ -265,12 +260,9 @@ The following parameters are supported in the order specified above:
 
 W> Although the implementation of `require` is passed as an argument to the `callback` function, using an arbitrary name e.g. `require.ensure([], function(request) { request('someModule'); })` isn't handled by webpack's static parser. Use `require` instead, e.g. `require.ensure([], function(require) { require('someModule'); })`.
 
-
-
 ## AMD
 
 Asynchronous Module Definition (AMD) is a JavaScript specification that defines an interface for writing and loading modules. The following AMD methods are supported by webpack:
-
 
 ### `define` (with factory)
 
@@ -284,8 +276,8 @@ If `dependencies` are provided, `factoryMethod` will be called with the exports 
 
 W> Note that webpack ignores the `name` argument.
 
-``` javascript
-define(['jquery', 'my-module'], function($, myModule) {
+```javascript
+define(['jquery', 'my-module'], function ($, myModule) {
   // Do something with $ and myModule...
 
   // Export a function
@@ -297,7 +289,6 @@ define(['jquery', 'my-module'], function($, myModule) {
 
 W> This CANNOT be used in an asynchronous function.
 
-
 ### `define` (with value)
 
 <!-- eslint-skip -->
@@ -308,14 +299,13 @@ define(value: !Function)
 
 This will simply export the provided `value`. The `value` here can be anything except a function.
 
-``` javascript
+```javascript
 define({
-  answer: 42
+  answer: 42,
 });
 ```
 
 W> This CANNOT be used in an async function.
-
 
 ### `require` (amd-version)
 
@@ -329,20 +319,17 @@ Similar to `require.ensure`, this will split the given `dependencies` into a sep
 
 W> This feature relies on [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) internally. If you use AMD with older browsers (e.g. Internet Explorer 11), remember to shim `Promise` using a polyfill such as [es6-promise](https://github.com/stefanpenner/es6-promise) or [promise-polyfill](https://github.com/taylorhakes/promise-polyfill).
 
-``` javascript
-require(['b'], function(b) {
+```javascript
+require(['b'], function (b) {
   var c = require('c');
 });
 ```
 
 W> There is no option to provide a chunk name.
 
-
-
 ## Labeled Modules
 
 The internal `LabeledModulesPlugin` enables you to use the following methods for exporting and requiring within your modules:
-
 
 ### `export` label
 
@@ -359,12 +346,11 @@ export: function method(value) {
 
 W> Using it in an async function may not have the expected effect.
 
-
 ### `require` label
 
 Make all exports from the dependency available in the current scope. The `require` label can occur before a string. The dependency must export values with the `export` label. CommonJS or AMD modules cannot be consumed.
 
-__some-dependency.js__
+**some-dependency.js**
 
 <!-- eslint-skip -->
 
@@ -383,12 +369,9 @@ console.log(answer);
 method(...);
 ```
 
-
-
 ## Webpack
 
 Aside from the module syntaxes described above, webpack also allows a few custom, webpack-specific methods:
-
 
 ### `require.context`
 
@@ -396,11 +379,11 @@ Aside from the module syntaxes described above, webpack also allows a few custom
 
 ```js
 require.context(
-  directory: String,
-  includeSubdirs: Boolean /* optional, default true */,
-  filter: RegExp /* optional, default /^\.\/.*$/, any file */,
-  mode: String  /* optional, 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once', default 'sync' */
-)
+  (directory: String),
+  (includeSubdirs: Boolean) /* optional, default true */,
+  (filter: RegExp) /* optional, default /^\.\/.*$/, any file */,
+  (mode: String) /* optional, 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once', default 'sync' */
+);
 ```
 
 Specify a whole group of dependencies using a path to the `directory`, an option to `includeSubdirs`, a `filter` for more fine grained control of the modules included, and a `mode` to define the way how loading will work. Underlying modules can then be easily resolved later on:
@@ -414,7 +397,7 @@ If `mode` is set to `'lazy'`, the underlying modules will be loaded asynchronous
 
 ```javascript
 var context = require.context('locales', true, /\.json$/, 'lazy');
-context('localeA').then(locale => {
+context('localeA').then((locale) => {
   // do something with locale
 });
 ```
@@ -426,15 +409,19 @@ The full list of available modes and their behavior is described in [`import()`]
 <!-- eslint-skip -->
 
 ```js
-require.include(dependency: String)
+require.include((dependency: String));
 ```
 
 Include a `dependency` without executing it. This can be used for optimizing the position of a module in the output chunks.
 
-``` javascript
+```javascript
 require.include('a');
-require.ensure(['a', 'b'], function(require) { /* ... */ });
-require.ensure(['a', 'c'], function(require) { /* ... */ });
+require.ensure(['a', 'b'], function (require) {
+  /* ... */
+});
+require.ensure(['a', 'c'], function (require) {
+  /* ... */
+});
 ```
 
 This will result in the following output:
@@ -445,16 +432,15 @@ This will result in the following output:
 
 Without `require.include('a')` it would be duplicated in both anonymous chunks.
 
-
 ### `require.resolveWeak`
 
 Similar to `require.resolve`, but this won't pull the `module` into the bundle. It's what is considered a "weak" dependency.
 
-``` javascript
-if(__webpack_modules__[require.resolveWeak('module')]) {
+```javascript
+if (__webpack_modules__[require.resolveWeak('module')]) {
   // Do something when module is available...
 }
-if(require.cache[require.resolveWeak('module')]) {
+if (require.cache[require.resolveWeak('module')]) {
   // Do something when module was loaded before...
 }
 

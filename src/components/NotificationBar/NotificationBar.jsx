@@ -17,14 +17,20 @@ const barDismissed = () => {
 
 class MessageBar extends Component {
   static propTypes = {
-    onClose: PropTypes.func
-  }
+    onClose: PropTypes.func,
+  };
   render() {
     return (
       <div className="notification-bar">
         <Container className="notification-bar__inner">
           <p>
-            Webpack 5 has been officially released. Read our <a href="/blog/2020-10-10-webpack-5-release/">announcement</a>. Not ready yet? Read <a href="https://v4.webpack.js.org/">webpack 4 documentation here</a>.
+            Webpack 5 has been officially released. Read our{' '}
+            <a href="/blog/2020-10-10-webpack-5-release/">announcement</a>. Not
+            ready yet? Read{' '}
+            <a href="https://v4.webpack.js.org/">
+              webpack 4 documentation here
+            </a>
+            .
           </p>
           {localStorageIsEnabled ? (
             <CloseIcon
@@ -34,7 +40,7 @@ class MessageBar extends Component {
               width={16}
               onClick={this.close.bind(this)}
               role="button"
-              />
+            />
           ) : null}
         </Container>
       </div>
@@ -52,7 +58,7 @@ class MessageBar extends Component {
   }
 }
 
-export default function NotificationBar () {
+export default function NotificationBar() {
   // hide the bar in the beginning
   const [dismissed, setDismissed] = useState(true);
   const onClose = () => {
@@ -72,8 +78,8 @@ export default function NotificationBar () {
         document.body.classList.remove('notification-bar-visible');
       }
     }
-
   }, [dismissed]);
-  return <>{dismissed === false ? <MessageBar onClose={onClose} /> : undefined}</>;
+  return (
+    <>{dismissed === false ? <MessageBar onClose={onClose} /> : undefined}</>
+  );
 }
-

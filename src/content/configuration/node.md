@@ -22,7 +22,7 @@ W> As of webpack 5, You can configure only `global`, `__filename` or `__dirname`
 
 `boolean: false` `object`
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -31,7 +31,7 @@ module.exports = {
     global: false,
     __filename: false,
     __dirname: false,
-  }
+  },
 };
 ```
 
@@ -56,11 +56,10 @@ Options:
 
 Options:
 
-- `true`: The filename of the __input__ file relative to the [`context` option](/configuration/entry-context/#context).
-- `false`: Webpack won't touch your `__filename` code, which means you have the regular Node.js `__filename` behavior. The filename of the __output__ file when run in a Node.js environment.
+- `true`: The filename of the **input** file relative to the [`context` option](/configuration/entry-context/#context).
+- `false`: Webpack won't touch your `__filename` code, which means you have the regular Node.js `__filename` behavior. The filename of the **output** file when run in a Node.js environment.
 - `'mock'`: The fixed value `'/index.js'`.
 - `'eval-only'`
-
 
 ## `node.__dirname`
 
@@ -68,7 +67,7 @@ Options:
 
 Options:
 
-- `true`: The dirname of the __input__ file relative to the [`context` option](/configuration/entry-context/#context).
-- `false`:  Webpack won't touch your `__dirname` code, which means you have the regular Node.js `__dirname` behavior. The dirname of the __output__ file when run in a Node.js environment.
+- `true`: The dirname of the **input** file relative to the [`context` option](/configuration/entry-context/#context).
+- `false`: Webpack won't touch your `__dirname` code, which means you have the regular Node.js `__dirname` behavior. The dirname of the **output** file when run in a Node.js environment.
 - `'mock'`: The fixed value `'/'`.
 - `'eval-only'`

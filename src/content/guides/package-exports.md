@@ -289,7 +289,7 @@ Since there are multiple versions of each environment the following guidelines a
 
 - `node`: See `engines` field for compatibility.
 - `browser`: Compatible with current Spec and stage 4 proposals at time of publishing the package. Polyfilling resp. transpiling must be handled on consumer side.
-    - Features that are not possible to polyfill or transpile should be used carefully as it limits the possible usage.
+  - Features that are not possible to polyfill or transpile should be used carefully as it limits the possible usage.
 - `deno`: TBD
 - `react-native`: TBD
 
@@ -332,15 +332,15 @@ They can be adapted to the individual packages.
 These pattern are based on the following list of goals/assumptions:
 
 - Packages are rotting.
-    - We assume at some point packages are no longer being maintained, but they are continued to be used.
-    - `exports` should be written to use fallbacks for unknown future cases. `default` condition can be used for that.
-    - As the future is unknown we assume an environment similar to browsers and module system similar to ESM.
+  - We assume at some point packages are no longer being maintained, but they are continued to be used.
+  - `exports` should be written to use fallbacks for unknown future cases. `default` condition can be used for that.
+  - As the future is unknown we assume an environment similar to browsers and module system similar to ESM.
 - Not all conditions are supported by every tool.
-    - Fallbacks should be used to handled these cases.
-    - We assume the following fallback make sense in general:
-        - ESM > CommonJs
-        - Production > Development
-        - Browser > node.js
+  - Fallbacks should be used to handled these cases.
+  - We assume the following fallback make sense in general:
+    - ESM > CommonJs
+    - Production > Development
+    - Browser > node.js
 
 Depending on the package intention maybe something else makes sense and in this case the patterns should be adopted to that. Example: For a command line tool a browser-like future and fallback doesn't make a lot of sense, and in this case node.js-like environments and fallbacks should be used instead.
 
@@ -617,8 +617,8 @@ Looks complex, yes. We were already able to reduce some complexity due to a assu
 - Write your source code as ESM and transpile to CJS via babel, typescript or similar tools.
 - Either use `.cjs` or `type: "commonjs"` in package.json to clearly mark source code as CommonJs. This makes it statically detectable for tools if CommonJs or ESM is used. This is important for tools that only support ESM and no CommonJs.
 - ESM used in packages support the following types of requests:
-    - module requests are supported, pointing to other packages with a package.json.
-    - relative requests are supported, pointing to other files within the package.
-        - They must not point to files outside of the package.
-    - `data:` url requests are supported.
-    - other absolute or server-relative requests are not supported by default, but they might be supported by some tools or environments.
+  - module requests are supported, pointing to other packages with a package.json.
+  - relative requests are supported, pointing to other files within the package.
+    - They must not point to files outside of the package.
+  - `data:` url requests are supported.
+  - other absolute or server-relative requests are not supported by default, but they might be supported by some tools or environments.

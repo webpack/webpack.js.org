@@ -15,7 +15,6 @@ contributors:
 
 Besides exporting a single configuration object, there are a few more ways that cover other needs as well.
 
-
 ## Exporting a Function
 
 Eventually you will find the need to disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production). You have (at least) two options:
@@ -42,7 +41,6 @@ One option is to export a function from your webpack configuration instead of ex
 };
 ```
 
-
 ## Exporting a Promise
 
 webpack will run the function exported by the configuration file and wait for a Promise to be returned. Handy when you need to asynchronously load configuration variables.
@@ -64,29 +62,52 @@ module.exports = () => {
 
 W> Returning a `Promise` only works when using webpack via CLI. [`webpack()`](/api/node/#webpack) expects an object.
 
-
 ## Exporting multiple configurations
 
 Instead of exporting a single configuration object/function, you may export multiple configurations (multiple functions are supported since webpack 3.1.0). When running webpack, all configurations are built. For instance, this is useful for [bundling a library](/guides/author-libraries) for multiple [targets](/configuration/output/#outputlibrarytarget) such as AMD and CommonJS:
 
 ```js
-module.exports = [{
-  output: {
-    filename: './dist-amd.js',
-    libraryTarget: 'amd'
+module.exports = [
+  {
+    output: {
+      filename: './dist-amd.js',
+      libraryTarget: 'amd',
+    },
+    name: 'amd',
+    entry: './app.js',
+    mode: 'production',
   },
-  name: 'amd',
-  entry: './app.js',
-  mode: 'production',
-}, {
-  output: {
-    filename: './dist-commonjs.js',
-    libraryTarget: 'commonjs'
+  {
+    output: {
+      filename: './dist-commonjs.js',
+      libraryTarget: 'commonjs',
+    },
+    name: 'commonjs',
+    entry: './app.js',
+    mode: 'production',
   },
-  name: 'commonjs',
-  entry: './app.js',
-  mode: 'production',
-}];
+];
 ```
 
-T> If you pass a name to [`--config-name`](/api/cli/#configuration-options) flag, webpack will only build that specific configuration.
+T> If you pass a name to [`--config-name`](/api/cli/#config-name) flag, webpack will only build that specific configuration.
+
+### parallelism
+
+In case you export multiple configurations, you can use `parallelism` option on the configuration array to specify the maximum number of compilers that will compile in parallel.
+
+- Type: `number`
+- Available: 5.22.0+
+
+**webpack.config.js**
+
+```javascript
+module.exports = [
+  {
+    //config-1
+  },
+  {
+    //config-2
+  },
+];
+module.exports.parallelism = 1;
+```

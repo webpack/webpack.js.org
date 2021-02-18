@@ -18,11 +18,11 @@ W> The webpack `target` property is not to be confused with the `output.libraryT
 
 To set the `target` property, you simply set the target value in your webpack config:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
-  target: 'node'
+  target: 'node',
 };
 ```
 
@@ -34,9 +34,9 @@ Each _target_ has a variety of deployment/environment specific additions, suppor
 
 ## Multiple Targets
 
-Although webpack does __not__ support multiple strings being passed into the `target` property, you can create an isomorphic library by bundling two separate configurations:
+Although webpack does **not** support multiple strings being passed into the `target` property, you can create an isomorphic library by bundling two separate configurations:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const path = require('path');
@@ -44,8 +44,8 @@ const serverConfig = {
   target: 'node',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'lib.node.js'
-  }
+    filename: 'lib.node.js',
+  },
   //…
 };
 
@@ -53,12 +53,12 @@ const clientConfig = {
   target: 'web', // <=== can be omitted as default is 'web'
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'lib.js'
-  }
+    filename: 'lib.js',
+  },
   //…
 };
 
-module.exports = [ serverConfig, clientConfig ];
+module.exports = [serverConfig, clientConfig];
 ```
 
 The example above will create a `lib.js` and `lib.node.js` file in your `dist` folder.
@@ -67,7 +67,7 @@ The example above will create a `lib.js` and `lib.node.js` file in your `dist` f
 
 As seen from the options above, there are multiple deployment _targets_ that you can choose from. Below is a list of examples and resources that you can refer to.
 
--  __[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)__: A great resource for testing and viewing different webpack _targets_. Also great for bug reporting.
-- __[Boilerplate of Electron-React Application](https://github.com/chentsulin/electron-react-boilerplate)__: A good example of a build process for electron's main process and renderer process.
+- **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**: A great resource for testing and viewing different webpack _targets_. Also great for bug reporting.
+- **[Boilerplate of Electron-React Application](https://github.com/chentsulin/electron-react-boilerplate)**: A good example of a build process for electron's main process and renderer process.
 
 ?> Need to find up to date examples of these webpack targets being used in live code or boilerplates.

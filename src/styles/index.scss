@@ -59,9 +59,11 @@ button.as-link {
 }
 
 .language-diff {
-  .token.prefix.inserted, .token.prefix.deleted {
+  .token.prefix.inserted,
+  .token.prefix.deleted {
     user-select: none;
   }
 }
-
-@import 'dark';
+[data-theme='dark'] {
+  @import 'dark';
+}

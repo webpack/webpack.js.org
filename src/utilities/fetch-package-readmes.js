@@ -16,7 +16,7 @@ const types = ['loaders', 'plugins'];
 
 const pathMap = {
   loaders: path.resolve(__dirname, '../content/loaders'),
-  plugins: path.resolve(__dirname, '../content/plugins')
+  plugins: path.resolve(__dirname, '../content/plugins'),
 };
 
 async function main() {
@@ -25,7 +25,9 @@ async function main() {
 
     await mkdirp(outputDir);
 
-    const repos = JSON.parse(await readFile(path.resolve(__dirname, `../../repositories/${type}.json`)));
+    const repos = JSON.parse(
+      await readFile(path.resolve(__dirname, `../../repositories/${type}.json`))
+    );
 
     for (const repo of repos) {
       const [, packageName] = repo.split('/');
@@ -47,7 +49,7 @@ async function main() {
         title: title,
         source: url,
         edit: editUrl,
-        repo: htmlUrl
+        repo: htmlUrl,
       });
 
       const response = await fetch(url);
@@ -60,4 +62,3 @@ async function main() {
 }
 
 main();
-

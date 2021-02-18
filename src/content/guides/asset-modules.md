@@ -6,6 +6,7 @@ contributors:
   - EugeneHlushko
   - chenxsan
   - anshumanv
+  - spence-s
 related:
   - title: webpack 5 - Asset Modules
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h
@@ -28,9 +29,9 @@ Asset Modules type replaces all of these loaders by adding 4 new module types:
 
 When using the old assets loaders (i.e. `file-loader`/`url-loader`/`raw-loader`) along with Asset Module in webpack 5, you might want to stop Asset Module from processing your assets again as that would result in asset duplication. This can be done by setting asset's module type to `'javascript/auto'`.
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
 module.exports = {
   module: {
    rules: [
@@ -53,15 +54,15 @@ module.exports = {
 
 To exclude assets that came from new URL calls from the asset loaders add `dependency: { not: ['url'] }` to the loader configuration.
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
 module.exports = {
   module: {
     rules: [
       {
         test: /\.(png|jpg|gif)$/i,
-+       dependency: { not: ['url'] }, 
++       dependency: { not: ['url'] },
         use: [
           {
             loader: 'url-loader',
@@ -78,9 +79,9 @@ module.exports = {
 
 ## Resource assets
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
 const path = require('path');
 
 module.exports = {
@@ -100,7 +101,7 @@ module.exports = {
 };
 ```
 
-__src/index.js__
+**src/index.js**
 
 ```js
 import mainImage from './images/main.png';
@@ -116,7 +117,7 @@ By default, `asset/resource` modules are emitting with `[hash][ext][query]` file
 
 You can modify this template by setting [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) in your webpack configuration:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```diff
 const path = require('path');
@@ -176,9 +177,9 @@ With this configuration all the `html` files will be emitted into a `static` dir
 
 ## Inlining assets
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
 const path = require('path');
 
 module.exports = {
@@ -209,7 +210,7 @@ module.exports = {
 };
 ```
 
-__src/index.js__
+**src/index.js**
 
 ```diff
 - import mainImage from './images/main.png';
@@ -227,7 +228,7 @@ By default, data URI emitted by webpack represents file contents encoded by usin
 
 If you want to use a custom encoding algorithm, you may specify a custom function to encode a file content:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```diff
 const path = require('path');
@@ -260,7 +261,7 @@ Now all `.svg` files will be encoded by `mini-svg-data-uri` package.
 
 ## Source assets
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```diff
 const path = require('path');
@@ -291,13 +292,13 @@ module.exports = {
 };
 ```
 
-__src/example.txt__
+**src/example.txt**
 
 ```text
 Hello world
 ```
 
-__src/index.js__
+**src/index.js**
 
 ```diff
 - import metroMap from './images/metro.svg';
@@ -313,7 +314,7 @@ All `.txt` files will be injected into the bundles as is.
 
 When using `new URL('./path/to/asset', import.meta.url)`, webpack creates an asset module too.
 
-__src/index.js__
+**src/index.js**
 
 ```js
 const logo = new URL('./logo.svg', import.meta.url);
@@ -323,20 +324,26 @@ Depending on the [`target`](/configuration/target/) in your configuration, webpa
 
 ```js
 // target: web
-new URL(__webpack_public_path__ + 'logo.svg', document.baseURI || self.location.href);
+new URL(
+  __webpack_public_path__ + 'logo.svg',
+  document.baseURI || self.location.href
+);
 
 // target: webworker
 new URL(__webpack_public_path__ + 'logo.svg', self.location);
 
 // target: node, node-webkit, nwjs, electron-main, electron-renderer, electron-preload, async-node
-new URL(__webpack_public_path__ + 'logo.svg', require('url').pathToFileUrl(__filename));
+new URL(
+  __webpack_public_path__ + 'logo.svg',
+  require('url').pathToFileUrl(__filename)
+);
 ```
 
 ## General asset type
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
 const path = require('path');
 
 module.exports = {
@@ -360,9 +367,9 @@ Now webpack will automatically choose between `resource` and `inline` by followi
 
 You can change this condition by setting a [`Rule.parser.dataUrlCondition.maxSize`](/configuration/module/#ruleparserdataurlcondition) option on the module rule level of your webpack configuration:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
 const path = require('path');
 
 module.exports = {
@@ -388,3 +395,48 @@ module.exports = {
 ```
 
 Also you can [specify a function](/configuration/module/#ruleparserdataurlcondition) to decide to inlining a module or not.
+
+## Replacing Inline Loader Syntax
+
+Before Asset Modules and Webpack 5, it was possible to use [inline syntax](https://webpack.js.org/concepts/loaders/#inline) with the legacy loaders mentioned above.
+
+It is now reccomended to remove all inline loader syntax and use a resourceQuery condition to mimic the functionality of the inline syntax.
+
+For example, in the case of replacing `raw-loader` with `asset/source` type:
+
+```diff
+- import myModule from 'raw-loader!my-module';
++ import myModule from 'my-module?raw';
+```
+
+and in the webpack configuration:
+
+```diff
+module: {
+    rules: [
+    // ...
++     {
++       resouceQuery: /raw/
++       type: 'asset/source'
++     }
+    ]
+  },
+```
+
+and if you'd like to exclude raw assets from being parsed by other loaders, use a negative lookahead:
+
+```diff
+module: {
+    rules: [
+    // ...
++     {
++       test: /\.m?js$/,
++       resourceQuery: /^(?!raw$).*/,
++     },
+      {
+        resouceQuery: /raw/
+        type: 'asset/source'
+      }
+    ]
+  },
+```

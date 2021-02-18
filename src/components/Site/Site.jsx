@@ -26,9 +26,11 @@ import Footer from '../Footer/Footer';
 import Page from '../Page/Page';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Vote from '../Vote/Vote';
-import Organization from '../Organization/Organization';
 import Badge from '../Badge/Badge.js';
 import { default as LinkComponent } from '../mdxComponents/Link';
+
+// Import Constants
+import { THEME, THEME_LOCAL_STORAGE_KEY } from '../../constants/theme';
 
 // Load Styling
 import '../../styles/index';
@@ -37,6 +39,7 @@ import './Site.scss';
 // Load Content Tree
 import Content from '../../_content.json';
 import NotifyBox from '../NotifyBox/NotifyBox';
+import { useLocalStorage } from 'react-use';
 
 Site.propTypes = {
   location: PropTypes.shape({
@@ -51,6 +54,21 @@ function Site(props) {
   const [loading, setLoading] = useState(false);
   const [NotificationBar, setNotificationBar] = useState(undefined);
   const [barLoaded, setBarLoaded] = useState(false);
+  const [theme, setTheme] = useLocalStorage(
+    THEME_LOCAL_STORAGE_KEY,
+    THEME.LIGHT
+  );
+
+  const applyTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+  };
+  useEffect(() => {
+    applyTheme(theme);
+  }, [theme]);
+
+  const switchTheme = (theme) => {
+    setTheme(theme);
+  };
 
   const listTransitions = useTransition(list, {
     config: config.gentle,
@@ -113,13 +131,13 @@ function Site(props) {
   }, []);
 
   useEffect(() => {
-    import(
-      '../NotificationBar/NotificationBar'
-    ).then(({default: NotificationBar}) => {
-      // we are storing a component, not passing an updater function
-      setNotificationBar(() => NotificationBar);
-      setBarLoaded(true);
-    });
+    import('../NotificationBar/NotificationBar').then(
+      ({ default: NotificationBar }) => {
+        // we are storing a component, not passing an updater function
+        setNotificationBar(() => NotificationBar);
+        setBarLoaded(true);
+      }
+    );
   }, []);
 
   useEffect(() => {
@@ -161,6 +179,9 @@ function Site(props) {
           (item) => item.type !== 'directory' && item.url !== '/'
         )
   );
+
+  // not to show in sub navbar
+  const excludeItems = ['contribute', 'blog'];
   return (
     <MDXProvider
       components={{
@@ -171,12 +192,12 @@ function Site(props) {
       <div className="site">
         <DocumentTitle title={getPageTitle(Content, location.pathname)} />
         <div className="site__header">
-          {
-            barLoaded === true ? <NotificationBar /> : undefined
-          }
+          {barLoaded === true ? <NotificationBar /> : undefined}
           <Navigation
             pathname={location.pathname}
             toggleSidebar={_toggleSidebar}
+            theme={theme}
+            switchTheme={switchTheme}
             links={[
               {
                 content: 'Documentation',
@@ -186,7 +207,9 @@ function Site(props) {
                     url
                   ),
                 children: _strip(
-                  sections.filter((item) => item.name !== 'contribute')
+                  sections.filter(
+                    ({ name }) => excludeItems.includes(name) === false
+                  )
                 ),
               },
               { content: 'Contribute', url: '/contribute/' },
@@ -217,7 +240,6 @@ function Site(props) {
               <Container className="site__content">
                 <Switch>
                   <Route path="/vote" component={Vote} />
-                  <Route path="/organization" component={Organization} />
                   <Route path="/app-shell" component={() => <Fragment />} />
                   {pages.map((page) => (
                     <Route
