@@ -46,3 +46,5 @@ module.exports = (env) => {
   };
 };
 ```
+
+T> Webpack CLI offers some [built-in environment variables](/api/cli/#environment-variables) which you can access inside a webpack configuration.
