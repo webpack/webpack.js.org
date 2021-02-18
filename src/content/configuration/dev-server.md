@@ -503,7 +503,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-npx webpack serve --hot only
+npx webpack serve --hot-only
 ```
 
 ## `devServer.http2`
