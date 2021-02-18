@@ -9,6 +9,7 @@ contributors:
   - wizardofhogwarts
   - EugeneHlushko
   - chenxsan
+  - jamesgeorge007
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -285,11 +286,17 @@ Store chunk info to the records. This is only triggered if [`shouldRecord`](#sho
 
 - Callback Parameters: `chunks` `records`
 
-### `beforeHash`
+### `beforeModuleHash`
 
 `SyncHook`
 
 Called before the compilation is hashed.
+
+### `beforeHash`
+
+`SyncHook`
+
+Called after the hashes of modules are created
 
 ### `afterHash`
 
