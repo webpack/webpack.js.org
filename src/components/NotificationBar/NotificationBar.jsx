@@ -4,6 +4,7 @@ import testLocalStorage from '../../utilities/test-local-storage';
 import './NotificationBar.scss';
 import CloseIcon from '../../styles/icons/cross.svg';
 import PropTypes from 'prop-types';
+import Content from './Notification.mdx';
 
 const version = '3';
 const localStorageIsEnabled = testLocalStorage() !== false;
@@ -27,12 +28,7 @@ function MessageBar(props) {
   return (
     <div className="notification-bar">
       <Container className="notification-bar__inner">
-        <p>
-          Webpack 5 has been officially released. Read our{' '}
-          <a href="/blog/2020-10-10-webpack-5-release/">announcement</a>. Not
-          ready yet? Read{' '}
-          <a href="https://v4.webpack.js.org/">webpack 4 documentation here</a>.
-        </p>
+        <Content />
         {localStorageIsEnabled ? (
           <CloseIcon
             aria-label="Dismiss"
