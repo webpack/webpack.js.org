@@ -44,11 +44,10 @@ export default function Page(props) {
     }
   }, [props.content]);
 
-  const location = useLocation();
+  const { hash, pathname } = useLocation();
 
   useEffect(() => {
     if (contentLoaded) {
-      const hash = location.hash;
       if (hash) {
         const element = document.querySelector(hash);
         if (element) {
@@ -58,7 +57,7 @@ export default function Page(props) {
         window.scrollTo(0, 0);
       }
     }
-  }, [contentLoaded, location]);
+  }, [contentLoaded, pathname, hash]);
 
   const loadRelated = contentLoaded && related && related.length !== 0;
   const loadContributors =
