@@ -1597,6 +1597,6 @@ T> It is possible to set any Node.js flags via `NODE_OPTIONS`, for example, to c
 
 ```json
 {
-  "scripts": "NODE_OPTIONS='--max-http-header-size=100000' npx webpack serve"
+  "scripts": "NODE_OPTIONS='--max-http-header-size=100000' webpack serve"
 }
 ```
