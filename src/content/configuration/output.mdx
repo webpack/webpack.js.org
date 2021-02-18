@@ -1381,22 +1381,27 @@ module.exports = {
 
 ## `output.module`
 
-`boolean = true`
+`boolean = false`
 
-Output JavaScript files as module type.
+Output JavaScript files as module type. Disabled by default as it's an experimental feature.
 
-When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output.scriptType`](#outputscripttype) to `'module'` and `terserOptions.module` to `true` internally. In addition, if you have [`output.library`](#outputlibrary) set, i.e., you're using webpack to compile a library to be consumed by others, webpack will also set [`output.libraryTarget`](#outputlibrarytarget) to `'module'`.
+When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output.scriptType`](#outputscripttype) to `'module'` and `terserOptions.module` to `true` internally.
 
-W> `output.module` is an experimental feature and can be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
+If you're using webpack to compile a library to be consumed by others, make sure to set [`output.libraryTarget`](#librarytarget-module) to `'module'` when `output.module` is `true`.
 
 ```javascript
 module.exports = {
   //...
+  experimentals: {
+    outputModule: true,
+  },
   output: {
     module: true,
   },
 };
 ```
+
+W> `output.module` is an experimental feature and can only be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
 
 ## output.clean
 
