@@ -53,6 +53,7 @@ module.exports = {
 
 |                名称                 |        类型         |                   默认值                    | 描述                                      |
 | :---------------------------------: | :-----------------: | :------------------------------------------: | :----------------------------------------------- |
+<<<<<<< HEAD
 |   **[`sources`](#sources)**   | `{Boolean\|Object}` |                    `true`                    | 启用/禁用 sources 处理             |
 | **[`preprocessor`](#preprocessor)** |    `{Function}`     |                 `undefined`                  | 允许在处理前对内容进行预处理 |
 |     **[`minimize`](#minimize)**     | `{Boolean\|Object}` | 在生产模式下为 `true`，其他情况为 `false` | 告知 `html-loader` 压缩 HTML              |
@@ -93,6 +94,49 @@ module.exports = {
 #### `Boolean` {#boolean}
 
 当设置为 `true` 时，则启用所有默认元素和属性的处理，而 `false` 则禁用所有属性的处理。
+=======
+|      **[`sources`](#sources)**      | `{Boolean\|Object}` |                    `true`                    | Enables/Disables sources handling                |
+| **[`preprocessor`](#preprocessor)** |    `{Function}`     |                 `undefined`                  | Allows pre-processing of content before handling |
+|     **[`minimize`](#minimize)**     | `{Boolean\|Object}` | `true` in production mode, otherwise `false` | Tell `html-loader` to minimize HTML              |
+|     **[`esModule`](#esmodule)**     |     `{Boolean}`     |                    `true`                    | Enable/disable ES modules syntax                 |
+
+### `sources`
+
+Type: `Boolean|Object`
+Default: `true`
+
+By default every loadable attributes (for example - `<img src="image.png">`) is imported (`const img = require('./image.png')` or `import img from "./image.png""`).
+You may need to specify loaders for images in your configuration (recommended [`asset modules`](/guides/asset-modules/)).
+
+Supported tags and attributes:
+
+- the `src` attribute of the `audio` tag
+- the `src` attribute of the `embed` tag
+- the `src` attribute of the `img` tag
+- the `srcset` attribute of the `img` tag
+- the `src` attribute of the `input` tag
+- the `data` attribute of the `object` tag
+- the `src` attribute of the `script` tag
+- the `href` attribute of the `script` tag
+- the `xlink:href` attribute of the `script` tag
+- the `src` attribute of the `source` tag
+- the `srcset` attribute of the `source` tag
+- the `src` attribute of the `track` tag
+- the `poster` attribute of the `video` tag
+- the `src` attribute of the `video` tag
+- the `xlink:href` attribute of the `image` tag
+- the `href` attribute of the `image` tag
+- the `xlink:href` attribute of the `use` tag
+- the `href` attribute of the `use` tag
+- the `href` attribute of the `link` tag when the `rel` attribute contains `stylesheet`, `icon`, `shortcut icon`, `mask-icon`, `apple-touch-icon`, `apple-touch-icon-precomposed`, `apple-touch-startup-image`, `manifest`, `prefetch`, `preload` or when the `itemprop` attribute is `image`, `logo`, `screenshot`, `thumbnailurl`, `contenturl`, `downloadurl`, `duringmedia`, `embedurl`, `installurl`, `layoutimage`
+- the `imagesrcset` attribute of the `link` tag when the `rel` attribute contains `stylesheet`, `icon`, `shortcut icon`, `mask-icon`, `apple-touch-icon`, `apple-touch-icon-precomposed`, `apple-touch-startup-image`, `manifest`, `prefetch`, `preload`
+- the `content` attribute of the `meta` tag when the `name` attribute is `msapplication-tileimage`, `msapplication-square70x70logo`, `msapplication-square150x150logo`, `msapplication-wide310x150logo`, `msapplication-square310x310logo`, `msapplication-config`, `twitter:image` or when the `property` attribute is `og:image`, `og:image:url`, `og:image:secure_url`, `og:audio`, `og:audio:secure_url`, `og:video`, `og:video:secure_url`, `vk:image` or when the `itemprop` attribute is `image`, `logo`, `screenshot`, `thumbnailurl`, `contenturl`, `downloadurl`, `duringmedia`, `embedurl`, `installurl`, `layoutimage`
+- the `icon-uri` value component in `content` attribute of the `meta` tag when the `name` attribute is `msapplication-task`
+
+#### `Boolean`
+
+The `true` value enables processing of all default elements and attributes, the `false` disable processing of all attributes.
+>>>>>>> e62fdf02aa76c534b4336a09a5844fbd9a3df974
 
 **webpack.config.js**
 
@@ -282,7 +326,13 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 filter 也可以用来扩展支持的元素和属性。例如，filter 可以帮助处理引用资源的 meta 标签：
+=======
+Filter can also be used to extend the supported elements and attributes.
+
+For example, filter can help process meta tags that reference assets:
+>>>>>>> e62fdf02aa76c534b4336a09a5844fbd9a3df974
 
 ```js
 module.exports = {
@@ -305,6 +355,7 @@ module.exports = {
                   ) {
                     return true;
                   }
+
                   return false;
                 },
               },
@@ -317,7 +368,43 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 #### `urlFilter` {#urlfilter}
+=======
+**Note:** source with a `tag` option takes precedence over source without.
+
+Filter can be used to disable default sources.
+
+For example:
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+        options: {
+          sources: {
+            list: [
+              '...',
+              {
+                tag: 'img',
+                attribute: 'src',
+                type: 'src',
+                filter: () => false,
+              },
+            ],
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+#### `urlFilter`
+>>>>>>> e62fdf02aa76c534b4336a09a5844fbd9a3df974
 
 类型：`Function`
 默认值： `undefined`
@@ -609,7 +696,7 @@ module.exports = {
     ],
   },
   output: {
-    publicPath: 'http://cdn.example.com/[hash]/',
+    publicPath: 'http://cdn.example.com/[fullhash]/',
   },
 };
 ```
@@ -640,6 +727,7 @@ require('html-loader?{"sources":{"list":[{"tag":"img","attribute":"src","type":"
 // => '<img src="http://cdn.example.com/49eba9f/a992ca.jpg" data-src="data:image/png;base64,..." >'
 ```
 
+<<<<<<< HEAD
 ```js
 require('html-loader?-sources!./file.html');
 
@@ -649,6 +737,9 @@ require('html-loader?-sources!./file.html');
 > :warning: `-sources` 设置 `sources: false`。
 
 ### 处理 `script` 和 `link` 标签 {#process-script-and-link-tags}
+=======
+### Process `script` and `link` tags
+>>>>>>> e62fdf02aa76c534b4336a09a5844fbd9a3df974
 
 **script.file.js**
 
