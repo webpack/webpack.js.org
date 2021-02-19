@@ -16,6 +16,7 @@ import isClient from '../../utilities/is-client';
 import getAdjacentPages from '../../utilities/get-adjacent-pages';
 
 // Import Components
+import NotificationBar from '../NotificationBar/NotificationBar';
 import Navigation from '../Navigation/Navigation';
 import SidebarMobile from '../SidebarMobile/SidebarMobile';
 import Container from '../Container/Container';
@@ -52,8 +53,6 @@ function Site(props) {
   const [list, setList] = useState([]);
   const [wb, setWb] = useState(undefined);
   const [loading, setLoading] = useState(false);
-  const [NotificationBar, setNotificationBar] = useState(undefined);
-  const [barLoaded, setBarLoaded] = useState(false);
   const [theme, setTheme] = useLocalStorage(
     THEME_LOCAL_STORAGE_KEY,
     THEME.LIGHT
@@ -131,16 +130,6 @@ function Site(props) {
   }, []);
 
   useEffect(() => {
-    import('../NotificationBar/NotificationBar').then(
-      ({ default: NotificationBar }) => {
-        // we are storing a component, not passing an updater function
-        setNotificationBar(() => NotificationBar);
-        setBarLoaded(true);
-      }
-    );
-  }, []);
-
-  useEffect(() => {
     if (isClient) {
       if (process.env.NODE_ENV === 'production') {
         // only register sw.js in production
@@ -192,7 +181,7 @@ function Site(props) {
       <div className="site">
         <DocumentTitle title={getPageTitle(Content, location.pathname)} />
         <div className="site__header">
-          {barLoaded === true ? <NotificationBar /> : undefined}
+          <NotificationBar />
           <Navigation
             pathname={location.pathname}
             toggleSidebar={_toggleSidebar}
