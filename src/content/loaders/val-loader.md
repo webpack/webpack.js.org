@@ -73,13 +73,13 @@ const answer = require("target-file");
 
 And run `webpack` via your preferred method.
 
-## Options
+## Options {#options}
 
 |                  Name                   |    Type    |   Default   | Description                                   |
 | :-------------------------------------: | :--------: | :---------: | :-------------------------------------------- |
 | **[`executableFile`](#executablefile)** | `{String}` | `undefined` | Allows to specify path to the executable file |
 
-### executableFile
+### executableFile {#executablefile}
 
 Type: `String`
 Default: `undefined`
