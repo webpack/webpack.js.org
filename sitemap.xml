@@ -412,10 +412,10 @@
         <loc>https://webpack.js.org/loaders/null-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/postcss-loader</loc>
+        <loc>https://webpack.js.org/loaders/polymer-webpack-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/polymer-webpack-loader</loc>
+        <loc>https://webpack.js.org/loaders/postcss-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/raw-loader</loc>
