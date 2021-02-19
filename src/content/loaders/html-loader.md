@@ -55,7 +55,7 @@ module.exports = {
 | :---------------------------------: | :-----------------: | :------------------------------------------: | :----------------------------------------------- |
 |   **[`sources`](#sources)**   | `{Boolean\|Object}` |                    `true`                    | 启用/禁用 sources 处理             |
 | **[`preprocessor`](#preprocessor)** |    `{Function}`     |                 `undefined`                  | 允许在处理前对内容进行预处理 |
-|     **[`minimize`](#minimize)**     | `{Boolean\|Object}` | 在生产模式下为 `true`，其他情况为 `false` | 告知 `html-loader` 压缩 HTML              |
+|     **[`minimize`](#minimize)**     | `{Boolean\|Object}` | 在生产模式下为 `true`，其他情况为 `false` | 通知 `html-loader` 压缩 HTML              |
 |     **[`esModule`](#esmodule)**     |     `{Boolean}`     |                   `true`                    | 启用/禁用 ES modules 语法                            |
 
 ### `sources` {#sources}
@@ -89,6 +89,7 @@ module.exports = {
 - 当 `rel` 属性值包含 `stylesheet`、`icon`、`shortcut icon`、`mask-icon`、`apple-touch-icon`、`apple-touch-icon-precomposed`、`apple-touch-startup-image`、`manifest`、`prefetch`、`preload` 或者当 `itemprop` 属性为 `image`、`logo`、`screenshot`、`thumbnailurl`、`contenturl`、`downloadurl`、`duringmedia`、`embedurl`、`installurl`、`layoutimage` 时，支持 `link` 标签的 `href` 属性
 - 当 `rel` 属性值包含 `stylesheet`、`icon`、`shortcut icon`、`mask-icon`、`apple-touch-icon`、`apple-touch-icon-precomposed`、`apple-touch-startup-image`、`manifest`、`prefetch`、`preload`时，支持 `link` 标签的 `imagesrcset` 属性
 - 当 `name` 属性为 `msapplication-tileimage`、`msapplication-square70x70logo`、`msapplication-square150x150logo`、`msapplication-wide310x150logo`、`msapplication-square310x310logo`、`msapplication-config`、`twitter:image` 或者当 `property` 属性为 `og:image`、`og:image:url`、`og:image:secure_url`、`og:audio`、`og:audio:secure_url`、`og:video`、`og:video:secure_url`、`vk:image`，支持 `meta` 标签的 `content` 属性。
+- 当 `name` 属性为 `msapplication-task` 时，支持 `meta` 标签的 `content` 属性中的 `icon-uri` 值组件
 
 #### `Boolean` {#boolean}
 
@@ -282,7 +283,9 @@ module.exports = {
 };
 ```
 
-filter 也可以用来扩展支持的元素和属性。例如，filter 可以帮助处理引用资源的 meta 标签：
+filter 也可以用来扩展支持的元素和属性。
+
+例如，filter 可以帮助处理引用资源的 meta 标签：
 
 ```js
 module.exports = {
@@ -305,8 +308,41 @@ module.exports = {
                   ) {
                     return true;
                   }
+
                   return false;
                 },
+              },
+            ],
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+**请注意：** 带有 `tag` 配置项的 source 优先级要比没有 `tag` 配置项的高。
+
+filter 可以用于禁用默认 source。
+
+示例：
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+        options: {
+          sources: {
+            list: [
+              '...',
+              {
+                tag: 'img',
+                attribute: 'src',
+                type: 'src',
+                filter: () => false,
               },
             ],
           },
@@ -609,7 +645,7 @@ module.exports = {
     ],
   },
   output: {
-    publicPath: 'http://cdn.example.com/[hash]/',
+    publicPath: 'http://cdn.example.com/[fullhash]/',
   },
 };
 ```
@@ -639,14 +675,6 @@ require('html-loader?{"sources":{"list":[{"tag":"img","attribute":"src","type":"
 
 // => '<img src="http://cdn.example.com/49eba9f/a992ca.jpg" data-src="data:image/png;base64,..." >'
 ```
-
-```js
-require('html-loader?-sources!./file.html');
-
-// => '<img src="image.jpg"  data-src="image2x.png" >'
-```
-
-> :warning: `-sources` 设置 `sources: false`。
 
 ### 处理 `script` 和 `link` 标签 {#process-script-and-link-tags}
 

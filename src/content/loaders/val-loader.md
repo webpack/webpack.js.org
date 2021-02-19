@@ -73,6 +73,71 @@ const answer = require("target-file");
 
 And run `webpack` via your preferred method.
 
+## Options {#options}
+
+|                  Name                   |    Type    |   Default   | Description                                   |
+| :-------------------------------------: | :--------: | :---------: | :-------------------------------------------- |
+| **[`executableFile`](#executablefile)** | `{String}` | `undefined` | Allows to specify path to the executable file |
+
+### executableFile {#executablefile}
+
+Type: `String`
+Default: `undefined`
+
+Allows to specify path to the executable file
+
+**data.json**
+
+```json
+{
+  "years": "10"
+}
+```
+
+**executable-file.js**
+
+```js
+module.exports = function yearsInMs(options, loaderContext, content) {
+  const { years } = JSON.parse(content);
+  const value = years * 365 * 24 * 60 * 60 * 1000;
+
+  return {
+    cacheable: true,
+    code: "module.exports = " + value,
+  };
+};
+```
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(json)$/i,
+        rules: [
+          {
+            loader: "val-loader",
+            options: {
+              executableFile: path.resolve(
+                __dirname,
+                "fixtures",
+                "executableFile.js"
+              ),
+            },
+          },
+        ],
+      },
+      {
+        test: /\.json$/i,
+        type: "asset/resource",
+      },
+    ],
+  },
+};
+```
+
 ## Return Object Properties {#return-object-properties}
 
 Targeted modules of this loader must export a `Function` that returns an object,
@@ -108,8 +173,7 @@ next loader uses the same AST.
 Type: `Array[String]`
 Default: `[]`
 
-An array of absolute, native paths to file dependencies that should be watched
-by webpack for changes.
+An array of absolute, native paths to file dependencies that should be watched by webpack for changes.
 
 Dependencies can also be added using [`loaderContext.addDependency(file: string)`](/api/loaders/#thisadddependency).
 
@@ -118,10 +182,18 @@ Dependencies can also be added using [`loaderContext.addDependency(file: string)
 Type: `Array[String]`
 Default: `[]`
 
-An array of absolute, native paths to directory dependencies that should be
-watched by webpack for changes.
+An array of absolute, native paths to directory dependencies that should be watched by webpack for changes.
 
 Context dependencies can also be added using [`loaderContext.addContextDependency(directory: string)`](/api/loaders/#thisaddcontextdependency).
+
+### `buildDependencies` {#builddependencies}
+
+Type: `Array[String]`
+Default: `[]`
+
+An array of absolute, native paths to directory dependencies that should be watched by webpack for changes.
+
+Build dependencies can also be added using `loaderContext.addBuildDependency(file: string)`.
 
 ### `cacheable` {#cacheable}
 
