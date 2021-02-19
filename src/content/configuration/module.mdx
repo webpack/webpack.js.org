@@ -155,21 +155,21 @@ const x = require(/* webpackIgnore: true */ 'x');
 
 Enable parsing of `new URL()` syntax.
 
-- Type: `boolean` | `relative`
+- Type: `boolean = true` | `'relative'`
 - Example:
   ```js
   module.exports = {
     module: {
       parser: {
         javascript: {
-          url: true,
+          url: false, // disable parsing of `new URL()` syntax
         },
       },
     },
   };
   ```
 
-The `relative` value for `module.parser.javascript.url` is available as of webpack <Badge text='5.23.0' />, it would generate relative URLs for `new URL()` syntax, i.e., there's no base URL included in the result:
+The `'relative'` value for `module.parser.javascript.url` is available since webpack <Badge text='5.23.0' />. When used, webpack would generate relative URLs for `new URL()` syntax, i.e., there's no base URL included in the result URL:
 
 ```
 <!-- with 'relative' -->
@@ -179,8 +179,8 @@ The `relative` value for `module.parser.javascript.url` is available as of webpa
 <img src='file:///path/to/project/dist/c43188443804f1b1f534.svg' />
 ```
 
-1. This is useful for static site generators, mini-css-plugin and html-plugin, etc. where you would compile code first for server side rendering.
-2. Also for SSR (Server side rendering) when base URL is not known by server (and it saves a few bytes). To be identical it must also be used for the client build.
+1. This is useful for SSR (Server side rendering) when base URL is not known by server (and it saves a few bytes). To be identical it must also be used for the client build.
+2. Also for static site generators, mini-css-plugin and html-plugin, etc. where server side rendering is commonly needed.
 
 ## `module.noParse`
 
