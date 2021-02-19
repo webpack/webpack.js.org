@@ -26,6 +26,13 @@ module.exports = (env) =>
         config: [__filename],
       },
     },
+    module: {
+      parser: {
+        javascript: {
+          url: 'relative',
+        },
+      },
+    },
     entry: {
       index: './server.jsx',
     },
