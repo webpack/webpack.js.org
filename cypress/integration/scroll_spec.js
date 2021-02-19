@@ -18,7 +18,8 @@ describe('Scroll Test', () => {
       cy.get('.contributors__section').scrollIntoView();
 
       cy.visit('/guides/build-performance/#development');
-      cy.isInViewport('#development');
+      // since we lazy load notification bar now, #development element is a little out of viewport now
+      cy.isInViewport('#compile-in-memory');
       cy.isNotInViewport('#general');
     });
   });
