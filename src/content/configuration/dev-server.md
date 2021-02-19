@@ -132,7 +132,7 @@ module.exports = {
 To use this option with the CLI pass the `--allowed-hosts` option a comma-delimited string.
 
 ```bash
-npx webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com,host2.com
+npx webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com --allowed-hosts host2.com
 ```
 
 ## `devServer.before`
