@@ -73,9 +73,6 @@ const answer = require("target-file");
 
 And run `webpack` via your preferred method.
 
-<<<<<<< HEAD
-## Return Object Properties {#return-object-properties}
-=======
 ## Options
 
 |                  Name                   |    Type    |   Default   | Description                                   |
@@ -141,8 +138,7 @@ module.exports = {
 };
 ```
 
-## Return Object Properties
->>>>>>> e62fdf02aa76c534b4336a09a5844fbd9a3df974
+## Return Object Properties {#return-object-properties}
 
 Targeted modules of this loader must export a `Function` that returns an object,
 or a `Promise` resolving an object (e.g. async function), containing a `code` property at a minimum, but can
@@ -190,10 +186,7 @@ An array of absolute, native paths to directory dependencies that should be watc
 
 Context dependencies can also be added using [`loaderContext.addContextDependency(directory: string)`](/api/loaders/#thisaddcontextdependency).
 
-<<<<<<< HEAD
-### `cacheable` {#cacheable}
-=======
-### `buildDependencies`
+### `buildDependencies` {#builddependencies}
 
 Type: `Array[String]`
 Default: `[]`
@@ -202,8 +195,7 @@ An array of absolute, native paths to directory dependencies that should be watc
 
 Build dependencies can also be added using `loaderContext.addBuildDependency(file: string)`.
 
-### `cacheable`
->>>>>>> e62fdf02aa76c534b4336a09a5844fbd9a3df974
+### `cacheable` {#cacheable}
 
 Type: `Boolean`
 Default: `false`
