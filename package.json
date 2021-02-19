@@ -166,6 +166,7 @@
   },
   "resolutions": {
     "sitemap-static/minimist": "1.2.5",
-    "ini": "1.3.7"
+    "ini": "1.3.7",
+    "eval": "git://github.com/chenxsan/node-eval.git#bugfix/fix-URL-not-defined"
   }
 }

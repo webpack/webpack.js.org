@@ -5046,10 +5046,9 @@ etag@~1.8.1:
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
 
-eval@^0.1.0:
+eval@^0.1.0, "eval@git://github.com/chenxsan/node-eval.git#bugfix/fix-URL-not-defined":
   version "0.1.4"
-  resolved "https://registry.yarnpkg.com/eval/-/eval-0.1.4.tgz#e05dbe0dab4b9330215cbb7bf4886eb24bd58700"
-  integrity sha512-npGsebJejyjMRnLdFu+T/97dnigqIU0Ov3IGrZ8ygd1v7RL1vGkEKtvyWZobqUH1AQgKlg0Yqqe2BtMA9/QZLw==
+  resolved "git://github.com/chenxsan/node-eval.git#527557aa29cff8ab0993dc2351ba3520631b6528"
   dependencies:
     require-like ">= 0.1.1"
 
