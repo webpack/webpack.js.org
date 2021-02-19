@@ -1974,7 +1974,7 @@ https://cache-dev.myserver.net/web/static/assets/image.somehash.png</code></pre>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Filter can also be used to extend the supported elements and attributes. For example, filter can help process meta tags that reference assets:</p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Filter can also be used to extend the supported elements and attributes.</p> <p>For example, filter can help process meta tags that reference assets:</p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -1994,8 +1994,31 @@ https://cache-dev.myserver.net/web/static/assets/image.somehash.png</code></pre>
                   <span class="token punctuation">)</span> <span class="token punctuation">{</span>
                     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
                   <span class="token punctuation">}</span>
+
                   <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
                 <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p><strong>Note:</strong> source with a <code>tag</code> option takes precedence over source without.</p> <p>Filter can be used to disable default sources.</p> <p>For example:</p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.html$/i</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">'html-loader'</span><span class="token punctuation">,</span>
+        options<span class="token operator">:</span> <span class="token punctuation">{</span>
+          sources<span class="token operator">:</span> <span class="token punctuation">{</span>
+            list<span class="token operator">:</span> <span class="token punctuation">[</span>
+              <span class="token string">'...'</span><span class="token punctuation">,</span>
+              <span class="token punctuation">{</span>
+                tag<span class="token operator">:</span> <span class="token string">'img'</span><span class="token punctuation">,</span>
+                attribute<span class="token operator">:</span> <span class="token string">'src'</span><span class="token punctuation">,</span>
+                type<span class="token operator">:</span> <span class="token string">'src'</span><span class="token punctuation">,</span>
+                <span class="token function-variable function">filter</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token boolean">false</span><span class="token punctuation">,</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">]</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -2171,7 +2194,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   output<span class="token operator">:</span> <span class="token punctuation">{</span>
-    publicPath<span class="token operator">:</span> <span class="token string">'http://cdn.example.com/[hash]/'</span><span class="token punctuation">,</span>
+    publicPath<span class="token operator">:</span> <span class="token string">'http://cdn.example.com/[fullhash]/'</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p><strong>file.html</strong></p> <pre><code class="hljs language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>image.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">data-src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>image2x.png<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></code></pre> <p><strong>index.js</strong></p> <pre><code class="hljs language-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'html-loader!./file.html'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -2179,9 +2202,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 
 <span class="token comment">// => '&#x3C;img src="image.jpg" data-src="data:image/png;base64,..." >'</span></code></pre> <pre><code class="hljs language-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'html-loader?{"sources":{"list":[{"tag":"img","attribute":"src","type":"src"},{"tag":"img","attribute":"data-src","type":"src"}]}}!./file.html'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token comment">// => '&#x3C;img src="http://cdn.example.com/49eba9f/a992ca.jpg" data-src="data:image/png;base64,..." >'</span></code></pre> <pre><code class="hljs language-js"><span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'html-loader?-sources!./file.html'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">// => '&#x3C;img src="image.jpg"  data-src="image2x.png" >'</span></code></pre> <blockquote> <p>⚠️ <code>-sources</code> sets <code>sources: false</code>.</p> </blockquote> <h3 id="process-script-and-link-tags">Process <code>script</code> and <code>link</code> tags<a href="#process-script-and-link-tags" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p><strong>script.file.js</strong></p> <pre><code class="hljs language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p><strong>style.file.css</strong></p> <pre><code class="hljs language-css"><span class="token selector">a</span> <span class="token punctuation">{</span>
+<span class="token comment">// => '&#x3C;img src="http://cdn.example.com/49eba9f/a992ca.jpg" data-src="data:image/png;base64,..." >'</span></code></pre> <h3 id="process-script-and-link-tags">Process <code>script</code> and <code>link</code> tags<a href="#process-script-and-link-tags" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p><strong>script.file.js</strong></p> <pre><code class="hljs language-js">console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p><strong>style.file.css</strong></p> <pre><code class="hljs language-css"><span class="token selector">a</span> <span class="token punctuation">{</span>
   <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre> <p><strong>file.html</strong></p> <pre><code class="hljs language-html"><span class="token doctype"><span class="token punctuation">&#x3C;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>html</span><span class="token punctuation">></span></span>
