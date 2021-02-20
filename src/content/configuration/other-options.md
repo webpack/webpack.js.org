@@ -305,9 +305,9 @@ A list of [`name`](#name) defining all sibling configurations it depends on. Dep
 
 In watch mode dependencies will invalidate the compiler when:
 
- 1. the dependency has changed
- 2. a dependency is currently compiling or invalid
- 
+1.  the dependency has changed
+2.  a dependency is currently compiling or invalid
+
 Remember that this configuration will not compile until the dependency is done.
 
 ## ignoreWarnings
