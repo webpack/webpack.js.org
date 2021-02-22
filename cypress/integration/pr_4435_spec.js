@@ -1,7 +1,7 @@
 // set scrollBehavior to false
 // because we don't want cypress to scroll itself
 describe('Open page in new tab', { scrollBehavior: false }, () => {
-  it('should not scroll to top', () => {
+  it('should not scroll to top when right clicked', () => {
     cy.visit('/concepts/plugins/', {
       onBeforeLoad: (win) => {
         cy.stub(win, 'scrollTo');
@@ -17,8 +17,8 @@ describe('Open page in new tab', { scrollBehavior: false }, () => {
     // we click the menu
     cy.get(selector).click();
     cy.window().then((win) => {
-      // since no pathname changed, so no scrollTo called again
-      expect(win.scrollTo).to.be.calledOnce;
+      // we don't know whether user has scrolled the page or not although no pathname changed
+      expect(win.scrollTo).to.be.calledTwice;
     });
 
     if (Cypress.platform === 'darwin') {
@@ -27,7 +27,7 @@ describe('Open page in new tab', { scrollBehavior: false }, () => {
       });
       // no scrollTo should be called
       cy.window().then((win) => {
-        expect(win.scrollTo).to.be.calledOnce;
+        expect(win.scrollTo).to.be.calledTwice;
       });
     } else if (Cypress.platform === 'win32' || Cypress.platform === 'linux') {
       // win32, linux
@@ -36,14 +36,14 @@ describe('Open page in new tab', { scrollBehavior: false }, () => {
       });
       // no scrollTo should be called
       cy.window().then((win) => {
-        expect(win.scrollTo).to.be.calledOnce;
+        expect(win.scrollTo).to.be.calledTwice;
       });
     }
 
     // we click the menu again
     cy.get(selector).click();
     cy.window().then((win) => {
-      expect(win.scrollTo).to.be.calledOnce;
+      expect(win.scrollTo).to.be.calledTwice;
     });
   });
 });
