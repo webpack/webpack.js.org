@@ -24,10 +24,11 @@ export default class SidebarItem extends Component {
     // 1. location.pathname or location.hash changes which will be handled by useEffect in Page.jsx
     // 2. location.pathname and location.hash doesn't change at all
     if (window.location.hash !== '') {
-      // hash will change after click, handled by useEffect in Page.jsx
+      // case 1
       return;
     }
     if (!event.metaKey && !event.ctrlKey) {
+      // case 2
       window.scrollTo(0, 0);
     }
   }
