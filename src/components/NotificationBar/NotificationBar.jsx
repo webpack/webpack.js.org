@@ -1,12 +1,11 @@
-import { Component, Fragment } from 'react';
-import Container from '../Container/Container';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import testLocalStorage from '../../utilities/test-local-storage';
 import './NotificationBar.scss';
-import CloseIcon from '../../styles/icons/cross.svg';
-import PropTypes from 'prop-types';
 
-const version = '3';
-const localStorageIsEnabled = testLocalStorage() !== false;
+const MessageBar = lazy(() => import('./MessageBar'));
+
+export const version = '3';
+export const localStorageIsEnabled = testLocalStorage() !== false;
 
 const barDismissed = () => {
   if (localStorageIsEnabled) {
@@ -15,10 +14,13 @@ const barDismissed = () => {
   return false;
 };
 
-class MessageBar extends Component {
-  static propTypes = {
-    onClose: PropTypes.func,
+export default function NotificationBar() {
+  // hide the bar in the beginning
+  const [dismissed, setDismissed] = useState(true);
+  const onClose = () => {
+    setDismissed(true);
   };
+<<<<<<< HEAD
   render() {
     return (
       <div className="notification-bar">
@@ -67,21 +69,30 @@ export default class NotificationBar extends Component {
   onClose() {
     this.setState((state) => {
       if (!state.dismissed && typeof document !== 'undefined') {
+=======
+  useEffect(() => {
+    // update dismissed value when component mounted
+    setDismissed(() => barDismissed());
+  }, []);
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      // client side
+      if (dismissed === false) {
+        document.body.classList.add('notification-bar-visible');
+      } else {
+>>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
         document.body.classList.remove('notification-bar-visible');
       }
-      return {
-        dismissed: !state.dismissed,
-      };
-    });
-  }
-
-  render() {
-    const { dismissed } = this.state;
-
-    return (
-      <Fragment>
-        {!dismissed ? <MessageBar onClose={this.onClose} /> : null}
-      </Fragment>
-    );
-  }
+    }
+  }, [dismissed]);
+  return (
+    <>
+      {dismissed === false ? (
+        <Suspense fallback={<div />}>
+          <MessageBar onClose={onClose} />
+        </Suspense>
+      ) : undefined}
+    </>
+  );
 }

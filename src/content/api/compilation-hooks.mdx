@@ -9,6 +9,7 @@ contributors:
   - wizardofhogwarts
   - EugeneHlushko
   - chenxsan
+  - jamesgeorge007
 ---
 
 `Compilation` 模块会被 `Compiler` 用来创建新的 compilation 对象（或新的 build 对象）。
@@ -285,13 +286,27 @@ chunk `id` 优化结束之后触发。
 
 - 回调参数：`chunks` `records`
 
+<<<<<<< HEAD
 ### `beforeHash` {#beforehash}
+=======
+### `beforeModuleHash`
+>>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
 
 `SyncHook`
 
 在 compilation 添加哈希(hash)之前。
 
+<<<<<<< HEAD
 ### `afterHash` {#afterhash}
+=======
+### `beforeHash`
+
+`SyncHook`
+
+Called after the hashes of modules are created.
+
+### `afterHash`
+>>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
 
 `SyncHook`
 

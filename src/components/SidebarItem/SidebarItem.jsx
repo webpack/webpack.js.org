@@ -22,6 +22,7 @@ export default class SidebarItem extends Component {
   renderAnchors(anchors) {
     return (
       <ul className={`${block}__anchors`}>
+<<<<<<< HEAD
         {
           anchors.map((anchor) => {
             anchor = this._handleAnchor(anchor);
@@ -36,10 +37,25 @@ export default class SidebarItem extends Component {
             );
           })
         }
+=======
+        {anchors.map((anchor) => (
+          <li
+            key={this._generateAnchorURL(anchor)}
+            className={`${block}__anchor`}
+            title={anchor.title}
+          >
+            <NavLink to={this._generateAnchorURL(anchor)}>
+              {anchor.title}
+            </NavLink>
+            {anchor.children && this.renderAnchors(anchor.children)}
+          </li>
+        ))}
+>>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
       </ul>
     );
   }
 
+<<<<<<< HEAD
   _handleAnchor(anchor) {
     let id = anchor.id;
     let title = anchor.title;
@@ -57,6 +73,8 @@ export default class SidebarItem extends Component {
     }
   }
 
+=======
+>>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
   render() {
     let { title, anchors = [] } = this.props;
     let openMod = this.state.open ? `${block}--open` : '';
@@ -89,7 +107,6 @@ export default class SidebarItem extends Component {
           key={this.props.url}
           className={`${block}__title`}
           to={this.props.url}
-          onClick={this.scrollTop}
         >
           {title}
         </NavLink>

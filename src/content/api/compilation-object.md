@@ -50,6 +50,7 @@ Compilation 对象有很多可用的方法和钩子。在此页面，我们将�
 
 - `module` - 要搜索的模块。标识符是通过编译使用 `module.identifier()` 方法从模块中提取的。
 
+<<<<<<< HEAD
 ### waitForBuildingFinished {#waitforbuildingfinished}
 
 `function (module, callback)`
@@ -62,6 +63,9 @@ Compilation 对象有很多可用的方法和钩子。在此页面，我们将�
 - `callback` - 要调用的函数。
 
 ### buildModule {#buildmodule}
+=======
+### buildModule
+>>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
 
 `function (module, optional, origin, dependencies)`
 
@@ -85,6 +89,7 @@ Compilation 对象有很多可用的方法和钩子。在此页面，我们将�
 - `module` - 要被处理依赖的模块。
 - `callback` - 模块依赖处理完成时回调的函数。
 
+<<<<<<< HEAD
 ### addModuleDependencies {#addmoduledependencies}
 
 `function (module, dependencies, bail, cacheGroup, recursive, callback)`
@@ -101,6 +106,9 @@ Compilation 对象有很多可用的方法和钩子。在此页面，我们将�
 - `callback` - 添加模块依赖之后回调的函数。
 
 ### addEntry {#addentry}
+=======
+### addEntry
+>>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
 
 `function (context, entry, name, callback)`
 
@@ -113,6 +121,7 @@ Compilation 对象有很多可用的方法和钩子。在此页面，我们将�
 - `name` - 入口名称。
 - `callback` - 添加入口完成之后回调的函数。
 
+<<<<<<< HEAD
 ### prefetch {#prefetch}
 
 `function (context, dependency, callback)`
@@ -126,6 +135,9 @@ Compilation 对象有很多可用的方法和钩子。在此页面，我们将�
 - `callback` - 向上一级发送模块的模块回调。
 
 ### rebuildModule {#rebuildmodule}
+=======
+### rebuildModule
+>>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
 
 `function (module, thisCallback)`
 
