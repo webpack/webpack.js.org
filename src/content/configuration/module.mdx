@@ -151,6 +151,37 @@ module.exports = {
 const x = require(/* webpackIgnore: true */ 'x');
 ```
 
+#### module.parser.javascript.url {#module.parser.javascript.url}
+
+启用 `new URL()` 语法解析。
+
+- 类型：`boolean = true` | `'relative'`
+- 示例:
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          url: false, // disable parsing of `new URL()` syntax
+        },
+      },
+    },
+  };
+  ```
+
+自 webpack <Badge text='5.23.0' /> 起，`module.parser.javascript.url` 的 `'relative'` 值可用。当使用 `'relative'` 时，webpack 将为 `new URL()` 语法生成相对的 URL，即结果 URL 中不包含根 URL：
+
+```
+<!-- with 'relative' -->
+<img src='c43188443804f1b1f534.svg' />
+
+<!-- without 'relative' -->
+<img src='file:///path/to/project/dist/c43188443804f1b1f534.svg' />
+```
+
+1. 当服务器不知道根 URL 时，这对 SSR（服务端渲染）很有用（而且可用节省一些字节）。为了使其相同，它也必须用于客户端构建。
+2. 这也适用于 SSG（静态网站生成器），mini-css-plugin 和 html-plugin 等通常需要进行服务端渲染。
+
 ## `module.noParse` {#modulenoparse}
 
 `RegExp` `[RegExp]` `function(resource)` `string` `[string]`

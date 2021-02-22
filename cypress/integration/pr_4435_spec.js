@@ -17,7 +17,8 @@ describe('Open page in new tab', { scrollBehavior: false }, () => {
     // we click the menu
     cy.get(selector).click();
     cy.window().then((win) => {
-      expect(win.scrollTo).to.be.calledTwice;
+      // since no pathname changed, so no scrollTo called again
+      expect(win.scrollTo).to.be.calledOnce;
     });
 
     if (Cypress.platform === 'darwin') {
@@ -26,7 +27,7 @@ describe('Open page in new tab', { scrollBehavior: false }, () => {
       });
       // no scrollTo should be called
       cy.window().then((win) => {
-        expect(win.scrollTo).to.be.calledTwice;
+        expect(win.scrollTo).to.be.calledOnce;
       });
     } else if (Cypress.platform === 'win32' || Cypress.platform === 'linux') {
       // win32, linux
@@ -35,14 +36,14 @@ describe('Open page in new tab', { scrollBehavior: false }, () => {
       });
       // no scrollTo should be called
       cy.window().then((win) => {
-        expect(win.scrollTo).to.be.calledTwice;
+        expect(win.scrollTo).to.be.calledOnce;
       });
     }
 
     // we click the menu again
     cy.get(selector).click();
     cy.window().then((win) => {
-      expect(win.scrollTo).to.be.calledThrice;
+      expect(win.scrollTo).to.be.calledOnce;
     });
   });
 });

@@ -696,7 +696,9 @@ T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回�
 
 这些选项将入口起点的返回值（例如，入口起点的任何导出值），在 bundle 包所引入的位置，赋值给 [`output.library`](#outputlibrary) 提供的变量名。
 
-`libraryTarget: 'var'` - （默认值）当 library 加载完成，**入口起点的返回值**将分配给一个变量：
+- #### `libraryTarget: 'var'` {#libraryTarget-var}
+
+  当 library 加载完成，**入口起点的返回值**将分配给一个变量：
 
   ```javascript
   var MyLibrary = _entry_return_;
@@ -705,7 +707,9 @@ T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回�
   MyLibrary.doSomething();
   ```
 
-- `libraryTarget: 'assign'` - 这将产生一个隐含的全局变量，可能会潜在地重新分配到全局中已存在的值（谨慎使用）：
+- #### `libraryTarget: 'assign'` {#libraryTarget-assign}
+
+  这将产生一个隐含的全局变量，可能会潜在地重新分配到全局中已存在的值（谨慎使用）：
 
   ```javascript
   MyLibrary = _entry_return_;
@@ -713,7 +717,9 @@ T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回�
 
   注意，如果 `MyLibrary` 在作用域中未在前面代码进行定义，则你的 library 将被设置在全局作用域内。
 
-- `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' /> – 如果目标对象存在，则将返回值 copy 到目标对象，否则先创建目标对象：
+- #### `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' /> {#libraryTarget-assign-properties}
+
+  如果目标对象存在，则将返回值 copy 到目标对象，否则先创建目标对象：
 
   ```js
   // 如果不存在的话就创建目标对象
@@ -749,236 +755,261 @@ W> 当使用此选项时，将 [`output.library`](#outputlibrary) 设置为空�
 
 W> 注意，不设置 `output.library` 将导致由入口起点返回的所有属性，都会被赋值给给定的对象；这里并不会检查现有的属性名是否存在。
 
-`libraryTarget: "this"` - **入口起点的返回值**将分配给 this 的一个属性（此名称由 `output.library` 定义）下，`this` 的含义取决于你：
+- #### `libraryTarget: 'this'` {#librarytarget-this}
 
-```javascript
-this['MyLibrary'] = _entry_return_;
+  **入口起点的返回值**将分配给 this 的一个属性（此名称由 `output.library` 定义）下，`this` 的含义取决于你：
 
-// 在一个单独的 script...
-this.MyLibrary.doSomething();
-MyLibrary.doSomething(); // 如果 this 是 window
-```
+  ```javascript
+  this['MyLibrary'] = _entry_return_;
 
-`libraryTarget: 'window'` - **入口起点的返回值**将使用 `output.library` 中定义的值，分配给 `window` 对象的这个属性下。
+  // 在一个单独的 script...
+  this.MyLibrary.doSomething();
+  MyLibrary.doSomething(); // 如果 this 是 window
+  ```
 
-```javascript
-window['MyLibrary'] = _entry_return_;
+- #### `libraryTarget: 'window'` {#librarytarget-window}
 
-window.MyLibrary.doSomething();
-```
+  **入口起点的返回值**将使用 `output.library` 中定义的值，分配给 `window` 对象的这个属性下。
 
-`libraryTarget: 'global'` - **入口起点的返回值**将使用 `output.library` 中定义的值，分配给 `global` 对象的这个属性下。
+  ```javascript
+  window['MyLibrary'] = _entry_return_;
 
-```javascript
-global['MyLibrary'] = _entry_return_;
+  window.MyLibrary.doSomething();
+  ```
 
-global.MyLibrary.doSomething();
-```
+- #### `libraryTarget: 'global'` {#librarytarget-global}
 
-`libraryTarget: 'commonjs'` - **入口起点的返回值**将使用 `output.library` 中定义的值，分配给 exports 对象。这个名称也意味着，模块用于 CommonJS 环境：
+  **入口起点的返回值**将使用 `output.library` 中定义的值，分配给 `global` 对象的这个属性下。
 
-```javascript
-exports['MyLibrary'] = _entry_return_;
+  ```javascript
+  global['MyLibrary'] = _entry_return_;
 
-require('MyLibrary').doSomething();
-```
+  global.MyLibrary.doSomething();
+  ```
+
+- #### `libraryTarget: 'commonjs'` {#librarytarget-commonjs}
+
+  **入口起点的返回值**将使用 `output.library` 中定义的值，分配给 exports 对象。这个名称也意味着，模块用于 CommonJS 环境：
+
+  ```javascript
+  exports['MyLibrary'] = _entry_return_;
+
+  require('MyLibrary').doSomething();
+  ```
 
 ### 模块定义系统 {#module-definition-systems}
 
 这些选项将使得 bundle 带有更完整的模块头，以确保与各种模块系统的兼容性。根据 `output.libraryTarget` 选项不同，`output.library` 选项将具有不同的含义。
 
-`libraryTarget: 'commonjs2'` - **入口起点的返回值**将分配给 `module.exports` 对象。这个名称也意味着模块用于 CommonJS 环境：
+- #### `libraryTarget: 'module'` {#librarytarget-module}
 
-```javascript
-module.exports = _entry_return_;
+  输出 ES 模块。请确保事先启用 [experiments.outputModule](/configuration/experiments/)。
 
-require('MyLibrary').doSomething();
-```
+  需要注意的是，该功能还未完全支持，请在[此处](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975)跟进进度。
 
-注意，`output.library` 不能与 `output.libraryTarget` 一起使用，具体原因请参照[此 issue](https://github.com/webpack/webpack/issues/11800)。
+- #### `libraryTarget: 'commonjs2'`
 
-T> 想要弄清楚 CommonJS 和 CommonJS2 之间的区别？虽然它们很相似，但二者之间存在一些微妙的差异，这通常与 webpack 上下文没有关联。（更多详细信息，请[阅读此 issue](https://github.com/webpack/webpack/issues/1114)。）
+  **入口起点的返回值**将分配给 `module.exports` 对象。这个名称也意味着模块用于 CommonJS 环境：
 
-`libraryTarget: 'amd'` - 将你的 library 暴露为 AMD 模块。
+  ```javascript
+  module.exports = _entry_return_;
 
-AMD 模块要求入口 chunk（例如使用 `<script>` 标签加载的第一个脚本）通过特定的属性定义，例如 `define` 和 `require`，它们通常由 RequireJS 或任何兼容的模块加载器提供（例如 almond）。否则，直接加载生成的 AMD bundle 将导致报错，如 `define is not defined`。
+  require('MyLibrary').doSomething();
+  ```
 
-所以，使用以下配置...
+  注意，`output.library` 不能与 `output.libraryTarget` 一起使用，具体原因请参照[此 issue](https://github.com/webpack/webpack/issues/11800)。
 
-```javascript
-module.exports = {
-  //...
-  output: {
-    library: 'MyLibrary',
-    libraryTarget: 'amd',
-  },
-};
-```
+  T> 想要弄清楚 CommonJS 和 CommonJS2 之间的区别？虽然它们很相似，但二者之间存在一些微妙的差异，这通常与 webpack 上下文没有关联。（更多详细信息，请[阅读此 issue](https://github.com/webpack/webpack/issues/1114)。）
 
-生成的 output 将会使用 "MyLibrary" 作为模块名定义，即
+- #### `libraryTarget: 'amd'`
 
-```javascript
-define('MyLibrary', [], function () {
-  return _entry_return_;
-});
-```
+  将你的 library 暴露为 AMD 模块。
 
-可以在 script 标签中，将 bundle 作为一个模块整体引入，并且可以像这样调用 bundle：
+  AMD 模块要求入口 chunk（例如使用 `<script>` 标签加载的第一个脚本）通过特定的属性定义，例如 `define` 和 `require`，它们通常由 RequireJS 或任何兼容的模块加载器提供（例如 almond）。否则，直接加载生成的 AMD bundle 将导致报错，如 `define is not defined`。
 
-```javascript
-require(['MyLibrary'], function (MyLibrary) {
-  // 使用 library 做一些事……
-});
-```
+  因此，配置如下：
 
-如果 `output.library` 未定义，将会生成以下内容。
-
-```javascript
-define([], function () {
-  return _entry_return_; // 此模块返回值，是入口 chunk 返回的值
-});
-```
-
-如果直接加载 `<script>` 标签，此 bundle 无法按预期运行，或者根本无法正常运行（在 almond loader 中）。只能通过文件的实际路径，在 RequireJS 兼容的异步模块加载器中运行，因此在这种情况下，如果这些设置直接暴露在服务器上，那么 `output.path` 和 `output.filename` 对于这个特定的设置可能变得很重要。
-
-`libraryTarget: 'amd-require'` - 这将使用立即执行的AMD `require(dependencies, factory)` 包装器包装您的输出。
-
- `'amd-require'` 目标（target）允许使用AMD依赖项，而无需单独的后续调用。与 `'amd'` 目标（target）一样, 这取决于在加载 webpack 输出的环境中适当可用的 [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) 。
-
-对于此目标，库名称将被忽略。
-
-`libraryTarget: 'umd'` - 将你的 library 暴露为所有的模块定义下都可运行的方式。它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。了解更多请查看 [UMD 仓库](https://github.com/umdjs/umd)。
-
-在这个例子中，你需要 `library` 属性来命名你的模块：
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    library: 'MyLibrary',
-    libraryTarget: 'umd',
-  },
-};
-```
-
-最终输出如下：
-
-```javascript
-(function webpackUniversalModuleDefinition(root, factory) {
-  if (typeof exports === 'object' && typeof module === 'object')
-    module.exports = factory();
-  else if (typeof define === 'function' && define.amd) define([], factory);
-  else if (typeof exports === 'object') exports['MyLibrary'] = factory();
-  else root['MyLibrary'] = factory();
-})(typeof self !== 'undefined' ? self : this, function () {
-  return _entry_return_;
-});
-```
-
-注意，省略 `library` 会导致将入口起点返回的所有属性，直接赋值给 root 对象，就像[对象分配章节](#expose-via-object-assignment)。例如：
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    libraryTarget: 'umd',
-  },
-};
-```
-
-输出结果如下：
-
-```javascript
-(function webpackUniversalModuleDefinition(root, factory) {
-  if (typeof exports === 'object' && typeof module === 'object')
-    module.exports = factory();
-  else if (typeof define === 'function' && define.amd) define([], factory);
-  else {
-    var a = factory();
-    for (var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-  }
-})(typeof self !== 'undefined' ? self : this, function () {
-  return _entry_return_;
-});
-```
-
-从 webpack 3.1.0 开始，你可以将 `library` 指定为一个对象，用于给每个 target 起不同的名称：
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    library: {
-      root: 'MyLibrary',
-      amd: 'my-library',
-      commonjs: 'my-common-library',
-    },
-    libraryTarget: 'umd',
-  },
-};
-```
-
-`libraryTarget: 'system'` —— 这将暴露你的 library 作为一个由 [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md)
-的模块。此特性首次发布于 [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0)。
-
-当 webpack bundle 被执行时，系统模块依赖全局的变量 `System`。编译为 `System.register` 形式后，你可以使用 `System.import('/bundle.js')` 而无需额外配置，并会将你的 webpack bundle 包加载到系统模块注册表中。
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    libraryTarget: 'system',
-  },
-};
-```
-
-Output:
-
-```javascript
-System.register([], function (_export) {
-  return {
-    setters: [],
-    execute: function () {
-      // ...
+  ```javascript
+  module.exports = {
+    //...
+    output: {
+      library: 'MyLibrary',
+      libraryTarget: 'amd',
     },
   };
-});
-```
+  ```
 
-除了将 `output.libraryTarget` 设置为 `system` 之外，还可将 `output.library` 添加到配置中，输出 bundle 的 library 名将作为 `System.register` 的参数：
+  生成的 output 名称将被定义为 "MyLibrary"：
 
-```javascript
-System.register('my-library', [], function (_export) {
-  return {
-    setters: [],
-    execute: function () {
-      // ...
+  ```javascript
+  define('MyLibrary', [], function () {
+    return _entry_return_;
+  });
+  ```
+
+  可以在 script 标签中，将 bundle 作为一个模块整体引入，并且可以像这样调用 bundle：
+
+  ```javascript
+  require(['MyLibrary'], function (MyLibrary) {
+    // Do something with the library...
+  });
+  ```
+
+  如果 `output.library` 未定义，将会生成以下内容。
+
+  ```javascript
+  define([], function () {
+    return _entry_return_;
+  });
+  ```
+
+  如果直接加载 `<script>` 标签，此 bundle 无法按预期运行，或者根本无法正常运行（在 almond loader 中）。只能通过文件的实际路径，在 RequireJS 兼容的异步模块加载器中运行，因此在这种情况下，如果这些设置直接暴露在服务器上，那么 `output.path` 和 `output.filename` 对于这个特定的设置可能变得很重要。
+
+- #### `libraryTarget: 'amd-require'`
+
+  这将使用立即执行的AMD `require(dependencies, factory)` 包装器包装您的输出。
+
+  `'amd-require'` 目标（target）允许使用AMD依赖项，而无需单独的后续调用。与 `'amd'` 目标（target）一样, 这取决于在加载 webpack 输出的环境中适当可用的 [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md)。
+
+  对于此 target，库名称将被忽略。
+
+- #### `libraryTarget: 'umd'`
+
+  将你的 library 暴露为所有的模块定义下都可运行的方式。它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。了解更多请查看 [UMD 仓库](https://github.com/umdjs/umd)。
+
+  在这个例子中，你需要 `library` 属性来命名你的模块：
+
+  ```javascript
+  module.exports = {
+    //...
+    output: {
+      library: 'MyLibrary',
+      libraryTarget: 'umd',
     },
   };
-});
-```
+  ```
 
-你可以通过 [SystemJS context](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md#format-definition) 凭借 `__system_context__`:
+  最终的输出结果为：
 
-```javascript
-// 记录当前系统模块的 URL
-console.log(__system_context__.meta.url);
+  ```javascript
+  (function webpackUniversalModuleDefinition(root, factory) {
+    if (typeof exports === 'object' && typeof module === 'object')
+      module.exports = factory();
+    else if (typeof define === 'function' && define.amd) define([], factory);
+    else if (typeof exports === 'object') exports['MyLibrary'] = factory();
+    else root['MyLibrary'] = factory();
+  })(typeof self !== 'undefined' ? self : this, function () {
+    return _entry_return_;
+  });
+  ```
 
-// 导入一个系统模块，通过将当前的系统模块的 url 作为 parentUrl
-__system_context__.import('./other-file.js').then((m) => {
-  console.log(m);
-});
-```
+  注意，省略 `library` 会导致将入口起点返回的所有属性，直接赋值给 root 对象，就像[对象分配章节](#expose-via-object-assignment)。例如：
+
+  ```javascript
+  module.exports = {
+    //...
+    output: {
+      libraryTarget: 'umd',
+    },
+  };
+  ```
+
+  输出结果如下：
+
+  ```javascript
+  (function webpackUniversalModuleDefinition(root, factory) {
+    if (typeof exports === 'object' && typeof module === 'object')
+      module.exports = factory();
+    else if (typeof define === 'function' && define.amd) define([], factory);
+    else {
+      var a = factory();
+      for (var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+    }
+  })(typeof self !== 'undefined' ? self : this, function () {
+    return _entry_return_;
+  });
+  ```
+
+  从 webpack 3.1.0 开始，你可以将 `library` 指定为一个对象，用于给每个 target 起不同的名称：
+
+  ```javascript
+  module.exports = {
+    //...
+    output: {
+      library: {
+        root: 'MyLibrary',
+        amd: 'my-library',
+        commonjs: 'my-common-library',
+      },
+      libraryTarget: 'umd',
+    },
+  };
+  ```
+
+- #### `libraryTarget: 'system'`
+
+  这将暴露你的 library 作为一个由 [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) 的模块。此特性首次发布于 [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0)。
+
+  当 webpack bundle 被执行时，系统模块依赖全局的变量 `System`。编译为 `System.register` 形式后，你可以使用 `System.import('/bundle.js')` 而无需额外配置，并会将你的 webpack bundle 包加载到系统模块注册表中。
+
+  ```javascript
+  module.exports = {
+    //...
+    output: {
+      libraryTarget: 'system',
+    },
+  };
+  ```
+
+  输出：
+
+  ```javascript
+  System.register([], function (_export) {
+    return {
+      setters: [],
+      execute: function () {
+        // ...
+      },
+    };
+  });
+  ```
+
+  除了将 `output.libraryTarget` 设置为 `system` 之外，还可将 `output.library` 添加到配置中，输出 bundle 的 library 名将作为 `System.register` 的参数：
+
+  ```javascript
+  System.register('my-library', [], function (_export) {
+    return {
+      setters: [],
+      execute: function () {
+        // ...
+      },
+    };
+  });
+  ```
+
+  你可以通过 `__system_context__` 访问 [SystemJS context](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md#format-definition)：
+
+  ```javascript
+  // 记录当前系统模块的 URL
+  console.log(__system_context__.meta.url);
+
+  // 导入一个系统模块，通过将当前的系统模块的 url 作为 parentUrl
+  __system_context__.import('./other-file.js').then((m) => {
+    console.log(m);
+  });
+  ```
 
 ### 其他 Targets {#other-targets}
 
-`libraryTarget: 'jsonp'` - 这将把入口起点的返回值，包裹到一个 jsonp 包装容器中
+- #### `libraryTarget: 'jsonp'`
 
-```javascript
-MyLibrary(_entry_return_);
-```
+  这将把入口起点的返回值，包裹到一个 jsonp 包装容器中
 
-你的 library 的依赖将由 [`externals`](/configuration/externals/) 配置定义。
+  ```javascript
+  MyLibrary(_entry_return_);
+  ```
+
+  你的 library 的依赖将由 [`externals`](/configuration/externals/) 配置定义。
 
 ## `output.importFunctionName` {#outputimportfunctionname}
 
@@ -1350,24 +1381,31 @@ module.exports = {
 
 ## `output.module` {#outputmodule}
 
-`boolean = true`
+`boolean = false`
 
-允许输出的 JavaScript 文件作为模块类型。 设置 `output.iife` 为 `false`, `output.libraryTarget` 为 `'module'`, `output.scriptType` 为 `'module'` 和 `terserOptions.module` 为 `true`
+以模块类型输出 JavaScript 文件。由于此功能还处于实验阶段，默认禁用。
 
-W> `output.module` 是一个实验性的功能， 想要使用的话，通过设置 [`experiments.outputModule`](/configuration/experiments/#experiments) 为 `true`.
+当启用时，webpack 会在内部将 [`output.iife`](#outputiife) 设置为 `false`，将 [`output.scriptType`](#outputscripttype) 为 `'module'`，并将 `terserOptions.module` 设置为 `true`
+
+如果你需要使用 webpack 构建一个库以供别人使用，当 `output.module` 为 `true` 时，一定要将 [`output.libraryTarget`](#librarytarget-module) 设置为 `'module'`。
 
 ```javascript
 module.exports = {
   //...
+  experimentals: {
+    outputModule: true,
+  },
   output: {
     module: true,
   },
 };
 ```
 
-## output.clean
+W> `output.module` 是一个实验性的功能， 想要使用的话，通过设置 [`experiments.outputModule`](/configuration/experiments/#experiments) 为 `true`.
 
-<Badge text='5.20.0+' />
+## output.clean {#outputclean}
+
+<Badge text="5.20.0+" />
 
 `boolean` `{ dry?: boolean, keep?: RegExp | string | ((filename: string) => boolean) }`
 
@@ -1409,7 +1447,7 @@ module.exports = {
     clean: {
       keep(asset) {
         return asset.includes('ignored/dir');
-      }
+      },
     },
   },
 };
@@ -1420,8 +1458,8 @@ module.exports = {
 ```javascript
 webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
   'Test',
-  asset => {
-    if(/\/ignored\/dir\//.test(asset)) return true;
+  (asset) => {
+    if (/\/ignored\/dir\//.test(asset)) return true;
   }
 );
 ```

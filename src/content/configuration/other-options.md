@@ -24,7 +24,7 @@ related:
 
 W> 寻求帮助：这个页面还在更新中，如果你发现本页面内有描述不准确或者不完整，请在 [webpack 的文档仓库](https://github.com/webpack/webpack.js.org)中创建 issue 或者 pull request
 
-## `amd` {#amd}
+## amd {#amd}
 
 `object` `boolean: false`
 
@@ -48,7 +48,7 @@ module.exports = {
 此选项允许将模块查找的键(key)设置为真值(truthy value)。
 发生这种情况时，webpack 中的 AMD 支持将忽略定义的名称。
 
-## `bail` {#bail}
+## bail {#bail}
 
 `boolean = false`
 
@@ -65,7 +65,7 @@ module.exports = {
 
 这将迫使 webpack 退出其打包过程。
 
-## `cache` {#cache}
+## cache {#cache}
 
 `boolean` `object`
 
@@ -80,7 +80,7 @@ module.exports = {
 };
 ```
 
-### `cache.type` {#cachetype}
+### cache.type {#cachetype}
 
 `string: 'memory' | 'filesystem'`
 
@@ -99,7 +99,7 @@ module.exports = {
 
 当将 `cache.type` 设置成 `filesystem` 会开放更多的选荐可配置。
 
-### `cache.cacheDirectory` {#cachecachedirectory}
+### cache.cacheDirectory {#cachecachedirectory}
 
 `string`
 
@@ -123,7 +123,7 @@ module.exports = {
 
 W> 最终的缓存目标是 `cache.cacheDirectory` + `cache.name` 的混合.
 
-### `cache.cacheLocation` {#cachecachelocation}
+### cache.cacheLocation {#cachecachelocation}
 
 `string`
 
@@ -143,15 +143,15 @@ module.exports = {
 };
 ```
 
-### `cache.buildDependencies` {#cachebuilddependencies}
+### cache.buildDependencies {#cachebuilddependencies}
 
 `object`
 
-`cache.buildDependencies` is an object of arrays of additional code dependencies for the build. webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
+`cache.buildDependencies` 是用于构建的额外代码依赖数组。webpack 将使用这些项和所有依赖项的哈希值来使文件系统缓存失效。
 
-Defaults to `webpack/lib` to get all dependencies of webpack.
+默认使用 `webpack/lib` 获取 webpack 的所有依赖项。
 
-T> It's recommended to set `cache.buildDependencies.config: [__filename]` in your webpack configuration to get the latest configuration and all dependencies.
+T> 推荐在你的 webpack 配置中设置 `cache.buildDependencies.config: [__filename]` 以获取最新配置以及所有依赖项。
 
 ```javascript
 module.exports = {
@@ -165,15 +165,15 @@ module.exports = {
 };
 ```
 
-### `cache.managedPaths` {#cachemanagedpaths}
+### cache.managedPaths {#cachemanagedpaths}
 
 `[string] = ['./node_modules']`
 
-W> Moved to [snapshot.managedPaths](#managedpaths)
+W> 已迁移到 [snapshot.managedPaths](#managedpaths)
 
-`cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
+`cache.managedPaths` 是仅托管路径的包管理器数组。webpack 将避免将他们进行哈希和时间戳处理，假设版本是唯一的，并将其用作快照（用于内存和文件系统缓存）。
 
-### `cache.hashAlgorithm` {#cachehashalgorithm}
+### cache.hashAlgorithm {#cachehashalgorithm}
 
 `string`
 
@@ -193,7 +193,7 @@ module.exports = {
 };
 ```
 
-### `cache.name` {#cachename}
+### cache.name {#cachename}
 
 `string`
 
@@ -213,7 +213,7 @@ module.exports = {
 };
 ```
 
-### `cache.store` {#cachestore}
+### cache.store {#cachestore}
 
 `string = 'pack': 'pack'`
 
@@ -237,7 +237,7 @@ module.exports = {
 };
 ```
 
-### `cache.version` {#cacheversion}
+### cache.version {#cacheversion}
 
 `string = ''`
 
@@ -259,7 +259,7 @@ module.exports = {
 
 W> 在具有不同选项的调用之间不要共享缓存。
 
-### `cache.idleTimeout` {#cacheidletimeout}
+### cache.idleTimeout {#cacheidletimeout}
 
 `number = 10000`
 
@@ -278,7 +278,7 @@ module.exports = {
 
 W> `cache.idleTimeout` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 才可配置。
 
-### `cache.idleTimeoutForInitialStore` {#cacheidletimeoutforinitialstore}
+### cache.idleTimeoutForInitialStore {#cacheidletimeoutforinitialstore}
 
 `number = 0`
 
@@ -297,7 +297,20 @@ module.exports = {
 
 W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 才可配置。
 
-## `ignoreWarnings` {#ignorewarnings}
+## dependencies {#dependencies}
+
+`[string]`
+
+一个 [`name`](#name) 列表，定义它所依赖的所有兄弟（sibling）配置。需要首先编译依赖的配置。
+
+在 watch 模式下，当出现以下情况时，依赖项将使编译器失效：
+
+1.  依赖项发生变化
+2.  依赖项当前正在编译或者处于无效状态
+
+请记住，在完成依赖项编译之前，不会编译此配置。
+
+## ignoreWarnings {#ignorewarnings}
 
 `RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`
 
@@ -325,7 +338,7 @@ module.exports = {
 };
 ```
 
-## `loader` {#loader}
+## loader {#loader}
 
 `object`
 
@@ -358,13 +371,13 @@ module.exports = function (source) {
 
 T> 你可以覆盖 loader 上下文中的属性，因为 webpack 会将所有定义在 `loader` 中的属性负责到 loader 上下文中。
 
-## `parallelism` {#parallelism}
+## parallelism {#parallelism}
 
 `number = 100`
 
 限制并行处理的模块数量。可以用于调优性能或获取更可靠的性能分析结果。
 
-## `profile` {#profile}
+## profile {#profile}
 
 `boolean`
 
@@ -375,7 +388,7 @@ T> 使用 [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) 可�
 T> 与 `parallelism: 1` 混用以达到更好的结果。
 需要注意的是，这样做也会减慢建造速度。
 
-## `recordsPath` {#recordspath}
+## recordsPath {#recordspath}
 
 `string`
 
@@ -398,13 +411,13 @@ T> 注意，虽然这个文件是由编译器(compiler)生成的，但你可能�
 
 W> 设置 `recordsPath` 本质上会把 `recordsInputPath` 和 `recordsOutputPath` 都设置成相同的路径。通常来讲这也是符合逻辑的，除非你决定改变记录文件的名称。可以查看下面的实例：
 
-## `recordsInputPath` {#recordsinputpath}
+## recordsInputPath {#recordsinputpath}
 
 `string`
 
 指定读取最后一条记录的文件的名称。这可以用来重命名一个记录文件，可以查看下面的实例：
 
-## `recordsOutputPath` {#recordsoutputpath}
+## recordsOutputPath {#recordsoutputpath}
 
 `string`
 
@@ -422,7 +435,7 @@ module.exports = {
 };
 ```
 
-## `name` {#name}
+## name {#name}
 
 `string`
 
@@ -487,11 +500,11 @@ module.exports = {
 };
 ```
 
-## `snapshot` {#snapshot}
+## snapshot {#snapshot}
 
 `object`
 
-`snapshot` options decide how the file system snapshots are created and invalidated.
+`snapshot` 配置项决定文件系统是如何创建和无效快照。
 
 **webpack.config.js**
 
@@ -520,56 +533,56 @@ module.exports = {
 };
 ```
 
-### `managedPaths` {#managed-paths}
+### managedPaths {#managedpaths}
 
 `[string]`
 
-An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
+由包管理器管理的路径数组，可以信任它不会被修改。
 
-### `immutablePaths` {#immutable-paths}
+### immutablePaths {#immutable-paths}
 
 `[string]`
 
-An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
+由包管理器管理的路径数组，在其路径中包含一个版本或哈希，以便所有文件都是不可变的（immutable）。
 
-### `buildDependencies` {#build-dependencies}
+### buildDependencies {#build-dependencies}
 
 `object = { hash boolean = true, timestamp boolean = true }`
 
-Snapshots for build dependencies when using the persistent cache.
+使用持久化缓存时的依赖构建关系快照。
 
-- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
-- `timestamp`: Compare timestamps to determine invalidation.
+- `hash`：比较内容哈希以确定无效（比 `timestamp` 更昂贵，但更改的频率较低）。
+- `timestamp`：比较 timestamps 以确定无效。
 
-Both `hash` and `timestamp` are optional.
+`hash` 与 `timestamp` 都是可选配置。
 
-- `{ hash: true }`: Good for CI caching with a fresh checkout which doesn't keep timestamps and uses hashes.
-- `{ timestamp: true }`: Good for local development caching.
-- `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps are the same, which leads to a small performance hit for the initial build.
+- `{ hash: true }`：对 CI 缓存很有帮助，使用新的 checkout，不需要保存时间戳，并且使用哈希。
+- `{ timestamp: true }`：对应本地开发缓存很用帮助。
+- `{ timestamp: true, hash: true }`：对于以上提到的两者都很有帮助。首先比较时间戳，这代价很低，因为 webpack 不需要读取文件来计算它们的哈希值。仅当时间戳相同时才会比较内容哈希，这对初始构建的性能影响很小。
 
-### `module` {#module}
-
-`object = {hash boolean = true, timestamp boolean = true}`
-
-Snapshots for building modules.
-
-- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
-- `timestamp`: Compare timestamps to determine invalidation.
-
-### `resolve` {#resolve}
+### module {#module}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
-Snapshots for resolving of requests.
+构建模块的快照。
 
-- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
-- `timestamp`: Compare timestamps to determine invalidation.
+- `hash`：比较内容哈希以判断无效。（比 `timestamp` 更昂贵，但更改的频率较低）。
+- `timestamp`：比较时间戳以确定无效。
 
-### `resolveBuildDependencies` {#resolve-build-dependencies}
+### resolve {#resolve}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
-Snapshots for resolving of build dependencies when using the persistent cache.
+解析请求的快照。
 
-- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
-- `timestamp`: Compare timestamps to determine invalidation.
+- `hash`：比较内容哈希以判断无效。（比 `timestamp` 更昂贵，但更改的频率较低）。
+- `timestamp`：比较时间戳以确定无效。
+
+### resolveBuildDependencies {#resolve-build-dependencies}
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+使用持久缓存时用于解析构建依赖项的快照。
+
+- `hash`：比较内容哈希以判断无效。（比 `timestamp` 更昂贵，但更改的频率较低）。
+- `timestamp`：比较时间戳以确定无效。

@@ -132,7 +132,7 @@ module.exports = {
 要将这个选项与 CLI 一起使用，请将 `--allowed-hosts` 的转换为用逗号分割的字符串并传入。
 
 ```bash
-webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com,host2.com
+npx webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com --allowed-hosts host2.com
 ```
 
 ## `devServer.before` {#devserverbefore}
@@ -178,7 +178,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --bonjour
+npx webpack serve --bonjour
 ```
 
 ## `devServer.clientLogLevel` {#devserverclientloglevel}
@@ -205,7 +205,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --client-log-level silent
+npx webpack serve --client-log-level silent
 ```
 
 ## `devServer.compress` {#devservercompress}
@@ -228,7 +228,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --compress
+npx webpack serve --compress
 ```
 
 ## `devServer.contentBase` {#devservercontentbase}
@@ -275,7 +275,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --content-base ./path/to/content/dir
+npx webpack serve --content-base ./path/to/content/dir
 ```
 
 ## `devServer.contentBasePublicPath` {#devservercontentbasepublicpath}
@@ -332,7 +332,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --disable-host-check
+npx webpack serve --disable-host-check
 ```
 
 ## `devServer.filename` 🔑 {#devserverfilename-}
@@ -436,7 +436,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --history-api-fallback
+npx webpack serve --history-api-fallback
 ```
 
 有关更多选项和信息，请参见 [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) 文档。
@@ -461,7 +461,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --host 0.0.0.0
+npx webpack serve --host 0.0.0.0
 ```
 
 ## `devServer.hot` {#devserverhot}
@@ -503,7 +503,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --hot only
+npx webpack serve --hot-only
 ```
 
 ## `devServer.http2` {#devserverhttp2}
@@ -548,13 +548,13 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --http2
+npx webpack serve --http2
 ```
 
 要通过CLI使用自己的证书，请使用以下选项
 
 ```bash
-webpack serve --http2 --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
+npx webpack serve --http2 --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
 ```
 
 ## `devServer.https` {#devserverhttps}
@@ -595,13 +595,13 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --https
+npx webpack serve --https
 ```
 
 要通过 CLI 使用自己的证书，请使用以下选项
 
 ```bash
-webpack serve --https --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
+npx webpack serve --https --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
 ```
 
 ## `devServer.index` {#devserverindex}
@@ -628,7 +628,7 @@ module.exports = {
 输出 cli 信息。默认情况下启用。
 
 ```bash
-webpack serve --info false
+npx webpack serve --info false
 ```
 
 ## `devServer.injectClient` {#devserverinjectclient}
@@ -686,7 +686,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --inline false
+npx webpack serve --inline false
 ```
 
 T> 对于 [Hot Module Replacement](/plugins/hot-module-replacement-plugin/) ，建议使用串联模式，因为它包含来自 websocket 的 HMR 触发器。 轮询模式可以用作替代方法，但需要附加的入口点`'webpack/hot/poll?1000'`。
@@ -711,7 +711,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --lazy
+npx webpack serve --lazy
 ```
 
 T> [`watchOptions`](#devserverwatchoptions-) 不会有任何副作用当使用 **lazy mode** 时。
@@ -738,7 +738,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --no-live-reload
+npx webpack serve --no-live-reload
 ```
 
 ## `devServer.mimeTypes` 🔑 {#devservermimetypes-}
@@ -845,7 +845,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --open 'Google Chrome'
+npx webpack serve --open 'Google Chrome'
 ```
 
 T> 浏览器应用程序名称取决于平台。 不要在可重用模块中对其进行硬编码。 例如，`'Chrome'` 在macOS上是 `'Google Chrome'` ，在Linux上是 `'Google Chrome'` 在Windows上是 `'Chrome'` 。
@@ -870,7 +870,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --open-page /different/page
+npx webpack serve --open-page /different/page
 ```
 
 如果希望指定多个页面在浏览器中打开。
@@ -889,7 +889,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --open-page /different/page1,/different/page2
+npx webpack serve --open-page /different/page1,/different/page2
 ```
 
 ## `devServer.overlay` {#devserveroverlay}
@@ -945,7 +945,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --pfx ./path/to/file.pfx
+npx webpack serve --pfx ./path/to/file.pfx
 ```
 
 ## `devServer.pfxPassphrase` {#devserverpfxpassphrase}
@@ -968,7 +968,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --pfx-passphrase passphrase
+npx webpack serve --pfx-passphrase passphrase
 ```
 
 ## `devServer.port` {#devserverport}
@@ -991,7 +991,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --port 8080
+npx webpack serve --port 8080
 ```
 
 ## `devServer.proxy` {#devserverproxy}
@@ -1148,7 +1148,7 @@ module.exports = {
 将运行进度输出到控制台。
 
 ```bash
-webpack serve --progress
+npx webpack serve --progress
 ```
 
 ## `devServer.public` {#devserverpublic}
@@ -1173,7 +1173,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --public myapp.test:80
+npx webpack serve --public myapp.test:80
 ```
 
 ## `devServer.publicPath` 🔑 {#devserverpublicpath-}
@@ -1238,7 +1238,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --quiet
+npx webpack serve --quiet
 ```
 
 ## `devServer.serveIndex` {#devserverserveindex}
@@ -1319,7 +1319,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --sock-path /socket
+npx webpack serve --sock-path /socket
 ```
 
 ## `devServer.sockPort` {#devserversockport}
@@ -1390,7 +1390,7 @@ T> 与 `quiet` 或 `noInfo` 一起使用时，该选项无效。
 当stdin结束时，此选项将关闭服务器。
 
 ```bash
-webpack serve --stdin
+npx webpack serve --stdin
 ```
 
 ## `devServer.transportMode` {#devservertransportmode}
@@ -1508,7 +1508,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --use-local-ip
+npx webpack serve --use-local-ip
 ```
 
 ## `devServer.watchContentBase` {#devserverwatchcontentbase}
@@ -1531,7 +1531,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-webpack serve --watch-content-base
+npx webpack serve --watch-content-base
 ```
 
 ## `devServer.watchOptions` 🔑 {#devserverwatchoptions-}

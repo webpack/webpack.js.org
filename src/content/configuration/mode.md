@@ -42,7 +42,7 @@ webpack --mode=development
 
 如果没有设置，webpack 会给 `mode` 的默认值设置为 `production`。
 
-T> 请注意，设置 `NODE_ENV` 并不会自动地设置 `mode`。
+T> 如果 `mode` 未通过配置或 CLI 赋值，CLI 将使用可能有效的 `NODE_ENV` 值作为 `mode`。
 
 ### Mode: development {#mode-development}
 

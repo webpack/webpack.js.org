@@ -90,3 +90,24 @@ module.exports = [
 ```
 
 T> 如果你只传了一个 [`--config-name`](/api/cli/#configuration-options) 名字标识，webpack 将只会构建指定的配置项。
+
+### parallelism {#parallelism}
+
+如果你导出了多个配置，你可以在配置中使用 `parallelism` 选项来指定编译的最大并发数。
+
+- 类型：`number`
+- 支持版本：5.22.0+
+
+**webpack.config.js**
+
+```javascript
+module.exports = [
+  {
+    //config-1
+  },
+  {
+    //config-2
+  },
+];
+module.exports.parallelism = 1;
+```

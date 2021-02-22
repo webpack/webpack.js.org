@@ -25,7 +25,7 @@ Available options:
 - `layers`: Enable module and chunk layers.
 - `lazyCompilation`: Compile entrypoints and dynamic `import`s only when they are in use.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -82,21 +82,21 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
   };
   ```
 - Example 2:
-    ```js
-    module.exports = {
-      // …
-      experiments: {
-        lazyCompilation: {
 
-          // disable lazy compilation for dynamic imports
-          imports: false,
+  ```js
+  module.exports = {
+    // …
+    experiments: {
+      lazyCompilation: {
+        // disable lazy compilation for dynamic imports
+        imports: false,
 
-          // disable lazy compilation for entries
-          entries: false,
+        // disable lazy compilation for entries
+        entries: false,
 
-          // do not lazily compile moduleB
-          test: module => !/moduleB/.test(module.nameForCondition()),
-        },
+        // do not lazily compile moduleB
+        test: (module) => !/moduleB/.test(module.nameForCondition()),
       },
-    };
-    ```
+    },
+  };
+  ```

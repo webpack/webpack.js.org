@@ -446,5 +446,25 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 | 退出代码 | 描述                                        |
 | --------- | -------------------------------------------------- |
 | `0`       | 成功                                            |
-| `1`       | webpack Error                                |
-| `2`       | 配置/选项问题，或者内部错误 |
+| `1`       | webpack Error                                   |
+| `2`       | 配置/选项问题，或者内部错误                         |
+
+## 环境变量 {#environment-variables}
+
+| 变量名 | 描述                                  |
+| -------------------- | -------------------------------------------- |
+| `WEBPACK_SERVE`      | 如果设置了 `serve\|s`，则为 `true`。            |
+| `WEBPACK_BUILD`      | 如果设置了 `build\|bundle\|b`，则为 `true`      |
+| `WEBPACK_WATCH`      | 如果设置了 `--watch\|watch\|w`，则为 `true`     |
+
+你可以在你的 webpack 配置中使用上述环境变量：
+
+```javascript
+module.exports = (env, argv) => {
+  return {
+    mode: env.WEBPACK_SERVE ? 'development' : 'production',
+  };
+};
+```
+
+W> 禁止在 bundle 代码中访问上述变量。

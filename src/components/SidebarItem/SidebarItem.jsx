@@ -22,20 +22,21 @@ export default class SidebarItem extends Component {
   renderAnchors(anchors) {
     return (
       <ul className={`${block}__anchors`}>
-        {
-          anchors.map((anchor) => {
-            anchor = this._handleAnchor(anchor);
-            return (<li
+        {anchors.map((anchor) => {
+          anchor = this._handleAnchor(anchor);
+          return (
+            <li
               key={this._generateAnchorURL(anchor)}
               className={`${block}__anchor`}
               title={anchor.title}
             >
-              <a href={this._generateAnchorURL(anchor)}>{anchor.title}</a>
+              <NavLink to={this._generateAnchorURL(anchor)}>
+                {anchor.title}
+              </NavLink>
               {anchor.children && this.renderAnchors(anchor.children)}
             </li>
-            );
-          })
-        }
+          );
+        })}
       </ul>
     );
   }
@@ -49,12 +50,6 @@ export default class SidebarItem extends Component {
     anchor.id = id;
     anchor.title = title;
     return anchor;
-  }
-
-  scrollTop(event) {
-    if (!event.metaKey && !event.ctrlKey) {
-      window.scrollTo(0, 0);
-    }
   }
 
   render() {
@@ -89,7 +84,6 @@ export default class SidebarItem extends Component {
           key={this.props.url}
           className={`${block}__title`}
           to={this.props.url}
-          onClick={this.scrollTop}
         >
           {title}
         </NavLink>

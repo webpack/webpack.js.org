@@ -50,17 +50,6 @@ Compilation 对象有很多可用的方法和钩子。在此页面，我们将�
 
 - `module` - 要搜索的模块。标识符是通过编译使用 `module.identifier()` 方法从模块中提取的。
 
-### waitForBuildingFinished {#waitforbuildingfinished}
-
-`function (module, callback)`
-
-在构建给定模块时运行给定的 `callback` 函数。
-
-参数：
-
-- `module` - 有问题的模块。
-- `callback` - 要调用的函数。
-
 ### buildModule {#buildmodule}
 
 `function (module, optional, origin, dependencies)`
@@ -85,21 +74,6 @@ Compilation 对象有很多可用的方法和钩子。在此页面，我们将�
 - `module` - 要被处理依赖的模块。
 - `callback` - 模块依赖处理完成时回调的函数。
 
-### addModuleDependencies {#addmoduledependencies}
-
-`function (module, dependencies, bail, cacheGroup, recursive, callback)`
-
-向模块添加依赖。处理依赖之后被 `processModuleDependencies` 自动调用。
-
-参数：
-
-- `module` - 要添加依赖的模块。
-- `dependencies` - 要遍历添加到模块的一组已排序依赖。
-- `bail` - 发生错误时是否中断进程并抛出 error。
-- `cacheGroup` - 模块的 `cacheGroup`。
-- `recursive` - 是否要递归遍历。
-- `callback` - 添加模块依赖之后回调的函数。
-
 ### addEntry {#addentry}
 
 `function (context, entry, name, callback)`
@@ -112,18 +86,6 @@ Compilation 对象有很多可用的方法和钩子。在此页面，我们将�
 - `entry` - 入口依赖。
 - `name` - 入口名称。
 - `callback` - 添加入口完成之后回调的函数。
-
-### prefetch {#prefetch}
-
-`function (context, dependency, callback)`
-
-根据给定的依赖创建一个模块。
-
-参数：
-
-- `context` - 上下文路径。
-- `dependency` - 被用来创建模块的依赖。
-- `callback` - 向上一级发送模块的模块回调。
 
 ### rebuildModule {#rebuildmodule}
 

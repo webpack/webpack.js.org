@@ -47,6 +47,7 @@ webpack 有一些特定的预设选项给统计信息输出：
 | `'normal'`          | `true`      | 标准输出                                                        |
 | `'verbose'`         | _none_      | 全部输出                                                        |
 | `'detailed'`        | _none_      | 全部输出除了 `chunkModules` 和 `chunkRootModules`                |
+| `'summary'`         | _none_      | 输出 webpack 版本，以及警告数和错误数        |
 
 ## Stats 选项 {#stats-options}
 
