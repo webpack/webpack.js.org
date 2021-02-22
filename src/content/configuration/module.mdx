@@ -151,15 +151,12 @@ module.exports = {
 const x = require(/* webpackIgnore: true */ 'x');
 ```
 
-<<<<<<< HEAD
-## `module.noParse` {#modulenoparse}
-=======
-#### module.parser.javascript.url
+#### module.parser.javascript.url {#module.parser.javascript.url}
 
-Enable parsing of `new URL()` syntax.
+启用 `new URL()` 语法解析。
 
-- Type: `boolean = true` | `'relative'`
-- Example:
+- 类型：`boolean = true` | `'relative'`
+- 示例:
   ```js
   module.exports = {
     module: {
@@ -172,7 +169,7 @@ Enable parsing of `new URL()` syntax.
   };
   ```
 
-The `'relative'` value for `module.parser.javascript.url` is available since webpack <Badge text='5.23.0' />. When used, webpack would generate relative URLs for `new URL()` syntax, i.e., there's no base URL included in the result URL:
+自 webpack <Badge text='5.23.0' /> 起，`module.parser.javascript.url` 的 `'relative'` 值可用。当使用 `'relative'` 时，webpack 将为 `new URL()` 语法生成相对的 URL，即结果 URL 中不包含根 URL：
 
 ```
 <!-- with 'relative' -->
@@ -182,11 +179,10 @@ The `'relative'` value for `module.parser.javascript.url` is available since web
 <img src='file:///path/to/project/dist/c43188443804f1b1f534.svg' />
 ```
 
-1. This is useful for SSR (Server side rendering) when base URL is not known by server (and it saves a few bytes). To be identical it must also be used for the client build.
-2. Also for static site generators, mini-css-plugin and html-plugin, etc. where server side rendering is commonly needed.
+1. 当服务器不知道根 URL 时，这对 SSR（服务端渲染）很有用（而且可用节省一些字节）。为了使其相同，它也必须用于客户端构建。
+2. 这也适用于 SSG（静态网站生成器），mini-css-plugin 和 html-plugin 等通常需要进行服务端渲染。
 
-## `module.noParse`
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+## `module.noParse` {#modulenoparse}
 
 `RegExp` `[RegExp]` `function(resource)` `string` `[string]`
 

@@ -445,24 +445,19 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 
 | 退出代码 | 描述                                        |
 | --------- | -------------------------------------------------- |
-<<<<<<< HEAD
 | `0`       | 成功                                            |
-| `1`       | webpack Error                                |
-| `2`       | 配置/选项问题，或者内部错误 |
-=======
-| `0`       | Success                                            |
-| `1`       | Errors from webpack                                |
-| `2`       | Configuration/options problem or an internal error |
+| `1`       | webpack Error                                   |
+| `2`       | 配置/选项问题，或者内部错误                         |
 
-## Environment Variables
+## 环境变量 {#environment-variables}
 
-| Environment Variable | Description                                  |
+| 变量名 | 描述                                  |
 | -------------------- | -------------------------------------------- |
-| `WEBPACK_SERVE`      | `true` if `serve\|s` is being used.          |
-| `WEBPACK_BUILD`      | `true` if `build\|bundle\|b` is being used.  |
-| `WEBPACK_WATCH`      | `true` if `--watch\|watch\|w` is being used. |
+| `WEBPACK_SERVE`      | 如果设置了 `serve\|s`，则为 `true`。            |
+| `WEBPACK_BUILD`      | 如果设置了 `build\|bundle\|b`，则为 `true`      |
+| `WEBPACK_WATCH`      | 如果设置了 `--watch\|watch\|w`，则为 `true`     |
 
-You can use the above environment variables inside your webpack configuration:
+你可以在你的 webpack 配置中使用上述环境变量：
 
 ```javascript
 module.exports = (env, argv) => {
@@ -472,5 +467,4 @@ module.exports = (env, argv) => {
 };
 ```
 
-W> You can not access these environment variables inside bundled code.
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+W> 禁止在 bundle 代码中访问上述变量。

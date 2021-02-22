@@ -40,7 +40,6 @@ webpack 有一些特定的预设选项给统计信息输出：
 
 | 预设              | 可选值 | 描述                                                    |
 | ------------------- | ----------- | -------------------------------------------------------------- |
-<<<<<<< HEAD
 | `'errors-only'`     | _none_      | 只在发生错误时输出                                                |
 | `'errors-warnings'` | _none_      | 只在发生错误或有新的编译时输出                                      |
 | `'minimal'`         | _none_      | 只在发生错误或新的编译开始时输出                                    |
@@ -48,16 +47,7 @@ webpack 有一些特定的预设选项给统计信息输出：
 | `'normal'`          | `true`      | 标准输出                                                        |
 | `'verbose'`         | _none_      | 全部输出                                                        |
 | `'detailed'`        | _none_      | 全部输出除了 `chunkModules` 和 `chunkRootModules`                |
-=======
-| `'errors-only'`     | _none_      | Only output when errors happen                                 |
-| `'errors-warnings'` | _none_      | Only output errors and warnings happen                         |
-| `'minimal'`         | _none_      | Only output when errors or new compilation happen              |
-| `'none'`            | `false`     | Output nothing                                                 |
-| `'normal'`          | `true`      | Standard output                                                |
-| `'verbose'`         | _none_      | Output everything                                              |
-| `'detailed'`        | _none_      | Output everything except `chunkModules` and `chunkRootModules` |
-| `'summary'`         | _none_      | Output webpack version, warnings count and errors count        |
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+| `'summary'`         | _none_      | 输出 webpack 版本，以及警告数和错误数        |
 
 ## Stats 选项 {#stats-options}
 

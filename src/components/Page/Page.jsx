@@ -13,67 +13,6 @@ import AdjacentPages from './AdjacentPages';
 
 // Load Styling
 import './Page.scss';
-<<<<<<< HEAD
-
-class Page extends Component {
-  static propTypes = {
-    title: PropTypes.string,
-    contributors: PropTypes.array,
-    related: PropTypes.array,
-    previous: PropTypes.object,
-    next: PropTypes.object,
-    content: PropTypes.oneOfType([
-      PropTypes.shape({
-        then: PropTypes.func.isRequired,
-        default: PropTypes.string,
-      }),
-    ]),
-  };
-  constructor(props) {
-    super(props);
-
-    const { content } = props;
-    const isDynamicContent = content instanceof Promise;
-
-    this.state = {
-      content: isDynamicContent
-        ? PlaceholderString()
-        : content.default || content,
-      contentLoaded: isDynamicContent ? false : true,
-    };
-  }
-
-  componentDidMount() {
-    const { content } = this.props;
-
-    if (content instanceof Promise) {
-      content
-        .then((module) =>
-          this.setState(
-            {
-              content: module.default || module,
-              contentLoaded: true,
-            },
-            () => {
-              const hash = window.location.hash;
-              if (hash) {
-                const newHash = decodeURIComponent(hash);
-                const element = document.querySelector(newHash);
-                if (element) {
-                  element.scrollIntoView();
-                }
-              } else {
-                window.scrollTo(0, 0);
-              }
-            }
-          )
-        )
-        .catch(() =>
-          this.setState({
-            content: 'Error loading content.',
-          })
-        );
-=======
 export default function Page(props) {
   const {
     title,
@@ -102,7 +41,6 @@ export default function Page(props) {
           setContentLoaded(true);
         })
         .catch(() => setContent('Error loading content.'));
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
     }
   }, [props.content]);
 

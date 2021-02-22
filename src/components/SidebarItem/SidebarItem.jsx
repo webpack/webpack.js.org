@@ -22,23 +22,8 @@ export default class SidebarItem extends Component {
   renderAnchors(anchors) {
     return (
       <ul className={`${block}__anchors`}>
-<<<<<<< HEAD
-        {
-          anchors.map((anchor) => {
-            anchor = this._handleAnchor(anchor);
-            return (<li
-              key={this._generateAnchorURL(anchor)}
-              className={`${block}__anchor`}
-              title={anchor.title}
-            >
-              <a href={this._generateAnchorURL(anchor)}>{anchor.title}</a>
-              {anchor.children && this.renderAnchors(anchor.children)}
-            </li>
-            );
-          })
-        }
-=======
         {anchors.map((anchor) => (
+          anchor = this._handleAnchor(anchor);
           <li
             key={this._generateAnchorURL(anchor)}
             className={`${block}__anchor`}
@@ -50,12 +35,10 @@ export default class SidebarItem extends Component {
             {anchor.children && this.renderAnchors(anchor.children)}
           </li>
         ))}
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
       </ul>
     );
   }
 
-<<<<<<< HEAD
   _handleAnchor(anchor) {
     let id = anchor.id;
     let title = anchor.title;
@@ -67,14 +50,6 @@ export default class SidebarItem extends Component {
     return anchor;
   }
 
-  scrollTop(event) {
-    if (!event.metaKey && !event.ctrlKey) {
-      window.scrollTo(0, 0);
-    }
-  }
-
-=======
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
   render() {
     let { title, anchors = [] } = this.props;
     let openMod = this.state.open ? `${block}--open` : '';

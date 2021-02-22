@@ -24,11 +24,7 @@ related:
 
 W> 寻求帮助：这个页面还在更新中，如果你发现本页面内有描述不准确或者不完整，请在 [webpack 的文档仓库](https://github.com/webpack/webpack.js.org)中创建 issue 或者 pull request
 
-<<<<<<< HEAD
-## `amd` {#amd}
-=======
-## amd
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+## amd {#amd}
 
 `object` `boolean: false`
 
@@ -52,11 +48,7 @@ module.exports = {
 此选项允许将模块查找的键(key)设置为真值(truthy value)。
 发生这种情况时，webpack 中的 AMD 支持将忽略定义的名称。
 
-<<<<<<< HEAD
-## `bail` {#bail}
-=======
-## bail
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+## bail {#bail}
 
 `boolean = false`
 
@@ -73,11 +65,7 @@ module.exports = {
 
 这将迫使 webpack 退出其打包过程。
 
-<<<<<<< HEAD
-## `cache` {#cache}
-=======
-## cache
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+## cache {#cache}
 
 `boolean` `object`
 
@@ -92,11 +80,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `cache.type` {#cachetype}
-=======
-### cache.type
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### cache.type {#cachetype}
 
 `string: 'memory' | 'filesystem'`
 
@@ -115,11 +99,7 @@ module.exports = {
 
 当将 `cache.type` 设置成 `filesystem` 会开放更多的选荐可配置。
 
-<<<<<<< HEAD
-### `cache.cacheDirectory` {#cachecachedirectory}
-=======
-### cache.cacheDirectory
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### cache.cacheDirectory {#cachecachedirectory}
 
 `string`
 
@@ -143,11 +123,7 @@ module.exports = {
 
 W> 最终的缓存目标是 `cache.cacheDirectory` + `cache.name` 的混合.
 
-<<<<<<< HEAD
-### `cache.cacheLocation` {#cachecachelocation}
-=======
-### cache.cacheLocation
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### cache.cacheLocation {#cachecachelocation}
 
 `string`
 
@@ -167,11 +143,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `cache.buildDependencies` {#cachebuilddependencies}
-=======
-### cache.buildDependencies
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### cache.buildDependencies {#cachebuilddependencies}
 
 `object`
 
@@ -193,11 +165,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `cache.managedPaths` {#cachemanagedpaths}
-=======
-### cache.managedPaths
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### cache.managedPaths {#cachemanagedpaths}
 
 `[string] = ['./node_modules']`
 
@@ -205,11 +173,7 @@ W> Moved to [snapshot.managedPaths](#managedpaths)
 
 `cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
 
-<<<<<<< HEAD
-### `cache.hashAlgorithm` {#cachehashalgorithm}
-=======
-### cache.hashAlgorithm
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### cache.hashAlgorithm {#cachehashalgorithm}
 
 `string`
 
@@ -229,11 +193,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `cache.name` {#cachename}
-=======
-### cache.name
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### cache.name {#cachename}
 
 `string`
 
@@ -253,11 +213,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `cache.store` {#cachestore}
-=======
-### cache.store
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### cache.store {#cachestore}
 
 `string = 'pack': 'pack'`
 
@@ -281,11 +237,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `cache.version` {#cacheversion}
-=======
-### cache.version
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### cache.version {#cacheversion}
 
 `string = ''`
 
@@ -307,11 +259,7 @@ module.exports = {
 
 W> 在具有不同选项的调用之间不要共享缓存。
 
-<<<<<<< HEAD
-### `cache.idleTimeout` {#cacheidletimeout}
-=======
-### cache.idleTimeout
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### cache.idleTimeout {#cacheidletimeout}
 
 `number = 10000`
 
@@ -330,11 +278,7 @@ module.exports = {
 
 W> `cache.idleTimeout` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 才可配置。
 
-<<<<<<< HEAD
-### `cache.idleTimeoutForInitialStore` {#cacheidletimeoutforinitialstore}
-=======
-### cache.idleTimeoutForInitialStore
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### cache.idleTimeoutForInitialStore {#cacheidletimeoutforinitialstore}
 
 `number = 0`
 
@@ -353,10 +297,7 @@ module.exports = {
 
 W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 才可配置。
 
-<<<<<<< HEAD
-## `ignoreWarnings` {#ignorewarnings}
-=======
-## dependencies
+## dependencies {#dependencies}
 
 `[string]`
 
@@ -369,8 +310,7 @@ In watch mode dependencies will invalidate the compiler when:
 
 Remember that this configuration will not compile until the dependency is done.
 
-## ignoreWarnings
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+## ignoreWarnings {#ignorewarnings}
 
 `RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`
 
@@ -398,11 +338,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `loader` {#loader}
-=======
-## loader
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+## loader {#loader}
 
 `object`
 
@@ -435,21 +371,13 @@ module.exports = function (source) {
 
 T> 你可以覆盖 loader 上下文中的属性，因为 webpack 会将所有定义在 `loader` 中的属性负责到 loader 上下文中。
 
-<<<<<<< HEAD
-## `parallelism` {#parallelism}
-=======
-## parallelism
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+## parallelism {#parallelism}
 
 `number = 100`
 
 限制并行处理的模块数量。可以用于调优性能或获取更可靠的性能分析结果。
 
-<<<<<<< HEAD
-## `profile` {#profile}
-=======
-## profile
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+## profile {#profile}
 
 `boolean`
 
@@ -460,11 +388,7 @@ T> 使用 [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) 可�
 T> 与 `parallelism: 1` 混用以达到更好的结果。
 需要注意的是，这样做也会减慢建造速度。
 
-<<<<<<< HEAD
-## `recordsPath` {#recordspath}
-=======
-## recordsPath
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+## recordsPath {#recordspath}
 
 `string`
 
@@ -487,21 +411,13 @@ T> 注意，虽然这个文件是由编译器(compiler)生成的，但你可能�
 
 W> 设置 `recordsPath` 本质上会把 `recordsInputPath` 和 `recordsOutputPath` 都设置成相同的路径。通常来讲这也是符合逻辑的，除非你决定改变记录文件的名称。可以查看下面的实例：
 
-<<<<<<< HEAD
-## `recordsInputPath` {#recordsinputpath}
-=======
-## recordsInputPath
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+## recordsInputPath {#recordsinputpath}
 
 `string`
 
 指定读取最后一条记录的文件的名称。这可以用来重命名一个记录文件，可以查看下面的实例：
 
-<<<<<<< HEAD
-## `recordsOutputPath` {#recordsoutputpath}
-=======
-## recordsOutputPath
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+## recordsOutputPath {#recordsoutputpath}
 
 `string`
 
@@ -519,11 +435,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `name` {#name}
-=======
-## name
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+## name {#name}
 
 `string`
 
@@ -588,11 +500,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `snapshot` {#snapshot}
-=======
-## snapshot
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+## snapshot {#snapshot}
 
 `object`
 
@@ -625,31 +533,19 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `managedPaths` {#managed-paths}
-=======
-### managedPaths
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### managedPaths {#managed-paths}
 
 `[string]`
 
 An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
 
-<<<<<<< HEAD
-### `immutablePaths` {#immutable-paths}
-=======
-### immutablePaths
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### immutablePaths {#immutable-paths}
 
 `[string]`
 
 An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
 
-<<<<<<< HEAD
-### `buildDependencies` {#build-dependencies}
-=======
-### buildDependencies
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### buildDependencies {#build-dependencies}
 
 `object = { hash boolean = true, timestamp boolean = true }`
 
@@ -664,11 +560,7 @@ Both `hash` and `timestamp` are optional.
 - `{ timestamp: true }`: Good for local development caching.
 - `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps are the same, which leads to a small performance hit for the initial build.
 
-<<<<<<< HEAD
-### `module` {#module}
-=======
-### module
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### module {#module}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
@@ -677,11 +569,7 @@ Snapshots for building modules.
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
 
-<<<<<<< HEAD
-### `resolve` {#resolve}
-=======
-### resolve
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### resolve {#resolve}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
@@ -690,11 +578,7 @@ Snapshots for resolving of requests.
 - `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
 - `timestamp`: Compare timestamps to determine invalidation.
 
-<<<<<<< HEAD
-### `resolveBuildDependencies` {#resolve-build-dependencies}
-=======
-### resolveBuildDependencies
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
+### resolveBuildDependencies {#resolve-build-dependencies}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 

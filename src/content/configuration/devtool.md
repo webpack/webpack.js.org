@@ -79,13 +79,7 @@ T> 验证 devtool 名称时， 我们期望使用某种模式， 注意不要混
 
 其中一些值适用于开发环境，一些适用于生产环境。对于开发环境，通常希望更快速的 source map，需要添加到 bundle 中以增加体积为代价，但是对于生产环境，则希望更精准的 source map，需要从 bundle 中分离并独立存在。
 
-<<<<<<< HEAD
-W> Chrome 中的 source map 有一些问题。[我们需要你的帮助！](https://github.com/webpack/webpack/issues/3165)。
-
 T> 查看 [`output.sourceMapFilename`](/configuration/output#output-sourcemapfilename) 自定义生成的 source map 的文件名。
-=======
-T> See [`output.sourceMapFilename`](/configuration/output/#outputsourcemapfilename) to customize the filenames of generated Source Maps.
->>>>>>> 02213e4bfb40c7571a086a66ddd5c3f0dca1def8
 
 ### 品质说明(quality) {#qualities}
 
