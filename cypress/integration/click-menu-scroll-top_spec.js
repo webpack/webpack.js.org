@@ -8,7 +8,7 @@ describe('Click menu', () => {
 
     cy.get(selector).click();
     cy.window().then((win) => {
-      expect(win.scrollY).toBe(0);
+      expect(win.scrollY).to.equal(0);
     });
   });
 });
