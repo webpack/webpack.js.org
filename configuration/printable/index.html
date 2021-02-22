@@ -1793,7 +1793,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h2 id="outputmodule"><code>output.module</code><a href="#outputmodule" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p><code>boolean = false</code></p> <p>Output JavaScript files as module type. Disabled by default as it's an experimental feature.</p> <p>When enabled, webpack will set <a href="#outputiife"><code>output.iife</code></a> to <code>false</code>, <a href="#outputscripttype"><code>output.scriptType</code></a> to <code>'module'</code> and <code>terserOptions.module</code> to <code>true</code> internally.</p> <p>If you're using webpack to compile a library to be consumed by others, make sure to set <a href="#librarytarget-module"><code>output.libraryTarget</code></a> to <code>'module'</code> when <code>output.module</code> is <code>true</code>.</p> <pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">//...</span>
-  experimentals<span class="token operator">:</span> <span class="token punctuation">{</span>
+  experiments<span class="token operator">:</span> <span class="token punctuation">{</span>
     outputModule<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   output<span class="token operator">:</span> <span class="token punctuation">{</span>
