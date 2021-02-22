@@ -47,4 +47,4 @@ module.exports = (env) => {
 };
 ```
 
-T> Webpack CLI offers some [built-in environment variables](/api/cli/#environment-variables) which you can access inside a webpack configuration.
+T> webpack CLI 提供一些你可以在 webpack 配置中访问的[内建环境变量](/api/cli/#environment-variables)。
