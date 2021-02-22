@@ -22,19 +22,21 @@ export default class SidebarItem extends Component {
   renderAnchors(anchors) {
     return (
       <ul className={`${block}__anchors`}>
-        {anchors.map((anchor) => (
+        {anchors.map((anchor) => {
           anchor = this._handleAnchor(anchor);
-          <li
-            key={this._generateAnchorURL(anchor)}
-            className={`${block}__anchor`}
-            title={anchor.title}
-          >
-            <NavLink to={this._generateAnchorURL(anchor)}>
-              {anchor.title}
-            </NavLink>
-            {anchor.children && this.renderAnchors(anchor.children)}
-          </li>
-        ))}
+          return (
+            <li
+              key={this._generateAnchorURL(anchor)}
+              className={`${block}__anchor`}
+              title={anchor.title}
+            >
+              <NavLink to={this._generateAnchorURL(anchor)}>
+                {anchor.title}
+              </NavLink>
+              {anchor.children && this.renderAnchors(anchor.children)}
+            </li>
+          );
+        })}
       </ul>
     );
   }
