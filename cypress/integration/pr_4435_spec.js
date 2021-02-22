@@ -40,10 +40,10 @@ describe('Open page in new tab', { scrollBehavior: false }, () => {
       });
     }
 
-    // we click the menu again
+    // we click the menu again, scroll to top again
     cy.get(selector).click();
     cy.window().then((win) => {
-      expect(win.scrollTo).to.be.calledTwice;
+      expect(win.scrollTo).to.be.calledThrice;
     });
   });
 });
