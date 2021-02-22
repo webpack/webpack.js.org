@@ -147,11 +147,11 @@ module.exports = {
 
 `object`
 
-`cache.buildDependencies` is an object of arrays of additional code dependencies for the build. webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
+`cache.buildDependencies` 是用于构建的额外代码依赖数组。webpack 将使用这些项和所有依赖项的哈希值来使文件系统缓存失效。
 
-Defaults to `webpack/lib` to get all dependencies of webpack.
+默认使用 `webpack/lib` 获取 webpack 的所有依赖项。
 
-T> It's recommended to set `cache.buildDependencies.config: [__filename]` in your webpack configuration to get the latest configuration and all dependencies.
+T> 推荐在你的 webpack 配置中设置 `cache.buildDependencies.config: [__filename]` 以获取最新配置以及所有依赖项。
 
 ```javascript
 module.exports = {
@@ -169,9 +169,9 @@ module.exports = {
 
 `[string] = ['./node_modules']`
 
-W> Moved to [snapshot.managedPaths](#managedpaths)
+W> 已迁移到 [snapshot.managedPaths](#managedpaths)
 
-`cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
+`cache.managedPaths` 是仅托管路径的包管理器数组。webpack 将避免将他们进行哈希和时间戳处理，假设版本是唯一的，并将其用作快照（用于内存和文件系统缓存）。
 
 ### cache.hashAlgorithm {#cachehashalgorithm}
 
@@ -301,14 +301,14 @@ W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置
 
 `[string]`
 
-A list of [`name`](#name) defining all sibling configurations it depends on. Dependent configurations need to be compiled first.
+一个 [`name`](#name) 列表，定义它所依赖的所有兄弟（sibling）配置。需要首先编译依赖的配置。
 
-In watch mode dependencies will invalidate the compiler when:
+在 watch 模式下，当出现以下情况时，依赖项将使编译器失效：
 
-1.  the dependency has changed
-2.  a dependency is currently compiling or invalid
+1.  依赖项发生变化
+2.  依赖项当前正在编译或者处于无效状态
 
-Remember that this configuration will not compile until the dependency is done.
+请记住，在完成依赖项编译之前，不会编译此配置。
 
 ## ignoreWarnings {#ignorewarnings}
 
@@ -504,7 +504,7 @@ module.exports = {
 
 `object`
 
-`snapshot` options decide how the file system snapshots are created and invalidated.
+`snapshot` 配置项决定文件系统是如何创建和无效快照。
 
 **webpack.config.js**
 
@@ -533,56 +533,56 @@ module.exports = {
 };
 ```
 
-### managedPaths {#managed-paths}
+### managedPaths {#managedpaths}
 
 `[string]`
 
-An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
+由包管理器管理的路径数组，可以信任它不会被修改。
 
 ### immutablePaths {#immutable-paths}
 
 `[string]`
 
-An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
+由包管理器管理的路径数组，在其路径中包含一个版本或哈希，以便所有文件都是不可变的（immutable）。
 
 ### buildDependencies {#build-dependencies}
 
 `object = { hash boolean = true, timestamp boolean = true }`
 
-Snapshots for build dependencies when using the persistent cache.
+使用持久化缓存时的依赖构建关系快照。
 
-- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
-- `timestamp`: Compare timestamps to determine invalidation.
+- `hash`：比较内容哈希以确定无效（比 `timestamp` 更昂贵，但更改的频率较低）。
+- `timestamp`：比较 timestamps 以确定无效。
 
-Both `hash` and `timestamp` are optional.
+`hash` 与 `timestamp` 都是可选配置。
 
-- `{ hash: true }`: Good for CI caching with a fresh checkout which doesn't keep timestamps and uses hashes.
-- `{ timestamp: true }`: Good for local development caching.
-- `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps are the same, which leads to a small performance hit for the initial build.
+- `{ hash: true }`：对 CI 缓存很有帮助，使用新的 checkout，不需要保存时间戳，并且使用哈希。
+- `{ timestamp: true }`：对应本地开发缓存很用帮助。
+- `{ timestamp: true, hash: true }`：对于以上提到的两者都很有帮助。首先比较时间戳，这代价很低，因为 webpack 不需要读取文件来计算它们的哈希值。仅当时间戳相同时才会比较内容哈希，这对初始构建的性能影响很小。
 
 ### module {#module}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
-Snapshots for building modules.
+构建模块的快照。
 
-- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
-- `timestamp`: Compare timestamps to determine invalidation.
+- `hash`：比较内容哈希以判断无效。（比 `timestamp` 更昂贵，但更改的频率较低）。
+- `timestamp`：比较时间戳以确定无效。
 
 ### resolve {#resolve}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
-Snapshots for resolving of requests.
+解析请求的快照。
 
-- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
-- `timestamp`: Compare timestamps to determine invalidation.
+- `hash`：比较内容哈希以判断无效。（比 `timestamp` 更昂贵，但更改的频率较低）。
+- `timestamp`：比较时间戳以确定无效。
 
 ### resolveBuildDependencies {#resolve-build-dependencies}
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
-Snapshots for resolving of build dependencies when using the persistent cache.
+使用持久缓存时用于解析构建依赖项的快照。
 
-- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
-- `timestamp`: Compare timestamps to determine invalidation.
+- `hash`：比较内容哈希以判断无效。（比 `timestamp` 更昂贵，但更改的频率较低）。
+- `timestamp`：比较时间戳以确定无效。
