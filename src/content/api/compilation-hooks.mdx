@@ -290,13 +290,19 @@ Store chunk info to the records. This is only triggered if [`shouldRecord`](#sho
 
 `SyncHook`
 
-Called before the compilation is hashed.
+Called before modules are hashed.
+
+### `afterModuleHash`
+
+`syncHook`
+
+Called after modules are hashed.
 
 ### `beforeHash`
 
 `SyncHook`
 
-Called after the hashes of modules are created.
+Called before the compilation is hashed.
 
 ### `afterHash`
 
