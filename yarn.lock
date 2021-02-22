@@ -6187,13 +6187,13 @@ html-escaper@^2.0.0:
   resolved "https://registry.yarnpkg.com/html-escaper/-/html-escaper-2.0.2.tgz#dfd60027da36a36dfcbe236262c00a5822681453"
   integrity sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==
 
-html-loader@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/html-loader/-/html-loader-2.0.0.tgz#32e98b39cf7ce8be6851fa5466abe06015425a46"
-  integrity sha512-/8yd7xrPJM0ugzz4VDK/xLV39nPGpelwehonX/msg/N5ORvQj9G4VncX5coIWKkOSLBANseNaEcW+3Ga0twDWg==
+html-loader@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/html-loader/-/html-loader-2.1.0.tgz#f125167d3ebf348f94b42a1f6fb60d976205d5f3"
+  integrity sha512-yg3ph4jmeA79WtXaT/K5RdnJKGHtitvmowZ556Hsii38OQVetl3hmIRwFqYRCy8MODov/oHQEYV5aLaDOX7uaw==
   dependencies:
     html-minifier-terser "^5.1.1"
-    parse5-sax-parser "^6.0.1"
+    parse5 "^6.0.1"
 
 html-minifier-terser@^5.0.1, html-minifier-terser@^5.1.1:
   version "5.1.1"
@@ -9482,13 +9482,6 @@ parse-latin@^4.0.0:
     nlcst-to-string "^2.0.0"
     unist-util-modify-children "^1.0.0"
     unist-util-visit-children "^1.0.0"
-
-parse5-sax-parser@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/parse5-sax-parser/-/parse5-sax-parser-6.0.1.tgz#98b4d366b5b266a7cd90b4b58906667af882daba"
-  integrity sha512-kXX+5S81lgESA0LsDuGjAlBybImAChYRMT+/uKCEXFBFOeEhS52qUCydGhU3qLRD8D9DVjaUo821WK7DM4iCeg==
-  dependencies:
-    parse5 "^6.0.1"
 
 parse5@5.1.0:
   version "5.1.0"
