@@ -4441,10 +4441,10 @@ directory-tree-webpack-plugin@^1.0.2:
   dependencies:
     directory-tree "^2.0.0"
 
-directory-tree@^2.0.0, directory-tree@^2.2.6:
-  version "2.2.6"
-  resolved "https://registry.yarnpkg.com/directory-tree/-/directory-tree-2.2.6.tgz#7ba77554d30993ead67cb03d415faffd363b0816"
-  integrity sha512-0xF1t4fRkd2vYCremWjhcP4xWTnshzfPZpTCH3F1yJTXhW84YQQM1MasAMnnqyMAkNwGuUEdg9UzuuUo1uoHtA==
+directory-tree@^2.0.0, directory-tree@^2.2.7:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/directory-tree/-/directory-tree-2.2.7.tgz#4617c794ee89d5618f03fffb7486c7e49df52ad2"
+  integrity sha512-fgTad/YdV6Y2njsCRK4fl4ZUlGhmb5xj1qrZUIMjvnrKvghVqh8dkB+OUssjYVvb/Q2L+5+8XG0l5uTGI9/8iQ==
 
 dns-equal@^1.0.0:
   version "1.0.0"
