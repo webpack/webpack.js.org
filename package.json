@@ -73,7 +73,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.17",
     "@babel/eslint-parser": "^7.12.17",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/preset-env": "^7.12.17",
     "@babel/preset-react": "^7.12.13",
     "@mdx-js/loader": "^1.6.21",
@@ -143,7 +143,7 @@
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^4.0.0-beta.0",
     "webpack-merge": "^5.7.3",
-    "workbox-webpack-plugin": "^6.1.0"
+    "workbox-webpack-plugin": "^6.1.1"
   },
   "dependencies": {
     "docsearch.js": "^2.5.2",
