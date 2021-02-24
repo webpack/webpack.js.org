@@ -26,7 +26,7 @@ A single result can be returned in **sync mode**. For multiple results the `this
 /**
  *
  * @param {string|Buffer} content Content of the resource file
- * @param {object} [map] SourceMap data
+ * @param {object} [map] SourceMap data consumable by https://github.com/mozilla/source-map
  * @param {any} [meta] Meta data, could be anything
  */
 function webpackLoader(content, map, meta) {
