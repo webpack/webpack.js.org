@@ -22,6 +22,18 @@ The first loader is passed one argument: the content of the resource file. The c
 
 A single result can be returned in **sync mode**. For multiple results the `this.callback()` must be called. In **async mode** `this.async()` must be called to indicate that the [loader runner](https://github.com/webpack/loader-runner) should wait for an asynchronous result. It returns `this.callback()`. Then the loader must return `undefined` and call that callback.
 
+```js
+/**
+ *
+ * @param {string|Buffer} content Content of the resource file
+ * @param {object} [map] SourceMap data
+ * @param {any} [meta] Meta data, could be anything
+ */
+function webpackLoader(content, map, meta) {
+  // code of your webpack loader
+}
+```
+
 ## Examples
 
 The following sections provide some basic examples of the different types of loaders. Note that the `map` and `meta` parameters are optional, see [`this.callback`](#thiscallback) below.
