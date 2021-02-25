@@ -22,6 +22,18 @@ The first loader is passed one argument: the content of the resource file. The c
 
 A single result can be returned in **sync mode**. For multiple results the `this.callback()` must be called. In **async mode** `this.async()` must be called to indicate that the [loader runner](https://github.com/webpack/loader-runner) should wait for an asynchronous result. It returns `this.callback()`. Then the loader must return `undefined` and call that callback.
 
+```js
+/**
+ *
+ * @param {string|Buffer} content Content of the resource file
+ * @param {object} [map] SourceMap data consumable by https://github.com/mozilla/source-map
+ * @param {any} [meta] Meta data, could be anything
+ */
+function webpackLoader(content, map, meta) {
+  // code of your webpack loader
+}
+```
+
 ## Examples
 
 The following sections provide some basic examples of the different types of loaders. Note that the `map` and `meta` parameters are optional, see [`this.callback`](#thiscallback) below.
@@ -454,6 +466,22 @@ Read in which [`mode`](/configuration/mode/) webpack is running.
 
 Possible values: `'production'`, `'development'`, `'none'`
 
+## Webpack specific properties
+
+The loader interface provides all module relate information. However in rare cases you might need access to the compiler api itself.
+
+W> Please note that using these webpack specific properties will have a negative impact on your loaders compatibility.
+
+Therefore you should only use them as a last resort. Using them will reduce the portability of your loader.
+
+### `this._compiler`
+
+Access to the current Compiler object of webpack.
+
+### `this._compilation`
+
+Access to the current Compilation object of webpack.
+
 ## Deprecated context properties
 
 W> The usage of these properties is highly discouraged since we are planning to remove them from the context. They are still listed here for documentation purposes.
@@ -473,14 +501,6 @@ A boolean flag. It is set when in debug mode.
 ### `this.minimize`
 
 Tells if result should be minimized.
-
-### `this._compilation`
-
-Hacky access to the Compilation object of webpack.
-
-### `this._compiler`
-
-Hacky access to the Compiler object of webpack.
 
 ### `this._module`
 

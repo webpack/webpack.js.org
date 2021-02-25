@@ -9,6 +9,7 @@ contributors:
   - wizardofhogwarts
   - EugeneHlushko
   - chenxsan
+  - jamesgeorge007
 ---
 
 The `Compilation` module is used by the `Compiler` to create new compilations
@@ -285,6 +286,18 @@ Store chunk info to the records. This is only triggered if [`shouldRecord`](#sho
 
 - Callback Parameters: `chunks` `records`
 
+### `beforeModuleHash`
+
+`SyncHook`
+
+Called before modules are hashed.
+
+### `afterModuleHash`
+
+`syncHook`
+
+Called after modules are hashed.
+
 ### `beforeHash`
 
 `SyncHook`
@@ -323,7 +336,7 @@ Executed before module assets creation.
 
 `SyncHook`
 
-W> `additionalChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS*ASSETS_STAGE*\* as a stage option)
+W> `additionalChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE\_\* as a stage option)
 
 Create additional assets for the chunks.
 
@@ -367,7 +380,7 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', (callback) => {
 
 `AsyncSeriesHook`
 
-W> `optimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS*ASSETS_STAGE*\* as a stage option)
+W> `optimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE\_\* as a stage option)
 
 Optimize any chunk assets. The assets are stored in `compilation.assets`. A
 `Chunk` has a property `files` which points to all files created by a chunk.
@@ -400,7 +413,7 @@ compilation.hooks.optimizeChunkAssets.tapAsync(
 
 `SyncHook`
 
-W> `afterOptimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS*ASSETS_STAGE*\* as a stage option)
+W> `afterOptimizeChunkAssets` is deprecated (use the [Compilation.hook.processAssets](#processassets) instead and use one of the Compilation.PROCESS_ASSETS_STAGE\_\* as a stage option)
 
 The chunk assets have been optimized.
 

@@ -12,6 +12,7 @@ contributors:
   - wizardofhogwarts
   - anikethsaha
   - chenxsan
+  - jamesgeorge007
 related:
   - title: CommonJS
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -131,12 +132,33 @@ Equals the configuration option's `output.publicPath`.
 
 The raw require function. This expression isn't parsed by the Parser for dependencies.
 
-### `__webpack_chunk_load__` (webpack-specific)
+### \_\_webpack_chunk_load\_\_ (webpack-specific)
 
-The internal chunk loading function. Takes two arguments:
+The internal chunk loading function. Takes one argument:
 
 - `chunkId` The id for the chunk to load.
-- `callback(require)` A callback function called once the chunk is loaded.
+
+Example to load chunks from alternate public path when one failed:
+
+```js
+const originalLoad = __webpack_chunk_load__;
+const publicPaths = ['a', 'b', 'c'];
+__webpack_chunk_load__ = async (id) => {
+  let error;
+  for (const path of publicPaths) {
+    __webpack_public_path__ = path;
+    try {
+      return await originalLoad(id);
+    } catch (e) {
+      error = e;
+    }
+  }
+  throw error;
+};
+import('./module-a').then((moduleA) => {
+  // now webpack will use the custom __webpack_chunk_load__ to load chunk
+});
+```
 
 ### `__webpack_modules__` (webpack-specific)
 
@@ -144,7 +166,7 @@ Access to the internal object of all modules.
 
 ### `__webpack_hash__` (webpack-specific)
 
-This variable is only available with the `HotModuleReplacementPlugin` or the `ExtendedAPIPlugin`. It provides access to the hash of the compilation.
+It provides access to the hash of the compilation.
 
 ### `__non_webpack_require__` (webpack-specific)
 
@@ -185,6 +207,17 @@ if (__webpack_is_included__('./module-a.js')) {
   // do something
 }
 ```
+
+### \_\_webpack_base_uri\_\_ (webpack-specific)
+
+Change base URI at runtime.
+
+- Type: `string`
+- Available: 5.21.0+
+- Example:
+  ```js
+  __webpack_base_uri__ = 'https://example.com';
+  ```
 
 ### `DEBUG` (webpack-specific)
 

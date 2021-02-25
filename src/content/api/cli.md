@@ -210,10 +210,18 @@ This is the lookup priority in increasing order
 
 W> Note that Command Line Interface has a higher precedence for the arguments you use it with than your configuration file. For instance, if you pass [`--mode="production"`](/configuration/mode/#usage) to webpack CLI and your configuration file uses `development`, `production` will be used.
 
+### help
+
 **List basic commands and flags available on the cli**
+
+Both `webpack help [command] [option]` and `webpack [command] --help` are valid to get help:
 
 ```bash
 npx webpack --help
+
+# or
+
+npx webpack help
 ```
 
 **List all supported commands and flags by cli**
@@ -222,12 +230,24 @@ npx webpack --help
 npx webpack --help=verbose
 ```
 
+**See help for a specific command or option**
+
+```bash
+npx webpack help --mode
+```
+
+### version
+
 **Show version of installed packages and sub-packages**
 
 To inspect the version of `webpack` and `webpack-cli` you are using just run command:
 
 ```bash
 npx webpack --version
+
+# or
+
+npx webpack version
 ```
 
 This will output the following result:
@@ -259,6 +279,8 @@ webpack-cli 4.2.0
 webpack 5.4.0
 ```
 
+### config
+
 **Build source using a configuration file**
 
 Specify a different [configuration](/configuration) file other than `webpack.config.js`, which is one of the defaults.
@@ -266,6 +288,8 @@ Specify a different [configuration](/configuration) file other than `webpack.con
 ```bash
 npx webpack --config example.config.js
 ```
+
+### config-name
 
 In case your configuration file exports multiple configurations, you can use `--config-name` to specify which configuration to run.
 
@@ -313,7 +337,7 @@ You can also pass multiple values:
 npx webpack --config-name first --config-name second
 ```
 
-**Merge two or more different webpack configurations**
+### merge
 
 You can merge two or more different webpack configurations with the help of `--merge`:
 
@@ -321,7 +345,9 @@ You can merge two or more different webpack configurations with the help of `--m
 npx webpack --config ./first.js --config ./second.js --merge
 ```
 
-**Print result of webpack as a JSON**
+### json
+
+**Print result of webpack as JSON**
 
 ```bash
 npx webpack --json
@@ -421,3 +447,23 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 | `0`       | Success                                            |
 | `1`       | Errors from webpack                                |
 | `2`       | Configuration/options problem or an internal error |
+
+## Environment Variables
+
+| Environment Variable | Description                                  |
+| -------------------- | -------------------------------------------- |
+| `WEBPACK_SERVE`      | `true` if `serve\|s` is being used.          |
+| `WEBPACK_BUILD`      | `true` if `build\|bundle\|b` is being used.  |
+| `WEBPACK_WATCH`      | `true` if `--watch\|watch\|w` is being used. |
+
+You can use the above environment variables inside your webpack configuration:
+
+```javascript
+module.exports = (env, argv) => {
+  return {
+    mode: env.WEBPACK_SERVE ? 'development' : 'production',
+  };
+};
+```
+
+W> You can not access these environment variables inside bundled code.

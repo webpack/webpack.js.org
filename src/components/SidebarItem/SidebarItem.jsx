@@ -19,6 +19,20 @@ export default class SidebarItem extends Component {
     open: this._isOpen(this.props),
   };
 
+  scrollTop(event) {
+    // there're two cases
+    // 1. location.pathname or location.hash changes which will be handled by useEffect in Page.jsx
+    // 2. location.pathname and location.hash doesn't change at all
+    if (window.location.hash !== '') {
+      // case 1
+      return;
+    }
+    if (!event.metaKey && !event.ctrlKey) {
+      // case 2
+      window.scrollTo(0, 0);
+    }
+  }
+
   renderAnchors(anchors) {
     return (
       <ul className={`${block}__anchors`}>
@@ -28,18 +42,14 @@ export default class SidebarItem extends Component {
             className={`${block}__anchor`}
             title={anchor.title}
           >
-            <a href={this._generateAnchorURL(anchor)}>{anchor.title}</a>
+            <NavLink to={this._generateAnchorURL(anchor)}>
+              {anchor.title}
+            </NavLink>
             {anchor.children && this.renderAnchors(anchor.children)}
           </li>
         ))}
       </ul>
     );
-  }
-
-  scrollTop(event) {
-    if (!event.metaKey && !event.ctrlKey) {
-      window.scrollTo(0, 0);
-    }
   }
 
   render() {

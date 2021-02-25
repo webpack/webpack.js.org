@@ -82,9 +82,9 @@ console.log(config.title);
 And now you just get the right configuration imported depending on which target you're building for:
 
 ```bash
-webpack --env.APP_TARGET VERSION_A
+npx webpack --env APP_TARGET=VERSION_A
 => 'I am version A'
 
-webpack --env.APP_TARGET VERSION_B
+npx webpack --env APP_TARGET=VERSION_B
 => 'I am version B'
 ```

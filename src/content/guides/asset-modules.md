@@ -400,7 +400,7 @@ Also you can [specify a function](/configuration/module/#ruleparserdataurlcondit
 
 Before Asset Modules and Webpack 5, it was possible to use [inline syntax](https://webpack.js.org/concepts/loaders/#inline) with the legacy loaders mentioned above.
 
-It is now reccomended to remove all inline loader syntax and use a resourceQuery condition to mimic the functionality of the inline syntax.
+It is now recommended to remove all inline loader syntax and use a resourceQuery condition to mimic the functionality of the inline syntax.
 
 For example, in the case of replacing `raw-loader` with `asset/source` type:
 
@@ -416,7 +416,7 @@ module: {
     rules: [
     // ...
 +     {
-+       resouceQuery: /raw/
++       resourceQuery: /raw/
 +       type: 'asset/source'
 +     }
     ]
@@ -434,7 +434,7 @@ module: {
 +       resourceQuery: /^(?!raw$).*/,
 +     },
       {
-        resouceQuery: /raw/
+        resourceQuery: /raw/
         type: 'asset/source'
       }
     ]

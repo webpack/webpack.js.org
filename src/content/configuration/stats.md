@@ -47,6 +47,7 @@ webpack comes with certain presets available for the stats output:
 | `'normal'`          | `true`      | Standard output                                                |
 | `'verbose'`         | _none_      | Output everything                                              |
 | `'detailed'`        | _none_      | Output everything except `chunkModules` and `chunkRootModules` |
+| `'summary'`         | _none_      | Output webpack version, warnings count and errors count        |
 
 ## Stats Options
 
@@ -527,9 +528,9 @@ module.exports = {
 
 ### `stats.errorDetails`
 
-`boolean = true`
+`boolean` `string = "auto"`
 
-Tells `stats` whether to add the details to the errors.
+Tells `stats` whether to add the details to the errors. It defaults to `'auto'` which will show error details when there're only 2 or less errors.
 
 ```javascript
 module.exports = {

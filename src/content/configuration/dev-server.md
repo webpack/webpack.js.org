@@ -132,7 +132,7 @@ module.exports = {
 To use this option with the CLI pass the `--allowed-hosts` option a comma-delimited string.
 
 ```bash
-webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com,host2.com
+npx webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com --allowed-hosts host2.com
 ```
 
 ## `devServer.before`
@@ -178,7 +178,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --bonjour
+npx webpack serve --bonjour
 ```
 
 ## `devServer.clientLogLevel`
@@ -205,7 +205,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --client-log-level silent
+npx webpack serve --client-log-level silent
 ```
 
 ## `devServer.compress`
@@ -228,7 +228,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --compress
+npx webpack serve --compress
 ```
 
 ## `devServer.contentBase`
@@ -275,7 +275,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --content-base ./path/to/content/dir
+npx webpack serve --content-base ./path/to/content/dir
 ```
 
 ## `devServer.contentBasePublicPath`
@@ -332,7 +332,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --disable-host-check
+npx webpack serve --disable-host-check
 ```
 
 ## `devServer.filename` 🔑
@@ -436,7 +436,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --history-api-fallback
+npx webpack serve --history-api-fallback
 ```
 
 For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
@@ -461,7 +461,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --host 0.0.0.0
+npx webpack serve --host 0.0.0.0
 ```
 
 ## `devServer.hot`
@@ -503,7 +503,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --hot only
+npx webpack serve --hot-only
 ```
 
 ## `devServer.http2`
@@ -548,13 +548,13 @@ module.exports = {
 Usage via CLI
 
 ```bash
-webpack serve --http2
+npx webpack serve --http2
 ```
 
 To pass your own certificate via CLI, use the following options
 
 ```bash
-webpack serve --http2 --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
+npx webpack serve --http2 --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
 ```
 
 ## `devServer.https`
@@ -595,13 +595,13 @@ This object is passed straight to Node.js HTTPS module, so see the [HTTPS docume
 Usage via the CLI
 
 ```bash
-webpack serve --https
+npx webpack serve --https
 ```
 
 To pass your own certificate via the CLI use the following options
 
 ```bash
-webpack serve --https --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
+npx webpack serve --https --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
 ```
 
 ## `devServer.index`
@@ -628,7 +628,7 @@ module.exports = {
 Output cli information. It is enabled by default.
 
 ```bash
-webpack serve --info false
+npx webpack serve --info false
 ```
 
 ## `devServer.injectClient`
@@ -686,7 +686,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --inline false
+npx webpack serve --inline false
 ```
 
 T> Inline mode is recommended for [Hot Module Replacement](/plugins/hot-module-replacement-plugin/) as it includes an HMR trigger from the websocket. Polling mode can be used as an alternative, but requires an additional entry point, `'webpack/hot/poll?1000'`.
@@ -711,7 +711,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --lazy
+npx webpack serve --lazy
 ```
 
 T> [`watchOptions`](#devserverwatchoptions-) will have no effect when used with **lazy mode**.
@@ -738,7 +738,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --no-live-reload
+npx webpack serve --no-live-reload
 ```
 
 ## `devServer.mimeTypes` 🔑
@@ -845,7 +845,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --open 'Google Chrome'
+npx webpack serve --open 'Google Chrome'
 ```
 
 T> The browser application name is platform dependent. Don't hard code it in reusable modules. For example, `'Chrome'` is `'Google Chrome'` on macOS, `'google-chrome'` on Linux and `'chrome'` on Windows.
@@ -870,7 +870,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --open-page /different/page
+npx webpack serve --open-page /different/page
 ```
 
 If you wish to specify multiple pages to open in the browser.
@@ -889,7 +889,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --open-page /different/page1,/different/page2
+npx webpack serve --open-page /different/page1,/different/page2
 ```
 
 ## `devServer.overlay`
@@ -945,7 +945,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --pfx ./path/to/file.pfx
+npx webpack serve --pfx ./path/to/file.pfx
 ```
 
 ## `devServer.pfxPassphrase`
@@ -968,7 +968,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --pfx-passphrase passphrase
+npx webpack serve --pfx-passphrase passphrase
 ```
 
 ## `devServer.port`
@@ -991,7 +991,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --port 8080
+npx webpack serve --port 8080
 ```
 
 ## `devServer.proxy`
@@ -1148,7 +1148,7 @@ module.exports = {
 Output running progress to console.
 
 ```bash
-webpack serve --progress
+npx webpack serve --progress
 ```
 
 ## `devServer.public`
@@ -1173,7 +1173,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --public myapp.test:80
+npx webpack serve --public myapp.test:80
 ```
 
 ## `devServer.publicPath` 🔑
@@ -1238,7 +1238,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --quiet
+npx webpack serve --quiet
 ```
 
 ## `devServer.serveIndex`
@@ -1319,7 +1319,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --sock-path /socket
+npx webpack serve --sock-path /socket
 ```
 
 ## `devServer.sockPort`
@@ -1390,7 +1390,7 @@ T> This option has no effect when used with `quiet` or `noInfo`.
 This option closes the server when stdin ends.
 
 ```bash
-webpack serve --stdin
+npx webpack serve --stdin
 ```
 
 ## `devServer.transportMode`
@@ -1508,7 +1508,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --use-local-ip
+npx webpack serve --use-local-ip
 ```
 
 ## `devServer.watchContentBase`
@@ -1531,7 +1531,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-webpack serve --watch-content-base
+npx webpack serve --watch-content-base
 ```
 
 ## `devServer.watchOptions` 🔑
