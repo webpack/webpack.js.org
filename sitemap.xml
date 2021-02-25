@@ -502,10 +502,10 @@
         <loc>https://webpack.js.org/plugins/eval-source-map-dev-tool-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/hot-module-replacement-plugin</loc>
+        <loc>https://webpack.js.org/plugins/hashed-module-ids-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/hashed-module-ids-plugin</loc>
+        <loc>https://webpack.js.org/plugins/hot-module-replacement-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/html-minimizer-webpack-plugin</loc>
@@ -514,16 +514,16 @@
         <loc>https://webpack.js.org/plugins/html-webpack-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/image-minimizer-webpack-plugin</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/ignore-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/json-minimizer-webpack-plugin</loc>
+        <loc>https://webpack.js.org/plugins/image-minimizer-webpack-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/internal-plugins</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/json-minimizer-webpack-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
@@ -535,10 +535,10 @@
         <loc>https://webpack.js.org/plugins/mini-css-extract-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin</loc>
+        <loc>https://webpack.js.org/plugins/module-concatenation-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/module-concatenation-plugin</loc>
+        <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin</loc>
