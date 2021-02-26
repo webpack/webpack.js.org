@@ -1172,7 +1172,7 @@ module.exports = {
 
 /* prettier-ignore */
 .class {
-  /* 对 'background-image' 声明中第三和第六个个 url 禁用 url 处理 */
+  /* 对 'background-image' 声明中第三和第六个 url 禁用 url 处理 */
   background-image: image-set(
     url(./url/img.png) 2x,
     url(./url/img.png) 3x,
