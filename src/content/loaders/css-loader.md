@@ -1131,7 +1131,61 @@ module.exports = {
 
 ## 示例 {#examples}
 
-### 资源 {#assets}
+### 使用 `/* webpackIgnore: true */` 注释禁用 url 解析
+
+有了 `/* webpackIgnore: true */` 注释，可以禁用对规则和单个声明的源处理。
+
+```css
+/* webpackIgnore: true */
+@import url(./basic.css);
+@import /* webpackIgnore: true */ url(./imported.css);
+
+.class {
+  /* 对 'background' 声明中的所有 url 禁用 url 处理 */
+  color: red;
+  /* webpackIgnore: true */
+  background: url("./url/img.png"), url("./url/img.png");
+}
+
+.class {
+  /* 对 'background' 声明中第一个 url 禁用 url 处理 */
+  color: red;
+  background:
+    /* webpackIgnore: true */ url("./url/img.png"), url("./url/img.png");
+}
+
+.class {
+  /* 对 'background' 声明中第二个 url 禁用 url 处理 */
+  color: red;
+  background: url("./url/img.png"),
+    /* webpackIgnore: true */ url("./url/img.png");
+}
+
+/* prettier-ignore */
+.class {
+  /* 对 'background' 声明中第二个 url 禁用 url 处理 */
+  color: red;
+  background: url("./url/img.png"),
+    /* webpackIgnore: true */
+    url("./url/img.png");
+}
+
+/* prettier-ignore */
+.class {
+  /* 对 'background-image' 声明中第三和第六个 url 禁用 url 处理 */
+  background-image: image-set(
+    url(./url/img.png) 2x,
+    url(./url/img.png) 3x,
+    /* webpackIgnore:  true */ url(./url/img.png) 4x,
+    url(./url/img.png) 5x,
+    url(./url/img.png) 6x,
+    /* webpackIgnore:  true */
+    url(./url/img.png) 7x
+  );
+}
+```
+
+### Assets {#assets}
 
 如下配置的 `webpack.config.js` 可以加载 CSS 文件，嵌入小的 PNG/JPG/GIF/SVG 图片以及字体作为[数据 URL](https://tools.ietf.org/html/rfc2397)，并将较大的文件复制到输出目录。
 
