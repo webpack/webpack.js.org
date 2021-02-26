@@ -13,6 +13,9 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 
 module.exports = (env) =>
   merge(common(env), {
+    experiments: {
+      lazyCompilation: true,
+    },
     mode: 'development',
     devtool: 'source-map',
     entry: {
