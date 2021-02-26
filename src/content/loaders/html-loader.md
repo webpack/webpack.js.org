@@ -588,6 +588,32 @@ module.exports = {
 
 ## Examples
 
+### Disable url resolving using the `` comment
+
+With `` comment, can to disable sources handling for next tag.
+
+```html
+
+
+<img src="image.png" />
+
+
+
+<img
+  srcset="image.png 480w, image.png 768w"
+  src="image.png"
+  alt="Elva dressed as a fairy"
+/>
+
+
+
+<meta itemprop="image" content="./image.png" />
+
+
+
+<link rel="icon" type="image/png" sizes="192x192" href="./image.png" />
+```
+
 ### roots
 
 With [`resolve.roots`](/configuration/resolve/#resolveroots) can specify a list of directories where requests of server-relative URLs (starting with '/') are resolved.
