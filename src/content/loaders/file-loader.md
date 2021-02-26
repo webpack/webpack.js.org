@@ -501,7 +501,7 @@ base49, base52, base58, base62, base64, and hex.
 Type: `String`
 Default: `'md4'`
 
-The type of hash that the has function should use. Valid values include: `md4`, `md5`, `sha1`, `sha256`, and `sha512`.
+The type of hash that the hash function should use. Valid values include: `md4`, `md5`, `sha1`, `sha256`, and `sha512`.
 
 #### `length` {#length}
 

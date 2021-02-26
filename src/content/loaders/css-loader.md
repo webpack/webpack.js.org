@@ -1131,7 +1131,65 @@ module.exports = {
 
 ## 示例 {#examples}
 
+<<<<<<< HEAD
 ### 资源 {#assets}
+=======
+### Disable url resolving using the `/* webpackIgnore: true */` comment
+
+With the help of the `/* webpackIgnore: true */`comment, it is possible to disable sources handling for rules and for individual declarations.
+
+```css
+/* webpackIgnore: true */
+@import url(./basic.css);
+@import /* webpackIgnore: true */ url(./imported.css);
+
+.class {
+  /* Disabled url handling for the all urls in the 'background' declaration */
+  color: red;
+  /* webpackIgnore: true */
+  background: url("./url/img.png"), url("./url/img.png");
+}
+
+.class {
+  /* Disabled url handling for the first url in the 'background' declaration */
+  color: red;
+  background: 
+    /* webpackIgnore: true */ url("./url/img.png"), url("./url/img.png");
+}
+
+.class {
+  /* Disabled url handling for the second url in the 'background' declaration */
+  color: red;
+  background: url("./url/img.png"),
+    /* webpackIgnore: true */ url("./url/img.png");
+}
+
+/* prettier-ignore */
+.class {
+  /* Disabled url handling for the second url in the 'background' declaration */
+  color: red;
+  background: url("./url/img.png"),
+    /* webpackIgnore: true */ 
+    url("./url/img.png");
+}
+
+/* prettier-ignore */
+.class {
+  /* Disabled url handling for third and sixth urls in the 'background-image' declaration */
+  background-image: image-set(
+    url(./url/img.png) 2x,
+    url(./url/img.png) 3x,
+    /* webpackIgnore:  true */ url(./url/img.png) 4x,
+    url(./url/img.png) 5x,
+    url(./url/img.png) 6x,
+    /* webpackIgnore:  true */
+    url(./url/img.png) 7x
+  );
+}
+```
+
+### Assets
+>>>>>>> 70ebe2041fd39f9ef7df025fa542c8f1381f443a
 
 如下配置的 `webpack.config.js` 可以加载 CSS 文件，嵌入小的 PNG/JPG/GIF/SVG 图片以及字体作为[数据 URL](https://tools.ietf.org/html/rfc2397)，并将较大的文件复制到输出目录。
 

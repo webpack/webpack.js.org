@@ -588,7 +588,37 @@ module.exports = {
 
 ## 示例 {#examples}
 
+<<<<<<< HEAD
 ### roots {#roots}
+=======
+### Disable url resolving using the `` comment
+
+With `` comment, can to disable sources handling for next tag.
+
+```html
+
+
+<img src="image.png" />
+
+
+
+<img
+  srcset="image.png 480w, image.png 768w"
+  src="image.png"
+  alt="Elva dressed as a fairy"
+/>
+
+
+
+<meta itemprop="image" content="./image.png" />
+
+
+
+<link rel="icon" type="image/png" sizes="192x192" href="./image.png" />
+```
+
+### roots
+>>>>>>> 70ebe2041fd39f9ef7df025fa542c8f1381f443a
 
 使用 [`resolve.roots`](/configuration/resolve/#resolveroots) 可以指定解析相对服务端的 URL（以 '/' 开头）请求的目录列表。
 
