@@ -588,37 +588,33 @@ module.exports = {
 
 ## 示例 {#examples}
 
-<<<<<<< HEAD
-### roots {#roots}
-=======
-### Disable url resolving using the `` comment
+### 使用 `<!-- webpackIgnore: true -->` 注释禁用 url 解析
 
-With `` comment, can to disable sources handling for next tag.
+通过 `<!-- webpackIgnore: true -->` 注释，可以禁止处理下一个标签的源。
 
 ```html
-
-
+<!-- 禁止对 src 属性进行 url 处理 -->
+<!-- webpackIgnore: true -->
 <img src="image.png" />
 
-
-
+<!-- 禁止对 src 与 srcset 属性进行 url 处理 -->
+<!-- webpackIgnore: true -->
 <img
   srcset="image.png 480w, image.png 768w"
   src="image.png"
   alt="Elva dressed as a fairy"
 />
 
-
-
+<!-- 禁止对 content 属性进行 url 处理 -->
+<!-- webpackIgnore: true -->
 <meta itemprop="image" content="./image.png" />
 
-
-
+<!-- 禁止对 href 属性进行 url 处理 -->
+<!-- webpackIgnore: true -->
 <link rel="icon" type="image/png" sizes="192x192" href="./image.png" />
 ```
 
-### roots
->>>>>>> 70ebe2041fd39f9ef7df025fa542c8f1381f443a
+### roots {#roots}
 
 使用 [`resolve.roots`](/configuration/resolve/#resolveroots) 可以指定解析相对服务端的 URL（以 '/' 开头）请求的目录列表。
 
