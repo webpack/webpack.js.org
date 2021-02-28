@@ -33,7 +33,7 @@ __webpack.config.ts__
 ```typescript
 import * as path from 'path';
 import * as webpack from 'webpack';
-// and, if using webpack-dev-server
+// just in case you run into any typescript error when configuring `devServer`
 import 'webpack-dev-server';
 
 const config: webpack.Configuration = {
