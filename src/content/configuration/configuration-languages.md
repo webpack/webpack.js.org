@@ -32,6 +32,8 @@ and then proceed to write your configuration:
 ```typescript
 import * as path from 'path';
 import * as webpack from 'webpack';
+// just in case you run into any typescript error when configuring `devServer`
+import 'webpack-dev-server';
 
 const config: webpack.Configuration = {
   mode: 'production',
