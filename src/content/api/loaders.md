@@ -22,9 +22,21 @@ loader 本质上是导出为函数的 JavaScript 模块。[loader runner](https:
 
 如果是单个处理结果，可以在 **同步模式** 中直接返回。如果有多个处理结果，则必须调用 `this.callback()`。在 **异步模式** 中，必须调用 `this.async()` 来告知 [loader runner](https://github.com/webpack/loader-runner) 等待异步结果，它会返回 `this.callback()` 回调函数。随后 loader 必须返回 `undefined` 并且调用该回调函数。
 
+```js
+/**
+ *
+ * @param {string|Buffer} content 源文件的内容
+ * @param {object} [map] 可以被 https://github.com/mozilla/source-map 使用的 SourceMap 数据
+ * @param {any} [meta] meta 数据，可以是任何内容
+ */
+function webpackLoader(content, map, meta) {
+  // 你的 webpack loader 代码
+}
+```
+
 ## 示例 {#examples}
 
-以下部分提供了不同类型的 loader 的一些基本示例。注意，`map` 和 `meta` 参数是可选的，查看下面的  [`this.callback`](#thiscallback)。
+以下部分提供了不同类型的 loader 的一些基本示例。注意，`map` 和 `meta` 参数是可选的，查看下面的 [`this.callback`](#thiscallback)。
 
 ### 同步 Loaders {#synchronous-loaders}
 
@@ -232,7 +244,7 @@ this.callback(
 3. 可选的：第三个参数必须是一个可以被 [this module](https://github.com/mozilla/source-map) 解析的 source map。
 4. 可选的：第四个参数，会被 webpack 忽略，可以是任何东西（例如一些元数据）。
 
-T> 如果希望在 loader 之间共享公共的AST，可以将抽象语法树AST（例如 [`ESTree`](https://github.com/estree/estree)）作为第四个参数（`meta`）传递，以加快构建时间。
+T> 如果希望在 loader 之间共享公共的 AST，可以将抽象语法树 AST（例如 [`ESTree`](https://github.com/estree/estree)）作为第四个参数（`meta`）传递，以加快构建时间。
 
 如果这个函数被调用的话，你应该返回 undefined 从而避免含糊的 loader 结果。
 
@@ -572,7 +584,7 @@ T> 所有的报错和警告信息将被记录到 `stats` 当中。详情请查�
 
 ### Inline matchResource {#inline-matchresource}
 
-在 webpack v4 中引入了一种新的内联请求语法。前缀为 `<match-resource>!=!` 将为此请求设置  `matchResource`。
+在 webpack v4 中引入了一种新的内联请求语法。前缀为 `<match-resource>!=!` 将为此请求设置 `matchResource`。
 
 W> 不建议在应用程序代码中使用此语法。
 内联请求语法仅用于 loader 生成的代码。

@@ -178,18 +178,18 @@ W> 如果你使用的是 webpack 的 [CLI](/api/cli/)，当这个插件被启用
 
 ## `optimization.moduleIds` {#optimizationmoduleids}
 
-`boolean = false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
+`boolean: false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
 
-告知 webpack 当选择模块 id 时需要使用哪种算法。将 `optimization.moduleIds` 设置为  `false` 会告知 webpack 没有任何内置的算法会被使用，但自定义的算法会由插件提供。`optimization.moduleIds` 的默认值是 `false`。
+告知 webpack 当选择模块 id 时需要使用哪种算法。将 `optimization.moduleIds` 设置为 `false` 会告知 webpack 没有任何内置的算法会被使用，但自定义的算法会由插件提供。
 
 下面的字符串值均被支持：
 
-选荐值                | 描述
---------------------- | -----------------------
-`natural`             | 按使用顺序的数字 id。
-`named`               | 对调试更友好的可读的 id。
-`deterministic`       | 被哈希转化成的小位数值模块名。
-`size`                | 专注于让初始下载包大小更小的数字 id。
+| 选荐值          | 描述                                  |
+| --------------- | ------------------------------------- |
+| `natural`       | 按使用顺序的数字 id。                 |
+| `named`         | 对调试更友好的可读的 id。             |
+| `deterministic` | 被哈希转化成的小位数值模块名。        |
+| `size`          | 专注于让初始下载包大小更小的数字 id。 |
 
 **webpack.config.js**
 
@@ -202,8 +202,8 @@ module.exports = {
 };
 ```
 
-`deterministic` 选项有益于长期缓存，但对比于 `hashed` 来说，它会导致更小的文件 bundles。数字值的长度会被选作用于填满最多80%的id空间。
-当  `optimization.moduleIds` 被设置成 `deterministic`，默认最小3位数字会被使用。
+`deterministic` 选项有益于长期缓存，但对比于 `hashed` 来说，它会导致更小的文件 bundles。数字值的长度会被选作用于填满最多 80%的 id 空间。
+当 `optimization.moduleIds` 被设置成 `deterministic`，默认最小 3 位数字会被使用。
 要覆盖默认行为，要将 `optimization.moduleIds` 设置成 `false`，
 并且要使用 `webpack.ids.DeterministicModuleIdsPlugin`。
 
@@ -231,22 +231,21 @@ W> `moduleIds: total-size` 在 webpack 5 中被废弃。
 
 `boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic'`
 
-告知 webpack 当选择模块 id 时需要使用哪种算法。将 `optimization.chunkIds` 设置为  `false` 会告知 webpack 没有任何内置的算法会被使用，但自定义的算法会由插件提供。`optimization.chunkIds` 的默认值是 `false`：
+告知 webpack 当选择模块 id 时需要使用哪种算法。将 `optimization.chunkIds` 设置为 `false` 会告知 webpack 没有任何内置的算法会被使用，但自定义的算法会由插件提供。`optimization.chunkIds` 的默认值是 `false`：
 
 - 如果环境是开发环境，那么 `optimization.chunkIds` 会被设置成 `'named'`,
-但当在生产环境中时，它会被设置成 `'deterministic'`
+  但当在生产环境中时，它会被设置成 `'deterministic'`
 - 如果上述的条件都不符合, `optimization.chunkIds` 会被默认设置为 `'natural'`
 
 下述选项字符串值均为被支持:
 
-选项值                  | 描述
------------------------ | -----------------------
-`'natural'`             | 按使用顺序的数字 id。
-`'named'`               | 对调试更友好的可读的 id。
-`'deterministic'`       | 在不同的编译中不变的短数字 id。有益于长期缓存。
-在生产模式中会默认开启。
-`'size'`                | 专注于让初始下载包大小更小的数字 id。
-`'total-size'`          | 专注于让总下载包大小更小的数字 id。
+| 选项值            | 描述                                                                    |
+| ----------------- | ----------------------------------------------------------------------- |
+| `'natural'`       | 按使用顺序的数字 id。                                                   |
+| `'named'`         | 对调试更友好的可读的 id。                                               |
+| `'deterministic'` | 在不同的编译中不变的短数字 id。有益于长期缓存。在生产模式中会默认开启。 |
+| `'size'`          | 专注于让初始下载包大小更小的数字 id。                                   |
+| `'total-size'`    | 专注于让总下载包大小更小的数字 id。                                     |
 
 **webpack.config.js**
 
@@ -259,7 +258,7 @@ module.exports = {
 };
 ```
 
-默认地，当 `optimization.chunkIds` 被设置为 `'deterministic'` 时，最少3位数字会被使用。要覆盖默认的行为，
+默认地，当 `optimization.chunkIds` 被设置为 `'deterministic'` 时，最少 3 位数字会被使用。要覆盖默认的行为，
 要将 `optimization.chunkIds` 设置为 `false`，同时要使用 `webpack.ids.DeterministicChunkIdsPlugin`。
 
 **webpack.config.js**
@@ -458,7 +457,7 @@ module.exports = {
 
 `boolean = true` `string: 'flag'`
 
-告知 webpack 去辨识 `package.json` 中的  [`副作用`](https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md) 标记或规则，以跳过那些当导出不被使用且被标记不包含副作用的模块。
+告知 webpack 去辨识 `package.json` 中的 [`副作用`](https://github.com/webpack/webpack/blob/master/examples/side-effects/README.md) 标记或规则，以跳过那些当导出不被使用且被标记不包含副作用的模块。
 
 **package.json**
 
@@ -532,12 +531,12 @@ module.exports = {
 
 此选项支持以下选项：
 
-选项                  | 描述
------------------------ | -----------------------
-`'size'`                | 简写形式 — 通常只有一个字符 — 专注于最小的下载 size。
-`'deterministic'`       | 简写形式 - 通常两个字符 — 在添加或移除 export 时不会改变。适用于长效缓存。
-`true`                  | 等价于 `'deterministic'`
-`false`                 | 保留原名，有利于阅读和调试。
+| 选项              | 描述                                                                       |
+| ----------------- | -------------------------------------------------------------------------- |
+| `'size'`          | 简写形式 — 通常只有一个字符 — 专注于最小的下载 size。                      |
+| `'deterministic'` | 简写形式 - 通常两个字符 — 在添加或移除 export 时不会改变。适用于长效缓存。 |
+| `true`            | 等价于 `'deterministic'`                                                   |
+| `false`           | 保留原名，有利于阅读和调试。                                               |
 
 **webpack.config.js**
 
