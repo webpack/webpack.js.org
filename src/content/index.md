@@ -75,4 +75,4 @@ module.exports = {
 
 ## 深入学习 {#awesome-isnt-it-lets-dive-in}
 
-**[快速开始](/guides/getting-started)**部分在**指南**章节，如果有兴趣深入学习，可以查阅**[概念](/concepts)**章节，以了解 webpack 的核心概念以及底层实现。
+**[快速开始](/guides/getting-started)**部分在**指南**章节，如果有兴趣深入学习，可以查阅 **[概念](/concepts)** 章节，以了解 webpack 的核心概念以及底层实现。

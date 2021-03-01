@@ -290,27 +290,19 @@ chunk `id` 优化结束之后触发。
 
 `SyncHook`
 
-<<<<<<< HEAD
 在创建模块哈希（hash）之前。
-=======
-Called before modules are hashed.
 
-### `afterModuleHash`
+### `afterModuleHash` {#aftermodulehash}
 
 `syncHook`
 
-Called after modules are hashed.
->>>>>>> 1beb52c5826b6491d6389f30a6ea0a829410e776
+在创建模块哈希（hash）之后。
 
 ### `beforeHash` {#beforehash}
 
 `SyncHook`
 
-<<<<<<< HEAD
 在 compilation 添加哈希（hash）之前。
-=======
-Called before the compilation is hashed.
->>>>>>> 1beb52c5826b6491d6389f30a6ea0a829410e776
 
 ### `afterHash` {#afterhash}
 
@@ -597,4 +589,4 @@ compilation.hooks.processAssets.tap(
 
 ### `normalModuleLoader` {#normalmoduleloader}
 
-从 webpack v5 开始，`normalModuleLoader` 钩子已经删除。现在要访问loader 请改用 `NormalModule.getCompilationHooks(compilation).loader`。
+从 webpack v5 开始，`normalModuleLoader` 钩子已经删除。现在要访问 loader 请改用 `NormalModule.getCompilationHooks(compilation).loader`。

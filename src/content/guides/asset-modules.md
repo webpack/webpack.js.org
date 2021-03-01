@@ -400,11 +400,7 @@ module.exports = {
 
 在 asset 模块和 webpack 5 之前，可以使用[内联语法](/concepts/loaders/#inline)与上述传统的 loader 结合使用。
 
-<<<<<<< HEAD
-现在建议去掉所有的 loader 的语法，使用资源查询条件来魔法内联语法的功能。
-=======
-It is now recommended to remove all inline loader syntax and use a resourceQuery condition to mimic the functionality of the inline syntax.
->>>>>>> 1beb52c5826b6491d6389f30a6ea0a829410e776
+现在建议去掉所有的内联 loader 的语法，使用资源查询条件来模仿内联语法的功能。
 
 示例，将 `raw-loader` 替换为 `asset/source` 类型：
 
