@@ -22,7 +22,23 @@ loader 本质上是导出为函数的 JavaScript 模块。[loader runner](https:
 
 如果是单个处理结果，可以在 **同步模式** 中直接返回。如果有多个处理结果，则必须调用 `this.callback()`。在 **异步模式** 中，必须调用 `this.async()` 来告知 [loader runner](https://github.com/webpack/loader-runner) 等待异步结果，它会返回 `this.callback()` 回调函数。随后 loader 必须返回 `undefined` 并且调用该回调函数。
 
+<<<<<<< HEAD
 ## 示例 {#examples}
+=======
+```js
+/**
+ *
+ * @param {string|Buffer} content Content of the resource file
+ * @param {object} [map] SourceMap data consumable by https://github.com/mozilla/source-map
+ * @param {any} [meta] Meta data, could be anything
+ */
+function webpackLoader(content, map, meta) {
+  // code of your webpack loader
+}
+```
+
+## Examples
+>>>>>>> 1beb52c5826b6491d6389f30a6ea0a829410e776
 
 以下部分提供了不同类型的 loader 的一些基本示例。注意，`map` 和 `meta` 参数是可选的，查看下面的  [`this.callback`](#thiscallback)。
 

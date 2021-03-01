@@ -178,9 +178,13 @@ W> 如果你使用的是 webpack 的 [CLI](/api/cli/)，当这个插件被启用
 
 ## `optimization.moduleIds` {#optimizationmoduleids}
 
-`boolean = false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
+`boolean: false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
 
+<<<<<<< HEAD
 告知 webpack 当选择模块 id 时需要使用哪种算法。将 `optimization.moduleIds` 设置为  `false` 会告知 webpack 没有任何内置的算法会被使用，但自定义的算法会由插件提供。`optimization.moduleIds` 的默认值是 `false`。
+=======
+Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin.
+>>>>>>> 1beb52c5826b6491d6389f30a6ea0a829410e776
 
 下面的字符串值均被支持：
 
