@@ -30,7 +30,6 @@ Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-dev
 ```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
- const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
  module.exports = {
 +  mode: 'development',
@@ -39,7 +38,6 @@ Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-dev
      print: './src/print.js',
    },
    plugins: [
-     new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({
 -      title: 'Output Management',
 +      title: 'Development',
@@ -48,6 +46,7 @@ Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-dev
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
+     clean: true,
    },
  };
 ```
@@ -67,7 +66,6 @@ For this guide, let's use the `inline-source-map` option, which is good for illu
 ```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
- const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
  module.exports = {
    mode: 'development',
@@ -77,7 +75,6 @@ For this guide, let's use the `inline-source-map` option, which is good for illu
    },
 +  devtool: 'inline-source-map',
    plugins: [
-     new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({
        title: 'Development',
      }),
@@ -85,6 +82,7 @@ For this guide, let's use the `inline-source-map` option, which is good for illu
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
+     clean: true,
    },
  };
 ```
@@ -162,7 +160,6 @@ Let's add an npm script that will start webpack's Watch Mode:
    "author": "",
    "license": "ISC",
    "devDependencies": {
-     "clean-webpack-plugin": "^3.0.0",
      "html-webpack-plugin": "^4.5.0",
      "webpack": "^5.4.0",
      "webpack-cli": "^4.2.0"
@@ -171,36 +168,6 @@ Let's add an npm script that will start webpack's Watch Mode:
      "lodash": "^4.17.20"
    }
  }
-```
-
-Tell `CleanWebpackPlugin` that we don't want to remove the `index.html` file after the incremental build triggered by watch. We do this with the [`cleanStaleWebpackAssets` option](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional):
-
-**webpack.config.js**
-
-```diff
- const path = require('path');
- const HtmlWebpackPlugin = require('html-webpack-plugin');
- const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
- module.exports = {
-   mode: 'development',
-   entry: {
-     index: './src/index.js',
-     print: './src/print.js',
-   },
-   devtool: 'inline-source-map',
-   plugins: [
--    new CleanWebpackPlugin(),
-+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-     new HtmlWebpackPlugin({
-       title: 'Development',
-     }),
-   ],
-   output: {
-     filename: '[name].bundle.js',
-     path: path.resolve(__dirname, 'dist'),
-   },
- };
 ```
 
 Now run `npm run watch` from the command line and see how webpack compiles your code.
@@ -236,7 +203,6 @@ Change your configuration file to tell the dev server where to look for files:
 ```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
- const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
  module.exports = {
    mode: 'development',
@@ -249,7 +215,6 @@ Change your configuration file to tell the dev server where to look for files:
 +    contentBase: './dist',
 +  },
    plugins: [
-     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
      new HtmlWebpackPlugin({
        title: 'Development',
      }),
@@ -257,6 +222,7 @@ Change your configuration file to tell the dev server where to look for files:
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
+     clean: true,
    },
  };
 ```
@@ -287,7 +253,6 @@ Let's add a script to easily run the dev server as well:
    "author": "",
    "license": "ISC",
    "devDependencies": {
-     "clean-webpack-plugin": "^3.0.0",
      "html-webpack-plugin": "^4.5.0",
      "webpack": "^5.4.0",
      "webpack-cli": "^4.2.0",
@@ -322,7 +287,6 @@ Now we need to make some adjustments to our webpack configuration file in order 
 ```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
- const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
  module.exports = {
    mode: 'development',
@@ -335,7 +299,6 @@ Now we need to make some adjustments to our webpack configuration file in order 
      contentBase: './dist',
    },
    plugins: [
-     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
      new HtmlWebpackPlugin({
        title: 'Development',
      }),
@@ -343,6 +306,7 @@ Now we need to make some adjustments to our webpack configuration file in order 
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
+     clean: true,
 +    publicPath: '/',
    },
  };
@@ -410,7 +374,6 @@ Now add an npm script to make it a little easier to run the server:
    "author": "",
    "license": "ISC",
    "devDependencies": {
-     "clean-webpack-plugin": "^3.0.0",
      "express": "^4.17.1",
      "html-webpack-plugin": "^4.5.0",
      "webpack": "^5.4.0",

@@ -45,7 +45,6 @@ T> If you took the route of using `webpack-dev-middleware` instead of `webpack-d
 ```diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
@@ -58,8 +57,6 @@ T> If you took the route of using `webpack-dev-middleware` instead of `webpack-d
 +     hot: true,
     },
     plugins: [
-      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement',
       }),
@@ -67,6 +64,7 @@ T> If you took the route of using `webpack-dev-middleware` instead of `webpack-d
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
   };
 ```
@@ -224,7 +222,6 @@ Now let's update the configuration file to make use of the loader.
 ```diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
@@ -244,8 +241,6 @@ Now let's update the configuration file to make use of the loader.
 +     ],
 +   },
     plugins: [
-      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement',
       }),
@@ -253,6 +248,7 @@ Now let's update the configuration file to make use of the loader.
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
   };
 ```

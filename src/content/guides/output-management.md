@@ -184,18 +184,13 @@ As you might have noticed over the past guides and code example, our `/dist` fol
 
 In general it's good practice to clean the `/dist` folder before each build, so that only used files will be generated. Let's take care of that.
 
-A popular plugin to manage this is the [`clean-webpack-plugin`](https://www.npmjs.com/package/clean-webpack-plugin) so let's install and configure it.
-
-```bash
-npm install --save-dev clean-webpack-plugin
-```
+You can use [`output.clean` option](/configuration/output/#outputclean) for the same purpose.
 
 **webpack.config.js**
 
 ```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
-+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
  module.exports = {
    entry: {
@@ -203,7 +198,6 @@ npm install --save-dev clean-webpack-plugin
      print: './src/print.js',
    },
    plugins: [
-+    new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({
        title: 'Output Management',
      }),
@@ -211,6 +205,7 @@ npm install --save-dev clean-webpack-plugin
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
++    clean: true,
    },
  };
 ```

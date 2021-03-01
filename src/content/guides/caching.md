@@ -46,14 +46,11 @@ webpack-demo
 
 ```diff
   const path = require('path');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
 -       title: 'Output Management',
 +       title: 'Caching',
@@ -63,6 +60,7 @@ webpack-demo
 -     filename: 'bundle.js',
 +     filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
   };
 ```
@@ -99,14 +97,11 @@ As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlug
 
 ```diff
   const path = require('path');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching',
       }),
@@ -114,6 +109,7 @@ As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlug
     output: {
       filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
 +   optimization: {
 +     runtimeChunk: 'single',
@@ -144,14 +140,11 @@ This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin/#spli
 
 ```diff
   const path = require('path');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching',
       }),
@@ -159,6 +152,7 @@ This can be done by using the [`cacheGroups`](/plugins/split-chunks-plugin/#spli
     output: {
       filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
     optimization: {
       runtimeChunk: 'single',
@@ -257,14 +251,11 @@ The first and last are expected, it's the `vendor` hash we want to fix. Let's us
 
 ```diff
   const path = require('path');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching',
       }),
@@ -272,6 +263,7 @@ The first and last are expected, it's the `vendor` hash we want to fix. Let's us
     output: {
       filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
     optimization: {
 +     moduleIds: 'deterministic',
