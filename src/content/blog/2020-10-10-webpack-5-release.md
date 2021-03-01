@@ -287,7 +287,7 @@ This is now disabled by default (`activeModules` option). This also reduces the 
 Now writing to stderr during building modules is throttled to 500ms.
 
 The profiling mode also got an upgrade and will display timings of nested progress messages.
-This makes it easier to figure out while plugin is causing performance problems.
+This makes it easier to figure out which plugin is causing performance problems.
 
 A newly added `percentBy`-option tells `ProgressPlugin` how to calculate progress percentage.
 
