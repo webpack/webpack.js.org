@@ -57,7 +57,7 @@
     "cypress:run": "cypress run",
     "cypress:ci": "start-server-and-test build-test http://localhost:4200 cypress:run",
     "prettier": "prettier --write 'src/**/*.{js,jsx,css,scss,md,mdx}' '**/*.{js,json}'",
-    "postinstall": "husky install"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,jsx,md}": [
