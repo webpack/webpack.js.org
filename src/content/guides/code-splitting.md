@@ -31,6 +31,7 @@ contributors:
   - maximilianschmelzer
   - smelukov
   - chenxsan
+  - Adarah
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -407,7 +408,7 @@ Preload directive has a bunch of differences compared to prefetch:
 
 Simple preload example can be having a `Component` which always depends on a big library that should be in a separate chunk.
 
-Let's imagine a component `ChartComponent` which needs huge `ChartingLibrary`. It displays a `LoadingIndicator` when rendered and instantly does an on demand import of `ChartingLibrary`:
+Let's imagine a component `ChartComponent` which needs a huge `ChartingLibrary`. It displays a `LoadingIndicator` when rendered and instantly does an on demand import of `ChartingLibrary`:
 
 **ChartComponent.js**
 
