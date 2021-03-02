@@ -182,20 +182,14 @@ If you want to learn more about all the features and options that the `HtmlWebpa
 
 As you might have noticed over the past guides and code example, our `/dist` folder has become quite cluttered. Webpack will generate the files and put them in the `/dist` folder for you, but it doesn't keep track of which files are actually in use by your project.
 
-In general it's good practice to clean the `/dist` folder before each build, so that only used files will be generated. Let's take care of that.
+In general it's good practice to clean the `/dist` folder before each build, so that only used files will be generated. Let's take care of that with [`output.clean`](/configuration/output/#outputclean) option.
 
-A popular plugin to manage this is the [`clean-webpack-plugin`](https://www.npmjs.com/package/clean-webpack-plugin) so let's install and configure it.
-
-```bash
-npm install --save-dev clean-webpack-plugin
-```
 
 **webpack.config.js**
 
 ```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
-+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
  module.exports = {
    entry: {
@@ -203,7 +197,6 @@ npm install --save-dev clean-webpack-plugin
      print: './src/print.js',
    },
    plugins: [
-+    new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({
        title: 'Output Management',
      }),
@@ -211,6 +204,7 @@ npm install --save-dev clean-webpack-plugin
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
++    clean: true,
    },
  };
 ```

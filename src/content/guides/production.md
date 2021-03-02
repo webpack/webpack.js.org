@@ -61,7 +61,6 @@ npm install --save-dev webpack-merge
 
 ```diff
 + const path = require('path');
-+ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 + const HtmlWebpackPlugin = require('html-webpack-plugin');
 +
 + module.exports = {
@@ -69,8 +68,6 @@ npm install --save-dev webpack-merge
 +     app: './src/index.js',
 +   },
 +   plugins: [
-+     // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-+     new CleanWebpackPlugin(),
 +     new HtmlWebpackPlugin({
 +       title: 'Production',
 +     }),
@@ -78,6 +75,7 @@ npm install --save-dev webpack-merge
 +   output: {
 +     filename: '[name].bundle.js',
 +     path: path.resolve(__dirname, 'dist'),
++     clean: true,
 +   },
 + };
 ```
@@ -134,7 +132,6 @@ Now, let's modify our npm scripts to use the new configuration files. For the `s
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "clean-webpack-plugin": "^0.1.17",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "express": "^4.15.3",
