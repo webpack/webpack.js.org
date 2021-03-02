@@ -5,14 +5,11 @@
 |- /src
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.js
 </span></span>|- /node_modules</code></pre> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require('path');
-</span><span class="token prefix unchanged"> </span><span class="token line"> const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require('html-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: './src/index.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     // new CleanWebpackPlugin(['dist/*']) for &#x3C; v2 versions of CleanWebpackPlugin
-</span><span class="token prefix unchanged"> </span><span class="token line">     new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">       title: 'Output Management',
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">       title: 'Caching',
@@ -22,6 +19,7 @@
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">     filename: 'bundle.js',
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     filename: '[name].[contenthash].js',
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre> <p>Running our build script, <code>npm run build</code>, with this configuration should produce the following output:</p> <pre><code class="hljs language-bash"><span class="token punctuation">..</span>.
                        Asset       Size  Chunks                    Chunk Names
@@ -32,14 +30,11 @@ main.7e2c49a622975ebd9b7e.js     <span class="token number">544</span> kB       
 main.205199ab45963f6a62ec.js     <span class="token number">544</span> kB       <span class="token number">0</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
                   index.html  <span class="token number">197</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 <span class="token punctuation">..</span>.</code></pre> <p>This is because webpack includes certain boilerplate, specifically the runtime and manifest, in the entry chunk.</p> <aside class="warning"><h6 class="warning__prefix">warning</h6><p>Output may differ depending on your current webpack version. Newer versions may not have all the same issues with hashing as some older versions, but we still recommend the following steps to be safe.</p></aside> <h2 id="extracting-boilerplate">Extracting Boilerplate<a href="#extracting-boilerplate" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>As we learned in <a href="/guides/code-splitting">code splitting</a>, the <a href="/plugins/split-chunks-plugin/"><code>SplitChunksPlugin</code></a> can be used to split modules out into separate bundles. webpack provides an optimization feature to split runtime code into a separate chunk using the <a href="/configuration/optimization/#optimizationruntimechunk"><code>optimization.runtimeChunk</code></a> option. Set it to <code>single</code> to create a single runtime bundle for all chunks:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require('path');
-</span><span class="token prefix unchanged"> </span><span class="token line"> const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require('html-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: './src/index.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     // new CleanWebpackPlugin(['dist/*']) for &#x3C; v2 versions of CleanWebpackPlugin
-</span><span class="token prefix unchanged"> </span><span class="token line">     new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
 </span><span class="token prefix unchanged"> </span><span class="token line">       title: 'Caching',
 </span><span class="token prefix unchanged"> </span><span class="token line">     }),
@@ -47,6 +42,7 @@ main.205199ab45963f6a62ec.js     <span class="token number">544</span> kB       
 </span><span class="token prefix unchanged"> </span><span class="token line">   output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     filename: '[name].[contenthash].js',
 </span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   optimization: {
 </span><span class="token prefix inserted">+</span><span class="token line">     runtimeChunk: 'single',
@@ -62,14 +58,11 @@ runtime.cc17ae2a94ec771e9221.js   <span class="token number">1.42</span> KiB    
 <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js <span class="token number">489</span> bytes <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
 <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> ./src/index.js <span class="token number">309</span> bytes <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
     + <span class="token number">1</span> hidden module</code></pre> <p>It's also good practice to extract third-party libraries, such as <code>lodash</code> or <code>react</code>, to a separate <code>vendor</code> chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date. This can be done by using the <a href="/plugins/split-chunks-plugin/#splitchunkscachegroups"><code>cacheGroups</code></a> option of the <a href="/plugins/split-chunks-plugin/"><code>SplitChunksPlugin</code></a> demonstrated in <a href="/plugins/split-chunks-plugin/#split-chunks-example-2">Example 2 of SplitChunksPlugin</a>. Lets add <code>optimization.splitChunks</code> with <code>cacheGroups</code> with next params and build:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require('path');
-</span><span class="token prefix unchanged"> </span><span class="token line"> const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require('html-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: './src/index.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     // new CleanWebpackPlugin(['dist/*']) for &#x3C; v2 versions of CleanWebpackPlugin
-</span><span class="token prefix unchanged"> </span><span class="token line">     new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
 </span><span class="token prefix unchanged"> </span><span class="token line">       title: 'Caching',
 </span><span class="token prefix unchanged"> </span><span class="token line">     }),
@@ -77,6 +70,7 @@ runtime.cc17ae2a94ec771e9221.js   <span class="token number">1.42</span> KiB    
 </span><span class="token prefix unchanged"> </span><span class="token line">   output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     filename: '[name].[contenthash].js',
 </span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line">   optimization: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     runtimeChunk: 'single',
@@ -125,14 +119,11 @@ vendors.a42c3ca0d742766d7a28.js   <span class="token number">69.4</span> KiB    
     main.b746e3eb72875af2caa9.js    <span class="token number">1.22</span> kB       <span class="token number">2</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         main
                       index.html  <span class="token number">352</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 <span class="token punctuation">..</span>.</code></pre> <p>... we can see that all three have. This is because each <a href="/api/module-variables/#moduleid-commonjs"><code>module.id</code></a> is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. So, to recap:</p> <ul> <li>The <code>main</code> bundle changed because of its new content.</li> <li>The <code>vendor</code> bundle changed because its <code>module.id</code> was changed.</li> <li>And, the <code>runtime</code> bundle changed because it now contains a reference to a new module.</li> </ul> <p>The first and last are expected, it's the <code>vendor</code> hash we want to fix. Let's use <a href="/configuration/optimization/#optimizationmoduleids"><code>optimization.moduleIds</code></a> with <code>'deterministic'</code> option:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require('path');
-</span><span class="token prefix unchanged"> </span><span class="token line"> const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require('html-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: './src/index.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     // new CleanWebpackPlugin(['dist/*']) for &#x3C; v2 versions of CleanWebpackPlugin
-</span><span class="token prefix unchanged"> </span><span class="token line">     new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
 </span><span class="token prefix unchanged"> </span><span class="token line">       title: 'Caching',
 </span><span class="token prefix unchanged"> </span><span class="token line">     }),
@@ -140,6 +131,7 @@ vendors.a42c3ca0d742766d7a28.js   <span class="token number">69.4</span> KiB    
 </span><span class="token prefix unchanged"> </span><span class="token line">   output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     filename: '[name].[contenthash].js',
 </span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line">   optimization: {
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     moduleIds: 'deterministic',

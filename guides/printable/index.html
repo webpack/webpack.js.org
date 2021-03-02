@@ -762,9 +762,8 @@ cacheable modules <span class="token number">530</span> KiB
   ./src/index.js <span class="token number">406</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./src/print.js <span class="token number">83</span> bytes <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
   ./node_modules/lodash/lodash.js <span class="token number">530</span> KiB <span class="token punctuation">[</span>built<span class="token punctuation">]</span> <span class="token punctuation">[</span>code generated<span class="token punctuation">]</span>
-webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">2189</span> ms</code></pre> <p>If you open <code>index.html</code> in your code editor, you'll see that the <code>HtmlWebpackPlugin</code> has created an entirely new file for you and that all the bundles are automatically added.</p> <p>If you want to learn more about all the features and options that the <code>HtmlWebpackPlugin</code> provides, then you should read up on it on the <a href="https://github.com/jantimon/html-webpack-plugin"><code>HtmlWebpackPlugin</code></a> repo.</p> <h2 id="cleaning-up-the-dist-folder">Cleaning up the <code>/dist</code> folder<a href="#cleaning-up-the-dist-folder" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>As you might have noticed over the past guides and code example, our <code>/dist</code> folder has become quite cluttered. Webpack will generate the files and put them in the <code>/dist</code> folder for you, but it doesn't keep track of which files are actually in use by your project.</p> <p>In general it's good practice to clean the <code>/dist</code> folder before each build, so that only used files will be generated. Let's take care of that.</p> <p>A popular plugin to manage this is the <a href="https://www.npmjs.com/package/clean-webpack-plugin"><code>clean-webpack-plugin</code></a> so let's install and configure it.</p> <pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev clean-webpack-plugin</code></pre> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
+webpack <span class="token number">5.4</span>.0 compiled successfully <span class="token keyword">in</span> <span class="token number">2189</span> ms</code></pre> <p>If you open <code>index.html</code> in your code editor, you'll see that the <code>HtmlWebpackPlugin</code> has created an entirely new file for you and that all the bundles are automatically added.</p> <p>If you want to learn more about all the features and options that the <code>HtmlWebpackPlugin</code> provides, then you should read up on it on the <a href="https://github.com/jantimon/html-webpack-plugin"><code>HtmlWebpackPlugin</code></a> repo.</p> <h2 id="cleaning-up-the-dist-folder">Cleaning up the <code>/dist</code> folder<a href="#cleaning-up-the-dist-folder" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>As you might have noticed over the past guides and code example, our <code>/dist</code> folder has become quite cluttered. Webpack will generate the files and put them in the <code>/dist</code> folder for you, but it doesn't keep track of which files are actually in use by your project.</p> <p>In general it's good practice to clean the <code>/dist</code> folder before each build, so that only used files will be generated. Let's take care of that with <a href="/configuration/output/#outputclean"><code>output.clean</code></a> option.</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
 </span><span class="token prefix unchanged"> </span><span class="token line">const HtmlWebpackPlugin = require('html-webpack-plugin');
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">  entry: {
@@ -772,18 +771,17 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">    print: './src/print.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    new CleanWebpackPlugin(),
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
+</span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
 </span><span class="token prefix unchanged"> </span><span class="token line">      title: 'Output Management',
 </span><span class="token prefix unchanged"> </span><span class="token line">    }),
 </span><span class="token prefix unchanged"> </span><span class="token line">  ],
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: '[name].bundle.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, 'dist'),
-</span><span class="token prefix unchanged"> </span><span class="token line">  },
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    clean: true,
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre> <p>Now run an <code>npm run build</code> and inspect the <code>/dist</code> folder. If everything went well you should now only see the files generated from the build and no more old files!</p> <h2 id="the-manifest">The Manifest<a href="#the-manifest" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>You might be wondering how webpack and its plugins seem to "know" what files are being generated. The answer is in the manifest that webpack keeps to track how all the modules map to the output bundles. If you're interested in managing webpack's <a href="/configuration/output"><code>output</code></a> in other ways, the manifest would be a good place to start.</p> <p>The manifest data can be extracted into a json file for easy consumption using the <a href="https://github.com/shellscape/webpack-manifest-plugin"><code>WebpackManifestPlugin</code></a>.</p> <p>We won't go through a full example of how to use this plugin within your projects, but you can read up on <a href="/concepts/manifest">the concept page</a> and the <a href="/guides/caching">caching guide</a> to find out how this ties into long term caching.</p> <h2 id="conclusion-1">Conclusion<a href="#conclusion-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>Now that you've learned about dynamically adding bundles to your HTML, let's dive into the <a href="/guides/development">development guide</a>. Or, if you want to dig into more advanced topics, we would recommend heading over to the <a href="/guides/code-splitting">code splitting guide</a>.</p> <h1 id="development">Development<a href="#development" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1> <aside class="tip"><h6 class="tip__prefix">tip</h6><p>This guide extends on code examples found in the <a href="/guides/output-management">Output Management</a> guide.</p></aside> <p>If you've been following the guides, you should have a solid understanding of some of the webpack basics. Before we continue, let's look into setting up a development environment to make our lives a little easier.</p> <aside class="warning"><h6 class="warning__prefix">warning</h6><p>The tools in this guide are <strong>only meant for development</strong>, please <strong>avoid</strong> using them in production!</p></aside> <p>Let's start by setting <a href="/configuration/mode/#mode-development"><code>mode</code> to <code>'development'</code></a> and <code>title</code> to <code>'Development'</code>.</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
 </span><span class="token prefix unchanged"> </span><span class="token line">const HtmlWebpackPlugin = require('html-webpack-plugin');
-</span><span class="token prefix unchanged"> </span><span class="token line">const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  mode: 'development',
@@ -792,7 +790,6 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">    print: './src/print.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">    new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">      title: 'Output Management',
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">      title: 'Development',
@@ -801,10 +798,10 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: '[name].bundle.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">    clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre> <h2 id="using-source-maps">Using source maps<a href="#using-source-maps" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (<code>a.js</code>, <code>b.js</code>, and <code>c.js</code>) into one bundle (<code>bundle.js</code>) and one of the source files contains an error, the stack trace will simply point to <code>bundle.js</code>. This isn't always helpful as you probably want to know exactly which source file the error came from.</p> <p>In order to make it easier to track down errors and warnings, JavaScript offers <a href="http://blog.teamtreehouse.com/introduction-source-maps">source maps</a>, which map your compiled code back to your original source code. If an error originates from <code>b.js</code>, the source map will tell you exactly that.</p> <p>There are a lot of <a href="/configuration/devtool">different options</a> available when it comes to source maps. Be sure to check them out so you can configure them to your needs.</p> <p>For this guide, let's use the <code>inline-source-map</code> option, which is good for illustrative purposes (though not for production):</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
 </span><span class="token prefix unchanged"> </span><span class="token line">const HtmlWebpackPlugin = require('html-webpack-plugin');
-</span><span class="token prefix unchanged"> </span><span class="token line">const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">  mode: 'development',
@@ -814,7 +811,6 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  devtool: 'inline-source-map',
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">    new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
 </span><span class="token prefix unchanged"> </span><span class="token line">      title: 'Development',
 </span><span class="token prefix unchanged"> </span><span class="token line">    }),
@@ -822,6 +818,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: '[name].bundle.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">    clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre> <p>Now let's make sure we have something to debug, so let's create an error in our <code>print.js</code> file:</p> <p><strong>src/print.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default function printMe() {
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  console.log('I get called from print.js!');
@@ -851,7 +848,6 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  "author": "",
 </span><span class="token prefix unchanged"> </span><span class="token line">  "license": "ISC",
 </span><span class="token prefix unchanged"> </span><span class="token line">  "devDependencies": {
-</span><span class="token prefix unchanged"> </span><span class="token line">    "clean-webpack-plugin": "^3.0.0",
 </span><span class="token prefix unchanged"> </span><span class="token line">    "html-webpack-plugin": "^4.5.0",
 </span><span class="token prefix unchanged"> </span><span class="token line">    "webpack": "^5.4.0",
 </span><span class="token prefix unchanged"> </span><span class="token line">    "webpack-cli": "^4.2.0"
@@ -859,34 +855,11 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  "dependencies": {
 </span><span class="token prefix unchanged"> </span><span class="token line">    "lodash": "^4.17.20"
 </span><span class="token prefix unchanged"> </span><span class="token line">  }
-</span><span class="token prefix unchanged"> </span><span class="token line">}</span></span></code></pre> <p>Tell <code>CleanWebpackPlugin</code> that we don't want to remove the <code>index.html</code> file after the incremental build triggered by watch. We do this with the <a href="https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional"><code>cleanStaleWebpackAssets</code> option</a>:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
-</span><span class="token prefix unchanged"> </span><span class="token line">const HtmlWebpackPlugin = require('html-webpack-plugin');
-</span><span class="token prefix unchanged"> </span><span class="token line">const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-</span></span>
-<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
-</span><span class="token prefix unchanged"> </span><span class="token line">  mode: 'development',
-</span><span class="token prefix unchanged"> </span><span class="token line">  entry: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    index: './src/index.js',
-</span><span class="token prefix unchanged"> </span><span class="token line">    print: './src/print.js',
-</span><span class="token prefix unchanged"> </span><span class="token line">  },
-</span><span class="token prefix unchanged"> </span><span class="token line">  devtool: 'inline-source-map',
-</span><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">    new CleanWebpackPlugin(),
-</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
-</span><span class="token prefix unchanged"> </span><span class="token line">      title: 'Development',
-</span><span class="token prefix unchanged"> </span><span class="token line">    }),
-</span><span class="token prefix unchanged"> </span><span class="token line">  ],
-</span><span class="token prefix unchanged"> </span><span class="token line">  output: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    filename: '[name].bundle.js',
-</span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, 'dist'),
-</span><span class="token prefix unchanged"> </span><span class="token line">  },
-</span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre> <p>Now run <code>npm run watch</code> from the command line and see how webpack compiles your code. You can see that it doesn't exit the command line because the script is currently watching your files.</p> <p>Now, while webpack is watching your files, let's remove the error we introduced earlier:</p> <p><strong>src/print.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default function printMe() {
+</span><span class="token prefix unchanged"> </span><span class="token line">}</span></span></code></pre> <p>Now run <code>npm run watch</code> from the command line and see how webpack compiles your code. You can see that it doesn't exit the command line because the script is currently watching your files.</p> <p>Now, while webpack is watching your files, let's remove the error we introduced earlier:</p> <p><strong>src/print.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">export default function printMe() {
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  cosnole.log('I get called from print.js!');
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  console.log('I get called from print.js!');
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">}</span></span></code></pre> <p>Now save your file and check the terminal window. You should see that webpack automatically recompiles the changed module!</p> <p>The only downside is that you have to refresh your browser in order to see the changes. It would be much nicer if that would happen automatically as well, so let's try <code>webpack-dev-server</code> which will do exactly that.</p> <h3 id="using-webpack-dev-server">Using webpack-dev-server<a href="#using-webpack-dev-server" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>The <code>webpack-dev-server</code> provides you with a simple web server and the ability to use live reloading. Let's set it up:</p> <pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev webpack-dev-server</code></pre> <p>Change your configuration file to tell the dev server where to look for files:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
 </span><span class="token prefix unchanged"> </span><span class="token line">const HtmlWebpackPlugin = require('html-webpack-plugin');
-</span><span class="token prefix unchanged"> </span><span class="token line">const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">  mode: 'development',
@@ -899,7 +872,6 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix inserted">+</span><span class="token line">    contentBase: './dist',
 </span><span class="token prefix inserted">+</span><span class="token line">  },
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
 </span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
 </span><span class="token prefix unchanged"> </span><span class="token line">      title: 'Development',
 </span><span class="token prefix unchanged"> </span><span class="token line">    }),
@@ -907,6 +879,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: '[name].bundle.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">    clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre> <p>This tells <code>webpack-dev-server</code> to serve the files from the <code>dist</code> directory on <code>localhost:8080</code>.</p> <aside class="tip"><h6 class="tip__prefix">tip</h6><p><code>webpack-dev-server</code> serves bundled files from the directory defined in <a href="/configuration/output/#outputpath"><code>output.path</code></a>, i.e., files will be available under <code>http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]</code>.</p></aside> <aside class="warning"><h6 class="warning__prefix">warning</h6><p>webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files on a different path, you can change this with the <a href="/configuration/dev-server/#devserverpublicpath-"><code>publicPath</code></a> option in the dev server's configuration.</p></aside> <p>Let's add a script to easily run the dev server as well:</p> <p><strong>package.json</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">{
 </span><span class="token prefix unchanged"> </span><span class="token line">  "name": "webpack-demo",
@@ -923,7 +896,6 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  "author": "",
 </span><span class="token prefix unchanged"> </span><span class="token line">  "license": "ISC",
 </span><span class="token prefix unchanged"> </span><span class="token line">  "devDependencies": {
-</span><span class="token prefix unchanged"> </span><span class="token line">    "clean-webpack-plugin": "^3.0.0",
 </span><span class="token prefix unchanged"> </span><span class="token line">    "html-webpack-plugin": "^4.5.0",
 </span><span class="token prefix unchanged"> </span><span class="token line">    "webpack": "^5.4.0",
 </span><span class="token prefix unchanged"> </span><span class="token line">    "webpack-cli": "^4.2.0",
@@ -934,7 +906,6 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  }
 </span><span class="token prefix unchanged"> </span><span class="token line">}</span></span></code></pre> <p>Now we can run <code>npm start</code> from the command line and we will see our browser automatically loading up our page. If you now change any of the source files and save them, the web server will automatically reload after the code has been compiled. Give it a try!</p> <p>The <code>webpack-dev-server</code> comes with many configurable options. Head over to the <a href="/configuration/dev-server">documentation</a> to learn more.</p> <aside class="tip"><h6 class="tip__prefix">tip</h6><p>Now that your server is working, you might want to give <a href="/guides/hot-module-replacement">Hot Module Replacement</a> a try!</p></aside> <h3 id="using-webpack-dev-middleware">Using webpack-dev-middleware<a href="#using-webpack-dev-middleware" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p><code>webpack-dev-middleware</code> is a wrapper that will emit files processed by webpack to a server. This is used in <code>webpack-dev-server</code> internally, however it's available as a separate package to allow more custom setups if desired. We'll take a look at an example that combines <code>webpack-dev-middleware</code> with an express server.</p> <p>Let's install <code>express</code> and <code>webpack-dev-middleware</code> so we can get started:</p> <pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev express webpack-dev-middleware</code></pre> <p>Now we need to make some adjustments to our webpack configuration file in order to make sure the middleware will function correctly:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">const path = require('path');
 </span><span class="token prefix unchanged"> </span><span class="token line">const HtmlWebpackPlugin = require('html-webpack-plugin');
-</span><span class="token prefix unchanged"> </span><span class="token line">const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">  mode: 'development',
@@ -947,7 +918,6 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">    contentBase: './dist',
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
 </span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
 </span><span class="token prefix unchanged"> </span><span class="token line">      title: 'Development',
 </span><span class="token prefix unchanged"> </span><span class="token line">    }),
@@ -955,6 +925,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span><span class="token prefix unchanged"> </span><span class="token line">  output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">    filename: '[name].bundle.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">    path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">    clean: true,
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">    publicPath: '/',
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">};</span></span></code></pre> <p>The <code>publicPath</code> will be used within our server script as well in order to make sure files are served correctly on <code>http://localhost:3000</code>. We'll specify the port number later. The next step is setting up our custom <code>express</code> server:</p> <p><strong>project</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
@@ -1000,7 +971,6 @@ app<span class="token punctuation">.</span><span class="token function">listen</
 </span><span class="token prefix unchanged"> </span><span class="token line">  "author": "",
 </span><span class="token prefix unchanged"> </span><span class="token line">  "license": "ISC",
 </span><span class="token prefix unchanged"> </span><span class="token line">  "devDependencies": {
-</span><span class="token prefix unchanged"> </span><span class="token line">    "clean-webpack-plugin": "^3.0.0",
 </span><span class="token prefix unchanged"> </span><span class="token line">    "express": "^4.17.1",
 </span><span class="token prefix unchanged"> </span><span class="token line">    "html-webpack-plugin": "^4.5.0",
 </span><span class="token prefix unchanged"> </span><span class="token line">    "webpack": "^5.4.0",
@@ -1229,14 +1199,11 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 |- /src
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> |- index.js
 </span></span>|- /node_modules</code></pre> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require('path');
-</span><span class="token prefix unchanged"> </span><span class="token line"> const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require('html-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: './src/index.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     // new CleanWebpackPlugin(['dist/*']) for &#x3C; v2 versions of CleanWebpackPlugin
-</span><span class="token prefix unchanged"> </span><span class="token line">     new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">       title: 'Output Management',
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">       title: 'Caching',
@@ -1246,6 +1213,7 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">     filename: 'bundle.js',
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     filename: '[name].[contenthash].js',
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre> <p>Running our build script, <code>npm run build</code>, with this configuration should produce the following output:</p> <pre><code class="hljs language-bash"><span class="token punctuation">..</span>.
                        Asset       Size  Chunks                    Chunk Names
@@ -1256,14 +1224,11 @@ main.7e2c49a622975ebd9b7e.js     <span class="token number">544</span> kB       
 main.205199ab45963f6a62ec.js     <span class="token number">544</span> kB       <span class="token number">0</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>  <span class="token punctuation">[</span>big<span class="token punctuation">]</span>  main
                   index.html  <span class="token number">197</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 <span class="token punctuation">..</span>.</code></pre> <p>This is because webpack includes certain boilerplate, specifically the runtime and manifest, in the entry chunk.</p> <aside class="warning"><h6 class="warning__prefix">warning</h6><p>Output may differ depending on your current webpack version. Newer versions may not have all the same issues with hashing as some older versions, but we still recommend the following steps to be safe.</p></aside> <h2 id="extracting-boilerplate">Extracting Boilerplate<a href="#extracting-boilerplate" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>As we learned in <a href="/guides/code-splitting">code splitting</a>, the <a href="/plugins/split-chunks-plugin/"><code>SplitChunksPlugin</code></a> can be used to split modules out into separate bundles. webpack provides an optimization feature to split runtime code into a separate chunk using the <a href="/configuration/optimization/#optimizationruntimechunk"><code>optimization.runtimeChunk</code></a> option. Set it to <code>single</code> to create a single runtime bundle for all chunks:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require('path');
-</span><span class="token prefix unchanged"> </span><span class="token line"> const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require('html-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: './src/index.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     // new CleanWebpackPlugin(['dist/*']) for &#x3C; v2 versions of CleanWebpackPlugin
-</span><span class="token prefix unchanged"> </span><span class="token line">     new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
 </span><span class="token prefix unchanged"> </span><span class="token line">       title: 'Caching',
 </span><span class="token prefix unchanged"> </span><span class="token line">     }),
@@ -1271,6 +1236,7 @@ main.205199ab45963f6a62ec.js     <span class="token number">544</span> kB       
 </span><span class="token prefix unchanged"> </span><span class="token line">   output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     filename: '[name].[contenthash].js',
 </span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   optimization: {
 </span><span class="token prefix inserted">+</span><span class="token line">     runtimeChunk: 'single',
@@ -1286,14 +1252,11 @@ runtime.cc17ae2a94ec771e9221.js   <span class="token number">1.42</span> KiB    
 <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token punctuation">(</span>webpack<span class="token punctuation">)</span>/buildin/global.js <span class="token number">489</span> bytes <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
 <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> ./src/index.js <span class="token number">309</span> bytes <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token punctuation">[</span>built<span class="token punctuation">]</span>
     + <span class="token number">1</span> hidden module</code></pre> <p>It's also good practice to extract third-party libraries, such as <code>lodash</code> or <code>react</code>, to a separate <code>vendor</code> chunk as they are less likely to change than our local source code. This step will allow clients to request even less from the server to stay up to date. This can be done by using the <a href="/plugins/split-chunks-plugin/#splitchunkscachegroups"><code>cacheGroups</code></a> option of the <a href="/plugins/split-chunks-plugin/"><code>SplitChunksPlugin</code></a> demonstrated in <a href="/plugins/split-chunks-plugin/#split-chunks-example-2">Example 2 of SplitChunksPlugin</a>. Lets add <code>optimization.splitChunks</code> with <code>cacheGroups</code> with next params and build:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require('path');
-</span><span class="token prefix unchanged"> </span><span class="token line"> const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require('html-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: './src/index.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     // new CleanWebpackPlugin(['dist/*']) for &#x3C; v2 versions of CleanWebpackPlugin
-</span><span class="token prefix unchanged"> </span><span class="token line">     new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
 </span><span class="token prefix unchanged"> </span><span class="token line">       title: 'Caching',
 </span><span class="token prefix unchanged"> </span><span class="token line">     }),
@@ -1301,6 +1264,7 @@ runtime.cc17ae2a94ec771e9221.js   <span class="token number">1.42</span> KiB    
 </span><span class="token prefix unchanged"> </span><span class="token line">   output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     filename: '[name].[contenthash].js',
 </span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line">   optimization: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     runtimeChunk: 'single',
@@ -1349,14 +1313,11 @@ vendors.a42c3ca0d742766d7a28.js   <span class="token number">69.4</span> KiB    
     main.b746e3eb72875af2caa9.js    <span class="token number">1.22</span> kB       <span class="token number">2</span>  <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>         main
                       index.html  <span class="token number">352</span> bytes          <span class="token punctuation">[</span>emitted<span class="token punctuation">]</span>
 <span class="token punctuation">..</span>.</code></pre> <p>... we can see that all three have. This is because each <a href="/api/module-variables/#moduleid-commonjs"><code>module.id</code></a> is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. So, to recap:</p> <ul> <li>The <code>main</code> bundle changed because of its new content.</li> <li>The <code>vendor</code> bundle changed because its <code>module.id</code> was changed.</li> <li>And, the <code>runtime</code> bundle changed because it now contains a reference to a new module.</li> </ul> <p>The first and last are expected, it's the <code>vendor</code> hash we want to fix. Let's use <a href="/configuration/optimization/#optimizationmoduleids"><code>optimization.moduleIds</code></a> with <code>'deterministic'</code> option:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require('path');
-</span><span class="token prefix unchanged"> </span><span class="token line"> const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require('html-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: './src/index.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     // new CleanWebpackPlugin(['dist/*']) for &#x3C; v2 versions of CleanWebpackPlugin
-</span><span class="token prefix unchanged"> </span><span class="token line">     new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
 </span><span class="token prefix unchanged"> </span><span class="token line">       title: 'Caching',
 </span><span class="token prefix unchanged"> </span><span class="token line">     }),
@@ -1364,6 +1325,7 @@ vendors.a42c3ca0d742766d7a28.js   <span class="token number">69.4</span> KiB    
 </span><span class="token prefix unchanged"> </span><span class="token line">   output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     filename: '[name].[contenthash].js',
 </span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line">   optimization: {
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     moduleIds: 'deterministic',
@@ -1728,7 +1690,6 @@ webpack-cli init my-scaffold</code></pre> <h4 id="running-a-scaffold-from-npm">R
   <span class="token string">'const path = require("path");'</span><span class="token punctuation">,</span>
 <span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre> <h3 id="myobjconfignameoptional"><code>myObj.configName</code>(optional)<a href="#myobjconfignameoptional" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p><code>string</code></p> <p><code>configName</code> allows you to customize the name of your configuration file. For example you can name it <code>webpack.base.js</code> instead of the default <code>webpack.config.js</code>:</p> <pre><code class="hljs language-js"><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>env<span class="token punctuation">.</span>configuration<span class="token punctuation">.</span>dev<span class="token punctuation">.</span>configName <span class="token operator">=</span> <span class="token string">'base'</span><span class="token punctuation">;</span></code></pre> <h1 id="hot-module-replacement">Hot Module Replacement<a href="#hot-module-replacement" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1> <aside class="tip"><h6 class="tip__prefix">tip</h6><p>This guide extends on code examples found in the <a href="/guides/development">Development</a> guide.</p></aside> <p>Hot Module Replacement (or HMR) is one of the most useful features offered by webpack. It allows all kinds of modules to be updated at runtime without the need for a full refresh. This page focuses on <strong>implementation</strong> while the <a href="/concepts/hot-module-replacement">concepts page</a> gives more details on how it works and why it's useful.</p> <aside class="warning"><h6 class="warning__prefix">warning</h6><p><strong>HMR</strong> is not intended for use in production, meaning it should only be used in development. See the <a href="/guides/production">building for production guide</a> for more information.</p></aside> <h2 id="enabling-hmr">Enabling HMR<a href="#enabling-hmr" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>This feature is great for productivity. All we need to do is update our <a href="https://github.com/webpack/webpack-dev-server">webpack-dev-server</a> configuration, and use webpack's built-in HMR plugin. We'll also remove the entry point for <code>print.js</code> as it will now be consumed by the <code>index.js</code> module.</p> <aside class="tip"><h6 class="tip__prefix">tip</h6><p>If you took the route of using <code>webpack-dev-middleware</code> instead of <code>webpack-dev-server</code>, please use the <a href="https://github.com/webpack-contrib/webpack-hot-middleware"><code>webpack-hot-middleware</code></a> package to enable HMR on your custom server or application.</p></aside> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require('path');
 </span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require('html-webpack-plugin');
-</span><span class="token prefix unchanged"> </span><span class="token line"> const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: {
@@ -1741,8 +1702,6 @@ webpack-cli init my-scaffold</code></pre> <h4 id="running-a-scaffold-from-npm">R
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     hot: true,
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     // new CleanWebpackPlugin(['dist/*']) for &#x3C; v2 versions of CleanWebpackPlugin
-</span><span class="token prefix unchanged"> </span><span class="token line">     new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
 </span><span class="token prefix unchanged"> </span><span class="token line">       title: 'Hot Module Replacement',
 </span><span class="token prefix unchanged"> </span><span class="token line">     }),
@@ -1750,6 +1709,7 @@ webpack-cli init my-scaffold</code></pre> <h4 id="running-a-scaffold-from-npm">R
 </span><span class="token prefix unchanged"> </span><span class="token line">   output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     filename: '[name].bundle.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre> <aside class="tip"><h6 class="tip__prefix">tip</h6><p>You can use the CLI to modify the <a href="https://github.com/webpack/webpack-dev-server">webpack-dev-server</a> configuration with the following command: <code>webpack serve --hot=only</code>.</p></aside> <p>Now let's update the <code>index.js</code> file so that when a change inside <code>print.js</code> is detected we tell webpack to accept the updated module.</p> <p><strong>index.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> import _ from 'lodash';
 </span><span class="token prefix unchanged"> </span><span class="token line"> import printMe from './print.js';
@@ -1833,7 +1793,6 @@ server<span class="token punctuation">.</span><span class="token function">liste
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   })
 </span><span class="token prefix unchanged"> </span><span class="token line"> }</span></span></code></pre> <p>This is just one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there (some of which are mentioned below) that will make hot module replacement much easier.</p> <h2 id="hmr-with-stylesheets">HMR with Stylesheets<a href="#hmr-with-stylesheets" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>Hot Module Replacement with CSS is actually fairly straightforward with the help of the <code>style-loader</code>. This loader uses <code>module.hot.accept</code> behind the scenes to patch <code>&#x3C;style></code> tags when CSS dependencies are updated.</p> <p>First let's install both loaders with the following command:</p> <pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev style-loader css-loader</code></pre> <p>Now let's update the configuration file to make use of the loader.</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require('path');
 </span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require('html-webpack-plugin');
-</span><span class="token prefix unchanged"> </span><span class="token line"> const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   entry: {
@@ -1853,8 +1812,6 @@ server<span class="token punctuation">.</span><span class="token function">liste
 </span><span class="token prefix inserted">+</span><span class="token line">     ],
 </span><span class="token prefix inserted">+</span><span class="token line">   },
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     // new CleanWebpackPlugin(['dist/*']) for &#x3C; v2 versions of CleanWebpackPlugin
-</span><span class="token prefix unchanged"> </span><span class="token line">     new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
 </span><span class="token prefix unchanged"> </span><span class="token line">       title: 'Hot Module Replacement',
 </span><span class="token prefix unchanged"> </span><span class="token line">     }),
@@ -1862,6 +1819,7 @@ server<span class="token punctuation">.</span><span class="token function">liste
 </span><span class="token prefix unchanged"> </span><span class="token line">   output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     filename: '[name].bundle.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre> <p>Hot loading stylesheets is as easy as importing them into a module:</p> <p><strong>project</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> webpack-demo
 </span><span class="token prefix unchanged"> </span><span class="token line"> | - package.json
@@ -2054,7 +2012,6 @@ module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   |- index.js
 </span><span class="token prefix unchanged"> </span><span class="token line">   |- math.js
 </span><span class="token prefix unchanged"> </span><span class="token line"> |- /node_modules</span></span></code></pre> <p><strong>webpack.common.js</strong></p> <pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> const path = require('path');
-</span><span class="token prefix inserted">+</span><span class="token line"> const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span><span class="token prefix inserted">+</span><span class="token line"> const HtmlWebpackPlugin = require('html-webpack-plugin');
 </span><span class="token prefix inserted">+</span><span class="token line">
 </span><span class="token prefix inserted">+</span><span class="token line"> module.exports = {
@@ -2062,8 +2019,6 @@ module.exports = {
 </span><span class="token prefix inserted">+</span><span class="token line">     app: './src/index.js',
 </span><span class="token prefix inserted">+</span><span class="token line">   },
 </span><span class="token prefix inserted">+</span><span class="token line">   plugins: [
-</span><span class="token prefix inserted">+</span><span class="token line">     // new CleanWebpackPlugin(['dist/*']) for &#x3C; v2 versions of CleanWebpackPlugin
-</span><span class="token prefix inserted">+</span><span class="token line">     new CleanWebpackPlugin(),
 </span><span class="token prefix inserted">+</span><span class="token line">     new HtmlWebpackPlugin({
 </span><span class="token prefix inserted">+</span><span class="token line">       title: 'Production',
 </span><span class="token prefix inserted">+</span><span class="token line">     }),
@@ -2071,6 +2026,7 @@ module.exports = {
 </span><span class="token prefix inserted">+</span><span class="token line">   output: {
 </span><span class="token prefix inserted">+</span><span class="token line">     filename: '[name].bundle.js',
 </span><span class="token prefix inserted">+</span><span class="token line">     path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix inserted">+</span><span class="token line">     clean: true,
 </span><span class="token prefix inserted">+</span><span class="token line">   },
 </span><span class="token prefix inserted">+</span><span class="token line"> };</span></span></code></pre> <p><strong>webpack.dev.js</strong></p> <pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> const { merge } = require('webpack-merge');
 </span><span class="token prefix inserted">+</span><span class="token line"> const common = require('./webpack.common.js');
@@ -2101,7 +2057,6 @@ module.exports = {
 </span><span class="token prefix unchanged"> </span><span class="token line">   "author": "",
 </span><span class="token prefix unchanged"> </span><span class="token line">   "license": "ISC",
 </span><span class="token prefix unchanged"> </span><span class="token line">   "devDependencies": {
-</span><span class="token prefix unchanged"> </span><span class="token line">     "clean-webpack-plugin": "^0.1.17",
 </span><span class="token prefix unchanged"> </span><span class="token line">     "css-loader": "^0.28.4",
 </span><span class="token prefix unchanged"> </span><span class="token line">     "csv-loader": "^2.1.1",
 </span><span class="token prefix unchanged"> </span><span class="token line">     "express": "^4.15.3",
@@ -2590,7 +2545,6 @@ Available on:
   http://xxx.xxx.x.x:8080
 Hit CTRL-C to stop the server</code></pre> <p>If you open your browser to <code>http://localhost:8080</code> (i.e. <code>http://127.0.0.1</code>) you should see your webpack application being served from the <code>dist</code> directory. If you stop the server and refresh, the webpack application is no longer available.</p> <p>This is what we aim to change. Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.</p> <h2 id="adding-workbox">Adding Workbox<a href="#adding-workbox" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>Let's add the Workbox webpack plugin and adjust the <code>webpack.config.js</code> file:</p> <pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> workbox-webpack-plugin --save-dev</code></pre> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require('path');
 </span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require('html-webpack-plugin');
-</span><span class="token prefix unchanged"> </span><span class="token line"> const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> const WorkboxPlugin = require('workbox-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
@@ -2599,8 +2553,6 @@ Hit CTRL-C to stop the server</code></pre> <p>If you open your browser to <code>
 </span><span class="token prefix unchanged"> </span><span class="token line">     print: './src/print.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     // new CleanWebpackPlugin(['dist/*']) for &#x3C; v2 versions of CleanWebpackPlugin
-</span><span class="token prefix unchanged"> </span><span class="token line">     new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">       title: 'Output Management',
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">       title: 'Progressive Web Application',
@@ -2615,6 +2567,7 @@ Hit CTRL-C to stop the server</code></pre> <p>If you open your browser to <code>
 </span><span class="token prefix unchanged"> </span><span class="token line">   output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     filename: '[name].bundle.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre> <p>With that in place, let's see what happens when we do an <code>npm run build</code>:</p> <pre><code class="hljs language-bash"><span class="token punctuation">..</span>.
                   Asset       Size  Chunks                    Chunk Names

@@ -15,7 +15,6 @@ Available on:
   http://xxx.xxx.x.x:8080
 Hit CTRL-C to stop the server</code></pre> <p>If you open your browser to <code>http://localhost:8080</code> (i.e. <code>http://127.0.0.1</code>) you should see your webpack application being served from the <code>dist</code> directory. If you stop the server and refresh, the webpack application is no longer available.</p> <p>This is what we aim to change. Once we reach the end of this module we should be able to stop the server, hit refresh and still see our application.</p> <h2 id="adding-workbox">Adding Workbox<a href="#adding-workbox" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>Let's add the Workbox webpack plugin and adjust the <code>webpack.config.js</code> file:</p> <pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> workbox-webpack-plugin --save-dev</code></pre> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require('path');
 </span><span class="token prefix unchanged"> </span><span class="token line"> const HtmlWebpackPlugin = require('html-webpack-plugin');
-</span><span class="token prefix unchanged"> </span><span class="token line"> const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> const WorkboxPlugin = require('workbox-webpack-plugin');
 </span></span>
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> module.exports = {
@@ -24,8 +23,6 @@ Hit CTRL-C to stop the server</code></pre> <p>If you open your browser to <code>
 </span><span class="token prefix unchanged"> </span><span class="token line">     print: './src/print.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
-</span><span class="token prefix unchanged"> </span><span class="token line">     // new CleanWebpackPlugin(['dist/*']) for &#x3C; v2 versions of CleanWebpackPlugin
-</span><span class="token prefix unchanged"> </span><span class="token line">     new CleanWebpackPlugin(),
 </span><span class="token prefix unchanged"> </span><span class="token line">     new HtmlWebpackPlugin({
 </span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">       title: 'Output Management',
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">       title: 'Progressive Web Application',
@@ -40,6 +37,7 @@ Hit CTRL-C to stop the server</code></pre> <p>If you open your browser to <code>
 </span><span class="token prefix unchanged"> </span><span class="token line">   output: {
 </span><span class="token prefix unchanged"> </span><span class="token line">     filename: '[name].bundle.js',
 </span><span class="token prefix unchanged"> </span><span class="token line">     path: path.resolve(__dirname, 'dist'),
+</span><span class="token prefix unchanged"> </span><span class="token line">     clean: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line"> };</span></span></code></pre> <p>With that in place, let's see what happens when we do an <code>npm run build</code>:</p> <pre><code class="hljs language-bash"><span class="token punctuation">..</span>.
                   Asset       Size  Chunks                    Chunk Names
