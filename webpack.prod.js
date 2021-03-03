@@ -24,7 +24,6 @@ module.exports = (env) =>
     },
     output: {
       filename: '[name].[contenthash].js',
-      clean: true,
     },
     optimization: {
       splitChunks: {
