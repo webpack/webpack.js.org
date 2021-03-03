@@ -24,34 +24,34 @@ related:
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
 ---
 
-Originally, chunks (and modules imported inside them) were connected by a parent-child relationship in the internal webpack graph. The `CommonsChunkPlugin` was used to avoid duplicated dependencies across them, but further optimizations were not possible.
+最初，chunks（以及内部导入的模块）是通过内部 webpack 图谱中的父子关系关联的。`CommonsChunkPlugin` 曾被用来避免他们之间的重复依赖，但是不可能再做进一步的优化。
 
-Since webpack v4, the `CommonsChunkPlugin` was removed in favor of `optimization.splitChunks`.
+从 webpack v4 开始，移除了 `CommonsChunkPlugin`，取而代之的是 `optimization.splitChunks`。
 
-## Defaults {#defaults}
+## 默认值 {#defaults}
 
-Out of the box `SplitChunksPlugin` should work well for most users.
+开箱即用的 `SplitChunksPlugin` 对于大部分用户来说非常友好。
 
-By default it only affects on-demand chunks, because changing initial chunks would affect the script tags the HTML file should include to run the project.
+默认情况下，它只会影响到按需加载的 chunks，因为修改 initial chunks 会影响到项目的 HTML 文件中的脚本标签。
 
-webpack will automatically split chunks based on these conditions:
+webpack 将根据以下条件自动拆分 chunks：
 
-- New chunk can be shared OR modules are from the `node_modules` folder
-- New chunk would be bigger than 20kb (before min+gz)
-- Maximum number of parallel requests when loading chunks on demand would be lower or equal to 30
-- Maximum number of parallel requests at initial page load would be lower or equal to 30
+- 新的 chunk 可以被共享，或者模块来自于 `node_modules` 文件夹
+- 新的 chunk 体积大于 20kb（在进行 min+gz 之前的体积）
+- 当按需加载 chunks 时，并行请求的最大数量小于或等于 30
+- 当加载初始化页面时，并发请求的最大数量小于或等于 30
 
-When trying to fulfill the last two conditions, bigger chunks are preferred.
+当尝试满足最后两个条件时，最好使用较大的 chunks。
 
-## Configuration {#configuration}
+## 配置 {#configuration}
 
-webpack provides a set of options for developers that want more control over this functionality.
+webpack 为希望对该功能进行更多控制的开发者提供了一组选项。
 
-W> The default configuration was chosen to fit web performance best practices, but the optimal strategy for your project might differ. If you're changing the configuration, you should measure the impact of your changes to ensure there's a real benefit.
+W> 选择了默认配置为了符合 Web 性能最佳实践，但是项目的最佳策略可能有所不同。如果要更改配置，则应评估所做更改的影响，以确保有真正的收益。
 
 ## `optimization.splitChunks` {#optimizationsplitchunks}
 
-This configuration object represents the default behavior of the `SplitChunksPlugin`.
+下面这个配置对象代表 `SplitChunksPlugin` 的默认行为。
 
 **webpack.config.js**
 
@@ -85,21 +85,21 @@ module.exports = {
 };
 ```
 
-W> When files paths are processed by webpack, they always contain `/` on Unix systems and `\` on Windows. That's why using `[\\/]` in `{cacheGroup}.test` fields is necessary to represent a path separator. `/` or `\` in `{cacheGroup}.test` will cause issues when used cross-platform.
+W> 当 webpack 处理文件路径时，它们始终包含 Unix 系统中的 `/` 和 Windows 系统中的 `\`。这就是为什么在 `{cacheGroup}.test` 字段中使用 `[\\/]` 来表示路径分隔符的原因。`{cacheGroup}.test` 中的 `/` 或 `\` 会在跨平台使用时产生问题。
 
-W> Since webpack 5, passing an entry name to `{cacheGroup}.test` and using a name of an existing chunk for `{cacheGroup}.name` is no longer allowed.
+W> 从 webpack 5 开始，不再允许将 entry 名称传递给 `{cacheGroup}.test` 或者为 `{cacheGroup}.name` 使用现有的 chunk 的名称。
 
 ### `splitChunks.automaticNameDelimiter` {#splitchunksautomaticnamedelimiter}
 
 `string = '~'`
 
-By default webpack will generate names using origin and name of the chunk (e.g. `vendors~main.js`). This option lets you specify the delimiter to use for the generated names.
+默认情况下，webpack 将使用 chunk 的来源和名称生成名称（例如 `vendors~main.js`）。此选项使你可以指定用于生成名称的分隔符。
 
 ### `splitChunks.chunks` {#splitchunkschunks}
 
 `string = 'async'` `function (chunk)`
 
-This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
+这表明将选择哪些 chunk 进行优化。当提供一个字符串，有效值为 `all`，`async` 和 `initial`。设置为 `all` 可能特别强大，因为这意味着 chunk 可以在异步和非异步 chunk 之间共享。
 
 **webpack.config.js**
 
@@ -115,7 +115,7 @@ module.exports = {
 };
 ```
 
-Alternatively, you may provide a function for more control. The return value will indicate whether to include each chunk.
+或者，你也可以提供一个函数去做更多的控制。这个函数的返回值将决定是否包含每一个 chunk。
 
 ```js
 module.exports = {
@@ -131,19 +131,19 @@ module.exports = {
 };
 ```
 
-T> You can combine this configuration with the [HtmlWebpackPlugin](/plugins/html-webpack-plugin/). It will inject all the generated vendor chunks for you.
+T> 你可以将此配置与 [HtmlWebpackPlugin](/plugins/html-webpack-plugin/) 结合使用。它将为你注入所有生成的 vendor chunks。
 
 ### `splitChunks.maxAsyncRequests` {#splitchunksmaxasyncrequests}
 
 `number = 30`
 
-Maximum number of parallel requests when on-demand loading.
+按需加载时的最大并行请求数。
 
 ### `splitChunks.maxInitialRequests` {#splitchunksmaxinitialrequests}
 
 `number = 30`
 
-Maximum number of parallel requests at an entry point.
+入口点的最大并行请求数。
 
 ### `splitChunks.defaultSizeTypes` {#splitchunksdefaultsizetypes}
 
@@ -155,19 +155,19 @@ Sets the size types which are used when a number is used for sizes.
 
 `number = 1`
 
-The minimum times must a module be shared among chunks before splitting.
+拆分前必须共享模块的最小 chunks 数。
 
 ### `splitChunks.hidePathInfo`
 
 `boolean`
 
-Prevents exposing path info when creating names for parts splitted by maxSize.
+为由 maxSize 分割的部分创建名称时，阻止公开路径信息。
 
 ### `splitChunks.minSize` {#splitchunksminsize}
 
 `number = 20000`
 
-Minimum size, in bytes, for a chunk to be generated.
+生成 chunk 的最小体积（以 bytes 为单位）。
 
 ### `splitChunks.enforceSizeThreshold` {#splitchunksenforcesizethreshold}
 
@@ -175,7 +175,7 @@ Minimum size, in bytes, for a chunk to be generated.
 
 `number = 50000`
 
-Size threshold at which splitting is enforced and other restrictions (minRemainingSize, maxAsyncRequests, maxInitialRequests) are ignored.
+强制执行拆分的体积阈值和其他限制（minRemainingSize，maxAsyncRequests，maxInitialRequests）将被忽略。
 
 ### `splitChunks.minRemainingSize` {#splitchunksminremainingsize}
 
@@ -183,9 +183,9 @@ Size threshold at which splitting is enforced and other restrictions (minRemaini
 
 `number = 0`
 
-`splitChunks.minRemainingSize` option was introduced in webpack 5 to avoid zero sized modules by ensuring that the minimum size of the chunk which remains after splitting is above a limit. Defaults to `0` in ['development' mode](/configuration/mode/#mode-development). For other cases `splitChunks.minRemainingSize` defaults to the value of `splitChunks.minSize` so it doesn't need to be specified manually except for the rare cases where deep control is required.
+在 webpack 5 中引入了 `splitChunks.minRemainingSize` 选项，通过确保拆分后剩余的最小 chunk 体积超过限制来避免大小为零的模块。 ['development' 模式](/configuration/mode/#mode-development) 中默认为  `0`。对于其他情况，`splitChunks.minRemainingSize` 默认为 `splitChunks.minSize` 的值，因此除需要深度控制的极少数情况外，不需要手动指定它。
 
-W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remaining.
+W> `splitChunks.minRemainingSize` 仅在剩余单个 chunk 时生效。
 
 ### `splitChunks.layer` {#splitchunkslayer}
 
@@ -193,52 +193,52 @@ W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remai
 
 `RegExp` `string` `function`
 
-Assign modules to a cache group by module layer.
+按模块层将模块分配给缓存组。
 
 ### `splitChunks.maxSize` {#splitchunksmaxsize}
 
 `number = 0`
 
-Using `maxSize` (either globally `optimization.splitChunks.maxSize` per cache group `optimization.splitChunks.cacheGroups[x].maxSize` or for the fallback cache group `optimization.splitChunks.fallbackCacheGroup.maxSize`) tells webpack to try to split chunks bigger than `maxSize` bytes into smaller parts. Parts will be at least `minSize` (next to `maxSize`) in size.
-The algorithm is deterministic and changes to the modules will only have local impact. So that it is usable when using long term caching and doesn't require records. `maxSize` is only a hint and could be violated when modules are bigger than `maxSize` or splitting would violate `minSize`.
+使用 `maxSize`（每个缓存组 `optimization.splitChunks.cacheGroups[x].maxSize` 全局使用 `optimization.splitChunks.maxSize` 或对后备缓存组 `optimization.splitChunks.fallbackCacheGroup.maxSize` 使用）告诉 webpack 尝试将大于 `maxSize` 个字节的 chunk 分割成较小的部分。 这些较小的部分在体积上至少为 `minSize`（仅次于 `maxSize`）。
+该算法是确定性的，对模块的更改只会产生局部影响。这样，在使用长期缓存时就可以使用它并且不需要记录。`maxSize` 只是一个提示，当模块大于 `maxSize` 或者拆分不符合 `minSize` 时可能会被违反。
 
-When the chunk has a name already, each part will get a new name derived from that name. Depending on the value of `optimization.splitChunks.hidePathInfo` it will add a key derived from the first module name or a hash of it.
+当 chunk 已经有一个名称时，每个部分将获得一个从该名称派生的新名称。 根据 `optimization.splitChunks.hidePathInfo` 的值，它将添加一个从第一个模块名称或其哈希值派生的密钥。
 
-`maxSize` option is intended to be used with HTTP/2 and long term caching. It increases the request count for better caching. It could also be used to decrease the file size for faster rebuilding.
+`maxSize` 选项旨在与 HTTP/2 和长期缓存一起使用。它增加了请求数量以实现更好的缓存。它还可以用于减小文件大小，以加快二次构建速度。
 
-T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Actual priority is `maxInitialRequest/maxAsyncRequests < maxSize < minSize`.
+T> `maxSize` 比 `maxInitialRequest/maxAsyncRequests` 具有更高的优先级。实际优先级是 `maxInitialRequest/maxAsyncRequests < maxSize < minSize`。
 
-T> Setting the value for `maxSize` sets the value for both `maxAsyncSize` and `maxInitialSize`.
+T> 设置 `maxSize` 的值会同时设置 `maxAsyncSize` 和 `maxInitialSize` 的值。
 
 ### `splitChunks.maxAsyncSize` {#splitchunksmaxasyncsize}
 
 `number`
 
-Like `maxSize`, `maxAsyncSize` can be applied globally (`splitChunks.maxAsyncSize`), to cacheGroups (`splitChunks.cacheGroups.{cacheGroup}.maxAsyncSize`), or to the fallback cache group (`splitChunks.fallbackCacheGroup.maxAsyncSize`).
+像 `maxSize` 一样，`maxAsyncSize` 可以为 cacheGroups（`splitChunks.cacheGroups.{cacheGroup}.maxAsyncSize`）或 fallback 缓存组（`splitChunks.fallbackCacheGroup.maxAsyncSize` ）全局应用（`splitChunks.maxAsyncSize`）
 
-The difference between `maxAsyncSize` and `maxSize` is that `maxAsyncSize` will only affect on-demand loading chunks.
+`maxAsyncSize` 和 `maxSize` 的区别在于 `maxAsyncSize` 仅会影响按需加载 chunk。
 
 ### `splitChunks.maxInitialSize` {#splitchunksmaxinitialsize}
 
 `number`
 
-Like `maxSize`, `maxInitialSize` can be applied globally (`splitChunks.maxInitialSize`), to cacheGroups (`splitChunks.cacheGroups.{cacheGroup}.maxInitialSize`), or to the fallback cache group (`splitChunks.fallbackCacheGroup.maxInitialSize`).
+像 `maxSize` 一样，`maxInitialSize` 可以对 cacheGroups（`splitChunks.cacheGroups.{cacheGroup}.maxInitialSize`）或 fallback 缓存组（`splitChunks.fallbackCacheGroup.maxInitialSize`）全局应用（splitChunks.maxInitialSize）。
 
-The difference between `maxInitialSize` and `maxSize` is that `maxInitialSize` will only affect initial load chunks.
+`maxInitialSize` 和 `maxSize` 的区别在于 `maxInitialSize` 仅会影响初始加载 chunks。
 
 ### `splitChunks.name` {#splitchunksname}
 
 `boolean = false` `function (module, chunks, cacheGroupKey) => string` `string`
 
-Also available for each cacheGroup: `splitChunks.cacheGroups.{cacheGroup}.name`.
+每个 cacheGroup 也可以使用：`splitChunks.cacheGroups.{cacheGroup}.name`。
 
-The name of the split chunk. Providing `false` will keep the same name of the chunks so it doesn't change names unnecessarily. It is the recommended value for production builds.
+拆分 chunk 的名称。设为 `false` 将保持 chunk 的相同名称，因此不会不必要地更改名称。这是生产环境下构建的建议值。
 
-Providing a string or a function allows you to use a custom name. Specifying either a string or a function that always returns the same string will merge all common modules and vendors into a single chunk. This might lead to bigger initial downloads and slow down page loads.
+提供字符串或函数使你可以使用自定义名称。指定字符串或始终返回相同字符串的函数会将所有常见模块和 vendor 合并为一个 chunk。这可能会导致更大的初始下载量并减慢页面加载速度。
 
-If you choose to specify a function, you may find the `chunk.name` and `chunk.hash` properties (where `chunk` is an element of the `chunks` array) particularly useful in choosing a name for your chunk.
+如果你选择指定一个函数，则可能会发现 `chunk.name` 和 `chunk.hash` 属性（其中 `chunk` 是 `chunks` 数组的一个元素）在选择 chunk 名时特别有用。
 
-If the `splitChunks.name` matches an [entry point](/configuration/entry-context/#entry) name, the entry point will be removed.
+如果 `splitChunks.name` 与 [entry point](/configuration/entry-context/#entry) 名称匹配，entry point 将被删除。
 
 **main.js**
 
@@ -275,9 +275,9 @@ module.exports = {
 };
 ```
 
-Running webpack with following `splitChunks` configuration would also output a chunk of the group common with next name: `commons-main-lodash.js.e7519d2bb8777058fa27.js` (hash given as an example of real world output).
+使用以下 `splitChunks` 配置来运行 webpack 也会输出一组公用组，其下一个名称为：`commons-main-lodash.js.e7519d2bb8777058fa27.js`（以哈希方式作为真实世界输出示例）。
 
-W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
+W> 在为不同的拆分 chunk 分配相同的名称时，所有 vendor 模块都放在一个共享的 chunk 中，尽管不建议这样做，因为这可能会导致下载更多代码。
 
 ### `splitChunks.usedExports` {#splitchunksusedexports}
 
@@ -290,7 +290,7 @@ W> When assigning equal names to different split chunks, all vendor modules are 
 
 ### `splitChunks.cacheGroups` {#splitchunkscachegroups}
 
-Cache groups can inherit and/or override any options from `splitChunks.*`; but `test`, `priority` and `reuseExistingChunk` can only be configured on cache group level. To disable any of the default cache groups, set them to `false`.
+缓存组可以继承和/或覆盖来自 `splitChunks.*` 的任何选项。但是 `test`、`priority` 和 `reuseExistingChunk` 只能在缓存组级别上进行配置。将它们设置为 `false`以禁用任何默认缓存组。
 
 **webpack.config.js**
 
@@ -311,13 +311,13 @@ module.exports = {
 
 `number = -20`
 
-A module can belong to multiple cache groups. The optimization will prefer the cache group with a higher `priority`. The default groups have a negative priority to allow custom groups to take higher priority (default value is `0` for custom groups).
+一个模块可以属于多个缓存组。优化将优先考虑具有更高 `priority`（优先级）的缓存组。默认组的优先级为负，以允许自定义组获得更高的优先级（自定义组的默认值为 `0`）。
 
 #### `splitChunks.cacheGroups.{cacheGroup}.reuseExistingChunk` {#splitchunkscachegroupscachegroupreuseexistingchunk}
 
 `boolean = true`
 
-If the current chunk contains modules already split out from the main bundle, it will be reused instead of a new one being generated. This can impact the resulting file name of the chunk.
+如果当前 chunk 包含已从主 bundle 中拆分出的模块，则它将被重用，而不是生成新的模块。这可能会影响 chunk 的结果文件名。
 
 **webpack.config.js**
 
@@ -340,7 +340,7 @@ module.exports = {
 
 `function` `RegExp` `string`
 
-Allows to assign modules to a cache group by module type.
+允许按模块类型将模块分配给缓存组。
 
 **webpack.config.js**
 
@@ -365,9 +365,9 @@ module.exports = {
 
 `function (module, chunk) => boolean` `RegExp` `string`
 
-Controls which modules are selected by this cache group. Omitting it selects all modules. It can match the absolute module resource path or chunk names. When a chunk name is matched, all modules in the chunk are selected.
+控制此缓存组选择的模块。省略它会选择所有模块。它可以匹配绝对模块资源路径或 chunk 名称。匹配 chunk 名称时，将选择 chunk 中的所有模块。
 
-Providing a function to`{cacheGroup}.test`:
+为 `{cacheGroup}.test` 提供一个函数：
 
 **webpack.config.js**
 
@@ -400,9 +400,9 @@ module.exports = {
 };
 ```
 
-In order to see what information is available in `module` and `chunks` objects, you can put `debugger;` statement in the callback. Then [run your webpack build in debug mode](/contribute/debugging/#devtools) to inspect the parameters in Chromium DevTools.
+为了查看 `module` and `chunks` 对象中可用的信息，你可以在回调函数中放入 `debugger;` 语句。然后 [以调试模式运行 webpack 构建](/contribute/debugging/#devtools) 检查 Chromium DevTools 中的参数。
 
-Providing a `RegExp` to `{cacheGroup}.test`:
+向 `{cacheGroup}.test` 提供 `RegExp`：
 
 **webpack.config.js**
 
@@ -426,10 +426,10 @@ module.exports = {
 
 `string` `function (pathData, assetInfo) => string`
 
-Allows to override the filename when and only when it's an initial chunk.
-All placeholders available in [`output.filename`](/configuration/output/#outputfilename) are also available here.
+仅在初始 chunk 时才允许覆盖文件名。
+也可以在 [`output.filename`](/configuration/output/#outputfilename) 中使用所有占位符。
 
-W> This option can also be set globally in `splitChunks.filename`, but this isn't recommended and will likely lead to an error if [`splitChunks.chunks`](#splitchunkschunks) is not set to `'initial'`. Avoid setting it globally.
+W> 也可以在 `splitChunks.filename` 中全局设置此选项，但是不建议这样做，如果 [`splitChunks.chunks`](#splitchunkschunks) 未设置为 `'initial'`，则可能会导致错误。避免全局设置。
 
 **webpack.config.js**
 
@@ -448,7 +448,7 @@ module.exports = {
 };
 ```
 
-And as a function:
+若为函数，则：
 
 **webpack.config.js**
 
@@ -470,7 +470,7 @@ module.exports = {
 };
 ```
 
-It is possible to create a folder structure by providing path prefixing the filename: `'js/vendor/bundle.js'`.
+通过提供以文件名开头的路径 `'js/vendor/bundle.js'`，可以创建文件夹结构。
 
 **webpack.config.js**
 
@@ -493,7 +493,7 @@ module.exports = {
 
 `boolean = false`
 
-Tells webpack to ignore [`splitChunks.minSize`](#splitchunksminsize), [`splitChunks.minChunks`](#splitchunksminchunks), [`splitChunks.maxAsyncRequests`](#splitchunksmaxasyncrequests) and [`splitChunks.maxInitialRequests`](#splitchunksmaxinitialrequests) options and always create chunks for this cache group.
+告诉 webpack 忽略 [`splitChunks.minSize`](#splitchunksminsize)、[`splitChunks.minChunks`](#splitchunksminchunks)、[`splitChunks.maxAsyncRequests`](#splitchunksmaxasyncrequests) 和 [`splitChunks.maxInitialRequests`](#splitchunksmaxinitialrequests) 选项，并始终为此缓存组创建 chunk。
 
 **webpack.config.js**
 
@@ -516,7 +516,7 @@ module.exports = {
 
 `string`
 
-Sets the hint for chunk id. It will be added to chunk's filename.
+设置 chunk id 的提示。 它将被添加到 chunk 的文件名中。
 
 **webpack.config.js**
 
@@ -552,16 +552,16 @@ import 'react';
 //...
 ```
 
-**Result:** A separate chunk would be created containing `react`. At the import call this chunk is loaded in parallel to the original chunk containing `./a`.
+**结果：** 将创建一个单独的包含 `react` 的 chunk。在导入调用中，此 chunk 并行加载到包含 `./a` 的原始 chunk 中。
 
-Why:
+为什么：
 
-- Condition 1: The chunk contains modules from `node_modules`
-- Condition 2: `react` is bigger than 30kb
-- Condition 3: Number of parallel requests at the import call is 2
-- Condition 4: Doesn't affect request at initial page load
+- 条件1：chunk 包含来自 `node_modules` 的模块
+- 条件2：`react` 大于 30kb
+- 条件3：导入调用中的并行请求数为 2
+- 条件4：在初始页面加载时不影响请求
 
-What's the reasoning behind this? `react` probably won't change as often as your application code. By moving it into a separate chunk this chunk can be cached separately from your app code (assuming you are using chunkhash, records, Cache-Control or other long term cache approach).
+这背后的原因是什么？`react` 可能不会像你的应用程序代码那样频繁地更改。通过将其移动到单独的 chunk 中，可以将该 chunk 与应用程序代码分开进行缓存（假设你使用的是 chunkhash，records，Cache-Control 或其他长期缓存方法）。
 
 ### Defaults: Example 2 {#defaults-example-2}
 
@@ -588,20 +588,20 @@ import './more-helpers'; // more-helpers is also 40kb in size
 //...
 ```
 
-**Result:** A separate chunk would be created containing `./helpers` and all dependencies of it. At the import calls this chunk is loaded in parallel to the original chunks.
+**结果：** 将创建一个单独的 chunk，其中包含 `./helpers` 及其所有依赖项。在导入调用时，此 chunk 与原始 chunks 并行加载。
 
-Why:
+为什么：
 
-- Condition 1: The chunk is shared between both import calls
-- Condition 2: `helpers` is bigger than 30kb
-- Condition 3: Number of parallel requests at the import calls is 2
-- Condition 4: Doesn't affect request at initial page load
+- 条件1：chunk 在两个导入调用之间共享
+- 条件2：`helpers` 大于 30kb
+- 条件3：导入调用中的并行请求数为 2
+- 条件4：在初始页面加载时不影响请求
 
-Putting the content of `helpers` into each chunk will result into its code being downloaded twice. By using a separate chunk this will only happen once. We pay the cost of an additional request, which could be considered a tradeoff. That's why there is a minimum size of 30kb.
+将 `helpers` 的内容放入每个 chunk 中将导致其代码被下载两次。通过使用单独的块，这只会发生一次。我们会进行额外的请求，这可以视为一种折衷。这就是为什么最小体积为 30kb 的原因。
 
 ### Split Chunks: Example 1 {#split-chunks-example-1}
 
-Create a `commons` chunk, which includes all code shared between entry points.
+创建一个 `commons` chunk，其中包括入口（entry points）之间所有共享的代码。
 
 **webpack.config.js**
 
@@ -622,11 +622,11 @@ module.exports = {
 };
 ```
 
-W> This configuration can enlarge your initial bundles, it is recommended to use dynamic imports when a module is not immediately needed.
+W> 此配置可以扩大你的初始 bundles，建议在不需要立即使用模块时使用动态导入。
 
 ### Split Chunks: Example 2 {#split-chunks-example-2}
 
-Create a `vendors` chunk, which includes all code from `node_modules` in the whole application.
+创建一个 `vendors` chunk，其中包括整个应用程序中 `node_modules` 的所有代码。
 
 **webpack.config.js**
 
@@ -647,11 +647,11 @@ module.exports = {
 };
 ```
 
-W> This might result in a large chunk containing all external packages. It is recommended to only include your core frameworks and utilities and dynamically load the rest of the dependencies.
+W> 这可能会导致包含所有外部程序包的较大 chunk。建议仅包括你的核心框架和实用程序，并动态加载其余依赖项。
 
 ### Split Chunks: Example 3 {#split-chunks-example-3}
 
-Create a `custom vendor` chunk, which contains certain `node_modules` packages matched by `RegExp`.
+创建一个 `custom vendor` chunk，其中包含与 `RegExp` 匹配的某些 `node_modules` 包。
 
 **webpack.config.js**
 
@@ -672,4 +672,4 @@ module.exports = {
 };
 ```
 
-T> This will result in splitting `react` and `react-dom` into a separate chunk. If you're not sure what packages have been included in a chunk you may refer to [Bundle Analysis](/guides/code-splitting/#bundle-analysis) section for details.
+T> 这将导致将 `react` 和 `react-dom` 分成一个单独的 chunk。 如果你不确定 chunk 中包含哪些包，请参考 [Bundle Analysis](/guides/code-splitting/#bundle-analysis) 部分以获取详细信息。
