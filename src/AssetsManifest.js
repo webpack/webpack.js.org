@@ -1,6 +1,6 @@
 const { Compilation, sources } = require('webpack');
 
-// collect assets data (vendors.[contenthash].js and index.[contenthash].js) for ssg
+// collect assets data (vendor.[contenthash].js and index.[contenthash].js) for ssg
 class AssetsManifest {
   apply(compiler) {
     let manifest = [];
