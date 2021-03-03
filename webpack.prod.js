@@ -3,6 +3,7 @@ const { merge } = require('webpack-merge');
 const OptimizeCSSAssetsPlugin = require('css-minimizer-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const path = require('path');
+const AssetsManifest = require('./src/AssetsManifest');
 
 // Load Common Configuration
 const common = require('./webpack.common.js');
@@ -18,11 +19,12 @@ module.exports = (env) =>
     entry: {
       index: {
         import: './index.jsx',
-        filename: 'index.bundle.js',
+        filename: 'index.[contenthash].js',
       },
     },
     output: {
       filename: '[name].[contenthash].js',
+      clean: true,
     },
     optimization: {
       splitChunks: {
@@ -31,7 +33,7 @@ module.exports = (env) =>
             test: /node_modules/,
             chunks: 'initial',
             enforce: true,
-            filename: 'vendor.bundle.js',
+            filename: 'vendor.[contenthash].js',
           },
         },
       },
@@ -44,5 +46,6 @@ module.exports = (env) =>
         // exclude license
         exclude: [/license\.txt/i],
       }),
+      new AssetsManifest(),
     ],
   });

@@ -14,9 +14,7 @@ import Favicon from './favicon.ico';
 import Logo from './assets/logo-on-white-bg.svg';
 import OgImage from './assets/icon-pwa-512x512.png';
 
-// Define bundles (previously used `Object.values(locals.assets)`) but
-// can't retrieve from there anymore due to separate compilation.
-const bundles = ['/vendor.bundle.js', '/index.bundle.js'];
+import bundles from '../dist/prod-manifest.json';
 
 // As github pages uses trailing slash, we need to provide it to canonicals for consistency
 // between canonical href and final url served by github pages.
