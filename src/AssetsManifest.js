@@ -35,4 +35,4 @@ class AssetsManifest {
     });
   }
 }
-export default AssetsManifest;
+module.exports = AssetsManifest;
