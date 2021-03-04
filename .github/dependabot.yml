@@ -6,3 +6,6 @@ updates:
       interval: "daily"
     labels:
       - "dependencies"
+    allowed_updates:
+      - match:
+        dependency_name: "textlint"
