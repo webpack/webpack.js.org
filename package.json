@@ -141,7 +141,7 @@
     "static-site-generator-webpack-plugin": "^3.4.1",
     "style-loader": "^2.0.0",
     "tap-spot": "^1.1.1",
-    "textlint": "^11.6.3",
+    "textlint": "^11.8.2",
     "textlint-rule-heading": "^1.0.10",
     "unist-util-visit": "^2.0.3",
     "webpack": "^5.24.2",
