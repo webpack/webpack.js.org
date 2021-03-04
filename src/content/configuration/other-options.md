@@ -308,7 +308,24 @@ In watch mode dependencies will invalidate the compiler when:
 1.  the dependency has changed
 2.  a dependency is currently compiling or invalid
 
-Remember that this configuration will not compile until the dependency is done.
+Remember that current configuration will not compile until its dependencies are done.
+
+**webpack.config.js**
+
+```js
+module.exports = [
+  {
+    name: 'client',
+    target: 'web',
+    // …
+  },
+  {
+    name: 'server',
+    target: 'node',
+    dependencies: ['client'],
+  },
+];
+```
 
 ## ignoreWarnings
 
