@@ -30,9 +30,15 @@ npm install sass-loader sass webpack --save-dev
 
 这样可以控制所有依赖项的版本，并选择要使用的 Sass 实现。
 
+<<<<<<< HEAD
 > ℹ️ 我们推荐使用 [Dart Sass](https://github.com/sass/dart-sass)。
 
 > ⚠ [Node Sass](https://github.com/sass/node-sass) 不能与 [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) 特性一起正常工作。
+=======
+> ℹ️ We highly recommend using [Dart Sass](https://github.com/sass/dart-sass).
+
+> ⚠ [Node Sass](https://github.com/sass/node-sass) does not work with [Yarn PnP](https://classic.yarnpkg.com/en/docs/pnp/) feature and doesn't support [@use rule](https://sass-lang.com/documentation/at-rules/use).
+>>>>>>> d3924eaa03657afb1786139c60957a46c11d686f
 
 将 `sass-loader` 、[css-loader](/loaders/css-loader/) 与 [style-loader](/loaders/style-loader/) 进行链式调用，可以将样式以 style 标签的形式插入 DOM 中，或者使用 [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) 将样式输出到独立的文件中。
 
