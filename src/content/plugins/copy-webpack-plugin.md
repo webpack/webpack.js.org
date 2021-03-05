@@ -86,6 +86,7 @@ module.exports = {
 |           [`filter`](#filter)           |     `{Function}`     |                   `undefined`                   | Allows to filter copied assets.                                                                                                                        |
 |           [`toType`](#totype)           |      `{String}`      |                   `undefined`                   | Determinate what is `to` option - directory, file or template.                                                                                         |
 |            [`force`](#force)            |     `{Boolean}`      |                     `false`                     | Overwrites files already in `compilation.assets` (usually added by other plugins/loaders).                                                             |
+|         [`priority`](#priority)         |      `{Number}`      |                       `0`                       | Allows you to specify the copy priority.                                                                                                               |
 |        [`transform`](#transform)        |      `{Object}`      |                   `undefined`                   | Allows to modify the file contents. Enable `transform` caching. You can use `{ transform: {cache: { key: 'my-cache-key' }} }` to invalidate the cache. |
 | [`noErrorOnMissing`](#noerroronmissing) |     `{Boolean}`      |                     `false`                     | Doesn't generate an error on missing file(s).                                                                                                          |
 |             [`info`](#info)             | `{Object\|Function}` |                   `undefined`                   | Allows to add assets info.                                                                                                                             |
@@ -201,7 +202,7 @@ module.exports = {
         },
         {
           from: "**/*",
-          to: "[path][name].[contenthash].[ext]",
+          to: "[path][name].[contenthash][ext]",
         },
       ],
     }),
@@ -372,11 +373,11 @@ Sometimes it is hard to say what is `to`, example `path/to/dir-with.ext`.
 If you want to copy files in directory you need use `dir` option.
 We try to automatically determine the `type` so you most likely do not need this option.
 
-|       Name       |    Type    |   Default   | Description                                                                                        |
-| :--------------: | :--------: | :---------: | :------------------------------------------------------------------------------------------------- |
-|   **`'dir'`**    | `{String}` | `undefined` | If `to` has no extension or ends on `'/'`                                                          |
-|   **`'file'`**   | `{String}` | `undefined` | If `to` is not a directory and is not a template                                                   |
-| **`'template'`** | `{String}` | `undefined` | If `to` contains [a template pattern](https://github.com/webpack-contrib/file-loader#placeholders) |
+|       Name       |    Type    |   Default   | Description                                                                                          |
+| :--------------: | :--------: | :---------: | :--------------------------------------------------------------------------------------------------- |
+|   **`'dir'`**    | `{String}` | `undefined` | If `to` has no extension or ends on `'/'`                                                            |
+|   **`'file'`**   | `{String}` | `undefined` | If `to` is not a directory and is not a template                                                     |
+| **`'template'`** | `{String}` | `undefined` | If `to` contains [a template pattern](/configuration/output/#template-strings) |
 
 ##### `'dir'` {#dir}
 
@@ -429,7 +430,7 @@ module.exports = {
       patterns: [
         {
           from: "src/",
-          to: "dest/[name].[hash].[ext]",
+          to: "dest/[name].[contenthash][ext]",
           toType: "template",
         },
       ],
@@ -456,6 +457,41 @@ module.exports = {
           from: "src/**/*",
           to: "dest/",
           force: true,
+        },
+      ],
+    }),
+  ],
+};
+```
+
+#### `priority` {#priority}
+
+Type: `Number`
+Default: `0`
+
+Allows to specify the priority of copying files with the same destination name.
+Files for patterns with higher priority will be copied later.
+To overwrite files, the [`force`](#force) option must be enabled.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        // Сopied second and will overwrite "dir_2/file.txt"
+        {
+          from: "dir_1/file.txt",
+          to: "newfile.txt",
+          force: true,
+          priority: 10,
+        },
+        // Сopied first
+        {
+          from: "dir_2/file.txt",
+          to: "newfile.txt",
+          priority: 5,
         },
       ],
     }),
@@ -996,7 +1032,7 @@ module.exports = {
       patterns: [
         {
           from: "src/**/*",
-          to: "[name].[ext]",
+          to: "[name][ext]",
         },
       ],
     }),
@@ -1042,6 +1078,29 @@ Result:
 "newdirectory/nestedfile.txt",
 "newdirectory/nested/deep-nested/deepnested.txt",
 "newdirectory/nested/nestedfile.txt",
+```
+
+#### Skip running JavaScript files through a minimizer {#skiprunningjavaScriptfilesthroughaminimizer}
+
+Useful if you need to simply copy `*.js` files to destination "as is" without evaluating and minimizing them using Terser.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        "relative/path/to/file.ext",
+        {
+          from: "**/*",
+          // Terser skip this file for minimization
+          info: { minimized: true },
+        },
+      ],
+    }),
+  ],
+};
 ```
 
 ## Contributing {#contributing}
