@@ -464,10 +464,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-#### `transform` {#transform}
-=======
-#### `priority`
+#### `priority` {#priority}
 
 Type: `Number`
 Default: `0`
@@ -502,8 +499,7 @@ module.exports = {
 };
 ```
 
-#### `transform`
->>>>>>> d3924eaa03657afb1786139c60957a46c11d686f
+#### `transform` {#transform}
 
 Type: `Function|Object`
 Default: `undefined`
@@ -1084,10 +1080,7 @@ Result:
 "newdirectory/nested/nestedfile.txt",
 ```
 
-<<<<<<< HEAD
-## Contributing {#contributing}
-=======
-#### Skip running JavaScript files through a minimizer
+#### Skip running JavaScript files through a minimizer {#skiprunningjavaScriptfilesthroughaminimizer}
 
 Useful if you need to simply copy `*.js` files to destination "as is" without evaluating and minimizing them using Terser.
 
@@ -1110,8 +1103,7 @@ module.exports = {
 };
 ```
 
-## Contributing
->>>>>>> d3924eaa03657afb1786139c60957a46c11d686f
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
