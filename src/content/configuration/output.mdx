@@ -607,28 +607,86 @@ Customize the main hot update filename. `[fullhash]` and `[runtime]` are availab
 
 T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
-## `output.library`
+## output.library
 
-`string` `object`
+Output a library exposing the exports of your entry point.
 
-T> Can be given an `object` since webpack 3.1.0. Effective for `libraryTarget: 'umd'`.
+- Type: `string|string[]|object`
 
-How the value of the `output.library` is used depends on the value of the [`output.libraryTarget`](#outputlibrarytarget) option; please refer to that section for the complete details. Note that the default option for `output.libraryTarget` is `var`, so if the following configuration option is used:
+Let's take a look at a simple example.
 
 **webpack.config.js**
 
-```javascript
+```js
 module.exports = {
-  //...
+  // …
+  entry: './src/index.js',
   output: {
     library: 'MyLibrary',
   },
 };
 ```
 
-The variable `MyLibrary` will be bound with the return value of your entry file, if the resulting output is included as a script tag in an HTML page.
+Say you have exported a function in your `src/index.js` entry:
 
-W> Note that if an `array` is provided as an `entry` point, only the last module in the array will be exposed. If an `object` is provided, it can be exposed using an `array` syntax (see [this example](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for details).
+```js
+export function hello(name) {
+  console.log(`hello ${name}`);
+}
+```
+
+Now the variable `MyLibrary` will be bound with the exports of your entry file, and here's how to consume the webpack bundled library:
+
+```html
+<script src="https://example.org/path/to/my-library.js"></script>
+<script>
+  MyLibrary.hello('webpack');
+</script>
+```
+
+Note that we're passing a single entry file to `entry` in the above example. However webpack can accept [many kinds of entry point](/configuration/entry-context/#entry), e.g., an `array`, an `object`.
+
+1. If you provide an `array` as the `entry` point, only the last one in the array will be exposed.
+
+   ```js
+   module.exports = {
+     // …
+     entry: ['./src/a.js', './src/b.js'], // only exports in b.js will be exposed
+     output: {
+       library: 'MyLibrary',
+     },
+   };
+   ```
+
+2. If an `object` is provided as the `entry` point, all can be exposed using the `array` syntax of `library`:
+
+   ```js
+   module.exports = {
+     // …
+     entry: {
+       a: './src/a.js',
+       b: './src/b.js',
+     },
+     output: {
+       filename: '[name].js',
+       // name is a placeholder here
+       library: ['MyLibrary', '[name]'],
+     },
+   };
+   ```
+
+   Assuming that both `a.js` and `b.js` export a function `hello`, here's how to consume the libraries:
+
+   ```html
+   <script src="https://example.org/path/to/a.js"></script>
+   <script src="https://example.org/path/to/b.js"></script>
+   <script>
+     MyLibrary.a.hello('webpack');
+     MyLibrary.b.hello('webpack');
+   </script>
+   ```
+
+   See [this example](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for more.
 
 T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library` as well as `output.libraryTarget`.
 
