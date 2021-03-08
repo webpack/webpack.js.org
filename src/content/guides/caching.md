@@ -51,11 +51,6 @@ webpack-demo
   module.exports = {
     entry: './src/index.js',
     plugins: [
-<<<<<<< HEAD
-      // 对于 CleanWebpackPlugin 的 v2 versions 以下版本，使用 new CleanWebpackPlugin(['dist/*'])
-      new CleanWebpackPlugin(),
-=======
->>>>>>> 740b17b7f3fd3b3503862c67f6dca4e3e4c1ac39
       new HtmlWebpackPlugin({
 -       title: 'Output Management',
 +       title: 'Caching',
@@ -107,11 +102,6 @@ W> 输出可能会因当前的 webpack 版本而稍有差异。与旧版本相�
   module.exports = {
     entry: './src/index.js',
     plugins: [
-<<<<<<< HEAD
-      // 对于 CleanWebpackPlugin 的 v2 versions 以下版本，使用 new CleanWebpackPlugin(['dist/*'])
-      new CleanWebpackPlugin(),
-=======
->>>>>>> 740b17b7f3fd3b3503862c67f6dca4e3e4c1ac39
       new HtmlWebpackPlugin({
         title: 'Caching',
       }),
@@ -155,11 +145,6 @@ runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
   module.exports = {
     entry: './src/index.js',
     plugins: [
-<<<<<<< HEAD
-      // 对于 CleanWebpackPlugin 的 v2 versions 以下版本，使用 new CleanWebpackPlugin(['dist/*'])
-      new CleanWebpackPlugin(),
-=======
->>>>>>> 740b17b7f3fd3b3503862c67f6dca4e3e4c1ac39
       new HtmlWebpackPlugin({
         title: 'Caching',
       }),
@@ -271,11 +256,6 @@ webpack-demo
   module.exports = {
     entry: './src/index.js',
     plugins: [
-<<<<<<< HEAD
-      // 对于 CleanWebpackPlugin 的 v2 versions 以下版本，使用 new CleanWebpackPlugin(['dist/*'])
-      new CleanWebpackPlugin(),
-=======
->>>>>>> 740b17b7f3fd3b3503862c67f6dca4e3e4c1ac39
       new HtmlWebpackPlugin({
         title: 'Caching',
       }),

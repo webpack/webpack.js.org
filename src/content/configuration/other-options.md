@@ -308,10 +308,7 @@ W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置
 1.  依赖项发生变化
 2.  依赖项当前正在编译或者处于无效状态
 
-<<<<<<< HEAD
 请记住，在完成依赖项编译之前，不会编译此配置。
-=======
-Remember that current configuration will not compile until its dependencies are done.
 
 **webpack.config.js**
 
@@ -329,7 +326,6 @@ module.exports = [
   },
 ];
 ```
->>>>>>> 740b17b7f3fd3b3503862c67f6dca4e3e4c1ac39
 
 ## ignoreWarnings {#ignorewarnings}
 

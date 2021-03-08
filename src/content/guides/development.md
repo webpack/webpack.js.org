@@ -170,43 +170,8 @@ webpack 提供几种可选方式，帮助你在代码发生变化后自动编译
  }
 ```
 
-<<<<<<< HEAD
-如果不想在 watch 触发增量构建后删除 `index.html` 文件，可以在 `CleanWebpackPlugin` 中配置 [`cleanStaleWebpackAssets` 选项](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional) 来实现：
-
-**webpack.config.js**
-
-```diff
- const path = require('path');
- const HtmlWebpackPlugin = require('html-webpack-plugin');
- const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
- module.exports = {
-   mode: 'development',
-   entry: {
-     index: './src/index.js',
-     print: './src/print.js',
-   },
-   devtool: 'inline-source-map',
-   plugins: [
--    new CleanWebpackPlugin(),
-+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-     new HtmlWebpackPlugin({
-       title: 'Development',
-     }),
-   ],
-   output: {
-     filename: '[name].bundle.js',
-     path: path.resolve(__dirname, 'dist'),
-   },
- };
-```
-
 现在，你可以在命令行中运行 `npm run watch`，然后就会看到 webpack 是如何编译代码。
 然而，你会发现并没有退出命令行。这是因为此 script 当前还在 watch 你的文件。
-=======
-Now run `npm run watch` from the command line and see how webpack compiles your code.
-You can see that it doesn't exit the command line because the script is currently watching your files.
->>>>>>> 740b17b7f3fd3b3503862c67f6dca4e3e4c1ac39
 
 现在，webpack 观察文件的同时，先移除我们之前加入的错误：
 

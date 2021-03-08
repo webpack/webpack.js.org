@@ -248,11 +248,6 @@ npm install --save-dev style-loader css-loader
 +     ],
 +   },
     plugins: [
-<<<<<<< HEAD
-       // 对于 CleanWebpackPlugin 的 v2 versions 以下版本，使用 new CleanWebpackPlugin(['dist/*'])
-      new CleanWebpackPlugin(),
-=======
->>>>>>> 740b17b7f3fd3b3503862c67f6dca4e3e4c1ac39
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement',
       }),
