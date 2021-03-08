@@ -310,6 +310,23 @@ W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置
 
 请记住，在完成依赖项编译之前，不会编译此配置。
 
+**webpack.config.js**
+
+```js
+module.exports = [
+  {
+    name: 'client',
+    target: 'web',
+    // …
+  },
+  {
+    name: 'server',
+    target: 'node',
+    dependencies: ['client'],
+  },
+];
+```
+
 ## ignoreWarnings {#ignorewarnings}
 
 `RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`

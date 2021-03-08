@@ -31,6 +31,7 @@ contributors:
   - maximilianschmelzer
   - smelukov
   - chenxsan
+  - Adarah
 related:
   - title: webpack 中的 <link rel=”prefetch/preload”>
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -407,7 +408,7 @@ T> 只要父 chunk 完成加载，webpack 就会添加 prefetch hint(预取提�
 
 下面这个简单的 preload 示例中，有一个 `Component`，依赖于一个较大的 library，所以应该将其分离到一个独立的 chunk 中。
 
-我们假想这里的图表组件 `ChartComponent` 组件需要依赖体积巨大的 `ChartingLibrary` 库。它会在渲染时显示一个 `LoadingIndicator(加载进度条)` 组件，然后立即按需导入 `ChartingLibrary`：
+我们假想这里的图表组件 `ChartComponent` 组件需要依赖一个体积巨大的 `ChartingLibrary` 库。它会在渲染时显示一个 `LoadingIndicator(加载进度条)` 组件，然后立即按需导入 `ChartingLibrary`：
 
 **ChartComponent.js**
 

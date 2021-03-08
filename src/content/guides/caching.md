@@ -46,14 +46,11 @@ webpack-demo
 
 ```diff
   const path = require('path');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      // 对于 CleanWebpackPlugin 的 v2 versions 以下版本，使用 new CleanWebpackPlugin(['dist/*'])
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
 -       title: 'Output Management',
 +       title: 'Caching',
@@ -63,6 +60,7 @@ webpack-demo
 -     filename: 'bundle.js',
 +     filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
   };
 ```
@@ -99,14 +97,11 @@ W> 输出可能会因当前的 webpack 版本而稍有差异。与旧版本相�
 
 ```diff
   const path = require('path');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      // 对于 CleanWebpackPlugin 的 v2 versions 以下版本，使用 new CleanWebpackPlugin(['dist/*'])
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching',
       }),
@@ -114,6 +109,7 @@ W> 输出可能会因当前的 webpack 版本而稍有差异。与旧版本相�
     output: {
       filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
 +   optimization: {
 +     runtimeChunk: 'single',
@@ -144,14 +140,11 @@ runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
 
 ```diff
   const path = require('path');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      // 对于 CleanWebpackPlugin 的 v2 versions 以下版本，使用 new CleanWebpackPlugin(['dist/*'])
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching',
       }),
@@ -159,6 +152,7 @@ runtime.cc17ae2a94ec771e9221.js   1.42 KiB       0  [emitted]  runtime
     output: {
       filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
     optimization: {
       runtimeChunk: 'single',
@@ -257,14 +251,11 @@ webpack-demo
 
 ```diff
   const path = require('path');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
 
   module.exports = {
     entry: './src/index.js',
     plugins: [
-      // 对于 CleanWebpackPlugin 的 v2 versions 以下版本，使用 new CleanWebpackPlugin(['dist/*'])
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Caching',
       }),
@@ -272,6 +263,7 @@ webpack-demo
     output: {
       filename: '[name].[contenthash].js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
     optimization: {
 +     moduleIds: 'deterministic',

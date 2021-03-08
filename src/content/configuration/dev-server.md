@@ -582,10 +582,11 @@ module.exports = {
 module.exports = {
   //...
   devServer: {
-    https: true,
-    key: fs.readFileSync('/path/to/server.key'),
-    cert: fs.readFileSync('/path/to/server.crt'),
-    ca: fs.readFileSync('/path/to/ca.pem'),
+    https: {
+      key: fs.readFileSync('/path/to/server.key'),
+      cert: fs.readFileSync('/path/to/server.crt'),
+      ca: fs.readFileSync('/path/to/ca.pem'),
+    },
   },
 };
 ```

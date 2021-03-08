@@ -182,20 +182,14 @@ webpack 5.4.0 compiled successfully in 2189 ms
 
 你可能已经注意到，由于遗留了之前的指南和代码示例，我们的 `/dist` 文件夹显得相当杂乱。webpack 将生成文件并放置在 `/dist` 文件夹中，但是它不会追踪哪些文件是实际在项目中用到的。
 
-通常比较推荐的做法是，在每次构建前清理 `/dist` 文件夹，这样只会生成用到的文件。让我们实现这个需求。
+通常比较推荐的做法是，在每次构建前清理 `/dist` 文件夹，这样只会生成用到的文件。让我们使用 [`output.clean`](/configuration/output/#outputclean) 配置项实现这个需求。
 
-[`clean-webpack-plugin`](https://www.npmjs.com/package/clean-webpack-plugin) 是一个流行的清理插件，安装和配置它。
-
-```bash
-npm install --save-dev clean-webpack-plugin
-```
 
 **webpack.config.js**
 
 ```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
-+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
  module.exports = {
    entry: {
@@ -203,7 +197,6 @@ npm install --save-dev clean-webpack-plugin
      print: './src/print.js',
    },
    plugins: [
-+    new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({
        title: 'Output Management',
      }),
@@ -211,6 +204,7 @@ npm install --save-dev clean-webpack-plugin
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
++    clean: true,
    },
  };
 ```
