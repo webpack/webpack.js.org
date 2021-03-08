@@ -9,7 +9,7 @@
 
   &__content-cont {
     margin-top: 1rem;
-    font-size: 2em;
+    font-size: 18px;
     text-align: center;
     color: #535353;
   }
@@ -36,8 +36,9 @@
     }
   }
   &__img {
-    &__webpack {
-      width: 100px;
+    &__docschina {
+      margin-top: 20px;
+      width: 220px;
     }
   }
 }
