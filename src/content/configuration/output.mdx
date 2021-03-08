@@ -611,7 +611,7 @@ T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
 Output a library exposing the exports of your entry point.
 
-- Type: `string|string[]|object`
+- Type: `string | string[] | object`
 
 Let's take a look at a simple example.
 
@@ -669,8 +669,7 @@ Note that we're passing a single entry file to `entry` in the above example. How
      },
      output: {
        filename: '[name].js',
-       // name is a placeholder here
-       library: ['MyLibrary', '[name]'],
+       library: ['MyLibrary', '[name]'], // name is a placeholder here
      },
    };
    ```
@@ -687,6 +686,15 @@ Note that we're passing a single entry file to `entry` in the above example. How
    ```
 
    See [this example](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for more.
+
+### output.library.name
+
+Specify a name for the library.
+
+- Type:
+  ```ts
+  string | string[] | {amd?: string, commonjs?: string, root?: string | string[]}
+  ```
 
 T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library` as well as `output.libraryTarget`.
 
