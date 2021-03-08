@@ -13,6 +13,7 @@ contributors:
   - snitin315
   - pixel-ray
   - chenxsan
+  - Roberto14
 related:
   - title: 'webpack 4: Code Splitting, chunk graph and the splitChunks optimization'
     url: https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
@@ -57,7 +58,6 @@ module.exports = {
   optimization: {
     minimizer: [
       new TerserPlugin({
-        cache: true,
         parallel: true,
         sourceMap: true, // 如果在生产环境中使用 source-maps，必须设置为 true
         terserOptions: {

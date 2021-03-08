@@ -30,7 +30,6 @@ W> 本指南中的工具**仅用于开发环境**，请**不要**在生产环境
 ```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
- const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
  module.exports = {
 +  mode: 'development',
@@ -39,7 +38,6 @@ W> 本指南中的工具**仅用于开发环境**，请**不要**在生产环境
      print: './src/print.js',
    },
    plugins: [
-     new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({
 -      title: 'Output Management',
 +      title: 'Development',
@@ -48,6 +46,7 @@ W> 本指南中的工具**仅用于开发环境**，请**不要**在生产环境
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
+     clean: true,
    },
  };
 ```
@@ -67,7 +66,6 @@ source map 有许多 [可用选项](/configuration/devtool)，请务必仔细阅
 ```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
- const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
  module.exports = {
    mode: 'development',
@@ -77,7 +75,6 @@ source map 有许多 [可用选项](/configuration/devtool)，请务必仔细阅
    },
 +  devtool: 'inline-source-map',
    plugins: [
-     new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({
        title: 'Development',
      }),
@@ -85,6 +82,7 @@ source map 有许多 [可用选项](/configuration/devtool)，请务必仔细阅
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
+     clean: true,
    },
  };
 ```
@@ -162,7 +160,6 @@ webpack 提供几种可选方式，帮助你在代码发生变化后自动编译
    "author": "",
    "license": "ISC",
    "devDependencies": {
-     "clean-webpack-plugin": "^3.0.0",
      "html-webpack-plugin": "^4.5.0",
      "webpack": "^5.4.0",
      "webpack-cli": "^4.2.0"
@@ -173,6 +170,7 @@ webpack 提供几种可选方式，帮助你在代码发生变化后自动编译
  }
 ```
 
+<<<<<<< HEAD
 如果不想在 watch 触发增量构建后删除 `index.html` 文件，可以在 `CleanWebpackPlugin` 中配置 [`cleanStaleWebpackAssets` 选项](https://github.com/johnagan/clean-webpack-plugin#options-and-defaults-optional) 来实现：
 
 **webpack.config.js**
@@ -205,6 +203,10 @@ webpack 提供几种可选方式，帮助你在代码发生变化后自动编译
 
 现在，你可以在命令行中运行 `npm run watch`，然后就会看到 webpack 是如何编译代码。
 然而，你会发现并没有退出命令行。这是因为此 script 当前还在 watch 你的文件。
+=======
+Now run `npm run watch` from the command line and see how webpack compiles your code.
+You can see that it doesn't exit the command line because the script is currently watching your files.
+>>>>>>> 740b17b7f3fd3b3503862c67f6dca4e3e4c1ac39
 
 现在，webpack 观察文件的同时，先移除我们之前加入的错误：
 
@@ -236,7 +238,6 @@ npm install --save-dev webpack-dev-server
 ```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
- const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
  module.exports = {
    mode: 'development',
@@ -249,7 +250,6 @@ npm install --save-dev webpack-dev-server
 +    contentBase: './dist',
 +  },
    plugins: [
-     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
      new HtmlWebpackPlugin({
        title: 'Development',
      }),
@@ -257,6 +257,7 @@ npm install --save-dev webpack-dev-server
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
+     clean: true,
    },
  };
 ```
@@ -287,7 +288,6 @@ W> webpack-dev-server 在编译之后不会写入到任何输出文件。而是�
    "author": "",
    "license": "ISC",
    "devDependencies": {
-     "clean-webpack-plugin": "^3.0.0",
      "html-webpack-plugin": "^4.5.0",
      "webpack": "^5.4.0",
      "webpack-cli": "^4.2.0",
@@ -322,7 +322,6 @@ npm install --save-dev express webpack-dev-middleware
 ```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
- const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
  module.exports = {
    mode: 'development',
@@ -335,7 +334,6 @@ npm install --save-dev express webpack-dev-middleware
      contentBase: './dist',
    },
    plugins: [
-     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
      new HtmlWebpackPlugin({
        title: 'Development',
      }),
@@ -343,6 +341,7 @@ npm install --save-dev express webpack-dev-middleware
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
+     clean: true,
 +    publicPath: '/',
    },
  };
@@ -410,7 +409,6 @@ app.listen(3000, function () {
    "author": "",
    "license": "ISC",
    "devDependencies": {
-     "clean-webpack-plugin": "^3.0.0",
      "express": "^4.17.1",
      "html-webpack-plugin": "^4.5.0",
      "webpack": "^5.4.0",

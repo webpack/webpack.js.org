@@ -61,7 +61,6 @@ npm install --save-dev webpack-merge
 
 ```diff
 + const path = require('path');
-+ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 + const HtmlWebpackPlugin = require('html-webpack-plugin');
 +
 + module.exports = {
@@ -69,8 +68,11 @@ npm install --save-dev webpack-merge
 +     app: './src/index.js',
 +   },
 +   plugins: [
+<<<<<<< HEAD
 +     // 对于 CleanWebpackPlugin 的 v2 versions 以下版本，使用 new CleanWebpackPlugin(['dist/*'])
 +     new CleanWebpackPlugin(),
+=======
+>>>>>>> 740b17b7f3fd3b3503862c67f6dca4e3e4c1ac39
 +     new HtmlWebpackPlugin({
 +       title: 'Production',
 +     }),
@@ -78,6 +80,7 @@ npm install --save-dev webpack-merge
 +   output: {
 +     filename: '[name].bundle.js',
 +     path: path.resolve(__dirname, 'dist'),
++     clean: true,
 +   },
 + };
 ```
@@ -134,7 +137,6 @@ npm install --save-dev webpack-merge
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "clean-webpack-plugin": "^0.1.17",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "express": "^4.15.3",

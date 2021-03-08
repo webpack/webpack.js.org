@@ -48,7 +48,6 @@ T> 如果你在技术选型中使用了 `webpack-dev-middleware` 而没有使用
 ```diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
@@ -61,8 +60,6 @@ T> 如果你在技术选型中使用了 `webpack-dev-middleware` 而没有使用
 +     hot: true,
     },
     plugins: [
-      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement',
       }),
@@ -70,6 +67,7 @@ T> 如果你在技术选型中使用了 `webpack-dev-middleware` 而没有使用
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
   };
 ```
@@ -231,7 +229,6 @@ npm install --save-dev style-loader css-loader
 ```diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
   module.exports = {
     entry: {
@@ -251,8 +248,11 @@ npm install --save-dev style-loader css-loader
 +     ],
 +   },
     plugins: [
+<<<<<<< HEAD
        // 对于 CleanWebpackPlugin 的 v2 versions 以下版本，使用 new CleanWebpackPlugin(['dist/*'])
       new CleanWebpackPlugin(),
+=======
+>>>>>>> 740b17b7f3fd3b3503862c67f6dca4e3e4c1ac39
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement',
       }),
@@ -260,6 +260,7 @@ npm install --save-dev style-loader css-loader
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
   };
 ```

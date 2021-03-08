@@ -286,8 +286,13 @@ Webpack 5 允许传递一个目标列表，并且支持目标的版本。
 现在这个功能被默认关闭（`activeModules` 选项）。这也减少了控制台的垃圾信息量。
 现在，在构建模块的过程中，向 stderr 写入的时间被控制在 500ms 以内。
 
+<<<<<<< HEAD
 剖析模式也得到了升级，将显示嵌套进度消息的时间。
 这使得它更容易弄清楚，当插件导致了性能问题。
+=======
+The profiling mode also got an upgrade and will display timings of nested progress messages.
+This makes it easier to figure out which plugin is causing performance problems.
+>>>>>>> 740b17b7f3fd3b3503862c67f6dca4e3e4c1ac39
 
 新增加的 `percentBy` -选项告知 `ProgressPlugin` 如何计算进度百分比。
 
