@@ -696,6 +696,12 @@ Specify a name for the library.
   string | string[] | {amd?: string, commonjs?: string, root?: string | string[]}
   ```
 
+### output.library.type
+
+Configure how the library will be exposed. Any one of the following options can be used. Please note that this option works in conjunction with the value assigned to [`output.library.name`](#outputlibraryname). For the following examples, it is assumed that the value of [`output.library.name`](#outputlibraryname) is configured as `MyLibrary`.
+
+- Type: `string`
+
 T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library` as well as `output.libraryTarget`.
 
 ## output.scriptType
@@ -753,6 +759,8 @@ MySubModule.doSomething();
 ## output.libraryTarget
 
 `string = 'var'`
+
+W> Please use [`output.library.type`](#outputlibrarytype) instead as we might drop for `output.libraryTarget` in the future.
 
 Configure how the library will be exposed. Any one of the following options can be used. Please note that this option works in conjunction with the value assigned to [`output.library`](#outputlibrary). For the following examples, it is assumed that the value of [`output.library`](#outputlibrary) is configured as `MyLibrary`.
 
