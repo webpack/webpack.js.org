@@ -559,10 +559,10 @@
         <loc>https://webpack.js.org/plugins/provide-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/split-chunks-plugin</loc>
+        <loc>https://webpack.js.org/plugins/source-map-dev-tool-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/source-map-dev-tool-plugin</loc>
+        <loc>https://webpack.js.org/plugins/split-chunks-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/stylelint-webpack-plugin</loc>
