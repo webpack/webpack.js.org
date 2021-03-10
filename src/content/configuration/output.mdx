@@ -698,9 +698,69 @@ Specify a name for the library.
 
 ### output.library.type
 
-Configure how the library will be exposed. Any one of the following options can be used. Please note that this option works in conjunction with the value assigned to [`output.library.name`](#outputlibraryname). For the following examples, it is assumed that the value of [`output.library.name`](#outputlibraryname) is configured as `MyLibrary`.
+Configure how the library will be exposed. Any one of the following options can be used. Please note that this option works in conjunction with the value assigned to [`output.library.name`](#outputlibraryname).
 
 - Type: `string`
+
+  Types included by default are `'var'`, `'module'`, `'assign'`, `'assign-properties'`, `'this'`, `'window'`, `'self'`, `'global'`, `'commonjs'`, `'commonjs2'`, `'commonjs-module'`, `'amd'`, `'amd-require'`, `'umd'`, `'umd2'`, `'jsonp'` and `'system'`, but others might be added by plugins.
+
+For the following examples, we'll use `__entry_return_` to indicate the values returned by the entry point.
+
+#### Expose a Variable
+
+These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library.name`](#outputlibraryname) at whatever scope the bundle was included at.
+
+- ##### `type: 'var'`
+
+  ```js
+  module.exports = {
+    output: {
+      library: {
+        name: 'MyLibrary',
+        type: 'var',
+      },
+    },
+  };
+  ```
+
+  When your library is loaded, the **return value of your entry point** will be assigned to a variable:
+
+  ```javascript
+  var MyLibrary = _entry_return_;
+
+  // In a separate script with `MyLibrary` loaded…
+  MyLibrary.doSomething();
+  ```
+
+- ##### `type: 'assign'`
+
+  This will generate an implied global which has the potential to reassign an existing value (use with caution):
+
+  ```javascript
+  MyLibrary = _entry_return_;
+  ```
+
+  Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
+
+- ##### `type: 'assign-properties'` <Badge text='5.16.0+' />
+
+  Similar to [`type: 'assign'`](#type-assign) but a safer option as it will reuse `MyLibrary` if it already exists:
+
+  ```js
+  // only create MyLibrary if it doesn't exist
+  MyLibrary = typeof MyLibrary === 'undefined' ? {} : MyLibrary;
+  // then copy the return value to MyLibrary
+  // just like what Object.assign does
+
+  // for instance, you export a `hello` function in your entry as follow
+  export function hello(name) {
+    console.log(`Hello ${name}`);
+  }
+
+  // In another script with MyLibrary loaded
+  // you can run `hello` function like so
+  MyLibrary.hello('World');
+  ```
 
 T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library` as well as `output.libraryTarget`.
 
