@@ -714,6 +714,7 @@ These options assign the return value of the entry point (e.g. whatever the entr
 
   ```js
   module.exports = {
+    // …
     output: {
       library: {
         name: 'MyLibrary',
@@ -734,6 +735,18 @@ These options assign the return value of the entry point (e.g. whatever the entr
 
 - ##### `type: 'assign'`
 
+  ```js
+  module.exports = {
+    // …
+    output: {
+      library: {
+        name: 'MyLibrary',
+        type: 'assign',
+      },
+    },
+  };
+  ```
+
   This will generate an implied global which has the potential to reassign an existing value (use with caution):
 
   ```javascript
@@ -743,6 +756,18 @@ These options assign the return value of the entry point (e.g. whatever the entr
   Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
 
 - ##### `type: 'assign-properties'` <Badge text='5.16.0+' />
+
+  ```js
+  module.exports = {
+    // …
+    output: {
+      library: {
+        name: 'MyLibrary',
+        type: 'assign-properties',
+      },
+    },
+  };
+  ```
 
   Similar to [`type: 'assign'`](#type-assign) but a safer option as it will reuse `MyLibrary` if it already exists:
 
@@ -761,6 +786,102 @@ These options assign the return value of the entry point (e.g. whatever the entr
   // you can run `hello` function like so
   MyLibrary.hello('World');
   ```
+
+#### Expose Via Object Assignment
+
+These options assign the return value of the entry point (e.g. whatever the entry point exported) to a specific object under the name defined by [`output.library.name`](#outputlibraryname).
+
+- ##### `type: 'this'`
+
+  ```js
+  module.exports = {
+    // …
+    output: {
+      library: {
+        name: 'MyLibrary',
+        type: 'this',
+      },
+    },
+  };
+  ```
+
+  The **return value of your entry point** will be assigned to `this` under the property named by `output.library.name`. The meaning of `this` is up to you:
+
+  ```javascript
+  this['MyLibrary'] = _entry_return_;
+
+  // In a separate script...
+  this.MyLibrary.doSomething();
+  MyLibrary.doSomething(); // if this is window
+  ```
+
+- ##### `type: 'window'`
+
+  ```js
+  module.exports = {
+    // …
+    output: {
+      library: {
+        name: 'MyLibrary',
+        type: 'window',
+      },
+    },
+  };
+  ```
+
+  The **return value of your entry point** will be assigned to the `window` object using the `output.library.name` value.
+
+  ```javascript
+  window['MyLibrary'] = _entry_return_;
+
+  window.MyLibrary.doSomething();
+  ```
+
+- ##### `type: 'global'`
+
+  ```js
+  module.exports = {
+    // …
+    output: {
+      library: {
+        name: 'MyLibrary',
+        type: 'global',
+      },
+    },
+  };
+  ```
+
+  The **return value of your entry point** will be assigned to the global object using the `output.library.name` value. Depending on the [`target`](/configuration/target/) value, the global object could change respectively, e.g., `self`, `global` or `globalThis`.
+
+  ```javascript
+  global['MyLibrary'] = _entry_return_;
+
+  global.MyLibrary.doSomething();
+  ```
+
+- ##### `type: 'commonjs'`
+
+  ```js
+  module.exports = {
+    // …
+    output: {
+      library: {
+        name: 'MyLibrary',
+        type: 'commonjs',
+      },
+    },
+  };
+  ```
+
+  The **return value of your entry point** will be assigned to the `exports` object using the `output.library.name` value. As the name implies, this is used in CommonJS environments.
+
+  ```javascript
+  exports['MyLibrary'] = _entry_return_;
+
+  require('MyLibrary').doSomething();
+  ```
+
+W> Note that not setting a `output.library.name` will cause all properties returned by the entry point to be assigned to the given object; there are no checks against existing property names.
 
 T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library` as well as `output.libraryTarget`.
 
