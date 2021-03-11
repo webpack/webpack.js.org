@@ -1187,38 +1187,6 @@ T> Using some kind of indentation makes bundles look prettier, but will cause is
 
 T> Typically you don't need to change `output.sourcePrefix`.
 
-## `output.strictModuleExceptionHandling`
-
-`boolean = false`
-
-Tell webpack to remove a module from the module instance cache (`require.cache`) if it throws an exception when it is `require`d.
-
-It defaults to `false` for performance reasons.
-
-When set to `false`, the module is not removed from cache, which results in the exception getting thrown only on the first `require` call (making it incompatible with node.js).
-
-For instance, consider `module.js`:
-
-```javascript
-throw new Error('error');
-```
-
-With `strictModuleExceptionHandling` set to `false`, only the first `require` throws an exception:
-
-```javascript
-// with strictModuleExceptionHandling = false
-require('module'); // <- throws
-require('module'); // <- doesn't throw
-```
-
-Instead, with `strictModuleExceptionHandling` set to `true`, all `require`s of this module throw an exception:
-
-```javascript
-// with strictModuleExceptionHandling = true
-require('module'); // <- throws
-require('module'); // <- also throws
-```
-
 ## `output.umdNamedDefine`
 
 `boolean`
@@ -1230,6 +1198,21 @@ module.exports = {
   //...
   output: {
     umdNamedDefine: true,
+  },
+};
+```
+
+## `output.strictModuleErrorHandling`
+
+`boolean`
+
+Handles error in module loading correctly at a performance cost. This will handle module error compatible with the EcmaScript Modules spec.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    strictModuleErrorHandling: true,
   },
 };
 ```
