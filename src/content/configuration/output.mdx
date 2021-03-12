@@ -1321,6 +1321,7 @@ These options will result in a bundle that comes with a complete header to ensur
 
   ```javascript
   module.exports = _entry_return_;
+
   require('MyLibrary').doSomething();
   ```
 
@@ -1499,6 +1500,7 @@ These options will result in a bundle that comes with a complete header to ensur
   ```javascript
   // Log the URL of the current SystemJS module
   console.log(__system_context__.meta.url);
+
   // Import a SystemJS module, with the current SystemJS module's url as the parentUrl
   __system_context__.import('./other-file.js').then((m) => {
     console.log(m);
