@@ -1138,7 +1138,52 @@ These options will result in a bundle that comes with a complete header to ensur
 
 T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library.name` as well as `output.library.type`.
 
-### output.library.exports
+### output.library.export
+
+Specify which exports should be exposed as library.
+
+- Type: `string | string[]`
+
+It is `undefined` by default, which will export the whole (namespace) object. The examples below demonstrate the effect of this configuration when using [`output.library.type: 'var'`](#type-var).
+
+```js
+module.exports = {
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'var',
+      export: 'default',
+    },
+  },
+};
+```
+
+The default export of your entry point will be assigned to the library name:
+
+```js
+// if your entry has a default export
+var MyLibrary = _entry_return_.default;
+```
+
+You can pass an array to `output.library.export` as well, it will be interpreted as a path to a module to be assigned to the library name:
+
+```js
+module.exports = {
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'var',
+      export: ['default', 'subModule'],
+    },
+  },
+};
+```
+
+And here's the library code:
+
+```js
+var MyLibrary = _entry_return_.default.subModule;
+```
 
 ## output.scriptType
 
@@ -1158,6 +1203,8 @@ module.exports = {
 ```
 
 ## `output.libraryExport`
+
+W> We might drop support for this, so prefer to use [output.library.export](#outputlibraryexport) which works the same as `libraryExport`.
 
 `string` `[string]`
 
