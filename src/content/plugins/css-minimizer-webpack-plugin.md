@@ -277,7 +277,7 @@ module.exports = {
 
 为什么？因为 CSS 仅支持这些 source map 类型。
 
-该插件遵循 [`devtool`](/configuration/devtool/) 并使用 `SourceMapDevToolPlugin` 插件。 
+该插件遵循 [`devtool`](/configuration/devtool/) 并使用 `SourceMapDevToolPlugin` 插件。
 使用受支持的 `devtool` 值可以生成 source map。
 使用了开启 `columns` 选项的 `SourceMapDevToolPlugin` 可以生成 source map。
 
@@ -382,18 +382,15 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `warningsFilter` {#warningsfilter}
-=======
 #### `processorOptions`
 
-Type: `Object`
-Default: `{ to: assetName, from: assetName }`
+类型：`Object`
+默认值：`{ to: assetName, from: assetName }`
 
-Allows to specify options [`processoptions`](https://postcss.org/api/#processoptions) for the cssnano.
-The `parser`,` stringifier` and `syntax` can be either a function or a string indicating the module that will be imported.
+允许配置 cssnano 的 [`processoptions`](https://postcss.org/api/#processoptions) 配置项。
+`parser`、` stringifier` 和 `syntax` 可以是一个函数，也可以是一个字符串，用来表示将会被导出的模块。
 
-> ⚠️ **If a function is passed, the `parallel` option must be disabled.**.
+> ⚠️ **如果传入一个函数，则必须禁用`parallel` 配置项。**.
 
 ```js
 import sugarss from 'sugarss';
@@ -432,8 +429,7 @@ module.exports = {
 };
 ```
 
-### `warningsFilter`
->>>>>>> 413256598c80cdd628d826fa233231c09f961170
+### `warningsFilter` {#warningsfilter}
 
 类型：`Function<(warning, file, source) -> Boolean>`
 默认值：`() => true`
