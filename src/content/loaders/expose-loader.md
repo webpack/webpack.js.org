@@ -28,6 +28,8 @@ To begin, you'll need to install `expose-loader`:
 $ npm install expose-loader --save-dev
 ```
 
+(If you're using WebPack 4, install `expose-loader@1` and follow the [corresponding instructions](https://v4.webpack.js.org/loaders/expose-loader/) instead.)
+
 Then you can use the `expose-loader` using two approaches.
 
 ## Inline

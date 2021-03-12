@@ -382,6 +382,53 @@ module.exports = {
 };
 ```
 
+#### `processorOptions`
+
+Type: `Object`
+Default: `{ to: assetName, from: assetName }`
+
+Allows to specify options [`processoptions`](https://postcss.org/api/#processoptions) for the cssnano.
+The `parser`,` stringifier` and `syntax` can be either a function or a string indicating the module that will be imported.
+
+> ⚠️ **If a function is passed, the `parallel` option must be disabled.**.
+
+```js
+import sugarss from 'sugarss';
+
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        parallel: false,
+        minimizerOptions: {
+          processorOptions: {
+            parser: sugarss,
+          },
+        },
+      }),
+    ],
+  },
+};
+```
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          processorOptions: {
+            parser: 'sugarss',
+          },
+        },
+      }),
+    ],
+  },
+};
+```
+
 ### `warningsFilter`
 
 Type: `Function<(warning, file, source) -> Boolean>`
