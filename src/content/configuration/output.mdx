@@ -1255,6 +1255,8 @@ These options assign the return value of the entry point (e.g. whatever the entr
 
 - #### `libraryTarget: 'var'`
 
+  W> Prefer to use [`output.library.type: 'var'`](#type-var).
+
   When your library is loaded, the **return value of your entry point** will be assigned to a variable:
 
   ```javascript
@@ -1266,6 +1268,8 @@ These options assign the return value of the entry point (e.g. whatever the entr
 
 - #### `libraryTarget: 'assign'`
 
+  W> Prefer to use [`output.library.type: 'assign'`](#type-assign).
+
   This will generate an implied global which has the potential to reassign an existing value (use with caution):
 
   ```javascript
@@ -1275,6 +1279,8 @@ These options assign the return value of the entry point (e.g. whatever the entr
   Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
 
 - #### `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' />
+
+  W> Prefer to use [output.library.type: 'assign-properties'`](#type-assign-properties-badge-text5160-)
 
   Copy the return value to a target object if it exists, otherwise create the target object first:
 
@@ -1314,6 +1320,8 @@ W> Note that not setting a `output.library` will cause all properties returned b
 
 - #### `libraryTarget: 'this'`
 
+  W> Prefer to use [`output.library.type: 'this'`](#type-this).
+
   The **return value of your entry point** will be assigned to this under the property named by `output.library`. The meaning of `this` is up to you:
 
   ```javascript
@@ -1326,6 +1334,8 @@ W> Note that not setting a `output.library` will cause all properties returned b
 
 - #### `libraryTarget: 'window'`
 
+  W> Prefer to use [`output.library.type: 'window'`](#type-window).
+
   The **return value of your entry point** will be assigned to the `window` object using the `output.library` value.
 
   ```javascript
@@ -1336,6 +1346,8 @@ W> Note that not setting a `output.library` will cause all properties returned b
 
 - #### `libraryTarget: 'global'`
 
+  W> Prefer to use [`output.library.type: 'global'`](#type-global).
+
   The **return value of your entry point** will be assigned to the `global` object using the `output.library` value.
 
   ```javascript
@@ -1345,6 +1357,8 @@ W> Note that not setting a `output.library` will cause all properties returned b
   ```
 
 - #### `libraryTarget: 'commonjs'`
+
+  W> Prefer to use [`output.library.type: 'commonjs'`](#type-commonjs).
 
   The **return value of your entry point** will be assigned to the `exports` object using the `output.library` value. As the name implies, this is used in CommonJS environments.
 
@@ -1360,11 +1374,15 @@ These options will result in a bundle that comes with a complete header to ensur
 
 - #### `libraryTarget: 'module'`
 
+  W> Prefer to use [`output.library.type: 'module'`](#type-module).
+
   Output ES Module. Make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand.
 
   Note that this feature is not fully supported yet, please track the progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
 
 - #### `libraryTarget: 'commonjs2'`
+
+  W> Prefer to use [`output.library.type: 'commonjs2'`](#type-commonjs2).
 
   The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in CommonJS environments:
 
@@ -1379,6 +1397,8 @@ These options will result in a bundle that comes with a complete header to ensur
   T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
 
 - #### `libraryTarget: 'amd'`
+
+  W> Prefer to use [`output.library.type: 'amd'`](#type-amd).
 
   This will expose your library as an AMD module.
 
@@ -1424,6 +1444,8 @@ These options will result in a bundle that comes with a complete header to ensur
 
 - #### `libraryTarget: 'amd-require'`
 
+  W> Prefer to use [`output.library.type: 'amd-require'`](#type-amd-require).
+
   This packages your output with an immediately-executed AMD `require(dependencies, factory)` wrapper.
 
   The `'amd-require'` target allows for the use of AMD dependencies without needing a separate later invocation. As with the `'amd'` target, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
@@ -1431,6 +1453,8 @@ These options will result in a bundle that comes with a complete header to ensur
   With this target, the library name is ignored.
 
 - #### `libraryTarget: 'umd'`
+
+  W> Prefer to use [`output.library.type: 'umd'`](#type-umd).
 
   This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
 
@@ -1505,6 +1529,8 @@ These options will result in a bundle that comes with a complete header to ensur
 
 - #### `libraryTarget: 'system'`
 
+  W> Prefer to use [`output.library.type: 'system'`](#type-system).
+
   This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
 
   System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and have your webpack bundle loaded into the System module registry.
@@ -1559,6 +1585,8 @@ These options will result in a bundle that comes with a complete header to ensur
 ### Other Targets
 
 - #### `libraryTarget: 'jsonp'`
+
+  W> Prefer to use [`output.library.type: 'jsonp'`](#type-jsonp).
 
   This will wrap the return value of your entry point into a jsonp wrapper.
 
