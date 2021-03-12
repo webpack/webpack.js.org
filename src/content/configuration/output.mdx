@@ -1074,9 +1074,9 @@ These options will result in a bundle that comes with a complete header to ensur
   module.exports = {
     //...
     output: {
-      library{
-        type: 'system'
-      }
+      library: {
+        type: 'system',
+      },
     },
   };
   ```
@@ -1136,7 +1136,9 @@ These options will result in a bundle that comes with a complete header to ensur
 
   The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
 
-T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library` as well as `output.libraryTarget`.
+T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library.name` as well as `output.library.type`.
+
+### output.library.exports
 
 ## output.scriptType
 
