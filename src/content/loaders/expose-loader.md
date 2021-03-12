@@ -28,7 +28,13 @@ repo: https://github.com/webpack-contrib/expose-loader
 $ npm install expose-loader --save-dev
 ```
 
+<<<<<<< HEAD
 然后你可以用两种方法来用 `expose-loader`。
+=======
+(If you're using WebPack 4, install `expose-loader@1` and follow the [corresponding instructions](https://v4.webpack.js.org/loaders/expose-loader/) instead.)
+
+Then you can use the `expose-loader` using two approaches.
+>>>>>>> 413256598c80cdd628d826fa233231c09f961170
 
 ## 内联 {#inline}
 

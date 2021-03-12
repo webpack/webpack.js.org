@@ -88,9 +88,16 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 ```scss
 @import "bootstrap";
 ```
+<<<<<<< HEAD
 `~` 用法已被废弃，可以从代码中删除（**我们建议这么做**），但是我们会因为一些历史原因一直支持这种写法。
 为什么你可以移除它呢？loader 首先会尝试以相对路径解析 `@import`，如果它不能被解析，loader 将会尝试在 [`node_modules`](/configuration/resolve/#resolvemodules) 中解析 `@import`。
 只要在包名前加上 `~`，告诉 Webpack 在 [`modules`](/configuration/resolve/#resolvemodules) 中进行查找。
+=======
+
+Using `~` is deprecated and can be removed from your code (**we recommend it**), but we still support it for historical reasons.
+Why you can remove it? The loader will first try to resolve `@import` as relative, if it cannot be resolved, the loader will try to resolve `@import` inside [`node_modules`](/configuration/resolve/#resolvemodules).
+Just prepend them with a `~` which tells webpack to look up the [`modules`](/configuration/resolve/#resolvemodules).
+>>>>>>> 413256598c80cdd628d826fa233231c09f961170
 
 ```scss
 @import "~bootstrap";

@@ -382,7 +382,58 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `warningsFilter` {#warningsfilter}
+=======
+#### `processorOptions`
+
+Type: `Object`
+Default: `{ to: assetName, from: assetName }`
+
+Allows to specify options [`processoptions`](https://postcss.org/api/#processoptions) for the cssnano.
+The `parser`,` stringifier` and `syntax` can be either a function or a string indicating the module that will be imported.
+
+> ⚠️ **If a function is passed, the `parallel` option must be disabled.**.
+
+```js
+import sugarss from 'sugarss';
+
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        parallel: false,
+        minimizerOptions: {
+          processorOptions: {
+            parser: sugarss,
+          },
+        },
+      }),
+    ],
+  },
+};
+```
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          processorOptions: {
+            parser: 'sugarss',
+          },
+        },
+      }),
+    ],
+  },
+};
+```
+
+### `warningsFilter`
+>>>>>>> 413256598c80cdd628d826fa233231c09f961170
 
 类型：`Function<(warning, file, source) -> Boolean>`
 默认值：`() => true`
