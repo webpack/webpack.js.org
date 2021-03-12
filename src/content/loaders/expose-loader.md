@@ -28,6 +28,8 @@ repo: https://github.com/webpack-contrib/expose-loader
 $ npm install expose-loader --save-dev
 ```
 
+（如果你在使用 webpack4，请安装 `expose-loader@1` 并按照 [相应说明](https://v4.webpack.docschina.org/loaders/expose-loader/) 进行配置。）
+
 然后你可以用两种方法来用 `expose-loader`。
 
 ## 内联 {#inline}

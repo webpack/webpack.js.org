@@ -277,7 +277,7 @@ module.exports = {
 
 为什么？因为 CSS 仅支持这些 source map 类型。
 
-该插件遵循 [`devtool`](/configuration/devtool/) 并使用 `SourceMapDevToolPlugin` 插件。 
+该插件遵循 [`devtool`](/configuration/devtool/) 并使用 `SourceMapDevToolPlugin` 插件。
 使用受支持的 `devtool` 值可以生成 source map。
 使用了开启 `columns` 选项的 `SourceMapDevToolPlugin` 可以生成 source map。
 
@@ -375,6 +375,53 @@ module.exports = {
               discardComments: { removeAll: true },
             },
           ],
+        },
+      }),
+    ],
+  },
+};
+```
+
+#### `processorOptions`
+
+类型：`Object`
+默认值：`{ to: assetName, from: assetName }`
+
+允许配置 cssnano 的 [`processoptions`](https://postcss.org/api/#processoptions) 配置项。
+`parser`、` stringifier` 和 `syntax` 可以是一个函数，也可以是一个字符串，用来表示将会被导出的模块。
+
+> ⚠️ **如果传入一个函数，则必须禁用`parallel` 配置项。**.
+
+```js
+import sugarss from 'sugarss';
+
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        parallel: false,
+        minimizerOptions: {
+          processorOptions: {
+            parser: sugarss,
+          },
+        },
+      }),
+    ],
+  },
+};
+```
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          processorOptions: {
+            parser: 'sugarss',
+          },
         },
       }),
     ],

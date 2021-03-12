@@ -917,7 +917,7 @@ module.exports = {
 };
 ```
 
-### 添加依赖 {#add-dependencies}
+### 添加 dependencies、contextDependencies、buildDependencies、missingDependencies {#add-dependencies-contextdependencies-builddependencies-missingdependencies}
 
 当需要在文件变化时进行重新编译时，webpack 为了理解这样的操作需要添加必要的依赖。
 
@@ -927,7 +927,7 @@ module.exports = {
 
 消息应该包含下面两个字段：
 
-- `type` = `dependency` - 消息类型（必需字段，并且应该为 `dependency`）
+- `type` = `dependency` - 消息类型（必需字段，并且应该为 `dependency`、`context-dependency`、`build-dependency` 或 `missing-dependency`）
 - `file` - 文件的绝对路径（必需）
 
 **webpack.config.js**
