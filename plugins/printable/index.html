@@ -1095,6 +1095,35 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h4 id="processoroptions"><code>processorOptions</code><a href="#processoroptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4> <p>Type: <code>Object</code> Default: <code>{ to: assetName, from: assetName }</code></p> <p>Allows to specify options <a href="https://postcss.org/api/#processoptions"><code>processoptions</code></a> for the cssnano. The <code>parser</code>,<code> stringifier</code> and <code>syntax</code> can be either a function or a string indicating the module that will be imported.</p> <blockquote> <p>⚠️ <strong>If a function is passed, the <code>parallel</code> option must be disabled.</strong>.</p> </blockquote> <pre><code class="hljs language-js"><span class="token keyword">import</span> sugarss <span class="token keyword">from</span> <span class="token string">'sugarss'</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        parallel<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+          processorOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+            parser<span class="token operator">:</span> sugarss<span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+          processorOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+            parser<span class="token operator">:</span> <span class="token string">'sugarss'</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h3 id="warningsfilter"><code>warningsFilter</code><a href="#warningsfilter" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>Type: <code>Function&#x3C;(warning, file, source) -> Boolean></code> Default: <code>() => true</code></p> <p>Allow to filter css-minimizer warnings (By default <a href="https://github.com/cssnano/cssnano">cssnano</a>). Return <code>true</code> to keep the warning, a falsy value (<code>false</code>/<code>null</code>/<code>undefined</code>) otherwise.</p> <blockquote> <p>⚠️ The <code>source</code> argument will contain <code>undefined</code> if you don't use source maps.</p> </blockquote> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
@@ -1542,7 +1571,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h3 id="standalone-plugin">Standalone Plugin<a href="#standalone-plugin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p><a href="/concepts/plugins/">Documentation: Using plugins</a></p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js"><span class="token keyword">const</span> ImageminWebpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'image-minimizer-webpack-plugin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h3 id="standalone-plugin">Standalone Plugin<a href="#standalone-plugin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p><a href="/concepts/plugins/">Documentation: Using plugins</a></p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js"><span class="token keyword">const</span> ImageMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'image-minimizer-webpack-plugin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -1558,7 +1587,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token comment">// Make sure that the plugin placed after any plugins that added images</span>
-    <span class="token keyword">new</span> <span class="token class-name">ImageminWebpack</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token keyword">new</span> <span class="token class-name">ImageMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       severityError<span class="token operator">:</span> <span class="token string">'warning'</span><span class="token punctuation">,</span> <span class="token comment">// Ignore errors on corrupted images</span>
       minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
         plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'gifsicle'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>

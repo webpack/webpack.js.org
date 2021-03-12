@@ -63,7 +63,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h3 id="standalone-plugin">Standalone Plugin<a href="#standalone-plugin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p><a href="/concepts/plugins/">Documentation: Using plugins</a></p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js"><span class="token keyword">const</span> ImageminWebpack <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'image-minimizer-webpack-plugin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h3 id="standalone-plugin">Standalone Plugin<a href="#standalone-plugin" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p><a href="/concepts/plugins/">Documentation: Using plugins</a></p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js"><span class="token keyword">const</span> ImageMinimizerPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'image-minimizer-webpack-plugin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -79,7 +79,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   plugins<span class="token operator">:</span> <span class="token punctuation">[</span>
     <span class="token comment">// Make sure that the plugin placed after any plugins that added images</span>
-    <span class="token keyword">new</span> <span class="token class-name">ImageminWebpack</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    <span class="token keyword">new</span> <span class="token class-name">ImageMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       severityError<span class="token operator">:</span> <span class="token string">'warning'</span><span class="token punctuation">,</span> <span class="token comment">// Ignore errors on corrupted images</span>
       minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
         plugins<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'gifsicle'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
