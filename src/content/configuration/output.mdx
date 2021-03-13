@@ -710,176 +710,176 @@ For the following examples, we'll use `__entry_return_` to indicate the values r
 
 These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library.name`](#outputlibraryname) at whatever scope the bundle was included at.
 
-- ##### `type: 'var'`
+##### `type: 'var'`
 
-  ```js
-  module.exports = {
-    // …
-    output: {
-      library: {
-        name: 'MyLibrary',
-        type: 'var',
-      },
+```js
+module.exports = {
+  // …
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'var',
     },
-  };
-  ```
+  },
+};
+```
 
-  When your library is loaded, the **return value of your entry point** will be assigned to a variable:
+When your library is loaded, the **return value of your entry point** will be assigned to a variable:
 
-  ```javascript
-  var MyLibrary = _entry_return_;
+```javascript
+var MyLibrary = _entry_return_;
 
-  // In a separate script with `MyLibrary` loaded…
-  MyLibrary.doSomething();
-  ```
+// In a separate script with `MyLibrary` loaded…
+MyLibrary.doSomething();
+```
 
-- ##### `type: 'assign'`
+##### `type: 'assign'`
 
-  ```js
-  module.exports = {
-    // …
-    output: {
-      library: {
-        name: 'MyLibrary',
-        type: 'assign',
-      },
+```js
+module.exports = {
+  // …
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'assign',
     },
-  };
-  ```
+  },
+};
+```
 
-  This will generate an implied global which has the potential to reassign an existing value (use with caution):
+This will generate an implied global which has the potential to reassign an existing value (use with caution):
 
-  ```javascript
-  MyLibrary = _entry_return_;
-  ```
+```javascript
+MyLibrary = _entry_return_;
+```
 
-  Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
+Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
 
-- ##### `type: 'assign-properties'` <Badge text='5.16.0+' />
+##### `type: 'assign-properties'` <Badge text='5.16.0+' />
 
-  ```js
-  module.exports = {
-    // …
-    output: {
-      library: {
-        name: 'MyLibrary',
-        type: 'assign-properties',
-      },
+```js
+module.exports = {
+  // …
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'assign-properties',
     },
-  };
-  ```
+  },
+};
+```
 
-  Similar to [`type: 'assign'`](#type-assign) but a safer option as it will reuse `MyLibrary` if it already exists:
+Similar to [`type: 'assign'`](#type-assign) but a safer option as it will reuse `MyLibrary` if it already exists:
 
-  ```js
-  // only create MyLibrary if it doesn't exist
-  MyLibrary = typeof MyLibrary === 'undefined' ? {} : MyLibrary;
-  // then copy the return value to MyLibrary
-  // just like what Object.assign does
+```js
+// only create MyLibrary if it doesn't exist
+MyLibrary = typeof MyLibrary === 'undefined' ? {} : MyLibrary;
+// then copy the return value to MyLibrary
+// just like what Object.assign does
 
-  // for instance, you export a `hello` function in your entry as follow
-  export function hello(name) {
-    console.log(`Hello ${name}`);
-  }
+// for instance, you export a `hello` function in your entry as follow
+export function hello(name) {
+  console.log(`Hello ${name}`);
+}
 
-  // In another script with MyLibrary loaded
-  // you can run `hello` function like so
-  MyLibrary.hello('World');
-  ```
+// In another script with MyLibrary loaded
+// you can run `hello` function like so
+MyLibrary.hello('World');
+```
 
 #### Expose Via Object Assignment
 
 These options assign the return value of the entry point (e.g. whatever the entry point exported) to a specific object under the name defined by [`output.library.name`](#outputlibraryname).
 
-- ##### `type: 'this'`
+##### `type: 'this'`
 
-  ```js
-  module.exports = {
-    // …
-    output: {
-      library: {
-        name: 'MyLibrary',
-        type: 'this',
-      },
+```js
+module.exports = {
+  // …
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'this',
     },
-  };
-  ```
+  },
+};
+```
 
-  The **return value of your entry point** will be assigned to `this` under the property named by `output.library.name`. The meaning of `this` is up to you:
+The **return value of your entry point** will be assigned to `this` under the property named by `output.library.name`. The meaning of `this` is up to you:
 
-  ```javascript
-  this['MyLibrary'] = _entry_return_;
+```javascript
+this['MyLibrary'] = _entry_return_;
 
-  // In a separate script...
-  this.MyLibrary.doSomething();
-  MyLibrary.doSomething(); // if this is window
-  ```
+// In a separate script...
+this.MyLibrary.doSomething();
+MyLibrary.doSomething(); // if this is window
+```
 
-- ##### `type: 'window'`
+##### `type: 'window'`
 
-  ```js
-  module.exports = {
-    // …
-    output: {
-      library: {
-        name: 'MyLibrary',
-        type: 'window',
-      },
+```js
+module.exports = {
+  // …
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'window',
     },
-  };
-  ```
+  },
+};
+```
 
-  The **return value of your entry point** will be assigned to the `window` object using the `output.library.name` value.
+The **return value of your entry point** will be assigned to the `window` object using the `output.library.name` value.
 
-  ```javascript
-  window['MyLibrary'] = _entry_return_;
+```javascript
+window['MyLibrary'] = _entry_return_;
 
-  window.MyLibrary.doSomething();
-  ```
+window.MyLibrary.doSomething();
+```
 
-- ##### `type: 'global'`
+##### `type: 'global'`
 
-  ```js
-  module.exports = {
-    // …
-    output: {
-      library: {
-        name: 'MyLibrary',
-        type: 'global',
-      },
+```js
+module.exports = {
+  // …
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'global',
     },
-  };
-  ```
+  },
+};
+```
 
-  The **return value of your entry point** will be assigned to the global object using the `output.library.name` value. Depending on the [`target`](/configuration/target/) value, the global object could change respectively, e.g., `self`, `global` or `globalThis`.
+The **return value of your entry point** will be assigned to the global object using the `output.library.name` value. Depending on the [`target`](/configuration/target/) value, the global object could change respectively, e.g., `self`, `global` or `globalThis`.
 
-  ```javascript
-  global['MyLibrary'] = _entry_return_;
+```javascript
+global['MyLibrary'] = _entry_return_;
 
-  global.MyLibrary.doSomething();
-  ```
+global.MyLibrary.doSomething();
+```
 
-- ##### `type: 'commonjs'`
+##### `type: 'commonjs'`
 
-  ```js
-  module.exports = {
-    // …
-    output: {
-      library: {
-        name: 'MyLibrary',
-        type: 'commonjs',
-      },
+```js
+module.exports = {
+  // …
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'commonjs',
     },
-  };
-  ```
+  },
+};
+```
 
-  The **return value of your entry point** will be assigned to the `exports` object using the `output.library.name` value. As the name implies, this is used in CommonJS environments.
+The **return value of your entry point** will be assigned to the `exports` object using the `output.library.name` value. As the name implies, this is used in CommonJS environments.
 
-  ```javascript
-  exports['MyLibrary'] = _entry_return_;
+```javascript
+exports['MyLibrary'] = _entry_return_;
 
-  require('MyLibrary').doSomething();
-  ```
+require('MyLibrary').doSomething();
+```
 
 W> Note that not setting a `output.library.name` will cause all properties returned by the entry point to be assigned to the given object; there are no checks against existing property names.
 
@@ -887,254 +887,251 @@ W> Note that not setting a `output.library.name` will cause all properties retur
 
 These options will result in a bundle that comes with a complete header to ensure compatibility with various module systems. The `output.library.name` option will take on a different meaning under the following `output.library.type` options.
 
-- ##### `type: 'module'`
+##### `type: 'module'`
 
-  ```js
-  module.exports = {
-    // …
-    experiments: {
-      outputModule: true,
+```js
+module.exports = {
+  // …
+  experiments: {
+    outputModule: true,
+  },
+  output: {
+    library: {
+      // note that you should not specify a name here
+      type: 'module',
     },
-    output: {
-      library: {
-        // note that you should not specify a name here
-        type: 'module',
+  },
+};
+```
+
+Output ES Module. Make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand.
+
+Note that this feature is not fully supported yet, please track the progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
+
+##### `type: 'commonjs2'`
+
+```js
+module.exports = {
+  // …
+  output: {
+    library: {
+      type: 'commonjs2',
+    },
+  },
+};
+```
+
+The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in Node.js (CommonJS) environments:
+
+```javascript
+module.exports = _entry_return_;
+
+require('MyLibrary').doSomething();
+```
+
+If we specify `output.library.name` with `type: commmonjs2`, the return value of your entry point will be assigned to the `module.exports.[output.library.name]`.
+
+T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
+
+##### `type: 'amd'`
+
+This will expose your library as an AMD module.
+
+AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
+
+So, with the following configuration...
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'amd',
+    },
+  },
+};
+```
+
+The generated output will be defined with the name `"MyLibrary"`, i.e.:
+
+```javascript
+define('MyLibrary', [], function () {
+  return _entry_return_;
+});
+```
+
+The bundle can be included as part of a script tag, and the bundle can be invoked like so:
+
+```javascript
+require(['MyLibrary'], function (MyLibrary) {
+  // Do something with the library...
+});
+```
+
+If `output.library.name` is undefined, the following is generated instead.
+
+```javascript
+define(function () {
+  return _entry_return_;
+});
+```
+
+This bundle will not work as expected, or not work at all (in the case of the almond loader) if loaded directly with a `<script>` tag. It will only work through a RequireJS compatible asynchronous module loader through the actual path to that file, so in this case, the `output.path` and `output.filename` may become important for this particular setup if these are exposed directly on the server.
+
+##### `type: 'amd-require'`
+
+This packages your output with an immediately-executed AMD `require(dependencies, factory)` wrapper.
+
+The `'amd-require'` type allows for the use of AMD dependencies without needing a separate later invocation. As with the `'amd'` type, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
+
+With this type, the library name can't be used.
+
+##### `type: 'umd'`
+
+This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
+
+In this case, you need the `library.name` property to name your module:
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'umd',
+    },
+  },
+};
+```
+
+And finally the output is:
+
+```javascript
+(function webpackUniversalModuleDefinition(root, factory) {
+  if (typeof exports === 'object' && typeof module === 'object')
+    module.exports = factory();
+  else if (typeof define === 'function' && define.amd) define([], factory);
+  else if (typeof exports === 'object') exports['MyLibrary'] = factory();
+  else root['MyLibrary'] = factory();
+})(global, function () {
+  return _entry_return_;
+});
+```
+
+Note that omitting `library.name` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    libraryTarget: 'umd',
+  },
+};
+```
+
+The output will be:
+
+```javascript
+(function webpackUniversalModuleDefinition(root, factory) {
+  if (typeof exports === 'object' && typeof module === 'object')
+    module.exports = factory();
+  else if (typeof define === 'function' && define.amd) define([], factory);
+  else {
+    var a = factory();
+    for (var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+  }
+})(global, function () {
+  return _entry_return_;
+});
+```
+
+You may specify an object for `library.name` for differing names per targets:
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    library: {
+      name: {
+        root: 'MyLibrary',
+        amd: 'my-library',
+        commonjs: 'my-common-library',
       },
+      type: 'umd',
+    },
+  },
+};
+```
+
+##### `type: 'system'`
+
+This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
+
+System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and have your webpack bundle loaded into the System module registry.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    library: {
+      type: 'system',
+    },
+  },
+};
+```
+
+Output:
+
+```javascript
+System.register([], function (__WEBPACK_DYNAMIC_EXPORT__, __system_context__) {
+  return {
+    execute: function () {
+      // ...
     },
   };
-  ```
+});
+```
 
-  Output ES Module. Make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand.
+By adding `output.library.name` to configuration in addition to having `output.library.type` set to `system`, the output bundle will have the library name as an argument to `System.register`:
 
-  Note that this feature is not fully supported yet, please track the progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
-
-- ##### `type: 'commonjs2'`
-
-  ```js
-  module.exports = {
-    // …
-    output: {
-      library: {
-        type: 'commonjs2',
+```javascript
+System.register(
+  'MyLibrary',
+  [],
+  function (__WEBPACK_DYNAMIC_EXPORT__, __system_context__) {
+    return {
+      execute: function () {
+        // ...
       },
-    },
-  };
-  ```
-
-  The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in Node.js (CommonJS) environments:
-
-  ```javascript
-  module.exports = _entry_return_;
-
-  require('MyLibrary').doSomething();
-  ```
-
-  If we specify `output.library.name` with `type: commmonjs2`, the return value of your entry point will be assigned to the `module.exports.[output.library.name]`.
-
-  T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
-
-- ##### `type: 'amd'`
-
-  This will expose your library as an AMD module.
-
-  AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
-
-  So, with the following configuration...
-
-  ```javascript
-  module.exports = {
-    //...
-    output: {
-      library: {
-        name: 'MyLibrary',
-        type: 'amd',
-      },
-    },
-  };
-  ```
-
-  The generated output will be defined with the name `"MyLibrary"`, i.e.:
-
-  ```javascript
-  define('MyLibrary', [], function () {
-    return _entry_return_;
-  });
-  ```
-
-  The bundle can be included as part of a script tag, and the bundle can be invoked like so:
-
-  ```javascript
-  require(['MyLibrary'], function (MyLibrary) {
-    // Do something with the library...
-  });
-  ```
-
-  If `output.library.name` is undefined, the following is generated instead.
-
-  ```javascript
-  define(function () {
-    return _entry_return_;
-  });
-  ```
-
-  This bundle will not work as expected, or not work at all (in the case of the almond loader) if loaded directly with a `<script>` tag. It will only work through a RequireJS compatible asynchronous module loader through the actual path to that file, so in this case, the `output.path` and `output.filename` may become important for this particular setup if these are exposed directly on the server.
-
-- ##### `type: 'amd-require'`
-
-  This packages your output with an immediately-executed AMD `require(dependencies, factory)` wrapper.
-
-  The `'amd-require'` type allows for the use of AMD dependencies without needing a separate later invocation. As with the `'amd'` type, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
-
-  With this type, the library name can't be used.
-
-- ##### `type: 'umd'`
-
-  This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
-
-  In this case, you need the `library.name` property to name your module:
-
-  ```javascript
-  module.exports = {
-    //...
-    output: {
-      library: {
-        name: 'MyLibrary',
-        type: 'umd',
-      },
-    },
-  };
-  ```
-
-  And finally the output is:
-
-  ```javascript
-  (function webpackUniversalModuleDefinition(root, factory) {
-    if (typeof exports === 'object' && typeof module === 'object')
-      module.exports = factory();
-    else if (typeof define === 'function' && define.amd) define([], factory);
-    else if (typeof exports === 'object') exports['MyLibrary'] = factory();
-    else root['MyLibrary'] = factory();
-  })(global, function () {
-    return _entry_return_;
-  });
-  ```
-
-  Note that omitting `library.name` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
-
-  ```javascript
-  module.exports = {
-    //...
-    output: {
-      libraryTarget: 'umd',
-    },
-  };
-  ```
-
-  The output will be:
-
-  ```javascript
-  (function webpackUniversalModuleDefinition(root, factory) {
-    if (typeof exports === 'object' && typeof module === 'object')
-      module.exports = factory();
-    else if (typeof define === 'function' && define.amd) define([], factory);
-    else {
-      var a = factory();
-      for (var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
-    }
-  })(global, function () {
-    return _entry_return_;
-  });
-  ```
-
-  You may specify an object for `library.name` for differing names per targets:
-
-  ```javascript
-  module.exports = {
-    //...
-    output: {
-      library: {
-        name: {
-          root: 'MyLibrary',
-          amd: 'my-library',
-          commonjs: 'my-common-library',
-        },
-        type: 'umd',
-      },
-    },
-  };
-  ```
-
-- ##### `type: 'system'`
-
-  This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
-
-  System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and have your webpack bundle loaded into the System module registry.
-
-  ```javascript
-  module.exports = {
-    //...
-    output: {
-      library: {
-        type: 'system',
-      },
-    },
-  };
-  ```
-
-  Output:
-
-  ```javascript
-  System.register(
-    [],
-    function (__WEBPACK_DYNAMIC_EXPORT__, __system_context__) {
-      return {
-        execute: function () {
-          // ...
-        },
-      };
-    }
-  );
-  ```
-
-  By adding `output.library.name` to configuration in addition to having `output.library.type` set to `system`, the output bundle will have the library name as an argument to `System.register`:
-
-  ```javascript
-  System.register(
-    'MyLibrary',
-    [],
-    function (__WEBPACK_DYNAMIC_EXPORT__, __system_context__) {
-      return {
-        execute: function () {
-          // ...
-        },
-      };
-    }
-  );
-  ```
+    };
+  }
+);
+```
 
 #### Other Types
 
-- ##### `type: 'jsonp'`
+##### `type: 'jsonp'`
 
-  ```js
-  module.exports = {
-    // …
-    output: {
-      library: {
-        name: 'MyLibrary',
-        type: 'jsonp',
-      },
+```js
+module.exports = {
+  // …
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'jsonp',
     },
-  };
-  ```
+  },
+};
+```
 
-  This will wrap the return value of your entry point into a jsonp wrapper.
+This will wrap the return value of your entry point into a jsonp wrapper.
 
-  ```javascript
-  MyLibrary(_entry_return_);
-  ```
+```javascript
+MyLibrary(_entry_return_);
+```
 
-  The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
+The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
 
 T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library.name` as well as `output.library.type`.
 
