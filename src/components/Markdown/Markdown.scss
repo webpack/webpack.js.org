@@ -42,7 +42,6 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   h5,
   h6 {
     &:before {
-      position: absolute; // a hack for safari
       content: '';
       display: block;
       visibility: hidden;
