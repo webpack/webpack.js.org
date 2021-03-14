@@ -1257,6 +1257,29 @@ module.exports = {
 };
 ```
 
+### output.library.umdNamedDefine
+
+`boolean`
+
+When using `output.library.type: "umd"`, setting `output.library.umdNamedDefine` to `true` will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    name: 'MyLibrary',
+    type: 'umd',
+    umdNamedDefine: true,
+  },
+};
+```
+
+The AMD module will be:
+
+```js
+define('MyLibrary', [], factory);
+```
+
 ## `output.libraryExport`
 
 W> We might drop support for this, so prefer to use [output.library.export](#outputlibraryexport) which works the same as `libraryExport`.
@@ -1877,6 +1900,8 @@ require('module'); // <- also throws
 ```
 
 ## `output.umdNamedDefine`
+
+W> Prefer to use [`output.library.umdNamedDefine`](#outputlibraryumdnameddefine) instead.
 
 `boolean`
 
