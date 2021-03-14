@@ -1434,7 +1434,7 @@ module.exports = {
   //...
   output: {
     clean: {
-      keep: /\/ignored\/dir\//, // Keep these assets.
+      keep: /ignored\/dir\//, // Keep these assets under 'ignored/dir'.
     },
   },
 };
@@ -1459,7 +1459,7 @@ You can also use it with hook:
 webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
   'Test',
   (asset) => {
-    if (/\/ignored\/dir\//.test(asset)) return true;
+    if (/ignored\/dir\//.test(asset)) return true;
   }
 );
 ```
