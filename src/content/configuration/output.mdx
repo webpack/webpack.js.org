@@ -33,6 +33,8 @@ The top-level `output` key contains set of options instructing webpack on how an
 
 ## `output.auxiliaryComment`
 
+W> Prefer to use [`output.library.auxiliaryComment`](#outputlibraryauxiliarycomment) instead.
+
 `string` `object`
 
 When used in tandem with [`output.library`](#outputlibrary) and [`output.libraryTarget`](#outputlibrarytarget), this option allows users to insert comments within the export wrapper. To insert the same comment for each `libraryTarget` type, set `auxiliaryComment` to a string:
@@ -1192,6 +1194,67 @@ And here's the library code:
 
 ```js
 var MyLibrary = _entry_return_.default.subModule;
+```
+
+### output.library.auxiliaryComment
+
+Add a comment in the UMD wrapper.
+
+- Type: `string | { amd?: string, commonjs?: string, commonjs2?: string, root?: string }`
+
+To insert the same comment for each `umd` type, set `auxiliaryComment` to a string:
+
+```js
+module.exports = {
+  // …
+  mode: 'development',
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'umd',
+      auxiliaryComment: 'Test Comment',
+    },
+  },
+};
+```
+
+which will yield the following:
+
+```js
+(function webpackUniversalModuleDefinition(root, factory) {
+  //Test Comment
+  if (typeof exports === 'object' && typeof module === 'object')
+    module.exports = factory();
+  //Test Comment
+  else if (typeof define === 'function' && define.amd) define([], factory);
+  //Test Comment
+  else if (typeof exports === 'object') exports['MyLibrary'] = factory();
+  //Test Comment
+  else root['MyLibrary'] = factory();
+})(self, function () {
+  return __entry_return_;
+});
+```
+
+For fine-grained control, pass an object:
+
+```js
+module.exports = {
+  // …
+  mode: 'development',
+  output: {
+    library: {
+      name: 'MyLibrary',
+      type: 'umd',
+      auxiliaryComment: {
+        root: 'Root Comment',
+        commonjs: 'CommonJS Comment',
+        commonjs2: 'CommonJS2 Comment',
+        amd: 'AMD Comment',
+      },
+    },
+  },
+};
 ```
 
 ## `output.libraryExport`
