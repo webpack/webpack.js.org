@@ -689,6 +689,31 @@ Note that we're passing a single entry file to `entry` in the above example. How
 
    See [this example](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for more.
 
+   Note that the above configuration won't work if you're going to configure library options per entry point. Here is how to do it [right under your entry point](/concepts/entry-points/#entrydescription-object):
+
+   ```js
+   module.exports = {
+     // …
+     entry: {
+       main: {
+         import: './src/index.js',
+         library: {
+           name: 'MyLibrary',
+           type: 'umd',
+           umdNamedDefine: true,
+         },
+       },
+       another: {
+         import: './src/another.js',
+         library: {
+           name: 'AnotherLibrary',
+           type: 'commonjs2',
+         },
+       },
+     },
+   };
+   ```
+
 ### output.library.name
 
 Specify a name for the library.
