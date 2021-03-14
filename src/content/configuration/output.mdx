@@ -646,7 +646,7 @@ Now the variable `MyLibrary` will be bound with the exports of your entry file, 
 </script>
 ```
 
-Note that we're passing a single entry file to `entry` in the above example. However webpack can accept [many kinds of entry point](/configuration/entry-context/#entry), e.g., an `array`, an `object`.
+In the above example we're passing a single entry file to `entry`, however webpack can accept [many kinds of entry point](/configuration/entry-context/#entry), e.g., an `array`, or an `object`.
 
 1. If you provide an `array` as the `entry` point, only the last one in the array will be exposed.
 
@@ -660,7 +660,7 @@ Note that we're passing a single entry file to `entry` in the above example. How
    };
    ```
 
-2. If an `object` is provided as the `entry` point, all can be exposed using the `array` syntax of `library`:
+2. If an `object` is provided as the `entry` point, all entries can be exposed using the `array` syntax of `library`:
 
    ```js
    module.exports = {
@@ -689,7 +689,7 @@ Note that we're passing a single entry file to `entry` in the above example. How
 
    See [this example](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for more.
 
-   Note that the above configuration won't work if you're going to configure library options per entry point. Here is how to do it [right under your entry point](/concepts/entry-points/#entrydescription-object):
+   Note that the above configuration won't work as expected if you're going to configure library options per entry point. Here is how to do it [under each of your entries](/concepts/entry-points/#entrydescription-object):
 
    ```js
    module.exports = {
@@ -698,6 +698,7 @@ Note that we're passing a single entry file to `entry` in the above example. How
        main: {
          import: './src/index.js',
          library: {
+           // all options under `output.library` can be used here
            name: 'MyLibrary',
            type: 'umd',
            umdNamedDefine: true,
@@ -736,7 +737,7 @@ Specify a name for the library.
 
 ### output.library.type
 
-Configure how the library will be exposed. Any one of the following options can be used. Please note that this option works in conjunction with the value assigned to [`output.library.name`](#outputlibraryname).
+Configure how the library will be exposed.
 
 - Type: `string`
 
@@ -850,7 +851,7 @@ this['MyLibrary'] = _entry_return_;
 
 // In a separate script...
 this.MyLibrary.doSomething();
-MyLibrary.doSomething(); // if this is window
+MyLibrary.doSomething(); // if `this` is window
 ```
 
 ##### `type: 'window'`
@@ -935,16 +936,16 @@ module.exports = {
   },
   output: {
     library: {
-      // note that you should not specify a name here
+      // do not specify a `name` here
       type: 'module',
     },
   },
 };
 ```
 
-Output ES Module. Make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand.
+Output ES Module.
 
-Note that this feature is not fully supported yet, please track the progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
+However this feature is still experimental and not fully supported yet, so make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand. In addition, you can track the development progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
 
 ##### `type: 'commonjs2'`
 
@@ -953,6 +954,7 @@ module.exports = {
   // …
   output: {
     library: {
+      // note there's no `name` here
       type: 'commonjs2',
     },
   },
