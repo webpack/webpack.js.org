@@ -416,8 +416,8 @@ module: {
     rules: [
     // ...
 +     {
-+       resourceQuery: /raw/
-+       type: 'asset/source'
++       resourceQuery: /raw/,
++       type: 'asset/source',
 +     }
     ]
   },
@@ -434,8 +434,8 @@ module: {
 +       resourceQuery: /^(?!\?raw$).*/,
 +     },
       {
-        resourceQuery: /raw/
-        type: 'asset/source'
+        resourceQuery: /raw/,
+        type: 'asset/source',
       }
     ]
   },
