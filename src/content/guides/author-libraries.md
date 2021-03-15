@@ -209,7 +209,7 @@ module.exports = ['source-map'].map((devtool) => ({
 
 ## Externalize Lodash
 
-Now, if you run `webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. In this case, we'd prefer to treat `lodash` as a `peerDependency`. Meaning that the consumer should already have `lodash` installed. Hence you would want to give up control of this external library to the consumer of your library.
+Now, if you run `webpack`, you will find that a largish bundle is created. If you inspect the file, you'll see that lodash has been bundled along with your code. In this case, we'd prefer to treat `lodash` as a *peer dependency*. Meaning that the consumer should already have `lodash` installed. Hence you would want to give up control of this external library to the consumer of your library.
 
 This can be done using the `externals` configuration:
 
@@ -324,7 +324,7 @@ You can expose the library in the following ways:
 - Variable: as a global variable made available by a `script` tag (`libraryTarget:'var'`).
 - This: available through the `this` object (`libraryTarget:'this'`).
 - Window: available through the `window` object, in the browser (`libraryTarget:'window'`).
-- UMD: available after AMD or CommonJS `require` (`libraryTarget:'umd'`).
+- UMD: available under all the module definitions (`libraryTarget:'umd'`).
 
 If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output/#outputlibrarytarget) there for a detailed list of all available options.
 
