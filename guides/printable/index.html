@@ -2911,8 +2911,8 @@ module.exports = {
 <span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   rules: [
 </span><span class="token prefix unchanged"> </span><span class="token line">   // ...
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     {
-</span><span class="token prefix inserted">+</span><span class="token line">       resourceQuery: /raw/
-</span><span class="token prefix inserted">+</span><span class="token line">       type: 'asset/source'
+</span><span class="token prefix inserted">+</span><span class="token line">       resourceQuery: /raw/,
+</span><span class="token prefix inserted">+</span><span class="token line">       type: 'asset/source',
 </span><span class="token prefix inserted">+</span><span class="token line">     }
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   ]
 </span><span class="token prefix unchanged"> </span><span class="token line"> },</span></span></code></pre> <p>and if you'd like to exclude raw assets from being parsed by other loaders, use a negative lookahead:</p> <pre><code class="hljs language-diff">module: {
@@ -2923,8 +2923,8 @@ module.exports = {
 </span><span class="token prefix inserted">+</span><span class="token line">       resourceQuery: /^(?!\?raw$).*/,
 </span><span class="token prefix inserted">+</span><span class="token line">     },
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">     {
-</span><span class="token prefix unchanged"> </span><span class="token line">       resourceQuery: /raw/
-</span><span class="token prefix unchanged"> </span><span class="token line">       type: 'asset/source'
+</span><span class="token prefix unchanged"> </span><span class="token line">       resourceQuery: /raw/,
+</span><span class="token prefix unchanged"> </span><span class="token line">       type: 'asset/source',
 </span><span class="token prefix unchanged"> </span><span class="token line">     }
 </span><span class="token prefix unchanged"> </span><span class="token line">   ]
 </span><span class="token prefix unchanged"> </span><span class="token line"> },</span></span></code></pre> <h1 id="package-exports">Package exports<a href="#package-exports" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1> <p>The <code>exports</code> field in the <code>package.json</code> of a package allows to declare which module should be used when using module requests like <code>import "package"</code> or <code>import "package/sub/path"</code>. It replaces the default implementation that returns <code>main</code> field resp. <code>index.js</code> files for <code>"package"</code> and the file system lookup for <code>"package/sub/path"</code>.</p> <p>When the <code>exports</code> field is specified, only these module requests are available. Any other requests will lead to a ModuleNotFound Error.</p> <h2 id="general-syntax">General syntax<a href="#general-syntax" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>In general the <code>exports</code> field should contain an object where each properties specifies a sub path of the module request. For the examples above the following properties could be used: <code>"."</code> for <code>import "package"</code> and <code>"./sub/path"</code> for <code>import "package/sub/path"</code>. Properties ending with a <code>/</code> will forward a request with this prefix to the old file system lookup algorithm. For properties ending with <code>*</code>, <code>*</code> may take any value and any <code>*</code> in the property value is replaced with the taken value.</p> <p>An example:</p> <pre><code class="hljs language-json"><span class="token punctuation">{</span>
