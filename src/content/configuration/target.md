@@ -127,7 +127,7 @@ module.exports = {
   // ...
   target: false,
   plugins: [
-    new webpack.JsonpTemplatePlugin(options.output),
+    new webpack.web.JsonpTemplatePlugin(options.output),
     new webpack.LoaderTargetPlugin('web'),
   ],
 };

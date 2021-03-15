@@ -26,7 +26,11 @@ related:
 
 我们区分本地模块和远程模块。本地模块即为普通模块，是当前构建的一部分。远程模块不属于当前构建，并在运行时从所谓的容器加载。
 
+<<<<<<< HEAD
 加载远程模块被认为是异步操作。当使用远程模块时，这些异步操作将被放置在远程模块和入口之间的下一个 chunk 的加载操作中。如果没有 chunk 加载操作，就不能使用远程模块。
+=======
+Loading remote modules is considered an asynchronous operation. When using a remote module these asynchronous operations will be placed in the next chunk loading operation(s) that is between the remote module and the entrypoint. It's not possible to use a remote module without a chunk loading operation.
+>>>>>>> 8b4e677e1717189450cc9449e082a292abb0873d
 
 chunk 的加载操作通常是通过调用 `import()` 实现的，但也支持像 `require.ensure` 或 `require([...])` 之类的旧语法。
 
@@ -45,7 +49,11 @@ chunk 的加载操作通常是通过调用 `import()` 实现的，但也支持�
 
 容器管理可重载模块的方式为：当使用者已经重写它们后，就不需要下载了。这通常是通过将它们放在单独的 chunk 中来实现的。
 
+<<<<<<< HEAD
 另一方面，替换模块的提供者，将只提供异步加载函数。它允许容器仅在需要替换模块时才去加载。提供者管理替换模块的方式为：当容器不请求替换模块时，则无需下载。这通常是通过将它们放在单独的 chunk 中来实现的。
+=======
+On the other hand, the provider of the replacement modules will only provide asynchronous loading functions. It allows the container to load replacement modules only when they are needed. The provider will manage replacement modules in a way that they do not need to be downloaded at all when they are not requested by the container. This usually happens by placing them into separate chunks.
+>>>>>>> 8b4e677e1717189450cc9449e082a292abb0873d
 
 "name" 用于标识容器中可重载的模块。
 
@@ -56,7 +64,11 @@ chunk 的加载操作通常是通过调用 `import()` 实现的，但也支持�
 
 W> 当嵌套使用时，向容器提供重载将自动覆盖嵌套容器中具有相同 "name" 的模块。
 
+<<<<<<< HEAD
 必须在容器模块加载之前提供重载。在初始 chunk 中使用的重载只能被不使用 Promise 的同步模块重载。一旦执行，就不可再次被重载。
+=======
+Overrides must be provided before the modules of the container are loaded. Overridables that are used in the initial chunk, can only be overridden by a synchronous module override that doesn't use Promises. Once evaluated, overridables are no longer overridable.
+>>>>>>> 8b4e677e1717189450cc9449e082a292abb0873d
 
 ## 高级概念 {#high-level-concepts}
 
@@ -142,9 +154,15 @@ __webpack_override__({
 
 ## 动态远程容器 {#dynamic-remote-containers}
 
+<<<<<<< HEAD
 该容器接口支持 `get` 和 `init` 方法。
 `init` 是一个兼容 `async` 的方法，调用时，只含有一个参数：共享作用域对象(shared scope object)。此对象在远程容器中用作共享作用域，并由 host 提供的模块填充。
 可以利用它在运行时动态地将远程容器连接到 host 容器。
+=======
+The container interface supports `get` and `init` methods.
+`init` is an `async` compatible method that is called with one argument: the shared scope object. This object is used as a shared scope in the remote container and is filled with the provided modules from a host.
+It can be leveraged to connect remote containers to a host container dynamically at runtime.
+>>>>>>> 8b4e677e1717189450cc9449e082a292abb0873d
 
 **init.js**
 
@@ -192,7 +210,11 @@ loadComponent('abtests', 'test123');
 
 **`Uncaught Error: Shared module is not available for eager consumption`**
 
+<<<<<<< HEAD
 应用程序正急切地执行一个作为全局主机运行的应用程序。有如下选项可供选择:
+=======
+The application is eagerly executing an application that is operating as an omnidirectional host. There are options to choose from:
+>>>>>>> 8b4e677e1717189450cc9449e082a292abb0873d
 
 你可以在模块联邦的高级 API 中将依赖设置为即时依赖，此 API 不会将模块放在异步 chunk 中，而是同步地提供它们。这使得我们在初始块中可以直接使用这些共享模块。但是要注意，由于所有提供的和降级模块是要异步下载的，因此，建议只在应用程序的某个地方提供它，例如 shell。
 
@@ -265,5 +287,10 @@ new ModuleFederationPlugin({
 
 **`Uncaught TypeError: fn is not a function`**
 
+<<<<<<< HEAD
 此处错误可能是丢失了远程容器，请确保在使用前添加它。
 如果已为试图使用远程服务器的容器加载了容器，但仍然看到此错误，则需将主机容器的远程容器文件也添加到 HTML 中。
+=======
+You are likely missing the remote container, make sure it's added.
+If you have the container loaded for the remote you are trying to consume, but still see this error, add the host container's remote container file to the HTML as well.
+>>>>>>> 8b4e677e1717189450cc9449e082a292abb0873d
