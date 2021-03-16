@@ -4345,10 +4345,10 @@ cuss@^1.3.0:
   resolved "https://registry.yarnpkg.com/cuss/-/cuss-1.21.0.tgz#1aba3bb911fadda8566855ed036295af8116be40"
   integrity sha512-X3VvImImJ5q6w0wOgJtxAX+RC06d26egp/A/vdSxqOrsRtAA9biXAkc4PZGj/3gx0+z+gDFri6BpcpwuG1/UEw==
 
-cypress@^6.6.0:
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-6.6.0.tgz#659c64cdb06e51b6be18fdac39d8f192deb54fa0"
-  integrity sha512-+Xx3Zn653LJHUsCb9h1Keql2jlazbr1ROmbY6DFJMmXKLgXP4ez9cE403W93JNGRbZK0Tng3R/oP8mvd9XAPVg==
+cypress@^6.7.1:
+  version "6.7.1"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-6.7.1.tgz#6b8e1ba9badbded284ddc8575873b64211250ea6"
+  integrity sha512-MC9yt1GqpL4WVDQ0STI89K+PdLeC3T3NuAb2N61d6vYGR9pJy8w3Fqe0OWZwaRTJtg9eAyHXPGmFsyKeNQ3tmg==
   dependencies:
     "@cypress/listr-verbose-renderer" "^0.4.1"
     "@cypress/request" "^2.88.5"
@@ -13907,11 +13907,6 @@ workbox-cacheable-response@^6.1.2:
   dependencies:
     workbox-core "^6.1.2"
 
-workbox-core@^6.1.1, workbox-core@^6.1.2:
-  version "6.1.2"
-  resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-6.1.2.tgz#b694ca77e1cdf43c330f8fb29122946aa7e6a7a1"
-  integrity sha512-69rch7EyPsNAx5Y5YlSoHV39/EEE1oDeb5zmLIy6+mgB4BnaG6u/tlDtvjvKqHcPM0gz2L5SzYtTEvWmk5WRTQ==
-
 workbox-core@^6.1.2:
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-6.1.2.tgz#b694ca77e1cdf43c330f8fb29122946aa7e6a7a1"
@@ -14007,13 +14002,6 @@ workbox-webpack-plugin@^6.1.2:
     upath "^1.2.0"
     webpack-sources "^1.4.3"
     workbox-build "^6.1.2"
-
-workbox-window@^6.1.1, workbox-window@^6.1.2:
-  version "6.1.2"
-  resolved "https://registry.yarnpkg.com/workbox-window/-/workbox-window-6.1.2.tgz#6db9a3b1eebf6470513d916852bfd1b1c918fe05"
-  integrity sha512-SXOAv56PWHzLhJcyQGPio1OXGzSza814lc2D42+go8CmeNIJDb03nzUi1FGMF4Tt1F7h5q8IYzq5bPQLTZ7IKQ==
-  dependencies:
-    workbox-core "^6.1.2"
 
 workbox-window@^6.1.2:
   version "6.1.2"
