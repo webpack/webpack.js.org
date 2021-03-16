@@ -807,7 +807,7 @@ require('MyLibrary').doSomething();
 
 需要注意的是，该功能还未完全支持，请在[此处](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975)跟进进度。
 
-#### `libraryTarget: 'commonjs2'`
+#### `libraryTarget: 'commonjs2'` {#librarytarget-commonjs2}
 
 **入口起点的返回值**将分配给 `module.exports` 对象。这个名称也意味着模块用于 CommonJS 环境：
 
@@ -821,7 +821,7 @@ require('MyLibrary').doSomething();
 
 T> 想要弄清楚 CommonJS 和 CommonJS2 之间的区别？虽然它们很相似，但二者之间存在一些微妙的差异，这通常与 webpack 上下文没有关联。（更多详细信息，请[阅读此 issue](https://github.com/webpack/webpack/issues/1114)。）
 
-#### `libraryTarget: 'amd'`
+#### `libraryTarget: 'amd'` {#librarytarget-amd}
 
 将你的 library 暴露为 AMD 模块。
 
@@ -865,7 +865,7 @@ define([], function () {
 
 如果直接加载 `<script>` 标签，此 bundle 无法按预期运行，或者根本无法正常运行（在 almond loader 中）。只能通过文件的实际路径，在 RequireJS 兼容的异步模块加载器中运行，因此在这种情况下，如果这些设置直接暴露在服务器上，那么 `output.path` 和 `output.filename` 对于这个特定的设置可能变得很重要。
 
-#### `libraryTarget: 'amd-require'`
+#### `libraryTarget: 'amd-require'` {#librarytarget-amd-require}
 
 这将使用立即执行的AMD `require(dependencies, factory)` 包装器包装您的输出。
 
@@ -873,7 +873,7 @@ define([], function () {
 
 对于此 target，库名称将被忽略。
 
-#### `libraryTarget: 'umd'`
+#### `libraryTarget: 'umd'` {#librarytarget-umd}
 
 将你的 library 暴露为所有的模块定义下都可运行的方式。它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。了解更多请查看 [UMD 仓库](https://github.com/umdjs/umd)。
 
@@ -942,8 +942,6 @@ module.exports = {
       commonjs: 'my-common-library',
     },
     libraryTarget: 'umd',
-    },
-    libraryTarget: 'umd',
   },
 };
 ```
@@ -1003,7 +1001,7 @@ __system_context__.import('./other-file.js').then((m) => {
 
 ### 其他 Targets {#other-targets}
 
-#### `libraryTarget: 'jsonp'`
+#### `libraryTarget: 'jsonp'` {#librarytarget-jsonp}
 
 这将把入口起点的返回值，包裹到一个 jsonp 包装容器中
 
