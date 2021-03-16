@@ -382,7 +382,7 @@ module.exports = {
 };
 ```
 
-#### `processorOptions`
+#### `processorOptions` {#processoroptions}
 
 类型：`Object`
 默认值：`{ to: assetName, from: assetName }`
