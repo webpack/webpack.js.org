@@ -17,7 +17,7 @@ webpack supported processing ECMAScript Modules to optimize them.
 
 The `export` keyword allows to expose things from an ESM to other modules:
 
-``` js
+```js
 export const CONSTANT = 42;
 
 export let variable = 42;
@@ -44,7 +44,7 @@ export default 1 + 2 + 3 + more();
 
 The `import` keyword allows to get references to things from other modules into an ESM:
 
-``` js
+```js
 import { CONSTANT, variable } from './module.js';
 // import "bindings" to exports from another module
 // these bindings are live. The values are not copied,
@@ -59,7 +59,7 @@ import theDefaultValue from './module.js';
 // shortcut to import the "default" export
 ```
 
-## Flagging modules are ESM
+## Flagging modules as ESM
 
 By default webpack will automatically detect whether a file is an ESM or a different module system.
 
@@ -67,7 +67,7 @@ Node.js established a way of explicitly setting the module type of files by usin
 Setting `"type": "module"` in a package.json does force all files below this package.json to be ECMAScript Modules.
 Setting `"type": "commonjs"` will instead force them to be CommonJS Modules.
 
-``` json
+```json
 {
   "type": "module"
 }

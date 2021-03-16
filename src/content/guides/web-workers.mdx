@@ -1,0 +1,53 @@
+---
+title: Web Workers
+sort: 21
+contributors:
+  - chenxsan
+---
+
+As of webpack 5, you can use [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) without [`worker-loader`](https://github.com/webpack-contrib/worker-loader).
+
+## Syntax
+
+```js
+new Worker(new URL('./worker.js', import.meta.url));
+```
+
+The syntax was chosen to allow running code without bundler, it is also available in native ECMAScript modules in the browser.
+
+## Example
+
+**src/index.js**
+
+```js
+const worker = new Worker(new URL('./deep-thought.js', import.meta.url));
+worker.postMessage({
+  question:
+    'The Answer to the Ultimate Question of Life, The Universe, and Everything.',
+});
+worker.onmessage = ({ data: { answer } }) => {
+  console.log(answer);
+};
+```
+
+**src/deep-thought.js**
+
+```js
+self.onmessage = ({ data: { question } }) => {
+  self.postMessage({
+    answer: 42,
+  });
+};
+```
+
+## Node.js
+
+Similar syntax is supported in Node.js (>= 12.17.0):
+
+```js
+import { Worker } from 'worker_threads';
+
+new Worker(new URL('./worker.js', import.meta.url));
+```
+
+Note that this is only available in ESM. CommonJS is not supported by neither webpack nor Node.js.

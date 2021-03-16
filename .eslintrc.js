@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'prettier'],
   parser: '@babel/eslint-parser',
   env: {
     browser: true,
@@ -9,7 +9,7 @@ module.exports = {
     jest: true,
     'cypress/globals': true,
   },
-  plugins: ['markdown', 'cypress'],
+  plugins: ['markdown', 'cypress', 'react-hooks'],
   globals: {
     __DEV__: true,
     Badge: true, // global MDX component
@@ -20,6 +20,8 @@ module.exports = {
     quotes: ['error', 'single'],
     'react/jsx-uses-react': 'off', // no longer needed with new jsx transform
     'react/react-in-jsx-scope': 'off', // ditto
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
   },
   settings: {
     react: {

@@ -26,7 +26,7 @@ This is often known as Micro-Frontends, but is not limited to that.
 
 We distinguish between local and remote modules. Local modules are normal modules which are part of the current build. Remote modules are modules that are not part of the current build and loaded from a so-called container at the runtime.
 
-Loading remote modules is considered asynchronous operation. When using a remote module these asynchronous operations will be placed in the next chunk loading operation(s) that is between the remote module and the entrypoint. It's not possible to use a remote module without a chunk loading operation.
+Loading remote modules is considered an asynchronous operation. When using a remote module these asynchronous operations will be placed in the next chunk loading operation(s) that is between the remote module and the entrypoint. It's not possible to use a remote module without a chunk loading operation.
 
 A chunk loading operation is usually an `import()` call, but older constructs like `require.ensure` or `require([...])` are supported as well.
 
@@ -37,7 +37,7 @@ A container is created through a container entry, which exposes asynchronous acc
 
 Step 1 will be done during the chunk loading. Step 2 will be done during the module evaluation interleaved with other (local and remote) modules. This way, evaluation order is unaffected by converting a module from local to remote or the other way around.
 
-It is possible to nest a container. Containers can use modules from other containers. Circular dependencies between container are also possible.
+It is possible to nest a container. Containers can use modules from other containers. Circular dependencies between containers are also possible.
 
 ### Overriding
 
@@ -45,7 +45,7 @@ A container is able to flag selected local modules as "overridable". A consumer 
 
 The container will manage overridable modules in a way that they do not need to be downloaded when they have been overridden by the consumer. This usually happens by placing them into separate chunks.
 
-On the other hand, the provider of the replacement modules, will only provide asynchronous loading functions. It allows the container to load replacement modules only when they are needed. The provider will manage replacement modules in a way that they do not need to be downloaded at all when they are not requested by the container. This usually happens by placing them into separate chunks.
+On the other hand, the provider of the replacement modules will only provide asynchronous loading functions. It allows the container to load replacement modules only when they are needed. The provider will manage replacement modules in a way that they do not need to be downloaded at all when they are not requested by the container. This usually happens by placing them into separate chunks.
 
 A "name" is used to identify overridable modules from the container.
 
@@ -56,7 +56,7 @@ Overrides are provided in a similar way as the container exposes modules, separa
 
 W> When nesting is used, providing overrides to one container will automatically override the modules with the same "name" in the nested container(s).
 
-Overrides must be provided before the modules of the container are loaded. Overridables that are used in initial chunk, can only be overridden by a synchronous module override that doesn't use Promises. Once evaluated, overridables are no longer overridable.
+Overrides must be provided before the modules of the container are loaded. Overridables that are used in the initial chunk, can only be overridden by a synchronous module override that doesn't use Promises. Once evaluated, overridables are no longer overridable.
 
 ## High-level concepts
 
@@ -72,7 +72,7 @@ The `packageName` option allows setting a package name to look for a `requiredVe
 
 This plugin makes specific modules "overridable". A local API (`__webpack_override__`) allows to provide overrides.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 const OverridablesPlugin = require('webpack/lib/container/OverridablesPlugin');
@@ -88,7 +88,7 @@ module.exports = {
 };
 ```
 
-__src/index.js__
+**src/index.js**
 
 ```js
 __webpack_override__({
@@ -114,20 +114,20 @@ This plugin combines `ContainerPlugin` and `ContainerReferencePlugin`. Overrides
 - It should be possible to expose and use any module type that webpack supports.
 - Chunk loading should load everything needed in parallel (web: single round-trip to server).
 - Control from consumer to container
-    - Overriding modules is a one-directional operation.
-    - Sibling containers cannot override each other's modules.
+  - Overriding modules is a one-directional operation.
+  - Sibling containers cannot override each other's modules.
 - Concept should be environment-independent.
-    - Usable in web, Node.js, etc.
+  - Usable in web, Node.js, etc.
 - Relative and absolute request in shared:
-    - Will always be provided, even if not used.
-    - Will resolve relative to `config.context`.
-    - Does not use a `requiredVersion` by default.
+  - Will always be provided, even if not used.
+  - Will resolve relative to `config.context`.
+  - Does not use a `requiredVersion` by default.
 - Module requests in shared:
-    - Are only provided when they are used.
-    - Will match all used equal module requests in your build.
-    - Will provide all matching modules.
-    - Will extract `requiredVersion` from package.json at this position in the graph.
-    - Could provide and consume multiple different version when you have nested node_modules.
+  - Are only provided when they are used.
+  - Will match all used equal module requests in your build.
+  - Will provide all matching modules.
+  - Will extract `requiredVersion` from package.json at this position in the graph.
+  - Could provide and consume multiple different version when you have nested node_modules.
 - Module requests with trailing `/` in shared will match all module requests with this prefix.
 
 ## Use cases
@@ -143,10 +143,10 @@ Many applications share a common components library which could be built as a co
 ## Dynamic Remote Containers
 
 The container interface supports `get` and `init` methods.
-`init` is a `async` compatible method that is called with one argument: the shared scope object. This object is used as a shared scope in the remote container and is filled with the provided modules from a host.
+`init` is an `async` compatible method that is called with one argument: the shared scope object. This object is used as a shared scope in the remote container and is filled with the provided modules from a host.
 It can be leveraged to connect remote containers to a host container dynamically at runtime.
 
-__init.js__
+**init.js**
 
 ```js
 (async () => {
@@ -167,7 +167,7 @@ T> Ensure you have loaded the container before attempting to dynamically connect
 
 Example:
 
-__init.js__
+**init.js**
 
 ```js
 function loadComponent(scope, module) {
@@ -190,9 +190,9 @@ loadComponent('abtests', 'test123');
 
 ## Troubleshooting
 
-__`Uncaught Error: Shared module is not available for eager consumption`__
+**`Uncaught Error: Shared module is not available for eager consumption`**
 
-The application is eagerly executing an application which is operating as an omnidirectional host. There are options to choose from:
+The application is eagerly executing an application that is operating as an omnidirectional host. There are options to choose from:
 
 You can set the dependency as eager inside the advanced API of Module Federation, which doesn’t put the modules in an async chunk, but provides them synchronously. This allows us to use these shared modules in the initial chunk. But be careful as all provided and fallback modules will always be downloaded. It’s recommended to provide it only at one point of your application, e.g. the shell.
 
@@ -200,7 +200,7 @@ We strongly recommend using an asynchronous boundary. It will split out the init
 
 For example, your entry looked like this:
 
-__index.js__
+**index.js**
 
 ```js
 import React from 'react';
@@ -211,7 +211,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 Let's create `bootstrap.js` file and move contents of the entry into it, and import that bootstrap into the entry:
 
-__index.js__
+**index.js**
 
 ```diff
 + import('./bootstrap');
@@ -221,7 +221,7 @@ __index.js__
 - ReactDOM.render(<App />, document.getElementById('root'));
 ```
 
-__bootstrap.js__
+**bootstrap.js**
 
 ```diff
 + import React from 'react';
@@ -234,7 +234,7 @@ This method works but can have limitations or drawbacks.
 
 Setting `eager: true` for dependency via the `ModuleFederationPlugin`
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 // ...
@@ -243,12 +243,12 @@ new ModuleFederationPlugin({
     ...deps,
     react: {
       eager: true,
-    }
-  }
+    },
+  },
 });
 ```
 
-__`Uncaught Error: Module "./Button" does not exist in container.`__
+**`Uncaught Error: Module "./Button" does not exist in container.`**
 
 It likely does not say `"./Button"`, but the error message will look similar. This issue is typically seen if you are upgrading from webpack beta.16 to webpack beta.17.
 
@@ -263,7 +263,7 @@ new ModuleFederationPlugin({
 });
 ```
 
-__`Uncaught TypeError: fn is not a function`__
+**`Uncaught TypeError: fn is not a function`**
 
-You are likely missing the remote container, make sure its added.
+You are likely missing the remote container, make sure it's added.
 If you have the container loaded for the remote you are trying to consume, but still see this error, add the host container's remote container file to the HTML as well.

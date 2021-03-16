@@ -15,7 +15,7 @@ contributors:
 
 If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
 
-Prior to webpack, front-end developers would use tools like [grunt](https://gruntjs.com/) and [gulp](https://gulpjs.com/) to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. The same idea was used for JavaScript modules, but tools like webpack will __dynamically bundle__ all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is great because every module now _explicitly states its dependencies_ and we'll avoid bundling modules that aren't in use.
+Prior to webpack, front-end developers would use tools like [grunt](https://gruntjs.com/) and [gulp](https://gulpjs.com/) to process these assets and move them from their `/src` folder into their `/dist` or `/build` directory. The same idea was used for JavaScript modules, but tools like webpack will **dynamically bundle** all dependencies (creating what's known as a [dependency graph](/concepts/dependency-graph)). This is great because every module now _explicitly states its dependencies_ and we'll avoid bundling modules that aren't in use.
 
 One of the coolest webpack features is that you can also _include any other type of file_, besides JavaScript, for which there is a loader or built-in [Asset Modules](/guides/asset-modules/) support. This means that the same benefits listed above for JavaScript (e.g. explicit dependencies) can be applied to everything used in building a website or web app. Let's start with CSS, as you may already be familiar with that setup.
 
@@ -23,9 +23,9 @@ One of the coolest webpack features is that you can also _include any other type
 
 Let's make a minor change to our project before we get started:
 
-__dist/index.html__
+**dist/index.html**
 
-``` diff
+```diff
  <!DOCTYPE html>
  <html>
    <head>
@@ -40,11 +40,11 @@ __dist/index.html__
  </html>
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
- 
+
  module.exports = {
    entry: './src/index.js',
    output: {
@@ -55,20 +55,19 @@ __webpack.config.js__
  };
 ```
 
-
 ## Loading CSS
 
 In order to `import` a CSS file from within a JavaScript module, you need to install and add the [style-loader](/loaders/style-loader) and [css-loader](/loaders/css-loader) to your [`module` configuration](/configuration/module):
 
-``` bash
+```bash
 npm install --save-dev style-loader css-loader
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
- 
+
  module.exports = {
    entry: './src/index.js',
    output: {
@@ -86,7 +85,7 @@ __webpack.config.js__
  };
 ```
 
-Module loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order. The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, webpack expects JavaScript to be returned by the last loader in the chain. 
+Module loaders can be chained. Each loader in the chain applies transformations to the processed resource. A chain is executed in reverse order. The first loader passes its result (resource with applied transformations) to the next one, and so forth. Finally, webpack expects JavaScript to be returned by the last loader in the chain.
 
 The above order of loaders should be maintained: [`'style-loader'`](/loaders/style-loader) comes first and followed by [`'css-loader'`](/loaders/css-loader). If this convention is not followed, webpack is likely to throw errors.
 
@@ -96,9 +95,9 @@ This enables you to `import './style.css'` into the file that depends on that st
 
 Let's try it out by adding a new `style.css` file to our project and import it in our `index.js`:
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
   |- webpack.config.js
@@ -111,36 +110,36 @@ __project__
   |- /node_modules
 ```
 
-__src/style.css__
+**src/style.css**
 
-``` css
+```css
 .hello {
   color: red;
 }
 ```
 
-__src/index.js__
+**src/index.js**
 
-``` diff
+```diff
  import _ from 'lodash';
 +import './style.css';
- 
+
  function component() {
    const element = document.createElement('div');
- 
+
    // Lodash, now imported by this script
    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +  element.classList.add('hello');
- 
+
    return element;
  }
- 
+
  document.body.appendChild(component());
 ```
 
 Now run your build command:
 
-``` bash
+```bash
 $ npm run build
 
 ...
@@ -161,18 +160,17 @@ webpack 5.4.0 compiled successfully in 2231 ms
 
 Open up `dist/index.html` in your browser again and you should see that `Hello webpack` is now styled in red. To see what webpack did, inspect the page (don't view the page source, as it won't show you the result, because the `<style>` tag is dynamically created by JavaScript) and look at the page's head tags. It should contain the style block that we imported in `index.js`.
 
-Note that you can, and in most cases should, [minimize css](/plugins/mini-css-extract-plugin/#minimizing-for-production) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of -- [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
-
+Note that you can, and in most cases should, [minimize css](/plugins/mini-css-extract-plugin/#minimizing-for-production) for better load times in production. On top of that, loaders exist for pretty much any flavor of CSS you can think of – [postcss](/loaders/postcss-loader), [sass](/loaders/sass-loader), and [less](/loaders/less-loader) to name a few.
 
 ## Loading Images
 
 So now we're pulling in our CSS, but what about our images like backgrounds and icons? As of webpack 5, using the built-in [Asset Modules](/guides/asset-modules/) we can easily incorporate those in our system as well:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
- 
+
  module.exports = {
    entry: './src/index.js',
    output: {
@@ -198,9 +196,9 @@ Now, when you `import MyImage from './my-image.png'`, that image will be process
 
 Let's add an image to our project and see how this works, you can use any image you like:
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
   |- webpack.config.js
@@ -214,20 +212,20 @@ __project__
   |- /node_modules
 ```
 
-__src/index.js__
+**src/index.js**
 
-``` diff
+```diff
  import _ from 'lodash';
  import './style.css';
 +import Icon from './icon.png';
- 
+
  function component() {
    const element = document.createElement('div');
- 
+
    // Lodash, now imported by this script
    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
    element.classList.add('hello');
- 
+
 +  // Add the image to our existing div.
 +  const myIcon = new Image();
 +  myIcon.src = Icon;
@@ -236,13 +234,13 @@ __src/index.js__
 +
    return element;
  }
- 
+
  document.body.appendChild(component());
 ```
 
-__src/style.css__
+**src/style.css**
 
-``` diff
+```diff
  .hello {
    color: red;
 +  background: url('./icon.png');
@@ -251,7 +249,7 @@ __src/style.css__
 
 Let's create a new build and open up the `index.html` file again:
 
-``` bash
+```bash
 $ npm run build
 
 ...
@@ -276,16 +274,15 @@ webpack 5.4.0 compiled successfully in 1972 ms
 
 If all went well, you should now see your icon as a repeating background, as well as an `img` element beside our `Hello webpack` text. If you inspect this element, you'll see that the actual filename has changed to something like `29822eaa871e8eadeaa4.png`. This means webpack found our file in the `src` folder and processed it!
 
-
 ## Loading Fonts
 
 So what about other assets like fonts? The Asset Modules will take any file you load through them and output it to your build directory. This means we can use them for any kind of file, including fonts. Let's update our `webpack.config.js` to handle font files:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
- 
+
  module.exports = {
    entry: './src/index.js',
    output: {
@@ -313,10 +310,9 @@ __webpack.config.js__
 
 Add some font files to your project:
 
-__project__
+**project**
 
-
-``` diff
+```diff
   webpack-demo
   |- package.json
   |- webpack.config.js
@@ -334,9 +330,9 @@ __project__
 
 With the loader configured and fonts in place, you can incorporate them via an `@font-face` declaration. The local `url(...)` directive will be picked up by webpack just as it was with the image:
 
-__src/style.css__
+**src/style.css**
 
-``` diff
+```diff
 +@font-face {
 +  font-family: 'MyFont';
 +  src: url('./my-font.woff2') format('woff2'),
@@ -354,7 +350,7 @@ __src/style.css__
 
 Now run a new build and let's see if webpack handled our fonts:
 
-``` bash
+```bash
 $ npm run build
 
 ...
@@ -384,20 +380,19 @@ webpack 5.4.0 compiled successfully in 2142 ms
 
 Open up `dist/index.html` again and see if our `Hello webpack` text has changed to the new font. If all is well, you should see the changes.
 
-
 ## Loading Data
 
 Another useful asset that can be loaded is data, like JSON files, CSVs, TSVs, and XML. Support for JSON is actually built-in, similar to NodeJS, meaning `import Data from './data.json'` will work by default. To import CSVs, TSVs, and XML you could use the [csv-loader](https://github.com/theplatapi/csv-loader) and [xml-loader](https://github.com/gisikw/xml-loader). Let's handle loading all three:
 
-``` bash
+```bash
 npm install --save-dev csv-loader xml-loader
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
- 
+
  module.exports = {
    entry: './src/index.js',
    output: {
@@ -433,9 +428,9 @@ __webpack.config.js__
 
 Add some data files to your project:
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
   |- webpack.config.js
@@ -453,9 +448,9 @@ __project__
   |- /node_modules
 ```
 
-__src/data.xml__
+**src/data.xml**
 
-``` xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <note>
   <to>Mary</to>
@@ -465,9 +460,9 @@ __src/data.xml__
 </note>
 ```
 
-__src/data.csv__
+**src/data.csv**
 
-``` csv
+```csv
 to,from,heading,body
 Mary,John,Reminder,Call Cindy on Tuesday
 Zoe,Bill,Reminder,Buy orange juice
@@ -476,34 +471,34 @@ Autumn,Lindsey,Letter,I miss you
 
 Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import, will contain parsed JSON for easy consumption:
 
-__src/index.js__
+**src/index.js**
 
-``` diff
+```diff
  import _ from 'lodash';
  import './style.css';
  import Icon from './icon.png';
 +import Data from './data.xml';
 +import Notes from './data.csv';
- 
+
  function component() {
    const element = document.createElement('div');
- 
+
    // Lodash, now imported by this script
    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
    element.classList.add('hello');
- 
+
    // Add the image to our existing div.
    const myIcon = new Image();
    myIcon.src = Icon;
- 
+
    element.appendChild(myIcon);
- 
+
 +  console.log(Data);
 +  console.log(Notes);
 +
    return element;
  }
- 
+
  document.body.appendChild(component());
 ```
 
@@ -527,7 +522,7 @@ It's possible to import any `toml`, `yaml` or `json5` files as a JSON module by 
 
 Let's say you have a `data.toml`, a `data.yaml` and a `data.json5` files under `src` folder:
 
-__src/data.toml__
+**src/data.toml**
 
 ```toml
 title = "TOML Example"
@@ -539,7 +534,7 @@ bio = "GitHub Cofounder & CEO\nLikes tater tots and beer."
 dob = 1979-05-27T07:32:00Z
 ```
 
-__src/data.yaml__
+**src/data.yaml**
 
 ```yaml
 title: YAML Example
@@ -552,19 +547,19 @@ owner:
   dob: 1979-05-27T07:32:00.000Z
 ```
 
-__src/data.json5__
+**src/data.json5**
 
 ```json5
 {
   // comment
-  title: "JSON5 Example",
+  title: 'JSON5 Example',
   owner: {
-    name: "Tom Preston-Werner",
-    organization: "GitHub",
-    bio: "GitHub Cofounder & CEO\n\
-Likes tater tots and beer.",
-    dob: "1979-05-27T07:32:00.000Z"
-  }
+    name: 'Tom Preston-Werner',
+    organization: 'GitHub',
+    bio: 'GitHub Cofounder & CEO\n\
+Likes tater tots and beer.',
+    dob: '1979-05-27T07:32:00.000Z',
+  },
 }
 ```
 
@@ -576,14 +571,14 @@ npm install toml yamljs json5 --save-dev
 
 And configure them in your webpack configuration:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```diff
  const path = require('path');
 +const toml = require('toml');
 +const yaml = require('yamljs');
 +const json5 = require('json5');
- 
+
  module.exports = {
    entry: './src/index.js',
    output: {
@@ -638,7 +633,7 @@ __webpack.config.js__
  };
 ```
 
-__src/index.js__
+**src/index.js**
 
 ```diff
  import _ from 'lodash';
@@ -658,26 +653,26 @@ __src/index.js__
 +
 +console.log(json.title); // output `JSON5 Example`
 +console.log(json.owner.name); // output `Tom Preston-Werner`
- 
+
  function component() {
    const element = document.createElement('div');
- 
+
    // Lodash, now imported by this script
    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
    element.classList.add('hello');
- 
+
    // Add the image to our existing div.
    const myIcon = new Image();
    myIcon.src = Icon;
- 
+
    element.appendChild(myIcon);
- 
+
    console.log(Data);
    console.log(Notes);
- 
+
    return element;
  }
- 
+
  document.body.appendChild(component());
 ```
 
@@ -687,7 +682,7 @@ Re-run the `npm run build` command and open `dist/index.html`. You should be abl
 
 The coolest part of everything mentioned above, is that loading assets this way allows you to group modules and assets in a more intuitive way. Instead of relying on a global `/assets` directory that contains everything, you can group assets with the code that uses them. For example, a structure like this can be useful:
 
-``` diff
+```diff
 - |- /assets
 + |– /components
 + |  |– /my-component
@@ -701,14 +696,13 @@ This setup makes your code a lot more portable as everything that is closely cou
 
 However, let's say you're locked into your old ways or you have some assets that are shared between multiple components (views, templates, modules, etc.). It's still possible to store these assets in a base directory and even use [aliasing](/configuration/resolve/#resolvealias) to make them easier to `import`.
 
-
 ## Wrapping up
 
 For the next guides we won't be using all the different assets we've used in this guide, so let's do some cleanup so we're prepared for the next piece of the guides [Output Management](https://webpack.js.org/guides/output-management/):
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
   |- webpack.config.js
@@ -729,14 +723,14 @@ __project__
   |- /node_modules
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```diff
  const path = require('path');
 -const toml = require('toml');
 -const yaml = require('yamljs');
 -const json5 = require('json5');
- 
+
  module.exports = {
    entry: './src/index.js',
    output: {
@@ -791,9 +785,9 @@ __webpack.config.js__
  };
 ```
 
-__src/index.js__
+**src/index.js**
 
-``` diff
+```diff
  import _ from 'lodash';
 -import './style.css';
 -import Icon from './icon.png';
@@ -811,10 +805,10 @@ __src/index.js__
 -
 -console.log(json.title); // output `JSON5 Example`
 -console.log(json.owner.name); // output `Tom Preston-Werner`
- 
+
  function component() {
    const element = document.createElement('div');
- 
+
 -  // Lodash, now imported by this script
    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 -  element.classList.add('hello');
@@ -827,10 +821,10 @@ __src/index.js__
 -
 -  console.log(Data);
 -  console.log(Notes);
- 
+
    return element;
  }
- 
+
  document.body.appendChild(component());
 ```
 
@@ -843,7 +837,6 @@ npm uninstall css-loader csv-loader json5 style-loader toml xml-loader yamljs
 ## Next guide
 
 Let's move on to [Output Management](https://webpack.js.org/guides/output-management/)
-
 
 ## Further Reading
 

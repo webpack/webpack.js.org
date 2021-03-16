@@ -11,7 +11,6 @@ const frontmatter = require('remark-frontmatter');
 const gfm = require('remark-gfm');
 
 const enhance = (tree, options) => {
-
   // delete `./` root directory on node
   const dir = path.normalize(options.dir).replace(/^(\.\/)/gm, '');
 
@@ -46,9 +45,10 @@ const enhance = (tree, options) => {
       .use(slug)
       .use(frontmatter)
       .use(gfm)
+      .use(require('remark-emoji'))
       .use(extractAnchors, { anchors, levels: 3 })
       .use(remarkHtml)
-      .process(content, err => {
+      .process(content, (err) => {
         if (err) {
           throw err;
         }
@@ -56,9 +56,13 @@ const enhance = (tree, options) => {
 
     tree.anchors = anchors;
 
-    Object.assign(tree, {
-      path: tree.path.replace(/\\/g, '/')
-    }, attributes);
+    Object.assign(
+      tree,
+      {
+        path: tree.path.replace(/\\/g, '/'),
+      },
+      attributes
+    );
   }
 };
 
@@ -84,7 +88,7 @@ function restructure(item, options) {
   enhance(item, options);
 
   if (item.children) {
-    item.children.forEach(child => restructure(child, options));
+    item.children.forEach((child) => restructure(child, options));
 
     item.children.filter(filter);
     item.children.sort(sort);
@@ -97,5 +101,5 @@ module.exports = {
   enhance,
   filter,
   restructure,
-  sort
+  sort,
 };

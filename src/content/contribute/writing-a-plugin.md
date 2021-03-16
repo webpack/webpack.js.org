@@ -34,7 +34,10 @@ class MyExampleWebpackPlugin {
       'MyExampleWebpackPlugin',
       (compilation, callback) => {
         console.log('This is an example plugin!');
-        console.log('Here’s the `compilation` object which represents a single build of assets:', compilation);
+        console.log(
+          'Here’s the `compilation` object which represents a single build of assets:',
+          compilation
+        );
 
         // Manipulate the build using the plugin API provided by webpack
         compilation.addModule(/* ... */);
@@ -72,15 +75,13 @@ var HelloWorldPlugin = require('hello-world');
 
 module.exports = {
   // ... configuration settings here ...
-  plugins: [new HelloWorldPlugin({ options: true })]
+  plugins: [new HelloWorldPlugin({ options: true })],
 };
 ```
-
 
 Use [`schema-utils`](https://github.com/webpack/schema-utils) in order to validate the options being passed through the plugin options. Here is an example:
 
 ```javascript
-
 import validateOptions from 'schema-utils';
 
 // schema for options object
@@ -88,14 +89,13 @@ const schema = {
   type: 'object',
   properties: {
     test: {
-      type: 'string'
-    }
-  }
+      type: 'string',
+    },
+  },
 };
 
 export default class HelloWorldPlugin {
-
-  constructor(options = {}){
+  constructor(options = {}) {
     validateOptions(schema, options, 'Hello World Plugin');
   }
 
@@ -113,7 +113,7 @@ Among the two most important resources while developing plugins are the [`compil
 class HelloCompilationPlugin {
   apply(compiler) {
     // Tap into compilation hook which gives compilation as argument to the callback function
-    compiler.hooks.compilation.tap('HelloCompilationPlugin', compilation => {
+    compiler.hooks.compilation.tap('HelloCompilationPlugin', (compilation) => {
       // Now we can tap into various hooks available through compilation
       compilation.hooks.optimize.tap('HelloCompilationPlugin', () => {
         console.log('Assets are being optimized.');
@@ -138,13 +138,16 @@ When we use `tapAsync` method to tap into plugins, we need to call the callback 
 ```javascript
 class HelloAsyncPlugin {
   apply(compiler) {
-    compiler.hooks.emit.tapAsync('HelloAsyncPlugin', (compilation, callback) => {
-      // Do something async...
-      setTimeout(function() {
-        console.log('Done with async work...');
-        callback();
-      }, 1000);
-    });
+    compiler.hooks.emit.tapAsync(
+      'HelloAsyncPlugin',
+      (compilation, callback) => {
+        // Do something async...
+        setTimeout(function () {
+          console.log('Done with async work...');
+          callback();
+        }, 1000);
+      }
+    );
   }
 }
 
@@ -158,10 +161,10 @@ When we use `tapPromise` method to tap into plugins, we need to return a promise
 ```javascript
 class HelloAsyncPlugin {
   apply(compiler) {
-    compiler.hooks.emit.tapPromise('HelloAsyncPlugin', compilation => {
+    compiler.hooks.emit.tapPromise('HelloAsyncPlugin', (compilation) => {
       // return a Promise that resolves when we are done...
       return new Promise((resolve, reject) => {
-        setTimeout(function() {
+        setTimeout(function () {
           console.log('Done with async work...');
           resolve();
         }, 1000);
@@ -195,12 +198,12 @@ class FileListPlugin {
 
       // Insert this list into the webpack build as a new file asset:
       compilation.assets['filelist.md'] = {
-        source: function() {
+        source: function () {
           return filelist;
         },
-        size: function() {
+        size: function () {
           return filelist.length;
-        }
+        },
       };
 
       callback();
@@ -219,7 +222,7 @@ For example:
 
 ```javascript
 this.hooks = {
-  shouldEmit: new SyncBailHook(['compilation'])
+  shouldEmit: new SyncBailHook(['compilation']),
 };
 ```
 
@@ -229,60 +232,60 @@ Various types of hooks supported are :
 
 ### Synchronous Hooks
 
-- __SyncHook__
+- **SyncHook**
 
-    - Defined as `new SyncHook([params])`
-    - Tapped into using `tap` method.
-    - Called using `call(...params)` method.
+  - Defined as `new SyncHook([params])`
+  - Tapped into using `tap` method.
+  - Called using `call(...params)` method.
 
-- __Bail Hooks__
+- **Bail Hooks**
 
-    - Defined using `SyncBailHook[params]`
-    - Tapped into using `tap` method.
-    - Called using `call(...params)` method.
+  - Defined using `SyncBailHook[params]`
+  - Tapped into using `tap` method.
+  - Called using `call(...params)` method.
 
   In these type of hooks, each of the plugin callbacks will be invoked one after the other with the specific `args`. If any value is returned except undefined by any plugin, then that value is returned by hook and no further plugin callback is invoked. Many useful events like `optimizeChunks`, `optimizeChunkModules` are SyncBailHooks.
 
-- __Waterfall Hooks__
+- **Waterfall Hooks**
 
-    - Defined using `SyncWaterfallHook[params]`
-    - Tapped into using `tap` method.
-    - Called using `call(...params)` method
+  - Defined using `SyncWaterfallHook[params]`
+  - Tapped into using `tap` method.
+  - Called using `call(...params)` method
 
   Here each of the plugins are called one after the other with the arguments from the return value of the previous plugin. The plugin must take the order of its execution into account.
   It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence at least 1 param must be supplied for waterfall hooks. This pattern is used in the Tapable instances which are related to the webpack templates like `ModuleTemplate`, `ChunkTemplate` etc.
 
 ### Asynchronous Hooks
 
-- __Async Series Hook__
+- **Async Series Hook**
 
-    - Defined using `AsyncSeriesHook[params]`
-    - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-    - Called using `callAsync(...params)` method
+  - Defined using `AsyncSeriesHook[params]`
+  - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
+  - Called using `callAsync(...params)` method
 
   The plugin handler functions are called with all arguments and a callback function with the signature `(err?: Error) -> void`. The handler functions are called in order of registration. `callback` is called after all the handlers are called.
   This is also a commonly used pattern for events like `emit`, `run`.
 
-- __Async waterfall__ The plugins will be applied asynchronously in the waterfall manner.
+- **Async waterfall** The plugins will be applied asynchronously in the waterfall manner.
 
-    - Defined using `AsyncWaterfallHook[params]`
-    - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-    - Called using `callAsync(...params)` method
+  - Defined using `AsyncWaterfallHook[params]`
+  - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
+  - Called using `callAsync(...params)` method
 
   The plugin handler functions are called with the current value and a callback function with the signature `(err: Error, nextValue: any) -> void.` When called `nextValue` is the current value for the next handler. The current value for the first handler is `init`. After all handlers are applied, callback is called with the last value. If any handler passes a value for `err`, the callback is called with this error and no more handlers are called.
   This plugin pattern is expected for events like `before-resolve` and `after-resolve`.
 
-- __Async Series Bail__
+- **Async Series Bail**
 
-    - Defined using `AsyncSeriesBailHook[params]`
-    - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-    - Called using `callAsync(...params)` method
+  - Defined using `AsyncSeriesBailHook[params]`
+  - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
+  - Called using `callAsync(...params)` method
 
-- __Async Parallel__
+- **Async Parallel**
 
-    - Defined using `AsyncParallelHook[params]`
-    - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
-    - Called using `callAsync(...params)` method
+  - Defined using `AsyncParallelHook[params]`
+  - Tapped into using `tap`/`tapAsync`/`tapPromise` method.
+  - Called using `callAsync(...params)` method
 
 ### Configuration defaults
 

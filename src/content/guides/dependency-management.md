@@ -15,10 +15,9 @@ contributors:
 
 > amd
 
-
 ## require with expression
 
-A context is created if your request contains expressions, so the __exact__ module is not known on compile time.
+A context is created if your request contains expressions, so the **exact** module is not known on compile time.
 
 Example, given we have the following folder structure including `.ejs` files:
 
@@ -46,9 +45,9 @@ Directory: ./template
 Regular expression: /^.*\.ejs$/
 ```
 
-__context module__
+**context module**
 
-A context module is generated. It contains references to __all modules in that directory__ that can be required with a request matching the regular expression. The context module contains a map which translates requests to module ids.
+A context module is generated. It contains references to **all modules in that directory** that can be required with a request matching the regular expression. The context module contains a map which translates requests to module ids.
 
 Example map:
 
@@ -64,7 +63,6 @@ The context module also contains some runtime logic to access the map.
 
 This means dynamic requires are supported but will cause all matching modules to be included in the bundle.
 
-
 ## `require.context`
 
 You can create your own context with the `require.context()` function.
@@ -77,7 +75,12 @@ webpack parses for `require.context()` in the code while building.
 The syntax is as follows:
 
 ```javascript
-require.context(directory, useSubdirectories = true, regExp = /^\.\/.*$/, mode = 'sync');
+require.context(
+  directory,
+  (useSubdirectories = true),
+  (regExp = /^\.\/.*$/),
+  (mode = 'sync')
+);
 ```
 
 Examples:
@@ -94,7 +97,6 @@ require.context('../', true, /\.stories\.js$/);
 
 W> The arguments passed to `require.context` must be literals!
 
-
 ### context module API
 
 A context module exports a (require) function that takes one argument: the request.
@@ -107,7 +109,7 @@ The exported function has 3 properties: `resolve`, `keys`, `id`.
 This can be useful if you want to require all files in a directory or matching a pattern, Example:
 
 ```javascript
-function importAll (r) {
+function importAll(r) {
   r.keys().forEach(r);
 }
 
@@ -117,8 +119,8 @@ importAll(require.context('../components/', true, /\.js$/));
 ```javascript
 const cache = {};
 
-function importAll (r) {
-  r.keys().forEach(key => cache[key] = r(key));
+function importAll(r) {
+  r.keys().forEach((key) => (cache[key] = r(key)));
 }
 
 importAll(require.context('../components/', true, /\.js$/));

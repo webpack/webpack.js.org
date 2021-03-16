@@ -38,7 +38,7 @@ module.exports = {
 And create an `index.html` file. The script tag should point to your bundle. If `output.filename` is not specified in the config, this will be `bundle.js`.
 
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <script src="/bundle.js" charset="utf-8"></script>

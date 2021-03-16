@@ -1,6 +1,6 @@
 const sizes = ['iphone-6', 'macbook-15'];
 describe('Scroll Test', () => {
-  sizes.forEach(size => {
+  sizes.forEach((size) => {
     it(`scroll to top when accessing new page on ${size}`, () => {
       cy.viewport(size);
       cy.visit('/guides/getting-started');
@@ -18,7 +18,8 @@ describe('Scroll Test', () => {
       cy.get('.contributors__section').scrollIntoView();
 
       cy.visit('/guides/build-performance/#development');
-      cy.isInViewport('#development');
+      // since we lazy load notification bar now, #development element is a little out of viewport now
+      cy.isInViewport('#compile-in-memory');
       cy.isNotInViewport('#general');
     });
   });

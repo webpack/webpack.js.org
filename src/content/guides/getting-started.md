@@ -33,26 +33,26 @@ W> The minimum supported Node.js version to run webpack 5 is 10.13.0 (LTS)
 
 First let's create a directory, initialize npm, [install webpack locally](/guides/installation/#local-installation), and install the [`webpack-cli`](https://github.com/webpack/webpack-cli) (the tool used to run webpack on the command line):
 
-``` bash
+```bash
 mkdir webpack-demo
 cd webpack-demo
 npm init -y
 npm install webpack webpack-cli --save-dev
 ```
 
-Throughout the Guides we will use __`diff`__  blocks to show you what changes we're making to directories, files, and code. For instance:
+Throughout the Guides we will use **`diff`** blocks to show you what changes we're making to directories, files, and code. For instance:
 
 ```diff
 + this is a new line you shall copy into your code
 - and this is a line to be removed from your code
-  and this is a line not to touch. 
+  and this is a line not to touch.
 ```
 
 Now we'll create the following directory structure, files and their contents:
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
 + |- index.html
@@ -60,9 +60,9 @@ __project__
 +   |- index.js
 ```
 
-__src/index.js__
+**src/index.js**
 
-``` javascript
+```javascript
 function component() {
   const element = document.createElement('div');
 
@@ -75,9 +75,9 @@ function component() {
 document.body.appendChild(component());
 ```
 
-__index.html__
+**index.html**
 
-``` html
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -95,9 +95,9 @@ We also need to adjust our `package.json` file in order to make sure we mark our
 
 T> If you want to learn more about the inner workings of `package.json`, then we recommend reading the [npm documentation](https://docs.npmjs.com/files/package.json).
 
-__package.json__
+**package.json**
 
-``` diff
+```diff
  {
    "name": "webpack-demo",
    "version": "1.0.0",
@@ -131,9 +131,9 @@ Let's use webpack to manage these scripts instead.
 
 First we'll tweak our directory structure slightly, separating the "source" code (`./src`) from our "distribution" code (`./dist`). The "source" code is the code that we'll write and edit. The "distribution" code is the minimized and optimized `output` of our build process that will eventually be loaded in the browser. Tweak the directory structure as follows:
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
 + |- /dist
@@ -143,12 +143,11 @@ __project__
     |- index.js
 ```
 
-T> The observant among you may have noticed that `index.html` is created manually, even though it is now placed in the `dist` directory. Later on in this guide, we will generate `index.html` rather than edit it manually. Once this is done, it should be safe to empty the `dist` directory and to regenerate all the files within it.
-
+T> You may have noticed that `index.html` was created manually, even though it is now placed in the `dist` directory. Later on in this guide, we will generate `index.html` rather than edit it manually. Once this is done, it should be safe to empty the `dist` directory and to regenerate all the files within it.
 
 To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally:
 
-``` bash
+```bash
 npm install --save lodash
 ```
 
@@ -156,29 +155,29 @@ T> When installing a package that will be bundled into your production bundle, y
 
 Now, let's import `lodash` in our script:
 
-__src/index.js__
+**src/index.js**
 
-``` diff
+```diff
 +import _ from 'lodash';
 +
  function component() {
    const element = document.createElement('div');
- 
+
 -  // Lodash, currently included via a script, is required for this line to work
 +  // Lodash, now imported by this script
    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
- 
+
    return element;
  }
- 
+
  document.body.appendChild(component());
 ```
 
 Now, since we'll be bundling our scripts, we have to update our `index.html` file. Let's remove the lodash `<script>`, as we now `import` it, and modify the other `<script>` tag to load the bundle, instead of the raw `./src` file:
 
-__dist/index.html__
+**dist/index.html**
 
-``` diff
+```diff
  <!DOCTYPE html>
  <html>
    <head>
@@ -197,7 +196,7 @@ In this setup, `index.js` explicitly requires `lodash` to be present, and binds 
 
 With that said, let's run `npx webpack`, which will take our script at `src/index.js` as the [entry point](/concepts/entry-points), and will generate `dist/main.js` as the [output](/concepts/output). The `npx` command, which ships with Node 8.2/npm 5.2.0 or higher, runs the webpack binary (`./node_modules/.bin/webpack`) of the webpack package we installed in the beginning:
 
-``` bash
+```bash
 $ npx webpack
 [webpack-cli] Compilation finished
 asset main.js 69.3 KiB [emitted] [minimized] (name: main) 1 related asset
@@ -216,18 +215,17 @@ Open `index.html` from the `dist` directory in your browser and, if everything w
 
 The [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) and [`export`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) statements have been standardized in [ES2015](https://babeljs.io/docs/en/learn/). They are supported in most of the browsers at this moment, however there are some browsers that don't recognize the new syntax. But don't worry, webpack does support them out of the box.
 
-Behind the scenes, webpack actually "__transpiles__" the code so that older browsers can also run it. If you inspect `dist/main.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
+Behind the scenes, webpack actually "**transpiles**" the code so that older browsers can also run it. If you inspect `dist/main.js`, you might be able to see how webpack does this, it's quite ingenious! Besides `import` and `export`, webpack supports various other module syntaxes as well, see [Module API](/api/module-methods) for more information.
 
 Note that webpack will not alter any code other than `import` and `export` statements. If you are using other [ES2015 features](http://es6-features.org/), make sure to [use a transpiler](/loaders/#transpiling) such as [Babel](https://babeljs.io/) or [Bublé](https://buble.surge.sh/guide/) via webpack's [loader system](/concepts/loaders/).
-
 
 ## Using a Configuration
 
 As of version 4, webpack doesn't require any configuration, but most projects will need a more complex setup, which is why webpack supports a [configuration file](/concepts/configuration). This is much more efficient than having to manually type in a lot of commands in the terminal, so let's create one:
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
 + |- webpack.config.js
@@ -237,9 +235,9 @@ __project__
     |- index.js
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` javascript
+```javascript
 const path = require('path');
 
 module.exports = {
@@ -253,8 +251,8 @@ module.exports = {
 
 Now, let's run the build again but instead using our new configuration file:
 
-``` bash
-$ npx webpack --config webpack.config.js 
+```bash
+$ npx webpack --config webpack.config.js
 [webpack-cli] Compilation finished
 asset main.js 69.3 KiB [compared for emit] [minimized] (name: main) 1 related asset
 runtime modules 1000 bytes 5 modules
@@ -268,14 +266,13 @@ T> If a `webpack.config.js` is present, the `webpack` command picks it up by def
 
 A configuration file allows far more flexibility than simple CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](/configuration) to learn more.
 
-
 ## NPM Scripts
 
 Given it's not particularly fun to run a local copy of webpack from the CLI, we can set up a little shortcut. Let's adjust our _package.json_ by adding an [npm script](https://docs.npmjs.com/misc/scripts):
 
-__package.json__
+**package.json**
 
-``` diff
+```diff
  {
    "name": "webpack-demo",
    "version": "1.0.0",
@@ -303,7 +300,7 @@ Now the `npm run build` command can be used in place of the `npx` command we use
 
 Now run the following command and see if your script alias works:
 
-``` bash
+```bash
 $ npm run build
 
 ...
@@ -319,14 +316,13 @@ webpack 5.4.0 compiled successfully in 1940 ms
 
 T> Custom parameters can be passed to webpack by adding two dashes between the `npm run build` command and your parameters, e.g. `npm run build -- --color`.
 
-
 ## Conclusion
 
 Now that you have a basic build together you should move on to the next guide [`Asset Management`](/guides/asset-management) to learn how to manage assets like images and fonts with webpack. At this point, your project should look like this:
 
-__project__
+**project**
 
-``` diff
+```diff
 webpack-demo
 |- package.json
 |- webpack.config.js

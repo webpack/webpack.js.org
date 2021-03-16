@@ -27,12 +27,12 @@ T> Setting up your `env` variable without assignment, `--env production` sets `e
 
 There is one change that you will have to make to your webpack config. Typically, `module.exports` points to the configuration object. To use the `env` variable, you must convert `module.exports` to a function:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` js
+```js
 const path = require('path');
 
-module.exports = env => {
+module.exports = (env) => {
   // Use env.<YOUR VARIABLE> here:
   console.log('NODE_ENV: ', env.NODE_ENV); // 'local'
   console.log('Production: ', env.production); // true
@@ -46,3 +46,5 @@ module.exports = env => {
   };
 };
 ```
+
+T> Webpack CLI offers some [built-in environment variables](/api/cli/#environment-variables) which you can access inside a webpack configuration.

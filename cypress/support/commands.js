@@ -1,5 +1,5 @@
-Cypress.Commands.add('isNotInViewport', element => {
-  cy.get(element).then($el => {
+Cypress.Commands.add('isNotInViewport', (element) => {
+  cy.get(element).then(($el) => {
     // we won't have horizontal scollbar
     const rect = $el[0].getBoundingClientRect();
     if (rect.top < 0) {
@@ -10,8 +10,8 @@ Cypress.Commands.add('isNotInViewport', element => {
   });
 });
 
-Cypress.Commands.add('isInViewport', element => {
-  cy.get(element).then($el => {
+Cypress.Commands.add('isInViewport', (element) => {
+  cy.get(element).then(($el) => {
     const rect = $el[0].getBoundingClientRect();
 
     expect(rect.top).to.be.at.least(0);

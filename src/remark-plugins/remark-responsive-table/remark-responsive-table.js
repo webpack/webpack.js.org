@@ -1,5 +1,6 @@
+// this plugin was first based on https://github.com/montogeek/remark-responsive-tables
 const visit = require('unist-util-visit');
-module.exports = function responsiveTable() {
+module.exports = function remarkResponsiveTable() {
   return function transformer(tree) {
     visit(tree, 'table', visitor);
     function visitor(node) {

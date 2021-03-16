@@ -14,14 +14,13 @@ The `plugins` option is used to customize the webpack build process in a variety
 
 T> Note: This page only discusses using plugins, however if you are interested in writing your own please visit [Writing a Plugin](/contribute/writing-a-plugin/).
 
-
 ## `plugins`
 
 [`[Plugin]`](/plugins/)
 
 An array of webpack plugins. For example, [`DefinePlugin`](/plugins/define-plugin/) allows you to create global constants which can be configured at compile time. This can be useful for allowing different behavior between development builds and release builds.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
@@ -29,14 +28,14 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       // Definitions...
-    })
-  ]
+    }),
+  ],
 };
 ```
 
 A more complex example, using multiple plugins, might look something like this:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 var webpack = require('webpack');
@@ -55,6 +54,6 @@ module.exports = {
     // webpack-dev-server enhancement plugins
     new DashboardPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-  ]
+  ],
 };
 ```

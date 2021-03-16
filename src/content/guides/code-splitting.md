@@ -31,6 +31,7 @@ contributors:
   - maximilianschmelzer
   - smelukov
   - chenxsan
+  - Adarah
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -46,18 +47,17 @@ Code splitting is one of the most compelling features of webpack. This feature a
 
 There are three general approaches to code splitting available:
 
-- __Entry Points__: Manually split code using [`entry`](/configuration/entry-context) configuration.
-- __Prevent Duplication__: Use [Entry dependencies](/configuration/entry-context/#dependencies) or [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) to dedupe and split chunks.
-- __Dynamic Imports__: Split code via inline function calls within modules.
-
+- **Entry Points**: Manually split code using [`entry`](/configuration/entry-context) configuration.
+- **Prevent Duplication**: Use [Entry dependencies](/configuration/entry-context/#dependencies) or [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) to dedupe and split chunks.
+- **Dynamic Imports**: Split code via inline function calls within modules.
 
 ## Entry Points
 
 This is by far the easiest and most intuitive way to split code. However, it is more manual and has some pitfalls we will go over. Let's take a look at how we might split another module from the main bundle:
 
-__project__
+**project**
 
-``` diff
+```diff
 webpack-demo
 |- package.json
 |- webpack.config.js
@@ -68,19 +68,19 @@ webpack-demo
 |- /node_modules
 ```
 
-__another-module.js__
+**another-module.js**
 
-``` js
+```js
 import _ from 'lodash';
 
 console.log(_.join(['Another', 'module', 'loaded!'], ' '));
 ```
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
- 
+
  module.exports = {
 -  entry: './src/index.js',
 +  mode: 'development',
@@ -98,7 +98,7 @@ __webpack.config.js__
 
 This will yield the following build result:
 
-``` bash
+```bash
 ...
 [webpack-cli] Compilation finished
 asset index.bundle.js 553 KiB [emitted] (name: index)
@@ -118,18 +118,17 @@ As mentioned there are some pitfalls to this approach:
 
 The first of these two points is definitely an issue for our example, as `lodash` is also imported within `./src/index.js` and will thus be duplicated in both bundles. Let's remove this duplication in next section.
 
-
 ## Prevent Duplication
 
 ### Entry dependencies
 
 The [`dependOn` option](/configuration/entry-context/#dependencies) allows to share the modules between the chunks:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
- 
+
  module.exports = {
    mode: 'development',
    entry: {
@@ -154,11 +153,11 @@ __webpack.config.js__
 
 If we're going to use multiple entry points on a single HTML page, `optimization.runtimeChunk: 'single'` is needed too, otherwise we could get into trouble described [here](https://bundlers.tooling.report/code-splitting/multi-entry/).
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```diff
  const path = require('path');
- 
+
  module.exports = {
    mode: 'development',
    entry: {
@@ -210,9 +209,9 @@ Although using multiple entry points per page is allowed in webpack, it should b
 
 The [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
   const path = require('path');
 
   module.exports = {
@@ -235,7 +234,7 @@ __webpack.config.js__
 
 With the [`optimization.splitChunks`](/plugins/split-chunks-plugin/#optimizationsplitchunks) configuration option in place, we should now see the duplicate dependency removed from our `index.bundle.js` and `another.bundle.js`. The plugin should notice that we've separated `lodash` out to a separate chunk and remove the dead weight from our main bundle. Let's do an `npm run build` to see if it worked:
 
-``` bash
+```bash
 ...
 [webpack-cli] Compilation finished
 asset vendors-node_modules_lodash_lodash_js.bundle.js 549 KiB [compared for emit] (id hint: vendors)
@@ -255,7 +254,6 @@ Here are some other useful plugins and loaders provided by the community for spl
 
 - [`mini-css-extract-plugin`](/plugins/mini-css-extract-plugin): Useful for splitting CSS out from the main application.
 
-
 ## Dynamic Imports
 
 Two similar techniques are supported by webpack when it comes to dynamic code splitting. The first and recommended approach is to use the [`import()` syntax](/api/module-methods/#import-1) that conforms to the [ECMAScript proposal](https://github.com/tc39/proposal-dynamic-import) for dynamic imports. The legacy, webpack-specific approach is to use [`require.ensure`](/api/module-methods/#requireensure). Let's try using the first of these two approaches...
@@ -264,11 +262,11 @@ W> `import()` calls use [promises](https://developer.mozilla.org/en-US/docs/Web/
 
 Before we start, let's remove the extra [`entry`](/concepts/entry-points/) and [`optimization.splitChunks`](/plugins/split-chunks-plugin) from our configuration in the above example as they won't be needed for this next demonstration:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
  const path = require('path');
- 
+
  module.exports = {
    mode: 'development',
    entry: {
@@ -289,9 +287,9 @@ __webpack.config.js__
 
 We'll also update our project to remove the now unused files:
 
-__project__
+**project**
 
-``` diff
+```diff
 webpack-demo
 |- package.json
 |- webpack.config.js
@@ -304,15 +302,15 @@ webpack-demo
 
 Now, instead of statically importing `lodash`, we'll use dynamic importing to separate a chunk:
 
-__src/index.js__
+**src/index.js**
 
-``` diff
+```diff
 -import _ from 'lodash';
 -
 -function component() {
 +function getComponent() {
    const element = document.createElement('div');
- 
+
 -  // Lodash, now imported by this script
 -  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 +  return import('lodash')
@@ -320,13 +318,13 @@ __src/index.js__
 +      const element = document.createElement('div');
 +
 +      element.innerHTML = _.join(['Hello', 'webpack'], ' ');
- 
+
 -  return element;
 +      return element;
 +    })
 +    .catch((error) => 'An error occurred while loading the component');
  }
- 
+
 -document.body.appendChild(component());
 +getComponent().then((component) => {
 +  document.body.appendChild(component);
@@ -337,7 +335,7 @@ The reason we need `default` is that since webpack 4, when importing a CommonJS 
 
 Let's run webpack to see `lodash` separated out to a separate bundle:
 
-``` bash
+```bash
 ...
 [webpack-cli] Compilation finished
 asset vendors-node_modules_lodash_lodash_js.bundle.js 549 KiB [compared for emit] (id hint: vendors)
@@ -351,19 +349,19 @@ webpack 5.4.0 compiled successfully in 268 ms
 
 As `import()` returns a promise, it can be used with [`async` functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function). Here's how it would simplify the code:
 
-__src/index.js__
+**src/index.js**
 
-``` diff
+```diff
 -function getComponent() {
 +async function getComponent() {
    const element = document.createElement('div');
 +  const { default: _ } = await import('lodash');
- 
+
 -  return import('lodash')
 -    .then(({ default: _ }) => {
 -      const element = document.createElement('div');
 +  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
- 
+
 -      element.innerHTML = _.join(['Hello', 'webpack'], ' ');
 -
 -      return element;
@@ -371,7 +369,7 @@ __src/index.js__
 -    .catch((error) => 'An error occurred while loading the component');
 +  return element;
  }
- 
+
  getComponent().then((component) => {
    document.body.appendChild(component);
  });
@@ -379,19 +377,18 @@ __src/index.js__
 
 T> It is possible to provide a [dynamic expression](/api/module-methods/#dynamic-expressions-in-import) to `import()` when you might need to import specific module based on a computed variable later.
 
-
 ## Prefetching/Preloading modules
 
 webpack 4.6.0+ adds support for prefetching and preloading.
 
 Using these inline directives while declaring your imports allows webpack to output “Resource Hint” which tells the browser that for:
 
-- __prefetch__: resource is probably needed for some navigation in the future
-- __preload__: resource will also be needed during the current navigation
+- **prefetch**: resource is probably needed for some navigation in the future
+- **preload**: resource will also be needed during the current navigation
 
 Simple prefetch example can be having a `HomePage` component, which renders a `LoginButton` component which then on demand loads a `LoginModal` component after being clicked.
 
-__LoginButton.js__
+**LoginButton.js**
 
 ```js
 //...
@@ -411,9 +408,9 @@ Preload directive has a bunch of differences compared to prefetch:
 
 Simple preload example can be having a `Component` which always depends on a big library that should be in a separate chunk.
 
-Let's imagine a component `ChartComponent` which needs huge `ChartingLibrary`. It displays a `LoadingIndicator` when rendered and instantly does an on demand import of `ChartingLibrary`:
+Let's imagine a component `ChartComponent` which needs a huge `ChartingLibrary`. It displays a `LoadingIndicator` when rendered and instantly does an on demand import of `ChartingLibrary`:
 
-__ChartComponent.js__
+**ChartComponent.js**
 
 ```js
 //...
@@ -423,7 +420,6 @@ import(/* webpackPreload: true */ 'ChartingLibrary');
 When a page which uses the `ChartComponent` is requested, the charting-library-chunk is also requested via `<link rel="preload">`. Assuming the page-chunk is smaller and finishes faster, the page will be displayed with a `LoadingIndicator`, until the already requested `charting-library-chunk` finishes. This will give a little load time boost since it only needs one round-trip instead of two. Especially in high-latency environments.
 
 T> Using `webpackPreload` incorrectly can actually hurt performance, so be careful when using it.
-
 
 ## Bundle Analysis
 
