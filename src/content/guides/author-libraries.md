@@ -324,7 +324,7 @@ You can expose the library in the following ways:
 - Variable: as a global variable made available by a `script` tag (`libraryTarget:'var'`).
 - This: available through the `this` object (`libraryTarget:'this'`).
 - Window: available through the `window` object, in the browser (`libraryTarget:'window'`).
-- UMD: available under all the module definitions (`libraryTarget:'umd'`).
+- UMD: available under AMD or CommonJS `require` (`libraryTarget:'umd'`).
 
 If `library` is set and `libraryTarget` is not, `libraryTarget` defaults to `var` as specified in the [output configuration documentation](/configuration/output). See [`output.libraryTarget`](/configuration/output/#outputlibrarytarget) there for a detailed list of all available options.
 
