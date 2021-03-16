@@ -45,7 +45,7 @@ chunk 的加载操作通常是通过调用 `import()` 实现的，但也支持�
 
 容器管理可重载模块的方式为：当使用者已经重写它们后，就不需要下载了。这通常是通过将它们放在单独的 chunk 中来实现的。
 
-On the other hand, the provider of the replacement modules will only provide asynchronous loading functions. It allows the container to load replacement modules only when they are needed. The provider will manage replacement modules in a way that they do not need to be downloaded at all when they are not requested by the container. This usually happens by placing them into separate chunks.
+另一方面，替换模块的提供者，将只提供异步加载函数。它允许容器仅在需要替换模块时才去加载。提供者管理替换模块的方式为：当容器不请求替换模块时，则无需下载。这通常是通过将它们放在单独的 chunk 中来实现的。
 
 "name" 用于标识容器中可重载的模块。
 
