@@ -431,7 +431,7 @@ module: {
     // ...
 +     {
 +       test: /\.m?js$/,
-+       resourceQuery: /^(?!raw$).*/,
++       resourceQuery: /^(?!\?raw$).*/,
 +     },
       {
         resourceQuery: /raw/
