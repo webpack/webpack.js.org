@@ -124,6 +124,9 @@
         <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/concepts/configuration</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/concepts/dependency-graph</loc>
     </url>
     <url>
@@ -131,9 +134,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/configuration</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/loaders</loc>
@@ -232,13 +232,13 @@
         <loc>https://webpack.js.org/contribute/plugin-patterns</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/contribute/release-process</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/contribute/writers-guide</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/writing-a-loader</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/contribute/release-process</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/writing-a-plugin</loc>
@@ -310,10 +310,13 @@
         <loc>https://webpack.js.org/guides/development-vagrant</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/environment-variables</loc>
+        <loc>https://webpack.js.org/guides/ecma-script-modules</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/ecma-script-modules</loc>
+        <loc>https://webpack.js.org/guides/entry-advanced</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/environment-variables</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/getting-started</loc>
@@ -322,13 +325,13 @@
         <loc>https://webpack.js.org/guides/hot-module-replacement</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/entry-advanced</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/installation</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/integrations</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/lazy-loading</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/output-management</loc>
@@ -362,9 +365,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/web-workers</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/lazy-loading</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/why-webpack</loc>
@@ -406,13 +406,13 @@
         <loc>https://webpack.js.org/loaders/mocha-loader</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/node-loader</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/null-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/polymer-webpack-loader</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/node-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/postcss-loader</loc>
@@ -442,13 +442,13 @@
         <loc>https://webpack.js.org/loaders/url-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/val-loader</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/loaders/worker-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/migrate/3</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/loaders/val-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/migrate/4</loc>
