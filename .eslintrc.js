@@ -12,7 +12,6 @@ module.exports = {
   plugins: ['markdown', 'cypress', 'react-hooks'],
   globals: {
     __DEV__: true,
-    Badge: true, // global MDX component
   },
   rules: {
     'no-console': 'off',
@@ -27,15 +26,20 @@ module.exports = {
     react: {
       version: 'detect',
     },
-    'mdx/code-blocks': true,
   },
   overrides: [
     { files: ['src/**/*.jsx'] }, // eslint would lint .js only by default
     {
       files: ['**/*.mdx'],
       extends: ['plugin:mdx/recommended'],
+      globals: {
+        Badge: true,
+      },
       rules: {
         semi: ['off'],
+      },
+      settings: {
+        'mdx/code-blocks': true,
       },
     },
     {
@@ -43,7 +47,7 @@ module.exports = {
       processor: 'markdown/markdown',
     },
     {
-      files: ['**/*.md/*.{js,javascript}'], // we don't lint ts at the moment
+      files: ['**/*.{md,mdx}/*.{js,javascript}'], // we don't lint ts at the moment
       rules: {
         indent: ['error', 2],
         quotes: ['error', 'single'],
