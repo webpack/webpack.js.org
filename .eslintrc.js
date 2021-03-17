@@ -27,6 +27,7 @@ module.exports = {
     react: {
       version: 'detect',
     },
+    'mdx/code-blocks': true,
   },
   overrides: [
     { files: ['src/**/*.jsx'] }, // eslint would lint .js only by default
