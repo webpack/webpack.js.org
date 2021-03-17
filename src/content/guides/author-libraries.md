@@ -121,7 +121,7 @@ It should be familiar have you used webpack to bundle your application. Basicall
 
 ## Expose the Library
 
-So far everything should be same to bundling an application, and here comes the different part – we need to expose exports from the entry point through [`output.library`](/configuration/output/#outputlibrary) option.
+So far everything should be the same as bundling an application, and here comes the different part – we need to expose exports from the entry point through [`output.library`](/configuration/output/#outputlibrary) option.
 
 **webpack.config.js**
 
@@ -213,7 +213,7 @@ Let's update the `output.library` option with its `type` set to [`'umd'`](/confi
  };
 ```
 
-Now webpack will bundle a library that can work with CommonJS, AMD and script tag.
+Now webpack will bundle a library that can work with CommonJS, AMD, and script tag.
 
 T> Note that the `library` setup is tied to the `entry` configuration. For most libraries, specifying a single entry point is sufficient. While [multi-part libraries](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) are possible, it is simpler to expose partial exports through an [index script](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file) that serves as a single entry point. Using an `array` as an `entry` point for a library is **not recommended**.
 
