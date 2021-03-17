@@ -452,7 +452,7 @@ module: {
         {
           resourceQuery: /raw/,
           type: 'asset/source',
-        }
+        },
 +       {
 +         test: /\.m?js$/,
 +         use: [ ... ]
