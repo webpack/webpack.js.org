@@ -8,7 +8,6 @@ import {
 } from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { setCatchHandler, setDefaultHandler } from 'workbox-routing';
-import ssgManifest from '../dist/ssg-manifest.json';
 
 const cacheName = cacheNames.runtime;
 
@@ -17,13 +16,14 @@ const otherManifest = [
   {
     url: '/manifest.json',
   },
+  {
+    url: '/app-shell/',
+  },
 ];
-const manifestURLs = [...manifest, ...ssgManifest, ...otherManifest].map(
-  (entry) => {
-    const url = new URL(entry.url, self.location);
-    return url.href;
-  }
-);
+const manifestURLs = [...manifest, ...otherManifest].map((entry) => {
+  const url = new URL(entry.url, self.location);
+  return url.href;
+});
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(cacheName).then((cache) => {

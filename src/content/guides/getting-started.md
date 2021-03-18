@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Learn how to get started with webpack quick
 sort: 1
 contributors:
   - bebraw
