@@ -7,14 +7,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     loaders<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         test<span class="token operator">:</span> <span class="token regex">/\.html$/i</span><span class="token punctuation">,</span>
-        use<span class="token operator">:</span> <span class="token punctuation">[</span>
-          <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">"file-loader"</span><span class="token punctuation">,</span>
-            options<span class="token operator">:</span> <span class="token punctuation">{</span>
-              name<span class="token operator">:</span> <span class="token string">"[name].[ext]"</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        type<span class="token operator">:</span> <span class="token string">"asset/resource"</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
