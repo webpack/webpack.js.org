@@ -79,7 +79,7 @@ You can invoke webpack-dev-server via CLI by:
 npx webpack serve
 ```
 
-See a list of available CLI options for serve [here](https://github.com/webpack/webpack-cli/blob/master/SERVE.md)
+A list of CLI options for `serve` is available [here](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS.md)
 
 ## `devServer.after`
 
