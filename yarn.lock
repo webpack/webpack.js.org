@@ -5300,10 +5300,10 @@ eslint-config-prettier@^8.1.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.1.0.tgz#4ef1eaf97afe5176e6a75ddfb57c335121abc5a6"
   integrity sha512-oKMhGv3ihGbCIimCAjqkdzx2Q+jthoqnXSP+d86M9tptwugycmTFdVR4IpLgq2c4SHifbwO90z2fQ8/Aio73yw==
 
-eslint-mdx@^1.10.0:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/eslint-mdx/-/eslint-mdx-1.10.0.tgz#8d3c8770c083bd8a1fa9c8745ec26787dd9e81ef"
-  integrity sha512-dONEs5ZEhTzpqKxmrgYcrZVBHjUmoF5k3G1/gQieYdGVE5bzZMt57hBmdUhWUPc0jZAzw/b68D53zkYtkUGkOQ==
+eslint-mdx@^1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/eslint-mdx/-/eslint-mdx-1.11.0.tgz#5ac0aad48a94679fda63eb1f3f1cf2a26d6e2304"
+  integrity sha512-EsuUErl3noFsP//D/+IYe6drdTIR5Y3RejF3bYL2IyKwgQWGR5flAC5jgYlVjaVi4B0q2pSBxJD1nhdge6nvug==
   dependencies:
     remark-mdx "^1.6.22"
     remark-parse "^8.0.3"
@@ -5325,14 +5325,13 @@ eslint-plugin-markdown@^2.0.0:
     remark-parse "^5.0.0"
     unified "^6.1.2"
 
-eslint-plugin-mdx@^1.10.0:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-mdx/-/eslint-plugin-mdx-1.10.0.tgz#5797cb818b27354fdcff2d36782f15567f622df3"
-  integrity sha512-P50XEGwOu7dTo8lreacC9RYufmXpw/JwfXZHhOQJzVkaIBjyDxhrixKO3va236+dOjpd27GIPx4YdZbm4k01Sg==
+eslint-plugin-mdx@^1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-mdx/-/eslint-plugin-mdx-1.11.0.tgz#3dffbc7b34605d4f52dd8f5e6d92f043e193c1b3"
+  integrity sha512-jnWLNL6dCPhdTszmhymac6dhUSaYnMAwEASx04EquaqEmtssLZiJCrVslh/ot9tFF/oMGmiX7nlRNDsRQgdDMQ==
   dependencies:
     cosmiconfig "^7.0.0"
-    eslint-mdx "^1.10.0"
-    eslint-plugin-react "^7.22.0"
+    eslint-mdx "^1.11.0"
     remark-mdx "^1.6.22"
     remark-parse "^8.0.3"
     remark-stringify "^8.1.1"

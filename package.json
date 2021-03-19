@@ -95,7 +95,7 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-markdown": "^2.0.0",
-    "eslint-plugin-mdx": "^1.10.0",
+    "eslint-plugin-mdx": "^1.11.0",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "front-matter": "^4.0.2",
@@ -169,6 +169,5 @@
     "sitemap-static/minimist": "1.2.5",
     "ini": "1.3.7",
     "eval": "^0.1.5"
-  },
-  "remarkConfig": {}
+  }
 }
