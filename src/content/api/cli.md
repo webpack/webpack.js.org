@@ -3,6 +3,7 @@ title: Command Line Interface
 sort: 1
 contributors:
   - anshumanv
+  - rishabh3112
   - snitin315
   - evenstensberg
   - simon04
@@ -50,6 +51,38 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 | `serve`      | `serve\|s [options]`                      | Run the `webpack-dev-server`.                                                   |
 | `version`    | `version\|v [commands...]`                | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
 | `watch`      | `watch\|w [entries...] [options]`         | Run webpack and watch for files changes.                                        |
+
+### Init
+
+Used to initialize new webpack project
+
+```bash
+npx webpack init [generation-path] [options]
+```
+
+**example**
+
+```bash
+npx webpack init ./my-app --force --template=default
+```
+
+#### Generation Path
+
+Location of where to generate configuration. defaults to `process.cwd()`
+
+#### Options
+
+**template**
+
+`string = default`
+
+Name of template to generate.
+
+**force**
+
+`boolean`
+
+To generate project without questions. If passed, default answer for each question will be used.
 
 ## Flags
 
