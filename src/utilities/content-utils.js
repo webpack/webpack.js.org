@@ -90,14 +90,9 @@ export const getPageTitle = (tree, path) => {
 };
 
 export const getPageDescription = (tree, path) => {
-  let page = findInContent(tree, (item) => item.url === path);
-  if (!page) {
-    return '';
-  } else if (path === '/') {
-    return '';
-  } else if (path.includes('/printable')) {
-    return '';
-  } else {
-    return page.description || '';
-  }
+  const page = findInContent(tree, (item) => item.url === path);
+  if (!page) return undefined;
+  if (path.includes('/printable')) return '';
+
+  return page.description ?? '';
 };
