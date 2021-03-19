@@ -65,7 +65,7 @@ And run `webpack` via your preferred method.
 
 |             Name              |            Type             |                            Default                            | Description                                                                         |
 | :---------------------------: | :-------------------------: | :-----------------------------------------------------------: | :---------------------------------------------------------------------------------- |
-|     **[`limit`](#limit)**     | `{Boolean\|Number\|String}` |                         `undefined`                           | Specifying the maximum size of a file in bytes.                                     |
+|     **[`limit`](#limit)**     | `{Boolean\|Number\|String}` |                            `true`                             | Specifying the maximum size of a file in bytes.                                     |
 |  **[`mimetype`](#mimetype)**  |     `{Boolean\|String}`     | based from [mime-types](https://github.com/jshttp/mime-types) | Sets the MIME type for the file to be transformed.                                  |
 |  **[`encoding`](#encoding)**  |     `{Boolean\|String}`     |                           `base64`                            | Specify the encoding which the file will be inlined with.                           |
 | **[`generator`](#generator)** |        `{Function}`         |           `() => type/subtype;encoding,base64_data`           | You can create you own custom implementation for encoding data.                     |
@@ -75,7 +75,7 @@ And run `webpack` via your preferred method.
 ### `limit`
 
 Type: `Boolean|Number|String`
-Default: `undefined`
+Default: `true`
 
 The limit can be specified via loader options and defaults to no limit.
 
