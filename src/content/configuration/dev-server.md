@@ -71,6 +71,16 @@ T> If you want to manually recompile the bundle, navigating to the `/invalidate`
 
 T> HTML template is required to serve the bundle, usually it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
 
+### Usage via CLI
+
+You can invoke webpack-dev-server via CLI by: 
+
+```bash
+npx webpack serve
+```
+
+A list of CLI options for `serve` is available [here](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS.md)
+
 ## `devServer.after`
 
 `function (app, server, compiler)`

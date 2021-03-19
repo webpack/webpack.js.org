@@ -11,18 +11,17 @@ contributors:
   - EugeneHlushko
   - dhurlburtusa
   - anshumanv
+  - thorn0
 ---
 
 Besides exporting a single configuration object, there are a few more ways that cover other needs as well.
 
 ## Exporting a Function
 
-Eventually you will find the need to disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production). You have (at least) two options:
-
-One option is to export a function from your webpack configuration instead of exporting an object. The function will be invoked with two arguments:
+Eventually you will find the need to disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production). There are multiple ways to do that. One option is to export a function from your webpack configuration instead of exporting an object. The function will be invoked with two arguments:
 
 - An environment as the first parameter. See the [environment options CLI documentation](/api/cli/#environment-options) for syntax examples.
-- An options map (`argv`) as the second parameter. This describes the options passed to webpack, with keys such as [`output-filename`](/api/cli/#output-options) and [`optimize-minimize`](/api/cli/#optimize-options).
+- An options map (`argv`) as the second parameter. This describes the options passed to webpack, with keys such as [`output-path`](/api/cli/#flags) and [`mode`](/api/cli/#flags).
 
 ```diff
 -module.exports = {
@@ -33,7 +32,7 @@ One option is to export a function from your webpack configuration instead of ex
      plugins: [
        new TerserPlugin({
          terserOptions: {
-+          compress: argv['optimize-minimize'] // only if -p or --optimize-minimize were passed
++          compress: argv.mode === 'production' // only if `--mode production` was passed
          }
        })
      ]
