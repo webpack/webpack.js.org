@@ -8,9 +8,7 @@ import PrintScript from './components/Print/PrintScript';
 
 import { HelmetProvider } from 'react-helmet-async';
 
-// Define bundles (previously used `Object.values(locals.assets)`) but
-// can't retrieve from there anymore due to separate compilation.
-const bundles = ['/vendor.bundle.js', '/index.bundle.js'];
+import assets from '../dist/prod-assets-manifest.json';
 
 function isPrintPage(url) {
   return url.includes('/printable');
@@ -18,8 +16,6 @@ function isPrintPage(url) {
 
 // Export method for `SSGPlugin`
 export default (locals) => {
-  let { assets } = locals.webpackStats.compilation;
-
   const helmetContext = {};
 
   const renderedHtml = ReactDOMServer.renderToString(
@@ -42,7 +38,7 @@ export default (locals) => {
           {isPrintPage(locals.path) ? (
             <PrintScript />
           ) : (
-            bundles.map((path) => <script key={path} src={path} />)
+            assets.js.map((path) => <script key={path} src={path} />)
           )}
         </body>
       </StaticRouter>
@@ -51,9 +47,8 @@ export default (locals) => {
 
   const { helmet } = helmetContext;
 
-  const css = Object.keys(assets)
-    .filter((asset) => /\.css$/.test(asset))
-    .map((path) => `<link rel="stylesheet" href=${`/${path}`} />`)
+  const css = assets.css
+    .map((path) => `<link rel="stylesheet" href=${`${path}`} />`)
     .join('');
 
   return `<!DOCTYPE html><html ${helmet.htmlAttributes.toString()}><head>${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}${css}</head>${renderedHtml}`;
