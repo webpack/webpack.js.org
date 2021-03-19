@@ -45,7 +45,6 @@ The remainder of this section of the site is dedicated to developers such as you
 
 - [Writing a Loader](/contribute/writing-a-loader)
 - [Writing a Plugin](/contribute/writing-a-plugin)
-- [Writing a Scaffold](/contribute/writing-a-scaffold)
 - [Plugin Patterns](/contribute/plugin-patterns)
 - [Release Process](/contribute/release-process)
 
