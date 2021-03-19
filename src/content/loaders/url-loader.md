@@ -65,17 +65,31 @@ module.exports = {
 
 |             Name              |            Type             |                            Default                            | Description                                                                         |
 | :---------------------------: | :-------------------------: | :-----------------------------------------------------------: | :---------------------------------------------------------------------------------- |
+<<<<<<< HEAD
 |     **[`limit`](#limit)**     | `{Boolean\|Number\|String}` |                            `undefined`                        | 指定文件的最大体积（以字节为单位）。                                                    |
 |  **[`mimetype`](#mimetype)**  |     `{Boolean\|String}`     | 基于 [mime-types](https://github.com/jshttp/mime-types) 库实现转换 | 设置要转换的文件的 MIME 类型。                                                           |
 |  **[`encoding`](#encoding)**  |     `{Boolean\|String}`     |                           `base64`                            | 指定用于内联文件的编码。                                                               |
 | **[`generator`](#generator)** |        `{Function}`         |           `() => type/subtype;encoding,base64_data`           | 你可以创建自己的自定义实现以对数据进行编码。                                             |
 |  **[`fallback`](#fallback)**  |         `{String}`          |                         `file-loader`                         | 指定当目标文件大小超过限制时的替代 loader。                                              |
 |  **[`esModule`](#esmodule)**  |         `{Boolean}`         |                            `true`                             | 使用 ES 模块语法。                                                                     |
+=======
+|     **[`limit`](#limit)**     | `{Boolean\|Number\|String}` |                            `true`                             | Specifying the maximum size of a file in bytes.                                     |
+|  **[`mimetype`](#mimetype)**  |     `{Boolean\|String}`     | based from [mime-types](https://github.com/jshttp/mime-types) | Sets the MIME type for the file to be transformed.                                  |
+|  **[`encoding`](#encoding)**  |     `{Boolean\|String}`     |                           `base64`                            | Specify the encoding which the file will be inlined with.                           |
+| **[`generator`](#generator)** |        `{Function}`         |           `() => type/subtype;encoding,base64_data`           | You can create you own custom implementation for encoding data.                     |
+|  **[`fallback`](#fallback)**  |         `{String}`          |                         `file-loader`                         | Specifies an alternative loader to use when a target file's size exceeds the limit. |
+|  **[`esModule`](#esmodule)**  |         `{Boolean}`         |                            `true`                             | Use ES modules syntax.                                                              |
+>>>>>>> ca2f5addc882e38d5d72ecf5998f605247aeedbc
 
 ### `limit` {#limit}
 
+<<<<<<< HEAD
 类型: `Boolean|Number|String`
 默认值: `undefined`
+=======
+Type: `Boolean|Number|String`
+Default: `true`
+>>>>>>> ca2f5addc882e38d5d72ecf5998f605247aeedbc
 
 该值可以通过 loader 的 options 参数来指定，默认为 `undefined`。
 

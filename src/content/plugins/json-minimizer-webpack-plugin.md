@@ -36,18 +36,10 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.json/i,
-        type: "javascript/auto",
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-            },
-          },
-        ],
+        test: /\.json$/i,
+        type: "asset/resource",
       },
     ],
   },

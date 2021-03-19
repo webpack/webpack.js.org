@@ -61,7 +61,24 @@ module.exports = {
 
 然后通过你喜欢的方式运行 `webpack`。
 
+<<<<<<< HEAD
 ## 选项 {#options}
+=======
+## Note about source maps
+
+**Works only with `source-map`, `inline-source-map`, `hidden-source-map` and `nosources-source-map` values for the [`devtool`](/configuration/devtool/) option.**
+
+Why? Because CSS support only these source map types.
+
+The plugin respect the [`devtool`](/configuration/devtool/) and using the `SourceMapDevToolPlugin` plugin.
+Using supported `devtool` values enable source map generation.
+Using `SourceMapDevToolPlugin` with enabled the `columns` option enables source map generation.
+
+Use source maps to map error message locations to modules (this slows down the compilation).
+If you use your own `minify` function please read the `minify` section for handling source maps correctly.
+
+## Options
+>>>>>>> ca2f5addc882e38d5d72ecf5998f605247aeedbc
 
 ### `test` {#test}
 
@@ -126,6 +143,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `cache` {#cache}
 
 > ⚠ 在 webpack 5 中已被忽略！请使用 https://webpack.docschina.org/configuration/other-options/#cache。
@@ -218,6 +236,9 @@ module.exports = {
 ```
 
 ### `parallel` {#parallel}
+=======
+### `parallel`
+>>>>>>> ca2f5addc882e38d5d72ecf5998f605247aeedbc
 
 类型：`Boolean|Number`
 默认值：`true`
@@ -265,6 +286,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `sourceMap` {#sourcemap}
 
 类型：`Boolean|Object`
@@ -300,6 +322,9 @@ module.exports = {
 ```
 
 ### `minify` {#minify}
+=======
+### `minify`
+>>>>>>> ca2f5addc882e38d5d72ecf5998f605247aeedbc
 
 类型：`Function`
 默认值：`undefined`
@@ -318,7 +343,6 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        sourceMap: true,
         minify: (data, inputMap, minimizerOptions) => {
           const postcss = require('postcss');
 
@@ -478,6 +502,7 @@ module.exports = {
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
+  devtool: 'source-map',
   module: {
     loaders: [
       {
@@ -491,11 +516,7 @@ module.exports = {
     ],
   },
   optimization: {
-    minimizer: [
-      new CssMinimizerPlugin({
-        sourceMap: true,
-      }),
-    ],
+    minimizer: [new CssMinimizerPlugin()],
   },
 };
 ```
@@ -539,7 +560,6 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        sourceMap: true,
         minify: async (data, inputMap) => {
           const csso = require('csso');
           const sourcemap = require('source-map');
@@ -584,7 +604,6 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        sourceMap: true,
         minify: async (data, inputMap) => {
           // eslint-disable-next-line global-require
           const CleanCSS = require('clean-css');
