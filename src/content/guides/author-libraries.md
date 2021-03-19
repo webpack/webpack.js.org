@@ -151,14 +151,6 @@ However it only works when it's referenced through script tag, it can't be used 
 
 As a library author, we want it to be compatible in different environments, i.e., users should be able to consume the bundled library in multiple ways listed below:
 
-- **ES2015 module import**:
-
-  ```js
-  import * as webpackNumbers from 'webpack-numbers';
-  // ...
-  webpackNumbers.wordToNum('Two');
-  ```
-
 - **CommonJS module require**:
 
   ```js
