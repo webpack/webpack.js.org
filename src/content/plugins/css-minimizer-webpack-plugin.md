@@ -61,7 +61,7 @@ module.exports = {
 
 然后通过你喜欢的方式运行 `webpack`。
 
-## Note about source maps {#note-about-source-maps}
+## 关于 source maps 的提示 {#note-about-source-maps}
 
 **仅对 [`devtool`](/configuration/devtool/) 配置项的 `source-map`、`inline-source-map`、`hidden-source-map` 与 `nosources-source-map` 值生效。**
 
