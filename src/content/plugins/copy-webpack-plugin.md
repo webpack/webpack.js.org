@@ -333,7 +333,7 @@ module.exports = {
 Type: `Function`
 Default: `undefined`
 
-> ℹ️ To ignore files by path please use the [`globOptions.ignore`](https://github.com/webpack-contrib/copy-webpack-plugin/blob/master/(#globoptions) option.
+> ℹ️ To ignore files by path please use the [`globOptions.ignore`](#globoptions) option.
 
 **webpack.config.js**
 

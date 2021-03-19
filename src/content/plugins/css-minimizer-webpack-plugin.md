@@ -61,6 +61,19 @@ module.exports = {
 
 然后通过你喜欢的方式运行 `webpack`。
 
+## 关于 source maps 的提示 {#note-about-source-maps}
+
+**仅对 [`devtool`](/configuration/devtool/) 配置项的 `source-map`、`inline-source-map`、`hidden-source-map` 与 `nosources-source-map` 值生效。**
+
+为什么呢？因为 CSS 仅支持这些 source map 类型。
+
+插件支持 [`devtool`](/configuration/devtool/) 并且使用 `SourceMapDevToolPlugin` 插件。
+使用受支持的 `devtool` 值可以启用 source map 生成。
+使用 `SourceMapDevToolPlugin` 并启用 `columns` 配置项可以启用 source map 生成。
+
+使用 source map 将错误信息位置映射到 modules 中（这降低了复杂度）。
+如果你是用自定义 `minify` 函数，请阅读 `minify` 章节以确保正确处理 source map。
+
 ## 选项 {#options}
 
 ### `test` {#test}
@@ -126,97 +139,6 @@ module.exports = {
 };
 ```
 
-### `cache` {#cache}
-
-> ⚠ 在 webpack 5 中已被忽略！请使用 https://webpack.docschina.org/configuration/other-options/#cache。
-
-类型：`Boolean|String`
-默认值：`true`
-
-启用文件缓存。
-缓存目录的默认路径：`node_modules/.cache/css-minimizer-webpack-plugin`。
-
-> ℹ️ 如果使用自己的 `minify` 函数，为缓存正确无效请先阅读 `minify` 部分。
-
-#### `Boolean` {#boolean}
-
-启用/禁用文件缓存。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new CssMinimizerPlugin({
-        cache: true,
-      }),
-    ],
-  },
-};
-```
-
-#### `String` {#string}
-
-启用文件缓存并设置缓存目录的路径。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new CssMinimizerPlugin({
-        cache: 'path/to/cache',
-      }),
-    ],
-  },
-};
-```
-
-### `cacheKeys` {#cachekeys}
-
-> ⚠ 在 webpack 5 中已被忽略！请使用 https://webpack.docschina.org/configuration/other-options/#cache。
-
-类型：`Function<(defaultCacheKeys, file) -> Object>`
-默认值：`defaultCacheKeys => defaultCacheKeys`
-
-允许覆盖默认的缓存键。
-
-默认缓存键：
-
-```js
-({
-  cssMinimizer: require('cssnano/package.json').version, // cssnano version
-  'css-minimizer-webpack-plugin': require('../package.json').version, // plugin version
-  'css-minimizer-webpack-plugin-options': this.options, // plugin options
-  path: compiler.outputPath ? `${compiler.outputPath}/${file}` : file, // asset path
-  hash: crypto.createHash('md4').update(input).digest('hex'), // source file hash
-});
-```
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new CssMinimizerPlugin({
-        cache: true,
-        cacheKeys: (defaultCacheKeys, file) => {
-          defaultCacheKeys.myCacheKey = 'myCacheKeyValue';
-
-          return defaultCacheKeys;
-        },
-      }),
-    ],
-  },
-};
-```
-
 ### `parallel` {#parallel}
 
 类型：`Boolean|Number`
@@ -265,40 +187,6 @@ module.exports = {
 };
 ```
 
-### `sourceMap` {#sourcemap}
-
-类型：`Boolean|Object`
-默认值：`false`（关于 `devtool`  和 `SourceMapDevToolPlugin` 插件的详细信息请参见下文）
-
-启用（配置）source map 支持。使用 [PostCss SourceMap 选项](https://github.com/postcss/postcss-loader#sourcemap)。
-启用时的默认配置：`{ inline: false }`。
-
-**仅适用于 [`devtool`](/configuration/devtool/) 选项中的 `source-map`，`inline-source-map`，`hidden-source-map` 和 `nosources-source-map`。**
-
-为什么？因为 CSS 仅支持这些 source map 类型。
-
-该插件遵循 [`devtool`](/configuration/devtool/) 并使用 `SourceMapDevToolPlugin` 插件。
-使用受支持的 `devtool` 值可以生成 source map。
-使用了开启 `columns` 选项的 `SourceMapDevToolPlugin` 可以生成 source map。
-
-使用 source map 在模块中映射错误信息（这会减慢编译速度）。
-如果要使用自定义的 `minify` 函数，为了能准确处理 source maps，请先阅读 `minify` 部分。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new CssMinimizerPlugin({
-        sourceMap: true,
-      }),
-    ],
-  },
-};
-```
-
 ### `minify` {#minify}
 
 类型：`Function`
@@ -318,7 +206,6 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        sourceMap: true,
         minify: (data, inputMap, minimizerOptions) => {
           const postcss = require('postcss');
 
@@ -478,6 +365,7 @@ module.exports = {
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
+  devtool: 'source-map',
   module: {
     loaders: [
       {
@@ -491,11 +379,7 @@ module.exports = {
     ],
   },
   optimization: {
-    minimizer: [
-      new CssMinimizerPlugin({
-        sourceMap: true,
-      }),
-    ],
+    minimizer: [new CssMinimizerPlugin()],
   },
 };
 ```
@@ -539,7 +423,6 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        sourceMap: true,
         minify: async (data, inputMap) => {
           const csso = require('csso');
           const sourcemap = require('source-map');
@@ -584,7 +467,6 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        sourceMap: true,
         minify: async (data, inputMap) => {
           // eslint-disable-next-line global-require
           const CleanCSS = require('clean-css');
