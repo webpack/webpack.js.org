@@ -17,7 +17,7 @@ const otherManifest = [
     url: '/manifest.json',
   },
   {
-    url: '/app-shell/',
+    url: '/app-shell/index.html',
   },
 ];
 const manifestURLs = [...manifest, ...otherManifest].map((entry) => {
