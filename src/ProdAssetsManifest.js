@@ -17,7 +17,6 @@ class ProdAssetsManifest {
             js = js.concat(
               files
                 .filter((file) => file.endsWith('.js')) // two js files
-
                 .sort((a) => {
                   // vendor first
                   if (a.startsWith('vendor')) return -1;
