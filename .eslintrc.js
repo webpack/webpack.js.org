@@ -10,9 +10,6 @@ module.exports = {
     'cypress/globals': true,
   },
   plugins: ['markdown', 'cypress', 'react-hooks'],
-  globals: {
-    __DEV__: true,
-  },
   rules: {
     'no-console': 'off',
     semi: ['error', 'always'],
