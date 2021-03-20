@@ -17,6 +17,8 @@ describe('getPageDescription', () => {
   });
   it('should return description for get-started', () => {
     const description = getPageDescription(content, '/guides/getting-started/');
-    expect(description).toBe('Learn how to get started with webpack quick');
+    expect(description).toBe(
+      'Learn how to bundle a JavaScript application with webpack 5.'
+    );
   });
 });

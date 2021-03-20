@@ -4,7 +4,7 @@ describe('server side rendered page', () => {
     cy.get('head meta[name="description"]').should(
       'have.attr',
       'content',
-      'Learn how to get started with webpack quick'
+      'Learn how to bundle a JavaScript application with webpack 5.'
     );
   });
 
