@@ -73,7 +73,7 @@ T> HTML template is required to serve the bundle, usually it is an `index.html` 
 
 ### Usage via CLI
 
-You can invoke webpack-dev-server via CLI by: 
+You can invoke webpack-dev-server via CLI by:
 
 ```bash
 npx webpack serve

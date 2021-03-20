@@ -184,7 +184,6 @@ As you might have noticed over the past guides and code example, our `/dist` fol
 
 In general it's good practice to clean the `/dist` folder before each build, so that only used files will be generated. Let's take care of that with [`output.clean`](/configuration/output/#outputclean) option.
 
-
 **webpack.config.js**
 
 ```diff
