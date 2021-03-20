@@ -54,7 +54,7 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 
 ### Init
 
-Used to initialize new webpack project
+Used to initialize a new webpack project.
 
 ```bash
 npx webpack init [generation-path] [options]
@@ -68,7 +68,7 @@ npx webpack init ./my-app --force --template=default
 
 #### Generation Path
 
-Location of where to generate configuration. defaults to `process.cwd()`
+Location of where to generate the configuration. Defaults to `process.cwd()`.
 
 #### Options
 
@@ -82,7 +82,7 @@ Name of template to generate.
 
 `boolean`
 
-To generate project without questions. If passed, default answer for each question will be used.
+To generate a project without questions. When enabled, default answer for each question will be used.
 
 ## Flags
 
