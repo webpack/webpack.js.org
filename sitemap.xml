@@ -508,10 +508,10 @@
         <loc>https://webpack.js.org/plugins/hot-module-replacement-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/html-webpack-plugin</loc>
+        <loc>https://webpack.js.org/plugins/html-minimizer-webpack-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/html-minimizer-webpack-plugin</loc>
+        <loc>https://webpack.js.org/plugins/html-webpack-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/ignore-plugin</loc>
@@ -586,10 +586,10 @@
         <loc>https://webpack.js.org/api/plugins/compiler</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/parser</loc>
+        <loc>https://webpack.js.org/api/plugins/module-factories</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/module-factories</loc>
+        <loc>https://webpack.js.org/api/plugins/parser</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/resolver</loc>
