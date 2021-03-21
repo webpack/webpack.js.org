@@ -90,7 +90,7 @@ module.exports = (env) =>
           'plugins/no-emit-on-errors-plugin':
             '/configuration/optimization/#optimizationemitonerrors',
           'concepts/mode': '/configuration/mode',
-          'contibute/writing-a-scaffold': '/api/cli/#init',
+          'contribute/writing-a-scaffold': '/api/cli/#init',
         },
       }),
       new CopyWebpackPlugin({
