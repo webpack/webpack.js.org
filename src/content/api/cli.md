@@ -3,6 +3,7 @@ title: Command Line Interface
 sort: 1
 contributors:
   - anshumanv
+  - rishabh3112
   - snitin315
   - evenstensberg
   - simon04
@@ -38,18 +39,50 @@ Read the [installation guide](/guides/installation) if you don't already have we
 
 webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with
 
-| Command      | Usage                                     | Description                                                                     |
-| ------------ | ----------------------------------------- | ------------------------------------------------------------------------------- |
-| `build`      | `build\|bundle\|b [entries...] [options]` | Run webpack (default command, can be omitted).                                  |
-| `configtest` | `configtest\|t [config-path]`             | Validate a webpack configuration.                                               |
-| `help`       | `help\|h [command] [option]`              | Display help for commands and options.                                          |
-| `info`       | `info\|i [options]`                       | Outputs information about your system.                                          |
-| `init`       | `init\|c [scaffold...] [options]`         | Initialize a new webpack configuration.                                         |
-| `loader`     | `loader\|l [output-path]`                 | Scaffold a loader.                                                              |
-| `plugin`     | `plugin\|p [output-path]`                 | Scaffold a plugin.                                                              |
-| `serve`      | `serve\|s [options]`                      | Run the `webpack-dev-server`.                                                   |
-| `version`    | `version\|v [commands...]`                | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
-| `watch`      | `watch\|w [entries...] [options]`         | Run webpack and watch for files changes.                                        |
+| Command                               | Usage                                     | Description                                                                     |
+| ------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------- |
+| `build`                               | `build\|bundle\|b [entries...] [options]` | Run webpack (default command, can be omitted).                                  |
+| `configtest`                          | `configtest\|t [config-path]`             | Validate a webpack configuration.                                               |
+| [`help`](#help)                       | `help\|h [command] [option]`              | Display help for commands and options.                                          |
+| `info`                                | `info\|i [options]`                       | Outputs information about your system.                                          |
+| [`init`](#init)                       | `init\|c [generation-path] [options]`     | Initialize a new webpack project.                                               |
+| `loader`                              | `loader\|l [output-path]`                 | Scaffold a loader.                                                              |
+| `plugin`                              | `plugin\|p [output-path]`                 | Scaffold a plugin.                                                              |
+| [`serve`](/configuration/dev-server/) | `serve\|s [options]`                      | Run the `webpack-dev-server`.                                                   |
+| [`version`](#version)                 | `version\|v [commands...]`                | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
+| `watch`                               | `watch\|w [entries...] [options]`         | Run webpack and watch for files changes.                                        |
+
+### Init
+
+Used to initialize a new webpack project.
+
+```bash
+npx webpack init [generation-path] [options]
+```
+
+**example**
+
+```bash
+npx webpack init ./my-app --force --template=default
+```
+
+#### Generation Path
+
+Location of where to generate the configuration. Defaults to `process.cwd()`.
+
+#### Options
+
+**`--template`**
+
+`string = default`
+
+Name of template to generate.
+
+**`--force`**
+
+`boolean`
+
+To generate a project without questions. When enabled, default answer for each question will be used.
 
 ## Flags
 
