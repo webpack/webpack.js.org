@@ -98,7 +98,7 @@ npx webpack info [options]
 npx webpack info --output=json
 ```
 
-**Options**
+#### Options for info
 
 **`--output`**
 
