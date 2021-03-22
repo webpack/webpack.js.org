@@ -993,16 +993,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-如果生成的输出文件，是在 HTML 页面中作为一个 script 标签引入，则变量 `MyLibrary` 将与入口文件的返回值绑定。
-
-W> 注意，如果将`数组`作为 `entry`，那么只会暴露数组中的最后一个模块。如果将`对象`作为 `entry`，还可以使用 `array` 语法暴露（具体查看[这个示例](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for details)）。
-
-T> 有关 `output.library` 以及 `output.libraryTarget` 详细信息，请查看[创建 library 指南](/guides/author-libraries/)。
-
-## output.scriptType {#ouputscripttype}
-=======
-The generated output will be defined with the name `"MyLibrary"`, i.e.:
+生成的输出将被定义为 `"MyLibrary"`，例如：
 
 ```javascript
 define('MyLibrary', [], function () {
@@ -1010,32 +1001,25 @@ define('MyLibrary', [], function () {
 });
 ```
 
-The bundle can be included as part of a script tag, and the bundle can be invoked like so:
+该 bundle 可以使用 script 标签引入，并且可以被这样引入：
 
 ```javascript
 require(['MyLibrary'], function (MyLibrary) {
   // Do something with the library...
 });
 ```
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
 
 If `output.library.name` is undefined, the following is generated instead.
 
-<<<<<<< HEAD
-此选项允许加载使用自定义 srcipt 类型的异步 chunk，例如 `<script type="module" ...>`。
-
-T> 如果 [`output.module`](#outputmodule) 设置为 `true`，则 `output.scriptType` 会默认将 `'module'` 替换为 `false`。
-=======
 ```javascript
 define(function () {
   return _entry_return_;
 });
 ```
 
-This bundle will not work as expected, or not work at all (in the case of the almond loader) if loaded directly with a `<script>` tag. It will only work through a RequireJS compatible asynchronous module loader through the actual path to that file, so in this case, the `output.path` and `output.filename` may become important for this particular setup if these are exposed directly on the server.
+如果使用一个 `<script>` 标签直接加载。它只能通过 RequireJS 兼容的异步模块 loader 通过文件的实际路径工作，所以在这种情况下，如果 `output.path` 与 `output.filename` 直接在服务端暴露，那么对于这种特殊设置可能会变得很重要。
 
-##### `type: 'amd-require'`
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+##### `type: 'amd-require'` {#type-amd-require}
 
 ```javascript
 module.exports = {
@@ -1328,17 +1312,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `output.libraryExport` {#outputlibraryexport}
-=======
-The AMD module will be:
+AMD module 将会是这样：
 
 ```js
 define('MyLibrary', [], factory);
 ```
 
-## `output.libraryExport`
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+## `output.libraryExport` {#outputlibraryexport}
 
 W> We might drop support for this, so prefer to use [output.library.export](#outputlibraryexport) which works the same as `libraryExport`.
 
@@ -1379,13 +1359,9 @@ MySubModule.doSomething();
 
 `string = 'var'`
 
-<<<<<<< HEAD
-配置如何暴露 library。可以使用下面的选项中的任意一个。注意，此选项与分配给 [`output.library`](#outputlibrary) 的值一同使用。对于下面的所有示例，都假定将 [`output.library`](#outputlibrary) 的值配置为 `MyLibrary`。
-=======
-W> Please use [`output.library.type`](#outputlibrarytype) instead as we might drop support for `output.libraryTarget` in the future.
+W> 请使用 [`output.library.type`](#outputlibrarytype) 代理，因为我们可能在未来放弃对 `output.libraryTarget` 的支持。
 
-Configure how the library will be exposed. Any one of the following options can be used. Please note that this option works in conjunction with the value assigned to [`output.library`](#outputlibrary). For the following examples, it is assumed that the value of [`output.library`](#outputlibrary) is configured as `MyLibrary`.
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+配置如何暴露 library。可以使用下面的选项中的任意一个。注意，此选项与分配给 [`output.library`](#outputlibrary) 的值一同使用。对于下面的所有示例，都假定将 [`output.library`](#outputlibrary) 的值配置为 `MyLibrary`。
 
 T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回的值。在 bundle 本身中，它是从入口起点、由 webpack 生成的函数的输出结果。
 
@@ -1395,13 +1371,9 @@ T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回�
 
 #### `libraryTarget: 'var'` {#libraryTarget-var}
 
-<<<<<<< HEAD
-当 library 加载完成，**入口起点的返回值**将分配给一个变量：
-=======
-W> Prefer to use [`output.library.type: 'var'`](#type-var).
+W> 最好使用 [`output.library.type: 'var'`](#type-var)。
 
-When your library is loaded, the **return value of your entry point** will be assigned to a variable:
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+当 library 加载完成，**入口起点的返回值**将分配给一个变量：
 
 ```javascript
 var MyLibrary = _entry_return_;
@@ -1412,13 +1384,9 @@ var MyLibrary = _entry_return_;
 
 #### `libraryTarget: 'assign'` {#libraryTarget-assign}
 
-<<<<<<< HEAD
-这将产生一个隐含的全局变量，可能会潜在地重新分配到全局中已存在的值（谨慎使用）：
-=======
-W> Prefer to use [`output.library.type: 'assign'`](#type-assign).
+W> 最好使用 [`output.library.type: 'assign'`](#type-assign)。
 
-This will generate an implied global which has the potential to reassign an existing value (use with caution):
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+这将产生一个隐含的全局变量，可能会潜在地重新分配到全局中已存在的值（谨慎使用）：
 
 ```javascript
 MyLibrary = _entry_return_;
@@ -1428,13 +1396,9 @@ MyLibrary = _entry_return_;
 
 #### `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' /> {#libraryTarget-assign-properties}
 
-<<<<<<< HEAD
-如果目标对象存在，则将返回值 copy 到目标对象，否则先创建目标对象：
-=======
-W> Prefer to use [output.library.type: 'assign-properties'`](#type-assign-properties-badge-text5160-).
+W> 最好使用 [output.library.type: 'assign-properties'`](#type-assign-properties-badge-text5160-)。
 
-Copy the return value to a target object if it exists, otherwise create the target object first:
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+如果目标对象存在，则将返回值 copy 到目标对象，否则先创建目标对象：
 
 ```js
 // 如果不存在的话就创建目标对象
@@ -1472,13 +1436,9 @@ W> 注意，不设置 `output.library` 将导致由入口起点返回的所有�
 
 #### `libraryTarget: 'this'` {#librarytarget-this}
 
-<<<<<<< HEAD
-**入口起点的返回值**将分配给 this 的一个属性（此名称由 `output.library` 定义）下，`this` 的含义取决于你：
-=======
-W> Prefer to use [`output.library.type: 'this'`](#type-this).
+W> 最好使用 [`output.library.type: 'this'`](#type-this)。
 
-The **return value of your entry point** will be assigned to this under the property named by `output.library`. The meaning of `this` is up to you:
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+**入口起点的返回值**将分配给 this 的一个属性（此名称由 `output.library` 定义）下，`this` 的含义取决于你：
 
 ```javascript
 this['MyLibrary'] = _entry_return_;
@@ -1490,13 +1450,9 @@ MyLibrary.doSomething(); // 如果 this 是 window
 
 #### `libraryTarget: 'window'` {#librarytarget-window}
 
-<<<<<<< HEAD
-**入口起点的返回值**将使用 `output.library` 中定义的值，分配给 `window` 对象的这个属性下。
-=======
-W> Prefer to use [`output.library.type: 'window'`](#type-window).
+W> 最好使用 [`output.library.type: 'window'`](#type-window)。
 
-The **return value of your entry point** will be assigned to the `window` object using the `output.library` value.
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+**入口起点的返回值**将使用 `output.library` 中定义的值，分配给 `window` 对象的这个属性下。
 
 ```javascript
 window['MyLibrary'] = _entry_return_;
@@ -1506,13 +1462,9 @@ window.MyLibrary.doSomething();
 
 #### `libraryTarget: 'global'` {#librarytarget-global}
 
-<<<<<<< HEAD
-**入口起点的返回值**将使用 `output.library` 中定义的值，分配给 `global` 对象的这个属性下。
-=======
-W> Prefer to use [`output.library.type: 'global'`](#type-global).
+W> 最好使用 [`output.library.type: 'global'`](#type-global)。
 
-The **return value of your entry point** will be assigned to the `global` object using the `output.library` value.
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+**入口起点的返回值**将使用 `output.library` 中定义的值，分配给 `global` 对象的这个属性下。
 
 ```javascript
 global['MyLibrary'] = _entry_return_;
@@ -1522,13 +1474,9 @@ global.MyLibrary.doSomething();
 
 #### `libraryTarget: 'commonjs'` {#librarytarget-commonjs}
 
-<<<<<<< HEAD
-**入口起点的返回值**将使用 `output.library` 中定义的值，分配给 exports 对象。这个名称也意味着，模块用于 CommonJS 环境：
-=======
-W> Prefer to use [`output.library.type: 'commonjs'`](#type-commonjs).
+W> 最好使用 [`output.library.type: 'commonjs'`](#type-commonjs)。
 
-The **return value of your entry point** will be assigned to the `exports` object using the `output.library` value. As the name implies, this is used in CommonJS environments.
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+**入口起点的返回值**将使用 `output.library` 中定义的值，分配给 exports 对象。这个名称也意味着，模块用于 CommonJS 环境：
 
 ```javascript
 exports['MyLibrary'] = _entry_return_;
@@ -1542,25 +1490,17 @@ require('MyLibrary').doSomething();
 
 #### `libraryTarget: 'module'` {#librarytarget-module}
 
-<<<<<<< HEAD
-输出 ES 模块。请确保事先启用 [experiments.outputModule](/configuration/experiments/)。
-=======
-W> Prefer to use [`output.library.type: 'module'`](#type-module).
+W> 最好使用 [`output.library.type: 'module'`](#type-module)。
 
-Output ES Module. Make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand.
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+输出 ES 模块。请确保事先启用 [experiments.outputModule](/configuration/experiments/)。
 
 需要注意的是，该功能还未完全支持，请在[此处](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975)跟进进度。
 
 #### `libraryTarget: 'commonjs2'` {#librarytarget-commonjs2}
 
-<<<<<<< HEAD
-**入口起点的返回值**将分配给 `module.exports` 对象。这个名称也意味着模块用于 CommonJS 环境：
-=======
-W> Prefer to use [`output.library.type: 'commonjs2'`](#type-commonjs2).
+W> 最好使用 [`output.library.type: 'commonjs2'`](#type-commonjs2)。
 
-The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in CommonJS environments:
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+**入口起点的返回值**将分配给 `module.exports` 对象。这个名称也意味着模块用于 CommonJS 环境：
 
 ```javascript
 module.exports = _entry_return_;
@@ -1574,13 +1514,9 @@ T> 想要弄清楚 CommonJS 和 CommonJS2 之间的区别？虽然它们很相�
 
 #### `libraryTarget: 'amd'` {#librarytarget-amd}
 
-<<<<<<< HEAD
-将你的 library 暴露为 AMD 模块。
-=======
-W> Prefer to use [`output.library.type: 'amd'`](#type-amd).
+W> 最好使用 [`output.library.type: 'amd'`](#type-amd)。
 
-This will expose your library as an AMD module.
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+将你的 library 暴露为 AMD 模块。
 
 AMD 模块要求入口 chunk（例如使用 `<script>` 标签加载的第一个脚本）通过特定的属性定义，例如 `define` 和 `require`，它们通常由 RequireJS 或任何兼容的模块加载器提供（例如 almond）。否则，直接加载生成的 AMD bundle 将导致报错，如 `define is not defined`。
 
@@ -1624,13 +1560,9 @@ define([], function () {
 
 #### `libraryTarget: 'amd-require'` {#librarytarget-amd-require}
 
-<<<<<<< HEAD
-这将使用立即执行的AMD `require(dependencies, factory)` 包装器包装您的输出。
-=======
-W> Prefer to use [`output.library.type: 'amd-require'`](#type-amd-require).
+W> 最好使用 [`output.library.type: 'amd-require'`](#type-amd-require)。
 
-This packages your output with an immediately-executed AMD `require(dependencies, factory)` wrapper.
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+这将使用立即执行的AMD `require(dependencies, factory)` 包装器包装您的输出。
 
 `'amd-require'` 目标（target）允许使用AMD依赖项，而无需单独的后续调用。与 `'amd'` 目标（target）一样, 这取决于在加载 webpack 输出的环境中适当可用的 [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md)。
 
@@ -1638,13 +1570,9 @@ This packages your output with an immediately-executed AMD `require(dependencies
 
 #### `libraryTarget: 'umd'` {#librarytarget-umd}
 
-<<<<<<< HEAD
-将你的 library 暴露为所有的模块定义下都可运行的方式。它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。了解更多请查看 [UMD 仓库](https://github.com/umdjs/umd)。
-=======
-W> Prefer to use [`output.library.type: 'umd'`](#type-umd).
+W> 最好使用 [`output.library.type: 'umd'`](#type-umd)。
 
-This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+将你的 library 暴露为所有的模块定义下都可运行的方式。它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。了解更多请查看 [UMD 仓库](https://github.com/umdjs/umd)。
 
 在这个例子中，你需要 `library` 属性来命名你的模块：
 
@@ -1717,13 +1645,9 @@ module.exports = {
 
 #### `libraryTarget: 'system'` {#librarytarget-system}
 
-<<<<<<< HEAD
-这将暴露你的 library 作为一个由 [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) 的模块。此特性首次发布于 [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0)。
-=======
-W> Prefer to use [`output.library.type: 'system'`](#type-system).
+W> 最好使用 [`output.library.type: 'system'`](#type-system)。
 
-This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+这将暴露你的 library 作为一个由 [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) 的模块。此特性首次发布于 [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0)。
 
 当 webpack bundle 被执行时，系统模块依赖全局的变量 `System`。编译为 `System.register` 形式后，你可以使用 `System.import('/bundle.js')` 而无需额外配置，并会将你的 webpack bundle 包加载到系统模块注册表中。
 
@@ -1778,13 +1702,9 @@ __system_context__.import('./other-file.js').then((m) => {
 
 #### `libraryTarget: 'jsonp'` {#librarytarget-jsonp}
 
-<<<<<<< HEAD
-这将把入口起点的返回值，包裹到一个 jsonp 包装容器中
-=======
-W> Prefer to use [`output.library.type: 'jsonp'`](#type-jsonp).
+W> 最好使用 [`output.library.type: 'jsonp'`](#type-jsonp)。
 
-This will wrap the return value of your entry point into a jsonp wrapper.
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+这将把入口起点的返回值，包裹到一个 jsonp 包装容器中
 
 ```javascript
 MyLibrary(_entry_return_);
@@ -1939,16 +1859,13 @@ __webpack_public_path__ = myRuntimePublicPath;
 
 T> `output.publicPath` defaults to `'auto'` with `web` and `web-worker` targets.
 
-<<<<<<< HEAD
-## `output.sourceMapFilename` {#outputsourcemapfilename}
-=======
-## output.scriptType
+## output.scriptType {#outputscripttype}
 
 `string: 'module' | 'text/javascript'` `boolean = false`
 
-This option allows loading asynchronous chunks with a custom script type, such as `<script type="module" ...>`.
+这个配置项允许使用自定义 script 类型加载异步 chunk，例如 `<script type="module" ...>`。
 
-T> If [`output.module`](#outputmodule) is set to `true`, `output.scriptType` will default to `'module'` instead of `false`.
+T> 如果将 [`output.module`](#outputmodule) 设置为 `true`，`output.scriptType` 将会默认设置为 `'module'` 而不是 `false`。
 
 ```javascript
 module.exports = {
@@ -1959,8 +1876,7 @@ module.exports = {
 };
 ```
 
-## `output.sourceMapFilename`
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+## `output.sourceMapFilename` {#outputsourcemapfilename}
 
 `string = '[file].map[query]'`
 
