@@ -44,7 +44,7 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 | `build`                               | `build\|bundle\|b [entries...] [options]` | Run webpack (default command, can be omitted).                                  |
 | `configtest`                          | `configtest\|t [config-path]`             | Validate a webpack configuration.                                               |
 | [`help`](#help)                       | `help\|h [command] [option]`              | Display help for commands and options.                                          |
-| `info`                                | `info\|i [options]`                       | Outputs information about your system.                                          |
+| [`info`](#info)                       | `info\|i [options]`                       | Outputs information about your system.                                          |
 | [`init`](#init)                       | `init\|c [generation-path] [options]`     | Initialize a new webpack project.                                               |
 | `loader`                              | `loader\|l [output-path]`                 | Scaffold a loader.                                                              |
 | `plugin`                              | `plugin\|p [output-path]`                 | Scaffold a plugin.                                                              |
@@ -83,6 +83,28 @@ Name of template to generate.
 `boolean`
 
 To generate a project without questions. When enabled, default answer for each question will be used.
+
+### Info
+
+Outputs information about your system.
+
+```bash
+npx webpack info [options]
+```
+
+**example**
+
+```bash
+npx webpack info --output=json
+```
+
+#### Options
+
+**`--output`**
+
+`string`
+
+To get the output in specified format (accept `json` or `markdown`).
 
 ## Flags
 
