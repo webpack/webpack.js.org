@@ -39,7 +39,7 @@ npm init -y
 npm install --save-dev webpack lodash
 ```
 
-We install `lodash` as `devDependencies` instead of `dependencies` because we don't want to bundle it into our library, or our library could be easily bloated.
+我们将 `lodash` 安装为 `devDependencies` 而不是 `dependencies`，因为我们不需要将其打包到我们的库中，否则我们的库体积很容易变大。
 
 **src/ref.json**
 
@@ -99,7 +99,7 @@ export function wordToNum(word) {
 }
 ```
 
-## Webpack Configuration {#webpack-configuration}
+## Webpack 配置 {#webpack-configuration}
 
 我们可以从如下 webpack 基本配置开始：
 
@@ -147,9 +147,9 @@ We exposed the entry point as `webpackNumbers` so users can use it through scrip
 </script>
 ```
 
-However it only works when it's referenced through script tag, it can't be used in other environments like CommonJS, AMD, Node.js, etc.
+然而它只能通过被 script 标签引用而发挥作用，它不能运行在 CommonJS、AMD、Node.js 等环境中。
 
-As a library author, we want it to be compatible in different environments, i.e., users should be able to consume the bundled library in multiple ways listed below:
+作为一个库作者，我们希望它能够兼容不同的环境，也就是说，用户应该能够通过以下方式使用打包后的库：
 
 - **CommonJS module require**:
 
@@ -186,7 +186,7 @@ As a library author, we want it to be compatible in different environments, i.e.
   </html>
   ```
 
-Let's update the `output.library` option with its `type` set to [`'umd'`](/configuration/output/#type-amd):
+我们更新 `output.library` 配置项，将其 `type` 设置为 [`'umd'`](/configuration/output/#type-amd)：
 
 ```diff
  const path = require('path');
