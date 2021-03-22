@@ -416,14 +416,18 @@ module: {
     rules: [
     // ...
 +     {
-+       resourceQuery: /raw/
-+       type: 'asset/source'
++       resourceQuery: /raw/,
++       type: 'asset/source',
 +     }
     ]
   },
 ```
 
+<<<<<<< HEAD
 如果你想把原始资源排除在其他 loader 的解析范围以外，请使用取反的符合：
+=======
+and if you'd like to exclude raw assets from being processed by other loaders, use a negative condition:
+>>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
 
 ```diff
 module: {
@@ -431,12 +435,33 @@ module: {
     // ...
 +     {
 +       test: /\.m?js$/,
-+       resourceQuery: /^(?!\?raw$).*/,
++       resourceQuery: { not: /raw/ },
++       use: [ ... ]
 +     },
       {
-        resourceQuery: /raw/
-        type: 'asset/source'
+        resourceQuery: /raw/,
+        type: 'asset/source',
       }
+    ]
+  },
+```
+
+or a `oneOf` list of rules. Here only the first matching rule will be applied:
+
+```diff
+module: {
+    rules: [
+    // ...
++     { oneOf: [
+        {
+          resourceQuery: /raw/,
+          type: 'asset/source',
+        },
++       {
++         test: /\.m?js$/,
++         use: [ ... ]
++       },
++     ] }
     ]
   },
 ```

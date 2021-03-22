@@ -66,8 +66,12 @@ contributors:
 
 ## S {#s}
 
+<<<<<<< HEAD
 - [**Scaffolding**](/guides/scaffolding/): 此功能允许使用可自定义的第三方初始化包创建 webpack 配置项。
 - [**Shimming**](/guides/shimming/): 并非所有 JS 文件都可以直接与 webpack 一起使用。有些文件可能是不支持的模块格式，甚至不是任何模块格式。`shimming` 这时就会发挥作用。
+=======
+- [**Shimming**](/guides/shimming/): Not all JS files can be used directly with webpack. The file maybe in an unsupported module format, or not even in any module format. It is here where `shimming` comes into play.
+>>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
 
 ## T {#t}
 

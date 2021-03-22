@@ -10,6 +10,7 @@ contributors:
   - EugeneHlushko
   - snitin315
   - rahul3v
+  - jamesgeorge007
 ---
 
 Plugins expose the full potential of the webpack engine to third-party developers. Using staged build callbacks, developers can introduce their own behaviors into the webpack build process. Building plugins is a bit more advanced than building loaders, because you'll need to understand some of the webpack low-level internals to hook into them. Be prepared to read some source code!
@@ -82,7 +83,7 @@ module.exports = {
 Use [`schema-utils`](https://github.com/webpack/schema-utils) in order to validate the options being passed through the plugin options. Here is an example:
 
 ```javascript
-import validateOptions from 'schema-utils';
+import { validate } from 'schema-utils';
 
 // schema for options object
 const schema = {
@@ -96,16 +97,23 @@ const schema = {
 
 export default class HelloWorldPlugin {
   constructor(options = {}) {
-    validateOptions(schema, options, 'Hello World Plugin');
+    validate(schema, options, {
+      name: 'Hello World Plugin',
+      baseDataPath: 'options',
+    });
   }
 
   apply(compiler) {}
 }
 ```
 
+<<<<<<< HEAD
 W> The [`schema-utils`](https://github.com/webpack/schema-utils) API has changed in recent versions. webpack still uses the v1.0.0 release, and we ask that you do the same until further notice.
 
 ## Compiler and Compilation {#compiler-and-compilation}
+=======
+## Compiler and Compilation
+>>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
 
 Among the two most important resources while developing plugins are the [`compiler`](/api/node/#compiler-instance) and [`compilation`](/api/compilation-hooks/) objects. Understanding their roles is an important first step in extending the webpack engine.
 

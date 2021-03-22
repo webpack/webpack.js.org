@@ -11,18 +11,26 @@ contributors:
   - EugeneHlushko
   - dhurlburtusa
   - anshumanv
+  - thorn0
 ---
 
 除了导出单个配置外，还有一些能满足更多需求的使用方式。
 
 ## 导出函数 {#exporting-a-function}
 
+<<<<<<< HEAD
 你可能会遇到需要区分[开发](/guides/development)环境和[生产](/guides/production)环境的情况。你（至少）有两种选择：
 
 其中一种选择是由 webpack 配置导出一个函数而非对象，这个函数包含两个参数：
 
 - 参数一是环境（environment）。请查阅 [environment 选项文档](/api/cli/#environment-options)了解更多。
 - 参数二是传递给 webpack 的配置项，其中包含 [`output-filename`](/api/cli/#output-options) 和 [`optimize-minimize`](/api/cli/#optimize-options) 等。
+=======
+Eventually you will find the need to disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production). There are multiple ways to do that. One option is to export a function from your webpack configuration instead of exporting an object. The function will be invoked with two arguments:
+
+- An environment as the first parameter. See the [environment options CLI documentation](/api/cli/#environment-options) for syntax examples.
+- An options map (`argv`) as the second parameter. This describes the options passed to webpack, with keys such as [`output-path`](/api/cli/#flags) and [`mode`](/api/cli/#flags).
+>>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
 
 ```diff
 -module.exports = {
@@ -33,7 +41,7 @@ contributors:
      plugins: [
        new TerserPlugin({
          terserOptions: {
-+          compress: argv['optimize-minimize'] // only if -p or --optimize-minimize were passed
++          compress: argv.mode === 'production' // only if `--mode production` was passed
          }
        })
      ]

@@ -184,7 +184,6 @@ webpack 5.4.0 compiled successfully in 2189 ms
 
 通常比较推荐的做法是，在每次构建前清理 `/dist` 文件夹，这样只会生成用到的文件。让我们使用 [`output.clean`](/configuration/output/#outputclean) 配置项实现这个需求。
 
-
 **webpack.config.js**
 
 ```diff

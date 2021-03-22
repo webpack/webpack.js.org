@@ -84,11 +84,13 @@ module.exports = (env) =>
           'guides/code-splitting-css': '/guides/code-splitting/',
           'guides/code-splitting-libraries': '/guides/code-splitting/',
           'guides/why-webpack': '/comparison/',
+          'guides/scaffolding': '/api/cli/#init',
           'guides/production-build': '/guides/production/',
           migrating: '/migrate/3/',
           'plugins/no-emit-on-errors-plugin':
             '/configuration/optimization/#optimizationemitonerrors',
           'concepts/mode': '/configuration/mode',
+          'contribute/writing-a-scaffold': '/api/cli/#init',
         },
       }),
       new CopyWebpackPlugin({

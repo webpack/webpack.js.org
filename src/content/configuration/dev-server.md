@@ -71,7 +71,21 @@ T> 如果你需要要手动重新编译 `bundle`，将路由导航至 `/invalida
 
 T> 当启动本地服务的时候 HTML 模板是必须提供的，通常是 `index.html`。确保将脚本引用添加到 HTML 中，webpack-dev-server 不会自动注入它们。
 
+<<<<<<< HEAD
 ## `devServer.after` {#devserverafter}
+=======
+### Usage via CLI
+
+You can invoke webpack-dev-server via CLI by:
+
+```bash
+npx webpack serve
+```
+
+A list of CLI options for `serve` is available [here](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS.md)
+
+## `devServer.after`
+>>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
 
 `function (app, server, compiler)`
 
