@@ -39,44 +39,22 @@ related:
 
 webpack-cli 提供了许多命令来使 webpack 的工作变得简单。默认情况下，webpack 提供了以下命令：
 
-<<<<<<< HEAD
 | 命令          | 使用                                      | 描述                                                                     |
 | ------------ | ----------------------------------------- | ------------------------------------------------------------------------------- |
 | `build`      | `build\|bundle\|b [entries...] [options]` | 运行 webpack（默认命令，可以被省略）。                                               |
 | `configtest` | `configtest\|t [config-path]`             | 校验 webpack 配置。                                                               |
-| `help`       | `help\|h [command] [option]`              | 展示所有命令和选项的帮助。                                                          |
+| [`help`](#help)       | `help\|h [command] [option]`              | 展示所有命令和选项的帮助。                                                          |
 | `info`       | `info\|i [options]`                       | 输出有关系统的信息。                                                                |
-| `init`       | `init\|c [scaffold...] [options]`         | 初始化一个新的 webpack 配置。                                                       |
+| [`init`](#init)       | `init\|c [scaffold...] [options]`         | 初始化一个新的 webpack 配置。                                                       |
 | `loader`     | `loader\|l [output-path]`                 | 生成一个 loader 仓库。                                                             |
 | `plugin`     | `plugin\|p [output-path]`                 | 生成一个 plugin 仓库。                                                             |
-| `serve`      | `serve\|s [options]`                      | 运行 `webpack-dev-server`.                                                       |
-| `version`    | `version\|v [commands...]`                | 输出 `webpack`，`webpack-cli` 以及 `webpack-dev-server` 的版本信息。                |
+| [`serve`](/configuration/dev-server/)      | `serve\|s [options]`                      | 运行 `webpack-dev-server`.                                                       |
+| [`version`](#version)    | `version\|v [commands...]`                | 输出 `webpack`，`webpack-cli` 以及 `webpack-dev-server` 的版本信息。                |
 | `watch`      | `watch\|w [entries...] [options]`         | 运行 webpack 并监听文件变化。                                                       |
 
-## Flags {#flags}
+### Init {#init}
 
-webpack-cli 提供了许多 flag 来使 webpack 的工作变得简单。默认情况下，webpack 提供了以下 flag：
-
-注意：这些是 webpack v4 的 flag，从 v5 开始 CLI 开始支持 [核心 flags](/api/cli/#core-flags)。
-
-| Flag / 别名        | 类型            | 描述                                                                                                    |
-=======
-| Command                               | Usage                                     | Description                                                                     |
-| ------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------- |
-| `build`                               | `build\|bundle\|b [entries...] [options]` | Run webpack (default command, can be omitted).                                  |
-| `configtest`                          | `configtest\|t [config-path]`             | Validate a webpack configuration.                                               |
-| [`help`](#help)                       | `help\|h [command] [option]`              | Display help for commands and options.                                          |
-| `info`                                | `info\|i [options]`                       | Outputs information about your system.                                          |
-| [`init`](#init)                       | `init\|c [generation-path] [options]`     | Initialize a new webpack project.                                               |
-| `loader`                              | `loader\|l [output-path]`                 | Scaffold a loader.                                                              |
-| `plugin`                              | `plugin\|p [output-path]`                 | Scaffold a plugin.                                                              |
-| [`serve`](/configuration/dev-server/) | `serve\|s [options]`                      | Run the `webpack-dev-server`.                                                   |
-| [`version`](#version)                 | `version\|v [commands...]`                | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
-| `watch`                               | `watch\|w [entries...] [options]`         | Run webpack and watch for files changes.                                        |
-
-### Init
-
-Used to initialize a new webpack project.
+用于初始化一个新的 webpack 项目。
 
 ```bash
 npx webpack init [generation-path] [options]
@@ -88,29 +66,29 @@ npx webpack init [generation-path] [options]
 npx webpack init ./my-app --force --template=default
 ```
 
-#### Generation Path
+#### 生成路径 {#generation-path}
 
-Location of where to generate the configuration. Defaults to `process.cwd()`.
+生成配置的位置。默认为 `process.cwd()`。
 
-#### Options
+#### 配置 {#options}
 
 **`--template`**
 
 `string = default`
 
-Name of template to generate.
+要生成的模板名称。
 
 **`--force`**
 
 `boolean`
 
-To generate a project without questions. When enabled, default answer for each question will be used.
+生成项目时不启用选项模式。当为 `true` 时，所有命令行选项使用默认值。
 
-## Flags
+## Flags {#flags}
 
-By default webpack ships with the following flags:
-| Flag / Alias | Type | Description |
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+默认情况下，webpack 提供了以下 flag：
+
+| Flag / 别名        | 类型            | 描述                                                                                                    |
 | ------------------- | --------------- | -------------------------------------------------------------------------------------------------------------- |
 | `--entry`           | string[]        | 应用程序的入口文件，例如 `./src/main.js`                                 |
 | `--config, -c`      | string[]        | 提供 webpack 配置文件的路径，例如 `./webpack.config.js`                  |

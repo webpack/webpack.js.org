@@ -423,11 +423,7 @@ module: {
   },
 ```
 
-<<<<<<< HEAD
-如果你想把原始资源排除在其他 loader 的解析范围以外，请使用取反的符合：
-=======
-and if you'd like to exclude raw assets from being processed by other loaders, use a negative condition:
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+如果你想把原始资源排除在其他 loader 的处理范围以外，请使用使用取反的正则：
 
 ```diff
 module: {
@@ -446,7 +442,7 @@ module: {
   },
 ```
 
-or a `oneOf` list of rules. Here only the first matching rule will be applied:
+或者使用 `oneOf` 的规则列表。此处只应用第一个匹配规则：
 
 ```diff
 module: {

@@ -609,23 +609,13 @@ JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
 T> 通常，你不需要修改 `output.hotUpdateMainFilename`.
 
-<<<<<<< HEAD
-## `output.library` {#outputlibrary}
-=======
-## output.library
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+## output.library {#outputlibrary}
 
-Output a library exposing the exports of your entry point.
+输出一个库，为你的入口做导出。
 
-<<<<<<< HEAD
-T> `object` 从 webpack 3.1.0 开始应用。用于 `libraryTarget: 'umd'`。
+- 类型：`string | string[] | object`
 
-`output.library` 的值的作用，取决于[`output.libraryTarget`](#outputlibrarytarget) 选项的值；完整的详细信息请查阅该章节。注意，`output.libraryTarget` 的默认选项是 `var`，所以如果使用以下配置选项：
-=======
-- Type: `string | string[] | object`
-
-Let's take a look at a simple example.
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
+一起来看一个简单的示例。
 
 **webpack.config.js**
 
@@ -639,7 +629,7 @@ module.exports = {
 };
 ```
 
-Say you have exported a function in your `src/index.js` entry:
+假设你在 `src/index.js` 的入口中导出了如下函数：
 
 ```js
 export function hello(name) {
@@ -647,7 +637,7 @@ export function hello(name) {
 }
 ```
 
-Now the variable `MyLibrary` will be bound with the exports of your entry file, and here's how to consume the webpack bundled library:
+此时，变量 `MyLibrary` 将与你的入口文件所导出的文件进行榜单，下面是如何使用 webpack 构建的库的实现：
 
 ```html
 <script src="https://example.org/path/to/my-library.js"></script>

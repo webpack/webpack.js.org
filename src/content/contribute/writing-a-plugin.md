@@ -107,13 +107,7 @@ export default class HelloWorldPlugin {
 }
 ```
 
-<<<<<<< HEAD
-W> The [`schema-utils`](https://github.com/webpack/schema-utils) API has changed in recent versions. webpack still uses the v1.0.0 release, and we ask that you do the same until further notice.
-
 ## Compiler and Compilation {#compiler-and-compilation}
-=======
-## Compiler and Compilation
->>>>>>> c2c13f356b18ccadb0f3fcaa8bcc9ef9316d05f5
 
 Among the two most important resources while developing plugins are the [`compiler`](/api/node/#compiler-instance) and [`compilation`](/api/compilation-hooks/) objects. Understanding their roles is an important first step in extending the webpack engine.
 
