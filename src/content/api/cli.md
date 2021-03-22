@@ -102,9 +102,9 @@ npx webpack info --output=json
 
 **`--output`**
 
-`string`
+`string : 'json' | 'markdown'`
 
-To get the output in specified format (accept `json` or `markdown`).
+To get the output in specified format.
 
 ## Flags
 
