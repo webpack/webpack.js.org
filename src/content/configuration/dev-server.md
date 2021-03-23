@@ -79,7 +79,7 @@ T> 当启动本地服务的时候 HTML 模板是必须提供的，通常是 `ind
 npx webpack serve
 ```
 
-A list of CLI options for serve is available CLI 配置项列表可以在 [这里](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS.md) 查询。
+CLI 配置项列表可以在 [这里](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS.md) 查询。
 
 ## `devServer.after` {#devserverafter}
 

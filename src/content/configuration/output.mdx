@@ -33,7 +33,7 @@ contributors:
 
 ## `output.auxiliaryComment` {#outputauxiliarycomment}
 
-W> Prefer to use [`output.library.auxiliaryComment`](#outputlibraryauxiliarycomment) instead.
+W> 最好使用 [`output.library.auxiliaryComment`](#outputlibraryauxiliarycomment)。
 
 `string` `object`
 
@@ -646,21 +646,21 @@ export function hello(name) {
 </script>
 ```
 
-In the above example we're passing a single entry file to `entry`, however webpack can accept [many kinds of entry point](/configuration/entry-context/#entry), e.g., an `array`, or an `object`.
+在上面的例子中，我们为 `entry` 设置了一个入口文件，然而 webpack 可以接受 [多个入口](/configuration/entry-context/#entry)，例如一个 `array` 或者一个 `object`。
 
-1. If you provide an `array` as the `entry` point, only the last one in the array will be exposed.
+1. 如果你将 `entry` 设置为一个 `array`，那么只有数组中的最后一个会被暴露。
 
    ```js
    module.exports = {
      // …
-     entry: ['./src/a.js', './src/b.js'], // only exports in b.js will be exposed
+     entry: ['./src/a.js', './src/b.js'], // 只有在 b.js 中导出的内容才会被暴露
      output: {
        library: 'MyLibrary',
      },
    };
    ```
 
-2. If an `object` is provided as the `entry` point, all entries can be exposed using the `array` syntax of `library`:
+2. 如果你将 `entry` 设置为一个 `object`，所以入口都可以通过 `library` 的 `array` 语法暴露：
 
    ```js
    module.exports = {
@@ -676,7 +676,7 @@ In the above example we're passing a single entry file to `entry`, however webpa
    };
    ```
 
-   Assuming that both `a.js` and `b.js` export a function `hello`, here's how to consume the libraries:
+   假设 `a.js` 与 `b.js` 导出名为 `hello` 的函数，这就是如何使用这些库的方法：
 
    ```html
    <script src="https://example.org/path/to/a.js"></script>
@@ -687,9 +687,9 @@ In the above example we're passing a single entry file to `entry`, however webpa
    </script>
    ```
 
-   See [this example](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) for more.
+   查看 [示例](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) 获取更多内容。
 
-   Note that the above configuration won't work as expected if you're going to configure library options per entry point. Here is how to do it [under each of your entries](/concepts/entry-points/#entrydescription-object):
+   请注意，如果你打算在每个入口点配置 library 配置项的话，以上配置将不能按照预期执行。这里是如何 [在每个入口点下](/concepts/entry-points/#entrydescription-object) 做的方法：
 
    ```js
    module.exports = {
@@ -698,7 +698,7 @@ In the above example we're passing a single entry file to `entry`, however webpa
        main: {
          import: './src/index.js',
          library: {
-           // all options under `output.library` can be used here
+           // `output.library` 下的所有配置项可以在这里使用
            name: 'MyLibrary',
            type: 'umd',
            umdNamedDefine: true,
@@ -715,7 +715,7 @@ In the above example we're passing a single entry file to `entry`, however webpa
    };
    ```
 
-### output.library.name
+### output.library.name {#outputlibraryname}
 
 ```js
 module.exports = {
@@ -728,24 +728,24 @@ module.exports = {
 };
 ```
 
-Specify a name for the library.
+指定库的名称。
 
-- Type:
+- 类型：
   ```ts
   string | string[] | {amd?: string, commonjs?: string, root?: string | string[]}
   ```
 
-### output.library.type
+### output.library.type {#outputlibrarytype}
 
-Configure how the library will be exposed.
+配置将库暴露的方式。
 
-- Type: `string`
+- 类型：`string`
 
-  Types included by default are `'var'`, `'module'`, `'assign'`, `'assign-properties'`, `'this'`, `'window'`, `'self'`, `'global'`, `'commonjs'`, `'commonjs2'`, `'commonjs-module'`, `'amd'`, `'amd-require'`, `'umd'`, `'umd2'`, `'jsonp'` and `'system'`, but others might be added by plugins.
+  类型默认包括 `'var'`、`'module'`、`'assign'`、`'assign-properties'`、`'this'`、`'window'`、`'self'`、`'global'`、`'commonjs'`、`'commonjs2'`、`'commonjs-module'`、`'amd'`、`'amd-require'`、`'umd'`、`'umd2'`、`'jsonp'` 以及 `'system'`，除此之外也可以通过插件添加。
 
-For the following examples, we'll use `__entry_return_` to indicate the values returned by the entry point.
+对于接下来的实例，我们将会使用 `__entry_return_` 表示被入口点返回的值。
 
-#### Expose a Variable
+#### Expose a Variable {#exposeavariable}
 
 These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library.name`](#outputlibraryname) at whatever scope the bundle was included at.
 
@@ -763,16 +763,16 @@ module.exports = {
 };
 ```
 
-When your library is loaded, the **return value of your entry point** will be assigned to a variable:
+让你的库加载之后，**入口起点的返回值** 将会被赋值给一个变量：
 
 ```javascript
 var MyLibrary = _entry_return_;
 
-// In a separate script with `MyLibrary` loaded…
+// 在加载了 `MyLibrary` 的单独脚本中
 MyLibrary.doSomething();
 ```
 
-##### `type: 'assign'`
+##### `type: 'assign'` {#typeassign}
 
 ```js
 module.exports = {
@@ -786,15 +786,15 @@ module.exports = {
 };
 ```
 
-This will generate an implied global which has the potential to reassign an existing value (use with caution):
+这将生成一个隐含的全局变量，它有可能重新分配一个现有的值（请谨慎使用）：
 
 ```javascript
 MyLibrary = _entry_return_;
 ```
 
-Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
+请注意，如果 `MyLibrary` 没有在你的库之前定义，那么它将会被设置在全局作用域。
 
-##### `type: 'assign-properties'` <Badge text='5.16.0+' />
+##### `type: 'assign-properties'` <Badge text='5.16.0+' /> {#typeassignproperties}
 
 ```js
 module.exports = {
@@ -808,29 +808,29 @@ module.exports = {
 };
 ```
 
-Similar to [`type: 'assign'`](#type-assign) but a safer option as it will reuse `MyLibrary` if it already exists:
+与 [`type: 'assign'`](#type-assign) 相似但是更安全，因为如果 `MyLibrary` 已经存在的话，它将被重用：
 
 ```js
-// only create MyLibrary if it doesn't exist
+// 仅在当其不存在是创建 MyLibrary
 MyLibrary = typeof MyLibrary === 'undefined' ? {} : MyLibrary;
-// then copy the return value to MyLibrary
-// just like what Object.assign does
+// 然后复制返回值到 MyLibrary
+// 就像是 Object.assign 行为
 
-// for instance, you export a `hello` function in your entry as follow
+// 例如，你像下面这样在你的入口导出一个 `hello` 函数
 export function hello(name) {
   console.log(`Hello ${name}`);
 }
 
-// In another script with MyLibrary loaded
-// you can run `hello` function like so
+// 在另外一个已经加载 MyLibrary 的脚本中
+// 你可以像这样运行 `hello` 函数
 MyLibrary.hello('World');
 ```
 
-#### Expose Via Object Assignment
+#### Expose Via Object Assignment {#exposeviaobjectassignment}
 
-These options assign the return value of the entry point (e.g. whatever the entry point exported) to a specific object under the name defined by [`output.library.name`](#outputlibraryname).
+这些配置项分配入口点的返回值（例如：无论入口点导出的什么内容）到一个名为 [`output.library.name`](#outputlibraryname) 的对象中。
 
-##### `type: 'this'`
+##### `type: 'this'` {#typethis}
 
 ```js
 module.exports = {
@@ -844,17 +844,17 @@ module.exports = {
 };
 ```
 
-The **return value of your entry point** will be assigned to `this` under the property named by `output.library.name`. The meaning of `this` is up to you:
+**入口起点的返回值** 将会被赋值给 this 对象下的 `output.library.name` 属性。`this` 的含义取决于你：
 
 ```javascript
 this['MyLibrary'] = _entry_return_;
 
-// In a separate script...
+// 在一个单独的脚本中
 this.MyLibrary.doSomething();
-MyLibrary.doSomething(); // if `this` is window
+MyLibrary.doSomething(); // 如果 `this` 为 window 对象
 ```
 
-##### `type: 'window'`
+##### `type: 'window'` {#type-window}
 
 ```js
 module.exports = {
@@ -868,7 +868,7 @@ module.exports = {
 };
 ```
 
-The **return value of your entry point** will be assigned to the `window` object using the `output.library.name` value.
+**入口起点的返回值** 将会被赋值给 `window` 对象下的 `output.library.name`。
 
 ```javascript
 window['MyLibrary'] = _entry_return_;
@@ -876,7 +876,7 @@ window['MyLibrary'] = _entry_return_;
 window.MyLibrary.doSomething();
 ```
 
-##### `type: 'global'`
+##### `type: 'global'` {#type-global}
 
 ```js
 module.exports = {
@@ -890,7 +890,7 @@ module.exports = {
 };
 ```
 
-The **return value of your entry point** will be assigned to the global object using the `output.library.name` value. Depending on the [`target`](/configuration/target/) value, the global object could change respectively, e.g., `self`, `global` or `globalThis`.
+**入口起点的返回值** 将会被复制给全局对象下的 `output.library.name`。取决于 [`target`](/configuration/target/) 值，全局对象可以分别改变,例如，`self`、`global` 或者 `globalThis`。
 
 ```javascript
 global['MyLibrary'] = _entry_return_;
@@ -898,7 +898,7 @@ global['MyLibrary'] = _entry_return_;
 global.MyLibrary.doSomething();
 ```
 
-##### `type: 'commonjs'`
+##### `type: 'commonjs'` {type-commmonjs}
 
 ```js
 module.exports = {
@@ -912,7 +912,7 @@ module.exports = {
 };
 ```
 
-The **return value of your entry point** will be assigned to the `exports` object using the `output.library.name` value. As the name implies, this is used in CommonJS environments.
+**入口起点的返回值** 将使用 `output.library.name` 赋值给  `exports` 对象。顾名思义，这是在 CommonJS 环境中使用。
 
 ```javascript
 exports['MyLibrary'] = _entry_return_;
@@ -920,13 +920,13 @@ exports['MyLibrary'] = _entry_return_;
 require('MyLibrary').doSomething();
 ```
 
-W> Note that not setting a `output.library.name` will cause all properties returned by the entry point to be assigned to the given object; there are no checks against existing property names.
+W> 注意，不设置 `output.library.name` 将导致入口起点返回的所有属性都被赋值给给定的对象；不检查现有的属性名。
 
-#### Module Definition Systems
+#### Module Definition Systems {#moduledefinitionsystems}
 
-These options will result in a bundle that comes with a complete header to ensure compatibility with various module systems. The `output.library.name` option will take on a different meaning under the following `output.library.type` options.
+这些配置项将生成一个带有完整 header 的 bundle，以确保与各种模块系统兼容。`output.library.name` 配置项在不同的 `output.library.type` 中有不同的含义。
 
-##### `type: 'module'`
+##### `type: 'module'` {#type-module}
 
 ```js
 module.exports = {
@@ -943,11 +943,11 @@ module.exports = {
 };
 ```
 
-Output ES Module.
+输出 ES 模块。
 
-However this feature is still experimental and not fully supported yet, so make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand. In addition, you can track the development progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
+然而该特性仍然是实验性的，并且没有完全支持，所以请确保事先启用 [experiments.outputModule](/configuration/experiments/)。除此之外，你可以在 [这里](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975) 追踪开发进度。
 
-##### `type: 'commonjs2'`
+##### `type: 'commonjs2'` {#type-commmonjs2}
 
 ```js
 module.exports = {
@@ -961,7 +961,7 @@ module.exports = {
 };
 ```
 
-The **return value of your entry point** will be assigned to the `module.exports`. As the name implies, this is used in Node.js (CommonJS) environments:
+**入口起点的返回值** 将会被赋值给 `module.exports`。顾名思义，这是在 Node.js（CommonJS）环境中使用的：
 
 ```javascript
 module.exports = _entry_return_;
@@ -969,17 +969,17 @@ module.exports = _entry_return_;
 require('MyLibrary').doSomething();
 ```
 
-If we specify `output.library.name` with `type: commmonjs2`, the return value of your entry point will be assigned to the `module.exports.[output.library.name]`.
+如果我们指定 `output.library.name` 为 `type: commmonjs2`，你的入口起点的返回值将会被赋值给 `module.exports.[output.library.name]`。
 
-T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
+T> 在考虑 CommonJS 与 CommonJS2 之间的区别？虽然它们很相似，但是它们之间有一些细微的差别，这些差别在 webpack 的上下文中通常是不相关的。（要获取更多详细内容，请 [阅读这个 issue](https://github.com/webpack/webpack/issues/1114)。）
 
-##### `type: 'amd'`
+##### `type: 'amd'` {#type-amd}
 
-This will expose your library as an AMD module.
+可以将你的库暴露为 AMD 模块。
 
-AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
+AMD module 要求入口 chunk（例如，第一个通过 `<script>` 标签加载的脚本）使用特定的属性来定义, 例如 `define` 与 `require`，这通常由 RequireJS 或任何兼容的 loader（如 almond）提供。否则，直接加载产生的 AMD bundle 将导致一个错误，如 `define is not defined`。
 
-So, with the following configuration...
+所以，按照下面的配置
 
 ```javascript
 module.exports = {
@@ -1009,7 +1009,7 @@ require(['MyLibrary'], function (MyLibrary) {
 });
 ```
 
-If `output.library.name` is undefined, the following is generated instead.
+如果没有定义 `output.library.name` 的话，会生成以下内容。
 
 ```javascript
 define(function () {
@@ -1033,17 +1033,17 @@ module.exports = {
 };
 ```
 
-This packages your output with an immediately-executed AMD `require(dependencies, factory)` wrapper.
+它会用一个立即执行的 AMD `require(dependencies, factory)` 包装器来打包输出。
 
-The `'amd-require'` type allows for the use of AMD dependencies without needing a separate later invocation. As with the `'amd'` type, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
+`'amd-require'` 类型允许使用AMD的依赖，而不需要单独的后续调用。与 `'amd'` 类型一样，这取决于在加载 webpack 输出的环境中适当的 [`require` 函数](https://github.com/amdjs/amdjs-api/blob/master/require.md) 是否可用。
 
-With this type, the library name can't be used.
+使用该类型的话，不能使用库的名称。
 
-##### `type: 'umd'`
+##### `type: 'umd'` {#type-umd}
 
-This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
+这将在所有模块定义下暴露你的库, 允许它与 CommonJS、AMD 和作为全局变量工作。可以查看 [UMD Repository](https://github.com/umdjs/umd) 获取更多内容。
 
-In this case, you need the `library.name` property to name your module:
+在这种情况下，你需要使用 `library.name` 属性命名你的模块：
 
 ```javascript
 module.exports = {
@@ -1057,7 +1057,7 @@ module.exports = {
 };
 ```
 
-And finally the output is:
+最终的输出为：
 
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1071,7 +1071,7 @@ And finally the output is:
 });
 ```
 
-Note that omitting `library.name` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
+请注意，根据 [对象赋值部分](#expose-via-object-assignment)，省略 `library.name` 将导致入口起点返回的所有属性直接赋值给根对象。示例：
 
 ```javascript
 module.exports = {
@@ -1082,7 +1082,7 @@ module.exports = {
 };
 ```
 
-The output will be:
+输出将会是：
 
 ```javascript
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1098,7 +1098,7 @@ The output will be:
 });
 ```
 
-You may specify an object for `library.name` for differing names per targets:
+你可以为 `library.name` 指定一个对象，每个目标的名称不同：
 
 ```javascript
 module.exports = {
@@ -1116,11 +1116,11 @@ module.exports = {
 };
 ```
 
-##### `type: 'system'`
+##### `type: 'system'` {#type-system}
 
-This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
+这将会把你的库暴露为一个 [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) 模块。这个特性最初是在 [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0) 中发布。
 
-System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and have your webpack bundle loaded into the System module registry.
+System 模块要求当 webpack bundle 执行时，全局变量 `System` 出现在浏览器中。编译的 `System.register` 格式允许你在没有额外配置的情况下使用 `System.import('/bundle.js')`，并将你的 webpack bundle 加载到系统模块注册表中。
 
 ```javascript
 module.exports = {
@@ -1133,7 +1133,7 @@ module.exports = {
 };
 ```
 
-Output:
+输出：
 
 ```javascript
 System.register([], function (__WEBPACK_DYNAMIC_EXPORT__, __system_context__) {
@@ -1145,7 +1145,7 @@ System.register([], function (__WEBPACK_DYNAMIC_EXPORT__, __system_context__) {
 });
 ```
 
-By adding `output.library.name` to configuration in addition to having `output.library.type` set to `system`, the output bundle will have the library name as an argument to `System.register`:
+除了设置 `output.library.type` 为 `system`，还要将 `output.library.name` 添加到配置中，输出的 bundle 将以库名作为 `System.register` 的参数：
 
 ```javascript
 System.register(
@@ -1161,9 +1161,9 @@ System.register(
 );
 ```
 
-#### Other Types
+#### Other Types {#othertypes}
 
-##### `type: 'jsonp'`
+##### `type: 'jsonp'` {#type-jsonp}
 
 ```js
 module.exports = {
@@ -1177,23 +1177,23 @@ module.exports = {
 };
 ```
 
-This will wrap the return value of your entry point into a jsonp wrapper.
+这将把入口起点的返回值包装到 jsonp 包装器中。
 
 ```javascript
 MyLibrary(_entry_return_);
 ```
 
-The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
+你的库的依赖将由 [`externals`](/configuration/externals/) 配置定义。
 
-T> Read the [authoring libraries guide](/guides/author-libraries/) guide for more information on `output.library.name` as well as `output.library.type`.
+T> 阅读 [authoring libraries guide](/guides/author-libraries/) 指南获取更多关于 `output.library.name` 与 `output.library.type` 的相关信息。
 
-### output.library.export
+### output.library.export {#outputlibraryexport}
 
-Specify which export should be exposed as library.
+指定哪一个导出应该被暴露为一个库。
 
-- Type: `string | string[]`
+- 类型：`string | string[]`
 
-It is `undefined` by default, which will export the whole (namespace) object. The examples below demonstrate the effect of this configuration when using [`output.library.type: 'var'`](#type-var).
+默认为 `undefined`，将会导出整个（命名空间）对象。下面的例子演示了使用 [`output.library.type: 'var'`](#type-var) 配置项产生的作用。
 
 ```js
 module.exports = {
@@ -1207,14 +1207,14 @@ module.exports = {
 };
 ```
 
-The default export of your entry point will be assigned to the library name:
+入口起点的默认导出将会被赋值为库名称：
 
 ```js
-// if your entry has a default export
+// 如果入口有一个默认导出
 var MyLibrary = _entry_return_.default;
 ```
 
-You can pass an array to `output.library.export` as well, it will be interpreted as a path to a module to be assigned to the library name:
+你也可以向 `output.library.export` 传递一个数组，它将被解析为一个要分配给库名的模块的路径：
 
 ```js
 module.exports = {
@@ -1228,19 +1228,19 @@ module.exports = {
 };
 ```
 
-And here's the library code:
+这里就是库代码：
 
 ```js
 var MyLibrary = _entry_return_.default.subModule;
 ```
 
-### output.library.auxiliaryComment
+### output.library.auxiliaryComment {#outputlibraryauxiliarycomment}
 
-Add a comment in the UMD wrapper.
+在 UMD 包装器中添加注释。
 
-- Type: `string | { amd?: string, commonjs?: string, commonjs2?: string, root?: string }`
+- 类型：`string | { amd?: string, commonjs?: string, commonjs2?: string, root?: string }`
 
-To insert the same comment for each `umd` type, set `auxiliaryComment` to a string:
+为每个 `umd` 类型插入相同的注释，将 `auxiliaryComment` 设置为 string。
 
 ```js
 module.exports = {
@@ -1256,7 +1256,7 @@ module.exports = {
 };
 ```
 
-which will yield the following:
+这将产生以下结果：
 
 ```js
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -1274,7 +1274,7 @@ which will yield the following:
 });
 ```
 
-For fine-grained control, pass an object:
+对于细粒度控制，可以传递一个对象：
 
 ```js
 module.exports = {
@@ -1295,11 +1295,11 @@ module.exports = {
 };
 ```
 
-### output.library.umdNamedDefine
+### output.library.umdNamedDefine {#outputlibraryumdNameddefine}
 
 `boolean`
 
-When using `output.library.type: "umd"`, setting `output.library.umdNamedDefine` to `true` will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.
+当使用 `output.library.type: "umd"` 时，将 `output.library.umdNamedDefine` 设置为 `true` 将会把 AMD 模块命名为 UMD 构建。否则使用匿名 `define`。
 
 ```javascript
 module.exports = {
@@ -1320,7 +1320,7 @@ define('MyLibrary', [], factory);
 
 ## `output.libraryExport` {#outputlibraryexport}
 
-W> We might drop support for this, so prefer to use [output.library.export](#outputlibraryexport) which works the same as `libraryExport`.
+W> 我们可能会停止对此的支持，所以最好使用 [output.library.export](#outputlibraryexport)，其作用与 `libraryExport` 一致。
 
 `string` `[string]`
 
@@ -1939,7 +1939,7 @@ require('module'); // <- 仍然抛出
 
 ## `output.umdNamedDefine` {#outputumdnameddefine}
 
-W> Prefer to use [`output.library.umdNamedDefine`](#outputlibraryumdnameddefine) instead.
+W> 最好使用 [`output.library.umdNamedDefine`](#outputlibraryumdnameddefine)。
 
 `boolean`
 
