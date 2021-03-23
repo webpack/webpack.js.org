@@ -12,7 +12,7 @@ Here you can find **webpack** project brand guidelines, assets, and license. See
 
 ## The Name
 
-webpack should **always** be written in lower-case letters, even at the beginning of a sentence.
+Webpack can be written with a capital W when used at the start of a sentence.
 
 ## Logo
 
