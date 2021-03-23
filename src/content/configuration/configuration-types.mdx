@@ -11,18 +11,17 @@ contributors:
   - EugeneHlushko
   - dhurlburtusa
   - anshumanv
+  - thorn0
 ---
 
 除了导出单个配置外，还有一些能满足更多需求的使用方式。
 
 ## 导出函数 {#exporting-a-function}
 
-你可能会遇到需要区分[开发](/guides/development)环境和[生产](/guides/production)环境的情况。你（至少）有两种选择：
-
-其中一种选择是由 webpack 配置导出一个函数而非对象，这个函数包含两个参数：
+你可能会遇到需要区分[开发](/guides/development)环境和[生产](/guides/production)环境的情况。有很多种方式可以做到这一点。其中一种选择是由 webpack 配置导出一个函数而非对象，这个函数包含两个参数：
 
 - 参数一是环境（environment）。请查阅 [environment 选项文档](/api/cli/#environment-options)了解更多。
-- 参数二是传递给 webpack 的配置项，其中包含 [`output-filename`](/api/cli/#output-options) 和 [`optimize-minimize`](/api/cli/#optimize-options) 等。
+- 参数二是传递给 webpack 的配置项，其中包含 [`output-path`](/api/cli/#flags) 和 [`mode`](/api/cli/#flags) 等。
 
 ```diff
 -module.exports = {
@@ -33,7 +32,7 @@ contributors:
      plugins: [
        new TerserPlugin({
          terserOptions: {
-+          compress: argv['optimize-minimize'] // only if -p or --optimize-minimize were passed
++          compress: argv.mode === 'production' // only if `--mode production` was passed
          }
        })
      ]

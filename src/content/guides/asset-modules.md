@@ -416,14 +416,14 @@ module: {
     rules: [
     // ...
 +     {
-+       resourceQuery: /raw/
-+       type: 'asset/source'
++       resourceQuery: /raw/,
++       type: 'asset/source',
 +     }
     ]
   },
 ```
 
-如果你想把原始资源排除在其他 loader 的解析范围以外，请使用取反的符合：
+如果你想把原始资源排除在其他 loader 的处理范围以外，请使用使用取反的正则：
 
 ```diff
 module: {
@@ -431,12 +431,33 @@ module: {
     // ...
 +     {
 +       test: /\.m?js$/,
-+       resourceQuery: /^(?!\?raw$).*/,
++       resourceQuery: { not: /raw/ },
++       use: [ ... ]
 +     },
       {
-        resourceQuery: /raw/
-        type: 'asset/source'
+        resourceQuery: /raw/,
+        type: 'asset/source',
       }
+    ]
+  },
+```
+
+或者使用 `oneOf` 的规则列表。此处只应用第一个匹配规则：
+
+```diff
+module: {
+    rules: [
+    // ...
++     { oneOf: [
+        {
+          resourceQuery: /raw/,
+          type: 'asset/source',
+        },
++       {
++         test: /\.m?js$/,
++         use: [ ... ]
++       },
++     ] }
     ]
   },
 ```

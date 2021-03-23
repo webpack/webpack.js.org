@@ -3,6 +3,7 @@ title: 命令行接口（CLI）
 sort: 1
 contributors:
   - anshumanv
+  - rishabh3112
   - snitin315
   - evenstensberg
   - simon04
@@ -42,20 +43,50 @@ webpack-cli 提供了许多命令来使 webpack 的工作变得简单。默认�
 | ------------ | ----------------------------------------- | ------------------------------------------------------------------------------- |
 | `build`      | `build\|bundle\|b [entries...] [options]` | 运行 webpack（默认命令，可以被省略）。                                               |
 | `configtest` | `configtest\|t [config-path]`             | 校验 webpack 配置。                                                               |
-| `help`       | `help\|h [command] [option]`              | 展示所有命令和选项的帮助。                                                          |
+| [`help`](#help)       | `help\|h [command] [option]`              | 展示所有命令和选项的帮助。                                                          |
 | `info`       | `info\|i [options]`                       | 输出有关系统的信息。                                                                |
-| `init`       | `init\|c [scaffold...] [options]`         | 初始化一个新的 webpack 配置。                                                       |
+| [`init`](#init)       | `init\|c [scaffold...] [options]`         | 初始化一个新的 webpack 配置。                                                       |
 | `loader`     | `loader\|l [output-path]`                 | 生成一个 loader 仓库。                                                             |
 | `plugin`     | `plugin\|p [output-path]`                 | 生成一个 plugin 仓库。                                                             |
-| `serve`      | `serve\|s [options]`                      | 运行 `webpack-dev-server`.                                                       |
-| `version`    | `version\|v [commands...]`                | 输出 `webpack`，`webpack-cli` 以及 `webpack-dev-server` 的版本信息。                |
+| [`serve`](/configuration/dev-server/)      | `serve\|s [options]`                      | 运行 `webpack-dev-server`.                                                       |
+| [`version`](#version)    | `version\|v [commands...]`                | 输出 `webpack`，`webpack-cli` 以及 `webpack-dev-server` 的版本信息。                |
 | `watch`      | `watch\|w [entries...] [options]`         | 运行 webpack 并监听文件变化。                                                       |
+
+### Init {#init}
+
+用于初始化一个新的 webpack 项目。
+
+```bash
+npx webpack init [generation-path] [options]
+```
+
+**example**
+
+```bash
+npx webpack init ./my-app --force --template=default
+```
+
+#### 生成路径 {#generation-path}
+
+生成配置的位置。默认为 `process.cwd()`。
+
+#### 配置 {#options}
+
+**`--template`**
+
+`string = default`
+
+要生成的模板名称。
+
+**`--force`**
+
+`boolean`
+
+生成项目时不启用选项模式。当为 `true` 时，所有命令行选项使用默认值。
 
 ## Flags {#flags}
 
-webpack-cli 提供了许多 flag 来使 webpack 的工作变得简单。默认情况下，webpack 提供了以下 flag：
-
-注意：这些是 webpack v4 的 flag，从 v5 开始 CLI 开始支持 [核心 flags](/api/cli/#core-flags)。
+默认情况下，webpack 提供了以下 flag：
 
 | Flag / 别名        | 类型            | 描述                                                                                                    |
 | ------------------- | --------------- | -------------------------------------------------------------------------------------------------------------- |

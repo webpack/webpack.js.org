@@ -81,7 +81,7 @@ T> 当你通过插件生成入口时，你可以传递空对象 `{}` 给 `entry`
 - `dependOn`: 当前入口所依赖的入口。它们必须在该入口被加载前被加载。
 - `filename`: 指定要输出的文件名称。
 - `import`: 启动时需加载的模块。
-- `library`: library 的相关选项。
+- `library`: 指定 library 选项，为当前 entry 构建一个 library。
 - `runtime`: 运行时 chunk 的名字。如果设置了，就会创建一个以这个名字命名的运行时 chunk，否则将使用现有的入口作为运行时。
 
 **webpack.config.js**
