@@ -106,6 +106,24 @@ npx webpack info --output=json
 
 To get the output in a specified format.
 
+### Configtest
+
+Validate a webpack configuration.
+
+```bash
+npx webpack configtest [config-path]
+```
+
+**example**
+
+```bash
+npx webpack configtest ./webpack.config.js
+```
+
+#### Config Path
+
+Path to your webpack configuration file. Defaults to `./webpack.config.js`.
+
 ## Flags
 
 By default webpack ships with the following flags:
