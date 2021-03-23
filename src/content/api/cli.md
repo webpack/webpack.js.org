@@ -25,8 +25,6 @@ related:
     url: https://medium.com/@joeclever/three-simple-ways-to-inspect-a-webpack-bundle-7f6a8fe7195d#.7d2i06mjx
   - title: Optimising your application bundle size with webpack
     url: https://hackernoon.com/optimising-your-application-bundle-size-with-webpack-e85b00bab579#.5w5ko08pq
-  - title: Analyzing & optimizing your webpack bundle
-    url: https://medium.com/@ahmedelgabri/analyzing-optimizing-your-webpack-bundle-8590818af4df#.hce4vdjs9
   - title: Analysing and minimising the size of client-side bundle with webpack and source-map-explorer
     url: https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x
 ---
@@ -44,7 +42,7 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 | `build`                               | `build\|bundle\|b [entries...] [options]` | Run webpack (default command, can be omitted).                                  |
 | `configtest`                          | `configtest\|t [config-path]`             | Validate a webpack configuration.                                               |
 | [`help`](#help)                       | `help\|h [command] [option]`              | Display help for commands and options.                                          |
-| `info`                                | `info\|i [options]`                       | Outputs information about your system.                                          |
+| [`info`](#info)                       | `info\|i [options]`                       | Outputs information about your system.                                          |
 | [`init`](#init)                       | `init\|c [generation-path] [options]`     | Initialize a new webpack project.                                               |
 | `loader`                              | `loader\|l [output-path]`                 | Scaffold a loader.                                                              |
 | `plugin`                              | `plugin\|p [output-path]`                 | Scaffold a plugin.                                                              |
@@ -83,6 +81,28 @@ Name of template to generate.
 `boolean`
 
 To generate a project without questions. When enabled, default answer for each question will be used.
+
+### Info
+
+Outputs information about your system.
+
+```bash
+npx webpack info [options]
+```
+
+**example**
+
+```bash
+npx webpack info --output=json
+```
+
+#### Options for info
+
+**`--output`**
+
+`string : 'json' | 'markdown'`
+
+To get the output in a specified format.
 
 ## Flags
 

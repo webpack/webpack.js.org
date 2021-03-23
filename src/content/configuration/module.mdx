@@ -981,7 +981,7 @@ module.exports = {
 
 **`function(info)`**
 
-A `UseEntry` can also be a function which receives the object argument describing the module being loaded, and must return an options object. This can be used to vary the loader options on a per-module basis.
+A `UseEntry` can also be a function which receives the object argument describing the module being loaded, and must return a non-function `UseEntry` object. This can be used to vary the loader options on a per-module basis.
 
 The `info` object parameter has the following fields:
 
