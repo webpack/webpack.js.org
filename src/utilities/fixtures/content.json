@@ -1,0 +1,1375 @@
+{
+  "path": "./src/content",
+  "name": "content",
+  "children": [
+    {
+      "path": "src/content/guides",
+      "name": "guides",
+      "children": [
+        {
+          "path": "src/content/guides/index.md",
+          "name": "index.md",
+          "size": 931,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/",
+          "anchors": [],
+          "title": "Guides",
+          "sort": -1,
+          "contributors": ["skipjack", "EugeneHlushko", "benschac"]
+        },
+        {
+          "path": "src/content/guides/getting-started.md",
+          "name": "getting-started.md",
+          "size": 12727,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/getting-started/",
+          "anchors": [
+            { "title": "Basic Setup", "id": "basic-setup", "level": 2 },
+            {
+              "title": "Creating a Bundle",
+              "id": "creating-a-bundle",
+              "level": 2
+            },
+            { "title": "Modules", "id": "modules", "level": 2 },
+            {
+              "title": "Using a Configuration",
+              "id": "using-a-configuration",
+              "level": 2
+            },
+            { "title": "NPM Scripts", "id": "npm-scripts", "level": 2 },
+            { "title": "Conclusion", "id": "conclusion", "level": 2 }
+          ],
+          "title": "Getting Started",
+          "description": "Learn how to bundle a JavaScript application with webpack 5.",
+          "sort": 1,
+          "contributors": [
+            "bebraw",
+            "varunjayaraman",
+            "cntanglijun",
+            "chrisVillanueva",
+            "johnstew",
+            "simon04",
+            "aaronang",
+            "TheDutchCoder",
+            "sudarsangp",
+            "Vanguard90",
+            "chenxsan",
+            "EugeneHlushko",
+            "ATGardner",
+            "ayvarot",
+            "bjarki",
+            "ztomasze",
+            "Spiral90210",
+            "byzyk",
+            "wizardofhogwarts",
+            "myshov",
+            "anshumanv"
+          ]
+        },
+        {
+          "path": "src/content/guides/asset-management.md",
+          "name": "asset-management.md",
+          "size": 24191,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/asset-management/",
+          "anchors": [
+            { "title": "Setup", "id": "setup", "level": 2 },
+            { "title": "Loading CSS", "id": "loading-css", "level": 2 },
+            { "title": "Loading Images", "id": "loading-images", "level": 2 },
+            { "title": "Loading Fonts", "id": "loading-fonts", "level": 2 },
+            { "title": "Loading Data", "id": "loading-data", "level": 2 },
+            {
+              "title": "Customize parser of JSON modules",
+              "id": "customize-parser-of-json-modules",
+              "level": 3
+            },
+            { "title": "Global Assets", "id": "global-assets", "level": 2 },
+            { "title": "Wrapping up", "id": "wrapping-up", "level": 2 },
+            { "title": "Next guide", "id": "next-guide", "level": 2 },
+            { "title": "Further Reading", "id": "further-reading", "level": 2 }
+          ],
+          "title": "Asset Management",
+          "sort": 2,
+          "contributors": [
+            "skipjack",
+            "michael-ciniawsky",
+            "TheDutchCoder",
+            "sudarsangp",
+            "chenxsan",
+            "EugeneHlushko",
+            "AnayaDesign",
+            "wizardofhogwarts",
+            "astonizer"
+          ]
+        },
+        {
+          "path": "src/content/guides/output-management.md",
+          "name": "output-management.md",
+          "size": 7542,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/output-management/",
+          "anchors": [
+            { "title": "Preparation", "id": "preparation", "level": 2 },
+            {
+              "title": "Setting up HtmlWebpackPlugin",
+              "id": "setting-up-htmlwebpackplugin",
+              "level": 2
+            },
+            {
+              "title": "Cleaning up the /dist folder",
+              "id": "cleaning-up-the-dist-folder",
+              "level": 2
+            },
+            { "title": "The Manifest", "id": "the-manifest", "level": 2 },
+            { "title": "Conclusion", "id": "conclusion", "level": 2 }
+          ],
+          "title": "Output Management",
+          "sort": 3,
+          "contributors": [
+            "skipjack",
+            "TheDutchCoder",
+            "sudarsangp",
+            "JGJP",
+            "EugeneHlushko",
+            "AnayaDesign",
+            "chenxsan"
+          ]
+        },
+        {
+          "path": "src/content/guides/development.md",
+          "name": "development.md",
+          "size": 14128,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/development/",
+          "anchors": [
+            {
+              "title": "Using source maps",
+              "id": "using-source-maps",
+              "level": 2
+            },
+            {
+              "title": "Choosing a Development Tool",
+              "id": "choosing-a-development-tool",
+              "level": 2
+            },
+            {
+              "title": "Using Watch Mode",
+              "id": "using-watch-mode",
+              "level": 3
+            },
+            {
+              "title": "Using webpack-dev-server",
+              "id": "using-webpack-dev-server",
+              "level": 3
+            },
+            {
+              "title": "Using webpack-dev-middleware",
+              "id": "using-webpack-dev-middleware",
+              "level": 3
+            },
+            {
+              "title": "Adjusting Your Text Editor",
+              "id": "adjusting-your-text-editor",
+              "level": 2
+            },
+            { "title": "Conclusion", "id": "conclusion", "level": 2 }
+          ],
+          "title": "Development",
+          "sort": 4,
+          "contributors": [
+            "SpaceK33z",
+            "rafde",
+            "fvgs",
+            "TheDutchCoder",
+            "WojciechKo",
+            "Calinou",
+            "GAumala",
+            "EugeneHlushko",
+            "byzyk",
+            "trivikr",
+            "aholzner",
+            "chenxsan",
+            "maxloh"
+          ]
+        },
+        {
+          "path": "src/content/guides/code-splitting.md",
+          "name": "code-splitting.md",
+          "size": 16575,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/code-splitting/",
+          "anchors": [
+            { "title": "Entry Points", "id": "entry-points", "level": 2 },
+            {
+              "title": "Prevent Duplication",
+              "id": "prevent-duplication",
+              "level": 2
+            },
+            {
+              "title": "Entry dependencies",
+              "id": "entry-dependencies",
+              "level": 3
+            },
+            {
+              "title": "SplitChunksPlugin",
+              "id": "splitchunksplugin",
+              "level": 3
+            },
+            { "title": "Dynamic Imports", "id": "dynamic-imports", "level": 2 },
+            {
+              "title": "Prefetching/Preloading modules",
+              "id": "prefetchingpreloading-modules",
+              "level": 2
+            },
+            { "title": "Bundle Analysis", "id": "bundle-analysis", "level": 2 },
+            { "title": "Next Steps", "id": "next-steps", "level": 2 }
+          ],
+          "title": "Code Splitting",
+          "sort": 5,
+          "contributors": [
+            "pksjce",
+            "pastelsky",
+            "simon04",
+            "jonwheeler",
+            "johnstew",
+            "shinxi",
+            "tomtasche",
+            "levy9527",
+            "rahulcs",
+            "chrisVillanueva",
+            "rafde",
+            "bartushek",
+            "shaunwallace",
+            "skipjack",
+            "jakearchibald",
+            "TheDutchCoder",
+            "rouzbeh84",
+            "shaodahong",
+            "sudarsangp",
+            "kcolton",
+            "efreitasn",
+            "EugeneHlushko",
+            "Tiendo1011",
+            "byzyk",
+            "AnayaDesign",
+            "wizardofhogwarts",
+            "maximilianschmelzer",
+            "smelukov",
+            "chenxsan",
+            "Adarah"
+          ],
+          "related": [
+            {
+              "title": "<link rel=”prefetch/preload”> in webpack",
+              "url": "https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c"
+            },
+            {
+              "title": "Preload, Prefetch And Priorities in Chrome",
+              "url": "https://medium.com/reloading/preload-prefetch-and-priorities-in-chrome-776165961bbf"
+            },
+            {
+              "title": "Preloading content with rel=\"preload\"",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content"
+            }
+          ]
+        },
+        {
+          "path": "src/content/guides/caching.md",
+          "name": "caching.md",
+          "size": 11386,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/caching/",
+          "anchors": [
+            {
+              "title": "Output Filenames",
+              "id": "output-filenames",
+              "level": 2
+            },
+            {
+              "title": "Extracting Boilerplate",
+              "id": "extracting-boilerplate",
+              "level": 2
+            },
+            {
+              "title": "Module Identifiers",
+              "id": "module-identifiers",
+              "level": 2
+            },
+            { "title": "Conclusion", "id": "conclusion", "level": 2 }
+          ],
+          "title": "Caching",
+          "sort": 6,
+          "contributors": [
+            "okonet",
+            "jouni-kantola",
+            "skipjack",
+            "dannycjones",
+            "fadysamirsadek",
+            "afontcu",
+            "rosavage",
+            "saiprasad2595",
+            "EugeneHlushko",
+            "AnayaDesign",
+            "aholzner"
+          ],
+          "related": [
+            {
+              "title": "Issue 652",
+              "url": "https://github.com/webpack/webpack.js.org/issues/652"
+            }
+          ]
+        },
+        {
+          "path": "src/content/guides/author-libraries.md",
+          "name": "author-libraries.md",
+          "size": 10439,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/author-libraries/",
+          "anchors": [
+            {
+              "title": "Authoring a Library",
+              "id": "authoring-a-library",
+              "level": 2
+            },
+            {
+              "title": "Base Configuration",
+              "id": "base-configuration",
+              "level": 2
+            },
+            {
+              "title": "Base Configuration with source map",
+              "id": "base-configuration-with-source-map",
+              "level": 2
+            },
+            {
+              "title": "Externalize Lodash",
+              "id": "externalize-lodash",
+              "level": 2
+            },
+            {
+              "title": "External Limitations",
+              "id": "external-limitations",
+              "level": 2
+            },
+            {
+              "title": "Expose the Library",
+              "id": "expose-the-library",
+              "level": 2
+            },
+            { "title": "Final Steps", "id": "final-steps", "level": 3 }
+          ],
+          "title": "Authoring Libraries",
+          "sort": 7,
+          "contributors": [
+            "pksjce",
+            "johnstew",
+            "simon04",
+            "5angel",
+            "marioacc",
+            "byzyk",
+            "EugeneHlushko",
+            "AnayaDesign",
+            "chenxsan",
+            "wizardofhogwarts"
+          ]
+        },
+        {
+          "path": "src/content/guides/environment-variables.md",
+          "name": "environment-variables.md",
+          "size": 2132,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/environment-variables/",
+          "anchors": [],
+          "title": "Environment Variables",
+          "sort": 8,
+          "contributors": [
+            "simon04",
+            "grisanu",
+            "tbroadley",
+            "legalcodes",
+            "byzyk",
+            "jceipek"
+          ],
+          "related": [
+            {
+              "title": "The Fine Art of the webpack 3 Config",
+              "url": "https://blog.flennik.com/the-fine-art-of-the-webpack-2-config-dc4d19d7f172#d60a"
+            }
+          ]
+        },
+        {
+          "path": "src/content/guides/build-performance.md",
+          "name": "build-performance.md",
+          "size": 8979,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/build-performance/",
+          "anchors": [
+            { "title": "General", "id": "general", "level": 2 },
+            { "title": "Stay Up to Date", "id": "stay-up-to-date", "level": 3 },
+            { "title": "Loaders", "id": "loaders", "level": 3 },
+            { "title": "Bootstrap", "id": "bootstrap", "level": 3 },
+            { "title": "Resolving", "id": "resolving", "level": 3 },
+            { "title": "Dlls", "id": "dlls", "level": 3 },
+            {
+              "title": "Smaller = Faster",
+              "id": "smaller--faster",
+              "level": 3
+            },
+            { "title": "Worker Pool", "id": "worker-pool", "level": 3 },
+            {
+              "title": "Persistent cache",
+              "id": "persistent-cache",
+              "level": 3
+            },
+            {
+              "title": "Custom plugins/loaders",
+              "id": "custom-pluginsloaders",
+              "level": 3
+            },
+            { "title": "Progress plugin", "id": "progress-plugin", "level": 3 },
+            { "title": "Development", "id": "development", "level": 2 },
+            {
+              "title": "Incremental Builds",
+              "id": "incremental-builds",
+              "level": 3
+            },
+            {
+              "title": "Compile in Memory",
+              "id": "compile-in-memory",
+              "level": 3
+            },
+            {
+              "title": "stats.toJson speed",
+              "id": "statstojson-speed",
+              "level": 3
+            },
+            { "title": "Devtool", "id": "devtool", "level": 3 },
+            {
+              "title": "Avoid Production Specific Tooling",
+              "id": "avoid-production-specific-tooling",
+              "level": 3
+            },
+            {
+              "title": "Minimal Entry Chunk",
+              "id": "minimal-entry-chunk",
+              "level": 3
+            },
+            {
+              "title": "Avoid Extra Optimization Steps",
+              "id": "avoid-extra-optimization-steps",
+              "level": 3
+            },
+            {
+              "title": "Output Without Path Info",
+              "id": "output-without-path-info",
+              "level": 3
+            },
+            {
+              "title": "Node.js Versions 8.9.10-9.11.1",
+              "id": "nodejs-versions-8910-9111",
+              "level": 3
+            },
+            {
+              "title": "TypeScript Loader",
+              "id": "typescript-loader",
+              "level": 3
+            },
+            { "title": "Production", "id": "production", "level": 2 },
+            {
+              "title": "Multiple Compilations",
+              "id": "multiple-compilations",
+              "level": 3
+            },
+            { "title": "Source Maps", "id": "source-maps", "level": 3 },
+            {
+              "title": "Specific Tooling Issues",
+              "id": "specific-tooling-issues",
+              "level": 2
+            },
+            { "title": "Babel", "id": "babel", "level": 3 },
+            { "title": "TypeScript", "id": "typescript", "level": 3 },
+            { "title": "Sass", "id": "sass", "level": 3 }
+          ],
+          "title": "Build Performance",
+          "sort": 9,
+          "contributors": [
+            "sokra",
+            "tbroadley",
+            "byzyk",
+            "madhavarshney",
+            "wizardofhogwarts",
+            "anikethsaha"
+          ]
+        },
+        {
+          "path": "src/content/guides/csp.md",
+          "name": "csp.md",
+          "size": 1817,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/csp/",
+          "anchors": [
+            { "title": "Examples", "id": "examples", "level": 2 },
+            { "title": "Enabling CSP", "id": "enabling-csp", "level": 2 }
+          ],
+          "title": "Content Security Policies",
+          "sort": 10,
+          "contributors": ["EugeneHlushko", "probablyup", "wizardofhogwarts"],
+          "related": [
+            {
+              "title": "Nonce purpose explained",
+              "url": "https://stackoverflow.com/questions/42922784/what-s-the-purpose-of-the-html-nonce-attribute-for-script-and-style-elements"
+            },
+            {
+              "title": "On the Insecurity of Whitelists and the Future of Content Security Policy",
+              "url": "https://ai.google/research/pubs/pub45542"
+            },
+            {
+              "title": "Locking Down Your Website Scripts with CSP, Hashes, Nonces and Report URI",
+              "url": "https://www.troyhunt.com/locking-down-your-website-scripts-with-csp-hashes-nonces-and-report-uri/"
+            },
+            {
+              "title": "CSP on MDN",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP"
+            }
+          ]
+        },
+        {
+          "path": "src/content/guides/development-vagrant.md",
+          "name": "development-vagrant.md",
+          "size": 3326,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/development-vagrant/",
+          "anchors": [
+            {
+              "title": "Configuring the Project",
+              "id": "configuring-the-project",
+              "level": 2
+            },
+            {
+              "title": "Running the Server",
+              "id": "running-the-server",
+              "level": 2
+            },
+            {
+              "title": "Advanced Usage with nginx",
+              "id": "advanced-usage-with-nginx",
+              "level": 2
+            },
+            { "title": "Conclusion", "id": "conclusion", "level": 2 }
+          ],
+          "title": "Development - Vagrant",
+          "sort": 11,
+          "contributors": [
+            "SpaceK33z",
+            "chrisVillanueva",
+            "byzyk",
+            "wizardofhogwarts"
+          ]
+        },
+        {
+          "path": "src/content/guides/dependency-management.md",
+          "name": "dependency-management.md",
+          "size": 3161,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/dependency-management/",
+          "anchors": [
+            {
+              "title": "require with expression",
+              "id": "require-with-expression",
+              "level": 2
+            },
+            { "title": "require.context", "id": "requirecontext", "level": 2 },
+            {
+              "title": "context module API",
+              "id": "context-module-api",
+              "level": 3
+            }
+          ],
+          "title": "Dependency Management",
+          "sort": 12,
+          "contributors": [
+            "ndelangen",
+            "chrisVillanueva",
+            "sokra",
+            "byzyk",
+            "AnayaDesign"
+          ]
+        },
+        {
+          "path": "src/content/guides/installation.md",
+          "name": "installation.md",
+          "size": 2750,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/installation/",
+          "anchors": [
+            { "title": "Prerequisites", "id": "prerequisites", "level": 2 },
+            {
+              "title": "Local Installation",
+              "id": "local-installation",
+              "level": 2
+            },
+            {
+              "title": "Global Installation",
+              "id": "global-installation",
+              "level": 2
+            },
+            { "title": "Bleeding Edge", "id": "bleeding-edge", "level": 2 }
+          ],
+          "title": "Installation",
+          "sort": 13,
+          "contributors": [
+            "pksjce",
+            "bebraw",
+            "simon04",
+            "EugeneHlushko",
+            "sibiraj-s",
+            "chenxsan"
+          ]
+        },
+        {
+          "path": "src/content/guides/scaffolding.md",
+          "name": "scaffolding.md",
+          "size": 5504,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/scaffolding/",
+          "anchors": [
+            {
+              "title": "Creating a scaffold",
+              "id": "creating-a-scaffold",
+              "level": 2
+            },
+            {
+              "title": "Writing a scaffold",
+              "id": "writing-a-scaffold",
+              "level": 3
+            },
+            {
+              "title": "Running a scaffold",
+              "id": "running-a-scaffold",
+              "level": 3
+            },
+            { "title": "API", "id": "api", "level": 2 },
+            { "title": "Required", "id": "required", "level": 3 },
+            { "title": "Optional", "id": "optional", "level": 3 },
+            {
+              "title": "opts.env.configuration(required)",
+              "id": "optsenvconfigurationrequired",
+              "level": 3
+            },
+            {
+              "title": "opts.env.configuration.myObj (required)",
+              "id": "optsenvconfigurationmyobj-required",
+              "level": 3
+            },
+            {
+              "title": "myObj.webpackOptions (required)",
+              "id": "myobjwebpackoptions-required",
+              "level": 3
+            },
+            {
+              "title": "writing (required)",
+              "id": "writing-required",
+              "level": 3
+            },
+            {
+              "title": "myObj.merge (optional)",
+              "id": "myobjmerge-optional",
+              "level": 3
+            },
+            {
+              "title": "myObj.topScope(optional)",
+              "id": "myobjtopscopeoptional",
+              "level": 3
+            },
+            {
+              "title": "myObj.configName(optional)",
+              "id": "myobjconfignameoptional",
+              "level": 3
+            }
+          ],
+          "title": "Scaffolding",
+          "sort": 14,
+          "contributors": [
+            "evenstensberg",
+            "pranshuchittora",
+            "EugeneHlushko",
+            "jamesgeorge007"
+          ]
+        },
+        {
+          "path": "src/content/guides/hot-module-replacement.md",
+          "name": "hot-module-replacement.md",
+          "size": 10375,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/hot-module-replacement/",
+          "anchors": [
+            { "title": "Enabling HMR", "id": "enabling-hmr", "level": 2 },
+            {
+              "title": "Via the Node.js API",
+              "id": "via-the-nodejs-api",
+              "level": 2
+            },
+            { "title": "Gotchas", "id": "gotchas", "level": 2 },
+            {
+              "title": "HMR with Stylesheets",
+              "id": "hmr-with-stylesheets",
+              "level": 2
+            },
+            {
+              "title": "Other Code and Frameworks",
+              "id": "other-code-and-frameworks",
+              "level": 2
+            }
+          ],
+          "title": "Hot Module Replacement",
+          "sort": 15,
+          "contributors": [
+            "jmreidy",
+            "jhnns",
+            "sararubin",
+            "rohannair",
+            "joshsantos",
+            "drpicox",
+            "skipjack",
+            "sbaidon",
+            "gdi2290",
+            "bdwain",
+            "caryli",
+            "xgirma",
+            "EugeneHlushko",
+            "AnayaDesign",
+            "aviyacohen",
+            "dhruvdutt",
+            "wizardofhogwarts",
+            "aholzner"
+          ],
+          "related": [
+            {
+              "title": "Concepts - Hot Module Replacement",
+              "url": "/concepts/hot-module-replacement"
+            },
+            {
+              "title": "API - Hot Module Replacement",
+              "url": "/api/hot-module-replacement"
+            }
+          ]
+        },
+        {
+          "path": "src/content/guides/tree-shaking.md",
+          "name": "tree-shaking.md",
+          "size": 14896,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/tree-shaking/",
+          "anchors": [
+            { "title": "Add a Utility", "id": "add-a-utility", "level": 2 },
+            {
+              "title": "Mark the file as side-effect-free",
+              "id": "mark-the-file-as-side-effect-free",
+              "level": 2
+            },
+            {
+              "title": "Clarifying tree shaking and sideEffects",
+              "id": "clarifying-tree-shaking-and-sideeffects",
+              "level": 2
+            },
+            {
+              "title": "Mark a function call as side-effect-free",
+              "id": "mark-a-function-call-as-side-effect-free",
+              "level": 2
+            },
+            {
+              "title": "Minify the Output",
+              "id": "minify-the-output",
+              "level": 2
+            },
+            { "title": "Conclusion", "id": "conclusion", "level": 2 }
+          ],
+          "title": "Tree Shaking",
+          "sort": 16,
+          "contributors": [
+            "simon04",
+            "zacanger",
+            "alexjoverm",
+            "avant1",
+            "MijaelWatts",
+            "dmitriid",
+            "probablyup",
+            "gish",
+            "lumo10",
+            "byzyk",
+            "pnevares",
+            "EugeneHlushko",
+            "AnayaDesign",
+            "torifat",
+            "rahul3v"
+          ],
+          "related": [
+            {
+              "title": "Debugging Optimization Bailouts",
+              "url": "https://webpack.js.org/plugins/module-concatenation-plugin/#debugging-optimization-bailouts"
+            },
+            {
+              "title": "Issue 6074 - Add support for more complex selectors for sideEffects",
+              "url": "https://github.com/webpack/webpack/issues/6074"
+            }
+          ]
+        },
+        {
+          "path": "src/content/guides/production.md",
+          "name": "production.md",
+          "size": 9049,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/production/",
+          "anchors": [
+            { "title": "Setup", "id": "setup", "level": 2 },
+            { "title": "NPM Scripts", "id": "npm-scripts", "level": 2 },
+            {
+              "title": "Specify the Mode",
+              "id": "specify-the-mode",
+              "level": 2
+            },
+            { "title": "Minification", "id": "minification", "level": 2 },
+            { "title": "Source Mapping", "id": "source-mapping", "level": 2 },
+            { "title": "Minimize CSS", "id": "minimize-css", "level": 2 },
+            {
+              "title": "CLI Alternatives",
+              "id": "cli-alternatives",
+              "level": 2
+            }
+          ],
+          "title": "Production",
+          "sort": 17,
+          "contributors": [
+            "henriquea",
+            "rajagopal4890",
+            "makuzaverite",
+            "markerikson",
+            "simon04",
+            "kisnows",
+            "chrisVillanueva",
+            "swapnilmishra",
+            "bring2dip",
+            "redian",
+            "skipjack",
+            "xgqfrms",
+            "kelset",
+            "xgirma",
+            "mehrdaad",
+            "SevenOutman",
+            "AnayaDesign",
+            "wizardofhogwarts",
+            "aholzner",
+            "EugeneHlushko",
+            "snitin315"
+          ]
+        },
+        {
+          "path": "src/content/guides/lazy-loading.md",
+          "name": "lazy-loading.md",
+          "size": 4266,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/lazy-loading/",
+          "anchors": [
+            { "title": "Example", "id": "example", "level": 2 },
+            { "title": "Frameworks", "id": "frameworks", "level": 2 }
+          ],
+          "title": "Lazy Loading",
+          "sort": 18,
+          "contributors": [
+            "iammerrick",
+            "chrisVillanueva",
+            "skipjack",
+            "byzyk",
+            "EugeneHlushko",
+            "AnayaDesign"
+          ],
+          "related": [
+            {
+              "title": "Lazy Loading ES2015 Modules in the Browser",
+              "url": "https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser"
+            },
+            {
+              "title": "Asynchronous vs Deferred JavaScript",
+              "url": "https://bitsofco.de/async-vs-defer/"
+            }
+          ]
+        },
+        {
+          "path": "src/content/guides/ecma-script-modules.md",
+          "name": "ecma-script-modules.md",
+          "size": 2778,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/ecma-script-modules/",
+          "anchors": [
+            { "title": "Exporting", "id": "exporting", "level": 2 },
+            { "title": "Importing", "id": "importing", "level": 2 },
+            {
+              "title": "Flagging modules as ESM",
+              "id": "flagging-modules-as-esm",
+              "level": 2
+            }
+          ],
+          "title": "ECMAScript Modules",
+          "sort": 19,
+          "contributors": ["sokra"],
+          "related": [
+            {
+              "title": "ECMAScript Modules in Node.js",
+              "url": "https://nodejs.org/api/esm.html"
+            }
+          ]
+        },
+        {
+          "path": "src/content/guides/shimming.md",
+          "name": "shimming.md",
+          "size": 14846,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/shimming/",
+          "anchors": [
+            {
+              "title": "Shimming Globals",
+              "id": "shimming-globals",
+              "level": 2
+            },
+            {
+              "title": "Granular Shimming",
+              "id": "granular-shimming",
+              "level": 2
+            },
+            { "title": "Global Exports", "id": "global-exports", "level": 2 },
+            {
+              "title": "Loading Polyfills",
+              "id": "loading-polyfills",
+              "level": 2
+            },
+            {
+              "title": "Further Optimizations",
+              "id": "further-optimizations",
+              "level": 2
+            },
+            { "title": "Node Built-Ins", "id": "node-built-ins", "level": 2 },
+            { "title": "Other Utilities", "id": "other-utilities", "level": 2 }
+          ],
+          "title": "Shimming",
+          "sort": 20,
+          "contributors": [
+            "pksjce",
+            "jhnns",
+            "simon04",
+            "jeremenichelli",
+            "svyandun",
+            "byzyk",
+            "EugeneHlushko",
+            "AnayaDesign",
+            "dhurlburtusa",
+            "plr108",
+            "NicolasLetellier",
+            "wizardofhogwarts",
+            "snitin315",
+            "chenxsan"
+          ],
+          "related": [
+            {
+              "title": "Reward modern browser users script",
+              "url": "https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665"
+            },
+            {
+              "title": "useBuiltIns in babel-preset-env",
+              "url": "https://babeljs.io/docs/en/babel-preset-env#usebuiltins"
+            }
+          ]
+        },
+        {
+          "path": "src/content/guides/typescript.md",
+          "name": "typescript.md",
+          "size": 6201,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/typescript/",
+          "anchors": [
+            { "title": "Basic Setup", "id": "basic-setup", "level": 2 },
+            { "title": "Loader", "id": "loader", "level": 2 },
+            { "title": "Source Maps", "id": "source-maps", "level": 2 },
+            {
+              "title": "Using Third Party Libraries",
+              "id": "using-third-party-libraries",
+              "level": 2
+            },
+            {
+              "title": "Importing Other Assets",
+              "id": "importing-other-assets",
+              "level": 2
+            },
+            {
+              "title": "Build Performance",
+              "id": "build-performance",
+              "level": 2
+            }
+          ],
+          "title": "TypeScript",
+          "sort": 21,
+          "contributors": [
+            "morsdyce",
+            "kkamali",
+            "mtrivera",
+            "byzyk",
+            "EugeneHlushko"
+          ]
+        },
+        {
+          "path": "src/content/guides/web-workers.mdx",
+          "name": "web-workers.mdx",
+          "size": 1179,
+          "extension": ".mdx",
+          "type": "file",
+          "url": "/guides/web-workers/",
+          "anchors": [
+            { "title": "Syntax", "id": "syntax", "level": 2 },
+            { "title": "Example", "id": "example", "level": 2 },
+            { "title": "Node.js", "id": "nodejs", "level": 2 }
+          ],
+          "title": "Web Workers",
+          "sort": 21,
+          "contributors": ["chenxsan"]
+        },
+        {
+          "path": "src/content/guides/progressive-web-application.md",
+          "name": "progressive-web-application.md",
+          "size": 5994,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/progressive-web-application/",
+          "anchors": [
+            {
+              "title": "We Don't Work Offline Now",
+              "id": "we-dont-work-offline-now",
+              "level": 2
+            },
+            { "title": "Adding Workbox", "id": "adding-workbox", "level": 2 },
+            {
+              "title": "Registering Our Service Worker",
+              "id": "registering-our-service-worker",
+              "level": 2
+            },
+            { "title": "Conclusion", "id": "conclusion", "level": 2 }
+          ],
+          "title": "Progressive Web Application",
+          "sort": 22,
+          "contributors": [
+            "johnnyreilly",
+            "chenxsan",
+            "EugeneHlushko",
+            "benschac",
+            "aholzner"
+          ]
+        },
+        {
+          "path": "src/content/guides/public-path.md",
+          "name": "public-path.md",
+          "size": 2441,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/public-path/",
+          "anchors": [
+            { "title": "Use Cases", "id": "use-cases", "level": 2 },
+            {
+              "title": "Environment Based",
+              "id": "environment-based",
+              "level": 3
+            },
+            { "title": "On The Fly", "id": "on-the-fly", "level": 3 }
+          ],
+          "title": "Public Path",
+          "sort": 23,
+          "contributors": ["rafaelrinaldi", "chrisVillanueva", "gonzoyumo"]
+        },
+        {
+          "path": "src/content/guides/integrations.md",
+          "name": "integrations.md",
+          "size": 5418,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/integrations/",
+          "anchors": [
+            { "title": "NPM Scripts", "id": "npm-scripts", "level": 2 },
+            { "title": "Grunt", "id": "grunt", "level": 2 },
+            { "title": "Gulp", "id": "gulp", "level": 2 },
+            { "title": "Mocha", "id": "mocha", "level": 2 },
+            { "title": "Karma", "id": "karma", "level": 2 }
+          ],
+          "title": "Integrations",
+          "sort": 24,
+          "contributors": [
+            "pksjce",
+            "bebraw",
+            "tashian",
+            "skipjack",
+            "AnayaDesign"
+          ]
+        },
+        {
+          "path": "src/content/guides/asset-modules.md",
+          "name": "asset-modules.md",
+          "size": 10520,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/asset-modules/",
+          "anchors": [
+            { "title": "Resource assets", "id": "resource-assets", "level": 2 },
+            {
+              "title": "Custom output filename",
+              "id": "custom-output-filename",
+              "level": 3
+            },
+            { "title": "Inlining assets", "id": "inlining-assets", "level": 2 },
+            {
+              "title": "Custom data URI generator",
+              "id": "custom-data-uri-generator",
+              "level": 3
+            },
+            { "title": "Source assets", "id": "source-assets", "level": 2 },
+            { "title": "URL assets", "id": "url-assets", "level": 2 },
+            {
+              "title": "General asset type",
+              "id": "general-asset-type",
+              "level": 2
+            },
+            {
+              "title": "Replacing Inline Loader Syntax",
+              "id": "replacing-inline-loader-syntax",
+              "level": 2
+            }
+          ],
+          "title": "Asset Modules",
+          "sort": 25,
+          "contributors": [
+            "smelukov",
+            "EugeneHlushko",
+            "chenxsan",
+            "anshumanv",
+            "spence-s"
+          ],
+          "related": [
+            {
+              "title": "webpack 5 - Asset Modules",
+              "url": "https://dev.to/smelukov/webpack-5-asset-modules-2o3h"
+            }
+          ]
+        },
+        {
+          "path": "src/content/guides/entry-advanced.md",
+          "name": "entry-advanced.md",
+          "size": 2072,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/entry-advanced/",
+          "anchors": [
+            {
+              "title": "Multiple file types per entry",
+              "id": "multiple-file-types-per-entry",
+              "level": 2
+            }
+          ],
+          "title": "Advanced entry",
+          "sort": 25,
+          "contributors": ["EugeneHlushko"]
+        },
+        {
+          "path": "src/content/guides/package-exports.md",
+          "name": "package-exports.md",
+          "size": 24504,
+          "extension": ".md",
+          "type": "file",
+          "url": "/guides/package-exports/",
+          "anchors": [
+            { "title": "General syntax", "id": "general-syntax", "level": 2 },
+            { "title": "Alternatives", "id": "alternatives", "level": 2 },
+            {
+              "title": "Conditional syntax",
+              "id": "conditional-syntax",
+              "level": 2
+            },
+            { "title": "Abbreviation", "id": "abbreviation", "level": 2 },
+            {
+              "title": "Notes about ordering",
+              "id": "notes-about-ordering",
+              "level": 2
+            },
+            { "title": "Support", "id": "support", "level": 2 },
+            { "title": "Conditions", "id": "conditions", "level": 2 },
+            {
+              "title": "Reference syntax",
+              "id": "reference-syntax",
+              "level": 3
+            },
+            { "title": "Optimizations", "id": "optimizations", "level": 3 },
+            {
+              "title": "Target environment",
+              "id": "target-environment",
+              "level": 3
+            },
+            {
+              "title": "Conditions: Preprocessor and runtimes",
+              "id": "conditions-preprocessor-and-runtimes",
+              "level": 3
+            },
+            {
+              "title": "Conditions: Custom",
+              "id": "conditions-custom",
+              "level": 3
+            },
+            { "title": "Common patterns", "id": "common-patterns", "level": 2 },
+            {
+              "title": "Target environment independent packages",
+              "id": "target-environment-independent-packages",
+              "level": 3
+            },
+            {
+              "title": "Providing devtools or production optimizations",
+              "id": "providing-devtools-or-production-optimizations",
+              "level": 3
+            },
+            {
+              "title": "Providing different versions depending on target environment",
+              "id": "providing-different-versions-depending-on-target-environment",
+              "level": 3
+            },
+            {
+              "title": "Combining patterns",
+              "id": "combining-patterns",
+              "level": 3
+            },
+            { "title": "Guidelines", "id": "guidelines", "level": 2 }
+          ],
+          "title": "Package exports",
+          "sort": 25,
+          "contributors": ["sokra"],
+          "related": [
+            {
+              "title": "Package entry points in Node.js",
+              "url": "https://nodejs.org/api/packages.html#packages_package_entry_points"
+            }
+          ]
+        }
+      ],
+      "size": 240127,
+      "type": "directory",
+      "url": "/guides/"
+    },
+    {
+      "path": "src/content/index.md",
+      "name": "index.md",
+      "size": 1169,
+      "extension": ".md",
+      "type": "file",
+      "url": "/",
+      "anchors": [
+        { "title": "Write Your Code", "id": "write-your-code", "level": 2 },
+        { "title": "Bundle It", "id": "bundle-it", "level": 2 },
+        {
+          "title": "Awesome isn't it? Let's dive in!",
+          "id": "awesome-isnt-it-lets-dive-in",
+          "level": 2
+        }
+      ],
+      "title": "webpack",
+      "sort": -1
+    },
+    {
+      "path": "src/content/printable.md",
+      "name": "printable.md",
+      "size": 32161,
+      "extension": ".md",
+      "type": "file",
+      "url": "/printable/",
+      "anchors": [
+        { "title": "webpack", "id": "webpack", "level": 1 },
+        { "title": "Write Your Code", "id": "write-your-code", "level": 2 },
+        { "title": "Bundle It", "id": "bundle-it", "level": 2 },
+        {
+          "title": "Awesome isn't it? Let's dive in!",
+          "id": "awesome-isnt-it-lets-dive-in",
+          "level": 2
+        },
+        { "title": "Comparison", "id": "comparison", "level": 1 },
+        {
+          "title": "Bundling vs. Loading",
+          "id": "bundling-vs-loading",
+          "level": 2
+        },
+        {
+          "title": "Branding Guidelines",
+          "id": "branding-guidelines",
+          "level": 1
+        },
+        { "title": "The Name", "id": "the-name", "level": 2 },
+        { "title": "Logo", "id": "logo", "level": 2 },
+        { "title": "Icon only", "id": "icon-only", "level": 2 },
+        { "title": "Font", "id": "font", "level": 2 },
+        { "title": "Color Palette", "id": "color-palette", "level": 2 },
+        { "title": "License", "id": "license", "level": 2 },
+        { "title": "Glossary", "id": "glossary", "level": 1 },
+        { "title": "A", "id": "a", "level": 2 },
+        { "title": "B", "id": "b", "level": 2 },
+        { "title": "C", "id": "c", "level": 2 },
+        { "title": "D", "id": "d", "level": 2 },
+        { "title": "E", "id": "e", "level": 2 },
+        { "title": "H", "id": "h", "level": 2 },
+        { "title": "L", "id": "l", "level": 2 },
+        { "title": "M", "id": "m", "level": 2 },
+        { "title": "O", "id": "o", "level": 2 },
+        { "title": "P", "id": "p", "level": 2 },
+        { "title": "R", "id": "r", "level": 2 },
+        { "title": "S", "id": "s", "level": 2 },
+        { "title": "T", "id": "t", "level": 2 },
+        { "title": "V", "id": "v", "level": 2 },
+        { "title": "W", "id": "w", "level": 2 },
+        { "title": "Vote", "id": "vote", "level": 1 },
+        { "title": "License", "id": "license-1", "level": 1 },
+        { "title": "webpack", "id": "webpack-1", "level": 2 },
+        {
+          "title": "webpack logo and icon",
+          "id": "webpack-logo-and-icon",
+          "level": 2
+        },
+        {
+          "title": "webpack documentation",
+          "id": "webpack-documentation",
+          "level": 2
+        },
+        {
+          "title": "webpack code samples",
+          "id": "webpack-code-samples",
+          "level": 2
+        }
+      ],
+      "title": "Printable",
+      "sort": 999,
+      "contributors": ["webpack"]
+    }
+  ],
+  "size": 1123067,
+  "type": "directory",
+  "url": "/"
+}
