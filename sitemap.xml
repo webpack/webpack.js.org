@@ -46,6 +46,9 @@
         <loc>https://webpack.js.org/migrate</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/migrating</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins</loc>
     </url>
     <url>
@@ -61,16 +64,13 @@
         <loc>https://webpack.js.org/writers-guide</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/migrating</loc>
+        <loc>https://webpack.js.org/api/cli</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/compilation-hooks</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/compilation-object</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api/cli</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/compiler-hooks</loc>
@@ -145,10 +145,10 @@
         <loc>https://webpack.js.org/concepts/mode</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/module-resolution</loc>
+        <loc>https://webpack.js.org/concepts/module-federation</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/module-federation</loc>
+        <loc>https://webpack.js.org/concepts/module-resolution</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/modules</loc>
@@ -181,6 +181,9 @@
         <loc>https://webpack.js.org/configuration/devtool</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/configuration/entry-context</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/configuration/experiments</loc>
     </url>
     <url>
@@ -196,13 +199,10 @@
         <loc>https://webpack.js.org/configuration/node</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/other-options</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/entry-context</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/configuration/optimization</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/other-options</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/output</loc>
@@ -241,10 +241,10 @@
         <loc>https://webpack.js.org/contribute/writing-a-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/contribute/writing-a-scaffold</loc>
+        <loc>https://webpack.js.org/contribute/writing-a-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/contribute/writing-a-plugin</loc>
+        <loc>https://webpack.js.org/contribute/writing-a-scaffold</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/development/how-to-write-a-loader</loc>
@@ -268,13 +268,13 @@
         <loc>https://webpack.js.org/guides/asset-management</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/build-performance</loc>
+        <loc>https://webpack.js.org/guides/asset-modules</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/author-libraries</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/asset-modules</loc>
+        <loc>https://webpack.js.org/guides/build-performance</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/caching</loc>
@@ -481,10 +481,10 @@
         <loc>https://webpack.js.org/plugins/context-replacement-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/css-minimizer-webpack-plugin</loc>
+        <loc>https://webpack.js.org/plugins/copy-webpack-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/copy-webpack-plugin</loc>
+        <loc>https://webpack.js.org/plugins/css-minimizer-webpack-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/define-plugin</loc>
@@ -595,9 +595,9 @@
         <loc>https://webpack.js.org/api/plugins/resolver</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/template</loc>
+        <loc>https://webpack.js.org/api/plugins/tapable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/tapable</loc>
+        <loc>https://webpack.js.org/api/plugins/template</loc>
     </url>
 </urlset>
