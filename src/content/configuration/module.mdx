@@ -547,7 +547,9 @@ module.exports = {
 };
 ```
 
-## `Rule.generator.dataUrl`
+## Rule.generator
+
+### Rule.generator.dataUrl
 
 `object = { encoding string = 'base64' | false, mimetype string = undefined | false }` `function (content, { filename, module }) => string`
 
@@ -601,7 +603,7 @@ module.exports = {
 };
 ```
 
-## `Rule.generator.filename`
+### Rule.generator.filename
 
 The same as [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) but for specific rule. Overrides `output.assetModuleFilename` and works only with `asset` and `asset/resource` module types.
 
@@ -630,6 +632,31 @@ module.exports = {
   },
 };
 ```
+
+### Rule.generator.emit
+
+Opt out of writing assets from [Asset Modules](/guides/asset-modules/), you might want to use it in Server side rendering cases.
+
+- Type: `boolean = true`
+- Available: 5.25.0+
+- Example:
+
+  ```js
+  module.exports = {
+    // …
+    module: {
+      rules: [
+        {
+          test: /\.png$/i,
+          type: 'asset/resource',
+          generator: {
+            emit: false,
+          },
+        },
+      ],
+    },
+  };
+  ```
 
 ## `Rule.resource`
 
