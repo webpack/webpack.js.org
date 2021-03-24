@@ -64,45 +64,48 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h3 id="minify"><code>minify</code><a href="#minify" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>Type: <code>Function</code> Default: <code>undefined</code></p> <p>Allows you to override default minify function. By default plugin uses <a href="https://github.com/cssnano/cssnano">cssnano</a> package. Useful for using and testing unpublished versions or forks.</p> <blockquote> <p>⚠️ <strong>Always use <code>require</code> inside <code>minify</code> function when <code>parallel</code> option enabled</strong>.</p> </blockquote> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h3 id="minify"><code>minify</code><a href="#minify" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>Type: <code>Function|Array&#x3C;Function></code> Default: <code>CssMinimizerPlugin.cssnanoMinify</code></p> <p>Allows to override default minify function. By default plugin uses <a href="https://github.com/cssnano/cssnano">cssnano</a> package. Useful for using and testing unpublished versions or forks.</p> <p>Possible options:</p> <ul> <li>CssMinimizerPlugin.cssnanoMinify</li> <li>CssMinimizerPlugin.cssoMinify</li> <li>CssMinimizerPlugin.cleanCssMinify</li> <li>async (data, inputMap, minimizerOptions) => {return {code: <code>a{color: red}</code>, map: <code>...</code>, warnings: []}}</li> </ul> <blockquote> <p>⚠️ <strong>Always use <code>require</code> inside <code>minify</code> function when <code>parallel</code> option enabled</strong>.</p> </blockquote> <h4 id="function"><code>Function</code><a href="#function" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        <span class="token function-variable function">minify</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> inputMap<span class="token punctuation">,</span> minimizerOptions</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-          <span class="token keyword">const</span> postcss <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'postcss'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-          <span class="token keyword">const</span> plugin <span class="token operator">=</span> postcss<span class="token punctuation">.</span><span class="token function">plugin</span><span class="token punctuation">(</span>
-            <span class="token string">'custom-plugin'</span><span class="token punctuation">,</span>
-            <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">(</span><span class="token parameter">css<span class="token punctuation">,</span> result</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-              <span class="token comment">// custom code</span>
-            <span class="token punctuation">}</span>
-          <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-          <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>filename<span class="token punctuation">,</span> input<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-          <span class="token keyword">const</span> postcssOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
-            <span class="token keyword">from</span><span class="token operator">:</span> filename<span class="token punctuation">,</span>
-            to<span class="token operator">:</span> filename<span class="token punctuation">,</span>
-            map<span class="token operator">:</span> <span class="token punctuation">{</span>
-              prev<span class="token operator">:</span> inputMap<span class="token punctuation">,</span>
+        minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+          level<span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token number">1</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+              roundingPrecision<span class="token operator">:</span> <span class="token string">'all=3,px=5'</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-          <span class="token keyword">return</span> <span class="token function">postcss</span><span class="token punctuation">(</span><span class="token punctuation">[</span>plugin<span class="token punctuation">]</span><span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">process</span><span class="token punctuation">(</span>input<span class="token punctuation">,</span> postcssOptions<span class="token punctuation">)</span>
-            <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">result</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-              <span class="token keyword">return</span> <span class="token punctuation">{</span>
-                css<span class="token operator">:</span> result<span class="token punctuation">.</span>css<span class="token punctuation">,</span>
-                map<span class="token operator">:</span> result<span class="token punctuation">.</span>map<span class="token punctuation">,</span>
-                warnings<span class="token operator">:</span> result<span class="token punctuation">.</span><span class="token function">warnings</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-              <span class="token punctuation">}</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        minify<span class="token operator">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>cleanCssMinify<span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h3 id="minimizeroptions"><code>minimizerOptions</code><a href="#minimizeroptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>Type: <code>Object</code> Default: <code>{ preset: 'default' }</code></p> <p>Cssnano optimisations <a href="https://cssnano.co/docs/optimisations">options</a>.</p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h4 id="array"><code>Array</code><a href="#array" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4> <p>If an array of functions is passed to the <code>minify</code> option, the <code>minimizerOptions</code> must also be an array. The function index in the <code>minify</code> array corresponds to the options object with the same index in the <code>minimizerOptions</code> array.</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        minimizerOptions<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">// Options for the first function (CssMinimizerPlugin.cssnanoMinify)</span>
+          <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">// Options for the second function (CssMinimizerPlugin.cleanCssMinify)</span>
+          <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">// Options for the third function</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        minify<span class="token operator">:</span> <span class="token punctuation">[</span>
+          CssMinimizerPlugin<span class="token punctuation">.</span>cssnanoMinify<span class="token punctuation">,</span>
+          CssMinimizerPlugin<span class="token punctuation">.</span>cleanCssMinify<span class="token punctuation">,</span>
+          <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> inputMap<span class="token punctuation">,</span> minimizerOptions</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+            <span class="token comment">// To do something</span>
+            <span class="token keyword">return</span> <span class="token punctuation">{</span>
+              code<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">a{color: red}</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+              map<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">{"version": "3", ...}</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+              warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h3 id="minimizeroptions"><code>minimizerOptions</code><a href="#minimizeroptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>Type: <code>Object|Array&#x3C;Object></code> Default: <code>{ preset: 'default' }</code></p> <p>Cssnano optimisations <a href="https://cssnano.co/docs/optimisations">options</a>.</p> <h4 id="object"><code>Object</code><a href="#object" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -118,7 +121,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h4 id="processoroptions"><code>processorOptions</code><a href="#processoroptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4> <p>Type: <code>Object</code> Default: <code>{ to: assetName, from: assetName }</code></p> <p>Allows to specify options <a href="https://postcss.org/api/#processoptions"><code>processoptions</code></a> for the cssnano. The <code>parser</code>,<code> stringifier</code> and <code>syntax</code> can be either a function or a string indicating the module that will be imported.</p> <blockquote> <p>⚠️ <strong>If a function is passed, the <code>parallel</code> option must be disabled.</strong>.</p> </blockquote> <pre><code class="hljs language-js"><span class="token keyword">import</span> sugarss <span class="token keyword">from</span> <span class="token string">'sugarss'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h4 id="array-1"><code>Array</code><a href="#array-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4> <p>If an array of functions is passed to the <code>minify</code> option, the <code>minimizerOptions</code> must also be an array. The function index in the <code>minify</code> array corresponds to the options object with the same index in the <code>minimizerOptions</code> array.</p> <h4 id="processoroptions"><code>processorOptions</code><a href="#processoroptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4> <p>Type: <code>Object</code> Default: <code>{ to: assetName, from: assetName }</code></p> <p>Allows to specify options <a href="https://postcss.org/api/#processoptions"><code>processoptions</code></a> for the cssnano. The <code>parser</code>,<code> stringifier</code> and <code>syntax</code> can be either a function or a string indicating the module that will be imported.</p> <blockquote> <p>⚠️ <strong>If a function is passed, the <code>parallel</code> option must be disabled.</strong>.</p> </blockquote> <pre><code class="hljs language-js"><span class="token keyword">import</span> sugarss <span class="token keyword">from</span> <span class="token string">'sugarss'</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -228,7 +231,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
           <span class="token punctuation">}</span>
 
           <span class="token keyword">return</span> <span class="token punctuation">{</span>
-            css<span class="token operator">:</span> minifiedCss<span class="token punctuation">.</span>css<span class="token punctuation">,</span>
+            code<span class="token operator">:</span> minifiedCss<span class="token punctuation">.</span>css<span class="token punctuation">,</span>
             map<span class="token operator">:</span> minifiedCss<span class="token punctuation">.</span>map<span class="token punctuation">.</span><span class="token function">toJSON</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -254,7 +257,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
           <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
           <span class="token keyword">return</span> <span class="token punctuation">{</span>
-            css<span class="token operator">:</span> minifiedCss<span class="token punctuation">.</span>styles<span class="token punctuation">,</span>
+            code<span class="token operator">:</span> minifiedCss<span class="token punctuation">.</span>styles<span class="token punctuation">,</span>
             map<span class="token operator">:</span> minifiedCss<span class="token punctuation">.</span>sourceMap<span class="token punctuation">.</span><span class="token function">toJSON</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
             warnings<span class="token operator">:</span> minifiedCss<span class="token punctuation">.</span>warnings<span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">;</span>
