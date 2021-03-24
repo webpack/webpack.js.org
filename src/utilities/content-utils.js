@@ -73,20 +73,17 @@ export const extractPages = (tree) => {
  * @return {string}      - The title specified by that page or a fallback
  */
 export const getPageTitle = (tree, path) => {
-  let page = findInContent(tree, (item) => item.url === path);
-  let title;
+  const page = findInContent(tree, (item) => item.url === path);
 
-  if (!page) {
-    if (!path.endsWith('/')) path += '/';
-    title = path.replace(/.*\/(.+)\//g, '$1');
-    title = title.replace(/-/g, ' ');
-  } else if (path === '/') {
-    title = page.title;
-  } else if (path.includes('/printable')) {
-    title = 'Combined printable page | webpack';
-  } else title = `${page.title} | webpack`;
+  // non page found
+  if (!page) return 'webpack';
 
-  return title;
+  if (page) {
+    if (path.includes('/printable')) {
+      return 'Combined printable page | webpack';
+    }
+    return `${page.title} | webpack`;
+  }
 };
 
 export const getPageDescription = (tree, path) => {

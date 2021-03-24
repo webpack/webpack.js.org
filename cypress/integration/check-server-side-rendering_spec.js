@@ -26,4 +26,12 @@ describe('server side rendered page', () => {
       'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.'
     );
   });
+
+  it('should find title', () => {
+    cy.visit('/');
+    cy.title().should('eq', 'webpack');
+
+    cy.visit('/guides/getting-started/');
+    cy.title().should('eq', 'Getting Started | webpack');
+  });
 });
