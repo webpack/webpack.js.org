@@ -17,4 +17,13 @@ describe('server side rendered page', () => {
     cy.visit('/');
     cy.get('meta[charset="utf-8"]');
   });
+
+  it('should find the default meta description', () => {
+    cy.visit('/');
+    cy.get('head meta[name="description"]').should(
+      'have.attr',
+      'content',
+      'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.'
+    );
+  });
 });
