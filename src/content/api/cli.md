@@ -454,6 +454,7 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 | -------------------- | -------------------------------------------- |
 | `WEBPACK_SERVE`      | `true` if `serve\|s` is being used.          |
 | `WEBPACK_BUILD`      | `true` if `build\|bundle\|b` is being used.  |
+| `WEBPACK_BUNDLE`     | `true` if `build\|bundle\|b` is being used.  |
 | `WEBPACK_WATCH`      | `true` if `--watch\|watch\|w` is being used. |
 
 You can use the above environment variables inside your webpack configuration:
