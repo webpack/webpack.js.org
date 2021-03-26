@@ -189,6 +189,7 @@ module.exports = {
 
 ### `minify` {#minify}
 
+<<<<<<< HEAD
 类型：`Function`
 默认值：`undefined`
 
@@ -197,6 +198,25 @@ module.exports = {
 对于使用和测试未发布或版本衍生版本很有用。
 
 > ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
+=======
+Type: `Function|Array<Function>`
+Default: `CssMinimizerPlugin.cssnanoMinify`
+
+Allows to override default minify function.
+By default plugin uses [cssnano](https://github.com/cssnano/cssnano) package.
+Useful for using and testing unpublished versions or forks.
+
+Possible options:
+
+- CssMinimizerPlugin.cssnanoMinify
+- CssMinimizerPlugin.cssoMinify
+- CssMinimizerPlugin.cleanCssMinify
+- async (data, inputMap, minimizerOptions) => {return {code: `a{color: red}`, map: `...`, warnings: []}}
+
+> ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**.
+>>>>>>> dd58df1ace2a66632d1b7affde6cd934d0276bd3
+
+#### `Function`
 
 **webpack.config.js**
 
@@ -206,36 +226,59 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        minify: (data, inputMap, minimizerOptions) => {
-          const postcss = require('postcss');
+        minimizerOptions: {
+          level: {
+            1: {
+              roundingPrecision: 'all=3,px=5',
+            },
+          },
+        },
+        minify: CssMinimizerPlugin.cleanCssMinify,
+      }),
+    ],
+  },
+};
+```
 
+<<<<<<< HEAD
           const plugin = postcss.plugin(
             'custom-plugin',
             () => (css, result) => {
               // 自定义代码
             }
           );
+=======
+#### `Array`
+>>>>>>> dd58df1ace2a66632d1b7affde6cd934d0276bd3
 
-          const [[filename, input]] = Object.entries(data);
+If an array of functions is passed to the `minify` option, the `minimizerOptions` must also be an array.
+The function index in the `minify` array corresponds to the options object with the same index in the `minimizerOptions` array.
 
-          const postcssOptions = {
-            from: filename,
-            to: filename,
-            map: {
-              prev: inputMap,
-            },
-          };
+**webpack.config.js**
 
-          return postcss([plugin])
-            .process(input, postcssOptions)
-            .then((result) => {
-              return {
-                css: result.css,
-                map: result.map,
-                warnings: result.warnings(),
-              };
-            });
-        },
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: [
+          {}, // Options for the first function (CssMinimizerPlugin.cssnanoMinify)
+          {}, // Options for the second function (CssMinimizerPlugin.cleanCssMinify)
+          {}, // Options for the third function
+        ],
+        minify: [
+          CssMinimizerPlugin.cssnanoMinify,
+          CssMinimizerPlugin.cleanCssMinify,
+          async (data, inputMap, minimizerOptions) => {
+            // To do something
+            return {
+              code: `a{color: red}`,
+              map: `{"version": "3", ...}`,
+              warnings: [],
+            };
+          },
+        ],
       }),
     ],
   },
@@ -244,10 +287,17 @@ module.exports = {
 
 ### `minimizerOptions` {#minimizeroptions}
 
+<<<<<<< HEAD
 类型：`Object`
 默认值：`{ preset: 'default' }`
+=======
+Type: `Object|Array<Object>`
+Default: `{ preset: 'default' }`
+>>>>>>> dd58df1ace2a66632d1b7affde6cd934d0276bd3
 
 Cssnano 优化 [选项](https://cssnano.co/docs/optimisations).
+
+#### `Object`
 
 ```js
 module.exports = {
@@ -269,7 +319,16 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 #### `processorOptions` {#processoroptions}
+=======
+#### `Array`
+
+If an array of functions is passed to the `minify` option, the `minimizerOptions` must also be an array.
+The function index in the `minify` array corresponds to the options object with the same index in the `minimizerOptions` array.
+
+#### `processorOptions`
+>>>>>>> dd58df1ace2a66632d1b7affde6cd934d0276bd3
 
 类型：`Object`
 默认值：`{ to: assetName, from: assetName }`
@@ -441,7 +500,7 @@ module.exports = {
           }
 
           return {
-            css: minifiedCss.css,
+            code: minifiedCss.css,
             map: minifiedCss.map.toJSON(),
           };
         },
@@ -480,7 +539,7 @@ module.exports = {
           });
 
           return {
-            css: minifiedCss.styles,
+            code: minifiedCss.styles,
             map: minifiedCss.sourceMap.toJSON(),
             warnings: minifiedCss.warnings,
           };
