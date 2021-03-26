@@ -7,6 +7,8 @@ const path = require('path');
 // Load Common Configuration
 const common = require('./webpack.common.js');
 
+const ProdAssetsManifest = require('./src/ProdAssetsManifest');
+
 module.exports = (env) =>
   merge(common(env), {
     mode: 'production',
@@ -18,7 +20,7 @@ module.exports = (env) =>
     entry: {
       index: {
         import: './index.jsx',
-        filename: 'index.bundle.js',
+        filename: 'index.[contenthash].js',
       },
     },
     output: {
@@ -31,7 +33,7 @@ module.exports = (env) =>
             test: /node_modules/,
             chunks: 'initial',
             enforce: true,
-            filename: 'vendor.bundle.js',
+            filename: 'vendor.[contenthash].js',
           },
         },
       },
@@ -44,5 +46,6 @@ module.exports = (env) =>
         // exclude license
         exclude: [/license\.txt/i],
       }),
+      new ProdAssetsManifest(),
     ],
   });

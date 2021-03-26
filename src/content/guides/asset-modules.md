@@ -416,14 +416,14 @@ module: {
     rules: [
     // ...
 +     {
-+       resourceQuery: /raw/
-+       type: 'asset/source'
++       resourceQuery: /raw/,
++       type: 'asset/source',
 +     }
     ]
   },
 ```
 
-and if you'd like to exclude raw assets from being parsed by other loaders, use a negative lookahead:
+and if you'd like to exclude raw assets from being processed by other loaders, use a negative condition:
 
 ```diff
 module: {
@@ -431,12 +431,33 @@ module: {
     // ...
 +     {
 +       test: /\.m?js$/,
-+       resourceQuery: /^(?!\?raw$).*/,
++       resourceQuery: { not: /raw/ },
++       use: [ ... ]
 +     },
       {
-        resourceQuery: /raw/
-        type: 'asset/source'
+        resourceQuery: /raw/,
+        type: 'asset/source',
       }
+    ]
+  },
+```
+
+or a `oneOf` list of rules. Here only the first matching rule will be applied:
+
+```diff
+module: {
+    rules: [
+    // ...
++     { oneOf: [
+        {
+          resourceQuery: /raw/,
+          type: 'asset/source',
+        },
++       {
++         test: /\.m?js$/,
++         use: [ ... ]
++       },
++     ] }
     ]
   },
 ```

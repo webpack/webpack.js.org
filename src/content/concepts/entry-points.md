@@ -81,7 +81,7 @@ An object with entry point description. You can specify the following properties
 - `dependOn`: The entry points that the current entry point depends on. They must be loaded before this entry point is loaded.
 - `filename`: Specifies the name of each output file on disk.
 - `import`: Module(s) that are loaded upon startup.
-- `library`: Options for library.
+- `library`: Specify [library options](/configuration/output/#outputlibrary) to bundle a library from current entry.
 - `runtime`: The name of the runtime chunk. If set, a runtime chunk with this name is created otherwise an existing entry point is used as runtime.
 
 **webpack.config.js**

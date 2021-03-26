@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Learn how to bundle a JavaScript application with webpack 5.
 sort: 1
 contributors:
   - bebraw

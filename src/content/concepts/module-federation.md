@@ -26,7 +26,7 @@ This is often known as Micro-Frontends, but is not limited to that.
 
 We distinguish between local and remote modules. Local modules are normal modules which are part of the current build. Remote modules are modules that are not part of the current build and loaded from a so-called container at the runtime.
 
-Loading remote modules is considered asynchronous operation. When using a remote module these asynchronous operations will be placed in the next chunk loading operation(s) that is between the remote module and the entrypoint. It's not possible to use a remote module without a chunk loading operation.
+Loading remote modules is considered an asynchronous operation. When using a remote module these asynchronous operations will be placed in the next chunk loading operation(s) that is between the remote module and the entrypoint. It's not possible to use a remote module without a chunk loading operation.
 
 A chunk loading operation is usually an `import()` call, but older constructs like `require.ensure` or `require([...])` are supported as well.
 
@@ -45,7 +45,7 @@ A container is able to flag selected local modules as "overridable". A consumer 
 
 The container will manage overridable modules in a way that they do not need to be downloaded when they have been overridden by the consumer. This usually happens by placing them into separate chunks.
 
-On the other hand, the provider of the replacement modules, will only provide asynchronous loading functions. It allows the container to load replacement modules only when they are needed. The provider will manage replacement modules in a way that they do not need to be downloaded at all when they are not requested by the container. This usually happens by placing them into separate chunks.
+On the other hand, the provider of the replacement modules will only provide asynchronous loading functions. It allows the container to load replacement modules only when they are needed. The provider will manage replacement modules in a way that they do not need to be downloaded at all when they are not requested by the container. This usually happens by placing them into separate chunks.
 
 A "name" is used to identify overridable modules from the container.
 
@@ -56,7 +56,7 @@ Overrides are provided in a similar way as the container exposes modules, separa
 
 W> When nesting is used, providing overrides to one container will automatically override the modules with the same "name" in the nested container(s).
 
-Overrides must be provided before the modules of the container are loaded. Overridables that are used in initial chunk, can only be overridden by a synchronous module override that doesn't use Promises. Once evaluated, overridables are no longer overridable.
+Overrides must be provided before the modules of the container are loaded. Overridables that are used in the initial chunk, can only be overridden by a synchronous module override that doesn't use Promises. Once evaluated, overridables are no longer overridable.
 
 ## High-level concepts
 
@@ -143,7 +143,7 @@ Many applications share a common components library which could be built as a co
 ## Dynamic Remote Containers
 
 The container interface supports `get` and `init` methods.
-`init` is a `async` compatible method that is called with one argument: the shared scope object. This object is used as a shared scope in the remote container and is filled with the provided modules from a host.
+`init` is an `async` compatible method that is called with one argument: the shared scope object. This object is used as a shared scope in the remote container and is filled with the provided modules from a host.
 It can be leveraged to connect remote containers to a host container dynamically at runtime.
 
 **init.js**
@@ -192,7 +192,7 @@ loadComponent('abtests', 'test123');
 
 **`Uncaught Error: Shared module is not available for eager consumption`**
 
-The application is eagerly executing an application which is operating as an omnidirectional host. There are options to choose from:
+The application is eagerly executing an application that is operating as an omnidirectional host. There are options to choose from:
 
 You can set the dependency as eager inside the advanced API of Module Federation, which doesn’t put the modules in an async chunk, but provides them synchronously. This allows us to use these shared modules in the initial chunk. But be careful as all provided and fallback modules will always be downloaded. It’s recommended to provide it only at one point of your application, e.g. the shell.
 
@@ -265,5 +265,5 @@ new ModuleFederationPlugin({
 
 **`Uncaught TypeError: fn is not a function`**
 
-You are likely missing the remote container, make sure its added.
+You are likely missing the remote container, make sure it's added.
 If you have the container loaded for the remote you are trying to consume, but still see this error, add the host container's remote container file to the HTML as well.

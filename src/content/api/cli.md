@@ -3,6 +3,7 @@ title: Command Line Interface
 sort: 1
 contributors:
   - anshumanv
+  - rishabh3112
   - snitin315
   - evenstensberg
   - simon04
@@ -24,8 +25,6 @@ related:
     url: https://medium.com/@joeclever/three-simple-ways-to-inspect-a-webpack-bundle-7f6a8fe7195d#.7d2i06mjx
   - title: Optimising your application bundle size with webpack
     url: https://hackernoon.com/optimising-your-application-bundle-size-with-webpack-e85b00bab579#.5w5ko08pq
-  - title: Analyzing & optimizing your webpack bundle
-    url: https://medium.com/@ahmedelgabri/analyzing-optimizing-your-webpack-bundle-8590818af4df#.hce4vdjs9
   - title: Analysing and minimising the size of client-side bundle with webpack and source-map-explorer
     url: https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x
 ---
@@ -38,18 +37,90 @@ Read the [installation guide](/guides/installation) if you don't already have we
 
 webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with
 
-| Command      | Usage                                     | Description                                                                     |
-| ------------ | ----------------------------------------- | ------------------------------------------------------------------------------- |
-| `build`      | `build\|bundle\|b [entries...] [options]` | Run webpack (default command, can be omitted).                                  |
-| `configtest` | `configtest\|t [config-path]`             | Validate a webpack configuration.                                               |
-| `help`       | `help\|h [command] [option]`              | Display help for commands and options.                                          |
-| `info`       | `info\|i [options]`                       | Outputs information about your system.                                          |
-| `init`       | `init\|c [scaffold...] [options]`         | Initialize a new webpack configuration.                                         |
-| `loader`     | `loader\|l [output-path]`                 | Scaffold a loader.                                                              |
-| `plugin`     | `plugin\|p [output-path]`                 | Scaffold a plugin.                                                              |
-| `serve`      | `serve\|s [options]`                      | Run the `webpack-dev-server`.                                                   |
-| `version`    | `version\|v [commands...]`                | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
-| `watch`      | `watch\|w [entries...] [options]`         | Run webpack and watch for files changes.                                        |
+| Command                               | Usage                                     | Description                                                                     |
+| ------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------- |
+| `build`                               | `build\|bundle\|b [entries...] [options]` | Run webpack (default command, can be omitted).                                  |
+| [`configtest`](#configtest)           | `configtest\|t [config-path]`             | Validate a webpack configuration.                                               |
+| [`help`](#help)                       | `help\|h [command] [option]`              | Display help for commands and options.                                          |
+| [`info`](#info)                       | `info\|i [options]`                       | Outputs information about your system.                                          |
+| [`init`](#init)                       | `init\|c [generation-path] [options]`     | Initialize a new webpack project.                                               |
+| `loader`                              | `loader\|l [output-path]`                 | Scaffold a loader.                                                              |
+| `plugin`                              | `plugin\|p [output-path]`                 | Scaffold a plugin.                                                              |
+| [`serve`](/configuration/dev-server/) | `serve\|s [options]`                      | Run the `webpack-dev-server`.                                                   |
+| [`version`](#version)                 | `version\|v [commands...]`                | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
+| `watch`                               | `watch\|w [entries...] [options]`         | Run webpack and watch for files changes.                                        |
+
+### Init
+
+Used to initialize a new webpack project.
+
+```bash
+npx webpack init [generation-path] [options]
+```
+
+**example**
+
+```bash
+npx webpack init ./my-app --force --template=default
+```
+
+#### Generation Path
+
+Location of where to generate the configuration. Defaults to `process.cwd()`.
+
+#### Options
+
+**`--template`**
+
+`string = default`
+
+Name of template to generate.
+
+**`--force`**
+
+`boolean`
+
+To generate a project without questions. When enabled, default answer for each question will be used.
+
+### Info
+
+Outputs information about your system.
+
+```bash
+npx webpack info [options]
+```
+
+**example**
+
+```bash
+npx webpack info --output=json
+```
+
+#### Options for info
+
+**`--output`**
+
+`string : 'json' | 'markdown'`
+
+To get the output in a specified format.
+
+### Configtest
+
+Validate a webpack configuration.
+
+```bash
+npx webpack configtest [config-path]
+```
+
+**example**
+
+```bash
+npx webpack configtest ./webpack.config.js
+```
+
+#### Config Path
+
+Path to your webpack configuration file. Defaults to `./webpack.config.js`.
 
 ## Flags
 
