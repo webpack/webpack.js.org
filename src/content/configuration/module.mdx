@@ -38,12 +38,18 @@ module.exports = {
     generator: {
       asset: {
         // Generator options for asset modules
+
+        // Customize publicPath for asset modules, available since webpack 5.28.0
+        publicPath: 'assets/',
       },
       'asset/inline': {
         // Generator options for asset/inline modules
       },
       'asset/resource': {
         // Generator options for asset/resource modules
+
+        // Customize publicPath for asset/resource modules, available since webpack 5.28.0
+        publicPath: 'assets/',
       },
       javascript: {
         // No generator options are supported for this module type yet
@@ -651,6 +657,33 @@ module.exports = {
         type: 'asset/resource',
         generator: {
           filename: 'static/[hash][ext]',
+        },
+      },
+    ],
+  },
+};
+```
+
+### Rule.generator.publicPath
+
+Customize `publicPath` for specific Asset Modules.
+
+- Type: `string | ((pathData: PathData, assetInfo?: AssetInfo) => string)`
+- Available: 5.28.0+
+
+```js
+module.exports = {
+  //...
+  output: {
+    publicPath: 'static/',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.png$/i,
+        type: 'asset/resource',
+        generator: {
+          publicPath: 'assets/',
         },
       },
     ],
