@@ -189,14 +189,23 @@ module.exports = {
 
 ### `minify`
 
-Type: `Function`
-Default: `undefined`
+Type: `Function|Array<Function>`
+Default: `CssMinimizerPlugin.cssnanoMinify`
 
-Allows you to override default minify function.
+Allows to override default minify function.
 By default plugin uses [cssnano](https://github.com/cssnano/cssnano) package.
 Useful for using and testing unpublished versions or forks.
 
+Possible options:
+
+- CssMinimizerPlugin.cssnanoMinify
+- CssMinimizerPlugin.cssoMinify
+- CssMinimizerPlugin.cleanCssMinify
+- async (data, inputMap, minimizerOptions) => {return {code: `a{color: red}`, map: `...`, warnings: []}}
+
 > ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**.
+
+#### `Function`
 
 **webpack.config.js**
 
@@ -206,36 +215,50 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        minify: (data, inputMap, minimizerOptions) => {
-          const postcss = require('postcss');
-
-          const plugin = postcss.plugin(
-            'custom-plugin',
-            () => (css, result) => {
-              // custom code
-            }
-          );
-
-          const [[filename, input]] = Object.entries(data);
-
-          const postcssOptions = {
-            from: filename,
-            to: filename,
-            map: {
-              prev: inputMap,
+        minimizerOptions: {
+          level: {
+            1: {
+              roundingPrecision: 'all=3,px=5',
             },
-          };
-
-          return postcss([plugin])
-            .process(input, postcssOptions)
-            .then((result) => {
-              return {
-                css: result.css,
-                map: result.map,
-                warnings: result.warnings(),
-              };
-            });
+          },
         },
+        minify: CssMinimizerPlugin.cleanCssMinify,
+      }),
+    ],
+  },
+};
+```
+
+#### `Array`
+
+If an array of functions is passed to the `minify` option, the `minimizerOptions` must also be an array.
+The function index in the `minify` array corresponds to the options object with the same index in the `minimizerOptions` array.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: [
+          {}, // Options for the first function (CssMinimizerPlugin.cssnanoMinify)
+          {}, // Options for the second function (CssMinimizerPlugin.cleanCssMinify)
+          {}, // Options for the third function
+        ],
+        minify: [
+          CssMinimizerPlugin.cssnanoMinify,
+          CssMinimizerPlugin.cleanCssMinify,
+          async (data, inputMap, minimizerOptions) => {
+            // To do something
+            return {
+              code: `a{color: red}`,
+              map: `{"version": "3", ...}`,
+              warnings: [],
+            };
+          },
+        ],
       }),
     ],
   },
@@ -244,10 +267,12 @@ module.exports = {
 
 ### `minimizerOptions`
 
-Type: `Object`
+Type: `Object|Array<Object>`
 Default: `{ preset: 'default' }`
 
 Cssnano optimisations [options](https://cssnano.co/docs/optimisations).
+
+#### `Object`
 
 ```js
 module.exports = {
@@ -268,6 +293,11 @@ module.exports = {
   },
 };
 ```
+
+#### `Array`
+
+If an array of functions is passed to the `minify` option, the `minimizerOptions` must also be an array.
+The function index in the `minify` array corresponds to the options object with the same index in the `minimizerOptions` array.
 
 #### `processorOptions`
 
@@ -441,7 +471,7 @@ module.exports = {
           }
 
           return {
-            css: minifiedCss.css,
+            code: minifiedCss.css,
             map: minifiedCss.map.toJSON(),
           };
         },
@@ -480,7 +510,7 @@ module.exports = {
           });
 
           return {
-            css: minifiedCss.styles,
+            code: minifiedCss.styles,
             map: minifiedCss.sourceMap.toJSON(),
             warnings: minifiedCss.warnings,
           };

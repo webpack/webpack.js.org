@@ -88,6 +88,7 @@ module.exports = {
 |            [`force`](#force)            |     `{Boolean}`      |                     `false`                     | Overwrites files already in `compilation.assets` (usually added by other plugins/loaders).                                                             |
 |         [`priority`](#priority)         |      `{Number}`      |                       `0`                       | Allows you to specify the copy priority.                                                                                                               |
 |        [`transform`](#transform)        |      `{Object}`      |                   `undefined`                   | Allows to modify the file contents. Enable `transform` caching. You can use `{ transform: {cache: { key: 'my-cache-key' }} }` to invalidate the cache. |
+|     [`transformAll`](#transformall)     |     `{Function}`     |                   `undefined`                   | Allows you to modify the contents of multiple files and save the result to one file.                                                                   |
 | [`noErrorOnMissing`](#noerroronmissing) |     `{Boolean}`      |                     `false`                     | Doesn't generate an error on missing file(s).                                                                                                          |
 |             [`info`](#info)             | `{Object\|Function}` |                   `undefined`                   | Allows to add assets info.                                                                                                                             |
 
@@ -731,6 +732,45 @@ module.exports = {
 };
 ```
 
+#### `transformAll`
+
+Type: `Function`
+Default: `undefined`
+
+Allows you to modify the contents of multiple files and save the result to one file.
+
+> ℹ️ The `to` option must be specified and point to a file. It is allowed to use only `[contenthash]` and `[fullhash]` template strings.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "src/**/*.txt",
+          to: "dest/file.txt",
+          // The `assets` argument is an assets array for the pattern.from ("src/**/*.txt")
+          transformAll(assets) {
+            const result = assets.reduce((accumulator, asset) => {
+              // The asset content can be obtained from `asset.source` using `source` method.
+              // The asset content is a [`Buffer`](https://nodejs.org/api/buffer.html) object, it could be converted to a `String` to be processed using `content.toString()`
+              const content = asset.data;
+
+              accumulator = `${accumulator}${content}\n`;
+              return accumulator;
+            }, "");
+
+            return result;
+          },
+        },
+      ],
+    }),
+  ],
+};
+```
+
 ### `noErrorOnMissing`
 
 Type: `Boolean`
@@ -1096,6 +1136,30 @@ module.exports = {
           from: "**/*",
           // Terser skip this file for minimization
           info: { minimized: true },
+        },
+      ],
+    }),
+  ],
+};
+```
+
+##### `yarn workspaces` and `monorepos`
+
+When using `yarn workspaces` or` monorepos`, relative copy paths from node_modules can be broken due to the way packages are hoisting.
+To avoid this, should explicitly specify where to copy the files from using `require.resolve`.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: `${path.dirname(
+            require.resolve(`${moduleName}/package.json`)
+          )}/target`,
+          to: "target",
         },
       ],
     }),
