@@ -1905,7 +1905,26 @@ T> Using some kind of indentation makes bundles look prettier, but will cause is
 
 T> Typically you don't need to change `output.sourcePrefix`.
 
-## `output.strictModuleExceptionHandling`
+## output.strictModuleErrorHandling
+
+Handle error in module loading as per EcmaScript Modules spec at a performance cost.
+
+- Type: `boolean`
+- Available: 5.25.0+
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    strictModuleErrorHandling: true,
+  },
+};
+```
+
+## output.strictModuleExceptionHandling
+
+W> Deprecated, use
+[`output.strictModuleErrorHandling`](#outputstrictmoduleerrorhandling) instead.
 
 `boolean = false`
 
