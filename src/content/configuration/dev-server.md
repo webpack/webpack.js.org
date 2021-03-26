@@ -139,7 +139,7 @@ module.exports = {
 };
 ```
 
-To use this option with the CLI pass the `--allowed-hosts` option a comma-delimited string.
+To use this option with the CLI pass the `--allowed-hosts` as following:
 
 ```bash
 npx webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com --allowed-hosts host2.com
