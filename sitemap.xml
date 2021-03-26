@@ -46,6 +46,9 @@
         <loc>https://webpack.js.org/migrate</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/migrating</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins</loc>
     </url>
     <url>
@@ -59,9 +62,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/writers-guide</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/migrating</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/cli</loc>
@@ -304,13 +304,13 @@
         <loc>https://webpack.js.org/guides/dependency-management</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/development</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/development-vagrant</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/ecma-script-modules</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/development</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/entry-advanced</loc>
@@ -349,9 +349,6 @@
         <loc>https://webpack.js.org/guides/progressive-web-application</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/public-path</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/scaffolding</loc>
     </url>
     <url>
@@ -359,6 +356,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/tree-shaking</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/public-path</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/typescript</loc>
@@ -412,6 +412,9 @@
         <loc>https://webpack.js.org/loaders/null-loader</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/polymer-webpack-loader</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/postcss-loader</loc>
     </url>
     <url>
@@ -434,9 +437,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/thread-loader</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/polymer-webpack-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/url-loader</loc>
