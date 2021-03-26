@@ -40,7 +40,7 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 | Command                               | Usage                                     | Description                                                                     |
 | ------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------- |
 | `build`                               | `build\|bundle\|b [entries...] [options]` | Run webpack (default command, can be omitted).                                  |
-| `configtest`                          | `configtest\|t [config-path]`             | Validate a webpack configuration.                                               |
+| [`configtest`](#configtest)           | `configtest\|t [config-path]`             | Validate a webpack configuration.                                               |
 | [`help`](#help)                       | `help\|h [command] [option]`              | Display help for commands and options.                                          |
 | [`info`](#info)                       | `info\|i [options]`                       | Outputs information about your system.                                          |
 | [`init`](#init)                       | `init\|c [generation-path] [options]`     | Initialize a new webpack project.                                               |
