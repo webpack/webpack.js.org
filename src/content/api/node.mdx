@@ -87,8 +87,7 @@ The `run` method is then used to kickstart all compilation work. Upon
 completion, the given `callback` function is executed. The final logging of
 stats and errors should be done in this `callback` function.
 
-W> The API only supports a single concurrent compilation at a time. When using
-`run`, wait for it to finish before calling `run` or `watch` again. When using
+W> The API only supports a single concurrent compilation at a time. When using `run` or
 `watch`, call `close` and wait for it to finish before calling `run` or `watch`
 again. Concurrent compilations will corrupt the output files.
 
@@ -106,8 +105,14 @@ const compiler = webpack({
 
 compiler.run((err, stats) => { // [Stats Object](#stats-object)
   // ...
+  
+  compiler.close((closeErr) => {
+    // ...
+  });
 });
 ```
+
+W> Don't forget to close the compiler, so that low-priority work (like persistent caching) have the opportunity to complete. 
 
 ## Watching
 
@@ -150,7 +155,7 @@ The `watch` method returns a `Watching` instance that exposes
 `.close(callback)` method. Calling this method will end watching:
 
 ```js
-watching.close(() => {
+watching.close((closeErr) => {
   console.log('Watching Ended.');
 });
 ```
