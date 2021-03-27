@@ -88,6 +88,7 @@ module.exports = {
 |            [`force`](#force)            |     `{Boolean}`      |                     `false`                     | Overwrites files already in `compilation.assets` (usually added by other plugins/loaders).                                                             |
 |         [`priority`](#priority)         |      `{Number}`      |                       `0`                       | Allows you to specify the copy priority.                                                                                                               |
 |        [`transform`](#transform)        |      `{Object}`      |                   `undefined`                   | Allows to modify the file contents. Enable `transform` caching. You can use `{ transform: {cache: { key: 'my-cache-key' }} }` to invalidate the cache. |
+|     [`transformAll`](#transformall)     |     `{Function}`     |                   `undefined`                   | Allows you to modify the contents of multiple files and save the result to one file.                                                                   |
 | [`noErrorOnMissing`](#noerroronmissing) |     `{Boolean}`      |                     `false`                     | Doesn't generate an error on missing file(s).                                                                                                          |
 |             [`info`](#info)             | `{Object\|Function}` |                   `undefined`                   | Allows to add assets info.                                                                                                                             |
 
@@ -731,6 +732,45 @@ module.exports = {
 };
 ```
 
+#### `transformAll` {#transformall}
+
+类型：`Function`
+默认值：`undefined`
+
+允许你去更改多个文件的内容，并将结果保存到一个文件中。
+
+> ℹ️ 必须指定 `to` 配置项为一个文件。只允许使用 `[contenthash]` 与 `[fullhash]` 模板字符串。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "src/**/*.txt",
+          to: "dest/file.txt",
+          // `assets` 参数是一个符合 pattern.from ("src/**/*.txt") 静态资源数组。
+          transformAll(assets) {
+            const result = assets.reduce((accumulator, asset) => {
+              // 静态资源内容可以使用 `source` 方法从 `asset.source` 中获取。
+              // 静态资源内容是一个 [`Buffer`](https://nodejs.org/api/buffer.html) 对象，可以使用 `content.toString()` 将其转为 `String`
+              const content = asset.data;
+
+              accumulator = `${accumulator}${content}\n`;
+              return accumulator;
+            }, "");
+
+            return result;
+          },
+        },
+      ],
+    }),
+  ],
+};
+```
+
 ### `noErrorOnMissing` {#noerroronmissing}
 
 Type: `Boolean`
@@ -1096,6 +1136,30 @@ module.exports = {
           from: "**/*",
           // Terser skip this file for minimization
           info: { minimized: true },
+        },
+      ],
+    }),
+  ],
+};
+```
+
+##### `yarn workspaces` and `monorepos` {yarnworkspacesandmonorepos}
+
+当时用 `yarn workspaces` 或者 `monorepos` 时，由于包提升方式不同，node_modules 的相对复制路径可能会失效。
+为了避免这种情况，请使用 `require.resolve` 指定复制路径。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: `${path.dirname(
+            require.resolve(`${moduleName}/package.json`)
+          )}/target`,
+          to: "target",
         },
       ],
     }),
