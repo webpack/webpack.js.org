@@ -205,7 +205,7 @@ module.exports = {
 
 > ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
 
-#### `Function`
+#### `Function` {#function}
 
 **webpack.config.js**
 

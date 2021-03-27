@@ -1145,8 +1145,8 @@ module.exports = {
 
 ##### `yarn workspaces` and `monorepos` {yarnworkspacesandmonorepos}
 
-When using `yarn workspaces` or` monorepos`, relative copy paths from node_modules can be broken due to the way packages are hoisting.
-To avoid this, should explicitly specify where to copy the files from using `require.resolve`.
+当时用 `yarn workspaces` 或者 `monorepos` 时，由于包提升方式不同，node_modules 的相对复制路径可能会失效。
+为了避免这种情况，请使用 `require.resolve` 指定复制路径。
 
 **webpack.config.js**
 
