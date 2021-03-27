@@ -189,32 +189,21 @@ module.exports = {
 
 ### `minify` {#minify}
 
-<<<<<<< HEAD
-类型：`Function`
-默认值：`undefined`
+类型：`Function|Array<Function>`
+默认值：`CssMinimizerPlugin.cssnanoMinify`
 
 允许覆盖默认的 minify 函数。
 默认情况下，插件使用 [cssnano](https://github.com/cssnano/cssnano) 包。
 对于使用和测试未发布或版本衍生版本很有用。
 
-> ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
-=======
-Type: `Function|Array<Function>`
-Default: `CssMinimizerPlugin.cssnanoMinify`
-
-Allows to override default minify function.
-By default plugin uses [cssnano](https://github.com/cssnano/cssnano) package.
-Useful for using and testing unpublished versions or forks.
-
-Possible options:
+可选配置：
 
 - CssMinimizerPlugin.cssnanoMinify
 - CssMinimizerPlugin.cssoMinify
 - CssMinimizerPlugin.cleanCssMinify
 - async (data, inputMap, minimizerOptions) => {return {code: `a{color: red}`, map: `...`, warnings: []}}
 
-> ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**.
->>>>>>> dd58df1ace2a66632d1b7affde6cd934d0276bd3
+> ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
 
 #### `Function`
 
@@ -240,19 +229,10 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-          const plugin = postcss.plugin(
-            'custom-plugin',
-            () => (css, result) => {
-              // 自定义代码
-            }
-          );
-=======
-#### `Array`
->>>>>>> dd58df1ace2a66632d1b7affde6cd934d0276bd3
+#### `Array` {#array}
 
-If an array of functions is passed to the `minify` option, the `minimizerOptions` must also be an array.
-The function index in the `minify` array corresponds to the options object with the same index in the `minimizerOptions` array.
+如果 `minify` 配置项传入一个数组，`minimizerOptions` 也必须是个数组。
+`miniify` 数组中的函数索引对应于 `minimizerOptions` 数组中具有相同索引的 options 对象。
 
 **webpack.config.js**
 
@@ -263,9 +243,9 @@ module.exports = {
     minimizer: [
       new CssMinimizerPlugin({
         minimizerOptions: [
-          {}, // Options for the first function (CssMinimizerPlugin.cssnanoMinify)
-          {}, // Options for the second function (CssMinimizerPlugin.cleanCssMinify)
-          {}, // Options for the third function
+          {}, // 第一个函数的配置项（CssMinimizerPlugin.cssnanoMinify）
+          {}, // 第二个函数的配置项（CssMinimizerPlugin.cleanCssMinify）
+          {}, // 第三个函数的配置项
         ],
         minify: [
           CssMinimizerPlugin.cssnanoMinify,
@@ -287,17 +267,12 @@ module.exports = {
 
 ### `minimizerOptions` {#minimizeroptions}
 
-<<<<<<< HEAD
-类型：`Object`
+类型：`Object|Array<Object>`
 默认值：`{ preset: 'default' }`
-=======
-Type: `Object|Array<Object>`
-Default: `{ preset: 'default' }`
->>>>>>> dd58df1ace2a66632d1b7affde6cd934d0276bd3
 
 Cssnano 优化 [选项](https://cssnano.co/docs/optimisations).
 
-#### `Object`
+#### `Object` {#object}
 
 ```js
 module.exports = {
@@ -319,16 +294,12 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
+#### `Array` {#array}
+
+如果 `minify` 配置项传入一个数组，`minimizerOptions` 也必须是个数组。
+`miniify` 数组中的函数索引对应于 `minimizerOptions` 数组中具有相同索引的 options 对象。
+
 #### `processorOptions` {#processoroptions}
-=======
-#### `Array`
-
-If an array of functions is passed to the `minify` option, the `minimizerOptions` must also be an array.
-The function index in the `minify` array corresponds to the options object with the same index in the `minimizerOptions` array.
-
-#### `processorOptions`
->>>>>>> dd58df1ace2a66632d1b7affde6cd934d0276bd3
 
 类型：`Object`
 默认值：`{ to: assetName, from: assetName }`

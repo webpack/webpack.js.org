@@ -732,17 +732,14 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `noErrorOnMissing` {#noerroronmissing}
-=======
-#### `transformAll`
+#### `transformAll` {#transformall}
 
-Type: `Function`
-Default: `undefined`
+类型：`Function`
+默认值：`undefined`
 
-Allows you to modify the contents of multiple files and save the result to one file.
+允许你去更改多个文件的内容，并将结果保存到一个文件中。
 
-> ℹ️ The `to` option must be specified and point to a file. It is allowed to use only `[contenthash]` and `[fullhash]` template strings.
+> ℹ️ 必须指定 `to` 配置项为一个文件。只允许使用 `[contenthash]` 与 `[fullhash]` 模板字符串。
 
 **webpack.config.js**
 
@@ -754,11 +751,11 @@ module.exports = {
         {
           from: "src/**/*.txt",
           to: "dest/file.txt",
-          // The `assets` argument is an assets array for the pattern.from ("src/**/*.txt")
+          // `assets` 参数是一个符合 pattern.from ("src/**/*.txt") 静态资源数组。
           transformAll(assets) {
             const result = assets.reduce((accumulator, asset) => {
-              // The asset content can be obtained from `asset.source` using `source` method.
-              // The asset content is a [`Buffer`](https://nodejs.org/api/buffer.html) object, it could be converted to a `String` to be processed using `content.toString()`
+              // 静态资源内容可以使用 `source` 方法从 `asset.source` 中获取。
+              // 静态资源内容是一个 [`Buffer`](https://nodejs.org/api/buffer.html) 对象，可以使用 `content.toString()` 将其转为 `String`
               const content = asset.data;
 
               accumulator = `${accumulator}${content}\n`;
@@ -774,8 +771,7 @@ module.exports = {
 };
 ```
 
-### `noErrorOnMissing`
->>>>>>> dd58df1ace2a66632d1b7affde6cd934d0276bd3
+### `noErrorOnMissing` {#noerroronmissing}
 
 Type: `Boolean`
 Default: `false`
@@ -1147,10 +1143,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## Contributing {#contributing}
-=======
-##### `yarn workspaces` and `monorepos`
+##### `yarn workspaces` and `monorepos` {yarnworkspacesandmonorepos}
 
 When using `yarn workspaces` or` monorepos`, relative copy paths from node_modules can be broken due to the way packages are hoisting.
 To avoid this, should explicitly specify where to copy the files from using `require.resolve`.
@@ -1174,8 +1167,7 @@ module.exports = {
 };
 ```
 
-## Contributing
->>>>>>> dd58df1ace2a66632d1b7affde6cd934d0276bd3
+## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
