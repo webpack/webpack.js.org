@@ -16,26 +16,26 @@ repo: https://github.com/webpack-contrib/imports-loader
 
 
 
-The imports loader allows you to use modules that depend on specific global variables.
+imports loader 允许使用依赖于特定全局变量的模块。
 
-This is useful for third-party modules that rely on global variables like `$` or `this` being the `window` object.
-The imports loader can add the necessary `require('whatever')` calls, so those modules work with webpack.
+这对于依赖 `window` 对象下的全局变量（比如 `$` 或 `this` ）的第三方模块非常有用。
+imports loader 可以添加必要的 `require('whatever')` 调用，因此这些模块可以与 webpack 一起使用。
 
-For further hints on compatibility issues, check out [Shimming](/guides/shimming/) of the official docs.
+有关兼容性问题的进一步提示，可以查看官方文档中的 [Shimming](/guides/shimming/)。
 
-> ⚠ By default loader generate ES module named syntax.
+> ⚠ 默认情况下，loader 生成具名 ES module。
 
-> ⚠ Be careful, existing imports (`import`/`require`) in the original code and importing new values can cause failure.
+> ⚠ 请注意，在原始代码中已存在的 imports（`import`/`require`）与引入新值会导致失败。
 
-## Getting Started {#getting-started}
+## 快速开始 {#getting-started}
 
-To begin, you'll need to install `imports-loader`:
+首先，你需要安装 `imports-loader`：
 
 ```console
 $ npm install imports-loader --save-dev
 ```
 
-Given you have this file:
+如果你有这个文件：
 
 **example.js**
 
@@ -43,23 +43,23 @@ Given you have this file:
 $('img').doSomeAwesomeJqueryPluginStuff();
 ```
 
-Then you can inject the `jquery` value into the module by configuring the `imports-loader` using two approaches.
+然后你可以使用两个方法来配置 `imports-loader`，就可以把 `jquery` 值注入到模块中。
 
-### Inline {#inline}
+### 内联 {#inline}
 
-The `|` or `%20` (space) allow to separate the `syntax`, `moduleName`, `name` and `alias` of import.
-The documentation and syntax examples can be read [here](#syntax).
+可以使用 `|` 或者 `%20`（空格）分隔 import 语句中的 `syntax`、`moduleName`、`name` 和 `alias`。
+可以在 [这里](#syntax) 获取文档和语法示例。
 
-> ⚠ `%20` is space in a query string, because you can't use spaces in URLs
+> ⚠ `%20` 是查询字符串中的空格，因为你不能在 URL 中使用空格。
 
 ```js
-// Alternative syntax:
+// 可供选择的语法：
 //
 // import myLib from 'imports-loader?imports=default%20jquery%20$!./example.js';
 //
-// `%20` is space in a query string, equivalently `default jquery $`
+// `%20` 是查询字符串中的空格，相当于 `default jquery $`
 import myLib from 'imports-loader?imports=default|jquery|$!./example.js';
-// Adds the following code to the beginning of example.js:
+// 在 example.js 的开头添加如下代码：
 //
 // import $ from "jquery";
 //
@@ -70,8 +70,8 @@ import myLib from 'imports-loader?imports=default|jquery|$!./example.js';
 
 ```js
 import myLib from 'imports-loader?imports=default|jquery|$,angular!./example.js';
-// `|` is separator in a query string, equivalently `default|jquery|$` and `angular`
-// Adds the following code to the beginning of example.js:
+// `|` 是查询字符串中的分隔符，相当于 `default|jquery|$` 与 `angular`
+// 在 example.js 的开头添加如下代码：
 //
 // import $ from "jquery";
 // import angular from "angular";
@@ -83,8 +83,8 @@ import myLib from 'imports-loader?imports=default|jquery|$,angular!./example.js'
 
 ```js
 import myLib from 'imports-loader?imports=named|library|myMethod,angular!./example.js';
-// `|` is separator in a query string, equivalently `named|library|myMethod` and `angular`
-// Adds the following code to the beginning of example.js:
+// `|` 是查询字符串中的分隔符，相当于 `named|library|myMethod` 与 `angular`
+// 在 example.js 的开头添加如下代码：
 //
 // import { myMethod } from "library";
 // import angular from "angular";
@@ -96,8 +96,8 @@ import myLib from 'imports-loader?imports=named|library|myMethod,angular!./examp
 
 ```js
 const myLib = require(`imports-loader?type=commonjs&imports=single|jquery|$,angular!./example.js`);
-// `|` is separator in a query string, equivalently `single|jquery|$` and `angular`
-// Adds the following code to the beginning of example.js:
+// `|` 是查询字符串中的分隔符，相当于 `single|jquery|$` 与 `angular`
+// 在 example.js 的开头添加如下代码：
 //
 // var $ = require("jquery");
 // var angular = require("angular");
@@ -109,8 +109,8 @@ const myLib = require(`imports-loader?type=commonjs&imports=single|jquery|$,angu
 
 ```js
 const myLib = require(`imports-loader?type=commonjs&imports=single|myLib|myMethod&wrapper=window&!./example.js`);
-// `|` is separator in a query string, equivalently `single|myLib|myMethod` and `angular`
-// Adds the following code to the example.js:
+// `|` 是查询字符串中的分隔符，相当于 `single|myLib|myMethod` 与 `angular`
+// 在 example.js 中添加如下代码：
 //
 // const myMethod = require('myLib');
 //
@@ -123,7 +123,7 @@ const myLib = require(`imports-loader?type=commonjs&imports=single|myLib|myMetho
 
 ```js
 import myLib from 'imports-loader?additionalCode=var%20myVariable%20=%20false;!./example.js';
-// Adds the following code to the beginning of example.js:
+// 在 example.js 的开头添加如下代码：
 //
 // var myVariable = false;
 //
@@ -132,7 +132,7 @@ import myLib from 'imports-loader?additionalCode=var%20myVariable%20=%20false;!.
 // ...
 ```
 
-### Using Configuration {#using-configuration}
+### 使用配置项 {#using-configuration}
 
 **webpack.config.js**
 
@@ -141,7 +141,7 @@ module.exports = {
   module: {
     rules: [
       {
-        // You can use `regexp`
+        // 你可以使用 `regexp`
         // test: /example\.js/$
         test: require.resolve('example.js'),
         use: [
@@ -170,7 +170,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成输出：
 
 ```js
 import $ from 'jquery';
@@ -181,25 +181,25 @@ import 'lib_5';
 import angular from 'angular';
 ```
 
-And run `webpack` via your preferred method.
+然后用你喜欢的方式运行 `webpack`
 
-## Options {#options}
+## 配置项 {#options}
 
 |                  Name                   |                   Type                    |   Default   | Description                                                            |
 | :-------------------------------------: | :---------------------------------------: | :---------: | :--------------------------------------------------------------------- |
-|           **[`type`](#type)**           |                `{String}`                 |  `module`   | Format of generated imports                                            |
-|        **[`imports`](#imports)**        | `{String\|Object\|Array<String\|Object>}` | `undefined` | List of imports                                                        |
-|        **[`wrapper`](#wrapper)**        |        `{Boolean\|String\|Object}`        | `undefined` | Closes the module code in a function (`(function () { ... }).call();`) |
-| **[`additionalCode`](#additionalcode)** |                `{String}`                 | `undefined` | Adds custom code                                                       |
+|           **[`type`](#type)**           |                `{String}`                 |  `module`   | 生成 import 的格式                                            |
+|        **[`imports`](#imports)**        | `{String\|Object\|Array<String\|Object>}` | `undefined` | import 列表                                                        |
+|        **[`wrapper`](#wrapper)**        |        `{Boolean\|String\|Object}`        | `undefined` | 关闭函数中的模块代码 (`(function () { ... }).call();`) |
+| **[`additionalCode`](#additionalcode)** |                `{String}`                 | `undefined` | 添加自定义代码                                                       |
 
 ### `type` {#type}
 
-Type: `String`
-Default: `module`
+类型：`String`
+默认值：`module`
 
-Format of generated exports.
+生成 exports 的格式。
 
-Possible values - `commonjs` (CommonJS module syntax) and `module` (ES module syntax).
+可选值 - `commonjs` （CommonJS module 语法） 和 `module` （ES module 语法）。
 
 #### `commonjs` {#commonjs}
 
@@ -223,7 +223,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成输出：
 
 ```js
 var Foo = require('Foo');
@@ -254,7 +254,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成输出：
 
 ```js
 import Foo from 'Foo';
@@ -266,57 +266,57 @@ import Foo from 'Foo';
 
 ### `imports` {#imports}
 
-Type: `String|Object|Array<String|Object>`
-Default: `undefined`
+类型：`String|Object|Array<String|Object>`
+默认值：`undefined`
 
-List of imports.
+import 列表。
 
 #### `String` {#string}
 
-Allows to use a string to describe an export.
+允许使用字符串描述 export。
 
 ##### `Syntax` {#syntax}
 
-The `|` or `%20` (space) allow to separate the `syntax`, `moduleName`, `name` and `alias` of import.
+使用 `|` 或者 `%20`（空格）分隔 import 中的 `syntax`、`moduleName`、`name` 与 `alias`。
 
-String syntax - `[[syntax] [moduleName] [name] [alias]]` or `[[syntax]|[moduleName]|[name]|[alias]]`, where:
+字符串语法 - `[[syntax] [moduleName] [name] [alias]]` 或者 `[[syntax]|[moduleName]|[name]|[alias]]`，其含义为：
 
-- `[syntax]` (**may be omitted**):
+- `[syntax]` (**可以被省略**):
 
-  - if `type` is `module`- can be `default`, `named`, `namespace` or `side-effects`, the default value is `default`.
-  - if `type` is `commonjs`- can be `single`, `multiple` or `pure`, the default value is `single`.
+  - 如果 `type` 值为 `module`- 可以是 `default`、`named`、`namespace` 或者 `side-effects`，默认值为 `default`。
+  - 如果 `type` 值为 `commonjs`- 可以是 `single`、`multiple` 或者 `pure`，默认值为 `single`。
 
-- `[moduleName]` - name of an imported module (**required**)
-- `[name]` - name of an imported value (**required**)
-- `[alias]` - alias of an imported value (**may be omitted**)
+- `[moduleName]` - 被导入模块的名称(**必填**)
+- `[name]` - 被导入值的名称(**必填**)
+- `[alias]` - 被导入值的别名(**可以被省略**)
 
-Examples:
+示例：
 
-If type `module`:
+如果 type 值为 `module`：
 
-- `[Foo]` - generates `import Foo from "Foo";`.
-- `[default Foo]` - generates `import Foo from "Foo";`.
-- `[default ./my-lib Foo]` - generates `import Foo from "./my-lib";`.
-- `[named Foo FooA]` - generates `import { FooA } from "Foo";`.
-- `[named Foo FooA Bar]` - generates `import { FooA as Bar } from "Foo";`.
-- `[namespace Foo FooA]` - generates `import * as FooA from "Foo";`.
-- `[side-effects Foo]` - generates `import "Foo";`.
+- `[Foo]` - 生成 `import Foo from "Foo";`.
+- `[default Foo]` - 生成 `import Foo from "Foo";`.
+- `[default ./my-lib Foo]` - 生成 `import Foo from "./my-lib";`.
+- `[named Foo FooA]` - 生成 `import { FooA } from "Foo";`.
+- `[named Foo FooA Bar]` - 生成 `import { FooA as Bar } from "Foo";`.
+- `[namespace Foo FooA]` - 生成 `import * as FooA from "Foo";`.
+- `[side-effects Foo]` - 生成 `import "Foo";`.
 
-If type `commonjs`:
+如果 type 值为 `commonjs`：
 
-- `[Foo]` - generates `const Foo = require("Foo");`.
-- `[single Foo]` - generates `const Foo = require("Foo");`.
-- `[single ./my-lib Foo]` - generates `const Foo = require("./my-lib");`.
-- `[multiple Foo FooA Bar]` - generates `const { FooA: Bar } = require("Foo");`.
-- `[pure Foo]` - generates `require("Foo");`.
+- `[Foo]` - 生成 `const Foo = require("Foo");`.
+- `[single Foo]` - 生成 `const Foo = require("Foo");`.
+- `[single ./my-lib Foo]` - 生成 `const Foo = require("./my-lib");`.
+- `[multiple Foo FooA Bar]` - 生成 `const { FooA: Bar } = require("Foo");`.
+- `[pure Foo]` - 生成 `require("Foo");`.
 
-> ⚠ You need to set `type: "commonjs"` to use `single`, `multiple` and `pure` syntaxes.
+> ⚠ 你需要设置 `type: "commonjs"` 以使用 `single`、`multiple` 与 `pure` 语法。
 
-> ⚠ Aliases can't be used together with `default`, `namespace`, `side-effects`, `single` and `pure` syntaxes.
+> ⚠ Aliases 不能与 `default`、`namespace`、`side-effects`、`single` 与 `pure` 语法同时使用。
 
-###### Examples {#examples}
+###### 示例 {#examples}
 
-###### ES Module Default Import {#es-module-default-import}
+###### ES Module 默认导入 {#es-module-default-import}
 
 **webpack.config.js**
 
@@ -336,7 +336,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成输出：
 
 ```js
 import myName from 'lib';
@@ -367,7 +367,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成输出：
 
 ```js
 var myName = require('lib');
@@ -379,22 +379,22 @@ var myName = require('lib');
 
 #### `Object` {#object}
 
-Allows to use an object to describe an import.
+允许使用一个对象来描述 import。
 
-Properties:
+属性：
 
 - `syntax`:
 
-  - if `type` is `module`- can be `default`, `named`, `namespace` or `side-effects`
-  - if `type` is `commonjs`- can be `single`, `multiple` or `pure`
+  - 如果 `type` 值为 `module`- 可以是 `default`、`named`、`namespace` 或 `side-effects`
+  - 如果 `type` 值为 `commonjs`- 可以是 single`、`multiple` 或 `pure`
 
-- `moduleName` - name of an imported module (**required**)
-- `name` - name of an imported value (**required**)
-- `alias` - alias of an imported value (**may be omitted**)
+- `moduleName` - 被导入模块的名称 (**必填**)
+- `name` - 被导入值的名称 (**必填**)
+- `alias` - 被导入值的别名 (**可以被省略**)
 
-> ⚠ Alias can't be used together with `default`, `namespace`, `side-effects`, `single` and `pure` syntaxes.
+> ⚠ Alias 不能与 `default`、`namespace`、`side-effects`、`single` 与 `pure` 语法同时使用。
 
-##### Examples {#examples}
+##### 示例 {#examples}
 
 **webpack.config.js**
 
@@ -423,7 +423,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成输出：
 
 ```js
 import { lib2_method_2 as lib_2_method_2_alias } from 'lib_2';
@@ -435,10 +435,10 @@ import { lib2_method_2 as lib_2_method_2_alias } from 'lib_2';
 
 #### `Array` {#array}
 
-Allow to specify multiple imports.
-Each item can be a [`string`](https://github.com/webpack-contrib/imports-loader#string) or an [`object`](https://github.com/webpack-contrib/imports-loader#object).
+允许指定多个导入。
+每一项可以为 [`string`](https://github.com/webpack-contrib/imports-loader#string) 或者 [`object`](https://github.com/webpack-contrib/imports-loader#object)。
 
-##### Examples {#examples}
+##### 示例 {#examples}
 
 **webpack.config.js**
 
@@ -476,7 +476,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成输出：
 
 ```js
 import angular from 'angular';
@@ -493,12 +493,12 @@ import 'lib_4';
 
 ### `wrapper` {#wrapper}
 
-Type: `Boolean|String|Object`
-Default: `undefined`
+类型：`Boolean|String|Object`
+默认值：`undefined`
 
-Closes the module code in a function with a given `thisArg` and `args` (`(function () { ... }).call();`).
+用给定的 `thisArg` 和 `args` 关闭函数中的模块代码 (`(function () { ... }).call();`)。
 
-> ⚠ Do not use this option if source code contains ES module import(s)
+> ⚠ 如果源码中包含 ES module import 的话，请不要使用该配置。
 
 #### `Boolean` {#boolean}
 
@@ -528,7 +528,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成输出：
 
 ```js
 import $ from 'jquery';
@@ -568,7 +568,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成输出：
 
 ```js
 import $ from 'jquery';
@@ -611,7 +611,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成输出：
 
 ```js
 import $ from 'jquery';
@@ -657,7 +657,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成输出：
 
 ```js
 import $ from 'jquery';
@@ -671,14 +671,14 @@ import $ from 'jquery';
 
 ### `additionalCode` {#additionalcode}
 
-Type: `String`
-Default: `undefined`
+类型：`String`
+默认值：`undefined`
 
-Adds custom code as a preamble before the module's code.
+在模块代码之前添加自定义代码作为前导。
 
 ##### Examples {#examples}
 
-###### Define custom variable {#define-custom-variable}
+###### 定义自定义变量 {#define-custom-variable}
 
 **webpack.config.js**
 
@@ -706,7 +706,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成输出：
 
 ```js
 import $ from 'jquery';
@@ -747,7 +747,7 @@ module.exports = {
 };
 ```
 
-Generate output:
+生成输出：
 
 ```js
 import $ from 'jquery';
@@ -761,9 +761,9 @@ var define = false; /* Disable AMD for misbehaving libraries */
 
 ## Contributing {#contributing}
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+如果你还没有阅读，请花一点时间阅读我们的贡献指南。
 
-[CONTRIBUTING](https://github.com/webpack-contrib/imports-loader/blob/master/.github/CONTRIBUTING.md)
+[贡献指南](https://github.com/webpack-contrib/imports-loader/blob/master/.github/CONTRIBUTING.md)
 
 ## License {#license}
 
