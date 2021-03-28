@@ -521,13 +521,14 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 
 ## Environment Variables
 
-| Environment Variable            | Description                                                         | Available in `env` |
-| ------------------------------- | ------------------------------------------------------------------- | ------------------ |
-| `WEBPACK_SERVE`                 | `true` if `serve\|s` is being used.                                 | yes                |
-| `WEBPACK_BUILD`                 | `true` if `build\|bundle\|b` is being used.                         | yes                |
-| `WEBPACK_WATCH`                 | `true` if `--watch\|watch\|w` is being used.                        | yes                |
-| `WEBPACK_PACKAGE`               | Use a custom webpack version in CLI                                 | no                 |
-| `WEBPACK_CLI_SKIP_IMPORT_LOCAL` | when `true` it will skip using the local instance of `webpack-cli`. | no                 |
+| Environment Variable                | Description                                                         | Available in `env` |
+| ----------------------------------- | ------------------------------------------------------------------- | ------------------ |
+| `WEBPACK_SERVE`                     | `true` if `serve\|s` is being used.                                 | yes                |
+| `WEBPACK_BUILD`                     | `true` if `build\|bundle\|b` is being used.                         | yes                |
+| `WEBPACK_WATCH`                     | `true` if `--watch\|watch\|w` is being used.                        | yes                |
+| `WEBPACK_PACKAGE`                   | Use a custom webpack version in CLI                                 | no                 |
+| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`     | when `true` it will skip using the local instance of `webpack-cli`. | no                 |
+| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG` | when `true` it will force load the ESM config.                      | no                 |
 
 You can use the above environment variables inside your webpack configuration:
 
