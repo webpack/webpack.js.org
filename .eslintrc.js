@@ -10,9 +10,6 @@ module.exports = {
     'cypress/globals': true,
   },
   plugins: ['markdown', 'cypress', 'react-hooks'],
-  globals: {
-    __DEV__: true,
-  },
   rules: {
     'no-console': 'off',
     semi: ['error', 'always'],
@@ -30,7 +27,20 @@ module.exports = {
   overrides: [
     { files: ['src/**/*.jsx'] }, // eslint would lint .js only by default
     {
-      files: ['**/*.{md,mdx}'],
+      files: ['**/*.mdx'],
+      extends: ['plugin:mdx/recommended'],
+      globals: {
+        Badge: true,
+      },
+      rules: {
+        semi: ['off'],
+      },
+      settings: {
+        'mdx/code-blocks': true,
+      },
+    },
+    {
+      files: ['**/*.md'],
       processor: 'markdown/markdown',
     },
     {

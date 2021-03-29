@@ -2,28 +2,14 @@
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter, Route } from 'react-router-dom';
 
-// Import Utilities
-import { getPageTitle } from './utilities/content-utils';
-
 // Import Components
 import Site from './components/Site/Site';
 import PrintScript from './components/Print/PrintScript';
 import StatsScript from './components/Stats/StatsScript';
 
-// Import Images
-import Favicon from './favicon.ico';
-import Logo from './assets/logo-on-white-bg.svg';
-import OgImage from './assets/icon-pwa-512x512.png';
+import { HelmetProvider } from 'react-helmet-async';
 
-// Define bundles (previously used `Object.values(locals.assets)`) but
-// can't retrieve from there anymore due to separate compilation.
-const bundles = ['/vendor.bundle.js', '/index.bundle.js'];
-
-// As github pages uses trailing slash, we need to provide it to canonicals for consistency
-// between canonical href and final url served by github pages.
-function enforceTrailingSlash(url) {
-  return url.replace(/\/?$/, '/');
-}
+import assets from '../dist/prod-assets-manifest.json';
 
 function isPrintPage(url) {
   return url.includes('/printable');
@@ -31,6 +17,7 @@ function isPrintPage(url) {
 
 // Export method for `SSGPlugin`
 export default (locals) => {
+<<<<<<< HEAD
   let { assets } = locals.webpackStats.compilation;
 
   let title = 'webpack 官方中文文档';
@@ -88,6 +75,13 @@ export default (locals) => {
           <meta name="msapplication-TileImage" content="/icon_150x150.png" />
           <meta name="msapplication-TileColor" content="#465e69" />
         </head>
+=======
+  const helmetContext = {};
+
+  const renderedHtml = ReactDOMServer.renderToString(
+    <HelmetProvider context={helmetContext}>
+      <StaticRouter location={locals.path} context={{}}>
+>>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
         <body>
           <div id="root">
             <Route
@@ -95,6 +89,8 @@ export default (locals) => {
               render={(props) => (
                 <Site
                   {...props}
+                  // note that here we use require instead of import
+                  // i.e., can't just reuse App.jsx
                   import={(path) => require(`./content/${path}`)}
                 />
               )}
@@ -103,15 +99,21 @@ export default (locals) => {
           {isPrintPage(locals.path) ? (
             <PrintScript />
           ) : (
-            bundles.map((path) => <script key={path} src={path} />)
+            assets.js.map((path) => <script key={path} src={path} />)
           )}
           {
             <StatsScript/>
           }
         </body>
-      </html>
-    </StaticRouter>
+      </StaticRouter>
+    </HelmetProvider>
   );
 
-  return '<!DOCTYPE html>' + renderedHtml;
+  const { helmet } = helmetContext;
+
+  const css = assets.css
+    .map((path) => `<link rel="stylesheet" href=${`${path}`} />`)
+    .join('');
+
+  return `<!DOCTYPE html><html ${helmet.htmlAttributes.toString()}><head>${helmet.title.toString()}${helmet.meta.toString()}${helmet.link.toString()}${css}</head>${renderedHtml}`;
 };

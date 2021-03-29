@@ -1,5 +1,10 @@
 ---
+<<<<<<< HEAD
 title: 起步
+=======
+title: Getting Started
+description: Learn how to bundle a JavaScript application with webpack 5.
+>>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
 sort: 1
 contributors:
   - bebraw

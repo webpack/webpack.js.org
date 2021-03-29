@@ -139,7 +139,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 要将这个选项与 CLI 一起使用，请将 `--allowed-hosts` 的转换为用逗号分割的字符串并传入。
+=======
+To use this option with the CLI pass the `--allowed-hosts` as following:
+>>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
 
 ```bash
 npx webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com --allowed-hosts host2.com

@@ -38,12 +38,18 @@ module.exports = {
     generator: {
       asset: {
         // Generator options for asset modules
+
+        // Customize publicPath for asset modules, available since webpack 5.28.0
+        publicPath: 'assets/',
       },
       'asset/inline': {
         // Generator options for asset/inline modules
       },
       'asset/resource': {
         // Generator options for asset/resource modules
+
+        // Customize publicPath for asset/resource modules, available since webpack 5.28.0
+        publicPath: 'assets/',
       },
       javascript: {
         // No generator options are supported for this module type yet
@@ -557,7 +563,13 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `Rule.generator.dataUrl` {#rulegeneratordataurl}
+=======
+## Rule.generator
+
+### Rule.generator.dataUrl
+>>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
 
 `object = { encoding string = 'base64' | false, mimetype string = undefined | false }` `function (content, { filename, module }) => string`
 
@@ -611,7 +623,36 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `Rule.generator.filename` {#rulegeneratorfilename}
+=======
+### Rule.generator.emit
+
+Opt out of writing assets from [Asset Modules](/guides/asset-modules/), you might want to use it in Server side rendering cases.
+
+- Type: `boolean = true`
+- Available: <Badge text='5.25.0+' />
+- Example:
+
+  ```js
+  module.exports = {
+    // …
+    module: {
+      rules: [
+        {
+          test: /\.png$/i,
+          type: 'asset/resource',
+          generator: {
+            emit: false,
+          },
+        },
+      ],
+    },
+  };
+  ```
+
+### Rule.generator.filename
+>>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
 
 对某些特定的规则而言与 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 相同. 覆盖了 `output.assetModuleFilename` 选项并且仅与 `asset` 和 `asset/resource` 模块类型一同起作用。
 
@@ -641,7 +682,38 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `Rule.resource` {#ruleresource}
+=======
+### Rule.generator.publicPath
+
+Customize `publicPath` for specific Asset Modules.
+
+- Type: `string | ((pathData: PathData, assetInfo?: AssetInfo) => string)`
+- Available: <Badge text='5.28.0+' />
+
+```js
+module.exports = {
+  //...
+  output: {
+    publicPath: 'static/',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.png$/i,
+        type: 'asset/resource',
+        generator: {
+          publicPath: 'assets/',
+        },
+      },
+    ],
+  },
+};
+```
+
+## `Rule.resource`
+>>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
 
 [`条件`](#条件)会匹配 resource。在 [`Rule` 条件](#rule-conditions) 中查阅详情。
 
@@ -1000,8 +1072,12 @@ module.exports = {
 
 **`function(info)`**
 
+<<<<<<< HEAD
 `UseEntry` 也可以是一个函数，接受对象参数，描述被加载的模块，而且必须返回一个参数对象。
 这可用于按模块更改 loader 选项。
+=======
+A `UseEntry` can also be a function which receives the object argument describing the module being loaded, and must return a non-function `UseEntry` object. This can be used to vary the loader options on a per-module basis.
+>>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
 
 `info` 对象参数有以下的字段：
 

@@ -1905,7 +1905,30 @@ T> 使用一些缩进会使 bundle 看起来更美观，但会导致多行字符
 
 T> 通常，你不需要修改 `output.sourcePrefix`。
 
+<<<<<<< HEAD
 ## `output.strictModuleExceptionHandling` {#outputstrictmoduleexceptionhandling}
+=======
+## output.strictModuleErrorHandling
+
+Handle error in module loading as per EcmaScript Modules spec at a performance cost.
+
+- Type: `boolean`
+- Available: 5.25.0+
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    strictModuleErrorHandling: true,
+  },
+};
+```
+
+## output.strictModuleExceptionHandling
+
+W> Deprecated, use
+[`output.strictModuleErrorHandling`](#outputstrictmoduleerrorhandling) instead.
+>>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
 
 `boolean = false`
 

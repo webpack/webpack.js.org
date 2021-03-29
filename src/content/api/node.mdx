@@ -86,10 +86,16 @@ T> 你也可以为 `webpack` 函数提供一个配置数组。更多详细信息
 完成之后，执行传入的的 `callback` 函数。
 最终记录下来的概括信息（stats）和错误（errors），都应在这个 callback 函数中获取。
 
+<<<<<<< HEAD
 W> 这个 API 一次仅支持一个编译。当使用 `run` 时，
 再次调用 `run` 或 `watch` 之前需等待它完成。
 当使用 `watch` 时，调用 `close`，并等待它完成后，
 然后才能再次调用 `run` 或 `watch`。并发编译将破坏输出文件。
+=======
+W> The API only supports a single concurrent compilation at a time. When using `run` or
+`watch`, call `close` and wait for it to finish before calling `run` or `watch`
+again. Concurrent compilations will corrupt the output files.
+>>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
 
 ## 执行（Run） {#run}
 
@@ -105,10 +111,20 @@ const compiler = webpack({
 
 compiler.run((err, stats) => { // [Stats Object](#stats-object)
   // ...
+  
+  compiler.close((closeErr) => {
+    // ...
+  });
 });
 ```
 
+<<<<<<< HEAD
 ## 监听(Watching) {#watching}
+=======
+W> Don't forget to close the compiler, so that low-priority work (like persistent caching) have the opportunity to complete. 
+
+## Watching
+>>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
 
 调用 `watch` 方法会触发 webpack 执行，但之后会监听变更（很像 CLI 命令: `webpack --watch`），
 一旦 webpack 检测到文件变更，就会重新执行编译。
@@ -149,7 +165,7 @@ W> 文件系统不正确的问题，可能会对单次修改触发多次构建�
 调用该方法将会结束监听:
 
 ```js
-watching.close(() => {
+watching.close((closeErr) => {
   console.log('Watching Ended.');
 });
 ```
