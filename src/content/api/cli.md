@@ -528,7 +528,7 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 | `WEBPACK_PACKAGE`                   | Use a custom webpack version in CLI.                                |
 
 ```bash
-WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true webpack --config ./webpack.config.esm
+WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
 ```
 
 ## ENV Environment Variables
