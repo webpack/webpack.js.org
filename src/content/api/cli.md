@@ -519,7 +519,19 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 | `1`       | Errors from webpack                                |
 | `2`       | Configuration/options problem or an internal error |
 
-## Environment Variables
+## CLI Environment Variables
+
+| Environment Variable                | Description                                                         |
+| ----------------------------------- | ------------------------------------------------------------------- |
+| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`     | when `true` it will skip using the local instance of `webpack-cli`. |
+| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG` | when `true` it will force load the ESM config.                      |
+| `WEBPACK_PACKAGE`                   | Use a custom webpack version in CLI.                                |
+
+```bash
+WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
+```
+
+## ENV Environment Variables
 
 | Environment Variable | Description                                  |
 | -------------------- | -------------------------------------------- |
