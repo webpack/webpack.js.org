@@ -466,6 +466,29 @@ Read in which [`mode`](/configuration/mode/) webpack is running.
 
 Possible values: `'production'`, `'development'`, `'none'`
 
+### this.utils
+
+<Badge text="5.27.0+" />
+
+Access to `contextify` and `absolutify` utilities.
+
+- `contextify`: Return a new request string avoiding absolute paths when possible.
+- `absolutify`: Return a new request string using absolute paths when possible.
+
+**my-sync-loader.js**
+
+```js
+module.exports = function (content) {
+  this.utils.contextify(
+    this.context,
+    this.utils.absolutify(this.context, './index.js')
+  );
+  this.utils.absolutify(this.context, this.resourcePath);
+  // …
+  return content;
+};
+```
+
 ## Webpack specific properties
 
 The loader interface provides all module relate information. However in rare cases you might need access to the compiler api itself.
