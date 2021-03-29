@@ -265,7 +265,7 @@ W> 在 webpack 4 中其默认值为 `true`。
 
 W> 小心！resource 是文件的 _解析_ 路径，这意味着符号链接的资源是真正的路径，_而不是_ 符号链接位置。
 在使用工具来符号链接包的时候（如 `npm link`）比较好记，像 `/node_modules/` 等常见条件可能会不小心错过符号链接的文件。
-注意，可以通过 [`resolve.symlinks`](/configuration/resolve#resolve-symlinks) 
+注意，可以通过 [`resolve.symlinks`](/configuration/resolve#resolve-symlinks)
 关闭符号链接解析（以便将资源解析为符号链接路径）。
 
 ### Rule 结果 {#rule-results}
@@ -459,7 +459,7 @@ T> 详情请参阅 [`嵌套规则`](#nested-rules)。
 
 ## `Rule.options` / `Rule.query` {#ruleoptions--rulequery}
 
-`Rule.options` 和 `Rule.query` 是 `Rule.use: [ { options } ]` 的简写。详细请查看 [`Rule.use`](#rule-use) 
+`Rule.options` 和 `Rule.query` 是 `Rule.use: [ { options } ]` 的简写。详细请查看 [`Rule.use`](#rule-use)
 和 [`UseEntry.options`](#useentry)。
 
 W> 由于需要支持 `Rule.options`，`UseEntry.options` 以及 `Rule.use`，因此 `Rule.query` 已废弃。
@@ -563,13 +563,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `Rule.generator.dataUrl` {#rulegeneratordataurl}
-=======
-## Rule.generator
+## Rule.generator {#rulegenerator}
 
-### Rule.generator.dataUrl
->>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
+### Rule.generator.dataUrl {#rulegeneratordataurl}
 
 `object = { encoding string = 'base64' | false, mimetype string = undefined | false }` `function (content, { filename, module }) => string`
 
@@ -623,16 +619,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `Rule.generator.filename` {#rulegeneratorfilename}
-=======
-### Rule.generator.emit
+### Rule.generator.emit {#rulegeneratoremit}
 
-Opt out of writing assets from [Asset Modules](/guides/asset-modules/), you might want to use it in Server side rendering cases.
+配置不从 [Asset Modules](/guides/asset-modules/) 写入资源文件, 你可能会在 SSR 中使用它。
 
-- Type: `boolean = true`
-- Available: <Badge text='5.25.0+' />
-- Example:
+- 类型：`boolean = true`
+- 可用版本：<Badge text='5.25.0+' />
+- 示例：
 
   ```js
   module.exports = {
@@ -651,8 +644,7 @@ Opt out of writing assets from [Asset Modules](/guides/asset-modules/), you migh
   };
   ```
 
-### Rule.generator.filename
->>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
+### Rule.generator.filename {#rulegeneratorfilename}
 
 对某些特定的规则而言与 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 相同. 覆盖了 `output.assetModuleFilename` 选项并且仅与 `asset` 和 `asset/resource` 模块类型一同起作用。
 
@@ -682,15 +674,12 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `Rule.resource` {#ruleresource}
-=======
-### Rule.generator.publicPath
+### Rule.generator.publicPath {#rulegeneratorpublichpath}
 
-Customize `publicPath` for specific Asset Modules.
+对指定的资源模式指定 `publicPath`。
 
-- Type: `string | ((pathData: PathData, assetInfo?: AssetInfo) => string)`
-- Available: <Badge text='5.28.0+' />
+- 类型：`string | ((pathData: PathData, assetInfo?: AssetInfo) => string)`
+- 可用版本：<Badge text='5.28.0+' />
 
 ```js
 module.exports = {
@@ -712,8 +701,7 @@ module.exports = {
 };
 ```
 
-## `Rule.resource`
->>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
+## `Rule.resource` {#ruleresource}
 
 [`条件`](#条件)会匹配 resource。在 [`Rule` 条件](#rule-conditions) 中查阅详情。
 
@@ -942,7 +930,7 @@ module.exports = {
 };
 ```
 
-当用该配置创建一个包，`console.log(footer)` 会输出 'default footer'。让我们为 `.js` 文件设置 `Rule.resolve`，以及 
+当用该配置创建一个包，`console.log(footer)` 会输出 'default footer'。让我们为 `.js` 文件设置 `Rule.resolve`，以及
 `footer` 作为 `overridden.js` 的别名。
 
 **webpack.js.org**
@@ -1072,12 +1060,7 @@ module.exports = {
 
 **`function(info)`**
 
-<<<<<<< HEAD
-`UseEntry` 也可以是一个函数，接受对象参数，描述被加载的模块，而且必须返回一个参数对象。
-这可用于按模块更改 loader 选项。
-=======
-A `UseEntry` can also be a function which receives the object argument describing the module being loaded, and must return a non-function `UseEntry` object. This can be used to vary the loader options on a per-module basis.
->>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
+`UseEntry` 也可以是一个函数，接受对象参数，描述被加载的模块，而且必须返回一个参数对象。这可用于按模块更改 loader 选项。
 
 `info` 对象参数有以下的字段：
 

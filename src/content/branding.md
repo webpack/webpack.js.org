@@ -12,11 +12,7 @@ contributors:
 
 ## 名称 {#the-name}
 
-<<<<<<< HEAD
-webpack 应当**总是**以小写字母书写，即使在一句话的起始位置也是如此。
-=======
-Webpack can be written with a capital W when used at the start of a sentence, otherwise it should be written in lower-case letters.
->>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
+Webpack 在句子的开头可以是大写字母 W，否则它应该全部为小写。
 
 ## Logo {#logo}
 

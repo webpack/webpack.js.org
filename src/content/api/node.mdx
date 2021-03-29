@@ -77,25 +77,18 @@ T> 你也可以为 `webpack` 函数提供一个配置数组。更多详细信息
 
 `Compiler` 实例上的 `hooks` 属性，用于将一个插件注册
 到 `Compiler` 的生命周期中的所有钩子事件上。
-`webpack` 使用 
-[`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js) 
-和 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js) 
+`webpack` 使用
+[`WebpackOptionsDefaulter`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js)
+和 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js)
 来配置 `Compiler` 实例以及所有内置插件。
 
 使用 `run` 方法启动所有编译工作。
 完成之后，执行传入的的 `callback` 函数。
 最终记录下来的概括信息（stats）和错误（errors），都应在这个 callback 函数中获取。
 
-<<<<<<< HEAD
-W> 这个 API 一次仅支持一个编译。当使用 `run` 时，
-再次调用 `run` 或 `watch` 之前需等待它完成。
-当使用 `watch` 时，调用 `close`，并等待它完成后，
-然后才能再次调用 `run` 或 `watch`。并发编译将破坏输出文件。
-=======
-W> The API only supports a single concurrent compilation at a time. When using `run` or
-`watch`, call `close` and wait for it to finish before calling `run` or `watch`
-again. Concurrent compilations will corrupt the output files.
->>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
+W> 这个 API 一次仅支持一个编译。当使用 `run` 或者
+`watch` 时，调用 `close`，并等待它完成后再次执行 `run` 或者 `watch`。
+并发编译将破坏输出文件。
 
 ## 执行（Run） {#run}
 
@@ -111,20 +104,16 @@ const compiler = webpack({
 
 compiler.run((err, stats) => { // [Stats Object](#stats-object)
   // ...
-  
+
   compiler.close((closeErr) => {
     // ...
   });
 });
 ```
 
-<<<<<<< HEAD
-## 监听(Watching) {#watching}
-=======
-W> Don't forget to close the compiler, so that low-priority work (like persistent caching) have the opportunity to complete. 
+W> 不要忘记关闭编译器，这样低优先级的工作（比如持久缓存）就有机会完成。
 
-## Watching
->>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
+## 监听(Watching) {#watching}
 
 调用 `watch` 方法会触发 webpack 执行，但之后会监听变更（很像 CLI 命令: `webpack --watch`），
 一旦 webpack 检测到文件变更，就会重新执行编译。
@@ -354,9 +343,9 @@ compiler.run((err, stats) => {
 });
 ```
 
-值得一提的是，被 
+值得一提的是，被
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
-及众多其他包依赖的 
+及众多其他包依赖的
 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 就是通过这种方式，
 将你的文件神秘地隐藏起来，但却仍然可以用它们为浏览器提供服务！
 

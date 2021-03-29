@@ -1905,15 +1905,12 @@ T> 使用一些缩进会使 bundle 看起来更美观，但会导致多行字符
 
 T> 通常，你不需要修改 `output.sourcePrefix`。
 
-<<<<<<< HEAD
-## `output.strictModuleExceptionHandling` {#outputstrictmoduleexceptionhandling}
-=======
-## output.strictModuleErrorHandling
+## output.strictModuleErrorHandling {#outputstrictmoduleerrorhandling}
 
-Handle error in module loading as per EcmaScript Modules spec at a performance cost.
+按照 ES Module 规范处理 module 加载时的错误，会有性能损失。
 
-- Type: `boolean`
-- Available: 5.25.0+
+- 类型：`boolean`
+- 可用版本：5.25.0+
 
 ```javascript
 module.exports = {
@@ -1924,11 +1921,10 @@ module.exports = {
 };
 ```
 
-## output.strictModuleExceptionHandling
+## output.strictModuleExceptionHandling {#outputstrictmoduleexceptionhandling}
 
-W> Deprecated, use
-[`output.strictModuleErrorHandling`](#outputstrictmoduleerrorhandling) instead.
->>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
+W> 已废弃，请使用
+[`output.strictModuleErrorHandling`](#outputstrictmoduleerrorhandling)。
 
 `boolean = false`
 

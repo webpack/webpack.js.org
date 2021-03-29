@@ -68,11 +68,8 @@ module.hot.decline(
 );
 ```
 
-<<<<<<< HEAD
-将依赖模块标记为不可更新(not-update-able)。在处理「依赖的导出正在更新」或「尚未实现处理」时，这是有意义的。取决于你的 HMR 管理代码，此依赖模块（或其未接受的依赖模块）更新，通常会导致页面被完全重新加载。
-=======
-Flag a dependency as not-update-able. This makes sense when changing exports of this dependency can't be handled or handling is not implemented yet. Depending on your HMR management code, an update to these dependencies (or unaccepted dependencies of it) usually causes a full-reload of the page.
->>>>>>> 3319e6dc4b32e2b9baf800a66354ebc5e51ed343
+将依赖模块标记为不可更新(not-update-able)。在处理「依赖的导出正在更新」或「尚未实现处理」时，这是有意义的。取决于你的 HMR 管理代码，
+此依赖模块（或其未接受的依赖模块）更新，通常会导致页面被完全重新加载。
 
 ### `decline` (自身) {#decline-self}
 
