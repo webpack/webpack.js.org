@@ -40,24 +40,34 @@ The following methods are supported...
 
 ### `accept`
 
-Accept updates for the given `dependencies` and fire a `callback` to react to those updates.
+Accept updates for the given `dependencies` and fire a `callback` to react to those updates, in addition, you can attach an optional error handler:
 
 ```js
 module.hot.accept(
   dependencies, // Either a string or an array of strings
-  callback // Function to fire when the dependencies are updated
+  callback, // Function to fire when the dependencies are updated
+  errorHandler // (err, {moduleId, dependencyId}) => {}
 );
 
 // or
 import.meta.webpackHot.accept(
   dependencies, // Either a string or an array of strings
-  callback // Function to fire when the dependencies are updated
+  callback, // Function to fire when the dependencies are updated
+  errorHandler // (err, {moduleId, dependencyId}) => {}
 );
 ```
 
 When using ESM `import` all imported symbols from `dependencies` are automatically updated. Note: The dependency string must match exactly with the `from` string in the `import`. In some cases `callback` can even be omitted. Using `require()` in the `callback` doesn't make sense here.
 
 When using CommonJS you need to update dependencies manually by using `require()` in the `callback`. Omitting the `callback` doesn't make sense here.
+
+#### errorHandler for accept
+
+`(err, {moduleId, dependencyId}) => {}`
+
+- `err`: the error thrown by the callback in second argument or during dependency execution when using ESM dependencies.
+- `moduleId`: the current module id.
+- `dependencyId`: the module id of the (first) changed dependency.
 
 ### `accept` (self)
 
@@ -77,6 +87,16 @@ import.meta.webpackHot.accept(
 When this module or dependencies are updated, this module can be disposed and re-evaluated without informing parents. This makes sense if this module has no exports (or exports are updated in another way).
 
 The `errorHandler` is fired when the evaluation of this module (or dependencies) has thrown an exception.
+
+### errorHandler for self accept
+
+`(err, {moduleId, module}) => {}`
+
+- `err`: the error when evaluating the new version.
+- `moduleId`: the current module id.
+- `module`: the current module instance.
+  - `module.hot`: allow to use the HMR API of the errored module instance. A common scenario is to self accept it again. It also makes sense to add a dispose handler to pass data along. Note that the errored module might be already partially executed, so make sure to not get into a inconsistent state. You can use `module.hot.data` to store partial state.
+  - `module.exports`: can be overriden, but be careful since property names might be mangled in production mode.
 
 ### `decline`
 
