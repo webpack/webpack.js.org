@@ -37,4 +37,4 @@ runtime，以及伴随的 manifest 数据，主要是指：在浏览器运行过
 
 通过使用内容散列(content hash)作为 bundle 文件的名称，这样在文件内容修改时，会计算出新的 hash，浏览器会使用新的名称加载文件，从而使缓存无效。一旦你开始这样做，你会立即注意到一些有趣的行为。即使某些内容明显没有修改，某些 hash 还是会改变。这是因为，注入的 runtime 和 manifest 在每次构建后都会发生变化。
 
-查看_管理输出_指南的 [manifest 部分](/guides/output-management/#the-manifest)，了解如何提取 manifest，并阅读下面的指南，以了解更多长效缓存错综复杂之处。
+查看 _管理输出_ 指南的 [manifest 部分](/guides/output-management/#the-manifest)，了解如何提取 manifest，并阅读下面的指南，以了解更多长效缓存错综复杂之处。

@@ -19,7 +19,7 @@ T> 如果在插件中使用了 [`webpack-sources`](https://github.com/webpack/we
 
 ## 剖析 {#anatomy}
 
-webpack **插件**是一个具有 [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 方法的 JavaScript 对象。`apply` 方法会被 webpack compiler 调用，并且在__整个__编译生命周期都可以访问 compiler 对象。
+webpack **插件**是一个具有 [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 方法的 JavaScript 对象。`apply` 方法会被 webpack compiler 调用，并且在 __整个__ 编译生命周期都可以访问 compiler 对象。
 
 **ConsoleLogOnBuildWebpackPlugin.js**
 

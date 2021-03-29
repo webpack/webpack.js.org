@@ -66,4 +66,4 @@ HMR 是可选功能，只会影响包含 HMR 代码的模块。举个例子，�
 
 在开发环境，可以将 HMR 作为 LiveReload 的替代。[webpack-dev-server](/configuration/dev-server/) 支持 `hot` 模式，在试图重新加载整个页面之前，`hot` 模式会尝试使用 HMR 来更新。更多细节请查看 [模块热替换](/guides/hot-module-replacement) 指南。
 
-T> 与许多其他功能一样，webpack 的强大之处在于它的可定制化。取决于特定项目需求，会有_许多方式_来配置 HMR。然而，对于多数项目的实现目的来说，`webpack-dev-server` 都能够很好适应，可以帮助你在项目中快速应用 HMR。
+T> 与许多其他功能一样，webpack 的强大之处在于它的可定制化。取决于特定项目需求，会有 _许多方式_ 来配置 HMR。然而，对于多数项目的实现目的来说，`webpack-dev-server` 都能够很好适应，可以帮助你在项目中快速应用 HMR。
