@@ -1,5 +1,6 @@
 ---
 title: 起步
+description: 学习如何使用 webpack5 打包 JavaScript 应用
 sort: 1
 contributors:
   - bebraw

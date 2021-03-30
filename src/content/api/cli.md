@@ -25,8 +25,6 @@ related:
     url: https://medium.com/@joeclever/three-simple-ways-to-inspect-a-webpack-bundle-7f6a8fe7195d#.7d2i06mjx
   - title: 使用 webpack 优化应用程序包
     url: https://hackernoon.com/optimising-your-application-bundle-size-with-webpack-e85b00bab579#.5w5ko08pq
-  - title: 分析和优化你的 webpack 包
-    url: https://medium.com/@ahmedelgabri/analyzing-optimizing-your-webpack-bundle-8590818af4df#.hce4vdjs9
   - title: 使用 webpack 和 source-map-explorer 分析并减小 client-side 包
     url: https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x
 ---
@@ -44,7 +42,7 @@ webpack-cli 提供了许多命令来使 webpack 的工作变得简单。默认�
 | `build`      | `build\|bundle\|b [entries...] [options]` | 运行 webpack（默认命令，可以被省略）。                                               |
 | `configtest` | `configtest\|t [config-path]`             | 校验 webpack 配置。                                                               |
 | [`help`](#help)       | `help\|h [command] [option]`              | 展示所有命令和选项的帮助。                                                          |
-| `info`       | `info\|i [options]`                       | 输出有关系统的信息。                                                                |
+| [`info`](#info)       | `info\|i [options]`                       | 输出有关系统的信息。                                                                |
 | [`init`](#init)       | `init\|c [scaffold...] [options]`         | 初始化一个新的 webpack 配置。                                                       |
 | `loader`     | `loader\|l [output-path]`                 | 生成一个 loader 仓库。                                                             |
 | `plugin`     | `plugin\|p [output-path]`                 | 生成一个 plugin 仓库。                                                             |
@@ -83,6 +81,46 @@ npx webpack init ./my-app --force --template=default
 `boolean`
 
 生成项目时不启用选项模式。当为 `true` 时，所有命令行选项使用默认值。
+
+### Info {#info}
+
+输出你的系统信息。
+
+```bash
+npx webpack info [options]
+```
+
+**示例**
+
+```bash
+npx webpack info --output=json
+```
+
+#### info 配置项 {#optionsforinfo}
+
+**`--output`**
+
+`string : 'json' | 'markdown'`
+
+获取指定格式的输出。
+
+### Configtest {#configtest}
+
+校验 webpack 配置。
+
+```bash
+npx webpack configtest [config-path]
+```
+
+**示例**
+
+```bash
+npx webpack configtest ./webpack.config.js
+```
+
+#### Config Path {configpath}
+
+你的 webpack 配置文件路径。默认为 `./webpack.config.js`。
 
 ## Flags {#flags}
 
@@ -487,6 +525,8 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 | `WEBPACK_SERVE`      | 如果设置了 `serve\|s`，则为 `true`。            |
 | `WEBPACK_BUILD`      | 如果设置了 `build\|bundle\|b`，则为 `true`      |
 | `WEBPACK_WATCH`      | 如果设置了 `--watch\|watch\|w`，则为 `true`     |
+| `WEBPACK_PACKAGE`               | 在 CLI 中使用自定义 webpack 版本                                 | no                 |
+| `WEBPACK_CLI_SKIP_IMPORT_LOCAL` | 设置为 `true` 时将不会使用 `webpack-cli` 本地实例。 | no                 |
 
 你可以在你的 webpack 配置中使用上述环境变量：
 

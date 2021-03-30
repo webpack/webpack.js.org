@@ -12,7 +12,7 @@ contributors:
 
 ## 名称 {#the-name}
 
-webpack 应当**总是**以小写字母书写，即使在一句话的起始位置也是如此。
+Webpack 在句子的开头可以是大写字母 W，否则它应该全部为小写。
 
 ## Logo {#logo}
 
