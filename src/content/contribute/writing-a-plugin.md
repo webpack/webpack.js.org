@@ -186,7 +186,7 @@ Once we can latch onto the webpack compiler and each individual compilations, th
 Let's write a simple example plugin that generates a new build file called `assets.md`, the contents of which will list all of the asset files in our build. This plugin might look something like this:
 
 ```javascript
-export class FileListPlugin {
+class FileListPlugin {
 
   static defaultOptions = {
     outputFile: 'assets.md',
@@ -234,13 +234,15 @@ export class FileListPlugin {
     });
   }
 }
+
+module.exports = { FileListPlugin };
 ```
 
 ```javascript
-import { FileListPlugin } from './file-list-plugin.js';
+const { FileListPlugin } = require('./file-list-plugin.js');
 
 // Use the plugin in your webpack configuration:
-export default {
+module.exports = {
   // …
 
   plugins: [
