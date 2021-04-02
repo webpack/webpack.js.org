@@ -263,6 +263,7 @@ module.exports = {
 | **[`publicPath`](#publicpath)** | `{String\|Function}` | `webpackOptions.output.publicPath` | 为图片、文件等外部资源指定一个自定义的公共路径。 |
 |   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | 使用 ES modules 语法                                                             |
 |    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | 配置 CSS 模块                                                         |
+|    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | 配置 CSS Modules                                                         |
 
 #### `publicPath` {#publicpath}
 
@@ -344,7 +345,15 @@ module.exports = {
 };
 ```
 
-### `esModule` {#esmodule}
+#### `emit` {#emit}
+
+类型：`Boolean`
+默认值：`true`
+
+如果设置为 true，会发送一个文件（向文件系统中写入一个文件）。如果设置为 false，该插件将会提取 CSS 但是 **不会** 发送文件。
+禁用该配置对服务侧的包比较有用。
+
+#### `esModule` {#esmodule}
 
 类型：`Boolean`
 默认值：`true`
