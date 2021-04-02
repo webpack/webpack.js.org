@@ -260,16 +260,10 @@ module.exports = {
 
 |              名称               |         类型         |              默认值               | 描述                                                                       |
 | :-----------------------------: | :------------------: | :--------------------------------: | :-------------------------------------------------------------------------------- |
-<<<<<<< HEAD
 | **[`publicPath`](#publicpath)** | `{String\|Function}` | `webpackOptions.output.publicPath` | 为图片、文件等外部资源指定一个自定义的公共路径。 |
 |   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | 使用 ES modules 语法                                                             |
 |    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | 配置 CSS 模块                                                         |
-=======
-| **[`publicPath`](#publicpath)** | `{String\|Function}` | `webpackOptions.output.publicPath` | Specifies a custom public path for the external resources like images, files, etc |
-|       **[`emit`](#emit)**       |     `{Boolean}`      |               `true`               | If false, the plugin will extract the CSS but **will not** emit the file          |
-|   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | Use ES modules syntax                                                             |
-|    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | Configuration CSS Modules                                                         |
->>>>>>> 3b64b196db7f6820aa466909299d6be0df670edc
+|    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | 配置 CSS Modules                                                         |
 
 #### `publicPath` {#publicpath}
 
@@ -351,19 +345,15 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `esModule` {#esmodule}
-=======
-#### `emit`
+#### `emit` {#emit}
 
-Type: `Boolean`
-Default: `true`
+类型：`Boolean`
+默认值：`true`
 
-If true, emits a file (writes a file to the filesystem). If false, the plugin will extract the CSS but **will not** emit the file.
-It is often useful to disable this option for server-side packages.
+如果设置为 true，会发送一个文件（向文件系统中写入一个文件）。如果设置为 false，该插件将会提取 CSS 但是 **不会** 发送文件。
+禁用该配置对服务侧的包比较有用。
 
-#### `esModule`
->>>>>>> 3b64b196db7f6820aa466909299d6be0df670edc
+#### `esModule` {#esmodule}
 
 类型：`Boolean`
 默认值：`true`
