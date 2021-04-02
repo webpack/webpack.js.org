@@ -260,9 +260,16 @@ module.exports = {
 
 |              名称               |         类型         |              默认值               | 描述                                                                       |
 | :-----------------------------: | :------------------: | :--------------------------------: | :-------------------------------------------------------------------------------- |
+<<<<<<< HEAD
 | **[`publicPath`](#publicpath)** | `{String\|Function}` | `webpackOptions.output.publicPath` | 为图片、文件等外部资源指定一个自定义的公共路径。 |
 |   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | 使用 ES modules 语法                                                             |
 |    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | 配置 CSS 模块                                                         |
+=======
+| **[`publicPath`](#publicpath)** | `{String\|Function}` | `webpackOptions.output.publicPath` | Specifies a custom public path for the external resources like images, files, etc |
+|       **[`emit`](#emit)**       |     `{Boolean}`      |               `true`               | If false, the plugin will extract the CSS but **will not** emit the file          |
+|   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | Use ES modules syntax                                                             |
+|    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | Configuration CSS Modules                                                         |
+>>>>>>> 3b64b196db7f6820aa466909299d6be0df670edc
 
 #### `publicPath` {#publicpath}
 
@@ -344,7 +351,19 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `esModule` {#esmodule}
+=======
+#### `emit`
+
+Type: `Boolean`
+Default: `true`
+
+If true, emits a file (writes a file to the filesystem). If false, the plugin will extract the CSS but **will not** emit the file.
+It is often useful to disable this option for server-side packages.
+
+#### `esModule`
+>>>>>>> 3b64b196db7f6820aa466909299d6be0df670edc
 
 类型：`Boolean`
 默认值：`true`

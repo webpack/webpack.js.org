@@ -36,7 +36,15 @@ module.exports = {
     rules: [
       {
         test: /\.less$/i,
+<<<<<<< HEAD
         loader: "less-loader", // 将 Less 文件编译为 CSS 文件
+=======
+        loader: [ // compiles Less to CSS
+          "style-loader",
+          "css-loader",
+          "less-loader",
+        ],
+>>>>>>> 3b64b196db7f6820aa466909299d6be0df670edc
       },
     ],
   },
