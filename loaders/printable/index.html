@@ -2849,7 +2849,11 @@ components<span class="token punctuation">.</span><span class="token function">k
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         test<span class="token operator">:</span> <span class="token regex">/\.less$/i</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">"less-loader"</span><span class="token punctuation">,</span> <span class="token comment">// compiles Less to CSS</span>
+        loader<span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">// compiles Less to CSS</span>
+          <span class="token string">"style-loader"</span><span class="token punctuation">,</span>
+          <span class="token string">"css-loader"</span><span class="token punctuation">,</span>
+          <span class="token string">"less-loader"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
