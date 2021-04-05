@@ -3,6 +3,7 @@ title: Compilation Hooks
 group: Plugins
 sort: 10
 contributors:
+  - slavafomin
   - byzyk
   - madhavarshney
   - misterdev
@@ -455,7 +456,8 @@ The assets have been optimized.
 
 Asset processing.
 
-- Callback Parameters: `assets`
+**Callback parameters:**
+- `assets: { [pathname: string]: Source }`
 
 Here's an example:
 
@@ -471,41 +473,43 @@ compilation.hooks.processAssets.tap(
 );
 ```
 
-In addition to `name` and `stage`, you can pass a `additionalAssets` <Badge text='5.8.0+' /> option which accepts either a value of `true` or a function with `assets` as parameter:
+In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge text='5.8.0+' /> option which accepts either a value of `true` or a callback function that receives `assets` as a first argument:
 
-1. `true` - Run callback against assets added later by plugins.
+1. `true` - run the provided callback again for assets added later by plugins.
 
-   ```js
-   compilation.hooks.processAssets.tap(
-     {
-       name: 'MyPlugin',
-       stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
-       additionalAssets: true,
-     },
-     (assets) => {
-       // this callback will run against assets added later by plugins.
-     }
-   );
+In this mode, the callback will be called multiple times: once for assets added prior to the specified stage, and additional times for assets added by plugins later (on this or next stages).
+
+```js
+compilation.hooks.processAssets.tap(
+  {
+    name: 'MyPlugin',
+    stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
+    additionalAssets: true,
+  },
+  (assets) => {
+    // process the assets
+  }
+);
    ```
 
-2. `(assets) => {}` - Run this specified callback against assets added later by plugins.
+2. `(assets, [callback]) => (void | Promise<void>)` - run the specified callback against assets added by plugins later (on this or next stages). The callback must respect the type of the tap method used (e.g. when used with `tapPromise()`, it should return a promise).
 
-   ```js
-   compilation.hooks.processAssets.tap(
-     {
-       name: 'MyPlugin',
-       stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
-       additionalAssets: (assets) => {
-         // this callback will run against assets added later by plugins.
-       },
-     },
-     (assets) => {
-       // code
-     }
-   );
+```js
+compilation.hooks.processAssets.tap(
+  {
+    name: 'MyPlugin',
+    stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
+    additionalAssets: (assets) => {
+      // this callback will run against assets added by plugins later
+    },
+  },
+  (assets) => {
+    // this callback will run against assets added by plugins on prior stages
+  }
+);
    ```
 
-Here's a list of stages we can use:
+Here's a list of supported stages (in the order of processing):
 
 - `PROCESS_ASSETS_STAGE_ADDITIONAL` - Add additional assets to the compilation.
 - `PROCESS_ASSETS_STAGE_PRE_PROCESS` - Basic preprocessing of the assets.
@@ -522,6 +526,8 @@ Here's a list of stages we can use:
 - `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` - Optimize the transfer of existing assets, e.g. by preparing a compressed (gzip) file as separate asset.
 - `PROCESS_ASSETS_STAGE_ANALYSE` - Analyze the existing assets.
 - `PROCESS_ASSETS_STAGE_REPORT` - Creating assets for the reporting purposes.
+
+T> The "asset info" metadata is not automatically provided for this hook. If needed, you will have to resolve this metadata manually using the compilation instance and the provided asset pathname. This will be improved in a future version of the webpack.
 
 ### `afterProcessAssets`
 
