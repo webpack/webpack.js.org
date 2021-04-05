@@ -9,7 +9,7 @@ page please create an issue first.
 Start by ensuring that you have Node.js installed and forking the repository:
 
 - Install [Node.js][1] if you have not already.
-- Install [Yarn][13] if you have not already. Yarn is an alternative to npm, and it is required for building the site.
+- Install [Yarn][13] if you have not already. Yarn is an alternative to npm, and it is required for building the site. Note that we use `yarn` specific feature like `resolutions`, so `pnpm` is not expected to work out of the box.
 - Fork the **webpack.js.org** repo from [the main repository][2].
 - `git clone <your-clone-url> && cd webpack.js.org`
 
