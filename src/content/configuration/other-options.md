@@ -342,6 +342,28 @@ module.exports = {
 };
 ```
 
+### cache.maxGenerations
+
+`number`
+
+Number of generations unused cache entries stay in memory cache at minimum.
+
+- `cache.maxGenerations: 1`: Cache entries removed after unused for a single compilation.
+
+- `cache.maxGenerations: Infinity`: Cache entries kept forever.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    type: 'memory',
+    maxGenerations: Infinity,
+  },
+};
+```
+
 ## dependencies
 
 `[string]`
