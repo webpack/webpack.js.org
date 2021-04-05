@@ -518,15 +518,25 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 | `1`       | webpack Error                                   |
 | `2`       | 配置/选项问题，或者内部错误                         |
 
-## 环境变量 {#environment-variables}
+## CLI 环境变量 {#cli-environment-variables}
 
-| 变量名 | 描述                                  |
+| 环境变量                | 描述                                                         |
+| ----------------------------------- | ------------------------------------------------------------------- |
+| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`     | 设置为 `true` 时将不会使用 `webpack-cli` 本地实例。 |
+| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG` | 设置为 `true` 则强制加载 ESM 配置。             |
+| `WEBPACK_PACKAGE`                   | 在 CLI 中使用自定义 webpack 版本。                               |
+
+```bash
+WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
+```
+
+## ENV 环境变量 {#env-environment-variables}
+
+| 环境变量 | 描述                                  |
 | -------------------- | -------------------------------------------- |
-| `WEBPACK_SERVE`      | 如果设置了 `serve\|s`，则为 `true`。            |
-| `WEBPACK_BUILD`      | 如果设置了 `build\|bundle\|b`，则为 `true`      |
-| `WEBPACK_WATCH`      | 如果设置了 `--watch\|watch\|w`，则为 `true`     |
-| `WEBPACK_PACKAGE`               | 在 CLI 中使用自定义 webpack 版本                                 | no                 |
-| `WEBPACK_CLI_SKIP_IMPORT_LOCAL` | 设置为 `true` 时将不会使用 `webpack-cli` 本地实例。 | no                 |
+| `WEBPACK_SERVE`      | 如果使用了 `serve\|s`，则为 `true`。         |
+| `WEBPACK_BUILD`      | 如果使用了 `build\|bundle\|b`，则为 `true`。 |
+| `WEBPACK_WATCH`      | 如果使用了 `--watch\|watch\|w`，则为 `true`。|
 
 你可以在你的 webpack 配置中使用上述环境变量：
 
