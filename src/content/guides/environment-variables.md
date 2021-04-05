@@ -14,11 +14,7 @@ contributors:
 
 T> webpack 环境变量，与操作系统中的 `bash` 和 `CMD.exe` 这些 shell [环境变量](https://en.wikipedia.org/wiki/Environment_variable) 不同。
 
-<<<<<<< HEAD
-webpack 命令行 [环境配置](/api/cli/#environment-options) 的 `--env` 参数，可以允许你传入任意数量的环境变量。而在 `webpack.config.js` 中可以访问到这些环境变量。例如，`--env production` 或 `--env NODE_ENV=local`（`NODE_ENV` 通常约定用于定义环境类型，查看 [这里](https://dzone.com/articles/what-you-should-know-about-node-env)）。
-=======
-The webpack command line [environment option](/api/cli/#environment-options) `--env` allows you to pass in as many environment variables as you like. Environment variables will be made accessible in your `webpack.config.js`. For example, `--env production` or `--env goal=local`.
->>>>>>> 6d4e5617620f76812e9cf005117db90db69c257c
+webpack 命令行 [环境配置](/api/cli/#environment-options) 的 `--env` 参数，可以允许你传入任意数量的环境变量。而在 `webpack.config.js` 中可以访问到这些环境变量。例如，`--env production` 或 `--env goal=local`。
 
 ```bash
 npx webpack --env NODE_ENV=local --env production --progress

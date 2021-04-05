@@ -100,15 +100,11 @@ console.log(import.meta.url); // 输出结果类似于 `file:///path/to/your/pro
 console.log(import.meta.webpack); // output `5` for webpack 5
 ```
 
-<<<<<<< HEAD
+### import.meta.webpackHot {#importmetawebpackhot}
+
+webpack 特定。[`module.hot`](#modulehot-webpack-specific) 的一个别名，[strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm) 中可以使用 `import.meta.webpackHot` 但是不能使用 `module.hot`。
+
 ### `__filename` (NodeJS) {#__filename-nodejs}
-=======
-### import.meta.webpackHot
-
-Webpack specific. An alias for [`module.hot`](#modulehot-webpack-specific), however `import.meta.webpackHot` can be used in [strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm) while `module.hot` can't.
-
-### `__filename` (NodeJS)
->>>>>>> 6d4e5617620f76812e9cf005117db90db69c257c
 
 取决于 `node.__filename` 配置选项：
 
