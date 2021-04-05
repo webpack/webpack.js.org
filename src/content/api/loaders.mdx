@@ -466,7 +466,34 @@ module.exports = function (source) {
 
 可能的值为：`'production'`, `'development'`, `'none'`
 
+<<<<<<< HEAD:src/content/api/loaders.md
 ## Webpack specific properties {#webpack-specific-properties}
+=======
+### this.utils
+
+<Badge text="5.27.0+" />
+
+Access to `contextify` and `absolutify` utilities.
+
+- `contextify`: Return a new request string avoiding absolute paths when possible.
+- `absolutify`: Return a new request string using absolute paths when possible.
+
+**my-sync-loader.js**
+
+```js
+module.exports = function (content) {
+  this.utils.contextify(
+    this.context,
+    this.utils.absolutify(this.context, './index.js')
+  );
+  this.utils.absolutify(this.context, this.resourcePath);
+  // …
+  return content;
+};
+```
+
+## Webpack specific properties
+>>>>>>> 6d4e5617620f76812e9cf005117db90db69c257c:src/content/api/loaders.mdx
 
 loader 接口提供所有模块的相关信息。然而，在极少数情况下，你可能需要访问 compiler api 本身。
 

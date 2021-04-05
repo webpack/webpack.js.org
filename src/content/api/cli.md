@@ -518,6 +518,7 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 | `1`       | webpack Error                                   |
 | `2`       | 配置/选项问题，或者内部错误                         |
 
+<<<<<<< HEAD
 ## 环境变量 {#environment-variables}
 
 | 变量名 | 描述                                  |
@@ -527,6 +528,27 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 | `WEBPACK_WATCH`      | 如果设置了 `--watch\|watch\|w`，则为 `true`     |
 | `WEBPACK_PACKAGE`               | 在 CLI 中使用自定义 webpack 版本                                 | no                 |
 | `WEBPACK_CLI_SKIP_IMPORT_LOCAL` | 设置为 `true` 时将不会使用 `webpack-cli` 本地实例。 | no                 |
+=======
+## CLI Environment Variables
+
+| Environment Variable                | Description                                                         |
+| ----------------------------------- | ------------------------------------------------------------------- |
+| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`     | when `true` it will skip using the local instance of `webpack-cli`. |
+| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG` | when `true` it will force load the ESM config.                      |
+| `WEBPACK_PACKAGE`                   | Use a custom webpack version in CLI.                                |
+
+```bash
+WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
+```
+
+## ENV Environment Variables
+
+| Environment Variable | Description                                  |
+| -------------------- | -------------------------------------------- |
+| `WEBPACK_SERVE`      | `true` if `serve\|s` is being used.          |
+| `WEBPACK_BUILD`      | `true` if `build\|bundle\|b` is being used.  |
+| `WEBPACK_WATCH`      | `true` if `--watch\|watch\|w` is being used. |
+>>>>>>> 6d4e5617620f76812e9cf005117db90db69c257c
 
 你可以在你的 webpack 配置中使用上述环境变量：
 

@@ -34,7 +34,11 @@ npm install --save-dev webpack@<version>
 
 T> 是否使用 `--save-dev` 取决于你的应用场景。假设你仅使用 webpack 进行构建操作，那么建议你在安装时使用 `--save-dev` 选项，因为可能你不需要在生产环境上使用 webpack。如果需要应用于生产环境，请忽略 `--save-dev` 选项。
 
+<<<<<<< HEAD
 如果你使用 webpack v4+ 版本，你还需要安装 [CLI](/api/cli/)。
+=======
+If you're using webpack v4 or later and want to call `webpack` from the command line, you'll also need to install the [CLI](/api/cli/).
+>>>>>>> 6d4e5617620f76812e9cf005117db90db69c257c
 
 ```bash
 npm install --save-dev webpack-cli
