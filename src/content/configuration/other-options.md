@@ -324,6 +324,24 @@ module.exports = {
 };
 ```
 
+### cache.maxAge
+
+`number = 5184000000`
+
+Time for which unused cache entries stay in the filesystem cache at minimum (in milliseconds).
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    type: 'filesystem',
+    maxAge: 5184000000,
+  },
+};
+```
+
 ## dependencies
 
 `[string]`
