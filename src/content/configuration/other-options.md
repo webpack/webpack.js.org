@@ -15,6 +15,7 @@ contributors:
   - Neob91
   - chenxsan
   - u01jmg3
+  - jamesgeorge007
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -296,6 +297,32 @@ module.exports = {
 ```
 
 W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#cachestore) is set to `'pack'`
+
+### cache.maxMemoryGenerations
+
+`number`
+
+Number of generations unused cache entries stay in memory cache at minimum.
+
+- `cache.maxMemoryGenerations: 0`: Persistent cache will not use an additional memory cache. It will only cache items in memory until they are serialized to disk. Once serialized the next read will deserialize them from the disk again. This mode will minimize memory usage but introduces a performance cost.
+
+- `cache.maxMemoryGenerations: 1`: This will clear items from the memory cache once they are serialized and unused for at least one compilation. When they are used again they will be deserialized from the disk. This mode will minimize memory usage while still keeping active items in the memory cache.
+
+- `cache.maxMemoryGenerations` small numbers > 0 will have a performance cost for the GC operation. It gets lower as the number increases.
+
+- `cache.maxMemoryGenerations` defaults to 10 in `development` mode and to `Infinity` in `production` mode.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    type: 'filesystem',
+    maxMemoryGenerations: Infinity,
+  },
+};
+```
 
 ## dependencies
 
