@@ -258,6 +258,8 @@ class FileListPlugin {
 module.exports = { FileListPlugin };
 ```
 
+**webpack.config.js**
+
 ```javascript
 const { FileListPlugin } = require('./file-list-plugin.js');
 
