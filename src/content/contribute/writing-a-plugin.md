@@ -198,7 +198,7 @@ class FileListPlugin {
     // Applying user-specified options over the default options
     // and making merged options further available to the plugin methods.
     // You should probably validate all the options here as well.
-    this.options = { ...FileListPlugin.defaultOptions, options };
+    this.options = { ...FileListPlugin.defaultOptions, ...options };
   }
 
   apply(compiler) {
