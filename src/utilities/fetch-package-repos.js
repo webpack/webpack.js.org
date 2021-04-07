@@ -18,7 +18,6 @@ const fetch = {
       hides: excludedLoaders,
     },
     'babel/babel-loader',
-    'Banno/polymer-webpack-loader',
   ],
   plugins: [
     {
