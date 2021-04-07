@@ -456,10 +456,15 @@ The assets have been optimized.
 
 Asset processing.
 
-**Callback parameters:**
-- `assets: { [pathname: string]: Source }`
+**Hook parameters:**
+- `name: string` — a name of the plugin
+- `stage: Stage` — a stage to tap into (see the [list of supported stage](#list-of-asset-processing-stages) below)
+- `additionalAssets?: boolean | (assets, [callback]) => (void | Promise<void>)` — a callback for additional assets ([see below](#additional-assets))
 
-Here's an example:
+**Callback parameters:**
+- `assets: { [pathname: string]: Source }` — a map object of assets, where key is the asset's pathname and the value is the source content of the asset
+
+**Example:**
 
 ```js
 compilation.hooks.processAssets.tap(
@@ -468,66 +473,89 @@ compilation.hooks.processAssets.tap(
     stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONS, // see below for more stages
   },
   (assets) => {
-    // code here
+    console.log('List of assets and their sizes:');
+    Object.entries(assets).forEach(([pathname, source]) => {
+      console.log(`— ${pathname}: ${source.size()} bytes`);
+    });
   }
 );
 ```
+
+#### Additional assets
 
 In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge text='5.8.0+' /> option which accepts either a value of `true` or a callback function that receives `assets` as a first argument:
 
 1. `true` - run the provided callback again for assets added later by plugins.
 
-In this mode, the callback will be called multiple times: once for assets added prior to the specified stage, and additional times for assets added by plugins later (on this or next stages).
+   In this mode, the callback will be called multiple times: once for assets added prior to the specified stage, and additional times for assets added by plugins later (on this or next stages).
 
-```js
-compilation.hooks.processAssets.tap(
-  {
-    name: 'MyPlugin',
-    stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
-    additionalAssets: true,
-  },
-  (assets) => {
-    // process the assets
-  }
-);
+   ```js
+   compilation.hooks.processAssets.tap(
+     {
+       name: 'MyPlugin',
+       stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
+       additionalAssets: true,
+     },
+     (assets) => {
+       // this function will be called multiple times with each bulk of assets
+     }
+   );
    ```
 
 2. `(assets, [callback]) => (void | Promise<void>)` - run the specified callback against assets added by plugins later (on this or next stages). The callback must respect the type of the tap method used (e.g. when used with `tapPromise()`, it should return a promise).
 
-```js
-compilation.hooks.processAssets.tap(
-  {
-    name: 'MyPlugin',
-    stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
-    additionalAssets: (assets) => {
-      // this callback will run against assets added by plugins later
-    },
-  },
-  (assets) => {
-    // this callback will run against assets added by plugins on prior stages
-  }
-);
+   ```js
+   compilation.hooks.processAssets.tap(
+     {
+       name: 'MyPlugin',
+       stage: Compilation.PROCESS_ASSETS_STAGE_DEV_TOOLING,
+       additionalAssets: (assets) => {
+         // this function potentially could be called multiple times for assets added on later stages
+       },
+     },
+     (assets) => {
+       // this function will be called once with assets added by plugins on prior stages
+     }
+   );
    ```
+
+#### List of asset processing stages
 
 Here's a list of supported stages (in the order of processing):
 
-- `PROCESS_ASSETS_STAGE_ADDITIONAL` - Add additional assets to the compilation.
-- `PROCESS_ASSETS_STAGE_PRE_PROCESS` - Basic preprocessing of the assets.
-- `PROCESS_ASSETS_STAGE_DERIVED` - Derive new assets from the existing assets.
-- `PROCESS_ASSETS_STAGE_ADDITIONS` - Add additional sections to the existing assets e.g. banner or initialization code.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE` - Optimize existing assets in a general way.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_COUNT` - Optimize the count of existing assets, e.g. by merging them.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY` - Optimize the compatibility of existing assets, e.g. add polyfills or vendor prefixes.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE` - Optimize the size of existing assets, e.g. by minimizing or omitting whitespace.
-- `PROCESS_ASSETS_STAGE_DEV_TOOLING` - Add development tooling to the assets, e.g. by extracting a source map.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_INLINE` <Badge text='5.8.0+' /> - Optimize the numbers of existing assets, e.g. by inlining assets into other assets.
-- `PROCESS_ASSETS_STAGE_SUMMARIZE` - Summarize the list of existing assets.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_HASH` - Optimize the hashes of the assets, e.g. by generating real hashes of the asset content.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` - Optimize the transfer of existing assets, e.g. by preparing a compressed (gzip) file as separate asset.
-- `PROCESS_ASSETS_STAGE_ANALYSE` - Analyze the existing assets.
-- `PROCESS_ASSETS_STAGE_REPORT` - Creating assets for the reporting purposes.
+- `PROCESS_ASSETS_STAGE_ADDITIONAL` — add additional assets to the compilation.
+- `PROCESS_ASSETS_STAGE_PRE_PROCESS` — basic preprocessing of the assets.
+- `PROCESS_ASSETS_STAGE_DERIVED` — derive new assets from the existing assets.
+- `PROCESS_ASSETS_STAGE_ADDITIONS` — add additional sections to the existing assets e.g. banner or initialization code.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE` — optimize existing assets in a general way.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_COUNT` — optimize the count of existing assets, e.g. by merging them.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY` — optimize the compatibility of existing assets, e.g. add polyfills or vendor prefixes.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE` — optimize the size of existing assets, e.g. by minimizing or omitting whitespace.
+- `PROCESS_ASSETS_STAGE_DEV_TOOLING` — add development tooling to the assets, e.g. by extracting a source map.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_INLINE` <Badge text='5.8.0+' /> — optimize the numbers of existing assets, e.g. by inlining assets into other assets.
+- `PROCESS_ASSETS_STAGE_SUMMARIZE` — summarize the list of existing assets.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_HASH` — optimize the hashes of the assets, e.g. by generating real hashes of the asset content.
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` — optimize the transfer of existing assets, e.g. by preparing a compressed (gzip) file as separate asset.
+- `PROCESS_ASSETS_STAGE_ANALYSE` — analyze the existing assets.
+- `PROCESS_ASSETS_STAGE_REPORT` — creating assets for the reporting purposes.
 
-T> The "asset info" metadata is not automatically provided for this hook. If needed, you will have to resolve this metadata manually using the compilation instance and the provided asset pathname. This will be improved in a future version of the webpack.
+#### Assets info
+
+The "asset info" metadata is not automatically provided for this hook. If needed, you will have to resolve this metadata manually using the compilation instance and the provided asset pathname. This will be improved in a future version of the webpack.
+
+**Example:**
+
+```js
+compilation.hooks.processAssets.tap(
+  { /**  … */ },
+  (assets) => {
+    Object.entries(assets).forEach(([pathname, source]) => {
+      const assetInfo = compilation.assetsInfo.get(pathname);
+      // @todo: do something with "pathname", "source" and "assetInfo"
+    });
+  }
+);
+```
 
 ### `afterProcessAssets`
 
