@@ -632,16 +632,6 @@ module.exports = {
 };
 ```
 
-## `devServer.info` - CLI only
-
-`boolean`
-
-Output cli information. It is enabled by default.
-
-```bash
-npx webpack serve --info false
-```
-
 ## `devServer.injectClient`
 
 `boolean = false` `function (compilerConfig) => boolean`
