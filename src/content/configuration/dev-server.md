@@ -632,16 +632,6 @@ module.exports = {
 };
 ```
 
-## `devServer.info` - CLI only
-
-`boolean`
-
-Output cli information. It is enabled by default.
-
-```bash
-npx webpack serve --info false
-```
-
 ## `devServer.injectClient`
 
 `boolean = false` `function (compilerConfig) => boolean`
@@ -749,8 +739,10 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-npx webpack serve --no-live-reload
+npx webpack serve --liveReload
 ```
+
+Notice that there's no way to disable it from CLI.
 
 ## `devServer.mimeTypes` 🔑
 
