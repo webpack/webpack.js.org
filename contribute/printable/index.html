@@ -284,7 +284,6 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token punctuation">}</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> HelloAsyncPlugin<span class="token punctuation">;</span></code></pre> <h2 id="example">Example<a href="#example" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>Once we can latch onto the webpack compiler and each individual compilations, the possibilities become endless for what we can do with the engine itself. We can reformat existing files, create derivative files, or fabricate entirely new assets.</p> <p>Let's write a simple example plugin that generates a new build file called <code>assets.md</code>, the contents of which will list all of the asset files in our build. This plugin might look something like this:</p> <pre><code class="hljs language-javascript"><span class="token keyword">class</span> <span class="token class-name">FileListPlugin</span> <span class="token punctuation">{</span>
-
   <span class="token keyword">static</span> defaultOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
     outputFile<span class="token operator">:</span> <span class="token string">'assets.md'</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -299,7 +298,6 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span>
 
   <span class="token function">apply</span><span class="token punctuation">(</span><span class="token parameter">compiler</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-
     <span class="token keyword">const</span> pluginName <span class="token operator">=</span> FileListPlugin<span class="token punctuation">.</span>name<span class="token punctuation">;</span>
 
     <span class="token comment">// webpack module instance can be accessed from the compiler object,</span>
@@ -317,7 +315,6 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token comment">// Tapping to the "thisCompilation" hook in order to further tap</span>
     <span class="token comment">// to the compilation process on an earlier stage.</span>
     compiler<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>thisCompilation<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span>pluginName<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">compilation</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-
       <span class="token comment">// Tapping to the assets processing pipeline on a specific stage.</span>
       compilation<span class="token punctuation">.</span>hooks<span class="token punctuation">.</span>processAssets<span class="token punctuation">.</span><span class="token function">tap</span><span class="token punctuation">(</span>
         <span class="token punctuation">{</span>
@@ -328,24 +325,24 @@ module<span class="token punctuation">.</span>exports <span class="token operato
           stage<span class="token operator">:</span> Compilation<span class="token punctuation">.</span><span class="token constant">PROCESS_ASSETS_STAGE_SUMMARIZE</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">(</span><span class="token parameter">assets</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
-
           <span class="token comment">// "assets" is an object that contains all assets</span>
           <span class="token comment">// in the compilation, the keys of the object are pathnames of the assets</span>
           <span class="token comment">// and the values are file sources.</span>
 
           <span class="token comment">// Iterating over all the assets and</span>
           <span class="token comment">// generating content for our Markdown file.</span>
-          <span class="token keyword">const</span> content <span class="token operator">=</span> <span class="token punctuation">(</span>
+          <span class="token keyword">const</span> content <span class="token operator">=</span>
             <span class="token string">'# In this build:\n\n'</span> <span class="token operator">+</span>
             Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>assets<span class="token punctuation">)</span>
               <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">filename</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">- </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>filename<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
-              <span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span>
-          <span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
           <span class="token comment">// Adding new asset to the compilation, so it would be automatically</span>
           <span class="token comment">// generated by the webpack in the output directory.</span>
-          compilation<span class="token punctuation">.</span><span class="token function">emitAsset</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>outputFile<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">RawSource</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
+          compilation<span class="token punctuation">.</span><span class="token function">emitAsset</span><span class="token punctuation">(</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>outputFile<span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token class-name">RawSource</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span>
+          <span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
       <span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
