@@ -462,7 +462,7 @@ Asset processing.
 - `additionalAssets?: true | (assets, [callback]) => (void | Promise<void>)` — a callback for additional assets ([see below](#additional-assets))
 
 **Callback parameters:**
-- `assets: { [pathname: string]: Source }` — a map object of assets, where key is the asset's pathname and the value is the source content of the asset
+- `assets: { [pathname: string]: Source }` — a plain object, where key is the asset's pathname, and the value is the source content of the asset
 
 **Example:**
 
