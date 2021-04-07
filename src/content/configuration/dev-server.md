@@ -740,6 +740,7 @@ Usage via the CLI
 
 ```bash
 npx webpack serve --liveReload
+```
 
 Notice that there's no way to disable it from CLI.
 
