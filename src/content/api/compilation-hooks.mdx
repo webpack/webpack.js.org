@@ -485,7 +485,7 @@ compilation.hooks.processAssets.tap(
 
 In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge text='5.8.0+' /> option which accepts either a value of `true` or a callback function that receives `assets` as a first argument:
 
-1. `true` - run the provided callback again for assets added later by plugins.
+1. `true` — run the provided callback again for assets added later by plugins.
 
    In this mode, the callback will be called multiple times: once for assets added prior to the specified stage, and additional times for assets added by plugins later (on this or next stages).
 
@@ -502,7 +502,7 @@ In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge tex
    );
    ```
 
-2. `(assets, [callback]) => (void | Promise<void>)` - run the specified callback against assets added by plugins later (on this or next stages). The callback must respect the type of the tap method used (e.g. when used with `tapPromise()`, it should return a promise).
+2. `(assets, [callback]) => (void | Promise<void>)` — run the specified callback against assets added by plugins later (on this or next stages). The callback must respect the type of the tap method used (e.g. when used with `tapPromise()`, it should return a promise).
 
    ```js
    compilation.hooks.processAssets.tap(
@@ -547,7 +547,7 @@ The "asset info" metadata is not automatically provided for this hook. If needed
 
 ```js
 compilation.hooks.processAssets.tap(
-  { /**  … */ },
+  { /** … */ },
   (assets) => {
     Object.entries(assets).forEach(([pathname, source]) => {
       const assetInfo = compilation.assetsInfo.get(pathname);
