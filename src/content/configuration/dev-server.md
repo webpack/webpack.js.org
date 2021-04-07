@@ -749,7 +749,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-npx webpack serve --no-live-reload
+npx webpack serve --liveReload
 ```
 
 ## `devServer.mimeTypes` 🔑
