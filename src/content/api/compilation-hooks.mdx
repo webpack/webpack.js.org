@@ -459,7 +459,7 @@ Asset processing.
 **Hook parameters:**
 - `name: string` — a name of the plugin
 - `stage: Stage` — a stage to tap into (see the [list of supported stages](#list-of-asset-processing-stages) below)
-- `additionalAssets?: boolean | (assets, [callback]) => (void | Promise<void>)` — a callback for additional assets ([see below](#additional-assets))
+- `additionalAssets?: true | (assets, [callback]) => (void | Promise<void>)` — a callback for additional assets ([see below](#additional-assets))
 
 **Callback parameters:**
 - `assets: { [pathname: string]: Source }` — a map object of assets, where key is the asset's pathname and the value is the source content of the asset
