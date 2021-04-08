@@ -66,7 +66,6 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 ## Frameworks
 
 - [`vue-loader`](https://github.com/vuejs/vue-loader) Loads and compiles [Vue Components](https://vuejs.org/v2/guide/components.html)
-- [`polymer-loader`](https://github.com/webpack-contrib/polymer-webpack-loader) Process HTML & CSS with preprocessor of choice and `require()` Web Components like first-class modules
 - [`angular2-template-loader`](https://github.com/TheLarkInn/angular2-template-loader) Loads and compiles [Angular](https://angular.io/) Components
 
 ## Awesome
