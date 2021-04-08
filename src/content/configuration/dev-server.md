@@ -865,6 +865,7 @@ Specify a page to navigate to when opening the browser.
 module.exports = {
   //...
   devServer: {
+    open: true,
     openPage: 'different/page',
   },
 };
@@ -886,6 +887,7 @@ If you wish to specify multiple pages to open in the browser.
 module.exports = {
   //...
   devServer: {
+    open: true,
     openPage: ['different/page1', 'different/page2'],
   },
 };
