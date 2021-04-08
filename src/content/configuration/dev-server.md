@@ -877,7 +877,7 @@ Usage via the CLI
 npx webpack serve --open --open-page different/page
 ```
 
-W> You do not need to add `/` in starting webpack-dev-server adds it automatically for you else the browser will open `http://localhost:8080//different/page`
+W> Do not prepend `/` for the page as webpack-dev-server will do it automatically, otherwise the browser will open urls like `http://localhost:8080//different/page`.
 
 If you wish to specify multiple pages to open in the browser.
 
