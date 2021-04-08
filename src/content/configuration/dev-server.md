@@ -865,7 +865,7 @@ Specify a page to navigate to when opening the browser.
 module.exports = {
   //...
   devServer: {
-    openPage: '/different/page',
+    openPage: 'different/page',
   },
 };
 ```
@@ -873,8 +873,10 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-npx webpack serve --open-page /different/page
+npx webpack serve --open --open-page different/page
 ```
+
+W> You do not need to add `/` in starting webpack-dev-server adds it automatically for you else the browser will open `http://localhost:8080//different/page`
 
 If you wish to specify multiple pages to open in the browser.
 
@@ -884,7 +886,7 @@ If you wish to specify multiple pages to open in the browser.
 module.exports = {
   //...
   devServer: {
-    openPage: ['/different/page1', '/different/page2'],
+    openPage: ['different/page1', 'different/page2'],
   },
 };
 ```
@@ -892,7 +894,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-npx webpack serve --open-page /different/page1 --open-page /different/page2
+npx webpack serve --open --open-page different/page1 --open-page different/page2
 ```
 
 ## `devServer.overlay`
