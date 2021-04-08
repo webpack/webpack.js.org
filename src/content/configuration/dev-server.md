@@ -892,7 +892,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-npx webpack serve --open-page /different/page1,/different/page2
+npx webpack serve --open-page /different/page1 --open-page /different/page2
 ```
 
 ## `devServer.overlay`
