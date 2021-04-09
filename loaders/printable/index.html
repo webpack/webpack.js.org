@@ -2695,7 +2695,8 @@ components<span class="token punctuation">.</span><span class="token function">k
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         test<span class="token operator">:</span> <span class="token regex">/\.less$/i</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token comment">// compiles Less to CSS</span>
+        loader<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token comment">// compiles Less to CSS</span>
           <span class="token string">"style-loader"</span><span class="token punctuation">,</span>
           <span class="token string">"css-loader"</span><span class="token punctuation">,</span>
           <span class="token string">"less-loader"</span><span class="token punctuation">,</span>
@@ -2992,10 +2993,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token operator">...</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <blockquote> <p>ℹ️ Access to the <a href="/api/loaders/#the-loader-context">loader context</a> inside the custom plugin can be done using the <code>less.webpackLoaderContext</code> property.</p> </blockquote> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <blockquote> <p>ℹ️ Access to the <a href="/api/loaders/#the-loader-context">loader context</a> inside the custom plugin can be done using the <code>pluginManager.webpackLoaderContext</code> property.</p> </blockquote> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token function-variable function">install</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">less<span class="token punctuation">,</span> pluginManager<span class="token punctuation">,</span> functions</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     functions<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"pi"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token comment">// Loader context is available in `less.webpackLoaderContext`</span>
+      <span class="token comment">// Loader context is available in `pluginManager.webpackLoaderContext`</span>
 
       <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token constant">PI</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
