@@ -36,7 +36,7 @@ $ npm install node-loader --save-dev
 
 ```js
 module.exports = {
-  target: 'node',
+  target: "node",
   node: {
     __dirname: false,
   },
@@ -44,7 +44,7 @@ module.exports = {
     rules: [
       {
         test: /\.node$/,
-        loader: 'node-loader',
+        loader: "node-loader",
       },
     ],
   },
@@ -56,7 +56,7 @@ module.exports = {
 **index.js**
 
 ```js
-import node from 'node-loader!./file.node';
+import node from "node-loader!./file.node";
 ```
 
 然后通过你喜欢的方式运行 `webpack`。
@@ -66,7 +66,7 @@ import node from 'node-loader!./file.node';
 **index.js**
 
 ```js
-import node from 'file.node';
+import node from "file.node";
 ```
 
 然后在你的 `webpack` 配置中添加该 loader。例如：
@@ -75,7 +75,7 @@ import node from 'file.node';
 
 ```js
 module.exports = {
-  target: 'node',
+  target: "node",
   node: {
     __dirname: false,
   },
@@ -83,7 +83,7 @@ module.exports = {
     rules: [
       {
         test: /\.node$/,
-        loader: 'node-loader',
+        loader: "node-loader",
       },
     ],
   },
@@ -110,16 +110,16 @@ module.exports = {
 **index.js**
 
 ```js
-import node from 'file.node';
+import node from "file.node";
 ```
 
 **webpack.config.js**
 
 ```js
-const os = require('os');
+const os = require("os");
 
 module.exports = {
-  target: 'node',
+  target: "node",
   node: {
     __dirname: false,
   },
@@ -127,7 +127,7 @@ module.exports = {
     rules: [
       {
         test: /\.node$/,
-        loader: 'node-loader',
+        loader: "node-loader",
         options: {
           flags: os.constants.dlopen.RTLD_NOW,
         },
@@ -150,7 +150,7 @@ module.exports = {
 
 ```js
 module.exports = {
-  target: 'node',
+  target: "node",
   node: {
     __dirname: false,
   },
@@ -158,9 +158,9 @@ module.exports = {
     rules: [
       {
         test: /\.node$/,
-        loader: 'node-loader',
+        loader: "node-loader",
         options: {
-          name: '[path][name].[ext]',
+          name: "[path][name].[ext]",
         },
       },
     ],
@@ -174,7 +174,7 @@ module.exports = {
 
 ```js
 module.exports = {
-  target: 'node',
+  target: "node",
   node: {
     __dirname: false,
   },
@@ -182,17 +182,17 @@ module.exports = {
     rules: [
       {
         test: /\.node$/,
-        loader: 'node-loader',
+        loader: "node-loader",
         options: {
           name(resourcePath, resourceQuery) {
             // `resourcePath` - `/absolute/path/to/file.js`
             // `resourceQuery` - `?foo=bar`
 
-            if (process.env.NODE_ENV === 'development') {
-              return '[path][name].[ext]';
+            if (process.env.NODE_ENV === "development") {
+              return "[path][name].[ext]";
             }
 
-            return '[contenthash].[ext]';
+            return "[contenthash].[ext]";
           },
         },
       },
