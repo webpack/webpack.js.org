@@ -17,7 +17,7 @@ T> webpack's environment variables are different from the [environment variables
 The webpack command line [environment option](/api/cli/#environment-options) `--env` allows you to pass in as many environment variables as you like. Environment variables will be made accessible in your `webpack.config.js`. For example, `--env production` or `--env goal=local`.
 
 ```bash
-npx webpack --env NODE_ENV=local --env production --progress
+npx webpack --env goal=local --env production --progress
 ```
 
 T> Setting up your `env` variable without assignment, `--env production` sets `env.production` to `true` by default. There are also other syntaxes that you can use. See the [webpack CLI](/api/cli/#environment-options) documentation for more information.
