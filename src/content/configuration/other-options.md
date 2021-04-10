@@ -174,6 +174,84 @@ W> Moved to [snapshot.managedPaths](#managedpaths)
 
 `cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
 
+### cache.maxAge
+
+`number = 5184000000`
+
+<Badge text='5.30.0+' />
+
+The amount of time in milliseconds that unused cache entries are allowed to stay in the filesystem cache; defaults to one month.
+
+`cache.maxAge` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  cache: {
+    type: 'filesystem',
+    maxAge: 5184000000,
+  },
+};
+```
+
+### cache.maxGenerations
+
+`number`
+
+<Badge text='5.30.0+' />
+
+Define the lifespan of unused cache entries in the memory cache.
+
+- `cache.maxGenerations: 1`: Cache entries are removed after being unused for a single compilation.
+
+- `cache.maxGenerations: Infinity`: Cache entries are kept forever.
+
+`cache.maxGenerations` option is only available when [`cache.type`](#cachetype) is set to `memory`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  cache: {
+    type: 'memory',
+    maxGenerations: Infinity,
+  },
+};
+```
+
+### cache.maxMemoryGenerations
+
+`number`
+
+<Badge text='5.30.0+' />
+
+Define the lifespan of unused cache entries in the memory cache.
+
+- `cache.maxMemoryGenerations: 0`: Persistent cache will not use an additional memory cache. It will only cache items in memory until they are serialized to disk. Once serialized the next read will deserialize them from the disk again. This mode will minimize memory usage but introduce a performance cost.
+
+- `cache.maxMemoryGenerations: 1`: This will purge items from the memory cache once they are serialized and unused for at least one compilation. When they are used again they will be deserialized from the disk. This mode will minimize memory usage while still keeping active items in the memory cache.
+
+- `cache.maxMemoryGenerations`: small numbers > 0 will have a performance cost for the GC operation. It gets lower as the number increases.
+
+- `cache.maxMemoryGenerations`: defaults to 10 in `development` mode and to `Infinity` in `production` mode.
+
+`cache.maxMemoryGenerations` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  cache: {
+    type: 'filesystem',
+    maxMemoryGenerations: Infinity,
+  },
+};
+```
+
 ### cache.hashAlgorithm
 
 `string`
@@ -297,78 +375,6 @@ module.exports = {
 ```
 
 W> `cache.idleTimeoutForInitialStore` is only available when [`cache.store`](#cachestore) is set to `'pack'`
-
-### cache.maxMemoryGenerations
-
-`number`
-
-<Badge text='5.30.0+' />
-
-Define the lifespan of unused cache entries in the memory cache.
-
-- `cache.maxMemoryGenerations: 0`: Persistent cache will not use an additional memory cache. It will only cache items in memory until they are serialized to disk. Once serialized the next read will deserialize them from the disk again. This mode will minimize memory usage but introduce a performance cost.
-
-- `cache.maxMemoryGenerations: 1`: This will purge items from the memory cache once they are serialized and unused for at least one compilation. When they are used again they will be deserialized from the disk. This mode will minimize memory usage while still keeping active items in the memory cache.
-
-- `cache.maxMemoryGenerations`: small numbers > 0 will have a performance cost for the GC operation. It gets lower as the number increases.
-
-- `cache.maxMemoryGenerations`: defaults to 10 in `development` mode and to `Infinity` in `production` mode.
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  // ...
-  cache: {
-    type: 'filesystem',
-    maxMemoryGenerations: Infinity,
-  },
-};
-```
-
-### cache.maxAge
-
-`number = 5184000000`
-
-<Badge text='5.30.0+' />
-
-Time for which unused cache entries stay in the filesystem cache at minimum (in milliseconds).
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  // ...
-  cache: {
-    type: 'filesystem',
-    maxAge: 5184000000,
-  },
-};
-```
-
-### cache.maxGenerations
-
-`number`
-
-<Badge text='5.30.0+' />
-
-Define the lifespan of unused cache entries in the memory cache.
-
-- `cache.maxGenerations: 1`: Cache entries are removed after being unused for a single compilation.
-
-- `cache.maxGenerations: Infinity`: Cache entries are kept forever.
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  // ...
-  cache: {
-    type: 'memory',
-    maxGenerations: Infinity,
-  },
-};
-```
 
 ## dependencies
 
