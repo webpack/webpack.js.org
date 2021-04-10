@@ -769,6 +769,7 @@ module.exports = {
 ```
 
 请注意在 webpack 5 中应该使用 `type` 而不是 `test`，否则将会生成 `.js` 文件而不是 `.css`。这是因为 `test` 不知道应该去掉哪个模块（在这种情况下，它不会检测到 `.js` 应该被删除）。
+
 ### 基于入口提取 CSS {#extracting-css-based-on-entry}
 
 你可以基于 webpack 的入口名称提取 CSS。
