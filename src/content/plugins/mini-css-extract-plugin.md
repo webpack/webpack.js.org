@@ -768,13 +768,8 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
+请注意在 webpack 5 中应该使用 `type` 而不是 `test`，否则将会生成 `.js` 文件而不是 `.css`。这是因为 `test` 不知道应该去掉哪个模块（在这种情况下，它不会检测到 `.js` 应该被删除）。
 ### 基于入口提取 CSS {#extracting-css-based-on-entry}
-=======
-Note that `type` should be used instead of `test` in Webpack 5, or else an extra `.js` file can be generated besides the `.css` file. This is because `test` doesn't know which modules should be dropped (in this case, it won't detect that `.js` should be dropped).
-
-### Extracting CSS based on entry
->>>>>>> d96c59d7c65a835aa917ae6fcf9ed4ea8c5643b4
 
 你可以基于 webpack 的入口名称提取 CSS。
 当你使用路由动态加载但是想要通过入口加载对应的 CSS 文件时这将会非常有用。

@@ -89,30 +89,18 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 @import "bootstrap";
 ```
 
-<<<<<<< HEAD
 `~` 用法已被废弃，可以从代码中删除（**我们建议这么做**），但是我们会因为一些历史原因一直支持这种写法。
 为什么你可以移除它呢？loader 首先会尝试以相对路径解析 `@import`，如果它不能被解析，loader 将会尝试在 [`node_modules`](/configuration/resolve/#resolvemodules) 中解析 `@import`。
-只要在包名前加上 `~`，告诉 Webpack 在 [`modules`](/configuration/resolve/#resolvemodules) 中进行查找。
-=======
-Using `~` is deprecated and can be removed from your code (**we recommend it**), but we still support it for historical reasons.
-Why can you remove it? The loader will first try to resolve `@import` as a relative path. If it cannot be resolved, then the loader will try to resolve `@import` inside [`node_modules`](/configuration/resolve/#resolvemodules).
 
-Prepending module paths with a `~` tells webpack to search through [`node_modules`](/configuration/resolve/#resolvemodules).
->>>>>>> d96c59d7c65a835aa917ae6fcf9ed4ea8c5643b4
+在包名前加上 `~` 就会告诉 Webpack 在 [`modules`](/configuration/resolve/#resolvemodules) 中进行查找。
 
 ```scss
 @import "~bootstrap";
 ```
 
-<<<<<<< HEAD
 重要的是，只在前面加上 `~`，因为`~/` 将会解析到用户的主目录（home directory）。
 因为 CSS 和 Sass 文件没有用于导入相关文件的特殊语法，所以 Webpack 需要区分 `bootstrap` 和 `~bootstrap`。
  `@import "style.scss"` 和 `@import "./style.scss";` 两种写法是相同的。
-=======
-It's important to prepend it with only `~`, because `~/` resolves to the home directory.
-Webpack needs to distinguish between `bootstrap` and `~bootstrap` because CSS and Sass files have no special syntax for importing relative files.
-Writing `@import "style.scss"` is the same as `@import "./style.scss";`
->>>>>>> d96c59d7c65a835aa917ae6fcf9ed4ea8c5643b4
 
 ### `url(...)` 的问题 {#problems-with-url}
 
