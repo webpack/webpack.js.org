@@ -228,13 +228,11 @@ module.exports = {
 };
 ```
 
-### `resolve.extensions`
+### resolve.extensions
 
-`[string] = ['.wasm', '.mjs', '.js', '.json']`
+`[string] = ['.js', '.json', '.wasm']`
 
-Attempt to resolve these extensions in order.
-
-W> If multiple files share the same name but have different extensions, webpack will resolve the one with the extension listed first in the array and skip the rest.
+Attempt to resolve these extensions in order. If multiple files share the same name but have different extensions, webpack will resolve the one with the extension listed first in the array and skip the rest.
 
 **webpack.config.js**
 
@@ -242,7 +240,7 @@ W> If multiple files share the same name but have different extensions, webpack 
 module.exports = {
   //...
   resolve: {
-    extensions: ['.wasm', '.mjs', '.js', '.json'],
+    extensions: ['.js', '.json', '.wasm'],
   },
 };
 ```
@@ -253,7 +251,16 @@ which is what enables users to leave off the extension when importing:
 import File from '../path/to/file';
 ```
 
-W> Using this will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions.
+Note that using `resolve.extensions` like above will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. However you can use `'...'` to access the default extensions:
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    extensions: ['.ts', '...'],
+  },
+};
+```
 
 ### `resolve.mainFields`
 
