@@ -31,42 +31,23 @@ export default function Sidebar({ className = '', pages, currentPage }) {
   return (
     <nav className={`sidebar ${className}`}>
       <div className="sidebar__inner">
-        <div
+        <select
+          name="version-selector"
           style={{
+            border: '1px solid #dedede',
+            borderRadius: 0,
+            fontSize: 14,
+            color: '#535353',
             display: 'flex',
+            width: '100%',
+            padding: '5px 10px',
           }}
+          value={version}
+          onChange={(e) => setVersion(+e.target.value)}
         >
-          <label
-            htmlFor="version-selector"
-            style={{
-              background: '#1f71b3',
-              color: '#e8f1f9',
-              fontSize: '12px',
-              padding: '2px 5px',
-            }}
-          >
-            webpack
-          </label>
-          <span
-            style={{
-              padding: '2px 5px',
-              fontSize: '12px',
-            }}
-          >
-            <select
-              name="version-selector"
-              style={{
-                border: 'none',
-                borderRadius: 0,
-              }}
-              value={version}
-              onChange={(e) => setVersion(+e.target.value)}
-            >
-              <option value={5}>5</option>
-              <option value={4}>4</option>
-            </select>
-          </span>
-        </div>
+          <option value={5}>Webpack 5</option>
+          <option value={4}>Webpack 4</option>
+        </select>
         <Print url={currentPage} />
 
         {pages.map((page, index) => {
