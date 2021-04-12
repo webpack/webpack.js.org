@@ -94,7 +94,7 @@ Now let's make sure we have something to debug, so let's create an error in our 
 ```diff
  export default function printMe() {
 -  console.log('I get called from print.js!');
-+  cosnole.log('I get called from print.js!');
++  console.log('I get called from print.js!');
  }
 ```
 
