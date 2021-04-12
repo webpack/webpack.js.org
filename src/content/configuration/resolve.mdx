@@ -229,14 +229,22 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `resolve.extensions` {#resolveextensions}
+=======
+### resolve.extensions
+>>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
 
-`[string] = ['.wasm', '.mjs', '.js', '.json']`
+`[string] = ['.js', '.json', '.wasm']`
 
+<<<<<<< HEAD
 尝试按顺序解析这些后缀名。
 
 W> 如果有多个文件有相同的名字，但后缀名不同，webpack 会解析列在数组首位的后缀的文件
 并跳过其余的后缀。
+=======
+Attempt to resolve these extensions in order. If multiple files share the same name but have different extensions, webpack will resolve the one with the extension listed first in the array and skip the rest.
+>>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
 
 **webpack.config.js**
 
@@ -244,7 +252,7 @@ W> 如果有多个文件有相同的名字，但后缀名不同，webpack 会解
 module.exports = {
   //...
   resolve: {
-    extensions: ['.wasm', '.mjs', '.js', '.json'],
+    extensions: ['.js', '.json', '.wasm'],
   },
 };
 ```
@@ -255,7 +263,20 @@ module.exports = {
 import File from '../path/to/file';
 ```
 
+<<<<<<< HEAD
 W> 使用此选项会 **覆盖默认数组**，这就意味着 webpack 将不再尝试使用默认扩展来解析模块。
+=======
+Note that using `resolve.extensions` like above will **override the default array**, meaning that webpack will no longer try to resolve modules using the default extensions. However you can use `'...'` to access the default extensions:
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    extensions: ['.ts', '...'],
+  },
+};
+```
+>>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
 
 ### `resolve.mainFields` {#resolvemainfields}
 

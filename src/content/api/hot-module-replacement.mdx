@@ -15,12 +15,25 @@ related:
     url: /guides/hot-module-replacement
 ---
 
+<<<<<<< HEAD:src/content/api/hot-module-replacement.md
 如果已经通过 [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) 启用了 [Hot Module Replacement](/concepts/hot-module-replacement), 则它的接口将被暴露在 [`module.hot` 属性](/api/module-variables/#modulehot-webpack-specific) 下面。通常，用户先要检查这个接口是否可访问, 再使用它。你可以这样使用 `accept` 操作一个更新的模块：
+=======
+If [Hot Module Replacement](/concepts/hot-module-replacement) has been enabled via the [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin), its interface will be exposed under the [`module.hot`](/api/module-variables/#modulehot-webpack-specific) property as well as [`import.meta.webpackHot`](/api/module-variables/#importmetawebpackhot) property. Note that only `import.meta.webpackHot` can be used in [strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm).
+
+Typically, users will check to see if the interface is accessible, then begin working with it. As an example, here's how you might `accept` an updated module:
+>>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826:src/content/api/hot-module-replacement.mdx
 
 ```js
 if (module.hot) {
   module.hot.accept('./library.js', function() {
     // 对更新过的 library 模块做些事情...
+  });
+}
+
+// or
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept('./library.js', function () {
+    // Do something with the updated library modue…
   });
 }
 ```
@@ -31,12 +44,29 @@ if (module.hot) {
 
 ### `accept` {#accept}
 
+<<<<<<< HEAD:src/content/api/hot-module-replacement.md
 接受(accept)给定 `依赖模块(dependencies)` 的更新，并触发一个 `回调函数` 来响应更新。
 
 ```js
 module.hot.accept(
   dependencies, // 可以是一个字符串或字符串数组
   callback // 用于在模块更新后触发的函数
+=======
+Accept updates for the given `dependencies` and fire a `callback` to react to those updates, in addition, you can attach an optional error handler:
+
+```js
+module.hot.accept(
+  dependencies, // Either a string or an array of strings
+  callback, // Function to fire when the dependencies are updated
+  errorHandler // (err, {moduleId, dependencyId}) => {}
+);
+
+// or
+import.meta.webpackHot.accept(
+  dependencies, // Either a string or an array of strings
+  callback, // Function to fire when the dependencies are updated
+  errorHandler // (err, {moduleId, dependencyId}) => {}
+>>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826:src/content/api/hot-module-replacement.mdx
 );
 ```
 
@@ -44,7 +74,19 @@ module.hot.accept(
 
 在使用 CommonJS 时，你应该通过 `callback` 中的 `require()` 手动更新依赖模块。省略 `callback` 在这里没有任何意义。
 
+<<<<<<< HEAD:src/content/api/hot-module-replacement.md
 ### `accept` (自身) {#accept-self}
+=======
+#### errorHandler for accept
+
+`(err, {moduleId, dependencyId}) => {}`
+
+- `err`: the error thrown by the callback in second argument or during dependency execution when using ESM dependencies.
+- `moduleId`: the current module id.
+- `dependencyId`: the module id of the (first) changed dependency.
+
+### `accept` (self)
+>>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826:src/content/api/hot-module-replacement.mdx
 
 接受自身更新。
 
@@ -52,19 +94,43 @@ module.hot.accept(
 module.hot.accept(
   errorHandler // 在计算新版本时处理错误的函数
 );
+
+// or
+import.meta.webpackHot.accept(
+  errorHandler // Function to handle errors when evaluating the new version
+);
 ```
 
 在此模块或依赖模块更新时，可以在不通知父依赖的情况下，对此模块处理和重新取值。如果此模块没有导出（或以其他方式更新的导出），这是有意义的。
 
 当执行此模块（或依赖模块）抛出异常时，会触发 `errorHandler`。
 
+<<<<<<< HEAD:src/content/api/hot-module-replacement.md
 ### `decline` {#decline}
+=======
+#### errorHandler for self accept
+
+`(err, {moduleId, module}) => {}`
+
+- `err`: the error when evaluating the new version.
+- `moduleId`: the current module id.
+- `module`: the current module instance.
+  - `module.hot`: allow to use the HMR API of the errored module instance. A common scenario is to self accept it again. It also makes sense to add a dispose handler to pass data along. Note that the errored module might be already partially executed, so make sure to not get into a inconsistent state. You can use `module.hot.data` to store partial state.
+  - `module.exports`: can be overriden, but be careful since property names might be mangled in production mode.
+
+### `decline`
+>>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826:src/content/api/hot-module-replacement.mdx
 
 拒绝给定`依赖模块`的更新，使用 `'decline'` 方法强制更新失败。
 
 ```js
 module.hot.decline(
   dependencies // 可以是一个字符串或字符串数组
+);
+
+// or
+import.meta.webpackHot.decline(
+  dependencies // Either a string or an array of strings
 );
 ```
 
@@ -77,6 +143,9 @@ module.hot.decline(
 
 ```js
 module.hot.decline();
+
+// or
+import.meta.webpackHot.decline();
 ```
 
 将依赖模块标记为不可更新(not-update-able)。当此模块具有无法避免的外部作用(side-effect)，或者尚未对此模块进行 HMR 处理时，这是有意义的。取决于你的 HMR 管理代码，此依赖模块（或其未接受的依赖模块）更新，通常会导致页面被完全重新加载。
@@ -88,6 +157,11 @@ module.hot.decline();
 ``` js
 module.hot.dispose(data => {
   // 清理并将 data 传递到更新后的模块...
+});
+
+// or
+import.meta.webpackHot.dispose((data) => {
+  // Clean up and pass data to the updated module...
 });
 ```
 
@@ -103,7 +177,11 @@ module.hot.dispose(data => {
 
 在 `dispose` 或 `apply` 状态下调用时，HMR 将在退出这些状态后将其拾取。
 
+<<<<<<< HEAD:src/content/api/hot-module-replacement.md
 ### 用例 {#use-cases}
+=======
+#### Use Cases
+>>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826:src/content/api/hot-module-replacement.mdx
 
 **Conditional Accepting**
 
@@ -174,6 +252,9 @@ W> 通过一次次的调用 `invalidate`，不要陷入 `invalidate` 循环。�
 
 ```js
 module.hot.removeDisposeHandler(callback);
+
+// or
+import.meta.webpackHot.removeDisposeHandler(callback);
 ```
 
 ## API 管理 {#management-api}
@@ -182,6 +263,7 @@ module.hot.removeDisposeHandler(callback);
 
 获取当前模块热替换进程的状态。
 
+<<<<<<< HEAD:src/content/api/hot-module-replacement.md
 ``` js
 module.hot.status(); // 返回以下字符串之一...
 ```
@@ -196,6 +278,25 @@ module.hot.status(); // 返回以下字符串之一...
 | apply       | 该进程正在调用 `accept` 处理函数，并重新执行自我接受(self-accepted)的模块 |
 | abort       | 更新已中止，但系统仍处于之前的状态 |
 | fail        | 更新已抛出异常，系统状态已被破坏 |
+=======
+```js
+module.hot.status(); // Will return one of the following strings...
+
+// or
+import.meta.webpackHot.status();
+```
+
+| Status  | Description                                                                         |
+| ------- | ----------------------------------------------------------------------------------- |
+| idle    | The process is waiting for a call to [`check`](#check)                              |
+| check   | The process is checking for updates                                                 |
+| prepare | The process is getting ready for the update (e.g. downloading the updated module)   |
+| ready   | The update is prepared and available                                                |
+| dispose | The process is calling the `dispose` handlers on the modules that will be replaced  |
+| apply   | The process is calling the `accept` handlers and re-executing self-accepted modules |
+| abort   | An update was aborted, but the system is still in its previous state                |
+| fail    | An update has thrown an exception and the system's state has been compromised       |
+>>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826:src/content/api/hot-module-replacement.mdx
 
 
 ### `check` {#check}
@@ -210,6 +311,16 @@ module.hot
   })
   .catch((error) => {
     // 捕获错误
+  });
+
+// or
+import.meta.webpackHot
+  .check(autoApply)
+  .then((outdatedModules) => {
+    // outdated modules...
+  })
+  .catch((error) => {
+    // catch errors
   });
 ```
 
@@ -227,6 +338,16 @@ module.hot
   })
   .catch((error) => {
     // 捕获错误
+  });
+
+// or
+import.meta.webpackHot
+  .apply(options)
+  .then((outdatedModules) => {
+    // outdated modules...
+  })
+  .catch((error) => {
+    // catch errors
   });
 ```
 
@@ -273,6 +394,11 @@ module.hot
 module.hot.addStatusHandler((status) => {
   // 响应当前状态...
 });
+
+// or
+import.meta.webpackHot.addStatusHandler((status) => {
+  // React to the current status...
+});
 ```
 
 ### `removeStatusHandler` {#removestatushandler}
@@ -281,4 +407,7 @@ module.hot.addStatusHandler((status) => {
 
 ```js
 module.hot.removeStatusHandler(callback);
+
+// or
+import.meta.webpackHot.removeStatusHandler(callback);
 ```

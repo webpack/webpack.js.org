@@ -632,6 +632,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `devServer.info` - CLI only {#devserverinfo---cli-only}
 
 `boolean`
@@ -643,6 +644,9 @@ npx webpack serve --info false
 ```
 
 ## `devServer.injectClient` {#devserverinjectclient}
+=======
+## `devServer.injectClient`
+>>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
 
 `boolean = false` `function (compilerConfig) => boolean`
 
@@ -749,10 +753,16 @@ module.exports = {
 通过命令行使用
 
 ```bash
-npx webpack serve --no-live-reload
+npx webpack serve --liveReload
 ```
 
+<<<<<<< HEAD
 ## `devServer.mimeTypes` 🔑 {#devservermimetypes-}
+=======
+Notice that there's no way to disable it from CLI.
+
+## `devServer.mimeTypes` 🔑
+>>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
 
 `object`
 
@@ -873,7 +883,8 @@ T> 浏览器应用程序名称取决于平台。 不要在可重用模块中对�
 module.exports = {
   //...
   devServer: {
-    openPage: '/different/page',
+    open: true,
+    openPage: 'different/page',
   },
 };
 ```
@@ -881,10 +892,16 @@ module.exports = {
 通过命令行使用
 
 ```bash
-npx webpack serve --open-page /different/page
+npx webpack serve --open --open-page different/page
 ```
 
+<<<<<<< HEAD
 如果希望指定多个页面在浏览器中打开。
+=======
+W> Do not prepend `/` for the page as webpack-dev-server will do it automatically, otherwise the browser will open urls like `http://localhost:8080//different/page`.
+
+If you wish to specify multiple pages to open in the browser.
+>>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
 
 **webpack.config.js**
 
@@ -892,7 +909,8 @@ npx webpack serve --open-page /different/page
 module.exports = {
   //...
   devServer: {
-    openPage: ['/different/page1', '/different/page2'],
+    open: true,
+    openPage: ['different/page1', 'different/page2'],
   },
 };
 ```
@@ -900,7 +918,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-npx webpack serve --open-page /different/page1,/different/page2
+npx webpack serve --open --open-page different/page1 --open-page different/page2
 ```
 
 ## `devServer.overlay` {#devserveroverlay}

@@ -52,11 +52,6 @@ button.as-link {
   &:hover {
     color: darken(getColor(denim), 5%);
   }
-
-  .page &[href^='http']::after {
-    color: transparentize($text-color-highlight, 0.65);
-    content: ' \25F3';
-  }
 }
 
 ::selection {

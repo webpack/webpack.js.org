@@ -47,7 +47,7 @@ module.exports = {
       files: ['**/*.{md,mdx}/*.{js,javascript}'], // we don't lint ts at the moment
       rules: {
         indent: ['error', 2],
-        quotes: ['error', 'single'],
+        quotes: ['error', 'single', { allowTemplateLiterals: true }],
         'no-undef': 'off',
         'no-unused-vars': 'off',
         'no-constant-condition': 'off',
