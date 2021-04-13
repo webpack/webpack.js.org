@@ -557,7 +557,7 @@ Options for infrastructure level logging.
 
 `boolean`
 
-Only appends lines to the output. Avoids updating existing output e. g. for status messages. This option is only used when no custom [`console`](#console) is provided.
+Append lines to the output instead of updating existing output, useful for status messages. This option is used only when no custom [`console`](#console) is provided.
 
 **webpack.config.js**
 
@@ -566,7 +566,15 @@ module.exports = {
   //...
   infrastructureLogging: {
     appendOnly: true,
+    level: 'verbose'
   },
+  plugins: [
+		compiler => {
+			const logger = compiler.getInfrastructureLogger("MyPlugin");
+			logger.status("first output"); // this line won't be overridden with `appendOnly` enabled
+			logger.status("second output");
+		}
+	]
 };
 ```
 
@@ -576,7 +584,7 @@ module.exports = {
 
 `boolean`
 
-Enable/Disable colorful output. This option is only used when no custom [`console`](#console) is provided.
+Enable colorful output for infrastructure level logging. This option is used only when no custom [`console`](#console) is provided.
 
 **webpack.config.js**
 
@@ -585,7 +593,14 @@ module.exports = {
   //...
   infrastructureLogging: {
     colors: true,
+    level: 'verbose'
   },
+  plugins: [
+    compiler => {
+      const logger = compiler.getInfrastructureLogger("MyPlugin");
+      logger.log("this output will be colorful");
+    }
+  ],
 };
 ```
 
@@ -595,7 +610,7 @@ module.exports = {
 
 `Console`
 
-Custom console used for logging.
+Customize the console used for infrastructure level logging.
 
 **webpack.config.js**
 
@@ -658,7 +673,7 @@ module.exports = {
 
 `NodeJS.WritableStream = process.stderr`
 
-Stream used for logging output. Defaults to `process.stderr`. This option is only used when no custom [`console`](#console) is provided.
+Stream used for logging output. Defaults to `process.stderr`. This option is used only when no custom [`console`](#console) is provided.
 
 **webpack.config.js**
 
