@@ -104,13 +104,22 @@ It is possible to define variables with values that rely on files and will be re
 Arguments:
 
 - The first argument of the `webpack.DefinePlugin.runtimeValue` is a `function` that should return the value to be assigned to the definition.
-- The second argument is an array of file paths to watch for. Pass `true` instead of `[string]` here to flag the module as uncacheable.
+- The second argument is an options object argument with the following properties
+  - `options.fileDependencies: string[]` list of files the function depends on
+  - `options.contextDependencies: string[]` list of directories the function depends on
+  - `options.missingDependencies: string[]` list of not existing files the function depends on
+  - `options.buildDependencies: string[]` list of build dependencies the function depends on
+  - `options.version: string | () => string` version of the function
+
+W> The constant options of the DefinePlugin do not have to be covered by build dependencies but for the `DefinePlugin.runtimeValue` generator function build dependencies need to be used.
 
 ```javascript
 const fileDep = path.resolve(__dirname, 'sample.txt');
 
 new webpack.DefinePlugin({
-  BUILT_AT: webpack.DefinePlugin.runtimeValue(Date.now, [fileDep]),
+  BUILT_AT: webpack.DefinePlugin.runtimeValue(Date.now, {
+    fileDependencies: [fileDep],
+  }),
 });
 ```
 
