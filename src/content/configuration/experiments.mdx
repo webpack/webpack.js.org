@@ -18,12 +18,13 @@ W> Because experimental features have relaxed semantic versioning and might cont
 
 Available options:
 
+- [`executeModule`](#experimentsexecutemodule): Enable execution of modules from the module graph for plugins and loaders at build time.
 - `syncWebAssembly`: Support the old WebAssembly like in webpack 4
 - `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module
 - `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level
 - `outputModule`: enables the use of [`output.module`](/configuration/output/#outputmodule) configuration option and sets it to `true`. Enables the use of `output.libraryTarget` as `'module'` and sets it to `'module'`.
 - `layers`: Enable module and chunk layers.
-- `lazyCompilation`: Compile entrypoints and dynamic `import`s only when they are in use.
+- [`lazyCompilation`](#experimentslazycompilation): Compile entrypoints and dynamic `import`s only when they are in use.
 
 **webpack.config.js**
 
@@ -31,6 +32,7 @@ Available options:
 module.exports = {
   //...
   experiments: {
+    executeModule: true,
     outputModule: true,
     syncWebAssembly: true,
     topLevelAwait: true,
@@ -40,6 +42,23 @@ module.exports = {
   },
 };
 ```
+
+### experiments.executeModule
+
+Enable execution of modules from the module graph for plugins and loaders at build time to generate code or other assets.
+
+- Type: `boolean`
+- Available: 5.32.0+
+- Example:
+
+  ```js
+  module.exports = {
+    // …
+    experiments: {
+      executeModule: true,
+    },
+  };
+  ```
 
 ### experiments.lazyCompilation
 
