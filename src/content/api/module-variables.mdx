@@ -22,27 +22,15 @@ related:
 
 本章节涵盖了使用 webpack 编译的代码中所有的**变量**。模块将通过 `module` 和其他变量，来访问编译过程中的某些数据。
 
-<<<<<<< HEAD
-### `module.loaded` (NodeJS) {#moduleloaded-nodejs}
-=======
-## `module.loaded` (NodeJS)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `module.loaded` (NodeJS) {#moduleloaded-nodejs}
 
 `false` 表示该模块正在执行， `true` 表示同步执行已经完成。
 
-<<<<<<< HEAD
-### `module.hot` (webpack-specific) {#modulehot-webpack-specific}
-=======
-## `module.hot` (webpack-specific)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `module.hot` (webpack-specific) {#modulehot-webpack-specific}
 
 表示 [模块热替换(Hot Module Replacement)](/concepts/hot-module-replacement) 是否启用，并给进程提供一个接口。详细说明请查看 [模块热替换 API 页面](/api/hot-module-replacement)。
 
-<<<<<<< HEAD
-### `module.id` (CommonJS) {#moduleid-commonjs}
-=======
-## `module.id` (CommonJS)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `module.id` (CommonJS) {#moduleid-commonjs}
 
 当前模块的 ID。
 
@@ -50,11 +38,7 @@ related:
 module.id === require.resolve('./file.js');
 ```
 
-<<<<<<< HEAD
-### `module.exports` (CommonJS) {#moduleexports-commonjs}
-=======
-## `module.exports` (CommonJS)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `module.exports` (CommonJS) {#moduleexports-commonjs}
 
 调用者通过 `require` 对模块进行调用时返回的值（默认为一个新对象）。
 
@@ -66,11 +50,7 @@ module.exports = function doSomething() {
 
 W> 无法在异步函数中访问该变量。
 
-<<<<<<< HEAD
-### `exports` (CommonJS) {#exports-commonjs}
-=======
-## `exports` (CommonJS)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `exports` (CommonJS) {#exports-commonjs}
 
 该变量默认值为 `module.exports`（即一个对象）。 如果 `module.exports` 被重写的话， `exports` 不再会被导出。
 
