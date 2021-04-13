@@ -17,10 +17,6 @@ with all the options passed through the [CLI](/api/cli) or [Node API](/api/node)
 `Tapable` class in order to register and call plugins. Most user facing plugins
 are first registered on the `Compiler`.
 
-T> This module is exposed as `webpack.Compiler` and can be used directly. See
-[this example](https://github.com/pksjce/webpack-internal-examples/tree/master/compiler-example)
-for more information.
-
 When developing a plugin for webpack, you might want to know where each hook is called. To learn this, search for `hooks.<hook name>.call` across the webpack source
 
 ## Watching
