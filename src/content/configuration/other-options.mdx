@@ -174,18 +174,15 @@ W> 已迁移到 [snapshot.managedPaths](#managedpaths)
 
 `cache.managedPaths` 是仅托管路径的包管理器数组。webpack 将避免将他们进行哈希和时间戳处理，假设版本是唯一的，并将其用作快照（用于内存和文件系统缓存）。
 
-<<<<<<< HEAD:src/content/configuration/other-options.md
-### cache.hashAlgorithm {#cachehashalgorithm}
-=======
-### cache.maxAge
+### cache.maxAge {#cachemaxage}
 
 `number = 5184000000`
 
 <Badge text='5.30.0+' />
 
-The amount of time in milliseconds that unused cache entries are allowed to stay in the filesystem cache; defaults to one month.
+允许未使用的缓存留在文件系统缓存中的时间（以毫秒为单位）；默认为一个月。
 
-`cache.maxAge` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+`cache.maxAge` 仅在  [`cache.type`](#cachetype) 设置为 `filesystem` 时生效。
 
 **webpack.config.js**
 
@@ -199,19 +196,19 @@ module.exports = {
 };
 ```
 
-### cache.maxGenerations
+### cache.maxGenerations {#cachemaxgenerations}
 
 `number`
 
 <Badge text='5.30.0+' />
 
-Define the lifespan of unused cache entries in the memory cache.
+定义内存缓存中未使用的缓存项的生命周期。
 
-- `cache.maxGenerations: 1`: Cache entries are removed after being unused for a single compilation.
+- `cache.maxGenerations: 1`: 在一次编译中未使用的缓存被删除。
 
-- `cache.maxGenerations: Infinity`: Cache entries are kept forever.
+- `cache.maxGenerations: Infinity`: 缓存将永远保存。
 
-`cache.maxGenerations` option is only available when [`cache.type`](#cachetype) is set to `memory`.
+`cache.maxGenerations` 配置项仅在 [`cache.type`](#cachetype) 设置为 `memory` 时有效。
 
 **webpack.config.js**
 
@@ -225,23 +222,23 @@ module.exports = {
 };
 ```
 
-### cache.maxMemoryGenerations
+### cache.maxMemoryGenerations {#cachemaxMemorygenerations}
 
 `number`
 
 <Badge text='5.30.0+' />
 
-Define the lifespan of unused cache entries in the memory cache.
+定义内存缓存中未使用的缓存项的生命周期。
 
-- `cache.maxMemoryGenerations: 0`: Persistent cache will not use an additional memory cache. It will only cache items in memory until they are serialized to disk. Once serialized the next read will deserialize them from the disk again. This mode will minimize memory usage but introduce a performance cost.
+- `cache.maxMemoryGenerations: 0`: 持久化缓存不会使用额外的内存缓存。它只将项目缓存到内存中，直到它们被序列化到磁盘。一旦序列化，下一次读取将再次从磁盘反序列化它们。这种模式将最小化内存使用，但会带来性能成本。
 
-- `cache.maxMemoryGenerations: 1`: This will purge items from the memory cache once they are serialized and unused for at least one compilation. When they are used again they will be deserialized from the disk. This mode will minimize memory usage while still keeping active items in the memory cache.
+- `cache.maxMemoryGenerations: 1`: 这将从内存缓存中清除已序列化且在至少一次编译中未使用的项。当再次使用它们时，它们将从磁盘反序列化。这种模式将最小化内存使用量，同时仍将活动项保留在内存缓存中。
 
-- `cache.maxMemoryGenerations`: small numbers > 0 will have a performance cost for the GC operation. It gets lower as the number increases.
+- `cache.maxMemoryGenerations`: 大于 0 的小数字将为 GC 操作带来性能成本。它会随着数字的增加而降低。
 
-- `cache.maxMemoryGenerations`: defaults to 10 in `development` mode and to `Infinity` in `production` mode.
+- `cache.maxMemoryGenerations`: `development` 模式下默认为 10，`production` 模式下默认为 `Infinity`。
 
-`cache.maxMemoryGenerations` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+`cache.maxMemoryGenerations` 配置项仅在 [`cache.type`](#cachetype) 设置为 `filesystem` 时有效。
 
 **webpack.config.js**
 
@@ -255,8 +252,7 @@ module.exports = {
 };
 ```
 
-### cache.hashAlgorithm
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826:src/content/configuration/other-options.mdx
+### cache.hashAlgorithm {#cachehashalgorithm}
 
 `string`
 

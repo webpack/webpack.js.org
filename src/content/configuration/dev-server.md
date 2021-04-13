@@ -632,21 +632,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `devServer.info` - CLI only {#devserverinfo---cli-only}
-
-`boolean`
-
-输出 cli 信息。默认情况下启用。
-
-```bash
-npx webpack serve --info false
-```
-
 ## `devServer.injectClient` {#devserverinjectclient}
-=======
-## `devServer.injectClient`
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
 
 `boolean = false` `function (compilerConfig) => boolean`
 
@@ -756,13 +742,8 @@ module.exports = {
 npx webpack serve --liveReload
 ```
 
-<<<<<<< HEAD
-## `devServer.mimeTypes` 🔑 {#devservermimetypes-}
-=======
-Notice that there's no way to disable it from CLI.
-
-## `devServer.mimeTypes` 🔑
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+请注意在 CLI 中没有方法禁用它。
+## `devServer.mimeTypes` 🔑 {#devservermimetypes}
 
 `object`
 
@@ -895,13 +876,9 @@ module.exports = {
 npx webpack serve --open --open-page different/page
 ```
 
-<<<<<<< HEAD
-如果希望指定多个页面在浏览器中打开。
-=======
-W> Do not prepend `/` for the page as webpack-dev-server will do it automatically, otherwise the browser will open urls like `http://localhost:8080//different/page`.
+W> 不要在页面前加上 `/`，因为 webpack-dev-server 会自动添加，否则浏览器将会打开像这样的 url：`http://localhost:8080//different/page`。
 
-If you wish to specify multiple pages to open in the browser.
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+如果希望指定多个页面在浏览器中打开。
 
 **webpack.config.js**
 

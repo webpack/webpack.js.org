@@ -84,21 +84,13 @@ exports.aFunction = function doSomething() {
 };
 ```
 
-<<<<<<< HEAD
-### `global` (NodeJS) {#global-nodejs}
-=======
-## `global` (NodeJS)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `global` (NodeJS) {#global-nodejs}
 
 见 [node.js global](https://nodejs.org/api/globals.html#globals_global).
 
 出于兼容性考虑，webpack 默认填充了 `global` 变量。
 
-<<<<<<< HEAD
-### `__dirname` (NodeJS) {#__dirname-nodejs}
-=======
-## `__dirname` (NodeJS)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `__dirname` (NodeJS) {#__dirname-nodejs}
 
 取决于 `node.__dirname` 配置选项：
 
@@ -108,11 +100,7 @@ exports.aFunction = function doSomething() {
 
 如果在一个被 Parser 解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
-<<<<<<< HEAD
-### `import.meta.url` {#import-meta-url}
-=======
-## `import.meta.url`
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `import.meta.url` {#import-meta-url}
 
 返回模块以 `fike:` 开头绝对路径的 URL。
 
@@ -122,11 +110,7 @@ exports.aFunction = function doSomething() {
 console.log(import.meta.url); // 输出结果类似于 `file:///path/to/your/project/src/index.js`
 ```
 
-<<<<<<< HEAD
-### `import.meta.webpack` {#import-meta-webpack}
-=======
-## `import.meta.webpack`
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `import.meta.webpack` {#import-meta-webpack}
 
 返回 webpack 的版本
 
@@ -136,19 +120,11 @@ console.log(import.meta.url); // 输出结果类似于 `file:///path/to/your/pro
 console.log(import.meta.webpack); // output `5` for webpack 5
 ```
 
-<<<<<<< HEAD
-### import.meta.webpackHot {#importmetawebpackhot}
-=======
-## import.meta.webpackHot
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## import.meta.webpackHot {#importmetawebpackhot}
 
 webpack 特定。[`module.hot`](#modulehot-webpack-specific) 的一个别名，[strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm) 中可以使用 `import.meta.webpackHot` 但是不能使用 `module.hot`。
 
-<<<<<<< HEAD
-### `__filename` (NodeJS) {#__filename-nodejs}
-=======
-## `__filename` (NodeJS)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `__filename` (NodeJS) {#__filename-nodejs}
 
 取决于 `node.__filename` 配置选项：
 
@@ -158,11 +134,7 @@ webpack 特定。[`module.hot`](#modulehot-webpack-specific) 的一个别名，[
 
 如果在一个被 Parser 解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
-<<<<<<< HEAD
-### `__resourceQuery` (webpack 特有变量) {#__resourcequery-webpack-specific}
-=======
-## `__resourceQuery` (webpack-specific)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `__resourceQuery` (webpack 特有变量) {#__resourcequery-webpack-specific}
 
 当前模块的资源查询(resource query) 。如果进行了如下的 `reqiure` 调用，那么查询字符串(query string)在`file.js` 中可访问。
 
@@ -176,27 +148,15 @@ require('file.js?test');
 __resourceQuery === '?test';
 ```
 
-<<<<<<< HEAD
-### `__webpack_public_path__` (webpack 特有变量) {#__webpack_public_path__-webpack-specific}
-=======
-## `__webpack_public_path__` (webpack-specific)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `__webpack_public_path__` (webpack 特有变量) {#__webpack_public_path__-webpack-specific}
 
 等同于 `output.publicPath` 配置选项。
 
-<<<<<<< HEAD
-### `__webpack_require__` (webpack 特有变量) {#__webpack_require__-webpack-specific}
-=======
-## `__webpack_require__` (webpack-specific)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `__webpack_require__` (webpack 特有变量) {#__webpack_require__-webpack-specific}
 
 原始 require 函数。这个表达式不会被解析器解析为依赖。
 
-<<<<<<< HEAD
-### `__webpack_chunk_load__` (webpack 特有变量) {#__webpack_chunk_load__-webpack-specific}
-=======
-## \_\_webpack_chunk_load\_\_ (webpack-specific)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `__webpack_chunk_load__` (webpack 特有变量) {#__webpack_chunk_load__-webpack-specific}
 
 内部 chunk 载入函数，有一个输入参数：
 
@@ -224,35 +184,19 @@ import('./module-a').then((moduleA) => {
 });
 ```
 
-<<<<<<< HEAD
-### `__webpack_modules__` (webpack 特有变量) {#__webpack_modules__-webpack-specific}
-=======
-## `__webpack_modules__` (webpack-specific)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `__webpack_modules__` (webpack 特有变量) {#__webpack_modules__-webpack-specific}
 
 访问所有模块的内部对象。
 
-<<<<<<< HEAD
-### `__webpack_hash__` (webpack 特有变量) {#__webpack_hash__-webpack-specific}
-=======
-## `__webpack_hash__` (webpack-specific)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `__webpack_hash__` (webpack 特有变量) {#__webpack_hash__-webpack-specific}
 
 这个变量提供对编译过程中(compilation)的 hash 信息的访问。
 
-<<<<<<< HEAD
-### `__non_webpack_require__` (webpack 特有变量) {#__non_webpack_require__-webpack-specific}
-=======
-## `__non_webpack_require__` (webpack-specific)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `__non_webpack_require__` (webpack 特有变量) {#__non_webpack_require__-webpack-specific}
 
 生成一个不会被 webpack 解析的 `require` 函数。配合全局可以获取到的 require 函数，可以完成一些酷炫操作。
 
-<<<<<<< HEAD
-### `__webpack_exports_info__` (webpack 特有变量) {#__webpack_exports_info__-webpack-specific}
-=======
-## `__webpack_exports_info__` (webpack-specific)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `__webpack_exports_info__` (webpack 特有变量) {#__webpack_exports_info__-webpack-specific}
 
 在模块中, `__webpack_exports_info__` 可以被获取到，以便导出模块用以自我检查：
 
@@ -276,11 +220,7 @@ import('./module-a').then((moduleA) => {
 
 - 可以从嵌套的 exports 中得到相关信息: 例如 `__webpack_exports_info__.<exportName>.<exportName>.<exportName>.used`
 
-<<<<<<< HEAD
-### `__webpack_is_included__` (webpack-specific) {#webpack-is-included}
-=======
-## `__webpack_is_included__` (webpack-specific)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `__webpack_is_included__` (webpack-specific) {#webpack-is-included}
 
 <Badge text="5.16.0+" />
 
@@ -292,11 +232,7 @@ if (__webpack_is_included__('./module-a.js')) {
 }
 ```
 
-<<<<<<< HEAD
-### \_\_webpack_base_uri\_\_ (webpack-specific) {#webpack-base-uri}
-=======
-## \_\_webpack_base_uri\_\_ (webpack-specific)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## \_\_webpack_base_uri\_\_ (webpack-specific) {#webpack-base-uri}
 
 运行时修改 base 的 URI。
 
@@ -307,14 +243,11 @@ if (__webpack_is_included__('./module-a.js')) {
   __webpack_base_uri__ = 'https://example.com';
   ```
 
-<<<<<<< HEAD
-### `DEBUG`  (webpack 特有变量) {#debug--webpack-specific}
-=======
-## \_\_webpack_runtime_id\_\_
+## \_\_webpack_runtime_id\_\_ {#webpackruntimeid}
 
-Access the [runtime](/blog/2020-10-10-webpack-5-release/#entry-point-runtime) id of current entry.
+访问当前入口的 [runtime](/blog/2020-10-10-webpack-5-release/#entry-point-runtime) id。
 
-This is a webpack specific feature and it's available since webpack 5.25.0.
+这是一个 webpack 特性，并且在 webpack 5.25.0 后可用。
 
 **src/index.js**
 
@@ -322,7 +255,6 @@ This is a webpack specific feature and it's available since webpack 5.25.0.
 console.log(__webpack_runtime_id__ === 'main');
 ```
 
-## `DEBUG` (webpack-specific)
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## `DEBUG` (webpack 特有变量) {#debug--webpack-specific}
 
 等同于 `debug` 配置选项。

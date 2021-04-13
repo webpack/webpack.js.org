@@ -288,15 +288,11 @@ This will generate a markdown file with chosen name that looks like this:
 - index.html
 ```
 
-<<<<<<< HEAD
-## Different Plugin Shapes {#different-plugin-shapes}
-=======
 T> We are using synchronous `tap()` method to tap into the `processAssets` hook because we don't need to perform any asynchronous operations in the example above. However, the `processAssets` hook is an asynchronous one, so you can also use `tapPromise()` or `tapAsync()` if you actually need to.
 
 T> The [`processAssets`](/api/compilation-hooks/#processassets) hook also supports the `additionalAssets` property, that allows your plugin to intercept not only assets that were added by other plugins prior to the execution of the specified stage, but also for assets that were added on a later stages. This allows to intercept absolutely all the assets which are part of the compilation. However, in our example we are just fine with using the `SUMMARIZE` stage to capture all the assets generated on previous stages (this should account for all assets in general case).
 
-## Different Plugin Shapes
->>>>>>> a0d4fac37c398d8d789d6a05b746138836a0c826
+## Different Plugin Shapes {#different-plugin-shapes}
 
 A plugin can be classified into types based on the event hooks it taps into. Every event hook is pre-defined as synchronous or asynchronous or waterfall or parallel hook and hook is called internally using call/callAsync method. The list of hooks that are supported or can be tapped into are generally specified in `this.hooks` property.
 
