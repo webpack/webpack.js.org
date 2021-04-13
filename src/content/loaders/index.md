@@ -66,7 +66,6 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 ## 框架 {#frameworks}
 
 - [`vue-loader`](https://github.com/vuejs/vue-loader) 加载并编译 [Vue 组件](https://vuejs.org/v2/guide/components.html)
-- [`polymer-loader`](https://github.com/webpack-contrib/polymer-webpack-loader) 使用支持配置的预处理程序处理 HTML 和 CSS，并使用 `require()` 加载模块的方式处理 Web Components
 - [`angular2-template-loader`](https://github.com/TheLarkInn/angular2-template-loader) 加载并编译 [Angular](https://angular.io/) 组件
 
 ## Awesome {#awesome}

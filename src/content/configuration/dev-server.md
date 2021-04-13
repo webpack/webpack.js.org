@@ -632,16 +632,6 @@ module.exports = {
 };
 ```
 
-## `devServer.info` - CLI only {#devserverinfo---cli-only}
-
-`boolean`
-
-输出 cli 信息。默认情况下启用。
-
-```bash
-npx webpack serve --info false
-```
-
 ## `devServer.injectClient` {#devserverinjectclient}
 
 `boolean = false` `function (compilerConfig) => boolean`
@@ -749,10 +739,11 @@ module.exports = {
 通过命令行使用
 
 ```bash
-npx webpack serve --no-live-reload
+npx webpack serve --liveReload
 ```
 
-## `devServer.mimeTypes` 🔑 {#devservermimetypes-}
+请注意在 CLI 中没有方法禁用它。
+## `devServer.mimeTypes` 🔑 {#devservermimetypes}
 
 `object`
 
@@ -873,7 +864,8 @@ T> 浏览器应用程序名称取决于平台。 不要在可重用模块中对�
 module.exports = {
   //...
   devServer: {
-    openPage: '/different/page',
+    open: true,
+    openPage: 'different/page',
   },
 };
 ```
@@ -881,8 +873,10 @@ module.exports = {
 通过命令行使用
 
 ```bash
-npx webpack serve --open-page /different/page
+npx webpack serve --open --open-page different/page
 ```
+
+W> 不要在页面前加上 `/`，因为 webpack-dev-server 会自动添加，否则浏览器将会打开像这样的 url：`http://localhost:8080//different/page`。
 
 如果希望指定多个页面在浏览器中打开。
 
@@ -892,7 +886,8 @@ npx webpack serve --open-page /different/page
 module.exports = {
   //...
   devServer: {
-    openPage: ['/different/page1', '/different/page2'],
+    open: true,
+    openPage: ['different/page1', 'different/page2'],
   },
 };
 ```
@@ -900,7 +895,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-npx webpack serve --open-page /different/page1,/different/page2
+npx webpack serve --open --open-page different/page1 --open-page different/page2
 ```
 
 ## `devServer.overlay` {#devserveroverlay}

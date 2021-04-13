@@ -196,7 +196,7 @@ module.exports = {
 
 `boolean = false`
 
-如果是 `true`，将不允许无扩展名文件。默认如果 `./foo` 有 `.js` 扩展，`require('./foo')` 可以正常运行。但如果启用此选项，只有 `require('./foo.js')` 
+如果是 `true`，将不允许无扩展名文件。默认如果 `./foo` 有 `.js` 扩展，`require('./foo')` 可以正常运行。但如果启用此选项，只有 `require('./foo.js')`
 能够正常工作。
 
 **webpack.config.js**
@@ -229,13 +229,11 @@ module.exports = {
 };
 ```
 
-### `resolve.extensions` {#resolveextensions}
+### resolve.extensions {#resolveextensions}
 
-`[string] = ['.wasm', '.mjs', '.js', '.json']`
+`[string] = ['.js', '.json', '.wasm']`
 
-尝试按顺序解析这些后缀名。
-
-W> 如果有多个文件有相同的名字，但后缀名不同，webpack 会解析列在数组首位的后缀的文件
+尝试按顺序解析这些后缀名。如果有多个文件有相同的名字，但后缀名不同，webpack 会解析列在数组首位的后缀的文件
 并跳过其余的后缀。
 
 **webpack.config.js**
@@ -244,7 +242,7 @@ W> 如果有多个文件有相同的名字，但后缀名不同，webpack 会解
 module.exports = {
   //...
   resolve: {
-    extensions: ['.wasm', '.mjs', '.js', '.json'],
+    extensions: ['.js', '.json', '.wasm'],
   },
 };
 ```
@@ -255,7 +253,15 @@ module.exports = {
 import File from '../path/to/file';
 ```
 
-W> 使用此选项会 **覆盖默认数组**，这就意味着 webpack 将不再尝试使用默认扩展来解析模块。
+请注意，以上这样使用 `resolve.extensions` 会 **覆盖默认数组**，这就意味着 webpack 将不再尝试使用默认扩展来解析模块。然而你可以使用 `'...'` 访问默认拓展名：
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    extensions: ['.ts', '...'],
+  },
+};
 
 ### `resolve.mainFields` {#resolvemainfields}
 

@@ -72,7 +72,7 @@ T> 如果你在技术选型中使用了 `webpack-dev-middleware` 而没有使用
   };
 ```
 
-T> 你可以通过以下命令来修改 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的配置：`webpack serve --hotOnly`。
+T> 你可以通过以下命令来修改 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的配置：`webpack serve --hot-only`。
 
 现在，我们来修改 `index.js` 文件，以便当 `print.js` 内部发生变更时可以告诉 webpack 接受更新的模块。
 

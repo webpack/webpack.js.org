@@ -15,12 +15,21 @@ related:
     url: /guides/hot-module-replacement
 ---
 
-如果已经通过 [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) 启用了 [Hot Module Replacement](/concepts/hot-module-replacement), 则它的接口将被暴露在 [`module.hot` 属性](/api/module-variables/#modulehot-webpack-specific) 下面。通常，用户先要检查这个接口是否可访问, 再使用它。你可以这样使用 `accept` 操作一个更新的模块：
+如果已经通过 [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) 启用了 [Hot Module Replacement](/concepts/hot-module-replacement), 则它的接口将被暴露在 [`module.hot`](/api/module-variables/#modulehot-webpack-specific) 以及 [`import.meta.webpackHot`](/api/module-variables/#importmetawebpackhot) 属性下。请注意，只有 `import.meta.webpackHot` 可以在 [strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm) 中使用。
+
+通常，用户先要检查这个接口是否可访问, 再使用它。你可以这样使用 `accept` 操作一个更新的模块：
 
 ```js
 if (module.hot) {
   module.hot.accept('./library.js', function() {
     // 对更新过的 library 模块做些事情...
+  });
+}
+
+// or
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept('./library.js', function () {
+    // Do something with the updated library modue…
   });
 }
 ```
@@ -31,12 +40,20 @@ if (module.hot) {
 
 ### `accept` {#accept}
 
-接受(accept)给定 `依赖模块(dependencies)` 的更新，并触发一个 `回调函数` 来响应更新。
+接受(accept)给定 `依赖模块(dependencies)` 的更新，并触发一个 `回调函数` 来响应更新，除此之外，你可以附加一个可选的 error 处理程序：
 
 ```js
 module.hot.accept(
   dependencies, // 可以是一个字符串或字符串数组
   callback // 用于在模块更新后触发的函数
+  errorHandler // (err, {moduleId, dependencyId}) => {}
+);
+
+// or
+import.meta.webpackHot.accept(
+  dependencies, // 可以是一个字符串或字符串数组
+  callback, // 用于在模块更新后触发的函数
+  errorHandler // (err, {moduleId, dependencyId}) => {}
 );
 ```
 
@@ -44,7 +61,15 @@ module.hot.accept(
 
 在使用 CommonJS 时，你应该通过 `callback` 中的 `require()` 手动更新依赖模块。省略 `callback` 在这里没有任何意义。
 
-### `accept` (自身) {#accept-self}
+#### errorHandler for accept {#errorhandlerforaccept}
+
+`(err, {moduleId, dependencyId}) => {}`
+
+- `err`: 当使用 ESM 依赖项时，回调函数在第二个参数中或在依赖项执行期间抛出的错误。
+- `moduleId`: 当前模块 id。
+- `dependencyId`: (第一个)被更改依赖项的模块id。
+
+### `accept` (self) {#accept-self}
 
 接受自身更新。
 
@@ -52,11 +77,26 @@ module.hot.accept(
 module.hot.accept(
   errorHandler // 在计算新版本时处理错误的函数
 );
+
+// or
+import.meta.webpackHot.accept(
+  errorHandler // Function to handle errors when evaluating the new version
+);
 ```
 
 在此模块或依赖模块更新时，可以在不通知父依赖的情况下，对此模块处理和重新取值。如果此模块没有导出（或以其他方式更新的导出），这是有意义的。
 
 当执行此模块（或依赖模块）抛出异常时，会触发 `errorHandler`。
+
+#### errorHandler for self accept {#errorhandlerforselfaccept}
+
+`(err, {moduleId, module}) => {}`
+
+- `err`: 计算新版本时的错误。
+- `moduleId`: 当前模块 id。
+- `module`: 当前模块实例。
+  - `module.hot`: 允许访问出错模块实例的 HMR API。一个常见的场景是再次自我接收（accept）。添加一个dispose处理程序来传递数据也是有意义的。注意，错误的模块可能已经部分执行，所以请确保不要进入不一致的状态。你可以使用 `module.hot.data` 存储部分状态。
+  - `module.exports`: 可以被重载，但是要小心，因为属性名在生产模式下可能会被破坏。
 
 ### `decline` {#decline}
 
@@ -65,6 +105,11 @@ module.hot.accept(
 ```js
 module.hot.decline(
   dependencies // 可以是一个字符串或字符串数组
+);
+
+// or
+import.meta.webpackHot.decline(
+  dependencies // Either a string or an array of strings
 );
 ```
 
@@ -77,6 +122,9 @@ module.hot.decline(
 
 ```js
 module.hot.decline();
+
+// or
+import.meta.webpackHot.decline();
 ```
 
 将依赖模块标记为不可更新(not-update-able)。当此模块具有无法避免的外部作用(side-effect)，或者尚未对此模块进行 HMR 处理时，这是有意义的。取决于你的 HMR 管理代码，此依赖模块（或其未接受的依赖模块）更新，通常会导致页面被完全重新加载。
@@ -88,6 +136,11 @@ module.hot.decline();
 ``` js
 module.hot.dispose(data => {
   // 清理并将 data 传递到更新后的模块...
+});
+
+// or
+import.meta.webpackHot.dispose((data) => {
+  // Clean up and pass data to the updated module...
 });
 ```
 
@@ -103,7 +156,7 @@ module.hot.dispose(data => {
 
 在 `dispose` 或 `apply` 状态下调用时，HMR 将在退出这些状态后将其拾取。
 
-### 用例 {#use-cases}
+#### 用例 {#use-cases}
 
 **Conditional Accepting**
 
@@ -174,6 +227,9 @@ W> 通过一次次的调用 `invalidate`，不要陷入 `invalidate` 循环。�
 
 ```js
 module.hot.removeDisposeHandler(callback);
+
+// or
+import.meta.webpackHot.removeDisposeHandler(callback);
 ```
 
 ## API 管理 {#management-api}
@@ -184,6 +240,9 @@ module.hot.removeDisposeHandler(callback);
 
 ``` js
 module.hot.status(); // 返回以下字符串之一...
+
+// 或者
+import.meta.webpackHot.status();
 ```
 
 | Status      | Description                                                                            |
@@ -211,6 +270,16 @@ module.hot
   .catch((error) => {
     // 捕获错误
   });
+
+// or
+import.meta.webpackHot
+  .check(autoApply)
+  .then((outdatedModules) => {
+    // outdated modules...
+  })
+  .catch((error) => {
+    // catch errors
+  });
 ```
 
 当被调用时，传递给 `apply` 方法的 `autoApply` 参数可以是布尔值，也可以是 `options`，
@@ -227,6 +296,16 @@ module.hot
   })
   .catch((error) => {
     // 捕获错误
+  });
+
+// or
+import.meta.webpackHot
+  .apply(options)
+  .then((outdatedModules) => {
+    // outdated modules...
+  })
+  .catch((error) => {
+    // catch errors
   });
 ```
 
@@ -273,6 +352,11 @@ module.hot
 module.hot.addStatusHandler((status) => {
   // 响应当前状态...
 });
+
+// or
+import.meta.webpackHot.addStatusHandler((status) => {
+  // React to the current status...
+});
 ```
 
 ### `removeStatusHandler` {#removestatushandler}
@@ -281,4 +365,7 @@ module.hot.addStatusHandler((status) => {
 
 ```js
 module.hot.removeStatusHandler(callback);
+
+// or
+import.meta.webpackHot.removeStatusHandler(callback);
 ```
