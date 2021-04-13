@@ -348,6 +348,21 @@ module.exports = function (source) {
 };
 ```
 
+### this.importModule
+
+<Badge text="5.32.0+" /> Compile and execute a request at build time.
+
+**loader.js**
+
+```js
+exports.pitch = async function (remaining) {
+  const result = await this.importModule(
+    this.resourcePath + '.webpack[javascript/auto]' + '!=!' + remaining
+  );
+  return result.default || result;
+};
+```
+
 ### `this.loaderIndex`
 
 The index in the loaders array of the current loader.
