@@ -547,7 +547,13 @@ module.exports = {
 
 ## infrastructureLogging
 
+Options for infrastructure level logging.
+
+`object = {}`
+
 ### appendOnly
+
+<Badge text='5.31.0+' />
 
 `boolean`
 
@@ -566,6 +572,8 @@ module.exports = {
 
 ### colors
 
+<Badge text='5.31.0+' />
+
 `boolean`
 
 Enable/Disable colorful output. This option is only used when no custom [`console`](#console) is provided.
@@ -583,6 +591,8 @@ module.exports = {
 
 ### console
 
+<Badge text='5.31.0+' />
+
 `Console`
 
 Custom console used for logging.
@@ -597,10 +607,6 @@ module.exports = {
   },
 };
 ```
-
-Options for infrastructure level logging.
-
-`object = {}`
 
 ### level
 
@@ -647,6 +653,8 @@ module.exports = {
 ```
 
 ### stream
+
+<Badge text='5.31.0+' />
 
 `NodeJS.WritableStream = process.stderr`
 
