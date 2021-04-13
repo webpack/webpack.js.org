@@ -72,7 +72,7 @@ Location of where to generate the configuration. Defaults to `process.cwd()`.
 
 **`--template`**
 
-`string = default`
+`string = 'default'`
 
 Name of template to generate.
 
