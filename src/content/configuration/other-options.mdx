@@ -547,6 +547,57 @@ module.exports = {
 
 ## infrastructureLogging
 
+### appendOnly
+
+`boolean`
+
+Only appends lines to the output. Avoids updating existing output e. g. for status messages. This option is only used when no custom [`console`](#console) is provided.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    appendOnly: true,
+  },
+};
+```
+
+### colors
+
+`boolean`
+
+Enable/Disable colorful output. This option is only used when no custom [`console`](#console) is provided.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    colors: true,
+  },
+};
+```
+
+### console
+
+`Console`
+
+Custom console used for logging.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    console: yourCustomConsole(),
+  },
+};
+```
+
 Options for infrastructure level logging.
 
 `object = {}`
@@ -594,6 +645,25 @@ module.exports = {
   },
 };
 ```
+
+### stream
+
+`NodeJS.WritableStream = process.stderr`
+
+Stream used for logging output. Defaults to `process.stderr`. This option is only used when no custom [`console`](#console) is provided.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    stream: process.stderr,
+  },
+};
+```
+
+T> In the case of a TTY stream, `colors` is enabled and `appendOnly` is disabled, and vice versa.
 
 ## snapshot
 
