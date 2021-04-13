@@ -340,7 +340,7 @@ W> Don't share the cache between calls with different options.
 
 ### cache.idleTimeout
 
-`number = 10000`
+`number = 60000`
 
 Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
 
@@ -350,7 +350,7 @@ Time in milliseconds. `cache.idleTimeout` denotes the time period after which th
 module.exports = {
   //..
   cache: {
-    idleTimeout: 10000,
+    idleTimeout: 60000,
   },
 };
 ```
