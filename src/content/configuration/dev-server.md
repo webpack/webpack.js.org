@@ -1515,7 +1515,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-npx webpack serve --use-local-ip
+npx webpack serve --useLocalIp
 ```
 
 ## `devServer.watchContentBase`
