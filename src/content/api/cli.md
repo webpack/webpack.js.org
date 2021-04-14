@@ -521,11 +521,11 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 
 ## CLI Environment Variables
 
-| Environment Variable                | Description                                                         |
-| ----------------------------------- | ------------------------------------------------------------------- |
-| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`     | when `true` it will skip using the local instance of `webpack-cli`. |
-| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG` | when `true` it will force load the ESM config.                      |
-| `WEBPACK_PACKAGE`                   | Use a custom webpack version in CLI.                                |
+| Environment Variable                 | Description                                                         |
+| ------------------------------------ | ------------------------------------------------------------------- |
+| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`      | when `true` it will skip using the local instance of `webpack-cli`. |
+| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG`  | when `true` it will force load the ESM config.                      |
+| [`WEBPACK_PACKAGE`](#webpackpackage) | Use a custom webpack version in CLI.                                |
 
 ```bash
 WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
@@ -533,11 +533,10 @@ WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
 
 ### WEBPACK_PACKAGE
 
-Use a custom webpack version in CLI. Considering the following entries in your `package.json`:
+Use a custom webpack version in CLI. Considering the following content in your `package.json`:
 
 ```json
 {
-  //...
   "webpack": "^4.0.0",
   "webpack-5": "npm:webpack@^5.32.0",
   "webpack-cli": "^4.5.0"
