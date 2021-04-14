@@ -687,8 +687,10 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-npx webpack serve --inline false
+npx webpack serve --inline
 ```
+
+Notice that there's no way to disable it from CLI.
 
 T> Inline mode is recommended for [Hot Module Replacement](/plugins/hot-module-replacement-plugin/) as it includes an HMR trigger from the websocket. Polling mode can be used as an alternative, but requires an additional entry point, `'webpack/hot/poll?1000'`.
 
