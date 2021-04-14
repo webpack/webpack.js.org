@@ -533,7 +533,7 @@ WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
 
 ### WEBPACK_PACKAGE
 
-Considering the following entries in your `package.json`:
+Use a custom webpack version in CLI. Considering the following entries in your `package.json`:
 
 ```json
 {
@@ -553,7 +553,7 @@ npx webpack
 To use `webpack v5.32.0`:
 
 ```bash
-WEBPACK_PACKAGE=webpack5 npx webpack
+WEBPACK_PACKAGE=webpack-5 npx webpack
 ```
 
 ## ENV Environment Variables
