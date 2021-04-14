@@ -178,7 +178,7 @@ W> Moved to [snapshot.managedPaths](#managedpaths)
 
 `number = 5184000000`
 
-<Badge text='5.30.0+' />
+<Badge text="5.30.0+" />
 
 The amount of time in milliseconds that unused cache entries are allowed to stay in the filesystem cache; defaults to one month.
 
@@ -200,7 +200,7 @@ module.exports = {
 
 `number`
 
-<Badge text='5.30.0+' />
+<Badge text="5.30.0+" />
 
 Define the lifespan of unused cache entries in the memory cache.
 
@@ -226,7 +226,7 @@ module.exports = {
 
 `number`
 
-<Badge text='5.30.0+' />
+<Badge text="5.30.0+" />
 
 Define the lifespan of unused cache entries in the memory cache.
 
@@ -340,7 +340,7 @@ W> Don't share the cache between calls with different options.
 
 ### cache.idleTimeout
 
-`number = 10000`
+`number = 60000`
 
 Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
 
@@ -350,7 +350,7 @@ Time in milliseconds. `cache.idleTimeout` denotes the time period after which th
 module.exports = {
   //..
   cache: {
-    idleTimeout: 10000,
+    idleTimeout: 60000,
   },
 };
 ```
@@ -551,6 +551,78 @@ Options for infrastructure level logging.
 
 `object = {}`
 
+### appendOnly
+
+<Badge text="5.31.0+" />
+
+`boolean`
+
+Append lines to the output instead of updating existing output, useful for status messages. This option is used only when no custom [`console`](#console) is provided.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    appendOnly: true,
+    level: 'verbose',
+  },
+  plugins: [
+    (compiler) => {
+      const logger = compiler.getInfrastructureLogger('MyPlugin');
+      logger.status('first output'); // this line won't be overridden with `appendOnly` enabled
+      logger.status('second output');
+    },
+  ],
+};
+```
+
+### colors
+
+<Badge text="5.31.0+" />
+
+`boolean`
+
+Enable colorful output for infrastructure level logging. This option is used only when no custom [`console`](#console) is provided.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    colors: true,
+    level: 'verbose',
+  },
+  plugins: [
+    (compiler) => {
+      const logger = compiler.getInfrastructureLogger('MyPlugin');
+      logger.log('this output will be colorful');
+    },
+  ],
+};
+```
+
+### console
+
+<Badge text="5.31.0+" />
+
+`Console`
+
+Customize the console used for infrastructure level logging.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    console: yourCustomConsole(),
+  },
+};
+```
+
 ### level
 
 `string`
@@ -594,6 +666,27 @@ module.exports = {
   },
 };
 ```
+
+### stream
+
+<Badge text="5.31.0+" />
+
+`NodeJS.WritableStream = process.stderr`
+
+Stream used for logging output. Defaults to `process.stderr`. This option is used only when no custom [`console`](#console) is provided.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    stream: process.stderr,
+  },
+};
+```
+
+T> In the case of a TTY stream, `colors` is enabled and `appendOnly` is disabled, and vice versa.
 
 ## snapshot
 
