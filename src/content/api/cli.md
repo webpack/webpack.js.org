@@ -531,6 +531,31 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
 ```
 
+### WEBPACK_PACKAGE
+
+Considering the following entries in your `package.json`:
+
+```json
+{
+  //...
+  "webpack": "^4.0.0",
+  "webpack-5": "npm:webpack@^5.32.0",
+  "webpack-cli": "^4.5.0"
+}
+```
+
+To use `webpack v4.0.0`:
+
+```bash
+npx webpack
+```
+
+To use `webpack v5.32.0`:
+
+```bash
+WEBPACK_PACKAGE=webpack5 npx webpack
+```
+
 ## ENV Environment Variables
 
 | Environment Variable | Description                                  |
