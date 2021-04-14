@@ -186,7 +186,7 @@ See [configuration](/configuration) for the options in the configuration file.
 ### Without configuration file
 
 ```bash
-npx webpack --entry <entry> -o <output-path>
+npx webpack --entry <entry> --output-path <output-path>
 ```
 
 **example**
