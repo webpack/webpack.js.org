@@ -185,6 +185,8 @@ The steps above would be shortened to:
 
 The loader context represents the properties that are available inside of a loader assigned to the `this` property.
 
+### Example for the loader context
+
 Given the following example, this require call is used:
 
 In `/abc/file.js`:
@@ -262,7 +264,7 @@ Remove all dependencies of the loader result, even initial dependencies and thos
 
 **The directory of the module.** Can be used as a context for resolving other stuff.
 
-In the example: `/abc` because `resource.js` is in this directory
+In [the example](#example-for-the-loader-context): `/abc` because `resource.js` is in this directory
 
 ### `this.data`
 
@@ -367,7 +369,7 @@ exports.pitch = async function (remaining) {
 
 The index in the loaders array of the current loader.
 
-In the example: in loader1: `0`, in loader2: `1`
+In [the example](#example-for-the-loader-context): in loader1: `0`, in loader2: `1`
 
 ### `this.loadModule`
 
@@ -389,7 +391,7 @@ An array of all the loaders. It is writable in the pitch phase.
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
 
-In the example:
+In [the example](#example-for-the-loader-context):
 
 ```javascript
 [
@@ -423,7 +425,7 @@ Possible values: `'production'`, `'development'`, `'none'`
 
 The resolved request string.
 
-In the example: `'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
+In [the example](#example-for-the-loader-context): `'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
 
 ### `this.resolve`
 
@@ -443,19 +445,19 @@ All dependencies of the resolving operation are automatically added as dependenc
 
 The resource part of the request, including query.
 
-In the example: `'/abc/resource.js?rrr'`
+In [the example](#example-for-the-loader-context): `'/abc/resource.js?rrr'`
 
 ### `this.resourcePath`
 
 The resource file.
 
-In the example: `'/abc/resource.js'`
+In [the example](#example-for-the-loader-context): `'/abc/resource.js'`
 
 ### `this.resourceQuery`
 
 The query of the resource.
 
-In the example: `'?rrr'`
+In [the example](#example-for-the-loader-context): `'?rrr'`
 
 ### `this.rootContext`
 
