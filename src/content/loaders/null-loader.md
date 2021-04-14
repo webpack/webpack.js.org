@@ -15,21 +15,21 @@ repo: https://github.com/webpack-contrib/null-loader
 
 
 
-A webpack loader that returns an empty module.
+返回一个空模块的 webpack loader
 
-One use for this loader is to silence modules imported by a dependency. Say, for
-example, your project relies on an ES6 library that imports a polyfill you don't
-need, so removing it will cause no loss in functionality.
+此 loader 的一个用途是，使依赖项导入的模块静默。 
+例如，项目依赖于一个 ES6 库，该库会导入你不需要的 polyfill，
+因此，删除它不会造成功能上的缺失。
 
-## Getting Started {#getting-started}
+## 起步 {#getting-started}
 
-To begin, you'll need to install `null-loader`:
+首先，你需要预先安装 `null-loader`;
 
 ```console
 $ npm install null-loader --save-dev
 ```
 
-Then add the loader to your `webpack` config. For example:
+然后，在 `webpack` 配置中添加 loader。例如：
 
 ```js
 // webpack.config.js
@@ -39,8 +39,8 @@ module.exports = {
   module: {
     rules: [
       {
-        // Test for a polyfill (or any file) and it won't be included in your
-        // bundle
+        // 匹配一个 polyfill（或任何文件），
+        // 然后在 bundle 中不会引入这个 polyfill
         test: path.resolve(__dirname, 'node_modules/library/polyfill.js'),
         use: 'null-loader',
       },
@@ -49,13 +49,13 @@ module.exports = {
 };
 ```
 
-And run `webpack` via your preferred method.
+然后，根据你习惯的方式运行 `webpack`。
 
-## Contributing {#contributing}
+## 贡献指南 {#contributing}
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+如果你从未阅读过我们的贡献指南，请在上面花点时间。
 
-[CONTRIBUTING](https://github.com/webpack-contrib/null-loader/blob/master/.github/CONTRIBUTING.md)
+[贡献指南](https://github.com/webpack-contrib/null-loader/blob/master/.github/CONTRIBUTING.md)
 
 ## License {#license}
 
