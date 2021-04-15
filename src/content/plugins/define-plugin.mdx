@@ -106,7 +106,8 @@ Arguments:
 - The first argument of the `webpack.DefinePlugin.runtimeValue` is a `function(module, key, version)` that should return the value to be assigned to the definition.
 - The second argument is an array of file paths to watch for. Pass `true` instead of `[string]` here to flag the module as uncacheable.
 - <Badge text="5.26.0+" /> The second argument can also take an options object argument
-  with the following properties -
+  with the following properties:
+
   - `fileDependencies?: string[]` A list of files the function depends on.
   - `contextDependencies?: string[]` A list of directories the function depends on.
   - `missingDependencies?: string[]` A list of not existing files the function depends on.
