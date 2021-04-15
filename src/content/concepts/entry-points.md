@@ -10,6 +10,7 @@ contributors:
   - Zearin
   - chenxsan
   - adyjs
+  - anshumanv
 ---
 
 As mentioned in [Getting Started](/guides/getting-started/#using-a-configuration), there are multiple ways to define the `entry` property in your webpack configuration. We will show you the ways you **can** configure the `entry` property, in addition to explaining why it may be useful to you.
@@ -83,6 +84,7 @@ An object with entry point description. You can specify the following properties
 - `import`: Module(s) that are loaded upon startup.
 - `library`: Specify [library options](/configuration/output/#outputlibrary) to bundle a library from current entry.
 - `runtime`: The name of the runtime chunk. If set, a runtime chunk with this name is created otherwise an existing entry point is used as runtime.
+- `publicPath`: Specifies the public URL address of the output files when referenced in a browser for this entry. Also see [output.publicPath](/configuration/output/#outputpublicpath).
 
 **webpack.config.js**
 
