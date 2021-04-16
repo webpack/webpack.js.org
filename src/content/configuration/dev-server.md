@@ -746,6 +746,8 @@ npx webpack serve --liveReload
 
 Notice that there's no way to disable it from CLI.
 
+W> Live reloading does not work with non-web targets like `node`, `async-node` etc.
+
 ## `devServer.mimeTypes` 🔑
 
 `object`
