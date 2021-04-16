@@ -36,7 +36,8 @@ module.exports = {
     rules: [
       {
         test: /\.less$/i,
-        loader: [ // compiles Less to CSS
+        loader: [
+          // compiles Less to CSS
           "style-loader",
           "css-loader",
           "less-loader",
@@ -531,13 +532,13 @@ module.exports = {
 };
 ```
 
-> ℹ️ Access to the [loader context](/api/loaders/#the-loader-context) inside the custom plugin can be done using the `less.webpackLoaderContext` property.
+> ℹ️ Access to the [loader context](/api/loaders/#the-loader-context) inside the custom plugin can be done using the `pluginManager.webpackLoaderContext` property.
 
 ```js
 module.exports = {
   install: function (less, pluginManager, functions) {
     functions.add("pi", function () {
-      // Loader context is available in `less.webpackLoaderContext`
+      // Loader context is available in `pluginManager.webpackLoaderContext`
 
       return Math.PI;
     });
