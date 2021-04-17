@@ -531,11 +531,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-> ℹ️ 使用 `less.webpackLoaderContext` 属性可以访问自定义插件中的 [loader context](/api/loaders/#the-loader-context)。
-=======
-> ℹ️ Access to the [loader context](/api/loaders/#the-loader-context) inside the custom plugin can be done using the `pluginManager.webpackLoaderContext` property.
->>>>>>> 54a4042429922f9d8d02445e3120bf4d9649c6db
+> ℹ️ 使用 `pluginManager.webpackLoaderContext` 属性可以访问自定义插件中的 [loader context](/api/loaders/#the-loader-context)。
 
 ```js
 module.exports = {

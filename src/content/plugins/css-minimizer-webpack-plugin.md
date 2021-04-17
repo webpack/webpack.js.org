@@ -296,13 +296,8 @@ module.exports = {
 
 #### `Array` {#array}
 
-<<<<<<< HEAD
-如果 `minify` 配置项传入一个数组，`minimizerOptions` 也必须是个数组。
 `miniify` 数组中的函数索引对应于 `minimizerOptions` 数组中具有相同索引的 options 对象。
-=======
-The function index in the `minify` array corresponds to the options object with the same index in the `minimizerOptions` array.
-If you use `minimizerOptions` like object, all `minify` function accept it.
->>>>>>> 54a4042429922f9d8d02445e3120bf4d9649c6db
+如果你使用了类似于 `minimizerOptions` 的对象，那么所有函数都会接受它。
 
 #### `processorOptions` {#processoroptions}
 
@@ -486,16 +481,8 @@ module.exports = {
 };
 ```
 
-### 使用自定义 minifier [clean-css](https://github.com/jakubpawlowicz/clean-css) {#using-custom-minifier-clean-csshttpsgithubcomjakubpawlowiczclean-css}
+### 使用自定义 minifier [clean-css](https://github.com/jakubpawlowicz/clean-css) {#using-custom-minifier-clean-css}
 
-<<<<<<< HEAD
-默认情况下，插件使用 [cssnano](https://github.com/cssnano/cssnano) 包。
-可以使用其他提供压缩功能的依赖包。
-
-> ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
-
-=======
->>>>>>> 54a4042429922f9d8d02445e3120bf4d9649c6db
 **webpack.config.js**
 
 ```js
