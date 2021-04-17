@@ -352,9 +352,29 @@ module.exports = function (source) {
 
 ### this.importModule
 
-<Badge text="5.32.0+" /> Compile and execute a request at build time.
+<Badge text="5.32.0+" />
 
-**loader.js**
+`this.importModule(request, options, [callback]): Promise`
+
+An alternative lightweight solution for the child compiler to compile and execute a request at build time. It can be enabled
+with [`experiments.executeModule`](/configuration/experiments/#experimentsexecutemodule).
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /target-file\.js$/i,
+        use: ['./a-pitching-loader.js', './a-normal-loader.js'],
+      },
+    ],
+  },
+};
+```
+
+**a-pitching-loader.js**
 
 ```js
 exports.pitch = async function (remaining) {
@@ -364,6 +384,21 @@ exports.pitch = async function (remaining) {
   return result.default || result;
 };
 ```
+
+**a-normal-loader.js**
+
+```js
+module.exports = function (source) {
+  // a dumb normal loader returning the source
+  return source;
+};
+```
+
+There are multiple things to watch in the above example:
+
+1. We have a [pitching loader](#pitching-loader),
+2. We use `!=!` syntax in that pitching loader to set [matchResource](#inline-matchresource) for the request, i.e., we'll use `this.resourcePath + '.webpack[javascript/auto]'` to match with the [`module.rules`](/configuration/module/#modulerules) instead of the original resource,
+3. `.webpack[javascript/auto]` is a pseudo extension of the `.webpack[type]` pattern, we use it to specify a default [module type](/configuration/module/#ruletype) when no other module type is specified. It's typically used in conjunction with `!=!` syntax.
 
 ### `this.loaderIndex`
 
