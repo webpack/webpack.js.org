@@ -457,12 +457,14 @@ The assets have been optimized.
 Asset processing.
 
 **Hook parameters:**
+
 - `name: string` — a name of the plugin
 - `stage: Stage` — a stage to tap into (see the [list of supported stages](#list-of-asset-processing-stages) below)
 - `additionalAssets?: true | (assets, [callback]) => (void | Promise<void>)` — a callback for additional assets ([see below](#additional-assets))
 
 **Callback parameters:**
-- `assets: { [pathname: string]: Source }` — a plain object, where key is the asset's pathname, and the value is the source content of the asset
+
+- `assets: { [pathname: string]: Source }` — a plain object, where key is the asset's pathname, and the value is data of the asset represented by the [`Source`](https://github.com/webpack/webpack-sources#source).
 
 **Example:**
 
@@ -547,7 +549,9 @@ The "asset info" metadata is not automatically provided for this hook. If needed
 
 ```js
 compilation.hooks.processAssets.tap(
-  { /** … */ },
+  {
+    /** … */
+  },
   (assets) => {
     Object.entries(assets).forEach(([pathname, source]) => {
       const assetInfo = compilation.assetsInfo.get(pathname);
