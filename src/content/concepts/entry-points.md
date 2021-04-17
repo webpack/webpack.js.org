@@ -84,7 +84,7 @@ An object with entry point description. You can specify the following properties
 - `import`: Module(s) that are loaded upon startup.
 - `library`: Specify [library options](/configuration/output/#outputlibrary) to bundle a library from current entry.
 - `runtime`: The name of the runtime chunk. If set, a runtime chunk with this name is created otherwise an existing entry point is used as runtime.
-- `publicPath`: Specify base path for assets for this entry. Also see [output.publicPath](/configuration/output/#outputpublicpath).
+- `publicPath`: Specify a public URL address for the output files of this entry when they are referenced in a browser. Also see [output.publicPath](/configuration/output/#outputpublicpath).
 
 **webpack.config.js**
 
