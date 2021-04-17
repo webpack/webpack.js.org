@@ -46,7 +46,7 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 | [`init`](#init)                       | `init\|c [generation-path] [options]`     | Initialize a new webpack project.                                               |
 | `loader`                              | `loader\|l [output-path]`                 | Scaffold a loader.                                                              |
 | `plugin`                              | `plugin\|p [output-path]`                 | Scaffold a plugin.                                                              |
-| [`serve`](/configuration/dev-server/) | `serve\|s [options]`                      | Run the `webpack-dev-server`.                                                   |
+| [`serve`](/configuration/dev-server/) | `serve\|server\|s [options]`              | Run the `webpack-dev-server`.                                                   |
 | [`version`](#version)                 | `version\|v [commands...]`                | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
 | `watch`                               | `watch\|w [entries...] [options]`         | Run webpack and watch for files changes.                                        |
 
