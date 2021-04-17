@@ -36,7 +36,8 @@ module.exports = {
     rules: [
       {
         test: /\.less$/i,
-        loader: [ // compiles Less to CSS
+        loader: [
+          // compiles Less to CSS
           "style-loader",
           "css-loader",
           "less-loader",
@@ -530,13 +531,13 @@ module.exports = {
 };
 ```
 
-> ℹ️ 使用 `less.webpackLoaderContext` 属性可以访问自定义插件中的 [loader context](/api/loaders/#the-loader-context)。
+> ℹ️ 使用 `pluginManager.webpackLoaderContext` 属性可以访问自定义插件中的 [loader context](/api/loaders/#the-loader-context)。
 
 ```js
 module.exports = {
   install: function (less, pluginManager, functions) {
     functions.add("pi", function () {
-      // Loader context is available in `less.webpackLoaderContext`
+      // Loader context is available in `pluginManager.webpackLoaderContext`
 
       return Math.PI;
     });

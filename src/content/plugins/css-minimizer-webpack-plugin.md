@@ -296,8 +296,8 @@ module.exports = {
 
 #### `Array` {#array}
 
-如果 `minify` 配置项传入一个数组，`minimizerOptions` 也必须是个数组。
 `miniify` 数组中的函数索引对应于 `minimizerOptions` 数组中具有相同索引的 options 对象。
+如果你使用了类似于 `minimizerOptions` 的对象，那么所有函数都会接受它。
 
 #### `processorOptions` {#processoroptions}
 
@@ -481,12 +481,7 @@ module.exports = {
 };
 ```
 
-### 使用自定义 minifier [clean-css](https://github.com/jakubpawlowicz/clean-css) {#using-custom-minifier-clean-csshttpsgithubcomjakubpawlowiczclean-css}
-
-默认情况下，插件使用 [cssnano](https://github.com/cssnano/cssnano) 包。
-可以使用其他提供压缩功能的依赖包。
-
-> ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
+### 使用自定义 minifier [clean-css](https://github.com/jakubpawlowicz/clean-css) {#using-custom-minifier-clean-css}
 
 **webpack.config.js**
 
@@ -497,24 +492,29 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        minify: async (data, inputMap) => {
-          // eslint-disable-next-line global-require
-          const CleanCSS = require('clean-css');
+        minify: CssMinimizerPlugin.cleanCssMinify,
+        // Uncomment this line for options
+        // minimizerOptions: { compatibility: 'ie11,-properties.merging' },
+      }),
+    ],
+  },
+};
+```
 
-          const [[filename, input]] = Object.entries(data);
-          const minifiedCss = await new CleanCSS({ sourceMap: true }).minify({
-            [filename]: https://github.com/webpack-contrib/css-minimizer-webpack-plugin/blob/master/%7B
-              styles: input,
-              sourceMap: inputMap,
-            },
-          });
+### Using custom minifier [csso](https://github.com/css/csso)
 
-          return {
-            code: minifiedCss.styles,
-            map: minifiedCss.sourceMap.toJSON(),
-            warnings: minifiedCss.warnings,
-          };
-        },
+**webpack.config.js**
+
+```js
+module.exports = {
+  devtool: 'source-map',
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minify: CssMinimizerPlugin.cssoMinify,
+        // Uncomment this line for options
+        // minimizerOptions: { restructure: false },
       }),
     ],
   },
