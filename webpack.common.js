@@ -139,6 +139,7 @@ module.exports = ({ ssg = false }) => ({
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
+      experimentalUseImportModule: true,
     }),
     new webpack.DefinePlugin({
       // https://github.com/algolia/algoliasearch-client-javascript/issues/764

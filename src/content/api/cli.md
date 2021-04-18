@@ -186,7 +186,7 @@ See [configuration](/configuration) for the options in the configuration file.
 ### Without configuration file
 
 ```bash
-npx webpack --entry <entry> -o <output-path>
+npx webpack --entry <entry> --output-path <output-path>
 ```
 
 **example**
@@ -218,7 +218,7 @@ npx webpack --entry ./first-entry.js ./other-entry.js
 
 T> Use `webpack [command] [entries...] [option]` syntax because some options can accept multiple values so `webpack --target node ./entry.js` means `target: ['node', './entry.js']`
 
-**`<output>`**
+**`<output-path>`**
 
 A path for the bundled file to be saved in. It will be mapped to the configuration options `output.path`.
 
@@ -237,7 +237,7 @@ If your project structure is as follows -
 ```
 
 ```bash
-npx webpack ./src/index.js -o dist
+npx webpack ./src/index.js --output-path dist
 ```
 
 This will bundle your source code with entry as `index.js`, and the output bundle file will have a path of `dist`.
@@ -250,7 +250,7 @@ webpack 5.1.0 compiled successfully in 187 ms
 ```
 
 ```bash
-npx webpack ./src/index.js ./src/others2.js -o dist/
+npx webpack ./src/index.js ./src/others2.js --output-path dist/
 ```
 
 This will form the bundle with both the files as separate entry points.
@@ -521,14 +521,38 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 
 ## CLI Environment Variables
 
-| Environment Variable                | Description                                                         |
-| ----------------------------------- | ------------------------------------------------------------------- |
-| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`     | when `true` it will skip using the local instance of `webpack-cli`. |
-| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG` | when `true` it will force load the ESM config.                      |
-| `WEBPACK_PACKAGE`                   | Use a custom webpack version in CLI.                                |
+| Environment Variable                  | Description                                                         |
+| ------------------------------------- | ------------------------------------------------------------------- |
+| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`       | when `true` it will skip using the local instance of `webpack-cli`. |
+| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG`   | when `true` it will force load the ESM config.                      |
+| [`WEBPACK_PACKAGE`](#webpack_package) | Use a custom webpack version in CLI.                                |
 
 ```bash
 WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
+```
+
+### WEBPACK_PACKAGE
+
+Use a custom webpack version in CLI. Considering the following content in your `package.json`:
+
+```json
+{
+  "webpack": "^4.0.0",
+  "webpack-5": "npm:webpack@^5.32.0",
+  "webpack-cli": "^4.5.0"
+}
+```
+
+To use `webpack v4.0.0`:
+
+```bash
+npx webpack
+```
+
+To use `webpack v5.32.0`:
+
+```bash
+WEBPACK_PACKAGE=webpack-5 npx webpack
 ```
 
 ## ENV Environment Variables
