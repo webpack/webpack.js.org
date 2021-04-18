@@ -357,7 +357,13 @@ module.exports = function (source) {
 `this.importModule(request, options, [callback]): Promise`
 
 An alternative lightweight solution for the child compiler to compile and execute a request at build time. It can be enabled
-with [`experiments.executeModule`](/configuration/experiments/#experimentsexecutemodule).
+with the [`experiments.executeModule`](/configuration/experiments/#experimentsexecutemodule).
+
+- `request`: the request string to load the module from
+- `options`:
+  - `layer`: specify a layer in which this module is placed/compiled
+  - `publicPath`: the public path used for the built modules
+- `callback`: an optional function returning the exports. `importModule` will return a Promise if no callback is provided.
 
 **webpack.config.js**
 
@@ -366,8 +372,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /target-file\.js$/i,
-        use: ['./a-pitching-loader.js', './a-normal-loader.js'],
+        test: /stylesheet\.js$/i,
+        use: ['./a-pitching-loader.js'],
+        type: 'asset/source', // we set type to 'asset/source' as the loader will return a string
       },
     ],
   },
@@ -385,20 +392,34 @@ exports.pitch = async function (remaining) {
 };
 ```
 
-**a-normal-loader.js**
+**src/stylesheet.js**
 
 ```js
-module.exports = function (source) {
-  // a dumb normal loader returning the source
-  return source;
-};
+import { green, red } from './colors.js';
+export default `body { background: ${red}; color: ${green}; }`;
 ```
 
-There are multiple things to watch in the above example:
+**src/colors.js**
+
+```js
+export const red = '#f00';
+export const green = '#0f0';
+```
+
+**src/index.js**
+
+```js
+import stylesheet from './stylesheet.js';
+// stylesheet will be a string `body { background: #f00; color: #0f0; }` at build time
+```
+
+You might notice something in the above example:
 
 1. We have a [pitching loader](#pitching-loader),
 2. We use `!=!` syntax in that pitching loader to set [matchResource](#inline-matchresource) for the request, i.e., we'll use `this.resourcePath + '.webpack[javascript/auto]'` to match with the [`module.rules`](/configuration/module/#modulerules) instead of the original resource,
 3. `.webpack[javascript/auto]` is a pseudo extension of the `.webpack[type]` pattern, we use it to specify a default [module type](/configuration/module/#ruletype) when no other module type is specified. It's typically used in conjunction with `!=!` syntax.
+
+Note that the above example is a simplified one, you can check [the full example on webpack repository](https://github.com/webpack/webpack/tree/master/test/configCases/loader-import-module/css).
 
 ### `this.loaderIndex`
 
