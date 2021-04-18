@@ -746,6 +746,8 @@ npx webpack serve --liveReload
 
 Notice that there's no way to disable it from CLI.
 
+W> Live reloading works only with web related [targets](/configuration/target/#string) like `web`, `webworker`, `electron-renderer` and `node-webkit`.
+
 ## `devServer.mimeTypes` 🔑
 
 `object`
