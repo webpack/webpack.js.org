@@ -344,12 +344,15 @@ W> Don't share the cache between calls with different options.
 
 Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
 
+`cache.idleTimeout` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+
 **webpack.config.js**
 
 ```javascript
 module.exports = {
   //..
   cache: {
+    type: 'filesystem',
     idleTimeout: 60000,
   },
 };
@@ -361,12 +364,15 @@ module.exports = {
 
 Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period after which the initial cache storing should happen.
 
+`cache.idleTimeoutForInitialStore` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+
 **webpack.config.js**
 
 ```javascript
 module.exports = {
   //..
   cache: {
+    type: 'filesystem',
     idleTimeoutForInitialStore: 0,
   },
 };
