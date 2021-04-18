@@ -186,7 +186,7 @@ See [configuration](/configuration) for the options in the configuration file.
 ### Without configuration file
 
 ```bash
-npx webpack --entry <entry> -o <output-path>
+npx webpack --entry <entry> --output-path <output-path>
 ```
 
 **example**
@@ -218,7 +218,7 @@ npx webpack --entry ./first-entry.js ./other-entry.js
 
 T> Use `webpack [command] [entries...] [option]` syntax because some options can accept multiple values so `webpack --target node ./entry.js` means `target: ['node', './entry.js']`
 
-**`<output>`**
+**`<output-path>`**
 
 A path for the bundled file to be saved in. It will be mapped to the configuration options `output.path`.
 
@@ -237,7 +237,7 @@ If your project structure is as follows -
 ```
 
 ```bash
-npx webpack ./src/index.js -o dist
+npx webpack ./src/index.js --output-path dist
 ```
 
 This will bundle your source code with entry as `index.js`, and the output bundle file will have a path of `dist`.
@@ -250,7 +250,7 @@ webpack 5.1.0 compiled successfully in 187 ms
 ```
 
 ```bash
-npx webpack ./src/index.js ./src/others2.js -o dist/
+npx webpack ./src/index.js ./src/others2.js --output-path dist/
 ```
 
 This will form the bundle with both the files as separate entry points.
