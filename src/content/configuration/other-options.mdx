@@ -16,6 +16,7 @@ contributors:
   - chenxsan
   - u01jmg3
   - jamesgeorge007
+  - snitin315
 related:
   - title: Using Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -65,6 +66,8 @@ module.exports = {
 ```
 
 This will force webpack to exit its bundling process.
+
+W> You can use `bail` option in [`watch`](/configuration/watch) mode, but it will still force webpack to exit as soon as an error is found.
 
 ## cache
 
