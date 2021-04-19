@@ -10,6 +10,7 @@ contributors:
   - Zearin
   - chenxsan
   - adyjs
+  - anshumanv
 ---
 
 正如我们在 [起步](/guides/getting-started/#using-a-configuration) 中提到的，在 webpack 配置中有多种方式定义 `entry` 属性。除了解释为什么它可能非常有用，我们还将向你展示**如何去**配置 `entry` 属性。
@@ -78,11 +79,20 @@ T> 当你通过插件生成入口时，你可以传递空对象 `{}` 给 `entry`
 
 用于描述入口的对象。你可以使用如下属性：
 
+<<<<<<< HEAD
 - `dependOn`: 当前入口所依赖的入口。它们必须在该入口被加载前被加载。
 - `filename`: 指定要输出的文件名称。
 - `import`: 启动时需加载的模块。
 - `library`: 指定 library 选项，为当前 entry 构建一个 library。
 - `runtime`: 运行时 chunk 的名字。如果设置了，就会创建一个以这个名字命名的运行时 chunk，否则将使用现有的入口作为运行时。
+=======
+- `dependOn`: The entry points that the current entry point depends on. They must be loaded before this entry point is loaded.
+- `filename`: Specifies the name of each output file on disk.
+- `import`: Module(s) that are loaded upon startup.
+- `library`: Specify [library options](/configuration/output/#outputlibrary) to bundle a library from current entry.
+- `runtime`: The name of the runtime chunk. If set, a runtime chunk with this name is created otherwise an existing entry point is used as runtime.
+- `publicPath`: Specify a public URL address for the output files of this entry when they are referenced in a browser. Also see [output.publicPath](/configuration/output/#outputpublicpath).
+>>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
 
 **webpack.config.js**
 

@@ -687,10 +687,16 @@ module.exports = {
 通过命令行使用
 
 ```bash
-npx webpack serve --inline false
+npx webpack serve --inline
 ```
 
+<<<<<<< HEAD
 T> 对于 [Hot Module Replacement](/plugins/hot-module-replacement-plugin/) ，建议使用串联模式，因为它包含来自 websocket 的 HMR 触发器。 轮询模式可以用作替代方法，但需要附加的入口点`'webpack/hot/poll?1000'`。
+=======
+Notice that there's no way to disable it from CLI.
+
+T> Inline mode is recommended for [Hot Module Replacement](/plugins/hot-module-replacement-plugin/) as it includes an HMR trigger from the websocket. Polling mode can be used as an alternative, but requires an additional entry point, `'webpack/hot/poll?1000'`.
+>>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
 
 ## `devServer.lazy` 🔑 {#devserverlazy-}
 
@@ -742,8 +748,16 @@ module.exports = {
 npx webpack serve --liveReload
 ```
 
+<<<<<<< HEAD
 请注意在 CLI 中没有方法禁用它。
 ## `devServer.mimeTypes` 🔑 {#devservermimetypes}
+=======
+Notice that there's no way to disable it from CLI.
+
+W> Live reloading works only with web related [targets](/configuration/target/#string) like `web`, `webworker`, `electron-renderer` and `node-webkit`.
+
+## `devServer.mimeTypes` 🔑
+>>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
 
 `object`
 
@@ -1514,7 +1528,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-npx webpack serve --use-local-ip
+npx webpack serve --useLocalIp
 ```
 
 ## `devServer.watchContentBase` {#devserverwatchcontentbase}

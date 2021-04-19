@@ -178,7 +178,7 @@ W> 已迁移到 [snapshot.managedPaths](#managedpaths)
 
 `number = 5184000000`
 
-<Badge text='5.30.0+' />
+<Badge text="5.30.0+" />
 
 允许未使用的缓存留在文件系统缓存中的时间（以毫秒为单位）；默认为一个月。
 
@@ -200,7 +200,7 @@ module.exports = {
 
 `number`
 
-<Badge text='5.30.0+' />
+<Badge text="5.30.0+" />
 
 定义内存缓存中未使用的缓存项的生命周期。
 
@@ -226,7 +226,7 @@ module.exports = {
 
 `number`
 
-<Badge text='5.30.0+' />
+<Badge text="5.30.0+" />
 
 定义内存缓存中未使用的缓存项的生命周期。
 
@@ -340,7 +340,7 @@ W> 在具有不同选项的调用之间不要共享缓存。
 
 ### cache.idleTimeout {#cacheidletimeout}
 
-`number = 10000`
+`number = 60000`
 
 单位毫秒。 `cache.idleTimeout` 表示缓存存储发生后的时间段。
 
@@ -350,14 +350,18 @@ W> 在具有不同选项的调用之间不要共享缓存。
 module.exports = {
   //..
   cache: {
-    idleTimeout: 10000,
+    idleTimeout: 60000,
   },
 };
 ```
 
+<<<<<<< HEAD
 W> `cache.idleTimeout` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 才可配置。
 
 ### cache.idleTimeoutForInitialStore {#cacheidletimeoutforinitialstore}
+=======
+### cache.idleTimeoutForInitialStore
+>>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
 
 `number = 0`
 
@@ -374,9 +378,13 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 才可配置。
 
 ## dependencies {#dependencies}
+=======
+## dependencies
+>>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
 
 `[string]`
 
@@ -552,7 +560,83 @@ module.exports = {
 
 `object = {}`
 
+<<<<<<< HEAD
 ### level {#level}
+=======
+### appendOnly
+
+<Badge text="5.31.0+" />
+
+`boolean`
+
+Append lines to the output instead of updating existing output, useful for status messages. This option is used only when no custom [`console`](#console) is provided.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    appendOnly: true,
+    level: 'verbose',
+  },
+  plugins: [
+    (compiler) => {
+      const logger = compiler.getInfrastructureLogger('MyPlugin');
+      logger.status('first output'); // this line won't be overridden with `appendOnly` enabled
+      logger.status('second output');
+    },
+  ],
+};
+```
+
+### colors
+
+<Badge text="5.31.0+" />
+
+`boolean`
+
+Enable colorful output for infrastructure level logging. This option is used only when no custom [`console`](#console) is provided.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    colors: true,
+    level: 'verbose',
+  },
+  plugins: [
+    (compiler) => {
+      const logger = compiler.getInfrastructureLogger('MyPlugin');
+      logger.log('this output will be colorful');
+    },
+  ],
+};
+```
+
+### console
+
+<Badge text="5.31.0+" />
+
+`Console`
+
+Customize the console used for infrastructure level logging.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    console: yourCustomConsole(),
+  },
+};
+```
+
+### level
+>>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
 
 `string`
 
@@ -596,7 +680,32 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## snapshot {#snapshot}
+=======
+### stream
+
+<Badge text="5.31.0+" />
+
+`NodeJS.WritableStream = process.stderr`
+
+Stream used for logging output. Defaults to `process.stderr`. This option is used only when no custom [`console`](#console) is provided.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    stream: process.stderr,
+  },
+};
+```
+
+T> In the case of a TTY stream, `colors` is enabled and `appendOnly` is disabled, and vice versa.
+
+## snapshot
+>>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
 
 `object`
 
