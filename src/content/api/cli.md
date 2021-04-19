@@ -511,11 +511,7 @@ npx webpack --env production    # env.production = true
 
 T> 请查阅 [environment 变量指南](/guides/environment-variables/)了解更多信息及用法。
 
-<<<<<<< HEAD
-### NODE_ENV {#node-env}
-=======
-### node-env
->>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
+### node-env {#node-env}
 
 你可以使用 `--node-env` 选项来设置 `process.env.NODE_ENV`:
 
@@ -583,30 +579,19 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 
 ## CLI 环境变量 {#cli-environment-variables}
 
-<<<<<<< HEAD
 | 环境变量                | 描述                                                         |
 | ----------------------------------- | ------------------------------------------------------------------- |
 | `WEBPACK_CLI_SKIP_IMPORT_LOCAL`     | 设置为 `true` 时将不会使用 `webpack-cli` 本地实例。 |
 | `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG` | 设置为 `true` 则强制加载 ESM 配置。             |
-| `WEBPACK_PACKAGE`                   | 在 CLI 中使用自定义 webpack 版本。                               |
-=======
-| Environment Variable                  | Description                                                         |
-| ------------------------------------- | ------------------------------------------------------------------- |
-| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`       | when `true` it will skip using the local instance of `webpack-cli`. |
-| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG`   | when `true` it will force load the ESM config.                      |
-| [`WEBPACK_PACKAGE`](#webpack_package) | Use a custom webpack version in CLI.                                |
->>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
+| [`WEBPACK_PACKAGE`](#webpack_package)                   | 在 CLI 中使用自定义 webpack 版本。                               |
 
 ```bash
 WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
 ```
 
-<<<<<<< HEAD
-## ENV 环境变量 {#env-environment-variables}
-=======
-### WEBPACK_PACKAGE
+### WEBPACK_PACKAGE {#webpackpackage}
 
-Use a custom webpack version in CLI. Considering the following content in your `package.json`:
+在 CLI 中使用自定义 webpack 版本。在你的 `package.json` 中配置以下内容：
 
 ```json
 {
@@ -616,20 +601,19 @@ Use a custom webpack version in CLI. Considering the following content in your `
 }
 ```
 
-To use `webpack v4.0.0`:
+使用 `webpack v4.0.0`：
 
 ```bash
 npx webpack
 ```
 
-To use `webpack v5.32.0`:
+使用 `webpack v5.32.0`：
 
 ```bash
 WEBPACK_PACKAGE=webpack-5 npx webpack
 ```
 
-## ENV Environment Variables
->>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
+## ENV 环境变量 {#env-environment-variables}
 
 | 环境变量 | 描述                                  |
 | -------------------- | -------------------------------------------- |

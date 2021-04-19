@@ -17,15 +17,7 @@ contributors:
 它扩展(extend)自 `Tapable` 类，用来注册和调用插件。
 大多数面向用户的插件会首先在 `Compiler` 上注册。
 
-<<<<<<< HEAD
-T> 此模块会暴露在 `webpack.Compiler`，
-可以直接通过这种方式使用。
-关于更多信息，请查看 [这个示例](https://github.com/pksjce/webpack-internal-examples/tree/master/compiler-example)。
-
 在为 webpack 开发插件时，你可能需要知道每个钩子函数是在哪里调用的。想要了解这些内容，请在 webpack 源码中搜索 `hooks.<hook name>.call`。
-=======
-When developing a plugin for webpack, you might want to know where each hook is called. To learn this, search for `hooks.<hook name>.call` across the webpack source
->>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
 
 ## 监听(watching) {#watching}
 
