@@ -453,6 +453,7 @@ The `--env` argument accepts multiple values:
 | `npx webpack --env prod`                                         | `{ prod: true }`                               |
 | `npx webpack --env prod --env min`                               | `{ prod: true, min: true }`                    |
 | `npx webpack --env platform=app --env production`                | `{ platform: "app", production: true }`        |
+| `npx webpack --env foo=bar=app`                                  | `{ foo: "bar=app"}`                            |
 | `npx webpack --env app.platform="staging" --env app.name="test"` | `{ app: { platform: "staging", name: "test" }` |
 
 T> See the [environment variables](/guides/environment-variables/) guide for more information on its usage.
