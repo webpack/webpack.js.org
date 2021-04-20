@@ -35,7 +35,7 @@ The examples below describe how webpack's configuration can be both expressive a
 **webpack.config.js**
 
 ```javascript
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   mode: 'development',
