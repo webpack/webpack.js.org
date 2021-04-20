@@ -208,10 +208,10 @@
         <loc>https://webpack.js.org/configuration/output</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/performance</loc>
+        <loc>https://webpack.js.org/configuration/plugins</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/plugins</loc>
+        <loc>https://webpack.js.org/configuration/performance</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/resolve</loc>
@@ -535,6 +535,9 @@
         <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins/npm-install-webpack-plugin</loc>
     </url>
     <url>
@@ -542,9 +545,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/profiling-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/progress-plugin</loc>
