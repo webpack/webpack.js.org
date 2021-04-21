@@ -136,7 +136,7 @@
     "static-site-generator-webpack-plugin": "^3.4.1",
     "style-loader": "^2.0.0",
     "tap-spot": "^1.1.1",
-    "unist-util-visit": "^2.0.3",
+    "unist-util-visit": "^3.0.0",
     "webpack": "^5.34.0",
     "webpack-bundle-analyzer": "^4.4.1",
     "webpack-cli": "^4.6.0",
@@ -158,7 +158,7 @@
     "react-tiny-popover": "5",
     "react-use": "^17.2.3",
     "react-visibility-sensor": "^5.0.2",
-    "unist-util-visit": "^2.0.3",
+    "unist-util-visit": "^3.0.0",
     "webpack-pwa-manifest": "^4.3.0",
     "webpack.vote": "https://github.com/webpack/voting-app.git",
     "workbox-window": "^6.1.5"
