@@ -52,7 +52,7 @@ Let's set up a simple configuration to support JSX and compile TypeScript down t
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
   }
 }
 ```
@@ -140,7 +140,7 @@ To enable source maps, we must configure TypeScript to output inline source maps
       "target": "es5",
       "jsx": "react",
       "allowJs": true,
-      "moduleResolution": "node"
+      "moduleResolution": "node",
     }
   }
 ```
