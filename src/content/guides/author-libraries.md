@@ -32,11 +32,11 @@ The basic project structure would look like this:
 +    |- ref.json
 ```
 
-Initialize the project with npm, then install `webpack` and `lodash`:
+Initialize the project with npm, then install `webpack`, `webpack-cli` and `lodash`:
 
 ```bash
 npm init -y
-npm install --save-dev webpack lodash
+npm install --save-dev webpack webpack-cli lodash
 ```
 
 We install `lodash` as `devDependencies` instead of `dependencies` because we don't want to bundle it into our library, or our library could be easily bloated.
