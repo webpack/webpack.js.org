@@ -2400,7 +2400,8 @@ webpack <span class="token number">5.4</span>.0 compiled successfully <span clas
     <span class="token property">"module"</span><span class="token operator">:</span> <span class="token string">"es6"</span><span class="token punctuation">,</span>
     <span class="token property">"target"</span><span class="token operator">:</span> <span class="token string">"es5"</span><span class="token punctuation">,</span>
     <span class="token property">"jsx"</span><span class="token operator">:</span> <span class="token string">"react"</span><span class="token punctuation">,</span>
-    <span class="token property">"allowJs"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token property">"allowJs"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token property">"moduleResolution"</span><span class="token operator">:</span> <span class="token string">"node"</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre> <p>See <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html">TypeScript's documentation</a> to learn more about <code>tsconfig.json</code> configuration options.</p> <p>To learn more about webpack configuration, see the <a href="/concepts/configuration/">configuration concepts</a>.</p> <p>Now let's configure webpack to handle TypeScript:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -2441,7 +2442,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </span><span class="token prefix unchanged"> </span><span class="token line">     "module": "commonjs",
 </span><span class="token prefix unchanged"> </span><span class="token line">     "target": "es5",
 </span><span class="token prefix unchanged"> </span><span class="token line">     "jsx": "react",
-</span><span class="token prefix unchanged"> </span><span class="token line">     "allowJs": true
+</span><span class="token prefix unchanged"> </span><span class="token line">     "allowJs": true,
+</span><span class="token prefix unchanged"> </span><span class="token line">     "moduleResolution": "node",
 </span><span class="token prefix unchanged"> </span><span class="token line">   }
 </span><span class="token prefix unchanged"> </span><span class="token line"> }</span></span></code></pre> <p>Now we need to tell webpack to extract these source maps and include in our final bundle:</p> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-diff"><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"> const path = require('path');
 </span></span>
