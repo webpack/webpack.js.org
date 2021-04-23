@@ -75,6 +75,7 @@ module.exports = {
 
 ### Plugin Options {#plugin-options}
 
+<<<<<<< HEAD
 |                 选项名                  |         类型         |       默认值       | 描述                                              |
 | :-----------------------------------: | :------------------: | :-----------------: | :------------------------------------------------------- |
 |      **[`filename`](#filename)**      | `{String\|Function}` |    `[name].css`     | 此选项决定了输出的每个 CSS 文件的名称  |
@@ -83,6 +84,17 @@ module.exports = {
 |        **[`insert`](#insert)**        | `{String\|Function}` | `var head = document.getElementsByTagName("head")[0];head.appendChild(linkTag);` | 在指定位置插入 `<link>`                   |
 |    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 给标签添加自定义属性                            |
 |      **[`linkType`](#linktype)**      | `{String\|Boolean}`  |              `text/css`               | 允许使用自定义 link 类型加载异步 chunk |
+=======
+|                               Name                                |         Type         |                Default                | Description                                                                   |
+| :---------------------------------------------------------------: | :------------------: | :-----------------------------------: | :---------------------------------------------------------------------------- |
+|                    **[`filename`](#filename)**                    | `{String\|Function}` |             `[name].css`              | This option determines the name of each output CSS file                       |
+|               **[`chunkFilename`](#chunkfilename)**               | `{String\|Function}` |          `based on filename`          | This option determines the name of non-entry chunk files                      |
+|                 **[`ignoreOrder`](#ignoreorder)**                 |     `{Boolean}`      |                `false`                | Remove Order Warnings                                                         |
+|                      **[`insert`](#insert)**                      | `{String\|Function}` | `document.head.appendChild(linkTag);` | Inserts `<link>` at the given position                                        |
+|                  **[`attributes`](#attributes)**                  |      `{Object}`      |                 `{}`                  | Adds custom attributes to tag                                                 |
+|                    **[`linkType`](#linktype)**                    | `{String\|Boolean}`  |              `text/css`               | Allows loading asynchronous chunks with a custom link type                    |
+| **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | Use an experimental webpack API to execute modules instead of child compilers |
+>>>>>>> da8a2d2048bb580635dae36af0cf3e28ea2ed07e
 
 #### `filename` {#filename}
 
@@ -256,7 +268,43 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### Loader 选项 {#loader-options}
+=======
+#### `experimentalUseImportModule`
+
+Use an experimental webpack API to execute modules instead of child compilers.
+
+This improves performance and memory usage a lot, but isn't as stable as the normal approach.
+
+When combined with `experiments.layers`, this adds a `layer` option to the loader options to specify the layer of the css execution.
+
+You need to have at least webpack 5.33.2.
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  plugins: [
+    new MiniCssExtractPlugin({
+      experimentalUseImportModule: true,
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+};
+```
+
+### Loader Options
+>>>>>>> da8a2d2048bb580635dae36af0cf3e28ea2ed07e
 
 |              名称               |         类型         |              默认值               | 描述                                                                       |
 | :-----------------------------: | :------------------: | :--------------------------------: | :-------------------------------------------------------------------------------- |
@@ -511,9 +559,9 @@ module.exports = {
 ### 通用用例 {#common-use-case}
 
 `mini-css-extract-plugin` is more often used in `production` mode to get separate css files.
-For `development` mode (including `webpack-dev-server`) you can use `style-loader`, because it injects CSS into the DOM using multiple <style></style> and works faster.
+For `development` mode (including `webpack-dev-server`) you can use `style-loader`, because it injects CSS into the DOM using multiple `<style></style>` and works faster.
 
-> i Do not use together `style-loader` and `mini-css-extract-plugin`.
+> ⚠️ Do not use `style-loader` and `mini-css-extract-plugin` together.
 
 **webpack.config.js**
 
