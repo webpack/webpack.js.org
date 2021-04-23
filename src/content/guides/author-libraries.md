@@ -36,7 +36,7 @@ Initialize the project with npm, then install `webpack`, `webpack-cli` and `loda
 
 ```bash
 npm init -y
-npm install --save-dev webpack wepack-cli lodash
+npm install --save-dev webpack webpack-cli lodash
 ```
 
 We install `lodash` as `devDependencies` instead of `dependencies` because we don't want to bundle it into our library, or our library could be easily bloated.
