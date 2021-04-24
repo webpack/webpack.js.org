@@ -37,18 +37,18 @@ related:
 
 webpack-cli 提供了许多命令来使 webpack 的工作变得简单。默认情况下，webpack 提供了以下命令：
 
-| 命令          | 使用                                      | 描述                                                                     |
-| ------------ | ----------------------------------------- | ------------------------------------------------------------------------------- |
-| `build`      | `build\|bundle\|b [entries...] [options]` | 运行 webpack（默认命令，可以被省略）。                                               |
-| `configtest` | `configtest\|t [config-path]`             | 校验 webpack 配置。                                                               |
-| [`help`](#help)       | `help\|h [command] [option]`              | 展示所有命令和选项的帮助。                                                          |
-| [`info`](#info)       | `info\|i [options]`                       | 输出有关系统的信息。                                                                |
-| [`init`](#init)       | `init\|c [scaffold...] [options]`         | 初始化一个新的 webpack 配置。                                                       |
-| `loader`     | `loader\|l [output-path]`                 | 生成一个 loader 仓库。                                                             |
-| `plugin`     | `plugin\|p [output-path]`                 | 生成一个 plugin 仓库。                                                             |
-| [`serve`](/configuration/dev-server/)      | `serve\|s [options]`                      | 运行 `webpack-dev-server`.                                                       |
-| [`version`](#version)    | `version\|v [commands...]`                | 输出 `webpack`，`webpack-cli` 以及 `webpack-dev-server` 的版本信息。                |
-| `watch`      | `watch\|w [entries...] [options]`         | 运行 webpack 并监听文件变化。                                                       |
+| 命令                                  | 使用                                      | 描述                                                                 |
+| ------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------- |
+| `build`                               | `build\|bundle\|b [entries...] [options]` | 运行 webpack（默认命令，可以被省略）。                               |
+| `configtest`                          | `configtest\|t [config-path]`             | 校验 webpack 配置。                                                  |
+| [`help`](#help)                       | `help\|h [command] [option]`              | 展示所有命令和选项的帮助。                                           |
+| [`info`](#info)                       | `info\|i [options]`                       | 输出有关系统的信息。                                                 |
+| [`init`](#init)                       | `init\|c [scaffold...] [options]`         | 初始化一个新的 webpack 配置。                                        |
+| `loader`                              | `loader\|l [output-path]`                 | 生成一个 loader 仓库。                                               |
+| `plugin`                              | `plugin\|p [output-path]`                 | 生成一个 plugin 仓库。                                               |
+| [`serve`](/configuration/dev-server/) | `serve\|s [options]`                      | 运行 `webpack-dev-server`.                                           |
+| [`version`](#version)                 | `version\|v [commands...]`                | 输出 `webpack`，`webpack-cli` 以及 `webpack-dev-server` 的版本信息。 |
+| `watch`                               | `watch\|w [entries...] [options]`         | 运行 webpack 并监听文件变化。                                        |
 
 ### Init {#init}
 
@@ -126,40 +126,39 @@ npx webpack configtest ./webpack.config.js
 
 默认情况下，webpack 提供了以下 flag：
 
-<<<<<<< HEAD
-| Flag / 别名        | 类型            | 描述                                                                                                    |
-| ------------------- | --------------- | -------------------------------------------------------------------------------------------------------------- |
-| `--entry`           | string[]        | 应用程序的入口文件，例如 `./src/main.js`                                 |
-| `--config, -c`      | string[]        | 提供 webpack 配置文件的路径，例如 `./webpack.config.js`                  |
-| `--config-name`     | string[]        | 要使用的配置名                                                         |
-| `--name`            | string        | 配置名称，在加载多个配置时使用                                            |
-| `--color`           | boolean         | 启用控制台颜色                                                         |
-| `--merge, -m`       | boolean         | 使用 webpack-merge 合并两个配置文件，例如 `-c ./webpack.config.js -c ./webpack.test.config.js` |
-| `--env`             | string[]        | 当它是一个函数时，传递给配置的环境变量                                     |
-| `--progress`        | boolean, string | 在构建过程中打印编译进度                                                 |
-| `--help`            | boolean         | 输出所有支持的 flag 和命令                                              |
-| `--output-path, -o` | string          | webpack 生成文件的输出位置，例如 `./dist`                                |
-| `--target, -t`      | string[]          | 设置要构建的 target                                                    |
-| `--watch, -w`       | boolean         | 监听文件变化                                                           |
-| `--watch-options-stdin` | boolean     | stdin stream 结束时，停止监听                                                                  |
-| `--hot, -h`         | boolean         | 启用 HMR                                                              |
-| `--devtool, -d`     | string          | 控制是否生成 source map，以及如何生成                                     |
-| `--prefetch`        | string          | 预先发生请求                                                            |
-| `--json, -j`        | boolean, string | 将结果打印成 JSON 格式或存储在文件中                                       |
-| `--mode`            | string          | 定义 webpack 所需的 mode                                                |
-| `--version, -v`     | boolean         | 获取当前 cli 版本                                                       |
-| `--stats`           | boolean, string | 它告诉 webpack 如何处理 stats                                            |
-| `--analyze`         | boolean         | 它调用 `webpack-bundle-analyzer` 插件来获取 bundle 信息                   |
+| Flag / 别名             | 类型            | 描述                                                                                           |
+| ----------------------- | --------------- | ---------------------------------------------------------------------------------------------- |
+| `--entry`               | string[]        | 应用程序的入口文件，例如 `./src/main.js`                                                       |
+| `--config, -c`          | string[]        | 提供 webpack 配置文件的路径，例如 `./webpack.config.js`                                        |
+| `--config-name`         | string[]        | 要使用的配置名                                                                                 |
+| `--name`                | string          | 配置名称，在加载多个配置时使用                                                                 |
+| `--color`               | boolean         | 启用控制台颜色                                                                                 |
+| `--merge, -m`           | boolean         | 使用 webpack-merge 合并两个配置文件，例如 `-c ./webpack.config.js -c ./webpack.test.config.js` |
+| `--env`                 | string[]        | 当它是一个函数时，传递给配置的环境变量                                                         |
+| `--progress`            | boolean, string | 在构建过程中打印编译进度                                                                       |
+| `--help`                | boolean         | 输出所有支持的 flag 和命令                                                                     |
+| `--output-path, -o`     | string          | webpack 生成文件的输出位置，例如 `./dist`                                                      |
+| `--target, -t`          | string[]        | 设置要构建的 target                                                                            |
+| `--watch, -w`           | boolean         | 监听文件变化                                                                                   |
+| `--watch-options-stdin` | boolean         | stdin stream 结束时，停止监听                                                                  |
+| `--hot, -h`             | boolean         | 启用 HMR                                                                                       |
+| `--devtool, -d`         | string          | 控制是否生成 source map，以及如何生成                                                          |
+| `--prefetch`            | string          | 预先发生请求                                                                                   |
+| `--json, -j`            | boolean, string | 将结果打印成 JSON 格式或存储在文件中                                                           |
+| `--mode`                | string          | 定义 webpack 所需的 mode                                                                       |
+| `--version, -v`         | boolean         | 获取当前 cli 版本                                                                              |
+| `--stats`               | boolean, string | 它告诉 webpack 如何处理 stats                                                                  |
+| `--analyze`             | boolean         | 它调用 `webpack-bundle-analyzer` 插件来获取 bundle 信息                                        |
 
 ### Negated Flags {#negated-flags}
 
-| Flag       | 描述                                                   |
-| ---------- | ------------------------------------------------------------- |
-| --no-color | 禁用控制台颜色                                                   |
-| --no-hot   | 如果你通过配置启用了 HMR，则禁用它                                 |
-| --no-stats | 禁用任何由 webpack emit 出来的 stats                             |
-| --no-watch | 禁用文件变更的监听                                               |
-| --no-devtool | 禁止生成 source maps                                         |
+| Flag         | 描述                                 |
+| ------------ | ------------------------------------ |
+| --no-color   | 禁用控制台颜色                       |
+| --no-hot     | 如果你通过配置启用了 HMR，则禁用它   |
+| --no-stats   | 禁用任何由 webpack emit 出来的 stats |
+| --no-watch   | 禁用文件变更的监听                   |
+| --no-devtool | 禁止生成 source maps                 |
 
 ### 核心 Flags {#core-flags}
 
@@ -168,53 +167,6 @@ npx webpack configtest ./webpack.config.js
 **链接中是 webpack v5 和 CLI v4 支持的所有核心 flag 列表 - [详戳](https://github.com/webpack/webpack-cli/blob/master/OPTIONS.md)**
 
 例如，如果你想在项目中启用性能提示，你需在配置中使用[此](/configuration/performance/#performancehints)选项，而如果使用核心 flag，你可以这样做：
-=======
-By default webpack ships with the following flags:
-
-| Flag / Alias                        | Type            | Description                                                             |
-| ----------------------------------- | --------------- | ----------------------------------------------------------------------- |
-| [`--entry`](#entry)                 | string[]        | The entry point(s) of your application e.g. `./src/main.js`             |
-| [`--config, -c`](#config)           | string[]        | Provide path to a webpack configuration file e.g. `./webpack.config.js` |
-| [`--config-name`](#config-name)     | string[]        | Name of the configuration to use                                        |
-| `--name`                            | string          | Name of the configuration. Used when loading multiple configurations    |
-| `--color`                           | boolean         | Enable colors on console                                                |
-| [`--merge, -m`](#merge)             | boolean         | Merge two or more configurations using `webpack-merge`                  |
-| [`--env`](#env)                     | string[]        | Environment passed to the configuration when it is a function           |
-| [`--node-env`](#node-env)           | string          | Set `process.env.NODE_ENV` to the specified value                       |
-| [`--progress`](#progress)           | boolean, string | Print compilation progress during build                                 |
-| [`--help`](#help)                   | boolean         | Outputs list of supported flags and commands                            |
-| [`--output-path, -o`](#output-path) | string          | Output location of the file generated by webpack e.g. `./dist`          |
-| `--target, -t`                      | string[]        | Sets the build target                                                   |
-| `--watch, -w`                       | boolean         | Watch for file changes                                                  |
-| `--watch-options-stdin`             | boolean         | Stop watching when stdin stream has ended                               |
-| `--hot, -h`                         | boolean         | Enables Hot Module Replacement                                          |
-| `--devtool, -d`                     | string          | Controls if and how source maps are generated.                          |
-| `--prefetch`                        | string          | Prefetch this request                                                   |
-| [`--json, -j`](#json)               | boolean, string | Prints result as JSON or store it in a file                             |
-| `--mode`                            | string          | Defines the mode to pass to webpack                                     |
-| [`--version, -v`](#version)         | boolean         | Get current version                                                     |
-| `--stats`                           | boolean, string | It instructs webpack on how to treat the stats                          |
-| [`--analyze`](#analyzing-bundle)    | boolean         | It invokes `webpack-bundle-analyzer` plugin to get bundle information   |
-
-### Negated Flags
-
-| Flag                       | Description                                                   |
-| -------------------------- | ------------------------------------------------------------- |
-| `--no-color`               | Disables any color on the console                             |
-| `--no-hot`                 | Disables hot reloading if you have it enabled via your config |
-| `--no-stats`               | Disables any compilation stats emitted by webpack             |
-| `--no-watch`               | Do not watch for file changes                                 |
-| `--no-devtool`             | Do not generate source maps                                   |
-| `--no-watch-options-stdin` | Do not stop watching when stdin stream has ended              |
-
-### Core Flags
-
-Starting CLI v4 and webpack v5, CLI imports the entire configuration schema from webpack core to allow tuning almost every configuration option from the command line.
-
-**Here's the list of all the core flags supported by webpack v5 with CLI v4 - [link](https://github.com/webpack/webpack-cli/blob/master/OPTIONS.md)**
-
-For example if you want to enable performance hints in your project you'd use [this](https://webpack.js.org/configuration/performance/#performancehints) option in configuration, with core flags you can do -
->>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
 
 ```bash
 npx webpack --performance-hints warning
@@ -263,11 +215,7 @@ npx webpack ./first-entry.js ./other-entry.js
 npx webpack --entry ./first-entry.js ./other-entry.js
 ```
 
-<<<<<<< HEAD
-T> 使用 `webpack [command] [entries...] [option]` 语法，主要是因为某些选项支持接受多个值。因此，你可以用 `webpack --target node ./entry.js` 表示 `target: ['node', './file.js']`。
-=======
-T> Use `webpack [command] [entries...] [option]` syntax because some options can accept multiple values so `webpack --target node ./entry.js` means `target: ['node', './entry.js']`
->>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
+T> 使用 `webpack [command] [entries...] [option]` 语法，主要是因为某些选项支持接受多个值。因此，你可以用 `webpack --target node ./entry.js` 表示 `target: ['node', './entry.js']`。
 
 #### output-path
 
@@ -387,11 +335,7 @@ webpack-cli 4.6.0
 webpack-dev-server 3.11.2
 ```
 
-<<<<<<< HEAD
-如需检查 `webpack-cli` 子包的版本（如 `@webpack-cli/init`），只需运行如下命令：
-=======
-To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/info`) just run command similar to the following:
->>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
+如需检查 `webpack-cli` 子包的版本（如 `@webpack-cli/info`），只需运行如下命令：
 
 ```bash
 npx webpack info --version
@@ -523,11 +467,11 @@ T> 如果你不明确的设置 mode，`mode` 选项的值会被 `--node-env` 覆
 
 ## 配置选项 {#configuration-options}
 
-| 参数       | 说明                                                    | 输入类型 | 默认值                                             |
-| --------------- | -------------------------------------------------------------- | ---------- | --------------------------------------------------- |
-| `--config`      | 配置文件的路径                                 | string[]     | [默认配置](/api/cli/#default-configurations) |
-| `--config-name` | 要使用的配置名                               | string[]     |
-| `--env`         | 当配置文件为函数时，environment 将作为参数传递给配置  | string[]        |
+| 参数            | 说明                                                 | 输入类型 | 默认值                                       |
+| --------------- | ---------------------------------------------------- | -------- | -------------------------------------------- |
+| `--config`      | 配置文件的路径                                       | string[] | [默认配置](/api/cli/#default-configurations) |
+| `--config-name` | 要使用的配置名                                       | string[] |
+| `--env`         | 当配置文件为函数时，environment 将作为参数传递给配置 | string[] |
 
 ## 分析 Bundle {#analyzing-bundle}
 
@@ -571,19 +515,19 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 
 ## 退出代码及其含义 {#exit-codes-and-their-meanings}
 
-| 退出代码 | 描述                                        |
-| --------- | -------------------------------------------------- |
-| `0`       | 成功                                            |
-| `1`       | webpack Error                                   |
-| `2`       | 配置/选项问题，或者内部错误                         |
+| 退出代码 | 描述                        |
+| -------- | --------------------------- |
+| `0`      | 成功                        |
+| `1`      | webpack Error               |
+| `2`      | 配置/选项问题，或者内部错误 |
 
 ## CLI 环境变量 {#cli-environment-variables}
 
-| 环境变量                | 描述                                                         |
-| ----------------------------------- | ------------------------------------------------------------------- |
+| 环境变量                            | 描述                                                |
+| ----------------------------------- | --------------------------------------------------- |
 | `WEBPACK_CLI_SKIP_IMPORT_LOCAL`     | 设置为 `true` 时将不会使用 `webpack-cli` 本地实例。 |
-| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG` | 设置为 `true` 则强制加载 ESM 配置。             |
-| [`WEBPACK_PACKAGE`](#webpack_package)                   | 在 CLI 中使用自定义 webpack 版本。                               |
+| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG` | 设置为 `true` 则强制加载 ESM 配置。                 |
+| `WEBPACK_PACKAGE`                   | 在 CLI 中使用自定义 webpack 版本。                  |
 
 ```bash
 WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
@@ -615,11 +559,11 @@ WEBPACK_PACKAGE=webpack-5 npx webpack
 
 ## ENV 环境变量 {#env-environment-variables}
 
-| 环境变量 | 描述                                  |
-| -------------------- | -------------------------------------------- |
-| `WEBPACK_SERVE`      | 如果使用了 `serve\|s`，则为 `true`。         |
-| `WEBPACK_BUILD`      | 如果使用了 `build\|bundle\|b`，则为 `true`。 |
-| `WEBPACK_WATCH`      | 如果使用了 `--watch\|watch\|w`，则为 `true`。|
+| 环境变量        | 描述                                          |
+| --------------- | --------------------------------------------- |
+| `WEBPACK_SERVE` | 如果使用了 `serve\|s`，则为 `true`。          |
+| `WEBPACK_BUILD` | 如果使用了 `build\|bundle\|b`，则为 `true`。  |
+| `WEBPACK_WATCH` | 如果使用了 `--watch\|watch\|w`，则为 `true`。 |
 
 你可以在你的 webpack 配置中使用上述环境变量：
 

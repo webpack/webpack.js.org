@@ -70,7 +70,7 @@ module.exports = {
 
 `boolean` `object`
 
-缓存生成的 webpack 模块和 chunk，来改善构建速度。`cache` 会在[`开发` 模式](/configuration/mode/#mode-development)被设置成 `type: 'memory'` 而且在 [`生产` 模式](/configuration/mode/#mode-production) 中被禁用。 `cache: true` 与 `cache: { type: 'memory' }` 配置作用一致。 传入  `false` 会禁用缓存:
+缓存生成的 webpack 模块和 chunk，来改善构建速度。`cache` 会在[`开发` 模式](/configuration/mode/#mode-development)被设置成 `type: 'memory'` 而且在 [`生产` 模式](/configuration/mode/#mode-production) 中被禁用。 `cache: true` 与 `cache: { type: 'memory' }` 配置作用一致。 传入 `false` 会禁用缓存:
 
 **webpack.config.js**
 
@@ -182,7 +182,7 @@ W> 已迁移到 [snapshot.managedPaths](#managedpaths)
 
 允许未使用的缓存留在文件系统缓存中的时间（以毫秒为单位）；默认为一个月。
 
-`cache.maxAge` 仅在  [`cache.type`](#cachetype) 设置为 `filesystem` 时生效。
+`cache.maxAge` 仅在 [`cache.type`](#cachetype) 设置为 `filesystem` 时生效。
 
 **webpack.config.js**
 
@@ -548,16 +548,13 @@ module.exports = {
 
 `object = {}`
 
-<<<<<<< HEAD
-### level {#level}
-=======
-### appendOnly
+### appendOnly {#appendonly}
 
 <Badge text="5.31.0+" />
 
 `boolean`
 
-Append lines to the output instead of updating existing output, useful for status messages. This option is used only when no custom [`console`](#console) is provided.
+将内容追加到现有输出中，而非更新现有输出，这对于展示状态信息来说非常有用。此选项仅在未提供自定义 [`console`](#console) 的情况下使用。
 
 **webpack.config.js**
 
@@ -578,13 +575,13 @@ module.exports = {
 };
 ```
 
-### colors
+### colors {#colors}
 
 <Badge text="5.31.0+" />
 
 `boolean`
 
-Enable colorful output for infrastructure level logging. This option is used only when no custom [`console`](#console) is provided.
+为基础设施日志启用带有颜色的输出。此选项仅在未提供自定义 [`console`](#console) 的情况下使用。
 
 **webpack.config.js**
 
@@ -604,13 +601,13 @@ module.exports = {
 };
 ```
 
-### console
+### console {#console}
 
 <Badge text="5.31.0+" />
 
 `Console`
 
-Customize the console used for infrastructure level logging.
+为基础设施日志提供自定义方案。
 
 **webpack.config.js**
 
@@ -624,11 +621,10 @@ module.exports = {
 ```
 
 ### level {#level}
->>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
 
 `string`
 
-开启基础设施日志输出。与 [`stats.logging`](/configuration/stats/#statslogging) 选项类似但仅仅是对于基础设施而言。 没有默认值提供。
+开启基础设施日志输出。与 [`stats.logging`](/configuration/stats/#statslogging) 选项类似但仅仅是对于基础设施而言。没有默认值提供。
 
 可能的取值：
 
@@ -668,16 +664,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## snapshot {#snapshot}
-=======
-### stream
+### stream {#stream}
 
 <Badge text="5.31.0+" />
 
 `NodeJS.WritableStream = process.stderr`
 
-Stream used for logging output. Defaults to `process.stderr`. This option is used only when no custom [`console`](#console) is provided.
+用于日志输出的流。默认为 `process.stderr`。此选项仅在未提供自定义 [`console`](#console) 的情况下使用。
 
 **webpack.config.js**
 
@@ -690,10 +683,9 @@ module.exports = {
 };
 ```
 
-T> In the case of a TTY stream, `colors` is enabled and `appendOnly` is disabled, and vice versa.
+T> 在 TTY 流的情况下，会启用 `colors` 并禁用 `appendOnly`，反之亦然。
 
-## snapshot
->>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
+## snapshot {#snapshot}
 
 `object`
 

@@ -456,23 +456,17 @@ asset 已经优化。
 
 asset 处理.
 
-<<<<<<< HEAD
-- 回调参数：`assets`
+**Hook 参数：**
 
-以下为示例代码：
-=======
-**Hook parameters:**
-
-- `name: string` — a name of the plugin
+- `name: string` — 插件名称
 - `stage: Stage` — a stage to tap into (see the [list of supported stages](#list-of-asset-processing-stages) below)
 - `additionalAssets?: true | (assets, [callback]) => (void | Promise<void>)` — a callback for additional assets ([see below](#additional-assets))
 
-**Callback parameters:**
+**回调参数：**
 
-- `assets: { [pathname: string]: Source }` — a plain object, where key is the asset's pathname, and the value is data of the asset represented by the [`Source`](https://github.com/webpack/webpack-sources#source).
+- `assets: { [pathname: string]: Source }` — 普通对象，其中 key 是 asset 的路径名，value 是 asset 的数据，具体的代表请参考 [`Source`](https://github.com/webpack/webpack-sources#source)。
 
-**Example:**
->>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
+**示例：**
 
 ```js
 compilation.hooks.processAssets.tap(
@@ -489,19 +483,13 @@ compilation.hooks.processAssets.tap(
 );
 ```
 
-<<<<<<< HEAD
+#### 额外的 assets {#additional-assets}
+
 除了 `name` 和 `stage` 以外，你还可以传递 `additionalAssets` <Badge text='5.8.0+' /> 选项，此选项可接受 `true` 或者一个带有 `assets` 的函数作为参数：
 
 1. `true` - 针对插件后续添加的 asset 执行回调。
-=======
-#### Additional assets
 
-In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge text='5.8.0+' /> option which accepts either a value of `true` or a callback function that receives `assets` as a first argument:
-
-1. `true` — run the provided callback again for assets added later by plugins.
-
-   In this mode, the callback will be called multiple times: once for assets added prior to the specified stage, and additional times for assets added by plugins later (on this or next stages).
->>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
+   在此模式下，回调将被多次调用：一次是在指定阶段之前添加资产时，另一次是后来由插件添加资产时。（在本阶段或下一阶段）。
 
    ```js
    compilation.hooks.processAssets.tap(
@@ -516,11 +504,7 @@ In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge tex
    );
    ```
 
-<<<<<<< HEAD
-2. `(assets) => {}` - 针对插件后续添加的 asset 执行指定的回调。
-=======
-2. `(assets, [callback]) => (void | Promise<void>)` — run the specified callback against assets added by plugins later (on this or next stages). The callback must respect the type of the tap method used (e.g. when used with `tapPromise()`, it should return a promise).
->>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
+2. `(assets, [callback]) => (void | Promise<void>)` - 针对插件后续添加的 asset 执行指定的回调（在本阶段或下一阶段）。回调必须遵循所使用的 tap 函数的类型（例如，当与 `tapPromise()` 一同使用时，它应该返回一个 Promise）。
 
    ```js
    compilation.hooks.processAssets.tap(
@@ -537,48 +521,29 @@ In addition to `name` and `stage`, you can pass an `additionalAssets` <Badge tex
    );
    ```
 
-<<<<<<< HEAD
-如下是我们可以使用的 stage 清单：
+#### 资产处理 stage 的列表 {#list-of-asset-processing-stages}
 
-- `PROCESS_ASSETS_STAGE_ADDITIONAL` - Add additional assets to the compilation.
-- `PROCESS_ASSETS_STAGE_PRE_PROCESS` - Basic preprocessing of the assets.
-- `PROCESS_ASSETS_STAGE_DERIVED` - Derive new assets from the existing assets.
-- `PROCESS_ASSETS_STAGE_ADDITIONS` - Add additional sections to the existing assets e.g. banner or initialization code.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE` - Optimize existing assets in a general way.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_COUNT` - Optimize the count of existing assets, e.g. by merging them.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY` - Optimize the compatibility of existing assets, e.g. add polyfills or vendor prefixes.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE` - Optimize the size of existing assets, e.g. by minimizing or omitting whitespace.
-- `PROCESS_ASSETS_STAGE_DEV_TOOLING` - Add development tooling to the assets, e.g. by extracting a source map.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_INLINE` <Badge text='5.8.0+' /> - Optimize the numbers of existing assets, e.g. by inlining assets into other assets.
-- `PROCESS_ASSETS_STAGE_SUMMARIZE` - Summarize the list of existing assets.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_HASH` - Optimize the hashes of the assets, e.g. by generating real hashes of the asset content.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` - Optimize the transfer of existing assets, e.g. by preparing a compressed (gzip) file as separate asset.
-- `PROCESS_ASSETS_STAGE_ANALYSE` - Analyze the existing assets.
-- `PROCESS_ASSETS_STAGE_REPORT` - Creating assets for the reporting purposes.
-=======
-#### List of asset processing stages
+如下是我们可以使用的 stage 清单（按顺序处理）：
 
-Here's a list of supported stages (in the order of processing):
+- `PROCESS_ASSETS_STAGE_ADDITIONAL` — 在编译中添加额外的 asset。
+- `PROCESS_ASSETS_STAGE_PRE_PROCESS` — asset 进行了基础预处理。
+- `PROCESS_ASSETS_STAGE_DERIVED` — 从已有 asset 中获取新的 asset。
+- `PROCESS_ASSETS_STAGE_ADDITIONS` — 为现有的 asset 添加额外的内容，例如 banner 或初始代码。
+- `PROCESS_ASSETS_STAGE_OPTIMIZE` — 以通用的方式优化已有 asset。
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_COUNT` — 优化现有资产的数量，例如，进行合并操作。
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY` — 优化现有 asset 兼容性，例如添加 polyfills 或者 vendor prefixes。
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE` — 优化现有 asset 大小，例如进行压缩或者删除空格。
+- `PROCESS_ASSETS_STAGE_DEV_TOOLING` — 为 asset 添加开发者工具，例如，提取 source map。
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_INLINE` <Badge text='5.8.0+' /> — 优化已有 asset 数量，例如，通过将 asset 内联到其他 asset 中。
+- `PROCESS_ASSETS_STAGE_SUMMARIZE` — 整理现有 asset 列表。
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_HASH` — 优化 asset 的 hash 值，例如，生成 asset 内容的真实 hash 值。
+- `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` — 优化已有 asset 的转换操作，例如对 asset 进行压缩，并作为独立的 asset。
+- `PROCESS_ASSETS_STAGE_ANALYSE` — 分析已有 asset。
+- `PROCESS_ASSETS_STAGE_REPORT` — 创建用于上报的 asset。
 
-- `PROCESS_ASSETS_STAGE_ADDITIONAL` — add additional assets to the compilation.
-- `PROCESS_ASSETS_STAGE_PRE_PROCESS` — basic preprocessing of the assets.
-- `PROCESS_ASSETS_STAGE_DERIVED` — derive new assets from the existing assets.
-- `PROCESS_ASSETS_STAGE_ADDITIONS` — add additional sections to the existing assets e.g. banner or initialization code.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE` — optimize existing assets in a general way.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_COUNT` — optimize the count of existing assets, e.g. by merging them.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_COMPATIBILITY` — optimize the compatibility of existing assets, e.g. add polyfills or vendor prefixes.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_SIZE` — optimize the size of existing assets, e.g. by minimizing or omitting whitespace.
-- `PROCESS_ASSETS_STAGE_DEV_TOOLING` — add development tooling to the assets, e.g. by extracting a source map.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_INLINE` <Badge text='5.8.0+' /> — optimize the numbers of existing assets, e.g. by inlining assets into other assets.
-- `PROCESS_ASSETS_STAGE_SUMMARIZE` — summarize the list of existing assets.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_HASH` — optimize the hashes of the assets, e.g. by generating real hashes of the asset content.
-- `PROCESS_ASSETS_STAGE_OPTIMIZE_TRANSFER` — optimize the transfer of existing assets, e.g. by preparing a compressed (gzip) file as separate asset.
-- `PROCESS_ASSETS_STAGE_ANALYSE` — analyze the existing assets.
-- `PROCESS_ASSETS_STAGE_REPORT` — creating assets for the reporting purposes.
+#### Assets info {#assets-info}
 
-#### Assets info
-
-The "asset info" metadata is not automatically provided for this hook. If needed, you will have to resolve this metadata manually using the compilation instance and the provided asset pathname. This will be improved in a future version of the webpack.
+"asset info" 元数据不会自动提供给这个 hook。如果必须使用，你需要通过编译实例以及 asset 路径来手动获取这个元数据。这将在未来的 webpack 版本中得到改善。
 
 **Example:**
 
@@ -595,7 +560,6 @@ compilation.hooks.processAssets.tap(
   }
 );
 ```
->>>>>>> 19129dfea71d07044f4bbd81a41e9b649f32ae16
 
 ### `afterProcessAssets` {#afterprocessassets}
 
