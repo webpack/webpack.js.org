@@ -75,7 +75,6 @@ module.exports = {
 
 ### Plugin Options {#plugin-options}
 
-<<<<<<< HEAD
 |                 选项名                  |         类型         |       默认值       | 描述                                              |
 | :-----------------------------------: | :------------------: | :-----------------: | :------------------------------------------------------- |
 |      **[`filename`](#filename)**      | `{String\|Function}` |    `[name].css`     | 此选项决定了输出的每个 CSS 文件的名称  |
@@ -84,17 +83,7 @@ module.exports = {
 |        **[`insert`](#insert)**        | `{String\|Function}` | `var head = document.getElementsByTagName("head")[0];head.appendChild(linkTag);` | 在指定位置插入 `<link>`                   |
 |    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 给标签添加自定义属性                            |
 |      **[`linkType`](#linktype)**      | `{String\|Boolean}`  |              `text/css`               | 允许使用自定义 link 类型加载异步 chunk |
-=======
-|                               Name                                |         Type         |                Default                | Description                                                                   |
-| :---------------------------------------------------------------: | :------------------: | :-----------------------------------: | :---------------------------------------------------------------------------- |
-|                    **[`filename`](#filename)**                    | `{String\|Function}` |             `[name].css`              | This option determines the name of each output CSS file                       |
-|               **[`chunkFilename`](#chunkfilename)**               | `{String\|Function}` |          `based on filename`          | This option determines the name of non-entry chunk files                      |
-|                 **[`ignoreOrder`](#ignoreorder)**                 |     `{Boolean}`      |                `false`                | Remove Order Warnings                                                         |
-|                      **[`insert`](#insert)**                      | `{String\|Function}` | `document.head.appendChild(linkTag);` | Inserts `<link>` at the given position                                        |
-|                  **[`attributes`](#attributes)**                  |      `{Object}`      |                 `{}`                  | Adds custom attributes to tag                                                 |
-|                    **[`linkType`](#linktype)**                    | `{String\|Boolean}`  |              `text/css`               | Allows loading asynchronous chunks with a custom link type                    |
-| **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | Use an experimental webpack API to execute modules instead of child compilers |
->>>>>>> da8a2d2048bb580635dae36af0cf3e28ea2ed07e
+| **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | 使用实验性的 webpack API 来执行模块，而非子代编译器 |
 
 #### `filename` {#filename}
 
@@ -268,18 +257,15 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### Loader 选项 {#loader-options}
-=======
-#### `experimentalUseImportModule`
+#### `experimentalUseImportModule` {#experimentaluseimportmodule}
 
-Use an experimental webpack API to execute modules instead of child compilers.
+使用实验性的 webpack API 来执行模块，而非子代编译器。
 
-This improves performance and memory usage a lot, but isn't as stable as the normal approach.
+使用此 API 在性能和内存占用方面有很大改善，但没有正常的方式稳定。
 
-When combined with `experiments.layers`, this adds a `layer` option to the loader options to specify the layer of the css execution.
+当与 `experiments.layer` 结合使用时，这在 loader 配置中增加了一个 `layer` 选项，为 css 指定执行 layer。
 
-You need to have at least webpack 5.33.2.
+你需保证 webpack 的版本至少为 5.33.2。
 
 **webpack.config.js**
 
@@ -303,8 +289,7 @@ module.exports = {
 };
 ```
 
-### Loader Options
->>>>>>> da8a2d2048bb580635dae36af0cf3e28ea2ed07e
+### Loader 选项 {#loader-options}
 
 |              名称               |         类型         |              默认值               | 描述                                                                       |
 | :-----------------------------: | :------------------: | :--------------------------------: | :-------------------------------------------------------------------------------- |
