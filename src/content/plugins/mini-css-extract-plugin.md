@@ -83,6 +83,7 @@ module.exports = {
 |        **[`insert`](#insert)**        | `{String\|Function}` | `var head = document.getElementsByTagName("head")[0];head.appendChild(linkTag);` | 在指定位置插入 `<link>`                   |
 |    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 给标签添加自定义属性                            |
 |      **[`linkType`](#linktype)**      | `{String\|Boolean}`  |              `text/css`               | 允许使用自定义 link 类型加载异步 chunk |
+| **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | 使用实验性的 webpack API 来执行模块，而非子代编译器 |
 
 #### `filename` {#filename}
 
@@ -243,6 +244,38 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       linkType: false,
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+};
+```
+
+#### `experimentalUseImportModule` {#experimentaluseimportmodule}
+
+使用实验性的 webpack API 来执行模块，而非子代编译器。
+
+使用此 API 在性能和内存占用方面有很大改善，但没有正常的方式稳定。
+
+当与 `experiments.layer` 结合使用时，这在 loader 配置中增加了一个 `layer` 选项，为 css 指定执行 layer。
+
+你需保证 webpack 的版本至少为 5.33.2。
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  plugins: [
+    new MiniCssExtractPlugin({
+      experimentalUseImportModule: true,
     }),
   ],
   module: {
@@ -511,9 +544,9 @@ module.exports = {
 ### 通用用例 {#common-use-case}
 
 `mini-css-extract-plugin` is more often used in `production` mode to get separate css files.
-For `development` mode (including `webpack-dev-server`) you can use `style-loader`, because it injects CSS into the DOM using multiple <style></style> and works faster.
+For `development` mode (including `webpack-dev-server`) you can use `style-loader`, because it injects CSS into the DOM using multiple `<style></style>` and works faster.
 
-> i Do not use together `style-loader` and `mini-css-extract-plugin`.
+> ⚠️ Do not use `style-loader` and `mini-css-extract-plugin` together.
 
 **webpack.config.js**
 
