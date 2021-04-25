@@ -4,17 +4,17 @@ source: https://raw.githubusercontent.com/webpack-contrib/svg-inline-loader/mast
 edit: https://github.com/webpack-contrib/svg-inline-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/svg-inline-loader
 ---
-This Webpack loader inlines SVG as module. If you use Adobe suite or Sketch to export SVGs, you will get auto-generated, unneeded crusts. This loader removes it for you, too.
+此 webpack loader 会将 SVG 文件内联为模块。如果你使用 Adobe Suite 或 Sketch 导出 SVG 时，会生成不必要的冗余文件代码。此 loader 也会帮你移除它。
 
-## Install {#install}
+## 安装 {#install}
 
 ```bash
 npm install svg-inline-loader --save-dev
 ```
 
-## Configuration {#configuration}
+## 配置 {#configuration}
 
-Simply add configuration object to `module.loaders` like this.
+只需按如下方式配置到  `module.loaders` 即可。
 
 ```javascript
     {
@@ -23,72 +23,72 @@ Simply add configuration object to `module.loaders` like this.
     }
 ```
 
-warning: You should configure this loader only once via `module.loaders` or `require('!...')`. See [#15](https://github.com/webpack-contrib/svg-inline-loader/issues/15) for detail.
+警告: 这个 loader 你应只能通过 `module.loaders` 或者 `require('!...')` 配置一次。更多细节参考 [#15](https://github.com/webpack-contrib/svg-inline-loader/issues/15)。
 
-## Query Options {#query-options}
+## Query 选项 {#query-options}
 
 #### `removeTags: boolean` {#removetags-boolean}
 
-Removes specified tags and its children. You can specify tags by setting `removingTags` query array.
+删除指定的标签和它的子元素。你可以通过设置 `removingTags` 查询数组来指定标签。
 
-default: `removeTags: false`
+默认值: `removeTags: false`
 
 #### `removingTags: [...string]` {#removingtags-string}
 
-warning: this won't work unless you specify `removeTags: true`
+警告：你指定 `removeTags: true` 时，它才会执行。
 
-default: `removingTags: ['title', 'desc', 'defs', 'style']`
+默认值: `removingTags: ['title', 'desc', 'defs', 'style']`
 
 #### `warnTags: [...string]` {#warntags-string}
 
-warns about tags, ex: ['desc', 'defs', 'style']
+警告标签，不含：['desc', 'defs', 'style']
 
-default: `warnTags: []`
+默认值: `warnTags: []`
 
 #### `removeSVGTagAttrs: boolean` {#removesvgtagattrs-boolean}
 
-Removes `width` and `height` attributes from `<svg />`.
+删除 `<svg />` 的 `width` 和 `height` 属性。
 
-default: `removeSVGTagAttrs: true`
+默认值: `removeSVGTagAttrs: true`
 
 #### `removingTagAttrs: [...string]` {#removingtagattrs-string}
 
-Removes attributes from inside the `<svg />`.
+删除 `<svg />` 内部的属性。
 
-default: `removingTagAttrs: []`
+默认值: `removingTagAttrs: []`
 
 #### `warnTagAttrs: [...string]` {#warntagattrs-string}
 
-Warns to console about attributes from inside the `<svg />`.
+在 console 发出关于内部 `<svg />` 属性的警告
 
-default: `warnTagAttrs: []`
+默认值: `warnTagAttrs: []`
 #### `classPrefix: boolean || string` {#classprefix-boolean--string}
 
-Adds a prefix to class names to avoid collision across svg files.
+添加一个前缀到 svg 文件的 class，以避免冲突。
 
-default: `classPrefix: false`
+默认值: `classPrefix: false`
 
 #### `idPrefix: boolean || string` {#idprefix-boolean--string}
 
-Adds a prefix to ids to avoid collision across svg files.
+添加一个前缀到 svg 文件的 id，以避免冲突。
 
-default: `idPrefix: false`
+默认值: `idPrefix: false`
 
-## Example Usage {#example-usage}
+## 使用示例 {#example-usage}
 
 ```js
-// Using default hashed prefix (__[hash:base64:7]__)
+// 使用默认 hashed prefix (__[hash:base64:7]__)
 var logoTwo = require('svg-inline-loader?classPrefix!./logo_two.svg');
 
-// Using custom string
+// 使用自定义字符串
 var logoOne = require('svg-inline-loader?classPrefix=my-prefix-!./logo_one.svg');
 
-// Using custom string and hash
+// 使用自定义字符串和 hash
 var logoThree = require('svg-inline-loader?classPrefix=__prefix-[sha512:hash:hex:5]__!./logo_three.svg');
 ```
-See [loader-utils](https://github.com/webpack/loader-utils#interpolatename) for hash options.
+hash 操作请参照 [loader-utils](https://github.com/webpack/loader-utils#interpolatename)。
 
-Preferred usage is via a `module.loaders`:
+首选 `module.loaders` 用法：
 ```js
     {
         test: /\.svg$/,
@@ -96,7 +96,7 @@ Preferred usage is via a `module.loaders`:
     }
 ```
 
-## Maintainers {#maintainers}
+## 维护人员 {#maintainers}
 
 <table>
   <tbody>
