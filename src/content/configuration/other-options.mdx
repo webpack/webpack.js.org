@@ -70,7 +70,7 @@ module.exports = {
 
 `boolean` `object`
 
-缓存生成的 webpack 模块和 chunk，来改善构建速度。`cache` 会在[`开发` 模式](/configuration/mode/#mode-development)被设置成 `type: 'memory'` 而且在 [`生产` 模式](/configuration/mode/#mode-production) 中被禁用。 `cache: true` 与 `cache: { type: 'memory' }` 配置作用一致。 传入  `false` 会禁用缓存:
+缓存生成的 webpack 模块和 chunk，来改善构建速度。`cache` 会在[`开发` 模式](/configuration/mode/#mode-development)被设置成 `type: 'memory'` 而且在 [`生产` 模式](/configuration/mode/#mode-production) 中被禁用。 `cache: true` 与 `cache: { type: 'memory' }` 配置作用一致。 传入 `false` 会禁用缓存:
 
 **webpack.config.js**
 
@@ -178,11 +178,11 @@ W> 已迁移到 [snapshot.managedPaths](#managedpaths)
 
 `number = 5184000000`
 
-<Badge text='5.30.0+' />
+<Badge text="5.30.0+" />
 
 允许未使用的缓存留在文件系统缓存中的时间（以毫秒为单位）；默认为一个月。
 
-`cache.maxAge` 仅在  [`cache.type`](#cachetype) 设置为 `filesystem` 时生效。
+`cache.maxAge` 仅在 [`cache.type`](#cachetype) 设置为 `filesystem` 时生效。
 
 **webpack.config.js**
 
@@ -200,7 +200,7 @@ module.exports = {
 
 `number`
 
-<Badge text='5.30.0+' />
+<Badge text="5.30.0+" />
 
 定义内存缓存中未使用的缓存项的生命周期。
 
@@ -226,7 +226,7 @@ module.exports = {
 
 `number`
 
-<Badge text='5.30.0+' />
+<Badge text="5.30.0+" />
 
 定义内存缓存中未使用的缓存项的生命周期。
 
@@ -340,7 +340,7 @@ W> 在具有不同选项的调用之间不要共享缓存。
 
 ### cache.idleTimeout {#cacheidletimeout}
 
-`number = 10000`
+`number = 60000`
 
 单位毫秒。 `cache.idleTimeout` 表示缓存存储发生后的时间段。
 
@@ -350,12 +350,10 @@ W> 在具有不同选项的调用之间不要共享缓存。
 module.exports = {
   //..
   cache: {
-    idleTimeout: 10000,
+    idleTimeout: 60000,
   },
 };
 ```
-
-W> `cache.idleTimeout` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 才可配置。
 
 ### cache.idleTimeoutForInitialStore {#cacheidletimeoutforinitialstore}
 
@@ -373,8 +371,6 @@ module.exports = {
   },
 };
 ```
-
-W> `cache.idleTimeoutForInitialStore` 仅当 [`cache.store`](#cachestore) 设置成 `'pack'` 才可配置。
 
 ## dependencies {#dependencies}
 
@@ -552,11 +548,83 @@ module.exports = {
 
 `object = {}`
 
+### appendOnly {#appendonly}
+
+<Badge text="5.31.0+" />
+
+`boolean`
+
+将内容追加到现有输出中，而非更新现有输出，这对于展示状态信息来说非常有用。此选项仅在未提供自定义 [`console`](#console) 的情况下使用。
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    appendOnly: true,
+    level: 'verbose',
+  },
+  plugins: [
+    (compiler) => {
+      const logger = compiler.getInfrastructureLogger('MyPlugin');
+      logger.status('first output'); // this line won't be overridden with `appendOnly` enabled
+      logger.status('second output');
+    },
+  ],
+};
+```
+
+### colors {#colors}
+
+<Badge text="5.31.0+" />
+
+`boolean`
+
+为基础设施日志启用带有颜色的输出。此选项仅在未提供自定义 [`console`](#console) 的情况下使用。
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    colors: true,
+    level: 'verbose',
+  },
+  plugins: [
+    (compiler) => {
+      const logger = compiler.getInfrastructureLogger('MyPlugin');
+      logger.log('this output will be colorful');
+    },
+  ],
+};
+```
+
+### console {#console}
+
+<Badge text="5.31.0+" />
+
+`Console`
+
+为基础设施日志提供自定义方案。
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    console: yourCustomConsole(),
+  },
+};
+```
+
 ### level {#level}
 
 `string`
 
-开启基础设施日志输出。与 [`stats.logging`](/configuration/stats/#statslogging) 选项类似但仅仅是对于基础设施而言。 没有默认值提供。
+开启基础设施日志输出。与 [`stats.logging`](/configuration/stats/#statslogging) 选项类似但仅仅是对于基础设施而言。没有默认值提供。
 
 可能的取值：
 
@@ -595,6 +663,27 @@ module.exports = {
   },
 };
 ```
+
+### stream {#stream}
+
+<Badge text="5.31.0+" />
+
+`NodeJS.WritableStream = process.stderr`
+
+用于日志输出的流。默认为 `process.stderr`。此选项仅在未提供自定义 [`console`](#console) 的情况下使用。
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    stream: process.stderr,
+  },
+};
+```
+
+T> 在 TTY 流的情况下，会启用 `colors` 并禁用 `appendOnly`，反之亦然。
 
 ## snapshot {#snapshot}
 

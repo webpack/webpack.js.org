@@ -687,8 +687,10 @@ module.exports = {
 通过命令行使用
 
 ```bash
-npx webpack serve --inline false
+npx webpack serve --inline
 ```
+
+请注意在 CLI 中没有方法禁用它。
 
 T> 对于 [Hot Module Replacement](/plugins/hot-module-replacement-plugin/) ，建议使用串联模式，因为它包含来自 websocket 的 HMR 触发器。 轮询模式可以用作替代方法，但需要附加的入口点`'webpack/hot/poll?1000'`。
 
@@ -743,6 +745,9 @@ npx webpack serve --liveReload
 ```
 
 请注意在 CLI 中没有方法禁用它。
+
+W> 热更新只适用于 web 相关的 [targets](/configuration/target/#string)，例如：`web`、`webworker`、`electron-renderer` 和 `node-webkit`。
+
 ## `devServer.mimeTypes` 🔑 {#devservermimetypes}
 
 `object`
@@ -1514,7 +1519,7 @@ module.exports = {
 通过命令行使用
 
 ```bash
-npx webpack serve --use-local-ip
+npx webpack serve --useLocalIp
 ```
 
 ## `devServer.watchContentBase` {#devserverwatchcontentbase}
