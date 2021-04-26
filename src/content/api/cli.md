@@ -451,6 +451,7 @@ npx webpack --env production    # env.production = true
 | `npx webpack --env prod`                                         | `{ prod: true }`                               |
 | `npx webpack --env prod --env min`                               | `{ prod: true, min: true }`                    |
 | `npx webpack --env platform=app --env production`                | `{ platform: "app", production: true }`        |
+| `npx webpack --env foo=bar=app`                                  | `{ foo: "bar=app"}`                            |
 | `npx webpack --env app.platform="staging" --env app.name="test"` | `{ app: { platform: "staging", name: "test" }` |
 
 T> 请查阅 [environment 变量指南](/guides/environment-variables/)了解更多信息及用法。

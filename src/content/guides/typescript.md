@@ -51,7 +51,8 @@ npm install --save-dev typescript ts-loader
     "module": "es6",
     "target": "es5",
     "jsx": "react",
-    "allowJs": true
+    "allowJs": true,
+    "moduleResolution": "node",
   }
 }
 ```
@@ -139,7 +140,8 @@ Note that if you're already using [`babel-loader`](https://github.com/babel/babe
       "module": "commonjs",
       "target": "es5",
       "jsx": "react",
-      "allowJs": true
+      "allowJs": true,
+      "moduleResolution": "node",
     }
   }
 ```
