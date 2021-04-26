@@ -16,19 +16,19 @@ repo: https://github.com/webpack-contrib/raw-loader
 
 
 
-**DEPREACTED for v5**: please consider migrating to [`asset modules`](/guides/asset-modules/).
+**在 webpack 5 中已废弃**: 请考虑迁移至[`asset modules`](/guides/asset-modules/)中。
 
-A loader for webpack that allows importing files as a String.
+可以将文件作为字符串导入的 webpack loader。
 
-## Getting Started {#getting-started}
+## 起步 {#getting-started}
 
-To begin, you'll need to install `raw-loader`:
+首先，你需要安装 `raw-loader`:
 
 ```console
 $ npm install raw-loader --save-dev
 ```
 
-Then add the loader to your `webpack` config. For example:
+然后将此 loader 添加至你的 `webpack` 配置中。例如:
 
 **file.js**
 
@@ -52,23 +52,23 @@ module.exports = {
 };
 ```
 
-And run `webpack` via your preferred method.
+然后根据你习惯的方式启动 `webpack`。 
 
-## Options {#options}
+## 选项 {#options}
 
-|            Name             |    Type     | Default | Description            |
-| :-------------------------: | :---------: | :-----: | :--------------------- |
-| **[`esModule`](#esmodule)** | `{Boolean}` | `true`  | Uses ES modules syntax |
+|           属性名            |    类型     | 默认值 | 备注             |
+| :-------------------------: | :---------: | :----: | :--------------- |
+| **[`esModule`](#esmodule)** | `{Boolean}` | `true` | 使用 ES 模块语法 |
 
 ### `esModule` {#esmodule}
 
-Type: `Boolean`
-Default: `true`
+类型: `Boolean`
+默认值: `true`
 
-By default, `raw-loader` generates JS modules that use the ES modules syntax.
-There are some cases in which using ES modules is beneficial, like in the case of [module concatenation](/plugins/module-concatenation-plugin/) and [tree shaking](/guides/tree-shaking/).
+默认情况下, `raw-loader` 会生成使用 ES 模块语法的 JS 模块。
+在某些情况下，使用 ES 模块是有益的， 如[模块连接(module concatenation)](/plugins/module-concatenation-plugin/)和[树摇(tree shaking)](/guides/tree-shaking/)。
 
-You can enable a CommonJS module syntax using:
+你可以使用以下命令启用 CommonJS 模块语法:
 
 **webpack.config.js**
 
@@ -92,25 +92,25 @@ module.exports = {
 };
 ```
 
-## Examples {#examples}
+## 示例 {#examples}
 
-### Inline {#inline}
+### 内联 {#inline}
 
 ```js
 import txt from 'raw-loader!./file.txt';
 ```
 
-Beware, if you already define loader(s) for extension(s) in `webpack.config.js` you should use:
+注意，如果你已经在 `webpack.config.js` 中为 extension(s) 定义了 loader(s)，那么你应该使用:
 
 ```js
-import css from '!!raw-loader!./file.txt'; // Adding `!!` to a request will disable all loaders specified in the configuration
+import css from '!!raw-loader!./file.txt'; // 在请求中添加`!!`将禁用配置中指定的所有 loaders
 ```
 
-## Contributing {#contributing}
+## 贡献 {#contributing}
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+如果你从未阅读过我们的贡献指南，请在上面花点时间。
 
-[CONTRIBUTING](https://github.com/webpack-contrib/raw-loader/blob/master/.github/CONTRIBUTING.md)
+[贡献指南](https://github.com/webpack-contrib/raw-loader/blob/master/.github/CONTRIBUTING.md)
 
 ## License {#license}
 
