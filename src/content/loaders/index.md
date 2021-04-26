@@ -19,7 +19,7 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 
 - [`raw-loader`](/loaders/raw-loader) 用于加载文件的原始内容（utf-8）
 - [`val-loader`](/loaders/val-loader) 将代码作为模块执行，并将其导出为 JS 代码
-- [`url-loader`](/loaders/url-loader) 与 `file-loader` 类似，但是如果文件大写小于一个设置的值，则会返回 [data URL](https://tools.ietf.org/html/rfc2397)
+- [`url-loader`](/loaders/url-loader) 与 `file-loader` 类似，但是如果文件大小小于一个设置的值，则会返回 [data URL](https://tools.ietf.org/html/rfc2397)
 - [`file-loader`](/loaders/file-loader) 将文件保存至输出文件夹中并返回（相对）URL
 - [`ref-loader`](https://www.npmjs.com/package/ref-loader) 用于手动建立文件之间的依赖关系
 
