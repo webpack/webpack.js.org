@@ -35,7 +35,7 @@ T> 此文档中得出最重要的结论是，webpack 的配置可以有许多不
 **webpack.config.js**
 
 ```javascript
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   mode: 'development',

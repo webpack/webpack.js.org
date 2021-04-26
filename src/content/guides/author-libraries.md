@@ -32,11 +32,15 @@ contributors:
 +    |- ref.json
 ```
 
+<<<<<<< HEAD
 使用 npm 初始化项目，然后安装 `webpack` 和 `lodash`：
+=======
+Initialize the project with npm, then install `webpack`, `webpack-cli` and `lodash`:
+>>>>>>> e20580a67ad076aa580806a2bfd6a6f35d3a7187
 
 ```bash
 npm init -y
-npm install --save-dev webpack lodash
+npm install --save-dev webpack webpack-cli lodash
 ```
 
 我们将 `lodash` 安装为 `devDependencies` 而不是 `dependencies`，因为我们不需要将其打包到我们的库中，否则我们的库体积很容易变大。

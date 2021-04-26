@@ -16,6 +16,7 @@ contributors:
   - chenxsan
   - u01jmg3
   - jamesgeorge007
+  - snitin315
 related:
   - title: 使用 Records
     url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
@@ -66,7 +67,13 @@ module.exports = {
 
 这将迫使 webpack 退出其打包过程。
 
+<<<<<<< HEAD
 ## cache {#cache}
+=======
+W> Avoid using `bail` option in [`watch`](/configuration/watch) mode, as it will force webpack to exit as soon as possible when an error is found.
+
+## cache
+>>>>>>> e20580a67ad076aa580806a2bfd6a6f35d3a7187
 
 `boolean` `object`
 
@@ -344,12 +351,15 @@ W> 在具有不同选项的调用之间不要共享缓存。
 
 单位毫秒。 `cache.idleTimeout` 表示缓存存储发生后的时间段。
 
+`cache.idleTimeout` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+
 **webpack.config.js**
 
 ```javascript
 module.exports = {
   //..
   cache: {
+    type: 'filesystem',
     idleTimeout: 60000,
   },
 };
@@ -361,12 +371,15 @@ module.exports = {
 
 单位毫秒。 `cache.idleTimeoutForInitialStore` 是在初始缓存存储发生后的时间段。
 
+`cache.idleTimeoutForInitialStore` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+
 **webpack.config.js**
 
 ```javascript
 module.exports = {
   //..
   cache: {
+    type: 'filesystem',
     idleTimeoutForInitialStore: 0,
   },
 };
