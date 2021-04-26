@@ -28,7 +28,7 @@ contributors:
 
 <Badge text="5.12.0+" />
 
-It's possible to configure all generators' options in one place with a `module.generator`.
+可以使用 `module.generator` 在一个地方配置所有生成器的选项。
 
 **webpack.config.js**
 
@@ -37,33 +37,33 @@ module.exports = {
   module: {
     generator: {
       asset: {
-        // Generator options for asset modules
+        // asseet 模块的 generator 选项
 
-        // Customize publicPath for asset modules, available since webpack 5.28.0
+        // 自定义 asset 模块的 publicPath，自 webpack 5.28.0 起可用
         publicPath: 'assets/',
       },
       'asset/inline': {
-        // Generator options for asset/inline modules
+        // asset/内联模块的 generator 选项
       },
       'asset/resource': {
-        // Generator options for asset/resource modules
+        // asset/资源模块的 generator 选项
 
-        // Customize publicPath for asset/resource modules, available since webpack 5.28.0
+        // 自定义 asset/resource 模块的 publicPath，自 webpack 5.28.0 起可用
         publicPath: 'assets/',
       },
       javascript: {
-        // No generator options are supported for this module type yet
+        // 该模块类型尚不支持 generator 选项
       },
       'javascript/auto': {
-        // ditto
+        // 同上
       },
       'javascript/dynamic': {
-        // ditto
+        // 同上
       },
       'javascript/esm': {
-        // ditto
+        // 同上
       },
-      // others…
+      // 其他...
     },
   },
 };
@@ -73,7 +73,7 @@ module.exports = {
 
 <Badge text="5.12.0+" />
 
-Similar to the [`module.generator`](#modulegenerator), you can configure all parsers' options in one place with a `module.parser`.
+类似于 [`module.generator`](#modulegenerator)，你可以用 `module.parser` 在一个地方配置所有解析器的选项。
 
 **webpack.config.js**
 
@@ -82,32 +82,32 @@ module.exports = {
   module: {
     parser: {
       asset: {
-        // Parser options for asset modules
+        // 资产模块的 parser 选项
       },
       'asset/inline': {
-        // No parser options are supported for this module type yet
+        // 该模块类型尚不支持 parser 选项
       },
       'asset/resource': {
-        // ditto
+        // 同上
       },
       'asset/source': {
-        // ditto
+        // 同上
       },
       javascript: {
-        // Parser options for javascript modules
-        // e.g, enable parsing of require.ensure syntax
+        // javascript 模块的解析器选项
+        // 例如，启用解析 require.ensure 语法的功能
         requireEnsure: true,
       },
       'javascript/auto': {
-        // ditto
+        // 同上
       },
       'javascript/dynamic': {
-        // ditto
+        // 同上
       },
       'javascript/esm': {
-        // ditto
+        // 同上
       },
-      // others…
+      // 其他...
     },
   },
 };
@@ -311,7 +311,7 @@ W> 小心！resource 是文件的 _解析_ 路径，这意味着符号链接的�
 
 1. **Pitching** 阶段: loader 上的 pitch 方法，按照 `后置(post)、行内(inline)、普通(normal)、前置(pre)` 的顺序调用。更多详细信息，请查看 [Pitching Loader](/api/loaders/#pitching-loader)。
 2. **Normal** 阶段: loader 上的 常规方法，按照 `前置(pre)、普通(normal)、行内(inline)、后置(post)` 的顺序调用。模块源码的转换，
-发生在这个阶段。
+   发生在这个阶段。
 
 所有普通 loader 可以通过在请求中加上 `!` 前缀来忽略（覆盖）。
 
@@ -324,10 +324,10 @@ W> 小心！resource 是文件的 _解析_ 路径，这意味着符号链接的�
 import { a } from '!./file1.js';
 
 // 禁用前置和普通 loaders
-import { b } from  '-!./file2.js';
+import { b } from '-!./file2.js';
 
 // 禁用所有的 laoders
-import { c } from  '!!./file3.js';
+import { c } from '!!./file3.js';
 ```
 
 不应使用内联 loader 和 `!` 前缀，因为它是非标准的。它们可能会被 loader 生成代码使用。
@@ -400,7 +400,7 @@ module.exports = {
 
 ## `Rule.loaders` {#ruleloaders}
 
-W>  由于需要支持 `Rule.use`，此选项 **已废弃**。
+W> 由于需要支持 `Rule.use`，此选项 **已废弃**。
 
 `Rule.loaders` 是 `Rule.use` 的别名。详细请查看 [`Rule.use`](#rule-use)。
 
@@ -571,7 +571,7 @@ module.exports = {
 
 当 `Rule.generator.dataUrl` 被用作一个对象，你可以配置两个属性：
 
-- encoding: 当被设置为`'base64'`，模块源码会用 Baes64算法 编码。设置 `encoding` 为 false，会禁用编码。
+- encoding: 当被设置为`'base64'`，模块源码会用 Baes64 算法 编码。设置 `encoding` 为 false，会禁用编码。
 - mimetype: 为数据链接(data URI)设置的一个 mimetype 值。默认根据模块资源后缀设置。
 
 **webpack.config.js**
@@ -730,8 +730,8 @@ module.exports = {
 
 `function(input) => string | object`
 
-如果 `Rule.type` 被设置成  `'json'`，那么 `Rules.parser.parse` 选择可能会是一个方法，该方法实现自定义的逻辑，以解析模块的源和并将它转换成 JavaScript `对象`。
-它可能在没有特定加载器的时候，对将 `toml`, `yaml` 和其它非JSON文件导入成导入非常有用：
+如果 `Rule.type` 被设置成 `'json'`，那么 `Rules.parser.parse` 选择可能会是一个方法，该方法实现自定义的逻辑，以解析模块的源和并将它转换成 JavaScript `对象`。
+它可能在没有特定加载器的时候，对将 `toml`, `yaml` 和其它非 JSON 文件导入成导入非常有用：
 
 **webpack.config.js**
 
@@ -896,7 +896,7 @@ W> `Rule.resolve` 从 webpack 4.36.1 起可用
 模块解析可以在模块层被配置。[resolve 配置页面](/configuration/resolve/#resolve)可查看所有可用的配置。
 所有被应用的 resolve 选项被更高层级的[resolve](/configuration/resolve/#resolve)配置合并。
 
-例如，假设我们有一个入口文件在 `./src/index.js`, `./src/footer/default.js` 和一个  `./src/footer/overridden.js`，
+例如，假设我们有一个入口文件在 `./src/index.js`, `./src/footer/default.js` 和一个 `./src/footer/overridden.js`，
 用以论证模块层级的解析。
 
 **./src/index.js**
