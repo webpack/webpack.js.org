@@ -32,11 +32,7 @@ contributors:
 +    |- ref.json
 ```
 
-<<<<<<< HEAD
-使用 npm 初始化项目，然后安装 `webpack` 和 `lodash`：
-=======
-Initialize the project with npm, then install `webpack`, `webpack-cli` and `lodash`:
->>>>>>> e20580a67ad076aa580806a2bfd6a6f35d3a7187
+使用 npm 初始化项目，然后安装 `webpack`，`webpack-cli` 和 `lodash`：
 
 ```bash
 npm init -y
