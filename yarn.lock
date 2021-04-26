@@ -5069,12 +5069,12 @@ eslint-plugin-cypress@^2.11.2:
   dependencies:
     globals "^11.12.0"
 
-eslint-plugin-markdown@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-markdown/-/eslint-plugin-markdown-2.0.1.tgz#10567fd38c564462482e944a250ee6d0806826c4"
-  integrity sha512-w05C86QOtESVqK1klvH8vKVc1gUfPqRWD/PDIsuiaW5kUb7/UQAaajQMGg/BZloTV4N+IfywhJ5uMQIR5vzAkQ==
+eslint-plugin-markdown@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-markdown/-/eslint-plugin-markdown-2.1.0.tgz#1fee34a058e299bd51f3393553bf7f92f3fa167c"
+  integrity sha512-Rqw7tosArdlzXcR/xJGW3Er9gRiF7iE+QEMEm7hZZ/feZjUf8xCaGQJgB1nzs9yVhJnUeiAcj5TXLLfKMbp3DQ==
   dependencies:
-    remark-parse "^5.0.0"
+    remark-parse "^7.0.0"
     unified "^6.1.2"
 
 eslint-plugin-mdx@^1.12.0:
@@ -10977,10 +10977,10 @@ remark-parse@8.0.3, remark-parse@^8.0.3:
     vfile-location "^3.0.0"
     xtend "^4.0.1"
 
-remark-parse@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/remark-parse/-/remark-parse-5.0.0.tgz#4c077f9e499044d1d5c13f80d7a98cf7b9285d95"
-  integrity sha512-b3iXszZLH1TLoyUzrATcTQUZrwNl1rE70rVdSruJFlDaJ9z5aMkhrG43Pp68OgfHndL/ADz6V69Zow8cTQu+JA==
+remark-parse@^7.0.0:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/remark-parse/-/remark-parse-7.0.2.tgz#41e7170d9c1d96c3d32cf1109600a9ed50dba7cf"
+  integrity sha512-9+my0lQS80IQkYXsMA8Sg6m9QfXYJBnXjWYN5U+kFc5/n69t+XZVXU/ZBYr3cYH8FheEGf1v87rkFDhJ8bVgMA==
   dependencies:
     collapse-white-space "^1.0.2"
     is-alphabetical "^1.0.0"
