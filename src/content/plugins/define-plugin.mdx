@@ -97,20 +97,28 @@ new webpack.DefinePlugin({
 
 ## Runtime values via `runtimeValue`
 
-`function (getterFunction, [string]) => getterFunction()`
+`function (getterFunction, [string] | true | object) => getterFunction()`
 
 It is possible to define variables with values that rely on files and will be re-evaluated when such files change in the file system. This means webpack will rebuild when such watched files change.
 
-Arguments:
+There're two arguments for `webpack.DefinePlugin.runtimeValue` function:
 
-- The first argument of the `webpack.DefinePlugin.runtimeValue` is a `function` that should return the value to be assigned to the definition.
-- The second argument is an array of file paths to watch for. Pass `true` instead of `[string]` here to flag the module as uncacheable.
+- The first argument is a `function(module, key, version)` that should return the value to be assigned to the definition.
+- The second argument could either be an array of file paths to watch for or a `true` to flag the module as uncacheable. Since 5.26.0, it can also take an object argument with the following properties:
+
+  - `fileDependencies?: string[]` A list of files the function depends on.
+  - `contextDependencies?: string[]` A list of directories the function depends on.
+  - `missingDependencies?: string[]` A list of not existing files the function depends on.
+  - `buildDependencies?: string[]` A list of build dependencies the function depends on.
+  - `version?: string | () => string` A version of the function.
 
 ```javascript
 const fileDep = path.resolve(__dirname, 'sample.txt');
 
 new webpack.DefinePlugin({
-  BUILT_AT: webpack.DefinePlugin.runtimeValue(Date.now, [fileDep]),
+  BUILT_AT: webpack.DefinePlugin.runtimeValue(Date.now, {
+    fileDependencies: [fileDep],
+  }),
 });
 ```
 

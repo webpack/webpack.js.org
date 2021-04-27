@@ -20,7 +20,7 @@ A loader is just a JavaScript module that exports a function. The [loader runner
 
 The first loader is passed one argument: the content of the resource file. The compiler expects a result from the last loader. The result should be a `String` or a `Buffer` (which is converted to a string), representing the JavaScript source code of the module. An optional SourceMap result (as a JSON object) may also be passed.
 
-A single result can be returned in **sync mode**. For multiple results the `this.callback()` must be called. In **async mode** `this.async()` must be called to indicate that the [loader runner](https://github.com/webpack/loader-runner) should wait for an asynchronous result. It returns `this.callback()`. Then the loader must return `undefined` and call that callback.
+A single result can be returned in [sync mode](#synchronous-loaders). For multiple results the `this.callback()` must be called. In [async mode](#asynchronous-loaders) `this.async()` must be called to indicate that the [loader runner](https://github.com/webpack/loader-runner) should wait for an asynchronous result. It returns `this.callback()`. Then the loader must return `undefined` and call that callback.
 
 ```js
 /**
@@ -185,6 +185,8 @@ The steps above would be shortened to:
 
 The loader context represents the properties that are available inside of a loader assigned to the `this` property.
 
+### Example for the loader context
+
 Given the following example, this require call is used:
 
 In `/abc/file.js`:
@@ -193,36 +195,38 @@ In `/abc/file.js`:
 require('./loader1?xyz!loader2!./resource?rrr');
 ```
 
-### `this.version`
+### `this.addContextDependency`
 
-**Loader API version.** Currently `2`. This is useful for providing backwards compatibility. Using the version you can specify custom logic or fallbacks for breaking changes.
+```typescript
+addContextDependency(directory: string)
+```
 
-### `this.context`
+Add a directory as dependency of the loader result.
 
-**The directory of the module.** Can be used as a context for resolving other stuff.
+### `this.addDependency`
 
-In the example: `/abc` because `resource.js` is in this directory
+```typescript
+addDependency(file: string)
+dependency(file: string) // shortcut
+```
 
-### `this.rootContext`
+Add a file as dependency of the loader result in order to make them watchable. For example, [`sass-loader`](https://github.com/webpack-contrib/sass-loader), [`less-loader`](https://github.com/webpack-contrib/less-loader) uses this to recompile whenever any imported `css` file changes.
 
-Since webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
+### `this.async`
 
-### `this.request`
+Tells the [loader-runner](https://github.com/webpack/loader-runner) that the loader intends to call back asynchronously. Returns `this.callback`.
 
-The resolved request string.
+### `this.cacheable`
 
-In the example: `'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
+A function that sets the cacheable flag:
 
-### `this.query`
+```typescript
+cacheable(flag = true: boolean)
+```
 
-1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
-2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
+By default, loader results are flagged as cacheable. Call this method passing `false` to make the loader's result not cacheable.
 
-### `this.getOptions(schema)`
-
-Extracts given loader options. Optionally, accepts JSON schema as an argument.
-
-T> Since webpack 5, `this.getOptions` is available in loader context. It substitutes `getOptions` method from [loader-utils](https://github.com/webpack/loader-utils#getoptions).
+A cacheable loader must have a deterministic result when inputs and dependencies haven't changed. This means the loader shouldn't have dependencies other than those specified with `this.addDependency`.
 
 ### `this.callback`
 
@@ -248,111 +252,23 @@ T> It can be useful to pass an abstract syntax tree (AST), like [`ESTree`](https
 
 In case this function is called, you should return undefined to avoid ambiguous loader results.
 
-### `this.async`
+### `this.clearDependencies`
 
-Tells the [loader-runner](https://github.com/webpack/loader-runner) that the loader intends to call back asynchronously. Returns `this.callback`.
+```typescript
+clearDependencies();
+```
+
+Remove all dependencies of the loader result, even initial dependencies and those of other loaders. Consider using `pitch`.
+
+### `this.context`
+
+**The directory of the module.** Can be used as a context for resolving other stuff.
+
+In [the example](#example-for-the-loader-context): `/abc` because `resource.js` is in this directory
 
 ### `this.data`
 
 A data object shared between the pitch and the normal phase.
-
-### `this.cacheable`
-
-A function that sets the cacheable flag:
-
-```typescript
-cacheable(flag = true: boolean)
-```
-
-By default, loader results are flagged as cacheable. Call this method passing `false` to make the loader's result not cacheable.
-
-A cacheable loader must have a deterministic result when inputs and dependencies haven't changed. This means the loader shouldn't have dependencies other than those specified with `this.addDependency`.
-
-### `this.loaders`
-
-An array of all the loaders. It is writable in the pitch phase.
-
-<!-- eslint-skip -->
-
-```javascript
-loaders = [{request: string, path: string, query: string, module: function}]
-```
-
-In the example:
-
-```javascript
-[
-  {
-    request: '/abc/loader1.js?xyz',
-    path: '/abc/loader1.js',
-    query: '?xyz',
-    module: [Function],
-  },
-  {
-    request: '/abc/node_modules/loader2/index.js',
-    path: '/abc/node_modules/loader2/index.js',
-    query: '',
-    module: [Function],
-  },
-];
-```
-
-### `this.loaderIndex`
-
-The index in the loaders array of the current loader.
-
-In the example: in loader1: `0`, in loader2: `1`
-
-### `this.resource`
-
-The resource part of the request, including query.
-
-In the example: `'/abc/resource.js?rrr'`
-
-### `this.resourcePath`
-
-The resource file.
-
-In the example: `'/abc/resource.js'`
-
-### `this.resourceQuery`
-
-The query of the resource.
-
-In the example: `'?rrr'`
-
-### `this.target`
-
-Target of compilation. Passed from configuration options.
-
-Example values: `'web'`, `'node'`
-
-### `this.webpack`
-
-This boolean is set to true when this is compiled by webpack.
-
-T> Loaders were originally designed to also work as Babel transforms. Therefore, if you write a loader that works for both, you can use this property to know if there is access to additional loaderContext and webpack features.
-
-### `this.sourceMap`
-
-Tells if source map should be generated. Since generating source maps can be an expensive task, you should check if source maps are actually requested.
-
-### `this.emitWarning`
-
-```typescript
-emitWarning(warning: Error)
-```
-
-Emit a warning that will be displayed in the output like the following:
-
-```bash
-WARNING in ./src/lib.js (./src/loader.js!./src/lib.js)
-Module Warning (from ./src/loader.js):
-Here is a Warning!
- @ ./src/index.js 1:0-25
-```
-
-T> Note that the warnings will not be displayed if `stats.warnings` is set to `false`, or some other omit setting is used to `stats` such as `none` or `errors-only`. See the [stats presets configuration](/configuration/stats/#stats-presets).
 
 ### `this.emitError`
 
@@ -371,29 +287,40 @@ Here is an Error!
 
 T> Unlike throwing an Error directly, it will NOT interrupt the compilation process of the current module.
 
-### `this.loadModule`
+### `this.emitFile`
 
 ```typescript
-loadModule(request: string, callback: function(err, source, sourceMap, module))
+emitFile(name: string, content: Buffer|string, sourceMap: {...})
 ```
 
-Resolves the given request to a module, applies all configured loaders and calls back with the generated source, the sourceMap and the module instance (usually an instance of [`NormalModule`](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js)). Use this function if you need to know the source code of another module to generate the result.
+Emit a file. This is webpack-specific.
 
-`this.loadModule` in a loader context uses CommonJS resolve rules by default. Use `this.getResolve` with an appropriate `dependencyType`, e.g. `'esm'`, `'commonjs'` or a custom one before using a different semantic.
-
-### `this.resolve`
+### `this.emitWarning`
 
 ```typescript
-resolve(context: string, request: string, callback: function(err, result: string))
+emitWarning(warning: Error)
 ```
 
-Resolve a request like a require expression.
+Emit a warning that will be displayed in the output like the following:
 
-- `context` must be an absolute path to a directory. This directory is used as the starting location for the resolving.
-- `request` is the request to be resolved. Usually either relative requests like `./relative` or module requests like `module/path` are used, but absolute paths like `/some/path` are also possible as requests.
-- `callback` is a normal Node.js-style callback function giving the resolved path.
+```bash
+WARNING in ./src/lib.js (./src/loader.js!./src/lib.js)
+Module Warning (from ./src/loader.js):
+Here is a Warning!
+ @ ./src/index.js 1:0-25
+```
 
-All dependencies of the resolving operation are automatically added as dependencies to the current module.
+T> Note that the warnings will not be displayed if `stats.warnings` is set to `false`, or some other omit setting is used to `stats` such as `none` or `errors-only`. See the [stats presets configuration](/configuration/stats/#stats-presets).
+
+### `this.fs`
+
+Access to the `compilation`'s `inputFileSystem` property.
+
+### `this.getOptions(schema)`
+
+Extracts given loader options. Optionally, accepts JSON schema as an argument.
+
+T> Since webpack 5, `this.getOptions` is available in loader context. It substitutes `getOptions` method from [loader-utils](https://github.com/webpack/loader-utils#getoptions).
 
 ### `this.getResolve`
 
@@ -412,39 +339,6 @@ Any options under webpack [`resolve` options](/configuration/resolve/#resolve) a
 
 All dependencies of the resolving operation are automatically added as dependencies to the current module.
 
-### `this.addDependency`
-
-```typescript
-addDependency(file: string)
-dependency(file: string) // shortcut
-```
-
-Add a file as dependency of the loader result in order to make them watchable. For example, [`sass-loader`](https://github.com/webpack-contrib/sass-loader), [`less-loader`](https://github.com/webpack-contrib/less-loader) uses this to recompile whenever any imported `css` file changes.
-
-### `this.addContextDependency`
-
-```typescript
-addContextDependency(directory: string)
-```
-
-Add a directory as dependency of the loader result.
-
-### `this.clearDependencies`
-
-```typescript
-clearDependencies();
-```
-
-Remove all dependencies of the loader result, even initial dependencies and those of other loaders. Consider using `pitch`.
-
-### `this.emitFile`
-
-```typescript
-emitFile(name: string, content: Buffer|string, sourceMap: {...})
-```
-
-Emit a file. This is webpack-specific.
-
 ### `this.hot`
 
 Information about HMR for loaders.
@@ -456,15 +350,184 @@ module.exports = function (source) {
 };
 ```
 
-### `this.fs`
+### this.importModule
 
-Access to the `compilation`'s `inputFileSystem` property.
+<Badge text="5.32.0+" />
+
+`this.importModule(request, options, [callback]): Promise`
+
+An alternative lightweight solution for the child compiler to compile and execute a request at build time. It can be enabled
+with the [`experiments.executeModule`](/configuration/experiments/#experimentsexecutemodule).
+
+- `request`: the request string to load the module from
+- `options`:
+  - `layer`: specify a layer in which this module is placed/compiled
+  - `publicPath`: the public path used for the built modules
+- `callback`: an optional function returning the exports. `importModule` will return a Promise if no callback is provided.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /stylesheet\.js$/i,
+        use: ['./a-pitching-loader.js'],
+        type: 'asset/source', // we set type to 'asset/source' as the loader will return a string
+      },
+    ],
+  },
+};
+```
+
+**a-pitching-loader.js**
+
+```js
+exports.pitch = async function (remaining) {
+  const result = await this.importModule(
+    this.resourcePath + '.webpack[javascript/auto]' + '!=!' + remaining
+  );
+  return result.default || result;
+};
+```
+
+**src/stylesheet.js**
+
+```js
+import { green, red } from './colors.js';
+export default `body { background: ${red}; color: ${green}; }`;
+```
+
+**src/colors.js**
+
+```js
+export const red = '#f00';
+export const green = '#0f0';
+```
+
+**src/index.js**
+
+```js
+import stylesheet from './stylesheet.js';
+// stylesheet will be a string `body { background: #f00; color: #0f0; }` at build time
+```
+
+You might notice something in the above example:
+
+1. We have a [pitching loader](#pitching-loader),
+2. We use `!=!` syntax in that pitching loader to set [matchResource](#inline-matchresource) for the request, i.e., we'll use `this.resourcePath + '.webpack[javascript/auto]'` to match with the [`module.rules`](/configuration/module/#modulerules) instead of the original resource,
+3. `.webpack[javascript/auto]` is a pseudo extension of the `.webpack[type]` pattern, we use it to specify a default [module type](/configuration/module/#ruletype) when no other module type is specified. It's typically used in conjunction with `!=!` syntax.
+
+Note that the above example is a simplified one, you can check [the full example on webpack repository](https://github.com/webpack/webpack/tree/master/test/configCases/loader-import-module/css).
+
+### `this.loaderIndex`
+
+The index in the loaders array of the current loader.
+
+In [the example](#example-for-the-loader-context): in loader1: `0`, in loader2: `1`
+
+### `this.loadModule`
+
+```typescript
+loadModule(request: string, callback: function(err, source, sourceMap, module))
+```
+
+Resolves the given request to a module, applies all configured loaders and calls back with the generated source, the sourceMap and the module instance (usually an instance of [`NormalModule`](https://github.com/webpack/webpack/blob/master/lib/NormalModule.js)). Use this function if you need to know the source code of another module to generate the result.
+
+`this.loadModule` in a loader context uses CommonJS resolve rules by default. Use `this.getResolve` with an appropriate `dependencyType`, e.g. `'esm'`, `'commonjs'` or a custom one before using a different semantic.
+
+### `this.loaders`
+
+An array of all the loaders. It is writable in the pitch phase.
+
+<!-- eslint-skip -->
+
+```javascript
+loaders = [{request: string, path: string, query: string, module: function}]
+```
+
+In [the example](#example-for-the-loader-context):
+
+```javascript
+[
+  {
+    request: '/abc/loader1.js?xyz',
+    path: '/abc/loader1.js',
+    query: '?xyz',
+    module: [Function],
+  },
+  {
+    request: '/abc/node_modules/loader2/index.js',
+    path: '/abc/node_modules/loader2/index.js',
+    query: '',
+    module: [Function],
+  },
+];
+```
 
 ### `this.mode`
 
 Read in which [`mode`](/configuration/mode/) webpack is running.
 
 Possible values: `'production'`, `'development'`, `'none'`
+
+### `this.query`
+
+1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
+2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
+
+### `this.request`
+
+The resolved request string.
+
+In [the example](#example-for-the-loader-context): `'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
+
+### `this.resolve`
+
+```typescript
+resolve(context: string, request: string, callback: function(err, result: string))
+```
+
+Resolve a request like a require expression.
+
+- `context` must be an absolute path to a directory. This directory is used as the starting location for the resolving.
+- `request` is the request to be resolved. Usually either relative requests like `./relative` or module requests like `module/path` are used, but absolute paths like `/some/path` are also possible as requests.
+- `callback` is a normal Node.js-style callback function giving the resolved path.
+
+All dependencies of the resolving operation are automatically added as dependencies to the current module.
+
+### `this.resource`
+
+The resource part of the request, including query.
+
+In [the example](#example-for-the-loader-context): `'/abc/resource.js?rrr'`
+
+### `this.resourcePath`
+
+The resource file.
+
+In [the example](#example-for-the-loader-context): `'/abc/resource.js'`
+
+### `this.resourceQuery`
+
+The query of the resource.
+
+In [the example](#example-for-the-loader-context): `'?rrr'`
+
+### `this.rootContext`
+
+Since webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
+
+### `this.sourceMap`
+
+Tells if source map should be generated. Since generating source maps can be an expensive task, you should check if source maps are actually requested.
+
+### `this.target`
+
+Target of compilation. Passed from configuration options.
+
+Example values: `'web'`, `'node'`
 
 ### this.utils
 
@@ -489,6 +552,16 @@ module.exports = function (content) {
 };
 ```
 
+### `this.version`
+
+**Loader API version.** Currently `2`. This is useful for providing backwards compatibility. Using the version you can specify custom logic or fallbacks for breaking changes.
+
+### `this.webpack`
+
+This boolean is set to true when this is compiled by webpack.
+
+T> Loaders were originally designed to also work as Babel transforms. Therefore, if you write a loader that works for both, you can use this property to know if there is access to additional loaderContext and webpack features.
+
 ## Webpack specific properties
 
 The loader interface provides all module relate information. However in rare cases you might need access to the compiler api itself.
@@ -497,33 +570,33 @@ W> Please note that using these webpack specific properties will have a negative
 
 Therefore you should only use them as a last resort. Using them will reduce the portability of your loader.
 
-### `this._compiler`
-
-Access to the current Compiler object of webpack.
-
 ### `this._compilation`
 
 Access to the current Compilation object of webpack.
+
+### `this._compiler`
+
+Access to the current Compiler object of webpack.
 
 ## Deprecated context properties
 
 W> The usage of these properties is highly discouraged since we are planning to remove them from the context. They are still listed here for documentation purposes.
 
-### `this.value`
+### `this.debug`
 
-Pass values to the next loader. If you know what your result exports if executed as a module, set this value here (as an only element array).
+A boolean flag. It is set when in debug mode.
 
 ### `this.inputValue`
 
 Passed from the last loader. If you would execute the input argument as a module, consider reading this variable for a shortcut (for performance).
 
-### `this.debug`
-
-A boolean flag. It is set when in debug mode.
-
 ### `this.minimize`
 
 Tells if result should be minimized.
+
+### `this.value`
+
+Pass values to the next loader. If you know what your result exports if executed as a module, set this value here (as an only element array).
 
 ### `this._module`
 
@@ -605,7 +678,7 @@ W> The loader path in the error is displayed since webpack 4.12
 
 T> All the errors and warnings will be recorded into `stats`. Please see [Stats Data](/api/stats/#errors-and-warnings).
 
-### Inline matchResource
+## Inline matchResource
 
 A new inline request syntax was introduced in webpack v4. Prefixing `<match-resource>!=!` to a request will set the `matchResource` for this request.
 

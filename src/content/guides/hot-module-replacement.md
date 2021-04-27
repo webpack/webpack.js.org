@@ -69,7 +69,7 @@ T> If you took the route of using `webpack-dev-middleware` instead of `webpack-d
   };
 ```
 
-T> You can use the CLI to modify the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration with the following command: `webpack serve --hot=only`.
+T> You can use the CLI to modify the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration with the following command: `webpack serve --hot-only`.
 
 Now let's update the `index.js` file so that when a change inside `print.js` is detected we tell webpack to accept the updated module.
 
