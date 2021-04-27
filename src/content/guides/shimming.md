@@ -16,6 +16,9 @@ contributors:
   - wizardofhogwarts
   - snitin315
   - chenxsan
+translators:
+  - QC-L
+  - lcxfs1991
 related:
   - title: Reward modern browser users script
     url: https://hackernoon.com/10-things-i-learned-making-the-fastest-site-in-the-world-18a0e1cdf4a7#c665
@@ -480,6 +483,6 @@ W> 任何需要 AST 的功能（例如 `ProvidePlugin`）都不起作用。
 
 最后，一些模块支持多种 [模块格式](/concepts/modules)，例如一个混合有 AMD、CommonJS 和 legacy(遗留) 的模块。在大多数这样的模块中，会首先检查 `define`，然后使用一些怪异代码导出一些属性。在这些情况下，可以通过 [`imports-loader`](/loaders/imports-loader/) 设置 `additionalCode=var%define%20=%20false;` 来强制 CommonJS 路径。
 
-***
+---
 
 T> 译者注：shimming 是一个库(library)，它将一个新的 API 引入到一个旧的环境中，而且仅靠旧的环境中已有的手段实现。polyfill 就是一个用在浏览器 API 上的 shimming。我们通常的做法是先检查当前浏览器是否支持某个 API，如果不支持的话就按需加载对应的 polyfill。然后新旧浏览器就都可以使用这个 API 了。

@@ -8,6 +8,9 @@ contributors:
   - srilman
   - byzyk
   - EugeneHlushko
+translators:
+  - QC-L
+  - SquareFong
 ---
 
 由于 JavaScript 既可以编写服务端代码也可以编写浏览器代码，所以 webpack 提供了多种部署 _target_，你可以在 webpack 的[配置选项](/configuration)中进行设置。
@@ -67,7 +70,7 @@ module.exports = [serverConfig, clientConfig];
 
 从上面选项可以看出，你可以选择部署不同的 _target_。下面是可以参考的示例和资源：
 
--  **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**：测试并查看 webpack _target_ 的绝佳资源。同样包含错误上报。
+- **[compare-webpack-target-bundles](https://github.com/TheLarkInn/compare-webpack-target-bundles)**：测试并查看 webpack _target_ 的绝佳资源。同样包含错误上报。
 - **[Boilerplate of Electron-React Application](https://github.com/chentsulin/electron-react-boilerplate)**: 一个关于 electron 主进程和渲染进程构建过程的优秀示例。
 
 ?> 需要你查看在线代码或样本中 webpack 配置中使用的 target 示例。

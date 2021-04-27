@@ -7,6 +7,9 @@ contributors:
   - mtrivera
   - byzyk
   - EugeneHlushko
+translators:
+  - QC-L
+  - lcxfs1991
 ---
 
 T> 本指南继续沿用 [_起步_](/guides/getting-started/) 中的代码示例。
@@ -52,7 +55,7 @@ npm install --save-dev typescript ts-loader
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node"
   }
 }
 ```
@@ -89,7 +92,7 @@ module.exports = {
 };
 ```
 
-这会让 webpack 直接从 `./index.ts` _进入_，然后通过 `ts-loader` _加载_所有的 `.ts` 和 `.tsx` 文件，并且在当前目录_输出_一个 `bundle.js` 文件。
+这会让 webpack 直接从 `./index.ts` _进入_，然后通过 `ts-loader` *加载*所有的 `.ts` 和 `.tsx` 文件，并且在当前目录*输出*一个 `bundle.js` 文件。
 
 现在让我们改变 `lodash` 在 `./index.ts` 文件中的引入，
 因为在 `lodash` 的定义中没有默认(default)的导出。
@@ -202,7 +205,7 @@ declare module '*.svg' {
 }
 ```
 
-H这里，我们通过指定任何以 `.svg` 结尾的导入(import)，将 SVG 声明(declare) 为一个新的模块(module)，并将模块的 `content` 定义为 `any`。我们可以通过将类型定义为字符串，来更加显式地将它声明为一个 url。同样的概念适用于其他资源，包括 CSS, SCSS, JSON 等。
+H 这里，我们通过指定任何以 `.svg` 结尾的导入(import)，将 SVG 声明(declare) 为一个新的模块(module)，并将模块的 `content` 定义为 `any`。我们可以通过将类型定义为字符串，来更加显式地将它声明为一个 url。同样的概念适用于其他资源，包括 CSS, SCSS, JSON 等。
 
 ## 构建性能 {#build-performance}
 

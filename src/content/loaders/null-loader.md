@@ -3,6 +3,9 @@ title: null-loader
 source: https://raw.githubusercontent.com/webpack-contrib/null-loader/master/README.md
 edit: https://github.com/webpack-contrib/null-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/null-loader
+translators:
+  - KimYangOfCat
+  - QC-L
 ---
 
 

@@ -4,6 +4,10 @@ sort: -202010100
 contributors:
   - sokra
   - chenxsan
+translators:
+  - QC-L
+  - lcxfs1991
+  - jacob-lcs
 ---
 
 webpack 4 于 2018 年 2 月发布。

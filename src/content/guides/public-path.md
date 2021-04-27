@@ -5,6 +5,10 @@ contributors:
   - rafaelrinaldi
   - chrisVillanueva
   - gonzoyumo
+translators:
+  - QC-L
+  - jacob-lcs
+  - lcxfs1991
 ---
 
 `publicPath` 配置选项在各种场景中都非常有用。你可以通过它来指定应用程序中所有资源的基础路径。

@@ -3,6 +3,8 @@ title: I18nWebpackPlugin
 source: https://raw.githubusercontent.com/webpack-contrib/i18n-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/i18n-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/i18n-webpack-plugin
+translators:
+  - NealST
 ---
 webpack 的 i18n（本地化）插件
 

@@ -10,6 +10,10 @@ contributors:
   - EugeneHlushko
   - superburrito
   - chenxsan
+translators:
+  - dear-lizhihua
+  - QC-L
+  - jacob-lcs
 ---
 
 `Compiler` 模块是 webpack 的主要引擎，它通过 [CLI](/api/cli) 传递的所有选项，

@@ -8,6 +8,10 @@ contributors:
   - EugeneHlushko
   - sibiraj-s
   - chenxsan
+translators:
+  - QC-L
+  - jacob-lcs
+  - lcxfs1991
 ---
 
 本指南介绍了安装 webpack 的各种方法。

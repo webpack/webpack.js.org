@@ -6,6 +6,9 @@ contributors:
   - montogeek
   - jeremenichelli
   - EugeneHlushko
+translators:
+  - QC-L
+  - lcxfs1991
 ---
 
 想要理解为什么要使用 webpack，我们先回顾下历史，在打包工具出现之前，我们是如何在 web 中使用 JavaScript 的。

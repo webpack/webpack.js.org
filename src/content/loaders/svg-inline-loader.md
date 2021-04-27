@@ -3,6 +3,9 @@ title: svg-inline-loader
 source: https://raw.githubusercontent.com/webpack-contrib/svg-inline-loader/master/README.md
 edit: https://github.com/webpack-contrib/svg-inline-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/svg-inline-loader
+translators:
+  - KimYangOfCat
+  - QC-L
 ---
 此 webpack loader 会将 SVG 文件内联为模块。如果你使用 Adobe Suite 或 Sketch 导出 SVG 时，会生成不必要的冗余文件代码。此 loader 也会帮你移除它。
 

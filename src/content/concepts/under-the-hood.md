@@ -6,6 +6,9 @@ contributors:
   - EugeneHlushko
   - chenxsan
   - amirsaeed671
+translators:
+  - QC-L
+  - dear-lizhihua
 ---
 
 > 此章节描述 webpack 内部实现，对于插件开发人员可能会提供帮助

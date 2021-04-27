@@ -6,6 +6,11 @@ contributors:
   - simon04
   - EugeneHlushko
   - byzyk
+translators:
+  - QC-L
+  - jacob-lcs
+  - hanhan9449
+  - binzhangyong
 ---
 
 你可能已经注意到，很少有 webpack 配置看起来完全相同。这是因为 **webpack 的配置文件是 JavaScript 文件，文件内导出了一个 webpack [配置的对象](/configuration/)。** webpack 会根据该配置定义的属性进行处理。
@@ -47,16 +52,16 @@ module.exports = {
 };
 ```
 
-*查看*：[配置章节](/configuration/)中所有支持的配置选项。
+_查看_：[配置章节](/configuration/)中所有支持的配置选项。
 
 ## 多个 target {#multiple-targets}
 
 除了可以将单个配置导出为 object，[function](/configuration/configuration-types/#exporting-a-function) 或 [Promise](/configuration/configuration-types/#exporting-a-promise) 以外，还可以将其导出为多个配置。
 
-*查看*：[导出多个配置](/configuration/configuration-types/#exporting-multiple-configurations)
+_查看_：[导出多个配置](/configuration/configuration-types/#exporting-multiple-configurations)
 
 ## 使用其它配置语言 {#using-other-configuration-languages}
 
 webpack 支持由多种编程和数据语言编写的配置文件。
 
-*查看*：[配置语言](/configuration/configuration-languages/)
+_查看_：[配置语言](/configuration/configuration-languages/)

@@ -3,6 +3,10 @@ title: css-loader
 source: https://raw.githubusercontent.com/webpack-contrib/css-loader/master/README.md
 edit: https://github.com/webpack-contrib/css-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/css-loader
+translators:
+  - Jacksonlike
+  - QC-L
+  - jacob-lcs
 ---
 
 

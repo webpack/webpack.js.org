@@ -3,6 +3,8 @@ title: MiniCssExtractPlugin
 source: https://raw.githubusercontent.com/webpack-contrib/mini-css-extract-plugin/master/README.md
 edit: https://github.com/webpack-contrib/mini-css-extract-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/mini-css-extract-plugin
+translators:
+  - wangjq4214
 ---
 
 

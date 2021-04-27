@@ -5,6 +5,8 @@ contributors:
   - EugeneHlushko
   - probablyup
   - wizardofhogwarts
+translators:
+  - QC-L
 related:
   - title: 解释 nonce 设计目的
     url: https://stackoverflow.com/questions/42922784/what-s-the-purpose-of-the-html-nonce-attribute-for-script-and-style-elements

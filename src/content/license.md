@@ -4,6 +4,9 @@ sort: 5
 contributors:
   - EugeneHlushko
   - pranshuchittora
+translators:
+  - GSZS
+  - QC-L
 ---
 
 ## webpack {#webpack}

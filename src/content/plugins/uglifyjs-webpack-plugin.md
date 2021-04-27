@@ -3,6 +3,8 @@ title: UglifyjsWebpackPlugin
 source: https://raw.githubusercontent.com/webpack-contrib/uglifyjs-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/uglifyjs-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/uglifyjs-webpack-plugin
+translators:
+  - jefferyE
 ---
 
 

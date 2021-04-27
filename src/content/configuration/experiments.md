@@ -6,6 +6,9 @@ contributors:
   - wizardofhogwarts
   - chenxsan
   - anshumanv
+translators:
+  - lcxfs1991
+  - QC-L
 ---
 
 ## `experiments` {#experiments}

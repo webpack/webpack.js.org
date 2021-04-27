@@ -7,6 +7,9 @@ contributors:
   - byzyk
   - madhavarshney
   - EugeneHlushko
+translators:
+  - lcxfs1991
+  - QC-L
 ---
 
 这些选项可以控制 webpack 如何通知「资源(asset)和入口起点超过指定文件限制」。

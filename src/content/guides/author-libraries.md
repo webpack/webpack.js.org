@@ -12,6 +12,9 @@ contributors:
   - AnayaDesign
   - chenxsan
   - wizardofhogwarts
+translators:
+  - QC-L
+  - jacob-lcs
 ---
 
 除了打包应用程序，webpack 还可以用于打包 JavaScript library。以下指南适用于希望简化打包策略的 library 作者。

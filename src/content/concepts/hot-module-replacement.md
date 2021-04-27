@@ -8,6 +8,11 @@ contributors:
   - GRardB
   - rouzbeh84
   - skipjack
+translators:
+  - lcxfs1991
+  - QC-L
+  - jacob-lcs
+  - hanhan9449
 ---
 
 模块热替换(HMR - hot module replacement)功能会在应用程序运行过程中，替换、添加或删除 [模块](/concepts/modules/)，而无需重新加载整个页面。主要是通过以下几种方式，来显著加快开发速度：

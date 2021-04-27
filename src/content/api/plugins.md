@@ -9,6 +9,9 @@ contributors:
   - byzyk
   - EugeneHlushko
   - wizardofhogwarts
+translators:
+  - chenzesam
+  - QC-L
 ---
 
 插件是 webpack 生态的关键部分，

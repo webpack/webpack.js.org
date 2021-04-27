@@ -23,6 +23,10 @@ contributors:
   - aholzner
   - EugeneHlushko
   - snitin315
+translators:
+  - QC-L
+  - jacob-lcs
+  - lcxfs1991
 ---
 
 在本指南中，我们将深入一些最佳实践和工具，将站点或应用程序构建到生产环境中。
@@ -147,7 +151,7 @@ npm install --save-dev webpack-merge
   }
 ```
 
-随便运行下这些脚本，然后查看输出结果的变化，然后我们会继续添加一些_生产环境_配置。
+随便运行下这些脚本，然后查看输出结果的变化，然后我们会继续添加一些 *生产环境* 配置。
 
 ## 指定 mode {#specify-the-mode}
 
@@ -203,7 +207,7 @@ webpack v4+ will minify your code by default in [`production mode`](/configurati
 
 ## 源码映射(Source Mapping) {#source-mapping}
 
-我们鼓励你在生产环境中启用 source map，因为它们对 debug(调试源码) 和运行 benchmark tests(基准测试) 很有帮助。虽然有着如此强大的功能，然而还是应该针对生产环境用途，选择一个可以快速构建的推荐配置（更多选项请查看 [`devtool`](/configuration/devtool)）。对于本指南，我们将在_生产环境_中使用 `source-map` 选项，而不是我们在_开发环境_中用到的 `inline-source-map`：
+我们鼓励你在生产环境中启用 source map，因为它们对 debug(调试源码) 和运行 benchmark tests(基准测试) 很有帮助。虽然有着如此强大的功能，然而还是应该针对生产环境用途，选择一个可以快速构建的推荐配置（更多选项请查看 [`devtool`](/configuration/devtool)）。对于本指南，我们将在 *生产环境* 中使用 `source-map` 选项，而不是我们在 *开发环境* 中用到的 `inline-source-map`：
 
 **webpack.prod.js**
 

@@ -8,6 +8,9 @@ contributors:
   - legalcodes
   - byzyk
   - jceipek
+translators:
+  - QC-L
+  - jacob-lcs
 ---
 
 想要消除 `webpack.config.js` 在 [开发环境](/guides/development) 和 [生产环境](/guides/production) 之间的差异，你可能需要环境变量(environment variable)。

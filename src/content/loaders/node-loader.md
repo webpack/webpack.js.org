@@ -3,6 +3,9 @@ title: node-loader
 source: https://raw.githubusercontent.com/webpack-contrib/node-loader/master/README.md
 edit: https://github.com/webpack-contrib/node-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/node-loader
+translators:
+  - jacob-lcs
+  - QC-L
 ---
 
 

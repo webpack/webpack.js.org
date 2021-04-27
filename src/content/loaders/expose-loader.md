@@ -3,6 +3,9 @@ title: expose-loader
 source: https://raw.githubusercontent.com/webpack-contrib/expose-loader/master/README.md
 edit: https://github.com/webpack-contrib/expose-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/expose-loader
+translators:
+  - jacob-lcs
+  - wangyiman
 ---
 
 

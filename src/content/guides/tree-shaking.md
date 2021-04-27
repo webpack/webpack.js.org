@@ -17,6 +17,9 @@ contributors:
   - AnayaDesign
   - torifat
   - rahul3v
+translators:
+  - QC-L
+  - lcxfs1991
 related:
   - title: Debugging Optimization Bailouts
     url: https://webpack.js.org/plugins/module-concatenation-plugin/#debugging-optimization-bailouts
@@ -236,7 +239,7 @@ export {
 
 当 `Button` 没有被使用，你可以有效地清除掉 `export { Button$1 };` 且保留所有剩下的代码。那问题来了，“这段代码会有任何副作用或它能被安全都清理掉吗？”。很难说，尤其是这 `withAppProvider()(Button)` 这段代码。`withAppProvider` 被调用，而且返回的值也被调用。当调用 `merge` 或 `hoistStatics` 会有任何副作用吗？当给 `WithProvider.contextTypes` (Setter?) 赋值或当读取 `WrappedComponent.contextTypes` (Getter) 的时候，会有任何副作用吗？
 
-实际上，Terser 尝试去解决以上的问题，但在很多情况下，它不太确定。但这不会意味着 terser 由于无法解决这些问题而运作得不好，而是由于在 JavaScript 这种动态语言中实在太难去确定。
+实际上，Terser 尝试去解决以上的问题，但在很多情况下，它不太确定。但这不会意味着 terser 由于无法解决这些问题而运作得不好，而是由于在 JavaScript 这种动态语言中实在太难去确定。
 
 但我们可以通过 `/*#__PURE__*/` 注释来帮忙 terser。它给一个语句标记为没有副作用。就这样一个简单的改变就能够使下面的代码被 tree-shake:
 
@@ -299,7 +302,7 @@ export { default as ButtonGroup } from './ButtonGroup';
 - `components/Button.js`: 直接的导出被使用，没有被标记为有副作用 -> 导入它
 - `components/Button.css`: 没有导出被使用，但被标记为有副作用 -> 导入它
 
-在这种情况下，只有4个模块被导入到 bundle 中：
+在这种情况下，只有 4 个模块被导入到 bundle 中：
 
 - `index.js`: 基本为空的
 - `configure.js`
@@ -308,7 +311,7 @@ export { default as ButtonGroup } from './ButtonGroup';
 
 在这次的优化后，其它的优化项目都可以应用。例如：从 `Button.js` 导出 的`buttonFrom` 和 `buttonsFrom` 也没有被使用。`usedExports` 优化会捡起这些代码而且 terser 会能够从 bundle 中把这些语句摘除出来。
 
-模块合并也会应用。所以这4个模块，加上入口的模块（也可能有更多的依赖）会被合并。**`index.js` 最终没有生成代码**.
+模块合并也会应用。所以这 4 个模块，加上入口的模块（也可能有更多的依赖）会被合并。**`index.js` 最终没有生成代码**.
 
 ## 将函数调用标记为无副作用 {#mark-a-function-call-as-side-effect-free}
 
@@ -322,7 +325,7 @@ export { default as ButtonGroup } from './ButtonGroup';
 
 ## 压缩输出结果 {#minify-the-output}
 
-通过 `import` 和 `export`  语法，我们已经找出需要删除的“未引用代码(dead code)”，然而，不仅仅是要找出，还要在 bundle 中删除它们。为此，我们需要将 `mode` 配置选项设置为 [`production`](/configuration/mode/#mode-production)。
+通过 `import` 和 `export` 语法，我们已经找出需要删除的“未引用代码(dead code)”，然而，不仅仅是要找出，还要在 bundle 中删除它们。为此，我们需要将 `mode` 配置选项设置为 [`production`](/configuration/mode/#mode-production)。
 
 **webpack.config.js**
 

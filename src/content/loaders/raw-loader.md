@@ -3,6 +3,8 @@ title: raw-loader
 source: https://raw.githubusercontent.com/webpack-contrib/raw-loader/master/README.md
 edit: https://github.com/webpack-contrib/raw-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/raw-loader
+translators:
+  - KimYangOfCat
 ---
 
 

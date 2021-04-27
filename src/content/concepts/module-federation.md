@@ -14,6 +14,10 @@ related:
     url: https://github.com/module-federation/module-federation-examples
   - title: 'Module Federation YouTube Playlist'
     url: https://www.youtube.com/playlist?list=PLWSiF9YHHK-DqsFHGYbeAMwbd9xcZbEWJ
+translators:
+  - lcxfs1991
+  - QC-L
+  - blesstosam
 ---
 
 ## 动机 {#motivation}
@@ -120,13 +124,13 @@ __webpack_override__({
   - 可用于 web、Node.js 等
 - 共享中的相对和绝对请求
   - 会一直提供，即使不使用
-  - 会将相对路径解析到 `config.context` 
-  - 默认不会使用 `requiredVersion` 
+  - 会将相对路径解析到 `config.context`
+  - 默认不会使用 `requiredVersion`
 - 共享中的模块请求
   - 只在使用时提供
   - 会匹配构建中所有使用的相等模块请求
   - 将提供所有匹配模块
-  - 将从图中这个位置的 package.json 提取 `requiredVersion` 
+  - 将从图中这个位置的 package.json 提取 `requiredVersion`
   - 当你有嵌套的 node_modules 时，可以提供和使用多个不同的版本
 - 共享中尾部带有 `/` 的模块请求将匹配所有具有这个前缀的模块请求
 
@@ -142,7 +146,7 @@ __webpack_override__({
 
 ## 动态远程容器 {#dynamic-remote-containers}
 
-该容器接口支持 `get` 和 `init` 方法。
+该容器接口支持 `get` 和 `init` 方法。
 `init` 是一个兼容 `async` 的方法，调用时，只含有一个参数：共享作用域对象(shared scope object)。此对象在远程容器中用作共享作用域，并由 host 提供的模块填充。
 可以利用它在运行时动态地将远程容器连接到 host 容器。
 
@@ -232,7 +236,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 这种方法有效，但存在局限性或缺点。
 
-通过 `ModuleFederationPlugin` 将依赖的 `eager` 属性设置为 `true` 
+通过 `ModuleFederationPlugin` 将依赖的 `eager` 属性设置为 `true`
 
 **webpack.config.js**
 

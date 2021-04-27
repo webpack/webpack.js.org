@@ -20,11 +20,14 @@ contributors:
   - dhruvdutt
   - wizardofhogwarts
   - aholzner
-
+translators:
+  - QC-L
+  - jacob-lcs
+  - lcxfs1991
 related:
   - title: 概念 - 模块热替换
     url: /concepts/hot-module-replacement
-  - title:  API - 模块热替换(hot module replacement)
+  - title: API - 模块热替换(hot module replacement)
     url: /api/hot-module-replacement
 ---
 
@@ -338,7 +341,7 @@ body {
 - [Vue Loader](https://github.com/vuejs/vue-loader): 此 loader 支持 vue 组件的 HMR，提供开箱即用体验。
 - [Elm Hot webpack Loader](https://github.com/klazuka/elm-hot-webpack-loader): 支持 Elm 编程语言的 HMR。
 - [Angular HMR](https://github.com/gdi2290/angular-hmr): 没有必要使用 loader！直接修改 NgModule 主文件就够了，
-它可以完全控制 HMR API。
+  它可以完全控制 HMR API。
 - [Svelte Loader](https://github.com/sveltejs/svelte-loader): 此 loader 开箱即用地支持 Svelte 组件的热更新。
 
 T> 如果你知道任何其他 loader 或 plugin，能够有助于或增强模块热替换(hot module replacement)，请提交一个 pull request 以添加到此列表中！

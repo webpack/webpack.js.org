@@ -20,6 +20,9 @@ contributors:
   - g100g
   - anikethsaha
   - snitin315
+translators:
+  - jerexyz
+  - QC-L
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 可用于快速开发应用程序。请查阅 [开发指南](/guides/development/) 开始使用。

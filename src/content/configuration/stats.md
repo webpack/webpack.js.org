@@ -17,6 +17,9 @@ contributors:
   - snitin315
   - u01jmg3
   - grrizzly
+translators:
+  - lcxfs1991
+  - QC-L
 ---
 
 `object` `string`

@@ -3,6 +3,9 @@ title: babel-loader
 source: https://raw.githubusercontent.com/babel/babel-loader/master/README.md
 edit: https://github.com/babel/babel-loader/edit/master/README.md
 repo: https://github.com/babel/babel-loader
+translators:
+  - flytam
+  - QC-L
 ---
 
 

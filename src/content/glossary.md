@@ -9,6 +9,9 @@ contributors:
   - byzyk
   - pranshuchittora
   - jamesgeorge007
+translators:
+  - daxiaoxiaodejia
+  - QC-L
 ---
 
 该索引列出了整个 webpack 生态系统中的常用术语。

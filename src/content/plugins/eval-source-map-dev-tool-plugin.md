@@ -10,6 +10,8 @@ contributors:
   - jamesgeorge007
   - anshumanv
   - EugeneHlushko
+translators:
+  - niubaobaozsy
 related:
   - title: Building Eval Source Maps
     url: https://survivejs.com/webpack/building/source-maps/#sourcemapdevtoolplugin-and-evalsourcemapdevtoolplugin

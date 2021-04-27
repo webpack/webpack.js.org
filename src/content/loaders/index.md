@@ -9,6 +9,11 @@ contributors:
   - hemal7735
   - snitin315
   - anshumanv
+translators:
+  - L924553229
+  - jacob-lcs
+  - 92hackers
+  - QC-L
 ---
 
 webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你可以构建包括 JavaScript 在内的任何静态资源。并且可以使用 Node.js 轻松编写自己的 loader。

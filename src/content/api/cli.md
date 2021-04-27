@@ -27,6 +27,11 @@ related:
     url: https://hackernoon.com/optimising-your-application-bundle-size-with-webpack-e85b00bab579#.5w5ko08pq
   - title: 使用 webpack 和 source-map-explorer 分析并减小 client-side 包
     url: https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x
+translators:
+  - Fonkie
+  - Xeonice
+  - QC-L
+  - jacob-lcs
 ---
 
 为了更合适且方便地使用配置，可以在 `webpack.config.js` 中对 webpack 进行配置。CLI 中传入的任何参数会在配置文件中映射为对应的参数。

@@ -15,6 +15,10 @@ related:
     url: https://survivejs.com/webpack/developing-with-webpack/enabling-sourcemaps/
   - title: webpack 的 Devtool Source Map
     url: http://cheng.logdown.com/posts/2016/03/25/679045
+translators:
+  - jerexyz
+  - QC-L
+  - jacob-lcs
 ---
 
 此选项控制是否生成，以及如何生成 source map。

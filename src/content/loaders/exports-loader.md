@@ -3,6 +3,9 @@ title: exports-loader
 source: https://raw.githubusercontent.com/webpack-contrib/exports-loader/master/README.md
 edit: https://github.com/webpack-contrib/exports-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/exports-loader
+translators:
+  - jacob-lcs
+  - QC-L
 ---
 
 

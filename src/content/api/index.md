@@ -3,6 +3,9 @@ title: 简介
 sort: -1
 contributors:
   - tbroadley
+translators:
+  - Xeonice
+  - QC-L
 ---
 
 Webpack 提供了多种接口来自定义编译过程。

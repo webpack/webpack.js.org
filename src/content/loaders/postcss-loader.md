@@ -3,6 +3,10 @@ title: postcss-loader
 source: https://raw.githubusercontent.com/webpack-contrib/postcss-loader/master/README.md
 edit: https://github.com/webpack-contrib/postcss-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/postcss-loader
+translators:
+  - wangjq4214
+  - QC-L
+  - jacob-lcs
 ---
 
 </div>

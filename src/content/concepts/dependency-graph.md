@@ -4,6 +4,10 @@ sort: 9
 contributors:
   - TheLarkInn
   - EugeneHlushko
+translators:
+  - QC-L
+  - jacob-lcs
+  - hanhan9449
 related:
   - title: HTTP2 Aggressive Splitting Example
     url: https://github.com/webpack/webpack/tree/master/examples/http2-aggressive-splitting

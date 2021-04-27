@@ -3,6 +3,9 @@ title: cache-loader
 source: https://raw.githubusercontent.com/webpack-contrib/cache-loader/master/README.md
 edit: https://github.com/webpack-contrib/cache-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/cache-loader
+translators:
+  - mercurywang
+  - QC-L
 ---
 
 

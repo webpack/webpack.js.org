@@ -15,6 +15,10 @@ contributors:
   - aholzner
   - chenxsan
   - maxloh
+translators:
+  - QC-L
+  - jacob-lcs
+  - dear-lizhihua
 ---
 
 T> 本指南继续沿用 [管理输出](/guides/output-management) 指南中的代码示例。
@@ -272,7 +276,7 @@ T> 现在，server 正在运行，你可能需要尝试 [模块热替换(hot mod
 
 ### 使用 webpack-dev-middleware {#using-webpack-dev-middleware}
 
-`webpack-dev-middleware` 是一个封装器(wrapper)，它可以把 webpack 处理过的文件发送到一个 server。  `webpack-dev-server` 在内部使用了它，然而它也可以作为一个单独的 package 来使用，以便根据需求进行更多自定义设置。下面是一个 webpack-dev-middleware 配合 express server 的示例。
+`webpack-dev-middleware` 是一个封装器(wrapper)，它可以把 webpack 处理过的文件发送到一个 server。`webpack-dev-server` 在内部使用了它，然而它也可以作为一个单独的 package 来使用，以便根据需求进行更多自定义设置。下面是一个 webpack-dev-middleware 配合 express server 的示例。
 
 首先，安装 `express` 和 `webpack-dev-middleware`：
 

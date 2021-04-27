@@ -5,6 +5,9 @@ sort: 15
 contributors:
   - EugeneHlushko
   - chenxsan
+translators:
+  - pampang
+  - QC-L
 ---
 
 解析器是使用 `enhanced-resolve` 库创建的。`Resolver` 类

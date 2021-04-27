@@ -9,6 +9,10 @@ contributors:
   - EugeneHlushko
   - AnayaDesign
   - chenxsan
+translators:
+  - QC-L
+  - jacob-lcs
+  - dear-lizhihua
 ---
 
 T> 本指南继续沿用 [`管理资源`](/guides/asset-management) 指南中的代码示例。

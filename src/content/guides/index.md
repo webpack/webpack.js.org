@@ -5,6 +5,8 @@ contributors:
   - skipjack
   - EugeneHlushko
   - benschac
+translators:
+  - dear-lizhihua
 ---
 
 指南章节，用于理解和掌握 webpack 提供的各种工具和特性。首先，通过 [起步](/guides/getting-started/) 进行简单导入。

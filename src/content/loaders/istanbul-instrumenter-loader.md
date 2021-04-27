@@ -3,6 +3,9 @@ title: istanbul-instrumenter-loader
 source: https://raw.githubusercontent.com/webpack-contrib/istanbul-instrumenter-loader/master/README.md
 edit: https://github.com/webpack-contrib/istanbul-instrumenter-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/istanbul-instrumenter-loader
+translators:
+  - LJCandyCrush
+  - jacob-lcs
 ---
 
 

@@ -10,12 +10,16 @@ contributors:
 related:
   - title: JavaScript Module Systems Showdown
     url: https://auth0.com/blog/javascript-module-systems-showdown/
+translators:
+  - QC-L
+  - jacob-lcs
+  - hanhan9449
 ---
 
-在[模块化编程](https://en.wikipedia.org/wiki/Modular_programming)中，开发者将程序分解为功能离散的 chunk，并称之为 __模块__。
+在[模块化编程](https://en.wikipedia.org/wiki/Modular_programming)中，开发者将程序分解为功能离散的 chunk，并称之为 **模块**。
 
 每个模块都拥有小于完整程序的体积，使得验证、调试及测试变得轻而易举。
-精心编写的 __模块__提供了可靠的抽象和封装界限，使得应用程序中每个模块都具备了条理清晰的设计和明确的目的。
+精心编写的 **模块** 提供了可靠的抽象和封装界限，使得应用程序中每个模块都具备了条理清晰的设计和明确的目的。
 
 Node.js 从一开始就支持模块化编程。
 然而，web 的 _模块化_ 正在缓慢支持中。
@@ -24,7 +28,7 @@ webpack 从这些系统中汲取了经验和教训，并将 _模块_ 的概念�
 
 ## 何为 webpack 模块 {#what-is-a-webpack-module}
 
-与 [Node.js 模块](https://nodejs.org/api/modules.html)相比，webpack _模块_能以各种方式表达它们的依赖关系。下面是一些示例：
+与 [Node.js 模块](https://nodejs.org/api/modules.html)相比，webpack *模块* 能以各种方式表达它们的依赖关系。下面是一些示例：
 
 - [ES2015 `import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 语句
 - [CommonJS](http://www.commonjs.org/specs/modules/1.0/) `require()` 语句

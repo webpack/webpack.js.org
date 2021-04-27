@@ -8,6 +8,9 @@ contributors:
   - byzyk
   - EugeneHlushko
   - snitin315
+translators:
+  - lcxfs1991
+  - QC-L
 ---
 
 `plugins` 选项用于以各种方式自定义 webpack 构建过程。webpack 附带了各种内置插件，可以通过 `webpack.[plugin-name]` 访问这些插件。请查看 [插件页面](/plugins) 获取插件列表和对应文档，

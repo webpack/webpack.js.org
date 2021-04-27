@@ -32,6 +32,10 @@ contributors:
   - smelukov
   - chenxsan
   - Adarah
+translators:
+  - QC-L
+  - jacob-lcs
+  - dear-lizhihua
 related:
   - title: webpack 中的 <link rel=”prefetch/preload”>
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c

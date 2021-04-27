@@ -11,6 +11,10 @@ contributors:
   - byzyk
   - Nek-
   - liyiming22
+translators:
+  - NealST
+  - lornally
+  - QC-L
 ---
 
 webpack 支持使用多种编程语言和数据描述格式来编写配置文件。在 [node-interpret](https://github.com/gulpjs/interpret) 中你可以找到当前所支持的文件类型列表，通过 [node-interpret](https://github.com/gulpjs/interpret)，webpack 能够处理这些类型的配置文件。

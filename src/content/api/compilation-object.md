@@ -7,6 +7,9 @@ contributors:
   - wizardofhogwarts
   - jamesgeorge007
   - snitin315
+translators:
+  - jacob-lcs
+  - QC-L
 ---
 
 Compilation 对象有很多可用的方法和钩子。在此页面，我们将会列举出这些可用的方法和属性。

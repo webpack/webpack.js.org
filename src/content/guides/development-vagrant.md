@@ -6,6 +6,9 @@ contributors:
   - chrisVillanueva
   - byzyk
   - wizardofhogwarts
+translators:
+  - QC-L
+  - lcxfs1991
 ---
 
 如果你在开发一个更加高级的项目，并且使用 [Vagrant](https://www.vagrantup.com/) 来实现在虚拟机(Virtual Machine)上运行你的开发环境，那你可能会需要在虚拟机中运行 webpack。

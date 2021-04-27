@@ -8,6 +8,9 @@ contributors:
   - madhavarshney
   - wizardofhogwarts
   - anikethsaha
+translators:
+  - QC-L
+  - jacob-lcs
 ---
 
 本指南包含一些改进构建/编译性能的实用技巧。
@@ -153,7 +156,7 @@ T> 在大多数情况下，最佳选择是 `eval-cheap-module-source-map`。
 - `AggressiveMergingPlugin`
 - `ModuleConcatenationPlugin`
 
-### 最小化 entry chunk  {#minimal-entry-chunk}
+### 最小化 entry chunk {#minimal-entry-chunk}
 
 webpack 只会在文件系统中输出已经更新的 chunk。某些配置选项（HMR, `output.chunkFilename` 的 `[name]`/`[chunkhash]/[contenthash]`，`[fullhash]`）来说，除了对已经更新的 chunk 无效之外，对于 entry chunk 也不会生效。
 

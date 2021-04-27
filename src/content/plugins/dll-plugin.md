@@ -9,6 +9,9 @@ contributors:
   - byzyk
   - EugeneHlushko
   - EslamHiko
+translators:
+  - weiyuan0609
+  - QC-L
 related:
   - title: Code Splitting Example
     url: https://github.com/webpack/webpack/blob/master/examples/explicit-vendor-chunk/README.md

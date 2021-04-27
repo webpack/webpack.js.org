@@ -8,6 +8,10 @@ contributors:
   - misterdev
   - EugeneHlushko
   - chenxsan
+translators:
+  - lcxfs1991
+  - QC-L
+  - jacob-lcs
 ---
 
 `parser` 实例，在 `compiler` 中被发现，是用来解析由 webpack

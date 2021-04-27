@@ -3,6 +3,9 @@ title: TerserWebpackPlugin
 source: https://raw.githubusercontent.com/webpack-contrib/terser-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/terser-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/terser-webpack-plugin
+translators:
+  - 92hackers
+  - QC-L
 ---
 
 

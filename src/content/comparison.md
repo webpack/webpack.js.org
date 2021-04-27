@@ -8,6 +8,9 @@ contributors:
   - tashian
   - simon04
   - byzyk
+translators:
+  - mercurywang
+  - QC-L
 related:
   - title: JSPM vs. webpack
     url: https://ilikekillnerds.com/2015/07/jspm-vs-webpack/

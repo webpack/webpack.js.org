@@ -11,6 +11,11 @@ contributors:
   - chenxsan
   - adyjs
   - anshumanv
+translators:
+  - QC-L
+  - jacob-lcs
+  - dear-lizhihua
+  - hanhan9449
 ---
 
 正如我们在 [起步](/guides/getting-started/#using-a-configuration) 中提到的，在 webpack 配置中有多种方式定义 `entry` 属性。除了解释为什么它可能非常有用，我们还将向你展示**如何去**配置 `entry` 属性。

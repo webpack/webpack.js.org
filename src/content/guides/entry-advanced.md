@@ -3,6 +3,9 @@ title: entry 高级用法
 sort: 25
 contributors:
   - EugeneHlushko
+translators:
+  - QC-L
+  - dear-lizhihua
 ---
 
 ## 每个入口使用多种文件类型 {#multiple-file-types-per-entry}

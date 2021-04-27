@@ -7,6 +7,10 @@ contributors:
   - chenxsan
   - anshumanv
   - spence-s
+translators:
+  - QC-L
+  - jacob-lcs
+  - dear-lizhihua
 related:
   - title: webpack 5 - 资源模块
     url: https://dev.to/smelukov/webpack-5-asset-modules-2o3h

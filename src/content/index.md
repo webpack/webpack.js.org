@@ -1,6 +1,9 @@
 ---
 title: webpack
 sort: -1
+translators:
+  - QC-L
+  - jacob-lcs
 ---
 
 ## 编写代码 {#write-your-code}

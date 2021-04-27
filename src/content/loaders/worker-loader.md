@@ -3,6 +3,9 @@ title: worker-loader
 source: https://raw.githubusercontent.com/webpack-contrib/worker-loader/master/README.md
 edit: https://github.com/webpack-contrib/worker-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/worker-loader
+translators:
+  - jacob-lcs
+  - QC-L
 ---
 
 

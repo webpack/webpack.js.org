@@ -11,6 +11,9 @@ contributors:
   - byzyk
   - EugeneHlushko
   - smelukov
+translators:
+  - lcxfs1991
+  - QC-L
 ---
 
 webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `target` 的详细信息，
@@ -31,13 +34,13 @@ webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `
 --------------------- | -----------------------
 `async-node`          | 编译为类 Node.js 环境可用（使用 fs 和 vm 异步加载分块）
 `electron-main`       |  编译为 [Electron](https://electronjs.org/) 主进程。
-`electron-renderer`   | 编译为 [Electron](https://electronjs.org/) 渲染进程，使用 `JsonpTemplatePlugin`, 
+`electron-renderer`   | 编译为 [Electron](https://electronjs.org/) 渲染进程，使用 `JsonpTemplatePlugin`,
 `FunctionModulePlugin` 来为浏览器环境提供目标，使用 `NodeTargetPlugin` 和 `ExternalsPlugin`
 为 CommonJS 和 Electron 内置模块提供目标。
 `electron-preload`    | 编译为 [Electron](https://electronjs.org/) 渲染进程，
 使用 `NodeTemplatePlugin` 且 `asyncChunkLoading` 设置为 `true` ，`FunctionModulePlugin` 来为浏览器提供目标，使用 `NodeTargetPlugin` 和 `ExternalsPlugin` 为 CommonJS 和 Electron 内置模块提供目标。
 `node`                | 编译为类 Node.js 环境可用（使用 Node.js `require` 加载 chunks）
-`node-webkit`         | 编译为 Webkit 可用，并且使用 jsonp 去加载分块。支持 Node.js 内置模块和 [`nw.gui`](http://docs.nwjs.io/en/latest/) 
+`node-webkit`         | 编译为 Webkit 可用，并且使用 jsonp 去加载分块。支持 Node.js 内置模块和 [`nw.gui`](http://docs.nwjs.io/en/latest/)
 导入（实验性质）
 `nwjs[[X].Y]`         | 等价于 `node-webkit`
 `web`                 | 编译为类浏览器环境里可用 **（默认）**

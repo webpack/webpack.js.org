@@ -7,6 +7,10 @@ contributors:
   - sokra
   - byzyk
   - AnayaDesign
+translators:
+  - QC-L
+  - hanhan9449
+  - lcxfs1991
 ---
 
 > es6 modules
@@ -47,9 +51,9 @@ Regular expression: /^.*\.ejs$/
 
 **context module**
 
-会生成一个 context module(上下文模块)。会生成一个 context module(上下文模块)。它包含 **目录下的所有模块** 的引用，如果一个 request 符合正则表达式，就能 require 进来。该 context module 包含一个map（映射）对象，会把 requests 翻译成对应的模块 id。（译者注：request 参考[概念术语](https://webpack.docschina.org/glossary/) ）
+会生成一个 context module(上下文模块)。会生成一个 context module(上下文模块)。它包含 **目录下的所有模块** 的引用，如果一个 request 符合正则表达式，就能 require 进来。该 context module 包含一个 map（映射）对象，会把 requests 翻译成对应的模块 id。（译者注：request 参考[概念术语](https://webpack.docschina.org/glossary/) ）
 
-示例map（映射）:
+示例 map（映射）:
 
 ```json
 {

@@ -7,6 +7,8 @@ contributors:
   - byzyk
   - EugeneHlushko
   - wizardofhogwarts
+translators:
+  - QC-L
 ---
 
 resolver 是一个帮助寻找模块绝对路径的库。

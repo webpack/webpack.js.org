@@ -5,6 +5,9 @@ contributors:
   - simon04
   - Sibiraj-S
   - EugeneHlushko
+translators:
+  - jacob-lcs
+  - QC-L
 ---
 
 [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) 简化了 HTML 文件的创建，以便为你的 webpack 包提供服务。这对于那些文件名中包含哈希值，并且哈希值会随着每次编译而改变的 webpack 包特别有用。你可以让该插件为你生成一个 HTML 文件，使用 [lodash 模板](https://lodash.com/docs#template)提供模板，或者使用你自己的 [loader](/loaders)。

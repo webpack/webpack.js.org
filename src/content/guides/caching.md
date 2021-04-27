@@ -13,6 +13,10 @@ contributors:
   - EugeneHlushko
   - AnayaDesign
   - aholzner
+translators:
+  - QC-L
+  - jacob-lcs
+  - dear-lizhihua
 related:
   - title: Issue 652
     url: https://github.com/webpack/webpack.js.org/issues/652
@@ -334,4 +338,4 @@ Entrypoint main = runtime.725a1a51ede5ae0cfde0.js vendors.55e79e5927a639d21a1b.j
 
 ## 结论 {#conclusion}
 
-缓存可能很复杂，但是从应用程序或站点用户可以获得的收益来看，这值得付出努力。想要了解更多信息，请查看下面_进一步阅读_部分。
+缓存可能很复杂，但是从应用程序或站点用户可以获得的收益来看，这值得付出努力。想要了解更多信息，请查看下面 *进一步阅读* 部分。

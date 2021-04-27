@@ -6,6 +6,10 @@ contributors:
   - skipjack
   - rouzbeh84
   - byzyk
+translators:
+  - helianthuswhite
+  - QC-L
+  - jacob-lcs
 ---
 
 在这里你可以找到 **webpack** 项目的品牌指南、资源和许可证。有关更多信息，请通过查看我们的官方[媒体仓库](https://github.com/webpack/media)，并找到[许可证](https://github.com/webpack/media/blob/master/LICENSE)来了解。点击任意图片下载它们。

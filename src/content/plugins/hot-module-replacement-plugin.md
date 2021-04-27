@@ -10,6 +10,9 @@ related:
     url: /concepts/hot-module-replacement
   - title: API - Hot Module Replacement
     url: /api/hot-module-replacement
+translators:
+  - yolilufei
+  - QC-L
 ---
 
  [Hot Module Replacement](/concepts/hot-module-replacement)，除此之外还被称为 HMR。

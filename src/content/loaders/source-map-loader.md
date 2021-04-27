@@ -3,6 +3,9 @@ title: source-map-loader
 source: https://raw.githubusercontent.com/webpack-contrib/source-map-loader/master/README.md
 edit: https://github.com/webpack-contrib/source-map-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/source-map-loader
+translators:
+  - mercurywang
+  - QC-L
 ---
 
 

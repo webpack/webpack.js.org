@@ -1,0 +1,48 @@
+@import 'functions';
+@import 'mixins';
+
+.translators__section {
+  @media print {
+    display: none;
+  }
+}
+
+.translators__list {
+  font-size: 14px;
+  margin-left: -0.5em;
+}
+
+.translator {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5em;
+
+  img {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .translator__name {
+    width: 110px;
+    margin-top: -6px;
+    padding: 0 6px;
+    line-height: 1.4;
+    border-radius: 2px;
+    text-align: center;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    color: getColor(fiord);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    background: transparentize(getColor(white), 0.05);
+    transition: color 0.1s;
+  }
+
+  &:hover {
+    .translator__name {
+      color: lighten(getColor(denim), 5%);
+    }
+  }
+}

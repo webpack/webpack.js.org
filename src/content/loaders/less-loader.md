@@ -3,6 +3,10 @@ title: less-loader
 source: https://raw.githubusercontent.com/webpack-contrib/less-loader/master/README.md
 edit: https://github.com/webpack-contrib/less-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/less-loader
+translators:
+  - phobal
+  - jacob-lcs
+  - QC-L
 ---
 
 

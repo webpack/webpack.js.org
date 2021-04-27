@@ -11,6 +11,11 @@ related:
     url: https://medium.com/webpack/predictable-long-term-caching-with-webpack-d3eee1d3fa31
   - title: 缓存
     url: /guides/caching/
+translators:
+  - lcxfs1991
+  - QC-L
+  - jacob-lcs
+  - hanhan9449
 ---
 
 在使用 webpack 构建的典型应用程序或站点中，有三种主要的代码类型：

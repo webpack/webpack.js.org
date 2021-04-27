@@ -6,6 +6,9 @@ contributors:
   - pranshuchittora
   - EugeneHlushko
   - jamesgeorge007
+translators:
+  - QC-L
+  - dear-lizhihua
 ---
 
 首次设置复杂的 webpack 配置可能会很困难。并且编写高级配置来优化性能会更加困难。下面提供的 `init` 能力，可以让我们使用可自定义的第三方初始化包，来创建 webpack 配置。
@@ -42,7 +45,7 @@ webpack-cli init <your-scaffold>
 webpack-cli init path/to/your/scaffold
 ```
 
-或者，还可以创建一个全局模块并符号链接(symlink)到本地​​模块：
+或者，还可以创建一个全局模块并符号链接(symlink)到本地模块：
 
 - 使用 npm
 
@@ -174,7 +177,7 @@ this.options.env.configuration.dev.topScope = [
 
 `string`
 
-`configName` 允许自定义配置文件的名称。例如，可以将其命名为 `webpack.base.js`  而不是默认的 `webpack.config.js`：
+`configName` 允许自定义配置文件的名称。例如，可以将其命名为 `webpack.base.js` 而不是默认的 `webpack.config.js`：
 
 ```js
 this.options.env.configuration.dev.configName = 'base';

@@ -5,6 +5,9 @@ contributors:
   - EugeneHlushko
   - wizardofhogwarts
   - chenxsan
+translators:
+  - wangjq4214
+  - QC-L
 ---
 
 T> 本 API 从 v4.39.0 开始可用

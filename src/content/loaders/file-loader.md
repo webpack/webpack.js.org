@@ -3,6 +3,9 @@ title: file-loader
 source: https://raw.githubusercontent.com/webpack-contrib/file-loader/master/README.md
 edit: https://github.com/webpack-contrib/file-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/file-loader
+translators:
+  - jacob-lcs
+  - QC-L
 ---
 
 

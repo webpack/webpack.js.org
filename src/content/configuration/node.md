@@ -10,6 +10,9 @@ contributors:
   - EugeneHlushko
   - anikethsaha
   - chenxsan
+translators:
+  - lcxfs1991
+  - QC-L
 ---
 
 这些选项可以配置是否 polyfill 或 mock 某些 [Node.js 全局变量](https://nodejs.org/docs/latest/api/globals.html)。

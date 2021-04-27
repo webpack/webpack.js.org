@@ -3,6 +3,9 @@ title: coffee-loader
 source: https://raw.githubusercontent.com/webpack-contrib/coffee-loader/master/README.md
 edit: https://github.com/webpack-contrib/coffee-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/coffee-loader
+translators:
+  - mercurywang
+  - QC-L
 ---
 
 

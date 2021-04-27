@@ -10,6 +10,9 @@ contributors:
 related:
   - title: 'webpack default options (source code)'
     url: https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js
+translators:
+  - aa875982361
+  - QC-L
 ---
 
 提供 `mode` 配置选项，告知 webpack 使用相应模式的内置优化。

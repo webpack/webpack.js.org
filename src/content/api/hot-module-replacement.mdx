@@ -13,6 +13,10 @@ related:
     url: /concepts/hot-module-replacement
   - title: Guides - Hot Module Replacement
     url: /guides/hot-module-replacement
+translators:
+  - Geekhyt
+  - QC-L
+  - jacob-lcs
 ---
 
 如果已经通过 [`HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin) 启用了 [Hot Module Replacement](/concepts/hot-module-replacement), 则它的接口将被暴露在 [`module.hot`](/api/module-variables/#modulehot-webpack-specific) 以及 [`import.meta.webpackHot`](/api/module-variables/#importmetawebpackhot) 属性下。请注意，只有 `import.meta.webpackHot` 可以在 [strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm) 中使用。
