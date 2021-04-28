@@ -84,24 +84,29 @@ module.exports = {
 };
 ```
 
-### cache.type
+While setting `cache.type` to `filesystem` opens up more options for configuration.
 
-`string: 'memory' | 'filesystem'`
+### cache.buildDependencies
 
-Sets the `cache` type to either in memory or on the file system. The `memory` option is straightforward, it tells webpack to store cache in memory and doesn't allow additional configuration:
+`object`
 
-**webpack.config.js**
+`cache.buildDependencies` is an object of arrays of additional code dependencies for the build. webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
+
+Defaults to `webpack/lib` to get all dependencies of webpack.
+
+T> It's recommended to set `cache.buildDependencies.config: [__filename]` in your webpack configuration to get the latest configuration and all dependencies.
 
 ```javascript
 module.exports = {
-  //...
   cache: {
-    type: 'memory',
+    buildDependencies: {
+      // This makes all dependencies of this file - build dependencies
+      config: [__filename],
+      // By default webpack and loaders are build dependencies
+    },
   },
 };
 ```
-
-While setting `cache.type` to `filesystem` opens up more options for configuration.
 
 ### cache.cacheDirectory
 
@@ -147,24 +152,62 @@ module.exports = {
 };
 ```
 
-### cache.buildDependencies
+### cache.hashAlgorithm
 
-`object`
+`string`
 
-`cache.buildDependencies` is an object of arrays of additional code dependencies for the build. webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
+Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/crypto.html) for more details. Defaults to `md4`.
 
-Defaults to `webpack/lib` to get all dependencies of webpack.
+`cache.hashAlgorithm` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
 
-T> It's recommended to set `cache.buildDependencies.config: [__filename]` in your webpack configuration to get the latest configuration and all dependencies.
+**webpack.config.js**
 
 ```javascript
 module.exports = {
+  //...
   cache: {
-    buildDependencies: {
-      // This makes all dependencies of this file - build dependencies
-      config: [__filename],
-      // By default webpack and loaders are build dependencies
-    },
+    type: 'filesystem',
+    hashAlgorithm: 'md4',
+  },
+};
+```
+
+### cache.idleTimeout
+
+`number = 60000`
+
+Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
+
+`cache.idleTimeout` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    type: 'filesystem',
+    idleTimeout: 60000,
+  },
+};
+```
+
+### cache.idleTimeoutForInitialStore
+
+`number = 0`
+
+Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period after which the initial cache storing should happen.
+
+`cache.idleTimeoutForInitialStore` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    type: 'filesystem',
+    idleTimeoutForInitialStore: 0,
   },
 };
 ```
@@ -255,26 +298,6 @@ module.exports = {
 };
 ```
 
-### cache.hashAlgorithm
-
-`string`
-
-Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/crypto.html) for more details. Defaults to `md4`.
-
-`cache.hashAlgorithm` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  cache: {
-    type: 'filesystem',
-    hashAlgorithm: 'md4',
-  },
-};
-```
-
 ### cache.name
 
 `string`
@@ -319,6 +342,23 @@ module.exports = {
 };
 ```
 
+### cache.type
+
+`string: 'memory' | 'filesystem'`
+
+Sets the `cache` type to either in memory or on the file system. The `memory` option is straightforward, it tells webpack to store cache in memory and doesn't allow additional configuration:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'memory',
+  },
+};
+```
+
 ### cache.version
 
 `string = ''`
@@ -340,46 +380,6 @@ module.exports = {
 ```
 
 W> Don't share the cache between calls with different options.
-
-### cache.idleTimeout
-
-`number = 60000`
-
-Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
-
-`cache.idleTimeout` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //..
-  cache: {
-    type: 'filesystem',
-    idleTimeout: 60000,
-  },
-};
-```
-
-### cache.idleTimeoutForInitialStore
-
-`number = 0`
-
-Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period after which the initial cache storing should happen.
-
-`cache.idleTimeoutForInitialStore` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //..
-  cache: {
-    type: 'filesystem',
-    idleTimeoutForInitialStore: 0,
-  },
-};
-```
 
 ## dependencies
 
