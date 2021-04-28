@@ -84,7 +84,24 @@ module.exports = {
 };
 ```
 
-While setting `cache.type` to `filesystem` opens up more options for configuration.
+While setting `cache.type` to `'filesystem'` opens up more options for configuration.
+
+### cache.allowCollectingMemory
+
+Collect unused memory allocated during deserialization, only available when [`cache.type`](#cachetype) is set to `'filesystem'`. This requires copying data into smaller buffers and has a performance cost.
+
+- Type: `boolean`
+  - It defaults to `false` in production mode and `true` in development mode.
+- <Badge text="5.35.0+" />
+
+```js
+module.exports = {
+  cache: {
+    type: 'filesystem',
+    allowCollectingMemory: true,
+  },
+};
+```
 
 ### cache.buildDependencies
 
@@ -114,7 +131,7 @@ module.exports = {
 
 Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
 
-`cache.cacheDirectory` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+`cache.cacheDirectory` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
 
 **webpack.config.js**
 
@@ -158,7 +175,7 @@ module.exports = {
 
 Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/crypto.html) for more details. Defaults to `md4`.
 
-`cache.hashAlgorithm` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+`cache.hashAlgorithm` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
 
 **webpack.config.js**
 
@@ -178,7 +195,7 @@ module.exports = {
 
 Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
 
-`cache.idleTimeout` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+`cache.idleTimeout` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
 
 **webpack.config.js**
 
@@ -198,7 +215,7 @@ module.exports = {
 
 Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period after which the initial cache storing should happen.
 
-`cache.idleTimeoutForInitialStore` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+`cache.idleTimeoutForInitialStore` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
 
 **webpack.config.js**
 
@@ -228,7 +245,7 @@ W> Moved to [snapshot.managedPaths](#managedpaths)
 
 The amount of time in milliseconds that unused cache entries are allowed to stay in the filesystem cache; defaults to one month.
 
-`cache.maxAge` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+`cache.maxAge` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
 
 **webpack.config.js**
 
@@ -284,7 +301,7 @@ Define the lifespan of unused cache entries in the memory cache.
 
 - `cache.maxMemoryGenerations`: defaults to 10 in `development` mode and to `Infinity` in `production` mode.
 
-`cache.maxMemoryGenerations` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+`cache.maxMemoryGenerations` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
 
 **webpack.config.js**
 
@@ -304,7 +321,7 @@ module.exports = {
 
 Name for the cache. Different names will lead to different coexisting caches. Defaults to `${config.name}-${config.mode}`. Using `cache.name` makes sense when you have multiple configurations which should have independent caches.
 
-`cache.name` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+`cache.name` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
 
 **webpack.config.js**
 
@@ -326,7 +343,7 @@ module.exports = {
 
 - `'pack'`: Store data when compiler is idle in a single file for all cached items
 
-`cache.store` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+`cache.store` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
 
 W> `pack` is the only supported mode since webpack 5.0.x
 
@@ -365,7 +382,7 @@ module.exports = {
 
 Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when configuration changed in a way which doesn't allow to reuse cache. This will invalidate the cache.
 
-`cache.version` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+`cache.version` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
 
 **webpack.config.js**
 
