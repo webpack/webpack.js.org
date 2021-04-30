@@ -87,13 +87,11 @@ plugins: [
 - [x] Supports webpack's `resolve.alias` & `resolve.root` configuration.
       (e.g. `require("react")` can alias to `react-lite`)
 
-
 ## Contributing {#contributing}
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/npm-install-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
-
 
 ## Maintainers {#maintainers}
 
