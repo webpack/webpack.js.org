@@ -122,15 +122,9 @@ module.exports = {
 
 默认情况下，`mini-css-extract-plugin` 会将 styles（`<link>` 元素）附加到当前 `window` 的 `document.head` 中。
 
-<<<<<<< HEAD
 但在某些情况下，可能需要对附加的目标进行精细化管理，甚至延迟 `link` 元素的插入。
 例如，当你在 iframe 中运行应用程序异步加载样式时，就属于此情况。
 对于此类情况，`insert` 可被配置为函数或自定义的选择器。
-=======
-However in some circumstances it might be necessary to have finer control over the append target or even delay `link` elements insertion.
-For example this is the case when you asynchronously load styles for an application that runs inside of an iframe.
-In such cases `insert` can be configured to be a function or a custom selector.
->>>>>>> b1981be14f55a6b0505fdb081cccbac0b494afeb
 
 如果附加目标为 [iframe](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement)，请确保父文档有足够的访问权限进入 frame document，并将元素附加到它上面。
 
