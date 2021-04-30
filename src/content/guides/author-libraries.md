@@ -12,6 +12,7 @@ contributors:
   - AnayaDesign
   - chenxsan
   - wizardofhogwarts
+  - itcobcoder
 ---
 
 Aside from applications, webpack can also be used to bundle JavaScript libraries. The following guide is meant for library authors looking to streamline their bundling strategy.
