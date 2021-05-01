@@ -3,19 +3,21 @@ title: Web Workers
 sort: 21
 contributors:
   - chenxsan
+translators:
+  - KimYangOfCat
 ---
 
-As of webpack 5, you can use [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) without [`worker-loader`](https://github.com/webpack-contrib/worker-loader).
+从 webpack 5 开始，你可以使用 [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) 代替 [`worker-loader`](https://github.com/webpack-contrib/worker-loader)。
 
-## Syntax
+## 语法
 
 ```js
 new Worker(new URL('./worker.js', import.meta.url));
 ```
 
-The syntax was chosen to allow running code without bundler, it is also available in native ECMAScript modules in the browser.
+选择这种语法是为了实现不使用 bundler 就可以运行代码，它也可以在浏览器中的原生 ECMAScript 模块中使用。
 
-## Example
+## 示例
 
 **src/index.js**
 
@@ -42,7 +44,7 @@ self.onmessage = ({ data: { question } }) => {
 
 ## Node.js
 
-Similar syntax is supported in Node.js (>= 12.17.0):
+Node.js（>= 12.17.0） 也支持类似的语法：
 
 ```js
 import { Worker } from 'worker_threads';
@@ -50,4 +52,4 @@ import { Worker } from 'worker_threads';
 new Worker(new URL('./worker.js', import.meta.url));
 ```
 
-Note that this is only available in ESM. CommonJS is not supported by neither webpack nor Node.js.
+请注意，这仅在 ESM 中可用。但不可用于 ComonnJS，无论 webpack 还是 Node.js 均是如此。
