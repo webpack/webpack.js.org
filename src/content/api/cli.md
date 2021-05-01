@@ -560,7 +560,7 @@ To use `webpack v5.32.0`:
 WEBPACK_PACKAGE=webpack-5 npx webpack
 ```
 
-## ENV Environment Variables
+## Configuratioon Environment Variables
 
 | Environment Variable | Description                                  |
 | -------------------- | -------------------------------------------- |
