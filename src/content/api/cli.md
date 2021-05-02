@@ -468,7 +468,7 @@ npx webpack --node-env production   # process.env.NODE_ENV = 'production'
 
 T> The `mode` option would respect the `--node-env` option if you don't set it explicitly, i.e. `--node-env production` would set both `process.env.NODE_ENV` and `mode` to `'production'`
 
-### Configuration Environment Variables
+### Built-in Environment Variables
 
 | Environment Variable | Description                                  |
 | -------------------- | -------------------------------------------- |
