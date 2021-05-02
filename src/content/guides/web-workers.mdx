@@ -9,7 +9,7 @@ translators:
 
 从 webpack 5 开始，你可以使用 [Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) 代替 [`worker-loader`](https://github.com/webpack-contrib/worker-loader)。
 
-## 语法
+## 语法 {#syntax}
 
 ```js
 new Worker(new URL('./worker.js', import.meta.url));
@@ -17,7 +17,7 @@ new Worker(new URL('./worker.js', import.meta.url));
 
 选择这种语法是为了实现不使用 bundler 就可以运行代码，它也可以在浏览器中的原生 ECMAScript 模块中使用。
 
-## 示例
+## 示例 {#example}
 
 **src/index.js**
 
@@ -42,7 +42,7 @@ self.onmessage = ({ data: { question } }) => {
 };
 ```
 
-## Node.js
+## Node.js {#nodejs}
 
 Node.js（>= 12.17.0） 也支持类似的语法：
 
