@@ -193,13 +193,13 @@ module.exports = {
 };
 ```
 
-### cache.idleTimeout
+### cache.idleTimeout {#cacheidletimeout}
 
 `number = 60000`
 
-Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
+时间以毫秒为单位。`cache.idleTimeout` 表示缓存存储发生的时间间隔。
 
-`cache.idleTimeout` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+`cache.idleTimeout` 配置项仅在 [`cache.type`] `'filesystem'` 时生效。
 
 **webpack.config.js**
 
@@ -219,7 +219,7 @@ module.exports = {
 
 单位毫秒。 `cache.idleTimeoutForInitialStore` 是在初始缓存存储发生后的时间段。
 
-`cache.idleTimeoutForInitialStore` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
+`cache.idleTimeoutForInitialStore` 配置项仅在 [`cache.type`] `'filesystem'` 时生效。
 
 **webpack.config.js**
 
