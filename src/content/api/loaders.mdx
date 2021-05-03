@@ -188,6 +188,8 @@ module.exports.pitch = function (remainingRequest, precedingRequest, data) {
 
 loader context 表示在 loader 内使用 `this` 可以访问的一些方法或属性。
 
+### loader 上下文示例 {#example-for-the-loader-context}
+
 下面提供一个例子，将使用 require 进行调用：
 
 在 `/abc/file.js` 中：
@@ -265,7 +267,7 @@ clearDependencies();
 
 **模块所在的目录** 可以用作解析其他模块成员的上下文。
 
-在我们的例子中：因为 `resource.js` 在这个目录中，这个属性的值为 `/abc`
+在我们的 [例子](#example-for-the-loader-context) 中：因为 `resource.js` 在这个目录中，这个属性的值为 `/abc`
 
 ### `this.data` {#thisdata}
 
@@ -351,11 +353,82 @@ module.exports = function (source) {
 };
 ```
 
+### this.importModule {#thisimportmodule}
+
+<Badge text="5.32.0+" />
+
+`this.importModule(request, options, [callback]): Promise`
+
+一种可以选择的轻量级解决方案，用于子编译器在构建时编译和执行请求。
+可以使用 [`experiments.executeModule`](/configuration/experiments/#experimentsexecutemodule) 启用。
+
+- `request`: 加载模块的请求字符串
+- `options`:
+  - `layer`: 指定该模块放置/编译的层
+  - `publicPath`: 用于构建模块的公共路径
+- `callback`: 返回 exports 的可选函数。如果没有提供 callback 函数的话，`importModule` 将会返回一个 Promise。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /stylesheet\.js$/i,
+        use: ['./a-pitching-loader.js'],
+        type: 'asset/source', // 我们将 type 设置为 'asset/source'，其会返回一个字符串。
+      },
+    ],
+  },
+};
+```
+
+**a-pitching-loader.js**
+
+```js
+exports.pitch = async function (remaining) {
+  const result = await this.importModule(
+    this.resourcePath + '.webpack[javascript/auto]' + '!=!' + remaining
+  );
+  return result.default || result;
+};
+```
+
+**src/stylesheet.js**
+
+```js
+import { green, red } from './colors.js';
+export default `body { background: ${red}; color: ${green}; }`;
+```
+
+**src/colors.js**
+
+```js
+export const red = '#f00';
+export const green = '#0f0';
+```
+
+**src/index.js**
+
+```js
+import stylesheet from './stylesheet.js';
+// stylesheet 在构建时会成为一个字符串：`body { background: #f00; color: #0f0; }`。
+```
+
+在上面的例子中你可能会注意到一些东西：
+
+1. 我们有一个 [pitching loader](#pitching-loader)，
+2. 我们在 pitching loader 中使用 `!=!` 语法来为请求设置 [matchResource](#inline-matchresource)，例如，我们将使用 `this.resourcePath + '.webpack[javascript/auto]'` 而不是原始资源匹配 [`module.rules`](/configuration/module/#modulerules)，
+3. `.webpack[javascript/auto]` 是 `.webpack[type]` 模式的伪拓展，当没有指定其他模块类型时，我们使用它指定一个默认 [模块类型](/configuration/module/#ruletype)，它通常和 `!=!` 语法一起使用。
+
+注意，上面的示例是一个简化的示例，你可以查看 [webpack 仓库的完整示例](https://github.com/webpack/webpack/tree/master/test/configCases/loader-import-module/css)。
+
 ### `this.loaderIndex` {#thisloaderindex}
 
 当前 loader 在 loader 数组中的索引。
 
-在示例中：loader1 中得到：`0`，loader2 中得到：`1`
+在[示例](#example-for-the-loader-context)中：loader1 中得到：`0`，loader2 中得到：`1`
 
 ### `this.loadModule` {#thisloadmodule}
 
@@ -377,7 +450,7 @@ loadModule(request: string, callback: function(err, source, sourceMap, module))
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
 
-在此示例中：
+在此[示例](#example-for-the-loader-context)中：
 
 ```javascript
 [
@@ -411,7 +484,7 @@ loaders = [{request: string, path: string, query: string, module: function}]
 
 被解析出来的 request 字符串。
 
-在我们的示例中：`'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
+在我们的[示例](#example-for-the-loader-context)中：`'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
 
 ### `this.resolve` {#thisresolve}
 
@@ -431,19 +504,19 @@ resolve(context: string, request: string, callback: function(err, result: string
 
 request 中的资源部分，包括 query 参数。
 
-在示例中：`'/abc/resource.js?rrr'`
+在[示例](#example-for-the-loader-context)中：`'/abc/resource.js?rrr'`
 
 ### `this.resourcePath` {#thisresourcepath}
 
 资源文件的路径。
 
-在示例中：`'/abc/resource.js'`
+在【示例](#example-for-the-loader-context)中：`'/abc/resource.js'`
 
 ### `this.resourceQuery` {#thisresourcequery}
 
 资源的 query 参数。
 
-在示例中：`'?rrr'`
+在[示例](#example-for-the-loader-context)中：`'?rrr'`
 
 ### `this.rootContext` {#thisrootcontext}
 

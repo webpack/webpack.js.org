@@ -88,24 +88,46 @@ module.exports = {
 };
 ```
 
-### cache.type {#cachetype}
+当将 `cache.type` 设置为 `'filesystem'` 是会开放更多的可配置项。
 
-`string: 'memory' | 'filesystem'`
+### cache.allowCollectingMemory
 
-将 `cache` 类型设置成内存或者文件系统。`memory` 选项很简单，它会告诉 webpack 将内容存放在内存中并且不允许额外的配置：
+收集在反序列化期间分配的未使用的内存，仅当 [`cache.type`](#cachetype) 设置为 `'filesystem'` 时生效。这需要将数据复制到更小的缓冲区中，并有性能成本。
 
-**webpack.config.js**
+- Type: `boolean`
+  - It defaults to `false` in production mode and `true` in development mode.
+- <Badge text="5.35.0+" />
 
-```javascript
+```js
 module.exports = {
-  //...
   cache: {
-    type: 'memory',
+    type: 'filesystem',
+    allowCollectingMemory: true,
   },
 };
 ```
 
-当将 `cache.type` 设置成 `filesystem` 会开放更多的选荐可配置。
+### cache.buildDependencies {#cachebuilddependencies}
+
+`object`
+
+`cache.buildDependencies` 是一个针对构建的额外代码依赖的数组对象。webpack 将使用这些项和所有依赖项的哈希值来使文件系统缓存失效。
+
+默认是 `webpack/lib` 来获取 webpack 的所有依赖项。
+
+T> 推荐在 webpack 配置中设置 `cache.buildDependencies.config: [__filename]` 来获取最新配置以及所有依赖项。
+
+```javascript
+module.exports = {
+  cache: {
+    buildDependencies: {
+      // This makes all dependencies of this file - build dependencies
+      config: [__filename],
+      // 默认情况下 webpack 与 loader 是构建依赖。
+    },
+  },
+};
+```
 
 ### cache.cacheDirectory {#cachecachedirectory}
 
@@ -113,7 +135,7 @@ module.exports = {
 
 缓存的。默认为 `node_modules/.cache/webpack`。
 
-`cache.cacheDirectory` 选项仅当 [`cache.type`](#cachetype) 被设置成 `filesystem` 才可用。
+`cache.cacheDirectory` 选项仅当 [`cache.type`](#cachetype) 被设置成 `'filesystem'` 才可用。
 
 **webpack.config.js**
 
@@ -151,24 +173,62 @@ module.exports = {
 };
 ```
 
-### cache.buildDependencies {#cachebuilddependencies}
+### cache.hashAlgorithm {#cachehashalgorithm}
 
-`object`
+`string`
 
-`cache.buildDependencies` 是用于构建的额外代码依赖数组。webpack 将使用这些项和所有依赖项的哈希值来使文件系统缓存失效。
+用于哈希生成的算法。详情请参阅 [Node.js crypto](https://nodejs.org/api/crypto.html)。默认值为 `md4`.
 
-默认使用 `webpack/lib` 获取 webpack 的所有依赖项。
+`cache.hashAlgorithm` 选项仅当 [`cache.type`](#cachetype) 设置成 `'filesystem'` 才可配置。
 
-T> 推荐在你的 webpack 配置中设置 `cache.buildDependencies.config: [__filename]` 以获取最新配置以及所有依赖项。
+**webpack.config.js**
 
 ```javascript
 module.exports = {
+  //...
   cache: {
-    buildDependencies: {
-      // This makes all dependencies of this file - build dependencies
-      config: [__filename],
-      // By default webpack and loaders are build dependencies
-    },
+    type: 'filesystem',
+    hashAlgorithm: 'md4',
+  },
+};
+```
+
+### cache.idleTimeout {#cacheidletimeout}
+
+`number = 60000`
+
+时间以毫秒为单位。`cache.idleTimeout` 表示缓存存储发生的时间间隔。
+
+`cache.idleTimeout` 配置项仅在 [`cache.type`] `'filesystem'` 时生效。
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    type: 'filesystem',
+    idleTimeout: 60000,
+  },
+};
+```
+
+### cache.idleTimeoutForInitialStore {#cacheidletimeoutforinitialstore}
+
+`number = 0`
+
+单位毫秒。 `cache.idleTimeoutForInitialStore` 是在初始缓存存储发生后的时间段。
+
+`cache.idleTimeoutForInitialStore` 配置项仅在 [`cache.type`] `'filesystem'` 时生效。
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    type: 'filesystem',
+    idleTimeoutForInitialStore: 0,
   },
 };
 ```
@@ -189,7 +249,7 @@ W> 已迁移到 [snapshot.managedPaths](#managedpaths)
 
 允许未使用的缓存留在文件系统缓存中的时间（以毫秒为单位）；默认为一个月。
 
-`cache.maxAge` 仅在 [`cache.type`](#cachetype) 设置为 `filesystem` 时生效。
+`cache.maxAge` 仅在 [`cache.type`](#cachetype) 设置为 `'filesystem'` 时生效。
 
 **webpack.config.js**
 
@@ -215,7 +275,7 @@ module.exports = {
 
 - `cache.maxGenerations: Infinity`: 缓存将永远保存。
 
-`cache.maxGenerations` 配置项仅在 [`cache.type`](#cachetype) 设置为 `memory` 时有效。
+`cache.maxGenerations` 配置项仅在 [`cache.type`](#cachetype) 设置为 `'memory'` 时有效。
 
 **webpack.config.js**
 
@@ -245,7 +305,7 @@ module.exports = {
 
 - `cache.maxMemoryGenerations`: `development` 模式下默认为 10，`production` 模式下默认为 `Infinity`。
 
-`cache.maxMemoryGenerations` 配置项仅在 [`cache.type`](#cachetype) 设置为 `filesystem` 时有效。
+`cache.maxMemoryGenerations` 配置项仅在 [`cache.type`](#cachetype) 设置为 `'filesystem'` 时有效。
 
 **webpack.config.js**
 
@@ -259,33 +319,13 @@ module.exports = {
 };
 ```
 
-### cache.hashAlgorithm {#cachehashalgorithm}
-
-`string`
-
-用于哈希生成的算法。详情请参阅 [Node.js crypto](https://nodejs.org/api/crypto.html)。默认值为 `md4`.
-
-`cache.hashAlgorithm` 选项仅当 [`cache.type`](#cachetype) 设置成 `filesystem` 才可配置。
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  cache: {
-    type: 'filesystem',
-    hashAlgorithm: 'md4',
-  },
-};
-```
-
 ### cache.name {#cachename}
 
 `string`
 
 缓存的名称。不同的名字会导致不同的的共存的缓存。默认值为 `${config.name}-${config.mode}`。使用 `cache.name` 当你有多份配置的时候，是比较合理的因为会有配置会有独立的缓存。
 
-`cache.name` 选项仅当 [`cache.type`](#cachetype) 被设置成 `filesystem` 的时候可进行配置。
+`cache.name` 选项仅当 [`cache.type`](#cachetype) 被设置成 `'filesystem'` 的时候可进行配置。
 
 **webpack.config.js**
 
@@ -307,7 +347,7 @@ module.exports = {
 
 - `'pack'`: 当编译器闲置时候，将缓存数据都存放在一个文件中
 
-`cache.store` 选项仅当 [`cache.type`](#cachetype) 设置成 `filesystem` 才可配置。
+`cache.store` 选项仅当 [`cache.type`](#cachetype) 设置成 `'filesystem'` 才可配置。
 
 W> `pack` 是 webpack 5.0.x 起唯一支持的类型
 
@@ -323,13 +363,30 @@ module.exports = {
 };
 ```
 
+### cache.type
+
+`string: 'memory' | 'filesystem'`
+
+将 `cache` 类型设置为内存或者文件系统。`memory` 选项很简单，它告诉 webpack 在内存中存储缓存，不允许额外的配置：
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'memory',
+  },
+};
+```
+
 ### cache.version {#cacheversion}
 
 `string = ''`
 
 缓存数据的版本。不同版本不会允许重用缓存和重载当前的内容。当配置以一种无法重用缓存的方式改变时，要更新缓存的版本。这会让缓存失效。
 
-`cache.version` 选项仅当 [`cache.type`](#cachetype) 设置成 `filesystem` 才可配置。
+`cache.version` 选项仅当 [`cache.type`](#cachetype) 设置成 `'filesystem'` 才可配置。
 
 **webpack.config.js**
 
@@ -344,46 +401,6 @@ module.exports = {
 ```
 
 W> 在具有不同选项的调用之间不要共享缓存。
-
-### cache.idleTimeout {#cacheidletimeout}
-
-`number = 60000`
-
-单位毫秒。 `cache.idleTimeout` 表示缓存存储发生后的时间段。
-
-`cache.idleTimeout` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //..
-  cache: {
-    type: 'filesystem',
-    idleTimeout: 60000,
-  },
-};
-```
-
-### cache.idleTimeoutForInitialStore {#cacheidletimeoutforinitialstore}
-
-`number = 0`
-
-单位毫秒。 `cache.idleTimeoutForInitialStore` 是在初始缓存存储发生后的时间段。
-
-`cache.idleTimeoutForInitialStore` option is only available when [`cache.type`](#cachetype) is set to `filesystem`.
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //..
-  cache: {
-    type: 'filesystem',
-    idleTimeoutForInitialStore: 0,
-  },
-};
-```
 
 ## dependencies {#dependencies}
 

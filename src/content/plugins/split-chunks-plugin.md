@@ -365,7 +365,7 @@ module.exports = {
 
 #### `splitChunks.cacheGroups.{cacheGroup}.test` {#splitchunkscachegroupscachegrouptest}
 
-`function (module, chunk) => boolean` `RegExp` `string`
+`function (module, { chunkGraph, moduleGraph }) => boolean` `RegExp` `string`
 
 控制此缓存组选择的模块。省略它会选择所有模块。它可以匹配绝对模块资源路径或 chunk 名称。匹配 chunk 名称时，将选择 chunk 中的所有模块。
 
@@ -380,7 +380,7 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         svgGroup: {
-          test(module, chunks) {
+          test(module) {
             // `module.resource` contains the absolute path of the file on disk.
             // Note the usage of `path.sep` instead of / or \, for cross-platform compatibility.
             const path = require('path');
@@ -392,7 +392,7 @@ module.exports = {
           },
         },
         byModuleTypeGroup: {
-          test(module, chunks) {
+          test(module) {
             return module.type === 'javascript/auto';
           },
         },
