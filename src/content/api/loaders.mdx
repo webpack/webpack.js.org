@@ -188,7 +188,13 @@ module.exports.pitch = function (remainingRequest, precedingRequest, data) {
 
 loader context 表示在 loader 内使用 `this` 可以访问的一些方法或属性。
 
+<<<<<<< HEAD
 下面提供一个例子，将使用 require 进行调用：
+=======
+### Example for the loader context
+
+Given the following example, this require call is used:
+>>>>>>> ad310a8f282a86ec2ec5e554577685377eaf7398
 
 在 `/abc/file.js` 中：
 
@@ -265,7 +271,11 @@ clearDependencies();
 
 **模块所在的目录** 可以用作解析其他模块成员的上下文。
 
+<<<<<<< HEAD
 在我们的例子中：因为 `resource.js` 在这个目录中，这个属性的值为 `/abc`
+=======
+In [the example](#example-for-the-loader-context): `/abc` because `resource.js` is in this directory
+>>>>>>> ad310a8f282a86ec2ec5e554577685377eaf7398
 
 ### `this.data` {#thisdata}
 
@@ -351,11 +361,90 @@ module.exports = function (source) {
 };
 ```
 
+<<<<<<< HEAD
 ### `this.loaderIndex` {#thisloaderindex}
+=======
+### this.importModule
+
+<Badge text="5.32.0+" />
+
+`this.importModule(request, options, [callback]): Promise`
+
+An alternative lightweight solution for the child compiler to compile and execute a request at build time. It can be enabled
+with the [`experiments.executeModule`](/configuration/experiments/#experimentsexecutemodule).
+
+- `request`: the request string to load the module from
+- `options`:
+  - `layer`: specify a layer in which this module is placed/compiled
+  - `publicPath`: the public path used for the built modules
+- `callback`: an optional function returning the exports. `importModule` will return a Promise if no callback is provided.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /stylesheet\.js$/i,
+        use: ['./a-pitching-loader.js'],
+        type: 'asset/source', // we set type to 'asset/source' as the loader will return a string
+      },
+    ],
+  },
+};
+```
+
+**a-pitching-loader.js**
+
+```js
+exports.pitch = async function (remaining) {
+  const result = await this.importModule(
+    this.resourcePath + '.webpack[javascript/auto]' + '!=!' + remaining
+  );
+  return result.default || result;
+};
+```
+
+**src/stylesheet.js**
+
+```js
+import { green, red } from './colors.js';
+export default `body { background: ${red}; color: ${green}; }`;
+```
+
+**src/colors.js**
+
+```js
+export const red = '#f00';
+export const green = '#0f0';
+```
+
+**src/index.js**
+
+```js
+import stylesheet from './stylesheet.js';
+// stylesheet will be a string `body { background: #f00; color: #0f0; }` at build time
+```
+
+You might notice something in the above example:
+
+1. We have a [pitching loader](#pitching-loader),
+2. We use `!=!` syntax in that pitching loader to set [matchResource](#inline-matchresource) for the request, i.e., we'll use `this.resourcePath + '.webpack[javascript/auto]'` to match with the [`module.rules`](/configuration/module/#modulerules) instead of the original resource,
+3. `.webpack[javascript/auto]` is a pseudo extension of the `.webpack[type]` pattern, we use it to specify a default [module type](/configuration/module/#ruletype) when no other module type is specified. It's typically used in conjunction with `!=!` syntax.
+
+Note that the above example is a simplified one, you can check [the full example on webpack repository](https://github.com/webpack/webpack/tree/master/test/configCases/loader-import-module/css).
+
+### `this.loaderIndex`
+>>>>>>> ad310a8f282a86ec2ec5e554577685377eaf7398
 
 当前 loader 在 loader 数组中的索引。
 
+<<<<<<< HEAD
 在示例中：loader1 中得到：`0`，loader2 中得到：`1`
+=======
+In [the example](#example-for-the-loader-context): in loader1: `0`, in loader2: `1`
+>>>>>>> ad310a8f282a86ec2ec5e554577685377eaf7398
 
 ### `this.loadModule` {#thisloadmodule}
 
@@ -377,7 +466,11 @@ loadModule(request: string, callback: function(err, source, sourceMap, module))
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
 
+<<<<<<< HEAD
 在此示例中：
+=======
+In [the example](#example-for-the-loader-context):
+>>>>>>> ad310a8f282a86ec2ec5e554577685377eaf7398
 
 ```javascript
 [
@@ -411,7 +504,11 @@ loaders = [{request: string, path: string, query: string, module: function}]
 
 被解析出来的 request 字符串。
 
+<<<<<<< HEAD
 在我们的示例中：`'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
+=======
+In [the example](#example-for-the-loader-context): `'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
+>>>>>>> ad310a8f282a86ec2ec5e554577685377eaf7398
 
 ### `this.resolve` {#thisresolve}
 
@@ -431,19 +528,31 @@ resolve(context: string, request: string, callback: function(err, result: string
 
 request 中的资源部分，包括 query 参数。
 
+<<<<<<< HEAD
 在示例中：`'/abc/resource.js?rrr'`
+=======
+In [the example](#example-for-the-loader-context): `'/abc/resource.js?rrr'`
+>>>>>>> ad310a8f282a86ec2ec5e554577685377eaf7398
 
 ### `this.resourcePath` {#thisresourcepath}
 
 资源文件的路径。
 
+<<<<<<< HEAD
 在示例中：`'/abc/resource.js'`
+=======
+In [the example](#example-for-the-loader-context): `'/abc/resource.js'`
+>>>>>>> ad310a8f282a86ec2ec5e554577685377eaf7398
 
 ### `this.resourceQuery` {#thisresourcequery}
 
 资源的 query 参数。
 
+<<<<<<< HEAD
 在示例中：`'?rrr'`
+=======
+In [the example](#example-for-the-loader-context): `'?rrr'`
+>>>>>>> ad310a8f282a86ec2ec5e554577685377eaf7398
 
 ### `this.rootContext` {#thisrootcontext}
 
