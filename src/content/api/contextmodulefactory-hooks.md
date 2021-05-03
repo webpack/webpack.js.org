@@ -4,48 +4,50 @@ group: Plugins
 sort: 11
 contributors:
   - iguessitsokay
+translators:
+  - KimYangOfCat
 ---
 
-The `ContextModuleFactory` module is used by the `Compiler` to generate dependencies from webpack specific [require.context](/api/module-methods/#requirecontext) API. It resolves the requested directory, generates requests for each file and filters against passed regExp. Matching dependencies then passes through [NormalModuleFactory](/api/normalmodulefactory-hooks).
+`Compiler` 使用 `ContextModuleFactory` 模块从 webpack 独特的 [require.context](/api/module-methods/#requirecontext) API 生成依赖关系。它会解析请求的目录，为每个文件生成请求，并依据传递来的 regExp 进行过滤。最后匹配成功的依赖关系将被传入 [NormalModuleFactory](/api/normalmodulefactory-hooks)。
 
-The `ContextModuleFactory` class extends `Tapable` and provides the following
-lifecycle hooks. They can be tapped the same way as compiler hooks:
+`ContextModuleFactory` 类扩展了 `Tapable` 并提供了以下的生命周期钩子。
+你可以像使用编译器钩子一样使用它们：
 
 ```js
 ContextModuleFactory.hooks.someHook.tap(/* ... */);
 ```
 
-As with the `compiler`, `tapAsync` and `tapPromise` may also be available
-depending on the type of hook.
+与 `compiler` 一样，`tapAsync` 和 `tapPromise` 是否可用
+取决于钩子的类型。
 
-### beforeResolve
-
-`AsyncSeriesWaterfallHook`
-
-Called before resolving the requested directory. The request can be ignored by returning `false`.
-
-- Callback Parameters: `data`
-
-### afterResolve
+### beforeResolve {#beforeresolve}
 
 `AsyncSeriesWaterfallHook`
 
-Called after the requested directory resolved.
+在解析请求的目录之前调用。请求可以通过返回 `false` 来忽略。
 
-- Callback Parameters: `data`
+- 回调参数：`data`
 
-### contextModuleFiles
+### afterResolve {#afterresolve}
+
+`AsyncSeriesWaterfallHook`
+
+在请求的目录解析后调用。
+
+- 回调参数：`data`
+
+### contextModuleFiles {#contextmodulefiles}
 
 `SyncWaterfallHook`
 
-Called after directory contents are read. On recursive mode, calls for each sub-directory as well. Callback parameter is an array of all file and folder names in each directory.
+读取目录内容后调用。在递归模式下，也会读取每个子目录。回调参数是一个包含每个目录中所有文件和文件夹名称的数组。
 
-- Callback Parameters: `fileNames`
+- 回调参数：`fileNames`
 
-### alternativeRequests
+### alternativeRequests {#alternativerequests}
 
 `AsyncSeriesWaterfallHook`
 
-Called for each file after the request is created but before filtering against regExp.
+在创建请求之后但依据 regExp 进行过滤之前，为每个文件调用。
 
-- Callback Parameters: `request` `options`
+- 回调参数：`request` `options`
