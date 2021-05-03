@@ -418,11 +418,11 @@ import stylesheet from './stylesheet.js';
 
 在上面的例子中你可能会注意到一些东西：
 
-1. We have a [pitching loader](#pitching-loader),
-2. We use `!=!` syntax in that pitching loader to set [matchResource](#inline-matchresource) for the request, i.e., we'll use `this.resourcePath + '.webpack[javascript/auto]'` to match with the [`module.rules`](/configuration/module/#modulerules) instead of the original resource,
-3. `.webpack[javascript/auto]` is a pseudo extension of the `.webpack[type]` pattern, we use it to specify a default [module type](/configuration/module/#ruletype) when no other module type is specified. It's typically used in conjunction with `!=!` syntax.
+1. 我们有一个 [pitching loader](#pitching-loader)，
+2. 我们在 pitching loader 中使用 `!=!` 语法来为请求设置 [matchResource](#inline-matchresource)，例如，我们将使用 `this.resourcePath + '.webpack[javascript/auto]'` 而不是原始资源匹配 [`module.rules`](/configuration/module/#modulerules)，
+3. `.webpack[javascript/auto]` 是 `.webpack[type]` 模式的伪拓展，当没有指定其他模块类型时，我们使用它指定一个默认 [模块类型](/configuration/module/#ruletype)，它通常和 `!=!` 语法一起使用。
 
-Note that the above example is a simplified one, you can check [the full example on webpack repository](https://github.com/webpack/webpack/tree/master/test/configCases/loader-import-module/css).
+注意，上面的示例是一个简化的示例，你可以查看 [webpack 仓库的完整示例](https://github.com/webpack/webpack/tree/master/test/configCases/loader-import-module/css)。
 
 ### `this.loaderIndex` {#thisloaderindex}
 

@@ -12796,19 +12796,6 @@ symbol-tree@^3.2.2, symbol-tree@^3.2.4:
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
 
-<<<<<<< HEAD
-table@^3.8.3:
-  version "3.8.3"
-  resolved "https://registry.yarnpkg.com/table/-/table-3.8.3.tgz#2bbc542f0fda9861a755d3947fefd8b3f513855f"
-  integrity sha1-K7xULw/amGGnVdOUf+/Ys/UThV8=
-  dependencies:
-    ajv "^4.7.0"
-    ajv-keywords "^1.0.0"
-    chalk "^1.1.1"
-    lodash "^4.0.0"
-    slice-ansi "0.0.4"
-    string-width "^2.0.0"
-=======
 synckit@^0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/synckit/-/synckit-0.1.5.tgz#f34462b2e3686bba3dbea2ae13b6e01adff2ffb8"
@@ -12816,7 +12803,6 @@ synckit@^0.1.5:
   dependencies:
     tslib "^2.2.0"
     uuid "^8.3.2"
->>>>>>> ad310a8f282a86ec2ec5e554577685377eaf7398
 
 table@^6.0.4:
   version "6.0.4"
