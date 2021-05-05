@@ -398,6 +398,23 @@ module.exports = {
 
 W> Don't share the cache between calls with different options.
 
+### cache.profile
+
+`boolean = false`
+
+Track and log detailed timing information for individual `"filesystem"` cache items.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    profile: true,
+  },
+};
+```
+
 ## dependencies
 
 `[string]`
