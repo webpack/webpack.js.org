@@ -372,14 +372,13 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
         cursor: pointer;
 
         &::after {
-          content: '\F103';
+          content: '›';
           float: left;
           position: relative;
           left: -2px;
-          top: 2px;
           text-align: center;
-          font-family: icons;
           color: lighten(getColor(denim), 10%);
+          font-size: 16px;
         }
       }
 
