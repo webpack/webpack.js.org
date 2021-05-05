@@ -458,6 +458,23 @@ The `--env` argument accepts multiple values:
 
 T> See the [environment variables](/guides/environment-variables/) guide for more information on its usage.
 
+In addition to the customized `env` showed above, there are some built-in ones under `env` to be used inside your webpack configuration:
+
+| Environment Variable | Description                                  |
+| -------------------- | -------------------------------------------- |
+| `WEBPACK_SERVE`      | `true` if `serve\|s` is being used.          |
+| `WEBPACK_BUILD`      | `true` if `build\|bundle\|b` is being used.  |
+| `WEBPACK_WATCH`      | `true` if `--watch\|watch\|w` is being used. |
+Note that you can not access those built-in environment variables inside the bundled code.
+
+```javascript
+module.exports = (env, argv) => {
+  return {
+    mode: env.WEBPACK_SERVE ? 'development' : 'production',
+  };
+};
+```
+
 ### node-env
 
 You can use `--node-env` option to set `process.env.NODE_ENV`:
@@ -467,6 +484,7 @@ npx webpack --node-env production   # process.env.NODE_ENV = 'production'
 ```
 
 T> The `mode` option would respect the `--node-env` option if you don't set it explicitly, i.e. `--node-env production` would set both `process.env.NODE_ENV` and `mode` to `'production'`
+
 
 ## Configuration Options
 
@@ -559,23 +577,3 @@ To use `webpack v5.32.0`:
 ```bash
 WEBPACK_PACKAGE=webpack-5 npx webpack
 ```
-
-## ENV Environment Variables
-
-| Environment Variable | Description                                  |
-| -------------------- | -------------------------------------------- |
-| `WEBPACK_SERVE`      | `true` if `serve\|s` is being used.          |
-| `WEBPACK_BUILD`      | `true` if `build\|bundle\|b` is being used.  |
-| `WEBPACK_WATCH`      | `true` if `--watch\|watch\|w` is being used. |
-
-You can use the above environment variables inside your webpack configuration:
-
-```javascript
-module.exports = (env, argv) => {
-  return {
-    mode: env.WEBPACK_SERVE ? 'development' : 'production',
-  };
-};
-```
-
-W> You can not access these environment variables inside bundled code.
