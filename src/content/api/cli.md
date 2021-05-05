@@ -465,6 +465,7 @@ In addition to the customized `env` showed above, there are some built-in ones u
 | `WEBPACK_SERVE`      | `true` if `serve\|s` is being used.          |
 | `WEBPACK_BUILD`      | `true` if `build\|bundle\|b` is being used.  |
 | `WEBPACK_WATCH`      | `true` if `--watch\|watch\|w` is being used. |
+Note that you can not access those built-in environment variables inside the bundled code.
 
 ```javascript
 module.exports = (env, argv) => {
@@ -484,7 +485,6 @@ npx webpack --node-env production   # process.env.NODE_ENV = 'production'
 
 T> The `mode` option would respect the `--node-env` option if you don't set it explicitly, i.e. `--node-env production` would set both `process.env.NODE_ENV` and `mode` to `'production'`
 
-W> You can not access these environment variables inside bundled code.
 
 ## Configuration Options
 
