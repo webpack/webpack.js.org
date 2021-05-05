@@ -4,103 +4,105 @@ group: Plugins
 sort: 13
 contributors:
   - iguessitsokay
+translators:
+  - KimYangOfCat
 ---
 
-The `NormalModuleFactory` module is used by the `Compiler` to generate modules. Starting with entry points, it resolves each request, parses the content to find further requests, and keeps crawling through files by resolving all and parsing any new files. At last stage, each dependency becomes a Module instance.
+`Compiler` 使用 `NormalModuleFactory` 模块生成各类模块。从入口点开始，此模块会分解每个请求，解析文件内容以查找进一步的请求，然后通过分解所有请求以及解析新的文件来爬取全部文件。在最后阶段，每个依赖项都会成为一个模块实例。
 
-The `NormalModuleFactory` class extends `Tapable` and provides the following
-lifecycle hooks. They can be tapped the same way as compiler hooks:
+`NormalModuleFactory` 类扩展了 `Tapable` 并提供了以下的生命周期钩子。 
+你可以像使用编译器钩子一样使用它们：
 
 ```js
 NormalModuleFactory.hooks.someHook.tap(/* ... */);
 ```
 
-NormaleModuleFactory creates `Parser` and `Generator` instances which can be accessed by HookMaps. Identifier must be passed to tap into these:
+`NormalModuleFactory` 创建了可由 `HookMaps` 访问的 `Parser` 和 `Generator` 实例。同时必须传入 `identifier` 才能使用以下代码：
 
 ```js
 NormalModuleFactory.hooks.someHook.for('identifier').tap(/* ... */);
 ```
 
-As with the `compiler`, `tapAsync` and `tapPromise` may also be available
-depending on the type of hook.
+与 `compiler` 一样，`tapAsync` 和 `tapPromise` 是否可用
+取决于钩子的类型。
 
-### beforeResolve
-
-`AsyncSeriesBailHook`
-
-Called when a new dependency request is encountered. A dependency can be ignored by returning `false`. Otherwise, it should return `undefined` to proceed.
-
-- Callback Parameters: `ResolveData`
-
-### factorize
+### beforeResolve {#beforeresolve}
 
 `AsyncSeriesBailHook`
 
-Called before initiating resolve. It should return `undefined` to proceed.
+当遇到新的依赖项请求时调用。可以通过返回 `false` 来忽略依赖项。否则，返回 `undefined` 以继续。
 
-- Callback Parameters: `resolveData`
+- 回调参数：`ResolveData`
 
-### resolve
-
-`AsyncSeriesBailHook`
-
-Called before the request is resolved. A dependency can be ignored by returning `false`. Returning a Module instance would finalize the process. Otherwise, it should return `undefined` to proceed.
-
-- Callback Parameters: `resolveData`
-
-### resolveForScheme
+### factorize {#factorize}
 
 `AsyncSeriesBailHook`
 
-Called before a request with scheme (URI) is resolved.
+在初始化解析之前调用。它应该返回 `undefined` 以继续。
 
-- Callback Parameters: `resolveData`
+- 回调参数：`resolveData`
 
-### afterResolve
-
-`AsyncSeriesBailHook`
-
-Called after the request is resolved.
-
-- Callback Parameters: `resolveData`
-
-### createModule
+### resolve {#resolve}
 
 `AsyncSeriesBailHook`
 
-Called before a `NormalModule` instance is created.
+在请求被解析之前调用。可以通过返回 `false` 来忽略依赖项。返回一个模块实例将结束进程。否则，返回 `undefined` 以继续。
 
-- Callback Parameters: `createData` `resolveData`
+- 回调参数：`resolveData`
 
-### module
+### resolveForScheme {#resolveForScheme}
+
+`AsyncSeriesBailHook`
+
+在解析符合统一资源标志符方案(URI)的请求之前调用。
+
+- 回调参数：`resolveData`
+
+### afterResolve {#afterResolve}
+
+`AsyncSeriesBailHook`
+
+在请求解析后调用。
+
+- 回调参数：`resolveData`
+
+### createModule {#createModule}
+
+`AsyncSeriesBailHook`
+
+在创建 `NormalModule` 实例之前调用。
+
+- 回调参数：`createData` `resolveData`
+
+### module {#module}
 
 `SyncWaterfallHook`
 
-Called after a `NormalModule` instance is created.
+在创建 `NormalModule` 实例后调用。
 
-- Callback Parameters: `module` `createData` `resolveData`
+- 回调参数：`module` `createData` `resolveData`
 
-### createParser
+### createParser {#createParser}
 
 `HookMap<SyncBailHook>`
 
-Called before a `Parser` instance is created. `parserOptions` is options in [module.parser](/configuration/module/#moduleparser) for the corresponding identifier or an empty object.
+在 `Parser` 实例创建后调用。`parserOptions` 是 [module.parser](/configuration/module/#moduleparser) 中对应标识符或空对象的选项。
 
-- Hook Parameters: `identifier`
+- 钩子参数：`identifier`
 
-- Callback Parameters: `parserOptions`
+- 回调参数：`parserOptions`
 
-### parser
+### parser {#parser}
 
 `HookMap<SyncHook>`
 
-Fired after a `Parser` instance is created.
+在创建 `Parser` 实例后触发。
 
-- Hook Parameters: `identifier`
+- 钩子参数：`identifier`
 
-- Callback Parameters: `parser` `parserOptions`
+- 回调参数：`parser` `parserOptions`
 
-Possible default identifiers:
+可能的默认标识符：
 
 1. `javascript/auto`
 2. `javascript/dynamic`
@@ -110,27 +112,27 @@ Possible default identifiers:
 6. `webassembly/async`
 7. `asset`
 
-### createGenerator
+### createGenerator {#createGenerator}
 
 `HookMap<SyncBailHook>`
 
-Called before a `Generator` instance is created. `generatorOptions` is options in [module.parser](/configuration/module/#modulegenerator) for the corresponding identifier or an empty object.
+在 `Generator` 实例创建后调用。`generatorOptions` 是 [module.parser](/configuration/module/#modulegenerator) 中对应标识符或空对象的选项。
 
-- Hook Parameters: `identifier`
+- 钩子参数：`identifier`
 
-- Callback Parameters: `generatorOptions`
+- 回调参数：`generatorOptions`
 
-### generator
+### generator {#generator}
 
 `HookMap<SyncHook>`
 
-Called after a `Generator` instance is created.
+在 `Generator` 实例创建之后调用。
 
-- Hook Parameters: `identifier`
+- 钩子参数：`identifier`
 
-- Callback Parameters: `generator` `generatorOptions`
+- 回调参数：`generator` `generatorOptions`
 
-Possible default identifiers:
+可能的默认标识符：
 
 1. `json`
 2. `webassembly/sync`
