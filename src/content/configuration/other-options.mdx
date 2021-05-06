@@ -335,6 +335,24 @@ module.exports = {
 };
 ```
 
+### cache.profile
+
+`boolean = false`
+
+Track and log detailed timing information for individual cache items of type `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    profile: true,
+  },
+};
+```
+
 ### cache.store
 
 `string = 'pack': 'pack'`
