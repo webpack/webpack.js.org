@@ -549,6 +549,7 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 | `WEBPACK_CLI_SKIP_IMPORT_LOCAL`       | when `true` it will skip using the local instance of `webpack-cli`. |
 | `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG`   | when `true` it will force load the ESM config.                      |
 | [`WEBPACK_PACKAGE`](#webpack_package) | Use a custom webpack version in CLI.                                |
+| `WEBPACK_CLI_HELP_WIDTH`              | Use a custom width for help output.                                 |
 
 ```bash
 WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
