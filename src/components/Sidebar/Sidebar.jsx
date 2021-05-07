@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import './Sidebar.scss';
 import { useEffect, useState } from 'react';
 
+const versions = [5, 4];
 const currentDocsVersion = 5;
 
 Sidebar.propTypes = {
@@ -17,6 +18,7 @@ Sidebar.propTypes = {
 // Create and export the component
 export default function Sidebar({ className = '', pages, currentPage }) {
   const [version, setVersion] = useState(currentDocsVersion);
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     if (version === currentDocsVersion) return;
     const href = window.location.href;
@@ -31,23 +33,32 @@ export default function Sidebar({ className = '', pages, currentPage }) {
   return (
     <nav className={`sidebar ${className}`}>
       <div className="sidebar__inner">
-        <select
-          name="version-selector"
-          style={{
-            border: '1px solid #dedede',
-            borderRadius: 0,
-            fontSize: 14,
-            color: '#535353',
-            display: 'flex',
-            width: '100%',
-            padding: '5px 10px',
-          }}
-          value={version}
-          onChange={(e) => setVersion(+e.target.value)}
-        >
-          <option value={5}>Webpack 5</option>
-          <option value={4}>Webpack 4</option>
-        </select>
+        <div className="z-10 border border-solid border-gray-200 text-gray-600 relative text-14 px-[5px] py-[5px]">
+          <div
+            className="cursor-pointer flex items-center justify-between text-black"
+            onClick={() => setVisible((prev) => !prev)}
+          >
+            <span>Webpack {version} </span>
+          </div>
+          <div
+            className={`bg-white box-border border border-gray-200 border-solid absolute flex-col left-[-1px] right-[-1px] top-[30px] ${
+              visible ? 'flex' : 'hidden'
+            }`}
+          >
+            {versions.map((version) => (
+              <button
+                key={version}
+                onClick={() => setVersion(version)}
+                className={`cursor-pointer border-none bg-transparent text-left px-[5px] py-[10px] transition-colors duration-200 hover:bg-gray-100 ${
+                  version === currentDocsVersion ? 'font-bold' : ''
+                }`}
+                value={version}
+              >
+                Webpack {version}
+              </button>
+            ))}
+          </div>
+        </div>
         <Print url={currentPage} />
 
         {pages.map((page, index) => {
