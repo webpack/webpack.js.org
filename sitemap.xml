@@ -109,10 +109,10 @@
         <loc>https://webpack.js.org/api/plugins</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/stats</loc>
+        <loc>https://webpack.js.org/api/resolvers</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/resolvers</loc>
+        <loc>https://webpack.js.org/api/stats</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
@@ -277,13 +277,13 @@
         <loc>https://webpack.js.org/guides/build-performance</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/caching</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/code-splitting</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting-async</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/caching</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting-css</loc>
@@ -346,6 +346,9 @@
         <loc>https://webpack.js.org/guides/production-build</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/progressive-web-application</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/public-path</loc>
     </url>
     <url>
@@ -355,13 +358,10 @@
         <loc>https://webpack.js.org/guides/shimming</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/progressive-web-application</loc>
+        <loc>https://webpack.js.org/guides/tree-shaking</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/typescript</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/tree-shaking</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/web-workers</loc>
@@ -445,22 +445,22 @@
         <loc>https://webpack.js.org/migrate/3</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/migrate/5</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/migrate/4</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/migrate/5</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins/NoEmitOnErrorsPlugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/automatic-prefetch-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/banner-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/closure-webpack-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/automatic-prefetch-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/commons-chunk-plugin</loc>
@@ -520,16 +520,16 @@
         <loc>https://webpack.js.org/plugins/json-minimizer-webpack-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/min-chunk-size-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/mini-css-extract-plugin</loc>
+        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/module-concatenation-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/mini-css-extract-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin</loc>
@@ -550,16 +550,16 @@
         <loc>https://webpack.js.org/plugins/progress-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/provide-plugin</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/source-map-dev-tool-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/split-chunks-plugin</loc>
+        <loc>https://webpack.js.org/plugins/provide-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/stylelint-webpack-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/split-chunks-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/terser-webpack-plugin</loc>
