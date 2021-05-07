@@ -59,7 +59,6 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 ## Linting && Testing
 
 - [`mocha-loader`](/loaders/mocha-loader) Tests with [mocha](https://mochajs.org/) (Browser/NodeJS)
-- [`eslint-loader`](https://github.com/webpack-contrib/eslint-loader) PreLoader for linting code using [ESLint](https://eslint.org/)
 
 ## Frameworks
 
