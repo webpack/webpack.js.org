@@ -2,10 +2,12 @@
 import SidebarItem from '../SidebarItem/SidebarItem';
 import Print from '../Print/Print';
 import PropTypes from 'prop-types';
+import { useClickAway } from 'react-use';
 
 // Load Styling
 import './Sidebar.scss';
 import { useEffect, useState } from 'react';
+import { useRef } from 'react';
 
 const versions = [5, 4];
 const currentDocsVersion = 5;
@@ -19,6 +21,11 @@ Sidebar.propTypes = {
 export default function Sidebar({ className = '', pages, currentPage }) {
   const [version, setVersion] = useState(currentDocsVersion);
   const [visible, setVisible] = useState(false);
+  const ref = useRef(null);
+
+  useClickAway(ref, () => {
+    setVisible(false);
+  });
   useEffect(() => {
     if (version === currentDocsVersion) return;
     const href = window.location.href;
@@ -33,7 +40,10 @@ export default function Sidebar({ className = '', pages, currentPage }) {
   return (
     <nav className={`sidebar ${className}`}>
       <div className="sidebar__inner">
-        <div className="z-10 border border-solid border-gray-200 text-gray-600 relative text-14 px-[5px] py-[5px]">
+        <div
+          ref={ref}
+          className="z-10 border border-solid border-gray-200 text-gray-600 relative text-14 px-[5px] py-[5px]"
+        >
           <div
             className="cursor-pointer flex items-center justify-between text-black"
             onClick={() => setVisible((prev) => !prev)}
