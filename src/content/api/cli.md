@@ -43,7 +43,7 @@ webpack-cli offers a variety of commands to make working with webpack easy. By d
 | [`configtest`](#configtest)           | `configtest\|t [config-path]`                         | Validate a webpack configuration.                                               |
 | [`help`](#help)                       | `help\|h [command] [option]`                          | Display help for commands and options.                                          |
 | [`info`](#info)                       | `info\|i [options]`                                   | Outputs information about your system.                                          |
-| [`init`](#init)                       | `init\|create\|new\|c\|n [generation-path] [options]` | Initialize a new webpack project.                                               |
+| [`init`](#init)                       | `init\|create\|c\|new\|n [generation-path] [options]` | Initialize a new webpack project.                                               |
 | `loader`                              | `loader\|l [output-path] [options]`                   | Scaffold a loader.                                                              |
 | `plugin`                              | `plugin\|p [output-path] [options]`                   | Scaffold a plugin.                                                              |
 | [`serve`](/configuration/dev-server/) | `serve\|server\|s [options]`                          | Run the `webpack-dev-server`.                                                   |
