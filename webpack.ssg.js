@@ -90,6 +90,9 @@ module.exports = (env) =>
             '/configuration/optimization/#optimizationemitonerrors',
           'concepts/mode': '/configuration/mode',
           'contribute/writing-a-scaffold': '/api/cli/#init',
+          'loaders/raw-loader': 'https://v4.webpack.js.org/loaders/raw-loader',
+          'loaders/url-loader': 'https://v4.webpack.js.org/loaders/url-loader',
+          'loaders/file-loader': 'https://v4.webpack.js.org/loaders/file-loader',
         },
       }),
       new CopyWebpackPlugin({

@@ -9,6 +9,7 @@ contributors:
   - hemal7735
   - snitin315
   - anshumanv
+  - jamesgeorge007
 ---
 
 webpack enables use of [loaders](/concepts/loaders) to preprocess files. This allows you to bundle any static resource way beyond JavaScript. You can easily write your own loaders using Node.js.
@@ -17,10 +18,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 
 ## Files
 
-- [`raw-loader`](/loaders/raw-loader) Loads raw content of a file (utf-8)
 - [`val-loader`](/loaders/val-loader) Executes code as module and consider exports as JS code
-- [`url-loader`](/loaders/url-loader) Works like the file loader, but can return a [data URL](https://tools.ietf.org/html/rfc2397) if the file is smaller than a limit
-- [`file-loader`](/loaders/file-loader) Emits the file into the output folder and returns the (relative) URL
 - [`ref-loader`](https://www.npmjs.com/package/ref-loader) Create dependencies between any files manually
 
 ## JSON
