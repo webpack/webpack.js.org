@@ -9,6 +9,8 @@ import './Sidebar.scss';
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 
+import DownIcon from '../../styles/icons/chevron-down.svg';
+
 const versions = [5, 4];
 const currentDocsVersion = 5;
 
@@ -45,10 +47,15 @@ export default function Sidebar({ className = '', pages, currentPage }) {
           className="z-10 border border-solid border-gray-200 text-gray-600 relative text-14 px-[5px] py-[5px]"
         >
           <div
-            className="cursor-pointer flex items-center justify-between text-black"
+            className="cursor-pointer flex items-center justify-between text-black dark:text-white"
             onClick={() => setVisible((prev) => !prev)}
           >
             <span>Webpack {version} </span>
+            <DownIcon
+              className={`text-black dark:text-white fill-current w-[20px] transform ${
+                !visible ? '' : '-rotate-180'
+              }`}
+            />
           </div>
           <div
             className={`bg-white box-border border border-gray-200 border-solid absolute flex-col left-[-1px] right-[-1px] top-[30px] ${
