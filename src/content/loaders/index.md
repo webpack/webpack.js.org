@@ -56,7 +56,7 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 - [`postcss-loader`](/loaders/postcss-loader) Loads and transforms a CSS/SSS file using [PostCSS](http://postcss.org)
 - [`stylus-loader`](/loaders/stylus-loader/) Loads and compiles a Stylus file
 
-## Linting && Testing
+## Testing
 
 - [`mocha-loader`](/loaders/mocha-loader) Tests with [mocha](https://mochajs.org/) (Browser/NodeJS)
 
