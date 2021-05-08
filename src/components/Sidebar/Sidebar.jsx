@@ -33,7 +33,7 @@ export default function Sidebar({ className = '', pages, currentPage }) {
     <nav className={`sidebar ${className}`}>
       <div className="sidebar__inner">
         <select
-          className="z-10 text-gray-600 relative text-14 px-[5px] py-[5px] appearance-none bg-white box-border border border-gray-200 border-solid flex-col flex w-full rounded-none dark:bg-gray-100"
+          className="z-10 text-gray-600 relative text-14 px-5 py-5 appearance-none bg-white box-border border border-gray-200 border-solid flex-col flex w-full rounded-none dark:bg-gray-100"
           value={version}
           onChange={(e) => {
             setVersion(+e.target.value);

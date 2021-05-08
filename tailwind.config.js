@@ -8,7 +8,9 @@ module.exports = {
         14: '14px',
       },
     },
-
+    spacing: {
+      5: '5px',
+    },
     colors: {
       white: '#fff',
       black: '#000',
