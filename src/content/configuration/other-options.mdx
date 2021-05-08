@@ -94,6 +94,8 @@ Collect unused memory allocated during deserialization, only available when [`ca
   - It defaults to `false` in production mode and `true` in development mode.
 - <Badge text="5.35.0+" />
 
+**webpack.config.js**
+
 ```js
 module.exports = {
   cache: {
@@ -112,6 +114,8 @@ module.exports = {
 Defaults to `webpack/lib` to get all dependencies of webpack.
 
 T> It's recommended to set `cache.buildDependencies.config: [__filename]` in your webpack configuration to get the latest configuration and all dependencies.
+
+**webpack.config.js**
 
 ```javascript
 module.exports = {
