@@ -2,14 +2,10 @@
 import SidebarItem from '../SidebarItem/SidebarItem';
 import Print from '../Print/Print';
 import PropTypes from 'prop-types';
-import { useClickAway } from 'react-use';
 
 // Load Styling
 import './Sidebar.scss';
 import { useEffect, useState } from 'react';
-import { useRef } from 'react';
-
-import DownIcon from '../../styles/icons/chevron-down.svg';
 
 const versions = [5, 4];
 const currentDocsVersion = 5;
@@ -22,12 +18,6 @@ Sidebar.propTypes = {
 // Create and export the component
 export default function Sidebar({ className = '', pages, currentPage }) {
   const [version, setVersion] = useState(currentDocsVersion);
-  const [visible, setVisible] = useState(false);
-  const ref = useRef(null);
-
-  useClickAway(ref, () => {
-    setVisible(false);
-  });
   useEffect(() => {
     if (version === currentDocsVersion) return;
     const href = window.location.href;
@@ -42,40 +32,19 @@ export default function Sidebar({ className = '', pages, currentPage }) {
   return (
     <nav className={`sidebar ${className}`}>
       <div className="sidebar__inner">
-        <div
-          ref={ref}
-          className="z-10 border border-solid border-gray-200 text-gray-600 relative text-14 px-[5px] py-[5px]"
+        <select
+          className="z-10 text-gray-600 relative text-14 px-[5px] py-[5px] appearance-none bg-white box-border border border-gray-200 border-solid flex-col flex w-full rounded-none dark:bg-gray-100"
+          value={version}
+          onChange={(e) => {
+            setVersion(+e.target.value);
+          }}
         >
-          <div
-            className="cursor-pointer flex items-center justify-between text-black dark:text-white"
-            onClick={() => setVisible((prev) => !prev)}
-          >
-            <span>Webpack {version} </span>
-            <DownIcon
-              className={`text-black dark:text-white fill-current w-[20px] transform ${
-                !visible ? '' : '-rotate-180'
-              }`}
-            />
-          </div>
-          <div
-            className={`bg-white box-border border border-gray-200 border-solid absolute flex-col left-[-1px] right-[-1px] top-[30px] ${
-              visible ? 'flex' : 'hidden'
-            }`}
-          >
-            {versions.map((version) => (
-              <button
-                key={version}
-                onClick={() => setVersion(version)}
-                className={`cursor-pointer border-none bg-transparent text-left px-[5px] py-[10px] transition-colors duration-200 hover:bg-gray-100 ${
-                  version === currentDocsVersion ? 'font-bold' : ''
-                }`}
-                value={version}
-              >
-                Webpack {version}
-              </button>
-            ))}
-          </div>
-        </div>
+          {versions.map((version) => (
+            <option key={version} value={version}>
+              Webpack {version}
+            </option>
+          ))}
+        </select>
         <Print url={currentPage} />
 
         {pages.map((page, index) => {
