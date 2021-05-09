@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 import './Sidebar.scss';
 import { useEffect, useState } from 'react';
 
+import DownIcon from '../../styles/icons/chevron-down.svg';
+
 const versions = [5, 4];
 const currentDocsVersion = 5;
 
@@ -32,19 +34,26 @@ export default function Sidebar({ className = '', pages, currentPage }) {
   return (
     <nav className={`sidebar ${className}`}>
       <div className="sidebar__inner">
-        <select
-          className="z-10 text-gray-600 relative text-14 px-5 py-5 appearance-none bg-white box-border border border-gray-200 border-solid flex-col flex w-full rounded-none dark:bg-gray-100"
-          value={version}
-          onChange={(e) => {
-            setVersion(+e.target.value);
-          }}
-        >
-          {versions.map((version) => (
-            <option key={version} value={version}>
-              Webpack {version}
-            </option>
-          ))}
-        </select>
+        <div className="relative z-0 bg-white dark:bg-gray-100 ">
+          <select
+            className="text-gray-600 text-14 px-5 py-5 appearance-none box-border border border-gray-200 border-solid flex-col flex w-full rounded-none bg-transparent bg-none"
+            value={version}
+            onChange={(e) => {
+              setVersion(+e.target.value);
+            }}
+          >
+            {versions.map((version) => (
+              <option key={version} value={version}>
+                Webpack {version}
+              </option>
+            ))}
+          </select>
+          <DownIcon
+            className="absolute right-5 top-5 fill-current text-gray-300 z-[-1]"
+            width={20}
+            height={20}
+          />
+        </div>
         <Print url={currentPage} />
 
         {pages.map((page, index) => {
