@@ -9,6 +9,7 @@ contributors:
   - hemal7735
   - snitin315
   - anshumanv
+  - jamesgeorge007
 translators:
   - L924553229
   - jacob-lcs
@@ -22,10 +23,7 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 
 ## 文件 {#files}
 
-- [`raw-loader`](/loaders/raw-loader) 用于加载文件的原始内容（utf-8）
 - [`val-loader`](/loaders/val-loader) 将代码作为模块执行，并将其导出为 JS 代码
-- [`url-loader`](/loaders/url-loader) 与 `file-loader` 类似，但是如果文件大小小于一个设置的值，则会返回 [data URL](https://tools.ietf.org/html/rfc2397)
-- [`file-loader`](/loaders/file-loader) 将文件保存至输出文件夹中并返回（相对）URL
 - [`ref-loader`](https://www.npmjs.com/package/ref-loader) 用于手动建立文件之间的依赖关系
 
 ## JSON {#json}
@@ -63,10 +61,9 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 - [`postcss-loader`](/loaders/postcss-loader) 使用 [PostCSS](http://postcss.org) 加载并转换 CSS/SSS 文件
 - [`stylus-loader`](/loaders/stylus-loader/) 加载并编译 Stylus 文件
 
-## Linting 和测试 {#linting--testing}
+## 测试 {#testing}
 
 - [`mocha-loader`](/loaders/mocha-loader) 使用 [mocha](https://mochajs.org/) (Browser/NodeJS) 进行测试
-- [`eslint-loader`](https://github.com/webpack-contrib/eslint-loader) 使用 [ESLint](https://eslint.org/) 对代码进行格式化
 
 ## 框架 {#frameworks}
 

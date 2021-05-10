@@ -45,7 +45,7 @@ webpack-cli 提供了许多命令来使 webpack 的工作变得简单。默认�
 | 命令                                  | 使用                                      | 描述                                                                 |
 | ------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------- |
 | `build`                               | `build\|bundle\|b [entries...] [options]` | 运行 webpack（默认命令，可以被省略）。                               |
-| `configtest`                          | `configtest\|t [config-path]`             | 校验 webpack 配置。                                                  |
+| [`configtest`](#configtest)           | `configtest\|t [config-path]`             | 校验 webpack 配置。                                                  |
 | [`help`](#help)                       | `help\|h [command] [option]`              | 展示所有命令和选项的帮助。                                           |
 | [`info`](#info)                       | `info\|i [options]`                       | 输出有关系统的信息。                                                 |
 | [`init`](#init)                       | `init\|c [scaffold...] [options]`         | 初始化一个新的 webpack 配置。                                        |
@@ -461,6 +461,24 @@ npx webpack --env production    # env.production = true
 
 T> 请查阅 [environment 变量指南](/guides/environment-variables/)了解更多信息及用法。
 
+除了上面所说的自定义 `env` 变量，在你的 webpack 配置中也使用了一些 `env` 内置变量：
+
+| 变量名 | 描述                                  |
+| -------------------- | -------------------------------------------- |
+| `WEBPACK_SERVE` | 如果使用了 `serve\|s`，则为 `true`。          |
+| `WEBPACK_BUILD` | 如果使用了 `build\|bundle\|b`，则为 `true`。  |
+| `WEBPACK_WATCH` | 如果使用了 `--watch\|watch\|w`，则为 `true`。 |
+
+请注意你不能在 bundle 代码中使用这些内置环境变量。
+
+```javascript
+module.exports = (env, argv) => {
+  return {
+    mode: env.WEBPACK_SERVE ? 'development' : 'production',
+  };
+};
+```
+
 ### node-env {#node-env}
 
 你可以使用 `--node-env` 选项来设置 `process.env.NODE_ENV`:
@@ -533,13 +551,14 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 | ----------------------------------- | --------------------------------------------------- |
 | `WEBPACK_CLI_SKIP_IMPORT_LOCAL`     | 设置为 `true` 时将不会使用 `webpack-cli` 本地实例。 |
 | `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG` | 设置为 `true` 则强制加载 ESM 配置。                 |
-| `WEBPACK_PACKAGE`                   | 在 CLI 中使用自定义 webpack 版本。                  |
+| [`WEBPACK_PACKAGE`](#webpack_package) | 在 CLI 中使用自定义 webpack 版本。                  |
+| `WEBPACK_CLI_HELP_WIDTH`              | 用于帮助输出的自定义宽度。                               |
 
 ```bash
 WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
 ```
 
-### WEBPACK_PACKAGE {#webpackpackage}
+### WEBPACK_PACKAGE {#webpack_package}
 
 在 CLI 中使用自定义 webpack 版本。在你的 `package.json` 中配置以下内容：
 
@@ -562,23 +581,3 @@ npx webpack
 ```bash
 WEBPACK_PACKAGE=webpack-5 npx webpack
 ```
-
-## ENV 环境变量 {#env-environment-variables}
-
-| 环境变量        | 描述                                          |
-| --------------- | --------------------------------------------- |
-| `WEBPACK_SERVE` | 如果使用了 `serve\|s`，则为 `true`。          |
-| `WEBPACK_BUILD` | 如果使用了 `build\|bundle\|b`，则为 `true`。  |
-| `WEBPACK_WATCH` | 如果使用了 `--watch\|watch\|w`，则为 `true`。 |
-
-你可以在你的 webpack 配置中使用上述环境变量：
-
-```javascript
-module.exports = (env, argv) => {
-  return {
-    mode: env.WEBPACK_SERVE ? 'development' : 'production',
-  };
-};
-```
-
-W> 禁止在 bundle 代码中访问上述变量。

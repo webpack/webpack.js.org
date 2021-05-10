@@ -17,6 +17,9 @@ const excludedLoaders = [
   'webpack-contrib/gzip-loader',
   'webpack-contrib/cache-loader',
   'webpack-contrib/json5-loader',
+  'webpack-contrib/raw-loader',
+  'webpack-contrib/url-loader',
+  'webpack-contrib/file-loader',
 ];
 const excludedPlugins = [
   'webpack-contrib/component-webpack-plugin',
