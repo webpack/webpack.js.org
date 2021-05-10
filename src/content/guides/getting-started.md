@@ -149,10 +149,10 @@ T> You may have noticed that `index.html` was created manually, even though it i
 To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally:
 
 ```bash
-npm install --save lodash
+npm install lodash
 ```
 
-T> When installing a package that will be bundled into your production bundle, you should use `npm install --save`. If you're installing a package for development purposes (e.g. a linter, testing libraries, etc.) then you should use `npm install --save-dev`. More information can be found in the [npm documentation](https://docs.npmjs.com/cli/install).
+T> If you're installing a package for development purposes (e.g. a linter, testing libraries, etc.) then you should use `npm install --save-dev`. More information can be found in the [npm documentation](https://docs.npmjs.com/cli/install).
 
 Now, let's import `lodash` in our script:
 
