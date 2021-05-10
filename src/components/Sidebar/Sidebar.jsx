@@ -8,6 +8,7 @@ import './Sidebar.scss';
 import { useEffect, useState } from 'react';
 
 import DownIcon from '../../styles/icons/chevron-down.svg';
+import LoadingIcon from '../../styles/icons/loading.svg';
 
 const versions = [5, 4];
 const currentDocsVersion = 5;
@@ -20,6 +21,7 @@ Sidebar.propTypes = {
 // Create and export the component
 export default function Sidebar({ className = '', pages, currentPage }) {
   const [version, setVersion] = useState(currentDocsVersion);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (version === currentDocsVersion) return;
     const href = window.location.href;
@@ -40,6 +42,9 @@ export default function Sidebar({ className = '', pages, currentPage }) {
             value={version}
             onChange={(e) => {
               setVersion(+e.target.value);
+              if (+e.target.value !== currentDocsVersion) {
+                setLoading(true);
+              }
             }}
           >
             {versions.map((version) => (
@@ -48,11 +53,19 @@ export default function Sidebar({ className = '', pages, currentPage }) {
               </option>
             ))}
           </select>
-          <DownIcon
-            className="absolute right-5 top-5 fill-current text-gray-300 z-[-1]"
-            width={20}
-            height={20}
-          />
+          {loading ? (
+            <LoadingIcon
+              className="absolute right-5 top-5 fill-current text-gray-300 z-[-1]"
+              width={20}
+              height={20}
+            />
+          ) : (
+            <DownIcon
+              className="absolute right-5 top-5 fill-current text-gray-300 z-[-1]"
+              width={20}
+              height={20}
+            />
+          )}
         </div>
         <Print url={currentPage} />
 
