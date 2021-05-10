@@ -9,11 +9,15 @@ contributors:
   - hemal7735
   - snitin315
   - anshumanv
+<<<<<<< HEAD
 translators:
   - L924553229
   - jacob-lcs
   - 92hackers
   - QC-L
+=======
+  - jamesgeorge007
+>>>>>>> 3b737e6f7bf6ceec6eb776dcb21ab97bb4f937e1
 ---
 
 webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你可以构建包括 JavaScript 在内的任何静态资源。并且可以使用 Node.js 轻松编写自己的 loader。
@@ -22,11 +26,16 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 
 ## 文件 {#files}
 
+<<<<<<< HEAD
 - [`raw-loader`](/loaders/raw-loader) 用于加载文件的原始内容（utf-8）
 - [`val-loader`](/loaders/val-loader) 将代码作为模块执行，并将其导出为 JS 代码
 - [`url-loader`](/loaders/url-loader) 与 `file-loader` 类似，但是如果文件大小小于一个设置的值，则会返回 [data URL](https://tools.ietf.org/html/rfc2397)
 - [`file-loader`](/loaders/file-loader) 将文件保存至输出文件夹中并返回（相对）URL
 - [`ref-loader`](https://www.npmjs.com/package/ref-loader) 用于手动建立文件之间的依赖关系
+=======
+- [`val-loader`](/loaders/val-loader) Executes code as module and consider exports as JS code
+- [`ref-loader`](https://www.npmjs.com/package/ref-loader) Create dependencies between any files manually
+>>>>>>> 3b737e6f7bf6ceec6eb776dcb21ab97bb4f937e1
 
 ## JSON {#json}
 
@@ -63,10 +72,16 @@ webpack 支持使用 [loader](/concepts/loaders) 对文件进行预处理。你�
 - [`postcss-loader`](/loaders/postcss-loader) 使用 [PostCSS](http://postcss.org) 加载并转换 CSS/SSS 文件
 - [`stylus-loader`](/loaders/stylus-loader/) 加载并编译 Stylus 文件
 
+<<<<<<< HEAD
 ## Linting 和测试 {#linting--testing}
 
 - [`mocha-loader`](/loaders/mocha-loader) 使用 [mocha](https://mochajs.org/) (Browser/NodeJS) 进行测试
 - [`eslint-loader`](https://github.com/webpack-contrib/eslint-loader) 使用 [ESLint](https://eslint.org/) 对代码进行格式化
+=======
+## Testing
+
+- [`mocha-loader`](/loaders/mocha-loader) Tests with [mocha](https://mochajs.org/) (Browser/NodeJS)
+>>>>>>> 3b737e6f7bf6ceec6eb776dcb21ab97bb4f937e1
 
 ## 框架 {#frameworks}
 

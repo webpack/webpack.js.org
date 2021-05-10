@@ -98,6 +98,8 @@ module.exports = {
   - It defaults to `false` in production mode and `true` in development mode.
 - <Badge text="5.35.0+" />
 
+**webpack.config.js**
+
 ```js
 module.exports = {
   cache: {
@@ -116,6 +118,8 @@ module.exports = {
 默认是 `webpack/lib` 来获取 webpack 的所有依赖项。
 
 T> 推荐在 webpack 配置中设置 `cache.buildDependencies.config: [__filename]` 来获取最新配置以及所有依赖项。
+
+**webpack.config.js**
 
 ```javascript
 module.exports = {
@@ -339,7 +343,29 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### cache.store {#cachestore}
+=======
+### cache.profile
+
+`boolean = false`
+
+Track and log detailed timing information for individual cache items of type `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    profile: true,
+  },
+};
+```
+
+### cache.store
+>>>>>>> 3b737e6f7bf6ceec6eb776dcb21ab97bb4f937e1
 
 `string = 'pack': 'pack'`
 
