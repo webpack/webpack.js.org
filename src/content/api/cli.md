@@ -42,11 +42,10 @@ translators:
 
 webpack-cli 提供了许多命令来使 webpack 的工作变得简单。默认情况下，webpack 提供了以下命令：
 
-<<<<<<< HEAD
 | 命令                                  | 使用                                      | 描述                                                                 |
 | ------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------- |
 | `build`                               | `build\|bundle\|b [entries...] [options]` | 运行 webpack（默认命令，可以被省略）。                               |
-| `configtest`                          | `configtest\|t [config-path]`             | 校验 webpack 配置。                                                  |
+| [`configtest`](#configtest)           | `configtest\|t [config-path]`             | 校验 webpack 配置。                                                  |
 | [`help`](#help)                       | `help\|h [command] [option]`              | 展示所有命令和选项的帮助。                                           |
 | [`info`](#info)                       | `info\|i [options]`                       | 输出有关系统的信息。                                                 |
 | [`init`](#init)                       | `init\|c [scaffold...] [options]`         | 初始化一个新的 webpack 配置。                                        |
@@ -55,20 +54,6 @@ webpack-cli 提供了许多命令来使 webpack 的工作变得简单。默认�
 | [`serve`](/configuration/dev-server/) | `serve\|s [options]`                      | 运行 `webpack-dev-server`.                                           |
 | [`version`](#version)                 | `version\|v [commands...]`                | 输出 `webpack`，`webpack-cli` 以及 `webpack-dev-server` 的版本信息。 |
 | `watch`                               | `watch\|w [entries...] [options]`         | 运行 webpack 并监听文件变化。                                        |
-=======
-| Command                               | Usage                                                 | Description                                                                     |
-| ------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `build`                               | `build\|bundle\|b [entries...] [options]`             | Run webpack (default command, can be omitted).                                  |
-| [`configtest`](#configtest)           | `configtest\|t [config-path]`                         | Validate a webpack configuration.                                               |
-| [`help`](#help)                       | `help\|h [command] [option]`                          | Display help for commands and options.                                          |
-| [`info`](#info)                       | `info\|i [options]`                                   | Outputs information about your system.                                          |
-| [`init`](#init)                       | `init\|create\|c\|new\|n [generation-path] [options]` | Initialize a new webpack project.                                               |
-| `loader`                              | `loader\|l [output-path] [options]`                   | Scaffold a loader.                                                              |
-| `plugin`                              | `plugin\|p [output-path] [options]`                   | Scaffold a plugin.                                                              |
-| [`serve`](/configuration/dev-server/) | `serve\|server\|s [options]`                          | Run the `webpack-dev-server`.                                                   |
-| [`version`](#version)                 | `version\|v [commands...]`                            | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
-| `watch`                               | `watch\|w [entries...] [options]`                     | Run webpack and watch for files changes.                                        |
->>>>>>> 3b737e6f7bf6ceec6eb776dcb21ab97bb4f937e1
 
 ### Init {#init}
 
@@ -476,18 +461,15 @@ npx webpack --env production    # env.production = true
 
 T> 请查阅 [environment 变量指南](/guides/environment-variables/)了解更多信息及用法。
 
-<<<<<<< HEAD
-### node-env {#node-env}
-=======
-In addition to the customized `env` showed above, there are some built-in ones under `env` to be used inside your webpack configuration:
+除了上面所说的自定义 `env` 变量，在你的 webpack 配置中也使用了一些 `env` 内置变量：
 
-| Environment Variable | Description                                  |
+| 变量名 | 描述                                  |
 | -------------------- | -------------------------------------------- |
-| `WEBPACK_SERVE`      | `true` if `serve\|s` is being used.          |
-| `WEBPACK_BUILD`      | `true` if `build\|bundle\|b` is being used.  |
-| `WEBPACK_WATCH`      | `true` if `--watch\|watch\|w` is being used. |
+| `WEBPACK_SERVE` | 如果使用了 `serve\|s`，则为 `true`。          |
+| `WEBPACK_BUILD` | 如果使用了 `build\|bundle\|b`，则为 `true`。  |
+| `WEBPACK_WATCH` | 如果使用了 `--watch\|watch\|w`，则为 `true`。 |
 
-Note that you can not access those built-in environment variables inside the bundled code.
+请注意你不能在 bundle 代码中使用这些内置环境变量。
 
 ```javascript
 module.exports = (env, argv) => {
@@ -497,8 +479,7 @@ module.exports = (env, argv) => {
 };
 ```
 
-### node-env
->>>>>>> 3b737e6f7bf6ceec6eb776dcb21ab97bb4f937e1
+### node-env {#node-env}
 
 你可以使用 `--node-env` 选项来设置 `process.env.NODE_ENV`:
 
@@ -566,26 +547,18 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 
 ## CLI 环境变量 {#cli-environment-variables}
 
-<<<<<<< HEAD
 | 环境变量                            | 描述                                                |
 | ----------------------------------- | --------------------------------------------------- |
 | `WEBPACK_CLI_SKIP_IMPORT_LOCAL`     | 设置为 `true` 时将不会使用 `webpack-cli` 本地实例。 |
 | `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG` | 设置为 `true` 则强制加载 ESM 配置。                 |
-| `WEBPACK_PACKAGE`                   | 在 CLI 中使用自定义 webpack 版本。                  |
-=======
-| Environment Variable                  | Description                                                         |
-| ------------------------------------- | ------------------------------------------------------------------- |
-| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`       | when `true` it will skip using the local instance of `webpack-cli`. |
-| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG`   | when `true` it will force load the ESM config.                      |
-| [`WEBPACK_PACKAGE`](#webpack_package) | Use a custom webpack version in CLI.                                |
-| `WEBPACK_CLI_HELP_WIDTH`              | Use a custom width for help output.                                 |
->>>>>>> 3b737e6f7bf6ceec6eb776dcb21ab97bb4f937e1
+| [`WEBPACK_PACKAGE`](#webpack_package) | 在 CLI 中使用自定义 webpack 版本。                  |
+| `WEBPACK_CLI_HELP_WIDTH`              | 用于帮助输出的自定义宽度。                               |
 
 ```bash
 WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
 ```
 
-### WEBPACK_PACKAGE {#webpackpackage}
+### WEBPACK_PACKAGE {#webpack_package}
 
 在 CLI 中使用自定义 webpack 版本。在你的 `package.json` 中配置以下内容：
 
@@ -608,26 +581,3 @@ npx webpack
 ```bash
 WEBPACK_PACKAGE=webpack-5 npx webpack
 ```
-<<<<<<< HEAD
-
-## ENV 环境变量 {#env-environment-variables}
-
-| 环境变量        | 描述                                          |
-| --------------- | --------------------------------------------- |
-| `WEBPACK_SERVE` | 如果使用了 `serve\|s`，则为 `true`。          |
-| `WEBPACK_BUILD` | 如果使用了 `build\|bundle\|b`，则为 `true`。  |
-| `WEBPACK_WATCH` | 如果使用了 `--watch\|watch\|w`，则为 `true`。 |
-
-你可以在你的 webpack 配置中使用上述环境变量：
-
-```javascript
-module.exports = (env, argv) => {
-  return {
-    mode: env.WEBPACK_SERVE ? 'development' : 'production',
-  };
-};
-```
-
-W> 禁止在 bundle 代码中访问上述变量。
-=======
->>>>>>> 3b737e6f7bf6ceec6eb776dcb21ab97bb4f937e1
