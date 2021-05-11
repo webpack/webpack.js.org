@@ -70,13 +70,13 @@ Location of where to generate the configuration. Defaults to `process.cwd()`.
 
 #### Options
 
-**`--template`**
+**`-t, --template`**
 
 `string = 'default'`
 
 Name of template to generate.
 
-**`--force`**
+**`-f, --force`**
 
 `boolean`
 
