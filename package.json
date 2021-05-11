@@ -21,7 +21,7 @@
     "url": "https://github.com/webpack/webpack.js.org/issues"
   },
   "engines": {
-    "node": ">=8.9.4"
+    "node": ">=10"
   },
   "scripts": {
     "clean-dist": "rimraf ./dist",
