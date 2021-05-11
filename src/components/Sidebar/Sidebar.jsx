@@ -12,7 +12,8 @@ import DownIcon from '../../styles/icons/chevron-down.svg';
 import LoadingIcon from '../../styles/icons/loading.svg';
 
 const versions = [5, 4];
-const currentDocsVersion = 5;
+const currentDocsVersion = 4;
+const latestDocVersion = 5;
 
 Sidebar.propTypes = {
   className: PropTypes.string,
@@ -28,7 +29,7 @@ export default function Sidebar({ className = '', pages, currentPage }) {
     if (version === currentDocsVersion) return;
     const href = window.location.href;
     const url = new URL(href);
-    url.hostname = `v${version}.webpack.js.org`;
+    url.hostname = version === latestDocVersion ? 'webpack.js.org' : `v${version}.webpack.js.org`;
 
     // redirect
     window.location.href = url.href;
