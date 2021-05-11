@@ -431,7 +431,7 @@ module: {
     // ...
 +     {
 +       test: /\.m?js$/,
-+       resourceQuery: { not: /raw/ },
++       resourceQuery: { not: [/raw/] },
 +       use: [ ... ]
 +     },
       {
