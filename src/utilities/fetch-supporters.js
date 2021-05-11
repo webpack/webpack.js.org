@@ -43,14 +43,16 @@ const graphqlQuery = `query account($limit: Int, $offset: Int) {
 
 const graphqlPageSize = 1000;
 
-const nodeToSupporter = (node) => ({
-  name: node.fromAccount && node.fromAccount.name,
-  slug: node.fromAccount.slug,
-  website: node.fromAccount.website,
-  avatar: node.fromAccount.imageUrl,
-  firstDonation: node.createdAt,
-  totalDonations: node.totalDonations.value * 100,
-});
+const nodeToSupporter = (node) => {
+  return {
+    name: node.fromAccount && node.fromAccount.name,
+    slug: node.fromAccount && node.fromAccount.slug,
+    website: node.fromAccount && node.fromAccount.website,
+    avatar: node.fromAccount && node.fromAccount.imageUrl,
+    firstDonation: node.createdAt,
+    totalDonations: node.totalDonations.value * 100,
+  };
+};
 
 const getAllOrders = async () => {
   const requestOptions = {
