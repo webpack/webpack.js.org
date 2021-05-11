@@ -5,6 +5,7 @@ import { BrowserRouter as AnalyticsRouter } from 'react-g-analytics';
 
 import App from './App.jsx';
 
+import './styles/tailwind.css';
 // Import helpers
 import isClient from './utilities/is-client';
 import { HelmetProvider } from 'react-helmet-async';
