@@ -97,7 +97,8 @@ module.exports = (env = {}) => ({
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader'
+          'css-loader',
+          'postcss-loader'
         ]
       },
       {
@@ -107,16 +108,13 @@ module.exports = (env = {}) => ({
           'css-loader',
           {
             loader: 'postcss-loader',
-            options: {
-              plugins: () => [
-                require('autoprefixer')
-              ],
-            }
           },
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [ path.join('./src/styles/partials') ]
+              sassOptions: {
+                includePaths: [ path.join('./src/styles/partials') ]
+              }
             }
           }
         ]

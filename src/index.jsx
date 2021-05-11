@@ -7,6 +7,7 @@ import { BrowserRouter as AnalyticsRouter } from 'react-g-analytics';
 // Import Components
 import Site from './components/Site/Site';
 
+import './styles/tailwind.css';
 // Import helpers
 import isClient from './utilities/is-client';
 
