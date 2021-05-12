@@ -82,6 +82,10 @@ module.exports = (env) =>
             'https://webpack.js.org/guides/asset-modules/',
           '/plugins/eslint-webpack-plugin':
             'https://webpack.js.org/plugins/eslint-webpack-plugin/',
+          '/configuration/other-options/#ignorewarnings':
+            'https://webpack.js.org/configuration/other-options/#ignorewarnings',
+          '/configuration/resolve/#resolvebydependency':
+            'https://webpack.js.org/configuration/resolve/#resolvebydependency',
         },
       }),
       new CopyWebpackPlugin([
