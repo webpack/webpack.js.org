@@ -86,6 +86,8 @@ module.exports = (env) =>
             'https://webpack.js.org/configuration/other-options/#ignorewarnings',
           '/configuration/resolve/#resolvebydependency':
             'https://webpack.js.org/configuration/resolve/#resolvebydependency',
+          '/plugins/css-minimizer-webpack-plugin':
+            'https://webpack.js.org/plugins/css-minimizer-webpack-plugin',
         },
       }),
       new CopyWebpackPlugin([
