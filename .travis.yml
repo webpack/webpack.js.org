@@ -1,10 +1,6 @@
-sudo: false
 language: node_js
 node_js:
   - "14"
-
-matrix:
-  fast_finish: true
 
 cache:
   yarn: true
@@ -22,7 +18,5 @@ jobs:
   include:
     - stage: Build
       name: Lint and Build
-      before_install: npm install --global yarn
-      install: yarn
       script:
         - yarn lint:js || travis_terminate 1
