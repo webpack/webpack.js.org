@@ -20,3 +20,7 @@ jobs:
       name: Lint and Build
       script:
         - yarn lint:js || travis_terminate 1
+        - yarn lint:markdown || travis_terminate 1
+        - yarn lint:social || travis_terminate 1
+        - yarn build || travis_terminate 1
+        - yarn lint:links || travis_terminate 1
