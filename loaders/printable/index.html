@@ -5325,18 +5325,16 @@ worker<span class="token punctuation">.</span><span class="token function">addEv
       <span class="token comment">// Place this *before* the `ts-loader`.</span>
       <span class="token punctuation">{</span>
         test<span class="token operator">:</span> <span class="token regex">/\.worker\.ts$/</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'worker-loader'</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"worker-loader"</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">{</span>
         test<span class="token operator">:</span> <span class="token regex">/\.ts$/</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'ts-loader'</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"ts-loader"</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   resolve<span class="token operator">:</span> <span class="token punctuation">{</span>
-    extensions<span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token string">'.ts'</span><span class="token punctuation">,</span> <span class="token string">'.js'</span><span class="token punctuation">,</span>
-    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    extensions<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">".ts"</span><span class="token punctuation">,</span> <span class="token string">".js"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h3 id="cross-origin-policy">Cross-Origin Policy<a href="#cross-origin-policy" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API"><code>WebWorkers</code></a> are restricted by a <a href="https://en.wikipedia.org/wiki/Same-origin_policy">same-origin policy</a>, so if your <code>webpack</code> assets are not being served from the same origin as your application, their download may be blocked by your browser. This scenario can commonly occur if you are hosting your assets under a CDN domain. Even downloads from the <code>webpack-dev-server</code> could be blocked.</p> <p>There are two workarounds:</p> <p>Firstly, you can inline the worker as a blob instead of downloading it as an external script via the <a href="#inline"><code>inline</code></a> parameter</p> <p><strong>App.js</strong></p> <pre><code class="hljs language-js"><span class="token keyword">import</span> Worker <span class="token keyword">from</span> <span class="token string">"./file.worker.js"</span><span class="token punctuation">;</span></code></pre> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
