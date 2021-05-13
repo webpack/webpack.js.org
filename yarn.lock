@@ -4108,10 +4108,10 @@ css-loader@^5.2.4:
     schema-utils "^3.0.0"
     semver "^7.3.5"
 
-css-minimizer-webpack-plugin@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/css-minimizer-webpack-plugin/-/css-minimizer-webpack-plugin-2.0.0.tgz#3c42f6624ed4cf4780dd963e23ee649e5a25c1a8"
-  integrity sha512-cG/uc94727tx5pBNtb1Sd7gvUPzwmcQi1lkpfqTpdkuNq75hJCw7bIVsCNijLm4dhDcr1atvuysl2rZqOG8Txw==
+css-minimizer-webpack-plugin@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/css-minimizer-webpack-plugin/-/css-minimizer-webpack-plugin-3.0.0.tgz#5b1edbffe1a3e6450d8cb53fb4f4c5013b7af313"
+  integrity sha512-yIrqG0pPphR1RoNx2wDxYmxRf2ubRChLDXxv7ccipEm5bRKsZRYp8n+2peeXehtTF5s3yNxlqsdz3WQOsAgUkw==
   dependencies:
     cssnano "^5.0.0"
     jest-worker "^26.3.0"
@@ -9063,7 +9063,7 @@ nano-css@^5.3.1:
     stacktrace-js "^2.0.2"
     stylis "^4.0.6"
 
-nanoid@^3.1.22, nanoid@^3.1.23:
+nanoid@^3.1.23:
   version "3.1.23"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.23.tgz#f744086ce7c2bc47ee0a8472574d5c78e4183a81"
   integrity sha512-FiB0kzdP0FFVGDKlRLEQ1BgDzU87dy5NnzjeW9YZNt+/c3+q82EQDUwniSAUxp/F0gFNI1ZhKU1FqYsMuqZVnw==
@@ -10491,16 +10491,7 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.27:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@^8.1.6, postcss@^8.2.1:
-  version "8.2.14"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.2.14.tgz#dcf313eb8247b3ce8078d048c0e8262ca565ad2b"
-  integrity sha512-+jD0ZijcvyCqPQo/m/CW0UcARpdFylq04of+Q7RKX6f/Tu+dvpUI/9Sp81+i6/vJThnOBX09Quw0ZLOVwpzX3w==
-  dependencies:
-    colorette "^1.2.2"
-    nanoid "^3.1.22"
-    source-map "^0.6.1"
-
-postcss@^8.2.10, postcss@^8.2.15, postcss@^8.2.9:
+postcss@^8.1.6, postcss@^8.2.1, postcss@^8.2.10, postcss@^8.2.15, postcss@^8.2.9:
   version "8.2.15"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.2.15.tgz#9e66ccf07292817d226fc315cbbf9bc148fbca65"
   integrity sha512-2zO3b26eJD/8rb106Qu2o7Qgg52ND5HPjcyQiK2B98O388h43A448LCslC0dI2P97wCAQRJsFvwTRcXxTKds+Q==
