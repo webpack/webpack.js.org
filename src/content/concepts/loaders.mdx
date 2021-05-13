@@ -46,11 +46,10 @@ module.exports = {
 
 ## Using Loaders
 
-There are three ways to use loaders in your application:
+There are two ways to use loaders in your application:
 
 - [Configuration](#configuration) (recommended): Specify them in your **webpack.config.js** file.
 - [Inline](#inline): Specify them explicitly in each `import` statement.
-- [CLI](#cli): Specify them within a shell command.
 
 ### Configuration
 
@@ -115,16 +114,6 @@ It's possible to override any loaders, preLoaders and postLoaders from the [conf
 Options can be passed with a query parameter, e.g. `?key=value&foo=bar`, or a JSON object, e.g. `?{"key":"value","foo":"bar"}`.
 
 T> Use `module.rules` whenever possible, as this will reduce boilerplate in your source code and allow you to debug or locate a loader faster if something goes south.
-
-### CLI
-
-You can also use loaders through the CLI:
-
-```bash
-webpack --module-bind pug-loader --module-bind 'css=style-loader!css-loader'
-```
-
-This uses the `pug-loader` for `.jade` files, and the [`style-loader`](/loaders/style-loader) and [`css-loader`](/loaders/css-loader) for `.css` files.
 
 ## Loader Features
 
