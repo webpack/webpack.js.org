@@ -150,6 +150,7 @@ module.exports = {
 运行时默认的并发数：`os.cpus().length - 1`。
 
 > ℹ️ 并行化可以显著提升构建速度，所以**强烈建议**使用。
+> 如果启用了并行化，`minimizerOptions` 中的包必须通过字符串引入（`packageName` 或者 `require.resolve(packageName)`）。在 [`minimizerOptions`](#minimizeroptions) 获取更多详细信息。
 
 #### `Boolean` {#boolean}
 
@@ -300,6 +301,23 @@ module.exports = {
 
 `miniify` 数组中的函数索引对应于 `minimizerOptions` 数组中具有相同索引的 options 对象。
 如果你使用了类似于 `minimizerOptions` 的对象，那么所有函数都会接受它。
+
+> 如果启用了并行化，`minimizerOptions` 中的包必须通过字符串引入（`packageName` 或者 `require.resolve(packageName)`）。在这种情况下，我们不应该使用 `require`/`import`。
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: require.resolve('cssnano-preset-simple'),
+        },
+      }),
+    ],
+  },
+};
+```
 
 #### `processorOptions` {#processoroptions}
 
