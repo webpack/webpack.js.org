@@ -499,7 +499,7 @@ worker.onmessage = (event) => {};
 worker.addEventListener("message", (event) => {});
 ```
 
-#### 不是用 `worker-loader!` 加载 {#loadingwidthoutworkloader}
+#### 不使用 `worker-loader!` 加载 {#loadingwidthoutworkloader}
 
 另外，你可以通过使用以下符号忽略传递给 `import` 语句的 `worker-loader!` 前缀。
 这对于使用非 webpack 运行时环境执行代码很有用
