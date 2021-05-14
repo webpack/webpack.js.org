@@ -199,7 +199,13 @@ module.exports = {
 需要注意的是，当使用 `sass`（`Dart Sass`）时，由于异步回调的开销，通常情况下**同步编译的速度是异步编译速度的两倍**。
 为了避免这种开销，你可以使用 [fibers](https://www.npmjs.com/package/fibers) 包从同步代码中调用异步导入程序。
 
+<<<<<<< HEAD
 如果可能，我们会自动注入 [`fibers`](https://github.com/laverdet/node-fibers) 软件包（设置 `sassOptions.fiber`）（当然需要你安装 [`fibers`](https://github.com/laverdet/node-fibers) 包）。
+=======
+We automatically inject the [`fibers`](https://github.com/laverdet/node-fibers) package (setup `sassOptions.fiber`) for `Node.js` less v16.0.0 if is possible (i.e. you need install the [`fibers`](https://github.com/laverdet/node-fibers) package).
+
+> Fibers is not compatible with `Node.js` v16.0.0 or later ([see introduction to readme](https://github.com/laverdet/node-fibers)).
+>>>>>>> 4e66ede0df1988292dbae81d143b7ddfad6ba121
 
 **package.json**
 

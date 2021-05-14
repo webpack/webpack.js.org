@@ -457,7 +457,13 @@ module.exports = {
 
 要与 TypeScript 集成，你需要为 worker 导出一个自定义模块。
 
+<<<<<<< HEAD
 __typings/worker-loader.d.ts__
+=======
+#### Loading with `worker-loader!`
+
+**typings/worker-loader.d.ts**
+>>>>>>> 4e66ede0df1988292dbae81d143b7ddfad6ba121
 
 ```typescript
 declare module "worker-loader!*" {
@@ -497,7 +503,80 @@ worker.onmessage = (event) => {};
 worker.addEventListener("message", (event) => {});
 ```
 
+<<<<<<< HEAD
 ### 跨域策略 {#cross-origin-policy}
+=======
+#### Loading without `worker-loader!`
+
+Alternatively, you can ommit the `worker-loader!` prefix passed to `import` statement by using the following notation.
+This is useful for executing the code using a non-WebPack runtime environment
+(such as Jest with [`workerloader-jest-transformer`](https://github.com/astagi/workerloader-jest-transformer)).
+
+**typings/worker-loader.d.ts**
+
+```typescript
+declare module "*.worker.ts" {
+  // You need to change `Worker`, if you specified a different value for the `workerType` option
+  class WebpackWorker extends Worker {
+    constructor();
+  }
+
+  // Uncomment this if you set the `esModule` option to `false`
+  // export = WebpackWorker;
+  export default WebpackWorker;
+}
+```
+
+**my.worker.ts**
+
+```typescript
+const ctx: Worker = self as any;
+
+// Post data to parent thread
+ctx.postMessage({ foo: "foo" });
+
+// Respond to message from parent thread
+ctx.addEventListener("message", (event) => console.log(event));
+```
+
+**index.ts**
+
+```typescript
+import MyWorker from "./my.worker.ts";
+
+const worker = new MyWorker();
+
+worker.postMessage({ a: 1 });
+worker.onmessage = (event) => {};
+
+worker.addEventListener("message", (event) => {});
+```
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      // Place this *before* the `ts-loader`.
+      {
+        test: /\.worker\.ts$/,
+        loader: "worker-loader",
+      },
+      {
+        test: /\.ts$/,
+        loader: "ts-loader",
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+};
+```
+
+### Cross-Origin Policy
+>>>>>>> 4e66ede0df1988292dbae81d143b7ddfad6ba121
 
 [`WebWorkers`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) 受到 [同源策略](https://en.wikipedia.org/wiki/Same-origin_policy) 的限制， 如果 `webpack` 资源的访问服务和应用程序不是同源，浏览器就会拦截其下载。
 如果在 CDN 域下托管资源， 通常就会出现这种情况。 

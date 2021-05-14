@@ -149,7 +149,12 @@ module.exports = {
 使用多进程并发执行，提升构建速度。
 运行时默认的并发数：`os.cpus().length - 1`。
 
+<<<<<<< HEAD
 > ℹ️ 并行化可以显著提升构建速度，所以**强烈建议**使用。
+=======
+> ℹ️ Parallelization can speedup your build significantly and is therefore **highly recommended**.
+> If a parallelization is enabled, the packages in `minimizerOptions` must be required via strings (`packageName` or `require.resolve(packageName)`). Read more in [`minimizerOptions`](#minimizeroptions)
+>>>>>>> 4e66ede0df1988292dbae81d143b7ddfad6ba121
 
 #### `Boolean` {#boolean}
 
@@ -301,7 +306,28 @@ module.exports = {
 `miniify` 数组中的函数索引对应于 `minimizerOptions` 数组中具有相同索引的 options 对象。
 如果你使用了类似于 `minimizerOptions` 的对象，那么所有函数都会接受它。
 
+<<<<<<< HEAD
 #### `processorOptions` {#processoroptions}
+=======
+> If a parallelization is enabled, the packages in `minimizerOptions` must be required via strings (`packageName` or `require.resolve(packageName)`). In this case, we shouldn't use `require`/`import`.
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: require.resolve('cssnano-preset-simple'),
+        },
+      }),
+    ],
+  },
+};
+```
+
+#### `processorOptions`
+>>>>>>> 4e66ede0df1988292dbae81d143b7ddfad6ba121
 
 类型：`Object`
 默认值：`{ to: assetName, from: assetName }`
