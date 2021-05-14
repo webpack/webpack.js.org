@@ -1,10 +1,6 @@
-sudo: false
 language: node_js
 node_js:
-  - "8"
-
-matrix:
-  fast_finish: true
+  - "14"
 
 cache:
   yarn: true
@@ -15,7 +11,6 @@ cache:
 
 stages:
   - Build
-  - Post-build
 
 jobs:
   fast_finish: true
@@ -23,27 +18,9 @@ jobs:
   include:
     - stage: Build
       name: Lint and Build
-      before_install: npm install --global yarn
-      install: yarn
       script:
         - yarn lint:js || travis_terminate 1
         - yarn lint:markdown || travis_terminate 1
         - yarn lint:social || travis_terminate 1
         - yarn build || travis_terminate 1
         - yarn lint:links || travis_terminate 1
-
-    - stage: Build
-      name: Proselint
-      language: python
-      python: 3.6
-      cache:
-        pip: true
-        directories:
-          - $HOME/.cache
-      install: pip install -r requirements.txt
-      script: cp .proselintrc ~/ && proselint src/content
-
-    - stage: Post-build
-      name: Deploy
-      if: branch = master AND type IN (push, cron)
-      script: bash ./src/scripts/deploy.sh

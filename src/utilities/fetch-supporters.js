@@ -9,7 +9,13 @@ const asyncWriteFile = promisify(fs.writeFile);
 
 const REQUIRED_KEYS = ['totalDonations', 'slug', 'name'];
 const filename = '_supporters.json';
-const absoluteFilename = path.resolve(__dirname, '..', 'components', 'Support', filename);
+const absoluteFilename = path.resolve(
+  __dirname,
+  '..',
+  'components',
+  'Support',
+  filename
+);
 
 const graphqlEndpoint = 'https://api.opencollective.com/graphql/v2';
 
@@ -37,21 +43,26 @@ const graphqlQuery = `query account($limit: Int, $offset: Int) {
 
 const graphqlPageSize = 1000;
 
-const nodeToSupporter = node => ({
-  name: node.fromAccount.name,
-  slug: node.fromAccount.slug,
-  website: node.fromAccount.website,
-  avatar: node.fromAccount.imageUrl,
-  firstDonation: node.createdAt,
-  totalDonations: node.totalDonations.value * 100
-});
+const nodeToSupporter = (node) => {
+  return {
+    name: node.fromAccount && node.fromAccount.name,
+    slug: node.fromAccount && node.fromAccount.slug,
+    website: node.fromAccount && node.fromAccount.website,
+    avatar: node.fromAccount && node.fromAccount.imageUrl,
+    firstDonation: node.createdAt,
+    totalDonations: node.totalDonations.value * 100,
+  };
+};
 
 const getAllOrders = async () => {
   const requestOptions = {
     method: 'POST',
     uri: graphqlEndpoint,
-    body: { query: graphqlQuery, variables: { limit: graphqlPageSize, offset: 0 } },
-    json: true
+    body: {
+      query: graphqlQuery,
+      variables: { limit: graphqlPageSize, offset: 0 },
+    },
+    json: true,
   };
 
   let allOrders = [];
@@ -70,8 +81,10 @@ const getAllOrders = async () => {
 };
 
 getAllOrders()
-  .then(orders => {
-    let supporters = orders.map(nodeToSupporter).sort((a, b) => b.totalDonations - a.totalDonations);
+  .then((orders) => {
+    let supporters = orders
+      .map(nodeToSupporter)
+      .sort((a, b) => b.totalDonations - a.totalDonations);
 
     // Deduplicating supporters with multiple orders
     supporters = uniqBy(supporters, 'slug');
@@ -83,19 +96,24 @@ getAllOrders()
     for (const item of supporters) {
       for (const key of REQUIRED_KEYS) {
         if (!item || typeof item !== 'object') {
-          throw new Error(`Supporters: ${JSON.stringify(item)} is not an object.`);
+          throw new Error(
+            `Supporters: ${JSON.stringify(item)} is not an object.`
+          );
         }
         if (!(key in item)) {
-          throw new Error(`Supporters: ${JSON.stringify(item)} doesn't include ${key}.`);
+          throw new Error(
+            `Supporters: ${JSON.stringify(item)} doesn't include ${key}.`
+          );
         }
       }
     }
 
     // Write the file
-    return asyncWriteFile(absoluteFilename, JSON.stringify(supporters, null, 2)).then(() =>
-      console.log(`Fetched 1 file: ${filename}`)
-    );
+    return asyncWriteFile(
+      absoluteFilename,
+      JSON.stringify(supporters, null, 2)
+    ).then(() => console.log(`Fetched 1 file: ${filename}`));
   })
-  .catch(error => {
+  .catch((error) => {
     console.error('utilities/fetch-supporters:', error);
   });
