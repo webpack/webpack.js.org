@@ -457,13 +457,9 @@ module.exports = {
 
 要与 TypeScript 集成，你需要为 worker 导出一个自定义模块。
 
-<<<<<<< HEAD
-__typings/worker-loader.d.ts__
-=======
-#### Loading with `worker-loader!`
+#### 使用 `worker-loader!` 加载 {#loadingwidthworkloader}
 
 **typings/worker-loader.d.ts**
->>>>>>> 4e66ede0df1988292dbae81d143b7ddfad6ba121
 
 ```typescript
 declare module "worker-loader!*" {
@@ -503,14 +499,11 @@ worker.onmessage = (event) => {};
 worker.addEventListener("message", (event) => {});
 ```
 
-<<<<<<< HEAD
-### 跨域策略 {#cross-origin-policy}
-=======
-#### Loading without `worker-loader!`
+#### 不是用 `worker-loader!` 加载 {#loadingwidthoutworkloader}
 
-Alternatively, you can ommit the `worker-loader!` prefix passed to `import` statement by using the following notation.
-This is useful for executing the code using a non-WebPack runtime environment
-(such as Jest with [`workerloader-jest-transformer`](https://github.com/astagi/workerloader-jest-transformer)).
+另外，你可以通过使用以下符号忽略传递给 `import` 语句的 `worker-loader!` 前缀。
+这对于使用非 webpack 运行时环境执行代码很有用
+(例如 Jest 使用 [`workerloader-jest-transformer`](https://github.com/astagi/workerloader-jest-transformer)).
 
 **typings/worker-loader.d.ts**
 
@@ -575,11 +568,10 @@ module.exports = {
 };
 ```
 
-### Cross-Origin Policy
->>>>>>> 4e66ede0df1988292dbae81d143b7ddfad6ba121
+### 跨域策略 {#cross-origin-policy}
 
 [`WebWorkers`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) 受到 [同源策略](https://en.wikipedia.org/wiki/Same-origin_policy) 的限制， 如果 `webpack` 资源的访问服务和应用程序不是同源，浏览器就会拦截其下载。
-如果在 CDN 域下托管资源， 通常就会出现这种情况。 
+如果在 CDN 域下托管资源， 通常就会出现这种情况。
 甚至从 `webpack-dev-server` 下载时都会被拦截。
 
 有两种解决方法：
