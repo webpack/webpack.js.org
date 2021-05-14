@@ -454,6 +454,8 @@ module.exports = {
 
 To integrate with TypeScript, you will need to define a custom module for the exports of your worker.
 
+#### Loading with `worker-loader!`
+
 **typings/worker-loader.d.ts**
 
 ```typescript
@@ -492,6 +494,75 @@ worker.postMessage({ a: 1 });
 worker.onmessage = (event) => {};
 
 worker.addEventListener("message", (event) => {});
+```
+
+#### Loading without `worker-loader!`
+
+Alternatively, you can ommit the `worker-loader!` prefix passed to `import` statement by using the following notation.
+This is useful for executing the code using a non-WebPack runtime environment
+(such as Jest with [`workerloader-jest-transformer`](https://github.com/astagi/workerloader-jest-transformer)).
+
+**typings/worker-loader.d.ts**
+
+```typescript
+declare module "*.worker.ts" {
+  // You need to change `Worker`, if you specified a different value for the `workerType` option
+  class WebpackWorker extends Worker {
+    constructor();
+  }
+
+  // Uncomment this if you set the `esModule` option to `false`
+  // export = WebpackWorker;
+  export default WebpackWorker;
+}
+```
+
+**my.worker.ts**
+
+```typescript
+const ctx: Worker = self as any;
+
+// Post data to parent thread
+ctx.postMessage({ foo: "foo" });
+
+// Respond to message from parent thread
+ctx.addEventListener("message", (event) => console.log(event));
+```
+
+**index.ts**
+
+```typescript
+import MyWorker from "./my.worker.ts";
+
+const worker = new MyWorker();
+
+worker.postMessage({ a: 1 });
+worker.onmessage = (event) => {};
+
+worker.addEventListener("message", (event) => {});
+```
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      // Place this *before* the `ts-loader`.
+      {
+        test: /\.worker\.ts$/,
+        loader: "worker-loader",
+      },
+      {
+        test: /\.ts$/,
+        loader: "ts-loader",
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+};
 ```
 
 ### Cross-Origin Policy

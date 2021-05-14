@@ -148,6 +148,7 @@ Use multi-process parallel running to improve the build speed.
 Default number of concurrent runs: `os.cpus().length - 1`.
 
 > ℹ️ Parallelization can speedup your build significantly and is therefore **highly recommended**.
+> If a parallelization is enabled, the packages in `minimizerOptions` must be required via strings (`packageName` or `require.resolve(packageName)`). Read more in [`minimizerOptions`](#minimizeroptions)
 
 #### `Boolean`
 
@@ -298,6 +299,23 @@ module.exports = {
 
 The function index in the `minify` array corresponds to the options object with the same index in the `minimizerOptions` array.
 If you use `minimizerOptions` like object, all `minify` function accept it.
+
+> If a parallelization is enabled, the packages in `minimizerOptions` must be required via strings (`packageName` or `require.resolve(packageName)`). In this case, we shouldn't use `require`/`import`.
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: require.resolve('cssnano-preset-simple'),
+        },
+      }),
+    ],
+  },
+};
+```
 
 #### `processorOptions`
 
