@@ -33,20 +33,6 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  // - [x] clean up workbox precached data
-  // TODO to be removed after maybe two months?
-  // i.e., 2021-03-23
-  event.waitUntil(
-    caches.delete(cacheNames.precache).then((result) => {
-      if (result) {
-        console.log('Precached data removed');
-      } else {
-        console.log('No precache found');
-      }
-    })
-  );
-});
-self.addEventListener('activate', (event) => {
   // - [x] clean up outdated runtime cache
   event.waitUntil(
     caches.open(cacheName).then((cache) => {
@@ -97,14 +83,5 @@ setCatchHandler(({ event }) => {
       return caches.match('/app-shell/index.html');
     default:
       return Response.error();
-  }
-});
-
-// TODO remove this in the future
-// as we are using NetworkFirst strategy now
-// TODO remove NotifyBox as well
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
   }
 });
