@@ -11,17 +11,6 @@
   }
 }
 
-// when notification is shown
-.notification-bar
-  + header
-  .navigation-search
-  .algolia-autocomplete
-  .ds-dropdown-menu {
-  @media (max-width: 600px) {
-    top: 110px !important;
-  }
-}
-
 .algolia-autocomplete {
   display: flex !important;
   position: relative;

@@ -230,7 +230,6 @@ function Site(props) {
           <meta name="msapplication-TileColor" content="#465e69" />
         </Helmet>
         <div className="site__header">
-          <NotificationBar />
           <Navigation
             pathname={location.pathname}
             toggleSidebar={_toggleSidebar}
@@ -318,6 +317,7 @@ function Site(props) {
           />
         </Switch>
         <Footer />
+        <NotificationBar />
       </div>
     </MDXProvider>
   );

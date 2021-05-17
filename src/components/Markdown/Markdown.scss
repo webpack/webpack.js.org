@@ -432,25 +432,3 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     margin-top: 1.5em;
   }
 }
-
-.notification-bar-visible .markdown {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    &:before {
-      content: '';
-      display: block;
-      visibility: hidden;
-      pointer-events: none;
-      height: $topHeightMobileWithBanner;
-      margin-top: -#{$topHeightMobileWithBanner};
-      @include break {
-        height: $topHeightDesktopWithBanner;
-        margin-top: -#{$topHeightDesktopWithBanner};
-      }
-    }
-  }
-}

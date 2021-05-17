@@ -3,13 +3,19 @@ module.exports = {
   purge: ['./src/components/**/*.{js,jsx}'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
+    screen: {
+      md: '768px',
+    },
     extend: {
       fontSize: {
         14: '14px',
       },
     },
     spacing: {
+      0: '0px',
       5: '5px',
+      10: '10px',
+      20: '20px',
     },
     colors: {
       white: '#fff',
