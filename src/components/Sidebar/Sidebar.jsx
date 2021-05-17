@@ -7,21 +7,8 @@ import PropTypes from 'prop-types';
 import './Sidebar.scss';
 import { useEffect, useState } from 'react';
 
-<<<<<<< HEAD
-const docs = [
-  {
-    version: 5,
-    url: 'https://webpack.docschina.org',
-  },
-  {
-    version: 4,
-    url: 'https://v4.webpack.docschina.org',
-  }
-];
-=======
 import DownIcon from '../../styles/icons/chevron-down.svg';
 import LoadingIcon from '../../styles/icons/loading.svg';
->>>>>>> 850a32215a80e804d76bbeb9921731c50434698f
 
 const versions = [5, 4];
 const currentDocsVersion = 5;
