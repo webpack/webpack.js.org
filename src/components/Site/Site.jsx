@@ -3,7 +3,6 @@ import { Fragment, useEffect, useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { MDXProvider } from '@mdx-js/react';
-import { useTransition, animated, config } from 'react-spring';
 
 // Import Utilities
 import {
@@ -44,7 +43,6 @@ import './Site.scss';
 
 // Load Content Tree
 import Content from '../../_content.json';
-import NotifyBox from '../NotifyBox/NotifyBox';
 import { useLocalStorage } from 'react-use';
 
 const mdxComponents = {
@@ -60,9 +58,6 @@ Site.propTypes = {
 };
 function Site(props) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [list, setList] = useState([]);
-  const [wb, setWb] = useState(undefined);
-  const [loading, setLoading] = useState(false);
   const [theme, setTheme] = useLocalStorage(
     THEME_LOCAL_STORAGE_KEY,
     THEME.LIGHT
@@ -80,17 +75,6 @@ function Site(props) {
     setTheme(theme);
   };
 
-  const listTransitions = useTransition(list, {
-    config: config.gentle,
-    from: { opacity: 0, transform: 'translate3d(50%, 0px, 0px)' },
-    enter: { opacity: 1, transform: 'translate3d(0%, 0px, 0px)' },
-    keys: list.map((item, index) => index),
-  });
-  const skip = () => {
-    if (!wb) return;
-    setLoading(true);
-    wb.messageSkipWaiting();
-  };
   /**
    * Toggle the mobile sidebar
    *
@@ -148,7 +132,6 @@ function Site(props) {
           // dynamic load sw
           import('workbox-window/Workbox.mjs').then(({ Workbox }) => {
             const wb = new Workbox('/sw.js');
-            setWb(wb);
 
             // listen to `waiting` event
             wb.addEventListener('waiting', () => {
@@ -157,7 +140,6 @@ function Site(props) {
                 // eslint-disable-next-line
                 "A new service worker has installed, but it can't activate until all tabs running the current version have been unloaded"
               );
-              setList([true]);
             });
 
             // register the service worker
@@ -336,11 +318,6 @@ function Site(props) {
           />
         </Switch>
         <Footer />
-        {listTransitions((styles) => (
-          <animated.div style={styles} className="notifyBox">
-            <NotifyBox skip={skip} loading={loading} />
-          </animated.div>
-        ))}
       </div>
     </MDXProvider>
   );
