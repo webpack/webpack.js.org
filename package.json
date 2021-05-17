@@ -115,7 +115,7 @@
     "postcss": "^8.2.15",
     "postcss-loader": "^5.2.0",
     "prettier": "^2.3.0",
-    "react-refresh": "^0.9.0",
+    "react-refresh": "^0.10.0",
     "redirect-webpack-plugin": "^1.0.0",
     "remark": "^13.0.0",
     "remark-autolink-headings": "^6.0.1",
