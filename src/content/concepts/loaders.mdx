@@ -48,11 +48,18 @@ module.exports = {
 
 ## 使用 loader {#using-loaders}
 
+<<<<<<< HEAD
 在你的应用程序中，有三种使用 loader 的方式：
 
 - [配置方式](#configuration)（推荐）：在 **webpack.config.js** 文件中指定 loader。
 - [内联方式](#inline)：在每个 `import` 语句中显式指定 loader。
 - [CLI 方式](#cli)：在 shell 命令中指定它们。
+=======
+There are two ways to use loaders in your application:
+
+- [Configuration](#configuration) (recommended): Specify them in your **webpack.config.js** file.
+- [Inline](#inline): Specify them explicitly in each `import` statement.
+>>>>>>> 850a32215a80e804d76bbeb9921731c50434698f
 
 ### 配置方式 {#configuration}
 
@@ -118,6 +125,7 @@ import Styles from 'style-loader!css-loader?modules!./styles.css';
 
 T> 尽可能使用 `module.rules`，因为这样可以减少源码中样板文件的代码量，并且可以在出错时，更快地调试和定位 loader 中的问题。
 
+<<<<<<< HEAD
 ### CLI 方式 {#cli}
 
 还可以通过 CLI 使用 loader：
@@ -129,6 +137,9 @@ webpack --module-bind pug-loader --module-bind 'css=style-loader!css-loader'
 这会对 `.jade` 文件使用 `pug-loader`，以及对 `.css` 文件使用 [`style-loader`](/loaders/style-loader) 和 [`css-loader`](/loaders/css-loader)。
 
 ## loader 特性 {#loader-features}
+=======
+## Loader Features
+>>>>>>> 850a32215a80e804d76bbeb9921731c50434698f
 
 - loader 支持链式调用。链中的每个 loader 会将转换应用在已处理过的资源上。一组链式的 loader 将按照相反的顺序执行。链中的第一个 loader 将其结果（也就是应用过转换后的资源）传递给下一个 loader，依此类推。最后，链中的最后一个 loader，返回 webpack 所期望的 JavaScript。
 - loader 可以是同步的，也可以是异步的。

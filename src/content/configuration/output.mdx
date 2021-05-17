@@ -1962,7 +1962,39 @@ require('module'); // <- 抛出
 require('module'); // <- 仍然抛出
 ```
 
+<<<<<<< HEAD
 ## `output.umdNamedDefine` {#outputumdnameddefine}
+=======
+## `output.trustedTypes`
+
+`boolean = false` `string` `object`
+
+<Badge text="5.37.0+" />
+
+Controls [Trusted Types](https://web.dev/trusted-types) compatibility. When enabled, webpack will detect Trusted Types support and, if they are supported, use Trusted Types policies to create script URLs it loads dynamically. Use when the application runs under a [`require-trusted-types-for`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) Content Security Policy directive.
+
+It defaults to `false` (no compatibility, script URLs are strings).
+
+- When set to `true`, webpack will use [`output.uniqueName`](#outputuniquename) as the Trusted Types policy name.
+- When set to a non-empty string, its value will be used as a policy name.
+- When set to an object, the policy name is taken from the object's `policyName` property.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    trustedTypes: {
+      policyName: 'my-application#webpack',
+    },
+  },
+};
+```
+
+## `output.umdNamedDefine`
+>>>>>>> 850a32215a80e804d76bbeb9921731c50434698f
 
 W> 最好使用 [`output.library.umdNamedDefine`](#outputlibraryumdnameddefine)。
 

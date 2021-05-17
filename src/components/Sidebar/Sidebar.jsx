@@ -1,12 +1,13 @@
 // Import External Dependencies
-import Shield from '../Shield/Shield';
 import SidebarItem from '../SidebarItem/SidebarItem';
 import Print from '../Print/Print';
 import PropTypes from 'prop-types';
 
 // Load Styling
 import './Sidebar.scss';
+import { useEffect, useState } from 'react';
 
+<<<<<<< HEAD
 const docs = [
   {
     version: 5,
@@ -17,8 +18,14 @@ const docs = [
     url: 'https://v4.webpack.docschina.org',
   }
 ];
+=======
+import DownIcon from '../../styles/icons/chevron-down.svg';
+import LoadingIcon from '../../styles/icons/loading.svg';
+>>>>>>> 850a32215a80e804d76bbeb9921731c50434698f
 
+const versions = [5, 4];
 const currentDocsVersion = 5;
+
 Sidebar.propTypes = {
   className: PropTypes.string,
   pages: PropTypes.array,
@@ -26,18 +33,52 @@ Sidebar.propTypes = {
 };
 // Create and export the component
 export default function Sidebar({ className = '', pages, currentPage }) {
+  const [version, setVersion] = useState(currentDocsVersion);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (version === currentDocsVersion) return;
+    const href = window.location.href;
+    const url = new URL(href);
+    url.hostname = `v${version}.webpack.js.org`;
+
+    // redirect
+    window.location.href = url.href;
+  }, [version]);
   let group;
 
   return (
     <nav className={`sidebar ${className}`}>
       <div className="sidebar__inner">
-        <div className="sidebar__shields">
-          <a href="https://github.com/webpack/webpack/releases">
-            <Shield
-              content="github/package-json/v/webpack/webpack"
-              label="webpack"
+        <div className="relative z-0 bg-white dark:bg-gray-100 ">
+          <select
+            className="text-gray-600 text-14 px-5 py-5 appearance-none box-border border border-gray-200 border-solid flex-col flex w-full rounded-none bg-transparent bg-none"
+            value={version}
+            onChange={(e) => {
+              setVersion(+e.target.value);
+              if (+e.target.value !== currentDocsVersion) {
+                setLoading(true);
+              }
+            }}
+          >
+            {versions.map((version) => (
+              <option key={version} value={version}>
+                Webpack {version}
+              </option>
+            ))}
+          </select>
+          {loading ? (
+            <LoadingIcon
+              className="absolute right-5 top-5 fill-current text-gray-300 z-[-1]"
+              width={20}
+              height={20}
             />
-          </a>
+          ) : (
+            <DownIcon
+              className="absolute right-5 top-5 fill-current text-gray-300 z-[-1]"
+              width={20}
+              height={20}
+            />
+          )}
         </div>
         <Print url={currentPage} />
 
@@ -61,21 +102,6 @@ export default function Sidebar({ className = '', pages, currentPage }) {
             </div>
           );
         })}
-        <div className="sidebar__docs-version">
-          You are reading webpack {currentDocsVersion} documentation. Change
-          here to:
-          <ul>
-            {docs
-              .filter((item) => item.version !== currentDocsVersion)
-              .map(({ version, url }) => (
-                <li key={`webpack-${version}-docs`}>
-                  <a rel="nofollow" href={url}>
-                    webpack {version} documentation
-                  </a>
-                </li>
-              ))}
-          </ul>
-        </div>
       </div>
     </nav>
   );
