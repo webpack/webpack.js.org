@@ -1962,6 +1962,34 @@ require('module'); // <- 抛出
 require('module'); // <- 仍然抛出
 ```
 
+## `output.trustedTypes` {#outputtrustedtypes}
+
+`boolean = false` `string` `object`
+
+<Badge text="5.37.0+" />
+
+控制 [Trusted Types](https://web.dev/trusted-types) 兼容性。启用时，webpack 将检测 Trusted Types 支持，如果支持，则使用 Trusted Types 策略创建它动态加载的脚本 url。当应用程序在 [`require-trusted-types-for`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) 内容安全策略指令下运行时使用。
+
+默认为 `false`（不兼容，脚本 URL 为字符串）。
+
+- 设置为 `true` 时，webpack 将会使用 [`output.uniqueName`](#outputuniquename) 作为 Trusted Types 策略名称。
+- 设置为非空字符串时，它的值将被用作策略名称。
+- 设置为一个对象时，策略名称取自对象 `policyName` 属性。
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    trustedTypes: {
+      policyName: 'my-application#webpack',
+    },
+  },
+};
+```
+
 ## `output.umdNamedDefine` {#outputumdnameddefine}
 
 W> 最好使用 [`output.library.umdNamedDefine`](#outputlibraryumdnameddefine)。

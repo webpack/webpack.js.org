@@ -52,7 +52,6 @@ module.exports = {
 
 - [配置方式](#configuration)（推荐）：在 **webpack.config.js** 文件中指定 loader。
 - [内联方式](#inline)：在每个 `import` 语句中显式指定 loader。
-- [CLI 方式](#cli)：在 shell 命令中指定它们。
 
 ### 配置方式 {#configuration}
 
@@ -117,16 +116,6 @@ import Styles from 'style-loader!css-loader?modules!./styles.css';
 选项可以传递查询参数，例如 `?key=value&foo=bar`，或者一个 JSON 对象，例如 `?{"key":"value","foo":"bar"}`。
 
 T> 尽可能使用 `module.rules`，因为这样可以减少源码中样板文件的代码量，并且可以在出错时，更快地调试和定位 loader 中的问题。
-
-### CLI 方式 {#cli}
-
-还可以通过 CLI 使用 loader：
-
-```bash
-webpack --module-bind pug-loader --module-bind 'css=style-loader!css-loader'
-```
-
-这会对 `.jade` 文件使用 `pug-loader`，以及对 `.css` 文件使用 [`style-loader`](/loaders/style-loader) 和 [`css-loader`](/loaders/css-loader)。
 
 ## loader 特性 {#loader-features}
 

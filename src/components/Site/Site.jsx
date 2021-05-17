@@ -70,6 +70,7 @@ function Site(props) {
 
   const applyTheme = (theme) => {
     document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.classList.add(theme);
   };
   useEffect(() => {
     applyTheme(theme);
