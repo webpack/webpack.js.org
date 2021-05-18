@@ -139,7 +139,7 @@
     "tap-spot": "^1.1.1",
     "unist-util-visit": "^2.0.3",
     "webpack": "^5.37.0",
-    "webpack-bundle-analyzer": "^4.4.1",
+    "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.7.0",
     "webpack-dev-server": "^4.0.0-beta.3",
     "webpack-merge": "^5.7.3",
