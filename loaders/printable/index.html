@@ -969,7 +969,7 @@ import styles from "Component.module.scss";
 // const ctx = mountsCanvas.current.getContext('2d',{alpha: false});
 ctx.fillStyle = `${svars.colorBackgroundCanvas}`;
 </code></pre> <h2 id="contributing-1">Contributing<a href="#contributing-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>Please take a moment to read our contributing guidelines if you haven't yet done so.</p> <p><a href="https://github.com/webpack-contrib/css-loader/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p> <h2 id="license-2">License<a href="#license-2" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p><a href="https://github.com/webpack-contrib/css-loader/blob/master/LICENSE">MIT</a></p> <h1 id="exports-loader">exports-loader<a href="#exports-loader" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1> <p><a href="https://npmjs.com/package/coffee-loader"><img src="https://img.shields.io/npm/v/coffee-loader.svg" alt="npm"></a> <a href="https://nodejs.org"><img src="https://img.shields.io/node/v/coffee-loader.svg" alt="node"></a> <a href="https://david-dm.org/webpack-contrib/coffee-loader"><img src="https://david-dm.org/webpack-contrib/coffee-loader.svg" alt="deps"></a> <a href="https://github.com/webpack-contrib/coffee-loader/actions"><img src="https://github.com/webpack-contrib/coffee-loader/workflows/coffee-loader/badge.svg" alt="tests"></a> <a href="https://codecov.io/gh/webpack-contrib/coffee-loader"><img src="https://codecov.io/gh/webpack-contrib/coffee-loader/branch/master/graph/badge.svg" alt="coverage"></a> <a href="https://gitter.im/webpack/webpack"><img src="https://badges.gitter.im/webpack/webpack.svg" alt="chat"></a> <a href="https://packagephobia.now.sh/result?p=coffee-loader"><img src="https://packagephobia.now.sh/badge?p=coffee-loader" alt="size"></a></p> <p>Allow to setup exports <code>module.exports</code>/<code>export</code> for source files.</p> <p>Useful when a source file does not contain exports or something does not export.</p> <p>For further hints on compatibility issues, check out <a href="/guides/shimming/">Shimming</a> of the official docs.</p> <blockquote> <p>⚠ By default loader generate ES module named syntax.</p> <p>⚠ Be careful, existing exports (<code>export</code>/<code>module.exports</code>/<code>exports</code>) in the original code and exporting new values can cause a failure.</p> </blockquote> <h2 id="getting-started-2">Getting Started<a href="#getting-started-2" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>To begin, you'll need to install <code>exports-loader</code>:</p> <pre><code class="hljs language-console">$ npm install exports-loader --save-dev
-</code></pre> <h3 id="inline">Inline<a href="#inline" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>The <code>|</code> or <code>%20</code> (space) allow to separate the <code>syntax</code>, <code>name</code> and <code>alias</code> of export. The documentation and syntax examples can be read <a href="#syntax">here</a>.</p> <blockquote> <p>⚠ <code>%20</code> is space in a query string, because you can't use spaces in URLs</p> </blockquote> <p>Then add the loader to the desired <code>import</code> statement or <code>require</code> calls. For example:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> myFunction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'exports-loader?exports=myFunction!./file.js'</span><span class="token punctuation">;</span>
+</code></pre> <h3 id="inline">Inline<a href="#inline" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>The <code>|</code> or <code>%20</code> (space) allow to separate the <code>syntax</code>, <code>name</code> and <code>alias</code> of export. The documentation and syntax examples can be read <a href="#syntax">here</a>.</p> <blockquote> <p>⚠ <code>%20</code> is space in a query string, because you can't use spaces in URLs</p> </blockquote> <p>Then add the loader to the desired <code>import</code> statement or <code>require</code> calls. For example:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> myFunction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"exports-loader?exports=myFunction!./file.js"</span><span class="token punctuation">;</span>
 <span class="token comment">// Adds the following code to the file's source:</span>
 <span class="token comment">//</span>
 <span class="token comment">// ...</span>
@@ -978,10 +978,10 @@ ctx.fillStyle = `${svars.colorBackgroundCanvas}`;
 <span class="token comment">//</span>
 <span class="token comment">// export { myFunction }</span>
 
-<span class="token function">myFunction</span><span class="token punctuation">(</span><span class="token string">'Hello world'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>
+<span class="token function">myFunction</span><span class="token punctuation">(</span><span class="token string">"Hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>
   myVariable<span class="token punctuation">,</span>
   myFunction<span class="token punctuation">,</span>
-<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'exports-loader?exports=myVariable,myFunction!./file.js'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"exports-loader?exports=myVariable,myFunction!./file.js"</span><span class="token punctuation">;</span>
 <span class="token comment">// Adds the following code to the file's source:</span>
 <span class="token comment">//</span>
 <span class="token comment">// ...</span>
@@ -990,13 +990,13 @@ ctx.fillStyle = `${svars.colorBackgroundCanvas}`;
 <span class="token comment">//</span>
 <span class="token comment">// export { myVariable, myFunction };</span>
 
-<span class="token keyword">const</span> newVariable <span class="token operator">=</span> myVariable <span class="token operator">+</span> <span class="token string">'!!!'</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> newVariable <span class="token operator">=</span> myVariable <span class="token operator">+</span> <span class="token string">"!!!"</span><span class="token punctuation">;</span>
 
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newVariable<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token function">myFunction</span><span class="token punctuation">(</span><span class="token string">'Hello world'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span>
+<span class="token function">myFunction</span><span class="token punctuation">(</span><span class="token string">"Hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">const</span> <span class="token punctuation">{</span>
   myFunction<span class="token punctuation">,</span>
-<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'exports-loader?type=commonjs&#x26;exports=myFunction!./file.js'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"exports-loader?type=commonjs&#x26;exports=myFunction!./file.js"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// Adds the following code to the file's source:</span>
 <span class="token comment">//</span>
 <span class="token comment">// ...</span>
@@ -1005,9 +1005,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token comment">//</span>
 <span class="token comment">// module.exports = { myFunction }</span>
 
-<span class="token function">myFunction</span><span class="token punctuation">(</span><span class="token string">'Hello world'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <pre><code class="hljs language-js"><span class="token comment">// Alternative syntax:</span>
+<span class="token function">myFunction</span><span class="token punctuation">(</span><span class="token string">"Hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <pre><code class="hljs language-js"><span class="token comment">// Alternative syntax:</span>
 <span class="token comment">// import myFunction from 'exports-loader?exports=default%20myFunction!./file.js';</span>
-<span class="token keyword">import</span> myFunction <span class="token keyword">from</span> <span class="token string">'exports-loader?exports=default|myFunction!./file.js'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> myFunction <span class="token keyword">from</span> <span class="token string">"exports-loader?exports=default|myFunction!./file.js"</span><span class="token punctuation">;</span>
 <span class="token comment">// `%20` is space in a query string, equivalently `default myFunction`</span>
 <span class="token comment">// Adds the following code to the file's source:</span>
 <span class="token comment">//</span>
@@ -1017,7 +1017,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token comment">//</span>
 <span class="token comment">// exports default myFunction;</span>
 
-<span class="token function">myFunction</span><span class="token punctuation">(</span><span class="token string">'Hello world'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">const</span> myFunction <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'exports-loader?type=commonjs&#x26;exports=single|myFunction!./file.js'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">myFunction</span><span class="token punctuation">(</span><span class="token string">"Hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">const</span> myFunction <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"exports-loader?type=commonjs&#x26;exports=single|myFunction!./file.js"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// `|` is separator in a query string, equivalently `single|myFunction`</span>
 <span class="token comment">// Adds the following code to the file's source:</span>
 <span class="token comment">//</span>
@@ -1027,7 +1027,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token comment">//</span>
 <span class="token comment">// module.exports = myFunction;</span>
 
-<span class="token function">myFunction</span><span class="token punctuation">(</span><span class="token string">'Hello world'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> myFunctionAlias <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'exports-loader?exports=named|myFunction|myFunctionAlias!./file.js'</span><span class="token punctuation">;</span>
+<span class="token function">myFunction</span><span class="token punctuation">(</span><span class="token string">"Hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> myFunctionAlias <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"exports-loader?exports=named|myFunction|myFunctionAlias!./file.js"</span><span class="token punctuation">;</span>
 <span class="token comment">// `|` is separator in a query string, equivalently `named|myFunction|myFunctionAlias`</span>
 <span class="token comment">// Adds the following code to the file's source:</span>
 <span class="token comment">//</span>
@@ -1037,16 +1037,16 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token comment">//</span>
 <span class="token comment">// exports { myFunction as myFunctionAlias };</span>
 
-<span class="token function">myFunctionAlias</span><span class="token punctuation">(</span><span class="token string">'Hello world'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p>Description of string values can be found in the documentation below.</p> <h3 id="using-configuration">Using Configuration<a href="#using-configuration" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token function">myFunctionAlias</span><span class="token punctuation">(</span><span class="token string">"Hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p>Description of string values can be found in the documentation below.</p> <h3 id="using-configuration">Using Configuration<a href="#using-configuration" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
         <span class="token comment">// You can use `regexp`</span>
         <span class="token comment">// test: /vendor\.js/$</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          exports<span class="token operator">:</span> <span class="token string">'myFunction'</span><span class="token punctuation">,</span>
+          exports<span class="token operator">:</span> <span class="token string">"myFunction"</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1055,11 +1055,11 @@ console<span class="token punctuation">.</span><span class="token function">log<
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          type<span class="token operator">:</span> <span class="token string">'commonjs'</span><span class="token punctuation">,</span>
-          exports<span class="token operator">:</span> <span class="token string">'Foo'</span><span class="token punctuation">,</span>
+          type<span class="token operator">:</span> <span class="token string">"commonjs"</span><span class="token punctuation">,</span>
+          exports<span class="token operator">:</span> <span class="token string">"Foo"</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1072,11 +1072,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          type<span class="token operator">:</span> <span class="token string">'module'</span><span class="token punctuation">,</span>
-          exports<span class="token operator">:</span> <span class="token string">'Foo'</span><span class="token punctuation">,</span>
+          type<span class="token operator">:</span> <span class="token string">"module"</span><span class="token punctuation">,</span>
+          exports<span class="token operator">:</span> <span class="token string">"Foo"</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1089,10 +1089,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          exports<span class="token operator">:</span> <span class="token string">'default Foo'</span><span class="token punctuation">,</span>
+          exports<span class="token operator">:</span> <span class="token string">"default Foo"</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1105,10 +1105,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          exports<span class="token operator">:</span> <span class="token string">'named Foo FooA'</span><span class="token punctuation">,</span>
+          exports<span class="token operator">:</span> <span class="token string">"named Foo FooA"</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1121,11 +1121,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          type<span class="token operator">:</span> <span class="token string">'commonjs'</span><span class="token punctuation">,</span>
-          exports<span class="token operator">:</span> <span class="token string">'single Foo'</span><span class="token punctuation">,</span>
+          type<span class="token operator">:</span> <span class="token string">"commonjs"</span><span class="token punctuation">,</span>
+          exports<span class="token operator">:</span> <span class="token string">"single Foo"</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1138,11 +1138,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          type<span class="token operator">:</span> <span class="token string">'commonjs'</span><span class="token punctuation">,</span>
-          exports<span class="token operator">:</span> <span class="token string">'multiple Foo FooA'</span><span class="token punctuation">,</span>
+          type<span class="token operator">:</span> <span class="token string">"commonjs"</span><span class="token punctuation">,</span>
+          exports<span class="token operator">:</span> <span class="token string">"multiple Foo FooA"</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1155,12 +1155,12 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
           exports<span class="token operator">:</span> <span class="token punctuation">{</span>
-            syntax<span class="token operator">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
-            name<span class="token operator">:</span> <span class="token string">'Foo'</span><span class="token punctuation">,</span>
+            syntax<span class="token operator">:</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+            name<span class="token operator">:</span> <span class="token string">"Foo"</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -1174,13 +1174,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
           exports<span class="token operator">:</span> <span class="token punctuation">{</span>
-            syntax<span class="token operator">:</span> <span class="token string">'named'</span><span class="token punctuation">,</span>
-            name<span class="token operator">:</span> <span class="token string">'Foo'</span><span class="token punctuation">,</span>
-            alias<span class="token operator">:</span> <span class="token string">'FooA'</span><span class="token punctuation">,</span>
+            syntax<span class="token operator">:</span> <span class="token string">"named"</span><span class="token punctuation">,</span>
+            name<span class="token operator">:</span> <span class="token string">"Foo"</span><span class="token punctuation">,</span>
+            alias<span class="token operator">:</span> <span class="token string">"FooA"</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -1194,13 +1194,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          type<span class="token operator">:</span> <span class="token string">'commonjs'</span><span class="token punctuation">,</span>
+          type<span class="token operator">:</span> <span class="token string">"commonjs"</span><span class="token punctuation">,</span>
           exports<span class="token operator">:</span> <span class="token punctuation">{</span>
-            syntax<span class="token operator">:</span> <span class="token string">'single'</span><span class="token punctuation">,</span>
-            name<span class="token operator">:</span> <span class="token string">'Foo'</span><span class="token punctuation">,</span>
+            syntax<span class="token operator">:</span> <span class="token string">"single"</span><span class="token punctuation">,</span>
+            name<span class="token operator">:</span> <span class="token string">"Foo"</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -1214,14 +1214,14 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          type<span class="token operator">:</span> <span class="token string">'commonjs'</span><span class="token punctuation">,</span>
+          type<span class="token operator">:</span> <span class="token string">"commonjs"</span><span class="token punctuation">,</span>
           exports<span class="token operator">:</span> <span class="token punctuation">{</span>
-            syntax<span class="token operator">:</span> <span class="token string">'multiple'</span><span class="token punctuation">,</span>
-            name<span class="token operator">:</span> <span class="token string">'Foo'</span><span class="token punctuation">,</span>
-            alias<span class="token operator">:</span> <span class="token string">'FooA'</span><span class="token punctuation">,</span>
+            syntax<span class="token operator">:</span> <span class="token string">"multiple"</span><span class="token punctuation">,</span>
+            name<span class="token operator">:</span> <span class="token string">"Foo"</span><span class="token punctuation">,</span>
+            alias<span class="token operator">:</span> <span class="token string">"FooA"</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -1235,11 +1235,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          type<span class="token operator">:</span> <span class="token string">'commonjs'</span><span class="token punctuation">,</span>
-          exports<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'Foo'</span><span class="token punctuation">,</span> <span class="token string">'multiple Bar'</span><span class="token punctuation">,</span> <span class="token string">'multiple Baz BazA'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          type<span class="token operator">:</span> <span class="token string">"commonjs"</span><span class="token punctuation">,</span>
+          exports<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"Foo"</span><span class="token punctuation">,</span> <span class="token string">"multiple Bar"</span><span class="token punctuation">,</span> <span class="token string">"multiple Baz BazA"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1252,10 +1252,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          exports<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'default Foo'</span><span class="token punctuation">,</span> <span class="token string">'named Bar BarA'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+          exports<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"default Foo"</span><span class="token punctuation">,</span> <span class="token string">"named Bar BarA"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -1269,13 +1269,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/vendor.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'exports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/vendor.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"exports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
           exports<span class="token operator">:</span> <span class="token punctuation">[</span>
-            <span class="token punctuation">{</span> syntax<span class="token operator">:</span> <span class="token string">'named'</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">'Foo'</span><span class="token punctuation">,</span> alias<span class="token operator">:</span> <span class="token string">'FooA'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token punctuation">{</span> syntax<span class="token operator">:</span> <span class="token string">'named'</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">'Bar'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token string">'Baz'</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span> syntax<span class="token operator">:</span> <span class="token string">"named"</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">"Foo"</span><span class="token punctuation">,</span> alias<span class="token operator">:</span> <span class="token string">"FooA"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span> syntax<span class="token operator">:</span> <span class="token string">"named"</span><span class="token punctuation">,</span> name<span class="token operator">:</span> <span class="token string">"Bar"</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token string">"Baz"</span><span class="token punctuation">,</span>
           <span class="token punctuation">]</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
