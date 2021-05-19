@@ -1929,19 +1929,19 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h2 id="contributing-4">Contributing<a href="#contributing-4" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>Please take a moment to read our contributing guidelines if you haven't yet done so.</p> <p><a href="https://github.com/webpack-contrib/html-loader/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p> <h2 id="license-5">License<a href="#license-5" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p><a href="https://github.com/webpack-contrib/html-loader/blob/master/LICENSE">MIT</a></p> <h1 id="imports-loader">imports-loader<a href="#imports-loader" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1> <p><a href="https://npmjs.com/package/coffee-loader"><img src="https://img.shields.io/npm/v/coffee-loader.svg" alt="npm"></a> <a href="https://nodejs.org"><img src="https://img.shields.io/node/v/coffee-loader.svg" alt="node"></a> <a href="https://david-dm.org/webpack-contrib/coffee-loader"><img src="https://david-dm.org/webpack-contrib/coffee-loader.svg" alt="deps"></a> <a href="https://github.com/webpack-contrib/coffee-loader/actions"><img src="https://github.com/webpack-contrib/coffee-loader/workflows/coffee-loader/badge.svg" alt="tests"></a> <a href="https://codecov.io/gh/webpack-contrib/coffee-loader"><img src="https://codecov.io/gh/webpack-contrib/coffee-loader/branch/master/graph/badge.svg" alt="cover"></a> <a href="https://gitter.im/webpack/webpack"><img src="https://badges.gitter.im/webpack/webpack.svg" alt="chat"></a> <a href="https://packagephobia.now.sh/result?p=coffee-loader"><img src="https://packagephobia.now.sh/badge?p=coffee-loader" alt="size"></a></p> <p>The imports loader allows you to use modules that depend on specific global variables.</p> <p>This is useful for third-party modules that rely on global variables like <code>$</code> or <code>this</code> being the <code>window</code> object. The imports loader can add the necessary <code>require('whatever')</code> calls, so those modules work with webpack.</p> <p>For further hints on compatibility issues, check out <a href="/guides/shimming/">Shimming</a> of the official docs.</p> <blockquote> <p>⚠ By default loader generate ES module named syntax.</p> </blockquote> <blockquote> <p>⚠ Be careful, existing imports (<code>import</code>/<code>require</code>) in the original code and importing new values can cause failure.</p> </blockquote> <h2 id="getting-started-5">Getting Started<a href="#getting-started-5" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>To begin, you'll need to install <code>imports-loader</code>:</p> <pre><code class="hljs language-console">$ npm install imports-loader --save-dev
-</code></pre> <p>Given you have this file:</p> <p><strong>example.js</strong></p> <pre><code class="hljs language-js"><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'img'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">doSomeAwesomeJqueryPluginStuff</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p>Then you can inject the <code>jquery</code> value into the module by configuring the <code>imports-loader</code> using two approaches.</p> <h3 id="inline-2">Inline<a href="#inline-2" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>The <code>|</code> or <code>%20</code> (space) allow to separate the <code>syntax</code>, <code>moduleName</code>, <code>name</code> and <code>alias</code> of import. The documentation and syntax examples can be read <a href="#syntax">here</a>.</p> <blockquote> <p>⚠ <code>%20</code> is space in a query string, because you can't use spaces in URLs</p> </blockquote> <pre><code class="hljs language-js"><span class="token comment">// Alternative syntax:</span>
+</code></pre> <p>Given you have this file:</p> <p><strong>example.js</strong></p> <pre><code class="hljs language-js"><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">"img"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">doSomeAwesomeJqueryPluginStuff</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p>Then you can inject the <code>jquery</code> value into the module by configuring the <code>imports-loader</code> using two approaches.</p> <h3 id="inline-2">Inline<a href="#inline-2" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>The <code>|</code> or <code>%20</code> (space) allow to separate the <code>syntax</code>, <code>moduleName</code>, <code>name</code> and <code>alias</code> of import. The documentation and syntax examples can be read <a href="#syntax">here</a>.</p> <blockquote> <p>⚠ <code>%20</code> is space in a query string, because you can't use spaces in URLs</p> </blockquote> <pre><code class="hljs language-js"><span class="token comment">// Alternative syntax:</span>
 <span class="token comment">//</span>
 <span class="token comment">// import myLib from 'imports-loader?imports=default%20jquery%20$!./example.js';</span>
 <span class="token comment">//</span>
 <span class="token comment">// `%20` is space in a query string, equivalently `default jquery $`</span>
-<span class="token keyword">import</span> myLib <span class="token keyword">from</span> <span class="token string">'imports-loader?imports=default|jquery|$!./example.js'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> myLib <span class="token keyword">from</span> <span class="token string">"imports-loader?imports=default|jquery|$!./example.js"</span><span class="token punctuation">;</span>
 <span class="token comment">// Adds the following code to the beginning of example.js:</span>
 <span class="token comment">//</span>
 <span class="token comment">// import $ from "jquery";</span>
 <span class="token comment">//</span>
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
-<span class="token comment">// ...</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">import</span> myLib <span class="token keyword">from</span> <span class="token string">'imports-loader?imports=default|jquery|$,angular!./example.js'</span><span class="token punctuation">;</span>
+<span class="token comment">// ...</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">import</span> myLib <span class="token keyword">from</span> <span class="token string">"imports-loader?imports=default|jquery|$,angular!./example.js"</span><span class="token punctuation">;</span>
 <span class="token comment">// `|` is separator in a query string, equivalently `default|jquery|$` and `angular`</span>
 <span class="token comment">// Adds the following code to the beginning of example.js:</span>
 <span class="token comment">//</span>
@@ -1950,7 +1950,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token comment">//</span>
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
-<span class="token comment">// ...</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">import</span> myLib <span class="token keyword">from</span> <span class="token string">'imports-loader?imports=named|library|myMethod,angular!./example.js'</span><span class="token punctuation">;</span>
+<span class="token comment">// ...</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">import</span> myLib <span class="token keyword">from</span> <span class="token string">"imports-loader?imports=named|library|myMethod,angular!./example.js"</span><span class="token punctuation">;</span>
 <span class="token comment">// `|` is separator in a query string, equivalently `named|library|myMethod` and `angular`</span>
 <span class="token comment">// Adds the following code to the beginning of example.js:</span>
 <span class="token comment">//</span>
@@ -1978,7 +1978,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
 <span class="token comment">// ...</span>
-<span class="token comment">// }.call(window));</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">import</span> myLib <span class="token keyword">from</span> <span class="token string">'imports-loader?additionalCode=var%20myVariable%20=%20false;!./example.js'</span><span class="token punctuation">;</span>
+<span class="token comment">// }.call(window));</span></code></pre> <pre><code class="hljs language-js"><span class="token keyword">import</span> myLib <span class="token keyword">from</span> <span class="token string">"imports-loader?additionalCode=var%20myVariable%20=%20false;!./example.js"</span><span class="token punctuation">;</span>
 <span class="token comment">// Adds the following code to the beginning of example.js:</span>
 <span class="token comment">//</span>
 <span class="token comment">// var myVariable = false;</span>
@@ -1991,22 +1991,22 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">{</span>
         <span class="token comment">// You can use `regexp`</span>
         <span class="token comment">// test: /example\.js/$</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'example.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"example.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">'imports-loader'</span><span class="token punctuation">,</span>
+            loader<span class="token operator">:</span> <span class="token string">"imports-loader"</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
               imports<span class="token operator">:</span> <span class="token punctuation">[</span>
-                <span class="token string">'default jquery $'</span><span class="token punctuation">,</span>
-                <span class="token string">'default lib_2 lib_2_default'</span><span class="token punctuation">,</span>
-                <span class="token string">'named lib_3 lib2_method_1'</span><span class="token punctuation">,</span>
-                <span class="token string">'named lib_3 lib2_method_2 lib_2_method_2_short'</span><span class="token punctuation">,</span>
-                <span class="token string">'namespace lib_4 my_namespace'</span><span class="token punctuation">,</span>
-                <span class="token string">'side-effects lib_5'</span><span class="token punctuation">,</span>
+                <span class="token string">"default jquery $"</span><span class="token punctuation">,</span>
+                <span class="token string">"default lib_2 lib_2_default"</span><span class="token punctuation">,</span>
+                <span class="token string">"named lib_3 lib2_method_1"</span><span class="token punctuation">,</span>
+                <span class="token string">"named lib_3 lib2_method_2 lib_2_method_2_short"</span><span class="token punctuation">,</span>
+                <span class="token string">"namespace lib_4 my_namespace"</span><span class="token punctuation">,</span>
+                <span class="token string">"side-effects lib_5"</span><span class="token punctuation">,</span>
                 <span class="token punctuation">{</span>
-                  syntax<span class="token operator">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
-                  moduleName<span class="token operator">:</span> <span class="token string">'angular'</span><span class="token punctuation">,</span>
-                  name<span class="token operator">:</span> <span class="token string">'angular'</span><span class="token punctuation">,</span>
+                  syntax<span class="token operator">:</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+                  moduleName<span class="token operator">:</span> <span class="token string">"angular"</span><span class="token punctuation">,</span>
+                  name<span class="token operator">:</span> <span class="token string">"angular"</span><span class="token punctuation">,</span>
                 <span class="token punctuation">}</span><span class="token punctuation">,</span>
               <span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -2015,26 +2015,26 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">'jquery'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> lib_2_default <span class="token keyword">from</span> <span class="token string">'lib_2'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> lib2_method_1<span class="token punctuation">,</span> lib2_method_2 <span class="token keyword">as</span> lib_2_method_2_short <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'lib_3'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> my_namespace <span class="token keyword">from</span> <span class="token string">'lib_4'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token string">'lib_5'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> angular <span class="token keyword">from</span> <span class="token string">'angular'</span><span class="token punctuation">;</span></code></pre> <p>And run <code>webpack</code> via your preferred method.</p> <h2 id="options-6">Options<a href="#options-6" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <table> <thead> <tr> <th align="center">Name</th> <th align="center">Type</th> <th align="center">Default</th> <th align="left">Description</th> </tr> </thead> <tbody> <tr> <td align="center" data-th="Name"><span><strong><a href="#type"><code>type</code></a></strong></span></td> <td align="center" data-th="Type"><span><code>{String}</code></span></td> <td align="center" data-th="Default"><span><code>module</code></span></td> <td align="left" data-th="Description"><span>Format of generated imports</span></td> </tr> <tr> <td align="center" data-th="Name"><span><strong><a href="#imports"><code>imports</code></a></strong></span></td> <td align="center" data-th="Type"><span><code>{String|Object|Array&#x3C;String|Object>}</code></span></td> <td align="center" data-th="Default"><span><code>undefined</code></span></td> <td align="left" data-th="Description"><span>List of imports</span></td> </tr> <tr> <td align="center" data-th="Name"><span><strong><a href="#wrapper"><code>wrapper</code></a></strong></span></td> <td align="center" data-th="Type"><span><code>{Boolean|String|Object}</code></span></td> <td align="center" data-th="Default"><span><code>undefined</code></span></td> <td align="left" data-th="Description"><span>Closes the module code in a function (<code>(function () { ... }).call();</code>)</span></td> </tr> <tr> <td align="center" data-th="Name"><span><strong><a href="#additionalcode"><code>additionalCode</code></a></strong></span></td> <td align="center" data-th="Type"><span><code>{String}</code></span></td> <td align="center" data-th="Default"><span><code>undefined</code></span></td> <td align="left" data-th="Description"><span>Adds custom code</span></td> </tr> </tbody> </table> <h3 id="type-1"><code>type</code><a href="#type-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>Type: <code>String</code> Default: <code>module</code></p> <p>Format of generated exports.</p> <p>Possible values - <code>commonjs</code> (CommonJS module syntax) and <code>module</code> (ES module syntax).</p> <h4 id="commonjs-1"><code>commonjs</code><a href="#commonjs-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">"jquery"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> lib_2_default <span class="token keyword">from</span> <span class="token string">"lib_2"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> lib2_method_1<span class="token punctuation">,</span> lib2_method_2 <span class="token keyword">as</span> lib_2_method_2_short <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"lib_3"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> my_namespace <span class="token keyword">from</span> <span class="token string">"lib_4"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">"lib_5"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> angular <span class="token keyword">from</span> <span class="token string">"angular"</span><span class="token punctuation">;</span></code></pre> <p>And run <code>webpack</code> via your preferred method.</p> <h2 id="options-6">Options<a href="#options-6" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <table> <thead> <tr> <th align="center">Name</th> <th align="center">Type</th> <th align="center">Default</th> <th align="left">Description</th> </tr> </thead> <tbody> <tr> <td align="center" data-th="Name"><span><strong><a href="#type"><code>type</code></a></strong></span></td> <td align="center" data-th="Type"><span><code>{String}</code></span></td> <td align="center" data-th="Default"><span><code>module</code></span></td> <td align="left" data-th="Description"><span>Format of generated imports</span></td> </tr> <tr> <td align="center" data-th="Name"><span><strong><a href="#imports"><code>imports</code></a></strong></span></td> <td align="center" data-th="Type"><span><code>{String|Object|Array&#x3C;String|Object>}</code></span></td> <td align="center" data-th="Default"><span><code>undefined</code></span></td> <td align="left" data-th="Description"><span>List of imports</span></td> </tr> <tr> <td align="center" data-th="Name"><span><strong><a href="#wrapper"><code>wrapper</code></a></strong></span></td> <td align="center" data-th="Type"><span><code>{Boolean|String|Object}</code></span></td> <td align="center" data-th="Default"><span><code>undefined</code></span></td> <td align="left" data-th="Description"><span>Closes the module code in a function (<code>(function () { ... }).call();</code>)</span></td> </tr> <tr> <td align="center" data-th="Name"><span><strong><a href="#additionalcode"><code>additionalCode</code></a></strong></span></td> <td align="center" data-th="Type"><span><code>{String}</code></span></td> <td align="center" data-th="Default"><span><code>undefined</code></span></td> <td align="left" data-th="Description"><span>Adds custom code</span></td> </tr> </tbody> </table> <h3 id="type-1"><code>type</code><a href="#type-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <p>Type: <code>String</code> Default: <code>module</code></p> <p>Format of generated exports.</p> <p>Possible values - <code>commonjs</code> (CommonJS module syntax) and <code>module</code> (ES module syntax).</p> <h4 id="commonjs-1"><code>commonjs</code><a href="#commonjs-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4> <p><strong>webpack.config.js</strong></p> <pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'example.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'imports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"example.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"imports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          syntax<span class="token operator">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
-          type<span class="token operator">:</span> <span class="token string">'commonjs'</span><span class="token punctuation">,</span>
-          imports<span class="token operator">:</span> <span class="token string">'Foo'</span><span class="token punctuation">,</span>
+          syntax<span class="token operator">:</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+          type<span class="token operator">:</span> <span class="token string">"commonjs"</span><span class="token punctuation">,</span>
+          imports<span class="token operator">:</span> <span class="token string">"Foo"</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">var</span> Foo <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'Foo'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">var</span> Foo <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"Foo"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
@@ -2042,16 +2042,16 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'example.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'imports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"example.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"imports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          type<span class="token operator">:</span> <span class="token string">'module'</span><span class="token punctuation">,</span>
-          imports<span class="token operator">:</span> <span class="token string">'Foo'</span><span class="token punctuation">,</span>
+          type<span class="token operator">:</span> <span class="token string">"module"</span><span class="token punctuation">,</span>
+          imports<span class="token operator">:</span> <span class="token string">"Foo"</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> Foo <span class="token keyword">from</span> <span class="token string">'Foo'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> Foo <span class="token keyword">from</span> <span class="token string">"Foo"</span><span class="token punctuation">;</span>
 
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
@@ -2059,15 +2059,15 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/example.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'imports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/example.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"imports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          imports<span class="token operator">:</span> <span class="token string">'default lib myName'</span><span class="token punctuation">,</span>
+          imports<span class="token operator">:</span> <span class="token string">"default lib myName"</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> myName <span class="token keyword">from</span> <span class="token string">'lib'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> myName <span class="token keyword">from</span> <span class="token string">"lib"</span><span class="token punctuation">;</span>
 
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
@@ -2075,16 +2075,16 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'./path/to/example.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-        loader<span class="token operator">:</span> <span class="token string">'imports-loader'</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"./path/to/example.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">"imports-loader"</span><span class="token punctuation">,</span>
         options<span class="token operator">:</span> <span class="token punctuation">{</span>
-          type<span class="token operator">:</span> <span class="token string">'commonjs'</span><span class="token punctuation">,</span>
-          imports<span class="token operator">:</span> <span class="token string">'single lib myName'</span><span class="token punctuation">,</span>
+          type<span class="token operator">:</span> <span class="token string">"commonjs"</span><span class="token punctuation">,</span>
+          imports<span class="token operator">:</span> <span class="token string">"single lib myName"</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">var</span> myName <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'lib'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">var</span> myName <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"lib"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
@@ -2092,16 +2092,16 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'example.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"example.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">'imports-loader'</span><span class="token punctuation">,</span>
+            loader<span class="token operator">:</span> <span class="token string">"imports-loader"</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
               imports<span class="token operator">:</span> <span class="token punctuation">{</span>
-                syntax<span class="token operator">:</span> <span class="token string">'named'</span><span class="token punctuation">,</span>
-                moduleName<span class="token operator">:</span> <span class="token string">'lib_2'</span><span class="token punctuation">,</span>
-                name<span class="token operator">:</span> <span class="token string">'lib2_method_2'</span><span class="token punctuation">,</span>
-                alias<span class="token operator">:</span> <span class="token string">'lib_2_method_2_alias'</span><span class="token punctuation">,</span>
+                syntax<span class="token operator">:</span> <span class="token string">"named"</span><span class="token punctuation">,</span>
+                moduleName<span class="token operator">:</span> <span class="token string">"lib_2"</span><span class="token punctuation">,</span>
+                name<span class="token operator">:</span> <span class="token string">"lib2_method_2"</span><span class="token punctuation">,</span>
+                alias<span class="token operator">:</span> <span class="token string">"lib_2_method_2_alias"</span><span class="token punctuation">,</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -2109,7 +2109,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> lib2_method_2 <span class="token keyword">as</span> lib_2_method_2_alias <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'lib_2'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> lib2_method_2 <span class="token keyword">as</span> lib_2_method_2_alias <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"lib_2"</span><span class="token punctuation">;</span>
 
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
@@ -2117,25 +2117,25 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'example.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"example.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">'imports-loader'</span><span class="token punctuation">,</span>
+            loader<span class="token operator">:</span> <span class="token string">"imports-loader"</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
               imports<span class="token operator">:</span> <span class="token punctuation">[</span>
                 <span class="token punctuation">{</span>
-                  moduleName<span class="token operator">:</span> <span class="token string">'angular'</span><span class="token punctuation">,</span>
+                  moduleName<span class="token operator">:</span> <span class="token string">"angular"</span><span class="token punctuation">,</span>
                 <span class="token punctuation">}</span><span class="token punctuation">,</span>
                 <span class="token punctuation">{</span>
-                  syntax<span class="token operator">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
-                  moduleName<span class="token operator">:</span> <span class="token string">'jquery'</span><span class="token punctuation">,</span>
-                  name<span class="token operator">:</span> <span class="token string">'$'</span><span class="token punctuation">,</span>
+                  syntax<span class="token operator">:</span> <span class="token string">"default"</span><span class="token punctuation">,</span>
+                  moduleName<span class="token operator">:</span> <span class="token string">"jquery"</span><span class="token punctuation">,</span>
+                  name<span class="token operator">:</span> <span class="token string">"$"</span><span class="token punctuation">,</span>
                 <span class="token punctuation">}</span><span class="token punctuation">,</span>
-                <span class="token string">'default lib_2 lib_2_default'</span><span class="token punctuation">,</span>
-                <span class="token string">'named lib_2 lib2_method_1'</span><span class="token punctuation">,</span>
-                <span class="token string">'named lib_2 lib2_method_2 lib_2_method_2_alias'</span><span class="token punctuation">,</span>
-                <span class="token string">'namespace lib_3 lib_3_all'</span><span class="token punctuation">,</span>
-                <span class="token string">'side-effects lib_4'</span><span class="token punctuation">,</span>
+                <span class="token string">"default lib_2 lib_2_default"</span><span class="token punctuation">,</span>
+                <span class="token string">"named lib_2 lib2_method_1"</span><span class="token punctuation">,</span>
+                <span class="token string">"named lib_2 lib2_method_2 lib_2_method_2_alias"</span><span class="token punctuation">,</span>
+                <span class="token string">"namespace lib_3 lib_3_all"</span><span class="token punctuation">,</span>
+                <span class="token string">"side-effects lib_4"</span><span class="token punctuation">,</span>
               <span class="token punctuation">]</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -2143,12 +2143,12 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> angular <span class="token keyword">from</span> <span class="token string">'angular'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">'jquery'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> lib_2_default <span class="token keyword">from</span> <span class="token string">'lib_2'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> lib2_method_1<span class="token punctuation">,</span> lib2_method_2 <span class="token keyword">as</span> lib_2_method_2_alias <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'lib_2'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> lib_3_all <span class="token keyword">from</span> <span class="token string">'lib_3'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token string">'lib_4'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> angular <span class="token keyword">from</span> <span class="token string">"angular"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">"jquery"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> lib_2_default <span class="token keyword">from</span> <span class="token string">"lib_2"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> lib2_method_1<span class="token punctuation">,</span> lib2_method_2 <span class="token keyword">as</span> lib_2_method_2_alias <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"lib_2"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> lib_3_all <span class="token keyword">from</span> <span class="token string">"lib_3"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">"lib_4"</span><span class="token punctuation">;</span>
 
 <span class="token comment">// ...</span>
 <span class="token comment">// Code</span>
@@ -2156,14 +2156,14 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'example.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"example.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">'imports-loader'</span><span class="token punctuation">,</span>
+            loader<span class="token operator">:</span> <span class="token string">"imports-loader"</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
               imports<span class="token operator">:</span> <span class="token punctuation">{</span>
-                moduleName<span class="token operator">:</span> <span class="token string">'jquery'</span><span class="token punctuation">,</span>
-                name<span class="token operator">:</span> <span class="token string">'$'</span><span class="token punctuation">,</span>
+                moduleName<span class="token operator">:</span> <span class="token string">"jquery"</span><span class="token punctuation">,</span>
+                name<span class="token operator">:</span> <span class="token string">"$"</span><span class="token punctuation">,</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
               wrapper<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -2172,7 +2172,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">'jquery'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">"jquery"</span><span class="token punctuation">;</span>
 
 <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -2182,23 +2182,23 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'example.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"example.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">'imports-loader'</span><span class="token punctuation">,</span>
+            loader<span class="token operator">:</span> <span class="token string">"imports-loader"</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
               imports<span class="token operator">:</span> <span class="token punctuation">{</span>
-                moduleName<span class="token operator">:</span> <span class="token string">'jquery'</span><span class="token punctuation">,</span>
-                name<span class="token operator">:</span> <span class="token string">'$'</span><span class="token punctuation">,</span>
+                moduleName<span class="token operator">:</span> <span class="token string">"jquery"</span><span class="token punctuation">,</span>
+                name<span class="token operator">:</span> <span class="token string">"$"</span><span class="token punctuation">,</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
-              wrapper<span class="token operator">:</span> <span class="token string">'window'</span><span class="token punctuation">,</span>
+              wrapper<span class="token operator">:</span> <span class="token string">"window"</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">'jquery'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">"jquery"</span><span class="token punctuation">;</span>
 
 <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -2208,18 +2208,18 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'example.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"example.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">'imports-loader'</span><span class="token punctuation">,</span>
+            loader<span class="token operator">:</span> <span class="token string">"imports-loader"</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
               imports<span class="token operator">:</span> <span class="token punctuation">{</span>
-                moduleName<span class="token operator">:</span> <span class="token string">'jquery'</span><span class="token punctuation">,</span>
-                name<span class="token operator">:</span> <span class="token string">'$'</span><span class="token punctuation">,</span>
+                moduleName<span class="token operator">:</span> <span class="token string">"jquery"</span><span class="token punctuation">,</span>
+                name<span class="token operator">:</span> <span class="token string">"$"</span><span class="token punctuation">,</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
               wrapper<span class="token operator">:</span> <span class="token punctuation">{</span>
-                thisArg<span class="token operator">:</span> <span class="token string">'window'</span><span class="token punctuation">,</span>
-                args<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'myVariable'</span><span class="token punctuation">,</span> <span class="token string">'myOtherVariable'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                thisArg<span class="token operator">:</span> <span class="token string">"window"</span><span class="token punctuation">,</span>
+                args<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"myVariable"</span><span class="token punctuation">,</span> <span class="token string">"myOtherVariable"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -2227,7 +2227,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">'jquery'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">"jquery"</span><span class="token punctuation">;</span>
 
 <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">myVariable<span class="token punctuation">,</span> myOtherVariable</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -2237,20 +2237,20 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'example.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"example.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">'imports-loader'</span><span class="token punctuation">,</span>
+            loader<span class="token operator">:</span> <span class="token string">"imports-loader"</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
               imports<span class="token operator">:</span> <span class="token punctuation">{</span>
-                moduleName<span class="token operator">:</span> <span class="token string">'jquery'</span><span class="token punctuation">,</span>
-                name<span class="token operator">:</span> <span class="token string">'$'</span><span class="token punctuation">,</span>
+                moduleName<span class="token operator">:</span> <span class="token string">"jquery"</span><span class="token punctuation">,</span>
+                name<span class="token operator">:</span> <span class="token string">"$"</span><span class="token punctuation">,</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
               wrapper<span class="token operator">:</span> <span class="token punctuation">{</span>
-                thisArg<span class="token operator">:</span> <span class="token string">'window'</span><span class="token punctuation">,</span>
+                thisArg<span class="token operator">:</span> <span class="token string">"window"</span><span class="token punctuation">,</span>
                 args<span class="token operator">:</span> <span class="token punctuation">{</span>
-                  myVariable<span class="token operator">:</span> <span class="token string">'var1'</span><span class="token punctuation">,</span>
-                  myOtherVariable<span class="token operator">:</span> <span class="token string">'var2'</span><span class="token punctuation">,</span>
+                  myVariable<span class="token operator">:</span> <span class="token string">"var1"</span><span class="token punctuation">,</span>
+                  myOtherVariable<span class="token operator">:</span> <span class="token string">"var2"</span><span class="token punctuation">,</span>
                 <span class="token punctuation">}</span><span class="token punctuation">,</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -2259,7 +2259,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">'jquery'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">"jquery"</span><span class="token punctuation">;</span>
 
 <span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">var1<span class="token punctuation">,</span> var2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token comment">// ...</span>
@@ -2269,23 +2269,23 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'example.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"example.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">'imports-loader'</span><span class="token punctuation">,</span>
+            loader<span class="token operator">:</span> <span class="token string">"imports-loader"</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
               imports<span class="token operator">:</span> <span class="token punctuation">{</span>
-                moduleName<span class="token operator">:</span> <span class="token string">'jquery'</span><span class="token punctuation">,</span>
-                name<span class="token operator">:</span> <span class="token string">'$'</span><span class="token punctuation">,</span>
+                moduleName<span class="token operator">:</span> <span class="token string">"jquery"</span><span class="token punctuation">,</span>
+                name<span class="token operator">:</span> <span class="token string">"$"</span><span class="token punctuation">,</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
-              additionalCode<span class="token operator">:</span> <span class="token string">'var myVariable = false;'</span><span class="token punctuation">,</span>
+              additionalCode<span class="token operator">:</span> <span class="token string">"var myVariable = false;"</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">'jquery'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">"jquery"</span><span class="token punctuation">;</span>
 
 <span class="token keyword">var</span> myVariable <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
 
@@ -2295,24 +2295,24 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">'example.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> require<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token string">"example.js"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span>
-            loader<span class="token operator">:</span> <span class="token string">'imports-loader'</span><span class="token punctuation">,</span>
+            loader<span class="token operator">:</span> <span class="token string">"imports-loader"</span><span class="token punctuation">,</span>
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
               imports<span class="token operator">:</span> <span class="token punctuation">{</span>
-                moduleName<span class="token operator">:</span> <span class="token string">'jquery'</span><span class="token punctuation">,</span>
-                name<span class="token operator">:</span> <span class="token string">'$'</span><span class="token punctuation">,</span>
+                moduleName<span class="token operator">:</span> <span class="token string">"jquery"</span><span class="token punctuation">,</span>
+                name<span class="token operator">:</span> <span class="token string">"$"</span><span class="token punctuation">,</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
               additionalCode<span class="token operator">:</span>
-                <span class="token string">'var define = false; /* Disable AMD for misbehaving libraries */'</span><span class="token punctuation">,</span>
+                <span class="token string">"var define = false; /* Disable AMD for misbehaving libraries */"</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
           <span class="token punctuation">}</span><span class="token punctuation">,</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">'jquery'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>Generate output:</p> <pre><code class="hljs language-js"><span class="token keyword">import</span> $ <span class="token keyword">from</span> <span class="token string">"jquery"</span><span class="token punctuation">;</span>
 
 <span class="token keyword">var</span> define <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">/* Disable AMD for misbehaving libraries */</span>
 
