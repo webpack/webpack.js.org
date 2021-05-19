@@ -44,4 +44,4 @@ For more information on CSP and `nonce` attribute, please refer to **Further Rea
 
 ## Trusted Types
 
-webpack is also capable of using Trusted Types to load dynamically constructed scripts, to adhere to CSP [`require-trusted-types-for`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) directive restrictions. See [`output.trustedTypes`](/configuration/output/#outputtrustedtypes) configuration option.
+Webpack is also capable of using Trusted Types to load dynamically constructed scripts, to adhere to CSP [`require-trusted-types-for`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) directive restrictions. See [`output.trustedTypes`](/configuration/output/#outputtrustedtypes) configuration option.
