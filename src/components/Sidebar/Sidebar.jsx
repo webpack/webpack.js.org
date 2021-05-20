@@ -26,7 +26,7 @@ export default function Sidebar({ className = '', pages, currentPage }) {
     if (version === currentDocsVersion) return;
     const href = window.location.href;
     const url = new URL(href);
-    url.hostname = `v${version}.webpack.js.org`;
+    url.hostname = `v${version}.webpack.docschina.org`;
 
     // redirect
     window.location.href = url.href;
