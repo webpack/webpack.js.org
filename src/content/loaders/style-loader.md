@@ -669,7 +669,39 @@ module.exports = {
 
 ## 示例 {#examples}
 
-当前面的 loader 生成 source map 时，此 loader 会向 source map 中自动注入。
+### 推荐 {#recommend}
+
+推荐 `production` 环境的构建将 CSS 从你的 bundle 中分离出来，这样可以使用 CSS/JS 文件的并行加载。
+这可以通过使用 `mini-css-extract-plugin` 来实现，因为它可以创建单独的 CSS 文件。
+对于 `development` 模式（包括 `webpack-dev-server`），你可以使用 [style-loader](/loaders/style-loader/)，因为它可以使用多个 <style></style> 标签将 CSS 插入到 DOM 中，并且反应会更快。
+
+> i 不要同时使用 `style-loader` 与 `mini-css-extract-plugin`。
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
+      },
+    ],
+  },
+  plugins: [].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
+};
+```
+
+### Source maps {#sourcemap}
 
 因此，想要生成 source map，则需将 style-loader 之前执行 loader 的 `sourceMap` 选项设置为`true`。
 

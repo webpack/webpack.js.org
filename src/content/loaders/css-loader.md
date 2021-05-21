@@ -128,8 +128,7 @@ module.exports = {
 类型: `Boolean|Function`
 默认值: `true`
 
-启用/禁用 `url`/`image-set` 函数进行处理。
-控制 `url()` 函数的解析。绝对路径和根目录的相对 URL 现在会被解析(版本 [4.0.0](https://github.com/webpack-contrib/css-loader/blob/master/CHANGELOG.md#400-2020-07-25)。
+启用/禁用 `url`/`image-set` 函数进行处理。如果设置为 `false`，`css-loader` 将不会解析 `url` 或者 `image-set` 中的任何路径。还可以传递给一个函数基于资源的路径动态地控制这种行为。绝对路径和根目录的相对 URL 现在会被解析(版本 [4.0.0](https://github.com/webpack-contrib/css-loader/blob/master/CHANGELOG.md#400-2020-07-25)。
 
 示例解决方案:
 
@@ -1135,6 +1134,38 @@ module.exports = {
 
 ## 示例 {#examples}
 
+### 推荐 {#recommend}
+
+推荐 `production` 环境的构建将 CSS 从你的 bundle 中分离出来，这样可以使用 CSS/JS 文件的并行加载。
+这可以通过使用 `mini-css-extract-plugin` 来实现，因为它可以创建单独的 CSS 文件。
+对于 `development` 模式（包括 `webpack-dev-server`），你可以使用 [style-loader](/loaders/style-loader/)，因为它可以使用多个 <style></style> 标签将 CSS 插入到 DOM 中，并且反应会更快。
+
+> i 不要同时使用 `style-loader` 与 `mini-css-extract-plugin`。
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const devMode = process.env.NODE_ENV !== "production";
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
+        ],
+      },
+    ],
+  },
+  plugins: [].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
+};
+```
+
 ### 使用 `/* webpackIgnore: true */` 注释禁用 url 解析
 
 有了 `/* webpackIgnore: true */` 注释，可以禁用对规则和单个声明的源处理。
@@ -1238,14 +1269,6 @@ module.exports = {
   },
 };
 ```
-
-### 提取 {#extract}
-
-对于生产版本，建议以后从 bundle 中提取 CSS，以便以后可以使用 CSS/JS 资源的并行加载。
-
-- [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) 可以在生产模式下运行时使用来提取CSS。
-
-- 或者，如果寻求更好的开发性能和可模仿生产的CSS输出。 [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin) 提供了支持热重载的 mini-css-extract-plugin 扩展版本。开发人员中的 HMR 模式下的真实 CSS 文件，与非开发人员中的 mini-css 是一样的效果。
 
 ### 纯 CSS，CSS 模块和 PostCSS {#pure-css-css-modules-and-postcss}
 
