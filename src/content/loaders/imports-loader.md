@@ -61,15 +61,9 @@ $("img").doSomeAwesomeJqueryPluginStuff();
 //
 // import myLib from 'imports-loader?imports=default%20jquery%20$!./example.js';
 //
-<<<<<<< HEAD
 // `%20` 是查询字符串中的空格，相当于 `default jquery $`
 import myLib from 'imports-loader?imports=default|jquery|$!./example.js';
 // 在 example.js 的开头添加如下代码：
-=======
-// `%20` is space in a query string, equivalently `default jquery $`
-import myLib from "imports-loader?imports=default|jquery|$!./example.js";
-// Adds the following code to the beginning of example.js:
->>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // import $ from "jquery";
 //
@@ -79,15 +73,9 @@ import myLib from "imports-loader?imports=default|jquery|$!./example.js";
 ```
 
 ```js
-<<<<<<< HEAD
 import myLib from 'imports-loader?imports=default|jquery|$,angular!./example.js';
 // `|` 是查询字符串中的分隔符，相当于 `default|jquery|$` 与 `angular`
 // 在 example.js 的开头添加如下代码：
-=======
-import myLib from "imports-loader?imports=default|jquery|$,angular!./example.js";
-// `|` is separator in a query string, equivalently `default|jquery|$` and `angular`
-// Adds the following code to the beginning of example.js:
->>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // import $ from "jquery";
 // import angular from "angular";
@@ -98,15 +86,9 @@ import myLib from "imports-loader?imports=default|jquery|$,angular!./example.js"
 ```
 
 ```js
-<<<<<<< HEAD
 import myLib from 'imports-loader?imports=named|library|myMethod,angular!./example.js';
 // `|` 是查询字符串中的分隔符，相当于 `named|library|myMethod` 与 `angular`
 // 在 example.js 的开头添加如下代码：
-=======
-import myLib from "imports-loader?imports=named|library|myMethod,angular!./example.js";
-// `|` is separator in a query string, equivalently `named|library|myMethod` and `angular`
-// Adds the following code to the beginning of example.js:
->>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // import { myMethod } from "library";
 // import angular from "angular";
@@ -144,13 +126,8 @@ const myLib = require(`imports-loader?type=commonjs&imports=single|myLib|myMetho
 ```
 
 ```js
-<<<<<<< HEAD
 import myLib from 'imports-loader?additionalCode=var%20myVariable%20=%20false;!./example.js';
 // 在 example.js 的开头添加如下代码：
-=======
-import myLib from "imports-loader?additionalCode=var%20myVariable%20=%20false;!./example.js";
-// Adds the following code to the beginning of example.js:
->>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // var myVariable = false;
 //

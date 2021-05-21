@@ -47,13 +47,8 @@ $ npm install exports-loader --save-dev
 然后将 loader 添加到所需的 `import` 语句或 `require` 调用中。例如：
 
 ```js
-<<<<<<< HEAD
 import { myFunction } from 'exports-loader?exports=myFunction!./file.js';
 // 向源文件中添加如下代码：
-=======
-import { myFunction } from "exports-loader?exports=myFunction!./file.js";
-// Adds the following code to the file's source:
->>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // ...
 // Code
@@ -61,20 +56,15 @@ import { myFunction } from "exports-loader?exports=myFunction!./file.js";
 //
 // export { myFunction }
 
-myFunction("Hello world");
+myFunction('Hello world');
 ```
 
 ```js
 import {
   myVariable,
   myFunction,
-<<<<<<< HEAD
 } from 'exports-loader?exports=myVariable,myFunction!./file.js';
 // 向源文件中添加如下代码：
-=======
-} from "exports-loader?exports=myVariable,myFunction!./file.js";
-// Adds the following code to the file's source:
->>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // ...
 // Code
@@ -82,23 +72,18 @@ import {
 //
 // export { myVariable, myFunction };
 
-const newVariable = myVariable + "!!!";
+const newVariable = myVariable + '!!!';
 
 console.log(newVariable);
 
-myFunction("Hello world");
+myFunction('Hello world');
 ```
 
 ```js
 const {
   myFunction,
-<<<<<<< HEAD
 } = require('exports-loader?type=commonjs&exports=myFunction!./file.js');
 // 向源文件中添加如下代码：
-=======
-} = require("exports-loader?type=commonjs&exports=myFunction!./file.js");
-// Adds the following code to the file's source:
->>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // ...
 // Code
@@ -106,21 +91,15 @@ const {
 //
 // module.exports = { myFunction }
 
-myFunction("Hello world");
+myFunction('Hello world');
 ```
 
 ```js
 // 替换语法：
 // import myFunction from 'exports-loader?exports=default%20myFunction!./file.js';
-<<<<<<< HEAD
 import myFunction from 'exports-loader?exports=default|myFunction!./file.js';
 // `%20` 是查询字符串中的空格，等同于 `default myFunction`
 // 向源文件中添加如下代码：
-=======
-import myFunction from "exports-loader?exports=default|myFunction!./file.js";
-// `%20` is space in a query string, equivalently `default myFunction`
-// Adds the following code to the file's source:
->>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // ...
 // Code
@@ -128,19 +107,13 @@ import myFunction from "exports-loader?exports=default|myFunction!./file.js";
 //
 // exports default myFunction;
 
-myFunction("Hello world");
+myFunction('Hello world');
 ```
 
 ```js
-<<<<<<< HEAD
 const myFunction = require('exports-loader?type=commonjs&exports=single|myFunction!./file.js');
 // `|` 是查询字符串中的分隔符， 等同于 `single|myFunction`
 // 向源文件中添加如下代码：
-=======
-const myFunction = require("exports-loader?type=commonjs&exports=single|myFunction!./file.js");
-// `|` is separator in a query string, equivalently `single|myFunction`
-// Adds the following code to the file's source:
->>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // ...
 // Code
@@ -148,19 +121,13 @@ const myFunction = require("exports-loader?type=commonjs&exports=single|myFuncti
 //
 // module.exports = myFunction;
 
-myFunction("Hello world");
+myFunction('Hello world');
 ```
 
 ```js
-<<<<<<< HEAD
 import { myFunctionAlias } from 'exports-loader?exports=named|myFunction|myFunctionAlias!./file.js';
 // `|` 是查询字符串中的分隔符， 等同于 `named|myFunction|myFunctionAlias`
 // 向源文件中添加如下代码：
-=======
-import { myFunctionAlias } from "exports-loader?exports=named|myFunction|myFunctionAlias!./file.js";
-// `|` is separator in a query string, equivalently `named|myFunction|myFunctionAlias`
-// Adds the following code to the file's source:
->>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // ...
 // Code
@@ -168,7 +135,7 @@ import { myFunctionAlias } from "exports-loader?exports=named|myFunction|myFunct
 //
 // exports { myFunction as myFunctionAlias };
 
-myFunctionAlias("Hello world");
+myFunctionAlias('Hello world');
 ```
 
 可以在下面的文档中找到字段值的含义。
@@ -184,10 +151,10 @@ module.exports = {
       {
         // 你可以使用 `regexp`
         // test: /vendor\.js/$
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
-          exports: "myFunction",
+          exports: 'myFunction',
         },
       },
     ],
@@ -222,11 +189,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
-          type: "commonjs",
-          exports: "Foo",
+          type: 'commonjs',
+          exports: 'Foo',
         },
       },
     ],
@@ -253,11 +220,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
-          type: "module",
-          exports: "Foo",
+          type: 'module',
+          exports: 'Foo',
         },
       },
     ],
@@ -326,10 +293,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
-          exports: "default Foo",
+          exports: 'default Foo',
         },
       },
     ],
@@ -356,10 +323,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
-          exports: "named Foo FooA",
+          exports: 'named Foo FooA',
         },
       },
     ],
@@ -386,11 +353,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
-          type: "commonjs",
-          exports: "single Foo",
+          type: 'commonjs',
+          exports: 'single Foo',
         },
       },
     ],
@@ -417,11 +384,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
-          type: "commonjs",
-          exports: "multiple Foo FooA",
+          type: 'commonjs',
+          exports: 'multiple Foo FooA',
         },
       },
     ],
@@ -460,12 +427,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
           exports: {
-            syntax: "default",
-            name: "Foo",
+            syntax: 'default',
+            name: 'Foo',
           },
         },
       },
@@ -493,13 +460,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
           exports: {
-            syntax: "named",
-            name: "Foo",
-            alias: "FooA",
+            syntax: 'named',
+            name: 'Foo',
+            alias: 'FooA',
           },
         },
       },
@@ -527,13 +494,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
-          type: "commonjs",
+          type: 'commonjs',
           exports: {
-            syntax: "single",
-            name: "Foo",
+            syntax: 'single',
+            name: 'Foo',
           },
         },
       },
@@ -561,14 +528,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
-          type: "commonjs",
+          type: 'commonjs',
           exports: {
-            syntax: "multiple",
-            name: "Foo",
-            alias: "FooA",
+            syntax: 'multiple',
+            name: 'Foo',
+            alias: 'FooA',
           },
         },
       },
@@ -608,11 +575,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
-          type: "commonjs",
-          exports: ["Foo", "multiple Bar", "multiple Baz BazA"],
+          type: 'commonjs',
+          exports: ['Foo', 'multiple Bar', 'multiple Baz BazA'],
         },
       },
     ],
@@ -639,10 +606,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
-          exports: ["default Foo", "named Bar BarA"],
+          exports: ['default Foo', 'named Bar BarA'],
         },
       },
     ],
@@ -670,13 +637,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve("./path/to/vendor.js"),
-        loader: "exports-loader",
+        test: require.resolve('./path/to/vendor.js'),
+        loader: 'exports-loader',
         options: {
           exports: [
-            { syntax: "named", name: "Foo", alias: "FooA" },
-            { syntax: "named", name: "Bar" },
-            "Baz",
+            { syntax: 'named', name: 'Foo', alias: 'FooA' },
+            { syntax: 'named', name: 'Bar' },
+            'Baz',
           ],
         },
       },
