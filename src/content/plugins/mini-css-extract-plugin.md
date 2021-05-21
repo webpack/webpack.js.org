@@ -505,7 +505,75 @@ module.exports = {
 
 ## 示例 {#examples}
 
+<<<<<<< HEAD
 ### 最简单的例子 {#minimal-example}
+=======
+### Recommend
+
+For `production` builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
+This can be achieved by using the `mini-css-extract-plugin`, because it creates separate css files.
+For `development` mode (including `webpack-dev-server`) you can use [style-loader](/loaders/style-loader/), because it injects CSS into the DOM using multiple <style></style> and works faster.
+
+> i Do not use together `style-loader` and `mini-css-extract-plugin`.
+>>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
+
+module.exports = {
+<<<<<<< HEAD
+  plugins: [
+    new MiniCssExtractPlugin({
+      // 类似于 webpackOptions.output 中的选项
+      // 所有选项都是可选的
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+      ignoreOrder: false, // 忽略有关顺序冲突的警告
+    }),
+  ],
+=======
+>>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+<<<<<<< HEAD
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // 你可以在这里指定特定的 publicPath
+              // 默认情况下使用 webpackOptions.output 中的 publicPath
+              publicPath: '../',
+            },
+          },
+=======
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+>>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
+      },
+    ],
+  },
+  plugins: [].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
+};
+```
+
+<<<<<<< HEAD
+### 通用用例 {#common-use-case}
+
+`mini-css-extract-plugin` is more often used in `production` mode to get separate css files.
+For `development` mode (including `webpack-dev-server`) you can use `style-loader`, because it injects CSS into the DOM using multiple `<style></style>` and works faster.
+
+> ⚠️ Do not use `style-loader` and `mini-css-extract-plugin` together.
+=======
+### Minimal example
+>>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 
 **webpack.config.js**
 
@@ -515,11 +583,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
-      // 类似于 webpackOptions.output 中的选项
-      // 所有选项都是可选的
+      // Options similar to the same options in webpackOptions.output
+      // all options are optional
       filename: '[name].css',
       chunkFilename: '[id].css',
-      ignoreOrder: false, // 忽略有关顺序冲突的警告
+      ignoreOrder: false, // Enable to remove warnings about conflicting order
     }),
   ],
   module: {
@@ -530,49 +598,12 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              // 你可以在这里指定特定的 publicPath
-              // 默认情况下使用 webpackOptions.output 中的 publicPath
+              // you can specify a publicPath here
+              // by default it uses publicPath in webpackOptions.output
               publicPath: '../',
             },
           },
           'css-loader',
-        ],
-      },
-    ],
-  },
-};
-```
-
-### 通用用例 {#common-use-case}
-
-`mini-css-extract-plugin` is more often used in `production` mode to get separate css files.
-For `development` mode (including `webpack-dev-server`) you can use `style-loader`, because it injects CSS into the DOM using multiple `<style></style>` and works faster.
-
-> ⚠️ Do not use `style-loader` and `mini-css-extract-plugin` together.
-
-**webpack.config.js**
-
-```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const devMode = process.env.NODE_ENV !== 'production';
-
-const plugins = [];
-if (!devMode) {
-  // enable in production only
-  plugins.push(new MiniCssExtractPlugin());
-}
-
-module.exports = {
-  plugins,
-  module: {
-    rules: [
-      {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
         ],
       },
     ],

@@ -44,7 +44,7 @@ $ npm install imports-loader --save-dev
 **example.js**
 
 ```js
-$('img').doSomeAwesomeJqueryPluginStuff();
+$("img").doSomeAwesomeJqueryPluginStuff();
 ```
 
 然后你可以使用两个方法来配置 `imports-loader`，就可以把 `jquery` 值注入到模块中。
@@ -61,9 +61,15 @@ $('img').doSomeAwesomeJqueryPluginStuff();
 //
 // import myLib from 'imports-loader?imports=default%20jquery%20$!./example.js';
 //
+<<<<<<< HEAD
 // `%20` 是查询字符串中的空格，相当于 `default jquery $`
 import myLib from 'imports-loader?imports=default|jquery|$!./example.js';
 // 在 example.js 的开头添加如下代码：
+=======
+// `%20` is space in a query string, equivalently `default jquery $`
+import myLib from "imports-loader?imports=default|jquery|$!./example.js";
+// Adds the following code to the beginning of example.js:
+>>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // import $ from "jquery";
 //
@@ -73,9 +79,15 @@ import myLib from 'imports-loader?imports=default|jquery|$!./example.js';
 ```
 
 ```js
+<<<<<<< HEAD
 import myLib from 'imports-loader?imports=default|jquery|$,angular!./example.js';
 // `|` 是查询字符串中的分隔符，相当于 `default|jquery|$` 与 `angular`
 // 在 example.js 的开头添加如下代码：
+=======
+import myLib from "imports-loader?imports=default|jquery|$,angular!./example.js";
+// `|` is separator in a query string, equivalently `default|jquery|$` and `angular`
+// Adds the following code to the beginning of example.js:
+>>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // import $ from "jquery";
 // import angular from "angular";
@@ -86,9 +98,15 @@ import myLib from 'imports-loader?imports=default|jquery|$,angular!./example.js'
 ```
 
 ```js
+<<<<<<< HEAD
 import myLib from 'imports-loader?imports=named|library|myMethod,angular!./example.js';
 // `|` 是查询字符串中的分隔符，相当于 `named|library|myMethod` 与 `angular`
 // 在 example.js 的开头添加如下代码：
+=======
+import myLib from "imports-loader?imports=named|library|myMethod,angular!./example.js";
+// `|` is separator in a query string, equivalently `named|library|myMethod` and `angular`
+// Adds the following code to the beginning of example.js:
+>>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // import { myMethod } from "library";
 // import angular from "angular";
@@ -126,8 +144,13 @@ const myLib = require(`imports-loader?type=commonjs&imports=single|myLib|myMetho
 ```
 
 ```js
+<<<<<<< HEAD
 import myLib from 'imports-loader?additionalCode=var%20myVariable%20=%20false;!./example.js';
 // 在 example.js 的开头添加如下代码：
+=======
+import myLib from "imports-loader?additionalCode=var%20myVariable%20=%20false;!./example.js";
+// Adds the following code to the beginning of example.js:
+>>>>>>> 6845d19644f2909a394980c69fc96cd190dd9786
 //
 // var myVariable = false;
 //
@@ -147,22 +170,22 @@ module.exports = {
       {
         // 你可以使用 `regexp`
         // test: /example\.js/$
-        test: require.resolve('example.js'),
+        test: require.resolve("example.js"),
         use: [
           {
-            loader: 'imports-loader',
+            loader: "imports-loader",
             options: {
               imports: [
-                'default jquery $',
-                'default lib_2 lib_2_default',
-                'named lib_3 lib2_method_1',
-                'named lib_3 lib2_method_2 lib_2_method_2_short',
-                'namespace lib_4 my_namespace',
-                'side-effects lib_5',
+                "default jquery $",
+                "default lib_2 lib_2_default",
+                "named lib_3 lib2_method_1",
+                "named lib_3 lib2_method_2 lib_2_method_2_short",
+                "namespace lib_4 my_namespace",
+                "side-effects lib_5",
                 {
-                  syntax: 'default',
-                  moduleName: 'angular',
-                  name: 'angular',
+                  syntax: "default",
+                  moduleName: "angular",
+                  name: "angular",
                 },
               ],
             },
@@ -177,12 +200,12 @@ module.exports = {
 生成输出：
 
 ```js
-import $ from 'jquery';
-import lib_2_default from 'lib_2';
-import { lib2_method_1, lib2_method_2 as lib_2_method_2_short } from 'lib_3';
-import * as my_namespace from 'lib_4';
-import 'lib_5';
-import angular from 'angular';
+import $ from "jquery";
+import lib_2_default from "lib_2";
+import { lib2_method_1, lib2_method_2 as lib_2_method_2_short } from "lib_3";
+import * as my_namespace from "lib_4";
+import "lib_5";
+import angular from "angular";
 ```
 
 然后用你喜欢的方式运行 `webpack`
@@ -214,12 +237,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('example.js'),
-        loader: 'imports-loader',
+        test: require.resolve("example.js"),
+        loader: "imports-loader",
         options: {
-          syntax: 'default',
-          type: 'commonjs',
-          imports: 'Foo',
+          syntax: "default",
+          type: "commonjs",
+          imports: "Foo",
         },
       },
     ],
@@ -230,7 +253,7 @@ module.exports = {
 生成输出：
 
 ```js
-var Foo = require('Foo');
+var Foo = require("Foo");
 
 // ...
 // Code
@@ -246,11 +269,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('example.js'),
-        loader: 'imports-loader',
+        test: require.resolve("example.js"),
+        loader: "imports-loader",
         options: {
-          type: 'module',
-          imports: 'Foo',
+          type: "module",
+          imports: "Foo",
         },
       },
     ],
@@ -261,7 +284,7 @@ module.exports = {
 生成输出：
 
 ```js
-import Foo from 'Foo';
+import Foo from "Foo";
 
 // ...
 // Code
@@ -329,10 +352,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('./path/to/example.js'),
-        loader: 'imports-loader',
+        test: require.resolve("./path/to/example.js"),
+        loader: "imports-loader",
         options: {
-          imports: 'default lib myName',
+          imports: "default lib myName",
         },
       },
     ],
@@ -343,7 +366,7 @@ module.exports = {
 生成输出：
 
 ```js
-import myName from 'lib';
+import myName from "lib";
 
 // ...
 // Code
@@ -359,11 +382,11 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('./path/to/example.js'),
-        loader: 'imports-loader',
+        test: require.resolve("./path/to/example.js"),
+        loader: "imports-loader",
         options: {
-          type: 'commonjs',
-          imports: 'single lib myName',
+          type: "commonjs",
+          imports: "single lib myName",
         },
       },
     ],
@@ -374,7 +397,7 @@ module.exports = {
 生成输出：
 
 ```js
-var myName = require('lib');
+var myName = require("lib");
 
 // ...
 // Code
@@ -407,16 +430,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('example.js'),
+        test: require.resolve("example.js"),
         use: [
           {
-            loader: 'imports-loader',
+            loader: "imports-loader",
             options: {
               imports: {
-                syntax: 'named',
-                moduleName: 'lib_2',
-                name: 'lib2_method_2',
-                alias: 'lib_2_method_2_alias',
+                syntax: "named",
+                moduleName: "lib_2",
+                name: "lib2_method_2",
+                alias: "lib_2_method_2_alias",
               },
             },
           },
@@ -430,7 +453,7 @@ module.exports = {
 生成输出：
 
 ```js
-import { lib2_method_2 as lib_2_method_2_alias } from 'lib_2';
+import { lib2_method_2 as lib_2_method_2_alias } from "lib_2";
 
 // ...
 // Code
@@ -451,25 +474,25 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('example.js'),
+        test: require.resolve("example.js"),
         use: [
           {
-            loader: 'imports-loader',
+            loader: "imports-loader",
             options: {
               imports: [
                 {
-                  moduleName: 'angular',
+                  moduleName: "angular",
                 },
                 {
-                  syntax: 'default',
-                  moduleName: 'jquery',
-                  name: '$',
+                  syntax: "default",
+                  moduleName: "jquery",
+                  name: "$",
                 },
-                'default lib_2 lib_2_default',
-                'named lib_2 lib2_method_1',
-                'named lib_2 lib2_method_2 lib_2_method_2_alias',
-                'namespace lib_3 lib_3_all',
-                'side-effects lib_4',
+                "default lib_2 lib_2_default",
+                "named lib_2 lib2_method_1",
+                "named lib_2 lib2_method_2 lib_2_method_2_alias",
+                "namespace lib_3 lib_3_all",
+                "side-effects lib_4",
               ],
             },
           },
@@ -483,12 +506,12 @@ module.exports = {
 生成输出：
 
 ```js
-import angular from 'angular';
-import $ from 'jquery';
-import lib_2_default from 'lib_2';
-import { lib2_method_1, lib2_method_2 as lib_2_method_2_alias } from 'lib_2';
-import * as lib_3_all from 'lib_3';
-import 'lib_4';
+import angular from "angular";
+import $ from "jquery";
+import lib_2_default from "lib_2";
+import { lib2_method_1, lib2_method_2 as lib_2_method_2_alias } from "lib_2";
+import * as lib_3_all from "lib_3";
+import "lib_4";
 
 // ...
 // Code
@@ -513,14 +536,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('example.js'),
+        test: require.resolve("example.js"),
         use: [
           {
-            loader: 'imports-loader',
+            loader: "imports-loader",
             options: {
               imports: {
-                moduleName: 'jquery',
-                name: '$',
+                moduleName: "jquery",
+                name: "$",
               },
               wrapper: true,
             },
@@ -535,7 +558,7 @@ module.exports = {
 生成输出：
 
 ```js
-import $ from 'jquery';
+import $ from "jquery";
 
 (function () {
   // ...
@@ -553,16 +576,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('example.js'),
+        test: require.resolve("example.js"),
         use: [
           {
-            loader: 'imports-loader',
+            loader: "imports-loader",
             options: {
               imports: {
-                moduleName: 'jquery',
-                name: '$',
+                moduleName: "jquery",
+                name: "$",
               },
-              wrapper: 'window',
+              wrapper: "window",
             },
           },
         ],
@@ -575,7 +598,7 @@ module.exports = {
 生成输出：
 
 ```js
-import $ from 'jquery';
+import $ from "jquery";
 
 (function () {
   // ...
@@ -593,18 +616,18 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('example.js'),
+        test: require.resolve("example.js"),
         use: [
           {
-            loader: 'imports-loader',
+            loader: "imports-loader",
             options: {
               imports: {
-                moduleName: 'jquery',
-                name: '$',
+                moduleName: "jquery",
+                name: "$",
               },
               wrapper: {
-                thisArg: 'window',
-                args: ['myVariable', 'myOtherVariable'],
+                thisArg: "window",
+                args: ["myVariable", "myOtherVariable"],
               },
             },
           },
@@ -618,7 +641,7 @@ module.exports = {
 生成输出：
 
 ```js
-import $ from 'jquery';
+import $ from "jquery";
 
 (function (myVariable, myOtherVariable) {
   // ...
@@ -636,20 +659,20 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('example.js'),
+        test: require.resolve("example.js"),
         use: [
           {
-            loader: 'imports-loader',
+            loader: "imports-loader",
             options: {
               imports: {
-                moduleName: 'jquery',
-                name: '$',
+                moduleName: "jquery",
+                name: "$",
               },
               wrapper: {
-                thisArg: 'window',
+                thisArg: "window",
                 args: {
-                  myVariable: 'var1',
-                  myOtherVariable: 'var2',
+                  myVariable: "var1",
+                  myOtherVariable: "var2",
                 },
               },
             },
@@ -664,7 +687,7 @@ module.exports = {
 生成输出：
 
 ```js
-import $ from 'jquery';
+import $ from "jquery";
 
 (function (var1, var2) {
   // ...
@@ -691,16 +714,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('example.js'),
+        test: require.resolve("example.js"),
         use: [
           {
-            loader: 'imports-loader',
+            loader: "imports-loader",
             options: {
               imports: {
-                moduleName: 'jquery',
-                name: '$',
+                moduleName: "jquery",
+                name: "$",
               },
-              additionalCode: 'var myVariable = false;',
+              additionalCode: "var myVariable = false;",
             },
           },
         ],
@@ -713,7 +736,7 @@ module.exports = {
 生成输出：
 
 ```js
-import $ from 'jquery';
+import $ from "jquery";
 
 var myVariable = false;
 
@@ -731,17 +754,17 @@ module.exports = {
   module: {
     rules: [
       {
-        test: require.resolve('example.js'),
+        test: require.resolve("example.js"),
         use: [
           {
-            loader: 'imports-loader',
+            loader: "imports-loader",
             options: {
               imports: {
-                moduleName: 'jquery',
-                name: '$',
+                moduleName: "jquery",
+                name: "$",
               },
               additionalCode:
-                'var define = false; /* Disable AMD for misbehaving libraries */',
+                "var define = false; /* Disable AMD for misbehaving libraries */",
             },
           },
         ],
@@ -754,7 +777,7 @@ module.exports = {
 生成输出：
 
 ```js
-import $ from 'jquery';
+import $ from "jquery";
 
 var define = false; /* Disable AMD for misbehaving libraries */
 
