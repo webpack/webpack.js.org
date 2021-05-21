@@ -124,8 +124,7 @@ module.exports = {
 Type: `Boolean|Function`
 Default: `true`
 
-Enables/Disables `url`/`image-set` functions handling.
-Control `url()` resolving. Absolute paths and root-relative URLs now resolving(Version [4.0.0](https://github.com/webpack-contrib/css-loader/blob/master/CHANGELOG.md#400-2020-07-25) and above).
+Enables/Disables handling the CSS functions `url` and `image-set`. If set to `false`, `css-loader` will not parse any paths specified in `url` or `image-set`. A function can also be passed to control this behavior dynamically based on the path to the asset. Starting with version [4.0.0](https://github.com/webpack-contrib/css-loader/blob/master/CHANGELOG.md#400-2020-07-25), absolute paths are parsed based on the server root.
 
 Examples resolutions:
 
@@ -1131,6 +1130,38 @@ module.exports = {
 
 ## Examples
 
+### Recommend
+
+For `production` builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
+This can be achieved by using the [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/), because it creates separate css files.
+For `development` mode (including `webpack-dev-server`) you can use [style-loader](/loaders/style-loader/), because it injects CSS into the DOM using multiple <style></style> and works faster.
+
+> i Do not use together `style-loader` and `mini-css-extract-plugin`.
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const devMode = process.env.NODE_ENV !== "production";
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
+        ],
+      },
+    ],
+  },
+  plugins: [].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
+};
+```
+
 ### Disable url resolving using the `/* webpackIgnore: true */` comment
 
 With the help of the `/* webpackIgnore: true */`comment, it is possible to disable sources handling for rules and for individual declarations.
@@ -1234,14 +1265,6 @@ module.exports = {
   },
 };
 ```
-
-### Extract
-
-For production builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
-
-- This can be achieved by using the [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) to extract the CSS when running in production mode.
-
-- As an alternative, if seeking better development performance and css outputs that mimic production. [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin) offers a hot module reload friendly, extended version of mini-css-extract-plugin. HMR real CSS files in dev, works like mini-css in non-dev
 
 ### Pure CSS, CSS modules and PostCSS
 
