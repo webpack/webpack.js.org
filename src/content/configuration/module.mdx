@@ -749,6 +749,28 @@ An array of [`Rules`](#rule) that is also used when the Rule matches.
 
 T> See [`Nested rules`](#nested-rules) for more information.
 
+## Rule.scheme
+
+Matche the used schema, e.g., `data`, `http`.
+
+- Type: `string | RegExp | ((value: string) => boolean) | RuleSetLogicalConditions | RuleSetCondition[]`
+- Available: <Badge text='5.38.0+' />
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        scheme: 'data',
+        type: 'asset/resource',
+      },
+    ],
+  },
+};
+```
+
 ## `Rule.sideEffects`
 
 `bool`
