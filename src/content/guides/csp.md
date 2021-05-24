@@ -5,8 +5,12 @@ contributors:
   - EugeneHlushko
   - probablyup
   - wizardofhogwarts
+<<<<<<< HEAD
 translators:
   - QC-L
+=======
+  - koto
+>>>>>>> ddf697f384c7d1a970f6925746f836090d3aa73f
 related:
   - title: 解释 nonce 设计目的
     url: https://stackoverflow.com/questions/42922784/what-s-the-purpose-of-the-html-nonce-attribute-for-script-and-style-elements
@@ -16,6 +20,8 @@ related:
     url: https://www.troyhunt.com/locking-down-your-website-scripts-with-csp-hashes-nonces-and-report-uri/
   - title: MDN 的 CSP 文档
     url: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+  - title: Trusted Types
+    url: https://web.dev/trusted-types
 ---
 
 webpack 能够为其加载的所有脚本添加 `nonce`。要启用此功能，需要在引入的入口脚本中设置一个 `__webpack_nonce__` 变量。应该为每个唯一的页面视图生成和提供一个唯一的基于 hash 的 nonce，这就是为什么 `__webpack_nonce__` 要在入口文件中指定，而不是在配置中指定的原因。注意，`nonce` 应该是一个 base64 编码的字符串。
@@ -39,4 +45,12 @@ Content-Security-Policy: default-src 'self'; script-src 'self'
 https://trusted.cdn.com;
 ```
 
+<<<<<<< HEAD
 有关 CSP 和 `nonce` 属性的更多信息，请查看页面底部的**延伸阅读**部分。
+=======
+For more information on CSP and `nonce` attribute, please refer to **Further Reading** section at the bottom of this page.
+
+## Trusted Types
+
+Webpack is also capable of using Trusted Types to load dynamically constructed scripts, to adhere to CSP [`require-trusted-types-for`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) directive restrictions. See [`output.trustedTypes`](/configuration/output/#outputtrustedtypes) configuration option.
+>>>>>>> ddf697f384c7d1a970f6925746f836090d3aa73f
