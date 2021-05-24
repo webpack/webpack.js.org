@@ -5,12 +5,10 @@ contributors:
   - EugeneHlushko
   - probablyup
   - wizardofhogwarts
-<<<<<<< HEAD
+  - koto
 translators:
   - QC-L
-=======
-  - koto
->>>>>>> ddf697f384c7d1a970f6925746f836090d3aa73f
+  - jacob-lcs
 related:
   - title: 解释 nonce 设计目的
     url: https://stackoverflow.com/questions/42922784/what-s-the-purpose-of-the-html-nonce-attribute-for-script-and-style-elements
@@ -45,12 +43,8 @@ Content-Security-Policy: default-src 'self'; script-src 'self'
 https://trusted.cdn.com;
 ```
 
-<<<<<<< HEAD
-有关 CSP 和 `nonce` 属性的更多信息，请查看页面底部的**延伸阅读**部分。
-=======
-For more information on CSP and `nonce` attribute, please refer to **Further Reading** section at the bottom of this page.
+有关 CSP 和 `nonce` 属性的更多信息，请查看页面底部的 **延伸阅读** 部分。
 
-## Trusted Types
+## Trusted Types {#trustedtypes}
 
-Webpack is also capable of using Trusted Types to load dynamically constructed scripts, to adhere to CSP [`require-trusted-types-for`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) directive restrictions. See [`output.trustedTypes`](/configuration/output/#outputtrustedtypes) configuration option.
->>>>>>> ddf697f384c7d1a970f6925746f836090d3aa73f
+webpack 还能够使用 Trusted Types 来加载动态构建的脚本，遵守 CSP [`require-trusted-types-for`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-trusted-types-for) 指令的限制。可查看 [`output.trustedTypes`](/configuration/output/#outputtrustedtypes) 配置项。
