@@ -82,6 +82,8 @@ Name of template to generate.
 
 To generate a project without questions. When enabled, default answer for each question will be used.
 
+Know more about the questions aksed by `init` [here](https://github.com/webpack/webpack-cli/blob/master/INIT.md#description-of-questions-asked-by-the-generator)
+
 ### Info
 
 Outputs information about your system.
