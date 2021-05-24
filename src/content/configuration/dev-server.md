@@ -1273,7 +1273,7 @@ module.exports = {
 
 `function (app, server)`
 
-W> This option is **deprecated** in favor of [`devServer.before`](#devserverbefore) and will be removed in v3.0.0.
+W> This option is **deprecated** in favor of [`devServer.before`](#devserverbefore) and will be removed in v4.0.0.
 
 Here you can access the Express app object and add your own custom middleware to it.
 For example, to define custom handlers for some paths:
