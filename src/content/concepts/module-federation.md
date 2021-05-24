@@ -268,7 +268,7 @@ module.exports = {
 __webpack_public_path__ = document.currentScript.src + '/../';
 ```
 
-T> There is also a value called [`auto`](https://webpack.js.org/configuration/output/#outputpublicpath) available which automatically determines publicPath for you.
+T> There is also an `'auto'` value available to [`output.publicPath`](/configuration/output/#outputpublicpath) which automatically determines the publicPath for you.
 
 ## Troubleshooting
 
