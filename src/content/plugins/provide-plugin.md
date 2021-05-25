@@ -58,8 +58,8 @@ Then in any of our source code:
 
 ```javascript
 // in a module
-$('#item'); // <= just works
-jQuery('#item'); // <= just works
+$('#item'); // <= works
+jQuery('#item'); // <= also works
 // $ is automatically set to the exports of module "jquery"
 ```
 

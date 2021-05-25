@@ -29,7 +29,7 @@ and [variables](/api/module-variables) – that are supported.
 
 ## Node
 
-While most users can get away with just using the CLI along with a
+While most users can get away with using the CLI along with a
 configuration file, more fine-grained control of the compilation can be
 achieved via the Node interface. This includes passing multiple configurations,
 programmatically running or watching, and collecting stats.

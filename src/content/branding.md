@@ -22,7 +22,7 @@ The webpack logo should be placed on a white background with enough space around
 
 [svg](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.svg) | [png](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.png) | [jpg](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.jpg)
 
-Just double the size of the inner dark blue cube to get an idea how much space the logo should have.
+Double the size of the inner dark blue cube to get an idea how much space the logo should have.
 
 For dark backgrounds, you can use the negative version of the logo:
 

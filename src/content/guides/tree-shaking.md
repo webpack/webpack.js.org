@@ -130,7 +130,7 @@ Note the `unused harmony export square` comment above. If you look at the code b
 
 ## Mark the file as side-effect-free
 
-In a 100% ESM module world, identifying side effects is straightforward. However, we aren't there just yet, so in the mean time it's necessary to provide hints to webpack's compiler on the "pureness" of your code.
+In a 100% ESM module world, identifying side effects is straightforward. However, we aren't there quite yet, so in the mean time it's necessary to provide hints to webpack's compiler on the "pureness" of your code.
 
 The way this is accomplished is the `"sideEffects"` package.json property.
 
@@ -236,7 +236,7 @@ export {
 
 When `Button` is unused you can effectively remove the `export { Button$1 };` which leaves all the remaining code. So the question is "Does this code have any side effects or can it be safely removed?". Difficult to say, especially because of this line `withAppProvider()(Button)`. `withAppProvider` is called and the return value is also called. Are there any side effects when calling `merge` or `hoistStatics`? Are there side effects when assigning `WithProvider.contextTypes` (Setter?) or when reading `WrappedComponent.contextTypes` (Getter?).
 
-Terser actually tries to figure it out, but it doesn't know for sure in many cases. This doesn't mean that terser is not doing its job well because it can't figure it out. It's just too difficult to determine it reliably in a dynamic language like JavaScript.
+Terser actually tries to figure it out, but it doesn't know for sure in many cases. This doesn't mean that terser is not doing its job well because it can't figure it out. It's too difficult to determine it reliably in a dynamic language like JavaScript.
 
 But we can help terser by using the `/*#__PURE__*/` annotation. It flags a statement as side effect free. So a small change would make it possible to tree-shake the code:
 

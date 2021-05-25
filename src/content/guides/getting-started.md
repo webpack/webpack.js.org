@@ -118,7 +118,7 @@ T> If you want to learn more about the inner workings of `package.json`, then we
  }
 ```
 
-In this example, there are implicit dependencies between the `<script>` tags. Our `index.js` file depends on `lodash` being included in the page before it runs. This is because `index.js` never explicitly declared a need for `lodash`; it just assumes that the global variable `_` exists.
+In this example, there are implicit dependencies between the `<script>` tags. Our `index.js` file depends on `lodash` being included in the page before it runs. This is because `index.js` never explicitly declared a need for `lodash`; it assumes that the global variable `_` exists.
 
 There are problems with managing JavaScript projects this way:
 

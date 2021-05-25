@@ -312,7 +312,7 @@ npx webpack help --mode
 
 **Show version of installed packages and sub-packages**
 
-To inspect the version of `webpack` and `webpack-cli` you are using just run command:
+To inspect the version of `webpack` and `webpack-cli` you are using, run the command:
 
 ```bash
 npx webpack --version
@@ -337,7 +337,7 @@ webpack-cli 4.6.0
 webpack-dev-server 3.11.2
 ```
 
-To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/info`) just run command similar to the following:
+To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/info`), run command similar to the following:
 
 ```bash
 npx webpack info --version

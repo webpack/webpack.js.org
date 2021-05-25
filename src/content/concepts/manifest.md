@@ -33,7 +33,7 @@ As the compiler enters, resolves, and maps out your application, it keeps detail
 
 ## The Problem
 
-So now you have a little bit of insight about how webpack works behind the scenes. "But, how does this affect me?", you might ask. Most of the time, it doesn't. The runtime will do its thing, utilizing the manifest, and everything will appear to just magically work once your application hits the browser. However, if you decide to improve the performance of your projects by utilizing browser caching, this process will all of a sudden become an important thing to understand.
+So now you have a little bit of insight about how webpack works behind the scenes. "But, how does this affect me?", you might ask. Most of the time, it doesn't. The runtime will do its thing, utilizing the manifest, and everything will appear to magically work once your application hits the browser. However, if you decide to improve the performance of your projects by utilizing browser caching, this process will all of a sudden become an important thing to understand.
 
 By using content hashes within your bundle file names, you can indicate to the browser when the content of a file has changed, thus invalidating the cache. Once you start doing this though, you'll immediately notice some funny behavior. Certain hashes change even when their content apparently does not. This is caused by the injection of the runtime and manifest, which changes every build.
 

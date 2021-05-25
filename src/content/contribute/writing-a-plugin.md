@@ -290,7 +290,7 @@ This will generate a markdown file with chosen name that looks like this:
 
 T> We are using synchronous `tap()` method to tap into the `processAssets` hook because we don't need to perform any asynchronous operations in the example above. However, the `processAssets` hook is an asynchronous one, so you can also use `tapPromise()` or `tapAsync()` if you actually need to.
 
-T> The [`processAssets`](/api/compilation-hooks/#processassets) hook also supports the `additionalAssets` property, that allows your plugin to intercept not only assets that were added by other plugins prior to the execution of the specified stage, but also for assets that were added on a later stages. This allows to intercept absolutely all the assets which are part of the compilation. However, in our example we are just fine with using the `SUMMARIZE` stage to capture all the assets generated on previous stages (this should account for all assets in general case).
+T> The [`processAssets`](/api/compilation-hooks/#processassets) hook also supports the `additionalAssets` property, that allows your plugin to intercept not only assets that were added by other plugins prior to the execution of the specified stage, but also for assets that were added on a later stages. This allows to intercept absolutely all the assets which are part of the compilation. However, in our example we are fine with using the `SUMMARIZE` stage to capture all the assets generated on previous stages (this should account for all assets in general case).
 
 ## Different Plugin Shapes
 

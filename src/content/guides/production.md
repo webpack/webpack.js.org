@@ -199,7 +199,7 @@ Note that while the [`TerserPlugin`](/plugins/terser-webpack-plugin/) is a great
 
 - [`ClosureWebpackPlugin`](https://github.com/webpack-contrib/closure-webpack-plugin)
 
-If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
+If you decide to try another minification plugin, make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
 
 ## Source Mapping
 

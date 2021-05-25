@@ -390,7 +390,7 @@ import 'whatwg-fetch';
  };
 ```
 
-With that in place, we can add the logic to conditionally load our new `polyfills.bundle.js` file. How you make this decision depends on the technologies and browsers you need to support. We'll just do some testing to determine whether our polyfills are needed:
+With that in place, we can add the logic to conditionally load our new `polyfills.bundle.js` file. How you make this decision depends on the technologies and browsers you need to support. We'll do some testing to determine whether our polyfills are needed:
 
 **dist/index.html**
 

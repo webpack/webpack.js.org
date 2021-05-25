@@ -203,7 +203,7 @@ To make this work with HMR we need to update that binding to the new `printMe` f
   }
 ```
 
-This is just one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there (some of which are mentioned below) that will make hot module replacement much easier.
+This is only one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there (some of which are mentioned below) that will make hot module replacement much easier.
 
 ## HMR with Stylesheets
 

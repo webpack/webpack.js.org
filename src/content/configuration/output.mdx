@@ -390,7 +390,7 @@ module.exports = {
 };
 ```
 
-Make sure to read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
+Make sure to read the [Caching guide](/guides/caching) for details. There are more steps involved than only setting this option.
 
 Note this option is called filename but you are still allowed to use something like `'js/[name]/bundle.js'` to create a folder structure.
 
@@ -814,7 +814,7 @@ Similar to [`type: 'assign'`](#type-assign) but a safer option as it will reuse 
 // only create MyLibrary if it doesn't exist
 MyLibrary = typeof MyLibrary === 'undefined' ? {} : MyLibrary;
 // then copy the return value to MyLibrary
-// just like what Object.assign does
+// similarly to what Object.assign does
 
 // for instance, you export a `hello` function in your entry as follow
 export function hello(name) {
@@ -1406,7 +1406,7 @@ Copy the return value to a target object if it exists, otherwise create the targ
 // create the target object if it doesn't exist
 MyLibrary = typeof MyLibrary === 'undefined' ? {} : MyLibrary;
 // then copy the return value to MyLibrary
-// just like what Object.assign does
+// similarly to what Object.assign does
 
 // for instance, you export a `hello` function in your entry as follow
 export function hello(name) {

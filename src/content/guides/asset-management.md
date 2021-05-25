@@ -328,7 +328,7 @@ Add some font files to your project:
   |- /node_modules
 ```
 
-With the loader configured and fonts in place, you can incorporate them via an `@font-face` declaration. The local `url(...)` directive will be picked up by webpack just as it was with the image:
+With the loader configured and fonts in place, you can incorporate them via an `@font-face` declaration. The local `url(...)` directive will be picked up by webpack, as it was with the image:
 
 **src/style.css**
 

@@ -61,7 +61,7 @@ Gulp is also a fairly straightforward integration with the help of the [`webpack
 npm install --save-dev webpack-stream
 ```
 
-Just `require('webpack-stream')` instead of `webpack` and optionally pass it an configuration:
+You can `require('webpack-stream')` instead of `webpack` and optionally pass it an configuration:
 
 **gulpfile.js**
 
