@@ -188,6 +188,88 @@ loadComponent('abtests', 'test123');
 
 [See full implementation](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)
 
+## Dynamic Public Path
+
+### Offer a host API to set the publicPath
+
+One could allow the host to set the publicPath of a remote module at runtime by exposing a method from that remote module.
+
+This approach is particularly helpful when you mount independently deployed child applications on the sub path of the host domain.
+
+Scenario:
+
+You have a host app hosted on `https://my-host.com/app/*` and a child app hosted on `https://foo-app.com`. The child app is also mounted on the host domain, hence,
+`https://foo-app.com` is expected to be accessible via `https://my-host.com/app/foo-app` and `https://my-host.com/app/foo/*` requests are redirected to `https://foo-app.com/*` via a proxy.
+
+Example:
+
+**webpack.config.js (remote)**
+
+```js
+module.exports = {
+  entry: {
+    remote: './public-path',
+  },
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'remote', // this name needs to match with the entry name
+      exposes: ['./public-path'],
+      // ...
+    }),
+  ],
+};
+```
+
+**public-path.js (remote)**
+
+```js
+export function set(value) {
+  __webpack_public_path__ = value;
+}
+```
+
+**src/index.js (host)**
+
+<!-- eslint-skip -->
+
+```js
+const publicPath = await import('remote/public-path');
+publicPath.set('/your-public-path');
+
+//boostrap app  e.g. import('./boostrap.js')
+```
+
+### Infer publicPath from script
+
+One could infer the publicPath from the script tag from `document.currentScript.src` and set it with the [`__webpack_public_path__`](/api/module-variables/#__webpack_public_path__-webpack-specific) module variable at runtime.
+
+Example:
+
+**webpack.config.js (remote)**
+
+```js
+module.exports = {
+  entry: {
+    remote: './setup-public-path',
+  },
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'remote', // this name needs to match with the entry name
+      // ...
+    }),
+  ],
+};
+```
+
+**setup-public-path.js (remote)**
+
+```js
+// derive the publicPath with your own logic and set it with the __webpack_public_path__ API
+__webpack_public_path__ = document.currentScript.src + '/../';
+```
+
+T> There is also an `'auto'` value available to [`output.publicPath`](/configuration/output/#outputpublicpath) which automatically determines the publicPath for you.
+
 ## Troubleshooting
 
 **`Uncaught Error: Shared module is not available for eager consumption`**
