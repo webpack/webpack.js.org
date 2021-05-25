@@ -46,9 +46,6 @@
         <loc>https://webpack.js.org/migrate</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/migrating</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins</loc>
     </url>
     <url>
@@ -64,13 +61,16 @@
         <loc>https://webpack.js.org/writers-guide</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/migrating</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/api/cli</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/api/compilation-hooks</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/compilation-object</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api/cli</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/compiler-hooks</loc>
@@ -115,25 +115,25 @@
         <loc>https://webpack.js.org/api/stats</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
+        <loc>https://webpack.js.org/blog/2020-12-08-roadmap-2021</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/blog/2020-12-08-roadmap-2021</loc>
+        <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/configuration</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/concepts/entry-points</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/concepts/configuration</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/loaders</loc>
@@ -223,10 +223,10 @@
         <loc>https://webpack.js.org/configuration/target</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/watch</loc>
+        <loc>https://webpack.js.org/contribute/debugging</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/contribute/debugging</loc>
+        <loc>https://webpack.js.org/configuration/watch</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/plugin-patterns</loc>
@@ -289,9 +289,6 @@
         <loc>https://webpack.js.org/guides/code-splitting-css</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/code-splitting-import</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/code-splitting-libraries</loc>
     </url>
     <url>
@@ -323,6 +320,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/hot-module-replacement</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/code-splitting-import</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/installation</loc>
@@ -379,9 +379,6 @@
         <loc>https://webpack.js.org/loaders/css-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/exports-loader</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/loaders/expose-loader</loc>
     </url>
     <url>
@@ -392,6 +389,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/imports-loader</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/loaders/exports-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/istanbul-instrumenter-loader</loc>
@@ -418,9 +418,6 @@
         <loc>https://webpack.js.org/loaders/remark-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/sass-loader</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/loaders/source-map-loader</loc>
     </url>
     <url>
@@ -437,6 +434,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/val-loader</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/loaders/sass-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/worker-loader</loc>
