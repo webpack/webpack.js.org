@@ -117,7 +117,7 @@ module.exports = {
 };
 ```
 
-It should be familiar have you used webpack to bundle your application. Basically, we're telling webpack to bundle `src/index.js` into `dist/webpack-numbers.js`.
+In the above example, we're telling webpack to bundle `src/index.js` into `dist/webpack-numbers.js`.
 
 ## Expose the Library
 
