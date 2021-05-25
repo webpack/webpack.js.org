@@ -16,7 +16,7 @@ A loader is a node module that exports a function. This function is called when 
 
 Before we dig into the different types of loaders, their usage, and examples, let's take a look at the three ways you can develop and test a loader locally.
 
-To test a single loader, you can simply use `path` to `resolve` a local file within a rule object:
+To test a single loader, you can use `path` to `resolve` a local file within a rule object:
 
 **webpack.config.js**
 
@@ -66,7 +66,7 @@ T> You can use [`webpack-defaults` package](https://github.com/webpack-contrib/w
 
 When a single loader is applied to the resource, the loader is called with only one parameter – a string containing the content of the resource file.
 
-Synchronous loaders can simply `return` a single value representing the transformed module. In more complex cases, the loader can return any number of values by using the `this.callback(err, values...)` function. Errors are either passed to the `this.callback` function or thrown in a sync loader.
+Synchronous loaders can `return` a single value representing the transformed module. In more complex cases, the loader can return any number of values by using the `this.callback(err, values...)` function. Errors are either passed to the `this.callback` function or thrown in a sync loader.
 
 The loader is expected to give back one or two values. The first value is a resulting JavaScript code as string or buffer. The second optional value is a SourceMap as JavaScript object.
 
@@ -119,7 +119,7 @@ Loaders should do only a single task. This not only makes the job of maintaining
 
 Take advantage of the fact that loaders can be chained together. Instead of writing a single loader that tackles five tasks, write five simpler loaders that divide this effort. Isolating them not only keeps each individual loader simple, but may allow for them to be used for something you hadn't thought of originally.
 
-Take the case of rendering a template file with data specified via loader options or query parameters. It could be written as a single loader that compiles the template from source, executes it and returns a module that exports a string containing the HTML code. However, in accordance with guidelines, a simple `apply-loader` exists that can be chained with other open source loaders:
+Take the case of rendering a template file with data specified via loader options or query parameters. It could be written as a single loader that compiles the template from source, executes it and returns a module that exports a string containing the HTML code. However, in accordance with guidelines, an `apply-loader` exists that can be chained with other open source loaders:
 
 - `pug-loader`: Convert template to a module that exports a function.
 - `apply-loader`: Executes the function with loader options and returns raw HTML.
@@ -256,7 +256,7 @@ For instance, the `sass-loader` [specifies `node-sass`](https://github.com/webpa
 
 ## Testing
 
-So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a simple unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest](https://jestjs.io/) framework to do this. We'll also install `babel-jest` and some presets that will allow us to use the `import` / `export` and `async` / `await`. Let's start by installing and saving these as a `devDependencies`:
+So you've written a loader, followed the guidelines above, and have it set up to run locally. What's next? Let's go through a unit testing example to ensure our loader is working the way we expect. We'll be using the [Jest](https://jestjs.io/) framework to do this. We'll also install `babel-jest` and some presets that will allow us to use the `import` / `export` and `async` / `await`. Let's start by installing and saving these as a `devDependencies`:
 
 ```bash
 npm install --save-dev jest babel-jest @babel/core @babel/preset-env
@@ -279,7 +279,7 @@ module.exports = {
 };
 ```
 
-Our loader will process `.txt` files and simply replace any instance of `[name]` with the `name` option given to the loader. Then it will output a valid JavaScript module containing the text as its default export:
+Our loader will process `.txt` files and replace any instance of `[name]` with the `name` option given to the loader. Then it will output a valid JavaScript module containing the text as its default export:
 
 **src/loader.js**
 

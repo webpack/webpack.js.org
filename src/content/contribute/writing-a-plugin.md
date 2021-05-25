@@ -53,7 +53,7 @@ class MyExampleWebpackPlugin {
 
 ## Basic plugin architecture
 
-Plugins are instantiated objects with an `apply` method on their prototype. This `apply` method is called once by the webpack compiler while installing the plugin. The `apply` method is given a reference to the underlying webpack compiler, which grants access to compiler callbacks. A simple plugin is structured as follows:
+Plugins are instantiated objects with an `apply` method on their prototype. This `apply` method is called once by the webpack compiler while installing the plugin. The `apply` method is given a reference to the underlying webpack compiler, which grants access to compiler callbacks. A plugin is structured as follows:
 
 ```javascript
 class HelloWorldPlugin {
@@ -183,7 +183,7 @@ module.exports = HelloAsyncPlugin;
 
 Once we can latch onto the webpack compiler and each individual compilations, the possibilities become endless for what we can do with the engine itself. We can reformat existing files, create derivative files, or fabricate entirely new assets.
 
-Let's write a simple example plugin that generates a new build file called `assets.md`, the contents of which will list all of the asset files in our build. This plugin might look something like this:
+Let's write an example plugin that generates a new build file called `assets.md`, the contents of which will list all of the asset files in our build. This plugin might look something like this:
 
 ```javascript
 class FileListPlugin {

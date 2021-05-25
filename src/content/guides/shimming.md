@@ -272,7 +272,7 @@ Now from within our entry script (i.e. `src/index.js`), we could use `const { fi
 
 Almost everything we've discussed thus far has been in relation to handling legacy packages. Let's move on to our second topic: **polyfills**.
 
-There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`](https://babeljs.io/docs/en/babel-polyfill/) we might simply:
+There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`](https://babeljs.io/docs/en/babel-polyfill/) we might:
 
 ```bash
 npm install --save babel-polyfill
@@ -390,7 +390,7 @@ import 'whatwg-fetch';
  };
 ```
 
-With that in place, we can add the logic to conditionally load our new `polyfills.bundle.js` file. How you make this decision depends on the technologies and browsers you need to support. We'll just do some simple testing to determine whether our polyfills are needed:
+With that in place, we can add the logic to conditionally load our new `polyfills.bundle.js` file. How you make this decision depends on the technologies and browsers you need to support. We'll just do some testing to determine whether our polyfills are needed:
 
 **dist/index.html**
 

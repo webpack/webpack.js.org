@@ -253,7 +253,7 @@ Webpack 5 allows to pass a list of targets and also support versions of target.
 
 Examples: `target: "node14"` `target: ["web", "es2020"]`
 
-This is a simple way to provide webpack all the information it needs to determine:
+This enables us to provide webpack all the information it needs to determine:
 
 - chunk loading mechanism, and
 - supported syntax like arrow functions

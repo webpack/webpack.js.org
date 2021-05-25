@@ -53,7 +53,7 @@ Let's start by setting [`mode` to `'development'`](/configuration/mode/#mode-dev
 
 ## Using source maps
 
-When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, the stack trace will simply point to `bundle.js`. This isn't always helpful as you probably want to know exactly which source file the error came from.
+When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, the stack trace will point to `bundle.js`. This isn't always helpful as you probably want to know exactly which source file the error came from.
 
 In order to make it easier to track down errors and warnings, JavaScript offers [source maps](http://blog.teamtreehouse.com/introduction-source-maps), which map your compiled code back to your original source code. If an error originates from `b.js`, the source map will tell you exactly that.
 
@@ -190,7 +190,7 @@ The only downside is that you have to refresh your browser in order to see the c
 
 ### Using webpack-dev-server
 
-The `webpack-dev-server` provides you with a simple web server and the ability to use live reloading. Let's set it up:
+The `webpack-dev-server` provides you with a rudimentary web server and the ability to use live reloading. Let's set it up:
 
 ```bash
 npm install --save-dev webpack-dev-server
@@ -425,4 +425,4 @@ To disable this feature in some common editors, see the list below:
 
 ## Conclusion
 
-Now that you've learned how to automatically compile your code and run a simple development server, you can check out the next guide, which will cover [Code Splitting](/guides/code-splitting/).
+Now that you've learned how to automatically compile your code and run a development server, you can check out the next guide, which will cover [Code Splitting](/guides/code-splitting/).

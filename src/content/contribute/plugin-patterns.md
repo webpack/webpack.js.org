@@ -93,7 +93,7 @@ W> Since webpack 5, `compilation.fileDependencies`, `compilation.contextDependen
 
 ## Changed chunks
 
-Similar to the watch graph, it's fairly simple to monitor changed chunks (or modules, for that matter) within a compilation by tracking their hashes.
+Similar to the watch graph, you can monitor changed chunks (or modules, for that matter) within a compilation by tracking their hashes.
 
 ```javascript
 class MyPlugin {

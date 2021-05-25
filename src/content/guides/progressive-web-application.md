@@ -19,7 +19,7 @@ This section will focus on adding an offline experience to our app. We'll achiev
 
 So far, we've been viewing the output by going directly to the local file system. Typically though, a real user accesses a web app over a network; their browser talking to a **server** which will serve up the required assets (e.g. `.html`, `.js`, and `.css` files).
 
-So let's test what the current experience is like using a simple server. Let's use the [http-server](https://www.npmjs.com/package/http-server) package: `npm install http-server --save-dev`. We'll also amend the `scripts` section of our `package.json` to add in a `start` script:
+So let's test what the current experience is like using a server with more basic features. Let's use the [http-server](https://www.npmjs.com/package/http-server) package: `npm install http-server --save-dev`. We'll also amend the `scripts` section of our `package.json` to add in a `start` script:
 
 **package.json**
 

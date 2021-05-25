@@ -14,7 +14,7 @@ The following high-level information should get you started.
 
 The Command Line Interface (CLI) to configure and interact with your build. It
 is especially useful in the case of early prototyping and profiling. For the
-most part, the CLI is simply used to kick off the process using a configuration
+most part, the CLI is used to kick off the process using a configuration
 file and a few flags (e.g. `--env`).
 
 [Learn more about the CLI!](/api/cli)

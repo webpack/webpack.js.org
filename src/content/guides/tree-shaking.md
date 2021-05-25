@@ -141,7 +141,7 @@ The way this is accomplished is the `"sideEffects"` package.json property.
 }
 ```
 
-All the code noted above does not contain side effects, so we can simply mark the property as `false` to inform webpack that it can safely prune unused exports.
+All the code noted above does not contain side effects, so we can mark the property as `false` to inform webpack that it can safely prune unused exports.
 
 T> A "side effect" is defined as code that performs a special behavior when imported, other than exposing one or more exports. An example of this are polyfills, which affect the global scope and usually do not provide an export.
 
@@ -238,7 +238,7 @@ When `Button` is unused you can effectively remove the `export { Button$1 };` wh
 
 Terser actually tries to figure it out, but it doesn't know for sure in many cases. This doesn't mean that terser is not doing its job well because it can't figure it out. It's just too difficult to determine it reliably in a dynamic language like JavaScript.
 
-But we can help terser by using the `/*#__PURE__*/` annotation. It flags a statement as side effect free. So a simple change would make it possible to tree-shake the code:
+But we can help terser by using the `/*#__PURE__*/` annotation. It flags a statement as side effect free. So a small change would make it possible to tree-shake the code:
 
 ```javascript
 var Button$1 = /*#__PURE__*/ withAppProvider()(Button);
