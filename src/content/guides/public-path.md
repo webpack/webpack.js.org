@@ -41,7 +41,7 @@ export default {
 
 ### On The Fly
 
-Another possible use case is to set the `publicPath` on the fly. webpack exposes a global variable called `__webpack_public_path__` that allows you to do that. So, in your application's entry point, you can do this:
+Another possible use case is to set the `publicPath` on the fly. webpack exposes a global variable called `__webpack_public_path__` that allows you to do that. In your application's entry point, you can do this:
 
 ```js
 __webpack_public_path__ = process.env.ASSET_PATH;

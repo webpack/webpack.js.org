@@ -239,7 +239,7 @@ Running another build, we would expect only our `main` bundle's hash to change, 
 ...
 ```
 
-... we can see that all three have. This is because each [`module.id`](/api/module-variables/#moduleid-commonjs) is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. So, to recap:
+... we can see that all three have. This is because each [`module.id`](/api/module-variables/#moduleid-commonjs) is incremented based on resolving order by default. Meaning when the order of resolving is changed, the IDs will be changed as well. To recap:
 
 - The `main` bundle changed because of its new content.
 - The `vendor` bundle changed because its `module.id` was changed.
