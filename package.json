@@ -130,7 +130,7 @@
     "rimraf": "^3.0.2",
     "sass": "^1.34.0",
     "sass-loader": "^11.1.1",
-    "sirv-cli": "^1.0.11",
+    "sirv-cli": "^1.0.12",
     "sitemap-static": "^0.4.2",
     "start-server-and-test": "^1.12.2",
     "static-site-generator-webpack-plugin": "^3.4.1",
