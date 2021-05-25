@@ -469,7 +469,7 @@ Zoe,Bill,Reminder,Buy orange juice
 Autumn,Lindsey,Letter,I miss you
 ```
 
-Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import, will contain parsed JSON for easy consumption:
+Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import, will contain parsed JSON for consumption:
 
 **src/index.js**
 

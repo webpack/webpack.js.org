@@ -253,7 +253,7 @@ Now let's update the configuration file to make use of the loader.
   };
 ```
 
-Hot loading stylesheets is as easy as importing them into a module:
+Hot loading stylesheets can be done by importing them into a module:
 
 **project**
 
