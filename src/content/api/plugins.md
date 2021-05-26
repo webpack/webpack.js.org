@@ -88,7 +88,7 @@ The moral of the story is that there are a variety of ways to `hook` into the
 ## Custom Hooks
 
 In order to add a new hook to the compilation for other plugins to `tap` into,
-simply `require` the necessary hook class from `tapable` and create one:
+you then `require` the necessary hook class from `tapable` and create one:
 
 ```js
 const SyncHook = require('tapable').SyncHook;

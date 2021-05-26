@@ -390,7 +390,7 @@ module.exports = {
 };
 ```
 
-Make sure to read the [Caching guide](/guides/caching) for details. There are more steps involved than just setting this option.
+Make sure to read the [Caching guide](/guides/caching) for details. There are more steps involved than only setting this option.
 
 Note this option is called filename but you are still allowed to use something like `'js/[name]/bundle.js'` to create a folder structure.
 
@@ -615,7 +615,7 @@ Output a library exposing the exports of your entry point.
 
 - Type: `string | string[] | object`
 
-Let's take a look at a simple example.
+Let's take a look at an example.
 
 **webpack.config.js**
 
@@ -814,7 +814,7 @@ Similar to [`type: 'assign'`](#type-assign) but a safer option as it will reuse 
 // only create MyLibrary if it doesn't exist
 MyLibrary = typeof MyLibrary === 'undefined' ? {} : MyLibrary;
 // then copy the return value to MyLibrary
-// just like what Object.assign does
+// similarly to what Object.assign does
 
 // for instance, you export a `hello` function in your entry as follow
 export function hello(name) {
@@ -979,7 +979,7 @@ This will expose your library as an AMD module.
 
 AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
 
-So, with the following configuration...
+With the following configuration...
 
 ```javascript
 module.exports = {
@@ -1406,7 +1406,7 @@ Copy the return value to a target object if it exists, otherwise create the targ
 // create the target object if it doesn't exist
 MyLibrary = typeof MyLibrary === 'undefined' ? {} : MyLibrary;
 // then copy the return value to MyLibrary
-// just like what Object.assign does
+// similarly to what Object.assign does
 
 // for instance, you export a `hello` function in your entry as follow
 export function hello(name) {
@@ -1522,7 +1522,7 @@ This will expose your library as an AMD module.
 
 AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
 
-So, with the following configuration...
+With the following configuration...
 
 ```javascript
 module.exports = {
@@ -1783,7 +1783,7 @@ This option specifies the **public URL** of the output directory when referenced
 
 The value of the option is prefixed to every URL created by the runtime or loaders. Because of this **the value of this option ends with `/`** in most cases.
 
-Simple rule: The URL of your [`output.path`](#outputpath) from the view of the HTML page.
+A rule to consider: The URL of your [`output.path`](#outputpath) from the view of the HTML page.
 
 **webpack.config.js**
 

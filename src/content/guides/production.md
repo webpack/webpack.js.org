@@ -106,7 +106,7 @@ npm install --save-dev webpack-merge
 + });
 ```
 
-In `webpack.common.js`, we now have setup our `entry` and `output` configuration and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've set `mode` to `development`. Also, we've added the recommended `devtool` for that environment (strong source mapping), as well as our simple `devServer` configuration. Finally, in `webpack.prod.js`,`mode` is set to `production` which loads [`TerserPlugin`](/plugins/terser-webpack-plugin/), which was first introduced by the [tree shaking](/guides/tree-shaking/) guide.
+In `webpack.common.js`, we now have setup our `entry` and `output` configuration and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've set `mode` to `development`. Also, we've added the recommended `devtool` for that environment (strong source mapping), as well as our `devServer` configuration. Finally, in `webpack.prod.js`,`mode` is set to `production` which loads [`TerserPlugin`](/plugins/terser-webpack-plugin/), which was first introduced by the [tree shaking](/guides/tree-shaking/) guide.
 
 Note the use of `merge()` calls in the environment-specific configurations to include our common configuration in `webpack.dev.js` and `webpack.prod.js`. The `webpack-merge` tool offers a variety of advanced features for merging but for our use case we won't need any of that.
 
@@ -199,7 +199,7 @@ Note that while the [`TerserPlugin`](/plugins/terser-webpack-plugin/) is a great
 
 - [`ClosureWebpackPlugin`](https://github.com/webpack-contrib/closure-webpack-plugin)
 
-If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
+If you decide to try another minification plugin, make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
 
 ## Source Mapping
 

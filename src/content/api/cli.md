@@ -29,13 +29,13 @@ related:
     url: https://medium.com/@nimgrg/analysing-and-minimising-the-size-of-client-side-bundle-with-webpack-and-source-map-explorer-41096559beca#.c3t2srr8x
 ---
 
-For proper usage and easy distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the configuration file.
+For proper usage and easier distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the configuration file.
 
 Read the [installation guide](/guides/installation) if you don't already have webpack and CLI installed.
 
 ## Commands
 
-webpack-cli offers a variety of commands to make working with webpack easy. By default webpack ships with
+webpack-cli offers a variety of commands to make working with webpack easier. By default webpack ships with
 
 | Command                               | Usage                                                 | Description                                                                     |
 | ------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- |
@@ -314,7 +314,7 @@ npx webpack help --mode
 
 **Show version of installed packages and sub-packages**
 
-To inspect the version of `webpack` and `webpack-cli` you are using just run command:
+To inspect the version of `webpack` and `webpack-cli` you are using, run the command:
 
 ```bash
 npx webpack --version
@@ -339,7 +339,7 @@ webpack-cli 4.6.0
 webpack-dev-server 3.11.2
 ```
 
-To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/info`) just run command similar to the following:
+To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/info`), run command similar to the following:
 
 ```bash
 npx webpack info --version
