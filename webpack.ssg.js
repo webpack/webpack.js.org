@@ -89,11 +89,13 @@ module.exports = (env) =>
           'plugins/no-emit-on-errors-plugin':
             '/configuration/optimization/#optimizationemitonerrors',
           'concepts/mode': '/configuration/mode',
-          '/concepts/configuration/#simple-configuration': '/concepts/configuration/#introductory-configuration',
+          'concepts/configuration/#simple-configuration':
+            '/concepts/configuration/#introductory-configuration',
           'contribute/writing-a-scaffold': '/api/cli/#init',
           'loaders/raw-loader': 'https://v4.webpack.js.org/loaders/raw-loader',
           'loaders/url-loader': 'https://v4.webpack.js.org/loaders/url-loader',
-          'loaders/file-loader': 'https://v4.webpack.js.org/loaders/file-loader',
+          'loaders/file-loader':
+            'https://v4.webpack.js.org/loaders/file-loader',
         },
       }),
       new CopyWebpackPlugin({
