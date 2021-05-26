@@ -7,7 +7,7 @@ contributors:
   - gonzoyumo
 ---
 
-The `publicPath` configuration option can be quite useful in a variety of scenarios. It allows you to specify the base path for all the assets within your application.
+The [`publicPath`](/configuration/output/#outputpublicpath) configuration option can be quite useful in a variety of scenarios. It allows you to specify the base path for all the assets within your application.
 
 ## Use Cases
 
