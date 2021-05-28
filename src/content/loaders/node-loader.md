@@ -105,7 +105,7 @@ Type: `Number`
 Default: `undefined`
 
 The `flags` argument is an integer that allows to specify dlopen behavior.
-See the [`process.dlopen`][https://nodejs.org/api/process.html#process_process_dlopen_module_filename_flags] documentation for details.
+See the [`process.dlopen`](https://nodejs.org/api/process.html#process_process_dlopen_module_filename_flags) documentation for details.
 
 **index.js**
 

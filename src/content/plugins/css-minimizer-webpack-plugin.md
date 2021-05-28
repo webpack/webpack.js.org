@@ -38,7 +38,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   module: {
-    loaders: [
+    rules: [
       {
         test: /.s?css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
@@ -46,7 +46,6 @@ module.exports = {
     ],
   },
   optimization: {
-    minimize: true,
     minimizer: [
       // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
       // `...`,
@@ -57,7 +56,20 @@ module.exports = {
 ```
 
 This will enable CSS optimization only in production mode.
-If you want to run it also in development set the `optimization.minimize` option to `true`.
+
+If you want to run it also in development set the `optimization.minimize` option to `true`:
+
+**webpack.config.js**
+
+```js
+// [...]
+module.exports = {
+  optimization: {
+    // [...]
+    minimize: true,
+  },
+};
+```
 
 And run `webpack` via your preferred method.
 
