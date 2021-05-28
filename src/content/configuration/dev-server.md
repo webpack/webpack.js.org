@@ -1269,6 +1269,12 @@ module.exports = {
 };
 ```
 
+Usage via the CLI
+
+```bash
+npx webpack serve --serveIndex
+```
+
 ## `devServer.setup`
 
 `function (app, server)`
