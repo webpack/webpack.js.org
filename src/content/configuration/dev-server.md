@@ -195,7 +195,7 @@ npx webpack serve --bonjour
 
 `string = 'info': 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'`
 
-W> `none` and `warning` are going to be deprecated at the next major version.
+W> `silent`, `trace`, `debug`, and `warning` are going to be deprecated at the next major version.
 
 When using _inline mode_, the console in your DevTools will show you messages e.g. before reloading, before an error or when [Hot Module Replacement](/concepts/hot-module-replacement/) is enabled.
 
