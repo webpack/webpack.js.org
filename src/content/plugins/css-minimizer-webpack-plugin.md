@@ -40,7 +40,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   module: {
-    loaders: [
+    rules: [
       {
         test: /.s?css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
@@ -48,7 +48,6 @@ module.exports = {
     ],
   },
   optimization: {
-    minimize: true,
     minimizer: [
       // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释
       // `...`,
@@ -59,7 +58,20 @@ module.exports = {
 ```
 
 这将仅在生产环境开启 CSS 优化。
-如果还想在开发环境下启用 CSS 优化，请将 `optimization.minimize` 设置为 `true`。
+
+如果还想在开发环境下启用 CSS 优化，请将 `optimization.minimize` 设置为 `true`:
+
+**webpack.config.js**
+
+```js
+// [...]
+module.exports = {
+  optimization: {
+    // [...]
+    minimize: true,
+  },
+};
+```
 
 然后通过你喜欢的方式运行 `webpack`。
 

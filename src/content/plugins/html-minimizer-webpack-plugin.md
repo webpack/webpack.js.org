@@ -184,14 +184,16 @@ module.exports = {
 
 ### `minify`
 
-Type: `Function`
-Default: `undefined`
+Type: `Function|Array<Function>`
+Default: `HtmlMinimizerPlugin.htmlMinifierTerser`
 
 Allows you to override default minify function.
 By default plugin uses [html-minifier-terser](https://github.com/terser/html-minifier-terser) package.
 Useful for using and testing unpublished versions or forks.
 
 > ⚠️ **Always use `require` inside `minify` function when `parallel` option enabled**.
+
+#### `Function`
 
 **webpack.config.js**
 
@@ -208,8 +210,52 @@ module.exports = {
           const htmlMinifier = require("html-minifier-terser");
           const [[filename, input]] = Object.entries(data);
 
-          return htmlMinifier.minify(input, minimizerOptions);
+          return {
+            code: htmlMinifier.minify(input, minimizerOptions),
+            warnings: [],
+            errors: [],
+          };
         },
+      }),
+    ],
+  },
+};
+```
+
+#### `Array`
+
+If an array of functions is passed to the `minify` option, the `minimizerOptions` can be an array or an object.
+If `minimizerOptions` is array, the function index in the `minify` array corresponds to the options object with the same index in the `minimizerOptions` array.
+If you use `minimizerOptions` like object, all `minify` function accept it.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new HtmlMinimizerPlugin({
+        minimizerOptions: [
+          // Options for the first function (HtmlMinimizerPlugin.htmlMinifierTerser)
+          {
+            collapseWhitespace: true,
+          },
+          // Options for the second function
+          {},
+        ],
+        minify: [
+          HtmlMinimizerPlugin.htmlMinifierTerser,
+          (data, minimizerOptions) => {
+            const [[filename, input]] = Object.entries(data);
+            // To do something
+            return {
+              code: `optimised code`,
+              warnings: [],
+              errors: [],
+            };
+          },
+        ],
       }),
     ],
   },
@@ -218,10 +264,12 @@ module.exports = {
 
 ### `minimizerOptions`
 
-Type: `Object`
+Type: `Object|Array<Object>`
 Default: `{ caseSensitive: true, collapseWhitespace: true, conservativeCollapse: true, keepClosingSlash: true, minifyCSS: true, minifyJS: true, removeComments: true, removeScriptTypeAttributes: true, removeStyleLinkTypeAttributes: true, }`
 
 `Html-minifier-terser` optimisations [options](https://github.com/terser/html-minifier-terser#options-quick-reference).
+
+#### `Object`
 
 ```js
 module.exports = {
@@ -232,6 +280,45 @@ module.exports = {
         minimizerOptions: {
           collapseWhitespace: false,
         },
+      }),
+    ],
+  },
+};
+```
+
+#### `Array`
+
+The function index in the `minify` array corresponds to the options object with the same index in the `minimizerOptions` array.
+If you use `minimizerOptions` like object, all `minify` function accept it.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new HtmlMinimizerPlugin({
+        minimizerOptions: [
+          // Options for the first function (HtmlMinimizerPlugin.htmlMinifierTerser)
+          {
+            collapseWhitespace: true,
+          },
+          // Options for the second function
+          {},
+        ],
+        minify: [
+          HtmlMinimizerPlugin.htmlMinifierTerser,
+          (data, minimizerOptions) => {
+            const [[filename, input]] = Object.entries(data);
+            // To do something
+            return {
+              code: `optimised code`,
+              warnings: [],
+              errors: [],
+            };
+          },
+        ],
       }),
     ],
   },
