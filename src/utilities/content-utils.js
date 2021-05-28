@@ -82,7 +82,7 @@ export const getPageTitle = (tree, path) => {
     if (path.includes('/printable')) {
       return 'Combined printable page | webpack';
     }
-    if (path === '/') return page.title ?? 'webpack';
+    if (path === '/') return page.title || 'webpack';
     return `${page.title} | webpack`;
   }
 };
@@ -92,5 +92,5 @@ export const getPageDescription = (tree, path) => {
   if (!page) return undefined;
   if (path.includes('/printable')) return '';
 
-  return page.description ?? '';
+  return page.description || '';
 };
