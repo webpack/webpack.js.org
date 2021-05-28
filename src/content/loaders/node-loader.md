@@ -107,8 +107,13 @@ module.exports = {
 类型：`Number`
 默认值：`undefined`
 
+<<<<<<< HEAD
 `flags` 参数是一个允许指定 dlopen 行为的整数。
 请查阅 [`process.dlopen`][https://nodejs.org/api/process.html#process_process_dlopen_module_filename_flags] 文档了解更多。
+=======
+The `flags` argument is an integer that allows to specify dlopen behavior.
+See the [`process.dlopen`](https://nodejs.org/api/process.html#process_process_dlopen_module_filename_flags) documentation for details.
+>>>>>>> 57a8d1e8bd34e8a7c6aea9966d973abfddb8dfe6
 
 **index.js**
 
