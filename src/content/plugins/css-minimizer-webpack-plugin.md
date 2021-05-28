@@ -57,13 +57,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 这将仅在生产环境开启 CSS 优化。
-如果还想在开发环境下启用 CSS 优化，请将 `optimization.minimize` 设置为 `true`。
-=======
-This will enable CSS optimization only in production mode.
 
-If you want to run it also in development set the `optimization.minimize` option to `true`:
+如果还想在开发环境下启用 CSS 优化，请将 `optimization.minimize` 设置为 `true`:
 
 **webpack.config.js**
 
@@ -76,7 +72,6 @@ module.exports = {
   },
 };
 ```
->>>>>>> 57a8d1e8bd34e8a7c6aea9966d973abfddb8dfe6
 
 然后通过你喜欢的方式运行 `webpack`。
 
