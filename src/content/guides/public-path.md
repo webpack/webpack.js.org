@@ -74,4 +74,4 @@ module.exports = {
 };
 ```
 
-Note that in cases where `document.currentScript` is not supported, e.g., IE, you have to include a polyfill like [`currentScript Polyfill`](https://github.com/amiller-gh/currentScript-polyfill).
+Note that in cases where `document.currentScript` is not supported, e.g., IE browser, you will have to include a polyfill like [`currentScript Polyfill`](https://github.com/amiller-gh/currentScript-polyfill).
