@@ -5,6 +5,7 @@ contributors:
   - rafaelrinaldi
   - chrisVillanueva
   - gonzoyumo
+  - chenxsan
 ---
 
 The [`publicPath`](/configuration/output/#outputpublicpath) configuration option can be quite useful in a variety of scenarios. It allows you to specify the base path for all the assets within your application.
@@ -59,4 +60,18 @@ import './public-path';
 import './app';
 ```
 
-T> When using `web` or `web-worker` target, `publicPath` defaults to `'auto'` which will automatically determine the public path from either `import.meta.url`, `document.currentScript`, `<script />` or `self.location`.
+### Automatic publicPath
+
+There are chances that you don't know what the publicPath will be in advance, and webpack can handle it automatically for you by determining the public path from variables like [`import.meta.url`](/api/module-variables/#importmetaurl), [`document.currentScript`](https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript), `script.src` or `self.location`. What you need is to set [`output.publicPath`](/configuration/output/#outputpublicpath) to `'auto'`:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  output: {
+    publicPath: 'auto',
+  },
+};
+```
+
+Note that in cases where `document.currentScript` is not supported, e.g., IE, you have to include a polyfill like [`currentScript Polyfill`](https://github.com/amiller-gh/currentScript-polyfill).
