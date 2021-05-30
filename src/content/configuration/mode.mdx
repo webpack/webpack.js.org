@@ -7,6 +7,7 @@ contributors:
   - mrichmond
   - Fental
   - snitin315
+  - chenxsan
 related:
   - title: 'webpack default options (source code)'
     url: https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js
@@ -64,7 +65,6 @@ module.exports = {
 -   mangleExports: false,
 -   nodeEnv: 'development',
 -   flagIncludedChunks: false,
--   occurrenceOrder: false,
 -   concatenateModules: false,
 -   splitChunks: {
 -     hidePathInfo: false,
@@ -101,7 +101,6 @@ module.exports = {
 -   mangleExports: 'deterministic',
 -   nodeEnv: 'production',
 -   flagIncludedChunks: true,
--   occurrenceOrder: true,
 -   concatenateModules: true,
 -   splitChunks: {
 -     hidePathInfo: true,
@@ -133,7 +132,6 @@ module.exports = {
 - },
 - optimization: {
 -   flagIncludedChunks: false,
--   occurrenceOrder: false,
 -   concatenateModules: false,
 -   splitChunks: {
 -     hidePathInfo: false,
