@@ -7,6 +7,8 @@ contributors:
   - EugeneHlushko
   - jamesgeorge007
   - ScriptedAlchemy
+  - XiaofengXie16
+
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
@@ -108,6 +110,207 @@ This plugin adds specific references to containers as externals and allows to im
 ### `ModuleFederationPlugin` (high level)
 
 This plugin combines `ContainerPlugin` and `ContainerReferencePlugin`. Overrides and overridables are combined into a single list of specified shared modules.
+
+## Shared Libraries and Versioning
+
+### Specify package versions
+
+There are three ways to specify the versions of shared libraries.
+
+**Array syntax**
+
+This syntax allows you to easily share libraries with package name only. This approach is good for prototyping, but it will not allow you to scale to large production environment given libraries like `react` and `react-dom` will require additional requirements.
+
+```js
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      // adds lodash as shared module
+      // version is inferred from package.json
+      // there is no version check for the required version
+      // so it will always use the higher version found
+      shared: ['lodash'],
+    }),
+  ],
+};
+```
+
+**Object syntax**
+
+This syntax provides you more control over each shared library in which you can define package name as the key and version ([semver](https://semver.org/)) as the value.
+
+```js
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      shared: {
+        // adds lodash as shared module
+        // version is inferred from package.json
+        // it will use the highest moment version that is >= 4.17 and < 5
+        lodash: '^4.17.0',
+      },
+    }),
+  ],
+};
+```
+
+**Object syntax with sharing hints**
+
+This syntax allows you to provide additional [hints](#sharing-hints) to each shared package where you define the package name as the key, and the value as an object containing hints to modify sharing behavior.
+
+```js
+const deps = require('./package.json').dependencies;
+
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      shared: {
+        // adds react as shared module
+        // version is inferred from package.json
+        // it will always use the shared version, but print a warning when the shared lodash is < 4.17 or >= 5
+        react: {
+          requiredVersion: deps.lodash,
+          singleton: true,
+        },
+      },
+    }),
+  ],
+};
+```
+
+### Sharing hints
+
+**`eager`**
+
+`boolean`
+
+This hint will allow Webpack to include the provided and fallback module directly instead of fetching the library via an asynchronous request. In other words, this allows to use this shared module in the initial chunk. Also, be careful that all provided and fallback modules will always be downloaded when this hint is enabled.
+
+**`import`**
+
+`false | string`
+
+The provided module that should be placed in the shared scope. This provided module also acts as fallback module if no shared module is found in the shared scope or version isn't valid. (The value for this hint defaults to the property name.)
+
+**`packageName`**
+
+`string`
+
+The package name that is used to determine required version from description file. This is only needed when the package name can't be automatically determined from request.
+
+**`requiredVersion`**
+
+`false | string`
+
+The required version of the package.
+
+**`shareKey`**
+
+`string`
+
+The requested shared module is looked up under this key from the shared scope.
+
+**`shareScope`**
+
+`string`
+
+The name of the shared scope.
+
+**`singleton`**
+
+`boolean`
+
+This hint only allows a single version of the shared module in the shared scope (disabled by default). Some libraries use a global internal state (e.g. react, react-dom). Thus, it is critical to have only one instance of the library running at a time.
+
+**`strictVersion`**
+
+`boolean`
+
+This hint allows Webpack to reject the shared module if version is not valid (defaults to `true`, if local fallback module is available and shared module is not a singleton, otherwise `false`, it has no effect if there is no required version specified).
+
+**`version`**
+
+`false | string`
+
+The version of the provided module. It allows Webpack to replace lower matching versions, but not higher.
+
+**Additional examples**
+
+```js
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      // adds vue as shared module
+      // version is inferred from package.json
+      // it will always use the shared version, but print a warning when the shared vue is < 2.6.5 or >= 3
+      shared: {
+        vue: {
+          requiredVersion: '^2.6.5',
+          singleton: true,
+        },
+      },
+    }),
+  ],
+};
+```
+
+```js
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      // adds vue as shared module
+      // there is no local version provided
+      // it will emit a warning if the shared vue is < 2.6.5 or >= 3
+      shared: {
+        vue: {
+          import: false,
+          requiredVersion: '^2.6.5',
+        },
+      },
+    }),
+  ],
+};
+```
+
+```js
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      // adds vue as shared module
+      // there is no local version provided
+      // it throw an error when the shared vue is < 2.6.5 or >= 3
+      shared: {
+        vue: {
+          import: false,
+          requiredVersion: '^2.6.5',
+          strictVersion: true,
+        },
+      },
+    }),
+  ],
+};
+```
+
+```js
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      shared: {
+        'my-vue': {
+          // can be referenced by import "my-vue"
+          import: 'vue', // the "vue" package will be used a provided and fallback module
+          shareKey: 'shared-vue', // under this name the shared module will be placed in the share scope
+          shareScope: 'default', // share scope with this name will be used
+          singleton: true, // only a single version of the shared module is allowed
+          strictVersion: true, // don't use shared version when version isn't valid. Singleton or modules without fallback will throw, otherwise fallback is used
+          version: '1.2.3', // the version of the shared module
+          requiredVersion: '^1.0.0', // the required version of the shared module
+        },
+      },
+    }),
+  ],
+};
+```
 
 ## Concept goals
 
