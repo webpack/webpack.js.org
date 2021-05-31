@@ -7,6 +7,7 @@ contributors:
   - mrichmond
   - Fental
   - snitin315
+  - chenxsan
 related:
   - title: 'webpack default options (source code)'
     url: https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsDefaulter.js
@@ -46,107 +47,29 @@ T> If `mode` is not provided via configuration or CLI, CLI will use any valid `N
 
 ### Mode: development
 
-```diff
+```js
 // webpack.development.config.js
 module.exports = {
-+ mode: 'development'
-- devtool: 'eval',
-- cache: true,
-- performance: {
--   hints: false
-- },
-- output: {
--   pathinfo: true
-- },
-- optimization: {
--   moduleIds: 'named',
--   chunkIds: 'named',
--   mangleExports: false,
--   nodeEnv: 'development',
--   flagIncludedChunks: false,
--   occurrenceOrder: false,
--   concatenateModules: false,
--   splitChunks: {
--     hidePathInfo: false,
--     minSize: 10000,
--     maxAsyncRequests: Infinity,
--     maxInitialRequests: Infinity,
--   },
--   emitOnErrors: true,
--   checkWasmTypes: false,
--   minimize: false,
--   removeAvailableModules: false
-- },
-- plugins: [
--   new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("development") }),
-- ]
-}
+  mode: 'development',
+};
 ```
 
 ### Mode: production
 
-```diff
+```js
 // webpack.production.config.js
 module.exports = {
-+  mode: 'production',
-- performance: {
--   hints: 'warning'
-- },
-- output: {
--   pathinfo: false
-- },
-- optimization: {
--   moduleIds: 'deterministic',
--   chunkIds: 'deterministic',
--   mangleExports: 'deterministic',
--   nodeEnv: 'production',
--   flagIncludedChunks: true,
--   occurrenceOrder: true,
--   concatenateModules: true,
--   splitChunks: {
--     hidePathInfo: true,
--     minSize: 30000,
--     maxAsyncRequests: 5,
--     maxInitialRequests: 3,
--   },
--   emitOnErrors: false,
--   checkWasmTypes: true,
--   minimize: true,
-- },
-- plugins: [
--   new TerserPlugin(/* ... */),
--   new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("production") }),
--   new webpack.optimize.ModuleConcatenationPlugin(),
--   new webpack.NoEmitOnErrorsPlugin()
-- ]
-}
+  mode: 'production',
+};
 ```
 
 ### Mode: none
 
-```diff
+```js
 // webpack.custom.config.js
 module.exports = {
-+ mode: 'none',
-- performance: {
--  hints: false
-- },
-- optimization: {
--   flagIncludedChunks: false,
--   occurrenceOrder: false,
--   concatenateModules: false,
--   splitChunks: {
--     hidePathInfo: false,
--     minSize: 10000,
--     maxAsyncRequests: Infinity,
--     maxInitialRequests: Infinity,
--   },
--   emitOnErrors: true,
--   checkWasmTypes: false,
--   minimize: false,
-- },
-- plugins: []
-}
+  mode: 'none',
+};
 ```
 
 If you want to change the behavior according to the **mode** variable inside the _webpack.config.js_, you have to export a function instead of an object:
