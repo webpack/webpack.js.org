@@ -194,7 +194,7 @@ webpack 提供几种可选方式，帮助你在代码发生变化后自动编译
 
 ### 使用 webpack-dev-server {#using-webpack-dev-server}
 
-`webpack-dev-server` 为你提供了一个简单的 web server，并且具有 live reloading(实时重新加载) 功能。设置如下：
+`webpack-dev-server` 为你提供了一个基本的 web server，并且具有 live reloading(实时重新加载) 功能。设置如下：
 
 ```bash
 npm install --save-dev webpack-dev-server
@@ -429,4 +429,8 @@ T> 如果想要了解更多关于模块热替换(hot module replacement)的运�
 
 ## 结论 {#conclusion}
 
+<<<<<<< HEAD
 现在，你已经学会了如何自动编译代码，并运行一个简单的 development server，查看下一个指南，其中将介绍[代码分割（Code Splitting）](/guides/code-splitting/)。
+=======
+Now that you've learned how to automatically compile your code and run a development server, you can check out the next guide, which will cover [Code Splitting](/guides/code-splitting/).
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382

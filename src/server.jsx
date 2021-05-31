@@ -30,7 +30,7 @@ export default (locals) => {
                 <Site
                   {...props}
                   // note that here we use require instead of import
-                  // i.e., can't just reuse App.jsx
+                  // i.e., can't  reuse App.jsx
                   import={(path) => require(`./content/${path}`)}
                 />
               )}

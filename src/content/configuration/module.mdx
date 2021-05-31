@@ -763,6 +763,28 @@ module.exports = {
 
 T> 详情参阅 [`嵌套规则`](#nested-rules) 。
 
+## Rule.scheme {#rulescheme}
+
+匹配使用的 schema，例如 `data`，`http`。
+
+- 类型：`string | RegExp | ((value: string) => boolean) | RuleSetLogicalConditions | RuleSetCondition[]`
+- 可用：<Badge text='5.38.0+' />
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        scheme: 'data',
+        type: 'asset/resource',
+      },
+    ],
+  },
+};
+```
+
 ## `Rule.sideEffects` {#rulesideeffects}
 
 `bool`

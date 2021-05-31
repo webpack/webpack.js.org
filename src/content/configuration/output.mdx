@@ -818,7 +818,7 @@ module.exports = {
 // 仅在当其不存在是创建 MyLibrary
 MyLibrary = typeof MyLibrary === 'undefined' ? {} : MyLibrary;
 // 然后复制返回值到 MyLibrary
-// 就像是 Object.assign 行为
+// 与 Object.assign 行为类似
 
 // 例如，你像下面这样在你的入口导出一个 `hello` 函数
 export function hello(name) {
@@ -983,7 +983,7 @@ T> 在考虑 CommonJS 与 CommonJS2 之间的区别？虽然它们很相似，�
 
 AMD module 要求入口 chunk（例如，第一个通过 `<script>` 标签加载的脚本）使用特定的属性来定义, 例如 `define` 与 `require`，这通常由 RequireJS 或任何兼容的 loader（如 almond）提供。否则，直接加载产生的 AMD bundle 将导致一个错误，如 `define is not defined`。
 
-所以，按照下面的配置
+按照下面的配置
 
 ```javascript
 module.exports = {
@@ -1410,7 +1410,7 @@ W> 最好使用 [output.library.type: 'assign-properties'`](#type-assign-propert
 // 如果不存在的话就创建目标对象
 MyLibrary = typeof MyLibrary === 'undefined' ? {} : MyLibrary;
 // 然后复制返回值到 MyLibrary
-// 就像是 Object.assign
+// 与 Object.assign 行为类似
 
 // 例如，你在入口导出了一个 `hello` 函数
 export function hello(name) {
@@ -1526,7 +1526,7 @@ W> 最好使用 [`output.library.type: 'amd'`](#type-amd)。
 
 AMD 模块要求入口 chunk（例如使用 `<script>` 标签加载的第一个脚本）通过特定的属性定义，例如 `define` 和 `require`，它们通常由 RequireJS 或任何兼容的模块加载器提供（例如 almond）。否则，直接加载生成的 AMD bundle 将导致报错，如 `define is not defined`。
 
-因此，配置如下：
+配置如下：
 
 ```javascript
 module.exports = {
@@ -1787,7 +1787,7 @@ T> 这些注释也会被添加至经过 tree shaking 后生成的 bundle 中。
 
 该选项的值是以 runtime(运行时) 或 loader(载入时) 所创建的每个 URL 为前缀。因此，在多数情况下，**此选项的值都会以 `/` 结束**。
 
-简单规则如下：[`output.path`](#outputpath) 中的 URL 以 HTML 页面为基准。
+规则如下：[`output.path`](#outputpath) 中的 URL 以 HTML 页面为基准。
 
 **webpack.config.js**
 

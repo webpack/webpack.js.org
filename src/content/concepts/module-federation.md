@@ -192,6 +192,88 @@ loadComponent('abtests', 'test123');
 
 [查看完整实现](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)
 
+## 动态 Public Path {#dynamicpublicpath}
+
+### 提供一个 host api 以设置 publicPath {#offerahostapitosetthepublicPath}
+
+可以允许 host 在运行时通过公开远程模块的方法来设置远程模块的 publicPath。
+
+当你在 host 域的子路径上挂载独立部署的子应用程序时，这种方法特别有用。
+
+场景：
+
+你在 `https://my-host.com/app/*` 上有一个 host 应用，并且在 `https://foo-app.com` 上有一个子应用。子应用程序也挂载在 host 域上, 因此，
+`https://foo-app.com` is expected to be accessible via `https://my-host.com/app/foo-app` and `https://my-host.com/app/foo/*` requests are redirected to `https://foo-app.com/*` via a proxy.
+
+示例：
+
+**webpack.config.js (remote)**
+
+```js
+module.exports = {
+  entry: {
+    remote: './public-path',
+  },
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'remote', // 该名称必须与入口名称相匹配
+      exposes: ['./public-path'],
+      // ...
+    }),
+  ],
+};
+```
+
+**public-path.js (remote)**
+
+```js
+export function set(value) {
+  __webpack_public_path__ = value;
+}
+```
+
+**src/index.js (host)**
+
+<!-- eslint-skip -->
+
+```js
+const publicPath = await import('remote/public-path');
+publicPath.set('/your-public-path');
+
+//boostrap app  e.g. import('./boostrap.js')
+```
+
+### Infer publicPath from script {#inferpublicpathfromscript}
+
+One could infer the publicPath from the script tag from `document.currentScript.src` and set it with the [`__webpack_public_path__`](/api/module-variables/#__webpack_public_path__-webpack-specific) module variable at runtime.
+
+示例：
+
+**webpack.config.js (remote)**
+
+```js
+module.exports = {
+  entry: {
+    remote: './setup-public-path',
+  },
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'remote', // 该名称必须与入口名称相匹配
+      // ...
+    }),
+  ],
+};
+```
+
+**setup-public-path.js (remote)**
+
+```js
+// 使用你自己的逻辑派生 publicPath，并使用 __webpack_public_path__ API 设置它
+__webpack_public_path__ = document.currentScript.src + '/../';
+```
+
+T> [`output.publicPath`](/configuration/output/#outputpublicpath) 配置项也可设置为 `'auto'`，它将为你自动决定一个 publicPath。
+
 ## 故障排除 {#troubleshooting}
 
 **`Uncaught Error: Shared module is not available for eager consumption`**

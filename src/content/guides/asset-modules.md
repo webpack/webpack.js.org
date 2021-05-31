@@ -343,6 +343,17 @@ new URL(
 );
 ```
 
+自 webpack 5.38.0 起，[Data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) 也支持在 `new URL()` 中使用了：
+
+**src/index.js**
+
+```js
+const url = new URL('data:,', import.meta.url);
+console.log(url.href === 'data:,');
+console.log(url.protocol === 'data:');
+console.log(url.pathname === ',');
+```
+
 ## 通用资源类型 {#general-asset-type}
 
 **webpack.config.js**

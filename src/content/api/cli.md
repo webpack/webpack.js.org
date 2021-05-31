@@ -40,7 +40,7 @@ translators:
 
 ## 命令 {#commands}
 
-webpack-cli 提供了许多命令来使 webpack 的工作变得简单。默认情况下，webpack 提供了以下命令：
+webpack-cli 提供了许多命令来使 webpack 的工作变得更简单。默认情况下，webpack 提供了以下命令：
 
 | 命令                                  | 使用                                      | 描述                                                                 |
 | ------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------- |
@@ -86,6 +86,8 @@ npx webpack init ./my-app --force --template=default
 `boolean`
 
 生成项目时不启用选项模式。当为 `true` 时，所有命令行选项使用默认值。
+
+T> 点击 [这里](https://github.com/webpack/webpack-cli/blob/master/INIT.md) 获取 webpack init 命令的完整文档。
 
 ### Info {#info}
 

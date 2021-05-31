@@ -123,7 +123,7 @@ T> 如果你想要了解 `package.json` 内在机制的更多信息，我们推�
  }
 ```
 
-在此示例中，`<script>` 标签之间存在隐式依赖关系。在 `index.js` 文件执行之前，还需要在页面中先引入 `lodash`。这是因为 `index.js` 并未显式声明它需要 `lodash`，只是假定推测已经存在一个全局变量 `_`。
+在此示例中，`<script>` 标签之间存在隐式依赖关系。在 `index.js` 文件执行之前，还需要在页面中先引入 `lodash`。这是因为 `index.js` 并未显式声明它需要 `lodash`，假定推测已经存在一个全局变量 `_`。
 
 使用这种方式去管理 JavaScript 项目会有一些问题：
 
@@ -270,7 +270,11 @@ webpack 5.4.0 compiled successfully in 1934 ms
 
 T> 如果 `webpack.config.js` 存在，则 `webpack` 命令将默认选择使用它。我们在这里使用 `--config` 选项只是向你表明，可以传递任何名称的配置文件。这对于需要拆分成多个文件的复杂配置是非常有用的。
 
+<<<<<<< HEAD
 比起 CLI 这种简单直接的使用方式，配置文件具有更多的灵活性。我们可以通过配置方式指定 loader 规则(loader rule)、plugin(插件)、resolve 选项，以及许多其他增强功能。更多详细信息请查看 [配置文档](/configuration)。
+=======
+A configuration file allows far more flexibility than CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](/configuration) to learn more.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ## npm scripts {#npm-scripts}
 

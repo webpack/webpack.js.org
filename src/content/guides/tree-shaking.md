@@ -133,7 +133,7 @@ module.exports = {
 
 ## 将文件标记为 side-effect-free(无副作用) {#mark-the-file-as-side-effect-free}
 
-在一个纯粹的 ESM 模块世界中，很容易识别出哪些文件有 side effect。然而，我们的项目无法达到这种纯度，所以，此时有必要提示 webpack compiler 哪些代码是“纯粹部分”。
+在一个纯粹的 ESM 模块世界中，很容易识别出哪些文件有副作用。然而，我们的项目无法达到这种纯度，所以，此时有必要提示 webpack compiler 哪些代码是“纯粹部分”。
 
 通过 package.json 的 `"sideEffects"` 属性，来实现这种方式。
 
@@ -144,7 +144,7 @@ module.exports = {
 }
 ```
 
-如果所有代码都不包含 side effect，我们就可以简单地将该属性标记为 `false`，来告知 webpack，它可以安全地删除未用到的 export。
+如果所有代码都不包含副作用，我们就可以简单地将该属性标记为 `false`，来告知 webpack 它可以安全地删除未用到的 export。
 
 T> "side effect(副作用)" 的定义是，在导入时会执行特殊行为的代码，而不是仅仅暴露一个 export 或多个 export。举例说明，例如 polyfill，它影响全局作用域，并且通常不提供 export。
 
@@ -350,13 +350,13 @@ T> 注意，也可以在命令行接口中使用 `--optimize-minimize` 标记，
 
 准备就绪后，然后运行另一个命令 `npm run build`，看看输出结果有没有发生改变。
 
-你发现 `dist/bundle.js` 中的差异了吗？显然，现在整个 bundle 都已经被 minify(压缩) 和 mangle(混淆破坏)，但是如果仔细观察，则不会看到引入 `square` 函数，但能看到 `cube` 函数的混淆破坏版本（`function r(e){return e*e*e}n.a=r`）。现在，随着 minification(代码压缩) 和 tree shaking，我们的 bundle 减小几个字节！虽然，在这个特定示例中，可能看起来没有减少很多，但是，在有着复杂依赖树的大型应用程序上运行 tree shaking 时，会对 bundle 产生显著的体积优化。
+你发现 `dist/bundle.js` 中的差异了吗？现在整个 bundle 都已经被 minify(压缩) 和 mangle(混淆破坏)，但是如果仔细观察，则不会看到引入 `square` 函数，但能看到 `cube` 函数的混淆破坏版本（`function r(e){return e*e*e}n.a=r`）。现在，随着 minification(代码压缩) 和 tree shaking，我们的 bundle 减小几个字节！虽然，在这个特定示例中，可能看起来没有减少很多，但是，在有着复杂依赖树的大型应用程序上运行 tree shaking 时，会对 bundle 产生显著的体积优化。
 
 T> 在使用 tree shaking 时必须有 [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin) 的支持，您可以通过设置配置项 `mode: "production"` 以启用它。如果您没有如此做，请记得手动引入 [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin)。
 
 ## 结论 {#conclusion}
 
-因此，我们学到为了利用 _tree shaking_ 的优势， 你必须...
+我们学到为了利用 _tree shaking_ 的优势， 你必须...
 
 - 使用 ES2015 模块语法（即 `import` 和 `export`）。
 - 确保没有编译器将您的 ES2015 模块语法转换为 CommonJS 的（顺带一提，这是现在常用的 @babel/preset-env 的默认行为，详细信息请参阅[文档](https://babeljs.io/docs/en/babel-preset-env#modules)）。

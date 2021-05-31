@@ -35,7 +35,7 @@ T> 此文档中得出最重要的结论是，webpack 的配置可以有许多不
 
 接下来的示例中，展示了 webpack 配置如何实现既可表达，又可灵活配置，这主要得益于 _配置即为代码_：
 
-## 基本配置 {#simple-configuration}
+## 基本配置 {#introductory-configuration}
 
 **webpack.config.js**
 

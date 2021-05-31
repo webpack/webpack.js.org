@@ -243,7 +243,7 @@ webpack-demo
 ...
 ```
 
-……我们可以看到这三个文件的 hash 都变化了。这是因为每个 [`module.id`](/api/module-variables/#moduleid-commonjs) 会默认地基于解析顺序(resolve order)进行增量。也就是说，当解析顺序发生变化，ID 也会随之改变。因此，简要概括：
+……我们可以看到这三个文件的 hash 都变化了。这是因为每个 [`module.id`](/api/module-variables/#moduleid-commonjs) 会默认地基于解析顺序(resolve order)进行增量。也就是说，当解析顺序发生变化，ID 也会随之改变。简要概括：
 
 - `main` bundle 会随着自身的新增内容的修改，而发生变化。
 - `vendor` bundle 会随着自身的 `module.id` 的变化，而发生变化。
