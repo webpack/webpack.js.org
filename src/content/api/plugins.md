@@ -90,8 +90,13 @@ compiler.hooks.run.tapPromise(
 
 ## 自定义钩子 {#custom-hooks}
 
+<<<<<<< HEAD
 为了便于其他插件的编译过程中可以 `tap` 到，则需要创建一个新的 hook，
 我们只需要简单的从 `tapable` 中 `require` 所需的 hook 类，并创建：
+=======
+In order to add a new hook to the compilation for other plugins to `tap` into,
+you then `require` the necessary hook class from `tapable` and create one:
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ```js
 const SyncHook = require('tapable').SyncHook;

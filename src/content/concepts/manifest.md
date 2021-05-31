@@ -28,7 +28,11 @@ translators:
 
 ## runtime {#runtime}
 
+<<<<<<< HEAD
 runtime，以及伴随的 manifest 数据，主要是指：在浏览器运行过程中，webpack 用来连接模块化应用程序所需的所有代码。它包含：在模块交互时，连接模块所需的加载和解析逻辑。包括：已经加载到浏览器中的连接模块逻辑，以及尚未加载模块的延迟加载逻辑。
+=======
+The runtime, along with the manifest data, is all the code webpack needs to connect your modularized application while it's running in the browser. It contains the loading and resolving logic needed to connect your modules as they interact. This includes connecting modules that have already been loaded into the browser as well as logic to lazy-load the ones that haven't.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ## manifest {#manifest}
 
@@ -38,7 +42,11 @@ runtime，以及伴随的 manifest 数据，主要是指：在浏览器运行过
 
 ## 问题 {#the-problem}
 
+<<<<<<< HEAD
 所以，现在你应该对 webpack 在幕后工作有一点了解。“但是，这对我有什么影响呢？”，你可能会问。答案是大多数情况下没有。runtime 做完成这些工作：一旦你的应用程序加载到浏览器中，使用 manifest，然后所有内容将展现出魔幻般运行结果。然而，如果你决定通过使用浏览器缓存来改善项目的性能，理解这一过程将突然变得极为重要。
+=======
+So now you have a little bit of insight about how webpack works behind the scenes. "But, how does this affect me?", you might ask. Most of the time, it doesn't. The runtime will do its thing, utilizing the manifest, and everything will appear to magically work once your application hits the browser. However, if you decide to improve the performance of your projects by utilizing browser caching, this process will all of a sudden become an important thing to understand.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 通过使用内容散列(content hash)作为 bundle 文件的名称，这样在文件内容修改时，会计算出新的 hash，浏览器会使用新的名称加载文件，从而使缓存无效。一旦你开始这样做，你会立即注意到一些有趣的行为。即使某些内容明显没有修改，某些 hash 还是会改变。这是因为，注入的 runtime 和 manifest 在每次构建后都会发生变化。
 

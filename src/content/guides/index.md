@@ -9,7 +9,11 @@ translators:
   - dear-lizhihua
 ---
 
+<<<<<<< HEAD
 指南章节，用于理解和掌握 webpack 提供的各种工具和特性。首先，通过 [起步](/guides/getting-started/) 进行简单导入。
+=======
+This section contains guides for understanding and mastering the wide variety of tools and features that webpack offers. The first is a guide that takes you through [getting started](/guides/getting-started/).
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 指南会逐步带你由浅入深。本章节更多是作为一个切入点，一旦阅读完成后，你就会更加容易深入到实际的 [配置](/configuration) 文档中。
 

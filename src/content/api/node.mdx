@@ -74,11 +74,19 @@ T> 你也可以为 `webpack` 函数提供一个配置数组。更多详细信息
 - `.run(callback)`
 - `.watch(watchOptions, handler)`
 
+<<<<<<< HEAD
 通常情况下，仅会创建一个主要 `Compiler` 实例，
 虽然可以创建一些子 compiler 来代理到特定任务。
 `Compiler` 基本上只是执行最低限度的功能，以维持生命周期运行的功能。
 它将所有的加载、打包和写入工作，
 都委托到注册过的插件上。
+=======
+Typically, only one master `Compiler` instance is created, although child
+compilers can be created in order to delegate specific tasks. The `Compiler` is
+ultimately a function which performs bare minimum functionality to keep a
+lifecycle running. It delegates all the loading, bundling, and writing work to
+registered plugins.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 `Compiler` 实例上的 `hooks` 属性，用于将一个插件注册
 到 `Compiler` 的生命周期中的所有钩子事件上。
@@ -148,10 +156,17 @@ const watching = compiler.watch({
 `Watching` 配置选项的细节可以在
 [这里](/configuration/watch/#watchoptions)查询。
 
+<<<<<<< HEAD
 W> 文件系统不正确的问题，可能会对单次修改触发多次构建。
 因此，在上面的示例中，一次修改可能会多次触发 `console.log` 语句。
 用户应该预知此行为，
 并且可能需要检查 `stats.hash` 来查看文件哈希是否确实变更。
+=======
+W> Filesystem inaccuracies may trigger multiple builds for a single change.
+In the example above, the `console.log` statement may fire multiple times for a
+single modification. Users should expect this behavior and may check
+`stats.hash` to see if the file hash has actually changed.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ### 关闭 `Watching` (Close `Watching`) {#close-watching}
 

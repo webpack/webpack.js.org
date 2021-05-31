@@ -15,10 +15,17 @@ Webpack 提供了多种接口来自定义编译过程。
 
 ## CLI {#cli}
 
+<<<<<<< HEAD
 命令行界面（CLI），
 用于配置构建并与之交互。它在早期原型制作和性能分析的情况下特别有用。
 大多数情况下，
 CLI 只是用于通过配置文件和一些标志（例如`--env`）来启动进程。
+=======
+The Command Line Interface (CLI) to configure and interact with your build. It
+is especially useful in the case of early prototyping and profiling. For the
+most part, the CLI is used to kick off the process using a configuration
+file and a few flags (e.g. `--env`).
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 [了解更多关于 CLI 的知识！](/api/cli)
 
@@ -32,10 +39,17 @@ CLI 只是用于通过配置文件和一些标志（例如`--env`）来启动进
 
 ## Node {#node}
 
+<<<<<<< HEAD
 尽管大多数用户可以借助 CLI 和配置文件控制编译，
 通过 Node 接口可以实现更细粒度的控制。
 这包括传递多个配置、
 以程序的方式运行、查阅并收集统计信息。
+=======
+While most users can get away with using the CLI along with a
+configuration file, more fine-grained control of the compilation can be
+achieved via the Node interface. This includes passing multiple configurations,
+programmatically running or watching, and collecting stats.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 [了解更多关于 Node API 的知识！](/api/node)
 

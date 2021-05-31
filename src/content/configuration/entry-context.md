@@ -45,7 +45,11 @@ module.exports = {
 
 动态加载的模块 **不是** 入口起点。
 
+<<<<<<< HEAD
 简单规则：每个 HTML 页面都有一个入口起点。单页应用(SPA)：一个入口起点，多页应用(MPA)：多个入口起点。
+=======
+A rule to consider: one entry point per HTML page. SPA: one entry point, MPA: multiple entry points.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ```js
 module.exports = {

@@ -34,13 +34,21 @@ translators:
   - jacob-lcs
 ---
 
+<<<<<<< HEAD
 为了更合适且方便地使用配置，可以在 `webpack.config.js` 中对 webpack 进行配置。CLI 中传入的任何参数会在配置文件中映射为对应的参数。
+=======
+For proper usage and easier distribution of this configuration, webpack can be configured with `webpack.config.js`. Any parameters sent to the CLI will map to a corresponding parameter in the configuration file.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 如果你还没有安装过 webpack 和 CLI，请先阅读 [安装指南](/guides/installation)。
 
 ## 命令 {#commands}
 
+<<<<<<< HEAD
 webpack-cli 提供了许多命令来使 webpack 的工作变得简单。默认情况下，webpack 提供了以下命令：
+=======
+webpack-cli offers a variety of commands to make working with webpack easier. By default webpack ships with
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 | 命令                                  | 使用                                      | 描述                                                                 |
 | ------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------- |
@@ -87,7 +95,13 @@ npx webpack init ./my-app --force --template=default
 
 生成项目时不启用选项模式。当为 `true` 时，所有命令行选项使用默认值。
 
+<<<<<<< HEAD
 ### Info {#info}
+=======
+T> Click [here](https://github.com/webpack/webpack-cli/blob/master/INIT.md) to see the full documentation of webpack init command.
+
+### Info
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 输出你的系统信息。
 
@@ -315,7 +329,11 @@ npx webpack help --mode
 
 **显示已安装的 package 以及子 package 的版本**。
 
+<<<<<<< HEAD
 如需检查你正在使用的 `webpack` 和 `webpack-cli` 的版本，只需运行如下命令：
+=======
+To inspect the version of `webpack` and `webpack-cli` you are using, run the command:
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ```bash
 npx webpack --version
@@ -340,7 +358,11 @@ webpack-cli 4.6.0
 webpack-dev-server 3.11.2
 ```
 
+<<<<<<< HEAD
 如需检查 `webpack-cli` 子包的版本（如 `@webpack-cli/info`），只需运行如下命令：
+=======
+To inspect the version of any `webpack-cli` sub-package (like `@webpack-cli/info`), run command similar to the following:
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ```bash
 npx webpack info --version

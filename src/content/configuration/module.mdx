@@ -477,8 +477,12 @@ W> 由于需要支持 `Rule.options`，`UseEntry.options` 以及 `Rule.use`，�
 - 将选项设置为 `false`，将禁用解析器。
 - 将选项设置为 `true`，或不修改将其保留为 `undefined`，可以启用解析器。
 
+<<<<<<< HEAD
 然而，一些解析器(parser)插件可能不光只接收一个布尔值。例如，内部的 `NodeStuffPlugin` 插件，可以接收一个对象，而不是 `true`，
 来为特定的规则添加额外的选项。
+=======
+However, parser plugins may accept more than only a boolean. For example, the internal `NodeStuffPlugin` can accept an object instead of `true` to add additional options for a particular Rule.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 **示例**（默认的插件解析器选项）：
 
@@ -763,7 +767,33 @@ module.exports = {
 
 T> 详情参阅 [`嵌套规则`](#nested-rules) 。
 
+<<<<<<< HEAD
 ## `Rule.sideEffects` {#rulesideeffects}
+=======
+## Rule.scheme
+
+Match the used schema, e.g., `data`, `http`.
+
+- Type: `string | RegExp | ((value: string) => boolean) | RuleSetLogicalConditions | RuleSetCondition[]`
+- Available: <Badge text='5.38.0+' />
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        scheme: 'data',
+        type: 'asset/resource',
+      },
+    ],
+  },
+};
+```
+
+## `Rule.sideEffects`
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 `bool`
 

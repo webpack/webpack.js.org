@@ -19,7 +19,11 @@ W> webpack 的 `target` 属性，不要和 `output.libraryTarget` 属性混淆�
 
 ## 用法 {#usage}
 
+<<<<<<< HEAD
 想设置 `target` 属性，只需在 webpack 配置中设置 target 字段：
+=======
+To set the `target` property, you set the target value in your webpack config:
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 **webpack.config.js**
 

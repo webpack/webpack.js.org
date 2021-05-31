@@ -647,7 +647,11 @@ T> 注意，这里你可以使用别名，并且其他特性类似于 resolve �
 
 W> 在 webpack 5 中被废弃
 
+<<<<<<< HEAD
 解析 loader 时，用到扩展名(extensions)/后缀(suffixes)。从 webpack 2 开始，我们 [强烈建议](/migrate/3/#automatic-loader-module-name-extension-removed) 使用全名，例如 `example-loader`，以尽可能清晰。然而，如果你确实想省略 `-loader`，也就是说只使用 `example`，则可以使用此选项来实现：
+=======
+The extensions/suffixes that are used when resolving loaders. Since version two, we [strongly recommend](/migrate/3/#automatic--loader-module-name-extension-removed) using the full name, e.g. `example-loader`, as much as possible for clarity. However, if you really wanted to exclude the `-loader` bit, i.e. to only use `example`, you can use this option to do so:
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 **webpack.config.js**
 

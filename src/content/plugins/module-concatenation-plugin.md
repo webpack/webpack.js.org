@@ -83,7 +83,7 @@ function tryToAdd(group, module) {
 
 ### Debugging Optimization Bailouts {#debugging-optimization-bailouts}
 
-When using the webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the webpack config, just add the following to the `stats` object:
+When using the webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the webpack config, add the following to the `stats` object:
 
 ```js
 module.exports = {

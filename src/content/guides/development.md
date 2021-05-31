@@ -57,7 +57,11 @@ W> 本指南中的工具**仅用于开发环境**，请**不要**在生产环境
 
 ## 使用 source map {#using-source-maps}
 
+<<<<<<< HEAD
 当 webpack 打包源代码时，可能会很难追踪到 error(错误) 和 warning(警告) 在源代码中的原始位置。例如，如果将三个源文件（`a.js`, `b.js` 和 `c.js`）打包到一个 bundle（`bundle.js`）中，而其中一个源文件包含一个错误，那么堆栈跟踪就会直接指向到 `bundle.js`。你可能需要准确地知道错误来自于哪个源文件，所以这种提示这通常不会提供太多帮助。
+=======
+When webpack bundles your source code, it can become difficult to track down errors and warnings to their original location. For example, if you bundle three source files (`a.js`, `b.js`, and `c.js`) into one bundle (`bundle.js`) and one of the source files contains an error, the stack trace will point to `bundle.js`. This isn't always helpful as you probably want to know exactly which source file the error came from.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 为了更容易地追踪 error 和 warning，JavaScript 提供了 [source maps](http://blog.teamtreehouse.com/introduction-source-maps) 功能，可以将编译后的代码映射回原始源代码。如果一个错误来自于 `b.js`，source map 就会明确的告诉你。
 
@@ -194,7 +198,11 @@ webpack 提供几种可选方式，帮助你在代码发生变化后自动编译
 
 ### 使用 webpack-dev-server {#using-webpack-dev-server}
 
+<<<<<<< HEAD
 `webpack-dev-server` 为你提供了一个简单的 web server，并且具有 live reloading(实时重新加载) 功能。设置如下：
+=======
+The `webpack-dev-server` provides you with a rudimentary web server and the ability to use live reloading. Let's set it up:
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ```bash
 npm install --save-dev webpack-dev-server
@@ -429,4 +437,8 @@ T> 如果想要了解更多关于模块热替换(hot module replacement)的运�
 
 ## 结论 {#conclusion}
 
+<<<<<<< HEAD
 现在，你已经学会了如何自动编译代码，并运行一个简单的 development server，查看下一个指南，其中将介绍[代码分割（Code Splitting）](/guides/code-splitting/)。
+=======
+Now that you've learned how to automatically compile your code and run a development server, you can check out the next guide, which will cover [Code Splitting](/guides/code-splitting/).
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382

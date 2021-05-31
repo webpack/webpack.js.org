@@ -275,7 +275,11 @@ const helpers = {
 
 目前为止我们所讨论的所有内容都是处理那些遗留的 package，让我们进入到第二个话题：**polyfill**。
 
+<<<<<<< HEAD
 有很多方法来加载 polyfill。例如，想要引入 [`babel-polyfill`](https://babel.docschina.org/docs/en/babel-polyfill/) 我们只需如下操作：
+=======
+There's a lot of ways to load polyfills. For example, to include the [`babel-polyfill`](https://babeljs.io/docs/en/babel-polyfill/) we might:
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ```bash
 npm install --save babel-polyfill
@@ -393,7 +397,11 @@ import 'whatwg-fetch';
  };
 ```
 
+<<<<<<< HEAD
 如上配置之后，我们可以在代码中添加一些逻辑，有条件地加载新的 `polyfills.bundle.js` 文件。根据需要支持的技术和浏览器来决定是否加载。我们将做一些简单的试验，来确定是否需要引入这些 polyfill：
+=======
+With that in place, we can add the logic to conditionally load our new `polyfills.bundle.js` file. How you make this decision depends on the technologies and browsers you need to support. We'll do some testing to determine whether our polyfills are needed:
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 **dist/index.html**
 

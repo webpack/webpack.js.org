@@ -343,7 +343,22 @@ new URL(
 );
 ```
 
+<<<<<<< HEAD
 ## 通用资源类型 {#general-asset-type}
+=======
+As of webpack 5.38.0, [Data URLs](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) are supported in `new URL()` as well:
+
+**src/index.js**
+
+```js
+const url = new URL('data:,', import.meta.url);
+console.log(url.href === 'data:,');
+console.log(url.protocol === 'data:');
+console.log(url.pathname === ',');
+```
+
+## General asset type
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 **webpack.config.js**
 

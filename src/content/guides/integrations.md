@@ -20,7 +20,11 @@ translators:
 
 ## NPM Scripts {#npm-scripts}
 
+<<<<<<< HEAD
 通常 webpack 用户使用 npm [`scripts`](https://docs.npmjs.com/misc/scripts) 来作为任务执行工具。这是比较好的开始。然而跨平台支持可能是个问题，但是有几种解决方案。许多用户（但不是大多数用户）直接使用 npm `scripts` 和各种级别的 webpack 配置和工具。
+=======
+Often webpack users use npm [`scripts`](https://docs.npmjs.com/misc/scripts) as their task runner. This is a good starting point. Cross-platform support can become a problem, but there are several workarounds for that. Many, if not most users, get by with npm `scripts` and various levels of webpack configuration and tooling.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 因此，虽然 webpack 核心重点是打包，但是可以通过各种扩展，将它用于任务运行工具的常见工作。集成一个单独的工具会增加复杂度，因此在开始前一定要权衡利弊。
 
@@ -64,7 +68,11 @@ module.exports = function (grunt) {
 npm install --save-dev webpack-stream
 ```
 
+<<<<<<< HEAD
 只要将 `webpack` 替换为 `require('webpack-stream')`，并传递一个配置：
+=======
+You can `require('webpack-stream')` instead of `webpack` and optionally pass it an configuration:
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 **gulpfile.js**
 

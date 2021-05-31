@@ -26,7 +26,11 @@ webpack logo 应放置在白色背景上，并且其周围有足够间距，如�
 
 [svg](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.svg) | [png](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.png) | [jpg](https://github.com/webpack/media/blob/master/logo/logo-on-white-bg.jpg)
 
+<<<<<<< HEAD
 只需将内部深蓝色正方体的大小加倍，就可以知道 logo 应占据多大空间。
+=======
+Double the size of the inner dark blue cube to get an idea how much space the logo should have.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 对于深色背景，可以使用 logo 的反色版本：
 

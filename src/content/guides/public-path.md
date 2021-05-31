@@ -45,7 +45,11 @@ export default {
 
 ### 在运行时设置 {#on-the-fly}
 
+<<<<<<< HEAD
 另一个可能出现的情况是，需要在运行时设置 `publicPath`。webpack 暴露了一个名为 `__webpack_public_path__` 的全局变量。所以在应用程序的 entry point 中，可以直接如下设置：
+=======
+Another possible use case is to set the `publicPath` on the fly. webpack exposes a global variable called `__webpack_public_path__` that allows you to do that. In your application's entry point, you can do this:
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ```js
 __webpack_public_path__ = process.env.ASSET_PATH;

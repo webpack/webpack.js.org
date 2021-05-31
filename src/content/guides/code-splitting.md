@@ -390,7 +390,11 @@ webpack v4.6.0+ 增加了对预获取和预加载的支持。
 - **prefetch**(预获取)：将来某些导航下可能需要的资源
 - **preload**(预加载)：当前导航下可能需要资源
 
+<<<<<<< HEAD
 下面这个 prefetch 的简单示例中，有一个 `HomePage` 组件，其内部渲染一个 `LoginButton` 组件，然后在点击后按需加载 `LoginModal` 组件。
+=======
+An example of this is having a `HomePage` component, which renders a `LoginButton` component which then on demand loads a `LoginModal` component after being clicked.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 **LoginButton.js**
 
@@ -410,7 +414,11 @@ T> 只要父 chunk 完成加载，webpack 就会添加 prefetch hint(预取提�
 - preload chunk 会在父 chunk 中立即请求，用于当下时刻。prefetch chunk 会用于未来的某个时刻。
 - 浏览器支持程度不同。
 
+<<<<<<< HEAD
 下面这个简单的 preload 示例中，有一个 `Component`，依赖于一个较大的 library，所以应该将其分离到一个独立的 chunk 中。
+=======
+An example of this can be having a `Component` which always depends on a big library that should be in a separate chunk.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 我们假想这里的图表组件 `ChartComponent` 组件需要依赖一个体积巨大的 `ChartingLibrary` 库。它会在渲染时显示一个 `LoadingIndicator(加载进度条)` 组件，然后立即按需导入 `ChartingLibrary`：
 

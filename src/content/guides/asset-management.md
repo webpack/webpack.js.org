@@ -331,7 +331,11 @@ webpack 5.4.0 compiled successfully in 1972 ms
   |- /node_modules
 ```
 
+<<<<<<< HEAD
 配置好 loader 并将字体文件放在合适的位置后，你可以通过一个 `@font-face` 声明将其混合。本地的 `url(...)` 指令会被 webpack 获取处理，就像它处理图片一样：
+=======
+With the loader configured and fonts in place, you can incorporate them via an `@font-face` declaration. The local `url(...)` directive will be picked up by webpack, as it was with the image:
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 **src/style.css**
 
@@ -472,7 +476,11 @@ Zoe,Bill,Reminder,Buy orange juice
 Autumn,Lindsey,Letter,I miss you
 ```
 
+<<<<<<< HEAD
 现在，你可以 `import` 这四种类型的数据(JSON, CSV, TSV, XML)中的任何一种，所导入的 `Data` 变量，将包含可直接使用的已解析 JSON：
+=======
+Now you can `import` any one of those four types of data (JSON, CSV, TSV, XML) and the `Data` variable you import, will contain parsed JSON for consumption:
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 **src/index.js**
 
@@ -695,7 +703,11 @@ Re-run the `npm run build` command and open `dist/index.html`. You should be abl
 + |  |  |– img.png
 ```
 
+<<<<<<< HEAD
 这种配置方式会使你的代码更具备可移植性，因为现有的集中放置的方式会让所有资源紧密耦合起来。假如你想在另一个项目中使用 `/my-component`，只需将其复制或移动到 `/components` 目录下。只要你已经安装过全部 *外部依赖* ，并且 *已经在配置中定义过相同的 loader* ，那么项目应该能够良好运行。
+=======
+This setup makes your code a lot more portable as everything that is closely coupled now lives together. Let's say you want to use `/my-component` in another project, copy or move it into the `/components` directory over there. As long as you've installed any _external dependencies_ and your _configuration has the same loaders_ defined, you should be good to go.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 但是，假如你只能被局限在旧有开发方式，或者你有一些在多个组件（视图、模板、模块等）之间共享的资源。你仍然可以将这些资源存储在一个基本目录(base directory)中，甚至配合使用 [alias](/configuration/resolve/#resolvealias) 来使它们更方便 `import 导入`。
 

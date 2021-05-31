@@ -300,7 +300,11 @@ W> 上面的写法不能在异步函数中使用。
 define(value: !Function)
 ```
 
+<<<<<<< HEAD
 这种方式只将提供的 `value` 导出。这里的 `value` 可以是除函数以外的任何值。
+=======
+This will export the provided `value`. The `value` here can be anything except a function.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ```javascript
 define({
@@ -447,8 +451,13 @@ if (require.cache[require.resolveWeak('module')]) {
   // 在模块加载完成之前，执行一些操作……
 }
 
+<<<<<<< HEAD
 // 你可以像执行其他 require/import 方法一样，
 // 执行动态解析上下文 resolves ("context")。
+=======
+// You can perform dynamic resolves ("context")
+// similarly to other require/import methods.
+>>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 const page = 'Foo';
 __webpack_modules__[require.resolveWeak(`./page/${page}`)];
 ```
