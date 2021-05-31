@@ -133,11 +133,7 @@ module.exports = {
 
 ## 将文件标记为 side-effect-free(无副作用) {#mark-the-file-as-side-effect-free}
 
-<<<<<<< HEAD
-在一个纯粹的 ESM 模块世界中，很容易识别出哪些文件有 side effect。然而，我们的项目无法达到这种纯度，所以，此时有必要提示 webpack compiler 哪些代码是“纯粹部分”。
-=======
-In a 100% ESM module world, identifying side effects is straightforward. However, we aren't there quite yet, so in the mean time it's necessary to provide hints to webpack's compiler on the "pureness" of your code.
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
+在一个纯粹的 ESM 模块世界中，很容易识别出哪些文件有副作用。然而，我们的项目无法达到这种纯度，所以，此时有必要提示 webpack compiler 哪些代码是“纯粹部分”。
 
 通过 package.json 的 `"sideEffects"` 属性，来实现这种方式。
 
@@ -148,11 +144,7 @@ In a 100% ESM module world, identifying side effects is straightforward. However
 }
 ```
 
-<<<<<<< HEAD
-如果所有代码都不包含 side effect，我们就可以简单地将该属性标记为 `false`，来告知 webpack，它可以安全地删除未用到的 export。
-=======
-All the code noted above does not contain side effects, so we can mark the property as `false` to inform webpack that it can safely prune unused exports.
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
+如果所有代码都不包含副作用，我们就可以简单地将该属性标记为 `false`，来告知 webpack 它可以安全地删除未用到的 export。
 
 T> "side effect(副作用)" 的定义是，在导入时会执行特殊行为的代码，而不是仅仅暴露一个 export 或多个 export。举例说明，例如 polyfill，它影响全局作用域，并且通常不提供 export。
 
@@ -247,15 +239,9 @@ export {
 
 当 `Button` 没有被使用，你可以有效地清除掉 `export { Button$1 };` 且保留所有剩下的代码。那问题来了，“这段代码会有任何副作用或它能被安全都清理掉吗？”。很难说，尤其是这 `withAppProvider()(Button)` 这段代码。`withAppProvider` 被调用，而且返回的值也被调用。当调用 `merge` 或 `hoistStatics` 会有任何副作用吗？当给 `WithProvider.contextTypes` (Setter?) 赋值或当读取 `WrappedComponent.contextTypes` (Getter) 的时候，会有任何副作用吗？
 
-<<<<<<< HEAD
 实际上，Terser 尝试去解决以上的问题，但在很多情况下，它不太确定。但这不会意味着 terser 由于无法解决这些问题而运作得不好，而是由于在 JavaScript 这种动态语言中实在太难去确定。
 
 但我们可以通过 `/*#__PURE__*/` 注释来帮忙 terser。它给一个语句标记为没有副作用。就这样一个简单的改变就能够使下面的代码被 tree-shake:
-=======
-Terser actually tries to figure it out, but it doesn't know for sure in many cases. This doesn't mean that terser is not doing its job well because it can't figure it out. It's too difficult to determine it reliably in a dynamic language like JavaScript.
-
-But we can help terser by using the `/*#__PURE__*/` annotation. It flags a statement as side effect free. So a small change would make it possible to tree-shake the code:
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ```javascript
 var Button$1 = /*#__PURE__*/ withAppProvider()(Button);
@@ -364,21 +350,13 @@ T> 注意，也可以在命令行接口中使用 `--optimize-minimize` 标记，
 
 准备就绪后，然后运行另一个命令 `npm run build`，看看输出结果有没有发生改变。
 
-<<<<<<< HEAD
-你发现 `dist/bundle.js` 中的差异了吗？显然，现在整个 bundle 都已经被 minify(压缩) 和 mangle(混淆破坏)，但是如果仔细观察，则不会看到引入 `square` 函数，但能看到 `cube` 函数的混淆破坏版本（`function r(e){return e*e*e}n.a=r`）。现在，随着 minification(代码压缩) 和 tree shaking，我们的 bundle 减小几个字节！虽然，在这个特定示例中，可能看起来没有减少很多，但是，在有着复杂依赖树的大型应用程序上运行 tree shaking 时，会对 bundle 产生显著的体积优化。
-=======
-Notice anything different about `dist/bundle.js`? The whole bundle is now minified and mangled, but, if you look carefully, you won't see the `square` function included but will see a mangled version of the `cube` function (`function r(e){return e*e*e}n.a=r`). With minification and tree shaking, our bundle is now a few bytes smaller! While that may not seem like much in this contrived example, tree shaking can yield a significant decrease in bundle size when working on larger applications with complex dependency trees.
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
+你发现 `dist/bundle.js` 中的差异了吗？现在整个 bundle 都已经被 minify(压缩) 和 mangle(混淆破坏)，但是如果仔细观察，则不会看到引入 `square` 函数，但能看到 `cube` 函数的混淆破坏版本（`function r(e){return e*e*e}n.a=r`）。现在，随着 minification(代码压缩) 和 tree shaking，我们的 bundle 减小几个字节！虽然，在这个特定示例中，可能看起来没有减少很多，但是，在有着复杂依赖树的大型应用程序上运行 tree shaking 时，会对 bundle 产生显著的体积优化。
 
 T> 在使用 tree shaking 时必须有 [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin) 的支持，您可以通过设置配置项 `mode: "production"` 以启用它。如果您没有如此做，请记得手动引入 [ModuleConcatenationPlugin](/plugins/module-concatenation-plugin)。
 
 ## 结论 {#conclusion}
 
-<<<<<<< HEAD
-因此，我们学到为了利用 _tree shaking_ 的优势， 你必须...
-=======
-What we've learned is that in order to take advantage of _tree shaking_, you must...
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
+我们学到为了利用 _tree shaking_ 的优势， 你必须...
 
 - 使用 ES2015 模块语法（即 `import` 和 `export`）。
 - 确保没有编译器将您的 ES2015 模块语法转换为 CommonJS 的（顺带一提，这是现在常用的 @babel/preset-env 的默认行为，详细信息请参阅[文档](https://babeljs.io/docs/en/babel-preset-env#modules)）。

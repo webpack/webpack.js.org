@@ -82,13 +82,8 @@ export const getPageTitle = (tree, path) => {
     if (path.includes('/printable')) {
       return 'Combined printable page | webpack 中文文档';
     }
-<<<<<<< HEAD
-    if (path === '/') return page.title ?? 'webpack 中文文档';
+    if (path === '/') return page.title || 'webpack 中文文档';
     return `${page.title} | webpack 中文文档`;
-=======
-    if (path === '/') return page.title || 'webpack';
-    return `${page.title} | webpack`;
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
   }
 };
 

@@ -20,15 +20,9 @@ npm install --save-dev html-webpack-plugin
 
 ## 基本用法 {#basic-usage}
 
-<<<<<<< HEAD
 该插件将为你生成一个 HTML5 文件，
 在 body 中使用 `script` 标签引入你所有 webpack 生成的 bundle。
 只需添加该插件到你的 webpack 配置中，如下所示：
-=======
-The plugin will generate an HTML5 file for you that includes all your webpack
-bundles in the body using `script` tags. Add the plugin to your webpack
-configuration as follows:
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin');

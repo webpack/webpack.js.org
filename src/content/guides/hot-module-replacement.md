@@ -212,12 +212,8 @@ T> 如果你正在使用 [`webpack-dev-middleware`](/guides/development#using-we
   }
 ```
 
-<<<<<<< HEAD
 这仅仅是一个示例，还有很多让人易于犯错的情况。
 幸运的是，有很多 loader（下面会提到一些）可以使得模块热替换变得更加容易。
-=======
-This is only one example, but there are many others that can easily trip people up. Luckily, there are a lot of loaders out there (some of which are mentioned below) that will make hot module replacement much easier.
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ## HMR 加载样式 {#hmr-with-stylesheets}
 
@@ -267,11 +263,7 @@ npm install --save-dev style-loader css-loader
   };
 ```
 
-<<<<<<< HEAD
-如同 import 模块，热加载样式表同样很简单：
-=======
-Hot loading stylesheets can be done by importing them into a module:
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
+热加载样式表也可以通过将它们引入一个模块来实现：
 
 **project**
 
@@ -345,19 +337,10 @@ body {
 
 社区还提供许多其他 loader 和示例，可以使 HMR 与各种框架和库平滑地进行交互……
 
-<<<<<<< HEAD
 - [React Hot Loader](https://github.com/gaearon/react-hot-loader): 实时调整 react 组件。
 - [Vue Loader](https://github.com/vuejs/vue-loader): 此 loader 支持 vue 组件的 HMR，提供开箱即用体验。
 - [Elm Hot webpack Loader](https://github.com/klazuka/elm-hot-webpack-loader): 支持 Elm 编程语言的 HMR。
-- [Angular HMR](https://github.com/gdi2290/angular-hmr): 没有必要使用 loader！直接修改 NgModule 主文件就够了，
-  它可以完全控制 HMR API。
+- [Angular HMR](https://github.com/gdi2290/angular-hmr): 没有必要使用 loader！直接修改 NgModule 主文件就够了，它可以完全控制 HMR API。
 - [Svelte Loader](https://github.com/sveltejs/svelte-loader): 此 loader 开箱即用地支持 Svelte 组件的热更新。
-=======
-- [React Hot Loader](https://github.com/gaearon/react-hot-loader): Tweak react components in real time.
-- [Vue Loader](https://github.com/vuejs/vue-loader): This loader supports HMR for vue components out of the box.
-- [Elm Hot webpack Loader](https://github.com/klazuka/elm-hot-webpack-loader): Supports HMR for the Elm programming language.
-- [Angular HMR](https://github.com/gdi2290/angular-hmr): No loader necessary! A small change to your main NgModule file is all that's required to have full control over the HMR APIs.
-- [Svelte Loader](https://github.com/sveltejs/svelte-loader): This loader supports HMR for Svelte components out of the box.
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 T> 如果你知道任何其他 loader 或 plugin，能够有助于或增强模块热替换(hot module replacement)，请提交一个 pull request 以添加到此列表中！

@@ -44,11 +44,7 @@ npm install --save-dev typescript ts-loader
 
 **tsconfig.json**
 
-<<<<<<< HEAD
-这里我们设置一个基本的配置，来支持 JSX，并将 TypeScript 编译到 ES5……
-=======
-Let's set up a configuration to support JSX and compile TypeScript down to ES5...
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
+这里我们设置一个基本的配置来支持 JSX，并将 TypeScript 编译到 ES5……
 
 ```json
 {

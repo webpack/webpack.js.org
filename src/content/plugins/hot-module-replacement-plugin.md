@@ -21,11 +21,7 @@ W> HMR **绝对不能**被用在生产环境。
 
 ## 基本使用 {#basic-usage}
 
-<<<<<<< HEAD
 启用 HMR 很容易，且在大多数情况下不需要任何配置。
-=======
-Enabling HMR is straightforward and in most cases no options are necessary.
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ```javascript
 new webpack.HotModuleReplacementPlugin({
