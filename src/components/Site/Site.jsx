@@ -223,7 +223,7 @@ function Site(props) {
           <meta property="twitter:domain" content="https://webpack.js.org/" />
           <meta
             name="keywords"
-            content="webpack5, webpack, webpack 中文文档, 印记中文, docschina, docschina.org, webpack.docschina.org, doc.react-china.org, nodejs.cn, vue.docschina.org, babel.docschina.org, parceljs.docschina.org, rollup.docschina.org, koajs.docschina.org"
+            content="webpack5, webpack, webpack 中文文档, webpack 官方中文, webpack 5 官方中文, 印记中文, docschina, docschina.org, webpack.docschina.org, doc.react-china.org, nodejs.cn, vue.docschina.org, babel.docschina.org, parceljs.docschina.org, rollup.docschina.org, koajs.docschina.org"
           ></meta>
           <link rel="icon" type="image/x-icon" href={Favicon} />
           <link rel="manifest" href="/manifest.json" />
@@ -243,6 +243,11 @@ function Site(props) {
           <link rel="mask-icon" href={Logo} color="#465e69" />
           <meta name="msapplication-TileImage" content="/icon_150x150.png" />
           <meta name="msapplication-TileColor" content="#465e69" />
+          <script
+            data-ad-client="ca-pub-7556818484543627"
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          ></script>
         </Helmet>
         <div className="site__header">
           <NotificationBar />
