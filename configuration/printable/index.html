@@ -1291,94 +1291,16 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>When combining with the <a href="/configuration/output/#outputlibrary"><code>output.library</code></a> option: If an array is passed only the last item is exported.</p> <h1 id="mode">Mode<a href="#mode" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1> <p>Providing the <code>mode</code> configuration option tells webpack to use its built-in optimizations accordingly.</p> <p><code>string = 'production': 'none' | 'development' | 'production'</code></p> <h2 id="usage">Usage<a href="#usage" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2> <p>Provide the <code>mode</code> option in the config:</p> <pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   mode<span class="token operator">:</span> <span class="token string">'development'</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>or pass it as a <a href="/api/cli/">CLI</a> argument:</p> <pre><code class="hljs language-bash">webpack --mode<span class="token operator">=</span>development</code></pre> <p>The following string values are supported:</p> <table> <thead> <tr> <th>Option</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td data-th="Option"><span><code>development</code></span></td> <td data-th="Description"><span>Sets <code>process.env.NODE_ENV</code> on <code>DefinePlugin</code> to value <code>development</code>. Enables useful names for modules and chunks.</span></td> </tr> <tr> <td data-th="Option"><span><code>production</code></span></td> <td data-th="Description"><span>Sets <code>process.env.NODE_ENV</code> on <code>DefinePlugin</code> to value <code>production</code>. Enables deterministic mangled names for modules and chunks, <code>FlagDependencyUsagePlugin</code>, <code>FlagIncludedChunksPlugin</code>, <code>ModuleConcatenationPlugin</code>, <code>NoEmitOnErrorsPlugin</code> and <code>TerserPlugin</code>.</span></td> </tr> <tr> <td data-th="Option"><span><code>none</code></span></td> <td data-th="Description"><span>Opts out of any default optimization options</span></td> </tr> </tbody> </table> <p>If not set, webpack sets <code>production</code> as the default value for <code>mode</code>.</p> <aside class="tip"><h6 class="tip__prefix">tip</h6><p>If <code>mode</code> is not provided via configuration or CLI, CLI will use any valid <code>NODE_ENV</code> value for <code>mode</code>.</p></aside> <h3 id="mode-development">Mode: development<a href="#mode-development" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <pre><code class="hljs language-diff">// webpack.development.config.js
-module.exports = {
-<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> mode: 'development'
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> devtool: 'eval',
-</span><span class="token prefix deleted">-</span><span class="token line"> cache: true,
-</span><span class="token prefix deleted">-</span><span class="token line"> performance: {
-</span><span class="token prefix deleted">-</span><span class="token line">   hints: false
-</span><span class="token prefix deleted">-</span><span class="token line"> },
-</span><span class="token prefix deleted">-</span><span class="token line"> output: {
-</span><span class="token prefix deleted">-</span><span class="token line">   pathinfo: true
-</span><span class="token prefix deleted">-</span><span class="token line"> },
-</span><span class="token prefix deleted">-</span><span class="token line"> optimization: {
-</span><span class="token prefix deleted">-</span><span class="token line">   moduleIds: 'named',
-</span><span class="token prefix deleted">-</span><span class="token line">   chunkIds: 'named',
-</span><span class="token prefix deleted">-</span><span class="token line">   mangleExports: false,
-</span><span class="token prefix deleted">-</span><span class="token line">   nodeEnv: 'development',
-</span><span class="token prefix deleted">-</span><span class="token line">   flagIncludedChunks: false,
-</span><span class="token prefix deleted">-</span><span class="token line">   occurrenceOrder: false,
-</span><span class="token prefix deleted">-</span><span class="token line">   concatenateModules: false,
-</span><span class="token prefix deleted">-</span><span class="token line">   splitChunks: {
-</span><span class="token prefix deleted">-</span><span class="token line">     hidePathInfo: false,
-</span><span class="token prefix deleted">-</span><span class="token line">     minSize: 10000,
-</span><span class="token prefix deleted">-</span><span class="token line">     maxAsyncRequests: Infinity,
-</span><span class="token prefix deleted">-</span><span class="token line">     maxInitialRequests: Infinity,
-</span><span class="token prefix deleted">-</span><span class="token line">   },
-</span><span class="token prefix deleted">-</span><span class="token line">   emitOnErrors: true,
-</span><span class="token prefix deleted">-</span><span class="token line">   checkWasmTypes: false,
-</span><span class="token prefix deleted">-</span><span class="token line">   minimize: false,
-</span><span class="token prefix deleted">-</span><span class="token line">   removeAvailableModules: false
-</span><span class="token prefix deleted">-</span><span class="token line"> },
-</span><span class="token prefix deleted">-</span><span class="token line"> plugins: [
-</span><span class="token prefix deleted">-</span><span class="token line">   new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("development") }),
-</span><span class="token prefix deleted">-</span><span class="token line"> ]
-</span></span>}</code></pre> <h3 id="mode-production">Mode: production<a href="#mode-production" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <pre><code class="hljs language-diff">// webpack.production.config.js
-module.exports = {
-<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  mode: 'production',
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> performance: {
-</span><span class="token prefix deleted">-</span><span class="token line">   hints: 'warning'
-</span><span class="token prefix deleted">-</span><span class="token line"> },
-</span><span class="token prefix deleted">-</span><span class="token line"> output: {
-</span><span class="token prefix deleted">-</span><span class="token line">   pathinfo: false
-</span><span class="token prefix deleted">-</span><span class="token line"> },
-</span><span class="token prefix deleted">-</span><span class="token line"> optimization: {
-</span><span class="token prefix deleted">-</span><span class="token line">   moduleIds: 'deterministic',
-</span><span class="token prefix deleted">-</span><span class="token line">   chunkIds: 'deterministic',
-</span><span class="token prefix deleted">-</span><span class="token line">   mangleExports: 'deterministic',
-</span><span class="token prefix deleted">-</span><span class="token line">   nodeEnv: 'production',
-</span><span class="token prefix deleted">-</span><span class="token line">   flagIncludedChunks: true,
-</span><span class="token prefix deleted">-</span><span class="token line">   occurrenceOrder: true,
-</span><span class="token prefix deleted">-</span><span class="token line">   concatenateModules: true,
-</span><span class="token prefix deleted">-</span><span class="token line">   splitChunks: {
-</span><span class="token prefix deleted">-</span><span class="token line">     hidePathInfo: true,
-</span><span class="token prefix deleted">-</span><span class="token line">     minSize: 30000,
-</span><span class="token prefix deleted">-</span><span class="token line">     maxAsyncRequests: 5,
-</span><span class="token prefix deleted">-</span><span class="token line">     maxInitialRequests: 3,
-</span><span class="token prefix deleted">-</span><span class="token line">   },
-</span><span class="token prefix deleted">-</span><span class="token line">   emitOnErrors: false,
-</span><span class="token prefix deleted">-</span><span class="token line">   checkWasmTypes: true,
-</span><span class="token prefix deleted">-</span><span class="token line">   minimize: true,
-</span><span class="token prefix deleted">-</span><span class="token line"> },
-</span><span class="token prefix deleted">-</span><span class="token line"> plugins: [
-</span><span class="token prefix deleted">-</span><span class="token line">   new TerserPlugin(/* ... */),
-</span><span class="token prefix deleted">-</span><span class="token line">   new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("production") }),
-</span><span class="token prefix deleted">-</span><span class="token line">   new webpack.optimize.ModuleConcatenationPlugin(),
-</span><span class="token prefix deleted">-</span><span class="token line">   new webpack.NoEmitOnErrorsPlugin()
-</span><span class="token prefix deleted">-</span><span class="token line"> ]
-</span></span>}</code></pre> <h3 id="mode-none">Mode: none<a href="#mode-none" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <pre><code class="hljs language-diff">// webpack.custom.config.js
-module.exports = {
-<span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> mode: 'none',
-</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line"> performance: {
-</span><span class="token prefix deleted">-</span><span class="token line">  hints: false
-</span><span class="token prefix deleted">-</span><span class="token line"> },
-</span><span class="token prefix deleted">-</span><span class="token line"> optimization: {
-</span><span class="token prefix deleted">-</span><span class="token line">   flagIncludedChunks: false,
-</span><span class="token prefix deleted">-</span><span class="token line">   occurrenceOrder: false,
-</span><span class="token prefix deleted">-</span><span class="token line">   concatenateModules: false,
-</span><span class="token prefix deleted">-</span><span class="token line">   splitChunks: {
-</span><span class="token prefix deleted">-</span><span class="token line">     hidePathInfo: false,
-</span><span class="token prefix deleted">-</span><span class="token line">     minSize: 10000,
-</span><span class="token prefix deleted">-</span><span class="token line">     maxAsyncRequests: Infinity,
-</span><span class="token prefix deleted">-</span><span class="token line">     maxInitialRequests: Infinity,
-</span><span class="token prefix deleted">-</span><span class="token line">   },
-</span><span class="token prefix deleted">-</span><span class="token line">   emitOnErrors: true,
-</span><span class="token prefix deleted">-</span><span class="token line">   checkWasmTypes: false,
-</span><span class="token prefix deleted">-</span><span class="token line">   minimize: false,
-</span><span class="token prefix deleted">-</span><span class="token line"> },
-</span><span class="token prefix deleted">-</span><span class="token line"> plugins: []
-</span></span>}</code></pre> <p>If you want to change the behavior according to the <strong>mode</strong> variable inside the <em>webpack.config.js</em>, you have to export a function instead of an object:</p> <pre><code class="hljs language-javascript"><span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>or pass it as a <a href="/api/cli/">CLI</a> argument:</p> <pre><code class="hljs language-bash">webpack --mode<span class="token operator">=</span>development</code></pre> <p>The following string values are supported:</p> <table> <thead> <tr> <th>Option</th> <th>Description</th> </tr> </thead> <tbody> <tr> <td data-th="Option"><span><code>development</code></span></td> <td data-th="Description"><span>Sets <code>process.env.NODE_ENV</code> on <code>DefinePlugin</code> to value <code>development</code>. Enables useful names for modules and chunks.</span></td> </tr> <tr> <td data-th="Option"><span><code>production</code></span></td> <td data-th="Description"><span>Sets <code>process.env.NODE_ENV</code> on <code>DefinePlugin</code> to value <code>production</code>. Enables deterministic mangled names for modules and chunks, <code>FlagDependencyUsagePlugin</code>, <code>FlagIncludedChunksPlugin</code>, <code>ModuleConcatenationPlugin</code>, <code>NoEmitOnErrorsPlugin</code> and <code>TerserPlugin</code>.</span></td> </tr> <tr> <td data-th="Option"><span><code>none</code></span></td> <td data-th="Description"><span>Opts out of any default optimization options</span></td> </tr> </tbody> </table> <p>If not set, webpack sets <code>production</code> as the default value for <code>mode</code>.</p> <aside class="tip"><h6 class="tip__prefix">tip</h6><p>If <code>mode</code> is not provided via configuration or CLI, CLI will use any valid <code>NODE_ENV</code> value for <code>mode</code>.</p></aside> <h3 id="mode-development">Mode: development<a href="#mode-development" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <pre><code class="hljs language-js"><span class="token comment">// webpack.development.config.js</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  mode<span class="token operator">:</span> <span class="token string">'development'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h3 id="mode-production">Mode: production<a href="#mode-production" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <pre><code class="hljs language-js"><span class="token comment">// webpack.production.config.js</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  mode<span class="token operator">:</span> <span class="token string">'production'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <h3 id="mode-none">Mode: none<a href="#mode-none" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3> <pre><code class="hljs language-js"><span class="token comment">// webpack.custom.config.js</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  mode<span class="token operator">:</span> <span class="token string">'none'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre> <p>If you want to change the behavior according to the <strong>mode</strong> variable inside the <em>webpack.config.js</em>, you have to export a function instead of an object:</p> <pre><code class="hljs language-javascript"><span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
   entry<span class="token operator">:</span> <span class="token string">'./app.js'</span><span class="token punctuation">,</span>
   <span class="token comment">//...</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
