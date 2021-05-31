@@ -123,11 +123,7 @@ T> 如果你想要了解 `package.json` 内在机制的更多信息，我们推�
  }
 ```
 
-<<<<<<< HEAD
-在此示例中，`<script>` 标签之间存在隐式依赖关系。在 `index.js` 文件执行之前，还需要在页面中先引入 `lodash`。这是因为 `index.js` 并未显式声明它需要 `lodash`，只是假定推测已经存在一个全局变量 `_`。
-=======
-In this example, there are implicit dependencies between the `<script>` tags. Our `index.js` file depends on `lodash` being included in the page before it runs. This is because `index.js` never explicitly declared a need for `lodash`; it assumes that the global variable `_` exists.
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
+在此示例中，`<script>` 标签之间存在隐式依赖关系。在 `index.js` 文件执行之前，还需要在页面中先引入 `lodash`。这是因为 `index.js` 并未显式声明它需要 `lodash`，假定推测已经存在一个全局变量 `_`。
 
 使用这种方式去管理 JavaScript 项目会有一些问题：
 

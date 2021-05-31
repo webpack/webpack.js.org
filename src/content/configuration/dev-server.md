@@ -35,11 +35,7 @@ T> 与 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middlewar
 
 `object`
 
-<<<<<<< HEAD
-通过 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的这些配置，能够以多种方式改变其行为。这是一个简单的示例，利用 `gzips` 压缩 `dist/` 目录当中的所有内容并提供一个本地服务(serve)：
-=======
-This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change its behavior in various ways. Here's a rudimentary example that gzips and serves everything from our `dist/` directory in the project root:
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
+通过 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的这些配置，能够以多种方式改变其行为。这是一个基本的示例，利用 `gzips` 压缩 `dist/` 目录当中的所有内容并提供一个本地服务(serve)：
 
 **webpack.config.js**
 
@@ -1276,25 +1272,17 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `devServer.setup` {#devserversetup}
-
-`function (app, server)`
-
-W> 这个选项将被 [`devServer.before`](#devserverbefore) 所**替代**，并将在 v3.0.0 中**删除**。
-=======
-Usage via the CLI
+通过 CLI 使用
 
 ```bash
 npx webpack serve --serveIndex
 ```
 
-## `devServer.setup`
+## `devServer.setup` {#devserversetup}
 
 `function (app, server)`
 
-W> This option is **deprecated** in favor of [`devServer.before`](#devserverbefore) and will be removed in v4.0.0.
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
+W> 此配置项将被 [`devServer.before`](#devserverbefore) 所**替代**，并将在 v4.0.0 中**删除**。
 
 在这里，可以访问 Express 应用程序对象，并向其中添加自己的自定义中间件。
 例如，为某些路径定义自定义处理程序：

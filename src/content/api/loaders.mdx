@@ -19,11 +19,7 @@ translators:
   - QC-L
 ---
 
-<<<<<<< HEAD
 loader 本质上是导出为函数的 JavaScript 模块。[loader runner](https://github.com/webpack/loader-runner) 会调用此函数，然后将上一个 loader 产生的结果或者资源文件传入进去。函数中的 `this` 作为上下文会被 webpack 填充，并且 [loader runner](https://github.com/webpack/loader-runner) 中包含一些实用的方法，比如可以使 loader 调用方式变为异步，或者获取 query 参数。
-=======
-A loader is a JavaScript module that exports a function. The [loader runner](https://github.com/webpack/loader-runner) calls this function and passes the result of the previous loader or the resource file into it. The `this` context of the function is filled-in by webpack and the [loader runner](https://github.com/webpack/loader-runner) with some useful methods that allow the loader (among other things) to change its invocation style to async, or get query parameters.
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 起始 loader 只有一个入参：资源文件的内容。compiler 预期得到最后一个 loader 产生的处理结果。这个处理结果应该为 `String` 或者 `Buffer`（能够被转换为 string）类型，代表了模块的 JavaScript 源码。另外，还可以传递一个可选的 SourceMap 结果（格式为 JSON 对象）。
 
@@ -57,11 +53,7 @@ module.exports = function (content, map, meta) {
 };
 ```
 
-<<<<<<< HEAD
 `this.callback` 方法则更灵活，因为它允许传递多个参数，而不仅仅是 `content`。
-=======
-The `this.callback` method is more flexible as it allows multiple arguments to be passed as opposed to only the `content`.
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 **sync-loader-with-multiple-results.js**
 

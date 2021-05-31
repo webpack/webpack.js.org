@@ -192,23 +192,20 @@ loadComponent('abtests', 'test123');
 
 [查看完整实现](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)
 
-<<<<<<< HEAD
-## 故障排除 {#troubleshooting}
-=======
-## Dynamic Public Path
+## 动态 Public Path {#dynamicpublicpath}
 
-### Offer a host API to set the publicPath
+### 提供一个 host api 以设置 publicPath {#offerahostapitosetthepublicPath}
 
-One could allow the host to set the publicPath of a remote module at runtime by exposing a method from that remote module.
+可以允许 host 在运行时通过公开远程模块的方法来设置远程模块的 publicPath。
 
-This approach is particularly helpful when you mount independently deployed child applications on the sub path of the host domain.
+当你在 host 域的子路径上挂载独立部署的子应用程序时，这种方法特别有用。
 
-Scenario:
+场景：
 
-You have a host app hosted on `https://my-host.com/app/*` and a child app hosted on `https://foo-app.com`. The child app is also mounted on the host domain, hence,
+你在 `https://my-host.com/app/*` 上有一个 host 应用，并且在 `https://foo-app.com` 上有一个子应用。子应用程序也挂载在 host 域上, 因此，
 `https://foo-app.com` is expected to be accessible via `https://my-host.com/app/foo-app` and `https://my-host.com/app/foo/*` requests are redirected to `https://foo-app.com/*` via a proxy.
 
-Example:
+示例：
 
 **webpack.config.js (remote)**
 
@@ -219,7 +216,7 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'remote', // this name needs to match with the entry name
+      name: 'remote', // 该名称必须与入口名称相匹配
       exposes: ['./public-path'],
       // ...
     }),
@@ -246,11 +243,11 @@ publicPath.set('/your-public-path');
 //boostrap app  e.g. import('./boostrap.js')
 ```
 
-### Infer publicPath from script
+### Infer publicPath from script {#inferpublicpathfromscript}
 
 One could infer the publicPath from the script tag from `document.currentScript.src` and set it with the [`__webpack_public_path__`](/api/module-variables/#__webpack_public_path__-webpack-specific) module variable at runtime.
 
-Example:
+示例：
 
 **webpack.config.js (remote)**
 
@@ -261,7 +258,7 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'remote', // this name needs to match with the entry name
+      name: 'remote', // 该名称必须与入口名称相匹配
       // ...
     }),
   ],
@@ -271,14 +268,13 @@ module.exports = {
 **setup-public-path.js (remote)**
 
 ```js
-// derive the publicPath with your own logic and set it with the __webpack_public_path__ API
+// 使用你自己的逻辑派生 publicPath，并使用 __webpack_public_path__ API 设置它
 __webpack_public_path__ = document.currentScript.src + '/../';
 ```
 
-T> There is also an `'auto'` value available to [`output.publicPath`](/configuration/output/#outputpublicpath) which automatically determines the publicPath for you.
+T> [`output.publicPath`](/configuration/output/#outputpublicpath) 配置项也可设置为 `'auto'`，它将为你自动决定一个 publicPath。
 
-## Troubleshooting
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
+## 故障排除 {#troubleshooting}
 
 **`Uncaught Error: Shared module is not available for eager consumption`**
 

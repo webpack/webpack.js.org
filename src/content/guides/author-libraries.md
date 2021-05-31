@@ -120,11 +120,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-你应该能够熟练使用 webpack 打包你的应用。基本上，我们将通知 webpack 将 `src/index.js` 打包到 `dist/webpack-numbers.js` 中。
-=======
-In the above example, we're telling webpack to bundle `src/index.js` into `dist/webpack-numbers.js`.
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
+在上面的例子中，我们将通知 webpack 将 `src/index.js` 打包到 `dist/webpack-numbers.js` 中。
 
 ## Expose the Library {#expose-the-library}
 

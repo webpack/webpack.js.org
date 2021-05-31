@@ -102,11 +102,7 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 在早期，webpack 的目的是为了让大多数的 Node.js 模块运行在浏览器中，但如今模块的格局已经发生了变化，现在许多模块主要是为前端而编写。webpack <= 4 的版本中提供了许多 Node.js 核心模块的 polyfills，一旦某个模块引用了任何一个核心模块（如 `cypto` 模块），webpack 就会自动引用这些 polyfills。
 
-<<<<<<< HEAD
 尽管这会使得使用为 Node.js 编写模块变得容易，但它在构建时给 bundle 附加了庞大的 polyfills。在大部分情况下，这些 polyfills 并非必须。
-=======
-While this makes using modules written for Node.js easier, it adds these huge polyfills to the bundle. In many cases these polyfills are unnecessary.
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 从 webpack 5 开始不再自动填充这些 polyfills，而会专注于前端模块兼容。我们的目标是提高 web 平台的兼容性。
 
@@ -261,11 +257,7 @@ Webpack 5 允许传递一个目标列表，并且支持目标的版本。
 
 例如 ` target: "node14"``target: ["web", "es2020"] `。
 
-<<<<<<< HEAD
 这是一个简单的方法，为 webpack 提供它需要确定的所有信息：
-=======
-This enables us to provide webpack all the information it needs to determine:
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 - 代码块加载机制，以及
 - 支持的语法，如箭头函数
