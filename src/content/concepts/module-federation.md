@@ -7,6 +7,7 @@ contributors:
   - EugeneHlushko
   - jamesgeorge007
   - ScriptedAlchemy
+  - KyleBastien
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
@@ -187,6 +188,58 @@ loadComponent('abtests', 'test123');
 ```
 
 [See full implementation](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)
+
+## Promise Based Dynamic Remotes
+
+Generally, remotes are configured using URL's like in this example:
+
+```js
+new ModuleFederationPlugin({
+  name: 'host',
+  remotes: {
+    app1: "app1@http://localhost:3001/remoteEntry.js",
+  },
+  // ...
+}),
+```
+
+But you can also pass in a promise to this remote, which will be resolved at runtime. You should resolve this promise with some module that fits the `get/init` interface described above. For example, if you wanted to pass in which version of a federated module you should use, via a query parameter you could do something like the following:
+
+```js
+new ModuleFederationPlugin({
+  name: 'host',
+  remotes: {
+    app1: `promise new Promsie(res => {
+      let remote
+      const urlParams = new URLSearchParams(window.location.search)
+      const version = urlParams.get('app1VersionParam')
+      // This part depends on how you plan on hosting and versioning your federated modules
+      const remoteUrlWithVersion = 'https://localhost:3001/' + version + '/remoteEntry.js'
+      try {
+        remote = require(remoteUrlWithVersion)['app1']
+      } catch (e) {
+        delete require.cache[remoteUrlWithVersion]
+        remote = require(remoteUrlWithVersion)['app1']
+      }
+      const proxy = {
+        get: (request) => remote.get(request),
+        init: (arg) => {
+          try {
+            return remote.init(arg)
+          } catch(e) {
+            console.log('remote container already initialized')
+          }
+        }
+      }
+      res(proxy)
+    })
+    `,
+  },
+  // ...
+}),
+```
+
+Note that when using this API you _have_ to resolve an object which contains the get/init API.
 
 ## Dynamic Public Path
 
