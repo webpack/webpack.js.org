@@ -1709,12 +1709,17 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token keyword">new</span> <span class="token class-name">ImageMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       <span class="token function-variable function">minify</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> minimizerOptions</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
         <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">,</span> input<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">// To do something</span>
-        <span class="token keyword">return</span> <span class="token punctuation">{</span>
-          code<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#x3C;Buffer></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-          warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-          errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">let</span> result<span class="token punctuation">;</span>
+
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+          result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">minifyAndReturnBuffer</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token comment">// Return original input if there was an error</span>
+          <span class="token keyword">return</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> input<span class="token punctuation">,</span> errors<span class="token operator">:</span> <span class="token punctuation">[</span>error<span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">return</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> result<span class="token punctuation">,</span> warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
       minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -1728,12 +1733,17 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         ImageMinimizerPlugin<span class="token punctuation">.</span>imageminMinify<span class="token punctuation">,</span>
         <span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> minimizerOptions</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
           <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">,</span> input<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token comment">// To do something</span>
-          <span class="token keyword">return</span> <span class="token punctuation">{</span>
-            code<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#x3C;Buffer></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-            warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-            errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+          <span class="token keyword">let</span> result<span class="token punctuation">;</span>
+
+          <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            result <span class="token operator">=</span> <span class="token function">minifyAndReturnBuffer</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// Return original input if there was an error</span>
+            <span class="token keyword">return</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> input<span class="token punctuation">,</span> errors<span class="token operator">:</span> <span class="token punctuation">[</span>error<span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+
+          <span class="token keyword">return</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> result<span class="token punctuation">,</span> warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">]</span><span class="token punctuation">,</span>
       minimizerOptions<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -1786,12 +1796,17 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         ImageMinimizerPlugin<span class="token punctuation">.</span>imageminMinify<span class="token punctuation">,</span>
         <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> minimizerOptions</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
           <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">,</span> input<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token comment">// To do something</span>
-          <span class="token keyword">return</span> <span class="token punctuation">{</span>
-            code<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#x3C;Buffer></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-            warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-            errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-          <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+          <span class="token keyword">let</span> result<span class="token punctuation">;</span>
+
+          <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">minifyAndReturnBuffer</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// Return original input if there was an error</span>
+            <span class="token keyword">return</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> input<span class="token punctuation">,</span> errors<span class="token operator">:</span> <span class="token punctuation">[</span>error<span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+
+          <span class="token keyword">return</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> result<span class="token punctuation">,</span> warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">]</span><span class="token punctuation">,</span>
       minimizerOptions<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -1944,12 +1959,17 @@ module<span class="token punctuation">.</span>exports <span class="token operato
             options<span class="token operator">:</span> <span class="token punctuation">{</span>
               <span class="token function-variable function">minify</span><span class="token operator">:</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> minimizerOptions</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
                 <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">,</span> input<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token comment">// To do something</span>
-                <span class="token keyword">return</span> <span class="token punctuation">{</span>
-                  code<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#x3C;Buffer></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-                  warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-                  errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-                <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">let</span> result<span class="token punctuation">;</span>
+
+                <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                  result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">minifyAndReturnBuffer</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                  <span class="token comment">// Return original input if there was an error</span>
+                  <span class="token keyword">return</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> input<span class="token punctuation">,</span> errors<span class="token operator">:</span> <span class="token punctuation">[</span>error<span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword">return</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> result<span class="token punctuation">,</span> warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
               <span class="token punctuation">}</span><span class="token punctuation">,</span>
               minimizerOptions<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
             <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -1977,12 +1997,17 @@ module<span class="token punctuation">.</span>exports <span class="token operato
                 ImageMinimizerPlugin<span class="token punctuation">.</span>imageminMinify<span class="token punctuation">,</span>
                 <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> minimizerOptions</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
                   <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">,</span> input<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                  <span class="token comment">// To do something</span>
-                  <span class="token keyword">return</span> <span class="token punctuation">{</span>
-                    code<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#x3C;Buffer></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-                    warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-                    errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-                  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+                  <span class="token keyword">let</span> result<span class="token punctuation">;</span>
+
+                  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                    result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">minifyAndReturnBuffer</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token comment">// Return original input if there was an error</span>
+                    <span class="token keyword">return</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> input<span class="token punctuation">,</span> errors<span class="token operator">:</span> <span class="token punctuation">[</span>error<span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+                  <span class="token punctuation">}</span>
+
+                  <span class="token keyword">return</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> result<span class="token punctuation">,</span> warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
                 <span class="token punctuation">}</span><span class="token punctuation">,</span>
               <span class="token punctuation">]</span><span class="token punctuation">,</span>
               minimizerOptions<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -2044,12 +2069,17 @@ module<span class="token punctuation">.</span>exports <span class="token operato
                 ImageMinimizerPlugin<span class="token punctuation">.</span>imageminMinify<span class="token punctuation">,</span>
                 <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">data<span class="token punctuation">,</span> minimizerOptions</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
                   <span class="token keyword">const</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token punctuation">,</span> input<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                  <span class="token comment">// To do something</span>
-                  <span class="token keyword">return</span> <span class="token punctuation">{</span>
-                    code<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&#x3C;Buffer></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
-                    warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-                    errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-                  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+                  <span class="token keyword">let</span> result<span class="token punctuation">;</span>
+
+                  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                    result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">minifyAndReturnBuffer</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token comment">// Return original input if there was an error</span>
+                    <span class="token keyword">return</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> input<span class="token punctuation">,</span> errors<span class="token operator">:</span> <span class="token punctuation">[</span>error<span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+                  <span class="token punctuation">}</span>
+
+                  <span class="token keyword">return</span> <span class="token punctuation">{</span> data<span class="token operator">:</span> result<span class="token punctuation">,</span> warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
                 <span class="token punctuation">}</span><span class="token punctuation">,</span>
               <span class="token punctuation">]</span><span class="token punctuation">,</span>
               minimizerOptions<span class="token operator">:</span> <span class="token punctuation">[</span>
