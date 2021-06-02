@@ -194,22 +194,27 @@ loadComponent('abtests', 'test123');
 Generally, remotes are configured using URL's like in this example:
 
 ```js
-new ModuleFederationPlugin({
-  name: 'host',
-  remotes: {
-    app1: "app1@http://localhost:3001/remoteEntry.js",
-  },
-  // ...
-}),
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'host',
+      remotes: {
+        app1: 'app1@http://localhost:3001/remoteEntry.js',
+      },
+    }),
+  ],
+};
 ```
 
 But you can also pass in a promise to this remote, which will be resolved at runtime. You should resolve this promise with some module that fits the `get/init` interface described above. For example, if you wanted to pass in which version of a federated module you should use, via a query parameter you could do something like the following:
 
 ```js
-new ModuleFederationPlugin({
-  name: 'host',
-  remotes: {
-    app1: `promise new Promsie(res => {
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'host',
+      remotes: {
+        app1: `promise new Promsie(res => {
       let remote
       const urlParams = new URLSearchParams(window.location.search)
       const version = urlParams.get('app1VersionParam')
@@ -234,9 +239,11 @@ new ModuleFederationPlugin({
       res(proxy)
     })
     `,
-  },
-  // ...
-}),
+      },
+      // ...
+    }),
+  ],
+};
 ```
 
 Note that when using this API you _have_ to resolve an object which contains the get/init API.
