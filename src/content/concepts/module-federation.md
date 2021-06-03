@@ -206,7 +206,7 @@ module.exports = {
 };
 ```
 
-But you can also pass in a promise to this remote, which will be resolved at runtime. You should resolve this promise with some module that fits the `get/init` interface described above. For example, if you wanted to pass in which version of a federated module you should use, via a query parameter you could do something like the following:
+But you can also pass in a promise to this remote, which will be resolved at runtime. You should resolve this promise with any module that fits the `get/init` interface described above. For example, if you wanted to pass in which version of a federated module you should use, via a query parameter you could do something like the following:
 
 ```js
 module.exports = {
@@ -214,7 +214,7 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'host',
       remotes: {
-        app1: `promise new Promsie(res => {
+        app1: `promise new Promise(resolve => {
       let remote
       const urlParams = new URLSearchParams(window.location.search)
       const version = urlParams.get('app1VersionParam')
@@ -236,7 +236,7 @@ module.exports = {
           }
         }
       }
-      res(proxy)
+      resolve(proxy)
     })
     `,
       },
