@@ -27,6 +27,7 @@ import Page from '../Page/Page';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Vote from '../Vote/Vote';
 import Badge from '../Badge/Badge.js';
+import StackBlitzPreview from '../StackBlitzPreview/StackBlitzPreview';
 import { default as LinkComponent } from '../mdxComponents/Link';
 import { Helmet } from 'react-helmet-async';
 
@@ -47,6 +48,7 @@ import { useLocalStorage } from 'react-use';
 
 const mdxComponents = {
   Badge: Badge,
+  StackBlitzPreview: StackBlitzPreview,
   a: LinkComponent,
 };
 
