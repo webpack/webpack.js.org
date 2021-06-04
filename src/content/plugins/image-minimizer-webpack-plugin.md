@@ -21,9 +21,12 @@ repo: https://github.com/webpack-contrib/image-minimizer-webpack-plugin
 
 
 
-This plugin uses [imagemin](https://github.com/imagemin/imagemin) to optimize your images.
-
 ## Getting Started
+
+This plugin can use 2 tools to compress images:
+
+- [`imagemin`](https://github.com/imagemin/imagemin) - optimize your images by default, since it is stable and works with all types of images
+- [`squoosh`](https://github.com/GoogleChromeLabs/squoosh/tree/dev/libsquoosh) - while working in experimental mode with `.jpg`, `.jpeg`, `.png`, `.webp`, `.avif` file types.
 
 To begin, you'll need to install `image-minimizer-webpack-plugin`:
 
@@ -35,6 +38,8 @@ Images can be optimized in two modes:
 
 1.  [Lossless](https://en.wikipedia.org/wiki/Lossless_compression) (without loss of quality).
 2.  [Lossy](https://en.wikipedia.org/wiki/Lossy_compression) (with loss of quality).
+
+### Optimize with [imagemin](https://github.com/imagemin/imagemin)
 
 Note:
 
@@ -106,7 +111,80 @@ module.exports = {
 };
 ```
 
-> ℹ️ Only for `4` version of `webpack`: Make sure that plugin place after any plugins that add images or other assets which you want to optimized.\*\*
+### Optimize with [`squoosh`](https://github.com/GoogleChromeLabs/squoosh/tree/dev/libsquoosh)
+
+```console
+$ npm install @squoosh/lib --save-dev
+```
+
+**Recommended `@squoosh/lib` options for lossy optimization**
+
+For lossy optimization we recommend using the default settings `@squoosh/lib`.
+The default values and supported file types for each option can be found in the `[codecs.js]`(https://github.com/GoogleChromeLabs/squoosh/blob/dev/libsquoosh/src/codecs.js) file under `codecs`.
+
+**webpack.config.js**
+
+```js
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(jpe?g|png)$/i,
+        type: "asset",
+      },
+    ],
+  },
+  plugins: [
+    new ImageMinimizerPlugin({
+      minify: ImageMinimizerPlugin.squooshMinify,
+    }),
+  ],
+};
+```
+
+**Recommended `squoosh` options for lossless optimization**
+
+For lossless optimization we recommend using the options listed below in `minimizerOptions.encodeOptions`.
+
+**webpack.config.js**
+
+```js
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(jpe?g|png)$/i,
+        type: "asset",
+      },
+    ],
+  },
+  plugins: [
+    new ImageMinimizerPlugin({
+      minify: ImageMinimizerPlugin.squooshMinify,
+      minimizerOptions: {
+        encodeOptions: {
+          mozjpeg: {
+            // That setting might be close to lossless, but it’s not guaranteed
+            // https://github.com/GoogleChromeLabs/squoosh/issues/85
+            quality: 100,
+          },
+          webp: {
+            lossless: 1,
+          },
+          avif: {
+            // https://github.com/GoogleChromeLabs/squoosh/blob/dev/codecs/avif/enc/README.md
+            cqLevel: 0,
+          },
+        },
+      },
+    }),
+  ],
+};
+```
 
 > ℹ️ If you want to use `loader` or `plugin` standalone see sections below, but this is not recommended.
 
@@ -191,7 +269,7 @@ module.exports = {
 |       **`include`**        | `{String\/RegExp\|Array<String\|RegExp>}` |                         `undefined`                         | Files to `include`                                                                                |
 |       **`exclude`**        | `{String\/RegExp\|Array<String\|RegExp>}` |                         `undefined`                         | Files to `exclude`                                                                                |
 |        **`filter`**        |               `{Function}`                |                        `() => true`                         | Allows filtering of images for optimization                                                       |
-|    **`severityError`**     |            `{Boolean\|String}`            |                          `'auto'`                           | Allows to choose how errors are displayed                                                         |
+|    **`severityError`**     |                `{String}`                 |                          `'error'`                          | Allows to choose how errors are displayed                                                         |
 |        **`minify`**        |      `{Function \| Array<Function>}`      |            `ImageMinimizerPlugin.imageminMinify`            | Allows to override default minify function                                                        |
 |   **`minimizerOptions`**   |         `{Object\|Array<Object>}`         |                      `{ plugins: [] }`                      | Options for `imagemin`                                                                            |
 |        **`loader`**        |                `{Boolean}`                |                           `true`                            | Automatically adding `imagemin-loader`                                                            |
@@ -297,17 +375,16 @@ module.exports = {
 
 #### `severityError`
 
-Type: `Boolean|String`
-Default: `'auto'`
+Type: `String`
+Default: `'error'`
 
 Allows to choose how errors are displayed.
 
 Сan have the following values:
 
-- `'auto'` - emit warnings in `development` mode and emit errors in `production` mode (default behavior)
-- `false` or `'off'` - suppresses errors and warnings
+- `'off'` - suppresses errors and warnings
 - `'warning'` - emit warnings instead errors
-- `true` or `'error'` - emit errors
+- `'error'` - emit errors
 
 **webpack.config.js**
 
@@ -332,6 +409,11 @@ Allows to override default minify function.
 By default plugin uses [imagemin](https://github.com/imagemin/imagemin) package.
 Useful for using and testing unpublished versions or forks.
 
+Аvailable minifiers:
+
+- ImageMinimizerPlugin.imageminMinify
+- ImageMinimizerPlugin.squooshMinify
+
 ##### `Function`
 
 **webpack.config.js**
@@ -344,12 +426,17 @@ module.exports = {
     new ImageMinimizerPlugin({
       minify: async (data, minimizerOptions) => {
         const [[, input]] = Object.entries(data);
-        // To do something
-        return {
-          code: `<Buffer>`,
-          warnings: [],
-          errors: [],
-        };
+
+        let result;
+
+        try {
+          result = await minifyAndReturnBuffer(input);
+        } catch (error) {
+          // Return original input if there was an error
+          return { data: input, errors: [error] };
+        }
+
+        return { data: result, warnings: [], errors: [] };
       },
       minimizerOptions: {},
     }),
@@ -375,12 +462,17 @@ module.exports = {
         ImageMinimizerPlugin.imageminMinify,
         (data, minimizerOptions) => {
           const [[, input]] = Object.entries(data);
-          // To do something
-          return {
-            code: `<Buffer>`,
-            warnings: [],
-            errors: [],
-          };
+
+          let result;
+
+          try {
+            result = minifyAndReturnBuffer(input);
+          } catch (error) {
+            // Return original input if there was an error
+            return { data: input, errors: [error] };
+          }
+
+          return { data: result, warnings: [], errors: [] };
         },
       ],
       minimizerOptions: [
@@ -461,12 +553,17 @@ module.exports = {
         ImageMinimizerPlugin.imageminMinify,
         async (data, minimizerOptions) => {
           const [[, input]] = Object.entries(data);
-          // To do something
-          return {
-            code: `<Buffer>`,
-            warnings: [],
-            errors: [],
-          };
+
+          let result;
+
+          try {
+            result = await minifyAndReturnBuffer(input);
+          } catch (error) {
+            // Return original input if there was an error
+            return { data: input, errors: [error] };
+          }
+
+          return { data: result, warnings: [], errors: [] };
         },
       ],
       minimizerOptions: [
@@ -530,6 +627,7 @@ Type: `String`
 Default: `'[path][name][ext]'`
 
 Allows to set the filename for the generated asset. Useful for converting to a `webp`.
+Supported values see in [`webpack template strings`](/configuration/output/#template-strings), `File-level` section.
 
 **webpack.config.js**
 
@@ -544,6 +642,40 @@ module.exports = {
       filename: "[path][name].webp",
       minimizerOptions: {
         plugins: ["imagemin-webp"],
+      },
+    }),
+  ],
+};
+```
+
+##### Converting to `webp` using `ImageMinimizerPlugin.squooshMinify`
+
+**webpack.config.js**
+
+```js
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+/*
+const defaultTargets = {
+  ".png": "oxipng",
+  ".jpg": "mozjpeg",
+  ".jpeg": "mozjpeg",
+  ".jxl": "jxl",
+  ".webp": "webp",
+  ".avif": "avif",
+};
+*/
+
+module.exports = {
+  plugins: [
+    // Images are converted to `webp` and the original assets have been kept
+    new ImageMinimizerPlugin({
+      test: /\.(png)$/i,
+      filename: "[path][name].webp",
+      minify: ImageMinimizerPlugin.squooshMinify,
+      minimizerOptions: {
+        targets: {
+          ".png": "webp",
+        },
       },
     }),
   ],
@@ -611,7 +743,7 @@ module.exports = {
 |            Name            |              Type               |                Default                | Description                                                                                       |
 | :------------------------: | :-----------------------------: | :-----------------------------------: | :------------------------------------------------------------------------------------------------ |
 |        **`filter`**        |          `{Function}`           |              `undefined`              | Allows filtering of images for optimization                                                       |
-|    **`severityError`**     |       `{Boolean\|String}`       |               `'auto'`                | Allows to choose how errors are displayed                                                         |
+|    **`severityError`**     |           `{String}`            |               `'error'`               | Allows to choose how errors are displayed                                                         |
 |        **`minify`**        | `{Function \| Array<Function>}` | `ImageMinimizerPlugin.imageminMinify` | Allows to override default minify function                                                        |
 |   **`minimizerOptions`**   |    `{Object\|Array<Object>}`    |           `{ plugins: [] }`           | Options for `imagemin`                                                                            |
 |       **`filename`**       |           `{string}`            |         `'[path][name][ext]'`         | Allows to set the filename for the generated asset. Useful for converting to a `webp`             |
@@ -668,17 +800,16 @@ module.exports = {
 
 #### `severityError`
 
-Type: `Boolean|String`
-Default: `'auto'`
+Type: `String`
+Default: `'error'`
 
 Allows to choose how errors are displayed.
 
 Сan have the following values:
 
-- `'auto'` - emit warnings in `development` mode and emit errors in `production` mode (default behavior)
-- `false` or `'off'` - suppresses errors and warnings
+- `'off'` - suppresses errors and warnings
 - `'warning'` - emit warnings instead errors
-- `true` or `'error'` - emit errors
+- `'error'` - emit errors
 
 **webpack.config.js**
 
@@ -720,6 +851,11 @@ Allows to override default minify function.
 By default plugin uses [imagemin](https://github.com/imagemin/imagemin) package.
 Useful for using and testing unpublished versions or forks.
 
+Аvailable minifiers:
+
+- ImageMinimizerPlugin.imageminMinify
+- ImageMinimizerPlugin.squooshMinify
+
 ##### `Function`
 
 **webpack.config.js**
@@ -742,12 +878,17 @@ module.exports = {
             options: {
               minify: async (data, minimizerOptions) => {
                 const [[, input]] = Object.entries(data);
-                // To do something
-                return {
-                  code: `<Buffer>`,
-                  warnings: [],
-                  errors: [],
-                };
+
+                let result;
+
+                try {
+                  result = await minifyAndReturnBuffer(input);
+                } catch (error) {
+                  // Return original input if there was an error
+                  return { data: input, errors: [error] };
+                }
+
+                return { data: result, warnings: [], errors: [] };
               },
               minimizerOptions: {},
             },
@@ -787,12 +928,17 @@ module.exports = {
                 ImageMinimizerPlugin.imageminMinify,
                 async (data, minimizerOptions) => {
                   const [[, input]] = Object.entries(data);
-                  // To do something
-                  return {
-                    code: `<Buffer>`,
-                    warnings: [],
-                    errors: [],
-                  };
+
+                  let result;
+
+                  try {
+                    result = await minifyAndReturnBuffer(input);
+                  } catch (error) {
+                    // Return original input if there was an error
+                    return { data: input, errors: [error] };
+                  }
+
+                  return { data: result, warnings: [], errors: [] };
                 },
               ],
               minimizerOptions: [
@@ -882,12 +1028,17 @@ module.exports = {
                 ImageMinimizerPlugin.imageminMinify,
                 async (data, minimizerOptions) => {
                   const [[, input]] = Object.entries(data);
-                  // To do something
-                  return {
-                    code: `<Buffer>`,
-                    warnings: [],
-                    errors: [],
-                  };
+
+                  let result;
+
+                  try {
+                    result = await minifyAndReturnBuffer(input);
+                  } catch (error) {
+                    // Return original input if there was an error
+                    return { data: input, errors: [error] };
+                  }
+
+                  return { data: result, warnings: [], errors: [] };
                 },
               ],
               minimizerOptions: [
@@ -915,6 +1066,7 @@ Type: `String`
 Default: `'[path][name][ext]'`
 
 Allows to set the filename for the generated asset. Useful for converting to a `webp`.
+Supported values see in [`webpack template strings`](/configuration/output/#template-strings), `File-level` section.
 
 **webpack.config.js**
 
