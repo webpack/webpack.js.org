@@ -17,7 +17,7 @@ Guides, documentation, and all things webpack.
 Now that we've covered much of the backlog of _missing documentation_, we are
 starting to heavily review each section of the site's content to sort and
 structure it appropriately. The following issues should provide a pretty good
-idea of where things are, and where they are going:
+the idea of where things are, and where they are going:
 
 - [Guides - Review and Simplify][guides-url]
 - [Concepts - Review and Organize][concepts-url]
@@ -32,10 +32,10 @@ To help translate this documentation please jump to the [translation branch][tra
 ## Versioning
 
 Since webpack 4 we have created a subdomain-based archive for older states of documentation
-matching older webpack version. webpack 4's documentation is available at
+matching older webpack versions. webpack 4's documentation is available at
 [https://v4.webpack.js.org/](https://v4.webpack.js.org/) and is deployed from [`gh-pages` branch of v4.webpack.js.org repository](https://github.com/webpack/v4.webpack.js.org/tree/gh-pages)
 
-There are various known issues that need fixing ([#3366](https://github.com/webpack/webpack.js.org/issues/3366)).
+Various known issues need fixing ([#3366](https://github.com/webpack/webpack.js.org/issues/3366)).
 
 ## Contributing
 
