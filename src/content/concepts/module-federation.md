@@ -7,6 +7,7 @@ contributors:
   - EugeneHlushko
   - jamesgeorge007
   - ScriptedAlchemy
+  - snitin315
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
@@ -39,25 +40,6 @@ Step 1 will be done during the chunk loading. Step 2 will be done during the mod
 
 It is possible to nest a container. Containers can use modules from other containers. Circular dependencies between containers are also possible.
 
-### Overriding
-
-A container is able to flag selected local modules as "overridable". A consumer of the container is able to provide "overrides", which are modules that replace one of the overridable modules of the container. All modules of the container will use the replacement module instead of the local module when the consumer provides one. When the consumer doesn't provide a replacement module, all modules of the container will use the local one.
-
-The container will manage overridable modules in a way that they do not need to be downloaded when they have been overridden by the consumer. This usually happens by placing them into separate chunks.
-
-On the other hand, the provider of the replacement modules will only provide asynchronous loading functions. It allows the container to load replacement modules only when they are needed. The provider will manage replacement modules in a way that they do not need to be downloaded at all when they are not requested by the container. This usually happens by placing them into separate chunks.
-
-A "name" is used to identify overridable modules from the container.
-
-Overrides are provided in a similar way as the container exposes modules, separated into two steps:
-
-1. Loading (asynchronous)
-2. evaluating (asynchronous)
-
-W> When nesting is used, providing overrides to one container will automatically override the modules with the same "name" in the nested container(s).
-
-Overrides must be provided before the modules of the container are loaded. Overridables that are used in the initial chunk, can only be overridden by a synchronous module override that doesn't use Promises. Once evaluated, overridables are no longer overridable.
-
 ## High-level concepts
 
 Each build acts as a container and also consumes other builds as containers. This way each build is able to access any other exposed module by loading it from its container.
@@ -67,35 +49,6 @@ Shared modules are modules that are both overridable and provided as overrides t
 The `packageName` option allows setting a package name to look for a `requiredVersion`. It is automatically inferred for the module requests by default, set `requiredVersion` to `false` when automatic infer should be disabled.
 
 ## Building blocks
-
-### `OverridablesPlugin` (low level)
-
-This plugin makes specific modules "overridable". A local API (`__webpack_override__`) allows to provide overrides.
-
-**webpack.config.js**
-
-```js
-const OverridablesPlugin = require('webpack/lib/container/OverridablesPlugin');
-module.exports = {
-  plugins: [
-    new OverridablesPlugin([
-      {
-        // we define an overridable module with OverridablesPlugin
-        test1: './src/test1.js',
-      },
-    ]),
-  ],
-};
-```
-
-**src/index.js**
-
-```js
-__webpack_override__({
-  // here we override test1 module
-  test1: () => 'I will override test1 module under src',
-});
-```
 
 ### `ContainerPlugin` (low level)
 
