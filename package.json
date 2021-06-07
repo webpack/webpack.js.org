@@ -114,7 +114,7 @@
     "npm-run-all": "^4.1.1",
     "postcss": "^8.3.0",
     "postcss-loader": "^5.3.0",
-    "prettier": "^2.3.0",
+    "prettier": "^2.3.1",
     "react-refresh": "^0.10.0",
     "redirect-webpack-plugin": "^1.0.0",
     "remark": "^13.0.0",
