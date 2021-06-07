@@ -52,4 +52,8 @@ import { Worker } from 'worker_threads';
 new Worker(new URL('./worker.js', import.meta.url));
 ```
 
+<<<<<<< HEAD
 请注意，这仅在 ESM 中可用。但不可用于 ComonnJS，无论 webpack 还是 Node.js 均是如此。
+=======
+Note that this is only available in ESM. `Worker` in CommonJS syntax is not supported by either webpack or Node.js.
+>>>>>>> 60d0565eb021625720de4919e5cce3468b9b247f

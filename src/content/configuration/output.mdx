@@ -1779,7 +1779,12 @@ T> 这些注释也会被添加至经过 tree shaking 后生成的 bundle 中。
 
 ## `output.publicPath` {#outputpublicpath}
 
-`string` `function`
+- Type:
+
+  - `function`
+  - `string`
+
+    `output.publicPath` defaults to `'auto'` with `web` and `web-worker` targets, see [this guide](/guides/public-path/#automatic-publicpath) for its use cases.
 
 对于按需加载(on-demand-load)或加载外部资源(external resources)（如图片、文件等）来说，output.publicPath 是很重要的选项。如果指定了一个错误的值，则在加载这些资源时会收到 404 错误。
 
@@ -1863,9 +1868,13 @@ __webpack_public_path__ = myRuntimePublicPath;
 
 有关 `__webpack_public_path__` 的更多信息，请查看[此讨论](https://github.com/webpack/webpack/issues/2776#issuecomment-233208623)。
 
+<<<<<<< HEAD
 T> `output.publicPath` defaults to `'auto'` with `web` and `web-worker` targets.
 
 ## output.scriptType {#outputscripttype}
+=======
+## output.scriptType
+>>>>>>> 60d0565eb021625720de4919e5cce3468b9b247f
 
 `string: 'module' | 'text/javascript'` `boolean = false`
 
