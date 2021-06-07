@@ -5,20 +5,14 @@ contributors:
   - rafaelrinaldi
   - chrisVillanueva
   - gonzoyumo
-<<<<<<< HEAD
+  - chenxsan
 translators:
   - QC-L
   - jacob-lcs
   - lcxfs1991
 ---
 
-`publicPath` 配置选项在各种场景中都非常有用。你可以通过它来指定应用程序中所有资源的基础路径。
-=======
-  - chenxsan
----
-
-The [`publicPath`](/configuration/output/#outputpublicpath) configuration option can be quite useful in a variety of scenarios. It allows you to specify the base path for all the assets within your application.
->>>>>>> 60d0565eb021625720de4919e5cce3468b9b247f
+[`publicPath`](/configuration/output/#outputpublicpath) 配置选项在各种场景中都非常有用。你可以通过它来指定应用程序中所有资源的基础路径。
 
 ## 示例 {#use-cases}
 
@@ -70,12 +64,9 @@ import './public-path';
 import './app';
 ```
 
-<<<<<<< HEAD
-T> 当使用 `web` 或者 `web-worker` 时，`publicPath` 默认为 `'auto'`，将会自动从 `import.meta.url`、`document.currentScript`、`<script />` 或者 `self.location` 中确定公共路径。
-=======
-### Automatic publicPath
+### Automatic publicPath {#automaticpublicPath}
 
-There are chances that you don't know what the publicPath will be in advance, and webpack can handle it automatically for you by determining the public path from variables like [`import.meta.url`](/api/module-variables/#importmetaurl), [`document.currentScript`](https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript), `script.src` or `self.location`. What you need is to set [`output.publicPath`](/configuration/output/#outputpublicpath) to `'auto'`:
+有可能你事先不知道 publicPath 是什么，webpack 会自动根据 [`import.meta.url`](/api/module-variables/#importmetaurl)、[`document.currentScript`](https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript)、`script.src` 或者 `self.location` 变量设置 publicPath。你需要做的是将 [`output.publicPath`](/configuration/output/#outputpublicpath) 设为 `'auto'`：
 
 **webpack.config.js**
 
@@ -87,5 +78,4 @@ module.exports = {
 };
 ```
 
-Note that in cases where `document.currentScript` is not supported, e.g., IE browser, you will have to include a polyfill like [`currentScript Polyfill`](https://github.com/amiller-gh/currentScript-polyfill).
->>>>>>> 60d0565eb021625720de4919e5cce3468b9b247f
+请注意在某些情况下不支持 `document.currentScript`，例如：IE 浏览器，你不得不引入一个 polyfill，例如 [`currentScript Polyfill`](https://github.com/amiller-gh/currentScript-polyfill)。
