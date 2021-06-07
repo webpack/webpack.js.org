@@ -1784,7 +1784,7 @@ T> 这些注释也会被添加至经过 tree shaking 后生成的 bundle 中。
   - `function`
   - `string`
 
-    `output.publicPath` defaults to `'auto'` with `web` and `web-worker` targets, see [this guide](/guides/public-path/#automatic-publicpath) for its use cases.
+    targets 设置为 `web` 与 `web-worker` 时 `output.publicPath` 默认为 `'auto'`，查看[该指南](/guides/public-path/#automatic-publicpath)获取其用例
 
 对于按需加载(on-demand-load)或加载外部资源(external resources)（如图片、文件等）来说，output.publicPath 是很重要的选项。如果指定了一个错误的值，则在加载这些资源时会收到 404 错误。
 
