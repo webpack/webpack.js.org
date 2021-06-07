@@ -117,7 +117,7 @@ This plugin combines `ContainerPlugin` and `ContainerReferencePlugin`. Overrides
 
 There are three ways to specify the versions of shared libraries.
 
-**Array syntax**
+#### Array syntax
 
 This syntax allows you to easily share libraries with package name only. This approach is good for prototyping, but it will not allow you to scale to large production environment given libraries like `react` and `react-dom` will require additional requirements.
 
