@@ -52,7 +52,7 @@ The `packageName` option allows setting a package name to look for a `requiredVe
 
 ### `ContainerPlugin` (low level)
 
-This plugin creates an additional container entry with the specified exposed modules. It also uses the `OverridablesPlugin` internally and exposes the `override` API to consumer of the container.
+This plugin creates an additional container entry with the specified exposed modules.
 
 ### `ContainerReferencePlugin` (low level)
 
