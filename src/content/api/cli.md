@@ -98,7 +98,7 @@ npx webpack info --output=json
 
 #### Options for info
 
-**`-o, --output`**
+**`-o`, `--output`**
 
 `string : 'json' | 'markdown'`
 
