@@ -3,11 +3,12 @@ title: Module Federation Plugin
 contributors:
   - XiaofengXie16
 
-- title: Module Federation
-  url: https://webpack.js.org/concepts/module-federation/
+related:
+  - title: Module Federation
+    url: https://webpack.js.org/concepts/module-federation/
 ---
 
-The ModuleFederationPlugin allows a build to provide or consume modules with other independent build at runtime.
+The ModuleFederationPlugin allows a build to provide or consume modules with other independent builds at runtime.
 
 ### Specify package versions
 

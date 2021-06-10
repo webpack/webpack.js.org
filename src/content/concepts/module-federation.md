@@ -111,7 +111,7 @@ This plugin adds specific references to containers as externals and allows to im
 
 This plugin combines `ContainerPlugin` and `ContainerReferencePlugin`. Overrides and overridables are combined into a single list of specified shared modules.
 
-T>[Learn more](plugins/module-federation-plugin)
+T> Learn more about how to configure ModuleFederationPlugin from [here](/plugins/module-federation-plugin)
 
 ## Concept goals
 
