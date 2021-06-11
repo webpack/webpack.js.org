@@ -42,9 +42,9 @@ module.exports = {
         test: /\.less$/i,
         loader: [
           // compiles Less to CSS
-          "style-loader",
-          "css-loader",
-          "less-loader",
+          'style-loader',
+          'css-loader',
+          'less-loader',
         ],
       },
     ],
@@ -62,7 +62,7 @@ module.exports = {
 |     **[`additionalData`](#additionaldata)**     | `{String\|Function}` |       `undefined`        | 在入口文件起始或末尾添加 Less 代码。  |
 |      **[`sourceMap`](#sourcemap)**      |     `{Boolean}`      |    `compiler.devtool`    | 是否生成 source map。       |
 | **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |          `true`          | 是否启用默认的 webpack importer。         |
-| **[`implementation`](#implementation)** |      `{Object}`      |          `less`          | 配置 Less 使用的实现库                |
+| **[`implementation`](#implementation)** |      `{Object\|String}`      |          `less`          | 配置 Less 使用的实现库                |
 
 ### `lessOptions` {#lessoptions}
 
@@ -85,13 +85,13 @@ module.exports = {
         test: /\.less$/i,
         use: [
           {
-            loader: "style-loader",
+            loader: 'style-loader',
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
           },
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               lessOptions: {
                 strictMath: true,
@@ -116,24 +116,24 @@ module.exports = {
       {
         test: /\.less$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               lessOptions: (loaderContext) => {
                 // 更多可用的属性见 https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
-                if (relativePath === "styles/foo.less") {
+                if (relativePath === 'styles/foo.less') {
                   return {
-                    paths: ["absolute/path/c", "absolute/path/d"],
+                    paths: ['absolute/path/c', 'absolute/path/d'],
                   };
                 }
 
                 return {
-                  paths: ["absolute/path/a", "absolute/path/b"],
+                  paths: ['absolute/path/a', 'absolute/path/b'],
                 };
               },
             },
@@ -166,10 +166,10 @@ module.exports = {
       {
         test: /\.less$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               additionalData: `@env: ${process.env.NODE_ENV};`,
             },
@@ -192,21 +192,21 @@ module.exports = {
       {
         test: /\.less$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               additionalData: (content, loaderContext) => {
                 // 更多可用的属性见 https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
-                if (relativePath === "styles/foo.less") {
-                  return "@value: 100px;" + content;
+                if (relativePath === 'styles/foo.less') {
+                  return '@value: 100px;' + content;
                 }
 
-                return "@value: 200px;" + content;
+                return '@value: 200px;' + content;
               },
             },
           },
@@ -226,21 +226,21 @@ module.exports = {
       {
         test: /\.less$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               additionalData: async (content, loaderContext) => {
                 // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
-                if (relativePath === "styles/foo.less") {
-                  return "@value: 100px;" + content;
+                if (relativePath === 'styles/foo.less') {
+                  return '@value: 100px;' + content;
                 }
 
-                return "@value: 200px;" + content;
+                return '@value: 200px;' + content;
               },
             },
           },
@@ -267,15 +267,15 @@ module.exports = {
       {
         test: /\.less$/i,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               sourceMap: true,
             },
@@ -305,10 +305,10 @@ module.exports = {
       {
         test: /\.less$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               webpackImporter: false,
             },
@@ -322,13 +322,15 @@ module.exports = {
 
 ### `implementation` {#implementation}
 
-类型：`Object`
+类型：`Object | String`
 
 > ⚠ less-loader 已兼容 Less 3 和 Less 4。
 
 特殊的 `implementation` 选项决定使用 Less 的哪个实现。重载本地安装的 `less` 的 `peerDependency` 版本。
 
 **此选项只对下游的工具作者有效，以便于 Less 3 到 Less 4 的过渡。**
+
+#### Object
 
 **webpack.config.js**
 
@@ -339,12 +341,38 @@ module.exports = {
       {
         test: /\.less$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
-              implementation: require("less"),
+              implementation: require('less'),
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+#### String {#string}
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.less$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'less-loader',
+            options: {
+              implementation: require.resolve('less'),
             },
           },
         ],
@@ -370,13 +398,13 @@ module.exports = {
         test: /\.less$/i,
         use: [
           {
-            loader: "style-loader", // 从 JS 中创建样式节点
+            loader: 'style-loader', // 从 JS 中创建样式节点
           },
           {
-            loader: "css-loader", // 转化 CSS 为 CommonJS
+            loader: 'css-loader', // 转化 CSS 为 CommonJS
           },
           {
-            loader: "less-loader", // 编译 Less 为 CSS
+            loader: 'less-loader', // 编译 Less 为 CSS
           },
         ],
       },
@@ -395,21 +423,21 @@ module.exports = {
 
 ```js
 module.exports = {
-  devtool: "source-map", // 任何类似于 "source-map" 的  devtool 值都可以
+  devtool: 'source-map', // 任何类似于 "source-map" 的  devtool 值都可以
   module: {
     rules: [
       {
         test: /\.less$/i,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               sourceMap: true,
             },
@@ -453,12 +481,12 @@ module.exports = {
 
 ```js
 module.exports = {
-  devtool: "source-map", // "source-map" 类的 devtool 都是可以的
+  devtool: 'source-map', // "source-map" 类的 devtool 都是可以的
   module: {
     rules: [
       {
         test: /\.less$/i,
-        use: ["style-loader", "css-loader", "less-loader"],
+        use: ['style-loader', 'css-loader', 'less-loader'],
       },
     ],
   },
@@ -466,7 +494,7 @@ module.exports = {
     byDependency: {
       // 更多的配置项可以在这里找到 https://webpack.js.org/configuration/resolve/
       less: {
-        mainFiles: ["custom"],
+        mainFiles: ['custom'],
       },
     },
   },
@@ -489,16 +517,16 @@ module.exports = {
         test: /\.less$/i,
         use: [
           {
-            loader: "style-loader",
+            loader: 'style-loader',
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
           },
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
               lessOptions: {
-                paths: [path.resolve(__dirname, "node_modules")],
+                paths: [path.resolve(__dirname, 'node_modules')],
               },
             },
           },
@@ -540,7 +568,7 @@ module.exports = {
 ```js
 module.exports = {
   install: function (less, pluginManager, functions) {
-    functions.add("pi", function () {
+    functions.add('pi', function () {
       // Loader context is available in `pluginManager.webpackLoaderContext`
 
       return Math.PI;

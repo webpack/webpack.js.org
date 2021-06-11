@@ -28,6 +28,8 @@ PostCSS chat: [![chat-postcss][chat-postcss]][chat-postcss-url]
 
 ## 快速开始 {#getting-started}
 
+如果要使用最新版本的话，你需要使用 webpack v5。如果使用 webpack v4 的话，你需要安装 postcss-loader v4。
+
 为了使用本 loader，你需要安装 `postcss-loader` 和 `postcss`：
 
 ```console
@@ -39,7 +41,7 @@ npm install --save-dev postcss-loader postcss
 **file.js**
 
 ```js
-import css from "file.css";
+import css from 'file.css';
 ```
 
 **webpack.config.js**
@@ -51,15 +53,15 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
                 plugins: [
                   [
-                    "postcss-preset-env",
+                    'postcss-preset-env',
                     {
                       // 其他选项
                     },
@@ -83,7 +85,7 @@ module.exports = {
 module.exports = {
   plugins: [
     [
-      "postcss-preset-env",
+      'postcss-preset-env',
       {
         // 其他选项
       },
@@ -102,7 +104,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
     ],
   },
@@ -135,15 +137,15 @@ module.exports = {
       {
         test: /\.style.js$/,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
           },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                parser: "postcss-js",
+                parser: 'postcss-js',
               },
               execute: true,
             },
@@ -175,23 +177,23 @@ module.exports = {
 **webpack.config.js** (**recommended**)
 
 ```js
-const myOtherPostcssPlugin = require("postcss-my-plugin");
+const myOtherPostcssPlugin = require('postcss-my-plugin');
 
 module.exports = {
   module: {
     rules: [
       {
         test: /\.sss$/i,
-        loader: "postcss-loader",
+        loader: 'postcss-loader',
         options: {
           postcssOptions: {
             plugins: [
-              "postcss-import",
-              ["postcss-short", { prefix: "x" }],
-              require.resolve("my-postcss-plugin"),
+              'postcss-import',
+              ['postcss-short', { prefix: 'x' }],
+              require.resolve('my-postcss-plugin'),
               myOtherPostcssPlugin({ myOption: true }),
               // 废弃的，将会在下一个主要版本中移除
-              { "postcss-nested": { preserveEmpty: true } },
+              { 'postcss-nested': { preserveEmpty: true } },
             ],
           },
         },
@@ -209,12 +211,12 @@ module.exports = {
     rules: [
       {
         test: /\.sss$/i,
-        loader: "postcss-loader",
+        loader: 'postcss-loader',
         options: {
           postcssOptions: {
             plugins: {
-              "postcss-import": {},
-              "postcss-short": { prefix: "x" },
+              'postcss-import': {},
+              'postcss-short': { prefix: 'x' },
             },
           },
         },
@@ -234,13 +236,13 @@ module.exports = {
     rules: [
       {
         test: /\.sss$/i,
-        loader: "postcss-loader",
+        loader: 'postcss-loader',
         options: {
           postcssOptions: {
             // 可以是 `String`
-            syntax: "sugarss",
+            syntax: 'sugarss',
             // 可以是 `Object`
-            syntax: require("sugarss"),
+            syntax: require('sugarss'),
           },
         },
       },
@@ -259,15 +261,15 @@ module.exports = {
     rules: [
       {
         test: /\.sss$/i,
-        loader: "postcss-loader",
+        loader: 'postcss-loader',
         options: {
           postcssOptions: {
             // 可以是 `String`
-            parser: "sugarss",
+            parser: 'sugarss',
             // 可以是 `Object`
-            parser: require("sugarss"),
+            parser: require('sugarss'),
             // 可以是 `Function`
-            parser: require("sugarss").parse,
+            parser: require('sugarss').parse,
           },
         },
       },
@@ -281,7 +283,7 @@ module.exports = {
 **webpack.config.js**
 
 ```js
-const Midas = require("midas");
+const Midas = require('midas');
 const midas = new Midas();
 
 module.exports = {
@@ -289,13 +291,13 @@ module.exports = {
     rules: [
       {
         test: /\.sss$/i,
-        loader: "postcss-loader",
+        loader: 'postcss-loader',
         options: {
           postcssOptions: {
             // 可以是 `String`
-            stringifier: "sugarss",
+            stringifier: 'sugarss',
             // 可以是 `Object`
-            stringifier: require("sugarss"),
+            stringifier: require('sugarss'),
             // 可以是 `Function`
             stringifier: midas.stringifier,
           },
@@ -316,23 +318,23 @@ module.exports = {
     rules: [
       {
         test: /\.(css|sss)$/i,
-        loader: "postcss-loader",
+        loader: 'postcss-loader',
         options: {
           postcssOptions: (loaderContext) => {
             if (/\.sss$/.test(loaderContext.resourcePath)) {
               return {
-                parser: "sugarss",
+                parser: 'sugarss',
                 plugins: [
-                  ["postcss-short", { prefix: "x" }],
-                  "postcss-preset-env",
+                  ['postcss-short', { prefix: 'x' }],
+                  'postcss-preset-env',
                 ],
               };
             }
 
             return {
               plugins: [
-                ["postcss-short", { prefix: "x" }],
-                "postcss-preset-env",
+                ['postcss-short', { prefix: 'x' }],
+                'postcss-preset-env',
               ],
             };
           },
@@ -372,8 +374,8 @@ module.exports = {
   // parser: 'sugarss',
   plugins: [
     // PostCSS 插件
-    ["postcss-short", { prefix: "x" }],
-    "postcss-preset-env",
+    ['postcss-short', { prefix: 'x' }],
+    'postcss-preset-env',
   ],
 };
 ```
@@ -393,11 +395,11 @@ module.exports = (api) => {
   if (/\.sss$/.test(api.file)) {
     return {
       //你可以指定下面提到的所有选项 https://postcss.org/api/#processoptions here
-      parser: "sugarss",
+      parser: 'sugarss',
       plugins: [
         // PostCSS 插件
-        ["postcss-short", { prefix: "x" }],
-        "postcss-preset-env",
+        ['postcss-short', { prefix: 'x' }],
+        'postcss-preset-env',
       ],
     };
   }
@@ -406,8 +408,8 @@ module.exports = (api) => {
     // 你可以指定下面提到的所有选项 https://postcss.org/api/#processoptions
     plugins: [
       // PostCSS 插件
-      ["postcss-short", { prefix: "x" }],
-      "postcss-preset-env",
+      ['postcss-short', { prefix: 'x' }],
+      'postcss-preset-env',
     ],
   };
 };
@@ -421,8 +423,8 @@ module.exports = {
   // parser: 'sugarss',
   plugins: {
     // PostCSS 插件
-    "postcss-short": { prefix: "x" },
-    "postcss-preset-env": {},
+    'postcss-short': { prefix: 'x' },
+    'postcss-preset-env': {},
   },
 };
 ```
@@ -464,14 +466,14 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               importLoaders: 1,
             },
           },
-          "postcss-loader",
+          'postcss-loader',
         ],
       },
     ],
@@ -491,7 +493,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: "postcss-loader",
+        loader: 'postcss-loader',
         options: {
           postcssOptions: {
             config: false,
@@ -510,17 +512,17 @@ module.exports = {
 **webpack.config.js**
 
 ```js
-const path = require("path");
+const path = require('path');
 
 module.exports = {
   module: {
     rules: [
       {
         test: /\.css$/i,
-        loader: "postcss-loader",
+        loader: 'postcss-loader',
         options: {
           postcssOptions: {
-            config: path.resolve(__dirname, "custom.config.js"),
+            config: path.resolve(__dirname, 'custom.config.js'),
           },
         },
       },
@@ -546,10 +548,10 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          { loader: "style-loader" },
-          { loader: "css-loader", options: { sourceMap: true } },
-          { loader: "postcss-loader", options: { sourceMap: true } },
-          { loader: "sass-loader", options: { sourceMap: true } },
+          { loader: 'style-loader' },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } },
         ],
       },
     ],
@@ -563,16 +565,16 @@ module.exports = {
 
 ```js
 module.exports = {
-  devtool: "source-map",
+  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.css$/i,
         use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" },
-          { loader: "postcss-loader" },
-          { loader: "sass-loader" },
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'postcss-loader' },
+          { loader: 'sass-loader' },
         ],
       },
     ],
@@ -582,11 +584,13 @@ module.exports = {
 
 ### `implementation` {#implementation}
 
-类型：`Function`
+类型：`Function | String`
 
 特殊的 `implementation` 选项决定使用 PostCSS 哪个实现。重载本地安装的 `postcss` 的 `peerDependency` 版本。
 
 **此选项只对下游的工具作者有效，以便于 PostCSS 7 到 PostCSS 8 的过渡。**
+
+#### Function
 
 **webpack.config.js**
 
@@ -597,13 +601,38 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" },
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
           {
-            loader: "postcss-loader",
-            options: { implementation: require("postcss") },
+            loader: 'postcss-loader',
+            options: { implementation: require('postcss') },
           },
-          { loader: "sass-loader" },
+          { loader: 'sass-loader' },
+        ],
+      },
+    ],
+  },
+};
+```
+
+#### String {#string}
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          {
+            loader: 'postcss-loader',
+            options: { implementation: require.resolve('postcss') },
+          },
+          { loader: 'sass-loader' },
         ],
       },
     ],
@@ -632,16 +661,16 @@ module.exports = {
       {
         test: /\.sss$/i,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: { importLoaders: 1 },
           },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                parser: "sugarss",
+                parser: 'sugarss',
               },
             },
           },
@@ -671,18 +700,18 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: { importLoaders: 1 },
           },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
                 plugins: [
                   [
-                    "autoprefixer",
+                    'autoprefixer',
                     {
                       // 选项
                     },
@@ -717,18 +746,18 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: { importLoaders: 1 },
           },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
                 plugins: [
                   [
-                    "postcss-preset-env",
+                    'postcss-preset-env',
                     {
                       // 选项
                     },
@@ -760,15 +789,15 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               modules: true,
               importLoaders: 1,
             },
           },
-          "postcss-loader",
+          'postcss-loader',
         ],
       },
     ],
@@ -795,23 +824,23 @@ module.exports = {
       {
         test: /\.style.js$/,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               importLoaders: 2,
             },
           },
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                parser: "postcss-js",
+                parser: 'postcss-js',
               },
               execute: true,
             },
           },
-          "babel-loader",
+          'babel-loader',
         ],
       },
     ],
@@ -822,14 +851,14 @@ module.exports = {
 接下来你就可以像下面这样书写样式了
 
 ```js
-import colors from "./styles/colors";
+import colors from './styles/colors';
 
 export default {
-  ".menu": {
+  '.menu': {
     color: colors.main,
     height: 25,
-    "&_link": {
-      color: "white",
+    '&_link': {
+      color: 'white',
     },
   },
 };
@@ -847,27 +876,27 @@ export default {
 **webpack.config.js**
 
 ```js
-const isProductionMode = process.env.NODE_ENV === "production";
+const isProductionMode = process.env.NODE_ENV === 'production';
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: isProductionMode ? "production" : "development",
+  mode: isProductionMode ? 'production' : 'development',
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          isProductionMode ? MiniCssExtractPlugin.loader : "style-loader",
-          "css-loader",
-          "postcss-loader",
+          isProductionMode ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          'postcss-loader',
         ],
       },
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: isProductionMode ? "[name].[contenthash].css" : "[name].css",
+      filename: isProductionMode ? '[name].[contenthash].css' : '[name].css',
     }),
   ],
 };
@@ -890,13 +919,13 @@ module.exports = {
 ```js
 const customPlugin = () => (css, result) => {
   result.messages.push({
-    type: "asset",
-    file: "sprite.svg",
-    content: "<svg>...</svg>",
+    type: 'asset',
+    file: 'sprite.svg',
+    content: '<svg>...</svg>',
   });
 };
 
-const postcssPlugin = postcss.plugin("postcss-assets", customPlugin);
+const postcssPlugin = postcss.plugin('postcss-assets', customPlugin);
 
 module.exports = {
   module: {
@@ -904,10 +933,10 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
                 plugins: [postcssPlugin()],
@@ -937,16 +966,16 @@ module.exports = {
 **webpack.config.js**
 
 ```js
-const path = require("path");
+const path = require('path');
 
 const customPlugin = () => (css, result) => {
   result.messages.push({
-    type: "dependency",
-    file: path.resolve(__dirname, "path", "to", "file"),
+    type: 'dependency',
+    file: path.resolve(__dirname, 'path', 'to', 'file'),
   });
 };
 
-const postcssPlugin = postcss.plugin("postcss-assets", customPlugin);
+const postcssPlugin = postcss.plugin('postcss-assets', customPlugin);
 
 module.exports = {
   module: {
@@ -954,10 +983,10 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
                 plugins: [postcssPlugin()],
@@ -976,7 +1005,7 @@ module.exports = {
 **webpack.config.js**
 
 ```js
-const path = require("path");
+const path = require('path');
 
 module.exports = {
   module: {
@@ -984,13 +1013,13 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "postcss-loader",
+            loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                config: path.resolve(__dirname, "path/to/postcss.config.js"),
+                config: path.resolve(__dirname, 'path/to/postcss.config.js'),
               },
             },
           },
@@ -1006,7 +1035,7 @@ module.exports = {
 ```js
 module.exports = (api) => ({
   plugins: [
-    require("path/to/customPlugin")({
+    require('path/to/customPlugin')({
       loaderContext: api.webpackLoaderContext,
     }),
   ],
@@ -1016,15 +1045,15 @@ module.exports = (api) => ({
 **customPlugin.js**
 
 ```js
-const path = require("path");
+const path = require('path');
 
 const customPlugin = (loaderContext) => (css, result) => {
   loaderContext.webpack.addDependency(
-    path.resolve(__dirname, "path", "to", "file")
+    path.resolve(__dirname, 'path', 'to', 'file')
   );
 };
 
-module.exports = postcss.plugin("postcss-assets", customPlugin);
+module.exports = postcss.plugin('postcss-assets', customPlugin);
 ```
 
 ## 贡献 {#contributing}

@@ -274,7 +274,7 @@ module.exports = {
 |   **`minimizerOptions`**   |         `{Object\|Array<Object>}`         |                      `{ plugins: [] }`                      | Options for `imagemin`                                                                            |
 |        **`loader`**        |                `{Boolean}`                |                           `true`                            | Automatically adding `imagemin-loader`                                                            |
 |    **`maxConcurrency`**    |                `{Number}`                 |             `Math.max(1, os.cpus().length - 1)`             | Maximum number of concurrency optimization processes in one time                                  |
-|       **`filename`**       |                `{string}`                 |                    `'[path][name][ext]'`                    | Allows to set the filename for the generated asset. Useful for converting to a `webp`             |
+|       **`filename`**       |           `{string\|Function}`            |                    `'[path][name][ext]'`                    | Allows to set the filename for the generated asset. Useful for converting to a `webp`             |
 | **`deleteOriginalAssets`** |                `{Boolean}`                |                           `false`                           | Allows to delete the original asset. Useful for converting to a `webp` and remove original assets |
 
 
@@ -623,11 +623,13 @@ module.exports = {
 
 #### `filename`
 
-Type: `String`
+Type: `String|Function`
 Default: `'[path][name][ext]'`
 
 Allows to set the filename for the generated asset. Useful for converting to a `webp`.
 Supported values see in [`webpack template strings`](/configuration/output/#template-strings), `File-level` section.
+
+##### `String`
 
 **webpack.config.js**
 
@@ -640,6 +642,33 @@ module.exports = {
     new ImageMinimizerPlugin({
       test: /\.(png)$/i,
       filename: "[path][name].webp",
+      minimizerOptions: {
+        plugins: ["imagemin-webp"],
+      },
+    }),
+  ],
+};
+```
+
+##### `Function`
+
+**webpack.config.js**
+
+```js
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+
+module.exports = {
+  plugins: [
+    // Images are converted to `webp` and the original assets have been kept
+    new ImageMinimizerPlugin({
+      test: /\.(png)$/i,
+      filename: (pathData, assetInfo) => {
+        if (/imageLg/i.test(pathData.filename)) {
+          return "./bigImages/[path][name].webp";
+        }
+
+        return "[path][name].webp";
+      },
       minimizerOptions: {
         plugins: ["imagemin-webp"],
       },
@@ -746,7 +775,7 @@ module.exports = {
 |    **`severityError`**     |           `{String}`            |               `'error'`               | Allows to choose how errors are displayed                                                         |
 |        **`minify`**        | `{Function \| Array<Function>}` | `ImageMinimizerPlugin.imageminMinify` | Allows to override default minify function                                                        |
 |   **`minimizerOptions`**   |    `{Object\|Array<Object>}`    |           `{ plugins: [] }`           | Options for `imagemin`                                                                            |
-|       **`filename`**       |           `{string}`            |         `'[path][name][ext]'`         | Allows to set the filename for the generated asset. Useful for converting to a `webp`             |
+|       **`filename`**       |      `{string\|Function}`       |         `'[path][name][ext]'`         | Allows to set the filename for the generated asset. Useful for converting to a `webp`             |
 | **`deleteOriginalAssets`** |           `{Boolean}`           |                `false`                | Allows to delete the original asset. Useful for converting to a `webp` and remove original assets |
 
 #### `filter`
@@ -1062,11 +1091,13 @@ module.exports = {
 
 #### `filename`
 
-Type: `String`
+Type: `String|Function`
 Default: `'[path][name][ext]'`
 
 Allows to set the filename for the generated asset. Useful for converting to a `webp`.
 Supported values see in [`webpack template strings`](/configuration/output/#template-strings), `File-level` section.
+
+##### `String`
 
 **webpack.config.js**
 
@@ -1087,6 +1118,45 @@ module.exports = {
             loader: ImageMinimizerPlugin.loader,
             options: {
               filename: "[path][name].webp",
+              minimizerOptions: {
+                plugins: ["imagemin-webp"],
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+##### `Function`
+
+**webpack.config.js**
+
+```js
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        use: [
+          {
+            test: /\.(jpe?g|png|gif|svg)$/i,
+            type: "asset",
+          },
+          {
+            loader: ImageMinimizerPlugin.loader,
+            options: {
+              filename: (pathData, assetInfo) => {
+                if (/imageLg/i.test(pathData.filename)) {
+                  return "./bigImages/[path][name].webp";
+                }
+
+                return "[path][name].webp";
+              },
               minimizerOptions: {
                 plugins: ["imagemin-webp"],
               },

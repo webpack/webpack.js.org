@@ -45,7 +45,7 @@ npm install sass-loader sass webpack --save-dev
 **app.js**
 
 ```js
-import "./style.scss";
+import './style.scss';
 ```
 
 **style.scss**
@@ -68,11 +68,11 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           // 将 JS 字符串生成为 style 节点
-          "style-loader",
+          'style-loader',
           // 将 CSS 转化成 CommonJS 模块
-          "css-loader",
+          'css-loader',
           // 将 Sass 编译成 CSS
-          "sass-loader",
+          'sass-loader',
         ],
       },
     ],
@@ -124,7 +124,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 
 |                   名称                    |         类型         |       默认值       | Description                                    |
 | :---------------------------------------: | :------------------: | :----------------: | :--------------------------------------------- |
-|  **[`implementation`](#implementation)**  |      `{Object}`      |       `sass`       | 设置使用的 Sass 的实现。                       |
+|  **[`implementation`](#implementation)**  |      `{Object\|String}`      |       `sass`       | 设置使用的 Sass 的实现。                       |
 |     **[`sassOptions`](#sassoptions)**     | `{Object\|Function}` | Sass 实现的默认值  | Sass 自身选项。                                |
 |       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      | `compiler.devtool` | 启用 / 禁用 source maps 的生成。               |
 |  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |    `undefined`     | 在实际的输入文件之前添加 `Sass` /`SCSS` 代码。 |
@@ -132,7 +132,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 
 ### `implementation` {#implementation}
 
-类型： `Object`
+类型： `Object | String`
 默认值： `sass`
 
 特殊的 `implementation` 选项确定要使用的 Sass 实现。
@@ -171,6 +171,8 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 
 `implementation` 选项可以以模块的形式接受 `sass`（`Dart Sass`）或 `node-sass`。
 
+#### Object {#object}
+
 例如，为了使用 Dart Sass，你应该传递：
 
 ```js
@@ -180,13 +182,40 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               // `dart-sass` 是首选
-              implementation: require("sass"),
+              implementation: require('sass'),
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+#### String {#string}
+
+例如，为了使用 Dart Sass，你应该传递：
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              // Prefer `dart-sass`
+              implementation: require.resolve('sass'),
             },
           },
         ],
@@ -226,12 +255,12 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
-              implementation: require("sass"),
+              implementation: require('sass'),
               sassOptions: {
                 fiber: false,
               },
@@ -255,14 +284,14 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
-              implementation: require("sass"),
+              implementation: require('sass'),
               sassOptions: {
-                fiber: require("fibers"),
+                fiber: require('fibers'),
               },
             },
           },
@@ -308,14 +337,14 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sassOptions: {
                 indentWidth: 4,
-                includePaths: ["absolute/path/a", "absolute/path/b"],
+                includePaths: ['absolute/path/a', 'absolute/path/b'],
               },
             },
           },
@@ -337,24 +366,24 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sassOptions: (loaderContext) => {
                 // 有关可用属性的更多信息 https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
-                if (relativePath === "styles/foo.scss") {
+                if (relativePath === 'styles/foo.scss') {
                   return {
-                    includePaths: ["absolute/path/c", "absolute/path/d"],
+                    includePaths: ['absolute/path/c', 'absolute/path/d'],
                   };
                 }
 
                 return {
-                  includePaths: ["absolute/path/a", "absolute/path/b"],
+                  includePaths: ['absolute/path/a', 'absolute/path/b'],
                 };
               },
             },
@@ -387,15 +416,15 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sourceMap: true,
             },
@@ -420,14 +449,14 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sourceMap: true,
               sassOptions: {
-                outputStyle: "compressed",
+                outputStyle: 'compressed',
               },
             },
           },
@@ -457,12 +486,12 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
-              additionalData: "$env: " + process.env.NODE_ENV + ";",
+              additionalData: '$env: ' + process.env.NODE_ENV + ';',
             },
           },
         ],
@@ -483,21 +512,21 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               additionalData: (content, loaderContext) => {
                 // 有关可用属性的更多信息 https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
-                if (relativePath === "styles/foo.scss") {
-                  return "$value: 100px;" + content;
+                if (relativePath === 'styles/foo.scss') {
+                  return '$value: 100px;' + content;
                 }
 
-                return "$value: 200px;" + content;
+                return '$value: 200px;' + content;
               },
             },
           },
@@ -517,21 +546,21 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               additionalData: async (content, loaderContext) => {
                 // More information about available properties https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
-                if (relativePath === "styles/foo.scss") {
-                  return "$value: 100px;" + content;
+                if (relativePath === 'styles/foo.scss') {
+                  return '$value: 100px;' + content;
                 }
 
-                return "$value: 200px;" + content;
+                return '$value: 200px;' + content;
               },
             },
           },
@@ -561,10 +590,10 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          'style-loader',
+          'css-loader',
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               webpackImporter: false,
             },
@@ -590,7 +619,7 @@ module.exports = {
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   module: {
@@ -599,11 +628,11 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           // 在开发过程中回退到 style-loader
-          process.env.NODE_ENV !== "production"
-            ? "style-loader"
+          process.env.NODE_ENV !== 'production'
+            ? 'style-loader'
             : MiniCssExtractPlugin.loader,
-          "css-loader",
-          "sass-loader",
+          'css-loader',
+          'sass-loader',
         ],
       },
     ],
@@ -612,8 +641,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       // 与 webpackOptions.output 中的选项相似
       // 所有的选项都是可选的
-      filename: "[name].css",
-      chunkFilename: "[id].css",
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
   ],
 };
