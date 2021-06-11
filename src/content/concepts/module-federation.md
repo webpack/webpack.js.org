@@ -64,8 +64,6 @@ This plugin adds specific references to containers as externals and allows to im
 
 [`ModuleFederationPlugin`](/plugins/module-federation-plugin) combines `ContainerPlugin` and `ContainerReferencePlugin`.
 
-T> Learn more about how to configure ModuleFederationPlugin from [here](/plugins/module-federation-plugin)
-
 ## Concept goals
 
 - It should be possible to expose and use any module type that webpack supports.
