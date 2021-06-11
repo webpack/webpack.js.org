@@ -120,7 +120,7 @@ Thankfully there are a two solutions to this problem:
 
 |                   Name                    |         Type         |                 Default                 | Description                                                       |
 | :---------------------------------------: | :------------------: | :-------------------------------------: | :---------------------------------------------------------------- |
-|  **[`implementation`](#implementation)**  |      `{Object}`      |                 `sass`                  | Setup Sass implementation to use.                                 |
+|  **[`implementation`](#implementation)**  |  `{Object\|String}`  |                 `sass`                  | Setup Sass implementation to use.                                 |
 |     **[`sassOptions`](#sassoptions)**     | `{Object\|Function}` | defaults values for Sass implementation | Options for Sass.                                                 |
 |       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.                       |
 |  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |               `undefined`               | Prepends/Appends `Sass`/`SCSS` code before the actual entry file. |
@@ -128,7 +128,7 @@ Thankfully there are a two solutions to this problem:
 
 ### `implementation`
 
-Type: `Object`
+Type: `Object | String`
 Default: `sass`
 
 The special `implementation` option determines which implementation of Sass to use.
@@ -167,6 +167,8 @@ In order to avoid this situation you can use the `implementation` option.
 
 The `implementation` options either accepts `sass` (`Dart Sass`) or `node-sass` as a module.
 
+#### Object
+
 For example, to use Dart Sass, you'd pass:
 
 ```js
@@ -183,6 +185,33 @@ module.exports = {
             options: {
               // Prefer `dart-sass`
               implementation: require("sass"),
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+#### String
+
+For example, to use Dart Sass, you'd pass:
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              // Prefer `dart-sass`
+              implementation: require.resolve("sass"),
             },
           },
         ],

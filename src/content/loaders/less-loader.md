@@ -58,7 +58,7 @@ And run `webpack` via your preferred method.
 |  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |       `undefined`        | Prepends/Appends `Less` code to the actual entry file. |
 |       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |    `compiler.devtool`    | Enables/Disables generation of source maps.            |
 | **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |          `true`          | Enables/Disables the default Webpack importer.         |
-|  **[`implementation`](#implementation)**  |      `{Object}`      |          `less`          | Setup Less implementation to use.                      |
+|  **[`implementation`](#implementation)**  |  `{Object\|String}`  |          `less`          | Setup Less implementation to use.                      |
 
 ### `lessOptions`
 
@@ -318,13 +318,15 @@ module.exports = {
 
 ### `implementation`
 
-Type: `Object`
+Type: `Object | String`
 
 > ⚠ less-loader compatible with Less 3 and 4 versions
 
 The special `implementation` option determines which implementation of Less to use. Overrides the locally installed `peerDependency` version of `less`.
 
 **This option is only really useful for downstream tooling authors to ease the Less 3-to-4 transition.**
+
+#### Object
 
 **webpack.config.js**
 
@@ -341,6 +343,32 @@ module.exports = {
             loader: "less-loader",
             options: {
               implementation: require("less"),
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+#### String
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.less$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              implementation: require.resolve("less"),
             },
           },
         ],

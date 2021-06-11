@@ -24,6 +24,8 @@ Loader to process CSS with [`PostCSS`](https://github.com/postcss/postcss).
 
 ## Getting Started
 
+You need webpack v5 to use the latest version. For Webpack v4, you have to install postcss-loader v4.
+
 To begin, you'll need to install `postcss-loader` and `postcss`:
 
 ```console
@@ -578,11 +580,13 @@ module.exports = {
 
 ### `implementation`
 
-Type: `Function`
+Type: `Function | String`
 
 The special `implementation` option determines which implementation of PostCSS to use. Overrides the locally installed `peerDependency` version of `postcss`.
 
 **This option is only really useful for downstream tooling authors to ease the PostCSS 7-to-8 transition.**
+
+#### Function
 
 **webpack.config.js**
 
@@ -598,6 +602,31 @@ module.exports = {
           {
             loader: "postcss-loader",
             options: { implementation: require("postcss") },
+          },
+          { loader: "sass-loader" },
+        ],
+      },
+    ],
+  },
+};
+```
+
+#### String
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          {
+            loader: "postcss-loader",
+            options: { implementation: require.resolve("postcss") },
           },
           { loader: "sass-loader" },
         ],
