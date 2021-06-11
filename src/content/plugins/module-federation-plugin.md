@@ -16,7 +16,7 @@ There are three ways to specify the versions of shared libraries.
 
 #### Array syntax
 
-This syntax allows you to easily share libraries with package name only. This approach is good for prototyping, but it will not allow you to scale to large production environment given libraries like `react` and `react-dom` will require additional requirements.
+This syntax allows you to share libraries with package name only. This approach is good for prototyping, but it will not allow you to scale to large production environment given that libraries like `react` and `react-dom` will require additional requirements.
 
 ```js
 const { ModuleFederationPlugin } = require('webpack').container;
