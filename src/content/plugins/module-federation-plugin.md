@@ -1,5 +1,5 @@
 ---
-title: Module Federation Plugin
+title: ModuleFederationPlugin
 contributors:
   - XiaofengXie16
 
