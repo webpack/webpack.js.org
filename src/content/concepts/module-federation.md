@@ -8,6 +8,8 @@ contributors:
   - jamesgeorge007
   - ScriptedAlchemy
   - snitin315
+  - XiaofengXie16
+
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
@@ -60,7 +62,7 @@ This plugin adds specific references to containers as externals and allows to im
 
 ### `ModuleFederationPlugin` (high level)
 
-This plugin combines `ContainerPlugin` and `ContainerReferencePlugin`. Overrides and overridables are combined into a single list of specified shared modules.
+[`ModuleFederationPlugin`](/plugins/module-federation-plugin) combines `ContainerPlugin` and `ContainerReferencePlugin`.
 
 ## Concept goals
 
