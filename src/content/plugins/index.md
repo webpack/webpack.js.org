@@ -35,7 +35,7 @@ webpack has a rich plugin interface. Most of the features within webpack itself 
 | [`MiniCssExtractPlugin`](/plugins/mini-css-extract-plugin)                      | creates a CSS file per JS file which requires CSS                                      |
 | [`NoEmitOnErrorsPlugin`](/configuration/optimization/#optimizationemitonerrors) | Skip the emitting phase when there are compilation errors                              |
 | [`NormalModuleReplacementPlugin`](/plugins/normal-module-replacement-plugin)    | Replace resource(s) that matches a regexp                                              |
-| [`NpmInstallWebpackPlugin`](/plugins/npm-install-webpack-plugin)                | Auto-install missing dependencies during development                                   |
+| [`NpmInstallWebpackPlugin`](/plugins/install-webpack-plugin)                    | Auto-install missing dependencies during development                                   |
 | [`ProgressPlugin`](/plugins/progress-plugin)                                    | Report compilation progress                                                            |
 | [`ProvidePlugin`](/plugins/provide-plugin)                                      | Use modules without having to use import/require                                       |
 | [`SourceMapDevToolPlugin`](/plugins/source-map-dev-tool-plugin)                 | Enables a more fine grained control of source maps                                     |
