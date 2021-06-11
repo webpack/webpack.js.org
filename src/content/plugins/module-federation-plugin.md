@@ -44,7 +44,7 @@ module.exports = {
       shared: {
         // adds lodash as shared module
         // version is inferred from package.json
-        // it will use the highest moment version that is >= 4.17 and < 5
+        // it will use the highest lodash version that is >= 4.17 and < 5
         lodash: '^4.17.0',
       },
     }),
