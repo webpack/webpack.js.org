@@ -211,7 +211,9 @@ function Site(props) {
           <meta property="twitter:creator" content="@webpack" />
           <meta property="twitter:domain" content="https://webpack.js.org/" />
           <link rel="icon" type="image/x-icon" href={Favicon} />
-          <link rel="manifest" href="/manifest.json" />
+          {process.env.NODE_ENV === 'production' && (
+            <link rel="manifest" href="/manifest.json" />
+          )}
           <link
             rel="canonical"
             href={`https://webpack.js.org${enforceTrailingSlash(
