@@ -196,7 +196,7 @@ module.exports = {
       shared: {
         'my-vue': {
           // can be referenced by import "my-vue"
-          import: 'vue', // the "vue" package will be used a provided and fallback module
+          import: 'vue', // the "vue" package will be used as a provided and fallback module
           shareKey: 'shared-vue', // under this name the shared module will be placed in the share scope
           shareScope: 'default', // share scope with this name will be used
           singleton: true, // only a single version of the shared module is allowed
