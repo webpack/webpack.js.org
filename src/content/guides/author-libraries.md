@@ -210,11 +210,7 @@ We exposed the entry point as `webpackNumbers` so users can use it through scrip
 
 现在 webpack 将打包一个库，其可以与 CommonJS、AMD 以及 script 标签使用。
 
-<<<<<<< HEAD
 T> 请注意，`library` 设置与 `entry` 配置项绑定。对于绝大多数的库，指定一个入口就已经足够了。尽管 [multi-part 库](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) 是有可能的，但通过作为单个入口点的[索引脚本](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file)暴露部分导出会更简单。**不推荐**使用一个 `array` 作为库的 `entry`。
-=======
-T> Note that the `library` setup is tied to the `entry` configuration. For most libraries, specifying a single entry point is sufficient. While [multi-part libraries](https://github.com/webpack/webpack/tree/master/examples/multi-part-library) are possible, it is more straightforward to expose partial exports through an [index script](https://stackoverflow.com/questions/34072598/es6-exporting-importing-in-index-file) that serves as a single entry point. Using an `array` as an `entry` point for a library is **not recommended**.
->>>>>>> b2b1b5d42c04cdccdc522c97cb2f4604e898a382
 
 ## 外部化 lodash {#externalize-lodash}
 
