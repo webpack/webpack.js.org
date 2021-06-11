@@ -8,7 +8,7 @@ related:
     url: https://webpack.js.org/concepts/module-federation/
 ---
 
-The ModuleFederationPlugin allows a build to provide or consume modules with other independent builds at runtime.
+The `ModuleFederationPlugin` allows a build to provide or consume modules with other independent builds at runtime.
 
 ### Specify package versions
 
