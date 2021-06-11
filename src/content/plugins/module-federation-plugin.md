@@ -176,7 +176,7 @@ module.exports = {
     new ModuleFederationPlugin({
       // adds vue as shared module
       // there is no local version provided
-      // it throw an error when the shared vue is < 2.6.5 or >= 3
+      // it will throw an error when the shared vue is < 2.6.5 or >= 3
       shared: {
         vue: {
           import: false,
