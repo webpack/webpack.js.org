@@ -53,6 +53,7 @@ And run `webpack` via your preferred method.
 |       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      | `compiler.devtool` | Enables/Disables generation of source maps.              |
 | **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |       `true`       | Enables/Disables the default Webpack importer.           |
 |  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |    `undefined`     | Prepends/Appends `Stylus` code to the actual entry file. |
+|  **[`implementation`](#implementation)**  | `{String\|Function}` |      `stylus`      | Setup Stylus implementation to use.                      |
 
 ### `stylusOptions`
 
@@ -391,6 +392,64 @@ module.exports = {
 
                 return "value 200px" + content;
               },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+### `implementation`
+
+Type: `Function | String`
+
+The special `implementation` option determines which implementation of Stylus to use. Overrides the locally installed `peerDependency` version of `stylus`.
+
+#### Function
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.styl/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "stylus-loader",
+            options: {
+              implementation: require("stylus"),
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+#### String
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.styl/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "stylus-loader",
+            options: {
+              implementation: require.resolve("stylus"),
             },
           },
         ],

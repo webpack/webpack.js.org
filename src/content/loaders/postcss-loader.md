@@ -28,7 +28,13 @@ PostCSS chat: [![chat-postcss][chat-postcss]][chat-postcss-url]
 
 ## 快速开始 {#getting-started}
 
+<<<<<<< HEAD
 为了使用本 loader，你需要安装 `postcss-loader` 和 `postcss`：
+=======
+You need webpack v5 to use the latest version. For Webpack v4, you have to install postcss-loader v4.
+
+To begin, you'll need to install `postcss-loader` and `postcss`:
+>>>>>>> 4bc535a244db37f146570167f4be45bc8e88ee57
 
 ```console
 npm install --save-dev postcss-loader postcss
@@ -582,11 +588,17 @@ module.exports = {
 
 ### `implementation` {#implementation}
 
+<<<<<<< HEAD
 类型：`Function`
+=======
+Type: `Function | String`
+>>>>>>> 4bc535a244db37f146570167f4be45bc8e88ee57
 
 特殊的 `implementation` 选项决定使用 PostCSS 哪个实现。重载本地安装的 `postcss` 的 `peerDependency` 版本。
 
 **此选项只对下游的工具作者有效，以便于 PostCSS 7 到 PostCSS 8 的过渡。**
+
+#### Function
 
 **webpack.config.js**
 
@@ -611,7 +623,36 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## 例子 {#examples}
+=======
+#### String
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          {
+            loader: "postcss-loader",
+            options: { implementation: require.resolve("postcss") },
+          },
+          { loader: "sass-loader" },
+        ],
+      },
+    ],
+  },
+};
+```
+
+## Examples
+>>>>>>> 4bc535a244db37f146570167f4be45bc8e88ee57
 
 ### SugarSS {#sugarss}
 

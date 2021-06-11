@@ -122,6 +122,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 
 ## 配置选项 {#options}
 
+<<<<<<< HEAD
 |                   名称                    |         类型         |       默认值       | Description                                    |
 | :---------------------------------------: | :------------------: | :----------------: | :--------------------------------------------- |
 |  **[`implementation`](#implementation)**  |      `{Object}`      |       `sass`       | 设置使用的 Sass 的实现。                       |
@@ -129,11 +130,25 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 |       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      | `compiler.devtool` | 启用 / 禁用 source maps 的生成。               |
 |  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |    `undefined`     | 在实际的输入文件之前添加 `Sass` /`SCSS` 代码。 |
 | **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |       `true`       | 启用 / 禁用默认的 Webpack importer。           |
+=======
+|                   Name                    |         Type         |                 Default                 | Description                                                       |
+| :---------------------------------------: | :------------------: | :-------------------------------------: | :---------------------------------------------------------------- |
+|  **[`implementation`](#implementation)**  |  `{Object\|String}`  |                 `sass`                  | Setup Sass implementation to use.                                 |
+|     **[`sassOptions`](#sassoptions)**     | `{Object\|Function}` | defaults values for Sass implementation | Options for Sass.                                                 |
+|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.                       |
+|  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |               `undefined`               | Prepends/Appends `Sass`/`SCSS` code before the actual entry file. |
+| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.                    |
+>>>>>>> 4bc535a244db37f146570167f4be45bc8e88ee57
 
 ### `implementation` {#implementation}
 
+<<<<<<< HEAD
 类型： `Object`
 默认值： `sass`
+=======
+Type: `Object | String`
+Default: `sass`
+>>>>>>> 4bc535a244db37f146570167f4be45bc8e88ee57
 
 特殊的 `implementation` 选项确定要使用的 Sass 实现。
 
@@ -171,7 +186,13 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 
 `implementation` 选项可以以模块的形式接受 `sass`（`Dart Sass`）或 `node-sass`。
 
+<<<<<<< HEAD
 例如，为了使用 Dart Sass，你应该传递：
+=======
+#### Object
+
+For example, to use Dart Sass, you'd pass:
+>>>>>>> 4bc535a244db37f146570167f4be45bc8e88ee57
 
 ```js
 module.exports = {
@@ -196,8 +217,40 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 需要注意的是，当使用 `sass`（`Dart Sass`）时，由于异步回调的开销，通常情况下**同步编译的速度是异步编译速度的两倍**。
 为了避免这种开销，你可以使用 [fibers](https://www.npmjs.com/package/fibers) 包从同步代码中调用异步导入程序。
+=======
+#### String
+
+For example, to use Dart Sass, you'd pass:
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              // Prefer `dart-sass`
+              implementation: require.resolve("sass"),
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+Note that when using `sass` (`Dart Sass`), **synchronous compilation is twice as fast as asynchronous compilation** by default, due to the overhead of asynchronous callbacks.
+To avoid this overhead, you can use the [fibers](https://www.npmjs.com/package/fibers) package to call asynchronous importers from the synchronous code path.
+>>>>>>> 4bc535a244db37f146570167f4be45bc8e88ee57
 
 如果可能，我们会为小于 v16.0.0 的 `Node.js` 自动注入 [`fibers`](https://github.com/laverdet/node-fibers) 软件包（设置 `sassOptions.fiber`）（当然需要你安装 [`fibers`](https://github.com/laverdet/node-fibers) 包）。
 

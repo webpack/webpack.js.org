@@ -56,6 +56,7 @@ module.exports = {
 
 ## 可选项 {#options}
 
+<<<<<<< HEAD
 |                  名称                   |         类型         |         默认值          | 描述                                      |
 | :-------------------------------------: | :------------------: | :----------------------: | :----------------------------------------------- |
 |    **[`lessOptions`](#lessoptions)**    | `{Object\|Function}` | `{ relativeUrls: true }` | Less 的可选项。                                |
@@ -63,6 +64,15 @@ module.exports = {
 |      **[`sourceMap`](#sourcemap)**      |     `{Boolean}`      |    `compiler.devtool`    | 是否生成 source map。       |
 | **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |          `true`          | 是否启用默认的 webpack importer。         |
 | **[`implementation`](#implementation)** |      `{Object}`      |          `less`          | 配置 Less 使用的实现库                |
+=======
+|                   Name                    |         Type         |         Default          | Description                                            |
+| :---------------------------------------: | :------------------: | :----------------------: | :----------------------------------------------------- |
+|     **[`lessOptions`](#lessoptions)**     | `{Object\|Function}` | `{ relativeUrls: true }` | Options for Less.                                      |
+|  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |       `undefined`        | Prepends/Appends `Less` code to the actual entry file. |
+|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      |    `compiler.devtool`    | Enables/Disables generation of source maps.            |
+| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |          `true`          | Enables/Disables the default Webpack importer.         |
+|  **[`implementation`](#implementation)**  |  `{Object\|String}`  |          `less`          | Setup Less implementation to use.                      |
+>>>>>>> 4bc535a244db37f146570167f4be45bc8e88ee57
 
 ### `lessOptions` {#lessoptions}
 
@@ -322,13 +332,19 @@ module.exports = {
 
 ### `implementation` {#implementation}
 
+<<<<<<< HEAD
 类型：`Object`
+=======
+Type: `Object | String`
+>>>>>>> 4bc535a244db37f146570167f4be45bc8e88ee57
 
 > ⚠ less-loader 已兼容 Less 3 和 Less 4。
 
 特殊的 `implementation` 选项决定使用 Less 的哪个实现。重载本地安装的 `less` 的 `peerDependency` 版本。
 
 **此选项只对下游的工具作者有效，以便于 Less 3 到 Less 4 的过渡。**
+
+#### Object
 
 **webpack.config.js**
 
@@ -354,7 +370,37 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## 示例 {#examples}
+=======
+#### String
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.less$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              implementation: require.resolve("less"),
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+## Examples
+>>>>>>> 4bc535a244db37f146570167f4be45bc8e88ee57
 
 ### 常规用法 {#normal-usage}
 
