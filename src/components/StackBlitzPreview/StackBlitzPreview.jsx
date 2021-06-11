@@ -8,7 +8,7 @@ StackBlitzPreview.propTypes = {
 export default function StackBlitzPreview(props = {}) {
   const { example = '' } = props;
 
-  const url = `https://github.com/webpack/webpack.js.org/tree/master/examples/${example}`;
+  const url = `https://stackblitz.com/github/webpack/webpack.js.org/tree/master/examples/${example}`;
 
   return (
     <aside className="preview">
