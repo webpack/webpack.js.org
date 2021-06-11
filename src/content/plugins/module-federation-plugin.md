@@ -124,7 +124,7 @@ This hint only allows a single version of the shared module in the shared scope 
 
 `boolean`
 
-This hint allows Webpack to reject the shared module if version is not valid (defaults to `true`, if local fallback module is available and shared module is not a singleton, otherwise `false`, it has no effect if there is no required version specified).
+This hint allows webpack to reject the shared module if version is not valid (defaults to `true` when local fallback module is available and shared module is not a singleton, otherwise `false`, it has no effect if there is no required version specified).
 
 #### **`version`**
 
