@@ -130,7 +130,7 @@ This hint allows Webpack to reject the shared module if version is not valid (de
 
 `false | string`
 
-The version of the provided module. It allows Webpack to replace lower matching versions, but not higher.
+The version of the provided module. It allows webpack to replace lower matching versions, but not higher.
 
 #### **Additional examples**
 
