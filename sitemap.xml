@@ -124,16 +124,16 @@
         <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
+        <loc>https://webpack.js.org/concepts/configuration</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
+        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/entry-points</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/configuration</loc>
+        <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/loaders</loc>
@@ -403,6 +403,9 @@
         <loc>https://webpack.js.org/loaders/mocha-loader</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/node-loader</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/null-loader</loc>
     </url>
     <url>
@@ -437,9 +440,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/worker-loader</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/node-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/migrate/3</loc>
@@ -523,6 +523,9 @@
         <loc>https://webpack.js.org/plugins/json-minimizer-webpack-plugin</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins/min-chunk-size-plugin</loc>
     </url>
     <url>
@@ -550,10 +553,10 @@
         <loc>https://webpack.js.org/plugins/provide-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/source-map-dev-tool-plugin</loc>
+        <loc>https://webpack.js.org/plugins/split-chunks-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/split-chunks-plugin</loc>
+        <loc>https://webpack.js.org/plugins/source-map-dev-tool-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/stylelint-webpack-plugin</loc>
@@ -563,9 +566,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/watch-ignore-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/pluginsapi/compiler</loc>
