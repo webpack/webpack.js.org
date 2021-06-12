@@ -82,7 +82,7 @@ Name of template to generate.
 
 To generate a project without questions. When enabled, default answer for each question will be used.
 
-T> Click [here](https://github.com/webpack/webpack-cli/blob/master/INIT.md) to see the full documentation of webpack init command.
+T> [Click here](https://github.com/webpack/webpack-cli/blob/master/packages/generators/INIT.md) to see the full documentation of webpack init command.
 
 ### Info
 
