@@ -87,11 +87,7 @@ npx webpack init ./my-app --force --template=default
 
 生成项目时不启用选项模式。当为 `true` 时，所有命令行选项使用默认值。
 
-<<<<<<< HEAD
-T> 点击 [这里](https://github.com/webpack/webpack-cli/blob/master/INIT.md) 获取 webpack init 命令的完整文档。
-=======
-T> See the [full documentation of `webpack init` command](https://github.com/webpack/webpack-cli/blob/master/packages/generators/INIT.md).
->>>>>>> d0a07a3f512d238ac81dd3879200e5b37803c912
+T> 点击 [这里](https://github.com/webpack/webpack-cli/blob/master/packages/generators/INIT.md) 获取 `webpack init` 命令的完整文档。
 
 ### Info {#info}
 
@@ -469,8 +465,8 @@ T> 请查阅 [environment 变量指南](/guides/environment-variables/)了解更
 
 除了上面所说的自定义 `env` 变量，在你的 webpack 配置中也使用了一些 `env` 内置变量：
 
-| 变量名 | 描述                                  |
-| -------------------- | -------------------------------------------- |
+| 变量名          | 描述                                          |
+| --------------- | --------------------------------------------- |
 | `WEBPACK_SERVE` | 如果使用了 `serve\|s`，则为 `true`。          |
 | `WEBPACK_BUILD` | 如果使用了 `build\|bundle\|b`，则为 `true`。  |
 | `WEBPACK_WATCH` | 如果使用了 `--watch\|watch\|w`，则为 `true`。 |
@@ -553,12 +549,12 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 
 ## CLI 环境变量 {#cli-environment-variables}
 
-| 环境变量                            | 描述                                                |
-| ----------------------------------- | --------------------------------------------------- |
-| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`     | 设置为 `true` 时将不会使用 `webpack-cli` 本地实例。 |
-| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG` | 设置为 `true` 则强制加载 ESM 配置。                 |
+| 环境变量                              | 描述                                                |
+| ------------------------------------- | --------------------------------------------------- |
+| `WEBPACK_CLI_SKIP_IMPORT_LOCAL`       | 设置为 `true` 时将不会使用 `webpack-cli` 本地实例。 |
+| `WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG`   | 设置为 `true` 则强制加载 ESM 配置。                 |
 | [`WEBPACK_PACKAGE`](#webpack_package) | 在 CLI 中使用自定义 webpack 版本。                  |
-| `WEBPACK_CLI_HELP_WIDTH`              | 用于帮助输出的自定义宽度。                               |
+| `WEBPACK_CLI_HELP_WIDTH`              | 用于帮助输出的自定义宽度。                          |
 
 ```bash
 WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
