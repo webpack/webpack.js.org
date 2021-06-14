@@ -11,11 +11,11 @@ contributors:
   - XiaofengXie16
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
-url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
+    url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
   - title: 'Explanations and Examples'
-url: https://github.com/module-federation/module-federation-examples
+    url: https://github.com/module-federation/module-federation-examples
   - title: 'Module Federation YouTube Playlist'
-url: https://www.youtube.com/playlist?list=PLWSiF9YHHK-DqsFHGYbeAMwbd9xcZbEWJ
+    url: https://www.youtube.com/playlist?list=PLWSiF9YHHK-DqsFHGYbeAMwbd9xcZbEWJ
 ---
 
 ## Motivation
@@ -73,20 +73,20 @@ This plugin adds specific references to containers as externals and allows to im
 - It should be possible to expose and use any module type that webpack supports.
 - Chunk loading should load everything needed in parallel (web: single round-trip to server).
 - Control from consumer to container
-- Overriding modules is a one-directional operation.
-- Sibling containers cannot override each other's modules.
+  - Overriding modules is a one-directional operation.
+  - Sibling containers cannot override each other's modules.
 - Concept should be environment-independent.
-- Usable in web, Node.js, etc.
+  - Usable in web, Node.js, etc.
 - Relative and absolute request in shared:
-- Will always be provided, even if not used.
-- Will resolve relative to `config.context`.
-- Does not use a `requiredVersion` by default.
+  - Will always be provided, even if not used.
+  - Will resolve relative to `config.context`.
+  - Does not use a `requiredVersion` by default.
 - Module requests in shared:
-- Are only provided when they are used.
-- Will match all used equal module requests in your build.
-- Will provide all matching modules.
-- Will extract `requiredVersion` from package.json at this position in the graph.
-- Could provide and consume multiple different version when you have nested node_modules.
+  - Are only provided when they are used.
+  - Will match all used equal module requests in your build.
+  - Will provide all matching modules.
+  - Will extract `requiredVersion` from package.json at this position in the graph.
+  - Could provide and consume multiple different version when you have nested node_modules.
 - Module requests with trailing `/` in shared will match all module requests with this prefix.
 
 ## Use cases
