@@ -31,6 +31,7 @@ contributors:
   - maximilianschmelzer
   - smelukov
   - chenxsan
+  - Adarah
 related:
   - title: <link rel=”prefetch/preload”> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -385,7 +386,7 @@ Using these inline directives while declaring your imports allows webpack to out
 - **prefetch**: resource is probably needed for some navigation in the future
 - **preload**: resource will also be needed during the current navigation
 
-Simple prefetch example can be having a `HomePage` component, which renders a `LoginButton` component which then on demand loads a `LoginModal` component after being clicked.
+An example of this is having a `HomePage` component, which renders a `LoginButton` component which then on demand loads a `LoginModal` component after being clicked.
 
 **LoginButton.js**
 
@@ -405,9 +406,9 @@ Preload directive has a bunch of differences compared to prefetch:
 - A preloaded chunk should be instantly requested by the parent chunk. A prefetched chunk can be used anytime in the future.
 - Browser support is different.
 
-Simple preload example can be having a `Component` which always depends on a big library that should be in a separate chunk.
+An example of this can be having a `Component` which always depends on a big library that should be in a separate chunk.
 
-Let's imagine a component `ChartComponent` which needs huge `ChartingLibrary`. It displays a `LoadingIndicator` when rendered and instantly does an on demand import of `ChartingLibrary`:
+Let's imagine a component `ChartComponent` which needs a huge `ChartingLibrary`. It displays a `LoadingIndicator` when rendered and instantly does an on demand import of `ChartingLibrary`:
 
 **ChartComponent.js**
 

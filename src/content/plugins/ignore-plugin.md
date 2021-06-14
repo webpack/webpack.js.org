@@ -44,7 +44,7 @@ As of [moment](https://momentjs.com/) 2.18, all locales are bundled together wit
 The `resourceRegExp` parameter passed to `IgnorePlugin` is not tested against the resolved file names or absolute module names being imported or required, but rather against the _string_ passed to `require` or `import` _within the source code where the import is taking place_. For example, if you're trying to exclude `node_modules/moment/locale/*.js`, this won't work:
 
 ```diff
--new webpack.IgnorePlugin({requestRegExp: /moment\/locale\//});
+-new webpack.IgnorePlugin({ resourceRegExp: /moment\/locale\// });
 ```
 
 Rather, because `moment` imports with this code:

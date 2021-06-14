@@ -30,7 +30,7 @@ const mdPlugins = [
   require('remark-refractor'),
 ];
 
-module.exports = () => ({
+module.exports = ({ ssg = false }) => ({
   context: path.resolve(__dirname, './src'),
   cache: {
     type: 'filesystem',
@@ -109,6 +109,7 @@ module.exports = () => ({
         type: 'asset/resource',
         generator: {
           filename: 'font/[name].[hash][ext][query]',
+          emit: ssg !== true,
         },
       },
       {
@@ -116,6 +117,7 @@ module.exports = () => ({
         type: 'asset/resource',
         generator: {
           filename: '[name].[hash][ext][query]',
+          emit: ssg !== true,
         },
       },
       {
@@ -124,6 +126,7 @@ module.exports = () => ({
         exclude: [path.resolve(__dirname, 'src/styles/icons')],
         generator: {
           filename: '[name].[hash][ext][query]',
+          emit: ssg !== true,
         },
       },
       {
@@ -136,6 +139,7 @@ module.exports = () => ({
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
+      experimentalUseImportModule: true,
     }),
     new webpack.DefinePlugin({
       // https://github.com/algolia/algoliasearch-client-javascript/issues/764

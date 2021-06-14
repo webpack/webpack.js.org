@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Learn how to bundle a JavaScript application with webpack 5.
 sort: 1
 contributors:
   - bebraw
@@ -23,11 +24,16 @@ contributors:
   - wizardofhogwarts
   - myshov
   - anshumanv
+  - d3lm
 ---
 
 webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interact with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
 
 W> The minimum supported Node.js version to run webpack 5 is 10.13.0 (LTS)
+
+<StackBlitzPreview
+  example="getting-started?terminal="
+/>
 
 ## Basic Setup
 
@@ -109,15 +115,15 @@ T> If you want to learn more about the inner workings of `package.json`, then we
    },
    "keywords": [],
    "author": "",
-   "license": "ISC",
+   "license": "MIT",
    "devDependencies": {
-     "webpack": "^5.4.0",
-     "webpack-cli": "^4.2.0"
+     "webpack": "^5.38.1",
+     "webpack-cli": "^4.7.2",
    }
  }
 ```
 
-In this example, there are implicit dependencies between the `<script>` tags. Our `index.js` file depends on `lodash` being included in the page before it runs. This is because `index.js` never explicitly declared a need for `lodash`; it just assumes that the global variable `_` exists.
+In this example, there are implicit dependencies between the `<script>` tags. Our `index.js` file depends on `lodash` being included in the page before it runs. This is because `index.js` never explicitly declared a need for `lodash`; it assumes that the global variable `_` exists.
 
 There are problems with managing JavaScript projects this way:
 
@@ -143,7 +149,7 @@ First we'll tweak our directory structure slightly, separating the "source" code
     |- index.js
 ```
 
-T> You may have noticed that `index.html` was created manually, even though it is now placed in the `dist` directory. Later on in this guide, we will generate `index.html` rather than edit it manually. Once this is done, it should be safe to empty the `dist` directory and to regenerate all the files within it.
+T> You may have noticed that `index.html` was created manually, even though it is now placed in the `dist` directory. Later on in [another guide](/guides/output-management/#setting-up-htmlwebpackplugin), we will generate `index.html` rather than edit it manually. Once this is done, it should be safe to empty the `dist` directory and to regenerate all the files within it.
 
 To bundle the `lodash` dependency with `index.js`, we'll need to install the library locally:
 
@@ -264,7 +270,7 @@ webpack 5.4.0 compiled successfully in 1934 ms
 
 T> If a `webpack.config.js` is present, the `webpack` command picks it up by default. We use the `--config` option here only to show that you can pass a configuration of any name. This will be useful for more complex configurations that need to be split into multiple files.
 
-A configuration file allows far more flexibility than simple CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](/configuration) to learn more.
+A configuration file allows far more flexibility than CLI usage. We can specify loader rules, plugins, resolve options and many other enhancements this way. See the [configuration documentation](/configuration) to learn more.
 
 ## NPM Scripts
 

@@ -8,7 +8,6 @@ import {
 } from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { setCatchHandler, setDefaultHandler } from 'workbox-routing';
-import ssgManifest from '../dist/ssg-manifest.json';
 
 const cacheName = cacheNames.runtime;
 
@@ -17,13 +16,14 @@ const otherManifest = [
   {
     url: '/manifest.json',
   },
+  {
+    url: '/app-shell/index.html',
+  },
 ];
-const manifestURLs = [...manifest, ...ssgManifest, ...otherManifest].map(
-  (entry) => {
-    const url = new URL(entry.url, self.location);
-    return url.href;
-  }
-);
+const manifestURLs = [...manifest, ...otherManifest].map((entry) => {
+  const url = new URL(entry.url, self.location);
+  return url.href;
+});
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(cacheName).then((cache) => {
@@ -32,20 +32,6 @@ self.addEventListener('install', (event) => {
   );
 });
 
-self.addEventListener('activate', (event) => {
-  // - [x] clean up workbox precached data
-  // TODO to be removed after maybe two months?
-  // i.e., 2021-03-23
-  event.waitUntil(
-    caches.delete(cacheNames.precache).then((result) => {
-      if (result) {
-        console.log('Precached data removed');
-      } else {
-        console.log('No precache found');
-      }
-    })
-  );
-});
 self.addEventListener('activate', (event) => {
   // - [x] clean up outdated runtime cache
   event.waitUntil(
@@ -97,14 +83,5 @@ setCatchHandler(({ event }) => {
       return caches.match('/app-shell/index.html');
     default:
       return Response.error();
-  }
-});
-
-// TODO remove this in the future
-// as we are using NetworkFirst strategy now
-// TODO remove NotifyBox as well
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
   }
 });

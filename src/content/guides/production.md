@@ -61,7 +61,6 @@ npm install --save-dev webpack-merge
 
 ```diff
 + const path = require('path');
-+ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 + const HtmlWebpackPlugin = require('html-webpack-plugin');
 +
 + module.exports = {
@@ -69,8 +68,6 @@ npm install --save-dev webpack-merge
 +     app: './src/index.js',
 +   },
 +   plugins: [
-+     // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-+     new CleanWebpackPlugin(),
 +     new HtmlWebpackPlugin({
 +       title: 'Production',
 +     }),
@@ -78,6 +75,7 @@ npm install --save-dev webpack-merge
 +   output: {
 +     filename: '[name].bundle.js',
 +     path: path.resolve(__dirname, 'dist'),
++     clean: true,
 +   },
 + };
 ```
@@ -108,7 +106,7 @@ npm install --save-dev webpack-merge
 + });
 ```
 
-In `webpack.common.js`, we now have setup our `entry` and `output` configuration and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've set `mode` to `development`. Also, we've added the recommended `devtool` for that environment (strong source mapping), as well as our simple `devServer` configuration. Finally, in `webpack.prod.js`,`mode` is set to `production` which loads [`TerserPlugin`](/plugins/terser-webpack-plugin/), which was first introduced by the [tree shaking](/guides/tree-shaking/) guide.
+In `webpack.common.js`, we now have setup our `entry` and `output` configuration and we've included any plugins that are required for both environments. In `webpack.dev.js`, we've set `mode` to `development`. Also, we've added the recommended `devtool` for that environment (strong source mapping), as well as our `devServer` configuration. Finally, in `webpack.prod.js`,`mode` is set to `production` which loads [`TerserPlugin`](/plugins/terser-webpack-plugin/), which was first introduced by the [tree shaking](/guides/tree-shaking/) guide.
 
 Note the use of `merge()` calls in the environment-specific configurations to include our common configuration in `webpack.dev.js` and `webpack.prod.js`. The `webpack-merge` tool offers a variety of advanced features for merging but for our use case we won't need any of that.
 
@@ -134,7 +132,6 @@ Now, let's modify our npm scripts to use the new configuration files. For the `s
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "clean-webpack-plugin": "^0.1.17",
       "css-loader": "^0.28.4",
       "csv-loader": "^2.1.1",
       "express": "^4.15.3",
@@ -202,7 +199,7 @@ Note that while the [`TerserPlugin`](/plugins/terser-webpack-plugin/) is a great
 
 - [`ClosureWebpackPlugin`](https://github.com/webpack-contrib/closure-webpack-plugin)
 
-If you decide to try another minification plugin, just make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
+If you decide to try another minification plugin, make sure your new choice also drops dead code as described in the [tree shaking](/guides/tree-shaking) guide and provide it as the [`optimization.minimizer`](/configuration/optimization/#optimizationminimizer).
 
 ## Source Mapping
 

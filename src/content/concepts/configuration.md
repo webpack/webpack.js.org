@@ -30,12 +30,12 @@ T> The most important part to take away from this document is that there are man
 
 The examples below describe how webpack's configuration can be both expressive and configurable because _it is code_:
 
-## Simple Configuration
+## Introductory Configuration
 
 **webpack.config.js**
 
 ```javascript
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   mode: 'development',

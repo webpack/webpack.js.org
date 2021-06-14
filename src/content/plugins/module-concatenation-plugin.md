@@ -5,8 +5,6 @@ contributors:
   - skipjack
   - TheLarkInn
   - byzyk
-related:
-  - webpack 3: Official Release!!
 ---
 
 In the past, one of webpack’s trade-offs when bundling was that each module in your bundle would be wrapped in individual function closures. These wrapper functions made it slower for your JavaScript to execute in the browser. In comparison, tools like Closure Compiler and RollupJS ‘hoist’ or concatenate the scope of all your modules into one closure and allow for your code to have a faster execution time in the browser.
@@ -86,7 +84,7 @@ function tryToAdd(group, module) {
 
 ### Debugging Optimization Bailouts
 
-When using the webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the webpack config, just add the following to the `stats` object:
+When using the webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the webpack config, add the following to the `stats` object:
 
 ```js
 module.exports = {

@@ -16,7 +16,7 @@ W> The webpack `target` property is not to be confused with the `output.libraryT
 
 ## Usage
 
-To set the `target` property, you simply set the target value in your webpack config:
+To set the `target` property, you set the target value in your webpack config:
 
 **webpack.config.js**
 

@@ -46,7 +46,7 @@ For importing the default export of an ES2015 module, you have to specify the de
 
 ## Usage: jQuery
 
-To automatically load `jquery` we can simply point both variables it exposes to the corresponding node module:
+To automatically load `jquery` we can point both variables it exposes to the corresponding node module:
 
 ```javascript
 new webpack.ProvidePlugin({
@@ -59,8 +59,8 @@ Then in any of our source code:
 
 ```javascript
 // in a module
-$('#item'); // <= just works
-jQuery('#item'); // <= just works
+$('#item'); // <= works
+jQuery('#item'); // <= also works
 // $ is automatically set to the exports of module "jquery"
 ```
 

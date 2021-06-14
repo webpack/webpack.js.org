@@ -64,7 +64,6 @@ module.exports = {
       chunks: 'async',
       minSize: 20000,
       minRemainingSize: 0,
-      maxSize: 0,
       minChunks: 1,
       maxAsyncRequests: 30,
       maxInitialRequests: 30,
@@ -364,7 +363,7 @@ module.exports = {
 
 #### `splitChunks.cacheGroups.{cacheGroup}.test`
 
-`function (module, chunk) => boolean` `RegExp` `string`
+`function (module, { chunkGraph, moduleGraph }) => boolean` `RegExp` `string`
 
 Controls which modules are selected by this cache group. Omitting it selects all modules. It can match the absolute module resource path or chunk names. When a chunk name is matched, all modules in the chunk are selected.
 
@@ -379,7 +378,7 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         svgGroup: {
-          test(module, chunks) {
+          test(module) {
             // `module.resource` contains the absolute path of the file on disk.
             // Note the usage of `path.sep` instead of / or \, for cross-platform compatibility.
             const path = require('path');
@@ -391,7 +390,7 @@ module.exports = {
           },
         },
         byModuleTypeGroup: {
-          test(module, chunks) {
+          test(module) {
             return module.type === 'javascript/auto';
           },
         },

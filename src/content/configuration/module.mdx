@@ -38,12 +38,18 @@ module.exports = {
     generator: {
       asset: {
         // Generator options for asset modules
+
+        // Customize publicPath for asset modules, available since webpack 5.28.0
+        publicPath: 'assets/',
       },
       'asset/inline': {
         // Generator options for asset/inline modules
       },
       'asset/resource': {
         // Generator options for asset/resource modules
+
+        // Customize publicPath for asset/resource modules, available since webpack 5.28.0
+        publicPath: 'assets/',
       },
       javascript: {
         // No generator options are supported for this module type yet
@@ -460,7 +466,7 @@ Parsers may inspect these options and disable or reconfigure themselves accordin
 - Setting the option to `false` disables the parser.
 - Setting the option to `true` or leaving it `undefined` enables the parser.
 
-However, parser plugins may accept more than just a boolean. For example, the internal `NodeStuffPlugin` can accept an object instead of `true` to add additional options for a particular Rule.
+However, parser plugins may accept more than only a boolean. For example, the internal `NodeStuffPlugin` can accept an object instead of `true` to add additional options for a particular Rule.
 
 **Examples** (parser options by the default plugins):
 
@@ -547,7 +553,9 @@ module.exports = {
 };
 ```
 
-## `Rule.generator.dataUrl`
+## Rule.generator
+
+### Rule.generator.dataUrl
 
 `object = { encoding string = 'base64' | false, mimetype string = undefined | false }` `function (content, { filename, module }) => string`
 
@@ -601,7 +609,32 @@ module.exports = {
 };
 ```
 
-## `Rule.generator.filename`
+### Rule.generator.emit
+
+Opt out of writing assets from [Asset Modules](/guides/asset-modules/), you might want to use it in Server side rendering cases.
+
+- Type: `boolean = true`
+- Available: <Badge text='5.25.0+' />
+- Example:
+
+  ```js
+  module.exports = {
+    // …
+    module: {
+      rules: [
+        {
+          test: /\.png$/i,
+          type: 'asset/resource',
+          generator: {
+            emit: false,
+          },
+        },
+      ],
+    },
+  };
+  ```
+
+### Rule.generator.filename
 
 The same as [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) but for specific rule. Overrides `output.assetModuleFilename` and works only with `asset` and `asset/resource` module types.
 
@@ -624,6 +657,33 @@ module.exports = {
         type: 'asset/resource',
         generator: {
           filename: 'static/[hash][ext]',
+        },
+      },
+    ],
+  },
+};
+```
+
+### Rule.generator.publicPath
+
+Customize `publicPath` for specific Asset Modules.
+
+- Type: `string | ((pathData: PathData, assetInfo?: AssetInfo) => string)`
+- Available: <Badge text='5.28.0+' />
+
+```js
+module.exports = {
+  //...
+  output: {
+    publicPath: 'static/',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.png$/i,
+        type: 'asset/resource',
+        generator: {
+          publicPath: 'assets/',
         },
       },
     ],
@@ -688,6 +748,28 @@ module.exports = {
 An array of [`Rules`](#rule) that is also used when the Rule matches.
 
 T> See [`Nested rules`](#nested-rules) for more information.
+
+## Rule.scheme
+
+Match the used schema, e.g., `data`, `http`.
+
+- Type: `string | RegExp | ((value: string) => boolean) | RuleSetLogicalConditions | RuleSetCondition[]`
+- Available: <Badge text='5.38.0+' />
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        scheme: 'data',
+        type: 'asset/resource',
+      },
+    ],
+  },
+};
+```
 
 ## `Rule.sideEffects`
 
@@ -981,7 +1063,7 @@ module.exports = {
 
 **`function(info)`**
 
-A `UseEntry` can also be a function which receives the object argument describing the module being loaded, and must return an options object. This can be used to vary the loader options on a per-module basis.
+A `UseEntry` can also be a function which receives the object argument describing the module being loaded, and must return a non-function `UseEntry` object. This can be used to vary the loader options on a per-module basis.
 
 The `info` object parameter has the following fields:
 

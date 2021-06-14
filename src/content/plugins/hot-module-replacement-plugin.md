@@ -19,7 +19,7 @@ W> HMR should **never** be used in production.
 
 ## Basic Usage
 
-Enabling HMR is easy and in most cases no options are necessary.
+Enabling HMR is straightforward and in most cases no options are necessary.
 
 ```javascript
 new webpack.HotModuleReplacementPlugin({

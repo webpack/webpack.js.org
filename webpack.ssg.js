@@ -11,7 +11,6 @@ const contentTree = require('./src/_content.json');
 
 // Load Common Configuration
 const common = require('./webpack.common.js');
-const PrecacheSsgManifestPlugin = require('./src/PrecacheSsgManifestPlugin');
 
 // content tree to path array
 const paths = [...flattenContentTree(contentTree), '/vote', '/app-shell'];
@@ -84,11 +83,17 @@ module.exports = (env) =>
           'guides/code-splitting-css': '/guides/code-splitting/',
           'guides/code-splitting-libraries': '/guides/code-splitting/',
           'guides/why-webpack': '/comparison/',
+          'guides/scaffolding': '/api/cli/#init',
           'guides/production-build': '/guides/production/',
           migrating: '/migrate/3/',
           'plugins/no-emit-on-errors-plugin':
             '/configuration/optimization/#optimizationemitonerrors',
           'concepts/mode': '/configuration/mode',
+          'contribute/writing-a-scaffold': '/api/cli/#init',
+          'loaders/raw-loader': 'https://v4.webpack.js.org/loaders/raw-loader',
+          'loaders/url-loader': 'https://v4.webpack.js.org/loaders/url-loader',
+          'loaders/file-loader':
+            'https://v4.webpack.js.org/loaders/file-loader',
         },
       }),
       new CopyWebpackPlugin({
@@ -133,6 +138,5 @@ module.exports = (env) =>
           },
         ],
       }),
-      new PrecacheSsgManifestPlugin(),
     ],
   });

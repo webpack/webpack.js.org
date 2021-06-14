@@ -72,7 +72,7 @@ webpack runner or have it build and watch for changes, much like the
 
 Typically, only one master `Compiler` instance is created, although child
 compilers can be created in order to delegate specific tasks. The `Compiler` is
-ultimately just a function which performs bare minimum functionality to keep a
+ultimately a function which performs bare minimum functionality to keep a
 lifecycle running. It delegates all the loading, bundling, and writing work to
 registered plugins.
 
@@ -87,8 +87,7 @@ The `run` method is then used to kickstart all compilation work. Upon
 completion, the given `callback` function is executed. The final logging of
 stats and errors should be done in this `callback` function.
 
-W> The API only supports a single concurrent compilation at a time. When using
-`run`, wait for it to finish before calling `run` or `watch` again. When using
+W> The API only supports a single concurrent compilation at a time. When using `run` or
 `watch`, call `close` and wait for it to finish before calling `run` or `watch`
 again. Concurrent compilations will corrupt the output files.
 
@@ -106,8 +105,14 @@ const compiler = webpack({
 
 compiler.run((err, stats) => { // [Stats Object](#stats-object)
   // ...
+
+  compiler.close((closeErr) => {
+    // ...
+  });
 });
 ```
+
+W> Don't forget to close the compiler, so that low-priority work (like persistent caching) have the opportunity to complete.
 
 ## Watching
 
@@ -139,8 +144,8 @@ const watching = compiler.watch({
 `Watching` options are covered in detail
 [here](/configuration/watch/#watchoptions).
 
-W> Filesystem inaccuracies may trigger multiple builds for a single change. So,
-in the example above, the `console.log` statement may fire multiple times for a
+W> Filesystem inaccuracies may trigger multiple builds for a single change.
+In the example above, the `console.log` statement may fire multiple times for a
 single modification. Users should expect this behavior and may check
 `stats.hash` to see if the file hash has actually changed.
 
@@ -150,7 +155,7 @@ The `watch` method returns a `Watching` instance that exposes
 `.close(callback)` method. Calling this method will end watching:
 
 ```js
-watching.close(() => {
+watching.close((closeErr) => {
   console.log('Watching Ended.');
 });
 ```

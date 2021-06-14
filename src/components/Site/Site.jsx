@@ -1,15 +1,14 @@
 // Import External Dependencies
 import { Fragment, useEffect, useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import DocumentTitle from 'react-document-title';
 import PropTypes from 'prop-types';
 import { MDXProvider } from '@mdx-js/react';
-import { useTransition, animated, config } from 'react-spring';
 
 // Import Utilities
 import {
   extractPages,
   extractSections,
+  getPageDescription,
   getPageTitle,
 } from '../../utilities/content-utils';
 import isClient from '../../utilities/is-client';
@@ -28,7 +27,13 @@ import Page from '../Page/Page';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Vote from '../Vote/Vote';
 import Badge from '../Badge/Badge.js';
+import StackBlitzPreview from '../StackBlitzPreview/StackBlitzPreview';
 import { default as LinkComponent } from '../mdxComponents/Link';
+import { Helmet } from 'react-helmet-async';
+
+import Favicon from '../../favicon.ico';
+import Logo from '../../assets/logo-on-white-bg.svg';
+import OgImage from '../../assets/icon-pwa-512x512.png';
 
 // Import Constants
 import { THEME, THEME_LOCAL_STORAGE_KEY } from '../../constants/theme';
@@ -39,8 +44,13 @@ import './Site.scss';
 
 // Load Content Tree
 import Content from '../../_content.json';
-import NotifyBox from '../NotifyBox/NotifyBox';
 import { useLocalStorage } from 'react-use';
+
+const mdxComponents = {
+  Badge: Badge,
+  StackBlitzPreview: StackBlitzPreview,
+  a: LinkComponent,
+};
 
 Site.propTypes = {
   location: PropTypes.shape({
@@ -50,9 +60,6 @@ Site.propTypes = {
 };
 function Site(props) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [list, setList] = useState([]);
-  const [wb, setWb] = useState(undefined);
-  const [loading, setLoading] = useState(false);
   const [theme, setTheme] = useLocalStorage(
     THEME_LOCAL_STORAGE_KEY,
     THEME.LIGHT
@@ -60,6 +67,7 @@ function Site(props) {
 
   const applyTheme = (theme) => {
     document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.classList.add(theme);
   };
   useEffect(() => {
     applyTheme(theme);
@@ -69,17 +77,6 @@ function Site(props) {
     setTheme(theme);
   };
 
-  const listTransitions = useTransition(list, {
-    config: config.gentle,
-    from: { opacity: 0, transform: 'translate3d(50%, 0px, 0px)' },
-    enter: { opacity: 1, transform: 'translate3d(0%, 0px, 0px)' },
-    keys: list.map((item, index) => index),
-  });
-  const skip = () => {
-    if (!wb) return;
-    setLoading(true);
-    wb.messageSkipWaiting();
-  };
   /**
    * Toggle the mobile sidebar
    *
@@ -137,7 +134,6 @@ function Site(props) {
           // dynamic load sw
           import('workbox-window/Workbox.mjs').then(({ Workbox }) => {
             const wb = new Workbox('/sw.js');
-            setWb(wb);
 
             // listen to `waiting` event
             wb.addEventListener('waiting', () => {
@@ -146,7 +142,6 @@ function Site(props) {
                 // eslint-disable-next-line
                 "A new service worker has installed, but it can't activate until all tabs running the current version have been unloaded"
               );
-              setList([true]);
             });
 
             // register the service worker
@@ -171,15 +166,73 @@ function Site(props) {
 
   // not to show in sub navbar
   const excludeItems = ['contribute', 'blog'];
+
+  const title = getPageTitle(Content, location.pathname);
+
+  const description =
+    getPageDescription(Content, location.pathname) ||
+    'webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser, yet it is also capable of transforming, bundling, or packaging just about any resource or asset.';
+
+  function isPrintPage(url) {
+    return url.includes('/printable');
+  }
+
+  // As github pages uses trailing slash, we need to provide it to canonicals for consistency
+  // between canonical href and final url served by github pages.
+  function enforceTrailingSlash(url) {
+    return url.replace(/\/?$/, '/');
+  }
+
   return (
-    <MDXProvider
-      components={{
-        Badge: Badge,
-        a: LinkComponent,
-      }}
-    >
+    <MDXProvider components={mdxComponents}>
       <div className="site">
-        <DocumentTitle title={getPageTitle(Content, location.pathname)} />
+        <Helmet>
+          <html lang="en" />
+          <meta charset="utf-8" />
+          <meta name="theme-color" content="#2B3A42" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          {isPrintPage(location.pathname) ? (
+            <meta name="robots" content="noindex,nofollow" />
+          ) : null}
+          <title>{title}</title>
+          <meta name="description" content={description} />
+          <meta property="og:site_name" content="webpack" />
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content={title} />
+          <meta
+            property="og:description"
+            name="description"
+            content={description}
+          />
+          <meta
+            property="og:image"
+            content={`https://webpack.js.org${OgImage}`}
+          />
+          <meta property="twitter:card" content="summary" />
+          <meta property="twitter:site" content="@webpack" />
+          <meta property="twitter:creator" content="@webpack" />
+          <meta property="twitter:domain" content="https://webpack.js.org/" />
+          <link rel="icon" type="image/x-icon" href={Favicon} />
+          {process.env.NODE_ENV === 'production' && (
+            <link rel="manifest" href="/manifest.json" />
+          )}
+          <link
+            rel="canonical"
+            href={`https://webpack.js.org${enforceTrailingSlash(
+              location.pathname
+            )}`}
+          />
+          <meta name="mobile-web-app-capable" content="yes" />
+          <link rel="icon" sizes="192x192" href="/icon_192x192.png" />
+          <link rel="icon" sizes="512x512" href="/icon_512x512.png" />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+          <meta name="apple-mobile-web-app-title" content="webpack" />
+          <link rel="apple-touch-icon" href="/icon_180x180.png" />
+          <link rel="mask-icon" href={Logo} color="#465e69" />
+          <meta name="msapplication-TileImage" content="/icon_150x150.png" />
+          <meta name="msapplication-TileColor" content="#465e69" />
+        </Helmet>
         <div className="site__header">
           <NotificationBar />
           <Navigation
@@ -269,11 +322,6 @@ function Site(props) {
           />
         </Switch>
         <Footer />
-        {listTransitions((styles) => (
-          <animated.div style={styles} className="notifyBox">
-            <NotifyBox skip={skip} loading={loading} />
-          </animated.div>
-        ))}
       </div>
     </MDXProvider>
   );

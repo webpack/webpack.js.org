@@ -32,7 +32,7 @@ T> Options that are compatible with [webpack-dev-middleware](https://github.com/
 
 `object`
 
-This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change its behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory in the project root:
+This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change its behavior in various ways. Here's a rudimentary example that gzips and serves everything from our `dist/` directory in the project root:
 
 **webpack.config.js**
 
@@ -70,6 +70,16 @@ T> If you're having trouble, navigating to the `/webpack-dev-server` route will 
 T> If you want to manually recompile the bundle, navigating to the `/invalidate` route will [invalidate](/api/node/#invalidate-watching) the current compilation of the bundle and recompile it for you via [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate). Depending on your configuration, URL may look like `http://localhost:9000/invalidate`.
 
 T> HTML template is required to serve the bundle, usually it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
+
+### Usage via CLI
+
+You can invoke webpack-dev-server via CLI by:
+
+```bash
+npx webpack serve
+```
+
+A list of CLI options for `serve` is available [here](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS.md)
 
 ## `devServer.after`
 
@@ -129,7 +139,7 @@ module.exports = {
 };
 ```
 
-To use this option with the CLI pass the `--allowed-hosts` option a comma-delimited string.
+To use this option with the CLI pass the `--allowed-hosts` as following:
 
 ```bash
 npx webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com --allowed-hosts host2.com
@@ -185,7 +195,7 @@ npx webpack serve --bonjour
 
 `string = 'info': 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'`
 
-W> `none` and `warning` are going to be deprecated at the next major version.
+W> `silent`, `trace`, `debug`, and `warning` are going to be deprecated at the next major version.
 
 When using _inline mode_, the console in your DevTools will show you messages e.g. before reloading, before an error or when [Hot Module Replacement](/concepts/hot-module-replacement/) is enabled.
 
@@ -582,10 +592,11 @@ With the above setting, a self-signed certificate is used, but you can provide y
 module.exports = {
   //...
   devServer: {
-    https: true,
-    key: fs.readFileSync('/path/to/server.key'),
-    cert: fs.readFileSync('/path/to/server.crt'),
-    ca: fs.readFileSync('/path/to/ca.pem'),
+    https: {
+      key: fs.readFileSync('/path/to/server.key'),
+      cert: fs.readFileSync('/path/to/server.crt'),
+      ca: fs.readFileSync('/path/to/ca.pem'),
+    },
   },
 };
 ```
@@ -619,16 +630,6 @@ module.exports = {
     index: 'index.html',
   },
 };
-```
-
-## `devServer.info` - CLI only
-
-`boolean`
-
-Output cli information. It is enabled by default.
-
-```bash
-npx webpack serve --info false
 ```
 
 ## `devServer.injectClient`
@@ -686,8 +687,10 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-npx webpack serve --inline false
+npx webpack serve --inline
 ```
+
+Notice that there's no way to disable it from CLI.
 
 T> Inline mode is recommended for [Hot Module Replacement](/plugins/hot-module-replacement-plugin/) as it includes an HMR trigger from the websocket. Polling mode can be used as an alternative, but requires an additional entry point, `'webpack/hot/poll?1000'`.
 
@@ -738,8 +741,12 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-npx webpack serve --no-live-reload
+npx webpack serve --liveReload
 ```
+
+Notice that there's no way to disable it from CLI.
+
+W> Live reloading works only with web related [targets](/configuration/target/#string) like `web`, `webworker`, `electron-renderer` and `node-webkit`.
 
 ## `devServer.mimeTypes` 🔑
 
@@ -862,7 +869,8 @@ Specify a page to navigate to when opening the browser.
 module.exports = {
   //...
   devServer: {
-    openPage: '/different/page',
+    open: true,
+    openPage: 'different/page',
   },
 };
 ```
@@ -870,8 +878,10 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-npx webpack serve --open-page /different/page
+npx webpack serve --open --open-page different/page
 ```
+
+W> Do not prepend `/` for the page as webpack-dev-server will do it automatically, otherwise the browser will open urls like `http://localhost:8080//different/page`.
 
 If you wish to specify multiple pages to open in the browser.
 
@@ -881,7 +891,8 @@ If you wish to specify multiple pages to open in the browser.
 module.exports = {
   //...
   devServer: {
-    openPage: ['/different/page1', '/different/page2'],
+    open: true,
+    openPage: ['different/page1', 'different/page2'],
   },
 };
 ```
@@ -889,7 +900,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-npx webpack serve --open-page /different/page1,/different/page2
+npx webpack serve --open --open-page different/page1 --open-page different/page2
 ```
 
 ## `devServer.overlay`
@@ -1258,11 +1269,17 @@ module.exports = {
 };
 ```
 
+Usage via the CLI
+
+```bash
+npx webpack serve --serveIndex
+```
+
 ## `devServer.setup`
 
 `function (app, server)`
 
-W> This option is **deprecated** in favor of [`devServer.before`](#devserverbefore) and will be removed in v3.0.0.
+W> This option is **deprecated** in favor of [`devServer.before`](#devserverbefore) and will be removed in v4.0.0.
 
 Here you can access the Express app object and add your own custom middleware to it.
 For example, to define custom handlers for some paths:
@@ -1508,7 +1525,7 @@ module.exports = {
 Usage via the CLI
 
 ```bash
-npx webpack serve --use-local-ip
+npx webpack serve --useLocalIp
 ```
 
 ## `devServer.watchContentBase`

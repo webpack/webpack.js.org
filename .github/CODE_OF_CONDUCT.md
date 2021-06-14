@@ -1,5 +1,4 @@
-Code of Conduct
----------------
+## Code of Conduct
 
 At webpack and all webpack/webpack-contrib repositories we follow the
 [JSFoundation Code of Conduct][1]. Please adhere to the guidelines there and

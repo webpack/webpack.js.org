@@ -98,7 +98,7 @@ Behavior can be changed with `Rule.parser.requireInclude` to allowed, deprecated
 
 In the early days, webpack's aim was to allow running most Node.js modules in the browser, but the module landscape changed and many module uses are now written mainly for frontend purposes. webpack <= 4 ships with polyfills for many of the Node.js core modules, which are automatically applied once a module uses any of the core modules (i.e. the `crypto` module).
 
-While this makes using modules written for Node.js easy, it adds these huge polyfills to the bundle. In many cases these polyfills are unnecessary.
+While this makes using modules written for Node.js easier, it adds these huge polyfills to the bundle. In many cases these polyfills are unnecessary.
 
 webpack 5 stops automatically polyfilling these core modules and focus on frontend-compatible modules. Our goal is to improve compatibility with the web platform, where Node.js core modules are not available.
 
@@ -253,7 +253,7 @@ Webpack 5 allows to pass a list of targets and also support versions of target.
 
 Examples: `target: "node14"` `target: ["web", "es2020"]`
 
-This is a simple way to provide webpack all the information it needs to determine:
+This enables us to provide webpack all the information it needs to determine:
 
 - chunk loading mechanism, and
 - supported syntax like arrow functions
@@ -287,7 +287,7 @@ This is now disabled by default (`activeModules` option). This also reduces the 
 Now writing to stderr during building modules is throttled to 500ms.
 
 The profiling mode also got an upgrade and will display timings of nested progress messages.
-This makes it easier to figure out while plugin is causing performance problems.
+This makes it easier to figure out which plugin is causing performance problems.
 
 A newly added `percentBy`-option tells `ProgressPlugin` how to calculate progress percentage.
 

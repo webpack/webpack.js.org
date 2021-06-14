@@ -46,7 +46,7 @@ new webpack.optimize.CommonsChunkPlugin(options);
   minChunks: number|Infinity|function(module, count) => boolean,
   // The minimum number of chunks which need to contain a module before it's moved into the commons chunk.
   // The number must be greater than or equal 2 and lower than or equal to the number of chunks.
-  // Passing `Infinity` just creates the commons chunk, but moves no modules into it.
+  // Passing `Infinity` creates the commons chunk, but moves no modules into it.
   // By providing a `function` you can add custom logic. (Defaults to the number of chunks)
 
   chunks: string[],

@@ -172,6 +172,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
     }
     &.tip,
     &.warning,
+    &.preview,
     &.todo {
       border-left-width: 3px;
       border-left-style: solid;
@@ -186,6 +187,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
 
       > .tip__prefix,
       > .warning__prefix,
+      > .preview__prefix,
       > .todo__prefix {
         text-transform: capitalize;
         font-weight: 700;
@@ -204,6 +206,12 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
       background-color: #fdf5d8;
       color: #716b53;
       border-left-color: darken(#fdf5d8, 40%);
+    }
+
+    &.preview {
+      background-color: #f2f2f2;
+      color: #716b53;
+      border-left-color: #1e72b3;
     }
 
     &.todo {
@@ -372,14 +380,13 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
         cursor: pointer;
 
         &::after {
-          content: '\F103';
+          content: '›';
           float: left;
           position: relative;
           left: -2px;
-          top: 2px;
           text-align: center;
-          font-family: icons;
           color: lighten(getColor(denim), 10%);
+          font-size: 16px;
         }
       }
 

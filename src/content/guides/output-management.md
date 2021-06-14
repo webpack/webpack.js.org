@@ -182,20 +182,13 @@ If you want to learn more about all the features and options that the `HtmlWebpa
 
 As you might have noticed over the past guides and code example, our `/dist` folder has become quite cluttered. Webpack will generate the files and put them in the `/dist` folder for you, but it doesn't keep track of which files are actually in use by your project.
 
-In general it's good practice to clean the `/dist` folder before each build, so that only used files will be generated. Let's take care of that.
-
-A popular plugin to manage this is the [`clean-webpack-plugin`](https://www.npmjs.com/package/clean-webpack-plugin) so let's install and configure it.
-
-```bash
-npm install --save-dev clean-webpack-plugin
-```
+In general it's good practice to clean the `/dist` folder before each build, so that only used files will be generated. Let's take care of that with [`output.clean`](/configuration/output/#outputclean) option.
 
 **webpack.config.js**
 
 ```diff
  const path = require('path');
  const HtmlWebpackPlugin = require('html-webpack-plugin');
-+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
  module.exports = {
    entry: {
@@ -203,7 +196,6 @@ npm install --save-dev clean-webpack-plugin
      print: './src/print.js',
    },
    plugins: [
-+    new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({
        title: 'Output Management',
      }),
@@ -211,6 +203,7 @@ npm install --save-dev clean-webpack-plugin
    output: {
      filename: '[name].bundle.js',
      path: path.resolve(__dirname, 'dist'),
++    clean: true,
    },
  };
 ```
@@ -221,7 +214,7 @@ Now run an `npm run build` and inspect the `/dist` folder. If everything went we
 
 You might be wondering how webpack and its plugins seem to "know" what files are being generated. The answer is in the manifest that webpack keeps to track how all the modules map to the output bundles. If you're interested in managing webpack's [`output`](/configuration/output) in other ways, the manifest would be a good place to start.
 
-The manifest data can be extracted into a json file for easy consumption using the [`WebpackManifestPlugin`](https://github.com/shellscape/webpack-manifest-plugin).
+The manifest data can be extracted into a json file for consumption using the [`WebpackManifestPlugin`](https://github.com/shellscape/webpack-manifest-plugin).
 
 We won't go through a full example of how to use this plugin within your projects, but you can read up on [the concept page](/concepts/manifest) and the [caching guide](/guides/caching) to find out how this ties into long term caching.
 

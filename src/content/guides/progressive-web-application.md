@@ -19,7 +19,7 @@ This section will focus on adding an offline experience to our app. We'll achiev
 
 So far, we've been viewing the output by going directly to the local file system. Typically though, a real user accesses a web app over a network; their browser talking to a **server** which will serve up the required assets (e.g. `.html`, `.js`, and `.css` files).
 
-So let's test what the current experience is like using a simple server. Let's use the [http-server](https://www.npmjs.com/package/http-server) package: `npm install http-server --save-dev`. We'll also amend the `scripts` section of our `package.json` to add in a `start` script:
+So let's test what the current experience is like using a server with more basic features. Let's use the [http-server](https://www.npmjs.com/package/http-server) package: `npm install http-server --save-dev`. We'll also amend the `scripts` section of our `package.json` to add in a `start` script:
 
 **package.json**
 
@@ -67,7 +67,6 @@ npm install workbox-webpack-plugin --save-dev
 ```diff
   const path = require('path');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
-  const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 + const WorkboxPlugin = require('workbox-webpack-plugin');
 
   module.exports = {
@@ -76,8 +75,6 @@ npm install workbox-webpack-plugin --save-dev
       print: './src/print.js',
     },
     plugins: [
-      // new CleanWebpackPlugin(['dist/*']) for < v2 versions of CleanWebpackPlugin
-      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
 -       title: 'Output Management',
 +       title: 'Progressive Web Application',
@@ -92,6 +89,7 @@ npm install workbox-webpack-plugin --save-dev
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
     },
   };
 ```

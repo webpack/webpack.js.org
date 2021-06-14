@@ -41,7 +41,7 @@ Now we'll modify the directory structure & the configuration files:
 
 **tsconfig.json**
 
-Let's set up a simple configuration to support JSX and compile TypeScript down to ES5...
+Let's set up a configuration to support JSX and compile TypeScript down to ES5...
 
 ```json
 {
@@ -51,7 +51,8 @@ Let's set up a simple configuration to support JSX and compile TypeScript down t
     "module": "es6",
     "target": "es5",
     "jsx": "react",
-    "allowJs": true
+    "allowJs": true,
+    "moduleResolution": "node",
   }
 }
 ```
@@ -138,7 +139,8 @@ To enable source maps, we must configure TypeScript to output inline source maps
       "module": "commonjs",
       "target": "es5",
       "jsx": "react",
-      "allowJs": true
+      "allowJs": true,
+      "moduleResolution": "node",
     }
   }
 ```
