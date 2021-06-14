@@ -198,7 +198,11 @@ npx webpack serve --bonjour
 
 `string = 'info': 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'`
 
+<<<<<<< HEAD
 W> `none` 和 `warning` 将在下一个主要版本中弃用。
+=======
+W> `silent`, `trace`, `debug`, and `warning` are going to be deprecated at the next major version.
+>>>>>>> d0a07a3f512d238ac81dd3879200e5b37803c912
 
 当使用 _inline mode_ 时， DevTools 会输出信息，例如：重新加载之前，出错之前或 [Hot Module Replacement](/concepts/hot-module-replacement/) 被开启时。
 

@@ -7,6 +7,9 @@ contributors:
   - EugeneHlushko
   - jamesgeorge007
   - ScriptedAlchemy
+  - snitin315
+  - XiaofengXie16
+
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
@@ -43,6 +46,7 @@ chunk 的加载操作通常是通过调用 `import()` 实现的，但也支持�
 
 容器可以嵌套使用，容器可以使用来自其他容器的模块。容器之间也可以循环依赖。
 
+<<<<<<< HEAD
 ### 重载（Overriding） {#overriding}
 
 容器能够将选定的本地模块标记为“可重载”。容器的使用者能够提供“重载”，即替换容器中的一个“可重载”的模块。当使用者提供重载模块时，容器的所有模块将使用替换模块而非本地模块。当使用者不提供替换模块时，容器的所有模块将使用本地模块。
@@ -63,6 +67,9 @@ W> 当嵌套使用时，向容器提供重载将自动覆盖嵌套容器中具�
 必须在容器模块加载之前提供重载。在初始 chunk 中使用的重载只能被不使用 Promise 的同步模块重载。一旦执行，就不可再次被重载。
 
 ## 高级概念 {#high-level-concepts}
+=======
+## High-level concepts
+>>>>>>> d0a07a3f512d238ac81dd3879200e5b37803c912
 
 每个构建都充当一个容器，也可将其他构建作为容器。通过这种方式，每个构建都能够通过从对应容器中加载模块来访问其他容器暴露出来的模块。
 
@@ -72,6 +79,7 @@ packageName 选项允许通过设置包名来查找所需的版本。默认情�
 
 ## 构建块(Building blocks) {#building-blocks}
 
+<<<<<<< HEAD
 ### `OverridablesPlugin` (底层 API) {#overridablesplugin-low-level}
 
 这个插件使得特定模块“可重载”。一个本地 API ( `__webpack_override__` ) 允许提供重载。
@@ -104,6 +112,11 @@ __webpack_override__({
 ### `ContainerPlugin` (底层 API) {#containerplugin-low-level}
 
 该插件使用指定的公开模块来创建一个额外的容器入口。它还会在内部使用 OverridablesPlugin，并向容器的使用者暴露 `override` API。
+=======
+### `ContainerPlugin` (low level)
+
+This plugin creates an additional container entry with the specified exposed modules.
+>>>>>>> d0a07a3f512d238ac81dd3879200e5b37803c912
 
 ### `ContainerReferencePlugin` (底层 API) {#containerreferenceplugin-low-level}
 
@@ -111,7 +124,11 @@ __webpack_override__({
 
 ### `ModuleFederationPlugin` （高级 API）{#modulefederationplugin-high-level}
 
+<<<<<<< HEAD
 该插件组合了 `ContainerPlugin` 和 `ContainerReferencePlugin`。重载（overrides）和可重载（overridables）被合并到指定共享模块的单个列表中。
+=======
+[`ModuleFederationPlugin`](/plugins/module-federation-plugin) combines `ContainerPlugin` and `ContainerReferencePlugin`.
+>>>>>>> d0a07a3f512d238ac81dd3879200e5b37803c912
 
 ## 概念目标 {#concept-goals}
 

@@ -1,3 +1,4 @@
 dist/
+examples/
 src/content/loaders/_*.md
 src/content/plugins/_*.md

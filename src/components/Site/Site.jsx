@@ -27,6 +27,7 @@ import Page from '../Page/Page';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Vote from '../Vote/Vote';
 import Badge from '../Badge/Badge.js';
+import StackBlitzPreview from '../StackBlitzPreview/StackBlitzPreview';
 import { default as LinkComponent } from '../mdxComponents/Link';
 import { Helmet } from 'react-helmet-async';
 
@@ -47,6 +48,7 @@ import { useLocalStorage } from 'react-use';
 
 const mdxComponents = {
   Badge: Badge,
+  StackBlitzPreview: StackBlitzPreview,
   a: LinkComponent,
 };
 
@@ -226,7 +228,9 @@ function Site(props) {
             content="webpack5, webpack, webpack 中文文档, webpack 官方中文, webpack 5 官方中文, 印记中文, docschina, docschina.org, webpack.docschina.org, doc.react-china.org, nodejs.cn, vue.docschina.org, babel.docschina.org, parceljs.docschina.org, rollup.docschina.org, koajs.docschina.org"
           ></meta>
           <link rel="icon" type="image/x-icon" href={Favicon} />
-          <link rel="manifest" href="/manifest.json" />
+          {process.env.NODE_ENV === 'production' && (
+            <link rel="manifest" href="/manifest.json" />
+          )}
           <link
             rel="canonical"
             href={`https://webpack.docschina.org${enforceTrailingSlash(

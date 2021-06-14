@@ -75,19 +75,23 @@ npx webpack init ./my-app --force --template=default
 
 #### 配置 {#options}
 
-**`--template`**
+**`-t`, `--template`**
 
 `string = 'default'`
 
 要生成的模板名称。
 
-**`--force`**
+**`-f`, `--force`**
 
 `boolean`
 
 生成项目时不启用选项模式。当为 `true` 时，所有命令行选项使用默认值。
 
+<<<<<<< HEAD
 T> 点击 [这里](https://github.com/webpack/webpack-cli/blob/master/INIT.md) 获取 webpack init 命令的完整文档。
+=======
+T> See the [full documentation of `webpack init` command](https://github.com/webpack/webpack-cli/blob/master/packages/generators/INIT.md).
+>>>>>>> d0a07a3f512d238ac81dd3879200e5b37803c912
 
 ### Info {#info}
 
@@ -105,7 +109,7 @@ npx webpack info --output=json
 
 #### info 配置项 {#optionsforinfo}
 
-**`--output`**
+**`-o`, `--output`**
 
 `string : 'json' | 'markdown'`
 

@@ -15,6 +15,9 @@ const Footer = () => (
         <Link className="footer__link" to="/comparison/">
           对比
         </Link>
+        <Link className="footer__link" to="https://privacy-policy.openjsf.org/">
+          Privacy Policy
+        </Link>
       </section>
 
       <section className="footer__middle">
