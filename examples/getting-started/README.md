@@ -5,7 +5,7 @@
 Run the following commands in the root directory.
 
 ```bash
-❯ npm install
-❯ npm run build
-❯ npm run serve
+npm install
+npm run build
+npm run serve
 ```

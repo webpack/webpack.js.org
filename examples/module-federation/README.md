@@ -5,8 +5,8 @@
 Run the following commands in the root directory.
 
 ```bash
-❯ npm install
-❯ npm start
+yarn
+yarn start
 ```
 
 Both `app1` and `app2` are independently deployed apps:
