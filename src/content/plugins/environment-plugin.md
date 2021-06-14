@@ -1,5 +1,6 @@
 ---
 title: EnvironmentPlugin
+group: webpack
 contributors:
   - simon04
   - einarlove

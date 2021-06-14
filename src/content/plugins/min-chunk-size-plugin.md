@@ -1,5 +1,6 @@
 ---
 title: MinChunkSizePlugin
+group: webpack
 contributors:
   - byzyk
   - erykpiast

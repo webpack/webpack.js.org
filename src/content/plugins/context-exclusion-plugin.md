@@ -1,5 +1,6 @@
 ---
 title: ContextExclusionPlugin
+group: webpack
 contributors:
   - jeffin
 ---

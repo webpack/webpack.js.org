@@ -1,5 +1,6 @@
 ---
 title: BannerPlugin
+group: webpack
 contributors:
   - simon04
   - byzyk
