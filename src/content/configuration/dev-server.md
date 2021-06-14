@@ -198,7 +198,7 @@ npx webpack serve --bonjour
 
 `string = 'info': 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'`
 
-W> `none` 和 `warning` 将在下一个主要版本中弃用。
+W> `silent`、`trace`、`debug` 和 `warning` 将在下一个主要版本中弃用。
 
 当使用 _inline mode_ 时， DevTools 会输出信息，例如：重新加载之前，出错之前或 [Hot Module Replacement](/concepts/hot-module-replacement/) 被开启时。
 
@@ -329,7 +329,7 @@ module.exports = {
 
 `boolean`
 
-当将此项配置设置为 `true` 时，将会跳过 host 检查。**这是不推荐的**因为不检查host的应用容易受到DNS重新绑定攻击。
+当将此项配置设置为 `true` 时，将会跳过 host 检查。**这是不推荐的**因为不检查 host 的应用容易受到 DNS 重新绑定攻击。
 
 **webpack.config.js**
 
@@ -564,7 +564,7 @@ module.exports = {
 npx webpack serve --http2
 ```
 
-要通过CLI使用自己的证书，请使用以下选项
+要通过 CLI 使用自己的证书，请使用以下选项
 
 ```bash
 npx webpack serve --http2 --key ./path/to/server.key --cert ./path/to/server.crt --cacert ./path/to/ca.pem
@@ -574,7 +574,7 @@ npx webpack serve --http2 --key ./path/to/server.key --cert ./path/to/server.crt
 
 `boolean` `object`
 
-默认情况下，开发服务器将通过HTTP提供服务。可以选择使用HTTPS通过HTTP/2提供服务：
+默认情况下，开发服务器将通过 HTTP 提供服务。可以选择使用 HTTPS 通过 HTTP/2 提供服务：
 
 **webpack.config.js**
 
@@ -672,9 +672,9 @@ W> 使用前请确保 [`devServer.hot`](#devserverhot) 的值设置为 `true`，
 
 `boolean`
 
-在开发服务器的两种不同模式之间切换。默认情况下，应用程序将启用 __inline模式__。这意味着将在 bundle 中插入脚本以进行实时重新加载，并且构建消息将出现在浏览器控制台中。
+在开发服务器的两种不同模式之间切换。默认情况下，应用程序将启用 **inline 模式**。这意味着将在 bundle 中插入脚本以进行实时重新加载，并且构建消息将出现在浏览器控制台中。
 
-也可以使用 **iframe模式**，它在通知栏下使用带有有关构建消息的`<iframe>`。 切换到 **iframe模式**：
+也可以使用 **iframe 模式**，它在通知栏下使用带有有关构建消息的`<iframe>`。 切换到 **iframe 模式**：
 
 **webpack.config.js**
 
@@ -701,7 +701,7 @@ T> 对于 [Hot Module Replacement](/plugins/hot-module-replacement-plugin/) ，�
 
 `boolean`
 
-启用 `devServer.lazy` 时，开发服务器仅在收到请求时才编译捆绑软件。 这意味着webpack将不会监视任何文件更改。 我们称这种方式为“懒惰模式(**lazy mode**)”。
+启用 `devServer.lazy` 时，开发服务器仅在收到请求时才编译捆绑软件。 这意味着 webpack 将不会监视任何文件更改。 我们称这种方式为“懒惰模式(**lazy mode**)”。
 
 **webpack.config.js**
 
@@ -755,7 +755,7 @@ W> 热更新只适用于 web 相关的 [targets](/configuration/target/#string)�
 
 `object`
 
-允许 dev-server 注册自定义的mime类型。
+允许 dev-server 注册自定义的 mime 类型。
 该对象被传递到底层的 `webpack-dev-middleware`。
 有关使用说明，请参见 [documentation](https://github.com/webpack/webpack-dev-middleware#mimetypes) 。
 
@@ -858,7 +858,7 @@ module.exports = {
 npx webpack serve --open 'Google Chrome'
 ```
 
-T> 浏览器应用程序名称取决于平台。 不要在可重用模块中对其进行硬编码。 例如，`'Chrome'` 在macOS上是 `'Google Chrome'` ，在Linux上是 `'Google Chrome'` 在Windows上是 `'Chrome'` 。
+T> 浏览器应用程序名称取决于平台。 不要在可重用模块中对其进行硬编码。 例如，`'Chrome'` 在 macOS 上是 `'Google Chrome'` ，在 Linux 上是 `'Google Chrome'` 在 Windows 上是 `'Chrome'` 。
 
 ## `devServer.openPage` {#devserveropenpage}
 
@@ -943,7 +943,7 @@ module.exports = {
 
 `string`
 
-通过CLI使用时，是SSL .pfx文件的路径。 如果在选项中使用，则它应该是.pfx文件的字节流。
+通过 CLI 使用时，是 SSL .pfx 文件的路径。 如果在选项中使用，则它应该是.pfx 文件的字节流。
 
 **webpack.config.js**
 
@@ -966,7 +966,7 @@ npx webpack serve --pfx ./path/to/file.pfx
 
 `string`
 
-将密码短语转换为SSL PFX文件。
+将密码短语转换为 SSL PFX 文件。
 
 **webpack.config.js**
 
@@ -1012,7 +1012,7 @@ npx webpack serve --port 8080
 
 `object` `[object, function]`
 
-当拥有单独的API后端开发服务器并且希望在同一域上发送API请求时，代理某些URL可能会很有用。
+当拥有单独的 API 后端开发服务器并且希望在同一域上发送 API 请求时，代理某些 URL 可能会很有用。
 
 开发服务器使用功能强大的 [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) 软件包。 查看其 [documentation](https://github.com/chimurai/http-proxy-middleware#options) 了解更多高级用法。 请注意，`http-proxy-middleware` 的某些功能不需要`target`键，例如 它的 `router` 功能，但是仍然需要在此处的配置中包含`target`，否则`webpack-dev-server` 不会将其传递给 `http-proxy-middleware`）。
 
@@ -1074,7 +1074,7 @@ module.exports = {
 在该功能中，可以访问请求，响应和代理选项。
 
 - 返回 `null` 或 `undefined` 以继续使用代理处理请求。
-- 返回 `false` 会为请求产生404错误。
+- 返回 `false` 会为请求产生 404 错误。
 - 返回提供服务的路径，而不是继续代理请求。
 
 例如。 对于浏览器请求，想要提供 HTML 页面，但是对于 API 请求，想要代理它。 可以执行以下操作：
@@ -1169,7 +1169,7 @@ npx webpack serve --progress
 
 `string`
 
-使用 _inline模式_ 并代理 dev-server 时，内联客户端脚本并不总是知道要连接到哪里。 它将尝试基于 `window.location` 猜测服务器的 URL，但是如果失败，则需要使用它。
+使用 _inline 模式_ 并代理 dev-server 时，内联客户端脚本并不总是知道要连接到哪里。 它将尝试基于 `window.location` 猜测服务器的 URL，但是如果失败，则需要使用它。
 
 例如，开发服务器由 nginx 代理，并在 `myapp.test` 上可用：
 
@@ -1215,7 +1215,7 @@ module.exports = {
 
 T> 确保 `devServer.publicPath` 始终以正斜杠开头和结尾。
 
-也可以使用完整的URL。
+也可以使用完整的 URL。
 
 **webpack.config.js**
 
@@ -1236,7 +1236,7 @@ T> 建议 `devServer.publicPath` 与 [`output.publicPath`](/configuration/output
 
 `boolean`
 
-启用 `devServer.quiet` 后，除了初始启动信息外，什么都不会写入控制台。 这也意味着来自webpack的错误或警告是不可见的。
+启用 `devServer.quiet` 后，除了初始启动信息外，什么都不会写入控制台。 这也意味着来自 webpack 的错误或警告是不可见的。
 
 **webpack.config.js**
 
@@ -1261,7 +1261,7 @@ npx webpack serve --quiet
 
 告诉开发服务器启用后使用 [`serveIndex`](https://github.com/expressjs/serve-index) 中间件。
 
-[`serveIndex`](https://github.com/expressjs/serve-index) 中间件会在查看没有index.html文件的目录时生成目录列表。
+[`serveIndex`](https://github.com/expressjs/serve-index) 中间件会在查看没有 index.html 文件的目录时生成目录列表。
 
 ```javascript
 module.exports = {
@@ -1407,7 +1407,7 @@ T> 与 `quiet` 或 `noInfo` 一起使用时，该选项无效。
 
 `boolean`
 
-当stdin结束时，此选项将关闭服务器。
+当 stdin 结束时，此选项将关闭服务器。
 
 ```bash
 npx webpack serve --stdin
@@ -1419,13 +1419,13 @@ npx webpack serve --stdin
 
 W> `transportMode` 是一个实验性选项，这意味着其用法可能会更改，而不会发出警告。
 
-T> 将字符串提供给d `devServer.transportMode` 是将 `devServer.transportMode.client` 和 `devServer.transportMode.server` 都设置为给定字符串值的快捷方式。
+T> 将字符串提供给 d `devServer.transportMode` 是将 `devServer.transportMode.client` 和 `devServer.transportMode.server` 都设置为给定字符串值的快捷方式。
 
 这个选项允许我们要么为客户端/服务器分别选择当前的`devServer`传输模式，要么提供定制的客户端/服务器实现。 这允许指定浏览器或其他客户端如何与`devServer`通信。
 
 当前的默认模式是 [`'sockjs'`](https://www.npmjs.com/package/sockjs)。 此模式使用 [SockJS-node](https://github.com/sockjs/sockjs-node) 作为服务器，并使用 [SockJS-client](https://www.npmjs.com/package/sockjs-client) 在客户端上。
 
-在下一代主要的 `devServer` 版本中，`'ws'` 模式将成为默认模式。 此模式将 [ws](https://www.npmjs.com/package/ws) 用作服务器，并在客户端上使用本机  WebSocket。
+在下一代主要的 `devServer` 版本中，`'ws'` 模式将成为默认模式。 此模式将 [ws](https://www.npmjs.com/package/ws) 用作服务器，并在客户端上使用本机 WebSocket。
 
 Use `'ws'` mode:
 
@@ -1446,7 +1446,7 @@ T> 提供自定义客户端和服务器实现时，请确保它们彼此兼容�
 
 要创建自定义客户端实现，请创建一个扩展并继承 [`BaseClient`](https://github.com/webpack/webpack-dev-server/blob/master/client-src/clients/BaseClient.js).
 
-使用`CustomServer.js`导出的类实现自定义WebSocket客户端并兼容`ws`服务端：
+使用`CustomServer.js`导出的类实现自定义 WebSocket 客户端并兼容`ws`服务端：
 
 ```javascript
 module.exports = {
@@ -1466,7 +1466,7 @@ module.exports = {
 
 要创建自定义服务器实现，请创建一个扩展并继承 [`BaseServer`](https://github.com/webpack/webpack-dev-server/blob/master/lib/servers/BaseServer.js).
 
-使用`CustomServer.js`导出的类实现自定义WebSocket服务器并兼容`ws`客户端：
+使用`CustomServer.js`导出的类实现自定义 WebSocket 服务器并兼容`ws`客户端：
 
 ```javascript
 module.exports = {
@@ -1480,7 +1480,7 @@ module.exports = {
 };
 ```
 
-使用 `CustomServer.js` 导出的类实现自定义WebSocket服务器并兼容 `ws` 客户端：
+使用 `CustomServer.js` 导出的类实现自定义 WebSocket 服务器并兼容 `ws` 客户端：
 
 ```javascript
 module.exports = {
@@ -1494,7 +1494,7 @@ module.exports = {
 };
 ```
 
-使用自定义兼容的WebSocket客户端和服务器实现：
+使用自定义兼容的 WebSocket 客户端和服务器实现：
 
 ```javascript
 module.exports = {
@@ -1512,7 +1512,7 @@ module.exports = {
 
 `boolean`
 
-此选项使浏览器可以使用的本地IP打开。
+此选项使浏览器可以使用的本地 IP 打开。
 
 **webpack.config.js**
 

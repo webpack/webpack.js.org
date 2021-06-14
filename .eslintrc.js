@@ -31,6 +31,7 @@ module.exports = {
       extends: ['plugin:mdx/recommended'],
       globals: {
         Badge: true,
+        StackBlitzPreview: true,
       },
       rules: {
         semi: ['off'],
