@@ -9,6 +9,7 @@ src/**/_*.md
 npm-debug.log
 yarn-error.log
 package-lock.json
+!examples/**/package-lock.json
 .cache
 internal-links.tap
 stats.json
