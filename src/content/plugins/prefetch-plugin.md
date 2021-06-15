@@ -1,5 +1,6 @@
 ---
 title: PrefetchPlugin
+group: webpack
 contributors:
   - skipjack
   - byzyk

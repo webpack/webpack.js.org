@@ -1,5 +1,6 @@
 ---
 title: ModuleConcatenationPlugin
+group: webpack
 contributors:
   - skipjack
   - TheLarkInn

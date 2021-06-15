@@ -1,5 +1,6 @@
 ---
 title: HotModuleReplacementPlugin
+group: webpack
 contributors:
   - skipjack
   - byzyk

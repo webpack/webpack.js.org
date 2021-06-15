@@ -1,5 +1,6 @@
 ---
 title: ProgressPlugin
+group: webpack
 contributors:
   - elliottsj
   - EugeneHlushko
