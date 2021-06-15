@@ -215,28 +215,29 @@ module.exports = {
       name: 'host',
       remotes: {
         app1: `promise new Promise(resolve => {
-      let remote
       const urlParams = new URLSearchParams(window.location.search)
       const version = urlParams.get('app1VersionParam')
       // This part depends on how you plan on hosting and versioning your federated modules
       const remoteUrlWithVersion = 'https://localhost:3001/' + version + '/remoteEntry.js'
-      try {
-        remote = require(remoteUrlWithVersion)['app1']
-      } catch (e) {
-        delete require.cache[remoteUrlWithVersion]
-        remote = require(remoteUrlWithVersion)['app1']
-      }
-      const proxy = {
-        get: (request) => remote.get(request),
-        init: (arg) => {
-          try {
-            return remote.init(arg)
-          } catch(e) {
-            console.log('remote container already initialized')
+      const script = document.createElement('script')
+      script.src = remoteUrlWithVersion
+      script.onload = () => {
+        // the injected script has loaded and is available on window
+        // we can now resolve this Promise
+        const proxy = {
+          get: (request) => window.app1.get(request),
+          init: (arg) => {
+            try {
+              return window.app1.init(arg)
+            } catch(e) {
+              console.log('remote container already initialized')
+            }
           }
         }
+        resolve(proxy)
       }
-      resolve(proxy)
+      // inject this script with the src set to the versioned remoteEntry.js
+      document.head.appendChild(script);
     })
     `,
       },
