@@ -1,5 +1,6 @@
 ---
 title: IgnorePlugin
+group: webpack
 contributors:
   - simon04
   - byzyk

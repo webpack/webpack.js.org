@@ -27,6 +27,7 @@ import Page from '../Page/Page';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Vote from '../Vote/Vote';
 import Badge from '../Badge/Badge.js';
+import StackBlitzPreview from '../StackBlitzPreview/StackBlitzPreview';
 import { default as LinkComponent } from '../mdxComponents/Link';
 import { Helmet } from 'react-helmet-async';
 
@@ -47,6 +48,7 @@ import { useLocalStorage } from 'react-use';
 
 const mdxComponents = {
   Badge: Badge,
+  StackBlitzPreview: StackBlitzPreview,
   a: LinkComponent,
 };
 
@@ -211,7 +213,9 @@ function Site(props) {
           <meta property="twitter:creator" content="@webpack" />
           <meta property="twitter:domain" content="https://webpack.js.org/" />
           <link rel="icon" type="image/x-icon" href={Favicon} />
-          <link rel="manifest" href="/manifest.json" />
+          {process.env.NODE_ENV === 'production' && (
+            <link rel="manifest" href="/manifest.json" />
+          )}
           <link
             rel="canonical"
             href={`https://webpack.js.org${enforceTrailingSlash(

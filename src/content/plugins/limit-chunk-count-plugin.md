@@ -1,5 +1,6 @@
 ---
 title: LimitChunkCountPlugin
+group: webpack
 contributors:
   - rouzbeh84
   - skipjack

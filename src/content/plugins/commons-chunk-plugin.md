@@ -1,5 +1,6 @@
 ---
 title: CommonsChunkPlugin
+group: webpack
 contributors:
   - bebraw
   - simon04

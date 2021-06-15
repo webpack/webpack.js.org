@@ -70,19 +70,19 @@ Location of where to generate the configuration. Defaults to `process.cwd()`.
 
 #### Options
 
-**`--template`**
+**`-t`, `--template`**
 
 `string = 'default'`
 
 Name of template to generate.
 
-**`--force`**
+**`-f`, `--force`**
 
 `boolean`
 
 To generate a project without questions. When enabled, default answer for each question will be used.
 
-T> Click [here](https://github.com/webpack/webpack-cli/blob/master/INIT.md) to see the full documentation of webpack init command.
+T> See the [full documentation of `webpack init` command](https://github.com/webpack/webpack-cli/blob/master/packages/generators/INIT.md).
 
 ### Info
 
@@ -100,7 +100,7 @@ npx webpack info --output=json
 
 #### Options for info
 
-**`--output`**
+**`-o`, `--output`**
 
 `string : 'json' | 'markdown'`
 

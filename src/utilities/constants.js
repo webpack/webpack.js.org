@@ -28,6 +28,7 @@ const excludedPlugins = [
   'webpack-contrib/babel-minify-webpack-plugin',
   'webpack-contrib/uglifyjs-webpack-plugin',
   'webpack-contrib/zopfli-webpack-plugin',
+  'webpack-contrib/closure-webpack-plugin',
 ];
 
 module.exports = {

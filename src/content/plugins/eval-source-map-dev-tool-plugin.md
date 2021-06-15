@@ -1,5 +1,6 @@
 ---
 title: EvalSourceMapDevToolPlugin
+group: webpack
 contributors:
   - johnnyreilly
   - simon04
