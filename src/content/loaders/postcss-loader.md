@@ -115,20 +115,12 @@ module.exports = {
 
 ## 选项 {#options}
 
-<<<<<<< HEAD
 |                名称                 |         类型         |          默认值           | 描述                                      |
 | :---------------------------------: | :------------------: | :-----------------------: | :---------------------------------------- |
 |        [`execute`](#execute)        |     `{Boolean}`      |        `undefined`        | 在 `CSS-in-JS` 中启动 PostCSS Parser 支持 |
 | [`postcssOptions`](#postcssoptions) | `{Object\|Function}` | `Postcss.process的默认值` | 设置 `PostCSS` 选项与插件                 |
 |      [`sourceMap`](#sourcemap)      |     `{Boolean}`      |    `compiler.devtool`     | 开启 / 关闭 source map 的生成             |
-=======
-|                Name                 |         Type         |                Default                | Description                                  |
-| :---------------------------------: | :------------------: | :-----------------------------------: | :------------------------------------------- |
-|        [`execute`](#execute)        |     `{Boolean}`      |              `undefined`              | Enable PostCSS Parser support in `CSS-in-JS` |
-| [`postcssOptions`](#postcssoptions) | `{Object\|Function}` | `defaults values for Postcss.process` | Set `PostCSS` options and plugins            |
-|      [`sourceMap`](#sourcemap)      |     `{Boolean}`      |          `compiler.devtool`           | Enables/Disables generation of source maps   |
-| [`implementation`](#implementation) | `{Function\|String}` |               `postcss`               | Setup PostCSS implementation to use          |
->>>>>>> 36213856d02a28037a420823ef06aac0b045a3ee
+| [`implementation`](#implementation) | `{Function\|String}` |               `postcss`               | 为 PostCSS 设置对应实现并使用          |
 
 ### `execute`
 
@@ -593,18 +585,14 @@ module.exports = {
 
 ### `implementation` {#implementation}
 
-<<<<<<< HEAD
 类型：`Function | String`
-=======
-Type: `Function | String`
-Default: `postcss`
->>>>>>> 36213856d02a28037a420823ef06aac0b045a3ee
+默认值：`postcss`
 
 特殊的 `implementation` 选项决定使用 PostCSS 哪个实现。重载本地安装的 `postcss` 的 `peerDependency` 版本。
 
-**此选项只对下游的工具作者有效，以便于 PostCSS 7 到 PostCSS 8 的过渡。**
+**此选项只对底层工具的作者有效，以便于 PostCSS 7 到 PostCSS 8 的过渡。**
 
-#### Function
+#### Function {#function}
 
 **webpack.config.js**
 
