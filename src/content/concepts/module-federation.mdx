@@ -9,6 +9,7 @@ contributors:
   - ScriptedAlchemy
   - snitin315
   - XiaofengXie16
+  - KyleBastien
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
@@ -146,6 +147,66 @@ loadComponent('abtests', 'test123');
 ```
 
 [See full implementation](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)
+
+## Promise Based Dynamic Remotes
+
+Generally, remotes are configured using URL's like in this example:
+
+```js
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'host',
+      remotes: {
+        app1: 'app1@http://localhost:3001/remoteEntry.js',
+      },
+    }),
+  ],
+};
+```
+
+But you can also pass in a promise to this remote, which will be resolved at runtime. You should resolve this promise with any module that fits the `get/init` interface described above. For example, if you wanted to pass in which version of a federated module you should use, via a query parameter you could do something like the following:
+
+```js
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'host',
+      remotes: {
+        app1: `promise new Promise(resolve => {
+      const urlParams = new URLSearchParams(window.location.search)
+      const version = urlParams.get('app1VersionParam')
+      // This part depends on how you plan on hosting and versioning your federated modules
+      const remoteUrlWithVersion = 'http://localhost:3001/' + version + '/remoteEntry.js'
+      const script = document.createElement('script')
+      script.src = remoteUrlWithVersion
+      script.onload = () => {
+        // the injected script has loaded and is available on window
+        // we can now resolve this Promise
+        const proxy = {
+          get: (request) => window.app1.get(request),
+          init: (arg) => {
+            try {
+              return window.app1.init(arg)
+            } catch(e) {
+              console.log('remote container already initialized')
+            }
+          }
+        }
+        resolve(proxy)
+      }
+      // inject this script with the src set to the versioned remoteEntry.js
+      document.head.appendChild(script);
+    })
+    `,
+      },
+      // ...
+    }),
+  ],
+};
+```
+
+Note that when using this API you _have_ to resolve an object which contains the get/init API.
 
 ## Dynamic Public Path
 
