@@ -119,7 +119,7 @@ $ npm install @squoosh/lib --save-dev
 **Recommended `@squoosh/lib` options for lossy optimization**
 
 For lossy optimization we recommend using the default settings `@squoosh/lib`.
-The default values and supported file types for each option can be found in the `[codecs.js]`(https://github.com/GoogleChromeLabs/squoosh/blob/dev/libsquoosh/src/codecs.js) file under `codecs`.
+The default values and supported file types for each option can be found in the `[codecs.ts]`(https://github.com/GoogleChromeLabs/squoosh/blob/dev/libsquoosh/src/codecs.ts) file under `codecs`.
 
 **webpack.config.js**
 
