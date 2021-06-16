@@ -1,5 +1,6 @@
 ---
 title: NormalModuleReplacementPlugin
+group: webpack
 contributors:
   - gonzoyumo
   - byzyk

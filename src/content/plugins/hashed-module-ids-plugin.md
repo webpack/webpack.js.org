@@ -1,5 +1,6 @@
 ---
 title: HashedModuleIdsPlugin
+group: webpack
 contributors:
   - shaodahong
   - byzyk

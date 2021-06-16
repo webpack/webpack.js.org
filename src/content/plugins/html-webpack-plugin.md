@@ -1,5 +1,6 @@
 ---
 title: HtmlWebpackPlugin
+group: Community
 contributors:
   - ampedandwired
   - simon04

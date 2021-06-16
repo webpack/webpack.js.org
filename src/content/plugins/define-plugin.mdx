@@ -1,5 +1,6 @@
 ---
 title: DefinePlugin
+group: webpack
 contributors:
   - simon04
   - rouzbeh84
