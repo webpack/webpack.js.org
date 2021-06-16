@@ -776,7 +776,7 @@ var define = false; /* Disable AMD for misbehaving libraries */
 [npm]: https://img.shields.io/npm/v/imports-loader.svg
 [npm-url]: https://www.npmjs.com/package/imports-loader
 [node]: https://img.shields.io/node/v/imports-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/imports-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/imports-loader
 [tests]: https://github.com/webpack-contrib/imports-loader/workflows/imports-loader/badge.svg

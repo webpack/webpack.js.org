@@ -1,10 +1,11 @@
 ---
 title: InstallWebpackPlugin
+group: webpack contrib
 source: https://raw.githubusercontent.com/webpack-contrib/install-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/install-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/install-webpack-plugin
 ---
-Speed up development by <b>automatically installing & saving dependencies</b> with Webpack.
+
 
 It is inefficient to <kbd>Ctrl-C</kbd> your
 build script & server just to install
@@ -16,7 +17,7 @@ will happen **automatically to install & save missing dependencies** while you w
 ## Install
 
 ```bash
-$ npm install --save-dev npm-install-webpack-plugin
+$ npm install --save-dev install-webpack-plugin
 ```
 
 ## Usage
@@ -25,7 +26,7 @@ In your `webpack.config.js`:
 
 ```js
 plugins: [
-  new NpmInstallPlugin()
+  new InstallPlugin()
 ],
 ```
 
@@ -33,7 +34,7 @@ plugins: [
 
 ```js
 plugins: [
-  new NpmInstallPlugin({
+  new InstallPlugin({
     // Use --save or --save-dev
     dev: false,
     // Install missing peerDependencies
@@ -50,7 +51,7 @@ You can provide a `Function` to the `dev` to make it dynamic:
 
 ```js
 plugins: [
-  new NpmInstallPlugin({
+  new InstallPlugin({
     dev: function(module, path) {
       return [
         "babel-preset-react-hmre",
@@ -64,7 +65,7 @@ plugins: [
 
 ## Demo
 
-![npm-install-webpack-plugin demo](https://cloud.githubusercontent.com/assets/15182/12540538/6a4e8f1a-c2d0-11e5-97ee-4ddaf6892645.gif)
+![install-webpack-plugin demo](https://cloud.githubusercontent.com/assets/15182/12540538/6a4e8f1a-c2d0-11e5-97ee-4ddaf6892645.gif)
 
 ## Features
 
@@ -114,13 +115,13 @@ Please take a moment to read our contributing guidelines if you haven't yet done
   <tbody>
 </table>
 
-[npm]: https://img.shields.io/npm/v/npm-install-webpack-plugin.svg
-[npm-url]: https://npmjs.com/package/npm-install-webpack-plugin
-[deps]: https://david-dm.org/webpack-contrib/npm-install-webpack-plugin.svg
-[deps-url]: https://david-dm.org/webpack-contrib/npm-install-webpack-plugin
+[npm]: https://img.shields.io/npm/v/install-webpack-plugin.svg
+[npm-url]: https://npmjs.com/package/install-webpack-plugin
+[deps]: https://david-dm.org/webpack-contrib/install-webpack-plugin.svg
+[deps-url]: https://david-dm.org/webpack-contrib/install-webpack-plugin
 [chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
 [chat-url]: https://gitter.im/webpack/webpack
-[test]: https://travis-ci.org/webpack-contrib/npm-install-webpack-plugin.svg?branch=master
-[test-url]: https://travis-ci.org/webpack-contrib/npm-install-webpack-plugin
-[cover]: https://codecov.io/gh/webpack-contrib/npm-install-webpack-plugin/branch/master/graph/badge.svg
-[cover-url]: https://codecov.io/gh/webpack-contrib/npm-install-webpack-plugin
+[test]: https://travis-ci.org/webpack-contrib/install-webpack-plugin.svg?branch=master
+[test-url]: https://travis-ci.org/webpack-contrib/install-webpack-plugin
+[cover]: https://codecov.io/gh/webpack-contrib/install-webpack-plugin/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/install-webpack-plugin

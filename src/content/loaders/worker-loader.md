@@ -636,7 +636,7 @@ module.exports = {
 [npm]: https://img.shields.io/npm/v/worker-loader.svg
 [npm-url]: https://npmjs.com/package/worker-loader
 [node]: https://img.shields.io/node/v/worker-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/worker-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/worker-loader
 [tests]: https://github.com/webpack-contrib/worker-loader/workflows/worker-loader/badge.svg

@@ -155,7 +155,7 @@ module.exports = {
 [npm]: https://img.shields.io/npm/v/source-map-loader.svg
 [npm-url]: https://npmjs.com/package/source-map-loader
 [node]: https://img.shields.io/node/v/source-map-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/source-map-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/source-map-loader
 [tests]: https://github.com/webpack-contrib/source-map-loader/workflows/source-map-loader/badge.svg

@@ -120,6 +120,7 @@ module.exports = {
 |        [`execute`](#execute)        |     `{Boolean}`      |        `undefined`        | 在 `CSS-in-JS` 中启动 PostCSS Parser 支持 |
 | [`postcssOptions`](#postcssoptions) | `{Object\|Function}` | `Postcss.process的默认值` | 设置 `PostCSS` 选项与插件                 |
 |      [`sourceMap`](#sourcemap)      |     `{Boolean}`      |    `compiler.devtool`     | 开启 / 关闭 source map 的生成             |
+| [`implementation`](#implementation) | `{Function\|String}` |               `postcss`               | 为 PostCSS 设置对应实现并使用          |
 
 ### `execute`
 
@@ -585,12 +586,13 @@ module.exports = {
 ### `implementation` {#implementation}
 
 类型：`Function | String`
+默认值：`postcss`
 
 特殊的 `implementation` 选项决定使用 PostCSS 哪个实现。重载本地安装的 `postcss` 的 `peerDependency` 版本。
 
-**此选项只对下游的工具作者有效，以便于 PostCSS 7 到 PostCSS 8 的过渡。**
+**此选项只对底层工具的作者有效，以便于 PostCSS 7 到 PostCSS 8 的过渡。**
 
-#### Function
+#### Function {#function}
 
 **webpack.config.js**
 
@@ -1069,7 +1071,7 @@ module.exports = postcss.plugin('postcss-assets', customPlugin);
 [npm]: https://img.shields.io/npm/v/postcss-loader.svg
 [npm-url]: https://npmjs.com/package/postcss-loader
 [node]: https://img.shields.io/node/v/postcss-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/postcss-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/postcss-loader
 [tests]: https://github.com/webpack-contrib/postcss-loader/workflows/postcss-loader/badge.svg

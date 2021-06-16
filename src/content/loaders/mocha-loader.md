@@ -113,7 +113,7 @@ describe('Test', () => {
 [npm]: https://img.shields.io/npm/v/mocha-loader.svg
 [npm-url]: https://npmjs.com/package/mocha-loader
 [node]: https://img.shields.io/node/v/mocha-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/mocha-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/mocha-loader
 [tests]: https://github.com/webpack-contrib/mocha-loader/workflows/mocha-loader/badge.svg

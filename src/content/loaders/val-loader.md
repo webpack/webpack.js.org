@@ -414,7 +414,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm]: https://img.shields.io/npm/v/val-loader.svg
 [npm-url]: https://npmjs.com/package/val-loader
 [node]: https://img.shields.io/node/v/val-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/val-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/val-loader
 [tests]: https://github.com/webpack-contrib/val-loader/workflows/val-loader/badge.svg

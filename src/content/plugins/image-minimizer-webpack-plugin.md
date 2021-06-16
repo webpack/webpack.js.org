@@ -1,13 +1,12 @@
 ---
 title: ImageMinimizerWebpackPlugin
+group: webpack contrib
 source: https://raw.githubusercontent.com/webpack-contrib/image-minimizer-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/image-minimizer-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/image-minimizer-webpack-plugin
 ---
-
-    Plugin and Loader for <a href="http://webpack.js.org/">webpack</a> to optimize (compress) all images using <a href="https://github.com/imagemin/imagemin">imagemin</a>.
+Plugin and Loader for <a href="http://webpack.js.org/">webpack</a> to optimize (compress) all images using <a href="https://github.com/imagemin/imagemin">imagemin</a>.
     Do not worry about size of images, now they are always optimized/compressed.
-  
 
 
 
@@ -1336,7 +1335,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm]: https://img.shields.io/npm/v/image-minimizer-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/image-minimizer-webpack-plugin
 [node]: https://img.shields.io/node/v/image-minimizer-webpack-plugin.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/image-minimizer-webpack-plugin.svg
 [deps-url]: https://david-dm.org/webpack-contrib/image-minimizer-webpack-plugin
 [tests]: https://github.com/webpack-contrib/image-minimizer-webpack-plugin/workflows/image-minimizer-webpack-plugin/badge.svg
