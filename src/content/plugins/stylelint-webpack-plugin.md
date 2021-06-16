@@ -1,5 +1,6 @@
 ---
 title: StylelintWebpackPlugin
+group: webpack contrib
 source: https://raw.githubusercontent.com/webpack-contrib/stylelint-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/stylelint-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/stylelint-webpack-plugin
@@ -66,12 +67,35 @@ module.exports = {
 
 指定文件根目录的字符串。
 
+<<<<<<< HEAD
 ### `files` {#files}
 
 - 类型：`String|Array[String]`
 - 默认值：`'**/*.(s(c|a)ss|css)'`
 
 指定查找文件的全局模式。必须相对于 `options.context`。
+=======
+### `exclude`
+
+- Type: `String|Array[String]`
+- Default: `'node_modules'`
+
+Specify the files and/or directories to exclude. Must be relative to `options.context`.
+
+### `extensions`
+
+- Type: `String|Array[String]`
+- Default: `['css', 'scss', 'sass']`
+
+Specify extensions that should be checked.
+
+### `files`
+
+- Type: `String|Array[String]`
+- Default: `null`
+
+Specify directories, files, or globs. Must be relative to `options.context`. Directories are traveresed recursively looking for files matching `options.extensions`. File and glob patterns ignore `options.extensions`.
+>>>>>>> 36213856d02a28037a420823ef06aac0b045a3ee
 
 ### `fix` {#fix}
 
@@ -101,7 +125,18 @@ module.exports = {
 
 将要用来做检查的 `stylelint` 实例的路径。
 
+<<<<<<< HEAD
 ### Errors 和 Warning {#errors-and-warning}
+=======
+### `threads`
+
+- Type: `Boolean | Number`
+- Default: `false`
+
+Set to true for an auto-selected pool size based on number of cpus. Set to a number greater than 1 to set an explicit pool size. Set to false, 1, or less to disable and only run in main process.
+
+### Errors and Warning
+>>>>>>> 36213856d02a28037a420823ef06aac0b045a3ee
 
 **默认情况下，插件将根据 stylelint 错误/警告数量自动调整错误报告。**
 你仍然可以使用 `emitError` **或** `emitWarning` 选项来强制改变这种默认行为。
@@ -111,21 +146,33 @@ module.exports = {
 - 类型：`Boolean`
 - 默认值：`false`
 
+<<<<<<< HEAD
 如果设置为 `true`，将总是返回 errors。
+=======
+The errors found will always be emitted, to disable set to `false`.
+>>>>>>> 36213856d02a28037a420823ef06aac0b045a3ee
 
 #### `emitWarning` {#emitwarning}
 
 - 类型：`Boolean`
 - 默认值：`false`
 
+<<<<<<< HEAD
 如果设置为 `true`，将总是返回 warnings。
+=======
+The warnings found will always be emitted, to disable set to `false`.
+>>>>>>> 36213856d02a28037a420823ef06aac0b045a3ee
 
 #### `failOnError` {#failonerror}
 
 - 类型：`Boolean`
 - 默认值：`false`
 
+<<<<<<< HEAD
 如果设置为 `true`，出现任何 errors 都将会导致模块构建失败。
+=======
+Will cause the module build to fail if there are any errors, to disable set to `false`.
+>>>>>>> 36213856d02a28037a420823ef06aac0b045a3ee
 
 #### `failOnWarning` {#failonwarning}
 
@@ -141,7 +188,27 @@ module.exports = {
 
 如果设置为 `true`，则仅处理和报告 errors，并忽略 warnings。
 
+<<<<<<< HEAD
 ## Changelog {#changelog}
+=======
+#### `outputReport`
+
+- Type: `Boolean|Object`
+- Default: `false`
+
+Write the output of the errors to a file, for example a `json` file for use for reporting.
+The `filePath` is relative to the webpack config: `output.path`.
+You can pass in a different formatter for the output file, if none is passed in the default/configured formatter will be used.
+
+```js
+{
+  filePath: 'path/to/file';
+  formatter: 'json';
+}
+```
+
+## Changelog
+>>>>>>> 36213856d02a28037a420823ef06aac0b045a3ee
 
 [Changelog](https://github.com/webpack-contrib/stylelint-webpack-plugin/blob/master/CHANGELOG.md)
 
@@ -152,7 +219,7 @@ module.exports = {
 [npm]: https://img.shields.io/npm/v/stylelint-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/stylelint-webpack-plugin
 [node]: https://img.shields.io/node/v/stylelint-webpack-plugin.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/stylelint-webpack-plugin.svg
 [deps-url]: https://david-dm.org/webpack-contrib/stylelint-webpack-plugin
 [tests]: https://github.com/webpack-contrib/stylelint-webpack-plugin/workflows/stylelint-webpack-plugin/badge.svg

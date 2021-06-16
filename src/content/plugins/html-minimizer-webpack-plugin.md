@@ -1,5 +1,6 @@
 ---
 title: HtmlMinimizerWebpackPlugin
+group: webpack contrib
 source: https://raw.githubusercontent.com/webpack-contrib/html-minimizer-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/html-minimizer-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/html-minimizer-webpack-plugin
@@ -338,7 +339,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm]: https://img.shields.io/npm/v/html-minimizer-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/html-minimizer-webpack-plugin
 [node]: https://img.shields.io/node/v/html-minimizer-webpack-plugin.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/html-minimizer-webpack-plugin.svg
 [deps-url]: https://david-dm.org/webpack-contrib/html-minimizer-webpack-plugin
 [tests]: https://github.com/webpack-contrib/html-minimizer-webpack-plugin/workflows/html-minimizer-webpack-plugin/badge.svg

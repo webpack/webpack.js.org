@@ -603,7 +603,7 @@ Less 和 [CSS modules](https://github.com/css-modules/css-modules) 有一个已�
 [npm]: https://img.shields.io/npm/v/less-loader.svg
 [npm-url]: https://npmjs.com/package/less-loader
 [node]: https://img.shields.io/node/v/less-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/less-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/less-loader
 [tests]: https://github.com/webpack-contrib/less-loader/workflows/less-loader/badge.svg

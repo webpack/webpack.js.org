@@ -1,5 +1,6 @@
 ---
 title: MiniCssExtractPlugin
+group: webpack contrib
 source: https://raw.githubusercontent.com/webpack-contrib/mini-css-extract-plugin/master/README.md
 edit: https://github.com/webpack-contrib/mini-css-extract-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/mini-css-extract-plugin
@@ -972,7 +973,7 @@ module.exports = {
 [npm]: https://img.shields.io/npm/v/mini-css-extract-plugin.svg
 [npm-url]: https://npmjs.com/package/mini-css-extract-plugin
 [node]: https://img.shields.io/node/v/mini-css-extract-plugin.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/mini-css-extract-plugin.svg
 [deps-url]: https://david-dm.org/webpack-contrib/mini-css-extract-plugin
 [tests]: https://github.com/webpack-contrib/mini-css-extract-plugin/workflows/mini-css-extract-plugin/badge.svg

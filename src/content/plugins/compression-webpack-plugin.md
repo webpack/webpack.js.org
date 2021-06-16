@@ -1,5 +1,6 @@
 ---
 title: CompressionWebpackPlugin
+group: webpack contrib
 source: https://raw.githubusercontent.com/webpack-contrib/compression-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/compression-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/compression-webpack-plugin
@@ -374,7 +375,7 @@ module.exports = {
       test: /\.(js|css|html|svg)$/,
       compressionOptions: {
         params: {
-          [zlib.constants.BROTLI_PARAM_QUALITY]: https://github.com/webpack-contrib/compression-webpack-plugin/blob/master/11,
+          [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
         },
       },
       threshold: 10240,
@@ -410,7 +411,7 @@ module.exports = {
       test: /\.(js|css|html|svg)$/,
       compressionOptions: {
         params: {
-          [zlib.constants.BROTLI_PARAM_QUALITY]: https://github.com/webpack-contrib/compression-webpack-plugin/blob/master/11,
+          [zlib.constants.BROTLI_PARAM_QUALITY]: 11,
         },
       },
       threshold: 10240,
@@ -433,7 +434,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm]: https://img.shields.io/npm/v/compression-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/compression-webpack-plugin
 [node]: https://img.shields.io/node/v/compression-webpack-plugin.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/compression-webpack-plugin.svg
 [deps-url]: https://david-dm.org/webpack-contrib/compression-webpack-plugin
 [tests]: https://github.com/webpack-contrib/compression-webpack-plugin/workflows/compression-webpack-plugin/badge.svg

@@ -1,5 +1,6 @@
 ---
 title: CssMinimizerWebpackPlugin
+group: webpack contrib
 source: https://raw.githubusercontent.com/webpack-contrib/css-minimizer-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/css-minimizer-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/css-minimizer-webpack-plugin
@@ -566,7 +567,7 @@ module.exports = {
 [npm]: https://img.shields.io/npm/v/css-minimizer-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/css-minimizer-webpack-plugin
 [node]: https://img.shields.io/node/v/css-minimizer-webpack-plugin.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/css-minimizer-webpack-plugin.svg
 [deps-url]: https://david-dm.org/webpack-contrib/css-minimizer-webpack-plugin
 [tests]: https://github.com/webpack-contrib/css-minimizer-webpack-plugin/workflows/css-minimizer-webpack-plugin/badge.svg

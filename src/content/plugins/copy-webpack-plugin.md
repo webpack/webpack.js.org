@@ -1,5 +1,6 @@
 ---
 title: CopyWebpackPlugin
+group: webpack contrib
 source: https://raw.githubusercontent.com/webpack-contrib/copy-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/copy-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/copy-webpack-plugin
@@ -1180,7 +1181,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm]: https://img.shields.io/npm/v/copy-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/copy-webpack-plugin
 [node]: https://img.shields.io/node/v/copy-webpack-plugin.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/copy-webpack-plugin.svg
 [deps-url]: https://david-dm.org/webpack-contrib/copy-webpack-plugin
 [tests]: https://github.com/webpack-contrib/copy-webpack-plugin/workflows/copy-webpack-plugin/badge.svg

@@ -67,7 +67,7 @@ module.exports = {
 [npm]: https://img.shields.io/npm/v/null-loader.svg
 [npm-url]: https://npmjs.com/package/null-loader
 [node]: https://img.shields.io/node/v/null-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/null-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/null-loader
 [tests]: https://github.com/webpack-contrib/null-loader/workflows/null-loader/badge.svg
