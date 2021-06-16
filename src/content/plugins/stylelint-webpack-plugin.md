@@ -1,5 +1,6 @@
 ---
 title: StylelintWebpackPlugin
+group: webpack contrib
 source: https://raw.githubusercontent.com/webpack-contrib/stylelint-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/stylelint-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/stylelint-webpack-plugin
@@ -64,12 +65,26 @@ Specify the config file location to be used by `stylelint`.
 
 A string indicating the root of your files.
 
+### `exclude`
+
+- Type: `String|Array[String]`
+- Default: `'node_modules'`
+
+Specify the files and/or directories to exclude. Must be relative to `options.context`.
+
+### `extensions`
+
+- Type: `String|Array[String]`
+- Default: `['css', 'scss', 'sass']`
+
+Specify extensions that should be checked.
+
 ### `files`
 
 - Type: `String|Array[String]`
-- Default: `'**/*.(s(c|a)ss|css)'`
+- Default: `null`
 
-Specify the glob pattern for finding files. Must be relative to `options.context`.
+Specify directories, files, or globs. Must be relative to `options.context`. Directories are traveresed recursively looking for files matching `options.extensions`. File and glob patterns ignore `options.extensions`.
 
 ### `fix`
 
@@ -99,6 +114,13 @@ Lint only changed files, skip lint on start.
 
 Path to `stylelint` instance that will be used for linting.
 
+### `threads`
+
+- Type: `Boolean | Number`
+- Default: `false`
+
+Set to true for an auto-selected pool size based on number of cpus. Set to a number greater than 1 to set an explicit pool size. Set to false, 1, or less to disable and only run in main process.
+
 ### Errors and Warning
 
 **By default the plugin will auto adjust error reporting depending on stylelint errors/warnings counts.**
@@ -109,21 +131,21 @@ You can still force this behavior by using `emitError` **or** `emitWarning` opti
 - Type: `Boolean`
 - Default: `false`
 
-Will always return errors, if set to `true`.
+The errors found will always be emitted, to disable set to `false`.
 
 #### `emitWarning`
 
 - Type: `Boolean`
 - Default: `false`
 
-Will always return warnings, if set to `true`.
+The warnings found will always be emitted, to disable set to `false`.
 
 #### `failOnError`
 
 - Type: `Boolean`
 - Default: `false`
 
-Will cause the module build to fail if there are any errors, if set to `true`.
+Will cause the module build to fail if there are any errors, to disable set to `false`.
 
 #### `failOnWarning`
 
@@ -139,6 +161,22 @@ Will cause the module build to fail if there are any warnings, if set to `true`.
 
 Will process and report errors only and ignore warnings, if set to `true`.
 
+#### `outputReport`
+
+- Type: `Boolean|Object`
+- Default: `false`
+
+Write the output of the errors to a file, for example a `json` file for use for reporting.
+The `filePath` is relative to the webpack config: `output.path`.
+You can pass in a different formatter for the output file, if none is passed in the default/configured formatter will be used.
+
+```js
+{
+  filePath: 'path/to/file';
+  formatter: 'json';
+}
+```
+
 ## Changelog
 
 [Changelog](https://github.com/webpack-contrib/stylelint-webpack-plugin/blob/master/CHANGELOG.md)
@@ -150,7 +188,7 @@ Will process and report errors only and ignore warnings, if set to `true`.
 [npm]: https://img.shields.io/npm/v/stylelint-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/stylelint-webpack-plugin
 [node]: https://img.shields.io/node/v/stylelint-webpack-plugin.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/stylelint-webpack-plugin.svg
 [deps-url]: https://david-dm.org/webpack-contrib/stylelint-webpack-plugin
 [tests]: https://github.com/webpack-contrib/stylelint-webpack-plugin/workflows/stylelint-webpack-plugin/badge.svg

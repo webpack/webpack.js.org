@@ -358,7 +358,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm]: https://img.shields.io/npm/v/remark-loader.svg
 [npm-url]: https://npmjs.com/package/remark-loader
 [node]: https://img.shields.io/node/v/remark-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/remark-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/remark-loader
 [tests]: https://github.com/webpack-contrib/remark-loader/workflows/remark-loader/badge.svg

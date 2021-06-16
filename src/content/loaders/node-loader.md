@@ -214,7 +214,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm]: https://img.shields.io/npm/v/node-loader.svg
 [npm-url]: https://npmjs.com/package/node-loader
 [node]: https://img.shields.io/node/v/node-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/node-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/node-loader
 [tests]: https://github.com/webpack-contrib/node-loader/workflows/node-loader/badge.svg

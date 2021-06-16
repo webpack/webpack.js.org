@@ -1,5 +1,6 @@
 ---
 title: JsonMinimizerWebpackPlugin
+group: webpack contrib
 source: https://raw.githubusercontent.com/webpack-contrib/json-minimizer-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/json-minimizer-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/json-minimizer-webpack-plugin
@@ -169,7 +170,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm]: https://img.shields.io/npm/v/json-minimizer-webpack-plugin.svg
 [npm-url]: https://npmjs.com/package/json-minimizer-webpack-plugin
 [node]: https://img.shields.io/node/v/json-minimizer-webpack-plugin.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/json-minimizer-webpack-plugin.svg
 [deps-url]: https://david-dm.org/webpack-contrib/json-minimizer-webpack-plugin
 [tests]: https://github.com/webpack-contrib/json-minimizer-webpack-plugin/workflows/json-minimizer-webpack-plugin/badge.svg

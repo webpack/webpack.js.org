@@ -920,7 +920,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm]: https://img.shields.io/npm/v/html-loader.svg
 [npm-url]: https://npmjs.com/package/html-loader
 [node]: https://img.shields.io/node/v/html-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/html-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/html-loader
 [tests]: https://github.com/webpack-contrib/html-loader/workflows/html-loader/badge.svg

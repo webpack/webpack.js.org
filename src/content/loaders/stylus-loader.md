@@ -685,7 +685,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm]: https://img.shields.io/npm/v/stylus-loader.svg
 [npm-url]: https://npmjs.com/package/stylus-loader
 [node]: https://img.shields.io/node/v/stylus-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/stylus-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/stylus-loader
 [tests]: https://github.com/webpack-contrib/stylus-loader/workflows/stylus-loader/badge.svg

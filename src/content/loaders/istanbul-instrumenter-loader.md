@@ -178,7 +178,7 @@ The loader supports all options supported by `istanbul-lib-instrument`
 [npm-url]: https://npmjs.com/package/istanbul-instrumenter-loader
 
 [node]: https://img.shields.io/node/v/istanbul-instrumenter-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 
 [deps]: https://david-dm.org/webpack-contrib/istanbul-instrumenter-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/istanbul-instrumenter-loader

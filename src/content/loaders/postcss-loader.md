@@ -116,6 +116,7 @@ And run `webpack` via your preferred method.
 |        [`execute`](#execute)        |     `{Boolean}`      |              `undefined`              | Enable PostCSS Parser support in `CSS-in-JS` |
 | [`postcssOptions`](#postcssoptions) | `{Object\|Function}` | `defaults values for Postcss.process` | Set `PostCSS` options and plugins            |
 |      [`sourceMap`](#sourcemap)      |     `{Boolean}`      |          `compiler.devtool`           | Enables/Disables generation of source maps   |
+| [`implementation`](#implementation) | `{Function\|String}` |               `postcss`               | Setup PostCSS implementation to use          |
 
 ### `execute`
 
@@ -581,6 +582,7 @@ module.exports = {
 ### `implementation`
 
 Type: `Function | String`
+Default: `postcss`
 
 The special `implementation` option determines which implementation of PostCSS to use. Overrides the locally installed `peerDependency` version of `postcss`.
 
@@ -1065,7 +1067,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm]: https://img.shields.io/npm/v/postcss-loader.svg
 [npm-url]: https://npmjs.com/package/postcss-loader
 [node]: https://img.shields.io/node/v/postcss-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/postcss-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/postcss-loader
 [tests]: https://github.com/webpack-contrib/postcss-loader/workflows/postcss-loader/badge.svg

@@ -672,7 +672,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm]: https://img.shields.io/npm/v/exports-loader.svg
 [npm-url]: https://npmjs.com/package/exports-loader
 [node]: https://img.shields.io/node/v/exports-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/exports-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/exports-loader
 [tests]: https://github.com/webpack-contrib/exports-loader/workflows/exports-loader/badge.svg

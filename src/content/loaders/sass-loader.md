@@ -695,7 +695,7 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm]: https://img.shields.io/npm/v/sass-loader.svg
 [npm-url]: https://npmjs.com/package/sass-loader
 [node]: https://img.shields.io/node/v/sass-loader.svg
-[node-url]: https://nodejs.org/
+[node-url]: https://nodejs.org
 [deps]: https://david-dm.org/webpack-contrib/sass-loader.svg
 [deps-url]: https://david-dm.org/webpack-contrib/sass-loader
 [tests]: https://github.com/webpack-contrib/sass-loader/workflows/sass-loader/badge.svg
