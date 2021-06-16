@@ -177,7 +177,7 @@ module.exports = {
       const urlParams = new URLSearchParams(window.location.search)
       const version = urlParams.get('app1VersionParam')
       // This part depends on how you plan on hosting and versioning your federated modules
-      const remoteUrlWithVersion = 'https://localhost:3001/' + version + '/remoteEntry.js'
+      const remoteUrlWithVersion = 'http://localhost:3001/' + version + '/remoteEntry.js'
       const script = document.createElement('script')
       script.src = remoteUrlWithVersion
       script.onload = () => {
