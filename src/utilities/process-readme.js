@@ -3,18 +3,23 @@ const { excludedLoaders, excludedPlugins } = require('./constants');
 
 const beginsWithDocsDomainRegex = /^(?:https?:)\/\/webpack\.js\.org/;
 const inlineLinkRegex = /\[[^\]]*\]\(([^)]+)\)/g;
-const externalLinkRegex = /^[ \t]*\[[^\]]+\]:[ \t]+([^ \n]+)/gm;
 
 const fragmentLinkMap = {
-  '/api/module-variables/#__webpack_public_path__-webpack-specific-': '/api/module-variables/#__webpack_public_path__-webpack-specific',
+  '/api/module-variables/#__webpack_public_path__-webpack-specific-':
+    '/api/module-variables/#__webpack_public_path__-webpack-specific',
   '/configuration/module/#rule-exclude': '/configuration/module/#ruleexclude',
   '/configuration/module/#rule-include': '/configuration/module/#ruleinclude',
-  '/configuration/module/#rule-options-rule-query': '/configuration/module/#ruleoptions--rulequery',
+  '/configuration/module/#rule-options-rule-query':
+    '/configuration/module/#ruleoptions--rulequery',
   '/configuration/module/#rule-use': '/configuration/module/#ruleuse',
-  '/configuration/optimization/#optimization-concatenatemodules': '/configuration/optimization/#optimizationconcatenatemodules',
-  '/configuration/output/#output-chunkfilename': '/configuration/output/#outputchunkfilename',
-  '/configuration/output/#output-publicpath': '/configuration/output/#outputpublicpath',
-  '/configuration/resolve/#resolve-modules': '/configuration/resolve/#resolvemodules',
+  '/configuration/optimization/#optimization-concatenatemodules':
+    '/configuration/optimization/#optimizationconcatenatemodules',
+  '/configuration/output/#output-chunkfilename':
+    '/configuration/output/#outputchunkfilename',
+  '/configuration/output/#output-publicpath':
+    '/configuration/output/#outputpublicpath',
+  '/configuration/resolve/#resolve-modules':
+    '/configuration/resolve/#resolvemodules',
   '/guides/shimming/#exports-loader': '/loaders/exports-loader',
   '/guides/shimming/#imports-loader': '/loaders/imports-loader',
   '/guides/shimming/#provideplugin': '/plugins/provide-plugin/',
@@ -43,13 +48,21 @@ function linkFixerFactory(sourceUrl) {
       href = href.replace(beginsWithDocsDomainRegex, '');
     }
 
-    const fragmentLinkMapMatch = Object.keys(fragmentLinkMap).find(mapFrom => href.includes(mapFrom));
+    const fragmentLinkMapMatch = Object.keys(fragmentLinkMap).find((mapFrom) =>
+      href.includes(mapFrom)
+    );
     if (fragmentLinkMapMatch) {
-      href = href.replace(fragmentLinkMapMatch, fragmentLinkMap[fragmentLinkMapMatch]);
+      href = href.replace(
+        fragmentLinkMapMatch,
+        fragmentLinkMap[fragmentLinkMapMatch]
+      );
       console.error(`DEPRECATED EXTERNAL README LINK:
   URL: ${sourceUrl}
   ACTUAL: ${oldHref}
-  EXPECTED: ${oldHref.replace(fragmentLinkMapMatch, fragmentLinkMap[fragmentLinkMapMatch])}`);
+  EXPECTED: ${oldHref.replace(
+    fragmentLinkMapMatch,
+    fragmentLinkMap[fragmentLinkMapMatch]
+  )}`);
     }
 
     // Lowercase all fragment links, since markdown generators do the same
@@ -71,7 +84,7 @@ function getMatches(string, regex) {
   const matches = [];
   let match;
   // eslint-disable-next-line
-  while (match = regex.exec(string)) {
+  while ((match = regex.exec(string))) {
     matches.push(match);
   }
   return matches;
@@ -79,8 +92,10 @@ function getMatches(string, regex) {
 
 module.exports = function processREADME(body, options = {}) {
   let processingString = body
+    // remove items other than paragraphs in div[align="center"]
+    // e.g., logo, title and so on.
     .replace(/[^]*?<div align="center">([^]*?)<\/div>/, (match, content) => {
-      let parsed = content.match(/<p>([^]*?)<\/?p>/);
+      let parsed = content.match(/<p>\s+([^]*?)\s+<\/?p>/);
       return parsed ? parsed[1] : '';
     })
     // Replace lone h1 formats
@@ -92,29 +107,40 @@ module.exports = function processREADME(body, options = {}) {
     // EXAMPLE: [Contributing](CONTRIBUTING.md)
     // EXAMPLE: [line-identifier]: https://webpack.js.org/loaders/
     .replace(inlineLinkRegex, linkFixerFactory(options.source))
-    .replace(externalLinkRegex, linkFixerFactory(options.source))
     // Replace any <h2> with `##`
     .replace(/<h2[^>]*>/g, '## ')
     .replace(/<\/h2>/g, '')
     // Drop any comments
     .replace(/<!--[\s\S]*?-->/g, '');
 
-    // find the laoders links
-    const loaderMatches = getMatches(processingString, /https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g);
-    // dont make relative links for excluded loaders
-    loaderMatches.forEach((match) => {
-      if (!excludedLoaders.includes(`${match[1]}/${match[2]}`)) {
-        processingString = processingString.replace(match[0], `/loaders/${match[2]}/)`);
-      }
-    });
+  // find the laoders links
+  const loaderMatches = getMatches(
+    processingString,
+    /https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-loader\/?)([)"])/g
+  );
+  // dont make relative links for excluded loaders
+  loaderMatches.forEach((match) => {
+    if (!excludedLoaders.includes(`${match[1]}/${match[2]}`)) {
+      processingString = processingString.replace(
+        match[0],
+        `/loaders/${match[2]}/)`
+      );
+    }
+  });
 
-    const pluginMatches = getMatches(processingString, /https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g);
-    // dont make relative links for excluded loaders
-    pluginMatches.forEach((match) => {
-      if (!excludedPlugins.includes(`${match[1]}/${match[2]}`)) {
-        processingString = processingString.replace(match[0], `/plugins/${match[2]}/)`);
-      }
-    });
+  const pluginMatches = getMatches(
+    processingString,
+    /https?:\/\/github.com\/(webpack|webpack-contrib)\/([-A-za-z0-9]+-plugin\/?)([)"])/g
+  );
+  // dont make relative links for excluded loaders
+  pluginMatches.forEach((match) => {
+    if (!excludedPlugins.includes(`${match[1]}/${match[2]}`)) {
+      processingString = processingString.replace(
+        match[0],
+        `/plugins/${match[2]}/)`
+      );
+    }
+  });
 
-    return processingString;
+  return processingString;
 };

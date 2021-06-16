@@ -5,6 +5,7 @@ const excludedLoaders = [
   'webpack-contrib/json-loader',
   'webpack-contrib/script-loader',
   'webpack-contrib/bundle-loader',
+  'webpack-contrib/svg-inline-loader',
   'webpack-contrib/i18n-loader',
   'webpack-contrib/jshint-loader',
   'webpack-contrib/coverjs-loader',
@@ -13,7 +14,12 @@ const excludedLoaders = [
   'webpack-contrib/multi-loader',
   'webpack-contrib/yaml-frontmatter-loader',
   'webpack-contrib/restyle-loader',
-  'webpack-contrib/gzip-loader'
+  'webpack-contrib/gzip-loader',
+  'webpack-contrib/cache-loader',
+  'webpack-contrib/json5-loader',
+  'webpack-contrib/raw-loader',
+  'webpack-contrib/url-loader',
+  'webpack-contrib/file-loader',
 ];
 const excludedPlugins = [
   'webpack-contrib/component-webpack-plugin',
@@ -21,10 +27,11 @@ const excludedPlugins = [
   'webpack-contrib/i18n-webpack-plugin',
   'webpack-contrib/babel-minify-webpack-plugin',
   'webpack-contrib/uglifyjs-webpack-plugin',
-  'webpack-contrib/zopfli-webpack-plugin'
+  'webpack-contrib/zopfli-webpack-plugin',
+  'webpack-contrib/closure-webpack-plugin',
 ];
 
 module.exports = {
   excludedLoaders,
-  excludedPlugins
+  excludedPlugins,
 };

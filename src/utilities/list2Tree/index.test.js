@@ -3,11 +3,11 @@ describe('list2Tree', () => {
   it('should return data withouth any children', () => {
     const anchors = [
       { title: 'hd2.1', level: 2 },
-      { title: 'hd2.2', level: 2 }
+      { title: 'hd2.2', level: 2 },
     ];
     expect(list2Tree(anchors)).toEqual([
       { title: 'hd2.1', level: 2 },
-      { title: 'hd2.2', level: 2 }
+      { title: 'hd2.2', level: 2 },
     ]);
   });
   it('should return data with children', () => {
@@ -16,7 +16,7 @@ describe('list2Tree', () => {
       { title: 'hd3.1', level: 3 },
       { title: 'hd3.2', level: 3 },
       { title: 'hd4.1', level: 4 },
-      { title: 'hd2.2', level: 2 }
+      { title: 'hd2.2', level: 2 },
     ];
     expect(list2Tree(anchors)).toEqual([
       {
@@ -24,10 +24,14 @@ describe('list2Tree', () => {
         level: 2,
         children: [
           { title: 'hd3.1', level: 3 },
-          { title: 'hd3.2', level: 3, children: [{ title: 'hd4.1', level: 4 }] }
-        ]
+          {
+            title: 'hd3.2',
+            level: 3,
+            children: [{ title: 'hd4.1', level: 4 }],
+          },
+        ],
       },
-      { title: 'hd2.2', level: 2 }
+      { title: 'hd2.2', level: 2 },
     ]);
   });
 });
