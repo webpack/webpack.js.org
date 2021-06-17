@@ -3,6 +3,8 @@ title: stylus-loader
 source: https://raw.githubusercontent.com/webpack-contrib/stylus-loader/master/README.md
 edit: https://github.com/webpack-contrib/stylus-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/stylus-loader
+translators:
+  - Usualminds
 ---
 
 
@@ -16,17 +18,17 @@ repo: https://github.com/webpack-contrib/stylus-loader
 
 
 
-A Stylus loader for webpack. Compiles Styl to CSS.
+一个 webpack 的 Stylus loader。将 Stylus 文件编译为 CSS。
 
-## Getting Started
+## 快速开始 {#getting-started}
 
-To begin, you'll need to install `stylus` and `stylus-loader`:
+首先，你需要安装 `stylus` 和 `stylus-loader`：
 
 ```console
 $ npm install stylus stylus-loader --save-dev
 ```
 
-Then add the loader to your `webpack` config. For example:
+然后将该 loader 添加到 `webpack` 配置中。例如：
 
 **webpack.config.js**
 
@@ -36,37 +38,37 @@ module.exports = {
     rules: [
       {
         test: /\.styl$/,
-        loader: "stylus-loader", // compiles Styl to CSS
+        loader: "stylus-loader", // 将 Stylus 文件编译为 CSS
       },
     ],
   },
 };
 ```
 
-And run `webpack` via your preferred method.
+接着按照你习惯的方式运行 `webpack`。
 
-## Options
+## 可选项 {#options}
 
 |                   Name                    |         Type         |      Default       | Description                                              |
 | :---------------------------------------: | :------------------: | :----------------: | :------------------------------------------------------- |
-|   **[`stylusOptions`](#stylusoptions)**   | `{Object\|Function}` |        `{}`        | Options for Stylus.                                      |
-|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      | `compiler.devtool` | Enables/Disables generation of source maps.              |
-| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |       `true`       | Enables/Disables the default Webpack importer.           |
-|  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |    `undefined`     | Prepends/Appends `Stylus` code to the actual entry file. |
-|  **[`implementation`](#implementation)**  | `{String\|Function}` |      `stylus`      | Setup Stylus implementation to use.                      |
+|   **[`stylusOptions`](#stylusoptions)**   | `{Object\|Function}` |        `{}`        | Stylus 的可选项。                                      |
+|       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      | `compiler.devtool` | 启用/禁用生成 SourceMap。              |
+| **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |       `true`       | 启用/禁用默认的 webpack importer。           |
+|  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |    `undefined`     | 在入口文件起始或末尾添加 `Stylus` 代码。 |
+|  **[`implementation`](#implementation)**  | `{String\|Function}` |      `stylus`      | 配置 Stylus 使用的实现库。                      |
 
-### `stylusOptions`
+### `stylusOptions` {#stylusOptions}
 
-Type: `Object|Function`
-Default: `{}`
+类型：`Object|Function`
+默认值：`{}`
 
-You can pass any Stylus specific options to the `stylus-loader` through the `stylusOptions` property in the [loader options](/configuration/module/#ruleoptions--rulequery).
-See the [Stylus documentation](https://stylus-lang.com/docs/js.html).
-Options in dash-case should use camelCase.
+通过 `stylusOptions` 属性，你可以给 `stylus-loader` 配置 [loader options](/configuration/module/#ruleoptions--rulequery) 中任意特定的选项值。
+所有可用选项可以查看 [Stylus 文档](https://stylus-lang.com/docs/js.html)。
+这些配置项需要将破折号（dash-case）转换为驼峰值（camelCase）后进行设置。
 
-#### `Object`
+#### `Object` {#object}
 
-Use an object to pass options through to Stylus.
+使用对象（Object）的形式传递 options 给 Stylus。
 
 **webpack.config.js**
 
@@ -88,8 +90,8 @@ module.exports = {
             options: {
               stylusOptions: {
                 /**
-                 * Specify Stylus plugins to use. Plugins may be passed as
-                 * strings instead of importing them in your Webpack config.
+                 * 指定要使用的 Stylus 插件。将插件作为
+                 * 字符串进行传递，而不是从 Webpack 配置中导入。
                  *
                  * @type {(string|Function)[]}
                  * @default []
@@ -97,7 +99,7 @@ module.exports = {
                 use: ["nib"],
 
                 /**
-                 * Add path(s) to the import lookup paths.
+                 * 指定 path 的查找路径。
                  *
                  * @type {string[]}
                  * @default []
@@ -105,7 +107,7 @@ module.exports = {
                 include: [path.join(__dirname, "src/styl/config")],
 
                 /**
-                 * Import the specified Stylus files/paths.
+                 * 导入指定的 Stylus 文件或者路径
                  *
                  * @type {string[]}
                  * @default []
@@ -113,24 +115,24 @@ module.exports = {
                 import: ["nib", path.join(__dirname, "src/styl/mixins")],
 
                 /**
-                 * Define Stylus variables or functions.
+                 * 定义 Stylus 变量或者函数。
                  *
                  * @type {Array|Object}
                  * @default {}
                  */
-                // Array is the recommended syntax: [key, value, raw]
+                // 定义数组语法的推荐格式：[key, value, raw]
                 define: [
                   ["$development", process.env.NODE_ENV === "development"],
                   ["rawVar", 42, true],
                 ],
-                // Object is deprecated syntax (there is no possibility to specify "raw')
+                // Object 语法已经弃用（不可指定 "raw' 选项）
                 // define: {
                 //   $development: process.env.NODE_ENV === 'development',
                 //   rawVar: 42,
                 // },
 
                 /**
-                 * Include regular CSS on @import.
+                 * 是否包含通过 @import 导入的常规 CSS。
                  *
                  * @type {boolean}
                  * @default false
@@ -138,7 +140,7 @@ module.exports = {
                 includeCSS: false,
 
                 /**
-                 * Resolve relative url()'s inside imported files.
+                 * 解析导入文件中的相对 url()。
                  *
                  * @see https://stylus-lang.com/docs/js.html#stylusresolveroptions
                  *
@@ -149,7 +151,7 @@ module.exports = {
                 // resolveURL: { nocheck: true },
 
                 /**
-                 * Emits comments in the generated CSS indicating the corresponding Stylus line.
+                 * 生成 CSS 后 注入注释并指定其所在 Stylus 文件行。
                  *
                  * @see https://stylus-lang.com/docs/executable.html
                  *
@@ -159,7 +161,7 @@ module.exports = {
                 lineNumbers: true,
 
                 /**
-                 * Move @import and @charset to the top.
+                 * 将 @import 和 @charset 移至文件顶部。
                  *
                  * @see https://stylus-lang.com/docs/executable.html
                  *
@@ -169,8 +171,8 @@ module.exports = {
                 hoistAtrules: true,
 
                 /**
-                 * Compress CSS output.
-                 * In the "production" mode is `true` by default
+                 * 压缩输出的 CSS。
+                 * 生产环境默认值为 `true`
                  *
                  * @see https://stylus-lang.com/docs/executable.html
                  *
@@ -188,9 +190,9 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
-Allows setting the options passed through to Stylus based off of the loader context.
+允许根据 loader 的 context 来设置 options，再传递给  Stylus。
 
 ```js
 module.exports = {
@@ -205,7 +207,7 @@ module.exports = {
             loader: "stylus-loader",
             options: {
               stylusOptions: (loaderContext) => {
-                // More information about available properties https://webpack.js.org/api/loaders/
+                // 更多可用的属性参见 https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
@@ -228,9 +230,9 @@ module.exports = {
 };
 ```
 
-### `sourceMap`
+### `sourceMap` {#sourcemap}
 
-Type: `Boolean`
+类型：`Boolean`
 
 **webpack.config.js**
 
@@ -261,15 +263,15 @@ module.exports = {
 };
 ```
 
-### `webpackImporter`
+### `webpackImporter` {#webpackimporter}
 
-Type: `Boolean`
-Default: `true`
+类型：`Boolean`
+默认值：`true`
 
-Enables/Disables the default Webpack importer.
+启用/禁用 webpack 默认的 importer。
 
-This can improve performance in some cases.
-Use it with caution because aliases and `@import` at-rules starting with `~` will not work.
+在某些情况下，这样做可以提高性能。
+但是请慎用，因为可能会使得 aliases 和以 `~` 开头的 `@import` 规则失效。
 
 **webpack.config.js**
 
@@ -295,17 +297,17 @@ module.exports = {
 };
 ```
 
-### `additionalData`
+### `additionalData` {#additionaldata}
 
-Type: `String|Function`
-Default: `undefined`
+类型：`String|Function`
+默认值：`undefined`
 
-Prepends `Stylus` code before the actual entry file.
-In this case, the `stylus-loader` will not override the source but just **prepend** the entry's content.
+在实际入口文件的起始位置添加 `Stylus` 代码。
+这种情况下，`stylus-loader` 只会**追加**并不会覆盖文件内容。
 
-This is especially useful when some of your Stylus variables depend on the environment:
+当你的 Stylus 变量依赖环境变量时这个属性将非常有用：
 
-> ℹ Since you're injecting code, this will break the source mappings in your entry file. Often there's a simpler solution than this, like multiple Stylus entry files.
+> ℹ 由于你注入了代码，因此它将破坏入口文件的源映射关系。通常有比这更简单的解决方案，例如多个 Stylus 入口文件。
 
 #### `String`
 
@@ -331,7 +333,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
 ##### Sync
 
@@ -348,7 +350,7 @@ module.exports = {
             loader: "stylus-loader",
             options: {
               additionalData: (content, loaderContext) => {
-                // More information about available properties https://webpack.js.org/api/loaders/
+                // 更多可用的属性参见 https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
@@ -382,7 +384,7 @@ module.exports = {
             loader: "stylus-loader",
             options: {
               additionalData: async (content, loaderContext) => {
-                // More information about available properties https://webpack.js.org/api/loaders/
+                // 更多可用的属性参见 https://webpack.js.org/api/loaders/
                 const { resourcePath, rootContext } = loaderContext;
                 const relativePath = path.relative(rootContext, resourcePath);
 
@@ -401,13 +403,13 @@ module.exports = {
 };
 ```
 
-### `implementation`
+### `implementation` {#implementation}
 
-Type: `Function | String`
+类型：`Function | String`
 
-The special `implementation` option determines which implementation of Stylus to use. Overrides the locally installed `peerDependency` version of `stylus`.
+特殊的 `implementation` 选项决定使用 Stylus 的哪个实现。将会覆盖本地安装的 `stylus` 的 `peerDependency` 版本。
 
-#### Function
+#### Function {#function}
 
 **webpack.config.js**
 
@@ -433,7 +435,7 @@ module.exports = {
 };
 ```
 
-#### String
+#### String {#string}
 
 **webpack.config.js**
 
@@ -459,11 +461,11 @@ module.exports = {
 };
 ```
 
-## Examples
+## 示例 {#examples}
 
-### Normal usage
+### 常规用法 {#normal-usage}
 
-Chain the `stylus-loader` with the [`css-loader`](/loaders/css-loader/) and the [`style-loader`](/loaders/style-loader/) to immediately apply all styles to the DOM.
+将 `stylus-loader`、[`css-loader`](/loaders/css-loader/) 和 [`style-loader`](/loaders/style-loader/) 串联起来使用可立即将所有样式更新到 DOM。
 
 **webpack.config.js**
 
@@ -475,13 +477,13 @@ module.exports = {
         test: /\.styl$/,
         use: [
           {
-            loader: "style-loader", // creates style nodes from JS strings
+            loader: "style-loader", // 从 JS 中创建样式节点
           },
           {
-            loader: "css-loader", // translates CSS into CommonJS
+            loader: "css-loader", // 将 CSS 转为 CommonJS
           },
           {
-            loader: "stylus-loader", // compiles Stylus to CSS
+            loader: "stylus-loader", // 将 Stylus 编译为 CSS
           },
         ],
       },
@@ -490,15 +492,15 @@ module.exports = {
 };
 ```
 
-### Source maps
+### Source maps {#source-maps}
 
-To enable sourcemaps for CSS, you'll need to pass the `sourceMap` property in the loader's options. If this is not passed, the loader will respect the setting for webpack source maps, set in `devtool`.
+为了生成 CSS 的 source map, 你需要在 loader 的可选项中设置 `sourceMap` 属性。如果没设置的话 loader 将会继承你 webpack 中为生成 source map 设置的属性值 `devtool`。
 
 **webpack.config.js**
 
 ```javascript
 module.exports = {
-  devtool: "source-map", // any "source-map"-like devtool is possible
+  devtool: "source-map", // 任何类似于 "source-map" 的 devtool 值都可以
   module: {
     rules: [
       {
@@ -524,7 +526,7 @@ module.exports = {
 };
 ```
 
-### Using nib with stylus
+### stylus 中使用 nib {#using-nib-with-stylus}
 
 **webpack.config.js**
 
@@ -536,13 +538,13 @@ module.exports = {
         test: /\.styl$/,
         use: [
           {
-            loader: "style-loader", // creates style nodes from JS strings
+            loader: "style-loader", // 从 JS 中创建样式节点
           },
           {
-            loader: "css-loader", // translates CSS into CommonJS
+            loader: "css-loader", // 将 CSS 转为 CommonJS
           },
           {
-            loader: "stylus-loader", // compiles Stylus to CSS
+            loader: "stylus-loader", // 将 Stylus 编译为 CSS
             options: {
               stylusOptions: {
                 use: [require("nib")()],
@@ -557,16 +559,16 @@ module.exports = {
 };
 ```
 
-### Import JSON files
+### 导入 JSON 文件 {#import-json-files}
 
-Stylus does not provide resolving capabilities in the `json` function.
-Therefore webpack resolver does not work for `.json` files.
-Use [`stylus resolver`](#stylus-resolver).
+Stylus 在 `json` 函数中无效。
+因此 webpack 解析器不适用于 `.json` 文件。
+可使用 [`stylus resolver`](#stylus-resolver)。
 
 **index.styl**
 
 ```styl
-// Suppose the file is located here `node_modules/vars/vars.json`
+// 假设文件位置在这里 `node_modules/vars/vars.json`
 json('vars.json')
 
 @media queries-small
@@ -590,7 +592,7 @@ module.exports = {
             loader: "stylus-loader",
             options: {
               stylusOptions: {
-                // Specify the path. where to find files
+                // 指定文件查找路径。
                 paths: ["node_modules/vars"],
               },
             },
@@ -602,36 +604,36 @@ module.exports = {
 };
 ```
 
-### In production
+### 生产环境 {#in-production}
 
-Usually, it's recommended to extract the style sheets into a dedicated file in production using the [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/). This way your styles are not dependent on JavaScript.
+在生产环境中推荐使用 [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) 来提取样式表到专门的文件中，这样你的样式就不需要依赖 JavaScript。
 
-### webpack resolver
+### webpack 解析器 {#webpack-resolver}
 
-Webpack provides an [advanced mechanism to resolve files](/configuration/resolve/).
-The `stylus-loader` applies the webpack resolver when processing queries.
-Thus you can import your Stylus modules from `node_modules`.
+`webpack` 提供了一种 [解析文件的高级机制](/configuration/resolve/)。
+`stylus-loader` 将所有的查询结果传递给了 webpack 解析器。
+因此你可以从 `node_modules` 中导入 Stylus 模块。
 
 ```styl
 @import 'bootstrap-styl/bootstrap/index.styl';
 ```
 
-Using `~` is deprecated and can be removed from your code (**we recommend it**), but we still support it for historical reasons.
-Why you can removed it? The loader will first try to resolve `@import`/`@require` as relative, if it cannot be resolved, the loader will try to resolve `@import`/`@require` inside [`node_modules`](/configuration/resolve/#resolvemodules).
-Just prepend them with a `~` which tells webpack to look up the [`modules`](/configuration/resolve/#resolvemodules).
+`~` 用法已被废弃，可以从代码中删除（**我们建议这么做**），但是我们会因为一些历史原因一直支持这种写法。
+为什么你可以移除它呢？loader 首先会尝试以相对路径解析 `@import`，如果它不能被解析，loader 将会尝试在 [`node_modules`](/configuration/resolve/#resolvemodules) 中解析 `@import`。
+只要在包名前加上 `~`，告诉 webpack 在 [`modules`](/configuration/resolve/#resolvemodules) 中进行查找。
 
 ```styl
 @import "~bootstrap-styl/bootstrap/index.styl";
 ```
 
-It's important to only prepend it with `~`, because `~/` resolves to the home-directory.
-Webpack needs to distinguish between `bootstrap` and `~bootstrap`, because CSS and Styl files have no special syntax for importing relative files.
-Writing `@import "file"` is the same as `@import "./file";`
+重要的是只在它的前面加上 `~`，因为 `~/` 会被解析到根目录。
+`webpack` 需要区分 `bootstrap` 和 `~bootstrap`，因为 CSS 和 Stylus 文件没有特殊的语法可以导入相对路径的文件。
+`@import "file"` 和 `@import "./file";` 写法是等价的。
 
-### Stylus resolver
+### Stylus resolver {#stylus-resolver}
 
-If you specify the `paths` option, modules will be searched in the given `paths`.
-This is Stylus default behavior.
+如果指定 `paths` 选项，将从指定的 `paths` 中搜索模块。
+这是 Stylus 的默认行为。
 
 **webpack.config.js**
 
@@ -663,22 +665,22 @@ module.exports = {
 };
 ```
 
-### Extracting style sheets
+### 提取样式 {#extracting-style-sheets}
 
-Bundling CSS with webpack has some nice advantages like referencing images and fonts with hashed urls or [hot module replacement](/concepts/hot-module-replacement/) in development. In production, on the other hand, it's not a good idea to apply your style sheets depending on JS execution. Rendering may be delayed or even a [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content) might be visible. Thus it's often still better to have them as separate files in your final production build.
+通过 webpack 打包 CSS 有很多好处，比如给引用图片和字体文件路径添加 hash, 在开发环境可以[模块热更新](/concepts/hot-module-replacement/)。另一方面，在生产环境，根据 JS 来控制应用样式表不是一个好的方式，可能会导致延迟渲染，甚至可能会出现[闪烁现象](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)。因此，在你最终的生产环境中将它们拆分成单独的文件来存放通常是比较好的选择。
 
-There are two possibilities to extract a style sheet from the bundle:
+有两种从 bundle 中提取样式表的方式：
 
-- [`extract-loader`](https://github.com/peerigon/extract-loader) (simpler, but specialized on the css-loader's output)
-- [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) (more complex, but works in all use-cases)
+- [`extract-loader`](https://github.com/peerigon/extract-loader) （简单，但得专门指定 `css-loader` 的 output）
+- [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) （较复杂，但适用于所有的场景）
 
-## Contributing
+## 贡献 {#contributing}
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+如果你还没有看过我们的贡献者指南请先花点时间看一下。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/stylus-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License
+## 许可 {#license}
 
 [MIT](https://github.com/webpack-contrib/stylus-loader/blob/master/LICENSE)
 
