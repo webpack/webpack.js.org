@@ -152,12 +152,9 @@ loadComponent('abtests', 'test123');
 
 [查看完整实现](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)
 
-<<<<<<< HEAD
-## 动态 Public Path {#dynamicpublicpath}
-=======
-## Promise Based Dynamic Remotes
+## 基于 Promise 的动态 Remote {#promisebaseddynamicremotes}
 
-Generally, remotes are configured using URL's like in this example:
+一般来说，remote 是使用 URL 配置的，示例如下：
 
 ```js
 module.exports = {
@@ -172,7 +169,7 @@ module.exports = {
 };
 ```
 
-But you can also pass in a promise to this remote, which will be resolved at runtime. You should resolve this promise with any module that fits the `get/init` interface described above. For example, if you wanted to pass in which version of a federated module you should use, via a query parameter you could do something like the following:
+但是你也可以向 remote 传递一个 promise，其会在运行时被调用。你应该用任何符合上面描述的 `get/init` 接口的模块来调用这个 promise。例如，如果你想传递你应该使用哪个版本的联邦模块，你可以通过一个查询参数做以下事情：
 
 ```js
 module.exports = {
@@ -213,10 +210,9 @@ module.exports = {
 };
 ```
 
-Note that when using this API you _have_ to resolve an object which contains the get/init API.
+请注意当使用该 API 时，你 _必须_ resolve 一个包含 get/init API 的对象。
 
-## Dynamic Public Path
->>>>>>> 445ed65da21baa246554f6e42f24c59a29b96b98
+## 动态 Public Path {#dynamicpublicpath}
 
 ### 提供一个 host api 以设置 publicPath {#offerahostapitosetthepublicPath}
 
