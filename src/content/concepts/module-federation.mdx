@@ -9,6 +9,7 @@ contributors:
   - ScriptedAlchemy
   - snitin315
   - XiaofengXie16
+  - KyleBastien
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
@@ -29,7 +30,7 @@ translators:
 这通常被称作微前端，但并不仅限于此。
 
 <StackBlitzPreview
-  example="module-federation?terminal="
+  example="module-federation?terminal=start&terminal="
   description="Check out this live module federation example on StackBlitz."
 />
 
@@ -150,6 +151,66 @@ loadComponent('abtests', 'test123');
 ```
 
 [查看完整实现](https://github.com/module-federation/module-federation-examples/tree/master/advanced-api/dynamic-remotes)
+
+## 基于 Promise 的动态 Remote {#promisebaseddynamicremotes}
+
+一般来说，remote 是使用 URL 配置的，示例如下：
+
+```js
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'host',
+      remotes: {
+        app1: 'app1@http://localhost:3001/remoteEntry.js',
+      },
+    }),
+  ],
+};
+```
+
+但是你也可以向 remote 传递一个 promise，其会在运行时被调用。你应该用任何符合上面描述的 `get/init` 接口的模块来调用这个 promise。例如，如果你想传递你应该使用哪个版本的联邦模块，你可以通过一个查询参数做以下事情：
+
+```js
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'host',
+      remotes: {
+        app1: `promise new Promise(resolve => {
+      const urlParams = new URLSearchParams(window.location.search)
+      const version = urlParams.get('app1VersionParam')
+      // This part depends on how you plan on hosting and versioning your federated modules
+      const remoteUrlWithVersion = 'http://localhost:3001/' + version + '/remoteEntry.js'
+      const script = document.createElement('script')
+      script.src = remoteUrlWithVersion
+      script.onload = () => {
+        // the injected script has loaded and is available on window
+        // we can now resolve this Promise
+        const proxy = {
+          get: (request) => window.app1.get(request),
+          init: (arg) => {
+            try {
+              return window.app1.init(arg)
+            } catch(e) {
+              console.log('remote container already initialized')
+            }
+          }
+        }
+        resolve(proxy)
+      }
+      // inject this script with the src set to the versioned remoteEntry.js
+      document.head.appendChild(script);
+    })
+    `,
+      },
+      // ...
+    }),
+  ],
+};
+```
+
+请注意当使用该 API 时，你 _必须_ resolve 一个包含 get/init API 的对象。
 
 ## 动态 Public Path {#dynamicpublicpath}
 
