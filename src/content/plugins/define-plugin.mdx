@@ -7,11 +7,13 @@ contributors:
   - byzyk
   - EugeneHlushko
   - smonusbonus
+  - chenxsan
 translators:
   - Maxim-HSP
+  - QC-L
 ---
 
-`DefinePlugin` 允许在 **编译时** 创建配置的全局常量，这在需要区分开发模式与生产模式进行不同的操作时，非常有用。例如，如果想在开发构建中进行日志记录，而不在生产构建中进行，就可以定义一个全局常量去判断是否记录日志。这就是 `DefinePlugin` 的发光之处，设置好它，就可以忘掉开发环境和生产环境的构建规则。
+`DefinePlugin` 允许在 **编译时** 将你代码中的变量替换为其他值或表达式。这在需要根据开发模式与生产模式进行不同的操作时，非常有用。例如，如果想在开发构建中进行日志记录，而不在生产构建中进行，就可以定义一个全局常量去判断是否记录日志。这就是 `DefinePlugin` 的发光之处，设置好它，就可以忘掉开发环境和生产环境的构建规则。
 
 ```javascript
 new webpack.DefinePlugin({
