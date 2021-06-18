@@ -57,7 +57,7 @@ module.exports = {
 |  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |    `undefined`     | 在入口文件起始或末尾添加 `Stylus` 代码。 |
 |  **[`implementation`](#implementation)**  | `{String\|Function}` |      `stylus`      | 配置 Stylus 使用的实现库。                      |
 
-### `stylusOptions` {#stylusOptions}
+### `stylusOptions` {#stylusoptions}
 
 类型：`Object|Function`
 默认值：`{}`
