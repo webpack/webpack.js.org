@@ -16,7 +16,7 @@ related:
     url: https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27
 ---
 
-When contributing to the core repo, writing a loader/plugin, or even just working on a complex project, debugging tools can be central to your workflow. Whether the problem is slow performance on a large project or an unhelpful traceback, the following utilities can make figuring it out less painful.
+When contributing to the core repo, writing a loader/plugin, or even working on a complex project, debugging tools can be central to your workflow. Whether the problem is slow performance on a large project or an unhelpful traceback, the following utilities can make figuring it out less painful.
 
 - The [`stats` data](/api/stats) made available through [Node](/api/node/#stats-object) and the [CLI](/api/cli/#common-options).
 - Chrome **DevTools** via `node-nightly` and the latest Node.js versions.
@@ -36,7 +36,7 @@ On top of that, the official [analyze tool](https://github.com/webpack/analyse) 
 
 ## DevTools
 
-While [`console`](https://nodejs.org/api/console.html) statements may work well in simpler scenarios, sometimes a more robust solution is needed. As most front-end developers already know, Chrome DevTools are a life saver when debugging web applications, _but they don’t have to stop there_. As of Node v6.3.0+, developers can use the built-in `--inspect` flag to debug a node program in DevTools.
+While [`console`](https://nodejs.org/api/console.html) statements may work well in straightforward scenarios, sometimes a more robust solution is needed. As most front-end developers already know, Chrome DevTools are a life saver when debugging web applications, _but they don’t have to stop there_. As of Node v6.3.0+, developers can use the built-in `--inspect` flag to debug a node program in DevTools.
 
 This gives you the power to easily create breakpoints, debug memory usage, expose and examine objects in the console, and much more. In this short demo, we'll utilize the [`node-nightly`](https://github.com/hemanth/node-nightly) package which provides access to the latest and greatest inspecting capabilities.
 
@@ -54,7 +54,7 @@ Now, we'll need to run it once to finish the installation:
 node-nightly
 ```
 
-Now, we can simply use `node-nightly` along with the `--inspect` flag to start our build in any webpack-based project. Note that we cannot run NPM `scripts`, e.g. `npm run build`, so we'll have to specify the full `node_modules` path:
+Now, we can use `node-nightly` along with the `--inspect` flag to start our build in any webpack-based project. Note that we cannot run NPM `scripts`, e.g. `npm run build`, so we'll have to specify the full `node_modules` path:
 
 ```bash
 node-nightly --inspect ./node_modules/webpack/bin/webpack.js

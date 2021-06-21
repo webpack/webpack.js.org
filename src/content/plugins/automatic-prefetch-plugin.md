@@ -1,5 +1,6 @@
 ---
 title: AutomaticPrefetchPlugin
+group: webpack
 contributors:
   - sokra
   - EugeneHlushko

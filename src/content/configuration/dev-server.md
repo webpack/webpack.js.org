@@ -32,7 +32,7 @@ T> Options that are compatible with [webpack-dev-middleware](https://github.com/
 
 `object`
 
-This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change its behavior in various ways. Here's a simple example that gzips and serves everything from our `dist/` directory in the project root:
+This set of options is picked up by [webpack-dev-server](https://github.com/webpack/webpack-dev-server) and can be used to change its behavior in various ways. Here's a rudimentary example that gzips and serves everything from our `dist/` directory in the project root:
 
 **webpack.config.js**
 
@@ -195,7 +195,7 @@ npx webpack serve --bonjour
 
 `string = 'info': 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'`
 
-W> `none` and `warning` are going to be deprecated at the next major version.
+W> `silent`, `trace`, `debug`, and `warning` are going to be deprecated at the next major version.
 
 When using _inline mode_, the console in your DevTools will show you messages e.g. before reloading, before an error or when [Hot Module Replacement](/concepts/hot-module-replacement/) is enabled.
 
@@ -1269,11 +1269,17 @@ module.exports = {
 };
 ```
 
+Usage via the CLI
+
+```bash
+npx webpack serve --serveIndex
+```
+
 ## `devServer.setup`
 
 `function (app, server)`
 
-W> This option is **deprecated** in favor of [`devServer.before`](#devserverbefore) and will be removed in v3.0.0.
+W> This option is **deprecated** in favor of [`devServer.before`](#devserverbefore) and will be removed in v4.0.0.
 
 Here you can access the Express app object and add your own custom middleware to it.
 For example, to define custom handlers for some paths:

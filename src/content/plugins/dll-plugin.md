@@ -1,5 +1,6 @@
 ---
 title: DllPlugin
+group: webpack
 contributors:
   - aretecode
   - sokra

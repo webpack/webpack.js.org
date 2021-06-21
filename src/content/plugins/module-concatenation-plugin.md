@@ -1,5 +1,6 @@
 ---
 title: ModuleConcatenationPlugin
+group: webpack
 contributors:
   - skipjack
   - TheLarkInn
@@ -83,7 +84,7 @@ function tryToAdd(group, module) {
 
 ### Debugging Optimization Bailouts
 
-When using the webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the webpack config, just add the following to the `stats` object:
+When using the webpack CLI, the `--display-optimization-bailout` flag will display bailout reasons. When using the webpack config, add the following to the `stats` object:
 
 ```js
 module.exports = {

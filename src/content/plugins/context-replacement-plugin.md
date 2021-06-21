@@ -1,5 +1,6 @@
 ---
 title: ContextReplacementPlugin
+group: webpack
 contributors:
   - simon04
   - byzyk

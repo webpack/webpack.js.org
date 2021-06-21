@@ -1,5 +1,6 @@
 node_modules
 dist
+!examples/**/dist
 src/**/_*.json
 src/**/_*.md
 .vscode

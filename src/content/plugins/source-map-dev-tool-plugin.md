@@ -1,5 +1,6 @@
 ---
 title: SourceMapDevToolPlugin
+group: webpack
 contributors:
   - johnnyreilly
   - simon04

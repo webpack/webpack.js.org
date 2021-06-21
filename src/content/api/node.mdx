@@ -72,7 +72,7 @@ webpack runner or have it build and watch for changes, much like the
 
 Typically, only one master `Compiler` instance is created, although child
 compilers can be created in order to delegate specific tasks. The `Compiler` is
-ultimately just a function which performs bare minimum functionality to keep a
+ultimately a function which performs bare minimum functionality to keep a
 lifecycle running. It delegates all the loading, bundling, and writing work to
 registered plugins.
 
@@ -144,8 +144,8 @@ const watching = compiler.watch({
 `Watching` options are covered in detail
 [here](/configuration/watch/#watchoptions).
 
-W> Filesystem inaccuracies may trigger multiple builds for a single change. So,
-in the example above, the `console.log` statement may fire multiple times for a
+W> Filesystem inaccuracies may trigger multiple builds for a single change.
+In the example above, the `console.log` statement may fire multiple times for a
 single modification. Users should expect this behavior and may check
 `stats.hash` to see if the file hash has actually changed.
 

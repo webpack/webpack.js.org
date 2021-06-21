@@ -466,7 +466,7 @@ Parsers may inspect these options and disable or reconfigure themselves accordin
 - Setting the option to `false` disables the parser.
 - Setting the option to `true` or leaving it `undefined` enables the parser.
 
-However, parser plugins may accept more than just a boolean. For example, the internal `NodeStuffPlugin` can accept an object instead of `true` to add additional options for a particular Rule.
+However, parser plugins may accept more than only a boolean. For example, the internal `NodeStuffPlugin` can accept an object instead of `true` to add additional options for a particular Rule.
 
 **Examples** (parser options by the default plugins):
 
@@ -748,6 +748,28 @@ module.exports = {
 An array of [`Rules`](#rule) that is also used when the Rule matches.
 
 T> See [`Nested rules`](#nested-rules) for more information.
+
+## Rule.scheme
+
+Match the used schema, e.g., `data`, `http`.
+
+- Type: `string | RegExp | ((value: string) => boolean) | RuleSetLogicalConditions | RuleSetCondition[]`
+- Available: <Badge text='5.38.0+' />
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        scheme: 'data',
+        type: 'asset/resource',
+      },
+    ],
+  },
+};
+```
 
 ## `Rule.sideEffects`
 

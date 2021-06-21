@@ -53,7 +53,7 @@ class MyExampleWebpackPlugin {
 
 ## Basic plugin architecture
 
-Plugins are instantiated objects with an `apply` method on their prototype. This `apply` method is called once by the webpack compiler while installing the plugin. The `apply` method is given a reference to the underlying webpack compiler, which grants access to compiler callbacks. A simple plugin is structured as follows:
+Plugins are instantiated objects with an `apply` method on their prototype. This `apply` method is called once by the webpack compiler while installing the plugin. The `apply` method is given a reference to the underlying webpack compiler, which grants access to compiler callbacks. A plugin is structured as follows:
 
 ```javascript
 class HelloWorldPlugin {
@@ -183,7 +183,7 @@ module.exports = HelloAsyncPlugin;
 
 Once we can latch onto the webpack compiler and each individual compilations, the possibilities become endless for what we can do with the engine itself. We can reformat existing files, create derivative files, or fabricate entirely new assets.
 
-Let's write a simple example plugin that generates a new build file called `assets.md`, the contents of which will list all of the asset files in our build. This plugin might look something like this:
+Let's write an example plugin that generates a new build file called `assets.md`, the contents of which will list all of the asset files in our build. This plugin might look something like this:
 
 ```javascript
 class FileListPlugin {
@@ -290,7 +290,7 @@ This will generate a markdown file with chosen name that looks like this:
 
 T> We are using synchronous `tap()` method to tap into the `processAssets` hook because we don't need to perform any asynchronous operations in the example above. However, the `processAssets` hook is an asynchronous one, so you can also use `tapPromise()` or `tapAsync()` if you actually need to.
 
-T> The [`processAssets`](/api/compilation-hooks/#processassets) hook also supports the `additionalAssets` property, that allows your plugin to intercept not only assets that were added by other plugins prior to the execution of the specified stage, but also for assets that were added on a later stages. This allows to intercept absolutely all the assets which are part of the compilation. However, in our example we are just fine with using the `SUMMARIZE` stage to capture all the assets generated on previous stages (this should account for all assets in general case).
+T> The [`processAssets`](/api/compilation-hooks/#processassets) hook also supports the `additionalAssets` property, that allows your plugin to intercept not only assets that were added by other plugins prior to the execution of the specified stage, but also for assets that were added on a later stages. This allows to intercept absolutely all the assets which are part of the compilation. However, in our example we are fine with using the `SUMMARIZE` stage to capture all the assets generated on previous stages (this should account for all assets in general case).
 
 ## Different Plugin Shapes
 

@@ -81,6 +81,11 @@ export default class Navigation extends Component {
                     title: '中文',
                     url: 'https://webpack.docschina.org/',
                   },
+                  {
+                    lang: 'ko',
+                    title: '한국어',
+                    url: 'https://webpack.kr/',
+                  },
                 ]}
               />
             ),

@@ -92,8 +92,10 @@ function getMatches(string, regex) {
 
 module.exports = function processREADME(body, options = {}) {
   let processingString = body
+    // remove items other than paragraphs in div[align="center"]
+    // e.g., logo, title and so on.
     .replace(/[^]*?<div align="center">([^]*?)<\/div>/, (match, content) => {
-      let parsed = content.match(/<p>([^]*?)<\/?p>/);
+      let parsed = content.match(/<p>\s+([^]*?)\s+<\/?p>/);
       return parsed ? parsed[1] : '';
     })
     // Replace lone h1 formats
