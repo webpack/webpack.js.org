@@ -68,7 +68,7 @@ A string indicating the root of your files.
 ### `exclude`
 
 - Type: `String|Array[String]`
-- Default: `'node_modules'`
+- Default: `['node_modules', compiler.options.output.path]`
 
 Specify the files and/or directories to exclude. Must be relative to `options.context`.
 
