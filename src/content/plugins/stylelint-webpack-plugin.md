@@ -69,8 +69,13 @@ module.exports = {
 
 ### `exclude` {#exclude}
 
+<<<<<<< HEAD
 - 类型：`String|Array[String]`
 - 默认值：`'node_modules'`
+=======
+- Type: `String|Array[String]`
+- Default: `['node_modules', compiler.options.output.path]`
+>>>>>>> d40b3321030525f30f228dc7af25147db79ba9d9
 
 指定要忽略的文件或目录。必须相对于 `options.context`。
 

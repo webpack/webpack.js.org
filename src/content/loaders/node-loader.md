@@ -23,7 +23,11 @@ translators:
 
 允许使用 `.node` 拓展名与原生 node module 相关联。
 
+<<<<<<< HEAD
 > ⚠ `node-loader` 只对 `node`/`electron-main`/`electron-main` 生效。
+=======
+> ⚠ `node-loader` only works on the `node`/`async-node`/`electron-main`/`electron-renderer`/`electron-preload` targets.
+>>>>>>> d40b3321030525f30f228dc7af25147db79ba9d9
 
 ## 快速开始 {#getting-started}
 
@@ -33,7 +37,11 @@ translators:
 $ npm install node-loader --save-dev
 ```
 
+<<<<<<< HEAD
 设置 `target` 配置项为 `node`/`electron-main`/`electron-main`，并且需禁用 `__dirname` 全局变量。
+=======
+Setup the `target` option to `node`/`async-node`/`electron-main`/`electron-renderer`/`electron-preload` value and do not mock the `__dirname` global variable.
+>>>>>>> d40b3321030525f30f228dc7af25147db79ba9d9
 
 **webpack.config.js**
 
