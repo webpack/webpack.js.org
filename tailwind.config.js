@@ -3,8 +3,9 @@ module.exports = {
   purge: ['./src/components/**/*.{js,jsx}'],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
-    screen: {
+    screens: {
       md: '768px',
+      print: { raw: 'print' },
     },
     extend: {
       fontSize: {
