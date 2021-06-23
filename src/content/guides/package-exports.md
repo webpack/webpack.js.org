@@ -308,11 +308,11 @@ This would simplify creating exceptions for Node.js.
 
 The following tools support custom conditions:
 
-| Tool      | Supported | Notes                                                           |
-| --------- | --------- | --------------------------------------------------------------- |
-| Node.js   | yes       | Use `--conditions` CLI argument.                                |
-| webpack   | yes       | Use `resolve.conditionNames` configuration option.              |
-| rollup    | yes       | Use `exportConditions` option for `@rollup/plugin-node-resolve` |
+| Tool      | Supported | Notes                                                                                                    |
+| --------- | --------- | -------------------------------------------------------------------------------------------------------- |
+| Node.js   | yes       | Use [`--conditions`](https://nodejs.org/api/cli.html#cli_c_condition_conditions_condition) CLI argument. |
+| webpack   | yes       | Use [`resolve.conditionNames`](/configuration/resolve/#resolveconditionnames) configuration option.      |
+| rollup    | yes       | Use `exportConditions` option for `@rollup/plugin-node-resolve`                                          |
 | esinstall | no        |
 | wmr       | no        |
 
