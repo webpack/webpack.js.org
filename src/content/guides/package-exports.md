@@ -320,7 +320,7 @@ For custom conditions the following naming schema is recommended:
 
 `<company-name>:<condition-name>`
 
-Examples: `example-corp:beta`, `google:internal`, `
+Examples: `example-corp:beta`, `google:internal`.
 
 ## Common patterns
 
