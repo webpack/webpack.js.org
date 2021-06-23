@@ -74,17 +74,17 @@ export default class Navigation extends Component {
                 items={[
                   {
                     title: 'English',
-                    url: 'https://webpack.js.org/',
+                    url: `https://webpack.js.org${pathname}`,
                   },
                   {
                     lang: 'zh',
                     title: '中文',
-                    url: 'https://webpack.docschina.org/',
+                    url: `https://webpack.docschina.org${pathname}`,
                   },
                   {
                     lang: 'ko',
                     title: '한국어',
-                    url: 'https://webpack.kr/',
+                    url: `https://webpack.kr${pathname}`,
                   },
                 ]}
               />
