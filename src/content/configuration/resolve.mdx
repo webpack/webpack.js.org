@@ -175,6 +175,23 @@ module.exports = {
 
 If unsafe cache is enabled, includes `request.context` in the cache key. This option is taken into account by the [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) module. Since webpack 3.1.0 context in resolve caching is ignored when resolve or resolveLoader plugins are provided. This addresses a performance regression.
 
+### resolve.conditionNames
+
+`string[]`
+
+Condition names for [`exports` field](https://nodejs.org/api/packages.html#packages_exports) which defines entry points of a package.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    conditionNames: ['require', 'node'],
+  },
+};
+```
+
 ### `resolve.descriptionFiles`
 
 `[string] = ['package.json']`
