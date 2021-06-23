@@ -193,11 +193,11 @@ One of these conditions is set depending on the syntax used to reference the mod
 
 These conditions might also be set additionally:
 
-| Condition   | Description                                                                                                       | Supported by         |
-| ----------- | ----------------------------------------------------------------------------------------------------------------- | -------------------- |
-| `module`    | All module syntax that allows to reference javascript supports ESM.<br>(only combined with `import` or `require`) | webpack, rollup, wmr |
-| `esmodules` | Always set by supported tools.                                                                                    | wmr                  |
-| `types`     | Request is issued from typescript that is interested in type declarations.                                        |
+| Condition   | Description                                                                                                         | Supported by         |
+| ----------- | ------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| `module`    | All module syntax that allows to reference javascript supports ESM.<br />(only combined with `import` or `require`) | webpack, rollup, wmr |
+| `esmodules` | Always set by supported tools.                                                                                      | wmr                  |
+| `types`     | Request is issued from typescript that is interested in type declarations.                                          |
 
 (1) `import` and `require` are both set independent of referencing syntax. `require` has always lower priority.
 
