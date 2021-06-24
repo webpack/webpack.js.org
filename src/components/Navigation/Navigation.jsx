@@ -29,13 +29,15 @@ const { DARK, LIGHT } = THEME;
 export default class Navigation extends Component {
   static propTypes = {
     pathname: PropTypes.string,
+    hash: PropTypes.string,
     links: PropTypes.array,
     toggleSidebar: PropTypes.func,
     theme: PropTypes.string,
     switchTheme: PropTypes.func,
   };
   render() {
-    const { pathname, links, toggleSidebar, theme, switchTheme } = this.props;
+    const { pathname, hash, links, toggleSidebar, theme, switchTheme } =
+      this.props;
     const themeSwitcher = () => switchTheme(theme === DARK ? LIGHT : DARK);
 
     return (
@@ -74,17 +76,17 @@ export default class Navigation extends Component {
                 items={[
                   {
                     title: 'English',
-                    url: `https://webpack.js.org${pathname}`,
+                    url: `https://webpack.js.org${pathname}${hash}`,
                   },
                   {
                     lang: 'zh',
                     title: '中文',
-                    url: `https://webpack.docschina.org${pathname}`,
+                    url: `https://webpack.docschina.org${pathname}${hash}`,
                   },
                   {
                     lang: 'ko',
                     title: '한국어',
-                    url: `https://webpack.kr${pathname}`,
+                    url: `https://webpack.kr${pathname}${hash}`,
                   },
                 ]}
               />
