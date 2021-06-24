@@ -16,7 +16,9 @@ repo: https://github.com/webpack-contrib/worker-loader
 
 
 
-worker loader module for webpack
+Web Worker loader for webpack 4.
+
+Note that this is specific to webpack 4. To use Web Workers in webpack 5, see https://webpack.js.org/guides/web-workers/.
 
 ## Getting Started
 
