@@ -254,7 +254,6 @@ function Site(props) {
           ></script>
         </Helmet>
         <div className="site__header">
-          <NotificationBar />
           <Navigation
             pathname={location.pathname}
             toggleSidebar={_toggleSidebar}
@@ -343,6 +342,7 @@ function Site(props) {
           />
         </Switch>
         <Footer />
+        <NotificationBar />
       </div>
     </MDXProvider>
   );
