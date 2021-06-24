@@ -45,7 +45,7 @@ body {
 **component.js**
 
 ```js
-import './style.css';
+import "./style.css";
 ```
 
 **webpack.config.js**
@@ -56,7 +56,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
@@ -65,6 +65,7 @@ module.exports = {
 
 ## Options {#options}
 
+<<<<<<< HEAD
 |              名称               |         类型         |  默认值   | 描述                                              |
 | :-----------------------------: | :------------------: | :--------: | :------------------------------------------------------- |
 | [**`injectType`**](#injecttype) |      `{String}`      | `styleTag` | 配置把 styles 插入到 DOM 中的方式 |
@@ -73,6 +74,16 @@ module.exports = {
 |       [**`base`**](#base)       |      `{Number}`      |   `true`   | 基于 (DLLPlugin) 设置 module ID |
 |   [**`esModule`**](#esmodule)   |     `{Boolean}`      |  `false`   | 使用 ES modules 语法                                       |
 |    [**`modules`**](#modules)    |      `{Object}`      | `undefined`| 配置 CSS Modules                                |
+=======
+|                     Name                      |         Type         |   Default   | Description                                                |
+| :-------------------------------------------: | :------------------: | :---------: | :--------------------------------------------------------- |
+|        [**`injectType`**](#injecttype)        |      `{String}`      | `styleTag`  | Allows to setup how styles will be injected into the DOM   |
+|        [**`attributes`**](#attributes)        |      `{Object}`      |    `{}`     | Adds custom attributes to tag                              |
+|            [**`insert`**](#insert)            | `{String\|Function}` |   `head`    | Inserts tag at the given position into the DOM             |
+| [**`styleTagTransform`**](#styletagtransform) |     `{Function}`     | `undefined` | Transform tag and css when insert 'style' tag into the DOM |
+|              [**`base`**](#base)              |      `{Number}`      |   `true`    | Sets module ID base (DLLPlugin)                            |
+|          [**`esModule`**](#esmodule)          |     `{Boolean}`      |   `true`    | Use ES modules syntax                                      |
+>>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
 
 ### `injectType` {#injecttype}
 
@@ -85,8 +96,10 @@ Default: `styleTag`
 
 - `styleTag`
 - `singletonStyleTag`
+- `autoStyleTag`
 - `lazyStyleTag`
 - `lazySingletonStyleTag`
+- `lazyAutoStyleTag`
 - `linkTag`
 
 #### `styleTag` {#styletag}
@@ -96,7 +109,7 @@ Default: `styleTag`
 **component.js**
 
 ```js
-import './styles.css';
+import "./styles.css";
 ```
 
 使用 Locals (CSS Modules) 的例子：
@@ -104,10 +117,10 @@ import './styles.css';
 **component-with-css-modules.js**
 
 ```js
-import styles from './styles.css';
+import styles from "./styles.css";
 
-const divElement = document.createElement('div');
-divElement.className = styles['my-class'];
+const divElement = document.createElement("div");
+divElement.className = styles["my-class"];
 ```
 
 导入的对象保存着所有的 locals (class names)。
@@ -121,9 +134,15 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
+<<<<<<< HEAD
           // 由于是默认行为，`injectType` 选项可以省略
           { loader: 'style-loader', options: { injectType: 'styleTag' } },
           'css-loader',
+=======
+          // The `injectType`  option can be avoided because it is default behaviour
+          { loader: "style-loader", options: { injectType: "styleTag" } },
+          "css-loader",
+>>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
         ],
       },
     ],
@@ -155,16 +174,16 @@ module.exports = {
 **component.js**
 
 ```js
-import './styles.css';
+import "./styles.css";
 ```
 
 **component-with-css-modules.js**
 
 ```js
-import styles from './styles.css';
+import styles from "./styles.css";
 
-const divElement = document.createElement('div');
-divElement.className = styles['my-class'];
+const divElement = document.createElement("div");
+divElement.className = styles["my-class"];
 ```
 
 导入的对象保存着所有的 locals  (class names)。
@@ -179,10 +198,10 @@ module.exports = {
         test: /\.css$/i,
         use: [
           {
-            loader: 'style-loader',
-            options: { injectType: 'singletonStyleTag' },
+            loader: "style-loader",
+            options: { injectType: "singletonStyleTag" },
           },
-          'css-loader',
+          "css-loader",
         ],
       },
     ],
@@ -203,7 +222,15 @@ loader 插入的 styles 如下：
 </style>
 ```
 
+<<<<<<< HEAD
 #### `lazyStyleTag` {#lazystyletag}
+=======
+#### `autoStyleTag`
+
+Works the same as a [`styleTag`](#styletag), but if the code is executed in IE6-9, turns on the [`singletonStyleTag`](#singletonstyletag) mode.
+
+#### `lazyStyleTag`
+>>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
 
 在需要时使用多个 `<style></style>` 把 styles 插入到 DOM 中。
 
@@ -216,7 +243,7 @@ loader 插入的 styles 如下：
 **component.js**
 
 ```js
-import styles from './styles.lazy.css';
+import styles from "./styles.lazy.css";
 
 styles.use();
 // 要移除 styles 时你可以调用
@@ -226,12 +253,12 @@ styles.use();
 **component-with-css-modules.js**
 
 ```js
-import styles from './styles.lazy.css';
+import styles from "./styles.lazy.css";
 
 styles.use();
 
-const divElement = document.createElement('div');
-divElement.className = styles.locals['my-class'];
+const divElement = document.createElement("div");
+divElement.className = styles.locals["my-class"];
 ```
 
 导入的对象的 `locals` 属性保存着所有的 locals (class names)。
@@ -245,13 +272,13 @@ module.exports = {
       {
         test: /\.css$/i,
         exclude: /\.lazy\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.lazy\.css$/i,
         use: [
-          { loader: 'style-loader', options: { injectType: 'lazyStyleTag' } },
-          'css-loader',
+          { loader: "style-loader", options: { injectType: "lazyStyleTag" } },
+          "css-loader",
         ],
       },
     ],
@@ -290,7 +317,7 @@ module.exports = {
 **component.js**
 
 ```js
-import styles from './styles.css';
+import styles from "./styles.css";
 
 styles.use();
 // 要移除 styles 时你可以调用
@@ -300,12 +327,12 @@ styles.use();
 **component-with-css-modules.js**
 
 ```js
-import styles from './styles.lazy.css';
+import styles from "./styles.lazy.css";
 
 styles.use();
 
-const divElement = document.createElement('div');
-divElement.className = styles.locals['my-class'];
+const divElement = document.createElement("div");
+divElement.className = styles.locals["my-class"];
 ```
 
 导入的对象的 `locals` 属性保存着所有的 locals (class names)。
@@ -319,16 +346,16 @@ module.exports = {
       {
         test: /\.css$/i,
         exclude: /\.lazy\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.lazy\.css$/i,
         use: [
           {
-            loader: 'style-loader',
-            options: { injectType: 'lazySingletonStyleTag' },
+            loader: "style-loader",
+            options: { injectType: "lazySingletonStyleTag" },
           },
-          'css-loader',
+          "css-loader",
         ],
       },
     ],
@@ -349,15 +376,23 @@ module.exports = {
 </style>
 ```
 
+<<<<<<< HEAD
 #### `linkTag` {#linktag}
+=======
+#### `lazyAutoStyleTag`
+
+Works the same as a [`lazyStyleTag`](#lazystyletag), but if the code is executed in IE6-9, turns on the [`lazySingletonStyleTag`](#lazysingletonstyletag) mode.
+
+#### `linkTag`
+>>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
 
 使用多个 `<link rel="stylesheet" href="path/to/file.css">` 将 styles 插入到 DOM 中。
 
 > ℹ️ 此 loader 会在运行时使用 JavaScript 动态地插入 `<link href="path/to/file.css" rel="stylesheet">`。要静态插入 `<link href="path/to/file.css" rel="stylesheet">` 时请使用[MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/)。
 
 ```js
-import './styles.css';
-import './other-styles.css';
+import "./styles.css";
+import "./other-styles.css";
 ```
 
 **webpack.config.js**
@@ -369,8 +404,8 @@ module.exports = {
       {
         test: /\.link\.css$/i,
         use: [
-          { loader: 'style-loader', options: { injectType: 'linkTag' } },
-          { loader: 'file-loader' },
+          { loader: "style-loader", options: { injectType: "linkTag" } },
+          { loader: "file-loader" },
         ],
       },
     ],
@@ -395,7 +430,7 @@ Default: `{}`
 **component.js**
 
 ```js
-import style from './file.css';
+import style from "./file.css";
 ```
 
 **webpack.config.js**
@@ -407,8 +442,8 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          { loader: 'style-loader', options: { attributes: { id: 'id' } } },
-          { loader: 'css-loader' },
+          { loader: "style-loader", options: { attributes: { id: "id" } } },
+          { loader: "css-loader" },
         ],
       },
     ],
@@ -446,12 +481,12 @@ module.exports = {
         test: /\.css$/i,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
             options: {
-              insert: 'body',
+              insert: "body",
             },
           },
-          'css-loader',
+          "css-loader",
         ],
       },
     ],
@@ -479,10 +514,10 @@ module.exports = {
         test: /\.css$/i,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
             options: {
               insert: function insertAtTop(element) {
-                var parent = document.querySelector('head');
+                var parent = document.querySelector("head");
                 // eslint-disable-next-line no-underscore-dangle
                 var lastInsertedElement =
                   window._lastElementInsertedByStyleLoader;
@@ -500,7 +535,7 @@ module.exports = {
               },
             },
           },
-          'css-loader',
+          "css-loader",
         ],
       },
     ],
@@ -510,7 +545,50 @@ module.exports = {
 
 在 `head` 标签顶部插入styles。
 
+<<<<<<< HEAD
 ### `base` {#base}
+=======
+### `styleTagTransform`
+
+Type: `Function`
+Default: `undefined`
+
+Transform tag and css when insert 'style' tag into the DOM.
+
+> ⚠ Do not forget that this code will be used in the browser and not all browsers support latest ECMA features like `let`, `const`, `arrow function expression` and etc, we recommend use only ECMA 5 features, but it is depends what browsers you want to support
+> ⚠ Do not forget that some DOM methods may not be available in older browsers, we recommended use only [DOM core level 2 properties](https://caniuse.com/#search=dom%20core), but it is depends what browsers you want to support
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: "style-loader",
+            options: {
+              injectType: "styleTag",
+              styleTagTransform: function (css, style) {
+                // Do something ...
+                style.innerHTML = `${css}.modify{}\n`;
+
+                document.head.appendChild(style);
+              },
+            },
+          },
+          "css-loader",
+        ],
+      },
+    ],
+  },
+};
+```
+
+### `base`
+>>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
 
 这个配置主要是作为使用 [DllPlugin](https://robertknight.me.uk/posts/webpack-dll-plugins/) 时出现 [css clashes](https://github.com/webpack-contrib/style-loader/issues/163) 问题时的解决方案。`base` 允许你通过指定一个比 _DllPlugin1_ 使用的 css 模块 id 大的值，来避免应用程序中的 css (或者 DllPlugin2 的 css) 被 DllPlugin1 中的 css 覆盖问题。比如：
 
@@ -522,7 +600,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
@@ -538,8 +616,8 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          { loader: 'style-loader', options: { base: 1000 } },
-          'css-loader',
+          { loader: "style-loader", options: { base: 1000 } },
+          "css-loader",
         ],
       },
     ],
@@ -556,8 +634,8 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          { loader: 'style-loader', options: { base: 2000 } },
-          'css-loader',
+          { loader: "style-loader", options: { base: 2000 } },
+          "css-loader",
         ],
       },
     ],
@@ -582,7 +660,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        loader: 'style-loader',
+        loader: "style-loader",
         options: {
           esModule: false,
         },
@@ -592,6 +670,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `modules` {#modules}
 
 类型：`Object`
@@ -605,12 +684,53 @@ module.exports = {
 默认值：`false`
 
 启用/禁用本地 ES 模块的命名导出功能。
+=======
+## Examples
+
+### Recommend
+
+For `production` builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
+This can be achieved by using the [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/), because it creates separate css files.
+For `development` mode (including `webpack-dev-server`) you can use `style-loader`, because it injects CSS into the DOM using multiple <style></style> and works faster.
+
+> i Do not use together `style-loader` and `mini-css-extract-plugin`.
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const devMode = process.env.NODE_ENV !== "production";
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
+        ],
+      },
+    ],
+  },
+  plugins: [].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
+};
+```
+
+### Named export for CSS Modules
+>>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
 
 > ⚠ 本地命名导出时，会将其名称转换为 `camelCase` 的形式。
 
 > ⚠ 并且不允许在 css 的 class 名中使用 JavaScript 的保留字。
 
+<<<<<<< HEAD
 > ⚠ 在 `css-loader` 和 `style-loader` 中，选项 `esModule` 和 `modules.namedExport` 应启用。
+=======
+> ⚠ Options `esModule` and `modules.namedExport` in `css-loader` should be enabled.
+>>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
 
 **styles.css**
 
@@ -626,7 +746,7 @@ module.exports = {
 **index.js**
 
 ```js
-import { fooBaz, bar } from './styles.css';
+import { fooBaz, bar } from "./styles.css";
 
 console.log(fooBaz, bar);
 ```
@@ -643,18 +763,11 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader',
-            options: {
-              esModule: true,
-              modules: {
-                namedExport: true,
-              },
-            },
+            loader: "style-loader",
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
-              esModule: true,
               modules: {
                 namedExport: true,
               },
@@ -667,6 +780,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## 示例 {#examples}
 
 ### 推荐 {#recommend}
@@ -702,6 +816,9 @@ module.exports = {
 ```
 
 ### Source maps {#sourcemap}
+=======
+### Source maps
+>>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
 
 因此，想要生成 source map，则需将 style-loader 之前执行 loader 的 `sourceMap` 选项设置为`true`。
 
@@ -714,8 +831,8 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          'style-loader',
-          { loader: 'css-loader', options: { sourceMap: true } },
+          "style-loader",
+          { loader: "css-loader", options: { sourceMap: true } },
         ],
       },
     ],
@@ -737,7 +854,7 @@ module.exports = {
 **component.js**
 
 ```js
-import './style.css';
+import "./style.css";
 ```
 
 **webpack.config.js**
@@ -750,14 +867,14 @@ module.exports = {
         test: /\.css$/i,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
             options: {
               attributes: {
-                nonce: '12345678',
+                nonce: "12345678",
               },
             },
           },
-          'css-loader',
+          "css-loader",
         ],
       },
     ],
@@ -780,14 +897,14 @@ module.exports = {
 **create-nonce.js**
 
 ```js
-__webpack_nonce__ = '12345678';
+__webpack_nonce__ = "12345678";
 ```
 
 **component.js**
 
 ```js
-import './create-nonce.js';
-import './style.css';
+import "./create-nonce.js";
+import "./style.css";
 ```
 
 使用 `require` 的示例：
@@ -795,9 +912,9 @@ import './style.css';
 **component.js**
 
 ```js
-__webpack_nonce__ = '12345678';
+__webpack_nonce__ = "12345678";
 
-require('./style.css');
+require("./style.css");
 ```
 
 **webpack.config.js**
@@ -808,7 +925,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
@@ -839,10 +956,10 @@ module.exports = {
         test: /\.css$/i,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
             options: {
               insert: function insertAtTop(element) {
-                var parent = document.querySelector('head');
+                var parent = document.querySelector("head");
                 var lastInsertedElement =
                   window._lastElementInsertedByStyleLoader;
 
@@ -858,7 +975,7 @@ module.exports = {
               },
             },
           },
-          'css-loader',
+          "css-loader",
         ],
       },
     ],
@@ -880,11 +997,11 @@ module.exports = {
         test: /\.css$/i,
         use: [
           {
-            loader: 'style-loader',
+            loader: "style-loader",
             options: {
               insert: function insertBeforeAt(element) {
-                const parent = document.querySelector('head');
-                const target = document.querySelector('#id');
+                const parent = document.querySelector("head");
+                const target = document.querySelector("#id");
 
                 const lastInsertedElement =
                   window._lastElementInsertedByStyleLoader;
@@ -901,7 +1018,7 @@ module.exports = {
               },
             },
           },
-          'css-loader',
+          "css-loader",
         ],
       },
     ],
