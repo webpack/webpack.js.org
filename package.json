@@ -134,7 +134,7 @@
     "sitemap-static": "^0.4.2",
     "start-server-and-test": "^1.12.5",
     "static-site-generator-webpack-plugin": "^3.4.1",
-    "style-loader": "^2.0.0",
+    "style-loader": "^3.0.0",
     "tailwindcss": "^2.2.4",
     "tap-spot": "^1.1.1",
     "unist-util-visit": "^2.0.3",
