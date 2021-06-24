@@ -174,8 +174,8 @@ module.exports = {
 
 ```js
 {
-  'path/to/file';
-  'json';
+  filePath: 'path/to/file';
+  formatter: 'json';
 }
 ```
 
