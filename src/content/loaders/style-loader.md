@@ -65,25 +65,14 @@ module.exports = {
 
 ## Options {#options}
 
-<<<<<<< HEAD
 |              名称               |         类型         |  默认值   | 描述                                              |
 | :-----------------------------: | :------------------: | :--------: | :------------------------------------------------------- |
 | [**`injectType`**](#injecttype) |      `{String}`      | `styleTag` | 配置把 styles 插入到 DOM 中的方式 |
 | [**`attributes`**](#attributes) |      `{Object}`      |    `{}`    | 添加自定义属性到插入的标签中              |
 |     [**`insert`**](#insert)     | `{String\|Function}` |   `head`   | 在指定的位置插入标签 |
+|    [**`styleTagTransform`**](#styletagtransform)    |      `{Function}`      | `undefined`| 当将 'style' 标签插入到 DOM 中时，转换标签和 css                                |
 |       [**`base`**](#base)       |      `{Number}`      |   `true`   | 基于 (DLLPlugin) 设置 module ID |
 |   [**`esModule`**](#esmodule)   |     `{Boolean}`      |  `false`   | 使用 ES modules 语法                                       |
-|    [**`modules`**](#modules)    |      `{Object}`      | `undefined`| 配置 CSS Modules                                |
-=======
-|                     Name                      |         Type         |   Default   | Description                                                |
-| :-------------------------------------------: | :------------------: | :---------: | :--------------------------------------------------------- |
-|        [**`injectType`**](#injecttype)        |      `{String}`      | `styleTag`  | Allows to setup how styles will be injected into the DOM   |
-|        [**`attributes`**](#attributes)        |      `{Object}`      |    `{}`     | Adds custom attributes to tag                              |
-|            [**`insert`**](#insert)            | `{String\|Function}` |   `head`    | Inserts tag at the given position into the DOM             |
-| [**`styleTagTransform`**](#styletagtransform) |     `{Function}`     | `undefined` | Transform tag and css when insert 'style' tag into the DOM |
-|              [**`base`**](#base)              |      `{Number}`      |   `true`    | Sets module ID base (DLLPlugin)                            |
-|          [**`esModule`**](#esmodule)          |     `{Boolean}`      |   `true`    | Use ES modules syntax                                      |
->>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
 
 ### `injectType` {#injecttype}
 
@@ -134,15 +123,9 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-<<<<<<< HEAD
           // 由于是默认行为，`injectType` 选项可以省略
           { loader: 'style-loader', options: { injectType: 'styleTag' } },
           'css-loader',
-=======
-          // The `injectType`  option can be avoided because it is default behaviour
-          { loader: "style-loader", options: { injectType: "styleTag" } },
-          "css-loader",
->>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
         ],
       },
     ],
@@ -222,15 +205,11 @@ loader 插入的 styles 如下：
 </style>
 ```
 
-<<<<<<< HEAD
+#### `autoStyleTag` {#autostyletag}
+
+与 [`styleTag`](#styletag) 相同，但是当代码在 IE6-9 中运行时，请打开 [`singletonStyleTag`](#singletonstyletag) 模式。
+
 #### `lazyStyleTag` {#lazystyletag}
-=======
-#### `autoStyleTag`
-
-Works the same as a [`styleTag`](#styletag), but if the code is executed in IE6-9, turns on the [`singletonStyleTag`](#singletonstyletag) mode.
-
-#### `lazyStyleTag`
->>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
 
 在需要时使用多个 `<style></style>` 把 styles 插入到 DOM 中。
 
@@ -376,15 +355,11 @@ module.exports = {
 </style>
 ```
 
-<<<<<<< HEAD
+#### `lazyAutoStyleTag` {#lazyautostyletag}
+
+与 [`lazyStyleTag`](#lazystyletag) 相同，但是当代码在 IE6-9 中运行时，请打开 [`lazySingletonStyleTag`](#lazysingletonstyletag) 模式。
+
 #### `linkTag` {#linktag}
-=======
-#### `lazyAutoStyleTag`
-
-Works the same as a [`lazyStyleTag`](#lazystyletag), but if the code is executed in IE6-9, turns on the [`lazySingletonStyleTag`](#lazysingletonstyletag) mode.
-
-#### `linkTag`
->>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
 
 使用多个 `<link rel="stylesheet" href="path/to/file.css">` 将 styles 插入到 DOM 中。
 
@@ -545,18 +520,15 @@ module.exports = {
 
 在 `head` 标签顶部插入styles。
 
-<<<<<<< HEAD
-### `base` {#base}
-=======
-### `styleTagTransform`
+### `styleTagTransform` {#styletagtransform}
 
-Type: `Function`
-Default: `undefined`
+类型：`Function`
+默认值：`undefined`
 
-Transform tag and css when insert 'style' tag into the DOM.
+当将 'style' 标签插入到 DOM 中时，转换标签和 css。
 
-> ⚠ Do not forget that this code will be used in the browser and not all browsers support latest ECMA features like `let`, `const`, `arrow function expression` and etc, we recommend use only ECMA 5 features, but it is depends what browsers you want to support
-> ⚠ Do not forget that some DOM methods may not be available in older browsers, we recommended use only [DOM core level 2 properties](https://caniuse.com/#search=dom%20core), but it is depends what browsers you want to support
+> ⚠ 不要忘记该代码会在浏览器中使用，并且不是所有的浏览器都支持想 `let`、`const`、`箭头函数` 等最新的 ECMA 特性，我们建议仅使用 ECMA5 特性，但这取决于你想支持什么浏览器。
+> ⚠ 不要忘记有一些 DOM 方法在老的浏览器中是不可用的，我们推荐只使用 [DOM core level 2 properties](https://caniuse.com/#search=dom%20core)，但这取决于你想支持什么浏览器。
 
 **webpack.config.js**
 
@@ -587,8 +559,7 @@ module.exports = {
 };
 ```
 
-### `base`
->>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
+### `base` {#base}
 
 这个配置主要是作为使用 [DllPlugin](https://robertknight.me.uk/posts/webpack-dll-plugins/) 时出现 [css clashes](https://github.com/webpack-contrib/style-loader/issues/163) 问题时的解决方案。`base` 允许你通过指定一个比 _DllPlugin1_ 使用的 css 模块 id 大的值，来避免应用程序中的 css (或者 DllPlugin2 的 css) 被 DllPlugin1 中的 css 覆盖问题。比如：
 
@@ -670,30 +641,15 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `modules` {#modules}
+## 示例 {#examples}
 
-类型：`Object`
-默认值：`undefined`
+### 推荐 {#recommend}
 
-配置 CSS 模块。
+对于 `production` 模式的构建，建议从你的包中提取 CSS，以便以后能够使用 CSS/JS 资源的并行加载。
+可以使用 [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) 实现，因为它可以创建单独的 css 文件。
+对于 `development` 模式（包括 `webpack-dev-server`），你可以使用 `style-loader`，因为他使用多个 <style></style> 将 CSS 插入到 DOM 中，并且运行得会更快。
 
-#### `namedExport` {#namedexport}
-
-类型：`Boolean`
-默认值：`false`
-
-启用/禁用本地 ES 模块的命名导出功能。
-=======
-## Examples
-
-### Recommend
-
-For `production` builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
-This can be achieved by using the [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/), because it creates separate css files.
-For `development` mode (including `webpack-dev-server`) you can use `style-loader`, because it injects CSS into the DOM using multiple <style></style> and works faster.
-
-> i Do not use together `style-loader` and `mini-css-extract-plugin`.
+> i 不要将 `style-loader` 于 `mini-css-extract-plugin` 一起使用。
 
 **webpack.config.js**
 
@@ -719,18 +675,13 @@ module.exports = {
 };
 ```
 
-### Named export for CSS Modules
->>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
+### Named export for CSS Modules {#namedexportforcssmodules}
 
 > ⚠ 本地命名导出时，会将其名称转换为 `camelCase` 的形式。
 
 > ⚠ 并且不允许在 css 的 class 名中使用 JavaScript 的保留字。
 
-<<<<<<< HEAD
-> ⚠ 在 `css-loader` 和 `style-loader` 中，选项 `esModule` 和 `modules.namedExport` 应启用。
-=======
-> ⚠ Options `esModule` and `modules.namedExport` in `css-loader` should be enabled.
->>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
+> ⚠ 在 `css-loader` 中，应启用 `esModule` 和 `modules.namedExport` 配置项。
 
 **styles.css**
 
@@ -780,45 +731,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## 示例 {#examples}
-
-### 推荐 {#recommend}
-
-推荐 `production` 环境的构建将 CSS 从你的 bundle 中分离出来，这样可以使用 CSS/JS 文件的并行加载。
-这可以通过使用 `mini-css-extract-plugin` 来实现，因为它可以创建单独的 CSS 文件。
-对于 `development` 模式（包括 `webpack-dev-server`），你可以使用 [style-loader](/loaders/style-loader/)，因为它可以使用多个 <style></style> 标签将 CSS 插入到 DOM 中，并且反应会更快。
-
-> i 不要同时使用 `style-loader` 与 `mini-css-extract-plugin`。
-
-**webpack.config.js**
-
-```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const devMode = process.env.NODE_ENV !== 'production';
-
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
-        ],
-      },
-    ],
-  },
-  plugins: [].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
-};
-```
-
 ### Source maps {#sourcemap}
-=======
-### Source maps
->>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
 
 因此，想要生成 source map，则需将 style-loader 之前执行 loader 的 `sourceMap` 选项设置为`true`。
 

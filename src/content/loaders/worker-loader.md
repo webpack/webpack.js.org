@@ -19,13 +19,9 @@ translators:
 
 
 
-<<<<<<< HEAD
-webpack 的 worker loader 模块
-=======
-Web Worker loader for webpack 4.
+webpack 4 的 web worker loader。
 
-Note that this is specific to webpack 4. To use Web Workers in webpack 5, see https://webpack.js.org/guides/web-workers/.
->>>>>>> b3ce25d6670851b05ede7bf57623de457e983a63
+请注意这是针对 webpack 4 的。如果要在 webpack 5 中使用  Web Workers，请查看 https://webpack.js.org/guides/web-workers/。
 
 ## 快速开始 {#getting-started}
 
