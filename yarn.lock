@@ -2,26 +2,6 @@
 # yarn lockfile v1
 
 
-<<<<<<< HEAD
-"@alloc/types@^1.2.1":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@alloc/types/-/types-1.3.0.tgz#904245b8d3260a4b7d8a801c12501968f64fac08"
-  integrity sha512-mH7LiFiq9g6rX2tvt1LtwsclfG5hnsmtIfkZiauAGrm1AwXhoRS0sF2WrN9JGN7eV5vFXqNaB0eXZ3IvMsVi9g==
-
-"@azu/format-text@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/@azu/format-text/-/format-text-1.0.1.tgz#6967350a94640f6b02855169bd897ce54d6cebe2"
-  integrity sha1-aWc1CpRkD2sChVFpvYl85U1s6+I=
-
-"@azu/style-format@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@azu/style-format/-/style-format-1.0.0.tgz#e70187f8a862e191b1bce6c0268f13acd3a56b20"
-  integrity sha1-5wGH+Khi4ZGxvObAJo8TrNOlayA=
-  dependencies:
-    "@azu/format-text" "^1.0.1"
-
-=======
->>>>>>> 81531e69d29c02d1a73c31c3e47a2a2820fd20b3
 "@babel/code-frame@7.12.11":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"
