@@ -21,7 +21,7 @@ translators:
 
 webpack 4 的 web worker loader。
 
-请注意这是针对 webpack 4 的。如果要在 webpack 5 中使用  Web Workers，请查看 https://webpack.js.org/guides/web-workers/。
+请注意这是针对 webpack 4 的。如果要在 webpack 5 中使用 Web Workers，请查看 https://webpack.js.org/guides/web-workers/。
 
 ## 快速开始 {#getting-started}
 
