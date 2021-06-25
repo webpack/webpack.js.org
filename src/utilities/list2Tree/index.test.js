@@ -5,7 +5,7 @@ describe('list2Tree', () => {
       { title: 'hd2.1', level: 2 },
       { title: 'hd2.2', level: 2 },
     ];
-    expect(list2Tree(anchors)).toEqual([
+    expect(list2Tree('', anchors)).toEqual([
       { title: 'hd2.1', level: 2 },
       { title: 'hd2.2', level: 2 },
     ]);
@@ -18,7 +18,7 @@ describe('list2Tree', () => {
       { title: 'hd4.1', level: 4 },
       { title: 'hd2.2', level: 2 },
     ];
-    expect(list2Tree(anchors)).toEqual([
+    expect(list2Tree('', anchors)).toEqual([
       {
         title: 'hd2.1',
         level: 2,
