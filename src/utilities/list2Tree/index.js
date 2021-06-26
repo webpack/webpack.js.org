@@ -1,13 +1,5 @@
 const findTopLevel = require('./findTopLevel');
 /**
- *
- * @param {.map(anchor => ({
-      ...anchor,
-      menuTitle: anchor.title.replace(new RegExp(`${title}.`, 'i'), '')
-    }))} anchors
- * @param {*} topLevel
- */
-/**
  * @param {string} parent the parent menu text for anchors
  * @param {*} anchors a list of ordered anchors in the page
  * @param {number} topLevel the root level in anchor
