@@ -44,7 +44,7 @@ function Navigation({
   switchTheme,
 }) {
   const themeSwitcher = () => switchTheme(theme === DARK ? LIGHT : DARK);
-  const [locationHash, setLocationHash] = useState('');
+  const [locationHash, setLocationHash] = useState(hash);
 
   useEffect(() => {
     if (isClient) {
