@@ -1,6 +1,6 @@
 const list2Tree = require('./index');
 describe('list2Tree', () => {
-  it('should return data withouth any children', () => {
+  it('should return data without any children', () => {
     const anchors = [
       { title: 'hd2.1', level: 2 },
       { title: 'hd2.2', level: 2 },
