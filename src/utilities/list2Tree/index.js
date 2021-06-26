@@ -20,13 +20,13 @@ function list2Tree(parent, anchors, topLevel = findTopLevel(anchors)) {
         const [hd, ...others] = c;
         return {
           ...hd,
-          title2: hd.title.replace(new RegExp(`${parent}\\.`, 'i'), ''),
+          title2: hd.title.replace(new RegExp(`^${parent}\\.`, 'i'), ''),
           children: list2Tree(hd.title, others, findTopLevel(others)),
         };
       } else {
         return {
           ...c[0],
-          title2: c[0].title.replace(new RegExp(`${parent}\\.`, 'i'), ''),
+          title2: c[0].title.replace(new RegExp(`^${parent}\\.`, 'i'), ''),
         };
       }
     });
