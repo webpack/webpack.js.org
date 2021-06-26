@@ -55,6 +55,7 @@ const mdxComponents = {
 Site.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
+    hash: PropTypes.string,
   }),
   import: PropTypes.func,
 };
@@ -236,6 +237,7 @@ function Site(props) {
         <div className="site__header">
           <Navigation
             pathname={location.pathname}
+            hash={location.hash}
             toggleSidebar={_toggleSidebar}
             theme={theme}
             switchTheme={switchTheme}
