@@ -36,6 +36,7 @@ export default class SidebarItem extends Component {
   renderAnchors(anchors) {
     return (
       <ul className={`${block}__anchors`}>
+<<<<<<< HEAD
         {anchors.map((anchor) => {
           anchor = this._handleAnchor(anchor);
           return (
@@ -51,6 +52,20 @@ export default class SidebarItem extends Component {
             </li>
           );
         })}
+=======
+        {anchors.map((anchor) => (
+          <li
+            key={this._generateAnchorURL(anchor)}
+            className={`${block}__anchor`}
+            title={anchor.title}
+          >
+            <NavLink to={this._generateAnchorURL(anchor)}>
+              {anchor.title2}
+            </NavLink>
+            {anchor.children && this.renderAnchors(anchor.children)}
+          </li>
+        ))}
+>>>>>>> d49e7409ab723d0207cbf46aba2f57f2dbb9f057
       </ul>
     );
   }
@@ -72,7 +87,7 @@ export default class SidebarItem extends Component {
     let disabledMod = anchors.length == 0 ? `${block}--disabled` : '';
 
     const filteredAnchors = anchors.filter((anchor) => anchor.level > 1);
-    const tree = list2Tree(filteredAnchors);
+    const tree = list2Tree(title, filteredAnchors);
 
     return (
       <div className={`${block} ${openMod} ${disabledMod}`}>
