@@ -175,11 +175,11 @@ module.exports = {
 };
 ```
 
-## `output.chunkLoading`
+## output.chunkLoading
 
-`false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>`
+`false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | 'import' | <any string>`
 
-The method to load chunks (methods included by default are 'jsonp' (web), 'importScripts' (WebWorker), 'require' (sync node.js), 'async-node' (async node.js), but others might be added by plugins).
+The method to load chunks (methods included by default are `'jsonp'` (web), `'importScripts'` (WebWorker), `'require'` (sync node.js), `'async-node'` (async node.js), but others might be added by plugins).
 
 **webpack.config.js**
 
