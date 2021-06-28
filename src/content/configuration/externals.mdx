@@ -345,6 +345,8 @@ Supported types:
 - `'promise'` - same as `'var'` but awaits the result (async module)
 - `'import'` - uses `import()` to load a native EcmaScript module (async module)
 - `'script'` - load script exposing predefined global variables with HTML `<script>` element
+- `'module'` - generate `import * as X from '...'` code for modules while `import("...")` for scripts
+- `'node-commonjs'` - generte `import { createRequire } from 'module'` for modules
 
 **webpack.config.js**
 
