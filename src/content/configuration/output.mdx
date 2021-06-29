@@ -179,7 +179,7 @@ module.exports = {
 
 `false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | 'import' | <any string>`
 
-The method to load chunks (methods included by default are `'jsonp'` (web), `'importScripts'` (WebWorker), `'require'` (sync node.js), `'async-node'` (async node.js), but others might be added by plugins).
+The method to load chunks (methods included by default are `'jsonp'` (web), `'import'` (ESM), `'importScripts'` (WebWorker), `'require'` (sync node.js), `'async-node'` (async node.js), but others might be added by plugins).
 
 **webpack.config.js**
 
@@ -197,7 +197,7 @@ module.exports = {
 
 `false` `string: 'array-push' | 'commonjs' | 'module' | <any string>`
 
-The format of chunks (formats included by default are `'array-push'` (web/WebWorker), `'commonjs'` (node.js), but others might be added by plugins).
+The format of chunks (formats included by default are `'array-push'` (web/WebWorker), `'commonjs'` (node.js), `'module'` (ESM), but others might be added by plugins).
 
 **webpack.config.js**
 
