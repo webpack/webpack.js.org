@@ -22,7 +22,7 @@ Available options:
 - `syncWebAssembly`: Support the old WebAssembly like in webpack 4
 - `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module
 - `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level
-- `outputModule`: enables the use of [`output.module`](/configuration/output/#outputmodule) configuration option and sets it to `true`. Enables the use of `output.libraryTarget` as `'module'` and sets it to `'module'`.
+- [`outputModule`](#experimentsoutputmodule)
 - `layers`: Enable module and chunk layers.
 - [`lazyCompilation`](#experimentslazycompilation): Compile entrypoints and dynamic `import`s only when they are in use.
 
@@ -119,3 +119,17 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
     },
   };
   ```
+
+### experiments.outputModule
+
+`boolean`
+
+Once enabled, webpack will use ECMAScript modules whenever possible. For instance, `import()` to load chunks, ESM exports to expose chunk data, among others.
+
+```js
+module.exports = {
+  experiments: {
+    outputModule: true,
+  },
+};
+```
