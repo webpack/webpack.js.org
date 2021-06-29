@@ -1,7 +1,12 @@
 const findTopLevel = require('./findTopLevel');
-function list2Tree(anchors, topLevel = findTopLevel(anchors)) {
+/**
+ * @param {string} parent the parent menu text for anchors
+ * @param {*} anchors a list of ordered anchors in the page
+ * @param {number} topLevel the root level in anchor
+ */
+function list2Tree(parent, anchors, topLevel = findTopLevel(anchors)) {
   if (anchors.length === 0) return [];
-  if (anchors.length > 1) {
+  if (anchors.length > 0) {
     const cache = [];
     anchors.forEach((anchor) => {
       if (anchor.level === topLevel) {
@@ -15,14 +20,18 @@ function list2Tree(anchors, topLevel = findTopLevel(anchors)) {
         const [hd, ...others] = c;
         return {
           ...hd,
-          children: list2Tree(others, findTopLevel(others)),
+          title2: hd.title.replace(new RegExp(`^${parent}\\.`, 'i'), ''),
+          children: list2Tree(hd.title, others, findTopLevel(others)),
         };
       } else {
-        return c[0];
+        const match = /^.+(\s*\{#([a-z0-9\-_]+?)\}\s*)$/.exec(parent);
+        const newParent = match ? parent.replace(match[1], '').trim() : parent;
+        return {
+          ...c[0],
+          title2: c[0].title.replace(new RegExp(`^${newParent}\\.`, 'i'), ''),
+        };
       }
     });
-  } else {
-    return anchors;
   }
 }
 

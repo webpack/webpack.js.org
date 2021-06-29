@@ -1,5 +1,5 @@
 ---
-title: 输出(output)
+title: Output
 sort: 6
 contributors:
   - sokra
@@ -272,16 +272,16 @@ module.exports = {
 
 模板字符串(template string)中做以下替换（通过 webpack 内部的 [`ModuleFilenameHelpers`](https://github.com/webpack/webpack/blob/master/lib/ModuleFilenameHelpers.js)）：
 
-| Template                 | Description |
-| ------------------------ | ----------- |
-| [absolute-resource-path] | 绝对路径文件名|
-| [all-loaders]            | 自动和显式的 loader，并且参数取决于第一个 loader 名称|
-| [hash]                   | 模块标识符的 hash|
-| [id]                     | 模块标识符|
-| [loaders]                | 显式的 loader，并且参数取决于第一个 loader 名称|
-| [resource]               | 用于解析文件的路径和用于第一个 loader 的任意查询参数|
-| [resource-path]          | 不带任何查询参数，用于解析文件的路径|
-| [namespace]              | 模块命名空间。在构建成为一个 library 之后，通常也是 library 名称，否则为空|
+| Template                 | Description                                                                |
+| ------------------------ | -------------------------------------------------------------------------- |
+| [absolute-resource-path] | 绝对路径文件名                                                             |
+| [all-loaders]            | 自动和显式的 loader，并且参数取决于第一个 loader 名称                      |
+| [hash]                   | 模块标识符的 hash                                                          |
+| [id]                     | 模块标识符                                                                 |
+| [loaders]                | 显式的 loader，并且参数取决于第一个 loader 名称                            |
+| [resource]               | 用于解析文件的路径和用于第一个 loader 的任意查询参数                       |
+| [resource-path]          | 不带任何查询参数，用于解析文件的路径                                       |
+| [namespace]              | 模块命名空间。在构建成为一个 library 之后，通常也是 library 名称，否则为空 |
 
 当使用一个函数，同样的选项要通过 `info` 参数并使用驼峰式(camel-cased)：
 
@@ -398,7 +398,7 @@ module.exports = {
 
 注意此选项被称为文件名，但是你还是可以使用像 `'js/[name]/bundle.js'` 这样的文件夹结构。
 
-注意，此选项不会影响那些「按需加载 chunk」的输出文件。它只影响最初加载的输出文件。对于按需加载的 chunk文件，请使用 [`output.chunkFilename`](#outputchunkfilename) 选项来控制输出。通过 loader 创建的文件也不受影响。在这种情况下，你必须尝试 loader 特定的可用选项。
+注意，此选项不会影响那些「按需加载 chunk」的输出文件。它只影响最初加载的输出文件。对于按需加载的 chunk 文件，请使用 [`output.chunkFilename`](#outputchunkfilename) 选项来控制输出。通过 loader 创建的文件也不受影响。在这种情况下，你必须尝试 loader 特定的可用选项。
 
 ## Template strings {#template-strings}
 
@@ -406,48 +406,48 @@ module.exports = {
 
 可在编译层面进行替换的内容：
 
-| 模板   | 描述                  |
-| ---------- | ---------------------------- |
+| 模板       | 描述                       |
+| ---------- | -------------------------- |
 | [fullhash] | compilation 完整的 hash 值 |
-| [hash]     | 同上，但已弃用              |
+| [hash]     | 同上，但已弃用             |
 
 可在 chunk 层面进行替换的内容：
 
-| 模板      | 描述                                                                                                      |
-| ------------- | ---------------------------------------------------------------------------------------------------------------- |
-| [id]          | 此 chunk 的 ID                                                                                              |
-| [name]        | 如果设置，则为此 chunk 的名称，否则使用 chunk 的 ID                                                     |
-| [chunkhash]   | 此 chunk 的 hash 值，包含该 chunk 的所有元素                                                       |
-| [contenthash] | 此 chunk 的 hash 值，只包括该内容类型的元素（受 `optimization.realContentHash` 影响）|
+| 模板          | 描述                                                                                  |
+| ------------- | ------------------------------------------------------------------------------------- |
+| [id]          | 此 chunk 的 ID                                                                        |
+| [name]        | 如果设置，则为此 chunk 的名称，否则使用 chunk 的 ID                                   |
+| [chunkhash]   | 此 chunk 的 hash 值，包含该 chunk 的所有元素                                          |
+| [contenthash] | 此 chunk 的 hash 值，只包括该内容类型的元素（受 `optimization.realContentHash` 影响） |
 
 可在模块层面替换的内容：
 
-| 模板      | 描述                           |
-| ------------- | ------------------------------------- |
-| [id]          | 模块的 ID                              |
-| [moduleid]    | 同上，但已弃用                          |
-| [hash]        | 模块的 Hash 值                         |
-| [modulehash]  | 同上，但已弃用                          |
-| [contenthash] | 模块内容的 Hash 值                      |
+| 模板          | 描述               |
+| ------------- | ------------------ |
+| [id]          | 模块的 ID          |
+| [moduleid]    | 同上，但已弃用     |
+| [hash]        | 模块的 Hash 值     |
+| [modulehash]  | 同上，但已弃用     |
+| [contenthash] | 模块内容的 Hash 值 |
 
 可在文件层面替换的内容：
 
-| 模板   | 描述                                        |
-| ---------- | -------------------------------------------------- |
-| [file]     | filename和路径，不含 query 或 fragment                   |
-| [query]    | 带前缀 `?` 的 query                                 |
-| [fragment] | 带前缀 `#` 的 fragment                              |
-| [base]     | 只有 filename（包含扩展名），不含 path                 |
-| [filebase] | 同上，但已弃用                                       |
-| [path]     | 只有 path，不含 filename                             |
-| [name]     | 只有 filename，不含扩展名或 path                      |
-| [ext]      | 带前缀 `.` 的扩展名                                  |
+| 模板       | 描述                                    |
+| ---------- | --------------------------------------- |
+| [file]     | filename 和路径，不含 query 或 fragment |
+| [query]    | 带前缀 `?` 的 query                     |
+| [fragment] | 带前缀 `#` 的 fragment                  |
+| [base]     | 只有 filename（包含扩展名），不含 path  |
+| [filebase] | 同上，但已弃用                          |
+| [path]     | 只有 path，不含 filename                |
+| [name]     | 只有 filename，不含扩展名或 path        |
+| [ext]      | 带前缀 `.` 的扩展名                     |
 
 可在 URL 层面替换的内容：
 
-| 模块 | 描述 |
-| -------- | ----------- |
-| [url]    | URL         |
+| 模块  | 描述 |
+| ----- | ---- |
+| [url] | URL  |
 
 T> `[file]` 等价于 `[path][base]`。`[base]` 等价于 `[name][ext]`。完整的路径为 `[path][name][ext][query][fragment]` 或 `[path][base][query][fragment]` 或 `[file][query][fragment]`。
 
@@ -916,7 +916,7 @@ module.exports = {
 };
 ```
 
-**入口起点的返回值** 将使用 `output.library.name` 赋值给  `exports` 对象。顾名思义，这是在 CommonJS 环境中使用。
+**入口起点的返回值** 将使用 `output.library.name` 赋值给 `exports` 对象。顾名思义，这是在 CommonJS 环境中使用。
 
 ```javascript
 exports['MyLibrary'] = _entry_return_;
@@ -1039,7 +1039,7 @@ module.exports = {
 
 它会用一个立即执行的 AMD `require(dependencies, factory)` 包装器来打包输出。
 
-`'amd-require'` 类型允许使用AMD的依赖，而不需要单独的后续调用。与 `'amd'` 类型一样，这取决于在加载 webpack 输出的环境中适当的 [`require` 函数](https://github.com/amdjs/amdjs-api/blob/master/require.md) 是否可用。
+`'amd-require'` 类型允许使用 AMD 的依赖，而不需要单独的后续调用。与 `'amd'` 类型一样，这取决于在加载 webpack 输出的环境中适当的 [`require` 函数](https://github.com/amdjs/amdjs-api/blob/master/require.md) 是否可用。
 
 使用该类型的话，不能使用库的名称。
 
@@ -1299,7 +1299,7 @@ module.exports = {
 };
 ```
 
-### output.library.umdNamedDefine {#outputlibraryumdNameddefine}
+### output.library.umdNamedDefine {#outputlibraryumdnameddefine}
 
 `boolean`
 
@@ -1384,9 +1384,9 @@ W> 最好使用 [`output.library.type: 'var'`](#type-var)。
 ```javascript
 var MyLibrary = _entry_return_;
 
-  // 在一个单独的 script...
-  MyLibrary.doSomething();
-  ```
+// 在一个单独的 script...
+MyLibrary.doSomething();
+```
 
 #### `libraryTarget: 'assign'` {#libraryTarget-assign}
 
@@ -1568,9 +1568,9 @@ define([], function () {
 
 W> 最好使用 [`output.library.type: 'amd-require'`](#type-amd-require)。
 
-这将使用立即执行的AMD `require(dependencies, factory)` 包装器包装您的输出。
+这将使用立即执行的 AMD `require(dependencies, factory)` 包装器包装您的输出。
 
-`'amd-require'` 目标（target）允许使用AMD依赖项，而无需单独的后续调用。与 `'amd'` 目标（target）一样, 这取决于在加载 webpack 输出的环境中适当可用的 [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md)。
+`'amd-require'` 目标（target）允许使用 AMD 依赖项，而无需单独的后续调用。与 `'amd'` 目标（target）一样, 这取决于在加载 webpack 输出的环境中适当可用的 [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md)。
 
 对于此 target，库名称将被忽略。
 
@@ -1854,7 +1854,7 @@ module.exports = {
     publicPath: 'assets/', // 相对于 HTML 页面
     publicPath: '../assets/', // 相对于 HTML 页面
     publicPath: '', // 相对于 HTML 页面（目录相同）
-  }
+  },
 };
 ```
 

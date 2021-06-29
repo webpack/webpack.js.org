@@ -1,5 +1,5 @@
 ---
-title: 模式（Mode）
+title: 模式(Mode)
 sort: 5
 contributors:
   - EugeneHlushko
@@ -38,11 +38,11 @@ webpack --mode=development
 
 支持以下字符串值：
 
-选项                  | 描述
---------------------- | -----------------------
-`development`         | 会将 `DefinePlugin` 中 `process.env.NODE_ENV` 的值设置为 `development`. 为模块和 chunk 启用有效的名。
-`production`          | 会将 `DefinePlugin` 中 `process.env.NODE_ENV` 的值设置为 `production`。为模块和 chunk 启用确定性的混淆名称，`FlagDependencyUsagePlugin`，`FlagIncludedChunksPlugin`，`ModuleConcatenationPlugin`，`NoEmitOnErrorsPlugin` 和 `TerserPlugin` 。
-`none`                | 不使用任何默认优化选项
+| 选项          | 描述                                                                                                                                                                                                                                          |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `development` | 会将 `DefinePlugin` 中 `process.env.NODE_ENV` 的值设置为 `development`. 为模块和 chunk 启用有效的名。                                                                                                                                         |
+| `production`  | 会将 `DefinePlugin` 中 `process.env.NODE_ENV` 的值设置为 `production`。为模块和 chunk 启用确定性的混淆名称，`FlagDependencyUsagePlugin`，`FlagIncludedChunksPlugin`，`ModuleConcatenationPlugin`，`NoEmitOnErrorsPlugin` 和 `TerserPlugin` 。 |
+| `none`        | 不使用任何默认优化选项                                                                                                                                                                                                                        |
 
 如果没有设置，webpack 会给 `mode` 的默认值设置为 `production`。
 
@@ -75,7 +75,7 @@ module.exports = {
 };
 ```
 
-如果要根据 *webpack.config.js* 中的 **mode** 变量更改打包行为，则必须将配置导出为函数，而不是导出对象：
+如果要根据 _webpack.config.js_ 中的 **mode** 变量更改打包行为，则必须将配置导出为函数，而不是导出对象：
 
 ```javascript
 var config = {
