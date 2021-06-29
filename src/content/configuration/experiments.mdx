@@ -1,20 +1,23 @@
 ---
-title: Experiments
+title: 实验特性(Experiments)
 sort: 19
 contributors:
   - EugeneHlushko
   - wizardofhogwarts
   - chenxsan
   - anshumanv
+translators:
+  - lcxfs1991
+  - QC-L
 ---
 
-## `experiments`
+## `experiments` {#experiments}
 
 `boolean: false`
 
-`experiments` option was introduced in webpack 5 to empower users with the ability to activate and try out experimental features.
+`experiments` 配置是在 webpack 5 中推出，目的是为了给用户赋能去开启并试用一些实验的特性。
 
-W> Because experimental features have relaxed semantic versioning and might contain breaking changes, make sure to fix webpack's version to minor e.g. `webpack: ~5.4.3` instead of `webpack: ^5.4.3` or use a lockfile when using `experiments`.
+W> 由于实验特性具有相对 宽松的语义版本，可能会有重大的变更，所以主确定你将 webpack 的版本固定为小版本号，例如与其使用 `webpack: ~5.4.3` 不如使用 `webpack: ^5.4.3` 或者当使用 `experiments` 配置时使用版本锁定能力。
 
 Available options:
 
@@ -43,7 +46,7 @@ module.exports = {
 };
 ```
 
-### experiments.executeModule
+### experiments.executeModule {#experimentsexecutemodule}
 
 Enable execution of modules from the module graph for plugins and loaders at build time to generate code or other assets.
 
@@ -60,7 +63,7 @@ Enable execution of modules from the module graph for plugins and loaders at bui
   };
   ```
 
-### experiments.lazyCompilation
+### experiments.lazyCompilation {#experimentslazycompilation}
 
 Compile entrypoints and dynamic `import`s only when they are in use. It can be used for either Web or Node.js.
 

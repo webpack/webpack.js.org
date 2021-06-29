@@ -1,5 +1,5 @@
 ---
-title: 入口和上下文(entry and context)
+title: 入口和上下文
 sort: 4
 contributors:
   - sokra

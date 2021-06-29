@@ -1,5 +1,5 @@
 ---
-title: stats 对象
+title: Stats 对象
 sort: 18
 contributors:
   - SpaceK33z
@@ -41,18 +41,18 @@ module.exports = {
 
 webpack 有一些特定的预设选项给统计信息输出：
 
-| 预设              | 可选值 | 描述                                                    |
-| ------------------- | ----------- | -------------------------------------------------------------- |
-| `'errors-only'`     | _none_      | 只在发生错误时输出                                                |
-| `'errors-warnings'` | _none_      | 只在发生错误或有新的编译时输出                                      |
-| `'minimal'`         | _none_      | 只在发生错误或新的编译开始时输出                                    |
-| `'none'`            | `false`     | 没有输出                                                        |
-| `'normal'`          | `true`      | 标准输出                                                        |
-| `'verbose'`         | _none_      | 全部输出                                                        |
-| `'detailed'`        | _none_      | 全部输出除了 `chunkModules` 和 `chunkRootModules`                |
-| `'summary'`         | _none_      | 输出 webpack 版本，以及警告数和错误数        |
+| 预设                | 可选值  | 描述                                              |
+| ------------------- | ------- | ------------------------------------------------- |
+| `'errors-only'`     | _none_  | 只在发生错误时输出                                |
+| `'errors-warnings'` | _none_  | 只在发生错误或有新的编译时输出                    |
+| `'minimal'`         | _none_  | 只在发生错误或新的编译开始时输出                  |
+| `'none'`            | `false` | 没有输出                                          |
+| `'normal'`          | `true`  | 标准输出                                          |
+| `'verbose'`         | _none_  | 全部输出                                          |
+| `'detailed'`        | _none_  | 全部输出除了 `chunkModules` 和 `chunkRootModules` |
+| `'summary'`         | _none_  | 输出 webpack 版本，以及警告数和错误数             |
 
-## Stats 选项 {#stats-options}
+## Stats {#stats}
 
 你可以在统计输出里指定你想看到的信息。
 
@@ -394,7 +394,7 @@ module.exports = {
 
 `string = 'id'`
 
-告知 `stats` 基于给定的字段给 chunks 排序。所有 [排序字段](#sorting-fields) 都被允许用于作为 `stats.chunksSort` 的值。使用  `!` 作为值里的前缀用以将基于给定字段排序的结果反转。
+告知 `stats` 基于给定的字段给 chunks 排序。所有 [排序字段](#sorting-fields) 都被允许用于作为 `stats.chunksSort` 的值。使用 `!` 作为值里的前缀用以将基于给定字段排序的结果反转。
 
 ```javascript
 module.exports = {
@@ -503,7 +503,7 @@ module.exports = {
 
 `boolean = false`
 
-告知 `stats` 是否隐藏 `孤儿(orphan)` 模块. 一个模块属于 `孤儿(orphan)` 如果它不被包含在任何一个 chunk里。孤儿模块默认在 `stats` 中会被隐藏。
+告知 `stats` 是否隐藏 `孤儿(orphan)` 模块. 一个模块属于 `孤儿(orphan)` 如果它不被包含在任何一个 chunk 里。孤儿模块默认在 `stats` 中会被隐藏。
 
 ```javascript
 module.exports = {
@@ -847,7 +847,7 @@ module.exports = {
 };
 ```
 
-### `stats.relatedAssets`  {#statsrelatedassets}
+### `stats.relatedAssets` {#statsrelatedassets}
 
 `boolean = false`
 
@@ -862,7 +862,7 @@ module.exports = {
 };
 ```
 
-### `stats.source`  {#statssource}
+### `stats.source` {#statssource}
 
 `boolean = false`
 
@@ -1018,13 +1018,13 @@ W> `stats.warningsFilter` 已被弃用，请改用 [`ignoreWarnings`](/configura
 
 `boolean = false`
 
-告知 `stats` 展示 chunk 的父chunk，孩子chunk和兄弟chunk。
+告知 `stats` 展示 chunk 的父 chunk，孩子 chunk 和兄弟 chunk。
 
 ### 字段排序 {#sorting-fields}
 
 对于 `assetsSort`, `chunksSort` 和 `modulesSort` 它们有几个可用的字段用于排序：
 
-- `'id'` 是元素（指资源，chunk或模块，下同）的 id;
+- `'id'` 是元素（指资源，chunk 或模块，下同）的 id;
 - `'name'` - 一个元素的名字，在导引的时候被分配；
 - `'size'` - 一个元素的大小，单位字节（bytes）;
 - `'chunks'` - 元素来源于哪些 chunks (例如，一个 chunk 有多个子 chunks， - 子 chunks 会被基于主 chunk 组合到一起);
@@ -1040,7 +1040,7 @@ W> `stats.warningsFilter` 已被弃用，请改用 [`ignoreWarnings`](/configura
 - `'index2'`
 - `'profile'`
 - `'issuer'` - 发起者(issuer)的标识符;
-- `'issuerId'` - 发起者(issuer)的id;
+- `'issuerId'` - 发起者(issuer)的 id;
 - `'issuerName'` - 发起者(issuer)的名字;
 - `'issuerPath'` - 一个完整的发起者(issuer)对象。基于这个字段排序没有现实的需要;
 

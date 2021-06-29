@@ -1,5 +1,5 @@
 ---
-title: 开发服务器(DevServer)
+title: DevServer
 sort: 11
 contributors:
   - sokra

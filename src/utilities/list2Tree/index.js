@@ -24,9 +24,11 @@ function list2Tree(parent, anchors, topLevel = findTopLevel(anchors)) {
           children: list2Tree(hd.title, others, findTopLevel(others)),
         };
       } else {
+        const match = /^.+(\s*\{#([a-z0-9\-_]+?)\}\s*)$/.exec(parent);
+        const newParent = match ? parent.replace(match[1], '').trim() : parent;
         return {
           ...c[0],
-          title2: c[0].title.replace(new RegExp(`^${parent}\\.`, 'i'), ''),
+          title2: c[0].title.replace(new RegExp(`^${newParent}\\.`, 'i'), ''),
         };
       }
     });
