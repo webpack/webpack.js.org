@@ -358,7 +358,7 @@ module.exports = {
 
 ### externalsType.module
 
-Specify the default type of externals as `'module'`. Webpack will generate code like `import * as X from '...'` for externals of module type.
+Specify the default type of externals as `'module'`. Webpack will generate code like `import * as X from '...'` for externals used in a module.
 
 Make sure to enable [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) first, otherwise webpack will throw errors.
 
@@ -476,8 +476,6 @@ T> Options like `output.chunkLoadTimeout`, `output.crossOriginLoading` and `outp
 
 Enable presets of externals for specific targets.
 
-W> In earlier webpack versions, the following functionality was achieved by using [`target`](/configuration/target/).
-
 | Option             | Description                                                                                                                                                                                                     | Input Type |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 | `electron`         | Treat common electron built-in modules in main and preload context like `electron`, `ipc` or `shell` as external and load them via `require()` when used.                                                       | boolean    |
@@ -488,6 +486,8 @@ W> In earlier webpack versions, the following functionality was achieved by usin
 | `nwjs`             | Treat `NW.js` legacy `nw.gui` module as external and load it via `require()` when used.                                                                                                                         | boolean    |
 | `web`              | Treat references to `http(s)://...` and `std:...` as external and load them via `import` when used. **(Note that this changes execution order as externals are executed before any other code in the chunk)**.  | boolean    |
 | `webAsync`         | Treat references to `http(s)://...` and `std:...` as external and load them via `async import()` when used **(Note that this external type is an `async` module, which has various effects on the execution)**. | boolean    |
+
+Note that if you're going to output ES Modules with those node.js-related presets, webpack will set the default `externalsType` to [`node-commonjs`](#externalstypenode-commonjs) which would use `createRequire` to construct a require function instead of using `require()`.
 
 **Example**
 
