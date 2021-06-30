@@ -179,11 +179,19 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.chunkLoading` {#outputchunkloading}
+=======
+## output.chunkLoading
+>>>>>>> 93310f481e184f07fbea366ba1a33ccc8b995e1b
 
-`false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>`
+`false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | 'import' | <any string>`
 
+<<<<<<< HEAD
 加载 chunk 的方法（默认值有 'jsonp' (web)，'importScripts' (WebWorker)，'require' (sync node.js)，'async-node' (async node.js)，还有其他值可由插件添加)。
+=======
+The method to load chunks (methods included by default are `'jsonp'` (web), `'import'` (ESM), `'importScripts'` (WebWorker), `'require'` (sync node.js), `'async-node'` (async node.js), but others might be added by plugins).
+>>>>>>> 93310f481e184f07fbea366ba1a33ccc8b995e1b
 
 **webpack.config.js**
 
@@ -197,11 +205,19 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.chunkFormat` {#outputchunkformat}
+=======
+## output.chunkFormat
+>>>>>>> 93310f481e184f07fbea366ba1a33ccc8b995e1b
 
-`false` `string: 'array-push' | 'commonjs' | <any string>`
+`false` `string: 'array-push' | 'commonjs' | 'module' | <any string>`
 
+<<<<<<< HEAD
 chunk 的格式（formats 默认包含 'array-push' (web/WebWorker)，'commonjs' (node.js)，还有其他情况可由插件添加）。
+=======
+The format of chunks (formats included by default are `'array-push'` (web/WebWorker), `'commonjs'` (node.js), `'module'` (ESM), but others might be added by plugins).
+>>>>>>> 93310f481e184f07fbea366ba1a33ccc8b995e1b
 
 **webpack.config.js**
 

@@ -1775,10 +1775,10 @@
   resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-7.3.2.tgz#065ce49b338043ec7f741316ce06afd4d459d944"
   integrity sha512-oJhK/yhl9Gt430OrZOzAl2wJqR0No9445vmZ9Ey8GjUZUpwuu/vmEFP0TDhDXdpGDoxD6/EIFHJEcY8nHXpDTA==
 
-"@octokit/openapi-types@^7.3.5":
-  version "7.3.5"
-  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-7.3.5.tgz#ffd195472f345b32fb29ba3c86a1ee68c09f24b3"
-  integrity sha512-6bm5lzGDOeSnWHM5W8OZ86RD2KpchynU+/Qlm5hNEFjfLDhwfAY2lSe68YRUEYFGlxSHe0HmakyhvmtWoD3Zog==
+"@octokit/openapi-types@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-7.4.0.tgz#07631899dc32b72a532178e27235c541f3c359f1"
+  integrity sha512-V2qNML1knHjrjTJcIIvhYZSTkvtSAoQpNEX8y0ykTJI8vOQPqIh0y6Jf9EU6c/y+v0c9+LeC1acwLQh1xo96MA==
 
 "@octokit/plugin-paginate-rest@^2.6.2":
   version "2.11.0"
@@ -1792,12 +1792,12 @@
   resolved "https://registry.yarnpkg.com/@octokit/plugin-request-log/-/plugin-request-log-1.0.3.tgz#70a62be213e1edc04bb8897ee48c311482f9700d"
   integrity sha512-4RFU4li238jMJAzLgAwkBAw+4Loile5haQMQr+uhFq27BmyJXcXSKvoQKqh0agsZEiUlW6iSv3FAgvmGkur7OQ==
 
-"@octokit/plugin-rest-endpoint-methods@5.3.4":
-  version "5.3.4"
-  resolved "https://registry.yarnpkg.com/@octokit/plugin-rest-endpoint-methods/-/plugin-rest-endpoint-methods-5.3.4.tgz#291dea5af9eecf4d457884d9efbcf72aabbaff57"
-  integrity sha512-2Y2q/FYCsW5tcwIqgnLOgzZXEb3I1VoSQGyHs/Zki/Ufs5H+uT0maPVHatLKw90LQbqK7ON8NpL3Y8IyzG6pNA==
+"@octokit/plugin-rest-endpoint-methods@5.3.5":
+  version "5.3.5"
+  resolved "https://registry.yarnpkg.com/@octokit/plugin-rest-endpoint-methods/-/plugin-rest-endpoint-methods-5.3.5.tgz#2ad8dd6e0ee0e9db2a807879bf4ab7775834f27c"
+  integrity sha512-QL3vIDYbANwxfrWOFlgn0rkp1ojlZKccsTb0+9x9keG8XGIq4ZJhxgpyJASYIui1QqCV8JIfDiEqX2dzr7x8KA==
   dependencies:
-    "@octokit/types" "^6.16.7"
+    "@octokit/types" "^6.17.1"
     deprecation "^2.3.1"
 
 "@octokit/request-error@^2.0.0":
@@ -1844,15 +1844,15 @@
     node-fetch "^2.6.1"
     universal-user-agent "^6.0.0"
 
-"@octokit/rest@^18.6.3":
-  version "18.6.3"
-  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-18.6.3.tgz#0283de05d5dbc9d3adcacb208c055db03000abf9"
-  integrity sha512-BeV2P48RR3MVPhSBq6KXXHMVHEJg5vnFBkFN1GKPXBohXTp+eb0gJq+5iYgkjbOMG6biNvkKllPDWJchpQHHiA==
+"@octokit/rest@^18.6.4":
+  version "18.6.4"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-18.6.4.tgz#450339a66122febd3af9f67911ba34eb469e0ef6"
+  integrity sha512-1q1H1rJIjOjGd9/qIWaQgLaxtWcQ5H0tdh1D7JHqdsxopGciIUfU15GOZQf5lhW1YeQnlILHFynhKaZpXDiwuA==
   dependencies:
     "@octokit/core" "^3.5.0"
     "@octokit/plugin-paginate-rest" "^2.6.2"
     "@octokit/plugin-request-log" "^1.0.2"
-    "@octokit/plugin-rest-endpoint-methods" "5.3.4"
+    "@octokit/plugin-rest-endpoint-methods" "5.3.5"
 
 "@octokit/types@^6.0.3", "@octokit/types@^6.11.0", "@octokit/types@^6.16.1", "@octokit/types@^6.7.1":
   version "6.16.4"
@@ -1861,12 +1861,12 @@
   dependencies:
     "@octokit/openapi-types" "^7.3.2"
 
-"@octokit/types@^6.16.7":
-  version "6.16.7"
-  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-6.16.7.tgz#f27e87daf7ed87bde3e67b2e71956468fa4d02a7"
-  integrity sha512-OuQELiwIKeDySgNID52vm33wDRc2aaX8lKYgAw9Hmw939ITow1HspT8/AH3M3jgGFUMDmHlMNBNEmH7xV7ggXQ==
+"@octokit/types@^6.17.1":
+  version "6.17.1"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-6.17.1.tgz#b8e3fbf22efb939e1cb428f05f2991a258996810"
+  integrity sha512-x1RDwjjSzGHK8hfwyNa4Gz0t5YtwUfIxEtejFpm2cjH1gMMk6XDv8La3gUAPzYpDgdzTEF8Lpz+7BGv9aZR/0w==
   dependencies:
-    "@octokit/openapi-types" "^7.3.5"
+    "@octokit/openapi-types" "^7.4.0"
 
 "@pmmmwh/react-refresh-webpack-plugin@next":
   version "0.5.0-rc.0"
@@ -13505,10 +13505,10 @@ webpack-sources@^2.3.0:
     react-textarea-autosize "^5.2.1"
     uuid "^3.1.0"
 
-webpack@^5.41.0:
-  version "5.41.0"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.41.0.tgz#217daa27bdd30287c1d7f9d9e0a2304fe33c5a51"
-  integrity sha512-pCVO7hVm8XiL6DpPtXrFLS8ktmH/tpvtbEex6hn4RweTFe6z6Cugh5FlQoEPZotb15HiirjM2Kv7THTA7sKLzQ==
+webpack@^5.41.1:
+  version "5.41.1"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.41.1.tgz#23fa1d82c95c222d3fc3163806b9a833fe52b253"
+  integrity sha512-AJZIIsqJ/MVTmegEq9Tlw5mk5EHdGiJbDdz9qP15vmUH+oxI1FdWcL0E9EO8K/zKaRPWqEs7G/OPxq1P61u5Ug==
   dependencies:
     "@types/eslint-scope" "^3.7.0"
     "@types/estree" "^0.0.48"
