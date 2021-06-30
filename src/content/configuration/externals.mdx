@@ -323,28 +323,29 @@ module.exports = {
 
 `string = 'var'`
 
-Specifies the default type of externals. `amd`, `umd`, `system` and `jsonp` externals **depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)** being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
+Specify the default type of externals. `amd`, `umd`, `system` and `jsonp` externals **depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)** being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
 
 Supported types:
 
-- `'var'`
-- `'module'`
-- `'assign'`
-- `'this'`
-- `'window'`
-- `'self'`
-- `'global'`
-- `'commonjs'`
-- `'commonjs-module'`
 - `'amd'`
 - `'amd-require'`
+- `'assign'`
+- `'commonjs'`
+- `'commonjs-module'`
+- `'global'`
+- `'import'` - uses `import()` to load a native EcmaScript module (async module)
+- `'jsonp'`
+- [`'module'`](#externalstypemodule)
+- [`'node-commonjs'`](#externalstypenode-commonjs)
+- `'promise'` - same as `'var'` but awaits the result (async module)
+- `'self'`
+- `'system'`
+- [`'script'`](#externalstypescript)
+- `'this'`
 - `'umd'`
 - `'umd2'`
-- `'jsonp'`
-- `'system'`
-- `'promise'` - same as `'var'` but awaits the result (async module)
-- `'import'` - uses `import()` to load a native EcmaScript module (async module)
-- `'script'` - load script exposing predefined global variables with HTML `<script>` element
+- `'var'`
+- `'window'`
 
 **webpack.config.js**
 
@@ -355,14 +356,45 @@ module.exports = {
 };
 ```
 
-### `script`
+### externalsType.module
 
-External script can be loaded from any URL when [`externalsType`](#externalstype) is set to `'script'`. The `<script>` tag would be removed after the script has been loaded.
+Specify the default type of externals as `'module'`. Webpack will generate code like `import * as X from '...'` for externals used in a module.
+
+Make sure to enable [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) first, otherwise webpack will throw errors.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  experiments: {
+    outputModule: true,
+  },
+  externalsType: 'module',
+};
+```
+
+### externalsType.node-commonjs
+
+Specify the default type of externals as `'node-commonjs'`. Webpack will import [`createRequire`](https://nodejs.org/api/module.html#module_module_createrequire_filename) from `'module'` to construct a require function for loading externals used in a module.
+
+```js
+module.export = {
+  experiments: {
+    outputModule: true,
+  },
+  externalsType: 'node-commonjs',
+};
+```
+
+### externalsType.script
+
+Specify the default type of externals as `'script'`. Webpack will Load the external as a script exposing predefined global variables with HTML `<script>` element. The `<script>` tag would be removed after the script has been loaded.
 
 #### Syntax
 
 ```javascript
 module.exports = {
+  externalsType: 'script',
   externals: {
     packageName: [
       'http://example.com/script.js',
@@ -378,13 +410,14 @@ You can also use the shortcut syntax if you're not going to specify any properti
 
 ```javascript
 module.exports = {
+  externalsType: 'script',
   externals: {
     packageName: 'global@http://example.com/script.js', // no properties here
   },
 };
 ```
 
-T> [`output.publicPath`](/configuration/output/#outputpublicpath) won't be added to the provided URL.
+Note that [`output.publicPath`](/configuration/output/#outputpublicpath) won't be added to the provided URL.
 
 #### Example
 
@@ -443,8 +476,6 @@ T> Options like `output.chunkLoadTimeout`, `output.crossOriginLoading` and `outp
 
 Enable presets of externals for specific targets.
 
-W> In earlier webpack versions, the following functionality was achieved by using [`target`](/configuration/target/).
-
 | Option             | Description                                                                                                                                                                                                     | Input Type |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 | `electron`         | Treat common electron built-in modules in main and preload context like `electron`, `ipc` or `shell` as external and load them via `require()` when used.                                                       | boolean    |
@@ -455,6 +486,8 @@ W> In earlier webpack versions, the following functionality was achieved by usin
 | `nwjs`             | Treat `NW.js` legacy `nw.gui` module as external and load it via `require()` when used.                                                                                                                         | boolean    |
 | `web`              | Treat references to `http(s)://...` and `std:...` as external and load them via `import` when used. **(Note that this changes execution order as externals are executed before any other code in the chunk)**.  | boolean    |
 | `webAsync`         | Treat references to `http(s)://...` and `std:...` as external and load them via `async import()` when used **(Note that this external type is an `async` module, which has various effects on the execution)**. | boolean    |
+
+Note that if you're going to output ES Modules with those node.js-related presets, webpack will set the default `externalsType` to [`node-commonjs`](#externalstypenode-commonjs) which would use `createRequire` to construct a require function instead of using `require()`.
 
 **Example**
 
