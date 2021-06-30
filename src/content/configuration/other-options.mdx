@@ -213,6 +213,28 @@ module.exports = {
 };
 ```
 
+### cache.idleTimeoutAfterLargeChanges
+
+`number = 1000`
+
+<Badge text="5.41.0+" />
+
+Time in milliseconds. `cache.idleTimeoutAfterLargeChanges` is the time period after which the cache storing should happen when larger changes have been detected.
+
+`cache.idleTimeoutAfterLargeChanges` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    type: 'filesystem',
+    idleTimeoutAfterLargeChanges: 1000,
+  },
+};
+```
+
 ### cache.idleTimeoutForInitialStore
 
 `number = 0`
