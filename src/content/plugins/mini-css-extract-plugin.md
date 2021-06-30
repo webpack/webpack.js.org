@@ -296,10 +296,16 @@ module.exports = {
 
 |              名称               |         类型         |              默认值               | 描述                                                                       |
 | :-----------------------------: | :------------------: | :--------------------------------: | :-------------------------------------------------------------------------------- |
+<<<<<<< HEAD
 | **[`publicPath`](#publicpath)** | `{String\|Function}` | `webpackOptions.output.publicPath` | 为图片、文件等外部资源指定一个自定义的公共路径。 |
 |   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | 使用 ES modules 语法                                                             |
 |    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | 配置 CSS 模块                                                         |
 |    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | 配置 CSS Modules                                                         |
+=======
+| **[`publicPath`](#publicpath)** | `{String\|Function}` | `webpackOptions.output.publicPath` | Specifies a custom public path for the external resources like images, files, etc |
+|       **[`emit`](#emit)**       |     `{Boolean}`      |               `true`               | If false, the plugin will extract the CSS but **will not** emit the file          |
+|   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | Use ES modules syntax                                                             |
+>>>>>>> c1774808eba146532e37e41bb8d5f45b57c90a3b
 
 #### `publicPath` {#publicpath}
 
@@ -425,6 +431,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 #### `modules` {#modules}
 
 类型：`Object`
@@ -505,6 +512,9 @@ module.exports = {
 ```
 
 ## 示例 {#examples}
+=======
+## Examples
+>>>>>>> c1774808eba146532e37e41bb8d5f45b57c90a3b
 
 ### 推荐 {#recommend}
 
@@ -576,7 +586,72 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### `publicPath` 选项为函数 {#the-publicpath-option-as-function}
+=======
+### Named export for CSS Modules
+
+> ⚠ Names of locals are converted to `camelCase`.
+
+> ⚠ It is not allowed to use JavaScript reserved words in css class names.
+
+> ⚠ Options `esModule` and `modules.namedExport` in `css-loader` should be enabled.
+
+**styles.css**
+
+```css
+.foo-baz {
+  color: red;
+}
+.bar {
+  color: blue;
+}
+```
+
+**index.js**
+
+```js
+import { fooBaz, bar } from './styles.css';
+
+console.log(fooBaz, bar);
+```
+
+You can enable a ES module named export using:
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  plugins: [new MiniCssExtractPlugin()],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              esModule: true,
+              modules: {
+                namedExport: true,
+                localIdentName: 'foo__[name]__[local]',
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+### The `publicPath` option as function
+>>>>>>> c1774808eba146532e37e41bb8d5f45b57c90a3b
 
 **webpack.config.js**
 
