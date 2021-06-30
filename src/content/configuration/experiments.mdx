@@ -18,13 +18,13 @@ W> Because experimental features have relaxed semantic versioning and might cont
 
 Available options:
 
-- [`executeModule`](#experimentsexecutemodule): Enable execution of modules from the module graph for plugins and loaders at build time.
+- [`executeModule`](#experimentsexecutemodule)
 - `syncWebAssembly`: Support the old WebAssembly like in webpack 4
 - `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module
 - `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level
 - [`outputModule`](#experimentsoutputmodule)
 - `layers`: Enable module and chunk layers.
-- [`lazyCompilation`](#experimentslazycompilation): Compile entrypoints and dynamic `import`s only when they are in use.
+- [`lazyCompilation`](#experimentslazycompilation)
 
 **webpack.config.js**
 
