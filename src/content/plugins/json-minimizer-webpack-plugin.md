@@ -65,9 +65,6 @@ module.exports = {
 };
 ```
 
-This will enable JSON optimization only in production mode.
-If you want to run it also in development set the `optimization.minimize` option to `true`.
-
 And run `webpack` via your preferred method.
 
 ## Options
