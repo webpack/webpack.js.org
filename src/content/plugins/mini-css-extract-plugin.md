@@ -6,6 +6,7 @@ edit: https://github.com/webpack-contrib/mini-css-extract-plugin/edit/master/REA
 repo: https://github.com/webpack-contrib/mini-css-extract-plugin
 translators:
   - wangjq4214
+  - jacob-lcs
 ---
 
 
@@ -296,16 +297,9 @@ module.exports = {
 
 |              名称               |         类型         |              默认值               | 描述                                                                       |
 | :-----------------------------: | :------------------: | :--------------------------------: | :-------------------------------------------------------------------------------- |
-<<<<<<< HEAD
 | **[`publicPath`](#publicpath)** | `{String\|Function}` | `webpackOptions.output.publicPath` | 为图片、文件等外部资源指定一个自定义的公共路径。 |
+|       **[`emit`](#emit)**       |     `{Boolean}`      |               `true`               | 如果设为 false，插件将会提取 CSS **但不会** 生成文件         |
 |   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | 使用 ES modules 语法                                                             |
-|    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | 配置 CSS 模块                                                         |
-|    **[`modules`](#modules)**    |      `{Object}`      |            `undefined`             | 配置 CSS Modules                                                         |
-=======
-| **[`publicPath`](#publicpath)** | `{String\|Function}` | `webpackOptions.output.publicPath` | Specifies a custom public path for the external resources like images, files, etc |
-|       **[`emit`](#emit)**       |     `{Boolean}`      |               `true`               | If false, the plugin will extract the CSS but **will not** emit the file          |
-|   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | Use ES modules syntax                                                             |
->>>>>>> c1774808eba146532e37e41bb8d5f45b57c90a3b
 
 #### `publicPath` {#publicpath}
 
@@ -431,90 +425,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-#### `modules` {#modules}
-
-类型：`Object`
-默认值：`undefined`
-
-用于配置 CSS Modules。
-
-##### `namedExport` {#namedexport}
-
-类型：`Boolean`
-类型：`false`
-
-启用/禁用 ES 模块命名导出。
-
-> ⚠ 命名会被修改为 `camelCase` 的形式。
-
-> ⚠ 不允许在 css 的 class name 中使用 JavaScript 关键字。
-
-> ⚠ 应启用 `css-loader` 和 `MiniCssExtractPlugin.loader` 中的 `esModule` 以及 `modules.namedExport` 选项。
-
-**styles.css**
-
-```css
-.foo-baz {
-  color: red;
-}
-.bar {
-  color: blue;
-}
-```
-
-**index.js**
-
-```js
-import { fooBaz, bar } from './styles.css';
-
-console.log(fooBaz, bar);
-```
-
-你可以按照如下配置启用 ES 模块命名导出。
-
-**webpack.config.js**
-
-```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-module.exports = {
-  plugins: [new MiniCssExtractPlugin()],
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              esModule: true,
-              modules: {
-                namedExport: true,
-              },
-            },
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              esModule: true,
-              modules: {
-                namedExport: true,
-                localIdentName: 'foo__[name]__[local]',
-              },
-            },
-          },
-        ],
-      },
-    ],
-  },
-};
-```
-
 ## 示例 {#examples}
-=======
-## Examples
->>>>>>> c1774808eba146532e37e41bb8d5f45b57c90a3b
 
 ### 推荐 {#recommend}
 
@@ -586,16 +497,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `publicPath` 选项为函数 {#the-publicpath-option-as-function}
-=======
-### Named export for CSS Modules
+### Named export for CSS Modules {#name-export-for-css-modules}
 
-> ⚠ Names of locals are converted to `camelCase`.
+> ⚠ 命名会被修改为 `camelCase` 的形式。
 
-> ⚠ It is not allowed to use JavaScript reserved words in css class names.
+> ⚠ 不允许在 css 的 class name 中使用 JavaScript 关键字。
 
-> ⚠ Options `esModule` and `modules.namedExport` in `css-loader` should be enabled.
+> ⚠ 应启用 `css-loader` 中的 `esModule` 以及 `modules.namedExport` 选项。
 
 **styles.css**
 
@@ -616,7 +524,7 @@ import { fooBaz, bar } from './styles.css';
 console.log(fooBaz, bar);
 ```
 
-You can enable a ES module named export using:
+你可以按照如下配置启用 ES 模块命名导出：
 
 **webpack.config.js**
 
@@ -650,8 +558,7 @@ module.exports = {
 };
 ```
 
-### The `publicPath` option as function
->>>>>>> c1774808eba146532e37e41bb8d5f45b57c90a3b
+### `publicPath` 选项为函数 {#the-publicpath-option-as-function}
 
 **webpack.config.js**
 
