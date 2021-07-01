@@ -325,11 +325,7 @@ module.exports = {
 
 `string = 'var'`
 
-<<<<<<< HEAD
-指定 externals 的默认类型。当 external 被设置为 `amd`，`umd`，`system` 以及 `jsonp` 时，**[`output.libraryTarget`](/configuration/output/#outputlibrarytarget)** 的值也应相同。例如，你只能在 `amd` 库中使用 `amd` 的 externals。
-=======
-Specify the default type of externals. `amd`, `umd`, `system` and `jsonp` externals **depend on the [`output.libraryTarget`](/configuration/output/#outputlibrarytarget)** being set to the same value e.g. you can only consume `amd` externals within an `amd` library.
->>>>>>> 93310f481e184f07fbea366ba1a33ccc8b995e1b
+指定 externals 的默认类型。当 external 被设置为 `amd`，`umd`，`system` 以及 `jsonp` 时，[`output.libraryTarget`](/configuration/output/#outputlibrarytarget) 的值也应相同。例如，你只能在 `amd` 库中使用 `amd` 的 externals。
 
 支持的类型如下：
 
@@ -341,15 +337,9 @@ Specify the default type of externals. `amd`, `umd`, `system` and `jsonp` extern
 - `'global'`
 - `'import'` - uses `import()` to load a native EcmaScript module (async module)
 - `'jsonp'`
-<<<<<<< HEAD
-- `'system'`
-- `'promise'` - 与 `'var'` 相同，但会 awaits 结果（适用于 async 模块）
-- `'import'` - 使用 `import()` 加载原生的 EcmaScript 模块（适用于 async 模块）
-- `'script'` - 使用 HTML 的 `<script>` 元素加载 script，用于暴露预定义的全局变量
-=======
 - [`'module'`](#externalstypemodule)
 - [`'node-commonjs'`](#externalstypenode-commonjs)
-- `'promise'` - same as `'var'` but awaits the result (async module)
+- `'promise'` - 与 `'var'` 相同，但是会 await 结果（适用于 async 模块）
 - `'self'`
 - `'system'`
 - [`'script'`](#externalstypescript)
@@ -358,7 +348,6 @@ Specify the default type of externals. `amd`, `umd`, `system` and `jsonp` extern
 - `'umd2'`
 - `'var'`
 - `'window'`
->>>>>>> 93310f481e184f07fbea366ba1a33ccc8b995e1b
 
 **webpack.config.js**
 
@@ -369,11 +358,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `script` {#script}
-=======
-### externalsType.module
->>>>>>> 93310f481e184f07fbea366ba1a33ccc8b995e1b
+### externalsType.module {#externalstype-module}
 
 Specify the default type of externals as `'module'`. Webpack will generate code like `import * as X from '...'` for externals used in a module.
 
@@ -434,11 +419,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-T> [`output.publicPath`](/configuration/output/#outputpublicpath) 不会被添加到提供的 URL 中。
-=======
-Note that [`output.publicPath`](/configuration/output/#outputpublicpath) won't be added to the provided URL.
->>>>>>> 93310f481e184f07fbea366ba1a33ccc8b995e1b
+请注意，[`output.publicPath`](/configuration/output/#outputpublicpath) 不会被添加到提供的 URL 中。
 
 #### 示例 {#example}
 
@@ -497,9 +478,6 @@ T> 像 `output.chunkLoadTimeout`，`output.crossOriginLoading` 以及 `output.sc
 
 为特定的 target 启用 externals 的 preset。
 
-<<<<<<< HEAD
-W> 在早期的 webpack 版本中，通过使用 [`target`](/configuration/target/) 实现以下功能。
-
 | 选项               | 描述                                                                                                                                                                    | 输入类型 |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | `electron`         | 将 main 和预加载上下文中常见的 electron 内置模块视为 external 模块（如 `electron`，`ipc` 或 `shell`），使用时通过 `require()` 加载。                                    | boolean  |
@@ -510,18 +488,6 @@ W> 在早期的 webpack 版本中，通过使用 [`target`](/configuration/targe
 | `nwjs`             | 将 `NW.js` 遗留的 `nw.gui` 模块视为 external 模块，使用时通过 `require()` 加载。                                                                                        | boolean  |
 | `web`              | 将 `http(s)://...` 以及 `std:...` 视为 external 模块，使用时通过 `import` 加载。**（注意，这将改变执行顺序，因为 external 代码会在该块中的其他代码执行前被执行）**。    | boolean  |
 | `webAsync`         | 将 'http(s)://...' 以及 'std:...' 的引用视为 external 模块，使用时通过 `async import()` 加载。**（注意，此 external 类型为 `async` 模块，它对执行会产生各种副作用）**。 | boolean  |
-=======
-| Option             | Description                                                                                                                                                                                                     | Input Type |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| `electron`         | Treat common electron built-in modules in main and preload context like `electron`, `ipc` or `shell` as external and load them via `require()` when used.                                                       | boolean    |
-| `electronMain`     | Treat electron built-in modules in the main context like `app`, `ipc-main` or `shell` as external and load them via `require()` when used.                                                                      | boolean    |
-| `electronPreload`  | Treat electron built-in modules in the preload context like `web-frame`, `ipc-renderer` or `shell` as external and load them via require() when used.                                                           | boolean    |
-| `electronRenderer` | Treat electron built-in modules in the renderer context like `web-frame`, `ipc-renderer` or `shell` as external and load them via `require()` when used.                                                        | boolean    |
-| `node`             | Treat node.js built-in modules like `fs`, `path` or `vm` as external and load them via `require()` when used.                                                                                                   | boolean    |
-| `nwjs`             | Treat `NW.js` legacy `nw.gui` module as external and load it via `require()` when used.                                                                                                                         | boolean    |
-| `web`              | Treat references to `http(s)://...` and `std:...` as external and load them via `import` when used. **(Note that this changes execution order as externals are executed before any other code in the chunk)**.  | boolean    |
-| `webAsync`         | Treat references to `http(s)://...` and `std:...` as external and load them via `async import()` when used **(Note that this external type is an `async` module, which has various effects on the execution)**. | boolean    |
->>>>>>> 93310f481e184f07fbea366ba1a33ccc8b995e1b
 
 Note that if you're going to output ES Modules with those node.js-related presets, webpack will set the default `externalsType` to [`node-commonjs`](#externalstypenode-commonjs) which would use `createRequire` to construct a require function instead of using `require()`.
 

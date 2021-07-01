@@ -217,18 +217,15 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### cache.idleTimeoutForInitialStore {#cacheidletimeoutforinitialstore}
-=======
-### cache.idleTimeoutAfterLargeChanges
+### cache.idleTimeoutAfterLargeChanges {#cacheidletimeoutafterlargechanges}
 
 `number = 1000`
 
 <Badge text="5.41.0+" />
 
-Time in milliseconds. `cache.idleTimeoutAfterLargeChanges` is the time period after which the cache storing should happen when larger changes have been detected.
+以毫秒为单位。`cache.idleTimeoutAfterLargeChanges` 是当检测到较大的更改时，缓存存储应在此之后发生的时间段。
 
-`cache.idleTimeoutAfterLargeChanges` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+`cache.idleTimeoutAfterLargeChanges` 仅在 [`cache.type`](#cachetype) 设为 `'filesystem'` 时可用。
 
 **webpack.config.js**
 
@@ -242,8 +239,7 @@ module.exports = {
 };
 ```
 
-### cache.idleTimeoutForInitialStore
->>>>>>> 93310f481e184f07fbea366ba1a33ccc8b995e1b
+### cache.idleTimeoutForInitialStore {#cacheidletimeoutforinitialstore}
 
 `number = 0`
 
