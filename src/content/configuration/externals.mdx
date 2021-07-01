@@ -325,28 +325,29 @@ module.exports = {
 
 `string = 'var'`
 
-指定 externals 的默认类型。当 external 被设置为 `amd`，`umd`，`system` 以及 `jsonp` 时，**[`output.libraryTarget`](/configuration/output/#outputlibrarytarget)** 的值也应相同。例如，你只能在 `amd` 库中使用 `amd` 的 externals。
+指定 externals 的默认类型。当 external 被设置为 `amd`，`umd`，`system` 以及 `jsonp` 时，[`output.libraryTarget`](/configuration/output/#outputlibrarytarget) 的值也应相同。例如，你只能在 `amd` 库中使用 `amd` 的 externals。
 
 支持的类型如下：
 
-- `'var'`
-- `'module'`
-- `'assign'`
-- `'this'`
-- `'window'`
-- `'self'`
-- `'global'`
-- `'commonjs'`
-- `'commonjs-module'`
 - `'amd'`
 - `'amd-require'`
+- `'assign'`
+- `'commonjs'`
+- `'commonjs-module'`
+- `'global'`
+- `'import'` - uses `import()` to load a native EcmaScript module (async module)
+- `'jsonp'`
+- [`'module'`](#externalstypemodule)
+- [`'node-commonjs'`](#externalstypenode-commonjs)
+- `'promise'` - 与 `'var'` 相同，但是会 await 结果（适用于 async 模块）
+- `'self'`
+- `'system'`
+- [`'script'`](#externalstypescript)
+- `'this'`
 - `'umd'`
 - `'umd2'`
-- `'jsonp'`
-- `'system'`
-- `'promise'` - 与 `'var'` 相同，但会 awaits 结果（适用于 async 模块）
-- `'import'` - 使用 `import()` 加载原生的 EcmaScript 模块（适用于 async 模块）
-- `'script'` - 使用 HTML 的 `<script>` 元素加载 script，用于暴露预定义的全局变量
+- `'var'`
+- `'window'`
 
 **webpack.config.js**
 
@@ -357,14 +358,45 @@ module.exports = {
 };
 ```
 
-### `script` {#script}
+### externalsType.module {#externalstype-module}
 
-External script can be loaded from any URL when [`externalsType`](#externalstype) is set to `'script'`. The `<script>` tag would be removed after the script has been loaded.
+Specify the default type of externals as `'module'`. Webpack will generate code like `import * as X from '...'` for externals used in a module.
+
+Make sure to enable [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) first, otherwise webpack will throw errors.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  experiments: {
+    outputModule: true,
+  },
+  externalsType: 'module',
+};
+```
+
+### externalsType.node-commonjs
+
+Specify the default type of externals as `'node-commonjs'`. Webpack will import [`createRequire`](https://nodejs.org/api/module.html#module_module_createrequire_filename) from `'module'` to construct a require function for loading externals used in a module.
+
+```js
+module.export = {
+  experiments: {
+    outputModule: true,
+  },
+  externalsType: 'node-commonjs',
+};
+```
+
+### externalsType.script
+
+Specify the default type of externals as `'script'`. Webpack will Load the external as a script exposing predefined global variables with HTML `<script>` element. The `<script>` tag would be removed after the script has been loaded.
 
 #### Syntax {#syntax}
 
 ```javascript
 module.exports = {
+  externalsType: 'script',
   externals: {
     packageName: [
       'http://example.com/script.js',
@@ -380,13 +412,14 @@ module.exports = {
 
 ```javascript
 module.exports = {
+  externalsType: 'script',
   externals: {
     packageName: 'global@http://example.com/script.js', // no properties here
   },
 };
 ```
 
-T> [`output.publicPath`](/configuration/output/#outputpublicpath) 不会被添加到提供的 URL 中。
+请注意，[`output.publicPath`](/configuration/output/#outputpublicpath) 不会被添加到提供的 URL 中。
 
 #### 示例 {#example}
 
@@ -445,8 +478,6 @@ T> 像 `output.chunkLoadTimeout`，`output.crossOriginLoading` 以及 `output.sc
 
 为特定的 target 启用 externals 的 preset。
 
-W> 在早期的 webpack 版本中，通过使用 [`target`](/configuration/target/) 实现以下功能。
-
 | 选项               | 描述                                                                                                                                                                    | 输入类型 |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | `electron`         | 将 main 和预加载上下文中常见的 electron 内置模块视为 external 模块（如 `electron`，`ipc` 或 `shell`），使用时通过 `require()` 加载。                                    | boolean  |
@@ -457,6 +488,8 @@ W> 在早期的 webpack 版本中，通过使用 [`target`](/configuration/targe
 | `nwjs`             | 将 `NW.js` 遗留的 `nw.gui` 模块视为 external 模块，使用时通过 `require()` 加载。                                                                                        | boolean  |
 | `web`              | 将 `http(s)://...` 以及 `std:...` 视为 external 模块，使用时通过 `import` 加载。**（注意，这将改变执行顺序，因为 external 代码会在该块中的其他代码执行前被执行）**。    | boolean  |
 | `webAsync`         | 将 'http(s)://...' 以及 'std:...' 的引用视为 external 模块，使用时通过 `async import()` 加载。**（注意，此 external 类型为 `async` 模块，它对执行会产生各种副作用）**。 | boolean  |
+
+Note that if you're going to output ES Modules with those node.js-related presets, webpack will set the default `externalsType` to [`node-commonjs`](#externalstypenode-commonjs) which would use `createRequire` to construct a require function instead of using `require()`.
 
 **Example**
 

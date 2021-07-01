@@ -21,13 +21,13 @@ W> 由于实验特性具有相对 宽松的语义版本，可能会有重大的�
 
 Available options:
 
-- [`executeModule`](#experimentsexecutemodule): Enable execution of modules from the module graph for plugins and loaders at build time.
-- `syncWebAssembly`: Support the old WebAssembly like in webpack 4
-- `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module
-- `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level
-- `outputModule`: enables the use of [`output.module`](/configuration/output/#outputmodule) configuration option and sets it to `true`. Enables the use of `output.libraryTarget` as `'module'` and sets it to `'module'`.
+- `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module.
+- [`executeModule`](#experimentsexecutemodule)
 - `layers`: Enable module and chunk layers.
-- [`lazyCompilation`](#experimentslazycompilation): Compile entrypoints and dynamic `import`s only when they are in use.
+- [`lazyCompilation`](#experimentslazycompilation)
+- [`outputModule`](#experimentsoutputmodule)
+- `syncWebAssembly`: Support the old WebAssembly like in webpack 4.
+- `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level.
 
 **webpack.config.js**
 
@@ -122,3 +122,17 @@ Compile entrypoints and dynamic `import`s only when they are in use. It can be u
     },
   };
   ```
+
+### experiments.outputModule
+
+`boolean`
+
+Once enabled, webpack will ouput ECMAScript module syntax whenever possible. For instance, `import()` to load chunks, ESM exports to expose chunk data, among others.
+
+```js
+module.exports = {
+  experiments: {
+    outputModule: true,
+  },
+};
+```

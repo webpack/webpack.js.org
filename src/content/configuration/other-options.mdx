@@ -217,6 +217,28 @@ module.exports = {
 };
 ```
 
+### cache.idleTimeoutAfterLargeChanges {#cacheidletimeoutafterlargechanges}
+
+`number = 1000`
+
+<Badge text="5.41.0+" />
+
+以毫秒为单位。`cache.idleTimeoutAfterLargeChanges` 是当检测到较大的更改时，缓存存储应在此之后发生的时间段。
+
+`cache.idleTimeoutAfterLargeChanges` 仅在 [`cache.type`](#cachetype) 设为 `'filesystem'` 时可用。
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    type: 'filesystem',
+    idleTimeoutAfterLargeChanges: 1000,
+  },
+};
+```
+
 ### cache.idleTimeoutForInitialStore {#cacheidletimeoutforinitialstore}
 
 `number = 0`

@@ -179,11 +179,11 @@ module.exports = {
 };
 ```
 
-## `output.chunkLoading` {#outputchunkloading}
+## output.chunkLoading {#outputchunkloading}
 
-`false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>`
+`false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | 'import' | <any string>`
 
-加载 chunk 的方法（默认值有 'jsonp' (web)，'importScripts' (WebWorker)，'require' (sync node.js)，'async-node' (async node.js)，还有其他值可由插件添加)。
+加载 chunk 的方法（默认值有 `'jsonp'` (web)、`'import'` (ESM)、`'importScripts'` (WebWorker)、`'require'` (sync node.js)、`'async-node'` (async node.js)，还有其他值可由插件添加)。
 
 **webpack.config.js**
 
@@ -197,11 +197,11 @@ module.exports = {
 };
 ```
 
-## `output.chunkFormat` {#outputchunkformat}
+## output.chunkFormat {#outputchunkformat}
 
-`false` `string: 'array-push' | 'commonjs' | <any string>`
+`false` `string: 'array-push' | 'commonjs' | 'module' | <any string>`
 
-chunk 的格式（formats 默认包含 'array-push' (web/WebWorker)，'commonjs' (node.js)，还有其他情况可由插件添加）。
+chunk 的格式（formats 默认包含 `'array-push'` (web/WebWorker)、`'commonjs'` (node.js)、`'module'` (ESM)，还有其他情况可由插件添加）。
 
 **webpack.config.js**
 
