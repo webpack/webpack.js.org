@@ -68,7 +68,11 @@ function Site(props) {
 
   const applyTheme = (theme) => {
     document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.classList.add(theme);
+    if (theme === THEME.DARK) {
+      document.documentElement.classList.add(THEME.DARK);
+    } else {
+      document.documentElement.classList.remove(THEME.DARK);
+    }
   };
   useEffect(() => {
     applyTheme(theme);

@@ -124,6 +124,7 @@ function Navigation({
                 cursor: 'pointer',
               }}
               onClick={themeSwitcher}
+              data-testid="hello-darkness"
             >
               {theme === DARK ? '🌙' : '☀️'}
             </button>
