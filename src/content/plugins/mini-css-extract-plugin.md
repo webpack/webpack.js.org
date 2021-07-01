@@ -51,13 +51,13 @@ body {
 **component.js**
 
 ```js
-import './style.css';
+import "./style.css";
 ```
 
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [new MiniCssExtractPlugin()],
@@ -65,7 +65,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -136,7 +136,7 @@ A new `<link>` element will be inserted after the found item.
 
 ```js
 new MiniCssExtractPlugin({
-  insert: '#some-element',
+  insert: "#some-element",
 });
 ```
 
@@ -155,7 +155,7 @@ Allows to override default behavior and insert styles at any position.
 ```js
 new MiniCssExtractPlugin({
   insert: function (linkTag) {
-    var reference = document.querySelector('#some-element');
+    var reference = document.querySelector("#some-element");
     if (reference) {
       reference.parentNode.insertBefore(linkTag, reference);
     }
@@ -175,14 +175,14 @@ If defined, the `mini-css-extract-plugin` will attach given attributes with thei
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       attributes: {
-        id: 'target',
-        'data-target': 'example',
+        id: "target",
+        "data-target": "example",
       },
     }),
   ],
@@ -190,7 +190,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -213,19 +213,19 @@ Possible values: `text/css`
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
-      linkType: 'text/css',
+      linkType: "text/css",
     }),
   ],
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -239,7 +239,7 @@ module.exports = {
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [
@@ -251,7 +251,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -271,7 +271,7 @@ You need to have at least webpack 5.33.2.
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [
@@ -283,7 +283,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -311,15 +311,15 @@ Works like [`output.publicPath`](/configuration/output/#outputpublicpath)
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: "[name].css",
+      chunkFilename: "[id].css",
     }),
   ],
   module: {
@@ -330,10 +330,10 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: '/public/path/to/',
+              publicPath: "/public/path/to/",
             },
           },
-          'css-loader',
+          "css-loader",
         ],
       },
     ],
@@ -346,15 +346,15 @@ module.exports = {
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: "[name].css",
+      chunkFilename: "[id].css",
     }),
   ],
   module: {
@@ -366,11 +366,11 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
             options: {
               publicPath: (resourcePath, context) => {
-                return path.relative(path.dirname(resourcePath), context) + '/';
+                return path.relative(path.dirname(resourcePath), context) + "/";
               },
             },
           },
-          'css-loader',
+          "css-loader",
         ],
       },
     ],
@@ -399,7 +399,7 @@ You can enable a CommonJS syntax using:
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [new MiniCssExtractPlugin()],
@@ -414,7 +414,7 @@ module.exports = {
               esModule: false,
             },
           },
-          'css-loader',
+          "css-loader",
         ],
       },
     ],
@@ -435,8 +435,8 @@ For `development` mode (including `webpack-dev-server`) you can use [style-loade
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const devMode = process.env.NODE_ENV !== 'production';
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
   module: {
@@ -444,10 +444,10 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
         ],
       },
     ],
@@ -461,15 +461,15 @@ module.exports = {
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // all options are optional
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: "[name].css",
+      chunkFilename: "[id].css",
       ignoreOrder: false, // Enable to remove warnings about conflicting order
     }),
   ],
@@ -483,10 +483,10 @@ module.exports = {
             options: {
               // you can specify a publicPath here
               // by default it uses publicPath in webpackOptions.output
-              publicPath: '../',
+              publicPath: "../",
             },
           },
-          'css-loader',
+          "css-loader",
         ],
       },
     ],
@@ -516,7 +516,7 @@ module.exports = {
 **index.js**
 
 ```js
-import { fooBaz, bar } from './styles.css';
+import { fooBaz, bar } from "./styles.css";
 
 console.log(fooBaz, bar);
 ```
@@ -526,7 +526,7 @@ You can enable a ES module named export using:
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [new MiniCssExtractPlugin()],
@@ -539,12 +539,12 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
           },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               esModule: true,
               modules: {
                 namedExport: true,
-                localIdentName: 'foo__[name]__[local]',
+                localIdentName: "foo__[name]__[local]",
               },
             },
           },
@@ -560,15 +560,15 @@ module.exports = {
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: "[name].css",
+      chunkFilename: "[id].css",
     }),
   ],
   module: {
@@ -583,11 +583,11 @@ module.exports = {
                 // publicPath is the relative path of the resource to the context
                 // e.g. for ./css/admin/main.css the publicPath will be ../../
                 // while for ./css/main.css the publicPath will be ../
-                return path.relative(path.dirname(resourcePath), context) + '/';
+                return path.relative(path.dirname(resourcePath), context) + "/";
               },
             },
           },
-          'css-loader',
+          "css-loader",
         ],
       },
     ],
@@ -609,16 +609,16 @@ You should not use `HotModuleReplacementPlugin` plugin if you are using a `webpa
 **webpack.config.js**
 
 ```js
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const devMode = process.env.NODE_ENV !== 'production';
+const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const devMode = process.env.NODE_ENV !== "production";
 
 const plugins = [
   new MiniCssExtractPlugin({
     // Options similar to the same options in webpackOptions.output
     // both options are optional
-    filename: devMode ? '[name].css' : '[name].[contenthash].css',
-    chunkFilename: devMode ? '[id].css' : '[id].[contenthash].css',
+    filename: devMode ? "[name].css" : "[name].[contenthash].css",
+    chunkFilename: devMode ? "[id].css" : "[id].[contenthash].css",
   }),
 ];
 if (devMode) {
@@ -634,9 +634,9 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
         ],
       },
     ],
@@ -658,15 +658,15 @@ You should not use `HotModuleReplacementPlugin` plugin if you are using a `webpa
 **webpack.config.js**
 
 ```js
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const plugins = [
   new MiniCssExtractPlugin({
     // Options similar to the same options in webpackOptions.output
     // both options are optional
-    filename: devMode ? '[name].css' : '[name].[contenthash].css',
-    chunkFilename: devMode ? '[id].css' : '[id].[contenthash].css',
+    filename: devMode ? "[name].css" : "[name].[contenthash].css",
+    chunkFilename: devMode ? "[id].css" : "[id].[contenthash].css",
   }),
 ];
 if (devMode) {
@@ -685,7 +685,7 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
             options: {},
           },
-          'css-loader',
+          "css-loader",
         ],
       },
     ],
@@ -700,21 +700,21 @@ To minify the output, use a plugin like [css-minimizer-webpack-plugin](/plugins/
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: "[name].css",
+      chunkFilename: "[id].css",
     }),
   ],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -745,18 +745,18 @@ The CSS can be extracted in one CSS file using `optimization.splitChunks.cacheGr
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
         styles: {
-          name: 'styles',
-          type: 'css/mini-extract',
+          name: "styles",
+          type: "css/mini-extract",
           // For webpack@4
           // test: /\.css$/,
-          chunks: 'all',
+          chunks: "all",
           enforce: true,
         },
       },
@@ -764,14 +764,14 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: "[name].css",
     }),
   ],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -787,8 +787,8 @@ This is especially useful if you import routes dynamically but want to keep your
 This also prevents the CSS duplication issue one had with the ExtractTextPlugin.
 
 ```js
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 function recursiveIssuer(m, c) {
   const issuer = c.moduleGraph.getIssuer(m);
@@ -810,26 +810,26 @@ function recursiveIssuer(m, c) {
 
 module.exports = {
   entry: {
-    foo: path.resolve(__dirname, 'src/foo'),
-    bar: path.resolve(__dirname, 'src/bar'),
+    foo: path.resolve(__dirname, "src/foo"),
+    bar: path.resolve(__dirname, "src/bar"),
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
         fooStyles: {
-          name: 'styles_foo',
-          test: (m, c, entry = 'foo') =>
-            m.constructor.name === 'CssModule' &&
+          name: "styles_foo",
+          test: (m, c, entry = "foo") =>
+            m.constructor.name === "CssModule" &&
             recursiveIssuer(m, c) === entry,
-          chunks: 'all',
+          chunks: "all",
           enforce: true,
         },
         barStyles: {
-          name: 'styles_bar',
-          test: (m, c, entry = 'bar') =>
-            m.constructor.name === 'CssModule' &&
+          name: "styles_bar",
+          test: (m, c, entry = "bar") =>
+            m.constructor.name === "CssModule" &&
             recursiveIssuer(m, c) === entry,
-          chunks: 'all',
+          chunks: "all",
           enforce: true,
         },
       },
@@ -837,14 +837,14 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: "[name].css",
     }),
   ],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -860,19 +860,19 @@ In the example below, we'll use `filename` to output the generated css into a di
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
-      filename: ({ chunk }) => `${chunk.name.replace('/js/', '/css/')}.css`,
+      filename: ({ chunk }) => `${chunk.name.replace("/js/", "/css/")}.css`,
     }),
   ],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -886,20 +886,20 @@ For long term caching use `filename: "[contenthash].css"`. Optionally add `[name
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-      chunkFilename: '[id].[contenthash].css',
+      filename: "[name].[contenthash].css",
+      chunkFilename: "[id].[contenthash].css",
     }),
   ],
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
@@ -913,7 +913,7 @@ For projects where css ordering has been mitigated through consistent use of sco
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   plugins: [
@@ -925,7 +925,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
