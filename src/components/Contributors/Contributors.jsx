@@ -3,6 +3,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import SmallIcon from '../../assets/icon-square-small-slack.png';
 import './Contributors.scss';
 import PropTypes from 'prop-types';
+import { contributorsNotFound } from './404.js';
 
 export default class Contributors extends Component {
   static propTypes = {
@@ -36,23 +37,25 @@ export default class Contributors extends Component {
       >
         <div className="contributors">
           <div className="contributors__list">
-            {contributors.map((contributor) => (
-              <a
-                key={contributor}
-                className="contributor"
-                href={`https://github.com/${contributor}`}
-              >
-                <img
-                  alt={contributor}
-                  src={
-                    inView
-                      ? `https://github.com/${contributor}.png?size=90`
-                      : SmallIcon
-                  }
-                />
-                <span className="contributor__name"> {contributor}</span>
-              </a>
-            ))}
+            {contributors
+              .filter((c) => contributorsNotFound.includes(c) === false)
+              .map((contributor) => (
+                <a
+                  key={contributor}
+                  className="contributor"
+                  href={`https://github.com/${contributor}`}
+                >
+                  <img
+                    alt={contributor}
+                    src={
+                      inView
+                        ? `https://github.com/${contributor}.png?size=90`
+                        : SmallIcon
+                    }
+                  />
+                  <span className="contributor__name"> {contributor}</span>
+                </a>
+              ))}
           </div>
         </div>
       </VisibilitySensor>
