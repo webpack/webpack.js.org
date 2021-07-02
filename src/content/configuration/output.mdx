@@ -31,7 +31,13 @@ contributors:
 
 The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
 
-## `output.auxiliaryComment`
+## output.assetModuleFilename
+
+`string = '[hash][ext][query]'`
+
+The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/).
+
+## output.auxiliaryComment
 
 W> Prefer to use [`output.library.auxiliaryComment`](#outputlibraryauxiliarycomment) instead.
 
@@ -139,6 +145,24 @@ module.exports = {
 };
 ```
 
+## output.chunkFormat
+
+`false` `string: 'array-push' | 'commonjs' | 'module' | <any string>`
+
+The format of chunks (formats included by default are `'array-push'` (web/WebWorker), `'commonjs'` (node.js), `'module'` (ESM), but others might be added by plugins).
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkFormat: 'commonjs',
+  },
+};
+```
+
 ## `output.chunkLoadTimeout`
 
 `number = 120000`
@@ -189,24 +213,6 @@ module.exports = {
   output: {
     //...
     chunkLoading: 'async-node',
-  },
-};
-```
-
-## output.chunkFormat
-
-`false` `string: 'array-push' | 'commonjs' | 'module' | <any string>`
-
-The format of chunks (formats included by default are `'array-push'` (web/WebWorker), `'commonjs'` (node.js), `'module'` (ESM), but others might be added by plugins).
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    //...
-    chunkFormat: 'commonjs',
   },
 };
 ```
@@ -487,12 +493,6 @@ type ModulePathData = {
 ```
 
 T> In some context properties will use JavaScript code expressions instead of raw values. In these cases the `WithLength` variant is available and should be used instead of slicing the original value.
-
-## `output.assetModuleFilename`
-
-`string = '[hash][ext][query]'`
-
-The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/)
 
 ## `output.globalObject`
 
