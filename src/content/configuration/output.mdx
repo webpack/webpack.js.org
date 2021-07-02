@@ -35,7 +35,17 @@ translators:
 
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
 
+<<<<<<< HEAD
 ## `output.auxiliaryComment` {#outputauxiliarycomment}
+=======
+## output.assetModuleFilename
+
+`string = '[hash][ext][query]'`
+
+The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/).
+
+## output.auxiliaryComment
+>>>>>>> 05b95b3dd0d9a0ebf29e007df9c7088fce744a82
 
 W> 最好使用 [`output.library.auxiliaryComment`](#outputlibraryauxiliarycomment)。
 
@@ -143,11 +153,45 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.chunkLoadTimeout` {#outputchunkloadtimeout}
+=======
+## output.chunkFormat
+>>>>>>> 05b95b3dd0d9a0ebf29e007df9c7088fce744a82
+
+`false` `string: 'array-push' | 'commonjs' | 'module' | <any string>`
+
+<<<<<<< HEAD
+chunk 请求到期之前的毫秒数，默认为 120000。从 webpack 2.6.0 开始支持此选项。
+=======
+The format of chunks (formats included by default are `'array-push'` (web/WebWorker), `'commonjs'` (node.js), `'module'` (ESM), but others might be added by plugins).
+>>>>>>> 05b95b3dd0d9a0ebf29e007df9c7088fce744a82
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    chunkFormat: 'commonjs',
+  },
+};
+```
+
+<<<<<<< HEAD
+## `output.chunkLoadingGlobal` {#outputchunkloadingglobal}
+=======
+## `output.chunkLoadTimeout`
+>>>>>>> 05b95b3dd0d9a0ebf29e007df9c7088fce744a82
 
 `number = 120000`
 
-chunk 请求到期之前的毫秒数，默认为 120000。从 webpack 2.6.0 开始支持此选项。
+<<<<<<< HEAD
+webpack 用于加载 chunk 的全局变量。
+=======
+Number of milliseconds before chunk request expires. This option is supported since webpack 2.6.0.
+>>>>>>> 05b95b3dd0d9a0ebf29e007df9c7088fce744a82
 
 **webpack.config.js**
 
@@ -161,11 +205,19 @@ module.exports = {
 };
 ```
 
-## `output.chunkLoadingGlobal` {#outputchunkloadingglobal}
+<<<<<<< HEAD
+## output.chunkLoading {#outputchunkloading}
+=======
+## `output.chunkLoadingGlobal`
+>>>>>>> 05b95b3dd0d9a0ebf29e007df9c7088fce744a82
 
 `string = 'webpackChunkwebpack'`
 
-webpack 用于加载 chunk 的全局变量。
+<<<<<<< HEAD
+加载 chunk 的方法（默认值有 `'jsonp'` (web)、`'import'` (ESM)、`'importScripts'` (WebWorker)、`'require'` (sync node.js)、`'async-node'` (async node.js)，还有其他值可由插件添加)。
+=======
+The global variable used by webpack for loading of chunks.
+>>>>>>> 05b95b3dd0d9a0ebf29e007df9c7088fce744a82
 
 **webpack.config.js**
 
@@ -179,11 +231,19 @@ module.exports = {
 };
 ```
 
-## output.chunkLoading {#outputchunkloading}
+<<<<<<< HEAD
+## output.chunkFormat {#outputchunkformat}
+=======
+## output.chunkLoading
+>>>>>>> 05b95b3dd0d9a0ebf29e007df9c7088fce744a82
 
 `false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | 'import' | <any string>`
 
-加载 chunk 的方法（默认值有 `'jsonp'` (web)、`'import'` (ESM)、`'importScripts'` (WebWorker)、`'require'` (sync node.js)、`'async-node'` (async node.js)，还有其他值可由插件添加)。
+<<<<<<< HEAD
+chunk 的格式（formats 默认包含 `'array-push'` (web/WebWorker)、`'commonjs'` (node.js)、`'module'` (ESM)，还有其他情况可由插件添加）。
+=======
+The method to load chunks (methods included by default are `'jsonp'` (web), `'import'` (ESM), `'importScripts'` (WebWorker), `'require'` (sync node.js), `'async-node'` (async node.js), but others might be added by plugins).
+>>>>>>> 05b95b3dd0d9a0ebf29e007df9c7088fce744a82
 
 **webpack.config.js**
 
@@ -193,24 +253,6 @@ module.exports = {
   output: {
     //...
     chunkLoading: 'async-node',
-  },
-};
-```
-
-## output.chunkFormat {#outputchunkformat}
-
-`false` `string: 'array-push' | 'commonjs' | 'module' | <any string>`
-
-chunk 的格式（formats 默认包含 `'array-push'` (web/WebWorker)、`'commonjs'` (node.js)、`'module'` (ESM)，还有其他情况可由插件添加）。
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    //...
-    chunkFormat: 'commonjs',
   },
 };
 ```
@@ -492,6 +534,7 @@ type ModulePathData = {
 
 T> 在某些上下文中，属性将使用 JavaScript 代码表达式代替原始值。在此情况下，`WithLength` 变量是可用的，应该使用它来代替对原始值的分片操作。
 
+<<<<<<< HEAD
 ## `output.assetModuleFilename` {#outputassetmodulefilename}
 
 `string = '[hash][ext][query]'`
@@ -499,6 +542,9 @@ T> 在某些上下文中，属性将使用 JavaScript 代码表达式代替原�
 参考 [`output.filename`](#outputfilename) 不过应用于 [Asset Modules](/guides/asset-modules/)
 
 ## `output.globalObject` {#outputglobalobject}
+=======
+## `output.globalObject`
+>>>>>>> 05b95b3dd0d9a0ebf29e007df9c7088fce744a82
 
 `string = 'window'`
 
