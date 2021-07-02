@@ -319,17 +319,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
-<<<<<<< HEAD
       // 类似于 webpackOptions.output 中的选项
       // 所有选项都是可选的
       filename: '[name].css',
       chunkFilename: '[id].css',
-=======
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: "[name].css",
-      chunkFilename: "[id].css",
->>>>>>> 342b34e958f5b2b5ef5b6bf341014786ec908e95
     }),
   ],
   module: {
@@ -361,17 +354,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
-<<<<<<< HEAD
       // 类似于 webpackOptions.output 中的选项
       // 所有选项都是可选的
       filename: '[name].css',
       chunkFilename: '[id].css',
-=======
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: "[name].css",
-      chunkFilename: "[id].css",
->>>>>>> 342b34e958f5b2b5ef5b6bf341014786ec908e95
     }),
   ],
   module: {
@@ -582,17 +568,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
-<<<<<<< HEAD
       // 类似于 webpackOptions.output 中的选项
       // 所有选项都是可选的
       filename: '[name].css',
       chunkFilename: '[id].css',
-=======
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: "[name].css",
-      chunkFilename: "[id].css",
->>>>>>> 342b34e958f5b2b5ef5b6bf341014786ec908e95
     }),
   ],
   module: {
@@ -604,17 +583,10 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
             options: {
               publicPath: (resourcePath, context) => {
-<<<<<<< HEAD
                 // publicPath 是资源相对于上下文的相对路径
                 // 例如：对于 ./css/admin/main.css publicPath 将会是 ../../
                 // 而对于 ./css/main.css publicPath 将会是 ../
                 return path.relative(path.dirname(resourcePath), context) + '/';
-=======
-                // publicPath is the relative path of the resource to the context
-                // e.g. for ./css/admin/main.css the publicPath will be ../../
-                // while for ./css/main.css the publicPath will be ../
-                return path.relative(path.dirname(resourcePath), context) + "/";
->>>>>>> 342b34e958f5b2b5ef5b6bf341014786ec908e95
               },
             },
           },
