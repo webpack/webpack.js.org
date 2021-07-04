@@ -49,7 +49,7 @@ module.exports = (env) =>
             __ssgrun: true,
           },
         },
-        paths,
+        paths: [...paths, '404.html'],
         locals: {
           content: contentTree,
         },
