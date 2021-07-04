@@ -46,6 +46,8 @@ export default class Contributors extends Component {
                   href={`https://github.com/${contributor}`}
                 >
                   <img
+                    width={45}
+                    height={45}
                     alt={contributor}
                     src={
                       inView
