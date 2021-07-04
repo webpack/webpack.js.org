@@ -1,0 +1,379 @@
+---
+title: Cache
+sort: 12
+contributors:
+  - snitin315
+---
+
+## cache
+
+`boolean` `object`
+
+Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/configuration/mode/#mode-development) and disabled in [`production` mode](/configuration/mode/#mode-production). `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: false,
+};
+```
+
+While setting `cache.type` to `'filesystem'` opens up more options for configuration.
+
+### cache.allowCollectingMemory
+
+Collect unused memory allocated during deserialization, only available when [`cache.type`](#cachetype) is set to `'filesystem'`. This requires copying data into smaller buffers and has a performance cost.
+
+- Type: `boolean`
+  - It defaults to `false` in production mode and `true` in development mode.
+- <Badge text="5.35.0+" />
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  cache: {
+    type: 'filesystem',
+    allowCollectingMemory: true,
+  },
+};
+```
+
+### cache.buildDependencies
+
+`object`
+
+`cache.buildDependencies` is an object of arrays of additional code dependencies for the build. webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
+
+Defaults to `webpack/lib` to get all dependencies of webpack.
+
+T> It's recommended to set `cache.buildDependencies.config: [__filename]` in your webpack configuration to get the latest configuration and all dependencies.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  cache: {
+    buildDependencies: {
+      // This makes all dependencies of this file - build dependencies
+      config: [__filename],
+      // By default webpack and loaders are build dependencies
+    },
+  },
+};
+```
+
+### cache.cacheDirectory
+
+`string`
+
+Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
+
+`cache.cacheDirectory` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: path.resolve(__dirname, '.temp_cache'),
+  },
+};
+```
+
+W> The final location of the cache is a combination of `cache.cacheDirectory` + `cache.name`.
+
+### cache.cacheLocation
+
+`string`
+
+Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.name)`.
+
+**webpack.config.js**
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    cacheLocation: path.resolve(__dirname, '.test_cache'),
+  },
+};
+```
+
+### cache.hashAlgorithm
+
+`string`
+
+Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/crypto.html) for more details. Defaults to `md4`.
+
+`cache.hashAlgorithm` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    hashAlgorithm: 'md4',
+  },
+};
+```
+
+### cache.idleTimeout
+
+`number = 60000`
+
+Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
+
+`cache.idleTimeout` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    type: 'filesystem',
+    idleTimeout: 60000,
+  },
+};
+```
+
+### cache.idleTimeoutAfterLargeChanges
+
+`number = 1000`
+
+<Badge text="5.41.0+" />
+
+Time in milliseconds. `cache.idleTimeoutAfterLargeChanges` is the time period after which the cache storing should happen when larger changes have been detected.
+
+`cache.idleTimeoutAfterLargeChanges` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    type: 'filesystem',
+    idleTimeoutAfterLargeChanges: 1000,
+  },
+};
+```
+
+### cache.idleTimeoutForInitialStore
+
+`number = 0`
+
+Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period after which the initial cache storing should happen.
+
+`cache.idleTimeoutForInitialStore` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //..
+  cache: {
+    type: 'filesystem',
+    idleTimeoutForInitialStore: 0,
+  },
+};
+```
+
+### cache.managedPaths
+
+`[string] = ['./node_modules']`
+
+W> Moved to [snapshot.managedPaths](#managedpaths)
+
+`cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
+
+### cache.maxAge
+
+`number = 5184000000`
+
+<Badge text="5.30.0+" />
+
+The amount of time in milliseconds that unused cache entries are allowed to stay in the filesystem cache; defaults to one month.
+
+`cache.maxAge` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  cache: {
+    type: 'filesystem',
+    maxAge: 5184000000,
+  },
+};
+```
+
+### cache.maxGenerations
+
+`number`
+
+<Badge text="5.30.0+" />
+
+Define the lifespan of unused cache entries in the memory cache.
+
+- `cache.maxGenerations: 1`: Cache entries are removed after being unused for a single compilation.
+
+- `cache.maxGenerations: Infinity`: Cache entries are kept forever.
+
+`cache.maxGenerations` option is only available when [`cache.type`](#cachetype) is set to `'memory'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  cache: {
+    type: 'memory',
+    maxGenerations: Infinity,
+  },
+};
+```
+
+### cache.maxMemoryGenerations
+
+`number`
+
+<Badge text="5.30.0+" />
+
+Define the lifespan of unused cache entries in the memory cache.
+
+- `cache.maxMemoryGenerations: 0`: Persistent cache will not use an additional memory cache. It will only cache items in memory until they are serialized to disk. Once serialized the next read will deserialize them from the disk again. This mode will minimize memory usage but introduce a performance cost.
+
+- `cache.maxMemoryGenerations: 1`: This will purge items from the memory cache once they are serialized and unused for at least one compilation. When they are used again they will be deserialized from the disk. This mode will minimize memory usage while still keeping active items in the memory cache.
+
+- `cache.maxMemoryGenerations`: small numbers > 0 will have a performance cost for the GC operation. It gets lower as the number increases.
+
+- `cache.maxMemoryGenerations`: defaults to 10 in `development` mode and to `Infinity` in `production` mode.
+
+`cache.maxMemoryGenerations` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  cache: {
+    type: 'filesystem',
+    maxMemoryGenerations: Infinity,
+  },
+};
+```
+
+### cache.name
+
+`string`
+
+Name for the cache. Different names will lead to different coexisting caches. Defaults to `${config.name}-${config.mode}`. Using `cache.name` makes sense when you have multiple configurations which should have independent caches.
+
+`cache.name` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    name: 'AppBuildCache',
+  },
+};
+```
+
+### cache.profile
+
+`boolean = false`
+
+Track and log detailed timing information for individual cache items of type `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    profile: true,
+  },
+};
+```
+
+### cache.store
+
+`string = 'pack': 'pack'`
+
+`cache.store` tells webpack when to store data on the file system.
+
+- `'pack'`: Store data when compiler is idle in a single file for all cached items
+
+`cache.store` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+
+W> `pack` is the only supported mode since webpack 5.0.x
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    store: 'pack',
+  },
+};
+```
+
+### cache.type
+
+`string: 'memory' | 'filesystem'`
+
+Sets the `cache` type to either in memory or on the file system. The `memory` option is straightforward, it tells webpack to store cache in memory and doesn't allow additional configuration:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'memory',
+  },
+};
+```
+
+### cache.version
+
+`string = ''`
+
+Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when configuration changed in a way which doesn't allow to reuse cache. This will invalidate the cache.
+
+`cache.version` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    version: 'your_version',
+  },
+};
+```
+
+W> Don't share the cache between calls with different options.
