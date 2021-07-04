@@ -13,7 +13,12 @@ const contentTree = require('./src/_content.json');
 const common = require('./webpack.common.js');
 
 // content tree to path array
-const paths = [...flattenContentTree(contentTree), '/vote', '/app-shell'];
+const paths = [
+  ...flattenContentTree(contentTree),
+  '/vote',
+  '/app-shell',
+  '/404.html',
+];
 
 module.exports = (env) =>
   merge(common(env), {
@@ -49,7 +54,7 @@ module.exports = (env) =>
             __ssgrun: true,
           },
         },
-        paths: [...paths, '404.html'],
+        paths,
         locals: {
           content: contentTree,
         },
