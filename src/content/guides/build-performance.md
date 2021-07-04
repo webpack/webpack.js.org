@@ -97,7 +97,7 @@ W> Don't use too many workers, as there is a boot overhead for the Node.js runti
 
 ### Persistent cache
 
-Use [`cache`](/configuration/other-options/#cache) option in webpack configuration. Clear cache directory on `"postinstall"` in `package.json`.
+Use [`cache`](/configuration/cache) option in webpack configuration. Clear cache directory on `"postinstall"` in `package.json`.
 
 T> We support yarn PnP version 3 [`yarn 2 berry`](https://yarnpkg.com/features/pnp) for persistent caching.
 
