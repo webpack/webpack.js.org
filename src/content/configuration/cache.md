@@ -195,7 +195,7 @@ module.exports = {
 
 `[string] = ['./node_modules']`
 
-W> Moved to [snapshot.managedPaths](#managedpaths)
+W> Moved to [snapshot.managedPaths](/configuration/other-options/#managedpaths)
 
 `cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
 
