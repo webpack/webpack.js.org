@@ -94,6 +94,41 @@ module.exports = (env) =>
           'loaders/url-loader': 'https://v4.webpack.js.org/loaders/url-loader',
           'loaders/file-loader':
             'https://v4.webpack.js.org/loaders/file-loader',
+          'configuration/other-options/#cache': 'configuration/cache',
+          'configuration/other-options/#cacheallowcollectingmemory':
+            'configuration/cache/#cacheallowcollectingmemory',
+          'configuration/other-options/#cachebuilddependencies':
+            'configuration/cache/#cachebuilddependencies',
+          'configuration/other-options/#cachecachedirectory':
+            'configuration/cache/#cachecachedirectory',
+          'configuration/other-options/#cachecachelocation':
+            'configuration/cache/#cachecachelocation',
+          'configuration/other-options/#cachehashalgorithm':
+            'configuration/cache/#cachehashalgorithm',
+          'configuration/other-options/#cacheidletimeout':
+            'configuration/cache/#cacheidletimeout',
+          'configuration/other-options/#cacheidletimeoutafterlargechanges':
+            'configuration/cache/#cacheidletimeoutafterlargechanges',
+          'configuration/other-options/#cacheidletimeoutforinitialstore':
+            'configuration/cache/#cacheidletimeoutforinitialstore',
+          'configuration/other-options/#cachemanagedpaths':
+            'configuration/cache/#cachemanagedpaths',
+          'configuration/other-options/#cachemaxage':
+            'configuration/cache/#cachemaxage',
+          'configuration/other-options/#cachemaxgenerations':
+            'configuration/cache/#cachemaxgenerations',
+          'configuration/other-options/#cachemaxmemorygenerations':
+            'configuration/cache/#cachemaxmemorygenerations',
+          'configuration/other-options/#cachename':
+            'configuration/cache/#cachename',
+          'configuration/other-options/#cacheprofile':
+            'configuration/cache/#cacheprofile',
+          'configuration/other-options/#cachestore':
+            'configuration/ocache#cachestore',
+          'configuration/other-options/#cachetype':
+            'configuration/cache/#cachetype',
+          'configuration/other-options/#cacheversion':
+            'configuration/cache/#cacheversion',
         },
       }),
       new CopyWebpackPlugin({
