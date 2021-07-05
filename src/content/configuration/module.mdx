@@ -223,8 +223,13 @@ module.exports = {
 
 缓存模块请求的解析。`module.unsafeCache` 包含如下几个默认值：
 
+<<<<<<< HEAD
 - 如果 [`cache`](/configuration/other-options/#cache) 未被启用，则默认值为 `false`。
 - 如果 [`cache`](/configuration/other-options/#cache) 被启用，并且此模块的来自 node_modules，则值为 `true`，否则为 `false`。
+=======
+- `false` if [`cache`](/configuration/cache) is disabled.
+- `true` if [`cache`](/configuration/cache) is enabled and the module appears to come from node modules, `false` otherwise.
+>>>>>>> 80a8e6db9f601eac65cd4b68185e34feaeb72a23
 
 **webpack.config.js**
 
