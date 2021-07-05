@@ -46,6 +46,8 @@ import './Site.scss';
 import Content from '../../_content.json';
 import { useLocalStorage } from 'react-use';
 
+import clientSideRedirections from './clientSideRedirections';
+
 const mdxComponents = {
   Badge: Badge,
   StackBlitzPreview: StackBlitzPreview,
@@ -57,6 +59,7 @@ Site.propTypes = {
     pathname: PropTypes.string.isRequired,
     hash: PropTypes.string,
   }),
+  history: PropTypes.any,
   import: PropTypes.func,
 };
 function Site(props) {
@@ -157,7 +160,7 @@ function Site(props) {
     }
   }, []);
 
-  let { location } = props;
+  const { location, history } = props;
   let sections = extractSections(Content);
   let section = sections.find(({ url }) => location.pathname.startsWith(url));
   let pages = extractPages(Content);
@@ -188,17 +191,14 @@ function Site(props) {
     return url.replace(/\/?$/, '/');
   }
 
-  // Enable custom redirections for cache documentation
+  // Enable client side redirection
   // See https://github.com/webpack/webpack.js.org/pull/5146#discussion_r663510210
   useEffect(() => {
-    const { location } = props;
-    if (
-      location.pathname === '/configuration/other-options/' &&
-      location.hash.startsWith('#cache')
-    ) {
-      window.location.href = `/configuration/cache/${location.hash}`;
+    const target = clientSideRedirections(location);
+    if (target) {
+      history.replace(target);
     }
-  }, [props]);
+  }, [location, history]);
 
   return (
     <MDXProvider components={mdxComponents}>
