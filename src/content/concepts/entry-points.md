@@ -83,7 +83,7 @@ An object with entry point description. You can specify the following properties
 - `filename`: Specifies the name of each output file on disk.
 - `import`: Module(s) that are loaded upon startup.
 - `library`: Specify [library options](/configuration/output/#outputlibrary) to bundle a library from current entry.
-- `runtime`: The name of the runtime chunk. If set, a runtime chunk with this name is created otherwise an existing entry point is used as runtime.
+- `runtime`: The name of the runtime chunk. If set, a runtime chunk with this name is created otherwise an existing entry point is used as runtime. `runtime` can be set to `false` since webpack 5.43.0.
 - `publicPath`: Specify a public URL address for the output files of this entry when they are referenced in a browser. Also see [output.publicPath](/configuration/output/#outputpublicpath).
 
 **webpack.config.js**
