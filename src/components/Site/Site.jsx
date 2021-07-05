@@ -188,6 +188,18 @@ function Site(props) {
     return url.replace(/\/?$/, '/');
   }
 
+  // Enable custom redirections for cache documentation
+  // See https://github.com/webpack/webpack.js.org/pull/5146#discussion_r663510210
+  useEffect(() => {
+    const { location } = props;
+    if (
+      location.pathname === '/configuration/other-options/' &&
+      location.hash.startsWith('#cache')
+    ) {
+      window.location.href = `/configuration/cache/${location.hash}`;
+    }
+  }, [props]);
+
   return (
     <MDXProvider components={mdxComponents}>
       <div className="site">
