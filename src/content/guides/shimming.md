@@ -481,8 +481,12 @@ See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset
 
 W> 任何需要 AST 的功能（例如 `ProvidePlugin`）都不起作用。
 
+<<<<<<< HEAD
 最后，一些模块支持多种 [模块格式](/concepts/modules)，例如一个混合有 AMD、CommonJS 和 legacy(遗留) 的模块。在大多数这样的模块中，会首先检查 `define`，然后使用一些怪异代码导出一些属性。在这些情况下，可以通过 [`imports-loader`](/loaders/imports-loader/) 设置 `additionalCode=var%define%20=%20false;` 来强制 CommonJS 路径。
 
 ---
 
 T> 译者注：shimming 是一个库(library)，它将一个新的 API 引入到一个旧的环境中，而且仅靠旧的环境中已有的手段实现。polyfill 就是一个用在浏览器 API 上的 shimming。我们通常的做法是先检查当前浏览器是否支持某个 API，如果不支持的话就按需加载对应的 polyfill。然后新旧浏览器就都可以使用这个 API 了。
+=======
+Lastly, there are some modules that support multiple [module styles](/concepts/modules); e.g. a combination of AMD, CommonJS, and legacy. In most of these cases, they first check for `define` and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting `additionalCode=var%20define%20=%20false;` via the [`imports-loader`](/loaders/imports-loader/).
+>>>>>>> 603e85b65d11132064d88f58c0cba7b98334aed7
