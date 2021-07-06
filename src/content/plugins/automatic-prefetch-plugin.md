@@ -6,9 +6,9 @@ contributors:
   - EugeneHlushko
 ---
 
-The `AutomaticPrefetchPlugin` discovers **all modules** from the previous compilation upfront while watching for changes, trying to improve the incremental build times. Compared to [`PrefetchPlugin`](/plugins/prefetch-plugin/) which discovers a **single module** upfront.
+`AutomaticPrefetchPlugin` 会观察之前编译的 **所有模块** 的变化，以改进增量构建的时间。对比[`PrefetchPlugin`](/plugins/prefetch-plugin/) 而言，`PrefetchPlugin` 是预先发现 **单个模块**。
 
-W> May or may not have a performance benefit since the incremental build times are pretty fast.
+W> 可能有性能上的好处，也可能没有，因为增量构建时间非常快。
 
 **webpack.config.js**
 
