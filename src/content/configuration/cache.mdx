@@ -3,13 +3,17 @@ title: Cache
 sort: 12
 contributors:
   - snitin315
+translators:
+  - lcxfs1991
+  - QC-L
+  - jacob-lcs
 ---
 
-## cache
+## cache {#cache}
 
 `boolean` `object`
 
-Cache the generated webpack modules and chunks to improve build speed. `cache` is set to `type: 'memory'` in [`development` mode](/configuration/mode/#mode-development) and disabled in [`production` mode](/configuration/mode/#mode-production). `cache: true` is an alias to `cache: { type: 'memory' }`. To disable caching pass `false`:
+缓存生成的 webpack 模块和 chunk，来改善构建速度。`cache` 会在[`开发` 模式](/configuration/mode/#mode-development)被设置成 `type: 'memory'` 而且在 [`生产` 模式](/configuration/mode/#mode-production) 中被禁用。 `cache: true` 与 `cache: { type: 'memory' }` 配置作用一致。 传入 `false` 会禁用缓存:
 
 **webpack.config.js**
 
@@ -20,11 +24,11 @@ module.exports = {
 };
 ```
 
-While setting `cache.type` to `'filesystem'` opens up more options for configuration.
+当将 `cache.type` 设置为 `'filesystem'` 是会开放更多的可配置项。
 
-### cache.allowCollectingMemory
+### cache.allowCollectingMemory {#cacheallowcollectingmemory}
 
-Collect unused memory allocated during deserialization, only available when [`cache.type`](#cachetype) is set to `'filesystem'`. This requires copying data into smaller buffers and has a performance cost.
+收集在反序列化期间分配的未使用的内存，仅当 [`cache.type`](#cachetype) 设置为 `'filesystem'` 时生效。这需要将数据复制到更小的缓冲区中，并有性能成本。
 
 - Type: `boolean`
   - It defaults to `false` in production mode and `true` in development mode.
@@ -41,15 +45,15 @@ module.exports = {
 };
 ```
 
-### cache.buildDependencies
+### cache.buildDependencies {#cachebuilddependencies}
 
 `object`
 
-`cache.buildDependencies` is an object of arrays of additional code dependencies for the build. webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
+`cache.buildDependencies` 是一个针对构建的额外代码依赖的数组对象。webpack 将使用这些项和所有依赖项的哈希值来使文件系统缓存失效。
 
-Defaults to `webpack/lib` to get all dependencies of webpack.
+默认是 `webpack/lib` 来获取 webpack 的所有依赖项。
 
-T> It's recommended to set `cache.buildDependencies.config: [__filename]` in your webpack configuration to get the latest configuration and all dependencies.
+T> 推荐在 webpack 配置中设置 `cache.buildDependencies.config: [__filename]` 来获取最新配置以及所有依赖项。
 
 **webpack.config.js**
 
@@ -59,19 +63,19 @@ module.exports = {
     buildDependencies: {
       // This makes all dependencies of this file - build dependencies
       config: [__filename],
-      // By default webpack and loaders are build dependencies
+      // 默认情况下 webpack 与 loader 是构建依赖。
     },
   },
 };
 ```
 
-### cache.cacheDirectory
+### cache.cacheDirectory {#cachecachedirectory}
 
 `string`
 
-Base directory for the cache. Defaults to `node_modules/.cache/webpack`.
+缓存的。默认为 `node_modules/.cache/webpack`。
 
-`cache.cacheDirectory` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+`cache.cacheDirectory` 选项仅当 [`cache.type`](#cachetype) 被设置成 `'filesystem'` 才可用。
 
 **webpack.config.js**
 
@@ -87,13 +91,13 @@ module.exports = {
 };
 ```
 
-W> The final location of the cache is a combination of `cache.cacheDirectory` + `cache.name`.
+W> 最终的缓存目标是 `cache.cacheDirectory` + `cache.name` 的混合。
 
-### cache.cacheLocation
+### cache.cacheLocation {#cachecachelocation}
 
 `string`
 
-Locations for the cache. Defaults to `path.resolve(cache.cacheDirectory, cache.name)`.
+缓存的路径。默认值为 `path.resolve(cache.cacheDirectory, cache.name)`.
 
 **webpack.config.js**
 
@@ -109,13 +113,13 @@ module.exports = {
 };
 ```
 
-### cache.hashAlgorithm
+### cache.hashAlgorithm {#cachehashalgorithm}
 
 `string`
 
-Algorithm used the hash generation. See [Node.js crypto](https://nodejs.org/api/crypto.html) for more details. Defaults to `md4`.
+用于哈希生成的算法。详情请参阅 [Node.js crypto](https://nodejs.org/api/crypto.html)。默认值为 `md4`.
 
-`cache.hashAlgorithm` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+`cache.hashAlgorithm` 选项仅当 [`cache.type`](#cachetype) 设置成 `'filesystem'` 才可配置。
 
 **webpack.config.js**
 
@@ -129,13 +133,13 @@ module.exports = {
 };
 ```
 
-### cache.idleTimeout
+### cache.idleTimeout {#cacheidletimeout}
 
 `number = 60000`
 
-Time in milliseconds. `cache.idleTimeout` denotes the time period after which the cache storing should happen.
+时间以毫秒为单位。`cache.idleTimeout` 表示缓存存储发生的时间间隔。
 
-`cache.idleTimeout` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+`cache.idleTimeout` 配置项仅在 [`cache.type`] `'filesystem'` 时生效。
 
 **webpack.config.js**
 
@@ -149,15 +153,15 @@ module.exports = {
 };
 ```
 
-### cache.idleTimeoutAfterLargeChanges
+### cache.idleTimeoutAfterLargeChanges {#cacheidletimeoutafterlargechanges}
 
 `number = 1000`
 
 <Badge text="5.41.0+" />
 
-Time in milliseconds. `cache.idleTimeoutAfterLargeChanges` is the time period after which the cache storing should happen when larger changes have been detected.
+以毫秒为单位。`cache.idleTimeoutAfterLargeChanges` 是当检测到较大的更改时，缓存存储应在此之后发生的时间段。
 
-`cache.idleTimeoutAfterLargeChanges` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+`cache.idleTimeoutAfterLargeChanges` 仅在 [`cache.type`](#cachetype) 设为 `'filesystem'` 时可用。
 
 **webpack.config.js**
 
@@ -171,13 +175,13 @@ module.exports = {
 };
 ```
 
-### cache.idleTimeoutForInitialStore
+### cache.idleTimeoutForInitialStore {#cacheidletimeoutforinitialstore}
 
 `number = 0`
 
-Time in milliseconds. `cache.idleTimeoutForInitialStore` is the time period after which the initial cache storing should happen.
+单位毫秒。 `cache.idleTimeoutForInitialStore` 是在初始缓存存储发生后的时间段。
 
-`cache.idleTimeoutForInitialStore` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+`cache.idleTimeoutForInitialStore` 配置项仅在 [`cache.type`] `'filesystem'` 时生效。
 
 **webpack.config.js**
 
@@ -191,23 +195,23 @@ module.exports = {
 };
 ```
 
-### cache.managedPaths
+### cache.managedPaths {#cachemanagedpaths}
 
 `[string] = ['./node_modules']`
 
-W> Moved to [snapshot.managedPaths](/configuration/other-options/#managedpaths)
+W> 已迁移到 [snapshot.managedPaths](#managedpaths)
 
-`cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
+`cache.managedPaths` 是仅托管路径的包管理器数组。webpack 将避免将他们进行哈希和时间戳处理，假设版本是唯一的，并将其用作快照（用于内存和文件系统缓存）。
 
-### cache.maxAge
+### cache.maxAge {#cachemaxage}
 
 `number = 5184000000`
 
 <Badge text="5.30.0+" />
 
-The amount of time in milliseconds that unused cache entries are allowed to stay in the filesystem cache; defaults to one month.
+允许未使用的缓存留在文件系统缓存中的时间（以毫秒为单位）；默认为一个月。
 
-`cache.maxAge` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+`cache.maxAge` 仅在 [`cache.type`](#cachetype) 设置为 `'filesystem'` 时生效。
 
 **webpack.config.js**
 
@@ -221,19 +225,19 @@ module.exports = {
 };
 ```
 
-### cache.maxGenerations
+### cache.maxGenerations {#cachemaxgenerations}
 
 `number`
 
 <Badge text="5.30.0+" />
 
-Define the lifespan of unused cache entries in the memory cache.
+定义内存缓存中未使用的缓存项的生命周期。
 
-- `cache.maxGenerations: 1`: Cache entries are removed after being unused for a single compilation.
+- `cache.maxGenerations: 1`: 在一次编译中未使用的缓存被删除。
 
-- `cache.maxGenerations: Infinity`: Cache entries are kept forever.
+- `cache.maxGenerations: Infinity`: 缓存将永远保存。
 
-`cache.maxGenerations` option is only available when [`cache.type`](#cachetype) is set to `'memory'`.
+`cache.maxGenerations` 配置项仅在 [`cache.type`](#cachetype) 设置为 `'memory'` 时有效。
 
 **webpack.config.js**
 
@@ -247,23 +251,23 @@ module.exports = {
 };
 ```
 
-### cache.maxMemoryGenerations
+### cache.maxMemoryGenerations {#cachemaxMemorygenerations}
 
 `number`
 
 <Badge text="5.30.0+" />
 
-Define the lifespan of unused cache entries in the memory cache.
+定义内存缓存中未使用的缓存项的生命周期。
 
-- `cache.maxMemoryGenerations: 0`: Persistent cache will not use an additional memory cache. It will only cache items in memory until they are serialized to disk. Once serialized the next read will deserialize them from the disk again. This mode will minimize memory usage but introduce a performance cost.
+- `cache.maxMemoryGenerations: 0`: 持久化缓存不会使用额外的内存缓存。它只将项目缓存到内存中，直到它们被序列化到磁盘。一旦序列化，下一次读取将再次从磁盘反序列化它们。这种模式将最小化内存使用，但会带来性能成本。
 
-- `cache.maxMemoryGenerations: 1`: This will purge items from the memory cache once they are serialized and unused for at least one compilation. When they are used again they will be deserialized from the disk. This mode will minimize memory usage while still keeping active items in the memory cache.
+- `cache.maxMemoryGenerations: 1`: 这将从内存缓存中清除已序列化且在至少一次编译中未使用的项。当再次使用它们时，它们将从磁盘反序列化。这种模式将最小化内存使用量，同时仍将活动项保留在内存缓存中。
 
-- `cache.maxMemoryGenerations`: small numbers > 0 will have a performance cost for the GC operation. It gets lower as the number increases.
+- `cache.maxMemoryGenerations`: 大于 0 的小数字将为 GC 操作带来性能成本。它会随着数字的增加而降低。
 
-- `cache.maxMemoryGenerations`: defaults to 10 in `development` mode and to `Infinity` in `production` mode.
+- `cache.maxMemoryGenerations`: `development` 模式下默认为 10，`production` 模式下默认为 `Infinity`。
 
-`cache.maxMemoryGenerations` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+`cache.maxMemoryGenerations` 配置项仅在 [`cache.type`](#cachetype) 设置为 `'filesystem'` 时有效。
 
 **webpack.config.js**
 
@@ -277,13 +281,13 @@ module.exports = {
 };
 ```
 
-### cache.name
+### cache.name {#cachename}
 
 `string`
 
-Name for the cache. Different names will lead to different coexisting caches. Defaults to `${config.name}-${config.mode}`. Using `cache.name` makes sense when you have multiple configurations which should have independent caches.
+缓存的名称。不同的名字会导致不同的的共存的缓存。默认值为 `${config.name}-${config.mode}`。使用 `cache.name` 当你有多份配置的时候，是比较合理的因为会有配置会有独立的缓存。
 
-`cache.name` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+`cache.name` 选项仅当 [`cache.type`](#cachetype) 被设置成 `'filesystem'` 的时候可进行配置。
 
 **webpack.config.js**
 
@@ -297,11 +301,11 @@ module.exports = {
 };
 ```
 
-### cache.profile
+### cache.profile {#cacheprofile}
 
 `boolean = false`
 
-Track and log detailed timing information for individual cache items of type `'filesystem'`.
+跟踪并记录各个 `'filesystem'` 缓存项的详细时间信息。
 
 **webpack.config.js**
 
@@ -315,17 +319,17 @@ module.exports = {
 };
 ```
 
-### cache.store
+### cache.store {#cachestore}
 
 `string = 'pack': 'pack'`
 
-`cache.store` tells webpack when to store data on the file system.
+`cache.store` 告诉 webpack 什么时候将数据存放在文件系统中。
 
-- `'pack'`: Store data when compiler is idle in a single file for all cached items
+- `'pack'`: 当编译器闲置时候，将缓存数据都存放在一个文件中
 
-`cache.store` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+`cache.store` 选项仅当 [`cache.type`](#cachetype) 设置成 `'filesystem'` 才可配置。
 
-W> `pack` is the only supported mode since webpack 5.0.x
+W> `pack` 是 webpack 5.0.x 起唯一支持的类型
 
 **webpack.config.js**
 
@@ -343,7 +347,7 @@ module.exports = {
 
 `string: 'memory' | 'filesystem'`
 
-Sets the `cache` type to either in memory or on the file system. The `memory` option is straightforward, it tells webpack to store cache in memory and doesn't allow additional configuration:
+将 `cache` 类型设置为内存或者文件系统。`memory` 选项很简单，它告诉 webpack 在内存中存储缓存，不允许额外的配置：
 
 **webpack.config.js**
 
@@ -356,13 +360,13 @@ module.exports = {
 };
 ```
 
-### cache.version
+### cache.version {#cacheversion}
 
 `string = ''`
 
-Version of the cache data. Different versions won't allow to reuse the cache and override existing content. Update the version when configuration changed in a way which doesn't allow to reuse cache. This will invalidate the cache.
+缓存数据的版本。不同版本不会允许重用缓存和重载当前的内容。当配置以一种无法重用缓存的方式改变时，要更新缓存的版本。这会让缓存失效。
 
-`cache.version` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+`cache.version` 选项仅当 [`cache.type`](#cachetype) 设置成 `'filesystem'` 才可配置。
 
 **webpack.config.js**
 
@@ -376,4 +380,4 @@ module.exports = {
 };
 ```
 
-W> Don't share the cache between calls with different options.
+W> 在具有不同选项的调用之间不要共享缓存。
