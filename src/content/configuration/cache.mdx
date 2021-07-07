@@ -109,6 +109,28 @@ module.exports = {
 };
 ```
 
+### cache.compression
+
+`false | 'gzip' | 'brotli'`
+
+<Badge text="5.42.0+" />
+
+Compression type used for the cache files. By default it is `false` for `development` mode and `'gzip'` for `production` mode.
+
+`cache.compression` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    compression: 'gzip',
+  },
+};
+```
+
 ### cache.hashAlgorithm
 
 `string`
