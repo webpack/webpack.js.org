@@ -481,7 +481,7 @@ See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset
 
 W> 任何需要 AST 的功能（例如 `ProvidePlugin`）都不起作用。
 
-最后，一些模块支持多种 [模块格式](/concepts/modules)，例如一个混合有 AMD、CommonJS 和 legacy(遗留) 的模块。在大多数这样的模块中，会首先检查 `define`，然后使用一些怪异代码导出一些属性。在这些情况下，可以通过 [`imports-loader`](/loaders/imports-loader/) 设置 `additionalCode=var%define%20=%20false;` 来强制 CommonJS 路径。
+最后，一些模块支持多种 [模块格式](/concepts/modules)，例如一个混合有 AMD、CommonJS 和 legacy(遗留) 的模块。在大多数这样的模块中，会首先检查 `define`，然后使用一些怪异代码导出一些属性。在这些情况下，可以通过 [`imports-loader`](/loaders/imports-loader/) 设置 `additionalCode=var%20define%20=%20false;` 来强制 CommonJS 路径。
 
 ---
 
