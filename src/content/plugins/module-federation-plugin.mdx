@@ -3,17 +3,49 @@ title: ModuleFederationPlugin
 group: webpack
 contributors:
   - XiaofengXie16
+  - chenxsan
 related:
   - title: Module Federation
-    url: https://webpack.js.org/concepts/module-federation/
+    url: /concepts/module-federation/
 ---
 
 The `ModuleFederationPlugin` allows a build to provide or consume modules with other independent builds at runtime.
+
+```ts
+const { ModuleFederationPlugin } = require('webpack').container;
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      // options' typings in typescript
+      runtime: string | false,
+    }),
+  ],
+};
+```
 
 <StackBlitzPreview
   example="module-federation?terminal=start&terminal="
   description="Check out this live module federation example on StackBlitz."
 />
+
+## Options
+
+### runtime
+
+Create a new runtime chunk with the specified name.
+
+**webpack.js.org**
+
+```js
+const { ModuleFederationPlugin } = require('webpack').container;
+module.exports = {
+  plugins: [
+    new ModuleFederationPlugin({
+      runtime: 'my-runtime-name',
+    }),
+  ],
+};
+```
 
 ### Specify package versions
 
