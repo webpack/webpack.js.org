@@ -113,7 +113,11 @@ module.exports = {
 
 `false | 'gzip' | 'brotli'`
 
-Compression type used for the cache files. By default it is `false` for `development` mode and `gzip` for `production` mode.
+<Badge text="5.42.0+" />
+
+Compression type used for the cache files. By default it is `false` for `development` mode and `'gzip'` for `production` mode.
+
+`cache.compression` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
 
 **webpack.config.js**
 
