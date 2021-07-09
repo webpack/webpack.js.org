@@ -113,6 +113,28 @@ module.exports = {
 };
 ```
 
+### cache.compression {#cachecompression}
+
+`false | 'gzip' | 'brotli'`
+
+<Badge text="5.42.0+" />
+
+用于缓存文件的压缩类型。`development` 模式下默认为 `false`，`production` 模式下默认为 `'gzip'`。
+
+`cache.compression` 配置项仅在 [`cache.type`](#cachetype) 设为 `'filesystem'` 时可用。
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    compression: 'gzip',
+  },
+};
+```
+
 ### cache.hashAlgorithm {#cachehashalgorithm}
 
 `string`
