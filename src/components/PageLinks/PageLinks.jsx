@@ -12,33 +12,26 @@ PageLinks.propTypes = {
 function Separator() {
   return <span className="mx-5 text-black font-bold">·</span>;
 }
+
+const classes =
+  'text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline';
+
 export default function PageLinks({ page = {} }) {
   const editLink = page.edit || Url.resolve(baseURL, page.path);
 
-  // TODO: Make sure we add `repo` / `edit` and address `type` (above)
   return (
     <div className="print:hidden mt-10">
-      <a
-        href={editLink}
-        className="text-gray-500 dark:text-gray-500 text-sm font-sans hover:underline"
-      >
+      <a className={classes} href={editLink}>
         Edit this page
       </a>
       <Separator />
-      <a
-        className="text-gray-500 dark:text-gray-500 text-sm font-sans p-0 cursor-pointer hover:underline"
-        onClick={_handlePrintClick}
-        title="Print this page"
-      >
+      <a className={classes} onClick={_handlePrintClick}>
         Print this page
       </a>
       {page.repo ? (
         <>
           <Separator />
-          <a
-            className="text-gray-500 dark:text-gray-500 text-sm font-sans hover:underline"
-            href={page.repo}
-          >
+          <a className={classes} href={page.repo}>
             Jump to repository
           </a>
         </>
