@@ -1,1 +1,1 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 18 25"><rect x="15" y="5" width="2" height="10"></rect> <rect x="10" y="5" width="2" height="20"></rect> <rect x="5" y="5" width="2" height="20"></rect> <rect width="2" height="15"></rect></svg>
+<svg viewBox="0 0 18 25" xmlns="http://www.w3.org/2000/svg"><path d="m15 5h2v10h-2z"/><path d="m10 5h2v20h-2z"/><path d="m5 5h2v20h-2z"/><path d="m0 0h2v15h-2z"/></svg>
