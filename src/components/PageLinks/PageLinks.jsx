@@ -1,7 +1,4 @@
 import Url from 'url';
-import './PageLinks.scss';
-import icon from '../../assets/icon-print.svg';
-import EditIcon from '../../styles/icons/edit.svg';
 import PropTypes from 'prop-types';
 
 const baseURL = 'https://github.com/docschina/webpack.js.org/edit/cn/';
@@ -11,21 +8,35 @@ PageLinks.propTypes = {
     repo: PropTypes.string,
   }),
 };
+
+function Separator() {
+  return <span className="mx-5 text-black font-bold dark:text-white">·</span>;
+}
+
+const classes =
+  'text-gray-500 italic dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline';
+
 export default function PageLinks({ page = {} }) {
   const editLink = page.edit || Url.resolve(baseURL, page.path);
 
-  // TODO: Make sure we add `repo` / `edit` and address `type` (above)
   return (
-    <div className="page-links">
+    <div className="print:hidden mt-10">
+      <a className={classes} href={editLink}>
+        Edit this page
+      </a>
+      <Separator />
+      <a className={classes} onClick={_handlePrintClick}>
+        Print this page
+      </a>
       {page.repo ? (
-        <span>
-          <a className="page-links__link" href={page.repo}>
-            Jump to Repository
+        <>
+          <Separator />
+          <a className={classes} href={page.repo}>
+            Jump to repository
           </a>
-
-          <span className="page-links__gap">|</span>
-        </span>
+        </>
       ) : null}
+<<<<<<< HEAD
 
       <a className="page-links__link" href={editLink}>
         编辑此页
@@ -40,6 +51,8 @@ export default function PageLinks({ page = {} }) {
         打印文档
         <img src={icon} alt="" />
       </button>
+=======
+>>>>>>> 6d6d86fd8efe239203b3d41df0eaf0ccf382e1ac
     </div>
   );
 }
