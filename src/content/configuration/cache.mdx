@@ -113,18 +113,15 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### cache.hashAlgorithm {#cachehashalgorithm}
-=======
-### cache.compression
+### cache.compression {#cachecompression}
 
 `false | 'gzip' | 'brotli'`
 
 <Badge text="5.42.0+" />
 
-Compression type used for the cache files. By default it is `false` for `development` mode and `'gzip'` for `production` mode.
+用于缓存文件的压缩类型。`development` 模式下默认为 `false`，`production` 模式下默认为 `'gzip'`。
 
-`cache.compression` option is only available when [`cache.type`](#cachetype) is set to `'filesystem'`.
+`cache.compression` 配置项仅在 [`cache.type`](#cachetype) 设为 `'filesystem'` 时可用。
 
 **webpack.config.js**
 
@@ -138,8 +135,7 @@ module.exports = {
 };
 ```
 
-### cache.hashAlgorithm
->>>>>>> e4c5c47690aa8966f3c15dccfd484351a464433a
+### cache.hashAlgorithm {#cachehashalgorithm}
 
 `string`
 
