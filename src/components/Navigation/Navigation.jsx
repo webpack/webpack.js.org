@@ -8,9 +8,6 @@ import Link from '../Link/Link';
 import Logo from '../Logo/Logo';
 import Dropdown from '../Dropdown/Dropdown';
 
-// Import constants
-import { THEME } from '../../constants/theme';
-
 // Load Styling
 import '@docsearch/css';
 
@@ -19,8 +16,7 @@ import TwitterIcon from '../../styles/icons/twitter.svg';
 import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
 import Hamburger from '../../styles/icons/hamburger.svg';
 import { NavLink, useLocation } from 'react-router-dom';
-
-const { DARK, LIGHT } = THEME;
+import HelloDarkness from '../HelloDarkness';
 
 NavigationItem.propTypes = {
   children: PropTypes.node.isRequired,
@@ -75,15 +71,7 @@ Navigation.propTypes = {
   switchTheme: PropTypes.func,
 };
 
-function Navigation({
-  links,
-  pathname,
-  hash = '',
-  toggleSidebar,
-  theme,
-  switchTheme,
-}) {
-  const themeSwitcher = () => switchTheme(theme === DARK ? LIGHT : DARK);
+function Navigation({ links, pathname, hash = '', toggleSidebar }) {
   const [locationHash, setLocationHash] = useState(hash);
 
   const location = useLocation();
@@ -166,13 +154,7 @@ function Navigation({
                 },
               ]}
             />
-            <button
-              className="bg-transparent border-none cursor-pointer"
-              onClick={themeSwitcher}
-              data-testid="hello-darkness"
-            >
-              {theme === DARK ? '🌙' : '☀️'}
-            </button>
+            <HelloDarkness />
           </nav>
           <DocSearch
             apiKey={'fac401d1a5f68bc41f01fb6261661490'}
