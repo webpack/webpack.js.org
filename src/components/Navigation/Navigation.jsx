@@ -172,6 +172,7 @@ function Navigation({
                     <NavLink
                       key={child.url}
                       to={child.url}
+                      title={child.title}
                       className="text-blue-400 ml-20 py-5 text-xs uppercase"
                       activeClassName="active-submenu"
                     >
