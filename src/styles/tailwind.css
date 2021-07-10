@@ -7,7 +7,7 @@
   @apply text-black dark:text-white !important;
 }
 
-/* search box */
+/* doc search */
 .DocSearch-Button-Placeholder,
 .DocSearch-Button-Keys {
   @apply hidden !important;
@@ -17,4 +17,7 @@
 }
 .DocSearch-Button .DocSearch-Search-Icon {
   @apply text-white !important;
+}
+:root {
+  --docsearch-primary-color: #1d78c1 !important;
 }
