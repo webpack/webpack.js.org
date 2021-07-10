@@ -52,7 +52,7 @@ Let's set up a configuration to support JSX and compile TypeScript down to ES5..
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node"
   }
 }
 ```
