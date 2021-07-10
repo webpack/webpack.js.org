@@ -261,10 +261,11 @@ function Site(props) {
               {
                 content: 'Documentation',
                 url: '/concepts/',
-                isActive: (url) =>
-                  /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
-                    url
-                  ),
+                isActive: (_, location) => {
+                  return /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
+                    location.pathname
+                  );
+                },
                 children: _strip(
                   sections.filter(
                     ({ name }) => excludeItems.includes(name) === false

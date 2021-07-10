@@ -1,30 +1,53 @@
 // Import External Dependencies
 import { useEffect, useState } from 'react';
-import Banner from 'react-banner';
 import PropTypes from 'prop-types';
+import { DocSearch } from '@docsearch/react';
 
 // Import Components
 import Link from '../Link/Link';
 import Logo from '../Logo/Logo';
 import Dropdown from '../Dropdown/Dropdown';
 
-// Import helpers
-import isClient from '../../utilities/is-client';
-
 // Import constants
 import { THEME } from '../../constants/theme';
 
 // Load Styling
-import 'docsearch.js/dist/cdn/docsearch.css';
-import './Navigation.scss';
-import './Search.scss';
+import '@docsearch/css';
 
 import GithubIcon from '../../styles/icons/github.svg';
 import TwitterIcon from '../../styles/icons/twitter.svg';
 import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
+import Hamburger from '../../styles/icons/hamburger.svg';
+import { NavLink, useLocation } from 'react-router-dom';
 
-const onSearch = () => {};
 const { DARK, LIGHT } = THEME;
+
+NavigationItem.propTypes = {
+  children: PropTypes.node.isRequired,
+  url: PropTypes.string.isRequired,
+  isActive: PropTypes.func,
+};
+
+function NavigationItem({ children, url, isActive }) {
+  let obj = {};
+  // decide if the link is active or not by providing a function
+  // otherwise we'll let react-dom makes the decision for us
+  if (isActive) {
+    obj = {
+      isActive,
+    };
+  }
+  return (
+    <NavLink
+      {...obj}
+      activeClassName="font-bold"
+      to={url}
+      className="text-white dark:text-white text-xs uppercase mr-[18px] hover:text-blue-200"
+    >
+      {children}
+    </NavLink>
+  );
+}
 
 Navigation.propTypes = {
   pathname: PropTypes.string,
@@ -36,9 +59,9 @@ Navigation.propTypes = {
 };
 
 function Navigation({
+  links,
   pathname,
   hash = '',
-  links,
   toggleSidebar,
   theme,
   switchTheme,
@@ -46,55 +69,58 @@ function Navigation({
   const themeSwitcher = () => switchTheme(theme === DARK ? LIGHT : DARK);
   const [locationHash, setLocationHash] = useState(hash);
 
-  useEffect(() => {
-    if (isClient) {
-      const DocSearch = require('docsearch.js');
-
-      DocSearch({
-        apiKey: 'fac401d1a5f68bc41f01fb6261661490',
-        indexName: 'webpack-js-org',
-        inputSelector: '.navigation-search__input',
-      });
-    }
-  }, []);
+  const location = useLocation();
 
   useEffect(() => {
     setLocationHash(hash);
   }, [hash]);
 
   return (
-    <Banner
-      onSearch={onSearch}
-      blockName="navigation"
-      logo={<Logo light={true} />}
-      url={pathname}
-      items={[
-        ...links,
-        {
-          title: 'GitHub Repository',
-          url: 'https://github.com/webpack/webpack',
-          className: 'navigation__item--icon',
-          content: <GithubIcon aria-hidden="true" fill="#fff" width={16} />,
-        },
-        {
-          title: 'webpack on Twitter',
-          url: 'https://twitter.com/webpack',
-          className: 'navigation__item--icon',
-          content: <TwitterIcon aria-hidden="true" fill="#fff" width={16} />,
-        },
-        {
-          title: 'webpack on Stack Overflow',
-          url: 'https://stackoverflow.com/questions/tagged/webpack',
-          className: 'navigation__item--icon',
-          content: (
-            <StackOverflowIcon aria-hidden="true" fill="#fff" width={16} />
-          ),
-        },
-        {
-          className: 'navigation__item--icon',
-          content: (
+    <>
+      <header className="bg-blue-800 dark:bg-gray-900">
+        <div className="flex items-center p-10 justify-between md:max-w-[1024px] md:mx-auto md:justify-start">
+          <button
+            className="bg-transparent border-none md:hidden"
+            onClick={toggleSidebar}
+          >
+            <Hamburger
+              width={20}
+              height={20}
+              className="fill-current text-white"
+            />
+          </button>
+          <Link to="/" className="md:mr-auto">
+            <Logo />
+          </Link>
+          <nav className="hidden md:inline-flex md:items-center">
+            {links.map(({ content, url, isActive }) => (
+              <NavigationItem key={url} url={url} isActive={isActive}>
+                {content}
+              </NavigationItem>
+            ))}
+            <Link
+              to="https://github.com/webpack/webpack"
+              className="mr-[18px]"
+              title="webpack repository"
+            >
+              <GithubIcon aria-hidden="true" fill="#fff" width={16} />
+            </Link>
+            <Link
+              to="https://twitter.com/webpack"
+              className="mr-[18px]"
+              title="webpack on Twitter"
+            >
+              <TwitterIcon aria-hidden="true" fill="#fff" width={16} />
+            </Link>
+            <Link
+              to="https://stackoverflow.com/questions/tagged/webpack"
+              className="mr-[18px]"
+              title="webpack on StackOverflow"
+            >
+              <StackOverflowIcon aria-hidden="true" fill="#fff" width={16} />
+            </Link>
             <Dropdown
-              className="navigation__languages"
+              className="mr-[18px]"
               items={[
                 {
                   title: 'English',
@@ -112,28 +138,52 @@ function Navigation({
                 },
               ]}
             />
-          ),
-        },
-        {
-          className: 'navigation__item--icon',
-          content: (
             <button
-              style={{
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-              }}
+              className="bg-transparent border-none cursor-pointer"
               onClick={themeSwitcher}
               data-testid="hello-darkness"
             >
               {theme === DARK ? '🌙' : '☀️'}
             </button>
-          ),
-        },
-      ]}
-      link={Link}
-      onMenuClick={toggleSidebar}
-    />
+          </nav>
+          <DocSearch
+            apiKey={'fac401d1a5f68bc41f01fb6261661490'}
+            indexName="webpack-js-org"
+          />
+        </div>
+        {/* sub navigation */}
+        {links
+          .filter((link) => {
+            return link.children;
+          })
+          .map((link) => {
+            if (link.isActive) {
+              if (!link.isActive({}, location)) {
+                return null;
+              }
+            }
+            return (
+              <div
+                key={link.url}
+                className="bg-gray-100 dark:bg-gray-800 hidden md:block"
+              >
+                <div className="md:max-w-[1024px] md:mx-auto md:flex md:justify-end">
+                  {link.children.map((child) => (
+                    <NavLink
+                      key={child.url}
+                      to={child.url}
+                      className="text-blue-400 ml-20 py-5 text-xs uppercase"
+                      activeClassName="active-submenu"
+                    >
+                      {child.content}
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+      </header>
+    </>
   );
 }
 

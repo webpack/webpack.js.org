@@ -1,3 +1,20 @@
 /* @import "tailwindcss/base"; */
 /* @import "tailwindcss/components"; */
 @import 'tailwindcss/utilities';
+
+/* some customized rules */
+.active-submenu {
+  @apply text-black dark:text-white !important;
+}
+
+/* search box */
+.DocSearch-Button-Placeholder,
+.DocSearch-Button-Keys {
+  @apply hidden !important;
+}
+.DocSearch-Button {
+  @apply bg-transparent !important;
+}
+.DocSearch-Button .DocSearch-Search-Icon {
+  @apply text-white !important;
+}
