@@ -49,6 +49,23 @@ function NavigationItem({ children, url, isActive }) {
   );
 }
 
+NavigationIcon.propTypes = {
+  children: PropTypes.node.isRequired,
+  to: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};
+function NavigationIcon({ children, to, title }) {
+  return (
+    <Link
+      to={to}
+      className="mr-[18px] inline-flex items-center"
+      title={`webpack on ${title}`}
+    >
+      {children}
+    </Link>
+  );
+}
+
 Navigation.propTypes = {
   pathname: PropTypes.string,
   hash: PropTypes.string,
@@ -98,27 +115,38 @@ function Navigation({
                 {content}
               </NavigationItem>
             ))}
-            <Link
-              to="https://github.com/webpack/webpack"
-              className="mr-[18px]"
-              title="webpack repository"
-            >
-              <GithubIcon aria-hidden="true" fill="#fff" width={16} />
-            </Link>
-            <Link
-              to="https://twitter.com/webpack"
-              className="mr-[18px]"
-              title="webpack on Twitter"
-            >
-              <TwitterIcon aria-hidden="true" fill="#fff" width={16} />
-            </Link>
-            <Link
-              to="https://stackoverflow.com/questions/tagged/webpack"
-              className="mr-[18px]"
-              title="webpack on StackOverflow"
-            >
-              <StackOverflowIcon aria-hidden="true" fill="#fff" width={16} />
-            </Link>
+            {[
+              {
+                to: 'https://github.com/webpack/webpack',
+                title: 'GitHub',
+                children: (
+                  <GithubIcon aria-hidden="true" fill="#fff" width={16} />
+                ),
+              },
+              {
+                to: 'https://twitter.com/webpack',
+                title: 'Twitter',
+                children: (
+                  <TwitterIcon aria-hidden="true" fill="#fff" width={16} />
+                ),
+              },
+              {
+                to: 'https://stackoverflow.com/questions/tagged/webpack',
+                title: 'StackOverflow',
+                children: (
+                  <StackOverflowIcon
+                    aria-hidden="true"
+                    fill="#fff"
+                    width={16}
+                  />
+                ),
+              },
+            ].map(({ to, title, children }) => (
+              <NavigationIcon key={to} to={to} title={title}>
+                {children}
+              </NavigationIcon>
+            ))}
+
             <Dropdown
               className="mr-[18px]"
               items={[
