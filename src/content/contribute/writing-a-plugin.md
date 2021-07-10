@@ -58,11 +58,14 @@ Plugins are instantiated objects with an `apply` method on their prototype. This
 ```javascript
 class HelloWorldPlugin {
   apply(compiler) {
-    compiler.hooks.done.tap('Hello World Plugin', (
-      stats /* stats is passed as an argument when done hook is tapped.  */
-    ) => {
-      console.log('Hello World!');
-    });
+    compiler.hooks.done.tap(
+      'Hello World Plugin',
+      (
+        stats /* stats is passed as an argument when done hook is tapped.  */
+      ) => {
+        console.log('Hello World!');
+      }
+    );
   }
 }
 

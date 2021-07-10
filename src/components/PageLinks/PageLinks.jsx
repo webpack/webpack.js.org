@@ -14,13 +14,13 @@ function Separator() {
 }
 
 const classes =
-  'text-gray-500 italic dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline';
+  'text-gray-500 dark:text-gray-500 text-sm cursor-pointer font-sans hover:underline';
 
 export default function PageLinks({ page = {} }) {
   const editLink = page.edit || Url.resolve(baseURL, page.path);
 
   return (
-    <div className="print:hidden mt-10">
+    <div className="print:hidden mt-20">
       <a className={classes} href={editLink}>
         编辑此页
       </a>

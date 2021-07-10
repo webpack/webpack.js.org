@@ -29,7 +29,6 @@ related:
   - title: Title of Related Article
     url: [url of related article]
 ---
-
 ```
 
 Let's break these down:
