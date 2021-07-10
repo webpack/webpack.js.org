@@ -11,25 +11,24 @@ contributors:
   - chenxsan
 ---
 
-__Plugins__ are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the __same plugin system__ that you use in your webpack configuration!
+**Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!
 
-They also serve the purpose of doing __anything else__ that a [loader](/concepts/loaders) cannot do.
+They also serve the purpose of doing **anything else** that a [loader](/concepts/loaders) cannot do.
 
 T> When consuming [`webpack-sources`](https://github.com/webpack/webpack-sources) package in plugins, use `require('webpack').sources` instead of `require('webpack-sources')` to avoid version conflicts for persistent caching.
 
-
 ## Anatomy
 
-A webpack __plugin__ is a JavaScript object that has an [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) method. This `apply` method is called by the webpack compiler, giving access to the __entire__ compilation lifecycle.
+A webpack **plugin** is a JavaScript object that has an [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) method. This `apply` method is called by the webpack compiler, giving access to the **entire** compilation lifecycle.
 
-__ConsoleLogOnBuildWebpackPlugin.js__
+**ConsoleLogOnBuildWebpackPlugin.js**
 
 ```javascript
 const pluginName = 'ConsoleLogOnBuildWebpackPlugin';
 
 class ConsoleLogOnBuildWebpackPlugin {
   apply(compiler) {
-    compiler.hooks.run.tap(pluginName, compilation => {
+    compiler.hooks.run.tap(pluginName, (compilation) => {
       console.log('The webpack build process is starting!!!');
     });
   }
@@ -42,14 +41,13 @@ The first parameter of the tap method of the compiler hook should be a camelized
 
 ## Usage
 
-Since __plugins__ can take arguments/options, you must pass a `new` instance to the `plugins` property in your webpack configuration.
+Since **plugins** can take arguments/options, you must pass a `new` instance to the `plugins` property in your webpack configuration.
 
 Depending on how you are using webpack, there are multiple ways to use plugins.
 
-
 ### Configuration
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
@@ -60,29 +58,30 @@ module.exports = {
   entry: './path/to/my/entry/file.js',
   output: {
     filename: 'my-first-webpack.bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: 'babel-loader'
-      }
-    ]
+        use: 'babel-loader',
+      },
+    ],
   },
   plugins: [
     new webpack.ProgressPlugin(),
-    new HtmlWebpackPlugin({template: './src/index.html'})
-  ]
+    new HtmlWebpackPlugin({ template: './src/index.html' }),
+  ],
 };
 ```
 
+The `ProgressPlugin` is used to customize how progress should be reported during compilation, and `HtmlWebpackPlugin` will generate a HTML file including the `my-first-webpack.bundle.js` file using a `script` tag.
 
 ### Node API
 
 When using the Node API, you can also pass plugins via the `plugins` property in the configuration.
 
-__some-node-script.js__
+**some-node-script.js**
 
 ```javascript
 const webpack = require('webpack'); //to access webpack runtime
@@ -92,7 +91,7 @@ let compiler = webpack(configuration);
 
 new webpack.ProgressPlugin().apply(compiler);
 
-compiler.run(function(err, stats) {
+compiler.run(function (err, stats) {
   // ...
 });
 ```

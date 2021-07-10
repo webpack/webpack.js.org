@@ -16,7 +16,7 @@ const types = ['loaders', 'plugins'];
 
 const pathMap = {
   loaders: path.resolve(__dirname, '../content/loaders'),
-  plugins: path.resolve(__dirname, '../content/plugins')
+  plugins: path.resolve(__dirname, '../content/plugins'),
 };
 
 async function main() {
@@ -25,7 +25,9 @@ async function main() {
 
     await mkdirp(outputDir);
 
-    const repos = JSON.parse(await readFile(path.resolve(__dirname, `../../repositories/${type}.json`)));
+    const repos = JSON.parse(
+      await readFile(path.resolve(__dirname, `../../repositories/${type}.json`))
+    );
 
     for (const repo of repos) {
       const [, packageName] = repo.split('/');
@@ -43,12 +45,25 @@ async function main() {
       }
 
       // generate yaml matter for file
-      let headmatter = yamlHeadmatter({
-        title: title,
-        source: url,
-        edit: editUrl,
-        repo: htmlUrl
-      });
+      let headmatter;
+
+      if (type === 'plugins') {
+        headmatter = yamlHeadmatter({
+          title: title,
+          group: 'webpack contrib',
+          source: url,
+          edit: editUrl,
+          repo: htmlUrl,
+        });
+      } else {
+        // TODO we need other categories for loaders
+        headmatter = yamlHeadmatter({
+          title: title,
+          source: url,
+          edit: editUrl,
+          repo: htmlUrl,
+        });
+      }
 
       const response = await fetch(url);
       const content = await response.text();
@@ -60,4 +75,3 @@ async function main() {
 }
 
 main();
-

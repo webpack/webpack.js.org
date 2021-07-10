@@ -15,21 +15,18 @@ const fetch = {
     {
       organization: 'webpack-contrib',
       suffixes: ['-loader'],
-      hides: excludedLoaders
+      hides: excludedLoaders,
     },
     'babel/babel-loader',
-    'peerigon/extract-loader',
-    'Banno/polymer-webpack-loader'
   ],
   plugins: [
     {
       organization: 'webpack-contrib',
       suffixes: ['-webpack-plugin', '-extract-plugin'],
-      hides: excludedPlugins
-    }
-  ]
+      hides: excludedPlugins,
+    },
+  ],
 };
-
 
 async function main() {
   let api;
@@ -37,7 +34,7 @@ async function main() {
     const auth = createActionAuth();
     const authentication = await auth();
     api = new GithubAPI({
-      auth: authentication
+      auth: authentication,
     });
   } else {
     api = new GithubAPI();
@@ -55,43 +52,45 @@ async function main() {
   for (const [type, collection] of Object.entries(fetch)) {
     const jsonPath = path.resolve(__dirname, `../../repositories/${type}.json`);
     try {
-      const result = await Promise.all(collection.map(async (item) => {
-        if (typeof item === 'string') {
-          return item;
-        }
+      const result = await Promise.all(
+        collection.map(async (item) => {
+          if (typeof item === 'string') {
+            return item;
+          }
 
-        const { organization, suffixes, hides } = item;
+          const { organization, suffixes, hides } = item;
 
-        const repos = await paginate(organization);
+          const repos = await paginate(organization);
 
-        return repos
-          .map(repo => repo.full_name)
-          .filter(name => suffixes.some(suffix => name.endsWith(suffix)))
-          .filter(name => !hides.includes(name));
-      }));
+          return repos
+            .map((repo) => repo.full_name)
+            .filter((name) => suffixes.some((suffix) => name.endsWith(suffix)))
+            .filter((name) => !hides.includes(name));
+        })
+      );
 
       const json = JSON.stringify(_.flatten(result), undefined, 2);
 
       await writeFile(jsonPath, json);
       console.log(`Fetched file: ${jsonPath}`);
-    } catch(e) {
+    } catch (e) {
       try {
         const info = await stat(jsonPath);
 
         // error is acceptable if the data from cache is less than 48 hours old
-        if(info.mtimeMs < Date.now() - 48 * 60 * 60 * 1000) {
+        if (info.mtimeMs < Date.now() - 48 * 60 * 60 * 1000) {
           throw e;
         } else {
           console.warn(e.message);
         }
-      } catch(e2) {
+      } catch (e2) {
         throw e;
       }
     }
   }
 }
 
-main().catch(e => {
+main().catch((e) => {
   console.error(e.message);
   process.exitCode = 1;
 });

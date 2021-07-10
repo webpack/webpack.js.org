@@ -5,10 +5,10 @@ contributors:
   - rafaelrinaldi
   - chrisVillanueva
   - gonzoyumo
+  - chenxsan
 ---
 
-The `publicPath` configuration option can be quite useful in a variety of scenarios. It allows you to specify the base path for all the assets within your application.
-
+The [`publicPath`](/configuration/output/#outputpublicpath) configuration option can be quite useful in a variety of scenarios. It allows you to specify the base path for all the assets within your application.
 
 ## Use Cases
 
@@ -20,7 +20,7 @@ In development for example, we might have an `assets/` folder that lives on the 
 
 To approach this problem you can easily use a good old environment variable. Let's say we have a variable `ASSET_PATH`:
 
-``` js
+```js
 import webpack from 'webpack';
 
 // Try the environment variable, otherwise use root
@@ -42,7 +42,7 @@ export default {
 
 ### On The Fly
 
-Another possible use case is to set the `publicPath` on the fly. webpack exposes a global variable called `__webpack_public_path__` that allows you to do that. So, in your application's entry point, you can simply do this:
+Another possible use case is to set the `publicPath` on the fly. webpack exposes a global variable called `__webpack_public_path__` that allows you to do that. In your application's entry point, you can do this:
 
 ```js
 __webpack_public_path__ = process.env.ASSET_PATH;
@@ -59,3 +59,19 @@ W> Be aware that if you use ES6 module imports in your entry file the `__webpack
 import './public-path';
 import './app';
 ```
+
+### Automatic publicPath
+
+There are chances that you don't know what the publicPath will be in advance, and webpack can handle it automatically for you by determining the public path from variables like [`import.meta.url`](/api/module-variables/#importmetaurl), [`document.currentScript`](https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript), `script.src` or `self.location`. What you need is to set [`output.publicPath`](/configuration/output/#outputpublicpath) to `'auto'`:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  output: {
+    publicPath: 'auto',
+  },
+};
+```
+
+Note that in cases where `document.currentScript` is not supported, e.g., IE browser, you will have to include a polyfill like [`currentScript Polyfill`](https://github.com/amiller-gh/currentScript-polyfill).

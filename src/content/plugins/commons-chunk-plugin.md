@@ -1,5 +1,6 @@
 ---
 title: CommonsChunkPlugin
+group: webpack
 contributors:
   - bebraw
   - simon04
@@ -21,7 +22,6 @@ By separating common modules from bundles, the resulting chunked file can be loa
 ```javascript
 new webpack.optimize.CommonsChunkPlugin(options);
 ```
-
 
 ## Options
 
@@ -46,7 +46,7 @@ new webpack.optimize.CommonsChunkPlugin(options);
   minChunks: number|Infinity|function(module, count) => boolean,
   // The minimum number of chunks which need to contain a module before it's moved into the commons chunk.
   // The number must be greater than or equal 2 and lower than or equal to the number of chunks.
-  // Passing `Infinity` just creates the commons chunk, but moves no modules into it.
+  // Passing `Infinity` creates the commons chunk, but moves no modules into it.
   // By providing a `function` you can add custom logic. (Defaults to the number of chunks)
 
   chunks: string[],
@@ -69,7 +69,6 @@ new webpack.optimize.CommonsChunkPlugin(options);
   // Minimum size of all common module before a commons chunk is created.
 }
 ```
-
 
 ## Examples
 
@@ -100,7 +99,6 @@ You must load the generated chunk before the entry point:
 <script src="entry.bundle.js" charset="utf-8"></script>
 ```
 
-
 ### Explicit vendor chunk
 
 Split your code into vendor and application.
@@ -110,7 +108,7 @@ module.exports = {
   //...
   entry: {
     vendor: ['jquery', 'other-lib'],
-    app: './entry'
+    app: './entry',
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
@@ -121,8 +119,8 @@ module.exports = {
       minChunks: Infinity,
       // (with more entries, this ensures that no other module
       //  goes into the vendor chunk)
-    })
-  ]
+    }),
+  ],
 };
 ```
 
@@ -132,7 +130,6 @@ module.exports = {
 ```
 
 T> In combination with long term caching you may need to use the [`ChunkManifestWebpackPlugin`](https://github.com/soundcloud/chunk-manifest-webpack-plugin) to avoid the vendor chunk changes. You should also use records to ensure stable module ids, e.g. using `NamedModulesPlugin` or [`HashedModuleIdsPlugin`](/plugins/hashed-module-ids-plugin).
-
 
 ### Move common modules into the parent chunk
 
@@ -150,7 +147,6 @@ new webpack.optimize.CommonsChunkPlugin({
   // (3 children must share the module before it's moved)
 });
 ```
-
 
 ### Extra async commons chunk
 
@@ -175,7 +171,6 @@ new webpack.optimize.CommonsChunkPlugin({
 });
 ```
 
-
 ### Passing the `minChunks` property a function
 
 You also have the ability to pass the `minChunks` property a function. This function is called by the `CommonsChunkPlugin` and calls the function with `module` and `count` arguments.
@@ -194,12 +189,12 @@ This option is useful when you want to have fine-grained control over how the Co
 new webpack.optimize.CommonsChunkPlugin({
   name: 'my-single-lib-chunk',
   filename: 'my-single-lib-chunk.js',
-  minChunks: function(module, count) {
+  minChunks: function (module, count) {
     // If module has a path, and inside of the path exists the name "somelib",
     // and it is used in 3 separate chunks/entries, then break it out into
     // a separate chunk with chunk keyname "my-single-lib-chunk", and filename "my-single-lib-chunk.js"
-    return module.resource && (/somelib/).test(module.resource) && count === 3;
-  }
+    return module.resource && /somelib/.test(module.resource) && count === 3;
+  },
 });
 ```
 
@@ -213,7 +208,7 @@ new webpack.optimize.CommonsChunkPlugin({
   minChunks: function (module) {
     // this assumes your vendor imports exist in the node_modules directory
     return module.context && module.context.includes('node_modules');
-  }
+  },
 });
 ```
 
@@ -224,7 +219,7 @@ To extract the webpack bootstrap logic into a separate file, use the `CommonsChu
 ```javascript
 new webpack.optimize.CommonsChunkPlugin({
   name: 'manifest',
-  minChunks: Infinity
+  minChunks: Infinity,
 });
 ```
 
@@ -236,13 +231,13 @@ Since the `vendor` and `manifest` chunk use a different definition for `minChunk
 [
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
-    minChunks: function(module){
+    minChunks: function (module) {
       return module.context && module.context.includes('node_modules');
-    }
+    },
   }),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'manifest',
-    minChunks: Infinity
+    minChunks: Infinity,
   }),
 ];
 ```

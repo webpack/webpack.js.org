@@ -1,0 +1,469 @@
+---
+title: Other Options
+sort: 20
+contributors:
+  - sokra
+  - skipjack
+  - terinjokes
+  - byzyk
+  - liorgreenb
+  - vansosnin
+  - EugeneHlushko
+  - skovy
+  - rishabh3112
+  - niravasher
+  - Neob91
+  - chenxsan
+  - u01jmg3
+  - jamesgeorge007
+  - snitin315
+related:
+  - title: Using Records
+    url: https://survivejs.com/webpack/optimizing/separating-manifest/#using-records
+---
+
+These are the remaining configuration options supported by webpack.
+
+W> Help Wanted: This page is still a work in progress. If you are familiar with any of the options for which the description or examples are incomplete, please create an issue and submit a PR at the [docs repo](https://github.com/webpack/webpack.js.org)!
+
+## amd
+
+`object` `boolean: false`
+
+Set the value of `require.amd` or `define.amd`. Setting `amd` to `false` will disable webpack's AMD support.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  amd: {
+    jQuery: true,
+  },
+};
+```
+
+Certain popular modules written for AMD, most notably jQuery versions 1.7.0 to 1.9.1, will only register as an AMD module if the loader indicates it has taken [special allowances](https://github.com/amdjs/amdjs-api/wiki/jQuery-and-AMD) for multiple versions being included on a page.
+
+The allowances were the ability to restrict registrations to a specific version or to support different sandboxes with different defined modules.
+
+This option allows you to set the key your module looks for to a truthy value.
+As it happens, the AMD support in webpack ignores the defined name anyways.
+
+## bail
+
+`boolean = false`
+
+Fail out on the first error instead of tolerating it. By default webpack will log these errors in red in the terminal, as well as the browser console when using HMR, but continue bundling. To enable it:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  bail: true,
+};
+```
+
+This will force webpack to exit its bundling process.
+
+W> Avoid using `bail` option in [`watch`](/configuration/watch) mode, as it will force webpack to exit as soon as possible when an error is found.
+
+## dependencies
+
+`[string]`
+
+A list of [`name`](#name) defining all sibling configurations it depends on. Dependent configurations need to be compiled first.
+
+In watch mode dependencies will invalidate the compiler when:
+
+1.  the dependency has changed
+2.  a dependency is currently compiling or invalid
+
+Remember that current configuration will not compile until its dependencies are done.
+
+**webpack.config.js**
+
+```js
+module.exports = [
+  {
+    name: 'client',
+    target: 'web',
+    // …
+  },
+  {
+    name: 'server',
+    target: 'node',
+    dependencies: ['client'],
+  },
+];
+```
+
+## ignoreWarnings
+
+`RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`
+
+Tells webpack to ignore specific warnings. This can be done with a `RegExp`, a custom `function` to select warnings based on the raw warning instance which is getting `WebpackError` and `Compilation` as arguments and returns a `boolean`, an `object` with the following properties:
+
+- `file` : A RegExp to select the origin file for the warning.
+- `message` : A RegExp to select the warning message.
+- `module` : A RegExp to select the origin module for the warning.
+
+`ignoreWarnings` can be an `array` of any of the above.
+
+```javascript
+module.exports = {
+  //...
+  ignoreWarnings: [
+    {
+      module: /module2\.js\?[34]/, // A RegExp
+    },
+    {
+      module: /[13]/,
+      message: /homepage/,
+    },
+    (warning) => true,
+  ],
+};
+```
+
+## loader
+
+`object`
+
+Expose custom values into the [loader context](/api/loaders/#the-loader-context).
+
+For example, you can define a new variable in the loader context:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  loader: {
+    answer: 42,
+  },
+};
+```
+
+Then use `this.answer` to get its value in the loader:
+
+**custom-loader.js**
+
+```javascript
+module.exports = function (source) {
+  // ...
+  console.log(this.answer); // will log `42` here
+  return source;
+};
+```
+
+T> You can override properties in the loader context as webpack copies all properties that are defined in the `loader` to the loader context.
+
+## parallelism
+
+`number = 100`
+
+Limit the number of parallel processed modules. Can be used to fine tune performance or to get more reliable profiling results.
+
+## profile
+
+`boolean`
+
+Capture a "profile" of the application, including statistics and hints, which can then be dissected using the [Analyze](https://webpack.github.io/analyse/) tool. It will also log out a summary of module timings.
+
+T> Use the [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) for more control over the generated profile.
+
+T> Combine `profile: true` with `parallelism: 1` to get correct timings. Note that this will slow down the build as well.
+
+## recordsPath
+
+`string`
+
+Use this option to generate a JSON file containing webpack "records" – pieces of data used to store module identifiers across multiple builds. You can use this file to track how modules change between builds. To generate one, specify a location:
+
+**webpack.config.js**
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  recordsPath: path.join(__dirname, 'records.json'),
+};
+```
+
+Records are particularly useful if you have a complex setup that leverages [Code Splitting](/guides/code-splitting). The data can be used to ensure the split bundles are achieving the [caching](/guides/caching) behavior you need.
+
+T> Note that although this file is generated by the compiler, you may still want to track it in source control to keep a history of how it has changed over time.
+
+W> Setting `recordsPath` will essentially set `recordsInputPath` and `recordsOutputPath` to the same location. This is usually all that's necessary unless you decide to change the name of the file containing the records. See below for an example.
+
+## recordsInputPath
+
+`string`
+
+Specify the file from which to read the last set of records. This can be used to rename a records file. See the example below.
+
+## recordsOutputPath
+
+`string`
+
+Specify where the records should be written. The following example shows how you might use this option in combination with `recordsInputPath` to rename a records file:
+
+**webpack.config.js**
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  recordsInputPath: path.join(__dirname, 'records.json'),
+  recordsOutputPath: path.join(__dirname, 'newRecords.json'),
+};
+```
+
+## name
+
+`string`
+
+Name of the configuration. Used when loading multiple configurations.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  name: 'admin-app',
+};
+```
+
+## infrastructureLogging
+
+Options for infrastructure level logging.
+
+`object = {}`
+
+### appendOnly
+
+<Badge text="5.31.0+" />
+
+`boolean`
+
+Append lines to the output instead of updating existing output, useful for status messages. This option is used only when no custom [`console`](#console) is provided.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    appendOnly: true,
+    level: 'verbose',
+  },
+  plugins: [
+    (compiler) => {
+      const logger = compiler.getInfrastructureLogger('MyPlugin');
+      logger.status('first output'); // this line won't be overridden with `appendOnly` enabled
+      logger.status('second output');
+    },
+  ],
+};
+```
+
+### colors
+
+<Badge text="5.31.0+" />
+
+`boolean`
+
+Enable colorful output for infrastructure level logging. This option is used only when no custom [`console`](#console) is provided.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    colors: true,
+    level: 'verbose',
+  },
+  plugins: [
+    (compiler) => {
+      const logger = compiler.getInfrastructureLogger('MyPlugin');
+      logger.log('this output will be colorful');
+    },
+  ],
+};
+```
+
+### console
+
+<Badge text="5.31.0+" />
+
+`Console`
+
+Customize the console used for infrastructure level logging.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    console: yourCustomConsole(),
+  },
+};
+```
+
+### level
+
+`string`
+
+Enable infrastructure logging output. Similar to [`stats.logging`](/configuration/stats/#statslogging) option but for infrastructure. No default value is given.
+
+Possible values:
+
+- `'none'` - disable logging
+- `'error'` - errors only
+- `'warn'` - errors and warnings only
+- `'info'` - errors, warnings, and info messages
+- `'log'` - errors, warnings, info messages, log messages, groups, clears. Collapsed groups are displayed in a collapsed state.
+- `'verbose'` - log everything except debug and trace. Collapsed groups are displayed in expanded state.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    level: 'info',
+  },
+};
+```
+
+### debug
+
+`string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
+
+Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) option but for infrastructure. No default value is given.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    level: 'info',
+    debug: ['MyPlugin', /MyPlugin/, (name) => name.contains('MyPlugin')],
+  },
+};
+```
+
+### stream
+
+<Badge text="5.31.0+" />
+
+`NodeJS.WritableStream = process.stderr`
+
+Stream used for logging output. Defaults to `process.stderr`. This option is used only when no custom [`console`](#console) is provided.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    stream: process.stderr,
+  },
+};
+```
+
+T> In the case of a TTY stream, `colors` is enabled and `appendOnly` is disabled, and vice versa.
+
+## snapshot
+
+`object`
+
+`snapshot` options decide how the file system snapshots are created and invalidated.
+
+**webpack.config.js**
+
+```javascript
+const path = require('path');
+module.exports = {
+  // ...
+  snapshot: {
+    managedPaths: [path.resolve(__dirname, '../node_modules')],
+    immutablePaths: [],
+    buildDependencies: {
+      hash: true,
+      timestamp: true,
+    },
+    module: {
+      timestamp: true,
+    },
+    resolve: {
+      timestamp: true,
+    },
+    resolveBuildDependencies: {
+      hash: true,
+      timestamp: true,
+    },
+  },
+};
+```
+
+### managedPaths
+
+`[string]`
+
+An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
+
+### immutablePaths
+
+`[string]`
+
+An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
+
+### buildDependencies
+
+`object = { hash boolean = true, timestamp boolean = true }`
+
+Snapshots for build dependencies when using the persistent cache.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
+
+Both `hash` and `timestamp` are optional.
+
+- `{ hash: true }`: Good for CI caching with a fresh checkout which doesn't keep timestamps and uses hashes.
+- `{ timestamp: true }`: Good for local development caching.
+- `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps are the same, which leads to a small performance hit for the initial build.
+
+### module
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+Snapshots for building modules.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
+
+### resolve
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+Snapshots for resolving of requests.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.
+
+### resolveBuildDependencies
+
+`object = {hash boolean = true, timestamp boolean = true}`
+
+Snapshots for resolving of build dependencies when using the persistent cache.
+
+- `hash`: Compare content hashes to determine invalidation (more expensive than `timestamp`, but changes less often).
+- `timestamp`: Compare timestamps to determine invalidation.

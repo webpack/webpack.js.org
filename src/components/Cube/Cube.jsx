@@ -12,7 +12,7 @@ export default class Cube extends Component {
     depth: PropTypes.number,
     repeatDelay: PropTypes.number,
     className: PropTypes.string,
-    continuous: PropTypes.bool
+    continuous: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -27,7 +27,7 @@ export default class Cube extends Component {
     y: 0,
     z: 0,
     iteration: 0,
-  }
+  };
 
   render() {
     let { x, y, z } = this.state;
@@ -35,46 +35,50 @@ export default class Cube extends Component {
 
     return (
       <div
-        className={ `cube__container ${className}` }
-           style={{
-             width: `${depth * 1.5}px`,
-             height: `${depth * 1.5}px`,
-             paddingLeft: `${depth / 1.7}px`
-           }}>
-      <span
-        ref={ ref => this.container = ref }
-        className={ `cube cube--${theme}` }
+        className={`cube__container ${className}`}
         style={{
-          width: `${depth}px`,
-          paddingBottom: `${depth * 0.5}px`
-        }}>
-        <figure
-          className="cube__outer"
+          width: `${depth * 1.5}px`,
+          height: `${depth * 1.5}px`,
+          paddingLeft: `${depth / 1.7}px`,
+        }}
+      >
+        <span
+          ref={(ref) => (this.container = ref)}
+          className={`cube cube--${theme}`}
           style={{
             width: `${depth}px`,
-            height: `${depth}px`,
-            transform: `translateX(-50%)
+            paddingBottom: `${depth * 0.5}px`,
+          }}
+        >
+          <figure
+            className="cube__outer"
+            style={{
+              width: `${depth}px`,
+              height: `${depth}px`,
+              transform: `translateX(-50%)
             scale3d(1,1,1)
             rotateX(${x}deg)
             rotateY(${y}deg)
-            rotateZ(${z}deg)`
-          }}>
-            { this._getFaces('outer') }
-        </figure>
-        <figure
-          className="cube__inner"
-          style={{
-            width: `${depth}px`,
-            height: `${depth}px`,
-            transform: `translateX(-50%)
+            rotateZ(${z}deg)`,
+            }}
+          >
+            {this._getFaces('outer')}
+          </figure>
+          <figure
+            className="cube__inner"
+            style={{
+              width: `${depth}px`,
+              height: `${depth}px`,
+              transform: `translateX(-50%)
             scale3d(0.5,0.5,0.5)
             rotateX(${-x}deg)
             rotateY(${-y}deg)
-            rotateZ(${-z}deg)`
-          }}>
-            { this._getFaces('inner') }
-        </figure>
-      </span>
+            rotateZ(${-z}deg)`,
+            }}
+          >
+            {this._getFaces('inner')}
+          </figure>
+        </span>
       </div>
     );
   }
@@ -85,7 +89,6 @@ export default class Cube extends Component {
     if (hover) {
       this.container.addEventListener('mouseenter', this._spin);
       this.container.addEventListener('mouseleave', this._reset);
-
     } else if (continuous) {
       let degrees = 0;
       let axis = 'y';
@@ -93,11 +96,15 @@ export default class Cube extends Component {
       let animation = () => {
         let obj = {};
         obj[axis] = degrees += 90;
-        this.setState({ ...obj, iteration: (this.state.iteration + 1) % 4 });
+        this.setState({
+          ...obj,
+          iteration: (this.state.iteration + 1) % 4,
+        });
         tick();
       };
 
-      let tick = () => setTimeout(() => requestAnimationFrame(animation), repeatDelay);
+      let tick = () =>
+        setTimeout(() => requestAnimationFrame(animation), repeatDelay);
 
       this._timeout = tick();
     }
@@ -109,7 +116,6 @@ export default class Cube extends Component {
     if (hover) {
       this.container.removeEventListener('mouseenter', this._spin);
       this.container.removeEventListener('mouseleave', this._reset);
-
     } else if (continuous) {
       clearTimeout(this._timeout);
     }
@@ -162,7 +168,7 @@ export default class Cube extends Component {
         right: [1, 1, 6, 1],
         top: [1, 1, 1, 1],
         bottom: [1, 6, 6, 1],
-      }
+      },
     };
 
     return [
@@ -171,23 +177,27 @@ export default class Cube extends Component {
       'rotateX(90deg)',
       'rotateY(-90deg)',
       'rotateY(90deg)',
-      'rotateY(180deg)'
+      'rotateY(180deg)',
     ].map((rotation, i) => {
-      const borderStyles = type === 'outer' ? {
-          borderTopWidth: borderWidthMap[i].top[iteration],
-          borderRightWidth: borderWidthMap[i].right[iteration],
-          borderBottomWidth: borderWidthMap[i].bottom[iteration],
-          borderLeftWidth: borderWidthMap[i].left[iteration],
-        } : {};
+      const borderStyles =
+        type === 'outer'
+          ? {
+              borderTopWidth: borderWidthMap[i].top[iteration],
+              borderRightWidth: borderWidthMap[i].right[iteration],
+              borderBottomWidth: borderWidthMap[i].bottom[iteration],
+              borderLeftWidth: borderWidthMap[i].left[iteration],
+            }
+          : {};
 
       return (
         <section
-          key={ i }
+          key={i}
           className="cube__face"
           style={{
-            transform: `${rotation} translateZ(${ this.props.depth / 2 }px)`,
+            transform: `${rotation} translateZ(${this.props.depth / 2}px)`,
             ...borderStyles,
-          }} />
+          }}
+        />
       );
     });
   }
@@ -200,7 +210,7 @@ export default class Cube extends Component {
   _getRandomAxis() {
     let axes = Object.keys(this.state);
 
-    return axes[ Math.floor(Math.random() * axes.length) ];
+    return axes[Math.floor(Math.random() * axes.length)];
   }
 
   /**
@@ -216,7 +226,7 @@ export default class Cube extends Component {
     obj[axis] = sign * 90;
 
     this.setState(obj);
-  }
+  };
 
   /**
    * Rotate the cubes back to their original position
@@ -227,7 +237,7 @@ export default class Cube extends Component {
     this.setState({
       x: 0,
       y: 0,
-      z: 0
+      z: 0,
     });
-  }
+  };
 }

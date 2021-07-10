@@ -10,35 +10,31 @@ Some features overlap between interfaces, e.g. a configuration option may be
 available via a CLI flag, while others exist only through a single interface.
 The following high-level information should get you started.
 
-
 ## CLI
 
 The Command Line Interface (CLI) to configure and interact with your build. It
 is especially useful in the case of early prototyping and profiling. For the
-most part, the CLI is simply used to kick off the process using a configuration
+most part, the CLI is used to kick off the process using a configuration
 file and a few flags (e.g. `--env`).
 
 [Learn more about the CLI!](/api/cli)
 
-
 ## Module
 
 When processing modules with webpack, it is important to understand the
-different module syntaxes -- specifically the [methods](/api/module-methods)
-and [variables](/api/module-variables) -- that are supported.
+different module syntaxes – specifically the [methods](/api/module-methods)
+and [variables](/api/module-variables) – that are supported.
 
 [Learn more about modules!](/api/module-methods)
 
-
 ## Node
 
-While most users can get away with just using the CLI along with a
+While most users can get away with using the CLI along with a
 configuration file, more fine-grained control of the compilation can be
 achieved via the Node interface. This includes passing multiple configurations,
 programmatically running or watching, and collecting stats.
 
 [Learn more about the Node API!](/api/node)
-
 
 ## Loaders
 
@@ -47,7 +43,6 @@ They are written as functions that accept source code as a parameter and return
 a new version of that code with transformations applied.
 
 [Learn more about loaders!](/api/loaders)
-
 
 ## Plugins
 

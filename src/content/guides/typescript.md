@@ -13,20 +13,19 @@ T> This guide stems from the [_Getting Started_](/guides/getting-started/) guide
 
 [TypeScript](https://www.typescriptlang.org) is a typed superset of JavaScript that compiles to plain JavaScript. In this guide we will learn how to integrate TypeScript with webpack.
 
-
 ## Basic Setup
 
 First install the TypeScript compiler and loader by running:
 
-``` bash
+```bash
 npm install --save-dev typescript ts-loader
 ```
 
 Now we'll modify the directory structure & the configuration files:
 
-__project__
+**project**
 
-``` diff
+```diff
   webpack-demo
   |- package.json
 + |- tsconfig.json
@@ -40,11 +39,11 @@ __project__
   |- /node_modules
 ```
 
-__tsconfig.json__
+**tsconfig.json**
 
-Let's set up a simple configuration to support JSX and compile TypeScript down to ES5...
+Let's set up a configuration to support JSX and compile TypeScript down to ES5...
 
-``` json
+```json
 {
   "compilerOptions": {
     "outDir": "./dist/",
@@ -52,7 +51,8 @@ Let's set up a simple configuration to support JSX and compile TypeScript down t
     "module": "es6",
     "target": "es5",
     "jsx": "react",
-    "allowJs": true
+    "allowJs": true,
+    "moduleResolution": "node"
   }
 }
 ```
@@ -63,9 +63,9 @@ To learn more about webpack configuration, see the [configuration concepts](/con
 
 Now let's configure webpack to handle TypeScript:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` js
+```js
 const path = require('path');
 
 module.exports = {
@@ -80,7 +80,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
     filename: 'bundle.js',
@@ -93,9 +93,9 @@ This will direct webpack to _enter_ through `./index.ts`, _load_ all `.ts` and `
 
 Now lets change the import of `lodash` in our `./index.ts` due to the fact that there is no default export present in `lodash` definitions.
 
-__./index.ts__
+**./index.ts**
 
-``` diff
+```diff
 - import _ from 'lodash';
 + import * as _ from 'lodash';
 
@@ -110,7 +110,7 @@ __./index.ts__
   document.body.appendChild(component());
 ```
 
-T> To make imports do this by default and keep `import _ from 'lodash';` syntax in TypeScript, set `"allowSyntheticDefaultImports" : true` and `"esModuleInterop" : true` in your __tsconfig.json__ file. This is related to TypeScript configuration and mentioned in our guide only for your information.
+T> To make imports do this by default and keep `import _ from 'lodash';` syntax in TypeScript, set `"allowSyntheticDefaultImports" : true` and `"esModuleInterop" : true` in your **tsconfig.json** file. This is related to TypeScript configuration and mentioned in our guide only for your information.
 
 ## Loader
 
@@ -128,9 +128,9 @@ To learn more about source maps, see the [development guide](/guides/development
 
 To enable source maps, we must configure TypeScript to output inline source maps to our compiled JavaScript files. The following line must be added to our TypeScript configuration:
 
-__tsconfig.json__
+**tsconfig.json**
 
-``` diff
+```diff
   {
     "compilerOptions": {
       "outDir": "./dist/",
@@ -139,16 +139,17 @@ __tsconfig.json__
       "module": "commonjs",
       "target": "es5",
       "jsx": "react",
-      "allowJs": true
+      "allowJs": true,
+      "moduleResolution": "node",
     }
   }
 ```
 
 Now we need to tell webpack to extract these source maps and include in our final bundle:
 
-__webpack.config.js__
+**webpack.config.js**
 
-``` diff
+```diff
   const path = require('path');
 
   module.exports = {
@@ -175,35 +176,32 @@ __webpack.config.js__
 
 See the [devtool documentation](/configuration/devtool/) for more information.
 
-
 ## Using Third Party Libraries
 
 When installing third party libraries from npm, it is important to remember to install the typing definition for that library. These definitions can be found at [TypeSearch](https://microsoft.github.io/TypeSearch/).
 
 For example if we want to install lodash we can run the following command to get the typings for it:
 
-``` bash
+```bash
 npm install --save-dev @types/lodash
 ```
 
 For more information see [this blog post](https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/).
 
-
 ## Importing Other Assets
 
 To use non-code assets with TypeScript, we need to defer the type for these imports. This requires a `custom.d.ts` file which signifies custom definitions for TypeScript in our project. Let's set up a declaration for `.svg` files:
 
-__custom.d.ts__
+**custom.d.ts**
 
 ```typescript
-declare module "*.svg" {
+declare module '*.svg' {
   const content: any;
   export default content;
 }
 ```
 
 Here we declare a new module for SVGs by specifying any import that ends in `.svg` and defining the module's `content` as `any`. We could be more explicit about it being a url by defining the type as string. The same concept applies to other assets including CSS, SCSS, JSON and more.
-
 
 ## Build Performance
 

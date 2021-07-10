@@ -1,5 +1,6 @@
 ---
 title: PrefetchPlugin
+group: webpack
 contributors:
   - skipjack
   - byzyk
@@ -7,10 +8,9 @@ contributors:
 
 Prefetch normal module requests, causing them to be resolved and built before the first `import` or `require` of that module occurs. Using this plugin can boost performance. Try to profile the build first to determine clever prefetching points.
 
-``` javascript
+```javascript
 new webpack.PrefetchPlugin([context], request);
 ```
-
 
 ## Options
 

@@ -1,0 +1,135 @@
+---
+title: Experiments
+sort: 19
+contributors:
+  - EugeneHlushko
+  - wizardofhogwarts
+  - chenxsan
+  - anshumanv
+---
+
+## `experiments`
+
+`boolean: false`
+
+`experiments` option was introduced in webpack 5 to empower users with the ability to activate and try out experimental features.
+
+W> Because experimental features have relaxed semantic versioning and might contain breaking changes, make sure to fix webpack's version to minor e.g. `webpack: ~5.4.3` instead of `webpack: ^5.4.3` or use a lockfile when using `experiments`.
+
+Available options:
+
+- `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module.
+- [`executeModule`](#experimentsexecutemodule)
+- `layers`: Enable module and chunk layers.
+- [`lazyCompilation`](#experimentslazycompilation)
+- [`outputModule`](#experimentsoutputmodule)
+- `syncWebAssembly`: Support the old WebAssembly like in webpack 4.
+- `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  experiments: {
+    executeModule: true,
+    outputModule: true,
+    syncWebAssembly: true,
+    topLevelAwait: true,
+    asyncWebAssembly: true,
+    layers: true,
+    lazyCompilation: true,
+  },
+};
+```
+
+### experiments.executeModule
+
+Enable execution of modules from the module graph for plugins and loaders at build time to generate code or other assets.
+
+- Type: `boolean`
+- Available: 5.32.0+
+- Example:
+
+  ```js
+  module.exports = {
+    // …
+    experiments: {
+      executeModule: true,
+    },
+  };
+  ```
+
+### experiments.lazyCompilation
+
+Compile entrypoints and dynamic `import`s only when they are in use. It can be used for either Web or Node.js.
+
+- Type
+  - `boolean`
+  - `object`
+    ```ts
+    {
+      // define a custom backend
+      backend?: ((
+        compiler: webpack.Compiler,
+        client: string,
+        callback: (err?: Error, api?: any) => void
+      ) => void)
+      | ((
+          compiler: webpack.Compiler,
+          client: string
+        ) => Promise<any>)
+      client?: string,
+      entries?: boolean,
+      imports?: boolean,
+      test?: RegExp | string | ((module: import("../lib/Module")) => boolean)
+    }
+    ```
+    - `client`: Path to a custom client, defaults to `webpack/hot/lazy-compilation-{node|web}.js`.
+    - `backend`: Customize the backend, defaults to `webpack/lib/hmr/lazyCompilationBackend`.
+    - `entries`: Enable lazy compilation for entries.
+    - `imports` <Badge text='5.20.0+' />: Enable lazy compilation for dynamic imports.
+    - `test` <Badge text='5.20.0+' />: Specify which imported modules should be lazily compiled.
+- Available: 5.17.0+
+- Example 1:
+  ```js
+  module.exports = {
+    // …
+    experiments: {
+      lazyCompilation: true,
+    },
+  };
+  ```
+- Example 2:
+
+  ```js
+  module.exports = {
+    // …
+    experiments: {
+      lazyCompilation: {
+        // disable lazy compilation for dynamic imports
+        imports: false,
+
+        // disable lazy compilation for entries
+        entries: false,
+
+        // do not lazily compile moduleB
+        test: (module) => !/moduleB/.test(module.nameForCondition()),
+      },
+    },
+  };
+  ```
+
+### experiments.outputModule
+
+`boolean`
+
+Once enabled, webpack will ouput ECMAScript module syntax whenever possible. For instance, `import()` to load chunks, ESM exports to expose chunk data, among others.
+
+```js
+module.exports = {
+  experiments: {
+    outputModule: true,
+  },
+};
+```

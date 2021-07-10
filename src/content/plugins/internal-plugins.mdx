@@ -1,5 +1,6 @@
 ---
 title: Internal webpack plugins
+group: webpack
 contributors:
   - iAziz786
   - EugeneHlushko
@@ -57,9 +58,9 @@ Saves and restores module and chunk ids from records.
 
 Plugins, which add entry chunks to the compilation.
 
-### SingleEntryPlugin
+### EntryPlugin
 
-`SingleEntryPlugin(context, request, chunkName)`
+`EntryPlugin(context, request, chunkName)`
 
 Adds an entry chunk on compilation. The chunk is named `chunkName` and contains only one module (plus dependencies). The module is resolved from `request` in `context` (absolute path).
 
@@ -210,7 +211,7 @@ If ensures that native modules are loaded correctly even if bundled.
 
 `dependencies/AMDPlugin(options)`
 
-Provides AMD-style `define` and `require` to modules. Also bind `require.amd`, `define.amd` and webpack_amd_options##  to the `options` passed as parameter.
+Provides AMD-style `define` and `require` to modules. Also bind `require.amd`, `define.amd` and webpack_amd_options## to the `options` passed as parameter.
 
 ### CommonJsPlugin
 
@@ -246,6 +247,8 @@ Define constants for identifier.
 
 ## optimize
 
+Note that all plugins under `webpack.optimize` namespace should only be used when [`mode`](/configuration/mode/#mode-none) set to `'none'`. Otherwise you might get into trouble where plugins are applied twice.
+
 ### LimitChunkCountPlugin
 
 `optimize/LimitChunkCountPlugin(options)`
@@ -273,6 +276,10 @@ Modules that are included in every parent chunk are removed from the chunk.
 `optimize/MinChunkSizePlugin(minChunkSize)`
 
 Merges chunks until each chunk has the minimum size of `minChunkSize`.
+
+### ModuleConcatenationPlugin
+
+See the [ModuleConcatenationPlugin page](/plugins/module-concatenation-plugin/) for details.
 
 ### FlagIncludedChunksPlugin
 

@@ -8,19 +8,17 @@ contributors:
 
 The following sections contain all you need to know about editing and formatting the content within this site. Make sure to do some research before starting your edits or additions. Sometimes the toughest part is finding where the content should live and determining whether or not it already exists.
 
-
 ## Process
 
 1. Check related issue if an article links to one.
 2. Hit `edit` and expand on the structure.
 3. PR changes.
 
-
 ## YAML Frontmatter
 
 Each article contains a small section at the top written in [YAML Frontmatter](https://jekyllrb.com/docs/frontmatter/):
 
-``` yaml
+```yaml
 ---
 title: My Article
 group: My Sub-Section
@@ -41,8 +39,7 @@ Let's break these down:
 - `contributors`: A list of GitHub usernames who have contributed to this article.
 - `related`: Any related reading or useful examples.
 
-Note that `related` will generate a __Further Reading__ section at the bottom of the page and `contributors` will yield a __Contributors__ section below it. If you edit an article and would like recognition, don't hesitate to add your GitHub username to the `contributors` list.
-
+Note that `related` will generate a **Further Reading** section at the bottom of the page and `contributors` will yield a **Contributors** section below it. If you edit an article and would like recognition, don't hesitate to add your GitHub username to the `contributors` list.
 
 ## Article Structure
 
@@ -50,7 +47,6 @@ Note that `related` will generate a __Further Reading__ section at the bottom of
 2. Outline Remaining Content – how the content will be presented.
 3. Main Content - tell what you promised to tell.
 4. Conclusion - tell what you told and recap the main points.
-
 
 ## Typesetting
 
@@ -60,15 +56,14 @@ Note that `related` will generate a __Further Reading__ section at the bottom of
 - Use "webpack 2" to refer to a specific webpack version (~~"webpack v2"~~)
 - Use ES5; ES2015, ES2016, … to refer to the ECMAScript standards (~~ES6~~, ~~ES7~~)
 
-
 ## Formatting
 
 ### Code
 
-__Syntax: \`\`\`javascript … \`\`\`__
+**Syntax: \`\`\`javascript … \`\`\`**
 
 ```javascript
-function foo () {
+function foo() {
   return 'bar';
 }
 
@@ -79,23 +74,20 @@ foo();
 
 Use single quotes in code snippets and project files (`.jsx`, `.scss` etc):
 
-
 ```diff
 - import webpack from "webpack";
 + import webpack from 'webpack';
 ```
 
-
 And in inline backticks:
 
-__correct__
+**correct**
 
 Set value to `'index.md'`...
 
-__incorrect__
+**incorrect**
 
 Set value to `"index.md"`...
-
 
 ### Lists
 
@@ -107,11 +99,11 @@ Lists should be ordered alphabetically.
 
 ### Tables
 
-Parameter   | Explanation                                      | Input Type | Default Value
------------ | ------------------------------------------------ | ---------- |--------------
---debug     | Switch loaders to debug mode                     | boolean    | false
---devtool   | Define source map type for the bundled resources | string     | -
---progress  | Print compilation progress in percentage         | boolean    | false
+| Parameter  | Explanation                                      | Input Type | Default Value |
+| ---------- | ------------------------------------------------ | ---------- | ------------- |
+| --debug    | Switch loaders to debug mode                     | boolean    | false         |
+| --devtool  | Define source map type for the bundled resources | string     | -             |
+| --progress | Print compilation progress in percentage         | boolean    | false         |
 
 Tables should also be ordered alphabetically.
 
@@ -127,21 +119,21 @@ The [configuration](/configuration) properties should be ordered alphabetically 
 
 #### Blockquote
 
-__Syntax: \>__
+**Syntax: \>**
 
 > This is a blockquote.
 
 #### Tip
 
-__Syntax: T\>__
+**Syntax: T\>**
 
 T> This is a tip.
 
-__Syntax: W\>__
+**Syntax: W\>**
 
 W> This is a warning.
 
-__Syntax: ?\>__
+**Syntax: ?\>**
 
 ?> This is a todo.
 
@@ -165,7 +157,7 @@ Please do not assume things are simple. Avoid words like 'just', 'simply'.
 
 Always provide types and defaults to all of the documentation options in order to keep the documentation accessible and well-written. We are adding types and defaults after entitling the documented option:
 
-__configuration.example.option__
+**configuration.example.option**
 
 `string = 'none'`
 
@@ -230,4 +222,4 @@ An example can be found on the [`options` section of the EvalSourceMapDevToolPlu
 
 ### Adding links
 
-Please use relative URLs (/concepts/mode/) to link our own content instead of absolute URLs (https://webpack.js.org/concepts/mode/).
+Please use relative URLs (such as `/concepts/mode/`) to link our own content instead of absolute URLs (such as `https://webpack.js.org/concepts/mode/`).

@@ -1,5 +1,6 @@
 ---
 title: HotModuleReplacementPlugin
+group: webpack
 contributors:
   - skipjack
   - byzyk
@@ -14,14 +15,13 @@ related:
 
 Enables [Hot Module Replacement](/concepts/hot-module-replacement), otherwise known as HMR.
 
-W> HMR should __never__ be used in production.
-
+W> HMR should **never** be used in production.
 
 ## Basic Usage
 
-Enabling HMR is easy and in most cases no options are necessary.
+Enabling HMR is straightforward and in most cases no options are necessary.
 
-``` javascript
+```javascript
 new webpack.HotModuleReplacementPlugin({
   // Options...
 });

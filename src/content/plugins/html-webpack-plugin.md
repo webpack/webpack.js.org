@@ -1,5 +1,6 @@
 ---
 title: HtmlWebpackPlugin
+group: Community
 contributors:
   - ampedandwired
   - simon04
@@ -9,31 +10,29 @@ contributors:
 
 The [`HtmlWebpackPlugin`](https://github.com/jantimon/html-webpack-plugin) simplifies creation of HTML files to serve your webpack bundles. This is especially useful for webpack bundles that include a hash in the filename which changes every compilation. You can either let the plugin generate an HTML file for you, supply your own template using [lodash templates](https://lodash.com/docs#template), or use your own [loader](/loaders).
 
-
 ## Installation
 
-``` bash
+```bash
 npm install --save-dev html-webpack-plugin
 ```
-
 
 ## Basic Usage
 
 The plugin will generate an HTML5 file for you that includes all your webpack
-bundles in the body using `script` tags. Just add the plugin to your webpack
+bundles in the body using `script` tags. Add the plugin to your webpack
 configuration as follows:
 
 ```javascript
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: 'index.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'index_bundle.js'
+    filename: 'index_bundle.js',
   },
-  plugins: [new HtmlWebpackPlugin()]
+  plugins: [new HtmlWebpackPlugin()],
 };
 ```
 
@@ -43,7 +42,7 @@ This will generate a file `dist/index.html` containing the following:
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>webpack App</title>
   </head>
   <body>
@@ -56,11 +55,9 @@ If you have multiple webpack entry points, they will all be included with `<scri
 
 If you have any CSS assets in webpack's output (for example, CSS extracted with the [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/)) then these will be included with `<link>` tags in the `<head>` element of generated HTML.
 
-
 ## Configuration
 
 For all configuration options, please see the [plugin documentation](https://github.com/jantimon/html-webpack-plugin#options).
-
 
 ## Third party addons
 

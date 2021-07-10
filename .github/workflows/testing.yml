@@ -37,7 +37,6 @@ jobs:
       - run: yarn --frozen-lockfile
       - run: yarn lint:js
       - run: yarn lint:markdown
-      - run: yarn lint:social
 
   proseLint:
     name: Proselint
@@ -83,6 +82,15 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - run: yarn
+
+      - uses: actions/cache@v2
+        id: build-cache
+        with:
+          path: .cache
+          key: build-${{ hashFiles('webpack.*.js') }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            build-${{ hashFiles('webpack.*.js') }}-
+
       - name: Build site
         run: yarn build
         env:
@@ -115,6 +123,14 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
+      - uses: actions/cache@v2
+        id: build-cache
+        with:
+          path: .cache
+          key: build-e2e-${{ hashFiles('webpack.*.js') }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            build-e2e-${{ hashFiles('webpack.*.js') }}-
 
       - run: |
           yarn

@@ -1,5 +1,6 @@
 ---
 title: BannerPlugin
+group: webpack
 contributors:
   - simon04
   - byzyk
@@ -19,7 +20,6 @@ new webpack.BannerPlugin(banner);
 new webpack.BannerPlugin(options);
 ```
 
-
 ## Options
 
 <!-- eslint-skip -->
@@ -37,21 +37,21 @@ new webpack.BannerPlugin(options);
 
 ## Usage
 
-
 ```javascript
 import webpack from 'webpack';
 
 // string
 new webpack.BannerPlugin({
-  banner: 'hello world'
+  banner: 'hello world',
 });
 
 // function
 new webpack.BannerPlugin({
-  banner: (yourVariable) => { return `yourVariable: ${yourVariable}`; }
+  banner: (yourVariable) => {
+    return `yourVariable: ${yourVariable}`;
+  },
 });
 ```
-
 
 ## Placeholders
 
@@ -61,6 +61,7 @@ Since webpack 2.5.0, placeholders are evaluated in the `banner` string:
 import webpack from 'webpack';
 
 new webpack.BannerPlugin({
-  banner: 'fullhash:[fullhash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]'
+  banner:
+    'fullhash:[fullhash], chunkhash:[chunkhash], name:[name], filebase:[filebase], query:[query], file:[file]',
 });
 ```

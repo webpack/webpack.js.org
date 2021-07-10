@@ -9,27 +9,21 @@ contributors:
   - hemal7735
   - snitin315
   - anshumanv
+  - jamesgeorge007
 ---
 
 webpack enables use of [loaders](/concepts/loaders) to preprocess files. This allows you to bundle any static resource way beyond JavaScript. You can easily write your own loaders using Node.js.
 
 Loaders are activated by using `loadername!` prefixes in `require()` statements, or are automatically applied via regex from your webpack configuration – see [configuration](/concepts/loaders/#configuration).
 
-
 ## Files
 
-- [`raw-loader`](/loaders/raw-loader) Loads raw content of a file (utf-8)
 - [`val-loader`](/loaders/val-loader) Executes code as module and consider exports as JS code
-- [`url-loader`](/loaders/url-loader) Works like the file loader, but can return a [data URL](https://tools.ietf.org/html/rfc2397) if the file is smaller than a limit
-- [`file-loader`](/loaders/file-loader) Emits the file into the output folder and returns the (relative) URL
 - [`ref-loader`](https://www.npmjs.com/package/ref-loader) Create dependencies between any files manually
-
 
 ## JSON
 
-- [`json5-loader`](/loaders/json5-loader) Loads and transpiles a [JSON 5](https://json5.org/) file
 - [`cson-loader`](https://github.com/awnist/cson-loader) Loads and transpiles a [CSON](https://github.com/bevry/cson#what-is-cson) file
-
 
 ## Transpiling
 
@@ -40,7 +34,6 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 - [`coffee-loader`](/loaders/coffee-loader) Loads [CoffeeScript](http://coffeescript.org/) like JavaScript
 - [`fengari-loader`](https://github.com/fengari-lua/fengari-loader/) Loads Lua code using [fengari](https://fengari.io/)
 - [`elm-webpack-loader`](https://github.com/elm-community/elm-webpack-loader) Loads [Elm](https://elm-lang.org/) like JavaScript
-
 
 ## Templating
 
@@ -54,7 +47,6 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 - [`twig-loader`](https://github.com/zimmo-be/twig-loader) Compiles Twig templates and returns a function
 - [`remark-loader`](https://github.com/webpack-contrib/remark-loader) Load markdown through `remark` with built-in image resolution
 
-
 ## Styling
 
 - [`style-loader`](/loaders/style-loader) Add exports of a module as style to DOM
@@ -64,16 +56,13 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 - [`postcss-loader`](/loaders/postcss-loader) Loads and transforms a CSS/SSS file using [PostCSS](http://postcss.org)
 - [`stylus-loader`](/loaders/stylus-loader/) Loads and compiles a Stylus file
 
-
-## Linting && Testing
+## Testing
 
 - [`mocha-loader`](/loaders/mocha-loader) Tests with [mocha](https://mochajs.org/) (Browser/NodeJS)
-- [`eslint-loader`](https://github.com/webpack-contrib/eslint-loader) PreLoader for linting code using [ESLint](https://eslint.org/)
 
 ## Frameworks
 
 - [`vue-loader`](https://github.com/vuejs/vue-loader) Loads and compiles [Vue Components](https://vuejs.org/v2/guide/components.html)
-- [`polymer-loader`](https://github.com/webpack-contrib/polymer-webpack-loader) Process HTML & CSS with preprocessor of choice and `require()` Web Components like first-class modules
 - [`angular2-template-loader`](https://github.com/TheLarkInn/angular2-template-loader) Loads and compiles [Angular](https://angular.io/) Components
 
 ## Awesome

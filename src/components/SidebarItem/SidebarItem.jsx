@@ -1,10 +1,10 @@
 import { Component } from 'react';
-import Link from '../Link/Link';
 import './SidebarItem.scss';
 import list2Tree from '../../utilities/list2Tree';
 import ChevronRightIcon from '../../styles/icons/chevron-right.svg';
 import BarIcon from '../../styles/icons/vertical-bar.svg';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 const block = 'sidebar-item';
 
@@ -13,11 +13,25 @@ export default class SidebarItem extends Component {
     title: PropTypes.string,
     anchors: PropTypes.array,
     url: PropTypes.string,
-    currentPage: PropTypes.string
-  }
-  state = {
-    open: this._isOpen(this.props)
+    currentPage: PropTypes.string,
   };
+  state = {
+    open: this._isOpen(this.props),
+  };
+
+  scrollTop(event) {
+    // there're two cases
+    // 1. location.pathname or location.hash changes which will be handled by useEffect in Page.jsx
+    // 2. location.pathname and location.hash doesn't change at all
+    if (window.location.hash !== '') {
+      // case 1
+      return;
+    }
+    if (!event.metaKey && !event.ctrlKey) {
+      // case 2
+      window.scrollTo(0, 0);
+    }
+  }
 
   renderAnchors(anchors) {
     return (
@@ -28,7 +42,9 @@ export default class SidebarItem extends Component {
             className={`${block}__anchor`}
             title={anchor.title}
           >
-            <a href={this._generateAnchorURL(anchor)}>{anchor.title}</a>
+            <NavLink to={this._generateAnchorURL(anchor)}>
+              {anchor.title2}
+            </NavLink>
             {anchor.children && this.renderAnchors(anchor.children)}
           </li>
         ))}
@@ -36,17 +52,13 @@ export default class SidebarItem extends Component {
     );
   }
 
-  scrollTop() {
-    window.scrollTo(0, 0);
-  }
-
   render() {
-    let {title, anchors = []} = this.props;
+    let { title, anchors = [] } = this.props;
     let openMod = this.state.open ? `${block}--open` : '';
     let disabledMod = anchors.length == 0 ? `${block}--disabled` : '';
 
-    const filteredAnchors = anchors.filter(anchor => anchor.level > 1);
-    const tree = list2Tree(filteredAnchors);
+    const filteredAnchors = anchors.filter((anchor) => anchor.level > 1);
+    const tree = list2Tree(title, filteredAnchors);
 
     return (
       <div className={`${block} ${openMod} ${disabledMod}`}>
@@ -56,18 +68,26 @@ export default class SidebarItem extends Component {
             height={17}
             fill="#175d96"
             className={`${block}__toggle`}
-            onClick={this._toggle.bind(this)} />
+            onClick={this._toggle.bind(this)}
+          />
         ) : (
-          <BarIcon className={`${block}__toggle`} width={15} height={17} fill="#175d96" />
+          <BarIcon
+            className={`${block}__toggle`}
+            width={15}
+            height={17}
+            fill="#175d96"
+          />
         )}
 
-        <Link
+        <NavLink
+          exact
           key={this.props.url}
           className={`${block}__title`}
           to={this.props.url}
-          onClick={this.scrollTop}>
+          onClick={this.scrollTop}
+        >
           {title}
-        </Link>
+        </NavLink>
 
         {anchors.length > 0 ? this.renderAnchors(tree) : null}
       </div>
@@ -75,9 +95,9 @@ export default class SidebarItem extends Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    if ( nextProps.currentPage !== this.props.currentPage ) {
+    if (nextProps.currentPage !== this.props.currentPage) {
       this.setState({
-        open: this._isOpen(nextProps)
+        open: this._isOpen(nextProps),
       });
     }
   }
@@ -98,7 +118,7 @@ export default class SidebarItem extends Component {
    */
   _toggle() {
     this.setState({
-      open: !this.state.open
+      open: !this.state.open,
     });
   }
 
@@ -109,7 +129,7 @@ export default class SidebarItem extends Component {
    * @returns {string}
    */
   _generateAnchorURL(anchor) {
-    let {url} = this.props;
+    let { url } = this.props;
     return anchor.id ? `${url}#${anchor.id}` : url;
   }
 }

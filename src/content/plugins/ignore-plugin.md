@@ -1,5 +1,6 @@
 ---
 title: IgnorePlugin
+group: webpack
 contributors:
   - simon04
   - byzyk
@@ -17,7 +18,7 @@ IgnorePlugin prevents the generation of modules for `import` or `require` calls 
 - `contextRegExp`: (optional) A RegExp to test the context (directory) against.
 
 ```javascript
-new webpack.IgnorePlugin({resourceRegExp, contextRegExp});
+new webpack.IgnorePlugin({ resourceRegExp, contextRegExp });
 // Supported in webpack 4 and earlier, unsupported in webpack 5:
 new webpack.IgnorePlugin(resourceRegExp, [contextRegExp]);
 ```
@@ -25,14 +26,14 @@ new webpack.IgnorePlugin(resourceRegExp, [contextRegExp]);
 ## Using filter functions
 
 - `checkResource (resource, context)` A Filter function that receives `resource` and `context` as arguments, must return boolean.
-- `checkContext (context)` was __removed in webpack 5__ as `checkResource` already gets context.
+- `checkContext (context)` was **removed in webpack 5** as `checkResource` already gets context.
 
 ```javascript
 new webpack.IgnorePlugin({
-  checkResource (resource) {
+  checkResource(resource) {
     // do something with resource
-    return true|false;
-  }
+    return true | false;
+  },
 });
 ```
 
@@ -43,7 +44,7 @@ As of [moment](https://momentjs.com/) 2.18, all locales are bundled together wit
 The `resourceRegExp` parameter passed to `IgnorePlugin` is not tested against the resolved file names or absolute module names being imported or required, but rather against the _string_ passed to `require` or `import` _within the source code where the import is taking place_. For example, if you're trying to exclude `node_modules/moment/locale/*.js`, this won't work:
 
 ```diff
--new webpack.IgnorePlugin({requestRegExp: /moment\/locale\//});
+-new webpack.IgnorePlugin({ resourceRegExp: /moment\/locale\// });
 ```
 
 Rather, because `moment` imports with this code:
@@ -57,7 +58,7 @@ require('./locale/' + name);
 ```javascript
 new webpack.IgnorePlugin({
   resourceRegExp: /^\.\/locale$/,
-  contextRegExp: /moment$/
+  contextRegExp: /moment$/,
 });
 ```
 

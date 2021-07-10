@@ -32,7 +32,7 @@ T> New to webpack? Check out our guide to some of webpack's [core concepts](/con
 
 If for some reason you want to use different configuration file depending on certain situations you can change this via command line by using the `--config` flag.
 
-__package.json__
+**package.json**
 
 ```json
 "scripts": {
@@ -44,11 +44,11 @@ __package.json__
 
 Click on the name of each option in the configuration code below to jump to the detailed documentation. Also note that the items with arrows can be expanded to show more examples and, in some cases, more advanced configuration.
 
-W> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
+W> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
 
 W> Notice that many array configurations allow to reference the default value via `"..."`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js-with-links-details
 const path = require('path');
@@ -201,6 +201,8 @@ module.exports = {
       crossOriginLoading: "anonymous",
       crossOriginLoading: false,
       // specifies how cross origin request are issued by the runtime
+      trustedTypes: false, // boolean (default) | string | object
+      // Trusted Types support
       importFunctionName: "import", // string (default)
       // expression that is called when using import()
       // can be replaced to use polyfills
@@ -269,7 +271,7 @@ module.exports = {
       hotUpdateGlobal: "hmrUpdateFunction", // string
       // the name of the global variable used to load hot update chunks
       sourcePrefix: "\t", // string
-      // prefix module sources in bundle for better readablitity
+      // prefix module sources in bundle for better readability
       // but breaks multi-line template strings
       hashFunction: "md4", // string (default)
       // hash function used in general
@@ -354,7 +356,7 @@ module.exports = {
               // ...
             }
           }
-        ]
+        ],
         <moduleType "#">
           <default>
             type: "javascript/auto",
@@ -830,7 +832,7 @@ module.exports = {
       // show information why optimizations bailed out for modules
     </advancedStatsOptimization>
 
-    children: true
+    children: true,
     // show stats for child compilations
 
     logging: true,
@@ -840,7 +842,7 @@ module.exports = {
     loggingTrace: true,
     // show stack traces for warnings and errors in logging output
 
-    warnings: true
+    warnings: true,
     // show warnings
 
     errors: true,
@@ -887,7 +889,7 @@ module.exports = {
     // Allow to output ESM
     topLevelAwait: true,
     // Allow to use await on module evaluation (Proposal)
-  }
+  },
   plugins: [
     // ...
   ],
@@ -1129,6 +1131,7 @@ module.exports = {
     // When using an array of configs this can be used to reference other
     // configs and let this config run after the other config at initial build
   </advancedBuild>
+}
 ```
 
 W> webpack applies configuration defaults after [plugins defaults](/contribute/writing-a-plugin/#configuration-defaults) are applied.

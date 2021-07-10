@@ -21,35 +21,34 @@ webpack can compile for multiple environments or _targets_. To understand what a
 
 Instructs webpack to target a specific environment. Defaults to `'browserslist'` or to `'web'` when no browserslist configuration was found.
 
-
 ### `string`
 
 The following string values are supported via [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js):
 
-Option                     | Description
--------------------------- | -----------------------
-`async-node[[X].Y]`        | Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)
-`electron[[X].Y]-main`     | Compile for [Electron](https://electronjs.org/) for main process.
-`electron[[X].Y]-renderer` | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.
-`electron[[X].Y]-preload`  | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `NodeTemplatePlugin` with `asyncChunkLoading` set to `true`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.
-`node[[X].Y]`              | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)
-`node-webkit[[X].Y]`       | Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)
-`nwjs[[X].Y]`              | The same as `node-webkit`
-`web`                      | Compile for usage in a browser-like environment __(default)__
-`webworker`                | Compile as WebWorker
-`esX`                      | Compile for specified ECMAScript version. Examples: es5, es2020.
-`browserslist`             | Infer a platform and the ES-features from a browserslist-config __(default if browserslist config is available)__
+| Option                     | Description                                                                                                                                                                                                                                                                                          |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `async-node[[X].Y]`        | Compile for usage in a Node.js-like environment (uses `fs` and `vm` to load chunks asynchronously)                                                                                                                                                                                                   |
+| `electron[[X].Y]-main`     | Compile for [Electron](https://electronjs.org/) for main process.                                                                                                                                                                                                                                    |
+| `electron[[X].Y]-renderer` | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `JsonpTemplatePlugin`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules.                                       |
+| `electron[[X].Y]-preload`  | Compile for [Electron](https://electronjs.org/) for renderer process, providing a target using `NodeTemplatePlugin` with `asyncChunkLoading` set to `true`, `FunctionModulePlugin` for browser environments and `NodeTargetPlugin` and `ExternalsPlugin` for CommonJS and Electron built-in modules. |
+| `node[[X].Y]`              | Compile for usage in a Node.js-like environment (uses Node.js `require` to load chunks)                                                                                                                                                                                                              |
+| `node-webkit[[X].Y]`       | Compile for usage in WebKit and uses JSONP for chunk loading. Allows importing of built-in Node.js modules and [`nw.gui`](http://docs.nwjs.io/en/latest/) (experimental)                                                                                                                             |
+| `nwjs[[X].Y]`              | The same as `node-webkit`                                                                                                                                                                                                                                                                            |
+| `web`                      | Compile for usage in a browser-like environment **(default)**                                                                                                                                                                                                                                        |
+| `webworker`                | Compile as WebWorker                                                                                                                                                                                                                                                                                 |
+| `esX`                      | Compile for specified ECMAScript version. Examples: es5, es2020.                                                                                                                                                                                                                                     |
+| `browserslist`             | Infer a platform and the ES-features from a browserslist-config **(default if browserslist config is available)**                                                                                                                                                                                    |
 
 For example, when the `target` is set to `"electron-main"`, webpack includes multiple electron specific variables.
 
 A version of `node` or `electron` may be optionally specified. This is denoted by the `[[X].Y]` in the table above.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   // ...
-  target: 'node12.18'
+  target: 'node12.18',
 };
 ```
 
@@ -74,12 +73,12 @@ Supported browserslist values:
 
 When multiple targets are passed, then common subset of features will be used:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   // ...
-  target: ['web', 'es5']
+  target: ['web', 'es5'],
 };
 ```
 
@@ -87,12 +86,12 @@ webpack will generate a runtime code for web platform and will use only ES5 feat
 
 Not all targets may be mixed for now.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   // ...
-  target: ['web', 'node']
+  target: ['web', 'node'],
 };
 ```
 
@@ -102,18 +101,18 @@ Will cause an error. webpack does not support universal target for now.
 
 Set `target` to `false` if none of the predefined targets from the list above meet your needs, no plugins will be applied.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 module.exports = {
   // ...
-  target: false
+  target: false,
 };
 ```
 
 Or you can apply specific plugins you want:
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js
 const webpack = require('webpack');
@@ -122,9 +121,9 @@ module.exports = {
   // ...
   target: false,
   plugins: [
-    new webpack.JsonpTemplatePlugin(options.output),
-    new webpack.LoaderTargetPlugin('web')
-  ]
+    new webpack.web.JsonpTemplatePlugin(options.output),
+    new webpack.LoaderTargetPlugin('web'),
+  ],
 };
 ```
 

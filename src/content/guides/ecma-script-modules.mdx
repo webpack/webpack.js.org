@@ -1,0 +1,90 @@
+---
+title: ECMAScript Modules
+sort: 19
+contributors:
+  - sokra
+related:
+  - title: ECMAScript Modules in Node.js
+    url: https://nodejs.org/api/esm.html
+---
+
+ECMAScript Modules (ESM) is a [specification](https://tc39.github.io/ecma262/#sec-modules) for using Modules in the Web.
+It's supported by all modern browsers and the recommended way of writing modular code for the Web.
+
+webpack supported processing ECMAScript Modules to optimize them.
+
+## Exporting
+
+The `export` keyword allows to expose things from an ESM to other modules:
+
+```js
+export const CONSTANT = 42;
+
+export let variable = 42;
+// only reading is exposed
+// it's not possible to modify the variable from outside
+
+export function fun() {
+  console.log('fun');
+}
+
+export class C extends Super {
+  method() {
+    console.log('method');
+  }
+}
+
+let a, b, other;
+export { a, b, other as c };
+
+export default 1 + 2 + 3 + more();
+```
+
+## Importing
+
+The `import` keyword allows to get references to things from other modules into an ESM:
+
+```js
+import { CONSTANT, variable } from './module.js';
+// import "bindings" to exports from another module
+// these bindings are live. The values are not copied,
+// instead accessing "variable" will get the current value
+// in the imported module
+
+import * as module from './module.js';
+module.fun();
+// import the "namespace object" which contains all exports
+
+import theDefaultValue from './module.js';
+// shortcut to import the "default" export
+```
+
+## Flagging modules as ESM
+
+By default webpack will automatically detect whether a file is an ESM or a different module system.
+
+Node.js established a way of explicitly setting the module type of files by using a property in the `package.json`.
+Setting `"type": "module"` in a package.json does force all files below this package.json to be ECMAScript Modules.
+Setting `"type": "commonjs"` will instead force them to be CommonJS Modules.
+
+```json
+{
+  "type": "module"
+}
+```
+
+In addition to that, files can set the module type by using `.mjs` or `.cjs` extension. `.mjs` will force them to be ESM, `.cjs` force them to be CommonJs.
+
+In DataURIs using the `text/javascript` or `application/javascript` mime type will also force module type to ESM.
+
+In addition to the module format, flagging modules as ESM also affect the resolving logic, interop logic and the available symbols in modules.
+
+Imports in ESM are resolved more strictly. Relative requests must include a filename and file extension.
+
+T> Requests to packages e.g. `import "lodash"` are still supported.
+
+Only the "default" export can be imported from non-ESM. Named exports are not available.
+
+CommonJs Syntax is not available: `require`, `module`, `exports`, `__filename`, `__dirname`.
+
+T> HMR can be used with [`import.meta.webpackHot`](/api/module-variables/#importmetawebpackhot) instead of [`module.hot`](/api/module-variables/#modulehot-webpack-specific).
