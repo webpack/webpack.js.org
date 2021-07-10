@@ -110,7 +110,12 @@ export default function Page(props) {
           </div>
         )}
 
-<<<<<<< HEAD
+        <PageLinks page={rest} />
+
+        {(previous || next) && (
+          <AdjacentPages previous={previous} next={next} />
+        )}
+
         {loadTranslators && (
           <div className="contributors__section">
             <hr />
@@ -122,17 +127,6 @@ export default function Page(props) {
         {loadContributors && (
           <div className="contributors__section">
             <h3>贡献者</h3>
-=======
-        <PageLinks page={rest} />
-
-        {(previous || next) && (
-          <AdjacentPages previous={previous} next={next} />
-        )}
-
-        {loadContributors && (
-          <div className="contributors__section">
-            <h3>Contributors</h3>
->>>>>>> 6d6d86fd8efe239203b3d41df0eaf0ccf382e1ac
             <Contributors contributors={contributors} />
           </div>
         )}
