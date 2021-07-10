@@ -154,12 +154,14 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                 },
               ]}
             />
-            <HelloDarkness />
           </nav>
-          <DocSearch
-            apiKey={'fac401d1a5f68bc41f01fb6261661490'}
-            indexName="webpack-js-org"
-          />
+          <div className="inline-flex items-center">
+            <HelloDarkness />
+            <DocSearch
+              apiKey={'fac401d1a5f68bc41f01fb6261661490'}
+              indexName="webpack-js-org"
+            />
+          </div>
         </div>
         {/* sub navigation */}
         {links
