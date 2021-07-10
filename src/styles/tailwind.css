@@ -3,6 +3,9 @@
 @import 'tailwindcss/utilities';
 
 /* some customized rules */
+.active-menu {
+  @apply text-white dark:text-white font-normal !important;
+}
 .active-submenu {
   @apply text-black dark:text-white !important;
 }

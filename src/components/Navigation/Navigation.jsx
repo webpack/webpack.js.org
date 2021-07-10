@@ -40,9 +40,9 @@ function NavigationItem({ children, url, isActive }) {
   return (
     <NavLink
       {...obj}
-      activeClassName="font-bold"
+      activeClassName="active-menu"
       to={url}
-      className="text-white dark:text-white text-xs uppercase mr-[18px] hover:text-blue-200"
+      className="text-gray-100 dark:text-gray-100 text-sm font-light uppercase mr-[18px] hover:text-blue-200"
     >
       {children}
     </NavLink>
@@ -95,7 +95,7 @@ function Navigation({
   return (
     <>
       <header className="bg-blue-800 dark:bg-gray-900">
-        <div className="flex items-center p-10 justify-between md:max-w-[1024px] md:mx-auto md:justify-start">
+        <div className="flex items-center py-10 px-[16px] justify-between md:px-[24px] md:max-w-[1024px] md:mx-auto md:justify-start">
           <button
             className="bg-transparent border-none md:hidden"
             onClick={toggleSidebar}
@@ -195,13 +195,13 @@ function Navigation({
                 key={link.url}
                 className="bg-gray-100 dark:bg-gray-800 hidden md:block"
               >
-                <div className="md:max-w-[1024px] md:mx-auto md:flex md:justify-end">
+                <div className="md:max-w-[1024px] md:mx-auto md:flex md:justify-end md:px-[24px]">
                   {link.children.map((child) => (
                     <NavLink
                       key={child.url}
                       to={child.url}
                       title={child.title}
-                      className="text-blue-400 ml-20 py-5 text-xs uppercase"
+                      className="text-blue-400 ml-20 py-5 text-sm capitalize"
                       activeClassName="active-submenu"
                     >
                       {child.content}
