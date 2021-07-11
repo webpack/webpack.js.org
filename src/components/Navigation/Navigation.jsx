@@ -38,7 +38,7 @@ function NavigationItem({ children, url, isActive }) {
       {...obj}
       activeClassName="active-menu"
       to={url}
-      className="text-gray-100 dark:text-gray-100 text-sm font-light uppercase mr-[18px] hover:text-blue-200"
+      className="text-gray-100 dark:text-gray-100 text-sm font-light uppercase hover:text-blue-200"
     >
       {children}
     </NavLink>
@@ -54,7 +54,7 @@ function NavigationIcon({ children, to, title }) {
   return (
     <Link
       to={to}
-      className="mr-[18px] inline-flex items-center"
+      className="inline-flex items-center"
       title={`webpack on ${title}`}
     >
       {children}
@@ -97,7 +97,7 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
           <Link to="/" className="md:mr-auto">
             <Logo />
           </Link>
-          <nav className="hidden md:inline-flex md:items-center">
+          <nav className="hidden md:inline-grid md:grid-flow-col md:gap-x-[18px]">
             {links.map(({ content, url, isActive }) => (
               <NavigationItem key={url} url={url} isActive={isActive}>
                 {content}
@@ -136,7 +136,7 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
             ))}
 
             <Dropdown
-              className="mr-[18px]"
+              className=""
               items={[
                 {
                   title: 'English',
@@ -155,7 +155,7 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
               ]}
             />
           </nav>
-          <div className="inline-flex items-center">
+          <div className="inline-flex items-center ml-[18px]">
             <HelloDarkness />
             <DocSearch
               apiKey={'fac401d1a5f68bc41f01fb6261661490'}
@@ -179,13 +179,13 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                 key={link.url}
                 className="bg-gray-100 dark:bg-gray-800 hidden md:block"
               >
-                <div className="md:max-w-[1024px] md:mx-auto md:flex md:justify-end md:px-[24px]">
+                <div className="md:max-w-[1024px] md:mx-auto md:grid md:grid-flow-col md:justify-end md:gap-x-[20px] md:px-[24px]">
                   {link.children.map((child) => (
                     <NavLink
                       key={child.url}
                       to={child.url}
                       title={child.title}
-                      className="text-blue-400 ml-20 py-5 text-sm capitalize"
+                      className="text-blue-400 py-5 text-sm capitalize"
                       activeClassName="active-submenu"
                     >
                       {child.content}
