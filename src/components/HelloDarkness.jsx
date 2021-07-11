@@ -36,7 +36,10 @@ export default function HelloDarkness() {
   const themeSwitcher = () => switchTheme(theme === DARK ? LIGHT : DARK);
   return (
     <button
-      className="bg-transparent border-none cursor-pointer"
+      aria-label={
+        theme === DARK ? 'Switch to light theme' : 'Switch to dark theme'
+      }
+      className="bg-transparent border-none cursor-pointer text-[16px] p-0 inline-flex items-center"
       onClick={themeSwitcher}
       data-testid="hello-darkness"
     >
