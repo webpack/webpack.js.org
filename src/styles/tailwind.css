@@ -18,7 +18,7 @@
   @apply hidden lg:flex !important;
 }
 .DocSearch-Button {
-  @apply bg-transparent lg:bg-gray-100 transition-colors duration-200 !important;
+  @apply bg-transparent lg:bg-gray-100 transition-colors duration-200 lg:w-[155px] !important;
 }
 .DocSearch-Button:hover {
   @apply dark:text-gray-700 !important;
