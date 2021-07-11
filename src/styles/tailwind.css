@@ -11,9 +11,11 @@
 }
 
 /* doc search */
-.DocSearch-Button-Placeholder,
+.DocSearch-Button-Placeholder {
+  @apply hidden lg:block !important;
+}
 .DocSearch-Button-Keys {
-  @apply hidden !important;
+  @apply hidden lg:flex !important;
 }
 .DocSearch-Button {
   @apply bg-transparent !important;
