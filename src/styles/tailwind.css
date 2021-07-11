@@ -18,10 +18,13 @@
   @apply hidden lg:flex !important;
 }
 .DocSearch-Button {
-  @apply bg-transparent !important;
+  @apply bg-transparent lg:bg-gray-100 transition-colors duration-200 !important;
+}
+.DocSearch-Button:hover {
+  @apply dark:text-gray-700 !important;
 }
 .DocSearch-Button .DocSearch-Search-Icon {
-  @apply text-white !important;
+  @apply text-white lg:text-gray-700 !important;
 }
 :root {
   --docsearch-primary-color: #1d78c1 !important;
