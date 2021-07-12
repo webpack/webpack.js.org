@@ -101,6 +101,6 @@ index.bundle.js     548 kB       1  [emitted]  [big]  index
 
 Many frameworks and libraries have their own recommendations on how this should be accomplished within their methodologies. Here are a few examples:
 
-- React: [Code Splitting and Lazy Loading](https://reacttraining.com/react-router/web/guides/code-splitting)
+- React: [Code Splitting and Lazy Loading](https://reactjs.org/docs/code-splitting.html)
 - Vue: [Dynamic Imports in Vue.js for better performance](https://vuedose.tips/tips/dynamic-imports-in-vue-js-for-better-performance/)
 - Angular: [Lazy Loading route configuration](https://angular.io/guide/router#milestone-6-asynchronous-routing) and [AngularJS + webpack = lazyLoad](https://medium.com/@var_bin/angularjs-webpack-lazyload-bb7977f390dd)
