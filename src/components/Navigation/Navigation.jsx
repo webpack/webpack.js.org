@@ -174,7 +174,10 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                 key={link.url}
                 className="bg-gray-100 dark:bg-gray-800 hidden md:block"
               >
-                <div className="md:max-w-[1024px] md:mx-auto md:grid md:grid-flow-col md:justify-end md:gap-x-[20px] md:px-[24px]">
+                <div
+                  className="md:max-w-[1024px] md:mx-auto md:grid md:grid-flow-col md:justify-end md:gap-x-[20px] md:px-[24px]"
+                  data-testid="sub-navigation"
+                >
                   {link.children.map((child) => (
                     <NavLink
                       key={child.url}
