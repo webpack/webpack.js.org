@@ -8,9 +8,13 @@ contributors:
   - byzyk
   - EugeneHlushko
   - AnayaDesign
+<<<<<<< HEAD
 translators:
   - QC-L
   - lcxfs1991
+=======
+  - tapanprakasht
+>>>>>>> 62277d8cd1c517f659f02cfd37d27c7433f65581
 related:
   - title: Lazy Loading ES2015 Modules in the Browser
     url: https://dzone.com/articles/lazy-loading-es2015-modules-in-the-browser
@@ -104,6 +108,6 @@ index.bundle.js     548 kB       1  [emitted]  [big]  index
 
 许多框架和类库对于如何用它们自己的方式来实现（懒加载）都有自己的建议。这里有一些例子：
 
-- React: [Code Splitting and Lazy Loading](https://reacttraining.com/react-router/web/guides/code-splitting)
+- React: [Code Splitting and Lazy Loading](https://reactjs.org/docs/code-splitting.html)
 - Vue: [Dynamic Imports in Vue.js for better performance](https://vuedose.tips/tips/dynamic-imports-in-vue-js-for-better-performance/)
 - Angular: [Lazy Loading route configuration](https://angular.io/guide/router#milestone-6-asynchronous-routing) and [AngularJS + webpack = lazyLoad](https://medium.com/@var_bin/angularjs-webpack-lazyload-bb7977f390dd)
