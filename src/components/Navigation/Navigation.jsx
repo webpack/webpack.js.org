@@ -61,6 +61,11 @@ function NavigationIcon({ children, to, title }) {
     </Link>
   );
 }
+const navigationIconProps = {
+  'aria-hidden': true,
+  fill: '#fff',
+  width: 16,
+};
 
 Navigation.propTypes = {
   pathname: PropTypes.string,
@@ -107,27 +112,17 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
               {
                 to: 'https://github.com/webpack/webpack',
                 title: 'GitHub',
-                children: (
-                  <GithubIcon aria-hidden="true" fill="#fff" width={16} />
-                ),
+                children: <GithubIcon {...navigationIconProps} />,
               },
               {
                 to: 'https://twitter.com/webpack',
                 title: 'Twitter',
-                children: (
-                  <TwitterIcon aria-hidden="true" fill="#fff" width={16} />
-                ),
+                children: <TwitterIcon {...navigationIconProps} />,
               },
               {
                 to: 'https://stackoverflow.com/questions/tagged/webpack',
                 title: 'StackOverflow',
-                children: (
-                  <StackOverflowIcon
-                    aria-hidden="true"
-                    fill="#fff"
-                    width={16}
-                  />
-                ),
+                children: <StackOverflowIcon {...navigationIconProps} />,
               },
             ].map(({ to, title, children }) => (
               <NavigationIcon key={to} to={to} title={title}>
