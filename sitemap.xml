@@ -94,10 +94,10 @@
         <loc>https://webpack.js.org/api/module-variables</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/node</loc>
+        <loc>https://webpack.js.org/api/normalmodulefactory-hooks</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/normalmodulefactory-hooks</loc>
+        <loc>https://webpack.js.org/api/node</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/parser</loc>
@@ -115,13 +115,13 @@
         <loc>https://webpack.js.org/api/stats</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/blog/2020-12-08-roadmap-2021</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/blog/printable</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/configuration</loc>
@@ -142,13 +142,13 @@
         <loc>https://webpack.js.org/concepts/manifest</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/mode</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/concepts/module-federation</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/module-resolution</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/mode</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/modules</loc>
@@ -178,9 +178,6 @@
         <loc>https://webpack.js.org/configuration/configuration-types</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/dev-server</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/configuration/devtool</loc>
     </url>
     <url>
@@ -191,6 +188,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/externals</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/dev-server</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/mode</loc>
@@ -250,13 +250,13 @@
         <loc>https://webpack.js.org/contribute/writing-a-scaffold</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/development/how-to-write-a-loader</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/development/how-to-write-a-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/development/plugin-patterns</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/development/how-to-write-a-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/development/release-process</loc>
@@ -268,10 +268,10 @@
         <loc>https://webpack.js.org/get-started/why-webpack</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/asset-management</loc>
+        <loc>https://webpack.js.org/guides/asset-modules</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/asset-modules</loc>
+        <loc>https://webpack.js.org/guides/asset-management</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/author-libraries</loc>
@@ -304,10 +304,10 @@
         <loc>https://webpack.js.org/guides/csp</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/dependency-management</loc>
+        <loc>https://webpack.js.org/guides/development</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/development</loc>
+        <loc>https://webpack.js.org/guides/dependency-management</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/development-vagrant</loc>
@@ -439,9 +439,6 @@
         <loc>https://webpack.js.org/loaders/url-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/val-loader</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/loaders/worker-loader</loc>
     </url>
     <url>
@@ -452,6 +449,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/migrate/5</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/loaders/val-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/NoEmitOnErrorsPlugin</loc>
