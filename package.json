@@ -155,7 +155,7 @@
     "react-g-analytics": "0.4.2",
     "react-helmet-async": "^1.0.9",
     "react-router-dom": "^5.2.0",
-    "react-spring": "^9.2.3",
+    "react-spring": "^9.2.4",
     "react-tiny-popover": "5",
     "react-use": "^17.2.4",
     "react-visibility-sensor": "^5.0.2",
