@@ -161,10 +161,12 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
         {/* sub navigation */}
         {links
           .filter((link) => {
+            // only those with children are displayed
             return link.children;
           })
           .map((link) => {
             if (link.isActive) {
+              // hide the children if the link is not active
               if (!link.isActive({}, location)) {
                 return null;
               }
