@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { DocSearch } from '@docsearch/react';
+import { Link as ReactDOMLink } from 'react-router-dom';
 
 // Import Components
 import Link from '../Link/Link';
@@ -158,7 +159,7 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
               disableUserPersonalization={true}
               placeholder="Search webpack documentation"
               hitComponent={({ hit, children }) => {
-                return <Link to={hit.url}>{children}</Link>;
+                return <ReactDOMLink to={hit.url}>{children}</ReactDOMLink>;
               }}
             />
           </div>
