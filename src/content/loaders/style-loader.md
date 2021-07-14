@@ -65,25 +65,14 @@ module.exports = {
 
 ## Options {#options}
 
-<<<<<<< HEAD
 |              名称               |         类型         |  默认值   | 描述                                              |
 | :-----------------------------: | :------------------: | :--------: | :------------------------------------------------------- |
 | [**`injectType`**](#injecttype) |      `{String}`      | `styleTag` | 配置把 styles 插入到 DOM 中的方式 |
 | [**`attributes`**](#attributes) |      `{Object}`      |    `{}`    | 添加自定义属性到插入的标签中              |
 |     [**`insert`**](#insert)     | `{String\|Function}` |   `head`   | 在指定的位置插入标签 |
-|    [**`styleTagTransform`**](#styletagtransform)    |      `{Function}`      | `undefined`| 当将 'style' 标签插入到 DOM 中时，转换标签和 css                                |
+|    [**`styleTagTransform`**](#styletagtransform)    |      `{String\|Function}`      | `undefined`| 当将 'style' 标签插入到 DOM 中时，转换标签和 css                                |
 |       [**`base`**](#base)       |      `{Number}`      |   `true`   | 基于 (DLLPlugin) 设置 module ID |
 |   [**`esModule`**](#esmodule)   |     `{Boolean}`      |  `false`   | 使用 ES modules 语法                                       |
-=======
-|                     Name                      |         Type         |   Default   | Description                                                |
-| :-------------------------------------------: | :------------------: | :---------: | :--------------------------------------------------------- |
-|        [**`injectType`**](#injecttype)        |      `{String}`      | `styleTag`  | Allows to setup how styles will be injected into the DOM   |
-|        [**`attributes`**](#attributes)        |      `{Object}`      |    `{}`     | Adds custom attributes to tag                              |
-|            [**`insert`**](#insert)            | `{String\|Function}` |   `head`    | Inserts tag at the given position into the DOM             |
-| [**`styleTagTransform`**](#styletagtransform) | `{String\|Function}` | `undefined` | Transform tag and css when insert 'style' tag into the DOM |
-|              [**`base`**](#base)              |      `{Number}`      |   `true`    | Sets module ID base (DLLPlugin)                            |
-|          [**`esModule`**](#esmodule)          |     `{Boolean}`      |   `true`    | Use ES modules syntax                                      |
->>>>>>> cefc73ceca447ff3d789fe986cc962cc774b7e4a
 
 ### `injectType` {#injecttype}
 
@@ -453,15 +442,11 @@ Default: `head`
 
 如果你指定 [iframe](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement) 作为插入的目标时，请确保你有足够的访问权限，styles 将会被插入到 content document 的 head 标签中。
 
-<<<<<<< HEAD
 #### `String` {#string}
 
-配置 styles 插入 DOM 的自定义 [query selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)。
-=======
-##### `Selector`
+##### `Selector` {#selector}
 
-Allows to setup custom [query selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) where styles inject into the DOM.
->>>>>>> cefc73ceca447ff3d789fe986cc962cc774b7e4a
+配置 styles 插入 DOM 的自定义 [query selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)。
 
 **webpack.config.js**
 
@@ -486,17 +471,12 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-`<style>` / `<link>` 元素将会被插入到 `body` 标签底部。
+##### `Absolute path to function` {#absolutepathtofunction}
 
-#### `Function` {#function}
-=======
-##### `Absolute path to function`
+允许设置自定义函数的绝对路径，该函数能够覆盖默认行为并且能够在任意位置插入样式。
 
-Allows to setup absolute path to custom function that allows to override default behavior and insert styles at any position.
-
-> ⚠ Do not forget that this code will be used in the browser and not all browsers support latest ECMA features like `let`, `const`, `arrow function expression` and etc. We recommend using [`babel-loader`](/loaders/babel-loader/) for support latest ECMA features.
-> ⚠ Do not forget that some DOM methods may not be available in older browsers, we recommended use only [DOM core level 2 properties](https://caniuse.com/#search=dom%20core), but it is depends what browsers you want to support
+> ⚠ 不要忘了这个函数会在浏览器中调用，由于不是所有浏览器都支持最新的 ECMA 特性，如：`let`，`const`，`arrow function expression` 等。我们推荐使用 [`babel-loader`](/loaders/babel-loader/) 以支持最新的 ECMA 特性。
+> ⚠ 不要忘了版本较旧的浏览器中某些 DOM 方法并不可用，所以我们推荐只使用 [DOM core level 2 properties](https://caniuse.com/#search=dom%20core)，但这取决于想要支持的浏览器版本。
 
 **webpack.config.js**
 
@@ -521,12 +501,13 @@ module.exports = {
 };
 ```
 
-A new `<style>`/`<link>` elements will be inserted into at bottom of `body` tag.
->>>>>>> cefc73ceca447ff3d789fe986cc962cc774b7e4a
+一个新的 `<style>` 或 `<link>` 元素将会被插入到 `body` 标签底部。
+
+#### `Function` {#function}
 
 允许覆盖默认行为并把 styles 插入到任意位置。
 
-> ⚠ 不要忘了这个函数会在浏览器中调用，由于不是所有浏览器都支持最新的 ECMA 特性，如：`let`，`const`，`allow function expression` 等，我们推荐只使用 ECMA 5 特性，但这取决于你想要支持的浏览器版本。
+> ⚠ 不要忘了这个函数会在浏览器中调用，由于不是所有浏览器都支持最新的 ECMA 特性，如：`let`，`const`，`arrow function expression` 等，我们推荐只使用 ECMA 5 特性，但这取决于你想要支持的浏览器版本。
 
 > ⚠ 不要忘了版本较旧的浏览器中某些 DOM 方法并不可用，所以我们推荐只使用 [DOM core level 2 properties](https://caniuse.com/#search=dom%20core)，但这取决于想要支持的浏览器版本。
 
@@ -573,20 +554,14 @@ module.exports = {
 
 ### `styleTagTransform` {#styletagtransform}
 
-<<<<<<< HEAD
-类型：`Function`
+类型：`String | Function`
 默认值：`undefined`
 
-当将 'style' 标签插入到 DOM 中时，转换标签和 css。
-=======
-Type: `String | Function`
-Default: `undefined`
+#### `String` {#string}
 
-#### `String`
+允许设置自定义函数的绝对路径，该函数能够覆盖 styleTagTransform 默认行为。
 
-Allows to setup absolute path to custom function that allows to override default behavior styleTagTransform.
-
-> ⚠ Do not forget that this code will be used in the browser and not all browsers support latest ECMA features like `let`, `const`, `arrow function expression` and etc, we recommend use only ECMA 5 features, but it is depends what browsers you want to support
+> ⚠ 不要忘了这个函数会在浏览器中调用，由于不是所有浏览器都支持最新的 ECMA 特性，如：`let`，`const`，`arrow function expression` 等，我们推荐只使用 ECMA 5 特性，但这取决于你想要支持的浏览器版本。
 
 **webpack.config.js**
 
@@ -612,10 +587,9 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `Function` {#function}
 
-Transform tag and css when insert 'style' tag into the DOM.
->>>>>>> cefc73ceca447ff3d789fe986cc962cc774b7e4a
+当将 'style' 标签插入到 DOM 中时，转换标签和 css。
 
 > ⚠ 不要忘记该代码会在浏览器中使用，并且不是所有的浏览器都支持想 `let`、`const`、`箭头函数` 等最新的 ECMA 特性，我们建议仅使用 ECMA5 特性，但这取决于你想支持什么浏览器。
 > ⚠ 不要忘记有一些 DOM 方法在老的浏览器中是不可用的，我们推荐只使用 [DOM core level 2 properties](https://caniuse.com/#search=dom%20core)，但这取决于你想支持什么浏览器。
