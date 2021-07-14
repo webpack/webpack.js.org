@@ -158,15 +158,17 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
               indexName="webpack-js-org"
               disableUserPersonalization={true}
               placeholder="Search webpack documentation"
+              transformItems={(items) =>
+                items.map(({ url, ...others }) => {
+                  const { origin } = new URL(url);
+                  return {
+                    ...others,
+                    url: url.replace(new RegExp(`^${origin}`), ''),
+                  };
+                })
+              }
               hitComponent={({ hit, children }) => {
-                const { origin } = new URL(hit.url);
-                return (
-                  <ReactDOMLink
-                    to={hit.url.replace(new RegExp(`^${origin}`), '')}
-                  >
-                    {children}
-                  </ReactDOMLink>
-                );
+                return <ReactDOMLink to={hit.url}>{children}</ReactDOMLink>;
               }}
             />
           </div>
