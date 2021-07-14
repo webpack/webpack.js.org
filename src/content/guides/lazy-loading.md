@@ -8,6 +8,7 @@ contributors:
   - byzyk
   - EugeneHlushko
   - AnayaDesign
+  - tapanprakasht
 translators:
   - QC-L
   - lcxfs1991
@@ -26,7 +27,7 @@ T> 本指南继承自[代码分离](/guides/code-splitting)。如果你尚未阅
 
 我们在[代码分离](/guides/code-splitting#dynamic-imports)中的例子基础上，进一步做些调整来说明这个概念。那里的代码确实会在脚本运行的时候产生一个分离的代码块 `lodash.bundle.js` ，在技术概念上“懒加载”它。问题是加载这个包并不需要用户的交互 - 意思是每次加载页面的时候都会请求它。这样做并没有对我们有很多帮助，还会对性能产生负面影响。
 
-我们试试不同的做法。我们增加一个交互，当用户点击按钮的时候用 console 打印一些文字。但是会等到第一次交互的时候再加载那个代码块（`print.js`）。为此，我们返回到代码分离的例子中，把 `lodash` 放到主代码块中，重新运行 *代码分离* 中的代码 [final _Dynamic Imports_ example](/guides/code-splitting#dynamic-imports)。
+我们试试不同的做法。我们增加一个交互，当用户点击按钮的时候用 console 打印一些文字。但是会等到第一次交互的时候再加载那个代码块（`print.js`）。为此，我们返回到代码分离的例子中，把 `lodash` 放到主代码块中，重新运行 _代码分离_ 中的代码 [final _Dynamic Imports_ example](/guides/code-splitting#dynamic-imports)。
 
 **project**
 
@@ -104,6 +105,6 @@ index.bundle.js     548 kB       1  [emitted]  [big]  index
 
 许多框架和类库对于如何用它们自己的方式来实现（懒加载）都有自己的建议。这里有一些例子：
 
-- React: [Code Splitting and Lazy Loading](https://reacttraining.com/react-router/web/guides/code-splitting)
+- React: [Code Splitting and Lazy Loading](https://reactjs.org/docs/code-splitting.html)
 - Vue: [Dynamic Imports in Vue.js for better performance](https://vuedose.tips/tips/dynamic-imports-in-vue-js-for-better-performance/)
 - Angular: [Lazy Loading route configuration](https://angular.io/guide/router#milestone-6-asynchronous-routing) and [AngularJS + webpack = lazyLoad](https://medium.com/@var_bin/angularjs-webpack-lazyload-bb7977f390dd)
