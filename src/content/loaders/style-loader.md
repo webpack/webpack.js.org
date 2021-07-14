@@ -70,7 +70,7 @@ module.exports = {
 | [**`injectType`**](#injecttype) |      `{String}`      | `styleTag` | 配置把 styles 插入到 DOM 中的方式 |
 | [**`attributes`**](#attributes) |      `{Object}`      |    `{}`    | 添加自定义属性到插入的标签中              |
 |     [**`insert`**](#insert)     | `{String\|Function}` |   `head`   | 在指定的位置插入标签 |
-|    [**`styleTagTransform`**](#styletagtransform)    |      `{Function}`      | `undefined`| 当将 'style' 标签插入到 DOM 中时，转换标签和 css                                |
+|    [**`styleTagTransform`**](#styletagtransform)    |      `{String\|Function}`      | `undefined`| 当将 'style' 标签插入到 DOM 中时，转换标签和 css                                |
 |       [**`base`**](#base)       |      `{Number}`      |   `true`   | 基于 (DLLPlugin) 设置 module ID |
 |   [**`esModule`**](#esmodule)   |     `{Boolean}`      |  `false`   | 使用 ES modules 语法                                       |
 
@@ -444,6 +444,8 @@ Default: `head`
 
 #### `String` {#string}
 
+##### `Selector` {#selector}
+
 配置 styles 插入 DOM 的自定义 [query selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)。
 
 **webpack.config.js**
@@ -469,13 +471,43 @@ module.exports = {
 };
 ```
 
-`<style>` / `<link>` 元素将会被插入到 `body` 标签底部。
+##### `Absolute path to function` {#absolutepathtofunction}
+
+允许设置自定义函数的绝对路径，该函数能够覆盖默认行为并且能够在任意位置插入样式。
+
+> ⚠ 不要忘了这个函数会在浏览器中调用，由于不是所有浏览器都支持最新的 ECMA 特性，如：`let`，`const`，`arrow function expression` 等。我们推荐使用 [`babel-loader`](/loaders/babel-loader/) 以支持最新的 ECMA 特性。
+> ⚠ 不要忘了版本较旧的浏览器中某些 DOM 方法并不可用，所以我们推荐只使用 [DOM core level 2 properties](https://caniuse.com/#search=dom%20core)，但这取决于想要支持的浏览器版本。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: "style-loader",
+            options: {
+              insert: require.resolve("modulePath"),
+            },
+          },
+          "css-loader",
+        ],
+      },
+    ],
+  },
+};
+```
+
+一个新的 `<style>` 或 `<link>` 元素将会被插入到 `body` 标签底部。
 
 #### `Function` {#function}
 
 允许覆盖默认行为并把 styles 插入到任意位置。
 
-> ⚠ 不要忘了这个函数会在浏览器中调用，由于不是所有浏览器都支持最新的 ECMA 特性，如：`let`，`const`，`allow function expression` 等，我们推荐只使用 ECMA 5 特性，但这取决于你想要支持的浏览器版本。
+> ⚠ 不要忘了这个函数会在浏览器中调用，由于不是所有浏览器都支持最新的 ECMA 特性，如：`let`，`const`，`arrow function expression` 等，我们推荐只使用 ECMA 5 特性，但这取决于你想要支持的浏览器版本。
 
 > ⚠ 不要忘了版本较旧的浏览器中某些 DOM 方法并不可用，所以我们推荐只使用 [DOM core level 2 properties](https://caniuse.com/#search=dom%20core)，但这取决于想要支持的浏览器版本。
 
@@ -522,8 +554,40 @@ module.exports = {
 
 ### `styleTagTransform` {#styletagtransform}
 
-类型：`Function`
+类型：`String | Function`
 默认值：`undefined`
+
+#### `String` {#string}
+
+允许设置自定义函数的绝对路径，该函数能够覆盖 styleTagTransform 默认行为。
+
+> ⚠ 不要忘了这个函数会在浏览器中调用，由于不是所有浏览器都支持最新的 ECMA 特性，如：`let`，`const`，`arrow function expression` 等，我们推荐只使用 ECMA 5 特性，但这取决于你想要支持的浏览器版本。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: "style-loader",
+            options: {
+              injectType: "styleTag",
+              styleTagTransform: require.resolve("module-path"),
+            },
+          },
+          "css-loader",
+        ],
+      },
+    ],
+  },
+};
+```
+
+#### `Function` {#function}
 
 当将 'style' 标签插入到 DOM 中时，转换标签和 css。
 
