@@ -155,6 +155,11 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
             <DocSearch
               apiKey={'fac401d1a5f68bc41f01fb6261661490'}
               indexName="webpack-js-org"
+              disableUserPersonalization={true}
+              placeholder="Search webpack documentation"
+              hitComponent={({ hit, children }) => {
+                return <Link to={hit.url}>{children}</Link>;
+              }}
             />
           </div>
         </div>
