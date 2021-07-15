@@ -4993,10 +4993,10 @@ eslint-config-prettier@^8.3.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.3.0.tgz#f7471b20b6fe8a9a9254cc684454202886a2dd7a"
   integrity sha512-BgZuLUSeKzvlL/VUjx/Yb787VQ26RU3gGjA3iiFvdsp/2bMfVIWUVP7tjxtjS0e+HP409cPlPvNkQloz8C91ew==
 
-eslint-mdx@^1.14.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/eslint-mdx/-/eslint-mdx-1.14.0.tgz#01b65957850e811d50aaaf48fcf51c8313532d58"
-  integrity sha512-GuOGmNwZwvVdqyTHP3sPBqNOFsczQ8Yfq3BCNKYyfhsBGrUBm3sHnTraHlPlc9Z5rgBPP3ECN8/zTwDKN9HwyA==
+eslint-mdx@^1.14.1:
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/eslint-mdx/-/eslint-mdx-1.14.1.tgz#c4133f3383d5b58315efc01ddc7d139eb8b72dd9"
+  integrity sha512-6QxqRRghkl3i0NyayvED2zTN0kZzKoNMiGTYSnU3WMykm/Koptau//BqkIff+sEVoqcq1Q5z5PkrVBlYDuw3EA==
   dependencies:
     remark-mdx "^1.6.22"
     remark-parse "^8.0.3"
@@ -5017,18 +5017,18 @@ eslint-plugin-markdown@^2.2.0:
   dependencies:
     mdast-util-from-markdown "^0.8.5"
 
-eslint-plugin-mdx@^1.14.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-mdx/-/eslint-plugin-mdx-1.14.0.tgz#360d89e38109624244f3d45ffc10c86d90a5af92"
-  integrity sha512-41jl95Hl8ZbriaagliMjD9v5R+PhKOBc6nArfwTCve0VEOnCTsikMM3I2F7CcUYc8hsMMlsHnMxfkDB7Rgxmxw==
+eslint-plugin-mdx@^1.14.1:
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-mdx/-/eslint-plugin-mdx-1.14.1.tgz#d3e07ac38107ebdabd6a979853d1aae44331e010"
+  integrity sha512-1FmVGuZSPhHl0x/tWMOSBtE3DcWFaAJmIaWK0uBlUsC797TGrCtXd87xR4D+phbl1ii17pfM6gjgTbCKGH0Afg==
   dependencies:
     cosmiconfig "^7.0.0"
-    eslint-mdx "^1.14.0"
+    eslint-mdx "^1.14.1"
     eslint-plugin-markdown "^2.2.0"
     remark-mdx "^1.6.22"
     remark-parse "^8.0.3"
     remark-stringify "^8.1.1"
-    synckit "^0.2.0"
+    synckit "^0.3.4"
     tslib "^2.3.0"
     unified "^9.2.1"
     vfile "^4.2.1"
@@ -11855,10 +11855,10 @@ symbol-tree@^3.2.2, symbol-tree@^3.2.4:
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
 
-synckit@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/synckit/-/synckit-0.2.0.tgz#f42e6d37c1ec7e79c2b12e70f854f0e9519248d8"
-  integrity sha512-kbpgqlOu36aTFTWczzDk3I7Hf70V+BPGnUZ89z0RsLw666hpFf2m7/PS7OuNmDhazWaSJwv0LVBc2epyxSpl+w==
+synckit@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/synckit/-/synckit-0.3.4.tgz#8f0c2b1019663633d56d43d09589494d74654ab3"
+  integrity sha512-t6qVl+gzR6qMkrP5pW+sxGe0mVx/O7vj29ir9k4Lw9BacPBE/cKHMvcROJlFBgNHFW94etQL/sBYFq4uur6C6A==
   dependencies:
     tslib "^2.3.0"
     uuid "^8.3.2"
