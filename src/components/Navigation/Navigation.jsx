@@ -200,7 +200,7 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                       key={child.url}
                       to={child.url}
                       title={child.title}
-                      className="text-blue-400 py-5 text-sm capitalize"
+                      className="text-blue-400 py-5 text-sm capitalize hover:text-black dark:hover:text-white"
                       activeClassName="active-submenu"
                     >
                       {child.content}
