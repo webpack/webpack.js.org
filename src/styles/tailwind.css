@@ -11,21 +11,21 @@
 }
 
 /* doc search */
+:root {
+  --docsearch-primary-color: #1d78c1 !important;
+}
+.DocSearch-Button {
+  @apply bg-transparent lg:bg-gray-500 transition duration-200 lg:w-[155px] !important;
+}
 .DocSearch-Button-Placeholder {
-  @apply hidden lg:block !important;
+  @apply hidden lg:font-light lg:text-sm lg:block lg:text-gray-200 lg:dark:text-gray-300 transition duration-200 !important;
+}
+.DocSearch-Button:hover .DocSearch-Button-Placeholder {
+  @apply lg:text-gray-100 !important;
 }
 .DocSearch-Button-Keys {
   @apply hidden lg:flex !important;
 }
-.DocSearch-Button {
-  @apply bg-transparent lg:bg-gray-100 transition-colors duration-200 lg:w-[155px] !important;
-}
-.DocSearch-Button:hover {
-  @apply dark:text-gray-700 !important;
-}
 .DocSearch-Button .DocSearch-Search-Icon {
-  @apply text-white lg:text-gray-700 !important;
-}
-:root {
-  --docsearch-primary-color: #1d78c1 !important;
+  @apply text-white lg:text-gray-100 !important;
 }
