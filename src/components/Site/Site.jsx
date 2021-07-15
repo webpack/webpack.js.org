@@ -35,16 +35,12 @@ import Favicon from '../../favicon.ico';
 import Logo from '../../assets/logo-on-white-bg.svg';
 import OgImage from '../../assets/icon-pwa-512x512.png';
 
-// Import Constants
-import { THEME, THEME_LOCAL_STORAGE_KEY } from '../../constants/theme';
-
 // Load Styling
 import '../../styles/index';
 import './Site.scss';
 
 // Load Content Tree
 import Content from '../../_content.json';
-import { useLocalStorage } from 'react-use';
 
 import clientSideRedirections from './clientSideRedirections';
 
@@ -64,26 +60,6 @@ Site.propTypes = {
 };
 function Site(props) {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [theme, setTheme] = useLocalStorage(
-    THEME_LOCAL_STORAGE_KEY,
-    THEME.LIGHT
-  );
-
-  const applyTheme = (theme) => {
-    document.documentElement.setAttribute('data-theme', theme);
-    if (theme === THEME.DARK) {
-      document.documentElement.classList.add(THEME.DARK);
-    } else {
-      document.documentElement.classList.remove(THEME.DARK);
-    }
-  };
-  useEffect(() => {
-    applyTheme(theme);
-  }, [theme]);
-
-  const switchTheme = (theme) => {
-    setTheme(theme);
-  };
 
   /**
    * Toggle the mobile sidebar
@@ -255,16 +231,15 @@ function Site(props) {
             pathname={location.pathname}
             hash={location.hash}
             toggleSidebar={_toggleSidebar}
-            theme={theme}
-            switchTheme={switchTheme}
             links={[
               {
                 content: 'Documentation',
                 url: '/concepts/',
-                isActive: (url) =>
-                  /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
-                    url
-                  ),
+                isActive: (_, location) => {
+                  return /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
+                    location.pathname
+                  );
+                },
                 children: _strip(
                   sections.filter(
                     ({ name }) => excludeItems.includes(name) === false

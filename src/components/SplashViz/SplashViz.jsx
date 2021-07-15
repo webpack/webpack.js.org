@@ -14,7 +14,7 @@ import './SplashViz.scss';
 export default class SplashViz extends Component {
   render() {
     return (
-      <section className="splash-viz">
+      <section className="splash-viz dark:bg-gray-900">
         <h1 className="splash-viz__heading">
           <span> bundle your</span>
           <TextRotator delay={5000} repeatDelay={5000} maxWidth={110}>
