@@ -4,7 +4,7 @@
 
 /* some customized rules */
 .active-menu {
-  @apply text-white dark:text-white font-normal !important;
+  @apply text-blue-200 !important;
 }
 .active-submenu {
   @apply text-black dark:text-white !important;
