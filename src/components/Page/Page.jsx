@@ -118,7 +118,6 @@ export default function Page(props) {
 
         {loadTranslators && (
           <div className="contributors__section">
-            <hr />
             <h3>译者</h3>
             <Translators translators={translators} />
           </div>
