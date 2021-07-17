@@ -278,6 +278,23 @@ webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
 );
 ```
 
+## output.crossOriginLoading
+
+`boolean = false` `string: 'anonymous' | 'use-credentials'`
+
+Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. Only takes effect when [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading on-demand chunks, by adding script tags.
+
+- `'anonymous'` - Enable cross-origin loading **without credentials**
+- `'use-credentials'` - Enable cross-origin loading **with credentials**
+
+## `output.devtoolFallbackModuleFilenameTemplate`
+
+`string` `function (info)`
+
+A fallback used when the template string or function above yields duplicates.
+
+See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate).
+
 ## `output.enabledChunkLoadingTypes`
 
 `[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
@@ -295,23 +312,6 @@ module.exports = {
   },
 };
 ```
-
-## `output.crossOriginLoading`
-
-`boolean = false` `string: 'anonymous' | 'use-credentials'`
-
-Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. Only takes effect when [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading on-demand chunks, by adding script tags.
-
-- `'anonymous'` - Enable cross-origin loading **without credentials**
-- `'use-credentials'` - Enable cross-origin loading **with credentials**
-
-## `output.devtoolFallbackModuleFilenameTemplate`
-
-`string` `function (info)`
-
-A fallback used when the template string or function above yields duplicates.
-
-See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate).
 
 ## `output.devtoolModuleFilenameTemplate`
 
