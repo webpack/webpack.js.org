@@ -17,57 +17,11 @@ repo: https://github.com/webpack-contrib/eslint-webpack-plugin
 
 
 
-> A ESLint plugin for webpack
+This plugin uses [`eslint`](https://eslint.org/) to find and fix problems in your JavaScript code
 
-## About plugin
+## Getting Started
 
-The plugin was born with the purpose of solving some problems of the [eslint-loader](https://github.com/webpack-contrib/eslint-loader).
-
-|                                  | eslint-webpack-plugin |      eslint-loader       |
-| -------------------------------- | :-------------------: | :----------------------: |
-| Easy configuration               |  :heavy_check_mark:   | :heavy_multiplication_x: |
-| Generate unique an output report |  :heavy_check_mark:   | :heavy_multiplication_x: |
-| Using cache directly from eslint |  :heavy_check_mark:   | :heavy_multiplication_x: |
-| Lint only changed files          |  :heavy_check_mark:   | :heavy_multiplication_x: |
-
-## Migrate from `eslint-loader`
-
-The loader `eslint-loader` will be deprecated soon, please use this plugin instead.
-
-Before:
-
-```js
-module.exports = {
-  // ...
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-        options: {
-          // eslint options (if necessary)
-        },
-      },
-    ],
-  },
-  // ...
-};
-```
-
-After:
-
-```js
-const ESLintPlugin = require('eslint-webpack-plugin');
-
-module.exports = {
-  // ...
-  plugins: [new ESLintPlugin(options)],
-  // ...
-};
-```
-
-## Install
+To begin, you'll need to install `eslint-webpack-plugin`:
 
 ```bash
 npm install eslint-webpack-plugin --save-dev
@@ -79,9 +33,7 @@ npm install eslint-webpack-plugin --save-dev
 npm install eslint --save-dev
 ```
 
-## Usage
-
-In your webpack configuration:
+Then add the plugin to your webpack config. For example:
 
 ```js
 const ESLintPlugin = require('eslint-webpack-plugin');

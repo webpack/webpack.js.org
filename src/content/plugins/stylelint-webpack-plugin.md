@@ -17,23 +17,23 @@ repo: https://github.com/webpack-contrib/stylelint-webpack-plugin
 
 
 
-> A Stylelint plugin for webpack
+This plugin uses [`stylelint`](https://stylelint.io/) that helps you avoid errors and enforce conventions in your styles.
 
-## Install
+## Getting Started
+
+To begin, you'll need to install `stylelint-webpack-plugin`:
 
 ```bash
 npm install stylelint-webpack-plugin --save-dev
 ```
 
-**Note**: You also need to install `stylelint` from npm, if you haven't already:
+**Note**: You also need to install `stylelint >= 13` from npm, if you haven't already:
 
 ```bash
 npm install stylelint --save-dev
 ```
 
-## Usage
-
-In your webpack configuration:
+Then add the plugin to your webpack config. For example:
 
 ```js
 const StylelintPlugin = require('stylelint-webpack-plugin');
