@@ -19,23 +19,39 @@ translators:
 
 
 
+<<<<<<< HEAD
 > 一个为 webpack 提供的 Stylelint 插件
 
 ## 安装 {#install}
+=======
+This plugin uses [`stylelint`](https://stylelint.io/) that helps you avoid errors and enforce conventions in your styles.
+
+## Getting Started
+
+To begin, you'll need to install `stylelint-webpack-plugin`:
+>>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
 
 ```bash
 npm install stylelint-webpack-plugin --save-dev
 ```
 
+<<<<<<< HEAD
 **注意**：如果你还没有安装 `stylelint`，请先用 npm 进行安装：
+=======
+**Note**: You also need to install `stylelint >= 13` from npm, if you haven't already:
+>>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
 
 ```bash
 npm install stylelint --save-dev
 ```
 
+<<<<<<< HEAD
 ## 用法 {#usage}
 
 在你的 webpack 配置中：
+=======
+Then add the plugin to your webpack config. For example:
+>>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
 
 ```js
 const StylelintPlugin = require('stylelint-webpack-plugin');
