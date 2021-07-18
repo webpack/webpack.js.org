@@ -24,13 +24,9 @@ translators:
 
 ## 快速开始 {#getting-started}
 
-<<<<<<< HEAD
-首先，你需要先安装 `css-loader`：
-=======
-> ⚠ To use css-loader, webpack@5 is required
+如果要使用 css-loader，你需要安装 webpack@5
 
-To begin, you'll need to install `css-loader`:
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+首先，你需要先安装 `css-loader`：
 
 ```console
 npm install --save-dev css-loader
@@ -59,15 +55,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-**仅针对 webpack v4：**
-
-[file-loader](/loaders/file-loader/) 和 [url-loader](/loaders/url-loader/) 能够非常好的处理资源文件，需在配置文件中进行配置，相关配置请[参阅](https://github.com/webpack-contrib/css-loader#assets)。
-
 然后运行 `webpack`。
-=======
-And run `webpack` via your preferred method.
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
 
 ### `toString` {#tostring}
 
@@ -124,42 +112,24 @@ module.exports = {
 
 ## Options {#options}
 
-<<<<<<< HEAD
 |                 名称                  |            类型             |                   默认值                       | 描述                                                |
 | :-----------------------------------: | :-------------------------: | :--------------------------------------------: | :-------------------------------------------------- |
-|           **[`url`](#url)**           |    `{Boolean\|Function}`    |                     `true`                     | 启用/禁用 `url`/`image-set` 函数处理                |
+|           **[`url`](#url)**           |    `{Boolean\|Function}`    |                     `true`                     | 启用/禁用 `url()`/`image-set()` 函数处理                |
 |        **[`import`](#import)**        |    `{Boolean\|Function}`    |                     `true`                     | 启用/禁用 `@import` 规则进行处理                    |
 |       **[`modules`](#modules)**       | `{Boolean\|String\|Object}` |                 `{auto: true}`                 | 启用/禁用 CSS 模块及其配置                          |
 |     **[`sourceMap`](#sourcemap)**     |         `{Boolean}`         |               `compiler.devtool`               | 启用/禁用生成 SourceMap                             |
 | **[`importLoaders`](#importloaders)** |         `{Number}`          |                      `0`                       | 启用/禁用或者设置在 css-loader 前应用的 loader 数量 |
 |      **[`esModule`](#esmodule)**      |         `{Boolean}`         |                     `true`                     | 使用 ES 模块语法                                    |
-=======
-|                 Name                  |            Type             |      Default       | Description                                                                                                              |
-| :-----------------------------------: | :-------------------------: | :----------------: | :----------------------------------------------------------------------------------------------------------------------- |
-|           **[`url`](#url)**           |     `{Boolean\|Object}`     |       `true`       | Allows to enables/disables `url()`/`image-set()` functions handling                                                      |
-|        **[`import`](#import)**        |     `{Boolean\|Object}`     |       `true`       | Allows to enables/disables `@import` at-rules handling                                                                   |
-|       **[`modules`](#modules)**       | `{Boolean\|String\|Object}` |   `{auto: true}`   | Allows to enables/disables or setup CSS Modules options                                                                  |
-|     **[`sourceMap`](#sourcemap)**     |         `{Boolean}`         | `compiler.devtool` | Enables/Disables generation of source maps                                                                               |
-| **[`importLoaders`](#importloaders)** |         `{Number}`          |        `0`         | Allows enables/disables or setups number of loaders applied before CSS loader for `@import`/CSS Modules and ICSS imports |
-|      **[`esModule`](#esmodule)**      |         `{Boolean}`         |       `true`       | Use ES modules syntax                                                                                                    |
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
 
 ### `url` {#url}
 
-<<<<<<< HEAD
-类型: `Boolean|Function`
+类型: `Boolean|Object`
 默认值: `true`
 
-启用/禁用 `url`/`image-set` 函数进行处理。如果设置为 `false`，`css-loader` 将不会解析 `url` 或者 `image-set` 中的任何路径。还可以传递给一个函数基于资源的路径动态地控制这种行为。绝对路径和根目录的相对 URL 现在会被解析(版本 [4.0.0](https://github.com/webpack-contrib/css-loader/blob/master/CHANGELOG.md#400-2020-07-25)。
-=======
-Type: `Boolean|Object`
-Default: `true`
-
-Allow to enable/disables handling the CSS functions `url` and `image-set`.
-If set to `false`, `css-loader` will not parse any paths specified in `url` or `image-set`.
-A function can also be passed to control this behavior dynamically based on the path to the asset.
-Starting with version [4.0.0](https://github.com/webpack-contrib/css-loader/blob/master/CHANGELOG.md#400-2020-07-25), absolute paths are parsed based on the server root.
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+启用/禁用 `url`/`image-set` 函数进行处理。
+如果设置为 `false`，`css-loader` 将不会解析 `url` 或者 `image-set` 中的任何路径。
+还可以传递给一个函数基于资源的路径动态地控制这种行为。
+绝对路径和根目录的相对 URL 现在会被解析(版本 [4.0.0](https://github.com/webpack-contrib/css-loader/blob/master/CHANGELOG.md#400-2020-07-25)。
 
 示例解决方案:
 
@@ -202,11 +172,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-#### `Function` {#function}
-=======
-#### `Object`
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+#### `Object` {#object}
 
 允许过滤 `url()`。所有过滤的内容 `url()` 都不会解析（保留编写时的代码）。
 
@@ -220,24 +186,14 @@ module.exports = {
         test: /\.css$/i,
         loader: "css-loader",
         options: {
-<<<<<<< HEAD
-          url: (url, resourcePath) => {
-            // resourcePath - css 文件的路径
-
-            // 不处理 `img.png` url
-            if (url.includes("img.png")) {
-              return false;
-            }
-=======
           url: {
             filter: (url, resourcePath) => {
-              // resourcePath - path to css file
+              // resourcePath - css 文件的路径
 
-              // Don't handle `img.png` urls
+              // 不处理 `img.png` url
               if (url.includes("img.png")) {
                 return false;
               }
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
 
               return true;
             },
@@ -251,19 +207,11 @@ module.exports = {
 
 ### `import` {#import}
 
-<<<<<<< HEAD
-类型: `Boolean|Function`
+类型: `Boolean|Object`
 默认值: `true`
 
-启用/禁用 `@import` 规则进行处理
+启用/禁用 `@import` 规则进行处理。
 控制 `@import` 的解析。`@import` 中的绝对 URL 会被直接移到运行时去处理。
-=======
-Type: `Boolean|Object`
-Default: `true`
-
-Allows to enables/disables `@import` at-rules handling.
-Control `@import` resolving. Absolute urls in `@import` will be moved in runtime code.
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
 
 示例解决方案：
 
@@ -307,20 +255,16 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-#### `Function` {#function}
-=======
-#### `Object`
+#### `Object` {#object}
 
-|          Name           |     Type     |   Default   | Description               |
+|          名称           |     类型     |   默认值   | 描述               |
 | :---------------------: | :----------: | :---------: | :------------------------ |
-| **[`filter`](#filter)** | `{Function}` | `undefined` | Allow to filter `@import` |
+| **[`filter`](#filter)** | `{Function}` | `undefined` | 允许过滤 `@import` |
 
-##### `filter`
+##### `filter` {filter}
 
-Type: `Function`
-Default: `undefined`
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+类型：`Function`
+默认值：`undefined`
 
 允许过滤 `@import`。所有过滤的内容 `@import` 都不会解析（保留编写时的代码）。
 
@@ -334,24 +278,14 @@ module.exports = {
         test: /\.css$/i,
         loader: "css-loader",
         options: {
-<<<<<<< HEAD
-          import: (url, media, resourcePath) => {
-            // resourcePath - css 文件路径
-
-            // 不处理 `style.css` 的导入
-            if (url.includes("style.css")) {
-              return false;
-            }
-=======
           import: {
             filter: (url, media, resourcePath) => {
-              // resourcePath - path to css file
+              // resourcePath - css 文件路径
 
-              // Don't handle `style.css` import
+              // 不处理 `style.css` 的导入
               if (url.includes("style.css")) {
                 return false;
               }
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
 
               return true;
             },
@@ -365,23 +299,16 @@ module.exports = {
 
 ### `modules` {#modules}
 
-<<<<<<< HEAD
 类型：`Boolean|String|Object`
-默认值：基于文件名，所有匹配正则表达式 `/\.module\.\w+$/i.test(filename)` 的文件为 `true`，你可以参考[这里](https://github.com/webpack-contrib/css-loader#auto)获取更多的信息
+默认值：`undefined`
 
-启用/禁用 CSS 模块及其配置
-=======
-Type: `Boolean|String|Object`
-Default: `undefined`
+启用/禁用 CSS 模块或者 ICSS 及其配置：
 
-Allows to enable/disable CSS Modules or ICSS and setup configuration:
-
-- `undefined` - enable CSS modules for all files matching `/\.module\.\w+$/i.test(filename)` and `/\.icss\.\w+$/i.test(filename)` regexp.
-- `true` - enable CSS modules for all files.
-- `false` - disables CSS Modules for all files.
-- `string` - disables CSS Modules for all files and set the `mode` option, more information you can read [here](https://github.com/webpack-contrib/css-loader#mode)
-- `object` - enable CSS modules for all files, if `modules.auto` option is not specified, otherwise the `modules.auto` option will determine whether if it is CSS modules or not, more information you can read [here](https://github.com/webpack-contrib/css-loader#auto)
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+- `undefined` - 为所有匹配 `/\.module\.\w+$/i.test(filename)` 与 `/\.icss\.\w+$/i.test(filename)` 正则表达式的文件启用 CSS 模块。
+- `true` - 对所有文件启用 CSS 模块。
+- `false` - 对所有文件禁用 CSS 模块。
+- `string` - 对所有文件禁用 CSS 模块并设置 `mode` 配置项，你可以在 [这里](https://github.com/webpack-contrib/css-loader#mode) 获得更多信息。
+- `object` - 如果没有配置 `modules.auto` 则对所有文件启用 CSS 模块，否则 `modules.auto` 配置项则会决定其是否为 CSS 模块，你可以在 [这里](https://github.com/webpack-contrib/css-loader#auto) 获得更多信息。
 
 该 `modules` 选项启用/禁用 **[CSS 模块](https://github.com/css-modules/css-modules)** 规范并且设置基本的行为。
 
@@ -639,73 +566,27 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-##### `compileType` {#compiletype}
-
-Type: `'module' | 'icss'`
-Default: `'module'`
-
-Controls the level of compilation applied to the input styles.
-
-The `module` handles `class` and `id` scoping and `@value` values.
-The `icss` will only compile the low level `Interoperable CSS` format for declaring `:import` and `:export` dependencies between CSS and other languages.
-
-ICSS underpins CSS Module support, and provides a low level syntax for other tools to implement CSS-module variations of their own.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        loader: "css-loader",
-        options: {
-          modules: {
-            compileType: "icss",
-          },
-        },
-      },
-    ],
-  },
-};
-```
-
 ##### `auto` {#auto}
 
 类型：`Boolean|RegExp|Function`
-默认：`'true'`
+默认值：`undefined`
 
-允许基于文件名自动启用 CSS 模块。
-=======
-##### `auto`
+当 `modules` 配置项为对象时允许基于文件名自动启用 CSS 模块或者 ICSS。
 
-Type: `Boolean|RegExp|Function`
-Default: `undefined`
+有效值：
 
-Allows auto enable CSS modules/ICSS based on filename when `modules` option is object.
-
-Possible values:
-
-- `undefined` - enable CSS modules for all files.
-- `true` - enable CSS modules for all files matching `/\.module\.\w+$/i.test(filename)` and `/\.icss\.\w+$/i.test(filename)` regexp.
-- `false` - disables CSS Modules.
-- `RegExp` - enable CSS modules for all files matching `/RegExp/i.test(filename)` regexp.
-- `function` - enable CSS Modules for files based on the filename satisfying your filter function check.
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+- `undefined` - 为所有文件启用 CSS 模块。
+- `true` - 为所有匹配 `/\.module\.\w+$/i.test(filename)` 和 `/\.icss\.\w+$/i.test(filename)` 正则表达式的文件启用 CSS 模块。
+- `false` - 禁用 CSS 模块。
+- `RegExp` - 为所有匹配 `/RegExp/i.test(filename)` 正则表达式的文件禁用 CSS 模块。
+- `function` - 为所有通过基于文件名的过滤函数校验的文件启用 CSS 模块。
 
 ###### `Boolean` {#boolean}
 
 可能的值：
 
-<<<<<<< HEAD
-- `true` - 启用 CSS 模块或者可交互 CSS 格式，为所有满足 `/\.module(s)?\.\w+$/i.test(filename)` 条件的文件设置 [`modules.compileType`](#compiletype) 选项为 `module`，或者为所有满足 `/\.icss\.\w+$/i.test(filename)` 条件的文件设置 [`modules.compileType`](#compiletype) 选项为 `icss`
+- `true` - 启用 CSS 模块或者可交互 CSS 格式，为所有满足 `/\.module(s)?\.\w+$/i.test(filename)` 条件的文件设置 [`modules.mode`](#mode) 选项为 `local`，或者为所有满足 `/\.icss\.\w+$/i.test(filename)` 条件的文件设置 [`modules.mode`](#mode) 选项为 `icss`
 - `false` - 禁用 css 模块或者基于文件名的可交互 CSS 格式
-=======
-- `true` - enables CSS modules or interoperable CSS format, sets the [`modules.mode`](#mode) option to `local` value for all files which satisfy `/\.module(s)?\.\w+$/i.test(filename)` condition or sets the [`modules.mode`](#mode) option to `icss` value for all files which satisfy `/\.icss\.\w+$/i.test(filename)` condition
-- `false` - disables CSS modules or interoperable CSS format based on filename
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
 
 **webpack.config.js**
 
@@ -782,22 +663,16 @@ module.exports = {
 
 设置 `mode` 选项。需要 `local` 模式时可以忽略该值。
 
-<<<<<<< HEAD
+控制应用于输入样式的编译级别。
+
+`local`、`global` 和 `pure` 处理 `class` 和 `id` 域以及 `@value` 值。
+`icss` 只会编译底层的 `Interoperable CSS` 格式，用于声明 CSS 和其他语言之间的 `:import` 和 `:export` 依赖关系。
+
+ICSS 提供 CSS Module 支持，并且为其他工具提供了一个底层语法，以实现它们自己的 css-module 变体。
+
 ###### `String` {#string}
 
-可能的值 - `local`，`global`，和 `pure`。
-=======
-Controls the level of compilation applied to the input styles.
-
-The `local`, `global`, and `pure` handles `class` and `id` scoping and `@value` values.
-The `icss` will only compile the low level `Interoperable CSS` format for declaring `:import` and `:export` dependencies between CSS and other languages.
-
-ICSS underpins CSS Module support, and provides a low level syntax for other tools to implement CSS-module variations of their own.
-
-###### `String`
-
-Possible values - `local`, `global`, `pure`, and `icss`.
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+可选值 - `local`、`global`、`pure` 和 `icss`。
 
 **webpack.config.js**
 
@@ -823,11 +698,7 @@ module.exports = {
 
 允许根据文件名设置不同的 `mode` 选项值。
 
-<<<<<<< HEAD
-可能的返回值 - `local`，`global`，和 `pure`。
-=======
-Possible return values - `local`, `global`, `pure` and `icss`.
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+可能的返回值 - `local`、`global`、`pure` 和 `icss`。
 
 **webpack.config.js**
 
@@ -865,13 +736,9 @@ module.exports = {
 类型：`String`
 默认：`'[hash:base64]'`
 
-<<<<<<< HEAD
-允许配置生成的本地标识符(ident)
-查看[loader-utils 的文档](https://github.com/webpack/loader-utils#interpolatename)获取选项更多的信息.
-=======
-Allows to configure the generated local ident name.
+允许配置生成的本地标识符(ident)。
 
-For more information on options see:
+更多关于配置项的信息可以查看：
 
 - [webpack template strings](/configuration/output/#template-strings),
 - [output.hashDigest](/configuration/output/#outputhashdigest),
@@ -879,16 +746,15 @@ For more information on options see:
 - [output.hashFunction](/configuration/output/#outputhashfunction),
 - [output.hashSalt](/configuration/output/#outputhashsalt).
 
-Supported template strings:
+支持的模板字符串：
 
-- [name] the basename of the resource
-- [path] the path of the resource relative to the `compiler.context` option or `modules.localIdentContext` option.
-- [file] - filename and path.
-- [ext] - extension with leading .
-- [hash] - the hash of the string, generated based on `localIdentHashSalt`, `localIdentHashFunction`, `localIdentHashDigest`, `localIdentHashDigestLength`, `localIdentContext`, `resourcePath` and `exportName`
-- [<hashFunction>:hash:<hashDigest>:<hashDigestLength>] - hash with hash settings.
-- [local] - original class.
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+- [name] 源文件名称
+- [path] 源文件相对于 `compiler.context` 或者 `modules.localIdentContext` 配置项的相对路径。
+- [file] - 文件名和路径。
+- [ext] - 文件拓展名。
+- [hash] - 字符串的哈希值。基于 `localIdentHashSalt`、`localIdentHashFunction`、`localIdentHashDigest`、`localIdentHashDigestLength`、`localIdentContext`、`resourcePath` 和 `exportName` 生成。
+- [<hashFunction>:hash:<hashDigest>:<hashDigestLength>] - 带有哈希设置的哈希。
+- [local] - 原始类名。
 
 建议：
 
@@ -946,20 +812,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-##### `localIdentHashPrefix` {#localidenthashprefix}
-=======
-##### `localIdentHashSalt`
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+##### `localIdentHashSalt` {#localidenthashsalt}
 
 类型：`String`
 默认：`undefined`
 
-<<<<<<< HEAD
 允许添加自定义哈希值以生成更多唯一类。
-=======
-Allows to add custom hash to generate more unique classes.
-For more information see [output.hashSalt](/configuration/output/#outputhashsalt).
+更多信息请查看 [output.hashSalt](/configuration/output/#outputhashsalt)。
 
 **webpack.config.js**
 
@@ -981,13 +840,13 @@ module.exports = {
 };
 ```
 
-##### `localIdentHashFunction`
+##### `localIdentHashFunction` {#localidenthashfunction}
 
-Type: `String`
-Default: `md4`
+类型：`String`
+默认值：`md4`
 
-Allows to specify hash function to generate classes .
-For more information see [output.hashFunction](/configuration/output/#outputhashfunction).
+允许设置生成 class 的哈希函数。
+更多信息请查看 [output.hashFunction](/configuration/output/#outputhashfunction)。
 
 **webpack.config.js**
 
@@ -1009,13 +868,13 @@ module.exports = {
 };
 ```
 
-##### `localIdentHashDigest`
+##### `localIdentHashDigest` {#localidenthashdigest}
 
-Type: `String`
-Default: `hex`
+类型：`String`
+默认值：`hex`
 
-Allows to specify hash digest to generate classes.
-For more information see [output.hashDigest](/configuration/output/#outputhashdigest).
+允许设置生成 class 的哈希摘要。
+更多信息请查看 [output.hashDigest](/configuration/output/#outputhashdigest)。
 
 **webpack.config.js**
 
@@ -1037,14 +896,13 @@ module.exports = {
 };
 ```
 
-##### `localIdentHashDigestLength`
+##### `localIdentHashDigestLength` {#localidentHashdigestlength}
 
-Type: `Number`
-Default: `20`
+类型：`Number`
+默认值：`20`
 
-Allows to specify hash digest length to generate classes.
-For more information see [output.hashDigestLength](/configuration/output/#outputhashdigestlength).
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+允许设置生成 class 的哈希摘要长度。
+更多信息请查看 [output.hashDigestLength](/configuration/output/#outputhashdigestlength)。
 
 **webpack.config.js**
 
@@ -1286,49 +1144,14 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `sourceMap` {#sourcemap}
-
-类型：`Boolean`
-默认：取决于 `compiler.devtool` 的值。
-
-默认情况下，SouceMap 的生成取决于 [`devtool`](/configuration/devtool/) 选项。除eval和false值外，所有值均都会生成 SouceMap。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        loader: "css-loader",
-        options: {
-          sourceMap: true,
-        },
-      },
-    ],
-  },
-};
-```
-
 ### `importLoaders` {#importloaders}
-=======
-### `importLoaders`
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
 
 类型：`Number`
 默认：`0`
 
-<<<<<<< HEAD
-启用/禁用或设置在CSS加载程序之前应用的加载程序的数量。
+允许为 `@import` 样式规则、CSS 模块或者 ICSS 启用/禁用或设置在 CSS loader 之前应用的 loader 的数量，例如：`@import`/`composes`/`@value value from './values.css'` 等。
 
-`importLoaders` 选项允许你配置在 `css-loader` 之前有多少 loader 应用于`@import`ed 资源。
-=======
-Allows to enables/disables or setups number of loaders applied before CSS loader for `@import` at-rules, CSS modules and ICSS imports, i.e. `@import`/`composes`/`@value value from './values.css'`/etc.
-
-The option `importLoaders` allows you to configure how many loaders before `css-loader` should be applied to `@import`ed resources and CSS modules/ICSS imports.
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+`importLoaders` 选项允许你配置在 `css-loader` 之前有多少 loader 应用于 `@import`ed 资源与 CSS 模块/ICSS 导入。
 
 **webpack.config.js**
 
@@ -1360,15 +1183,12 @@ module.exports = {
 
 当模块系统（即 webpack）支持按来源匹配 loader 时，这种情况将来可能会改变。
 
-<<<<<<< HEAD
-### `esModule` {#esmodule}
-=======
 ### `sourceMap`
 
-Type: `Boolean`
-Default: depends on the `compiler.devtool` value
+类型：`Boolean`
+默认值：取决于 `compiler.devtool` 值
 
-By default generation of source maps depends on the [`devtool`](/configuration/devtool/) option. All values enable source map generation except `eval` and `false` value.
+source map 的生成默认依赖 [`devtool`](/configuration/devtool/) 配置项。除了 `eval` 与 `false` 之外的值都会启用 source map。
 
 **webpack.config.js**
 
@@ -1388,8 +1208,7 @@ module.exports = {
 };
 ```
 
-### `esModule`
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+### `esModule` {#esmodule}
 
 类型：`Boolean`
 默认：`true`
@@ -1531,11 +1350,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-**对于 webpack v4：**
-=======
-### Extract
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
+### Extract {#extract}
 
 For production builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
 
@@ -1563,13 +1378,8 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
-<<<<<<< HEAD
-              // 每一个 CSS 的 `@import` 都运行 `postcss-loader`，不要忘了 `sass-loader` 将不属于 CSS 的 `@import` 编译到一个文件中
+              // 每一个 CSS 的 `@import` 与 CSS 模块/ICSS 都会运行 `postcss-loader`，不要忘了 `sass-loader` 将不属于 CSS 的 `@import` 编译到一个文件中
               // 如果您需要在每个 CSS 的 `@import` 上运行 `sass-loader` 和 `postcss-loader`，请将其设置为 `2`。
-=======
-              // Run `postcss-loader` on each CSS `@import` and CSS modules/ICSS imports, do not forget that `sass-loader` compile non CSS `@import`'s into a single file
-              // If you need run `sass-loader` and `postcss-loader` on each CSS `@import` please set it to `2`
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
               importLoaders: 1,
             },
           },
@@ -1589,17 +1399,6 @@ module.exports = {
         // More information here https://webpack.js.org/guides/asset-modules/
         type: "asset",
       },
-<<<<<<< HEAD
-      // 对于 webpack v4
-      // {
-      //  test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-      //  loader: "url-loader",
-      //  options: {
-      //    limit: 8192,
-      //  },
-      // },
-=======
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
     ],
   },
 };
@@ -1640,13 +1439,8 @@ module.exports = {
 
 ### 只允许 `可交互的 CSS` 使其与 `CSS Module` 特性分离{#separating-interoperable-css-only-and-css-module-features}
 
-<<<<<<< HEAD
-下面是有关配置的示例代码，通过为所有未匹配到 `*.module.scss` 命名约定文件设置 `compileType` 选项，只允许使用 `可交互的 CSS` 特性（如 `:import` 和 `:export`），而不使用其他的 `CSS Module` 特性。此处仅供参考，因为在 v4 之前，`css-loader` 默认将 `ICSS` 特性应用于所有文件。
+下面是有关配置的示例代码，通过为所有未匹配到 `*.module.scss` 命名约定文件设置 `mode` 选项，只允许使用 `可交互的 CSS` 特性（如 `:import` 和 `:export`），而不使用其他的 `CSS Module` 特性。此处仅供参考，因为在 v4 之前，`css-loader` 默认将 `ICSS` 特性应用于所有文件。
 同时，在本示例中，匹配到 `*.module.scss` 的所有文件都将被视为 `CSS Modules`。
-=======
-The following setup is an example of allowing `Interoperable CSS` features only (such as `:import` and `:export`) without using further `CSS Module` functionality by setting `mode` option for all files that do not match `*.module.scss` naming convention. This is for reference as having `ICSS` features applied to all files was default `css-loader` behavior before v4.
-Meanwhile all files matching `*.module.scss` are treated as `CSS Modules` in this example.
->>>>>>> 076a4a41ddf8ad3abf74b8900d6d73e82eb56946
 
 假设项目中有这样一个需求，要求 canvas 绘制使用的变量与 CSS 同步，换句话说就是 canvas 绘制使用的颜色（在 JavaScript 中设置的颜色名）与 HTML 背景（在 CSS 中通过 class 设置）相同。
 
