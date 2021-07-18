@@ -29,7 +29,7 @@ There is one change that you will have to make to your webpack config. Typically
 ```js
 const path = require('path');
 
-module.exports = (env) => {
+module.exports = (env) => ({
   // Use env.<YOUR VARIABLE> here:
   console.log('Goal: ', env.goal); // 'local'
   console.log('Production: ', env.production); // true
@@ -41,7 +41,7 @@ module.exports = (env) => {
       path: path.resolve(__dirname, 'dist'),
     },
   };
-};
+});
 ```
 
 T> Webpack CLI offers some [built-in environment variables](/api/cli/#environment-variables) which you can access inside a webpack configuration.
