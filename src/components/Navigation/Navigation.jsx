@@ -21,6 +21,7 @@ export default class Navigation extends React.Component {
 
     return (
       <Banner
+        onSearch={() => {}}
         blockName="navigation"
         logo={ <Logo light={ true } /> }
         url={ pathname }
@@ -68,7 +69,16 @@ export default class Navigation extends React.Component {
       DocSearch({
         apiKey: 'fac401d1a5f68bc41f01fb6261661490',
         indexName: 'webpack-js-org',
-        inputSelector: '.navigation-search__input'
+        inputSelector: '.navigation-search__input',
+        transformData: (data) => {
+          return data.map(({url, ...others}) => {
+            const { origin } = new URL(url);
+            return {
+              ...others,
+              url: url.replace(new RegExp(`^${origin}`), ''),
+            };
+          });
+        }
       });
     }
   }
