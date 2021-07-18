@@ -34,12 +34,26 @@ function NavigationItem({ children, url, isActive }) {
       isActive,
     };
   }
+  const classes =
+    'text-gray-100 dark:text-gray-100 text-sm font-light uppercase hover:text-blue-200';
+  if (url.startsWith('http') || url.startsWith('//')) {
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={classes}
+      >
+        {children}
+      </a>
+    );
+  }
   return (
     <NavLink
       {...obj}
       activeClassName="active-menu"
       to={url}
-      className="text-gray-100 dark:text-gray-100 text-sm font-light uppercase hover:text-blue-200"
+      className={classes}
     >
       {children}
     </NavLink>

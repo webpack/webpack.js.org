@@ -221,25 +221,80 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.enabledChunkLoadingTypes` {#outputenabledchunkloadingtypes}
+=======
+## output.clean
+>>>>>>> a95fa7f463ed175385ff6ed80ef0a2c695d28fcc
 
-`[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
+<Badge text="5.20.0+" />
 
+<<<<<<< HEAD
 为入口启用 chunk 加载类型列表。将由 webpack 自动填充。只有在使用函数作为入口选项并返回 chunkLoading 选项时才需要。
-
-**webpack.config.js**
+=======
+`boolean` `{ dry?: boolean, keep?: RegExp | string | ((filename: string) => boolean) }`
+>>>>>>> a95fa7f463ed175385ff6ed80ef0a2c695d28fcc
 
 ```javascript
 module.exports = {
   //...
   output: {
-    //...
-    enabledChunkLoadingTypes: ['jsonp', 'require'],
+    clean: true, // Clean the output directory before emit.
   },
 };
 ```
 
+```javascript
+module.exports = {
+  //...
+  output: {
+    clean: {
+      dry: true, // Log the assets that should be removed instead of deleting them.
+    },
+  },
+};
+```
+
+<<<<<<< HEAD
 ## `output.crossOriginLoading` {#outputcrossoriginloading}
+=======
+```javascript
+module.exports = {
+  //...
+  output: {
+    clean: {
+      keep: /ignored\/dir\//, // Keep these assets under 'ignored/dir'.
+    },
+  },
+};
+
+// or
+
+module.exports = {
+  //...
+  output: {
+    clean: {
+      keep(asset) {
+        return asset.includes('ignored/dir');
+      },
+    },
+  },
+};
+```
+
+You can also use it with hook:
+
+```javascript
+webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
+  'Test',
+  (asset) => {
+    if (/ignored\/dir\//.test(asset)) return true;
+  }
+);
+```
+
+## output.crossOriginLoading
+>>>>>>> a95fa7f463ed175385ff6ed80ef0a2c695d28fcc
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
 
@@ -256,7 +311,29 @@ module.exports = {
 
 查看 [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate)。
 
+<<<<<<< HEAD
 ## `output.devtoolModuleFilenameTemplate` {#outputdevtoolmodulefilenametemplate}
+=======
+## `output.enabledChunkLoadingTypes`
+
+`[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
+
+List of chunk loading types enabled for use by entry points. Will be automatically filled by webpack. Only needed when using a function as entry option and returning chunkLoading option from there.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    enabledChunkLoadingTypes: ['jsonp', 'require'],
+  },
+};
+```
+
+## `output.devtoolModuleFilenameTemplate`
+>>>>>>> a95fa7f463ed175385ff6ed80ef0a2c695d28fcc
 
 `string = 'webpack://[namespace]/[resource-path]?[loaders]'` `function (info) => string`
 
@@ -2177,6 +2254,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 W> `output.module` 是一个实验性的功能， 想要使用的话，通过设置 [`experiments.outputModule`](/configuration/experiments/#experiments) 为 `true`.
 
 ## output.clean {#outputclean}
@@ -2239,3 +2317,6 @@ webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
   }
 );
 ```
+=======
+W> `output.module` is an experimental feature and can only be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
+>>>>>>> a95fa7f463ed175385ff6ed80ef0a2c695d28fcc
