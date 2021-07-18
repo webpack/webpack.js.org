@@ -86,6 +86,7 @@ export default class Dropdown extends Component {
                       this.links ? this.links.push(node) : (this.links = [node])
                     }
                     href={item.url}
+                    className="px-5 block"
                   >
                     <span lang={item.lang}>{item.title}</span>
                   </a>

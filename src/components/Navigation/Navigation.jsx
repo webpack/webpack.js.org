@@ -1,30 +1,72 @@
 // Import External Dependencies
 import { useEffect, useState } from 'react';
-import Banner from 'react-banner';
 import PropTypes from 'prop-types';
+import { DocSearch } from '@docsearch/react';
+import { Link as ReactDOMLink } from 'react-router-dom';
 
 // Import Components
 import Link from '../Link/Link';
 import Logo from '../Logo/Logo';
 import Dropdown from '../Dropdown/Dropdown';
 
-// Import helpers
-import isClient from '../../utilities/is-client';
-
-// Import constants
-import { THEME } from '../../constants/theme';
-
 // Load Styling
-import 'docsearch.js/dist/cdn/docsearch.css';
-import './Navigation.scss';
-import './Search.scss';
+import '@docsearch/css';
 
 import GithubIcon from '../../styles/icons/github.svg';
 import TwitterIcon from '../../styles/icons/twitter.svg';
 import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
+import Hamburger from '../../styles/icons/hamburger.svg';
+import { NavLink, useLocation } from 'react-router-dom';
+import HelloDarkness from '../HelloDarkness';
 
-const onSearch = () => {};
-const { DARK, LIGHT } = THEME;
+NavigationItem.propTypes = {
+  children: PropTypes.node.isRequired,
+  url: PropTypes.string.isRequired,
+  isActive: PropTypes.func,
+};
+
+function NavigationItem({ children, url, isActive }) {
+  let obj = {};
+  // decide if the link is active or not by providing a function
+  // otherwise we'll let react-dom makes the decision for us
+  if (isActive) {
+    obj = {
+      isActive,
+    };
+  }
+  return (
+    <NavLink
+      {...obj}
+      activeClassName="active-menu"
+      to={url}
+      className="text-gray-100 dark:text-gray-100 text-sm font-light uppercase hover:text-blue-200"
+    >
+      {children}
+    </NavLink>
+  );
+}
+
+NavigationIcon.propTypes = {
+  children: PropTypes.node.isRequired,
+  to: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};
+function NavigationIcon({ children, to, title }) {
+  return (
+    <Link
+      to={to}
+      className="inline-flex items-center"
+      title={`webpack on ${title}`}
+    >
+      {children}
+    </Link>
+  );
+}
+const navigationIconProps = {
+  'aria-hidden': true,
+  fill: '#fff',
+  width: 16,
+};
 
 Navigation.propTypes = {
   pathname: PropTypes.string,
@@ -35,66 +77,62 @@ Navigation.propTypes = {
   switchTheme: PropTypes.func,
 };
 
-function Navigation({
-  pathname,
-  hash = '',
-  links,
-  toggleSidebar,
-  theme,
-  switchTheme,
-}) {
-  const themeSwitcher = () => switchTheme(theme === DARK ? LIGHT : DARK);
+function Navigation({ links, pathname, hash = '', toggleSidebar }) {
   const [locationHash, setLocationHash] = useState(hash);
 
-  useEffect(() => {
-    if (isClient) {
-      const DocSearch = require('docsearch.js');
-
-      DocSearch({
-        apiKey: 'cccb861b286b414d0f820013f3f70b84',
-        indexName: 'webpack_china',
-        inputSelector: '.navigation-search__input',
-      });
-    }
-  }, []);
+  const location = useLocation();
 
   useEffect(() => {
     setLocationHash(hash);
   }, [hash]);
 
   return (
-    <Banner
-      onSearch={onSearch}
-      blockName="navigation"
-      logo={<Logo light={true} />}
-      url={pathname}
-      items={[
-        ...links,
-        {
-          title: 'GitHub Repository',
-          url: 'https://github.com/webpack/webpack',
-          className: 'navigation__item--icon',
-          content: <GithubIcon aria-hidden="true" fill="#fff" width={16} />,
-        },
-        {
-          title: 'webpack on Twitter',
-          url: 'https://twitter.com/webpack',
-          className: 'navigation__item--icon',
-          content: <TwitterIcon aria-hidden="true" fill="#fff" width={16} />,
-        },
-        {
-          title: 'webpack on Stack Overflow',
-          url: 'https://stackoverflow.com/questions/tagged/webpack',
-          className: 'navigation__item--icon',
-          content: (
-            <StackOverflowIcon aria-hidden="true" fill="#fff" width={16} />
-          ),
-        },
-        {
-          className: 'navigation__item--icon',
-          content: (
+    <>
+      <header className="bg-blue-800 dark:bg-gray-900">
+        <div className="flex items-center py-10 px-[16px] justify-between md:px-[24px] md:max-w-[1024px] md:mx-auto md:justify-start">
+          <button
+            className="bg-transparent border-none md:hidden"
+            onClick={toggleSidebar}
+          >
+            <Hamburger
+              width={20}
+              height={20}
+              className="fill-current text-white"
+            />
+          </button>
+          <Link to="/" className="md:mr-auto">
+            <Logo />
+          </Link>
+          <nav className="hidden md:inline-grid md:grid-flow-col md:gap-x-[18px]">
+            {links.map(({ content, url, isActive }) => (
+              <NavigationItem key={url} url={url} isActive={isActive}>
+                {content}
+              </NavigationItem>
+            ))}
+            {[
+              {
+                to: 'https://github.com/webpack/webpack',
+                title: 'GitHub',
+                children: <GithubIcon {...navigationIconProps} />,
+              },
+              {
+                to: 'https://twitter.com/webpack',
+                title: 'Twitter',
+                children: <TwitterIcon {...navigationIconProps} />,
+              },
+              {
+                to: 'https://stackoverflow.com/questions/tagged/webpack',
+                title: 'StackOverflow',
+                children: <StackOverflowIcon {...navigationIconProps} />,
+              },
+            ].map(({ to, title, children }) => (
+              <NavigationIcon key={to} to={to} title={title}>
+                {children}
+              </NavigationIcon>
+            ))}
+
             <Dropdown
-              className="navigation__languages"
+              className=""
               items={[
                 {
                   title: 'English',
@@ -112,28 +150,68 @@ function Navigation({
                 },
               ]}
             />
-          ),
-        },
-        {
-          className: 'navigation__item--icon',
-          content: (
-            <button
-              style={{
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
+          </nav>
+          <div className="inline-flex items-center ml-[18px]">
+            <HelloDarkness />
+            <DocSearch
+              apiKey={'cccb861b286b414d0f820013f3f70b84'}
+              indexName="webpack_china"
+              disableUserPersonalization={true}
+              placeholder="Search webpack documentation"
+              transformItems={(items) =>
+                items.map(({ url, ...others }) => {
+                  const { origin } = new URL(url);
+                  return {
+                    ...others,
+                    url: url.replace(new RegExp(`^${origin}`), ''),
+                  };
+                })
+              }
+              hitComponent={({ hit, children }) => {
+                return <ReactDOMLink to={hit.url}>{children}</ReactDOMLink>;
               }}
-              onClick={themeSwitcher}
-              data-testid="hello-darkness"
-            >
-              {theme === DARK ? '🌙' : '☀️'}
-            </button>
-          ),
-        },
-      ]}
-      link={Link}
-      onMenuClick={toggleSidebar}
-    />
+            />
+          </div>
+        </div>
+        {/* sub navigation */}
+        {links
+          .filter((link) => {
+            // only those with children are displayed
+            return link.children;
+          })
+          .map((link) => {
+            if (link.isActive) {
+              // hide the children if the link is not active
+              if (!link.isActive({}, location)) {
+                return null;
+              }
+            }
+            return (
+              <div
+                key={link.url}
+                className="bg-gray-100 dark:bg-gray-800 hidden md:block"
+              >
+                <div
+                  className="md:max-w-[1024px] md:mx-auto md:grid md:grid-flow-col md:justify-end md:gap-x-[20px] md:px-[24px]"
+                  data-testid="sub-navigation"
+                >
+                  {link.children.map((child) => (
+                    <NavLink
+                      key={child.url}
+                      to={child.url}
+                      title={child.title}
+                      className="text-blue-400 py-5 text-sm capitalize hover:text-black dark:hover:text-white"
+                      activeClassName="active-submenu"
+                    >
+                      {child.content}
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+      </header>
+    </>
   );
 }
 
