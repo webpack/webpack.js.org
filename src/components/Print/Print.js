@@ -42,7 +42,7 @@ export default function Print(props) {
         target="_blank"
       >
         Print Section
-        <img src={icon} />
+        <img src={icon} width={27} height={20} alt="Printer Icon" />
       </a>
     </div>
   );
