@@ -1007,6 +1007,8 @@ Timestamping for directories is possible now, which allows serialization of Cont
 
 `Compiler.modifiedFiles` has been added (next to `Compiler.removedFiles`) to make it easier to reference the changed files.
 
+Also `compiler.fileTimestamps` (Timestamps for files) and `compiler.contextTimestamps` (Timestamps for directories) to find timestamps of file or directory.
+
 ### Filesystems
 
 Next to `compiler.inputFileSystem` and `compiler.outputFileSystem` there is a new `compiler.intermediateFileSystem` for all fs actions that are not considered as input or output, like writing records, cache or profiling output.
