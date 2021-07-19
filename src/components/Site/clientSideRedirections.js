@@ -9,5 +9,11 @@ export default function (location) {
   ) {
     return `/configuration/cache/${location.hash}`;
   }
+
+  if (location.pathname === '/webpack-options/') {
+    const searchParams = new URLSearchParams(location.search);
+    console.log(searchParams.get('option'));
+    return `${searchParams.get('option')}${location.hash}`;
+  }
   return false;
 }
