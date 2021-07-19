@@ -1034,7 +1034,14 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ##### `exportGlobals` {#exportglobals}
+=======
+To set a custom name for namedExport, can use [`exportLocalsConvention`](#exportlocalsconvention) option as a function.
+Example below in the [`examples`](#examples) section.
+
+##### `exportGlobals`
+>>>>>>> 201198ac74f4606abca3fe8c390f3d82e45085a5
 
 类型：`Boolean`
 默认：`false`
@@ -1063,12 +1070,23 @@ module.exports = {
 
 ##### `exportLocalsConvention` {#exportlocalsconvention}
 
+<<<<<<< HEAD
 类型：`String`
 默认：取决于 `modules.namedExport` 选项值，如果为 `true` 则对应的是 `camelCaseOnly`，反之对应的是 `asIs`
+=======
+Type: `String|Function`
+Default: based on the `modules.namedExport` option value, if `true` - `camelCaseOnly`, otherwise `asIs`
+>>>>>>> 201198ac74f4606abca3fe8c390f3d82e45085a5
 
 导出的类名称的样式。
 
+<<<<<<< HEAD
 默认情况下，导出的 JSON 密钥反映了类名（即 `asIs` 值）。
+=======
+###### `String`
+
+By default, the exported JSON keys mirror the class names (i.e `asIs` value).
+>>>>>>> 201198ac74f4606abca3fe8c390f3d82e45085a5
 
 > ⚠ 如果你设置 `namedExport` 为 `true` 那么只有 `camelCaseOnly` 被允许。
 
@@ -1113,7 +1131,63 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ##### `exportOnlyLocals` {#exportonlylocals}
+=======
+###### `Function`
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: "css-loader",
+        options: {
+          modules: {
+            exportLocalsConvention: function (name) {
+              return name.replace(/-/g, "_");
+            },
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: "css-loader",
+        options: {
+          modules: {
+            exportLocalsConvention: function (name) {
+              return [
+                name.replace(/-/g, "_"),
+                // dashesCamelCase
+                name.replace(/-+(\w)/g, (match, firstLetter) =>
+                  firstLetter.toUpperCase()
+                ),
+              ];
+            },
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+##### `exportOnlyLocals`
+>>>>>>> 201198ac74f4606abca3fe8c390f3d82e45085a5
 
 类型：`Boolean`
 默认：`false`
@@ -1437,7 +1511,36 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### 只允许 `可交互的 CSS` 使其与 `CSS Module` 特性分离{#separating-interoperable-css-only-and-css-module-features}
+=======
+### Named export with custom export names
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: "css-loader",
+        options: {
+          modules: {
+            namedExport: true,
+            exportLocalsConvention: function (name) {
+              return name.replace(/-/g, "_");
+            },
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+### Separating `Interoperable CSS`-only and `CSS Module` features
+>>>>>>> 201198ac74f4606abca3fe8c390f3d82e45085a5
 
 下面是有关配置的示例代码，通过为所有未匹配到 `*.module.scss` 命名约定文件设置 `mode` 选项，只允许使用 `可交互的 CSS` 特性（如 `:import` 和 `:export`），而不使用其他的 `CSS Module` 特性。此处仅供参考，因为在 v4 之前，`css-loader` 默认将 `ICSS` 特性应用于所有文件。
 同时，在本示例中，匹配到 `*.module.scss` 的所有文件都将被视为 `CSS Modules`。
