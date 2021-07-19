@@ -12,8 +12,9 @@ export default function (location) {
 
   if (location.pathname === '/webpack-options/') {
     const searchParams = new URLSearchParams(location.search);
-    console.log(searchParams.get('option'));
-    return `${searchParams.get('option')}${location.hash}`;
+    const option = searchParams.get('option');
+    const options = option.split('/').filter(Boolean);
+    return `/configuration/${options[0]}/#${options.join('').toLowerCase()}`;
   }
   return false;
 }
