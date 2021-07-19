@@ -13,7 +13,7 @@ import LoadingIcon from '../../styles/icons/loading.svg';
 const versions = [5, 4];
 const currentDocsVersion = 5;
 
-const excludedPages = ['/webpack-options/'];
+const excludedPages = ['/webpack/options/'];
 
 Sidebar.propTypes = {
   className: PropTypes.string,
