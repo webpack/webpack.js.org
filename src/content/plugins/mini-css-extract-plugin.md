@@ -19,7 +19,7 @@ repo: https://github.com/webpack-contrib/mini-css-extract-plugin
 
 This plugin extracts CSS into separate files. It creates a CSS file per JS file which contains CSS. It supports On-Demand-Loading of CSS and SourceMaps.
 
-It builds on top of a new webpack v4 feature (module types) and requires webpack 4 to work.
+It builds on top of a new webpack v5 feature and requires webpack 5 to work.
 
 Compared to the extract-text-webpack-plugin:
 
