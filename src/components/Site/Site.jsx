@@ -149,7 +149,7 @@ function Site(props) {
   );
 
   // not to show in sub navbar
-  const excludeItems = ['contribute', 'blog'];
+  const excludeItems = ['contribute', 'blog', 'r'];
 
   const title = getPageTitle(Content, location.pathname);
 
