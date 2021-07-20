@@ -231,7 +231,7 @@ module.exports = {
 module.exports = {
   //...
   output: {
-    clean: true, // Clean the output directory before emit.
+    clean: true, // 在生成文件之前清空 output 目录
   },
 };
 ```
@@ -241,7 +241,7 @@ module.exports = {
   //...
   output: {
     clean: {
-      dry: true, // Log the assets that should be removed instead of deleting them.
+      dry: true, // 打印而不是删除应该移除的静态资源
     },
   },
 };
