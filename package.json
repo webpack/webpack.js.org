@@ -126,7 +126,7 @@
     "remark-html": "^13.0.1",
     "remark-loader": "^4.0.0",
     "remark-refractor": "git://github.com/montogeek/remark-refractor.git",
-    "remark-slug": "^6.0.0",
+    "remark-slug": "^6.1.0",
     "rimraf": "^3.0.2",
     "sass": "^1.35.2",
     "sass-loader": "^12.1.0",
