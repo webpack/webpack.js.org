@@ -3064,8 +3064,6 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token keyword">new</span> <span class="token class-name">ModuleFederationPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       shared<span class="token operator">:</span> <span class="token punctuation">{</span>
         <span class="token comment">// adds react as shared module</span>
-        <span class="token comment">// version is inferred from package.json</span>
-        <span class="token comment">// it will always use the shared version, but print a warning when the shared lodash is &#x3C; 4.17 or >= 5</span>
         react<span class="token operator">:</span> <span class="token punctuation">{</span>
           requiredVersion<span class="token operator">:</span> deps<span class="token punctuation">.</span>react<span class="token punctuation">,</span>
           singleton<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
