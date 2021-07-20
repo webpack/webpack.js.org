@@ -22,7 +22,11 @@ translators:
 
 本插件会将 CSS 提取到单独的文件中，为每个包含 CSS 的 JS 文件创建一个 CSS 文件，并且支持 CSS 和 SourceMaps 的按需加载。
 
+<<<<<<< HEAD
 本插件基于 webpack v4 的新特性（模块类型）构建，并且需要 webpack 4 才能正常工作。
+=======
+It builds on top of a new webpack v5 feature and requires webpack 5 to work.
+>>>>>>> 76792b2f474321fc32cf15ae3bb01262ac5029eb
 
 与 extract-text-webpack-plugin 相比：
 
