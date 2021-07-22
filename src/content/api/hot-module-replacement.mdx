@@ -357,6 +357,8 @@ import.meta.webpackHot.addStatusHandler((status) => {
 });
 ```
 
+T> If a status handler returns a `Promise` then it will wait for the `Promise` to resolve before continuing.
+
 ### `removeStatusHandler`
 
 Remove a registered status handler.
