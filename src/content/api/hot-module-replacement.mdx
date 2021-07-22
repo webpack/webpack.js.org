@@ -357,7 +357,7 @@ import.meta.webpackHot.addStatusHandler((status) => {
 });
 ```
 
-T> If a status handler returns a `Promise` then it will wait for the `Promise` to resolve before continuing.
+Bear in mind that when the status handler returns a `Promise`, the HMR system will wait for the `Promise` to resolve before continuing.
 
 ### `removeStatusHandler`
 
