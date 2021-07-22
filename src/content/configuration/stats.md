@@ -297,6 +297,21 @@ module.exports = {
 };
 ```
 
+### `stats.groupReasonsByOrigin`
+
+`boolean`
+
+Group [`reasons`](#statsreasons) by their origin module.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupReasonsByOrigin: true,
+  },
+};
+```
+
 ### `stats.cachedAssets`
 
 `boolean = true`
@@ -843,6 +858,23 @@ module.exports = {
   },
 };
 ```
+
+### `stats.reasonsSpace`
+
+`number`
+
+Space to display [`reasons`](#statsreasons) (groups will be collapsed to fit this space).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    reasonsSpace: 1000,
+  },
+};
+```
+
+T> The [`detailed preset`](#stats-presets) limits all spaces to 1000 by default.
 
 ### `stats.relatedAssets`
 
