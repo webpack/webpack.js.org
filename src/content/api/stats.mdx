@@ -71,23 +71,21 @@ The top-level structure of the output JSON file is fairly straightforward but th
 
 Each `assets` object represents an `output` file emitted from the compilation. They all follow a similar structure:
 
-<!-- eslint-skip -->
-
-```js
+```json
 {
-  'chunkNames': [], // The chunks this asset contains
-  'chunks': [ 10, 6 ], // The chunk IDs this asset contains
-  'comparedForEmit': false, // Indicates whether or not the asset was compared with the same file on the output file system
-  'emitted': true, // Indicates whether or not the asset made it to the `output` directory
-  'name': '10.web.js', // The `output` filename
-  'size': 1058, // The size of the file in bytes
-  'info': {
-    'immutable': true, // A flag telling whether the asset can be long term cached (contains a hash)
-    'size': 1058, // The size in bytes, only becomes available after asset has been emitted
-    'development': true, // A flag telling whether the asset is only used for development and doesn't count towards user-facing assets
-    'hotModuleReplacement': true, // A flag telling whether the asset ships data for updating an existing application (HMR)
-    'sourceFilename': 'originalfile.js', // sourceFilename when asset was created from a source file (potentially transformed)
-    'javascriptModule': true // true, when asset is javascript and an ESM
+  "chunkNames": [], // The chunks this asset contains
+  "chunks": [10, 6], // The chunk IDs this asset contains
+  "comparedForEmit": false, // Indicates whether or not the asset was compared with the same file on the output file system
+  "emitted": true, // Indicates whether or not the asset made it to the `output` directory
+  "name": "10.web.js", // The `output` filename
+  "size": 1058, // The size of the file in bytes
+  "info": {
+    "immutable": true, // A flag telling whether the asset can be long term cached (contains a hash)
+    "size": 1058, // The size in bytes, only becomes available after asset has been emitted
+    "development": true, // A flag telling whether the asset is only used for development and doesn't count towards user-facing assets
+    "hotModuleReplacement": true, // A flag telling whether the asset ships data for updating an existing application (HMR)
+    "sourceFilename": "originalfile.js", // sourceFilename when asset was created from a source file (potentially transformed)
+    "javascriptModule": true // true, when asset is javascript and an ESM
   }
 }
 ```
