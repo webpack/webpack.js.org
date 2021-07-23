@@ -160,6 +160,21 @@ module.exports = function (source) {
 
 T> You can override properties in the loader context as webpack copies all properties that are defined in the `loader` to the loader context.
 
+## name
+
+`string`
+
+Name of the configuration. Used when loading multiple configurations.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  name: 'admin-app',
+};
+```
+
 ## parallelism
 
 `number = 100`
@@ -220,21 +235,6 @@ module.exports = {
   //...
   recordsInputPath: path.join(__dirname, 'records.json'),
   recordsOutputPath: path.join(__dirname, 'newRecords.json'),
-};
-```
-
-## name
-
-`string`
-
-Name of the configuration. Used when loading multiple configurations.
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  name: 'admin-app',
 };
 ```
 
