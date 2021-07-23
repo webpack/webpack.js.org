@@ -55,7 +55,7 @@ It is possible to specify which information you want to see in the stats output.
 
 T> All of the options in the stats configuration object are optional.
 
-### `stats.all`
+### stats.all
 
 A fallback value for stats options when an option is not defined. It has precedence over local webpack defaults.
 
@@ -68,7 +68,7 @@ module.exports = {
 };
 ```
 
-### `stats.assets`
+### stats.assets
 
 `boolean = true`
 
@@ -83,7 +83,7 @@ module.exports = {
 };
 ```
 
-### `stats.assetsSort`
+### stats.assetsSort
 
 `string = 'id'`
 
@@ -98,7 +98,7 @@ module.exports = {
 };
 ```
 
-### `stats.builtAt`
+### stats.builtAt
 
 `boolean = true`
 
@@ -113,7 +113,7 @@ module.exports = {
 };
 ```
 
-### `stats.moduleAssets`
+### stats.moduleAssets
 
 `boolean = true`
 
@@ -128,7 +128,7 @@ module.exports = {
 };
 ```
 
-### `stats.assetsSpace`
+### stats.assetsSpace
 
 `number = 15`
 
@@ -143,7 +143,7 @@ module.exports = {
 };
 ```
 
-### `stats.modulesSpace`
+### stats.modulesSpace
 
 `number = 15`
 
@@ -158,7 +158,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunkModulesSpace`
+### stats.chunkModulesSpace
 
 `number = 10`
 
@@ -173,7 +173,7 @@ module.exports = {
 };
 ```
 
-### `stats.nestedModulesSpace`
+### stats.nestedModulesSpace
 
 `number = 10`
 
@@ -188,11 +188,11 @@ module.exports = {
 };
 ```
 
-### `stats.cached`
+### stats.cached
 
 Old version of `stats.cachedModules`.
 
-### `stats.cachedModules`
+### stats.cachedModules
 
 `boolean = true`
 
@@ -207,7 +207,7 @@ module.exports = {
 };
 ```
 
-### `stats.runtimeModules`
+### stats.runtimeModules
 
 `boolean = true`
 
@@ -222,7 +222,7 @@ module.exports = {
 };
 ```
 
-### `stats.dependentModules`
+### stats.dependentModules
 
 `boolean`
 
@@ -237,7 +237,7 @@ module.exports = {
 };
 ```
 
-### `stats.groupAssetsByChunk`
+### stats.groupAssetsByChunk
 
 `boolean`
 
@@ -252,7 +252,7 @@ module.exports = {
 };
 ```
 
-### `stats.groupAssetsByEmitStatus`
+### stats.groupAssetsByEmitStatus
 
 `boolean`
 
@@ -267,7 +267,7 @@ module.exports = {
 };
 ```
 
-### `stats.groupAssetsByInfo`
+### stats.groupAssetsByInfo
 
 `boolean`
 
@@ -282,7 +282,7 @@ module.exports = {
 };
 ```
 
-### `stats.groupModulesByAttributes`
+### stats.groupModulesByAttributes
 
 `boolean`
 
@@ -297,7 +297,24 @@ module.exports = {
 };
 ```
 
-### `stats.cachedAssets`
+### stats.groupReasonsByOrigin
+
+`boolean`
+
+<Badge text="5.46.0+" />
+
+Group [`reasons`](#statsreasons) by their origin module to avoid large set of reasons.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupReasonsByOrigin: true,
+  },
+};
+```
+
+### stats.cachedAssets
 
 `boolean = true`
 
@@ -312,7 +329,7 @@ module.exports = {
 };
 ```
 
-### `stats.children`
+### stats.children
 
 `boolean = true`
 
@@ -327,7 +344,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunks`
+### stats.chunks
 
 `boolean = true`
 
@@ -342,7 +359,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunkGroups`
+### stats.chunkGroups
 
 `boolean = true`
 
@@ -357,7 +374,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunkModules`
+### stats.chunkModules
 
 `boolean = true`
 
@@ -372,7 +389,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunkOrigins`
+### stats.chunkOrigins
 
 `boolean = true`
 
@@ -387,7 +404,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunksSort`
+### stats.chunksSort
 
 `string = 'id'`
 
@@ -402,7 +419,7 @@ module.exports = {
 };
 ```
 
-### `stats.context`
+### stats.context
 
 `string = '../src/'`
 
@@ -417,7 +434,7 @@ module.exports = {
 };
 ```
 
-### `stats.colors`
+### stats.colors
 
 `boolean = false` `object`
 
@@ -449,7 +466,7 @@ module.exports = {
 };
 ```
 
-### `stats.depth`
+### stats.depth
 
 `boolean = false`
 
@@ -464,7 +481,7 @@ module.exports = {
 };
 ```
 
-### `stats.entrypoints`
+### stats.entrypoints
 
 `boolean = true` `string = 'auto'`
 
@@ -481,7 +498,7 @@ module.exports = {
 
 When `stats.entrypoints` is set to `'auto'`, webpack will decide automatically whether to display the entry points in the stats output.
 
-### `stats.env`
+### stats.env
 
 `boolean = false`
 
@@ -496,7 +513,7 @@ module.exports = {
 };
 ```
 
-### `stats.orphanModules`
+### stats.orphanModules
 
 `boolean = false`
 
@@ -511,7 +528,7 @@ module.exports = {
 };
 ```
 
-### `stats.errors`
+### stats.errors
 
 `boolean = true`
 
@@ -526,7 +543,7 @@ module.exports = {
 };
 ```
 
-### `stats.errorDetails`
+### stats.errorDetails
 
 `boolean` `string = "auto"`
 
@@ -541,7 +558,7 @@ module.exports = {
 };
 ```
 
-### `stats.errorStack`
+### stats.errorStack
 
 `boolean = true`
 
@@ -556,7 +573,7 @@ module.exports = {
 };
 ```
 
-### `stats.excludeAssets`
+### stats.excludeAssets
 
 `array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean`
 
@@ -575,7 +592,7 @@ module.exports = {
 };
 ```
 
-### `stats.excludeModules`
+### stats.excludeModules
 
 `array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean` `boolean: false`
 
@@ -601,11 +618,11 @@ module.exports = {
 };
 ```
 
-### `stats.exclude`
+### stats.exclude
 
 See [`stats.excludeModules`](#statsexcludemodules).
 
-### `stats.hash`
+### stats.hash
 
 `boolean = true`
 
@@ -620,7 +637,7 @@ module.exports = {
 };
 ```
 
-### `stats.logging`
+### stats.logging
 
 `string = 'info': 'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose'` `boolean`
 
@@ -642,7 +659,7 @@ module.exports = {
 };
 ```
 
-### `stats.loggingDebug`
+### stats.loggingDebug
 
 `array = []: string | RegExp | function (name) => boolean` `string` `RegExp` `function (name) => boolean`
 
@@ -662,7 +679,7 @@ module.exports = {
 };
 ```
 
-### `stats.loggingTrace`
+### stats.loggingTrace
 
 `boolean = true`
 
@@ -677,7 +694,7 @@ module.exports = {
 };
 ```
 
-### `stats.modules`
+### stats.modules
 
 `boolean = true`
 
@@ -692,7 +709,7 @@ module.exports = {
 };
 ```
 
-### `stats.modulesSort`
+### stats.modulesSort
 
 `string = 'id'`
 
@@ -707,7 +724,7 @@ module.exports = {
 };
 ```
 
-### `stats.moduleTrace`
+### stats.moduleTrace
 
 `boolean = true`
 
@@ -722,7 +739,7 @@ module.exports = {
 };
 ```
 
-### `stats.outputPath`
+### stats.outputPath
 
 `boolean = true`
 
@@ -737,7 +754,7 @@ module.exports = {
 };
 ```
 
-### `stats.performance`
+### stats.performance
 
 `boolean = true`
 
@@ -752,7 +769,7 @@ module.exports = {
 };
 ```
 
-### `stats.preset`
+### stats.preset
 
 `string` `boolean: false`
 
@@ -769,7 +786,7 @@ module.exports = {
 
 Setting value of `stats.preset` to `false` tells webpack to use `'none'` [stats preset](/configuration/stats/#stats-presets).
 
-### `stats.providedExports`
+### stats.providedExports
 
 `boolean = false`
 
@@ -784,7 +801,7 @@ module.exports = {
 };
 ```
 
-### `stats.errorsCount`
+### stats.errorsCount
 
 `boolean = true`
 
@@ -799,7 +816,7 @@ module.exports = {
 };
 ```
 
-### `stats.warningsCount`
+### stats.warningsCount
 
 `boolean = true`
 
@@ -814,7 +831,7 @@ module.exports = {
 };
 ```
 
-### `stats.publicPath`
+### stats.publicPath
 
 `boolean = true`
 
@@ -829,7 +846,7 @@ module.exports = {
 };
 ```
 
-### `stats.reasons`
+### stats.reasons
 
 `boolean = true`
 
@@ -844,7 +861,26 @@ module.exports = {
 };
 ```
 
-### `stats.relatedAssets`
+### stats.reasonsSpace
+
+`number`
+
+<Badge text="5.46.0+" />
+
+Space to display [`reasons`](#statsreasons) (groups will be collapsed to fit this space).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    reasonsSpace: 1000,
+  },
+};
+```
+
+T> The [`detailed preset`](#stats-presets) limits [`modulesSpace`](#statsmodulesspace), [`assetsSpace`](#statsassetsspace), and [`reasonsSpace`](#statsreasonsspace) to 1000 by default.
+
+### stats.relatedAssets
 
 `boolean = false`
 
@@ -859,7 +895,7 @@ module.exports = {
 };
 ```
 
-### `stats.source`
+### stats.source
 
 `boolean = false`
 
@@ -874,7 +910,7 @@ module.exports = {
 };
 ```
 
-### `stats.timings`
+### stats.timings
 
 `boolean = true`
 
@@ -889,7 +925,7 @@ module.exports = {
 };
 ```
 
-### `stats.ids`
+### stats.ids
 
 `boolean = false`
 
@@ -904,7 +940,7 @@ module.exports = {
 };
 ```
 
-### `stats.usedExports`
+### stats.usedExports
 
 `boolean = false`
 
@@ -919,7 +955,7 @@ module.exports = {
 };
 ```
 
-### `stats.version`
+### stats.version
 
 `boolean = true`
 
@@ -934,7 +970,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunkGroupAuxiliary`
+### stats.chunkGroupAuxiliary
 
 `boolean = true`
 
@@ -949,7 +985,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunkGroupChildren`
+### stats.chunkGroupChildren
 
 `boolean = true`
 
@@ -964,7 +1000,7 @@ module.exports = {
 };
 ```
 
-### `stats.chunkGroupMaxAssets`
+### stats.chunkGroupMaxAssets
 
 `number`
 
@@ -979,7 +1015,7 @@ module.exports = {
 };
 ```
 
-### `stats.warnings`
+### stats.warnings
 
 `boolean = true`
 
@@ -994,7 +1030,7 @@ module.exports = {
 };
 ```
 
-### `stats.warningsFilter`
+### stats.warningsFilter
 
 `array = []: string | RegExp | function (warning) => boolean` `string` `RegExp` `function (warning) => boolean`
 
@@ -1011,7 +1047,7 @@ module.exports = {
 
 W> `stats.warningsFilter` is deprecated in favor of [`ignoreWarnings`](/configuration/other-options/#ignorewarnings).
 
-### `stats.chunkRelations`
+### stats.chunkRelations
 
 `boolean = false`
 

@@ -357,6 +357,8 @@ import.meta.webpackHot.addStatusHandler((status) => {
 });
 ```
 
+Bear in mind that when the status handler returns a `Promise`, the HMR system will wait for the `Promise` to resolve before continuing.
+
 ### `removeStatusHandler`
 
 Remove a registered status handler.
