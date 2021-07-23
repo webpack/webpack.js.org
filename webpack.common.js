@@ -54,7 +54,7 @@ module.exports = ({ ssg = false }) => ({
           {
             loader: '@mdx-js/loader',
             options: {
-              remarkPlugins: mdPlugins,
+              remarkPlugins: [...mdPlugins, [require('remark-frontmatter')]],
             },
           },
         ],

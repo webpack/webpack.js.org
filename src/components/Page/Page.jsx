@@ -66,7 +66,7 @@ export default function Page(props) {
   let contentRender;
 
   if (typeof content === 'function') {
-    contentRender = content({}).props.children.slice(4); // Cut frontmatter information
+    contentRender = content({}).props.children;
     contentRender = Children.map(contentRender, (child) => {
       if (isValidElement(child)) {
         if (child.props.mdxType === 'pre') {

@@ -232,9 +232,7 @@ A cacheable loader must have a deterministic result when inputs and dependencies
 
 A function that can be called synchronously or asynchronously in order to return multiple results. The expected arguments are:
 
-<!-- eslint-skip -->
-
-```javascript
+```ts
 this.callback(
   err: Error | null,
   content: string | Buffer,
@@ -441,9 +439,7 @@ Resolves the given request to a module, applies all configured loaders and calls
 
 An array of all the loaders. It is writable in the pitch phase.
 
-<!-- eslint-skip -->
-
-```javascript
+```ts
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
 
@@ -642,9 +638,7 @@ module.exports = function (source) {
 
 The module will get bundled like this:
 
-<!-- eslint-skip -->
-
-```javascript
+```
 /***/ "./src/loader.js!./src/lib.js":
 /*!************************************!*\
   !*** ./src/loader.js!./src/lib.js ***!
