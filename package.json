@@ -146,7 +146,7 @@
     "workbox-webpack-plugin": "^6.1.5"
   },
   "dependencies": {
-    "@docsearch/react": "^3.0.0-alpha.37",
+    "@docsearch/react": "^3.0.0-alpha.38",
     "path-browserify": "^1.0.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
