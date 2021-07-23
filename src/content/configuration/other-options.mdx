@@ -205,6 +205,24 @@ module.exports = {
 };
 ```
 
+### debug
+
+`string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
+
+Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) option but for infrastructure. No default value is given.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    level: 'info',
+    debug: ['MyPlugin', /MyPlugin/, (name) => name.contains('MyPlugin')],
+  },
+};
+```
+
 ### level
 
 `string`
@@ -227,24 +245,6 @@ module.exports = {
   //...
   infrastructureLogging: {
     level: 'info',
-  },
-};
-```
-
-### debug
-
-`string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
-
-Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) option but for infrastructure. No default value is given.
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  infrastructureLogging: {
-    level: 'info',
-    debug: ['MyPlugin', /MyPlugin/, (name) => name.contains('MyPlugin')],
   },
 };
 ```
