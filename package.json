@@ -106,7 +106,7 @@
     "lint-staged": "^11.1.0",
     "lodash": "^4.17.21",
     "markdownlint": "^0.23.1",
-    "markdownlint-cli": "^0.27.1",
+    "markdownlint-cli": "^0.28.1",
     "mini-css-extract-plugin": "^2.1.0",
     "mkdirp": "^1.0.4",
     "modularscale-sass": "^3.0.3",
