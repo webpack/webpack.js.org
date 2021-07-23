@@ -135,7 +135,7 @@
     "start-server-and-test": "^1.13.0",
     "static-site-generator-webpack-plugin": "^3.4.1",
     "style-loader": "^3.2.1",
-    "tailwindcss": "^2.2.6",
+    "tailwindcss": "^2.2.7",
     "tap-spot": "^1.1.1",
     "unist-util-visit": "^2.0.3",
     "webpack": "^5.46.0",
