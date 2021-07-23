@@ -106,9 +106,7 @@ and then proceed to write your configuration:
 
 **webpack.config.coffee**
 
-<!-- eslint-skip -->
-
-```js
+```coffeescript
 HtmlWebpackPlugin = require('html-webpack-plugin')
 webpack = require('webpack')
 path = require('path')

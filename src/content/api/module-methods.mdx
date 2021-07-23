@@ -224,9 +224,7 @@ require.cache[module.id] !== module;
 
 W> `require.ensure()` is specific to webpack and superseded by `import()`.
 
-<!-- eslint-skip -->
-
-```js
+```ts
 require.ensure(
   dependencies: String[],
   callback: function(require),
@@ -266,9 +264,7 @@ Asynchronous Module Definition (AMD) is a JavaScript specification that defines 
 
 ### `define` (with factory)
 
-<!-- eslint-skip -->
-
-```js
+```ts
 define([name: String], [dependencies: String[]], factoryMethod: function(...))
 ```
 
@@ -291,9 +287,7 @@ W> This CANNOT be used in an asynchronous function.
 
 ### `define` (with value)
 
-<!-- eslint-skip -->
-
-```js
+```ts
 define(value: !Function)
 ```
 
@@ -309,9 +303,7 @@ W> This CANNOT be used in an async function.
 
 ### `require` (amd-version)
 
-<!-- eslint-skip -->
-
-```js
+```ts
 require(dependencies: String[], [callback: function(...)])
 ```
 
@@ -335,9 +327,7 @@ The internal `LabeledModulesPlugin` enables you to use the following methods for
 
 Export the given `value`. The label can occur before a function declaration or a variable declaration. The function name or variable name is the identifier under which the value is exported.
 
-<!-- eslint-skip -->
-
-```js
+```ts
 export: var answer = 42;
 export: function method(value) {
   // Do something...
@@ -352,18 +342,14 @@ Make all exports from the dependency available in the current scope. The `requir
 
 **some-dependency.js**
 
-<!-- eslint-skip -->
-
-```js
+```ts
 export: var answer = 42;
 export: function method(value) {
   // Do something...
 };
 ```
 
-<!-- eslint-skip -->
-
-```js
+```ts
 require: 'some-dependency';
 console.log(answer);
 method(...);
@@ -375,9 +361,7 @@ Aside from the module syntaxes described above, webpack also allows a few custom
 
 ### `require.context`
 
-<!-- eslint-skip -->
-
-```js
+```ts
 require.context(
   (directory: String),
   (includeSubdirs: Boolean) /* optional, default true */,
@@ -406,9 +390,7 @@ The full list of available modes and their behavior is described in [`import()`]
 
 ### `require.include`
 
-<!-- eslint-skip -->
-
-```js
+```ts
 require.include((dependency: String));
 ```
 
