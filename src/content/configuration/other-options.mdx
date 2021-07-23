@@ -420,12 +420,6 @@ module.exports = {
 
 An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
 
-### immutablePaths
-
-`[string]`
-
-An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
-
 ### buildDependencies
 
 `object = { hash boolean = true, timestamp boolean = true }`
@@ -440,6 +434,12 @@ Both `hash` and `timestamp` are optional.
 - `{ hash: true }`: Good for CI caching with a fresh checkout which doesn't keep timestamps and uses hashes.
 - `{ timestamp: true }`: Good for local development caching.
 - `{ timestamp: true, hash: true }`: Good for both cases mentioned above. Timestamps are compared first, which is cheap because webpack doesn't need to read files to compute their hashes. Content hashes will be compared only when timestamps are the same, which leads to a small performance hit for the initial build.
+
+### immutablePaths
+
+`[string]`
+
+An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
 
 ### module
 
