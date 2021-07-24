@@ -227,9 +227,7 @@ require.cache[module.id] !== module;
 
 W> `require.ensure()` 是 webpack 特有的，已被 `import()` 取代。
 
-<!-- eslint-skip -->
-
-```js
+```ts
 require.ensure(
   dependencies: String[],
   callback: function(require),
@@ -269,9 +267,7 @@ AMD（Asynchronous Module Definition）是一种定义了用于编写和加载�
 
 ### `define` (通过 factory 方法导出) {#define-with-factory}
 
-<!-- eslint-skip -->
-
-```js
+```ts
 define([name: String], [dependencies: String[]], factoryMethod: function(...))
 ```
 
@@ -294,9 +290,7 @@ W> 上面的写法不能在异步函数中使用。
 
 ### `define` (通过 value 导出) {#define-with-value}
 
-<!-- eslint-skip -->
-
-```js
+```ts
 define(value: !Function)
 ```
 
@@ -312,9 +306,7 @@ W> 上面的写法不能在异步函数中使用。
 
 ### `require` (AMD 版本) {#require-amd-version}
 
-<!-- eslint-skip -->
-
-```js
+```ts
 require(dependencies: String[], [callback: function(...)])
 ```
 
@@ -338,9 +330,7 @@ webpack 内置的 `LabeledModulesPlugin` 插件，允许你使用下面的方法
 
 导出给定的 `value`。标签可以出现在函数声明或变量声明之前。函数名或变量名是导出值的标识符。
 
-<!-- eslint-skip -->
-
-```js
+```ts
 export: var answer = 42;
 export: function method(value) {
   // Do something...
@@ -355,18 +345,14 @@ W> 在异步函数中使用，可能不会达到预期的效果。
 
 **some-dependency.js**
 
-<!-- eslint-skip -->
-
-```js
+```ts
 export: var answer = 42;
 export: function method(value) {
   // Do something...
 };
 ```
 
-<!-- eslint-skip -->
-
-```js
+```ts
 require: 'some-dependency';
 console.log(answer);
 method(...);
@@ -378,9 +364,7 @@ method(...);
 
 ### `require.context` {#requirecontext}
 
-<!-- eslint-skip -->
-
-```js
+```ts
 require.context(
   (directory: String),
   (includeSubdirs: Boolean) /* 可选的，默认值是 true */,
@@ -409,9 +393,7 @@ context('localeA').then((locale) => {
 
 ### `require.include` {#requireinclude}
 
-<!-- eslint-skip -->
-
-```js
+```ts
 require.include((dependency: String));
 ```
 

@@ -22,9 +22,7 @@ new webpack.BannerPlugin(options);
 
 ## Options {#options}
 
-<!-- eslint-skip -->
-
-```js
+```ts
 {
   banner: string | function, // the banner as string or function, it will be wrapped in a comment
   raw: boolean, // if true, banner will not be wrapped in a comment

@@ -110,9 +110,7 @@ npm install --save-dev coffeescript
 
 **webpack.config.coffee**
 
-<!-- eslint-skip -->
-
-```js
+```coffeescript
 HtmlWebpackPlugin = require('html-webpack-plugin')
 webpack = require('webpack')
 path = require('path')

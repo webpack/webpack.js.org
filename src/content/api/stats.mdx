@@ -74,10 +74,9 @@ npx webpack --profile --json=compilation-stats.json
 
 每个 `assets` 对象表示编译过程中生成的 `output` 文件。它们都遵循类似的结构：
 
-<!-- eslint-skip -->
-
-```js
+```json
 {
+<<<<<<< HEAD
   'chunkNames': [], // 该资源文件包含的 chunks
   'chunks': [ 10, 6 ], // 该资源文件包含的 chunk ID
   'comparedForEmit': false, // 指定是否对该资源文件和输出文件系统上相同文件进行比较
@@ -91,6 +90,21 @@ npx webpack --profile --json=compilation-stats.json
     'hotModuleReplacement': true, // 指定 asset 是否加载用于更新现有应用程序 (HMR) 的数据标志位
     'sourceFilename': 'originalfile.js', // 从源文件创建资产时（可能转换）sourceFilename
     'javascriptModule': true // 当 asset 是 javascript 和 ESM 时为 true
+=======
+  "chunkNames": [], // The chunks this asset contains
+  "chunks": [10, 6], // The chunk IDs this asset contains
+  "comparedForEmit": false, // Indicates whether or not the asset was compared with the same file on the output file system
+  "emitted": true, // Indicates whether or not the asset made it to the `output` directory
+  "name": "10.web.js", // The `output` filename
+  "size": 1058, // The size of the file in bytes
+  "info": {
+    "immutable": true, // A flag telling whether the asset can be long term cached (contains a hash)
+    "size": 1058, // The size in bytes, only becomes available after asset has been emitted
+    "development": true, // A flag telling whether the asset is only used for development and doesn't count towards user-facing assets
+    "hotModuleReplacement": true, // A flag telling whether the asset ships data for updating an existing application (HMR)
+    "sourceFilename": "originalfile.js", // sourceFilename when asset was created from a source file (potentially transformed)
+    "javascriptModule": true // true, when asset is javascript and an ESM
+>>>>>>> 53bbc74ba721db6a0d2b5437be8bd75f136a435b
   }
 }
 ```
