@@ -76,35 +76,19 @@ npx webpack --profile --json=compilation-stats.json
 
 ```json
 {
-<<<<<<< HEAD
-  'chunkNames': [], // 该资源文件包含的 chunks
-  'chunks': [ 10, 6 ], // 该资源文件包含的 chunk ID
-  'comparedForEmit': false, // 指定是否对该资源文件和输出文件系统上相同文件进行比较
-  'emitted': true, // 指定资源文件是否要生成到 `output` 目录中
-  'name': '10.web.js', // `output` 文件名
-  'size': 1058, // 文件大小（字节为单位）
-  'info': {
-    'immutable': true, // 指定 asset 是否可以长期缓存的标志位（包括哈希值）
-    'size': 1058, // 单位大小为字节，只有在资源文件生成之后才可以使用
-    'development': true, // 指定 asset 是否只用于 development 环境，而不面向用户的标志位
-    'hotModuleReplacement': true, // 指定 asset 是否加载用于更新现有应用程序 (HMR) 的数据标志位
-    'sourceFilename': 'originalfile.js', // 从源文件创建资产时（可能转换）sourceFilename
-    'javascriptModule': true // 当 asset 是 javascript 和 ESM 时为 true
-=======
-  "chunkNames": [], // The chunks this asset contains
-  "chunks": [10, 6], // The chunk IDs this asset contains
-  "comparedForEmit": false, // Indicates whether or not the asset was compared with the same file on the output file system
-  "emitted": true, // Indicates whether or not the asset made it to the `output` directory
-  "name": "10.web.js", // The `output` filename
-  "size": 1058, // The size of the file in bytes
+  "chunkNames": [], // 该资源文件包含的 chunks
+  "chunks": [ 10, 6 ], // 该资源文件包含的 chunk ID
+  "comparedForEmit": false, // 指定是否对该资源文件和输出文件系统上相同文件进行比较
+  "emitted": true, // 指定资源文件是否要生成到 `output` 目录中
+  "name": "10.web.js", // `output` 文件名
+  "size": 1058, // 文件大小（字节为单位）
   "info": {
-    "immutable": true, // A flag telling whether the asset can be long term cached (contains a hash)
-    "size": 1058, // The size in bytes, only becomes available after asset has been emitted
-    "development": true, // A flag telling whether the asset is only used for development and doesn't count towards user-facing assets
-    "hotModuleReplacement": true, // A flag telling whether the asset ships data for updating an existing application (HMR)
-    "sourceFilename": "originalfile.js", // sourceFilename when asset was created from a source file (potentially transformed)
-    "javascriptModule": true // true, when asset is javascript and an ESM
->>>>>>> 53bbc74ba721db6a0d2b5437be8bd75f136a435b
+    "immutable": true, // 指定 asset 是否可以长期缓存的标志位（包括哈希值）
+    "size": 1058, // 单位大小为字节，只有在资源文件生成之后才可以使用
+    "development": true, // 指定 asset 是否只用于 development 环境，而不面向用户的标志位
+    "hotModuleReplacement": true, // 指定 asset 是否加载用于更新现有应用程序 (HMR) 的数据标志位
+    "sourceFilename": "originalfile.js", // 从源文件创建资产时（可能转换）sourceFilename
+    "javascriptModule": true // 当 asset 是 javascript 和 ESM 时为 true
   }
 }
 ```
@@ -165,7 +149,7 @@ T> 从 webpack v4.40.0 版本开始，Asset 的 `info` 属性可用
   "assets": [
     // [asset objects](#asset-objects) 列表
   ],
-  "built": true, // 指定该模块经过 [Loaders](/concepts/loaders)、解析和代码生成 
+  "built": true, // 指定该模块经过 [Loaders](/concepts/loaders)、解析和代码生成
   "cacheable": true, // 是否可以缓存
   "chunks": [
     // 当前模块包含的 chunk ID
