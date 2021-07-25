@@ -235,9 +235,7 @@ cacheable(flag = true: boolean)
 
 可以同步或者异步调用的并返回多个结果的函数。预期的参数是：
 
-<!-- eslint-skip -->
-
-```javascript
+```ts
 this.callback(
   err: Error | null,
   content: string | Buffer,
@@ -444,9 +442,7 @@ loadModule(request: string, callback: function(err, source, sourceMap, module))
 
 所有 loader 组成的数组。它在 pitch 阶段的时候是可以写入的。
 
-<!-- eslint-skip -->
-
-```javascript
+```ts
 loaders = [{request: string, path: string, query: string, module: function}]
 ```
 
@@ -645,9 +641,7 @@ module.exports = function (source) {
 
 这个模块将获取像下面的 bundle：
 
-<!-- eslint-skip -->
-
-```javascript
+```
 /***/ "./src/loader.js!./src/lib.js":
 /*!************************************!*\
   !*** ./src/loader.js!./src/lib.js ***!
