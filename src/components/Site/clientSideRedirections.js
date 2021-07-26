@@ -14,7 +14,6 @@ export default function (location) {
     const searchParams = new URLSearchParams(location.search);
     const option = searchParams.get('option') || '';
     const options = option.split('/').filter(Boolean);
-    console.log(option, options);
     if (options.length === 0) return '/configuration/';
     return `/configuration/${options[0]}/#${options.join('').toLowerCase()}`;
   }
