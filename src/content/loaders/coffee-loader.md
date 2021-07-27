@@ -72,7 +72,7 @@ module.exports = {
     rules: [
       {
         test: /\.coffee$/,
-        loader: 'coffee-loader',
+        loader: "coffee-loader",
       },
     ],
   },
@@ -82,7 +82,7 @@ module.exports = {
 替代方案：
 
 ```js
-import coffee from 'coffee-loader!./file.coffee';
+import coffee from "coffee-loader!./file.coffee";
 ```
 
 然后按偏好运行 `webpack`
@@ -108,11 +108,11 @@ module.exports = {
     rules: [
       {
         test: /\.coffee$/,
-        loader: 'coffee-loader',
+        loader: "coffee-loader",
         options: {
           bare: false,
           transpile: {
-            presets: ['@babel/env'],
+            presets: ["@babel/env"],
           },
         },
       },
@@ -147,10 +147,10 @@ module.exports = {
     rules: [
       {
         test: /\.coffee$/,
-        loader: 'coffee-loader',
+        loader: "coffee-loader",
         options: {
           transpile: {
-            presets: ['@babel/env'],
+            presets: ["@babel/env"],
           },
         },
       },
@@ -171,7 +171,7 @@ module.exports = {
     rules: [
       {
         test: /\.coffee$/,
-        loader: 'coffee-loader',
+        loader: "coffee-loader",
         options: {
           literate: true,
         },
