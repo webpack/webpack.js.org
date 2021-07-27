@@ -34,15 +34,15 @@ Then add the plugin to your `webpack` configuration. For example:
 **webpack.config.js**
 
 ```js
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
   module: {
     rules: [
       {
         test: /.s?css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
     ],
   },
@@ -232,7 +232,7 @@ module.exports = {
         minimizerOptions: {
           level: {
             1: {
-              roundingPrecision: 'all=3,px=5',
+              roundingPrecision: "all=3,px=5",
             },
           },
         },
@@ -296,7 +296,7 @@ module.exports = {
       new CssMinimizerPlugin({
         minimizerOptions: {
           preset: [
-            'default',
+            "default",
             {
               discardComments: { removeAll: true },
             },
@@ -322,7 +322,7 @@ module.exports = {
     minimizer: [
       new CssMinimizerPlugin({
         minimizerOptions: {
-          preset: require.resolve('cssnano-preset-simple'),
+          preset: require.resolve("cssnano-preset-simple"),
         },
       }),
     ],
@@ -341,7 +341,7 @@ The `parser`,` stringifier` and `syntax` can be either a function or a string in
 > ⚠️ **If a function is passed, the `parallel` option must be disabled.**.
 
 ```js
-import sugarss from 'sugarss';
+import sugarss from "sugarss";
 
 module.exports = {
   optimization: {
@@ -368,7 +368,7 @@ module.exports = {
       new CssMinimizerPlugin({
         minimizerOptions: {
           processorOptions: {
-            parser: 'sugarss',
+            parser: "sugarss",
           },
         },
       }),
@@ -423,18 +423,18 @@ module.exports = {
 Don't forget to enable `sourceMap` options for all loaders.
 
 ```js
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
-  devtool: 'source-map',
+  devtool: "source-map",
   module: {
     loaders: [
       {
         test: /.s?css$/,
         use: [
           MiniCssExtractPlugin.loader,
-          { loader: 'css-loader', options: { sourceMap: true } },
-          { loader: 'sass-loader', options: { sourceMap: true } },
+          { loader: "css-loader", options: { sourceMap: true } },
+          { loader: "sass-loader", options: { sourceMap: true } },
         ],
       },
     ],
@@ -456,7 +456,7 @@ module.exports = {
       new CssMinimizerPlugin({
         minimizerOptions: {
           preset: [
-            'default',
+            "default",
             {
               discardComments: { removeAll: true },
             },
@@ -479,14 +479,14 @@ It is possible to use another minify function.
 
 ```js
 module.exports = {
-  devtool: 'source-map',
+  devtool: "source-map",
   optimization: {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
         minify: async (data, inputMap) => {
-          const csso = require('csso');
-          const sourcemap = require('source-map');
+          const csso = require("csso");
+          const sourcemap = require("source-map");
 
           const [[filename, input]] = Object.entries(data);
           const minifiedCss = csso.minify(input, {
@@ -518,7 +518,7 @@ module.exports = {
 
 ```js
 module.exports = {
-  devtool: 'source-map',
+  devtool: "source-map",
   optimization: {
     minimize: true,
     minimizer: [
@@ -538,7 +538,7 @@ module.exports = {
 
 ```js
 module.exports = {
-  devtool: 'source-map',
+  devtool: "source-map",
   optimization: {
     minimize: true,
     minimizer: [
