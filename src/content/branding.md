@@ -62,11 +62,15 @@ T> 对于那些遵循我们的指南，并已经深入了解的人，我们还�
 
 <img src="/assets/icon-square-small-slack.png" width="50" alt="icon square small example">
 
+<<<<<<< HEAD
 ## 字体 {#front}
 
 我们使用由一群极具天赋的人所设计的 [Atipo Foundry](http://atipofoundry.com/) 这款漂亮字体，它来自 [Geomanist Medium](http://atipofoundry.com/fonts/geomanist) 这个网站，并通过“随你付”的模式来提供完整的字体族。
 
 ## 调色板 {#color-palette}
+=======
+## Color Palette
+>>>>>>> ab209dfe5aa7e42e05f3e553be4cd8fb9e75d49f
 
 在 [Open Collective](https://opencollective.com/) 和 [Threadless](https://medium.com/u/840563ee2a56) 的帮助下，以下颜色在我们整个网站中被以各种组合形式使用，并且在 [webpack 官方商城](https://webpack.threadless.com/collections/the-final-release-collection/) 推出的时尚服装系列中也用了这些颜色！
 

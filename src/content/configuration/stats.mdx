@@ -455,7 +455,13 @@ module.exports = {
 它也可用通过命令行的参数实现：
 
 ```bash
-webpack-cli --colors
+npx webpack --stats-colors
+```
+
+To disable:
+
+```bash
+npx webpack --no-stats-colors
 ```
 
 你可以通过使用 [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code) 指定你自己的命令行终端颜色。
