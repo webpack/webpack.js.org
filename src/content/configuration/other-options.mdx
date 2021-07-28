@@ -131,118 +131,6 @@ module.exports = {
 };
 ```
 
-## loader {#loader}
-
-`object`
-
-在 [loader 上下文](/api/loaders/#the-loader-context)中暴露自定义值。
-
-例如，你可以在 loader 上下文中定义一个新变量：
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  // ...
-  loader: {
-    answer: 42,
-  },
-};
-```
-
-然后使用 `this.answer` 在 loader 中获取该值：
-
-**custom-loader.js**
-
-```javascript
-module.exports = function (source) {
-  // ...
-  console.log(this.answer); // will log `42` here
-  return source;
-};
-```
-
-T> 你可以覆盖 loader 上下文中的属性，因为 webpack 会将所有定义在 `loader` 中的属性负责到 loader 上下文中。
-
-## parallelism {#parallelism}
-
-`number = 100`
-
-限制并行处理的模块数量。可以用于调优性能或获取更可靠的性能分析结果。
-
-## profile {#profile}
-
-`boolean`
-
-捕获一个应用程序"配置文件"，包括统计和提示，然后可以使用 [Analyze](https://webpack.github.io/analyse/) 分析工具进行详细分析。
-
-T> 使用 [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) 可以更好地控制生成的配置文件。
-
-T> 与 `parallelism: 1` 混用以达到更好的结果。
-需要注意的是，这样做也会减慢建造速度。
-
-## recordsPath {#recordspath}
-
-`string`
-
-开启这个选项可以生成一个 JSON 文件，其中含有 webpack 的 "records" 记录 - 即「用于存储跨多次构建(across multiple builds)的模块标识符」的数据片段。可以使用此文件来跟踪在每次构建之间的模块变化。只要简单的设置一下路径,就可以生成这个 JSON 文件：
-
-**webpack.config.js**
-
-```javascript
-const path = require('path');
-
-module.exports = {
-  //...
-  recordsPath: path.join(__dirname, 'records.json'),
-};
-```
-
-如果你使用了[代码分离(code splittnig)](/guides/code-splitting)这样的复杂配置，records 会特别有用。这些数据用于确保拆分 bundle，以便实现你需要的[缓存(caching)](/guides/caching)行为。
-
-T> 注意，虽然这个文件是由编译器(compiler)生成的，但你可能仍然希望在源代码管理中追踪它，以便随时记录它的变化情况。
-
-W> 设置 `recordsPath` 本质上会把 `recordsInputPath` 和 `recordsOutputPath` 都设置成相同的路径。通常来讲这也是符合逻辑的，除非你决定改变记录文件的名称。可以查看下面的实例：
-
-## recordsInputPath {#recordsinputpath}
-
-`string`
-
-指定读取最后一条记录的文件的名称。这可以用来重命名一个记录文件，可以查看下面的实例：
-
-## recordsOutputPath {#recordsoutputpath}
-
-`string`
-
-指定记录要写入的位置。以下示例描述了如何用这个选项和 `recordsInptuPaht` 来重命名一个记录文件：
-
-**webpack.config.js**
-
-```javascript
-const path = require('path');
-
-module.exports = {
-  //...
-  recordsInputPath: path.join(__dirname, 'records.json'),
-  recordsOutputPath: path.join(__dirname, 'newRecords.json'),
-};
-```
-
-## name {#name}
-
-`string`
-
-配置的名称。当加载不同的配置时会被使用。
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  name: 'admin-app',
-};
-```
-
 ## infrastructureLogging {#infrastructurelogging}
 
 用于基础设施水平的日志选项。
@@ -321,6 +209,24 @@ module.exports = {
 };
 ```
 
+### debug {#debug}
+
+`string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
+
+开启特定日志比如插件(plugins)和加载器(loaders)的调试信息。 与 [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) 选项类似但仅仅对于基础设施而言。没有默认配置提供。
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  infrastructureLogging: {
+    level: 'info',
+    debug: ['MyPlugin', /MyPlugin/, (name) => name.contains('MyPlugin')],
+  },
+};
+```
+
 ### level {#level}
 
 `string`
@@ -347,24 +253,6 @@ module.exports = {
 };
 ```
 
-### debug {#debug}
-
-`string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
-
-开启特定日志比如插件(plugins)和加载器(loaders)的调试信息。 与 [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) 选项类似但仅仅对于基础设施而言。没有默认配置提供。
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  infrastructureLogging: {
-    level: 'info',
-    debug: ['MyPlugin', /MyPlugin/, (name) => name.contains('MyPlugin')],
-  },
-};
-```
-
 ### stream {#stream}
 
 <Badge text="5.31.0+" />
@@ -385,6 +273,118 @@ module.exports = {
 ```
 
 T> 在 TTY 流的情况下，会启用 `colors` 并禁用 `appendOnly`，反之亦然。
+
+## loader
+
+`object`
+
+在 [loader 上下文](/api/loaders/#the-loader-context) 中暴露自定义值。
+
+例如，你可以在 loader 上下文中定义一个新变量：
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  loader: {
+    answer: 42,
+  },
+};
+```
+
+然后使用 `this.answer` 在 loader 中获取该值：
+
+**custom-loader.js**
+
+```javascript
+module.exports = function (source) {
+  // ...
+  console.log(this.answer); // will log `42` here
+  return source;
+};
+```
+
+T> 你可以覆盖 loader 上下文中的属性，因为 webpack 会将所有定义在 `loader` 中的属性负责到 loader 上下文中。
+
+## name {#name}
+
+`string`
+
+配置的名称。当加载不同的配置时会被使用。
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  name: 'admin-app',
+};
+```
+
+## parallelism {#parallelism}
+
+`number = 100`
+
+限制并行处理的模块数量。可以用于调优性能或获取更可靠的性能分析结果。
+
+## profile {#profile}
+
+`boolean`
+
+捕获一个应用程序"配置文件"，包括统计和提示，然后可以使用 [Analyze](https://webpack.github.io/analyse/) 分析工具进行详细分析。
+
+T> 使用 [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) 可以更好地控制生成的配置文件。
+
+T> 与 `parallelism: 1` 混用以达到更好的结果。
+需要注意的是，这样做也会减慢建造速度。
+
+## recordsInputPath {#recordsinputpath}
+
+`string`
+
+指定读取最后一条记录的文件的名称。这可以用来重命名一个记录文件，可以查看下面的实例：
+
+## recordsOutputPath {#recordsoutputpath}
+
+`string`
+
+指定记录要写入的位置。以下示例描述了如何用这个选项和 `recordsInptuPaht` 来重命名一个记录文件：
+
+**webpack.config.js**
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  recordsInputPath: path.join(__dirname, 'records.json'),
+  recordsOutputPath: path.join(__dirname, 'newRecords.json'),
+};
+```
+
+## recordsPath {#recordspath}
+
+`string`
+
+开启这个选项可以生成一个 JSON 文件，其中含有 webpack 的 "records" 记录 - 即「用于存储跨多次构建(across multiple builds)的模块标识符」的数据片段。可以使用此文件来跟踪在每次构建之间的模块变化。只要简单的设置一下路径,就可以生成这个 JSON 文件：
+
+**webpack.config.js**
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  recordsPath: path.join(__dirname, 'records.json'),
+};
+```
+
+如果你使用了[代码分离(code splittnig)](/guides/code-splitting)这样的复杂配置，records 会特别有用。这些数据用于确保拆分 bundle，以便实现你需要的[缓存(caching)](/guides/caching)行为。
+
+T> 注意，虽然这个文件是由编译器(compiler)生成的，但你可能仍然希望在源代码管理中追踪它，以便随时记录它的变化情况。
+
+W> 设置 `recordsPath` 本质上会把 `recordsInputPath` 和 `recordsOutputPath` 都设置成相同的路径。通常来讲这也是符合逻辑的，除非你决定改变记录文件的名称。可以查看下面的实例：
 
 ## snapshot {#snapshot}
 
@@ -419,18 +419,6 @@ module.exports = {
 };
 ```
 
-### managedPaths {#managedpaths}
-
-`[string]`
-
-由包管理器管理的路径数组，可以信任它不会被修改。
-
-### immutablePaths {#immutable-paths}
-
-`[string]`
-
-由包管理器管理的路径数组，在其路径中包含一个版本或哈希，以便所有文件都是不可变的（immutable）。
-
 ### buildDependencies {#build-dependencies}
 
 `object = { hash boolean = true, timestamp boolean = true }`
@@ -445,6 +433,19 @@ module.exports = {
 - `{ hash: true }`：对 CI 缓存很有帮助，使用新的 checkout，不需要保存时间戳，并且使用哈希。
 - `{ timestamp: true }`：对应本地开发缓存很用帮助。
 - `{ timestamp: true, hash: true }`：对于以上提到的两者都很有帮助。首先比较时间戳，这代价很低，因为 webpack 不需要读取文件来计算它们的哈希值。仅当时间戳相同时才会比较内容哈希，这对初始构建的性能影响很小。
+
+### immutablePaths {#immutable-paths}
+
+`[string]`
+
+由包管理器管理的路径数组，在其路径中包含一个版本或哈希，以便所有文件都是不可变的（immutable）。
+
+### managedPaths {#managedpaths}
+
+`[string]`
+
+由包管理器管理的路径数组，可以信任它不会被修改。
+
 
 ### module {#module}
 

@@ -15,7 +15,7 @@
   --docsearch-primary-color: #1d78c1 !important;
 }
 .DocSearch-Button {
-  @apply bg-transparent lg:bg-gray-500 transition duration-200 lg:w-[155px] !important;
+  @apply bg-transparent lg:bg-gray-500 transition duration-200 !important;
 }
 .DocSearch-Button-Placeholder {
   @apply hidden lg:font-light lg:text-sm lg:block lg:text-gray-200 lg:dark:text-gray-300 transition duration-200 !important;
