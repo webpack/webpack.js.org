@@ -16,11 +16,11 @@ repo: https://github.com/webpack-contrib/remark-loader
 
 
 
-Load markdown through `remark`.
+通过 `remark` 加载 markdown。
 
-## Usage {#usage}
+## 用法 {#usage}
 
-Simply add the loader to your configuration, and pass options.
+只需将 loader 添加到您的配置中，并设置 options。
 
 ```js
 import md from "markdown-file.md";
@@ -57,10 +57,10 @@ module.exports = {
 };
 ```
 
-Here's the full list of [`remark` plugins](https://github.com/wooorm/remark/blob/master/doc/plugins.md).
+下面是 [`remark` plugins](https://github.com/wooorm/remark/blob/master/doc/plugins.md) 的完整列表。
 
-We no longer support any `react` specific features.
-Please see the wonderful [MDX](https://mdxjs.com/) project if you're interested in mixing JSX with Markdown.
+我们不再支持任何 `react` 的特殊功能。
+如果您对在 JSX 中使用 Markdown 感兴趣，请参阅很棒的 [MDX](https://mdxjs.com/) 项目。
 
 ## Options {#options}
 
@@ -82,7 +82,7 @@ Please see the wonderful [MDX](https://mdxjs.com/) project if you're interested 
 Type: `Array<String|Array>`
 Default: `[]`
 
-Allows to connect [`remark` plugins](https://github.com/wooorm/remark/blob/master/doc/plugins.md)
+可以和 [`remark` plugins](https://github.com/wooorm/remark/blob/master/doc/plugins.md) 一起使用
 
 ##### String {#string}
 
@@ -115,7 +115,7 @@ module.exports = {
 
 ##### Array {#array}
 
-If need to specify options for the plugin, can pass the plugin using an array, where the second argument will be options.
+如果需要为插件指定 options，可以使用数组传递插件，其中第二个参数就是将要设置的 options。
 
 **webpack.config.js**
 
@@ -160,7 +160,7 @@ module.exports = {
 Type: `Object`
 Default: `undefined`
 
-Pass [`remark-stringify` options](https://github.com/remarkjs/remark/tree/main/packages/remark-stringify#options) and [`remark-parse` options](https://github.com/remarkjs/remark/tree/main/packages/remark-parse#options) options to the `remark`.
+将 [`remark-stringify` options](https://github.com/remarkjs/remark/tree/main/packages/remark-stringify#options) 选项和 [`remark-parse` options](https://github.com/remarkjs/remark/tree/main/packages/remark-parse#options) 选项传递给 `remark`。
 
 **webpack.config.js**
 
@@ -195,8 +195,8 @@ module.exports = {
 Type: `Object`
 Default: `undefined`
 
-Configure the [`remark`](https://github.com/unifiedjs/unified#processordatakey-value) with information available to all plugins.
-Information is stored in an in-memory key-value store.
+使用所有插件通用的配置 [`remark`](https://github.com/unifiedjs/unified#processordatakey-value)。
+配置信息存储在内存中的键值存储中。
 
 **webpack.config.js**
 
@@ -237,8 +237,8 @@ module.exports = {
 Type: `Boolean`
 Default: `true`
 
-By default, the frontMatter is removed.
-To override this behavior, set `removeFrontMatter` to `false` and add `remark-frontmatter` to plugins.
+默认情况下，refortmatter 是被移除的。
+如果要覆盖这个配置，需要在插件中添加 `remark-frontmatter`，并设置 `removeFrontMatter` 为 `false`。
 
 **webpack.config.js**
 
@@ -268,18 +268,18 @@ module.exports = {
 };
 ```
 
-## Inspiration {#inspiration}
+## 启发 {#inspiration}
 
-This project was inspired the following open source work:
+这个项目收到了以下开源作品的启发：
 
 - [`react-markdown-loader`](https://github.com/javiercf/react-markdown-loader)
 - [`marksy`](https://github.com/cerebral/marksy)
 
-## Examples {#examples}
+## 示例 {#examples}
 
-### Markdown to HTML {#markdown-to-html}
+### Markdown 转为 HTML {#markdown-to-html}
 
-To get html, need to add [`remark-html`](https://github.com/wooorm/remark-html) to the remark plugins and add [`html-loader`](/loaders/html-loader/) to the `webpack.config`
+要获得 html，需要在 remark 插件中添加 [`remark-html`](https://github.com/wooorm/remark-html)，并在 `webpack.config` 中添加 [`html-loader`](/loaders/html-loader/)。
 
 ```js
 import md from "markdown-file.md";
@@ -316,7 +316,7 @@ module.exports = {
 };
 ```
 
-### Markdown to Markdown {#markdown-to-markdown}
+### Markdown 转为 Markdown {#markdown-to-markdown}
 
 **index.js**
 
@@ -345,9 +345,9 @@ module.exports = {
 };
 ```
 
-## Contributing {#contributing}
+## 贡献 {#contributing}
 
-Please take a moment to read our contributing guidelines if you haven't yet done so.
+如果您还没有贡献代码，请花点时间阅读我们的贡献指南。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/remark-loader/blob/master/.github/CONTRIBUTING.md)
 
