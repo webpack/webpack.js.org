@@ -13551,11 +13551,7 @@ webpack-sources@^1.1.0, webpack-sources@^1.4.3:
 
 webpack-sources@^3.1.1:
   version "3.1.1"
-<<<<<<< HEAD
-  resolved "https://registry.npmjs.org/webpack-sources/-/webpack-sources-3.1.1.tgz#586d15bc9a9723765f6a735f672357d6402f9c57"
-=======
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.1.1.tgz#586d15bc9a9723765f6a735f672357d6402f9c57"
->>>>>>> ef41088e78ae679677e5067b181545fa739788c0
   integrity sha512-ztUmIWq0LWaw+1YyR3bXtUPjt8vQedtI9WxGn/q1V1ASHsombnaso7MN9S25lzKS/OuC9Q8lEg3GsZexjDbdlQ==
 
 "webpack.vote@https://github.com/webpack/voting-app.git":
@@ -13565,15 +13561,9 @@ webpack-sources@^3.1.1:
     react-textarea-autosize "^5.2.1"
     uuid "^3.1.0"
 
-<<<<<<< HEAD
-webpack@^5.47.0:
-  version "5.47.1"
-  resolved "https://registry.npmjs.org/webpack/-/webpack-5.47.1.tgz#20fb7d76f68912a2249a6dd7ff16faa178049ad2"
-=======
 webpack@^5.47.1:
   version "5.47.1"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.47.1.tgz#20fb7d76f68912a2249a6dd7ff16faa178049ad2"
->>>>>>> ef41088e78ae679677e5067b181545fa739788c0
   integrity sha512-cW+Mzy9SCDapFV4OrkHuP6EFV2mAsiQd+gOa3PKtHNoKg6qPqQXZzBlHH+CnQG1osplBCqwsJZ8CfGO6XWah0g==
   dependencies:
     "@types/eslint-scope" "^3.7.0"
