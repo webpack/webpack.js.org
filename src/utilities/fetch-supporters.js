@@ -17,10 +17,14 @@ const absoluteFilename = path.resolve(
   filename
 );
 
-const graphqlEndpoint = 'https://api.opencollective.com/graphql/v2';
+let graphqlEndpoint = 'https://api.opencollective.com/graphql/v2';
 
 // https://github.com/opencollective/opencollective-api/blob/master/server/graphql/v2/query/TransactionsQuery.ts#L81
 const graphqlPageSize = 1000;
+
+if (process.env && process.env.CI && process.env.OPENCOLLECTIVE_API_KEY) {
+  graphqlEndpoint = graphqlEndpoint + `/${process.env.OPENCOLLECTIVE_API_KEY}`;
+}
 
 const membersGraphqlQuery = `query account($limit: Int, $offset: Int) {
   account(slug: "webpack") {
@@ -102,7 +106,7 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
       return allNodes;
     } else {
       // sleep for a while
-      await new Promise((resolve) => setTimeout(resolve, 6500));
+      await new Promise((resolve) => setTimeout(resolve, 100));
     }
   }
 };
