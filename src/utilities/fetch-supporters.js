@@ -102,7 +102,7 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
       return allNodes;
     } else {
       // sleep for a while
-      await new Promise((resolve) => setTimeout(resolve, 650));
+      await new Promise((resolve) => setTimeout(resolve, 6500));
     }
   }
 };
