@@ -42,7 +42,7 @@ const membersGraphqlQuery = `query account($limit: Int, $offset: Int) {
 }`;
 
 // only query transactions in last year
-const transactionsGraphqlQuery = `query transactions($dateFrom: ISODateTime, $limit: Int, $offset: Int) {
+const transactionsGraphqlQuery = `query transactions($dateFrom: DateTime, $limit: Int, $offset: Int) {
   transactions(account: {
     slug: "webpack"
   }, dateFrom: $dateFrom, limit: $limit, offset: $offset, includeIncognitoTransactions: false) {
@@ -95,6 +95,8 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
         'Content-Type': 'application/json',
       },
     }).then((response) => response.json());
+    console.log(result);
+    if (result.errors) throw new Error(result.errors[0].message);
     const nodes = getNodes(result.data);
     allNodes = [...allNodes, ...nodes];
     body.variables.offset += graphqlPageSize;
@@ -102,7 +104,7 @@ const getAllNodes = async (graphqlQuery, getNodes) => {
       return allNodes;
     } else {
       // sleep for a while
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 6000));
     }
   }
 };
