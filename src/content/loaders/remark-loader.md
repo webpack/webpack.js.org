@@ -3,6 +3,8 @@ title: remark-loader
 source: https://raw.githubusercontent.com/webpack-contrib/remark-loader/master/README.md
 edit: https://github.com/webpack-contrib/remark-loader/edit/master/README.md
 repo: https://github.com/webpack-contrib/remark-loader
+translators:
+  - fikyair
 ---
 
 
