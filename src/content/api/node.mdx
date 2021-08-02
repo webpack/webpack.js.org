@@ -340,6 +340,9 @@ compiler.outputFileSystem = fs;
 compiler.run((err, stats) => {
   // Read the output later:
   const content = fs.readFileSync('...');
+  compiler.close((closeErr) => {
+    // ...
+  });
 });
 ```
 
