@@ -345,6 +345,9 @@ compiler.outputFileSystem = fs;
 compiler.run((err, stats) => {
   // 之后读取输出:
   const content = fs.readFileSync('...');
+  compiler.close((closeErr) => {
+    // ...
+  });
 });
 ```
 
