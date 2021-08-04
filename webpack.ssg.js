@@ -119,7 +119,7 @@ module.exports = (env) =>
         description: 'webpack documentation web application',
         background_color: '#2b3a42',
         theme_color: '#2b3a42',
-        display: 'fullscreen',
+        display: 'minimal-ui',
         inject: false,
         fingerprints: false,
         ios: true,
