@@ -278,6 +278,23 @@ webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
 );
 ```
 
+## output.compareBeforeEmit
+
+`boolean = true`
+
+Tells webpack to check if to be emitted file already exists and has the same content before writing to the output file system.
+
+W> webpack will not write output file when file already exists on disk with the same content.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    compareBeforeEmit: false,
+  },
+};
+```
+
 ## output.crossOriginLoading
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
@@ -2141,23 +2158,6 @@ module.exports = {
       // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
       module: false,
     },
-  },
-};
-```
-
-## `output.compareBeforeEmit`
-
-`boolean = true`
-
-Tells webpack to check if to be emitted file already exists and has the same content before writing to the output file system.
-
-W> webpack will not write output file when file already exists on disk with the same content.
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    compareBeforeEmit: false,
   },
 };
 ```
