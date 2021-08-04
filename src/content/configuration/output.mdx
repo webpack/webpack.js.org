@@ -401,6 +401,21 @@ module.exports = {
 };
 ```
 
+## output.enabledWasmLoadingTypes
+
+`[string]`
+
+List of wasm loading types enabled for use by entry points.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledWasmLoadingTypes: ['fetch'],
+  },
+};
+```
+
 ## `output.filename`
 
 `string` `function (pathData, assetInfo) => string`
@@ -2178,21 +2193,6 @@ module.exports = {
   //...
   output: {
     wasmLoading: 'fetch',
-  },
-};
-```
-
-## `output.enabledWasmLoadingTypes`
-
-`[string]`
-
-List of wasm loading types enabled for use by entry points.
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    enabledWasmLoadingTypes: ['fetch'],
   },
 };
 ```
