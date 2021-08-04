@@ -386,6 +386,21 @@ module.exports = {
 };
 ```
 
+## output.enabledLibraryTypes
+
+`[string]`
+
+List of library types enabled for use by entry points.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledLibraryTypes: ['module'],
+  },
+};
+```
+
 ## `output.filename`
 
 `string` `function (pathData, assetInfo) => string`
@@ -2099,21 +2114,6 @@ module.exports = {
   //...
   output: {
     workerChunkLoading: false,
-  },
-};
-```
-
-## `output.enabledLibraryTypes`
-
-`[string]`
-
-List of library types enabled for use by entry points.
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    enabledLibraryTypes: ['module'],
   },
 };
 ```
