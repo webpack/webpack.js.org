@@ -63,7 +63,7 @@
   ],
   "name": "webpack Documentation",
   "short_name": "webpack",
-  "display": "fullscreen",
+  "display": "minimal-ui",
   "start_url": "/",
   "description": "webpack documentation web application",
   "background_color": "#2b3a42",
