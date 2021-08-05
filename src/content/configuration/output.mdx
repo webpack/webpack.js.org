@@ -282,7 +282,28 @@ webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
 );
 ```
 
+<<<<<<< HEAD
 ## output.crossOriginLoading {#outputcrossoriginloading}
+=======
+## output.compareBeforeEmit
+
+`boolean = true`
+
+Tells webpack to check if to be emitted file already exists and has the same content before writing to the output file system.
+
+W> webpack will not write output file when file already exists on disk with the same content.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    compareBeforeEmit: false,
+  },
+};
+```
+
+## output.crossOriginLoading
+>>>>>>> ade8beace05f5096239c224379c4e5cfa0f8032c
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
 
@@ -299,6 +320,7 @@ webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
 
 查看 [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate)。
 
+<<<<<<< HEAD
 ## `output.enabledChunkLoadingTypes` {#outputenabledchunkloadingtypes}
 
 `[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
@@ -318,6 +340,9 @@ module.exports = {
 ```
 
 ## `output.devtoolModuleFilenameTemplate` {#outputdevtoolmodulefilenametemplate}
+=======
+## `output.devtoolModuleFilenameTemplate`
+>>>>>>> ade8beace05f5096239c224379c4e5cfa0f8032c
 
 `string = 'webpack://[namespace]/[resource-path]?[loaders]'` `function (info) => string`
 
@@ -373,7 +398,86 @@ module.exports = {
 
 例如，如果你有两个 library，分别使用命名空间 `library1` 和 `library2`，并且都有一个文件 `./src/index.js`（可能具有不同内容），它们会将这些文件暴露为 `webpack://library1/./src/index.js` 和 `webpack://library2/./src/index.js`。
 
+<<<<<<< HEAD
 ## `output.filename` {#outputfilename}
+=======
+## output.enabledChunkLoadingTypes
+
+`[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
+
+List of chunk loading types enabled for use by entry points. Will be automatically filled by webpack. Only needed when using a function as entry option and returning chunkLoading option from there.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    enabledChunkLoadingTypes: ['jsonp', 'require'],
+  },
+};
+```
+
+## output.enabledLibraryTypes
+
+`[string]`
+
+List of library types enabled for use by entry points.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledLibraryTypes: ['module'],
+  },
+};
+```
+
+## output.enabledWasmLoadingTypes
+
+`[string]`
+
+List of wasm loading types enabled for use by entry points.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledWasmLoadingTypes: ['fetch'],
+  },
+};
+```
+
+## output.environment
+
+Tell webpack what kind of ES-features may be used in the generated runtime-code.
+
+```javascript
+module.exports = {
+  output: {
+    environment: {
+      // The environment supports arrow functions ('() => { ... }').
+      arrowFunction: true,
+      // The environment supports BigInt as literal (123n).
+      bigIntLiteral: false,
+      // The environment supports const and let for variable declarations.
+      const: true,
+      // The environment supports destructuring ('{ a, b } = obj').
+      destructuring: true,
+      // The environment supports an async import() function to import EcmaScript modules.
+      dynamicImport: false,
+      // The environment supports 'for of' iteration ('for (const x of array) { ... }').
+      forOf: true,
+      // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
+      module: false,
+    },
+  },
+};
+```
+
+## `output.filename`
+>>>>>>> ade8beace05f5096239c224379c4e5cfa0f8032c
 
 `string` `function (pathData, assetInfo) => string`
 
@@ -2090,6 +2194,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.enabledLibraryTypes`
 
 `[string]`
@@ -2106,6 +2211,9 @@ module.exports = {
 ```
 
 ## `output.futureEmitAssets` {#outputfutureemitassets}
+=======
+## `output.futureEmitAssets`
+>>>>>>> ade8beace05f5096239c224379c4e5cfa0f8032c
 
 `boolean = false`
 
@@ -2122,6 +2230,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.environment` {#outputenvironment}
 
 告诉 webpack 在生成的运行时代码中可以使用哪个版本的 ES 特性。
@@ -2167,6 +2276,9 @@ module.exports = {
 ```
 
 ## `output.wasmLoading` {#output-wasm-loading}
+=======
+## `output.wasmLoading`
+>>>>>>> ade8beace05f5096239c224379c4e5cfa0f8032c
 
 `boolean = false` `string`
 
@@ -2186,6 +2298,7 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.enabledWasmLoadingTypes` {#output-enabled-wasm-loading-types}
 
 `[string]`
@@ -2202,6 +2315,9 @@ module.exports = {
 ```
 
 ## `output.iife` {#output-iife}
+=======
+## `output.iife`
+>>>>>>> ade8beace05f5096239c224379c4e5cfa0f8032c
 
 `boolean = true`
 
