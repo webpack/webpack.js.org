@@ -19,6 +19,7 @@ W> Because experimental features have relaxed semantic versioning and might cont
 Available options:
 
 - `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module.
+- [`buildHttp`](#experimentsbuildhttp)
 - [`executeModule`](#experimentsexecutemodule)
 - `layers`: Enable module and chunk layers.
 - [`lazyCompilation`](#experimentslazycompilation)
@@ -33,6 +34,7 @@ module.exports = {
   //...
   experiments: {
     asyncWebAssembly: true,
+    buildHttp: true,
     executeModule: true,
     layers: true,
     lazyCompilation: true,
@@ -42,6 +44,10 @@ module.exports = {
   },
 };
 ```
+
+### experiments.buildHttp
+
+Build remote resources from the `http(s):` protocol.
 
 ### experiments.executeModule
 
