@@ -70,13 +70,13 @@
         <loc>https://webpack.js.org/api/compilation-hooks</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/api/compilation-object</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/api/compiler-hooks</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/contextmodulefactory-hooks</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api/compilation-object</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/hot-module-replacement</loc>
