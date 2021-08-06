@@ -70,7 +70,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.14.8",
+    "@babel/core": "^7.15.0",
     "@babel/eslint-parser": "^7.15.0",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.14.9",
@@ -161,7 +161,7 @@
     "unist-util-visit": "^2.0.3",
     "webpack-pwa-manifest": "^4.3.0",
     "webpack.vote": "https://github.com/webpack/voting-app.git",
-    "workbox-window": "^6.1.5"
+    "workbox-window": "^6.2.0"
   },
   "resolutions": {
     "sitemap-static/minimist": "1.2.5",
