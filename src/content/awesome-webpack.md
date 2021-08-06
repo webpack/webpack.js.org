@@ -5,11 +5,7 @@ contributors:
   - snitin315
 ---
 
-## [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
-
-> A curated list of awesome Webpack resources, libraries, tools and applications
-
-Inspired by the [awesome](https://github.com/sindresorhus/awesome) list. Feel free to improve this list by contributing.
+A curated list of awesome webpack resources, libraries, tools and applications. It is inspired by the [awesome](https://github.com/sindresorhus/awesome) list. Feel free to improve this list by contributing.
 
 ## Webpack Ecosystem
 
@@ -103,7 +99,6 @@ _People passionate about Webpack (In no particular order)_
 #### Utility
 
 - [Babel Loader](https://github.com/babel/babel-loader): Webpack plugin for Babel. -- _Maintainer_: `Babel Team` [![Github][githubicon]](https://github.com/babel) [![Twitter][twittericon]](https://twitter.com/babel)
-- [ESLint Loader](https://github.com/webpack/eslint-loader): A ESlint loader for webpack. -- _Maintainer_: `Ricardo Gobbo de Souza` [![Github][githubicon]](https://github.com/ricardogobbosouza)
 - [JSHint Loader](https://github.com/webpack/jshint-loader): JSHint loader module for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
 - [JSCS Loader](https://github.com/unindented/jscs-loader): Run your source through the JSCS style checker. -- _Maintainer_: `Daniel Perez Alvarez` [![Github][githubicon]](https://github.com/unindented)
 - [Bundle Loader](https://github.com/webpack/bundle-loader): Bundle loader for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
