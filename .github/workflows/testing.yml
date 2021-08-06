@@ -1,9 +1,6 @@
 name: Ensure PR
 
 on:
-  push:
-    branches-ignore:
-      - master
   pull_request:
 
 jobs:
