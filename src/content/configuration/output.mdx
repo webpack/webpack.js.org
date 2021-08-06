@@ -282,6 +282,23 @@ webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
 );
 ```
 
+## output.compareBeforeEmit {#outputcomparebeforeemit}
+
+`boolean = true`
+
+告知 webpack 在写入到输出文件系统时检查输出的文件是否已经存在并且拥有相同内容。
+
+W> 当在磁盘中已经存在有相同内容的文件时，webpack 将不会写入输出文件。
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    compareBeforeEmit: false,
+  },
+};
+```
+
 ## output.crossOriginLoading {#outputcrossoriginloading}
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
@@ -298,24 +315,6 @@ webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
 当上面的模板字符串或函数产生重复时使用的备用内容。
 
 查看 [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate)。
-
-## `output.enabledChunkLoadingTypes` {#outputenabledchunkloadingtypes}
-
-`[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
-
-允许入口点使用的 chunk 加载类型列表。将被 webpack 自动填充。只有当使用一个函数作为入口配置项并从那里返回 chunkLoading 配置项时才需要。
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    //...
-    enabledChunkLoadingTypes: ['jsonp', 'require'],
-  },
-};
-```
 
 ## `output.devtoolModuleFilenameTemplate` {#outputdevtoolmodulefilenametemplate}
 
@@ -372,6 +371,80 @@ module.exports = {
 此选项确定 [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate) 使用的模块名称空间。未指定时的默认值为：[`output.library`](#outputlibrary)。在加载多个通过 webpack 构建的 library 时，用于防止 source map 中源文件路径冲突。
 
 例如，如果你有两个 library，分别使用命名空间 `library1` 和 `library2`，并且都有一个文件 `./src/index.js`（可能具有不同内容），它们会将这些文件暴露为 `webpack://library1/./src/index.js` 和 `webpack://library2/./src/index.js`。
+
+## `output.enabledChunkLoadingTypes` {#outputenabledchunkloadingtypes}
+
+`[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
+
+允许入口点使用的 chunk 加载类型列表。将被 webpack 自动填充。只有当使用一个函数作为入口配置项并从那里返回 chunkLoading 配置项时才需要。
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    enabledChunkLoadingTypes: ['jsonp', 'require'],
+  },
+};
+```
+
+## `output.enabledLibraryTypes` {#outputenabledlibrarytypes}
+
+`[string]`
+
+入口点可用的 library 类型列表.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledLibraryTypes: ['module'],
+  },
+};
+```
+
+## `output.enabledWasmLoadingTypes` {#outputenabledwasmloadingtypes}
+
+`[string]`
+
+用于设置入口支持的 wasm 加载类型的列表。
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledWasmLoadingTypes: ['fetch'],
+  },
+};
+
+## `output.environment` {#outputenvironment}
+
+告诉 webpack 在生成的运行时代码中可以使用哪个版本的 ES 特性。
+
+```javascript
+module.exports = {
+  output: {
+    environment: {
+      // The environment supports arrow functions ('() => { ... }').
+      arrowFunction: true,
+      // The environment supports BigInt as literal (123n).
+      bigIntLiteral: false,
+      // The environment supports const and let for variable declarations.
+      const: true,
+      // The environment supports destructuring ('{ a, b } = obj').
+      destructuring: true,
+      // The environment supports an async import() function to import EcmaScript modules.
+      dynamicImport: false,
+      // The environment supports 'for of' iteration ('for (const x of array) { ... }').
+      forOf: true,
+      // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
+      module: false,
+    },
+  },
+};
+```
 
 ## `output.filename` {#outputfilename}
 
@@ -2090,21 +2163,6 @@ module.exports = {
 };
 ```
 
-## `output.enabledLibraryTypes`
-
-`[string]`
-
-入口点可用的 library 类型列表.
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    enabledLibraryTypes: ['module'],
-  },
-};
-```
-
 ## `output.futureEmitAssets` {#outputfutureemitassets}
 
 `boolean = false`
@@ -2118,50 +2176,6 @@ module.exports = {
   //...
   output: {
     futureEmitAssets: true,
-  },
-};
-```
-
-## `output.environment` {#outputenvironment}
-
-告诉 webpack 在生成的运行时代码中可以使用哪个版本的 ES 特性。
-
-```javascript
-module.exports = {
-  output: {
-    environment: {
-      // The environment supports arrow functions ('() => { ... }').
-      arrowFunction: true,
-      // The environment supports BigInt as literal (123n).
-      bigIntLiteral: false,
-      // The environment supports const and let for variable declarations.
-      const: true,
-      // The environment supports destructuring ('{ a, b } = obj').
-      destructuring: true,
-      // The environment supports an async import() function to import EcmaScript modules.
-      dynamicImport: false,
-      // The environment supports 'for of' iteration ('for (const x of array) { ... }').
-      forOf: true,
-      // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
-      module: false,
-    },
-  },
-};
-```
-
-## `output.compareBeforeEmit` {#outputcomparebeforeemit}
-
-`boolean = true`
-
-告诉 webpack 在写入输出文件系统（output file system）之前检查要发出的文件是否已经存在并且具有相同的内容。
-
-W> 当文件存在并且内容没有变更时，webpack 不会输出该文件。
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    compareBeforeEmit: false,
   },
 };
 ```
@@ -2182,21 +2196,6 @@ module.exports = {
   //...
   output: {
     wasmLoading: 'fetch',
-  },
-};
-```
-
-## `output.enabledWasmLoadingTypes` {#output-enabled-wasm-loading-types}
-
-`[string]`
-
-用于设置入口支持的 wasm 加载类型的列表。
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    enabledWasmLoadingTypes: ['fetch'],
   },
 };
 ```

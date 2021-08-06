@@ -119,7 +119,7 @@ module.exports = (env) =>
         description: 'webpack 中文文档 web 应用',
         background_color: '#2b3a42',
         theme_color: '#2b3a42',
-        display: 'fullscreen',
+        display: 'minimal-ui',
         inject: false,
         fingerprints: false,
         ios: true,
