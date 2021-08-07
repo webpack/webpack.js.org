@@ -41,15 +41,10 @@ _People passionate about Webpack (In no particular order)_
 
 #### File Type
 
-- [File Loader](https://github.com/webpack/file-loader): File loader module for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
-- [URL Loader](https://github.com/webpack/url-loader): URL loader module for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
 - [HTML Loader](https://github.com/webpack/html-loader): HTML loader module for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
-- [Raw Loader](https://github.com/webpack/raw-loader): Raw file loader module for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
 - [Image Loader](https://github.com/thetalecrafter/img-loader): Image minimizing loader for webpack. -- _Maintainer_: `Andy VanWagoner` [![Github][githubicon]](https://github.com/thetalecrafter) [![Twitter][twittericon]](https://twitter.com/thetalecrafter)
 - [Responsive Loader](https://github.com/herrstucki/responsive-loader): Loader for responsive images. -- _Maintainer_: `Jeremy Stucki` [![Github][githubicon]](https://github.com/herrstucki)
 - [SVG Url Loader](https://github.com/bhovhannes/svg-url-loader): Loader which loads SVG file as utf-8 encoded Url. -- _Maintainer_: `Hovhannes Babayan` [![Github][githubicon]](https://github.com/bhovhannes)
-- [json5 Loader](https://github.com/webpack/json5-loader): json5 loader module for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
-- [json Loader](https://github.com/webpack/json-loader): json loader module for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
 - [mermaid Loader](https://github.com/popul/mermaid-loader): [mermaid](https://github.com/mermaid-js/mermaid) loader module (diagrams) for Webpack. -- _Maintainer_: `Paul Musso` [![Github][githubicon]](https://github.com/popul)
 - [wasm loader](https://github.com/ballercat/wasm-loader): wasm binary loader module for Webpack. -- _Maintainer_: `Arthur Buldauskas` [![Github][githubicon]](https://github.com/wasm-loader)
 - [Imagemin Loader/Plugin](https://github.com/itgalaxy/imagemin-webpack): Image minimizing loader + plugin for webpack. -- _Maintainer_: `itgalaxy inc.` [![Github][githubicon]](https://github.com/itgalaxy)
@@ -89,7 +84,6 @@ _People passionate about Webpack (In no particular order)_
 #### Language & Framework
 
 - [TS Loader](https://github.com/TypeStrong/ts-loader): TypeScript loader for webpack. -- _Maintainer_: `TypeStrong Team` [![Github][githubicon]](https://github.com/TypeStrong)
-- [Awesome TypeScript Loader](https://github.com/s-panferov/awesome-typescript-loader): Awesome TS loader for Webpack. -- _Maintainer_: `Stanislav Panferov` [![Github][githubicon]](https://github.com/s-panferov) [![Twitter][twittericon]](https://twitter.com/babel)
 - [Coffee Loader](https://github.com/webpack/coffee-loader): Coffee loader module for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
 - [Bootstrap Loader](https://github.com/shakacode/bootstrap-loader): Load Bootstrap styles in your Webpack bundle. -- _Maintainer_: `ShakaCode Team` [![Github][githubicon]](https://github.com/shakacode) [![Twitter][twittericon]](https://twitter.com/shakacode)
 - [PostHTML Loader](https://github.com/posthtml/posthtml-loader): PostHTML loader for Webpack. -- _Maintainer_: `PostHTML Team` [![Github][githubicon]](https://github.com/posthtml) [![Twitter][twittericon]](https://twitter.com/PostHTML)
@@ -99,9 +93,6 @@ _People passionate about Webpack (In no particular order)_
 #### Utility
 
 - [Babel Loader](https://github.com/babel/babel-loader): Webpack plugin for Babel. -- _Maintainer_: `Babel Team` [![Github][githubicon]](https://github.com/babel) [![Twitter][twittericon]](https://twitter.com/babel)
-- [JSHint Loader](https://github.com/webpack/jshint-loader): JSHint loader module for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
-- [JSCS Loader](https://github.com/unindented/jscs-loader): Run your source through the JSCS style checker. -- _Maintainer_: `Daniel Perez Alvarez` [![Github][githubicon]](https://github.com/unindented)
-- [Bundle Loader](https://github.com/webpack/bundle-loader): Bundle loader for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
 - [Worker Loader](https://github.com/webpack/worker-loader): Worker loader module for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
 - [Resolve URL Loader](https://github.com/bholloway/resolve-url-loader): Resolves relative paths in url() statements. -- _Maintainer_: `Ben Holloway` [![Github][githubicon]](https://github.com/bholloway)
 - [Import Loader](https://github.com/webpack/imports-loader): Imports loader module for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
@@ -118,7 +109,6 @@ _People passionate about Webpack (In no particular order)_
 
 #### Testing
 
-- [Mocha Loader](https://github.com/webpack/mocha-loader): Mocha loader module for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
 - [Karma Webpack](https://github.com/webpack/karma-webpack): Use Karma with Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
 - [Istanbul Webpack plugin](https://github.com/DxCx/webpack-istanbul-plugin): Use Istanbul instrumenter for the whole pack. -- _Maintainer_: `Hagai Cohen` [![Github][githubicon]](https://github.com/DxCx)
 
@@ -135,7 +125,6 @@ _People passionate about Webpack (In no particular order)_
 
 ### Webpack Plugins
 
-- [Extract Text Plugin](https://github.com/webpack/extract-text-webpack-plugin): Extract text from bundle into a file. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
 - [DefinePlugin](https://webpack.js.org/plugins/define-plugin/): Create global constants which can be configured at compile time. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
 - [Compression Plugin](https://github.com/webpack/compression-webpack-plugin): Prepare assets to serve with Content-Encoding. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
 - [Offline Plugin](https://github.com/NekR/offline-plugin): Offline plugin (ServiceWorker, AppCache) for Webpack. -- _Maintainer_: `Arthur Stolyar` [![Github][githubicon]](https://github.com/NekR) [![Twitter][twittericon]](https://twitter.com/nekrtemplar)
@@ -156,11 +145,9 @@ _People passionate about Webpack (In no particular order)_
 - [Modules CDN Webpack Plugin](https://github.com/mastilver/modules-cdn-webpack-plugin) - Dynamically load your modules from a CDN. -- _Maintainer_: `Thomas Sileghem` [![Github][githubicon]](https://github.com/mastilver)
 - [Generate package.json Plugin](https://github.com/lostpebble/generate-package-json-webpack-plugin) - Limit dependencies in a deployment `package.json` to only those that are actually being used by your bundle. -- _Maintainer_: `Paul Myburgh` [![Github][githubicon]](https://github.com/lostpebble)
 - [Progressive Web App Manifest](https://github.com/arthurbergmz/webpack-pwa-manifest) - PWA manifest manager and generator. -- _Maintainer_: `Arthur A. Bergamaschi` [![Github][githubicon]](https://github.com/arthurbergmz)
-- [Friendly errors](https://github.com/geowarin/friendly-errors-webpack-plugin) - Recognizes certain classes of webpack errors and cleans, aggregates and prioritizes them. -- _Maintainer_: `Geoffroy Warin` [![Github][githubicon]](https://github.com/geowarin)
 - [FileManager Webpack Plugin](https://github.com/gregnb/filemanager-webpack-plugin) - Copy, move, delete files and directories before and after Webpack builds -- _Maintainer_: `Gregory Nowakowski` [![Github][githubicon]](https://github.com/gregnb)
 - [Fork TS Checker Webpack Plugin](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin) - Webpack plugin that runs typescript type checker on a separate process. -- _Maintainer_: `TypeStrong Team` [![Github][githubicon]](https://github.com/TypeStrong)
 - [Duplicate Package Checker Webpack Plugin](https://github.com/darrenscerri/duplicate-package-checker-webpack-plugin) - Warns you when multiple versions of the same package exist in your bundle -- _Maintainer_: `Darren Scerri` [![Github][githubicon]](https://github.com/darrenscerri)
-- [PurgeCSS Webpack Plugin](https://github.com/FullHuman/purgecss-webpack-plugin) - A plugin to remove unused css with purgecss -- _Maintainer_: `Floriel Fedry` [![Github][githubicon]](https://github.com/Ffloriel)
 - [Circular Dependency Plugin](https://github.com/aackerman/circular-dependency-plugin) - Detect modules with circular dependencies when bundling -- _Maintainer_: `Aaron Ackerman` [![Github][githubicon]](https://github.com/aackerman)
 - [webpack-inject-plugin](https://github.com/adierkens/webpack-inject-plugin) - A webpack plugin to dynamically inject code into the bundle. -- _Maintainer_: `Adam Dierkens` [![Github][githubicon]](https://github.com/adierkens)
 - [Public Path Manipulation Plugin](https://github.com/agoldis/webpack-require-from) - control `publicPath` of dynamically loaded resources at runtime -- _Maintainer_: `Andrew Goldis` [![Github][githubicon]](https://github.com/agoldis)
