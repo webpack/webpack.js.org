@@ -278,6 +278,23 @@ webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
 );
 ```
 
+## output.compareBeforeEmit
+
+`boolean = true`
+
+Tells webpack to check if to be emitted file already exists and has the same content before writing to the output file system.
+
+W> webpack will not write output file when file already exists on disk with the same content.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    compareBeforeEmit: false,
+  },
+};
+```
+
 ## output.crossOriginLoading
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
@@ -294,24 +311,6 @@ Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web
 A fallback used when the template string or function above yields duplicates.
 
 See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate).
-
-## `output.enabledChunkLoadingTypes`
-
-`[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
-
-List of chunk loading types enabled for use by entry points. Will be automatically filled by webpack. Only needed when using a function as entry option and returning chunkLoading option from there.
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    //...
-    enabledChunkLoadingTypes: ['jsonp', 'require'],
-  },
-};
-```
 
 ## `output.devtoolModuleFilenameTemplate`
 
@@ -368,6 +367,81 @@ If multiple modules would result in the same name, [`output.devtoolFallbackModul
 This option determines the modules namespace used with the [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.library`](#outputlibrary). It's used to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
 
 For example, if you have 2 libraries, with namespaces `library1` and `library2`, which both have a file `./src/index.js` (with potentially different contents), they will expose these files as `webpack://library1/./src/index.js` and `webpack://library2/./src/index.js`.
+
+## output.enabledChunkLoadingTypes
+
+`[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
+
+List of chunk loading types enabled for use by entry points. Will be automatically filled by webpack. Only needed when using a function as entry option and returning chunkLoading option from there.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    enabledChunkLoadingTypes: ['jsonp', 'require'],
+  },
+};
+```
+
+## output.enabledLibraryTypes
+
+`[string]`
+
+List of library types enabled for use by entry points.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledLibraryTypes: ['module'],
+  },
+};
+```
+
+## output.enabledWasmLoadingTypes
+
+`[string]`
+
+List of wasm loading types enabled for use by entry points.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    enabledWasmLoadingTypes: ['fetch'],
+  },
+};
+```
+
+## output.environment
+
+Tell webpack what kind of ES-features may be used in the generated runtime-code.
+
+```javascript
+module.exports = {
+  output: {
+    environment: {
+      // The environment supports arrow functions ('() => { ... }').
+      arrowFunction: true,
+      // The environment supports BigInt as literal (123n).
+      bigIntLiteral: false,
+      // The environment supports const and let for variable declarations.
+      const: true,
+      // The environment supports destructuring ('{ a, b } = obj').
+      destructuring: true,
+      // The environment supports an async import() function to import EcmaScript modules.
+      dynamicImport: false,
+      // The environment supports 'for of' iteration ('for (const x of array) { ... }').
+      forOf: true,
+      // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
+      module: false,
+    },
+  },
+};
+```
 
 ## `output.filename`
 
@@ -2086,21 +2160,6 @@ module.exports = {
 };
 ```
 
-## `output.enabledLibraryTypes`
-
-`[string]`
-
-List of library types enabled for use by entry points.
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    enabledLibraryTypes: ['module'],
-  },
-};
-```
-
 ## `output.futureEmitAssets`
 
 `boolean = false`
@@ -2114,50 +2173,6 @@ module.exports = {
   //...
   output: {
     futureEmitAssets: true,
-  },
-};
-```
-
-## `output.environment`
-
-Tell webpack what kind of ES-features may be used in the generated runtime-code.
-
-```javascript
-module.exports = {
-  output: {
-    environment: {
-      // The environment supports arrow functions ('() => { ... }').
-      arrowFunction: true,
-      // The environment supports BigInt as literal (123n).
-      bigIntLiteral: false,
-      // The environment supports const and let for variable declarations.
-      const: true,
-      // The environment supports destructuring ('{ a, b } = obj').
-      destructuring: true,
-      // The environment supports an async import() function to import EcmaScript modules.
-      dynamicImport: false,
-      // The environment supports 'for of' iteration ('for (const x of array) { ... }').
-      forOf: true,
-      // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
-      module: false,
-    },
-  },
-};
-```
-
-## `output.compareBeforeEmit`
-
-`boolean = true`
-
-Tells webpack to check if to be emitted file already exists and has the same content before writing to the output file system.
-
-W> webpack will not write output file when file already exists on disk with the same content.
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    compareBeforeEmit: false,
   },
 };
 ```
@@ -2178,21 +2193,6 @@ module.exports = {
   //...
   output: {
     wasmLoading: 'fetch',
-  },
-};
-```
-
-## `output.enabledWasmLoadingTypes`
-
-`[string]`
-
-List of wasm loading types enabled for use by entry points.
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    enabledWasmLoadingTypes: ['fetch'],
   },
 };
 ```
