@@ -8,7 +8,7 @@ contributors:
   - anshumanv
 ---
 
-## `experiments`
+## experiments
 
 `boolean: false`
 
@@ -47,7 +47,59 @@ module.exports = {
 
 ### experiments.buildHttp
 
-Build remote resources from the `http(s):` protocol.
+When eanbled, webpack can build remote resources with the `http(s):` protocol.
+
+- Type: one of the following:
+  - `boolean`
+  - `HttpUriOptions`
+    ```ts
+    {
+      cacheLocation?: false | string,
+      frozen?: boolean,
+      lockfileLocation?: string,
+      upgrade?: boolean
+    }
+    ```
+- Example
+
+  ```javascript
+  // webpack.config.js
+  module.exports = {
+    //...
+    experiments: {
+      buildHttp: true,
+    },
+  };
+  ```
+
+  ```js
+  // src/index.js
+  import pMap1 from 'https://cdn.skypack.dev/p-map';
+  // note that webpack will build pMap1 just like a regular local module
+  console.log(pMap1);
+  ```
+
+#### experiments.buildHttp.cacheLocation
+
+Define where to persist remote resources.
+
+By default webpack would use `<compiler-name.>webpack.lock.data/`, but you can disable it by setting it to `false`.
+
+Note that you should commit files under `cacheLocation` into a version control system as no network requests will be made during the `production` mode.
+
+#### experiments.buildHttp.frozen
+
+Freeze the remote resources and lockfile. Any modification to the lockfile or resource contents will result in an error.
+
+#### experiments.buildHttp.lockfileLocation
+
+Define the location to store the lockfile.
+
+By default webpack would generate a `<compiler-name.>webpack.lock` file, you're expected to commit it into a version control system. During the `production` mode, webpack will build those modules with `http(s):` protocol from the lockfile and cached remote resources under [`experiments.buildHttp.cacheLocation`](#experimentsbuildhttpcachelocation).
+
+#### experiments.buildHttp.upgrade
+
+Detect changes to remote resources and upgrade them automatically. It's possible to opt-out this feature by setting `upgrade` to `false`.
 
 ### experiments.executeModule
 
