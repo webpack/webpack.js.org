@@ -349,7 +349,7 @@ These functions are now always asynchronous instead of calling their callback sy
 
 ## Loader configuration is through `options`
 
-You can *no longer* configure a loader with a custom property in the `webpack.config.js`. It must be done through the `options`. The following configuration with the `ts` property is no longer valid with webpack 2:
+You can _no longer_ configure a loader with a custom property in the `webpack.config.js`. It must be done through the `options`. The following configuration with the `ts` property is no longer valid with webpack 2:
 
 ```js
 module.exports = {
@@ -369,7 +369,7 @@ module.exports = {
 
 ### What are `options`?
 
-Good question. Well, strictly speaking it's 2 possible things; both ways to configure a webpack loader. Classically `options` was called `query` and was a string which could be appended to the name of the loader. Much like a query string but actually with [greater powers](https://github.com/webpack/loader-utils#parsequery):
+Good question. Well, strictly speaking it's 2 possible things; both ways to configure a webpack loader. Classically `options` was called `query` and was a string which could be appended to the name of the loader. Much like a query string but actually with [greater powers](https://github.com/webpack/loader-utils#parsequery):
 
 ```js
 module.exports = {
