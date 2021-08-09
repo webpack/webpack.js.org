@@ -184,7 +184,6 @@ _People passionate about Webpack (In no particular order)_
 - [HJS Webpack](https://github.com/HenrikJoreteg/hjs-webpack): Helpers/presets for setting up webpack with hotloading. -- _Maintainer_: `Henrik Joreteg` [![Github][githubicon]](https://github.com/HenrikJoreteg)
 - [Webpack Dashboard](https://github.com/FormidableLabs/webpack-dashboard): A CLI dashboard for webpack dev server. -- _Maintainer_: `Formidable Labs` [![Github][githubicon]](https://github.com/FormidableLabs)
 - [Neutrino](https://github.com/mozilla-neutrino/neutrino-dev): Combines the power of Webpack with the simplicity of presets. -- _Maintainer_: `Eli Perelman` [![Github][githubicon]](https://github.com/eliperelman)
-- [Webpack Chain](https://github.com/mozilla-neutrino/webpack-chain): A chaining API to generate and simplify the mod. of Webpack 2 configurations. -- _Maintainer_: `Eli Perelman` [![Github][githubicon]](https://github.com/eliperelman)
 - [Speed Measure Plugin](https://github.com/stephencookdev/speed-measure-webpack-plugin) - Measures the speed of your webpack plugins and loaders. -- _Maintainer_: `Stephen Cook` [![Github][githubicon]](https://github.com/stephencookdev)
 - [packtracker.io](https://packtracker.io/?utm_source=github&utm_medium=awesome-webpack&utm_campaign=social) - Webpack bundle analysis on every commit, report webpack stats to every pull request.
 - [BundleStats](https://github.com/bundle-stats/bundle-stats) - Generates bundle report(sizes, assets, modules) and compares the results between different builds. -- _Maintainer_: `Vio` [![Github][githubicon]](https://github.com/vio) [![Twitter][twittericon]](https://twitter.com/vio)
@@ -197,8 +196,6 @@ _People passionate about Webpack (In no particular order)_
 
 - Aniketh Saha | 16-Oct-19 - [Creating a Custom webpack Plugin](https://alligator.io/js/create-custom-webpack-plugin/)
 - Antoine Caron | 18-Jan-19 - [Webpack : an unexpected journey](https://medium.zenika.com/webpack-an-unexpected-journey-26f987efd1c5)
-- Andrew Welch | 23-Oct-18 - [An Annotated webpack 4 Config for Frontend Web Development](https://nystudio107.com/blog/an-annotated-webpack-4-config-for-frontend-web-development)
-- Gábor Soós | 24-Apr-17 - [How to do proper tree-shaking in Webpack 2](https://blog.craftlab.hu/how-to-do-proper-tree-shaking-in-webpack-2-e27852af8b21)
 - Mark Erikson | 07-Mar-17 - [Declaratively Rendering Earth in 3D, Building a Cesium + React App with Webpack](http://blog.isquaredsoftware.com/2017/03/declarative-earth-part-1-cesium-webpack/)
 - Joseph Zimmerman | 2-Feb-17 - [A Detailed Introduction To Webpack.](https://www.smashingmagazine.com/2017/02/a-detailed-introduction-to-webpack/)
 - Jamund Ferguson | 22-Jul-16 - [Manually Tuning Webpack Builds.](https://medium.com/@xjamundx/manually-tuning-webpack-builds-284923f47f44#.lbvkidezh)
@@ -206,7 +203,6 @@ _People passionate about Webpack (In no particular order)_
 - Raja Rao DV | 10-Apr-16 - [Webpack  —  The Confusing Parts.](https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9#.qmfmplobc)
 - Andrew Ray | 09-Apr-16 - [Webpack: When To Use and Why.](http://blog.andrewray.me/webpack-when-to-use-and-why/)
 - Jonathan Creamer | 25-Feb-16 - [WebPack Code splitting with ES6 and Babel 6.](http://jonathancreamer.com/webpack-code-splitting-with-es6-and-babel-6/)
-- Grgur Grisogono | 15-Feb-16 - [Webpack 2 Tree Shaking Configuration.](https://medium.com/modus-create-front-end-development/webpack-2-tree-shaking-configuration-9f1de90f3233#.5pddvz5lz)
 - Ilya Zayats | 07-Feb-16 - [How to split your apps by routes with Webpack.](https://medium.com/@somebody32/how-to-split-your-apps-by-routes-with-webpack-36b7a8a6231#.iy99i4f7r)
 - Sebastian De Deyne | 04-Feb-16 - [Adventure Time With Webpack.](https://sebastiandedeyne.com/posts/2016/adventure-time-with-webpack)
 - Jonathan Creamer | 10-Jan-16 - [Advanced WebPack Part 2 - Code Splitting.](http://jonathancreamer.com/advanced-webpack-part-2-code-splitting)
@@ -223,11 +219,8 @@ _People passionate about Webpack (In no particular order)_
 - Colt Steele via Youtube| Mar-7-2019 - [Learn Webpack Course](https://www.youtube.com/playlist?list=PLblA84xge2_zwxh3XJqy6UVxS60YdusY8)
 - Naomi A. Jacobs via BuzzJS 2.0 2017 | Feb-27-2017 - [Webpack: It's Not Magic](https://www.youtube.com/watch?v=_QEM9kdV-b0)
 - Jack Franklin at HalfStack2016 | 18-Nov-16 | [Seamless client side JavaScript w/ Webpack](https://opbeat.com/community/posts/seamless-client-side-javascript-with-webpack-by-jack-franklin)
-- Emil Oberg via YouTube | Nov-4-2016 - [Introduction to Webpack 2, what is it?](https://www.youtube.com/watch?v=C_ZtQClrVYw)
-- Emil Oberg via YouTube | Nov-4-2016 - [Webpack 2 - A full tutorial](https://www.youtube.com/watch?v=eWmkBNBTbMM)
 - Sean Larkin NEJS Conf | 30-Sep-16 | [Webpack: Core Concepts](https://www.youtube.com/watch?v=AZPYL30ozCY&feature=youtu.be)
 - Front End Center Webpack from First Principles | 22-Aug-16 - [Intro to Webpack](https://www.youtube.com/watch?v=WQue1AN93YU)
-- Sean Larkin on AngularAir | 03-Aug-16 - [ngAir 75 - Webpack 2 with Sean Larkin.](https://plus.google.com/events/c76mih8qcjj0ffocpdlcbegvejs)
 - Eric Clemmons chat with Kent C. Dodds | 01-Jul-16 - [Webpack HMR.](https://www.youtube.com/watch?v=PthDwpgrhmQ)
 - Mirko Nasato (5 Part Series) | 07-Jun-16 - [Angular2 with Webpack Project Setup.](https://www.youtube.com/playlist?list=PLgGUMhSgtxJyIQ4vI3BzlCzZLHL79Ew6p)
 - Jonathan Creamer at Nodevember | 05-Dec-15 - [Advanced WebPack.](https://www.youtube.com/watch?v=MzVFrIAwwS8)
@@ -238,7 +231,7 @@ _People passionate about Webpack (In no particular order)_
 ### Courses
 
 - [Webpack for Everyone](https://laracasts.com/series/webpack-for-everyone) - Free Laracasts series by [Jeffrey Way](http://twitter.com/jeffrey_way)
-- [Webpack 4 Fundamentals](https://frontendmasters.com/courses/webpack-fundamentals/) - Brief introduction about Webpack fundamentals by [Sean Larkin](https://twitter.com/thelarkinn)
+- [Webpack Fundamentals](https://frontendmasters.com/courses/webpack-fundamentals/) - Brief introduction about Webpack fundamentals by [Sean Larkin](https://twitter.com/thelarkinn)
 - [Web Performance with Webpack](https://frontendmasters.com/courses/performance-webpack/) - Solving common web performance problems using Webpack by [Sean Larkin](https://twitter.com/thelarkinn)
 - [Intro to webpack (playlist)](https://egghead.io/playlists/intro-to-webpack-4ca2d994) - Egghead.io playlist of a few videos by [Kent C. Dodds](https://twitter.com/kentcdodds) (the first is free).
 - [Angular and Webpack for modular applications](https://egghead.io/courses/angular-and-webpack-for-modular-applications) - Egghead.io course by [Kent C. Dodds](https://twitter.com/kentcdodds)
@@ -269,7 +262,6 @@ _People passionate about Webpack (In no particular order)_
 
 #### Framework Agnostic
 
-- [Annotated webpack 4 Config](https://github.com/nystudio107/annotated-webpack-4-config) - This is the companion github repo for the [An Annotated webpack 4 Config for Frontend Web Development](https://nystudio107.com/blog/an-annotated-webpack-4-config-for-frontend-web-development) article.
 - [ES6 TodoMVC with Webpack](https://github.com/kentcdodds/es6-todomvc) - Repo used to teach webpack. (Check branches). from [Kent C. Dodds](https://github.com/kentcdodds).
 
 #### React
@@ -282,9 +274,7 @@ _People passionate about Webpack (In no particular order)_
 - [React Native Calculator](https://github.com/benoitvallon/react-native-nw-react-calculator) - Mobile, desktop and website Apps with the same code from [Benoit Vallon](https://github.com/benoitvallon).
 - [React Cordova Boilerplate](https://github.com/unimonkiez/react-cordova-boilerplate) - TodoMVC example for React with Cordova from [Yuval Saraf](https://github.com/unimonkiez).
 - [React Universally](https://github.com/ctrlplusb/react-universally) - A starter kit giving you the minimum for a production ready universal react application.
-- [Budgeting Application](https://github.com/ModusCreateOrg/budgeting-sample-app-webpack2) - A fully functional boilerplate application optimized for dev and prod, including PRPL from [Modus Create](https://github.com/ModusCreateOrg).
 - [Razzle Material-UI Styled Example](https://github.com/kireerik/razzle-material-ui-styled-example) - With Styled Components using Express with compression from [Erik Engi](https://github.com/kireerik).
-- [React Typescript Starter](https://github.com/shortgiraffe4/react-typescript-starter) - A React + TypeScript + Webpack 4 + React-Router 4 + Redux + React-Redux + Redux-Thunk + PostCSS + Bootstrap 4 boilerplate.
 - [Read](https://github.com/logustra/read) - A highly scalable react boilerplate from [logustra](https://github.com/logustra)
 
 #### Vue
