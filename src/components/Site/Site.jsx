@@ -77,7 +77,7 @@ function Site(props) {
    */
   const _strip = (array) => {
     let anchorTitleIndex = array.findIndex(
-      (item) => item.name.toLowerCase() === 'index.md'
+      (item) => item.name.toLowerCase() === 'index.mdx'
     );
 
     if (anchorTitleIndex !== -1) {

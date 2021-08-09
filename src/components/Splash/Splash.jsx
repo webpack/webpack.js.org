@@ -11,7 +11,7 @@ import { PlaceholderComponent } from '../Placeholder/Placeholder';
 import isClient from '../../utilities/is-client';
 
 // Import Demo Content
-import SplashContent from '../../content/index.md';
+import SplashContent from '../../content/index.mdx';
 
 // Load Styling
 import './Splash.scss';
@@ -55,11 +55,7 @@ const Splash = () => {
       <div className="splash__section splash__section--dark page__content">
         <Container>
           <Markdown>
-            <div
-              dangerouslySetInnerHTML={{
-                __html: SplashContent,
-              }}
-            />
+            <SplashContent />
           </Markdown>
         </Container>
       </div>
