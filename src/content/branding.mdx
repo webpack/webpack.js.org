@@ -31,7 +31,12 @@ Double the size of the inner dark blue cube to get an idea how much space the lo
 
 For dark backgrounds, you can use the negative version of the logo:
 
-<div style={{ display: 'block', background: '#111' }}>
+export const style = {
+  display: 'block',
+  background: '#111',
+};
+
+<div style={style}>
   <img
     src="https://raw.githubusercontent.com/webpack/media/master/logo/logo-on-dark-bg.png"
     alt="webpack logo default with proper spacing on light background"
