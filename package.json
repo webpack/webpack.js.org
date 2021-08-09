@@ -25,7 +25,7 @@
   },
   "scripts": {
     "clean-dist": "rimraf ./dist",
-    "clean-printable": "rimraf src/content/**/printable.mdx",
+    "clean-printable": "rimraf src/content/**/printable.md",
     "preclean": "run-s clean-dist clean-printable",
     "clean": "rimraf src/content/**/_*.md src/**/_*.json repositories/*.json",
     "start": "npm run clean-dist && webpack serve --config webpack.dev.js --env dev --progress --node-env development",
