@@ -22,15 +22,17 @@ contributors:
 
 Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index.js` and will output the result in `dist/main.js` minified and optimized for production.
 
+T> [createapp.dev](https://createapp.dev/webpack) is an online tool for creating custom webpack configuration. It allows you to select various features that will be combined and added to resulting configuration file. Also, it generates an example project based on provided webpack configuration that you can review in your browser and download.
+
 Usually your projects will need to extend this functionality, for this you can create a `webpack.config.js` file in the root folder and webpack will automatically use it.
 
 All the available configuration options are specified below.
 
 T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
 
-## Use different configuration file
+## Use a different configuration file
 
-If for some reason you want to use different configuration file depending on certain situations you can change this via command line by using the `--config` flag.
+If for some reason you want to use different configuration file depending on certain situations, you can change this via command line by using the `--config` flag.
 
 **package.json**
 
@@ -1170,4 +1172,4 @@ found 0 vulnerabilities
 Congratulations! Your new webpack configuration file has been created!
 ```
 
-[createapp.dev - create a webpack configuration in your browser](https://createapp.dev/webpack) is an online tool for creating custom webpack configuration. It allows you to select various features that will be combined and added to resulting configuration file. Also, it generates an example project based on provided webpack configuration that you can review in your browser and download.
+
