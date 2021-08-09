@@ -5,7 +5,7 @@ const front = require('front-matter');
 
 // root path
 const rootPath = path.join('src', 'content');
-const outFileName = 'printable.md';
+const outFileName = 'printable.mdx';
 
 console.info(
   'Concatenating *.md files of each content directory to create chapter-wide help files to be used for printing'

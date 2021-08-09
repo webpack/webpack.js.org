@@ -12,5 +12,5 @@ package-lock.json
 .cache
 internal-links.tap
 stats.json
-printable.md
+printable.mdx
 repositories/*.json
