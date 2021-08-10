@@ -42,15 +42,13 @@ _People passionate about Webpack (In no particular order)_
 #### File Type
 
 - [HTML Loader](https://github.com/webpack/html-loader): HTML loader module for Webpack. -- _Maintainer_: `Webpack Team` [![Github][githubicon]](https://github.com/webpack)
-- [Image Loader](https://github.com/thetalecrafter/img-loader): Image minimizing loader for webpack. -- _Maintainer_: `Andy VanWagoner` [![Github][githubicon]](https://github.com/thetalecrafter) [![Twitter][twittericon]](https://twitter.com/thetalecrafter)
 - [Responsive Loader](https://github.com/herrstucki/responsive-loader): Loader for responsive images. -- _Maintainer_: `Jeremy Stucki` [![Github][githubicon]](https://github.com/herrstucki)
 - [SVG Url Loader](https://github.com/bhovhannes/svg-url-loader): Loader which loads SVG file as utf-8 encoded Url. -- _Maintainer_: `Hovhannes Babayan` [![Github][githubicon]](https://github.com/bhovhannes)
 - [mermaid Loader](https://github.com/popul/mermaid-loader): [mermaid](https://github.com/mermaid-js/mermaid) loader module (diagrams) for Webpack. -- _Maintainer_: `Paul Musso` [![Github][githubicon]](https://github.com/popul)
-- [wasm loader](https://github.com/ballercat/wasm-loader): wasm binary loader module for Webpack. -- _Maintainer_: `Arthur Buldauskas` [![Github][githubicon]](https://github.com/wasm-loader)
+- [wasm loader](https://github.com/ballercat/wasm-loader): wasm binary loader module for Webpack. -- _Maintainer_: `Arthur Buldauskas` [![Github][githubicon]](https://github.com/ballercat)
 - [Imagemin Loader/Plugin](https://github.com/itgalaxy/imagemin-webpack): Image minimizing loader + plugin for webpack. -- _Maintainer_: `itgalaxy inc.` [![Github][githubicon]](https://github.com/itgalaxy)
 - [Bin Exec Loader](https://github.com/milewski/bin-exec-loader): Pipe any file through any binary. -- _Maintainer_: `Rafael Milewski` [![Github][githubicon]](https://github.com/milewski)
 - [GraphQL Loader](https://github.com/stephen/graphql-loader): `.graphql` document loader. -- _Maintainer_: `Stephen Wan` [![Github][githubicon]](https://github.com/stephen)
-- [C/C++ Loader](https://github.com/ClickSimply/cpp-wasm-loader): Load native C/C++ files with minimal bundle bloat. -- _Maintainer_: `Scott Lott` [![Github][githubicon]](https://github.com/ClickSimply)
 
 #### Component & Template
 
@@ -238,7 +236,6 @@ _People passionate about Webpack (In no particular order)_
 - [Using Webpack for Production JavaScript Applications](https://egghead.io/courses/using-webpack-for-production-javascript-applications) - Egghead.io course by [Kent C. Dodds](https://twitter.com/kentcdodds) (advanced)
 - [Webpack Fundamentals](https://www.pluralsight.com/courses/webpack-fundamentals) - [Joe Eames](https://twitter.com/josepheames) for Pluralsight (intermediate)
 - [Webpack Academy](https://webpack.academy) - A comprehensive webpack learning resource.
-- [Webpack workshops](https://slashgear.github.io/webpack-workshop/) - Collection of courses to learn webpack from novice to advanced levels by Antoine Caron
 - [Webpack from scratch series](https://www.youtube.com/playlist?list=PLLhEJK7fQIxB2gZBIzYI50NPsAQERD9rL) on YouTube by Paris Nakita Kejser
 
 ### Books
@@ -257,7 +254,6 @@ _People passionate about Webpack (In no particular order)_
 - [Angular2 Webpack](https://github.com/preboot/angular2-webpack) - A complete, yet simple, starter for Angular 2 using Webpack from [Preboot](https://github.com/preboot).
 - [Angular2 Webpack Visual Studio](https://github.com/damienbod/Angular2WebpackVisualStudio) - ASP.NET Core, Angular2 with Webpack and Visual Studio from [Damien Bod](https://github.com/damienbod).
 - [Angular2 Starter](https://github.com/schempy/angular2-typescript-webpack) - Angular2 starter kit with Typescript and Webpack from [Brian Schemp](https://github.com/schempy).
-- [Angular2 SPA](https://github.com/aspnet/JavaScriptServices/tree/dev/templates/Angular2Spa) - Angular 2 ASP.NET Core Spa from [Steve Sanderson](https://github.com/SteveSandersonMS).
 - [Angular2 Seed](https://github.com/angular/angular2-seed/) - A simple starter demonstrating the basic concepts of Angular2 from [Pawel Kozlowski](https://github.com/pkozlowski-opensource).
 
 #### Framework Agnostic
