@@ -46,7 +46,7 @@
     "lint:markdown": "npm run lint-markdown *.md ./src/content/**/*.md",
     "lint-markdown": "markdownlint --config ./.markdownlint.json --ignore './src/content/**/_*.md' --ignore '.vale/**/*.md' --ignore '.github/**/*.md'",
     "lint:prose": "vale --config='.vale.ini' src/content",
-    "lint:links": "hyperlink -c 8 --root dist -r dist/index.html --canonicalroot https://webpack.js.org/ --skip /plugins/extract-text-webpack-plugin/ --skip /printable --skip https:// --skip http:// --skip sw.js > internal-links.tap; cat internal-links.tap | tap-spot",
+    "lint:links": "hyperlink -c 8 --root dist -r dist/index.html --canonicalroot https://webpack.js.org/ --internal --skip /plugins/extract-text-webpack-plugin/ --skip /printable --skip https:// --skip http:// --skip sw.js > internal-links.tap; cat internal-links.tap | tap-spot",
     "sitemap": "cd dist && sitemap-static --ignore-file=../sitemap-ignore.json --pretty --prefix=https://webpack.js.org/ > sitemap.xml",
     "serve": "npm run build && sirv start ./dist --port 4000",
     "preprintable": "npm run clean-printable",
