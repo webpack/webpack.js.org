@@ -500,7 +500,7 @@ worker.addEventListener("message", (event) => {});
 
 #### Loading without `worker-loader!`
 
-Alternatively, you can ommit the `worker-loader!` prefix passed to `import` statement by using the following notation.
+Alternatively, you can omit the `worker-loader!` prefix passed to `import` statement by using the following notation.
 This is useful for executing the code using a non-WebPack runtime environment
 (such as Jest with [`workerloader-jest-transformer`](https://github.com/astagi/workerloader-jest-transformer)).
 
