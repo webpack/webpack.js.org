@@ -67,4 +67,4 @@ Loaders are activated by using `loadername!` prefixes in `require()` statements,
 
 ## Awesome
 
-For more third-party loaders, see the list from [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack#loaders).
+For more third-party loaders, see the list from [awesome-webpack](/awesome-webpack/#loaders).
