@@ -207,9 +207,9 @@ module.exports = {
 
 ### debug
 
-`string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
+`string` `boolean = false` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 
-Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) option but for infrastructure. No default value is given.
+Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) option but for infrastructure. Defaults to `false`.
 
 **webpack.config.js**
 
@@ -225,9 +225,9 @@ module.exports = {
 
 ### level
 
-`string`
+`string = 'info' : 'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose'`
 
-Enable infrastructure logging output. Similar to [`stats.logging`](/configuration/stats/#statslogging) option but for infrastructure. No default value is given.
+Enable infrastructure logging output. Similar to [`stats.logging`](/configuration/stats/#statslogging) option but for infrastructure. Defaults to `'info'`.
 
 Possible values:
 
