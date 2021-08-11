@@ -503,15 +503,9 @@ worker.addEventListener("message", (event) => {});
 
 #### 不使用 `worker-loader!` 加载 {#loadingwidthoutworkloader}
 
-<<<<<<< HEAD
 另外，你可以通过使用以下符号忽略传递给 `import` 语句的 `worker-loader!` 前缀。
 这对于使用非 webpack 运行时环境执行代码很有用
 (例如 Jest 使用 [`workerloader-jest-transformer`](https://github.com/astagi/workerloader-jest-transformer)).
-=======
-Alternatively, you can omit the `worker-loader!` prefix passed to `import` statement by using the following notation.
-This is useful for executing the code using a non-WebPack runtime environment
-(such as Jest with [`workerloader-jest-transformer`](https://github.com/astagi/workerloader-jest-transformer)).
->>>>>>> c8c9bcfe405b4ded3c297043c8b6facf7bf7b4bf
 
 **typings/worker-loader.d.ts**
 
