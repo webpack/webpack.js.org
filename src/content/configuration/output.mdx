@@ -740,6 +740,23 @@ Customize the main hot update filename. `[fullhash]` and `[runtime]` are availab
 
 T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
+## output.importFunctionName
+
+`string = 'import'`
+
+The name of the native `import()` function. Can be used for polyfilling, e.g. with [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    importFunctionName: '__import__',
+  },
+};
+```
+
 ## output.library
 
 Output a library exposing the exports of your entry point.
@@ -1844,23 +1861,6 @@ MyLibrary(_entry_return_);
 ```
 
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
-
-## `output.importFunctionName`
-
-`string = 'import'`
-
-The name of the native `import()` function. Can be used for polyfilling, e.g. with [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    importFunctionName: '__import__',
-  },
-};
-```
 
 ## `output.path`
 
