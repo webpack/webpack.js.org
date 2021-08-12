@@ -668,27 +668,6 @@ module.exports = {
 };
 ```
 
-## `output.uniqueName`
-
-`string`
-
-A unique name of the webpack build to avoid multiple webpack runtimes to conflict when using globals. It defaults to [`output.library`](/configuration/output/#outputlibrary) name or the package name from `package.json` in the context, if both aren't found, it is set to an `''`.
-
-`output.uniqueName` will be used to generate unique globals for:
-
-- [`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal)
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  // ...
-  output: {
-    uniqueName: 'my-package-xyz',
-  },
-};
-```
-
 ## `output.hashDigest`
 
 `string = 'hex'`
@@ -2154,6 +2133,27 @@ module.exports = {
   //...
   output: {
     umdNamedDefine: true,
+  },
+};
+```
+
+## output.uniqueName
+
+`string`
+
+A unique name of the webpack build to avoid multiple webpack runtimes to conflict when using globals. It defaults to [`output.library`](/configuration/output/#outputlibrary) name or the package name from `package.json` in the context, if both aren't found, it is set to an `''`.
+
+`output.uniqueName` will be used to generate unique globals for:
+
+- [`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal)
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  output: {
+    uniqueName: 'my-package-xyz',
   },
 };
 ```
