@@ -740,6 +740,21 @@ Customize the main hot update filename. `[fullhash]` and `[runtime]` are availab
 
 T> Typically you don't need to change `output.hotUpdateMainFilename`.
 
+## output.iife
+
+`boolean = true`
+
+Tells webpack to add [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) wrapper around emitted code.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    iife: true,
+  },
+};
+```
+
 ## output.importFunctionName
 
 `string = 'import'`
@@ -2193,21 +2208,6 @@ module.exports = {
   //...
   output: {
     wasmLoading: 'fetch',
-  },
-};
-```
-
-## `output.iife`
-
-`boolean = true`
-
-Tells webpack to add [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) wrapper around emitted code.
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    iife: true,
   },
 };
 ```
