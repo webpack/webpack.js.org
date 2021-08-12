@@ -2197,26 +2197,7 @@ module.exports = {
 };
 ```
 
-## `output.workerChunkLoading`
-
-`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
-
-The new option `workerChunkLoading` controls the chunk loading of workers.
-
-T> The default value of this option is depending on the `target` setting. For more details, search for `"workerChunkLoading"`: [in the webpack defaults](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js).
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    workerChunkLoading: false,
-  },
-};
-```
-
-## `output.wasmLoading`
+## output.wasmLoading
 
 `boolean = false` `string`
 
@@ -2232,6 +2213,25 @@ module.exports = {
   //...
   output: {
     wasmLoading: 'fetch',
+  },
+};
+```
+
+## output.workerChunkLoading
+
+`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
+
+The new option `workerChunkLoading` controls the chunk loading of workers.
+
+T> The default value of this option is depending on the `target` setting. For more details, search for `"workerChunkLoading"`: [in the webpack defaults](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js).
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    workerChunkLoading: false,
   },
 };
 ```
