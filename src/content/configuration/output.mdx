@@ -443,7 +443,7 @@ module.exports = {
 };
 ```
 
-## `output.filename`
+## output.filename
 
 `string` `function (pathData, assetInfo) => string`
 
@@ -537,7 +537,7 @@ Note this option is called filename but you are still allowed to use something l
 
 Note this option does not affect output files for on-demand-loaded chunks. It only affects output files that are initially loaded. For on-demand-loaded chunk files the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case you would have to try the specific loader's available options.
 
-## Template strings
+### Template strings
 
 The following substitutions are available in template strings (via webpack's internal [`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)):
 
@@ -629,6 +629,23 @@ type ModulePathData = {
 
 T> In some context properties will use JavaScript code expressions instead of raw values. In these cases the `WithLength` variant is available and should be used instead of slicing the original value.
 
+## output.futureEmitAssets
+
+`boolean = false`
+
+Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted.
+
+W> `output.futureEmitAssets` option will be removed in webpack v5.0.0 and this behaviour will become the new default.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    futureEmitAssets: true,
+  },
+};
+```
+
 ## `output.globalObject`
 
 `string = 'window'`
@@ -647,27 +664,6 @@ module.exports = {
     libraryTarget: 'umd',
     filename: 'myLib.js',
     globalObject: 'this',
-  },
-};
-```
-
-## `output.uniqueName`
-
-`string`
-
-A unique name of the webpack build to avoid multiple webpack runtimes to conflict when using globals. It defaults to [`output.library`](/configuration/output/#outputlibrary) name or the package name from `package.json` in the context, if both aren't found, it is set to an `''`.
-
-`output.uniqueName` will be used to generate unique globals for:
-
-- [`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal)
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  // ...
-  output: {
-    uniqueName: 'my-package-xyz',
   },
 };
 ```
@@ -743,6 +739,38 @@ For details see [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
 Customize the main hot update filename. `[fullhash]` and `[runtime]` are available as placeholder.
 
 T> Typically you don't need to change `output.hotUpdateMainFilename`.
+
+## output.iife
+
+`boolean = true`
+
+Tells webpack to add [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) wrapper around emitted code.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    iife: true,
+  },
+};
+```
+
+## output.importFunctionName
+
+`string = 'import'`
+
+The name of the native `import()` function. Can be used for polyfilling, e.g. with [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    importFunctionName: '__import__',
+  },
+};
+```
 
 ## output.library
 
@@ -1849,22 +1877,29 @@ MyLibrary(_entry_return_);
 
 The dependencies for your library will be defined by the [`externals`](/configuration/externals/) config.
 
-## `output.importFunctionName`
+## output.module
 
-`string = 'import'`
+`boolean = false`
 
-The name of the native `import()` function. Can be used for polyfilling, e.g. with [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
+Output JavaScript files as module type. Disabled by default as it's an experimental feature.
 
-**webpack.config.js**
+When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output.scriptType`](#outputscripttype) to `'module'` and `terserOptions.module` to `true` internally.
+
+If you're using webpack to compile a library to be consumed by others, make sure to set [`output.libraryTarget`](#librarytarget-module) to `'module'` when `output.module` is `true`.
 
 ```javascript
 module.exports = {
   //...
+  experiments: {
+    outputModule: true,
+  },
   output: {
-    importFunctionName: '__import__',
+    module: true,
   },
 };
 ```
+
+W> `output.module` is an experimental feature and can only be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
 
 ## `output.path`
 
@@ -2141,43 +2176,28 @@ module.exports = {
 };
 ```
 
-## `output.workerChunkLoading`
+## output.uniqueName
 
-`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
+`string`
 
-The new option `workerChunkLoading` controls the chunk loading of workers.
+A unique name of the webpack build to avoid multiple webpack runtimes to conflict when using globals. It defaults to [`output.library`](/configuration/output/#outputlibrary) name or the package name from `package.json` in the context, if both aren't found, it is set to an `''`.
 
-T> The default value of this option is depending on the `target` setting. For more details, search for `"workerChunkLoading"`: [in the webpack defaults](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js).
+`output.uniqueName` will be used to generate unique globals for:
+
+- [`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal)
 
 **webpack.config.js**
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   output: {
-    workerChunkLoading: false,
+    uniqueName: 'my-package-xyz',
   },
 };
 ```
 
-## `output.futureEmitAssets`
-
-`boolean = false`
-
-Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted.
-
-W> `output.futureEmitAssets` option will be removed in webpack v5.0.0 and this behaviour will become the new default.
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    futureEmitAssets: true,
-  },
-};
-```
-
-## `output.wasmLoading`
+## output.wasmLoading
 
 `boolean = false` `string`
 
@@ -2197,41 +2217,21 @@ module.exports = {
 };
 ```
 
-## `output.iife`
+## output.workerChunkLoading
 
-`boolean = true`
+`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
 
-Tells webpack to add [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) wrapper around emitted code.
+The new option `workerChunkLoading` controls the chunk loading of workers.
+
+T> The default value of this option is depending on the `target` setting. For more details, search for `"workerChunkLoading"`: [in the webpack defaults](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js).
+
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   output: {
-    iife: true,
+    workerChunkLoading: false,
   },
 };
 ```
-
-## `output.module`
-
-`boolean = false`
-
-Output JavaScript files as module type. Disabled by default as it's an experimental feature.
-
-When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output.scriptType`](#outputscripttype) to `'module'` and `terserOptions.module` to `true` internally.
-
-If you're using webpack to compile a library to be consumed by others, make sure to set [`output.libraryTarget`](#librarytarget-module) to `'module'` when `output.module` is `true`.
-
-```javascript
-module.exports = {
-  //...
-  experiments: {
-    outputModule: true,
-  },
-  output: {
-    module: true,
-  },
-};
-```
-
-W> `output.module` is an experimental feature and can only be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
