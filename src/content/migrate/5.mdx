@@ -52,12 +52,12 @@ Set `mode` to either [`production`](/configuration/mode/#mode-production) or [`d
 
 Update the following options to their new version (if used):
 
-- `optimization.hashedModuleIds: true` → `optimization.moduleIds: 'deterministic'`
+- `optimization.hashedModuleIds: true` → `optimization.moduleIds: 'hashed'`
 - `optimization.namedChunks: true` → `optimization.chunkIds: 'named'`
 - `optimization.namedModules: true` → `optimization.moduleIds: 'named'`
 - `NamedModulesPlugin` → `optimization.moduleIds: 'named'`
 - `NamedChunksPlugin` → `optimization.chunkIds: 'named'`
-- `HashedModuleIdsPlugin` → `optimization.moduleIds: 'deterministic'`
+- `HashedModuleIdsPlugin` → `optimization.moduleIds: 'hashed'`
 - `optimization.noEmitOnErrors: false` → `optimization.emitOnErrors: true`
 - `optimization.occurrenceOrder: true` → `optimization: { chunkIds: 'total-size', moduleIds: 'size' }`
 - `optimization.splitChunks.cacheGroups.vendors` → `optimization.splitChunks.cacheGroups.defaultVendors`
