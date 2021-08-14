@@ -17,11 +17,12 @@ contributors:
   - anikethsaha
   - chenxsan
   - jamesgeorge007
+  - snitin315
 ---
 
 These options change how modules are resolved. webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
 
-## `resolve`
+## resolve
 
 `object`
 
@@ -38,7 +39,7 @@ module.exports = {
 };
 ```
 
-### `resolve.alias`
+### resolve.alias
 
 `object`
 
@@ -152,7 +153,7 @@ module.exports = {
 };
 ```
 
-### `resolve.aliasFields`
+### resolve.aliasFields
 
 `[string]: ['browser']`
 
@@ -169,7 +170,7 @@ module.exports = {
 };
 ```
 
-### `resolve.cacheWithContext`
+### resolve.cacheWithContext
 
 `boolean` (since webpack 3.1.0)
 
@@ -192,7 +193,7 @@ module.exports = {
 };
 ```
 
-### `resolve.descriptionFiles`
+### resolve.descriptionFiles
 
 `[string] = ['package.json']`
 
@@ -209,7 +210,7 @@ module.exports = {
 };
 ```
 
-### `resolve.enforceExtension`
+### resolve.enforceExtension
 
 `boolean = false`
 
@@ -313,7 +314,7 @@ module.exports = {
 };
 ```
 
-### `resolve.mainFields`
+### resolve.mainFields
 
 `[string]`
 
@@ -356,7 +357,7 @@ For example, consider an arbitrary library called `upstream` with a `package.jso
 
 When we `import * as Upstream from 'upstream'` this will actually resolve to the file in the `browser` property. The `browser` property takes precedence because it's the first item in `mainFields`. Meanwhile, a Node.js application bundled by webpack will first try to resolve using the file in the `module` field.
 
-### `resolve.mainFiles`
+### resolve.mainFiles
 
 `[string] = ['index']`
 
@@ -373,7 +374,7 @@ module.exports = {
 };
 ```
 
-### `resolve.exportsFields`
+### resolve.exportsFields
 
 `[string] = ['exports']`
 
@@ -390,7 +391,7 @@ module.exports = {
 };
 ```
 
-### `resolve.modules`
+### resolve.modules
 
 `[string] = ['node_modules']`
 
@@ -428,7 +429,7 @@ module.exports = {
 };
 ```
 
-### `resolve.unsafeCache`
+### resolve.unsafeCache
 
 `RegExp` `[RegExp]` `boolean: true`
 
@@ -460,7 +461,7 @@ module.exports = {
 
 W> Changes to cached paths may cause failure in rare cases.
 
-### `resolve.plugins`
+### resolve.plugins
 
 [`[Plugin]`](/plugins/)
 
@@ -477,7 +478,7 @@ module.exports = {
 };
 ```
 
-### `resolve.preferRelative`
+### resolve.preferRelative
 
 `boolean`
 
@@ -506,7 +507,7 @@ const b = new URL('module/path', import.meta.url);
 const a = new URL('./module/path', import.meta.url);
 ```
 
-### `resolve.preferAbsolute`
+### resolve.preferAbsolute
 
 `boolean`
 
@@ -525,7 +526,7 @@ module.exports = {
 };
 ```
 
-### `resolve.symlinks`
+### resolve.symlinks
 
 `boolean = true`
 
@@ -544,7 +545,7 @@ module.exports = {
 };
 ```
 
-### `resolve.cachePredicate`
+### resolve.cachePredicate
 
 `function(module) => boolean`
 
@@ -564,7 +565,7 @@ module.exports = {
 };
 ```
 
-### `resolve.restrictions`
+### resolve.restrictions
 
 `[string, RegExp]`
 
@@ -581,7 +582,7 @@ module.exports = {
 };
 ```
 
-### `resolve.roots`
+### resolve.roots
 
 `[string]`
 
@@ -599,7 +600,7 @@ module.exports = {
 };
 ```
 
-### `resolve.importsFields`
+### resolve.importsFields
 
 `[string]`
 
@@ -642,7 +643,7 @@ Configure resolve options by the type of module request.
   };
   ```
 
-## `resolveLoader`
+## resolveLoader
 
 `object { modules [string] = ['node_modules'], extensions [string] = ['.js', '.json'], mainFields [string] = ['loader', 'main']}`
 
