@@ -21,6 +21,7 @@ const excludedLoaders = [
   'webpack-contrib/url-loader',
   'webpack-contrib/file-loader',
   'webpack-contrib/null-loader',
+  'webpack-contrib/mocha-loader',
 ];
 const excludedPlugins = [
   'webpack-contrib/component-webpack-plugin',

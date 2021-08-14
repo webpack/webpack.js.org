@@ -96,6 +96,8 @@ module.exports = (env) =>
             'https://v4.webpack.js.org/loaders/file-loader',
           'loaders/null-loader':
             'https://v4.webpack.js.org/loaders/null-loader/',
+          'loaders/mocha-loader':
+            'https://v4.webpack.js.org/loaders/mocha-loader/',
         },
       }),
       new CopyWebpackPlugin({
