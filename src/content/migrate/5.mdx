@@ -10,6 +10,7 @@ contributors:
   - rramaa
   - chenxsan
   - jamesgeorge007
+  - getsnoopy
 ---
 
 This guide aims to help you migrating to webpack 5 when using webpack directly. If you are using a higher level tool to run webpack, please refer to the tool for migration instructions.
@@ -179,9 +180,9 @@ console.log(pkg.version);
   - This doesn't apply to the `webpack(..., callback)` form which automatically closes.
   - This is optional if you use webpack in watching mode until the user ends the process. The idle phases in watch mode will be used for this kind of work.
 
-### Run a single build and follow advises
+### Run a single build and follow advice
 
-Please make sure to read the building errors/warnings carefully. If there is no corresponding advise, please create an issue and we will try to resolve it.
+Please make sure to read the building errors/warnings carefully. If there is no corresponding advice, please create an issue and we will try to resolve it.
 
 Repeat the following steps until you solved at least level 3 or 4:
 
@@ -203,7 +204,7 @@ Repeat the following steps until you solved at least level 3 or 4:
 
 - Level 5: **Runtime Errors**.
 
-  This is tricky. You probably have to debug to find the problem. A general advise is difficult here. But we do list some common advices below regarding Runtime Errors:
+  This is tricky. You probably have to debug to find the problem. General advice is difficult here. But we do list some common advice below regarding Runtime Errors:
 
   - `process` is not defined.
     - webpack 5 does no longer include a polyfill for this Node.js variable. Avoid using it in the frontend code.
@@ -221,7 +222,7 @@ Repeat the following steps until you solved at least level 3 or 4:
   You probably get a lot of deprecation warnings. This is not directly a problem. Plugins need time to catch up with core changes. Please report these deprecations to the plugins. These deprecations are only warnings and the build will still work with only minor drawbacks (like less performance).
 
   - You can hide deprecation warnings by running node with `--no-deprecation` flag, e.g.: `node --no-deprecation node_modules/webpack/bin/webpack.js`. This should only be a temporary workaround.
-  - Plugins and Loaders contributors can follow the advises in the deprecation messages to improve the code.
+  - Plugins and Loaders contributors can follow the advice in the deprecation messages to improve the code.
 
 - Level 7: **Performance issues**.
 
