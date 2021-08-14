@@ -86,21 +86,6 @@ module.exports = {
 
 An error will be displayed notifying you of a large asset. We recommend using `hints: "error"` during production builds to help prevent deploying production bundles that are too large, impacting webpage performance.
 
-## `performance.maxEntrypointSize`
-
-`number = 250000`
-
-An entry point represents all assets that would be utilized during initial load time for a specific entry. This option controls when webpack should emit performance hints based on the maximum entry point size in bytes.
-
-```js
-module.exports = {
-  //...
-  performance: {
-    maxEntrypointSize: 400000,
-  },
-};
-```
-
 ## `performance.maxAssetSize`
 
 `number = 250000`
@@ -112,6 +97,21 @@ module.exports = {
   //...
   performance: {
     maxAssetSize: 100000,
+  },
+};
+```
+
+## `performance.maxEntrypointSize`
+
+`number = 250000`
+
+An entry point represents all assets that would be utilized during initial load time for a specific entry. This option controls when webpack should emit performance hints based on the maximum entry point size in bytes.
+
+```js
+module.exports = {
+  //...
+  performance: {
+    maxEntrypointSize: 400000,
   },
 };
 ```
