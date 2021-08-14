@@ -18,6 +18,33 @@ This feature was inspired by the idea of [webpack Performance Budgets](https://g
 
 Configure how performance hints are shown. For example if you have an asset that is over 250kb, webpack will emit a warning notifying you of this.
 
+## `performance.assetFilter`
+
+`function(assetFilename) => boolean`
+
+This property allows webpack to control what files are used to calculate performance hints. The default function is:
+
+```js
+function assetFilter(assetFilename) {
+  return !/\.map$/.test(assetFilename);
+}
+```
+
+You can override this property by passing your own function in:
+
+```js
+module.exports = {
+  //...
+  performance: {
+    assetFilter: function (assetFilename) {
+      return assetFilename.endsWith('.js');
+    },
+  },
+};
+```
+
+The example above will only give you performance hints based on `.js` files.
+
 ## `performance.hints`
 
 `string = 'warning': 'error' | 'warning'` `boolean: false`
@@ -88,30 +115,3 @@ module.exports = {
   },
 };
 ```
-
-## `performance.assetFilter`
-
-`function(assetFilename) => boolean`
-
-This property allows webpack to control what files are used to calculate performance hints. The default function is:
-
-```js
-function assetFilter(assetFilename) {
-  return !/\.map$/.test(assetFilename);
-}
-```
-
-You can override this property by passing your own function in:
-
-```js
-module.exports = {
-  //...
-  performance: {
-    assetFilter: function (assetFilename) {
-      return assetFilename.endsWith('.js');
-    },
-  },
-};
-```
-
-The example above will only give you performance hints based on `.js` files.
