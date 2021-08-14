@@ -48,7 +48,7 @@ When trying to fulfill the last two conditions, bigger chunks are preferred.
 
 webpack provides a set of options for developers that want more control over this functionality.
 
-W> The default configuration was chosen to fit web performance best practices, but the optimal strategy for your project might differ. If you're changing the configuration, you should measure the impact of your changes to ensure there's a real benefit.
+W> The default configuration was chosen to fit web performance best practices, but the optimal strategy for your project might differ. If you're changing the configuration, you should measure the effect of your changes to ensure there's a real benefit.
 
 ## `optimization.splitChunks`
 
@@ -200,7 +200,7 @@ Assign modules to a cache group by module layer.
 `number = 0`
 
 Using `maxSize` (either globally `optimization.splitChunks.maxSize` per cache group `optimization.splitChunks.cacheGroups[x].maxSize` or for the fallback cache group `optimization.splitChunks.fallbackCacheGroup.maxSize`) tells webpack to try to split chunks bigger than `maxSize` bytes into smaller parts. Parts will be at least `minSize` (next to `maxSize`) in size.
-The algorithm is deterministic and changes to the modules will only have local impact. So that it is usable when using long term caching and doesn't require records. `maxSize` is only a hint and could be violated when modules are bigger than `maxSize` or splitting would violate `minSize`.
+The algorithm is deterministic and changes to the modules will only have local effects. So that it is usable when using long term caching and doesn't require records. `maxSize` is only a hint and could be violated when modules are bigger than `maxSize` or splitting would violate `minSize`.
 
 When the chunk has a name already, each part will get a new name derived from that name. Depending on the value of `optimization.splitChunks.hidePathInfo` it will add a key derived from the first module name or a hash of it.
 
@@ -317,7 +317,7 @@ A module can belong to multiple cache groups. The optimization will prefer the c
 
 `boolean = true`
 
-If the current chunk contains modules already split out from the main bundle, it will be reused instead of a new one being generated. This can impact the resulting file name of the chunk.
+If the current chunk contains modules already split out from the main bundle, it will be reused instead of a new one being generated. This can affect the resulting file name of the chunk.
 
 **webpack.config.js**
 
