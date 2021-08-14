@@ -20,6 +20,7 @@ const excludedLoaders = [
   'webpack-contrib/raw-loader',
   'webpack-contrib/url-loader',
   'webpack-contrib/file-loader',
+  'webpack-contrib/null-loader',
 ];
 const excludedPlugins = [
   'webpack-contrib/component-webpack-plugin',
