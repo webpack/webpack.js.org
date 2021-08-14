@@ -98,6 +98,8 @@ module.exports = (env) =>
             'https://v4.webpack.js.org/loaders/null-loader/',
           'loaders/mocha-loader':
             'https://v4.webpack.js.org/loaders/mocha-loader/',
+          'loaders/istanbul-instrumenter-loader':
+            'https://v4.webpack.js.org/loaders/istanbul-instrumenter-loader/',
         },
       }),
       new CopyWebpackPlugin({
