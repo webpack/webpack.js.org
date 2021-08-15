@@ -98,6 +98,11 @@ module.exports = function processREADME(body, options = {}) {
       let parsed = content.match(/<p>\s+([^]*?)\s+<\/?p>/);
       return parsed ? parsed[1] : '';
     })
+    // close <img> tags
+    .replace(
+      /<(img\s[^>]*?src\s*=\s*['"][^'"]*?['"][^>/]*?)>(?![^<]*<\/img)/g,
+      '<$1/>'
+    )
     // Replace lone h1 formats
     .replace(/<h1.*?>.+?<\/h1>/, '')
     .replace(/^# .+/m, '')
