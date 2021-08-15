@@ -22,7 +22,7 @@ contributors:
 
 The `externals` configuration option provides a way of excluding dependencies from the output bundles. Instead, the created bundle relies on that dependency to be present in the consumer's (any end-user application) environment. This feature is typically most useful to **library developers**, however there are a variety of applications for it.
 
-## `externals`
+## externals
 
 `string` `[string]` `object` `function` `RegExp`
 
@@ -97,7 +97,7 @@ will compile to something like:
 const fs = require('fs-extra');
 ```
 
-### `[string]`
+### [string]
 
 ```javascript
 module.exports = {
@@ -299,7 +299,7 @@ W> [Default type](/configuration/externals/#externalstype) will be used if you s
 
 For more information on how to use this configuration, please refer to the article on [how to author a library](/guides/author-libraries).
 
-### `byLayer`
+### byLayer
 
 `function` `object`
 
@@ -319,7 +319,7 @@ module.exports = {
 };
 ```
 
-## `externalsType`
+## externalsType
 
 `string = 'var'`
 
@@ -470,7 +470,7 @@ T> When loading code with HTML `<script>` tags, the webpack runtime will try to 
 
 T> Options like `output.chunkLoadTimeout`, `output.crossOriginLoading` and `output.scriptType` will also have effect on the external scripts loaded this way.
 
-## `externalsPresets`
+## externalsPresets
 
 `object`
 

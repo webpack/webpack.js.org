@@ -100,7 +100,7 @@ module.exports = {
 };
 ```
 
-## `output.charset`
+## output.charset
 
 `boolean = true`
 
@@ -108,7 +108,7 @@ Tells webpack to add `charset="utf-8"` to the HTML `<script>` tag.
 
 T> Although `charset` attribute for `<script>` tag was [deprecated](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes), webpack still adds it by default for compatibility with non-modern browsers.
 
-## `output.chunkFilename`
+## output.chunkFilename
 
 `string = '[id].js'` `function (pathData, assetInfo) => string`
 
@@ -163,7 +163,7 @@ module.exports = {
 };
 ```
 
-## `output.chunkLoadTimeout`
+## output.chunkLoadTimeout
 
 `number = 120000`
 
@@ -181,7 +181,7 @@ module.exports = {
 };
 ```
 
-## `output.chunkLoadingGlobal`
+## output.chunkLoadingGlobal
 
 `string = 'webpackChunkwebpack'`
 
@@ -304,7 +304,7 @@ Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web
 - `'anonymous'` - Enable cross-origin loading **without credentials**
 - `'use-credentials'` - Enable cross-origin loading **with credentials**
 
-## `output.devtoolFallbackModuleFilenameTemplate`
+## output.devtoolFallbackModuleFilenameTemplate
 
 `string` `function (info)`
 
@@ -312,7 +312,7 @@ A fallback used when the template string or function above yields duplicates.
 
 See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate).
 
-## `output.devtoolModuleFilenameTemplate`
+## output.devtoolModuleFilenameTemplate
 
 `string = 'webpack://[namespace]/[resource-path]?[loaders]'` `function (info) => string`
 
@@ -360,7 +360,7 @@ module.exports = {
 
 If multiple modules would result in the same name, [`output.devtoolFallbackModuleFilenameTemplate`](#outputdevtoolfallbackmodulefilenametemplate) is used instead for these modules.
 
-## `output.devtoolNamespace`
+## output.devtoolNamespace
 
 `string`
 
@@ -646,7 +646,7 @@ module.exports = {
 };
 ```
 
-## `output.globalObject`
+## output.globalObject
 
 `string = 'window'`
 
@@ -668,19 +668,19 @@ module.exports = {
 };
 ```
 
-## `output.hashDigest`
+## output.hashDigest
 
 `string = 'hex'`
 
 The encoding to use when generating the hash. All encodings from Node.JS' [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) are supported. Using `'base64'` for filenames might be problematic since it has the character `/` in its alphabet. Likewise `'latin1'` could contain any character.
 
-## `output.hashDigestLength`
+## output.hashDigestLength
 
 `number = 20`
 
 The prefix length of the hash digest to use.
 
-## `output.hashFunction`
+## output.hashFunction
 
 `string = 'md4'` `function`
 
@@ -697,11 +697,11 @@ module.exports = {
 
 Make sure that the hashing function will have `update` and `digest` methods available.
 
-## `output.hashSalt`
+## output.hashSalt
 
 An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding).
 
-## `output.hotUpdateChunkFilename`
+## output.hotUpdateChunkFilename
 
 `string = '[id].[fullhash].hot-update.js'`
 
@@ -722,7 +722,7 @@ module.exports = {
 
 T> Typically you don't need to change `output.hotUpdateChunkFilename`.
 
-## `output.hotUpdateGlobal`
+## output.hotUpdateGlobal
 
 `string`
 
@@ -732,7 +732,7 @@ A JSONP function used to asynchronously load hot-update chunks.
 
 For details see [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
 
-## `output.hotUpdateMainFilename`
+## output.hotUpdateMainFilename
 
 `string = '[runtime].[fullhash].hot-update.json'` `function`
 
@@ -912,7 +912,7 @@ For the following examples, we'll use `__entry_return_` to indicate the values r
 
 These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library.name`](#outputlibraryname) at whatever scope the bundle was included at.
 
-##### `type: 'var'`
+##### type: 'var'
 
 ```js
 module.exports = {
@@ -935,7 +935,7 @@ var MyLibrary = _entry_return_;
 MyLibrary.doSomething();
 ```
 
-##### `type: 'assign'`
+##### type: 'assign'
 
 ```js
 module.exports = {
@@ -957,7 +957,7 @@ MyLibrary = _entry_return_;
 
 Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
 
-##### `type: 'assign-properties'` <Badge text='5.16.0+' />
+##### type: 'assign-properties' <Badge text='5.16.0+' />
 
 ```js
 module.exports = {
@@ -993,7 +993,7 @@ MyLibrary.hello('World');
 
 These options assign the return value of the entry point (e.g. whatever the entry point exported) to a specific object under the name defined by [`output.library.name`](#outputlibraryname).
 
-##### `type: 'this'`
+##### type: 'this'
 
 ```js
 module.exports = {
@@ -1017,7 +1017,7 @@ this.MyLibrary.doSomething();
 MyLibrary.doSomething(); // if `this` is window
 ```
 
-##### `type: 'window'`
+##### type: 'window'
 
 ```js
 module.exports = {
@@ -1039,7 +1039,7 @@ window['MyLibrary'] = _entry_return_;
 window.MyLibrary.doSomething();
 ```
 
-##### `type: 'global'`
+##### type: 'global'
 
 ```js
 module.exports = {
@@ -1061,7 +1061,7 @@ global['MyLibrary'] = _entry_return_;
 global.MyLibrary.doSomething();
 ```
 
-##### `type: 'commonjs'`
+##### type: 'commonjs'
 
 ```js
 module.exports = {
@@ -1089,7 +1089,7 @@ W> Note that not setting a `output.library.name` will cause all properties retur
 
 These options will result in a bundle that comes with a complete header to ensure compatibility with various module systems. The `output.library.name` option will take on a different meaning under the following `output.library.type` options.
 
-##### `type: 'module'`
+##### type: 'module'
 
 ```js
 module.exports = {
@@ -1110,7 +1110,7 @@ Output ES Module.
 
 However this feature is still experimental and not fully supported yet, so make sure to enable [experiments.outputModule](/configuration/experiments/) beforehand. In addition, you can track the development progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
 
-##### `type: 'commonjs2'`
+##### type: 'commonjs2'
 
 ```js
 module.exports = {
@@ -1136,7 +1136,7 @@ If we specify `output.library.name` with `type: commmonjs2`, the return value of
 
 T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
 
-##### `type: 'amd'`
+##### type: 'amd'
 
 This will expose your library as an AMD module.
 
@@ -1182,7 +1182,7 @@ define(function () {
 
 This bundle will not work as expected, or not work at all (in the case of the almond loader) if loaded directly with a `<script>` tag. It will only work through a RequireJS compatible asynchronous module loader through the actual path to that file, so in this case, the `output.path` and `output.filename` may become important for this particular setup if these are exposed directly on the server.
 
-##### `type: 'amd-require'`
+##### type: 'amd-require'
 
 ```javascript
 module.exports = {
@@ -1202,7 +1202,7 @@ The `'amd-require'` type allows for the use of AMD dependencies without needing 
 
 With this type, the library name can't be used.
 
-##### `type: 'umd'`
+##### type: 'umd'
 
 This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
 
@@ -1279,7 +1279,7 @@ module.exports = {
 };
 ```
 
-##### `type: 'system'`
+##### type: 'system'
 
 This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
 
@@ -1326,7 +1326,7 @@ System.register(
 
 #### Other Types
 
-##### `type: 'jsonp'`
+##### type: 'jsonp'
 
 ```js
 module.exports = {
@@ -1483,7 +1483,7 @@ The AMD module will be:
 define('MyLibrary', [], factory);
 ```
 
-## `output.libraryExport`
+## output.libraryExport
 
 W> We might drop support for this, so prefer to use [output.library.export](#outputlibraryexport) which works the same as `libraryExport`.
 
@@ -1534,7 +1534,7 @@ T> Note that `_entry_return_` in the example code below is the value returned by
 
 These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library`](#outputlibrary) at whatever scope the bundle was included at.
 
-#### `libraryTarget: 'var'`
+#### libraryTarget: 'var'
 
 W> Prefer to use [`output.library.type: 'var'`](#type-var).
 
@@ -1547,7 +1547,7 @@ var MyLibrary = _entry_return_;
 MyLibrary.doSomething();
 ```
 
-#### `libraryTarget: 'assign'`
+#### libraryTarget: 'assign'
 
 W> Prefer to use [`output.library.type: 'assign'`](#type-assign).
 
@@ -1559,7 +1559,7 @@ MyLibrary = _entry_return_;
 
 Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
 
-#### `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' />
+#### libraryTarget: 'assign-properties' <Badge text='5.16.0+' />
 
 W> Prefer to use [output.library.type: 'assign-properties'`](#type-assign-properties).
 
@@ -1599,7 +1599,7 @@ If `output.library` is not assigned a non-empty string, the default behavior is 
 
 W> Note that not setting a `output.library` will cause all properties returned by the entry point to be assigned to the given object; there are no checks against existing property names.
 
-#### `libraryTarget: 'this'`
+#### libraryTarget: 'this'
 
 W> Prefer to use [`output.library.type: 'this'`](#type-this).
 
@@ -1613,7 +1613,7 @@ this.MyLibrary.doSomething();
 MyLibrary.doSomething(); // if this is window
 ```
 
-#### `libraryTarget: 'window'`
+#### libraryTarget: 'window'
 
 W> Prefer to use [`output.library.type: 'window'`](#type-window).
 
@@ -1625,7 +1625,7 @@ window['MyLibrary'] = _entry_return_;
 window.MyLibrary.doSomething();
 ```
 
-#### `libraryTarget: 'global'`
+#### libraryTarget: 'global'
 
 W> Prefer to use [`output.library.type: 'global'`](#type-global).
 
@@ -1637,7 +1637,7 @@ global['MyLibrary'] = _entry_return_;
 global.MyLibrary.doSomething();
 ```
 
-#### `libraryTarget: 'commonjs'`
+#### libraryTarget: 'commonjs'
 
 W> Prefer to use [`output.library.type: 'commonjs'`](#type-commonjs).
 
@@ -1653,7 +1653,7 @@ require('MyLibrary').doSomething();
 
 These options will result in a bundle that comes with a complete header to ensure compatibility with various module systems. The `output.library` option will take on a different meaning under the following `output.libraryTarget` options.
 
-#### `libraryTarget: 'module'`
+#### libraryTarget: 'module'
 
 W> Prefer to use [`output.library.type: 'module'`](#type-module).
 
@@ -1661,7 +1661,7 @@ Output ES Module. Make sure to enable [experiments.outputModule](/configuration/
 
 Note that this feature is not fully supported yet, please track the progress in [this thread](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975).
 
-#### `libraryTarget: 'commonjs2'`
+#### libraryTarget: 'commonjs2'
 
 W> Prefer to use [`output.library.type: 'commonjs2'`](#type-commonjs2).
 
@@ -1677,7 +1677,7 @@ Note that `output.library` can't be used with this particular `output.libraryTar
 
 T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
 
-#### `libraryTarget: 'amd'`
+#### libraryTarget: 'amd'
 
 W> Prefer to use [`output.library.type: 'amd'`](#type-amd).
 
@@ -1723,7 +1723,7 @@ define([], function () {
 
 This bundle will not work as expected, or not work at all (in the case of the almond loader) if loaded directly with a `<script>` tag. It will only work through a RequireJS compatible asynchronous module loader through the actual path to that file, so in this case, the `output.path` and `output.filename` may become important for this particular setup if these are exposed directly on the server.
 
-#### `libraryTarget: 'amd-require'`
+#### libraryTarget: 'amd-require'
 
 W> Prefer to use [`output.library.type: 'amd-require'`](#type-amd-require).
 
@@ -1733,7 +1733,7 @@ The `'amd-require'` target allows for the use of AMD dependencies without needin
 
 With this target, the library name is ignored.
 
-#### `libraryTarget: 'umd'`
+#### libraryTarget: 'umd'
 
 W> Prefer to use [`output.library.type: 'umd'`](#type-umd).
 
@@ -1808,7 +1808,7 @@ module.exports = {
 };
 ```
 
-#### `libraryTarget: 'system'`
+#### libraryTarget: 'system'
 
 W> Prefer to use [`output.library.type: 'system'`](#type-system).
 
@@ -1865,7 +1865,7 @@ __system_context__.import('./other-file.js').then((m) => {
 
 ### Other Targets
 
-#### `libraryTarget: 'jsonp'`
+#### libraryTarget: 'jsonp'
 
 W> Prefer to use [`output.library.type: 'jsonp'`](#type-jsonp).
 
@@ -1901,7 +1901,7 @@ module.exports = {
 
 W> `output.module` is an experimental feature and can only be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
 
-## `output.path`
+## output.path
 
 `string = path.join(process.cwd(), 'dist')`
 
@@ -1922,7 +1922,7 @@ module.exports = {
 
 Note that `[fullhash]` in this parameter will be replaced with a hash of the compilation. See the [Caching guide](/guides/caching/) for details.
 
-## `output.pathinfo`
+## output.pathinfo
 
 `boolean=true` `string: 'verbose'`
 
@@ -1943,7 +1943,7 @@ module.exports = {
 
 T> It also adds some info about tree shaking to the generated bundle.
 
-## `output.publicPath`
+## output.publicPath
 
 - Type:
 
@@ -2051,7 +2051,7 @@ module.exports = {
 };
 ```
 
-## `output.sourceMapFilename`
+## output.sourceMapFilename
 
 `string = '[file].map[query]'`
 
@@ -2059,7 +2059,7 @@ Configure how source maps are named. Only takes effect when [`devtool`](/configu
 
 The `[name]`, `[id]`, `[fullhash]` and `[chunkhash]` substitutions from [`output.filename`](#outputfilename) can be used. In addition to those, you can use substitutions listed under Filename-level in [Template strings](/configuration/output/#template-strings).
 
-## `output.sourcePrefix`
+## output.sourcePrefix
 
 `string = ''`
 
@@ -2131,7 +2131,7 @@ require('module'); // <- throws
 require('module'); // <- also throws
 ```
 
-## `output.trustedTypes`
+## output.trustedTypes
 
 `boolean = false` `string` `object`
 
@@ -2159,7 +2159,7 @@ module.exports = {
 };
 ```
 
-## `output.umdNamedDefine`
+## output.umdNamedDefine
 
 W> Prefer to use [`output.library.umdNamedDefine`](#outputlibraryumdnameddefine) instead.
 
