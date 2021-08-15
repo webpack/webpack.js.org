@@ -195,7 +195,7 @@ In `/abc/file.js`:
 require('./loader1?xyz!loader2!./resource?rrr');
 ```
 
-### `this.addContextDependency`
+### this.addContextDependency
 
 ```typescript
 addContextDependency(directory: string)
@@ -203,7 +203,7 @@ addContextDependency(directory: string)
 
 Add a directory as dependency of the loader result.
 
-### `this.addDependency`
+### this.addDependency
 
 ```typescript
 addDependency(file: string)
@@ -212,11 +212,11 @@ dependency(file: string) // shortcut
 
 Add a file as dependency of the loader result in order to make them watchable. For example, [`sass-loader`](https://github.com/webpack-contrib/sass-loader), [`less-loader`](https://github.com/webpack-contrib/less-loader) uses this to recompile whenever any imported `css` file changes.
 
-### `this.async`
+### this.async
 
 Tells the [loader-runner](https://github.com/webpack/loader-runner) that the loader intends to call back asynchronously. Returns `this.callback`.
 
-### `this.cacheable`
+### this.cacheable
 
 A function that sets the cacheable flag:
 
@@ -228,7 +228,7 @@ By default, loader results are flagged as cacheable. Call this method passing `f
 
 A cacheable loader must have a deterministic result when inputs and dependencies haven't changed. This means the loader shouldn't have dependencies other than those specified with `this.addDependency`.
 
-### `this.callback`
+### this.callback
 
 A function that can be called synchronously or asynchronously in order to return multiple results. The expected arguments are:
 
@@ -250,7 +250,7 @@ T> It can be useful to pass an abstract syntax tree (AST), like [`ESTree`](https
 
 In case this function is called, you should return undefined to avoid ambiguous loader results.
 
-### `this.clearDependencies`
+### this.clearDependencies
 
 ```typescript
 clearDependencies();
@@ -258,17 +258,17 @@ clearDependencies();
 
 Remove all dependencies of the loader result, even initial dependencies and those of other loaders. Consider using `pitch`.
 
-### `this.context`
+### this.context
 
 **The directory of the module.** Can be used as a context for resolving other stuff.
 
 In [the example](#example-for-the-loader-context): `/abc` because `resource.js` is in this directory
 
-### `this.data`
+### this.data
 
 A data object shared between the pitch and the normal phase.
 
-### `this.emitError`
+### this.emitError
 
 ```typescript
 emitError(error: Error)
@@ -285,7 +285,7 @@ Here is an Error!
 
 T> Unlike throwing an Error directly, it will NOT interrupt the compilation process of the current module.
 
-### `this.emitFile`
+### this.emitFile
 
 ```typescript
 emitFile(name: string, content: Buffer|string, sourceMap: {...})
@@ -293,7 +293,7 @@ emitFile(name: string, content: Buffer|string, sourceMap: {...})
 
 Emit a file. This is webpack-specific.
 
-### `this.emitWarning`
+### this.emitWarning
 
 ```typescript
 emitWarning(warning: Error)
@@ -310,17 +310,17 @@ Here is a Warning!
 
 T> Note that the warnings will not be displayed if `stats.warnings` is set to `false`, or some other omit setting is used to `stats` such as `none` or `errors-only`. See the [stats presets configuration](/configuration/stats/#stats-presets).
 
-### `this.fs`
+### this.fs
 
 Access to the `compilation`'s `inputFileSystem` property.
 
-### `this.getOptions(schema)`
+### this.getOptions(schema)
 
 Extracts given loader options. Optionally, accepts JSON schema as an argument.
 
 T> Since webpack 5, `this.getOptions` is available in loader context. It substitutes `getOptions` method from [loader-utils](https://github.com/webpack/loader-utils#getoptions).
 
-### `this.getResolve`
+### this.getResolve
 
 ```typescript
 getResolve(options: ResolveOptions): resolve
@@ -337,7 +337,7 @@ Any options under webpack [`resolve` options](/configuration/resolve/#resolve) a
 
 All dependencies of the resolving operation are automatically added as dependencies to the current module.
 
-### `this.hot`
+### this.hot
 
 Information about HMR for loaders.
 
@@ -419,13 +419,13 @@ You might notice something in the above example:
 
 Note that the above example is a simplified one, you can check [the full example on webpack repository](https://github.com/webpack/webpack/tree/master/test/configCases/loader-import-module/css).
 
-### `this.loaderIndex`
+### this.loaderIndex
 
 The index in the loaders array of the current loader.
 
 In [the example](#example-for-the-loader-context): in loader1: `0`, in loader2: `1`
 
-### `this.loadModule`
+### this.loadModule
 
 ```typescript
 loadModule(request: string, callback: function(err, source, sourceMap, module))
@@ -435,7 +435,7 @@ Resolves the given request to a module, applies all configured loaders and calls
 
 `this.loadModule` in a loader context uses CommonJS resolve rules by default. Use `this.getResolve` with an appropriate `dependencyType`, e.g. `'esm'`, `'commonjs'` or a custom one before using a different semantic.
 
-### `this.loaders`
+### this.loaders
 
 An array of all the loaders. It is writable in the pitch phase.
 
@@ -462,24 +462,24 @@ In [the example](#example-for-the-loader-context):
 ];
 ```
 
-### `this.mode`
+### this.mode
 
 Read in which [`mode`](/configuration/mode/) webpack is running.
 
 Possible values: `'production'`, `'development'`, `'none'`
 
-### `this.query`
+### this.query
 
 1. If the loader was configured with an [`options`](/configuration/module/#useentry) object, this will point to that object.
 2. If the loader has no `options`, but was invoked with a query string, this will be a string starting with `?`.
 
-### `this.request`
+### this.request
 
 The resolved request string.
 
 In [the example](#example-for-the-loader-context): `'/abc/loader1.js?xyz!/abc/node_modules/loader2/index.js!/abc/resource.js?rrr'`
 
-### `this.resolve`
+### this.resolve
 
 ```typescript
 resolve(context: string, request: string, callback: function(err, result: string))
@@ -493,33 +493,33 @@ Resolve a request like a require expression.
 
 All dependencies of the resolving operation are automatically added as dependencies to the current module.
 
-### `this.resource`
+### this.resource
 
 The resource part of the request, including query.
 
 In [the example](#example-for-the-loader-context): `'/abc/resource.js?rrr'`
 
-### `this.resourcePath`
+### this.resourcePath
 
 The resource file.
 
 In [the example](#example-for-the-loader-context): `'/abc/resource.js'`
 
-### `this.resourceQuery`
+### this.resourceQuery
 
 The query of the resource.
 
 In [the example](#example-for-the-loader-context): `'?rrr'`
 
-### `this.rootContext`
+### this.rootContext
 
 Since webpack 4, the formerly `this.options.context` is provided as `this.rootContext`.
 
-### `this.sourceMap`
+### this.sourceMap
 
 Tells if source map should be generated. Since generating source maps can be an expensive task, you should check if source maps are actually requested.
 
-### `this.target`
+### this.target
 
 Target of compilation. Passed from configuration options.
 
@@ -548,11 +548,11 @@ module.exports = function (content) {
 };
 ```
 
-### `this.version`
+### this.version
 
 **Loader API version.** Currently `2`. This is useful for providing backwards compatibility. Using the version you can specify custom logic or fallbacks for breaking changes.
 
-### `this.webpack`
+### this.webpack
 
 This boolean is set to true when this is compiled by webpack.
 
@@ -566,11 +566,11 @@ W> Please note that using these webpack specific properties will have a negative
 
 Therefore you should only use them as a last resort. Using them will reduce the portability of your loader.
 
-### `this._compilation`
+### this.\_compilation
 
 Access to the current Compilation object of webpack.
 
-### `this._compiler`
+### this.\_compiler
 
 Access to the current Compiler object of webpack.
 
@@ -578,23 +578,23 @@ Access to the current Compiler object of webpack.
 
 W> The usage of these properties is highly discouraged since we are planning to remove them from the context. They are still listed here for documentation purposes.
 
-### `this.debug`
+### this.debug
 
 A boolean flag. It is set when in debug mode.
 
-### `this.inputValue`
+### this.inputValue
 
 Passed from the last loader. If you would execute the input argument as a module, consider reading this variable for a shortcut (for performance).
 
-### `this.minimize`
+### this.minimize
 
 Tells if result should be minimized.
 
-### `this.value`
+### this.value
 
 Pass values to the next loader. If you know what your result exports if executed as a module, set this value here (as an only element array).
 
-### `this._module`
+### this.\_module
 
 Hacky access to the Module object being loaded.
 
