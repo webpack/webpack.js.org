@@ -57,15 +57,15 @@ The `packageName` option allows setting a package name to look for a `requiredVe
 
 ## Building blocks
 
-### `ContainerPlugin` (low level)
+### ContainerPlugin (low level)
 
 This plugin creates an additional container entry with the specified exposed modules.
 
-### `ContainerReferencePlugin` (low level)
+### ContainerReferencePlugin (low level)
 
 This plugin adds specific references to containers as externals and allows to import remote modules from these containers. It also calls the `override` API of these containers to provide overrides to them. Local overrides (via `__webpack_override__` or `override` API when build is also a container) and specified overrides are provided to all referenced containers.
 
-### `ModuleFederationPlugin` (high level)
+### ModuleFederationPlugin (high level)
 
 [`ModuleFederationPlugin`](/plugins/module-federation-plugin) combines `ContainerPlugin` and `ContainerReferencePlugin`.
 
