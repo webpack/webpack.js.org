@@ -17,7 +17,7 @@ related:
 
 The `DllPlugin` and `DllReferencePlugin` provide means to split bundles in a way that can drastically improve build time performance. The term "DLL" stands for Dynamic-link library which was originally introduced by Microsoft.
 
-## `DllPlugin`
+## DllPlugin
 
 This plugin is used in a separate webpack configuration exclusively to create a dll-only-bundle. It creates a `manifest.json` file, which is used by the [`DllReferencePlugin`](#dllreferenceplugin) to map dependencies.
 
@@ -38,7 +38,7 @@ Creates a `manifest.json` which is written to the given `path`. It contains mapp
 
 Combine this plugin with [`output.library`](/configuration/output/#outputlibrary) option to expose (aka, put into the global scope) the dll function.
 
-## `DllReferencePlugin`
+## DllReferencePlugin
 
 This plugin is used in the primary webpack config, it references the dll-only-bundle(s) to require pre-built dependencies.
 
