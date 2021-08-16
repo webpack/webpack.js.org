@@ -59,4 +59,35 @@ describe('processReadme', () => {
 </div>`;
     expect(processReadme(loaderMDData)).toEqual('');
   });
+
+  it('should clean up div[align="center"] with nested dev[align="center"]', () => {
+    // see https://raw.githubusercontent.com/webpack-contrib/postcss-loader/master/README.md
+    const loaderMDData = `
+    <div align="center">
+    <img
+      width="180"
+      height="180"
+      hspace="10"
+      alt="PostCSS Logo"
+      src="https://api.postcss.org/logo.svg">
+    <a href="https://github.com/webpack/webpack">
+      <img
+        width="200"
+        height="200"
+        hspace="10"
+        src="https://cdn.rawgit.com/webpack/media/e7485eb2/logo/icon.svg">
+    </a>
+    <div align="center">
+      <a href="https://evilmartians.com/?utm_source=postcss">
+        <img
+          src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
+          alt="Sponsored by Evil Martians"
+          width="236"
+          height="54"
+          vspace="10">
+      </a>
+    </div>
+  </div>`;
+    expect(processReadme(loaderMDData)).toEqual('');
+  });
 });
