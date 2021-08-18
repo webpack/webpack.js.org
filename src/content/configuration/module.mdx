@@ -1018,8 +1018,8 @@ module.exports = {
       {
         test: /\\.css$/,
         include: [
-          path.resolve(__dirname, 'app/styles'),
-          path.resolve(__dirname, 'vendor/styles'),
+          path.resolve(__dirname, 'app/styles'), // will include any paths relative to the current directory starting with `app/styles`, e.g. `app/styles.css`, `app/styles/styles.css`, `app/stylesheet.css`
+          path.resolve(__dirname, 'vendor/styles') + '/', // add an extra slash to only include the content of the directory `vendor/styles/`
         ],
       },
     ],
