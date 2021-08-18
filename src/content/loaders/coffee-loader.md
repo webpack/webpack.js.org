@@ -126,7 +126,7 @@ From CoffeeScript 2 documentation:
 
 > CoffeeScript 2 generates JavaScript that uses the latest, modern syntax.
 > The runtime or browsers where you want your code to run might not support all of that syntax.
-> In that case, we want to convert modern JavaScript into older JavaScript that will run in older versions of Node or older browsers; for example, { a } = obj into a = obj.a.
+> In that case, we want to convert modern JavaScript into older JavaScript that will run in older versions of Node or older browsers; for example, `{ a } = obj` into `a = obj.a`.
 > This is done via transpilers like Babel, Bublé or Traceur Compiler.
 
 You'll need to install `@babel/core` and `@babel/preset-env` and then create a configuration file:
