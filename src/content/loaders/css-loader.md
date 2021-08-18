@@ -748,6 +748,7 @@ module.exports = {
 
 支持的模板字符串：
 
+<<<<<<< HEAD
 - [name] 源文件名称
 - [path] 源文件相对于 `compiler.context` 或者 `modules.localIdentContext` 配置项的相对路径。
 - [file] - 文件名和路径。
@@ -755,6 +756,15 @@ module.exports = {
 - [hash] - 字符串的哈希值。基于 `localIdentHashSalt`、`localIdentHashFunction`、`localIdentHashDigest`、`localIdentHashDigestLength`、`localIdentContext`、`resourcePath` 和 `exportName` 生成。
 - [<hashFunction>:hash:<hashDigest>:<hashDigestLength>] - 带有哈希设置的哈希。
 - [local] - 原始类名。
+=======
+- `[name]` the basename of the resource
+- `[path]` the path of the resource relative to the `compiler.context` option or `modules.localIdentContext` option.
+- `[file]` - filename and path.
+- `[ext]` - extension with leading .
+- `[hash]` - the hash of the string, generated based on `localIdentHashSalt`, `localIdentHashFunction`, `localIdentHashDigest`, `localIdentHashDigestLength`, `localIdentContext`, `resourcePath` and `exportName`
+- `[<hashFunction>:hash:<hashDigest>:<hashDigestLength>]` - hash with hash settings.
+- `[local]` - original class.
+>>>>>>> b5185919ddf7fece41ff9086807eb11aadc49bb6
 
 建议：
 

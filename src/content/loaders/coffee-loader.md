@@ -127,10 +127,17 @@ module.exports = {
 
 来自 CoffeeScript 2 的文档：
 
+<<<<<<< HEAD
 > CoffeeScript 2 使用最新的句法生成 JavaScript。
 > 代码运行所在的运行时或浏览器有可能无法支持全部相关句法。
 > 这种情况下，新的 JavaScript 句法将被转换为旧的 JavaScript 句法，以便在较低版本 Node 环境或浏览器中运行这些代码。比如将 { a } = obj 转换为 a = obj.a.
 > 这个转换的过程是由一些诸如 Babel, Bublé or Traceur Compiler 等转换工具完成的。
+=======
+> CoffeeScript 2 generates JavaScript that uses the latest, modern syntax.
+> The runtime or browsers where you want your code to run might not support all of that syntax.
+> In that case, we want to convert modern JavaScript into older JavaScript that will run in older versions of Node or older browsers; for example, `{ a } = obj` into `a = obj.a`.
+> This is done via transpilers like Babel, Bublé or Traceur Compiler.
+>>>>>>> b5185919ddf7fece41ff9086807eb11aadc49bb6
 
 安装 `@babel/core` 和 `@babel/preset-env`  然后创建配置文件：
 
