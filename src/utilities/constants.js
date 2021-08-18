@@ -32,17 +32,6 @@ const excludedPlugins = [
   'webpack-contrib/uglifyjs-webpack-plugin',
   'webpack-contrib/zopfli-webpack-plugin',
   'webpack-contrib/closure-webpack-plugin',
-  'webpack-contrib/compression-webpack-plugin',
-  'webpack-contrib/copy-webpack-plugin',
-  'webpack-contrib/install-webpack-plugin',
-  'webpack-contrib/stylelint-webpack-plugin',
-  'webpack-contrib/image-minimizer-webpack-plugin',
-  'webpack-contrib/mini-css-extract-plugin',
-  'webpack-contrib/terser-webpack-plugin',
-  'webpack-contrib/css-minimizer-webpack-plugin',
-  'webpack-contrib/eslint-webpack-plugin',
-  'webpack-contrib/html-minimizer-webpack-plugin',
-  'webpack-contrib/json-minimizer-webpack-plugin',
 ];
 
 module.exports = {
