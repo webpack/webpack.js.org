@@ -95,7 +95,8 @@ contributors:
   });
 }
 
-getDirectoryRecursive(rootPath);
+// getDirectoryRecursive(rootPath);
+console.log(getDirectoryRecursive);
 
 // end message
 process.on('exit', () =>
