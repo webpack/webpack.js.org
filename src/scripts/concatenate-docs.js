@@ -38,6 +38,7 @@ function getDirectoryRecursive(basePath) {
         getDirectoryRecursive(fullPath);
       } else if (fullPath.endsWith('.mdx')) {
         // import the respective mdx file
+        // prefix a `W` to prevent filename like 12345.mdx
         const basename = path
           .basename(file, '.mdx')
           .split('-')
@@ -46,9 +47,9 @@ function getDirectoryRecursive(basePath) {
         fileContents[fileContents.length] = {
           ...front(fs.readFileSync(fullPath).toString()),
           body: `
-import ${basename} from './${file}'
+import W${basename} from './${file}'
 
-<${basename} />
+<W${basename} />
 `,
         };
       }
