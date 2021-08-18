@@ -28,9 +28,7 @@ function getDirectoryRecursive(basePath) {
 
     let fileContents = [];
 
-    for (let file of fileNames.filter((fileName) =>
-      fileName.includes('printable')
-    )) {
+    for (let file of fileNames) {
       const fullPath = path.join(basePath, file);
 
       // if the directory entry is a directory, recurse into that directory
