@@ -829,6 +829,26 @@ module.exports = {
 };
 ```
 
+## devserver.onListening
+
+`function (server)`
+
+Provides the ability to execute a custom function when webpack-dev-server starts listening for connections on a port.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    onListening: function (server) {
+      const port = server.address().port;
+      console.log('Listening on port:', port);
+    },
+  },
+};
+```
+
 ## devServer.open
 
 `boolean` `string` `[string]` `object` `[object]`
