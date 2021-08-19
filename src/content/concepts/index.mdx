@@ -19,9 +19,10 @@ contributors:
   - Jalitha
   - muhmushtaha
   - chenxsan
+  - RyanGreyling2
 ---
 
-At its core, **webpack** is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a [dependency graph](/concepts/dependency-graph/) which maps every module your project needs and generates one or more _bundles_.
+At its core, **webpack** is a _static module bundler_ for modern JavaScript applications. When webpack processes your application, it internally builds a [dependency graph](/concepts/dependency-graph/) from one or more _entry points_ and then combines every module your project needs into one or more _bundles_, static assets to serve your content from.
 
 T> Learn more about JavaScript modules and webpack modules [here](/concepts/modules).
 
@@ -88,7 +89,7 @@ T> The `output` property has [many more configurable features](/configuration/ou
 
 Out of the box, webpack only understands JavaScript and JSON files. **Loaders** allow webpack to process other types of files and convert them into valid [modules](/concepts/modules) that can be consumed by your application and added to the dependency graph.
 
-W> Note that the ability to `import` any type of module, e.g. `.css` files, is a feature specific to webpack and may not be supported by other bundlers or task runners. We feel this extension of the language is warranted as it allows developers to build a more accurate dependency graph.
+W> One of webpack's specific features is the ability to `import` any type of module, e.g. `.css` files, which may not be supported by other bundlers or task runners. We feel this extension of the language is warranted as it allows developers to build a more accurate dependency graph.
 
 At a high level, **loaders** have two properties in your webpack configuration:
 
@@ -142,7 +143,7 @@ module.exports = {
 };
 ```
 
-In the example above, the `html-webpack-plugin` generates an HTML file for your application by injecting automatically all your generated bundles.
+In the example above, the `html-webpack-plugin` generates an HTML file for your application and automatically injects all your generated bundles into this file.
 
 T> There are many plugins that webpack provides out of the box! Check out the [list of plugins](/plugins).
 
