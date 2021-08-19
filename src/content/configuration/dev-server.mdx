@@ -841,8 +841,8 @@ Provides the ability to execute a custom function when webpack-dev-server starts
 module.exports = {
   //...
   devServer: {
-    onListening: function (server) {
-      const port = server.server.address().port;
+    onListening: function (devServer) {
+      const port = devServer.server.address().port;
       console.log('Listening on port:', port);
     },
   },
