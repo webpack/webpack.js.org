@@ -1022,7 +1022,7 @@ module.exports = {
           // e.g. `app/styles.css`, `app/styles/styles.css`, `app/stylesheet.css`
           path.resolve(__dirname, 'app/styles'),
           // add an extra slash to only include the content of the directory `vendor/styles/`
-          path.resolve(__dirname, 'vendor/styles') + '/', 
+          path.join(__dirname, 'vendor/styles/'), 
         ],
       },
     ],
