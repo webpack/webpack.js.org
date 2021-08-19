@@ -1137,6 +1137,23 @@ module.exports = {
 };
 ```
 
+## devServer.setupExitSignals
+
+`boolean = true`
+
+Allows to close dev server and exit the process on `SIGINT` and `SIGTERM` signals.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    setupExitSignals: true,
+  },
+};
+```
+
 ## devServer.static
 
 `boolean` `string` `[string]` `object` `[object]`
