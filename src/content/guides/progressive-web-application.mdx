@@ -35,7 +35,7 @@ So let's test what the current experience is like using a server with more basic
 }
 ```
 
-Note: [webpack DevServer](/configuration/dev-server/) writes in-memory by default. We'll need to enable [writeToDisk](/configuration/dev-server/#devserverwritetodisk-) option in order for http-server to be able to serve files from `./dist` directory.
+Note: [webpack DevServer](/configuration/dev-server/) writes in-memory by default. We'll need to enable [devserverdevmiddleware.writeToDisk](/configuration/dev-server/#devserverdevmiddleware) option in order for http-server to be able to serve files from `./dist` directory.
 
 If you haven't previously done so, run the command `npm run build` to build your project. Then run the command `npm start`. This should produce the following output:
 
