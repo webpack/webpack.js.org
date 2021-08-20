@@ -4009,7 +4009,19 @@ Will be wrapped into comment.</p><p><strong>webpack.config.js</strong></p><pre><
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="swc"><a href="https://github.com/swc-project/swc"><code>swc</code></a><a href="#swc" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p><a href="https://github.com/swc-project/swc"><code>swc</code></a> is a super-fast compiler written in rust; producing widely-supported javascript from modern standards and typescript.</p><blockquote><p>⚠ the <code>extractComments</code> option is not supported</p></blockquote><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="uglify-js"><a href="https://github.com/mishoo/UglifyJS"><code>uglify-js</code></a><a href="#uglify-js" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p><a href="https://github.com/mishoo/UglifyJS"><code>UglifyJS</code></a> is a JavaScript parser, minifier, compressor and beautifier toolkit.</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token keyword">new</span> <span class="token class-name">TerserPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        minify<span class="token operator">:</span> TerserPlugin<span class="token punctuation">.</span>uglifyJsMinify<span class="token punctuation">,</span>
+        <span class="token comment">// `terserOptions` options will be passed to `uglify-js`</span>
+        <span class="token comment">// Link to options - https://github.com/mishoo/UglifyJS#minify-options</span>
+        terserOptions<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="swc"><a href="https://github.com/swc-project/swc"><code>swc</code></a><a href="#swc" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p><a href="https://github.com/swc-project/swc"><code>swc</code></a> is a super-fast compiler written in rust; producing widely-supported javascript from modern standards and typescript.</p><blockquote><p>⚠ the <code>extractComments</code> option is not supported and all comments will be removed by default, it will be fixed in future</p></blockquote><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -4021,14 +4033,21 @@ Will be wrapped into comment.</p><p><strong>webpack.config.js</strong></p><pre><
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="uglify-js"><a href="https://github.com/mishoo/UglifyJS"><code>uglify-js</code></a><a href="#uglify-js" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>UglifyJS is a JavaScript parser, minifier, compressor and beautifier toolkit.</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="esbuild"><a href="https://github.com/evanw/esbuild"><code>esbuild</code></a><a href="#esbuild" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p><a href="https://github.com/evanw/esbuild"><code>esbuild</code></a> is an extremely fast JavaScript bundler and minifier.</p><blockquote><p>⚠ the <code>extractComments</code> option is not supported and all legal comments (i.e. copyright, licenses and etc) will be preserved</p></blockquote><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">TerserPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        minify<span class="token operator">:</span> TerserPlugin<span class="token punctuation">.</span>uglifyJsMinify<span class="token punctuation">,</span>
-        <span class="token comment">// `terserOptions` options will be passed to `uglify-js`</span>
-        <span class="token comment">// Link to options - https://github.com/mishoo/UglifyJS#minify-options</span>
+        minify<span class="token operator">:</span> TerserPlugin<span class="token punctuation">.</span>esbuildMinify<span class="token punctuation">,</span>
+        <span class="token comment">// `terserOptions` options will be passed to `esbuild`</span>
+        <span class="token comment">// Link to options - https://esbuild.github.io/api/#minify</span>
+        <span class="token comment">// Note: the `minify` options is true by default (and override other `minify*` options), so if you want to disable the `minifyIdentifiers` option (or other `minify*` options) please use:</span>
+        <span class="token comment">// terserOptions: {</span>
+        <span class="token comment">//   minify: false,</span>
+        <span class="token comment">//   minifyWhitespace: true,</span>
+        <span class="token comment">//   minifyIdentifiers: false,</span>
+        <span class="token comment">//   minifySyntax: true,</span>
+        <span class="token comment">// },</span>
         terserOptions<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
