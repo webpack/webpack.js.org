@@ -2543,8 +2543,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">{</span>
         test<span class="token operator">:</span> <span class="token regex">/\\.css$/</span><span class="token punctuation">,</span>
         include<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token comment">// will include any paths relative to the current directory starting with `app/styles`</span>
+          <span class="token comment">// e.g. `app/styles.css`, `app/styles/styles.css`, `app/stylesheet.css`</span>
           path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&#x27;app/styles&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-          path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&#x27;vendor/styles&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token comment">// add an extra slash to only include the content of the directory `vendor/styles/`</span>
+          path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&#x27;vendor/styles/&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
