@@ -96,7 +96,7 @@ The `errorHandler` is fired when the evaluation of this module (or dependencies)
 - `moduleId`: the current module id.
 - `module`: the current module instance.
   - `module.hot`: allow to use the HMR API of the errored module instance. A common scenario is to self accept it again. It also makes sense to add a dispose handler to pass data along. Note that the errored module might be already partially executed, so make sure to not get into a inconsistent state. You can use `module.hot.data` to store partial state.
-  - `module.exports`: can be overriden, but be careful since property names might be mangled in production mode.
+  - `module.exports`: can be overridden, but be careful since property names might be mangled in production mode.
 
 ### `decline`
 
