@@ -13,7 +13,7 @@ contributors:
 
 **Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. webpack itself is built on the **same plugin system** that you use in your webpack configuration!
 
-They also serve the purpose of doing **anything else** that a [loader](/concepts/loaders) cannot do.
+They also serve the purpose of doing **anything else** that a [loader](/concepts/loaders) cannot do. webpack provides [many such plugins](/plugins/) out of the box.
 
 T> When consuming [`webpack-sources`](https://github.com/webpack/webpack-sources) package in plugins, use `require('webpack').sources` instead of `require('webpack-sources')` to avoid version conflicts for persistent caching.
 
