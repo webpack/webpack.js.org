@@ -39,7 +39,7 @@ export default function HelloDarkness() {
       aria-label={
         theme === DARK ? 'Switch to light theme' : 'Switch to dark theme'
       }
-      className="bg-transparent border-none cursor-pointer text-[16px] p-0 inline-flex items-center text-white"
+      className="bg-transparent border-none cursor-pointer text-[16px] p-0 inline-flex items-center text-gray-100 hover:text-blue-200 transition-colors duration-200"
       onClick={themeSwitcher}
       data-testid="hello-darkness"
     >
