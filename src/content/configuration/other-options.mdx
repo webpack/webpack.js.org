@@ -211,9 +211,13 @@ module.exports = {
 
 ### debug {#debug}
 
-`string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
+`string` `boolean = false` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 
+<<<<<<< HEAD
 开启特定日志比如插件(plugins)和加载器(loaders)的调试信息。 与 [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) 选项类似但仅仅对于基础设施而言。没有默认配置提供。
+=======
+Enable debug information of specified loggers such as plugins or loaders. Similar to [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) option but for infrastructure. Defaults to `false`.
+>>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
 
 **webpack.config.js**
 
@@ -229,9 +233,13 @@ module.exports = {
 
 ### level {#level}
 
-`string`
+`string = 'info' : 'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose'`
 
+<<<<<<< HEAD
 开启基础设施日志输出。与 [`stats.logging`](/configuration/stats/#statslogging) 选项类似但仅仅是对于基础设施而言。没有默认值提供。
+=======
+Enable infrastructure logging output. Similar to [`stats.logging`](/configuration/stats/#statslogging) option but for infrastructure. Defaults to `'info'`.
+>>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
 
 可能的取值：
 

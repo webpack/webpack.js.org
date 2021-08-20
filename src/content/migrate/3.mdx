@@ -350,7 +350,11 @@ module.exports = function (env) {
 
 ## 通过 `options` 中配置 loader {#loader-configuration-is-through-options}
 
+<<<<<<< HEAD:src/content/migrate/3.md
 你**不能再**通过 `webpack.config.js` 的自定义属性来配置 loader 。只能通过 `options` 来配置。下面配置的 `ts` 属性在 webpack 2 下不再有效：
+=======
+You can _no longer_ configure a loader with a custom property in the `webpack.config.js`. It must be done through the `options`. The following configuration with the `ts` property is no longer valid with webpack 2:
+>>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f:src/content/migrate/3.mdx
 
 ```js
 module.exports = {
@@ -370,7 +374,11 @@ module.exports = {
 
 ### 什么是 `options` ？ {#what-are-options}
 
+<<<<<<< HEAD:src/content/migrate/3.md
 好问题。严格来说，有两种办法，都可以用来配置 webpack 的 loader 。典型的 `options` 被称为 `query`，是一个可以被添加到 loader 名之后的字符串。它比较像一个查询字符串(query string)，但是实际上有[更强大的能力](https://github.com/webpack/loader-utils#parsequery):
+=======
+Good question. Well, strictly speaking it's 2 possible things; both ways to configure a webpack loader. Classically `options` was called `query` and was a string which could be appended to the name of the loader. Much like a query string but actually with [greater powers](https://github.com/webpack/loader-utils#parsequery):
+>>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f:src/content/migrate/3.mdx
 
 ```js
 module.exports = {

@@ -30,6 +30,9 @@ const Footer = () => (
         <Link className="footer__link" to="https://webpack.threadless.com/">
           周边
         </Link>
+        <Link className="footer__link" to="/awesome-webpack/">
+          Awesome webpack
+        </Link>
         <Link className="footer__link" to="/glossary/">
           术语
         </Link>

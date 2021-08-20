@@ -16,7 +16,11 @@ translators:
   - dear-lizhihua
 ---
 
+<<<<<<< HEAD:src/content/guides/asset-management.md
 如果你是从开始一直在沿用指南的示例，现在会有一个小项目，显示 "Hello webpack"。现在我们尝试混合一些其他资源，比如 images，看看 webpack 如何处理。
+=======
+If you've been following the guides from the start, you will now have a small project that shows "Hello webpack". Now let's try to incorporate some other assets, like images, to see how they can be handled.
+>>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f:src/content/guides/asset-management.mdx
 
 在 webpack 出现之前，前端开发人员会使用 [grunt](https://gruntjs.com/) 和 [gulp](https://gulpjs.com/) 等工具来处理资源，并将它们从 `/src` 文件夹移动到 `/dist` 或 `/build` 目录中。JavaScript 模块也遵循同样方式，但是，像 webpack 这样的工具，将**动态打包**所有依赖（创建所谓的 [依赖图(dependency graph)](/concepts/dependency-graph)）。这是极好的创举，因为现在每个模块都可以**明确表述它自身的依赖**，可以避免打包未使用的模块。
 

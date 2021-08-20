@@ -94,6 +94,12 @@ module.exports = (env) =>
           'loaders/url-loader': 'https://v4.webpack.js.org/loaders/url-loader',
           'loaders/file-loader':
             'https://v4.webpack.js.org/loaders/file-loader',
+          'loaders/null-loader':
+            'https://v4.webpack.js.org/loaders/null-loader/',
+          'loaders/mocha-loader':
+            'https://v4.webpack.js.org/loaders/mocha-loader/',
+          'loaders/istanbul-instrumenter-loader':
+            'https://v4.webpack.js.org/loaders/istanbul-instrumenter-loader/',
         },
       }),
       new CopyWebpackPlugin({
