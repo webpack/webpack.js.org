@@ -842,6 +842,10 @@ module.exports = {
   //...
   devServer: {
     onListening: function (devServer) {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
       const port = devServer.server.address().port;
       console.log('Listening on port:', port);
     },
