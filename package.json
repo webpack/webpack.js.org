@@ -122,7 +122,7 @@
     "remark-frontmatter": "^3.0.0",
     "remark-gfm": "^1.0.0",
     "remark-html": "^13.0.0",
-    "remark-refractor": "git://github.com/montogeek/remark-refractor.git",
+    "remark-refractor": "montogeek/remark-refractor",
     "remark-slug": "^6.1.0",
     "rimraf": "^3.0.2",
     "sass": "^1.37.5",
