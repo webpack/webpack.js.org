@@ -53,7 +53,7 @@ T> If you took the route of using `webpack-dev-middleware` instead of `webpack-d
     },
     devtool: 'inline-source-map',
     devServer: {
-      contentBase: './dist',
+      static: './dist',
 +     hot: true,
     },
     plugins: [
@@ -144,7 +144,7 @@ const webpack = require('webpack');
 
 const config = require('./webpack.config.js');
 const options = {
-  contentBase: './dist',
+  static: './dist',
   hot: true,
   host: 'localhost',
 };
@@ -229,7 +229,7 @@ Now let's update the configuration file to make use of the loader.
     },
     devtool: 'inline-source-map',
     devServer: {
-      contentBase: './dist',
+      static: './dist',
       hot: true,
     },
 +   module: {

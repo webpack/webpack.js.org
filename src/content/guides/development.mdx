@@ -212,7 +212,7 @@ Change your configuration file to tell the dev server where to look for files:
    },
    devtool: 'inline-source-map',
 +  devServer: {
-+    contentBase: './dist',
++    static: './dist',
 +  },
    plugins: [
      new HtmlWebpackPlugin({
@@ -296,7 +296,7 @@ Now we need to make some adjustments to our webpack configuration file in order 
    },
    devtool: 'inline-source-map',
    devServer: {
-     contentBase: './dist',
+     static: './dist',
    },
    plugins: [
      new HtmlWebpackPlugin({
