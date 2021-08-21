@@ -163,6 +163,12 @@ Usage via the CLI:
 npx webpack serve --bonjour
 ```
 
+To disable:
+
+```bash
+npx webpack serve --no-bonjour
+```
+
 You can also pass [custom options](https://github.com/watson/bonjour#initializing) to bonjour, for example:
 
 **webpack.config.js**
@@ -231,6 +237,12 @@ Usage via the CLI:
 npx webpack serve --client-overlay
 ```
 
+To disable:
+
+```bash
+npx webpack serve --no-client-overlay
+```
+
 If you want to show only errors:
 
 **webpack.config.js**
@@ -276,6 +288,12 @@ Usage via the CLI:
 
 ```bash
 npx webpack serve --client-progress
+```
+
+To disable:
+
+```bash
+npx webpack serve --no-client-progress
 ```
 
 ### webSocketTransport
@@ -421,6 +439,12 @@ Usage via the CLI:
 npx webpack serve --compress
 ```
 
+To disable:
+
+```bash
+npx webpack serve --no-compress
+```
+
 ## devserver.devMiddleware
 
 Provide options to [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) which handles webpack assets.
@@ -482,7 +506,13 @@ Usage via CLI
 npx webpack serve --http2
 ```
 
-To pass your own certificate via CLI, use the following options
+To disable:
+
+```bash
+npx webpack serve --no-http2
+```
+
+To pass your own certificate via CLI, use the following options:
 
 ```bash
 npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
@@ -532,7 +562,13 @@ Usage via the CLI:
 npx webpack serve --https
 ```
 
-To pass your own certificate via the CLI use the following options
+To disable:
+
+```bash
+npx webpack serve --no-https
+```
+
+To pass your own certificate via the CLI use the following options:
 
 ```bash
 npx webpack serve --https-key ./path/to/server.key --https--cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
@@ -614,6 +650,12 @@ Usage via the CLI:
 npx webpack serve --history-api-fallback
 ```
 
+To disable:
+
+```bash
+npx webpack serve --no-history-api-fallback
+```
+
 For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
 
 ## devServer.host
@@ -690,6 +732,12 @@ Usage via the CLI:
 
 ```bash
 npx webpack serve --hot
+```
+
+To disable:
+
+```bash
+npx webpack serve --no-hot
 ```
 
 To enable Hot Module Replacement without page refresh as a fallback in case of build failures, use `hot: 'only'`:
@@ -882,6 +930,12 @@ Usage via the CLI:
 
 ```bash
 npx webpack serve --open
+```
+
+To disable:
+
+```bash
+npx webpack serve --no-open
 ```
 
 To open a specified page in browser:
