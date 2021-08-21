@@ -748,13 +748,13 @@ module.exports = {
 
 支持的模板字符串：
 
-- [name] 源文件名称
-- [path] 源文件相对于 `compiler.context` 或者 `modules.localIdentContext` 配置项的相对路径。
-- [file] - 文件名和路径。
-- [ext] - 文件拓展名。
-- [hash] - 字符串的哈希值。基于 `localIdentHashSalt`、`localIdentHashFunction`、`localIdentHashDigest`、`localIdentHashDigestLength`、`localIdentContext`、`resourcePath` 和 `exportName` 生成。
-- [<hashFunction>:hash:<hashDigest>:<hashDigestLength>] - 带有哈希设置的哈希。
-- [local] - 原始类名。
+- `[name]` 源文件名称
+- `[path]` 源文件相对于 `compiler.context` 或者 `modules.localIdentContext` 配置项的相对路径。
+- `[file]` - 文件名和路径。
+- `[ext]` - 文件拓展名。
+- `[hash]` - 字符串的哈希值。基于 `localIdentHashSalt`、`localIdentHashFunction`、`localIdentHashDigest`、`localIdentHashDigestLength`、`localIdentContext`、`resourcePath` 和 `exportName` 生成。
+- `[<hashFunction>:hash:<hashDigest>:<hashDigestLength>]` - 带有哈希设置的哈希。
+- `[local]` - 原始类名。
 
 建议：
 

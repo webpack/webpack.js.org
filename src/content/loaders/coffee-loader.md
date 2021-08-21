@@ -129,7 +129,7 @@ module.exports = {
 
 > CoffeeScript 2 使用最新的句法生成 JavaScript。
 > 代码运行所在的运行时或浏览器有可能无法支持全部相关句法。
-> 这种情况下，新的 JavaScript 句法将被转换为旧的 JavaScript 句法，以便在较低版本 Node 环境或浏览器中运行这些代码。比如将 { a } = obj 转换为 a = obj.a.
+> 这种情况下，新的 JavaScript 句法将被转换为旧的 JavaScript 句法，以便在较低版本 Node 环境或浏览器中运行这些代码。比如将 `{ a } = obj` 转换为 `a = obj.a`。
 > 这个转换的过程是由一些诸如 Babel, Bublé or Traceur Compiler 等转换工具完成的。
 
 安装 `@babel/core` 和 `@babel/preset-env`  然后创建配置文件：

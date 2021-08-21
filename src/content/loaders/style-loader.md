@@ -711,9 +711,9 @@ module.exports = {
 
 对于 `production` 模式的构建，建议从你的包中提取 CSS，以便以后能够使用 CSS/JS 资源的并行加载。
 可以使用 [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) 实现，因为它可以创建单独的 css 文件。
-对于 `development` 模式（包括 `webpack-dev-server`），你可以使用 `style-loader`，因为他使用多个 <style></style> 将 CSS 插入到 DOM 中，并且运行得会更快。
+对于 `development` 模式（包括 `webpack-dev-server`），你可以使用 `style-loader`，因为他使用多个 `<style></style>` 将 CSS 插入到 DOM 中，并且运行得会更快。
 
-> i 不要将 `style-loader` 于 `mini-css-extract-plugin` 一起使用。
+> ⚠ 不要将 `style-loader` 于 `mini-css-extract-plugin` 一起使用。
 
 **webpack.config.js**
 
