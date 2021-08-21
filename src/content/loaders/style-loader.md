@@ -709,19 +709,11 @@ module.exports = {
 
 ### 推荐 {#recommend}
 
-<<<<<<< HEAD
 对于 `production` 模式的构建，建议从你的包中提取 CSS，以便以后能够使用 CSS/JS 资源的并行加载。
 可以使用 [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) 实现，因为它可以创建单独的 css 文件。
-对于 `development` 模式（包括 `webpack-dev-server`），你可以使用 `style-loader`，因为他使用多个 <style></style> 将 CSS 插入到 DOM 中，并且运行得会更快。
+对于 `development` 模式（包括 `webpack-dev-server`），你可以使用 `style-loader`，因为他使用多个 `<style></style>` 将 CSS 插入到 DOM 中，并且运行得会更快。
 
-> i 不要将 `style-loader` 于 `mini-css-extract-plugin` 一起使用。
-=======
-For `production` builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
-This can be achieved by using the [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/), because it creates separate css files.
-For `development` mode (including `webpack-dev-server`) you can use `style-loader`, because it injects CSS into the DOM using multiple `<style></style>` and works faster.
-
-> ⚠ Do not use together `style-loader` and `mini-css-extract-plugin`.
->>>>>>> b5185919ddf7fece41ff9086807eb11aadc49bb6
+> ⚠ 不要将 `style-loader` 于 `mini-css-extract-plugin` 一起使用。
 
 **webpack.config.js**
 
