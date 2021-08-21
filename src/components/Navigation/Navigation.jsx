@@ -69,7 +69,7 @@ function NavigationIcon({ children, to, title }) {
   return (
     <Link
       to={to}
-      className="inline-flex items-center"
+      className="inline-flex items-center text-gray-100 dark:text-gray-200 hover:text-blue-200"
       title={`webpack on ${title}`}
     >
       {children}
@@ -78,7 +78,7 @@ function NavigationIcon({ children, to, title }) {
 }
 const navigationIconProps = {
   'aria-hidden': true,
-  fill: '#fff',
+  fill: 'currentColor',
   width: 16,
 };
 

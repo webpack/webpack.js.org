@@ -874,7 +874,7 @@ module.exports = {
     proxy: { // proxy URLs to backend development server
       '/api': 'http://localhost:3000'
     },
-    contentBase: path.join(__dirname, 'public'), // boolean | string | array, static file location
+    static: path.join(__dirname, 'public'), // boolean | string | array, static file location
     compress: true, // enable gzip compression
     historyApiFallback: true, // true for index.html upon 404, object for multiple paths
     hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
@@ -1007,7 +1007,7 @@ module.exports = {
         minChunks: 1,
         // minimum number of chunks a module must be in
         enforceSizeThreshold: 100000,
-        // ignore when following criterias when size of modules
+        // ignore when following criteria when size of modules
         // is above this threshold
         minSize: 20000,
         // size of modules must be above this threshold
@@ -1171,5 +1171,3 @@ found 0 vulnerabilities
 
 Congratulations! Your new webpack configuration file has been created!
 ```
-
-

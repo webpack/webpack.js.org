@@ -121,6 +121,12 @@ module.exports = {
 };
 ```
 
+Usage via the CLI:
+
+```bash
+npx webpack serve --allowed-hosts .host.com --allowed-hosts host2.com
+```
+
 When set to `'all'` this option bypasses host checking. **THIS IS NOT RECOMMENDED** as apps that do not check the host are vulnerable to DNS rebinding attacks.
 
 **webpack.config.js**
@@ -134,10 +140,10 @@ module.exports = {
 };
 ```
 
-To use this option with the CLI pass the `--allowed-hosts` as following:
+Usage via the CLI:
 
 ```bash
-npx webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com --allowed-hosts host2.com
+npx webpack serve --allowed-hosts all
 ```
 
 ## `devServer.bonjour`
@@ -161,6 +167,12 @@ Usage via the CLI:
 
 ```bash
 npx webpack serve --bonjour
+```
+
+To disable:
+
+```bash
+npx webpack serve --no-bonjour
 ```
 
 You can also pass [custom options](https://github.com/watson/bonjour#initializing) to bonjour, for example:
@@ -231,6 +243,12 @@ Usage via the CLI:
 npx webpack serve --client-overlay
 ```
 
+To disable:
+
+```bash
+npx webpack serve --no-client-overlay
+```
+
 If you want to show only errors:
 
 **webpack.config.js**
@@ -276,6 +294,12 @@ Usage via the CLI:
 
 ```bash
 npx webpack serve --client-progress
+```
+
+To disable:
+
+```bash
+npx webpack serve --no-client-progress
 ```
 
 ### webSocketTransport
@@ -421,6 +445,12 @@ Usage via the CLI:
 npx webpack serve --compress
 ```
 
+To disable:
+
+```bash
+npx webpack serve --no-compress
+```
+
 ## devserver.devMiddleware
 
 Provide options to [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) which handles webpack assets.
@@ -482,7 +512,13 @@ Usage via CLI
 npx webpack serve --http2
 ```
 
-To pass your own certificate via CLI, use the following options
+To disable:
+
+```bash
+npx webpack serve --no-http2
+```
+
+To pass your own certificate via CLI, use the following options:
 
 ```bash
 npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
@@ -532,7 +568,13 @@ Usage via the CLI:
 npx webpack serve --https
 ```
 
-To pass your own certificate via the CLI use the following options
+To disable:
+
+```bash
+npx webpack serve --no-https
+```
+
+To pass your own certificate via the CLI use the following options:
 
 ```bash
 npx webpack serve --https-key ./path/to/server.key --https--cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
@@ -614,6 +656,12 @@ Usage via the CLI:
 npx webpack serve --history-api-fallback
 ```
 
+To disable:
+
+```bash
+npx webpack serve --no-history-api-fallback
+```
+
 For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
 
 ## devServer.host
@@ -690,6 +738,12 @@ Usage via the CLI:
 
 ```bash
 npx webpack serve --hot
+```
+
+To disable:
+
+```bash
+npx webpack serve --no-hot
 ```
 
 To enable Hot Module Replacement without page refresh as a fallback in case of build failures, use `hot: 'only'`:
@@ -786,7 +840,7 @@ W> Live reloading works only with web related [targets](/configuration/target/#s
 
 ## devServer.onAfterSetupMiddleware
 
-`function (app, server, compiler)`
+`function (devServer)`
 
 Provides the ability to execute custom middleware after all other middleware
 internally within the server.
@@ -798,6 +852,10 @@ module.exports = {
   //...
   devServer: {
     onAfterSetupMiddleware: function (devServer) {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
       devServer.app.get('/some/path', function (req, res) {
         res.json({ custom: 'response' });
       });
@@ -808,7 +866,7 @@ module.exports = {
 
 ## devServer.onBeforeSetupMiddleware
 
-`function (app, server, compiler)`
+`function (devServer)`
 
 Provides the ability to execute custom middleware prior to all other middleware
 internally within the server. This could be used to define custom handlers, for
@@ -820,8 +878,12 @@ example:
 module.exports = {
   //...
   devServer: {
-    onBeforeSetupMiddleware: function (app, server, compiler) {
-      app.get('/some/path', function (req, res) {
+    onBeforeSetupMiddleware: function (devServer) {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
+      devServer.app.get('/some/path', function (req, res) {
         res.json({ custom: 'response' });
       });
     },
@@ -831,7 +893,7 @@ module.exports = {
 
 ## devserver.onListening
 
-`function (server)`
+`function (devServer)`
 
 Provides the ability to execute a custom function when webpack-dev-server starts listening for connections on a port.
 
@@ -841,8 +903,12 @@ Provides the ability to execute a custom function when webpack-dev-server starts
 module.exports = {
   //...
   devServer: {
-    onListening: function (server) {
-      const port = server.address().port;
+    onListening: function (devServer) {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
+      const port = devServer.server.address().port;
       console.log('Listening on port:', port);
     },
   },
@@ -870,6 +936,12 @@ Usage via the CLI:
 
 ```bash
 npx webpack serve --open
+```
+
+To disable:
+
+```bash
+npx webpack serve --no-open
 ```
 
 To open a specified page in browser:
@@ -930,7 +1002,7 @@ module.exports = {
 Usage via the CLI:
 
 ```bash
-npx webpack serve --open-aoo-name 'google-chrome'
+npx webpack serve --open-app-name 'google-chrome'
 ```
 
 The object accepts all [open](https://www.npmjs.com/package/open) options:
@@ -1110,7 +1182,7 @@ module.exports = {
   devServer: {
     index: '', // specify to enable root proxying
     host: '...',
-    contentBase: '...',
+    static: '...',
     proxy: {
       context: () => true,
       target: 'http://localhost:1234',
