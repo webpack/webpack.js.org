@@ -10740,9 +10740,9 @@ remark-parse@^9.0.0:
   dependencies:
     mdast-util-from-markdown "^0.8.0"
 
-"remark-refractor@git://github.com/montogeek/remark-refractor.git":
+remark-refractor@montogeek/remark-refractor:
   version "1.0.0"
-  resolved "git://github.com/montogeek/remark-refractor.git#9b6048f89739b27f9de701d29d29d980b3ea18d7"
+  resolved "https://codeload.github.com/montogeek/remark-refractor/tar.gz/9b6048f89739b27f9de701d29d29d980b3ea18d7"
   dependencies:
     refractor "^3.1.0"
     unist-util-visit "1.3.1"
