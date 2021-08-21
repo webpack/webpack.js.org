@@ -955,7 +955,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         minChunks<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
         <span class="token comment">// minimum number of chunks a module must be in</span>
         enforceSizeThreshold<span class="token operator">:</span> <span class="token number">100000</span><span class="token punctuation">,</span>
-        <span class="token comment">// ignore when following criterias when size of modules</span>
+        <span class="token comment">// ignore when following criteria when size of modules</span>
         <span class="token comment">// is above this threshold</span>
         minSize<span class="token operator">:</span> <span class="token number">20000</span><span class="token punctuation">,</span>
         <span class="token comment">// size of modules must be above this threshold</span>
@@ -4352,7 +4352,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token function-variable function">test</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">module</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token operator">!</span><span class="token regex">/moduleB/</span><span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>module<span class="token punctuation">.</span><span class="token function">nameForCondition</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></li></ul><h3 id="experimentsoutputmodule">experiments.outputModule<a href="#experimentsoutputmodule" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p><code>boolean</code></p><p>Once enabled, webpack will ouput ECMAScript module syntax whenever possible. For instance, <code>import()</code> to load chunks, ESM exports to expose chunk data, among others.</p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></li></ul><h3 id="experimentsoutputmodule">experiments.outputModule<a href="#experimentsoutputmodule" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p><code>boolean</code></p><p>Once enabled, webpack will output ECMAScript module syntax whenever possible. For instance, <code>import()</code> to load chunks, ESM exports to expose chunk data, among others.</p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   experiments<span class="token operator">:</span> <span class="token punctuation">{</span>
     outputModule<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
