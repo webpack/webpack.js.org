@@ -786,7 +786,7 @@ W> Live reloading works only with web related [targets](/configuration/target/#s
 
 ## devServer.onAfterSetupMiddleware
 
-`function (app, server, compiler)`
+`function (devServer)`
 
 Provides the ability to execute custom middleware after all other middleware
 internally within the server.
@@ -798,6 +798,10 @@ module.exports = {
   //...
   devServer: {
     onAfterSetupMiddleware: function (devServer) {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
       devServer.app.get('/some/path', function (req, res) {
         res.json({ custom: 'response' });
       });
@@ -808,7 +812,7 @@ module.exports = {
 
 ## devServer.onBeforeSetupMiddleware
 
-`function (app, server, compiler)`
+`function (devServer)`
 
 Provides the ability to execute custom middleware prior to all other middleware
 internally within the server. This could be used to define custom handlers, for
@@ -820,8 +824,12 @@ example:
 module.exports = {
   //...
   devServer: {
-    onBeforeSetupMiddleware: function (app, server, compiler) {
-      app.get('/some/path', function (req, res) {
+    onBeforeSetupMiddleware: function (devServer) {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
+      devServer.app.get('/some/path', function (req, res) {
         res.json({ custom: 'response' });
       });
     },
@@ -831,7 +839,7 @@ module.exports = {
 
 ## devserver.onListening
 
-`function (server)`
+`function (devServer)`
 
 Provides the ability to execute a custom function when webpack-dev-server starts listening for connections on a port.
 
