@@ -121,6 +121,12 @@ module.exports = {
 };
 ```
 
+Usage via the CLI:
+
+```bash
+npx webpack serve --allowed-hosts .host.com --allowed-hosts host2.com
+```
+
 When set to `'all'` this option bypasses host checking. **THIS IS NOT RECOMMENDED** as apps that do not check the host are vulnerable to DNS rebinding attacks.
 
 **webpack.config.js**
@@ -134,10 +140,10 @@ module.exports = {
 };
 ```
 
-To use this option with the CLI pass the `--allowed-hosts` as following:
+Usage via the CLI:
 
 ```bash
-npx webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com --allowed-hosts host2.com
+npx webpack serve --allowed-hosts all
 ```
 
 ## `devServer.bonjour`
