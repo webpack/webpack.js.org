@@ -875,7 +875,7 @@ You can see that it doesn&#x27;t exit the command line because the script is cur
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  devtool: &#x27;inline-source-map&#x27;,
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  devServer: {
-</span><span class="token prefix inserted">+</span><span class="token line">    contentBase: &#x27;./dist&#x27;,
+</span><span class="token prefix inserted">+</span><span class="token line">    static: &#x27;./dist&#x27;,
 </span><span class="token prefix inserted">+</span><span class="token line">  },
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
 </span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
@@ -921,7 +921,7 @@ You can see that it doesn&#x27;t exit the command line because the script is cur
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  devtool: &#x27;inline-source-map&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  devServer: {
-</span><span class="token prefix unchanged"> </span><span class="token line">    contentBase: &#x27;./dist&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">    static: &#x27;./dist&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">  },
 </span><span class="token prefix unchanged"> </span><span class="token line">  plugins: [
 </span><span class="token prefix unchanged"> </span><span class="token line">    new HtmlWebpackPlugin({
@@ -1669,7 +1669,7 @@ too, and a regular expression to match files against.</p><p>webpack parses for <
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line">   devtool: &#x27;inline-source-map&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">   devServer: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     contentBase: &#x27;./dist&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">     static: &#x27;./dist&#x27;,
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">     hot: true,
 </span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line">   plugins: [
@@ -1722,7 +1722,7 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 
 <span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;./webpack.config.js&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>
-  contentBase<span class="token operator">:</span> <span class="token string">&#x27;./dist&#x27;</span><span class="token punctuation">,</span>
+  <span class="token keyword">static</span><span class="token operator">:</span> <span class="token string">&#x27;./dist&#x27;</span><span class="token punctuation">,</span>
   hot<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   host<span class="token operator">:</span> <span class="token string">&#x27;localhost&#x27;</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span>
@@ -1771,7 +1771,7 @@ server<span class="token punctuation">.</span><span class="token function">liste
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span><span class="token prefix unchanged"> </span><span class="token line">   devtool: &#x27;inline-source-map&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">   devServer: {
-</span><span class="token prefix unchanged"> </span><span class="token line">     contentBase: &#x27;./dist&#x27;,
+</span><span class="token prefix unchanged"> </span><span class="token line">     static: &#x27;./dist&#x27;,
 </span><span class="token prefix unchanged"> </span><span class="token line">     hot: true,
 </span><span class="token prefix unchanged"> </span><span class="token line">   },
 </span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">   module: {
@@ -2009,7 +2009,7 @@ module.exports = {
 </span><span class="token prefix inserted">+</span><span class="token line">   mode: &#x27;development&#x27;,
 </span><span class="token prefix inserted">+</span><span class="token line">   devtool: &#x27;inline-source-map&#x27;,
 </span><span class="token prefix inserted">+</span><span class="token line">   devServer: {
-</span><span class="token prefix inserted">+</span><span class="token line">     contentBase: &#x27;./dist&#x27;,
+</span><span class="token prefix inserted">+</span><span class="token line">     static: &#x27;./dist&#x27;,
 </span><span class="token prefix inserted">+</span><span class="token line">   },
 </span><span class="token prefix inserted">+</span><span class="token line"> });</span></span></code></pre><p><strong>webpack.prod.js</strong></p><pre><code class="hljs language-diff"><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line"> const { merge } = require(&#x27;webpack-merge&#x27;);
 </span><span class="token prefix inserted">+</span><span class="token line"> const common = require(&#x27;./webpack.common.js&#x27;);

@@ -822,7 +822,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     proxy<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token comment">// proxy URLs to backend development server</span>
       <span class="token string">&#x27;/api&#x27;</span><span class="token operator">:</span> <span class="token string">&#x27;http://localhost:3000&#x27;</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    contentBase<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&#x27;public&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// boolean | string | array, static file location</span>
+    static<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&#x27;public&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// boolean | string | array, static file location</span>
     compress<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// enable gzip compression</span>
     historyApiFallback<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// true for index.html upon 404, object for multiple paths</span>
     hot<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// hot module replacement. Depends on HotModuleReplacementPlugin</span>
@@ -3397,7 +3397,7 @@ example:</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs lang
   devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
     index<span class="token operator">:</span> <span class="token string">&#x27;&#x27;</span><span class="token punctuation">,</span> <span class="token comment">// specify to enable root proxying</span>
     host<span class="token operator">:</span> <span class="token string">&#x27;...&#x27;</span><span class="token punctuation">,</span>
-    contentBase<span class="token operator">:</span> <span class="token string">&#x27;...&#x27;</span><span class="token punctuation">,</span>
+    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token string">&#x27;...&#x27;</span><span class="token punctuation">,</span>
     proxy<span class="token operator">:</span> <span class="token punctuation">{</span>
       <span class="token function-variable function">context</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       target<span class="token operator">:</span> <span class="token string">&#x27;http://localhost:1234&#x27;</span><span class="token punctuation">,</span>
