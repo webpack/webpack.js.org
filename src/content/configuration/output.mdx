@@ -446,11 +446,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `output.filename` {#outputfilename}
-=======
-## output.filename
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
+## output.filename {#outputfilename}
 
 `string` `function (pathData, assetInfo) => string`
 
@@ -544,11 +540,7 @@ module.exports = {
 
 注意，此选项不会影响那些「按需加载 chunk」的输出文件。它只影响最初加载的输出文件。对于按需加载的 chunk 文件，请使用 [`output.chunkFilename`](#outputchunkfilename) 选项来控制输出。通过 loader 创建的文件也不受影响。在这种情况下，你必须尝试 loader 特定的可用选项。
 
-<<<<<<< HEAD
-## Template strings {#template-strings}
-=======
-### Template strings
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
+### Template strings {#template-strings}
 
 可以使用以下替换模板字符串（通过 webpack 内部的[`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)）:
 
@@ -1947,7 +1939,7 @@ module.exports = {
 =======
 W> `output.module` is an experimental feature and can only be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
 
-## `output.path`
+## `output.path` {#outputpath}
 >>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
 
 `string = path.join(process.cwd(), 'dist')`

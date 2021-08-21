@@ -10,13 +10,10 @@ contributors:
   - rramaa
   - chenxsan
   - jamesgeorge007
-<<<<<<< HEAD:src/content/migrate/5.md
+  - getsnoopy
 translators:
   - lcxfs1991
   - QC-L
-=======
-  - getsnoopy
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f:src/content/migrate/5.mdx
 ---
 
 本指南目标是帮助你在使用 webpack 的时候直接迁移到 webpack 5。如果你使用运行 webpack 更底层的工具，请
@@ -187,15 +184,9 @@ console.log(pkg.version);
   - 这不适用于自动关闭的 `webpack(..., callback)`。
   - 如果你在监听模式下使用 webpack，直到用户结束进程，此为可选。在监听模式下的空闲阶段将被用于执行此工作。
 
-<<<<<<< HEAD:src/content/migrate/5.md
 ### 运行单个构建并遵循以下建议 {#run-a-single-build-and-follow-advises}
 
 请务必仔细阅读构建时的错误/警告。如未发现相关建议，请创建一个 issue，我们会尽力解决。
-=======
-### Run a single build and follow advice
-
-Please make sure to read the building errors/warnings carefully. If there is no corresponding advice, please create an issue and we will try to resolve it.
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f:src/content/migrate/5.mdx
 
 重复以下步骤，直到你至少解决到 Level 3 或 Level 4：
 
@@ -217,11 +208,7 @@ Please make sure to read the building errors/warnings carefully. If there is no 
 
 - Level 5: **运行时错误**。
 
-<<<<<<< HEAD:src/content/migrate/5.md
-    这很棘手，你可能要调试才能找到问题所在。在这里很难给出一个通用的建议。但我们在下面列出了一些关于运行时错误的常见建议：
-=======
-  This is tricky. You probably have to debug to find the problem. General advice is difficult here. But we do list some common advice below regarding Runtime Errors:
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f:src/content/migrate/5.mdx
+  这很棘手，你可能要调试才能找到问题所在。在这里很难给出一个通用的建议。但我们在下面列出了一些关于运行时错误的常见建议：
 
     - `process` 未定义。
         - webpack 5 不再引入 Node.js 变量的 polyfill，在前端代码中应避免使用。
@@ -238,13 +225,8 @@ Please make sure to read the building errors/warnings carefully. If there is no 
 
     你可能会收到很多弃用警告，插件需要时间来赶上内核的变化。请将这些弃用上报给插件。这些弃用只是警告，构建仍然可以正常工作，只是会有小瑕疵（比如性能降低）。
 
-<<<<<<< HEAD:src/content/migrate/5.md
-    - 你使用带有 `--no-deprecation` 选项的 node 运行 webpack，可以隐藏废弃告警，例如：`node --no-deprecation node_modules/webpack/bin/webpack.js`。但这只能作为临时的解决方案。
-    - plugin 和 loader 的开发者，应遵循弃用信息中的建议以改进代码。
-=======
-  - You can hide deprecation warnings by running node with `--no-deprecation` flag, e.g.: `node --no-deprecation node_modules/webpack/bin/webpack.js`. This should only be a temporary workaround.
-  - Plugins and Loaders contributors can follow the advice in the deprecation messages to improve the code.
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f:src/content/migrate/5.mdx
+  - 你使用带有 `--no-deprecation` 选项的 node 运行 webpack，可以隐藏废弃告警，例如：`node --no-deprecation node_modules/webpack/bin/webpack.js`。但这只能作为临时的解决方案。
+  - plugin 和 loader 的开发者，应遵循弃用信息中的建议以改进代码。
 
 - Level 7: **性能问题**.
 

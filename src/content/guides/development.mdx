@@ -235,11 +235,7 @@ npm install --save-dev webpack-dev-server
 
 T> `webpack-dev-server` 会从 `output.path` 中定义的目录为服务提供 bundle 文件，即，文件将可以通过 `http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]` 进行访问。
 
-<<<<<<< HEAD:src/content/guides/development.md
-W> webpack-dev-server 在编译之后不会写入到任何输出文件。而是将 bundle 文件保留在内存中，然后将它们 serve 到 server 中，就好像它们是挂载在 server 根路径上的真实文件一样。如果你的页面希望在其他不同路径中找到 bundle 文件，则可以通过 dev server 配置中的 [`publicPath`](/configuration/dev-server/#devserverpublicpath-) 选项进行修改。
-=======
-W> webpack-dev-server doesn't write any output files after compiling. Instead, it keeps bundle files in memory and serves them as if they were real files mounted at the server's root path. If your page expects to find the bundle files on a different path, you can change this with the [`devMiddleware.publicPath`](/configuration/dev-server/#devserverdevmiddleware) option in the dev server's configuration.
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f:src/content/guides/development.mdx
+W> webpack-dev-server 在编译之后不会写入到任何输出文件。而是将 bundle 文件保留在内存中，然后将它们 serve 到 server 中，就好像它们是挂载在 server 根路径上的真实文件一样。如果你的页面希望在其他不同路径中找到 bundle 文件，则可以通过 dev server 配置中的 [`devMiddleware.publicPath`](/configuration/dev-server/#devserverdevmiddleware) 选项进行修改。
 
 我们添加一个可以直接运行 dev server 的 script：
 
