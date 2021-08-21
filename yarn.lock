@@ -5092,14 +5092,16 @@ eslint-config-prettier@^8.3.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.3.0.tgz#f7471b20b6fe8a9a9254cc684454202886a2dd7a"
   integrity sha512-BgZuLUSeKzvlL/VUjx/Yb787VQ26RU3gGjA3iiFvdsp/2bMfVIWUVP7tjxtjS0e+HP409cPlPvNkQloz8C91ew==
 
-eslint-mdx@^1.14.1:
-  version "1.14.1"
-  resolved "https://registry.yarnpkg.com/eslint-mdx/-/eslint-mdx-1.14.1.tgz#c4133f3383d5b58315efc01ddc7d139eb8b72dd9"
-  integrity sha512-6QxqRRghkl3i0NyayvED2zTN0kZzKoNMiGTYSnU3WMykm/Koptau//BqkIff+sEVoqcq1Q5z5PkrVBlYDuw3EA==
+eslint-mdx@^1.15.0:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/eslint-mdx/-/eslint-mdx-1.15.0.tgz#270de0a2ab27aad9350689d3b9b2112f94805239"
+  integrity sha512-0IGR9zH8RL5YDyL3SN3Vtc0u4uOTblGLrODMU9uhbiHJ8s48WZ24ruQthbUX221zFGf55+9A7cPeYi56xgI9pQ==
   dependencies:
+    cosmiconfig "^7.0.0"
     remark-mdx "^1.6.22"
     remark-parse "^8.0.3"
-    tslib "^2.3.0"
+    remark-stringify "^8.1.1"
+    tslib "^2.3.1"
     unified "^9.2.1"
 
 eslint-plugin-cypress@^2.11.3:
@@ -5116,20 +5118,15 @@ eslint-plugin-markdown@^2.2.0:
   dependencies:
     mdast-util-from-markdown "^0.8.5"
 
-eslint-plugin-mdx@^1.14.1:
-  version "1.14.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-mdx/-/eslint-plugin-mdx-1.14.1.tgz#d3e07ac38107ebdabd6a979853d1aae44331e010"
-  integrity sha512-1FmVGuZSPhHl0x/tWMOSBtE3DcWFaAJmIaWK0uBlUsC797TGrCtXd87xR4D+phbl1ii17pfM6gjgTbCKGH0Afg==
+eslint-plugin-mdx@^1.15.0:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-mdx/-/eslint-plugin-mdx-1.15.0.tgz#391e41b0025091f9912b6bd80897ce85b6d0cdd7"
+  integrity sha512-3NF/tp6MgdJL+28i+Qzg60loiHqgPWb35NUtDQvhocUOK2afRD0YR1+ep7JFUZ5mys2CTkpbd8Gc/GrXgsBVNA==
   dependencies:
-    cosmiconfig "^7.0.0"
-    eslint-mdx "^1.14.1"
+    eslint-mdx "^1.15.0"
     eslint-plugin-markdown "^2.2.0"
-    remark-mdx "^1.6.22"
-    remark-parse "^8.0.3"
-    remark-stringify "^8.1.1"
     synckit "^0.3.4"
-    tslib "^2.3.0"
-    unified "^9.2.1"
+    tslib "^2.3.1"
     vfile "^4.2.1"
 
 eslint-plugin-react-hooks@^4.2.0:
@@ -12392,10 +12389,10 @@ tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
-  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
+tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
+  integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
 
 tslib@~2.1.0:
   version "2.1.0"
