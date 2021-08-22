@@ -19,7 +19,7 @@ T> 本指南继续沿用 [管理输出](/guides/output-management) 中的代码�
 
 本章将重点介绍，如何为我们的应用程序添加离线体验。我们将使用名为 [Workbox](https://github.com/GoogleChrome/workbox) 的 Google 项目来实现此目的，该项目提供的工具可帮助我们更简单地为 web app 提供离线支持。
 
-## 现在，我们并没有运行在离线环境下 {#we-dont-work-offline-now}
+## 现在，我们并没有运行在离线环境下 $#we-dont-work-offline-now$
 
 到目前为止，我们一直是直接查看本地文件系统的输出结果。通常情况下，真正的用户是通过网络访问 web app；用户的浏览器会与一个提供所需资源（例如，`.html`, `.js` 和 `.css` 文件）的 **server** 通讯。
 
@@ -58,7 +58,7 @@ Hit CTRL-C to stop the server
 
 这就是我们为实现离线体验所需要的改变。在本章结束时，我们应该要实现的是，停止 server 然后刷新，仍然可以看到应用程序正常运行。
 
-## 添加 Workbox {#adding-workbox}
+## 添加 Workbox $#adding-workbox$
 
 添加 workbox-webpack-plugin 插件，然后调整 `webpack.config.js` 文件：
 
@@ -115,7 +115,7 @@ precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js  268 bytes          [emitt
 
 所以，值得高兴的是，我们现在已经创建出一个 Service Worker。接下来该做什么？
 
-## 注册 Service Worker {#registering-our-service-worker}
+## 注册 Service Worker $#registering-our-service-worker$
 
 接下来我们注册 Service Worker，使其出场并开始表演。通过添加以下注册代码来完成此操作：
 
@@ -144,6 +144,6 @@ SW registered
 
 现在来进行测试。停止 server 并刷新页面。如果浏览器能够支持 Service Worker，应该可以看到你的应用程序还在正常运行。然而，server 已经**停止** serve 整个 dist 文件夹，此刻是 Service Worker 在进行 serve。
 
-## 结论 {#conclusion}
+## 结论 $#conclusion$
 
 你已经使用 Workbox 项目构建了一个离线应用程序。开始进入将 web app 改造为 PWA 的旅程。你现在可能想要考虑下一步做什么。[这里](https://developers.google.com/web/progressive-web-apps/)是可以帮助到你解决下一步问题的比较不错的资源。

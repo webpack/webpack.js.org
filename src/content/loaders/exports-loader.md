@@ -29,7 +29,7 @@ translators:
 >
 > ⚠ 请注意，原始代码中现有的 exports（`export`/`module.exports`/`exports`）和导出新值可能会导致失败。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 首先，你需要安装 `exports-loader`：
 
@@ -37,7 +37,7 @@ translators:
 $ npm install exports-loader --save-dev
 ```
 
-### 内联 {#inline}
+### 内联 $#inline$
 
 可以使用 `|` 或者 `%20`（空格）分隔 export 中的 `syntax`，`name` 和 `alias`。
 可以在[这里](#syntax)获取文档和语法实例。
@@ -140,7 +140,7 @@ myFunctionAlias('Hello world');
 
 可以在下面的文档中找到字段值的含义。
 
-### 使用配置文件 {#using-configuration}
+### 使用配置文件 $#using-configuration$
 
 **webpack.config.js**
 
@@ -164,14 +164,14 @@ module.exports = {
 
 然后用你喜欢的方式运行 `webpack`。
 
-## 配置项 {#options}
+## 配置项 $#options$
 
 |           Name            |                   Type                    |   Default   | Description                 |
 | :-----------------------: | :---------------------------------------: | :---------: | :-------------------------- |
 |    **[`type`](#type)**    |                `{String}`                 |  `module`   | 生成导出的格式 |
 | **[`exports`](#exports)** | `{String\|Object\|Array<String\|Object>}` | `undefined` | 导出的列表             |
 
-### `type` {#type}
+### `type` $#type$
 
 类型：`String`
 默认值：`module`
@@ -180,7 +180,7 @@ module.exports = {
 
 可选值 - `commonjs`（CommonJS 模块语法）和 `module`（ES 模块语法）。
 
-#### `commonjs` {#commonjs}
+#### `commonjs` $#commonjs$
 
 **webpack.config.js**
 
@@ -211,7 +211,7 @@ module.exports = {
 module.exports = { Foo };
 ```
 
-#### `module` {#module}
+#### `module` $#module$
 
 **webpack.config.js**
 
@@ -242,18 +242,18 @@ module.exports = {
 export { Foo };
 ```
 
-### `exports` {#exports}
+### `exports` $#exports$
 
 类型：`String|Array`
 默认值：`undefined`
 
 导出的列表。
 
-#### `String` {#string}
+#### `String` $#string$
 
 允许使用一个字符串来描述导出。
 
-##### `Syntax` {#syntax}
+##### `Syntax` $#syntax$
 
 可以使用 `|` 或者 `%20`（空格）分隔 export 中的 `syntax`，`name` 和 `alias`。
 
@@ -282,9 +282,9 @@ Examples:
 
 > ⚠ 别名不能与 `default` 或者 `single` 语法一起使用。
 
-##### 示例 {#examples}
+##### 示例 $#examples$
 
-###### ES Module Default Export {#es-module-default-export}
+###### ES Module Default Export $#es-module-default-export$
 
 **webpack.config.js**
 
@@ -314,7 +314,7 @@ module.exports = {
 export default Foo;
 ```
 
-###### ES Module Named Exports {#es-module-named-exports}
+###### ES Module Named Exports $#es-module-named-exports$
 
 **webpack.config.js**
 
@@ -344,7 +344,7 @@ module.exports = {
 export { Foo as FooA };
 ```
 
-###### CommonJS Single Export {#commonjs-single-export}
+###### CommonJS Single Export $#commonjs-single-export$
 
 **webpack.config.js**
 
@@ -375,7 +375,7 @@ module.exports = {
 module.exports = Foo;
 ```
 
-###### CommonJS 导出多个 {#commonjs-multiple-exports}
+###### CommonJS 导出多个 $#commonjs-multiple-exports$
 
 **webpack.config.js**
 
@@ -406,7 +406,7 @@ module.exports = {
 module.exports = { FooA: Foo };
 ```
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 允许使用对象来描述导出。
 
@@ -416,9 +416,9 @@ module.exports = { FooA: Foo };
 - `name` - 导出值的名称 (**required**)
 - `alias` - 导出值的别名 (**may be omitted**)
 
-##### 示例 {#examples}
+##### 示例 $#examples$
 
-###### ES Module 默认导出 {#es-module-default-export}
+###### ES Module 默认导出 $#es-module-default-export$
 
 **webpack.config.js**
 
@@ -451,7 +451,7 @@ module.exports = {
 export default Foo;
 ```
 
-###### ES Module 重命名导出 {#es-module-named-exports}
+###### ES Module 重命名导出 $#es-module-named-exports$
 
 **webpack.config.js**
 
@@ -485,7 +485,7 @@ module.exports = {
 export { Foo as FooA };
 ```
 
-###### CommonJS 单个导出 {#commonjs-single-export}
+###### CommonJS 单个导出 $#commonjs-single-export$
 
 **webpack.config.js**
 
@@ -519,7 +519,7 @@ module.exports = {
 module.exports = Foo;
 ```
 
-###### CommonJS 导出多个 {#commonjs-multiple-exports}
+###### CommonJS 导出多个 $#commonjs-multiple-exports$
 
 **webpack.config.js**
 
@@ -554,7 +554,7 @@ module.exports = {
 module.exports = { FooA: Foo };
 ```
 
-#### `Array` {#array}
+#### `Array` $#array$
 
 允许指定多个导出。 每一个可以是 [`string`](https://github.com/webpack-contrib/exports-loader#string) 或者 [`object`](https://github.com/webpack-contrib/exports-loader#object).
 
@@ -564,9 +564,9 @@ module.exports = { FooA: Foo };
 
 > ⚠ 因为 CommonJS 格式限制，不能导出多个 `single` 值。
 
-##### 示例 {#examples}
+##### 示例 $#examples$
 
-###### CommonJS 导出多个 {#commonjs-multiple-exports}
+###### CommonJS 导出多个 $#commonjs-multiple-exports$
 
 **webpack.config.js**
 
@@ -597,7 +597,7 @@ module.exports = {
 module.exports = { Foo, Bar, BazA: Bar };
 ```
 
-###### ES 默认导出与导出重命名 {#es-module-default-export-and-named-exports-together}
+###### ES 默认导出与导出重命名 $#es-module-default-export-and-named-exports-together$
 
 **webpack.config.js**
 
@@ -628,7 +628,7 @@ export default Foo;
 export { Bar as BarA };
 ```
 
-###### 导出重命名 {#named-exports}
+###### 导出重命名 $#named-exports$
 
 **webpack.config.js**
 
@@ -662,13 +662,13 @@ module.exports = {
 export { Foo as FooA, Bar, Baz };
 ```
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果您还没有阅读，请花一点时间阅读我们的贡献指南。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/exports-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/exports-loader/blob/master/LICENSE)
 

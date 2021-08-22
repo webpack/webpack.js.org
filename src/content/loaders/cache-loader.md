@@ -21,7 +21,7 @@ translators:
 
 `cache-loader` 允许缓存以下 loaders 到（默认）磁盘或数据库。
 
-## 起步 {#getting-started}
+## 起步 $#getting-started$
 
 在开始前，需要安装 `cache-loader`:
 
@@ -49,7 +49,7 @@ module.exports = {
 
 > ⚠️  请注意，保存和读取这些缓存文件会有一些时间开销，所以请只对性能开销较大的 loader 使用此 loader。
 
-## 选项 {#options}
+## 选项 $#options$
 
 |         名称          |                       类型                       |                        默认值                        | 描述                                                                                                                                                            |
 | :-------------------: | :----------------------------------------------: | :-----------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -63,9 +63,9 @@ module.exports = {
 |    **`readOnly`**     |                   `{Boolean}`                    |                         `false`                         | 允许覆写默认值并将缓存设置为只读（比如某些环境中不需要缓存更新，只需要读取）|
 |      **`write`**      | `{Function(cacheKey, data, callback) -> {void}}` |                       `undefined`                       | 允许覆写默认向文件写入缓存数据（比如 Redis, memcached）|
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### 基本用法 {#basic}
+### 基本用法 $#basic$
 
 **webpack.config.js**
 
@@ -83,7 +83,7 @@ module.exports = {
 };
 ```
 
-### 数据库集成 {#database-integration}
+### 数据库集成 $#database-integration$
 
 **webpack.config.js**
 
@@ -158,13 +158,13 @@ module.exports = {
 };
 ```
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果您尚未了解，建议您阅读以下贡献指引。
 
 [贡献](https://github.com/webpack-contrib/cache-loader/blob/master/.github/CONTRIBUTING.md)
 
-## 许可 {#license}
+## 许可 $#license$
 
 [MIT](https://github.com/webpack-contrib/cache-loader/blob/master/LICENSE)
 

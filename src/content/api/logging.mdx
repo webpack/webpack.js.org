@@ -30,7 +30,7 @@ Webpack Logger 可以用在 [loader](/loaders/) 和 [plugin](/api/plugins/#loggi
 
 W> **避免在日志中输出无效信息！** 请记住，多个 plugin 和 loader 经常一起使用。loader 通常处理多个文件，并且每个文件都会调用，所以尽可能选择较低的日志级别以保证 log 的信息量。
 
-## Examples of how to get and use webpack logger in loaders and plugins {#examples-of-how-to-get-and-use-webpack-logger-in-loaders-and-plugins}
+## Examples of how to get and use webpack logger in loaders and plugins $#examples-of-how-to-get-and-use-webpack-logger-in-loaders-and-plugins$
 
 **my-webpack-plugin.js**
 
@@ -62,7 +62,7 @@ module.exports = function (source) {
 };
 ```
 
-## Logger methods {#logger-methods}
+## Logger methods $#logger-methods$
 
 - `logger.error(...)`：用于输出错误信息
 - `logger.warn(...)`：用于输出警告信息
@@ -77,7 +77,7 @@ module.exports = function (source) {
 - `logger.clear()`：打印水平线。展示形式类似于 `logger.log`
 - `logger.profile(...)`，`logger.profileEnd(...)`：捕获配置文件。当支持 `console.profile` API 时，使用其进行输出
 
-## Runtime Logger API {#runtime-logger-api}
+## Runtime Logger API $#runtime-logger-api$
 
 Runtime logger API 仅应该用作开发工具，不应该包含在 [生产模式](/configuration/mode/#mode-production)中。
 

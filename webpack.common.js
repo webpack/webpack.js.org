@@ -5,7 +5,8 @@ const h = require('hastscript');
 const remarkResponsiveTable = require('./src/remark-plugins/remark-responsive-table/remark-responsive-table.js');
 const mdPlugins = [
   require('remark-gfm'),
-  require('docschina-remark-slugger'),
+  require('./src/remark-plugins/docschina-remark-slugger/index.js'),
+  // require('remark-attr'),
   remarkResponsiveTable,
   require('remark-emoji'),
   require('./src/remark-plugins/remark-cleanup-readme/index.js'),

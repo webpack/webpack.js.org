@@ -34,7 +34,7 @@ compilation.hooks.someHook.tap(/* ... */);
 和 `compiler` 用法相同，取决于不同的钩子类型，
 所以也可以在某些钩子上访问 `tapAsync` 和 `tapPromise`。
 
-### `buildModule` {#buildmodule}
+### `buildModule` $#buildmodule$
 
 `SyncHook`
 
@@ -51,7 +51,7 @@ compilation.hooks.buildModule.tap(
 );
 ```
 
-### `rebuildModule` {#rebuildmodule}
+### `rebuildModule` $#rebuildmodule$
 
 `SyncHook`
 
@@ -59,7 +59,7 @@ compilation.hooks.buildModule.tap(
 
 - 回调参数：`module`
 
-### `failedModule` {#failedmodule}
+### `failedModule` $#failedmodule$
 
 `SyncHook`
 
@@ -67,7 +67,7 @@ compilation.hooks.buildModule.tap(
 
 - 回调参数：`module` `error`
 
-### `succeedModule` {#succeedmodule}
+### `succeedModule` $#succeedmodule$
 
 `SyncHook`
 
@@ -75,7 +75,7 @@ compilation.hooks.buildModule.tap(
 
 - 回调参数：`module`
 
-### `finishModules` {#finishmodules}
+### `finishModules` $#finishmodules$
 
 `AsyncSeriesHook`
 
@@ -83,7 +83,7 @@ compilation.hooks.buildModule.tap(
 
 - 回调参数：`modules`
 
-### `finishRebuildingModule` {#finishrebuildingmodule}
+### `finishRebuildingModule` $#finishrebuildingmodule$
 
 `SyncHook`
 
@@ -91,19 +91,19 @@ compilation.hooks.buildModule.tap(
 
 - 回调参数：`module`
 
-### `seal` {#seal}
+### `seal` $#seal$
 
 `SyncHook`
 
 compilation 对象停止接收新的模块时触发。
 
-### `unseal` {#unseal}
+### `unseal` $#unseal$
 
 `SyncHook`
 
 compilation 对象开始接收新模块时触发。
 
-### `optimizeDependencies` {#optimizedependencies}
+### `optimizeDependencies` $#optimizedependencies$
 
 `SyncBailHook`
 
@@ -111,7 +111,7 @@ compilation 对象开始接收新模块时触发。
 
 - 回调参数：`modules`
 
-### `afterOptimizeDependencies` {#afteroptimizedependencies}
+### `afterOptimizeDependencies` $#afteroptimizedependencies$
 
 `SyncHook`
 
@@ -119,13 +119,13 @@ compilation 对象开始接收新模块时触发。
 
 - 回调参数：`modules`
 
-### `optimize` {#optimize}
+### `optimize` $#optimize$
 
 `SyncHook`
 
 优化阶段开始时触发。
 
-### `optimizeModules` {#optimizemodules}
+### `optimizeModules` $#optimizemodules$
 
 `SyncBailHook`
 
@@ -133,7 +133,7 @@ compilation 对象开始接收新模块时触发。
 
 - 回调参数：`modules`
 
-### `afterOptimizeModules` {#afteroptimizemodules}
+### `afterOptimizeModules` $#afteroptimizemodules$
 
 `SyncHook`
 
@@ -141,7 +141,7 @@ compilation 对象开始接收新模块时触发。
 
 - 回调参数：`modules`
 
-### `optimizeChunks` {#optimizechunks}
+### `optimizeChunks` $#optimizechunks$
 
 `SyncBailHook`
 
@@ -149,7 +149,7 @@ compilation 对象开始接收新模块时触发。
 
 - 回调参数：`chunks`
 
-### `afterOptimizeChunks` {#afteroptimizechunks}
+### `afterOptimizeChunks` $#afteroptimizechunks$
 
 `SyncHook`
 
@@ -157,7 +157,7 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks`
 
-### `optimizeTree` {#optimizetree}
+### `optimizeTree` $#optimizetree$
 
 `AsyncSeriesHook`
 
@@ -165,7 +165,7 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks` `modules`
 
-### `afterOptimizeTree` {#afteroptimizetree}
+### `afterOptimizeTree` $#afteroptimizetree$
 
 `SyncHook`
 
@@ -173,7 +173,7 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks` `modules`
 
-### `optimizeChunkModules` {#optimizechunkmodules}
+### `optimizeChunkModules` $#optimizechunkmodules$
 
 `SyncBailHook`
 
@@ -181,7 +181,7 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks` `modules`
 
-### `afterOptimizeChunkModules` {#afteroptimizechunkmodules}
+### `afterOptimizeChunkModules` $#afteroptimizechunkmodules$
 
 `SyncHook`
 
@@ -189,13 +189,13 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks` `modules`
 
-### `shouldRecord` {#shouldrecord}
+### `shouldRecord` $#shouldrecord$
 
 `SyncBailHook`
 
 调用来决定是否存储 record。返回任何内容 `!== false` 将阻止执行所有其他 "record" 钩子（[`record`](#record), [`recordModules`](#recordmodules), [`recordChunks`](#recordchunks) 和 [`recordHash`](#recordhash)）。
 
-### `reviveModules` {#revivemodules}
+### `reviveModules` $#revivemodules$
 
 `SyncHook`
 
@@ -203,7 +203,7 @@ chunk 优化完成之后触发。
 
 - 回调参数：`modules` `records`
 
-### `beforeModuleIds` {#beforemoduleids}
+### `beforeModuleIds` $#beforemoduleids$
 
 `SyncHook`
 
@@ -211,7 +211,7 @@ chunk 优化完成之后触发。
 
 - 回调参数：`modules`
 
-### `moduleIds` {#moduleids}
+### `moduleIds` $#moduleids$
 
 `SyncHook`
 
@@ -219,7 +219,7 @@ chunk 优化完成之后触发。
 
 - 回调参数：`modules`
 
-### `optimizeModuleIds` {#optimizemoduleids}
+### `optimizeModuleIds` $#optimizemoduleids$
 
 `SyncHook`
 
@@ -227,7 +227,7 @@ chunk 优化完成之后触发。
 
 - 回调参数：`modules`
 
-### `afterOptimizeModuleIds` {#afteroptimizemoduleids}
+### `afterOptimizeModuleIds` $#afteroptimizemoduleids$
 
 `SyncHook`
 
@@ -235,7 +235,7 @@ chunk 优化完成之后触发。
 
 - 回调参数：`modules`
 
-### `reviveChunks` {#revivechunks}
+### `reviveChunks` $#revivechunks$
 
 `SyncHook`
 
@@ -243,7 +243,7 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks` `records`
 
-### `beforeChunkIds` {#beforechunkids}
+### `beforeChunkIds` $#beforechunkids$
 
 `SyncHook`
 
@@ -251,7 +251,7 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks`
 
-### `chunkIds` {#chunkids}
+### `chunkIds` $#chunkids$
 
 `SyncHook`
 
@@ -259,7 +259,7 @@ chunk 优化完成之后触发。
 
 - 回调函数的参数为：`chunks`
 
-### `optimizeChunkIds` {#optimizechunkids}
+### `optimizeChunkIds` $#optimizechunkids$
 
 `SyncHook`
 
@@ -267,7 +267,7 @@ chunk 优化完成之后触发。
 
 - 回调参数：`chunks`
 
-### `afterOptimizeChunkIds` {#afteroptimizechunkids}
+### `afterOptimizeChunkIds` $#afteroptimizechunkids$
 
 `SyncHook`
 
@@ -275,7 +275,7 @@ chunk `id` 优化结束之后触发。
 
 - 回调参数：`chunks`
 
-### `recordModules` {#recordmodules}
+### `recordModules` $#recordmodules$
 
 `SyncHook`
 
@@ -283,7 +283,7 @@ chunk `id` 优化结束之后触发。
 
 - 回调参数：`modules` `records`
 
-### `recordChunks` {#recordchunks}
+### `recordChunks` $#recordchunks$
 
 `SyncHook`
 
@@ -291,31 +291,31 @@ chunk `id` 优化结束之后触发。
 
 - 回调参数：`chunks` `records`
 
-### `beforeModuleHash` {#beforemodulehash}
+### `beforeModuleHash` $#beforemodulehash$
 
 `SyncHook`
 
 在创建模块哈希（hash）之前。
 
-### `afterModuleHash` {#aftermodulehash}
+### `afterModuleHash` $#aftermodulehash$
 
 `syncHook`
 
 在创建模块哈希（hash）之后。
 
-### `beforeHash` {#beforehash}
+### `beforeHash` $#beforehash$
 
 `SyncHook`
 
 在 compilation 添加哈希（hash）之前。
 
-### `afterHash` {#afterhash}
+### `afterHash` $#afterhash$
 
 `SyncHook`
 
 在 compilation 添加哈希（hash）之后。
 
-### `recordHash` {#recordhash}
+### `recordHash` $#recordhash$
 
 `SyncHook`
 
@@ -323,7 +323,7 @@ chunk `id` 优化结束之后触发。
 
 - 回调参数：`records`
 
-### `record` {#record}
+### `record` $#record$
 
 `SyncHook`
 
@@ -331,13 +331,13 @@ chunk `id` 优化结束之后触发。
 
 - 回调参数：`compilation` `records`
 
-### `beforeModuleAssets` {#beforemoduleassets}
+### `beforeModuleAssets` $#beforemoduleassets$
 
 `SyncHook`
 
 在创建模块 asset 之前执行。
 
-### `additionalChunkAssets` {#additionalchunkassets}
+### `additionalChunkAssets` $#additionalchunkassets$
 
 `SyncHook`
 
@@ -347,19 +347,19 @@ W> `additionalChunkAssets` 已弃用（可使用 [Compilation.hook.processAssets
 
 - 回调参数：`chunks`
 
-### `shouldGenerateChunkAssets` {#shouldgeneratechunkassets}
+### `shouldGenerateChunkAssets` $#shouldgeneratechunkassets$
 
 `SyncBailHook`
 
 调用以确定是否生成 chunk asset。返回任何 `!== false` 将允许生成 chunk asset。
 
-### `beforeChunkAssets` {#beforechunkassets}
+### `beforeChunkAssets` $#beforechunkassets$
 
 `SyncHook`
 
 在创建 chunk asset 之前。
 
-### `additionalAssets` {#additionalassets}
+### `additionalAssets` $#additionalassets$
 
 `AsyncSeriesHook`
 
@@ -381,7 +381,7 @@ compilation.hooks.additionalAssets.tapAsync('MyPlugin', (callback) => {
 });
 ```
 
-### `optimizeChunkAssets` {#optimizechunkassets}
+### `optimizeChunkAssets` $#optimizechunkassets$
 
 `AsyncSeriesHook`
 
@@ -414,7 +414,7 @@ compilation.hooks.optimizeChunkAssets.tapAsync(
 );
 ```
 
-### `afterOptimizeChunkAssets` {#afteroptimizechunkassets}
+### `afterOptimizeChunkAssets` $#afteroptimizechunkassets$
 
 `SyncHook`
 
@@ -438,7 +438,7 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', (chunks) => {
 });
 ```
 
-### `optimizeAssets` {#optimizeassets}
+### `optimizeAssets` $#optimizeassets$
 
 `AsyncSeriesHook`
 
@@ -446,7 +446,7 @@ compilation.hooks.afterOptimizeChunkAssets.tap('MyPlugin', (chunks) => {
 
 - 回调参数：`assets`
 
-### `afterOptimizeAssets` {#afteroptimizeassets}
+### `afterOptimizeAssets` $#afteroptimizeassets$
 
 `SyncHook`
 
@@ -454,7 +454,7 @@ asset 已经优化。
 
 - 回调参数：`assets`
 
-### `processAssets` {#processassets}
+### `processAssets` $#processassets$
 
 `AsyncSeriesHook`
 
@@ -487,7 +487,7 @@ compilation.hooks.processAssets.tap(
 );
 ```
 
-#### 额外的 assets {#additional-assets}
+#### 额外的 assets $#additional-assets$
 
 除了 `name` 和 `stage` 以外，你还可以传递 `additionalAssets` <Badge text='5.8.0+' /> 选项，此选项可接受 `true` 或者一个带有 `assets` 的函数作为参数：
 
@@ -525,7 +525,7 @@ compilation.hooks.processAssets.tap(
    );
    ```
 
-#### 资产处理 stage 的列表 {#list-of-asset-processing-stages}
+#### 资产处理 stage 的列表 $#list-of-asset-processing-stages$
 
 如下是我们可以使用的 stage 清单（按顺序处理）：
 
@@ -545,7 +545,7 @@ compilation.hooks.processAssets.tap(
 - `PROCESS_ASSETS_STAGE_ANALYSE` — 分析已有 asset。
 - `PROCESS_ASSETS_STAGE_REPORT` — 创建用于上报的 asset。
 
-#### Assets info {#assets-info}
+#### Assets info $#assets-info$
 
 "asset info" 元数据不会自动提供给这个 hook。如果必须使用，你需要通过编译实例以及 asset 路径来手动获取这个元数据。这将在未来的 webpack 版本中得到改善。
 
@@ -565,25 +565,25 @@ compilation.hooks.processAssets.tap(
 );
 ```
 
-### `afterProcessAssets` {#afterprocessassets}
+### `afterProcessAssets` $#afterprocessassets$
 
 `SyncHook`
 
 在 [`processAssets`](#processassets) hook 无错误执行后调用。
 
-### `needAdditionalSeal` {#needadditionalseal}
+### `needAdditionalSeal` $#needadditionalseal$
 
 `SyncBailHook`
 
 调用来决定 compilation 是否需要解除 seal 以引入其他文件。
 
-### `afterSeal` {#afterseal}
+### `afterSeal` $#afterseal$
 
 `AsyncSeriesHook`
 
 在 `needAdditionalSeal` 之后立即执行。
 
-### `chunkHash` {#chunkhash}
+### `chunkHash` $#chunkhash$
 
 `SyncHook`
 
@@ -591,7 +591,7 @@ compilation.hooks.processAssets.tap(
 
 - 回调参数：`chunk` `chunkHash`
 
-### `moduleAsset` {#moduleasset}
+### `moduleAsset` $#moduleasset$
 
 `SyncHook`
 
@@ -599,7 +599,7 @@ compilation.hooks.processAssets.tap(
 
 - 回调参数：`module` `filename`
 
-### `chunkAsset` {#chunkasset}
+### `chunkAsset` $#chunkasset$
 
 `SyncHook`
 
@@ -607,7 +607,7 @@ compilation.hooks.processAssets.tap(
 
 - 回调参数：`chunk` `filename`
 
-### `assetPath` {#assetpath}
+### `assetPath` $#assetpath$
 
 `SyncWaterfallHook`
 
@@ -615,13 +615,13 @@ compilation.hooks.processAssets.tap(
 
 - 回调参数：`path` `options`
 
-### `needAdditionalPass` {#needadditionalpass}
+### `needAdditionalPass` $#needadditionalpass$
 
 `SyncBailHook`
 
 调用以决定 asset 在输出后是否需要进一步处理。
 
-### `childCompiler` {#childcompiler}
+### `childCompiler` $#childcompiler$
 
 `SyncHook`
 
@@ -629,6 +629,6 @@ compilation.hooks.processAssets.tap(
 
 - 回调参数：`childCompiler` `compilerName` `compilerIndex`
 
-### `normalModuleLoader` {#normalmoduleloader}
+### `normalModuleLoader` $#normalmoduleloader$
 
 从 webpack v5 开始，`normalModuleLoader` 钩子已经删除。现在要访问 loader 请改用 `NormalModule.getCompilationHooks(compilation).loader`。

@@ -11,7 +11,7 @@ translators:
   - QC-L
 ---
 
-## experiments {#experiments}
+## experiments $#experiments$
 
 `boolean: false`
 
@@ -48,7 +48,7 @@ module.exports = {
 };
 ```
 
-### experiments.buildHttp {#experimentsbuildhttp}
+### experiments.buildHttp $#experimentsbuildhttp$
 
 When enabled, webpack can build remote resources that begin with the `http(s):` protocol.
 
@@ -87,7 +87,7 @@ When enabled, webpack can build remote resources that begin with the `http(s):` 
   console.log(pMap1);
   ```
 
-#### experiments.buildHttp.cacheLocation {#experimentsbuildhttpcachelocation}
+#### experiments.buildHttp.cacheLocation $#experimentsbuildhttpcachelocation$
 
 Define the location for caching remote resources.
 
@@ -111,13 +111,13 @@ By default webpack would use `<compiler-name.>webpack.lock.data/` for caching, b
 
 Note that you should commit files under `experiments.buildHttp.cacheLocation` into a version control system as no network requests will be made during the `production` build.
 
-#### experiments.buildHttp.frozen {#experimentsbuildhttpfrozen}
+#### experiments.buildHttp.frozen $#experimentsbuildhttpfrozen$
 
 Freeze the remote resources and lockfile. Any modification to the lockfile or resource contents will result in an error.
 
 - Type: `boolean`
 
-#### experiments.buildHttp.lockfileLocation {#experimentsbuildhttplockfilelocation}
+#### experiments.buildHttp.lockfileLocation $#experimentsbuildhttplockfilelocation$
 
 Define the location to store the lockfile.
 
@@ -125,13 +125,13 @@ Define the location to store the lockfile.
 
 By default webpack would generate a `<compiler-name.>webpack.lock` file>. Make sure to commit it into a version control system. During the `production` build, webpack will build those modules beginning with `http(s):` protocol from the lockfile and caches under [`experiments.buildHttp.cacheLocation`](#experimentsbuildhttpcachelocation).
 
-#### experiments.buildHttp.upgrade {#experimentsbuildhttpupgrade}
+#### experiments.buildHttp.upgrade $#experimentsbuildhttpupgrade$
 
 Detect changes to remote resources and upgrade them automatically.
 
 - Type: `boolean`
 
-### experiments.executeModule {#experimentsexecutemodule}
+### experiments.executeModule $#experimentsexecutemodule$
 
 Enable execution of modules from the module graph for plugins and loaders at build time to generate code or other assets.
 
@@ -148,7 +148,7 @@ Enable execution of modules from the module graph for plugins and loaders at bui
   };
   ```
 
-### experiments.lazyCompilation {#experimentslazycompilation}
+### experiments.lazyCompilation $#experimentslazycompilation$
 
 Compile entrypoints and dynamic `import`s only when they are in use. It can be used for either Web or Node.js.
 

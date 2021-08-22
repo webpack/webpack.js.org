@@ -9,7 +9,7 @@ translators:
   - jacob-lcs
 ---
 
-## cache {#cache}
+## cache $#cache$
 
 `boolean` `object`
 
@@ -26,7 +26,7 @@ module.exports = {
 
 当将 `cache.type` 设置为 `'filesystem'` 是会开放更多的可配置项。
 
-### cache.allowCollectingMemory {#cacheallowcollectingmemory}
+### cache.allowCollectingMemory $#cacheallowcollectingmemory$
 
 收集在反序列化期间分配的未使用的内存，仅当 [`cache.type`](#cachetype) 设置为 `'filesystem'` 时生效。这需要将数据复制到更小的缓冲区中，并有性能成本。
 
@@ -45,7 +45,7 @@ module.exports = {
 };
 ```
 
-### cache.buildDependencies {#cachebuilddependencies}
+### cache.buildDependencies $#cachebuilddependencies$
 
 `object`
 
@@ -69,7 +69,7 @@ module.exports = {
 };
 ```
 
-### cache.cacheDirectory {#cachecachedirectory}
+### cache.cacheDirectory $#cachecachedirectory$
 
 `string`
 
@@ -93,7 +93,7 @@ module.exports = {
 
 W> 最终的缓存目标是 `cache.cacheDirectory` + `cache.name` 的混合。
 
-### cache.cacheLocation {#cachecachelocation}
+### cache.cacheLocation $#cachecachelocation$
 
 `string`
 
@@ -113,7 +113,7 @@ module.exports = {
 };
 ```
 
-### cache.compression {#cachecompression}
+### cache.compression $#cachecompression$
 
 `false | 'gzip' | 'brotli'`
 
@@ -135,7 +135,7 @@ module.exports = {
 };
 ```
 
-### cache.hashAlgorithm {#cachehashalgorithm}
+### cache.hashAlgorithm $#cachehashalgorithm$
 
 `string`
 
@@ -155,7 +155,7 @@ module.exports = {
 };
 ```
 
-### cache.idleTimeout {#cacheidletimeout}
+### cache.idleTimeout $#cacheidletimeout$
 
 `number = 60000`
 
@@ -175,7 +175,7 @@ module.exports = {
 };
 ```
 
-### cache.idleTimeoutAfterLargeChanges {#cacheidletimeoutafterlargechanges}
+### cache.idleTimeoutAfterLargeChanges $#cacheidletimeoutafterlargechanges$
 
 `number = 1000`
 
@@ -197,7 +197,7 @@ module.exports = {
 };
 ```
 
-### cache.idleTimeoutForInitialStore {#cacheidletimeoutforinitialstore}
+### cache.idleTimeoutForInitialStore $#cacheidletimeoutforinitialstore$
 
 `number = 0`
 
@@ -217,7 +217,7 @@ module.exports = {
 };
 ```
 
-### cache.managedPaths {#cachemanagedpaths}
+### cache.managedPaths $#cachemanagedpaths$
 
 `[string] = ['./node_modules']`
 
@@ -225,7 +225,7 @@ W> 已迁移到 [snapshot.managedPaths](#managedpaths)
 
 `cache.managedPaths` 是仅托管路径的包管理器数组。webpack 将避免将他们进行哈希和时间戳处理，假设版本是唯一的，并将其用作快照（用于内存和文件系统缓存）。
 
-### cache.maxAge {#cachemaxage}
+### cache.maxAge $#cachemaxage$
 
 `number = 5184000000`
 
@@ -247,7 +247,7 @@ module.exports = {
 };
 ```
 
-### cache.maxGenerations {#cachemaxgenerations}
+### cache.maxGenerations $#cachemaxgenerations$
 
 `number`
 
@@ -273,7 +273,7 @@ module.exports = {
 };
 ```
 
-### cache.maxMemoryGenerations {#cachemaxMemorygenerations}
+### cache.maxMemoryGenerations $#cachemaxMemorygenerations$
 
 `number`
 
@@ -303,7 +303,7 @@ module.exports = {
 };
 ```
 
-### cache.name {#cachename}
+### cache.name $#cachename$
 
 `string`
 
@@ -323,7 +323,7 @@ module.exports = {
 };
 ```
 
-### cache.profile {#cacheprofile}
+### cache.profile $#cacheprofile$
 
 `boolean = false`
 
@@ -341,7 +341,7 @@ module.exports = {
 };
 ```
 
-### cache.store {#cachestore}
+### cache.store $#cachestore$
 
 `string = 'pack': 'pack'`
 
@@ -382,7 +382,7 @@ module.exports = {
 };
 ```
 
-### cache.version {#cacheversion}
+### cache.version $#cacheversion$
 
 `string = ''`
 

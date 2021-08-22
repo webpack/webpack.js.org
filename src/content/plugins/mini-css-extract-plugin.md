@@ -31,7 +31,7 @@ translators:
 - 更容易使用
 - 特别针对 CSS 开发
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 首先，你需要安装 `mini-css-extract-plugin`：
 
@@ -75,9 +75,9 @@ module.exports = {
 };
 ```
 
-## 选项 {#options}
+## 选项 $#options$
 
-### Plugin Options {#plugin-options}
+### Plugin Options $#plugin-options$
 
 |                 选项名                  |         类型         |       默认值       | 描述                                              |
 | :-----------------------------------: | :------------------: | :-----------------: | :------------------------------------------------------- |
@@ -89,7 +89,7 @@ module.exports = {
 |      **[`linkType`](#linktype)**      | `{String\|Boolean}`  |              `text/css`               | 允许使用自定义 link 类型加载异步 chunk |
 | **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | 使用实验性的 webpack API 来执行模块，而非子代编译器 |
 
-#### `filename` {#filename}
+#### `filename` $#filename$
 
 类型：`String|Function`
 默认值：`[name].css`
@@ -98,7 +98,7 @@ module.exports = {
 
 机制类似于 [`output.filename`](/configuration/output/#outputfilename)。
 
-#### `chunkFilename` {#chunkfilename}
+#### `chunkFilename` $#chunkfilename$
 
 类型：`String|Function`
 默认值：`based on filename`
@@ -109,7 +109,7 @@ module.exports = {
 
 机制类似于 [`output.chunkFilename`](/configuration/output/#outputchunkfilename)
 
-#### `ignoreOrder` {#ignoreorder}
+#### `ignoreOrder` $#ignoreorder$
 
 类型：`Boolean`
 默认值：`false`
@@ -117,7 +117,7 @@ module.exports = {
 移除 Order 警告
 具体细节请参阅[示例](#remove-order-warnings)。
 
-#### `insert` {#insert}
+#### `insert` $#insert$
 
 类型：`String|Function`
 默认值：`document.head.appendChild(linkTag);`
@@ -130,7 +130,7 @@ module.exports = {
 
 如果附加目标为 [iframe](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement)，请确保父文档有足够的访问权限进入 frame document，并将元素附加到它上面。
 
-##### `String` {#string}
+##### `String` $#string$
 
 允许设置自定义的 [query selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)。
 新的 `<link>` 元素将被插入到找到的 item 之后。
@@ -145,7 +145,7 @@ new MiniCssExtractPlugin({
 
 找到 id 为 `some-element` 的元素，在它之后插入新的 `<link>` 元素。
 
-##### `Function` {#function}
+##### `Function` $#function$
 
 允许覆盖默认行为，并在任意位置插入样式。
 
@@ -168,7 +168,7 @@ new MiniCssExtractPlugin({
 
 找到 id 为 `some-element` 的元素，在它之后插入新的 `<link>` 元素。
 
-#### `attributes` {#attributes}
+#### `attributes` $#attributes$
 
 类型：`Object`
 默认值：`{}`
@@ -202,14 +202,14 @@ module.exports = {
 
 注意：它只适用于动态加载的 css chunk，如果你想修改 html 文件内的链接属性，请使用 [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)。
 
-#### `linkType` {#linktype}
+#### `linkType` $#linktype$
 
 类型：`String|Boolean`
 默认值：`text/css`
 
 此选项运行使用自定义链接类型加载异步 chunk，例如 `<link type="text/css" ...>`。
 
-##### `String` {#string}
+##### `String` $#string$
 
 可选值：`text/css`
 
@@ -235,7 +235,7 @@ module.exports = {
 };
 ```
 
-##### `Boolean` {#boolean}
+##### `Boolean` $#boolean$
 
 `false` 禁用 link 的 `type` 属性
 
@@ -261,7 +261,7 @@ module.exports = {
 };
 ```
 
-#### `experimentalUseImportModule` {#experimentaluseimportmodule}
+#### `experimentalUseImportModule` $#experimentaluseimportmodule$
 
 使用实验性的 webpack API 来执行模块，而非子代编译器。
 
@@ -293,7 +293,7 @@ module.exports = {
 };
 ```
 
-### Loader 选项 {#loader-options}
+### Loader 选项 $#loader-options$
 
 |              名称               |         类型         |              默认值               | 描述                                                                       |
 | :-----------------------------: | :------------------: | :--------------------------------: | :-------------------------------------------------------------------------------- |
@@ -301,7 +301,7 @@ module.exports = {
 |       **[`emit`](#emit)**       |     `{Boolean}`      |               `true`               | 如果设为 false，插件将会提取 CSS **但不会** 生成文件         |
 |   **[`esModule`](#esmodule)**   |     `{Boolean}`      |               `true`               | 使用 ES modules 语法                                                             |
 
-#### `publicPath` {#publicpath}
+#### `publicPath` $#publicpath$
 
 类型：`String|Function`
 默认值：`webpackOptions.output` 选项中的 `publicPath`
@@ -309,7 +309,7 @@ module.exports = {
 为 CSS 内的图片、文件等外部资源指定一个自定义的公共路径。
 机制类似于 [`output.publicPath`](/configuration/output/#outputpublicpath)。
 
-##### `String` {#string}
+##### `String` $#string$
 
 **webpack.config.js**
 
@@ -344,7 +344,7 @@ module.exports = {
 };
 ```
 
-##### `Function` {#function}
+##### `Function` $#function$
 
 **webpack.config.js**
 
@@ -381,7 +381,7 @@ module.exports = {
 };
 ```
 
-#### `emit` {#emit}
+#### `emit` $#emit$
 
 类型：`Boolean`
 默认值：`true`
@@ -389,7 +389,7 @@ module.exports = {
 如果设置为 true，会发送一个文件（向文件系统中写入一个文件）。如果设置为 false，该插件将会提取 CSS 但是 **不会** 发送文件。
 禁用该配置对服务侧的包比较有用。
 
-#### `esModule` {#esmodule}
+#### `esModule` $#esmodule$
 
 类型：`Boolean`
 默认值：`true`
@@ -425,9 +425,9 @@ module.exports = {
 };
 ```
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### 推荐 {#recommend}
+### 推荐 $#recommend$
 
 推荐 `production` 环境的构建将 CSS 从你的 bundle 中分离出来，这样可以使用 CSS/JS 文件的并行加载。
 这可以通过使用 `mini-css-extract-plugin` 来实现，因为它可以创建单独的 CSS 文件。
@@ -459,7 +459,7 @@ module.exports = {
 };
 ```
 
-### 最简单的例子 {#minimal-example}
+### 最简单的例子 $#minimal-example$
 
 **webpack.config.js**
 
@@ -497,7 +497,7 @@ module.exports = {
 };
 ```
 
-### Named export for CSS Modules {#name-export-for-css-modules}
+### Named export for CSS Modules $#name-export-for-css-modules$
 
 > ⚠ 命名会被修改为 `camelCase` 的形式。
 
@@ -558,7 +558,7 @@ module.exports = {
 };
 ```
 
-### `publicPath` 选项为函数 {#the-publicpath-option-as-function}
+### `publicPath` 选项为函数 $#the-publicpath-option-as-function$
 
 **webpack.config.js**
 
@@ -598,7 +598,7 @@ module.exports = {
 };
 ```
 
-### 高级配置示例 {#advanced-configuration-example}
+### 高级配置示例 $#advanced-configuration-example$
 
 此插件不能与 loader 链中的 `style-loader` 一同使用。
 
@@ -647,7 +647,7 @@ module.exports = {
 };
 ```
 
-### 模块热更新 (HMR) {#hot-module-reloading-hmr}
+### 模块热更新 (HMR) $#hot-module-reloading-hmr$
 
 注意：在 webpack 5 中 HMR 已自动支持。无需配置。你可以跳过以下内容：
 
@@ -696,7 +696,7 @@ module.exports = {
 };
 ```
 
-### 生产模式压缩 {#minimizing-for-production}
+### 生产模式压缩 $#minimizing-for-production$
 
 为了压缩输出文件，请使用类似于 [css-minimizer-webpack-plugin](/plugins/css-minimizer-webpack-plugin/) 这样的插件。
 
@@ -733,7 +733,7 @@ module.exports = {
 
 这将只在生产模式下启用 CSS 压缩优化。如果你需要在开发模式下使用，请设置 `optimization.minimize` 选项为 true。
 
-### 使用预加载或内联 CSS {#using-preloaded-or-inlined-css}
+### 使用预加载或内联 CSS $#using-preloaded-or-inlined-css$
 
 运行时代码通过 `<link>` 或者`<style>` 标签检测已经添加的 CSS。
 当在服务端注入 CSS 代码 以及做 SSR 时将会很有用。
@@ -741,7 +741,7 @@ module.exports = {
 `data-href` 属性也可以被用在 `<link>` 和 `<style>` 标签中
 使用内联 CSS 时，必须使用 `data-href` 属性。
 
-### 提取所有的 CSS 到一个文件中 {#extracting-all-css-in-a-single-file}
+### 提取所有的 CSS 到一个文件中 $#extracting-all-css-in-a-single-file$
 
 用过使用 `optimization.splitChunks.cacheGroups` 选项，所有的 CSS 可以被提取到一个 CSS 文件中。
 
@@ -783,7 +783,7 @@ module.exports = {
 
 请注意在 webpack 5 中应该使用 `type` 而不是 `test`，否则将会生成 `.js` 文件而不是 `.css`。这是因为 `test` 不知道应该去掉哪个模块（在这种情况下，它不会检测到 `.js` 应该被删除）。
 
-### 基于入口提取 CSS {#extracting-css-based-on-entry}
+### 基于入口提取 CSS $#extracting-css-based-on-entry$
 
 你可以基于 webpack 的入口名称提取 CSS。
 当你使用路由动态加载但是想要通过入口加载对应的 CSS 文件时这将会非常有用。
@@ -854,7 +854,7 @@ module.exports = {
 };
 ```
 
-### 文件名选项设置为函数 {#filename-option-as-function}
+### 文件名选项设置为函数 $#filename-option-as-function$
 
 使用 `filename` 选项，你可以使用 chunk 数据来定制文件名。
 这点在处理多个入口，并且希望对给定的 入口/chunk 文件进行更多处理时，非常有用。
@@ -882,7 +882,7 @@ module.exports = {
 };
 ```
 
-### 长期缓存 {#long-term-caching}
+### 长期缓存 $#long-term-caching$
 
 使用 `filename: "[contenthash].css"` 启动长期缓存。根据需要添加 `[name]`。
 
@@ -909,7 +909,7 @@ module.exports = {
 };
 ```
 
-### 移除 Order 警告 {#remove-order-warnings}
+### 移除 Order 警告 $#remove-order-warnings$
 
 对于通过使用 scoping 或命名约定来解决 css order 的项目，可以通过将插件的 ignoreOrder 选项设置为 true 来禁用 css order 警告。
 
@@ -935,20 +935,20 @@ module.exports = {
 };
 ```
 
-### 媒体查询插件 {#media-query-plugin}
+### 媒体查询插件 $#media-query-plugin$
 
 如果您想从 CSS 文件中提取媒体查询（因为移动用户不需要加载电脑或平板专用的 CSS ），应使用以下插件之一：
 
 - [Media Query Plugin](https://github.com/SassNinja/media-query-plugin)
 - [Media Query Splitting Plugin](https://github.com/mike-diamond/media-query-splitting-plugin)
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果你还没有阅读过我们的贡献指南，请花一点时间阅读它。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/mini-css-extract-plugin/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/mini-css-extract-plugin/blob/master/LICENSE)
 

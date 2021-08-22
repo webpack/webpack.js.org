@@ -34,12 +34,12 @@ compiler.hooks.normalModuleFactory.tap('MyPlugin', (factory) => {
 和 `compiler` 用法相同，取决于不同的钩子类型，
 也可以在某些钩子上访问 `tapAsync` 和 `tapPromise`。
 
-## 钩子 {#hooks}
+## 钩子 $#hooks$
 
 以下生命周期钩子函数，是由 `parser` 暴露，可以通过
 如下方式访问：
 
-### evaluateTypeof {#evaluatetypeof}
+### evaluateTypeof $#evaluatetypeof$
 
 `SyncBailHook`
 
@@ -70,7 +70,7 @@ const myIdentifier = 0;
 const b = typeof myIdentifier;
 ```
 
-### evaluate {#evaluate}
+### evaluate $#evaluate$
 
 `SyncBailHook`
 
@@ -119,7 +119,7 @@ Where the expressions types are:
 - `'UnaryExpression'`
 - `'UpdateExpression'`
 
-### evaluateIdentifier {#evaluateidentifier}
+### evaluateIdentifier $#evaluateidentifier$
 
 `SyncBailHook`
 
@@ -128,7 +128,7 @@ Called when evaluating an identifier that is a free variable.
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
 
-### evaluateDefinedIdentifier {#evaluatedefinedidentifier}
+### evaluateDefinedIdentifier $#evaluatedefinedidentifier$
 
 `SyncBailHook`
 
@@ -137,7 +137,7 @@ Called when evaluating an identifier that is a defined variable.
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
 
-### evaluateCallExpressionMember {#evaluatecallexpressionmember}
+### evaluateCallExpressionMember $#evaluatecallexpressionmember$
 
 `SyncBailHook`
 
@@ -165,7 +165,7 @@ parser.hooks.evaluateCallExpressionMember
   });
 ```
 
-### statement {#statement}
+### statement $#statement$
 
 `SyncBailHook`
 
@@ -203,7 +203,7 @@ Where the `statement.type` could be:
 - `'LabeledStatement'`
 - `'WithStatement'`
 
-### statementIf {#statementif}
+### statementIf $#statementif$
 
 `SyncBailHook`
 
@@ -211,7 +211,7 @@ Called when parsing an if statement. Same as the `statement` hook, but triggered
 
 - Callback Parameters: `statement`
 
-### label {#label}
+### label $#label$
 
 `SyncBailHook`
 
@@ -220,7 +220,7 @@ Called when parsing statements with a [label](https://developer.mozilla.org/en-U
 - Hook Parameters: `labelName`
 - Callback Parameters: `statement`
 
-### import {#import}
+### import $#import$
 
 `SyncBailHook`
 
@@ -244,7 +244,7 @@ parser.hooks.import.tap('MyPlugin', (statement, source) => {
 });
 ```
 
-### importSpecifier {#importspecifier}
+### importSpecifier $#importspecifier$
 
 `SyncBailHook`
 
@@ -280,7 +280,7 @@ parser.hooks.importSpecifier.tap(
 );
 ```
 
-### export {#export}
+### export $#export$
 
 `SyncBailHook`
 
@@ -288,7 +288,7 @@ Called for every `export` statement in a code fragment.
 
 - Callback Parameters: `statement`
 
-### exportImport {#exportimport}
+### exportImport $#exportimport$
 
 `SyncBailHook`
 
@@ -296,7 +296,7 @@ Called for every `export`-import statement eg: `export * from 'otherModule';`.
 
 - Callback Parameters: `statement` `source`
 
-### exportDeclaration {#exportdeclaration}
+### exportDeclaration $#exportdeclaration$
 
 `SyncBailHook`
 
@@ -312,7 +312,7 @@ export function FunctionName() {}
 export class ClassName {}
 ```
 
-### exportExpression {#exportexpression}
+### exportExpression $#exportexpression$
 
 `SyncBailHook`
 
@@ -320,7 +320,7 @@ Called for every `export` statement exporting an expression e.g.`export default 
 
 - Callback Parameters: `statement` `declaration`
 
-### exportSpecifier {#exportspecifier}
+### exportSpecifier $#exportspecifier$
 
 `SyncBailHook`
 
@@ -328,7 +328,7 @@ Called for every specifier of every `export` statement.
 
 - Callback Parameters: `statement` `identifierName` `exportName` `index`
 
-### exportImportSpecifier {#exportimportspecifier}
+### exportImportSpecifier $#exportimportspecifier$
 
 `SyncBailHook`
 
@@ -336,7 +336,7 @@ Called for every specifier of every `export`-import statement.
 
 - Callback Parameters: `statement` `source` `identifierName` `exportName` `index`
 
-### varDeclaration {#vardeclaration}
+### varDeclaration $#vardeclaration$
 
 `SyncBailHook`
 
@@ -344,7 +344,7 @@ Called when parsing a variable declaration.
 
 - Callback Parameters: `declaration`
 
-### varDeclarationLet {#vardeclarationlet}
+### varDeclarationLet $#vardeclarationlet$
 
 `SyncBailHook`
 
@@ -352,7 +352,7 @@ Called when parsing a variable declaration defined using `let`
 
 - Callback Parameters: `declaration`
 
-### varDeclarationConst {#vardeclarationconst}
+### varDeclarationConst $#vardeclarationconst$
 
 `SyncBailHook`
 
@@ -360,7 +360,7 @@ Called when parsing a variable declaration defined using `const`
 
 - Callback Parameters: `declaration`
 
-### varDeclarationVar {#vardeclarationvar}
+### varDeclarationVar $#vardeclarationvar$
 
 `SyncBailHook`
 
@@ -368,7 +368,7 @@ Called when parsing a variable declaration defined using `var`
 
 - Callback Parameters: `declaration`
 
-### canRename {#canrename}
+### canRename $#canrename$
 
 `SyncBailHook`
 
@@ -386,7 +386,7 @@ parser.hooks.canRename.for('b').tap('MyPlugin', (expression) => {
 });
 ```
 
-### rename {#rename}
+### rename $#rename$
 
 `SyncBailHook`
 
@@ -401,7 +401,7 @@ var a = b;
 parser.hooks.rename.for('b').tap('MyPlugin', (expression) => {});
 ```
 
-### assigned {#assigned}
+### assigned $#assigned$
 
 `SyncBailHook`
 
@@ -418,7 +418,7 @@ parser.hooks.assigned.for('a').tap('MyPlugin', (expression) => {
 });
 ```
 
-### assign {#assign}
+### assign $#assign$
 
 `SyncBailHook`
 
@@ -435,7 +435,7 @@ parser.hooks.assigned.for('a').tap('MyPlugin', (expression) => {
 });
 ```
 
-### typeof {#typeof}
+### typeof $#typeof$
 
 `SyncBailHook`
 
@@ -444,7 +444,7 @@ Triggered when parsing the `typeof` of an identifier
 - Hook Parameters: `identifier`
 - Callback Parameters: `expression`
 
-### call {#call}
+### call $#call$
 
 `SyncBailHook`
 
@@ -459,7 +459,7 @@ eval(/* something */);
 parser.hooks.call.for('eval').tap('MyPlugin', (expression) => {});
 ```
 
-### callMemberChain {#callmemberchain}
+### callMemberChain $#callmemberchain$
 
 `SyncBailHook`
 
@@ -476,7 +476,7 @@ parser.hooks.callMemberChain
   .tap('MyPlugin', (expression, properties) => {});
 ```
 
-### new {#new}
+### new $#new$
 
 `SyncBailHook`
 
@@ -491,7 +491,7 @@ new MyClass();
 parser.hooks.new.for('MyClass').tap('MyPlugin', (expression) => {});
 ```
 
-### expression {#expression}
+### expression $#expression$
 
 `SyncBailHook`
 
@@ -506,7 +506,7 @@ const a = this;
 parser.hooks.expression.for('this').tap('MyPlugin', (expression) => {});
 ```
 
-### expressionConditionalOperator {#expressionconditionaloperator}
+### expressionConditionalOperator $#expressionconditionaloperator$
 
 `SyncBailHook`
 
@@ -514,7 +514,7 @@ Called when parsing a `ConditionalExpression` e.g. `condition ? a : b`
 
 - Callback Parameters: `expression`
 
-### program {#program}
+### program $#program$
 
 `SyncBailHook`
 

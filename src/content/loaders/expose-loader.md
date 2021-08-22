@@ -23,7 +23,7 @@ translators:
 
 想要获取有关兼容性的进一步提示，请查看官方文档中的 [Shimming](/guides/shimming/)。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 首先，你需要安装 `expose-loader`：
 
@@ -35,7 +35,7 @@ $ npm install expose-loader --save-dev
 
 然后你可以用两种方法来用 `expose-loader`。
 
-## 内联 {#inline}
+## 内联 $#inline$
 
 可以使用 `|` 或者 `%20`（空格）分隔 expose 中的 `globalName`、`moduleLocalName` 和 `override`。
 可以在[这里](#syntax)获取文档和语法实例。
@@ -63,7 +63,7 @@ import {
 // 将 `underscore` 中的 `map` 和 `reduce` 方法分别添加到全局对象中，其名称为 `_.map` 和 `_.reduce`
 ```
 
-## 使用配置文件 {#using-configuration}
+## 使用配置文件 $#using-configuration$
 
 **src/index.js**
 
@@ -112,24 +112,24 @@ module.exports = {
 
 然后用你喜欢的方式运行 `webpack`。
 
-## 配置项 {#options}
+## 配置项 $#options$
 
 |           Name            |                   Type                    |   Default   | Description     |
 | :-----------------------: | :---------------------------------------: | :---------: | :-------------- |
 | **[`exposes`](#exposes)** | `{String\|Object\|Array<String\|Object>}` | `undefined` | List of exposes |
 
-### `exposes` {#exposes}
+### `exposes` $#exposes$
 
 类型：`String|Object|Array<String|Object>`
 默认值：`undefined`
 
 List of exposes.
 
-#### `String` {#string}
+#### `String` $#string$
 
 允许用一个 string 来描述 expose。
 
-##### `Syntax` {#syntax}
+##### `Syntax` $#syntax$
 
 可以使用 `|` 或者 `%20`（空格）分隔 expose 中的 `globalName`、`moduleLocalName` 和 `override`。
 
@@ -166,11 +166,11 @@ module.exports = {
 };
 ```
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 允许用一个对象来描述 expose。
 
-##### `globalName` {#globalname}
+##### `globalName` $#globalname$
 
 类型：`String|Array<String>`
 默认值：`undefined`
@@ -205,7 +205,7 @@ module.exports = {
 };
 ```
 
-##### `moduleLocalName` {#modulelocalname}
+##### `moduleLocalName` $#modulelocalname$
 
 类型：`String`
 默认值：`undefined`
@@ -240,7 +240,7 @@ module.exports = {
 };
 ```
 
-##### `override` {#override}
+##### `override` $#override$
 
 类型：`Boolean`
 默认值：`false`
@@ -278,7 +278,7 @@ module.exports = {
 };
 ```
 
-#### `Array` {#array}
+#### `Array` $#array$
 
 **src/index.js**
 
@@ -318,13 +318,13 @@ module.exports = {
 
 在浏览器中，这些方法可以在 `windows._.map(..args)`、`windows._.filter(...args)` 和 `windows._.myNameForFind(...args)` 下使用。
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果你还没有阅读，请花一点时间阅读我们的贡献指南。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/expose-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/expose-loader/blob/master/LICENSE)
 

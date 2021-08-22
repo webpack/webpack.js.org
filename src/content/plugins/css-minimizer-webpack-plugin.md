@@ -23,7 +23,7 @@ translators:
 
 就像 [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) 一样，但在 source maps 和 assets 中使用查询字符串会更加准确，支持缓存和并发模式下运行。
 
-## 起步 {#getting-started}
+## 起步 $#getting-started$
 
 首先，你需要安装 `css-minimizer-webpack-plugin`：
 
@@ -76,7 +76,7 @@ module.exports = {
 
 然后通过你喜欢的方式运行 `webpack`。
 
-## 关于 source maps 的提示 {#note-about-source-maps}
+## 关于 source maps 的提示 $#note-about-source-maps$
 
 **仅对 [`devtool`](/configuration/devtool/) 配置项的 `source-map`、`inline-source-map`、`hidden-source-map` 与 `nosources-source-map` 值生效。**
 
@@ -89,9 +89,9 @@ module.exports = {
 使用 source map 将错误信息位置映射到 modules 中（这降低了复杂度）。
 如果你是用自定义 `minify` 函数，请阅读 `minify` 章节以确保正确处理 source map。
 
-## 选项 {#options}
+## 选项 $#options$
 
-### `test` {#test}
+### `test` $#test$
 
 类型：`String|RegExp|Array<String|RegExp>` - 默认值：`/\.css(\?.*)?$/i`
 
@@ -110,7 +110,7 @@ module.exports = {
 };
 ```
 
-### `include` {#include}
+### `include` $#include$
 
 类型：`String|RegExp|Array<String|RegExp>`
 默认值：`undefined`
@@ -132,7 +132,7 @@ module.exports = {
 };
 ```
 
-### `exclude` {#exclude}
+### `exclude` $#exclude$
 
 类型：`String|RegExp|Array<String|RegExp>`
 默认值：`undefined`
@@ -154,7 +154,7 @@ module.exports = {
 };
 ```
 
-### `parallel` {#parallel}
+### `parallel` $#parallel$
 
 类型：`Boolean|Number`
 默认值：`true`
@@ -165,7 +165,7 @@ module.exports = {
 > ℹ️ 并行化可以显著提升构建速度，所以**强烈建议**使用。
 > 如果启用了并行化，`minimizerOptions` 中的包必须通过字符串引入（`packageName` 或者 `require.resolve(packageName)`）。在 [`minimizerOptions`](#minimizeroptions) 获取更多详细信息。
 
-#### `Boolean` {#boolean}
+#### `Boolean` $#boolean$
 
 启用/禁用多进程并发执行。
 
@@ -184,7 +184,7 @@ module.exports = {
 };
 ```
 
-#### `Number` {#number}
+#### `Number` $#number$
 
 启用多进程并发执行且设置并发数。
 
@@ -203,7 +203,7 @@ module.exports = {
 };
 ```
 
-### `minify` {#minify}
+### `minify` $#minify$
 
 类型：`Function|Array<Function>`
 默认值：`CssMinimizerPlugin.cssnanoMinify`
@@ -221,7 +221,7 @@ module.exports = {
 
 > ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 **webpack.config.js**
 
@@ -245,7 +245,7 @@ module.exports = {
 };
 ```
 
-#### `Array` {#array}
+#### `Array` $#array$
 
 如果 `minify` 配置项传入一个数组，`minimizerOptions` 也必须是个数组。
 `miniify` 数组中的函数索引对应于 `minimizerOptions` 数组中具有相同索引的 options 对象。
@@ -281,14 +281,14 @@ module.exports = {
 };
 ```
 
-### `minimizerOptions` {#minimizeroptions}
+### `minimizerOptions` $#minimizeroptions$
 
 类型：`Object|Array<Object>`
 默认值：`{ preset: 'default' }`
 
 Cssnano 优化 [选项](https://cssnano.co/docs/optimisations).
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 ```js
 module.exports = {
@@ -310,7 +310,7 @@ module.exports = {
 };
 ```
 
-#### `Array` {#array}
+#### `Array` $#array$
 
 `miniify` 数组中的函数索引对应于 `minimizerOptions` 数组中具有相同索引的 options 对象。
 如果你使用了类似于 `minimizerOptions` 的对象，那么所有函数都会接受它。
@@ -332,7 +332,7 @@ module.exports = {
 };
 ```
 
-#### `processorOptions` {#processoroptions}
+#### `processorOptions` $#processoroptions$
 
 类型：`Object`
 默认值：`{ to: assetName, from: assetName }`
@@ -379,7 +379,7 @@ module.exports = {
 };
 ```
 
-### `warningsFilter` {#warningsfilter}
+### `warningsFilter` $#warningsfilter$
 
 类型：`Function<(warning, file, source) -> Boolean>`
 默认值：`() => true`
@@ -418,9 +418,9 @@ module.exports = {
 };
 ```
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### 使用 sourcemaps {#use-sourcemaps}
+### 使用 sourcemaps $#use-sourcemaps$
 
 不要忘记为所有 loader 启用 `sourceMap` 选项。
 
@@ -447,7 +447,7 @@ module.exports = {
 };
 ```
 
-### 移除所有注释 {#remove-all-comments}
+### 移除所有注释 $#remove-all-comments$
 
 移除所有注释（包括以 `/*!` 开头的注释）。
 
@@ -470,7 +470,7 @@ module.exports = {
 };
 ```
 
-### 使用自定义 minifier [csso](https://github.com/css/csso) {#using-custom-minifier-cssohttpsgithubcomcsscsso}
+### 使用自定义 minifier [csso](https://github.com/css/csso) $#using-custom-minifier-cssohttpsgithubcomcsscsso$
 
 默认情况下，插件使用 [cssnano](https://github.com/cssnano/cssnano) 包。
 可以使用其他提供压缩功能的依赖包。
@@ -514,7 +514,7 @@ module.exports = {
 };
 ```
 
-### 使用自定义 minifier [clean-css](https://github.com/jakubpawlowicz/clean-css) {#using-custom-minifier-clean-css}
+### 使用自定义 minifier [clean-css](https://github.com/jakubpawlowicz/clean-css) $#using-custom-minifier-clean-css$
 
 **webpack.config.js**
 
@@ -554,13 +554,13 @@ module.exports = {
 };
 ```
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果你还没有阅读，请花一点时间阅读我们的贡献指南。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/css-minimizer-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/css-minimizer-webpack-plugin/blob/master/LICENSE)
 

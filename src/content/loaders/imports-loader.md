@@ -31,7 +31,7 @@ imports loader 可以添加必要的 `require('whatever')` 调用，因此这些
 
 > ⚠ 请注意，在原始代码中已存在的 imports（`import`/`require`）与引入新值会导致失败。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 首先，你需要安装 `imports-loader`：
 
@@ -49,7 +49,7 @@ $('img').doSomeAwesomeJqueryPluginStuff();
 
 然后你可以使用两个方法来配置 `imports-loader`，就可以把 `jquery` 值注入到模块中。
 
-### 内联 {#inline}
+### 内联 $#inline$
 
 可以使用 `|` 或者 `%20`（空格）分隔 import 语句中的 `syntax`、`moduleName`、`name` 和 `alias`。
 可以在 [这里](#syntax) 获取文档和语法示例。
@@ -136,7 +136,7 @@ import myLib from 'imports-loader?additionalCode=var%20myVariable%20=%20false;!.
 // ...
 ```
 
-### 使用配置项 {#using-configuration}
+### 使用配置项 $#using-configuration$
 
 **webpack.config.js**
 
@@ -187,7 +187,7 @@ import angular from 'angular';
 
 然后用你喜欢的方式运行 `webpack`
 
-## 配置项 {#options}
+## 配置项 $#options$
 
 |                  Name                   |                   Type                    |   Default   | Description                                                            |
 | :-------------------------------------: | :---------------------------------------: | :---------: | :--------------------------------------------------------------------- |
@@ -196,7 +196,7 @@ import angular from 'angular';
 |        **[`wrapper`](#wrapper)**        |        `{Boolean\|String\|Object}`        | `undefined` | 关闭函数中的模块代码 (`(function () { ... }).call();`) |
 | **[`additionalCode`](#additionalcode)** |                `{String}`                 | `undefined` | 添加自定义代码                                                       |
 
-### `type` {#type}
+### `type` $#type$
 
 类型：`String`
 默认值：`module`
@@ -205,7 +205,7 @@ import angular from 'angular';
 
 可选值 - `commonjs` （CommonJS module 语法） 和 `module` （ES module 语法）。
 
-#### `commonjs` {#commonjs}
+#### `commonjs` $#commonjs$
 
 **webpack.config.js**
 
@@ -237,7 +237,7 @@ var Foo = require('Foo');
 // ...
 ```
 
-#### `module` {#module}
+#### `module` $#module$
 
 **webpack.config.js**
 
@@ -268,18 +268,18 @@ import Foo from 'Foo';
 // ...
 ```
 
-### `imports` {#imports}
+### `imports` $#imports$
 
 类型：`String|Object|Array<String|Object>`
 默认值：`undefined`
 
 import 列表。
 
-#### `String` {#string}
+#### `String` $#string$
 
 允许使用字符串描述 export。
 
-##### `Syntax` {#syntax}
+##### `Syntax` $#syntax$
 
 使用 `|` 或者 `%20`（空格）分隔 import 中的 `syntax`、`moduleName`、`name` 与 `alias`。
 
@@ -318,9 +318,9 @@ import 列表。
 
 > ⚠ Aliases 不能与 `default`、`namespace`、`side-effects`、`single` 与 `pure` 语法同时使用。
 
-###### 示例 {#examples}
+###### 示例 $#examples$
 
-###### ES Module 默认导入 {#es-module-default-import}
+###### ES Module 默认导入 $#es-module-default-import$
 
 **webpack.config.js**
 
@@ -350,7 +350,7 @@ import myName from 'lib';
 // ...
 ```
 
-###### CommonJS Single Import {#commonjs-single-import}
+###### CommonJS Single Import $#commonjs-single-import$
 
 **webpack.config.js**
 
@@ -381,7 +381,7 @@ var myName = require('lib');
 // ...
 ```
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 允许使用一个对象来描述 import。
 
@@ -398,7 +398,7 @@ var myName = require('lib');
 
 > ⚠ Alias 不能与 `default`、`namespace`、`side-effects`、`single` 与 `pure` 语法同时使用。
 
-##### 示例 {#examples}
+##### 示例 $#examples$
 
 **webpack.config.js**
 
@@ -437,12 +437,12 @@ import { lib2_method_2 as lib_2_method_2_alias } from 'lib_2';
 // ...
 ```
 
-#### `Array` {#array}
+#### `Array` $#array$
 
 允许指定多个导入。
 每一项可以为 [`string`](https://github.com/webpack-contrib/imports-loader#string) 或者 [`object`](https://github.com/webpack-contrib/imports-loader#object)。
 
-##### 示例 {#examples}
+##### 示例 $#examples$
 
 **webpack.config.js**
 
@@ -495,7 +495,7 @@ import 'lib_4';
 // ...
 ```
 
-### `wrapper` {#wrapper}
+### `wrapper` $#wrapper$
 
 类型：`Boolean|String|Object`
 默认值：`undefined`
@@ -504,7 +504,7 @@ import 'lib_4';
 
 > ⚠ 如果源码中包含 ES module import 的话，请不要使用该配置。
 
-#### `Boolean` {#boolean}
+#### `Boolean` $#boolean$
 
 **webpack.config.js**
 
@@ -544,7 +544,7 @@ import $ from 'jquery';
 }.call());
 ```
 
-#### `String` {#string}
+#### `String` $#string$
 
 **webpack.config.js**
 
@@ -584,7 +584,7 @@ import $ from 'jquery';
 }.call(window));
 ```
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 **webpack.config.js**
 
@@ -627,7 +627,7 @@ import $ from 'jquery';
 }.call(window, myVariable, myOtherVariable));
 ```
 
-#### `Object` with different parameter names {#object-with-different-parameter-names}
+#### `Object` with different parameter names $#object-with-different-parameter-names$
 
 **webpack.config.js**
 
@@ -673,16 +673,16 @@ import $ from 'jquery';
 }.call(window, myVariable, myOtherVariable));
 ```
 
-### `additionalCode` {#additionalcode}
+### `additionalCode` $#additionalcode$
 
 类型：`String`
 默认值：`undefined`
 
 在模块代码之前添加自定义代码作为前导。
 
-##### Examples {#examples}
+##### Examples $#examples$
 
-###### 定义自定义变量 {#define-custom-variable}
+###### 定义自定义变量 $#define-custom-variable$
 
 **webpack.config.js**
 
@@ -722,7 +722,7 @@ var myVariable = false;
 // ...
 ```
 
-###### Disable AMD Import Syntax {#disable-amd-import-syntax}
+###### Disable AMD Import Syntax $#disable-amd-import-syntax$
 
 **webpack.config.js**
 
@@ -763,13 +763,13 @@ var define = false; /* Disable AMD for misbehaving libraries */
 // ...
 ```
 
-## Contributing {#contributing}
+## Contributing $#contributing$
 
 如果你还没有阅读，请花一点时间阅读我们的贡献指南。
 
 [贡献指南](https://github.com/webpack-contrib/imports-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/imports-loader/blob/master/LICENSE)
 

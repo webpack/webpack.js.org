@@ -11,20 +11,20 @@ translators:
 
 使用 [istanbul-lib-instrument](https://github.com/istanbuljs/istanbuljs/tree/master/packages/istanbul-lib-instrument) 来测试 `JS` 文件，以生成后续代码覆盖率报告
 
-## 安装 {#install}
+## 安装 $#install$
 
 ```bash
 npm i -D istanbul-instrumenter-loader
 ```
 
-## <a href="https://webpack.js.org/concepts/loaders">用法</a> {#a-hrefhttpswebpackjsorgconceptsloadersusagea}
+## <a href="https://webpack.js.org/concepts/loaders">用法</a> $#a-hrefhttpswebpackjsorgconceptsloadersusagea$
 
-### `参考` {#references}
+### `参考` $#references$
 
 * [karma-webpack](https://github.com/webpack/karma-webpack)
 * [karma-coverage-istanbul-reporter](https://github.com/mattlewis92/karma-coverage-istanbul-reporter)
 
-### `结构` {#structure}
+### `结构` $#structure$
 
 ```
 ├─ src
@@ -90,7 +90,7 @@ config.set({
 });
 ```
 
-### 使用 `Babel` {#with-babel}
+### 使用 `Babel` $#with-babel$
 
 您必须将该检测作为后续步骤运行
 
@@ -107,7 +107,7 @@ config.set({
 }
 ```
 
-## <a href="https://github.com/istanbuljs/istanbuljs/blob/master/packages/istanbul-lib-instrument/api.md#instrumenter">选项</a> {#a-hrefhttpsgithubcomistanbuljsistanbuljsblobmasterpackagesistanbul-lib-instrumentapimdinstrumenteroptionsa}
+## <a href="https://github.com/istanbuljs/istanbuljs/blob/master/packages/istanbul-lib-instrument/api.md#instrumenter">选项</a> $#a-hrefhttpsgithubcomistanbuljsistanbuljsblobmasterpackagesistanbul-lib-instrumentapimdinstrumenteroptionsa$
 
  此 loader 支持 `istanbul-lib-instrument` 的所有配置选项 
 
@@ -133,7 +133,7 @@ config.set({
 }
 ```
 
-## Maintainers {#maintainers}
+## Maintainers $#maintainers$
 
 <table>
   <tbody>

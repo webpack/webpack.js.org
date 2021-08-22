@@ -38,7 +38,7 @@ translators:
 
 如果你还没有安装过 webpack 和 CLI，请先阅读 [安装指南](/guides/installation)。
 
-## 命令 {#commands}
+## 命令 $#commands$
 
 webpack-cli 提供了许多命令来使 webpack 的工作变得更简单。默认情况下，webpack 提供了以下命令：
 
@@ -55,7 +55,7 @@ webpack-cli 提供了许多命令来使 webpack 的工作变得更简单。默�
 | [`version`](#version)                 | `version\|v [commands...]`                | 输出 `webpack`，`webpack-cli` 以及 `webpack-dev-server` 的版本信息。 |
 | `watch`                               | `watch\|w [entries...] [options]`         | 运行 webpack 并监听文件变化。                                        |
 
-### Init {#init}
+### Init $#init$
 
 用于初始化一个新的 webpack 项目。
 
@@ -69,11 +69,11 @@ npx webpack init [generation-path] [options]
 npx webpack init ./my-app --force --template=default
 ```
 
-#### 生成路径 {#generation-path}
+#### 生成路径 $#generation-path$
 
 生成配置的位置。默认为 `process.cwd()`。
 
-#### 配置 {#options}
+#### 配置 $#options$
 
 **`-t`, `--template`**
 
@@ -89,7 +89,7 @@ npx webpack init ./my-app --force --template=default
 
 T> 点击 [这里](https://github.com/webpack/webpack-cli/blob/master/packages/generators/INIT.md) 获取 `webpack init` 命令的完整文档。
 
-### Info {#info}
+### Info $#info$
 
 输出你的系统信息。
 
@@ -103,7 +103,7 @@ npx webpack info [options]
 npx webpack info --output=json
 ```
 
-#### info 配置项 {#optionsforinfo}
+#### info 配置项 $#optionsforinfo$
 
 **`-o`, `--output`**
 
@@ -111,7 +111,7 @@ npx webpack info --output=json
 
 获取指定格式的输出。
 
-### Configtest {#configtest}
+### Configtest $#configtest$
 
 校验 webpack 配置。
 
@@ -125,11 +125,11 @@ npx webpack configtest [config-path]
 npx webpack configtest ./webpack.config.js
 ```
 
-#### Config Path {configpath}
+#### Config Path $#configpath$
 
 你的 webpack 配置文件路径。默认为 `./webpack.config.js`。
 
-## Flags {#flags}
+## Flags $#flags$
 
 默认情况下，webpack 提供了以下 flag：
 
@@ -157,7 +157,7 @@ npx webpack configtest ./webpack.config.js
 | `--stats`               | boolean, string | 它告诉 webpack 如何处理 stats                                                                  |
 | `--analyze`             | boolean         | 它调用 `webpack-bundle-analyzer` 插件来获取 bundle 信息                                        |
 
-### Negated Flags {#negated-flags}
+### Negated Flags $#negated-flags$
 
 | Flag         | 描述                                 |
 | ------------ | ------------------------------------ |
@@ -167,7 +167,7 @@ npx webpack configtest ./webpack.config.js
 | --no-watch   | 禁用文件变更的监听                   |
 | --no-devtool | 禁止生成 source maps                 |
 
-### 核心 Flags {#core-flags}
+### 核心 Flags $#core-flags$
 
 从 CLI v4 和 webpack v5 开始，CLI 将采用从 webpack 的 core 中导入整个配置的模式，允许 CLI 调整几乎所有配置项。
 
@@ -179,9 +179,9 @@ npx webpack configtest ./webpack.config.js
 npx webpack --performance-hints warning
 ```
 
-## 用法 {#usage}
+## 用法 $#usage$
 
-### 使用配置文件 {#with-configuration-file}
+### 使用配置文件 $#with-configuration-file$
 
 ```bash
 npx webpack [--config webpack.config.js]
@@ -189,7 +189,7 @@ npx webpack [--config webpack.config.js]
 
 配置文件中的相关选项，请参阅[配置](/configuration)。
 
-### 不使用配置文件 {#without-configuration-file}
+### 不使用配置文件 $#without-configuration-file$
 
 ```bash
 npx webpack --entry <entry> --output-path <output-path>
@@ -269,7 +269,7 @@ asset main.js 142 bytes [compared for emit] [minimized] (name: main)
 webpack 5.1.0 compiled successfully in 198 ms
 ```
 
-## 默认配置 {#default-configurations}
+## 默认配置 $#default-configurations$
 
 CLI 会在你的项目路径中寻找默认配置，以下是 CLI 采集到的配置文件。
 
@@ -283,11 +283,11 @@ CLI 会在你的项目路径中寻找默认配置，以下是 CLI 采集到的�
 '.webpack/webpackfile',
 ```
 
-## 通用配置 {#common-options}
+## 通用配置 $#common-options$
 
 W> 注意，命令行接口（Command Line Interface）参数的优先级，高于配置文件参数。例如，如果将 [`--mode="production"`](/configuration/mode/#usage) 传入 webpack CLI，而配置文件使用的是 `development`，最终会使用 `production`。
 
-### help {#help}
+### help $#help$
 
 **列出命令行可用的基础命令和 flag**
 
@@ -313,7 +313,7 @@ npx webpack --help=verbose
 npx webpack help --mode
 ```
 
-### version {#version}
+### version $#version$
 
 **显示已安装的 package 以及子 package 的版本**。
 
@@ -357,7 +357,7 @@ webpack-cli 4.6.0
 webpack-dev-server 3.11.2
 ```
 
-### config {#config}
+### config $#config$
 
 **使用配置文件进行构建**
 
@@ -367,7 +367,7 @@ webpack-dev-server 3.11.2
 npx webpack --config example.config.js
 ```
 
-### config-name {#config-name}
+### config-name $#config-name$
 
 如果你的配置文件导出了多个配置，你可以使用 `--config-name` 来指定要运行的配置。
 
@@ -415,7 +415,7 @@ npx webpack --config-name second
 npx webpack --config-name first --config-name second
 ```
 
-### merge {#merge}
+### merge $#merge$
 
 你可以通过 `--merge` 选项来合并两个或多个不同的 webpack 配置：
 
@@ -423,7 +423,7 @@ npx webpack --config-name first --config-name second
 npx webpack --config ./first.js --config ./second.js --merge
 ```
 
-### json {#json}
+### json $#json$
 
 **以 JSON 格式输出 webpack 的运行结果**
 
@@ -441,7 +441,7 @@ npx webpack --json stats.json
 
 T> 请查阅 [stats 数据 api](/api/stats)，了解更多关于生成的 stats 数据。
 
-## Environment 选项 {#environment-options}
+## Environment 选项 $#environment-options$
 
 当 webpack 配置[导出为函数时](/configuration/configuration-types/#exporting-a-function)，会接收到一个 "environment" 的参数。
 
@@ -481,7 +481,7 @@ module.exports = (env, argv) => {
 };
 ```
 
-### node-env {#node-env}
+### node-env $#node-env$
 
 你可以使用 `--node-env` 选项来设置 `process.env.NODE_ENV`:
 
@@ -491,7 +491,7 @@ npx webpack --node-env production   # process.env.NODE_ENV = 'production'
 
 T> 如果你不明确的设置 mode，`mode` 选项的值会被 `--node-env` 覆盖。例如 `--node-env production` 时，会把 `process.env.NODE_ENV` 和 `mode` 均设置为 `'production'`。
 
-## 配置选项 {#configuration-options}
+## 配置选项 $#configuration-options$
 
 | 参数            | 说明                                                 | 输入类型 | 默认值                                       |
 | --------------- | ---------------------------------------------------- | -------- | -------------------------------------------- |
@@ -499,7 +499,7 @@ T> 如果你不明确的设置 mode，`mode` 选项的值会被 `--node-env` 覆
 | `--config-name` | 要使用的配置名                                       | string[] |
 | `--env`         | 当配置文件为函数时，environment 将作为参数传递给配置 | string[] |
 
-## 分析 Bundle {#analyzing-bundle}
+## 分析 Bundle $#analyzing-bundle$
 
 你可以使用 `webpack-bundle-analyzer` 插件来分析你 webpack 输出的 bundle。你还可以通过 CLI 的 `--analyze` flag 调用它
 
@@ -509,7 +509,7 @@ npx webpack --analyze
 
 W> 请确保你的项目中安装了 `webpack-bundle-analyzer`，否则 CLI 会提示你安装它。
 
-## Progress {#progress}
+## Progress $#progress$
 
 如需查看 webpack 的编译进度，你可以使用 `--progress` flag。
 
@@ -523,7 +523,7 @@ npx webpack --progress
 npx webpack --progress=profile
 ```
 
-## 将 CLI 参数传递给 Node.js {#pass-cli-arguments-to-nodejs}
+## 将 CLI 参数传递给 Node.js $#pass-cli-arguments-to-nodejs$
 
 将参数直接传递给 Node.js 进程，你可以使用 `NODE_OPTIONS` 选项。
 
@@ -539,7 +539,7 @@ NODE_OPTIONS="--max-old-space-size=4096" webpack
 NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 ```
 
-## 退出代码及其含义 {#exit-codes-and-their-meanings}
+## 退出代码及其含义 $#exit-codes-and-their-meanings$
 
 | 退出代码 | 描述                        |
 | -------- | --------------------------- |
@@ -547,7 +547,7 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 | `1`      | webpack Error               |
 | `2`      | 配置/选项问题，或者内部错误 |
 
-## CLI 环境变量 {#cli-environment-variables}
+## CLI 环境变量 $#cli-environment-variables$
 
 | 环境变量                              | 描述                                                |
 | ------------------------------------- | --------------------------------------------------- |
@@ -560,7 +560,7 @@ NODE_OPTIONS="--max-old-space-size=4096 -r /path/to/preload/file.js" webpack
 WEBPACK_CLI_FORCE_LOAD_ESM_CONFIG=true npx webpack --config ./webpack.config.esm
 ```
 
-### WEBPACK_PACKAGE {#webpack_package}
+### WEBPACK_PACKAGE $#webpack_package$
 
 在 CLI 中使用自定义 webpack 版本。在你的 `package.json` 中配置以下内容：
 

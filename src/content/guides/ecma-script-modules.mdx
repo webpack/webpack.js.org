@@ -16,7 +16,7 @@ ECMAScript 模块（ESM）是在 Web 中使用模块的[规范](https://tc39.git
 
 webpack 支持处理 ECMAScript 模块以优化它们。
 
-## 导出 {#exporting}
+## 导出 $#exporting$
 
 关键字 `export` 允许将 ESM 中的内容暴露给其他模块:
 
@@ -43,7 +43,7 @@ export { a, b, other as c };
 export default 1 + 2 + 3 + more();
 ```
 
-## 导入 {#importing}
+## 导入 $#importing$
 
 关键字 `import` 允许从其他模块获取引用到 ESM 中:
 
@@ -62,7 +62,7 @@ import theDefaultValue from './module.js';
 // 导入 `default` 导出的快捷方式
 ```
 
-## 将模块标记为 ESM {#flagging-modules-as-esm}
+## 将模块标记为 ESM $#flagging-modules-as-esm$
 
 默认情况下，webpack 将自动检测文件是 ESM 还是其他模块系统。
 

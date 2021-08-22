@@ -26,7 +26,7 @@ PostCSS chat: [![chat-postcss][chat-postcss]][chat-postcss-url]
 
 使用 [`PostCSS`](https://github.com/postcss/postcss) 处理 CSS 的 loader。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 如果要使用最新版本的话，你需要使用 webpack v5。如果使用 webpack v4 的话，你需要安装 postcss-loader v4。
 
@@ -113,7 +113,7 @@ module.exports = {
 
 最后，通过你喜欢的方式运行 `webpack`。
 
-## 选项 {#options}
+## 选项 $#options$
 
 |                名称                 |         类型         |          默认值           | 描述                                      |
 | :---------------------------------: | :------------------: | :-----------------------: | :---------------------------------------- |
@@ -158,7 +158,7 @@ module.exports = {
 };
 ```
 
-### `postcssOptions` {#postcss-options}
+### `postcssOptions` $#postcss-options$
 
 类型：`Object|Function`
 默认值：`undefined`
@@ -346,7 +346,7 @@ module.exports = {
 };
 ```
 
-#### `config` {#config}
+#### `config` $#config$
 
 类型：`Boolean|String`
 默认值：`undefined`
@@ -354,7 +354,7 @@ module.exports = {
 允许使用配置文件设置选项。
 在配置文件中指定的选项将会和 loader option 进行合并，并且 loader option 将会覆盖配置文件中的选项。
 
-##### 配置文件 {#config-files}
+##### 配置文件 $#config-files$
 
 Loader 将会从下面几个地方搜索目录树来寻找配置文件：
 
@@ -363,7 +363,7 @@ Loader 将会从下面几个地方搜索目录树来寻找配置文件：
 - `.postcss.json`、`.postcss.yaml`、`.postcss.yml`、`.postcss.js` 或者 `.postcss.cjs` 文件
 - `postcss.config.js` 或者 `postcss.config.cjs` 导出一个对象的 CommonJS 模块（**推荐**）
 
-##### 配置文件示例 {#examples-of-config-files}
+##### 配置文件示例 $#examples-of-config-files$
 
 使用 `Object`：
 
@@ -430,7 +430,7 @@ module.exports = {
 };
 ```
 
-##### 配置级联 {#config-cascade}
+##### 配置级联 $#config-cascade$
 
 你可以在不同的目录中使用不同的 `postcss.config.js` 文件。
 配置文件的寻找从 `path.dirname(file)` 开始根据文件树向上寻找，直至找到一个配置文件。
@@ -482,7 +482,7 @@ module.exports = {
 };
 ```
 
-#### Boolean {#boolean}
+#### Boolean $#boolean$
 
 开启 / 关闭自动加载配置。
 
@@ -506,7 +506,7 @@ module.exports = {
 };
 ```
 
-#### String {#string}
+#### String $#string$
 
 允许指定配置文件路径。
 
@@ -532,7 +532,7 @@ module.exports = {
 };
 ```
 
-### `sourceMap` {#source-map}
+### `sourceMap` $#source-map$
 
 类型：`Boolean`
 默认值：依赖于 `compiler.devtool` 的值
@@ -583,7 +583,7 @@ module.exports = {
 };
 ```
 
-### `implementation` {#implementation}
+### `implementation` $#implementation$
 
 类型：`Function | String`
 默认值：`postcss`
@@ -592,7 +592,7 @@ module.exports = {
 
 **此选项只对底层工具的作者有效，以便于 PostCSS 7 到 PostCSS 8 的过渡。**
 
-#### Function {#function}
+#### Function $#function$
 
 **webpack.config.js**
 
@@ -617,7 +617,7 @@ module.exports = {
 };
 ```
 
-#### String {#string}
+#### String $#string$
 
 **webpack.config.js**
 
@@ -642,9 +642,9 @@ module.exports = {
 };
 ```
 
-## 例子 {#examples}
+## 例子 $#examples$
 
-### SugarSS {#sugarss}
+### SugarSS $#sugarss$
 
 你需要安装 `sugarss`：
 
@@ -683,7 +683,7 @@ module.exports = {
 };
 ```
 
-### Autoprefixer {#autoprefixer}
+### Autoprefixer $#autoprefixer$
 
 你需要安装 `autoprefixer`：
 
@@ -731,7 +731,7 @@ module.exports = {
 
 > :warning: [`postcss-preset-env`](https://github.com/csstools/postcss-preset-env) 包含 [`autoprefixer`](https://github.com/postcss/autoprefixer)，因此如果你已经使用了 preset 就无需单独添加它了。更多 [信息](https://github.com/csstools/postcss-preset-env#autoprefixer)
 
-### PostCSS Preset Env {#postcss-preset-env}
+### PostCSS Preset Env $#postcss-preset-env$
 
 你需要安装 `postcss-preset-env`：
 
@@ -775,7 +775,7 @@ module.exports = {
 };
 ```
 
-### CSS Modules {#css-modules}
+### CSS Modules $#css-modules$
 
 什么是 `CSS Modules`？请 [阅读](https://github.com/webpack-contrib/css-loader#modules)。
 
@@ -807,7 +807,7 @@ module.exports = {
 };
 ```
 
-### CSS-in-JS and [`postcss-js`](https://github.com/postcss/postcss-js) {#css-in-js-and-postcss-js}
+### CSS-in-JS and [`postcss-js`](https://github.com/postcss/postcss-js) $#css-in-js-and-postcss-js$
 
 你需要安装 `postcss-js`：
 
@@ -871,7 +871,7 @@ export default {
 > 1. 添加 [`babel-plugin-add-module-exports`](https://github.com/59naga/babel-plugin-add-module-exports) 到你的配置中。
 > 2. 你需要在每一个样式模块中有一个**默认**导出。
 
-### 提取 CSS {#extract-cssextractplugin}
+### 提取 CSS $#extract-cssextractplugin$
 
 使用 [`mini-css-extract-plugin`](/plugins/mini-css-extract-plugin/)。
 
@@ -904,7 +904,7 @@ module.exports = {
 };
 ```
 
-### 触发资源打包 {#emit-assets}
+### 触发资源打包 $#emit-assets$
 
 要将资源从 PostCSS 插件写到 webpack，需要向 `result.messages` 中添加一条消息。
 
@@ -952,7 +952,7 @@ module.exports = {
 };
 ```
 
-### 添加 dependencies、contextDependencies、buildDependencies、missingDependencies {#add-dependencies-contextdependencies-builddependencies-missingdependencies}
+### 添加 dependencies、contextDependencies、buildDependencies、missingDependencies $#add-dependencies-contextdependencies-builddependencies-missingdependencies$
 
 当需要在文件变化时进行重新编译时，webpack 为了理解这样的操作需要添加必要的依赖。
 
@@ -1058,13 +1058,13 @@ const customPlugin = (loaderContext) => (css, result) => {
 module.exports = postcss.plugin('postcss-assets', customPlugin);
 ```
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果你还没有读过我们的贡献指南，请花一点时间阅读它。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/postcss-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/postcss-loader/blob/master/LICENSE)
 

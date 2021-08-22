@@ -19,23 +19,23 @@ related:
 
 这篇指南仅仅展示了影响用户使用的主要改变。更多细节查看 [更新日志(the changelog)](https://github.com/webpack/webpack/releases)。
 
-## Node.js v4 {#nodejs-v4}
+## Node.js v4 $#nodejs-v4$
 
 如果你正在使用 Node.js 的 V4 或 V4 以下版本，需要更新你的 Node.js 至 V6 或者更高版本
 
 更新 Node.js 版本的说明见 [这里](https://stackoverflow.com/questions/10075990/upgrading-node-js-to-latest-version)。
 
-## 脚手架（CLI） {#cli}
+## 脚手架（CLI） $#cli$
 
 脚手架 (CLI) 已经放至一个单独的  webpack-cli 中。在你使用 webpack 之前需要安装它，参见[基础步骤](/guides/getting-started/#basic-setup).
 
 安装指南见[这里](/guides/installation)。
 
-## 更新插件 {#update-plugins}
+## 更新插件 $#update-plugins$
 
 为了兼容 webpack4，许多第三方插件需要更新至最新版本。一些流行的插件链接见[这里](/awesome-webpack/#webpack-plugins)。
 
-## 模式（mode） {#mode}
+## 模式（mode） $#mode$
 
 在你的配置中添加新的 [`模式 （mode）`](/configuration/mode/) 选项。设置它为 `'production'`, `'development'` or `'无 (none)'`
 
@@ -50,7 +50,7 @@ module.exports = {
 
 注：`'development'` 模式和 `'production'` 模式的用途不同。你可以使用 [操作指南](/guides/production/#setup) 中的 `webpack-merge` 来优化配置。
 
-## 不推荐或被移除的插件 {#deprecatedremoved-plugins}
+## 不推荐或被移除的插件 $#deprecatedremoved-plugins$
 
 生产模式中已经默认集成了部分插件，这部分默认插件可以在配置中被移除：
 
@@ -95,7 +95,7 @@ module.exports = {
 }
 ```
 
-## CommonsChunkPlugin {#commonschunkplugin}
+## CommonsChunkPlugin $#commonschunkplugin$
 
 `CommonsChunkPlugin` 已被移除。可以使用 [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) 来代替。
 
@@ -103,7 +103,7 @@ module.exports = {
 
 注：当计算生成 HTML 时，你可以使用 `optimization.splitChunks.chunks: "all"`， 该优化配置在较多项目中被使用。
 
-## import() 和 CommonJS {#import-and-commonjs}
+## import() 和 CommonJS $#import-and-commonjs$
 
 在 webpack 4 中，当使用 `import()` 去加载非标准 ESM 时，其值已经被加载. 现在你需要通过 `default` 属性来得到 `module.exports` 中的取值。
 
@@ -127,7 +127,7 @@ function sayHello() {
 }
 ```
 
-## json 和 loaders {#json-and-loaders}
+## json 和 loaders $#json-and-loaders$
 
 当使用自定义 loader 去转化 `.json` 文件时，你需要更改模块中的 `type`:
 
@@ -163,6 +163,6 @@ module.exports = {
 };
 ```
 
-## module.loaders {#moduleloaders}
+## module.loaders $#moduleloaders$
 
 自 webpack 2 后 `module.loaders` 不推荐使用，目前其已被移除，并推荐使用 [`module.rules`](/configuration/module/#rule)。

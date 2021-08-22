@@ -23,7 +23,7 @@ npx webpack --profile --json=compilation-stats.json
 
 `--json=compilation-stats.json` 标志告诉 `webpack` 生成一个包含依赖关系图和其他各种构建信息的 `compilation-stats.json` 文件。通常情况下，`--profile` 标志也会被添加，这样的话每个 [`module` objects](#module-objects) 都会增加一个 `profile` 部分，它包含了特定模块的统计信息。
 
-## 配置结构（Structure） {#structure}
+## 配置结构（Structure） $#structure$
 
 输出 JSON 文件的顶层结构相当简单，但是也包含部分嵌套的数据结构。为了让文档更易于使用，每个嵌套的数据结构都有对应的一小节来讲，注意，你可以点击如下的链接，跳转到相关章节查看文档：
 
@@ -70,7 +70,7 @@ npx webpack --profile --json=compilation-stats.json
 }
 ```
 
-### Asset 对象 {#asset-objects}
+### Asset 对象 $#asset-objects$
 
 每个 `assets` 对象表示编译过程中生成的 `output` 文件。它们都遵循类似的结构：
 
@@ -95,7 +95,7 @@ npx webpack --profile --json=compilation-stats.json
 
 T> 从 webpack v4.40.0 版本开始，Asset 的 `info` 属性可用
 
-### Chunk 对象 {#chunk-objects}
+### Chunk 对象 $#chunk-objects$
 
 每个 `chunks` 对象代表一组名为 [chunk](/glossary/#c) 的模块。每个对象都遵循如下结构：
 
@@ -140,7 +140,7 @@ T> 从 webpack v4.40.0 版本开始，Asset 的 `info` 属性可用
 }
 ```
 
-### Module 对象 {#module-objects}
+### Module 对象 $#module-objects$
 
 假如不描述编译后的应用程序的实际模块，这些统计的数据有什么作用？其依赖关系图中的每个模块用如下结构表示：
 
@@ -190,7 +190,7 @@ T> 从 webpack v4.40.0 版本开始，Asset 的 `info` 属性可用
 }
 ```
 
-### Entry 对象 {#entry-objects}
+### Entry 对象 $#entry-objects$
 
 ```json
 "main": {
@@ -215,7 +215,7 @@ T> 从 webpack v4.40.0 版本开始，Asset 的 `info` 属性可用
 }
 ```
 
-### 错误和告警信息 {#errors-and-warnings}
+### 错误和告警信息 $#errors-and-warnings$
 
 包含 `errors` and `warnings` 属性的一个对象列表。每个对象包含一条消息，一个堆栈跟踪信息和其他各种属性：
 

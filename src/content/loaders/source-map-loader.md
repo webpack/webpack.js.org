@@ -21,7 +21,7 @@ translators:
 
 从现有的源文件中提取 source maps（从 <code>sourceMappingURL</code> 中提取）。
 
-## 起步 {#getting-started}
+## 起步 $#getting-started$
 
 安装 `source-map-loader`：
 
@@ -63,13 +63,13 @@ module.exports = {
 
 最后按偏好运行 `webpack` 方法。
 
-## 选项 {#options}
+## 选项 $#options$
 
 |                          选项名                           |     类型     |   默认值   | 描述                                    |
 | :-----------------------------------------------------: | :----------: | :---------: | :--------------------------------------------- |
 | __[`filterSourceMappingUrl`](#filtersourcemappingurl)__ | `{Function}` | `undefined` | 允许控制 `SourceMappingURL` 的行为 |
 
-### filterSourceMappingUrl {#filter-source-mapping-url}
+### filterSourceMappingUrl $#filter-source-mapping-url$
 
 类型：`Function`
 默认值：`undefined`
@@ -117,9 +117,9 @@ module.exports = {
 };
 ```
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### 忽略警告 {#ignoring-warnings}
+### 忽略警告 $#ignoring-warnings$
 
 忽略警告可以使用以下配置：
 
@@ -142,13 +142,13 @@ module.exports = {
 
 欲了解 `ignoreWarnings` 的更多信息，请查阅[此文](/configuration/other-options/#ignorewarnings)。
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果您尚未了解，建议您阅读以下贡献指引。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/source-map-loader/blob/master/.github/CONTRIBUTING.md)
 
-## 许可 {#license}
+## 许可 $#license$
 
 [MIT](https://github.com/webpack-contrib/source-map-loader/blob/master/LICENSE)
 

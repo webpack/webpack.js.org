@@ -19,11 +19,11 @@ translators:
 本指南目标是帮助你在使用 webpack 的时候直接迁移到 webpack 5。如果你使用运行 webpack 更底层的工具，请
 参考工具有关迁移的指引。
 
-## 准备工作 {#preparations}
+## 准备工作 $#preparations$
 
 Webpack 5 对 Node.js 的版本要求至少是 10.13.0 (LTS)，因此，如果你还在使用旧版本的 Node.js，请升级它们。
 
-## 升级 webpack 4 及其相关的 plugin/loader {#upgrade-webpack-and-its-plugins-loaders}
+## 升级 webpack 4 及其相关的 plugin/loader $#upgrade-webpack-and-its-plugins-loaders$
 
 1. 升级 `webpack` 4 至最新的可用版本。
 
@@ -37,7 +37,7 @@ Webpack 5 对 Node.js 的版本要求至少是 10.13.0 (LTS)，因此，如果�
 
   部分 plugin 和 loader 可能会有一个 beta 版本，必须使用它们才能与 webpack 5 兼容。
 
-### 确保你的构建没有错误或警告 {#make-sure-your-build-has-no-errors-or-warnings}
+### 确保你的构建没有错误或警告 $#make-sure-your-build-has-no-errors-or-warnings$
 
 由于升级了 `webpack`，`webpack-cli`，plugin 以及 loader 的版本，因此，可能会出现新的错误或警告。在编译过程中请注意是否有弃用警告。
 
@@ -49,11 +49,11 @@ node --trace-deprecation node_modules/webpack/bin/webpack.js
 
 由于 webpack 5 移除了所有被废弃的特性，因此，需确保在构建过程中没有 webpack 的弃用警告才能继续。
 
-### 请确保设置了 `mode` {#make-sure-to-use-mode}
+### 请确保设置了 `mode` $#make-sure-to-use-mode$
 
 将 mode 设置成 [`production`](/configuration/mode/#mode-production) 或 [`development`](/configuration/mode/#mode-development) 以确保相应的默认值被设置。
 
-### 升级废弃的配置项 {#update-outdated-options}
+### 升级废弃的配置项 $#update-outdated-options$
 
 如有使用以下的配置项，请升级至最新的版本：
 
@@ -70,7 +70,7 @@ node --trace-deprecation node_modules/webpack/bin/webpack.js
 - `serve` → `serve` 已被移除，推荐使用 [`DevServer`](/configuration/dev-server/)
 - [`Rule.query`](/configuration/module/#ruleoptions--rulequery) (从 v3 开始被移除) → `Rule.options`/`UseEntry.options`
 
-### 测试 webpack 5 兼容性 {#test-webpack-5-compatibility}
+### 测试 webpack 5 兼容性 $#test-webpack-5-compatibility$
 
 尝试在 webpack 4 的配置中添加如下选项，检查一下构建是否仍然正确的运行。
 
@@ -88,7 +88,7 @@ module.exports = {
 
 T> webpack 5 从配置中移除了这些选项，并始终赋值 `false`。
 
-## 升级至 webpack 5 {#upgrade-webpack-to-5}
+## 升级至 webpack 5 $#upgrade-webpack-to-5$
 
 现在，让我们升级至 webpack 5：
 
@@ -96,7 +96,7 @@ T> webpack 5 从配置中移除了这些选项，并始终赋值 `false`。
 
 - Yarn: `yarn add webpack@latest`
 
-#### 清理配置 {#clean-up-configuration}
+#### 清理配置 $#clean-up-configuration$
 
 - 请考虑将 `optimization.moduleIds` 和 `optimization.chunkIds` 从你 webpack 配置中移除。使用默认值会更合适，因为它们会在 [`production 模式`](/configuration/mode/#mode-production) 下支持长效缓存且可以在 [`development` 模式](/configuration/mode/#mode-development)下进行调试。
 - 当 webpack 配置中使用了 `[hash]` 占位符时，请考虑将它改为 `[contenthash]`。效果一致，但事实证明会更为有效。
@@ -139,7 +139,7 @@ T> webpack 5 从配置中移除了这些选项，并始终赋值 `false`。
 - 当设置 `output.path: path.resolve(__dirname, 'dist')` 时：你可以省略它，此为默认值。
 - 当设置 `output.filename: '[name].js'` 时：你可以省略它，此为默认值。
 
-### 需要旧版浏览器的支持？比如 IE 11？ {#need-to-support-an-older-browser-like-ie-11}
+### 需要旧版浏览器的支持？比如 IE 11？ $#need-to-support-an-older-browser-like-ie-11$
 
 - 如果你在项目中启用了 [browserslist](https://github.com/browserslist/browserslist)，webpack 5 将会重用你的 `browserslist` 配置来决定运行时的代码风格。
 
@@ -151,9 +151,9 @@ T> webpack 5 从配置中移除了这些选项，并始终赋值 `false`。
 - 如未使用 `browserslist`，webpack 的运行时代码将默认使用 ES2015 语法（例如，箭头函数）来构建一个简洁的 bundles。如果你构建的目标环境并不支持 ES2015 的语法（如 IE 11），你需要设置 `target: ['web', 'es5']` 以使用 ES5 的语法。
 - 对于 Node.js 环境来说，构建中引入了对 Node.js 版本的支持，webpack 会自动找出对应版本支持的语法，例如，`target: 'node8.6'`。
 
-### 清理代码 {#cleanup-the-code}
+### 清理代码 $#cleanup-the-code$
 
-#### 使用 `/* webpackChunkName: '...' */` 时 {#using-webpack-chunk-name}
+#### 使用 `/* webpackChunkName: '...' */` 时 $#using-webpack-chunk-name$
 
 请确保你了解其意图：
 
@@ -162,7 +162,7 @@ T> webpack 5 从配置中移除了这些选项，并始终赋值 `false`。
 - webpack 会在 production 以及 development 的模式中使用它对文件进行命名。
 - 即使不使用 `webpackChunkName`，webpack 5 也会自动在 `development` 模式下分配有意义的文件名。
 
-#### 为 JSON 模块使用具名导出 {#using-named-exports-from-json-modules}
+#### 为 JSON 模块使用具名导出 $#using-named-exports-from-json-modules$
 
 新规范中将不再支持下面这种方式，如此做会发出警告：
 
@@ -178,13 +178,13 @@ import pkg from './package.json';
 console.log(pkg.version);
 ```
 
-#### 清理构建代码 {#cleanup-the-build-code}
+#### 清理构建代码 $#cleanup-the-build-code$
 
 - 当使用 `const compiler = webpack(...);`，确保在使用完毕后，使用 `compiler.close(callback);` 关闭编译器。
   - 这不适用于自动关闭的 `webpack(..., callback)`。
   - 如果你在监听模式下使用 webpack，直到用户结束进程，此为可选。在监听模式下的空闲阶段将被用于执行此工作。
 
-### 运行单个构建并遵循以下建议 {#run-a-single-build-and-follow-advises}
+### 运行单个构建并遵循以下建议 $#run-a-single-build-and-follow-advises$
 
 请务必仔细阅读构建时的错误/警告。如未发现相关建议，请创建一个 issue，我们会尽力解决。
 
@@ -250,25 +250,25 @@ console.log(pkg.version);
         - 持久缓存可以帮助改善重复性的完整构建。
         - Module Federation 允许将应用程序分割成多个较小的构建。
 
-## 所有情况都运行如常？ {#everything-works}
+## 所有情况都运行如常？ $#everything-works$
 
 如果你成功地迁移至 webpack 5。请[发推 @ 我们](https://twitter.com/intent/tweet?source=https://webpack.js.org/migrate/5/&text=I%20just%20migrated%20to%20webpack%205%20using%20its%20migration%20guide!%20&via=webpack&hashtags=webpack,webpack5)。
 
-## 运行异常？ {#it-is-not-working}
+## 运行异常？ $#it-is-not-working$
 
 创建一个 [issue](https://github.com/webpack/webpack/issues/new?template=Bug_report.md) 并告诉我们在迁移过程中你遇到的问题。
 
-## 发现本指南中缺失的东西？ {#something-missing-in-this-guide}
+## 发现本指南中缺失的东西？ $#something-missing-in-this-guide$
 
 请提交 [Pull Request](https://github.com/webpack/webpack.js.org/edit/master/src/content/migrate/5.md) 以帮助其他开发者更好地使用该指南。
 
-## 内核的改变 {#changes-to-internals}
+## 内核的改变 $#changes-to-internals$
 
 如果你对内核感兴趣，此处会列出 webpack 内核相关的变更，如：添加类型，代码重构和方法重命名等。但这些变化并不会作为迁移通用案例的一部份。
 
 - `Module.nameForCondition`，`Module.updateCacheModule` 以及 `Module.chunkCondition` 不再可选。
 
-### loader 的 getOptions 方法 {#getoptions-method-for-loaders}
+### loader 的 getOptions 方法 $#getoptions-method-for-loaders$
 
 webpack 5 发布后，在 loader 的上下文中，会带有内置的 [`this.getOptions`](/api/loaders/#thisgetoptionsschema) 方法。这对于那些使用之前推荐 [schema-utils](https://github.com/webpack/schema-utils) 中的 `getOptions` 方法的 loader 而言，这是一个重大更新：
 

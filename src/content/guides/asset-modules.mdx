@@ -81,7 +81,7 @@ module.exports = {
 }
 ```
 
-## Resource 资源 {#resource-assets}
+## Resource 资源 $#resource-assets$
 
 **webpack.config.js**
 
@@ -115,7 +115,7 @@ img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 
 所有 `.png` 文件都将被发送到输出目录，并且其路径将被注入到 bundle 中。
 
-### 自定义输出文件名 {#custom-output-filename}
+### 自定义输出文件名 $#custom-output-filename$
 
 默认情况下，`asset/resource` 模块以 `[hash][ext][query]` 文件名发送到输出目录。
 
@@ -179,7 +179,7 @@ module.exports = {
 
 `Rule.generator.filename` 与 [`output.assetModuleFilename`](/configuration/output/#outputassetmodulefilename) 相同，并且仅适用于 `asset` 和 `asset/resource` 模块类型。
 
-## inline 资源(inlining asset) {#inlining-assets}
+## inline 资源(inlining asset) $#inlining-assets$
 
 **webpack.config.js**
 
@@ -226,7 +226,7 @@ module.exports = {
 
 所有 `.svg` 文件都将作为 data URI 注入到 bundle 中。
 
-### 自定义 data URI 生成器 {#custom-data-uri-generator}
+### 自定义 data URI 生成器 $#custom-data-uri-generator$
 
 webpack 输出的 data URI，默认是呈现为使用 Base64 算法编码的文件内容。
 
@@ -263,7 +263,7 @@ module.exports = {
 
 现在，所有 `.svg` 文件都将通过 `mini-svg-data-uri` 包进行编码。
 
-## source 资源(source asset) {#source-assets}
+## source 资源(source asset) $#source-assets$
 
 **webpack.config.js**
 
@@ -354,7 +354,7 @@ console.log(url.protocol === 'data:');
 console.log(url.pathname === ',');
 ```
 
-## 通用资源类型 {#general-asset-type}
+## 通用资源类型 $#general-asset-type$
 
 **webpack.config.js**
 
@@ -411,7 +411,7 @@ module.exports = {
 
 还可以 [指定一个函数](/configuration/module/#ruleparserdataurlcondition) 来决定是否 inline 模块。
 
-## 变更内联 loader 的语法 {#replacing-inline-loader-syntax}
+## 变更内联 loader 的语法 $#replacing-inline-loader-syntax$
 
 在 asset 模块和 webpack 5 之前，可以使用[内联语法](/concepts/loaders/#inline)与上述传统的 loader 结合使用。
 

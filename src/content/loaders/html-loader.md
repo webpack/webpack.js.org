@@ -22,7 +22,7 @@ translators:
 
 将 HTML 导出为字符串。当编译器需要时，将压缩 HTML 字符串。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 首先，你需要安装 `html-loader` ：
 
@@ -53,7 +53,7 @@ module.exports = {
 };
 ```
 
-## 选项 {#options}
+## 选项 $#options$
 
 |                名称                 |        类型         |                   默认值                    | 描述                                      |
 | :---------------------------------: | :-----------------: | :------------------------------------------: | :----------------------------------------------- |
@@ -62,7 +62,7 @@ module.exports = {
 |     **[`minimize`](#minimize)**     | `{Boolean\|Object}` | 在生产模式下为 `true`，其他情况为 `false` | 通知 `html-loader` 压缩 HTML              |
 |     **[`esModule`](#esmodule)**     |     `{Boolean}`     |                   `true`                    | 启用/禁用 ES modules 语法                            |
 
-### `sources` {#sources}
+### `sources` $#sources$
 
 类型： `Boolean|Object`
 默认值： `true`
@@ -95,7 +95,7 @@ module.exports = {
 - 当 `name` 属性为 `msapplication-tileimage`、`msapplication-square70x70logo`、`msapplication-square150x150logo`、`msapplication-wide310x150logo`、`msapplication-square310x310logo`、`msapplication-config`、`twitter:image` 或者当 `property` 属性为 `og:image`、`og:image:url`、`og:image:secure_url`、`og:audio`、`og:audio:secure_url`、`og:video`、`og:video:secure_url`、`vk:image`，支持 `meta` 标签的 `content` 属性。
 - 当 `name` 属性为 `msapplication-task` 时，支持 `meta` 标签的 `content` 属性中的 `icon-uri` 值组件
 
-#### `Boolean` {#boolean}
+#### `Boolean` $#boolean$
 
 当设置为 `true` 时，则启用所有默认元素和属性的处理，而 `false` 则禁用所有属性的处理。
 
@@ -118,7 +118,7 @@ module.exports = {
 };
 ```
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 你可以配置要处理的标签和属性，来过滤它们，过滤 URL 并处理以 `/` 开头的资源地址。
 
@@ -168,7 +168,7 @@ module.exports = {
 };
 ```
 
-#### `list` {#list}
+#### `list` $#list$
 
 类型：`Array`
 默认值：[支持的标签和属性列表](#sources)
@@ -357,7 +357,7 @@ module.exports = {
 };
 ```
 
-#### `urlFilter` {#urlfilter}
+#### `urlFilter` $#urlfilter$
 
 类型：`Function`
 默认值： `undefined`
@@ -393,7 +393,7 @@ module.exports = {
 };
 ```
 
-### `preprocessor` {#preprocessor}
+### `preprocessor` $#preprocessor$
 
 类型：`Function`
 默认值：`undefined`
@@ -411,7 +411,7 @@ module.exports = {
 <div>
 ```
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 你可以将 `preprocessor` 选项设置为 `Function` 实例。
 
@@ -489,14 +489,14 @@ module.exports = {
 };
 ```
 
-### `minimize` {#minimize}
+### `minimize` $#minimize$
 
 类型：`Boolean|Object`
 默认值：在生产模式下为 `true` ，否则为 `false`
 
 告诉 `html-loader` 编译时需要压缩 HTML 字符串。
 
-#### `Boolean` {#boolean}
+#### `Boolean` $#boolean$
 
 默认情况下，启用压缩的规则如下：
 
@@ -533,7 +533,7 @@ module.exports = {
 };
 ```
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 **webpack.config.js**
 
@@ -562,7 +562,7 @@ module.exports = {
 };
 ```
 
-### `esModule` {#esmodule}
+### `esModule` $#esmodule$
 
 类型：`Boolean`
 默认值：`false`
@@ -590,7 +590,7 @@ module.exports = {
 };
 ```
 
-## 示例 {#examples}
+## 示例 $#examples$
 
 ### 使用 `<!-- webpackIgnore: true -->` 注释禁用 url 解析
 
@@ -618,7 +618,7 @@ module.exports = {
 <link rel="icon" type="image/png" sizes="192x192" href="./image.png" />
 ```
 
-### roots {#roots}
+### roots $#roots$
 
 使用 [`resolve.roots`](/configuration/resolve/#resolveroots) 可以指定解析相对服务端的 URL（以 '/' 开头）请求的目录列表。
 
@@ -656,7 +656,7 @@ module.exports = {
 // => image.jpg in __dirname/fixtures will be resolved
 ```
 
-### CDN {#cdn}
+### CDN $#cdn$
 
 **webpack.config.js**
 
@@ -706,7 +706,7 @@ require('html-loader?{"sources":{"list":[{"tag":"img","attribute":"src","type":"
 // => '<img src="http://cdn.example.com/49eba9f/a992ca.jpg" data-src="data:image/png;base64,..." >'
 ```
 
-### 处理 `script` 和 `link` 标签 {#process-script-and-link-tags}
+### 处理 `script` 和 `link` 标签 $#process-script-and-link-tags$
 
 **script.file.js**
 
@@ -779,7 +779,7 @@ module.exports = {
 };
 ```
 
-### 模板 {#templating}
+### 模板 $#templating$
 
 你可以使用任何模板系统。以下是 [handlebars](https://handlebarsjs.com/) 的示例。
 
@@ -827,7 +827,7 @@ module.exports = {
 };
 ```
 
-### PostHTML {#posthtml}
+### PostHTML $#posthtml$
 
 你可以使用 [PostHTML](https://github.com/posthtml/posthtml) 而无需任何其他加载程序。
 
@@ -870,7 +870,7 @@ module.exports = {
 };
 ```
 
-### 导出为 HTML 文件 {#export-into-html-files}
+### 导出为 HTML 文件 $#export-into-html-files$
 
 一种非常常见的情况是将 HTML 导出到自己的 _.html_ 文件中，以直接使用，
 而非注入到 javascript。
@@ -911,13 +911,13 @@ module.exports = {
 };
 ```
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果你还没有阅读，请花一点时间阅读我们的贡献指南。
 
 [贡献](https://github.com/webpack-contrib/html-loader/blob/master/.github/CONTRIBUTING.md)
 
-## 许可证 {#license}
+## 许可证 $#license$
 
 [MIT](https://github.com/webpack-contrib/html-loader/blob/master/LICENSE)
 

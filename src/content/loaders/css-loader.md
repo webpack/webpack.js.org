@@ -22,7 +22,7 @@ translators:
 
 `css-loader` 会对 `@import` 和 `url()` 进行处理，就像 js 解析 `import/require()` 一样。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 如果要使用 css-loader，你需要安装 webpack@5
 
@@ -57,7 +57,7 @@ module.exports = {
 
 然后运行 `webpack`。
 
-### `toString` {#tostring}
+### `toString` $#tostring$
 
 你也可以直接将 css-loader 的结果作为字符串使用，例如 Angular 的组件样式。
 
@@ -110,7 +110,7 @@ module.exports = {
 };
 ```
 
-## Options {#options}
+## Options $#options$
 
 |                 名称                  |            类型             |                   默认值                       | 描述                                                |
 | :-----------------------------------: | :-------------------------: | :--------------------------------------------: | :-------------------------------------------------- |
@@ -121,7 +121,7 @@ module.exports = {
 | **[`importLoaders`](#importloaders)** |         `{Number}`          |                      `0`                       | 启用/禁用或者设置在 css-loader 前应用的 loader 数量 |
 |      **[`esModule`](#esmodule)**      |         `{Boolean}`         |                     `true`                     | 使用 ES 模块语法                                    |
 
-### `url` {#url}
+### `url` $#url$
 
 类型: `Boolean|Object`
 默认值: `true`
@@ -150,7 +150,7 @@ url('~module/image.png') => require('module/image.png')
 url(~aliasDirectory/image.png) => require('otherDirectory/image.png')
 ```
 
-#### `Boolean` {#boolean}
+#### `Boolean` $#boolean$
 
 启用/禁用 `url()` 解析。
 
@@ -172,7 +172,7 @@ module.exports = {
 };
 ```
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 允许过滤 `url()`。所有过滤的内容 `url()` 都不会解析（保留编写时的代码）。
 
@@ -205,7 +205,7 @@ module.exports = {
 };
 ```
 
-### `import` {#import}
+### `import` $#import$
 
 类型: `Boolean|Object`
 默认值: `true`
@@ -233,7 +233,7 @@ module.exports = {
 @import url(~aliasDirectory/style.css) => require('otherDirectory/style.css')
 ```
 
-#### `Boolean` {#boolean}
+#### `Boolean` $#boolean$
 
 启用/禁用 `@import` 解析。
 
@@ -255,13 +255,13 @@ module.exports = {
 };
 ```
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 |          名称           |     类型     |   默认值   | 描述               |
 | :---------------------: | :----------: | :---------: | :------------------------ |
 | **[`filter`](#filter)** | `{Function}` | `undefined` | 允许过滤 `@import` |
 
-##### `filter` {filter}
+##### `filter` $#filter$
 
 类型：`Function`
 默认值：`undefined`
@@ -297,7 +297,7 @@ module.exports = {
 };
 ```
 
-### `modules` {#modules}
+### `modules` $#modules$
 
 类型：`Boolean|String|Object`
 默认值：`undefined`
@@ -332,9 +332,9 @@ module.exports = {
 };
 ```
 
-#### `Features` {#features}
+#### `Features` $#features$
 
-##### `Scope` {#scope}
+##### `Scope` $#scope$
 
 使用 `local` 值要求你指定 `:global` 类。
 使用 `global` 值要求你指定 `:local` 类。
@@ -395,7 +395,7 @@ exports.locals = {
 
 你也可以使用 `:local(#someId)`，但这并不推荐。应该使用类去代替 id。
 
-##### `Composing` {#composing}
+##### `Composing` $#composing$
 
 声明本地类名时，可以从另一个本地类名组成一个本地类。
 
@@ -431,7 +431,7 @@ exports.locals = {
 }
 ```
 
-##### `Importing` {#importing}
+##### `Importing` $#importing$
 
 从另一个模块导入本地类名。
 
@@ -462,7 +462,7 @@ exports.locals = {
 }
 ```
 
-##### `Values` {#values}
+##### `Values` $#values$
 
 可以使用 `@value` 来指定在整个文档中都能被重复使用的值，
 
@@ -489,7 +489,7 @@ exports.locals = {
 }
 ```
 
-#### `Boolean` {#boolean}
+#### `Boolean` $#boolean$
 
 启用 **CSS 模块** 功能。
 
@@ -511,7 +511,7 @@ module.exports = {
 };
 ```
 
-#### `String` {#string}
+#### `String` $#string$
 
 启用 **CSS 模块** 功能和设置 `mode`。
 
@@ -534,7 +534,7 @@ module.exports = {
 };
 ```
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 启用 **CSS 模块** 功能和设置选项。
 
@@ -566,7 +566,7 @@ module.exports = {
 };
 ```
 
-##### `auto` {#auto}
+##### `auto` $#auto$
 
 类型：`Boolean|RegExp|Function`
 默认值：`undefined`
@@ -581,7 +581,7 @@ module.exports = {
 - `RegExp` - 为所有匹配 `/RegExp/i.test(filename)` 正则表达式的文件禁用 CSS 模块。
 - `function` - 为所有通过基于文件名的过滤函数校验的文件启用 CSS 模块。
 
-###### `Boolean` {#boolean}
+###### `Boolean` $#boolean$
 
 可能的值：
 
@@ -608,7 +608,7 @@ module.exports = {
 };
 ```
 
-###### `RegExp` {#regexp}
+###### `RegExp` $#regexp$
 
 根据正则表达式检查文件名，为匹配的文件启用 css 模块。
 
@@ -632,7 +632,7 @@ module.exports = {
 };
 ```
 
-###### `Function` {#function}
+###### `Function` $#function$
 
 根据过滤器检查文件名，为满足过滤要求的文件启用css模块。
 
@@ -656,7 +656,7 @@ module.exports = {
 };
 ```
 
-##### `mode` {#mode}
+##### `mode` $#mode$
 
 类型：`String|Function`
 默认：`'local'`
@@ -670,7 +670,7 @@ module.exports = {
 
 ICSS 提供 CSS Module 支持，并且为其他工具提供了一个底层语法，以实现它们自己的 css-module 变体。
 
-###### `String` {#string}
+###### `String` $#string$
 
 可选值 - `local`、`global`、`pure` 和 `icss`。
 
@@ -694,7 +694,7 @@ module.exports = {
 };
 ```
 
-###### `Function` {#function}
+###### `Function` $#function$
 
 允许根据文件名设置不同的 `mode` 选项值。
 
@@ -731,7 +731,7 @@ module.exports = {
 };
 ```
 
-##### `localIdentName` {#localidentname}
+##### `localIdentName` $#localidentname$
 
 类型：`String`
 默认：`'[hash:base64]'`
@@ -785,7 +785,7 @@ module.exports = {
 };
 ```
 
-##### `localIdentContext` {#localidentcontext}
+##### `localIdentContext` $#localidentcontext$
 
 类型：`String`
 默认：`compiler.context`
@@ -812,7 +812,7 @@ module.exports = {
 };
 ```
 
-##### `localIdentHashSalt` {#localidenthashsalt}
+##### `localIdentHashSalt` $#localidenthashsalt$
 
 类型：`String`
 默认：`undefined`
@@ -840,7 +840,7 @@ module.exports = {
 };
 ```
 
-##### `localIdentHashFunction` {#localidenthashfunction}
+##### `localIdentHashFunction` $#localidenthashfunction$
 
 类型：`String`
 默认值：`md4`
@@ -868,7 +868,7 @@ module.exports = {
 };
 ```
 
-##### `localIdentHashDigest` {#localidenthashdigest}
+##### `localIdentHashDigest` $#localidenthashdigest$
 
 类型：`String`
 默认值：`hex`
@@ -896,7 +896,7 @@ module.exports = {
 };
 ```
 
-##### `localIdentHashDigestLength` {#localidentHashdigestlength}
+##### `localIdentHashDigestLength` $#localidentHashdigestlength$
 
 类型：`Number`
 默认值：`20`
@@ -924,7 +924,7 @@ module.exports = {
 };
 ```
 
-##### `localIdentRegExp` {#localidentregexp}
+##### `localIdentRegExp` $#localidentregexp$
 
 类型：`String|RegExp`
 默认：`undefined`
@@ -949,7 +949,7 @@ module.exports = {
 };
 ```
 
-##### `getLocalIdent` {#getlocalident}
+##### `getLocalIdent` $#getlocalident$
 
 类型：`Function`
 默认：`undefined`
@@ -981,7 +981,7 @@ module.exports = {
 };
 ```
 
-##### `namedExport` {#namedexport}
+##### `namedExport` $#namedexport$
 
 类型：`Boolean`
 默认：`false`
@@ -1037,7 +1037,7 @@ module.exports = {
 可以为 namedExport 设置一个自定义名称，可以使用 [`exportLocalsConvention`](#exportlocalsconvention) 配置项作为一个函数。
 可前往 [`examples`](#examples) 章节查看示例。
 
-##### `exportGlobals` {#exportglobals}
+##### `exportGlobals` $#exportglobals$
 
 类型：`Boolean`
 默认：`false`
@@ -1064,14 +1064,14 @@ module.exports = {
 };
 ```
 
-##### `exportLocalsConvention` {#exportlocalsconvention}
+##### `exportLocalsConvention` $#exportlocalsconvention$
 
 类型：`String|Function`
 默认：取决于 `modules.namedExport` 选项值，如果为 `true` 则对应的是 `camelCaseOnly`，反之对应的是 `asIs`
 
 导出的类名称的样式。
 
-###### `String` {#string}
+###### `String` $#string$
 
 默认情况下，导出的 JSON 密钥反映了类名（即 `asIs` 值）。
 
@@ -1118,7 +1118,7 @@ module.exports = {
 };
 ```
 
-###### `Function` {#function}
+###### `Function` $#function$
 
 **webpack.config.js**
 
@@ -1170,7 +1170,7 @@ module.exports = {
 };
 ```
 
-##### `exportOnlyLocals` {#exportonlylocals}
+##### `exportOnlyLocals` $#exportonlylocals$
 
 类型：`Boolean`
 默认：`false`
@@ -1201,7 +1201,7 @@ module.exports = {
 };
 ```
 
-### `importLoaders` {#importloaders}
+### `importLoaders` $#importloaders$
 
 类型：`Number`
 默认：`0`
@@ -1265,7 +1265,7 @@ module.exports = {
 };
 ```
 
-### `esModule` {#esmodule}
+### `esModule` $#esmodule$
 
 类型：`Boolean`
 默认：`true`
@@ -1293,9 +1293,9 @@ module.exports = {
 };
 ```
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### 推荐 {#recommend}
+### 推荐 $#recommend$
 
 推荐 `production` 环境的构建将 CSS 从你的 bundle 中分离出来，这样可以使用 CSS/JS 文件的并行加载。
 这可以通过使用 `mini-css-extract-plugin` 来实现，因为它可以创建单独的 CSS 文件。
@@ -1381,7 +1381,7 @@ module.exports = {
 }
 ```
 
-### Assets {#assets}
+### Assets $#assets$
 
 如下配置的 `webpack.config.js` 可以加载 CSS 文件，嵌入小的 PNG/JPG/GIF/SVG 图片以及字体作为[数据 URL](https://tools.ietf.org/html/rfc2397)，并将较大的文件复制到输出目录。
 
@@ -1407,7 +1407,7 @@ module.exports = {
 };
 ```
 
-### Extract {#extract}
+### Extract $#extract$
 
 For production builds it's recommended to extract the CSS from your bundle being able to use parallel loading of CSS/JS resources later on.
 
@@ -1415,7 +1415,7 @@ For production builds it's recommended to extract the CSS from your bundle being
 
 - As an alternative, if seeking better development performance and css outputs that mimic production. [extract-css-chunks-webpack-plugin](https://github.com/faceyspacey/extract-css-chunks-webpack-plugin) offers a hot module reload friendly, extended version of mini-css-extract-plugin. HMR real CSS files in dev, works like mini-css in non-dev
 
-### 纯 CSS，CSS 模块和 PostCSS {#pure-css-css-modules-and-postcss}
+### 纯 CSS，CSS 模块和 PostCSS $#pure-css-css-modules-and-postcss$
 
 如果项目中没有纯 CSS（没有 CSS 模块），CSS 模块和 PostCSS，则可以使用以下设置：
 
@@ -1461,7 +1461,7 @@ module.exports = {
 };
 ```
 
-### 使用别名解析未解析的 URL {#resolve-unresolved-urls-using-an-alias}
+### 使用别名解析未解析的 URL $#resolve-unresolved-urls-using-an-alias$
 
 **index.css**
 
@@ -1494,7 +1494,7 @@ module.exports = {
 };
 ```
 
-### Named export with custom export names {#named-export-with-custom-export-names}
+### Named export with custom export names $#named-export-with-custom-export-names$
 
 **webpack.config.js**
 
@@ -1519,7 +1519,7 @@ module.exports = {
 };
 ```
 
-### 只允许 `可交互的 CSS` 使其与 `CSS Module` 特性分离 {#separating-interoperable-css-only-and-css-module-features}
+### 只允许 `可交互的 CSS` 使其与 `CSS Module` 特性分离 $#separating-interoperable-css-only-and-css-module-features$
 
 下面是有关配置的示例代码，通过为所有未匹配到 `*.module.scss` 命名约定文件设置 `mode` 选项，只允许使用 `可交互的 CSS` 特性（如 `:import` 和 `:export`），而不使用其他的 `CSS Module` 特性。此处仅供参考，因为在 v4 之前，`css-loader` 默认将 `ICSS` 特性应用于所有文件。
 同时，在本示例中，匹配到 `*.module.scss` 的所有文件都将被视为 `CSS Modules`。
@@ -1625,13 +1625,13 @@ import styles from "Component.module.scss";
 ctx.fillStyle = `${svars.colorBackgroundCanvas}`;
 ```
 
-## Contributing {#contributing}
+## Contributing $#contributing$
 
 如果您还没有阅读，请花一点时间阅读我们的贡献指南。
 
 [贡献](https://github.com/webpack-contrib/css-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/css-loader/blob/master/LICENSE)
 

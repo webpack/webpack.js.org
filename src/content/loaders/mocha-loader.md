@@ -21,7 +21,7 @@ translators:
 
 允许 [Mocha](https://mochajs.org/) 通过 webpack 加载并运行。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 首先，你需要先安装 `mocha-loader` 与 `mocha`：
 
@@ -68,9 +68,9 @@ import test from 'mocha-loader!./test.js';
 
 无 loader 选项。
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### 基础 {#basic}
+### 基础 $#basic$
 
 **file.js**
 
@@ -100,13 +100,13 @@ describe('Test', () => {
 });
 ```
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果你还没有看过我们的贡献者指南请先花点时间看一下。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/mocha-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/mocha-loader/blob/master/LICENSE)
 

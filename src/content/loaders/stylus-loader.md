@@ -20,7 +20,7 @@ translators:
 
 一个 webpack 的 Stylus loader。将 Stylus 文件编译为 CSS。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 首先，你需要安装 `stylus` 和 `stylus-loader`：
 
@@ -47,7 +47,7 @@ module.exports = {
 
 接着按照你习惯的方式运行 `webpack`。
 
-## 可选项 {#options}
+## 可选项 $#options$
 
 |                   Name                    |         Type         |      Default       | Description                                              |
 | :---------------------------------------: | :------------------: | :----------------: | :------------------------------------------------------- |
@@ -57,7 +57,7 @@ module.exports = {
 |  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |    `undefined`     | 在入口文件起始或末尾添加 `Stylus` 代码。 |
 |  **[`implementation`](#implementation)**  | `{String\|Function}` |      `stylus`      | 配置 Stylus 使用的实现库。                      |
 
-### `stylusOptions` {#stylusoptions}
+### `stylusOptions` $#stylusoptions$
 
 类型：`Object|Function`
 默认值：`{}`
@@ -66,7 +66,7 @@ module.exports = {
 所有可用选项可以查看 [Stylus 文档](https://stylus-lang.com/docs/js.html)。
 这些配置项需要将破折号（dash-case）转换为驼峰值（camelCase）后进行设置。
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 使用对象（Object）的形式传递 options 给 Stylus。
 
@@ -190,7 +190,7 @@ module.exports = {
 };
 ```
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 允许根据 loader 的 context 来设置 options，再传递给  Stylus。
 
@@ -230,7 +230,7 @@ module.exports = {
 };
 ```
 
-### `sourceMap` {#sourcemap}
+### `sourceMap` $#sourcemap$
 
 类型：`Boolean`
 
@@ -263,7 +263,7 @@ module.exports = {
 };
 ```
 
-### `webpackImporter` {#webpackimporter}
+### `webpackImporter` $#webpackimporter$
 
 类型：`Boolean`
 默认值：`true`
@@ -297,7 +297,7 @@ module.exports = {
 };
 ```
 
-### `additionalData` {#additionaldata}
+### `additionalData` $#additionaldata$
 
 类型：`String|Function`
 默认值：`undefined`
@@ -333,7 +333,7 @@ module.exports = {
 };
 ```
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 ##### Sync
 
@@ -403,13 +403,13 @@ module.exports = {
 };
 ```
 
-### `implementation` {#implementation}
+### `implementation` $#implementation$
 
 类型：`Function | String`
 
 特殊的 `implementation` 选项决定使用 Stylus 的哪个实现。将会覆盖本地安装的 `stylus` 的 `peerDependency` 版本。
 
-#### Function {#function}
+#### Function $#function$
 
 **webpack.config.js**
 
@@ -435,7 +435,7 @@ module.exports = {
 };
 ```
 
-#### String {#string}
+#### String $#string$
 
 **webpack.config.js**
 
@@ -461,9 +461,9 @@ module.exports = {
 };
 ```
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### 常规用法 {#normal-usage}
+### 常规用法 $#normal-usage$
 
 将 `stylus-loader`、[`css-loader`](/loaders/css-loader/) 和 [`style-loader`](/loaders/style-loader/) 串联起来使用可立即将所有样式更新到 DOM。
 
@@ -492,7 +492,7 @@ module.exports = {
 };
 ```
 
-### Source maps {#source-maps}
+### Source maps $#source-maps$
 
 为了生成 CSS 的 source map, 你需要在 loader 的可选项中设置 `sourceMap` 属性。如果没设置的话 loader 将会继承你 webpack 中为生成 source map 设置的属性值 `devtool`。
 
@@ -526,7 +526,7 @@ module.exports = {
 };
 ```
 
-### stylus 中使用 nib {#using-nib-with-stylus}
+### stylus 中使用 nib $#using-nib-with-stylus$
 
 **webpack.config.js**
 
@@ -559,7 +559,7 @@ module.exports = {
 };
 ```
 
-### 导入 JSON 文件 {#import-json-files}
+### 导入 JSON 文件 $#import-json-files$
 
 Stylus 在 `json` 函数中无效。
 因此 webpack 解析器不适用于 `.json` 文件。
@@ -604,11 +604,11 @@ module.exports = {
 };
 ```
 
-### 生产环境 {#in-production}
+### 生产环境 $#in-production$
 
 在生产环境中推荐使用 [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) 来提取样式表到专门的文件中，这样你的样式就不需要依赖 JavaScript。
 
-### webpack 解析器 {#webpack-resolver}
+### webpack 解析器 $#webpack-resolver$
 
 `webpack` 提供了一种 [解析文件的高级机制](/configuration/resolve/)。
 `stylus-loader` 将所有的查询结果传递给了 webpack 解析器。
@@ -630,7 +630,7 @@ module.exports = {
 `webpack` 需要区分 `bootstrap` 和 `~bootstrap`，因为 CSS 和 Stylus 文件没有特殊的语法可以导入相对路径的文件。
 `@import "file"` 和 `@import "./file";` 写法是等价的。
 
-### Stylus resolver {#stylus-resolver}
+### Stylus resolver $#stylus-resolver$
 
 如果指定 `paths` 选项，将从指定的 `paths` 中搜索模块。
 这是 Stylus 的默认行为。
@@ -665,7 +665,7 @@ module.exports = {
 };
 ```
 
-### 提取样式 {#extracting-style-sheets}
+### 提取样式 $#extracting-style-sheets$
 
 通过 webpack 打包 CSS 有很多好处，比如给引用图片和字体文件路径添加 hash, 在开发环境可以[模块热更新](/concepts/hot-module-replacement/)。另一方面，在生产环境，根据 JS 来控制应用样式表不是一个好的方式，可能会导致延迟渲染，甚至可能会出现[闪烁现象](https://en.wikipedia.org/wiki/Flash_of_unstyled_content)。因此，在你最终的生产环境中将它们拆分成单独的文件来存放通常是比较好的选择。
 
@@ -674,13 +674,13 @@ module.exports = {
 - [`extract-loader`](https://github.com/peerigon/extract-loader) （简单，但得专门指定 `css-loader` 的 output）
 - [MiniCssExtractPlugin](/plugins/mini-css-extract-plugin/) （较复杂，但适用于所有的场景）
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果你还没有看过我们的贡献者指南请先花点时间看一下。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/stylus-loader/blob/master/.github/CONTRIBUTING.md)
 
-## 许可 {#license}
+## 许可 $#license$
 
 [MIT](https://github.com/webpack-contrib/stylus-loader/blob/master/LICENSE)
 

@@ -26,7 +26,7 @@ T> 关于编写插件的高级介绍，请移步：
 让我们首先从 tapable 工具开始，
 它为 webpack 插件接口提供了核心能力的。
 
-## Tapable {#tapable}
+## Tapable $#tapable$
 
 这个小型库是 webpack 的一个核心工具，但也可用于其他地方，
 以提供类似的插件接口。
@@ -40,7 +40,7 @@ T> 关于编写插件的高级介绍，请移步：
 那些扩展自 `Tapable` 的对象（例如：compiler），
 以及其提供的钩子(hooks)和每个钩子的类型（例如：`同步钩子(SyncHook)`）值得关注。
 
-## 插件类型 {#plugin-types}
+## 插件类型 $#plugin-types$
 
 根据使用不同的钩子(hooks)和 `tap` 方法，
 插件可以以多种不同的方式运行。
@@ -88,7 +88,7 @@ compiler.hooks.run.tapPromise(
 这些需求(story)的含义在于，
 我们可以有多种方式 hook 到 compiler 中，可以让各种插件都以合适的方式去运行。
 
-## 自定义钩子 {#custom-hooks}
+## 自定义钩子 $#custom-hooks$
 
 为了便于其他插件的编译过程中可以 `tap` 到，则需要创建一个新的 hook，
 我们只需要简单的从 `tapable` 中 `require` 所需的 hook 类，并创建：
@@ -106,7 +106,7 @@ compiler.hooks.myCustomHook.call(a, b, c);
 再次声明，
 查看 `tapable` [文档](https://github.com/webpack/tapable) 来了解更多不同的钩子类(hook class)，以及它们是如何工作的。
 
-## 进度报告 {#reporting-progress}
+## 进度报告 $#reporting-progress$
 
 插件能够通过 [`ProgressPlugin`](/plugins/progress-plugin/) 这个在默认情况下将信息打印到标准错误输出(stderr)的插件来进行进度报告。如果想要使用这个功能，只需要在使用 [webpack CLI](/api/cli/) 的时候传入 `--progress` 参数。
 
@@ -142,7 +142,7 @@ reportProgress(percentage, ...args);
 
 注意：只有 compiler 和 compilation 钩子的子集才支持 `reportProgress` 方法。请查看 [`ProgressPlugin`](/plugins/progress-plugin/#supported-hooks) 了解更多信息。
 
-## 日志 {#logging}
+## 日志 $#logging$
 
 日志的 API 在 webpack 4.37 版本后提供支持。当 `logging` 在 [`统计配置(stats configuration)`](/configuration/stats/#statslogging)中可用和(或)当 [`infrastructure logging`](/configuration/other-options/#infrastructurelogging) 可用的时候，插件会通过各自的记录格式(stats，infrastructure)打印信息。
 
@@ -150,7 +150,7 @@ reportProgress(percentage, ...args);
 - 插件也可以使用 `compilation.getInfrastructureLogger('PluginName')` 来做记录。使用 `infrastructure` 的形式并不会被保存在统计数据(Stats)中，因此也不会被格式化。它通常直接将记录载入到 console/dashboard/GUI 中。它能够被用户过滤。
 - 插件也可以使用特殊的降级逻辑 `compilation.getLogger ? compilation.getLogger('PluginName') : console` 来检测是否支持记录，以此来在不支持 `compilation.getLogger` 方法的旧版本 webpack 中提供降级方法。
 
-## 下一步 {#next-steps}
+## 下一步 $#next-steps$
 
 查看 [compiler hooks](/api/compiler-hooks/) 部分，
 了解所有可用的 `compiler` 钩子以及它们提供的参数的详细列表。

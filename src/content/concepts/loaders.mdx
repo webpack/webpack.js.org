@@ -23,7 +23,7 @@ translators:
 
 loader 用于对模块的源代码进行转换。loader 可以使你在 `import` 或 "load(加载)" 模块时预处理文件。因此，loader 类似于其他构建工具中“任务(task)”，并提供了处理前端构建步骤的得力方式。loader 可以将文件从不同的语言（如 TypeScript）转换为 JavaScript 或将内联图像转换为 data URL。loader 甚至允许你直接在 JavaScript 模块中 `import` CSS 文件！
 
-## 示例 {#example}
+## 示例 $#example$
 
 例如，你可以使用 loader 告诉 webpack 加载 CSS 文件，或者将 TypeScript 转为 JavaScript。为此，首先安装相对应的 loader：
 
@@ -46,14 +46,14 @@ module.exports = {
 };
 ```
 
-## 使用 loader {#using-loaders}
+## 使用 loader $#using-loaders$
 
 在你的应用程序中，有两种使用 loader 的方式：
 
 - [配置方式](#configuration)（推荐）：在 **webpack.config.js** 文件中指定 loader。
 - [内联方式](#inline)：在每个 `import` 语句中显式指定 loader。
 
-### 配置方式 {#configuration}
+### 配置方式 $#configuration$
 
 [`module.rules`](/configuration/module/#modulerules) 允许你在 webpack 配置中指定多个 loader。
 这种方式是展示 loader 的一种简明方式，并且有助于使代码变得简洁和易于维护。同时让你对各个 loader 有个全局概览：
@@ -85,7 +85,7 @@ module.exports = {
 };
 ```
 
-### 内联方式 {#inline}
+### 内联方式 $#inline$
 
 可以在 `import` 语句或任何 [与 "import" 方法同等的引用方式](/api/module-methods) 中指定 loader。使用 `!` 将资源中的 loader 分开。每个部分都会相对于当前目录解析。
 
@@ -117,7 +117,7 @@ import Styles from 'style-loader!css-loader?modules!./styles.css';
 
 T> 尽可能使用 `module.rules`，因为这样可以减少源码中样板文件的代码量，并且可以在出错时，更快地调试和定位 loader 中的问题。
 
-## loader 特性 {#loader-features}
+## loader 特性 $#loader-features$
 
 - loader 支持链式调用。链中的每个 loader 会将转换应用在已处理过的资源上。一组链式的 loader 将按照相反的顺序执行。链中的第一个 loader 将其结果（也就是应用过转换后的资源）传递给下一个 loader，依此类推。最后，链中的最后一个 loader，返回 webpack 所期望的 JavaScript。
 - loader 可以是同步的，也可以是异步的。
@@ -129,7 +129,7 @@ T> 尽可能使用 `module.rules`，因为这样可以减少源码中样板文�
 
 可以通过 loader 的预处理函数，为 JavaScript 生态系统提供更多能力。用户现在可以更加灵活地引入细粒度逻辑，例如：压缩、打包、语言转译（或编译）和 [更多其他特性](/loaders)。
 
-## 解析 loader {#resolving-loaders}
+## 解析 loader $#resolving-loaders$
 
 loader 遵循标准 [模块解析](/concepts/module-resolution/) 规则。多数情况下，loader 将从 [模块路径](/concepts/module-resolution/#module-paths) 加载（通常是从 `npm install`, `node_modules` 进行加载）。
 

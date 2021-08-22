@@ -30,7 +30,7 @@ translators:
 
 W> 寻求帮助：这个页面还在更新中，如果你发现本页面内有描述不准确或者不完整，请在 [webpack 的文档仓库](https://github.com/webpack/webpack.js.org)中创建 issue 或者 pull request
 
-## amd {#amd}
+## amd $#amd$
 
 `object` `boolean: false`
 
@@ -54,7 +54,7 @@ module.exports = {
 此选项允许将模块查找的键(key)设置为真值(truthy value)。
 发生这种情况时，webpack 中的 AMD 支持将忽略定义的名称。
 
-## bail {#bail}
+## bail $#bail$
 
 `boolean = false`
 
@@ -73,7 +73,7 @@ module.exports = {
 
 W> 避免在 [`watch`](/configuration/watch) 模式下使用 `ball` 选项，因为这将会致使 webpack 在发现错误时尽快退出。
 
-## dependencies {#dependencies}
+## dependencies $#dependencies$
 
 `[string]`
 
@@ -103,7 +103,7 @@ module.exports = [
 ];
 ```
 
-## ignoreWarnings {#ignorewarnings}
+## ignoreWarnings $#ignorewarnings$
 
 `RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`
 
@@ -131,13 +131,13 @@ module.exports = {
 };
 ```
 
-## infrastructureLogging {#infrastructurelogging}
+## infrastructureLogging $#infrastructurelogging$
 
 用于基础设施水平的日志选项。
 
 `object = {}`
 
-### appendOnly {#appendonly}
+### appendOnly $#appendonly$
 
 <Badge text="5.31.0+" />
 
@@ -164,7 +164,7 @@ module.exports = {
 };
 ```
 
-### colors {#colors}
+### colors $#colors$
 
 <Badge text="5.31.0+" />
 
@@ -190,7 +190,7 @@ module.exports = {
 };
 ```
 
-### console {#console}
+### console $#console$
 
 <Badge text="5.31.0+" />
 
@@ -209,7 +209,7 @@ module.exports = {
 };
 ```
 
-### debug {#debug}
+### debug $#debug$
 
 `string` `boolean = false` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 
@@ -227,7 +227,7 @@ module.exports = {
 };
 ```
 
-### level {#level}
+### level $#level$
 
 `string = 'info' : 'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose'`
 
@@ -253,7 +253,7 @@ module.exports = {
 };
 ```
 
-### stream {#stream}
+### stream $#stream$
 
 <Badge text="5.31.0+" />
 
@@ -307,7 +307,7 @@ module.exports = function (source) {
 
 T> 你可以覆盖 loader 上下文中的属性，因为 webpack 会将所有定义在 `loader` 中的属性负责到 loader 上下文中。
 
-## name {#name}
+## name $#name$
 
 `string`
 
@@ -322,13 +322,13 @@ module.exports = {
 };
 ```
 
-## parallelism {#parallelism}
+## parallelism $#parallelism$
 
 `number = 100`
 
 限制并行处理的模块数量。可以用于调优性能或获取更可靠的性能分析结果。
 
-## profile {#profile}
+## profile $#profile$
 
 `boolean`
 
@@ -339,13 +339,13 @@ T> 使用 [StatsPlugin](https://www.npmjs.com/package/stats-webpack-plugin) 可�
 T> 与 `parallelism: 1` 混用以达到更好的结果。
 需要注意的是，这样做也会减慢建造速度。
 
-## recordsInputPath {#recordsinputpath}
+## recordsInputPath $#recordsinputpath$
 
 `string`
 
 指定读取最后一条记录的文件的名称。这可以用来重命名一个记录文件，可以查看下面的实例：
 
-## recordsOutputPath {#recordsoutputpath}
+## recordsOutputPath $#recordsoutputpath$
 
 `string`
 
@@ -363,7 +363,7 @@ module.exports = {
 };
 ```
 
-## recordsPath {#recordspath}
+## recordsPath $#recordspath$
 
 `string`
 
@@ -386,7 +386,7 @@ T> 注意，虽然这个文件是由编译器(compiler)生成的，但你可能�
 
 W> 设置 `recordsPath` 本质上会把 `recordsInputPath` 和 `recordsOutputPath` 都设置成相同的路径。通常来讲这也是符合逻辑的，除非你决定改变记录文件的名称。可以查看下面的实例：
 
-## snapshot {#snapshot}
+## snapshot $#snapshot$
 
 `object`
 
@@ -419,7 +419,7 @@ module.exports = {
 };
 ```
 
-### buildDependencies {#build-dependencies}
+### buildDependencies $#build-dependencies$
 
 `object = { hash boolean = true, timestamp boolean = true }`
 
@@ -434,20 +434,20 @@ module.exports = {
 - `{ timestamp: true }`：对应本地开发缓存很用帮助。
 - `{ timestamp: true, hash: true }`：对于以上提到的两者都很有帮助。首先比较时间戳，这代价很低，因为 webpack 不需要读取文件来计算它们的哈希值。仅当时间戳相同时才会比较内容哈希，这对初始构建的性能影响很小。
 
-### immutablePaths {#immutable-paths}
+### immutablePaths $#immutable-paths$
 
 `[string]`
 
 由包管理器管理的路径数组，在其路径中包含一个版本或哈希，以便所有文件都是不可变的（immutable）。
 
-### managedPaths {#managedpaths}
+### managedPaths $#managedpaths$
 
 `[string]`
 
 由包管理器管理的路径数组，可以信任它不会被修改。
 
 
-### module {#module}
+### module $#module$
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
@@ -456,7 +456,7 @@ module.exports = {
 - `hash`：比较内容哈希以判断无效。（比 `timestamp` 更昂贵，但更改的频率较低）。
 - `timestamp`：比较时间戳以确定无效。
 
-### resolve {#resolve}
+### resolve $#resolve$
 
 `object = {hash boolean = true, timestamp boolean = true}`
 
@@ -465,7 +465,7 @@ module.exports = {
 - `hash`：比较内容哈希以判断无效。（比 `timestamp` 更昂贵，但更改的频率较低）。
 - `timestamp`：比较时间戳以确定无效。
 
-### resolveBuildDependencies {#resolve-build-dependencies}
+### resolveBuildDependencies $#resolve-build-dependencies$
 
 `object = {hash boolean = true, timestamp boolean = true}`
 

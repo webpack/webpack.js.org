@@ -58,7 +58,7 @@ export default class SidebarItem extends Component {
   _handleAnchor(anchor) {
     let id = anchor.id;
     let title = anchor.title2;
-    const match = /^.+(\s*\{#([a-z0-9\-_]+?)\}\s*)$/.exec(title);
+    const match = /^.+(\s*\$#([a-z0-9\-_]+?)\$\s*)$/.exec(title);
     id = match ? match[2] : id;
     title = match ? title.replace(match[1], '').trim() : title;
     anchor.id = id;

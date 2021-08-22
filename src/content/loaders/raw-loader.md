@@ -22,7 +22,7 @@ translators:
 
 可以将文件作为字符串导入的 webpack loader。
 
-## 起步 {#getting-started}
+## 起步 $#getting-started$
 
 首先，你需要安装 `raw-loader`:
 
@@ -56,13 +56,13 @@ module.exports = {
 
 然后根据你习惯的方式启动 `webpack`。 
 
-## 选项 {#options}
+## 选项 $#options$
 
 |           属性名            |    类型     | 默认值 | 备注             |
 | :-------------------------: | :---------: | :----: | :--------------- |
 | **[`esModule`](#esmodule)** | `{Boolean}` | `true` | 使用 ES 模块语法 |
 
-### `esModule` {#esmodule}
+### `esModule` $#esmodule$
 
 类型: `Boolean`
 默认值: `true`
@@ -94,9 +94,9 @@ module.exports = {
 };
 ```
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### 内联 {#inline}
+### 内联 $#inline$
 
 ```js
 import txt from 'raw-loader!./file.txt';
@@ -108,13 +108,13 @@ import txt from 'raw-loader!./file.txt';
 import css from '!!raw-loader!./file.txt'; // 在请求中添加`!!`将禁用配置中指定的所有 loaders
 ```
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果你从未阅读过我们的贡献指南，请在上面花点时间。
 
 [贡献指南](https://github.com/webpack-contrib/raw-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/raw-loader/blob/master/LICENSE)
 

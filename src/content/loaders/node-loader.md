@@ -25,7 +25,7 @@ translators:
 
 > ⚠ `node-loader` 只对 `node`/`electron-main`/`electron-main`/`electron-renderer`/`electron-preload` 生效。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 首先，你需要安装 `node-loader`：
 
@@ -54,7 +54,7 @@ module.exports = {
 };
 ```
 
-### 内联 {#inline}
+### 内联 $#inline$
 
 **index.js**
 
@@ -64,7 +64,7 @@ import node from 'node-loader!./file.node';
 
 然后通过你喜欢的方式运行 `webpack`。
 
-### 配置 {#configuration}
+### 配置 $#configuration$
 
 **index.js**
 
@@ -95,14 +95,14 @@ module.exports = {
 
 然后通过你喜欢的方式运行 `webpack`。
 
-## 选项 {#options}
+## 选项 $#options$
 
 |         Name          |         Type         |         Default         | Description                                                  |
 | :-------------------: | :------------------: | :---------------------: | :----------------------------------------------------------- |
 | **[`flags`](#flags)** |      `{Number}`      |       `undefined`       | 启用/禁用 `url`/`image-set` 函数处理       |
 |  **[`name`](#name)**  | `{String\|Function}` | `'[contenthash].[ext]'` | 指定一个或多个目标文件的自定义文件名模板。 |
 
-### `flags` {#flags}
+### `flags` $#flags$
 
 类型：`Number`
 默认值：`undefined`
@@ -140,14 +140,14 @@ module.exports = {
 };
 ```
 
-### `name` {#name}
+### `name` $#name$
 
 类型：`String|Function`
 默认值：`'[contenthash].[ext]'`
 
 指定一个或多个目标文件的自定义文件名模板。
 
-#### `String` {#string}
+#### `String` $#string$
 
 **webpack.config.js**
 
@@ -171,7 +171,7 @@ module.exports = {
 };
 ```
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 **webpack.config.js**
 
@@ -204,13 +204,13 @@ module.exports = {
 };
 ```
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果你还未阅读贡献指南，请抽时间进行阅读。
 
 [贡献指南](https://github.com/webpack-contrib/node-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/node-loader/blob/master/LICENSE)
 

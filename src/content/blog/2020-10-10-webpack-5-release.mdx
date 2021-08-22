@@ -27,20 +27,20 @@ webpack 4 于 2018 年 2 月发布。
 就像 webpack 4 一样，我们通过修复问题以及增加新特性来延续开发。
 在接下来的日子里，可能会有很多 bug 修复。新特性可能也会出现。
 
-## 疑问解答 {#common-questions}
+## 疑问解答 $#common-questions$
 
-### 那么发布意味着什么呢？{#so-what-does-the-release-mean}
+### 那么发布意味着什么呢？ $#so-what-does-the-release-mean$
 
 这意味着我们完成了重大的变更。
 许多重构已经完成，以提高架构的水平，并为未来的功能（和当前的功能）创建一个良好的基础。
 
-### 那么什么时候是升级的时候呢？{#so-when-is-the-time-to-upgrade}
+### 那么什么时候是升级的时候呢？ $#so-when-is-the-time-to-upgrade$
 
 这要看情况。有一个很好的机会，升级失败，你需要给它第二次或第三次尝试。
 如果你愿意的话，现在就尝试升级，并向 webpack、插件和加载器提供反馈。
 我们很想解决这些问题。总得有人开始，而你将是第一批受益者之一。
 
-## 赞助情况 {#sponsoring-update}
+## 赞助情况 $#sponsoring-update$
 
 webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 它不像其他一些开源项目那样与大公司挂钩（并由其支付费用）。
@@ -61,7 +61,7 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 感谢所有的赞助者。
 
-## 整体方向 {#general-direction}
+## 整体方向 $#general-direction$
 
 这个版本的重点在于以下几点。
 
@@ -72,13 +72,13 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 - 尝试在不引入任何破坏性变化的情况下，清理那些在实现 v4 功能时处于奇怪状态的内部结构。
 - 试图通过现在引入突破性的变化来为未来的功能做准备，使其能够尽可能长时间地保持在 v5 版本上。
 
-## **迁移**指南 {#migration-guide}
+## **迁移**指南 $#migration-guide$
 
 [在这里可查阅**迁移**指南](/migrate/5)
 
-## 重大变更: 功能清除 {#major-changes-removals}
+## 重大变更: 功能清除 $#major-changes-removals$
 
-### 清理弃用的能力 {#removed-deprecated-items}
+### 清理弃用的能力 $#removed-deprecated-items$
 
 所有在 v4 中被废弃的能力都被移除。
 
@@ -88,17 +88,17 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 - IgnorePlugin 和 BannerPlugin 现在必须只传递一个参数，这个参数可以是对象、字符串或函数。
 
-### 废弃代码 {#deprecation-codes}
+### 废弃代码 $#deprecation-codes$
 
 新的弃用包括一个弃用代码，这样他们更容易被引用。
 
-### 语法废弃 {#syntax-deprecated}
+### 语法废弃 $#syntax-deprecated$
 
 `require.include`已被废弃，使用时默认会发出警告。
 
 可以通过 `Rule.parser.requireInclude` 将行为改为允许、废弃或禁用。
 
-### 不再为 Node.js 模块 自动引用 Polyfills {#automatic-nodejs-polyfills-removed}
+### 不再为 Node.js 模块 自动引用 Polyfills $#automatic-nodejs-polyfills-removed$
 
 在早期，webpack 的目的是为了让大多数的 Node.js 模块运行在浏览器中，但如今模块的格局已经发生了变化，现在许多模块主要是为前端而编写。webpack &lt;= 4 的版本中提供了许多 Node.js 核心模块的 polyfills，一旦某个模块引用了任何一个核心模块（如 `cypto` 模块），webpack 就会自动引用这些 polyfills。
 
@@ -112,9 +112,9 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 - 可以手动为 Node.js 核心模块添加 polyfill。错误提示会告诉你如何实现。
 - Package 作者：在 `package.json` 中添加 `browser` 字段，使 package 与前端兼容。为浏览器提供其他的实现/dependencies。
 
-## 重大变更：长期缓存 {#major-changes-long-term-caching}
+## 重大变更：长期缓存 $#major-changes-long-term-caching$
 
-### 确定的 Chunk、模块 ID 和导出名称 {#deterministic-chunk-module-ids-and-export-names}
+### 确定的 Chunk、模块 ID 和导出名称 $#deterministic-chunk-module-ids-and-export-names$
 
 新增了长期缓存的算法。这些算法在生产模式下是默认启用的。
 
@@ -133,14 +133,14 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 注意：在 webpack 5 中，`deterministic` Ids 在生产模式下是默认启用的。
 
-### 真正的内容哈希 {#real-content-hash}
+### 真正的内容哈希 $#real-content-hash$
 
 当使用 `[contenthash]` 时，Webpack 5 将使用真正的文件内容哈希值。之前它 "只" 使用内部结构的哈希值。
 当只有注释被修改或变量被重命名时，这对长期缓存会有积极影响。这些变化在压缩后是不可见的。
 
-## 重大变更：开发支持 {#major-changes-development-support}
+## 重大变更：开发支持 $#major-changes-development-support$
 
-### 命名代码块 ID {#named-chunk-ids}
+### 命名代码块 ID $#named-chunk-ids$
 
 在开发模式下，默认启用的新命名代码块 ID 算法为模块（和文件名）提供了人类可读的名称。
 模块 ID 由其路径决定，相对于 `context`。
@@ -153,7 +153,7 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 **迁移**：如果你不喜欢在开发中改变文件名，你可以通过 `chunkIds: "natural"` 来使用旧的数字模式。
 
-### 模块联邦 {#module-federation}
+### 模块联邦 $#module-federation$
 
 Webpack 5 增加了一个新的功能 "模块联邦"，它允许多个 webpack 构建一起工作。
 从运行时的角度来看，多个构建的模块将表现得像一个巨大的连接模块图。
@@ -161,9 +161,9 @@ Webpack 5 增加了一个新的功能 "模块联邦"，它允许多个 webpack �
 
 更多细节请参见[本单独指南](/concepts/module-federation)。
 
-## 重大变更：支持崭新的 Web 平台特性 {#major-changes-new-web-platform-features}
+## 重大变更：支持崭新的 Web 平台特性 $#major-changes-new-web-platform-features$
 
-### JSON 模块 {#json-modules}
+### JSON 模块 $#json-modules$
 
 JSON 模块现在与提案保持一致，并在使用非默认导出时发出警告。
 当从严格的 ECMAScript 模块导入时，JSON 模块不再有命名的导出。
@@ -174,13 +174,13 @@ JSON 模块现在与提案保持一致，并在使用非默认导出时发出警
 
 可以在 `Rule.parser.parse` 中指定一个自定义的 JSON 解析器来导入类似 JSON 的文件（例如针对 toml、yaml、json5 等）。
 
-### import.meta {#importmeta}
+### import.meta $#importmeta$
 
 - `import.meta.webpackHot` 是 `module.hot` 的别名，在严格的 ESM 中也可以使用。
 - `import.meta.webpack` 是 webpack 的主要版本号。
 - `import.meta.url` 是当前文件的 `file:` url(类似于`__filename`，但作为文件 url)。
 
-### 资源模块 {#asset-modules}
+### 资源模块 $#asset-modules$
 
 Webpack 5 现在已经对表示资源的模块提供了内置支持。
 这些模块可以向输出文件夹发送一个文件，或者向 javascript 包注入一个 DataURI。
@@ -193,7 +193,7 @@ Webpack 5 现在已经对表示资源的模块提供了内置支持。
 
 选择 "新的方式 "语法是为了允许在没有打包工具的情况下运行代码。这种语法也可以在浏览器中的原生 ECMAScript 模块中使用。
 
-### 原生 Worker 支持 {#native-worker-support}
+### 原生 Worker 支持 $#native-worker-support$
 
 当把资源的 `new URL` 和 `new Worker`/`new SharedWorker`/`navigator.serviceWorker.register` 结合起来时，webpack 会自动为 web worker 创建一个新的入口点（entrypoint）。
 
@@ -201,7 +201,7 @@ Webpack 5 现在已经对表示资源的模块提供了内置支持。
 
 选择这种语法也是为了允许在没有打包工具的情况下运行代码。这种语法在浏览器的原生 ECMAScript 模块中也可以使用。
 
-### URIs {#uris}
+### URIs $#uris$
 
 Webpack 5 支持在请求中处理协议。
 
@@ -212,7 +212,7 @@ Webpack 5 支持在请求中处理协议。
 
 支持请求中的片段。例如：`./file.js#fragment`。
 
-### 异步模块 {#async-modules}
+### 异步模块 $#async-modules$
 
 Webpack 5 支持所谓的 "异步模块"。
 这些模块并不是同步解析的，而是基于异步和 Promise 的。
@@ -227,7 +227,7 @@ Webpack 5 支持所谓的 "异步模块"。
 - 新规范中的 WebAssembly 模块
 - 使用顶层 Await 的 ECMAScript 模块。
 
-### 外部资源 {#externals}
+### 外部资源 $#externals$
 
 Webpack 5 增加了更多的外部类型来覆盖更多的应用：
 
@@ -239,9 +239,9 @@ Webpack 5 增加了更多的外部类型来覆盖更多的应用：
 
 `script`: 通过 `<script>` 标签加载一个 url，并从一个全局变量（以及它的可选属性）中获取输出。外部模块是一个异步模块。
 
-## 重大变更：支持全新的 Node.js 生态特性 {#major-changes-new-nodejs-ecosystem-features}
+## 重大变更：支持全新的 Node.js 生态特性 $#major-changes-new-nodejs-ecosystem-features$
 
-### 解析 {#resolving}
+### 解析 $#resolving$
 
 现在支持 package.json 中的 `exports` 和 `imports` 字段。
 
@@ -249,9 +249,9 @@ Webpack 5 增加了更多的外部类型来覆盖更多的应用：
 
 更多细节请参见[package exports](/guides/package-exports/)。
 
-## 重大变更：开发体验 {#major-changes-development-experience}
+## 重大变更：开发体验 $#major-changes-development-experience$
 
-### 经过优化的构建目标(target) {#improved-target}
+### 经过优化的构建目标(target) $#improved-target$
 
 Webpack 5 允许传递一个目标列表，并且支持目标的版本。
 
@@ -262,7 +262,7 @@ Webpack 5 允许传递一个目标列表，并且支持目标的版本。
 - 代码块加载机制，以及
 - 支持的语法，如箭头函数
 
-### Stats {#stats}
+### Stats $#stats$
 
 改进了统计测试格式的可读性和冗余性。改进了默认值，使其不那么冗长，也适合大型构建。
 
@@ -279,7 +279,7 @@ Webpack 5 允许传递一个目标列表，并且支持目标的版本。
 - 默认情况下不再显示构建的时间戳，这可以通过 `stats.builtAt` 开启。它会在摘要中显示时间戳。
 - 默认情况下，不再显示子编译。它们可以用 `stats.children` 来显示。
 
-### 进度 {#progress}
+### 进度 $#progress$
 
 对 `ProgressPlugin` 做了一些改进，它被 CLI 在参数 `--progress` 开启时使用，但也可以作为插件手动使用。
 
@@ -301,7 +301,7 @@ new webpack.ProgressPlugin({ percentBy: 'entries' });
 
 为了使进度百分比更准确，`ProgressPlugin` 会缓存最后已知的总模块数，并在下一次构建时重新使用这个值。第一次构建将预热缓存，但后续构建将使用并更新这个值。
 
-### 自动添加唯一命名 {#automatic-unique-naming}
+### 自动添加唯一命名 $#automatic-unique-naming$
 
 在 webpack 4 中，多个 webpack 运行时可能会在同一个 HTML 页面上发生冲突，因为它们使用同一个全局变量进行代码块加载。为了解决这个问题，需要为 `output.jsonpFunction` 配置提供一个自定义的名称。
 
@@ -311,19 +311,19 @@ Webpack 5 确实会从 `package.json` `name` 中自动推断出一个唯一的�
 
 **迁移**: 由于 `package.json` 中有唯一的名称，可将 `output.jsonpFunction` 删除。
 
-### 自动添加公共路径 {#automatic-public-path}
+### 自动添加公共路径 $#automatic-public-path$
 
 Webpack 5 会在可能的情况下自动确定 `output.publicPath`。
 
-### Typescript 类型 {#typescript-typings}
+### Typescript 类型 $#typescript-typings$
 
 Webpack 5 从源码中生成 typescript 类型，并通过 npm 包暴露它们。
 
 **迁移**：删除`@types/webpack`。当名称不同时更新引用。
 
-## 重大变更: 构建优化 {#major-changes-optimization}
+## 重大变更: 构建优化 $#major-changes-optimization$
 
-### 嵌套的 tree-shaking {#nested-tree-shaking}
+### 嵌套的 tree-shaking $#nested-tree-shaking$
 
 webpack 现在能够跟踪对导出的嵌套属性的访问。这可以改善重新导出命名空间对象时的 Tree Shaking（清除未使用的导出和混淆导出）。
 
@@ -343,7 +343,7 @@ console.log(module.inner.a);
 
 在这个例子中，可以在生产模式下删除导出的`b`。
 
-### 内部模块 tree-shaking {#inner-module-tree-shaking}
+### 内部模块 tree-shaking $#inner-module-tree-shaking$
 
 webpack 4 没有分析模块的导出和引用之间的依赖关系。webpack 5 有一个新的选项 `optimization.innerGraph`，在生产模式下是默认启用的，它可以对模块中的标志进行分析，找出导出和引用之间的依赖关系。
 
@@ -385,7 +385,7 @@ export function test() {
 
 这种优化也被称为深度范围分析。
 
-### CommonJs Tree Shaking {#commonjs-tree-shaking}
+### CommonJs Tree Shaking $#commonjs-tree-shaking$
 
 webpack 曾经不进行对 CommonJs 导出和 `require()` 调用时的导出使用分析。
 
@@ -408,26 +408,26 @@ webpack 5 增加了对一些 CommonJs 构造的支持，允许消除未使用的
 
 当检测到不可分析的代码时，webpack 会放弃，并且完全不跟踪这些模块的导出信息（出于性能考虑）。
 
-### 副作用分析 {#side-effect-analysis}
+### 副作用分析 $#side-effect-analysis$
 
 在 package.json 中的 `"sideEffects"` 标志允许手动将模块标记为无副作用，这就允许在不使用时放弃它们。
 
 webpack 5 也可以根据对源代码的静态分析，自动将模块标记为无副作用。
 
-### 每个运行时的优化 {#optimization-per-runtime}
+### 每个运行时的优化 $#optimization-per-runtime$
 
 Webpack 5 现在能够（默认情况下也是如此）分析和优化每个运行时的模块（一个运行时通常等于一个入口点）。
 这允许只在真正需要的地方导出这些入口点。
 入口点之间不会相互影响 (只要每个入口点使用一个运行时)
 
-### 模块合并 {#module-concatenation}
+### 模块合并 $#module-concatenation$
 
 模块合并也可以在每个运行时工作，允许每个运行时进行不同的合并
 
 模块合并已经成为一等公民，现在任何模块和依赖都可以实现它。
 在初始时 webpack 5 已经添加了对 ExternalModules 和 json 模块的支持，更多的模块可能很快就会发布。
 
-### 通用 Tree Shaking 改进 {#general-tree-shaking-improvements}
+### 通用 Tree Shaking 改进 $#general-tree-shaking-improvements$
 
 `export *` 已经得到改进，可以跟踪更多的信息，并且不再将`默认`导出标记为使用。
 
@@ -435,7 +435,7 @@ Webpack 5 现在能够（默认情况下也是如此）分析和优化每个运�
 
 `import()` 允许通过 `/* webpackExports: ["abc", "default"] */` 该魔法注释手动 tree shake 模块。
 
-### 开发与生产的一致性问题 {#development-production-similarity}
+### 开发与生产的一致性问题 $#development-production-similarity$
 
 我们试图通过改善两种模式的相似性，在开发模式的构建性能和避免仅在生产模式的产生的问题之间找到一个很好的平衡点。
 
@@ -443,7 +443,7 @@ Webpack 5 默认在两种模式下都启用了 "sideEffects "优化。在 webpac
 
 在很多情况下，开发和生产都是在不同的操作系统上进行的，文件系统的大小写敏感度不同，所以 webpack 5 增加了一些奇怪的大小写的警告/错误。
 
-### 改进代码生成 {#improved-code-generation}
+### 改进代码生成 $#improved-code-generation$
 
 当 ASI 发生时，webpack 会检测到，当没有分号插入时，会生成更短的代码。`Object(...)`->`(0, ...)`。
 
@@ -459,7 +459,7 @@ webpack 5 则现在既可以生成 ES5 又可以生成 ES6/ES2015 代码。
 
 只支持现代浏览器，将使用箭头函数生成更短的代码，使用 `const` 声明与 TDZ 为 `export default` 生成更符合规范的代码。
 
-### 改进 `target` 配置 {#improved-target-option}
+### 改进 `target` 配置 $#improved-target-option$
 
 在 webpack 4 中，"target "是在 `"web"` 和 `"node"` 之间的一个粗略的选择（还有一些其他的）。
 Webpack 5 给你更多的选择。
@@ -492,7 +492,7 @@ Webpack 5 给你更多的选择。
 - `["web", "node"]` + `output.module: true`将导致一个模块代码块加载方法，该方法尚未实现。
 - `"web"`会导致`http(s):`的导入被视为`模块`外部资源，而这些外部还没有实现(变通方法：`externalsPresets.{ web: false, webAsync: true }`，将使用`import()`代替)。
 
-### 代码块拆分与模块大小 {#splitchunks-and-module-sizes}
+### 代码块拆分与模块大小 $#splitchunks-and-module-sizes$
 
 现在模块的尺寸比单一的数字更好的表达方式。现在有不同类型的大小。
 
@@ -516,9 +516,9 @@ module.exports = {
 
 `mini-css-extract-plugin` 使用 `css/mini-extra` 作为大小类型，并将此大小类型自动添加到默认类型中。
 
-## 重大变更：性能优化 {#major-changes-performance}
+## 重大变更：性能优化 $#major-changes-performance$
 
-### 持久缓存 {#persistent-caching}
+### 持久缓存 $#persistent-caching$
 
 现在有一个文件系统缓存。它是可选的，可以通过以下配置启用：
 
@@ -558,7 +558,7 @@ module.exports = {
 默认情况下，时间戳将用于开发模式的快照，而文件哈希将用于生产模式。
 文件哈希也允许在 CI 中使用持久性缓存。
 
-### 编译器闲置和关闭 {#compiler-idle-and-close}
+### 编译器闲置和关闭 $#compiler-idle-and-close$
 
 编译器现在需要在使用后关闭。编译器现在会进入和离开空闲状态，并且有这些状态的钩子。插件可能会使用这些钩子来做不重要的工作。(即将持久缓存缓慢地将缓存存储到磁盘上)。在编译器关闭时--所有剩余的工作应该尽可能快地完成。一个回调标志着关闭完成。
 
@@ -568,7 +568,7 @@ module.exports = {
 
 **迁移**：在使用 Node.js API 时，一定要在完成工作后调用 `Compiler.close`。
 
-### 文件生成 {#file-emitting}
+### 文件生成 $#file-emitting$
 
 webpack 过去总是在第一次构建时发出所有的输出文件，但在增量（观察）构建时跳过了写入未更改的文件。
 假设在 webpack 运行时，没有任何其他东西改变输出文件。
@@ -585,9 +585,9 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 我们假设当文件内容发生变化时，内容哈希会发生变化。
 这在一般情况下是正确的，但在 webpack 或插件开发过程中可能并不总是如此。
 
-## 重大变更：长期未解决的问题 {#major-changes-long-outstanding-problems}
+## 重大变更：长期未解决的问题 $#major-changes-long-outstanding-problems$
 
-### 单一文件目标的代码分割 {#code-splitting-for-single-file-targets}
+### 单一文件目标的代码分割 $#code-splitting-for-single-file-targets$
 
 只允许启动单个文件的目标（如 node、WebWorker、electron main）现在支持运行时自动加载引导所需的依赖代码片段。
 
@@ -595,7 +595,7 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 
 请注意，如果目标的代码块加载是异步的，这使得初始评估也是异步的。当使用 `output.library` 时，这可能是一个问题，因为现在导出的值是一个 Promise。
 
-### 更新了解析器 {#updated-resolver}
+### 更新了解析器 $#updated-resolver$
 
 `enhanced-resolve` 更新到了 v5，有以下改进：
 
@@ -605,14 +605,14 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 - 支持 `exports` 和 `imports` 字段等功能。
 - 性能提高
 
-### 没有 JS 的代码块 {#chunks-without-js}
+### 没有 JS 的代码块 $#chunks-without-js$
 
 不包含 JS 代码的块，将不再生成 JS 文件。
 这就允许有只包含 CSS 的代码块。
 
-## 重大变更：未来计划 {#major-changes-future}
+## 重大变更：未来计划 $#major-changes-future$
 
-### 实验特性 {#experiments}
+### 实验特性 $#experiments$
 
 并不是所有的功能都是一开始就稳定的。在 webpack 4 中，我们添加了实验性功能，并在变更日志中注明它们是实验性的，但从配置中并不总是能清楚地看到这些功能是实验性的。
 
@@ -632,15 +632,15 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 
 请注意，这也意味着 WebAssembly 的支持现在被默认禁用。
 
-### 最小 Node.js 版本 {#minimum-nodejs-version}
+### 最小 Node.js 版本 $#minimum-nodejs-version$
 
 最低支持的 Node.js 版本从 6 增加到 10.13.0(LTS)。
 
 **迁移**：升级到最新的 Node.js 版本。
 
-## 配置变更 {#changes-to-the-configuration}
+## 配置变更 $#changes-to-the-configuration$
 
-### 结构的变化 {#changes-to-the-structure}
+### 结构的变化 $#changes-to-the-structure$
 
 - `entry: {}` 现在可以赋值一个空对象（允许使用插件来修改入口）。
 - `target` 支持数组，版本及 browserslist
@@ -768,7 +768,7 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 - `watchOptions.ignored` 可以使用正则匹配
 - 暴露了 `webpack.util.serialization`
 
-### 默认值变更 {#changes-to-the-defaults}
+### 默认值变更 $#changes-to-the-defaults$
 
 - 当 browserslist 配置可用时，`target` 默认为 `"browserslist"`
 - `module.unsafeCache` 现默认只对 `node_modules` 启用
@@ -789,33 +789,33 @@ webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 - `node.global` 中的 `node.__filename` 和 `node.__dirname` 默认为 `false`
 - `stats.errorStack` 默认为 `false`
 
-## 加载器相关变更 {#loader-related-changes}
+## 加载器相关变更 $#loader-related-changes$
 
-### `this.getOptions` {#thisgetoptions}
+### `this.getOptions` $#thisgetoptions$
 
 这个新的 API 应该可以简化加载器中选项的使用。
 它允许传递 JSON 模式进行验证。
 详情请见[PR](https://github.com/webpack/webpack/pull/10017)
 
-### `this.exec` {#thisexec}
+### `this.exec` $#thisexec$
 
 这一点已从加载器上下文中删除
 
 **迁移**：这可以在加载器本身实现。
 
-### `this.getResolve` {#thisgetresolve}
+### `this.getResolve` $#thisgetresolve$
 
 loader API 中的 `getResolve(options)` 将以另一种方式合并选项，参见` module.rule``resolve `。
 
 由于 webpack 5 在不同的发布依赖关系之间存在差异，所以传递一个 `dependencyType` 作为选项可能是有意义的（例如 `"esm"`，`"commonjs"`，或者其他）。
 
-## 重大内部变更 {#major-internal-changes}
+## 重大内部变更 $#major-internal-changes$
 
 ?> 这一部分可能需要更多的完善。
 
 以下改动只与插件作者有关：
 
-### 新的插件运行顺序 {#new-plugin-order}
+### 新的插件运行顺序 $#new-plugin-order$
 
 现在 webpack 5 中的插件在应用配置默认值 **之前** 就会被应用。
 这使得插件可以应用自己的默认值，或者作为配置预设。
@@ -824,7 +824,7 @@ loader API 中的 `getResolve(options)` 将以另一种方式合并选项，参�
 
 **迁移**：只在插件钩子中访问配置。或者最好完全避免访问配置，并通过构造函数获取选项。
 
-### 运行时模块 {#runtime-modules}
+### 运行时模块 $#runtime-modules$
 
 大部分的运行时代码被移到了所谓的"运行时模块"中。这些特殊模块负责添加运行时代码。它们可以被添加到任何块中，但目前总是被添加到运行时块中。"运行时需求"控制哪些运行时模块（或核心运行时部件）被添加到代码包中。这确保了只有使用的运行时代码才会被添加到代码包中。未来，运行时模块也可以添加到按需加载的块中，以便在需要时加载运行时代码。
 
@@ -834,25 +834,25 @@ loader API 中的 `getResolve(options)` 将以另一种方式合并选项，参�
 
 **迁移**：如果你在插件中注入运行时代码到 webpack 运行时，可以考虑使用 RuntimeModules 来代替。instead.
 
-### 序列化 {#serialization}
+### 序列化 $#serialization$
 
 我们添加了一个序列化机制，以允许在 webpack 中对复杂对象进行序列化。它有一个可选的语义，所以那些应该被序列化的类需要被明确地标记出来（并且实现它们的序列化）。大多数模块、所有的依赖关系和一些错误都已经这样做了。
 
 **迁移**：当使用自定义模块或依赖关系时，建议将它们实现成可序列化的，以便从持久化缓存中获益。
 
-### 用于缓存的插件 {#plugins-for-caching}
+### 用于缓存的插件 $#plugins-for-caching$
 
 增加了一个带有插件接口的 `Cache` 类。该类可用于写入和读取缓存。根据配置的不同，不同的插件可以为缓存添加功能。`MemoryCachePlugin` 增加了内存缓存功能。`FileCachePlugin` 增加了持久性（文件系统）缓存。
 
 `FileCachePlugin` 使用序列化机制将缓存项目持久化到磁盘上或从磁盘上恢复。
 
-### 冻结钩子对象 {#hook-object-frozen}
+### 冻结钩子对象 $#hook-object-frozen$
 
 有 `hooks` 的类会冻结其 `hooks` 对象，所以通过这种方式添加自定义钩子已经不可能了。
 
 **迁移**：推荐的添加自定义钩子的方式是使用 WeakMap 和一个静态的 `getXXXHooks(XXX)`(即`getCompilationHook(compilation)`)方法。内部类使用与自定义钩子相同的机制。
 
-### Tapable 插件升级 {#tapable-upgrade}
+### Tapable 插件升级 $#tapable-upgrade$
 
 webpack 3 插件的 compat 层已经被移除。它在 webpack 4 中已经被取消了。
 
@@ -860,13 +860,13 @@ webpack 3 插件的 compat 层已经被移除。它在 webpack 4 中已经被取
 
 **迁移**：使用新的 tapable API。
 
-### Stage 钩子 {#staged-hooks}
+### Stage 钩子 $#staged-hooks$
 
 在封装代码包过程的几个步骤中，不同阶段有多个钩子，即 `optimizeDependenciesBasic`, `optimizeDependencies` 和 `optimizeDependenciesAdvanced`。这些已经被删除，改为一个单一的钩子，它可以与 `stage` 选项一起使用。参见 `OptimizationStages`了解可能的 `stage` 选项值。
 
 **迁移**: 侵入剩余的钩子。你可以添加一个 `stage` 选项。
 
-### Main/Chunk/ModuleTemplate 废弃 {#mainchunkmoduletemplate-deprecation}
+### Main/Chunk/ModuleTemplate 废弃 $#mainchunkmoduletemplate-deprecation$
 
 打包模板已经重构。MainTemplate/ChunkTemplate/ModuleTemplate 被废弃，现在 JavascriptModulesPlugin 负责 JS 模板。
 
@@ -878,7 +878,7 @@ webpack 3 插件的 compat 层已经被移除。它在 webpack 4 中已经被取
 
 **迁移**：按照 deprecation 消息中的建议。主要是指向不同位置的钩子。
 
-### 入口文件描述符 {#entry-point-descriptor}
+### 入口文件描述符 $#entry-point-descriptor$
 
 如果传递一个对象作为入口文件，其值可能是一个字符串、字符串数组或描述符：
 
@@ -894,7 +894,7 @@ module.exports = {
 
 描述符语法可用于向入口文件传递附加选项。
 
-#### 入口文件输出文件名 {#entry-point-output-filename}
+#### 入口文件输出文件名 $#entry-point-output-filename$
 
 默认情况下，入口文件代码块的输出文件名是从`output.filename`中提取的，
 但你可以为特定入口文件指定一个自定义的输出文件名：
@@ -907,7 +907,7 @@ module.exports = {
 };
 ```
 
-#### 入口文件依赖 {#entry-point-dependency}
+#### 入口文件依赖 $#entry-point-dependency$
 
 默认情况下，每个入口文件代码块都存储了它所使用的所有模块。使用 `dependOn`-选项，
 你可以将模块从一个入口文件代码块共享到另一个：
@@ -923,7 +923,7 @@ module.exports = {
 
 app 代码块 将不包含 `react-vendors` 所拥有的模块。
 
-#### 入口文件类库 {#entry-point-library}
+#### 入口文件类库 $#entry-point-library$
 
 入口文件描述符允许为每个入口文件传递不同的 `library` 选项。
 
@@ -946,7 +946,7 @@ module.exports = {
 };
 ```
 
-#### 入口文件运行时 {#entry-point-runtime}
+#### 入口文件运行时 $#entry-point-runtime$
 
 入口文件描述符允许为每个入口文件指定一个 `运行时代码`。
 当指定时，将创建一个以该名称命名的代码块，其中仅包含该条目的运行时代码。
@@ -964,7 +964,7 @@ module.exports = {
 };
 ```
 
-#### 入口文件代码块加载 {#entry-point-chunk-loading}
+#### 入口文件代码块加载 $#entry-point-chunk-loading$
 
 入口文件描述符允许为每个入口文件指定一个 `chunkLoading`。
 这个入口文件的运行时代码将使用这个来加载代码块。
@@ -983,7 +983,7 @@ module.exports = {
 };
 ```
 
-### 排序与 ID {#order-and-ids}
+### 排序与 ID $#order-and-ids$
 
 webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序，以递增的方式分配 ID。现在不再是这样了。顺序将不再用于 ID 的生成，取而代之的是，ID 生成的完全控制在插件中。
 
@@ -991,7 +991,7 @@ webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序
 
 **迁移**：在编译阶段，你不能再依赖模块和代码块的顺序了。
 
-### 从数组到集合(Set) {#arrays-to-sets}
+### 从数组到集合(Set) $#arrays-to-sets$
 
 - Compilation.modules 现在是一个集合
 - Compilation.chunks 现在是一个集合
@@ -1001,7 +1001,7 @@ webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序
 
 **迁移**: 使用集合方法代替数组方法。
 
-### Compilation.fileSystemInfo {#compilationfilesysteminfo}
+### Compilation.fileSystemInfo $#compilationfilesysteminfo$
 
 这个新 class 可以用来以缓存的方式访问文件系统的信息。目前，它允许访问文件和目录的时间戳。如果可能的话，关于时间戳的信息会从监听那里传输过了，否则将由文件系统访问决定。
 
@@ -1013,13 +1013,13 @@ webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序
 
 增加了 `Compiler.modifiedFiles`（类似于 `Compiler.removedFiles`），以便更容易引用更改后的文件。
 
-### Filesystems {#filesystems}
+### Filesystems $#filesystems$
 
 新增了一个类似于 `compiler.inputFileSystem` 和 `compiler.outputFileSystem` 的新 API `compiler.intermediateFileSystem`，用于所有不被认为是输入或输出的 fs 操作，如写入 records，缓存或输出 profiling。
 
 文件系统现在有 `fs` 接口，不再需要 `join` 或 `mkdirp` 等额外方式。但如果它们包含 `join` 或 `dirname` 等类似方法，也会被使用。
 
-### 模块热替换 {#hot-module-replacement}
+### 模块热替换 $#hot-module-replacement$
 
 HMR 运行时已被重构为运行时模块。`HotUpdateChunkTemplate` 已被合并入 `ChunkTemplate` 中。ChunkTemplates 和 plugins 也应处理 `HotUpdateChunk` 了。
 
@@ -1029,7 +1029,7 @@ HMR 运行时的 javascript 部分已从核心 HMR 运行时钟分离了出来�
 
 `import.meta.webpackHot` 公开了与 `module.hot` 相同的 API。当然可以在 ESM 模块（.mjs，package.json 中的 type: "module"）中使用，这些模块不能访问 `module`。
 
-### 工作队列 {#work-queues}
+### 工作队列 $#work-queues$
 
 webpack 曾经通过函数调用函数的形式来进行模块处理，还有一个 `semaphore` 选项限制并行性。`Compilation.semaphore` 已被移除，现在可以使用异步队列处理，每个步骤都有独立的队列：
 
@@ -1045,12 +1045,12 @@ webpack 曾经通过函数调用函数的形式来进行模块处理，还有一
 
 **迁移**：此为新功能，无需迁移。
 
-### Logging {#logging}
+### Logging $#logging$
 
 webpack 内部引入了一些日志记录的方法。
 `stats.logging` 和 `infrastructureLogging` 选项可用于启用这些信息。
 
-### 模块和 chunk 图 {#module-and-chunk-graph}
+### 模块和 chunk 图 $#module-and-chunk-graph$
 
 webpack 曾经在依赖关系中存储了已解析的模块，并在 chunk 中存储引入的模块。但现已发生变化。所有关于模块在模块图中如何连接的信息，现在都存储在 ModulGraph 的 class 中。所有关于模块与 chunk 如何连接的信息现在都已存储在 ChunkGraph 的 class 中。依赖于 chunk 图的信息也存储在相关的 class 中。
 
@@ -1079,13 +1079,13 @@ webpack 曾经在依赖关系中存储了已解析的模块，并在 chunk 中�
 
 **迁移**：在 ModuleGraph 和 ChunkGraph 上使用新的 API。
 
-### Init Fragments {#init-fragments}
+### Init Fragments $#init-fragments$
 
 `DependenciesBlockVariables` 已被移除，改为 `InitFragments`。`DependencyTemplates` 现在可以添加 `InitFragments`，以将代码注入模块源的起始位置。`InitFragments` 允许删除重复数据。
 
 **迁移**：使用 `InitFragments` 代替，而无需在源文件的负索引出插入。
 
-### 模块 Source Types {#module-source-types}
+### 模块 Source Types $#module-source-types$
 
 Modules 现在必须通过 `Module.getSourceTypes()` 来定义它们支持的源码类型。根据这一点，不同的插件会用这些类型调用 `source()`。对于源类型为 `javascript` 的 `JavascriptModulesPlugin` 会将源代码嵌入到 bundle 中。源类型 `webassembly` 的 `WebAssemblyModulesPlugin` 会 emit 一个 wasm 文件。同时，也支持自定义源类型，例如，mini-css-extract-plugin 会使用源类型为 `stylesheet` 将源码嵌入到 css 文件中。
 
@@ -1093,27 +1093,27 @@ Modules 现在必须通过 `Module.getSourceTypes()` 来定义它们支持的源
 
 **迁移**：自定义模块需要实现这些新的接口方法。
 
-### Stats 的插件 {#plugins-for-stats}
+### Stats 的插件 $#plugins-for-stats$
 
 Stats 的 `preset`，`default`，`json` 和 `toString` 现已由插件系统内置。将当前的 Stats 转换为插件。
 
 **迁移**：你现在可以自定义它，而无需替换整个 Stats 功能。额外的信息现在可以添加到 stats json 中，而不是单独编写文件。
 
-### 全新的监听 {#new-watching}
+### 全新的监听 $#new-watching$
 
 webpack 所使用的监听已重构。它之前使用的是 `chokidar` 和原生依赖 `fsevents`（仅在 macOS 上）。现在它在只基于原生的 Node.js 中的 `fs`。这意味着在 webpack 中已经没有原生依赖了。
 
 它还能在监听时捕捉更多关于文件系统的信息。目前，它还可以捕获 mtimes 和监视事件时间，以及丢失文件的信息。为此，`WatchFileSystem` API 做了一点小改动。在修改的同时，我们还将 Arrays 转换为 Sets，Objects 转换为 Maps。
 
-### SizeOnlySource after emit {#sizeonlysource-after-emit}
+### SizeOnlySource after emit $#sizeonlysource-after-emit$
 
 webpack 现在使用 `SizeOnlySource` 替换 `Compilation.assets` 中的 Sources，以减少内存占用。
 
-### Emitting assets multiple times {#emitting-assets-multiple-times}
+### Emitting assets multiple times $#emitting-assets-multiple-times$
 
 原来的 `Multiple assets emit different content to the same filename` 警告，现在成为错误。
 
-### ExportsInfo {#exportsinfo}
+### ExportsInfo $#exportsinfo$
 
 重构了模块导出信息的存储方式。ModuleGraph 现在为每个 `Module` 提供了一个 `ExportsInfo`，它用于存储每个 export 的信息。如果模块仅以副作用的方式使用，它还存储了关于未知 export 的信息，
 
@@ -1127,7 +1127,7 @@ webpack 现在使用 `SizeOnlySource` 替换 `Compilation.assets` 中的 Sources
   - 用于重新导出命名空间对象：`import * as X from "..."; export { X };`
   - 用于表示 JSON 模块中的结构
 
-### 代码生成阶段 {#code-generation-phase}
+### 代码生成阶段 $#code-generation-phase$
 
 编译的代码生成功能作为单独的编译阶段。它不再隐藏在 `Module.source()` 和 `Module.getRuntimeRequirements()` 中运行了。
 
@@ -1135,7 +1135,7 @@ webpack 现在使用 `SizeOnlySource` 替换 `Compilation.assets` 中的 Sources
 
 **迁移**：`Module.source()` 和 `Module.getRuntimeRequirements()` 已弃用。使用 `Module.codeGeneration()` 代替。
 
-### 依赖关系参考 {#dependencyreference}
+### 依赖关系参考 $#dependencyreference$
 
 webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（`Compilation.getDependencyReference` 会返回一个 `DependencyReference`）
 该类型用于引入关于该引用的所有信息，如 被引用的模块，已经引入了哪些 export，如果是弱引用，还需要订阅一些相关信息。
@@ -1149,7 +1149,7 @@ webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（
 - `Dependency` 的 class 上会有一个 `weak` 的 flag
 - 排序只与 `HarmonyImportDependencies` 相关，可以通过 `sourceOrder` 属性获取
 
-### Presentational Dependencies {#presentational-dependencies}
+### Presentational Dependencies $#presentational-dependencies$
 
 这是 `NormalModules` 的一种新 Dependencies 类型：Presentational Dependencies
 
@@ -1158,7 +1158,7 @@ webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（
 
 这些依赖关系的处理成本较低，webpack 会尽可能地使用它们
 
-### 弃用 loaders {#deprecated-loaders}
+### 弃用 loaders $#deprecated-loaders$
 
 - [`null-loader`](https://github.com/webpack-contrib/null-loader)
 
@@ -1186,7 +1186,7 @@ webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（
   };
   ```
 
-## 微小改动 {#minor-changes}
+## 微小改动 $#minor-changes$
 
 - `Compiler.name`：当生成带有绝对路径的编译器名称时，请确保名称使用 `|` 或 `!` 分隔。
     - 使用空格作为分隔符的做法现已不再适用。（路径可以保护空格）
@@ -1223,7 +1223,7 @@ webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（
 - 当引用的 env 变量缺失且没有降级数据时，EnvironmentPlugin 目前会展示一个错。
 - 从 schema 中移除 `serve` 熟悉。
 
-## 其他微小改动 {#other-minor-changes}
+## 其他微小改动 $#other-minor-changes$
 
 - 移除内置目录，用运行时代替内置目录
 - 移除不适用的特性

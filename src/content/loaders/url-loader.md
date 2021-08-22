@@ -23,7 +23,7 @@ translators:
 
 用于将文件转换为 base64 URI 的 loader。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 首先，你需要安装 `url-loader`：
 
@@ -65,7 +65,7 @@ module.exports = {
 
 然后通过你的首选方法运行 `webpack`。
 
-## 选项 {#options}
+## 选项 $#options$
 
 |             Name              |            Type             |                            Default                            | Description                                                                         |
 | :---------------------------: | :-------------------------: | :-----------------------------------------------------------: | :---------------------------------------------------------------------------------- |
@@ -76,14 +76,14 @@ module.exports = {
 |  **[`fallback`](#fallback)**  |         `{String}`          |                         `file-loader`                         | 指定当目标文件大小超过限制时的替代 loader。                                              |
 |  **[`esModule`](#esmodule)**  |         `{Boolean}`         |                            `true`                             | 使用 ES 模块语法。                                                                     |
 
-### `limit` {#limit}
+### `limit` $#limit$
 
 类型: `Boolean|Number|String`
 默认值: `true`
 
 该值可以通过 loader 的 options 参数来指定，默认为 `undefined`。
 
-#### `Boolean` {#boolean}
+#### `Boolean` $#boolean$
 
 开启/关闭将文件转换为 base64。
 
@@ -109,7 +109,7 @@ module.exports = {
 };
 ```
 
-#### `Number|String` {#numberstring}
+#### `Number|String` $#numberstring$
 
 指定文件的最大体积（以字节为单位）。
 如果文件体积**等于**或**大于**限制，默认情况下将使用 [`file-loader`](/loaders/file-loader/) 并将所有参数传递给它。
@@ -138,7 +138,7 @@ module.exports = {
 };
 ```
 
-### `mimetype` {#mimetype}
+### `mimetype` $#mimetype$
 
 类型: `Boolean|String`
 默认值: 基于第三方库 [mime-types](https://github.com/jshttp/mime-types) 来获取 mimetype。
@@ -146,7 +146,7 @@ module.exports = {
 指定用于内联文件的 `mimetype`。
 如果未指定，将使用第三方库 [mime-types](https://github.com/jshttp/mime-types) 来获取 mimetype。
 
-#### `Boolean` {#boolean}
+#### `Boolean` $#boolean$
 
 当值为 `true` 时，允许使用第三方库 [mime-types](https://github.com/jshttp/mime-types) 来获取 mimetype。
 而为 `false` 时，则从数据 URL 中删除 `mediatype` 部分（如果省略，则默认为 `text/plain；charset=US-ASCII`）。
@@ -173,7 +173,7 @@ module.exports = {
 };
 ```
 
-#### `String` {#string}
+#### `String` $#string$
 
 设置要转换的文件的 MIME 类型。
 
@@ -199,7 +199,7 @@ module.exports = {
 };
 ```
 
-### `encoding` {#encoding}
+### `encoding` $#encoding$
 
 类型: `Boolean|String`
 默认值: `base64`
@@ -207,7 +207,7 @@ module.exports = {
 指定用于内联文件的编码格式。
 如果未指定，则 `encoding` 为 `base64`。
 
-#### `Boolean` {#boolean}
+#### `Boolean` $#boolean$
 
 如果不想使用任何编码，可以将 “encoding” 设置为 `false`，如果将其设置为 `true`，则默认使用 `base64`。
 
@@ -233,7 +233,7 @@ module.exports = {
 };
 ```
 
-#### `String` {#string}
+#### `String` $#string$
 
 它支持下面的编码格式（[Node.js Buffers and Character Encodings](https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings)）：`["utf8","utf16le","latin1","base64","hex","ascii","binary","ucs2"]`。
 
@@ -259,7 +259,7 @@ module.exports = {
 };
 ```
 
-### `generator` {#generator}
+### `generator` $#generator$
 
 类型： `Function`
 默认值：`(mimetype, encoding, content, resourcePath) => mimetype;encoding,base64_content`
@@ -298,7 +298,7 @@ module.exports = {
 };
 ```
 
-### `fallback` {#fallback}
+### `fallback` $#fallback$
 
 类型: `String`
 默认值: `'file-loader'`
@@ -354,7 +354,7 @@ module.exports = {
 };
 ```
 
-### `esModule` {#esmodule}
+### `esModule` $#esmodule$
 
 类型: `Boolean`
 默认值: `true`
@@ -386,9 +386,9 @@ module.exports = {
 };
 ```
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### SVG {#svg}
+### SVG $#svg$
 
 SVG 可以被压缩至体积更小，尽量避免使用 `base64`。
 你可以从[这里](https://css-tricks.com/probably-dont-base64-svg/)了解更多信息。
@@ -418,13 +418,13 @@ module.exports = {
 };
 ```
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果你还没有阅读我们的贡献指南，请花一点时间阅读。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/url-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/url-loader/blob/master/LICENSE)
 

@@ -20,7 +20,7 @@ translators:
 
 通过 `remark` 加载 markdown。
 
-## 用法 {#usage}
+## 用法 $#usage$
 
 只需将 loader 添加到您的配置中，并设置 options。
 
@@ -64,14 +64,14 @@ module.exports = {
 我们不再支持任何 `react` 的特殊功能。
 如果您对在 JSX 中使用 Markdown 感兴趣，请参阅很棒的 [MDX](https://mdxjs.com/) 项目。
 
-## Options {#options}
+## Options $#options$
 
 |                     Name                      |    Type     | Default | Description              |
 | :-------------------------------------------: | :---------: | :-----: | :----------------------- |
 |     **[`remarkOptions`](#remarkoptions)**     | `{Object}`  |  `{}`   | Remark options           |
 | **[`removeFrontMatter`](#removefrontmatter)** | `{Boolean}` | `true`  | Remove removeFrontMatter |
 
-### remarkOptions {#remarkoptions}
+### remarkOptions $#remarkoptions$
 
 |            Name             |          Type          |   Default   | Description                                                                                       |
 | :-------------------------: | :--------------------: | :---------: | :------------------------------------------------------------------------------------------------ |
@@ -79,14 +79,14 @@ module.exports = {
 | **[`settings`](#settings)** |       `{Object}`       | `undefined` | Remark settings                                                                                   |
 |     **[`data`](#data)**     |       `{Object}`       | `undefined` | Information available to all plugins                                                              |
 
-#### plugins {#plugins}
+#### plugins $#plugins$
 
 Type: `Array<String|Array>`
 Default: `[]`
 
 可以和 [`remark` plugins](https://github.com/wooorm/remark/blob/master/doc/plugins.md) 一起使用
 
-##### String {#string}
+##### String $#string$
 
 **webpack.config.js**
 
@@ -115,7 +115,7 @@ module.exports = {
 };
 ```
 
-##### Array {#array}
+##### Array $#array$
 
 如果需要为插件指定 options，可以使用数组传递插件，其中第二个参数就是将要设置的 options。
 
@@ -157,7 +157,7 @@ module.exports = {
 };
 ```
 
-#### settings {#settings}
+#### settings $#settings$
 
 Type: `Object`
 Default: `undefined`
@@ -192,7 +192,7 @@ module.exports = {
 };
 ```
 
-#### data {#data}
+#### data $#data$
 
 Type: `Object`
 Default: `undefined`
@@ -234,7 +234,7 @@ module.exports = {
 };
 ```
 
-### removeFrontMatter {#removefrontmatter}
+### removeFrontMatter $#removefrontmatter$
 
 Type: `Boolean`
 Default: `true`
@@ -270,16 +270,16 @@ module.exports = {
 };
 ```
 
-## 启发 {#inspiration}
+## 启发 $#inspiration$
 
 这个项目收到了以下开源作品的启发：
 
 - [`react-markdown-loader`](https://github.com/javiercf/react-markdown-loader)
 - [`marksy`](https://github.com/cerebral/marksy)
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### Markdown 转为 HTML {#markdown-to-html}
+### Markdown 转为 HTML $#markdown-to-html$
 
 要获得 html，需要在 remark 插件中添加 [`remark-html`](https://github.com/wooorm/remark-html)，并在 `webpack.config` 中添加 [`html-loader`](/loaders/html-loader/)。
 
@@ -318,7 +318,7 @@ module.exports = {
 };
 ```
 
-### Markdown 转为 Markdown {#markdown-to-markdown}
+### Markdown 转为 Markdown $#markdown-to-markdown$
 
 **index.js**
 
@@ -347,13 +347,13 @@ module.exports = {
 };
 ```
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果您还没有贡献代码，请花点时间阅读我们的贡献指南。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/remark-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/remark-loader/blob/master/LICENSE)
 

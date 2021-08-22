@@ -18,13 +18,13 @@ translators:
 
 好的消息是，虽然有一些功能重叠，但是如果使用方式正确，任务运行工具和模块打包工具还是能够一起协同工作。本指南提供了关于如何将 webpack 与一些流行的任务运行工具集成在一起的高度概述。
 
-## NPM Scripts {#npm-scripts}
+## NPM Scripts $#npm-scripts$
 
 通常 webpack 用户使用 npm [`scripts`](https://docs.npmjs.com/misc/scripts) 来作为任务执行工具。这是比较好的开始。然而跨平台支持可能是个问题，但是有几种解决方案。许多用户（但不是大多数用户）直接使用 npm `scripts` 和各种级别的 webpack 配置和工具。
 
 因此，虽然 webpack 核心重点是打包，但是可以通过各种扩展，将它用于任务运行工具的常见工作。集成一个单独的工具会增加复杂度，因此在开始前一定要权衡利弊。
 
-## Grunt {#grunt}
+## Grunt $#grunt$
 
 对于那些使用 Grunt 的人，我们推荐使用 [`grunt-webpack`](https://www.npmjs.com/package/grunt-webpack) package。使用 `grunt-webpack` 你可以将 webpack 或 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 作为一项任务(task)执行，访问 [grunt template tags](https://gruntjs.com/api/grunt.template) 中的统计信息，拆分开发和生产配置等等。如果还没有安装 `grunt-webpack` 和 `webpack`，请先安装它们：
 
@@ -56,7 +56,7 @@ module.exports = function (grunt) {
 
 获取更多信息，请查看 [仓库](https://github.com/webpack-contrib/grunt-webpack)。
 
-## Gulp {#gulp}
+## Gulp $#gulp$
 
 在 [`webpack-stream`](https://github.com/shama/webpack-stream) package（也称作 `gulp-webpack`） 的帮助下，可以相当直接地将 Gulp 与 webpack 集成。在这种情况下，不需要单独安装 `webpack`，因为它是 `webpack-stream` 直接依赖：
 
@@ -85,7 +85,7 @@ gulp.task('default', function () {
 
 获取更多信息，请查看 [仓库](https://github.com/shama/webpack-stream)。
 
-## Mocha {#mocha}
+## Mocha $#mocha$
 
 [`mocha-webpack`](https://github.com/zinserjan/mocha-webpack) 可以将 Mocha 与 webpack 完全集成。这个仓库提供了很多关于其优势和劣势的细节，基本上 `mocha-webpack` 只是一个简单封装，提供与 Mocha 几乎相同的 CLI，并提供各种 webpack 功能，例如改进了 watch mode 和改进了路径分析。这里是一个如何安装并使用它来运行测试套件的示例（在 `./test` 中找到）：
 
@@ -96,7 +96,7 @@ mocha-webpack 'test/**/*.js'
 
 获取更多信息，请查看 [仓库](https://github.com/zinserjan/mocha-webpack)。
 
-## Karma {#karma}
+## Karma $#karma$
 
 [`karma-webpack`](https://github.com/webpack-contrib/karma-webpack) package 允许你使用 webpack 预处理 [Karma](https://karma-runner.github.io/1.0/index.html) 中的文件。
 

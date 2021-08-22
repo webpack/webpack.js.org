@@ -22,7 +22,7 @@ translators:
 
 加载 Sass/SCSS 文件并将他们编译为 CSS。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 首先，你需要安装 `sass-loader`：
 
@@ -82,7 +82,7 @@ module.exports = {
 
 最后通过你喜欢的方式运行 `webpack`。
 
-### 解析 `import` 的规则 {#resolving-import-at-rules}
+### 解析 `import` 的规则 $#resolving-import-at-rules$
 
 Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)。
 
@@ -106,7 +106,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 因为 CSS 和 Sass 文件没有用于导入相关文件的特殊语法，所以 Webpack 需要区分 `bootstrap` 和 `~bootstrap`。
  `@import "style.scss"` 和 `@import "./style.scss";` 两种写法是相同的。
 
-### `url(...)` 的问题 {#problems-with-url}
+### `url(...)` 的问题 $#problems-with-url$
 
 由于 Saass 的实现没有提供 [url 重写](https://github.com/sass/libsass/issues/532)的功能，所以相关的资源都必须是相对于输出文件（ouput）而言的。
 
@@ -120,7 +120,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 - 将 [resolve-url-loader](https://github.com/bholloway/resolve-url-loader) 设置于 loader 链中的 `sass-loader` 之前，就可以重写 url。
 - Library 作者一般都会提供变量，用来设置资源路径。比如 [bootstrap-sass](https://github.com/twbs/bootstrap-sass) 可以通过 `$icon-font-path` 进行设置。
 
-## 配置选项 {#options}
+## 配置选项 $#options$
 
 |                   名称                    |         类型         |       默认值       | Description                                    |
 | :---------------------------------------: | :------------------: | :----------------: | :--------------------------------------------- |
@@ -130,7 +130,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 |  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |    `undefined`     | 在实际的输入文件之前添加 `Sass` /`SCSS` 代码。 |
 | **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |       `true`       | 启用 / 禁用默认的 Webpack importer。           |
 
-### `implementation` {#implementation}
+### `implementation` $#implementation$
 
 类型： `Object | String`
 默认值： `sass`
@@ -171,7 +171,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 
 `implementation` 选项可以以模块的形式接受 `sass`（`Dart Sass`）或 `node-sass`。
 
-#### Object {#object}
+#### Object $#object$
 
 例如，为了使用 Dart Sass，你应该传递：
 
@@ -198,7 +198,7 @@ module.exports = {
 };
 ```
 
-#### String {#string}
+#### String $#string$
 
 例如，为了使用 Dart Sass，你应该传递：
 
@@ -302,7 +302,7 @@ module.exports = {
 };
 ```
 
-### `sassOptions` {#sassoptions}
+### `sassOptions` $#sassoptions$
 
 类型：`Object|Function`
 默认值：Sass 实现的默认值
@@ -324,7 +324,7 @@ module.exports = {
 - [Dart Sass 文档](https://github.com/sass/dart-sass#javascript-api) 提供了所有可用的 `sass` 选项。
 - [Node Sass 文档](https://github.com/sass/node-sass/#options) 提供了所有可用的 `node-sass` 选项。
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 使用对象设置 Sass 实现的启动选项。
 
@@ -355,7 +355,7 @@ module.exports = {
 };
 ```
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 允许通过 loader 上下文为 Sass 实现设置不同的选项。
 
@@ -395,7 +395,7 @@ module.exports = {
 };
 ```
 
-### `sourceMap` {#sourcemap}
+### `sourceMap` $#sourcemap$
 
 类型：`Boolean`
 默认值：取决于 `compiler.devtool` 的值
@@ -467,7 +467,7 @@ module.exports = {
 };
 ```
 
-### `additionalData` {#additionaldata}
+### `additionalData` $#additionaldata$
 
 类型：`String|Function`
 默认值：`undefined`
@@ -477,7 +477,7 @@ module.exports = {
 
 当某些 Sass 变量取决于环境时，这非常有用：
 
-#### `String` {#string}
+#### `String` $#string$
 
 ```js
 module.exports = {
@@ -501,7 +501,7 @@ module.exports = {
 };
 ```
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 ##### Sync
 
@@ -571,7 +571,7 @@ module.exports = {
 };
 ```
 
-### `webpackImporter` {#webpackimporter}
+### `webpackImporter` $#webpackimporter$
 
 类型：`Boolean`
 默认值：`true`
@@ -605,9 +605,9 @@ module.exports = {
 };
 ```
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### 提取样式表 {#extracts-css-into-separate-files}
+### 提取样式表 $#extracts-css-into-separate-files$
 
 对于生产版本，我们建议从 bundle 中提取 CSS，以便之后可以使 CSS/JS 资源并行加载。
 
@@ -648,7 +648,7 @@ module.exports = {
 };
 ```
 
-### Source maps {#source-maps}
+### Source maps $#source-maps$
 
 开启/关闭 source map 的生成。
 
@@ -686,13 +686,13 @@ module.exports = {
 
 如果你要在 Chrome 中编辑原始的 Sass 文件，建议阅读 [这篇不错的博客](https://medium.com/@toolmantim/getting-started-with-css-sourcemaps-and-in-browser-sass-editing-b4daab987fb0)。具体示例参考 [test/sourceMap](https://github.com/webpack-contrib/sass-loader/tree/master/test)。
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果你还没有阅读过我们的贡献指南，请花一点时间阅读它。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/sass-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/sass-loader/blob/master/LICENSE)
 

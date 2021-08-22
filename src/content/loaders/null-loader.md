@@ -24,7 +24,7 @@ translators:
 例如，项目依赖于一个 ES6 库，该库会导入你不需要的 polyfill，
 因此，删除它不会造成功能上的缺失。
 
-## 起步 {#getting-started}
+## 起步 $#getting-started$
 
 首先，你需要预先安装 `null-loader`;
 
@@ -54,13 +54,13 @@ module.exports = {
 
 然后，根据你习惯的方式运行 `webpack`。
 
-## 贡献指南 {#contributing}
+## 贡献指南 $#contributing$
 
 如果你从未阅读过我们的贡献指南，请在上面花点时间。
 
 [贡献指南](https://github.com/webpack-contrib/null-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/null-loader/blob/master/LICENSE)
 

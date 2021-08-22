@@ -21,7 +21,7 @@ translators:
 
 运行以下 loader 在 worker pool 中。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 ```bash
 npm install --save-dev thread-loader
@@ -39,7 +39,7 @@ npm install --save-dev thread-loader
 
 请仅在耗时的操作中使用此 loader！
 
-### 示例 {#examples}
+### 示例 $#examples$
 
 **webpack.config.js**
 
@@ -127,13 +127,13 @@ threadLoader.warmup(
 );
 ```
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果还未阅读贡献指南，请抽时间进行阅读。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/thread-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/thread-loader/blob/master/LICENSE)
 

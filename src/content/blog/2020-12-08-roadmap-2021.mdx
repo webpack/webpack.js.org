@@ -9,7 +9,7 @@ translators:
 
 webpack 5 正式发布已有两月之久。由于赞助方面出了些小状况，我们不能再像之前那样花费很多时间在 webpack 上面了。我（@sokra）个人休息了一段时间，并在这期间做了一些兼职项目。极具讽刺的是，当我在使用 webpack 5 及其所有前沿特性（asset modules，支持 worker，持久化缓存）时，我又发现了 webpack 5 中的一些 bug，而这些 bug 是大家将自己项目升级至 webpack 5 时可能会遇到的，因此，大量时间被用于修复这些 bug。以下是关于这些 bug 的小结：
 
-## 从发布至今有哪些变化？ {#what-happened-so-far}
+## 从发布至今有哪些变化？ $#what-happened-so-far$
 
 webpack 中又暴露了一些东西，其中包括类型及运行时相关的内容。同时，我们对一些处理性能低效的代码进行了改进。没有分号的代码曾在某些情况下生成一些无效/错误的代码，这一点也得到了修复。无副作用（side-effect-free）的代码 + 串连模块（concatenated modules）+ 重导出的组合时，会出现意料之外的情况，这一点也已修复（至少是已知的）。
 
@@ -36,11 +36,11 @@ webpack 中又暴露了一些东西，其中包括类型及运行时相关的内
 
 到此为止，对于这次 bug 修复的体验，希望不会让你感到无聊...
 
-## Roadmap 2021 {#roadmap-2021}
+## Roadmap 2021 $#roadmap-2021$
 
 因此，假设我们的赞助一切正常，以下为 2021 年的开发计划：
 
-### 进一步稳定 {#further-stabilizing}
+### 进一步稳定 $#further-stabilizing$
 
 我们的首要任务是稳定 webpack 5。
 目前来说，情况还不错。
@@ -49,7 +49,7 @@ webpack 中又暴露了一些东西，其中包括类型及运行时相关的内
 但处理特殊场景是 webpack 的强项之一（应该继续保持），所以我们要继续努力修复这些问题。
 我们认为，很多 webpack 用户需要通过自定义内容来进行构建，而这正是 webpack 的可配置性和丰富的插件系统所提供的。
 
-### EcmaScript Modules {#ecmascript-modules}
+### EcmaScript Modules $#ecmascript-modules$
 
 EcmaScript 模块（ESM）正在慢慢得到广泛的应用。
 在开发时，它们已然成为编写代码的首选标准。
@@ -60,7 +60,7 @@ EcmaScript 模块（ESM）正在慢慢得到广泛的应用。
 
 在 webpack 中，有许多地方可以改进对 ESM 的支持：
 
-#### ESM 作为 chunk 加载机制 {#esm-as-chunk-loading-mechanism}
+#### ESM 作为 chunk 加载机制 $#esm-as-chunk-loading-mechanism$
 
 当目标环境为 web 时，webpack 通过 `script` 标签加载 chunk。
 当目标环境为 node.js 时，webpack 通过 `require` 或 `fs` + `vm` 的方式加载 chunk。
@@ -69,7 +69,7 @@ EcmaScript 模块（ESM）正在慢慢得到广泛的应用。
 在不远的将来，这些环境都会支持 ESM，更重要的是会支持动态的 `import()` 函数。
 因此，基于 `import()` 的 chunk 加载机制可以一统所有环境，同时可能只需更少的运行时代码。
 
-#### 自执行的 chunk {#self-executed-chunks}
+#### 自执行的 chunk $#self-executed-chunks$
 
 目前 webpack 中按需加载的 chunk 总是模块的容器，从不直接执行模块代码。
 当在模块中编写 `import("./module")` 时，会被编译成 `__webpack_load_chunk__("chunk-containing-module.js").then(() => __webpack_require__("./module"))`。
@@ -78,14 +78,14 @@ EcmaScript 模块（ESM）正在慢慢得到广泛的应用。
 
 目前是否值得还尚未可知，但至少值得研究一下。
 
-#### ESM exports {#esm-exports}
+#### ESM exports $#esm-exports$
 
 目前不可能通过设置 `output.library.type: "module"`，为一个 bundle 生成 ESM export。
 这将在 webpack 的 bundle 集成到 ESM 加载环境或内联 script 中时非常有效。
 
 T> webpack 4 时，其实有一个插件可以实现该效果，但是最好还是原生支持。
 
-#### ESM externals (import) {#esm-externals-import}
+#### ESM externals (import) $#esm-externals-import$
 
 webpack 运行定义 `externals` 模块，这些模块并不存在在 bundle 中，而是运行时才加载。
 有许多类型的外部资源，从 CommonJS/AMD/System 的全局加载再到经典的 script 标签加载。
@@ -112,7 +112,7 @@ export default {
 
 W> 使用多个不同的 ESM CDN 将无法工作。这里只是个示例。
 
-#### ESM library {#esm-library}
+#### ESM library $#esm-library$
 
 当支持 ESM 的 export 和 import 时，开发者可能会认为构建一个 library 是有意义的，在某些情况下可能如此，但是在大部分情况下，原生 bundle 会导致更糟糕的结果。
 其中最大的问题是，`"sideEffects": false` 的 flag。它会影响每个文件的模块，从而跳过整个模块。当连接多个无副作用模块时，不再支持跳过各个模块，当没有使用所有库的出口时，会导致优化效果变差。
@@ -122,13 +122,13 @@ W> 使用多个不同的 ESM CDN 将无法工作。这里只是个示例。
 我可以想到一种特殊的模式，它不使用分块，而是通过 ESM 的 import 和 export（或者 CommonJS 的 `require`）触发原始（处理过的）的模块连接。
 所以，这意味着 loader、模块图和资产会优化运行，但是不会创建 chunk 图，模块图中的每个模块会作为单独的文件发出（emit）。
 
-#### 严格模式警告 {#strict-mode-warnings}
+#### 严格模式警告 $#strict-mode-warnings$
 
 当生成 ESM bundle 包时，其中所有的代码都会被强制转为严格模式。
 这对许多模块来说，问题不大。但是有些旧的 package 可能会在不同语义下出现问题。
 我们需对这些情况发出警告。
 
-### 更多一等公民 {#more-first-class-citizen}
+### 更多一等公民 $#more-first-class-citizen$
 
 webpack 4 和 5 在支持非 JS 模块方面做了很多工作，webpack 5 已默认支持了一部分模块类型：JS (ESM/CJS/AMD)，JSON，WebAssembly，Asset。
 从 webpack 5 开始，我们的长期目标之一就是成为一个 web 应用优化器，目标是支持所有浏览器支持的东西。
@@ -140,7 +140,7 @@ WebAssembly 和 JSON 已被支持，即使提案还未完成。
 
 但完整的情况还缺少两种资源类型：HTML 和 CSS。
 
-#### CSS 作为模块 {#css-as-modules}
+#### CSS 作为模块 $#css-as-modules$
 
 目前 webpack 通过 `css-loader`，`style-loader` 或者 `mini-css-extract-plugin` 来支持 CSS。
 这很实用，但我认为我们可以通过在 webpack 中支持 CSS 来为原生模块类型做更多事情。
@@ -158,7 +158,7 @@ WebAssembly 和 JSON 已被支持，即使提案还未完成。
 通常，webpack 会和提案保持一致，因此，这里需要斟酌一下。
 我们必须考虑是否可以避免潜在的冲突。
 
-#### HTML 作为入口 {#html-as-entrypoint}
+#### HTML 作为入口 $#html-as-entrypoint$
 
 灵感来源于 Parcels 的例子，我们也希望支持 HTML 的原生入口。
 要支持这一点，会与 webpack 成为 web 应用优化器的目标不谋而合，因为一切 web 应用的异常都是从 HTML 开始的。
@@ -169,16 +169,16 @@ WebAssembly 和 JSON 已被支持，即使提案还未完成。
 
 HTML 入口也将受益于 CSS 模块和 Asset 模块，因为这些资源也可以在 HTML 中引用（例如 `<link rel=stylesheet />`，`<img src="..." />`，`<link rel=icon />`）。
 
-#### HTML 模块 {#html-modules}
+#### HTML 模块 $#html-modules$
 
 还有一个提案，就是关于在浏览器中原生支持引入 HTML，此提案我们会同步跟进，这与 HTML 作为入口的想法不谋而合。
 
-### SourceMap 性能优化 {#sourcemap-performance}
+### SourceMap 性能优化 $#sourcemap-performance$
 
 在 webpack 中使用（完整的） SourceMaps，成本略高，因为 SourceMap 处理的性能并不是最好的。
 这点我们要为 webpack 做对应优化，同时也要为 terser 优化，因为 webpack 默认将其作为 minimizer 的。
 
-### `exports`/`imports` package.json field {#exports-imports-package-json-field}
+### `exports`/`imports` package.json field $#exports-imports-package-json-field$
 
 Node.js 14 增加了对 package.json 中 `exports` 字段的支持，允许定义一个 package 的入口。
 Webpack 5 也遵循了这一点，甚至增加了额外的字段，例如 `production/development`。
@@ -187,7 +187,7 @@ Webpack 5 也遵循了这一点，甚至增加了额外的字段，例如 `produ
 
 这一点我们也想跟进。
 
-### 完善 CommonJS 分析 {#improve-commonjs-analysis}
+### 完善 CommonJS 分析 $#improve-commonjs-analysis$
 
 尽管未来 ESM 是趋势，但在 npm 中仍然有很多 CommonJS 的 package 在使用。
 Webpack 5 增加了对 CommonJS 模块的分享，使得这些模块大部分都能实现 Tree Shaking。
@@ -195,13 +195,13 @@ Webpack 5 增加了对 CommonJS 模块的分享，使得这些模块大部分都
 但是我们可以做的更多。虽然支持了许多 export 模式，但仅支持了少数几个 import 模式。
 我们希望增加对更多模式的支持，让 CommonJS 模块得到进一步优化。
 
-### 模块联邦（Module Federation）的 HMR {#hot-module-replacement-for-module-federation}
+### 模块联邦（Module Federation）的 HMR $#hot-module-replacement-for-module-federation$
 
 Webpack 5 新增了一个全新的特性名为 "Module Federation"，可以在运行时将多个构建整合在一起。
 目前，HMR 一次仅支持单个构建，而且两个构建间无法进行更新。
 我们希望对此进行改进，并允许 HMR 在不同版本间实现更新，这将改善正在开发 federation 的应用程序。
 
-### 提示系统 {#hinting-system}
+### 提示系统 $#hinting-system$
 
 目前，webpack 会向用户展示警告和错误。
 在构建过程中，有许多情况下，我们可以告知用户一些信息，比如潜在的问题或优化方案，但它们并不适合作为警告或错误输出，我们不想用这些信息来冗余输出信息。
@@ -209,7 +209,7 @@ Webpack 5 新增了一个全新的特性名为 "Module Federation"，可以在�
 我们希望在构建过程中收集所有提示（插件可以 emit 一些），但只在输出中展示有限的内容（默认只展示一个）。
 这应该会为用户带来更好的开发体验。
 
-### 多线程 {#multi-threading}
+### 多线程 $#multi-threading$
 
 尽管 Persistent Caching 使得缓存构建的速度有了质的提示，但不使用 Persistent Cache 的初始构建仍有一定的改进空间。
 Node.js 中的 JavaScript 执行默认是单线程的，但最近增加的功能允许使用 `worker_threads`，这是一个类似于 WebWorker 的 API。
@@ -218,7 +218,7 @@ Node.js 中的 JavaScript 执行默认是单线程的，但最近增加的功能
 
 此功能已在我们的投票名单中很久了，但至今没有多少人为此投票。不知大家是否需要此功能？
 
-### WebAssembly {#webassembly}
+### WebAssembly $#webassembly$
 
 目前，WebAssembly 是实验性功能，默认情况下不启用。
 一旦此提案达到 Stage 4 时，我们会默认启用。
@@ -226,7 +226,7 @@ Node.js 中的 JavaScript 执行默认是单线程的，但最近增加的功能
 这也可能使得生态系统更广泛地采用 WebAssembly。
 我认为 2021 年，可能在此领域会有更深入的探索。
 
-## 免责声明 {#disclaimer}
+## 免责声明 $#disclaimer$
 
 此工作计划并非一成不变。
 Web 生态系统变化如此之快，以至于我们最终可能会实现完全不同的内容，而我们此时可能并未意识到。

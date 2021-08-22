@@ -36,7 +36,7 @@ _shim_ 另外一个极其有用的使用场景就是：当你希望 [polyfill](h
 
 T> 为了方便，本指南继续沿用 [起步](/guides/getting-started) 中的代码示例。在继续之前，请确保你已经熟悉这些配置。
 
-## Shimming 预置全局变量 {#shimming-globals}
+## Shimming 预置全局变量 $#shimming-globals$
 
 让我们开始第一个 shimming 全局变量的用例。在此之前，先看下我们的项目：
 
@@ -154,7 +154,7 @@ webpack 5.4.0 compiled successfully in 2910 ms
 
 这样就能很好的与 [tree shaking](/guides/tree-shaking) 配合，将 `lodash` library 中的其余没有用到的导出去除。
 
-## 细粒度 Shimming {#granular-shimming}
+## 细粒度 Shimming $#granular-shimming$
 
 一些遗留模块依赖的 `this` 指向的是 `window` 对象。在接下来的用例中，调整我们的 `index.js`：
 
@@ -203,7 +203,7 @@ webpack 5.4.0 compiled successfully in 2910 ms
  };
 ```
 
-## 全局 Exports {#global-exports}
+## 全局 Exports $#global-exports$
 
 让我们假设，某个 library 创建出一个全局变量，它期望 consumer(使用者) 使用这个变量。为此，我们可以在项目配置中，添加一个小模块来演示说明：
 
@@ -271,7 +271,7 @@ const helpers = {
 
 此时，在我们的 entry 入口文件中（即 `src/index.js`），可以使用 `const { file, parse } = require('./globals.js');`，可以保证一切将顺利运行。
 
-## 加载 Polyfills {#loading-polyfills}
+## 加载 Polyfills $#loading-polyfills$
 
 目前为止我们所讨论的所有内容都是处理那些遗留的 package，让我们进入到第二个话题：**polyfill**。
 
@@ -455,7 +455,7 @@ import 'whatwg-fetch';
 
 执行构建脚本，可以看到，浏览器发送了额外的 `polyfills.bundle.js` 文件请求，然后所有代码顺利执行。注意，以上的这些设定可能还会有所改进，这里我们向你提供一个很棒的想法：将 polyfill 提供给需要引入它的用户。
 
-## 进一步优化 {#further-optimizations}
+## 进一步优化 $#further-optimizations$
 
 `babel-preset-env` package 通过 [browserslist](https://github.com/browserslist/browserslist) 来转译那些你浏览器中不支持的特性。这个 preset 使用 [`useBuiltIns`](https://babel.docschina.org/docs/en/babel-preset-env#usebuiltins) 选项，默认值是 `false`，这种方式可以将全局 `babel-polyfill` 导入，改进为更细粒度的 `import` 格式：
 
@@ -469,11 +469,11 @@ import 'core-js/modules/web.dom.iterable';
 
 See [the babel-preset-env documentation](https://babeljs.io/docs/en/babel-preset-env) for more information.
 
-## Node 内置 {#node-built-ins}
+## Node 内置 $#node-built-ins$
 
 像 `process` 这种 Node 内置模块，能直接根据配置文件进行正确的 polyfill，而不需要任何特定的 loader 或者 plugin。查看 [node](/configuration/node) 配置页面获取更多信息。
 
-## 其他工具 {#other-utilities}
+## 其他工具 $#other-utilities$
 
 还有一些其他的工具，也能够帮助我们处理这些遗留模块。
 

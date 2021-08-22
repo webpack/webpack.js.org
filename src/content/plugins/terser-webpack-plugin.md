@@ -22,7 +22,7 @@ translators:
 
 该插件使用 [terser](https://github.com/terser-js/terser) 来压缩 JavaScript。
 
-## 入门 {#getting-started}
+## 入门 $#getting-started$
 
 如果你使用的是 webpack v5 或以上版本，你不需要安装这个插件。webpack v5 自带最新的 `terser-webpack-plugin`。如果使用 webpack v4，则必须安装 `terser-webpack-plugin` v4 的版本。
 
@@ -49,7 +49,7 @@ module.exports = {
 
 接下来，按照你习惯的方式运行 `webpack`。
 
-## 关于 source maps 说明 {#note-about-source-maps}
+## 关于 source maps 说明 $#note-about-source-maps$
 
 **Works only with `source-map`, `inline-source-map`, `hidden-source-map` and `nosources-source-map` values for the [`devtool`](/configuration/devtool/) option.**
 
@@ -60,9 +60,9 @@ Why?
 
 Using supported `devtool` values enable source map generation.
 
-## 选项 {#options}
+## 选项 $#options$
 
-### `test` {#test}
+### `test` $#test$
 
 类型： `String|RegExp|Array<String|RegExp>`
 默认值：`/\.m?js(\?.*)?$/i`
@@ -84,7 +84,7 @@ module.exports = {
 };
 ```
 
-### `include` {#include}
+### `include` $#include$
 
 类型： `String|RegExp|Array<String|RegExp>`
 默认值： `undefined`
@@ -106,7 +106,7 @@ module.exports = {
 };
 ```
 
-### `exclude` {#exclude}
+### `exclude` $#exclude$
 
 类型： `String|RegExp|Array<String|RegExp>`
 默认值： `undefined`
@@ -128,7 +128,7 @@ module.exports = {
 };
 ```
 
-### `parallel` {#parallel}
+### `parallel` $#parallel$
 
 类型： `Boolean|Number`
 默认值： `true`
@@ -140,7 +140,7 @@ module.exports = {
 
 > 如果你使用 **Circle CI** 或任何其他不提供 CPU 实际可用数量的环境，则需要显式设置 CPU 数量，以避免 `Error: Call retries were exceeded`（请参阅 [#143](https://github.com/webpack-contrib/terser-webpack-plugin/issues/143)，[#202](https://github.com/webpack-contrib/terser-webpack-plugin/issues/202) ）。
 
-#### `Boolean` {#boolean}
+#### `Boolean` $#boolean$
 
 启用/禁用多进程并发运行功能。
 
@@ -159,7 +159,7 @@ module.exports = {
 };
 ```
 
-#### `Number` {#number}
+#### `Number` $#number$
 
 启用多进程并发运行并设置并发运行次数。
 
@@ -178,7 +178,7 @@ module.exports = {
 };
 ```
 
-### `minify` {#minify}
+### `minify` $#minify$
 
 类型： `Function`
 默认值： `undefined`
@@ -221,7 +221,7 @@ module.exports = {
 };
 ```
 
-### `terserOptions` {#terseroptions}
+### `terserOptions` $#terseroptions$
 
 类型： `Object`
 默认值： [默认](https://github.com/terser-js/terser#minify-options)
@@ -258,7 +258,7 @@ module.exports = {
 };
 ```
 
-### `extractComments` {#extractcomments}
+### `extractComments` $#extractcomments$
 
 类型： `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>|Object`
 默认值： `true`
@@ -268,7 +268,7 @@ module.exports = {
 如果原始文件名为 `foo.js` ，则注释将存储到 `foo.js.LICENSE.txt` 。
 `terserOptions.format.comments` 选项指定是否保留注释，即可以在剥离其他注释时保留一些注释，甚至保留已剥离的注释。
 
-#### `Boolean` {#boolean}
+#### `Boolean` $#boolean$
 
 启用/禁用剥离注释功能。
 
@@ -287,7 +287,7 @@ module.exports = {
 };
 ```
 
-#### `String` {#string}
+#### `String` $#string$
 
 剥离 `all` 或 `some` （使用 `/^\**!|@preserve|@license|@cc_on/i` 正则表达式进行匹配）注释。
 
@@ -306,7 +306,7 @@ module.exports = {
 };
 ```
 
-#### `RegExp` {#regexp}
+#### `RegExp` $#regexp$
 
 与指定表达式匹配的所有注释将会被剥离到单独的文件中。
 
@@ -350,7 +350,7 @@ module.exports = {
 };
 ```
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 允许自定义剥离注释的条件，指定剥离的文件名和标题。
 
@@ -378,7 +378,7 @@ module.exports = {
 };
 ```
 
-##### `condition` {#condition}
+##### `condition` $#condition$
 
 类型： `Boolean|String|RegExp|Function<(node, comment) -> Boolean|Object>`
 
@@ -408,7 +408,7 @@ module.exports = {
 };
 ```
 
-##### `filename` {#filename}
+##### `filename` $#filename$
 
 类型： `String|Function<(string) -> String>`
 默认值： `[file].LICENSE.txt [query]`
@@ -442,7 +442,7 @@ module.exports = {
 };
 ```
 
-##### `banner` {#banner}
+##### `banner` $#banner$
 
 类型： `Boolean|String|Function<(string) -> String>`
 默认值： `/*! For license information please see ${commentsFile} */`
@@ -475,9 +475,9 @@ module.exports = {
 };
 ```
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### 保留注释 {#preserve-comments}
+### 保留注释 $#preserve-comments$
 
 剥离所有有效的注释（即 `/^\**!|@preserve|@license|@cc_on/i` ）并保留 `/@license/i` 注释。
 
@@ -501,7 +501,7 @@ module.exports = {
 };
 ```
 
-### 删除注释 {#remove-comments}
+### 删除注释 $#remove-comments$
 
 如果要在构建时去除注释，请使用以下配置：
 
@@ -525,7 +525,7 @@ module.exports = {
 };
 ```
 
-### 自定义压缩函数 {#custom-minify-function}
+### 自定义压缩函数 $#custom-minify-function$
 
 覆盖默认的 minify 函数 - 使用 `uglify-js` 进行压缩。
 
@@ -557,13 +557,13 @@ module.exports = {
 };
 ```
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 请花一点时间阅读我们的贡献指南。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/terser-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
 
-## 许可证 {#license}
+## 许可证 $#license$
 
 [MIT](https://github.com/webpack-contrib/terser-webpack-plugin/blob/master/LICENSE)
 

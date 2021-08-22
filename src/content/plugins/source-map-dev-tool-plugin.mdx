@@ -20,7 +20,7 @@ related:
 new webpack.SourceMapDevToolPlugin(options);
 ```
 
-## 配置项 {#options}
+## 配置项 $#options$
 
 支持以下配置项：
 
@@ -47,11 +47,11 @@ T> 如果你想在[开发模式](/configuration/mode/#mode-development)中使用
 
 W> 如果默认的 webpack `minimizer` 已经被覆盖（比如自定义 `TerserPlugin` 配置），请确保将其替换为 `sourceMap: true` 以启动 SourceMap 支持。
 
-## 示例 {#examples}
+## 示例 $#examples$
 
 下面的示例展示了本插件的一些常见用例。
 
-### 基本使用 {#basic-use-case}
+### 基本使用 $#basic-use-case$
 
 你可以使用以下代码将配置项 `devtool: inline-source-map` 替换为等效的自定义插件配置：
 
@@ -63,7 +63,7 @@ module.exports = {
 };
 ```
 
-### 排除 Vendor Maps {#exclude-vendor-maps}
+### 排除 Vendor Maps $#exclude-vendor-maps$
 
 以下代码会排除 `vendor.js` bundle 内模块的 source map。
 
@@ -74,7 +74,7 @@ new webpack.SourceMapDevToolPlugin({
 });
 ```
 
-### 在宿主环境外部化 source map {#host-source-maps-externally}
+### 在宿主环境外部化 source map $#host-source-maps-externally$
 
 设置 source map 的 URL。在宿主环境需要授权的情况下很有用。
 

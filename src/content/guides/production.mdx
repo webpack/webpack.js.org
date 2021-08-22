@@ -33,7 +33,7 @@ translators:
 
 T> 以下示例来源于 [tree shaking](/guides/tree-shaking) 和 [开发环境](/guides/development)。在继续之前，请确保你已经熟悉这些指南中所介绍的概念/配置。
 
-## 配置 {#setup}
+## 配置 $#setup$
 
 **development(开发环境)** 和 **production(生产环境)** 这两个环境下的构建目标存在着巨大差异。在**开发环境**中，我们需要：强大的 source map 和一个有着 live reloading(实时重新加载) 或 hot module replacement(热模块替换) 能力的 localhost server。而**生产环境**目标则转移至其他方面，关注点在于压缩 bundle、更轻量的 source map、资源优化等，通过这些优化方式改善加载时间。由于要遵循逻辑分离，我们通常建议为每个环境编写**彼此独立的 webpack 配置**。
 
@@ -114,7 +114,7 @@ npm install --save-dev webpack-merge
 
 注意，在环境特定的配置中使用 `merge()` 功能，可以很方便地引用 `webpack.dev.js` 和 `webpack.prod.js` 中公用的 common 配置。`webpack-merge` 工具提供了各种 merge(合并) 高级功能，但是在我们的用例中，无需用到这些功能。
 
-## NPM Scripts {#npm-scripts}
+## NPM Scripts $#npm-scripts$
 
 现在，我们把 `scripts` 重新指向到新配置。让 `npm start` script 中 `webpack-dev-server`, 使用 `webpack.dev.js`, 而让 `npm run build` script 使用 `webpack.prod.js`:
 
@@ -153,7 +153,7 @@ npm install --save-dev webpack-merge
 
 随便运行下这些脚本，然后查看输出结果的变化，然后我们会继续添加一些 *生产环境* 配置。
 
-## 指定 mode {#specify-the-mode}
+## 指定 mode $#specify-the-mode$
 
 许多 library 通过与 `process.env.NODE_ENV` 环境变量关联，以决定 library 中应该引用哪些内容。例如，当`process.env.NODE_ENV` 没有被设置为 `'production'` 时，某些 library 为了使调试变得容易，可能会添加额外的 log(日志记录) 和 test(测试) 功能。并且，在使用 `process.env.NODE_ENV === 'production'` 时，一些 library 可能针对具体用户的环境，删除或添加一些重要代码，以进行代码执行方面的优化。从 webpack v4 开始, 指定 [`mode`](/configuration/mode/) 会自动地配置 [`DefinePlugin`](/plugins/define-plugin)：
 
@@ -195,7 +195,7 @@ T> 技术上讲，`NODE_ENV` 是一个由 Node.js 暴露给执行脚本的系统
   document.body.appendChild(component());
 ```
 
-## 压缩(Minification) {#minification}
+## 压缩(Minification) $#minification$
 
 webpack v4+ will minify your code by default in [`production mode`](/configuration/mode/#mode-production).
 
@@ -205,7 +205,7 @@ webpack v4+ will minify your code by default in [`production mode`](/configurati
 
 如果决定尝试一些其他压缩插件，确保新插件也会按照 [tree shake](/guides/tree-shaking) 指南中所陈述的具有删除未引用代码(dead code)的能力，并将它作为 [`optimization.minimizer`](/configuration/optimization/#optimization-minimizer)。
 
-## 源码映射(Source Mapping) {#source-mapping}
+## 源码映射(Source Mapping) $#source-mapping$
 
 我们鼓励你在生产环境中启用 source map，因为它们对 debug(调试源码) 和运行 benchmark tests(基准测试) 很有帮助。虽然有着如此强大的功能，然而还是应该针对生产环境用途，选择一个可以快速构建的推荐配置（更多选项请查看 [`devtool`](/configuration/devtool)）。对于本指南，我们将在 *生产环境* 中使用 `source-map` 选项，而不是我们在 *开发环境* 中用到的 `inline-source-map`：
 
@@ -223,11 +223,11 @@ webpack v4+ will minify your code by default in [`production mode`](/configurati
 
 T> 避免在生产中使用 `inline-***` 和 `eval-***`，因为它们会增加 bundle 体积大小，并降低整体性能。
 
-## 压缩 CSS {#minimize-css}
+## 压缩 CSS $#minimize-css$
 
 将生产环境下的 CSS 进行压缩会非常重要，请查看 [在生产环境下压缩](/plugins/mini-css-extract-plugin/#minimizing-for-production) 章节。
 
-## CLI 替代选项 {#cli-alternatives}
+## CLI 替代选项 $#cli-alternatives$
 
 上述许多选项都可以通过命令行参数进行设置。例如，[`optimize-minimize`](/configuration/optimization/#optimizationminimize) 可以使用 `--optimization-minimize` 进行设置，[`mode`](/configuration/mode/) 可以使用 `--mode` 进行设置。运行 `npx webpack --help=verbose` 可以查看所有关于 CLI 的可用参数。
 

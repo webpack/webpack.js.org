@@ -19,7 +19,7 @@ repo: https://github.com/webpack-contrib/copy-webpack-plugin
 
 Copies individual files or entire directories, which already exist, to the build directory.
 
-## Getting Started {#getting-started}
+## Getting Started $#getting-started$
 
 To begin, you'll need to install `copy-webpack-plugin`:
 
@@ -52,7 +52,7 @@ module.exports = {
 
 > ℹ️ You can get the original source filename from [Asset Objects](/api/stats/#asset-objects).
 
-## Options {#options}
+## Options $#options$
 
 The plugin's signature:
 
@@ -76,7 +76,7 @@ module.exports = {
 };
 ```
 
-### Patterns {#patterns}
+### Patterns $#patterns$
 
 |                  Name                   |         Type         |                     Default                     | Description                                                                                                                                            |
 | :-------------------------------------: | :------------------: | :---------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -93,7 +93,7 @@ module.exports = {
 | [`noErrorOnMissing`](#noerroronmissing) |     `{Boolean}`      |                     `false`                     | Doesn't generate an error on missing file(s).                                                                                                          |
 |             [`info`](#info)             | `{Object\|Function}` |                   `undefined`                   | Allows to add assets info.                                                                                                                             |
 
-#### `from` {#from}
+#### `from` $#from$
 
 Type: `String`
 Default: `undefined`
@@ -132,7 +132,7 @@ module.exports = {
 };
 ```
 
-##### `For windows` {#for-windows}
+##### `For windows` $#for-windows$
 
 If you define `from` as absolute file path or absolute folder path on `Windows`, you can use windows path segment (`\\`)
 
@@ -174,12 +174,12 @@ module.exports = {
 The `context` behaves differently depending on what the `from` is (`glob`, `file` or `dir`).
 More [`examples`](#examples)
 
-#### `to` {#to}
+#### `to` $#to$
 
 Type: `String|Function`
 Default: `compiler.options.output`
 
-##### String {#string}
+##### String $#string$
 
 Output path.
 
@@ -212,7 +212,7 @@ module.exports = {
 };
 ```
 
-##### Function {#function}
+##### Function $#function$
 
 Allows to modify the writing path.
 
@@ -258,7 +258,7 @@ module.exports = {
 };
 ```
 
-#### `context` {#context}
+#### `context` $#context$
 
 Type: `String`
 Default: `options.context|compiler.options.context`
@@ -301,7 +301,7 @@ If `from` is a glob, then regardless of the `context` option, the result will be
 
 More [`examples`](#examples)
 
-#### `globOptions` {#globoptions}
+#### `globOptions` $#globoptions$
 
 Type: `Object`
 Default: `undefined`
@@ -330,7 +330,7 @@ module.exports = {
 };
 ```
 
-#### `filter` {#filter}
+#### `filter` $#filter$
 
 Type: `Function`
 Default: `undefined`
@@ -365,7 +365,7 @@ module.exports = {
 };
 ```
 
-#### `toType` {#totype}
+#### `toType` $#totype$
 
 Type: `String`
 Default: `undefined`
@@ -381,7 +381,7 @@ We try to automatically determine the `type` so you most likely do not need this
 |   **`'file'`**   | `{String}` | `undefined` | If `to` is not a directory and is not a template                                                     |
 | **`'template'`** | `{String}` | `undefined` | If `to` contains [a template pattern](/configuration/output/#template-strings) |
 
-##### `'dir'` {#dir}
+##### `'dir'` $#dir$
 
 **webpack.config.js**
 
@@ -401,7 +401,7 @@ module.exports = {
 };
 ```
 
-##### `'file'` {#file}
+##### `'file'` $#file$
 
 **webpack.config.js**
 
@@ -421,7 +421,7 @@ module.exports = {
 };
 ```
 
-##### `'template'` {#template}
+##### `'template'` $#template$
 
 **webpack.config.js**
 
@@ -441,7 +441,7 @@ module.exports = {
 };
 ```
 
-#### `force` {#force}
+#### `force` $#force$
 
 Type: `Boolean`
 Default: `false`
@@ -466,7 +466,7 @@ module.exports = {
 };
 ```
 
-#### `priority` {#priority}
+#### `priority` $#priority$
 
 Type: `Number`
 Default: `0`
@@ -501,7 +501,7 @@ module.exports = {
 };
 ```
 
-#### `transform` {#transform}
+#### `transform` $#transform$
 
 Type: `Function|Object`
 Default: `undefined`
@@ -532,14 +532,14 @@ module.exports = {
 };
 ```
 
-##### `Object` {#object}
+##### `Object` $#object$
 
 |               Name                |        Type         |   Default   | Description                                                                                                      |
 | :-------------------------------: | :-----------------: | :---------: | :--------------------------------------------------------------------------------------------------------------- |
 | **[`transformer`](#transformer)** |    `{Function}`     | `undefined` | Allows to modify the file contents.                                                                              |
 |       **[`cache`](#cache)**       | `{Boolean\|Object}` |   `false`   | Enable `transform` caching. You can use `transform: { cache: { key: 'my-cache-key' } }` to invalidate the cache. |
 
-###### `transformer` {#transformer}
+###### `transformer` $#transformer$
 
 Type: `Function`
 Default: `undefined`
@@ -590,7 +590,7 @@ module.exports = {
 };
 ```
 
-###### `cache` {#cache}
+###### `cache` $#cache$
 
 Type: `Boolean|Object`
 Default: `false`
@@ -600,7 +600,7 @@ Default: `false`
 Enable/disable and configure caching.
 Default path to cache directory: `node_modules/.cache/copy-webpack-plugin`.
 
-###### `Boolean` {#boolean}
+###### `Boolean` $#boolean$
 
 Enables/Disable `transform` caching.
 
@@ -627,7 +627,7 @@ module.exports = {
 };
 ```
 
-##### `Object` {#object}
+##### `Object` $#object$
 
 Enables `transform` caching and setup cache directory and invalidation keys.
 
@@ -733,7 +733,7 @@ module.exports = {
 };
 ```
 
-#### `transformAll` {#transformall}
+#### `transformAll` $#transformall$
 
 类型：`Function`
 默认值：`undefined`
@@ -772,7 +772,7 @@ module.exports = {
 };
 ```
 
-### `noErrorOnMissing` {#noerroronmissing}
+### `noErrorOnMissing` $#noerroronmissing$
 
 Type: `Boolean`
 Default: `false`
@@ -839,13 +839,13 @@ module.exports = {
 };
 ```
 
-### Options {#options}
+### Options $#options$
 
 |             Name              |    Type    | Default | Description                                      |
 | :---------------------------: | :--------: | :-----: | :----------------------------------------------- |
 | [`concurrency`](#concurrency) | `{Number}` |  `100`  | Limits the number of simultaneous requests to fs |
 
-#### `concurrency` {#concurrency}
+#### `concurrency` $#concurrency$
 
 limits the number of simultaneous requests to fs
 
@@ -862,9 +862,9 @@ module.exports = {
 };
 ```
 
-### Examples {#examples}
+### Examples $#examples$
 
-#### Different variants `from` (`glob`, `file` or `dir`). {#different-variants-from-glob-file-or-dir}
+#### Different variants `from` (`glob`, `file` or `dir`). $#different-variants-from-glob-file-or-dir$
 
 Take for example the following file structure:
 
@@ -873,7 +873,7 @@ src/directory-nested/deep-nested/deepnested-file.txt
 src/directory-nested/nested-file.txt
 ```
 
-##### From is a Glob {#from-is-a-glob}
+##### From is a Glob $#from-is-a-glob$
 
 Everything that you specify in `from` will be included in the result:
 
@@ -926,7 +926,7 @@ deep-nested/deepnested-file.txt,
 nested-file.txt
 ```
 
-##### From is a Dir {#from-is-a-dir}
+##### From is a Dir $#from-is-a-dir$
 
 **webpack.config.js**
 
@@ -977,7 +977,7 @@ deep-nested/deepnested-file.txt,
 nested-file.txt
 ```
 
-##### From is a File {#from-is-a-file}
+##### From is a File $#from-is-a-file$
 
 ```js
 module.exports = {
@@ -1029,7 +1029,7 @@ Result:
 nested-file.txt
 ```
 
-#### Ignoring files {#ignoring-files}
+#### Ignoring files $#ignoring-files$
 
 **webpack.config.js**
 
@@ -1058,7 +1058,7 @@ module.exports = {
 };
 ```
 
-#### Flatten copy {#flatten-copy}
+#### Flatten copy $#flatten-copy$
 
 Removes all directory references and only copies file names.
 
@@ -1089,7 +1089,7 @@ file-2.txt
 nested-file.txt
 ```
 
-#### Copy in new directory {#copy-in-new-directory}
+#### Copy in new directory $#copy-in-new-directory$
 
 **webpack.config.js**
 
@@ -1121,7 +1121,7 @@ Result:
 "newdirectory/nested/nestedfile.txt",
 ```
 
-#### Skip running JavaScript files through a minimizer {#skiprunningjavaScriptfilesthroughaminimizer}
+#### Skip running JavaScript files through a minimizer $#skiprunningjavaScriptfilesthroughaminimizer$
 
 Useful if you need to simply copy `*.js` files to destination "as is" without evaluating and minimizing them using Terser.
 
@@ -1144,7 +1144,7 @@ module.exports = {
 };
 ```
 
-##### `yarn workspaces` and `monorepos` {yarnworkspacesandmonorepos}
+##### `yarn workspaces` and `monorepos` $#yarnworkspacesandmonorepos$
 
 当时用 `yarn workspaces` 或者 `monorepos` 时，由于包提升方式不同，node_modules 的相对复制路径可能会失效。
 为了避免这种情况，请使用 `require.resolve` 指定复制路径。
@@ -1168,13 +1168,13 @@ module.exports = {
 };
 ```
 
-## Contributing {#contributing}
+## Contributing $#contributing$
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/copy-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/copy-webpack-plugin/blob/master/LICENSE)
 

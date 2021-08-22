@@ -29,7 +29,7 @@ translators:
 
 当前页面记录了影响 `webpack-dev-server` (简写: `dev-server`) <Badge text="version >= 4.0.0" /> 配置的选项。可以在 [这里](https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md) 找到 `v3` 到 `v4` 的迁移指南
 
-## 开发服务器(`devServer`) {#devserver}
+## 开发服务器(`devServer`) $#devserver$
 
 `object`
 
@@ -76,7 +76,7 @@ T> 如果你需要要手动重新编译 `bundle`，将路由导航至 `/invalida
 
 T> 当启动本地服务的时候 HTML 模板是必须提供的，通常是 `index.html`。确保将脚本引用添加到 HTML 中，webpack-dev-server 不会自动注入它们。
 
-### Usage via CLI {#usage-via-cli}
+### Usage via CLI $#usage-via-cli$
 
 你可以通过 CLI 调用 webpack-dev-server，方式是：
 
@@ -86,7 +86,7 @@ npx webpack serve
 
 CLI 配置项列表可以在 [这里](hhttps://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS-v4.md) 查询。
 
-## `devServer.allowedHosts` {#devserverallowedhosts}
+## `devServer.allowedHosts` $#devserverallowedhosts$
 
 `'auto' | 'all'` `[string]`
 
@@ -143,7 +143,7 @@ module.exports = {
 npx webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com --allowed-hosts host2.com
 ```
 
-## `devServer.bonjour` {#devserverbonjour}
+## `devServer.bonjour` $#devserverbonjour$
 
 `boolean` `object`
 
@@ -182,9 +182,9 @@ module.exports = {
 };
 ```
 
-## `devServer.client` {devserverclient}
+## `devServer.client` $#devserverclient$
 
-### `logging` {#logging}
+### `logging` $#logging$
 
 `'log' | 'info' | 'warn' | 'error' | 'none' | 'verbose'`
 
@@ -209,7 +209,7 @@ module.exports = {
 npx webpack serve --client-logging info
 ```
 
-### `overlay` {#overlay}
+### `overlay` $#overlay$
 
 `boolean = true` `object: { errors boolean = true, warnings boolean = true }`
 
@@ -258,7 +258,7 @@ module.exports = {
 npx webpack serve --client-overlay-errors --no-client-overlay-warnings
 ```
 
-### `progress` {#progress}
+### `progress` $#progress$
 
 在浏览器中以百分比显示编译进度。
 
@@ -281,7 +281,7 @@ module.exports = {
 npx webpack serve --client-progress
 ```
 
-### webSocketTransport {#websockettransport}
+### webSocketTransport $#websockettransport$
 
 `'ws' | 'sockjs'` `string`
 
@@ -345,7 +345,7 @@ module.exports = {
 };
 ```
 
-### webSocketURL {#websocketurl}
+### webSocketURL $#websocketurl$
 
 `string` `object`
 
@@ -401,7 +401,7 @@ module.exports = {
 
 T> 要从浏览器中获取 `protocol`/`hostname`/`port`，请使用 `webSocketURL: 'auto://0.0.0.0:0/ws'`。
 
-## `devServer.compress` {@devservercompress}
+## `devServer.compress` $#devservercompress$
 
 `boolean = true`
 
@@ -424,7 +424,7 @@ module.exports = {
 npx webpack serve --compress
 ```
 
-## devserver.devMiddleware {devserverdevmiddleware}
+## devserver.devMiddleware $#devserverdevmiddleware$
 
 为 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 提供处理 webpack 资源的配置项。
 
@@ -442,7 +442,7 @@ module.exports = {
 };
 ```
 
-## `devServer.http2` {devserverhttp2}
+## `devServer.http2` $#devserverhttp2$
 
 `boolean`
 
@@ -491,7 +491,7 @@ npx webpack serve --http2
 npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
 ```
 
-## `devServer.https` {#devserverhttps}
+## `devServer.https` $#devserverhttps$
 
 `boolean` `object`
 
@@ -541,7 +541,7 @@ npx webpack serve --https
 npx webpack serve --https-key ./path/to/server.key --https--cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
 ```
 
-## `devServer.headers` {#devserverheaders}
+## `devServer.headers` $#devserverheaders$
 
 `function` `object`
 
@@ -560,7 +560,7 @@ module.exports = {
 };
 ```
 
-## devServer.historyApiFallback {#devserverhistoryapifallback}
+## devServer.historyApiFallback $#devserverhistoryapifallback$
 
 `boolean` `object`
 
@@ -619,7 +619,7 @@ npx webpack serve --history-api-fallback
 
 For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
 
-## devServer.host {#devserverhost}
+## devServer.host $#devserverhost$
 
 `'local-ip' | 'local-ipv4' | 'local-ipv6'` `string`
 
@@ -648,7 +648,7 @@ npx webpack serve --host 0.0.0.0
 npx webpack serve --host ::
 ```
 
-### local-ip {#localip}
+### local-ip $#localip$
 
 Specifying `local-ip` as host will try to resolve the host option as your local `IPv4` address if available, if `IPv4` is not available it will try to resolve your local `IPv6` address.
 
@@ -672,7 +672,7 @@ npx webpack serve --host local-ipv4
 npx webpack serve --host local-ipv6
 ```
 
-## `devServer.hot` {#devserverhot}
+## `devServer.hot` $#devserverhot$
 
 `'only'` `boolean`
 
@@ -716,7 +716,7 @@ npx webpack serve --hot only
 
 T> 注意 [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin/) 是需要的以完全启用 HMR。如果 `webpack` 或者 `webpack-dev-server` 使用 `--hot` 选项启动，该插件会自动添加，因此你可能不需要将其添加到你的 `webpack.config.js` 中。关于更多信息可以查看 [HMR concepts page](/concepts/hot-module-replacement/)。
 
-## devServer.ipc {#devserveripc}
+## devServer.ipc $#devserveripc$
 
 `true` `string`
 
@@ -756,7 +756,7 @@ module.exports = {
 };
 ```
 
-## devServer.liveReload {#devserverlivereload}
+## devServer.liveReload $#devserverlivereload$
 
 `boolean = true`
 
@@ -809,7 +809,7 @@ module.exports = {
 };
 ```
 
-## devServer.onBeforeSetupMiddleware {#devserveronbeforesetupmiddleware}
+## devServer.onBeforeSetupMiddleware $#devserveronbeforesetupmiddleware$
 
 `function (app, server, compiler)`
 
@@ -832,7 +832,7 @@ module.exports = {
 };
 ```
 
-## devserver.onListening {#devserveronlistening}
+## devserver.onListening $#devserveronlistening$
 
 `function (server)`
 
@@ -852,7 +852,7 @@ module.exports = {
 };
 ```
 
-## devServer.open {#devserveropen}
+## devServer.open $#devserveropen$
 
 `boolean` `string` `[string]` `object` `[object]`
 
@@ -957,7 +957,7 @@ module.exports = {
 
 T> 浏览器应用程序名称与平台相关。不要在可重用模块中硬编码它。例如，`'Chrome'` 在 macOS 是 `'Google Chrome'`，在 Linux 是 `'google-chrome'`，在 Windows 是 `'chrome'`。
 
-## devServer.port {#devserverport}
+## devServer.port $#devserverport$
 
 `'auto'` `string` `number`
 
@@ -993,7 +993,7 @@ module.exports = {
 };
 ```
 
-## devServer.proxy {#devserverproxy}
+## devServer.proxy $#devserverproxy$
 
 `object` `[object, function]`
 
@@ -1140,7 +1140,7 @@ module.exports = {
 };
 ```
 
-## devServer.setupExitSignals {#devserversetupexitsignals}
+## devServer.setupExitSignals $#devserversetupexitsignals$
 
 `boolean = true`
 
@@ -1157,7 +1157,7 @@ module.exports = {
 };
 ```
 
-## devServer.static {#devserverstatic}
+## devServer.static $#devserverstatic$
 
 `boolean` `string` `[string]` `object` `[object]`
 
@@ -1186,7 +1186,7 @@ npx webpack serve --static
 npx webpack serve --no-static
 ```
 
-### directory {#directory}
+### directory $#directory$
 
 `string = path.join(process.cwd(), 'public')`
 
@@ -1228,7 +1228,7 @@ module.exports = {
 };
 ```
 
-### publicPath {#publicpath}
+### publicPath $#publicpath$
 
 `string = '/'` `[string]`
 
@@ -1274,7 +1274,7 @@ module.exports = {
 };
 ```
 
-### serveIndex {#serveindex}
+### serveIndex $#serveindex$
 
 `boolean` `object = { icons: true }`
 
@@ -1310,7 +1310,7 @@ npx webpack serve --static-serve-index
 npx webpack serve --no-static-serve-index
 ```
 
-### watch {#watch}
+### watch $#watch$
 
 `boolean` `object`
 
@@ -1365,7 +1365,7 @@ module.exports = {
 };
 ```
 
-## devServer.watchFiles {#devserverwatchfiles}
+## devServer.watchFiles $#devserverwatchfiles$
 
 `string` `[string]` `object` `[object]`
 
@@ -1400,7 +1400,7 @@ module.exports = {
 };
 ```
 
-## devServer.webSocketServer {#devServerwebsocketserver}
+## devServer.webSocketServer $#devServerwebsocketserver$
 
 `false | 'sockjs' | 'ws'` `string` `function` `object`
 

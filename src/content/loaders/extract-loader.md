@@ -25,7 +25,7 @@ The extract-loader works similar to the [extract-text-webpack-plugin](/plugins/e
 <br>
 
 Installation
------------------------------------------------------------------------- {#installation-------------------------------------------------------------------------}
+------------------------------------------------------------------------ $#installation-------------------------------------------------------------------------$
 
 ```bash
 $ npm install extract-loader --save-dev
@@ -34,9 +34,9 @@ $ npm install extract-loader --save-dev
 <br>
 
 Examples
------------------------------------------------------------------------- {#examples-------------------------------------------------------------------------}
+------------------------------------------------------------------------ $#examples-------------------------------------------------------------------------$
 
-### [Extracting a main.css](https://github.com/peerigon/extract-loader/tree/master/examples/main-css) {#extracting-a-maincsshttpsgithubcompeerigonextract-loadertreemasterexamplesmain-css}
+### [Extracting a main.css](https://github.com/peerigon/extract-loader/tree/master/examples/main-css) $#extracting-a-maincsshttpsgithubcompeerigonextract-loadertreemasterexamplesmain-css$
 
 Bundling CSS with webpack has some nice advantages like referencing images and fonts with hashed urls or [hot module replacement](/concepts/hot-module-replacement) in development. In production, on the other hand, it's not a good idea to apply your stylesheets depending on JS execution. Rendering may be delayed or even a [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content) might be visible. Thus it's still better to have them as separate files in your final production build.
 
@@ -76,7 +76,7 @@ module.exports = ({ mode }) => {
 };
 ```
 
-### [Extracting the index.html](https://github.com/peerigon/extract-loader/tree/master/examples/index-html) {#extracting-the-indexhtmlhttpsgithubcompeerigonextract-loadertreemasterexamplesindex-html}
+### [Extracting the index.html](https://github.com/peerigon/extract-loader/tree/master/examples/index-html) $#extracting-the-indexhtmlhttpsgithubcompeerigonextract-loadertreemasterexamplesindex-html$
 
 You can even add your `index.html` as `entry` and reference your stylesheets from there. In that case, tell the html-loader to also pick up `link:href`:
 
@@ -159,7 +159,7 @@ into
 <br>
 
 Source Maps
------------------------------------------------------------------------- {#source-maps-------------------------------------------------------------------------}
+------------------------------------------------------------------------ $#source-maps-------------------------------------------------------------------------$
 
 If you want source maps in your extracted CSS files, you need to set the [`sourceMap` option](https://github.com/webpack-contrib/css-loader#sourcemap) of the **css-loader**:
 
@@ -175,7 +175,7 @@ If you want source maps in your extracted CSS files, you need to set the [`sourc
 <br>
 
 Options
------------------------------------------------------------------------- {#options-------------------------------------------------------------------------}
+------------------------------------------------------------------------ $#options-------------------------------------------------------------------------$
 
 There is currently exactly one option: `publicPath`.
 If you are using a relative `publicPath` in webpack's [output options](/configuration/output/#outputpublicpath) and extracting to a file with the `file-loader`, you might need this to account for the location of your extracted file. `publicPath` may be defined as a string or a function that accepts current [loader context](/api/loaders/#the-loader-context) as single argument.
@@ -256,7 +256,7 @@ You need another option? Then you should think about:
 <br>
 
 Contributing
------------------------------------------------------------------------- {#contributing-------------------------------------------------------------------------}
+------------------------------------------------------------------------ $#contributing-------------------------------------------------------------------------$
 
 From opening a bug report to creating a pull request: **every contribution is appreciated and welcome**. If you're planning to implement a new feature or change the api please create an issue first. This way we can ensure that your precious work is not in vain.
 
@@ -268,11 +268,11 @@ All pull requests should have 100% test coverage (with notable exceptions) and n
 <br>
 
 License
------------------------------------------------------------------------- {#license-------------------------------------------------------------------------}
+------------------------------------------------------------------------ $#license-------------------------------------------------------------------------$
 
 Unlicense
 
 Sponsors
------------------------------------------------------------------------- {#sponsors-------------------------------------------------------------------------}
+------------------------------------------------------------------------ $#sponsors-------------------------------------------------------------------------$
 
 [<img src="https://assets.peerigon.com/peerigon/logo/peerigon-logo-flat-spinat.png" width="150" />](https://peerigon.com/)

@@ -40,9 +40,9 @@ if (import.meta.webpackHot) {
 
 支持以下方法……
 
-## 模块 API {#module-api}
+## 模块 API $#module-api$
 
-### `accept` {#accept}
+### `accept` $#accept$
 
 接受(accept)给定 `依赖模块(dependencies)` 的更新，并触发一个 `回调函数` 来响应更新，除此之外，你可以附加一个可选的 error 处理程序：
 
@@ -65,7 +65,7 @@ import.meta.webpackHot.accept(
 
 在使用 CommonJS 时，你应该通过 `callback` 中的 `require()` 手动更新依赖模块。省略 `callback` 在这里没有任何意义。
 
-#### errorHandler for accept {#errorhandlerforaccept}
+#### errorHandler for accept $#errorhandlerforaccept$
 
 `(err, {moduleId, dependencyId}) => {}`
 
@@ -73,7 +73,7 @@ import.meta.webpackHot.accept(
 - `moduleId`: 当前模块 id。
 - `dependencyId`: (第一个)被更改依赖项的模块id。
 
-### `accept` (self) {#accept-self}
+### `accept` (self) $#accept-self$
 
 接受自身更新。
 
@@ -92,7 +92,7 @@ import.meta.webpackHot.accept(
 
 当执行此模块（或依赖模块）抛出异常时，会触发 `errorHandler`。
 
-#### errorHandler for self accept {#errorhandlerforselfaccept}
+#### errorHandler for self accept $#errorhandlerforselfaccept$
 
 `(err, {moduleId, module}) => {}`
 
@@ -102,7 +102,7 @@ import.meta.webpackHot.accept(
   - `module.hot`: 允许访问出错模块实例的 HMR API。一个常见的场景是再次自我接收（accept）。添加一个dispose处理程序来传递数据也是有意义的。注意，错误的模块可能已经部分执行，所以请确保不要进入不一致的状态。你可以使用 `module.hot.data` 存储部分状态。
   - `module.exports`: 可以被重载，但是要小心，因为属性名在生产模式下可能会被破坏。
 
-### `decline` {#decline}
+### `decline` $#decline$
 
 拒绝给定`依赖模块`的更新，使用 `'decline'` 方法强制更新失败。
 
@@ -120,7 +120,7 @@ import.meta.webpackHot.decline(
 将依赖模块标记为不可更新(not-update-able)。在处理「依赖的导出正在更新」或「尚未实现处理」时，这是有意义的。取决于你的 HMR 管理代码，
 此依赖模块（或其未接受的依赖模块）更新，通常会导致页面被完全重新加载。
 
-### `decline` (自身) {#decline-self}
+### `decline` (自身) $#decline-self$
 
 拒绝自身更新。
 
@@ -133,7 +133,7 @@ import.meta.webpackHot.decline();
 
 将依赖模块标记为不可更新(not-update-able)。当此模块具有无法避免的外部作用(side-effect)，或者尚未对此模块进行 HMR 处理时，这是有意义的。取决于你的 HMR 管理代码，此依赖模块（或其未接受的依赖模块）更新，通常会导致页面被完全重新加载。
 
-### `dispose` (or `addDisposeHandler`) {#dispose-or-adddisposehandler}
+### `dispose` (or `addDisposeHandler`) $#dispose-or-adddisposehandler$
 
 添加一个处理函数，在当前模块代码被替换时执行。此函数应该用于移除你声明或创建的任何持久资源。如果要将状态传入到更新过的模块，请添加给定 `data` 参数。更新后，此对象在更新之后可通过 `module.hot.data` 调用。
 
@@ -148,7 +148,7 @@ import.meta.webpackHot.dispose((data) => {
 });
 ```
 
-### `invalidate` {#invalidate}
+### `invalidate` $#invalidate$
 
 调用此方法将使当前模块无效，而当前模块将在应用 HMR 更新时进行部署并重新创建。这个模块的更新像冒泡一样，拒绝自身更新。
 
@@ -160,7 +160,7 @@ import.meta.webpackHot.dispose((data) => {
 
 在 `dispose` 或 `apply` 状态下调用时，HMR 将在退出这些状态后将其拾取。
 
-#### 用例 {#use-cases}
+#### 用例 $#use-cases$
 
 **Conditional Accepting**
 
@@ -225,7 +225,7 @@ T> 当调用 `invalidate` 时，将最终调用 [`dispose`](#dispose-or-adddispo
 
 W> 通过一次次的调用 `invalidate`，不要陷入 `invalidate` 循环。这将导致栈溢出并且 HMR 进入 `fail` 状态。
 
-### `removeDisposeHandler` {#removedisposehandler}
+### `removeDisposeHandler` $#removedisposehandler$
 
 删除由 `dispose` 或 `addDisposeHandler` 添加的回调函数。
 
@@ -236,9 +236,9 @@ module.hot.removeDisposeHandler(callback);
 import.meta.webpackHot.removeDisposeHandler(callback);
 ```
 
-## API 管理 {#management-api}
+## API 管理 $#management-api$
 
-### `status` {#status}
+### `status` $#status$
 
 获取当前模块热替换进程的状态。
 
@@ -261,7 +261,7 @@ import.meta.webpackHot.status();
 | fail        | 更新已抛出异常，系统状态已被破坏 |
 
 
-### `check` {#check}
+### `check` $#check$
 
 测试所有加载的模块以进行更新，如果有更新，则 `apply` 它们。
 
@@ -288,7 +288,7 @@ import.meta.webpackHot
 
 当被调用时，传递给 `apply` 方法的 `autoApply` 参数可以是布尔值，也可以是 `options`，
 
-### `apply` {#apply}
+### `apply` $#apply$
 
 继续更新进程（当 `module.hot.status() === 'ready'` 时）。
 
@@ -346,7 +346,7 @@ import.meta.webpackHot
 }
 ```
 
-### `addStatusHandler` {#addstatushandler}
+### `addStatusHandler` $#addstatushandler$
 
 注册一个函数来监听 `status` 的变化。
 
@@ -363,7 +363,7 @@ import.meta.webpackHot.addStatusHandler((status) => {
 
 请记住，当 status 处理函数返回一个 `Promise` 时，HMR 系统将会在继续之前等待 `Promise` resolve。
 
-### `removeStatusHandler` {#removestatushandler}
+### `removeStatusHandler` $#removestatushandler$
 
 移除一个注册的状态处理函数。
 

@@ -23,7 +23,7 @@ webpack 4 的 web worker loader。
 
 请注意这是针对 webpack 4 的。如果要在 webpack 5 中使用 Web Workers，请查看 https://webpack.js.org/guides/web-workers/。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 开始之前你需要安装 `worker-loader` ：
 
@@ -31,7 +31,7 @@ webpack 4 的 web worker loader。
 $ npm install worker-loader --save-dev
 ```
 
-### 内敛 {#inlined}
+### 内敛 $#inlined$
 
 __App.js__
 
@@ -39,7 +39,7 @@ __App.js__
 import Worker from "worker-loader!./Worker.js";
 ```
 
-### 配置 {#config}
+### 配置 $#config$
 
 __webpack.config.js__
 
@@ -71,7 +71,7 @@ worker.addEventListener("message", function (event) {});
 
 然后，通过你的首选方式去运行 `webpack`。
 
-## 选项 {#options}
+## 选项 $#options$
 
 |                 选项名                  |             类型             |             默认值             | 描述                                                                       |
 | :-----------------------------------: | :--------------------------: | :-----------------------------: | :-------------------------------------------------------------------------------- |
@@ -82,14 +82,14 @@ worker.addEventListener("message", function (event) {});
 |        __[`inline`](#inline)__        | `'no-fallback'\|'fallback'`  |           `undefined`           | 允许将内联的 web worker 作为 `BLOB`                                            |
 |      __[`esModule`](#esmodule)__      |         `{Boolean}`          |             `true`              | 使用 ES 模块语法                                                             |
 
-### `worker` {#worker}
+### `worker` $#worker$
 
 类型：`String|Object`
 默认值：`Worker`
 
 设置 worker 的类型，
 
-#### `String` {#string}
+#### `String` $#string$
 
 允许为 web worker 设置 constructor 的名字。
 
@@ -111,7 +111,7 @@ module.exports = {
 };
 ```
 
-#### `Object` {#object}
+#### `Object` $#object$
 
 为 web worker 设置 constructor 的名字和选项。
 
@@ -140,7 +140,7 @@ module.exports = {
 };
 ```
 
-### `publicPath` {#publicpath}
+### `publicPath` $#publicpath$
 
 类型：`String|Function`
 默认值：与 `output.publicPath` 相同
@@ -148,7 +148,7 @@ module.exports = {
 在浏览器中引用时，`publicPath` 用于指定输出文件的 public URL 地址。
 如未定义，则使用与其他 webpack 资源相同的 public 地址。
 
-#### `String` {#string}
+#### `String` $#string$
 
 __webpack.config.js__
 
@@ -168,7 +168,7 @@ module.exports = {
 };
 ```
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 __webpack.config.js__
 
@@ -190,14 +190,14 @@ module.exports = {
 };
 ```
 
-### `filename` {#filename}
+### `filename` $#filename$
 
 类型：`String|Function`
 默认值：与 `output.filename` 相同，会添加 `worker` 后缀，示例 —— `output.filename: '[name].js'` 的选项会变成 `[name].worker.js`
 
 web worker 入口 chunk 的文件名。
 
-#### `String` {#string}
+#### `String` $#string$
 
 __webpack.config.js__
 
@@ -217,7 +217,7 @@ module.exports = {
 };
 ```
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 __webpack.config.js__
 
@@ -245,7 +245,7 @@ module.exports = {
 };
 ```
 
-### `chunkFilename` {#chunkfilename}
+### `chunkFilename` $#chunkfilename$
 
 类型：`String`
 默认值：与 `output.chunkFilename` 相同，并在基础上添加 `worker` 后缀，示例 —— `output.chunkFilename: '[id].js'` 选项值会变为 `[id].worker.js`
@@ -270,7 +270,7 @@ module.exports = {
 };
 ```
 
-### `inline` {#inline}
+### `inline` $#inline$
 
 类型：`'fallback' | 'no-fallback'`
 默认值：`undefined`
@@ -297,7 +297,7 @@ module.exports = {
 };
 ```
 
-### `esModule` {#esmodule}
+### `esModule` $#esmodule$
 
 类型：`Boolean`
 默认值：`true`
@@ -324,9 +324,9 @@ module.exports = {
 };
 ```
 
-## Examples {#examples}
+## Examples $#examples$
 
-### Basic {#basic}
+### Basic $#basic$
 
 worker 文件可以像其他文件导入依赖那样来导入依赖：
 
@@ -387,7 +387,7 @@ module.exports = {
 };
 ```
 
-### 集成 ES6+ 特性 {#integrating-with-es6-features}
+### 集成 ES6+ 特性 $#integrating-with-es6-features$
 
 如果使用 [`babel-loader`](https://github.com/babel/babel-loader) 配置，甚至可以使用 ES6+ 的特性。
 
@@ -455,11 +455,11 @@ module.exports = {
 };
 ```
 
-### 集成 TypeScript {#integrating-with-typescript}
+### 集成 TypeScript $#integrating-with-typescript$
 
 要与 TypeScript 集成，你需要为 worker 导出一个自定义模块。
 
-#### 使用 `worker-loader!` 加载 {#loadingwidthworkloader}
+#### 使用 `worker-loader!` 加载 $#loadingwidthworkloader$
 
 **typings/worker-loader.d.ts**
 
@@ -501,7 +501,7 @@ worker.onmessage = (event) => {};
 worker.addEventListener("message", (event) => {});
 ```
 
-#### 不使用 `worker-loader!` 加载 {#loadingwidthoutworkloader}
+#### 不使用 `worker-loader!` 加载 $#loadingwidthoutworkloader$
 
 另外，你可以通过使用以下符号忽略传递给 `import` 语句的 `worker-loader!` 前缀。
 这对于使用非 webpack 运行时环境执行代码很有用
@@ -570,7 +570,7 @@ module.exports = {
 };
 ```
 
-### 跨域策略 {#cross-origin-policy}
+### 跨域策略 $#cross-origin-policy$
 
 [`WebWorkers`](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API) 受到 [同源策略](https://en.wikipedia.org/wiki/Same-origin_policy) 的限制， 如果 `webpack` 资源的访问服务和应用程序不是同源，浏览器就会拦截其下载。
 如果在 CDN 域下托管资源， 通常就会出现这种情况。
@@ -625,13 +625,13 @@ module.exports = {
 };
 ```
 
-## Contributing {#contributing}
+## Contributing $#contributing$
 
 如果你从未阅读过我们的贡献指南，请在上面花点时间。
 
 [CONTRIBUTING](https://github.com/webpack-contrib/worker-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/worker-loader/blob/master/LICENSE)
 

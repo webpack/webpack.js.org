@@ -18,7 +18,7 @@ repo: https://github.com/webpack-contrib/json5-loader
 
 A webpack loader for parsing [json5](https://json5.org/) files into JavaScript objects.
 
-## Getting Started {#getting-started}
+## Getting Started $#getting-started$
 
 To begin, you'll need to install `json5-loader`:
 
@@ -58,13 +58,13 @@ module.exports = {
 };
 ```
 
-## Options {#options}
+## Options $#options$
 
 |            Name             |    Type     | Default | Description            |
 | :-------------------------: | :---------: | :-----: | :--------------------- |
 | **[`esModule`](#esmodule)** | `{Boolean}` | `true`  | Uses ES modules syntax |
 
-### `esModule` {#esmodule}
+### `esModule` $#esmodule$
 
 Type: `Boolean`
 Default: `true`
@@ -92,9 +92,9 @@ module.exports = {
 };
 ```
 
-## Examples {#examples}
+## Examples $#examples$
 
-### Usage with require statement loader prefix {#usage-with-require-statement-loader-prefix}
+### Usage with require statement loader prefix $#usage-with-require-statement-loader-prefix$
 
 **file.json5**
 
@@ -115,13 +115,13 @@ console.log(appConfig.env); // 'production'
 
 Don't forget to polyfill require if you want to use it in Node.js. See the webpack documentation.
 
-## Contributing {#contributing}
+## Contributing $#contributing$
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/json5-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/json5-loader/blob/master/LICENSE)
 

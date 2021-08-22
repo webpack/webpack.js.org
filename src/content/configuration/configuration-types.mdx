@@ -18,7 +18,7 @@ translators:
 
 除了导出单个配置外，还有一些能满足更多需求的使用方式。
 
-## 导出函数 {#exporting-a-function}
+## 导出函数 $#exporting-a-function$
 
 你可能会遇到需要区分[开发](/guides/development)环境和[生产](/guides/production)环境的情况。有很多种方式可以做到这一点。其中一种选择是由 webpack 配置导出一个函数而非对象，这个函数包含两个参数：
 
@@ -42,7 +42,7 @@ translators:
 };
 ```
 
-## 导出 Promise {#exporting-a-promise}
+## 导出 Promise $#exporting-a-promise$
 
 当需要异步加载配置变量时，webpack 将执行函数并导出一个配置文件，同时返回一个 Promise。
 
@@ -63,7 +63,7 @@ module.exports = () => {
 
 W> 只有通过 webpack 命令行工具返回的 `Promise` 才生效。[`webpack()`](/api/node/#webpack) 只接受对象。
 
-## 导出多种配置 {#exporting-multiple-configurations}
+## 导出多种配置 $#exporting-multiple-configurations$
 
 除了导出单个配置对象/函数，你可能也会需要导出多种配置（webpack 3.1.0 起支持）。当运行 webpack 时，所有配置项都会构建。比如，对于多 [targets](/configuration/output/#outputlibrarytarget)（如 AMD 和 CommonJS）[构建 library](/guides/author-libraries) 时会非常有用。
 
@@ -92,7 +92,7 @@ module.exports = [
 
 T> 如果你只传了一个 [`--config-name`](/api/cli/#configuration-options) 名字标识，webpack 将只会构建指定的配置项。
 
-### parallelism {#parallelism}
+### parallelism $#parallelism$
 
 如果你导出了多个配置，你可以在配置中使用 `parallelism` 选项来指定编译的最大并发数。
 

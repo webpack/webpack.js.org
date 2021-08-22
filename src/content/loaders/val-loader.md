@@ -28,7 +28,7 @@ The target module is called with two arguments: `(options, loaderContext)`
 - `options`: The loader options (for instance provided in the webpack config. See the [example](#examples) below).
 - `loaderContext`: [The loader context](/api/loaders/#the-loader-context).
 
-## Getting Started {#getting-started}
+## Getting Started $#getting-started$
 
 To begin, you'll need to install `val-loader`:
 
@@ -73,13 +73,13 @@ const answer = require("target-file");
 
 And run `webpack` via your preferred method.
 
-## Options {#options}
+## Options $#options$
 
 |                  Name                   |    Type    |   Default   | Description                                   |
 | :-------------------------------------: | :--------: | :---------: | :-------------------------------------------- |
 | **[`executableFile`](#executablefile)** | `{String}` | `undefined` | Allows to specify path to the executable file |
 
-### executableFile {#executablefile}
+### executableFile $#executablefile$
 
 Type: `String`
 Default: `undefined`
@@ -138,13 +138,13 @@ module.exports = {
 };
 ```
 
-## Return Object Properties {#return-object-properties}
+## Return Object Properties $#return-object-properties$
 
 Targeted modules of this loader must export a `Function` that returns an object,
 or a `Promise` resolving an object (e.g. async function), containing a `code` property at a minimum, but can
 contain any number of additional properties.
 
-### `code` {#code}
+### `code` $#code$
 
 Type: `String|Buffer`
 Default: `undefined`
@@ -152,14 +152,14 @@ _Required_
 
 Code passed along to webpack or the next loader that will replace the module.
 
-### `sourceMap` {#sourcemap}
+### `sourceMap` $#sourcemap$
 
 Type: `Object`
 Default: `undefined`
 
 A source map passed along to webpack or the next loader.
 
-### `ast` {#ast}
+### `ast` $#ast$
 
 Type: `Array[Object]`
 Default: `undefined`
@@ -168,7 +168,7 @@ An [Abstract Syntax Tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
 that will be passed to the next loader. Useful to speed up the build time if the
 next loader uses the same AST.
 
-### `dependencies` {#dependencies}
+### `dependencies` $#dependencies$
 
 Type: `Array[String]`
 Default: `[]`
@@ -177,7 +177,7 @@ An array of absolute, native paths to file dependencies that should be watched b
 
 Dependencies can also be added using [`loaderContext.addDependency(file: string)`](/api/loaders/#thisadddependency).
 
-### `contextDependencies` {#contextdependencies}
+### `contextDependencies` $#contextdependencies$
 
 Type: `Array[String]`
 Default: `[]`
@@ -186,7 +186,7 @@ An array of absolute, native paths to directory dependencies that should be watc
 
 Context dependencies can also be added using [`loaderContext.addContextDependency(directory: string)`](/api/loaders/#thisaddcontextdependency).
 
-### `buildDependencies` {#builddependencies}
+### `buildDependencies` $#builddependencies$
 
 Type: `Array[String]`
 Default: `[]`
@@ -195,7 +195,7 @@ An array of absolute, native paths to directory dependencies that should be watc
 
 Build dependencies can also be added using `loaderContext.addBuildDependency(file: string)`.
 
-### `cacheable` {#cacheable}
+### `cacheable` $#cacheable$
 
 Type: `Boolean`
 Default: `false`
@@ -203,9 +203,9 @@ Default: `false`
 If `true`, specifies that the code can be re-used in watch mode if none of the
 `dependencies` have changed.
 
-## Examples {#examples}
+## Examples $#examples$
 
-### Simple {#simple}
+### Simple $#simple$
 
 In this example the loader is configured to operator on a file name of
 `years-in-ms.js`, execute the code, and store the result in the bundle as the
@@ -256,7 +256,7 @@ import tenYearsMs from "years-in-ms";
 console.log(tenYearsMs); // 315360000000
 ```
 
-### Modernizr {#modernizr}
+### Modernizr $#modernizr$
 
 Example shows how to build [`modernizr`](https://www.npmjs.com/package/modernizr).
 
@@ -313,7 +313,7 @@ module.exports = {
 };
 ```
 
-### Figlet {#figlet}
+### Figlet $#figlet$
 
 Example shows how to build [`figlet`](https://www.npmjs.com/package/figlet).
 
@@ -401,13 +401,13 @@ module.exports = {
 };
 ```
 
-## Contributing {#contributing}
+## Contributing $#contributing$
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/val-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/val-loader/blob/master/LICENSE)
 

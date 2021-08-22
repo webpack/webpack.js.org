@@ -23,7 +23,7 @@ translators:
 
 `file-loader` 将一个文件中的 `import`/`require()` 解析为 url，并且将文件发送到输出文件夹。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 首先，你需要安装 `file-loader`：
 
@@ -66,9 +66,9 @@ module.exports = {
 
 > ℹ️ 默认情况下，生成文件的文件名，是文件内容的哈希值，并会保留所引用资源的原始扩展名。
 
-## 配置项 {#options}
+## 配置项 $#options$
 
-### `name` {#name}
+### `name` $#name$
 
 类型：`String|Function`
 默认值：`'[contenthash].[ext]'`
@@ -77,7 +77,7 @@ module.exports = {
 例如，要将文件从 `context` 目录发送到保留完整目录结构的输出目录中，
 可以使用：
 
-#### `String` {#string}
+#### `String` $#string$
 
 **webpack.config.js**
 
@@ -97,7 +97,7 @@ module.exports = {
 };
 ```
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 **webpack.config.js**
 
@@ -128,14 +128,14 @@ module.exports = {
 
 > ℹ️ 默认情况下，文件会按照你指定的路径和名称输出同一目录中，且会使用相同的 URI 路径来访问文件。
 
-### `outputPath` {#outputpath}
+### `outputPath` $#outputpath$
 
 类型：`String|Function`
 默认值：`undefined`
 
 指定用来放置一个或多个目标文件的文件系统路径。
 
-#### `String` {#string}
+#### `String` $#string$
 
 **webpack.config.js**
 
@@ -155,7 +155,7 @@ module.exports = {
 };
 ```
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 **webpack.config.js**
 
@@ -191,14 +191,14 @@ module.exports = {
 };
 ```
 
-### `publicPath` {#publicpath}
+### `publicPath` $#publicpath$
 
 类型：`String|Function`
 默认值：[`__webpack_public_path__`](/api/module-variables/#__webpack_public_path__-webpack-specific)+outputPath
 
 为一个或多个目标文件指定自定义公共路径。
 
-#### `String` {#string}
+#### `String` $#string$
 
 **webpack.config.js**
 
@@ -218,7 +218,7 @@ module.exports = {
 };
 ```
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 **webpack.config.js**
 
@@ -254,7 +254,7 @@ module.exports = {
 };
 ```
 
-### `postTransformPublicPath` {#posttransformpublicpath}
+### `postTransformPublicPath` $#posttransformpublicpath$
 
 类型：`Function`
 默认值：`undefined`
@@ -280,7 +280,7 @@ module.exports = {
 };
 ```
 
-### `context` {#context}
+### `context` $#context$
 
 类型：`String`
 默认值： [`context`](/configuration/entry-context/#context)
@@ -307,7 +307,7 @@ module.exports = {
 };
 ```
 
-### `emitFile` {#emitfile}
+### `emitFile` $#emitfile$
 
 类型：`Boolean`
 默认值：`true`
@@ -345,7 +345,7 @@ module.exports = {
 };
 ```
 
-### `regExp` {#regexp}
+### `regExp` $#regexp$
 
 类型：`RegExp`
 默认值：`undefined`
@@ -385,7 +385,7 @@ module.exports = {
 
 > ℹ️ 如果使用 `[0]`，它将被替换为整个测试字符串，而 `[1]` 将包含你的正则表达式的第一个捕获括号，依次类推。。。
 
-### `esModule` {#esmodule}
+### `esModule` $#esmodule$
 
 类型：`Boolean`
 默认值：`true`
@@ -417,80 +417,80 @@ module.exports = {
 };
 ```
 
-## Placeholders {#placeholders}
+## Placeholders $#placeholders$
 
 你可以在[这里](https://github.com/webpack/loader-utils#interpolatename)查到关于 placeholders 的所有信息。
 
-### `[ext]` {#ext}
+### `[ext]` $#ext$
 
 类型：`String`
 默认值：`file.extname`
 
 目标文件或资源的文件扩展名。
 
-### `[name]` {#name}
+### `[name]` $#name$
 
 类型：`String`
 默认值：`file.basename`
 
 文件或资源的 basename。
 
-### `[path]` {#path}
+### `[path]` $#path$
 
 类型：`String`
 默认值：`file.directory`
 
 相对于 webpack/config `context` 的资源路径。
 
-### `[folder]` {#folder}
+### `[folder]` $#folder$
 
 类型：`String`
 默认值：`file.folder`
 
 内有资源的文件夹。
 
-### `[query]` {#query}
+### `[query]` $#query$
 
 类型：`String`
 默认值：`file.query`
 
 资源的查询，例如：`?foo=bar`。
 
-### `[emoji]` {#emoji}
+### `[emoji]` $#emoji$
 
 类型：`String`
 默认值：`undefined`
 
 `content` 的随机 emoji 表示。
 
-### `[emoji:<length>]` {#emojilength}
+### `[emoji:<length>]` $#emojilength$
 
 类型：`String`
 默认值：`undefined`
 
 同上，但是有一个自定义 emoji 数量。
 
-### `[hash]` {#hash}
+### `[hash]` $#hash$
 
 类型：`String`
 默认值：`md4`
 
 指定生成文件内容哈希值的哈希方法。
 
-### `[contenthash]` {#contenthash}
+### `[contenthash]` $#contenthash$
 
 类型：`String`
 默认值：`md4`
 
 指定生成文件内容哈希值的哈希方法。
 
-### `[<hashType>:hash:<digestType>:<length>]` {#hashtypehashdigesttypelength}
+### `[<hashType>:hash:<digestType>:<length>]` $#hashtypehashdigesttypelength$
 
 类型：`String`
 
 options.content (Buffer) 的哈希（默认情况下，它是哈希的十六进制摘要）。
 
-#### `digestType` {#digesttype}
+#### `digestType` $#digesttype$
 
 类型：`String`
 默认值：`'hex'`
@@ -499,30 +499,30 @@ options.content (Buffer) 的哈希（默认情况下，它是哈希的十六进�
 有效值包括：base26、base32、base36、
 base49、base52、base58、base62、base64 和 hex。
 
-#### `hashType` {#hashtype}
+#### `hashType` $#hashtype$
 
 类型：`String`
 默认值：`'md4'`
 
 哈希函数应该使用的哈希类型。有效值包括：`md5`、`sha1`、`sha256` 和 `sha512`。
 
-#### `length` {#length}
+#### `length` $#length$
 
 类型：`Number`
 默认值：`undefined`
 
 用户还可以为计算出来的哈希值指定一个长度。
 
-### `[N]` {#n}
+### `[N]` $#n$
 
 类型：`String`
 默认值：`undefined`
 
 根据 `regExp` 匹配当前文件名而获得的第 n 个匹配。
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### Names {#names}
+### Names $#names$
 
 下面的例子展示了如何使用 `file-loader` 以及它会产生的结果。
 
@@ -635,7 +635,7 @@ module.exports = {
 path/to/file.png?e43b20c069c4a01867c31e98cbce33c9
 ```
 
-### CDN {#cdn}
+### CDN $#cdn$
 
 下面的例子展示了如何在 CDN 使用查询参数时使用 `file-loader`。
 
@@ -677,7 +677,7 @@ module.exports = {
 https://cdn.example.com/directory/image.png?width=300&height=300
 ```
 
-### 动态公共路径取决于运行时的环境变量 {#dynamic-public-path-depending-on-environment-variable-at-run-time}
+### 动态公共路径取决于运行时的环境变量 $#dynamic-public-path-depending-on-environment-variable-at-run-time$
 
 应用程序可能想要根据环境变量配置不同的 CDN 地址，而这个环境变量仅在运行应用程序时可用。这可能是一个优点，因为应用程序只需要一个构建，根据部署环境的环境变量而产生不同的构建行为。由于 file-loader 是在编译应用程序时应用的，而不是在运行应用程序时应用的，因此环境变量不能在 file-loader 配置中使用。解决这个问题的一种方法是在应用程序的入口根据环境变量将 `__webpack_public_path__` 设置为所需的 CDN 地址。`postTransformPublicPath` 配置项可以根据像 `__webpack_public_path__` 一样的变量来配置自定义路径。
 
@@ -744,13 +744,13 @@ https://cache.myserver.net/web/static/assets/image.somehash.png
 https://cache-dev.myserver.net/web/static/assets/image.somehash.png
 ```
 
-## 贡献 {#contributing}
+## 贡献 $#contributing$
 
 如果您还没有阅读，请花一点时间阅读我们的贡献指南。
 
 [贡献指南](https://github.com/webpack-contrib/file-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/file-loader/blob/master/LICENSE)
 

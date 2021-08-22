@@ -22,7 +22,7 @@ translators:
 
 把 CSS 插入到 DOM 中。
 
-## 快速开始 {#getting-started}
+## 快速开始 $#getting-started$
 
 首先，你需要安装 `style-loader`：
 
@@ -63,7 +63,7 @@ module.exports = {
 };
 ```
 
-## Options {#options}
+## Options $#options$
 
 |              名称               |         类型         |  默认值   | 描述                                              |
 | :-----------------------------: | :------------------: | :--------: | :------------------------------------------------------- |
@@ -74,7 +74,7 @@ module.exports = {
 |       [**`base`**](#base)       |      `{Number}`      |   `true`   | 基于 (DLLPlugin) 设置 module ID |
 |   [**`esModule`**](#esmodule)   |     `{Boolean}`      |  `false`   | 使用 ES modules 语法                                       |
 
-### `injectType` {#injecttype}
+### `injectType` $#injecttype$
 
 Type: `String`
 Default: `styleTag`
@@ -91,7 +91,7 @@ Default: `styleTag`
 - `lazyAutoStyleTag`
 - `linkTag`
 
-#### `styleTag` {#styletag}
+#### `styleTag` $#styletag$
 
 通过使用多个 `<style></style>` 自动把 styles 插入到 DOM 中。该方式是默认行为。
 
@@ -148,7 +148,7 @@ module.exports = {
 </style>
 ```
 
-#### `singletonStyleTag` {#singletonstyletag}
+#### `singletonStyleTag` $#singletonstyletag$
 
 通过使用一个 `<style></style>` 来自动把 styles 插入到 DOM 中。
 
@@ -205,11 +205,11 @@ loader 插入的 styles 如下：
 </style>
 ```
 
-#### `autoStyleTag` {#autostyletag}
+#### `autoStyleTag` $#autostyletag$
 
 与 [`styleTag`](#styletag) 相同，但是当代码在 IE6-9 中运行时，请打开 [`singletonStyleTag`](#singletonstyletag) 模式。
 
-#### `lazyStyleTag` {#lazystyletag}
+#### `lazyStyleTag` $#lazystyletag$
 
 在需要时使用多个 `<style></style>` 把 styles 插入到 DOM 中。
 
@@ -281,7 +281,7 @@ module.exports = {
 </style>
 ```
 
-#### `lazySingletonStyleTag` {#lazysingletonstyletag}
+#### `lazySingletonStyleTag` $#lazysingletonstyletag$
 
 在必要时，使用 `<style></style>` 把 style 插入的 DOM 中。
 
@@ -355,11 +355,11 @@ module.exports = {
 </style>
 ```
 
-#### `lazyAutoStyleTag` {#lazyautostyletag}
+#### `lazyAutoStyleTag` $#lazyautostyletag$
 
 与 [`lazyStyleTag`](#lazystyletag) 相同，但是当代码在 IE6-9 中运行时，请打开 [`lazySingletonStyleTag`](#lazysingletonstyletag) 模式。
 
-#### `linkTag` {#linktag}
+#### `linkTag` $#linktag$
 
 使用多个 `<link rel="stylesheet" href="path/to/file.css">` 将 styles 插入到 DOM 中。
 
@@ -395,7 +395,7 @@ module.exports = {
 <link rel="stylesheet" href="path/to/other-styles.css" />
 ```
 
-### `attributes` {#attributes}
+### `attributes` $#attributes$
 
 Type: `Object`
 Default: `{}`
@@ -430,7 +430,7 @@ module.exports = {
 <style id="id"></style>
 ```
 
-### `insert` {#insert}
+### `insert` $#insert$
 
 Type: `String|Function`
 Default: `head`
@@ -442,9 +442,9 @@ Default: `head`
 
 如果你指定 [iframe](https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement) 作为插入的目标时，请确保你有足够的访问权限，styles 将会被插入到 content document 的 head 标签中。
 
-#### `String` {#string}
+#### `String` $#string$
 
-##### `Selector` {#selector}
+##### `Selector` $#selector$
 
 配置 styles 插入 DOM 的自定义 [query selector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector)。
 
@@ -471,7 +471,7 @@ module.exports = {
 };
 ```
 
-##### `Absolute path to function` {#absolutepathtofunction}
+##### `Absolute path to function` $#absolutepathtofunction$
 
 允许设置自定义函数的绝对路径，该函数能够覆盖默认行为并且能够在任意位置插入样式。
 
@@ -503,7 +503,7 @@ module.exports = {
 
 一个新的 `<style>` 或 `<link>` 元素将会被插入到 `body` 标签底部。
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 允许覆盖默认行为并把 styles 插入到任意位置。
 
@@ -552,12 +552,12 @@ module.exports = {
 
 在 `head` 标签顶部插入styles。
 
-### `styleTagTransform` {#styletagtransform}
+### `styleTagTransform` $#styletagtransform$
 
 类型：`String | Function`
 默认值：`undefined`
 
-#### `String` {#string}
+#### `String` $#string$
 
 允许设置自定义函数的绝对路径，该函数能够覆盖 styleTagTransform 默认行为。
 
@@ -587,7 +587,7 @@ module.exports = {
 };
 ```
 
-#### `Function` {#function}
+#### `Function` $#function$
 
 当将 'style' 标签插入到 DOM 中时，转换标签和 css。
 
@@ -623,7 +623,7 @@ module.exports = {
 };
 ```
 
-### `base` {#base}
+### `base` $#base$
 
 这个配置主要是作为使用 [DllPlugin](https://robertknight.me.uk/posts/webpack-dll-plugins/) 时出现 [css clashes](https://github.com/webpack-contrib/style-loader/issues/163) 问题时的解决方案。`base` 允许你通过指定一个比 _DllPlugin1_ 使用的 css 模块 id 大的值，来避免应用程序中的 css (或者 DllPlugin2 的 css) 被 DllPlugin1 中的 css 覆盖问题。比如：
 
@@ -678,7 +678,7 @@ module.exports = {
 };
 ```
 
-### `esModule` {#esmodule}
+### `esModule` $#esmodule$
 
 Type: `Boolean`
 Default: `true`
@@ -705,9 +705,9 @@ module.exports = {
 };
 ```
 
-## 示例 {#examples}
+## 示例 $#examples$
 
-### 推荐 {#recommend}
+### 推荐 $#recommend$
 
 对于 `production` 模式的构建，建议从你的包中提取 CSS，以便以后能够使用 CSS/JS 资源的并行加载。
 可以使用 [mini-css-extract-plugin](/plugins/mini-css-extract-plugin/) 实现，因为它可以创建单独的 css 文件。
@@ -739,7 +739,7 @@ module.exports = {
 };
 ```
 
-### Named export for CSS Modules {#namedexportforcssmodules}
+### Named export for CSS Modules $#namedexportforcssmodules$
 
 > ⚠ 本地命名导出时，会将其名称转换为 `camelCase` 的形式。
 
@@ -795,7 +795,7 @@ module.exports = {
 };
 ```
 
-### Source maps {#sourcemap}
+### Source maps $#sourcemap$
 
 因此，想要生成 source map，则需将 style-loader 之前执行 loader 的 `sourceMap` 选项设置为`true`。
 
@@ -817,7 +817,7 @@ module.exports = {
 };
 ```
 
-### Nonce {#nonce}
+### Nonce $#nonce$
 
 有两种方式使用 `nonce`：
 
@@ -826,7 +826,7 @@ module.exports = {
 
 > ⚠ `attributes` 拥有比 `__webpack_nonce__` 更高的优先级
 
-#### `attributes` {#attributes}
+#### `attributes` $#attributes$
 
 **component.js**
 
@@ -869,7 +869,7 @@ module.exports = {
 </style>
 ```
 
-#### `__webpack_nonce__` {#__webpack_nonce__}
+#### `__webpack_nonce__` $#__webpack_nonce__$
 
 **create-nonce.js**
 
@@ -919,7 +919,7 @@ module.exports = {
 </style>
 ```
 
-#### Insert styles at top {#insert-styles-at-top}
+#### Insert styles at top $#insert-styles-at-top$
 
 在 `head` 标签顶部插入 style。
 
@@ -960,7 +960,7 @@ module.exports = {
 };
 ```
 
-#### 在目标元素前插入 style {#insert-styles-before-target-element}
+#### 在目标元素前插入 style $#insert-styles-before-target-element$
 
 在 `#id` 元素前面插入 style。
 
@@ -1003,13 +1003,13 @@ module.exports = {
 };
 ```
 
-## Contributing {#contributing}
+## Contributing $#contributing$
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
 [CONTRIBUTING](https://github.com/webpack-contrib/style-loader/blob/master/.github/CONTRIBUTING.md)
 
-## License {#license}
+## License $#license$
 
 [MIT](https://github.com/webpack-contrib/style-loader/blob/master/LICENSE)
 

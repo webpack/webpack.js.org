@@ -19,7 +19,7 @@ translators:
 
 webpack 支持使用多种编程语言和数据描述格式来编写配置文件。在 [node-interpret](https://github.com/gulpjs/interpret) 中你可以找到当前所支持的文件类型列表，通过 [node-interpret](https://github.com/gulpjs/interpret)，webpack 能够处理这些类型的配置文件。
 
-## TypeScript {#typescript}
+## TypeScript $#typescript$
 
 要使用 [Typescript](https://www.typescriptlang.org/) 来编写 webpack 配置，你需要先安装必要的依赖，比如 Typescript 以及其相应的类型声明，类型声明可以从 [DefinitelyTyped](https://definitelytyped.org/) 项目中获取，依赖安装如下所示：
 
@@ -98,7 +98,7 @@ T> ts-node 可以根据 `tsconfig-paths` 提供的环境变量 `process.env.TS_N
 
 之所以要添加 `cross-env`，是因为我们在直接使用 `TS_NODE_PROJECT` 时遇到过 `"TS_NODE_PROJECT" unrecognized command` 报错的反馈，添加 `cross-env` 之后该问题也似乎得到了解决，你可以查看[这个 issue](https://github.com/webpack/webpack.js.org/issues/2733)获取到关于该问题的更多信息。
 
-## CoffeeScript {#coffeescript}
+## CoffeeScript $#coffeescript$
 
 与 `Typescript` 类似，在使用 CoffeeScript 前需要先安装其依赖，如下所示:
 
@@ -132,7 +132,7 @@ config =
 module.exports = config
 ```
 
-## Babel and JSX {#babel-and-jsx}
+## Babel and JSX $#babel-and-jsx$
 
 下述的示例中使用了 JSX（用于 React 的 JavaScript 标记语言）和 babel 来创建格式为 json 的 webpack 配置文件。
 

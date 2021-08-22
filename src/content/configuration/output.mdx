@@ -35,13 +35,13 @@ translators:
 
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
 
-## output.assetModuleFilename {#outputassetModulefilename}
+## output.assetModuleFilename $#outputassetModulefilename$
 
 `string = '[hash][ext][query]'`
 
 与 [`output.filename`](#outputfilename) 相同，不过应用于 [Asset Modules](/guides/asset-modules/)。
 
-## output.auxiliaryComment {#outputauxiliarycomment}
+## output.auxiliaryComment $#outputauxiliarycomment$
 
 W> 最好使用 [`output.library.auxiliaryComment`](#outputlibraryauxiliarycomment)。
 
@@ -104,7 +104,7 @@ module.exports = {
 };
 ```
 
-## `output.charset` {#outputcharset}
+## `output.charset` $#outputcharset$
 
 `boolean = true`
 
@@ -112,7 +112,7 @@ module.exports = {
 
 T> 尽管 `<script>` [已弃用](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes)了 `charset` 属性，当 webpack 还是默认添加了它，目的是与非现代浏览器兼容。
 
-## `output.chunkFilename` {#outputchunkfilename}
+## `output.chunkFilename` $#outputchunkfilename$
 
 `string = '[id].js'` `function (pathData, assetInfo) => string`
 
@@ -149,7 +149,7 @@ module.exports = {
 };
 ```
 
-## output.chunkFormat {#outputchunkformat}
+## output.chunkFormat $#outputchunkformat$
 
 `false` `string: 'array-push' | 'commonjs' | 'module' | <any string>`
 
@@ -167,7 +167,7 @@ module.exports = {
 };
 ```
 
-## `output.chunkLoadTimeout` {#outputchunkLoadtimeout}
+## `output.chunkLoadTimeout` $#outputchunkLoadtimeout$
 
 `number = 120000`
 
@@ -185,7 +185,7 @@ module.exports = {
 };
 ```
 
-## `output.chunkLoadingGlobal` {#outputchunkloadingglobal}
+## `output.chunkLoadingGlobal` $#outputchunkloadingglobal$
 
 `string = 'webpackChunkwebpack'`
 
@@ -203,7 +203,7 @@ module.exports = {
 };
 ```
 
-## output.chunkLoading {#outputchunkloading}
+## output.chunkLoading $#outputchunkloading$
 
 `false` `string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | 'import' | <any string>`
 
@@ -221,7 +221,7 @@ module.exports = {
 };
 ```
 
-## output.clean {#outputclean}
+## output.clean $#outputclean$
 
 <Badge text="5.20.0+" />
 
@@ -282,7 +282,7 @@ webpack.CleanPlugin.getCompilationHooks(compilation).keep.tap(
 );
 ```
 
-## output.compareBeforeEmit {#outputcomparebeforeemit}
+## output.compareBeforeEmit $#outputcomparebeforeemit$
 
 `boolean = true`
 
@@ -299,7 +299,7 @@ module.exports = {
 };
 ```
 
-## output.crossOriginLoading {#outputcrossoriginloading}
+## output.crossOriginLoading $#outputcrossoriginloading$
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
 
@@ -308,7 +308,7 @@ module.exports = {
 - `'anonymous'` - **不带凭据(credential)** 启用跨域加载
 - `'use-credentials'` - **携带凭据(credential)** 启用跨域加载
 
-## `output.devtoolFallbackModuleFilenameTemplate` {#outputdevtoolfallbackmodulefilenametemplate}
+## `output.devtoolFallbackModuleFilenameTemplate` $#outputdevtoolfallbackmodulefilenametemplate$
 
 `string` `function (info)`
 
@@ -316,7 +316,7 @@ module.exports = {
 
 查看 [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate)。
 
-## `output.devtoolModuleFilenameTemplate` {#outputdevtoolmodulefilenametemplate}
+## `output.devtoolModuleFilenameTemplate` $#outputdevtoolmodulefilenametemplate$
 
 `string = 'webpack://[namespace]/[resource-path]?[loaders]'` `function (info) => string`
 
@@ -364,7 +364,7 @@ module.exports = {
 
 如果多个模块产生相同的名称，使用 [`output.devtoolFallbackModuleFilenameTemplate`](#outputdevtoolfallbackmodulefilenametemplate) 来代替这些模块。
 
-## `output.devtoolNamespace` {#outputdevtoolnamespace}
+## `output.devtoolNamespace` $#outputdevtoolnamespace$
 
 `string`
 
@@ -372,7 +372,7 @@ module.exports = {
 
 例如，如果你有两个 library，分别使用命名空间 `library1` 和 `library2`，并且都有一个文件 `./src/index.js`（可能具有不同内容），它们会将这些文件暴露为 `webpack://library1/./src/index.js` 和 `webpack://library2/./src/index.js`。
 
-## `output.enabledChunkLoadingTypes` {#outputenabledchunkloadingtypes}
+## `output.enabledChunkLoadingTypes` $#outputenabledchunkloadingtypes$
 
 `[string: 'jsonp' | 'import-scripts' | 'require' | 'async-node' | <any string>]`
 
@@ -390,7 +390,7 @@ module.exports = {
 };
 ```
 
-## `output.enabledLibraryTypes` {#outputenabledlibrarytypes}
+## `output.enabledLibraryTypes` $#outputenabledlibrarytypes$
 
 `[string]`
 
@@ -405,7 +405,7 @@ module.exports = {
 };
 ```
 
-## `output.enabledWasmLoadingTypes` {#outputenabledwasmloadingtypes}
+## `output.enabledWasmLoadingTypes` $#outputenabledwasmloadingtypes$
 
 `[string]`
 
@@ -419,7 +419,7 @@ module.exports = {
   },
 };
 
-## `output.environment` {#outputenvironment}
+## `output.environment` $#outputenvironment$
 
 告诉 webpack 在生成的运行时代码中可以使用哪个版本的 ES 特性。
 
@@ -446,7 +446,7 @@ module.exports = {
 };
 ```
 
-## output.filename {#outputfilename}
+## output.filename $#outputfilename$
 
 `string` `function (pathData, assetInfo) => string`
 
@@ -540,7 +540,7 @@ module.exports = {
 
 注意，此选项不会影响那些「按需加载 chunk」的输出文件。它只影响最初加载的输出文件。对于按需加载的 chunk 文件，请使用 [`output.chunkFilename`](#outputchunkfilename) 选项来控制输出。通过 loader 创建的文件也不受影响。在这种情况下，你必须尝试 loader 特定的可用选项。
 
-### Template strings {#template-strings}
+### Template strings $#template-strings$
 
 可以使用以下替换模板字符串（通过 webpack 内部的[`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)）:
 
@@ -632,7 +632,7 @@ type ModulePathData = {
 
 T> 在某些上下文中，属性将使用 JavaScript 代码表达式代替原始值。在此情况下，`WithLength` 变量是可用的，应该使用它来代替对原始值的分片操作。
 
-## output.futureEmitAssets {#outputfutureemitassets}
+## output.futureEmitAssets $#outputfutureemitassets$
 
 `boolean = false`
 
@@ -649,7 +649,7 @@ module.exports = {
 };
 ```
 
-## `output.globalObject` {#outputglobalobject}
+## `output.globalObject` $#outputglobalobject$
 
 `string = 'window'`
 
@@ -671,19 +671,19 @@ module.exports = {
 };
 ```
 
-## `output.hashDigest` {#outputhashdigest}
+## `output.hashDigest` $#outputhashdigest$
 
 `string = 'hex'`
 
 在生成 hash 时使用的编码方式。支持 Node.js [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) 的所有编码。对文件名使用 `'base64'`，可能会出现问题，因为 base64 字母表中具有 `/` 这个字符(character)。同样的，`'latin1'` 规定可以含有任何字符(character)。
 
-## `output.hashDigestLength` {#outputhashdigestlength}
+## `output.hashDigestLength` $#outputhashdigestlength$
 
 `number = 20`
 
 散列摘要的前缀长度。
 
-## `output.hashFunction` {#outputhashfunction}
+## `output.hashFunction` $#outputhashfunction$
 
 `string = 'md4'` `function`
 
@@ -700,11 +700,11 @@ module.exports = {
 
 确保 hash 函数有可访问的 `update` 和 `digest` 方法。
 
-## `output.hashSalt` {#outputhashsalt}
+## `output.hashSalt` $#outputhashsalt$
 
 一个可选的加盐值，通过 Node.JS [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding) 来更新哈希。
 
-## `output.hotUpdateChunkFilename` {#outputhotupdatechunkfilename}
+## `output.hotUpdateChunkFilename` $#outputhotupdatechunkfilename$
 
 `string = '[id].[fullhash].hot-update.js'`
 
@@ -725,7 +725,7 @@ module.exports = {
 
 T> 通常，你不需要修改 `output.hotUpdateChunkFilename`.
 
-## `output.hotUpdateGlobal` {#outputhotupdateglobal}
+## `output.hotUpdateGlobal` $#outputhotupdateglobal$
 
 `string`
 
@@ -735,7 +735,7 @@ JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
 欲了解详情，请查阅 [`output.chunkLoadingGlobal`](#outputchunkloadingglobal)。
 
-## `output.hotUpdateMainFilename` {#outputhotupdatemainfilename}
+## `output.hotUpdateMainFilename` $#outputhotupdatemainfilename$
 
 `string = '[runtime].[fullhash].hot-update.json'` `function`
 
@@ -743,7 +743,7 @@ JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
 T> 通常，你不需要修改 `output.hotUpdateMainFilename`.
 
-## `output.iife` {#outputiife}
+## `output.iife` $#outputiife$
 
 `boolean = true`
 
@@ -775,7 +775,7 @@ module.exports = {
 };
 ```
 
-## output.library {#outputlibrary}
+## output.library $#outputlibrary$
 
 输出一个库，为你的入口做导出。
 
@@ -881,7 +881,7 @@ export function hello(name) {
    };
    ```
 
-### output.library.name {#outputlibraryname}
+### output.library.name $#outputlibraryname$
 
 ```js
 module.exports = {
@@ -901,7 +901,7 @@ module.exports = {
   string | string[] | {amd?: string, commonjs?: string, root?: string | string[]}
   ```
 
-### output.library.type {#outputlibrarytype}
+### output.library.type $#outputlibrarytype$
 
 配置将库暴露的方式。
 
@@ -911,11 +911,11 @@ module.exports = {
 
 对于接下来的实例，我们将会使用 `__entry_return_` 表示被入口点返回的值。
 
-#### Expose a Variable {#exposeavariable}
+#### Expose a Variable $#exposeavariable$
 
 These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library.name`](#outputlibraryname) at whatever scope the bundle was included at.
 
-##### `type: 'var'` {#type-var}
+##### `type: 'var'` $#type-var$
 
 ```js
 module.exports = {
@@ -938,7 +938,7 @@ var MyLibrary = _entry_return_;
 MyLibrary.doSomething();
 ```
 
-##### `type: 'assign'` {#typeassign}
+##### `type: 'assign'` $#typeassign$
 
 ```js
 module.exports = {
@@ -960,7 +960,7 @@ MyLibrary = _entry_return_;
 
 请注意，如果 `MyLibrary` 没有在你的库之前定义，那么它将会被设置在全局作用域。
 
-##### `type: 'assign-properties'` <Badge text='5.16.0+' /> {#typeassignproperties}
+##### `type: 'assign-properties'` <Badge text='5.16.0+' /> $#typeassignproperties$
 
 ```js
 module.exports = {
@@ -992,11 +992,11 @@ export function hello(name) {
 MyLibrary.hello('World');
 ```
 
-#### Expose Via Object Assignment {#exposeviaobjectassignment}
+#### Expose Via Object Assignment $#exposeviaobjectassignment$
 
 这些配置项分配入口点的返回值（例如：无论入口点导出的什么内容）到一个名为 [`output.library.name`](#outputlibraryname) 的对象中。
 
-##### `type: 'this'` {#typethis}
+##### `type: 'this'` $#typethis$
 
 ```js
 module.exports = {
@@ -1020,7 +1020,7 @@ this.MyLibrary.doSomething();
 MyLibrary.doSomething(); // 如果 `this` 为 window 对象
 ```
 
-##### `type: 'window'` {#type-window}
+##### `type: 'window'` $#type-window$
 
 ```js
 module.exports = {
@@ -1042,7 +1042,7 @@ window['MyLibrary'] = _entry_return_;
 window.MyLibrary.doSomething();
 ```
 
-##### `type: 'global'` {#type-global}
+##### `type: 'global'` $#type-global$
 
 ```js
 module.exports = {
@@ -1064,7 +1064,7 @@ global['MyLibrary'] = _entry_return_;
 global.MyLibrary.doSomething();
 ```
 
-##### `type: 'commonjs'` {type-commmonjs}
+##### `type: 'commonjs'` $#type-commmonjs$
 
 ```js
 module.exports = {
@@ -1088,11 +1088,11 @@ require('MyLibrary').doSomething();
 
 W> 注意，不设置 `output.library.name` 将导致入口起点返回的所有属性都被赋值给给定的对象；不检查现有的属性名。
 
-#### Module Definition Systems {#moduledefinitionsystems}
+#### Module Definition Systems $#moduledefinitionsystems$
 
 这些配置项将生成一个带有完整 header 的 bundle，以确保与各种模块系统兼容。`output.library.name` 配置项在不同的 `output.library.type` 中有不同的含义。
 
-##### `type: 'module'` {#type-module}
+##### `type: 'module'` $#type-module$
 
 ```js
 module.exports = {
@@ -1113,7 +1113,7 @@ module.exports = {
 
 然而该特性仍然是实验性的，并且没有完全支持，所以请确保事先启用 [experiments.outputModule](/configuration/experiments/)。除此之外，你可以在 [这里](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975) 追踪开发进度。
 
-##### `type: 'commonjs2'` {#type-commmonjs2}
+##### `type: 'commonjs2'` $#type-commmonjs2$
 
 ```js
 module.exports = {
@@ -1139,7 +1139,7 @@ require('MyLibrary').doSomething();
 
 T> 在考虑 CommonJS 与 CommonJS2 之间的区别？虽然它们很相似，但是它们之间有一些细微的差别，这些差别在 webpack 的上下文中通常是不相关的。（要获取更多详细内容，请 [阅读这个 issue](https://github.com/webpack/webpack/issues/1114)。）
 
-##### `type: 'amd'` {#type-amd}
+##### `type: 'amd'` $#type-amd$
 
 可以将你的库暴露为 AMD 模块。
 
@@ -1185,7 +1185,7 @@ define(function () {
 
 如果使用一个 `<script>` 标签直接加载。它只能通过 RequireJS 兼容的异步模块 loader 通过文件的实际路径工作，所以在这种情况下，如果 `output.path` 与 `output.filename` 直接在服务端暴露，那么对于这种特殊设置可能会变得很重要。
 
-##### `type: 'amd-require'` {#type-amd-require}
+##### `type: 'amd-require'` $#type-amd-require$
 
 ```javascript
 module.exports = {
@@ -1205,7 +1205,7 @@ module.exports = {
 
 使用该类型的话，不能使用库的名称。
 
-##### `type: 'umd'` {#type-umd}
+##### `type: 'umd'` $#type-umd$
 
 这将在所有模块定义下暴露你的库, 允许它与 CommonJS、AMD 和作为全局变量工作。可以查看 [UMD Repository](https://github.com/umdjs/umd) 获取更多内容。
 
@@ -1282,7 +1282,7 @@ module.exports = {
 };
 ```
 
-##### `type: 'system'` {#type-system}
+##### `type: 'system'` $#type-system$
 
 这将会把你的库暴露为一个 [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) 模块。这个特性最初是在 [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0) 中发布。
 
@@ -1327,9 +1327,9 @@ System.register(
 );
 ```
 
-#### Other Types {#othertypes}
+#### Other Types $#othertypes$
 
-##### `type: 'jsonp'` {#type-jsonp}
+##### `type: 'jsonp'` $#type-jsonp$
 
 ```js
 module.exports = {
@@ -1353,7 +1353,7 @@ MyLibrary(_entry_return_);
 
 T> 阅读 [authoring libraries guide](/guides/author-libraries/) 指南获取更多关于 `output.library.name` 与 `output.library.type` 的相关信息。
 
-### output.library.export {#outputlibraryexport}
+### output.library.export $#outputlibraryexport$
 
 指定哪一个导出应该被暴露为一个库。
 
@@ -1400,7 +1400,7 @@ module.exports = {
 var MyLibrary = _entry_return_.default.subModule;
 ```
 
-### output.library.auxiliaryComment {#outputlibraryauxiliarycomment}
+### output.library.auxiliaryComment $#outputlibraryauxiliarycomment$
 
 在 UMD 包装器中添加注释。
 
@@ -1461,7 +1461,7 @@ module.exports = {
 };
 ```
 
-### output.library.umdNamedDefine {#outputlibraryumdnameddefine}
+### output.library.umdNamedDefine $#outputlibraryumdnameddefine$
 
 `boolean`
 
@@ -1486,7 +1486,7 @@ AMD module 将会是这样：
 define('MyLibrary', [], factory);
 ```
 
-## `output.libraryExport` {#outputlibraryexport}
+## `output.libraryExport` $#outputlibraryexport$
 
 W> 我们可能会停止对此的支持，所以最好使用 [output.library.export](#outputlibraryexport)，其作用与 `libraryExport` 一致。
 
@@ -1523,7 +1523,7 @@ MyModule.doSomething();
 MySubModule.doSomething();
 ```
 
-## `output.libraryTarget` {#outputlibrarytarget}
+## `output.libraryTarget` $#outputlibrarytarget$
 
 `string = 'var'`
 
@@ -1533,11 +1533,11 @@ W> 请使用 [`output.library.type`](#outputlibrarytype) 代理，因为我们�
 
 T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回的值。在 bundle 本身中，它是从入口起点、由 webpack 生成的函数的输出结果。
 
-### 暴露为一个变量 {#expose-a-variable}
+### 暴露为一个变量 $#expose-a-variable$
 
 这些选项将入口起点的返回值（例如，入口起点的任何导出值），在 bundle 包所引入的位置，赋值给 [`output.library`](#outputlibrary) 提供的变量名。
 
-#### `libraryTarget: 'var'` {#libraryTarget-var}
+#### `libraryTarget: 'var'` $#libraryTarget-var$
 
 W> 最好使用 [`output.library.type: 'var'`](#type-var)。
 
@@ -1550,7 +1550,7 @@ var MyLibrary = _entry_return_;
 MyLibrary.doSomething();
 ```
 
-#### `libraryTarget: 'assign'` {#libraryTarget-assign}
+#### `libraryTarget: 'assign'` $#libraryTarget-assign$
 
 W> 最好使用 [`output.library.type: 'assign'`](#type-assign)。
 
@@ -1562,7 +1562,7 @@ MyLibrary = _entry_return_;
 
 注意，如果 `MyLibrary` 在作用域中未在前面代码进行定义，则你的 library 将被设置在全局作用域内。
 
-#### `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' /> {#libraryTarget-assign-properties}
+#### `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' /> $#libraryTarget-assign-properties$
 
 W> 最好使用 [output.library.type: 'assign-properties'`](#type-assign-properties)。
 
@@ -1586,7 +1586,7 @@ MyLibrary.hello('World');
 
 W> 当使用此选项时，将 [`output.library`](#outputlibrary) 设置为空，将产生一个破损的输出 bundle。
 
-### 通过在对象上赋值暴露 {#expose-via-object-assignment}
+### 通过在对象上赋值暴露 $#expose-via-object-assignment$
 
 这些选项将入口起点的返回值（例如，入口起点的任何导出值）赋值给一个特定对象的属性（此名称由 `output.library` 定义）下。
 
@@ -1602,7 +1602,7 @@ W> 当使用此选项时，将 [`output.library`](#outputlibrary) 设置为空�
 
 W> 注意，不设置 `output.library` 将导致由入口起点返回的所有属性，都会被赋值给给定的对象；这里并不会检查现有的属性名是否存在。
 
-#### `libraryTarget: 'this'` {#librarytarget-this}
+#### `libraryTarget: 'this'` $#librarytarget-this$
 
 W> 最好使用 [`output.library.type: 'this'`](#type-this)。
 
@@ -1616,7 +1616,7 @@ this.MyLibrary.doSomething();
 MyLibrary.doSomething(); // 如果 this 是 window
 ```
 
-#### `libraryTarget: 'window'` {#librarytarget-window}
+#### `libraryTarget: 'window'` $#librarytarget-window$
 
 W> 最好使用 [`output.library.type: 'window'`](#type-window)。
 
@@ -1628,7 +1628,7 @@ window['MyLibrary'] = _entry_return_;
 window.MyLibrary.doSomething();
 ```
 
-#### `libraryTarget: 'global'` {#librarytarget-global}
+#### `libraryTarget: 'global'` $#librarytarget-global$
 
 W> 最好使用 [`output.library.type: 'global'`](#type-global)。
 
@@ -1640,7 +1640,7 @@ global['MyLibrary'] = _entry_return_;
 global.MyLibrary.doSomething();
 ```
 
-#### `libraryTarget: 'commonjs'` {#librarytarget-commonjs}
+#### `libraryTarget: 'commonjs'` $#librarytarget-commonjs$
 
 W> 最好使用 [`output.library.type: 'commonjs'`](#type-commonjs)。
 
@@ -1652,11 +1652,11 @@ exports['MyLibrary'] = _entry_return_;
 require('MyLibrary').doSomething();
 ```
 
-### 模块定义系统 {#module-definition-systems}
+### 模块定义系统 $#module-definition-systems$
 
 这些选项将使得 bundle 带有更完整的模块头，以确保与各种模块系统的兼容性。根据 `output.libraryTarget` 选项不同，`output.library` 选项将具有不同的含义。
 
-#### `libraryTarget: 'module'` {#librarytarget-module}
+#### `libraryTarget: 'module'` $#librarytarget-module$
 
 W> 最好使用 [`output.library.type: 'module'`](#type-module)。
 
@@ -1664,7 +1664,7 @@ W> 最好使用 [`output.library.type: 'module'`](#type-module)。
 
 需要注意的是，该功能还未完全支持，请在[此处](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975)跟进进度。
 
-#### `libraryTarget: 'commonjs2'` {#librarytarget-commonjs2}
+#### `libraryTarget: 'commonjs2'` $#librarytarget-commonjs2$
 
 W> 最好使用 [`output.library.type: 'commonjs2'`](#type-commonjs2)。
 
@@ -1680,7 +1680,7 @@ require('MyLibrary').doSomething();
 
 T> 想要弄清楚 CommonJS 和 CommonJS2 之间的区别？虽然它们很相似，但二者之间存在一些微妙的差异，这通常与 webpack 上下文没有关联。（更多详细信息，请[阅读此 issue](https://github.com/webpack/webpack/issues/1114)。）
 
-#### `libraryTarget: 'amd'` {#librarytarget-amd}
+#### `libraryTarget: 'amd'` $#librarytarget-amd$
 
 W> 最好使用 [`output.library.type: 'amd'`](#type-amd)。
 
@@ -1726,7 +1726,7 @@ define([], function () {
 
 如果直接加载 `<script>` 标签，此 bundle 无法按预期运行，或者根本无法正常运行（在 almond loader 中）。只能通过文件的实际路径，在 RequireJS 兼容的异步模块加载器中运行，因此在这种情况下，如果这些设置直接暴露在服务器上，那么 `output.path` 和 `output.filename` 对于这个特定的设置可能变得很重要。
 
-#### `libraryTarget: 'amd-require'` {#librarytarget-amd-require}
+#### `libraryTarget: 'amd-require'` $#librarytarget-amd-require$
 
 W> 最好使用 [`output.library.type: 'amd-require'`](#type-amd-require)。
 
@@ -1736,7 +1736,7 @@ W> 最好使用 [`output.library.type: 'amd-require'`](#type-amd-require)。
 
 对于此 target，库名称将被忽略。
 
-#### `libraryTarget: 'umd'` {#librarytarget-umd}
+#### `libraryTarget: 'umd'` $#librarytarget-umd$
 
 W> 最好使用 [`output.library.type: 'umd'`](#type-umd)。
 
@@ -1811,7 +1811,7 @@ module.exports = {
 };
 ```
 
-#### `libraryTarget: 'system'` {#librarytarget-system}
+#### `libraryTarget: 'system'` $#librarytarget-system$
 
 W> 最好使用 [`output.library.type: 'system'`](#type-system)。
 
@@ -1866,9 +1866,9 @@ __system_context__.import('./other-file.js').then((m) => {
 });
 ```
 
-### 其他 Targets {#other-targets}
+### 其他 Targets $#other-targets$
 
-#### `libraryTarget: 'jsonp'` {#librarytarget-jsonp}
+#### `libraryTarget: 'jsonp'` $#librarytarget-jsonp$
 
 W> 最好使用 [`output.library.type: 'jsonp'`](#type-jsonp)。
 
@@ -1880,7 +1880,7 @@ MyLibrary(_entry_return_);
 
 你的 library 的依赖将由 [`externals`](/configuration/externals/) 配置定义。
 
-## output.module {#outputmodule}
+## output.module $#outputmodule$
 
 `boolean = false`
 
@@ -1904,7 +1904,7 @@ module.exports = {
 
 W> `output.module` 是一个实验性的功能， 想要使用的话，通过设置 [`experiments.outputModule`](/configuration/experiments/#experiments) 为 `true`。
 
-## `output.path` {#outputpath}
+## `output.path` $#outputpath$
 
 `string = path.join(process.cwd(), 'dist')`
 
@@ -1925,7 +1925,7 @@ module.exports = {
 
 注意，`[fullhash]` 在参数中被替换为编译过程(compilation)的 hash。详细信息请查看[指南 - 缓存](/guides/caching/)。
 
-## `output.pathinfo` {#outputpathinfo}
+## `output.pathinfo` $#outputpathinfo$
 
 `boolean=true` `string: 'verbose'`
 
@@ -1946,7 +1946,7 @@ module.exports = {
 
 T> 这些注释也会被添加至经过 tree shaking 后生成的 bundle 中。
 
-## `output.publicPath` {#outputpublicpath}
+## `output.publicPath` $#outputpublicpath$
 
 - Type:
 
@@ -2037,7 +2037,7 @@ __webpack_public_path__ = myRuntimePublicPath;
 
 有关 `__webpack_public_path__` 的更多信息，请查看[此讨论](https://github.com/webpack/webpack/issues/2776#issuecomment-233208623)。
 
-## output.scriptType {#outputscripttype}
+## output.scriptType $#outputscripttype$
 
 `string: 'module' | 'text/javascript'` `boolean = false`
 
@@ -2054,7 +2054,7 @@ module.exports = {
 };
 ```
 
-## `output.sourceMapFilename` {#outputsourcemapfilename}
+## `output.sourceMapFilename` $#outputsourcemapfilename$
 
 `string = '[file].map[query]'`
 
@@ -2062,7 +2062,7 @@ module.exports = {
 
 可以使用 [#output-filename](#output-filename) 中的 `[name]`, `[id]`, `[hash]` 和 `[chunkhash]` 替换符号。除此之外，还可以使用 [Template strings](/configuration/output/#template-strings) 在 Filename-level 下替换。
 
-## `output.sourcePrefix` {#outputsourceprefix}
+## `output.sourcePrefix` $#outputsourceprefix$
 
 `string = ''`
 
@@ -2083,7 +2083,7 @@ T> 使用一些缩进会使 bundle 看起来更美观，但会导致多行字符
 
 T> 通常，你不需要修改 `output.sourcePrefix`。
 
-## output.strictModuleErrorHandling {#outputstrictmoduleerrorhandling}
+## output.strictModuleErrorHandling $#outputstrictmoduleerrorhandling$
 
 按照 ES Module 规范处理 module 加载时的错误，会有性能损失。
 
@@ -2099,7 +2099,7 @@ module.exports = {
 };
 ```
 
-## output.strictModuleExceptionHandling {#outputstrictmoduleexceptionhandling}
+## output.strictModuleExceptionHandling $#outputstrictmoduleexceptionhandling$
 
 W> 已废弃，请使用
 [`output.strictModuleErrorHandling`](#outputstrictmoduleerrorhandling)。
@@ -2134,7 +2134,7 @@ require('module'); // <- 抛出
 require('module'); // <- 仍然抛出
 ```
 
-## `output.trustedTypes` {#outputtrustedtypes}
+## `output.trustedTypes` $#outputtrustedtypes$
 
 `boolean = false` `string` `object`
 
@@ -2162,7 +2162,7 @@ module.exports = {
 };
 ```
 
-## `output.umdNamedDefine` {#outputumdnameddefine}
+## `output.umdNamedDefine` $#outputumdnameddefine$
 
 W> 最好使用 [`output.library.umdNamedDefine`](#outputlibraryumdnameddefine)。
 
@@ -2179,7 +2179,7 @@ module.exports = {
 };
 ```
 
-## output.uniqueName {#outputuniquename}
+## output.uniqueName $#outputuniquename$
 
 `string`
 
@@ -2200,7 +2200,7 @@ module.exports = {
 };
 ```
 
-## output.wasmLoading {#output-wasm-loading}
+## output.wasmLoading $#output-wasm-loading$
 
 `boolean = false` `string`
 
@@ -2220,7 +2220,7 @@ module.exports = {
 };
 ```
 
-## `output.workerChunkLoading` {#outputworkerchunkloading}
+## `output.workerChunkLoading` $#outputworkerchunkloading$
 
 `string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
 

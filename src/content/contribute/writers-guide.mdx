@@ -8,13 +8,13 @@ contributors:
 
 The following sections contain all you need to know about editing and formatting the content within this site. Make sure to do some research before starting your edits or additions. Sometimes the toughest part is finding where the content should live and determining whether or not it already exists.
 
-## Process {#process}
+## Process $#process$
 
 1. Check related issue if an article links to one.
 2. Hit `edit` and expand on the structure.
 3. PR changes.
 
-## YAML Frontmatter {#yaml-frontmatter}
+## YAML Frontmatter $#yaml-frontmatter$
 
 Each article contains a small section at the top written in [YAML Frontmatter](https://jekyllrb.com/docs/frontmatter/):
 
@@ -41,14 +41,14 @@ Let's break these down:
 
 Note that `related` will generate a **Further Reading** section at the bottom of the page and `contributors` will yield a **Contributors** section below it. If you edit an article and would like recognition, don't hesitate to add your GitHub username to the `contributors` list.
 
-## Article Structure {#article-structure}
+## Article Structure $#article-structure$
 
 1. Brief Introduction - a paragraph or two so you get the basic idea about the what and why.
 2. Outline Remaining Content – how the content will be presented.
 3. Main Content - tell what you promised to tell.
 4. Conclusion - tell what you told and recap the main points.
 
-## Typesetting {#typesetting}
+## Typesetting $#typesetting$
 
 - webpack should always be written in lower-case letters. Even at the beginning of a sentence. ([source](https://github.com/webpack/media#name))
 - loaders are enclosed in backticks and [kebab-cased](https://en.wikipedia.org/w/index.php?title=Kebab_case): `css-loader`, `ts-loader`, …
@@ -56,9 +56,9 @@ Note that `related` will generate a **Further Reading** section at the bottom of
 - Use "webpack 2" to refer to a specific webpack version (~~"webpack v2"~~)
 - Use ES5; ES2015, ES2016, … to refer to the ECMAScript standards (~~ES6~~, ~~ES7~~)
 
-## Formatting {#formatting}
+## Formatting $#formatting$
 
-### Code {#code}
+### Code $#code$
 
 **Syntax: \`\`\`javascript … \`\`\`**
 
@@ -70,7 +70,7 @@ function foo() {
 foo();
 ```
 
-#### Quotation {#quotation}
+#### Quotation $#quotation$
 
 Use single quotes in code snippets and project files (`.jsx`, `.scss` etc):
 
@@ -89,7 +89,7 @@ Set value to `'index.md'`...
 
 Set value to `"index.md"`...
 
-### Lists {#lists}
+### Lists $#lists$
 
 - Boo
 - Foo
@@ -97,7 +97,7 @@ Set value to `"index.md"`...
 
 Lists should be ordered alphabetically.
 
-### Tables {#tables}
+### Tables $#tables$
 
 | Parameter  | Explanation                                      | Input Type | Default Value |
 | ---------- | ------------------------------------------------ | ---------- | ------------- |
@@ -107,7 +107,7 @@ Lists should be ordered alphabetically.
 
 Tables should also be ordered alphabetically.
 
-### Configuration Properties {#configuration-properties}
+### Configuration Properties $#configuration-properties$
 
 The [configuration](/configuration) properties should be ordered alphabetically as well:
 
@@ -115,15 +115,15 @@ The [configuration](/configuration) properties should be ordered alphabetically 
 - `devServer.contentBase`
 - `devServer.hot`
 
-### Quotes {#quotes}
+### Quotes $#quotes$
 
-#### Blockquote {#blockquote}
+#### Blockquote $#blockquote$
 
 **Syntax: \>**
 
 > This is a blockquote.
 
-#### Tip {#tip}
+#### Tip $#tip$
 
 **Syntax: T\>**
 
@@ -137,7 +137,7 @@ W> This is a warning.
 
 ?> This is a todo.
 
-### Assumptions and simplicity {#assumptions-and-simplicity}
+### Assumptions and simplicity $#assumptions-and-simplicity$
 
 Do not make assumptions when writing the documentation.
 
@@ -153,7 +153,7 @@ Please do not assume things are simple. Avoid words like 'just', 'simply'.
 + Run the `command-name` command...
 ```
 
-### Configuration defaults and types {#configuration-defaults-and-types}
+### Configuration defaults and types $#configuration-defaults-and-types$
 
 Always provide types and defaults to all of the documentation options in order to keep the documentation accessible and well-written. We are adding types and defaults after entitling the documented option:
 
@@ -209,7 +209,7 @@ If the object's key is dynamic, user-defined, use `<key>` to describe it:
 
 `object = { <key> string }`
 
-### Options shortlists and their typing {#options-shortlists-and-their-typing}
+### Options shortlists and their typing $#options-shortlists-and-their-typing$
 
 Sometimes, we want to describe certain properties of objects and functions in lists. When applicable add typing directly to the list where properties are enlisted:
 
@@ -220,6 +220,6 @@ W> `:` is not a necessity here, note the property, type and default.
 
 An example can be found on the [`options` section of the EvalSourceMapDevToolPlugin's page](/plugins/eval-source-map-dev-tool-plugin/#options).
 
-### Adding links {#adding-links}
+### Adding links $#adding-links$
 
 Please use relative URLs (such as `/concepts/mode/`) to link our own content instead of absolute URLs (such as `https://webpack.js.org/concepts/mode/`).

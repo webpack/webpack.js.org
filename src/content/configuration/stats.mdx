@@ -35,7 +35,7 @@ module.exports = {
 };
 ```
 
-## Stats Presets {#stats-presets}
+## Stats Presets $#stats-presets$
 
 webpack 有一些特定的预设选项给统计信息输出：
 
@@ -50,13 +50,13 @@ webpack 有一些特定的预设选项给统计信息输出：
 | `'detailed'`        | _none_  | 全部输出除了 `chunkModules` 和 `chunkRootModules` |
 | `'summary'`         | _none_  | 输出 webpack 版本，以及警告数和错误数             |
 
-## Stats {#stats}
+## Stats $#stats$
 
 你可以在统计输出里指定你想看到的信息。
 
 T> 所有在统计信息配置里的选项都是可选的。
 
-### stats.all {#statsall}
+### stats.all $#statsall$
 
 当统计信息配置没被定义，则该值是一个回退值。它的优先级比本地的 webpack 默认值高。
 
@@ -69,7 +69,7 @@ module.exports = {
 };
 ```
 
-### stats.assets {#statsassets}
+### stats.assets $#statsassets$
 
 `boolean = true`
 
@@ -84,7 +84,7 @@ module.exports = {
 };
 ```
 
-### stats.assetsSort {#statsassetssort}
+### stats.assetsSort $#statsassetssort$
 
 `string = 'id'`
 
@@ -99,7 +99,7 @@ module.exports = {
 };
 ```
 
-### stats.builtAt {#statsbuiltat}
+### stats.builtAt $#statsbuiltat$
 
 `boolean = true`
 
@@ -114,7 +114,7 @@ module.exports = {
 };
 ```
 
-### stats.moduleAssets {#statsmoduleassets}
+### stats.moduleAssets $#statsmoduleassets$
 
 `boolean = true`
 
@@ -129,7 +129,7 @@ module.exports = {
 };
 ```
 
-### stats.assetsSpace {#statsassetsspace}
+### stats.assetsSpace $#statsassetsspace$
 
 `number = 15`
 
@@ -144,7 +144,7 @@ module.exports = {
 };
 ```
 
-### stats.modulesSpace {#statsmodulesspace}
+### stats.modulesSpace $#statsmodulesspace$
 
 `number = 15`
 
@@ -159,7 +159,7 @@ module.exports = {
 };
 ```
 
-### stats.chunkModulesSpace {#statschunkmodulesspace}
+### stats.chunkModulesSpace $#statschunkmodulesspace$
 
 `number = 10`
 
@@ -174,7 +174,7 @@ module.exports = {
 };
 ```
 
-### stats.nestedModulesSpace {#statsnestedmodulesspace}
+### stats.nestedModulesSpace $#statsnestedmodulesspace$
 
 `number = 10`
 
@@ -189,11 +189,11 @@ module.exports = {
 };
 ```
 
-### stats.cached {#statscached}
+### stats.cached $#statscached$
 
 旧版的 `stats.cachedModules`.
 
-### stats.cachedModules {#statscachedmodules}
+### stats.cachedModules $#statscachedmodules$
 
 `boolean = true`
 
@@ -208,7 +208,7 @@ module.exports = {
 };
 ```
 
-### stats.runtimeModules {#statsruntimemodules}
+### stats.runtimeModules $#statsruntimemodules$
 
 `boolean = true`
 
@@ -223,7 +223,7 @@ module.exports = {
 };
 ```
 
-### stats.dependentModules {#statsdependentmodules}
+### stats.dependentModules $#statsdependentmodules$
 
 `boolean`
 
@@ -238,7 +238,7 @@ module.exports = {
 };
 ```
 
-### stats.groupAssetsByChunk {#statsgroupassetsbychunk}
+### stats.groupAssetsByChunk $#statsgroupassetsbychunk$
 
 `boolean`
 
@@ -253,7 +253,7 @@ module.exports = {
 };
 ```
 
-### stats.groupAssetsByEmitStatus {#statsgroupassetsbyemitstatus}
+### stats.groupAssetsByEmitStatus $#statsgroupassetsbyemitstatus$
 
 `boolean`
 
@@ -268,7 +268,7 @@ module.exports = {
 };
 ```
 
-### stats.groupAssetsByInfo {#statsgroupassetsbyinfo}
+### stats.groupAssetsByInfo $#statsgroupassetsbyinfo$
 
 `boolean`
 
@@ -283,7 +283,7 @@ module.exports = {
 };
 ```
 
-### stats.groupModulesByAttributes {#statsgroupmodulesbyattributes}
+### stats.groupModulesByAttributes $#statsgroupmodulesbyattributes$
 
 `boolean`
 
@@ -298,7 +298,7 @@ module.exports = {
 };
 ```
 
-### stats.groupReasonsByOrigin {#statsgroupreasonsbyorigin}
+### stats.groupReasonsByOrigin $#statsgroupreasonsbyorigin$
 
 `boolean`
 
@@ -315,7 +315,7 @@ module.exports = {
 };
 ```
 
-### stats.cachedAssets {#statscachedassets}
+### stats.cachedAssets $#statscachedassets$
 
 `boolean = true`
 
@@ -330,7 +330,7 @@ module.exports = {
 };
 ```
 
-### stats.children {#statschildren}
+### stats.children $#statschildren$
 
 `boolean = true`
 
@@ -345,7 +345,7 @@ module.exports = {
 };
 ```
 
-### stats.chunks {#statschunks}
+### stats.chunks $#statschunks$
 
 `boolean = true`
 
@@ -360,7 +360,7 @@ module.exports = {
 };
 ```
 
-### stats.chunkGroups {#statschunkgroups}
+### stats.chunkGroups $#statschunkgroups$
 
 `boolean = true`
 
@@ -375,7 +375,7 @@ module.exports = {
 };
 ```
 
-### stats.chunkModules {#statschunkmodules}
+### stats.chunkModules $#statschunkmodules$
 
 `boolean = true`
 
@@ -390,7 +390,7 @@ module.exports = {
 };
 ```
 
-### stats.chunkOrigins {#statschunkorigins}
+### stats.chunkOrigins $#statschunkorigins$
 
 `boolean = true`
 
@@ -405,7 +405,7 @@ module.exports = {
 };
 ```
 
-### stats.chunksSort {#statschunkssort}
+### stats.chunksSort $#statschunkssort$
 
 `string = 'id'`
 
@@ -420,7 +420,7 @@ module.exports = {
 };
 ```
 
-### stats.context {#statscontext}
+### stats.context $#statscontext$
 
 `string = '../src/'`
 
@@ -435,7 +435,7 @@ module.exports = {
 };
 ```
 
-### stats.colors {#statscolors}
+### stats.colors $#statscolors$
 
 `boolean = false` `object`
 
@@ -473,7 +473,7 @@ module.exports = {
 };
 ```
 
-### stats.depth {#statsdepth}
+### stats.depth $#statsdepth$
 
 `boolean = false`
 
@@ -488,7 +488,7 @@ module.exports = {
 };
 ```
 
-### stats.entrypoints {#statsentrypoints}
+### stats.entrypoints $#statsentrypoints$
 
 `boolean = true` `string = 'auto'`
 
@@ -505,7 +505,7 @@ module.exports = {
 
 当 `stats.entrypoints` 被设置为 `'auto'` 时，webpack 将自动决定是否在 stats 输出中展示入口信息。
 
-### stats.env {#statsenv}
+### stats.env $#statsenv$
 
 `boolean = false`
 
@@ -520,7 +520,7 @@ module.exports = {
 };
 ```
 
-### stats.orphanModules {#statsorphanmodules}
+### stats.orphanModules $#statsorphanmodules$
 
 `boolean = false`
 
@@ -535,7 +535,7 @@ module.exports = {
 };
 ```
 
-### stats.errors {#statserrors}
+### stats.errors $#statserrors$
 
 `boolean = true`
 
@@ -550,7 +550,7 @@ module.exports = {
 };
 ```
 
-### stats.errorDetails {#statserrordetails}
+### stats.errorDetails $#statserrordetails$
 
 `boolean` `string = "auto"`
 
@@ -565,7 +565,7 @@ module.exports = {
 };
 ```
 
-### stats.errorStack {#statserrorstack}
+### stats.errorStack $#statserrorstack$
 
 `boolean = true`
 
@@ -580,7 +580,7 @@ module.exports = {
 };
 ```
 
-### stats.excludeAssets {#statsexcludeassets}
+### stats.excludeAssets $#statsexcludeassets$
 
 `array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean`
 
@@ -599,7 +599,7 @@ module.exports = {
 };
 ```
 
-### stats.excludeModules {#statsexcludemodules}
+### stats.excludeModules $#statsexcludemodules$
 
 `array = []: string | RegExp | function (assetName) => boolean` `string` `RegExp` `function (assetName) => boolean` `boolean: false`
 
@@ -625,11 +625,11 @@ module.exports = {
 };
 ```
 
-### stats.exclude {#statsexclude}
+### stats.exclude $#statsexclude$
 
 详参 [`stats.excludeModules`](#statsexcludemodules).
 
-### stats.hash {#statshash}
+### stats.hash $#statshash$
 
 `boolean = true`
 
@@ -644,7 +644,7 @@ module.exports = {
 };
 ```
 
-### stats.logging {#statslogging}
+### stats.logging $#statslogging$
 
 `string = 'info': 'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose'` `boolean`
 
@@ -666,7 +666,7 @@ module.exports = {
 };
 ```
 
-### stats.loggingDebug {#statsloggingdebug}
+### stats.loggingDebug $#statsloggingdebug$
 
 `array = []: string | RegExp | function (name) => boolean` `string` `RegExp` `function (name) => boolean`
 
@@ -686,7 +686,7 @@ module.exports = {
 };
 ```
 
-### stats.loggingTrace {#statsloggingtrace}
+### stats.loggingTrace $#statsloggingtrace$
 
 `boolean = true`
 
@@ -701,7 +701,7 @@ module.exports = {
 };
 ```
 
-### stats.modules {#statsmodules}
+### stats.modules $#statsmodules$
 
 `boolean = true`
 
@@ -716,7 +716,7 @@ module.exports = {
 };
 ```
 
-### stats.modulesSort {#statsmodulessort}
+### stats.modulesSort $#statsmodulessort$
 
 `string = 'id'`
 
@@ -731,7 +731,7 @@ module.exports = {
 };
 ```
 
-### stats.moduleTrace {#statsmoduletrace}
+### stats.moduleTrace $#statsmoduletrace$
 
 `boolean = true`
 
@@ -746,7 +746,7 @@ module.exports = {
 };
 ```
 
-### stats.outputPath {#statsoutputpath}
+### stats.outputPath $#statsoutputpath$
 
 `boolean = true`
 
@@ -761,7 +761,7 @@ module.exports = {
 };
 ```
 
-### stats.performance {#statsperformance}
+### stats.performance $#statsperformance$
 
 `boolean = true`
 
@@ -776,7 +776,7 @@ module.exports = {
 };
 ```
 
-### stats.preset {#statspreset}
+### stats.preset $#statspreset$
 
 `string` `boolean: false`
 
@@ -793,7 +793,7 @@ module.exports = {
 
 将 `stats.preset` 的值设置为`false` 告知 webpack 使用 `'none'` [统计信息预设值](/configuration/stats/#stats-presets)。
 
-### stats.providedExports {#statsprovidedexports}
+### stats.providedExports $#statsprovidedexports$
 
 `boolean = false`
 
@@ -808,7 +808,7 @@ module.exports = {
 };
 ```
 
-### stats.errorsCount {#statserrorscount}
+### stats.errorsCount $#statserrorscount$
 
 `boolean = true`
 
@@ -823,7 +823,7 @@ module.exports = {
 };
 ```
 
-### stats.warningsCount {#statswarningscount}
+### stats.warningsCount $#statswarningscount$
 
 `boolean = true`
 
@@ -838,7 +838,7 @@ module.exports = {
 };
 ```
 
-### stats.publicPath {#statspublicpath}
+### stats.publicPath $#statspublicpath$
 
 `boolean = true`
 
@@ -853,7 +853,7 @@ module.exports = {
 };
 ```
 
-### stats.reasons {#statsreasons}
+### stats.reasons $#statsreasons$
 
 `boolean = true`
 
@@ -868,7 +868,7 @@ module.exports = {
 };
 ```
 
-### stats.reasonsSpace {#statsreasonspace}
+### stats.reasonsSpace $#statsreasonspace$
 
 `number`
 
@@ -887,7 +887,7 @@ module.exports = {
 
 T> The [`detailed preset`](#stats-presets) limits [`modulesSpace`](#statsmodulesspace), [`assetsSpace`](#statsassetsspace), and [`reasonsSpace`](#statsreasonsspace) to 1000 by default.
 
-### stats.relatedAssets {#statsrelatedassets}
+### stats.relatedAssets $#statsrelatedassets$
 
 `boolean = false`
 
@@ -902,7 +902,7 @@ module.exports = {
 };
 ```
 
-### stats.source {#statssource}
+### stats.source $#statssource$
 
 `boolean = false`
 
@@ -917,7 +917,7 @@ module.exports = {
 };
 ```
 
-### stats.timings {#statstimings}
+### stats.timings $#statstimings$
 
 `boolean = true`
 
@@ -932,7 +932,7 @@ module.exports = {
 };
 ```
 
-### stats.ids {#statsids}
+### stats.ids $#statsids$
 
 `boolean = false`
 
@@ -947,7 +947,7 @@ module.exports = {
 };
 ```
 
-### stats.usedExports {#statsusedexports}
+### stats.usedExports $#statsusedexports$
 
 `boolean = false`
 
@@ -962,7 +962,7 @@ module.exports = {
 };
 ```
 
-### stats.version {#statsversion}
+### stats.version $#statsversion$
 
 `boolean = true`
 
@@ -977,7 +977,7 @@ module.exports = {
 };
 ```
 
-### stats.chunkGroupAuxiliary {#statschunkgroupauxiliary}
+### stats.chunkGroupAuxiliary $#statschunkgroupauxiliary$
 
 `boolean = true`
 
@@ -992,7 +992,7 @@ module.exports = {
 };
 ```
 
-### stats.chunkGroupChildren {#statschunkgroupchildren}
+### stats.chunkGroupChildren $#statschunkgroupchildren$
 
 `boolean = true`
 
@@ -1007,7 +1007,7 @@ module.exports = {
 };
 ```
 
-### stats.chunkGroupMaxAssets {#statschunkgroupmaxassets}
+### stats.chunkGroupMaxAssets $#statschunkgroupmaxassets$
 
 `number`
 
@@ -1022,7 +1022,7 @@ module.exports = {
 };
 ```
 
-### stats.warnings {#statswarnings}
+### stats.warnings $#statswarnings$
 
 `boolean = true`
 
@@ -1037,7 +1037,7 @@ module.exports = {
 };
 ```
 
-### stats.warningsFilter {#statswarningsfilter}
+### stats.warningsFilter $#statswarningsfilter$
 
 `array = []: string | RegExp | function (warning) => boolean` `string` `RegExp` `function (warning) => boolean`
 
@@ -1054,13 +1054,13 @@ module.exports = {
 
 W> `stats.warningsFilter` 已被弃用，请改用 [`ignoreWarnings`](/configuration/other-options/#ignorewarnings)。
 
-### stats.chunkRelations {#statschunkrelations}
+### stats.chunkRelations $#statschunkrelations$
 
 `boolean = false`
 
 告知 `stats` 展示 chunk 的父 chunk，孩子 chunk 和兄弟 chunk。
 
-### 字段排序 {#sorting-fields}
+### 字段排序 $#sorting-fields$
 
 对于 `assetsSort`, `chunksSort` 和 `modulesSort` 它们有几个可用的字段用于排序：
 
@@ -1084,7 +1084,7 @@ W> `stats.warningsFilter` 已被弃用，请改用 [`ignoreWarnings`](/configura
 - `'issuerName'` - 发起者(issuer)的名字;
 - `'issuerPath'` - 一个完整的发起者(issuer)对象。基于这个字段排序没有现实的需要;
 
-### 扩展统计信息行为 {#extending-stats-behaviours}
+### 扩展统计信息行为 $#extending-stats-behaviours$
 
 如果你想使用其中一个预定义的行为，例如 `'minimal'`，但仍想重载一个或更多的规则：请指定想要设置的 `stats.preset` 同时在后面添加自定义或额外的规则。
 

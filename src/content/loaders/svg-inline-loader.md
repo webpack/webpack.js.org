@@ -9,13 +9,13 @@ translators:
 ---
 此 webpack loader 会将 SVG 文件内联为模块。如果你使用 Adobe Suite 或 Sketch 导出 SVG 时，会生成不必要的冗余文件代码。此 loader 也会帮你移除它。
 
-## 安装 {#install}
+## 安装 $#install$
 
 ```bash
 npm install svg-inline-loader --save-dev
 ```
 
-## 配置 {#configuration}
+## 配置 $#configuration$
 
 只需按如下方式配置到  `module.loaders` 即可。
 
@@ -28,56 +28,56 @@ npm install svg-inline-loader --save-dev
 
 警告: 这个 loader 你应只能通过 `module.loaders` 或者 `require('!...')` 配置一次。更多细节参考 [#15](https://github.com/webpack-contrib/svg-inline-loader/issues/15)。
 
-## Query 选项 {#query-options}
+## Query 选项 $#query-options$
 
-#### `removeTags: boolean` {#removetags-boolean}
+#### `removeTags: boolean` $#removetags-boolean$
 
 删除指定的标签和它的子元素。你可以通过设置 `removingTags` 查询数组来指定标签。
 
 默认值: `removeTags: false`
 
-#### `removingTags: [...string]` {#removingtags-string}
+#### `removingTags: [...string]` $#removingtags-string$
 
 警告：你指定 `removeTags: true` 时，它才会执行。
 
 默认值: `removingTags: ['title', 'desc', 'defs', 'style']`
 
-#### `warnTags: [...string]` {#warntags-string}
+#### `warnTags: [...string]` $#warntags-string$
 
 警告标签，不含：['desc', 'defs', 'style']
 
 默认值: `warnTags: []`
 
-#### `removeSVGTagAttrs: boolean` {#removesvgtagattrs-boolean}
+#### `removeSVGTagAttrs: boolean` $#removesvgtagattrs-boolean$
 
 删除 `<svg />` 的 `width` 和 `height` 属性。
 
 默认值: `removeSVGTagAttrs: true`
 
-#### `removingTagAttrs: [...string]` {#removingtagattrs-string}
+#### `removingTagAttrs: [...string]` $#removingtagattrs-string$
 
 删除 `<svg />` 内部的属性。
 
 默认值: `removingTagAttrs: []`
 
-#### `warnTagAttrs: [...string]` {#warntagattrs-string}
+#### `warnTagAttrs: [...string]` $#warntagattrs-string$
 
 在 console 发出关于内部 `<svg />` 属性的警告
 
 默认值: `warnTagAttrs: []`
-#### `classPrefix: boolean || string` {#classprefix-boolean--string}
+#### `classPrefix: boolean || string` $#classprefix-boolean--string$
 
 添加一个前缀到 svg 文件的 class，以避免冲突。
 
 默认值: `classPrefix: false`
 
-#### `idPrefix: boolean || string` {#idprefix-boolean--string}
+#### `idPrefix: boolean || string` $#idprefix-boolean--string$
 
 添加一个前缀到 svg 文件的 id，以避免冲突。
 
 默认值: `idPrefix: false`
 
-## 使用示例 {#example-usage}
+## 使用示例 $#example-usage$
 
 ```js
 // 使用默认 hashed prefix (__[hash:base64:7]__)
@@ -99,7 +99,7 @@ hash 操作请参照 [loader-utils](https://github.com/webpack/loader-utils#inte
     }
 ```
 
-## 维护人员 {#maintainers}
+## 维护人员 $#maintainers$
 
 <table>
   <tbody>
