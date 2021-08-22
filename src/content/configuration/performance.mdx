@@ -21,14 +21,11 @@ translators:
 
 配置如何展示性能提示。例如，如果一个资源超过 250kb，webpack 会对此输出一个警告来通知你。
 
-<<<<<<< HEAD:src/content/configuration/performance.md
-## `performance.hints` {#performancehints}
-=======
-### performance.assetFilter
+### performance.assetFilter {#performanceassetfilter}
 
 `function(assetFilename) => boolean`
 
-This property allows webpack to control what files are used to calculate performance hints. The default function is:
+此属性允许 webpack 控制用于计算性能提示的文件。默认函数如下：
 
 ```js
 function assetFilter(assetFilename) {
@@ -36,7 +33,7 @@ function assetFilter(assetFilename) {
 }
 ```
 
-You can override this property by passing your own function in:
+你可以通过传递自己的函数来覆盖此属性：
 
 ```js
 module.exports = {
@@ -49,10 +46,9 @@ module.exports = {
 };
 ```
 
-The example above will only give you performance hints based on `.js` files.
+以上示例将只给出 `.js` 文件的性能提示。
 
-### performance.hints
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f:src/content/configuration/performance.mdx
+### performance.hints {#performancehints}
 
 `string = 'warning': 'error' | 'warning'` `boolean: false`
 
@@ -93,26 +89,7 @@ module.exports = {
 
 将展示一条错误，通知你这是体积大的资源。在生产环境构建时，我们推荐使用 `hints: "error"`，有助于防止把体积巨大的 bundle 部署到生产环境，从而影响网页的性能。
 
-<<<<<<< HEAD:src/content/configuration/performance.md
-## `performance.maxEntrypointSize` {#performancemaxentrypointsize}
-
-`number = 250000`
-
-入口起点表示针对指定的入口，对于所有资源，要充分利用初始加载时(initial load time)期间。此选项根据入口起点的最大体积，控制 webpack 何时生成性能提示。
-
-```js
-module.exports = {
-  //...
-  performance: {
-    maxEntrypointSize: 400000,
-  },
-};
-```
-
-## `performance.maxAssetSize` {#performancemaxassetsize}
-=======
-### performance.maxAssetSize
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f:src/content/configuration/performance.mdx
+### performance.maxAssetSize {#performancemaxassetsize}
 
 `number = 250000`
 
@@ -127,23 +104,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD:src/content/configuration/performance.md
-## `performance.assetFilter` {#performanceassetfilter}
-
-`function(assetFilename) => boolean`
-
-此属性允许 webpack 控制用于计算性能提示的文件。默认函数如下：
-=======
-### performance.maxEntrypointSize
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f:src/content/configuration/performance.mdx
+### performance.maxEntrypointSize {#performancemaxentrypointsize}
 
 `number = 250000`
 
-<<<<<<< HEAD:src/content/configuration/performance.md
-你可以通过传递自己的函数来覆盖此属性：
-=======
-An entry point represents all assets that would be utilized during initial load time for a specific entry. This option controls when webpack should emit performance hints based on the maximum entry point size in bytes.
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f:src/content/configuration/performance.mdx
+入口起点表示针对指定的入口，对于所有资源，要充分利用初始加载时(initial load time)期间。此选项根据入口起点的最大体积，控制 webpack 何时生成性能提示。
 
 ```js
 module.exports = {
@@ -153,8 +118,3 @@ module.exports = {
   },
 };
 ```
-<<<<<<< HEAD:src/content/configuration/performance.md
-
-以上示例将只给出 `.js` 文件的性能提示。
-=======
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f:src/content/configuration/performance.mdx

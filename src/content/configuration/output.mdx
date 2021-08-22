@@ -632,23 +632,13 @@ type ModulePathData = {
 
 T> 在某些上下文中，属性将使用 JavaScript 代码表达式代替原始值。在此情况下，`WithLength` 变量是可用的，应该使用它来代替对原始值的分片操作。
 
-<<<<<<< HEAD
-## `output.globalObject` {#outputglobalobject}
-
-`string = 'window'`
-
-当输出为 library 时，尤其是当 `libraryTarget` 为 `'umd'`时，此选项将决定使用哪个全局对象来挂载 library。为了使 UMD 构建在浏览器和 Node.js 上均可用，应将 `output.globalObject` 选项设置为 `'this'`。对于类似 web 的目标，默认为 `self`。
-
-示例：
-=======
-## output.futureEmitAssets
+## output.futureEmitAssets {#outputfutureemitassets}
 
 `boolean = false`
 
-Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted.
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
+告诉 webpack 使用未来版本的资源文件 emit 逻辑，允许在 emit 后释放资源文件的内存。这可能会破坏那些认为资源文件 emit 后仍然可读的插件。
 
-W> `output.futureEmitAssets` option will be removed in webpack v5.0.0 and this behaviour will become the new default.
+W> 在 webpack v5.0.0 中 `output.futureEmitAssets` 选项被移除并且这种行为将被默认支持。
 
 ```javascript
 module.exports = {
@@ -659,23 +649,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `output.uniqueName` {#outputuniquename}
-
-`string`
-
-在全局环境下为防止多个 webpack 运行时 冲突所使用的唯一名称。默认使用 [`output.library`](/configuration/output/#outputlibrary) 名称或者上下文中的 `package.json` 的 包名称(package name)， 如果两者都不存在，值为 `''`。
-
-`output.uniqueName` 将用于生成唯一全局变量:
-=======
-## `output.globalObject`
+## `output.globalObject` {#outputglobalobject}
 
 `string = 'window'`
 
-When targeting a library, especially when `libraryTarget` is `'umd'`, this option indicates what global object will be used to mount the library. To make UMD build available on both browsers and Node.js, set `output.globalObject` option to `'this'`. Defaults to `self` for Web-like targets.
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
+当输出为 library 时，尤其是当 `libraryTarget` 为 `'umd'`时，此选项将决定使用哪个全局对象来挂载 library。为了使 UMD 构建在浏览器和 Node.js 上均可用，应将 `output.globalObject` 选项设置为 `'this'`。对于类似 web 的目标，默认为 `self`。
 
-For example:
+示例：
 
 **webpack.config.js**
 
@@ -763,14 +743,11 @@ JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
 T> 通常，你不需要修改 `output.hotUpdateMainFilename`.
 
-<<<<<<< HEAD
-## output.library {#outputlibrary}
-=======
-## output.iife
+## `output.iife` {#outputiife}
 
 `boolean = true`
 
-Tells webpack to add [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) wrapper around emitted code.
+告诉 webpack 添加 [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) 外层包裹生成的代码.
 
 ```javascript
 module.exports = {
@@ -785,7 +762,7 @@ module.exports = {
 
 `string = 'import'`
 
-The name of the native `import()` function. Can be used for polyfilling, e.g. with [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
+内部 `import()` 函数的名称. 可用于 polyfilling, 例如 通过 [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
 
 **webpack.config.js**
 
@@ -798,8 +775,7 @@ module.exports = {
 };
 ```
 
-## output.library
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
+## output.library {#outputlibrary}
 
 输出一个库，为你的入口做导出。
 
@@ -1904,23 +1880,15 @@ MyLibrary(_entry_return_);
 
 你的 library 的依赖将由 [`externals`](/configuration/externals/) 配置定义。
 
-<<<<<<< HEAD
-## `output.importFunctionName` {#outputimportfunctionname}
-=======
-## output.module
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
+## output.module {#outputmodule}
 
 `boolean = false`
 
-<<<<<<< HEAD
-内部 `import()` 函数的名称. 可用于 polyfilling, 例如 通过 [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
-=======
-Output JavaScript files as module type. Disabled by default as it's an experimental feature.
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
+以模块类型输出 JavaScript 文件。由于此功能还处于实验阶段，默认禁用。
 
-When enabled, webpack will set [`output.iife`](#outputiife) to `false`, [`output.scriptType`](#outputscripttype) to `'module'` and `terserOptions.module` to `true` internally.
+当启用时，webpack 会在内部将 [`output.iife`](#outputiife) 设置为 `false`，将 [`output.scriptType`](#outputscripttype) 为 `'module'`，并将 `terserOptions.module` 设置为 `true`
 
-If you're using webpack to compile a library to be consumed by others, make sure to set [`output.libraryTarget`](#librarytarget-module) to `'module'` when `output.module` is `true`.
+如果你需要使用 webpack 构建一个库以供别人使用，当 `output.module` 为 `true` 时，一定要将 [`output.libraryTarget`](#librarytarget-module) 设置为 `'module'`。
 
 ```javascript
 module.exports = {
@@ -1934,13 +1902,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `output.path` {#outputpath}
-=======
-W> `output.module` is an experimental feature and can only be enabled by setting [`experiments.outputModule`](/configuration/experiments/#experiments) to `true`.
+W> `output.module` 是一个实验性的功能， 想要使用的话，通过设置 [`experiments.outputModule`](/configuration/experiments/#experiments) 为 `true`。
 
 ## `output.path` {#outputpath}
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
 
 `string = path.join(process.cwd(), 'dist')`
 
@@ -2215,39 +2179,17 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `output.workerChunkLoading` {#outputworkerchunkloading}
-
-`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
-
-新选项 `workerChunkLoading` 用于控制 workder 的 chunk 加载。
-
-T> 此选项默认值取决于 `target` 的设置。欲了解更多详情，请在 [webpack 默认值文件中搜索](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js) `"workerChunkLoading"`。
-
-**webpack.config.js**
-=======
-## output.uniqueName
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
+## output.uniqueName {#outputuniquename}
 
 `string`
 
-<<<<<<< HEAD
-## `output.futureEmitAssets` {#outputfutureemitassets}
-=======
-A unique name of the webpack build to avoid multiple webpack runtimes to conflict when using globals. It defaults to [`output.library`](/configuration/output/#outputlibrary) name or the package name from `package.json` in the context, if both aren't found, it is set to an `''`.
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
+在全局环境下为防止多个 webpack 运行时 冲突所使用的唯一名称。默认使用 [`output.library`](/configuration/output/#outputlibrary) 名称或者上下文中的 `package.json` 的 包名称(package name)， 如果两者都不存在，值为 `''`。
 
-`output.uniqueName` will be used to generate unique globals for:
+`output.uniqueName` 将用于生成唯一全局变量:
 
-<<<<<<< HEAD
-告诉 webpack 使用未来版本的资源文件 emit 逻辑，允许在 emit 后释放资源文件的内存。这可能会破坏那些认为资源文件 emit 后仍然可读的插件。
-
-W> 在 webpack v5.0.0 中 `output.futureEmitAssets` 选项被移除并且这种行为将被默认支持。
-=======
 - [`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal)
 
 **webpack.config.js**
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
 
 ```javascript
 module.exports = {
@@ -2258,11 +2200,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `output.wasmLoading` {#output-wasm-loading}
-=======
-## output.wasmLoading
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
+## output.wasmLoading {#output-wasm-loading}
 
 `boolean = false` `string`
 
@@ -2282,42 +2220,15 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `output.iife` {#output-iife}
-
-`boolean = true`
-
-告诉 webpack 添加 [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) 外层包裹生成的代码.
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    iife: true,
-  },
-};
-```
-
-## `output.module` {#outputmodule}
-
-`boolean = false`
-
-以模块类型输出 JavaScript 文件。由于此功能还处于实验阶段，默认禁用。
-
-当启用时，webpack 会在内部将 [`output.iife`](#outputiife) 设置为 `false`，将 [`output.scriptType`](#outputscripttype) 为 `'module'`，并将 `terserOptions.module` 设置为 `true`
-
-如果你需要使用 webpack 构建一个库以供别人使用，当 `output.module` 为 `true` 时，一定要将 [`output.libraryTarget`](#librarytarget-module) 设置为 `'module'`。
-=======
-## output.workerChunkLoading
+## `output.workerChunkLoading` {#outputworkerchunkloading}
 
 `string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
 
-The new option `workerChunkLoading` controls the chunk loading of workers.
+新选项 `workerChunkLoading` 用于控制 workder 的 chunk 加载。
 
-T> The default value of this option is depending on the `target` setting. For more details, search for `"workerChunkLoading"`: [in the webpack defaults](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js).
+T> 此选项默认值取决于 `target` 的设置。欲了解更多详情，请在 [webpack 默认值文件中搜索](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js) `"workerChunkLoading"`。
 
 **webpack.config.js**
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
 
 ```javascript
 module.exports = {
@@ -2327,8 +2238,3 @@ module.exports = {
   },
 };
 ```
-<<<<<<< HEAD
-
-W> `output.module` 是一个实验性的功能， 想要使用的话，通过设置 [`experiments.outputModule`](/configuration/experiments/#experiments) 为 `true`。
-=======
->>>>>>> adf6f27ad2c72a912693f9599d0f842fde48457f
