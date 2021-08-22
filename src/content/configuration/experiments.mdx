@@ -11,7 +11,7 @@ translators:
   - QC-L
 ---
 
-## `experiments` {#experiments}
+## experiments {#experiments}
 
 `boolean: false`
 
@@ -22,6 +22,7 @@ W> 由于实验特性具有相对 宽松的语义版本，可能会有重大的�
 Available options:
 
 - `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module.
+- [`buildHttp`](#experimentsbuildhttp)
 - [`executeModule`](#experimentsexecutemodule)
 - `layers`: Enable module and chunk layers.
 - [`lazyCompilation`](#experimentslazycompilation)
@@ -35,16 +36,100 @@ Available options:
 module.exports = {
   //...
   experiments: {
+    asyncWebAssembly: true,
+    buildHttp: true,
     executeModule: true,
+    layers: true,
+    lazyCompilation: true,
     outputModule: true,
     syncWebAssembly: true,
     topLevelAwait: true,
-    asyncWebAssembly: true,
-    layers: true,
-    lazyCompilation: true,
   },
 };
 ```
+
+### experiments.buildHttp {#experimentsbuildhttp}
+
+When enabled, webpack can build remote resources that begin with the `http(s):` protocol.
+
+- Type:
+
+  One of the following:
+
+  - `boolean`
+  - `HttpUriOptions`
+    ```ts
+    {
+      cacheLocation?: false | string,
+      frozen?: boolean,
+      lockfileLocation?: string,
+      upgrade?: boolean
+    }
+    ```
+
+- Available: 5.49.0+
+- Example
+
+  ```javascript
+  // webpack.config.js
+  module.exports = {
+    //...
+    experiments: {
+      buildHttp: true,
+    },
+  };
+  ```
+
+  ```js
+  // src/index.js
+  import pMap1 from 'https://cdn.skypack.dev/p-map';
+  // with `buildHttp` enabled, webpack will build pMap1 just like a regular local module
+  console.log(pMap1);
+  ```
+
+#### experiments.buildHttp.cacheLocation {#experimentsbuildhttpcachelocation}
+
+Define the location for caching remote resources.
+
+- Type
+  - `string`
+  - `false`
+- Example
+  ```javascript
+  // webpack.config.js
+  module.exports = {
+    //...
+    experiments: {
+      buildHttp: {
+        cacheLocation: false,
+      },
+    },
+  };
+  ```
+
+By default webpack would use `<compiler-name.>webpack.lock.data/` for caching, but you can disable it by setting its value to `false`.
+
+Note that you should commit files under `experiments.buildHttp.cacheLocation` into a version control system as no network requests will be made during the `production` build.
+
+#### experiments.buildHttp.frozen {#experimentsbuildhttpfrozen}
+
+Freeze the remote resources and lockfile. Any modification to the lockfile or resource contents will result in an error.
+
+- Type: `boolean`
+
+#### experiments.buildHttp.lockfileLocation {#experimentsbuildhttplockfilelocation}
+
+Define the location to store the lockfile.
+
+- Type: `string`
+
+By default webpack would generate a `<compiler-name.>webpack.lock` file>. Make sure to commit it into a version control system. During the `production` build, webpack will build those modules beginning with `http(s):` protocol from the lockfile and caches under [`experiments.buildHttp.cacheLocation`](#experimentsbuildhttpcachelocation).
+
+#### experiments.buildHttp.upgrade {#experimentsbuildhttpupgrade}
+
+Detect changes to remote resources and upgrade them automatically.
+
+- Type: `boolean`
 
 ### experiments.executeModule {#experimentsexecutemodule}
 

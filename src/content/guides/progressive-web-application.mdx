@@ -39,7 +39,7 @@ T> 本指南继续沿用 [管理输出](/guides/output-management) 中的代码�
 }
 ```
 
-注意：默认情况下，[webpack DevServer](/configuration/dev-server/) 会写入到内存。我们需要启用 [writeToDisk](/configuration/dev-server#devserverwritetodisk-) 选项，来让 http-server 处理 `./dist` 目录中的文件。
+注意：默认情况下，[webpack DevServer](/configuration/dev-server/) 会写入到内存。我们需要启用 [devserverdevmiddleware.writeToDisk](/configuration/dev-server/#devserverdevmiddleware) 配置项，来让 http-server 处理 `./dist` 目录中的文件。
 
 如果你之前没有操作过，先得运行命令 `npm run build` 来构建你的项目。然后运行命令 `npm start`。应该产生以下输出：
 

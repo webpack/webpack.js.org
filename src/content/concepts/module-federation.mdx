@@ -294,7 +294,7 @@ T> [`output.publicPath`](/configuration/output/#outputpublicpath) 配置项也�
 
 ## 故障排除 {#troubleshooting}
 
-**`Uncaught Error: Shared module is not available for eager consumption`**
+### `Uncaught Error: Shared module is not available for eager consumption`
 
 应用程序正急切地执行一个作为全局主机运行的应用程序。有如下选项可供选择:
 
@@ -352,7 +352,7 @@ new ModuleFederationPlugin({
 });
 ```
 
-**`Uncaught Error: Module "./Button" does not exist in container.`**
+### `Uncaught Error: Module "./Button" does not exist in container.`
 
 错误提示中可能不会显示 `"./Button"`，但是信息看起来差不多。这个问题通常会出现在将 webpack beta.16 升级到 webpack beta.17 中。
 
@@ -367,7 +367,12 @@ new ModuleFederationPlugin({
 });
 ```
 
-**`Uncaught TypeError: fn is not a function`**
+### `Uncaught TypeError: fn is not a function`
 
 此处错误可能是丢失了远程容器，请确保在使用前添加它。
 如果已为试图使用远程服务器的容器加载了容器，但仍然看到此错误，则需将主机容器的远程容器文件也添加到 HTML 中。
+
+### 来自多个 remote 的模块之间的冲突 {#collision-between-modules-from-different-remotes}
+
+如果你想从不同的 remote 中加载多个模块，建议为你的远程构建设置 [`output.uniqueName`](/configuration/output/#outputuniquename) 以避免多个 webpack 运行时之间的冲突。
+If you're going to load multiple modules from different remotes, it's advised to set the [`output.uniqueName`](/configuration/output/#outputuniquename) option for your remote builds to avoid collisions between multiple webpack runtimes.

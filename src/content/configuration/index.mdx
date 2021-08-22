@@ -25,6 +25,8 @@ translators:
 
 webpack 开箱即用，可以无需使用任何配置文件。然而，webpack 会假定项目的入口起点为 `src/index.js`，然后会在 `dist/main.js` 输出结果，并且在生产环境开启压缩和优化。
 
+T> [createapp.dev](https://createapp.dev/webpack) 是一个创建自定义 webpack 配置的在线工具。它允许你选择各种特性，其将会被添加到最后的配置文件中。它也会基于生成的 webpack 配置初始化一个示例项目，你可以在浏览器中查看该项目并且下载。
+
 通常你的项目还需要继续扩展此能力，为此你可以在项目根目录下创建一个 `webpack.config.js` 文件，然后 webpack 会自动使用它。
 
 下面指定了所有可用的配置选项。
@@ -33,7 +35,7 @@ T> 刚开始学习 webpack？请查看我们提供的指南，从 webpack 一些
 
 ## 使用不同的配置文件 {#use-different-configuration-file}
 
-如果出于某些原因，需要根据特定情况使用不同的配置文件，则可以通过在命令行中使用 `--config` flag 修改此配置文件名称。
+如果出于某些原因，需要根据特定情况使用不同的配置文件，则可以通过在命令行中使用 `--config` 标志修改。
 
 **package.json**
 
@@ -1173,4 +1175,3 @@ found 0 vulnerabilities
 Congratulations! Your new webpack configuration file has been created!
 ```
 
-[createapp.dev - 在浏览器中创建 webpack 配置](https://createapp.dev/webpack)，是一个用于创建自定义 webpack 配置的在线工具。它可以选择各种功能，这些功能将被组合并添加到生成的配置文件中。此外，它还会基于提供的 webpack 配置生成示例项目，可以在浏览器中查看并下载。

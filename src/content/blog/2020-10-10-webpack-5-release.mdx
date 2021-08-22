@@ -100,7 +100,7 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 ### 不再为 Node.js 模块 自动引用 Polyfills {#automatic-nodejs-polyfills-removed}
 
-在早期，webpack 的目的是为了让大多数的 Node.js 模块运行在浏览器中，但如今模块的格局已经发生了变化，现在许多模块主要是为前端而编写。webpack <= 4 的版本中提供了许多 Node.js 核心模块的 polyfills，一旦某个模块引用了任何一个核心模块（如 `cypto` 模块），webpack 就会自动引用这些 polyfills。
+在早期，webpack 的目的是为了让大多数的 Node.js 模块运行在浏览器中，但如今模块的格局已经发生了变化，现在许多模块主要是为前端而编写。webpack &lt;= 4 的版本中提供了许多 Node.js 核心模块的 polyfills，一旦某个模块引用了任何一个核心模块（如 `cypto` 模块），webpack 就会自动引用这些 polyfills。
 
 尽管这会使得使用为 Node.js 编写模块变得容易，但它在构建时给 bundle 附加了庞大的 polyfills。在大部分情况下，这些 polyfills 并非必须。
 

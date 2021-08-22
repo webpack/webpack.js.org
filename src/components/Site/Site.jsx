@@ -77,7 +77,7 @@ function Site(props) {
    */
   const _strip = (array) => {
     let anchorTitleIndex = array.findIndex(
-      (item) => item.name.toLowerCase() === 'index.md'
+      (item) => item.name.toLowerCase() === 'index.mdx'
     );
 
     if (anchorTitleIndex !== -1) {
@@ -109,7 +109,7 @@ function Site(props) {
       })
       .filter(
         (page) =>
-          page.title !== 'printable.md' && !page.content.includes('Printable')
+          page.title !== 'printable.mdx' && !page.content.includes('Printable')
       );
   };
 

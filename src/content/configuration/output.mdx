@@ -446,7 +446,7 @@ module.exports = {
 };
 ```
 
-## `output.filename` {#outputfilename}
+## output.filename {#outputfilename}
 
 `string` `function (pathData, assetInfo) => string`
 
@@ -540,7 +540,7 @@ module.exports = {
 
 注意，此选项不会影响那些「按需加载 chunk」的输出文件。它只影响最初加载的输出文件。对于按需加载的 chunk 文件，请使用 [`output.chunkFilename`](#outputchunkfilename) 选项来控制输出。通过 loader 创建的文件也不受影响。在这种情况下，你必须尝试 loader 特定的可用选项。
 
-## Template strings {#template-strings}
+### Template strings {#template-strings}
 
 可以使用以下替换模板字符串（通过 webpack 内部的[`TemplatedPathPlugin`](https://github.com/webpack/webpack/blob/master/lib/TemplatedPathPlugin.js)）:
 
@@ -632,6 +632,23 @@ type ModulePathData = {
 
 T> 在某些上下文中，属性将使用 JavaScript 代码表达式代替原始值。在此情况下，`WithLength` 变量是可用的，应该使用它来代替对原始值的分片操作。
 
+## output.futureEmitAssets {#outputfutureemitassets}
+
+`boolean = false`
+
+告诉 webpack 使用未来版本的资源文件 emit 逻辑，允许在 emit 后释放资源文件的内存。这可能会破坏那些认为资源文件 emit 后仍然可读的插件。
+
+W> 在 webpack v5.0.0 中 `output.futureEmitAssets` 选项被移除并且这种行为将被默认支持。
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    futureEmitAssets: true,
+  },
+};
+```
+
 ## `output.globalObject` {#outputglobalobject}
 
 `string = 'window'`
@@ -650,27 +667,6 @@ module.exports = {
     libraryTarget: 'umd',
     filename: 'myLib.js',
     globalObject: 'this',
-  },
-};
-```
-
-## `output.uniqueName` {#outputuniquename}
-
-`string`
-
-在全局环境下为防止多个 webpack 运行时 冲突所使用的唯一名称。默认使用 [`output.library`](/configuration/output/#outputlibrary) 名称或者上下文中的 `package.json` 的 包名称(package name)， 如果两者都不存在，值为 `''`。
-
-`output.uniqueName` 将用于生成唯一全局变量:
-
-- [`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal)
-
-**webpack.config.js**
-
-```javascript
-module.exports = {
-  // ...
-  output: {
-    uniqueName: 'my-package-xyz',
   },
 };
 ```
@@ -746,6 +742,38 @@ JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 自定义热更新的主文件名(main filename)。`[fullhash]` 和 `[runtime]` 均可作为占位符。
 
 T> 通常，你不需要修改 `output.hotUpdateMainFilename`.
+
+## `output.iife` {#outputiife}
+
+`boolean = true`
+
+告诉 webpack 添加 [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) 外层包裹生成的代码.
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    iife: true,
+  },
+};
+```
+
+## output.importFunctionName
+
+`string = 'import'`
+
+内部 `import()` 函数的名称. 可用于 polyfilling, 例如 通过 [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    importFunctionName: '__import__',
+  },
+};
+```
 
 ## output.library {#outputlibrary}
 
@@ -1852,22 +1880,29 @@ MyLibrary(_entry_return_);
 
 你的 library 的依赖将由 [`externals`](/configuration/externals/) 配置定义。
 
-## `output.importFunctionName` {#outputimportfunctionname}
+## output.module {#outputmodule}
 
-`string = 'import'`
+`boolean = false`
 
-内部 `import()` 函数的名称. 可用于 polyfilling, 例如 通过 [`dynamic-import-polyfill`](https://github.com/GoogleChromeLabs/dynamic-import-polyfill).
+以模块类型输出 JavaScript 文件。由于此功能还处于实验阶段，默认禁用。
 
-**webpack.config.js**
+当启用时，webpack 会在内部将 [`output.iife`](#outputiife) 设置为 `false`，将 [`output.scriptType`](#outputscripttype) 为 `'module'`，并将 `terserOptions.module` 设置为 `true`
+
+如果你需要使用 webpack 构建一个库以供别人使用，当 `output.module` 为 `true` 时，一定要将 [`output.libraryTarget`](#librarytarget-module) 设置为 `'module'`。
 
 ```javascript
 module.exports = {
   //...
+  experiments: {
+    outputModule: true,
+  },
   output: {
-    importFunctionName: '__import__',
+    module: true,
   },
 };
 ```
+
+W> `output.module` 是一个实验性的功能， 想要使用的话，通过设置 [`experiments.outputModule`](/configuration/experiments/#experiments) 为 `true`。
 
 ## `output.path` {#outputpath}
 
@@ -2144,43 +2179,28 @@ module.exports = {
 };
 ```
 
-## `output.workerChunkLoading` {#outputworkerchunkloading}
+## output.uniqueName {#outputuniquename}
 
-`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
+`string`
 
-新选项 `workerChunkLoading` 用于控制 workder 的 chunk 加载。
+在全局环境下为防止多个 webpack 运行时 冲突所使用的唯一名称。默认使用 [`output.library`](/configuration/output/#outputlibrary) 名称或者上下文中的 `package.json` 的 包名称(package name)， 如果两者都不存在，值为 `''`。
 
-T> 此选项默认值取决于 `target` 的设置。欲了解更多详情，请在 [webpack 默认值文件中搜索](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js) `"workerChunkLoading"`。
+`output.uniqueName` 将用于生成唯一全局变量:
+
+- [`output.chunkLoadingGlobal`](/configuration/output/#outputchunkloadingglobal)
 
 **webpack.config.js**
 
 ```javascript
 module.exports = {
-  //...
+  // ...
   output: {
-    workerChunkLoading: false,
+    uniqueName: 'my-package-xyz',
   },
 };
 ```
 
-## `output.futureEmitAssets` {#outputfutureemitassets}
-
-`boolean = false`
-
-告诉 webpack 使用未来版本的资源文件 emit 逻辑，允许在 emit 后释放资源文件的内存。这可能会破坏那些认为资源文件 emit 后仍然可读的插件。
-
-W> 在 webpack v5.0.0 中 `output.futureEmitAssets` 选项被移除并且这种行为将被默认支持。
-
-```javascript
-module.exports = {
-  //...
-  output: {
-    futureEmitAssets: true,
-  },
-};
-```
-
-## `output.wasmLoading` {#output-wasm-loading}
+## output.wasmLoading {#output-wasm-loading}
 
 `boolean = false` `string`
 
@@ -2200,41 +2220,21 @@ module.exports = {
 };
 ```
 
-## `output.iife` {#output-iife}
+## `output.workerChunkLoading` {#outputworkerchunkloading}
 
-`boolean = true`
+`string: 'require' | 'import-scripts' | 'async-node' | 'import' | 'universal'` `boolean: false`
 
-告诉 webpack 添加 [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) 外层包裹生成的代码.
+新选项 `workerChunkLoading` 用于控制 workder 的 chunk 加载。
+
+T> 此选项默认值取决于 `target` 的设置。欲了解更多详情，请在 [webpack 默认值文件中搜索](https://github.com/webpack/webpack/blob/master/lib/config/defaults.js) `"workerChunkLoading"`。
+
+**webpack.config.js**
 
 ```javascript
 module.exports = {
   //...
   output: {
-    iife: true,
+    workerChunkLoading: false,
   },
 };
 ```
-
-## `output.module` {#outputmodule}
-
-`boolean = false`
-
-以模块类型输出 JavaScript 文件。由于此功能还处于实验阶段，默认禁用。
-
-当启用时，webpack 会在内部将 [`output.iife`](#outputiife) 设置为 `false`，将 [`output.scriptType`](#outputscripttype) 为 `'module'`，并将 `terserOptions.module` 设置为 `true`
-
-如果你需要使用 webpack 构建一个库以供别人使用，当 `output.module` 为 `true` 时，一定要将 [`output.libraryTarget`](#librarytarget-module) 设置为 `'module'`。
-
-```javascript
-module.exports = {
-  //...
-  experiments: {
-    outputModule: true,
-  },
-  output: {
-    module: true,
-  },
-};
-```
-
-W> `output.module` 是一个实验性的功能， 想要使用的话，通过设置 [`experiments.outputModule`](/configuration/experiments/#experiments) 为 `true`。

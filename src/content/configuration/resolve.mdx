@@ -231,25 +231,6 @@ module.exports = {
 };
 ```
 
-### `resolve.enforceModuleExtension` {#resolveenforcemoduleextension}
-
-`boolean = false`
-
-W> 在 webpack 5 中被废弃
-
-告知 webpack 是否要求模块使用后缀（例如加载器 loaders）。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  resolve: {
-    enforceModuleExtension: false,
-  },
-};
-```
-
 ### resolve.extensions {#resolveextensions}
 
 `[string] = ['.js', '.json', '.wasm']`
@@ -690,23 +671,4 @@ module.exports = {
 };
 ```
 
-T> 注意，这里你可以使用别名，并且其他特性类似于 resolve 对象。例如，`{ txt: 'raw-loader' }` 会使用 `raw-loader` 去 shim(填充) `txt!templates/demo.txt`。
-
-### `resolveLoader.moduleExtensions` {#resolveloadermoduleextensions}
-
-`[string]`
-
-W> 在 webpack 5 中被废弃
-
-解析 loader 时，用到扩展名(extensions)/后缀(suffixes)。从 webpack 2 开始，我们 [强烈建议](/migrate/3/#automatic-loader-module-name-extension-removed) 使用全名，例如 `example-loader`，以尽可能清晰。然而，如果你确实想省略 `-loader`，也就是说只使用 `example`，则可以使用此选项来实现：
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  resolveLoader: {
-    moduleExtensions: ['-loader'],
-  },
-};
-```
+T> 请注意你可以在这里使用别名和 resolve 中熟悉的其他特性。例如 `{ txt: 'raw-loader' }` 将会 shim `txt!templates/demo.txt` 使用 `raw-loader`。

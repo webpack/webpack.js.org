@@ -211,9 +211,9 @@ module.exports = {
 
 ### debug {#debug}
 
-`string` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
+`string` `boolean = false` `RegExp` `function(name) => boolean` `[string, RegExp, function(name) => boolean]`
 
-开启特定日志比如插件(plugins)和加载器(loaders)的调试信息。 与 [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) 选项类似但仅仅对于基础设施而言。没有默认配置提供。
+开启特定日志比如插件(plugins)和加载器(loaders)的调试信息。 与 [`stats.loggingDebug`](/configuration/stats/#statsloggingdebug) 选项类似但仅仅对于基础设施而言。默认为 `false`。
 
 **webpack.config.js**
 
@@ -229,9 +229,9 @@ module.exports = {
 
 ### level {#level}
 
-`string`
+`string = 'info' : 'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose'`
 
-开启基础设施日志输出。与 [`stats.logging`](/configuration/stats/#statslogging) 选项类似但仅仅是对于基础设施而言。没有默认值提供。
+开启基础设施日志输出。与 [`stats.logging`](/configuration/stats/#statslogging) 选项类似但仅仅是对于基础设施而言。默认值为 `'info'`。
 
 可能的取值：
 

@@ -8,6 +8,7 @@ const mdPlugins = [
   require('docschina-remark-slugger'),
   remarkResponsiveTable,
   require('remark-emoji'),
+  require('./src/remark-plugins/remark-cleanup-readme/index.js'),
   [
     require('./src/remark-plugins/remark-custom-asides/index.js'),
     {
