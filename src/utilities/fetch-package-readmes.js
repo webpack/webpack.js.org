@@ -9,6 +9,7 @@ const yamlHeadmatter = require('./yaml-headmatter.js');
 const processReadme = require('./process-readme.js');
 
 const writeFile = promisify(fs.writeFile);
+const rename = promisify(fs.rename);
 const readFile = promisify(fs.readFile);
 const cwd = process.cwd();
 
@@ -69,7 +70,8 @@ async function main() {
       const content = await response.text();
       const body = processReadme(content, { source: url });
       await writeFile(fileName, headmatter + body);
-      console.log('Generated:', path.relative(cwd, fileName));
+      await rename(fileName, mdxFileName);
+      console.log('Generated:', path.relative(cwd, mdxFileName));
     }
   }
 }

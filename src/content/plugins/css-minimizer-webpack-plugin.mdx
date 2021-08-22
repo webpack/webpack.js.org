@@ -1,0 +1,595 @@
+---
+title: CssMinimizerWebpackPlugin
+group: webpack contrib
+source: https://raw.githubusercontent.com/webpack-contrib/css-minimizer-webpack-plugin/master/README.md
+edit: https://github.com/webpack-contrib/css-minimizer-webpack-plugin/edit/master/README.md
+repo: https://github.com/webpack-contrib/css-minimizer-webpack-plugin
+translators:
+  - fine-bot
+---
+<div align="center">
+  <a href="https://github.com/webpack/webpack">
+    <img width="200" height="200" src="https://webpack.js.org/assets/icon-square-big.svg"/>
+  </a>
+</div>
+
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![deps][deps]][deps-url]
+[![tests][tests]][tests-url]
+[![cover][cover]][cover-url]
+[![chat][chat]][chat-url]
+[![size][size]][size-url]
+
+
+
+这个插件使用 [cssnano](https://cssnano.co/) 优化和压缩 CSS。
+
+就像 [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) 一样，但在 source maps 和 assets 中使用查询字符串会更加准确，支持缓存和并发模式下运行。
+
+## 起步 $#getting-started$
+
+首先，你需要安装 `css-minimizer-webpack-plugin`：
+
+```console
+$ npm install css-minimizer-webpack-plugin --save-dev
+```
+
+接着在 `webpack` 配置中加入该插件。示例：
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /.s?css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+      },
+    ],
+  },
+  optimization: {
+    minimizer: [
+      // 在 webpack@5 中，你可以使用 `...` 语法来扩展现有的 minimizer（即 `terser-webpack-plugin`），将下一行取消注释
+      // `...`,
+      new CssMinimizerPlugin(),
+    ],
+  },
+};
+```
+
+这将仅在生产环境开启 CSS 优化。
+
+如果还想在开发环境下启用 CSS 优化，请将 `optimization.minimize` 设置为 `true`:
+
+**webpack.config.js**
+
+```js
+// [...]
+module.exports = {
+  optimization: {
+    // [...]
+    minimize: true,
+  },
+};
+```
+
+然后通过你喜欢的方式运行 `webpack`。
+
+## 关于 source maps 的提示 $#note-about-source-maps$
+
+**仅对 [`devtool`](/configuration/devtool/) 配置项的 `source-map`、`inline-source-map`、`hidden-source-map` 与 `nosources-source-map` 值生效。**
+
+为什么呢？因为 CSS 仅支持这些 source map 类型。
+
+插件支持 [`devtool`](/configuration/devtool/) 并且使用 `SourceMapDevToolPlugin` 插件。
+使用受支持的 `devtool` 值可以启用 source map 生成。
+使用 `SourceMapDevToolPlugin` 并启用 `columns` 配置项可以启用 source map 生成。
+
+使用 source map 将错误信息位置映射到 modules 中（这降低了复杂度）。
+如果你是用自定义 `minify` 函数，请阅读 `minify` 章节以确保正确处理 source map。
+
+## 选项 $#options$
+
+|                    选项名                     |                      类型                      |               默认值                | 描述                                                                                           |
+| :-----------------------------------------: | :--------------------------------------------: | :----------------------------------: | :---------------------------------------------------------------------------------------------------- |
+|             **[`test`](#test)**             |    `String\|RegExp\|Array<String\|RegExp>`     |          `/\.css(\?.*)?$/i`          | 匹配要处理的文件                                                                          |
+|          **[`include`](#include)**          |    `String\|RegExp\|Array<String\|RegExp>`     |             `undefined`              | 要引入的文件                                                                                     |
+|          **[`exclude`](#exclude)**          |    `String\|RegExp\|Array<String\|RegExp>`     |             `undefined`              | 要排除的文件                                                                                     |
+|         **[`parallel`](#parallel)**         |               `Boolean\|Number`                |                `true`                | 启用/禁用多进程并行处理。                                                        |
+|           **[`minify`](#minify)**           |          `Function\|Array<Function>`           |  `CssMinimizerPlugin.cssnanoMinify`  | 允许覆盖默认的 minify 函数。                                                           |
+| **[`minimizerOptions`](#minimizeroptions)** |            `Object\|Array<Object>`             |       `{ preset: 'default' }`        | Cssnano 优化 [配置项](https://cssnano.co/docs/optimisations)。                              |
+| **[`processorOptions`](#processoroptions)** |                    `Object`                    | `{ to: assetName, from: assetName }` | 允许为 cssnano 指定处理配置项 [`processoptions`](https://postcss.org/api/#processoptions)。 |
+|   **[`warningsFilter`](#warningsfilter)**   | `Function<(warning, file, source) -> Boolean>` |             `() => true`             | 允许过滤掉 css-minimizer 的警告。                                                               |
+
+### `test` $#test$
+
+类型：`String|RegExp|Array<String|RegExp>` - 默认值：`/\.css(\?.*)?$/i`
+
+用来匹配文件。
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        test: /\.foo\.css$/i,
+      }),
+    ],
+  },
+};
+```
+
+### `include` $#include$
+
+类型：`String|RegExp|Array<String|RegExp>`
+默认值：`undefined`
+
+要包含的文件。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        include: /\/includes/,
+      }),
+    ],
+  },
+};
+```
+
+### `exclude` $#exclude$
+
+类型：`String|RegExp|Array<String|RegExp>`
+默认值：`undefined`
+
+要排除的文件。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        exclude: /\/excludes/,
+      }),
+    ],
+  },
+};
+```
+
+### `parallel` $#parallel$
+
+类型：`Boolean|Number`
+默认值：`true`
+
+使用多进程并发执行，提升构建速度。
+运行时默认的并发数：`os.cpus().length - 1`。
+
+> ℹ️ 并行化可以显著提升构建速度，所以**强烈建议**使用。
+> 如果启用了并行化，`minimizerOptions` 中的包必须通过字符串引入（`packageName` 或者 `require.resolve(packageName)`）。在 [`minimizerOptions`](#minimizeroptions) 获取更多详细信息。
+
+#### `Boolean` $#boolean$
+
+启用/禁用多进程并发执行。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        parallel: true,
+      }),
+    ],
+  },
+};
+```
+
+#### `Number` $#number$
+
+启用多进程并发执行且设置并发数。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        parallel: 4,
+      }),
+    ],
+  },
+};
+```
+
+### `minify` $#minify$
+
+类型：`Function|Array<Function>`
+默认值：`CssMinimizerPlugin.cssnanoMinify`
+
+允许覆盖默认的 minify 函数。
+默认情况下，插件使用 [cssnano](https://github.com/cssnano/cssnano) 包。
+对于使用和测试未发布或版本衍生版本很有用。
+
+可选配置：
+
+- CssMinimizerPlugin.cssnanoMinify
+- CssMinimizerPlugin.cssoMinify
+- CssMinimizerPlugin.cleanCssMinify
+- `async (data, inputMap, minimizerOptions) => {return {code: "a{color: red}", map: "...", warnings: []}}`
+
+> ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
+
+#### `Function` $#function$
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          level: {
+            1: {
+              roundingPrecision: "all=3,px=5",
+            },
+          },
+        },
+        minify: CssMinimizerPlugin.cleanCssMinify,
+      }),
+    ],
+  },
+};
+```
+
+#### `Array` $#array$
+
+如果 `minify` 配置项传入一个数组，`minimizerOptions` 也必须是个数组。
+`miniify` 数组中的函数索引对应于 `minimizerOptions` 数组中具有相同索引的 options 对象。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: [
+          {}, // 第一个函数的配置项（CssMinimizerPlugin.cssnanoMinify）
+          {}, // 第二个函数的配置项（CssMinimizerPlugin.cleanCssMinify）
+          {}, // 第三个函数的配置项
+        ],
+        minify: [
+          CssMinimizerPlugin.cssnanoMinify,
+          CssMinimizerPlugin.cleanCssMinify,
+          async (data, inputMap, minimizerOptions) => {
+            // To do something
+            return {
+              code: `a{color: red}`,
+              map: `{"version": "3", ...}`,
+              warnings: [],
+            };
+          },
+        ],
+      }),
+    ],
+  },
+};
+```
+
+### `minimizerOptions` $#minimizeroptions$
+
+类型：`Object|Array<Object>`
+默认值：`{ preset: 'default' }`
+
+Cssnano 优化 [选项](https://cssnano.co/docs/optimisations).
+
+#### `Object` $#object$
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            "default",
+            {
+              discardComments: { removeAll: true },
+            },
+          ],
+        },
+      }),
+    ],
+  },
+};
+```
+
+#### `Array` $#array$
+
+`miniify` 数组中的函数索引对应于 `minimizerOptions` 数组中具有相同索引的 options 对象。
+如果你使用了类似于 `minimizerOptions` 的对象，那么所有函数都会接受它。
+
+> 如果启用了并行化，`minimizerOptions` 中的包必须通过字符串引入（`packageName` 或者 `require.resolve(packageName)`）。在这种情况下，我们不应该使用 `require`/`import`。
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: require.resolve("cssnano-preset-simple"),
+        },
+      }),
+    ],
+  },
+};
+```
+
+#### `processorOptions` $#processoroptions$
+
+类型：`Object`
+默认值：`{ to: assetName, from: assetName }`
+
+允许配置 cssnano 的 [`processoptions`](https://postcss.org/api/#processoptions) 配置项。
+`parser`、` stringifier` 和 `syntax` 可以是一个函数，也可以是一个字符串，用来表示将会被导出的模块。
+
+> ⚠️ **如果传入一个函数，则必须禁用`parallel` 配置项。**.
+
+```js
+import sugarss from "sugarss";
+
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        parallel: false,
+        minimizerOptions: {
+          processorOptions: {
+            parser: sugarss,
+          },
+        },
+      }),
+    ],
+  },
+};
+```
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          processorOptions: {
+            parser: "sugarss",
+          },
+        },
+      }),
+    ],
+  },
+};
+```
+
+### `warningsFilter` $#warningsfilter$
+
+类型：`Function<(warning, file, source) -> Boolean>`
+默认值：`() => true`
+
+允许过滤 css-minimizer warnings（默认使用 [cssnano](https://github.com/cssnano/cssnano)）。
+返回 `true` 将保留 warning，否则返回假值（`false`/`null`/`undefined`）。
+
+> ⚠️ 如果没有使用 source maps，`source` 参数将包含 `undefined`。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        warningsFilter: (warning, file, source) => {
+          if (/Dropping unreachable code/i.test(warning)) {
+            return true;
+          }
+
+          if (/file\.css/i.test(file)) {
+            return true;
+          }
+
+          if (/source\.css/i.test(source)) {
+            return true;
+          }
+
+          return false;
+        },
+      }),
+    ],
+  },
+};
+```
+
+## 示例 $#examples$
+
+### 使用 sourcemaps $#use-sourcemaps$
+
+不要忘记为所有 loader 启用 `sourceMap` 选项。
+
+```js
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
+module.exports = {
+  devtool: "source-map",
+  module: {
+    loaders: [
+      {
+        test: /.s?css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: "css-loader", options: { sourceMap: true } },
+          { loader: "sass-loader", options: { sourceMap: true } },
+        ],
+      },
+    ],
+  },
+  optimization: {
+    minimizer: [new CssMinimizerPlugin()],
+  },
+};
+```
+
+### 移除所有注释 $#remove-all-comments$
+
+移除所有注释（包括以 `/*!` 开头的注释）。
+
+```js
+module.exports = {
+  optimization: {
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            "default",
+            {
+              discardComments: { removeAll: true },
+            },
+          ],
+        },
+      }),
+    ],
+  },
+};
+```
+
+### 使用自定义 minifier [csso](https://github.com/css/csso) $#using-custom-minifier-cssohttpsgithubcomcsscsso$
+
+默认情况下，插件使用 [cssnano](https://github.com/cssnano/cssnano) 包。
+可以使用其他提供压缩功能的依赖包。
+
+> ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  devtool: "source-map",
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minify: async (data, inputMap) => {
+          const csso = require("csso");
+          const sourcemap = require("source-map");
+
+          const [[filename, input]] = Object.entries(data);
+          const minifiedCss = csso.minify(input, {
+            filename: filename,
+            sourceMap: true,
+          });
+
+          if (inputMap) {
+            minifiedCss.map.applySourceMap(
+              new sourcemap.SourceMapConsumer(inputMap),
+              filename
+            );
+          }
+
+          return {
+            code: minifiedCss.css,
+            map: minifiedCss.map.toJSON(),
+          };
+        },
+      }),
+    ],
+  },
+};
+```
+
+### 使用自定义 minifier [clean-css](https://github.com/jakubpawlowicz/clean-css) $#using-custom-minifier-clean-css$
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  devtool: "source-map",
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minify: CssMinimizerPlugin.cleanCssMinify,
+        // Uncomment this line for options
+        // minimizerOptions: { compatibility: 'ie11,-properties.merging' },
+      }),
+    ],
+  },
+};
+```
+
+### Using custom minifier [csso](https://github.com/css/csso)
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  devtool: "source-map",
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin({
+        minify: CssMinimizerPlugin.cssoMinify,
+        // Uncomment this line for options
+        // minimizerOptions: { restructure: false },
+      }),
+    ],
+  },
+};
+```
+
+## 贡献 $#contributing$
+
+如果你还没有阅读，请花一点时间阅读我们的贡献指南。
+
+[CONTRIBUTING](https://github.com/webpack-contrib/css-minimizer-webpack-plugin/blob/master/.github/CONTRIBUTING.md)
+
+## License $#license$
+
+[MIT](https://github.com/webpack-contrib/css-minimizer-webpack-plugin/blob/master/LICENSE)
+
+[npm]: https://img.shields.io/npm/v/css-minimizer-webpack-plugin.svg
+[npm-url]: https://npmjs.com/package/css-minimizer-webpack-plugin
+[node]: https://img.shields.io/node/v/css-minimizer-webpack-plugin.svg
+[node-url]: https://nodejs.org
+[deps]: https://david-dm.org/webpack-contrib/css-minimizer-webpack-plugin.svg
+[deps-url]: https://david-dm.org/webpack-contrib/css-minimizer-webpack-plugin
+[tests]: https://github.com/webpack-contrib/css-minimizer-webpack-plugin/workflows/css-minimizer-webpack-plugin/badge.svg
+[tests-url]: https://github.com/webpack-contrib/css-minimizer-webpack-plugin/actions
+[cover]: https://codecov.io/gh/webpack-contrib/css-minimizer-webpack-plugin/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/css-minimizer-webpack-plugin
+[chat]: https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg
+[chat-url]: https://gitter.im/webpack/webpack
+[size]: https://packagephobia.now.sh/badge?p=css-minimizer-webpack-plugin
+[size-url]: https://packagephobia.now.sh/result?p=css-minimizer-webpack-plugin
