@@ -17,19 +17,33 @@ translators:
 
 由于 webpack 遵循 CommonJS 模块规范，因此，你**可以在配置中使用**：
 
+<<<<<<< HEAD
 - 通过 `require(...)` 引入其他文件
 - 通过 `require(...)` 使用 npm 下载的工具函数
 - 使用 JavaScript 控制流表达式，例如 `?:` 操作符
 - 对 value 使用常量或变量赋值
 - 编写并执行函数，生成部分配置
+=======
+- Import other files via `require(...)`
+- use utilities on npm via `require(...)`
+- use JavaScript control flow expressions, e.g. the `?:` operator
+- use constants or variables for often used values
+- write and execute functions to generate a part of the configuration
+>>>>>>> da57cca5a0525e249bb842da5176b76664e8fedc
 
 请在合适的场景，使用这些功能。
 
 虽然技术上可行，**但还是应避免如下操作**：
 
+<<<<<<< HEAD
 - 当使用 webpack CLI 工具时，访问 CLI 参数（应编写自己的 CLI 工具替代，或者[使用 `--env`](/configuration/configuration-types/)）
 - 导出不确定的结果（两次调用 webpack 应产生相同的输出文件）
 - 编写超长的配置（应将配置文件拆分成多个）
+=======
+- Access CLI arguments, when using the webpack CLI (instead write your own CLI, or [use `--env`](/api/cli/#env))
+- Export non-deterministic values (calling webpack twice should result in the same output files)
+- Write long configurations (instead split the configuration into multiple files)
+>>>>>>> da57cca5a0525e249bb842da5176b76664e8fedc
 
 T> 此文档中得出最重要的结论是，webpack 的配置可以有许多不同的样式和风格。关键在于，为了易于维护和理解这些配置，需要在团队内部保证一致。
 

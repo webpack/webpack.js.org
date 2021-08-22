@@ -59,7 +59,7 @@ T> 如果你在技术选型中使用了 `webpack-dev-middleware` 而没有使用
     },
     devtool: 'inline-source-map',
     devServer: {
-      contentBase: './dist',
+      static: './dist',
 +     hot: true,
     },
     plugins: [
@@ -152,7 +152,7 @@ const webpack = require('webpack');
 
 const config = require('./webpack.config.js');
 const options = {
-  contentBase: './dist',
+  static: './dist',
   hot: true,
   host: 'localhost',
 };
@@ -239,7 +239,7 @@ npm install --save-dev style-loader css-loader
     },
     devtool: 'inline-source-map',
     devServer: {
-      contentBase: './dist',
+      static: './dist',
       hot: true,
     },
 +   module: {
