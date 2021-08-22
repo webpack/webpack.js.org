@@ -124,17 +124,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-当设置为 `'all'` 时会跳过 host 检查。**并不推荐这样做**，因为不检查 host 的应用程序容易受到 DNS 重绑定攻击。
-=======
-Usage via the CLI:
+通过 CLI 使用：
 
 ```bash
 npx webpack serve --allowed-hosts .host.com --allowed-hosts host2.com
 ```
 
-When set to `'all'` this option bypasses host checking. **THIS IS NOT RECOMMENDED** as apps that do not check the host are vulnerable to DNS rebinding attacks.
->>>>>>> da57cca5a0525e249bb842da5176b76664e8fedc
+当设置为 `'all'` 时会跳过 host 检查。**并不推荐这样做**，因为不检查 host 的应用程序容易受到 DNS 重绑定攻击。
 
 **webpack.config.js**
 
@@ -147,11 +143,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-要将这个选项与 CLI 一起使用，请按照如下所示传入 `--allowed-hosts`：
-=======
-Usage via the CLI:
->>>>>>> da57cca5a0525e249bb842da5176b76664e8fedc
+通过 CLI 使用：
 
 ```bash
 npx webpack serve --allowed-hosts all
@@ -180,17 +172,13 @@ module.exports = {
 npx webpack serve --bonjour
 ```
 
-<<<<<<< HEAD
-你也可以为 bonjour 设置 [自定义配置项](https://github.com/watson/bonjour#initializing)，例如：
-=======
-To disable:
+如需禁用：
 
 ```bash
 npx webpack serve --no-bonjour
 ```
 
-You can also pass [custom options](https://github.com/watson/bonjour#initializing) to bonjour, for example:
->>>>>>> da57cca5a0525e249bb842da5176b76664e8fedc
+你也可以为 bonjour 设置 [自定义配置项](https://github.com/watson/bonjour#initializing)，例如：
 
 **webpack.config.js**
 
@@ -258,17 +246,13 @@ module.exports = {
 npx webpack serve --client-overlay
 ```
 
-<<<<<<< HEAD
-如果你只想显示错误信息：
-=======
-To disable:
+如需禁用：
 
 ```bash
 npx webpack serve --no-client-overlay
 ```
 
-If you want to show only errors:
->>>>>>> da57cca5a0525e249bb842da5176b76664e8fedc
+如果你只想显示错误信息：
 
 **webpack.config.js**
 
@@ -315,17 +299,13 @@ module.exports = {
 npx webpack serve --client-progress
 ```
 
-<<<<<<< HEAD
-### webSocketTransport $#websockettransport$
-=======
-To disable:
+如需禁用：
 
 ```bash
 npx webpack serve --no-client-progress
 ```
 
-### webSocketTransport
->>>>>>> da57cca5a0525e249bb842da5176b76664e8fedc
+### webSocketTransport $#websockettransport$
 
 `'ws' | 'sockjs'` `string`
 
@@ -468,17 +448,13 @@ module.exports = {
 npx webpack serve --compress
 ```
 
-<<<<<<< HEAD
-## devserver.devMiddleware $#devserverdevmiddleware$
-=======
-To disable:
+如需禁用
 
 ```bash
 npx webpack serve --no-compress
 ```
 
-## devserver.devMiddleware
->>>>>>> da57cca5a0525e249bb842da5176b76664e8fedc
+## devserver.devMiddleware $#devserverdevmiddleware$
 
 为 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 提供处理 webpack 资源的配置项。
 
@@ -539,17 +515,13 @@ module.exports = {
 npx webpack serve --http2
 ```
 
-<<<<<<< HEAD
-要通过 CLI 使用自己的证书，请使用以下选项
-=======
-To disable:
+如需禁用：
 
 ```bash
 npx webpack serve --no-http2
 ```
 
-To pass your own certificate via CLI, use the following options:
->>>>>>> da57cca5a0525e249bb842da5176b76664e8fedc
+要通过 CLI 使用自己的证书，请使用以下选项：
 
 ```bash
 npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
@@ -599,17 +571,13 @@ module.exports = {
 npx webpack serve --https
 ```
 
-<<<<<<< HEAD
-要通过 CLI 使用自己的证书，请使用以下选项
-=======
-To disable:
+如下禁用：
 
 ```bash
 npx webpack serve --no-https
 ```
 
-To pass your own certificate via the CLI use the following options:
->>>>>>> da57cca5a0525e249bb842da5176b76664e8fedc
+要通过 CLI 使用自己的证书，请使用以下选项：
 
 ```bash
 npx webpack serve --https-key ./path/to/server.key --https--cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
@@ -775,17 +743,13 @@ module.exports = {
 npx webpack serve --hot
 ```
 
-<<<<<<< HEAD
-启用热模块替换功能，在构建失败时不刷新页面作为回退，使用 `hot: 'only'`：
-=======
-To disable:
+如需禁用：
 
 ```bash
 npx webpack serve --no-hot
 ```
 
-To enable Hot Module Replacement without page refresh as a fallback in case of build failures, use `hot: 'only'`:
->>>>>>> da57cca5a0525e249bb842da5176b76664e8fedc
+启用热模块替换功能，在构建失败时不刷新页面作为回退，使用 `hot: 'only'`：
 
 **webpack.config.js**
 
@@ -977,17 +941,13 @@ module.exports = {
 npx webpack serve --open
 ```
 
-<<<<<<< HEAD
-在浏览器中打开指定页面：
-=======
-To disable:
+如需禁用：
 
 ```bash
 npx webpack serve --no-open
 ```
 
-To open a specified page in browser:
->>>>>>> da57cca5a0525e249bb842da5176b76664e8fedc
+在浏览器中打开指定页面：
 
 **webpack.config.js**
 

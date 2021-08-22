@@ -96,19 +96,11 @@ import.meta.webpackHot.accept(
 
 `(err, {moduleId, module}) => {}`
 
-<<<<<<< HEAD
 - `err`: 计算新版本时的错误。
 - `moduleId`: 当前模块 id。
 - `module`: 当前模块实例。
   - `module.hot`: 允许访问出错模块实例的 HMR API。一个常见的场景是再次自我接收（accept）。添加一个dispose处理程序来传递数据也是有意义的。注意，错误的模块可能已经部分执行，所以请确保不要进入不一致的状态。你可以使用 `module.hot.data` 存储部分状态。
   - `module.exports`: 可以被重载，但是要小心，因为属性名在生产模式下可能会被破坏。
-=======
-- `err`: the error when evaluating the new version.
-- `moduleId`: the current module id.
-- `module`: the current module instance.
-  - `module.hot`: allow to use the HMR API of the errored module instance. A common scenario is to self accept it again. It also makes sense to add a dispose handler to pass data along. Note that the errored module might be already partially executed, so make sure to not get into a inconsistent state. You can use `module.hot.data` to store partial state.
-  - `module.exports`: can be overridden, but be careful since property names might be mangled in production mode.
->>>>>>> da57cca5a0525e249bb842da5176b76664e8fedc
 
 ### `decline` $#decline$
 
