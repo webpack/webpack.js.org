@@ -8,10 +8,14 @@ translators:
   - 92hackers
   - QC-L
 ---
+
 <div align="center">
   <a href="https://github.com/webpack/webpack">
-    <img width="200" height="200"
-      src="https://webpack.js.org/assets/icon-square-big.svg"/>
+    <img
+      width="200"
+      height="200"
+      src="https://webpack.js.org/assets/icon-square-big.svg"
+    />
   </a>
 </div>
 
@@ -22,8 +26,6 @@ translators:
 [![cover][cover]][cover-url]
 [![chat][chat]][chat-url]
 [![size][size]][size-url]
-
-
 
 imports loader 允许使用依赖于特定全局变量的模块。
 
@@ -194,12 +196,12 @@ import angular from 'angular';
 
 ## 配置项 $#options$
 
-|                  Name                   |                   Type                    |   Default   | Description                                                            |
-| :-------------------------------------: | :---------------------------------------: | :---------: | :--------------------------------------------------------------------- |
-|           **[`type`](#type)**           |                `{String}`                 |  `module`   | 生成 import 的格式                                            |
-|        **[`imports`](#imports)**        | `{String\|Object\|Array<String\|Object>}` | `undefined` | import 列表                                                        |
+|                  Name                   |                   Type                    |   Default   | Description                                            |
+| :-------------------------------------: | :---------------------------------------: | :---------: | :----------------------------------------------------- |
+|           **[`type`](#type)**           |                `{String}`                 |  `module`   | 生成 import 的格式                                     |
+|        **[`imports`](#imports)**        | `{String\|Object\|Array<String\|Object>}` | `undefined` | import 列表                                            |
 |        **[`wrapper`](#wrapper)**        |        `{Boolean\|String\|Object}`        | `undefined` | 关闭函数中的模块代码 (`(function () { ... }).call();`) |
-| **[`additionalCode`](#additionalcode)** |                `{String}`                 | `undefined` | 添加自定义代码                                                       |
+| **[`additionalCode`](#additionalcode)** |                `{String}`                 | `undefined` | 添加自定义代码                                         |
 
 ### `type` $#type$
 
@@ -278,11 +280,11 @@ import Foo from 'Foo';
 类型：`String|Object|Array<String|Object>`
 默认值：`undefined`
 
-import 列表。
+`import` 列表。
 
 #### `String` $#string$
 
-允许使用字符串描述 export。
+允许使用字符串描述 `export`。
 
 ##### `Syntax` $#syntax$
 
@@ -388,14 +390,14 @@ var myName = require('lib');
 
 #### `Object` $#object$
 
-允许使用一个对象来描述 import。
+允许使用一个对象来描述 `import`。
 
 属性：
 
 - `syntax`:
 
   - 如果 `type` 值为 `module`- 可以是 `default`、`named`、`namespace` 或 `side-effects`
-  - 如果 `type` 值为 `commonjs`- 可以是 single`、`multiple` 或 `pure`
+  - 如果 `type` 值为 `commonjs`- 可以是 single`、`multiple`或`pure`
 
 - `moduleName` - 被导入模块的名称 (**必填**)
 - `name` - 被导入值的名称 (**必填**)
@@ -507,7 +509,7 @@ import 'lib_4';
 
 用给定的 `thisArg` 和 `args` 关闭函数中的模块代码 (`(function () { ... }).call();`)。
 
-> ⚠ 如果源码中包含 ES module import 的话，请不要使用该配置。
+> ⚠ 如果源码中包含 ES module `import` 的话，请不要使用该配置。
 
 #### `Boolean` $#boolean$
 
