@@ -124,6 +124,12 @@ module.exports = {
 };
 ```
 
+通过 CLI 使用：
+
+```bash
+npx webpack serve --allowed-hosts .host.com --allowed-hosts host2.com
+```
+
 当设置为 `'all'` 时会跳过 host 检查。**并不推荐这样做**，因为不检查 host 的应用程序容易受到 DNS 重绑定攻击。
 
 **webpack.config.js**
@@ -137,10 +143,10 @@ module.exports = {
 };
 ```
 
-要将这个选项与 CLI 一起使用，请按照如下所示传入 `--allowed-hosts`：
+通过 CLI 使用：
 
 ```bash
-npx webpack serve --entry ./entry/file --output-path ./output/path --allowed-hosts .host.com --allowed-hosts host2.com
+npx webpack serve --allowed-hosts all
 ```
 
 ## `devServer.bonjour` $#devserverbonjour$
@@ -164,6 +170,12 @@ module.exports = {
 
 ```bash
 npx webpack serve --bonjour
+```
+
+如需禁用：
+
+```bash
+npx webpack serve --no-bonjour
 ```
 
 你也可以为 bonjour 设置 [自定义配置项](https://github.com/watson/bonjour#initializing)，例如：
@@ -234,6 +246,12 @@ module.exports = {
 npx webpack serve --client-overlay
 ```
 
+如需禁用：
+
+```bash
+npx webpack serve --no-client-overlay
+```
+
 如果你只想显示错误信息：
 
 **webpack.config.js**
@@ -279,6 +297,12 @@ module.exports = {
 
 ```bash
 npx webpack serve --client-progress
+```
+
+如需禁用：
+
+```bash
+npx webpack serve --no-client-progress
 ```
 
 ### webSocketTransport $#websockettransport$
@@ -424,6 +448,12 @@ module.exports = {
 npx webpack serve --compress
 ```
 
+如需禁用
+
+```bash
+npx webpack serve --no-compress
+```
+
 ## devserver.devMiddleware $#devserverdevmiddleware$
 
 为 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 提供处理 webpack 资源的配置项。
@@ -485,7 +515,13 @@ module.exports = {
 npx webpack serve --http2
 ```
 
-要通过 CLI 使用自己的证书，请使用以下选项
+如需禁用：
+
+```bash
+npx webpack serve --no-http2
+```
+
+要通过 CLI 使用自己的证书，请使用以下选项：
 
 ```bash
 npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
@@ -535,7 +571,13 @@ module.exports = {
 npx webpack serve --https
 ```
 
-要通过 CLI 使用自己的证书，请使用以下选项
+如下禁用：
+
+```bash
+npx webpack serve --no-https
+```
+
+要通过 CLI 使用自己的证书，请使用以下选项：
 
 ```bash
 npx webpack serve --https-key ./path/to/server.key --https--cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
@@ -617,6 +659,12 @@ module.exports = {
 npx webpack serve --history-api-fallback
 ```
 
+To disable:
+
+```bash
+npx webpack serve --no-history-api-fallback
+```
+
 For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
 
 ## devServer.host $#devserverhost$
@@ -693,6 +741,12 @@ module.exports = {
 
 ```bash
 npx webpack serve --hot
+```
+
+如需禁用：
+
+```bash
+npx webpack serve --no-hot
 ```
 
 启用热模块替换功能，在构建失败时不刷新页面作为回退，使用 `hot: 'only'`：
@@ -789,7 +843,7 @@ W> 热加载仅对像 `web`、`webworker`、`electron-renderer` 和 `node-webkit
 
 ## devServer.onAfterSetupMiddleware
 
-`function (app, server, compiler)`
+`function (devServer)`
 
 提供服务器内部在所有其他中间件之后执行
 自定义中间件的能力
@@ -801,6 +855,10 @@ module.exports = {
   //...
   devServer: {
     onAfterSetupMiddleware: function (devServer) {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
       devServer.app.get('/some/path', function (req, res) {
         res.json({ custom: 'response' });
       });
@@ -811,7 +869,7 @@ module.exports = {
 
 ## devServer.onBeforeSetupMiddleware $#devserveronbeforesetupmiddleware$
 
-`function (app, server, compiler)`
+`function (devServer)`
 
 提供在服务器内部执行所有其他中间件之前执行自定义中间件的能力。
 这可以用来定义自定义处理程序，
@@ -823,8 +881,12 @@ module.exports = {
 module.exports = {
   //...
   devServer: {
-    onBeforeSetupMiddleware: function (app, server, compiler) {
-      app.get('/some/path', function (req, res) {
+    onBeforeSetupMiddleware: function (devServer) {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
+      devServer.app.get('/some/path', function (req, res) {
         res.json({ custom: 'response' });
       });
     },
@@ -834,7 +896,7 @@ module.exports = {
 
 ## devserver.onListening $#devserveronlistening$
 
-`function (server)`
+`function (devServer)`
 
 提供在 webpack-dev-server 开始监听端口连接时执行自定义函数的能力。
 
@@ -844,8 +906,12 @@ module.exports = {
 module.exports = {
   //...
   devServer: {
-    onListening: function (server) {
-      const port = server.address().port;
+    onListening: function (devServer) {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
+      const port = devServer.server.address().port;
       console.log('Listening on port:', port);
     },
   },
@@ -873,6 +939,12 @@ module.exports = {
 
 ```bash
 npx webpack serve --open
+```
+
+如需禁用：
+
+```bash
+npx webpack serve --no-open
 ```
 
 在浏览器中打开指定页面：
@@ -1113,7 +1185,7 @@ module.exports = {
   devServer: {
     index: '', // specify to enable root proxying
     host: '...',
-    contentBase: '...',
+    static: '...',
     proxy: {
       context: () => true,
       target: 'http://localhost:1234',

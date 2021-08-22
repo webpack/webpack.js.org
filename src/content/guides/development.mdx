@@ -216,7 +216,7 @@ npm install --save-dev webpack-dev-server
    },
    devtool: 'inline-source-map',
 +  devServer: {
-+    contentBase: './dist',
++    static: './dist',
 +  },
    plugins: [
      new HtmlWebpackPlugin({
@@ -300,7 +300,7 @@ npm install --save-dev express webpack-dev-middleware
    },
    devtool: 'inline-source-map',
    devServer: {
-     contentBase: './dist',
+     static: './dist',
    },
    plugins: [
      new HtmlWebpackPlugin({

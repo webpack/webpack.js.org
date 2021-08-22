@@ -19,6 +19,7 @@ contributors:
   - Jalitha
   - muhmushtaha
   - chenxsan
+  - RyanGreyling2
 translators:
   - QC-L
   - jacob-lcs
@@ -27,7 +28,7 @@ translators:
   - zitup
 ---
 
-本质上，**webpack** 是一个用于现代 JavaScript 应用程序的 _静态模块打包工具_。当 webpack 处理应用程序时，它会在内部构建一个 [依赖图(dependency graph)](/concepts/dependency-graph/)，此依赖图对应映射到项目所需的每个模块，并生成一个或多个 _bundle_。
+本质上，**webpack** 是一个用于现代 JavaScript 应用程序的 _静态模块打包工具_。当 webpack 处理应用程序时，它会在内部从一个或多个入口点构建一个 [依赖图(dependency graph)](/concepts/dependency-graph/)，然后将你项目中所需的每一个模块组合成一个或多个 _bundles_，它们均为静态资源，用于展示你的内容。
 
 T> 可以在 [这里](/concepts/modules) 了解更多关于 JavaScript 模块和 webpack 模块的信息。
 
@@ -95,7 +96,7 @@ T> `output` 属性还有 [更多可配置的特性](/configuration/output)，如
 
 webpack 只能理解 JavaScript 和 JSON 文件，这是 webpack 开箱可用的自带能力。**loader** 让 webpack 能够去处理其他类型的文件，并将它们转换为有效 [模块](/concepts/modules)，以供应用程序使用，以及被添加到依赖图中。
 
-W> 注意，loader 能够 `import` 导入任何类型的模块（例如 `.css` 文件），这是 webpack 特有的功能，其他打包程序或任务执行器的可能并不支持。我们认为这种语言扩展是很有必要的，因为这可以使开发人员创建出更准确的依赖关系图。
+W> webpack 的其中一个强大的特性就是能通过 `import` 导入任何类型的模块（例如 `.css` 文件），其他打包程序或任务执行器的可能并不支持。我们认为这种语言扩展是很有必要的，因为这可以使开发人员创建出更准确的依赖关系图。
 
 在更高层面，在 webpack 的配置中，**loader** 有两个属性：
 
@@ -149,7 +150,7 @@ module.exports = {
 };
 ```
 
-在上面的示例中，`html-webpack-plugin` 为应用程序生成一个 HTML 文件，并自动注入所有生成的 bundle。
+在上面的示例中，`html-webpack-plugin` 为应用程序生成一个 HTML 文件，并自动将生成的所有 bundle 注入到此文件中。
 
 T> webpack 提供许多开箱可用的插件！查阅 [插件列表](/plugins) 获取更多。
 
