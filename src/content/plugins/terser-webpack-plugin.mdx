@@ -28,11 +28,7 @@ translators:
 
 ## 入门 $#getting-started$
 
-<<<<<<< HEAD:src/content/plugins/terser-webpack-plugin.md
-如果你使用的是 webpack v5 或以上版本，你不需要安装这个插件。webpack v5 自带最新的 `terser-webpack-plugin`。如果使用 webpack v4，则必须安装 `terser-webpack-plugin` v4 的版本。
-=======
-Webpack v5 comes with the latest `terser-webpack-plugin` out of the box. If you are using Webpack v5 or above and wish to customize the options, you will still need to install `terser-webpack-plugin`. Using Webpack v4, you have to install `terser-webpack-plugin` v4.
->>>>>>> 0dfa9eea75c055d911fa484e91fdf913f7b331d4:src/content/plugins/terser-webpack-plugin.mdx
+webpack v5 开箱即带有最新版本的 `terser-webpack-plugin`。如果你使用的是 webpack v5 或更高版本，同时希望自定义配置，那么仍需要安装 `terser-webpack-plugin`。如果使用 webpack v4，则必须安装 `terser-webpack-plugin` v4 的版本。
 
 首先，你需要安装 `terser-webpack-plugin`：
 
@@ -59,32 +55,28 @@ module.exports = {
 
 ## 关于 source maps 说明 $#note-about-source-maps$
 
-**Works only with `source-map`, `inline-source-map`, `hidden-source-map` and `nosources-source-map` values for the [`devtool`](/configuration/devtool/) option.**
+**只对 [`devtool`](/configuration/devtool/) 选项的 `source-map`，`inline-source-map`，`hidden-source-map` 和 `nosources-source-map` 有效**。
 
-Why?
+为何如此？
 
-- `eval` wraps modules in `eval("string")` and the minimizer does not handle strings.
-- `cheap` has not column information and minimizer generate only a single line, which leave only a single mapping.
+- `eval` 会包裹 modules，通过 `eval("string")`，而 minimizer 不会处理字符串。
+- `cheap` 不存在列信息，minimizer 只产生单行，只会留下一个映射。
 
-Using supported `devtool` values enable source map generation.
+使用支持的 `devtool` 值可以生成 source map。
 
 ## 选项 $#options$
 
-<<<<<<< HEAD:src/content/plugins/terser-webpack-plugin.md
-### `test` $#test$
-=======
-|                   Name                    |                                      Type                                       |                             Default                             | Description                                                                  |
+|                   选项名                    |                                      类型                                       |                             默认值                             | 描述                                                                  |
 | :---------------------------------------: | :-----------------------------------------------------------------------------: | :-------------------------------------------------------------: | :--------------------------------------------------------------------------- |
-|            **[`test`](#test)**            |                     `String\|RegExp\|Array<String\|RegExp>`                     |                       `/\.m?js(\?.*)?$/i`                       | Test to match files against.                                                 |
-|         **[`include`](#include)**         |                     `String\|RegExp\|Array<String\|RegExp>`                     |                           `undefined`                           | Files to include.                                                            |
-|            **[`exclude`](#)**             |                     `String\|RegExp\|Array<String\|RegExp>`                     |                           `undefined`                           | Files to exclude.                                                            |
-|        **[`parallel`](#parallel)**        |                                `Boolean\|Number`                                |                             `true`                              | Use multi-process parallel running to improve the build speed.               |
-|          **[`minify`](#minify)**          |                                   `Function`                                    |                           `undefined`                           | Allows you to override default minify function.                              |
-|   **[`terserOptions`](#terseroptions)**   |                                    `Object`                                     | [`default`](https://github.com/terser-js/terser#minify-options) | Terser [minify options](https://github.com/terser-js/terser#minify-options). |
-| **[`extractComments`](#extractcomments)** | `Boolean\|String\|RegExp\|Function<(node, comment) -> Boolean\|Object>\|Object` |                             `true`                              | Whether comments shall be extracted to a separate file.                      |
+|            **[`test`](#test)**            |                     `String\|RegExp\|Array<String\|RegExp>`                     |                       `/\.m?js(\?.*)?$/i`                       | 用来匹配需要压缩的文件。                                                 |
+|         **[`include`](#include)**         |                     `String\|RegExp\|Array<String\|RegExp>`                     |                           `undefined`                           | 匹配参与压缩的文件。                                                            |
+|            **[`exclude`](#)**             |                     `String\|RegExp\|Array<String\|RegExp>`                     |                           `undefined`                           | 匹配不需要压缩的文件。                                                            |
+|        **[`parallel`](#parallel)**        |                                `Boolean\|Number`                                |                             `true`                              | 使用多进程并发运行以提高构建速度。               |
+|          **[`minify`](#minify)**          |                                   `Function`                                    |                           `undefined`                           | 允许你自定义压缩函数。                              |
+|   **[`terserOptions`](#terseroptions)**   |                                    `Object`                                     | [`default`](https://github.com/terser-js/terser#minify-options) | Terser 的 [minify 选项](https://github.com/terser-js/terser#minify-options)。 |
+| **[`extractComments`](#extractcomments)** | `Boolean\|String\|RegExp\|Function<(node, comment) -> Boolean\|Object>\|Object` |                             `true`                              | 注释是否需要提取到一个单独的文件中。                      |
 
-### `test`
->>>>>>> 0dfa9eea75c055d911fa484e91fdf913f7b331d4:src/content/plugins/terser-webpack-plugin.mdx
+### `test` $#test$
 
 类型： `String|RegExp|Array<String|RegExp>`
 默认值：`/\.m?js(\?.*)?$/i`
@@ -347,7 +339,7 @@ module.exports = {
 };
 ```
 
-#### `Function<(node, comment) -> Boolean>` {＃functionnode-comment --- boolean} {#functionnode-comment---boolean-＃functionnode-comment-----boolean}
+#### `Function<(node, comment) -> Boolean>` $#functionnode-comment-----boolean$
 
 与指定表达式匹配的所有注释将会被剥离到单独的文件中。
 
@@ -547,12 +539,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD:src/content/plugins/terser-webpack-plugin.md
-### 自定义压缩函数 $#custom-minify-function$
-=======
 ### [`uglify-js`](https://github.com/mishoo/UglifyJS)
 
-[`UglifyJS`](https://github.com/mishoo/UglifyJS) is a JavaScript parser, minifier, compressor and beautifier toolkit.
+[`UglifyJS`](https://github.com/mishoo/UglifyJS) 是一款集 JavaScript 解析器，压缩器，美化器于一身的工具集。
 
 **webpack.config.js**
 
@@ -574,9 +563,9 @@ module.exports = {
 
 ### [`swc`](https://github.com/swc-project/swc)
 
-[`swc`](https://github.com/swc-project/swc) is a super-fast compiler written in rust; producing widely-supported javascript from modern standards and typescript.
+[`swc`](https://github.com/swc-project/swc) 是一款采用 rust 编写的超快编译器；可以将最新标准和 TypeScript 的语法生成被广泛使用的 JavaScript。
 
-> ⚠ the `extractComments` option is not supported and all comments will be removed by default, it will be fixed in future
+> ⚠ `extractComments` 选项暂不支持，所有注释将默认被删除，会在将来得到修复。
 
 **webpack.config.js**
 
@@ -598,9 +587,9 @@ module.exports = {
 
 ### [`esbuild`](https://github.com/evanw/esbuild)
 
-[`esbuild`](https://github.com/evanw/esbuild) is an extremely fast JavaScript bundler and minifier.
+[`esbuild`](https://github.com/evanw/esbuild) 是一款非常快速的 JavaScript 打包工具和压缩工具。
 
-> ⚠ the `extractComments` option is not supported and all legal comments (i.e. copyright, licenses and etc) will be preserved
+> ⚠ 不支持 `extractComments` 选项，所有法律相关的注释（如版权，许可证等)将被保留。
 
 **webpack.config.js**
 
@@ -627,8 +616,7 @@ module.exports = {
 };
 ```
 
-### Custom Minify Function
->>>>>>> 0dfa9eea75c055d911fa484e91fdf913f7b331d4:src/content/plugins/terser-webpack-plugin.mdx
+### 自定义压缩函数 $#custom-minify-function$
 
 覆盖默认的 minify 函数 - 使用 `uglify-js` 进行压缩。
 

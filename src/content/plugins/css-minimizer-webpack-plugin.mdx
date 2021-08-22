@@ -95,22 +95,18 @@ module.exports = {
 
 ## 选项 $#options$
 
-<<<<<<< HEAD:src/content/plugins/css-minimizer-webpack-plugin.md
-### `test` $#test$
-=======
-|                    Name                     |                      Type                      |               Default                | Description                                                                                           |
+|                    选项名                     |                      类型                      |               默认值                | 描述                                                                                           |
 | :-----------------------------------------: | :--------------------------------------------: | :----------------------------------: | :---------------------------------------------------------------------------------------------------- |
-|             **[`test`](#test)**             |    `String\|RegExp\|Array<String\|RegExp>`     |          `/\.css(\?.*)?$/i`          | Test to match files against.                                                                          |
-|          **[`include`](#include)**          |    `String\|RegExp\|Array<String\|RegExp>`     |             `undefined`              | Files to include.                                                                                     |
-|          **[`exclude`](#exclude)**          |    `String\|RegExp\|Array<String\|RegExp>`     |             `undefined`              | Files to exclude.                                                                                     |
-|         **[`parallel`](#parallel)**         |               `Boolean\|Number`                |                `true`                | Enable/disable multi-process parallel running.                                                        |
-|           **[`minify`](#minify)**           |          `Function\|Array<Function>`           |  `CssMinimizerPlugin.cssnanoMinify`  | Allows to override default minify function.                                                           |
-| **[`minimizerOptions`](#minimizeroptions)** |            `Object\|Array<Object>`             |       `{ preset: 'default' }`        | Cssnano optimisations [options](https://cssnano.co/docs/optimisations).                               |
-| **[`processorOptions`](#processoroptions)** |                    `Object`                    | `{ to: assetName, from: assetName }` | Allows to specify option [`processoptions`](https://postcss.org/api/#processoptions) for the cssnano. |
-|   **[`warningsFilter`](#warningsfilter)**   | `Function<(warning, file, source) -> Boolean>` |             `() => true`             | Allow to filter css-minimizer warnings.                                                               |
+|             **[`test`](#test)**             |    `String\|RegExp\|Array<String\|RegExp>`     |          `/\.css(\?.*)?$/i`          | 匹配要处理的文件                                                                          |
+|          **[`include`](#include)**          |    `String\|RegExp\|Array<String\|RegExp>`     |             `undefined`              | 要引入的文件                                                                                     |
+|          **[`exclude`](#exclude)**          |    `String\|RegExp\|Array<String\|RegExp>`     |             `undefined`              | 要排除的文件                                                                                     |
+|         **[`parallel`](#parallel)**         |               `Boolean\|Number`                |                `true`                | 启用/禁用多进程并行处理。                                                        |
+|           **[`minify`](#minify)**           |          `Function\|Array<Function>`           |  `CssMinimizerPlugin.cssnanoMinify`  | 允许覆盖默认的 minify 函数。                                                           |
+| **[`minimizerOptions`](#minimizeroptions)** |            `Object\|Array<Object>`             |       `{ preset: 'default' }`        | Cssnano 优化 [配置项](https://cssnano.co/docs/optimisations)。                              |
+| **[`processorOptions`](#processoroptions)** |                    `Object`                    | `{ to: assetName, from: assetName }` | 允许为 cssnano 指定处理配置项 [`processoptions`](https://postcss.org/api/#processoptions)。 |
+|   **[`warningsFilter`](#warningsfilter)**   | `Function<(warning, file, source) -> Boolean>` |             `() => true`             | 允许过滤掉 css-minimizer 的警告。                                                               |
 
-### `test`
->>>>>>> 0dfa9eea75c055d911fa484e91fdf913f7b331d4:src/content/plugins/css-minimizer-webpack-plugin.mdx
+### `test` $#test$
 
 类型：`String|RegExp|Array<String|RegExp>` - 默认值：`/\.css(\?.*)?$/i`
 

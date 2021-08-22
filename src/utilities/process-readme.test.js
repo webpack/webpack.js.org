@@ -28,8 +28,4 @@ describe('processReadme', () => {
       '- [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)'
     );
   });
-<<<<<<< HEAD
-=======
-
->>>>>>> 0dfa9eea75c055d911fa484e91fdf913f7b331d4
 });
