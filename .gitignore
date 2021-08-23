@@ -2,7 +2,7 @@ node_modules
 dist
 !examples/**/dist
 src/**/_*.json
-src/**/_*.md
+src/**/_*.mdx
 .vscode
 .idea
 .DS_Store
