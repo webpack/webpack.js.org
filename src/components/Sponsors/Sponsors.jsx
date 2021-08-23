@@ -16,8 +16,21 @@ const Sponsors = () => {
         className="sponsors__content"
         to="https://www.ag-grid.com/?utm_source=webpack&utm_medium=banner&utm_campaign=sponsorship"
       >
-        <img src={AGLogo} />
-        <img className="sponsors__img__webpack" src={WebpackIcon} />
+        <img
+          src={AGLogo}
+          width={260}
+          height={140}
+          alt="ag grid"
+          loading="lazy"
+        />
+        <img
+          className="sponsors__img__webpack"
+          src={WebpackIcon}
+          alt="webpack"
+          width={150}
+          height={150}
+          loading="lazy"
+        />
         <div className="sponsors__content-cont">
           ag-grid is proud to partner with webpack
         </div>
