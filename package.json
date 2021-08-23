@@ -116,7 +116,7 @@
     "react-refresh": "^0.10.0",
     "redirect-webpack-plugin": "^1.0.0",
     "remark": "^13.0.0",
-    "remark-autolink-headings": "^6.1.0",
+    "remark-autolink-headings": "^7.0.1",
     "remark-emoji": "^2.2.0",
     "remark-extract-anchors": "1.1.1",
     "remark-frontmatter": "^3.0.0",
