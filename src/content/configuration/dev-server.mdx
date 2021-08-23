@@ -1333,6 +1333,28 @@ module.exports = {
 };
 ```
 
+Provide an array of objects in case you have multiple static folders:
+
+**webpack.config.js**
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  devServer: {
+    static: [
+      {
+        directory: path.join(__dirname, 'assets'),
+      },
+      {
+        directory: path.join(__dirname, 'css'),
+      },
+    ],
+  },
+};
+```
+
 T> It is recommended to use an absolute path.
 
 ### staticOptions
