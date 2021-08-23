@@ -1274,6 +1274,44 @@ To disable:
 npx webpack serve --no-static
 ```
 
+To watch a single directory:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  // ...
+  devServer: {
+    static: ['assets'],
+  },
+};
+```
+
+Usage via CLI:
+
+```console
+npx webpack serve --static assets
+```
+
+To watch multiple single directories:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  // ...
+  devServer: {
+    static: ['assets', 'css'],
+  },
+};
+```
+
+Usage via CLI:
+
+```console
+npx webpack serve --static assets --static css
+```
+
 ### directory
 
 `string = path.join(process.cwd(), 'public')`
