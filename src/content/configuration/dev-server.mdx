@@ -29,7 +29,13 @@ translators:
 
 当前页面记录了影响 `webpack-dev-server` (简写: `dev-server`) <Badge text="version >= 4.0.0" /> 配置的选项。可以在 [这里](https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md) 找到 `v3` 到 `v4` 的迁移指南
 
+<<<<<<< HEAD
 ## 开发服务器(`devServer`) $#devserver$
+=======
+W> `webpack-dev-server v4.0.0+` requires `node >= v12.13.0`, `webpack >= v4.37.0` (but we recommend using `webpack >= v5.0.0`), and `webpack-cli >= v4.7.0`.
+
+## `devServer`
+>>>>>>> 0b123710686a81a52d4752f963c5484979504ead
 
 `object`
 
@@ -149,7 +155,30 @@ module.exports = {
 npx webpack serve --allowed-hosts all
 ```
 
+<<<<<<< HEAD
 ## `devServer.bonjour` $#devserverbonjour$
+=======
+When set to `'auto'` this option always allows `localhost`, [`host`](#devserverhost), and [`client.webSocketURL.hostname`](#websocketurl):
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    allowedHosts: 'auto',
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --allowed-hosts auto
+```
+
+## `devServer.bonjour`
+>>>>>>> 0b123710686a81a52d4752f963c5484979504ead
 
 `boolean` `object`
 
@@ -1258,7 +1287,49 @@ npx webpack serve --static
 npx webpack serve --no-static
 ```
 
+<<<<<<< HEAD
 ### directory $#directory$
+=======
+To watch a single directory:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  // ...
+  devServer: {
+    static: ['assets'],
+  },
+};
+```
+
+Usage via CLI:
+
+```console
+npx webpack serve --static assets
+```
+
+To watch multiple static directories:
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  // ...
+  devServer: {
+    static: ['assets', 'css'],
+  },
+};
+```
+
+Usage via CLI:
+
+```console
+npx webpack serve --static assets --static css
+```
+
+### directory
+>>>>>>> 0b123710686a81a52d4752f963c5484979504ead
 
 `string = path.join(process.cwd(), 'public')`
 
@@ -1279,7 +1350,33 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 T> 推荐使用决定路径。
+=======
+Provide an array of objects in case you have multiple static folders:
+
+**webpack.config.js**
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  devServer: {
+    static: [
+      {
+        directory: path.join(__dirname, 'assets'),
+      },
+      {
+        directory: path.join(__dirname, 'css'),
+      },
+    ],
+  },
+};
+```
+
+T> It is recommended to use an absolute path.
+>>>>>>> 0b123710686a81a52d4752f963c5484979504ead
 
 ### staticOptions
 
