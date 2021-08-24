@@ -63,7 +63,7 @@ Run when a module build has failed.
 
 - Callback Parameters: `module` `error`
 
-### succeedModul
+### succeedModule
 
 `SyncHook`
 
@@ -145,7 +145,7 @@ Called at the beginning of the chunk optimization phase. A plugin can tap into t
 
 - Callback Parameters: `chunks`
 
-##afterOptimizeChun
+## afterOptimizeChunks
 
 `SyncHook`
 
@@ -153,7 +153,7 @@ Fired after chunk optimization has completed.
 
 - Callback Parameters: `chunks`
 
-##optimizeTr
+## optimizeTree
 
 `AsyncSeriesHook`
 
@@ -161,7 +161,7 @@ Called before optimizing the dependency tree. A plugin can tap into this hook to
 
 - Callback Parameters: `chunks` `modules`
 
-###afterOptimizeTre
+### afterOptimizeTree
 
 `SyncHook`
 
@@ -169,7 +169,7 @@ Called after the dependency tree optimization has completed with success.
 
 - Callback Parameters: `chunks` `modules`
 
-###optimizeChunkModule
+### optimizeChunkModule
 
 `SyncBailHook`
 
