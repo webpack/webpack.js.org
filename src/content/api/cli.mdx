@@ -37,18 +37,18 @@ Read the [installation guide](/guides/installation) if you don't already have we
 
 webpack-cli offers a variety of commands to make working with webpack easier. By default webpack ships with
 
-| Command                               | Usage                                                 | Description                                                                     |
-| ------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- |
-| [`build`](#build)                     | `build\|bundle\|b [entries...] [options]`             | Run webpack (default command, can be omitted).                                  |
-| [`configtest`](#configtest)           | `configtest\|t [config-path]`                         | Validate a webpack configuration.                                               |
-| [`help`](#help)                       | `help\|h [command] [option]`                          | Display help for commands and options.                                          |
-| [`info`](#info)                       | `info\|i [options]`                                   | Outputs information about your system.                                          |
-| [`init`](#init)                       | `init\|create\|c\|new\|n [generation-path] [options]` | Initialize a new webpack project.                                               |
-| [`loader`](#loader)                   | `loader\|l [output-path] [options]`                   | Scaffold a loader.                                                              |
-| [`plugin`](#plugin)                   | `plugin\|p [output-path] [options]`                   | Scaffold a plugin.                                                              |
-| [`serve`](/configuration/dev-server/) | `serve\|server\|s [options]`                          | Run the `webpack-dev-server`.                                                   |
-| [`version`](#version)                 | `version\|v [commands...]`                            | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
-| [`watch`](#watch)                     | `watch\|w [entries...] [options]`                     | Run webpack and watch for files changes.                                        |
+| Command                     | Usage                                                 | Description                                                                     |
+| --------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [`build`](#build)           | `build\|bundle\|b [entries...] [options]`             | Run webpack (default command, can be omitted).                                  |
+| [`configtest`](#configtest) | `configtest\|t [config-path]`                         | Validate a webpack configuration.                                               |
+| [`help`](#help)             | `help\|h [command] [option]`                          | Display help for commands and options.                                          |
+| [`info`](#info)             | `info\|i [options]`                                   | Outputs information about your system.                                          |
+| [`init`](#init)             | `init\|create\|c\|new\|n [generation-path] [options]` | Initialize a new webpack project.                                               |
+| [`loader`](#loader)         | `loader\|l [output-path] [options]`                   | Scaffold a loader.                                                              |
+| [`plugin`](#plugin)         | `plugin\|p [output-path] [options]`                   | Scaffold a plugin.                                                              |
+| [`serve`](#serve)           | `serve\|server\|s [options]`                          | Run the `webpack-dev-server`.                                                   |
+| [`version`](#version)       | `version\|v [commands...]`                            | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
+| [`watch`](#watch)           | `watch\|w [entries...] [options]`                     | Run webpack and watch for files changes.                                        |
 
 ### Build
 
@@ -189,6 +189,22 @@ npx webpack configtest ./webpack.config.js
 #### Config Path
 
 Path to your webpack configuration file. Defaults to `./webpack.config.js`.
+
+### Serve
+
+Run the webpack dev server.
+
+```bash
+npx webpack serve [options]
+```
+
+**example**
+
+```bash
+npx webpack serve --hot --live-reload
+```
+
+T> See the [full list of options for `webpack serve` command](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS-v4.md) and [related documentation for webpack-dev-server](/configuration/dev-server).
 
 ### Watch
 
