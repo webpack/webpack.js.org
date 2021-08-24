@@ -62,22 +62,6 @@ module.exports = ({ ssg = false }) => ({
         ],
       },
       {
-        test: /\.md$/,
-        use: [
-          {
-            loader: 'html-loader',
-          },
-          {
-            loader: 'remark-loader',
-            options: {
-              remarkOptions: {
-                plugins: [...mdPlugins, require('remark-html')],
-              },
-            },
-          },
-        ],
-      },
-      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: ['babel-loader'],

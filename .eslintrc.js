@@ -9,7 +9,7 @@ module.exports = {
     jest: true,
     'cypress/globals': true,
   },
-  plugins: ['markdown', 'cypress', 'react-hooks'],
+  plugins: ['cypress', 'react-hooks'],
   rules: {
     'no-console': 'off',
     semi: ['error', 'always'],
@@ -41,11 +41,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/*.md'],
-      processor: 'markdown/markdown',
-    },
-    {
-      files: ['**/*.{md,mdx}/*.{js,javascript}'], // we don't lint ts at the moment
+      files: ['**/*.mdx/*.{js,javascript}'], // we don't lint ts at the moment
       rules: {
         indent: ['error', 2],
         quotes: ['error', 'single', { allowTemplateLiterals: true }],

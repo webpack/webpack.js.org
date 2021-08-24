@@ -15,7 +15,7 @@ const enhance = (tree, options) => {
   const dir = path.normalize(options.dir).replace(/^(\.\/)/gm, '');
 
   tree.url = tree.path
-    // delete `.md` extensions
+    // delete `.mdx` extensions
     .replace(tree.extension, '')
     // delete source content directory
     .replace(dir, '')

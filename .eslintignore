@@ -1,4 +1,4 @@
 dist/
 examples/
-src/content/loaders/_*.md
-src/content/plugins/_*.md
+src/content/loaders/_*.mdx
+src/content/plugins/_*.mdx

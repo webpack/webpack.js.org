@@ -29,6 +29,8 @@ translators:
 
 当前页面记录了影响 `webpack-dev-server` (简写: `dev-server`) <Badge text="version >= 4.0.0" /> 配置的选项。可以在 [这里](https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md) 找到 `v3` 到 `v4` 的迁移指南
 
+W> `webpack-dev-server v4.0.0+` 要求 `node >= v12.13.0`、`webpack >= v4.37.0`（但是我们推荐使用 `webpack >= v5.0.0`）和 `webpack-cli >= v4.7.0`。
+
 ## 开发服务器(`devServer`) $#devserver$
 
 `object`
@@ -147,6 +149,25 @@ module.exports = {
 
 ```bash
 npx webpack serve --allowed-hosts all
+```
+
+当设置为 `'auto'` 时，此配置项总是允许 `localhost`、 [`host`](#devserverhost) 和 [`client.webSocketURL.hostname`](#websocketurl)：
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    allowedHosts: 'auto',
+  },
+};
+```
+
+通过 CLI 使用：
+
+```bash
+npx webpack serve --allowed-hosts auto
 ```
 
 ## `devServer.bonjour` $#devserverbonjour$
@@ -1258,6 +1279,44 @@ npx webpack serve --static
 npx webpack serve --no-static
 ```
 
+监听单个目录：
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  // ...
+  devServer: {
+    static: ['assets'],
+  },
+};
+```
+
+通过 CLI 使用：
+
+```console
+npx webpack serve --static assets
+```
+
+监听多个进后台资源目录：
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  // ...
+  devServer: {
+    static: ['assets', 'css'],
+  },
+};
+```
+
+通过 CLI 使用：
+
+```console
+npx webpack serve --static assets --static css
+```
+
 ### directory $#directory$
 
 `string = path.join(process.cwd(), 'public')`
@@ -1279,7 +1338,29 @@ module.exports = {
 };
 ```
 
-T> 推荐使用决定路径。
+提供一个对象数组，以防你有多个静态资源文件夹：
+
+**webpack.config.js**
+
+```javascript
+const path = require('path');
+
+module.exports = {
+  //...
+  devServer: {
+    static: [
+      {
+        directory: path.join(__dirname, 'assets'),
+      },
+      {
+        directory: path.join(__dirname, 'css'),
+      },
+    ],
+  },
+};
+```
+
+T> 推荐使用绝对路径。
 
 ### staticOptions
 
@@ -1472,7 +1553,7 @@ module.exports = {
 };
 ```
 
-## devServer.webSocketServer $#devServerwebsocketserver$
+## devServer.webSocketServer $#devserverwebsocketserver$
 
 `false | 'sockjs' | 'ws'` `string` `function` `object`
 
