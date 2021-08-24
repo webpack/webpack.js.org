@@ -608,3 +608,16 @@ To use `webpack v5.32.0`:
 ```bash
 WEBPACK_PACKAGE=webpack-5 npx webpack
 ```
+
+## Troubleshooting
+
+### TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for ./webpack.config.ts
+
+`webpack-cli` supports `commonjs` and `ES` format, at first it tries to load a configuration using `require()`, if it fails with an error code of `'ERR_REQUIRE_ESM'` (special code for this case) it tries to load the configuration using `import()`.
+But here are some problems, without `--loader=ts-node/esm` `import()` will not work with `ts-node` - need runtime hooks (described here [`TypeStrong/ts-node#1007`](https://github.com/TypeStrong/ts-node/issues/1007)).
+
+To fix the error above use the following command:
+
+```bash
+NODE_OPTIONS="--loader ts-node/esm" npx webpack --entry ./index.js --mode production
+```
