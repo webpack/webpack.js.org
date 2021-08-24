@@ -613,6 +613,8 @@ WEBPACK_PACKAGE=webpack-5 npx webpack
 
 ### TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for ./webpack.config.ts
 
+You might encounter this error in acnse of typescript ECMA modules (i.e. `type: "module"` in `package.json`).
+
 `webpack-cli` supports `commonjs` and `ES` format, at first it tries to load a configuration using `require()`, if it fails with an error code of `'ERR_REQUIRE_ESM'` (special code for this case) it tries to load the configuration using `import()`.
 But here are some problems, without `--loader=ts-node/esm` `import()` will not work with `ts-node` - need runtime hooks (described here [`TypeStrong/ts-node#1007`](https://github.com/TypeStrong/ts-node/issues/1007)).
 
