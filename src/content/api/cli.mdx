@@ -44,8 +44,8 @@ webpack-cli offers a variety of commands to make working with webpack easier. By
 | [`help`](#help)                       | `help\|h [command] [option]`                          | Display help for commands and options.                                          |
 | [`info`](#info)                       | `info\|i [options]`                                   | Outputs information about your system.                                          |
 | [`init`](#init)                       | `init\|create\|c\|new\|n [generation-path] [options]` | Initialize a new webpack project.                                               |
-| `loader`                              | `loader\|l [output-path] [options]`                   | Scaffold a loader.                                                              |
-| `plugin`                              | `plugin\|p [output-path] [options]`                   | Scaffold a plugin.                                                              |
+| [`loader`](#loader)                   | `loader\|l [output-path] [options]`                   | Scaffold a loader.                                                              |
+| [`plugin`](#plugin)                   | `plugin\|p [output-path] [options]`                   | Scaffold a plugin.                                                              |
 | [`serve`](/configuration/dev-server/) | `serve\|server\|s [options]`                          | Run the `webpack-dev-server`.                                                   |
 | [`version`](#version)                 | `version\|v [commands...]`                            | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
 | [`watch`](#watch)                     | `watch\|w [entries...] [options]`                     | Run webpack and watch for files changes.                                        |
@@ -97,6 +97,58 @@ Name of template to generate.
 To generate a project without questions. When enabled, default answer for each question will be used.
 
 T> See the [full documentation of `webpack init` command](https://github.com/webpack/webpack-cli/blob/master/packages/generators/INIT.md).
+
+### Loader
+
+Scaffold a loader.
+
+```bash
+npx webpack loader [output-path] [options]
+```
+
+**example**
+
+```bash
+npx webpack loader ./my-loader --template=default
+```
+
+#### Output Path
+
+Path to the output directory, e.g. `./loader-name`.
+
+#### Options
+
+**`-t`, `--template`**
+
+`string = 'default'`
+
+Type of template.
+
+### Plugin
+
+Scaffold a plugin.
+
+```bash
+npx webpack plugin [output-path] [options]
+```
+
+**example**
+
+```bash
+npx webpack plugin ./my-loader --template=default
+```
+
+#### Output Path
+
+Path to the output directory, e.g. `./plugin-name`.
+
+#### Options
+
+**`-t`, `--template`**
+
+`string = 'default'`
+
+Type of template.
 
 ### Info
 
