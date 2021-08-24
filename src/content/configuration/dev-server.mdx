@@ -29,13 +29,9 @@ translators:
 
 当前页面记录了影响 `webpack-dev-server` (简写: `dev-server`) <Badge text="version >= 4.0.0" /> 配置的选项。可以在 [这里](https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md) 找到 `v3` 到 `v4` 的迁移指南
 
-<<<<<<< HEAD
-## 开发服务器(`devServer`) $#devserver$
-=======
-W> `webpack-dev-server v4.0.0+` requires `node >= v12.13.0`, `webpack >= v4.37.0` (but we recommend using `webpack >= v5.0.0`), and `webpack-cli >= v4.7.0`.
+W> `webpack-dev-server v4.0.0+` 要求 `node >= v12.13.0`、`webpack >= v4.37.0`（但是我们推荐使用 `webpack >= v5.0.0`）和 `webpack-cli >= v4.7.0`。
 
-## `devServer`
->>>>>>> 0b123710686a81a52d4752f963c5484979504ead
+## 开发服务器(`devServer`) $#devserver$
 
 `object`
 
@@ -155,10 +151,7 @@ module.exports = {
 npx webpack serve --allowed-hosts all
 ```
 
-<<<<<<< HEAD
-## `devServer.bonjour` $#devserverbonjour$
-=======
-When set to `'auto'` this option always allows `localhost`, [`host`](#devserverhost), and [`client.webSocketURL.hostname`](#websocketurl):
+当设置为 `'auto'` 时，此配置项总是允许 `localhost`、 [`host`](#devserverhost) 和 [`client.webSocketURL.hostname`](#websocketurl)：
 
 **webpack.config.js**
 
@@ -171,14 +164,13 @@ module.exports = {
 };
 ```
 
-Usage via the CLI:
+通过 CLI 使用：
 
 ```bash
 npx webpack serve --allowed-hosts auto
 ```
 
-## `devServer.bonjour`
->>>>>>> 0b123710686a81a52d4752f963c5484979504ead
+## `devServer.bonjour` $#devserverbonjour$
 
 `boolean` `object`
 
@@ -1287,10 +1279,7 @@ npx webpack serve --static
 npx webpack serve --no-static
 ```
 
-<<<<<<< HEAD
-### directory $#directory$
-=======
-To watch a single directory:
+监听单个目录：
 
 **webpack.config.js**
 
@@ -1303,13 +1292,13 @@ module.exports = {
 };
 ```
 
-Usage via CLI:
+通过 CLI 使用：
 
 ```console
 npx webpack serve --static assets
 ```
 
-To watch multiple static directories:
+监听多个进后台资源目录：
 
 **webpack.config.js**
 
@@ -1322,14 +1311,13 @@ module.exports = {
 };
 ```
 
-Usage via CLI:
+通过 CLI 使用：
 
 ```console
 npx webpack serve --static assets --static css
 ```
 
-### directory
->>>>>>> 0b123710686a81a52d4752f963c5484979504ead
+### directory $#directory$
 
 `string = path.join(process.cwd(), 'public')`
 
@@ -1350,10 +1338,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-T> 推荐使用决定路径。
-=======
-Provide an array of objects in case you have multiple static folders:
+提供一个对象数组，以防你有多个静态资源文件夹：
 
 **webpack.config.js**
 
@@ -1375,8 +1360,7 @@ module.exports = {
 };
 ```
 
-T> It is recommended to use an absolute path.
->>>>>>> 0b123710686a81a52d4752f963c5484979504ead
+T> 推荐使用绝对路径。
 
 ### staticOptions
 
@@ -1569,7 +1553,7 @@ module.exports = {
 };
 ```
 
-## devServer.webSocketServer $#devServerwebsocketserver$
+## devServer.webSocketServer $#devserverwebsocketserver$
 
 `false | 'sockjs' | 'ws'` `string` `function` `object`
 
