@@ -28,7 +28,7 @@ This page describes the options that affect the behavior of webpack-dev-server (
 
 W> `webpack-dev-server v4.0.0+` requires `node >= v12.13.0`, `webpack >= v4.37.0` (but we recommend using `webpack >= v5.0.0`), and `webpack-cli >= v4.7.0`.
 
-## `devServer`
+## devServer
 
 `object`
 
@@ -85,7 +85,7 @@ npx webpack serve
 
 A list of CLI options for `serve` is available [here](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS-v4.md)
 
-## `devServer.allowedHosts`
+## devServer.allowedHosts
 
 `'auto' | 'all'` `[string]`
 
@@ -167,7 +167,7 @@ Usage via the CLI:
 npx webpack serve --allowed-hosts auto
 ```
 
-## `devServer.bonjour`
+## devServer.bonjour
 
 `boolean` `object`
 
@@ -212,9 +212,9 @@ module.exports = {
 };
 ```
 
-## `devServer.client`
+## devServer.client
 
-### `logging`
+### logging
 
 `'log' | 'info' | 'warn' | 'error' | 'none' | 'verbose'`
 
@@ -239,7 +239,7 @@ Usage via the CLI:
 npx webpack serve --client-logging info
 ```
 
-### `overlay`
+### overlay
 
 `boolean = true` `object: { errors boolean = true, warnings boolean = true }`
 
@@ -294,7 +294,7 @@ Usage via the CLI:
 npx webpack serve --client-overlay-errors --no-client-overlay-warnings
 ```
 
-### `progress`
+### progress
 
 Prints compilation progress in percentage in the browser.
 
@@ -443,7 +443,7 @@ module.exports = {
 
 T> To get `protocol`/`hostname`/`port` from browser use `webSocketURL: 'auto://0.0.0.0:0/ws'`.
 
-## `devServer.compress`
+## devServer.compress
 
 `boolean = true`
 
@@ -490,7 +490,7 @@ module.exports = {
 };
 ```
 
-## `devServer.http2`
+## devServer.http2
 
 `boolean`
 
@@ -545,7 +545,7 @@ To pass your own certificate via CLI, use the following options:
 npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
 ```
 
-## `devServer.https`
+## devServer.https
 
 `boolean` `object`
 
@@ -601,7 +601,7 @@ To pass your own certificate via the CLI use the following options:
 npx webpack serve --https-key ./path/to/server.key --https--cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
 ```
 
-## `devServer.headers`
+## devServer.headers
 
 `function` `object`
 
@@ -738,7 +738,7 @@ Specifying local-ipv6 as host will try to resolve the host option as your local 
 npx webpack serve --host local-ipv6
 ```
 
-## `devServer.hot`
+## devServer.hot
 
 `'only'` `boolean`
 
