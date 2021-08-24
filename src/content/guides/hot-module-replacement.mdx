@@ -20,6 +20,7 @@ contributors:
   - dhruvdutt
   - wizardofhogwarts
   - aholzner
+  - snitin315
 
 related:
   - title: Concepts - Hot Module Replacement
@@ -60,6 +61,46 @@ T> If you took the route of using `webpack-dev-middleware` instead of `webpack-d
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement',
       }),
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist'),
+      clean: true,
+    },
+  };
+```
+
+you can also provide manual entry points for HMR:
+
+**webpack.config.js**
+
+```diff
+  const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
++ const webpack = require("webpack");
+
+  module.exports = {
+    entry: {
+       app: './src/index.js',
+-      print: './src/print.js',
++      // Runtime code for hot module replacement
++      hot: 'webpack/hot/dev-server.js',
++      // Dev server client for web socket transport, hot and live reload logic
++      client: 'webpack-dev-server/client/index.js?hot=true&live-reload=true',
+    },
+    devtool: 'inline-source-map',
+    devServer: {
+      static: './dist',
++     // Dev server client for web socket transport, hot and live reload logic
++     hot: false,
++     client: false,
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: 'Hot Module Replacement',
+      }),
++     // Plugin for hot module replacement
++     new webpack.HotModuleReplacementPlugin(),
     ],
     output: {
       filename: '[name].bundle.js',
@@ -132,30 +173,37 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 
 When using Webpack Dev Server with the Node.js API, don't put the dev server options on the webpack configuration object. Instead, pass them as a second parameter upon creation. For example:
 
-`new WebpackDevServer(compiler, options)`
+`new WebpackDevServer(options, compiler)`
 
-To enable HMR, you also need to modify your webpack configuration object to include the HMR entry points. The `webpack-dev-server` package includes a method called `addDevServerEntrypoints` which you can use to do this. Here's a small example of how that might look:
+To enable HMR, you also need to modify your webpack configuration object to include the HMR entry points. Here's a small example of how that might look:
 
 **dev-server.js**
 
 ```javascript
-const webpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
-
-const config = require('./webpack.config.js');
-const options = {
-  static: './dist',
-  hot: true,
-  host: 'localhost',
+const DevServer = require('webpack-dev-server');
+const config = {
+  entry: [
+    // Runtime code for hot module replacement
+    'webpack/hot/dev-server.js',
+    // Dev server client for web socket transport, hot and live reload logic
+    'webpack-dev-server/client/index.js?hot=true&live-reload=true',
+    // Your entry
+    './src/entry.js',
+  ],
+  plugin: [
+    // Plugin for hot module replacement
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 };
-
-webpackDevServer.addDevServerEntrypoints(config, options);
 const compiler = webpack(config);
-const server = new webpackDevServer(compiler, options);
+// `hot` and `client` options are disabled because we added them manually
+const server = new DevServer({ hot: false, client: false }, compiler);
 
-server.listen(5000, 'localhost', () => {
-  console.log('dev server listening on port 5000');
-});
+(async () => {
+  await server.start();
+  console.log('dev server is running');
+})();
 ```
 
 T> If you're [using `webpack-dev-middleware`](/guides/development/#using-webpack-dev-middleware), check out the [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) package to enable HMR on your custom dev server.
