@@ -39,7 +39,7 @@ webpack-cli offers a variety of commands to make working with webpack easier. By
 
 | Command                               | Usage                                                 | Description                                                                     |
 | ------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `build`                               | `build\|bundle\|b [entries...] [options]`             | Run webpack (default command, can be omitted).                                  |
+| [`build`](#build)                     | `build\|bundle\|b [entries...] [options]`             | Run webpack (default command, can be omitted).                                  |
 | [`configtest`](#configtest)           | `configtest\|t [config-path]`                         | Validate a webpack configuration.                                               |
 | [`help`](#help)                       | `help\|h [command] [option]`                          | Display help for commands and options.                                          |
 | [`info`](#info)                       | `info\|i [options]`                                   | Outputs information about your system.                                          |
@@ -49,6 +49,20 @@ webpack-cli offers a variety of commands to make working with webpack easier. By
 | [`serve`](/configuration/dev-server/) | `serve\|server\|s [options]`                          | Run the `webpack-dev-server`.                                                   |
 | [`version`](#version)                 | `version\|v [commands...]`                            | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
 | `watch`                               | `watch\|w [entries...] [options]`                     | Run webpack and watch for files changes.                                        |
+
+### Build
+
+Run webpack (default command, can be omitted).
+
+```bash
+npx webpack build [options]
+```
+
+**example**
+
+```bash
+npx webpack build --config ./webpack.config.js --stats verbose
+```
 
 ### Init
 
