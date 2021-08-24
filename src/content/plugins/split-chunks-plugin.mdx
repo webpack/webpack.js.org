@@ -171,7 +171,7 @@ Minimum size, in bytes, for a chunk to be generated.
 
 ### splitChunks.enforceSizeThreshold
 
-#### splitChunks.cacheGroups.{cacheGroup}.enforceSizeThreshold
+#### `splitChunks.cacheGroups.{cacheGroup}.enforceSizeThreshold`
 
 `number = 50000`
 
@@ -179,7 +179,7 @@ Size threshold at which splitting is enforced and other restrictions (minRemaini
 
 ### splitChunks.minRemainingSize
 
-#### splitChunks.cacheGroups.{cacheGroup}.minRemainingSize
+#### `splitChunks.cacheGroups.{cacheGroup}.minRemainingSize`
 
 `number = 0`
 
@@ -189,7 +189,7 @@ W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remai
 
 ### splitChunks.layer
 
-#### splitChunks.cacheGroups.{cacheGroup}.layer
+#### `splitChunks.cacheGroups.{cacheGroup}.layer`
 
 `RegExp` `string` `function`
 
@@ -281,7 +281,7 @@ W> When assigning equal names to different split chunks, all vendor modules are 
 
 ### splitChunks.usedExports
 
-#### splitChunks.cacheGroups{cacheGroup}.usedExports
+#### `splitChunks.cacheGroups{cacheGroup}.usedExports`
 
 `boolean = true`
 
@@ -307,13 +307,13 @@ module.exports = {
 };
 ```
 
-#### splitChunks.cacheGroups.{cacheGroup}.priority
+#### `splitChunks.cacheGroups.{cacheGroup}.priority`
 
 `number = -20`
 
 A module can belong to multiple cache groups. The optimization will prefer the cache group with a higher `priority`. The default groups have a negative priority to allow custom groups to take higher priority (default value is `0` for custom groups).
 
-#### splitChunks.cacheGroups.{cacheGroup}.reuseExistingChunk
+#### `splitChunks.cacheGroups.{cacheGroup}.reuseExistingChunk`
 
 `boolean = true`
 
@@ -336,7 +336,7 @@ module.exports = {
 };
 ```
 
-#### splitChunks.cacheGroups.{cacheGroup}.type
+#### `splitChunks.cacheGroups.{cacheGroup}.type`
 
 `function` `RegExp` `string`
 
@@ -361,7 +361,7 @@ module.exports = {
 
 #### splitChunks.cacheGroups.test
 
-#### splitChunks.cacheGroups.{cacheGroup}.test
+#### `splitChunks.cacheGroups.{cacheGroup}.test`
 
 `function (module, { chunkGraph, moduleGraph }) => boolean` `RegExp` `string`
 
@@ -422,7 +422,7 @@ module.exports = {
 };
 ```
 
-#### splitChunks.cacheGroups.{cacheGroup}.filename
+#### `splitChunks.cacheGroups.{cacheGroup}.filename`
 
 `string` `function (pathData, assetInfo) => string`
 
@@ -489,7 +489,7 @@ module.exports = {
 };
 ```
 
-#### splitChunks.cacheGroups.{cacheGroup}.enforce
+#### `splitChunks.cacheGroups.{cacheGroup}.enforce`
 
 `boolean = false`
 
@@ -512,7 +512,7 @@ module.exports = {
 };
 ```
 
-#### splitChunks.cacheGroups.{cacheGroup}.idHint
+#### `splitChunks.cacheGroups.{cacheGroup}.idHint`
 
 `string`
 
