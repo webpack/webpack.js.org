@@ -149,7 +149,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-g-analytics": "0.4.2",
-    "react-helmet-async": "^1.0.9",
+    "react-helmet-async": "^1.1.0",
     "react-router-dom": "^5.2.0",
     "react-spring": "^9.2.4",
     "react-tiny-popover": "5",
