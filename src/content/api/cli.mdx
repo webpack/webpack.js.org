@@ -613,13 +613,13 @@ WEBPACK_PACKAGE=webpack-5 npx webpack
 
 ### TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for ./webpack.config.ts
 
-You might encounter this error in the case of typescript ECMA modules (i.e. `type: "module"` in `package.json`).
+You might encounter this error in the case of using native ESM in TypeScript (i.e. `type: "module"` in `package.json`).
 
-`webpack-cli` supports `commonjs` and `ES` format, at first it tries to load a configuration using `require()`, if it fails with an error code of `'ERR_REQUIRE_ESM'` (special code for this case) it tries to load the configuration using `import()`.
-But here are some problems, without `--loader=ts-node/esm` `import()` will not work with `ts-node` - need runtime hooks (described here [`TypeStrong/ts-node#1007`](https://github.com/TypeStrong/ts-node/issues/1007)).
+`webpack-cli` supports configuration in both `CommonJS` and `ESM` format, at first it tries to load a configuration using `require()`, once it fails with an error code of `'ERR_REQUIRE_ESM'` (a special code for this case) it would try to load the configuration using `import()`.
+However, the `import()` method won't work with `ts-node` without [loader hooks](https://nodejs.org/api/esm.html#esm_experimental_loaders) enabled (described at [`TypeStrong/ts-node#1007`](https://github.com/TypeStrong/ts-node/issues/1007)).
 
 To fix the error above use the following command:
 
 ```bash
-NODE_OPTIONS="--loader ts-node/esm" npx webpack --entry ./index.js --mode production
+NODE_OPTIONS="--loader ts-node/esm" npx webpack --entry ./src/index.js --mode production
 ```
