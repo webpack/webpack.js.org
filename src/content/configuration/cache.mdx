@@ -45,7 +45,7 @@ module.exports = {
 
 `object`
 
-`cache.buildDependencies` is an object of arrays of additional code dependencies for the build. webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
+`cache.buildDependencies` is an object of arrays of additional code dependencies for the build. Webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
 
 Defaults to `webpack/lib` to get all dependencies of webpack.
 
@@ -219,7 +219,7 @@ module.exports = {
 
 W> Moved to [snapshot.managedPaths](/configuration/other-options/#managedpaths)
 
-`cache.managedPaths` is an array of package-manager only managed paths. webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
+`cache.managedPaths` is an array of package-manager only managed paths. Webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
 
 ### cache.maxAge
 

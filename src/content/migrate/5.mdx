@@ -266,7 +266,7 @@ The changes to webpack internals such as: adding types, refactoring code and met
 
 ### getOptions method for Loaders
 
-webpack 5 ships with built-in [`this.getOptions`](/api/loaders/#thisgetoptionsschema) method available in loader context. This is a breaking change for loaders that had been using `getOptions` method from previously preferred [schema-utils](https://github.com/webpack/schema-utils):
+Webpack 5 ships with built-in [`this.getOptions`](/api/loaders/#thisgetoptionsschema) method available in loader context. This is a breaking change for loaders that had been using `getOptions` method from previously preferred [schema-utils](https://github.com/webpack/schema-utils):
 
 - `this.getOptions` is available since webpack 5
 - Instead of JSON5 it supports JSON as a query string: `?{arg:true}` → `?{"arg":true}`. Using JSON5 should be considered and documented as deprecated in favor of JSON in the respective Loader's documentation.

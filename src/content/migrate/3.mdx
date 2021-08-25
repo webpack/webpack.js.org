@@ -445,7 +445,7 @@ require.ensure([], function (require) {
 });
 ```
 
-The ES2015 Loader spec defines [`import()`](/api/module-methods/#import-1) as method to load ES2015 Modules dynamically on runtime. webpack treats `import()` as a split-point and puts the requested module in a separate chunk. `import()` takes the module name as argument and returns a Promise.
+The ES2015 Loader spec defines [`import()`](/api/module-methods/#import-1) as method to load ES2015 Modules dynamically on runtime. Webpack treats `import()` as a split-point and puts the requested module in a separate chunk. `import()` takes the module name as argument and returns a Promise.
 
 ```js
 function onClick() {
@@ -478,7 +478,7 @@ function route(path, query) {
 
 ## Mixing ES2015 with AMD and CommonJS
 
-As for AMD and CommonJS you can freely mix all three module types (even within the same file). webpack behaves similar to babel and node-eps in this case:
+As for AMD and CommonJS you can freely mix all three module types (even within the same file). Webpack behaves similar to babel and node-eps in this case:
 
 ```javascript
 // CommonJS consuming ES2015 Module
@@ -514,7 +514,7 @@ No need to change something, but opportunities
 
 ### Template strings
 
-webpack now supports template strings in expressions. This means you can start using them in webpack constructs:
+Webpack now supports template strings in expressions. This means you can start using them in webpack constructs:
 
 ```diff
 - require("./templates/" + name);
@@ -523,7 +523,7 @@ webpack now supports template strings in expressions. This means you can start u
 
 ### Configuration Promise
 
-webpack now supports returning a `Promise` from the configuration file. This allows async processing in your configuration file.
+Webpack now supports returning a `Promise` from the configuration file. This allows async processing in your configuration file.
 
 **webpack.config.js**
 
@@ -539,7 +539,7 @@ module.exports = function () {
 
 ### Advanced loader matching
 
-webpack now supports more things to match on for loaders.
+Webpack now supports more things to match on for loaders.
 
 ```js
 module.exports = {
