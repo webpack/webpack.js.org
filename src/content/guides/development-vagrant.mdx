@@ -56,13 +56,13 @@ Note that you also need to create an `app.js` file.
 Now, let's run the server:
 
 ```bash
-webpack serve --host 0.0.0.0 --public 10.10.10.61:8080 --watch-poll
+webpack serve --host 0.0.0.0 --client-web-socket-url 10.10.10.61:8080 --watch-poll
 ```
 
 By default, the server will only be accessible from localhost. We'll be accessing it from our host PC, so we need to change `--host` to allow this.
 
 `webpack-dev-server` will include a script in your bundle that connects to a WebSocket to reload when a change in any of your files occurs.
-The `--public` flag makes sure the script knows where to look for the WebSocket. The server will use port `8080` by default, so we should also specify that here.
+The `--client-web-socket-url` flag makes sure the script knows where to look for the WebSocket. The server will use port `8080` by default, so we should also specify that here.
 
 `--watch-poll` makes sure that webpack can detect changes in your files. By default, webpack listens to events triggered by the filesystem, but VirtualBox has many problems with this.
 
@@ -96,7 +96,7 @@ The `proxy_set_header` lines are important, because they allow the WebSockets to
 The command to start `webpack-dev-server` can then be changed to this:
 
 ```bash
-webpack serve --public 10.10.10.61 --watch-poll
+webpack serve --client-web-socket-url 10.10.10.61 --watch-poll
 ```
 
 This makes the server only accessible on `127.0.0.1`, which is fine because nginx takes care of making it available on your host PC.
