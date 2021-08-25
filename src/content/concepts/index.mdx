@@ -47,7 +47,7 @@ For a better understanding of the ideas behind module bundlers and how they work
 
 ## Entry
 
-An **entry point** indicates which module webpack should use to begin building out its internal [dependency graph](/concepts/dependency-graph/). webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
+An **entry point** indicates which module webpack should use to begin building out its internal [dependency graph](/concepts/dependency-graph/). Webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
 
 By default its value is `./src/index.js`, but you can specify a different (or multiple entry points) by setting an [`entry` property in the webpack configuration](/configuration/entry-context/#entry). For example:
 
@@ -163,8 +163,8 @@ Learn more about the [mode configuration here](/configuration/mode) and what opt
 
 ## Browser Compatibility
 
-webpack supports all browsers that are [ES5-compliant](https://kangax.github.io/compat-table/es5/) (IE8 and below are not supported). webpack needs `Promise` for [`import()` and `require.ensure()`](/guides/code-splitting/#dynamic-imports). If you want to support older browsers, you will need to [load a polyfill](/guides/shimming/) before using these expressions.
+Webpack supports all browsers that are [ES5-compliant](https://kangax.github.io/compat-table/es5/) (IE8 and below are not supported). Webpack needs `Promise` for [`import()` and `require.ensure()`](/guides/code-splitting/#dynamic-imports). If you want to support older browsers, you will need to [load a polyfill](/guides/shimming/) before using these expressions.
 
 ## Environment
 
-webpack 5 runs on Node.js version 10.13.0+.
+Webpack 5 runs on Node.js version 10.13.0+.

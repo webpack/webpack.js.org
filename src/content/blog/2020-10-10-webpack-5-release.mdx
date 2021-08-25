@@ -6,7 +6,7 @@ contributors:
   - chenxsan
 ---
 
-webpack 4 was released in February 2018.
+Webpack 4 was released in February 2018.
 Since then we shipped a lot of features without breaking changes.
 We know that people dislike major changes with breaking changes.
 Especially with webpack, which people usually only touch twice a year, and the remaining time it "just works".
@@ -38,7 +38,7 @@ We are eager to fix those problems. Someone has to start and you would be one of
 
 ## Sponsoring Update
 
-webpack is fully based upon [sponsoring](https://opencollective.com/webpack).
+Webpack is fully based upon [sponsoring](https://opencollective.com/webpack).
 It's not tied to (and paid by) a big company like some other Open Source projects.
 99% of the earnings from sponsoring are distributed towards contributors and maintainers based on the contributions they do.
 We believe in investing the money towards making webpack better.
@@ -96,11 +96,11 @@ Behavior can be changed with `Rule.parser.requireInclude` to allowed, deprecated
 
 ### Automatic Node.js Polyfills Removed
 
-In the early days, webpack's aim was to allow running most Node.js modules in the browser, but the module landscape changed and many module uses are now written mainly for frontend purposes. webpack &lt;= 4 ships with polyfills for many of the Node.js core modules, which are automatically applied once a module uses any of the core modules (i.e. the `crypto` module).
+In the early days, webpack's aim was to allow running most Node.js modules in the browser, but the module landscape changed and many module uses are now written mainly for frontend purposes. Webpack &lt;= 4 ships with polyfills for many of the Node.js core modules, which are automatically applied once a module uses any of the core modules (i.e. the `crypto` module).
 
 While this makes using modules written for Node.js easier, it adds these huge polyfills to the bundle. In many cases these polyfills are unnecessary.
 
-webpack 5 stops automatically polyfilling these core modules and focus on frontend-compatible modules. Our goal is to improve compatibility with the web platform, where Node.js core modules are not available.
+Webpack 5 stops automatically polyfilling these core modules and focus on frontend-compatible modules. Our goal is to improve compatibility with the web platform, where Node.js core modules are not available.
 
 **MIGRATION**:
 
@@ -321,7 +321,7 @@ Webpack 5 generates typescript typings from source code and exposes them via the
 
 ### Nested tree-shaking
 
-webpack is now able to track access to nested properties of exports. This can improve Tree Shaking (Unused export elimination and export mangling) when reexporting namespace objects.
+Webpack is now able to track access to nested properties of exports. This can improve Tree Shaking (Unused export elimination and export mangling) when reexporting namespace objects.
 
 ```js
 // inner.js
@@ -341,7 +341,7 @@ In this example, the export `b` can be removed in production mode.
 
 ### Inner-module tree-shaking
 
-webpack 4 didn't analyze dependencies between exports and imports of a module. webpack 5 has a new option `optimization.innerGraph`, which is enabled by default in production mode, that runs an analysis on symbols in a module to figure out dependencies from exports to imports.
+Webpack 4 didn't analyze dependencies between exports and imports of a module. Webpack 5 has a new option `optimization.innerGraph`, which is enabled by default in production mode, that runs an analysis on symbols in a module to figure out dependencies from exports to imports.
 
 In a module like this:
 
@@ -383,9 +383,9 @@ This optimization is also known as Deep Scope Analysis.
 
 ### CommonJs Tree Shaking
 
-webpack used to opt-out from used exports analysing for CommonJs exports and `require()` calls.
+Webpack used to opt-out from used exports analysing for CommonJs exports and `require()` calls.
 
-webpack 5 adds support for some CommonJs constructs, allows to eliminate unused CommonJs exports and track referenced export names from `require()` calls.
+Webpack 5 adds support for some CommonJs constructs, allows to eliminate unused CommonJs exports and track referenced export names from `require()` calls.
 
 The following constructs are supported:
 
@@ -408,7 +408,7 @@ When detecting not analysable code, webpack bails out and doesn't track export i
 
 The `"sideEffects"` flag in package.json allows to manually flag modules as side-effect-free, which allows to drop them when unused.
 
-webpack 5 can also automatically flag modules as side-effect-free according to a static analysis of the source code.
+Webpack 5 can also automatically flag modules as side-effect-free according to a static analysis of the source code.
 
 ### Optimization per runtime
 
@@ -441,17 +441,17 @@ In many cases development and production happen on different OS with different c
 
 ### Improved Code Generation
 
-webpack detects when ASI happens and generates shorter code when no semicolons are inserted. `Object(...)` -> `(0, ...)`
+Webpack detects when ASI happens and generates shorter code when no semicolons are inserted. `Object(...)` -> `(0, ...)`
 
-webpack merges multiple export getters into a single runtime function call: `r.d(x, "a", () => a); r.d(x, "b", () => b);` -> `r.d(x, {a: () => a, b: () => b});`
+Webpack merges multiple export getters into a single runtime function call: `r.d(x, "a", () => a); r.d(x, "b", () => b);` -> `r.d(x, {a: () => a, b: () => b});`
 
 There are additional options in `output.environment` now.
 They allows specifying which ECMAScript feature can be used for runtime code generated by webpack.
 
 One usually do not specify this option directly, but would use the `target` option instead.
 
-webpack 4 used to only emit ES5 code.
-webpack 5 can generate both ES5 and ES6/ES2015 code now.
+Webpack 4 used to only emit ES5 code.
+Webpack 5 can generate both ES5 and ES6/ES2015 code now.
 
 Supporting only modern browsers will generate shorter code using arrow functions and more spec-conform code using `const` declarations with TDZ for `export default`.
 
@@ -566,7 +566,7 @@ The `webpack()` façade automatically calls `close` when being passed a callback
 
 ### File Emitting
 
-webpack used to always emit all output files during the first build but skipped writing unchanged files during incremental (watch) builds.
+Webpack used to always emit all output files during the first build but skipped writing unchanged files during incremental (watch) builds.
 It is assumed that nothing else changes output files while webpack is running.
 
 With Persistent Caching added a watch-like experience should be given even when restarting the webpack process, but it would be a too strong assumption to think that nothing else changes the output directory even when webpack is not running.
@@ -979,7 +979,7 @@ module.exports = {
 
 ### Order and IDs
 
-webpack used to order modules and chunks in the Compilation phase, in a specific way, to assign IDs in incremental order. This is no longer the case. The order will no longer be used for id generation, instead, the full control of ID generation is in the plugin.
+Webpack used to order modules and chunks in the Compilation phase, in a specific way, to assign IDs in incremental order. This is no longer the case. The order will no longer be used for id generation, instead, the full control of ID generation is in the plugin.
 
 Hooks to optimize the order of module and chunks have been removed.
 
@@ -1025,7 +1025,7 @@ The javascript part of HMR runtime has been separated from the core HMR runtime.
 
 ### Work Queues
 
-webpack used to handle module processing by functions calling functions, and a `semaphore` which limits parallelism. The `Compilation.semaphore` has been removed and async queues now handle work queuing and processing. Each step has a separate queue:
+Webpack used to handle module processing by functions calling functions, and a `semaphore` which limits parallelism. The `Compilation.semaphore` has been removed and async queues now handle work queuing and processing. Each step has a separate queue:
 
 - `Compilation.factorizeQueue`: calling the module factory for a group of dependencies.
 - `Compilation.addModuleQueue`: adding the module to the compilation queue (may restore module from cache).
@@ -1041,12 +1041,12 @@ In the future, multiple compilers may work together and job orchestration can be
 
 ### Logging
 
-webpack internals includes some logging now.
+Webpack internals includes some logging now.
 `stats.logging` and `infrastructureLogging` options can be used to enabled these messages.
 
 ### Module and Chunk Graph
 
-webpack used to store a resolved module in the dependency, and store the contained modules in the chunk. This is no longer the case. All information about how modules are connected in the module graph are now stored in a ModuleGraph class. All information about how modules are connected with chunks are now stored in the ChunkGraph class. The information which depends on i. e. the chunk graph, is also stored in the related class.
+Webpack used to store a resolved module in the dependency, and store the contained modules in the chunk. This is no longer the case. All information about how modules are connected in the module graph are now stored in a ModuleGraph class. All information about how modules are connected with chunks are now stored in the ChunkGraph class. The information which depends on i. e. the chunk graph, is also stored in the related class.
 
 That means the following information about modules has been moved:
 
@@ -1067,7 +1067,7 @@ That means the following information about modules has been moved:
 - Module is runtime module in chunk -> ChunkGraph
 - Chunk runtime requirements -> ChunkGraph
 
-webpack used to disconnect modules from the graph when restored from the cache. This is no longer necessary. A Module stores no info about the graph and can technically be used in multiple graphs. This makes caching easier.
+Webpack used to disconnect modules from the graph when restored from the cache. This is no longer necessary. A Module stores no info about the graph and can technically be used in multiple graphs. This makes caching easier.
 
 There is a compat-layer for most of these changes, which prints a deprecation warning when used.
 
@@ -1101,7 +1101,7 @@ It also captures more information about filesystem while watching. It now captur
 
 ### SizeOnlySource after emit
 
-webpack now replaces the Sources in `Compilation.assets` with `SizeOnlySource` variants to reduce memory usage.
+Webpack now replaces the Sources in `Compilation.assets` with `SizeOnlySource` variants to reduce memory usage.
 
 ### Emitting assets multiple times
 
@@ -1131,7 +1131,7 @@ This should make the flow much cleaner. It also allows to report progress for th
 
 ### DependencyReference
 
-webpack used to have a single method and type to represent references of dependencies (`Compilation.getDependencyReference` returning a `DependencyReference`).
+Webpack used to have a single method and type to represent references of dependencies (`Compilation.getDependencyReference` returning a `DependencyReference`).
 This type used to include all information about this reference like the referenced Module, which exports have been imported, if it's a weak reference and also some ordering related information.
 
 Bundling all these information together makes getting the reference expensive and it's also called often (every time somebody needs one piece of information).

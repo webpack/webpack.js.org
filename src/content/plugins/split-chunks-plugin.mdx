@@ -35,7 +35,7 @@ Out of the box `SplitChunksPlugin` should work well for most users.
 
 By default it only affects on-demand chunks, because changing initial chunks would affect the script tags the HTML file should include to run the project.
 
-webpack will automatically split chunks based on these conditions:
+Webpack will automatically split chunks based on these conditions:
 
 - New chunk can be shared OR modules are from the `node_modules` folder
 - New chunk would be bigger than 20kb (before min+gz)
@@ -46,7 +46,7 @@ When trying to fulfill the last two conditions, bigger chunks are preferred.
 
 ## Configuration
 
-webpack provides a set of options for developers that want more control over this functionality.
+Webpack provides a set of options for developers that want more control over this functionality.
 
 W> The default configuration was chosen to fit web performance best practices, but the optimal strategy for your project might differ. If you're changing the configuration, you should measure the effect of your changes to ensure there's a real benefit.
 

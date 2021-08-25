@@ -102,7 +102,7 @@ great way to own the awesome work that you do and we encourage you to do this in
 
 ## Thank You
 
-webpack is a feature rich, low level tool and documentation is a huge time sink. We appreciate
+Webpack is a feature rich, low level tool and documentation is a huge time sink. We appreciate
 any time spent fixing typos or clarifying sections in the documentation.
 
 [1]: https://nodejs.org/
