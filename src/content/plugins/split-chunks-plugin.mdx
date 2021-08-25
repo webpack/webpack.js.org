@@ -50,7 +50,7 @@ webpack provides a set of options for developers that want more control over thi
 
 W> The default configuration was chosen to fit web performance best practices, but the optimal strategy for your project might differ. If you're changing the configuration, you should measure the effect of your changes to ensure there's a real benefit.
 
-## `optimization.splitChunks`
+## optimization.splitChunks
 
 This configuration object represents the default behavior of the `SplitChunksPlugin`.
 
@@ -89,13 +89,13 @@ W> When files paths are processed by webpack, they always contain `/` on Unix sy
 
 W> Since webpack 5, passing an entry name to `{cacheGroup}.test` and using a name of an existing chunk for `{cacheGroup}.name` is no longer allowed.
 
-### `splitChunks.automaticNameDelimiter`
+### splitChunks.automaticNameDelimiter
 
 `string = '~'`
 
 By default webpack will generate names using origin and name of the chunk (e.g. `vendors~main.js`). This option lets you specify the delimiter to use for the generated names.
 
-### `splitChunks.chunks`
+### splitChunks.chunks
 
 `string = 'async'` `function (chunk)`
 
@@ -133,43 +133,43 @@ module.exports = {
 
 T> You can combine this configuration with the [HtmlWebpackPlugin](/plugins/html-webpack-plugin/). It will inject all the generated vendor chunks for you.
 
-### `splitChunks.maxAsyncRequests`
+### splitChunks.maxAsyncRequests
 
 `number = 30`
 
 Maximum number of parallel requests when on-demand loading.
 
-### `splitChunks.maxInitialRequests`
+### splitChunks.maxInitialRequests
 
 `number = 30`
 
 Maximum number of parallel requests at an entry point.
 
-### `splitChunks.defaultSizeTypes`
+### splitChunks.defaultSizeTypes
 
 `[string] = ['javascript', 'unknown']`
 
 Sets the size types which are used when a number is used for sizes.
 
-### `splitChunks.minChunks`
+### splitChunks.minChunks
 
 `number = 1`
 
 The minimum times must a module be shared among chunks before splitting.
 
-### `splitChunks.hidePathInfo`
+### splitChunks.hidePathInfo
 
 `boolean`
 
 Prevents exposing path info when creating names for parts splitted by maxSize.
 
-### `splitChunks.minSize`
+### splitChunks.minSize
 
 `number = 20000`
 
 Minimum size, in bytes, for a chunk to be generated.
 
-### `splitChunks.enforceSizeThreshold`
+### splitChunks.enforceSizeThreshold
 
 #### `splitChunks.cacheGroups.{cacheGroup}.enforceSizeThreshold`
 
@@ -177,7 +177,7 @@ Minimum size, in bytes, for a chunk to be generated.
 
 Size threshold at which splitting is enforced and other restrictions (minRemainingSize, maxAsyncRequests, maxInitialRequests) are ignored.
 
-### `splitChunks.minRemainingSize`
+### splitChunks.minRemainingSize
 
 #### `splitChunks.cacheGroups.{cacheGroup}.minRemainingSize`
 
@@ -187,7 +187,7 @@ Size threshold at which splitting is enforced and other restrictions (minRemaini
 
 W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remaining.
 
-### `splitChunks.layer`
+### splitChunks.layer
 
 #### `splitChunks.cacheGroups.{cacheGroup}.layer`
 
@@ -195,7 +195,7 @@ W> `splitChunks.minRemainingSize` only takes effect when a single chunk is remai
 
 Assign modules to a cache group by module layer.
 
-### `splitChunks.maxSize`
+### splitChunks.maxSize
 
 `number = 0`
 
@@ -210,7 +210,7 @@ T> `maxSize` takes higher priority than `maxInitialRequest/maxAsyncRequests`. Ac
 
 T> Setting the value for `maxSize` sets the value for both `maxAsyncSize` and `maxInitialSize`.
 
-### `splitChunks.maxAsyncSize`
+### splitChunks.maxAsyncSize
 
 `number`
 
@@ -218,7 +218,7 @@ Like `maxSize`, `maxAsyncSize` can be applied globally (`splitChunks.maxAsyncSiz
 
 The difference between `maxAsyncSize` and `maxSize` is that `maxAsyncSize` will only affect on-demand loading chunks.
 
-### `splitChunks.maxInitialSize`
+### splitChunks.maxInitialSize
 
 `number`
 
@@ -226,7 +226,7 @@ Like `maxSize`, `maxInitialSize` can be applied globally (`splitChunks.maxInitia
 
 The difference between `maxInitialSize` and `maxSize` is that `maxInitialSize` will only affect initial load chunks.
 
-### `splitChunks.name`
+### splitChunks.name
 
 `boolean = false` `function (module, chunks, cacheGroupKey) => string` `string`
 
@@ -279,7 +279,7 @@ Running webpack with following `splitChunks` configuration would also output a c
 
 W> When assigning equal names to different split chunks, all vendor modules are placed into a single shared chunk, though it's not recommend since it can result in more code downloaded.
 
-### `splitChunks.usedExports`
+### splitChunks.usedExports
 
 #### `splitChunks.cacheGroups{cacheGroup}.usedExports`
 
@@ -288,7 +288,7 @@ W> When assigning equal names to different split chunks, all vendor modules are 
 Figure out which exports are used by modules to mangle export names, omit unused exports and generate more efficient code.
 When it is `true`: analyse used exports for each runtime, when it is `"global"`: analyse exports globally for all runtimes combined).
 
-### `splitChunks.cacheGroups`
+### splitChunks.cacheGroups
 
 Cache groups can inherit and/or override any options from `splitChunks.*`; but `test`, `priority` and `reuseExistingChunk` can only be configured on cache group level. To disable any of the default cache groups, set them to `false`.
 
@@ -359,7 +359,7 @@ module.exports = {
 };
 ```
 
-#### `splitChunks.cacheGroups.test`
+#### splitChunks.cacheGroups.test
 
 #### `splitChunks.cacheGroups.{cacheGroup}.test`
 

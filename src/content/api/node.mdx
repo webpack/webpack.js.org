@@ -38,7 +38,7 @@ Or if you prefer ES2015:
 import webpack from 'webpack';
 ```
 
-## `webpack()`
+## webpack()
 
 The imported `webpack` function is fed a webpack [Configuration Object](/configuration/) and runs the webpack compiler if a callback function is provided:
 
@@ -191,17 +191,17 @@ i.e. the methods described below.
 
 This `stats` object exposes the following methods:
 
-### `stats.hasErrors()`
+### stats.hasErrors()
 
 Can be used to check if there were errors while compiling. Returns `true` or
 `false`.
 
-### `stats.hasWarnings()`
+### stats.hasWarnings()
 
 Can be used to check if there were warnings while compiling. Returns `true` or
 `false`.
 
-### `stats.toJson(options)`
+### stats.toJson(options)
 
 Returns compilation information as a JSON object. `options` can be either a
 string (a preset) or an object for more granular control:
@@ -222,7 +222,7 @@ All available options and presets are described in the stats [documentation](/co
 > Here’s an [example](https://raw.githubusercontent.com/webpack/analyse/master/app/pages/upload/example2.json)
 > of this function’s output.
 
-### `stats.toString(options)`
+### stats.toString(options)
 
 Returns a formatted string of the compilation information (similar to
 [CLI](/api/cli) output).

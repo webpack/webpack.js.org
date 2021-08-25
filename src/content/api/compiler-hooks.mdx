@@ -44,19 +44,19 @@ Depending on the hook type, `tapAsync` and `tapPromise` may also be available.
 
 For the description of hook types, see [the Tapable docs](https://github.com/webpack/tapable#tapable).
 
-### `environment`
+### environment
 
 `SyncHook`
 
 Called while preparing the compiler environment, right after initializing the plugins in the configuration file.
 
-### `afterEnvironment`
+### afterEnvironment
 
 `SyncHook`
 
 Called right after the `environment` hook, when the compiler environment setup is complete.
 
-### `entryOption`
+### entryOption
 
 `SyncBailHook`
 
@@ -70,7 +70,7 @@ compiler.hooks.entryOption.tap('MyPlugin', (context, entry) => {
 });
 ```
 
-### `afterPlugins`
+### afterPlugins
 
 `SyncHook`
 
@@ -78,7 +78,7 @@ Called after setting up initial set of internal plugins.
 
 - Callback Parameters: `compiler`
 
-### `afterResolvers`
+### afterResolvers
 
 `SyncHook`
 
@@ -86,13 +86,13 @@ Triggered after resolver setup is complete.
 
 - Callback Parameters: `compiler`
 
-### `initialize`
+### initialize
 
 `SyncHook`
 
 Called when a compiler object is initialized.
 
-### `beforeRun`
+### beforeRun
 
 `AsyncSeriesHook`
 
@@ -100,7 +100,7 @@ Adds a hook right before running the compiler.
 
 - Callback Parameters: `compiler`
 
-### `run`
+### run
 
 `AsyncSeriesHook`
 
@@ -108,7 +108,7 @@ Hook into the compiler before it begins reading [`records`](/configuration/other
 
 - Callback Parameters: `compiler`
 
-### `watchRun`
+### watchRun
 
 `AsyncSeriesHook`
 
@@ -116,7 +116,7 @@ Executes a plugin during watch mode after a new compilation is triggered but bef
 
 - Callback Parameters: `compiler`
 
-### `normalModuleFactory`
+### normalModuleFactory
 
 `SyncHook`
 
@@ -124,7 +124,7 @@ Called after a [NormalModuleFactory](/api/normalmodulefactory-hooks) is created.
 
 - Callback Parameters: `normalModuleFactory`
 
-### `contextModuleFactory`
+### contextModuleFactory
 
 `SyncHook`
 
@@ -132,7 +132,7 @@ Runs a plugin after a [ContextModuleFactory](/api/contextmodulefactory-hooks) is
 
 - Callback Parameters: `contextModuleFactory`
 
-### `beforeCompile`
+### beforeCompile
 
 `AsyncSeriesHook`
 
@@ -158,7 +158,7 @@ compiler.hooks.beforeCompile.tapAsync('MyPlugin', (params, callback) => {
 });
 ```
 
-### `compile`
+### compile
 
 `SyncHook`
 
@@ -166,7 +166,7 @@ Called right after `beforeCompile`, before a new compilation is created.
 
 - Callback Parameters: `compilationParams`
 
-### `thisCompilation`
+### thisCompilation
 
 `SyncHook`
 
@@ -174,7 +174,7 @@ Executed while initializing the compilation, right before emitting the `compilat
 
 - Callback Parameters: `compilation`, `compilationParams`
 
-### `compilation`
+### compilation
 
 `SyncHook`
 
@@ -182,7 +182,7 @@ Runs a plugin after a compilation has been created.
 
 - Callback Parameters: `compilation`, `compilationParams`
 
-### `make`
+### make
 
 `AsyncParallelHook`
 
@@ -190,7 +190,7 @@ Executed before finishing the compilation.
 
 - Callback Parameters: `compilation`
 
-### `afterCompile`
+### afterCompile
 
 `AsyncSeriesHook`
 
@@ -198,7 +198,7 @@ Called after finishing and sealing the compilation.
 
 - Callback Parameters: `compilation`
 
-### `shouldEmit`
+### shouldEmit
 
 `SyncBailHook`
 
@@ -213,7 +213,7 @@ compiler.hooks.shouldEmit.tap('MyPlugin', (compilation) => {
 });
 ```
 
-### `emit`
+### emit
 
 `AsyncSeriesHook`
 
@@ -221,7 +221,7 @@ Executed right before emitting assets to output dir.
 
 - Callback Parameters: `compilation`
 
-### `afterEmit`
+### afterEmit
 
 `AsyncSeriesHook`
 
@@ -229,7 +229,7 @@ Called after emitting assets to output directory.
 
 - Callback Parameters: `compilation`
 
-### `assetEmitted`
+### assetEmitted
 
 `AsyncSeriesHook`
 
@@ -248,7 +248,7 @@ compiler.hooks.assetEmitted.tap(
 );
 ```
 
-### `done`
+### done
 
 `AsyncSeriesHook`
 
@@ -256,13 +256,13 @@ Executed when the compilation has completed.
 
 - Callback Parameters: `stats`
 
-### `additionalPass`
+### additionalPass
 
 `AsyncSeriesHook`
 
 This hook allows you to do a one more additional pass of the build.
 
-### `failed`
+### failed
 
 `SyncHook`
 
@@ -270,7 +270,7 @@ Called if the compilation fails.
 
 - Callback Parameters: `error`
 
-### `invalid`
+### invalid
 
 `SyncHook`
 
@@ -278,13 +278,13 @@ Executed when a watching compilation has been invalidated.
 
 - Callback Parameters: `fileName`, `changeTime`
 
-### `watchClose`
+### watchClose
 
 `SyncHook`
 
 Called when a watching compilation has stopped.
 
-### `infrastructureLog`
+### infrastructureLog
 
 `SyncBailHook`
 
@@ -292,7 +292,7 @@ Allows to use infrastructure logging when enabled in the configuration via [`inf
 
 - Callback Parameters: `name`, `type`, `args`
 
-### `log`
+### log
 
 `SyncBailHook`
 

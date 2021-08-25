@@ -21,7 +21,7 @@ related:
 
 Since version 4 webpack runs optimizations for you depending on the chosen [`mode`](/configuration/mode/), still all optimizations are available for manual configuration and overrides.
 
-## `optimization.minimize`
+## optimization.minimize
 
 `boolean = true`
 
@@ -40,7 +40,7 @@ module.exports = {
 
 T> Learn how [mode](/configuration/mode/) works.
 
-## `optimization.minimizer`
+## optimization.minimizer
 
 `[TerserPlugin]` and or `[function (compiler)]`
 
@@ -92,13 +92,13 @@ module.exports = {
 };
 ```
 
-## `optimization.splitChunks`
+## optimization.splitChunks
 
 `object`
 
 By default webpack v4+ provides new common chunks strategies out of the box for dynamically imported modules. See available options for configuring this behavior in the [SplitChunksPlugin](/plugins/split-chunks-plugin/) page.
 
-## `optimization.runtimeChunk`
+## optimization.runtimeChunk
 
 `object` `string` `boolean`
 
@@ -151,7 +151,7 @@ module.exports = {
 };
 ```
 
-## `optimization.emitOnErrors`
+## optimization.emitOnErrors
 
 `boolean = false`
 
@@ -170,7 +170,7 @@ module.exports = {
 
 W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
 
-## `optimization.moduleIds`
+## optimization.moduleIds
 
 `boolean: false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
 
@@ -218,7 +218,7 @@ W> `moduleIds: 'deterministic'` was added in webpack 5 and `moduleIds: 'hashed'`
 
 W> `moduleIds: total-size` has been removed in webpack 5.
 
-## `optimization.chunkIds`
+## optimization.chunkIds
 
 `boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic'`
 
@@ -266,7 +266,7 @@ module.exports = {
 };
 ```
 
-## `optimization.nodeEnv`
+## optimization.nodeEnv
 
 `boolean = false` `string`
 
@@ -290,7 +290,7 @@ module.exports = {
 
 T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` defaults to `false`.
 
-## `optimization.mangleWasmImports`
+## optimization.mangleWasmImports
 
 `boolean = false`
 
@@ -307,7 +307,7 @@ module.exports = {
 };
 ```
 
-## `optimization.removeAvailableModules`
+## optimization.removeAvailableModules
 
 `boolean = false`
 
@@ -326,7 +326,7 @@ module.exports = {
 
 W> `optimization.removeAvailableModules` reduces the performance of webpack, and will be disabled in `production` mode by default in next major release. Disable it in `production` mode if you want extra build performance.
 
-## `optimization.removeEmptyChunks`
+## optimization.removeEmptyChunks
 
 `boolean = true`
 
@@ -343,7 +343,7 @@ module.exports = {
 };
 ```
 
-## `optimization.mergeDuplicateChunks`
+## optimization.mergeDuplicateChunks
 
 `boolean = true`
 
@@ -360,7 +360,7 @@ module.exports = {
 };
 ```
 
-## `optimization.flagIncludedChunks`
+## optimization.flagIncludedChunks
 
 `boolean`
 
@@ -377,7 +377,7 @@ module.exports = {
 };
 ```
 
-## `optimization.providedExports`
+## optimization.providedExports
 
 `boolean`
 
@@ -394,7 +394,7 @@ module.exports = {
 };
 ```
 
-## `optimization.usedExports`
+## optimization.usedExports
 
 `boolean = true` `string: 'global'`
 
@@ -423,7 +423,7 @@ module.exports = {
 };
 ```
 
-## `optimization.concatenateModules`
+## optimization.concatenateModules
 
 `boolean`
 
@@ -441,7 +441,7 @@ module.exports = {
 };
 ```
 
-## `optimization.sideEffects`
+## optimization.sideEffects
 
 `boolean = true` `string: 'flag'`
 
@@ -487,7 +487,7 @@ The `'flag'` value is used by default in non-production builds.
 
 T> `optimization.sideEffects` will also flag modules as side effect free when they contain only side effect free statements.
 
-## `optimization.portableRecords`
+## optimization.portableRecords
 
 `boolean`
 
@@ -506,7 +506,7 @@ module.exports = {
 };
 ```
 
-## `optimization.mangleExports`
+## optimization.mangleExports
 
 `boolean` `string: 'deterministic' | 'size'`
 
@@ -534,7 +534,7 @@ module.exports = {
 };
 ```
 
-## `optimization.innerGraph`
+## optimization.innerGraph
 
 `boolean = true`
 
@@ -551,7 +551,7 @@ module.exports = {
 };
 ```
 
-## `optimization.realContentHash`
+## optimization.realContentHash
 
 `boolean = true`
 

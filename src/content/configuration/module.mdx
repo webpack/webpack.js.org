@@ -24,7 +24,7 @@ contributors:
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
 
-## `module.generator`
+## module.generator
 
 <Badge text="5.12.0+" />
 
@@ -188,7 +188,7 @@ The `'relative'` value for `module.parser.javascript.url` is available since web
 1. This is useful for SSR (Server side rendering) when base URL is not known by server (and it saves a few bytes). To be identical it must also be used for the client build.
 2. Also for static site generators, mini-css-plugin and html-plugin, etc. where server side rendering is commonly needed.
 
-## `module.noParse`
+## module.noParse
 
 `RegExp` `[RegExp]` `function(resource)` `string` `[string]`
 
@@ -214,7 +214,7 @@ module.exports = {
 };
 ```
 
-## `module.unsafeCache`
+## module.unsafeCache
 
 `boolean` `function (module)`
 
@@ -236,7 +236,7 @@ module.exports = {
 
 W> The default value is `true` in webpack 4.
 
-## `module.rules`
+## module.rules
 
 `[Rule]`
 
@@ -293,7 +293,7 @@ The order of evaluation is as follows:
 2. [`rules`](#rulerules)
 3. [`oneOf`](#ruleoneof)
 
-## `Rule.enforce`
+## Rule.enforce
 
 `string`
 
@@ -327,15 +327,15 @@ import { c } from '!!./file3.js';
 
 Inline loaders and `!` prefixes should not be used as they are non-standard. They may be used by loader generated code.
 
-## `Rule.exclude`
+## Rule.exclude
 
 Exclude all modules matching any of these conditions. If you supply a `Rule.exclude` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.exclude`](#condition) for details.
 
-## `Rule.include`
+## Rule.include
 
 Include all modules matching any of these conditions. If you supply a `Rule.include` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.include`](#condition) for details.
 
-## `Rule.issuer`
+## Rule.issuer
 
 A [`Condition`](#condition) to match against the module that issued the request. In the following example, the `issuer` for the `a.js` request would be the path to the `index.js` file.
 
@@ -347,7 +347,7 @@ import A from './a.js';
 
 This option can be used to apply loaders to the dependencies of a specific module or set of modules.
 
-## `Rule.issuerLayer`
+## Rule.issuerLayer
 
 Allows to filter/match by layer of the issuer.
 
@@ -366,7 +366,7 @@ module.exports = {
 };
 ```
 
-## `Rule.layer`
+## Rule.layer
 
 `string`
 
@@ -388,17 +388,17 @@ module.exports = {
 };
 ```
 
-## `Rule.loader`
+## Rule.loader
 
 `Rule.loader` is a shortcut to `Rule.use: [ { loader } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.loader`](#useentry) for details.
 
-## `Rule.loaders`
+## Rule.loaders
 
 W> This option is **deprecated** in favor of `Rule.use`.
 
 `Rule.loaders` is an alias to `Rule.use`. See [`Rule.use`](#ruleuse) for details.
 
-## `Rule.mimetype`
+## Rule.mimetype
 
 You can match config rules to data uri with `mimetype`.
 
@@ -420,7 +420,7 @@ module.exports = {
 
 `application/json`, `text/javascript`, `application/javascript`, `application/node` and `application/wasm` are already included by default as mimetype.
 
-## `Rule.oneOf`
+## Rule.oneOf
 
 An array of [`Rules`](#rule) from which only the first matching Rule is used when the Rule matches.
 
@@ -451,13 +451,13 @@ module.exports = {
 
 T> See [`Nested rules`](#nested-rules) for more information.
 
-## `Rule.options` / `Rule.query`
+## Rule.options / Rule.query
 
 `Rule.options` and `Rule.query` are shortcuts to `Rule.use: [ { options } ]`. See [`Rule.use`](#ruleuse) and [`UseEntry.options`](#useentry) for details.
 
 W> `Rule.query` is deprecated in favor of `Rule.options` and `UseEntry.options`.
 
-## `Rule.parser`
+## Rule.parser
 
 An object with parser options. All applied parser options are merged.
 
@@ -504,7 +504,7 @@ If `Rule.type` is an `asset` or `asset/inline` then `Rule.generator` option may 
 
 See [Asset Modules guide](/guides/asset-modules/) for additional information and use cases.
 
-## `Rule.parser.dataUrlCondition`
+## Rule.parser.dataUrlCondition
 
 `object = { maxSize number = 8096 }` `function (source, { filename, module }) => boolean`
 
@@ -691,11 +691,11 @@ module.exports = {
 };
 ```
 
-## `Rule.resource`
+## Rule.resource
 
 A [`Condition`](#condition) matched with the resource. See details in [`Rule` conditions](#rule-conditions).
 
-## `Rule.resourceQuery`
+## Rule.resourceQuery
 
 A [`Condition`](#condition) matched with the resource query. This option is used to test against the query section of a request string (i.e. from the question mark onwards). If you were to `import Foo from './foo.css?inline'`, the following condition would match:
 
@@ -716,7 +716,7 @@ module.exports = {
 };
 ```
 
-## `Rule.parser.parse`
+## Rule.parser.parse
 
 `function(input) => string | object`
 
@@ -743,7 +743,7 @@ module.exports = {
 };
 ```
 
-## `Rule.rules`
+## Rule.rules
 
 An array of [`Rules`](#rule) that is also used when the Rule matches.
 
@@ -771,17 +771,17 @@ module.exports = {
 };
 ```
 
-## `Rule.sideEffects`
+## Rule.sideEffects
 
 `bool`
 
 Indicate what parts of the module contain side effects. See [Tree Shaking](/guides/tree-shaking/#mark-the-file-as-side-effect-free) for details.
 
-## `Rule.test`
+## Rule.test
 
 Include all modules that pass test assertion. If you supply a `Rule.test` option, you cannot also supply a `Rule.resource`. See [`Rule.resource`](#ruleresource) and [`Condition.test`](#condition) for details.
 
-## `Rule.type`
+## Rule.type
 
 `string`
 
@@ -809,7 +809,7 @@ module.exports = {
 
 > See [Asset Modules guide](/guides/asset-modules/) for more about `asset*` type.
 
-## `Rule.use`
+## Rule.use
 
 `[UseEntry]` `function(info)`
 
@@ -897,7 +897,7 @@ module.exports = {
 
 See [UseEntry](#useentry) for details.
 
-## `Rule.resolve`
+## Rule.resolve
 
 W> `Rule.resolve` is Available since webpack 4.36.1
 
@@ -964,7 +964,7 @@ module.exports = {
 
 When creating a bundle with updated configuration, `console.log(footer)` will output 'overridden footer'.
 
-### `resolve.fullySpecified`
+### resolve.fullySpecified
 
 `boolean = true`
 
@@ -990,7 +990,7 @@ module.exports = {
 
 W> `resolve.fullySpecified` doesn't affect requests from [mainFields](/configuration/resolve/#resolvemainfields), [aliasFields](/configuration/resolve/#resolvealiasfields) or [aliases](/configuration/resolve/#resolvealias).
 
-## `Condition`
+## Condition
 
 Conditions can be one of these:
 
@@ -1030,7 +1030,7 @@ module.exports = {
 };
 ```
 
-## `UseEntry`
+## UseEntry
 
 `object` `function(info)`
 

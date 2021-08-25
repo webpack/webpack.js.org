@@ -15,13 +15,13 @@ contributors:
 
 webpack can compile for multiple environments or _targets_. To understand what a `target` is in detail, read through [the targets concept page](/concepts/targets/).
 
-## `target`
+## target
 
 `string` `[string]` `false`
 
 Instructs webpack to target a specific environment. Defaults to `'browserslist'` or to `'web'` when no browserslist configuration was found.
 
-### `string`
+### string
 
 The following string values are supported via [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js):
 
@@ -54,7 +54,7 @@ module.exports = {
 
 It helps determinate ES-features that may be used to generate a runtime-code (all the chunks and modules are wrapped by runtime code).
 
-#### `browserslist`
+#### browserslist
 
 If a project has a browserslist config, then webpack will use it for:
 
@@ -69,7 +69,7 @@ Supported browserslist values:
 - `browserslist:/path/to/config` - explicitly specify browserslist config
 - `browserslist:/path/to/config:modern` - explicitly specify browserslist config and an environment
 
-### `[string]`
+### [string]
 
 When multiple targets are passed, then common subset of features will be used:
 
@@ -97,7 +97,7 @@ module.exports = {
 
 Will cause an error. webpack does not support universal target for now.
 
-### `false`
+### false
 
 Set `target` to `false` if none of the predefined targets from the list above meet your needs, no plugins will be applied.
 

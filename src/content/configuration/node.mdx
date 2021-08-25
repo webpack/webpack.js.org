@@ -18,7 +18,7 @@ This feature is provided by webpack's internal [`NodeStuffPlugin`](https://githu
 
 W> As of webpack 5, You can configure only `global`, `__filename` or `__dirname` under `node` option. If you're looking for how to polyfill `fs` alike in Node.js under webpack 5, please check [resolve.fallback](/configuration/resolve/#resolvefallback) for help.
 
-## `node`
+## node
 
 `boolean: false` `object`
 
@@ -37,7 +37,7 @@ module.exports = {
 
 Since webpack 3.0.0, the `node` option may be set to `false` to completely turn off the `NodeStuffPlugin` plugin.
 
-## `node.global`
+## node.global
 
 `boolean`
 
@@ -50,7 +50,7 @@ Options:
 - `true`: Provide a polyfill.
 - `false`: Provide nothing. Code that expects this object may crash with a `ReferenceError`.
 
-## `node.__filename`
+## node.\_\_filename
 
 `boolean` `string: 'mock' | 'eval-only'`
 
@@ -61,7 +61,7 @@ Options:
 - `'mock'`: The fixed value `'/index.js'`.
 - `'eval-only'`
 
-## `node.__dirname`
+## node.\_\_dirname
 
 `boolean` `string: 'mock' | 'eval-only'`
 

@@ -206,7 +206,7 @@ As you can see there's another `runtime.bundle.js` file generated besides `share
 
 Although using multiple entry points per page is allowed in webpack, it should be avoided when possible in favor of an entry point with multiple imports: `entry: { page: ['./analytics', './app'] }`. This results in a better optimization and consistent execution order when using `async` script tags.
 
-### `SplitChunksPlugin`
+### SplitChunksPlugin
 
 The [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) allows us to extract common dependencies into an existing entry chunk or an entirely new chunk. Let's use this to de-duplicate the `lodash` dependency from the previous example:
 

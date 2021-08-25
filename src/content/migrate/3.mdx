@@ -22,7 +22,7 @@ The following sections describe the major changes from webpack 1 to 2.
 
 T> Note that there were far fewer changes between 2 and 3, so that migration shouldn't be too bad. If you are running into issues, please see [the changelog](https://github.com/webpack/webpack/releases) for details.
 
-## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories`
+## resolve.root, resolve.fallback, resolve.modulesDirectories
 
 These options were replaced by a single option `resolve.modules`. See [resolving](/configuration/resolve) for more usage.
 
@@ -36,15 +36,15 @@ These options were replaced by a single option `resolve.modules`. See [resolving
   }
 ```
 
-## `resolve.extensions`
+## resolve.extensions
 
 This option no longer requires passing an empty string. This behavior was moved to `resolve.enforceExtension`. See [resolving](/configuration/resolve) for more usage.
 
-## `resolve.*`
+## resolve.\*
 
 Several APIs were changed here. Not listed in detail as it's not commonly used. See [resolving](/configuration/resolve) for details.
 
-## `module.loaders` is now `module.rules`
+## module.loaders is now module.rules
 
 The old loader configuration was superseded by a more powerful rules system, which allows configuration of loaders and more.
 For compatibility reasons, the old `module.loaders` syntax is still valid and the old names are parsed.
@@ -134,7 +134,7 @@ You can still opt-in to the old behavior with the `resolveLoader.moduleExtension
 
 See [#2986](https://github.com/webpack/webpack/issues/2986) for the reason behind this change.
 
-## `json-loader` is not required anymore
+## json-loader is not required anymore
 
 When no loader has been configured for a JSON file, webpack will automatically try to load the JSON
 file with the [`json-loader`](https://github.com/webpack-contrib/json-loader).
@@ -176,7 +176,7 @@ You may remove some hacks to work around this:
   }
 ```
 
-## `module.preLoaders` and `module.postLoaders` were removed:
+## module.preLoaders and module.postLoaders were removed:
 
 ```diff
   module: {
@@ -191,7 +191,7 @@ You may remove some hacks to work around this:
   }
 ```
 
-## `UglifyJsPlugin` sourceMap
+## UglifyJsPlugin sourceMap
 
 The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`. This means that if you are using source maps for minimized code or want correct line numbers for uglifyjs warnings, you need to set `sourceMap: true` for `UglifyJsPlugin`.
 
@@ -204,7 +204,7 @@ The `sourceMap` option of the `UglifyJsPlugin` now defaults to `false` instead o
   ]
 ```
 
-## `UglifyJsPlugin` warnings
+## UglifyJsPlugin warnings
 
 The `compress.warnings` option of the `UglifyJsPlugin` now defaults to `false` instead of `true`.
 This means that if you want to see uglifyjs warnings, you need to set `compress.warnings` to `true`.
@@ -220,7 +220,7 @@ This means that if you want to see uglifyjs warnings, you need to set `compress.
   ]
 ```
 
-## `UglifyJsPlugin` minimize loaders
+## UglifyJsPlugin minimize loaders
 
 `UglifyJsPlugin` no longer switches loaders into minimize mode. The `minimize: true` setting needs to be passed via loader options in the long-term. See loader documentation for relevant options.
 
@@ -236,11 +236,11 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
   ]
 ```
 
-## `DedupePlugin` has been removed
+## DedupePlugin has been removed
 
 `webpack.optimize.DedupePlugin` isn't needed anymore. Remove it from your configuration.
 
-## `BannerPlugin` - breaking change
+## BannerPlugin - breaking change
 
 `BannerPlugin` no longer accepts two parameters, but a single options object.
 
@@ -251,7 +251,7 @@ To keep compatibility with old loaders, loaders can be switched to minimize mode
   ]
 ```
 
-## `OccurrenceOrderPlugin` is now on by default
+## OccurrenceOrderPlugin is now on by default
 
 The `OccurrenceOrderPlugin` is now enabled by default and has been renamed (`OccurenceOrderPlugin` in webpack 1).
 Thus make sure to remove the plugin from your configuration:
@@ -265,7 +265,7 @@ Thus make sure to remove the plugin from your configuration:
   ]
 ```
 
-## `ExtractTextWebpackPlugin` - breaking change
+## ExtractTextWebpackPlugin - breaking change
 
 [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) requires version 2 to work with webpack 2.
 
@@ -273,7 +273,7 @@ Thus make sure to remove the plugin from your configuration:
 
 The configuration changes for this plugin are mainly syntactical.
 
-### `ExtractTextPlugin.extract`
+### ExtractTextPlugin.extract
 
 ```diff
 module: {
@@ -341,7 +341,7 @@ module.exports = function (env) {
 
 See [CLI](/api/cli).
 
-## `require.ensure` and AMD `require` are asynchronous
+## require.ensure and AMD require are asynchronous
 
 These functions are now always asynchronous instead of calling their callback synchronously if the chunk is already loaded.
 
@@ -402,7 +402,7 @@ module.exports = {
 };
 ```
 
-## `LoaderOptionsPlugin` context
+## LoaderOptionsPlugin context
 
 Some loaders need context information and read them from the configuration. This needs to be passed via loader options in the long-term. See loader documentation for relevant options.
 
@@ -418,7 +418,7 @@ To keep compatibility with old loaders, this information can be passed via plugi
   ]
 ```
 
-## `debug`
+## debug
 
 The `debug` option switched loaders to debug mode in webpack 1. This needs to be passed via loader options in long-term. See loader documentation for relevant options.
 
