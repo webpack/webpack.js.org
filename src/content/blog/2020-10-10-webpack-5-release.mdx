@@ -10,12 +10,21 @@ translators:
   - jacob-lcs
 ---
 
+<<<<<<< HEAD
 webpack 4 于 2018 年 2 月发布。
 从那时起，我们在没有重大更新的情况下，推出了很多功能。
 我们知道，人们不喜欢带有突破性的重大变化。
 尤其是 webpack，人们通常一年只接触两次，剩下的时间就 "只管用 "了。
 但是，在不做突破性改动的情况下推出功能也是有成本的：
 我们不能做重大的 API 或架构改进。
+=======
+Webpack 4 was released in February 2018.
+Since then we shipped a lot of features without breaking changes.
+We know that people dislike major changes with breaking changes.
+Especially with webpack, which people usually only touch twice a year, and the remaining time it "just works".
+But shipping features without breaking changes also has a cost:
+We can't do major API or architectural improvements.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 所以时不时就会有一个点，困难堆积起来，我们不得不做突破性的改动，才不至于把一切都搞乱。
 这时候就需要一个新的主要版本了。
@@ -42,10 +51,17 @@ webpack 4 于 2018 年 2 月发布。
 
 ## 赞助情况 $#sponsoring-update$
 
+<<<<<<< HEAD
 webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 它不像其他一些开源项目那样与大公司挂钩（并由其支付费用）。
 99% 的赞助收入是根据贡献者和维护者的贡献来分配的。
 我们相信将这些钱投资于使 webpack 变得更好。
+=======
+Webpack is fully based upon [sponsoring](https://opencollective.com/webpack).
+It's not tied to (and paid by) a big company like some other Open Source projects.
+99% of the earnings from sponsoring are distributed towards contributors and maintainers based on the contributions they do.
+We believe in investing the money towards making webpack better.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 但是由于疫情的原因，公司已经不怎么愿意赞助了。
 在这种情况下，Webpack 也受到了影响（就像许多其他公司和人一样）。
@@ -100,11 +116,19 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 ### 不再为 Node.js 模块 自动引用 Polyfills $#automatic-nodejs-polyfills-removed$
 
+<<<<<<< HEAD
 在早期，webpack 的目的是为了让大多数的 Node.js 模块运行在浏览器中，但如今模块的格局已经发生了变化，现在许多模块主要是为前端而编写。webpack &lt;= 4 的版本中提供了许多 Node.js 核心模块的 polyfills，一旦某个模块引用了任何一个核心模块（如 `cypto` 模块），webpack 就会自动引用这些 polyfills。
+=======
+In the early days, webpack's aim was to allow running most Node.js modules in the browser, but the module landscape changed and many module uses are now written mainly for frontend purposes. Webpack &lt;= 4 ships with polyfills for many of the Node.js core modules, which are automatically applied once a module uses any of the core modules (i.e. the `crypto` module).
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 尽管这会使得使用为 Node.js 编写模块变得容易，但它在构建时给 bundle 附加了庞大的 polyfills。在大部分情况下，这些 polyfills 并非必须。
 
+<<<<<<< HEAD
 从 webpack 5 开始不再自动填充这些 polyfills，而会专注于前端模块兼容。我们的目标是提高 web 平台的兼容性。
+=======
+Webpack 5 stops automatically polyfilling these core modules and focus on frontend-compatible modules. Our goal is to improve compatibility with the web platform, where Node.js core modules are not available.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 **迁移**：
 
@@ -325,7 +349,11 @@ Webpack 5 从源码中生成 typescript 类型，并通过 npm 包暴露它们�
 
 ### 嵌套的 tree-shaking $#nested-tree-shaking$
 
+<<<<<<< HEAD
 webpack 现在能够跟踪对导出的嵌套属性的访问。这可以改善重新导出命名空间对象时的 Tree Shaking（清除未使用的导出和混淆导出）。
+=======
+Webpack is now able to track access to nested properties of exports. This can improve Tree Shaking (Unused export elimination and export mangling) when reexporting namespace objects.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```js
 // inner.js
@@ -345,7 +373,11 @@ console.log(module.inner.a);
 
 ### 内部模块 tree-shaking $#inner-module-tree-shaking$
 
+<<<<<<< HEAD
 webpack 4 没有分析模块的导出和引用之间的依赖关系。webpack 5 有一个新的选项 `optimization.innerGraph`，在生产模式下是默认启用的，它可以对模块中的标志进行分析，找出导出和引用之间的依赖关系。
+=======
+Webpack 4 didn't analyze dependencies between exports and imports of a module. Webpack 5 has a new option `optimization.innerGraph`, which is enabled by default in production mode, that runs an analysis on symbols in a module to figure out dependencies from exports to imports.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 在这样的模块中：
 
@@ -387,9 +419,15 @@ export function test() {
 
 ### CommonJs Tree Shaking $#commonjs-tree-shaking$
 
+<<<<<<< HEAD
 webpack 曾经不进行对 CommonJs 导出和 `require()` 调用时的导出使用分析。
 
 webpack 5 增加了对一些 CommonJs 构造的支持，允许消除未使用的 CommonJs 导出，并从 `require()` 调用中跟踪引用的导出名称。
+=======
+Webpack used to opt-out from used exports analysing for CommonJs exports and `require()` calls.
+
+Webpack 5 adds support for some CommonJs constructs, allows to eliminate unused CommonJs exports and track referenced export names from `require()` calls.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 支持以下构造：
 
@@ -412,7 +450,11 @@ webpack 5 增加了对一些 CommonJs 构造的支持，允许消除未使用的
 
 在 package.json 中的 `"sideEffects"` 标志允许手动将模块标记为无副作用，这就允许在不使用时放弃它们。
 
+<<<<<<< HEAD
 webpack 5 也可以根据对源代码的静态分析，自动将模块标记为无副作用。
+=======
+Webpack 5 can also automatically flag modules as side-effect-free according to a static analysis of the source code.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ### 每个运行时的优化 $#optimization-per-runtime$
 
@@ -445,17 +487,28 @@ Webpack 5 默认在两种模式下都启用了 "sideEffects "优化。在 webpac
 
 ### 改进代码生成 $#improved-code-generation$
 
+<<<<<<< HEAD
 当 ASI 发生时，webpack 会检测到，当没有分号插入时，会生成更短的代码。`Object(...)`->`(0, ...)`。
 
 webpack 将多个导出的 getters 合并为一个运行时函数调用。`r.d(x, "a", () => a); r.d(x, "b", () => b);` -> `r.d(x, {a: () => a, b: () => b});`。
+=======
+Webpack detects when ASI happens and generates shorter code when no semicolons are inserted. `Object(...)` -> `(0, ...)`
+
+Webpack merges multiple export getters into a single runtime function call: `r.d(x, "a", () => a); r.d(x, "b", () => b);` -> `r.d(x, {a: () => a, b: () => b});`
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 现在在 `output.environment` 中有额外的选项。
 它们允许指定哪些 ECMAScript 特性可以用于 webpack 生成的运行时代码。
 
 通常人们不会直接指定这个选项，而是会使用 `target` 选项。
 
+<<<<<<< HEAD
 webpack 4 之前只生成 ES5 的代码。
 webpack 5 则现在既可以生成 ES5 又可以生成 ES6/ES2015 代码。
+=======
+Webpack 4 used to only emit ES5 code.
+Webpack 5 can generate both ES5 and ES6/ES2015 code now.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 只支持现代浏览器，将使用箭头函数生成更短的代码，使用 `const` 声明与 TDZ 为 `export default` 生成更符合规范的代码。
 
@@ -570,8 +623,13 @@ module.exports = {
 
 ### 文件生成 $#file-emitting$
 
+<<<<<<< HEAD
 webpack 过去总是在第一次构建时发出所有的输出文件，但在增量（观察）构建时跳过了写入未更改的文件。
 假设在 webpack 运行时，没有任何其他东西改变输出文件。
+=======
+Webpack used to always emit all output files during the first build but skipped writing unchanged files during incremental (watch) builds.
+It is assumed that nothing else changes output files while webpack is running.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 增加了持久性缓存后，即使在重启 webpack 进程时，也应该会有类似监听的体验，但如果认为即使在 webpack 不运行时也没有其他东西改变输出目录，那这个假设就太强了。
 
@@ -985,7 +1043,11 @@ module.exports = {
 
 ### 排序与 ID $#order-and-ids$
 
+<<<<<<< HEAD
 webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序，以递增的方式分配 ID。现在不再是这样了。顺序将不再用于 ID 的生成，取而代之的是，ID 生成的完全控制在插件中。
+=======
+Webpack used to order modules and chunks in the Compilation phase, in a specific way, to assign IDs in incremental order. This is no longer the case. The order will no longer be used for id generation, instead, the full control of ID generation is in the plugin.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 优化模块和代码块顺序的钩子已经被移除。
 
@@ -1031,7 +1093,11 @@ HMR 运行时的 javascript 部分已从核心 HMR 运行时钟分离了出来�
 
 ### 工作队列 $#work-queues$
 
+<<<<<<< HEAD
 webpack 曾经通过函数调用函数的形式来进行模块处理，还有一个 `semaphore` 选项限制并行性。`Compilation.semaphore` 已被移除，现在可以使用异步队列处理，每个步骤都有独立的队列：
+=======
+Webpack used to handle module processing by functions calling functions, and a `semaphore` which limits parallelism. The `Compilation.semaphore` has been removed and async queues now handle work queuing and processing. Each step has a separate queue:
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 - `Compilation.factorizeQueue`：为一组 dependencies 调用模块工厂。
 - `Compilation.addModuleQueue`：将模块添加到编译队列中（可以使用缓存恢复模块）
@@ -1047,12 +1113,21 @@ webpack 曾经通过函数调用函数的形式来进行模块处理，还有一
 
 ### Logging $#logging$
 
+<<<<<<< HEAD
 webpack 内部引入了一些日志记录的方法。
 `stats.logging` 和 `infrastructureLogging` 选项可用于启用这些信息。
+=======
+Webpack internals includes some logging now.
+`stats.logging` and `infrastructureLogging` options can be used to enabled these messages.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ### 模块和 chunk 图 $#module-and-chunk-graph$
 
+<<<<<<< HEAD
 webpack 曾经在依赖关系中存储了已解析的模块，并在 chunk 中存储引入的模块。但现已发生变化。所有关于模块在模块图中如何连接的信息，现在都存储在 ModulGraph 的 class 中。所有关于模块与 chunk 如何连接的信息现在都已存储在 ChunkGraph 的 class 中。依赖于 chunk 图的信息也存储在相关的 class 中。
+=======
+Webpack used to store a resolved module in the dependency, and store the contained modules in the chunk. This is no longer the case. All information about how modules are connected in the module graph are now stored in a ModuleGraph class. All information about how modules are connected with chunks are now stored in the ChunkGraph class. The information which depends on i. e. the chunk graph, is also stored in the related class.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 这意味着以下关于模块的信息已被移动：
 
@@ -1073,7 +1148,11 @@ webpack 曾经在依赖关系中存储了已解析的模块，并在 chunk 中�
 - Module is runtime module in chunk -> ChunkGraph
 - Chunk runtime requirements -> ChunkGraph
 
+<<<<<<< HEAD
 当从缓存中恢复模块时，webpack 会将模块从图中断开。现在已无需这么做。一个模块不存储图形的任何信息，技术上可以在多个图形中使用。这会使得缓存变得更加容易。
+=======
+Webpack used to disconnect modules from the graph when restored from the cache. This is no longer necessary. A Module stores no info about the graph and can technically be used in multiple graphs. This makes caching easier.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 这部分变化中大多数都有一个 compat-layer，当使用时，它会打印一个弃用警告。
 
@@ -1107,7 +1186,11 @@ webpack 所使用的监听已重构。它之前使用的是 `chokidar` 和原生
 
 ### SizeOnlySource after emit $#sizeonlysource-after-emit$
 
+<<<<<<< HEAD
 webpack 现在使用 `SizeOnlySource` 替换 `Compilation.assets` 中的 Sources，以减少内存占用。
+=======
+Webpack now replaces the Sources in `Compilation.assets` with `SizeOnlySource` variants to reduce memory usage.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ### Emitting assets multiple times $#emitting-assets-multiple-times$
 
@@ -1137,8 +1220,13 @@ webpack 现在使用 `SizeOnlySource` 替换 `Compilation.assets` 中的 Sources
 
 ### 依赖关系参考 $#dependencyreference$
 
+<<<<<<< HEAD
 webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（`Compilation.getDependencyReference` 会返回一个 `DependencyReference`）
 该类型用于引入关于该引用的所有信息，如 被引用的模块，已经引入了哪些 export，如果是弱引用，还需要订阅一些相关信息。
+=======
+Webpack used to have a single method and type to represent references of dependencies (`Compilation.getDependencyReference` returning a `DependencyReference`).
+This type used to include all information about this reference like the referenced Module, which exports have been imported, if it's a weak reference and also some ordering related information.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 把所有这些信息构建在一起，拿到参考的成本就很高，而且很频繁（每次有人需要一个信息）。
 

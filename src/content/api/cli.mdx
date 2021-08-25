@@ -42,6 +42,7 @@ translators:
 
 webpack-cli 提供了许多命令来使 webpack 的工作变得更简单。默认情况下，webpack 提供了以下命令：
 
+<<<<<<< HEAD
 | 命令                                  | 使用                                      | 描述                                                                 |
 | ------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------- |
 | `build`                               | `build\|bundle\|b [entries...] [options]` | 运行 webpack（默认命令，可以被省略）。                               |
@@ -54,6 +55,34 @@ webpack-cli 提供了许多命令来使 webpack 的工作变得更简单。默�
 | [`serve`](/configuration/dev-server/) | `serve\|s [options]`                      | 运行 `webpack-dev-server`.                                           |
 | [`version`](#version)                 | `version\|v [commands...]`                | 输出 `webpack`，`webpack-cli` 以及 `webpack-dev-server` 的版本信息。 |
 | `watch`                               | `watch\|w [entries...] [options]`         | 运行 webpack 并监听文件变化。                                        |
+=======
+| Command                     | Usage                                                 | Description                                                                     |
+| --------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [`build`](#build)           | `build\|bundle\|b [entries...] [options]`             | Run webpack (default command, can be omitted).                                  |
+| [`configtest`](#configtest) | `configtest\|t [config-path]`                         | Validate a webpack configuration.                                               |
+| [`help`](#help)             | `help\|h [command] [option]`                          | Display help for commands and options.                                          |
+| [`info`](#info)             | `info\|i [options]`                                   | Outputs information about your system.                                          |
+| [`init`](#init)             | `init\|create\|c\|new\|n [generation-path] [options]` | Initialize a new webpack project.                                               |
+| [`loader`](#loader)         | `loader\|l [output-path] [options]`                   | Scaffold a loader.                                                              |
+| [`plugin`](#plugin)         | `plugin\|p [output-path] [options]`                   | Scaffold a plugin.                                                              |
+| [`serve`](#serve)           | `serve\|server\|s [options]`                          | Run the `webpack-dev-server`.                                                   |
+| [`version`](#version)       | `version\|v [commands...]`                            | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
+| [`watch`](#watch)           | `watch\|w [entries...] [options]`                     | Run webpack and watch for files changes.                                        |
+
+### Build
+
+Run webpack (default command, can be omitted).
+
+```bash
+npx webpack build [options]
+```
+
+**example**
+
+```bash
+npx webpack build --config ./webpack.config.js --stats verbose
+```
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ### Init $#init$
 
@@ -89,7 +118,63 @@ npx webpack init ./my-app --force --template=default
 
 T> 点击 [这里](https://github.com/webpack/webpack-cli/blob/master/packages/generators/INIT.md) 获取 `webpack init` 命令的完整文档。
 
+<<<<<<< HEAD
 ### Info $#info$
+=======
+### Loader
+
+Scaffold a loader.
+
+```bash
+npx webpack loader [output-path] [options]
+```
+
+**example**
+
+```bash
+npx webpack loader ./my-loader --template=default
+```
+
+#### Output Path
+
+Path to the output directory, e.g. `./loader-name`.
+
+#### Options
+
+**`-t`, `--template`**
+
+`string = 'default'`
+
+Type of template.
+
+### Plugin
+
+Scaffold a plugin.
+
+```bash
+npx webpack plugin [output-path] [options]
+```
+
+**example**
+
+```bash
+npx webpack plugin ./my-loader --template=default
+```
+
+#### Output Path
+
+Path to the output directory, e.g. `./plugin-name`.
+
+#### Options
+
+**`-t`, `--template`**
+
+`string = 'default'`
+
+Type of template.
+
+### Info
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 输出你的系统信息。
 
@@ -129,7 +214,41 @@ npx webpack configtest ./webpack.config.js
 
 你的 webpack 配置文件路径。默认为 `./webpack.config.js`。
 
+<<<<<<< HEAD
 ## Flags $#flags$
+=======
+### Serve
+
+Run the webpack dev server.
+
+```bash
+npx webpack serve [options]
+```
+
+**example**
+
+```bash
+npx webpack serve --static --open
+```
+
+T> See the [full list of options for `webpack serve` command](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS-v4.md) and [related documentation for webpack-dev-server](/configuration/dev-server).
+
+### Watch
+
+Run webpack and watch for files changes.
+
+```bash
+npx webpack watch [options]
+```
+
+**example**
+
+```bash
+npx webpack watch --mode development
+```
+
+## Flags
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 默认情况下，webpack 提供了以下 flag：
 
@@ -582,4 +701,19 @@ npx webpack
 
 ```bash
 WEBPACK_PACKAGE=webpack-5 npx webpack
+```
+
+## Troubleshooting
+
+### TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension ".ts" for ./webpack.config.ts
+
+You might encounter this error in the case of using native ESM in TypeScript (i.e. `type: "module"` in `package.json`).
+
+`webpack-cli` supports configuration in both `CommonJS` and `ESM` format, at first it tries to load a configuration using `require()`, once it fails with an error code of `'ERR_REQUIRE_ESM'` (a special code for this case) it would try to load the configuration using `import()`.
+However, the `import()` method won't work with `ts-node` without [loader hooks](https://nodejs.org/api/esm.html#esm_experimental_loaders) enabled (described at [`TypeStrong/ts-node#1007`](https://github.com/TypeStrong/ts-node/issues/1007)).
+
+To fix the error above use the following command:
+
+```bash
+NODE_OPTIONS="--loader ts-node/esm" npx webpack --entry ./src/index.js --mode production
 ```

@@ -104,7 +104,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.charset` $#outputcharset$
+=======
+## output.charset
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `boolean = true`
 
@@ -112,7 +116,11 @@ module.exports = {
 
 T> 尽管 `<script>` [已弃用](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes)了 `charset` 属性，当 webpack 还是默认添加了它，目的是与非现代浏览器兼容。
 
+<<<<<<< HEAD
 ## `output.chunkFilename` $#outputchunkfilename$
+=======
+## output.chunkFilename
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string = '[id].js'` `function (pathData, assetInfo) => string`
 
@@ -167,7 +175,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.chunkLoadTimeout` $#outputchunkLoadtimeout$
+=======
+## output.chunkLoadTimeout
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `number = 120000`
 
@@ -185,7 +197,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.chunkLoadingGlobal` $#outputchunkloadingglobal$
+=======
+## output.chunkLoadingGlobal
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string = 'webpackChunkwebpack'`
 
@@ -308,7 +324,11 @@ module.exports = {
 - `'anonymous'` - **不带凭据(credential)** 启用跨域加载
 - `'use-credentials'` - **携带凭据(credential)** 启用跨域加载
 
+<<<<<<< HEAD
 ## `output.devtoolFallbackModuleFilenameTemplate` $#outputdevtoolfallbackmodulefilenametemplate$
+=======
+## output.devtoolFallbackModuleFilenameTemplate
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string` `function (info)`
 
@@ -316,7 +336,11 @@ module.exports = {
 
 查看 [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate)。
 
+<<<<<<< HEAD
 ## `output.devtoolModuleFilenameTemplate` $#outputdevtoolmodulefilenametemplate$
+=======
+## output.devtoolModuleFilenameTemplate
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string = 'webpack://[namespace]/[resource-path]?[loaders]'` `function (info) => string`
 
@@ -364,7 +388,11 @@ module.exports = {
 
 如果多个模块产生相同的名称，使用 [`output.devtoolFallbackModuleFilenameTemplate`](#outputdevtoolfallbackmodulefilenametemplate) 来代替这些模块。
 
+<<<<<<< HEAD
 ## `output.devtoolNamespace` $#outputdevtoolnamespace$
+=======
+## output.devtoolNamespace
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string`
 
@@ -649,7 +677,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.globalObject` $#outputglobalobject$
+=======
+## output.globalObject
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string = 'window'`
 
@@ -671,19 +703,31 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.hashDigest` $#outputhashdigest$
+=======
+## output.hashDigest
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string = 'hex'`
 
 在生成 hash 时使用的编码方式。支持 Node.js [`hash.digest`](https://nodejs.org/api/crypto.html#crypto_hash_digest_encoding) 的所有编码。对文件名使用 `'base64'`，可能会出现问题，因为 base64 字母表中具有 `/` 这个字符(character)。同样的，`'latin1'` 规定可以含有任何字符(character)。
 
+<<<<<<< HEAD
 ## `output.hashDigestLength` $#outputhashdigestlength$
+=======
+## output.hashDigestLength
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `number = 20`
 
 散列摘要的前缀长度。
 
+<<<<<<< HEAD
 ## `output.hashFunction` $#outputhashfunction$
+=======
+## output.hashFunction
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string = 'md4'` `function`
 
@@ -700,11 +744,19 @@ module.exports = {
 
 确保 hash 函数有可访问的 `update` 和 `digest` 方法。
 
+<<<<<<< HEAD
 ## `output.hashSalt` $#outputhashsalt$
+=======
+## output.hashSalt
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 一个可选的加盐值，通过 Node.JS [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding) 来更新哈希。
 
+<<<<<<< HEAD
 ## `output.hotUpdateChunkFilename` $#outputhotupdatechunkfilename$
+=======
+## output.hotUpdateChunkFilename
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string = '[id].[fullhash].hot-update.js'`
 
@@ -725,7 +777,11 @@ module.exports = {
 
 T> 通常，你不需要修改 `output.hotUpdateChunkFilename`.
 
+<<<<<<< HEAD
 ## `output.hotUpdateGlobal` $#outputhotupdateglobal$
+=======
+## output.hotUpdateGlobal
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string`
 
@@ -735,7 +791,11 @@ JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
 
 欲了解详情，请查阅 [`output.chunkLoadingGlobal`](#outputchunkloadingglobal)。
 
+<<<<<<< HEAD
 ## `output.hotUpdateMainFilename` $#outputhotupdatemainfilename$
+=======
+## output.hotUpdateMainFilename
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string = '[runtime].[fullhash].hot-update.json'` `function`
 
@@ -915,7 +975,11 @@ module.exports = {
 
 These options assign the return value of the entry point (e.g. whatever the entry point exported) to the name provided by [`output.library.name`](#outputlibraryname) at whatever scope the bundle was included at.
 
+<<<<<<< HEAD
 ##### `type: 'var'` $#type-var$
+=======
+##### type: 'var'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```js
 module.exports = {
@@ -938,7 +1002,11 @@ var MyLibrary = _entry_return_;
 MyLibrary.doSomething();
 ```
 
+<<<<<<< HEAD
 ##### `type: 'assign'` $#typeassign$
+=======
+##### type: 'assign'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```js
 module.exports = {
@@ -960,7 +1028,11 @@ MyLibrary = _entry_return_;
 
 请注意，如果 `MyLibrary` 没有在你的库之前定义，那么它将会被设置在全局作用域。
 
+<<<<<<< HEAD
 ##### `type: 'assign-properties'` <Badge text='5.16.0+' /> $#typeassignproperties$
+=======
+##### type: 'assign-properties' <Badge text='5.16.0+' />
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```js
 module.exports = {
@@ -996,7 +1068,11 @@ MyLibrary.hello('World');
 
 这些配置项分配入口点的返回值（例如：无论入口点导出的什么内容）到一个名为 [`output.library.name`](#outputlibraryname) 的对象中。
 
+<<<<<<< HEAD
 ##### `type: 'this'` $#typethis$
+=======
+##### type: 'this'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```js
 module.exports = {
@@ -1020,7 +1096,11 @@ this.MyLibrary.doSomething();
 MyLibrary.doSomething(); // 如果 `this` 为 window 对象
 ```
 
+<<<<<<< HEAD
 ##### `type: 'window'` $#type-window$
+=======
+##### type: 'window'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```js
 module.exports = {
@@ -1042,7 +1122,11 @@ window['MyLibrary'] = _entry_return_;
 window.MyLibrary.doSomething();
 ```
 
+<<<<<<< HEAD
 ##### `type: 'global'` $#type-global$
+=======
+##### type: 'global'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```js
 module.exports = {
@@ -1064,7 +1148,11 @@ global['MyLibrary'] = _entry_return_;
 global.MyLibrary.doSomething();
 ```
 
+<<<<<<< HEAD
 ##### `type: 'commonjs'` $#type-commmonjs$
+=======
+##### type: 'commonjs'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```js
 module.exports = {
@@ -1092,7 +1180,11 @@ W> 注意，不设置 `output.library.name` 将导致入口起点返回的所有
 
 这些配置项将生成一个带有完整 header 的 bundle，以确保与各种模块系统兼容。`output.library.name` 配置项在不同的 `output.library.type` 中有不同的含义。
 
+<<<<<<< HEAD
 ##### `type: 'module'` $#type-module$
+=======
+##### type: 'module'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```js
 module.exports = {
@@ -1113,7 +1205,11 @@ module.exports = {
 
 然而该特性仍然是实验性的，并且没有完全支持，所以请确保事先启用 [experiments.outputModule](/configuration/experiments/)。除此之外，你可以在 [这里](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975) 追踪开发进度。
 
+<<<<<<< HEAD
 ##### `type: 'commonjs2'` $#type-commmonjs2$
+=======
+##### type: 'commonjs2'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```js
 module.exports = {
@@ -1139,7 +1235,11 @@ require('MyLibrary').doSomething();
 
 T> 在考虑 CommonJS 与 CommonJS2 之间的区别？虽然它们很相似，但是它们之间有一些细微的差别，这些差别在 webpack 的上下文中通常是不相关的。（要获取更多详细内容，请 [阅读这个 issue](https://github.com/webpack/webpack/issues/1114)。）
 
+<<<<<<< HEAD
 ##### `type: 'amd'` $#type-amd$
+=======
+##### type: 'amd'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 可以将你的库暴露为 AMD 模块。
 
@@ -1185,7 +1285,11 @@ define(function () {
 
 如果使用一个 `<script>` 标签直接加载。它只能通过 RequireJS 兼容的异步模块 loader 通过文件的实际路径工作，所以在这种情况下，如果 `output.path` 与 `output.filename` 直接在服务端暴露，那么对于这种特殊设置可能会变得很重要。
 
+<<<<<<< HEAD
 ##### `type: 'amd-require'` $#type-amd-require$
+=======
+##### type: 'amd-require'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```javascript
 module.exports = {
@@ -1205,7 +1309,11 @@ module.exports = {
 
 使用该类型的话，不能使用库的名称。
 
+<<<<<<< HEAD
 ##### `type: 'umd'` $#type-umd$
+=======
+##### type: 'umd'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 这将在所有模块定义下暴露你的库, 允许它与 CommonJS、AMD 和作为全局变量工作。可以查看 [UMD Repository](https://github.com/umdjs/umd) 获取更多内容。
 
@@ -1282,7 +1390,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ##### `type: 'system'` $#type-system$
+=======
+##### type: 'system'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 这将会把你的库暴露为一个 [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) 模块。这个特性最初是在 [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0) 中发布。
 
@@ -1329,7 +1441,11 @@ System.register(
 
 #### Other Types $#othertypes$
 
+<<<<<<< HEAD
 ##### `type: 'jsonp'` $#type-jsonp$
+=======
+##### type: 'jsonp'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```js
 module.exports = {
@@ -1486,7 +1602,11 @@ AMD module 将会是这样：
 define('MyLibrary', [], factory);
 ```
 
+<<<<<<< HEAD
 ## `output.libraryExport` $#outputlibraryexport$
+=======
+## output.libraryExport
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 我们可能会停止对此的支持，所以最好使用 [output.library.export](#outputlibraryexport)，其作用与 `libraryExport` 一致。
 
@@ -1537,7 +1657,11 @@ T> 注意，下面的示例代码中的 `_entry_return_` 是入口起点返回�
 
 这些选项将入口起点的返回值（例如，入口起点的任何导出值），在 bundle 包所引入的位置，赋值给 [`output.library`](#outputlibrary) 提供的变量名。
 
+<<<<<<< HEAD
 #### `libraryTarget: 'var'` $#libraryTarget-var$
+=======
+#### libraryTarget: 'var'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.type: 'var'`](#type-var)。
 
@@ -1550,7 +1674,11 @@ var MyLibrary = _entry_return_;
 MyLibrary.doSomething();
 ```
 
+<<<<<<< HEAD
 #### `libraryTarget: 'assign'` $#libraryTarget-assign$
+=======
+#### libraryTarget: 'assign'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.type: 'assign'`](#type-assign)。
 
@@ -1562,7 +1690,11 @@ MyLibrary = _entry_return_;
 
 注意，如果 `MyLibrary` 在作用域中未在前面代码进行定义，则你的 library 将被设置在全局作用域内。
 
+<<<<<<< HEAD
 #### `libraryTarget: 'assign-properties'` <Badge text='5.16.0+' /> $#libraryTarget-assign-properties$
+=======
+#### libraryTarget: 'assign-properties' <Badge text='5.16.0+' />
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [output.library.type: 'assign-properties'`](#type-assign-properties)。
 
@@ -1602,7 +1734,11 @@ W> 当使用此选项时，将 [`output.library`](#outputlibrary) 设置为空�
 
 W> 注意，不设置 `output.library` 将导致由入口起点返回的所有属性，都会被赋值给给定的对象；这里并不会检查现有的属性名是否存在。
 
+<<<<<<< HEAD
 #### `libraryTarget: 'this'` $#librarytarget-this$
+=======
+#### libraryTarget: 'this'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.type: 'this'`](#type-this)。
 
@@ -1616,7 +1752,11 @@ this.MyLibrary.doSomething();
 MyLibrary.doSomething(); // 如果 this 是 window
 ```
 
+<<<<<<< HEAD
 #### `libraryTarget: 'window'` $#librarytarget-window$
+=======
+#### libraryTarget: 'window'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.type: 'window'`](#type-window)。
 
@@ -1628,7 +1768,11 @@ window['MyLibrary'] = _entry_return_;
 window.MyLibrary.doSomething();
 ```
 
+<<<<<<< HEAD
 #### `libraryTarget: 'global'` $#librarytarget-global$
+=======
+#### libraryTarget: 'global'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.type: 'global'`](#type-global)。
 
@@ -1640,7 +1784,11 @@ global['MyLibrary'] = _entry_return_;
 global.MyLibrary.doSomething();
 ```
 
+<<<<<<< HEAD
 #### `libraryTarget: 'commonjs'` $#librarytarget-commonjs$
+=======
+#### libraryTarget: 'commonjs'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.type: 'commonjs'`](#type-commonjs)。
 
@@ -1656,7 +1804,11 @@ require('MyLibrary').doSomething();
 
 这些选项将使得 bundle 带有更完整的模块头，以确保与各种模块系统的兼容性。根据 `output.libraryTarget` 选项不同，`output.library` 选项将具有不同的含义。
 
+<<<<<<< HEAD
 #### `libraryTarget: 'module'` $#librarytarget-module$
+=======
+#### libraryTarget: 'module'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.type: 'module'`](#type-module)。
 
@@ -1664,7 +1816,11 @@ W> 最好使用 [`output.library.type: 'module'`](#type-module)。
 
 需要注意的是，该功能还未完全支持，请在[此处](https://github.com/webpack/webpack/issues/2933#issuecomment-774253975)跟进进度。
 
+<<<<<<< HEAD
 #### `libraryTarget: 'commonjs2'` $#librarytarget-commonjs2$
+=======
+#### libraryTarget: 'commonjs2'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.type: 'commonjs2'`](#type-commonjs2)。
 
@@ -1680,7 +1836,11 @@ require('MyLibrary').doSomething();
 
 T> 想要弄清楚 CommonJS 和 CommonJS2 之间的区别？虽然它们很相似，但二者之间存在一些微妙的差异，这通常与 webpack 上下文没有关联。（更多详细信息，请[阅读此 issue](https://github.com/webpack/webpack/issues/1114)。）
 
+<<<<<<< HEAD
 #### `libraryTarget: 'amd'` $#librarytarget-amd$
+=======
+#### libraryTarget: 'amd'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.type: 'amd'`](#type-amd)。
 
@@ -1726,7 +1886,11 @@ define([], function () {
 
 如果直接加载 `<script>` 标签，此 bundle 无法按预期运行，或者根本无法正常运行（在 almond loader 中）。只能通过文件的实际路径，在 RequireJS 兼容的异步模块加载器中运行，因此在这种情况下，如果这些设置直接暴露在服务器上，那么 `output.path` 和 `output.filename` 对于这个特定的设置可能变得很重要。
 
+<<<<<<< HEAD
 #### `libraryTarget: 'amd-require'` $#librarytarget-amd-require$
+=======
+#### libraryTarget: 'amd-require'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.type: 'amd-require'`](#type-amd-require)。
 
@@ -1736,7 +1900,11 @@ W> 最好使用 [`output.library.type: 'amd-require'`](#type-amd-require)。
 
 对于此 target，库名称将被忽略。
 
+<<<<<<< HEAD
 #### `libraryTarget: 'umd'` $#librarytarget-umd$
+=======
+#### libraryTarget: 'umd'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.type: 'umd'`](#type-umd)。
 
@@ -1811,7 +1979,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 #### `libraryTarget: 'system'` $#librarytarget-system$
+=======
+#### libraryTarget: 'system'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.type: 'system'`](#type-system)。
 
@@ -1868,7 +2040,11 @@ __system_context__.import('./other-file.js').then((m) => {
 
 ### 其他 Targets $#other-targets$
 
+<<<<<<< HEAD
 #### `libraryTarget: 'jsonp'` $#librarytarget-jsonp$
+=======
+#### libraryTarget: 'jsonp'
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.type: 'jsonp'`](#type-jsonp)。
 
@@ -1904,7 +2080,11 @@ module.exports = {
 
 W> `output.module` 是一个实验性的功能， 想要使用的话，通过设置 [`experiments.outputModule`](/configuration/experiments/#experiments) 为 `true`。
 
+<<<<<<< HEAD
 ## `output.path` $#outputpath$
+=======
+## output.path
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string = path.join(process.cwd(), 'dist')`
 
@@ -1925,7 +2105,11 @@ module.exports = {
 
 注意，`[fullhash]` 在参数中被替换为编译过程(compilation)的 hash。详细信息请查看[指南 - 缓存](/guides/caching/)。
 
+<<<<<<< HEAD
 ## `output.pathinfo` $#outputpathinfo$
+=======
+## output.pathinfo
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `boolean=true` `string: 'verbose'`
 
@@ -1946,7 +2130,11 @@ module.exports = {
 
 T> 这些注释也会被添加至经过 tree shaking 后生成的 bundle 中。
 
+<<<<<<< HEAD
 ## `output.publicPath` $#outputpublicpath$
+=======
+## output.publicPath
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 - Type:
 
@@ -2054,7 +2242,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.sourceMapFilename` $#outputsourcemapfilename$
+=======
+## output.sourceMapFilename
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string = '[file].map[query]'`
 
@@ -2062,7 +2254,11 @@ module.exports = {
 
 可以使用 [#output-filename](#output-filename) 中的 `[name]`, `[id]`, `[hash]` 和 `[chunkhash]` 替换符号。除此之外，还可以使用 [Template strings](/configuration/output/#template-strings) 在 Filename-level 下替换。
 
+<<<<<<< HEAD
 ## `output.sourcePrefix` $#outputsourceprefix$
+=======
+## output.sourcePrefix
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string = ''`
 
@@ -2134,7 +2330,11 @@ require('module'); // <- 抛出
 require('module'); // <- 仍然抛出
 ```
 
+<<<<<<< HEAD
 ## `output.trustedTypes` $#outputtrustedtypes$
+=======
+## output.trustedTypes
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `boolean = false` `string` `object`
 
@@ -2162,7 +2362,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `output.umdNamedDefine` $#outputumdnameddefine$
+=======
+## output.umdNamedDefine
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 最好使用 [`output.library.umdNamedDefine`](#outputlibraryumdnameddefine)。
 

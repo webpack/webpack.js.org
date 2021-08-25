@@ -20,7 +20,11 @@ related:
 
 `DllPlugin` 和 `DllReferencePlugin` 用某种方法实现了拆分 bundles，同时还大幅度提升了构建的速度。"DLL" 一词代表微软最初引入的动态链接库。
 
+<<<<<<< HEAD
 ## `DllPlugin` $#dllplugin$
+=======
+## DllPlugin
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 此插件用于在单独的 webpack 配置中创建一个 dll-only-bundle。 此插件会生成一个名为 `manifest.json` 的文件，这个文件是用于让 [`DllReferencePlugin`](#dllreferenceplugin) 能够映射到相应的依赖上。
 
@@ -41,7 +45,11 @@ W> 我们建议 DllPlugin 只在 `entryOnly: true` 时使用，否则 DLL 中的
 
 此插件与 [`output.library`](/configuration/output/#outputlibrary) 的选项相结合可以暴露出（也称为放入全局作用域）dll 函数。
 
+<<<<<<< HEAD
 ## `DllReferencePlugin` $#dllreferenceplugin$
+=======
+## DllReferencePlugin
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 此插件配置在 webpack 的主配置文件中，此插件会把 dll-only-bundles 引用到需要的预编译的依赖中。
 

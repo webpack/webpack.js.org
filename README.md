@@ -29,9 +29,23 @@ $ git clone https://github.com/docschina/webpack.js.org.git
 # 安装依赖
 $ yarn
 
+<<<<<<< HEAD
 # 启动开发服务器
 $ yarn start
 ```
+=======
+Since webpack 4 we have created a subdomain-based archive for older states of documentation
+matching older webpack version. Webpack 4's documentation is available at
+[https://v4.webpack.js.org/](https://v4.webpack.js.org/) and is deployed from [`gh-pages` branch of v4.webpack.js.org repository](https://github.com/webpack/v4.webpack.js.org/tree/gh-pages)
+
+There are various known issues that need fixing ([#3366](https://github.com/webpack/webpack.js.org/issues/3366)).
+
+## Contributing
+
+Read through the [writer's guide][writer-guide-url] if you're interested in editing the
+content on this site. See the [contributors page][contributing-url] to learn how to set up and
+start working on the site locally.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ## License
 

@@ -39,7 +39,11 @@ translators:
 
 webpack 2 支持原生的 ES6 模块语法，意味着你无须额外引入 babel 这样的工具，就可以使用 `import` 和 `export`。但是注意，如果使用其他的 ES6+ 特性，仍然需要引入 babel。webpack 支持以下的方法：
 
+<<<<<<< HEAD
 ### `import` $#import$
+=======
+### import
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 通过 `import` 以静态的方式导入另一个通过 `export` 导出的模块。
 
@@ -60,7 +64,11 @@ import {
 } from 'data:text/javascript;charset=utf-8;base64,ZXhwb3J0IGNvbnN0IG51bWJlciA9IDQyOwpleHBvcnQgY29uc3QgZm4gPSAoKSA9PiAiSGVsbG8gd29ybGQiOw==';
 ```
 
+<<<<<<< HEAD
 ### `export` $#export$
+=======
+### export
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `默认`导出整个模块或具名导出模块。
 
@@ -77,7 +85,11 @@ export default {
 };
 ```
 
+<<<<<<< HEAD
 ### `import()` $#import$
+=======
+### import()
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `function(string path):Promise`
 
@@ -188,7 +200,11 @@ var myModule = require('my-module');
 
 W> 以异步的方式使用，可能不会达到预期效果。
 
+<<<<<<< HEAD
 ### `require.resolve` $#requireresolve$
+=======
+### require.resolve
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```typescript
 require.resolve(dependency: String);
@@ -200,7 +216,11 @@ W> 模块 ID 的类型可以是 `number` 或 `string`，具体取决于 [`optimi
 
 有关更多模块的信息，详见 [`module.id`](/api/module-variables/#moduleid-commonjs)。
 
+<<<<<<< HEAD
 ### `require.cache` $#requirecache$
+=======
+### require.cache
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 多处引用同一模块，最终只会产生一次模块执行和一次导出。所以，会在运行时（runtime）中会保存一份缓存。删除此缓存，则会产生新的模块执行和新的导出。
 
@@ -223,7 +243,11 @@ require('./file.js') !== module.exports; // 理论上是不相等的；实际运
 require.cache[module.id] !== module;
 ```
 
+<<<<<<< HEAD
 ### `require.ensure` $#requireensure$
+=======
+### require.ensure
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> `require.ensure()` 是 webpack 特有的，已被 `import()` 取代。
 
@@ -265,7 +289,11 @@ W> 虽然将 `require` 的实现作为参数（可以使用任意名称）传递
 
 AMD（Asynchronous Module Definition）是一种定义了用于编写和加载模块接口的 JavaScript 规范。
 
+<<<<<<< HEAD
 ### `define` (通过 factory 方法导出) $#define-with-factory$
+=======
+### define (with factory)
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```ts
 define([name: String], [dependencies: String[]], factoryMethod: function(...))
@@ -288,7 +316,11 @@ define(['jquery', 'my-module'], function ($, myModule) {
 
 W> 上面的写法不能在异步函数中使用。
 
+<<<<<<< HEAD
 ### `define` (通过 value 导出) $#define-with-value$
+=======
+### define (with value)
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```ts
 define(value: !Function)
@@ -304,7 +336,11 @@ define({
 
 W> 上面的写法不能在异步函数中使用。
 
+<<<<<<< HEAD
 ### `require` (AMD 版本) $#require-amd-version$
+=======
+### require (amd-version)
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```ts
 require(dependencies: String[], [callback: function(...)])
@@ -326,7 +362,11 @@ W> 这里没有提供命名 bundle 名称的选项。
 
 webpack 内置的 `LabeledModulesPlugin` 插件，允许你使用下面的方法导出和导入模块：
 
+<<<<<<< HEAD
 ### `export` 标签 $#export-label$
+=======
+### export label
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 导出给定的 `value`。标签可以出现在函数声明或变量声明之前。函数名或变量名是导出值的标识符。
 
@@ -339,7 +379,11 @@ export: function method(value) {
 
 W> 在异步函数中使用，可能不会达到预期的效果。
 
+<<<<<<< HEAD
 ### `require` 标签 $#require-label$
+=======
+### require label
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 在当前作用域下，依赖项的所有导出均可用。`require` 标签可以放置在一个字符串之前。依赖模块必须使用 `export` 标签导出值。CommonJS 或 AMD 模块无法通过这种方式使用。
 
@@ -362,7 +406,11 @@ method(...);
 
 除了上述模块语法之外，还允许使用一些 webpack 特定的方法：
 
+<<<<<<< HEAD
 ### `require.context` $#requirecontext$
+=======
+### require.context
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```ts
 require.context(
@@ -391,7 +439,11 @@ context('localeA').then((locale) => {
 
 `mode` 的可用模式及说明的完整列表在 [`import()`](#import-1) 文档中进行了描述。
 
+<<<<<<< HEAD
 ### `require.include` $#requireinclude$
+=======
+### require.include
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```ts
 require.include((dependency: String));
@@ -417,7 +469,11 @@ require.ensure(['a', 'c'], function (require) {
 
 不使用 `require.include('a')`，输出的两个匿名 chunk 都会有模块 a。
 
+<<<<<<< HEAD
 ### `require.resolveWeak` $#requireresolveweak$
+=======
+### require.resolveWeak
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 与 `require.resolve` 类似，但是不会把 `module` 引入到 bundle 中。这就是所谓的“弱（weak）”依赖。
 

@@ -16,9 +16,15 @@ translators:
   - dear-lizhihua
 ---
 
+<<<<<<< HEAD
 **插件**是 webpack 的 [支柱](https://github.com/webpack/tapable) 功能。webpack 自身也是构建于你在 webpack 配置中用到的**相同的插件系统**之上！
 
 插件目的在于解决 [loader](/concepts/loaders) 无法实现的**其他事**。
+=======
+**Plugins** are the [backbone](https://github.com/webpack/tapable) of webpack. Webpack itself is built on the **same plugin system** that you use in your webpack configuration!
+
+They also serve the purpose of doing **anything else** that a [loader](/concepts/loaders) cannot do. Webpack provides [many such plugins](/plugins/) out of the box.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 T> 如果在插件中使用了 [`webpack-sources`](https://github.com/webpack/webpack-sources) 的 package，请使用 `require('webpack').sources` 替代 `require('webpack-sources')`，以避免持久缓存的版本冲突。
 

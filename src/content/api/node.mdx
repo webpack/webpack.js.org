@@ -19,7 +19,11 @@ translators:
   - Janlay884181317
 ---
 
+<<<<<<< HEAD
 webpack 提供了 Node.js API，可以在 Node.js 运行时下直接使用。
+=======
+Webpack provides a Node.js API which can be used directly in Node.js runtime.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 当你需要自定义构建或开发流程时，Node.js API 非常有用，因为此时所有的报告和错误处理都必须自行实现，webpack 仅仅负责编译的部分。所以 [`stats`](/configuration/stats) 配置选项不会在 `webpack()` 调用中生效。
 
@@ -43,7 +47,11 @@ const webpack = require('webpack');
 import webpack from 'webpack';
 ```
 
+<<<<<<< HEAD
 ## `webpack()` $#webpack$
+=======
+## webpack()
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 导入的 `webpack` 函数会将 [配置对象](/configuration/) 传给 webpack，如果同时传入回调函数会在 webpack compiler 运行时被执行:
 
@@ -195,17 +203,29 @@ T> 当使用 [`MultiCompiler`](#multicompiler) 时，
 
 `stats` 对象暴露了以下方法:
 
+<<<<<<< HEAD
 ### `stats.hasErrors()` $#statshaserrors$
+=======
+### stats.hasErrors()
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 可以用来检查编译期是否有错误，
 返回值为 `true` 或 `false`。
 
+<<<<<<< HEAD
 ### `stats.hasWarnings()` $#statshaswarnings$
+=======
+### stats.hasWarnings()
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 可以用来检查编译期是否有警告，
 返回值为 `true` 或 `false`。
 
+<<<<<<< HEAD
 ### `stats.toJson(options)` $#statstojsonoptions$
+=======
+### stats.toJson(options)
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 以 JSON 对象形式返回编译信息。
 `options` 可以是一个字符串（预设值）或是颗粒化控制的对象:
@@ -227,7 +247,11 @@ stats.toJson({
 该函数输出的
 > [示例](https://raw.githubusercontent.com/webpack/analyse/master/app/pages/upload/example2.json)。
 
+<<<<<<< HEAD
 ### `stats.toString(options)` $#statstostringoptions$
+=======
+### stats.toString(options)
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 以格式化的字符串形式返回描述编译信息
 （类似 [CLI](/api/cli) 的输出）。

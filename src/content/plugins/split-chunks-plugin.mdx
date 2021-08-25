@@ -38,7 +38,11 @@ related:
 
 默认情况下，它只会影响到按需加载的 chunks，因为修改 initial chunks 会影响到项目的 HTML 文件中的脚本标签。
 
+<<<<<<< HEAD
 webpack 将根据以下条件自动拆分 chunks：
+=======
+Webpack will automatically split chunks based on these conditions:
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 - 新的 chunk 可以被共享，或者模块来自于 `node_modules` 文件夹
 - 新的 chunk 体积大于 20kb（在进行 min+gz 之前的体积）
@@ -49,11 +53,19 @@ webpack 将根据以下条件自动拆分 chunks：
 
 ## 配置 $#configuration$
 
+<<<<<<< HEAD
 webpack 为希望对该功能进行更多控制的开发者提供了一组选项。
+=======
+Webpack provides a set of options for developers that want more control over this functionality.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 选择了默认配置为了符合 Web 性能最佳实践，但是项目的最佳策略可能有所不同。如果要更改配置，则应评估所做更改的影响，以确保有真正的收益。
 
+<<<<<<< HEAD
 ## `optimization.splitChunks` $#optimizationsplitchunks$
+=======
+## optimization.splitChunks
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 下面这个配置对象代表 `SplitChunksPlugin` 的默认行为。
 
@@ -92,13 +104,21 @@ W> 当 webpack 处理文件路径时，它们始终包含 Unix 系统中的 `/` 
 
 W> 从 webpack 5 开始，不再允许将 entry 名称传递给 `{cacheGroup}.test` 或者为 `{cacheGroup}.name` 使用现有的 chunk 的名称。
 
+<<<<<<< HEAD
 ### `splitChunks.automaticNameDelimiter` $#splitchunksautomaticnamedelimiter$
+=======
+### splitChunks.automaticNameDelimiter
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string = '~'`
 
 默认情况下，webpack 将使用 chunk 的来源和名称生成名称（例如 `vendors~main.js`）。此选项使你可以指定用于生成名称的分隔符。
 
+<<<<<<< HEAD
 ### `splitChunks.chunks` $#splitchunkschunks$
+=======
+### splitChunks.chunks
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string = 'async'` `function (chunk)`
 
@@ -136,43 +156,67 @@ module.exports = {
 
 T> 你可以将此配置与 [HtmlWebpackPlugin](/plugins/html-webpack-plugin/) 结合使用。它将为你注入所有生成的 vendor chunks。
 
+<<<<<<< HEAD
 ### `splitChunks.maxAsyncRequests` $#splitchunksmaxasyncrequests$
+=======
+### splitChunks.maxAsyncRequests
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `number = 30`
 
 按需加载时的最大并行请求数。
 
+<<<<<<< HEAD
 ### `splitChunks.maxInitialRequests` $#splitchunksmaxinitialrequests$
+=======
+### splitChunks.maxInitialRequests
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `number = 30`
 
 入口点的最大并行请求数。
 
+<<<<<<< HEAD
 ### `splitChunks.defaultSizeTypes` $#splitchunksdefaultsizetypes$
+=======
+### splitChunks.defaultSizeTypes
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `[string] = ['javascript', 'unknown']`
 
 Sets the size types which are used when a number is used for sizes.
 
+<<<<<<< HEAD
 ### `splitChunks.minChunks` $#splitchunksminchunks$
+=======
+### splitChunks.minChunks
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `number = 1`
 
 拆分前必须共享模块的最小 chunks 数。
 
-### `splitChunks.hidePathInfo`
+### splitChunks.hidePathInfo
 
 `boolean`
 
 为由 maxSize 分割的部分创建名称时，阻止公开路径信息。
 
+<<<<<<< HEAD
 ### `splitChunks.minSize` $#splitchunksminsize$
+=======
+### splitChunks.minSize
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `number = 20000`
 
 生成 chunk 的最小体积（以 bytes 为单位）。
 
+<<<<<<< HEAD
 ### `splitChunks.enforceSizeThreshold` $#splitchunksenforcesizethreshold$
+=======
+### splitChunks.enforceSizeThreshold
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 #### `splitChunks.cacheGroups.{cacheGroup}.enforceSizeThreshold` $#splitchunkscachegroupscachegroupenforcesizethreshold$
 
@@ -180,7 +224,11 @@ Sets the size types which are used when a number is used for sizes.
 
 强制执行拆分的体积阈值和其他限制（minRemainingSize，maxAsyncRequests，maxInitialRequests）将被忽略。
 
+<<<<<<< HEAD
 ### `splitChunks.minRemainingSize` $#splitchunksminremainingsize$
+=======
+### splitChunks.minRemainingSize
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 #### `splitChunks.cacheGroups.{cacheGroup}.minRemainingSize` $#splitchunkscachegroupscachegroupminremainingsize$
 
@@ -190,7 +238,11 @@ Sets the size types which are used when a number is used for sizes.
 
 W> `splitChunks.minRemainingSize` 仅在剩余单个 chunk 时生效。
 
+<<<<<<< HEAD
 ### `splitChunks.layer` $#splitchunkslayer$
+=======
+### splitChunks.layer
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 #### `splitChunks.cacheGroups.{cacheGroup}.layer` $#splitchunkscachegroupscachegrouplayer$
 
@@ -198,7 +250,11 @@ W> `splitChunks.minRemainingSize` 仅在剩余单个 chunk 时生效。
 
 按模块层将模块分配给缓存组。
 
+<<<<<<< HEAD
 ### `splitChunks.maxSize` $#splitchunksmaxsize$
+=======
+### splitChunks.maxSize
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `number = 0`
 
@@ -213,7 +269,11 @@ T> `maxSize` 比 `maxInitialRequest/maxAsyncRequests` 具有更高的优先级�
 
 T> 设置 `maxSize` 的值会同时设置 `maxAsyncSize` 和 `maxInitialSize` 的值。
 
+<<<<<<< HEAD
 ### `splitChunks.maxAsyncSize` $#splitchunksmaxasyncsize$
+=======
+### splitChunks.maxAsyncSize
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `number`
 
@@ -221,7 +281,11 @@ T> 设置 `maxSize` 的值会同时设置 `maxAsyncSize` 和 `maxInitialSize` �
 
 `maxAsyncSize` 和 `maxSize` 的区别在于 `maxAsyncSize` 仅会影响按需加载 chunk。
 
+<<<<<<< HEAD
 ### `splitChunks.maxInitialSize` $#splitchunksmaxinitialsize$
+=======
+### splitChunks.maxInitialSize
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `number`
 
@@ -229,7 +293,11 @@ T> 设置 `maxSize` 的值会同时设置 `maxAsyncSize` 和 `maxInitialSize` �
 
 `maxInitialSize` 和 `maxSize` 的区别在于 `maxInitialSize` 仅会影响初始加载 chunks。
 
+<<<<<<< HEAD
 ### `splitChunks.name` $#splitchunksname$
+=======
+### splitChunks.name
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `boolean = false` `function (module, chunks, cacheGroupKey) => string` `string`
 
@@ -282,7 +350,11 @@ module.exports = {
 
 W> 在为不同的拆分 chunk 分配相同的名称时，所有 vendor 模块都放在一个共享的 chunk 中，尽管不建议这样做，因为这可能会导致下载更多代码。
 
+<<<<<<< HEAD
 ### `splitChunks.usedExports` $#splitchunksusedexports$
+=======
+### splitChunks.usedExports
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 #### `splitChunks.cacheGroups{cacheGroup}.usedExports` $#splitchunkscachegroupscachegroupusedexports$
 
@@ -291,7 +363,11 @@ W> 在为不同的拆分 chunk 分配相同的名称时，所有 vendor 模块�
 弄清哪些 export 被模块使用，以混淆 export 名称，省略未使用的 export，并生成有效的代码。
 当它为 `true` 时：分析每个运行时使用的出口，当它为 `"global"` 时：分析所有运行时的全局 export 组合）。
 
+<<<<<<< HEAD
 ### `splitChunks.cacheGroups` $#splitchunkscachegroups$
+=======
+### splitChunks.cacheGroups
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 缓存组可以继承和/或覆盖来自 `splitChunks.*` 的任何选项。但是 `test`、`priority` 和 `reuseExistingChunk` 只能在缓存组级别上进行配置。将它们设置为 `false`以禁用任何默认缓存组。
 
@@ -362,7 +438,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 #### `splitChunks.cacheGroups.test` $#splitchunkscachegroupstest$
+=======
+#### splitChunks.cacheGroups.test
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 #### `splitChunks.cacheGroups.{cacheGroup}.test` $#splitchunkscachegroupscachegrouptest$
 

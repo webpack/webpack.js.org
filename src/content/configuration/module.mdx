@@ -27,7 +27,11 @@ translators:
 
 这些选项决定了如何处理项目中的[不同类型的模块](/concepts/modules)。
 
+<<<<<<< HEAD
 ## `module.generator` $#modulegenerator$
+=======
+## module.generator
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 <Badge text="5.12.0+" />
 
@@ -191,7 +195,11 @@ const x = require(/* webpackIgnore: true */ 'x');
 1. 当服务器不知道根 URL 时，这对 SSR（服务端渲染）很有用（而且可用节省一些字节）。为了使其相同，它也必须用于客户端构建。
 2. 这也适用于 SSG（静态网站生成器），mini-css-plugin 和 html-plugin 等通常需要进行服务端渲染。
 
+<<<<<<< HEAD
 ## `module.noParse` $#modulenoparse$
+=======
+## module.noParse
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `RegExp` `[RegExp]` `function(resource)` `string` `[string]`
 
@@ -217,7 +225,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `module.unsafeCache` $#moduleunsafecache$
+=======
+## module.unsafeCache
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `boolean` `function (module)`
 
@@ -239,7 +251,11 @@ module.exports = {
 
 W> 在 webpack 4 中其默认值为 `true`。
 
+<<<<<<< HEAD
 ## `module.rules` $#modulerules$
+=======
+## module.rules
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `[Rule]`
 
@@ -300,7 +316,11 @@ W> 小心！resource 是文件的 _解析_ 路径，这意味着符号链接的�
 2. [`rules`](#rulerules)
 3. [`oneOf`](#ruleoneof)
 
+<<<<<<< HEAD
 ## `Rule.enforce` $#ruleenforce$
+=======
+## Rule.enforce
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string`
 
@@ -335,15 +355,27 @@ import { c } from '!!./file3.js';
 
 不应使用内联 loader 和 `!` 前缀，因为它是非标准的。它们可能会被 loader 生成代码使用。
 
+<<<<<<< HEAD
 ## `Rule.exclude` $#ruleexclude$
+=======
+## Rule.exclude
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 排除所有符合条件的模块。如果你提供了 `Rule.exclude` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.exclude`](#condition)。
 
+<<<<<<< HEAD
 ## `Rule.include` $#ruleinclude$
+=======
+## Rule.include
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 引入符合以下任何条件的模块。如果你提供了 `Rule.include` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.include`](#condition)。
 
+<<<<<<< HEAD
 ## `Rule.issuer` $#ruleissuer$
+=======
+## Rule.issuer
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 一个[`条件`](#condition)，用来与被发出的 request 对应的模块项匹配。在以下示例中，`a.js` request 的`发出者(issuer)`
 是 index.js 文件的路径。
@@ -356,7 +388,11 @@ import A from './a.js';
 
 这个选项可以用来将 loader 应用到一个特定模块或一组模块的依赖中。
 
+<<<<<<< HEAD
 ## `Rule.issuerLayer` $#ruleissuerlayer$
+=======
+## Rule.issuerLayer
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 允许按 issuer 的 layer 进行过滤/匹配。
 
@@ -375,7 +411,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `Rule.layer` $#rulelayer$
+=======
+## Rule.layer
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string`
 
@@ -397,17 +437,29 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `Rule.loader` $#ruleloader$
+=======
+## Rule.loader
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `Rule.loader` 是 `Rule.use: [ { loader } ]` 的简写。详细请查看 [`Rule.use`](#ruleuse) 和 [`UseEntry.loader`](#useentry)。
 
+<<<<<<< HEAD
 ## `Rule.loaders` $#ruleloaders$
+=======
+## Rule.loaders
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> 由于需要支持 `Rule.use`，此选项 **已废弃**。
 
 `Rule.loaders` 是 `Rule.use` 的别名。详细请查看 [`Rule.use`](#ruleuse)。
 
+<<<<<<< HEAD
 ## `Rule.mimetype` $#rulemimetype$
+=======
+## Rule.mimetype
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 你可以使用 `mimetype` 使 rules 配置与 data 的 uri 进行匹配。
 
@@ -429,7 +481,11 @@ module.exports = {
 
 mimetype 已默认包含了 `application/json`，`text/javascript`，`application/javascript`，`application/node` 以及 `application/wasm`。
 
+<<<<<<< HEAD
 ## `Rule.oneOf` $#ruleoneof$
+=======
+## Rule.oneOf
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 [`规则`](#rule)数组，当规则匹配时，只使用第一个匹配规则。
 
@@ -460,14 +516,22 @@ module.exports = {
 
 T> 详情请参阅 [`嵌套规则`](#nested-rules)。
 
+<<<<<<< HEAD
 ## `Rule.options` / `Rule.query` $#ruleoptions--rulequery$
+=======
+## Rule.options / Rule.query
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `Rule.options` 和 `Rule.query` 是 `Rule.use: [ { options } ]` 的简写。详细请查看 [`Rule.use`](#rule-use)
 和 [`UseEntry.options`](#useentry)。
 
 W> 由于需要支持 `Rule.options`，`UseEntry.options` 以及 `Rule.use`，因此 `Rule.query` 已废弃。
 
+<<<<<<< HEAD
 ## `Rule.parser` $#ruleparser$
+=======
+## Rule.parser
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 解析选项对象。所有应用的解析选项都将合并。
 
@@ -515,7 +579,11 @@ module.exports = {
 
 更多信息及用例请查阅 [Asset 模块指南](/guides/asset-modules/)。
 
+<<<<<<< HEAD
 ## `Rule.parser.dataUrlCondition` $#ruleparserdataurlcondition$
+=======
+## Rule.parser.dataUrlCondition
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `object = { maxSize number = 8096 }` `function (source, { filename, module }) => boolean`
 
@@ -704,11 +772,19 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `Rule.resource` $#ruleresource$
+=======
+## Rule.resource
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 [`条件`](#条件)会匹配 resource。在 [`Rule` 条件](#rule-conditions) 中查阅详情。
 
+<<<<<<< HEAD
 ## `Rule.resourceQuery` $#ruleresourcequery$
+=======
+## Rule.resourceQuery
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 与资源查询相匹配的 [`Condition`](#condition)。此选项用于测试请求字符串的查询部分（即从问号开始）。如果你需要通过 `import Foo from './foo.css?inline'` 导入 Foo，则需符合以下条件：
 
@@ -729,7 +805,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `Rule.parser.parse` $#ruleparserparse$
+=======
+## Rule.parser.parse
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `function(input) => string | object`
 
@@ -757,7 +837,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `Rule.rules` $#rulerules$
+=======
+## Rule.rules
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 [`规则`](#rule)数组，当规则匹配时使用。
 
@@ -785,17 +869,29 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `Rule.sideEffects` $#rulesideeffects$
+=======
+## Rule.sideEffects
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `bool`
 
 表明模块的哪一部份包含副作用。详情参阅 [Tree Shaking](/guides/tree-shaking/#mark-the-file-as-side-effect-free)。
 
+<<<<<<< HEAD
 ## `Rule.test` $#ruletest$
+=======
+## Rule.test
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 引入所有通过断言测试的模块。如果你提供了一个 `Rule.test` 选项，就不能再提供 `Rule.resource`。详细请查看 [`Rule.resource`](#rule-resource) 和 [`Condition.test`](#condition)。
 
+<<<<<<< HEAD
 ## `Rule.type` $#ruletype$
+=======
+## Rule.type
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `string`
 
@@ -825,7 +921,11 @@ module.exports = {
 
 > 关于 `asset*` 类型详参 [资源模块指南](/guides/asset-modules/) 。
 
+<<<<<<< HEAD
 ## `Rule.use` $#ruleuse$
+=======
+## Rule.use
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `[UseEntry]` `function(info)`
 
@@ -914,7 +1014,11 @@ module.exports = {
 
 参参 [UseEntry](#useentry)。
 
+<<<<<<< HEAD
 ## `Rule.resolve` $#ruleresolve$
+=======
+## Rule.resolve
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 W> `Rule.resolve` 从 webpack 4.36.1 起可用
 
@@ -983,7 +1087,11 @@ module.exports = {
 
 当用该配置创建一个包，`console.log(footer)` 会输出 'overridden footer'。
 
+<<<<<<< HEAD
 ### `resolve.fullySpecified` $#resolve-fully-specified$
+=======
+### resolve.fullySpecified
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `boolean = true`
 
@@ -1009,7 +1117,11 @@ module.exports = {
 
 W> `resolve.fullySpecified` 不影响来自 [mainFields](/configuration/resolve/#resolvemainfields)，[aliasFields](/configuration/resolve/#resolvealiasfields) 或 [aliases](/configuration/resolve/#resolvealias) 的请求。
 
+<<<<<<< HEAD
 ## `条件` $#condition$
+=======
+## Condition
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 条件可以是这些之一：
 
@@ -1049,7 +1161,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## `UseEntry` $#useentry$
+=======
+## UseEntry
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 `object` `function(info)`
 

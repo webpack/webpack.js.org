@@ -134,7 +134,11 @@ T> 我们支持 yarn PnP v3 [`yarn 2 berry`](https://yarnpkg.com/features/pnp)�
 
 ### stats.toJson 加速 $#statstojson-speed$
 
+<<<<<<< HEAD
 webpack 4 默认使用 `stats.toJson()` 输出大量数据。除非在增量步骤中做必要的统计，否则请避免获取 `stats` 对象的部分内容。`webpack-dev-server` 在 v3.1.3 以后的版本，包含一个重要的性能修复，即最小化每个增量构建步骤中，从 `stats` 对象获取的数据量。
+=======
+Webpack 4 outputs a large amount of data with its `stats.toJson()` by default. Avoid retrieving portions of the `stats` object unless necessary in the incremental step. `webpack-dev-server` after v3.1.3 contained a substantial performance fix to minimize the amount of data retrieved from the `stats` object per incremental build step.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ### Devtool $#devtool$
 
@@ -158,7 +162,11 @@ T> 在大多数情况下，最佳选择是 `eval-cheap-module-source-map`。
 
 ### 最小化 entry chunk $#minimal-entry-chunk$
 
+<<<<<<< HEAD
 webpack 只会在文件系统中输出已经更新的 chunk。某些配置选项（HMR, `output.chunkFilename` 的 `[name]`/`[chunkhash]/[contenthash]`，`[fullhash]`）来说，除了对已经更新的 chunk 无效之外，对于 entry chunk 也不会生效。
+=======
+Webpack only emits updated chunks to the filesystem. For some configuration options, (HMR, `[name]`/`[chunkhash]`/`[contenthash]` in `output.chunkFilename`, `[fullhash]`) the entry chunk is invalidated in addition to the changed chunks.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 确保在生成 entry chunk 时，尽量减少其体积以提高性能。下面的配置为运行时代码创建了一个额外的 chunk，所以它的生成代价较低：
 
@@ -173,7 +181,11 @@ module.exports = {
 
 ### 避免额外的优化步骤 $#avoid-extra-optimization-steps$
 
+<<<<<<< HEAD
 webpack 通过执行额外的算法任务，来优化输出结果的体积和加载性能。这些优化适用于小型代码库，但是在大型代码库中却非常耗费性能：
+=======
+Webpack does extra algorithmic work to optimize the output for size and load performance. These optimizations are performant for smaller codebases, but can be costly in larger ones:
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```js
 module.exports = {
@@ -188,7 +200,11 @@ module.exports = {
 
 ### 输出结果不携带路径信息 $#output-without-path-info$
 
+<<<<<<< HEAD
 webpack 会在输出的 bundle 中生成路径信息。然而，在打包数千个模块的项目中，这会导致造成垃圾回收性能压力。在 `options.output.pathinfo` 设置中关闭：
+=======
+Webpack has the ability to generate path info in the output bundle. However, this puts garbage collection pressure on projects that bundle thousands of modules. Turn this off in the `options.output.pathinfo` setting:
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```js
 module.exports = {
@@ -201,7 +217,11 @@ module.exports = {
 
 ### Node.js 版本 8.9.10-9.11.1 $#nodejs-versions-8910-9111$
 
+<<<<<<< HEAD
 Node.js v8.9.10 - v9.11.1 中的 ES2015 `Map` 和 `Set` 实现，存在 [性能回退](https://github.com/nodejs/node/issues/19769)。webpack 大量地使用这些数据结构，因此这次回退也会影响编译时间。
+=======
+There was a [performance regression](https://github.com/nodejs/node/issues/19769) in Node.js versions 8.9.10 - 9.11.1 in the ES2015 `Map` and `Set` implementations. Webpack uses those data structures liberally, so this regression affects compile times.
+>>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 之前和之后的 Node.js 版本不受影响。
 

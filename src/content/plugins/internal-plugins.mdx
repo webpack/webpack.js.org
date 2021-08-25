@@ -155,7 +155,7 @@ There are multiple optimizations in production mode regarding dead branches:
 - The ones performed by [Terser](https://github.com/fabiosantoscode/terser)
 - The ones performed by webpack
 
-webpack will try to evaluate conditional statements. If it succeeds then the dead branch is removed. webpack can't do constant folding unless the compiler knows it. For example:
+Webpack will try to evaluate conditional statements. If it succeeds then the dead branch is removed. Webpack can't do constant folding unless the compiler knows it. For example:
 
 ```javascript
 import { calculateTax } from './tax';
