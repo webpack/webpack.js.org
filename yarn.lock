@@ -9926,10 +9926,10 @@ react-g-analytics@0.4.2:
     history "^4.6.1"
     prop-types "^15.5.8"
 
-react-helmet-async@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-helmet-async/-/react-helmet-async-1.1.0.tgz#81d59ecfdf3540625639dc5e5a923f7219705bf9"
-  integrity sha512-550xWSW61j7Qzk26GBOdh096wKG6n1jY3ew7bH5NU0GvIZ5LyeuBLxHFBddMP7ZpsSltnUGzzh2p6Rj+aQAi4g==
+react-helmet-async@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-helmet-async/-/react-helmet-async-1.1.2.tgz#653b7e6bbfdd239c5dcd6b8df2811c7a363b8334"
+  integrity sha512-LTTzDDkyIleT/JJ6T/uqx7Y8qi1EuPPSiJawQY/nHHz0h7SPDT6HxP1YDDQx/fzcVxCqpWEEMS3QdrSrNkJYhg==
   dependencies:
     "@babel/runtime" "^7.12.5"
     invariant "^2.2.4"
