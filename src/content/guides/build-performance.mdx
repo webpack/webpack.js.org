@@ -158,7 +158,7 @@ T> 在大多数情况下，最佳选择是 `eval-cheap-module-source-map`。
 
 ### 最小化 entry chunk $#minimal-entry-chunk$
 
-webpack 只会在文件系统中输出已经更新的 chunk。某些配置选项（HMR, `output.chunkFilename` 的 `[name]`/`[chunkhash]/[contenthash]`，`[fullhash]`）来说，除了对已经更新的 chunk 无效之外，对于 entry chunk 也不会生效。
+Webpack 只会在文件系统中输出已经更新的 chunk。某些配置选项（HMR, `output.chunkFilename` 的 `[name]`/`[chunkhash]/[contenthash]`，`[fullhash]`）来说，除了对已经更新的 chunk 无效之外，对于 entry chunk 也不会生效。
 
 确保在生成 entry chunk 时，尽量减少其体积以提高性能。下面的配置为运行时代码创建了一个额外的 chunk，所以它的生成代价较低：
 
@@ -173,7 +173,7 @@ module.exports = {
 
 ### 避免额外的优化步骤 $#avoid-extra-optimization-steps$
 
-webpack 通过执行额外的算法任务，来优化输出结果的体积和加载性能。这些优化适用于小型代码库，但是在大型代码库中却非常耗费性能：
+Webpack 通过执行额外的算法任务，来优化输出结果的体积和加载性能。这些优化适用于小型代码库，但是在大型代码库中却非常耗费性能：
 
 ```js
 module.exports = {
@@ -188,7 +188,7 @@ module.exports = {
 
 ### 输出结果不携带路径信息 $#output-without-path-info$
 
-webpack 会在输出的 bundle 中生成路径信息。然而，在打包数千个模块的项目中，这会导致造成垃圾回收性能压力。在 `options.output.pathinfo` 设置中关闭：
+Webpack 会在输出的 bundle 中生成路径信息。然而，在打包数千个模块的项目中，这会导致造成垃圾回收性能压力。在 `options.output.pathinfo` 设置中关闭：
 
 ```js
 module.exports = {
@@ -201,7 +201,7 @@ module.exports = {
 
 ### Node.js 版本 8.9.10-9.11.1 $#nodejs-versions-8910-9111$
 
-Node.js v8.9.10 - v9.11.1 中的 ES2015 `Map` 和 `Set` 实现，存在 [性能回退](https://github.com/nodejs/node/issues/19769)。webpack 大量地使用这些数据结构，因此这次回退也会影响编译时间。
+Node.js v8.9.10 - v9.11.1 中的 ES2015 `Map` 和 `Set` 实现，存在 [性能回退](https://github.com/nodejs/node/issues/19769)。Webpack 大量地使用这些数据结构，因此这次回退也会影响编译时间。
 
 之前和之后的 Node.js 版本不受影响。
 

@@ -61,15 +61,15 @@ packageName 选项允许通过设置包名来查找所需的版本。默认情�
 
 ## 构建块(Building blocks) $#building-blocks$
 
-### `ContainerPlugin` (底层 API) $#containerplugin-low-level$
+### ContainerPlugin (low level) $#containerplugin-low-level$
 
 该插件使用指定的公开模块来创建一个额外的容器入口。
 
-### `ContainerReferencePlugin` (底层 API) $#containerreferenceplugin-low-level$
+### ContainerReferencePlugin (low level) $#containerreferenceplugin-low-level$
 
 该插件将特定的引用添加到作为外部资源（externals）的容器中，并允许从这些容器中导入远程模块。它还会调用这些容器的 `override` API 来为它们提供重载。本地的重载（当构建也是一个容器时，通过 `__webpack_override__` 或 `override` API）和指定的重载被提供给所有引用的容器。
 
-### `ModuleFederationPlugin` （高级 API） $#modulefederationplugin-high-level$
+### ModuleFederationPlugin (high level) $#modulefederationplugin-high-level$
 
 [`ModuleFederationPlugin`](/plugins/module-federation-plugin) 组合了 `ContainerPlugin` 和 `ContainerReferencePlugin`。
 

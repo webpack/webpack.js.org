@@ -25,7 +25,7 @@ translators:
 
 T> 注意：webpack 从 1 到 2 的变化，比从 2 到 3 要少很多，所以版本迁移起来难度应该不大。如果你遇到了问题，请查看[更新日志](https://github.com/webpack/webpack/releases) 以了解更多细节。
 
-## `resolve.root`, `resolve.fallback`, `resolve.modulesDirectories` $#resolveroot-resolvefallback-resolvemodulesdirectories$
+## resolve.root, resolve.fallback, resolve.modulesDirectories $#resolveroot-resolvefallback-resolvemodulesdirectories$
 
 这些选项被一个单独的选项 `resolve.modules` 取代。更多用法请查看 [resolving](/configuration/resolve) 。
 
@@ -39,15 +39,15 @@ T> 注意：webpack 从 1 到 2 的变化，比从 2 到 3 要少很多，所以
   }
 ```
 
-## `resolve.extensions` $#resolveextensions$
+## resolve.extensions $#resolveextensions$
 
 此选项不再需要传一个空字符串。此行为被迁移到 `resolve.enforceExtension` 。更多用法请查看 [解析](/configuration/resolve) 。
 
-## `resolve.*` $#resolve$
+## resolve.\* $#resolve$
 
 这里更改了几个 API 。由于不常用，不在这里详细列出。更多用法请查看 [解析](/configuration/resolve) 。
 
-## `module.loaders` 升级为 `module.rules` $#moduleloaders-is-now-modulerules$
+## module.loaders is now module.rules $#moduleloaders-is-now-modulerules$
 
 旧的 loader 配置被更强大的 rules 系统取代，后者允许配置 loader 以及其他更多选项。
 为了兼容旧版，`module.loaders` 语法仍然有效，旧的属性名依然可以被解析。
@@ -137,7 +137,7 @@ T> 注意：webpack 从 1 到 2 的变化，比从 2 到 3 要少很多，所以
 
 了解这一改变背后的原因，请查看 [#2986](https://github.com/webpack/webpack/issues/2986) 。
 
-## `json-loader` 不再需要手动添加 $#json-loader-is-not-required-anymore$
+## json-loader 不再需要手动添加 $#json-loader-is-not-required-anymore$
 
 如果没有为 JSON 文件配置 loader，webpack 将自动尝试通过 [`json-loader`]
 (https://github.com/webpack-contrib/json-loader) 加载 JSON 文件。
@@ -179,7 +179,7 @@ T> 注意：webpack 从 1 到 2 的变化，比从 2 到 3 要少很多，所以
   }
 ```
 
-## 移除了 `module.preLoaders` 和 `module.postLoaders`： $#modulepreloaders-and-modulepostloaders-were-removed$
+## module.preLoaders and module.postLoaders were removed: $#modulepreloaders-and-modulepostloaders-were-removed$
 
 ```diff
   module: {
@@ -194,7 +194,7 @@ T> 注意：webpack 从 1 到 2 的变化，比从 2 到 3 要少很多，所以
   }
 ```
 
-## `UglifyJsPlugin` sourceMap $#uglifyjsplugin-sourcemap$
+## UglifyJsPlugin sourceMap $#uglifyjsplugin-sourcemap$
 
  `UglifyJsPlugin` 的 `sourceMap` 选项现在默认为 `false` 而不是 `true`。这意味着如果你在压缩代码时启用了 `source map`，或者想要让 `uglifyjs` 的警告能够对应到正确的代码行，你需要将 `UglifyJsPlugin` 的 `sourceMap` 设为 `true` 。
 
@@ -207,7 +207,7 @@ T> 注意：webpack 从 1 到 2 的变化，比从 2 到 3 要少很多，所以
   ]
 ```
 
-## `UglifyJsPlugin` warnings $#uglifyjsplugin-warnings$
+## UglifyJsPlugin warnings $#uglifyjsplugin-warnings$
 
 
 ```diff
@@ -221,7 +221,7 @@ T> 注意：webpack 从 1 到 2 的变化，比从 2 到 3 要少很多，所以
   ]
 ```
 
-## `UglifyJsPlugin` 压缩优化 loaders $#uglifyjsplugin-minimize-loaders$
+## UglifyJsPlugin minimize loaders $#uglifyjsplugin-minimize-loaders$
 
 `UglifyJsPlugin` 不再压缩 loaders。在未来很长一段时间里，需要通过设置 `minimize:true` 来压缩 loaders。参考 loader 文档里的相关选项。
 
@@ -237,11 +237,11 @@ loaders 的压缩模式将在 webpack 3 或后续版本中取消。
   ]
 ```
 
-## 移除 `DedupePlugin` $#dedupeplugin-has-been-removed$
+## DedupePlugin has been removed $#dedupeplugin-has-been-removed$
 
 不再需要 `webpack.optimize.DedupePlugin`。请从配置中移除。
 
-## `BannerPlugin` - 破坏性改动 $#bannerplugin---breaking-change$
+## BannerPlugin - 破坏性改动 $#bannerplugin---breaking-change$
 
 `BannerPlugin` 不再接受两个参数，而是只接受单独的 options 对象。
 
@@ -252,7 +252,7 @@ loaders 的压缩模式将在 webpack 3 或后续版本中取消。
   ]
 ```
 
-## 默认加载 `OccurrenceOrderPlugin` $#occurrenceorderplugin-is-now-on-by-default$
+## 默认加载 OccurrenceOrderPlugin $#occurrenceorderplugin-is-now-on-by-default$
 
  `OccurrenceOrderPlugin` 现在默认启用，并已重命名(在webpack 1 中为 `OccurenceOrderPlugin`) 。
  因此，请确保从你的配置中删除该插件：
@@ -266,7 +266,7 @@ loaders 的压缩模式将在 webpack 3 或后续版本中取消。
   ]
 ```
 
-## `ExtractTextWebpackPlugin` - 破坏性改动 $#extracttextwebpackplugin---breaking-change$
+## ExtractTextWebpackPlugin - 破坏性改动 $#extracttextwebpackplugin---breaking-change$
 
 [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) 需要使用版本 2，才能在 webpack 2 下正常运行 。
 
@@ -274,7 +274,7 @@ loaders 的压缩模式将在 webpack 3 或后续版本中取消。
 
 这一插件的配置变化主要体现在语法上。
 
-### `ExtractTextPlugin.extract` $#extracttextpluginextract$
+### ExtractTextPlugin.extract $#extracttextpluginextract$
 
 ```diff
 module: {
@@ -342,7 +342,7 @@ module.exports = function (env) {
 
 详见 [CLI](/api/cli) 。
 
-## `require.ensure` 以及 AMD `require` 将采用异步式调用 $#requireensure-and-amd-require-are-asynchronous$
+## require.ensure and AMD require are asynchronous $#requireensure-and-amd-require-are-asynchronous$
 
 现在这些函数总是异步的，而不是当 chunk 已经加载完成的时候同步调用它们的回调函数 (callback) 。
 
@@ -403,7 +403,7 @@ module.exports = {
 };
 ```
 
-## `LoaderOptionsPlugin` context $#loaderoptionsplugin-context$
+## LoaderOptionsPlugin context $#loaderoptionsplugin-context$
 
 有的 loader 需要从配置中读取一些 context 信息。在未来很长一段时间里，这将需要通过 loader options 传入。详见 loader 文档的相关选项。
 
@@ -419,7 +419,7 @@ module.exports = {
   ]
 ```
 
-## `debug` $#debug$
+## debug $#debug$
 
 在 webpack 1 中 `debug` 选项可以将 loader 切换到调试模式 (debug mode) 。在未来很长一段时间里，这将需要通过 loader 选项传递。详见 loader 文档的相关选项。
 

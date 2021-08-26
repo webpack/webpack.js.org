@@ -31,7 +31,7 @@ translators:
 
 W> `webpack-dev-server v4.0.0+` 要求 `node >= v12.13.0`、`webpack >= v4.37.0`（但是我们推荐使用 `webpack >= v5.0.0`）和 `webpack-cli >= v4.7.0`。
 
-## 开发服务器(`devServer`) $#devserver$
+## devServer $#devserver$
 
 `object`
 
@@ -88,7 +88,7 @@ npx webpack serve
 
 CLI 配置项列表可以在 [这里](hhttps://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS-v4.md) 查询。
 
-## `devServer.allowedHosts` $#devserverallowedhosts$
+## devServer.allowedHosts $#devserverallowedhosts$
 
 `'auto' | 'all'` `[string]`
 
@@ -170,7 +170,7 @@ module.exports = {
 npx webpack serve --allowed-hosts auto
 ```
 
-## `devServer.bonjour` $#devserverbonjour$
+## devServer.bonjour $#devserverbonjour$
 
 `boolean` `object`
 
@@ -215,9 +215,9 @@ module.exports = {
 };
 ```
 
-## `devServer.client` $#devserverclient$
+## devServer.client $#devserverclient$
 
-### `logging` $#logging$
+### logging $#logging$
 
 `'log' | 'info' | 'warn' | 'error' | 'none' | 'verbose'`
 
@@ -242,7 +242,7 @@ module.exports = {
 npx webpack serve --client-logging info
 ```
 
-### `overlay` $#overlay$
+### overlay $#overlay$
 
 `boolean = true` `object: { errors boolean = true, warnings boolean = true }`
 
@@ -297,7 +297,7 @@ module.exports = {
 npx webpack serve --client-overlay-errors --no-client-overlay-warnings
 ```
 
-### `progress` $#progress$
+### progress $#progress$
 
 在浏览器中以百分比显示编译进度。
 
@@ -446,7 +446,7 @@ module.exports = {
 
 T> 要从浏览器中获取 `protocol`/`hostname`/`port`，请使用 `webSocketURL: 'auto://0.0.0.0:0/ws'`。
 
-## `devServer.compress` $#devservercompress$
+## devServer.compress $#devservercompress$
 
 `boolean = true`
 
@@ -493,7 +493,7 @@ module.exports = {
 };
 ```
 
-## `devServer.http2` $#devserverhttp2$
+## devServer.http2 $#devserverhttp2$
 
 `boolean`
 
@@ -548,7 +548,7 @@ npx webpack serve --no-http2
 npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
 ```
 
-## `devServer.https` $#devserverhttps$
+## devServer.https $#devserverhttps$
 
 `boolean` `object`
 
@@ -604,7 +604,7 @@ npx webpack serve --no-https
 npx webpack serve --https-key ./path/to/server.key --https--cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
 ```
 
-## `devServer.headers` $#devserverheaders$
+## devServer.headers $#devserverheaders$
 
 `function` `object`
 
@@ -741,7 +741,7 @@ npx webpack serve --host local-ipv4
 npx webpack serve --host local-ipv6
 ```
 
-## `devServer.hot` $#devserverhot$
+## devServer.hot $#devserverhot$
 
 `'only'` `boolean`
 

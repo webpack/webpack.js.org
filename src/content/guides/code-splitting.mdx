@@ -210,7 +210,7 @@ webpack 5.4.0 compiled successfully in 249 ms
 
 尽管可以在 webpack 中允许每个页面使用多入口，应尽可能避免使用多入口的入口：`entry: { page: ['./analytics', './app'] }`。如此，在使用 `async` 脚本标签时，会有更好的优化以及一致的执行顺序。
 
-### `SplitChunksPlugin` $#splitchunksplugin$
+### SplitChunksPlugin $#splitchunksplugin$
 
 [`SplitChunksPlugin`](/plugins/split-chunks-plugin) 插件可以将公共的依赖模块提取到已有的入口 chunk 中，或者提取到一个新生成的 chunk。让我们使用这个插件，将之前的示例中重复的 `lodash` 模块去除：
 
@@ -384,7 +384,7 @@ T> 在稍后示例中，可能会根据计算后的变量(computed variable)导�
 
 ## 预获取/预加载模块(prefetch/preload module) $#prefetchingpreloading-modules$
 
-webpack v4.6.0+ 增加了对预获取和预加载的支持。
+Webpack v4.6.0+ 增加了对预获取和预加载的支持。
 
 在声明 import 时，使用下面这些内置指令，可以让 webpack 输出 "resource hint(资源提示)"，来告知浏览器：
 

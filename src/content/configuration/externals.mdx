@@ -24,7 +24,7 @@ translators:
 
 `externals` 配置选项提供了「从输出的 bundle 中排除依赖」的方法。相反，所创建的 bundle 依赖于那些存在于用户环境(consumer's environment)中的依赖。此功能通常对 **library 开发人员**来说是最有用的，然而也会有各种各样的应用程序用到它。
 
-## `externals` $#externals$
+## externals $#externals$
 
 `string` `[string]` `object` `function` `RegExp`
 
@@ -99,7 +99,7 @@ import fs from 'fs-extra';
 const fs = require('fs-extra');
 ```
 
-### `[string]` $#string$
+### [string] $#string$
 
 ```javascript
 module.exports = {
@@ -301,7 +301,7 @@ W> 如果你指定的 `externals` 未使用类型，则会使用[默认类型](/
 
 关于如何使用此 externals 配置的更多信息，请参考 [如何编写 library](/guides/author-libraries)。
 
-### `byLayer` $#bylayer$
+### byLayer $#bylayer$
 
 `function` `object`
 
@@ -321,7 +321,7 @@ module.exports = {
 };
 ```
 
-## `externalsType` $#externalstype$
+## externalsType $#externalstype$
 
 `string = 'var'`
 
@@ -472,7 +472,7 @@ T> 当加载带有 HTML `<script>` 标签的代码时，webpack 的 runtime 将�
 
 T> 像 `output.chunkLoadTimeout`，`output.crossOriginLoading` 以及 `output.scriptType` 等选项也会对这种方式加载的 external 脚本产生影响。
 
-## `externalsPresets` $#externals-presets$
+## externalsPresets $#externals-presets$
 
 `object`
 

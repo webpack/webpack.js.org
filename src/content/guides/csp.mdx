@@ -22,7 +22,7 @@ related:
     url: https://web.dev/trusted-types
 ---
 
-webpack 能够为其加载的所有脚本添加 `nonce`。要启用此功能，需要在引入的入口脚本中设置一个 `__webpack_nonce__` 变量。应该为每个唯一的页面视图生成和提供一个唯一的基于 hash 的 nonce，这就是为什么 `__webpack_nonce__` 要在入口文件中指定，而不是在配置中指定的原因。注意，`nonce` 应该是一个 base64 编码的字符串。
+Webpack 能够为其加载的所有脚本添加 `nonce`。要启用此功能，需要在引入的入口脚本中设置一个 `__webpack_nonce__` 变量。应该为每个唯一的页面视图生成和提供一个唯一的基于 hash 的 nonce，这就是为什么 `__webpack_nonce__` 要在入口文件中指定，而不是在配置中指定的原因。注意，`nonce` 应该是一个 base64 编码的字符串。
 
 ## 示例 $#examples$
 

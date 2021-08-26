@@ -20,6 +20,7 @@ contributors:
   - dhruvdutt
   - wizardofhogwarts
   - aholzner
+  - snitin315
 translators:
   - QC-L
   - jacob-lcs
@@ -66,6 +67,46 @@ T> 如果你在技术选型中使用了 `webpack-dev-middleware` 而没有使用
       new HtmlWebpackPlugin({
         title: 'Hot Module Replacement',
       }),
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist'),
+      clean: true,
+    },
+  };
+```
+
+你也可以为 HMR 提供入口：
+
+**webpack.config.js**
+
+```diff
+  const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
++ const webpack = require("webpack");
+
+  module.exports = {
+    entry: {
+       app: './src/index.js',
+-      print: './src/print.js',
++      // Runtime code for hot module replacement
++      hot: 'webpack/hot/dev-server.js',
++      // Dev server client for web socket transport, hot and live reload logic
++      client: 'webpack-dev-server/client/index.js?hot=true&live-reload=true',
+    },
+    devtool: 'inline-source-map',
+    devServer: {
+      static: './dist',
++     // Dev server client for web socket transport, hot and live reload logic
++     hot: false,
++     client: false,
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: 'Hot Module Replacement',
+      }),
++     // Plugin for hot module replacement
++     new webpack.HotModuleReplacementPlugin(),
     ],
     output: {
       filename: '[name].bundle.js',
@@ -140,30 +181,37 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 在 Node.js API 中使用 webpack dev server 时，不要将 dev server 选项放在 webpack 配置对象中。而是在创建时，
 将其作为第二个参数传递。例如：
 
-`new WebpackDevServer(compiler, options)`
+`new WebpackDevServer(options, compiler)`
 
-想要启用 HMR，还需要修改 webpack 配置对象，使其包含 HMR 入口起点。`webpack-dev-server` 依赖包中具有一个叫做 `addDevServerEntrypoints` 的方法，你可以通过使用这个方法来实现。这是关于如何使用的一个基本示例：
+想要启用 HMR，还需要修改 webpack 配置对象，使其包含 HMR 入口起点。这是关于如何使用的一个基本示例：
 
 **dev-server.js**
 
 ```javascript
-const webpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
-
-const config = require('./webpack.config.js');
-const options = {
-  static: './dist',
-  hot: true,
-  host: 'localhost',
+const DevServer = require('webpack-dev-server');
+const config = {
+  entry: [
+    // Runtime code for hot module replacement
+    'webpack/hot/dev-server.js',
+    // Dev server client for web socket transport, hot and live reload logic
+    'webpack-dev-server/client/index.js?hot=true&live-reload=true',
+    // Your entry
+    './src/entry.js',
+  ],
+  plugin: [
+    // Plugin for hot module replacement
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 };
-
-webpackDevServer.addDevServerEntrypoints(config, options);
 const compiler = webpack(config);
-const server = new webpackDevServer(compiler, options);
+// `hot` and `client` options are disabled because we added them manually
+const server = new DevServer({ hot: false, client: false }, compiler);
 
-server.listen(5000, 'localhost', () => {
-  console.log('dev server listening on port 5000');
-});
+(async () => {
+  await server.start();
+  console.log('dev server is running');
+})();
 ```
 
 T> 如果你正在使用 [`webpack-dev-middleware`](/guides/development#using-webpack-dev-middleware)，可以通过 [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) 依赖包，在自定义 dev server 中启用 HMR。

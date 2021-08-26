@@ -10,7 +10,7 @@ translators:
   - jacob-lcs
 ---
 
-webpack 4 于 2018 年 2 月发布。
+Webpack 4 于 2018 年 2 月发布。
 从那时起，我们在没有重大更新的情况下，推出了很多功能。
 我们知道，人们不喜欢带有突破性的重大变化。
 尤其是 webpack，人们通常一年只接触两次，剩下的时间就 "只管用 "了。
@@ -42,7 +42,7 @@ webpack 4 于 2018 年 2 月发布。
 
 ## 赞助情况 $#sponsoring-update$
 
-webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
+Webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 它不像其他一些开源项目那样与大公司挂钩（并由其支付费用）。
 99% 的赞助收入是根据贡献者和维护者的贡献来分配的。
 我们相信将这些钱投资于使 webpack 变得更好。
@@ -100,11 +100,11 @@ webpack 是完全基于[赞助](https://opencollective.com/webpack)的。
 
 ### 不再为 Node.js 模块 自动引用 Polyfills $#automatic-nodejs-polyfills-removed$
 
-在早期，webpack 的目的是为了让大多数的 Node.js 模块运行在浏览器中，但如今模块的格局已经发生了变化，现在许多模块主要是为前端而编写。webpack &lt;= 4 的版本中提供了许多 Node.js 核心模块的 polyfills，一旦某个模块引用了任何一个核心模块（如 `cypto` 模块），webpack 就会自动引用这些 polyfills。
+在早期，webpack 的目的是为了让大多数的 Node.js 模块运行在浏览器中，但如今模块的格局已经发生了变化，现在许多模块主要是为前端而编写。Webpack &lt;= 4 的版本中提供了许多 Node.js 核心模块的 polyfills，一旦某个模块引用了任何一个核心模块（如 `cypto` 模块），webpack 就会自动引用这些 polyfills。
 
 尽管这会使得使用为 Node.js 编写模块变得容易，但它在构建时给 bundle 附加了庞大的 polyfills。在大部分情况下，这些 polyfills 并非必须。
 
-从 webpack 5 开始不再自动填充这些 polyfills，而会专注于前端模块兼容。我们的目标是提高 web 平台的兼容性。
+从 Webpack 5 开始不再自动填充这些 polyfills，而会专注于前端模块兼容。我们的目标是提高 web 平台的兼容性。
 
 **迁移**：
 
@@ -325,7 +325,7 @@ Webpack 5 从源码中生成 typescript 类型，并通过 npm 包暴露它们�
 
 ### 嵌套的 tree-shaking $#nested-tree-shaking$
 
-webpack 现在能够跟踪对导出的嵌套属性的访问。这可以改善重新导出命名空间对象时的 Tree Shaking（清除未使用的导出和混淆导出）。
+Webpack 现在能够跟踪对导出的嵌套属性的访问。这可以改善重新导出命名空间对象时的 Tree Shaking（清除未使用的导出和混淆导出）。
 
 ```js
 // inner.js
@@ -345,7 +345,7 @@ console.log(module.inner.a);
 
 ### 内部模块 tree-shaking $#inner-module-tree-shaking$
 
-webpack 4 没有分析模块的导出和引用之间的依赖关系。webpack 5 有一个新的选项 `optimization.innerGraph`，在生产模式下是默认启用的，它可以对模块中的标志进行分析，找出导出和引用之间的依赖关系。
+Webpack 4 没有分析模块的导出和引用之间的依赖关系。webpack 5 有一个新的选项 `optimization.innerGraph`，在生产模式下是默认启用的，它可以对模块中的标志进行分析，找出导出和引用之间的依赖关系。
 
 在这样的模块中：
 
@@ -387,9 +387,9 @@ export function test() {
 
 ### CommonJs Tree Shaking $#commonjs-tree-shaking$
 
-webpack 曾经不进行对 CommonJs 导出和 `require()` 调用时的导出使用分析。
+Webpack 曾经不进行对 CommonJs 导出和 `require()` 调用时的导出使用分析。
 
-webpack 5 增加了对一些 CommonJs 构造的支持，允许消除未使用的 CommonJs 导出，并从 `require()` 调用中跟踪引用的导出名称。
+Webpack 5 增加了对一些 CommonJs 构造的支持，允许消除未使用的 CommonJs 导出，并从 `require()` 调用中跟踪引用的导出名称。
 
 支持以下构造：
 
@@ -412,7 +412,7 @@ webpack 5 增加了对一些 CommonJs 构造的支持，允许消除未使用的
 
 在 package.json 中的 `"sideEffects"` 标志允许手动将模块标记为无副作用，这就允许在不使用时放弃它们。
 
-webpack 5 也可以根据对源代码的静态分析，自动将模块标记为无副作用。
+Webpack 5 也可以根据对源代码的静态分析，自动将模块标记为无副作用。
 
 ### 每个运行时的优化 $#optimization-per-runtime$
 
@@ -447,15 +447,15 @@ Webpack 5 默认在两种模式下都启用了 "sideEffects "优化。在 webpac
 
 当 ASI 发生时，webpack 会检测到，当没有分号插入时，会生成更短的代码。`Object(...)`->`(0, ...)`。
 
-webpack 将多个导出的 getters 合并为一个运行时函数调用。`r.d(x, "a", () => a); r.d(x, "b", () => b);` -> `r.d(x, {a: () => a, b: () => b});`。
+Webpack 将多个导出的 getters 合并为一个运行时函数调用。`r.d(x, "a", () => a); r.d(x, "b", () => b);` -> `r.d(x, {a: () => a, b: () => b});`。
 
 现在在 `output.environment` 中有额外的选项。
 它们允许指定哪些 ECMAScript 特性可以用于 webpack 生成的运行时代码。
 
 通常人们不会直接指定这个选项，而是会使用 `target` 选项。
 
-webpack 4 之前只生成 ES5 的代码。
-webpack 5 则现在既可以生成 ES5 又可以生成 ES6/ES2015 代码。
+Webpack 4 之前只生成 ES5 的代码。
+Webpack 5 则现在既可以生成 ES5 又可以生成 ES6/ES2015 代码。
 
 只支持现代浏览器，将使用箭头函数生成更短的代码，使用 `const` 声明与 TDZ 为 `export default` 生成更符合规范的代码。
 
@@ -570,7 +570,7 @@ module.exports = {
 
 ### 文件生成 $#file-emitting$
 
-webpack 过去总是在第一次构建时发出所有的输出文件，但在增量（观察）构建时跳过了写入未更改的文件。
+Webpack 过去总是在第一次构建时发出所有的输出文件，但在增量（观察）构建时跳过了写入未更改的文件。
 假设在 webpack 运行时，没有任何其他东西改变输出文件。
 
 增加了持久性缓存后，即使在重启 webpack 进程时，也应该会有类似监听的体验，但如果认为即使在 webpack 不运行时也没有其他东西改变输出目录，那这个假设就太强了。
@@ -985,7 +985,7 @@ module.exports = {
 
 ### 排序与 ID $#order-and-ids$
 
-webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序，以递增的方式分配 ID。现在不再是这样了。顺序将不再用于 ID 的生成，取而代之的是，ID 生成的完全控制在插件中。
+Webpack 曾经在编译阶段以特定的方式对模块和代码块进行排序，以递增的方式分配 ID。现在不再是这样了。顺序将不再用于 ID 的生成，取而代之的是，ID 生成的完全控制在插件中。
 
 优化模块和代码块顺序的钩子已经被移除。
 
@@ -1031,7 +1031,7 @@ HMR 运行时的 javascript 部分已从核心 HMR 运行时钟分离了出来�
 
 ### 工作队列 $#work-queues$
 
-webpack 曾经通过函数调用函数的形式来进行模块处理，还有一个 `semaphore` 选项限制并行性。`Compilation.semaphore` 已被移除，现在可以使用异步队列处理，每个步骤都有独立的队列：
+Webpack 曾经通过函数调用函数的形式来进行模块处理，还有一个 `semaphore` 选项限制并行性。`Compilation.semaphore` 已被移除，现在可以使用异步队列处理，每个步骤都有独立的队列：
 
 - `Compilation.factorizeQueue`：为一组 dependencies 调用模块工厂。
 - `Compilation.addModuleQueue`：将模块添加到编译队列中（可以使用缓存恢复模块）
@@ -1047,12 +1047,12 @@ webpack 曾经通过函数调用函数的形式来进行模块处理，还有一
 
 ### Logging $#logging$
 
-webpack 内部引入了一些日志记录的方法。
+Webpack 内部引入了一些日志记录的方法。
 `stats.logging` 和 `infrastructureLogging` 选项可用于启用这些信息。
 
 ### 模块和 chunk 图 $#module-and-chunk-graph$
 
-webpack 曾经在依赖关系中存储了已解析的模块，并在 chunk 中存储引入的模块。但现已发生变化。所有关于模块在模块图中如何连接的信息，现在都存储在 ModulGraph 的 class 中。所有关于模块与 chunk 如何连接的信息现在都已存储在 ChunkGraph 的 class 中。依赖于 chunk 图的信息也存储在相关的 class 中。
+Webpack 曾经在依赖关系中存储了已解析的模块，并在 chunk 中存储引入的模块。但现已发生变化。所有关于模块在模块图中如何连接的信息，现在都存储在 ModulGraph 的 class 中。所有关于模块与 chunk 如何连接的信息现在都已存储在 ChunkGraph 的 class 中。依赖于 chunk 图的信息也存储在相关的 class 中。
 
 这意味着以下关于模块的信息已被移动：
 
@@ -1107,7 +1107,7 @@ webpack 所使用的监听已重构。它之前使用的是 `chokidar` 和原生
 
 ### SizeOnlySource after emit $#sizeonlysource-after-emit$
 
-webpack 现在使用 `SizeOnlySource` 替换 `Compilation.assets` 中的 Sources，以减少内存占用。
+Webpack 现在使用 `SizeOnlySource` 替换 `Compilation.assets` 中的 Sources，以减少内存占用。
 
 ### Emitting assets multiple times $#emitting-assets-multiple-times$
 
@@ -1137,7 +1137,7 @@ webpack 现在使用 `SizeOnlySource` 替换 `Compilation.assets` 中的 Sources
 
 ### 依赖关系参考 $#dependencyreference$
 
-webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（`Compilation.getDependencyReference` 会返回一个 `DependencyReference`）
+Webpack 曾经有一个单一的方法和类型来表示依赖关系的引用（`Compilation.getDependencyReference` 会返回一个 `DependencyReference`）
 该类型用于引入关于该引用的所有信息，如 被引用的模块，已经引入了哪些 export，如果是弱引用，还需要订阅一些相关信息。
 
 把所有这些信息构建在一起，拿到参考的成本就很高，而且很频繁（每次有人需要一个信息）。

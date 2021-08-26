@@ -19,13 +19,13 @@ translators:
 webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `target` 的详细信息，
 请阅读 [target 概念页面](/concepts/targets/)。
 
-## `target` $#target$
+## target $#target$
 
 `string` `[string]` `false`
 
 告知 webpack 为目标(target)指定一个环境。默认值为 `"browserslist"`，如果没有找到 browserslist 的配置，则默认为 `"web"`
 
-### `string` $#string$
+### string $#string$
 
 通过 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js)，
 可以支持以下字符串值：
@@ -63,7 +63,7 @@ module.exports = {
 
 它有助于确定可能用于生成运行时代码的 ES 特性（所有的 chunk 和模块都被运行时代码所包裹）
 
-#### `browserslist`
+#### browserslist
 
 如果一个项目有 browserslist 配置，那么 webpack 将会使用它：
 
@@ -78,7 +78,7 @@ module.exports = {
 - `browserslist:/path/to/config` - 明确指定 browserslist 配置路径
 - `browserslist:/path/to/config:modern` - 明确指定 browserslist 的配置路径和环境
 
-### `[string]` $#string$
+### [string] $#string$
 
 当传递多个目标时，将使用共同的特性子集：
 
@@ -91,7 +91,7 @@ module.exports = {
 };
 ```
 
-webpack 将生成 web 平台的运行时代码，并且只使用 ES5 相关的特性。
+Webpack 将生成 web 平台的运行时代码，并且只使用 ES5 相关的特性。
 
 目前并不是所有的 target 都可以进行混合。
 
@@ -106,7 +106,7 @@ module.exports = {
 
 此时会导致错误。webpack 暂时不支持 universal 的 target。
 
-### `false` $#false$
+### false $#false$
 
 如果上述列表中的预设 target 都不符合你的需求，你可以将 `target` 设置为 `false`，这将告诉 webpack 不使用任何插件。
 

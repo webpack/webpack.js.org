@@ -26,7 +26,7 @@ translators:
 从 webpack 4 开始，会根据你选择的 [`mode`](/concepts/mode/) 来执行不同的优化，
 不过所有的优化还是可以手动配置和重写。
 
-## `optimization.minimize` $#optimizationminimize$
+## optimization.minimize $#optimizationminimize$
 
 `boolean = true`
 
@@ -46,7 +46,7 @@ module.exports = {
 
 T> 了解 [mode](/concepts/mode/) 工作机制。
 
-## `optimization.minimizer` $#optimizationminimizer$
+## optimization.minimizer $#optimizationminimizer$
 
 `[TerserPlugin]` 或 `[function (compiler)]`
 
@@ -99,14 +99,14 @@ module.exports = {
 };
 ```
 
-## `optimization.splitChunks` $#optimizationsplitchunks$
+## optimization.splitChunks $#optimizationsplitchunks$
 
 `object`
 
 对于动态导入模块，默认使用 webpack v4+ 提供的全新的通用分块策略(common chunk strategy)。请在 [SplitChunksPlugin](/plugins/split-chunks-plugin/)
 页面中查看配置其行为的可用选项。
 
-## `optimization.runtimeChunk` $#optimizationruntimechunk$
+## optimization.runtimeChunk $#optimizationruntimechunk$
 
 `object` `string` `boolean`
 
@@ -160,7 +160,7 @@ module.exports = {
 };
 ```
 
-## `optimization.emitOnErrors`
+## optimization.emitOnErrors
 
 `boolean = false`
 
@@ -179,7 +179,7 @@ module.exports = {
 
 W> 如果你使用的是 webpack 的 [CLI](/api/cli/)，当这个插件被启用时，webpack 进程不会以错误代码退出。如果你想让 webpack 在使用 CLI 时 "fail"，请查阅 [`bail` 选项](/api/cli/#advanced-options)。
 
-## `optimization.moduleIds` $#optimizationmoduleids$
+## optimization.moduleIds $#optimizationmoduleids$
 
 `boolean: false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
 
@@ -230,7 +230,7 @@ W> `moduleIds: 'deterministic'` 在 webpack 5 中被添加，而且 `moduleIds: 
 
 W> `moduleIds: total-size` 在 webpack 5 中被废弃。
 
-## `optimization.chunkIds` $#optimizationchunkids$
+## optimization.chunkIds $#optimizationchunkids$
 
 `boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic'`
 
@@ -280,7 +280,7 @@ module.exports = {
 };
 ```
 
-## `optimization.nodeEnv` $#optimizationnodeenv$
+## optimization.nodeEnv $#optimizationnodeenv$
 
 `boolean = false` `string`
 
@@ -304,7 +304,7 @@ module.exports = {
 
 T> 当 [mode](/configuration/mode/) 设置为 `'none'` 时，`optimization.nodeEnv` 的默认值为 `false`。
 
-## `optimization.mangleWasmImports` $#optimizationmanglewasmimports$
+## optimization.mangleWasmImports $#optimizationmanglewasmimports$
 
 `boolean = false`
 
@@ -321,7 +321,7 @@ module.exports = {
 };
 ```
 
-## `optimization.removeAvailableModules` $#optimizationremoveavailablemodules$
+## optimization.removeAvailableModules $#optimizationremoveavailablemodules$
 
 `boolean = false`
 
@@ -341,7 +341,7 @@ module.exports = {
 W> `optimization.removeAvailableModules` 会削减了 webapck 的性能表现，而且将会在下一个主要发布版本中，在 `生产` 模式下会被禁用。
 如果你想获得额外的构建性能，请在 `生产` 模式中禁用它。
 
-## `optimization.removeEmptyChunks` $#optimizationremoveemptychunks$
+## optimization.removeEmptyChunks $#optimizationremoveemptychunks$
 
 `boolean = true`
 
@@ -358,7 +358,7 @@ module.exports = {
 };
 ```
 
-## `optimization.mergeDuplicateChunks` $#optimizationmergeduplicatechunks$
+## optimization.mergeDuplicateChunks $#optimizationmergeduplicatechunks$
 
 `boolean = true`
 
@@ -375,7 +375,7 @@ module.exports = {
 };
 ```
 
-## `optimization.flagIncludedChunks` $#optimizationflagincludedchunks$
+## optimization.flagIncludedChunks $#optimizationflagincludedchunks$
 
 `boolean`
 
@@ -392,7 +392,7 @@ module.exports = {
 };
 ```
 
-## `optimization.providedExports` $#optimizationprovidedexports$
+## optimization.providedExports $#optimizationprovidedexports$
 
 `boolean`
 
@@ -409,7 +409,7 @@ module.exports = {
 };
 ```
 
-## `optimization.usedExports` $#optimizationusedexports$
+## optimization.usedExports $#optimizationusedexports$
 
 `boolean = true` `string: 'global'`
 
@@ -438,7 +438,7 @@ module.exports = {
 };
 ```
 
-## `optimization.concatenateModules` $#optimizationconcatenatemodules$
+## optimization.concatenateModules $#optimizationconcatenatemodules$
 
 `boolean`
 
@@ -456,7 +456,7 @@ module.exports = {
 };
 ```
 
-## `optimization.sideEffects` $#optimizationsideeffects$
+## optimization.sideEffects $#optimizationsideeffects$
 
 `boolean = true` `string: 'flag'`
 
@@ -504,7 +504,7 @@ module.exports = {
 
 T> 设置为 `optimization.sideEffects` 时，当模块只包含无副作用的语句时，此模块也会被标记为无副作用。
 
-## `optimization.portableRecords` $#optimizationportablerecords$
+## optimization.portableRecords $#optimizationportablerecords$
 
 `boolean`
 
@@ -524,7 +524,7 @@ module.exports = {
 };
 ```
 
-## `optimization.mangleExports` $#optimizationmangleexports$
+## optimization.mangleExports $#optimizationmangleexports$
 
 `boolean` `string: 'deterministic' | 'size'`
 
@@ -552,7 +552,7 @@ module.exports = {
 };
 ```
 
-## `optimization.innerGraph` $#optimizationinnergraph$
+## optimization.innerGraph $#optimizationinnergraph$
 
 `boolean = true`
 
@@ -569,7 +569,7 @@ module.exports = {
 };
 ```
 
-## `optimization.realContentHash`
+## optimization.realContentHash
 
 `boolean = true`
 
