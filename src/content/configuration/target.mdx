@@ -16,26 +16,16 @@ translators:
   - QC-L
 ---
 
-<<<<<<< HEAD
 webpack 能够为多种环境或 _target_ 构建编译。想要理解什么是 `target` 的详细信息，
 请阅读 [target 概念页面](/concepts/targets/)。
 
-## `target` $#target$
-=======
-Webpack can compile for multiple environments or _targets_. To understand what a `target` is in detail, read through [the targets concept page](/concepts/targets/).
-
-## target
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## target $#target$
 
 `string` `[string]` `false`
 
 告知 webpack 为目标(target)指定一个环境。默认值为 `"browserslist"`，如果没有找到 browserslist 的配置，则默认为 `"web"`
 
-<<<<<<< HEAD
-### `string` $#string$
-=======
-### string
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### string $#string$
 
 通过 [`WebpackOptionsApply`](https://github.com/webpack/webpack/blob/master/lib/WebpackOptionsApply.js)，
 可以支持以下字符串值：
@@ -88,11 +78,7 @@ module.exports = {
 - `browserslist:/path/to/config` - 明确指定 browserslist 配置路径
 - `browserslist:/path/to/config:modern` - 明确指定 browserslist 的配置路径和环境
 
-<<<<<<< HEAD
-### `[string]` $#string$
-=======
-### [string]
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### [string] $#string$
 
 当传递多个目标时，将使用共同的特性子集：
 
@@ -105,11 +91,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-webpack 将生成 web 平台的运行时代码，并且只使用 ES5 相关的特性。
-=======
-Webpack will generate a runtime code for web platform and will use only ES5 features.
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+Webpack 将生成 web 平台的运行时代码，并且只使用 ES5 相关的特性。
 
 目前并不是所有的 target 都可以进行混合。
 
@@ -122,15 +104,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 此时会导致错误。webpack 暂时不支持 universal 的 target。
 
-### `false` $#false$
-=======
-Will cause an error. Webpack does not support universal target for now.
-
-### false
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### false $#false$
 
 如果上述列表中的预设 target 都不符合你的需求，你可以将 `target` 设置为 `false`，这将告诉 webpack 不使用任何插件。
 

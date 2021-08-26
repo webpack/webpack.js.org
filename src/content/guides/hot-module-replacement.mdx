@@ -20,15 +20,11 @@ contributors:
   - dhruvdutt
   - wizardofhogwarts
   - aholzner
-<<<<<<< HEAD
+  - snitin315
 translators:
   - QC-L
   - jacob-lcs
   - lcxfs1991
-=======
-  - snitin315
-
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 related:
   - title: 概念 - 模块热替换
     url: /concepts/hot-module-replacement
@@ -80,10 +76,7 @@ T> 如果你在技术选型中使用了 `webpack-dev-middleware` 而没有使用
   };
 ```
 
-<<<<<<< HEAD
-T> 你可以通过以下命令来修改 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的配置：`webpack serve --hot-only`。
-=======
-you can also provide manual entry points for HMR:
+你也可以为 HMR 提供入口：
 
 **webpack.config.js**
 
@@ -123,8 +116,7 @@ you can also provide manual entry points for HMR:
   };
 ```
 
-T> You can use the CLI to modify the [webpack-dev-server](https://github.com/webpack/webpack-dev-server) configuration with the following command: `webpack serve --hot-only`.
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+T> 你可以通过以下命令来修改 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) 的配置：`webpack serve --hot-only`。
 
 现在，我们来修改 `index.js` 文件，以便当 `print.js` 内部发生变更时可以告诉 webpack 接受更新的模块。
 
@@ -191,11 +183,7 @@ main.js:4395 [WDS] Hot Module Replacement enabled.
 
 `new WebpackDevServer(options, compiler)`
 
-<<<<<<< HEAD
-想要启用 HMR，还需要修改 webpack 配置对象，使其包含 HMR 入口起点。`webpack-dev-server` 依赖包中具有一个叫做 `addDevServerEntrypoints` 的方法，你可以通过使用这个方法来实现。这是关于如何使用的一个基本示例：
-=======
-To enable HMR, you also need to modify your webpack configuration object to include the HMR entry points. Here's a small example of how that might look:
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+想要启用 HMR，还需要修改 webpack 配置对象，使其包含 HMR 入口起点。这是关于如何使用的一个基本示例：
 
 **dev-server.js**
 

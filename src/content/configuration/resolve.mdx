@@ -17,25 +17,16 @@ contributors:
   - anikethsaha
   - chenxsan
   - jamesgeorge007
-<<<<<<< HEAD
+  - snitin315
 translators:
   - lcxfs1991
   - QC-L
   - jacob-lcs
 ---
 
-这些选项能设置模块如何被解析。webpack 提供合理的默认值，但是还是可能会修改一些解析的细节。
-关于 resolver 具体如何工作的更多解释说明，请查看[模块解析](/concepts/module-resolution)。
+这些选项能设置模块如何被解析。webpack 提供合理的默认值，但是还是可能会修改一些解析的细节。关于 resolver 具体如何工作的更多解释说明，请查看[模块解析](/concepts/module-resolution)。
 
-## `resolve` $#resolve$
-=======
-  - snitin315
----
-
-These options change how modules are resolved. Webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at [Module Resolution](/concepts/module-resolution) for more explanation of how the resolver works.
-
-## resolve
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## resolve $#resolve$
 
 `object`
 
@@ -52,11 +43,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.alias` $#resolvealias$
-=======
-### resolve.alias
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.alias $#resolvealias$
 
 `object`
 
@@ -170,11 +157,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.aliasFields` $#resolvealiasfields$
-=======
-### resolve.aliasFields
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.aliasFields  $#resolvealiasfields$
 
 `[string]: ['browser']`
 
@@ -192,11 +175,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.cacheWithContext` $#resolvecachewithcontext$
-=======
-### resolve.cacheWithContext
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.cacheWithContext $#resolvecachewithcontext$
 
 如果启用了不安全缓存，请在缓存键(cache key)中引入 `request.context`。这个选项被 [`enhanced-resolve`](https://github.com/webpack/enhanced-resolve/) 模块考虑在内。从 webpack 3.1.0 开始，在配置了 resolve 或 resolveLoader 插件时，解析缓存(resolve caching)中的上下文(context)会被忽略。这解决了性能衰退的问题。
 
@@ -217,11 +196,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.descriptionFiles` $#resolvedescriptionfiles$
-=======
-### resolve.descriptionFiles
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.descriptionFiles $#resolvedescriptionfiles$
 
 `[string] = ['package.json']`
 
@@ -238,11 +213,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.enforceExtension` $#resolveenforceextension$
-=======
-### resolve.enforceExtension
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.enforceExtension $#resolveenforceextension$
 
 `boolean = false`
 
@@ -347,11 +318,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.mainFields` $#resolvemainfields$
-=======
-### resolve.mainFields
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.mainFields $#resolvemainfields$
 
 `[string]`
 
@@ -394,11 +361,7 @@ module.exports = {
 
 在我们 `import * as Upstream from 'upstream'` 时，这实际上会从 `browser` 属性解析文件。在这里 `browser` 属性是最优先选择的，因为它是 `mainFields` 的第一项。同时，由 webpack 打包的 Node.js 应用程序首先会尝试从 `module` 字段中解析文件。
 
-<<<<<<< HEAD
-### `resolve.mainFiles` $#resolvemainfiles$
-=======
-### resolve.mainFiles
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.mainFiles $#resolvemainfiles$
 
 `[string] = ['index']`
 
@@ -415,11 +378,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.exportsFields` $#resolveexportsfields$
-=======
-### resolve.exportsFields
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.exportsFields $#resolveexportsfields$
 
 `[string] = ['exports']`
 
@@ -436,11 +395,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.modules` $#resolvemodules$
-=======
-### resolve.modules
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.modules $#resolvemodules$
 
 `[string] = ['node_modules']`
 
@@ -479,11 +434,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.unsafeCache` $#resolveunsafecache$
-=======
-### resolve.unsafeCache
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.unsafeCache $#resolveunsafecache$
 
 `RegExp` `[RegExp]` `boolean: true`
 
@@ -516,11 +467,7 @@ module.exports = {
 
 W> 修改缓存路径可能在极少数情况下导致失败。
 
-<<<<<<< HEAD
-### `resolve.plugins` $#resolveplugins$
-=======
-### resolve.plugins
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.plugins $#resolveplugins$
 
 [`[Plugin]`](/plugins/)
 
@@ -538,11 +485,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.preferRelative` $#resolvepreferrelative$
-=======
-### resolve.preferRelative
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.preferRelative $#resolvepreferrelative$
 
 `boolean`
 
@@ -590,11 +533,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.symlinks` $#resolvesymlinks$
-=======
-### resolve.symlinks
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.symlinks $#resolvesymlinks$
 
 `boolean = true`
 
@@ -613,11 +552,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.cachePredicate` $#resolvecachepredicate$
-=======
-### resolve.cachePredicate
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.cachePredicate $#resolvecachepredicate$
 
 `function(module) => boolean`
 
@@ -638,11 +573,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.restrictions` $#resolverestrictions$
-=======
-### resolve.restrictions
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.restrictions $#resolverestrictions$
 
 `[string, RegExp]`
 
@@ -659,11 +590,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### `resolve.roots` $#resolveroots$
-=======
-### resolve.roots
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### resolve.roots $#resolveroots$
 
 `[string]`
 
@@ -724,11 +651,7 @@ module.exports = {
   };
   ```
 
-<<<<<<< HEAD
-## `resolveLoader` $#resolveloader$
-=======
-## resolveLoader
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## resolveLoader $#resolveloader$
 
 `object { modules [string] = ['node_modules'], extensions [string] = ['.js', '.json'], mainFields [string] = ['loader', 'main']}`
 

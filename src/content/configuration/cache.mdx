@@ -49,11 +49,7 @@ module.exports = {
 
 `object`
 
-<<<<<<< HEAD
 `cache.buildDependencies` 是一个针对构建的额外代码依赖的数组对象。webpack 将使用这些项和所有依赖项的哈希值来使文件系统缓存失效。
-=======
-`cache.buildDependencies` is an object of arrays of additional code dependencies for the build. Webpack will use a hash of each of these items and all dependencies to invalidate the filesystem cache.
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 默认是 `webpack/lib` 来获取 webpack 的所有依赖项。
 
@@ -227,11 +223,7 @@ module.exports = {
 
 W> 已迁移到 [snapshot.managedPaths](#managedpaths)
 
-<<<<<<< HEAD
 `cache.managedPaths` 是仅托管路径的包管理器数组。webpack 将避免将他们进行哈希和时间戳处理，假设版本是唯一的，并将其用作快照（用于内存和文件系统缓存）。
-=======
-`cache.managedPaths` is an array of package-manager only managed paths. Webpack will avoid hashing and timestamping them, assume the version is unique and will use it as a snapshot (for both memory and filesystem cache).
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ### cache.maxAge $#cachemaxage$
 

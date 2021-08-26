@@ -21,11 +21,7 @@ translators:
 
 W> 从 webpack 5 开始，你只能在 `node` 选项下配置 `global`、`__filename` 或 `__dirname`。如果需要在 webpack 5 下的 Node.js 中填充 `fs`，请查阅 [resolve.fallback](/configuration/resolve/#resolvefallback) 获取相关帮助。
 
-<<<<<<< HEAD
-## `node` $#node$
-=======
-## node
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## node $#node$
 
 `boolean: false` `object`
 
@@ -44,11 +40,7 @@ module.exports = {
 
 从 webpack 3.0.0 开始，`node` 选项可能被设置为 `false`，以完全关闭 `NodeStuffPlugin` 插件。
 
-<<<<<<< HEAD
-## `node.global` $#nodeglobal$
-=======
-## node.global
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## node.global $#nodeglobal$
 
 `boolean`
 
@@ -61,11 +53,7 @@ T> 如果你正在使用一个需要全局变量的模块，请使用 `ProvidePl
 - `true`: 提供 polyfill.
 - `false`: 不提供任何 polyfill。代码可能会出现 `ReferenceError` 的崩溃。
 
-<<<<<<< HEAD
-## `node.__filename` $#node__filename$
-=======
-## node.\_\_filename
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## node.\_\_filename $#node__filename$
 
 `boolean` `string: 'mock' | 'eval-only'`
 
@@ -75,11 +63,7 @@ T> 如果你正在使用一个需要全局变量的模块，请使用 `ProvidePl
 - `false`: webpack 不会更改 `__filename` 的代码。在 Node.js 环境中运行时，**出**文件的文件名。
 - `'mock'`: value 填充为 `'index.js'`.
 
-<<<<<<< HEAD
-## `node.__dirname` $#node__dirname$
-=======
-## node.\_\_dirname
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## node.\_\_dirname $#node__dirname$
 
 `boolean` `string: 'mock' | 'eval-only'`
 

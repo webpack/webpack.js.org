@@ -42,11 +42,7 @@ example_directory
 require('./template/' + name + '.ejs');
 ```
 
-<<<<<<< HEAD
 webpack 解析 `require()` 调用，然后提取出如下一些信息：
-=======
-Webpack parses the `require()` call and extracts some information:
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ```code
 Directory: ./template
@@ -71,22 +67,14 @@ Regular expression: /^.*\.ejs$/
 
 这意味着 webpack 能够支持动态地 require，但会导致所有可能用到的模块都包含在 bundle 中。
 
-<<<<<<< HEAD
-## `require.context` $#requirecontext$
-=======
-## require.context
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## require.context $#requirecontext$
 
 你还可以通过 `require.context()` 函数来创建自己的 context。
 
 可以给这个函数传入三个参数：一个要搜索的目录，一个标记表示是否还搜索其子目录，
 以及一个匹配文件的正则表达式。
 
-<<<<<<< HEAD
-webpack 会在构建中解析代码中的 `require.context()` 。
-=======
-Webpack parses for `require.context()` in the code while building.
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+Webpack 会在构建中解析代码中的 `require.context()` 。
 
 语法如下：
 

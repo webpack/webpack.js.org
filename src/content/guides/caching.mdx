@@ -30,11 +30,7 @@ T> 本指南继续沿用 [起步](/guides/getting-started)、[管理输出](/gui
 
 ## 输出文件的文件名(output filename) $#output-filenames$
 
-<<<<<<< HEAD
 我们可以通过替换 `output.filename` 中的 [substitutions](/configuration/output/#outputfilename) 设置，来定义输出文件的名称。webpack 提供了一种使用称为 **substitution(可替换模板字符串)** 的方式，通过带括号字符串来模板化文件名。其中，`[contenthash]` substitution 将根据资源内容创建出唯一 hash。当资源内容发生变化时，`[contenthash]` 也会发生变化。
-=======
-We can use the `output.filename` [substitutions](/configuration/output/#outputfilename) setting to define the names of our output files. Webpack provides a method of templating the filenames using bracketed strings called **substitutions**. The `[contenthash]` substitution will add a unique hash based on the content of an asset. When the asset's content changes, `[contenthash]` will change as well.
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 这里使用 [起步](/guides/getting-started) 中的示例和 [管理输出](/guides/output-management) 中的 `plugins` 插件来作为项目基础，所以我们依然不必手动地维护 `index.html` 文件：
 
@@ -99,11 +95,7 @@ W> 输出可能会因当前的 webpack 版本而稍有差异。与旧版本相�
 
 ## 提取引导模板(extracting boilerplate) $#extracting-boilerplate$
 
-<<<<<<< HEAD
 正如我们在 [代码分离](/guides/code-splitting) 中所学到的，[`SplitChunksPlugin`](/plugins/split-chunks-plugin/) 可以用于将模块分离到单独的 bundle 中。webpack 还提供了一个优化功能，可使用 [`optimization.runtimeChunk`](/configuration/optimization/#optimizationruntimechunk) 选项将 runtime 代码拆分为一个单独的 chunk。将其设置为 `single` 来为所有 chunk 创建一个 runtime bundle：
-=======
-As we learned in [code splitting](/guides/code-splitting), the [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) can be used to split modules out into separate bundles. Webpack provides an optimization feature to split runtime code into a separate chunk using the [`optimization.runtimeChunk`](/configuration/optimization/#optimizationruntimechunk) option. Set it to `single` to create a single runtime bundle for all chunks:
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 **webpack.config.js**
 

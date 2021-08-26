@@ -54,11 +54,7 @@ T> 可以在 [这里](/concepts/modules) 了解更多关于 JavaScript 模块和
 
 ## 入口(entry) $#entry$
 
-<<<<<<< HEAD
 **入口起点(entry point)** 指示 webpack 应该使用哪个模块，来作为构建其内部 [依赖图(dependency graph)](/concepts/dependency-graph/) 的开始。进入入口起点后，webpack 会找出有哪些模块和库是入口起点（直接和间接）依赖的。
-=======
-An **entry point** indicates which module webpack should use to begin building out its internal [dependency graph](/concepts/dependency-graph/). Webpack will figure out which other modules and libraries that entry point depends on (directly and indirectly).
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 默认值是 `./src/index.js`，但你可以通过在 [webpack configuration](/configuration) 中配置 `entry` 属性，来指定一个（或多个）不同的入口起点。例如：
 
@@ -174,16 +170,8 @@ module.exports = {
 
 ## 浏览器兼容性(browser compatibility) $#browser-compatibility$
 
-<<<<<<< HEAD
-webpack 支持所有符合 [ES5 标准](https://kangax.github.io/compat-table/es5/) 的浏览器（不支持 IE8 及以下版本）。webpack 的 `import()` 和 `require.ensure()` 需要 `Promise`。如果你想要支持旧版本浏览器，在使用这些表达式之前，还需要 [提前加载 polyfill](/guides/shimming/)。
-=======
-Webpack supports all browsers that are [ES5-compliant](https://kangax.github.io/compat-table/es5/) (IE8 and below are not supported). Webpack needs `Promise` for [`import()` and `require.ensure()`](/guides/code-splitting/#dynamic-imports). If you want to support older browsers, you will need to [load a polyfill](/guides/shimming/) before using these expressions.
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+Webpack 支持所有符合 [ES5 标准](https://kangax.github.io/compat-table/es5/) 的浏览器（不支持 IE8 及以下版本）。webpack 的 `import()` 和 `require.ensure()` 需要 `Promise`。如果你想要支持旧版本浏览器，在使用这些表达式之前，还需要 [提前加载 polyfill](/guides/shimming/)。
 
 ## 环境(environment) $#environment$
 
-<<<<<<< HEAD
-webpack 5 运行于 Node.js v10.13.0+ 的版本。
-=======
-Webpack 5 runs on Node.js version 10.13.0+.
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+Webpack 5 运行于 Node.js v10.13.0+ 的版本。

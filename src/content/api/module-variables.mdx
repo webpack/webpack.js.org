@@ -26,27 +26,15 @@ translators:
 
 本章节涵盖了使用 webpack 编译的代码中所有的**变量**。模块将通过 `module` 和其他变量，来访问编译过程中的某些数据。
 
-<<<<<<< HEAD
-## `module.loaded` (NodeJS) $#moduleloaded-nodejs$
-=======
-## module.loaded (NodeJS)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## module.loaded (NodeJS) $#moduleloaded-nodejs$
 
 `false` 表示该模块正在执行， `true` 表示同步执行已经完成。
 
-<<<<<<< HEAD
-## `module.hot` (webpack-specific) $#modulehot-webpack-specific$
-=======
-## module.hot (webpack-specific)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## module.hot (webpack-specific) $#modulehot-webpack-specific$
 
 表示 [模块热替换(Hot Module Replacement)](/concepts/hot-module-replacement) 是否启用，并给进程提供一个接口。详细说明请查看 [模块热替换 API 页面](/api/hot-module-replacement)。
 
-<<<<<<< HEAD
-## `module.id` (CommonJS) $#moduleid-commonjs$
-=======
-## module.id (CommonJS)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## module.id (CommonJS) $#moduleid-commonjs$
 
 当前模块的 ID。
 
@@ -54,11 +42,7 @@ translators:
 module.id === require.resolve('./file.js');
 ```
 
-<<<<<<< HEAD
-## `module.exports` (CommonJS) $#moduleexports-commonjs$
-=======
-## module.exports (CommonJS)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## module.exports (CommonJS) $#moduleexports-commonjs$
 
 调用者通过 `require` 对模块进行调用时返回的值（默认为一个新对象）。
 
@@ -70,11 +54,7 @@ module.exports = function doSomething() {
 
 W> 无法在异步函数中访问该变量。
 
-<<<<<<< HEAD
-## `exports` (CommonJS) $#exports-commonjs$
-=======
-## exports (CommonJS)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## exports (CommonJS) $#exports-commonjs$
 
 该变量默认值为 `module.exports`（即一个对象）。 如果 `module.exports` 被重写的话， `exports` 不再会被导出。
 
@@ -88,21 +68,13 @@ exports.aFunction = function doSomething() {
 };
 ```
 
-<<<<<<< HEAD
-## `global` (NodeJS) $#global-nodejs$
-=======
-## global (NodeJS)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## global (NodeJS) $#global-nodejs$
 
 见 [node.js global](https://nodejs.org/api/globals.html#globals_global).
 
 出于兼容性考虑，webpack 默认填充了 `global` 变量。
 
-<<<<<<< HEAD
-## `__dirname` (NodeJS) $#__dirname-nodejs$
-=======
-## \_\_dirname (NodeJS)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## \_\_dirname (NodeJS) $#__dirname-nodejs$
 
 取决于 `node.__dirname` 配置选项：
 
@@ -112,11 +84,7 @@ exports.aFunction = function doSomething() {
 
 如果在一个被 Parser 解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
-<<<<<<< HEAD
-## `import.meta.url` $#import-meta-url$
-=======
-## import.meta.url
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## import.meta.url $#import-meta-url$
 
 返回模块以 `file:` 开头绝对路径的 URL。
 
@@ -126,11 +94,7 @@ exports.aFunction = function doSomething() {
 console.log(import.meta.url); // 输出结果类似于 `file:///path/to/your/project/src/index.js`
 ```
 
-<<<<<<< HEAD
-## `import.meta.webpack` $#import-meta-webpack$
-=======
-## import.meta.webpack
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## import.meta.webpack $#import-meta-webpack$
 
 返回 webpack 的版本
 
@@ -144,11 +108,7 @@ console.log(import.meta.webpack); // output `5` for webpack 5
 
 webpack 特定。[`module.hot`](#modulehot-webpack-specific) 的一个别名，[strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm) 中可以使用 `import.meta.webpackHot` 但是不能使用 `module.hot`。
 
-<<<<<<< HEAD
-## `__filename` (NodeJS) $#__filename-nodejs$
-=======
-## \_\_filename (NodeJS)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## \_\_filename (NodeJS) $#__filename-nodejs$
 
 取决于 `node.__filename` 配置选项：
 
@@ -158,11 +118,7 @@ webpack 特定。[`module.hot`](#modulehot-webpack-specific) 的一个别名，[
 
 如果在一个被 Parser 解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
-<<<<<<< HEAD
-## `__resourceQuery` (webpack 特有变量) $#__resourcequery-webpack-specific$
-=======
-## \_\_resourceQuery (webpack-specific)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## \_\_resourceQuery (webpack-specific) $#__resourcequery-webpack-specific$
 
 当前模块的资源查询(resource query) 。如果进行了如下的 `reqiure` 调用，那么查询字符串(query string)在`file.js` 中可访问。
 
@@ -176,19 +132,11 @@ require('file.js?test');
 __resourceQuery === '?test';
 ```
 
-<<<<<<< HEAD
-## `__webpack_public_path__` (webpack 特有变量) $#__webpack_public_path__-webpack-specific$
-=======
-## \_\_webpack_public_path\_\_ (webpack-specific)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## \_\_webpack_public_path\_\_ (webpack-specific) $#__webpack_public_path__-webpack-specific$
 
 等同于 `output.publicPath` 配置选项。
 
-<<<<<<< HEAD
-## `__webpack_require__` (webpack 特有变量) $#__webpack_require__-webpack-specific$
-=======
-## \_\_webpack_require\_\_ (webpack-specific)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## \_\_webpack_require\_\_ (webpack-specific) $#__webpack_require__-webpack-specific$
 
 原始 require 函数。这个表达式不会被解析器解析为依赖。
 
@@ -220,35 +168,19 @@ import('./module-a').then((moduleA) => {
 });
 ```
 
-<<<<<<< HEAD
-## `__webpack_modules__` (webpack 特有变量) $#__webpack_modules__-webpack-specific$
-=======
-## \_\_webpack_modules\_\_ (webpack-specific)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## \_\_webpack_modules\_\_ (webpack-specific) $#__webpack_modules__-webpack-specific$
 
 访问所有模块的内部对象。
 
-<<<<<<< HEAD
-## `__webpack_hash__` (webpack 特有变量) $#__webpack_hash__-webpack-specific$
-=======
-## \_\_webpack_hash\_\_ (webpack-specific)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## \_\_webpack_hash\_\_ (webpack-specific) $#__webpack_hash__-webpack-specific$
 
 这个变量提供对编译过程中(compilation)的 hash 信息的访问。
 
-<<<<<<< HEAD
-## `__non_webpack_require__` (webpack 特有变量) $#__non_webpack_require__-webpack-specific$
-=======
-## \_\_non_webpack_require\_\_ (webpack-specific)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## \_\_non_webpack_require\_\_ (webpack-specific) $#__non_webpack_require__-webpack-specific$
 
 生成一个不会被 webpack 解析的 `require` 函数。配合全局可以获取到的 require 函数，可以完成一些酷炫操作。
 
-<<<<<<< HEAD
-## `__webpack_exports_info__` (webpack 特有变量) $#__webpack_exports_info__-webpack-specific$
-=======
-## \_\_webpack_exports_info\_\_ (webpack-specific)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## \_\_webpack_exports_info\_\_ (webpack-specific) $#__webpack_exports_info__-webpack-specific$
 
 在模块中, `__webpack_exports_info__` 可以被获取到，以便导出模块用以自我检查：
 
@@ -272,11 +204,7 @@ import('./module-a').then((moduleA) => {
 
 - 可以从嵌套的 exports 中得到相关信息: 例如 `__webpack_exports_info__.<exportName>.<exportName>.<exportName>.used`
 
-<<<<<<< HEAD
-## `__webpack_is_included__` (webpack-specific) $#webpack-is-included$
-=======
-## \_\_webpack_is_included\_\_ (webpack-specific)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## \_\_webpack_is_included\_\_ (webpack-specific) $#webpack-is-included$
 
 <Badge text="5.16.0+" />
 
@@ -311,10 +239,6 @@ if (__webpack_is_included__('./module-a.js')) {
 console.log(__webpack_runtime_id__ === 'main');
 ```
 
-<<<<<<< HEAD
-## `DEBUG` (webpack 特有变量) $#debug--webpack-specific$
-=======
-## DEBUG (webpack-specific)
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## DEBUG (webpack-specific) $#debug--webpack-specific$
 
 等同于 `debug` 配置选项。

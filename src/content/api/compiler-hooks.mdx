@@ -48,31 +48,19 @@ compiler.hooks.someHook.tap('MyPlugin', (params) => {
 
 关于钩子类型的描述，请查看 [Tapable 文档](https://github.com/webpack/tapable#tapable).
 
-<<<<<<< HEAD
-### `environment` $#environment$
-=======
-### environment
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### environment $#environment$
 
 `SyncHook`
 
 在编译器准备环境时调用，时机就在配置文件中初始化插件之后。
 
-<<<<<<< HEAD
-### `afterEnvironment` $#afterEnvironment$
-=======
-### afterEnvironment
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### afterEnvironment $#afterEnvironment$
 
 `SyncHook`
 
 当编译器环境设置完成后，在 `environment` hook 后直接调用。
 
-<<<<<<< HEAD
-### `entryOption` $#entryoption$
-=======
-### entryOption
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### entryOption $#entryoption$
 
 `SyncBailHook`
 
@@ -86,11 +74,7 @@ compiler.hooks.entryOption.tap('MyPlugin', (context, entry) => {
 });
 ```
 
-<<<<<<< HEAD
-### `afterPlugins` $#afterplugins$
-=======
-### afterPlugins
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### afterPlugins $#afterplugins$
 
 `SyncHook`
 
@@ -98,11 +82,7 @@ compiler.hooks.entryOption.tap('MyPlugin', (context, entry) => {
 
 - 回调参数：`compiler`
 
-<<<<<<< HEAD
-### `afterResolvers` $#afterresolvers$
-=======
-### afterResolvers
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### afterResolvers $#afterresolvers$
 
 `SyncHook`
 
@@ -110,21 +90,13 @@ resolver 设置完成之后触发。
 
 - 回调参数：`compiler`
 
-<<<<<<< HEAD
-### `initialize` $#initialize$
-=======
-### initialize
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### initialize $#initialize$
 
 `SyncHook`
 
 当编译器对象被初始化时调用。
 
-<<<<<<< HEAD
-### `beforeRun` $#beforerun$
-=======
-### beforeRun
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### beforeRun $#beforerun$
 
 `AsyncSeriesHook`
 
@@ -132,11 +104,7 @@ resolver 设置完成之后触发。
 
 - 回调参数：`compiler`
 
-<<<<<<< HEAD
-### `run` $#run$
-=======
-### run
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### run $#run$
 
 `AsyncSeriesHook`
 
@@ -144,11 +112,7 @@ resolver 设置完成之后触发。
 
 - 回调参数：`compiler`
 
-<<<<<<< HEAD
-### `watchRun` $#watchrun$
-=======
-### watchRun
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### watchRun $#watchrun$
 
 `AsyncSeriesHook`
 
@@ -156,11 +120,7 @@ resolver 设置完成之后触发。
 
 - 回调参数：`compiler`
 
-<<<<<<< HEAD
-### `normalModuleFactory` $#normalmodulefactory$
-=======
-### normalModuleFactory
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### normalModuleFactory $#normalmodulefactory$
 
 `SyncHook`
 
@@ -168,11 +128,7 @@ resolver 设置完成之后触发。
 
 - 回调参数：`normalModuleFactory`
 
-<<<<<<< HEAD
-### `contextModuleFactory` $#contextmodulefactory$
-=======
-### contextModuleFactory
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### contextModuleFactory $#contextmodulefactory$
 
 `SyncHook`
 
@@ -180,11 +136,7 @@ resolver 设置完成之后触发。
 
 - 回调参数：`contextModuleFactory`
 
-<<<<<<< HEAD
-### `beforeCompile` $#beforecompile$
-=======
-### beforeCompile
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### beforeCompile $#beforecompile$
 
 `AsyncSeriesHook`
 
@@ -210,11 +162,7 @@ compiler.hooks.beforeCompile.tapAsync('MyPlugin', (params, callback) => {
 });
 ```
 
-<<<<<<< HEAD
-### `compile` $#compile$
-=======
-### compile
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### compile $#compile$
 
 `SyncHook`
 
@@ -222,11 +170,7 @@ compiler.hooks.beforeCompile.tapAsync('MyPlugin', (params, callback) => {
 
 - 回调参数：`compilationParams`
 
-<<<<<<< HEAD
-### `thisCompilation` $#thiscompilation$
-=======
-### thisCompilation
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### thisCompilation $#thiscompilation$
 
 `SyncHook`
 
@@ -234,11 +178,7 @@ compiler.hooks.beforeCompile.tapAsync('MyPlugin', (params, callback) => {
 
 - 回调参数：`compilation`, `compilationParams`
 
-<<<<<<< HEAD
-### `compilation` $#compilation$
-=======
-### compilation
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### compilation $#compilation$
 
 `SyncHook`
 
@@ -246,11 +186,7 @@ compilation 创建之后执行。
 
 - 回调参数：`compilation`, `compilationParams`
 
-<<<<<<< HEAD
-### `make` $#make$
-=======
-### make
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### make $#make$
 
 `AsyncParallelHook`
 
@@ -258,11 +194,7 @@ compilation 结束之前执行。
 
 - 回调参数：`compilation`
 
-<<<<<<< HEAD
-### `afterCompile` $#aftercompile$
-=======
-### afterCompile
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### afterCompile $#aftercompile$
 
 `AsyncSeriesHook`
 
@@ -270,11 +202,7 @@ compilation 结束和封印之后执行。
 
 - 回调参数：`compilation`
 
-<<<<<<< HEAD
-### `shouldEmit` $#shouldemit$
-=======
-### shouldEmit
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### shouldEmit $#shouldemit$
 
 `SyncBailHook`
 
@@ -289,11 +217,7 @@ compiler.hooks.shouldEmit.tap('MyPlugin', (compilation) => {
 });
 ```
 
-<<<<<<< HEAD
-### `emit` $#emit$
-=======
-### emit
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### emit $#emit$
 
 `AsyncSeriesHook`
 
@@ -301,11 +225,7 @@ compiler.hooks.shouldEmit.tap('MyPlugin', (compilation) => {
 
 - 回调参数：`compilation`
 
-<<<<<<< HEAD
-### `afterEmit` $#afteremit$
-=======
-### afterEmit
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### afterEmit $#afteremit$
 
 `AsyncSeriesHook`
 
@@ -313,11 +233,7 @@ compiler.hooks.shouldEmit.tap('MyPlugin', (compilation) => {
 
 - 回调参数：`compilation`
 
-<<<<<<< HEAD
-### `assetEmitted` $#assetemitted$
-=======
-### assetEmitted
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### assetEmitted $#assetemitted$
 
 `AsyncSeriesHook`
 
@@ -336,11 +252,7 @@ compiler.hooks.assetEmitted.tap(
 );
 ```
 
-<<<<<<< HEAD
-### `done` $#done$
-=======
-### done
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### done $#done$
 
 `AsyncSeriesHook`
 
@@ -354,11 +266,7 @@ compiler.hooks.assetEmitted.tap(
 
 This hook allows you to do a one more additional pass of the build.
 
-<<<<<<< HEAD
-### `failed` $#failed$
-=======
-### failed
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### failed $#failed$
 
 `SyncHook`
 
@@ -366,11 +274,7 @@ This hook allows you to do a one more additional pass of the build.
 
 - 回调参数：`error`
 
-<<<<<<< HEAD
-### `invalid` $#invalid$
-=======
-### invalid
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### invalid $#invalid$
 
 `SyncHook`
 
@@ -378,21 +282,13 @@ This hook allows you to do a one more additional pass of the build.
 
 - 回调参数：`fileName`, `changeTime`
 
-<<<<<<< HEAD
-### `watchClose` $#watchclose$
-=======
-### watchClose
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### watchClose $#watchclose$
 
 `SyncHook`
 
 在一个观察中的 compilation 停止时执行。
 
-<<<<<<< HEAD
-### `infrastructureLog` $#infrastructurelog$
-=======
-### infrastructureLog
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### infrastructureLog $#infrastructurelog$
 
 `SyncBailHook`
 
@@ -400,11 +296,7 @@ This hook allows you to do a one more additional pass of the build.
 
 - 回调参数：`name`, `type`, `args`
 
-<<<<<<< HEAD
-### `log` $#log$
-=======
-### log
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### log $#log$
 
 `SyncBailHook`
 

@@ -270,11 +270,7 @@ console.log(pkg.version);
 
 ### loader 的 getOptions 方法 $#getoptions-method-for-loaders$
 
-<<<<<<< HEAD
-webpack 5 发布后，在 loader 的上下文中，会带有内置的 [`this.getOptions`](/api/loaders/#thisgetoptionsschema) 方法。这对于那些使用之前推荐 [schema-utils](https://github.com/webpack/schema-utils) 中的 `getOptions` 方法的 loader 而言，这是一个重大更新：
-=======
-Webpack 5 ships with built-in [`this.getOptions`](/api/loaders/#thisgetoptionsschema) method available in loader context. This is a breaking change for loaders that had been using `getOptions` method from previously preferred [schema-utils](https://github.com/webpack/schema-utils):
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+Webpack 5 发布后，在 loader 的上下文中，会带有内置的 [`this.getOptions`](/api/loaders/#thisgetoptionsschema) 方法。这对于那些使用之前推荐 [schema-utils](https://github.com/webpack/schema-utils) 中的 `getOptions` 方法的 loader 而言，这是一个重大更新：
 
 - `this.getOptions` 自 webpack 5 起支持使用
 - 它支持将 JSON 作为查询字符串，而不仅仅是 JSON5：如 `?{arg:true}` → `?{"arg":true}`。在相应的 loader 文档中，应推荐使用 JSON 并不推荐使用 JSON5。

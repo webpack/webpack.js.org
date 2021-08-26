@@ -26,11 +26,7 @@ translators:
 从 webpack 4 开始，会根据你选择的 [`mode`](/concepts/mode/) 来执行不同的优化，
 不过所有的优化还是可以手动配置和重写。
 
-<<<<<<< HEAD
-## `optimization.minimize` $#optimizationminimize$
-=======
-## optimization.minimize
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.minimize $#optimizationminimize$
 
 `boolean = true`
 
@@ -50,11 +46,7 @@ module.exports = {
 
 T> 了解 [mode](/concepts/mode/) 工作机制。
 
-<<<<<<< HEAD
-## `optimization.minimizer` $#optimizationminimizer$
-=======
-## optimization.minimizer
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.minimizer $#optimizationminimizer$
 
 `[TerserPlugin]` 或 `[function (compiler)]`
 
@@ -107,22 +99,14 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `optimization.splitChunks` $#optimizationsplitchunks$
-=======
-## optimization.splitChunks
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.splitChunks $#optimizationsplitchunks$
 
 `object`
 
 对于动态导入模块，默认使用 webpack v4+ 提供的全新的通用分块策略(common chunk strategy)。请在 [SplitChunksPlugin](/plugins/split-chunks-plugin/)
 页面中查看配置其行为的可用选项。
 
-<<<<<<< HEAD
-## `optimization.runtimeChunk` $#optimizationruntimechunk$
-=======
-## optimization.runtimeChunk
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.runtimeChunk $#optimizationruntimechunk$
 
 `object` `string` `boolean`
 
@@ -195,11 +179,7 @@ module.exports = {
 
 W> 如果你使用的是 webpack 的 [CLI](/api/cli/)，当这个插件被启用时，webpack 进程不会以错误代码退出。如果你想让 webpack 在使用 CLI 时 "fail"，请查阅 [`bail` 选项](/api/cli/#advanced-options)。
 
-<<<<<<< HEAD
-## `optimization.moduleIds` $#optimizationmoduleids$
-=======
-## optimization.moduleIds
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.moduleIds $#optimizationmoduleids$
 
 `boolean: false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
 
@@ -250,11 +230,7 @@ W> `moduleIds: 'deterministic'` 在 webpack 5 中被添加，而且 `moduleIds: 
 
 W> `moduleIds: total-size` 在 webpack 5 中被废弃。
 
-<<<<<<< HEAD
-## `optimization.chunkIds` $#optimizationchunkids$
-=======
-## optimization.chunkIds
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.chunkIds $#optimizationchunkids$
 
 `boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic'`
 
@@ -304,11 +280,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `optimization.nodeEnv` $#optimizationnodeenv$
-=======
-## optimization.nodeEnv
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.nodeEnv $#optimizationnodeenv$
 
 `boolean = false` `string`
 
@@ -332,11 +304,7 @@ module.exports = {
 
 T> 当 [mode](/configuration/mode/) 设置为 `'none'` 时，`optimization.nodeEnv` 的默认值为 `false`。
 
-<<<<<<< HEAD
-## `optimization.mangleWasmImports` $#optimizationmanglewasmimports$
-=======
-## optimization.mangleWasmImports
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.mangleWasmImports $#optimizationmanglewasmimports$
 
 `boolean = false`
 
@@ -353,11 +321,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `optimization.removeAvailableModules` $#optimizationremoveavailablemodules$
-=======
-## optimization.removeAvailableModules
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.removeAvailableModules $#optimizationremoveavailablemodules$
 
 `boolean = false`
 
@@ -377,11 +341,7 @@ module.exports = {
 W> `optimization.removeAvailableModules` 会削减了 webapck 的性能表现，而且将会在下一个主要发布版本中，在 `生产` 模式下会被禁用。
 如果你想获得额外的构建性能，请在 `生产` 模式中禁用它。
 
-<<<<<<< HEAD
-## `optimization.removeEmptyChunks` $#optimizationremoveemptychunks$
-=======
-## optimization.removeEmptyChunks
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.removeEmptyChunks $#optimizationremoveemptychunks$
 
 `boolean = true`
 
@@ -398,11 +358,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `optimization.mergeDuplicateChunks` $#optimizationmergeduplicatechunks$
-=======
-## optimization.mergeDuplicateChunks
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.mergeDuplicateChunks $#optimizationmergeduplicatechunks$
 
 `boolean = true`
 
@@ -419,11 +375,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `optimization.flagIncludedChunks` $#optimizationflagincludedchunks$
-=======
-## optimization.flagIncludedChunks
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.flagIncludedChunks $#optimizationflagincludedchunks$
 
 `boolean`
 
@@ -440,11 +392,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `optimization.providedExports` $#optimizationprovidedexports$
-=======
-## optimization.providedExports
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.providedExports $#optimizationprovidedexports$
 
 `boolean`
 
@@ -461,11 +409,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `optimization.usedExports` $#optimizationusedexports$
-=======
-## optimization.usedExports
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.usedExports $#optimizationusedexports$
 
 `boolean = true` `string: 'global'`
 
@@ -494,11 +438,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `optimization.concatenateModules` $#optimizationconcatenatemodules$
-=======
-## optimization.concatenateModules
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.concatenateModules $#optimizationconcatenatemodules$
 
 `boolean`
 
@@ -516,11 +456,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `optimization.sideEffects` $#optimizationsideeffects$
-=======
-## optimization.sideEffects
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.sideEffects $#optimizationsideeffects$
 
 `boolean = true` `string: 'flag'`
 
@@ -568,11 +504,7 @@ module.exports = {
 
 T> 设置为 `optimization.sideEffects` 时，当模块只包含无副作用的语句时，此模块也会被标记为无副作用。
 
-<<<<<<< HEAD
-## `optimization.portableRecords` $#optimizationportablerecords$
-=======
-## optimization.portableRecords
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.portableRecords $#optimizationportablerecords$
 
 `boolean`
 
@@ -592,11 +524,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `optimization.mangleExports` $#optimizationmangleexports$
-=======
-## optimization.mangleExports
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.mangleExports $#optimizationmangleexports$
 
 `boolean` `string: 'deterministic' | 'size'`
 
@@ -624,11 +552,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## `optimization.innerGraph` $#optimizationinnergraph$
-=======
-## optimization.innerGraph
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## optimization.innerGraph $#optimizationinnergraph$
 
 `boolean = true`
 

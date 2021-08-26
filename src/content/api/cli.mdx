@@ -42,20 +42,6 @@ translators:
 
 webpack-cli 提供了许多命令来使 webpack 的工作变得更简单。默认情况下，webpack 提供了以下命令：
 
-<<<<<<< HEAD
-| 命令                                  | 使用                                      | 描述                                                                 |
-| ------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------- |
-| `build`                               | `build\|bundle\|b [entries...] [options]` | 运行 webpack（默认命令，可以被省略）。                               |
-| [`configtest`](#configtest)           | `configtest\|t [config-path]`             | 校验 webpack 配置。                                                  |
-| [`help`](#help)                       | `help\|h [command] [option]`              | 展示所有命令和选项的帮助。                                           |
-| [`info`](#info)                       | `info\|i [options]`                       | 输出有关系统的信息。                                                 |
-| [`init`](#init)                       | `init\|c [scaffold...] [options]`         | 初始化一个新的 webpack 配置。                                        |
-| `loader`                              | `loader\|l [output-path]`                 | 生成一个 loader 仓库。                                               |
-| `plugin`                              | `plugin\|p [output-path]`                 | 生成一个 plugin 仓库。                                               |
-| [`serve`](/configuration/dev-server/) | `serve\|s [options]`                      | 运行 `webpack-dev-server`.                                           |
-| [`version`](#version)                 | `version\|v [commands...]`                | 输出 `webpack`，`webpack-cli` 以及 `webpack-dev-server` 的版本信息。 |
-| `watch`                               | `watch\|w [entries...] [options]`         | 运行 webpack 并监听文件变化。                                        |
-=======
 | Command                     | Usage                                                 | Description                                                                     |
 | --------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------- |
 | [`build`](#build)           | `build\|bundle\|b [entries...] [options]`             | Run webpack (default command, can be omitted).                                  |
@@ -69,20 +55,19 @@ webpack-cli 提供了许多命令来使 webpack 的工作变得更简单。默�
 | [`version`](#version)       | `version\|v [commands...]`                            | Output the version number of `webpack`, `webpack-cli` and `webpack-dev-server`. |
 | [`watch`](#watch)           | `watch\|w [entries...] [options]`                     | Run webpack and watch for files changes.                                        |
 
-### Build
+### Build $#build$
 
-Run webpack (default command, can be omitted).
+运行 webpack（默认命令，可用输出文件）。
 
 ```bash
 npx webpack build [options]
 ```
 
-**example**
+**示例**
 
 ```bash
 npx webpack build --config ./webpack.config.js --stats verbose
 ```
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
 
 ### Init $#init$
 
@@ -118,63 +103,59 @@ npx webpack init ./my-app --force --template=default
 
 T> 点击 [这里](https://github.com/webpack/webpack-cli/blob/master/packages/generators/INIT.md) 获取 `webpack init` 命令的完整文档。
 
-<<<<<<< HEAD
-### Info $#info$
-=======
-### Loader
+### Loader $#loader$
 
-Scaffold a loader.
+初始化一个 loader。
 
 ```bash
 npx webpack loader [output-path] [options]
 ```
 
-**example**
+**示例**
 
 ```bash
 npx webpack loader ./my-loader --template=default
 ```
 
-#### Output Path
+#### Output Path $#outputpath$
 
-Path to the output directory, e.g. `./loader-name`.
+输出文件夹，例如 `./loader-name`。
 
-#### Options
+#### Options $#options$
 
 **`-t`, `--template`**
 
 `string = 'default'`
 
-Type of template.
+模板类型。
 
-### Plugin
+### Plugin $#plugin$
 
-Scaffold a plugin.
+初始化一个插件。
 
 ```bash
 npx webpack plugin [output-path] [options]
 ```
 
-**example**
+**示例**
 
 ```bash
 npx webpack plugin ./my-loader --template=default
 ```
 
-#### Output Path
+#### Output Path $#outputpath$
 
-Path to the output directory, e.g. `./plugin-name`.
+输出文件夹，例如 `./plugin-name`.
 
-#### Options
+#### Options $#options$
 
 **`-t`, `--template`**
 
 `string = 'default'`
 
-Type of template.
+模板类型。
 
-### Info
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+### Info $#info$
 
 输出你的系统信息。
 
@@ -214,41 +195,37 @@ npx webpack configtest ./webpack.config.js
 
 你的 webpack 配置文件路径。默认为 `./webpack.config.js`。
 
-<<<<<<< HEAD
-## Flags $#flags$
-=======
-### Serve
+### Serve $#serve$
 
-Run the webpack dev server.
+运行 webpack 开发服务器。
 
 ```bash
 npx webpack serve [options]
 ```
 
-**example**
+**示例**
 
 ```bash
 npx webpack serve --static --open
 ```
 
-T> See the [full list of options for `webpack serve` command](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS-v4.md) and [related documentation for webpack-dev-server](/configuration/dev-server).
+T> 查看 [`webpack serve` 命令的所有可用配置项](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS-v4.md) 和 [webpack-dev-server 的相关文档](/configuration/dev-server)。
 
-### Watch
+### Watch $#watch$
 
-Run webpack and watch for files changes.
+运行 webpack 并且监听文件变化。
 
 ```bash
 npx webpack watch [options]
 ```
 
-**example**
+**示例**
 
 ```bash
 npx webpack watch --mode development
 ```
 
-## Flags
->>>>>>> 4db15f6f03f5ff286192bc41da319b0171baea4e
+## Flags $#flags$
 
 默认情况下，webpack 提供了以下 flag：
 
