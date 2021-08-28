@@ -10,40 +10,40 @@ related:
     url: https://github.com/webpack/webpack/blob/master/test/configCases/plugins/banner-plugin-hashing/webpack.config.js
 ---
 
-Adds a banner to the top of each generated chunk.
+为每个 chunk 文件头部添加 banner。
 
 ```javascript
 const webpack = require('webpack');
 
 new webpack.BannerPlugin(banner);
-// or
+// 或者
 new webpack.BannerPlugin(options);
 ```
 
-## Options $#options$
+## 选项 $#options$
 
 ```ts
 {
-  banner: string | function, // the banner as string or function, it will be wrapped in a comment
-  raw: boolean, // if true, banner will not be wrapped in a comment
-  entryOnly: boolean, // if true, the banner will only be added to the entry chunks
-  test: string | RegExp | [string, RegExp], // Include all modules that pass test assertion.
-  include: string | RegExp | [string, RegExp], // Include all modules matching any of these conditions.
-  exclude: string | RegExp | [string, RegExp], // Exclude all modules matching any of these conditions.
+  banner: string | function, // 其值为字符串或函数，将作为注释存在
+  raw: boolean, // 如果值为 true，将直接输出，不会被作为注释
+  entryOnly: boolean, // 如果值为 true，将只在入口 chunks 文件中添加
+  test: string | RegExp | [string, RegExp], // 包含所有匹配的模块
+  include: string | RegExp | [string, RegExp], // 根据条件匹配所有模块
+  exclude: string | RegExp | [string, RegExp], // 根据条件排除所有模块
 }
 ```
 
-## Usage $#usage$
+## 用法 $#usage$
 
 ```javascript
 import webpack from 'webpack';
 
-// string
+// 字符串
 new webpack.BannerPlugin({
   banner: 'hello world',
 });
 
-// function
+// 函数
 new webpack.BannerPlugin({
   banner: (yourVariable) => {
     return `yourVariable: ${yourVariable}`;
@@ -51,9 +51,9 @@ new webpack.BannerPlugin({
 });
 ```
 
-## Placeholders $#placeholders$
+## 占位符 $#placeholders$
 
-Since webpack 2.5.0, placeholders are evaluated in the `banner` string:
+从 webpack 2.5.0 开始，会对 `banner` 字符串中的占位符取值：
 
 ```javascript
 import webpack from 'webpack';
