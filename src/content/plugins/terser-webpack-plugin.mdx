@@ -68,23 +68,13 @@ module.exports = {
 
 |                   选项名                    |                                      类型                                       |                             默认值                             | 描述                                                                  |
 | :---------------------------------------: | :-----------------------------------------------------------------------------: | :-------------------------------------------------------------: | :--------------------------------------------------------------------------- |
-<<<<<<< HEAD
 |            **[`test`](#test)**            |                     `String\|RegExp\|Array<String\|RegExp>`                     |                       `/\.m?js(\?.*)?$/i`                       | 用来匹配需要压缩的文件。                                                 |
 |         **[`include`](#include)**         |                     `String\|RegExp\|Array<String\|RegExp>`                     |                           `undefined`                           | 匹配参与压缩的文件。                                                            |
 |            **[`exclude`](#)**             |                     `String\|RegExp\|Array<String\|RegExp>`                     |                           `undefined`                           | 匹配不需要压缩的文件。                                                            |
 |        **[`parallel`](#parallel)**        |                                `Boolean\|Number`                                |                             `true`                              | 使用多进程并发运行以提高构建速度。               |
-|          **[`minify`](#minify)**          |                                   `Function`                                    |                           `undefined`                           | 允许你自定义压缩函数。                              |
+|          **[`minify`](#minify)**          |                                   `Function`                                    |                           `TerserPlugin.terserMinify`                           | 允许你自定义压缩函数。                              |
 |   **[`terserOptions`](#terseroptions)**   |                                    `Object`                                     | [`default`](https://github.com/terser-js/terser#minify-options) | Terser 的 [minify 选项](https://github.com/terser-js/terser#minify-options)。 |
 | **[`extractComments`](#extractcomments)** | `Boolean\|String\|RegExp\|Function<(node, comment) -> Boolean\|Object>\|Object` |                             `true`                              | 注释是否需要提取到一个单独的文件中。                      |
-=======
-|            **[`test`](#test)**            |                     `String\|RegExp\|Array<String\|RegExp>`                     |                       `/\.m?js(\?.*)?$/i`                       | Test to match files against.                                                 |
-|         **[`include`](#include)**         |                     `String\|RegExp\|Array<String\|RegExp>`                     |                           `undefined`                           | Files to include.                                                            |
-|         **[`exclude`](#exclude)**         |                     `String\|RegExp\|Array<String\|RegExp>`                     |                           `undefined`                           | Files to exclude.                                                            |
-|        **[`parallel`](#parallel)**        |                                `Boolean\|Number`                                |                             `true`                              | Use multi-process parallel running to improve the build speed.               |
-|          **[`minify`](#minify)**          |                                   `Function`                                    |                   `TerserPlugin.terserMinify`                   | Allows you to override default minify function.                              |
-|   **[`terserOptions`](#terseroptions)**   |                                    `Object`                                     | [`default`](https://github.com/terser-js/terser#minify-options) | Terser [minify options](https://github.com/terser-js/terser#minify-options). |
-| **[`extractComments`](#extractcomments)** | `Boolean\|String\|RegExp\|Function<(node, comment) -> Boolean\|Object>\|Object` |                             `true`                              | Whether comments shall be extracted to a separate file.                      |
->>>>>>> 64b4699301e3c9048bd5a49eaf4529e76c851b91
 
 ### `test` $#test$
 
@@ -204,13 +194,8 @@ module.exports = {
 
 ### `minify` $#minify$
 
-<<<<<<< HEAD
 类型： `Function`
-默认值： `undefined`
-=======
-Type: `Function`
-Default: `TerserPlugin.terserMinify`
->>>>>>> 64b4699301e3c9048bd5a49eaf4529e76c851b91
+默认值： `TerserPlugin.terserMinify`
 
 允许你自定义压缩函数。
 默认情况下，插件使用 [terser](https://github.com/terser-js/terser) 库。
@@ -663,12 +648,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## 贡献 $#contributing$
-=======
-### Typescript
+### Typescript $#typescript$
 
-With default terser minify function:
+使用默认 terser 压缩函数：
 
 ```ts
 module.exports = {
@@ -685,7 +667,7 @@ module.exports = {
 };
 ```
 
-With built-in minify functions:
+使用内置压缩函数：
 
 ```ts
 import type { SwcMinifyFunction } from "terser-webpack-plugin";
@@ -713,8 +695,7 @@ module.exports = {
 };
 ```
 
-## Contributing
->>>>>>> 64b4699301e3c9048bd5a49eaf4529e76c851b91
+## Contributing $#contributing$
 
 请花一点时间阅读我们的贡献指南。
 
