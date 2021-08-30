@@ -171,6 +171,21 @@ module.exports = {
 };
 ```
 
+### stats.nestedModules
+
+`boolean`
+
+Tells `stats` whether to add information about modules nested in other modules (like with module concatenation).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    nestedModules: true,
+  },
+};
+```
+
 ### stats.nestedModulesSpace
 
 `number = 10`
