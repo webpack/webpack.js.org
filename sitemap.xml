@@ -16,10 +16,10 @@
         <loc>https://webpack.js.org/branding</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts</loc>
+        <loc>https://webpack.js.org/comparison</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/comparison</loc>
+        <loc>https://webpack.js.org/concepts</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration</loc>
@@ -94,10 +94,10 @@
         <loc>https://webpack.js.org/api/module-methods</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/node</loc>
+        <loc>https://webpack.js.org/api/module-variables</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/module-variables</loc>
+        <loc>https://webpack.js.org/api/node</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/normalmodulefactory-hooks</loc>
@@ -121,16 +121,13 @@
         <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/blog/printable</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/blog/2020-12-08-roadmap-2021</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
+        <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/configuration</loc>
+        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/entry-points</loc>
@@ -139,10 +136,16 @@
         <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/concepts/configuration</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/concepts/loaders</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/manifest</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/mode</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/module-federation</loc>
@@ -167,9 +170,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/why-webpack</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/mode</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/cache</loc>
@@ -292,10 +292,10 @@
         <loc>https://webpack.js.org/guides/code-splitting-async</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/code-splitting-import</loc>
+        <loc>https://webpack.js.org/guides/code-splitting-css</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/code-splitting-css</loc>
+        <loc>https://webpack.js.org/guides/code-splitting-import</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting-libraries</loc>
@@ -421,10 +421,10 @@
         <loc>https://webpack.js.org/loaders/raw-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/remark-loader</loc>
+        <loc>https://webpack.js.org/loaders/sass-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/sass-loader</loc>
+        <loc>https://webpack.js.org/loaders/remark-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/source-map-loader</loc>
@@ -580,10 +580,10 @@
         <loc>https://webpack.js.org/pluginsapi/template</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/compilation</loc>
+        <loc>https://webpack.js.org/api/plugins/compiler</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/compiler</loc>
+        <loc>https://webpack.js.org/api/plugins/compilation</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/module-factories</loc>
