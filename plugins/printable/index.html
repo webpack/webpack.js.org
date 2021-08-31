@@ -3749,7 +3749,7 @@ You can pass in a different formatter for the output file, if none is passed in 
 <a href="https://github.com/webpack-contrib/terser-webpack-plugin/actions"><img src="https://github.com/webpack-contrib/terser-webpack-plugin/workflows/terser-webpack-plugin/badge.svg" alt="tests"/></a>
 <a href="https://codecov.io/gh/webpack-contrib/terser-webpack-plugin"><img src="https://codecov.io/gh/webpack-contrib/terser-webpack-plugin/branch/master/graph/badge.svg" alt="cover"/></a>
 <a href="https://gitter.im/webpack/webpack"><img src="https://img.shields.io/badge/gitter-webpack%2Fwebpack-brightgreen.svg" alt="chat"/></a>
-<a href="https://packagephobia.now.sh/result?p=terser-webpack-plugin"><img src="https://packagephobia.now.sh/badge?p=terser-webpack-plugin" alt="size"/></a></p><p>This plugin uses <a href="https://github.com/terser-js/terser">terser</a> to minify your JavaScript.</p><h2 id="getting-started">Getting Started<a href="#getting-started" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p>Webpack v5 comes with the latest <code>terser-webpack-plugin</code> out of the box. If you are using Webpack v5 or above and wish to customize the options, you will still need to install <code>terser-webpack-plugin</code>. Using Webpack v4, you have to install <code>terser-webpack-plugin</code> v4.</p><p>To begin, you&#x27;ll need to install <code>terser-webpack-plugin</code>:</p><pre><code class="hljs language-console">$ npm install terser-webpack-plugin --save-dev
+<a href="https://packagephobia.now.sh/result?p=terser-webpack-plugin"><img src="https://packagephobia.now.sh/badge?p=terser-webpack-plugin" alt="size"/></a></p><p>This plugin uses <a href="https://github.com/terser-js/terser">terser</a> to minify/minimize your JavaScript.</p><h2 id="getting-started">Getting Started<a href="#getting-started" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p>Webpack v5 comes with the latest <code>terser-webpack-plugin</code> out of the box. If you are using Webpack v5 or above and wish to customize the options, you will still need to install <code>terser-webpack-plugin</code>. Using Webpack v4, you have to install <code>terser-webpack-plugin</code> v4.</p><p>To begin, you&#x27;ll need to install <code>terser-webpack-plugin</code>:</p><pre><code class="hljs language-console">$ npm install terser-webpack-plugin --save-dev
 </code></pre><p>Then add the plugin to your <code>webpack</code> config. For example:</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js"><span class="token keyword">const</span> TerserPlugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;terser-webpack-plugin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
@@ -3810,7 +3810,38 @@ Default number of concurrent runs: <code>os.cpus().length - 1</code>.</p><blockq
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="minify"><code>minify</code><a href="#minify" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>Type: <code>Function</code>
 Default: <code>TerserPlugin.terserMinify</code></p><p>Allows you to override default minify function.
 By default plugin uses <a href="https://github.com/terser-js/terser">terser</a> package.
-Useful for using and testing unpublished versions or forks.</p><blockquote><p>⚠️ <strong>Always use <code>require</code> inside <code>minify</code> function when <code>parallel</code> option enabled</strong>.</p></blockquote><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+Useful for using and testing unpublished versions or forks.</p><blockquote><p>⚠️ <strong>Always use <code>require</code> inside <code>minify</code> function when <code>parallel</code> option enabled</strong>.</p></blockquote><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js"><span class="token comment">// Can be async</span>
+<span class="token keyword">const</span> <span class="token function-variable function">minify</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">input<span class="token punctuation">,</span> sourceMap<span class="token punctuation">,</span> minimizerOptions<span class="token punctuation">,</span> extractsComments</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// The `minimizerOptions` option contains option from the `terserOptions` option</span>
+  <span class="token comment">// You can use `minimizerOptions.myCustomOption`</span>
+
+  <span class="token comment">// Custom logic for extract comments</span>
+  <span class="token keyword">const</span> <span class="token punctuation">{</span> map<span class="token punctuation">,</span> code <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;uglify-module&quot;</span><span class="token punctuation">)</span> <span class="token comment">// Or require(&#x27;./path/to/uglify-module&#x27;)</span>
+    <span class="token punctuation">.</span><span class="token function">minify</span><span class="token punctuation">(</span>input<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      <span class="token comment">/* Your options for minification */</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">{</span> map<span class="token punctuation">,</span> code<span class="token punctuation">,</span> warnings<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> errors<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> extractedComments<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Used to regenerate `fullhash`/`chunkhash` between different implementation</span>
+<span class="token comment">// Example: you fix a bug in custom minimizer/custom function, but unfortunately webpack doesn&#x27;t know about it, so you will get the same fullhash/chunkhash</span>
+<span class="token comment">// to avoid this you can provide version of your custom minimizer</span>
+<span class="token comment">// You don&#x27;t need if you use only `contenthash`</span>
+minify<span class="token punctuation">.</span><span class="token function-variable function">getMinimizerVersion</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> packageJson<span class="token punctuation">;</span>
+
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token comment">// eslint-disable-next-line global-require, import/no-extraneous-dependencies</span>
+    packageJson <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;uglify-module/package.json&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Ignore</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> packageJson <span class="token operator">&amp;&amp;</span> packageJson<span class="token punctuation">.</span>version<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -3818,26 +3849,12 @@ Useful for using and testing unpublished versions or forks.</p><blockquote><p>�
         terserOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
           myCustomOption<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token comment">// Can be async</span>
-        <span class="token function-variable function">minify</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">input<span class="token punctuation">,</span> sourceMap<span class="token punctuation">,</span> minimizerOptions<span class="token punctuation">,</span> extractsComments</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
-          <span class="token comment">// The `minimizerOptions` option contains option from the `terserOptions` option</span>
-          <span class="token comment">// You can use `minimizerOptions.myCustomOption`</span>
-          <span class="token keyword">const</span> extractedComments <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-          <span class="token comment">// Custom logic for extract comments</span>
-
-          <span class="token keyword">const</span> <span class="token punctuation">{</span> map<span class="token punctuation">,</span> code <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&quot;uglify-module&quot;</span><span class="token punctuation">)</span> <span class="token comment">// Or require(&#x27;./path/to/uglify-module&#x27;)</span>
-            <span class="token punctuation">.</span><span class="token function">minify</span><span class="token punctuation">(</span>input<span class="token punctuation">,</span> <span class="token punctuation">{</span>
-              <span class="token comment">/* Your options for minification */</span>
-            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-          <span class="token keyword">return</span> <span class="token punctuation">{</span> map<span class="token punctuation">,</span> code<span class="token punctuation">,</span> extractedComments <span class="token punctuation">}</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        minify<span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="terseroptions"><code>terserOptions</code><a href="#terseroptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>Type: <code>Object</code>
-Default: <a href="https://github.com/terser-js/terser#minify-options">default</a></p><p>Terser minify <a href="https://github.com/terser-js/terser#minify-options">options</a>.</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+Default: <a href="https://github.com/terser-js/terser#minify-options">default</a></p><p>Terser <a href="https://github.com/terser-js/terser#minify-options">options</a>.</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -4091,7 +4108,7 @@ Will be wrapped into comment.</p><p><strong>webpack.config.js</strong></p><pre><
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token keyword">new</span> <span class="token class-name">TerserPlugin<span class="token operator">&lt;</span>SwcMinifyFunction<span class="token operator">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token keyword">new</span> <span class="token class-name">TerserPlugin<span class="token operator">&lt;</span>SwcMinimizer<span class="token operator">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">{</span>
         minify<span class="token operator">:</span> TerserPlugin<span class="token punctuation">.</span>swcMinify<span class="token punctuation">,</span>
         terserOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
           compress<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
