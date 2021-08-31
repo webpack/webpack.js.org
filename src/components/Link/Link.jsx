@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link as ReactRouterLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default ({ to = '', url, ...props }) => {
+const Link = ({ to = '', url, ...props }) => {
   // XXX: Please `react-banner` for now, but we can update that package to
   // mimick the `NavLink` API
   if (url) to = url;
@@ -12,6 +13,13 @@ export default ({ to = '', url, ...props }) => {
       <a href={to} target="_blank" rel="noopener noreferrer" {...others} />
     );
   } else {
-    return <Link to={to} {...others} />;
+    return <ReactRouterLink to={to} {...others} />;
   }
 };
+
+Link.propTypes = {
+  to: PropTypes.string,
+  url: PropTypes.string,
+};
+
+export default Link;
