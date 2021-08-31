@@ -105,7 +105,7 @@
     "lodash": "^4.17.21",
     "markdownlint": "^0.24.0",
     "markdownlint-cli": "^0.28.1",
-    "mini-css-extract-plugin": "^2.2.0",
+    "mini-css-extract-plugin": "^2.2.1",
     "mkdirp": "^1.0.4",
     "modularscale-sass": "^3.0.3",
     "node-fetch": "^2.6.1",
