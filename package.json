@@ -153,7 +153,7 @@
     "react-router-dom": "^5.2.1",
     "react-spring": "^9.2.4",
     "react-tiny-popover": "5",
-    "react-use": "^17.2.4",
+    "react-use": "^17.3.1",
     "react-visibility-sensor": "^5.0.2",
     "unist-util-visit": "^2.0.3",
     "webpack-pwa-manifest": "^4.3.0",
