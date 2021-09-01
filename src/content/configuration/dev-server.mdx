@@ -172,7 +172,7 @@ npx webpack serve --allowed-hosts auto
 
 ## devServer.bonjour $#devserverbonjour$
 
-`boolean` `object`
+`boolean = false` `object`
 
 这个配置用于在启动时通过 [ZeroConf](http://www.zeroconf.org/) 网络广播你的开发服务器。
 
@@ -298,6 +298,8 @@ npx webpack serve --client-overlay-errors --no-client-overlay-warnings
 ```
 
 ### progress $#progress$
+
+`boolean`
 
 在浏览器中以百分比显示编译进度。
 
@@ -477,6 +479,8 @@ npx webpack serve --no-compress
 
 ## devserver.devMiddleware $#devserverdevmiddleware$
 
+`object`
+
 为 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware) 提供处理 webpack 资源的配置项。
 
 **webpack.config.js**
@@ -565,6 +569,18 @@ module.exports = {
 };
 ```
 
+通过 CLI 使用：
+
+```bash
+npx webpack serve --https
+```
+
+禁用：
+
+```bash
+npx webpack serve --no-https
+```
+
 根据上述配置，将使用自签名证书，但是你也可以提供自己的证书：
 
 **webpack.config.js**
@@ -585,18 +601,6 @@ module.exports = {
 ```
 
 该对象直接传递到 Node.js HTTPS 模块，因此请参阅 [HTTPS documentation](https://nodejs.org/api/https.html) 以获取更多信息。
-
-通过命令行使用：
-
-```bash
-npx webpack serve --https
-```
-
-如下禁用：
-
-```bash
-npx webpack serve --no-https
-```
 
 要通过 CLI 使用自己的证书，请使用以下选项：
 
@@ -625,7 +629,7 @@ module.exports = {
 
 ## devServer.historyApiFallback $#devserverhistoryapifallback$
 
-`boolean` `object`
+`boolean = false` `object`
 
 When using the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History), the `index.html` page will likely have to be served in place of any `404` responses. Enable `devServer.historyApiFallback` by setting it to `true`:
 
@@ -638,6 +642,18 @@ module.exports = {
     historyApiFallback: true,
   },
 };
+```
+
+通过 CLI 使用：
+
+```bash
+npx webpack serve --history-api-fallback
+```
+
+禁用：
+
+```bash
+npx webpack serve --no-history-api-fallback
 ```
 
 通过传递一个对象，这种行为可以通过像 `rewrites` 这样的配置项进一步控制：
@@ -672,18 +688,6 @@ module.exports = {
     },
   },
 };
-```
-
-通过命令行使用：
-
-```bash
-npx webpack serve --history-api-fallback
-```
-
-To disable:
-
-```bash
-npx webpack serve --no-history-api-fallback
 ```
 
 For more options and information, see the [connect-history-api-fallback](https://github.com/bripkens/connect-history-api-fallback) documentation.
@@ -743,7 +747,7 @@ npx webpack serve --host local-ipv6
 
 ## devServer.hot $#devserverhot$
 
-`'only'` `boolean`
+`'only'` `boolean = true`
 
 启用 webpack 的 [热模块替换](/concepts/hot-module-replacement/) 特性：
 
