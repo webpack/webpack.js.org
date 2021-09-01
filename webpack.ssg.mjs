@@ -7,7 +7,9 @@ import SSGPlugin from 'static-site-generator-webpack-plugin';
 import RedirectWebpackPlugin from 'redirect-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import flattenContentTree from './src/utilities/flatten-content-tree.mjs';
-import contentTree from './src/_content.json';
+import fs from 'fs';
+
+const contentTree = JSON.parse(fs.readFileSync('./src/_content.json', 'utf8'));
 
 // Load Common Configuration
 import common, { __filename } from './webpack.common.mjs';
