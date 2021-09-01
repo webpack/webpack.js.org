@@ -1,15 +1,15 @@
 // Import External Dependencies
-const { merge } = require('webpack-merge');
-const OptimizeCSSAssetsPlugin = require('css-minimizer-webpack-plugin');
-const { InjectManifest } = require('workbox-webpack-plugin');
-const path = require('path');
+import { merge } from 'webpack-merge';
+import OptimizeCSSAssetsPlugin from 'css-minimizer-webpack-plugin';
+import { InjectManifest } from 'workbox-webpack-plugin';
+import path from 'path';
 
 // Load Common Configuration
-const common = require('./webpack.common.js');
+import common, { __filename, __dirname } from './webpack.common.mjs';
 
-const ProdAssetsManifest = require('./src/ProdAssetsManifest');
+import ProdAssetsManifest from './src/ProdAssetsManifest.mjs';
 
-module.exports = (env) =>
+export default (env) =>
   merge(common(env), {
     mode: 'production',
     cache: {

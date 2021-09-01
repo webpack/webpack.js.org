@@ -1,17 +1,17 @@
-const path = require('path');
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
-const HTMLPlugin = require('html-webpack-plugin');
-const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
-const common = require('./webpack.common.js');
-const {
+import path from 'path';
+import webpack from 'webpack';
+import { merge } from 'webpack-merge';
+import HTMLPlugin from 'html-webpack-plugin';
+import DirectoryTreePlugin from 'directory-tree-webpack-plugin';
+import common, { __dirname } from './webpack.common.mjs';
+import {
   enhance,
   filter,
   sort,
-} = require('./src/utilities/content-tree-enhancers.js');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+} from './src/utilities/content-tree-enhancers.mjs';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
-module.exports = (env) =>
+export default (env) =>
   merge(common(env), {
     experiments: {
       lazyCompilation: true,

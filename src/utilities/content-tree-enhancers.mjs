@@ -1,16 +1,15 @@
-const fs = require('fs');
-const path = require('path');
-const frontMatter = require('front-matter');
-const remark = require('remark');
-const slug = require('remark-slug');
-const extractAnchors = require('remark-extract-anchors');
-const remarkHtml = require('remark-html');
-// why we have remark-frontmatter now
-// see https://github.com/webpack/webpack.js.org/pull/4111/files#r517309746
-const frontmatter = require('remark-frontmatter');
-const gfm = require('remark-gfm');
+import fs from 'fs';
+import path from 'path';
+import frontMatter from 'front-matter';
+import remark from 'remark';
+import slug from 'remark-slug';
+import extractAnchors from 'remark-extract-anchors';
+import remarkHtml from 'remark-html';
+import frontmatter from 'remark-frontmatter';
+import gfm from 'remark-gfm';
+import emoji from 'remark-emoji';
 
-const enhance = (tree, options) => {
+export const enhance = (tree, options) => {
   // delete `./` root directory on node
   const dir = path.normalize(options.dir).replace(/^(\.\/)/gm, '');
 
@@ -45,7 +44,7 @@ const enhance = (tree, options) => {
       .use(slug)
       .use(frontmatter)
       .use(gfm)
-      .use(require('remark-emoji'))
+      .use(emoji)
       .use(extractAnchors, { anchors, levels: 3 })
       .use(remarkHtml)
       .process(content, (err) => {
@@ -66,9 +65,9 @@ const enhance = (tree, options) => {
   }
 };
 
-const filter = () => true;
+export const filter = () => true;
 
-const sort = (a, b) => {
+export const sort = (a, b) => {
   let group1 = (a.group || '').toLowerCase();
   let group2 = (b.group || '').toLowerCase();
 
@@ -84,7 +83,7 @@ const sort = (a, b) => {
   return 0;
 };
 
-function restructure(item, options) {
+export function restructure(item, options) {
   enhance(item, options);
 
   if (item.children) {
@@ -96,10 +95,3 @@ function restructure(item, options) {
 
   return item;
 }
-
-module.exports = {
-  enhance,
-  filter,
-  restructure,
-  sort,
-};

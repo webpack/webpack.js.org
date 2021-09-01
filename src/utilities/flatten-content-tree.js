@@ -1,4 +1,4 @@
-const flattenContentTree = (tree) => {
+export default (tree) => {
   let paths = [];
 
   const crawl = (node) => {
@@ -15,5 +15,3 @@ const flattenContentTree = (tree) => {
 
   return paths;
 };
-
-module.exports = flattenContentTree;
