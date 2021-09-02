@@ -1,9 +1,10 @@
 import {remark} from 'remark';
+import remarkHtml from 'remark-html';
 describe('responsive table', () => {
   const processor = remark()
     .use(require('remark-gfm'))
     .use(require('./remark-responsive-table.js'))
-    .use(require('remark-html'));
+    .use(remarkHtml);
   it('should add data-th', () => {
     processor.process(
       `

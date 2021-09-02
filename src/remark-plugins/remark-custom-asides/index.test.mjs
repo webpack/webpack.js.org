@@ -1,4 +1,5 @@
 import {remark} from 'remark';
+import remarkHtml from 'remark-html';
 describe('customize blockquote', () => {
   it('should transform W> into aside of warning', () => {
     remark()
@@ -7,7 +8,7 @@ describe('customize blockquote', () => {
           'W>': 'warning',
         },
       })
-      .use(require('remark-html'))
+      .use(remarkHtml)
       .process(
         `
 W> hello world
