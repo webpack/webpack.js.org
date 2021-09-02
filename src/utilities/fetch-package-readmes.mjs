@@ -1,12 +1,12 @@
-const _ = require('lodash');
-const fs = require('fs');
-const path = require('path');
-const { promisify } = require('util');
-const mkdirp = require('mkdirp');
-const fetch = require('node-fetch');
+import _ from 'lodash';
+import fs from 'fs';
+import path from 'path';
+import { promisify } from 'util';
+import mkdirp from 'mkdirp';
+import fetch from 'node-fetch';
 
-const yamlHeadmatter = require('./yaml-headmatter.js');
-const processReadme = require('./process-readme.js');
+import yamlHeadmatter from './yaml-headmatter.mjs';
+import processReadme from './process-readme.mjs';
 
 const writeFile = promisify(fs.writeFile);
 const readFile = promisify(fs.readFile);
