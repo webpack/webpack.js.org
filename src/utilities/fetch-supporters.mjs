@@ -3,7 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import { promisify } from 'util';
 import fetch from 'node-fetch';
-import { uniqBy } from 'lodash';
+import lodash from 'lodash';
+
+const { uniqBy } = lodash;
 
 const asyncWriteFile = promisify(fs.writeFile);
 
