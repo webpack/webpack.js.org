@@ -4,7 +4,10 @@ import path from 'path';
 import { promisify } from 'util';
 import fetch from 'node-fetch';
 import lodash from 'lodash';
-import { __dirname } from '../../webpack.common.mjs';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const { uniqBy } = lodash;
 

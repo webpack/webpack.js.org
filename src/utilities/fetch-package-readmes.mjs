@@ -4,10 +4,13 @@ import path from 'path';
 import { promisify } from 'util';
 import mkdirp from 'mkdirp';
 import fetch from 'node-fetch';
-import { __dirname } from '../../webpack.common.mjs';
+import { fileURLToPath } from 'url';
 
 import yamlHeadmatter from './yaml-headmatter.mjs';
 import processReadme from './process-readme.mjs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const writeFile = promisify(fs.writeFile);
 const readFile = promisify(fs.readFile);
