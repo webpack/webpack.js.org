@@ -115,7 +115,7 @@
     "prettier": "^2.3.2",
     "react-refresh": "^0.10.0",
     "redirect-webpack-plugin": "^1.0.0",
-    "remark": "^13.0.0",
+    "remark": "^14.0.1",
     "remark-autolink-headings": "^6.1.0",
     "remark-emoji": "^3.0.1",
     "remark-extract-anchors": "1.1.1",
