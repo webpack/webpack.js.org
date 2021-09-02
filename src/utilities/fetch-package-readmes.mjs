@@ -4,6 +4,7 @@ import path from 'path';
 import { promisify } from 'util';
 import mkdirp from 'mkdirp';
 import fetch from 'node-fetch';
+import { __dirname } from '../../webpack.common.mjs';
 
 import yamlHeadmatter from './yaml-headmatter.mjs';
 import processReadme from './process-readme.mjs';
