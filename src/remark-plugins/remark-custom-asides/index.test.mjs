@@ -1,4 +1,4 @@
-import remark from 'remark';
+import {remark} from 'remark';
 describe('customize blockquote', () => {
   it('should transform W> into aside of warning', () => {
     remark()

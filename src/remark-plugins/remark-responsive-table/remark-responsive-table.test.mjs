@@ -1,4 +1,4 @@
-import remark from 'remark';
+import {remark} from 'remark';
 describe('responsive table', () => {
   const processor = remark()
     .use(require('remark-gfm'))
