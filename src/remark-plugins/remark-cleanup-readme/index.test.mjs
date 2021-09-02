@@ -1,4 +1,5 @@
-const mdx = require('@mdx-js/mdx');
+import mdx from '@mdx-js/mdx';
+import CleanupReadme from './index.mjs';
 describe('cleanup readme', () => {
   it('should clean up div[align="center"] block without paragraph', () => {
     const mdxText = `
@@ -12,7 +13,7 @@ describe('cleanup readme', () => {
 </div>
 `;
     const html = mdx.sync(mdxText, {
-      remarkPlugins: [require('./index.js')],
+      remarkPlugins: [CleanupReadme],
     });
     expect(html).toMatchSnapshot();
   });
@@ -32,7 +33,7 @@ describe('cleanup readme', () => {
 </div>
     `;
     const html = mdx.sync(mdxText, {
-      remarkPlugins: [require('./index.js')],
+      remarkPlugins: [CleanupReadme],
     });
     expect(html).toMatchSnapshot();
   });
@@ -67,7 +68,7 @@ describe('cleanup readme', () => {
 </div>
         `;
     const html = mdx.sync(mdxText, {
-      remarkPlugins: [require('./index.js')],
+      remarkPlugins: [CleanupReadme],
     });
     expect(html).toMatchSnapshot();
   });
