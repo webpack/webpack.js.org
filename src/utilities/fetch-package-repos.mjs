@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { Octokit as GithubAPI } from '@octokit/rest';
 import { createActionAuth } from '@octokit/auth-action';
 import { excludedLoaders, excludedPlugins } from './constants.mjs';
+import { __dirname } from '../../webpack.common.mjs';
 
 const writeFile = promisify(fs.writeFile);
 const stat = promisify(fs.stat);
