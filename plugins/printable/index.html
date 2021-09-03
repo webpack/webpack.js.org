@@ -4082,24 +4082,39 @@ Will be wrapped into comment.</p><p><strong>webpack.config.js</strong></p><pre><
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>With built-in minify functions:</p><pre><code class="hljs language-ts"><span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> SwcMinifyFunction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;terser-webpack-plugin&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>With built-in minify functions:</p><pre><code class="hljs language-ts"><span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> JsMinifyOptions <span class="token keyword">as</span> SwcOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@swc/core&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> MinifyOptions <span class="token keyword">as</span> UglifyJSOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;uglify-js&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> TransformOptions <span class="token keyword">as</span> EsbuildOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;esbuild&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token keyword">type</span> <span class="token punctuation">{</span> MinifyOptions <span class="token keyword">as</span> TerserOptions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;terser&quot;</span><span class="token punctuation">;</span>
 
 <span class="token keyword">module</span><span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
-      <span class="token keyword">new</span> <span class="token class-name">TerserPlugin<span class="token operator">&lt;</span>SwcMinimizer<span class="token operator">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token keyword">new</span> <span class="token class-name">TerserPlugin<span class="token operator">&lt;</span>SwcOptions<span class="token operator">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">{</span>
         minify<span class="token operator">:</span> TerserPlugin<span class="token punctuation">.</span>swcMinify<span class="token punctuation">,</span>
         terserOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-          compress<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+          <span class="token comment">// `swc` options</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token keyword">new</span> <span class="token class-name">TerserPlugin<span class="token operator">&lt;</span>UglifyJSOptions<span class="token operator">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        minify<span class="token operator">:</span> TerserPlugin<span class="token punctuation">.</span>uglifyJsMinify<span class="token punctuation">,</span>
+        terserOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token comment">// `uglif-js` options</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token keyword">new</span> <span class="token class-name">TerserPlugin<span class="token operator">&lt;</span>EsbuildOptions<span class="token operator">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        minify<span class="token operator">:</span> TerserPlugin<span class="token punctuation">.</span>esbuildMinify<span class="token punctuation">,</span>
+        terserOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token comment">// `esbuild` options</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 
-      <span class="token comment">// Alternative:</span>
-      <span class="token keyword">new</span> <span class="token class-name">TerserPlugin<span class="token operator">&lt;</span><span class="token keyword">typeof</span> TerserPlugin<span class="token punctuation">.</span>swcMinify<span class="token operator">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-        minify<span class="token operator">:</span> TerserPlugin<span class="token punctuation">.</span>swcMinify<span class="token punctuation">,</span>
+      <span class="token comment">// Alternative usage:</span>
+      <span class="token keyword">new</span> <span class="token class-name">TerserPlugin<span class="token operator">&lt;</span>TerserOptions<span class="token operator">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        minify<span class="token operator">:</span> TerserPlugin<span class="token punctuation">.</span>terserMinify<span class="token punctuation">,</span>
         terserOptions<span class="token operator">:</span> <span class="token punctuation">{</span>
-          compress<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+          <span class="token comment">// `terser` options</span>
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
