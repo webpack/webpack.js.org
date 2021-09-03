@@ -866,7 +866,38 @@ npx webpack serve --no-live-reload
 
 W> 热加载仅对像 `web`、`webworker`、`electron-renderer` 和 `node-webkit` 的 [targets](/configuration/target/#string) 生效。
 
-## devServer.onAfterSetupMiddleware
+## devServer.magicHtml $#devservermagichtml$
+
+`boolean = true`
+
+<Badge text="v4.1.0+" />
+
+Tell dev-server to enable/disable magic HTML routes (routes corresponding to your webpack output, for example `/main` for `main.js`).
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    magicHtml: true,
+  },
+};
+```
+
+通过 CLI 使用：
+
+```bash
+npx webpack serve --magic-html
+```
+
+禁用：
+
+```bash
+npx webpack serve --no-magic-html
+```
+
+## devServer.onAfterSetupMiddleware $#devserveronaftersetupmiddleware$
 
 `function (devServer)`
 
