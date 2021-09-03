@@ -5,7 +5,10 @@ import { InjectManifest } from 'workbox-webpack-plugin';
 import path from 'path';
 
 // Load Common Configuration
-import common, { __filename, __dirname } from './webpack.common.mjs';
+import common from './webpack.common.mjs';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 import ProdAssetsManifest from './src/ProdAssetsManifest.mjs';
 

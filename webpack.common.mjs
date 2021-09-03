@@ -11,11 +11,10 @@ import autolink from 'remark-autolink-headings';
 import refractor from 'remark-refractor';
 import frontmatter from 'remark-frontmatter';
 import { createRequire } from 'module';
-import { fileURLToPath } from 'url';
 import remarkEmoji from 'remark-emoji';
-
-export const __filename = fileURLToPath(import.meta.url);
-export const __dirname = path.dirname(__filename);
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const require = createRequire(import.meta.url);
 
