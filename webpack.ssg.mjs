@@ -12,7 +12,9 @@ import fs from 'fs';
 const contentTree = JSON.parse(fs.readFileSync('./src/_content.json', 'utf8'));
 
 // Load Common Configuration
-import common, { __filename } from './webpack.common.mjs';
+import common from './webpack.common.mjs';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
 
 // content tree to path array
 const paths = [...flattenContentTree(contentTree), '/vote', '/app-shell'];
