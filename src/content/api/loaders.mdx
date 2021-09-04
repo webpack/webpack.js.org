@@ -354,14 +354,13 @@ module.exports = function (source) {
 
 `this.importModule(request, options, [callback]): Promise`
 
-An alternative lightweight solution for the child compiler to compile and execute a request at build time. It can be enabled
-with the [`experiments.executeModule`](/configuration/experiments/#experimentsexecutemodule).
+An alternative lightweight solution for the child compiler to compile and execute a request at build time.
 
 - `request`: the request string to load the module from
 - `options`:
   - `layer`: specify a layer in which this module is placed/compiled
   - `publicPath`: the public path used for the built modules
-- `callback`: an optional function returning the exports. `importModule` will return a Promise if no callback is provided.
+- `callback`: an optional Node.js style callback returning the exports of the module or a namespace object for ESM. `importModule` will return a Promise if no callback is provided.
 
 **webpack.config.js**
 
