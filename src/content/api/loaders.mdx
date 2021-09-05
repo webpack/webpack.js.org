@@ -357,24 +357,13 @@ module.exports = function (source) {
 
 `this.importModule(request, options, [callback]): Promise`
 
-<<<<<<< HEAD
 一种可以选择的轻量级解决方案，用于子编译器在构建时编译和执行请求。
-可以使用 [`experiments.executeModule`](/configuration/experiments/#experimentsexecutemodule) 启用。
-=======
-An alternative lightweight solution for the child compiler to compile and execute a request at build time.
->>>>>>> 3b643ae9522de2b2030aa61eeceddc2ae00bba50
 
 - `request`: 加载模块的请求字符串
 - `options`:
-<<<<<<< HEAD
-  - `layer`: 指定该模块放置/编译的层
-  - `publicPath`: 用于构建模块的公共路径
-- `callback`: 返回 exports 的可选函数。如果没有提供 callback 函数的话，`importModule` 将会返回一个 Promise。
-=======
-  - `layer`: specify a layer in which this module is placed/compiled
-  - `publicPath`: the public path used for the built modules
-- `callback`: an optional Node.js style callback returning the exports of the module or a namespace object for ESM. `importModule` will return a Promise if no callback is provided.
->>>>>>> 3b643ae9522de2b2030aa61eeceddc2ae00bba50
+  - `layer`：指定该模块放置/编译的层
+  - `publicPath`：用于构建模块的公共路径
+- `callback`：一个可选的 Node.js 风格的回调，返回模块的 exports 或 ESM 的命名空间对象。如果没有提供回调，`importModule`将返回一个 Promise。
 
 **webpack.config.js**
 
