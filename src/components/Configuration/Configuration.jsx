@@ -1,5 +1,6 @@
 import { Children, isValidElement } from 'react';
 import { Details } from './components';
+import PropTypes from 'prop-types';
 
 const detailComponentsList = [
   'link',
@@ -77,9 +78,11 @@ export const Pre = (props) => {
   };
 
   return (
-    <pre>
+    <pre className={props?.children?.props?.className ?? ''}>
       <code {...newProps} />
     </pre>
   );
 };
-Pre.propTypes = {};
+Pre.propTypes = {
+  children: PropTypes.node,
+};
