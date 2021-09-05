@@ -23,7 +23,6 @@ Available options:
 
 - `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module.
 - [`buildHttp`](#experimentsbuildhttp)
-- [`executeModule`](#experimentsexecutemodule)
 - `layers`: Enable module and chunk layers.
 - [`lazyCompilation`](#experimentslazycompilation)
 - [`outputModule`](#experimentsoutputmodule)
@@ -130,23 +129,6 @@ By default webpack would generate a `<compiler-name.>webpack.lock` file>. Make s
 Detect changes to remote resources and upgrade them automatically.
 
 - Type: `boolean`
-
-### experiments.executeModule $#experimentsexecutemodule$
-
-Enable execution of modules from the module graph for plugins and loaders at build time to generate code or other assets.
-
-- Type: `boolean`
-- Available: 5.32.0+
-- Example:
-
-  ```js
-  module.exports = {
-    // …
-    experiments: {
-      executeModule: true,
-    },
-  };
-  ```
 
 ### experiments.lazyCompilation $#experimentslazycompilation$
 
