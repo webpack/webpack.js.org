@@ -485,11 +485,13 @@ Provide options to [webpack-dev-middleware](https://github.com/webpack/webpack-d
 ```javascript
 module.exports = {
   devServer: {
-    index: true,
-    mimeTypes: { 'text/html': ['phtml'] },
-    publicPath: '/publicPathForDevServe',
-    serverSideRender: true,
-    writeToDisk: true,
+    devMiddleware: {
+      index: true,
+      mimeTypes: { 'text/html': ['phtml'] },
+      publicPath: '/publicPathForDevServe',
+      serverSideRender: true,
+      writeToDisk: true,
+    },
   },
 };
 ```
@@ -513,6 +515,18 @@ module.exports = {
 };
 ```
 
+Usage via CLI
+
+```bash
+npx webpack serve --http2
+```
+
+To disable:
+
+```bash
+npx webpack serve --no-http2
+```
+
 Provide your own certificate using the [https](#devserverhttps) option:
 
 **webpack.config.js**
@@ -529,18 +543,6 @@ module.exports = {
     },
   },
 };
-```
-
-Usage via CLI
-
-```bash
-npx webpack serve --http2
-```
-
-To disable:
-
-```bash
-npx webpack serve --no-http2
 ```
 
 To pass your own certificate via CLI, use the following options:

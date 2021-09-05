@@ -5,4 +5,5 @@ export const contributorsNotFound = [
   'henriquea',
   'makuzaverite',
   'MijaelWatts',
+  'Kolhar730',
 ];
