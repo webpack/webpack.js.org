@@ -485,11 +485,13 @@ Provide options to [webpack-dev-middleware](https://github.com/webpack/webpack-d
 ```javascript
 module.exports = {
   devServer: {
-    index: true,
-    mimeTypes: { 'text/html': ['phtml'] },
-    publicPath: '/publicPathForDevServe',
-    serverSideRender: true,
-    writeToDisk: true,
+    devMiddleware: {
+      index: true,
+      mimeTypes: { 'text/html': ['phtml'] },
+      publicPath: '/publicPathForDevServe',
+      serverSideRender: true,
+      writeToDisk: true,
+    },
   },
 };
 ```
