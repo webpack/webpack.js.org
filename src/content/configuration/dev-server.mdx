@@ -488,11 +488,13 @@ npx webpack serve --no-compress
 ```javascript
 module.exports = {
   devServer: {
-    index: true,
-    mimeTypes: { 'text/html': ['phtml'] },
-    publicPath: '/publicPathForDevServe',
-    serverSideRender: true,
-    writeToDisk: true,
+    devMiddleware: {
+      index: true,
+      mimeTypes: { 'text/html': ['phtml'] },
+      publicPath: '/publicPathForDevServe',
+      serverSideRender: true,
+      writeToDisk: true,
+    },
   },
 };
 ```
@@ -516,7 +518,19 @@ module.exports = {
 };
 ```
 
-通过 [https](#devserverhttps) 配置你自己的证书文件:
+通过 CLI 使用：
+
+```bash
+npx webpack serve --http2
+```
+
+禁用：
+
+```bash
+npx webpack serve --no-http2
+```
+
+通过 [https](#devserverhttps) 配置你自己的证书文件：
 
 **webpack.config.js**
 
@@ -532,18 +546,6 @@ module.exports = {
     },
   },
 };
-```
-
-通过命令行使用
-
-```bash
-npx webpack serve --http2
-```
-
-如需禁用：
-
-```bash
-npx webpack serve --no-http2
 ```
 
 要通过 CLI 使用自己的证书，请使用以下选项：
