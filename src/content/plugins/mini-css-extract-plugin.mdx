@@ -81,10 +81,19 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## 选项 $#options$
+=======
+> ⚠️ Note that if you import CSS from your webpack entrypoint or import styles in the [initial](/concepts/under-the-hood/#chunks) chunk, `mini-css-extract-plugin` will not load this CSS into the page. Please use [`html-webpack-plugin`](https://github.com/jantimon/html-webpack-plugin) for automatic generation `link` tags or create `index.html` file with `link` tag.
+
+> ⚠️ Source maps works only for `source-map`/`nosources-source-map`/`hidden-nosources-source-map`/`hidden-source-map` values because CSS only supports source maps with the `sourceMappingURL` comment (i.e. `//# sourceMappingURL=style.css.map`). If you need set `devtool` to another value you can enable source maps generation for extracted CSS using [`sourceMap: true`](https://github.com/webpack-contrib/css-loader#sourcemap) for `css-loader`.
+
+## Options
+>>>>>>> 1af55664b1e566a1d8212c37b250f29bded996e1
 
 ### Plugin Options $#plugin-options$
 
+<<<<<<< HEAD
 |                 选项名                  |         类型         |       默认值       | 描述                                              |
 | :-----------------------------------: | :------------------: | :-----------------: | :------------------------------------------------------- |
 |      **[`filename`](#filename)**      | `{String\|Function}` |    `[name].css`     | 此选项决定了输出的每个 CSS 文件的名称  |
@@ -94,6 +103,17 @@ module.exports = {
 |    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 给标签添加自定义属性                            |
 |      **[`linkType`](#linktype)**      | `{String\|Boolean}`  |              `text/css`               | 允许使用自定义 link 类型加载异步 chunk |
 | **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | 使用实验性的 webpack API 来执行模块，而非子代编译器 |
+=======
+|                               Name                                |         Type         |                Default                | Description                                                                                                                               |
+| :---------------------------------------------------------------: | :------------------: | :-----------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------- |
+|                    **[`filename`](#filename)**                    | `{String\|Function}` |             `[name].css`              | This option determines the name of each output CSS file                                                                                   |
+|               **[`chunkFilename`](#chunkfilename)**               | `{String\|Function}` |          `based on filename`          | This option determines the name of non-entry chunk files                                                                                  |
+|                 **[`ignoreOrder`](#ignoreorder)**                 |     `{Boolean}`      |                `false`                | Remove Order Warnings                                                                                                                     |
+|                      **[`insert`](#insert)**                      | `{String\|Function}` | `document.head.appendChild(linkTag);` | Inserts the `link` tag at the given position for [non-initial (async)](/concepts/under-the-hood/#chunks) CSS chunks |
+|                  **[`attributes`](#attributes)**                  |      `{Object}`      |                 `{}`                  | Adds custom attributes to the `link` tag for [non-initial (async)](/concepts/under-the-hood/#chunks) CSS chunks     |
+|                    **[`linkType`](#linktype)**                    | `{String\|Boolean}`  |              `text/css`               | Allows loading asynchronous chunks with a custom link type                                                                                |
+| **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | Use an experimental webpack API to execute modules instead of child compilers                                                             |
+>>>>>>> 1af55664b1e566a1d8212c37b250f29bded996e1
 
 #### `filename` $#filename$
 
@@ -128,7 +148,13 @@ module.exports = {
 类型：`String|Function`
 默认值：`document.head.appendChild(linkTag);`
 
+<<<<<<< HEAD
 默认情况下，`mini-css-extract-plugin` 会将 styles（`<link>` 元素）附加到当前 `window` 的 `document.head` 中。
+=======
+> ⚠️ Only for [non-initial (async)](/concepts/under-the-hood/#chunks) chunks.
+
+By default, the `mini-css-extract-plugin` appends styles (`<link>` elements) to `document.head` of the current `window`.
+>>>>>>> 1af55664b1e566a1d8212c37b250f29bded996e1
 
 但在某些情况下，可能需要对附加的目标进行精细化管理，甚至延迟 `link` 元素的插入。
 例如，当你在 iframe 中运行应用程序异步加载样式时，就属于此情况。
@@ -179,7 +205,13 @@ new MiniCssExtractPlugin({
 类型：`Object`
 默认值：`{}`
 
+<<<<<<< HEAD
 如果定义了此选项，`mini-css-extract-plugin` 将把指定的属性和值附加到 `<link>` 元素上。
+=======
+> ⚠️ Only for [non-initial (async)](/concepts/under-the-hood/#chunks) chunks.
+
+If defined, the `mini-css-extract-plugin` will attach given attributes with their values on `<link>` element.
+>>>>>>> 1af55664b1e566a1d8212c37b250f29bded996e1
 
 **webpack.config.js**
 
@@ -921,7 +953,155 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### 媒体查询插件 $#media-query-plugin$
+=======
+### Multiple Themes
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+module.exports = {
+  entry: "./src/index.js",
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        oneOf: [
+          {
+            resourceQuery: "?dark",
+            use: [
+              Self.loader,
+              "css-loader",
+              {
+                loader: "sass-loader",
+                options: {
+                  additionalData: `@use 'dark-theme/vars' as vars;`,
+                },
+              },
+            ],
+          },
+          {
+            use: [
+              Self.loader,
+              "css-loader",
+              {
+                loader: "sass-loader",
+                options: {
+                  additionalData: `@use 'light-theme/vars' as vars;`,
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  plugins: [
+    new Self({
+      filename: "[name].css",
+      attributes: {
+        id: "theme",
+      },
+    }),
+  ],
+};
+```
+
+**src/index.js**
+
+```js
+import "./style.scss";
+
+let theme = "light";
+const themes = {};
+
+themes[theme] = document.querySelector("#theme");
+
+async function loadTheme(newTheme) {
+  // eslint-disable-next-line no-console
+  console.log(`CHANGE THEME - ${newTheme}`);
+
+  const themeElement = document.querySelector("#theme");
+
+  if (themeElement) {
+    themeElement.remove();
+  }
+
+  if (themes[newTheme]) {
+    // eslint-disable-next-line no-console
+    console.log(`THEME ALREADY LOADED - ${newTheme}`);
+
+    document.head.appendChild(themes[newTheme]);
+
+    return;
+  }
+
+  if (newTheme === "dark") {
+    // eslint-disable-next-line no-console
+    console.log(`LOADING THEME - ${newTheme}`);
+
+    import(/* webpackChunkName: "dark" */ "./style.scss?dark").then(() => {
+      themes[newTheme] = document.querySelector("#theme");
+
+      // eslint-disable-next-line no-console
+      console.log(`LOADED - ${newTheme}`);
+    });
+  }
+}
+
+document.onclick = () => {
+  if (theme === "light") {
+    theme = "dark";
+  } else {
+    theme = "light";
+  }
+
+  loadTheme(theme);
+};
+```
+
+**src/dark-theme/\_vars.scss**
+
+```scss
+$background: black;
+```
+
+**src/light-theme/\_vars.scss**
+
+```scss
+$background: white;
+```
+
+**src/styles.scss**
+
+```scss
+body {
+  background-color: vars.$background;
+}
+```
+
+**public/index.html**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document</title>
+    <link id="theme" rel="stylesheet" type="text/css" href="./main.css" />
+  </head>
+  <body>
+    <script src="./main.js"></script>
+  </body>
+</html>
+```
+
+### Media Query Plugin
+>>>>>>> 1af55664b1e566a1d8212c37b250f29bded996e1
 
 如果您想从 CSS 文件中提取媒体查询（因为移动用户不需要加载电脑或平板专用的 CSS ），应使用以下插件之一：
 
