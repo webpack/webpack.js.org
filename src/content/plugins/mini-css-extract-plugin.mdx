@@ -81,6 +81,10 @@ module.exports = {
 };
 ```
 
+> ⚠️ 注意，如果你从 webpack 入口处导入 CSS 或者在 [初始](/concepts/under-the-hood/#chunks) chunk 中引入 style， `mini-css-extract-plugin` 则不会将这些 CSS 加载到页面中。请使用 [`html-webpack-plugin`](https://github.com/jantimon/html-webpack-plugin) 自动生成 `link` 标签或者在创建 `index.html` 文件时使用 `link` 标签。
+
+> ⚠️ source map 只在 `source-map`/`nosources-source-map`/`hidden-nosources-source-map`/`hidden-source-map` 值情况下起作用，因为 CSS 仅支持带有 `sourceMappingURL` 注释的 source map (例如 `//# sourceMappingURL=style.css.map`)。如果你需要将 `devtool` 设置为其他值，你可以使用 `css-loader` 中的 [`sourceMap: true`](https://github.com/webpack-contrib/css-loader#sourcemap) 来启用提取并生成 CSS 的 source map。
+
 ## 选项 $#options$
 
 ### Plugin Options $#plugin-options$
@@ -90,8 +94,8 @@ module.exports = {
 |      **[`filename`](#filename)**      | `{String\|Function}` |    `[name].css`     | 此选项决定了输出的每个 CSS 文件的名称  |
 | **[`chunkFilename`](#chunkfilename)** | `{String\|Function}` | `based on filename` | 此选项决定了非入口的 chunk 文件名称 |
 |   **[`ignoreOrder`](#ignoreorder)**   |     `{Boolean}`      |       `false`       | 移除 Order 警告                                    |
-|        **[`insert`](#insert)**        | `{String\|Function}` | `var head = document.getElementsByTagName("head")[0];head.appendChild(linkTag);` | 在指定位置插入 `<link>`                   |
-|    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 给标签添加自定义属性                            |
+|        **[`insert`](#insert)**        | `{String\|Function}` | `var head = document.getElementsByTagName("head")[0];head.appendChild(linkTag);` | 在指定位置将 [非初始（由 async 修饰）](/concepts/under-the-hood/#chunks) 的 CSS chunk 插入 `link` 标签                   |
+|    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 为 [非初始（由 async 修饰）](/concepts/under-the-hood/#chunks) 的 CSS chunk 所处的 `link` 标签添加自定义属性                            |
 |      **[`linkType`](#linktype)**      | `{String\|Boolean}`  |              `text/css`               | 允许使用自定义 link 类型加载异步 chunk |
 | **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | 使用实验性的 webpack API 来执行模块，而非子代编译器 |
 
@@ -127,6 +131,8 @@ module.exports = {
 
 类型：`String|Function`
 默认值：`document.head.appendChild(linkTag);`
+
+> ⚠️ 仅对 [非初始（由 async 修饰）](/concepts/under-the-hood/#chunks) chunk 有效。
 
 默认情况下，`mini-css-extract-plugin` 会将 styles（`<link>` 元素）附加到当前 `window` 的 `document.head` 中。
 
@@ -178,6 +184,8 @@ new MiniCssExtractPlugin({
 
 类型：`Object`
 默认值：`{}`
+
+> ⚠️ 仅对 [非初始（由 async 修饰）](/concepts/under-the-hood/#chunks) chunk 有效。
 
 如果定义了此选项，`mini-css-extract-plugin` 将把指定的属性和值附加到 `<link>` 元素上。
 
@@ -919,6 +927,150 @@ module.exports = {
     ],
   },
 };
+```
+
+### 多主题配置 $#multiple-themes$
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+module.exports = {
+  entry: "./src/index.js",
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        oneOf: [
+          {
+            resourceQuery: "?dark",
+            use: [
+              Self.loader,
+              "css-loader",
+              {
+                loader: "sass-loader",
+                options: {
+                  additionalData: `@use 'dark-theme/vars' as vars;`,
+                },
+              },
+            ],
+          },
+          {
+            use: [
+              Self.loader,
+              "css-loader",
+              {
+                loader: "sass-loader",
+                options: {
+                  additionalData: `@use 'light-theme/vars' as vars;`,
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  plugins: [
+    new Self({
+      filename: "[name].css",
+      attributes: {
+        id: "theme",
+      },
+    }),
+  ],
+};
+```
+
+**src/index.js**
+
+```js
+import "./style.scss";
+
+let theme = "light";
+const themes = {};
+
+themes[theme] = document.querySelector("#theme");
+
+async function loadTheme(newTheme) {
+  // eslint-disable-next-line no-console
+  console.log(`CHANGE THEME - ${newTheme}`);
+
+  const themeElement = document.querySelector("#theme");
+
+  if (themeElement) {
+    themeElement.remove();
+  }
+
+  if (themes[newTheme]) {
+    // eslint-disable-next-line no-console
+    console.log(`THEME ALREADY LOADED - ${newTheme}`);
+
+    document.head.appendChild(themes[newTheme]);
+
+    return;
+  }
+
+  if (newTheme === "dark") {
+    // eslint-disable-next-line no-console
+    console.log(`LOADING THEME - ${newTheme}`);
+
+    import(/* webpackChunkName: "dark" */ "./style.scss?dark").then(() => {
+      themes[newTheme] = document.querySelector("#theme");
+
+      // eslint-disable-next-line no-console
+      console.log(`LOADED - ${newTheme}`);
+    });
+  }
+}
+
+document.onclick = () => {
+  if (theme === "light") {
+    theme = "dark";
+  } else {
+    theme = "light";
+  }
+
+  loadTheme(theme);
+};
+```
+
+**src/dark-theme/\_vars.scss**
+
+```scss
+$background: black;
+```
+
+**src/light-theme/\_vars.scss**
+
+```scss
+$background: white;
+```
+
+**src/styles.scss**
+
+```scss
+body {
+  background-color: vars.$background;
+}
+```
+
+**public/index.html**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Document</title>
+    <link id="theme" rel="stylesheet" type="text/css" href="./main.css" />
+  </head>
+  <body>
+    <script src="./main.js"></script>
+  </body>
+</html>
 ```
 
 ### 媒体查询插件 $#media-query-plugin$

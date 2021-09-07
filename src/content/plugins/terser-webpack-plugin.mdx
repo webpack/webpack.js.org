@@ -687,24 +687,39 @@ module.exports = {
 使用内置压缩函数：
 
 ```ts
-import type { SwcMinifyFunction } from "terser-webpack-plugin";
+import type { JsMinifyOptions as SwcOptions } from "@swc/core";
+import type { MinifyOptions as UglifyJSOptions } from "uglify-js";
+import type { TransformOptions as EsbuildOptions } from "esbuild";
+import type { MinifyOptions as TerserOptions } from "terser";
 
 module.exports = {
   optimization: {
     minimize: true,
     minimizer: [
-      new TerserPlugin<SwcMinimizer>({
+      new TerserPlugin<SwcOptions>({
         minify: TerserPlugin.swcMinify,
         terserOptions: {
-          compress: true,
+          // `swc` options
+        },
+      }),
+      new TerserPlugin<UglifyJSOptions>({
+        minify: TerserPlugin.uglifyJsMinify,
+        terserOptions: {
+          // `uglif-js` options
+        },
+      }),
+      new TerserPlugin<EsbuildOptions>({
+        minify: TerserPlugin.esbuildMinify,
+        terserOptions: {
+          // `esbuild` options
         },
       }),
 
-      // Alternative:
-      new TerserPlugin<typeof TerserPlugin.swcMinify>({
-        minify: TerserPlugin.swcMinify,
+      // Alternative usage:
+      new TerserPlugin<TerserOptions>({
+        minify: TerserPlugin.terserMinify,
         terserOptions: {
-          compress: true,
+          // `terser` options
         },
       }),
     ],
