@@ -316,11 +316,21 @@ module.exports = {
 
 [Dart Sass](http://sass-lang.com/dart-sass) 或者 [Node Sass](https://github.com/sass/node-sass) 实现的选项。
 
+<<<<<<< HEAD
 > ℹ️ `indentedSyntax` 选项值为 `true`，是对 `sass` 的扩展。
+=======
+> ℹ️ The `charset` option has `true` value by default for `dart-sass`, we strongly discourage change value to `false`, because webpack doesn't support files other than `utf-8`.
+
+> ℹ️ The `indentedSyntax` option has `true` value for the `sass` extension.
+>>>>>>> b4e044ed13b2495d1adc06daa3dc4b2e0198f946
 
 > ℹ️ 像 `data` 和 `file` 这样的选项是不可用的，且会被忽略。
 
+<<<<<<< HEAD
 > ℹ 我们推荐不要设置 `outFile`，`sourceMapContents`，`sourceMapEmbed`，`sourceMapRoot` 这些选项，因为当 `sourceMap` 是 `true` 时，`sass-loader` 会自动设置这些选项。
+=======
+> ℹ We strongly discourage change `outFile`, `sourceMapContents`, `sourceMapEmbed`, `sourceMapRoot` options because `sass-loader` automatically sets these options when the `sourceMap` option is `true`.
+>>>>>>> b4e044ed13b2495d1adc06daa3dc4b2e0198f946
 
 > ℹ️ 可以使用 `this.webpackLoaderContext` 属性访问自定义 importer 中的 [loader 上下文](/api/loaders/#the-loader-context)。
 
