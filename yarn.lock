@@ -11618,10 +11618,10 @@ table@^6.0.9:
     string-width "^4.2.0"
     strip-ansi "^6.0.0"
 
-tailwindcss@^2.2.9:
-  version "2.2.9"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-2.2.9.tgz#1484bd45a4a9f9f5de7faabf74c11bf0aeb5ad98"
-  integrity sha512-P8zCKFkEthfUvqcnun8DqGGXw4QqyDw971NAM23e8QQ+m5HW1agp4upq50rFGwGNtphVYvr+0zvVLSXo5/I9Qg==
+tailwindcss@^2.2.11:
+  version "2.2.11"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-2.2.11.tgz#da8a1d90aec279bbdf69150598869fccf82c1fe2"
+  integrity sha512-nXHuyB94Q5n3eSy41qdNEORDb2R6Vtq0LZmFfVfpYJxTWEZJ50IzaOkq2tCN8KJTNsQ5kZHhy+rj2aX6lJyGbQ==
   dependencies:
     arg "^5.0.1"
     bytes "^3.0.0"
@@ -11636,6 +11636,7 @@ tailwindcss@^2.2.9:
     fs-extra "^10.0.0"
     glob-parent "^6.0.1"
     html-tags "^3.1.0"
+    is-color-stop "^1.1.0"
     is-glob "^4.0.1"
     lodash "^4.17.21"
     lodash.topath "^4.5.2"
