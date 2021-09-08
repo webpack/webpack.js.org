@@ -360,7 +360,7 @@ T> 在提供自定义客户端和服务器实现时，要确保它们彼此兼�
 
 创建一个自定义客户端实现，创建一个类拓展 [`BaseClient`](https://github.com/webpack/webpack-dev-server/blob/master/client-src/clients/BaseClient.js)。
 
-使用 `CustomClient.js` 的路径，一个自定义 WebSocket 客户端实现，连同兼容的 `'ws'` s服务器：
+使用 `CustomClient.js` 的路径，一个自定义 WebSocket 客户端实现，连同兼容的 `'ws'` 服务器：
 
 **webpack.config.js**
 
@@ -477,7 +477,7 @@ npx webpack serve --compress
 npx webpack serve --no-compress
 ```
 
-## devserver.devMiddleware $#devserverdevmiddleware$
+## devServer.devMiddleware $#devserverdevmiddleware$
 
 `object`
 
@@ -717,7 +717,7 @@ module.exports = {
 npx webpack serve --host 0.0.0.0
 ```
 
-这也适用于IPv6：
+这也适用于 IPv6：
 
 ```bash
 npx webpack serve --host ::
