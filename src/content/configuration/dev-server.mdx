@@ -626,6 +626,19 @@ module.exports = {
 };
 ```
 
+You can also pass a function:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    headers: () => {
+      return { 'X-Bar': ['key1=value1', 'key2=value2'] };
+    },
+  },
+};
+```
+
 ## devServer.historyApiFallback
 
 `boolean = false` `object`
