@@ -14,6 +14,7 @@ import AdjacentPages from './AdjacentPages';
 
 // Load Styling
 import './Page.scss';
+import Link from '../Link/Link';
 export default function Page(props) {
   const {
     title,
@@ -103,7 +104,7 @@ export default function Page(props) {
             <ul>
               {related.map((link, index) => (
                 <li key={index}>
-                  <a href={link.url}>{link.title}</a>
+                  <Link to={link.url}>{link.title}</Link>
                 </li>
               ))}
             </ul>
