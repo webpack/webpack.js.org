@@ -474,7 +474,7 @@ To disable:
 npx webpack serve --no-compress
 ```
 
-## devserver.devMiddleware
+## devServer.devMiddleware
 
 `object`
 
@@ -621,6 +621,19 @@ module.exports = {
   devServer: {
     headers: {
       'X-Custom-Foo': 'bar',
+    },
+  },
+};
+```
+
+You can also pass a function:
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    headers: () => {
+      return { 'X-Bar': ['key1=value1', 'key2=value2'] };
     },
   },
 };
