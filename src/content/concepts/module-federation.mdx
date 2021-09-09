@@ -223,13 +223,8 @@ module.exports = {
 
 场景：
 
-<<<<<<< HEAD
 你在 `https://my-host.com/app/*` 上有一个 host 应用，并且在 `https://foo-app.com` 上有一个子应用。子应用程序也挂载在 host 域上, 因此，
-`https://foo-app.com` is expected to be accessible via `https://my-host.com/app/foo-app` and `https://my-host.com/app/foo/*` requests are redirected to `https://foo-app.com/*` via a proxy.
-=======
-You have a host app hosted on `https://my-host.com/app/*` and a child app hosted on `https://foo-app.com`. The child app is also mounted on the host domain, hence,
-`https://foo-app.com` is expected to be accessible via `https://my-host.com/app/foo-app` and `https://my-host.com/app/foo-app/*` requests are redirected to `https://foo-app.com/*` via a proxy.
->>>>>>> 1c88afcd3d2eab0103fc469de783efa944572153
+`https://foo-app.com` 可以通过 `https://my-host.com/app/foo-app` 访问，并且 `https://my-host.com/app/foo-app/*` 可以通过代理重定向到 `https://foo-app.com/*`。
 
 示例：
 
