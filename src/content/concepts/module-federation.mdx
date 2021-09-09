@@ -10,6 +10,7 @@ contributors:
   - snitin315
   - XiaofengXie16
   - KyleBastien
+  - Alevale
 related:
   - title: 'Webpack 5 Module Federation: A game-changer in JavaScript architecture'
     url: https://medium.com/swlh/webpack-5-module-federation-a-game-changer-to-javascript-architecture-bcdd30e02669
@@ -223,7 +224,7 @@ module.exports = {
 场景：
 
 你在 `https://my-host.com/app/*` 上有一个 host 应用，并且在 `https://foo-app.com` 上有一个子应用。子应用程序也挂载在 host 域上, 因此，
-`https://foo-app.com` is expected to be accessible via `https://my-host.com/app/foo-app` and `https://my-host.com/app/foo/*` requests are redirected to `https://foo-app.com/*` via a proxy.
+`https://foo-app.com` 可以通过 `https://my-host.com/app/foo-app` 访问，并且 `https://my-host.com/app/foo-app/*` 可以通过代理重定向到 `https://foo-app.com/*`。
 
 示例：
 

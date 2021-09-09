@@ -629,6 +629,19 @@ module.exports = {
 };
 ```
 
+你也可以传递一个函数：
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    headers: () => {
+      return { 'X-Bar': ['key1=value1', 'key2=value2'] };
+    },
+  },
+};
+```
+
 ## devServer.historyApiFallback $#devserverhistoryapifallback$
 
 `boolean = false` `object`
