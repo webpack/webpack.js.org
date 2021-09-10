@@ -607,7 +607,7 @@ module.exports = {
 要通过 CLI 使用自己的证书，请使用以下选项：
 
 ```bash
-npx webpack serve --https-key ./path/to/server.key --https--cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
+npx webpack serve --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
 ```
 
 ## devServer.headers $#devserverheaders$
@@ -1134,6 +1134,12 @@ module.exports = {
     port: 'auto',
   },
 };
+```
+
+通过 CLI 使用：
+
+```bash
+npx webpack serve --port auto
 ```
 
 ## devServer.proxy $#devserverproxy$
