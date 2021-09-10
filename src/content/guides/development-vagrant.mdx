@@ -20,10 +20,10 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-Next, install `webpack` and `webpack-dev-server` in your project;
+Next, install `webpack`, `webpack-cli`, `@webpack-cli/serve`, and `webpack-dev-server` in your project;
 
 ```bash
-npm install --save-dev webpack webpack-dev-server
+npm install --save-dev webpack webpack-cli @webpack-cli/serve webpack-dev-server
 ```
 
 Make sure to have a `webpack.config.js` file. If you haven't already, use this as a minimal example to get started:
@@ -56,15 +56,15 @@ Note that you also need to create an `app.js` file.
 Now, let's run the server:
 
 ```bash
-webpack serve --host 0.0.0.0 --public 10.10.10.61:8080 --watch-poll
+webpack serve --host 0.0.0.0 --client-web-socket-url ws://10.10.10.61:8080/ws --watch-options-poll
 ```
 
 By default, the server will only be accessible from localhost. We'll be accessing it from our host PC, so we need to change `--host` to allow this.
 
 `webpack-dev-server` will include a script in your bundle that connects to a WebSocket to reload when a change in any of your files occurs.
-The `--public` flag makes sure the script knows where to look for the WebSocket. The server will use port `8080` by default, so we should also specify that here.
+The `--client-web-socket-url` flag makes sure the script knows where to look for the WebSocket. The server will use port `8080` by default, so we should also specify that here.
 
-`--watch-poll` makes sure that webpack can detect changes in your files. By default, webpack listens to events triggered by the filesystem, but VirtualBox has many problems with this.
+`--watch-options-poll` makes sure that webpack can detect changes in your files. By default, webpack listens to events triggered by the filesystem, but VirtualBox has many problems with this.
 
 The server should be accessible on `http://10.10.10.61:8080` now. If you make a change in `app.js`, it should live reload.
 
@@ -96,7 +96,7 @@ The `proxy_set_header` lines are important, because they allow the WebSockets to
 The command to start `webpack-dev-server` can then be changed to this:
 
 ```bash
-webpack serve --public 10.10.10.61 --watch-poll
+webpack serve --client-web-socket-url ws://10.10.10.61:8080/ws --watch-options-poll
 ```
 
 This makes the server only accessible on `127.0.0.1`, which is fine because nginx takes care of making it available on your host PC.
