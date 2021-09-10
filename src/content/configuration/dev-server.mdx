@@ -588,7 +588,7 @@ With the above setting, a self-signed certificate is used, but you can provide y
 module.exports = {
   devServer: {
     https: {
-      ca: './server.pem',
+      cacert: './server.pem',
       pfx: './server.pfx',
       key: './server.key',
       cert: './server.crt',
