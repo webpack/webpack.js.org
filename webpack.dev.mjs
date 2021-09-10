@@ -1,5 +1,4 @@
 import path from 'path';
-import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 import HTMLPlugin from 'html-webpack-plugin';
 import DirectoryTreePlugin from 'directory-tree-webpack-plugin';
@@ -25,7 +24,6 @@ export default (env) =>
       index: './index.jsx',
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
       new ReactRefreshWebpackPlugin(),
       new HTMLPlugin({
         template: 'index.html',
