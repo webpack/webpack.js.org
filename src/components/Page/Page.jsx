@@ -114,7 +114,7 @@ export default function Page(props) {
         )}
 
         {loadContributors && (
-          <div className="">
+          <div data-testid="contributors">
             <h2 className="!font-sans !font-normal">
               {contributors.length} Contributors
             </h2>
