@@ -607,6 +607,31 @@ To pass your own certificate via the CLI use the following options:
 npx webpack serve --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
 ```
 
+`webpack-dev-server >= v4.2.0` allows you to set additional [TLS options](https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options) like `minVersion`. Also, you can directly pass the contents of respective files:
+
+**webpack.config.js**
+
+```javascript
+const fs = require('fs');
+const path = require('path');
+
+module.exports = {
+  devServer: {
+    https: {
+      minVersion: 'TLSv1.1',
+      key: fs.readFileSync(path.join(__dirname, './server.key')),
+      pfx: fs.readFileSync(path.join(__dirname, './server.pfx')),
+      cert: fs.readFileSync(path.join(__dirname, './server.crt')),
+      ca: fs.readFileSync(path.join(__dirname, './ca.pem')),
+      passphrase: 'webpack-dev-server',
+      requestCert: true,
+    },
+  },
+};
+```
+
+W> Don't specify `https.ca` and `https.cacert` options together, if specified `https.ca` will be used. `https.cacert` is deprecated and will be removed in next major release.
+
 ## devServer.headers
 
 `function` `object`
