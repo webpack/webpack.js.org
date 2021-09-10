@@ -114,8 +114,10 @@ export default function Page(props) {
         )}
 
         {loadContributors && (
-          <div className="contributors__section">
-            <h3>Contributors</h3>
+          <div className="">
+            <h2 className="!font-sans !font-normal">
+              {contributors.length} Contributors
+            </h2>
             <Contributors contributors={contributors} />
           </div>
         )}
