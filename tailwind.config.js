@@ -12,6 +12,9 @@ module.exports = {
       fontSize: {
         14: '14px',
       },
+      gridTemplateColumns: {
+        contributors: 'repeat(auto-fit, 36px)',
+      },
     },
     spacing: {
       0: '0px',
