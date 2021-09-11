@@ -89,6 +89,7 @@ module.exports = {
 
 ### Plugin Options $#plugin-options$
 
+<<<<<<< HEAD
 |                 选项名                  |         类型         |       默认值       | 描述                                              |
 | :-----------------------------------: | :------------------: | :-----------------: | :------------------------------------------------------- |
 |      **[`filename`](#filename)**      | `{String\|Function}` |    `[name].css`     | 此选项决定了输出的每个 CSS 文件的名称  |
@@ -98,6 +99,18 @@ module.exports = {
 |    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 为 [非初始（由 async 修饰）](/concepts/under-the-hood/#chunks) 的 CSS chunk 所处的 `link` 标签添加自定义属性                            |
 |      **[`linkType`](#linktype)**      | `{String\|Boolean}`  |              `text/css`               | 允许使用自定义 link 类型加载异步 chunk |
 | **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | 使用实验性的 webpack API 来执行模块，而非子代编译器 |
+=======
+|                               Name                                |         Type         |                Default                | Description                                                                                                                               |
+| :---------------------------------------------------------------: | :------------------: | :-----------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------- |
+|                    **[`filename`](#filename)**                    | `{String\|Function}` |             `[name].css`              | This option determines the name of each output CSS file                                                                                   |
+|               **[`chunkFilename`](#chunkfilename)**               | `{String\|Function}` |          `based on filename`          | This option determines the name of non-entry chunk files                                                                                  |
+|                 **[`ignoreOrder`](#ignoreorder)**                 |     `{Boolean}`      |                `false`                | Remove Order Warnings                                                                                                                     |
+|                      **[`insert`](#insert)**                      | `{String\|Function}` | `document.head.appendChild(linkTag);` | Inserts the `link` tag at the given position for [non-initial (async)](/concepts/under-the-hood/#chunks) CSS chunks |
+|                  **[`attributes`](#attributes)**                  |      `{Object}`      |                 `{}`                  | Adds custom attributes to the `link` tag for [non-initial (async)](/concepts/under-the-hood/#chunks) CSS chunks     |
+|                    **[`linkType`](#linktype)**                    | `{String\|Boolean}`  |              `text/css`               | Allows loading asynchronous chunks with a custom link type                                                                                |
+|                     **[`runtime`](#runtime)**                     |     `{Boolean}`      |                `true`                 | Allows to enable/disable the runtime generation                                                                                           |
+| **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | Use an experimental webpack API to execute modules instead of child compilers                                                             |
+>>>>>>> 66e02b5fa372156bd826cfa3ad89e9e190498e3b
 
 #### `filename` $#filename$
 
@@ -275,7 +288,44 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 #### `experimentalUseImportModule` $#experimentaluseimportmodule$
+=======
+#### `runtime`
+
+Type: `Boolean`
+Default: `true`
+
+Allows to enable/disable the runtime generation.
+CSS will be still extracted and can be used for a custom loading methods.
+For example, you can use [assets-webpack-plugin](https://github.com/ztoben/assets-webpack-plugin) to retreive them then use your own runtime code to download assets when needed.
+
+`true` to skip.
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+module.exports = {
+  plugins: [
+    new MiniCssExtractPlugin({
+      runtime: false,
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+    ],
+  },
+};
+```
+
+#### `experimentalUseImportModule`
+>>>>>>> 66e02b5fa372156bd826cfa3ad89e9e190498e3b
 
 使用实验性的 webpack API 来执行模块，而非子代编译器。
 
