@@ -49,7 +49,7 @@ export default function Contributors({ contributors }) {
       onChange={handleInView}
     >
       <div>
-        <div className="grid gap-[15px] grid-cols-contributors">
+        <div className="grid gap-[10px] lg:gap-[15px] grid-cols-contributors">
           {contributors
             .filter((c) => contributorsNotFound.includes(c) === false)
             .map((contributor) => (
