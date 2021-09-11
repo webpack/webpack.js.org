@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const { merge } = require('webpack-merge');
 const HTMLPlugin = require('html-webpack-plugin');
 const DirectoryTreePlugin = require('directory-tree-webpack-plugin');
@@ -22,7 +21,6 @@ module.exports = (env) =>
       index: './index.jsx',
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
       new ReactRefreshWebpackPlugin(),
       new HTMLPlugin({
         template: 'index.html',

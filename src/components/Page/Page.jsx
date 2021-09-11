@@ -125,8 +125,15 @@ export default function Page(props) {
         )}
 
         {loadContributors && (
+<<<<<<< HEAD
           <div className="contributors__section">
             <h3>贡献者</h3>
+=======
+          <div data-testid="contributors" className="print:hidden">
+            <h2 className="!font-sans !font-normal">
+              {contributors.length} Contributors
+            </h2>
+>>>>>>> b9eb9023f2119062a0f09f62bccf188fb105184c
             <Contributors contributors={contributors} />
           </div>
         )}
