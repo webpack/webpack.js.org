@@ -20,12 +20,12 @@ const pathMap = {
 };
 
 const loaderGroup = {
-  'css-loader': 'css',
-  'less-loader': 'css',
-  'postcss-loader': 'css',
-  'sass-loader': 'css',
-  'style-loader': 'css',
-  'stylus-loader': 'css',
+  'css-loader': 'CSS',
+  'less-loader': 'CSS',
+  'postcss-loader': 'CSS',
+  'sass-loader': 'CSS',
+  'style-loader': 'CSS',
+  'stylus-loader': 'CSS',
 };
 
 async function main() {
