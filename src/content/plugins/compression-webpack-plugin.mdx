@@ -282,7 +282,7 @@ module.exports = {
       filename(pathData) {
         // The `pathData` argument contains all placeholders - `path`/`name`/`ext`/etc
         // Available properties described above, for the `String` notation
-        if (/\.svg$/.test(pathData.file)) {
+        if (/\.svg$/.test(pathData.filename)) {
           return "assets/svg/[path][base].gz";
         }
 
