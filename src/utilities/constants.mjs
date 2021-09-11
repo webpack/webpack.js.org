@@ -23,6 +23,7 @@ export const excludedLoaders = [
   'webpack-contrib/null-loader',
   'webpack-contrib/mocha-loader',
   'webpack-contrib/istanbul-instrumenter-loader',
+  'webpack-contrib/worker-loader',
 ];
 export const excludedPlugins = [
   'webpack-contrib/component-webpack-plugin',

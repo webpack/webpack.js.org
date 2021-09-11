@@ -3,7 +3,7 @@ describe('Click menu', () => {
     cy.visit('/concepts/modules/');
     // scroll to Contributors section
     // note that there's no hash in url
-    cy.get('.contributors__section').scrollIntoView();
+    cy.get('[data-testid="contributors"]').scrollIntoView();
 
     const selector = '.sidebar-item__title[href="/concepts/modules/"]';
 

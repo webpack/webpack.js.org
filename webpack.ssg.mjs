@@ -104,6 +104,8 @@ export default (env) =>
             'https://v4.webpack.js.org/loaders/mocha-loader/',
           'loaders/istanbul-instrumenter-loader':
             'https://v4.webpack.js.org/loaders/istanbul-instrumenter-loader/',
+          'loaders/worker-loader/':
+            'https://v4.webpack.js.org/loaders/worker-loader/',
         },
       }),
       new CopyWebpackPlugin({
