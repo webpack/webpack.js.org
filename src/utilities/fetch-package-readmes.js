@@ -65,15 +65,17 @@ async function main() {
           repo: htmlUrl,
         });
       } else {
-        headmatter = yamlHeadmatter({
+        let basic = {
           title: title,
           source: url,
           edit: editUrl,
           repo: htmlUrl,
-        });
-        if (loaderGroup[repo.split('/')[1]]) {
-          headmatter.group = loaderGroup[repo.split('/')[1]];
+        };
+
+        if (loaderGroup[packageName]) {
+          basic.group = loaderGroup[packageName];
         }
+        headmatter = yamlHeadmatter(basic);
       }
 
       const response = await fetch(url);
