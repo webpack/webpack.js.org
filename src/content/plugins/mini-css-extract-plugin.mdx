@@ -13,7 +13,7 @@ translators:
   <a href="https://webpack.js.org/">
     <img width="200" height="200" vspace="" hspace="25" src="https://cdn.rawgit.com/webpack/media/e7485eb2/logo/icon-square-big.svg"/>
   </a>
-  
+
 </div>
 
 [![npm][npm]][npm-url]
@@ -97,6 +97,7 @@ module.exports = {
 |        **[`insert`](#insert)**        | `{String\|Function}` | `var head = document.getElementsByTagName("head")[0];head.appendChild(linkTag);` | 在指定位置将 [非初始（由 async 修饰）](/concepts/under-the-hood/#chunks) 的 CSS chunk 插入 `link` 标签                   |
 |    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 为 [非初始（由 async 修饰）](/concepts/under-the-hood/#chunks) 的 CSS chunk 所处的 `link` 标签添加自定义属性                            |
 |      **[`linkType`](#linktype)**      | `{String\|Boolean}`  |              `text/css`               | 允许使用自定义 link 类型加载异步 chunk |
+|                     **[`runtime`](#runtime)**                     |     `{Boolean}`      |                `true`                 | 允许启动/禁用 runtime 生成                                                                                        |
 | **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | 使用实验性的 webpack API 来执行模块，而非子代编译器 |
 
 #### `filename` $#filename$
@@ -262,6 +263,39 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       linkType: false,
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+    ],
+  },
+};
+```
+
+#### `runtime` $#runtime$
+
+Type: `Boolean`
+Default: `true`
+
+允许开启/禁用 runtime 生成。
+CSS 仍将被提取，并可用于自定义加载方法。
+例如，你可以使用 [assets-webpack-plugin](https://github.com/ztoben/assets-webpack-plugin) 来检索它们，然后当需要时使用你自己的 runtime 代码下载静态资源。
+
+设置为 `true` 以跳过。
+
+**webpack.config.js**
+
+```js
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+module.exports = {
+  plugins: [
+    new MiniCssExtractPlugin({
+      runtime: false,
     }),
   ],
   module: {
