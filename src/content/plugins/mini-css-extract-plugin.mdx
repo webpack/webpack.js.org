@@ -13,7 +13,7 @@ translators:
   <a href="https://webpack.js.org/">
     <img width="200" height="200" vspace="" hspace="25" src="https://cdn.rawgit.com/webpack/media/e7485eb2/logo/icon-square-big.svg"/>
   </a>
-  
+
 </div>
 
 [![npm][npm]][npm-url]
@@ -89,7 +89,6 @@ module.exports = {
 
 ### Plugin Options $#plugin-options$
 
-<<<<<<< HEAD
 |                 选项名                  |         类型         |       默认值       | 描述                                              |
 | :-----------------------------------: | :------------------: | :-----------------: | :------------------------------------------------------- |
 |      **[`filename`](#filename)**      | `{String\|Function}` |    `[name].css`     | 此选项决定了输出的每个 CSS 文件的名称  |
@@ -98,19 +97,8 @@ module.exports = {
 |        **[`insert`](#insert)**        | `{String\|Function}` | `var head = document.getElementsByTagName("head")[0];head.appendChild(linkTag);` | 在指定位置将 [非初始（由 async 修饰）](/concepts/under-the-hood/#chunks) 的 CSS chunk 插入 `link` 标签                   |
 |    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 为 [非初始（由 async 修饰）](/concepts/under-the-hood/#chunks) 的 CSS chunk 所处的 `link` 标签添加自定义属性                            |
 |      **[`linkType`](#linktype)**      | `{String\|Boolean}`  |              `text/css`               | 允许使用自定义 link 类型加载异步 chunk |
+|                     **[`runtime`](#runtime)**                     |     `{Boolean}`      |                `true`                 | 允许启动/禁用 runtime 生成                                                                                        |
 | **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | 使用实验性的 webpack API 来执行模块，而非子代编译器 |
-=======
-|                               Name                                |         Type         |                Default                | Description                                                                                                                               |
-| :---------------------------------------------------------------: | :------------------: | :-----------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------- |
-|                    **[`filename`](#filename)**                    | `{String\|Function}` |             `[name].css`              | This option determines the name of each output CSS file                                                                                   |
-|               **[`chunkFilename`](#chunkfilename)**               | `{String\|Function}` |          `based on filename`          | This option determines the name of non-entry chunk files                                                                                  |
-|                 **[`ignoreOrder`](#ignoreorder)**                 |     `{Boolean}`      |                `false`                | Remove Order Warnings                                                                                                                     |
-|                      **[`insert`](#insert)**                      | `{String\|Function}` | `document.head.appendChild(linkTag);` | Inserts the `link` tag at the given position for [non-initial (async)](/concepts/under-the-hood/#chunks) CSS chunks |
-|                  **[`attributes`](#attributes)**                  |      `{Object}`      |                 `{}`                  | Adds custom attributes to the `link` tag for [non-initial (async)](/concepts/under-the-hood/#chunks) CSS chunks     |
-|                    **[`linkType`](#linktype)**                    | `{String\|Boolean}`  |              `text/css`               | Allows loading asynchronous chunks with a custom link type                                                                                |
-|                     **[`runtime`](#runtime)**                     |     `{Boolean}`      |                `true`                 | Allows to enable/disable the runtime generation                                                                                           |
-| **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | Use an experimental webpack API to execute modules instead of child compilers                                                             |
->>>>>>> 66e02b5fa372156bd826cfa3ad89e9e190498e3b
 
 #### `filename` $#filename$
 
@@ -288,19 +276,16 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-#### `experimentalUseImportModule` $#experimentaluseimportmodule$
-=======
-#### `runtime`
+#### `runtime` $#runtime$
 
 Type: `Boolean`
 Default: `true`
 
-Allows to enable/disable the runtime generation.
-CSS will be still extracted and can be used for a custom loading methods.
-For example, you can use [assets-webpack-plugin](https://github.com/ztoben/assets-webpack-plugin) to retreive them then use your own runtime code to download assets when needed.
+允许开启/禁用 runtime 生成。
+CSS 仍将被提取，并可用于自定义加载方法。
+例如，你可以使用 [assets-webpack-plugin](https://github.com/ztoben/assets-webpack-plugin) 来检索它们，然后当需要时使用你自己的 runtime 代码下载静态资源。
 
-`true` to skip.
+设置为 `true` 以跳过。
 
 **webpack.config.js**
 
@@ -324,8 +309,7 @@ module.exports = {
 };
 ```
 
-#### `experimentalUseImportModule`
->>>>>>> 66e02b5fa372156bd826cfa3ad89e9e190498e3b
+#### `experimentalUseImportModule` $#experimentaluseimportmodule$
 
 使用实验性的 webpack API 来执行模块，而非子代编译器。
 
