@@ -23,11 +23,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-<<<<<<< HEAD
-然后，在项目中安装 `webpack` 和 `webpack-dev-server`；
-=======
-Next, install `webpack`, `webpack-cli`, `@webpack-cli/serve`, and `webpack-dev-server` in your project;
->>>>>>> b9eb9023f2119062a0f09f62bccf188fb105184c
+然后，在项目中安装 `webpack`、`webpack-cli`、`@webpack-cli/serve` 和 `webpack-dev-server`；
 
 ```bash
 npm install --save-dev webpack webpack-cli @webpack-cli/serve webpack-dev-server
@@ -69,18 +65,10 @@ webpack serve --host 0.0.0.0 --client-web-socket-url ws://10.10.10.61:8080/ws --
 默认只允许从 localhost 访问服务器。所以我们需要修改 `--host` 参数，
 以允许在我们的宿主 PC 上访问。
 
-<<<<<<< HEAD
 `webpack-dev-server` 会在包中引入一个脚本，此脚本连接到 WebSocket，这样可以在任何文件修改时，触发重新加载应用程序。
-`--public` 标记可以确保脚本知道从哪里查找 WebSocket。默认情况下，服务器会使用 `8080` 端口，因此也需要在这里指定。
+`--client-web-socket-url` 标志可以确保脚本知道从哪里查找 WebSocket。默认情况下，服务器会使用 `8080` 端口，因此也需要在这里指定。
 
-`--watch-poll` 可以确保 webpack 能够检测到文件更改。webpack 默认会监听文件系统触发的相关事件，
-但是 VirtualBox 使用默认配置会有许多问题。
-=======
-`webpack-dev-server` will include a script in your bundle that connects to a WebSocket to reload when a change in any of your files occurs.
-The `--client-web-socket-url` flag makes sure the script knows where to look for the WebSocket. The server will use port `8080` by default, so we should also specify that here.
-
-`--watch-options-poll` makes sure that webpack can detect changes in your files. By default, webpack listens to events triggered by the filesystem, but VirtualBox has many problems with this.
->>>>>>> b9eb9023f2119062a0f09f62bccf188fb105184c
+`--watch-options-poll` 可以确保 webpack 能够检测到文件更改。webpack 默认会监听文件系统触发的相关事件，但是 VirtualBox 使用默认配置会有许多问题。
 
 现在服务器应该能够通过 `http://10.10.10.61:8080` 访问了。修改 `app.js`，应用程序就会实时重新加载。
 

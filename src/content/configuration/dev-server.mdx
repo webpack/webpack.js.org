@@ -610,10 +610,7 @@ module.exports = {
 npx webpack serve --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
 ```
 
-<<<<<<< HEAD
-## devServer.headers $#devserverheaders$
-=======
-`webpack-dev-server >= v4.2.0` allows you to set additional [TLS options](https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options) like `minVersion`. Also, you can directly pass the contents of respective files:
+`webpack-dev-server >= v4.2.0` 允许你设置额外的 [TLS 配置项](https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options)，比如 `minVersion`。同样你可以直接传递各自文件的内容：
 
 **webpack.config.js**
 
@@ -636,10 +633,9 @@ module.exports = {
 };
 ```
 
-W> Don't specify `https.ca` and `https.cacert` options together, if specified `https.ca` will be used. `https.cacert` is deprecated and will be removed in next major release.
+W> 不要同时指定 `https.ca` 与 `https.cacert` 配置项，如果指定的话将会使用 `https.ca`。`https.cacert` 已弃用并且将会在下个主要版本中被移除。
 
-## devServer.headers
->>>>>>> b9eb9023f2119062a0f09f62bccf188fb105184c
+## devServer.headers $#devserverheaders$
 
 `function` `object`
 
