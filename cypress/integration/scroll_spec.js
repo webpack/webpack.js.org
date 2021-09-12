@@ -5,17 +5,17 @@ describe('Scroll Test', () => {
       cy.viewport(size);
       cy.visit('/guides/getting-started');
       // scroll to Contributors section
-      cy.get('.contributors__section').scrollIntoView();
+      cy.get('[data-testid="contributors"]').scrollIntoView();
 
       cy.isNotInViewport('#basic-setup');
 
       cy.visit('/guides/build-performance/');
-      cy.isNotInViewport('.contributors__section');
+      cy.isNotInViewport('[data-testid="contributors"]');
     });
     it(`scroll to fragment when accessing new page with fragment on ${size}`, () => {
       cy.viewport(size);
       cy.visit('/guides/getting-started');
-      cy.get('.contributors__section').scrollIntoView();
+      cy.get('[data-testid="contributors"]').scrollIntoView();
 
       cy.visit('/guides/build-performance/#development');
       // since we lazy load notification bar now, #development element is a little out of viewport now

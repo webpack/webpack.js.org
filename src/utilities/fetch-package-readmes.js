@@ -20,6 +20,15 @@ const pathMap = {
   plugins: path.resolve(__dirname, '../content/plugins'),
 };
 
+const loaderGroup = {
+  'css-loader': 'CSS',
+  'less-loader': 'CSS',
+  'postcss-loader': 'CSS',
+  'sass-loader': 'CSS',
+  'style-loader': 'CSS',
+  'stylus-loader': 'CSS',
+};
+
 async function main() {
   for (const type of types) {
     const outputDir = pathMap[type];
@@ -57,13 +66,17 @@ async function main() {
           repo: htmlUrl,
         });
       } else {
-        // TODO we need other categories for loaders
-        headmatter = yamlHeadmatter({
+        let basic = {
           title: title,
           source: url,
           edit: editUrl,
           repo: htmlUrl,
-        });
+        };
+
+        if (loaderGroup[packageName]) {
+          basic.group = loaderGroup[packageName];
+        }
+        headmatter = yamlHeadmatter(basic);
       }
 
       const response = await fetch(url);
