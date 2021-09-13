@@ -8,6 +8,7 @@ contributors:
   - EugeneHlushko
   - FadySamirSadek
   - iamakulov
+  - chenxsan
 ---
 
 IgnorePlugin prevents the generation of modules for `import` or `require` calls matching the regular expressions or filter functions:
@@ -19,14 +20,11 @@ IgnorePlugin prevents the generation of modules for `import` or `require` calls 
 
 ```javascript
 new webpack.IgnorePlugin({ resourceRegExp, contextRegExp });
-// Supported in webpack 4 and earlier, unsupported in webpack 5:
-new webpack.IgnorePlugin(resourceRegExp, [contextRegExp]);
 ```
 
 ## Using filter functions
 
 - `checkResource (resource, context)` A Filter function that receives `resource` and `context` as arguments, must return boolean.
-- `checkContext (context)` was **removed in webpack 5** as `checkResource` already gets context.
 
 ```javascript
 new webpack.IgnorePlugin({
