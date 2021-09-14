@@ -15,7 +15,7 @@ This can be useful for allowing different behaviour between builds.
 new webpack.NormalModuleReplacementPlugin(resourceRegExp, newResource);
 ```
 
-Note that the `resourceRegExp` is tested against the request you write in your code, not the resolved resource. For instance, `'./sum'` will be used to test instead of `./sum.js` when you have code `import sum from './sum'`.
+Note that the `resourceRegExp` is tested against the request you write in your code, not the resolved resource. For instance, `'./sum'` will be used to test instead of `'./sum.js'` when you have code `import sum from './sum'`.
 
 ## Basic Example
 
