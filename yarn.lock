@@ -2086,11 +2086,11 @@
     "@octokit/openapi-types" "^10.0.0"
 
 "@pmmmwh/react-refresh-webpack-plugin@next":
-  version "0.5.0-rc.6"
-  resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.0-rc.6.tgz#6c44da4a63655ed4c52f1336bb5b050d6bc6285e"
-  integrity sha512-EU+iDjTp5oFTK2Rw7SgBD8RdKTUpcUcLFCeHZG7/5shkKRMuHTMOzigaf5/C9oLRfWDeCo0mW67dovP03V7SgA==
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.0.tgz#ca24a418c3b69cb87fd0dd95cca2c4bfa5683904"
+  integrity sha512-VRmiCnVHudkmzGh4gD1eW42matvNL8Y0OZ8FCEWs79iPTldihsuEi5GTMFjU+UfKRQxinN2e0/MDhJzExuiIyA==
   dependencies:
-    ansi-html "^0.0.7"
+    ansi-html-community "^0.0.8"
     common-path-prefix "^3.0.0"
     core-js-pure "^3.8.1"
     error-stack-parser "^2.0.6"
@@ -2906,11 +2906,6 @@ ansi-html-community@^0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/ansi-html-community/-/ansi-html-community-0.0.8.tgz#69fbc4d6ccbe383f9736934ae34c3f8290f1bf41"
   integrity sha512-1APHAyr3+PCamwNw3bXCPp4HFLONZt/yIH0sZp0/469KWNTEy+qN5jQ3GVX6DMZ1UXAi34yVwtTeaG/HpBuuzw==
-
-ansi-html@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/ansi-html/-/ansi-html-0.0.7.tgz#813584021962a9e9e6fd039f940d12f56ca7859e"
-  integrity sha1-gTWEAhliqenm/QOflA0S9WynhZ4=
 
 ansi-regex@^2.0.0:
   version "2.1.1"
