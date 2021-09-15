@@ -4514,7 +4514,68 @@ If you target an <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLI
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>Insert styles at top of <code>head</code> tag.</p><h3 id="styletagtransform"><code>styleTagTransform</code><a href="#styletagtransform" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>Type: <code>String | Function</code>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>Insert styles at top of <code>head</code> tag.</p><p>You can pass any parameters to <code>style.use(options)</code> and this value will be passed to <code>insert</code> and <code>styleTagTransform</code> functions.</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.css$/i</span><span class="token punctuation">,</span>
+        use<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            loader<span class="token operator">:</span> <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
+            options<span class="token operator">:</span> <span class="token punctuation">{</span>
+              injectType<span class="token operator">:</span> <span class="token string">&quot;lazyStyleTag&quot;</span><span class="token punctuation">,</span>
+              <span class="token comment">// Do not forget that this code will be used in the browser and</span>
+              <span class="token comment">// not all browsers support latest ECMA features like `let`, `const`, `arrow function expression` and etc,</span>
+              <span class="token comment">// we recommend use only ECMA 5 features,</span>
+              <span class="token comment">// but it is depends what browsers you want to support</span>
+              <span class="token function-variable function">insert</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token function">insertIntoTarget</span><span class="token punctuation">(</span><span class="token parameter">element<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">var</span> parent <span class="token operator">=</span> options<span class="token punctuation">.</span>target <span class="token operator">||</span> document<span class="token punctuation">.</span>head<span class="token punctuation">;</span>
+
+                parent<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>Insert styles to the provided element or to the <code>head</code> tag if target isn&#x27;t provided. Now you can inject styles into Shadow DOM (or any other element).</p><p><strong>custom-square.css</strong></p><pre><code class="hljs language-css"><span class="token selector">div</span> <span class="token punctuation">{</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p><strong>custom-square.js</strong></p><pre><code class="hljs language-js"><span class="token keyword">import</span> customSquareStyles <span class="token keyword">from</span> <span class="token string">&quot;./custom-square.css&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">CustomSquare</span> <span class="token keyword">extends</span> <span class="token class-name">HTMLElement</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">attachShadow</span><span class="token punctuation">(</span><span class="token punctuation">{</span> mode<span class="token operator">:</span> <span class="token string">&quot;open&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> divElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&quot;div&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    divElement<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token string">&quot;Text content.&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span>shadowRoot<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>divElement<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    customSquareStyles<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">{</span> target<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>shadowRoot <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// You can override injected styles</span>
+    <span class="token keyword">const</span> bgPurple <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CSSStyleSheet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> width <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">&quot;w&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> height <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">&quot;h&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    bgPurple<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">div { width: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>width<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px; height: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>height<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px; }</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span>shadowRoot<span class="token punctuation">.</span>adoptedStyleSheets <span class="token operator">=</span> <span class="token punctuation">[</span>bgPurple<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// `divElement` will have `100px` width, `100px` height and `red` background color</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+customElements<span class="token punctuation">.</span><span class="token function">define</span><span class="token punctuation">(</span><span class="token string">&quot;custom-square&quot;</span><span class="token punctuation">,</span> CustomSquare<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> CustomSquare<span class="token punctuation">;</span></code></pre><h3 id="styletagtransform"><code>styleTagTransform</code><a href="#styletagtransform" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>Type: <code>String | Function</code>
 Default: <code>undefined</code></p><h4 id="string-1"><code>String</code><a href="#string-1" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4><p>Allows to setup absolute path to custom function that allows to override default behavior styleTagTransform.</p><blockquote><p>⚠ Do not forget that this code will be used in the browser and not all browsers support latest ECMA features like <code>let</code>, <code>const</code>, <code>arrow function expression</code> and etc, we recommend use only ECMA 5 features, but it is depends what browsers you want to support</p></blockquote><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -4768,7 +4829,68 @@ Therefore, to generate source maps, set the <code>sourceMap</code> option to <co
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h2 id="contributing">Contributing<a href="#contributing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p>Please take a moment to read our contributing guidelines if you haven&#x27;t yet done so.</p><p><a href="https://github.com/webpack-contrib/style-loader/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p><h2 id="license">License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p><a href="https://github.com/webpack-contrib/style-loader/blob/master/LICENSE">MIT</a></p><h1 id="stylus-loader">stylus-loader<a href="#stylus-loader" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h4 id="custom-elements-shadow-dom">Custom Elements (Shadow DOM)<a href="#custom-elements-shadow-dom" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4><p>You can define custom target for your styles for the <code>lazyStyleTag</code> type.</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.css$/i</span><span class="token punctuation">,</span>
+        use<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            loader<span class="token operator">:</span> <span class="token string">&quot;style-loader&quot;</span><span class="token punctuation">,</span>
+            options<span class="token operator">:</span> <span class="token punctuation">{</span>
+              injectType<span class="token operator">:</span> <span class="token string">&quot;lazyStyleTag&quot;</span><span class="token punctuation">,</span>
+              <span class="token comment">// Do not forget that this code will be used in the browser and</span>
+              <span class="token comment">// not all browsers support latest ECMA features like `let`, `const`, `arrow function expression` and etc,</span>
+              <span class="token comment">// we recommend use only ECMA 5 features,</span>
+              <span class="token comment">// but it is depends what browsers you want to support</span>
+              <span class="token function-variable function">insert</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token function">insertIntoTarget</span><span class="token punctuation">(</span><span class="token parameter">element<span class="token punctuation">,</span> options</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">var</span> parent <span class="token operator">=</span> options<span class="token punctuation">.</span>target <span class="token operator">||</span> document<span class="token punctuation">.</span>head<span class="token punctuation">;</span>
+
+                parent<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>element<span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token string">&quot;css-loader&quot;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>Insert styles to the provided element or to the <code>head</code> tag if target isn&#x27;t provided.</p><p><strong>custom-square.css</strong></p><pre><code class="hljs language-css"><span class="token selector">div</span> <span class="token punctuation">{</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre><p><strong>custom-square.js</strong></p><pre><code class="hljs language-js"><span class="token keyword">import</span> customSquareStyles <span class="token keyword">from</span> <span class="token string">&quot;./custom-square.css&quot;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">CustomSquare</span> <span class="token keyword">extends</span> <span class="token class-name">HTMLElement</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">attachShadow</span><span class="token punctuation">(</span><span class="token punctuation">{</span> mode<span class="token operator">:</span> <span class="token string">&quot;open&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">const</span> divElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&quot;div&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    divElement<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token string">&quot;Text content.&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span>shadowRoot<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>divElement<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    customSquareStyles<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">{</span> target<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>shadowRoot <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// You can override injected styles</span>
+    <span class="token keyword">const</span> bgPurple <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CSSStyleSheet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> width <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">&quot;w&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> height <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">&quot;h&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    bgPurple<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">div { width: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>width<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px; height: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>height<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">px; }</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">this</span><span class="token punctuation">.</span>shadowRoot<span class="token punctuation">.</span>adoptedStyleSheets <span class="token operator">=</span> <span class="token punctuation">[</span>bgPurple<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// `divElement` will have `100px` width, `100px` height and `red` background color</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+customElements<span class="token punctuation">.</span><span class="token function">define</span><span class="token punctuation">(</span><span class="token string">&quot;custom-square&quot;</span><span class="token punctuation">,</span> CustomSquare<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> CustomSquare<span class="token punctuation">;</span></code></pre><h2 id="contributing">Contributing<a href="#contributing" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p>Please take a moment to read our contributing guidelines if you haven&#x27;t yet done so.</p><p><a href="https://github.com/webpack-contrib/style-loader/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a></p><h2 id="license">License<a href="#license" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p><a href="https://github.com/webpack-contrib/style-loader/blob/master/LICENSE">MIT</a></p><h1 id="stylus-loader">stylus-loader<a href="#stylus-loader" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <div align="center"></div><p><a href="https://npmjs.com/package/stylus-loader"><img src="https://img.shields.io/npm/v/stylus-loader.svg" alt="npm"/></a>
 <a href="https://nodejs.org"><img src="https://img.shields.io/node/v/stylus-loader.svg" alt="node"/></a>
 <a href="https://david-dm.org/webpack-contrib/stylus-loader"><img src="https://david-dm.org/webpack-contrib/stylus-loader.svg" alt="deps"/></a>
