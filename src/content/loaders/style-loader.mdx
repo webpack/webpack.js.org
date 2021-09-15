@@ -13,7 +13,7 @@ translators:
     <img width="200" height="200"
       src="https://webpack.js.org/assets/icon-square-big.svg"/>
   </a>
-  
+
 </div>
 
 [![npm][npm]][npm-url]
@@ -558,6 +558,89 @@ module.exports = {
 
 在 `head` 标签顶部插入styles。
 
+你可以给 `style.use(options)` 传递任何参数，并且这些值会被传递给 `insert` 与 `styleTagTransform` 函数。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: "style-loader",
+            options: {
+              injectType: "lazyStyleTag",
+              // 不要忘记这些代码会在浏览器中使用，
+              // 并且不是所有的浏览器都支持 `let`、`const`、箭头函数表达式等高级 ECMA 特性。
+              // 我们建议只使用 ECMA 5 特性，
+              // 但是这取决于你想支持的浏览器
+              insert: function insertIntoTarget(element, options) {
+                var parent = options.target || document.head;
+
+                parent.appendChild(element);
+              },
+            },
+          },
+          "css-loader",
+        ],
+      },
+    ],
+  },
+};
+```
+
+向指定元素添加样式，没有指定时将会插入到 `head` 标签中。现在你可以向 Shadow DOM 注入样式了（或者其他元素）。
+
+**custom-square.css**
+
+```css
+div {
+  width: 50px;
+  height: 50px;
+  background-color: red;
+}
+```
+
+**custom-square.js**
+
+```js
+import customSquareStyles from "./custom-square.css";
+
+class CustomSquare extends HTMLElement {
+  constructor() {
+    super();
+
+    this.attachShadow({ mode: "open" });
+
+    const divElement = document.createElement("div");
+
+    divElement.textContent = "Text content.";
+
+    this.shadowRoot.appendChild(divElement);
+
+    customSquareStyles.use({ target: this.shadowRoot });
+
+    // 你可以覆盖注入的样式
+    const bgPurple = new CSSStyleSheet();
+    const width = this.getAttribute("w");
+    const height = this.getAttribute("h");
+
+    bgPurple.replace(`div { width: ${width}px; height: ${height}px; }`);
+
+    this.shadowRoot.adoptedStyleSheets = [bgPurple];
+
+    // `divElement` 将会拥有 `100px` 宽，`100px` 高和 `red` 背景颜色
+  }
+}
+
+customElements.define("custom-square", CustomSquare);
+
+export default CustomSquare;
+```
+
 ### `styleTagTransform` $#styletagtransform$
 
 类型：`String | Function`
@@ -1007,6 +1090,91 @@ module.exports = {
     ],
   },
 };
+```
+
+#### Custom Elements (Shadow DOM) $#customelements$
+
+你可以为 `lazyStyleTag` 类型定义自定义目标。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          {
+            loader: "style-loader",
+            options: {
+              injectType: "lazyStyleTag",
+              // 不要忘记这些代码会在浏览器中使用，
+              // 并且不是所有的浏览器都支持 `let`、`const`、箭头函数表达式等高级 ECMA 特性。
+              // 我们建议只使用 ECMA 5 特性，
+              // 但是这取决于你想支持的浏览器
+              insert: function insertIntoTarget(element, options) {
+                var parent = options.target || document.head;
+
+                parent.appendChild(element);
+              },
+            },
+          },
+          "css-loader",
+        ],
+      },
+    ],
+  },
+};
+```
+
+向指定元素添加样式，没有指定时将会插入到 `head` 标签中。
+
+**custom-square.css**
+
+```css
+div {
+  width: 50px;
+  height: 50px;
+  background-color: red;
+}
+```
+
+**custom-square.js**
+
+```js
+import customSquareStyles from "./custom-square.css";
+
+class CustomSquare extends HTMLElement {
+  constructor() {
+    super();
+
+    this.attachShadow({ mode: "open" });
+
+    const divElement = document.createElement("div");
+
+    divElement.textContent = "Text content.";
+
+    this.shadowRoot.appendChild(divElement);
+
+    customSquareStyles.use({ target: this.shadowRoot });
+
+    // 你可以覆盖注入的样式
+    const bgPurple = new CSSStyleSheet();
+    const width = this.getAttribute("w");
+    const height = this.getAttribute("h");
+
+    bgPurple.replace(`div { width: ${width}px; height: ${height}px; }`);
+
+    this.shadowRoot.adoptedStyleSheets = [bgPurple];
+
+    // `divElement` 将会拥有 `100px` 宽，`100px` 高和 `red` 背景颜色
+  }
+}
+
+customElements.define("custom-square", CustomSquare);
+
+export default CustomSquare;
 ```
 
 ## Contributing $#contributing$
