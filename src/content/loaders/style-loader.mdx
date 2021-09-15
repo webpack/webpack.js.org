@@ -13,7 +13,7 @@ translators:
     <img width="200" height="200"
       src="https://webpack.js.org/assets/icon-square-big.svg"/>
   </a>
-  
+
 </div>
 
 [![npm][npm]][npm-url]
@@ -558,10 +558,7 @@ module.exports = {
 
 在 `head` 标签顶部插入styles。
 
-<<<<<<< HEAD
-### `styleTagTransform` $#styletagtransform$
-=======
-You can pass any parameters to `style.use(options)` and this value will be passed to `insert` and `styleTagTransform` functions.
+你可以给 `style.use(options)` 传递任何参数，并且这些值会被传递给 `insert` 与 `styleTagTransform` 函数。
 
 **webpack.config.js**
 
@@ -576,10 +573,10 @@ module.exports = {
             loader: "style-loader",
             options: {
               injectType: "lazyStyleTag",
-              // Do not forget that this code will be used in the browser and
-              // not all browsers support latest ECMA features like `let`, `const`, `arrow function expression` and etc,
-              // we recommend use only ECMA 5 features,
-              // but it is depends what browsers you want to support
+              // 不要忘记这些代码会在浏览器中使用，
+              // 并且不是所有的浏览器都支持 `let`、`const`、箭头函数表达式等高级 ECMA 特性。
+              // 我们建议只使用 ECMA 5 特性，
+              // 但是这取决于你想支持的浏览器
               insert: function insertIntoTarget(element, options) {
                 var parent = options.target || document.head;
 
@@ -595,7 +592,7 @@ module.exports = {
 };
 ```
 
-Insert styles to the provided element or to the `head` tag if target isn't provided. Now you can inject styles into Shadow DOM (or any other element).
+向指定元素添加样式，没有指定时将会插入到 `head` 标签中。现在你可以向 Shadow DOM 注入样式了（或者其他元素）。
 
 **custom-square.css**
 
@@ -626,7 +623,7 @@ class CustomSquare extends HTMLElement {
 
     customSquareStyles.use({ target: this.shadowRoot });
 
-    // You can override injected styles
+    // 你可以覆盖注入的样式
     const bgPurple = new CSSStyleSheet();
     const width = this.getAttribute("w");
     const height = this.getAttribute("h");
@@ -635,7 +632,7 @@ class CustomSquare extends HTMLElement {
 
     this.shadowRoot.adoptedStyleSheets = [bgPurple];
 
-    // `divElement` will have `100px` width, `100px` height and `red` background color
+    // `divElement` 将会拥有 `100px` 宽，`100px` 高和 `red` 背景颜色
   }
 }
 
@@ -644,8 +641,7 @@ customElements.define("custom-square", CustomSquare);
 export default CustomSquare;
 ```
 
-### `styleTagTransform`
->>>>>>> 4ac786205ea89dedd3bcd0ef0ad00f9421a50e6a
+### `styleTagTransform` $#styletagtransform$
 
 类型：`String | Function`
 默认值：`undefined`
@@ -1096,12 +1092,9 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## Contributing $#contributing$
-=======
-#### Custom Elements (Shadow DOM)
+#### Custom Elements (Shadow DOM) $#customelements$
 
-You can define custom target for your styles for the `lazyStyleTag` type.
+你可以为 `lazyStyleTag` 类型定义自定义目标。
 
 **webpack.config.js**
 
@@ -1116,10 +1109,10 @@ module.exports = {
             loader: "style-loader",
             options: {
               injectType: "lazyStyleTag",
-              // Do not forget that this code will be used in the browser and
-              // not all browsers support latest ECMA features like `let`, `const`, `arrow function expression` and etc,
-              // we recommend use only ECMA 5 features,
-              // but it is depends what browsers you want to support
+              // 不要忘记这些代码会在浏览器中使用，
+              // 并且不是所有的浏览器都支持 `let`、`const`、箭头函数表达式等高级 ECMA 特性。
+              // 我们建议只使用 ECMA 5 特性，
+              // 但是这取决于你想支持的浏览器
               insert: function insertIntoTarget(element, options) {
                 var parent = options.target || document.head;
 
@@ -1135,7 +1128,7 @@ module.exports = {
 };
 ```
 
-Insert styles to the provided element or to the `head` tag if target isn't provided.
+向指定元素添加样式，没有指定时将会插入到 `head` 标签中。
 
 **custom-square.css**
 
@@ -1166,7 +1159,7 @@ class CustomSquare extends HTMLElement {
 
     customSquareStyles.use({ target: this.shadowRoot });
 
-    // You can override injected styles
+    // 你可以覆盖注入的样式
     const bgPurple = new CSSStyleSheet();
     const width = this.getAttribute("w");
     const height = this.getAttribute("h");
@@ -1175,7 +1168,7 @@ class CustomSquare extends HTMLElement {
 
     this.shadowRoot.adoptedStyleSheets = [bgPurple];
 
-    // `divElement` will have `100px` width, `100px` height and `red` background color
+    // `divElement` 将会拥有 `100px` 宽，`100px` 高和 `red` 背景颜色
   }
 }
 
@@ -1184,8 +1177,7 @@ customElements.define("custom-square", CustomSquare);
 export default CustomSquare;
 ```
 
-## Contributing
->>>>>>> 4ac786205ea89dedd3bcd0ef0ad00f9421a50e6a
+## Contributing $#contributing$
 
 Please take a moment to read our contributing guidelines if you haven't yet done so.
 
