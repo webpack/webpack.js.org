@@ -8311,6 +8311,11 @@ makeerror@1.0.x:
   dependencies:
     tmpl "1.0.x"
 
+map-like@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/map-like/-/map-like-2.0.0.tgz#94496d49ad333c0dc3234b27adbbd1e8535953b4"
+  integrity sha1-lEltSa0zPA3DI0snrbvR6FNZU7Q=
+
 map-stream@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/map-stream/-/map-stream-0.1.0.tgz#e56aa94c4c8055a16404a0674b78f215f7c8e194"
@@ -13139,10 +13144,17 @@ webpack-dev-middleware@^5.1.0:
     colorette "^1.2.2"
     memfs "^3.2.2"
     mime-types "^2.1.31"
-  integrity sha512-iBaDkHBLfW3cEITeJWNkjZBrm+b5A3YLg8XVdNOdjUNABdXJwcsJv4dzKSnVf1q4Ch489+6epWVW6OcOyVfG7w==
+    range-parser "^1.2.1"
+    schema-utils "^3.1.0"
+
+webpack-dev-server@^4.2.0:
+  version "4.2.1"
+  resolved "https://registry.npmjs.org/webpack-dev-server/-/webpack-dev-server-4.2.1.tgz#12e912b3cad8ddd5222a4ba2c41c6fc69d2545fb"
+  integrity sha512-SQrIyQDZsTaF84p/WMAXNRKxjTeIaewhDIiHYZ423ENhNAsQWyubvqPTn0IoLMGkbhWyWv8/GYnCjItt0ZNC5w==
   dependencies:
     ansi-html-community "^0.0.8"
     bonjour "^3.5.0"
+    chokidar "^3.5.1"
     colorette "^1.2.2"
     compression "^1.7.4"
     connect-history-api-fallback "^1.6.0"
