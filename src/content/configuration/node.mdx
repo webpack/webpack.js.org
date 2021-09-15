@@ -42,7 +42,7 @@ module.exports = {
 
 ## node.global $#nodeglobal$
 
-`boolean`
+`boolean` `'warn'`
 
 T> 如果你正在使用一个需要全局变量的模块，请使用 `ProvidePlugin` 替代 `global`。
 
@@ -50,26 +50,47 @@ T> 如果你正在使用一个需要全局变量的模块，请使用 `ProvidePl
 
 选项：
 
+<<<<<<< HEAD
 - `true`: 提供 polyfill.
 - `false`: 不提供任何 polyfill。代码可能会出现 `ReferenceError` 的崩溃。
+=======
+- `true`: Provide a polyfill.
+- `false`: Provide nothing. Code that expects this object may crash with a `ReferenceError`.
+- `'warn'`: Show a warning when using `global`.
+>>>>>>> d07fcdb6b91235bece57cb9ed9720e7e9b4b5de7
 
 ## node.\_\_filename $#node__filename$
 
-`boolean` `string: 'mock' | 'eval-only'`
+`boolean` `'mock' | 'warn-mock' | 'eval-only'`
 
 选项：
 
+<<<<<<< HEAD
 - `true`: **输入**文件的文件名，是相对于 [`context` 选项](/configuration/entry-context/#context)。
 - `false`: webpack 不会更改 `__filename` 的代码。在 Node.js 环境中运行时，**出**文件的文件名。
 - `'mock'`: value 填充为 `'index.js'`.
+=======
+- `true`: The filename of the **input** file relative to the [`context` option](/configuration/entry-context/#context).
+- `false`: Webpack won't touch your `__filename` code, which means you have the regular Node.js `__filename` behavior. The filename of the **output** file when run in a Node.js environment.
+- `'mock'`: The fixed value `'/index.js'`.
+- `'warn-mock'`: Use the fixed value of `'/index.js'` but show a warning.
+- `'eval-only'`
+>>>>>>> d07fcdb6b91235bece57cb9ed9720e7e9b4b5de7
 
 ## node.\_\_dirname $#node__dirname$
 
-`boolean` `string: 'mock' | 'eval-only'`
+`boolean` `'mock' | 'warn-mock' | 'eval-only'`
 
 选项：
 
+<<<<<<< HEAD
 - `true`: **输入** 文件的目录名，是相对于 [`context` 选项](/configuration/entry-context/#context)。
 - `false`: webpack 不会更改 `__dirname` 的代码，这意味着你有常规 Node.js 中的 `__dirname` 的行为。在 Node.js 环境中运行时，**输出** 文件的目录名。
 - `'mock'`: value 填充为 `'/'`。
+=======
+- `true`: The dirname of the **input** file relative to the [`context` option](/configuration/entry-context/#context).
+- `false`: Webpack won't touch your `__dirname` code, which means you have the regular Node.js `__dirname` behavior. The dirname of the **output** file when run in a Node.js environment.
+- `'mock'`: The fixed value `'/'`.
+- `'warn-mock'`: Use the fixed value of `'/'` but show a warning.
+>>>>>>> d07fcdb6b91235bece57cb9ed9720e7e9b4b5de7
 - `'eval-only'`

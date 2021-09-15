@@ -4,6 +4,7 @@ group: webpack
 contributors:
   - gonzoyumo
   - byzyk
+  - chenxsan
 ---
 
 The `NormalModuleReplacementPlugin` allows you to replace resources that match `resourceRegExp` with `newResource`. If `newResource` is relative, it is resolved relative to the previous resource. If `newResource` is a function, it is expected to overwrite the request attribute of the supplied resource.
@@ -14,7 +15,13 @@ This can be useful for allowing different behaviour between builds.
 new webpack.NormalModuleReplacementPlugin(resourceRegExp, newResource);
 ```
 
+<<<<<<< HEAD
 ## Basic Example $#basic-example$
+=======
+Note that the `resourceRegExp` is tested against the request you write in your code, not the resolved resource. For instance, `'./sum'` will be used to test instead of `'./sum.js'` when you have code `import sum from './sum'`.
+
+## Basic Example
+>>>>>>> d07fcdb6b91235bece57cb9ed9720e7e9b4b5de7
 
 Replace a specific module when building for a [development environment](/guides/production).
 
