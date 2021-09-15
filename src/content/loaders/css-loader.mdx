@@ -93,6 +93,7 @@ console.log(css); // {String}
 
 如果有 SourceMap，它们也将包含在字符串结果中。
 
+<<<<<<< HEAD
 如果由于某种原因，你需要将 CSS 提取为纯粹的
 字符串资源（即不包含在 JS 模块中），则可能需要
 查看 [extract-loader](https://github.com/peerigon/extract-loader)。
@@ -116,6 +117,9 @@ module.exports = {
   },
 };
 ```
+=======
+If, for one reason or another, you need to extract CSS as a file (i.e. do not store CSS in a JS module) you might want to check out the [recommend example](https://github.com/webpack-contrib/css-loader#recommend).
+>>>>>>> c3b931883822a6ac3a431197ba9a56f3bdacd949
 
 ## Options $#options$
 
@@ -755,6 +759,7 @@ module.exports = {
 
 支持的模板字符串：
 
+<<<<<<< HEAD
 - `[name]` 源文件名称
 - `[path]` 源文件相对于 `compiler.context` 或者 `modules.localIdentContext` 配置项的相对路径。
 - `[file]` - 文件名和路径。
@@ -762,6 +767,16 @@ module.exports = {
 - `[hash]` - 字符串的哈希值。基于 `localIdentHashSalt`、`localIdentHashFunction`、`localIdentHashDigest`、`localIdentHashDigestLength`、`localIdentContext`、`resourcePath` 和 `exportName` 生成。
 - `[<hashFunction>:hash:<hashDigest>:<hashDigestLength>]` - 带有哈希设置的哈希。
 - `[local]` - 原始类名。
+=======
+- `[name]` the basename of the resource
+- `[folder]` the folder the resource relative to the `compiler.context` option or `modules.localIdentContext` option.
+- `[path]` the path of the resource relative to the `compiler.context` option or `modules.localIdentContext` option.
+- `[file]` - filename and path.
+- `[ext]` - extension with leading `.`.
+- `[hash]` - the hash of the string, generated based on `localIdentHashSalt`, `localIdentHashFunction`, `localIdentHashDigest`, `localIdentHashDigestLength`, `localIdentContext`, `resourcePath` and `exportName`
+- `[<hashFunction>:hash:<hashDigest>:<hashDigestLength>]` - hash with hash settings.
+- `[local]` - original class.
+>>>>>>> c3b931883822a6ac3a431197ba9a56f3bdacd949
 
 建议：
 
