@@ -39,7 +39,7 @@ Since webpack 3.0.0, the `node` option may be set to `false` to completely turn 
 
 ## node.global
 
-`boolean`
+`boolean` `'warn'`
 
 T> If you are using a module which needs global variables in it, use `ProvidePlugin` instead of `global`.
 
@@ -49,25 +49,28 @@ Options:
 
 - `true`: Provide a polyfill.
 - `false`: Provide nothing. Code that expects this object may crash with a `ReferenceError`.
+- `'warn'`: Show a warning when using `global`.
 
 ## node.\_\_filename
 
-`boolean` `string: 'mock' | 'eval-only'`
+`boolean` `'mock' | 'warn-mock' | 'eval-only'`
 
 Options:
 
 - `true`: The filename of the **input** file relative to the [`context` option](/configuration/entry-context/#context).
 - `false`: Webpack won't touch your `__filename` code, which means you have the regular Node.js `__filename` behavior. The filename of the **output** file when run in a Node.js environment.
 - `'mock'`: The fixed value `'/index.js'`.
+- `'warn-mock'`: Use the fixed value of `'/index.js'` but show a warning.
 - `'eval-only'`
 
 ## node.\_\_dirname
 
-`boolean` `string: 'mock' | 'eval-only'`
+`boolean` `'mock' | 'warn-mock' | 'eval-only'`
 
 Options:
 
 - `true`: The dirname of the **input** file relative to the [`context` option](/configuration/entry-context/#context).
 - `false`: Webpack won't touch your `__dirname` code, which means you have the regular Node.js `__dirname` behavior. The dirname of the **output** file when run in a Node.js environment.
 - `'mock'`: The fixed value `'/'`.
+- `'warn-mock'`: Use the fixed value of `'/'` but show a warning.
 - `'eval-only'`
