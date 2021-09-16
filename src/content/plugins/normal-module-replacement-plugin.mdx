@@ -15,13 +15,9 @@ This can be useful for allowing different behaviour between builds.
 new webpack.NormalModuleReplacementPlugin(resourceRegExp, newResource);
 ```
 
-<<<<<<< HEAD
-## Basic Example $#basic-example$
-=======
-Note that the `resourceRegExp` is tested against the request you write in your code, not the resolved resource. For instance, `'./sum'` will be used to test instead of `'./sum.js'` when you have code `import sum from './sum'`.
+注意，`resourceRegExp` 是针对你在代码中编写的请求进行测试的，而不是解析的资源。例如，当你写了一段 `import sum from './sum'` 的代码时，`'./sum'` 将会被用来测试而不是 `'./sum.js'`。
 
-## Basic Example
->>>>>>> d07fcdb6b91235bece57cb9ed9720e7e9b4b5de7
+## Basic Example $#basic-example$
 
 Replace a specific module when building for a [development environment](/guides/production).
 
