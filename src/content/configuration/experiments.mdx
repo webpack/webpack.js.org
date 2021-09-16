@@ -23,6 +23,7 @@ Available options:
 
 - `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module.
 - [`buildHttp`](#experimentsbuildhttp)
+- [`futureDefaults`](#experimentsfuturedefaults)
 - `layers`: Enable module and chunk layers.
 - [`lazyCompilation`](#experimentslazycompilation)
 - [`outputModule`](#experimentsoutputmodule)
@@ -129,6 +130,21 @@ By default webpack would generate a `<compiler-name.>webpack.lock` file>. Make s
 Detect changes to remote resources and upgrade them automatically.
 
 - Type: `boolean`
+
+### experiments.futureDefaults $#experimentsfuturedefaults$
+
+使用下一个 webpack 主版本的默认值，并在任何有问题的地方显示警告。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  experimental: {
+    futureDefaults: true,
+  },
+};
+```
 
 ### experiments.lazyCompilation $#experimentslazycompilation$
 
