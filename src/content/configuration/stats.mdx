@@ -280,6 +280,21 @@ module.exports = {
 };
 ```
 
+### stats.groupAssetsByExtension
+
+`boolean`
+
+Tells `stats` whether to group assets by their extension.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupAssetsByExtension: false,
+  },
+};
+```
+
 ### stats.groupAssetsByInfo
 
 `boolean`
@@ -291,6 +306,21 @@ module.exports = {
   //...
   stats: {
     groupAssetsByInfo: false,
+  },
+};
+```
+
+### stats.groupAssetsByPath
+
+`boolean`
+
+Tells `stats` whether to group assets by their asset path.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupAssetsByPath: false,
   },
 };
 ```
