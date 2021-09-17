@@ -12667,23 +12667,7 @@ unified@9.2.0:
     trough "^1.0.0"
     vfile "^4.0.0"
 
-<<<<<<< HEAD
-unified@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.npmjs.org/unified/-/unified-6.2.0.tgz#7fbd630f719126d67d40c644b7e3f617035f6dba"
-  integrity sha512-1k+KPhlVtqmG99RaTbAv/usu85fcSRu3wY8X+vnsEhIxNP5VbVIDiXnLqyKIG+UMdyTg0ZX9EI6k2AfjJkHPtA==
-  dependencies:
-    bail "^1.0.0"
-    extend "^3.0.0"
-    is-plain-obj "^1.1.0"
-    trough "^1.0.0"
-    vfile "^2.0.0"
-    x-is-string "^0.1.0"
-
-unified@^9.0.0, unified@^9.1.0, unified@^9.2.0, unified@^9.2.1:
-=======
 unified@^9.0.0, unified@^9.1.0, unified@^9.2.0, unified@^9.2.2:
->>>>>>> e16c2dc6a1faad920453b83ae6428bb1be5141cd
   version "9.2.2"
   resolved "https://registry.npmjs.org/unified/-/unified-9.2.2.tgz#67649a1abfc3ab85d2969502902775eb03146975"
   integrity sha512-Sg7j110mtefBD+qunSLO1lqOEKdrwBFBrR6Qd8f4uwkhWNlbkaqwHse6e7QvD3AP/MNoJdEDLaf8OxYyoWgorQ==
