@@ -5289,17 +5289,17 @@ eslint-config-prettier@^8.3.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.3.0.tgz#f7471b20b6fe8a9a9254cc684454202886a2dd7a"
   integrity sha512-BgZuLUSeKzvlL/VUjx/Yb787VQ26RU3gGjA3iiFvdsp/2bMfVIWUVP7tjxtjS0e+HP409cPlPvNkQloz8C91ew==
 
-eslint-mdx@^1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/eslint-mdx/-/eslint-mdx-1.15.0.tgz#270de0a2ab27aad9350689d3b9b2112f94805239"
-  integrity sha512-0IGR9zH8RL5YDyL3SN3Vtc0u4uOTblGLrODMU9uhbiHJ8s48WZ24ruQthbUX221zFGf55+9A7cPeYi56xgI9pQ==
+eslint-mdx@^1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/eslint-mdx/-/eslint-mdx-1.15.1.tgz#985909c08b3612f7661d479c1df5509dcfb6291b"
+  integrity sha512-qrHpYPkdSVO3BIarGH+NVudmQ5ebrnEyzByWzTzN8S4tJA9OYQ58qbH0wEIpf+Pc9hXYsBdOUzO4Zg08CcREwg==
   dependencies:
-    cosmiconfig "^7.0.0"
+    cosmiconfig "^7.0.1"
     remark-mdx "^1.6.22"
     remark-parse "^8.0.3"
     remark-stringify "^8.1.1"
     tslib "^2.3.1"
-    unified "^9.2.1"
+    unified "^9.2.2"
 
 eslint-plugin-cypress@^2.12.1:
   version "2.12.1"
@@ -5315,12 +5315,12 @@ eslint-plugin-markdown@^2.2.0:
   dependencies:
     mdast-util-from-markdown "^0.8.5"
 
-eslint-plugin-mdx@^1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-mdx/-/eslint-plugin-mdx-1.15.0.tgz#391e41b0025091f9912b6bd80897ce85b6d0cdd7"
-  integrity sha512-3NF/tp6MgdJL+28i+Qzg60loiHqgPWb35NUtDQvhocUOK2afRD0YR1+ep7JFUZ5mys2CTkpbd8Gc/GrXgsBVNA==
+eslint-plugin-mdx@^1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-mdx/-/eslint-plugin-mdx-1.15.1.tgz#e8f063f74fc51612e1874b2d69e83caf3bbd1fae"
+  integrity sha512-kaA4NcI9L4Zz9traOFXwVe13yihazNFMLHWs6KAkaUjailO+LM5glAJROdCQGpQsTGpjaWY0Sp/XyARRrqsb8Q==
   dependencies:
-    eslint-mdx "^1.15.0"
+    eslint-mdx "^1.15.1"
     eslint-plugin-markdown "^2.2.0"
     synckit "^0.3.4"
     tslib "^2.3.1"
@@ -11198,10 +11198,10 @@ sass-loader@^12.1.0:
     klona "^2.0.4"
     neo-async "^2.6.2"
 
-sass@^1.40.1:
-  version "1.40.1"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.40.1.tgz#55d3fc38fe9dc579e7324ce0eb9185bede7992a9"
-  integrity sha512-M6WskYLzTfdZdb09W9SftIScjudL8jNkhdh9z96U+olQaKIcw2Knb6QLL9bUhnuSm4VD+1yJVaO2/ENDPMTtAQ==
+sass@^1.41.0:
+  version "1.41.0"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.41.0.tgz#f7b41dc00336a4c03429c37b9680b86758af61d4"
+  integrity sha512-wb8nT60cjo9ZZMcHzG7TzdbFtCAmHEKWrH+zAdScPb4ZxL64WQBnGdbp5nwlenW5wJPcHva1JWmVa0h6iqA5eg==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
 
@@ -12667,19 +12667,7 @@ unified@9.2.0:
     trough "^1.0.0"
     vfile "^4.0.0"
 
-unified@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.npmjs.org/unified/-/unified-6.2.0.tgz#7fbd630f719126d67d40c644b7e3f617035f6dba"
-  integrity sha512-1k+KPhlVtqmG99RaTbAv/usu85fcSRu3wY8X+vnsEhIxNP5VbVIDiXnLqyKIG+UMdyTg0ZX9EI6k2AfjJkHPtA==
-  dependencies:
-    bail "^1.0.0"
-    extend "^3.0.0"
-    is-plain-obj "^1.1.0"
-    trough "^1.0.0"
-    vfile "^2.0.0"
-    x-is-string "^0.1.0"
-
-unified@^9.0.0, unified@^9.1.0, unified@^9.2.0, unified@^9.2.1:
+unified@^9.0.0, unified@^9.1.0, unified@^9.2.0, unified@^9.2.2:
   version "9.2.2"
   resolved "https://registry.npmjs.org/unified/-/unified-9.2.2.tgz#67649a1abfc3ab85d2969502902775eb03146975"
   integrity sha512-Sg7j110mtefBD+qunSLO1lqOEKdrwBFBrR6Qd8f4uwkhWNlbkaqwHse6e7QvD3AP/MNoJdEDLaf8OxYyoWgorQ==
