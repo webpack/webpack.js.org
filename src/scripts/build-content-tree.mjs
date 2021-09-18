@@ -32,7 +32,10 @@ function buildContentTree(source, output) {
     );
   }
 
-  let content = directoryTree(source, { extensions: /\.(md|mdx)/ });
+  let content = directoryTree(source, {
+    extensions: /\.(md|mdx)/,
+    attributes: ['size', 'type', 'extension'],
+  });
 
   content = restructure(content, {
     dir: source,
