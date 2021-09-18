@@ -1,4 +1,4 @@
-import getAdjacentPages from './index';
+import getAdjacentPages from './index.mjs';
 const needle = { url: '/webpack' };
 describe('getAdjacentPages', () => {
   it('returns only next page', () => {
@@ -7,7 +7,7 @@ describe('getAdjacentPages', () => {
     expect(previous).toBeUndefined();
     expect(next).toEqual({ url: '/webpack-doc' });
   });
-  it('retuns only previous page', () => {
+  it('returns only previous page', () => {
     const pages = [{ url: '/webpack-doc' }, needle];
     const { previous, next } = getAdjacentPages(pages, needle, 'url');
     expect(next).toBeUndefined();

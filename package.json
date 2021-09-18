@@ -51,7 +51,7 @@
     "serve": "npm run build && sirv start ./dist --port 4000",
     "preprintable": "npm run clean-printable",
     "printable": "node ./src/scripts/concatenate-docs.mjs",
-    "jest": "jest",
+    "jest": "NODE_OPTIONS=--experimental-vm-modules jest --config=jest.config.mjs",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "cypress:ci": "start-server-and-test build-test http://localhost:4200 cypress:run",
