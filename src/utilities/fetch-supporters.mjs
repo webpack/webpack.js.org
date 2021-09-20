@@ -1,9 +1,15 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
-const { promisify } = require('util');
-const fetch = require('node-fetch');
-const { uniqBy } = require('lodash');
+import fs from 'fs';
+import path from 'path';
+import { promisify } from 'util';
+import fetch from 'node-fetch';
+import lodash from 'lodash';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const { uniqBy } = lodash;
 
 const asyncWriteFile = promisify(fs.writeFile);
 

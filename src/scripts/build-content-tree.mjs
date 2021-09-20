@@ -1,25 +1,26 @@
 #!/usr/bin/env node
 // ./build-content-tree source output
 // ./build-content-tree "./src/content" ".src/_content.json"
-
-const directoryTree = require('directory-tree');
-const fs = require('fs');
-const path = require('path');
+import directoryTree from 'directory-tree';
+import fs from 'fs';
+import path from 'path';
 
 // Import Utils
-const { restructure } = require('../utilities/content-tree-enhancers.js');
+import { restructure } from '../utilities/content-tree-enhancers.mjs';
 
-if (require.main === module) {
-  main();
-} else {
-  module.exports = buildContentTree;
-}
+// if (require.main === module) {
+//   main();
+// } else {
+//   module.exports = buildContentTree;
+// }
 
 function main() {
   const source = process.argv[2];
   const output = process.argv[3];
   buildContentTree(source, output);
 }
+
+main();
 
 function buildContentTree(source, output) {
   if (!source) {

@@ -1,21 +1,25 @@
 // Import External Dependencies
-const WebpackPwaManifest = require('webpack-pwa-manifest');
-const path = require('path');
-const { merge } = require('webpack-merge');
-const OptimizeCSSAssetsPlugin = require('css-minimizer-webpack-plugin');
-const SSGPlugin = require('static-site-generator-webpack-plugin');
-const RedirectWebpackPlugin = require('redirect-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const flattenContentTree = require('./src/utilities/flatten-content-tree');
-const contentTree = require('./src/_content.json');
+import WebpackPwaManifest from 'webpack-pwa-manifest';
+import path from 'path';
+import { merge } from 'webpack-merge';
+import OptimizeCSSAssetsPlugin from 'css-minimizer-webpack-plugin';
+import SSGPlugin from 'static-site-generator-webpack-plugin';
+import RedirectWebpackPlugin from 'redirect-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import flattenContentTree from './src/utilities/flatten-content-tree.mjs';
+import fs from 'fs';
+
+const contentTree = JSON.parse(fs.readFileSync('./src/_content.json', 'utf8'));
 
 // Load Common Configuration
-const common = require('./webpack.common.js');
+import common from './webpack.common.mjs';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
 
 // content tree to path array
 const paths = [...flattenContentTree(contentTree), '/vote', '/app-shell'];
 
-module.exports = (env) =>
+export default (env) =>
   merge(common(env), {
     name: 'ssg',
     mode: 'production',
