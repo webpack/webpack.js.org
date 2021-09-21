@@ -1,4 +1,4 @@
-module.exports = function yamlHeadmatter(fields) {
+export default function yamlHeadmatter(fields) {
   let ret = '---\n';
 
   Object.keys(fields).map((field) => {

@@ -226,7 +226,11 @@ T> 输出可能会稍有不同，但是只要构建成功，那么你就可以�
 
 事实上，webpack 在幕后会将代码 “**转译**”，以便旧版本浏览器可以执行。如果你检查 `dist/main.js`，你可以看到 webpack 具体如何实现，这是独创精巧的设计！除了 `import` 和 `export`，webpack 还能够很好地支持多种其他模块语法，更多信息请查看 [模块 API](/api/module-methods)。
 
+<<<<<<< HEAD
 注意，webpack 不会更改代码中除 `import` 和 `export` 语句以外的部分。如果你在使用其它 [ES2015 特性](http://es6-features.org/)，请确保你在 webpack [loader 系统](/concepts/loaders/) 中使用了一个像是 [Babel](https://babel.docschina.org/) 或 [Bublé](https://buble.surge.sh/guide/) 的 [transpiler(转译器)](/loaders/#transpiling)。
+=======
+Note that webpack will not alter any code other than `import` and `export` statements. If you are using other [ES2015 features](http://es6-features.org/), make sure to [use a transpiler](/loaders/#transpiling) such as [Babel](https://babeljs.io/) via webpack's [loader system](/concepts/loaders/).
+>>>>>>> bc141c2aff12a6d877f8960331e1a77651f413f6
 
 ## 使用一个配置文件 $#using-a-configuration$
 

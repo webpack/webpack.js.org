@@ -10,9 +10,9 @@ import {
   extractSections,
   getPageDescription,
   getPageTitle,
-} from '../../utilities/content-utils';
+} from '../../utilities/content-utils.mjs';
 import isClient from '../../utilities/is-client';
-import getAdjacentPages from '../../utilities/get-adjacent-pages';
+import getAdjacentPages from '../../utilities/get-adjacent-pages/index.mjs';
 
 // Import Components
 import NotificationBar from '../NotificationBar/NotificationBar';
