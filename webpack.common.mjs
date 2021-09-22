@@ -4,7 +4,7 @@ import webpack from 'webpack';
 import h from 'hastscript';
 import remarkResponsiveTable from './src/remark-plugins/remark-responsive-table/remark-responsive-table.mjs';
 import gfm from 'remark-gfm';
-import slug from 'remark-slug';
+import slug from './src/remark-plugins/docschina-remark-slugger/index.mjs';
 import cleanup from './src/remark-plugins/remark-cleanup-readme/index.mjs';
 import aside from './src/remark-plugins/remark-custom-asides/index.mjs';
 import autolink from 'remark-autolink-headings';
