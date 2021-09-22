@@ -86,7 +86,7 @@
     "css-loader": "^6.3.0",
     "css-minimizer-webpack-plugin": "^3.0.2",
     "cypress": "^8.4.1",
-    "directory-tree": "^2.4.0",
+    "directory-tree": "^3.0.0",
     "directory-tree-webpack-plugin": "^1.0.2",
     "duplexer": "^0.1.1",
     "eslint": "^7.32.0",
