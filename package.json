@@ -33,16 +33,10 @@
     "bundle-analyze": "run-s clean fetch content && webpack --config webpack.prod.mjs --node-env production && run-s printable content && webpack --config webpack.ssg.mjs --node-env production --env ssg --profile --json > stats.json && webpack-bundle-analyzer stats.json",
     "fetch-repos": "node src/utilities/fetch-package-repos.mjs",
     "fetch": "run-p fetch:*",
-<<<<<<< HEAD
-    "fetch:readmes": "node src/utilities/fetch-package-readmes.js",
-    "prebuild": "npm run clean",
-    "build": "run-s content && webpack --config webpack.prod.js --node-env production && run-s printable content && webpack --config webpack.ssg.js --node-env production",
-=======
     "fetch:readmes": "node src/utilities/fetch-package-readmes.mjs",
     "fetch:supporters": "node src/utilities/fetch-supporters.mjs",
     "prebuild": "npm run clean",
     "build": "run-s fetch-repos fetch content && webpack --config webpack.prod.mjs --node-env production && run-s printable content && webpack --config webpack.ssg.mjs --node-env production --env ssg",
->>>>>>> bc141c2aff12a6d877f8960331e1a77651f413f6
     "postbuild": "npm run sitemap",
     "build-test": "npm run build && http-server --port 4200 dist/",
     "test": "npm run lint",
@@ -146,15 +140,10 @@
     "style-loader": "^3.2.1",
     "tailwindcss": "^2.2.15",
     "tap-spot": "^1.1.1",
-<<<<<<< HEAD
     "textlint": "^11.8.2",
     "textlint-rule-heading": "^1.0.10",
-    "unist-util-visit": "^2.0.3",
-    "webpack": "^5.52.1",
-=======
     "unist-util-visit": "^4.0.0",
     "webpack": "^5.53.0",
->>>>>>> bc141c2aff12a6d877f8960331e1a77651f413f6
     "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.2.1",

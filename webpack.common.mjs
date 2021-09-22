@@ -19,14 +19,8 @@ const __dirname = path.dirname(__filename);
 const require = createRequire(import.meta.url);
 
 const mdPlugins = [
-<<<<<<< HEAD:webpack.common.js
-  require('remark-gfm'),
-  require('./src/remark-plugins/docschina-remark-slugger/index.js'),
-  // require('remark-attr'),
-=======
   gfm,
   slug,
->>>>>>> bc141c2aff12a6d877f8960331e1a77651f413f6:webpack.common.mjs
   remarkResponsiveTable,
   remarkEmoji,
   cleanup,

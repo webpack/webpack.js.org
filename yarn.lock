@@ -3761,16 +3761,12 @@ ccount@^1.0.0:
   resolved "https://registry.yarnpkg.com/ccount/-/ccount-1.1.0.tgz#246687debb6014735131be8abab2d93898f8d043"
   integrity sha512-vlNK021QdI7PNeiUh/lKkC/mNHHfV0m/Ad5JoI0TYtlBnJAslM/JIkm/tGC88bkLIwO6OQ5uV6ztS6kVAtCDlg==
 
-<<<<<<< HEAD
-chalk@^1.0.0, chalk@^1.1.1, chalk@^1.1.3:
-=======
 ccount@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ccount/-/ccount-2.0.0.tgz#3d6fb55803832766a24c6f339abc507297eb5d25"
   integrity sha512-VOR0NWFYX65n9gELQdcpqsie5L5ihBXuZGAgaPEp/U7IOSjnPMEH6geE+2f6lcekaNEfWzAHS45mPvSo5bqsUA==
 
 chalk@^1.1.3:
->>>>>>> bc141c2aff12a6d877f8960331e1a77651f413f6
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-1.1.3.tgz#a8115c55e4a702fe4d150abd3872822a7e09fc98"
   integrity sha1-qBFcVeSnAv5NFQq9OHKCKn4J/Jg=
@@ -3838,17 +3834,10 @@ character-reference-invalid@^1.0.0:
   resolved "https://registry.yarnpkg.com/character-reference-invalid/-/character-reference-invalid-1.1.4.tgz#083329cda0eae272ab3dbbf37e9a382c13af1560"
   integrity sha512-mKKUkUbhPpQlCOfIuZkvSEgktjPFIsZKRRbC6KWVEMvlzblj3i3asQv5ODsrwt0N3pHAEvjP8KTQPHkp0+6jOg==
 
-<<<<<<< HEAD
-charenc@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.npmjs.org/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
-  integrity sha1-wKHS86cJLgN3S/qD8UwPxXkKhmc=
-=======
 character-reference-invalid@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/character-reference-invalid/-/character-reference-invalid-2.0.0.tgz#a0bdeb89c051fe7ed5d3158b2f06af06984f2813"
   integrity sha512-pE3Z15lLRxDzWJy7bBHBopRwfI20sbrMVLQTC7xsPglCHf4Wv1e167OgYAFP78co2XlhojDyAqA+IAJse27//g==
->>>>>>> bc141c2aff12a6d877f8960331e1a77651f413f6
 
 check-more-types@2.24.0, check-more-types@^2.24.0:
   version "2.24.0"
@@ -8773,12 +8762,6 @@ mdast-util-to-markdown@^0.6.0, mdast-util-to-markdown@^0.6.1:
     repeat-string "^1.0.0"
     zwitch "^1.0.0"
 
-<<<<<<< HEAD
-mdast-util-to-string@^1.0.0, mdast-util-to-string@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/mdast-util-to-string/-/mdast-util-to-string-1.1.0.tgz#27055500103f51637bd07d01da01eb1967a43527"
-  integrity sha512-jVU0Nr2B9X3MU4tSK7JP1CMkSvOj7X5l/GboG1tKRw52lLF1x2Ju92Ms9tNetCcbfX3hzlM73zYo2NKkWSfF/A==
-=======
 mdast-util-to-markdown@^1.0.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/mdast-util-to-markdown/-/mdast-util-to-markdown-1.2.1.tgz#33e93c2409f8c1be17b832f90978e29830af5435"
@@ -8791,7 +8774,6 @@ mdast-util-to-markdown@^1.0.0:
     parse-entities "^3.0.0"
     unist-util-visit "^4.0.0"
     zwitch "^2.0.0"
->>>>>>> bc141c2aff12a6d877f8960331e1a77651f413f6
 
 mdast-util-to-string@^2.0.0:
   version "2.0.0"
@@ -11332,52 +11314,6 @@ remark-parse@8.0.3, remark-parse@^8.0.3:
     vfile-location "^3.0.0"
     xtend "^4.0.1"
 
-<<<<<<< HEAD
-remark-parse@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/remark-parse/-/remark-parse-5.0.0.tgz#4c077f9e499044d1d5c13f80d7a98cf7b9285d95"
-  integrity sha512-b3iXszZLH1TLoyUzrATcTQUZrwNl1rE70rVdSruJFlDaJ9z5aMkhrG43Pp68OgfHndL/ADz6V69Zow8cTQu+JA==
-  dependencies:
-    collapse-white-space "^1.0.2"
-    is-alphabetical "^1.0.0"
-    is-decimal "^1.0.0"
-    is-whitespace-character "^1.0.0"
-    is-word-character "^1.0.0"
-    markdown-escapes "^1.0.0"
-    parse-entities "^1.1.0"
-    repeat-string "^1.5.4"
-    state-toggle "^1.0.0"
-    trim "0.0.1"
-    trim-trailing-lines "^1.0.0"
-    unherit "^1.0.4"
-    unist-util-remove-position "^1.0.0"
-    vfile-location "^2.0.0"
-    xtend "^4.0.1"
-=======
-remark-parse@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/remark-parse/-/remark-parse-10.0.0.tgz#65e2b2b34d8581d36b97f12a2926bb2126961cb4"
-  integrity sha512-07ei47p2Xl7Bqbn9H2VYQYirnAFJPwdMuypdozWsSbnmrkgA2e2sZLZdnDNrrsxR4onmIzH/J6KXqKxCuqHtPQ==
-  dependencies:
-    "@types/mdast" "^3.0.0"
-    mdast-util-from-markdown "^1.0.0"
-    unified "^10.0.0"
->>>>>>> bc141c2aff12a6d877f8960331e1a77651f413f6
-
-remark-parse@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/remark-parse/-/remark-parse-9.0.0.tgz#4d20a299665880e4f4af5d90b7c7b8a935853640"
-  integrity sha512-geKatMwSzEXKHuzBNU1z676sGcDcFoChMK38TgdHJNAYfFtsfHDQG7MoJAjs6sgYMqyLduCYWDIWZIxiPeafEw==
-  dependencies:
-    mdast-util-from-markdown "^0.8.0"
-
-remark-refractor@montogeek/remark-refractor:
-  version "1.0.0"
-  resolved "https://codeload.github.com/montogeek/remark-refractor/tar.gz/9b6048f89739b27f9de701d29d29d980b3ea18d7"
-  dependencies:
-    refractor "^3.1.0"
-    unist-util-visit "1.3.1"
-
 remark-slug@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/remark-slug/-/remark-slug-7.0.0.tgz#b9db70defa5f4eead38741d1c36ae153595ce12d"
@@ -11385,7 +11321,6 @@ remark-slug@^7.0.0:
   dependencies:
     "@types/hast" "^2.3.2"
     "@types/mdast" "^3.0.0"
-    github-slugger "^1.0.0"
     mdast-util-to-string "^3.0.0"
     unified "^10.0.0"
     unist-util-visit "^4.0.0"
@@ -11399,7 +11334,6 @@ remark-squeeze-paragraphs@^4.0.0:
 
 remark-stringify@^10.0.0:
   version "10.0.0"
-  resolved "https://registry.yarnpkg.com/remark-stringify/-/remark-stringify-10.0.0.tgz#7f23659d92b2d5da489e3c858656d7bbe045f161"
   integrity sha512-3LAQqJ/qiUxkWc7fUcVuB7RtIT38rvmxfmJG8z1TiE/D8zi3JGQ2tTcTJu9Tptdpb7gFwU0whRi5q1FbFOb9yA==
   dependencies:
     "@types/mdast" "^3.0.0"
@@ -11408,7 +11342,6 @@ remark-stringify@^10.0.0:
 
 remark-stringify@^8.1.1:
   version "8.1.1"
-  resolved "https://registry.yarnpkg.com/remark-stringify/-/remark-stringify-8.1.1.tgz#e2a9dc7a7bf44e46a155ec78996db896780d8ce5"
   integrity sha512-q4EyPZT3PcA3Eq7vPpT6bIdokXzFGp9i85igjmhRyXWmPs0Y6/d2FYwUNotKAWyLch7g0ASZJn/KHHcHZQ163A==
   dependencies:
     ccount "^1.0.0"
@@ -12986,17 +12919,10 @@ trough@^1.0.0:
   resolved "https://registry.yarnpkg.com/trough/-/trough-1.0.5.tgz#b8b639cefad7d0bb2abd37d433ff8293efa5f406"
   integrity sha512-rvuRbTarPXmMb79SmzEp8aqXNKcK+y0XaB298IXueQ8I2PsrATcPBCSPyK/dDNa2iWOhKlfNnOjdAOTBU/nkFA==
 
-<<<<<<< HEAD
-try-resolve@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/try-resolve/-/try-resolve-1.0.1.tgz#cfde6fabd72d63e5797cfaab873abbe8e700e912"
-  integrity sha1-z95vq9ctY+V5fPqrhzq76OcA6RI=
-=======
 trough@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/trough/-/trough-2.0.2.tgz#94a3aa9d5ce379fc561f6244905b3f36b7458d96"
   integrity sha512-FnHq5sTMxC0sk957wHDzRnemFnNBvt/gSY99HzK8F7UP5WAbvP70yX5bd7CjEQkN+TjdxwI7g7lJ6podqrG2/w==
->>>>>>> bc141c2aff12a6d877f8960331e1a77651f413f6
 
 ts-easing@^0.2.0:
   version "0.2.0"
@@ -13273,19 +13199,10 @@ unist-util-position@^3.0.0, unist-util-position@^3.1.0:
   resolved "https://registry.yarnpkg.com/unist-util-position/-/unist-util-position-3.1.0.tgz#1c42ee6301f8d52f47d14f62bbdb796571fa2d47"
   integrity sha512-w+PkwCbYSFw8vpgWD0v7zRCl1FpY3fjDSQ3/N/wNd9Ffa4gPi8+4keqt99N3XW6F99t/mUzp2xAhNmfKWp95QA==
 
-<<<<<<< HEAD
-unist-util-remove-position@^1.0.0:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/unist-util-remove-position/-/unist-util-remove-position-1.1.4.tgz#ec037348b6102c897703eee6d0294ca4755a2020"
-  integrity sha512-tLqd653ArxJIPnKII6LMZwH+mb5q+n/GtXQZo6S6csPRs5zB0u79Yw8ouR3wTw8wxvdJFhpP6Y7jorWdCgLO0A==
-  dependencies:
-    unist-util-visit "^1.1.0"
-=======
 unist-util-position@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/unist-util-position/-/unist-util-position-4.0.1.tgz#f8484b2da19a897a0180556d160c28633070dbb9"
   integrity sha512-mgy/zI9fQ2HlbOtTdr2w9lhVaiFUHWQnZrFF2EUoVOqtAUdzqMtNiD99qA5a1IcjWVR8O6aVYE9u7Z2z1v0SQA==
->>>>>>> bc141c2aff12a6d877f8960331e1a77651f413f6
 
 unist-util-remove-position@^2.0.0:
   version "2.0.1"
@@ -13320,21 +13237,12 @@ unist-util-stringify-position@^2.0.0:
   dependencies:
     "@types/unist" "^2.0.2"
 
-<<<<<<< HEAD
-unist-util-visit-parents@^2.0.0:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/unist-util-visit-parents/-/unist-util-visit-parents-2.1.2.tgz#25e43e55312166f3348cae6743588781d112c1e9"
-  integrity sha512-DyN5vD4NE3aSeB+PXYNKxzGsfocxp6asDc2XXE3b0ekO2BaRUpBicbbUygfSvYfUz1IkmjFR1YF7dPklraMZ2g==
-  dependencies:
-    unist-util-is "^3.0.0"
-=======
 unist-util-stringify-position@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/unist-util-stringify-position/-/unist-util-stringify-position-3.0.0.tgz#d517d2883d74d0daa0b565adc3d10a02b4a8cde9"
   integrity sha512-SdfAl8fsDclywZpfMDTVDxA2V7LjtRDTOFd44wUJamgl6OlVngsqWjxvermMYf60elWHbxhuRCZml7AnuXCaSA==
   dependencies:
     "@types/unist" "^2.0.0"
->>>>>>> bc141c2aff12a6d877f8960331e1a77651f413f6
 
 unist-util-visit-parents@^3.0.0:
   version "3.1.1"
@@ -13367,18 +13275,7 @@ unist-util-visit@1.3.1:
   dependencies:
     unist-util-is "^2.1.1"
 
-<<<<<<< HEAD
-unist-util-visit@^1.1.0:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/unist-util-visit/-/unist-util-visit-1.4.1.tgz#4724aaa8486e6ee6e26d7ff3c8685960d560b1e3"
-  integrity sha512-AvGNk7Bb//EmJZyhtRUnNMEpId/AZ5Ph/KUpTI09WHQuDZHKovQ1oEv3mfmKpWKtoMzyMC4GLBm1Zy5k12fjIw==
-  dependencies:
-    unist-util-visit-parents "^2.0.0"
-
-unist-util-visit@^2.0.0, unist-util-visit@^2.0.3:
-=======
 unist-util-visit@^2.0.0:
->>>>>>> bc141c2aff12a6d877f8960331e1a77651f413f6
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/unist-util-visit/-/unist-util-visit-2.0.3.tgz#c3703893146df47203bb8a9795af47d7b971208c"
   integrity sha512-iJ4/RczbJMkD0712mGktuGpm/U4By4FfDonL7N/9tATGIF4imikjOuagyMY53tnZq3NP6BcmlrHhEKAfGWjh7Q==
@@ -13592,17 +13489,6 @@ vfile-message@^2.0.0:
     "@types/unist" "^2.0.0"
     unist-util-stringify-position "^2.0.0"
 
-<<<<<<< HEAD
-vfile@^2.0.0:
-  version "2.3.0"
-  resolved "https://registry.npmjs.org/vfile/-/vfile-2.3.0.tgz#e62d8e72b20e83c324bc6c67278ee272488bf84a"
-  integrity sha512-ASt4mBUHcTpMKD/l5Q+WJXNtshlWxOogYyGYYrg4lt/vuRjC1EFQtlAofL5VmtVNIZJzWYFJjzGWZ0Gw8pzW1w==
-  dependencies:
-    is-buffer "^1.1.4"
-    replace-ext "1.0.0"
-    unist-util-stringify-position "^1.0.0"
-    vfile-message "^1.0.0"
-=======
 vfile-message@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/vfile-message/-/vfile-message-3.0.2.tgz#db7eaebe7fecb853010f2ef1664427f52baf8f74"
@@ -13610,7 +13496,6 @@ vfile-message@^3.0.0:
   dependencies:
     "@types/unist" "^2.0.0"
     unist-util-stringify-position "^3.0.0"
->>>>>>> bc141c2aff12a6d877f8960331e1a77651f413f6
 
 vfile@^4.0.0, vfile@^4.2.1:
   version "4.2.1"
