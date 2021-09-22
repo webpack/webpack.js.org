@@ -64,44 +64,10 @@ module.exports = {
 
 然后运行 `webpack`。
 
-<<<<<<< HEAD
-### `toString` $#tostring$
-
-你也可以直接将 css-loader 的结果作为字符串使用，例如 Angular 的组件样式。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: ["to-string-loader", "css-loader"],
-      },
-    ],
-  },
-};
-```
-
-or
-
-```js
-const css = require("./test.css").toString();
-
-console.log(css); // {String}
-```
-
-如果有 SourceMap，它们也将包含在字符串结果中。
-
 如果由于某种原因你需要将 CSS 提取为一个文件（即不要将 CSS 存储在 JS 模块中），你可能想要查看 [推荐示例](https://github.com/webpack-contrib/css-loader#recommend)。
-=======
-If, for one reason or another, you need to extract CSS as a file (i.e. do not store CSS in a JS module) you might want to check out the [recommend example](https://github.com/webpack-contrib/css-loader#recommend).
->>>>>>> 89585cf8991c148df11788bc7e1353d5383d4585
 
-## Options $#options$
+## 配置项 $#options$
 
-<<<<<<< HEAD
 |                 名称                  |            类型             |                   默认值                       | 描述                                                |
 | :-----------------------------------: | :-------------------------: | :--------------------------------------------: | :-------------------------------------------------- |
 |           **[`url`](#url)**           |    `{Boolean\|Function}`    |                     `true`                     | 启用/禁用 `url()`/`image-set()` 函数处理                |
@@ -110,17 +76,7 @@ If, for one reason or another, you need to extract CSS as a file (i.e. do not st
 |     **[`sourceMap`](#sourcemap)**     |         `{Boolean}`         |               `compiler.devtool`               | 启用/禁用生成 SourceMap                             |
 | **[`importLoaders`](#importloaders)** |         `{Number}`          |                      `0`                       | 启用/禁用或者设置在 css-loader 前应用的 loader 数量 |
 |      **[`esModule`](#esmodule)**      |         `{Boolean}`         |                     `true`                     | 使用 ES 模块语法                                    |
-=======
-|                 Name                  |                     Type                     |      Default       | Description                                                                                                                                                                                                                                               |
-| :-----------------------------------: | :------------------------------------------: | :----------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|           **[`url`](#url)**           |             `{Boolean\|Object}`              |       `true`       | Allows to enables/disables `url()`/`image-set()` functions handling                                                                                                                                                                                       |
-|        **[`import`](#import)**        |             `{Boolean\|Object}`              |       `true`       | Allows to enables/disables `@import` at-rules handling                                                                                                                                                                                                    |
-|       **[`modules`](#modules)**       |         `{Boolean\|String\|Object}`          |   `{auto: true}`   | Allows to enables/disables or setup CSS Modules options                                                                                                                                                                                                   |
-|     **[`sourceMap`](#sourcemap)**     |                 `{Boolean}`                  | `compiler.devtool` | Enables/Disables generation of source maps                                                                                                                                                                                                                |
-| **[`importLoaders`](#importloaders)** |                  `{Number}`                  |        `0`         | Allows enables/disables or setups number of loaders applied before CSS loader for `@import`/CSS Modules and ICSS imports                                                                                                                                  |
-|      **[`esModule`](#esmodule)**      |                 `{Boolean}`                  |       `true`       | Use ES modules syntax                                                                                                                                                                                                                                     |
-|    **[`exportType`](#exporttype)**    | `{'array' \| 'string' \| 'css-style-sheet'}` |      `array`       | Allows exporting styles as array with modules, string or [constructable stylesheet](https://developers.google.com/web/updates/2019/02/constructable-stylesheets) (i.e. [`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet)) |
->>>>>>> 89585cf8991c148df11788bc7e1353d5383d4585
+|    **[`exportType`](#exporttype)**    | `{'array' \| 'string' \| 'css-style-sheet'}` |      `array`       | 允许导出样式为模块数组、字符串或者 [可构造样式](https://developers.google.com/web/updates/2019/02/constructable-stylesheets)（即 [`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet)） |
 
 ### `url` $#url$
 
@@ -1295,16 +1251,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## 示例 $#examples$
-=======
-### `exportType`
+### `exportType` $#exporttype$
 
-Type: `'array' | 'string' | 'css-style-sheet'`
-Default: `'array'`
+类型：`'array' | 'string' | 'css-style-sheet'`
+默认值：`'array'`
 
-Allows exporting styles as array with modules, string or [constructable stylesheet](https://developers.google.com/web/updates/2019/02/constructable-stylesheets) (i.e. [`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet)).
-Default value is `'array'`, i.e. loader exports array of modules with specific API which is used in `style-loader` or other.
+允许导出样式为模块数组、字符串或者 [可构造样式](https://developers.google.com/web/updates/2019/02/constructable-stylesheets)（即 [`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet)）。
+默认值为 `'array'`，即 loader 导出具有特定 API 的模块数组，用于 `style-loader` 或其他。
 
 **webpack.config.js**
 
@@ -1333,9 +1286,9 @@ document.adoptedStyleSheets = [sheet];
 shadowRoot.adoptedStyleSheets = [sheet];
 ```
 
-#### `'array'`
+#### `'array'` $#array$
 
-The default export is array of modules with specific API which is used in `style-loader` or other.
+loader 导出具有特定 API 的模块数组，用于 `style-loader` 或其他。
 
 **webpack.config.js**
 
@@ -1359,12 +1312,12 @@ module.exports = {
 import "./styles.css";
 ```
 
-#### `'string'`
+#### `'string'` $#string$
 
-> ⚠ You don't need [`style-loader`](/loaders/style-loader/) anymore, please remove it.
-> ⚠ The `esModules` option should be enabled if you want to use it with [`CSS modules`](https://github.com/webpack-contrib/css-loader#modules), by default for locals will be used [named export](https://github.com/webpack-contrib/css-loader#namedexport).
+> ⚠ 你不再需要 [`style-loader`](/loaders/style-loader/)，请移除它。
+> ⚠ 如果你想使用 [`CSS modules`](https://github.com/webpack-contrib/css-loader#modules)，应该启用 `esModules` 配置项，默认情况下，本地变量会被 [具名导出](https://github.com/webpack-contrib/css-loader#namedexport)。
 
-The default export is `string`.
+默认倒出为 `string`。
 
 **webpack.config.js**
 
@@ -1389,18 +1342,18 @@ import sheet from "./styles.css";
 console.log(sheet);
 ```
 
-#### `'css-style-sheet'`
+#### `'css-style-sheet'` $#cssstylesheet$
 
-> ⚠ `@import` rules not yet allowed, more [information](https://web.dev/css-module-scripts/#@import-rules-not-yet-allowed)
-> ⚠ You don't need [`style-loader`](/loaders/style-loader/) anymore, please remove it.
-> ⚠ The `esModules` option should be enabled if you want to use it with [`CSS modules`](https://github.com/webpack-contrib/css-loader#modules), by default for locals will be used [named export](https://github.com/webpack-contrib/css-loader#namedexport).
-> ⚠ Source maps are not currently supported in `Chrome` due [bug](https://bugs.chromium.org/p/chromium/issues/detail?id=1174094&q=CSSStyleSheet%20source%20maps&can=2)
+> ⚠ 不再允许使用 `@import` 规则，更多 [信息](https://web.dev/css-module-scripts/#@import-rules-not-yet-allowed)
+> ⚠ 你不再需要 [`style-loader`](/loaders/style-loader/)，请移除它。
+> ⚠ 如果你想使用 [`CSS modules`](https://github.com/webpack-contrib/css-loader#modules)，应该启用 `esModules` 配置项，默认情况下，本地变量会被 [具名导出](https://github.com/webpack-contrib/css-loader#namedexport)。
+> ⚠ 目前在 `Chrome` 中不支持 Source maps，因为有该 [bug](https://bugs.chromium.org/p/chromium/issues/detail?id=1174094&q=CSSStyleSheet%20source%20maps&can=2)
 
-The default export is a [constructable stylesheet](https://developers.google.com/web/updates/2019/02/constructable-stylesheets) (i.e. [`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet)).
+默认导出是一个 [可构造样式](https://developers.google.com/web/updates/2019/02/constructable-stylesheets) （即 [`CSSStyleSheet`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet)）。
 
-Useful for [custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) and shadow DOM.
+对 [自定义元素](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) 以及 shadow DOM 有用处。
 
-More information:
+更多信息：
 
 - [Using CSS Module Scripts to import stylesheets](https://web.dev/css-module-scripts/)
 - [Constructable Stylesheets: seamless reusable styles](https://developers.google.com/web/updates/2019/02/constructable-stylesheets)
@@ -1460,7 +1413,7 @@ document.adoptedStyleSheets = [sheet];
 shadowRoot.adoptedStyleSheets = [sheet];
 ```
 
-For migration purposes, you can use the following configuration:
+对于迁移，你可以使用以下配置：
 
 ```js
 module.exports = {
@@ -1495,8 +1448,7 @@ module.exports = {
 };
 ```
 
-## Examples
->>>>>>> 89585cf8991c148df11788bc7e1353d5383d4585
+## 示例 $#examples$
 
 ### 推荐 $#recommend$
 
