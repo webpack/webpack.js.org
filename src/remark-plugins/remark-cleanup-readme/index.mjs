@@ -1,8 +1,8 @@
-const visit = require('unist-util-visit');
+import { visit } from 'unist-util-visit';
 // remove items other than paragraphs in div[align="center"]
 // e.g., logo, title and so on.
 // see the original version at https://github.com/webpack/webpack.js.org/blob/webpack-4/src/utilities/process-readme.js#L71
-module.exports = function remarkCleanupReadme() {
+export default function remarkCleanupReadme() {
   return function transformer(tree) {
     visit(tree, 'mdxJsxFlowElement', visitor);
     function visitor(node) {
@@ -20,4 +20,4 @@ module.exports = function remarkCleanupReadme() {
       }
     }
   };
-};
+}

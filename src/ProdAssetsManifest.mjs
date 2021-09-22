@@ -1,4 +1,5 @@
-const { Compilation, sources } = require('webpack');
+import webpack from 'webpack';
+const { Compilation, sources } = webpack;
 
 // collect assets data (vendor.[contenthash].js and index.[contenthash].js) for ssg
 class ProdAssetsManifest {
@@ -46,4 +47,4 @@ class ProdAssetsManifest {
     });
   }
 }
-module.exports = ProdAssetsManifest;
+export default ProdAssetsManifest;

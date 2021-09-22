@@ -283,6 +283,21 @@ module.exports = {
 };
 ```
 
+### stats.groupAssetsByExtension $#statsgroupassetsbyextension$
+
+`boolean`
+
+告诉 `stats` 是否根据它们的拓展名聚合静态资源。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupAssetsByExtension: false,
+  },
+};
+```
+
 ### stats.groupAssetsByInfo $#statsgroupassetsbyinfo$
 
 `boolean`
@@ -294,6 +309,21 @@ module.exports = {
   //...
   stats: {
     groupAssetsByInfo: false,
+  },
+};
+```
+
+### stats.groupAssetsByPath $#statsgroupassetsbypath$
+
+`boolean`
+
+告诉 `stats` 是否根据它们的路径聚合静态资源。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupAssetsByPath: false,
   },
 };
 ```
@@ -757,6 +787,21 @@ module.exports = {
   //...
   stats: {
     moduleTrace: false,
+  },
+};
+```
+
+### stats.optimizationBailout $#statsoptimizationbailout$
+
+`boolean`
+
+告诉 `stats` 展示模块优化失效的原因。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    optimizationBailout: false,
   },
 };
 ```

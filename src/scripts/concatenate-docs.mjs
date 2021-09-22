@@ -1,7 +1,7 @@
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
-const front = require('front-matter');
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
+import front from 'front-matter';
 
 // root path
 const rootPath = path.join('src', 'content');

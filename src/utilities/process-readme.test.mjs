@@ -1,4 +1,4 @@
-const processReadme = require('./process-readme');
+import processReadme from './process-readme.mjs';
 describe('processReadme', () => {
   const url =
     'https://raw.githubusercontent.com/webpack/html-loader/master/README.md';

@@ -1,10 +1,8 @@
 'use strict';
 
-var toString = require('mdast-util-to-string');
-var visit = require('unist-util-visit');
-var slugs = require('github-slugger')();
-
-module.exports = slug;
+import toString from 'mdast-util-to-string';
+import { visit } from 'unist-util-visit';
+import slugs from 'github-slugger';
 
 function slug() {
   return transformer;
@@ -12,7 +10,7 @@ function slug() {
 
 // Patch slugs on heading nodes.
 function transformer(ast) {
-  slugs.reset();
+  slugs().reset();
 
   visit(ast, 'heading', visitor);
 
@@ -23,7 +21,7 @@ function transformer(ast) {
 
     var rawHeader = id ? id : toString(node);
     var match = /^.+(\s*\$#([a-z0-9\-_]+?)\$\s*)$/.exec(rawHeader);
-    id = match ? match[2] : slugs.slug(rawHeader, true);
+    id = match ? match[2] : slugs().slug(rawHeader, true);
 
     if (match) {
       // Remove the custom ID part from the text node.
@@ -34,3 +32,5 @@ function transformer(ast) {
     props.id = id;
   }
 }
+
+export default slug;

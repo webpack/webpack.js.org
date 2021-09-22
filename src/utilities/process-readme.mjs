@@ -1,5 +1,5 @@
-const url = require('url');
-const { excludedLoaders, excludedPlugins } = require('./constants');
+import url from 'url';
+import { excludedLoaders, excludedPlugins } from './constants.mjs';
 
 const beginsWithDocsDomainRegex = /^(?:https?:)\/\/webpack\.js\.org/;
 const inlineLinkRegex = /\[[^\]]*\]\(([^)]+)\)/g;
@@ -90,7 +90,7 @@ function getMatches(string, regex) {
   return matches;
 }
 
-module.exports = function processREADME(body, options = {}) {
+export default function processREADME(body, options = {}) {
   let processingString = body
     // close <img> tags
     .replace(
@@ -142,4 +142,4 @@ module.exports = function processREADME(body, options = {}) {
   });
 
   return processingString;
-};
+}

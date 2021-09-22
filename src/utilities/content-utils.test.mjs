@@ -1,9 +1,18 @@
+import { describe, expect } from '@jest/globals';
 import {
   findInContent,
   getPageTitle,
   getPageDescription,
-} from './content-utils.js';
-import content from './fixtures/content.json';
+} from './content-utils.mjs';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const content = JSON.parse(
+  fs.readFileSync(path.join(__dirname, './fixtures/content.json'), 'utf8')
+);
 
 describe('findInContent', () => {
   it('should find home page', () => {

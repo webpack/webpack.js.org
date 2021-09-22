@@ -2,8 +2,8 @@
  * based on https://github.com/montogeek/remark-custom-blockquotes
  */
 
-const visit = require('unist-util-visit');
-module.exports = function customAsides(
+import { visit } from 'unist-util-visit';
+export default function customAsides(
   options = {
     mapping: {},
   }
@@ -67,4 +67,4 @@ module.exports = function customAsides(
       }
     }
   };
-};
+}

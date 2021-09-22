@@ -1,11 +1,15 @@
-const fs = require('fs');
-const path = require('path');
-const mkdirp = require('mkdirp');
-const { promisify } = require('util');
-const _ = require('lodash');
-const { Octokit: GithubAPI } = require('@octokit/rest');
-const { createActionAuth } = require('@octokit/auth-action');
-const { excludedLoaders, excludedPlugins } = require('./constants');
+import fs from 'fs';
+import path from 'path';
+import mkdirp from 'mkdirp';
+import { promisify } from 'util';
+import _ from 'lodash';
+import { Octokit as GithubAPI } from '@octokit/rest';
+import { createActionAuth } from '@octokit/auth-action';
+import { excludedLoaders, excludedPlugins } from './constants.mjs';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const writeFile = promisify(fs.writeFile);
 const stat = promisify(fs.stat);
