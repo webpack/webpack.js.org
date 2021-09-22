@@ -4690,10 +4690,10 @@ directory-tree@^2.0.0:
   resolved "https://registry.yarnpkg.com/directory-tree/-/directory-tree-2.3.1.tgz#78b8aa84878eb84dd29a51dcd664ded4cd0247c7"
   integrity sha512-hxolIHCtQ/a56CUywaLzGD/V78zPwFihI+UK/4ZjOp7GoV4Mptmtv95yavOn/RlnTi7cCMjszvfcNrwCoWLH+Q==
 
-directory-tree@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/directory-tree/-/directory-tree-2.4.0.tgz#66113ef8c2e19f906cf73d2402fc60c2eff0fad5"
-  integrity sha512-AM03Th+ypDAHefyB6SP3uezaWkTbol1P43CS5yFU7wePTuHnR4YoHgY6KbGHLr/a065ocN26l9lXOoFBzzM31w==
+directory-tree@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/directory-tree/-/directory-tree-3.0.0.tgz#8e29e53a2b17e597fcc984cf41a8d63bf6431977"
+  integrity sha512-rPOvylpnKTuGp5wwEKwnAK506lHg9e0Db+q0J8br0IwMATfOE/2Ksqjgf5Tb9mfIWA8RzVJyta0ScXPgarD6BA==
 
 dlv@^1.1.3:
   version "1.1.3"
