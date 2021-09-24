@@ -20,6 +20,7 @@ contributors:
   - g100g
   - anikethsaha
   - snitin315
+  - Biki-das
 ---
 
 [webpack-dev-server](https://github.com/webpack/webpack-dev-server) can be used to quickly develop an application. See the [development guide](/guides/development/) to get started.
@@ -51,7 +52,7 @@ module.exports = {
 };
 ```
 
-When the server is started, there will be a message prior to the list of resolved modules:
+When the server is started, there will be a message before the list of resolved modules:
 
 ```bash
 <i> [webpack-dev-server] Project is running at:
@@ -71,9 +72,9 @@ W> Be aware that when [exporting multiple configurations](/configuration/configu
 
 T> If you're having trouble, navigating to the `/webpack-dev-server` route will show where files are served. For example, `http://localhost:9000/webpack-dev-server`.
 
-T> If you want to manually recompile the bundle, navigating to the `/invalidate` route will [invalidate](/api/node/#invalidate-watching) the current compilation of the bundle and recompile it for you via [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate). Depending on your configuration, URL may look like `http://localhost:9000/invalidate`.
+T> If you want to manually recompile the bundle, navigating to the `/invalidate` route will [invalidate](/api/node/#invalidate-watching) the current compilation of the bundle and recompile it for you via [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate). Depending on your configuration,the URL may look like `http://localhost:9000/invalidate`.
 
-T> HTML template is required to serve the bundle, usually it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
+T> HTML template is required to serve the bundle, usually, it is an `index.html` file. Make sure that script references are added into HTML, webpack-dev-server doesn't inject them automatically.
 
 ### Usage via CLI
 
@@ -107,7 +108,7 @@ module.exports = {
 };
 ```
 
-Mimicking django's `ALLOWED_HOSTS`, a value beginning with `.` can be used as a subdomain wildcard. `.host.com` will match `host.com`, `www.host.com`, and any other subdomain of `host.com`.
+Mimicking Django's `ALLOWED_HOSTS`, a value beginning with `.` can be used as a subdomain wildcard. `.host.com` will match `host.com`, `www.host.com`, and any other subdomain of `host.com`.
 
 **webpack.config.js**
 
@@ -329,7 +330,7 @@ npx webpack serve --no-client-progress
 
 `'ws' | 'sockjs'` `string`
 
-This option allows us either to choose the current `devServer` transport mode for client individually or to provide custom client implementation. This allows to specify how browser or other client communicates with the `devServer`.
+This option allows us either to choose the current `devServer` transport mode for clients individually or to provide custom client implementation. This allows specifying how the browser or other client communicates with the `devServer`.
 
 T> Providing `'ws'` or `'sockjs'` to [`webSocketServer`](#devserverwebsocketserver) is a shortcut to setting both `devServer.client.webSocketTransport` and `devServer.webSocketServer` to the given value.
 
@@ -393,7 +394,7 @@ module.exports = {
 
 `string` `object`
 
-This option allows to specify URL to web socket server (useful when you're proxying dev server and client script does not always know where to connect to).
+This option allows specifying URL to web socket server (useful when you're proxying dev server and client script does not always know where to connect to).
 
 **webpack.config.js**
 
@@ -545,7 +546,7 @@ module.exports = {
 };
 ```
 
-To pass your own certificate via CLI, use the following options:
+To pass your certificate via CLI, use the following options:
 
 ```bash
 npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
@@ -599,7 +600,7 @@ module.exports = {
 };
 ```
 
-This object is passed straight to Node.js HTTPS module, so see the [HTTPS documentation](https://nodejs.org/api/https.html) for more information.
+This object is passed straight to the Node.js HTTPS module, so see the [HTTPS documentation](https://nodejs.org/api/https.html) for more information.
 
 To pass your own certificate via the CLI use the following options:
 
@@ -630,7 +631,7 @@ module.exports = {
 };
 ```
 
-W> Don't specify `https.ca` and `https.cacert` options together, if specified `https.ca` will be used. `https.cacert` is deprecated and will be removed in next major release.
+W> Don't specify `https.ca` and `https.cacert` options together, if specified `https.ca` will be used. `https.cacert` is deprecated and will be removed in the next major release.
 
 ## devServer.headers
 
@@ -693,7 +694,7 @@ To disable:
 npx webpack serve --no-history-api-fallback
 ```
 
-By passing an object this behavior can be controlled further using options like `rewrites`:
+Bypassing an object this behavior can be controlled further using options like `rewrites`:
 
 **webpack.config.js**
 
@@ -964,7 +965,7 @@ module.exports = {
 
 `function (devServer)`
 
-Provides the ability to execute custom middleware prior to all other middleware
+Provides the ability to execute custom middleware before all other middleware
 internally within the server. This could be used to define custom handlers, for
 example:
 
@@ -1040,7 +1041,7 @@ To disable:
 npx webpack serve --no-open
 ```
 
-To open a specified page in browser:
+To open a specified page in a browser:
 
 **webpack.config.js**
 
@@ -1120,7 +1121,7 @@ module.exports = {
 };
 ```
 
-T> The browser application name is platform dependent. Don't hard code it in reusable modules. For example, `'Chrome'` is `'Google Chrome'` on macOS, `'google-chrome'` on Linux and `'chrome'` on Windows.
+T> The browser application name is platform-dependent. Don't hard code it in reusable modules. For example, `'Chrome'` is `'Google Chrome'` on macOS, `'google-chrome'` on Linux , and `'chrome'` on Windows.
 
 ## devServer.port
 
@@ -1227,13 +1228,13 @@ module.exports = {
 
 Sometimes you don't want to proxy everything. It is possible to bypass the proxy based on the return value of a function.
 
-In the function you get access to the request, response, and proxy options.
+In the function, you get access to the request, response, and proxy options.
 
 - Return `null` or `undefined` to continue processing the request with proxy.
 - Return `false` to produce a 404 error for the request.
 - Return a path to serve from, instead of continuing to proxy the request.
 
-E.g. for a browser request, you want to serve an HTML page, but for an API request you want to proxy it. You could do something like this:
+E.g. for a browser request, you want to serve an HTML page, but for an API request, you want to proxy it. You could do something like this:
 
 **webpack.config.js**
 
@@ -1332,7 +1333,7 @@ module.exports = {
 
 `boolean` `string` `[string]` `object` `[object]`
 
-This options allows to configure options for serving static files from directory (by default 'public' directory). To disable set it to `false`:
+This option allows configuring options for serving static files from the directory (by default 'public' directory). To disable set it to `false`:
 
 **webpack.config.js**
 
@@ -1399,7 +1400,7 @@ npx webpack serve --static assets --static css
 
 `string = path.join(process.cwd(), 'public')`
 
-Tell the server where to serve the content from. This is only necessary if you want to serve static files. [`static.publicPath`](#publicpath) will be used to determine where the bundles should be served from, and takes precedence.
+Tell the server where to serve the content from. This is only necessary if you want to serve static files. [`static.publicPath`](#publicpath) will be used to determine where the bundles should be served from and takes precedence.
 
 **webpack.config.js**
 
@@ -1600,7 +1601,7 @@ module.exports = {
 
 `string` `[string]` `object` `[object]`
 
-This option allows you to configure list of globs/directories/files to watch for file changes. For example:
+This option allows you to configure a list of globs/directories/files to watch for file changes. For example:
 
 **webpack.config.js**
 
