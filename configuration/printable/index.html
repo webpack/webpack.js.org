@@ -822,12 +822,11 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     proxy<span class="token operator">:</span> <span class="token punctuation">{</span> <span class="token comment">// proxy URLs to backend development server</span>
       <span class="token string">&#x27;/api&#x27;</span><span class="token operator">:</span> <span class="token string">&#x27;http://localhost:3000&#x27;</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    static<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&#x27;public&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// boolean | string | array, static file location</span>
+    static<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&#x27;public&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// boolean | string | array | object, static file location</span>
     compress<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// enable gzip compression</span>
     historyApiFallback<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// true for index.html upon 404, object for multiple paths</span>
     hot<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// hot module replacement. Depends on HotModuleReplacementPlugin</span>
     https<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// true for self-signed, object for cert authority</span>
-    noInfo<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// only errors &amp; warns on hot reload</span>
     <span class="token comment">// ...</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   experiments<span class="token operator">:</span> <span class="token punctuation">{</span>
