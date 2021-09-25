@@ -700,7 +700,13 @@ module.exports = {
 
 确保 hash 函数有可访问的 `update` 和 `digest` 方法。
 
+<<<<<<< HEAD
 ## output.hashSalt $#outputhashsalt$
+=======
+T> Since `webpack v5.54.0+`, `hashFunction` supports `xxhash64` as a faster algorithm, which will be used as default when [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) is enabled.
+
+## output.hashSalt
+>>>>>>> 6d1d1c1964893d28f9cf8ade0bf80e9527d0f85b
 
 一个可选的加盐值，通过 Node.JS [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding) 来更新哈希。
 
