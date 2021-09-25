@@ -697,6 +697,8 @@ module.exports = {
 
 Make sure that the hashing function will have `update` and `digest` methods available.
 
+T> Since `webpack v5.54.0+`, `hashFunction` supports `xxhash64` as a fast algorithm. It will be used as default when [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) is enabled.
+
 ## output.hashSalt
 
 An optional salt to update the hash via Node.JS' [`hash.update`](https://nodejs.org/api/crypto.html#crypto_hash_update_data_inputencoding).
