@@ -20,6 +20,7 @@ Available options:
 
 - `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module.
 - [`buildHttp`](#experimentsbuildhttp)
+- [`cacheUnaffected`](#experimentscacheunaffected)
 - [`futureDefaults`](#experimentsfuturedefaults)
 - `layers`: Enable module and chunk layers.
 - [`lazyCompilation`](#experimentslazycompilation)
@@ -127,6 +128,14 @@ By default webpack would generate a `<compiler-name.>webpack.lock` file>. Make s
 Detect changes to remote resources and upgrade them automatically.
 
 - Type: `boolean`
+
+### experiments.cacheUnaffected
+
+Enable additional in-memory caching of modules which are unchanged and reference only unchanged modules.
+
+- Type: `boolean`
+
+Defaults to the value of [`futureDefaults`](#experimentsfuturedefaults).
 
 ### experiments.futureDefaults
 
