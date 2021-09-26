@@ -3,10 +3,14 @@ title: Cache
 sort: 12
 contributors:
   - snitin315
+<<<<<<< HEAD
 translators:
   - lcxfs1991
   - QC-L
   - jacob-lcs
+=======
+  - chenxsan
+>>>>>>> e3428a7f60b2eff1c4469c19cbb16c9731e7e5f7
 ---
 
 ## cache $#cache$
@@ -113,7 +117,30 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### cache.compression $#cachecompression$
+=======
+### cache.cacheUnaffected
+
+Cache computation of modules which are unchanged and reference only unchanged modules. It can only be used along with [`cache.type`](#cachetype) of `'memory'`, besides, [`experiments.cacheUnaffected`](/configuration/experiments/#experimentscacheunaffected) must be enabled to use it.
+
+- Type: `boolean`
+- v5.54.0+
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'memory',
+    cacheUnaffected: true,
+  },
+};
+```
+
+### cache.compression
+>>>>>>> e3428a7f60b2eff1c4469c19cbb16c9731e7e5f7
 
 `false | 'gzip' | 'brotli'`
 
@@ -303,7 +330,30 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### cache.name $#cachename$
+=======
+### cache.memoryCacheUnaffected
+
+Cache computation of modules which are unchanged and reference only unchanged modules in memory. It can only be used along with [`cache.type`](#cachetype) of `'filesystem'`, besides, [`experiments.cacheUnaffected`](/configuration/experiments/#experimentscacheunaffected) must be enabled to use it.
+
+- Type: `boolean`
+- v5.54.0+
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    memoryCacheUnaffected: true,
+  },
+};
+```
+
+### cache.name
+>>>>>>> e3428a7f60b2eff1c4469c19cbb16c9731e7e5f7
 
 `string`
 

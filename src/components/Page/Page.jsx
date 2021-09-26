@@ -62,11 +62,16 @@ export default function Page(props) {
     }
   }, [contentLoaded, pathname, hash]);
 
+  const numberOfContributors = contributors.length;
   const loadRelated = contentLoaded && related && related.length !== 0;
   const loadContributors =
+<<<<<<< HEAD
     contentLoaded && contributors && contributors.length !== 0;
   const loadTranslators =
     contentLoaded && translators && translators.length !== 0;
+=======
+    contentLoaded && contributors && numberOfContributors !== 0;
+>>>>>>> e3428a7f60b2eff1c4469c19cbb16c9731e7e5f7
 
   let contentRender;
 
@@ -127,7 +132,12 @@ export default function Page(props) {
         {loadContributors && (
           <div data-testid="contributors" className="print:hidden">
             <h2 className="!font-sans !font-normal">
+<<<<<<< HEAD
               {contributors.length} 贡献者
+=======
+              {numberOfContributors}{' '}
+              {numberOfContributors === 1 ? 'Contributor' : 'Contributors'}
+>>>>>>> e3428a7f60b2eff1c4469c19cbb16c9731e7e5f7
             </h2>
             <Contributors contributors={contributors} />
           </div>

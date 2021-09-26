@@ -23,6 +23,7 @@ Available options:
 
 - `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module.
 - [`buildHttp`](#experimentsbuildhttp)
+- [`cacheUnaffected`](#experimentscacheunaffected)
 - [`futureDefaults`](#experimentsfuturedefaults)
 - `layers`: Enable module and chunk layers.
 - [`lazyCompilation`](#experimentslazycompilation)
@@ -131,7 +132,19 @@ Detect changes to remote resources and upgrade them automatically.
 
 - Type: `boolean`
 
+<<<<<<< HEAD
 ### experiments.futureDefaults $#experimentsfuturedefaults$
+=======
+### experiments.cacheUnaffected
+
+Enable additional in-memory caching of modules which are unchanged and reference only unchanged modules.
+
+- Type: `boolean`
+
+Defaults to the value of [`futureDefaults`](#experimentsfuturedefaults).
+
+### experiments.futureDefaults
+>>>>>>> e3428a7f60b2eff1c4469c19cbb16c9731e7e5f7
 
 使用下一个 webpack 主版本的默认值，并在任何有问题的地方显示警告。
 

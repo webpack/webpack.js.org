@@ -16,10 +16,17 @@ translators:
   - jacob-lcs
 ---
 
+<<<<<<< HEAD
 `Compiler` 模块是 webpack 的主要引擎，它通过 [CLI](/api/cli) 传递的所有选项，
 或者 [Node API](/api/node)，创建出一个 compilation 实例。
 它扩展(extend)自 `Tapable` 类，用来注册和调用插件。
 大多数面向用户的插件会首先在 `Compiler` 上注册。
+=======
+The `Compiler` module is the main engine that creates a compilation instance
+with all the options passed through the [CLI](/api/cli) or [Node API](/api/node). It extends the
+`Tapable` class in order to register and call plugins. Most user-facing plugins
+are first registered on the `Compiler`.
+>>>>>>> e3428a7f60b2eff1c4469c19cbb16c9731e7e5f7
 
 在为 webpack 开发插件时，你可能需要知道每个钩子函数是在哪里调用的。想要了解这些内容，请在 webpack 源码中搜索 `hooks.<hook name>.call`。
 
