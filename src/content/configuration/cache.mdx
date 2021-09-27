@@ -3,14 +3,11 @@ title: Cache
 sort: 12
 contributors:
   - snitin315
-<<<<<<< HEAD
+  - chenxsan
 translators:
   - lcxfs1991
   - QC-L
   - jacob-lcs
-=======
-  - chenxsan
->>>>>>> e3428a7f60b2eff1c4469c19cbb16c9731e7e5f7
 ---
 
 ## cache $#cache$
@@ -117,14 +114,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### cache.compression $#cachecompression$
-=======
-### cache.cacheUnaffected
+### cache.cacheUnaffected $#cachecacheunaffected$
 
-Cache computation of modules which are unchanged and reference only unchanged modules. It can only be used along with [`cache.type`](#cachetype) of `'memory'`, besides, [`experiments.cacheUnaffected`](/configuration/experiments/#experimentscacheunaffected) must be enabled to use it.
+对未改变的模块进行缓存计算，只引用未改变的模块。它只能在 [`cache.type`](#cachetype) 值为 `'memory'` 时使用，除此之外，必须启用 [`experiments.cacheUnaffected`](/configuration/experiments/#experimentscacheunaffected) 配置项。
 
-- Type: `boolean`
+- 类型：`boolean`
 - v5.54.0+
 
 **webpack.config.js**
@@ -139,8 +133,7 @@ module.exports = {
 };
 ```
 
-### cache.compression
->>>>>>> e3428a7f60b2eff1c4469c19cbb16c9731e7e5f7
+### cache.compression $#cachecompression$
 
 `false | 'gzip' | 'brotli'`
 
@@ -330,14 +323,11 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-### cache.name $#cachename$
-=======
-### cache.memoryCacheUnaffected
+### cache.memoryCacheUnaffected $#cachememorycacheunaffected$
 
-Cache computation of modules which are unchanged and reference only unchanged modules in memory. It can only be used along with [`cache.type`](#cachetype) of `'filesystem'`, besides, [`experiments.cacheUnaffected`](/configuration/experiments/#experimentscacheunaffected) must be enabled to use it.
+对未改变的模块进行缓存计算，并且只引用内存中未改变的模块。它只能在 [`cache.type`](#cachetype) 值为 `'filesystem'` 时使用，除此之外，必须启用 [`experiments.cacheUnaffected`](/configuration/experiments/#experimentscacheunaffected) 配置项。
 
-- Type: `boolean`
+- 类型：`boolean`
 - v5.54.0+
 
 **webpack.config.js**
@@ -352,8 +342,7 @@ module.exports = {
 };
 ```
 
-### cache.name
->>>>>>> e3428a7f60b2eff1c4469c19cbb16c9731e7e5f7
+### cache.name $#cachename$
 
 `string`
 
