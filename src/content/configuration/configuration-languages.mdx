@@ -11,6 +11,7 @@ contributors:
   - byzyk
   - Nek-
   - liyiming22
+  - daimalou
 ---
 
 Webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
@@ -51,10 +52,11 @@ Above sample assumes version >= 2.7 or newer of TypeScript is used with the new 
 
 Note that you'll also need to check your `tsconfig.json` file. If the `module` in `compilerOptions` in `tsconfig.json` is `commonjs`, the setting is complete, else webpack will fail with an error. This occurs because `ts-node` does not support any module syntax other than `commonjs`.
 
-There are two solutions to this issue:
+There are three solutions to this issue:
 
 - Modify `tsconfig.json`.
 - Install `tsconfig-paths`.
+- Modify `tsconfig.json` and add settings for ts-node
 
 The **first option** is to open your `tsconfig.json` file and look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
 
@@ -93,6 +95,23 @@ Then set the environment variable `process.env.TS_NODE_PROJECT` provided by `tsc
 ```
 
 W> We had been getting reports that `TS_NODE_PROJECT` might not work with `"TS_NODE_PROJECT" unrecognized command` error. Therefore running it with `cross-env` seems to fix the issue, for more info [see this issue](https://github.com/webpack/webpack.js.org/issues/2733).
+
+The **third option** is to add settings for ts-node:
+
+You can keep `"module": "ESNext"` for `tsc`, and if you use webpack, or another build tool, set an override for ts-node. [ts-node config](https://typestrong.org/ts-node/docs/imports/)
+
+```json
+{
+  "compilerOptions": {
+    "module": "ESNext",
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
+}
+```
 
 ## CoffeeScript
 
