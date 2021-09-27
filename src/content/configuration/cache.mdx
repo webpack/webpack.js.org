@@ -3,6 +3,7 @@ title: Cache
 sort: 12
 contributors:
   - snitin315
+  - chenxsan
 translators:
   - lcxfs1991
   - QC-L
@@ -109,6 +110,25 @@ module.exports = {
   cache: {
     type: 'filesystem',
     cacheLocation: path.resolve(__dirname, '.test_cache'),
+  },
+};
+```
+
+### cache.cacheUnaffected $#cachecacheunaffected$
+
+对未改变的模块进行缓存计算，只引用未改变的模块。它只能在 [`cache.type`](#cachetype) 值为 `'memory'` 时使用，除此之外，必须启用 [`experiments.cacheUnaffected`](/configuration/experiments/#experimentscacheunaffected) 配置项。
+
+- 类型：`boolean`
+- v5.54.0+
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'memory',
+    cacheUnaffected: true,
   },
 };
 ```
@@ -299,6 +319,25 @@ module.exports = {
   cache: {
     type: 'filesystem',
     maxMemoryGenerations: Infinity,
+  },
+};
+```
+
+### cache.memoryCacheUnaffected $#cachememorycacheunaffected$
+
+对未改变的模块进行缓存计算，并且只引用内存中未改变的模块。它只能在 [`cache.type`](#cachetype) 值为 `'filesystem'` 时使用，除此之外，必须启用 [`experiments.cacheUnaffected`](/configuration/experiments/#experimentscacheunaffected) 配置项。
+
+- 类型：`boolean`
+- v5.54.0+
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  cache: {
+    type: 'filesystem',
+    memoryCacheUnaffected: true,
   },
 };
 ```

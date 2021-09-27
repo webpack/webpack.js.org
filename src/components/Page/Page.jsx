@@ -62,9 +62,10 @@ export default function Page(props) {
     }
   }, [contentLoaded, pathname, hash]);
 
+  const numberOfContributors = contributors.length;
   const loadRelated = contentLoaded && related && related.length !== 0;
   const loadContributors =
-    contentLoaded && contributors && contributors.length !== 0;
+    contentLoaded && contributors && numberOfContributors !== 0;
   const loadTranslators =
     contentLoaded && translators && translators.length !== 0;
 
@@ -127,7 +128,8 @@ export default function Page(props) {
         {loadContributors && (
           <div data-testid="contributors" className="print:hidden">
             <h2 className="!font-sans !font-normal">
-              {contributors.length} 贡献者
+              {numberOfContributors}{' '}
+              位贡献者
             </h2>
             <Contributors contributors={contributors} />
           </div>
