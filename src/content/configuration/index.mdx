@@ -22,9 +22,9 @@ contributors:
 
 Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index.js` and will output the result in `dist/main.js` minified and optimized for production.
 
-T> [createapp.dev](https://createapp.dev/webpack) is an online tool for creating custom webpack configuration. It allows you to select various features that will be combined and added to resulting configuration file. Also, it generates an example project based on provided webpack configuration that you can review in your browser and download.
+T> [createapp.dev](https://createapp.dev/webpack) is an online tool for creating custom webpack configurations. It allows you to select various features that will be combined and added to the resulting configuration file. Also, it generates an example project based on provided webpack configuration that you can review in your browser and download.
 
-Usually your projects will need to extend this functionality, for this you can create a `webpack.config.js` file in the root folder and webpack will automatically use it.
+Usually, your projects will need to extend this functionality, for this you can create a `webpack.config.js` file in the root folder and webpack will automatically use it.
 
 All the available configuration options are specified below.
 
@@ -32,7 +32,7 @@ T> New to webpack? Check out our guide to some of webpack's [core concepts](/con
 
 ## Use a different configuration file
 
-If for some reason you want to use different configuration file depending on certain situations, you can change this via command line by using the `--config` flag.
+If for some reason you want to use a different configuration file depending on certain situations, you can change this via command line by using the `--config` flag.
 
 **package.json**
 
@@ -44,7 +44,7 @@ If for some reason you want to use different configuration file depending on cer
 
 ## Options
 
-Click on the name of each option in the configuration code below to jump to the detailed documentation. Also note that the items with arrows can be expanded to show more examples and, in some cases, more advanced configuration.
+Click on the name of each option in the configuration code below to jump to the detailed documentation. Also note that the items with arrows can be expanded to show more examples and, in some cases, more advanced configurations.
 
 W> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
 
@@ -1137,7 +1137,7 @@ module.exports = {
 
 W> webpack applies configuration defaults after [plugins defaults](/contribute/writing-a-plugin/#configuration-defaults) are applied.
 
-Use [webpack-cli's `init` command](https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli) to rapidly generate webpack configuration file for your project requirements, it will ask you a couple of questions before creating a configuration file.
+Use [webpack-cli's `init` command](https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli) to rapidly generate webpack configuration files for your project requirements, it will ask you a couple of questions before creating a configuration file.
 
 ```bash
 npx webpack-cli init

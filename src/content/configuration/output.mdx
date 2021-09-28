@@ -29,7 +29,7 @@ contributors:
   - mrzalyaul
 ---
 
-The top-level `output` key contains set of options instructing webpack on how and where it should output your bundles, assets and anything else you bundle or load with webpack.
+The top-level `output` key contains a set of options instructing webpack on how and where it should output your bundles, assets, and anything else you bundle or load with webpack.
 
 ## output.assetModuleFilename
 
@@ -106,7 +106,7 @@ module.exports = {
 
 Tells webpack to add `charset="utf-8"` to the HTML `<script>` tag.
 
-T> Although `charset` attribute for `<script>` tag was [deprecated](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes), webpack still adds it by default for compatibility with non-modern browsers.
+T> Although the `charset` attribute for `<script>` tag was [deprecated](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes), webpack still adds it by default for compatibility with non-modern browsers.
 
 ## output.chunkFilename
 
@@ -167,7 +167,7 @@ module.exports = {
 
 `number = 120000`
 
-Number of milliseconds before chunk request expires. This option is supported since webpack 2.6.0.
+The Number of milliseconds before chunk request expires. This option is supported since webpack 2.6.0.
 
 **webpack.config.js**
 
@@ -185,7 +185,7 @@ module.exports = {
 
 `string = 'webpackChunkwebpack'`
 
-The global variable used by webpack for loading of chunks.
+The global variable is used by webpack for loading chunks.
 
 **webpack.config.js**
 
@@ -299,7 +299,7 @@ module.exports = {
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
 
-Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. Only takes effect when [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading on-demand chunks, by adding script tags.
+Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. Only takes effect when the [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading on-demand chunks, by adding script tags.
 
 - `'anonymous'` - Enable cross-origin loading **without credentials**
 - `'use-credentials'` - Enable cross-origin loading **with credentials**
@@ -308,7 +308,7 @@ Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web
 
 `string` `function (info)`
 
-A fallback used when the template string or function above yields duplicates.
+A fallback is used when the template string or function above yields duplicates.
 
 See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate).
 
@@ -316,7 +316,7 @@ See [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplat
 
 `string = 'webpack://[namespace]/[resource-path]?[loaders]'` `function (info) => string`
 
-This option is only used when [`devtool`](/configuration/devtool) uses an options which requires module names.
+This option is only used when [`devtool`](/configuration/devtool) uses an option that requires module names.
 
 Customize the names used in each source map's `sources` array. This can be done by passing a template string or function. For example, when using `devtool: 'eval'`.
 
@@ -364,7 +364,7 @@ If multiple modules would result in the same name, [`output.devtoolFallbackModul
 
 `string`
 
-This option determines the modules namespace used with the [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.library`](#outputlibrary). It's used to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
+This option determines the module's namespace used with the [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.library`](#outputlibrary). It's used to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
 
 For example, if you have 2 libraries, with namespaces `library1` and `library2`, which both have a file `./src/index.js` (with potentially different contents), they will expose these files as `webpack://library1/./src/index.js` and `webpack://library2/./src/index.js`.
 
@@ -516,7 +516,7 @@ module.exports = {
 };
 ```
 
-Using function to return the filename:
+Using the function to return the filename:
 
 **webpack.config.js**
 
@@ -535,7 +535,7 @@ Make sure to read the [Caching guide](/guides/caching) for details. There are mo
 
 Note this option is called filename but you are still allowed to use something like `'js/[name]/bundle.js'` to create a folder structure.
 
-Note this option does not affect output files for on-demand-loaded chunks. It only affects output files that are initially loaded. For on-demand-loaded chunk files the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case you would have to try the specific loader's available options.
+Note this option does not affect output files for on-demand-loaded chunks. It only affects output files that are initially loaded. For on-demand-loaded chunk files, the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case, you would have to try the specific loader's available options.
 
 ### Template strings
 
@@ -627,13 +627,13 @@ type ModulePathData = {
 };
 ```
 
-T> In some context properties will use JavaScript code expressions instead of raw values. In these cases the `WithLength` variant is available and should be used instead of slicing the original value.
+T> In some contexts properties will use JavaScript code expressions instead of raw values. In these cases, the `WithLength` variant is available and should be used instead of slicing the original value.
 
 ## output.futureEmitAssets
 
 `boolean = false`
 
-Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins which assume that assets are still readable after they were emitted.
+Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins that assume that assets are still readable after they were emitted.
 
 W> `output.futureEmitAssets` option will be removed in webpack v5.0.0 and this behaviour will become the new default.
 
@@ -695,7 +695,7 @@ module.exports = {
 };
 ```
 
-Make sure that the hashing function will have `update` and `digest` methods available.
+Make sure that the hashing function will have an `update` and `digest` methods available.
 
 T> Since `webpack v5.54.0+`, `hashFunction` supports `xxhash64` as a faster algorithm, which will be used as default when [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) is enabled.
 
@@ -730,7 +730,7 @@ T> Typically you don't need to change `output.hotUpdateChunkFilename`.
 
 Only used when [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading hot updates.
 
-A JSONP function used to asynchronously load hot-update chunks.
+A JSONP function is used to asynchronously load hot-update chunks.
 
 For details see [`output.chunkLoadingGlobal`](#outputchunkloadingglobal).
 
@@ -811,7 +811,7 @@ Now the variable `MyLibrary` will be bound with the exports of your entry file, 
 </script>
 ```
 
-In the above example we're passing a single entry file to `entry`, however webpack can accept [many kinds of entry point](/configuration/entry-context/#entry), e.g., an `array`, or an `object`.
+In the above example, we're passing a single entry file to `entry`, however, webpack can accept [many kinds of entry point](/configuration/entry-context/#entry), e.g., an `array`, or an `object`.
 
 1. If you provide an `array` as the `entry` point, only the last one in the array will be exposed.
 
@@ -1142,7 +1142,7 @@ T> Wondering the difference between CommonJS and CommonJS2 is? While they are si
 
 This will expose your library as an AMD module.
 
-AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
+AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as to `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
 
 With the following configuration...
 
@@ -1198,7 +1198,7 @@ module.exports = {
 };
 ```
 
-This packages your output with an immediately-executed AMD `require(dependencies, factory)` wrapper.
+This packages your output with an immediately executed AMD `require(dependencies, factory)` wrapper.
 
 The `'amd-require'` type allows for the use of AMD dependencies without needing a separate later invocation. As with the `'amd'` type, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
 
@@ -1206,7 +1206,7 @@ With this type, the library name can't be used.
 
 ##### type: 'umd'
 
-This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
+This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD, and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
 
 In this case, you need the `library.name` property to name your module:
 
@@ -1285,7 +1285,7 @@ module.exports = {
 
 This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
 
-System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and have your webpack bundle loaded into the System module registry.
+System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and has your webpack bundle loaded into the System module registry.
 
 ```javascript
 module.exports = {
@@ -1354,7 +1354,7 @@ T> Read the [authoring libraries guide](/guides/author-libraries/) guide for mor
 
 ### output.library.export
 
-Specify which export should be exposed as library.
+Specify which export should be exposed as a library.
 
 - Type: `string | string[]`
 
@@ -1464,7 +1464,7 @@ module.exports = {
 
 `boolean`
 
-When using `output.library.type: "umd"`, setting `output.library.umdNamedDefine` to `true` will name the AMD module of the UMD build. Otherwise an anonymous `define` is used.
+When using `output.library.type: "umd"`, setting `output.library.umdNamedDefine` to `true` will name the AMD module of the UMD build. Otherwise, an anonymous `define` is used.
 
 ```javascript
 module.exports = {
@@ -1559,7 +1559,7 @@ This will generate an implied global which has the potential to reassign an exis
 MyLibrary = _entry_return_;
 ```
 
-Be aware that if `MyLibrary` isn't defined earlier your library will be set in global scope.
+Be aware that if `MyLibrary` isn't defined earlier your library will be set in the global scope.
 
 #### libraryTarget: 'assign-properties' <Badge text='5.16.0+' />
 
@@ -1583,7 +1583,7 @@ export function hello(name) {
 MyLibrary.hello('World');
 ```
 
-W> An empty string for [`output.library`](#outputlibrary) is invalid, make sure you specify a valid identifier that could be assigned.
+W> An empty string for the [`output.library`](#outputlibrary) is invalid, make sure you specify a valid identifier that could be assigned.
 
 ### Expose Via Object Assignment
 
@@ -1685,7 +1685,7 @@ W> Prefer to use [`output.library.type: 'amd'`](#type-amd).
 
 This will expose your library as an AMD module.
 
-AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
+AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as to `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
 
 With the following configuration...
 
@@ -1729,7 +1729,7 @@ This bundle will not work as expected, or not work at all (in the case of the al
 
 W> Prefer to use [`output.library.type: 'amd-require'`](#type-amd-require).
 
-This packages your output with an immediately-executed AMD `require(dependencies, factory)` wrapper.
+This packages your output with an immediately executed AMD `require(dependencies, factory)` wrapper.
 
 The `'amd-require'` target allows for the use of AMD dependencies without needing a separate later invocation. As with the `'amd'` target, this depends on the appropriate [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md) being available in the environment in which the webpack output is loaded.
 
@@ -1739,7 +1739,7 @@ With this target, the library name is ignored.
 
 W> Prefer to use [`output.library.type: 'umd'`](#type-umd).
 
-This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
+This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as a global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
 
 In this case, you need the `library` property to name your module:
 
@@ -1767,7 +1767,7 @@ And finally the output is:
 });
 ```
 
-Note that omitting `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
+Note that omitting the `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
 
 ```javascript
 module.exports = {
@@ -1816,7 +1816,7 @@ W> Prefer to use [`output.library.type: 'system'`](#type-system).
 
 This will expose your library as a [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) module. This feature was first released in [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0).
 
-System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and have your webpack bundle loaded into the System module registry.
+System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and has your webpack bundle loaded into the System module registry.
 
 ```javascript
 module.exports = {
@@ -1930,7 +1930,7 @@ Note that `[fullhash]` in this parameter will be replaced with a hash of the com
 
 Tells webpack to include comments in bundles with information about the contained modules. This option defaults to `true` in `development` and `false` in `production` [mode](/configuration/mode/) respectively. `'verbose'` shows more information like exports, runtime requirements and bailouts.
 
-W> While the data this comments can provide is useful during development when reading the generated code, it **should not** be used in production.
+W> While the data this comment can provide is useful during development when reading the generated code, it **should not** be used in production.
 
 **webpack.config.js**
 
