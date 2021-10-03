@@ -20,7 +20,7 @@ Besides exporting a single configuration object, there are a few more ways that 
 
 Eventually you will find the need to disambiguate in your `webpack.config.js` between [development](/guides/development) and [production builds](/guides/production). There are multiple ways to do that. One option is to export a function from your webpack configuration instead of exporting an object. The function will be invoked with two arguments:
 
-- An environment is the first parameter. See the [environment options CLI documentation](/api/cli/#environment-options) for syntax examples.
+- An environment as the first parameter. See the [environment options CLI documentation](/api/cli/#environment-options) for syntax examples.
 - An options map (`argv`) as the second parameter. This describes the options passed to webpack, with keys such as [`output-path`](/api/cli/#flags) and [`mode`](/api/cli/#flags).
 
 ```diff
