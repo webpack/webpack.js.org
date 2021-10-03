@@ -101,7 +101,7 @@ module.exports = [
 
 ## ignoreWarnings
 
-`RegExp` `function (WebpackError, Compilation) => boolean` `{module?: RegExp, file?: RegExp, message?: RegExp}`
+`[RegExp, function (WebpackError, Compilation) => boolean, {module?: RegExp, file?: RegExp, message?: RegExp}]`
 
 Tells webpack to ignore specific warnings. This can be done with a `RegExp`, a custom `function` to select warnings based on the raw warning instance which is getting `WebpackError` and `Compilation` as arguments and returns a `boolean`, an `object` with the following properties:
 
@@ -109,7 +109,7 @@ Tells webpack to ignore specific warnings. This can be done with a `RegExp`, a c
 - `message` : A RegExp to select the warning message.
 - `module` : A RegExp to select the origin module for the warning.
 
-`ignoreWarnings` can be an `array` of any of the above.
+`ignoreWarnings` must be an `array` of any or all of the above.
 
 ```javascript
 module.exports = {
@@ -122,6 +122,7 @@ module.exports = {
       module: /[13]/,
       message: /homepage/,
     },
+    /warning from compiler/,
     (warning) => true,
   ],
 };
