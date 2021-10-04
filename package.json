@@ -121,7 +121,7 @@
     "remark-extract-anchors": "1.1.1",
     "remark-frontmatter": "^3.0.0",
     "remark-gfm": "^1.0.0",
-    "remark-html": "^14.0.0",
+    "remark-html": "^15.0.0",
     "remark-refractor": "montogeek/remark-refractor",
     "remark-slug": "^7.0.0",
     "rimraf": "^3.0.2",
