@@ -20,6 +20,7 @@ contributors:
   - g100g
   - anikethsaha
   - snitin315
+  - Biki-das
 translators:
   - jerexyz
   - QC-L
@@ -74,7 +75,7 @@ W> 请注意，当[导出多个配置对象](/configuration/configuration-types/
 
 T> 如果你碰到了问题，请将路由导航至 `/webpack-dev-server` 将会为你展示服务文件的位置。例如： `http://localhost:9000/webpack-dev-server`。
 
-T> 如果你需要要手动重新编译 `bundle`，将路由导航至 `/invalidate` 使当前编译的 `bundle` 无效，并通过 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate) 为你重新编译。根据你的配置，URL 可能看起来像 `http://localhost:9000/invalidate`。
+T> 如果你需要要手动重新编译 `bundle`，将路由导航至 `/invalidate` 使当前编译的 `bundle` [无效](/api/node/#invalidate-watching)，并通过 [webpack-dev-middleware](https://github.com/webpack/webpack-dev-middleware#invalidate) 为你重新编译。根据你的配置，URL 可能看起来像 `http://localhost:9000/invalidate`。
 
 T> 当启动本地服务的时候 HTML 模板是必须提供的，通常是 `index.html`。确保将脚本引用添加到 HTML 中，webpack-dev-server 不会自动注入它们。
 
@@ -548,7 +549,7 @@ module.exports = {
 };
 ```
 
-要通过 CLI 使用自己的证书，请使用以下选项：
+要通过 CLI 使用你的证书，请使用以下配置项：
 
 ```bash
 npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
@@ -696,7 +697,7 @@ npx webpack serve --history-api-fallback
 npx webpack serve --no-history-api-fallback
 ```
 
-通过传递一个对象，这种行为可以通过像 `rewrites` 这样的配置项进一步控制：
+通过提供一个对象，这种行为可以通过像 `rewrites` 这样的配置项进一步控制：
 
 **webpack.config.js**
 
