@@ -25,7 +25,11 @@ translators:
 
 这个插件使用 [cssnano](https://cssnano.co/) 优化和压缩 CSS。
 
+<<<<<<< HEAD
 就像 [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) 一样，但在 source maps 和 assets 中使用查询字符串会更加准确，支持缓存和并发模式下运行。
+=======
+Just like [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) but more accurate with source maps and assets using query string, allows caching and works in parallel mode.
+>>>>>>> 822c8815f98e3469fe696fe1003a14262d36b213
 
 ## 起步 $#getting-started$
 
@@ -59,6 +63,7 @@ module.exports = {
       new CssMinimizerPlugin(),
     ],
   },
+  plugins: [new MiniCssExtractPlugin()],
 };
 ```
 
@@ -177,8 +182,13 @@ module.exports = {
 使用多进程并发执行，提升构建速度。
 运行时默认的并发数：`os.cpus().length - 1`。
 
+<<<<<<< HEAD
 > ℹ️ 并行化可以显著提升构建速度，所以**强烈建议**使用。
 > 如果启用了并行化，`minimizerOptions` 中的包必须通过字符串引入（`packageName` 或者 `require.resolve(packageName)`）。在 [`minimizerOptions`](#minimizeroptions) 获取更多详细信息。
+=======
+> ℹ️ Parallelization can speed up your build significantly and is therefore **highly recommended**.
+> If a parallelization is enabled, the packages in `minimizerOptions` must be required via strings (`packageName` or `require.resolve(packageName)`). Read more in [`minimizerOptions`](#minimizeroptions)
+>>>>>>> 822c8815f98e3469fe696fe1003a14262d36b213
 
 #### `Boolean` $#boolean$
 
@@ -223,16 +233,23 @@ module.exports = {
 类型：`Function|Array<Function>`
 默认值：`CssMinimizerPlugin.cssnanoMinify`
 
+<<<<<<< HEAD
 允许覆盖默认的 minify 函数。
 默认情况下，插件使用 [cssnano](https://github.com/cssnano/cssnano) 包。
 对于使用和测试未发布或版本衍生版本很有用。
+=======
+Allows overriding default minify function.
+By default, plugin uses [cssnano](https://github.com/cssnano/cssnano) package.
+Useful for using and testing unpublished versions or forks.
+>>>>>>> 822c8815f98e3469fe696fe1003a14262d36b213
 
 可选配置：
 
 - CssMinimizerPlugin.cssnanoMinify
 - CssMinimizerPlugin.cssoMinify
 - CssMinimizerPlugin.cleanCssMinify
-- `async (data, inputMap, minimizerOptions) => {return {code: "a{color: red}", map: "...", warnings: []}}`
+- CssMinimizerPlugin.esbuildMinify
+- `async (data, inputMap, minimizerOptions) => {return {code: "a{color: red}", map: "...", warnings: [], errors: []}}`
 
 > ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
 
@@ -287,6 +304,7 @@ module.exports = {
               code: `a{color: red}`,
               map: `{"version": "3", ...}`,
               warnings: [],
+              errors: [],
             };
           },
         ],
@@ -352,8 +370,13 @@ module.exports = {
 类型：`Object`
 默认值：`{ to: assetName, from: assetName }`
 
+<<<<<<< HEAD
 允许配置 cssnano 的 [`processoptions`](https://postcss.org/api/#processoptions) 配置项。
 `parser`、` stringifier` 和 `syntax` 可以是一个函数，也可以是一个字符串，用来表示将会被导出的模块。
+=======
+Allows filtering options [`processoptions`](https://postcss.org/api/#processoptions) for the cssnano.
+The `parser`,` stringifier` and `syntax` can be either a function or a string indicating the module that will be imported.
+>>>>>>> 822c8815f98e3469fe696fe1003a14262d36b213
 
 > ⚠️ **如果传入一个函数，则必须禁用`parallel` 配置项。**.
 
@@ -399,8 +422,13 @@ module.exports = {
 类型：`Function<(warning, file, source) -> Boolean>`
 默认值：`() => true`
 
+<<<<<<< HEAD
 允许过滤 css-minimizer warnings（默认使用 [cssnano](https://github.com/cssnano/cssnano)）。
 返回 `true` 将保留 warning，否则返回假值（`false`/`null`/`undefined`）。
+=======
+Allow filtering css-minimizer warnings (By default [cssnano](https://github.com/cssnano/cssnano)).
+Return `true` to keep the warning, a falsy value (`false`/`null`/`undefined`) otherwise.
+>>>>>>> 822c8815f98e3469fe696fe1003a14262d36b213
 
 > ⚠️ 如果没有使用 source maps，`source` 参数将包含 `undefined`。
 
@@ -459,6 +487,7 @@ module.exports = {
   optimization: {
     minimizer: [new CssMinimizerPlugin()],
   },
+  plugins: [new MiniCssExtractPlugin()],
 };
 ```
 
@@ -487,11 +516,14 @@ module.exports = {
 
 ### 使用自定义 minifier [csso](https://github.com/css/csso) $#using-custom-minifier-cssohttpsgithubcomcsscsso$
 
+<<<<<<< HEAD
 默认情况下，插件使用 [cssnano](https://github.com/cssnano/cssnano) 包。
 可以使用其他提供压缩功能的依赖包。
 
 > ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
 
+=======
+>>>>>>> 822c8815f98e3469fe696fe1003a14262d36b213
 **webpack.config.js**
 
 ```js
@@ -501,28 +533,9 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        minify: async (data, inputMap) => {
-          const csso = require("csso");
-          const sourcemap = require("source-map");
-
-          const [[filename, input]] = Object.entries(data);
-          const minifiedCss = csso.minify(input, {
-            filename: filename,
-            sourceMap: true,
-          });
-
-          if (inputMap) {
-            minifiedCss.map.applySourceMap(
-              new sourcemap.SourceMapConsumer(inputMap),
-              filename
-            );
-          }
-
-          return {
-            code: minifiedCss.css,
-            map: minifiedCss.map.toJSON(),
-          };
-        },
+        minify: CssMinimizerPlugin.cssoMinify,
+        // Uncomment this line for options
+        // minimizerOptions: { restructure: false },
       }),
     ],
   },
@@ -549,7 +562,7 @@ module.exports = {
 };
 ```
 
-### Using custom minifier [csso](https://github.com/css/csso)
+### Using custom minifier [esbuild](https://github.com/evanw/esbuild)
 
 **webpack.config.js**
 
@@ -560,9 +573,7 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        minify: CssMinimizerPlugin.cssoMinify,
-        // Uncomment this line for options
-        // minimizerOptions: { restructure: false },
+        minify: CssMinimizerPlugin.esbuildMinify,
       }),
     ],
   },

@@ -24,7 +24,11 @@ translators:
 
 
 
+<<<<<<< HEAD
 该插件使用 [terser](https://github.com/terser-js/terser) 来压缩 JavaScript。
+=======
+This plugin uses [terser](https://github.com/terser/terser) to minify/minimize your JavaScript.
+>>>>>>> 822c8815f98e3469fe696fe1003a14262d36b213
 
 ## 入门 $#getting-started$
 
@@ -66,6 +70,7 @@ module.exports = {
 
 ## 选项 $#options$
 
+<<<<<<< HEAD
 |                   选项名                    |                                      类型                                       |                             默认值                             | 描述                                                                  |
 | :---------------------------------------: | :-----------------------------------------------------------------------------: | :-------------------------------------------------------------: | :--------------------------------------------------------------------------- |
 |            **[`test`](#test)**            |                     `String\|RegExp\|Array<String\|RegExp>`                     |                       `/\.m?js(\?.*)?$/i`                       | 用来匹配需要压缩的文件。                                                 |
@@ -75,6 +80,17 @@ module.exports = {
 |          **[`minify`](#minify)**          |                                   `Function`                                    |                           `TerserPlugin.terserMinify`                           | 允许你自定义压缩函数。                              |
 |   **[`terserOptions`](#terseroptions)**   |                                    `Object`                                     | [`default`](https://github.com/terser-js/terser#minify-options) | Terser 的 [minify 选项](https://github.com/terser-js/terser#minify-options)。 |
 | **[`extractComments`](#extractcomments)** | `Boolean\|String\|RegExp\|Function<(node, comment) -> Boolean\|Object>\|Object` |                             `true`                              | 注释是否需要提取到一个单独的文件中。                      |
+=======
+|                   Name                    |                                      Type                                       |                           Default                            | Description                                                               |
+| :---------------------------------------: | :-----------------------------------------------------------------------------: | :----------------------------------------------------------: | :------------------------------------------------------------------------ |
+|            **[`test`](#test)**            |                     `String\|RegExp\|Array<String\|RegExp>`                     |                     `/\.m?js(\?.*)?$/i`                      | Test to match files against.                                              |
+|         **[`include`](#include)**         |                     `String\|RegExp\|Array<String\|RegExp>`                     |                         `undefined`                          | Files to include.                                                         |
+|         **[`exclude`](#exclude)**         |                     `String\|RegExp\|Array<String\|RegExp>`                     |                         `undefined`                          | Files to exclude.                                                         |
+|        **[`parallel`](#parallel)**        |                                `Boolean\|Number`                                |                            `true`                            | Use multi-process parallel running to improve the build speed.            |
+|          **[`minify`](#minify)**          |                                   `Function`                                    |                 `TerserPlugin.terserMinify`                  | Allows you to override default minify function.                           |
+|   **[`terserOptions`](#terseroptions)**   |                                    `Object`                                     | [`default`](https://github.com/terser/terser#minify-options) | Terser [minify options](https://github.com/terser/terser#minify-options). |
+| **[`extractComments`](#extractcomments)** | `Boolean\|String\|RegExp\|Function<(node, comment) -> Boolean\|Object>\|Object` |                            `true`                            | Whether comments shall be extracted to a separate file.                   |
+>>>>>>> 822c8815f98e3469fe696fe1003a14262d36b213
 
 ### `test` $#test$
 
@@ -197,9 +213,15 @@ module.exports = {
 类型： `Function`
 默认值： `TerserPlugin.terserMinify`
 
+<<<<<<< HEAD
 允许你自定义压缩函数。
 默认情况下，插件使用 [terser](https://github.com/terser-js/terser) 库。
 对于使用和测试未发布的版本或 fork 的代码很帮助。
+=======
+Allows you to override default minify function.
+By default plugin uses [terser](https://github.com/terser/terser) package.
+Useful for using and testing unpublished versions or forks.
+>>>>>>> 822c8815f98e3469fe696fe1003a14262d36b213
 
 > ⚠️ **启用 `parallel` 选项时，在 `minify` 函数内部只能使用 `require`** 。
 
@@ -254,10 +276,17 @@ module.exports = {
 
 ### `terserOptions` $#terseroptions$
 
+<<<<<<< HEAD
 类型： `Object`
 默认值： [默认](https://github.com/terser-js/terser#minify-options)
 
 Terser [配置项](https://github.com/terser-js/terser#minify-options) 。
+=======
+Type: `Object`
+Default: [default](https://github.com/terser/terser#minify-options)
+
+Terser [options](https://github.com/terser/terser#minify-options).
+>>>>>>> 822c8815f98e3469fe696fe1003a14262d36b213
 
 **webpack.config.js**
 
