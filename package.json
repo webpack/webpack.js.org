@@ -135,7 +135,7 @@
     "tailwindcss": "^2.2.16",
     "tap-spot": "^1.1.1",
     "unist-util-visit": "^4.1.0",
-    "webpack": "^5.56.0",
+    "webpack": "^5.56.1",
     "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.3.0",
