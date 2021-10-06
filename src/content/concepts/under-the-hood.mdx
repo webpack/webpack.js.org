@@ -69,7 +69,7 @@ Each of them has a chunk with a module - `./home.js` for `home` and `./about.js`
 
 Chunks come in two forms:
 
-- `initial` is the main chunk for the entry point. This chunk contains all the modules and its dependencies that you specify for an entry point.
+- `initial` is the main chunk for the entry point. This chunk contains all the modules and their dependencies that you specify for an entry point.
 - `non-initial` is a chunk that may be lazy-loaded. It may appear when [dynamic import](/guides/code-splitting/#dynamic-imports) or [SplitChunksPlugin](/plugins/split-chunks-plugin/) is being used.
 
 Each chunk has a corresponding **asset**. The assets are the output files - the result of bundling.
