@@ -1275,7 +1275,7 @@ module.exports = {
 };
 ```
 
-Note that requests to root won't be proxied by default. To enable root proxying, the `devServer.index` option should be specified as a falsy value:
+Note that requests to root won't be proxied by default. To enable root proxying, the [`devMiddleware.index`](#devserverdevmiddleware) option should be specified as a falsy value:
 
 **webpack.config.js**
 
@@ -1283,9 +1283,9 @@ Note that requests to root won't be proxied by default. To enable root proxying,
 module.exports = {
   //...
   devServer: {
-    index: '', // specify to enable root proxying
-    host: '...',
-    static: '...',
+    devMiddleware: {
+      index: false, // specify to enable root proxying
+    },
     proxy: {
       context: () => true,
       target: 'http://localhost:1234',
