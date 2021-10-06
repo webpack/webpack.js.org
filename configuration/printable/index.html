@@ -3437,12 +3437,12 @@ example:</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs lang
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>Note that requests to root won&#x27;t be proxied by default. To enable root proxying, the <code>devServer.index</code> option should be specified as a falsy value:</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>Note that requests to root won&#x27;t be proxied by default. To enable root proxying, the <a href="#devserverdevmiddleware"><code>devMiddleware.index</code></a> option should be specified as a falsy value:</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">//...</span>
   devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
-    index<span class="token operator">:</span> <span class="token string">&#x27;&#x27;</span><span class="token punctuation">,</span> <span class="token comment">// specify to enable root proxying</span>
-    host<span class="token operator">:</span> <span class="token string">&#x27;...&#x27;</span><span class="token punctuation">,</span>
-    <span class="token keyword">static</span><span class="token operator">:</span> <span class="token string">&#x27;...&#x27;</span><span class="token punctuation">,</span>
+    devMiddleware<span class="token operator">:</span> <span class="token punctuation">{</span>
+      index<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// specify to enable root proxying</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
     proxy<span class="token operator">:</span> <span class="token punctuation">{</span>
       <span class="token function-variable function">context</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       target<span class="token operator">:</span> <span class="token string">&#x27;http://localhost:1234&#x27;</span><span class="token punctuation">,</span>
