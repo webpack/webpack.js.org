@@ -299,7 +299,11 @@ T> [`processAssets`](/api/compilation-hooks/#processassets) 钩子还支持 `add
 
 ## 插件的不同类型 $#different-plugin-shapes$
 
+<<<<<<< HEAD
 webpack 插件可以按照它所注册的事件分成不同的类型。每一个事件钩子都预先定义为同步、异步、瀑布或并行钩子，钩子在内部用 call/callAsync 方法调用。支持的钩子清单或可被绑定的钩子清单，通常在 `this.hooks` 属性指定。
+=======
+A plugin can be classified into types based on the event hooks it taps into. Every event hook is pre-defined as synchronous or asynchronous or waterfall or parallel hook and hook is called internally using call/callAsync method. The list of hooks that are supported or can be tapped into is generally specified in `this.hooks` property.
+>>>>>>> ee23db7a141fb49d6f34109be9855413d42c9d90
 
 例如:
 
@@ -327,7 +331,11 @@ this.hooks = {
   - 用 `tap` 方法绑定。
   - 用 `call(...params)` 方法调用。
 
+<<<<<<< HEAD
   Bail类型的钩子，其插件回调函数是串行调用，任意一个插件回调函数返回非 undefined 值，则停止执行插件，该值作为钩子的返回值。`optimizeChunks`，`optimizeChunkModules` 等很有用的事件都是 SyncBailHooks 。
+=======
+  In these types of hooks, each of the plugin callbacks will be invoked one after the other with the specific `args`. If any value is returned except undefined by any plugin, then that value is returned by hook and no further plugin callback is invoked. Many useful events like `optimizeChunks`, `optimizeChunkModules` are SyncBailHooks.
+>>>>>>> ee23db7a141fb49d6f34109be9855413d42c9d90
 
 - **Waterfall(瀑布) Hooks**
 
@@ -335,8 +343,13 @@ this.hooks = {
   - 用 `tap` 方法绑定。
   - 用 `call(...params)` 方法调用。
 
+<<<<<<< HEAD
   该类型的插件是一个接一个串行执行，前一个的返回值作为后一个的入参。插件需要考虑执行的顺序，因为后一个插件必须接受前一个插件执行的结果作为入参。第一个插件的参数为 `init` 。
   所以 waterfall 钩子至少要制定一个参数。这种模式用于和 `ModuleTemplate`，`ChunkTemplate` 等 webpack 模板相关的 Tapable 实例。
+=======
+  Here each of the plugins is called one after the other with the arguments from the return value of the previous plugin. The plugin must take the order of its execution into account.
+  It must accept arguments from the previous plugin that was executed. The value for the first plugin is `init`. Hence at least 1 param must be supplied for waterfall hooks. This pattern is used in the Tapable instances which are related to the webpack templates like `ModuleTemplate`, `ChunkTemplate` etc.
+>>>>>>> ee23db7a141fb49d6f34109be9855413d42c9d90
 
 ### Asynchronous(异步) Hooks $#asynchronous-hooks$
 
