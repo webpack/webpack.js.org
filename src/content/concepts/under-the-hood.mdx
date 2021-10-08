@@ -72,13 +72,8 @@ module.exports = {
 
 chunk 有两种形式：
 
-<<<<<<< HEAD
 - `initial(初始化)` 是入口起点的 main chunk。此 chunk 包含为入口起点指定的所有模块及其依赖项。
 - `non-initial` 是可以延迟加载的块。可能会出现在使用 [动态导入(dynamic imports)](/guides/code-splitting/#dynamic-imports) 或者 [SplitChunksPlugin](/plugins/split-chunks-plugin/) 时。
-=======
-- `initial` is the main chunk for the entry point. This chunk contains all the modules and their dependencies that you specify for an entry point.
-- `non-initial` is a chunk that may be lazy-loaded. It may appear when [dynamic import](/guides/code-splitting/#dynamic-imports) or [SplitChunksPlugin](/plugins/split-chunks-plugin/) is being used.
->>>>>>> ee23db7a141fb49d6f34109be9855413d42c9d90
 
 每个 chunk 都有对应的 **asset(资源)**。资源，是指输出文件（即打包结果）。
 

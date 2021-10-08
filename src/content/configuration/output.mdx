@@ -572,7 +572,6 @@ module.exports = {
 
 可在文件层面替换的内容：
 
-<<<<<<< HEAD
 | 模板       | 描述                                    |
 | ---------- | --------------------------------------- |
 | [file]     | filename 和路径，不含 query 或 fragment |
@@ -582,19 +581,7 @@ module.exports = {
 | [filebase] | 同上，但已弃用                          |
 | [path]     | 只有 path，不含 filename                |
 | [name]     | 只有 filename，不含扩展名或 path        |
-| [ext]      | 带前缀 `.` 的扩展名                     |
-=======
-| Template   | Description                                                                       |
-| ---------- | --------------------------------------------------------------------------------- |
-| [file]     | Filename and path, without query or fragment                                      |
-| [query]    | Query with leading `?`                                                            |
-| [fragment] | Fragment with leading `#`                                                         |
-| [base]     | Only filename (including extensions), without path                                |
-| [filebase] | Same, but deprecated                                                              |
-| [path]     | Only path, without filename                                                       |
-| [name]     | Only filename without extension or path                                           |
-| [ext]      | Extension with leading `.` (not available for [output.filename](#outputfilename)) |
->>>>>>> ee23db7a141fb49d6f34109be9855413d42c9d90
+| [ext]      | 带前缀 `.` 的扩展名（对 [output.filename](#outputfilename) 不可用）                     |
 
 可在 URL 层面替换的内容：
 
