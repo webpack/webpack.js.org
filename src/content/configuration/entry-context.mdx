@@ -19,7 +19,7 @@ The entry object is where webpack looks to start building the bundle. The contex
 
 `string`
 
-The base directory, an **absolute path**, for resolving entry points and loaders from configuration.
+The base directory, an **absolute path**, for resolving entry points and loaders from the configuration.
 
 ```js
 const path = require('path');
@@ -30,7 +30,7 @@ module.exports = {
 };
 ```
 
-By default the current directory is used, but it's recommended to pass a value in your configuration. This makes your configuration independent from CWD (current working directory).
+By default, the current directory is used, but it's recommended to pass a value in your configuration. This makes your configuration independent from CWD (current working directory).
 
 ---
 
@@ -61,7 +61,7 @@ If a string or array of strings is passed, the chunk is named `main`. If an obje
 
 ### Entry descriptor
 
-If an object is passed the value might be a string, array of strings or a descriptor:
+If an object is passed the value might be a string, array of strings, or a descriptor:
 
 ```js
 module.exports = {
@@ -118,7 +118,7 @@ module.exports = {
 };
 ```
 
-The `app` chunk will not contain the modules that `react-vendors` has.
+The `app` chunk will not contain the modules that `react-vendors` have.
 
 `dependOn` option can also accept an array of strings:
 
@@ -152,7 +152,7 @@ module.exports = {
 
 If a function is passed then it will be invoked on every [make](/api/compiler-hooks/#make) event.
 
-> Note that the make event triggers when webpack starts and for every invalidation when [watching for file changes](/configuration/watch/).
+> Note that the `make` event triggers when webpack starts and for every invalidation when [watching for file changes](/configuration/watch/).
 
 ```js
 module.exports = {

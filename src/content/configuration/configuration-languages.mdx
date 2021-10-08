@@ -13,7 +13,7 @@ contributors:
   - liyiming22
 ---
 
-Webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found at the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
+Webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found in the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
 
 ## TypeScript
 
@@ -47,7 +47,7 @@ const config: webpack.Configuration = {
 export default config;
 ```
 
-Above sample assumes version >= 2.7 or newer of TypeScript is used with the new `esModuleInterop` and `allowSyntheticDefaultImports` compiler options in your `tsconfig.json` file.
+The above sample assumes version >= 2.7 or newer of TypeScript is used with the new `esModuleInterop` and `allowSyntheticDefaultImports` compiler options in your `tsconfig.json` file.
 
 Note that you'll also need to check your `tsconfig.json` file. If the `module` in `compilerOptions` in `tsconfig.json` is `commonjs`, the setting is complete, else webpack will fail with an error. This occurs because `ts-node` does not support any module syntax other than `commonjs`.
 
@@ -130,11 +130,11 @@ module.exports = config
 
 ## Babel and JSX
 
-In the example below JSX (React JavaScript Markup) and Babel are used to create a JSON Configuration that webpack can understand.
+In the example below JSX (React JavaScript Markup) and Babel are used, to create a JSON configuration that webpack can understand.
 
 > Courtesy of [Jason Miller](https://twitter.com/_developit)
 
-First install the necessary dependencies:
+First, install the necessary dependencies:
 
 ```bash
 npm install --save-dev babel-register jsxobj babel-preset-es2015
