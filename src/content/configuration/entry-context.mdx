@@ -22,7 +22,11 @@ translators:
 
 `string`
 
+<<<<<<< HEAD
 基础目录，**绝对路径**，用于从配置中解析入口点(entry point)和 加载器(loader)。
+=======
+The base directory, an **absolute path**, for resolving entry points and loaders from the configuration.
+>>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ```js
 const path = require('path');
@@ -33,7 +37,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 默认使用当前目录，但是推荐在配置中传入一个值。这使得你的配置独立于 CWD(current working directory, 当前工作目录)。
+=======
+By default, the current directory is used, but it's recommended to pass a value in your configuration. This makes your configuration independent from CWD (current working directory).
+>>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ---
 
@@ -64,7 +72,11 @@ module.exports = {
 
 ### Entry descriptor $#entry-descriptor$
 
+<<<<<<< HEAD
 如果传入一个对象，对象的属性的值可以是一个字符串、字符串数组或者一个描述符(descriptor):
+=======
+If an object is passed the value might be a string, array of strings, or a descriptor:
+>>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ```js
 module.exports = {
@@ -121,7 +133,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 `app` 这个 chunk 就不会包含 `react-vendors` 拥有的模块了.
+=======
+The `app` chunk will not contain the modules that `react-vendors` have.
+>>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 `dependOn` 选项的也可以为字符串数组：
 
@@ -155,7 +171,11 @@ module.exports = {
 
 如果传入一个函数，那么它将会在每次 [make](/api/compiler-hooks/#make) 事件中被调用。
 
+<<<<<<< HEAD
 > 要注意的是，make 事件在 webpack 启动和每当 [监听文件变化](/configuration/watch/) 时都会触发。
+=======
+> Note that the `make` event triggers when webpack starts and for every invalidation when [watching for file changes](/configuration/watch/).
+>>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ```js
 module.exports = {
