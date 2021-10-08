@@ -1278,7 +1278,7 @@ module.exports = {
 };
 ```
 
-请注意，默认情况下不会代理对 root 的请求。 要启用根代理，应将 `devServer.index` 选项指定为虚假值：
+请注意，默认情况下不会代理对 root 的请求。 要启用根代理，应将 [`devMiddleware.index`](#devserverdevmiddleware) 选项指定为虚假值：
 
 **webpack.config.js**
 
@@ -1286,9 +1286,9 @@ module.exports = {
 module.exports = {
   //...
   devServer: {
-    index: '', // specify to enable root proxying
-    host: '...',
-    static: '...',
+    devMiddleware: {
+      index: false, // specify to enable root proxying
+    },
     proxy: {
       context: () => true,
       target: 'http://localhost:1234',
