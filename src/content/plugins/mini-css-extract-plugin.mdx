@@ -98,7 +98,7 @@ module.exports = {
 |    **[`attributes`](#attributes)**    |      `{Object}`      |                                       `{}`                                       | 为 [非初始（由 async 修饰）](/concepts/under-the-hood/#chunks) 的 CSS chunk 所处的 `link` 标签添加自定义属性                            |
 |      **[`linkType`](#linktype)**      | `{String\|Boolean}`  |              `text/css`               | 允许使用自定义 link 类型加载异步 chunk |
 |                     **[`runtime`](#runtime)**                     |     `{Boolean}`      |                `true`                 | 允许启动/禁用 runtime 生成                                                                                        |
-| **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `false`                | 使用实验性的 webpack API 来执行模块，而非子代编译器 |
+| **[`experimentalUseImportModule`](#experimentaluseimportmodule)** |     `{Boolean}`      |                `undefined`                | 使用实验性的 webpack API 来执行模块，而非子代编译器 |
 
 #### `filename` $#filename$
 
@@ -311,13 +311,16 @@ module.exports = {
 
 #### `experimentalUseImportModule` $#experimentaluseimportmodule$
 
-使用实验性的 webpack API 来执行模块，而非子代编译器。
+类型：`Boolean`
+默认值：`undefined`
 
-使用此 API 在性能和内存占用方面有很大改善，但没有正常的方式稳定。
+如果没有显式启用，则默认启用（即可以通过 `true` 与 `false` 显式控制该配置），并且新 API 处于可用状态（webpack 版本至少为 `5.52.0`）。
+布尔值在 `5.33.2` 版本后可用，但是你需要启用 `experiments.executeModule`（webpack `5.52.0` 版本不需要）。
 
-当与 `experiments.layer` 结合使用时，这在 loader 配置中增加了一个 `layer` 选项，为 css 指定执行 layer。
+使用新的 webpack API 来执行模块而不是子编译器。
+这大大提高了性能和内存使用。
 
-你需保证 webpack 的版本至少为 5.33.2。
+当与 `experiments.layers` 相结合时，添加了一个 `layer` 选项到 loader 配置项中，以指定 CSS 执行的 layer。
 
 **webpack.config.js**
 
@@ -327,6 +330,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
+      // `>= 5.52.0` 版本的 webpack 不需要该配置，因为该配置项默认启用
+      // 仅 `>= 5.33.2 & <= 5.52.0` 版本的 webpack 需要该配置
+      // 对于 `<= 5.33.2` 版本的 webpack 不可用/不安全
       experimentalUseImportModule: true,
     }),
   ],

@@ -24,7 +24,7 @@ translators:
 
 
 
-该插件使用 [terser](https://github.com/terser-js/terser) 来压缩 JavaScript。
+该插件使用 [terser](https://github.com/terser/terser) 来压缩 JavaScript。
 
 ## 入门 $#getting-started$
 
@@ -70,10 +70,10 @@ module.exports = {
 | :---------------------------------------: | :-----------------------------------------------------------------------------: | :-------------------------------------------------------------: | :--------------------------------------------------------------------------- |
 |            **[`test`](#test)**            |                     `String\|RegExp\|Array<String\|RegExp>`                     |                       `/\.m?js(\?.*)?$/i`                       | 用来匹配需要压缩的文件。                                                 |
 |         **[`include`](#include)**         |                     `String\|RegExp\|Array<String\|RegExp>`                     |                           `undefined`                           | 匹配参与压缩的文件。                                                            |
-|            **[`exclude`](#)**             |                     `String\|RegExp\|Array<String\|RegExp>`                     |                           `undefined`                           | 匹配不需要压缩的文件。                                                            |
+|            **[`exclude`](#exclude)**             |                     `String\|RegExp\|Array<String\|RegExp>`                     |                           `undefined`                           | 匹配不需要压缩的文件。                                                            |
 |        **[`parallel`](#parallel)**        |                                `Boolean\|Number`                                |                             `true`                              | 使用多进程并发运行以提高构建速度。               |
 |          **[`minify`](#minify)**          |                                   `Function`                                    |                           `TerserPlugin.terserMinify`                           | 允许你自定义压缩函数。                              |
-|   **[`terserOptions`](#terseroptions)**   |                                    `Object`                                     | [`default`](https://github.com/terser-js/terser#minify-options) | Terser 的 [minify 选项](https://github.com/terser-js/terser#minify-options)。 |
+|   **[`terserOptions`](#terseroptions)**   |                                    `Object`                                     | [`default`](https://github.com/terser/terser#minify-options) | Terser 的 [minify 选项](https://github.com/terser/terser#minify-options)。 |
 | **[`extractComments`](#extractcomments)** | `Boolean\|String\|RegExp\|Function<(node, comment) -> Boolean\|Object>\|Object` |                             `true`                              | 注释是否需要提取到一个单独的文件中。                      |
 
 ### `test` $#test$
@@ -198,7 +198,7 @@ module.exports = {
 默认值： `TerserPlugin.terserMinify`
 
 允许你自定义压缩函数。
-默认情况下，插件使用 [terser](https://github.com/terser-js/terser) 库。
+默认情况下，插件使用 [terser](https://github.com/terser/terser) 库。
 对于使用和测试未发布的版本或 fork 的代码很帮助。
 
 > ⚠️ **启用 `parallel` 选项时，在 `minify` 函数内部只能使用 `require`** 。
@@ -255,9 +255,9 @@ module.exports = {
 ### `terserOptions` $#terseroptions$
 
 类型： `Object`
-默认值： [默认](https://github.com/terser-js/terser#minify-options)
+默认值： [默认](https://github.com/terser/terser#minify-options)
 
-Terser [配置项](https://github.com/terser-js/terser#minify-options) 。
+Terser [配置项](https://github.com/terser/terser#minify-options) 。
 
 **webpack.config.js**
 

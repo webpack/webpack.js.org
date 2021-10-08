@@ -59,6 +59,7 @@ module.exports = {
       new CssMinimizerPlugin(),
     ],
   },
+  plugins: [new MiniCssExtractPlugin()],
 };
 ```
 
@@ -232,7 +233,8 @@ module.exports = {
 - CssMinimizerPlugin.cssnanoMinify
 - CssMinimizerPlugin.cssoMinify
 - CssMinimizerPlugin.cleanCssMinify
-- `async (data, inputMap, minimizerOptions) => {return {code: "a{color: red}", map: "...", warnings: []}}`
+- CssMinimizerPlugin.esbuildMinify
+- `async (data, inputMap, minimizerOptions) => {return {code: "a{color: red}", map: "...", warnings: [], errors: []}}`
 
 > ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
 
@@ -287,6 +289,7 @@ module.exports = {
               code: `a{color: red}`,
               map: `{"version": "3", ...}`,
               warnings: [],
+              errors: [],
             };
           },
         ],
@@ -459,6 +462,7 @@ module.exports = {
   optimization: {
     minimizer: [new CssMinimizerPlugin()],
   },
+  plugins: [new MiniCssExtractPlugin()],
 };
 ```
 
@@ -487,11 +491,6 @@ module.exports = {
 
 ### 使用自定义 minifier [csso](https://github.com/css/csso) $#using-custom-minifier-cssohttpsgithubcomcsscsso$
 
-默认情况下，插件使用 [cssnano](https://github.com/cssnano/cssnano) 包。
-可以使用其他提供压缩功能的依赖包。
-
-> ⚠️ **启用 `parallel` 选项时，始终在 `minify` 函数中使用 `require`**。
-
 **webpack.config.js**
 
 ```js
@@ -501,28 +500,9 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        minify: async (data, inputMap) => {
-          const csso = require("csso");
-          const sourcemap = require("source-map");
-
-          const [[filename, input]] = Object.entries(data);
-          const minifiedCss = csso.minify(input, {
-            filename: filename,
-            sourceMap: true,
-          });
-
-          if (inputMap) {
-            minifiedCss.map.applySourceMap(
-              new sourcemap.SourceMapConsumer(inputMap),
-              filename
-            );
-          }
-
-          return {
-            code: minifiedCss.css,
-            map: minifiedCss.map.toJSON(),
-          };
-        },
+        minify: CssMinimizerPlugin.cssoMinify,
+        // Uncomment this line for options
+        // minimizerOptions: { restructure: false },
       }),
     ],
   },
@@ -549,7 +529,7 @@ module.exports = {
 };
 ```
 
-### Using custom minifier [csso](https://github.com/css/csso)
+### Using custom minifier [esbuild](https://github.com/evanw/esbuild)
 
 **webpack.config.js**
 
@@ -560,9 +540,7 @@ module.exports = {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin({
-        minify: CssMinimizerPlugin.cssoMinify,
-        // Uncomment this line for options
-        // minimizerOptions: { restructure: false },
+        minify: CssMinimizerPlugin.esbuildMinify,
       }),
     ],
   },
