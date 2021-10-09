@@ -17,11 +17,7 @@ translators:
   - QC-L
 ---
 
-<<<<<<< HEAD
 Webpack 支持使用多种编程语言和数据描述格式来编写配置文件。在 [node-interpret](https://github.com/gulpjs/interpret) 中你可以找到当前所支持的文件类型列表，通过 [node-interpret](https://github.com/gulpjs/interpret)，webpack 能够处理这些类型的配置文件。
-=======
-Webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found in the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ## TypeScript $#typescript$
 
@@ -55,11 +51,7 @@ const config: webpack.Configuration = {
 export default config;
 ```
 
-<<<<<<< HEAD
 该示例需要 typescript 版本在 2.7 及以上，并在 `tsconfig.json` 文件的 compilerOptions 中添加 `esModuleInterop` 和 `allowSyntheticDefaultImports` 两个配置项。
-=======
-The above sample assumes version >= 2.7 or newer of TypeScript is used with the new `esModuleInterop` and `allowSyntheticDefaultImports` compiler options in your `tsconfig.json` file.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 值得注意的是你需要确保 `tsconfig.json` 的 `compilerOptions` 中 `module` 选项的值为 `commonjs`,否则 webpack 的运行会失败报错，因为 `ts-node` 不支持 `commonjs` 以外的其他模块规范。
 
@@ -142,19 +134,11 @@ module.exports = config
 
 ## Babel and JSX $#babel-and-jsx$
 
-<<<<<<< HEAD
 下述的示例中使用了 JSX（用于 React 的 JavaScript 标记语言）和 babel 来创建格式为 json 的 webpack 配置文件。
-=======
-In the example below JSX (React JavaScript Markup) and Babel are used, to create a JSON configuration that webpack can understand.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 > 感谢 [Jason Miller](https://twitter.com/_developit) 提供示例代码
 
-<<<<<<< HEAD
-首先需要安装一些必要依赖，如下所示:
-=======
-First, install the necessary dependencies:
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
+首先，需要安装一些必要依赖，如下所示:
 
 ```bash
 npm install --save-dev babel-register jsxobj babel-preset-es2015

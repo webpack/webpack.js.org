@@ -33,11 +33,7 @@ translators:
   - QC-L
 ---
 
-<<<<<<< HEAD
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
-=======
-The top-level `output` key contains a set of options instructing webpack on how and where it should output your bundles, assets, and anything else you bundle or load with webpack.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ## output.assetModuleFilename $#outputassetModulefilename$
 
@@ -114,11 +110,7 @@ module.exports = {
 
 告诉 webpack 为 HTML 的 `<script>` 标签添加 `charset="utf-8"` 标识。
 
-<<<<<<< HEAD
 T> 尽管 `<script>` [已弃用](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes)了 `charset` 属性，当 webpack 还是默认添加了它，目的是与非现代浏览器兼容。
-=======
-T> Although the `charset` attribute for `<script>` tag was [deprecated](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#Deprecated_attributes), webpack still adds it by default for compatibility with non-modern browsers.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ## output.chunkFilename $#outputchunkfilename$
 
@@ -179,11 +171,7 @@ module.exports = {
 
 `number = 120000`
 
-<<<<<<< HEAD
 chunk 请求到期之前的毫秒数，默认为 120000。从 webpack 2.6.0 开始支持此选项。
-=======
-The Number of milliseconds before chunk request expires. This option is supported since webpack 2.6.0.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 **webpack.config.js**
 
@@ -201,11 +189,7 @@ module.exports = {
 
 `string = 'webpackChunkwebpack'`
 
-<<<<<<< HEAD
 webpack 用于加载 chunk 的全局变量。
-=======
-The global variable is used by webpack for loading chunks.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 **webpack.config.js**
 
@@ -319,11 +303,7 @@ module.exports = {
 
 `boolean = false` `string: 'anonymous' | 'use-credentials'`
 
-<<<<<<< HEAD
 告诉 webpack 启用 [cross-origin 属性](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) 加载 chunk。仅在 [`target`](/configuration/target/) 设置为 `'web'` 时生效，通过使用 JSONP 来添加脚本标签，实现按需加载模块。
-=======
-Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web/HTML/Element/script#attr-crossorigin) loading of chunks. Only takes effect when the [`target`](/configuration/target/) is set to `'web'`, which uses JSONP for loading on-demand chunks, by adding script tags.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 - `'anonymous'` - **不带凭据(credential)** 启用跨域加载
 - `'use-credentials'` - **携带凭据(credential)** 启用跨域加载
@@ -332,11 +312,7 @@ Tells webpack to enable [cross-origin](https://developer.mozilla.org/en/docs/Web
 
 `string` `function (info)`
 
-<<<<<<< HEAD
 当上面的模板字符串或函数产生重复时使用的备用内容。
-=======
-A fallback is used when the template string or function above yields duplicates.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 查看 [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate)。
 
@@ -344,11 +320,7 @@ A fallback is used when the template string or function above yields duplicates.
 
 `string = 'webpack://[namespace]/[resource-path]?[loaders]'` `function (info) => string`
 
-<<<<<<< HEAD
 此选项仅在 「[`devtool`](/configuration/devtool) 使用了需要模块名称的选项」时使用。
-=======
-This option is only used when [`devtool`](/configuration/devtool) uses an option that requires module names.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 自定义每个 source map 的 `sources` 数组中使用的名称。可以通过传递模板字符串(template string)或者函数来完成。例如，当使用 `devtool: 'eval'`，默认值是：
 
@@ -396,11 +368,7 @@ module.exports = {
 
 `string`
 
-<<<<<<< HEAD
 此选项确定 [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate) 使用的模块名称空间。未指定时的默认值为：[`output.library`](#outputlibrary)。在加载多个通过 webpack 构建的 library 时，用于防止 source map 中源文件路径冲突。
-=======
-This option determines the module's namespace used with the [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.library`](#outputlibrary). It's used to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 例如，如果你有两个 library，分别使用命名空间 `library1` 和 `library2`，并且都有一个文件 `./src/index.js`（可能具有不同内容），它们会将这些文件暴露为 `webpack://library1/./src/index.js` 和 `webpack://library2/./src/index.js`。
 
@@ -551,11 +519,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 使用函数返回 filename：
-=======
-Using the function to return the filename:
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 **webpack.config.js**
 
@@ -574,11 +538,7 @@ module.exports = {
 
 注意此选项被称为文件名，但是你还是可以使用像 `'js/[name]/bundle.js'` 这样的文件夹结构。
 
-<<<<<<< HEAD
 注意，此选项不会影响那些「按需加载 chunk」的输出文件。它只影响最初加载的输出文件。对于按需加载的 chunk 文件，请使用 [`output.chunkFilename`](#outputchunkfilename) 选项来控制输出。通过 loader 创建的文件也不受影响。在这种情况下，你必须尝试 loader 特定的可用选项。
-=======
-Note this option does not affect output files for on-demand-loaded chunks. It only affects output files that are initially loaded. For on-demand-loaded chunk files, the [`output.chunkFilename`](#outputchunkfilename) option is used. Files created by loaders also aren't affected. In this case, you would have to try the specific loader's available options.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ### Template strings $#template-strings$
 
@@ -670,21 +630,13 @@ type ModulePathData = {
 };
 ```
 
-<<<<<<< HEAD
 T> 在某些上下文中，属性将使用 JavaScript 代码表达式代替原始值。在此情况下，`WithLength` 变量是可用的，应该使用它来代替对原始值的分片操作。
-=======
-T> In some contexts properties will use JavaScript code expressions instead of raw values. In these cases, the `WithLength` variant is available and should be used instead of slicing the original value.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ## output.futureEmitAssets $#outputfutureemitassets$
 
 `boolean = false`
 
-<<<<<<< HEAD
 告诉 webpack 使用未来版本的资源文件 emit 逻辑，允许在 emit 后释放资源文件的内存。这可能会破坏那些认为资源文件 emit 后仍然可读的插件。
-=======
-Tells webpack to use the future version of asset emitting logic, which allows freeing memory of assets after emitting. It could break plugins that assume that assets are still readable after they were emitted.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 W> 在 webpack v5.0.0 中 `output.futureEmitAssets` 选项被移除并且这种行为将被默认支持。
 
@@ -746,11 +698,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 确保 hash 函数有可访问的 `update` 和 `digest` 方法。
-=======
-Make sure that the hashing function will have an `update` and `digest` methods available.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 T> 从 `webpack v5.54.0+` 起，`hashFunction` 支持将 `xxhash64` 作为更快的算法，当启用 [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) 时，此算法将被默认使用。
 
@@ -785,11 +733,7 @@ T> 通常，你不需要修改 `output.hotUpdateChunkFilename`.
 
 只在 [`target`](/configuration/target/) 设置为 `'web'` 时使用，用于加载热更新(hot update)的 JSONP 函数。
 
-<<<<<<< HEAD
 JSONP 函数用于异步加载(async load)热更新(hot-update) chunk。
-=======
-A JSONP function is used to asynchronously load hot-update chunks.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 欲了解详情，请查阅 [`output.chunkLoadingGlobal`](#outputchunkloadingglobal)。
 
@@ -870,11 +814,7 @@ export function hello(name) {
 </script>
 ```
 
-<<<<<<< HEAD
 在上面的例子中，我们为 `entry` 设置了一个入口文件，然而 webpack 可以接受 [多个入口](/configuration/entry-context/#entry)，例如一个 `array` 或者一个 `object`。
-=======
-In the above example, we're passing a single entry file to `entry`, however, webpack can accept [many kinds of entry point](/configuration/entry-context/#entry), e.g., an `array`, or an `object`.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 1. 如果你将 `entry` 设置为一个 `array`，那么只有数组中的最后一个会被暴露。
 
@@ -1205,11 +1145,7 @@ T> 在考虑 CommonJS 与 CommonJS2 之间的区别？虽然它们很相似，�
 
 可以将你的库暴露为 AMD 模块。
 
-<<<<<<< HEAD
 AMD module 要求入口 chunk（例如，第一个通过 `<script>` 标签加载的脚本）使用特定的属性来定义, 例如 `define` 与 `require`，这通常由 RequireJS 或任何兼容的 loader（如 almond）提供。否则，直接加载产生的 AMD bundle 将导致一个错误，如 `define is not defined`。
-=======
-AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as to `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 按照下面的配置
 
@@ -1265,11 +1201,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
 它会用一个立即执行的 AMD `require(dependencies, factory)` 包装器来打包输出。
-=======
-This packages your output with an immediately executed AMD `require(dependencies, factory)` wrapper.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 `'amd-require'` 类型允许使用 AMD 的依赖，而不需要单独的后续调用。与 `'amd'` 类型一样，这取决于在加载 webpack 输出的环境中适当的 [`require` 函数](https://github.com/amdjs/amdjs-api/blob/master/require.md) 是否可用。
 
@@ -1277,11 +1209,7 @@ This packages your output with an immediately executed AMD `require(dependencies
 
 ##### type: 'umd' $#type-umd$
 
-<<<<<<< HEAD
 这将在所有模块定义下暴露你的库, 允许它与 CommonJS、AMD 和作为全局变量工作。可以查看 [UMD Repository](https://github.com/umdjs/umd) 获取更多内容。
-=======
-This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD, and as global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 在这种情况下，你需要使用 `library.name` 属性命名你的模块：
 
@@ -1360,11 +1288,7 @@ module.exports = {
 
 这将会把你的库暴露为一个 [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) 模块。这个特性最初是在 [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0) 中发布。
 
-<<<<<<< HEAD
 System 模块要求当 webpack bundle 执行时，全局变量 `System` 出现在浏览器中。编译的 `System.register` 格式允许你在没有额外配置的情况下使用 `System.import('/bundle.js')`，并将你的 webpack bundle 加载到系统模块注册表中。
-=======
-System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and has your webpack bundle loaded into the System module registry.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ```javascript
 module.exports = {
@@ -1433,11 +1357,7 @@ T> 阅读 [authoring libraries guide](/guides/author-libraries/) 指南获取更
 
 ### output.library.export $#outputlibraryexport$
 
-<<<<<<< HEAD
 指定哪一个导出应该被暴露为一个库。
-=======
-Specify which export should be exposed as a library.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 - 类型：`string | string[]`
 
@@ -1547,11 +1467,7 @@ module.exports = {
 
 `boolean`
 
-<<<<<<< HEAD
 当使用 `output.library.type: "umd"` 时，将 `output.library.umdNamedDefine` 设置为 `true` 将会把 AMD 模块命名为 UMD 构建。否则使用匿名 `define`。
-=======
-When using `output.library.type: "umd"`, setting `output.library.umdNamedDefine` to `true` will name the AMD module of the UMD build. Otherwise, an anonymous `define` is used.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ```javascript
 module.exports = {
@@ -1646,11 +1562,7 @@ W> 最好使用 [`output.library.type: 'assign'`](#type-assign)。
 MyLibrary = _entry_return_;
 ```
 
-<<<<<<< HEAD
 注意，如果 `MyLibrary` 在作用域中未在前面代码进行定义，则你的 library 将被设置在全局作用域内。
-=======
-Be aware that if `MyLibrary` isn't defined earlier your library will be set in the global scope.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 #### libraryTarget: 'assign-properties' <Badge text='5.16.0+' /> $#libraryTarget-assign-properties$
 
@@ -1674,11 +1586,7 @@ export function hello(name) {
 MyLibrary.hello('World');
 ```
 
-<<<<<<< HEAD
 W> 当使用此选项时，将 [`output.library`](#outputlibrary) 设置为空，将产生一个破损的输出 bundle。
-=======
-W> An empty string for the [`output.library`](#outputlibrary) is invalid, make sure you specify a valid identifier that could be assigned.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ### 通过在对象上赋值暴露 $#expose-via-object-assignment$
 
@@ -1780,11 +1688,7 @@ W> 最好使用 [`output.library.type: 'amd'`](#type-amd)。
 
 将你的 library 暴露为 AMD 模块。
 
-<<<<<<< HEAD
 AMD 模块要求入口 chunk（例如使用 `<script>` 标签加载的第一个脚本）通过特定的属性定义，例如 `define` 和 `require`，它们通常由 RequireJS 或任何兼容的模块加载器提供（例如 almond）。否则，直接加载生成的 AMD bundle 将导致报错，如 `define is not defined`。
-=======
-AMD modules require that the entry chunk (e.g. the first script loaded by the `<script>` tag) be defined with specific properties, such as to `define` and `require` which is typically provided by RequireJS or any compatible loaders (such as almond). Otherwise, loading the resulting AMD bundle directly will result in an error like `define is not defined`.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 配置如下：
 
@@ -1828,11 +1732,7 @@ define([], function () {
 
 W> 最好使用 [`output.library.type: 'amd-require'`](#type-amd-require)。
 
-<<<<<<< HEAD
 这将使用立即执行的 AMD `require(dependencies, factory)` 包装器包装您的输出。
-=======
-This packages your output with an immediately executed AMD `require(dependencies, factory)` wrapper.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 `'amd-require'` 目标（target）允许使用 AMD 依赖项，而无需单独的后续调用。与 `'amd'` 目标（target）一样, 这取决于在加载 webpack 输出的环境中适当可用的 [`require` function](https://github.com/amdjs/amdjs-api/blob/master/require.md)。
 
@@ -1842,11 +1742,7 @@ This packages your output with an immediately executed AMD `require(dependencies
 
 W> 最好使用 [`output.library.type: 'umd'`](#type-umd)。
 
-<<<<<<< HEAD
 将你的 library 暴露为所有的模块定义下都可运行的方式。它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。了解更多请查看 [UMD 仓库](https://github.com/umdjs/umd)。
-=======
-This exposes your library under all the module definitions, allowing it to work with CommonJS, AMD and as a global variable. Take a look at the [UMD Repository](https://github.com/umdjs/umd) to learn more.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 在这个例子中，你需要 `library` 属性来命名你的模块：
 
@@ -1874,11 +1770,7 @@ module.exports = {
 });
 ```
 
-<<<<<<< HEAD
 注意，省略 `library` 会导致将入口起点返回的所有属性，直接赋值给 root 对象，就像[对象分配章节](#expose-via-object-assignment)。例如：
-=======
-Note that omitting the `library` will result in the assignment of all properties returned by the entry point be assigned directly to the root object, as documented under the [object assignment section](#expose-via-object-assignment). Example:
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ```javascript
 module.exports = {
@@ -1927,11 +1819,7 @@ W> 最好使用 [`output.library.type: 'system'`](#type-system)。
 
 这将暴露你的 library 作为一个由 [`System.register`](https://github.com/systemjs/systemjs/blob/master/docs/system-register.md) 的模块。此特性首次发布于 [webpack 4.30.0](https://github.com/webpack/webpack/releases/tag/v4.30.0)。
 
-<<<<<<< HEAD
 当 webpack bundle 被执行时，系统模块依赖全局的变量 `System`。编译为 `System.register` 形式后，你可以使用 `System.import('/bundle.js')` 而无需额外配置，并会将你的 webpack bundle 包加载到系统模块注册表中。
-=======
-System modules require that a global variable `System` is present in the browser when the webpack bundle is executed. Compiling to `System.register` format allows you to `System.import('/bundle.js')` without additional configuration and has your webpack bundle loaded into the System module registry.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 ```javascript
 module.exports = {
@@ -2045,11 +1933,7 @@ module.exports = {
 
 告知 webpack 在 bundle 中引入「所包含模块信息」的相关注释。此选项在 `development` [模式](/configuration/mode/)时的默认值为 `true`，而在 `production` [模式](/configuration/mode/)时的默认值为 `false`。当值为 `'verbose'` 时，会显示更多信息，如 export，运行时依赖以及 bailouts。
 
-<<<<<<< HEAD
 W> 对于在开发环境(development)下阅读生成代码时，虽然通过这些注释可以提供有用的数据信息，但在生产环境(production)下，**不应该**使用。
-=======
-W> While the data these comments can provide is useful during development when reading the generated code, it **should not** be used in production.
->>>>>>> 1dea1ccf9c28faf646ac85afdfd5774716991e90
 
 **webpack.config.js**
 
