@@ -162,7 +162,7 @@ compiler.hooks.beforeCompile.tapAsync('MyPlugin', (params, callback) => {
 
 `SyncHook`
 
-Called right after `beforeCompile`, before a new compilation is created.
+Called right after `beforeCompile`, before a new compilation is created. This hook is _not_ copied to child compilers.
 
 - Callback Parameters: `compilationParams`
 
@@ -170,7 +170,7 @@ Called right after `beforeCompile`, before a new compilation is created.
 
 `SyncHook`
 
-Executed while initializing the compilation, right before emitting the `compilation` event.
+Executed while initializing the compilation, right before emitting the `compilation` event. This hook is _not_ copied to child compilers.
 
 - Callback Parameters: `compilation`, `compilationParams`
 
@@ -186,7 +186,7 @@ Runs a plugin after a compilation has been created.
 
 `AsyncParallelHook`
 
-Executed before finishing the compilation.
+Executed before finishing the compilation. This hook is _not_ copied to child compilers.
 
 - Callback Parameters: `compilation`
 
@@ -217,7 +217,7 @@ compiler.hooks.shouldEmit.tap('MyPlugin', (compilation) => {
 
 `AsyncSeriesHook`
 
-Executed right before emitting assets to output dir.
+Executed right before emitting assets to output dir. This hook is _not_ copied to child compilers.
 
 - Callback Parameters: `compilation`
 
@@ -225,7 +225,7 @@ Executed right before emitting assets to output dir.
 
 `AsyncSeriesHook`
 
-Called after emitting assets to output directory.
+Called after emitting assets to output directory. This hook is _not_ copied to child compilers.
 
 - Callback Parameters: `compilation`
 
@@ -252,7 +252,7 @@ compiler.hooks.assetEmitted.tap(
 
 `AsyncSeriesHook`
 
-Executed when the compilation has completed.
+Executed when the compilation has completed. This hook is _not_ copied to child compilers.
 
 - Callback Parameters: `stats`
 
@@ -274,7 +274,7 @@ Called if the compilation fails.
 
 `SyncHook`
 
-Executed when a watching compilation has been invalidated.
+Executed when a watching compilation has been invalidated. This hook is _not_ copied to child compilers.
 
 - Callback Parameters: `fileName`, `changeTime`
 
