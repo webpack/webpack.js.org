@@ -1,6 +1,8 @@
 ---
 title: EslintWebpackPlugin
 group: webpack contrib
+translators:
+  - jsbugwang
 source: https://raw.githubusercontent.com/webpack-contrib/eslint-webpack-plugin/master/README.md
 edit: https://github.com/webpack-contrib/eslint-webpack-plugin/edit/master/README.md
 repo: https://github.com/webpack-contrib/eslint-webpack-plugin
@@ -20,23 +22,23 @@ repo: https://github.com/webpack-contrib/eslint-webpack-plugin
 
 
 
-This plugin uses [`eslint`](https://eslint.org/) to find and fix problems in your JavaScript code
+该插件使用 [`eslint`](https://eslint.org/) 来查找和修复 JavaScript 代码中的问题。
 
-## Getting Started $#getting-started$
+## 开始 $#getting-started$
 
-To begin, you'll need to install `eslint-webpack-plugin`:
+首先，需要安装 `eslint-webpack-plugin`：
 
 ```bash
 npm install eslint-webpack-plugin --save-dev
 ```
 
-**Note**: You also need to install `eslint >= 7` from npm, if you haven't already:
+**注意**: 如果未安装 `eslint >= 7` ，你还需先通过 npm 安装：
 
 ```bash
 npm install eslint --save-dev
 ```
 
-Then add the plugin to your webpack config. For example:
+然后把插件添加到你的 webpack 配置。例如：
 
 ```js
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -48,137 +50,137 @@ module.exports = {
 };
 ```
 
-## Options $#options$
+## 选项 $#options$
 
-You can pass [eslint options](https://eslint.org/docs/developer-guide/nodejs-api#%e2%97%86-new-eslint-options).
+你可以传入 [eslint 参数](https://eslint.org/docs/developer-guide/nodejs-api#%e2%97%86-new-eslint-options)。
 
-Note that the config option you provide will be passed to the `ESLint` class.
-This is a different set of options than what you'd specify in `package.json` or `.eslintrc`.
-See the [eslint docs](https://eslint.org/docs/developer-guide/nodejs-api#%e2%97%86-new-eslint-options) for more details.
+注意你提供的配置选项会传给 `ESLint` 类。
+这是一组和你在 `package.json` 与 `.eslintrc` 所指定选项不同的选项。
+查阅 [eslint 文档](https://eslint.org/docs/developer-guide/nodejs-api#%e2%97%86-new-eslint-options) 获取更多详情。
 
-**Warning**: In eslint-webpack-plugin version 1 the options were passed to the now deprecated [CLIEngine](https://eslint.org/docs/developer-guide/nodejs-api#cliengine).
+**警告**: 在 eslint-webpack-plugin 1.x 版本中，配置项会传递给已废弃的 [CLIEngine](https://eslint.org/docs/developer-guide/nodejs-api#cliengine)。
 
 ### `context` $#context$
 
-- Type: `String`
-- Default: `compiler.context`
+- 类型：`String`
+- 默认值：`compiler.context`
 
-A string indicating the root of your files.
+指定文件根目录，类型为字符串。
 
 ### `eslintPath` $#eslintpath$
 
-- Type: `String`
-- Default: `eslint`
+- 类型：`String`
+- 默认值：`eslint`
 
-Path to `eslint` instance that will be used for linting. If the `eslintPath` is a folder like a official eslint, or specify a `formatter` option. now you dont have to install `eslint`.
+用于 linting 的 `eslint` 实例的路径。如果 `eslintPath` 是类似官方 eslint 的目录，或者指定了 `formatter` 选项，那么就不需要安装 `eslint` 了。
 
 ### `extensions` $#estensions$
 
-- Type: `String|Array[String]`
-- Default: `'js'`
+- 类型：`String|Array[String]`
+- 默认值：`'js'`
 
-Specify extensions that should be checked.
+指定需要检查的扩展名。
 
 ### `exclude` $#exclude$
 
-- Type: `String|Array[String]`
-- Default: `'node_modules'`
+- 类型：`String|Array[String]`
+- 默认值：`'node_modules'`
 
-Specify the files and/or directories to exclude. Must be relative to `options.context`.
+指定需要排除的文件及目录。必须是相对于 `options.context` 的相对路径。
 
 ### `files` $#files$
 
-- Type: `String|Array[String]`
-- Default: `null`
+- 类型：`String|Array[String]`
+- 默认值：`null`
 
-Specify directories, files, or globs. Must be relative to `options.context`.
-Directories are traveresed recursively looking for files matching `options.extensions`.
-File and glob patterns ignore `options.extensions`.
+指定目录、文件或 globs ，必须是相对于 `options.context` 的相对路径。
+如果是目录则递归查找所有匹配 `options.extensions` 选项的文件。
+如果是文件或 globs 则忽略 `options.extensions` 选项。
 
 ### `fix` $#fix$
 
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-Will enable [ESLint autofix feature](https://eslint.org/docs/developer-guide/nodejs-api#%e2%97%86-eslint-outputfixes-results).
+启用 [ESLint 自动修复特性](https://eslint.org/docs/developer-guide/nodejs-api#%e2%97%86-eslint-outputfixes-results)。
 
-**Be careful: this option will change source files.**
+**小心: 该选项会修改源文件。**
 
 ### `formatter` $#formatter$
 
-- Type: `String|Function`
-- Default: `'stylish'`
+- 类型：`String|Function`
+- 默认值：`'stylish'`
 
-Accepts a function that will have one argument: an array of eslint messages (object). The function must return the output as a string. You can use official [eslint formatters](https://eslint.org/docs/user-guide/formatters/).
+接受一个有单一参数的函数：该参数为 eslint 消息（一个对象）的数组。函数必须返回字符串格式的 output。可以使用官方的 [eslint formatters](https://eslint.org/docs/user-guide/formatters/)。
 
 ### `lintDirtyModulesOnly` $#lintdirtymodulesonly$
 
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-Lint only changed files, skip lint on start.
+只对内容修改了的文件进行 lint，启动时跳过 lint 。
 
 ### `threads` $#threads$
 
-- Type: `Boolean | Number`
-- Default: `false`
+- 类型：`Boolean | Number`
+- 默认值：`false`
 
-Will run lint tasks across a thread pool. The pool size is automatic unless you specify a number.
+以线程池方式运行 lint 。线程池大小是自动的，除非你指定一个数值。
 
-### Errors and Warning $#errors-and-warning$
+### 错误以及警告 $#errors-and-warning$
 
-**By default the plugin will auto adjust error reporting depending on eslint errors/warnings counts.**
-You can still force this behavior by using `emitError` **or** `emitWarning` options:
+**该插件默认会根据 eslint 错误/警告的数量自动调整错误报告（error reporting）。**
+你也可以通过 `emitError` **或** `emitWarning` 强制开启错误报告行为：
 
 #### `emitError` $#emiterror$
 
-- Type: `Boolean`
-- Default: `true`
+- 类型：`Boolean`
+- 默认值：`true`
 
-The errors found will always be emitted, to disable set to `false`.
+总是发送发现的错误 ，设置为 `false` 以禁用。
 
 #### `emitWarning` $#emitwarning$
 
-- Type: `Boolean`
-- Default: `true`
+- 类型：`Boolean`
+- 默认值：`true`
 
-The warnings found will always be emitted, to disable set to `false`.
+总是发送发现的警告，设置为 `false` 以禁用。
 
 #### `failOnError` $#failonerror$
 
-- Type: `Boolean`
-- Default: `true`
+- 类型：`Boolean`
+- 默认值：`true`
 
-Will cause the module build to fail if there are any errors, to disable set to `false`.
+任何错误都会导致模块构建（module build）失败，设置为 `false` 禁用。
 
 #### `failOnWarning` $#failonwarning$
 
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-Will cause the module build to fail if there are any warnings, if set to `true`.
+当设置为 `true` 时，任何警告都会导致模块构建（module build）失败。
 
 #### `quiet` $#quiet$
 
-- Type: `Boolean`
-- Default: `false`
+- 类型：`Boolean`
+- 默认值：`false`
 
-Will process and report errors only and ignore warnings, if set to `true`.
+设置为 `true` 后，仅处理和报告错误，忽略警告。
 
 #### `outputReport` $#outputreport$
 
-- Type: `Boolean|Object`
-- Default: `false`
+- 类型：`Boolean|Object`
+- 默认值：`false`
 
-Write the output of the errors to a file, for example a checkstyle xml file for use for reporting on Jenkins CI.
+把错误输出到一个文件，例如在 Jenkins CI 使用 checkstyle xml 文件。
 
-The `filePath` is an absolute path or relative to the webpack config: `output.path`.
-You can pass in a different `formatter` for the output file,
-if none is passed in the default/configured formatter will be used.
+`filePath` 为绝对路径或者相对于 webpack 配置: `output.path` 的相对路径。
+你可以为输出文件传入不同的 `formatter` 。
+如果没有传入，则使用默认的或已配置的 formatter 。
 
-## Changelog $#changelog$
+## 更新日志 $#changelog$
 
-[Changelog](https://github.com/webpack-contrib/eslint-webpack-plugin/blob/master/CHANGELOG.md)
+[更新日志](https://github.com/webpack-contrib/eslint-webpack-plugin/blob/master/CHANGELOG.md)
 
 ## License $#license$
 
