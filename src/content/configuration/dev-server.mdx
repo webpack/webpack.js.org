@@ -1546,8 +1546,7 @@ npx webpack serve --no-static-serve-index
 
 `boolean` `object`
 
-Tell dev-server to watch the files served by the [`static.directory`](#directory) option. It is disabled by default. When enabled, file changes will trigger a full page reload.
-
+Tell dev-server to watch the files served by the [`static.directory`](#directory) option. It is enabled by default, and file changes will trigger a full page reload. This can be disabled by setting the `watch` option to `false`.
 **webpack.config.js**
 
 ```javascript
@@ -1558,7 +1557,7 @@ module.exports = {
   devServer: {
     static: {
       directory: path.join(__dirname, 'public'),
-      watch: true,
+      watch: false,
     },
   },
 };
