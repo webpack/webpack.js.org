@@ -166,11 +166,7 @@ compiler.hooks.beforeCompile.tapAsync('MyPlugin', (params, callback) => {
 
 `SyncHook`
 
-<<<<<<< HEAD
-`beforeCompile` 之后立即调用，但在一个新的 compilation 创建之前。
-=======
-Called right after `beforeCompile`, before a new compilation is created. This hook is _not_ copied to child compilers.
->>>>>>> 64445a8395135570cbb846a2695c17d429478f92
+`beforeCompile` 之后立即调用，但在一个新的 compilation 创建之前。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`compilationParams`
 
@@ -178,11 +174,7 @@ Called right after `beforeCompile`, before a new compilation is created. This ho
 
 `SyncHook`
 
-<<<<<<< HEAD
-初始化 compilation 时调用，在触发 `compilation` 事件之前调用。
-=======
-Executed while initializing the compilation, right before emitting the `compilation` event. This hook is _not_ copied to child compilers.
->>>>>>> 64445a8395135570cbb846a2695c17d429478f92
+初始化 compilation 时调用，在触发 `compilation` 事件之前调用。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`compilation`, `compilationParams`
 
@@ -198,11 +190,7 @@ compilation 创建之后执行。
 
 `AsyncParallelHook`
 
-<<<<<<< HEAD
-compilation 结束之前执行。
-=======
-Executed before finishing the compilation. This hook is _not_ copied to child compilers.
->>>>>>> 64445a8395135570cbb846a2695c17d429478f92
+compilation 结束之前执行。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`compilation`
 
@@ -233,11 +221,7 @@ compiler.hooks.shouldEmit.tap('MyPlugin', (compilation) => {
 
 `AsyncSeriesHook`
 
-<<<<<<< HEAD
-输出 asset 到 output 目录之前执行。
-=======
-Executed right before emitting assets to output dir. This hook is _not_ copied to child compilers.
->>>>>>> 64445a8395135570cbb846a2695c17d429478f92
+输出 asset 到 output 目录之前执行。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`compilation`
 
@@ -245,11 +229,7 @@ Executed right before emitting assets to output dir. This hook is _not_ copied t
 
 `AsyncSeriesHook`
 
-<<<<<<< HEAD
-输出 asset 到 output 目录之后执行。
-=======
-Called after emitting assets to output directory. This hook is _not_ copied to child compilers.
->>>>>>> 64445a8395135570cbb846a2695c17d429478f92
+输出 asset 到 output 目录之后执行。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`compilation`
 
@@ -276,11 +256,7 @@ compiler.hooks.assetEmitted.tap(
 
 `AsyncSeriesHook`
 
-<<<<<<< HEAD
-在 compilation 完成时执行。
-=======
-Executed when the compilation has completed. This hook is _not_ copied to child compilers.
->>>>>>> 64445a8395135570cbb846a2695c17d429478f92
+在 compilation 完成时执行。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`stats`
 
@@ -302,11 +278,7 @@ This hook allows you to do a one more additional pass of the build.
 
 `SyncHook`
 
-<<<<<<< HEAD
-在一个观察中的 compilation 无效时执行。
-=======
-Executed when a watching compilation has been invalidated. This hook is _not_ copied to child compilers.
->>>>>>> 64445a8395135570cbb846a2695c17d429478f92
+在一个观察中的 compilation 无效时执行。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`fileName`, `changeTime`
 
