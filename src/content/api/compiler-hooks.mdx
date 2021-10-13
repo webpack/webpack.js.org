@@ -166,7 +166,7 @@ compiler.hooks.beforeCompile.tapAsync('MyPlugin', (params, callback) => {
 
 `SyncHook`
 
-`beforeCompile` 之后立即调用，但在一个新的 compilation 创建之前。
+`beforeCompile` 之后立即调用，但在一个新的 compilation 创建之前。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`compilationParams`
 
@@ -174,7 +174,7 @@ compiler.hooks.beforeCompile.tapAsync('MyPlugin', (params, callback) => {
 
 `SyncHook`
 
-初始化 compilation 时调用，在触发 `compilation` 事件之前调用。
+初始化 compilation 时调用，在触发 `compilation` 事件之前调用。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`compilation`, `compilationParams`
 
@@ -190,7 +190,7 @@ compilation 创建之后执行。
 
 `AsyncParallelHook`
 
-compilation 结束之前执行。
+compilation 结束之前执行。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`compilation`
 
@@ -221,7 +221,7 @@ compiler.hooks.shouldEmit.tap('MyPlugin', (compilation) => {
 
 `AsyncSeriesHook`
 
-输出 asset 到 output 目录之前执行。
+输出 asset 到 output 目录之前执行。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`compilation`
 
@@ -229,7 +229,7 @@ compiler.hooks.shouldEmit.tap('MyPlugin', (compilation) => {
 
 `AsyncSeriesHook`
 
-输出 asset 到 output 目录之后执行。
+输出 asset 到 output 目录之后执行。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`compilation`
 
@@ -256,7 +256,7 @@ compiler.hooks.assetEmitted.tap(
 
 `AsyncSeriesHook`
 
-在 compilation 完成时执行。
+在 compilation 完成时执行。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`stats`
 
@@ -278,7 +278,7 @@ This hook allows you to do a one more additional pass of the build.
 
 `SyncHook`
 
-在一个观察中的 compilation 无效时执行。
+在一个观察中的 compilation 无效时执行。这个钩子 _不会_ 被复制到子编译器。
 
 - 回调参数：`fileName`, `changeTime`
 
