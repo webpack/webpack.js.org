@@ -4456,10 +4456,10 @@ csstype@^3.0.6:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.6.tgz#865d0b5833d7d8d40f4e5b8a6d76aea3de4725ef"
   integrity sha512-+ZAmfyWMT7TiIlzdqJgjMb7S4f1beorDbWbsocyK4RaiqA5RTX3K14bnBWmmA9QEM0gRdsjyyrEmcyga8Zsxmw==
 
-cypress@^8.5.0:
-  version "8.5.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-8.5.0.tgz#5712ca170913f8344bf167301205c4217c1eb9bd"
-  integrity sha512-MMkXIS+Ro2KETn4gAlG3tIc/7FiljuuCZP0zpd9QsRG6MZSyZW/l1J3D4iQM6WHsVxuX4rFChn5jPFlC2tNSvQ==
+cypress@^8.6.0:
+  version "8.6.0"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-8.6.0.tgz#8d02fa58878b37cfc45bbfce393aa974fa8a8e22"
+  integrity sha512-F7qEK/6Go5FsqTueR+0wEw2vOVKNgk5847Mys8vsWkzPoEKdxs+7N9Y1dit+zhaZCLtMPyrMwjfA53ZFy+lSww==
   dependencies:
     "@cypress/request" "^2.88.6"
     "@cypress/xvfb" "^1.2.4"
