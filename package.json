@@ -111,7 +111,7 @@
     "node-fetch": "^3.0.0",
     "npm-run-all": "^4.1.1",
     "postcss": "^8.3.9",
-    "postcss-loader": "^6.1.1",
+    "postcss-loader": "^6.2.0",
     "prettier": "^2.4.1",
     "react-refresh": "^0.10.0",
     "redirect-webpack-plugin": "^1.0.0",
