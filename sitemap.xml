@@ -280,6 +280,9 @@
         <loc>https://webpack.js.org/guides/author-libraries</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/build-performance</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/caching</loc>
     </url>
     <url>
@@ -308,9 +311,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/development</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/build-performance</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/development-vagrant</loc>
