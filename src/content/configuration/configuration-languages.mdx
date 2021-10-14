@@ -55,8 +55,9 @@ Note that you'll also need to check your `tsconfig.json` file. If the `module` i
 There are three solutions to this issue:
 
 - Modify `tsconfig.json`.
+- Modify `tsconfig.json` and add settings for `ts-node`.
 - Install `tsconfig-paths`.
-- Modify `tsconfig.json` and add settings for `ts-node`
+
 
 The **first option** is to open your `tsconfig.json` file and look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
 
