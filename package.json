@@ -125,7 +125,7 @@
     "remark-refractor": "montogeek/remark-refractor",
     "remark-slug": "^7.0.0",
     "rimraf": "^3.0.2",
-    "sass": "^1.42.1",
+    "sass": "^1.43.2",
     "sass-loader": "^12.2.0",
     "sirv-cli": "^1.0.14",
     "sitemap-static": "^0.4.2",
