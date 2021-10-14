@@ -190,10 +190,10 @@
         <loc>https://webpack.js.org/configuration/entry-context</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/experiments</loc>
+        <loc>https://webpack.js.org/configuration/externals</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/externals</loc>
+        <loc>https://webpack.js.org/configuration/experiments</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/mode</loc>
@@ -223,10 +223,10 @@
         <loc>https://webpack.js.org/configuration/resolve</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/stats</loc>
+        <loc>https://webpack.js.org/configuration/target</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/target</loc>
+        <loc>https://webpack.js.org/configuration/stats</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/watch</loc>
@@ -511,13 +511,13 @@
         <loc>https://webpack.js.org/plugins/html-webpack-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/ignore-plugin</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/image-minimizer-webpack-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/install-webpack-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/ignore-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/internal-plugins</loc>
