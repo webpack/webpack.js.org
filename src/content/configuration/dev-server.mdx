@@ -1549,7 +1549,7 @@ npx webpack serve --no-static-serve-index
 
 `boolean` `object`
 
-通过 [`static.directory`](#directory) 配置项告诉 dev-server 监听文件。默认关闭。当启用时，文件更改将触发整个页面重新加载。
+通过 [`static.directory`](#directory) 配置项告诉 dev-server 监听文件。默认启用，文件更改将触发整个页面重新加载。可以通过将 `watch` 设置为 `false` 禁用。
 
 **webpack.config.js**
 
@@ -1561,7 +1561,7 @@ module.exports = {
   devServer: {
     static: {
       directory: path.join(__dirname, 'public'),
-      watch: true,
+      watch: false,
     },
   },
 };
