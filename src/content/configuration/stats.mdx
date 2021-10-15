@@ -340,6 +340,51 @@ module.exports = {
 };
 ```
 
+### stats.groupModulesByCacheStatus
+
+`boolean`
+
+Tells `stats` whether to group modules by their cache status (cached or built and cacheable).
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupModulesByCacheStatus: true,
+  },
+};
+```
+
+### stats.groupModulesByExtension
+
+`boolean`
+
+Tells `stats` whether to group modules by their extension.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupModulesByExtension: true,
+  },
+};
+```
+
+### stats.groupModulesByLayer
+
+`boolean`
+
+Tells `stats` whether to group modules by their layer.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupModulesByLayer: true,
+  },
+};
+```
+
 ### stats.groupModulesByPath
 
 `boolean`
@@ -351,6 +396,21 @@ module.exports = {
   //...
   stats: {
     groupModulesByPath: true,
+  },
+};
+```
+
+### stats.groupModulesByType
+
+`boolean`
+
+Tells `stats` whether to group modules by their type.
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupModulesByType: true,
   },
 };
 ```
