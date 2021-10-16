@@ -30,8 +30,6 @@ See the `package.json` for the full list of `scripts`.
 
 > Note that **Node 12.x** or above is required for the build process to run properly.
 
-> On Debian and Ubuntu operating systems you may have to use `node >= 7.0.0` to avoid build errors with `node-sass`. Please note that we don't officially support building on these systems.
-
 ## Contributor License Agreement
 
 When submitting your contribution, a CLA (Contributor License Agreement) bot will come by
