@@ -172,6 +172,23 @@ Access to the internal object of all modules.
 
 It provides access to the hash of the compilation.
 
+## \_\_webpack_get_script_filename\_\_ (webpack-specific)
+
+`function (chunkId)`
+
+It provides filename of the chunk by its id.
+
+It is assignable, which allows changing the filename used by the runtime. For example, it can be used to determine the final path when loading chunks.
+
+```js
+const oldFn = __webpack_get_script_filename__;
+
+__webpack_get_script_filename__ = (chunkId) => {
+  const filename = oldFn(chunkId);
+  return filename + '.changed';
+};
+```
+
 ## \_\_non_webpack_require\_\_ (webpack-specific)
 
 Generates a `require` function that is not parsed by webpack. Can be used to do cool stuff with a global require function if available.
