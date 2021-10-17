@@ -11,14 +11,11 @@ contributors:
   - byzyk
   - Nek-
   - liyiming22
-<<<<<<< HEAD
+  - daimalou
 translators:
   - NealST
   - lornally
   - QC-L
-=======
-  - daimalou
->>>>>>> 680fecf206a289d2e7e420288cc19e38eb6170e7
 ---
 
 Webpack 支持使用多种编程语言和数据描述格式来编写配置文件。在 [node-interpret](https://github.com/gulpjs/interpret) 中你可以找到当前所支持的文件类型列表，通过 [node-interpret](https://github.com/gulpjs/interpret)，webpack 能够处理这些类型的配置文件。
@@ -59,28 +56,18 @@ export default config;
 
 值得注意的是你需要确保 `tsconfig.json` 的 `compilerOptions` 中 `module` 选项的值为 `commonjs`,否则 webpack 的运行会失败报错，因为 `ts-node` 不支持 `commonjs` 以外的其他模块规范。
 
-<<<<<<< HEAD
-你可以通过两个途径来完成 module 的设置:
+你可以通过三个途径来完成 module 的设置：
 
 * 直接修改 `tsconfig.json` 文件
+- 修改 `tsconfig.json` 并且添加 `ts-node` 的设置。
 * 使用 `tsconfig-paths`
+
 
 **第一种方法**就是打开你的 `tsconfig.json` 文件，找到 `compilerOptions` 的配置，然后设置 `target` 和 `module` 的选项分别为 `"ES5"` 和 `"CommonJs"` (在 `target` 设置为 `es5` 时你也可以不显示编写 `module` 配置)。
 
-**第二种方法**需要先安装 `tsconfig-paths` 这个 npm 包，如下所示：
-=======
-There are three solutions to this issue:
+**第二种方法** 就是添加 ts-node 设置：
 
-- Modify `tsconfig.json`.
-- Modify `tsconfig.json` and add settings for `ts-node`.
-- Install `tsconfig-paths`.
-
-
-The **first option** is to open your `tsconfig.json` file and look for `compilerOptions`. Set `target` to `"ES5"` and `module` to `"CommonJS"` (or completely remove the `module` option).
-
-The **second option** is to add settings for ts-node:
-
-You can keep `"module": "ESNext"` for `tsc`, and if you use webpack, or another build tool, set an override for ts-node. [ts-node config](https://typestrong.org/ts-node/docs/imports/)
+你可以为 `tsc` 保持 `"module": "ESNext"`配置，如果你是用 webpack 或者其他构建工具的话，为 ts-node 设置一个重载（override）。[ts-node 配置项](https://typestrong.org/ts-node/docs/imports/)
 
 ```json
 {
@@ -95,8 +82,7 @@ You can keep `"module": "ESNext"` for `tsc`, and if you use webpack, or another 
 }
 ```
 
-The **third option** is to install the `tsconfig-paths` package:
->>>>>>> 680fecf206a289d2e7e420288cc19e38eb6170e7
+**第二种方法**需要先安装 `tsconfig-paths` 这个 npm 包，如下所示：
 
 ```bash
 npm install --save-dev tsconfig-paths
