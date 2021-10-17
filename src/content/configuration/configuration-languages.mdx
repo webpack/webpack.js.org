@@ -11,6 +11,7 @@ contributors:
   - byzyk
   - Nek-
   - liyiming22
+  - daimalou
 translators:
   - NealST
   - lornally
@@ -55,12 +56,31 @@ export default config;
 
 值得注意的是你需要确保 `tsconfig.json` 的 `compilerOptions` 中 `module` 选项的值为 `commonjs`,否则 webpack 的运行会失败报错，因为 `ts-node` 不支持 `commonjs` 以外的其他模块规范。
 
-你可以通过两个途径来完成 module 的设置:
+你可以通过三个途径来完成 module 的设置：
 
 * 直接修改 `tsconfig.json` 文件
+- 修改 `tsconfig.json` 并且添加 `ts-node` 的设置。
 * 使用 `tsconfig-paths`
 
+
 **第一种方法**就是打开你的 `tsconfig.json` 文件，找到 `compilerOptions` 的配置，然后设置 `target` 和 `module` 的选项分别为 `"ES5"` 和 `"CommonJs"` (在 `target` 设置为 `es5` 时你也可以不显示编写 `module` 配置)。
+
+**第二种方法** 就是添加 ts-node 设置：
+
+你可以为 `tsc` 保持 `"module": "ESNext"`配置，如果你是用 webpack 或者其他构建工具的话，为 ts-node 设置一个重载（override）。[ts-node 配置项](https://typestrong.org/ts-node/docs/imports/)
+
+```json
+{
+  "compilerOptions": {
+    "module": "ESNext",
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
+}
+```
 
 **第二种方法**需要先安装 `tsconfig-paths` 这个 npm 包，如下所示：
 

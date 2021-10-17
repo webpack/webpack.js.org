@@ -343,6 +343,81 @@ module.exports = {
 };
 ```
 
+### stats.groupModulesByCacheStatus $#statsgroupmodulesbycachestatus$
+
+`boolean`
+
+告诉 `stats` 是否按模块的缓存状态进行分组（已缓存或者已构建并且可缓存）。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupModulesByCacheStatus: true,
+  },
+};
+```
+
+### stats.groupModulesByExtension $#statsgroupmodulesbyextension$
+
+`boolean`
+
+告诉 `stats` 是否按模块的拓展名进行分组。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupModulesByExtension: true,
+  },
+};
+```
+
+### stats.groupModulesByLayer $#statsgroupmodulesbylayer$
+
+`boolean`
+
+告诉 `stats` 是否按模块的 layer 进行分组。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupModulesByLayer: true,
+  },
+};
+```
+
+### stats.groupModulesByPath $#statsgroupmodulesbypath$
+
+`boolean`
+
+告诉 `stats` 是否按模块的路径进行分组。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupModulesByPath: true,
+  },
+};
+```
+
+### stats.groupModulesByType $#statsgroupmodulesbytype$
+
+`boolean`
+
+告诉 `stats` 是否按模块的类型进行分组。
+
+```javascript
+module.exports = {
+  //...
+  stats: {
+    groupModulesByType: true,
+  },
+};
+```
+
 ### stats.groupReasonsByOrigin $#statsgroupreasonsbyorigin$
 
 `boolean`
