@@ -111,6 +111,54 @@ module.exports = {
 };
 ```
 
+## optimization.moduleIds
+
+`boolean: false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
+
+Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin.
+
+The following string values are supported:
+
+| Option          | Description                                           |
+| --------------- | ----------------------------------------------------- |
+| `natural`       | Numeric ids in order of usage.                        |
+| `named`         | Readable ids for better debugging.                    |
+| `deterministic` | Module names are hashed into small numeric values.    |
+| `size`          | Numeric ids focused on minimal initial download size. |
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    moduleIds: 'deterministic',
+  },
+};
+```
+
+`deterministic` option is useful for long term caching, but still results in smaller bundles compared to `hashed`. Length of the numeric value is chosen to fill a maximum of 80% of the id space. By default a minimum length of 3 digits is used when `optimization.moduleIds` is set to `deterministic`. To override the default behaviour set `optimization.moduleIds` to `false` and use the `webpack.ids.DeterministicModuleIdsPlugin`.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    moduleIds: false,
+  },
+  plugins: [
+    new webpack.ids.DeterministicModuleIdsPlugin({
+      maxLength: 5,
+    }),
+  ],
+};
+```
+
+W> `moduleIds: 'deterministic'` was added in webpack 5 and `moduleIds: 'hashed'` is deprecated in favor of it.
+
+W> `moduleIds: total-size` has been removed in webpack 5.
+
 ## optimization.runtimeChunk
 
 `object` `string` `boolean`
@@ -169,54 +217,6 @@ module.exports = {
 `object`
 
 By default webpack v4+ provides new common chunks strategies out of the box for dynamically imported modules. See available options for configuring this behavior in the [SplitChunksPlugin](/plugins/split-chunks-plugin/) page.
-
-## optimization.moduleIds
-
-`boolean: false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
-
-Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin.
-
-The following string values are supported:
-
-| Option          | Description                                           |
-| --------------- | ----------------------------------------------------- |
-| `natural`       | Numeric ids in order of usage.                        |
-| `named`         | Readable ids for better debugging.                    |
-| `deterministic` | Module names are hashed into small numeric values.    |
-| `size`          | Numeric ids focused on minimal initial download size. |
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    moduleIds: 'deterministic',
-  },
-};
-```
-
-`deterministic` option is useful for long term caching, but still results in smaller bundles compared to `hashed`. Length of the numeric value is chosen to fill a maximum of 80% of the id space. By default a minimum length of 3 digits is used when `optimization.moduleIds` is set to `deterministic`. To override the default behaviour set `optimization.moduleIds` to `false` and use the `webpack.ids.DeterministicModuleIdsPlugin`.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    moduleIds: false,
-  },
-  plugins: [
-    new webpack.ids.DeterministicModuleIdsPlugin({
-      maxLength: 5,
-    }),
-  ],
-};
-```
-
-W> `moduleIds: 'deterministic'` was added in webpack 5 and `moduleIds: 'hashed'` is deprecated in favor of it.
-
-W> `moduleIds: total-size` has been removed in webpack 5.
 
 ## optimization.chunkIds
 
