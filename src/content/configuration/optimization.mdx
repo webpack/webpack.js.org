@@ -248,6 +248,42 @@ module.exports = {
 
 T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` defaults to `false`.
 
+## optimization.removeAvailableModules
+
+`boolean = false`
+
+Tells webpack to detect and remove modules from chunks when these modules are already included in all parents. Setting `optimization.removeAvailableModules` to `true` will enable this optimization. Enabled by default in [`production` mode](/configuration/mode/).
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    removeAvailableModules: true,
+  },
+};
+```
+
+W> `optimization.removeAvailableModules` reduces the performance of webpack, and will be disabled in `production` mode by default in next major release. Disable it in `production` mode if you want extra build performance.
+
+## optimization.removeEmptyChunks
+
+`boolean = true`
+
+Tells webpack to detect and remove chunks which are empty. Setting `optimization.removeEmptyChunks` to `false` will disable this optimization.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    removeEmptyChunks: false,
+  },
+};
+```
+
 ## optimization.runtimeChunk
 
 `object` `string` `boolean`
@@ -306,42 +342,6 @@ module.exports = {
 `object`
 
 By default webpack v4+ provides new common chunks strategies out of the box for dynamically imported modules. See available options for configuring this behavior in the [SplitChunksPlugin](/plugins/split-chunks-plugin/) page.
-
-## optimization.removeAvailableModules
-
-`boolean = false`
-
-Tells webpack to detect and remove modules from chunks when these modules are already included in all parents. Setting `optimization.removeAvailableModules` to `true` will enable this optimization. Enabled by default in [`production` mode](/configuration/mode/).
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    removeAvailableModules: true,
-  },
-};
-```
-
-W> `optimization.removeAvailableModules` reduces the performance of webpack, and will be disabled in `production` mode by default in next major release. Disable it in `production` mode if you want extra build performance.
-
-## optimization.removeEmptyChunks
-
-`boolean = true`
-
-Tells webpack to detect and remove chunks which are empty. Setting `optimization.removeEmptyChunks` to `false` will disable this optimization.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    removeEmptyChunks: false,
-  },
-};
-```
 
 ## optimization.mergeDuplicateChunks
 
