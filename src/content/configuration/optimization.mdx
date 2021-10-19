@@ -88,6 +88,23 @@ module.exports = {
 
 W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
 
+## optimization.mangleWasmImports
+
+`boolean = false`
+
+When set to `true` tells webpack to reduce the size of WASM by changing imports to shorter strings. It mangles module and export names.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    mangleWasmImports: true,
+  },
+};
+```
+
 ## optimization.minimize
 
 `boolean = true`
@@ -289,23 +306,6 @@ module.exports = {
 `object`
 
 By default webpack v4+ provides new common chunks strategies out of the box for dynamically imported modules. See available options for configuring this behavior in the [SplitChunksPlugin](/plugins/split-chunks-plugin/) page.
-
-## optimization.mangleWasmImports
-
-`boolean = false`
-
-When set to `true` tells webpack to reduce the size of WASM by changing imports to shorter strings. It mangles module and export names.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    mangleWasmImports: true,
-  },
-};
-```
 
 ## optimization.removeAvailableModules
 
