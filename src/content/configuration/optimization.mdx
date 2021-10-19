@@ -88,6 +88,23 @@ module.exports = {
 
 W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
 
+## optimization.flagIncludedChunks
+
+`boolean`
+
+Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don’t have to be loaded when the bigger chunk has been already loaded. By default `optimization.flagIncludedChunks` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    flagIncludedChunks: true,
+  },
+};
+```
+
 ## optimization.mangleWasmImports
 
 `boolean = false`
@@ -359,23 +376,6 @@ module.exports = {
 `object`
 
 By default webpack v4+ provides new common chunks strategies out of the box for dynamically imported modules. See available options for configuring this behavior in the [SplitChunksPlugin](/plugins/split-chunks-plugin/) page.
-
-## optimization.flagIncludedChunks
-
-`boolean`
-
-Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don’t have to be loaded when the bigger chunk has been already loaded. By default `optimization.flagIncludedChunks` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    flagIncludedChunks: true,
-  },
-};
-```
 
 ## optimization.providedExports
 
