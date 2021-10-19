@@ -406,41 +406,6 @@ module.exports = {
 };
 ```
 
-## optimization.splitChunks
-
-`object`
-
-By default webpack v4+ provides new common chunks strategies out of the box for dynamically imported modules. See available options for configuring this behavior in the [SplitChunksPlugin](/plugins/split-chunks-plugin/) page.
-
-## optimization.usedExports
-
-`boolean = true` `string: 'global'`
-
-Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimizationprovidedexports). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
-Dead code elimination in minimizers will benefit from this and can remove unused exports.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    usedExports: false,
-  },
-};
-```
-
-To opt-out from used exports analysis per runtime:
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    usedExports: 'global',
-  },
-};
-```
-
 ## optimization.sideEffects
 
 `boolean = true` `string: 'flag'`
@@ -486,6 +451,41 @@ module.exports = {
 The `'flag'` value is used by default in non-production builds.
 
 T> `optimization.sideEffects` will also flag modules as side effect free when they contain only side effect free statements.
+
+## optimization.splitChunks
+
+`object`
+
+By default webpack v4+ provides new common chunks strategies out of the box for dynamically imported modules. See available options for configuring this behavior in the [SplitChunksPlugin](/plugins/split-chunks-plugin/) page.
+
+## optimization.usedExports
+
+`boolean = true` `string: 'global'`
+
+Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimizationprovidedexports). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
+Dead code elimination in minimizers will benefit from this and can remove unused exports.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    usedExports: false,
+  },
+};
+```
+
+To opt-out from used exports analysis per runtime:
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    usedExports: 'global',
+  },
+};
+```
 
 ## optimization.portableRecords
 
