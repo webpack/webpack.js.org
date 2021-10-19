@@ -123,6 +123,23 @@ module.exports = {
 };
 ```
 
+## optimization.innerGraph
+
+`boolean = true`
+
+`optimization.innerGraph` tells webpack whether to conduct inner graph analysis for unused exports.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    innerGraph: false,
+  },
+};
+```
+
 ## optimization.mangleExports
 
 `boolean` `string: 'deterministic' | 'size'`
@@ -530,23 +547,6 @@ module.exports = {
   //...
   optimization: {
     usedExports: 'global',
-  },
-};
-```
-
-## optimization.innerGraph
-
-`boolean = true`
-
-`optimization.innerGraph` tells webpack whether to conduct inner graph analysis for unused exports.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    innerGraph: false,
   },
 };
 ```
