@@ -21,6 +21,54 @@ related:
 
 Since version 4 webpack runs optimizations for you depending on the chosen [`mode`](/configuration/mode/), still all optimizations are available for manual configuration and overrides.
 
+## optimization.chunkIds
+
+`boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic'`
+
+Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are a couple of defaults for `optimization.chunkIds`:
+
+- Also if the environment is development then `optimization.chunkIds` is set to `'named'`, while in production it is set to `'deterministic'`
+- if none of the above, `optimization.chunkIds` will be defaulted to `'natural'`
+
+The following string values are supported:
+
+| Option            | Description                                                                                                                           |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `'natural'`       | Numeric ids in order of usage.                                                                                                        |
+| `'named'`         | Readable ids for better debugging.                                                                                                    |
+| `'deterministic'` | Short numeric ids which will not be changing between compilation. Good for long term caching. Enabled by default for production mode. |
+| `'size'`          | Numeric ids focused on minimal initial download size.                                                                                 |
+| `'total-size'`    | numeric ids focused on minimal total download size.                                                                                   |
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    chunkIds: 'named',
+  },
+};
+```
+
+By default, a minimum length of 3 digits is used when `optimization.chunkIds` is set to `'deterministic'`. To override the default behaviour, set `optimization.chunkIds` to `false` and use the `webpack.ids.DeterministicChunkIdsPlugin`.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    chunkIds: false,
+  },
+  plugins: [
+    new webpack.ids.DeterministicChunkIdsPlugin({
+      maxLength: 5,
+    }),
+  ],
+};
+```
+
 ## optimization.emitOnErrors
 
 `boolean = false`
@@ -217,54 +265,6 @@ module.exports = {
 `object`
 
 By default webpack v4+ provides new common chunks strategies out of the box for dynamically imported modules. See available options for configuring this behavior in the [SplitChunksPlugin](/plugins/split-chunks-plugin/) page.
-
-## optimization.chunkIds
-
-`boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic'`
-
-Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are a couple of defaults for `optimization.chunkIds`:
-
-- Also if the environment is development then `optimization.chunkIds` is set to `'named'`, while in production it is set to `'deterministic'`
-- if none of the above, `optimization.chunkIds` will be defaulted to `'natural'`
-
-The following string values are supported:
-
-| Option            | Description                                                                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `'natural'`       | Numeric ids in order of usage.                                                                                                        |
-| `'named'`         | Readable ids for better debugging.                                                                                                    |
-| `'deterministic'` | Short numeric ids which will not be changing between compilation. Good for long term caching. Enabled by default for production mode. |
-| `'size'`          | Numeric ids focused on minimal initial download size.                                                                                 |
-| `'total-size'`    | numeric ids focused on minimal total download size.                                                                                   |
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    chunkIds: 'named',
-  },
-};
-```
-
-By default, a minimum length of 3 digits is used when `optimization.chunkIds` is set to `'deterministic'`. To override the default behaviour, set `optimization.chunkIds` to `false` and use the `webpack.ids.DeterministicChunkIdsPlugin`.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    chunkIds: false,
-  },
-  plugins: [
-    new webpack.ids.DeterministicChunkIdsPlugin({
-      maxLength: 5,
-    }),
-  ],
-};
-```
 
 ## optimization.nodeEnv
 
