@@ -21,6 +21,25 @@ related:
 
 Since version 4 webpack runs optimizations for you depending on the chosen [`mode`](/configuration/mode/), still all optimizations are available for manual configuration and overrides.
 
+## optimization.emitOnErrors
+
+`boolean = false`
+
+Use the `optimization.emitOnErrors` to emit assets whenever there are errors while compiling. This ensures that erroring assets are emitted. Critical errors are emitted into the generated code and will cause errors at runtime.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    emitOnErrors: true,
+  },
+};
+```
+
+W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
+
 ## optimization.minimize
 
 `boolean = true`
@@ -150,25 +169,6 @@ module.exports = {
   },
 };
 ```
-
-## optimization.emitOnErrors
-
-`boolean = false`
-
-Use the `optimization.emitOnErrors` to emit assets whenever there are errors while compiling. This ensures that erroring assets are emitted. Critical errors are emitted into the generated code and will cause errors at runtime.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    emitOnErrors: true,
-  },
-};
-```
-
-W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
 
 ## optimization.moduleIds
 
