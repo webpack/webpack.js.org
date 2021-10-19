@@ -52,6 +52,10 @@ When enabled, webpack can build remote resources that begin with the `http(s):` 
 
 - Type:
 
+  - `(string | RegExp | ((uri: string) => boolean))[]`
+
+    A shortcut for [`experiments.buildHttp.allowedUris`](#experimentsbuildhttpalloweduris).
+
   - `HttpUriOptions`
     ```ts
     {
@@ -83,27 +87,27 @@ When enabled, webpack can build remote resources that begin with the `http(s):` 
   console.log(pMap1);
   ```
 
-### experiments.buildHttp.allowedUris
+#### experiments.buildHttp.allowedUris
 
 A list of allowed URIs.
 
 - Type: `(string|RegExp|(uri: string) => boolean)[]`
 - Example
 
-```javascript
-// webpack.config.js
-module.exports = {
-  //...
-  experiments: {
-    buildHttp: {
-      allowedUris: [
-        'http://localhost:9990/',
-        'https://raw.githubusercontent.com/',
-      ],
+  ```javascript
+  // webpack.config.js
+  module.exports = {
+    //...
+    experiments: {
+      buildHttp: {
+        allowedUris: [
+          'http://localhost:9990/',
+          'https://raw.githubusercontent.com/',
+        ],
+      },
     },
-  },
-};
-```
+  };
+  ```
 
 #### experiments.buildHttp.cacheLocation
 
