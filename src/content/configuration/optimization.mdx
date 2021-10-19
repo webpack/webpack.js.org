@@ -282,6 +282,23 @@ module.exports = {
 
 T> When [mode](/configuration/mode/) is set to `'none'`, `optimization.nodeEnv` defaults to `false`.
 
+## optimization.providedExports
+
+`boolean`
+
+Tells webpack to figure out which exports are provided by modules to generate more efficient code for `export * from ...`. By default `optimization.providedExports` is enabled.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    providedExports: false,
+  },
+};
+```
+
 ## optimization.removeAvailableModules
 
 `boolean = false`
@@ -376,23 +393,6 @@ module.exports = {
 `object`
 
 By default webpack v4+ provides new common chunks strategies out of the box for dynamically imported modules. See available options for configuring this behavior in the [SplitChunksPlugin](/plugins/split-chunks-plugin/) page.
-
-## optimization.providedExports
-
-`boolean`
-
-Tells webpack to figure out which exports are provided by modules to generate more efficient code for `export * from ...`. By default `optimization.providedExports` is enabled.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    providedExports: false,
-  },
-};
-```
 
 ## optimization.usedExports
 
