@@ -69,6 +69,24 @@ module.exports = {
 };
 ```
 
+## optimization.concatenateModules
+
+`boolean`
+
+Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on [`optimization.providedExports`](#optimizationprovidedexports) and [`optimization.usedExports`](#optimizationusedexports).
+By default `optimization.concatenateModules` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    concatenateModules: true,
+  },
+};
+```
+
 ## optimization.emitOnErrors
 
 `boolean = false`
@@ -419,24 +437,6 @@ module.exports = {
   //...
   optimization: {
     usedExports: 'global',
-  },
-};
-```
-
-## optimization.concatenateModules
-
-`boolean`
-
-Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on [`optimization.providedExports`](#optimizationprovidedexports) and [`optimization.usedExports`](#optimizationusedexports).
-By default `optimization.concatenateModules` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    concatenateModules: true,
   },
 };
 ```
