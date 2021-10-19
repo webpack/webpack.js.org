@@ -123,6 +123,34 @@ module.exports = {
 };
 ```
 
+## optimization.mangleExports
+
+`boolean` `string: 'deterministic' | 'size'`
+
+`optimization.mangleExports` allows to control export mangling.
+
+By default `optimization.mangleExports: 'deterministic'` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+
+The following values are supported:
+
+| Option            | Description                                                                                                          |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `'size'`          | Short names - usually a single char - focused on minimal download size.                                              |
+| `'deterministic'` | Short names - usually two chars - which will not change when adding or removing exports. Good for long term caching. |
+| `true`            | Same as `'deterministic'`                                                                                            |
+| `false`           | Keep original name. Good for readablility and debugging.                                                             |
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    mangleExports: true,
+  },
+};
+```
+
 ## optimization.mangleWasmImports
 
 `boolean = false`
@@ -502,34 +530,6 @@ module.exports = {
   //...
   optimization: {
     usedExports: 'global',
-  },
-};
-```
-
-## optimization.mangleExports
-
-`boolean` `string: 'deterministic' | 'size'`
-
-`optimization.mangleExports` allows to control export mangling.
-
-By default `optimization.mangleExports: 'deterministic'` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
-
-The following values are supported:
-
-| Option            | Description                                                                                                          |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `'size'`          | Short names - usually a single char - focused on minimal download size.                                              |
-| `'deterministic'` | Short names - usually two chars - which will not change when adding or removing exports. Good for long term caching. |
-| `true`            | Same as `'deterministic'`                                                                                            |
-| `false`           | Keep original name. Good for readablility and debugging.                                                             |
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    mangleExports: true,
   },
 };
 ```
