@@ -635,7 +635,7 @@ W> Don't specify `https.ca` and `https.cacert` options together, if specified `h
 
 ## devServer.headers
 
-`function` `object`
+`array` `function` `object`
 
 Adds headers to all responses:
 
@@ -648,6 +648,28 @@ module.exports = {
     headers: {
       'X-Custom-Foo': 'bar',
     },
+  },
+};
+```
+
+You can also pass an array:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    headers: [
+      {
+        key: 'X-Custom',
+        value: 'foo',
+      },
+      {
+        key: 'Y-custom',
+        value: 'bar',
+      },
+    ],
   },
 };
 ```
