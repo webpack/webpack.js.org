@@ -642,6 +642,7 @@ Webpack 过去总是在第一次构建时发出所有的输出文件，但在增
 
 ### 结构的变化 $#changes-to-the-structure$
 
+<<<<<<< HEAD
 - `entry: {}` 现在可以赋值一个空对象（允许使用插件来修改入口）。
 - `target` 支持数组，版本及 browserslist
 - 移除了 `cache: Object`：不能再设置内存缓存对象
@@ -689,6 +690,56 @@ Webpack 过去总是在第一次构建时发出所有的输出文件，但在增
     - 迁移：使用 `chunkIds` 和 `moduleIds`
 - `optimization.splitChunks` `test` 不再匹配 chunk 名
     - 迁移：使用 test 函数
+=======
+- `entry: {}` allows an empty object now (to allow to use plugins to add entries)
+- `target` supports an array, versions and browserslist
+- `cache: Object` removed: Setting to a memory-cache object is no longer possible
+- `cache.type` added: It's now possible to choose between `"memory"` and `"filesystem"`
+- New configuration options for `cache.type = "filesystem"` added:
+  - `cache.cacheDirectory`
+  - `cache.name`
+  - `cache.version`
+  - `cache.store`
+  - `cache.hashAlgorithm`
+  - `cache.idleTimeout`
+  - `cache.idleTimeoutForInitialStore`
+  - `cache.buildDependencies`
+- `snapshot.resolveBuildDependencies` added
+- `snapshot.resolve` added
+- `snapshot.module` added
+- `snapshot.managedPaths` added
+- `snapshot.immutablePaths` added
+- `resolve.cache` added: Allows to disable/enable the safe resolve cache
+- `resolve.concord` removed
+- `resolve.moduleExtensions` removed
+- `resolve.alias` values can be arrays or `false` now
+- `resolve.restrictions` added: Allows to restrict potential resolve results
+- `resolve.fallback` added: Allow to alias requests that failed to resolve
+- `resolve.preferRelative` added: Allows to resolve modules requests are relative requests too
+- Automatic polyfills for native Node.js modules were removed
+  - `node.Buffer` removed
+  - `node.console` removed
+  - `node.process` removed
+  - `node.*` (Node.js native module) removed
+  - **MIGRATION**: `resolve.alias` and `ProvidePlugin`. Errors will give hints. (Refer to [node-libs-browser](https://github.com/webpack/node-libs-browser) for polyfills & mocks used in v4)
+- `output.filename` can now be a function
+- `output.assetModuleFilename` added
+- `output.jsonpScriptType` renamed to `output.scriptType`
+- `devtool` is more strict
+  - Format: `false | eval | [inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map`
+- `optimization.chunkIds: "deterministic"` added
+- `optimization.moduleIds: "deterministic"` added
+- `optimization.moduleIds: "hashed"` deprecated
+- `optimization.moduleIds: "total-size"` removed
+- Deprecated flags for module and chunk ids were removed
+  - `optimization.hashedModuleIds` removed
+  - `optimization.namedChunks` removed (`NamedChunksPlugin` too)
+  - `optimization.namedModules` removed (`NamedModulesPlugin` too)
+  - `optimization.occurrenceOrder` removed
+  - **MIGRATION**: Use `chunkIds` and `moduleIds`
+- `optimization.splitChunks` `test` no longer matches chunk name
+  - **MIGRATION**: Use a test function
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
     `(module, { chunkGraph }) => chunkGraph.getModuleChunks(module).some(chunk => chunk.name === "name")`
 - 添加了 `optimization.splitChunks` `minRemainingSize`
 - `optimization.splitChunks` 的 `filename` 可以设置为函数

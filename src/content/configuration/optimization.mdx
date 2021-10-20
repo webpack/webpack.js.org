@@ -26,12 +26,282 @@ translators:
 从 webpack 4 开始，会根据你选择的 [`mode`](/concepts/mode/) 来执行不同的优化，
 不过所有的优化还是可以手动配置和重写。
 
+<<<<<<< HEAD
 ## optimization.minimize $#optimizationminimize$
+=======
+## optimization.chunkIds
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+`boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic'`
+
+<<<<<<< HEAD
+告知 webpack 使用 [TerserPlugin](/plugins/terser-webpack-plugin/) 或其它在 [`optimization.minimizer`](#optimizationminimizer)
+定义的插件压缩 bundle。
+=======
+Tells webpack which algorithm to use when choosing chunk ids. Setting `optimization.chunkIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin. There are a couple of defaults for `optimization.chunkIds`:
+
+- Also if the environment is development then `optimization.chunkIds` is set to `'named'`, while in production it is set to `'deterministic'`
+- if none of the above, `optimization.chunkIds` will be defaulted to `'natural'`
+
+The following string values are supported:
+
+| Option            | Description                                                                                                                           |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `'natural'`       | Numeric ids in order of usage.                                                                                                        |
+| `'named'`         | Readable ids for better debugging.                                                                                                    |
+| `'deterministic'` | Short numeric ids which will not be changing between compilation. Good for long term caching. Enabled by default for production mode. |
+| `'size'`          | Numeric ids focused on minimal initial download size.                                                                                 |
+| `'total-size'`    | numeric ids focused on minimal total download size.                                                                                   |
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    chunkIds: 'named',
+  },
+};
+```
+
+<<<<<<< HEAD
+T> 了解 [mode](/concepts/mode/) 工作机制。
+
+## optimization.minimizer $#optimizationminimizer$
+
+`[TerserPlugin]` 或 `[function (compiler)]`
+
+允许你通过提供一个或多个定制过的 [TerserPlugin](/plugins/terser-webpack-plugin/) 实例，
+覆盖默认压缩工具(minimizer)。
+=======
+By default, a minimum length of 3 digits is used when `optimization.chunkIds` is set to `'deterministic'`. To override the default behaviour, set `optimization.chunkIds` to `false` and use the `webpack.ids.DeterministicChunkIdsPlugin`.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    chunkIds: false,
+  },
+  plugins: [
+    new webpack.ids.DeterministicChunkIdsPlugin({
+      maxLength: 5,
+    }),
+  ],
+};
+```
+
+<<<<<<< HEAD
+或，使用函数的形式：
+=======
+## optimization.concatenateModules
+
+`boolean`
+
+Tells webpack to find segments of the module graph which can be safely concatenated into a single module. Depends on [`optimization.providedExports`](#optimizationprovidedexports) and [`optimization.usedExports`](#optimizationusedexports).
+By default `optimization.concatenateModules` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+
+**webpack.config.js**
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+```js
+module.exports = {
+  //...
+  optimization: {
+<<<<<<< HEAD
+    minimizer: [
+      (compiler) => {
+        const TerserPlugin = require('terser-webpack-plugin');
+        new TerserPlugin({
+          /* 你的配置 */
+        }).apply(compiler);
+      },
+    ],
+=======
+    concatenateModules: true,
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+  },
+};
+```
+
+<<<<<<< HEAD
+在 `optimization.minimizer` 中可以使用 `'...'` 来访问默认值。
+=======
+## optimization.emitOnErrors
+
+`boolean = false`
+
+Use the `optimization.emitOnErrors` to emit assets whenever there are errors while compiling. This ensures that erroring assets are emitted. Critical errors are emitted into the generated code and will cause errors at runtime.
+
+**webpack.config.js**
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    emitOnErrors: true,
+  },
+};
+```
+
+<<<<<<< HEAD
+## optimization.splitChunks $#optimizationsplitchunks$
+
+`object`
+
+对于动态导入模块，默认使用 webpack v4+ 提供的全新的通用分块策略(common chunk strategy)。请在 [SplitChunksPlugin](/plugins/split-chunks-plugin/)
+页面中查看配置其行为的可用选项。
+
+## optimization.runtimeChunk $#optimizationruntimechunk$
+=======
+W> If you are using webpack [CLI](/api/cli/), the webpack process will not exit with an error code while this plugin is enabled. If you want webpack to "fail" when using the CLI, please check out the [`bail` option](/api/cli/#advanced-options).
+
+## optimization.flagIncludedChunks
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+`boolean`
+
+<<<<<<< HEAD
+将 `optimization.runtimeChunk` 设置为 `true` 或 `'multiple'`，会为每个入口添加一个只含有 runtime 的额外 chunk。此配置的别名如下：
+=======
+Tells webpack to determine and flag chunks which are subsets of other chunks in a way that subsets don’t have to be loaded when the bigger chunk has been already loaded. By default `optimization.flagIncludedChunks` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    flagIncludedChunks: true,
+  },
+};
+```
+
+<<<<<<< HEAD
+值 `"single"` 会创建一个在所有生成 chunk 之间共享的运行时文件。此设置是如下设置的别名：
+=======
+## optimization.innerGraph
 
 `boolean = true`
 
-告知 webpack 使用 [TerserPlugin](/plugins/terser-webpack-plugin/) 或其它在 [`optimization.minimizer`](#optimizationminimizer)
-定义的插件压缩 bundle。
+`optimization.innerGraph` tells webpack whether to conduct inner graph analysis for unused exports.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    innerGraph: false,
+  },
+};
+```
+
+<<<<<<< HEAD
+通过将 `optimization.runtimeChunk` 设置为 `object`，对象中可以设置只有 `name` 属性，其中属性值可以是名称或者返回名称的函数，
+用于为 runtime chunks 命名。
+
+默认值是 `false`：每个入口 chunk 中直接嵌入 runtime。
+
+W> 对于每个 runtime chunk，导入的模块会被分别初始化，因此如果你在同一个页面中引用多个入口起点，请注意此行为。你或许应该将其设置为 `single`，或者使用其他只有一个 runtime 实例的配置。
+=======
+## optimization.mangleExports
+
+`boolean` `string: 'deterministic' | 'size'`
+
+`optimization.mangleExports` allows to control export mangling.
+
+By default `optimization.mangleExports: 'deterministic'` is enabled in `production` [mode](/configuration/mode/) and disabled elsewise.
+
+The following values are supported:
+
+| Option            | Description                                                                                                          |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `'size'`          | Short names - usually a single char - focused on minimal download size.                                              |
+| `'deterministic'` | Short names - usually two chars - which will not change when adding or removing exports. Good for long term caching. |
+| `true`            | Same as `'deterministic'`                                                                                            |
+| `false`           | Keep original name. Good for readablility and debugging.                                                             |
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    mangleExports: true,
+  },
+};
+```
+
+## optimization.mangleWasmImports
+
+`boolean = false`
+
+<<<<<<< HEAD
+使用 `optimization.emitOnErrors` 在编译时每当有错误时，就会 emit asset。这样可以确保出错的 asset 被 emit 出来。关键错误会被 emit 到生成的代码中，并会在运行时报错。
+=======
+When set to `true` tells webpack to reduce the size of WASM by changing imports to shorter strings. It mangles module and export names.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    mangleWasmImports: true,
+  },
+};
+```
+
+<<<<<<< HEAD
+W> 如果你使用的是 webpack 的 [CLI](/api/cli/)，当这个插件被启用时，webpack 进程不会以错误代码退出。如果你想让 webpack 在使用 CLI 时 "fail"，请查阅 [`bail` 选项](/api/cli/#advanced-options)。
+
+## optimization.moduleIds $#optimizationmoduleids$
+=======
+## optimization.mergeDuplicateChunks
+
+`boolean = true`
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+Tells webpack to merge chunks which contain the same modules. Setting `optimization.mergeDuplicateChunks` to `false` will disable this optimization.
+
+<<<<<<< HEAD
+告知 webpack 当选择模块 id 时需要使用哪种算法。将 `optimization.moduleIds` 设置为 `false` 会告知 webpack 没有任何内置的算法会被使用，但自定义的算法会由插件提供。
+
+下面的字符串值均被支持：
+
+| 选荐值          | 描述                                  |
+| --------------- | ------------------------------------- |
+| `natural`       | 按使用顺序的数字 id。                 |
+| `named`         | 对调试更友好的可读的 id。             |
+| `deterministic` | 被哈希转化成的小位数值模块名。        |
+| `size`          | 专注于让初始下载包大小更小的数字 id。 |
+=======
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    mergeDuplicateChunks: false,
+  },
+};
+```
+
+## optimization.minimize
+
+`boolean = true`
+
+Tell webpack to minimize the bundle using the [TerserPlugin](/plugins/terser-webpack-plugin/) or the plugin(s) specified in [`optimization.minimizer`](#optimizationminimizer).
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
 **webpack.config.js**
 
@@ -44,14 +314,20 @@ module.exports = {
 };
 ```
 
-T> 了解 [mode](/concepts/mode/) 工作机制。
+<<<<<<< HEAD
+`deterministic` 选项有益于长期缓存，但对比于 `hashed` 来说，它会导致更小的文件 bundles。数字值的长度会被选作用于填满最多 80%的 id 空间。
+当 `optimization.moduleIds` 被设置成 `deterministic`，默认最小 3 位数字会被使用。
+要覆盖默认行为，要将 `optimization.moduleIds` 设置成 `false`，
+并且要使用 `webpack.ids.DeterministicModuleIdsPlugin`。
+=======
+T> Learn how [mode](/configuration/mode/) works.
 
-## optimization.minimizer $#optimizationminimizer$
+## optimization.minimizer
 
-`[TerserPlugin]` 或 `[function (compiler)]`
+`[TerserPlugin]` and or `[function (compiler)]`
 
-允许你通过提供一个或多个定制过的 [TerserPlugin](/plugins/terser-webpack-plugin/) 实例，
-覆盖默认压缩工具(minimizer)。
+Allows you to override the default minimizer by providing a different one or more customized [TerserPlugin](/plugins/terser-webpack-plugin/) instances.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
 **webpack.config.js**
 
@@ -72,7 +348,14 @@ module.exports = {
 };
 ```
 
-或，使用函数的形式：
+<<<<<<< HEAD
+W> `moduleIds: 'deterministic'` 在 webpack 5 中被添加，而且 `moduleIds: 'hashed'` 相应地会在 webpack 5 中废弃。
+
+W> `moduleIds: total-size` 在 webpack 5 中被废弃。
+
+## optimization.chunkIds $#optimizationchunkids$
+=======
+Or, as function:
 
 ```js
 module.exports = {
@@ -81,7 +364,7 @@ module.exports = {
       (compiler) => {
         const TerserPlugin = require('terser-webpack-plugin');
         new TerserPlugin({
-          /* 你的配置 */
+          /* your config */
         }).apply(compiler);
       },
     ],
@@ -89,7 +372,8 @@ module.exports = {
 };
 ```
 
-在 `optimization.minimizer` 中可以使用 `'...'` 来访问默认值。
+`'...'` can be used in `optimization.minimizer` to access the defaults.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
 ```js
 module.exports = {
@@ -99,100 +383,38 @@ module.exports = {
 };
 ```
 
-## optimization.splitChunks $#optimizationsplitchunks$
+<<<<<<< HEAD
+告知 webpack 当选择模块 id 时需要使用哪种算法。将 `optimization.chunkIds` 设置为 `false` 会告知 webpack 没有任何内置的算法会被使用，但自定义的算法会由插件提供。`optimization.chunkIds` 的默认值是 `false`：
 
-`object`
-
-对于动态导入模块，默认使用 webpack v4+ 提供的全新的通用分块策略(common chunk strategy)。请在 [SplitChunksPlugin](/plugins/split-chunks-plugin/)
-页面中查看配置其行为的可用选项。
-
-## optimization.runtimeChunk $#optimizationruntimechunk$
-
-`object` `string` `boolean`
-
-将 `optimization.runtimeChunk` 设置为 `true` 或 `'multiple'`，会为每个入口添加一个只含有 runtime 的额外 chunk。此配置的别名如下：
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    runtimeChunk: {
-      name: (entrypoint) => `runtime~${entrypoint.name}`,
-    },
-  },
-};
-```
-
-值 `"single"` 会创建一个在所有生成 chunk 之间共享的运行时文件。此设置是如下设置的别名：
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    runtimeChunk: {
-      name: 'runtime',
-    },
-  },
-};
-```
-
-通过将 `optimization.runtimeChunk` 设置为 `object`，对象中可以设置只有 `name` 属性，其中属性值可以是名称或者返回名称的函数，
-用于为 runtime chunks 命名。
-
-默认值是 `false`：每个入口 chunk 中直接嵌入 runtime。
-
-W> 对于每个 runtime chunk，导入的模块会被分别初始化，因此如果你在同一个页面中引用多个入口起点，请注意此行为。你或许应该将其设置为 `single`，或者使用其他只有一个 runtime 实例的配置。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    runtimeChunk: {
-      name: (entrypoint) => `runtimechunk~${entrypoint.name}`,
-    },
-  },
-};
-```
-
-## optimization.emitOnErrors
-
-`boolean = false`
-
-使用 `optimization.emitOnErrors` 在编译时每当有错误时，就会 emit asset。这样可以确保出错的 asset 被 emit 出来。关键错误会被 emit 到生成的代码中，并会在运行时报错。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    emitOnErrors: true,
-  },
-};
-```
-
-W> 如果你使用的是 webpack 的 [CLI](/api/cli/)，当这个插件被启用时，webpack 进程不会以错误代码退出。如果你想让 webpack 在使用 CLI 时 "fail"，请查阅 [`bail` 选项](/api/cli/#advanced-options)。
-
-## optimization.moduleIds $#optimizationmoduleids$
+- 如果环境是开发环境，那么 `optimization.chunkIds` 会被设置成 `'named'`,
+  但当在生产环境中时，它会被设置成 `'deterministic'`
+- 如果上述的条件都不符合, `optimization.chunkIds` 会被默认设置为 `'natural'`
+=======
+## optimization.moduleIds
 
 `boolean: false` `string: 'natural' | 'named' | 'deterministic' | 'size'`
 
-告知 webpack 当选择模块 id 时需要使用哪种算法。将 `optimization.moduleIds` 设置为 `false` 会告知 webpack 没有任何内置的算法会被使用，但自定义的算法会由插件提供。
+Tells webpack which algorithm to use when choosing module ids. Setting `optimization.moduleIds` to `false` tells webpack that none of built-in algorithms should be used, as custom one can be provided via plugin.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
-下面的字符串值均被支持：
+下述选项字符串值均为被支持:
 
-| 选荐值          | 描述                                  |
-| --------------- | ------------------------------------- |
-| `natural`       | 按使用顺序的数字 id。                 |
-| `named`         | 对调试更友好的可读的 id。             |
-| `deterministic` | 被哈希转化成的小位数值模块名。        |
-| `size`          | 专注于让初始下载包大小更小的数字 id。 |
+<<<<<<< HEAD
+| 选项值            | 描述                                                                    |
+| ----------------- | ----------------------------------------------------------------------- |
+| `'natural'`       | 按使用顺序的数字 id。                                                   |
+| `'named'`         | 对调试更友好的可读的 id。                                               |
+| `'deterministic'` | 在不同的编译中不变的短数字 id。有益于长期缓存。在生产模式中会默认开启。 |
+| `'size'`          | 专注于让初始下载包大小更小的数字 id。                                   |
+| `'total-size'`    | 专注于让总下载包大小更小的数字 id。                                     |
+=======
+| Option          | Description                                           |
+| --------------- | ----------------------------------------------------- |
+| `natural`       | Numeric ids in order of usage.                        |
+| `named`         | Readable ids for better debugging.                    |
+| `deterministic` | Module names are hashed into small numeric values.    |
+| `size`          | Numeric ids focused on minimal initial download size. |
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
 **webpack.config.js**
 
@@ -205,10 +427,12 @@ module.exports = {
 };
 ```
 
-`deterministic` 选项有益于长期缓存，但对比于 `hashed` 来说，它会导致更小的文件 bundles。数字值的长度会被选作用于填满最多 80%的 id 空间。
-当 `optimization.moduleIds` 被设置成 `deterministic`，默认最小 3 位数字会被使用。
-要覆盖默认行为，要将 `optimization.moduleIds` 设置成 `false`，
-并且要使用 `webpack.ids.DeterministicModuleIdsPlugin`。
+<<<<<<< HEAD
+默认地，当 `optimization.chunkIds` 被设置为 `'deterministic'` 时，最少 3 位数字会被使用。要覆盖默认的行为，
+要将 `optimization.chunkIds` 设置为 `false`，同时要使用 `webpack.ids.DeterministicChunkIdsPlugin`。
+=======
+`deterministic` option is useful for long term caching, but still results in smaller bundles compared to `hashed`. Length of the numeric value is chosen to fill a maximum of 80% of the id space. By default a minimum length of 3 digits is used when `optimization.moduleIds` is set to `deterministic`. To override the default behaviour set `optimization.moduleIds` to `false` and use the `webpack.ids.DeterministicModuleIdsPlugin`.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
 **webpack.config.js**
 
@@ -226,61 +450,15 @@ module.exports = {
 };
 ```
 
-W> `moduleIds: 'deterministic'` 在 webpack 5 中被添加，而且 `moduleIds: 'hashed'` 相应地会在 webpack 5 中废弃。
-
-W> `moduleIds: total-size` 在 webpack 5 中被废弃。
-
-## optimization.chunkIds $#optimizationchunkids$
-
-`boolean = false` `string: 'natural' | 'named' | 'size' | 'total-size' | 'deterministic'`
-
-告知 webpack 当选择模块 id 时需要使用哪种算法。将 `optimization.chunkIds` 设置为 `false` 会告知 webpack 没有任何内置的算法会被使用，但自定义的算法会由插件提供。`optimization.chunkIds` 的默认值是 `false`：
-
-- 如果环境是开发环境，那么 `optimization.chunkIds` 会被设置成 `'named'`,
-  但当在生产环境中时，它会被设置成 `'deterministic'`
-- 如果上述的条件都不符合, `optimization.chunkIds` 会被默认设置为 `'natural'`
-
-下述选项字符串值均为被支持:
-
-| 选项值            | 描述                                                                    |
-| ----------------- | ----------------------------------------------------------------------- |
-| `'natural'`       | 按使用顺序的数字 id。                                                   |
-| `'named'`         | 对调试更友好的可读的 id。                                               |
-| `'deterministic'` | 在不同的编译中不变的短数字 id。有益于长期缓存。在生产模式中会默认开启。 |
-| `'size'`          | 专注于让初始下载包大小更小的数字 id。                                   |
-| `'total-size'`    | 专注于让总下载包大小更小的数字 id。                                     |
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    chunkIds: 'named',
-  },
-};
-```
-
-默认地，当 `optimization.chunkIds` 被设置为 `'deterministic'` 时，最少 3 位数字会被使用。要覆盖默认的行为，
-要将 `optimization.chunkIds` 设置为 `false`，同时要使用 `webpack.ids.DeterministicChunkIdsPlugin`。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    chunkIds: false,
-  },
-  plugins: [
-    new webpack.ids.DeterministicChunkIdsPlugin({
-      maxLength: 5,
-    }),
-  ],
-};
-```
-
+<<<<<<< HEAD
 ## optimization.nodeEnv $#optimizationnodeenv$
+=======
+W> `moduleIds: 'deterministic'` was added in webpack 5 and `moduleIds: 'hashed'` is deprecated in favor of it.
+
+W> `moduleIds: total-size` has been removed in webpack 5.
+
+## optimization.nodeEnv
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
 `boolean = false` `string`
 
@@ -304,11 +482,21 @@ module.exports = {
 
 T> 当 [mode](/configuration/mode/) 设置为 `'none'` 时，`optimization.nodeEnv` 的默认值为 `false`。
 
+<<<<<<< HEAD
 ## optimization.mangleWasmImports $#optimizationmanglewasmimports$
+=======
+## optimization.portableRecords
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
-`boolean = false`
+`boolean`
 
+<<<<<<< HEAD
 在设置为 `true` 时，告知 webpack 通过将导入修改为更短的字符串，来减少 WASM 大小。这会破坏模块和导出名称。
+=======
+`optimization.portableRecords` tells webpack to generate records with relative paths to be able to move the context folder.
+
+By default `optimization.portableRecords` is disabled. Automatically enabled if at least one of the records options provided to webpack config: [`recordsPath`](/configuration/other-options/#recordspath), [`recordsInputPath`](/configuration/other-options/#recordsinputpath), [`recordsOutputPath`](/configuration/other-options/#recordsoutputpath).
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
 **webpack.config.js**
 
@@ -316,87 +504,24 @@ T> 当 [mode](/configuration/mode/) 设置为 `'none'` 时，`optimization.nodeE
 module.exports = {
   //...
   optimization: {
-    mangleWasmImports: true,
+    portableRecords: true,
   },
 };
 ```
 
+<<<<<<< HEAD
 ## optimization.removeAvailableModules $#optimizationremoveavailablemodules$
+=======
+## optimization.providedExports
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
-`boolean = false`
+`boolean`
 
+<<<<<<< HEAD
 如果模块已经包含在所有父级模块中，告知 webpack 从 chunk 中检测出这些模块，或移除这些模块。将 `optimization.removeAvailableModules` 设置为 `true` 以启用这项优化。在 [`生产` 模式](/configuration/mode/) 中默认会被开启。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    removeAvailableModules: true,
-  },
-};
-```
-
-W> `optimization.removeAvailableModules` 会削减了 webapck 的性能表现，而且将会在下一个主要发布版本中，在 `生产` 模式下会被禁用。
-如果你想获得额外的构建性能，请在 `生产` 模式中禁用它。
-
-## optimization.removeEmptyChunks $#optimizationremoveemptychunks$
-
-`boolean = true`
-
-如果 chunk 为空，告知 webpack 检测或移除这些 chunk。将 `optimization.removeEmptyChunks` 设置为 `false` 以禁用这项优化。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    removeEmptyChunks: false,
-  },
-};
-```
-
-## optimization.mergeDuplicateChunks $#optimizationmergeduplicatechunks$
-
-`boolean = true`
-
-告知 webpack 合并含有相同模块的 chunk。将 `optimization.mergeDuplicateChunks` 设置为 `false` 以禁用这项优化。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    mergeDuplicateChunks: false,
-  },
-};
-```
-
-## optimization.flagIncludedChunks $#optimizationflagincludedchunks$
-
-`boolean`
-
-告知 webpack 确定和标记出作为其他 chunk 子集的那些 chunk，其方式是在已经加载过较大的 chunk 之后，就不再去加载这些 chunk 子集。`optimization.flagIncludedChunks` 默认会在 `生产` [模式](/concepts/mode/) 中启用，其他情况禁用。
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  //...
-  optimization: {
-    flagIncludedChunks: true,
-  },
-};
-```
-
-## optimization.providedExports $#optimizationprovidedexports$
-
-`boolean`
-
-告知 webpack 去确定那些由模块提供的导出内容，为 `export * from ...` 生成更多高效的代码。默认 `optimization.providedExports` 会被启用。
+=======
+Tells webpack to figure out which exports are provided by modules to generate more efficient code for `export * from ...`. By default `optimization.providedExports` is enabled.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
 **webpack.config.js**
 
@@ -409,12 +534,22 @@ module.exports = {
 };
 ```
 
-## optimization.usedExports $#optimizationusedexports$
+<<<<<<< HEAD
+W> `optimization.removeAvailableModules` 会削减了 webapck 的性能表现，而且将会在下一个主要发布版本中，在 `生产` 模式下会被禁用。
+如果你想获得额外的构建性能，请在 `生产` 模式中禁用它。
 
-`boolean = true` `string: 'global'`
+## optimization.removeEmptyChunks $#optimizationremoveemptychunks$
 
-告知 webpack 去决定每个模块使用的导出内容。这取决于 [`optimization.providedExports`](#optimizationoccurrenceorder) 选项。由 `optimization.usedExports` 收集的信息会被其它优化手段或者代码生成使用，比如未使用的导出内容不会被生成，当所有的使用都适配，导出名称会被处理做单个标记字符。
-在压缩工具中的无用代码清除会受益于该选项，而且能够去除未使用的导出内容。
+`boolean = true`
+
+如果 chunk 为空，告知 webpack 检测或移除这些 chunk。将 `optimization.removeEmptyChunks` 设置为 `false` 以禁用这项优化。
+=======
+## optimization.realContentHash
+
+`boolean = true`
+
+Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
 **webpack.config.js**
 
@@ -422,6 +557,108 @@ module.exports = {
 module.exports = {
   //...
   optimization: {
+    realContentHash: false,
+  },
+};
+```
+
+<<<<<<< HEAD
+## optimization.mergeDuplicateChunks $#optimizationmergeduplicatechunks$
+=======
+## optimization.removeAvailableModules
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+`boolean = false`
+
+<<<<<<< HEAD
+告知 webpack 合并含有相同模块的 chunk。将 `optimization.mergeDuplicateChunks` 设置为 `false` 以禁用这项优化。
+=======
+Tells webpack to detect and remove modules from chunks when these modules are already included in all parents. Setting `optimization.removeAvailableModules` to `true` will enable this optimization. Enabled by default in [`production` mode](/configuration/mode/).
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    removeAvailableModules: true,
+  },
+};
+```
+
+<<<<<<< HEAD
+## optimization.flagIncludedChunks $#optimizationflagincludedchunks$
+=======
+W> `optimization.removeAvailableModules` reduces the performance of webpack, and will be disabled in `production` mode by default in next major release. Disable it in `production` mode if you want extra build performance.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+## optimization.removeEmptyChunks
+
+<<<<<<< HEAD
+告知 webpack 确定和标记出作为其他 chunk 子集的那些 chunk，其方式是在已经加载过较大的 chunk 之后，就不再去加载这些 chunk 子集。`optimization.flagIncludedChunks` 默认会在 `生产` [模式](/concepts/mode/) 中启用，其他情况禁用。
+=======
+`boolean = true`
+
+Tells webpack to detect and remove chunks which are empty. Setting `optimization.removeEmptyChunks` to `false` will disable this optimization.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    removeEmptyChunks: false,
+  },
+};
+```
+
+<<<<<<< HEAD
+## optimization.providedExports $#optimizationprovidedexports$
+=======
+## optimization.runtimeChunk
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+`object` `string` `boolean`
+
+<<<<<<< HEAD
+告知 webpack 去确定那些由模块提供的导出内容，为 `export * from ...` 生成更多高效的代码。默认 `optimization.providedExports` 会被启用。
+=======
+Setting `optimization.runtimeChunk` to `true` or `'multiple'` adds an additional chunk containing only the runtime to each entrypoint. This setting is an alias for:
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    runtimeChunk: {
+      name: (entrypoint) => `runtime~${entrypoint.name}`,
+    },
+  },
+};
+```
+
+<<<<<<< HEAD
+## optimization.usedExports $#optimizationusedexports$
+
+`boolean = true` `string: 'global'`
+
+告知 webpack 去决定每个模块使用的导出内容。这取决于 [`optimization.providedExports`](#optimizationoccurrenceorder) 选项。由 `optimization.usedExports` 收集的信息会被其它优化手段或者代码生成使用，比如未使用的导出内容不会被生成，当所有的使用都适配，导出名称会被处理做单个标记字符。
+在压缩工具中的无用代码清除会受益于该选项，而且能够去除未使用的导出内容。
+=======
+The value `'single'` instead creates a runtime file to be shared for all generated chunks. This setting is an alias for:
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  optimization: {
+<<<<<<< HEAD
     usedExports: false,
   },
 };
@@ -434,16 +671,29 @@ module.exports = {
   //...
   optimization: {
     usedExports: 'global',
+=======
+    runtimeChunk: {
+      name: 'runtime',
+    },
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
   },
 };
 ```
 
+<<<<<<< HEAD
 ## optimization.concatenateModules $#optimizationconcatenatemodules$
+=======
+By setting `optimization.runtimeChunk` to `object` it is only possible to provide the `name` property which stands for the name or name factory for the runtime chunks.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
-`boolean`
+Default is `false`: each entry chunk embeds runtime.
 
+<<<<<<< HEAD
 告知 webpack 去寻找模块图形中的片段，哪些是可以安全地被合并到单一模块中。这取决于 [`optimization.providedExports`](#optimizationprovidedexports) 和 [`optimization.usedExports`](#optimizationusedexports)。
 默认 `optimization.concatenateModules` 在 `生产` [模式](/configuration/mode/) 下被启用，而在其它情况下被禁用。
+=======
+W> Imported modules are initialized for each runtime chunk separately, so if you include multiple entry points on a page, beware of this behavior. You will probably want to set it to `single` or use another configuration that allows you to only have one runtime instance.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
 **webpack.config.js**
 
@@ -451,7 +701,9 @@ module.exports = {
 module.exports = {
   //...
   optimization: {
-    concatenateModules: true,
+    runtimeChunk: {
+      name: (entrypoint) => `runtimechunk~${entrypoint.name}`,
+    },
   },
 };
 ```
@@ -504,6 +756,7 @@ module.exports = {
 
 T> 设置为 `optimization.sideEffects` 时，当模块只包含无副作用的语句时，此模块也会被标记为无副作用。
 
+<<<<<<< HEAD
 ## optimization.portableRecords $#optimizationportablerecords$
 
 `boolean`
@@ -540,23 +793,28 @@ module.exports = {
 | `'deterministic'` | 简写形式 - 通常两个字符 — 在添加或移除 export 时不会改变。适用于长效缓存。 |
 | `true`            | 等价于 `'deterministic'`                                                   |
 | `false`           | 保留原名，有利于阅读和调试。                                               |
+=======
+## optimization.splitChunks
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
-**webpack.config.js**
+`object`
 
-```js
-module.exports = {
-  //...
-  optimization: {
-    mangleExports: true,
-  },
-};
-```
+By default webpack v4+ provides new common chunks strategies out of the box for dynamically imported modules. See available options for configuring this behavior in the [SplitChunksPlugin](/plugins/split-chunks-plugin/) page.
 
+<<<<<<< HEAD
 ## optimization.innerGraph $#optimizationinnergraph$
+=======
+## optimization.usedExports
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
-`boolean = true`
+`boolean = true` `string: 'global'`
 
+<<<<<<< HEAD
 `optimization.innerGraph` 告知 webpack 是否对未使用的导出内容，实施内部图形分析(graph analysis)。
+=======
+Tells webpack to determine used exports for each module. This depends on [`optimization.providedExports`](#optimizationprovidedexports). Information collected by `optimization.usedExports` is used by other optimizations or code generation i.e. exports are not generated for unused exports, export names are mangled to single char identifiers when all usages are compatible.
+Dead code elimination in minimizers will benefit from this and can remove unused exports.
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
 **webpack.config.js**
 
@@ -564,24 +822,18 @@ module.exports = {
 module.exports = {
   //...
   optimization: {
-    innerGraph: false,
+    usedExports: false,
   },
 };
 ```
 
-## optimization.realContentHash
-
-`boolean = true`
-
-Adds an additional hash compilation pass after the assets have been processed to get the correct asset content hashes. If `realContentHash` is set to `false`, internal data is used to calculate the hash and it can change when assets are identical.
-
-**webpack.config.js**
+To opt-out from used exports analysis per runtime:
 
 ```js
 module.exports = {
   //...
   optimization: {
-    realContentHash: false,
+    usedExports: 'global',
   },
 };
 ```

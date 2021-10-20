@@ -176,7 +176,28 @@ import('./module-a').then((moduleA) => {
 
 这个变量提供对编译过程中(compilation)的 hash 信息的访问。
 
+<<<<<<< HEAD
 ## \_\_non_webpack_require\_\_ (webpack-specific) $#__non_webpack_require__-webpack-specific$
+=======
+## \_\_webpack_get_script_filename\_\_ (webpack-specific)
+
+`function (chunkId)`
+
+It provides filename of the chunk by its id.
+
+It is assignable, which allows changing the filename used by the runtime. For example, it can be used to determine the final path when loading chunks.
+
+```js
+const oldFn = __webpack_get_script_filename__;
+
+__webpack_get_script_filename__ = (chunkId) => {
+  const filename = oldFn(chunkId);
+  return filename + '.changed';
+};
+```
+
+## \_\_non_webpack_require\_\_ (webpack-specific)
+>>>>>>> dcf403d2cc1e8b2d0d911d0aee46fe74891a96dc
 
 生成一个不会被 webpack 解析的 `require` 函数。配合全局可以获取到的 require 函数，可以完成一些酷炫操作。
 
