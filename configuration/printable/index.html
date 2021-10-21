@@ -3234,12 +3234,26 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       requestCert<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><aside class="warning"><h6 class="warning__prefix">warning</h6><p>Don&#x27;t specify <code>https.ca</code> and <code>https.cacert</code> options together, if specified <code>https.ca</code> will be used. <code>https.cacert</code> is deprecated and will be removed in the next major release.</p></aside><h2 id="devserverheaders">devServer.headers<a href="#devserverheaders" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p><code>function</code> <code>object</code></p><p>Adds headers to all responses:</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><aside class="warning"><h6 class="warning__prefix">warning</h6><p>Don&#x27;t specify <code>https.ca</code> and <code>https.cacert</code> options together, if specified <code>https.ca</code> will be used. <code>https.cacert</code> is deprecated and will be removed in the next major release.</p></aside><h2 id="devserverheaders">devServer.headers<a href="#devserverheaders" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p><code>array</code> <code>function</code> <code>object</code></p><p>Adds headers to all responses:</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">//...</span>
   devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
     headers<span class="token operator">:</span> <span class="token punctuation">{</span>
       <span class="token string">&#x27;X-Custom-Foo&#x27;</span><span class="token operator">:</span> <span class="token string">&#x27;bar&#x27;</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>You can also pass an array:</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">//...</span>
+  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
+    headers<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        key<span class="token operator">:</span> <span class="token string">&#x27;X-Custom&#x27;</span><span class="token punctuation">,</span>
+        value<span class="token operator">:</span> <span class="token string">&#x27;foo&#x27;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        key<span class="token operator">:</span> <span class="token string">&#x27;Y-Custom&#x27;</span><span class="token punctuation">,</span>
+        value<span class="token operator">:</span> <span class="token string">&#x27;bar&#x27;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>You can also pass a function:</p><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">//...</span>
