@@ -1706,3 +1706,132 @@ module.exports = {
   },
 };
 ```
+
+## API Usage
+
+While it's recommended to run `webpack-dev-server` via the CLI, you may also choose to start a server via the API.
+
+**server.js**
+
+```js
+const Webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const webpackConfig = require('./webpack.config.js');
+
+const compiler = Webpack(webpackConfig);
+const devServerOptions = { ...webpackConfig.devServer, open: true };
+const server = new WebpackDevServer(devServerOptions, compiler);
+
+const runServer = async () => {
+  console.log("Starting server...");
+  await server.start();
+};
+
+runServer();
+```
+
+And then run the server with the following command:
+
+```bash
+node server.js
+```
+
+### start
+
+It instructs `webpack-dev-server` instance to start the server.
+
+**server.js**
+
+```js
+const Webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const webpackConfig = require('./webpack.config.js');
+
+const compiler = Webpack(webpackConfig);
+const devServerOptions = { ...webpackConfig.devServer, open: true };
+const server = new WebpackDevServer(devServerOptions, compiler);
+
+const runServer = async () => {
+  console.log('Starting server...');
+  await server.start();
+};
+
+runServer();
+```
+
+### startCallback(callback)
+
+It instructs `webpack-dev-server` instance to start the server and then run the callback function.
+
+**server.js**
+
+```js
+const Webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const webpackConfig = require('./webpack.config.js');
+
+const compiler = Webpack(webpackConfig);
+const devServerOptions = { ...webpackConfig.devServer, open: true };
+const server = new WebpackDevServer(devServerOptions, compiler);
+
+server.startCallback(() => {
+  console.log('Successfully started server on http://localhost:8080');
+});
+```
+
+### stop
+
+It instructs `webpack-dev-server` instance to stop the server.
+
+**server.js**
+
+```js
+const Webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const webpackConfig = require('./webpack.config.js');
+
+const compiler = Webpack(webpackConfig);
+const devServerOptions = { ...webpackConfig.devServer, open: true };
+const server = new WebpackDevServer(devServerOptions, compiler);
+
+const runServer = async () => {
+  console.log('Starting server...');
+  await server.start();
+};
+
+const stopServer = async () => {
+  console.log('Stopping server...');
+  await server.stop();
+};
+
+runServer();
+
+setTimeout(stopServer, 5000);
+```
+
+### stopCallback(callback)
+
+It instructs `webpack-dev-server` instance to stop the server and then run the callback function.
+
+**server.js**
+
+```js
+const Webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const webpackConfig = require('./webpack.config.js');
+
+const compiler = Webpack(webpackConfig);
+const devServerOptions = { ...webpackConfig.devServer, open: true };
+const server = new WebpackDevServer(devServerOptions, compiler);
+
+server.startCallback(() => {
+  console.log('Successfully started server on http://localhost:8080');
+});
+
+const stopServer = () =>
+  server.stopCallback(() => {
+    console.log('Server stopped.');
+  });
+
+setTimeout(stopServer, 5000);
+```
