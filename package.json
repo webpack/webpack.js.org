@@ -98,7 +98,7 @@
     "front-matter": "^4.0.2",
     "html-webpack-plugin": "^5.4.0",
     "http-server": "^14.0.0",
-    "husky": "^7.0.2",
+    "husky": "^7.0.4",
     "hyperlink": "^5.0.0",
     "jest": "^27.3.1",
     "lint-staged": "^11.2.3",
