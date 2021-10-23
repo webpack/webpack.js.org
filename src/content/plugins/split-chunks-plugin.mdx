@@ -18,6 +18,7 @@ contributors:
   - rohrlaf
   - jamesgeorge007
   - anshumanv
+  - snitin315
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
@@ -168,6 +169,14 @@ Prevents exposing path info when creating names for parts splitted by maxSize.
 `number = 20000`
 
 Minimum size, in bytes, for a chunk to be generated.
+
+### splitChunks.minSizeReduction
+
+`number`
+
+Minimum size reduction to the whole compilation, in bytes, needed for a chunk to be generated.
+
+T> Both `splitChunks.minSizeReduction` and `splitChunks.minSize` need to be fulfilled for a chunk to be generated. You may want to reduce `minSize` when using `minSizeReduction`.
 
 ### splitChunks.enforceSizeThreshold
 
