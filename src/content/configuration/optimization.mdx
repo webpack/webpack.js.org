@@ -1,5 +1,5 @@
 ---
-title: Optimization
+title: 优化(Optimization)
 sort: 9
 contributors:
   - EugeneHlushko
@@ -386,7 +386,7 @@ module.exports = {
 };
 ```
 
-## optimization.realContentHash $#optimization.realcontenthash$
+## optimization.realContentHash $#optimizationrealcontenthash$
 
 `boolean = true`
 
@@ -419,8 +419,6 @@ module.exports = {
   },
 };
 ```
-
-## optimization.flagIncludedChunks $#optimizationflagincludedchunks$
 
 W> `optimization.removeAvailableModules` 会削减了 webapck 的性能表现，而且将会在下一个主要发布版本中，在 `production` 模式下会被禁用。如果你想获得额外的构建性能，请在 `production` 模式中禁用它。
 
@@ -548,7 +546,6 @@ T> 设置为 `optimization.sideEffects` 时，当模块只包含无副作用的�
 
 对于动态导入模块，默认使用 webpack v4+ 提供的全新的通用分块策略(common chunk strategy)。请在 [SplitChunksPlugin](/plugins/split-chunks-plugin/) 页面中查看配置其行为的可用选项。
 
-## optimization.innerGraph $#optimizationinnergraph$
 ## optimization.usedExports $#optimizationusedexports$
 
 `boolean = true` `string: 'global'`
