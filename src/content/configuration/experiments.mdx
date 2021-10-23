@@ -40,7 +40,6 @@ module.exports = {
   experiments: {
     asyncWebAssembly: true,
     buildHttp: true,
-    executeModule: true,
     layers: true,
     lazyCompilation: true,
     outputModule: true,
@@ -56,12 +55,14 @@ When enabled, webpack can build remote resources that begin with the `http(s):` 
 
 - Type:
 
-  One of the following:
+  - `(string | RegExp | ((uri: string) => boolean))[]`
 
-  - `boolean`
+    A shortcut for [`experiments.buildHttp.allowedUris`](#experimentsbuildhttpalloweduris).
+
   - `HttpUriOptions`
     ```ts
     {
+      allowedUris: (string|RegExp|(uri: string) => boolean)[],
       cacheLocation?: false | string,
       frozen?: boolean,
       lockfileLocation?: string,
@@ -87,6 +88,28 @@ When enabled, webpack can build remote resources that begin with the `http(s):` 
   import pMap1 from 'https://cdn.skypack.dev/p-map';
   // with `buildHttp` enabled, webpack will build pMap1 just like a regular local module
   console.log(pMap1);
+  ```
+
+#### experiments.buildHttp.allowedUris $#experimentsbuildhttpalloweduris$
+
+允许的 URI 列表。
+
+- 类型：`(string|RegExp|(uri: string) => boolean)[]`
+- 示例
+
+  ```javascript
+  // webpack.config.js
+  module.exports = {
+    //...
+    experiments: {
+      buildHttp: {
+        allowedUris: [
+          'http://localhost:9990/',
+          'https://raw.githubusercontent.com/',
+        ],
+      },
+    },
+  };
   ```
 
 #### experiments.buildHttp.cacheLocation $#experimentsbuildhttpcachelocation$
