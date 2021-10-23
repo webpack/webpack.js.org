@@ -202,9 +202,6 @@
         <loc>https://webpack.js.org/configuration/module</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/node</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/configuration/optimization</loc>
     </url>
     <url>
@@ -223,6 +220,9 @@
         <loc>https://webpack.js.org/configuration/resolve</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/configuration/node</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/configuration/stats</loc>
     </url>
     <url>
@@ -230,6 +230,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/watch</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/contribute/debugging</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/plugin-patterns</loc>
@@ -272,6 +275,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/asset-modules</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/author-libraries</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/build-performance</loc>
@@ -457,13 +463,13 @@
         <loc>https://webpack.js.org/plugins/automatic-prefetch-plugin</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/banner-plugin</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins/commons-chunk-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/compression-webpack-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/banner-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/context-exclusion-plugin</loc>
@@ -574,19 +580,13 @@
         <loc>https://webpack.js.org/pluginsapi/template</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/contribute/debugging</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/author-libraries</loc>
+        <loc>https://webpack.js.org/api/plugins/compilation</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/compiler</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/module-factories</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api/plugins/compilation</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/parser</loc>
