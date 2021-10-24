@@ -218,18 +218,28 @@ The [`SplitChunksPlugin`](/plugins/split-chunks-plugin/) allows us to extract co
   module.exports = {
     mode: 'development',
     entry: {
-      index: './src/index.js',
-      another: './src/another-module.js',
+-    index: {
+-      import: './src/index.js',
+-      dependOn: 'shared',
+-    },
++    index: './src/index.js',
+-    another: {
+-      import: './src/another-module.js',
+-      dependOn: 'shared',
+-    },
++    another: './src/another-module.js',
+-    shared: 'lodash',
     },
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
     },
-+   optimization: {
+    optimization: {
+-     runtimeChunk: 'single',
 +     splitChunks: {
 +       chunks: 'all',
 +     },
-+   },
+    },
   };
 ```
 
