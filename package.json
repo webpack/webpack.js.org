@@ -123,7 +123,7 @@
     "remark-gfm": "^1.0.0",
     "remark-html": "^15.0.0",
     "remark-refractor": "montogeek/remark-refractor",
-    "remark-slug": "^7.0.0",
+    "remark-slug": "^7.0.1",
     "rimraf": "^3.0.2",
     "sass": "^1.43.3",
     "sass-loader": "^12.2.0",
