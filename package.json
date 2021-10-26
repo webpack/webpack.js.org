@@ -96,7 +96,7 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "front-matter": "^4.0.2",
-    "html-webpack-plugin": "^5.4.0",
+    "html-webpack-plugin": "^5.5.0",
     "http-server": "^14.0.0",
     "husky": "^7.0.4",
     "hyperlink": "^5.0.0",
