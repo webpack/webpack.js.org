@@ -2,12 +2,13 @@
 title: Writing a Loader
 sort: 2
 contributors:
-  - asulaiman
-  - michael-ciniawsky
-  - byzyk
-  - anikethsaha
-  - jamesgeorge007
-  - chenxsan
+- asulaiman
+- michael-ciniawsky
+- byzyk
+- anikethsaha
+- jamesgeorge007
+- chenxsan
+- dev-itsheng
 ---
 
 A loader is a node module that exports a function. This function is called when a resource should be transformed by this loader. The given function will have access to the [Loader API](/api/loaders/) using the `this` context provided to it.
@@ -137,12 +138,14 @@ Make sure the loader does not retain state between module transformations. Each 
 
 ### Loader Utilities
 
-Take advantage of the [`loader-utils`](https://github.com/webpack/loader-utils) package. It provides a variety of useful tools but one of the most common is retrieving the options passed to the loader. Along with `loader-utils`, the [`schema-utils`](https://github.com/webpack-contrib/schema-utils) package should be used for consistent JSON Schema based validation of loader options. Here's a brief example that utilizes both:
+Take advantage of the [`loader-utils`](https://github.com/webpack/loader-utils) package. It provides a variety of useful tools. Along with `loader-utils`, the [`schema-utils`](https://github.com/webpack-contrib/schema-utils) package should be used for consistent JSON Schema based validation of loader options. Here's a brief example that utilizes both:
+
+T> In webpack5, the loader can use `this.getOptions` to retrieve the options passed to the loader, so `loader-utils` removed `getOptions` method since 3.0.0.
 
 **loader.js**
 
 ```js
-import { getOptions } from 'loader-utils';
+import { urlToRequest } from 'loader-utils';
 import { validate } from 'schema-utils';
 
 const schema = {
@@ -155,12 +158,14 @@ const schema = {
 };
 
 export default function (source) {
-  const options = getOptions(this);
+  const options = this.getOptions();
 
   validate(schema, options, {
     name: 'Example Loader',
     baseDataPath: 'options',
   });
+  
+  console.log('The request path', urlToRequest(this.resourcePath));
 
   // Apply some transformations to the source...
 
@@ -284,10 +289,8 @@ Our loader will process `.txt` files and replace any instance of `[name]` with t
 **src/loader.js**
 
 ```js
-import { getOptions } from 'loader-utils';
-
 export default function loader(source) {
-  const options = getOptions(this);
+  const options = this.getOptions();
 
   source = source.replace(/\[name\]/g, options.name);
 
