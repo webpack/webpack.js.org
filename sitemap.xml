@@ -16,9 +16,6 @@
         <loc>https://webpack.js.org/branding</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/comparison</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/concepts</loc>
     </url>
     <url>
@@ -38,6 +35,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/comparison</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/license</loc>
@@ -220,9 +220,6 @@
         <loc>https://webpack.js.org/configuration/performance</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/plugins</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/configuration/resolve</loc>
     </url>
     <url>
@@ -236,6 +233,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/debugging</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/plugins</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/plugin-patterns</loc>
