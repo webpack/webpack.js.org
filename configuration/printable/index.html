@@ -4501,22 +4501,39 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   experiments<span class="token operator">:</span> <span class="token punctuation">{</span>
     futureDefaults<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="experimentslazycompilation">experiments.lazyCompilation<a href="#experimentslazycompilation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>Compile entrypoints and dynamic <code>import</code>s only when they are in use. It can be used for either Web or Node.js.</p><ul><li><p>Type</p><ul><li><code>boolean</code></li><li><code>object</code><pre><code class="hljs language-ts"><span class="token punctuation">{</span>
-  <span class="token comment">// define a custom backend</span>
-  backend<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
-    compiler<span class="token operator">:</span> webpack<span class="token punctuation">.</span>Compiler<span class="token punctuation">,</span>
-    client<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
-    <span class="token function-variable function">callback</span><span class="token operator">:</span> <span class="token punctuation">(</span>err<span class="token operator">?</span><span class="token operator">:</span> Error<span class="token punctuation">,</span> api<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="experimentslazycompilation">experiments.lazyCompilation<a href="#experimentslazycompilation" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>Compile entrypoints and dynamic <code>import</code>s only when they are in use. It can be used for either Web or Node.js.</p><ul><li><p>Type</p><ul><li><p><code>boolean</code></p></li><li><p><code>object</code></p><pre><code class="hljs language-ts"><span class="token punctuation">{</span>
+<span class="token comment">// define a custom backend</span>
+backend<span class="token operator">?</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
+  compiler<span class="token operator">:</span> Compiler<span class="token punctuation">,</span>
+  <span class="token function-variable function">callback</span><span class="token operator">:</span> <span class="token punctuation">(</span>err<span class="token operator">?</span><span class="token operator">:</span> Error<span class="token punctuation">,</span> api<span class="token operator">?</span><span class="token operator">:</span> BackendApi<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span>
   <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span>
-  <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>
-      compiler<span class="token operator">:</span> webpack<span class="token punctuation">.</span>Compiler<span class="token punctuation">,</span>
-      client<span class="token operator">:</span> <span class="token builtin">string</span>
-    <span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token operator">&gt;</span><span class="token punctuation">)</span>
-  client<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span>
-  entries<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
-  imports<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
-  test<span class="token operator">?</span><span class="token operator">:</span> RegExp <span class="token operator">|</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">module</span><span class="token operator">:</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">&quot;../lib/Module&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span></code></pre><ul><li><code>client</code>: Path to a custom client, defaults to <code>webpack/hot/lazy-compilation-{node|web}.js</code>.</li><li><code>backend</code>: Customize the backend, defaults to <code>webpack/lib/hmr/lazyCompilationBackend</code>.</li><li><code>entries</code>: Enable lazy compilation for entries.</li><li><code>imports</code> <span class="badge">5.20.0+</span>: Enable lazy compilation for dynamic imports.</li><li><code>test</code> <span class="badge">5.20.0+</span>: Specify which imported modules should be lazily compiled.</li></ul></li></ul></li><li><p>Available: 5.17.0+</p></li><li><p>Example 1:</p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>compiler<span class="token operator">:</span> Compiler<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">Promise</span><span class="token operator">&lt;</span>BackendApi<span class="token operator">&gt;</span><span class="token punctuation">)</span>
+  <span class="token operator">|</span> <span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * A custom client.
+    */</span>
+    client<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * Specify where to listen to from the server.
+     */</span>
+    listen<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">number</span> <span class="token operator">|</span> ListenOptions <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>server<span class="token operator">:</span> <span class="token keyword">typeof</span> Server<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * Specify the protocol the client should use to connect to the server.
+     */</span>
+    protocol<span class="token operator">?</span><span class="token operator">:</span> <span class="token string">&quot;http&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;https&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * Specify how to create the server handling the EventSource requests.
+     */</span>
+    server<span class="token operator">?</span><span class="token operator">:</span> ServerOptionsImport <span class="token operator">|</span> ServerOptionsHttps <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">typeof</span> Server<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span><span class="token punctuation">,</span>
+entries<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
+imports<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">,</span>
+test<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> RegExp <span class="token operator">|</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">module</span><span class="token operator">:</span> Module<span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token builtin">boolean</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre><ul><li><code>backend</code>: Customize the backend.</li><li><code>entries</code>: Enable lazy compilation for entries.</li><li><code>imports</code> <span class="badge">5.20.0+</span>: Enable lazy compilation for dynamic imports.</li><li><code>test</code> <span class="badge">5.20.0+</span>: Specify which imported modules should be lazily compiled.</li></ul></li></ul></li><li><p>Available: 5.17.0+</p></li><li><p>Example 1:</p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">// …</span>
   experiments<span class="token operator">:</span> <span class="token punctuation">{</span>
     lazyCompilation<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
