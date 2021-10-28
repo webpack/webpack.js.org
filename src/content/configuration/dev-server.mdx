@@ -332,6 +332,69 @@ To disable:
 npx webpack serve --no-client-progress
 ```
 
+### reconnect
+
+`boolean = true` `number`
+
+Tells dev-server the number of times it should try to reconnect the client. When `true` it will try to reconnect unlimited times.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    client: {
+      reconnect: true,
+    },
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --client-reconnect
+```
+
+When set to `false` it will not try to reconnect.
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    client: {
+      reconnect: false,
+    },
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --no-client-reconnect
+```
+
+You can also specify the exact number of times the client should try to reconnect.
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    client: {
+      reconnect: 5,
+    },
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --client-reconnect 5
+```
+
 ### webSocketTransport
 
 `'ws' | 'sockjs'` `string`
