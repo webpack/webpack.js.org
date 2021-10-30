@@ -629,7 +629,7 @@ npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/t
 
 `boolean` `object`
 
-By default, dev-server will be served over `HTTP`. It can optionally be served over `HTTP/2` with `HTTPS`:
+By default, dev-server will be served over `HTTP`. It can optionally be served over `HTTPS`:
 
 **webpack.config.js**
 
@@ -662,10 +662,10 @@ With the above setting, a self-signed certificate is used, but you can provide y
 module.exports = {
   devServer: {
     https: {
-      ca: './server.pem',
-      pfx: './server.pfx',
-      key: './server.key',
-      cert: './server.crt',
+      ca: './path/to/server.pem',
+      pfx: './path/to/server.pfx',
+      key: './path/to/server.key',
+      cert: './path/to/server.crt',
       passphrase: 'webpack-dev-server',
       requestCert: true,
     },
@@ -678,7 +678,7 @@ This object is passed straight to the Node.js HTTPS module, so see the [HTTPS do
 To pass your own certificate via the CLI use the following options:
 
 ```bash
-npx webpack serve --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-ca ./path/to/ca.pem
+npx webpack serve --https-request-cert --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-ca ./path/to/ca.pem --https-pfx ./path/to/server.pfx --https-passphrase webpack-dev-server
 ```
 
 `webpack-dev-server >= v4.2.0` allows you to set additional [TLS options](https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options) like `minVersion`. Also, you can directly pass the contents of respective files:
