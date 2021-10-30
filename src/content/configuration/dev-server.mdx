@@ -38,7 +38,7 @@ This set of options is picked up by [webpack-dev-server](https://github.com/webp
 **webpack.config.js**
 
 ```javascript
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   //...
@@ -604,6 +604,8 @@ Provide your own certificate using the [https](#devserverhttps) option:
 **webpack.config.js**
 
 ```javascript
+const fs = require('fs');
+
 module.exports = {
   //...
   devServer: {
