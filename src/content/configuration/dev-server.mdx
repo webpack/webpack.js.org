@@ -625,6 +625,8 @@ To pass your certificate via CLI, use the following options:
 npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-ca ./path/to/ca.pem
 ```
 
+W> This option is deprecated in favor of [devServer.server](#devserverserver) option.
+
 ## devServer.https
 
 `boolean` `object`
@@ -705,6 +707,8 @@ module.exports = {
 ```
 
 W> Don't specify `https.ca` and `https.cacert` options together, if specified `https.ca` will be used. `https.cacert` is deprecated and will be removed in the next major release.
+
+W> This option is deprecated in favor of [devServer.server](#devserverserver) option.
 
 ## devServer.headers
 
@@ -1401,6 +1405,125 @@ module.exports = {
       '/api': {
         target: 'http://localhost:3000',
         changeOrigin: true,
+      },
+    },
+  },
+};
+```
+
+## devServer.server
+
+`'http' | 'https' | 'spdy'` `object`
+
+<Badge text="v4.4.0+" />
+
+Allows to set server and options (by default 'http').
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    server: 'http',
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --server-type http
+```
+
+To serve over `HTTPS` with a self-signed certificate:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    server: 'https',
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --server-type https
+```
+
+To serve over `HTTP/2` using [spdy](https://www.npmjs.com/package/spdy) with a self-signed certificate:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    server: 'spdy',
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --server-type spdy
+```
+
+Use the object syntax to provide your own certificate:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    server: {
+      type: 'https',
+      options: {
+        ca: './path/to/server.pem',
+        pfx: './path/to/server.pfx',
+        key: './path/to/server.key',
+        cert: './path/to/server.crt',
+        passphrase: 'webpack-dev-server',
+        requestCert: true,
+      },
+    },
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --server-type https --server-options-key ./path/to/server.key --server-options-cert ./path/to/server.crt --server-options-ca ./path/to/ca.pem --server-options-passphrase webpack-dev-server
+```
+
+It also allows you to set additional [TLS options](https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options) like `minVersion` and you can directly pass the contents of respective files:
+
+**webpack.config.js**
+
+```javascript
+const fs = require('fs');
+const path = require('path');
+
+module.exports = {
+  //...
+  devServer: {
+    server: {
+      type: 'https',
+      options: {
+        minVersion: 'TLSv1.1',
+        key: fs.readFileSync(path.join(__dirname, './server.key')),
+        pfx: fs.readFileSync(path.join(__dirname, './server.pfx')),
+        cert: fs.readFileSync(path.join(__dirname, './server.crt')),
+        ca: fs.readFileSync(path.join(__dirname, './ca.pem')),
+        passphrase: 'webpack-dev-server',
+        requestCert: true,
       },
     },
   },
