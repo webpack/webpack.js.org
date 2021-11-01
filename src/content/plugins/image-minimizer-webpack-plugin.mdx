@@ -1223,14 +1223,14 @@ module.exports = {
 
 ## Additional API
 
-### `normalizeImageminConfig(config)`
+### `imageminNormalizeConfig(config)`
 
 The function normalizes configuration (converts plugins names and options to `Function`s) for using in `imagemin` package directly.
 
 ```js
 const imagemin = require("imagemin");
-const { normalizeImageminConfig } = require("image-minimizer-webpack-plugin");
-const imageminConfig = normalizeImageminConfig({
+const { imageminNormalizeConfig } = require("image-minimizer-webpack-plugin");
+const imageminConfig = imageminNormalizeConfig({
   plugins: [
     "jpegtran",
     [
