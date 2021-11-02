@@ -4658,10 +4658,10 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-directory-tree-webpack-plugin@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/directory-tree-webpack-plugin/-/directory-tree-webpack-plugin-1.0.2.tgz#2457223b6f55bcbb7b3d4788e9469885ac3d85b9"
-  integrity sha512-F1/Jd/caZcPqaLlo1QgRTp4eqT/Pj0DyvIAPAtLJk0LhMz07ie00x8sOzMAS2ZGEvWfcOutvNIFtYZ5+KaKCaw==
+directory-tree-webpack-plugin@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/directory-tree-webpack-plugin/-/directory-tree-webpack-plugin-1.0.3.tgz#ee52f321fedeb744b2f17037d9de48c95e5c54e1"
+  integrity sha512-C8M4X2EBF2usJRL+yINp8Eu/BLv90dnl4bRfsujbeO1hTbIf3cS6UOpRpiHSoXxnYaP4k8D+O7ZSqsR1K6MwMw==
   dependencies:
     directory-tree "^2.0.0"
 
