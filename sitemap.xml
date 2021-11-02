@@ -130,9 +130,6 @@
         <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/configuration</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/concepts/dependency-graph</loc>
     </url>
     <url>
@@ -140,6 +137,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/configuration</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/loaders</loc>
@@ -310,10 +310,10 @@
         <loc>https://webpack.js.org/guides/csp</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/dependency-management</loc>
+        <loc>https://webpack.js.org/guides/development</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/development</loc>
+        <loc>https://webpack.js.org/guides/dependency-management</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/development-vagrant</loc>
@@ -526,10 +526,10 @@
         <loc>https://webpack.js.org/plugins/internal-plugins</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/json-minimizer-webpack-plugin</loc>
+        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
+        <loc>https://webpack.js.org/plugins/json-minimizer-webpack-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/min-chunk-size-plugin</loc>
@@ -547,13 +547,13 @@
         <loc>https://webpack.js.org/plugins/no-emit-on-errors-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/prefetch-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/profiling-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/normal-module-replacement-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/progress-plugin</loc>
