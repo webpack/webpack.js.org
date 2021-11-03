@@ -217,7 +217,9 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                       className="text-blue-400 py-5 text-sm capitalize hover:text-black dark:hover:text-white"
                       activeClassName="active-submenu"
                     >
-                      {child.content}
+                      {child.content === 'api'
+                        ? child.content.toUpperCase()
+                        : child.content}
                     </NavLink>
                   ))}
                 </div>

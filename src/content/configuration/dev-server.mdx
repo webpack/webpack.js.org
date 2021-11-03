@@ -41,7 +41,7 @@ W> `webpack-dev-server v4.0.0+` 要求 `node >= v12.13.0`、`webpack >= v4.37.0`
 **webpack.config.js**
 
 ```javascript
-var path = require('path');
+const path = require('path');
 
 module.exports = {
   //...
@@ -89,7 +89,17 @@ npx webpack serve
 
 CLI 配置项列表可以在 [这里](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS-v4.md) 查询。
 
+<<<<<<< HEAD
 ## devServer.allowedHosts $#devserverallowedhosts$
+=======
+### Usage via API
+
+While it's recommended to run `webpack-dev-server` via the CLI, you may also choose to start a server via the API.
+
+See the related [API documentation for `webpack-dev-server`](/api/webpack-dev-server/).
+
+## devServer.allowedHosts
+>>>>>>> 8c2047b350009634783f58509c12ab86f217f216
 
 `'auto' | 'all'` `[string]`
 
@@ -329,7 +339,76 @@ npx webpack serve --client-progress
 npx webpack serve --no-client-progress
 ```
 
+<<<<<<< HEAD
 ### webSocketTransport $#websockettransport$
+=======
+### reconnect
+
+`boolean = true` `number`
+
+<Badge text="v4.4.0+" />
+
+Tells dev-server the number of times it should try to reconnect the client. When `true` it will try to reconnect unlimited times.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    client: {
+      reconnect: true,
+    },
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --client-reconnect
+```
+
+When set to `false` it will not try to reconnect.
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    client: {
+      reconnect: false,
+    },
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --no-client-reconnect
+```
+
+You can also specify the exact number of times the client should try to reconnect.
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    client: {
+      reconnect: 5,
+    },
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --client-reconnect 5
+```
+
+### webSocketTransport
+>>>>>>> 8c2047b350009634783f58509c12ab86f217f216
 
 `'ws' | 'sockjs'` `string`
 
@@ -536,6 +615,8 @@ npx webpack serve --no-http2
 **webpack.config.js**
 
 ```javascript
+const fs = require('fs');
+
 module.exports = {
   //...
   devServer: {
@@ -543,7 +624,7 @@ module.exports = {
     https: {
       key: fs.readFileSync('/path/to/server.key'),
       cert: fs.readFileSync('/path/to/server.crt'),
-      cacert: fs.readFileSync('/path/to/ca.pem'),
+      ca: fs.readFileSync('/path/to/ca.pem'),
     },
   },
 };
@@ -552,14 +633,24 @@ module.exports = {
 要通过 CLI 使用你的证书，请使用以下配置项：
 
 ```bash
-npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
+npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-ca ./path/to/ca.pem
 ```
 
+<<<<<<< HEAD
 ## devServer.https $#devserverhttps$
 
 `boolean` `object`
 
 默认情况下，开发服务器将通过 HTTP 提供服务。可以选择使用 HTTPS 通过 HTTP/2 提供服务：
+=======
+W> This option is deprecated in favor of [devServer.server](#devserverserver) option.
+
+## devServer.https
+
+`boolean` `object`
+
+By default, dev-server will be served over `HTTP`. It can optionally be served over `HTTPS`:
+>>>>>>> 8c2047b350009634783f58509c12ab86f217f216
 
 **webpack.config.js**
 
@@ -592,10 +683,10 @@ npx webpack serve --no-https
 module.exports = {
   devServer: {
     https: {
-      cacert: './server.pem',
-      pfx: './server.pfx',
-      key: './server.key',
-      cert: './server.crt',
+      ca: './path/to/server.pem',
+      pfx: './path/to/server.pfx',
+      key: './path/to/server.key',
+      cert: './path/to/server.crt',
       passphrase: 'webpack-dev-server',
       requestCert: true,
     },
@@ -608,7 +699,7 @@ module.exports = {
 要通过 CLI 使用自己的证书，请使用以下选项：
 
 ```bash
-npx webpack serve --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-cacert ./path/to/ca.pem
+npx webpack serve --https-request-cert --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-ca ./path/to/ca.pem --https-pfx ./path/to/server.pfx --https-passphrase webpack-dev-server
 ```
 
 `webpack-dev-server >= v4.2.0` 允许你设置额外的 [TLS 配置项](https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options)，比如 `minVersion`。同样你可以直接传递各自文件的内容：
@@ -636,9 +727,15 @@ module.exports = {
 
 W> 不要同时指定 `https.ca` 与 `https.cacert` 配置项，如果指定的话将会使用 `https.ca`。`https.cacert` 已弃用并且将会在下个主要版本中被移除。
 
+<<<<<<< HEAD
 ## devServer.headers $#devserverheaders$
+=======
+W> This option is deprecated in favor of [devServer.server](#devserverserver) option.
 
-`function` `object`
+## devServer.headers
+>>>>>>> 8c2047b350009634783f58509c12ab86f217f216
+
+`array` `function` `object`
 
 为所有响应添加 headers：
 
@@ -655,7 +752,33 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 你也可以传递一个函数：
+=======
+You can also pass an array:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    headers: [
+      {
+        key: 'X-Custom',
+        value: 'foo',
+      },
+      {
+        key: 'Y-Custom',
+        value: 'bar',
+      },
+    ],
+  },
+};
+```
+
+You can also pass a function:
+>>>>>>> 8c2047b350009634783f58509c12ab86f217f216
 
 ```javascript
 module.exports = {
@@ -834,7 +957,11 @@ module.exports = {
 npx webpack serve --hot only
 ```
 
+<<<<<<< HEAD
 T> 注意 [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin/) 是需要的以完全启用 HMR。如果 `webpack` 或者 `webpack-dev-server` 使用 `--hot` 选项启动，该插件会自动添加，因此你可能不需要将其添加到你的 `webpack.config.js` 中。关于更多信息可以查看 [HMR concepts page](/concepts/hot-module-replacement/)。
+=======
+T> Since webpack-dev-server v4, HMR is enabled by default. It automatically applies [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin/) which is required to enable HMR. So you don't have to add this plugin to your `webpack.config.js` when `hot` is set to `true` in config or via the CLI option `--hot`. See the [HMR concepts page](/concepts/hot-module-replacement/) for more information.
+>>>>>>> 8c2047b350009634783f58509c12ab86f217f216
 
 ## devServer.ipc $#devserveripc$
 
@@ -1315,7 +1442,130 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## devServer.setupExitSignals $#devserversetupexitsignals$
+=======
+## devServer.server
+
+`'http' | 'https' | 'spdy'` `string` `object`
+
+<Badge text="v4.4.0+" />
+
+Allows to set server and options (by default 'http').
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    server: 'http',
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --server-type http
+```
+
+To serve over `HTTPS` with a self-signed certificate:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    server: 'https',
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --server-type https
+```
+
+To serve over `HTTP/2` using [spdy](https://www.npmjs.com/package/spdy) with a self-signed certificate:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    server: 'spdy',
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --server-type spdy
+```
+
+Use the object syntax to provide your own certificate:
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  devServer: {
+    server: {
+      type: 'https',
+      options: {
+        ca: './path/to/server.pem',
+        pfx: './path/to/server.pfx',
+        key: './path/to/server.key',
+        cert: './path/to/server.crt',
+        passphrase: 'webpack-dev-server',
+        requestCert: true,
+      },
+    },
+  },
+};
+```
+
+Usage via the CLI:
+
+```bash
+npx webpack serve --server-type https --server-options-key ./path/to/server.key --server-options-cert ./path/to/server.crt --server-options-ca ./path/to/ca.pem --server-options-passphrase webpack-dev-server
+```
+
+It also allows you to set additional [TLS options](https://nodejs.org/api/tls.html#tls_tls_createsecurecontext_options) like `minVersion` and you can directly pass the contents of respective files:
+
+**webpack.config.js**
+
+```javascript
+const fs = require('fs');
+const path = require('path');
+
+module.exports = {
+  //...
+  devServer: {
+    server: {
+      type: 'https',
+      options: {
+        minVersion: 'TLSv1.1',
+        key: fs.readFileSync(path.join(__dirname, './server.key')),
+        pfx: fs.readFileSync(path.join(__dirname, './server.pfx')),
+        cert: fs.readFileSync(path.join(__dirname, './server.crt')),
+        ca: fs.readFileSync(path.join(__dirname, './ca.pem')),
+        passphrase: 'webpack-dev-server',
+        requestCert: true,
+      },
+    },
+  },
+};
+```
+
+## devServer.setupExitSignals
+>>>>>>> 8c2047b350009634783f58509c12ab86f217f216
 
 `boolean = true`
 
@@ -1446,7 +1696,13 @@ T> 推荐使用绝对路径。
 
 ### staticOptions
 
+<<<<<<< HEAD
 可以配置从 [`static.directory`](#directory) 提供静态文件的高级选项。关于可用配置项可以插件 [Express 文档](http://expressjs.com/en/4x/api.html#express.static)。
+=======
+`object`
+
+It is possible to configure advanced options for serving static files from [`static.directory`](#directory). See the [Express documentation](http://expressjs.com/en/4x/api.html#express.static) for the possible options.
+>>>>>>> 8c2047b350009634783f58509c12ab86f217f216
 
 **webpack.config.js**
 

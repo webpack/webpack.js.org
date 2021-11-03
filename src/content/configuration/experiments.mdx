@@ -184,31 +184,51 @@ module.exports = {
 Compile entrypoints and dynamic `import`s only when they are in use. It can be used for either Web or Node.js.
 
 - Type
+
   - `boolean`
   - `object`
+
     ```ts
     {
-      // define a custom backend
-      backend?: ((
-        compiler: webpack.Compiler,
-        client: string,
-        callback: (err?: Error, api?: any) => void
+    // define a custom backend
+    backend?: ((
+      compiler: Compiler,
+      callback: (err?: Error, api?: BackendApi) => void
       ) => void)
-      | ((
-          compiler: webpack.Compiler,
-          client: string
-        ) => Promise<any>)
-      client?: string,
-      entries?: boolean,
-      imports?: boolean,
-      test?: RegExp | string | ((module: import("../lib/Module")) => boolean)
+      | ((compiler: Compiler) => Promise<BackendApi>)
+      | {
+        /**
+         * A custom client.
+        */
+        client?: string;
+
+        /**
+         * Specify where to listen to from the server.
+         */
+        listen?: number | ListenOptions | ((server: typeof Server) => void);
+
+        /**
+         * Specify the protocol the client should use to connect to the server.
+         */
+        protocol?: "http" | "https";
+
+        /**
+         * Specify how to create the server handling the EventSource requests.
+         */
+        server?: ServerOptionsImport | ServerOptionsHttps | (() => typeof Server);
+
+    },
+    entries?: boolean,
+    imports?: boolean,
+    test?: string | RegExp | ((module: Module) => boolean)
     }
     ```
-    - `client`: Path to a custom client, defaults to `webpack/hot/lazy-compilation-{node|web}.js`.
-    - `backend`: Customize the backend, defaults to `webpack/lib/hmr/lazyCompilationBackend`.
+
+    - `backend`: Customize the backend.
     - `entries`: Enable lazy compilation for entries.
     - `imports` <Badge text='5.20.0+' />: Enable lazy compilation for dynamic imports.
     - `test` <Badge text='5.20.0+' />: Specify which imported modules should be lazily compiled.
+
 - Available: 5.17.0+
 - Example 1:
   ```js
