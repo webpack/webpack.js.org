@@ -136,6 +136,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 |       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      | `compiler.devtool` | 启用 / 禁用 source maps 的生成。               |
 |  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |    `undefined`     | 在实际的输入文件之前添加 `Sass` /`SCSS` 代码。 |
 | **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |       `true`       | 启用 / 禁用默认的 Webpack importer。           |
+| **[`warnRuleAsWarning`](#warnruleaswarning)** |     `{Boolean}`      |                 `false`                 | 将 `@warn` 规则视为 webpack 警告。               |
 
 ### `implementation` $#implementation$
 
@@ -605,6 +606,65 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               webpackImporter: false,
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+### `warnRuleAsWarning` $#warnruleaswarning$
+
+Type: `Boolean`
+Default: `false`
+
+将 `@warn` 规则视为 webpack 警告。
+
+> ℹ️ 在下一个大版本发布中它将默认设置为 `true`。
+
+**style.scss**
+
+```scss
+$known-prefixes: webkit, moz, ms, o;
+
+@mixin prefix($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if not index($known-prefixes, $prefix) {
+      @warn "Unknown prefix #{$prefix}.";
+    }
+
+    -#{$prefix}-#{$property}: $value;
+  }
+  #{$property}: $value;
+}
+
+.tilt {
+  // Oops, we typo'd "webkit" as "wekbit"!
+  @include prefix(transform, rotate(15deg), wekbit ms);
+}
+```
+
+给出的代码将抛出 webpack 警告而不是日志。
+
+要忽略不必要的警告，可以使用 [ignoreWarnings](/configuration/other-options/#ignorewarnings) 配置项。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              warnRuleAsWarning: true,
             },
           },
         ],
