@@ -94,6 +94,9 @@
         <loc>https://webpack.js.org/api/module-methods</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/api/module-variables</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/api/node</loc>
     </url>
     <url>
@@ -118,9 +121,6 @@
         <loc>https://webpack.js.org/api/webpack-dev-server</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/module-variables</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
     </url>
     <url>
@@ -130,16 +130,16 @@
         <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/configuration</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/concepts/entry-points</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/configuration</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/loaders</loc>
@@ -244,6 +244,9 @@
         <loc>https://webpack.js.org/contribute/release-process</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/contribute/writers-guide</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/contribute/writing-a-loader</loc>
     </url>
     <url>
@@ -257,9 +260,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/development/how-to-write-a-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/contribute/writers-guide</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/development/plugin-patterns</loc>
@@ -391,13 +391,13 @@
         <loc>https://webpack.js.org/loaders/exports-loader</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/expose-loader</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/file-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/html-loader</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/expose-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/imports-loader</loc>
@@ -598,9 +598,9 @@
         <loc>https://webpack.js.org/api/plugins/resolver</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/template</loc>
+        <loc>https://webpack.js.org/api/plugins/tapable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/tapable</loc>
+        <loc>https://webpack.js.org/api/plugins/template</loc>
     </url>
 </urlset>
