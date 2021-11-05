@@ -129,7 +129,6 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 
 ## 配置选项 $#options$
 
-<<<<<<< HEAD
 |                   名称                    |         类型         |       默认值       | Description                                    |
 | :---------------------------------------: | :------------------: | :----------------: | :--------------------------------------------- |
 |  **[`implementation`](#implementation)**  |      `{Object\|String}`      |       `sass`       | 设置使用的 Sass 的实现。                       |
@@ -137,16 +136,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 |       **[`sourceMap`](#sourcemap)**       |     `{Boolean}`      | `compiler.devtool` | 启用 / 禁用 source maps 的生成。               |
 |  **[`additionalData`](#additionaldata)**  | `{String\|Function}` |    `undefined`     | 在实际的输入文件之前添加 `Sass` /`SCSS` 代码。 |
 | **[`webpackImporter`](#webpackimporter)** |     `{Boolean}`      |       `true`       | 启用 / 禁用默认的 Webpack importer。           |
-=======
-|                     Name                      |         Type         |                 Default                 | Description                                                       |
-| :-------------------------------------------: | :------------------: | :-------------------------------------: | :---------------------------------------------------------------- |
-|    **[`implementation`](#implementation)**    |  `{Object\|String}`  |                 `sass`                  | Setup Sass implementation to use.                                 |
-|       **[`sassOptions`](#sassoptions)**       | `{Object\|Function}` | defaults values for Sass implementation | Options for Sass.                                                 |
-|         **[`sourceMap`](#sourcemap)**         |     `{Boolean}`      |           `compiler.devtool`            | Enables/Disables generation of source maps.                       |
-|    **[`additionalData`](#additionaldata)**    | `{String\|Function}` |               `undefined`               | Prepends/Appends `Sass`/`SCSS` code before the actual entry file. |
-|   **[`webpackImporter`](#webpackimporter)**   |     `{Boolean}`      |                 `true`                  | Enables/Disables the default Webpack importer.                    |
-| **[`warnRuleAsWarning`](#warnruleaswarning)** |     `{Boolean}`      |                 `false`                 | Treats the `@warn` rule as a webpack warning.                     |
->>>>>>> 1d52f0a8d717d359a3c0acc900dcad920f3e0186
+| **[`warnRuleAsWarning`](#warnruleaswarning)** |     `{Boolean}`      |                 `false`                 | 将 `@warn` 规则视为 webpack 警告。               |
 
 ### `implementation` $#implementation$
 
@@ -625,17 +615,14 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## 示例 $#examples$
-=======
-### `warnRuleAsWarning`
+### `warnRuleAsWarning` $#warnruleaswarning$
 
 Type: `Boolean`
 Default: `false`
 
-Treats the `@warn` rule as a webpack warning.
+将 `@warn` 规则视为 webpack 警告。
 
-> ℹ️ It will be `true` by default in the next major release.
+> ℹ️ 在下一个大版本发布中它将默认设置为 `true`。
 
 **style.scss**
 
@@ -659,9 +646,9 @@ $known-prefixes: webkit, moz, ms, o;
 }
 ```
 
-The presented code will throw webpack warning instead logging.
+给出的代码将抛出 webpack 警告而不是日志。
 
-To ignore unnecessary warnings you can use the [ignoreWarnings](/configuration/other-options/#ignorewarnings) option.
+要忽略不必要的警告，可以使用 [ignoreWarnings](/configuration/other-options/#ignorewarnings) 配置项。
 
 **webpack.config.js**
 
@@ -687,8 +674,7 @@ module.exports = {
 };
 ```
 
-## Examples
->>>>>>> 1d52f0a8d717d359a3c0acc900dcad920f3e0186
+## 示例 $#examples$
 
 ### 提取样式表 $#extracts-css-into-separate-files$
 
