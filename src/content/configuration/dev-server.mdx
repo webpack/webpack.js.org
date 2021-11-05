@@ -89,17 +89,13 @@ npx webpack serve
 
 CLI 配置项列表可以在 [这里](https://github.com/webpack/webpack-cli/blob/master/SERVE-OPTIONS-v4.md) 查询。
 
-<<<<<<< HEAD
+### Usage via API $#usageviaapi$
+
+虽然推荐通过 CLI 运行 `webpack-dev-server`，但是你也可以通过 API 来启用服务器。
+
+查看相关的 [`webpack-dev-server` API 文档](/api/webpack-dev-server/)。
+
 ## devServer.allowedHosts $#devserverallowedhosts$
-=======
-### Usage via API
-
-While it's recommended to run `webpack-dev-server` via the CLI, you may also choose to start a server via the API.
-
-See the related [API documentation for `webpack-dev-server`](/api/webpack-dev-server/).
-
-## devServer.allowedHosts
->>>>>>> 8c2047b350009634783f58509c12ab86f217f216
 
 `'auto' | 'all'` `[string]`
 
@@ -339,16 +335,13 @@ npx webpack serve --client-progress
 npx webpack serve --no-client-progress
 ```
 
-<<<<<<< HEAD
-### webSocketTransport $#websockettransport$
-=======
-### reconnect
+### reconnect $#reconnect$
 
 `boolean = true` `number`
 
 <Badge text="v4.4.0+" />
 
-Tells dev-server the number of times it should try to reconnect the client. When `true` it will try to reconnect unlimited times.
+告诉 dev-server 它应该尝试重新连接客户端的次数。当为 `true` 时，它将无限次尝试重新连接。
 
 **webpack.config.js**
 
@@ -363,13 +356,13 @@ module.exports = {
 };
 ```
 
-Usage via the CLI:
+通过 CLI 使用：
 
 ```bash
 npx webpack serve --client-reconnect
 ```
 
-When set to `false` it will not try to reconnect.
+当设置为 `false` 时，它将不会尝试连接。
 
 ```javascript
 module.exports = {
@@ -382,13 +375,13 @@ module.exports = {
 };
 ```
 
-Usage via the CLI:
+通过 CLI 使用：
 
 ```bash
 npx webpack serve --no-client-reconnect
 ```
 
-You can also specify the exact number of times the client should try to reconnect.
+您还可以指定客户端应该尝试重新连接的确切次数。
 
 ```javascript
 module.exports = {
@@ -401,14 +394,13 @@ module.exports = {
 };
 ```
 
-Usage via the CLI:
+通过 CLI 使用：
 
 ```bash
 npx webpack serve --client-reconnect 5
 ```
 
-### webSocketTransport
->>>>>>> 8c2047b350009634783f58509c12ab86f217f216
+### webSocketTransport $#websockettransport$
 
 `'ws' | 'sockjs'` `string`
 
@@ -636,21 +628,13 @@ module.exports = {
 npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-ca ./path/to/ca.pem
 ```
 
-<<<<<<< HEAD
+W> 此配置项已被弃用，以支持 [devServer.server](#devserverserver)。
+
 ## devServer.https $#devserverhttps$
 
 `boolean` `object`
 
-默认情况下，开发服务器将通过 HTTP 提供服务。可以选择使用 HTTPS 通过 HTTP/2 提供服务：
-=======
-W> This option is deprecated in favor of [devServer.server](#devserverserver) option.
-
-## devServer.https
-
-`boolean` `object`
-
-By default, dev-server will be served over `HTTP`. It can optionally be served over `HTTPS`:
->>>>>>> 8c2047b350009634783f58509c12ab86f217f216
+默认情况下，开发服务器将通过 HTTP 提供服务。可以选择使用 HTTPS 提供服务：
 
 **webpack.config.js**
 
@@ -727,13 +711,9 @@ module.exports = {
 
 W> 不要同时指定 `https.ca` 与 `https.cacert` 配置项，如果指定的话将会使用 `https.ca`。`https.cacert` 已弃用并且将会在下个主要版本中被移除。
 
-<<<<<<< HEAD
-## devServer.headers $#devserverheaders$
-=======
-W> This option is deprecated in favor of [devServer.server](#devserverserver) option.
+W> 该配置项已弃用，以支持 [devServer.server](#devserverserver)。
 
-## devServer.headers
->>>>>>> 8c2047b350009634783f58509c12ab86f217f216
+## devServer.headers $#devserverheaders$
 
 `array` `function` `object`
 
@@ -752,10 +732,7 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-你也可以传递一个函数：
-=======
-You can also pass an array:
+你也可以传递一个数组：
 
 **webpack.config.js**
 
@@ -777,8 +754,7 @@ module.exports = {
 };
 ```
 
-You can also pass a function:
->>>>>>> 8c2047b350009634783f58509c12ab86f217f216
+你也可以传递一个函数：
 
 ```javascript
 module.exports = {
@@ -957,11 +933,7 @@ module.exports = {
 npx webpack serve --hot only
 ```
 
-<<<<<<< HEAD
-T> 注意 [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin/) 是需要的以完全启用 HMR。如果 `webpack` 或者 `webpack-dev-server` 使用 `--hot` 选项启动，该插件会自动添加，因此你可能不需要将其添加到你的 `webpack.config.js` 中。关于更多信息可以查看 [HMR concepts page](/concepts/hot-module-replacement/)。
-=======
-T> Since webpack-dev-server v4, HMR is enabled by default. It automatically applies [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin/) which is required to enable HMR. So you don't have to add this plugin to your `webpack.config.js` when `hot` is set to `true` in config or via the CLI option `--hot`. See the [HMR concepts page](/concepts/hot-module-replacement/) for more information.
->>>>>>> 8c2047b350009634783f58509c12ab86f217f216
+T> 从 webpack-dev-server v4 开始，HMR 是默认启用的。它会自动应用 [`webpack.HotModuleReplacementPlugin`](/plugins/hot-module-replacement-plugin/)，这是启用 HMR 所必需的。因此当 `hot` 设置为 `true` 或者通过 CLI 设置 `--hot`，你不需要在你的 `webpack.config.js` 添加该插件。查看 [HMR concepts page](/concepts/hot-module-replacement/) 以获取更多信息。
 
 ## devServer.ipc $#devserveripc$
 
@@ -1442,16 +1414,13 @@ module.exports = {
 };
 ```
 
-<<<<<<< HEAD
-## devServer.setupExitSignals $#devserversetupexitsignals$
-=======
-## devServer.server
+## devServer.server $#devserverserver$
 
 `'http' | 'https' | 'spdy'` `string` `object`
 
 <Badge text="v4.4.0+" />
 
-Allows to set server and options (by default 'http').
+允许设置服务器和配置项（默认为 'http'）。
 
 **webpack.config.js**
 
@@ -1464,13 +1433,13 @@ module.exports = {
 };
 ```
 
-Usage via the CLI:
+通过 CLI 使用：
 
 ```bash
 npx webpack serve --server-type http
 ```
 
-To serve over `HTTPS` with a self-signed certificate:
+使用自签名证书通过 `HTTPS` 提供服务：
 
 **webpack.config.js**
 
@@ -1483,13 +1452,13 @@ module.exports = {
 };
 ```
 
-Usage via the CLI:
+通过 CLI 使用：
 
 ```bash
 npx webpack serve --server-type https
 ```
 
-To serve over `HTTP/2` using [spdy](https://www.npmjs.com/package/spdy) with a self-signed certificate:
+使用 [spdy](https://www.npmjs.com/package/spdy) 使用自签名证书通过 `HTTP/2` 提供服务：
 
 **webpack.config.js**
 
@@ -1502,13 +1471,13 @@ module.exports = {
 };
 ```
 
-Usage via the CLI:
+通过 CLI 使用：
 
 ```bash
 npx webpack serve --server-type spdy
 ```
 
-Use the object syntax to provide your own certificate:
+使用对象语法提供自己的证书：
 
 **webpack.config.js**
 
@@ -1531,7 +1500,7 @@ module.exports = {
 };
 ```
 
-Usage via the CLI:
+通过 CLI 使用：
 
 ```bash
 npx webpack serve --server-type https --server-options-key ./path/to/server.key --server-options-cert ./path/to/server.crt --server-options-ca ./path/to/ca.pem --server-options-passphrase webpack-dev-server
@@ -1564,8 +1533,7 @@ module.exports = {
 };
 ```
 
-## devServer.setupExitSignals
->>>>>>> 8c2047b350009634783f58509c12ab86f217f216
+## devServer.setupExitSignals $#devserversetupexitsignals$
 
 `boolean = true`
 
@@ -1696,13 +1664,9 @@ T> 推荐使用绝对路径。
 
 ### staticOptions
 
-<<<<<<< HEAD
-可以配置从 [`static.directory`](#directory) 提供静态文件的高级选项。关于可用配置项可以插件 [Express 文档](http://expressjs.com/en/4x/api.html#express.static)。
-=======
 `object`
 
-It is possible to configure advanced options for serving static files from [`static.directory`](#directory). See the [Express documentation](http://expressjs.com/en/4x/api.html#express.static) for the possible options.
->>>>>>> 8c2047b350009634783f58509c12ab86f217f216
+可以配置从 [`static.directory`](#directory) 提供静态文件的高级选项。关于可用配置项可以插件 [Express 文档](http://expressjs.com/en/4x/api.html#express.static)。
 
 **webpack.config.js**
 

@@ -99,30 +99,19 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "front-matter": "^4.0.2",
-<<<<<<< HEAD
     "github-slugger": "^1.3.0",
     "html-loader": "^2.1.2",
-    "html-webpack-plugin": "^5.4.0",
-    "http-server": "^13.0.2",
-    "husky": "^7.0.2",
-    "hyperlink": "^4.7.0",
-=======
     "html-webpack-plugin": "^5.5.0",
     "http-server": "^14.0.0",
     "husky": "^7.0.4",
     "hyperlink": "^5.0.0",
->>>>>>> 8c2047b350009634783f58509c12ab86f217f216
     "jest": "^27.3.1",
     "lint-staged": "^11.2.6",
     "lodash": "^4.17.21",
     "markdownlint": "^0.24.0",
     "markdownlint-cli": "^0.29.0",
-<<<<<<< HEAD
     "mdast-util-to-string": "^1.1.0",
-    "mini-css-extract-plugin": "^2.4.2",
-=======
     "mini-css-extract-plugin": "^2.4.3",
->>>>>>> 8c2047b350009634783f58509c12ab86f217f216
     "mkdirp": "^1.0.4",
     "modularscale-sass": "^3.0.3",
     "node-fetch": "^3.0.0",
