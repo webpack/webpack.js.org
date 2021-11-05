@@ -117,7 +117,7 @@
     "redirect-webpack-plugin": "^1.0.0",
     "remark": "^14.0.1",
     "remark-autolink-headings": "7.0.1",
-    "remark-emoji": "^3.0.1",
+    "remark-emoji": "^3.0.2",
     "remark-extract-anchors": "1.1.1",
     "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^1.0.0",
