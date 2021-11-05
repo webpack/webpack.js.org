@@ -45,6 +45,8 @@ W> **HMR** 不适用于生产环境，这意味着它应当用于开发环境。
 然后使用 webpack 内置的 HMR 插件。我们还要删除掉 `print.js` 的入口起点，
 因为现在已经在 `index.js` 模块中引用了它。
 
+从 `webpack-dev-server` v4.0.0 开始，热模块替换是默认开启的。
+
 T> 如果你在技术选型中使用了 `webpack-dev-middleware` 而没有使用 `webpack-dev-server`，请使用 [`webpack-hot-middleware`](https://github.com/webpack-contrib/webpack-hot-middleware) 依赖包，以在你的自定义服务器或应用程序上启用 HMR。
 
 **webpack.config.js**
