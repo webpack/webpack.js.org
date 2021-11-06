@@ -174,9 +174,9 @@ Minimum size, in bytes, for a chunk to be generated.
 
 `number` `{ [index: string]: number }`
 
-Minimum size reduction to the whole compilation, in bytes, needed for a chunk to be generated.
+Minimum size reduction to the main chunk (bundle), in bytes, needed for a chunk to be generated. Meaning if splitting into a chunk does not reduce the size of the main chunk (bundle) by the given amount of bytes, it won't be split, even if it meets the `splitChunks.minSize` value.
 
-T> Both `splitChunks.minSizeReduction` and `splitChunks.minSize` need to be fulfilled for a chunk to be generated. You may want to reduce `minSize` when using `minSizeReduction`.
+T> Both `splitChunks.minSizeReduction` and `splitChunks.minSize` need to be fulfilled for a chunk to be generated.
 
 ### splitChunks.enforceSizeThreshold
 
