@@ -708,16 +708,13 @@ The loader could look like this:
 **extract-style-loader/index.js**
 
 ```javascript
-const stringifyRequest = require('loader-utils').stringifyRequest;
-const getRemainingRequest = require('loader-utils').getRemainingRequest;
 const getStylesLoader = require.resolve('./getStyle');
 
 module.exports = function (source) {
   if (STYLES_REGEXP.test(source)) {
     source = source.replace(STYLES_REGEXP, '');
-    const remReq = getRemainingRequest(this);
-    return `import ${stringifyRequest(
-      `${this.resource}.css!=!${getStylesLoader}!${remReq}`
+    return `import ${JSON.stringify(
+      this.utils.contextify(this.context || this.rootContext, `${this.resource}.css!=!${getStylesLoader}!${this.remainingRequest}`)
     )};${source}`;
   }
   return source;
