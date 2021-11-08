@@ -19,7 +19,8 @@ W> Because experimental features have relaxed semantic versioning and might cont
 
 Available options:
 
-- `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module.
+- `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module. And it is enabled by default when [`experiments.futureDefaults`](#experimentsfuturedefaults) is set to `true`.
+- [`backCompat`](#experimentsbackcompat)
 - [`buildHttp`](#experimentsbuildhttp)
 - [`cacheUnaffected`](#experimentscacheunaffected)
 - [`futureDefaults`](#experimentsfuturedefaults)
@@ -27,7 +28,7 @@ Available options:
 - [`lazyCompilation`](#experimentslazycompilation)
 - [`outputModule`](#experimentsoutputmodule)
 - `syncWebAssembly`: Support the old WebAssembly like in webpack 4.
-- `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level.
+- `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level. And it is enabled by default when [`experiments.futureDefaults`](#experimentsfuturedefaults) is set to `true`.
 
 **webpack.config.js**
 
@@ -42,6 +43,21 @@ module.exports = {
     outputModule: true,
     syncWebAssembly: true,
     topLevelAwait: true,
+  },
+};
+```
+
+### experiments.backCompat
+
+Enable backward-compat layer with deprecation warnings for many webpack 4 APIs.
+
+- Type: `boolean`
+
+```js
+module.exports = {
+  //...
+  experiments: {
+    backCompat: true,
   },
 };
 ```
