@@ -22,7 +22,8 @@ W> 由于实验特性具有相对 宽松的语义版本，可能会有重大的�
 
 Available options:
 
-- `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module.
+- `asyncWebAssembly`: Support the new WebAssembly according to the [updated specification](https://github.com/WebAssembly/esm-integration), it makes a WebAssembly module an async module. And it is enabled by default when [`experiments.futureDefaults`](#experimentsfuturedefaults) is set to `true`.
+- [`backCompat`](#experimentsbackcompat)
 - [`buildHttp`](#experimentsbuildhttp)
 - [`cacheUnaffected`](#experimentscacheunaffected)
 - [`futureDefaults`](#experimentsfuturedefaults)
@@ -30,7 +31,7 @@ Available options:
 - [`lazyCompilation`](#experimentslazycompilation)
 - [`outputModule`](#experimentsoutputmodule)
 - `syncWebAssembly`: Support the old WebAssembly like in webpack 4.
-- `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level.
+- `topLevelAwait`: Support the [Top Level Await Stage 3 proposal](https://github.com/tc39/proposal-top-level-await), it makes the module an async module when `await` is used on the top-level. And it is enabled by default when [`experiments.futureDefaults`](#experimentsfuturedefaults) is set to `true`.
 
 **webpack.config.js**
 
@@ -49,7 +50,26 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### experiments.buildHttp $#experimentsbuildhttp$
+=======
+### experiments.backCompat
+
+Enable backward-compat layer with deprecation warnings for many webpack 4 APIs.
+
+- Type: `boolean`
+
+```js
+module.exports = {
+  //...
+  experiments: {
+    backCompat: true,
+  },
+};
+```
+
+### experiments.buildHttp
+>>>>>>> 6fa86b993ce1a0efea7f42a2b672e6e6159ed7b9
 
 When enabled, webpack can build remote resources that begin with the `http(s):` protocol.
 

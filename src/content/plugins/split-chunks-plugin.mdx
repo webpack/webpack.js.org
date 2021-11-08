@@ -104,6 +104,8 @@ W> 从 webpack 5 开始，不再允许将 entry 名称传递给 `{cacheGroup}.te
 
 这表明将选择哪些 chunk 进行优化。当提供一个字符串，有效值为 `all`，`async` 和 `initial`。设置为 `all` 可能特别强大，因为这意味着 chunk 可以在异步和非异步 chunk 之间共享。
 
+Note that it is applied to the fallback cache group as well (`splitChunks.fallbackCacheGroup.chunks`).
+
 **webpack.config.js**
 
 ```js
