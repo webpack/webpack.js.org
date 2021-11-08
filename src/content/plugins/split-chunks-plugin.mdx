@@ -101,6 +101,8 @@ By default webpack will generate names using origin and name of the chunk (e.g. 
 
 This indicates which chunks will be selected for optimization. When a string is provided, valid values are `all`, `async`, and `initial`. Providing `all` can be particularly powerful, because it means that chunks can be shared even between async and non-async chunks.
 
+Note that it is applied to the fallback cache group as well (`splitChunks.fallbackCacheGroup.chunks`).
+
 **webpack.config.js**
 
 ```js
