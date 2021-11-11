@@ -7,6 +7,7 @@ contributors:
   - mtrivera
   - byzyk
   - EugeneHlushko
+  - chenxsan
 translators:
   - QC-L
   - lcxfs1991
@@ -179,6 +180,15 @@ Note that if you're already using [`babel-loader`](https://github.com/babel/babe
 ```
 
 查看 [devtool](/configuration/devtool/) 文档以了解更多信息。
+
+## Client types $#client-types$
+
+你可以在 TypeScript 代码中使用 webpack 特定的特性，比如 [`import.meta.webpack`](/api/module-variables/#importmetawebpack)。并且 webpack 也会为它们提供类型支持，只需要添加一个 TypeScript [`reference`](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html#-reference-types-) 声明：
+
+```ts
+/// <reference types="webpack/module" />
+console.log(import.meta.webpack); // 没有上面的声明的话，TypeScript 会抛出一个错误
+```
 
 ## 使用第三方类库 $#using-third-party-libraries$
 
