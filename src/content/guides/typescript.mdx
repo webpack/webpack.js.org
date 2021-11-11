@@ -7,13 +7,10 @@ contributors:
   - mtrivera
   - byzyk
   - EugeneHlushko
-<<<<<<< HEAD
+  - chenxsan
 translators:
   - QC-L
   - lcxfs1991
-=======
-  - chenxsan
->>>>>>> 6fa86b993ce1a0efea7f42a2b672e6e6159ed7b9
 ---
 
 T> 本指南继续沿用 [_起步_](/guides/getting-started/) 中的代码示例。
@@ -184,20 +181,16 @@ Note that if you're already using [`babel-loader`](https://github.com/babel/babe
 
 查看 [devtool](/configuration/devtool/) 文档以了解更多信息。
 
-<<<<<<< HEAD
-## 使用第三方类库 $#using-third-party-libraries$
-=======
-## Client types
+## Client types $#client-types$
 
-It's possible to use webpack specific features in your TypeScript code, such as [`import.meta.webpack`](/api/module-variables/#importmetawebpack). And webpack provides types for them as well, just add a TypeScript [`reference`](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html#-reference-types-) directive to declare it:
+你可以在 TypeScript 代码中使用 webpack 特定的特性，比如 [`import.meta.webpack`](/api/module-variables/#importmetawebpack)。并且 webpack 也会为它们提供类型支持，只需要添加一个 TypeScript [`reference`](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html#-reference-types-) 声明：
 
 ```ts
 /// <reference types="webpack/module" />
-console.log(import.meta.webpack); // without reference declared above, TypeScript will throw an error
+console.log(import.meta.webpack); // 没有上面的声明的话，TypeScript 会抛出一个错误
 ```
 
-## Using Third Party Libraries
->>>>>>> 6fa86b993ce1a0efea7f42a2b672e6e6159ed7b9
+## 使用第三方类库 $#using-third-party-libraries$
 
 在从 npm 安装 third party library(第三方库) 时，一定要记得同时安装此 library 的类型声明文件(typing definition)。你可以从 [TypeSearch](https://microsoft.github.io/TypeSearch/) 中找到并安装这些第三方库的类型声明文件。
 
