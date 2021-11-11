@@ -108,7 +108,7 @@
     "mini-css-extract-plugin": "^2.4.4",
     "mkdirp": "^1.0.4",
     "modularscale-sass": "^3.0.3",
-    "node-fetch": "^3.0.0",
+    "node-fetch": "^3.1.0",
     "npm-run-all": "^4.1.1",
     "postcss": "^8.3.11",
     "postcss-loader": "^6.2.0",
