@@ -37,6 +37,24 @@ The top-level `output` key contains a set of options instructing webpack on how 
 
 The same as [`output.filename`](#outputfilename) but for [Asset Modules](/guides/asset-modules/).
 
+## output.asyncChunks
+
+`boolean = true`
+
+Create async chunks that are loaded on demand.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    asyncChunks: true,
+  },
+};
+```
+
 ## output.auxiliaryComment
 
 W> Prefer to use [`output.library.auxiliaryComment`](#outputlibraryauxiliarycomment) instead.
