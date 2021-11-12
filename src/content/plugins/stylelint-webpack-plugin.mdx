@@ -22,7 +22,13 @@ translators:
 
 
 
+<<<<<<< HEAD
 该插件使用 [`stylelint`](https://stylelint.io/) 帮助你在样式代码中避免错误并强制规范。
+=======
+> This is stylelint-webpack-plugin 3.0 which works only with webpack 5. For the webpack 4, see the [2.x branch](https://github.com/webpack-contrib/stylelint-webpack-plugin/tree/2.x).
+
+This plugin uses [`stylelint`](https://stylelint.io/) that helps you avoid errors and enforce conventions in your styles.
+>>>>>>> 0c3193e78672d8fed04b7cdd0ed68faa73cdf126
 
 ## Getting Started $#getting-started$
 
@@ -52,7 +58,11 @@ module.exports = {
 
 ## 选项 $#options$
 
+<<<<<<< HEAD
 有关可用选项的完整列表请参阅 [styleint 的选项](http://stylelint.io/user-guide/node-api/#options)，这些选项直接传递给 `stylelint`。
+=======
+See [stylelint's options](https://stylelint.io/user-guide/usage/node-api#options) for the complete list of options available. These options are passed through to the `stylelint` directly.
+>>>>>>> 0c3193e78672d8fed04b7cdd0ed68faa73cdf126
 
 ### `configFile` $#configfile$
 
@@ -61,7 +71,11 @@ module.exports = {
 
 指定 `stylelint` 配置文件的位置。
 
+<<<<<<< HEAD
 **注意：** 默认情况下由 [`stylelint` 处理](http://stylelint.io/user-guide/configuration/)。
+=======
+**Note:** By default this is [handled by `stylelint`](https://stylelint.io/user-guide/configure).
+>>>>>>> 0c3193e78672d8fed04b7cdd0ed68faa73cdf126
 
 ### `context` $#context$
 
@@ -96,14 +110,22 @@ module.exports = {
 - 类型：`Boolean`
 - 默认值：`false`
 
+<<<<<<< HEAD
 如果值为 `true`，`stylelint` 将修复尽可能多的 error。修复真实的源文件。报告所有未修复的 errors。请参阅 [自动修复错误](https://stylelint.io/user-guide/cli#autofixing-errors) 文档。
+=======
+If `true`, `stylelint` will fix as many errors as possible. The fixes are made to the actual source files. All unfixed errors will be reported. See [Autofixing errors](https://stylelint.io/user-guide/usage/options#fix) docs.
+>>>>>>> 0c3193e78672d8fed04b7cdd0ed68faa73cdf126
 
 ### `formatter` $#formatter$
 
 - 类型：`String|Function`
 - 默认值：`'string'`
 
+<<<<<<< HEAD
 指定要用于格式化结果的 formatter。请参阅 [formatter 选项](https://stylelint.io/user-guide/node-api#formatter)。
+=======
+Specify the formatter that you would like to use to format your results. See [formatter option](https://stylelint.io/user-guide/usage/options#formatter).
+>>>>>>> 0c3193e78672d8fed04b7cdd0ed68faa73cdf126
 
 ### `lintDirtyModulesOnly` $#lintdirtymodulesonly$
 
