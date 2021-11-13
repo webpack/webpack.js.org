@@ -772,7 +772,7 @@ module.exports = {
       chunkOrigins: true,
       // show the origin of a chunk (why was this chunk created)
       chunkRelations: true,
-      // show relations to other chunks (parents, children, sibilings)
+      // show relations to other chunks (parents, children, siblings)
       dependentModules: true,
       // show modules that are dependencies of other modules in that chunk
     </advancedChunks>
@@ -932,7 +932,7 @@ module.exports = {
       // determine which exports are used by modules and
       // remove the unused ones
       realContentHash: true,
-      // caculcate a contenthash for assets based on the content
+      // calculate a contenthash for assets based on the content
       removeAvailableModules: true,
       // run extra pass to determine modules that are already in
       // parent chunks and remove them
@@ -1101,7 +1101,7 @@ module.exports = {
       aggregateTimeout: 1000, // in ms
       // aggregates multiple changes to a single rebuild
       poll: true,
-      poll: 500, // intervall in ms
+      poll: 500, // interval in ms
       // enables polling mode for watching
       // must be used on filesystems that doesn't notify on change
       // i. e. nfs shares
