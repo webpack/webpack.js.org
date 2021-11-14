@@ -155,12 +155,21 @@ module.exports = {
 
 此选项支持以下选项：
 
+<<<<<<< HEAD
 | 选项              | 描述                                                                       |
 | ----------------- | -------------------------------------------------------------------------- |
 | `'size'`          | 简写形式 — 通常只有一个字符 — 专注于最小的下载 size。                      |
 | `'deterministic'` | 简写形式 - 通常两个字符 — 在添加或移除 export 时不会改变。适用于长效缓存。 |
 | `true`            | 等价于 `'deterministic'`                                                   |
 | `false`           | 保留原名，有利于阅读和调试。                                               |
+=======
+| Option            | Description                                                                                                          |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `'size'`          | Short names - usually a single char - focused on minimal download size.                                              |
+| `'deterministic'` | Short names - usually two chars - which will not change when adding or removing exports. Good for long term caching. |
+| `true`            | Same as `'deterministic'`                                                                                            |
+| `false`           | Keep original name. Good for readability and debugging.                                                              |
+>>>>>>> 4d4ce101acec57e3fbd968bd3734bc5e03cfd9b2
 
 **webpack.config.js**
 

@@ -41,7 +41,29 @@ translators:
 
 与 [`output.filename`](#outputfilename) 相同，不过应用于 [Asset Modules](/guides/asset-modules/)。
 
+<<<<<<< HEAD
 ## output.auxiliaryComment $#outputauxiliarycomment$
+=======
+## output.asyncChunks
+
+`boolean = true`
+
+Create async chunks that are loaded on demand.
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  //...
+  output: {
+    //...
+    asyncChunks: true,
+  },
+};
+```
+
+## output.auxiliaryComment
+>>>>>>> 4d4ce101acec57e3fbd968bd3734bc5e03cfd9b2
 
 W> 最好使用 [`output.library.auxiliaryComment`](#outputlibraryauxiliarycomment)。
 
@@ -632,6 +654,7 @@ type ModulePathData = {
 
 T> 在某些上下文中，属性将使用 JavaScript 代码表达式代替原始值。在此情况下，`WithLength` 变量是可用的，应该使用它来代替对原始值的分片操作。
 
+<<<<<<< HEAD
 ## output.futureEmitAssets $#outputfutureemitassets$
 
 `boolean = false`
@@ -650,6 +673,9 @@ module.exports = {
 ```
 
 ## output.globalObject $#outputglobalobject$
+=======
+## output.globalObject
+>>>>>>> 4d4ce101acec57e3fbd968bd3734bc5e03cfd9b2
 
 `string = 'window'`
 

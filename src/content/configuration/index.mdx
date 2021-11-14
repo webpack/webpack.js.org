@@ -775,7 +775,7 @@ module.exports = {
       chunkOrigins: true,
       // show the origin of a chunk (why was this chunk created)
       chunkRelations: true,
-      // show relations to other chunks (parents, children, sibilings)
+      // show relations to other chunks (parents, children, siblings)
       dependentModules: true,
       // show modules that are dependencies of other modules in that chunk
     </advancedChunks>
@@ -935,7 +935,7 @@ module.exports = {
       // determine which exports are used by modules and
       // remove the unused ones
       realContentHash: true,
-      // caculcate a contenthash for assets based on the content
+      // calculate a contenthash for assets based on the content
       removeAvailableModules: true,
       // run extra pass to determine modules that are already in
       // parent chunks and remove them
@@ -1104,10 +1104,17 @@ module.exports = {
       aggregateTimeout: 1000, // 以毫秒为单位
       // 将多个修改聚合到单个 rebuild
       poll: true,
+<<<<<<< HEAD
       poll: 500, // 以毫秒为间隔单位
       // 在 watch 模式中启用轮询
       // 必须用在不通知更改的文件系统中
       // 即 nfs shares
+=======
+      poll: 500, // interval in ms
+      // enables polling mode for watching
+      // must be used on filesystems that doesn't notify on change
+      // i. e. nfs shares
+>>>>>>> 4d4ce101acec57e3fbd968bd3734bc5e03cfd9b2
     },
   </advancedCaching>
   <advancedBuild "#">
