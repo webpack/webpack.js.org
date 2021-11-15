@@ -10,13 +10,12 @@ HelloDarkness.propTypes = {
   switchTheme: PropTypes.func,
 };
 
-HelloDarkness.defaultProps = {
-  theme: LIGHT,
-};
 export default function HelloDarkness() {
   const [theme, setTheme] = useLocalStorage(
     THEME_LOCAL_STORAGE_KEY,
-    THEME.LIGHT
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? THEME.DARK
+      : THEME.LIGHT
   );
   const applyTheme = (theme) => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -26,6 +25,16 @@ export default function HelloDarkness() {
       document.documentElement.classList.remove(THEME.DARK);
     }
   };
+  useEffect(() => {
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', function (e) {
+        let changedTheme = e.matches ? THEME.DARK : THEME.LIGHT;
+        applyTheme(changedTheme);
+        setTheme(changedTheme);
+      });
+  }, [setTheme]);
+
   useEffect(() => {
     applyTheme(theme);
   }, [theme]);
