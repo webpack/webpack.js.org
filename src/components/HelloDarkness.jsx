@@ -13,23 +13,21 @@ HelloDarkness.propTypes = {
 export default function HelloDarkness() {
   const [theme, setTheme] = useLocalStorage(
     THEME_LOCAL_STORAGE_KEY,
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? THEME.DARK
-      : THEME.LIGHT
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? DARK : LIGHT
   );
   const applyTheme = (theme) => {
     document.documentElement.setAttribute('data-theme', theme);
-    if (theme === THEME.DARK) {
-      document.documentElement.classList.add(THEME.DARK);
+    if (theme === DARK) {
+      document.documentElement.classList.add(DARK);
     } else {
-      document.documentElement.classList.remove(THEME.DARK);
+      document.documentElement.classList.remove(DARK);
     }
   };
   useEffect(() => {
     window
       .matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', function (e) {
-        let changedTheme = e.matches ? THEME.DARK : THEME.LIGHT;
+        let changedTheme = e.matches ? DARK : LIGHT;
         applyTheme(changedTheme);
         setTheme(changedTheme);
       });
