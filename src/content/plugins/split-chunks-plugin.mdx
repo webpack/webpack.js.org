@@ -18,6 +18,7 @@ contributors:
   - rohrlaf
   - jamesgeorge007
   - anshumanv
+  - snitin315
 translators:
   - weiyuan0609
   - jacob-lcs
@@ -170,9 +171,17 @@ Sets the size types which are used when a number is used for sizes.
 
 ### splitChunks.minSize $#splitchunksminsize$
 
-`number = 20000`
+`number = 20000` `{ [index: string]: number }`
 
 生成 chunk 的最小体积（以 bytes 为单位）。
+
+### splitChunks.minSizeReduction $#splitchunksminsizereduction$
+
+`number` `{ [index: string]: number }`
+
+生成 chunk 所需的主 chunk（bundle）的最小体积（以字节为单位）缩减。这意味着如果分割成一个 chunk 并没有减少主 chunk（bundle）的给定字节数，它将不会被分割，即使它满足 `splitChunks.minSize`。
+
+T> 为了生成 chunk，`splitChunks.minSizeReduction` 与 `splitChunks.minSize` 都需要被满足。
 
 ### splitChunks.enforceSizeThreshold $#splitchunksenforcesizethreshold$
 
