@@ -18,13 +18,10 @@ contributors:
   - rohrlaf
   - jamesgeorge007
   - anshumanv
-<<<<<<< HEAD
+  - snitin315
 translators:
   - weiyuan0609
   - jacob-lcs
-=======
-  - snitin315
->>>>>>> 4d4ce101acec57e3fbd968bd3734bc5e03cfd9b2
 related:
   - title: webpack's automatic deduplication algorithm example
     url: https://github.com/webpack/webpack/blob/master/examples/many-pages/README.md
@@ -178,19 +175,15 @@ Sets the size types which are used when a number is used for sizes.
 
 生成 chunk 的最小体积（以 bytes 为单位）。
 
-<<<<<<< HEAD
-### splitChunks.enforceSizeThreshold $#splitchunksenforcesizethreshold$
-=======
-### splitChunks.minSizeReduction
+### splitChunks.minSizeReduction $#splitchunksminsizereduction$
 
 `number` `{ [index: string]: number }`
 
-Minimum size reduction to the main chunk (bundle), in bytes, needed for a chunk to be generated. Meaning if splitting into a chunk does not reduce the size of the main chunk (bundle) by the given amount of bytes, it won't be split, even if it meets the `splitChunks.minSize` value.
+生成 chunk 所需的主 chunk（bundle）的最小体积（以字节为单位）缩减。这意味着如果分割成一个 chunk 并没有减少主 chunk（bundle）的给定字节数，它将不会被分割，即使它满足 `splitChunks.minSize`。
 
-T> Both `splitChunks.minSizeReduction` and `splitChunks.minSize` need to be fulfilled for a chunk to be generated.
+T> 为了生成 chunk，`splitChunks.minSizeReduction` 与 `splitChunks.minSize` 都需要被满足。
 
-### splitChunks.enforceSizeThreshold
->>>>>>> 4d4ce101acec57e3fbd968bd3734bc5e03cfd9b2
+### splitChunks.enforceSizeThreshold $#splitchunksenforcesizethreshold$
 
 #### `splitChunks.cacheGroups.{cacheGroup}.enforceSizeThreshold` $#splitchunkscachegroupscachegroupenforcesizethreshold$
 
