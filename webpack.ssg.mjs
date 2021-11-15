@@ -51,6 +51,7 @@ export default (env) =>
         globals: {
           window: {
             __ssgrun: true,
+            matchMedia: () => ({matches: true})
           },
         },
         paths,
