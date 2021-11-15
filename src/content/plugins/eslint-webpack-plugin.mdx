@@ -22,13 +22,9 @@ repo: https://github.com/webpack-contrib/eslint-webpack-plugin
 
 
 
-<<<<<<< HEAD
-该插件使用 [`eslint`](https://eslint.org/) 来查找和修复 JavaScript 代码中的问题。
-=======
-> This is eslint-webpack-plugin 3.0 which works only with webpack 5. For the webpack 4, see the [2.x branch](https://github.com/webpack-contrib/eslint-webpack-plugin/tree/2.x).
+> eslint-webpack-plugin 3.0 仅支持 webpack 5。对于 webpack 4 请查看 [2.x 分支](https://github.com/webpack-contrib/eslint-webpack-plugin/tree/2.x)。
 
-This plugin uses [`eslint`](https://eslint.org/) to find and fix problems in your JavaScript code
->>>>>>> 0c3193e78672d8fed04b7cdd0ed68faa73cdf126
+该插件使用 [`eslint`](https://eslint.org/) 来查找和修复 JavaScript 代码中的问题。
 
 ## 开始 $#getting-started$
 
@@ -58,19 +54,11 @@ module.exports = {
 
 ## 选项 $#options$
 
-<<<<<<< HEAD
-你可以传入 [eslint 参数](https://eslint.org/docs/developer-guide/nodejs-api#%e2%97%86-new-eslint-options)。
+你可以传入 [eslint 参数](https://eslint.org/docs/developer-guide/nodejs-api#-new-eslintoptions)。
 
 注意你提供的配置选项会传给 `ESLint` 类。
 这是一组和你在 `package.json` 与 `.eslintrc` 所指定选项不同的选项。
-查阅 [eslint 文档](https://eslint.org/docs/developer-guide/nodejs-api#%e2%97%86-new-eslint-options) 获取更多详情。
-=======
-You can pass [eslint options](https://eslint.org/docs/developer-guide/nodejs-api#-new-eslintoptions).
-
-Note that the config option you provide will be passed to the `ESLint` class.
-This is a different set of options than what you'd specify in `package.json` or `.eslintrc`.
-See the [eslint docs](https://eslint.org/docs/developer-guide/nodejs-api#-new-eslintoptions) for more details.
->>>>>>> 0c3193e78672d8fed04b7cdd0ed68faa73cdf126
+查阅 [eslint 文档](https://eslint.org/docs/developer-guide/nodejs-api#-new-eslintoptions) 获取更多详情。
 
 **警告**: 在 eslint-webpack-plugin 1.x 版本中，配置项会传递给已废弃的 [CLIEngine](https://eslint.org/docs/developer-guide/nodejs-api#cliengine)。
 
@@ -86,11 +74,7 @@ See the [eslint docs](https://eslint.org/docs/developer-guide/nodejs-api#-new-es
 - 类型：`String`
 - 默认值：`eslint`
 
-<<<<<<< HEAD
 用于 linting 的 `eslint` 实例的路径。如果 `eslintPath` 是类似官方 eslint 的目录，或者指定了 `formatter` 选项，那么就不需要安装 `eslint` 了。
-=======
-Path to `eslint` instance that will be used for linting. If the `eslintPath` is a folder like a official eslint, or specify a `formatter` option. now you don't have to install `eslint`.
->>>>>>> 0c3193e78672d8fed04b7cdd0ed68faa73cdf126
 
 ### `extensions` $#estensions$
 
@@ -111,26 +95,16 @@ Path to `eslint` instance that will be used for linting. If the `eslintPath` is 
 - 类型：`String|Array[String]`
 - 默认值：`null`
 
-<<<<<<< HEAD
 指定目录、文件或 globs ，必须是相对于 `options.context` 的相对路径。
 如果是目录则递归查找所有匹配 `options.extensions` 选项的文件。
 如果是文件或 globs 则忽略 `options.extensions` 选项。
-=======
-Specify directories, files, or globs. Must be relative to `options.context`.
-Directories are traversed recursively looking for files matching `options.extensions`.
-File and glob patterns ignore `options.extensions`.
->>>>>>> 0c3193e78672d8fed04b7cdd0ed68faa73cdf126
 
 ### `fix` $#fix$
 
 - 类型：`Boolean`
 - 默认值：`false`
 
-<<<<<<< HEAD
-启用 [ESLint 自动修复特性](https://eslint.org/docs/developer-guide/nodejs-api#%e2%97%86-eslint-outputfixes-results)。
-=======
-Will enable [ESLint autofix feature](https://eslint.org/docs/developer-guide/nodejs-api#-eslintoutputfixesresults).
->>>>>>> 0c3193e78672d8fed04b7cdd0ed68faa73cdf126
+启用 [ESLint 自动修复特性](https://eslint.org/docs/developer-guide/nodejs-api#-eslintoutputfixesresults)。
 
 **小心: 该选项会修改源文件。**
 
