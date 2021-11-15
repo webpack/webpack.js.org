@@ -22,6 +22,8 @@ repo: https://github.com/webpack-contrib/eslint-webpack-plugin
 
 
 
+> eslint-webpack-plugin 3.0 仅支持 webpack 5。对于 webpack 4 请查看 [2.x 分支](https://github.com/webpack-contrib/eslint-webpack-plugin/tree/2.x)。
+
 该插件使用 [`eslint`](https://eslint.org/) 来查找和修复 JavaScript 代码中的问题。
 
 ## 开始 $#getting-started$
@@ -52,11 +54,11 @@ module.exports = {
 
 ## 选项 $#options$
 
-你可以传入 [eslint 参数](https://eslint.org/docs/developer-guide/nodejs-api#%e2%97%86-new-eslint-options)。
+你可以传入 [eslint 参数](https://eslint.org/docs/developer-guide/nodejs-api#-new-eslintoptions)。
 
 注意你提供的配置选项会传给 `ESLint` 类。
 这是一组和你在 `package.json` 与 `.eslintrc` 所指定选项不同的选项。
-查阅 [eslint 文档](https://eslint.org/docs/developer-guide/nodejs-api#%e2%97%86-new-eslint-options) 获取更多详情。
+查阅 [eslint 文档](https://eslint.org/docs/developer-guide/nodejs-api#-new-eslintoptions) 获取更多详情。
 
 **警告**: 在 eslint-webpack-plugin 1.x 版本中，配置项会传递给已废弃的 [CLIEngine](https://eslint.org/docs/developer-guide/nodejs-api#cliengine)。
 
@@ -102,7 +104,7 @@ module.exports = {
 - 类型：`Boolean`
 - 默认值：`false`
 
-启用 [ESLint 自动修复特性](https://eslint.org/docs/developer-guide/nodejs-api#%e2%97%86-eslint-outputfixes-results)。
+启用 [ESLint 自动修复特性](https://eslint.org/docs/developer-guide/nodejs-api#-eslintoutputfixesresults)。
 
 **小心: 该选项会修改源文件。**
 

@@ -22,6 +22,8 @@ translators:
 
 
 
+> stylelint-webpack-plugin 3.0 仅支持 webpack 5。对于 webpack 4，请查看 [2.x 分支](https://github.com/webpack-contrib/stylelint-webpack-plugin/tree/2.x)。
+
 该插件使用 [`stylelint`](https://stylelint.io/) 帮助你在样式代码中避免错误并强制规范。
 
 ## Getting Started $#getting-started$
@@ -52,7 +54,7 @@ module.exports = {
 
 ## 选项 $#options$
 
-有关可用选项的完整列表请参阅 [styleint 的选项](http://stylelint.io/user-guide/node-api/#options)，这些选项直接传递给 `stylelint`。
+有关可用选项的完整列表请参阅 [styleint 的配置项](https://stylelint.io/user-guide/usage/node-api#options)，这些选项直接传递给 `stylelint`。
 
 ### `configFile` $#configfile$
 
@@ -61,7 +63,7 @@ module.exports = {
 
 指定 `stylelint` 配置文件的位置。
 
-**注意：** 默认情况下由 [`stylelint` 处理](http://stylelint.io/user-guide/configuration/)。
+**注意：** 默认情况下由 [`stylelint` 处理](https://stylelint.io/user-guide/configure)。
 
 ### `context` $#context$
 
@@ -96,14 +98,14 @@ module.exports = {
 - 类型：`Boolean`
 - 默认值：`false`
 
-如果值为 `true`，`stylelint` 将修复尽可能多的 error。修复真实的源文件。报告所有未修复的 errors。请参阅 [自动修复错误](https://stylelint.io/user-guide/cli#autofixing-errors) 文档。
+如果值为 `true`，`stylelint` 将修复尽可能多的 error。修复真实的源文件。报告所有未修复的 errors。请参阅 [自动修复错误](https://stylelint.io/user-guide/usage/options#fix) 文档。
 
 ### `formatter` $#formatter$
 
 - 类型：`String|Function`
 - 默认值：`'string'`
 
-指定要用于格式化结果的 formatter。请参阅 [formatter 选项](https://stylelint.io/user-guide/node-api#formatter)。
+指定要用于格式化结果的 formatter。请参阅 [formatter 选项](https://stylelint.io/user-guide/usage/options#formatter)。
 
 ### `lintDirtyModulesOnly` $#lintdirtymodulesonly$
 
