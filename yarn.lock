@@ -8671,12 +8671,12 @@ mini-create-react-context@^0.4.0:
     "@babel/runtime" "^7.5.5"
     tiny-warning "^1.0.3"
 
-mini-css-extract-plugin@^2.4.4:
-  version "2.4.4"
-  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-2.4.4.tgz#c7e5d2d931dcf100ae50ae949ba757c506b54b0f"
-  integrity sha512-UJ+aNuFQaQaECu7AamlWOBLj2cJ6XSGU4zNiqXeZ7lZLe5VD0DoSPWFbWArXueo+6FZVbgHzpX9lUIaBIDLuYg==
+mini-css-extract-plugin@^2.4.5:
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-2.4.5.tgz#191d6c170226037212c483af1180b4010b7b9eef"
+  integrity sha512-oEIhRucyn1JbT/1tU2BhnwO6ft1jjH1iCX9Gc59WFMg0n5773rQU0oyQ0zzeYFFuBfONaRbQJyGoPtuNseMxjA==
   dependencies:
-    schema-utils "^3.1.0"
+    schema-utils "^4.0.0"
 
 minimalistic-assert@^1.0.0:
   version "1.0.1"
