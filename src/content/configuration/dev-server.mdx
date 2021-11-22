@@ -1474,6 +1474,8 @@ Usage via the CLI:
 npx webpack serve --server-type spdy
 ```
 
+W> This option is ignored for Node 15.0.0 and above, as [spdy is broken for those versions](https://github.com/spdy-http2/node-spdy/issues/380). The dev server will migrate over to Node's built-in HTTP/2 once [Express](https://expressjs.com/) supports it.
+
 Use the object syntax to provide your own certificate:
 
 **webpack.config.js**
