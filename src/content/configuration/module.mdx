@@ -20,6 +20,7 @@ contributors:
   - Mistyyyy
   - anshumanv
   - chenxsan
+  - snitin315
 ---
 
 These options determine how the [different types of modules](/concepts/modules) within a project will be treated.
@@ -156,6 +157,63 @@ Note that only `webpackIgnore` comment is supported at the moment:
 ```js
 const x = require(/* webpackIgnore: true */ 'x');
 ```
+
+#### module.parser.javascript.exportsPresence
+
+Specifies the behavior of invalid export names in `\"import ... from ...\"` and `\"export ... from ...\"`.
+
+- Type: `'error' | 'warn' | 'auto' | false`
+- Available: 5.62.0+
+- Example:
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          exportsPresence: 'error',
+        },
+      },
+    },
+  };
+  ```
+
+#### module.parser.javascript.importExportsPresence
+
+Specifies the behavior of invalid export names in `\"import ... from ...\"`.
+
+- Type: `'error' | 'warn' | 'auto' | false`
+- Available: 5.62.0+
+- Example:
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          importExportsPresence: 'error',
+        },
+      },
+    },
+  };
+  ```
+
+#### module.parser.javascript.reexportExportsPresence
+
+Specifies the behavior of invalid export names in `\"export ... from ...\"`. This might be useful to disable during the migration from `\"export ... from ...\"` to `\"export type ... from ...\"` when reexporting types in TypeScript.
+
+- Type: `'error' | 'warn' | 'auto' | false`
+- Available: 5.62.0+
+- Example:
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          reexportExportsPresence: 'error',
+        },
+      },
+    },
+  };
+  ```
 
 #### module.parser.javascript.url
 
@@ -1144,3 +1202,5 @@ A few use cases:
 - `require('./templates/' + expr)` should not include subdirectories by default: `wrappedContextRecursive: false`
 - `strictExportPresence` makes missing exports an error instead of warning
 - Set the inner regular expression for partial dynamic dependencies : `wrappedContextRegExp: /\\.\\*/`
+
+W> `strictExportPresence` is deprecated in favor of [`exportsPresence`](#moduleparserjavascriptexportspresence) option.
