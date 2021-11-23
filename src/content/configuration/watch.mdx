@@ -10,6 +10,7 @@ contributors:
   - spicalous
   - Neob91
   - Loonride
+  - snitin315
 ---
 
 Webpack can watch files and recompile whenever they change. This page explains how to enable this and a couple of tweaks you can make if watching does not work properly for you.
@@ -153,6 +154,21 @@ Follow symbolic links while looking for a file. This is usually not needed as we
     //...
     watchOptions: {
       followSymlinks: true,
+    },
+  };
+  ```
+
+### watchOptions.stdin
+
+Stop watching when stdin stream has ended.
+
+- Type: `boolean`
+- Example:
+  ```js
+  module.exports = {
+    //...
+    watchOptions: {
+      stdin: true,
     },
   };
   ```
