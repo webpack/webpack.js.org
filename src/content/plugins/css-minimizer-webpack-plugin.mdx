@@ -96,6 +96,7 @@ module.exports = {
 
 ## 选项 $#options$
 
+<<<<<<< HEAD
 |                    选项名                     |                      类型                      |               默认值                | 描述                                                                                           |
 | :-----------------------------------------: | :--------------------------------------------: | :----------------------------------: | :---------------------------------------------------------------------------------------------------- |
 |             **[`test`](#test)**             |    `String\|RegExp\|Array<String\|RegExp>`     |          `/\.css(\?.*)?$/i`          | 匹配要处理的文件                                                                          |
@@ -106,6 +107,17 @@ module.exports = {
 | **[`minimizerOptions`](#minimizeroptions)** |            `Object\|Array<Object>`             |       `{ preset: 'default' }`        | Cssnano 优化 [配置项](https://cssnano.co/docs/optimisations)。                              |
 | **[`processorOptions`](#processoroptions)** |                    `Object`                    | `{ to: assetName, from: assetName }` | 允许为 cssnano 指定处理配置项 [`processoptions`](https://postcss.org/api/#processoptions)。 |
 |   **[`warningsFilter`](#warningsfilter)**   | `Function<(warning, file, source) -> Boolean>` |             `() => true`             | 允许过滤掉 css-minimizer 的警告。                                                               |
+=======
+|                    Name                     |                      Type                      |              Default               | Description                                                             |
+| :-----------------------------------------: | :--------------------------------------------: | :--------------------------------: | :---------------------------------------------------------------------- |
+|             **[`test`](#test)**             |    `String\|RegExp\|Array<String\|RegExp>`     |         `/\.css(\?.*)?$/i`         | Test to match files against.                                            |
+|          **[`include`](#include)**          |    `String\|RegExp\|Array<String\|RegExp>`     |            `undefined`             | Files to include.                                                       |
+|          **[`exclude`](#exclude)**          |    `String\|RegExp\|Array<String\|RegExp>`     |            `undefined`             | Files to exclude.                                                       |
+|         **[`parallel`](#parallel)**         |               `Boolean\|Number`                |               `true`               | Enable/disable multi-process parallel running.                          |
+|           **[`minify`](#minify)**           |          `Function\|Array<Function>`           | `CssMinimizerPlugin.cssnanoMinify` | Allows to override default minify function.                             |
+| **[`minimizerOptions`](#minimizeroptions)** |            `Object\|Array<Object>`             |      `{ preset: 'default' }`       | Cssnano optimisations [options](https://cssnano.co/docs/optimisations). |
+|   **[`warningsFilter`](#warningsfilter)**   | `Function<(warning, file, source) -> Boolean>` |            `() => true`            | Allow to filter css-minimizer warnings.                                 |
+>>>>>>> 80355febbdd903897dfda8663616d4b744f9fc5f
 
 ### `test` $#test$
 
@@ -350,10 +362,17 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 #### `processorOptions` $#processoroptions$
 
 类型：`Object`
 默认值：`{ to: assetName, from: assetName }`
+=======
+##### `processorOptions` (⚠ only cssnano)
+
+Type: `Object`
+Default: `{ from: assetName }`
+>>>>>>> 80355febbdd903897dfda8663616d4b744f9fc5f
 
 允许配置 cssnano 的 [`processoptions`](https://postcss.org/api/#processoptions) 配置项。
 `parser`、` stringifier` 和 `syntax` 可以是一个函数，也可以是一个字符串，用来表示将会被导出的模块。
