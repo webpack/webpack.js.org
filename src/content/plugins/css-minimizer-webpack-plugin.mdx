@@ -104,7 +104,6 @@ module.exports = {
 |         **[`parallel`](#parallel)**         |               `Boolean\|Number`                |                `true`                | 启用/禁用多进程并行处理。                                                        |
 |           **[`minify`](#minify)**           |          `Function\|Array<Function>`           |  `CssMinimizerPlugin.cssnanoMinify`  | 允许覆盖默认的 minify 函数。                                                           |
 | **[`minimizerOptions`](#minimizeroptions)** |            `Object\|Array<Object>`             |       `{ preset: 'default' }`        | Cssnano 优化 [配置项](https://cssnano.co/docs/optimisations)。                              |
-| **[`processorOptions`](#processoroptions)** |                    `Object`                    | `{ to: assetName, from: assetName }` | 允许为 cssnano 指定处理配置项 [`processoptions`](https://postcss.org/api/#processoptions)。 |
 |   **[`warningsFilter`](#warningsfilter)**   | `Function<(warning, file, source) -> Boolean>` |             `() => true`             | 允许过滤掉 css-minimizer 的警告。                                                               |
 
 ### `test` $#test$
@@ -350,10 +349,10 @@ module.exports = {
 };
 ```
 
-#### `processorOptions` $#processoroptions$
+##### `processorOptions` (⚠ only cssnano) $#processoroptions$
 
 类型：`Object`
-默认值：`{ to: assetName, from: assetName }`
+默认值：`{ from: assetName }`
 
 允许配置 cssnano 的 [`processoptions`](https://postcss.org/api/#processoptions) 配置项。
 `parser`、` stringifier` 和 `syntax` 可以是一个函数，也可以是一个字符串，用来表示将会被导出的模块。
