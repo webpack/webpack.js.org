@@ -73,6 +73,7 @@ module.exports = {
       import: './catalog.js',
       filename: 'pages/catalog.js',
       dependOn: 'shared',
+      chunkLoading: false, // Disable chunks that are loaded on demand and put everything in the main chunk.
     },
     personal: {
       import: './personal.js',
@@ -85,8 +86,6 @@ module.exports = {
   },
 };
 ```
-
-T> Use `chunkLoading: false` to disable chunks that are loaded on demand and put everything in the main chunk.
 
 Descriptor syntax might be used to pass additional options to an entry point.
 
