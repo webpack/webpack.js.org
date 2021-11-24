@@ -1477,13 +1477,9 @@ module.exports = {
 npx webpack serve --server-type spdy
 ```
 
-<<<<<<< HEAD
-使用对象语法提供自己的证书：
-=======
-W> This option is ignored for Node 15.0.0 and above, as [spdy is broken for those versions](https://github.com/spdy-http2/node-spdy/issues/380). The dev server will migrate over to Node's built-in HTTP/2 once [Express](https://expressjs.com/) supports it.
+W> 该配置项在 Node 15.0.0 及以上的版本会被忽略，因为 [spdy 在这些版本中不会正常工作](https://github.com/spdy-http2/node-spdy/issues/380)。一旦 [Express](https://expressjs.com/) 支持 Node 内建 HTTP/2，dev server 会进行迁移。
 
-Use the object syntax to provide your own certificate:
->>>>>>> bf18fbd0851a863334ffefed0109b06f3c167e0a
+使用对象语法提供自己的证书：
 
 **webpack.config.js**
 

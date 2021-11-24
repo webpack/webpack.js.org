@@ -109,14 +109,9 @@
     "lint-staged": "^12.1.2",
     "lodash": "^4.17.21",
     "markdownlint": "^0.24.0",
-<<<<<<< HEAD
-    "markdownlint-cli": "^0.29.0",
-    "mdast-util-to-string": "^1.1.0",
-    "mini-css-extract-plugin": "^2.4.4",
-=======
     "markdownlint-cli": "^0.30.0",
+    "mdast-util-to-string": "^1.1.0",
     "mini-css-extract-plugin": "^2.4.5",
->>>>>>> bf18fbd0851a863334ffefed0109b06f3c167e0a
     "mkdirp": "^1.0.4",
     "modularscale-sass": "^3.0.3",
     "node-fetch": "^3.1.0",
