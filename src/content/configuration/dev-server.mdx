@@ -1477,6 +1477,8 @@ module.exports = {
 npx webpack serve --server-type spdy
 ```
 
+W> 该配置项在 Node 15.0.0 及以上的版本会被忽略，因为 [spdy 在这些版本中不会正常工作](https://github.com/spdy-http2/node-spdy/issues/380)。一旦 [Express](https://expressjs.com/) 支持 Node 内建 HTTP/2，dev server 会进行迁移。
+
 使用对象语法提供自己的证书：
 
 **webpack.config.js**

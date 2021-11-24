@@ -10,6 +10,7 @@ contributors:
   - spicalous
   - Neob91
   - Loonride
+  - snitin315
 translators:
   - lcxfs1991
   - QC-L
@@ -157,6 +158,21 @@ T> 如果监听没生效，试试这个选项吧。Watch 在 NFS 和 VirtualBox 
     //...
     watchOptions: {
       followSymlinks: true,
+    },
+  };
+  ```
+
+### watchOptions.stdin $#watchoptionsstdin$
+
+当 stdin 流结束时停止监听。
+
+- 类型：`boolean`
+- 示例：
+  ```js
+  module.exports = {
+    //...
+    watchOptions: {
+      stdin: true,
     },
   };
   ```
