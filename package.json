@@ -84,7 +84,7 @@
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.0.0",
     "css-loader": "^6.5.1",
-    "css-minimizer-webpack-plugin": "^3.1.4",
+    "css-minimizer-webpack-plugin": "^3.2.0",
     "cypress": "^9.1.0",
     "directory-tree": "^3.0.1",
     "directory-tree-webpack-plugin": "^1.0.3",
