@@ -76,6 +76,7 @@ module.exports = {
       import: './catalog.js',
       filename: 'pages/catalog.js',
       dependOn: 'shared',
+      chunkLoading: false, // Disable chunks that are loaded on demand and put everything in the main chunk.
     },
     personal: {
       import: './personal.js',

@@ -471,7 +471,28 @@ module.exports = {
 
 W> 修改缓存路径可能在极少数情况下导致失败。
 
+<<<<<<< HEAD
 ### resolve.plugins $#resolveplugins$
+=======
+### resolve.useSyncFileSystemCalls
+
+`boolean`
+
+Use synchronous filesystem calls for the resolver.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    useSyncFileSystemCalls: true,
+  },
+};
+```
+
+### resolve.plugins
+>>>>>>> 73b4564d18deda56c91885ae9a0aa4cc55fc8c48
 
 [`[Plugin]`](/plugins/)
 

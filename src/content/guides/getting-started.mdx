@@ -25,11 +25,15 @@ contributors:
   - myshov
   - anshumanv
   - d3lm
+<<<<<<< HEAD
 translators:
   - QC-L
   - jacob-lcs
   - conorzhong
   - dear-lizhihua
+=======
+  - snitin315
+>>>>>>> 73b4564d18deda56c91885ae9a0aa4cc55fc8c48
 ---
 
 webpack 用于编译 JavaScript 模块。一旦完成 [安装](/guides/installation)，你就可以通过 webpack [CLI](/api/cli) 或 [API](/api/node) 与其配合交互。如果你还不熟悉 webpack，请阅读 [核心概念](/concepts) 和 [对比](/comparison)，了解为什么要使用 webpack，而不是社区中的其他工具。
@@ -64,6 +68,7 @@ npm install webpack webpack-cli --save-dev
 ```diff
   webpack-demo
   |- package.json
+  |- package-lock.json
 + |- index.html
 + |- /src
 +   |- index.js
@@ -145,6 +150,7 @@ T> 如果你想要了解 `package.json` 内在机制的更多信息，我们推�
 ```diff
   webpack-demo
   |- package.json
+  |- package-lock.json
 + |- /dist
 +   |- index.html
 - |- index.html
@@ -237,6 +243,7 @@ T> 输出可能会稍有不同，但是只要构建成功，那么你就可以�
 ```diff
   webpack-demo
   |- package.json
+  |- package-lock.json
 + |- webpack.config.js
   |- /dist
     |- index.html
@@ -334,6 +341,7 @@ T> 可以通过在 `npm run build` 命令与参数之间添加两个连接符的
 ```diff
 webpack-demo
 |- package.json
+|- package-lock.json
 |- webpack.config.js
 |- /dist
   |- main.js
@@ -343,8 +351,12 @@ webpack-demo
 |- /node_modules
 ```
 
+<<<<<<< HEAD
 T> 如果你使用的是 npm 5+，你可能还会在目录中看到一个 `package-lock.json` 文件。
 
 W> 不要使用 webpack 编译不可信的代码。它可能会在你的计算机，远程服务器或者在你 web 应用程序使用者的浏览器中执行恶意代码。
+=======
+W> Do not compile untrusted code with webpack. It could lead to execution of malicious code on your computer, remote servers, or in the Web browsers of the end users of your application.
+>>>>>>> 73b4564d18deda56c91885ae9a0aa4cc55fc8c48
 
 如果想要了解 webpack 设计思想，你应该看下 [基本概念](/concepts) 和 [配置](/configuration) 页面。此外，[API](/api) 章节可以深入了解 webpack 提供的各种接口。
