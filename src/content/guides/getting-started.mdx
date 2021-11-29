@@ -25,6 +25,7 @@ contributors:
   - myshov
   - anshumanv
   - d3lm
+  - snitin315
 ---
 
 Webpack is used to compile JavaScript modules. Once [installed](/guides/installation), you can interact with webpack either from its [CLI](/api/cli) or [API](/api/node). If you're still new to webpack, please read through the [core concepts](/concepts) and [this comparison](/comparison) to learn why you might use it over the other tools that are out in the community.
@@ -59,6 +60,7 @@ Now we'll create the following directory structure, files and their contents:
 ```diff
   webpack-demo
   |- package.json
+  |- package-lock.json
 + |- index.html
 + |- /src
 +   |- index.js
@@ -140,6 +142,7 @@ First we'll tweak our directory structure slightly, separating the "source" code
 ```diff
   webpack-demo
   |- package.json
+  |- package-lock.json
 + |- /dist
 +   |- index.html
 - |- index.html
@@ -232,6 +235,7 @@ As of version 4, webpack doesn't require any configuration, but most projects wi
 ```diff
   webpack-demo
   |- package.json
+  |- package-lock.json
 + |- webpack.config.js
   |- /dist
     |- index.html
@@ -329,6 +333,7 @@ Now that you have a basic build together you should move on to the next guide [`
 ```diff
 webpack-demo
 |- package.json
+|- package-lock.json
 |- webpack.config.js
 |- /dist
   |- main.js
@@ -337,8 +342,6 @@ webpack-demo
   |- index.js
 |- /node_modules
 ```
-
-T> If you're using npm 5+, you'll probably also see a `package-lock.json` file in your directory.
 
 W> Do not compile untrusted code with webpack. It could lead to execution of malicious code on your computer, remote servers, or in the Web browsers of the end users of your application.
 

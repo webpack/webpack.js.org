@@ -33,6 +33,7 @@ contributors:
   - chenxsan
   - Adarah
   - atesgoral
+  - snitin315
 related:
   - title: <link rel="prefetch/preload" /> in webpack
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -61,6 +62,7 @@ This is by far the easiest and most intuitive way to split code. However, it is 
 ```diff
 webpack-demo
 |- package.json
+|- package-lock.json
 |- webpack.config.js
 |- /dist
 |- /src
@@ -293,6 +295,7 @@ We'll also update our project to remove the now unused files:
 ```diff
 webpack-demo
 |- package.json
+|- package-lock.json
 |- webpack.config.js
 |- /dist
 |- /src
