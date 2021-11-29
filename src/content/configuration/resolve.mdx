@@ -463,6 +463,23 @@ module.exports = {
 
 W> Changes to cached paths may cause failure in rare cases.
 
+### resolve.useSyncFileSystemCalls
+
+`boolean`
+
+Use synchronous filesystem calls for the resolver.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    useSyncFileSystemCalls: true,
+  },
+};
+```
+
 ### resolve.plugins
 
 [`[Plugin]`](/plugins/)
