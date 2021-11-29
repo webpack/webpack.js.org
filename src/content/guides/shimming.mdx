@@ -42,6 +42,7 @@ Let's start with the first use case of shimming global variables. Before we do a
 ```diff
 webpack-demo
 |- package.json
+|- package-lock.json
 |- webpack.config.js
 |- /dist
   |- index.html
@@ -209,6 +210,7 @@ Let's say a library creates a global variable that it expects its consumers to u
 ```diff
   webpack-demo
   |- package.json
+  |- package-lock.json
   |- webpack.config.js
   |- /dist
   |- /src
@@ -336,6 +338,7 @@ npm install --save whatwg-fetch
 ```diff
   webpack-demo
   |- package.json
+  |- package-lock.json
   |- webpack.config.js
   |- /dist
   |- /src
