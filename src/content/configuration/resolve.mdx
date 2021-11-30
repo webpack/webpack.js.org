@@ -266,6 +266,7 @@ module.exports = {
     extensions: ['.ts', '...'],
   },
 };
+```
 
 ### resolve.fallback $#resolvefallback$
 
@@ -470,6 +471,23 @@ module.exports = {
 ```
 
 W> 修改缓存路径可能在极少数情况下导致失败。
+
+### resolve.useSyncFileSystemCalls $#resolveusesyncfilesystemcalls$
+
+`boolean`
+
+对 resolver 使用同步文件系统调用。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    useSyncFileSystemCalls: true,
+  },
+};
+```
 
 ### resolve.plugins $#resolveplugins$
 

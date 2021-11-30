@@ -25,6 +25,7 @@ contributors:
   - myshov
   - anshumanv
   - d3lm
+  - snitin315
 translators:
   - QC-L
   - jacob-lcs
@@ -64,6 +65,7 @@ npm install webpack webpack-cli --save-dev
 ```diff
   webpack-demo
   |- package.json
+  |- package-lock.json
 + |- index.html
 + |- /src
 +   |- index.js
@@ -145,6 +147,7 @@ T> 如果你想要了解 `package.json` 内在机制的更多信息，我们推�
 ```diff
   webpack-demo
   |- package.json
+  |- package-lock.json
 + |- /dist
 +   |- index.html
 - |- index.html
@@ -237,6 +240,7 @@ T> 输出可能会稍有不同，但是只要构建成功，那么你就可以�
 ```diff
   webpack-demo
   |- package.json
+  |- package-lock.json
 + |- webpack.config.js
   |- /dist
     |- index.html
@@ -334,6 +338,7 @@ T> 可以通过在 `npm run build` 命令与参数之间添加两个连接符的
 ```diff
 webpack-demo
 |- package.json
+|- package-lock.json
 |- webpack.config.js
 |- /dist
   |- main.js
@@ -342,8 +347,6 @@ webpack-demo
   |- index.js
 |- /node_modules
 ```
-
-T> 如果你使用的是 npm 5+，你可能还会在目录中看到一个 `package-lock.json` 文件。
 
 W> 不要使用 webpack 编译不可信的代码。它可能会在你的计算机，远程服务器或者在你 web 应用程序使用者的浏览器中执行恶意代码。
 

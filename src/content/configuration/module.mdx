@@ -20,6 +20,7 @@ contributors:
   - Mistyyyy
   - anshumanv
   - chenxsan
+  - snitin315
 translators:
   - jacob-lcs
   - QC-L
@@ -159,6 +160,63 @@ module.exports = {
 ```js
 const x = require(/* webpackIgnore: true */ 'x');
 ```
+
+#### module.parser.javascript.exportsPresence $#moduleparserjavascriptexportspresence$
+
+指出在 `\"import ... from ...\"` 与 `\"export ... from ...\"` 中无效导出名称的行为。
+
+- Type: `'error' | 'warn' | 'auto' | false`
+- Available: 5.62.0+
+- Example:
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          exportsPresence: 'error',
+        },
+      },
+    },
+  };
+  ```
+
+#### module.parser.javascript.importExportsPresence $#moduleparserjavascriptimportexportspresence$
+
+指出在 `\"import ... from ...\"` 中无效导出名称的行为。
+
+- Type: `'error' | 'warn' | 'auto' | false`
+- Available: 5.62.0+
+- Example:
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          importExportsPresence: 'error',
+        },
+      },
+    },
+  };
+  ```
+
+#### module.parser.javascript.reexportExportsPresence $#moduleparserjavascriptreexportexportspresence$
+
+指出在  `\"export ... from ...\"` 中无效导出名称的行为。当在 TypeScript 重新导出类型，从 `\"export ... from ...\"` 迁移到 `\"export type ... from ...\"` 时禁用该配置项是有用的。
+
+- Type: `'error' | 'warn' | 'auto' | false`
+- Available: 5.62.0+
+- Example:
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          reexportExportsPresence: 'error',
+        },
+      },
+    },
+  };
+  ```
 
 #### module.parser.javascript.url $#moduleparserjavascripturl$
 
@@ -1166,3 +1224,5 @@ T> 你可以使用 `ContextReplacementPlugin` 来修改这些单个依赖的值�
 - `require("./templates/" + expr)` 不应该包含默认子目录：`wrappedContextRecursive: false`
 - `strictExportPresence` 将缺失的导出提示成错误而不是警告
 - 为部分动态依赖项设置内部正则表达式：`wrappedContextRegExp: /\\.\\*/`
+
+W> 为支持 [`exportsPresence`](#moduleparserjavascriptexportspresence) 配置项，`strictExportPresence` 已被废弃。
