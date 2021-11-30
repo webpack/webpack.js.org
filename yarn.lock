@@ -1978,9 +1978,9 @@
     "@octokit/openapi-types" "^11.1.0"
 
 "@pmmmwh/react-refresh-webpack-plugin@next":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.2.tgz#7f46eed92e2ef23ea6127089304c41da5ecff4c1"
-  integrity sha512-BWOG6opI9+L5HjQIj6znFLwVXkjDS98PKfRDlbPFvinTz4wQ7ZSXxV0lLOfRW12HXcqk4DEzrphjRMJFXuihNg==
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.3.tgz#b8f0e035f6df71b5c4126cb98de29f65188b9e7b"
+  integrity sha512-OoTnFb8XEYaOuMNhVDsLRnAO6MCYHNs1g6d8pBcHhDFsi1P3lPbq/IklwtbAx9cG0W4J9KswxZtwGnejrnxp+g==
   dependencies:
     ansi-html-community "^0.0.8"
     common-path-prefix "^3.0.0"
