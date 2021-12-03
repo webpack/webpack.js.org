@@ -6,6 +6,6 @@ _describe your changes..._
 - [ ] Do not abandon your Pull Request: [Stale Pull Requests][3].
 - **Remove these instructions from your PR as they are for your eyes only.**
 
-[1]: https://cla.js.foundation/webpack/webpack.js.org
+[1]: https://github.com/openjs-foundation/EasyCLA#openjs-foundation-cla
 [2]: https://webpack.js.org/contribute/writers-guide/
 [3]: https://webpack.js.org/contribute/#pull-requests
