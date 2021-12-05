@@ -163,7 +163,7 @@ npx webpack info [options]
 **example**
 
 ```bash
-npx webpack info --output=json
+npx webpack info --output json --addition-package postcss
 ```
 
 #### Options for info
@@ -174,11 +174,23 @@ npx webpack info --output=json
 
 Adds additional packages to the output.
 
+**example**
+
+```bash
+npx webpack info --additional-package postcss
+```
+
 **`-o`, `--output`**
 
 `string : 'json' | 'markdown'`
 
 To get the output in a specified format.
+
+**example**
+
+```bash
+npx webpack info --output markdown
+```
 
 ### Configtest
 
