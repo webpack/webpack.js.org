@@ -168,7 +168,7 @@ npx webpack info [options]
 **示例**
 
 ```bash
-npx webpack info --output=json
+npx webpack info --output json --addition-package postcss
 ```
 
 #### info 配置项 $#optionsforinfo$
@@ -179,13 +179,29 @@ npx webpack info --output=json
 
 在输出信息中添加额外的包。
 
+**example**
+
+```bash
+npx webpack info --additional-package postcss
+```
+
 **`-o`, `--output`**
 
 `string : 'json' | 'markdown'`
 
 获取指定格式的输出。
 
+<<<<<<< HEAD
 ### Configtest $#configtest$
+=======
+**example**
+
+```bash
+npx webpack info --output markdown
+```
+
+### Configtest
+>>>>>>> 5eb6e4f6cc9e0893c94006d9db3bb1df8e2f60e5
 
 校验 webpack 配置。
 
