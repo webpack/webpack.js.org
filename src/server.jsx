@@ -1,6 +1,5 @@
 // Import External Dependencies
 import ReactDOMServer from 'react-dom/server';
-import { Routes } from 'react-router-dom';
 import { StaticRouter } from 'react-router-dom/server';
 
 // Import Components
@@ -24,13 +23,11 @@ export default (locals) => {
       <StaticRouter location={locals.path} context={{}}>
         <body>
           <div id="root">
-            <Routes>
-              <Site
-                // note that here we use require instead of import
-                // i.e., can't  reuse App.jsx
-                import={(path) => require(`./content/${path}`)}
-              />
-            </Routes>
+            <Site
+              // note that here we use require instead of import
+              // i.e., can't  reuse App.jsx
+              import={(path) => require(`./content/${path}`)}
+            />
           </div>
           {isPrintPage(locals.path) ? (
             <PrintScript />
