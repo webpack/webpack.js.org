@@ -1,6 +1,7 @@
 // Import External Dependencies
 import ReactDOMServer from 'react-dom/server';
-import { StaticRouter, Routes } from 'react-router-dom';
+import { Routes } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
 
 // Import Components
 import Site from './components/Site/Site';
