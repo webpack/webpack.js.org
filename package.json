@@ -148,7 +148,7 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-g-analytics": "0.4.2",
+    "react-g-analytics-x": "0.4.3",
     "react-helmet-async": "^1.2.2",
     "react-router-dom": "^6.0.2",
     "react-spring": "^9.3.2",
