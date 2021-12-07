@@ -20,7 +20,7 @@ export default (locals) => {
 
   const renderedHtml = ReactDOMServer.renderToString(
     <HelmetProvider context={helmetContext}>
-      <StaticRouter location={locals.path} context={{}}>
+      <StaticRouter location={locals.path}>
         <body>
           <div id="root">
             <Site
