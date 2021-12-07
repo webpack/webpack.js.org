@@ -2,14 +2,6 @@
 /* @import "tailwindcss/components"; */
 @import 'tailwindcss/utilities';
 
-/* some customized rules */
-.active-menu {
-  @apply text-blue-200 !important;
-}
-.active-submenu {
-  @apply text-black dark:text-white !important;
-}
-
 /* doc search */
 :root {
   --docsearch-primary-color: #1d78c1 !important;
