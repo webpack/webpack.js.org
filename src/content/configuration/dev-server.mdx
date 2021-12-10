@@ -562,7 +562,7 @@ module.exports = {
   devServer: {
     devMiddleware: {
       index: true,
-      mimeTypes: { 'text/html': ['phtml'] },
+      mimeTypes: { phtml: 'text/html' },
       publicPath: '/publicPathForDevServe',
       serverSideRender: true,
       writeToDisk: true,
