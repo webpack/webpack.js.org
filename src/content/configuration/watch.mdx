@@ -141,7 +141,7 @@ module.exports = {
 };
 ```
 
-T> If watching does not work for you, try out this option. Watching does not work with NFS and machines in VirtualBox.
+T> If watching does not work for you, try out this option. This may help issues with NFS and machines in VirtualBox, WSL, Containers, or Docker. In those cases, use a polling interval and ignore large folders like `/node_modules/` to keep CPU usage minimal.
 
 ### watchOptions.followSymlinks
 
