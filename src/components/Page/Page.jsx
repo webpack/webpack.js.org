@@ -120,7 +120,10 @@ export default function Page(props) {
 
         {loadTranslators && (
           <div className="contributors__section">
-            <h3>译者</h3>
+            <h3 className="!font-sans !font-normal">
+              {translators.length}{' '}
+              位译者
+            </h3>
             <Translators translators={translators} />
           </div>
         )}
