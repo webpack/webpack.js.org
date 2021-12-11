@@ -145,7 +145,7 @@ module.exports = {
 };
 ```
 
-T> 如果监听没生效，试试这个选项吧。Watch 在 NFS 和 VirtualBox 机器上不适用。
+T> 如果监听没生效，试试这个选项吧。这会对 VirtualBox、WSL、Containers 或者 Docker 有所帮助。在这些情况下，使用轮询间隔并忽略 `/node_modules/` 这样的大文件夹，以保持最小的 CPU 使用率。
 
 ### `watchOptions.followSymlinks` $#watchoptionsfollowsymlinks$
 
