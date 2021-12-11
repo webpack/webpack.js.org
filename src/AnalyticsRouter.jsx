@@ -2,9 +2,10 @@
  * based on https://github.com/seeden/react-g-analytics
  * refactored against new version of react/react-router-dom
  */
-import { Router, BrowserRouter, useHistory } from 'react-router-dom';
+import { Router, BrowserRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { createBrowserHistory } from 'history';
 AnalyticsRouter.propTypes = {
   ...BrowserRouter.propTypes,
   id: PropTypes.string.isRequired,
@@ -12,12 +13,25 @@ AnalyticsRouter.propTypes = {
   set: PropTypes.object,
 };
 export default function AnalyticsRouter(props) {
-  const { id, set, children } = props;
-  const history = useHistory();
+  const {
+    id,
+    set,
+    children,
+    basename,
+    forceRefresh,
+    getUserConfirmation,
+    keyLength,
+  } = props;
+  const history = createBrowserHistory(
+    basename,
+    forceRefresh,
+    getUserConfirmation,
+    keyLength
+  );
 
   return (
     <Router history={history}>
-      <GoogleAnalytics id={id} set={set}>
+      <GoogleAnalytics id={id} set={set} history={history}>
         {children}
       </GoogleAnalytics>
     </Router>
@@ -60,6 +74,7 @@ GoogleAnalytics.propTypes = {
   id: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   set: PropTypes.object,
+  history: PropTypes.object,
 };
 
 function googleAnalyticsCommand(what, options, ...args) {
@@ -81,8 +96,7 @@ function googleAnalyticsSend(...options) {
 }
 
 function GoogleAnalytics(props) {
-  const { id, set, children } = props;
-  const history = useHistory();
+  const { id, set, children, history } = props;
 
   const [unlisten, setUnlisten] = useState(null);
   const [latestUrl, setLatestUrl] = useState(null);
