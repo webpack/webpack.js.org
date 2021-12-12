@@ -1532,6 +1532,8 @@ module.exports = {
 };
 ```
 
+W> Don't specify `server.options.ca` and `server.options.cacert` options together, if specified `server.options.ca` will be used. `server.options.cacert` is deprecated and will be removed in the next major release.
+
 ## devServer.setupExitSignals
 
 `boolean = true`
