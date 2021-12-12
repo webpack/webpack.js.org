@@ -2298,7 +2298,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> <span class="token regex">/\\.css$/</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
         oneOf<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token punctuation">{</span>
             resourceQuery<span class="token operator">:</span> <span class="token regex">/inline/</span><span class="token punctuation">,</span> <span class="token comment">// foo.css?inline</span>
@@ -2452,7 +2452,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> <span class="token regex">/\\.css$/</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
         resourceQuery<span class="token operator">:</span> <span class="token regex">/inline/</span><span class="token punctuation">,</span>
         use<span class="token operator">:</span> <span class="token string">&#x27;url-loader&#x27;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -2488,7 +2488,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token comment">//...</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> <span class="token regex">/\\.json$/</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.json$/</span><span class="token punctuation">,</span>
         type<span class="token operator">:</span> <span class="token string">&#x27;javascript/auto&#x27;</span><span class="token punctuation">,</span>
         loader<span class="token operator">:</span> <span class="token string">&#x27;custom-json-loader&#x27;</span><span class="token punctuation">,</span>
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
@@ -2587,7 +2587,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
-        test<span class="token operator">:</span> <span class="token regex">/\\.css$/</span><span class="token punctuation">,</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
         include<span class="token operator">:</span> <span class="token punctuation">[</span>
           <span class="token comment">// will include any paths relative to the current directory starting with `app/styles`</span>
           <span class="token comment">// e.g. `app/styles.css`, `app/styles/styles.css`, `app/stylesheet.css`</span>
@@ -2648,7 +2648,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     wrappedContextRegExp<span class="token operator">:</span> <span class="token regex">/.*/</span><span class="token punctuation">,</span>
     strictExportPresence<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><aside class="tip"><h6 class="tip__prefix">tip</h6><p>You can use the <code>ContextReplacementPlugin</code> to modify these values for individual dependencies. This also removes the warning.</p></aside><p>A few use cases:</p><ul><li>Warn for dynamic dependencies: <code>wrappedContextCritical: true</code>.</li><li><code>require(expr)</code> should include the whole directory: <code>exprContextRegExp: /^\\.\\//</code></li><li><code>require(&#x27;./templates/&#x27; + expr)</code> should not include subdirectories by default: <code>wrappedContextRecursive: false</code></li><li><code>strictExportPresence</code> makes missing exports an error instead of warning</li><li>Set the inner regular expression for partial dynamic dependencies : <code>wrappedContextRegExp: /\\.\\*/</code></li></ul><aside class="warning"><h6 class="warning__prefix">warning</h6><p><code>strictExportPresence</code> is deprecated in favor of <a href="#moduleparserjavascriptexportspresence"><code>exportsPresence</code></a> option.</p></aside><h1 id="resolve">Resolve<a href="#resolve" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><aside class="tip"><h6 class="tip__prefix">tip</h6><p>You can use the <code>ContextReplacementPlugin</code> to modify these values for individual dependencies. This also removes the warning.</p></aside><p>A few use cases:</p><ul><li>Warn for dynamic dependencies: <code>wrappedContextCritical: true</code>.</li><li><code>require(expr)</code> should include the whole directory: <code>exprContextRegExp: /^\.\//</code></li><li><code>require(&#x27;./templates/&#x27; + expr)</code> should not include subdirectories by default: <code>wrappedContextRecursive: false</code></li><li><code>strictExportPresence</code> makes missing exports an error instead of warning</li><li>Set the inner regular expression for partial dynamic dependencies : <code>wrappedContextRegExp: /\\.\\*/</code></li></ul><aside class="warning"><h6 class="warning__prefix">warning</h6><p><code>strictExportPresence</code> is deprecated in favor of <a href="#moduleparserjavascriptexportspresence"><code>exportsPresence</code></a> option.</p></aside><h1 id="resolve">Resolve<a href="#resolve" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h1>
 <p>These options change how modules are resolved. Webpack provides reasonable defaults, but it is possible to change the resolving in detail. Have a look at <a href="/concepts/module-resolution">Module Resolution</a> for more explanation of how the resolver works.</p><h2 id="resolve">resolve<a href="#resolve" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p><code>object</code></p><p>Configure how modules are resolved. For example, when calling <code>import &#x27;lodash&#x27;</code> in ES2015, the <code>resolve</code> options can change where webpack goes to look for <code>&#x27;lodash&#x27;</code> (see <a href="#resolvemodules"><code>modules</code></a>).</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token comment">//...</span>
   resolve<span class="token operator">:</span> <span class="token punctuation">{</span>
