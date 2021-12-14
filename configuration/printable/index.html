@@ -1507,6 +1507,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       forOf<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
       <span class="token comment">// The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from &#x27;...&#x27;).</span>
       module<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token comment">// The environment supports optional chaining (&#x27;obj?.a&#x27; or &#x27;obj?.()&#x27;).</span>
+      optionalChaining<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      <span class="token comment">// The environment supports template literals.</span>
+      templateLiteral<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h2 id="outputfilename">output.filename<a href="#outputfilename" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p><code>string</code> <code>function (pathData, assetInfo) =&gt; string</code></p><p>This option determines the name of each output bundle. The bundle is written to the directory specified by the <a href="#outputpath"><code>output.path</code></a> option.</p><p>For a single <a href="/configuration/entry-context/#entry"><code>entry</code></a> point, this can be a static name.</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
