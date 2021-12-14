@@ -13,21 +13,8 @@ AnalyticsRouter.propTypes = {
   set: PropTypes.object,
 };
 export default function AnalyticsRouter(props) {
-  const {
-    id,
-    set,
-    children,
-    basename,
-    forceRefresh,
-    getUserConfirmation,
-    keyLength,
-  } = props;
-  const history = createBrowserHistory(
-    basename,
-    forceRefresh,
-    getUserConfirmation,
-    keyLength
-  );
+  const { id, set, children } = props;
+  const history = createBrowserHistory();
 
   return (
     <Router history={history}>
@@ -98,13 +85,13 @@ function googleAnalyticsSend(...options) {
 function GoogleAnalytics(props) {
   const { id, set, children, history } = props;
 
-  const [unlisten, setUnlisten] = useState(null);
+  const [unListen, setUnListen] = useState(null);
   const [latestUrl, setLatestUrl] = useState(null);
 
   useEffect(() => {
     initGoogleAnalytics(id, set);
 
-    const pageview = (location) => {
+    const pageView = (location) => {
       const path = location.pathname + location.search;
       if (latestUrl === path) {
         return;
@@ -126,17 +113,17 @@ function GoogleAnalytics(props) {
       }, 0);
     };
 
-    setUnlisten(history.listen(pageview));
+    setUnListen(history.listen(pageView));
 
     // send current pageview
-    pageview(history.location);
+    pageView(history.location);
 
     return () => {
-      if (unlisten) {
-        unlisten();
-        setUnlisten(null);
+      if (unListen) {
+        unListen();
+        setUnListen(null);
       }
     };
-  }, [id, set, history, unlisten, latestUrl]);
+  }, [id, set, history, unListen, latestUrl]);
   return <>{children}</>;
 }
