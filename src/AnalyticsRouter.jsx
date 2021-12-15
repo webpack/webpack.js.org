@@ -116,7 +116,7 @@ function GoogleAnalytics(props) {
     setUnListen(history.listen(pageView));
 
     // send current pageview
-    pageView(history.location);
+    pageView({ location: history.location });
 
     return () => {
       if (unListen) {
