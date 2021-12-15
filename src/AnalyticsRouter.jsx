@@ -91,7 +91,7 @@ function GoogleAnalytics(props) {
   useEffect(() => {
     initGoogleAnalytics(id, set);
 
-    const pageView = (location) => {
+    const pageView = ({ location }) => {
       const path = location.pathname + location.search;
       if (latestUrl === path) {
         return;
