@@ -13,7 +13,7 @@ As of webpack 5, you can use [Web Workers](https://developer.mozilla.org/en-US/d
 new Worker(new URL('./worker.js', import.meta.url));
 ```
 
-The syntax was chosen to allow running code without bundler, it is also available in native ECMAScript modules in the browser.
+The syntax was chosen to allow running code without bundler since using `new Worker`) is available in native ECMAScript modules in the browser (https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) but in webpack, worker.js and the files that worker.js imports can be bundled.
 
 ## Example
 
@@ -33,12 +33,25 @@ worker.onmessage = ({ data: { answer } }) => {
 **src/deep-thought.js**
 
 ```js
+
+import { getAnswer } from './answer'
 self.onmessage = ({ data: { question } }) => {
   self.postMessage({
-    answer: 42,
+    answer: getAnswer(),
   });
 };
 ```
+
+**src/answer.js**
+
+```js
+
+export default getAnswer() {
+  return 42
+}
+```
+
+In this case, deep-thought.js and answer.js will be bundled for use in the web worker.
 
 ## Node.js
 
