@@ -34,7 +34,7 @@ worker.onmessage = ({ data: { answer } }) => {
 
 ```js
 
-import { getAnswer } from './answer'
+import { getAnswer } from './answer';
 self.onmessage = ({ data: { question } }) => {
   self.postMessage({
     answer: getAnswer(),
@@ -46,7 +46,7 @@ self.onmessage = ({ data: { question } }) => {
 
 ```js
 
-export default getAnswer() {
+export default function getAnswer() {
   return 42;
 }
 ```
