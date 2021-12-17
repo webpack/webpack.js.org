@@ -13,7 +13,7 @@ As of webpack 5, you can use [Web Workers](https://developer.mozilla.org/en-US/d
 new Worker(new URL('./worker.js', import.meta.url));
 ```
 
-The syntax was chosen to allow running code without bundler since using `new Worker`) is available in native ECMAScript modules in the browser (https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) but in webpack, worker.js and the files that worker.js imports can be bundled.
+The syntax was chosen to allow running code without bundler since using this is available in native ECMAScript modules in the browser (https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker). In webpack, the worker.js file that the `new Worker` API call refers to and the files that worker.js imports are additionally bundled.
 
 ## Example
 
