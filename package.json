@@ -36,7 +36,7 @@
     "fetch:readmes": "node src/utilities/fetch-package-readmes.mjs",
     "fetch:supporters": "node src/utilities/fetch-supporters.mjs",
     "prebuild": "npm run clean",
-    "build": "run-s fetch-repos fetch content && webpack --config webpack.prod.mjs --node-env production && run-s printable content && webpack --config webpack.ssg.mjs --node-env production --env ssg",
+    "build": "run-s content && webpack --config webpack.prod.mjs --node-env production && run-s printable content && webpack --config webpack.ssg.mjs --node-env production --env ssg",
     "postbuild": "npm run sitemap",
     "build-test": "npm run build && http-server --port 4200 dist/",
     "test": "npm run lint",
