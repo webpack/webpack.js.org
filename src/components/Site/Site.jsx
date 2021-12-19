@@ -168,7 +168,7 @@ function Site(props) {
   useEffect(() => {
     const target = clientSideRedirections(location);
     if (target) {
-      navigate(target);
+      navigate(target, { replace: true });
     }
   }, [location, navigate]);
 
