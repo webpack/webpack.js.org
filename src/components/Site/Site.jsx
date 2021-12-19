@@ -1,6 +1,12 @@
 // Import External Dependencies
 import { Fragment, useEffect, useState } from 'react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  Outlet,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { MDXProvider } from '@mdx-js/react';
 
@@ -260,35 +266,27 @@ function Site(props) {
         <Routes>
           <Route index element={<Splash />} />
           <Route
-            path="vote"
             element={
               <Container className="site__content">
-                <Vote />
+                <Outlet />
               </Container>
             }
-          />
-          <Route
-            path="app-shell"
-            element={
-              <Container className="site__content">
-                <Fragment />
-              </Container>
-            }
-          />
-          {pages.map((page) => {
-            let path = page.path.replace('src/content/', '');
-            let content = props.import(path);
-            const { previous, next } = getAdjacentPages(
-              sidebarPages,
-              page,
-              'url'
-            );
-            return (
-              <Route
-                key={page.url}
-                path={page.url}
-                element={
-                  <Container className="site__content">
+          >
+            <Route path="vote" element={<Vote />} />
+            <Route path="app-shell" element={<Fragment />} />
+            {pages.map((page) => {
+              let path = page.path.replace('src/content/', '');
+              let content = props.import(path);
+              const { previous, next } = getAdjacentPages(
+                sidebarPages,
+                page,
+                'url'
+              );
+              return (
+                <Route
+                  key={page.url}
+                  path={page.url}
+                  element={
                     <Fragment>
                       <Sponsors />
                       <Sidebar
@@ -303,19 +301,12 @@ function Site(props) {
                         next={next}
                       />
                     </Fragment>
-                  </Container>
-                }
-              />
-            );
-          })}
-          <Route
-            path="*"
-            element={
-              <Container className="site__content">
-                <PageNotFound />
-              </Container>
-            }
-          />
+                  }
+                />
+              );
+            })}
+            <Route path="*" element={<PageNotFound />} />
+          </Route>
         </Routes>
         <Footer />
         <NotificationBar />
