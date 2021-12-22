@@ -1551,6 +1551,46 @@ module.exports = {
 };
 ```
 
+## devServer.setupMiddlewares
+
+`function (middlewares, devServer)`
+
+Provides the ability to execute a custom function and apply custom middleware(s).
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  devServer: {
+    setupMiddlewares: (middlewares, devServer) => {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
+      devServer.app.get('/setup-middleware/some/path', (_, response) => {
+        response.send('setup-middlewares option GET');
+      });
+
+      middlewares.push({
+        name: 'hello-world-test-one',
+        // `path` is optional
+        path: '/foo/bar',
+        middleware: (req, res) => {
+          res.send('Foo Bar!');
+        },
+      });
+
+      middlewares.push((req, res) => {
+        res.send('Hello World!');
+      });
+
+      return middlewares;
+    },
+  },
+};
+```
+
 ## devServer.static
 
 `boolean` `string` `[string]` `object` `[object]`
