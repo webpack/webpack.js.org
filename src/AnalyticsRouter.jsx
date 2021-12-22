@@ -2,26 +2,23 @@
  * based on https://github.com/seeden/react-g-analytics
  * refactored against new version of react/react-router-dom
  */
-import { Router, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
-import { createBrowserHistory } from 'history';
+import { useEffect } from 'react';
 AnalyticsRouter.propTypes = {
-  ...BrowserRouter.propTypes,
   id: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   set: PropTypes.object,
 };
 export default function AnalyticsRouter(props) {
   const { id, set, children } = props;
-  const history = createBrowserHistory();
 
   return (
-    <Router history={history}>
-      <GoogleAnalytics id={id} set={set} history={history}>
+    <BrowserRouter>
+      <GoogleAnalytics id={id} set={set}>
         {children}
       </GoogleAnalytics>
-    </Router>
+    </BrowserRouter>
   );
 }
 
@@ -61,7 +58,6 @@ GoogleAnalytics.propTypes = {
   id: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   set: PropTypes.object,
-  history: PropTypes.object,
 };
 
 function googleAnalyticsCommand(what, options, ...args) {
@@ -83,47 +79,27 @@ function googleAnalyticsSend(...options) {
 }
 
 function GoogleAnalytics(props) {
-  const { id, set, children, history } = props;
+  const { id, set, children } = props;
 
-  const [unListen, setUnListen] = useState(null);
-  const [latestUrl, setLatestUrl] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     initGoogleAnalytics(id, set);
+  }, [id, set]);
 
-    const pageView = (location) => {
-      const path = location.pathname + location.search;
-      if (latestUrl === path) {
-        return;
-      }
+  useEffect(() => {
+    const path = location.pathname + location.search;
 
-      setLatestUrl(path);
+    googleAnalyticsSet({
+      page: path,
+      title: document.title,
+      location: document.location,
+    });
 
-      // user can change the title
-      setTimeout(() => {
-        googleAnalyticsSet({
-          page: path,
-          title: document.title,
-          location: document.location,
-        });
+    googleAnalyticsSend({
+      hitType: 'pageview',
+    });
+  }, [location]);
 
-        googleAnalyticsSend({
-          hitType: 'pageview',
-        });
-      }, 0);
-    };
-
-    setUnListen(history.listen(pageView));
-
-    // send current pageview
-    pageView(history.location);
-
-    return () => {
-      if (unListen) {
-        unListen();
-        setUnListen(null);
-      }
-    };
-  }, [id, set, history, unListen, latestUrl]);
   return <>{children}</>;
 }

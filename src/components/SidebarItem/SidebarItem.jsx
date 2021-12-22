@@ -80,7 +80,7 @@ export default class SidebarItem extends Component {
         )}
 
         <NavLink
-          exact
+          end
           key={this.props.url}
           className={`${block}__title`}
           to={this.props.url}

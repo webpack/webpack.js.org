@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename);
 export default (env) =>
   merge(common(env), {
     experiments: {
-      lazyCompilation: true,
+      lazyCompilation: false,
     },
     mode: 'development',
     devtool: 'source-map',
