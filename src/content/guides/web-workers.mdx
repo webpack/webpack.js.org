@@ -34,7 +34,7 @@ worker.onmessage = ({ data: { answer } }) => {
 
 ```js
 
-import { getAnswer } from './answer';
+import getAnswer from './answer';
 self.onmessage = ({ data: { question } }) => {
   self.postMessage({
     answer: getAnswer(),
