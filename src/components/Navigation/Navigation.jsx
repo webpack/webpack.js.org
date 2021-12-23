@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { DocSearch } from '@docsearch/react';
-import { Link as ReactDOMLink } from 'react-router-dom';
+import { Link as ReactDOMLink, NavLink, useLocation } from 'react-router-dom';
 
 // Import Components
 import Link from '../Link/Link';
@@ -16,7 +16,6 @@ import GithubIcon from '../../styles/icons/github.svg';
 import TwitterIcon from '../../styles/icons/twitter.svg';
 import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
 import Hamburger from '../../styles/icons/hamburger.svg';
-import { NavLink, useLocation } from 'react-router-dom';
 import HelloDarkness from '../HelloDarkness';
 
 NavigationItem.propTypes = {

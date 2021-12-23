@@ -14,6 +14,7 @@ module.exports = {
     'no-console': 'off',
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
+    'no-duplicate-imports': 'error',
     'react/jsx-uses-react': 'off', // no longer needed with new jsx transform
     'react/react-in-jsx-scope': 'off', // ditto
     'react-hooks/rules-of-hooks': 'error',
@@ -50,6 +51,7 @@ module.exports = {
         'no-constant-condition': 'off',
         'no-useless-escape': 'off',
         'no-dupe-keys': 'off',
+        'no-duplicate-imports': 'off',
       },
     },
   ],
