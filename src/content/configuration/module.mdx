@@ -21,9 +21,13 @@ contributors:
   - anshumanv
   - chenxsan
   - snitin315
+<<<<<<< HEAD
 translators:
   - jacob-lcs
   - QC-L
+=======
+  - vabushkevich
+>>>>>>> f2b590a402f9e261ede5b3370c0f3c70c0bf1af4
 ---
 
 这些选项决定了如何处理项目中的[不同类型的模块](/concepts/modules)。
@@ -497,7 +501,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.css$/,
+        test: /\.css$/,
         oneOf: [
           {
             resourceQuery: /inline/, // foo.css?inline
@@ -776,7 +780,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.css$/,
+        test: /\.css$/,
         resourceQuery: /inline/,
         use: 'url-loader',
       },
@@ -870,7 +874,7 @@ module.exports = {
     rules: [
       //...
       {
-        test: /\\.json$/,
+        test: /\.json$/,
         type: 'javascript/auto',
         loader: 'custom-json-loader',
       },
@@ -1091,7 +1095,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.css$/,
+        test: /\.css$/,
         include: [
           // will include any paths relative to the current directory starting with `app/styles`
           // e.g. `app/styles.css`, `app/styles/styles.css`, `app/stylesheet.css`
@@ -1219,10 +1223,18 @@ T> 你可以使用 `ContextReplacementPlugin` 来修改这些单个依赖的值�
 
 几个用例：
 
+<<<<<<< HEAD
 - 动态依赖的警告：`wrappedContextCritical: true`。
 - `require(expr)` 应该包含整个目录：`exprContextRegExp: /^\.\//`
 - `require("./templates/" + expr)` 不应该包含默认子目录：`wrappedContextRecursive: false`
 - `strictExportPresence` 将缺失的导出提示成错误而不是警告
 - 为部分动态依赖项设置内部正则表达式：`wrappedContextRegExp: /\\.\\*/`
+=======
+- Warn for dynamic dependencies: `wrappedContextCritical: true`.
+- `require(expr)` should include the whole directory: `exprContextRegExp: /^\.\//`
+- `require('./templates/' + expr)` should not include subdirectories by default: `wrappedContextRecursive: false`
+- `strictExportPresence` makes missing exports an error instead of warning
+- Set the inner regular expression for partial dynamic dependencies : `wrappedContextRegExp: /\\.\\*/`
+>>>>>>> f2b590a402f9e261ede5b3370c0f3c70c0bf1af4
 
 W> 为支持 [`exportsPresence`](#moduleparserjavascriptexportspresence) 配置项，`strictExportPresence` 已被废弃。

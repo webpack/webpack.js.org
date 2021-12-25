@@ -1,6 +1,6 @@
 // Import External Dependencies
 import ReactDOMServer from 'react-dom/server';
-import { StaticRouter, Route } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom/server';
 
 // Import Components
 import Site from './components/Site/Site';
@@ -21,19 +21,13 @@ export default (locals) => {
 
   const renderedHtml = ReactDOMServer.renderToString(
     <HelmetProvider context={helmetContext}>
-      <StaticRouter location={locals.path} context={{}}>
+      <StaticRouter location={locals.path}>
         <body>
           <div id="root">
-            <Route
-              path="/"
-              render={(props) => (
-                <Site
-                  {...props}
-                  // note that here we use require instead of import
-                  // i.e., can't  reuse App.jsx
-                  import={(path) => require(`./content/${path}`)}
-                />
-              )}
+            <Site
+              // note that here we use require instead of import
+              // i.e., can't  reuse App.jsx
+              import={(path) => require(`./content/${path}`)}
             />
           </div>
           {isPrintPage(locals.path) ? (

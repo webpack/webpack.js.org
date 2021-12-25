@@ -628,7 +628,11 @@ module.exports = {
 npx webpack serve --http2 --https-key ./path/to/server.key --https-cert ./path/to/server.crt --https-ca ./path/to/ca.pem
 ```
 
+<<<<<<< HEAD
 W> 此配置项已被弃用，以支持 [devServer.server](#devserverserver)。
+=======
+W> This option is deprecated in favor of the [devServer.server](#devserverserver) option.
+>>>>>>> f2b590a402f9e261ede5b3370c0f3c70c0bf1af4
 
 ## devServer.https $#devserverhttps$
 
@@ -711,7 +715,11 @@ module.exports = {
 
 W> 不要同时指定 `https.ca` 与 `https.cacert` 配置项，如果指定的话将会使用 `https.ca`。`https.cacert` 已弃用并且将会在下个主要版本中被移除。
 
+<<<<<<< HEAD
 W> 该配置项已弃用，以支持 [devServer.server](#devserverserver)。
+=======
+W> This option is deprecated in favor of the [devServer.server](#devserverserver) option.
+>>>>>>> f2b590a402f9e261ede5b3370c0f3c70c0bf1af4
 
 ## devServer.headers $#devserverheaders$
 
@@ -1063,7 +1071,13 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## devServer.onBeforeSetupMiddleware $#devserveronbeforesetupmiddleware$
+=======
+W> This option is deprecated in favor of the [devServer.setupMiddlewares](#devserversetupmiddlewares) option.
+
+## devServer.onBeforeSetupMiddleware
+>>>>>>> f2b590a402f9e261ede5b3370c0f3c70c0bf1af4
 
 `function (devServer)`
 
@@ -1090,7 +1104,13 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## devserver.onListening $#devserveronlistening$
+=======
+W> This option is deprecated in favor of the [devServer.setupMiddlewares](#devserversetupmiddlewares) option.
+
+## devserver.onListening
+>>>>>>> f2b590a402f9e261ede5b3370c0f3c70c0bf1af4
 
 `function (devServer)`
 
@@ -1535,7 +1555,13 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## devServer.setupExitSignals $#devserversetupexitsignals$
+=======
+W> Don't specify `server.options.ca` and `server.options.cacert` options together, if specified `server.options.ca` will be used. `server.options.cacert` is deprecated and will be removed in the next major release.
+
+## devServer.setupExitSignals
+>>>>>>> f2b590a402f9e261ede5b3370c0f3c70c0bf1af4
 
 `boolean = true`
 
@@ -1552,7 +1578,53 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## devServer.static $#devserverstatic$
+=======
+## devServer.setupMiddlewares
+
+`function (middlewares, devServer)`
+
+<Badge text="v4.7.0+" />
+
+Provides the ability to execute a custom function and apply custom middleware(s).
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  devServer: {
+    setupMiddlewares: (middlewares, devServer) => {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
+      devServer.app.get('/setup-middleware/some/path', (_, response) => {
+        response.send('setup-middlewares option GET');
+      });
+
+      middlewares.push({
+        name: 'hello-world-test-one',
+        // `path` is optional
+        path: '/foo/bar',
+        middleware: (req, res) => {
+          res.send('Foo Bar!');
+        },
+      });
+
+      middlewares.push((req, res) => {
+        res.send('Hello World!');
+      });
+
+      return middlewares;
+    },
+  },
+};
+```
+
+## devServer.static
+>>>>>>> f2b590a402f9e261ede5b3370c0f3c70c0bf1af4
 
 `boolean` `string` `[string]` `object` `[object]`
 

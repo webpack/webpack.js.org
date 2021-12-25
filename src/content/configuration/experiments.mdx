@@ -26,6 +26,7 @@ Available options:
 - [`backCompat`](#experimentsbackcompat)
 - [`buildHttp`](#experimentsbuildhttp)
 - [`cacheUnaffected`](#experimentscacheunaffected)
+- [`css`](#experimentscss)
 - [`futureDefaults`](#experimentsfuturedefaults)
 - `layers`: Enable module and chunk layers.
 - [`lazyCompilation`](#experimentslazycompilation)
@@ -172,7 +173,17 @@ Detect changes to remote resources and upgrade them automatically.
 
 - Type: `boolean`
 
+<<<<<<< HEAD
 ### experiments.cacheUnaffected $#experimentscacheunaffected$
+=======
+### experiments.css
+
+Enable native CSS support. Note that it's an experimental feature still under development and will be enabled by default in webpack v6, however you can track the progress on [GitHub](https://github.com/webpack/webpack/issues/14893).
+
+- Type: `boolean`
+
+### experiments.cacheUnaffected
+>>>>>>> f2b590a402f9e261ede5b3370c0f3c70c0bf1af4
 
 Enable additional in-memory caching of modules which are unchanged and reference only unchanged modules.
 
