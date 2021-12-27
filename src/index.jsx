@@ -1,7 +1,7 @@
 // Import External Dependencies
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { BrowserRouter as AnalyticsRouter } from 'react-g-analytics';
+import AnalyticsRouter from './AnalyticsRouter.jsx';
 
 import App from './App.jsx';
 

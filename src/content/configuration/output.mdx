@@ -459,6 +459,10 @@ module.exports = {
       forOf: true,
       // The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from '...').
       module: false,
+      // The environment supports optional chaining ('obj?.a' or 'obj?.()').
+      optionalChaining: true,
+      // The environment supports template literals.
+      templateLiteral: true,
     },
   },
 };
@@ -683,6 +687,8 @@ module.exports = {
 `number = 20`
 
 散列摘要的前缀长度。
+
+T> 针对 `webpack v5.65.0+`，在 [`experiments.futureDefaults`](/configuration/experiments/#experimentsfuturedefaults) 启用时，`hashDigestLength` 配置项会以 `16` 作为默认值。
 
 ## output.hashFunction $#outputhashfunction$
 

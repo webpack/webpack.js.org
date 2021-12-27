@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { DocSearch } from '@docsearch/react';
-import { Link as ReactDOMLink } from 'react-router-dom';
+import { Link as ReactDOMLink, NavLink, useLocation } from 'react-router-dom';
 
 // Import Components
 import Link from '../Link/Link';
@@ -16,22 +16,21 @@ import GithubIcon from '../../styles/icons/github.svg';
 import TwitterIcon from '../../styles/icons/twitter.svg';
 import StackOverflowIcon from '../../styles/icons/stack-overflow.svg';
 import Hamburger from '../../styles/icons/hamburger.svg';
-import { NavLink, useLocation } from 'react-router-dom';
 import HelloDarkness from '../HelloDarkness';
 
 NavigationItem.propTypes = {
   children: PropTypes.node.isRequired,
   url: PropTypes.string.isRequired,
-  isActive: PropTypes.func,
+  isactive: PropTypes.func,
 };
 
-function NavigationItem({ children, url, isActive }) {
+function NavigationItem({ children, url, isactive }) {
   let obj = {};
   // decide if the link is active or not by providing a function
   // otherwise we'll let react-dom makes the decision for us
-  if (isActive) {
+  if (isactive) {
     obj = {
-      isActive,
+      isactive,
     };
   }
   const classes =
@@ -51,9 +50,10 @@ function NavigationItem({ children, url, isActive }) {
   return (
     <NavLink
       {...obj}
-      activeClassName="active-menu"
+      className={({ isActive }) =>
+        isActive ? `${classes} !text-blue-200` : classes
+      }
       to={url}
-      className={classes}
     >
       {children}
     </NavLink>
@@ -194,9 +194,9 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
             return link.children;
           })
           .map((link) => {
-            if (link.isActive) {
+            if (link.isactive) {
               // hide the children if the link is not active
-              if (!link.isActive({}, location)) {
+              if (!link.isactive({}, location)) {
                 return null;
               }
             }
@@ -209,19 +209,26 @@ function Navigation({ links, pathname, hash = '', toggleSidebar }) {
                   className="md:max-w-[1024px] md:mx-auto md:grid md:grid-flow-col md:justify-end md:gap-x-[20px] md:px-[24px]"
                   data-testid="sub-navigation"
                 >
-                  {link.children.map((child) => (
-                    <NavLink
-                      key={child.url}
-                      to={child.url}
-                      title={child.title}
-                      className="text-blue-400 py-5 text-sm capitalize hover:text-black dark:hover:text-white"
-                      activeClassName="active-submenu"
-                    >
-                      {child.content === 'api'
-                        ? child.content.toUpperCase()
-                        : child.content}
-                    </NavLink>
-                  ))}
+                  {link.children.map((child) => {
+                    const classNames =
+                      'text-blue-400 py-5 text-sm capitalize hover:text-black dark:hover:text-white';
+                    return (
+                      <NavLink
+                        key={child.url}
+                        to={child.url}
+                        title={child.title}
+                        className={({ isActive }) =>
+                          isActive
+                            ? `!text-black dark:!text-white ${classNames}`
+                            : classNames
+                        }
+                      >
+                        {child.content === 'api'
+                          ? child.content.toUpperCase()
+                          : child.content}
+                      </NavLink>
+                    );
+                  })}
                 </div>
               </div>
             );

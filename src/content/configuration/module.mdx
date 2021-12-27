@@ -21,6 +21,7 @@ contributors:
   - anshumanv
   - chenxsan
   - snitin315
+  - vabushkevich
 translators:
   - jacob-lcs
   - QC-L
@@ -497,7 +498,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.css$/,
+        test: /\.css$/,
         oneOf: [
           {
             resourceQuery: /inline/, // foo.css?inline
@@ -776,7 +777,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.css$/,
+        test: /\.css$/,
         resourceQuery: /inline/,
         use: 'url-loader',
       },
@@ -870,7 +871,7 @@ module.exports = {
     rules: [
       //...
       {
-        test: /\\.json$/,
+        test: /\.json$/,
         type: 'javascript/auto',
         loader: 'custom-json-loader',
       },
@@ -1091,7 +1092,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.css$/,
+        test: /\.css$/,
         include: [
           // will include any paths relative to the current directory starting with `app/styles`
           // e.g. `app/styles.css`, `app/styles/styles.css`, `app/stylesheet.css`

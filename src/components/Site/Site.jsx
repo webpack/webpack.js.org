@@ -1,6 +1,12 @@
 // Import External Dependencies
 import { Fragment, useEffect, useState } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  Outlet,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { MDXProvider } from '@mdx-js/react';
 
@@ -51,14 +57,11 @@ const mdxComponents = {
 };
 
 Site.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-    hash: PropTypes.string,
-  }),
-  history: PropTypes.any,
   import: PropTypes.func,
 };
 function Site(props) {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   /**
@@ -147,7 +150,6 @@ function Site(props) {
     }
   }, []);
 
-  const { location, history } = props;
   let sections = extractSections(Content);
   let section = sections.find(({ url }) => location.pathname.startsWith(url));
   let pages = extractPages(Content);
@@ -183,9 +185,9 @@ function Site(props) {
   useEffect(() => {
     const target = clientSideRedirections(location);
     if (target) {
-      history.replace(target);
+      navigate(target, { replace: true });
     }
-  }, [location, history]);
+  }, [location, navigate]);
 
   return (
     <MDXProvider components={mdxComponents}>
@@ -255,7 +257,7 @@ function Site(props) {
               {
                 content: '中文文档',
                 url: '/concepts/',
-                isActive: (_, location) => {
+                isactive: (_, location) => {
                   return /^\/(api|concepts|configuration|guides|loaders|migrate|plugins)/.test(
                     location.pathname
                   );
@@ -282,63 +284,55 @@ function Site(props) {
           />
         ) : null}
 
-        <Switch>
+        <Routes>
+          <Route index element={<Splash />} />
           <Route
-            exact
-            strict
-            path="/:url*"
-            render={(props) => <Redirect to={`${props.location.pathname}/`} />}
-          />
-          <Route path="/" exact component={Splash} />
-          <Route
-            render={() => (
+            element={
               <Container className="site__content">
-                <Switch>
-                  <Route path="/vote" component={Vote} />
-                  <Route path="/app-shell" component={() => <Fragment />} />
-                  {pages.map((page) => (
-                    <Route
-                      key={page.url}
-                      exact={true}
-                      path={page.url}
-                      render={() => {
-                        let path = page.path.replace('src/content/', '');
-                        let content = props.import(path);
-                        const { previous, next } = getAdjacentPages(
-                          sidebarPages,
-                          page,
-                          'url'
-                        );
-                        return (
-                          <Fragment>
-                            <Sponsors />
-                            <Sidebar
-                              className="site__sidebar"
-                              currentPage={location.pathname}
-                              pages={sidebarPages}
-                            />
-                            <Page
-                              {...page}
-                              content={content}
-                              previous={previous}
-                              next={next}
-                            />
-                          </Fragment>
-                        );
-                      }}
-                    />
-                  ))}
-                  <Route render={() => <PageNotFound />} />
-                </Switch>
+                <Outlet />
               </Container>
-            )}
-          />
-        </Switch>
+            }
+          >
+            <Route path="vote" element={<Vote />} />
+            <Route path="app-shell" element={<Fragment />} />
+            {pages.map((page) => {
+              let path = page.path.replace('src/content/', '');
+              let content = props.import(path);
+              const { previous, next } = getAdjacentPages(
+                sidebarPages,
+                page,
+                'url'
+              );
+              return (
+                <Route
+                  key={page.url}
+                  path={page.url}
+                  element={
+                    <Fragment>
+                      <Sponsors />
+                      <Sidebar
+                        className="site__sidebar"
+                        currentPage={location.pathname}
+                        pages={sidebarPages}
+                      />
+                      <Page
+                        {...page}
+                        content={content}
+                        previous={previous}
+                        next={next}
+                      />
+                    </Fragment>
+                  }
+                />
+              );
+            })}
+            <Route path="*" element={<PageNotFound />} />
+          </Route>
+        </Routes>
         <Footer />
         <NotificationBar />
       </div>
     </MDXProvider>
   );
 }
-
 export default Site;

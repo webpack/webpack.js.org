@@ -1063,6 +1063,8 @@ module.exports = {
 };
 ```
 
+W> 该配置项已弃用，以支持 [devServer.setupMiddlewares](#devserversetupmiddlewares)。
+
 ## devServer.onBeforeSetupMiddleware $#devserveronbeforesetupmiddleware$
 
 `function (devServer)`
@@ -1089,6 +1091,8 @@ module.exports = {
   },
 };
 ```
+
+W> 该配置项已弃用，以支持 [devServer.setupMiddlewares](#devserversetupmiddlewares)。
 
 ## devserver.onListening $#devserveronlistening$
 
@@ -1535,6 +1539,8 @@ module.exports = {
 };
 ```
 
+W> 如果指定的 `server.options.ca` 将会被使用的话，不要同时指定 `server.options.ca` 与 `server.options.cacert` 配置项。`server.options.cacert` 已弃用并且会在下一个大版本中移除。
+
 ## devServer.setupExitSignals $#devserversetupexitsignals$
 
 `boolean = true`
@@ -1548,6 +1554,48 @@ module.exports = {
   //...
   devServer: {
     setupExitSignals: true,
+  },
+};
+```
+
+## devServer.setupMiddlewares $#devserversetupmiddlewares$
+
+`function (middlewares, devServer)`
+
+<Badge text="v4.7.0+" />
+
+提供执行自定义函数和应用自定义中间件的能力。
+
+**webpack.config.js**
+
+```javascript
+module.exports = {
+  // ...
+  devServer: {
+    setupMiddlewares: (middlewares, devServer) => {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
+      devServer.app.get('/setup-middleware/some/path', (_, response) => {
+        response.send('setup-middlewares option GET');
+      });
+
+      middlewares.push({
+        name: 'hello-world-test-one',
+        // `path` is optional
+        path: '/foo/bar',
+        middleware: (req, res) => {
+          res.send('Foo Bar!');
+        },
+      });
+
+      middlewares.push((req, res) => {
+        res.send('Hello World!');
+      });
+
+      return middlewares;
+    },
   },
 };
 ```

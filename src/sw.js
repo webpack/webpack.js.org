@@ -1,5 +1,9 @@
 import { cacheNames } from 'workbox-core';
-import { registerRoute } from 'workbox-routing';
+import {
+  registerRoute,
+  setCatchHandler,
+  setDefaultHandler,
+} from 'workbox-routing';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import {
   NetworkFirst,
@@ -7,7 +11,6 @@ import {
   NetworkOnly,
 } from 'workbox-strategies';
 import { ExpirationPlugin } from 'workbox-expiration';
-import { setCatchHandler, setDefaultHandler } from 'workbox-routing';
 
 const cacheName = cacheNames.runtime;
 

@@ -26,6 +26,7 @@ Available options:
 - [`backCompat`](#experimentsbackcompat)
 - [`buildHttp`](#experimentsbuildhttp)
 - [`cacheUnaffected`](#experimentscacheunaffected)
+- [`css`](#experimentscss)
 - [`futureDefaults`](#experimentsfuturedefaults)
 - `layers`: Enable module and chunk layers.
 - [`lazyCompilation`](#experimentslazycompilation)
@@ -169,6 +170,12 @@ By default webpack would generate a `<compiler-name.>webpack.lock` file>. Make s
 #### experiments.buildHttp.upgrade $#experimentsbuildhttpupgrade$
 
 Detect changes to remote resources and upgrade them automatically.
+
+- Type: `boolean`
+
+### experiments.css $#experimentscss$
+
+启用原生 CSS 支持。请注意该实验特性仍处于开发状态并且将会在 webpack v6 中默认启用，你可以在 [GitHub](https://github.com/webpack/webpack/issues/14893) 中跟踪进度。
 
 - Type: `boolean`
 
