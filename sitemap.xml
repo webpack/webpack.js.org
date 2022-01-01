@@ -130,13 +130,13 @@
         <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/concepts/configuration</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/concepts/dependency-graph</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/entry-points</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/configuration</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
@@ -265,10 +265,10 @@
         <loc>https://webpack.js.org/development/plugin-patterns</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/get-started/install-webpack</loc>
+        <loc>https://webpack.js.org/development/release-process</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/development/release-process</loc>
+        <loc>https://webpack.js.org/get-started/install-webpack</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/get-started/why-webpack</loc>
@@ -385,6 +385,9 @@
         <loc>https://webpack.js.org/loaders/coffee-loader</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/css-loader</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/exports-loader</loc>
     </url>
     <url>
@@ -416,9 +419,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/postcss-loader</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/css-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/raw-loader</loc>
