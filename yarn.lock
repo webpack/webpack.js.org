@@ -9915,10 +9915,10 @@ react-router@6.2.1:
   dependencies:
     history "^5.2.0"
 
-react-spring@^9.4.0:
-  version "9.4.0"
-  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-9.4.0.tgz#4372bd30d8ad913e1dade5431c6c133893a9f7a5"
-  integrity sha512-llg6JY2noYZ1SxFjDPRsH49FNj9VjVs7f5OmlybS8/M492QK2gl5gALbkAyQrLj5c1cKFHPdXkkSvbjkNcFTgA==
+react-spring@^9.4.1:
+  version "9.4.1"
+  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-9.4.1.tgz#7d17fdbcc527eb89ce9a642c86ec4e91cfee5909"
+  integrity sha512-1RO7FUpBFrnM2vhiaMyuzpi0YnAsCPpFdzAZtCCGsRKgNYLg28xE1J5vWk/GNoKhvpQePEuK6j9DLoDg9vDZbw==
   dependencies:
     "@react-spring/core" "~9.4.0"
     "@react-spring/konva" "~9.4.0"
