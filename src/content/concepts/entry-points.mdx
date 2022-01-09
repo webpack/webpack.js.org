@@ -11,11 +11,15 @@ contributors:
   - chenxsan
   - adyjs
   - anshumanv
+<<<<<<< HEAD
 translators:
   - QC-L
   - jacob-lcs
   - dear-lizhihua
   - hanhan9449
+=======
+  - ritikbanger
+>>>>>>> 7bd6238183ee438a473d634af782995f38aa51b1
 ---
 
 正如我们在 [起步](/guides/getting-started/#using-a-configuration) 中提到的，在 webpack 配置中有多种方式定义 `entry` 属性。除了解释为什么它可能非常有用，我们还将向你展示**如何去**配置 `entry` 属性。
@@ -57,7 +61,11 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 当你希望通过一个入口（例如一个库）为应用程序或工具快速设置 webpack 配置时，单一入口的语法方式是不错的选择。然而，使用这种语法方式来扩展或调整配置的灵活性不大。
+=======
+Single Entry Syntax is a great choice when you are looking to quickly set up a webpack configuration for an application or tool with one entry point (i.e. a library). However, there is not much flexibility in extending or scaling your configuration with this syntax.
+>>>>>>> 7bd6238183ee438a473d634af782995f38aa51b1
 
 ## 对象语法 $#object-syntax$
 
@@ -82,7 +90,11 @@ T> 当你通过插件生成入口时，你可以传递空对象 `{}` 给 `entry`
 
 ### 描述入口的对象 $#entry-description-object$
 
+<<<<<<< HEAD
 用于描述入口的对象。你可以使用如下属性：
+=======
+An object of entry point description. You can specify the following properties.
+>>>>>>> 7bd6238183ee438a473d634af782995f38aa51b1
 
 - `dependOn`: 当前入口所依赖的入口。它们必须在该入口被加载前被加载。
 - `filename`: 指定要输出的文件名称。
@@ -90,7 +102,11 @@ T> 当你通过插件生成入口时，你可以传递空对象 `{}` 给 `entry`
 - `library`: 指定 library 选项，为当前 entry 构建一个 library。
 - `runtime`: 运行时 chunk 的名字。如果设置了，就会创建一个新的运行时 chunk。在 webpack 5.43.0 之后可将其设为 `false` 以避免一个新的运行时 chunk。
 
+<<<<<<< HEAD
 - `publicPath`: 当该入口的输出文件在浏览器中被引用时，为它们指定一个公共 URL 地址。请查看 [output.publicPath](/configuration/output/#outputpublicpath)。
+=======
+- `publicPath`: Specify a public URL address for the output files of this entry when they are referenced in a browser. Also, see [output.publicPath](/configuration/output/#outputpublicpath).
+>>>>>>> 7bd6238183ee438a473d634af782995f38aa51b1
 
 **webpack.config.js**
 
@@ -193,11 +209,19 @@ module.exports = {
 
 **这是什么？** 这是告诉 webpack 我们想要配置 2 个单独的入口点（例如上面的示例）。
 
+<<<<<<< HEAD
 **为什么？** 这样你就可以在 `vendor.js` 中存入未做修改的必要 library 或文件（例如 Bootstrap, jQuery, 图片等），然后将它们打包在一起成为单独的 chunk。内容哈希保持不变，这使浏览器可以独立地缓存它们，从而减少了加载时间。
+=======
+**Why?** With this, you can import required libraries or files that aren't modified (e.g. Bootstrap, jQuery, images, etc) inside `vendor.js` and they will be bundled together into their own chunk. Content hash remains the same, which allows the browser to cache them separately thereby reducing load time.
+>>>>>>> 7bd6238183ee438a473d634af782995f38aa51b1
 
 T> 在 webpack < 4 的版本中，通常将 vendor 作为一个单独的入口起点添加到 entry 选项中，以将其编译为一个单独的文件（与 `CommonsChunkPlugin` 结合使用）。<br /><br /> 而在 webpack 4 中不鼓励这样做。而是使用 [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) 选项，将 vendor 和 app(应用程序) 模块分开，并为其创建一个单独的文件。**不要** 为 vendor 或其他不是执行起点创建 entry。
 
+<<<<<<< HEAD
 ### 多页面应用程序 $#multi-page-application$
+=======
+### Multi-Page Application
+>>>>>>> 7bd6238183ee438a473d634af782995f38aa51b1
 
 **webpack.config.js**
 

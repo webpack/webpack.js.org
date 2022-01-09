@@ -11,9 +11,13 @@ contributors:
   - chenxsan
   - jamesgeorge007
   - getsnoopy
+<<<<<<< HEAD
 translators:
   - lcxfs1991
   - QC-L
+=======
+  - yevhen-logosha
+>>>>>>> 7bd6238183ee438a473d634af782995f38aa51b1
 ---
 
 本指南目标是帮助你在使用 webpack 的时候直接迁移到 webpack 5。如果你使用运行 webpack 更底层的工具，请
@@ -35,7 +39,12 @@ Webpack 5 对 Node.js 的版本要求至少是 10.13.0 (LTS)，因此，如果�
 
 3. 升级所有使用到的 plugin 和 loader 为最新的可用版本。
 
+<<<<<<< HEAD
   部分 plugin 和 loader 可能会有一个 beta 版本，必须使用它们才能与 webpack 5 兼容。
+=======
+   Some Plugins and Loaders might have a beta version that has to be used in order to be compatible with webpack 5.
+   Make sure to read release notes of each individual plugin/loader when upgrading it, since latest version might only support webpack 5 and will fail in v4. In such case, it's recommended to update to the latest version that supports webpack 4.
+>>>>>>> 7bd6238183ee438a473d634af782995f38aa51b1
 
 ### 确保你的构建没有错误或警告 $#make-sure-your-build-has-no-errors-or-warnings$
 
@@ -96,7 +105,13 @@ T> webpack 5 从配置中移除了这些选项，并始终赋值 `false`。
 
 - Yarn: `yarn add webpack@latest`
 
+<<<<<<< HEAD
 #### 清理配置 $#clean-up-configuration$
+=======
+If you were not able to upgrade some plugins/loaders to the latest in Upgrade webpack 4 and its plugins/loaders step, don't forget to upgrade them now.
+
+### Clean up configuration
+>>>>>>> 7bd6238183ee438a473d634af782995f38aa51b1
 
 - 请考虑将 `optimization.moduleIds` 和 `optimization.chunkIds` 从你 webpack 配置中移除。使用默认值会更合适，因为它们会在 [`production 模式`](/configuration/mode/#mode-production) 下支持长效缓存且可以在 [`development` 模式](/configuration/mode/#mode-development)下进行调试。
 - 当 webpack 配置中使用了 `[hash]` 占位符时，请考虑将它改为 `[contenthash]`。效果一致，但事实证明会更为有效。
