@@ -13,6 +13,7 @@ contributors:
   - liyiming22
   - daimalou
   - ChocolateLoverRaj
+  - snitin315
 ---
 
 Webpack accepts configuration files written in multiple programming and data languages. The list of supported file extensions can be found in the [node-interpret](https://github.com/gulpjs/interpret) package. Using [node-interpret](https://github.com/gulpjs/interpret), webpack can handle many different types of configuration files.
@@ -23,6 +24,8 @@ To write the webpack configuration in [TypeScript](http://www.typescriptlang.org
 
 ```bash
 npm install --save-dev typescript ts-node @types/node @types/webpack
+# and, if using webpack-dev-server < v4.7.0
+npm install --save-dev @types/webpack-dev-server
 ```
 
 and then proceed to write your configuration:
