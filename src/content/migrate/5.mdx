@@ -11,9 +11,11 @@ contributors:
   - chenxsan
   - jamesgeorge007
   - getsnoopy
+  - yevhen-logosha
 translators:
   - lcxfs1991
   - QC-L
+  - jacob-lcs
 ---
 
 本指南目标是帮助你在使用 webpack 的时候直接迁移到 webpack 5。如果你使用运行 webpack 更底层的工具，请
@@ -27,15 +29,16 @@ Webpack 5 对 Node.js 的版本要求至少是 10.13.0 (LTS)，因此，如果�
 
 1. 升级 `webpack` 4 至最新的可用版本。
 
-  - 当使用 webpack >= 4 时，升级到最新的 webpack 5 版本无需额外的操作。
+- 当使用 webpack >= 4 时，升级到最新的 webpack 5 版本无需额外的操作。
 
-  - 如果你使用的 webpack 版本小于 4，请查阅 [webpack 4 迁移指南](/migrate/4/)。
+- 如果你使用的 webpack 版本小于 4，请查阅 [webpack 4 迁移指南](/migrate/4/)。
 
 2. 升级 `webpack-cli` 到最新的可用版本（如已使用的情况下）
 
 3. 升级所有使用到的 plugin 和 loader 为最新的可用版本。
 
-  部分 plugin 和 loader 可能会有一个 beta 版本，必须使用它们才能与 webpack 5 兼容。
+部分 plugin 和 loader 可能会有一个 beta 版本，必须使用它们才能与 webpack 5 兼容。
+请确保在升级时阅读每个插件/loader 的发布说明，因为最新版本可能只支持 webpack 5，而在 v4 中会运行失败。在这种情况下，建议升级到支持 webpack 4 的最新版本。
 
 ### 确保你的构建没有错误或警告 $#make-sure-your-build-has-no-errors-or-warnings$
 
@@ -96,6 +99,8 @@ T> webpack 5 从配置中移除了这些选项，并始终赋值 `false`。
 
 - Yarn: `yarn add webpack@latest`
 
+如果你之前在升级 webpack 4 时不能将某些插件或者 loader 升级到最新版本，现在不要忘了升级。
+
 #### 清理配置 $#clean-up-configuration$
 
 - 请考虑将 `optimization.moduleIds` 和 `optimization.chunkIds` 从你 webpack 配置中移除。使用默认值会更合适，因为它们会在 [`production 模式`](/configuration/mode/#mode-production) 下支持长效缓存且可以在 [`development` 模式](/configuration/mode/#mode-development)下进行调试。
@@ -107,20 +112,20 @@ T> webpack 5 从配置中移除了这些选项，并始终赋值 `false`。
 - 如果你定义了 `rules`，以使用 `raw-loader`，`url-loader` 或 `file-loader` 来加载资源，请使用 [资源模块](/guides/asset-modules/) 替代，因为它们可能在不久的将来被淘汰。
 - 如果你将 `target` 设置为函数，则应将其更新为 `false`，然后在 `plugins` 选项中使用该函数。具体示例如下：
 
-    ```json
-    // for webpack 4
-    {
-        target: WebExtensionTarget(nodeConfig)
-    }
+  ```json
+  // for webpack 4
+  {
+      target: WebExtensionTarget(nodeConfig)
+  }
 
-    // for webpack 5
-    {
-        target: false,
-        plugins: [
-            WebExtensionTarget(nodeConfig)
-        ]
-    }
-    ```
+  // for webpack 5
+  {
+      target: false,
+      plugins: [
+          WebExtensionTarget(nodeConfig)
+      ]
+  }
+  ```
 
 如果通过 import 使用了 WebAssembly，应遵循以下两点：
 
@@ -192,63 +197,63 @@ console.log(pkg.version);
 
 - Level 1: **模式（Schema）校验失败**。
 
-    配置选项已更改。应该要有校验失败的信息且附上 `BREAKING CHANGE:` 提示，或提示应该使用哪个选项。
+  配置选项已更改。应该要有校验失败的信息且附上 `BREAKING CHANGE:` 提示，或提示应该使用哪个选项。
 
 - Level 2: **webpack 异常退出并出现错误**。
 
-    错误信息应告诉你哪里需要进行修改。
+  错误信息应告诉你哪里需要进行修改。
 
 - Level 3: **构建错误**。
 
-    错误信息应该要有 `BREAKING CHANGE:` 提示。
+  错误信息应该要有 `BREAKING CHANGE:` 提示。
 
 - Level 4: **构建警告**。
 
-    警告信息应该告诉你哪里需要进行修改。
+  警告信息应该告诉你哪里需要进行修改。
 
 - Level 5: **运行时错误**。
 
   这很棘手，你可能要调试才能找到问题所在。在这里很难给出一个通用的建议。但我们在下面列出了一些关于运行时错误的常见建议：
 
-    - `process` 未定义。
-        - webpack 5 不再引入 Node.js 变量的 polyfill，在前端代码中应避免使用。
-        - 想支持浏览器的用法？使用 `exports` 或 `imports` 中的 package.json 字段，会根据环境不同使用不同的代码。
-            - 也可以使用 `browser` 字段来支持旧的 bundlers。
-            - 替代方案。用 `typeof process` 检查包裹的代码块。请注意，这将对 bundle 大小产生负面影响。
-        - 想要使用环境变量，如 `process.env.VARIABLE`？你需要使用 `DefinePlugin` 或 `EnvironmentPlugin` 在配置中定义这些变量。
-            - 考虑使用 `VARIABLE` 代替，但需要检查 `typeof VARIABLE !== 'undefined'`。`process.env` 是 Node.js 特有，应避免在前端中使用。
-    - 404 的 error 将指向含有 `auto` 的 URL
-        - 并非所有生态系统工具都已设置好新的 `publicPath` 的默认值 `output.publicPath: "auto"`
-            - 使用静态的 `output.publicPath: ""` 代替。
+  - `process` 未定义。
+    - webpack 5 不再引入 Node.js 变量的 polyfill，在前端代码中应避免使用。
+    - 想支持浏览器的用法？使用 `exports` 或 `imports` 中的 package.json 字段，会根据环境不同使用不同的代码。
+      - 也可以使用 `browser` 字段来支持旧的 bundlers。
+      - 替代方案。用 `typeof process` 检查包裹的代码块。请注意，这将对 bundle 大小产生负面影响。
+    - 想要使用环境变量，如 `process.env.VARIABLE`？你需要使用 `DefinePlugin` 或 `EnvironmentPlugin` 在配置中定义这些变量。
+      - 考虑使用 `VARIABLE` 代替，但需要检查 `typeof VARIABLE !== 'undefined'`。`process.env` 是 Node.js 特有，应避免在前端中使用。
+  - 404 的 error 将指向含有 `auto` 的 URL
+    - 并非所有生态系统工具都已设置好新的 `publicPath` 的默认值 `output.publicPath: "auto"`
+      - 使用静态的 `output.publicPath: ""` 代替。
 
 - Level 6: **弃用警告**.
 
-    你可能会收到很多弃用警告，插件需要时间来赶上内核的变化。请将这些弃用上报给插件。这些弃用只是警告，构建仍然可以正常工作，只是会有小瑕疵（比如性能降低）。
+  你可能会收到很多弃用警告，插件需要时间来赶上内核的变化。请将这些弃用上报给插件。这些弃用只是警告，构建仍然可以正常工作，只是会有小瑕疵（比如性能降低）。
 
   - 你使用带有 `--no-deprecation` 选项的 node 运行 webpack，可以隐藏废弃告警，例如：`node --no-deprecation node_modules/webpack/bin/webpack.js`。但这只能作为临时的解决方案。
   - plugin 和 loader 的开发者，应遵循弃用信息中的建议以改进代码。
 
 - Level 7: **性能问题**.
 
-    一般来说，webpack 5 的性能应该会有所提高，但也存在少数情况性能会变差。
+  一般来说，webpack 5 的性能应该会有所提高，但也存在少数情况性能会变差。
 
-    而在这里，你可以做一些事情来改善这种情况：
+  而在这里，你可以做一些事情来改善这种情况：
 
-    - 通过 Profile 检查时间耗费在哪里。
-        - `--profile --progress` 可以展示一个简单的性能曲线。
-        - `node --inspect-brk node_modules/webpack/bin/webpack.js` + [`chrome://inspect`](chrome://inspect) / [`edge://inspect`](edge://inspect)（查看 profiler 选项）。
-            - 你可以将这些性能文件保存到文件中，并在 issues 中提供它们。
-            - 尝试使用 `--no-turbo-inlining` 选项，在某些情况下可以获得更好的堆栈信息。
-    - 在增量构建时，构建模块的世界可以通过使用像 webpack 4 中的不安全缓存来改善：
-        - `module.unsafeCache: true`
-        - 但这可能会影响处理代码库的一些变化能力。
-    - 全量构建
-        - 与新功能相比，弃用特性的向后兼容层通常性能很差。
-        - 创建许多警告会影响构建性能，即使它们被忽略。
-        - Source Maps 的代价很昂贵。请在文档中查看 [`devtool`](/configuration/devtool/) 选项以比较使用不同选项的代价。
-        - Anti-Virus（反病毒）保护可能会影响文件系统的访问性能。
-        - 持久缓存可以帮助改善重复性的完整构建。
-        - Module Federation 允许将应用程序分割成多个较小的构建。
+  - 通过 Profile 检查时间耗费在哪里。
+    - `--profile --progress` 可以展示一个简单的性能曲线。
+    - `node --inspect-brk node_modules/webpack/bin/webpack.js` + [`chrome://inspect`](chrome://inspect) / [`edge://inspect`](edge://inspect)（查看 profiler 选项）。
+      - 你可以将这些性能文件保存到文件中，并在 issues 中提供它们。
+      - 尝试使用 `--no-turbo-inlining` 选项，在某些情况下可以获得更好的堆栈信息。
+  - 在增量构建时，构建模块的世界可以通过使用像 webpack 4 中的不安全缓存来改善：
+    - `module.unsafeCache: true`
+    - 但这可能会影响处理代码库的一些变化能力。
+  - 全量构建
+    - 与新功能相比，弃用特性的向后兼容层通常性能很差。
+    - 创建许多警告会影响构建性能，即使它们被忽略。
+    - Source Maps 的代价很昂贵。请在文档中查看 [`devtool`](/configuration/devtool/) 选项以比较使用不同选项的代价。
+    - Anti-Virus（反病毒）保护可能会影响文件系统的访问性能。
+    - 持久缓存可以帮助改善重复性的完整构建。
+    - Module Federation 允许将应用程序分割成多个较小的构建。
 
 ## 所有情况都运行如常？ $#everything-works$
 
