@@ -6304,10 +6304,10 @@ husky@^7.0.4:
   resolved "https://registry.yarnpkg.com/husky/-/husky-7.0.4.tgz#242048245dc49c8fb1bf0cc7cfb98dd722531535"
   integrity sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==
 
-hyperlink@^5.0.3:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/hyperlink/-/hyperlink-5.0.3.tgz#39281b98cb2e5f63bf1b818e454c6bdf9cfc8099"
-  integrity sha512-jp0SjVPhUEYQnvqQDmPEVhcrcxjtfvjHRkSswrrX1SeW2vYSIVMX7CECGA4AqYWpVy0+WMbtRyu1BU98/gcUBQ==
+hyperlink@^5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/hyperlink/-/hyperlink-5.0.4.tgz#b48056fef322ccc8d91c61d32ab3c83de1a17f57"
+  integrity sha512-McN25ky/8OszPWctZJbvNYb4odYQSYeqE8hNK1aH/oM9GtmOyBZNE4ObkIEKOxIntG1PVfPp7uP7QoIdFEKkDg==
   dependencies:
     "@munter/tap-render" "^0.2.0"
     assetgraph "^7.3.1"
