@@ -103,7 +103,7 @@
     "jest": "^27.4.7",
     "lint-staged": "^12.1.7",
     "lodash": "^4.17.21",
-    "markdownlint": "^0.25.0",
+    "markdownlint": "^0.25.1",
     "markdownlint-cli": "^0.30.0",
     "mini-css-extract-plugin": "^2.4.7",
     "mkdirp": "^1.0.4",
