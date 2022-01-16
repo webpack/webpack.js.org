@@ -3617,6 +3617,19 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         response<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&#x27;setup-middlewares option GET&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
+      <span class="token comment">// Use the `unshift` method if you want to run a middleware before all other middlewares</span>
+      <span class="token comment">// or when you are migrating from the `onBeforeSetupMiddleware` option</span>
+      middlewares<span class="token punctuation">.</span><span class="token function">unshift</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        name<span class="token operator">:</span> <span class="token string">&#x27;fist-in-array&#x27;</span><span class="token punctuation">,</span>
+        <span class="token comment">// `path` is optional</span>
+        path<span class="token operator">:</span> <span class="token string">&#x27;/foo/path&#x27;</span><span class="token punctuation">,</span>
+        <span class="token function-variable function">middleware</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+          res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">&#x27;Foo!&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+      <span class="token comment">// Use the `push` method if you want to run a middleware after all other middlewares</span>
+      <span class="token comment">// or when you are migrating from the `onAfterSetupMiddleware` option</span>
       middlewares<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
         name<span class="token operator">:</span> <span class="token string">&#x27;hello-world-test-one&#x27;</span><span class="token punctuation">,</span>
         <span class="token comment">// `path` is optional</span>
