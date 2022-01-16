@@ -1578,6 +1578,15 @@ module.exports = {
         response.send('setup-middlewares option GET');
       });
 
+      middlewares.unshift({
+        name: 'fist-in-array',
+        // `path` is optional
+        path: '/foo/path',
+        middleware: (req, res) => {
+          res.send('Foo!');
+        },
+      });
+
       middlewares.push({
         name: 'hello-world-test-one',
         // `path` is optional
