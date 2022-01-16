@@ -1578,6 +1578,8 @@ module.exports = {
         response.send('setup-middlewares option GET');
       });
 
+      // Use `unshift` method if you want to run a middleware before others
+      // or when you are migrating from `onBeforeSetupMiddleware` option
       middlewares.unshift({
         name: 'fist-in-array',
         // `path` is optional
@@ -1587,6 +1589,8 @@ module.exports = {
         },
       });
 
+      // Use `push` method if you want to run a middleware after others
+      // or when you are migrating from the `onAfterSetupMiddleware` option
       middlewares.push({
         name: 'hello-world-test-one',
         // `path` is optional
