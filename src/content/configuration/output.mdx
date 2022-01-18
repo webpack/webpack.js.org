@@ -386,7 +386,11 @@ module.exports = {
 
 `string`
 
+<<<<<<< HEAD
 此选项确定 [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate) 使用的模块名称空间。未指定时的默认值为：[`output.library`](#outputlibrary)。在加载多个通过 webpack 构建的 library 时，用于防止 source map 中源文件路径冲突。
+=======
+This option determines the module's namespace used with the [`output.devtoolModuleFilenameTemplate`](#outputdevtoolmodulefilenametemplate). When not specified, it will default to the value of: [`output.uniqueName`](#outputuniquename). It's used to prevent source file path collisions in sourcemaps when loading multiple libraries built with webpack.
+>>>>>>> e73e5a69f0bcd29dbce46583eb5c0aa93a0e70ea
 
 例如，如果你有两个 library，分别使用命名空间 `library1` 和 `library2`，并且都有一个文件 `./src/index.js`（可能具有不同内容），它们会将这些文件暴露为 `webpack://library1/./src/index.js` 和 `webpack://library2/./src/index.js`。
 
