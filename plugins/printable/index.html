@@ -1087,7 +1087,7 @@ If a parallelization is enabled, the packages in <code>minimizerOptions</code> m
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="minify"><code>minify</code><a href="#minify" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>Type: <code>Function|Array&lt;Function&gt;</code>
 Default: <code>CssMinimizerPlugin.cssnanoMinify</code></p><p>Allows overriding default minify function.
 By default, plugin uses <a href="https://github.com/cssnano/cssnano">cssnano</a> package.
-Useful for using and testing unpublished versions or forks.</p><p>Possible options:</p><ul><li>CssMinimizerPlugin.cssnanoMinify</li><li>CssMinimizerPlugin.cssoMinify</li><li>CssMinimizerPlugin.cleanCssMinify</li><li>CssMinimizerPlugin.esbuildMinify</li><li><code>async (data, inputMap, minimizerOptions) =&gt; {return {code: &quot;a{color: red}&quot;, map: &quot;...&quot;, warnings: [], errors: []}}</code></li></ul><blockquote><p>⚠️ <strong>Always use <code>require</code> inside <code>minify</code> function when <code>parallel</code> option enabled</strong>.</p></blockquote><h4 id="function"><code>Function</code><a href="#function" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+Useful for using and testing unpublished versions or forks.</p><p>Possible options:</p><ul><li>CssMinimizerPlugin.cssnanoMinify</li><li>CssMinimizerPlugin.cssoMinify</li><li>CssMinimizerPlugin.cleanCssMinify</li><li>CssMinimizerPlugin.esbuildMinify</li><li>CssMinimizerPlugin.parcelCssMinify</li><li><code>async (data, inputMap, minimizerOptions) =&gt; {return {code: &quot;a{color: red}&quot;, map: &quot;...&quot;, warnings: [], errors: []}}</code></li></ul><blockquote><p>⚠️ <strong>Always use <code>require</code> inside <code>minify</code> function when <code>parallel</code> option enabled</strong>.</p></blockquote><h4 id="function"><code>Function</code><a href="#function" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -1251,7 +1251,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="using-custom-minifier-csso">Using custom minifier <a href="https://github.com/css/csso">csso</a><a href="#using-custom-minifier-csso" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  devtool<span class="token operator">:</span> <span class="token string">&quot;source-map&quot;</span><span class="token punctuation">,</span>
+  <span class="token comment">// Uncomment if you need source maps</span>
+  <span class="token comment">// devtool: &quot;source-map&quot;,</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -1263,7 +1264,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="using-custom-minifier-clean-css">Using custom minifier <a href="https://github.com/jakubpawlowicz/clean-css">clean-css</a><a href="#using-custom-minifier-clean-css" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  devtool<span class="token operator">:</span> <span class="token string">&quot;source-map&quot;</span><span class="token punctuation">,</span>
+  <span class="token comment">// Uncomment if you need source maps</span>
+  <span class="token comment">// devtool: &quot;source-map&quot;,</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
@@ -1275,12 +1277,26 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="using-custom-minifier-esbuild">Using custom minifier <a href="https://github.com/evanw/esbuild">esbuild</a><a href="#using-custom-minifier-esbuild" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
-  devtool<span class="token operator">:</span> <span class="token string">&quot;source-map&quot;</span><span class="token punctuation">,</span>
+  <span class="token comment">// Uncomment if you need source maps</span>
+  <span class="token comment">// devtool: &quot;source-map&quot;,</span>
   optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
     minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
         minify<span class="token operator">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>esbuildMinify<span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><h3 id="using-custom-minifier-parcelcss">Using custom minifier <a href="https://github.com/parcel-bundler/parcel-css">@parcel/css</a><a href="#using-custom-minifier-parcelcss" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// Uncomment if you need source maps</span>
+  <span class="token comment">// devtool: &quot;source-map&quot;,</span>
+  optimization<span class="token operator">:</span> <span class="token punctuation">{</span>
+    minimize<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    minimizer<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token keyword">new</span> <span class="token class-name">CssMinimizerPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        minify<span class="token operator">:</span> CssMinimizerPlugin<span class="token punctuation">.</span>parcelCssMinify<span class="token punctuation">,</span>
+        <span class="token comment">// Uncomment this line for options</span>
+        <span class="token comment">// minimizerOptions: { targets: { ie: 11 }, drafts: { nesting: true } },</span>
       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
