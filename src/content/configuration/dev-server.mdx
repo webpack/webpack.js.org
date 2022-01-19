@@ -1581,9 +1581,22 @@ module.exports = {
         response.send('setup-middlewares option GET');
       });
 
+      // 如果你想在所有其他中间件之前运行一个中间件或者当你从 `onBeforeSetupMiddleware` 配置项迁移时，
+      // 可以使用 `unshift` 方法
+      middlewares.unshift({
+        name: 'fist-in-array',
+        // `path` 是可选的
+        path: '/foo/path',
+        middleware: (req, res) => {
+          res.send('Foo!');
+        },
+      });
+
+      // 如果你想在所有其他中间件之后运行一个中间件或者当你从 `onAfterSetupMiddleware` 配置项迁移时，
+      // 可以使用 `push` 方法
       middlewares.push({
         name: 'hello-world-test-one',
-        // `path` is optional
+        // `path` 是可选的
         path: '/foo/bar',
         middleware: (req, res) => {
           res.send('Foo Bar!');
