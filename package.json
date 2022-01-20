@@ -110,12 +110,8 @@
     "lodash": "^4.17.21",
     "markdownlint": "^0.25.1",
     "markdownlint-cli": "^0.30.0",
-<<<<<<< HEAD
     "mdast-util-to-string": "^1.1.0",
-    "mini-css-extract-plugin": "^2.5.1",
-=======
     "mini-css-extract-plugin": "^2.5.2",
->>>>>>> 6e86eb13a3db9d779c90a0979ffdae9f7af34556
     "mkdirp": "^1.0.4",
     "modularscale-sass": "^3.0.3",
     "node-fetch": "^3.1.1",
