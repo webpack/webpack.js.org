@@ -539,18 +539,22 @@ module.exports = {
 
 ### stats.context
 
-`string = '../src/'`
+`string`
 
-Sets the context directory for shortening the request information.
+The stats base directory, an **absolute path** for shortening the request information.
 
 ```javascript
+const path = require('path');
+
 module.exports = {
   //...
   stats: {
-    context: '../src/components/',
+    context: path.resolve(__dirname, 'src/components'),
   },
 };
 ```
+
+By default, the value of [`context`](/configuration/entry-context/#context) or the Node.js current working directory is used.
 
 ### stats.colors
 
