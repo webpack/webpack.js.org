@@ -27,6 +27,7 @@ contributors:
   - QC-L
   - anshumanv
   - mrzalyaul
+  - JakobJingleheimer
 ---
 
 The top-level `output` key contains a set of options instructing webpack on how and where it should output your bundles, assets, and anything else you bundle or load with webpack.
@@ -913,7 +914,7 @@ Configure how the library will be exposed.
 
 - Type: `string`
 
-  Types included by default are `'var'`, `'module'`, `'assign'`, `'assign-properties'`, `'this'`, `'window'`, `'self'`, `'global'`, `'commonjs'`, `'commonjs2'`, `'commonjs-module'`, `'amd'`, `'amd-require'`, `'umd'`, `'umd2'`, `'jsonp'` and `'system'`, but others might be added by plugins.
+  Types included by default are `'var'`, `'module'`, `'assign'`, `'assign-properties'`, `'this'`, `'window'`, `'self'`, `'global'`, `'commonjs'`, `'commonjs2'`, `'commonjs-module'`, `'commonjs-static'`, `'amd'`, `'amd-require'`, `'umd'`, `'umd2'`, `'jsonp'` and `'system'`, but others might be added by plugins.
 
 For the following examples, we'll use `__entry_return_` to indicate the values returned by the entry point.
 
@@ -1144,6 +1145,54 @@ require('MyLibrary').doSomething();
 If we specify `output.library.name` with `type: commmonjs2`, the return value of your entry point will be assigned to the `module.exports.[output.library.name]`.
 
 T> Wondering the difference between CommonJS and CommonJS2 is? While they are similar, there are some subtle differences between them that are not usually relevant in the context of webpack. (For further details, please [read this issue](https://github.com/webpack/webpack/issues/1114).)
+
+##### type: 'commonjs-static'
+
+<Badge text='5.66.0+' />
+
+```js
+module.exports = {
+  // …
+  output: {
+    library: {
+      // note there's no `name` here
+      type: 'commonjs-static',
+    },
+  },
+};
+```
+
+Individual exports will be set as properties on `module.exports`. The "static" in the name refers to the output being statically analysable, and thus named exports are importable into ESM via Node.js:
+
+Input:
+
+```javascript
+export function doSomething() {}
+```
+
+Output:
+
+```javascript
+function doSomething() {}
+
+// …
+
+exports.doSomething = __webpack_exports__.doSomething;
+```
+
+Consumption (CommonJS):
+
+```javascript
+const { doSomething } = require('./output.cjs'); // doSomething => [Function: doSomething]
+```
+
+Consumption (ESM):
+
+```javascript
+import { doSomething } from './output.cjs'; // doSomething => [Function: doSomething]
+```
+
+T> This is useful when source code is written in ESM and the output should be compatible with both CJS and ESM. For further details, please [read this issue](https://github.com/webpack/webpack/issues/14998) or [this article](https://dev.to/jakobjingleheimer/configuring-commonjs-es-modules-for-nodejs-12ed) (specifically, [this section](https://dev.to/jakobjingleheimer/configuring-commonjs-es-modules-for-nodejs-12ed#publish-only-a-cjs-distribution-with-property-exports)).
 
 ##### type: 'amd'
 
