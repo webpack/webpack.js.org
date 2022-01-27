@@ -27,10 +27,14 @@ contributors:
   - QC-L
   - anshumanv
   - mrzalyaul
+<<<<<<< HEAD
 translators:
   - dear-lizhihua
   - jacob-lcs
   - QC-L
+=======
+  - JakobJingleheimer
+>>>>>>> f36f9469970338874514a30d25bfb9e89d54fdfc
 ---
 
 `output` 位于对象最顶级键(key)，包括了一组选项，指示 webpack 如何去输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。
@@ -916,7 +920,11 @@ module.exports = {
 
 - 类型：`string`
 
+<<<<<<< HEAD
   类型默认包括 `'var'`、`'module'`、`'assign'`、`'assign-properties'`、`'this'`、`'window'`、`'self'`、`'global'`、`'commonjs'`、`'commonjs2'`、`'commonjs-module'`、`'amd'`、`'amd-require'`、`'umd'`、`'umd2'`、`'jsonp'` 以及 `'system'`，除此之外也可以通过插件添加。
+=======
+  Types included by default are `'var'`, `'module'`, `'assign'`, `'assign-properties'`, `'this'`, `'window'`, `'self'`, `'global'`, `'commonjs'`, `'commonjs2'`, `'commonjs-module'`, `'commonjs-static'`, `'amd'`, `'amd-require'`, `'umd'`, `'umd2'`, `'jsonp'` and `'system'`, but others might be added by plugins.
+>>>>>>> f36f9469970338874514a30d25bfb9e89d54fdfc
 
 对于接下来的实例，我们将会使用 `__entry_return_` 表示被入口点返回的值。
 
@@ -1148,7 +1156,59 @@ require('MyLibrary').doSomething();
 
 T> 在考虑 CommonJS 与 CommonJS2 之间的区别？虽然它们很相似，但是它们之间有一些细微的差别，这些差别在 webpack 的上下文中通常是不相关的。（要获取更多详细内容，请 [阅读这个 issue](https://github.com/webpack/webpack/issues/1114)。）
 
+<<<<<<< HEAD
 ##### type: 'amd' $#type-amd$
+=======
+##### type: 'commonjs-static'
+
+<Badge text='5.66.0+' />
+
+```js
+module.exports = {
+  // …
+  output: {
+    library: {
+      // note there's no `name` here
+      type: 'commonjs-static',
+    },
+  },
+};
+```
+
+Individual exports will be set as properties on `module.exports`. The "static" in the name refers to the output being statically analysable, and thus named exports are importable into ESM via Node.js:
+
+Input:
+
+```javascript
+export function doSomething() {}
+```
+
+Output:
+
+```javascript
+function doSomething() {}
+
+// …
+
+exports.doSomething = __webpack_exports__.doSomething;
+```
+
+Consumption (CommonJS):
+
+```javascript
+const { doSomething } = require('./output.cjs'); // doSomething => [Function: doSomething]
+```
+
+Consumption (ESM):
+
+```javascript
+import { doSomething } from './output.cjs'; // doSomething => [Function: doSomething]
+```
+
+T> This is useful when source code is written in ESM and the output should be compatible with both CJS and ESM. For further details, please [read this issue](https://github.com/webpack/webpack/issues/14998) or [this article](https://dev.to/jakobjingleheimer/configuring-commonjs-es-modules-for-nodejs-12ed) (specifically, [this section](https://dev.to/jakobjingleheimer/configuring-commonjs-es-modules-for-nodejs-12ed#publish-only-a-cjs-distribution-with-property-exports)).
+
+##### type: 'amd'
+>>>>>>> f36f9469970338874514a30d25bfb9e89d54fdfc
 
 可以将你的库暴露为 AMD 模块。
 

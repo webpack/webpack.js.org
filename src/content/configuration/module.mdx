@@ -44,8 +44,16 @@ module.exports = {
       asset: {
         // asseet 模块的 generator 选项
 
+<<<<<<< HEAD
         // 自定义 asset 模块的 publicPath，自 webpack 5.28.0 起可用
         publicPath: 'assets/',
+=======
+        // Customize publicPath for asset modules, available since webpack 5.28.0
+        publicPath: 'https://cdn/assets/',
+
+        // Emit the asset in the specified folder relative to 'output.path', available since webpack 5.67.0
+        outputPath: 'cdn-assets/',
+>>>>>>> f36f9469970338874514a30d25bfb9e89d54fdfc
       },
       'asset/inline': {
         // asset/内联模块的 generator 选项
@@ -53,8 +61,16 @@ module.exports = {
       'asset/resource': {
         // asset/资源模块的 generator 选项
 
+<<<<<<< HEAD
         // 自定义 asset/resource 模块的 publicPath，自 webpack 5.28.0 起可用
         publicPath: 'assets/',
+=======
+        // Customize publicPath for asset/resource modules, available since webpack 5.28.0
+        publicPath: 'https://cdn/assets/',
+
+        // Emit the asset in the specified folder relative to 'output.path', available since webpack 5.67.0
+        outputPath: 'cdn-assets/',
+>>>>>>> f36f9469970338874514a30d25bfb9e89d54fdfc
       },
       javascript: {
         // 该模块类型尚不支持 generator 选项
@@ -761,7 +777,39 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ## Rule.resource $#ruleresource$
+=======
+### Rule.generator.outputPath
+
+Emit the asset in the specified folder relative to 'output.path'. This should only be needed when custom 'publicPath' is specified to match the folder structure there.
+
+- Type: `string | ((pathData: PathData, assetInfo?: AssetInfo) => string)`
+- Available: <Badge text='5.67.0+' />
+
+```js
+module.exports = {
+  //...
+  output: {
+    publicPath: 'static/',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.png$/i,
+        type: 'asset/resource',
+        generator: {
+          publicPath: 'https://cdn/assets/',
+          outputPath: 'cdn-assets/',
+        },
+      },
+    ],
+  },
+};
+```
+
+## Rule.resource
+>>>>>>> f36f9469970338874514a30d25bfb9e89d54fdfc
 
 [`条件`](#条件)会匹配 resource。在 [`Rule` 条件](#rule-conditions) 中查阅详情。
 
