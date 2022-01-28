@@ -46,6 +46,9 @@ module.exports = {
 
         // 自定义 asset 模块的 publicPath，自 webpack 5.28.0 起可用
         publicPath: 'assets/',
+
+        // 将静态资源输出到相对于 'output.path' 的指定文件夹中，webpack 5.67.0 后可用
+        outputPath: 'cdn-assets/',
       },
       'asset/inline': {
         // asset/内联模块的 generator 选项
@@ -55,6 +58,9 @@ module.exports = {
 
         // 自定义 asset/resource 模块的 publicPath，自 webpack 5.28.0 起可用
         publicPath: 'assets/',
+
+        // 将静态资源输出到相对于 'output.path' 的指定文件夹中，webpack 5.67.0 后可用
+        outputPath: 'cdn-assets/',
       },
       javascript: {
         // 该模块类型尚不支持 generator 选项
@@ -754,6 +760,34 @@ module.exports = {
         type: 'asset/resource',
         generator: {
           publicPath: 'assets/',
+        },
+      },
+    ],
+  },
+};
+```
+
+### Rule.generator.outputPath $#rulegeneratoroutputpath$
+
+将静态资源输出到相对于 'output.path' 的指定文件夹中。只有当 'publicPath' 被用来匹配文件夹结构时才会需要设置该配置。
+
+- 类型：`string | ((pathData: PathData, assetInfo?: AssetInfo) => string)`
+- 可用：<Badge text='5.67.0+' />
+
+```js
+module.exports = {
+  //...
+  output: {
+    publicPath: 'static/',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.png$/i,
+        type: 'asset/resource',
+        generator: {
+          publicPath: 'https://cdn/assets/',
+          outputPath: 'cdn-assets/',
         },
       },
     ],
