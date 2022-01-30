@@ -106,9 +106,6 @@
         <loc>https://webpack.js.org/api/parser</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/passing-a-config</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/api/plugins</loc>
     </url>
     <url>
@@ -119,6 +116,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/api/webpack-dev-server</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/api/passing-a-config</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
@@ -277,6 +277,9 @@
         <loc>https://webpack.js.org/guides/asset-management</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/asset-modules</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/author-libraries</loc>
     </url>
     <url>
@@ -329,9 +332,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/hot-module-replacement</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/asset-modules</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/installation</loc>
