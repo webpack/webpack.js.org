@@ -130,13 +130,13 @@
         <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/configuration</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/concepts/dependency-graph</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/entry-points</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/configuration</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
@@ -349,13 +349,13 @@
         <loc>https://webpack.js.org/guides/package-exports</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/production</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/production-build</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/progressive-web-application</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/production</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/public-path</loc>
@@ -586,21 +586,21 @@
         <loc>https://webpack.js.org/api/plugins/compilation</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/compiler</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/api/plugins/module-factories</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/parser</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/api/plugins/compiler</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/api/plugins/resolver</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/template</loc>
+        <loc>https://webpack.js.org/api/plugins/tapable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/tapable</loc>
+        <loc>https://webpack.js.org/api/plugins/template</loc>
     </url>
 </urlset>
