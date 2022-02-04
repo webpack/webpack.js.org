@@ -1120,7 +1120,7 @@ module.exports = {
 
 ## devServer.open $#devserveropen$
 
-`boolean` `string` `[string]` `object` `[object]`
+`boolean` `string` `object` `[string, object]`
 
 告诉 dev-server 在服务器已经启动后打开浏览器。设置其为 `true` 以打开你的默认浏览器。
 
@@ -1615,7 +1615,7 @@ module.exports = {
 
 ## devServer.static $#devserverstatic$
 
-`boolean` `string` `[string]` `object` `[object]`
+`boolean` `string` `object` `[string, object]`
 
 该配置项允许配置从目录提供静态文件的选项（默认是 'public' 文件夹）。将其设置为 `false` 以禁用：
 
@@ -1885,7 +1885,7 @@ module.exports = {
 
 ## devServer.watchFiles $#devserverwatchfiles$
 
-`string` `[string]` `object` `[object]`
+`string` `object` `[string, object]`
 
 该配置项允许你配置 globs/directories/files 来监听文件变化。例如：
 
