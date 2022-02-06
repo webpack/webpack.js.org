@@ -13,6 +13,7 @@ contributors:
   - anikethsaha
   - chenxsan
   - jamesgeorge007
+  - snitin315
 related:
   - title: CommonJS
     url: https://en.wikipedia.org/wiki/CommonJS
@@ -84,7 +85,7 @@ exports.aFunction = function doSomething() {
 
 如果在一个被 Parser 解析的表达式内部使用，则配置选项会被当作 `true` 处理。
 
-## import.meta.url $#import-meta-url$
+## import.meta.url
 
 返回模块以 `file:` 开头绝对路径的 URL。
 
@@ -94,7 +95,7 @@ exports.aFunction = function doSomething() {
 console.log(import.meta.url); // 输出结果类似于 `file:///path/to/your/project/src/index.js`
 ```
 
-## import.meta.webpack $#import-meta-webpack$
+## import.meta.webpack
 
 返回 webpack 的版本
 
@@ -104,7 +105,7 @@ console.log(import.meta.url); // 输出结果类似于 `file:///path/to/your/pro
 console.log(import.meta.webpack); // output `5` for webpack 5
 ```
 
-## import.meta.webpackHot $#importmetawebpackhot$
+## import.meta.webpackHot
 
 webpack 特定。[`module.hot`](#modulehot-webpack-specific) 的一个别名，[strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm) 中可以使用 `import.meta.webpackHot` 但是不能使用 `module.hot`。
 
@@ -132,15 +133,15 @@ require('file.js?test');
 __resourceQuery === '?test';
 ```
 
-## \_\_webpack_public_path\_\_ (webpack-specific) $#__webpack_public_path__-webpack-specific$
+## \_\_webpack_public_path\_\_ (webpack-specific)
 
 等同于 `output.publicPath` 配置选项。
 
-## \_\_webpack_require\_\_ (webpack-specific) $#__webpack_require__-webpack-specific$
+## \_\_webpack_require\_\_ (webpack-specific)
 
 原始 require 函数。这个表达式不会被解析器解析为依赖。
 
-## `__webpack_chunk_load__` (webpack 特有变量) $#__webpack_chunk_load__-webpack-specific$
+## `__webpack_chunk_load__` (webpack-specific)
 
 内部 chunk 载入函数，有一个输入参数：
 
@@ -168,15 +169,27 @@ import('./module-a').then((moduleA) => {
 });
 ```
 
-## \_\_webpack_modules\_\_ (webpack-specific) $#__webpack_modules__-webpack-specific$
+## \_\_webpack_module\_\_ (webpack-specific)
+
+<Badge text="5.68.0+" />
+
+它提供对当前 `module` 的访问。`module` 在 ESM 严格模式下不可用。
+
+## \_\_webpack_module\_\_.id (webpack-specific)
+
+<Badge text="5.68.0+" />
+
+它提供对当前 `module`(`module.id`) ID 的访问。`module` 在 ESM 严格模式下不可用。
+
+## \_\_webpack_modules\_\_ (webpack-specific)
 
 访问所有模块的内部对象。
 
-## \_\_webpack_hash\_\_ (webpack-specific) $#__webpack_hash__-webpack-specific$
+## \_\_webpack_hash\_\_ (webpack-specific)
 
 这个变量提供对编译过程中(compilation)的 hash 信息的访问。
 
-## \_\_webpack_get_script_filename\_\_ (webpack-specific) $#__webpack_get_script_filename__-webpack-specific$
+## \_\_webpack_get_script_filename\_\_ (webpack-specific)
 
 `function (chunkId)`
 
@@ -193,11 +206,11 @@ __webpack_get_script_filename__ = (chunkId) => {
 };
 ```
 
-## \_\_non_webpack_require\_\_ (webpack-specific) $#__non_webpack_require__-webpack-specific$
+## \_\_non_webpack_require\_\_ (webpack-specific)
 
 生成一个不会被 webpack 解析的 `require` 函数。配合全局可以获取到的 require 函数，可以完成一些酷炫操作。
 
-## \_\_webpack_exports_info\_\_ (webpack-specific) $#__webpack_exports_info__-webpack-specific$
+## \_\_webpack_exports_info\_\_ (webpack-specific)
 
 在模块中, `__webpack_exports_info__` 可以被获取到，以便导出模块用以自我检查：
 
@@ -221,7 +234,7 @@ __webpack_get_script_filename__ = (chunkId) => {
 
 - 可以从嵌套的 exports 中得到相关信息: 例如 `__webpack_exports_info__.<exportName>.<exportName>.<exportName>.used`
 
-## \_\_webpack_is_included\_\_ (webpack-specific) $#webpack-is-included$
+## \_\_webpack_is_included\_\_ (webpack-specific)
 
 <Badge text="5.16.0+" />
 
@@ -233,7 +246,7 @@ if (__webpack_is_included__('./module-a.js')) {
 }
 ```
 
-## \_\_webpack_base_uri\_\_ (webpack-specific) $#webpack-base-uri$
+## \_\_webpack_base_uri\_\_ (webpack-specific)
 
 运行时修改 base 的 URI。
 
@@ -244,7 +257,7 @@ if (__webpack_is_included__('./module-a.js')) {
   __webpack_base_uri__ = 'https://example.com';
   ```
 
-## \_\_webpack_runtime_id\_\_ $#webpackruntimeid$
+## \_\_webpack_runtime_id\_\_
 
 访问当前入口的 [runtime](/blog/2020-10-10-webpack-5-release/#entry-point-runtime) id。
 
@@ -256,6 +269,6 @@ if (__webpack_is_included__('./module-a.js')) {
 console.log(__webpack_runtime_id__ === 'main');
 ```
 
-## DEBUG (webpack-specific) $#debug--webpack-specific$
+## DEBUG (webpack-specific)
 
 等同于 `debug` 配置选项。
