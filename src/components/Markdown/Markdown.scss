@@ -1,4 +1,4 @@
-@use "sass:color";
+@use 'sass:color';
 @import 'vars';
 @import 'functions';
 @import 'prism-theme';
@@ -42,14 +42,15 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   h5,
   h6 {
     &:before {
+      width: 0;
       content: '';
       display: block;
       visibility: hidden;
       pointer-events: none;
-      height: $topHeightMobile;
+      padding-top: $topHeightMobile;
       margin-top: -#{$topHeightMobile};
       @include break {
-        height: $topHeightDesktop;
+        padding-top: $topHeightDesktop;
         margin-top: -#{$topHeightDesktop};
       }
     }
