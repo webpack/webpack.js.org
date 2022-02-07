@@ -42,6 +42,7 @@ $topHeightMobileWithBanner: $bannerHeight + $topHeightMobile;
   h5,
   h6 {
     > span[id] {
+      position: absolute;
       width: 0;
       display: block;
       visibility: hidden;
