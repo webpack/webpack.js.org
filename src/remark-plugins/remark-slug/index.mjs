@@ -31,6 +31,8 @@ export default function remarkSlug() {
 
       data.id = id;
       props.id = id;
+
+      // insert <span id="..." /> for headings
       node.children = [
         {
           type: 'paragraph',

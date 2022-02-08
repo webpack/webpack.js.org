@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`customize blockquote should add id 1`] = `
+"<h2><span id=\\"user-content-hello-world\\"></span>hello world</h2>
+<p>this is me.</p>
+"
+`;
