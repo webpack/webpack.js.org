@@ -36,7 +36,6 @@ export default function remarkSlug() {
       node.children = [
         {
           type: 'paragraph',
-          value: '',
           data: {
             hName: 'span',
             hProperties: {
