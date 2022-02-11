@@ -40,7 +40,12 @@ export default (env) =>
           },
         },
       },
-      minimizer: ['...', new OptimizeCSSAssetsPlugin({})],
+      minimizer: [
+        '...',
+        new OptimizeCSSAssetsPlugin({
+          minify: OptimizeCSSAssetsPlugin.parcelCssMinify,
+        }),
+      ],
     },
     plugins: [
       new InjectManifest({

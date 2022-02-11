@@ -44,7 +44,11 @@ export default (env) =>
       libraryTarget: 'umd',
     },
     optimization: {
-      minimizer: [new OptimizeCSSAssetsPlugin({})],
+      minimizer: [
+        new OptimizeCSSAssetsPlugin({
+          minify: OptimizeCSSAssetsPlugin.parcelCssMinify,
+        }),
+      ],
     },
     plugins: [
       new SSGPlugin({
