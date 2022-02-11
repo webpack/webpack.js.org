@@ -4638,10 +4638,10 @@ directory-tree@^2.0.0:
   resolved "https://registry.yarnpkg.com/directory-tree/-/directory-tree-2.3.1.tgz#78b8aa84878eb84dd29a51dcd664ded4cd0247c7"
   integrity sha512-hxolIHCtQ/a56CUywaLzGD/V78zPwFihI+UK/4ZjOp7GoV4Mptmtv95yavOn/RlnTi7cCMjszvfcNrwCoWLH+Q==
 
-directory-tree@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/directory-tree/-/directory-tree-3.2.0.tgz#292d21c1b67574aba493a526260d955bbf8ba69d"
-  integrity sha512-9DVfwzNHQITlFSMohak4ix2P/B6Q7eP2QH70plgaJ8bADwDKtZgttmn9djHWYWznOWaK0vbQ1dpE4oOIimthsA==
+directory-tree@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/directory-tree/-/directory-tree-3.2.1.tgz#969fe53b448fb8dd85801021414c26e1f3b1707c"
+  integrity sha512-e0RmTrL/X98Rt4e32W/2fZehBWu3rr8D59XDSWuym8nECXA9/04T5ar1LHLXF2sSG2upj8RZUfj2c14z6y/zKQ==
   dependencies:
     command-line-args "^5.2.0"
     command-line-usage "^6.1.1"
