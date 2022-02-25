@@ -1,6 +1,6 @@
 // Import External Dependencies
 import { merge } from 'webpack-merge';
-import OptimizeCSSAssetsPlugin from 'css-minimizer-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import { InjectManifest } from 'workbox-webpack-plugin';
 import path from 'path';
 
@@ -42,8 +42,8 @@ export default (env) =>
       },
       minimizer: [
         '...',
-        new OptimizeCSSAssetsPlugin({
-          minify: OptimizeCSSAssetsPlugin.parcelCssMinify,
+        new CssMinimizerPlugin({
+          minify: CssMinimizerPlugin.parcelCssMinify,
         }),
       ],
     },

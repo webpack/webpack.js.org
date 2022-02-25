@@ -2,7 +2,7 @@
 import WebpackPwaManifest from 'webpack-pwa-manifest';
 import path from 'path';
 import { merge } from 'webpack-merge';
-import OptimizeCSSAssetsPlugin from 'css-minimizer-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import SSGPlugin from 'static-site-generator-webpack-plugin';
 import RedirectWebpackPlugin from 'redirect-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
@@ -45,8 +45,8 @@ export default (env) =>
     },
     optimization: {
       minimizer: [
-        new OptimizeCSSAssetsPlugin({
-          minify: OptimizeCSSAssetsPlugin.parcelCssMinify,
+        new CssMinimizerPlugin({
+          minify: CssMinimizerPlugin.parcelCssMinify,
         }),
       ],
     },
