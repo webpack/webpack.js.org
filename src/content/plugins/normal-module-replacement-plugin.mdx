@@ -46,7 +46,7 @@ module.exports = function (env) {
       new webpack.NormalModuleReplacementPlugin(
         /(.*)-APP_TARGET(\.*)/,
         function (resource) {
-          resource.request = resource.request.replace(
+          resource.createData.resource = resource.createData.resource.replace(
             /-APP_TARGET/,
             `-${appTarget}`
           );
