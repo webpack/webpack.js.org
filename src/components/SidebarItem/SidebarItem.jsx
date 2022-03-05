@@ -5,6 +5,7 @@ import ChevronRightIcon from '../../styles/icons/chevron-right.svg';
 import BarIcon from '../../styles/icons/vertical-bar.svg';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import Link from '../Link/Link';
 
 const block = 'sidebar-item';
 
@@ -79,15 +80,22 @@ export default class SidebarItem extends Component {
           />
         )}
 
-        <NavLink
-          end
-          key={this.props.url}
-          className={`${block}__title`}
-          to={this.props.url}
-          onClick={this.scrollTop}
-        >
-          {title}
-        </NavLink>
+        {this.props.url.startsWith('http') ||
+        this.props.url.startsWith('//') ? (
+          <Link url={this.props.url} className={`${block}__title`}>
+            {title}
+          </Link>
+        ) : (
+          <NavLink
+            end
+            key={this.props.url}
+            className={`${block}__title`}
+            to={this.props.url}
+            onClick={this.scrollTop}
+          >
+            {title}
+          </NavLink>
+        )}
 
         {anchors.length > 0 ? this.renderAnchors(tree) : null}
       </div>

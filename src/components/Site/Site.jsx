@@ -142,6 +142,18 @@ function Site(props) {
   let sections = extractSections(Content);
   let section = sections.find(({ url }) => location.pathname.startsWith(url));
   let pages = extractPages(Content);
+
+  const overrideUrls = {
+    '/vote/': 'https://v4.webpack.js.org/vote/',
+  };
+
+  pages = pages.map((p) => {
+    if (p.url && overrideUrls[p.url]) {
+      p.url = overrideUrls[p.url];
+    }
+    return p;
+  });
+
   const sidebarPages = _strip(
     section
       ? section.children
