@@ -249,7 +249,7 @@ function Site(props) {
                 ),
               },
               { content: 'Contribute', url: '/contribute/' },
-              { content: 'Vote', url: 'https://v4.webpack.js.org/vote/' },
+              { content: 'Vote', url: '/vote/' },
               { content: 'Blog', url: '/blog/' },
             ]}
           />
