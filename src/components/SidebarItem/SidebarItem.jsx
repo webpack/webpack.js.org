@@ -79,15 +79,27 @@ export default class SidebarItem extends Component {
           />
         )}
 
-        <NavLink
-          end
-          key={this.props.url}
-          className={`${block}__title`}
-          to={this.props.url}
-          onClick={this.scrollTop}
-        >
-          {title}
-        </NavLink>
+        {this.props.url.startsWith('http') ||
+        this.props.url.startsWith('//') ? (
+          <a
+            href={this.props.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${block}__title`}
+          >
+            {title}
+          </a>
+        ) : (
+          <NavLink
+            end
+            key={this.props.url}
+            className={`${block}__title`}
+            to={this.props.url}
+            onClick={this.scrollTop}
+          >
+            {title}
+          </NavLink>
+        )}
 
         {anchors.length > 0 ? this.renderAnchors(tree) : null}
       </div>
