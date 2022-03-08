@@ -64,6 +64,7 @@ Update the following options to their new version (if used):
 - `optimization.noEmitOnErrors: false` → `optimization.emitOnErrors: true`
 - `optimization.occurrenceOrder: true` → `optimization: { chunkIds: 'total-size', moduleIds: 'size' }`
 - `optimization.splitChunks.cacheGroups.vendors` → `optimization.splitChunks.cacheGroups.defaultVendors`
+- `optimization.splitChunks.cacheGroups.test(module, chunks)` → `optimization.splitChunks.cacheGroups.test(module, { chunkGraph, moduleGraph })`
 - `Compilation.entries` → `Compilation.entryDependencies`
 - `serve` → `serve` is removed in favor of [`DevServer`](/configuration/dev-server/)
 - [`Rule.query`](/configuration/module/#ruleoptions--rulequery) (deprecated since v3) → `Rule.options`/`UseEntry.options`
