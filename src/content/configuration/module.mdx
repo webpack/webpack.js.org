@@ -203,6 +203,25 @@ Specifies the behavior of invalid export names in `\"import ... from ...\"`.
   };
   ```
 
+#### module.parser.javascript.importMetaContext
+
+Enable/disable evaluating `import.meta.webpackContext`.
+
+- Type: `boolean`
+- Available: 5.70.0+
+- Example:
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          importMetaContext: true,
+        },
+      },
+    },
+  };
+  ```
+
 #### module.parser.javascript.reexportExportsPresence
 
 Specifies the behavior of invalid export names in `\"export ... from ...\"`. This might be useful to disable during the migration from `\"export ... from ...\"` to `\"export type ... from ...\"` when reexporting types in TypeScript.
