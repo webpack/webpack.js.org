@@ -109,7 +109,25 @@ Webpack specific. An alias for [`module.hot`](#modulehot-webpack-specific), howe
 
 Returns the same value as `require.context` but only for `javascript/auto` and `javascript/esm`.
 
-- Type: `function`
+- Type:
+
+```ts
+(
+  request: string,
+  options?: {
+    recursive?: boolean;
+    regExp?: RegExp;
+    include?: RegExp;
+    exclude?: RegExp;
+    preload?: boolean | number;
+    prefetch?: boolean | number;
+    chunkName?: string;
+    exports?: string | string[][];
+    mode?: 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once';
+  }
+) => webpack.Context;
+```
+
 - Available: 5.70.0+
 - Example:
   ```js
