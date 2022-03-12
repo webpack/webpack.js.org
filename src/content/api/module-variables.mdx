@@ -105,6 +105,40 @@ console.log(import.meta.webpack); // output `5` for webpack 5
 
 Webpack specific. An alias for [`module.hot`](#modulehot-webpack-specific), however `import.meta.webpackHot` can be used in [strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm) while `module.hot` can't.
 
+## import.meta.webpackContext
+
+Returns the same value as `require.context` but only for `javascript/auto` and `javascript/esm`.
+
+- Type:
+
+  ```ts
+  (
+    request: string,
+    options?: {
+      recursive?: boolean;
+      regExp?: RegExp;
+      include?: RegExp;
+      exclude?: RegExp;
+      preload?: boolean | number;
+      prefetch?: boolean | number;
+      chunkName?: string;
+      exports?: string | string[][];
+      mode?: 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once';
+    }
+  ) => webpack.Context;
+  ```
+
+- Available: 5.70.0+
+- Example:
+  ```js
+  const contextRequire = import.meta.webpackContext('.', {
+    recursive: false,
+    regExp: /two/,
+    mode: 'weak',
+    exclude: /three/,
+  });
+  ```
+
 ## \_\_filename (NodeJS)
 
 Depending on the configuration option `node.__filename`:
