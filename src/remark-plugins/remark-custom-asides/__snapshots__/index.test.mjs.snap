@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`customize blockquote should transform W> into aside of warning 1`] = `
+"<aside class=\\"warning\\"><h6 class=\\"warning__prefix\\">warning</h6><p>hello world</p></aside>
+"
+`;

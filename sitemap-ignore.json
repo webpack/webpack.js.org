@@ -1,5 +1,5 @@
 [
-	"app-shell/index.html",
+  "app-shell/index.html",
   "appcache/manifest.html",
   "printable/index.html",
   "api/printable/index.html",

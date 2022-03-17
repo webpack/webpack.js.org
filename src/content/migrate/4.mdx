@@ -1,0 +1,165 @@
+---
+title: To v4 from v3
+sort: 2
+contributors:
+  - sokra
+  - EugeneHlushko
+  - Kolhar730
+related:
+  - title: 'To v2 or v3 from v1'
+    url: https://webpack.js.org/migrate/3/
+  - title: 'RIP CommonChunkPlugin'
+    url: https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
+  - title: 'webpack 4: migration guide for plugins/loaders'
+    url: https://medium.com/webpack/webpack-4-migration-guide-for-plugins-loaders-20a79b927202
+---
+
+This guide only shows major changes that affect end users. For more details please see [the changelog](https://github.com/webpack/webpack/releases).
+
+## Node.js v4
+
+If you are still using Node.js v4 or lower, you need to upgrade your Node.js installation to Node.js v6 or higher.
+
+Instructions for upgrading your Node.js version can be found [here](https://stackoverflow.com/questions/10075990/upgrading-node-js-to-latest-version).
+
+## CLI
+
+The CLI has moved to a separate package: webpack-cli. You need to install it before using webpack, see [basic setup](/guides/getting-started/#basic-setup).
+
+The installation guide can be found [here](/guides/installation).
+
+## Update plugins
+
+Many 3rd party plugins need to be updated to the latest versions to be compatible with webpack 4. Links to popular plugins can be found [here](/awesome-webpack/#webpack-plugins).
+
+## mode
+
+Add the new [`mode`](/configuration/mode/) option to your configuration. Set it to `'production'`, `'development'` or `'none'` depending on your configuration type.
+
+**webpack.config.js**
+
+```diff
+module.exports = {
+  // ...
++  mode: 'production',
+}
+```
+
+T> The purpose of `'development'` mode and `'production'` mode is different. You can use `webpack-merge` as shown in [production guide](/guides/production/#setup) to optimize configurations.
+
+## Deprecated/Removed plugins
+
+These plugins can be removed from configuration as they are default in production mode:
+
+**webpack.config.js**
+
+```diff
+module.exports = {
+  // ...
+  plugins: [
+-    new NoEmitOnErrorsPlugin(),
+-    new ModuleConcatenationPlugin(),
+-    new DefinePlugin({ "process.env.NODE_ENV": JSON.stringify("production") })
+-    new UglifyJsPlugin()
+  ],
+}
+```
+
+These plugins are default in development mode
+
+**webpack.config.js**
+
+```diff
+module.exports = {
+  // ...
+  plugins: [
+-    new NamedModulesPlugin()
+  ],
+}
+```
+
+These plugins were deprecated and are now removed:
+
+**webpack.config.js**
+
+```diff
+module.exports = {
+  // ...
+  plugins: [
+-    new NoErrorsPlugin(),
+-    new NewWatchingPlugin()
+  ],
+}
+```
+
+## CommonsChunkPlugin
+
+The `CommonsChunkPlugin` was removed. Instead the [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) options can be used.
+
+See documentation of the [`optimization.splitChunks`](/configuration/optimization/#optimizationsplitchunks) for more details. The default configuration may already suit your needs.
+
+T> When generating the HTML from the stats you can use `optimization.splitChunks.chunks: "all"` which is the optimal configuration in most cases.
+
+## import() and CommonJS
+
+When using `import()` to load non-ESM the result has changed in webpack 4. Now you need to access the `default` property to get the value of `module.exports`.
+
+**non-esm.js**
+
+```javascript
+module.exports = {
+  sayHello: () => {
+    console.log('hello world');
+  },
+};
+```
+
+**example.js**
+
+```javascript
+function sayHello() {
+  import('./non-esm.js').then((module) => {
+    module.default.sayHello();
+  });
+}
+```
+
+## json and loaders
+
+When using a custom loader to transform `.json` files you now need to change the module `type`:
+
+**webpack.config.js**
+
+```diff
+module.exports = {
+  // ...
+  rules: [
+    {
+      test: /config\.json$/,
+      loader: 'special-loader',
++     type: 'javascript/auto',
+      options: {...}
+    }
+  ]
+};
+```
+
+When still using the `json-loader`, it can be removed:
+
+**webpack.config.js**
+
+```diff
+module.exports = {
+  // ...
+  rules: [
+    {
+-     test: /\.json$/,
+-     loader: 'json-loader'
+    }
+  ]
+};
+```
+
+## module.loaders
+
+`module.loaders` were deprecated since webpack 2 and are now removed in favor of [`module.rules`](/configuration/module/#rule).

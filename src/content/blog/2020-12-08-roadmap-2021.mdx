@@ -1,0 +1,232 @@
+---
+title: Roadmap 2021 (2020-12-08)
+sort: -202012080
+contributors:
+  - sokra
+---
+
+It has been nearly 2 months since webpack 5 was officially released. Due to the sponsoring situation, we couldn't devote as much time to webpack as we would like to. Speaking only for myself (@sokra), I enjoyed the little break and have worked on a few side projects. Ironically, while I was using webpack 5 and all its bleeding-edge features (asset modules, worker support, persistent caching), I discovered a few more bugs in webpack 5 that people are likely to run into when upgrading their projects to webpack 5, which led to a lot of work going into bug fixing. Here is a little summary:
+
+## What happened so far?
+
+A few more things have been exposed from webpack, both typings-wise and runtime-wise. A few low-handling performance improvements have been made. Code without semicolons used to generate some invalid/incorrect code in some cases, which has been corrected. The combination of side-effect-free code + concatenated modules + reexports has led to some edge cases, which have been fixed (at least the known ones).
+
+But one bug reported by a user has led to the need for a completely new internal feature. You can skip it and go to the next chapter if you find webpack internals boring or too complex.
+
+To trigger the bug we need three ingredients:
+
+- Since webpack 5 the optimization in `production` mode will run the used exports analysis (Tree Shaking) against each runtime (which is often identical to the entrypoints), which means webpack can optimize each runtime (resp. entrypoint) individually.
+- A custom `optimization.splitChunks` configuration allows to forcefully merge modules into a single chunk. This is done by passing the `name` option. E.g. `{ test: /node_modules/, name: "vendors" }` merges modules from `node_modules` into a single chunk. While this is not recommended in general, it's possible and probably makes sense in some cases. The whole thing is about trade-offs anyway and choosing to merge all vendors into a single chunk can be good for long term caching this chunk for repeated visits or between multiple entrypoints.
+- When exports of a side-effect-free module are not used, the whole module is omitted from the module graph and the `import`-statement generates no runtime code at all.
+
+A problem happens in an edge case where modules from two entrypoints are merged into a single chunk and they reference a side-effect-free module which is not in the shared chunk since only one of the entrypoints uses exports from the side-effect-free module. Modules in the shared chunk are used by both entrypoint, thus they need to include the exports that are used by any of the entrypoints.
+That means it will generate code referencing the side-effect-free module that is not available at runtime for the other entrypoint in the aforementioned edge case, which leads to an `undefined is not a function` or `cannot read property 'call' of undefined` error at runtime.
+
+A potential fix would be to include the side-effect-free module in all entrypoints, but as this module isn't really needed, that would be a waste of bundle size.
+So we went another route, which required the development of a new feature: `runtime-dependent code generation`.
+This allows to generate code which behaves differently depending on which runtime it executes.
+
+To put it another way, we are wrapping some generated code in `if`-blocks, so they only execute in one runtime.
+In this example, this would affect the `import`-statement which references the side-effect-free module.
+The import is only executed for one of the entrypoints.
+This avoids to include unnecessary modules, and it also avoids executing unnecessary code even if it would be available.
+So even if you are merging all code into a single chunk, only the code that is really used is executed.
+
+So far for the excurse, I hope it wasn't that boring...
+
+## Roadmap 2021
+
+So assuming we can sort out our sponsoring situation, the following is planned for 2021:
+
+### Further stabilizing
+
+Our top-priority stays stabilizing webpack 5.
+So far the situation looks pretty good.
+Most critical bugs reported in the last time, affect some edge cases.
+So I guess webpack 5 should work for the general cases.
+But handling edge cases is (and should stay) one of webpack strength, so we want to continue to work hard fixing these.
+We think that many many webpack users need custom things for their build and that's something webpack offers via configurability and its rich plugin system.
+
+### EcmaScript Modules
+
+EcmaScript Modules (ESM) are slowly gaining wide-spread adoption.
+On authoring side they are already the de facto standard to write code.
+On browser support it also looks pretty ok (except for IE11 and a few older mobile browsers).
+Browsers are still a bit lacking in supporting ESM for WebWorkers.
+
+One can also generate bundles that run in a `type=module` script tag, but that has few benefits currently.
+
+There are multiple areas in webpack where ESM support can be improved:
+
+#### ESM as chunk loading mechanism
+
+When targeting the web webpack loads chunks via `script` tags.
+When targeting node.js webpack loads chunks via `require` or `fs` + `vm`.
+When targeting WebWorkers webpack loads chunk via `importScripts`.
+
+In a not-so-far future, all these environments support ESM and more importantly the dynamic `import()` function.
+So a chunk loading mechanism based on `import()` can unify all these environments, while even needing less runtime code.
+
+#### Self-executed chunks
+
+Currently on-demand-loaded chunks in webpack are always containers for module and never execute module code directly.
+When writing `import("./module")` in modules, this will compile to something like `__webpack_load_chunk__("chunk-containing-module.js").then(() => __webpack_require__("./module"))`.
+There are many cases where this can't be changed (e.g. when loading multiple chunks or loading CSS too), but there are some cases where webpack could generate a chunk that directly executes the contained module.
+This could lead to less generated code and would avoid the function wrapping in the chunk.
+
+Currently I'm not yet sure if this is worth it, but it's at least worth looking into that.
+
+#### ESM exports
+
+Currently it's not possible to generate ESM exports for a bundle via `output.library.type: "module"`.
+This can be useful when integrating webpack bundles into ESM loading environments or inline scripts.
+
+T> For webpack 4 there is actually a plugin, but native support would be preferable.
+
+#### ESM externals (import)
+
+Webpack allows to define `externals` which are modules that are not bundled but exist at runtime.
+There are many types of externals ranging from globals over CommonJs/AMD/System to loading from classic script tag.
+Even `import()` (`type: "import"`) can be used to load an external, but `import` (`type: "module"`) can't be used yet.
+
+Interestingly even while `type: "module"` isn't supported yet, webpack already uses it as default when writing e.g. `import x from "https://example.com/module.js"`.
+The default has been choosing to seamlessly add support for ESM externals without introducing a breaking change.
+
+Absolute URLs in `import`s can make sense e.g. when using external services that offer their API as ESM: `import { event } from "https://analytics.company.com/api/v1.js"` (`import("https://analytics.company.com/api/v1.js")` might make more sense to gracefully handle errors when depending on this external service, but errors could also be caught higher in module graph).
+
+As usual the `externals` configuration allows to map any module name to externals:
+
+```js
+export default {
+  externalsType: 'module',
+  externals: {
+    analytics: 'https://analytics.company.com/api/v1.js',
+    svelte: 'https://jspm.dev/svelte@3',
+    react: 'https://cdn.skypack.dev/preact@10',
+    'react-dom': 'https://esm.sh/[react,react-dom]/react-dom',
+  },
+};
+```
+
+W> Using multiple different ESM CDNs will not work. This is only an example.
+
+#### ESM library
+
+When ESM exports and import are supported people might think bundling a library makes sense, and that's probably true in some cases, but in many cases natively bundling will result in worse results.
+The biggest problem is the `"sideEffects": false` flag. It affects modules on per file base to skip whole modules. When concatenating multiple side-effect-free modules it's no longer possible to skip the individual modules, which leads to worse optimization when not all exports of the library are used.
+
+When the output should be a library that will be processed by a bundler later, this needs to be considered.
+
+I could think of a special mode, which does not apply chunking and instead, emit the raw (processed) modules connected via ESM imports and exports (or also CommonJS `require`).
+So this means loaders, module graph, and asset optimizations run, but no chunk graph is created and each module in the module graph is emitted as a separate file.
+
+#### Strict mode warnings
+
+When generating an ESM bundle, all contained code will be forced to strict mode.
+For many modules, this isn't an issue, but there are a few older packages that might have trouble with the different semantic.
+We want to show warnings for these cases.
+
+### More first-class citizen
+
+Webpack 4 and 5 did a lot of work to support non-JS module types, and webpack 5 already supports some module types by default: JS (ESM/CJS/AMD), JSON, WebAssembly, Asset.
+Since webpack 5 one of our long term goals is to become a web-app optimizer, with the goal of supporting everything the browser supports.
+So technically a vanilla web app should work out-of-the-box with webpack, but being optimized on the go.
+
+The initial webpack 5 release already did some major steps in this direction: `new Worker` is supported natively. `new URL(...)` is supported natively (assets).
+
+WebAssembly and JSON is already supported, even while the proposals are not finished yet.
+
+But two resource types are still missing for the complete story: HTML and CSS.
+
+#### CSS as modules
+
+Currently webpack supports CSS via `css-loader`, `style-loader` or `mini-css-extract-plugin`.
+This is working pretty well, but I think we can do more by supporting CSS as a native module type in webpack.
+
+A major benefit would be the developer experience: The `mini-css-extract-plugin` configuration is not the easiest and getting rid of it would simplify a lot for the developer.
+That doesn't mean you can add additional customization on top of that.
+I see many developers not using raw CSS, but using preprocessors on top of that (with native CSS support this would look like that: `{ test: /\.sass$/, type: "stylesheet", use: "sass-loader" }`).
+
+As of [State of CSS 2020](https://2020.stateofcss.com/en-US/technologies/css-in-js/) CSS Modules is a popular way of writing modular CSS and it being a native module type in webpack allows to benefit from module graph optimization like Tree Shaking (Used Exports Optimization and Side-Effects optimization). When using CSS Modules this means the resulting CSS will only contain CSS rules that are referenced from the application (as one is used to from JS Tree Shaking).
+
+There are some potential CSS Modules specific optimizations which are possible with the global knowledge of the application webpack has: CSS rules can be split into smaller rules to avoid repeating common properties. This can result in a much smaller payload as the output CSS contains fewer repeated properties (Atomic CSS).
+
+But there is a big "BUT" here: There is work towards a different "CSS Modules" proposal in the WebComponents community, which is planned to become natively supported by browsers.
+At least that's the goal of the proposal.
+Sadly this proposal is different from what's currently used in the Frontend ecosystem but uses similar syntax.
+Usually, webpack would align with proposals, so that's something to consider here.
+We have to check whether it's possible to avoid potential conflicts.
+
+#### HTML as entrypoint
+
+Following Parcels example, we also want to support HTML natively as entrypoints.
+Supporting that would be inline with the goal as web app optimizer, as web apps unusally start with a HTML.
+It is also a huge developer experience improvement for beginners as many things can be inferred from the HTML.
+
+Being in control of the generated HTML does also allow to optimize more aggressively by default.
+Currently, we prevent renaming or splitting initial chunks by default, as this requires additional infrastructure for the HTML generation.
+
+HTML entrypoints also benefit from CSS as modules and Asset modules, as these resources can be referenced from HTML too (e.g. `<link rel=stylesheet />`, `<img src="..." />`, `<link rel=icon />`).
+
+#### HTML modules
+
+There is also a proposal about native support of importing HTML in browsers, that's something we will follow, especially as there is a huge overlap with HTML entrypoints.
+
+### SourceMap performance
+
+Using (full) SourceMaps with webpack is currently quite expensive with webpack, as performance for SourceMap processing isn't the best.
+This is something we want to look into for webpack, but also for terser, which is used by webpack as minimizer by default.
+
+### `exports`/`imports` package.json field
+
+Node.js 14 has added support for the `exports` field in package.json to allow to define entrypoints of a package.
+Webpack 5 followed this, and even added additional conditions like `production/development`.
+
+Shortly after that Node.js made further additionals to that, e.g. they also added an `imports` field for private imports.
+
+That's something we also want to add.
+
+### Improve CommonJS analysis
+
+While ESM is the future, there are still a lot of CommonJS packages in npm and in use.
+Webpack 5 added analysis for CommonJS modules to allow Tree Shaking for most of these modules.
+
+But we can do more. While many exporting patterns are supported, only a few importing patterns are supported.
+We want to add support for more patterns to allow more optimizations for CommonJS modules too.
+
+### Hot Module Replacement for Module Federation
+
+Webpack 5 added a new feature called "Module Federation" which allows integrating multiple builds together at runtime.
+Currently, Hot Module Replacement (HMR) supports only a single build at a time and updates can't bubble between builds.
+We want to improve here and allow HMR updates to bubble between different builds, which would improve developing federation applications.
+
+### Hinting system
+
+Currently, webpack displays warnings and errors to the user.
+During the build, there are quite a few cases where we could tell the user something, like potential footguns or optimization opportunities, but they don't fit into warnings or errors and we don't want to spam the output with all this information.
+So we want to add another category: Hints.
+We want to collect all hints during builds (plugins could also emit some), but only display a limited number of them in the output (by default only one).
+This should lead to some kind of "Did you know" experience for the user.
+
+### Multi-Threading
+
+While Persistent Caching makes cached build "blazing" fast, initial builds without Persistent Cache have still a bit of room for improvement.
+Javascript execution in Node.js is single-threaded by default, but recent additions allow to use `worker_threads`, which is an API similar to WebWorkers.
+
+This can be used distribute work across all CPUs. There has already been some preparations in webpack 5 for that: e.g. serializing of internal data structures is possible and the work queues support plugins. But some parts of that are still unclear and require experimentation.
+
+This is in our voting list for a while, but not many have voted on that. Is this really something people need?
+
+### WebAssembly
+
+Currently, WebAssembly is experimental and not enabled by default.
+Once the proposal reaches Stage 4 we can enable it by default.
+
+This might also lead to a wider adoption of WebAssembly in the ecosystem.
+I think we might see more in this field in 2021.
+
+## Disclaimer
+
+This list is not set in stone.
+The web ecosystem changes so fast that we probably end up implementing totally different things, that we might not even aware of at this time.
+We do not even know how much time we can invest in webpack, considering our current sponsoring situation.

@@ -1,10 +1,9 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 // Styles
 import './PageNotFound.scss';
 
-export default () => {
+export default function PageNotFound() {
   return (
     <div className="page markdown">
       <h1>Page Not Found</h1>
@@ -14,4 +13,4 @@ export default () => {
       </Link>
     </div>
   );
-};
+}

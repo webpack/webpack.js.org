@@ -1,7 +1,8 @@
 node_modules
 dist
+!examples/**/dist
 src/**/_*.json
-src/**/_*.md
+src/**/_*.mdx
 .vscode
 .idea
 .DS_Store
@@ -11,5 +12,5 @@ package-lock.json
 .cache
 internal-links.tap
 stats.json
-printable.md
+printable.mdx
 repositories/*.json

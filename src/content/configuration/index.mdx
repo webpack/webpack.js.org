@@ -17,21 +17,24 @@ contributors:
   - EugeneHlushko
   - bigdawggi
   - anshumanv
+  - textbook
 ---
 
 Out of the box, webpack won't require you to use a configuration file. However, it will assume the entry point of your project is `src/index.js` and will output the result in `dist/main.js` minified and optimized for production.
 
-Usually your projects will need to extend this functionality, for this you can create a `webpack.config.js` file in the root folder and webpack will automatically use it.
+T> [createapp.dev](https://createapp.dev/webpack) is an online tool for creating custom webpack configurations. It allows you to select various features that will be combined and added to the resulting configuration file. Also, it generates an example project based on provided webpack configuration that you can review in your browser and download.
+
+Usually, your projects will need to extend this functionality, for this you can create a `webpack.config.js` file in the root folder and webpack will automatically use it.
 
 All the available configuration options are specified below.
 
 T> New to webpack? Check out our guide to some of webpack's [core concepts](/concepts) to get started!
 
-## Use different configuration file
+## Use a different configuration file
 
-If for some reason you want to use different configuration file depending on certain situations you can change this via command line by using the `--config` flag.
+If for some reason you want to use a different configuration file depending on certain situations, you can change this via command line by using the `--config` flag.
 
-__package.json__
+**package.json**
 
 ```json
 "scripts": {
@@ -41,13 +44,13 @@ __package.json__
 
 ## Options
 
-Click on the name of each option in the configuration code below to jump to the detailed documentation. Also note that the items with arrows can be expanded to show more examples and, in some cases, more advanced configuration.
+Click on the name of each option in the configuration code below to jump to the detailed documentation. Also note that the items with arrows can be expanded to show more examples and, in some cases, more advanced configurations.
 
-W> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [__dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
+W> Notice that throughout the configuration we use Node's built-in [path module](https://nodejs.org/api/path.html) and prefix it with the [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) global. This prevents file path issues between operating systems and allows relative paths to work as expected. See [this section](https://nodejs.org/api/path.html#path_windows_vs_posix) for more info on POSIX vs. Windows paths.
 
 W> Notice that many array configurations allow to reference the default value via `"..."`.
 
-__webpack.config.js__
+**webpack.config.js**
 
 ```js-with-links-details
 const path = require('path');
@@ -200,6 +203,8 @@ module.exports = {
       crossOriginLoading: "anonymous",
       crossOriginLoading: false,
       // specifies how cross origin request are issued by the runtime
+      trustedTypes: false, // boolean (default) | string | object
+      // Trusted Types support
       importFunctionName: "import", // string (default)
       // expression that is called when using import()
       // can be replaced to use polyfills
@@ -267,8 +272,8 @@ module.exports = {
       // filename template for HMR chunks
       hotUpdateGlobal: "hmrUpdateFunction", // string
       // the name of the global variable used to load hot update chunks
-      sourcePrefix: "\\t", // string
-      // prefix module sources in bundle for better readablitity
+      sourcePrefix: "\t", // string
+      // prefix module sources in bundle for better readability
       // but breaks multi-line template strings
       hashFunction: "md4", // string (default)
       // hash function used in general
@@ -286,7 +291,7 @@ module.exports = {
       // rules for modules (configure loaders, parser options, etc.)
       {
         // Conditions:
-        test: /\\.jsx?$/,
+        test: /\.jsx?$/,
         include: [
           path.resolve(__dirname, "app")
         ],
@@ -302,18 +307,18 @@ module.exports = {
         // - Try to avoid exclude and prefer include
         // Each condition can also receive an object with "and", "or" or "not" properties
         // which are an array of conditions.
-        issuer: /\\.css$/,
+        issuer: /\.css$/,
         issuer: path.resolve(__dirname, "app"),
-        issuer: { and: [ /\\.css$/, path.resolve(__dirname, "app") ] },
-        issuer: { or: [ /\\.css$/, path.resolve(__dirname, "app") ] },
-        issuer: { not: [ /\\.css$/ ] },
-        issuer: [ /\\.css$/, path.resolve(__dirname, "app") ], // like "or"
+        issuer: { and: [ /\.css$/, path.resolve(__dirname, "app") ] },
+        issuer: { or: [ /\.css$/, path.resolve(__dirname, "app") ] },
+        issuer: { not: [ /\.css$/ ] },
+        issuer: [ /\.css$/, path.resolve(__dirname, "app") ], // like "or"
         // conditions for the issuer (the origin of the import)
         <advancedConditions "#">
           <default>
             /* Advanced conditions (click to show) */
           </default>
-          resource: /\\.css$/,
+          resource: /\.css$/,
           // matches the resource of the module, behaves equal to "test" and "include"
           compiler: /html-webpack-plugin/,
           // matches the name of the child compilation
@@ -329,7 +334,7 @@ module.exports = {
           // matches information from the package.json
           mimetype: "text/javascript",
           // matches the mimetype in DataUris
-          realResource: /\\.css$/,
+          realResource: /\.css$/,
           // matches the resource but ignores when resource was been renamed
           resourceFragment: "#blah",
           // matches the fragment part of the resource request
@@ -353,7 +358,7 @@ module.exports = {
               // ...
             }
           }
-        ]
+        ],
         <moduleType "#">
           <default>
             type: "javascript/auto",
@@ -402,15 +407,15 @@ module.exports = {
         /* Advanced module configuration (click to show) */
       </default>
       noParse: [
-        /special-library\\.js$/
+        /special-library\.js$/
       ],
       // do not parse this module
       unknownContextRequest: ".",
       unknownContextRecursive: true,
-      unknownContextRegExp: /^\\.\\/.*$/,
+      unknownContextRegExp: /^\.\/.*$/,
       unknownContextCritical: true,
       exprContextRequest: ".",
-      exprContextRegExp: /^\\.\\/.*$/,
+      exprContextRegExp: /^\.\/.*$/,
       exprContextRecursive: true,
       exprContextCritical: true,
       wrappedContextRegExp: /.*/,
@@ -482,7 +487,7 @@ module.exports = {
       mainFields: ["main"],
       // properties that are read from description file
       // when a folder is requested
-      restrictions: [ /\\.js$/, path.resolve(__dirname, "app") ],
+      restrictions: [ /\.js$/, path.resolve(__dirname, "app") ],
       // To successful resolve the result must match these criteria
       cache: true, // boolean
       // enable safe caching of resolving
@@ -597,7 +602,7 @@ module.exports = {
       externals: ["react", /^@angular/],
     </default>
     externals: "react", // string (exact match)
-    externals: /^[a-z\\-]+($|\\/)/, // Regex
+    externals: /^[a-z\-]+($|\/)/, // Regex
     externals: { // object
       angular: "this angular", // this["angular"]
       react: { // UMD
@@ -720,7 +725,7 @@ module.exports = {
       // number of asset lines to display
       cachedAssets: false,
       // show assets that are caching in output
-      excludeAssets: /\\.png$/,
+      excludeAssets: /\.png$/,
       // hide some assets
       groupAssetsByPath: true,
       // group assets by their path in the output directory
@@ -767,7 +772,7 @@ module.exports = {
       chunkOrigins: true,
       // show the origin of a chunk (why was this chunk created)
       chunkRelations: true,
-      // show relations to other chunks (parents, children, sibilings)
+      // show relations to other chunks (parents, children, siblings)
       dependentModules: true,
       // show modules that are dependencies of other modules in that chunk
     </advancedChunks>
@@ -786,7 +791,7 @@ module.exports = {
       // show modules that were cached
       orphanModules: true,
       // show modules that are not referenced in optimized graph anymore
-      excludeModules: /\\.css$/,
+      excludeModules: /\.css$/,
       // hide some modules
       reasons: true,
       // show the reasons why modules are included
@@ -829,7 +834,7 @@ module.exports = {
       // show information why optimizations bailed out for modules
     </advancedStatsOptimization>
 
-    children: true
+    children: true,
     // show stats for child compilations
 
     logging: true,
@@ -839,7 +844,7 @@ module.exports = {
     loggingTrace: true,
     // show stack traces for warnings and errors in logging output
 
-    warnings: true
+    warnings: true,
     // show warnings
 
     errors: true,
@@ -869,12 +874,11 @@ module.exports = {
     proxy: { // proxy URLs to backend development server
       '/api': 'http://localhost:3000'
     },
-    contentBase: path.join(__dirname, 'public'), // boolean | string | array, static file location
+    static: path.join(__dirname, 'public'), // boolean | string | array | object, static file location
     compress: true, // enable gzip compression
     historyApiFallback: true, // true for index.html upon 404, object for multiple paths
     hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
     https: false, // true for self-signed, object for cert authority
-    noInfo: true, // only errors & warns on hot reload
     // ...
   },
   experiments: {
@@ -886,7 +890,7 @@ module.exports = {
     // Allow to output ESM
     topLevelAwait: true,
     // Allow to use await on module evaluation (Proposal)
-  }
+  },
   plugins: [
     // ...
   ],
@@ -928,7 +932,7 @@ module.exports = {
       // determine which exports are used by modules and
       // remove the unused ones
       realContentHash: true,
-      // caculcate a contenthash for assets based on the content
+      // calculate a contenthash for assets based on the content
       removeAvailableModules: true,
       // run extra pass to determine modules that are already in
       // parent chunks and remove them
@@ -945,7 +949,7 @@ module.exports = {
         "my-name": {
           // define groups of modules with specific
           // caching behavior
-          test: /\\.sass$/,
+          test: /\.sass$/,
           type: "css/mini-extract",
 
           <cacheGroupAdvancedSelectors "#">
@@ -1002,7 +1006,7 @@ module.exports = {
         minChunks: 1,
         // minimum number of chunks a module must be in
         enforceSizeThreshold: 100000,
-        // ignore when following criterias when size of modules
+        // ignore when following criteria when size of modules
         // is above this threshold
         minSize: 20000,
         // size of modules must be above this threshold
@@ -1097,7 +1101,7 @@ module.exports = {
       aggregateTimeout: 1000, // in ms
       // aggregates multiple changes to a single rebuild
       poll: true,
-      poll: 500, // intervall in ms
+      poll: 500, // interval in ms
       // enables polling mode for watching
       // must be used on filesystems that doesn't notify on change
       // i. e. nfs shares
@@ -1128,11 +1132,12 @@ module.exports = {
     // When using an array of configs this can be used to reference other
     // configs and let this config run after the other config at initial build
   </advancedBuild>
+}
 ```
 
 W> webpack applies configuration defaults after [plugins defaults](/contribute/writing-a-plugin/#configuration-defaults) are applied.
 
-Use [webpack-cli's `init` command](https://github.com/webpack/webpack-cli/tree/master/packages/init#cli-via-webpack-cli) to rapidly generate webpack configuration file for your project requirements, it will ask you a couple of questions before creating a configuration file.
+Use [webpack-cli's `init` command](/api/cli/#init) to rapidly generate webpack configuration files for your project requirements, it will ask you a couple of questions before creating a configuration file.
 
 ```bash
 npx webpack-cli init
@@ -1165,5 +1170,3 @@ found 0 vulnerabilities
 
 Congratulations! Your new webpack configuration file has been created!
 ```
-
-[createapp.dev - create a webpack configuration in your browser](https://createapp.dev/webpack) is an online tool for creating custom webpack configuration. It allows you to select various features that will be combined and added to resulting configuration file. Also, it generates an example project based on provided webpack configuration that you can review in your browser and download.

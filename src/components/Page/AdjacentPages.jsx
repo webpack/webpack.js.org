@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from '../Link/Link';
 import './AdjacentPages.scss';
 import PropTypes from 'prop-types';
@@ -16,7 +15,7 @@ AdjacentPages.propTypes = {
 export default function AdjacentPages({ previous, next }) {
   if (!previous && !next) return null;
   return (
-    <div className="adjacent-links">
+    <div className="adjacent-links print:hidden">
       {previous && (
         <div className="adjacent-links__prev">
           <div>« Previous</div>

@@ -1,7 +1,7 @@
-import React from 'react';
-// Load Styling
 import './Print.scss';
 import icon from '../../assets/icon-print.svg';
+import BarIcon from '../../styles/icons/vertical-bar.svg';
+import PropTypes from 'prop-types';
 
 const PRINTABLE_SECTIONS = [
   'api',
@@ -11,10 +11,12 @@ const PRINTABLE_SECTIONS = [
   'guides',
   'loaders',
   'migrate',
-  'plugins'
+  'plugins',
 ];
-
-export default function Print (props) {
+Print.propTypes = {
+  url: PropTypes.string,
+};
+export default function Print(props) {
   const { url } = props;
   const printUrl = _printPageUrlFromUrl(url);
 
@@ -25,15 +27,22 @@ export default function Print (props) {
 
   return (
     <div className="sidebar-item sidebar-item--disabled`">
-      <i className="sidebar-item__toggle icon-vertical-bar" />
-      <a className="sidebar-item__title sidebar-link__print"
+      <BarIcon
+        className="sidebar-item__toggle"
+        width={15}
+        height={17}
+        fill="#175d96"
+      />
+      <a
+        className="sidebar-item__title sidebar-link__print"
         href={printUrl}
-        rel="nofollow"
+        rel="nofollow noopener noreferrer"
         alt="Print"
         title="Print"
-        target="_blank">
+        target="_blank"
+      >
         Print Section
-        <img src={icon} />
+        <img src={icon} width={27} height={20} alt="Printer Icon" />
       </a>
     </div>
   );
@@ -41,5 +50,7 @@ export default function Print (props) {
 
 function _printPageUrlFromUrl(urlRaw) {
   let urlSplit = urlRaw.split('/');
-  return PRINTABLE_SECTIONS.includes(urlSplit[1]) ? `/${urlSplit[1]}/printable/` : false;
+  return PRINTABLE_SECTIONS.includes(urlSplit[1])
+    ? `/${urlSplit[1]}/printable/`
+    : false;
 }

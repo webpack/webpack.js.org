@@ -4,4 +4,4 @@
 - [ ] For the document of Chinese translation（中文版文档), go to https://github.com/docschina/webpack.js.org.
 - [ ] For loader/plugin docs, consider opening an issue in the corresponding repository.
 - [ ] No existing issue? Go ahead and open a new one.
-- __Remove these instructions from your PR as they are for your eyes only.__
+- **Remove these instructions from your PR as they are for your eyes only.**

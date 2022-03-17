@@ -1,5 +1,3 @@
-import React from 'react';
-
 const printScript = `
 window.matchMedia('print').addListener(function(mql) {
   if (!mql.matches) {
@@ -8,8 +6,6 @@ window.matchMedia('print').addListener(function(mql) {
 });
 window.print();
 `;
-export default function PrintScript () {
-  return (
-    <script dangerouslySetInnerHTML={{ __html: printScript }}></script>
-  );
+export default function PrintScript() {
+  return <script dangerouslySetInnerHTML={{ __html: printScript }}></script>;
 }

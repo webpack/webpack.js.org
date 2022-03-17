@@ -1,12 +1,11 @@
-import React from 'react';
 import './Container.scss';
-
-export default (props = {}) => {
+import PropTypes from 'prop-types';
+Container.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
+};
+export default function Container(props = {}) {
   let { className = '' } = props;
 
-  return (
-    <div className={ `container ${className}` }>
-      { props.children }
-    </div>
-  );
-};
+  return <div className={`container ${className}`}>{props.children}</div>;
+}
