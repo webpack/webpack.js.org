@@ -103,7 +103,7 @@
     "husky": "^7.0.4",
     "hyperlink": "^5.0.4",
     "jest": "^27.5.1",
-    "lint-staged": "^12.3.5",
+    "lint-staged": "^12.3.6",
     "lodash": "^4.17.21",
     "markdownlint": "^0.25.1",
     "markdownlint-cli": "^0.31.1",
