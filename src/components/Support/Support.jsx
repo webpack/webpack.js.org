@@ -85,7 +85,7 @@ function formatMoney(number) {
   let str = Math.round(number) + '';
 
   if (str.length > 3) {
-    str = str.substr(0, str.length - 3) + ',' + str.substr(-3);
+    str = str.slice(0, -3) + ',' + str.slice(-3);
   }
   return str;
 }
