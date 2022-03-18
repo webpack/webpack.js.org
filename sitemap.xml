@@ -40,9 +40,6 @@
         <loc>https://webpack.js.org/get-started</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/license</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/loaders</loc>
     </url>
     <url>
@@ -50,6 +47,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/migrating</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/license</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins</loc>
@@ -133,13 +133,13 @@
         <loc>https://webpack.js.org/concepts/configuration</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
+        <loc>https://webpack.js.org/concepts/entry-points</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/entry-points</loc>
+        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/loaders</loc>
@@ -169,6 +169,9 @@
         <loc>https://webpack.js.org/concepts/targets</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/concepts/under-the-hood</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/concepts/why-webpack</loc>
     </url>
     <url>
@@ -178,13 +181,7 @@
         <loc>https://webpack.js.org/configuration/configuration-languages</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/under-the-hood</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/configuration/configuration-types</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/dev-server</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/devtool</loc>
@@ -196,10 +193,13 @@
         <loc>https://webpack.js.org/configuration/experiments</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/mode</loc>
+        <loc>https://webpack.js.org/configuration/externals</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/externals</loc>
+        <loc>https://webpack.js.org/configuration/dev-server</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/mode</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/module</loc>
@@ -256,10 +256,10 @@
         <loc>https://webpack.js.org/contribute/writing-a-scaffold</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/development/how-to-write-a-plugin</loc>
+        <loc>https://webpack.js.org/development/how-to-write-a-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/development/how-to-write-a-loader</loc>
+        <loc>https://webpack.js.org/development/how-to-write-a-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/development/plugin-patterns</loc>
@@ -325,10 +325,10 @@
         <loc>https://webpack.js.org/guides/getting-started</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/hot-module-replacement</loc>
+        <loc>https://webpack.js.org/guides/installation</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/installation</loc>
+        <loc>https://webpack.js.org/guides/hot-module-replacement</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/integrations</loc>
@@ -364,13 +364,13 @@
         <loc>https://webpack.js.org/guides/tree-shaking</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/typescript</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/web-workers</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/why-webpack</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/typescript</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/get-started/install-webpack</loc>
@@ -394,13 +394,13 @@
         <loc>https://webpack.js.org/loaders/expose-loader</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/file-loader</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/html-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/imports-loader</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/file-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/istanbul-instrumenter-loader</loc>
@@ -412,13 +412,13 @@
         <loc>https://webpack.js.org/loaders/mocha-loader</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/node-loader</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/null-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/postcss-loader</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/raw-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/remark-loader</loc>
@@ -427,7 +427,7 @@
         <loc>https://webpack.js.org/loaders/sass-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/node-loader</loc>
+        <loc>https://webpack.js.org/loaders/raw-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/source-map-loader</loc>
@@ -529,10 +529,10 @@
         <loc>https://webpack.js.org/plugins/json-minimizer-webpack-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/min-chunk-size-plugin</loc>
+        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
+        <loc>https://webpack.js.org/plugins/min-chunk-size-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/mini-css-extract-plugin</loc>
@@ -592,13 +592,13 @@
         <loc>https://webpack.js.org/api/plugins/module-factories</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/parser</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/api/plugins/resolver</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/tapable</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/api/plugins/parser</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/template</loc>
