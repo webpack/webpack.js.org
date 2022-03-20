@@ -91,7 +91,7 @@ export default function Page(props) {
   return (
     <section className="page">
       <Markdown>
-        <h1>{title}</h1>
+        <h1 data-thirdParty={rest.thirdParty}>{title}</h1>
 
         {contentRender}
 
