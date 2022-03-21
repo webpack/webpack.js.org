@@ -93,6 +93,15 @@ export default function Page(props) {
       <Markdown>
         <h1>{title}</h1>
 
+        {rest.thirdParty ? (
+          <div className="italic my-[20px]">
+            <strong className="font-bold">Disclaimer:</strong> {title} is a
+            third-party package maintained by community members, it potentially
+            does not have the same support, security policy or license as
+            webpack, and it is not maintained by webpack.
+          </div>
+        ) : null}
+
         {contentRender}
 
         {loadRelated && (
