@@ -67,6 +67,9 @@
         <loc>https://webpack.js.org/writers-guide</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/api/cli</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/api/compilation-hooks</loc>
     </url>
     <url>
@@ -80,9 +83,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/api/hot-module-replacement</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api/cli</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/loaders</loc>
@@ -121,25 +121,25 @@
         <loc>https://webpack.js.org/api/webpack-dev-server</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/blog/2020-12-08-roadmap-2021</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/blog/2020-12-08-roadmap-2021</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/blog/printable</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/entry-points</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/configuration</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/dependency-graph</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/entry-points</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/loaders</loc>
@@ -169,10 +169,10 @@
         <loc>https://webpack.js.org/concepts/targets</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/why-webpack</loc>
+        <loc>https://webpack.js.org/concepts/under-the-hood</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/under-the-hood</loc>
+        <loc>https://webpack.js.org/concepts/why-webpack</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/cache</loc>
@@ -385,6 +385,9 @@
         <loc>https://webpack.js.org/loaders/coffee-loader</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/css-loader</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/exports-loader</loc>
     </url>
     <url>
@@ -392,9 +395,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/file-loader</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/css-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/html-loader</loc>
@@ -484,9 +484,6 @@
         <loc>https://webpack.js.org/plugins/copy-webpack-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/css-minimizer-webpack-plugin</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/define-plugin</loc>
     </url>
     <url>
@@ -497,6 +494,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/eslint-webpack-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/css-minimizer-webpack-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/eval-source-map-dev-tool-plugin</loc>
@@ -527,6 +527,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/json-minimizer-webpack-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/min-chunk-size-plugin</loc>
@@ -577,9 +580,6 @@
         <loc>https://webpack.js.org/pluginsapi/compiler</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/pluginsapi/template</loc>
     </url>
     <url>
@@ -595,12 +595,12 @@
         <loc>https://webpack.js.org/api/plugins/parser</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/api/plugins/resolver</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/api/plugins/tapable</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/template</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api/plugins/resolver</loc>
     </url>
 </urlset>
