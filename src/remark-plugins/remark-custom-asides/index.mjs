@@ -20,7 +20,7 @@ export default function customAsides(
       if (!textNode) return;
 
       // looking for mapping in the beginning
-      const className = mapping[textNode.substr(0, 2)];
+      const className = mapping[textNode.slice(0, 2)];
       // >This is a joke <- ignore this
       // >T hi there
       const hasPostfixWhitespace = textNode.indexOf(' ') === 2;

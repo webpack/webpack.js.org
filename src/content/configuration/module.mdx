@@ -206,7 +206,30 @@ const x = require(/* webpackIgnore: true */ 'x');
   };
   ```
 
+<<<<<<< HEAD
 #### module.parser.javascript.reexportExportsPresence $#moduleparserjavascriptreexportexportspresence$
+=======
+#### module.parser.javascript.importMetaContext
+
+Enable/disable evaluating [`import.meta.webpackContext`](/api/module-variables/#importmetawebpackcontext).
+
+- Type: `boolean`
+- Available: 5.70.0+
+- Example:
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          importMetaContext: true,
+        },
+      },
+    },
+  };
+  ```
+
+#### module.parser.javascript.reexportExportsPresence
+>>>>>>> 2eb6c6adc5157680cd9e38aa7767c3e5fee78e76
 
 指出在  `\"export ... from ...\"` 中无效导出名称的行为。当在 TypeScript 重新导出类型，从 `\"export ... from ...\"` 迁移到 `\"export type ... from ...\"` 时禁用该配置项是有用的。
 

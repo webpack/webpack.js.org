@@ -68,6 +68,7 @@ async function main() {
           source: url,
           edit: editUrl,
           repo: htmlUrl,
+          thirdParty: true
         });
       } else {
         let basic = {
@@ -75,6 +76,7 @@ async function main() {
           source: url,
           edit: editUrl,
           repo: htmlUrl,
+          thirdParty: true
         };
 
         if (loaderGroup[packageName]) {

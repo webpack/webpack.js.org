@@ -167,7 +167,19 @@ Define the location to store the lockfile.
 
 By default webpack would generate a `<compiler-name.>webpack.lock` file>. Make sure to commit it into a version control system. During the `production` build, webpack will build those modules beginning with `http(s):` protocol from the lockfile and caches under [`experiments.buildHttp.cacheLocation`](#experimentsbuildhttpcachelocation).
 
+<<<<<<< HEAD
 #### experiments.buildHttp.upgrade $#experimentsbuildhttpupgrade$
+=======
+#### experiments.buildHttp.proxy
+
+Specify the proxy server to use for fetching remote resources.
+
+- Type: `string`
+
+By default, Webpack would imply the proxy server to use for fetching remote resources from the `http_proxy` (case insensitive) environment variable. However, you can also specify one through the `proxy` option.
+
+#### experiments.buildHttp.upgrade
+>>>>>>> 2eb6c6adc5157680cd9e38aa7767c3e5fee78e76
 
 Detect changes to remote resources and upgrade them automatically.
 
