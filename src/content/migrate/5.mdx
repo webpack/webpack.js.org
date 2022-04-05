@@ -69,6 +69,7 @@ node --trace-deprecation node_modules/webpack/bin/webpack.js
 - `optimization.noEmitOnErrors: false` → `optimization.emitOnErrors: true`
 - `optimization.occurrenceOrder: true` → `optimization: { chunkIds: 'total-size', moduleIds: 'size' }`
 - `optimization.splitChunks.cacheGroups.vendors` → `optimization.splitChunks.cacheGroups.defaultVendors`
+- `optimization.splitChunks.cacheGroups.test(module, chunks)` → `optimization.splitChunks.cacheGroups.test(module, { chunkGraph, moduleGraph })`
 - `Compilation.entries` → `Compilation.entryDependencies`
 - `serve` → `serve` 已被移除，推荐使用 [`DevServer`](/configuration/dev-server/)
 - [`Rule.query`](/configuration/module/#ruleoptions--rulequery) (从 v3 开始被移除) → `Rule.options`/`UseEntry.options`

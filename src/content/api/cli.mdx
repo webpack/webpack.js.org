@@ -101,7 +101,7 @@ npx webpack init ./my-app --force --template=default
 
 `boolean`
 
-生成项目时不启用选项模式。当为 `true` 时，所有命令行选项使用默认值。
+不输入配置项就生成一个项目。该配置启用时所有命令行配置项将使用默认值。
 
 T> 点击 [这里](https://github.com/webpack/webpack-cli/blob/master/packages/generators/INIT.md) 获取 `webpack init` 命令的完整文档。
 
@@ -583,7 +583,7 @@ T> 请查阅 [environment 变量指南](/guides/environment-variables/)了解更
 
 | 变量名          | 描述                                          |
 | --------------- | --------------------------------------------- |
-| `WEBPACK_SERVE` | 如果使用了 `serve\|s`，则为 `true`。          |
+| `WEBPACK_SERVE` | 如果使用了 `serve\|server\|s`，则为 `true`。          |
 | `WEBPACK_BUILD` | 如果使用了 `build\|bundle\|b`，则为 `true`。  |
 | `WEBPACK_WATCH` | 如果使用了 `--watch\|watch\|w`，则为 `true`。 |
 

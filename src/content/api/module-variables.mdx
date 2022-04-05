@@ -109,7 +109,41 @@ console.log(import.meta.webpack); // output `5` for webpack 5
 
 webpack 特定。[`module.hot`](#modulehot-webpack-specific) 的一个别名，[strict ESM](/guides/ecma-script-modules/#flagging-modules-as-esm) 中可以使用 `import.meta.webpackHot` 但是不能使用 `module.hot`。
 
-## \_\_filename (NodeJS) $#__filename-nodejs$
+## import.meta.webpackContext
+
+返回与 `require.context` 一样的值，但是仅用于 `javascript/auto` 和 `javascript/esm`。
+
+- 类型：
+
+  ```ts
+  (
+    request: string,
+    options?: {
+      recursive?: boolean;
+      regExp?: RegExp;
+      include?: RegExp;
+      exclude?: RegExp;
+      preload?: boolean | number;
+      prefetch?: boolean | number;
+      chunkName?: string;
+      exports?: string | string[][];
+      mode?: 'sync' | 'eager' | 'weak' | 'lazy' | 'lazy-once';
+    }
+  ) => webpack.Context;
+  ```
+
+- 可用版本：5.70.0+
+- 示例：
+  ```js
+  const contextRequire = import.meta.webpackContext('.', {
+    recursive: false,
+    regExp: /two/,
+    mode: 'weak',
+    exclude: /three/,
+  });
+  ```
+
+## \_\_filename (NodeJS)
 
 取决于 `node.__filename` 配置选项：
 

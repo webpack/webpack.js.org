@@ -1277,7 +1277,7 @@ npx webpack serve --port auto
 
 当拥有单独的 API 后端开发服务器并且希望在同一域上发送 API 请求时，代理某些 URL 可能会很有用。
 
-开发服务器使用功能强大的 [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) 软件包。 查看其 [documentation](https://github.com/chimurai/http-proxy-middleware#options) 了解更多高级用法。 请注意，`http-proxy-middleware` 的某些功能不需要`target`键，例如 它的 `router` 功能，但是仍然需要在此处的配置中包含`target`，否则`webpack-dev-server` 不会将其传递给 `http-proxy-middleware`）。
+开发服务器使用功能强大的 [http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware) 软件包。 查看其 [documentation](https://github.com/chimurai/http-proxy-middleware#options) 了解更多高级用法。 请注意，`http-proxy-middleware` 的某些功能不需要`target`键，例如 它的 `router` 功能，但是仍然需要在此处的配置中包含`target`，否则`webpack-dev-server` 不会将其传递给 `http-proxy-middleware`。
 
 使用后端在 `localhost:3000` 上，可以使用它来启用代理：
 

@@ -1,6 +1,6 @@
 'use strict';
 
-import toString from 'mdast-util-to-string';
+import { toString } from 'mdast-util-to-string';
 import { visit } from 'unist-util-visit';
 import slugs from 'github-slugger';
 

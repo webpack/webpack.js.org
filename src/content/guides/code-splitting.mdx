@@ -34,6 +34,7 @@ contributors:
   - Adarah
   - atesgoral
   - snitin315
+  - artem-malko
 translators:
   - QC-L
   - jacob-lcs
@@ -428,6 +429,29 @@ import(/* webpackPreload: true */ 'ChartingLibrary');
 在页面中使用 `ChartComponent` 时，在请求 ChartComponent.js 的同时，还会通过 `<link rel="preload">` 请求 charting-library-chunk。假定 page-chunk 体积很小，很快就被加载好，页面此时就会显示 `LoadingIndicator(加载进度条)` ，等到 `charting-library-chunk` 请求完成，LoadingIndicator 组件才消失。启动仅需要很少的加载时间，因为只进行单次往返，而不是两次往返。尤其是在高延迟环境下。
 
 T> 不正确地使用 `webpackPreload` 会有损性能，请谨慎使用。
+
+有时你需要自己控制预加载。例如，任何动态导入的预加载都可以通过异步脚本完成。这在流式服务器端渲染的情况下很有用。
+
+```js
+const lazyComp = () =>
+  import('DynamicComponent').catch((error) => {
+    // 在发生错误时做一些处理
+    // 例如，我们可以在网络错误的情况下重试请求
+  });
+```
+如果在 webpack 开始加载该脚本之前脚本加载失败（如果该脚本不在页面上，webpack 只是创建一个 script 标签来加载其代码），则该 catch 处理程序将不会启动，直到 [chunkLoadTimeout](/configuration/output/#outputchunkloadtimeout) 未通过。此行为可能是意料之外的。但这是可以解释的 - webpack 不能抛出任何错误，因为 webpack 不知道那个脚本失败了。Webpack 将在错误发生后立即将 onerror 处理脚本添加到 script 中。
+
+为了避免上述问题，你可以添加自己的 onerror 处理脚本，将会在错误发生时移除该 script。
+
+```html
+<script
+  src="https://example.com/dist/dynamicComponent.js"
+  async
+  onerror="this.remove()"
+></script>
+```
+
+在这种情况下，错误的 script 将被删除。Webpack 将创建自己的 script，并且任何错误都将被处理而没有任何超时。
 
 ## bundle 分析(bundle analysis) $#bundle-analysis$
 
