@@ -34,14 +34,11 @@ contributors:
   - Adarah
   - atesgoral
   - snitin315
-<<<<<<< HEAD
+  - artem-malko
 translators:
   - QC-L
   - jacob-lcs
   - dear-lizhihua
-=======
-  - artem-malko
->>>>>>> 2eb6c6adc5157680cd9e38aa7767c3e5fee78e76
 related:
   - title: webpack 中的 <link rel="prefetch/preload" />
     url: https://medium.com/webpack/link-rel-prefetch-preload-in-webpack-51a52358f84c
@@ -433,22 +430,18 @@ import(/* webpackPreload: true */ 'ChartingLibrary');
 
 T> 不正确地使用 `webpackPreload` 会有损性能，请谨慎使用。
 
-<<<<<<< HEAD
-## bundle 分析(bundle analysis) $#bundle-analysis$
-=======
-Sometimes you need to have your own control over preload. For example, preload of any dynamic import can be done via async script. This can be useful in case of streamming server side rendering.
+有时你需要自己控制预加载。例如，任何动态导入的预加载都可以通过异步脚本完成。这在流式服务器端渲染的情况下很有用。
 
 ```js
 const lazyComp = () =>
   import('DynamicComponent').catch((error) => {
-    // Do something with the error.
-    // For example, we can retry the request in case of any net error
+    // 在发生错误时做一些处理
+    // 例如，我们可以在网络错误的情况下重试请求
   });
 ```
+如果在 webpack 开始加载该脚本之前脚本加载失败（如果该脚本不在页面上，webpack 只是创建一个 script 标签来加载其代码），则该 catch 处理程序将不会启动，直到 [chunkLoadTimeout](/configuration/output/#outputchunkloadtimeout) 未通过。此行为可能是意料之外的。但这是可以解释的 - webpack 不能抛出任何错误，因为 webpack 不知道那个脚本失败了。Webpack 将在错误发生后立即将 onerror 处理脚本添加到 script 中。
 
-If the script loading will fail before webpack starts loading of that script by itself (webpack just creates a script tag to load its code, if that script is not on a page), that catch handler won't start till [chunkLoadTimeout](/configuration/output/#outputchunkloadtimeout) is not passed. This behavior can be unexpected. But it's explainable — webpack can not throw any error, cause webpack doesn't know, that script failed. Webpack will add onerror handler to the script right after the error has happen.
-
-To prevent such problem you can add your own onerror handler, which removes the script in case of any error:
+为了避免上述问题，你可以添加自己的 onerror 处理脚本，将会在错误发生时移除该 script。
 
 ```html
 <script
@@ -458,10 +451,9 @@ To prevent such problem you can add your own onerror handler, which removes the 
 ></script>
 ```
 
-In that case, errored script will be removed. Webpack will create its own script and any error will be processed without any timeouts.
+在这种情况下，错误的 script 将被删除。Webpack 将创建自己的 script，并且任何错误都将被处理而没有任何超时。
 
-## Bundle Analysis
->>>>>>> 2eb6c6adc5157680cd9e38aa7767c3e5fee78e76
+## bundle 分析(bundle analysis) $#bundle-analysis$
 
 一旦开始分离代码，一件很有帮助的事情是，分析输出结果来检查模块在何处结束。 [官方分析工具](https://github.com/webpack/analyse) 是一个不错的开始。还有一些其他社区支持的可选项：
 

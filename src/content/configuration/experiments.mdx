@@ -157,45 +157,41 @@ Note that you should commit files under `experiments.buildHttp.cacheLocation` in
 
 Freeze the remote resources and lockfile. Any modification to the lockfile or resource contents will result in an error.
 
-- Type: `boolean`
+- 类型：`boolean`
 
 #### experiments.buildHttp.lockfileLocation $#experimentsbuildhttplockfilelocation$
 
 Define the location to store the lockfile.
 
-- Type: `string`
+- 类型：`string`
 
 By default webpack would generate a `<compiler-name.>webpack.lock` file>. Make sure to commit it into a version control system. During the `production` build, webpack will build those modules beginning with `http(s):` protocol from the lockfile and caches under [`experiments.buildHttp.cacheLocation`](#experimentsbuildhttpcachelocation).
 
-<<<<<<< HEAD
-#### experiments.buildHttp.upgrade $#experimentsbuildhttpupgrade$
-=======
 #### experiments.buildHttp.proxy
 
-Specify the proxy server to use for fetching remote resources.
+指定用来获取远程资源的代理服务器。
 
-- Type: `string`
+- 类型：`string`
 
-By default, Webpack would imply the proxy server to use for fetching remote resources from the `http_proxy` (case insensitive) environment variable. However, you can also specify one through the `proxy` option.
+默认情况下，webpack 会让代理服务器使用 `http_proxy`（不区分大小写） 环境变量值获取远程资源。然而，你也可以通过 `proxy` 配置项指定。
 
 #### experiments.buildHttp.upgrade
->>>>>>> 2eb6c6adc5157680cd9e38aa7767c3e5fee78e76
 
-Detect changes to remote resources and upgrade them automatically.
+检测远程资源的更改并自动升级。
 
-- Type: `boolean`
+- 类型：`boolean`
 
 ### experiments.css $#experimentscss$
 
 启用原生 CSS 支持。请注意该实验特性仍处于开发状态并且将会在 webpack v6 中默认启用，你可以在 [GitHub](https://github.com/webpack/webpack/issues/14893) 中跟踪进度。
 
-- Type: `boolean`
+- 类型：`boolean`
 
 ### experiments.cacheUnaffected $#experimentscacheunaffected$
 
 Enable additional in-memory caching of modules which are unchanged and reference only unchanged modules.
 
-- Type: `boolean`
+- 类型：`boolean`
 
 Defaults to the value of [`futureDefaults`](#experimentsfuturedefaults).
 
