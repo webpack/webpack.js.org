@@ -438,3 +438,43 @@ module.exports = {
 ```
 
 W> Don't share the cache between calls with different options.
+
+## Setup cache in CI/CD system
+
+Filesystem cache allows to share cache between builds in CI. To setup cache:
+
+- CI should have an option to share cache between builds.
+- CI should run job in the same absolute path. This is important since webpack cache files store absolute paths.
+
+### GitLab CI/CD
+
+Common config could looks like
+
+```yaml
+variables:
+  # fallback to use "main" branch cache, requires GitLab Runner 13.4
+  CACHE_FALLBACK_KEY: main
+
+# this is webpack build job
+build-job:
+  cache:
+    key: '$CI_COMMIT_REF_SLUG' # branch/tag name
+    paths:
+      # cache directory
+      # make sure that you don't run "npm ci" in this job or change default cache directory
+      # otherwise "npm ci" will prune cache files
+      - node_modules/.cache/webpack/
+```
+
+### Github actions
+
+```yaml
+- uses: actions/cache@v3
+  with:
+    # cache directory
+    path: node_modules/.cache/webpack/
+    key: ${{ GITHUB_REF_NAME }}-webpack-build
+    # fallback to use "main" branch cache
+    restore-keys: |
+      main-webpack-build
+```
