@@ -442,3 +442,43 @@ module.exports = {
 ```
 
 W> 在具有不同选项的调用之间不要共享缓存。
+
+## 在 CI/CD 系统中设置缓存 $#setup-cache-in-cicd-system$
+
+文件系统缓存允许在 CI 的构建之间共享缓存。为了设置设置缓存：
+
+- CI 应该有一个在构建之间共享缓存的配置项。
+- CI 应该在相同的绝对路径中运行任务。这非常重要，因为 webpack 缓存文件存储绝对路径。
+
+### GitLab CI/CD
+
+以下是一些通用配置
+
+```yaml
+variables:
+  # 兜底使用 "main" 分支缓存，要求 GitLab Runner 版本为 13.4
+  CACHE_FALLBACK_KEY: main
+
+# 这是 webpack 构建任务
+build-job:
+  cache:
+    key: '$CI_COMMIT_REF_SLUG' # 分支/tag 名称
+    paths:
+      # 缓存文件夹
+      # 确保在这个任务中没有运行 "npm ci" 或者更改默认缓存文件夹
+      # 否则 "npm ci" 将会删除缓存文件
+      - node_modules/.cache/webpack/
+```
+
+### Github actions
+
+```yaml
+- uses: actions/cache@v3
+  with:
+    # 缓存文件夹
+    path: node_modules/.cache/webpack/
+    key: ${{ GITHUB_REF_NAME }}-webpack-build
+    # 兜底使用 "main" 分支缓存
+    restore-keys: |
+      main-webpack-build
+```
