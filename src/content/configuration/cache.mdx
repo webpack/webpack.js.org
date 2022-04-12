@@ -446,7 +446,6 @@ W> 在具有不同选项的调用之间不要共享缓存。
 ## 在 CI/CD 系统中设置缓存 $#setup-cache-in-cicd-system$
 
 文件系统缓存允许在 CI 的构建之间共享缓存。为了设置设置缓存：
-Filesystem cache allows to share cache between builds in CI. To setup cache:
 
 - CI 应该有一个在构建之间共享缓存的配置项。
 - CI 应该在相同的绝对路径中运行任务。这非常重要，因为 webpack 缓存文件存储绝对路径。
