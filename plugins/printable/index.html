@@ -409,7 +409,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token keyword">new</span> <span class="token class-name">CopyPlugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
       patterns<span class="token operator">:</span> <span class="token punctuation">[</span>
         <span class="token punctuation">{</span> <span class="token keyword">from</span><span class="token operator">:</span> <span class="token string">&quot;source&quot;</span><span class="token punctuation">,</span> to<span class="token operator">:</span> <span class="token string">&quot;dest&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token punctuation">{</span> <span class="token keyword">from</span><span class="token operator">:</span> <span class="token string">&quot;other&quot;</span><span class="token punctuation">,</span> to<span class="token operator">:</span> <span class="token string">&quot;public&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;path/to/source&quot;</span><span class="token punctuation">,</span> <span class="token comment">// absolute or relative, files/directories/globs - see below for examples</span>
       <span class="token punctuation">]</span><span class="token punctuation">,</span>
       options<span class="token operator">:</span> <span class="token punctuation">{</span>
         concurrency<span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
