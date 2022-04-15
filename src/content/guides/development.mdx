@@ -225,10 +225,15 @@ Change your configuration file to tell the dev server where to look for files:
      path: path.resolve(__dirname, 'dist'),
      clean: true,
    },
++  optimization: {
++    runtimeChunk: 'single',
++  },
  };
 ```
 
 This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080`.
+
+The `optimization.runtimeChunk: 'single'` was added because in this example we have more than one entrypoint on a single HTML page. Without this, we could get into trouble described [here](https://bundlers.tooling.report/code-splitting/multi-entry/). Read the [Code Splitting](/guides/code-splitting/) section of the guide for more details.
 
 T> `webpack-dev-server` serves bundled files from the directory defined in [`output.path`](/configuration/output/#outputpath), i.e., files will be available under `http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]`.
 
