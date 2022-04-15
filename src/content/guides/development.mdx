@@ -16,6 +16,7 @@ contributors:
   - chenxsan
   - maxloh
   - snitin315
+  - avishek143
 ---
 
 T> This guide extends on code examples found in the [Output Management](/guides/output-management) guide.
@@ -214,6 +215,7 @@ Change your configuration file to tell the dev server where to look for files:
    devtool: 'inline-source-map',
 +  devServer: {
 +    static: './dist',
++    watchFiles: ['./src/**/*.*'],
 +  },
    plugins: [
      new HtmlWebpackPlugin({
@@ -228,7 +230,7 @@ Change your configuration file to tell the dev server where to look for files:
  };
 ```
 
-This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080`.
+This tells `webpack-dev-server` to serve the files from the `dist` directory on `localhost:8080` and refresh the browser with the new content when any source file inside the `./src` folder changes.
 
 T> `webpack-dev-server` serves bundled files from the directory defined in [`output.path`](/configuration/output/#outputpath), i.e., files will be available under `http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]`.
 
