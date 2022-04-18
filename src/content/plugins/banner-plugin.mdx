@@ -5,6 +5,9 @@ contributors:
   - simon04
   - byzyk
   - chenxsan
+translators:
+  - watonyweng
+  - jacob-lcs
 related:
   - title: banner-plugin-hashing test
     url: https://github.com/webpack/webpack/blob/master/test/configCases/plugins/banner-plugin-hashing/webpack.config.js
@@ -30,6 +33,7 @@ new webpack.BannerPlugin(options);
   test: string | RegExp | [string, RegExp], // 包含所有匹配的模块
   include: string | RegExp | [string, RegExp], // 根据条件匹配所有模块
   exclude: string | RegExp | [string, RegExp], // 根据条件排除所有模块
+  footer?: boolean, // 如果值为 true，banner 将会位于编译结果的最下方
 }
 ```
 
