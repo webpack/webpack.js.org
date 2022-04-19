@@ -19,13 +19,13 @@
         <loc>https://webpack.js.org/comparison</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/concepts</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/contribute</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/development</loc>
@@ -130,66 +130,6 @@
         <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/configuration/cache</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/configuration-languages</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/configuration-types</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/dev-server</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/devtool</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/entry-context</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/experiments</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/externals</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/mode</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/module</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/node</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/optimization</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/other-options</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/output</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/performance</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/plugins</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/resolve</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/stats</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/target</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/watch</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/concepts/configuration</loc>
     </url>
     <url>
@@ -254,6 +194,66 @@
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/writing-a-scaffold</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/cache</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/configuration-languages</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/configuration-types</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/dev-server</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/devtool</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/entry-context</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/experiments</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/externals</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/mode</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/module</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/node</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/optimization</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/other-options</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/output</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/performance</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/plugins</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/resolve</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/stats</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/target</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/configuration/watch</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/development/how-to-write-a-loader</loc>
@@ -532,6 +532,9 @@
         <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/min-chunk-size-plugin</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins/mini-css-extract-plugin</loc>
     </url>
     <url>
@@ -580,9 +583,6 @@
         <loc>https://webpack.js.org/pluginsapi/template</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/min-chunk-size-plugin</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/api/plugins/compilation</loc>
     </url>
     <url>
@@ -598,9 +598,9 @@
         <loc>https://webpack.js.org/api/plugins/resolver</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/tapable</loc>
+        <loc>https://webpack.js.org/api/plugins/template</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/template</loc>
+        <loc>https://webpack.js.org/api/plugins/tapable</loc>
     </url>
 </urlset>
