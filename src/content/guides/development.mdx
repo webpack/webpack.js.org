@@ -16,6 +16,7 @@ contributors:
   - chenxsan
   - maxloh
   - snitin315
+  - f3ndot
 translators:
   - QC-L
   - jacob-lcs
@@ -229,12 +230,17 @@ npm install --save-dev webpack-dev-server
      path: path.resolve(__dirname, 'dist'),
      clean: true,
    },
++  optimization: {
++    runtimeChunk: 'single',
++  },
  };
 ```
 
 以上配置告知 `webpack-dev-server`，将 `dist` 目录下的文件 serve 到 `localhost:8080` 下。（译注：serve，将资源作为 server 的可访问文件）
 
-T> `webpack-dev-server` 会从 `output.path` 中定义的目录为服务提供 bundle 文件，即，文件将可以通过 `http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]` 进行访问。
+T> 因为在这个示例中单个 HTML 页面有多个入口，所以添加了 `optimization.runtimeChunk: 'single'` 配置。没有这个配置的话，我们可能会遇到 [这个问题](https://bundlers.tooling.report/code-splitting/multi-entry/)。 查看 [代码分割](/guides/code-splitting/) 章节获取更多细节。
+
+T> `webpack-dev-server` 会从 [`output.path`](/configuration/output/#outputpath) 中定义的目录中的 bundle 文件提供服务，即文件将可以通过 `http://[devServer.host]:[devServer.port]/[output.publicPath]/[output.filename]` 进行访问。
 
 W> webpack-dev-server 在编译之后不会写入到任何输出文件。而是将 bundle 文件保留在内存中，然后将它们 serve 到 server 中，就好像它们是挂载在 server 根路径上的真实文件一样。如果你的页面希望在其他不同路径中找到 bundle 文件，则可以通过 dev server 配置中的 [`devMiddleware.publicPath`](/configuration/dev-server/#devserverdevmiddleware) 选项进行修改。
 
