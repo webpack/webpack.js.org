@@ -2243,6 +2243,14 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <span class="token punctuation">}</span><span class="token punctuation">,</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></li></ul><h4><span id="moduleparserjavascriptimportmeta"></span>module.parser.javascript.importMeta<a href="#moduleparserjavascriptimportmeta" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4><p>Enable or disable evaluating <code>import.meta</code>.</p><ul><li>Type: <code>boolean = true</code></li><li>Available: 5.68.0+</li><li>Example:<pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    parser<span class="token operator">:</span> <span class="token punctuation">{</span>
+      javascript<span class="token operator">:</span> <span class="token punctuation">{</span>
+        importMeta<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre></li></ul><h4><span id="moduleparserjavascriptimportmetacontext"></span>module.parser.javascript.importMetaContext<a href="#moduleparserjavascriptimportmetacontext" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h4><p>Enable/disable evaluating <a href="/api/module-variables/#importmetawebpackcontext"><code>import.meta.webpackContext</code></a>.</p><ul><li>Type: <code>boolean</code></li><li>Available: 5.70.0+</li><li>Example:<pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     parser<span class="token operator">:</span> <span class="token punctuation">{</span>
