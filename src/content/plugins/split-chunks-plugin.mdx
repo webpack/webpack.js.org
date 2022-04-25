@@ -251,6 +251,8 @@ If you choose to specify a function, you may find the `chunk.name` and `chunk.ha
 
 If the `splitChunks.name` matches an [entry point](/configuration/entry-context/#entry) name, the entry point will be removed.
 
+T> `splitChunks.cacheGroups.{cacheGroup}.name` can be used to move modules into a chunk that is a parent of the source chunk. For example, use `name: "entry-name"` to move modules into the `entry-name` chunk. You can also use on demand named chunks, but you must be careful that the selected modules are only used under this chunk.
+
 **main.js**
 
 ```js
