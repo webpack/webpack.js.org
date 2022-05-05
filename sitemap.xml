@@ -121,10 +121,10 @@
         <loc>https://webpack.js.org/api/webpack-dev-server</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/blog/2020-12-08-roadmap-2021</loc>
+        <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
+        <loc>https://webpack.js.org/blog/2020-12-08-roadmap-2021</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/blog/printable</loc>
@@ -142,10 +142,10 @@
         <loc>https://webpack.js.org/concepts/configuration</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/loaders</loc>
+        <loc>https://webpack.js.org/concepts/manifest</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/manifest</loc>
+        <loc>https://webpack.js.org/concepts/loaders</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/mode</loc>
@@ -175,6 +175,9 @@
         <loc>https://webpack.js.org/concepts/why-webpack</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/configuration/cache</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/configuration/configuration-languages</loc>
     </url>
     <url>
@@ -191,9 +194,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/experiments</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/cache</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/externals</loc>
@@ -295,10 +295,10 @@
         <loc>https://webpack.js.org/guides/code-splitting-async</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/code-splitting-css</loc>
+        <loc>https://webpack.js.org/guides/code-splitting-import</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/code-splitting-import</loc>
+        <loc>https://webpack.js.org/guides/code-splitting-css</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting-libraries</loc>
@@ -433,6 +433,9 @@
         <loc>https://webpack.js.org/loaders/source-map-loader</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/loaders/style-loader</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/loaders/stylus-loader</loc>
     </url>
     <url>
@@ -446,9 +449,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/worker-loader</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/loaders/style-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/migrate/3</loc>
@@ -577,10 +577,10 @@
         <loc>https://webpack.js.org/plugins/watch-ignore-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/pluginsapi/template</loc>
+        <loc>https://webpack.js.org/pluginsapi/compiler</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/pluginsapi/compiler</loc>
+        <loc>https://webpack.js.org/pluginsapi/template</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/compilation</loc>
