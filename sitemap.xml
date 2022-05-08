@@ -460,6 +460,9 @@
         <loc>https://webpack.js.org/migrate/5</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/NoEmitOnErrorsPlugin</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins/automatic-prefetch-plugin</loc>
     </url>
     <url>
@@ -467,9 +470,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/commons-chunk-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/NoEmitOnErrorsPlugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/compression-webpack-plugin</loc>
@@ -529,6 +529,9 @@
         <loc>https://webpack.js.org/plugins/json-minimizer-webpack-plugin</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/plugins/min-chunk-size-plugin</loc>
     </url>
     <url>
@@ -560,9 +563,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/source-map-dev-tool-plugin</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/plugins/limit-chunk-count-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/split-chunks-plugin</loc>
