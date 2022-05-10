@@ -11606,10 +11606,10 @@ tap-parser@^7.0.0:
     js-yaml "^3.2.7"
     minipass "^2.2.0"
 
-tap-spot@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/tap-spot/-/tap-spot-1.1.1.tgz#54367e3cbb298bf4291ad7486a99d6e1d1ec498f"
-  integrity sha512-nyMERRqR9LnTUJvzkwBH/ujm/Zi6jYp0R2txRCSngN1AeJWZPuJJHn1EE7Gr6LtdAzsrk/P1Q6D5bZz9zhMGMw==
+tap-spot@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/tap-spot/-/tap-spot-1.1.2.tgz#a17213d54cc47e1d11c592cbc93b0e298e78ba6e"
+  integrity sha512-P1hF3JqpxvL++FNP7vuKFa1Tm8+2P7mnFINEb5A0zf8n46ulS8g+/oviYhcvXN9G+hhBaWVLie5HR6epeyxaog==
   dependencies:
     chalk "^2.3.2"
     duplexer "^0.1.1"
