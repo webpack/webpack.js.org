@@ -211,6 +211,9 @@
         <loc>https://webpack.js.org/configuration/optimization</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/configuration/other-options</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/configuration/output</loc>
     </url>
     <url>
@@ -218,9 +221,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/plugins</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/other-options</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/resolve</loc>
@@ -286,6 +286,9 @@
         <loc>https://webpack.js.org/guides/build-performance</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/caching</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/code-splitting</loc>
     </url>
     <url>
@@ -293,9 +296,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting-css</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/caching</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting-import</loc>
