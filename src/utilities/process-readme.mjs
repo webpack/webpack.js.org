@@ -1,7 +1,7 @@
 import url from 'url';
 import { excludedLoaders, excludedPlugins } from './constants.mjs';
 
-const beginsWithDocsDomainRegex = /^(?:https?:)\/\/webpack\.js\.org/;
+const beginsWithDocsDomainRegex = /^https?:\/\/webpack\.js\.org/;
 const inlineLinkRegex = /\[[^\]]*\]\(([^)]+)\)/g;
 
 const fragmentLinkMap = {
@@ -35,7 +35,7 @@ function linkFixerFactory(sourceUrl) {
 
     // Only resolve non-absolute urls from their source if they are not a document fragment link
     if (!href.startsWith('#')) {
-      // Convert Github raw links to rendered links
+      // Convert GitHub raw links to rendered links
       let rendered_url = sourceUrl
         .replace(/raw.githubusercontent.com/, 'github.com')
         .replace(/master/, 'blob/master');
@@ -101,7 +101,7 @@ export default function processREADME(body, options = {}) {
     .replace(/<h1.*?>.+?<\/h1>/, '')
     .replace(/^# .+/m, '')
     .replace(/.*\n=+/, '')
-    // Replace local github links with absolute links to the github location
+    // Replace local GitHub links with absolute links to the GitHub location
     // EXAMPLE: [Contributing](./.github/CONTRIBUTING.md)
     // EXAMPLE: [Contributing](CONTRIBUTING.md)
     // EXAMPLE: [line-identifier]: https://webpack.js.org/loaders/
