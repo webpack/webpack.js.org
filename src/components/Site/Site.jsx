@@ -163,8 +163,8 @@ function Site(props) {
     return url.includes('/printable');
   }
 
-  // As github pages uses trailing slash, we need to provide it to canonicals for consistency
-  // between canonical href and final url served by github pages.
+  // As GitHub pages uses trailing slash, we need to provide it to canonicals for consistency
+  // between canonical href and final url served by GitHub pages.
   function enforceTrailingSlash(url) {
     return url.replace(/\/?$/, '/');
   }
