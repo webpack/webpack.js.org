@@ -49,13 +49,13 @@
         <loc>https://webpack.js.org/migrate</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/migrating</loc>
+        <loc>https://webpack.js.org/pluginsapi</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/pluginsapi</loc>
+        <loc>https://webpack.js.org/migrating</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/support</loc>
@@ -100,13 +100,13 @@
         <loc>https://webpack.js.org/api/node</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/normalmodulefactory-hooks</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/api/parser</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/passing-a-config</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/api/normalmodulefactory-hooks</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins</loc>
@@ -130,9 +130,6 @@
         <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/concepts/configuration</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/concepts/dependency-graph</loc>
     </url>
     <url>
@@ -140,6 +137,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/configuration</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/loaders</loc>
@@ -355,9 +355,6 @@
         <loc>https://webpack.js.org/guides/production-build</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/progressive-web-application</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/guides/public-path</loc>
     </url>
     <url>
@@ -365,6 +362,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/shimming</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/guides/progressive-web-application</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/tree-shaking</loc>
@@ -458,6 +458,12 @@
     </url>
     <url>
         <loc>https://webpack.js.org/migrate/5</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/pluginsapi/compiler</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/pluginsapi/template</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/NoEmitOnErrorsPlugin</loc>
@@ -577,12 +583,6 @@
         <loc>https://webpack.js.org/plugins/watch-ignore-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/pluginsapi/compiler</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/pluginsapi/template</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/api/plugins/compilation</loc>
     </url>
     <url>
@@ -595,12 +595,12 @@
         <loc>https://webpack.js.org/api/plugins/parser</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/resolver</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/api/plugins/tapable</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/template</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/api/plugins/resolver</loc>
     </url>
 </urlset>
