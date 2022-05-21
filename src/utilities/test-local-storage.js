@@ -2,7 +2,7 @@
  * Test if localStorage is enabled.
  *
  * {@link https://github.com/Modernizr/Modernizr/blob/master/feature-detects/storage/localstorage.js}
- * @return {undefined|bool} Returns false on error.
+ * @return {undefined|boolean} Returns false on error.
  */
 module.exports = function () {
   const test = 'localStorageTest';
