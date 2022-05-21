@@ -39,7 +39,7 @@ async function main() {
     await mkdirp(outputDir);
 
     const repos = JSON.parse(
-      await readFile(path.resolve(__dirname, `../../repositories/${type}.json`))
+      await readFile(path.resolve(__dirname, `../../repositories/${type}.json`), 'utf-8')
     );
 
     for (const repo of repos) {
