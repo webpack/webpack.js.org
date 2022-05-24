@@ -61,7 +61,7 @@ import W${basename} from './${file}'
 
         if (
           left.sort > right.sort ||
-          (left.sort == right.sort && left.title > right.title)
+          (left.sort === right.sort && left.title > right.title)
         ) {
           [fileContents[i], fileContents[j]] = [
             fileContents[j],
