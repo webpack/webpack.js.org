@@ -156,7 +156,7 @@ export default class Dropdown extends Component {
   /**
    * Toggle visibility of dropdown items
    *
-   * @param {bool} state - Whether to display or hide the items
+   * @param {boolean} state - Whether to display or hide the items
    */
   _toggle(state = false) {
     this.setState({
