@@ -254,6 +254,8 @@ T> 设置 `maxSize` 的值会同时设置 `maxAsyncSize` 和 `maxInitialSize` �
 
 如果 `splitChunks.name` 与 [entry point](/configuration/entry-context/#entry) 名称匹配，entry point 将被删除。
 
+T> `splitChunks.cacheGroups.{cacheGroup}.name` can be used to move modules into a chunk that is a parent of the source chunk. For example, use `name: "entry-name"` to move modules into the `entry-name` chunk. You can also use on demand named chunks, but you must be careful that the selected modules are only used under this chunk.
+
 **main.js**
 
 ```js

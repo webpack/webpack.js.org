@@ -213,7 +213,19 @@ addDependency(file: string)
 dependency(file: string) // shortcut
 ```
 
+<<<<<<< HEAD
 加入一个文件作为产生 loader 结果的依赖，使它们的任何变化可以被监听到。例如，[`sass-loader`](https://github.com/webpack-contrib/sass-loader), [`less-loader`](https://github.com/webpack-contrib/less-loader) 就使用了这个技巧，当它发现无论何时导入的 `css` 文件发生变化时就会重新编译。
+=======
+Add an existing file as a dependency of the loader result in order to make them watchable. For example, [`sass-loader`](https://github.com/webpack-contrib/sass-loader), [`less-loader`](https://github.com/webpack-contrib/less-loader) uses this to recompile whenever any imported `css` file changes.
+
+### this.addMissingDependency
+
+```typescript
+addMissingDependency(file: string)
+```
+
+Add a non-existing file as a dependency of the loader result in order to make them watchable. Similar to `addDependency`, but handles the creation of files during compilation before watchers are attached correctly.
+>>>>>>> 4b5c7476beb64f2450f9184b4e886775cfe7c6ab
 
 ### this.async $#thisasync$
 

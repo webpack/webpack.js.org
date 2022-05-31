@@ -69,7 +69,7 @@ export default class SidebarItem extends Component {
   render() {
     let { title, anchors = [] } = this.props;
     let openMod = this.state.open ? `${block}--open` : '';
-    let disabledMod = anchors.length == 0 ? `${block}--disabled` : '';
+    let disabledMod = anchors.length === 0 ? `${block}--disabled` : '';
 
     const filteredAnchors = anchors.filter((anchor) => anchor.level > 1);
     const tree = list2Tree(title, filteredAnchors);

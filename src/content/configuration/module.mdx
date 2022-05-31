@@ -206,6 +206,25 @@ const x = require(/* webpackIgnore: true */ 'x');
   };
   ```
 
+#### module.parser.javascript.importMeta
+
+Enable or disable evaluating `import.meta`.
+
+- Type: `boolean = true`
+- Available: 5.68.0+
+- Example:
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          importMeta: false,
+        },
+      },
+    },
+  };
+  ```
+
 #### module.parser.javascript.importMetaContext
 
 启用/禁用 [`import.meta.webpackContext`](/api/module-variables/#importmetawebpackcontext) 分析。
