@@ -113,7 +113,7 @@ import mainImage from './images/main.png';
 img.src = mainImage; // '/dist/151cfcfa1bd74779aadb.png'
 ```
 
-所有 `.png` 文件都将被发送到输出目录，并且其路径将被注入到 bundle 中。
+所有 `.png` 文件都将被发送到输出目录，并且其路径将被注入到 bundle 中，除此之外，你可以为它们自定义 [`outputPath`](/configuration/module/#rulegeneratoroutputpath) 和 [`publicPath`](/configuration/module/#rulegeneratorpublicpath) 属性。
 
 ### 自定义输出文件名 $#custom-output-filename$
 

@@ -213,7 +213,15 @@ addDependency(file: string)
 dependency(file: string) // shortcut
 ```
 
-加入一个文件作为产生 loader 结果的依赖，使它们的任何变化可以被监听到。例如，[`sass-loader`](https://github.com/webpack-contrib/sass-loader), [`less-loader`](https://github.com/webpack-contrib/less-loader) 就使用了这个技巧，当它发现无论何时导入的 `css` 文件发生变化时就会重新编译。
+添加一个文件作为产生 loader 结果的依赖，使它们的任何变化可以被监听到。例如，[`sass-loader`](https://github.com/webpack-contrib/sass-loader), [`less-loader`](https://github.com/webpack-contrib/less-loader) 就使用了这个技巧，当它发现无论何时导入的 `css` 文件发生变化时就会重新编译。
+
+### this.addMissingDependency $#thisaddmissingdependency$
+
+```typescript
+addMissingDependency(file: string)
+```
+
+添加一个不存在的文件作为 loader 结果的依赖项，以使它们可监听。类似于 `addDependency`，但是会在正确附加观察者之前处理在编译期间文件的创建。
 
 ### this.async $#thisasync$
 

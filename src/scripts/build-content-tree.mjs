@@ -43,7 +43,7 @@ function buildContentTree(source, output) {
 
   fs.writeFileSync(
     path.resolve(output),
-    JSON.stringify(content, 2),
+    JSON.stringify(content, null, 2),
     (error) => {
       if (error) {
         console.log('scripts/build-content-tree', error);
