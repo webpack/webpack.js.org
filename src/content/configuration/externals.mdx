@@ -360,9 +360,9 @@ module.exports = {
 
 ### externalsType.module $#externalstype-module$
 
-Specify the default type of externals as `'module'`. Webpack will generate code like `import * as X from '...'` for externals used in a module.
+将 externals 类型设置为 `'module'`，webpack 将会在 module 中为外部引用生成形如 `import * as X from '...'` 的代码。
 
-Make sure to enable [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) first, otherwise webpack will throw errors.
+确保首先把 [`experiments.outputModule`](/configuration/experiments/#experimentsoutputmodule) 设置为 `true`, 否则 webpack 将会报错。
 
 **webpack.config.js**
 
@@ -375,9 +375,9 @@ module.exports = {
 };
 ```
 
-### externalsType.node-commonjs
+### externalsType.node-commonjs $#externalstype-node-commonjs$
 
-Specify the default type of externals as `'node-commonjs'`. Webpack will import [`createRequire`](https://nodejs.org/api/module.html#module_module_createrequire_filename) from `'module'` to construct a require function for loading externals used in a module.
+将 externals 类型设置为 `'node-commonjs'`，webpack 将从 `module` 中导入 `createRequire` 来构造一个 require 函数，用于加载模块中使用的外部对象。
 
 ```js
 module.export = {
@@ -388,9 +388,9 @@ module.export = {
 };
 ```
 
-### externalsType.script
+### externalsType.script $#externalstype-script$
 
-Specify the default type of externals as `'script'`. Webpack will Load the external as a script exposing predefined global variables with HTML `<script>` element. The `<script>` tag would be removed after the script has been loaded.
+将 externals 类型设置为 `'script'`，webpack 将会通过 HTML 中的 `<script>` 标签加载一个脚本，以暴露预定义的全局变量。当脚本被加载完后 `<script>` 标签会被删除。
 
 #### Syntax $#syntax$
 
