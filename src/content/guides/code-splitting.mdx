@@ -426,7 +426,7 @@ T> 只要父 chunk 完成加载，webpack 就会添加 prefetch hint(预取提�
 import(/* webpackPreload: true */ 'ChartingLibrary');
 ```
 
-在页面中使用 `ChartComponent` 时，在请求 ChartComponent.js 的同时，还会通过 `<link rel="preload">` 请求 charting-library-chunk。假定 page-chunk 体积很小，很快就被加载好，页面此时就会显示 `LoadingIndicator(加载进度条)` ，等到 `charting-library-chunk` 请求完成，LoadingIndicator 组件才消失。启动仅需要很少的加载时间，因为只进行单次往返，而不是两次往返。尤其是在高延迟环境下。
+在页面中使用 `ChartComponent` 时，在请求 ChartComponent.js 的同时，还会通过 `<link rel="preload">` 请求 charting-library-chunk。假定 page-chunk 体积比 charting-library-chunk 更小，也更快地被加载完成，页面此时就会显示 `LoadingIndicator(加载进度条)` ，等到 `charting-library-chunk` 请求完成，LoadingIndicator 组件才消失。这将会使得加载时间能够更短一点，因为只进行单次往返，而不是两次往返。尤其是在高延迟环境下。
 
 T> 不正确地使用 `webpackPreload` 会有损性能，请谨慎使用。
 
