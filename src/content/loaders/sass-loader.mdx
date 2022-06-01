@@ -115,7 +115,7 @@ Webpack 提供一种 [解析文件的高级机制](/concepts/module-resolution/)
 
 ### `url(...)` 的问题 $#problems-with-url$
 
-由于 Saass 的实现没有提供 [url 重写](https://github.com/sass/libsass/issues/532)的功能，所以相关的资源都必须是相对于输出文件（ouput）而言的。
+由于 Sass 的实现没有提供 [url 重写](https://github.com/sass/libsass/issues/532)的功能，所以相关的资源都必须是相对于输出文件（ouput）而言的。
 
 - 如果生成的 CSS 传递给了 `css-loader`，则所有的 url 规则都必须是相对于入口文件的（例如：`main.scss`）。
 - 如果仅仅生成了 CSS 文件，没有将其传递给 `css-loader`，那么所有的 url 都是相对于网站的根目录的。
