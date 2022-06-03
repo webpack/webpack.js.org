@@ -99,7 +99,7 @@
     "front-matter": "^4.0.2",
     "github-slugger": "^1.4.0",
     "html-webpack-plugin": "^5.5.0",
-    "http-server": "^14.1.0",
+    "http-server": "^14.1.1",
     "husky": "^8.0.1",
     "hyperlink": "^5.0.4",
     "jest": "^28.1.0",
