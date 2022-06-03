@@ -7,3 +7,6 @@ updates:
       interval: "daily"
     labels:
       - "dependencies"
+    ignore:
+      - dependency-name: "react"
+      - dependency-name: "react-dom"
