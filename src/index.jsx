@@ -14,11 +14,12 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const Router = isProduction ? AnalyticsRouter : BrowserRouter;
 
+const container = document.getElementById('root');
 // Client Side Rendering
 if (isClient) {
   if (isProduction) {
     hydrateRoot(
-      document.getElementById('root'),
+      container,
       <Router id="UA-46921629-2">
         <HelmetProvider>
           <App />
@@ -26,7 +27,7 @@ if (isClient) {
       </Router>
     );
   } else {
-    createRoot(document.getElementById('root')).render(
+    createRoot(container).render(
       <Router id="UA-46921629-2">
         <HelmetProvider>
           <App />
