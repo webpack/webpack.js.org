@@ -74,14 +74,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: yarn
-
-      - run: |
-          yarn
-          yarn cypress install
-          yarn cypress verify
-          yarn cypress:ci
+          build: yarn build
+          start: yarn serve-dist
