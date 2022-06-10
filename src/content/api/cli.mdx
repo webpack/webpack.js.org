@@ -574,6 +574,8 @@ The `--env` argument accepts multiple values:
 | `npx webpack --env foo=bar=app`                                  | `{ foo: "bar=app"}`                            |
 | `npx webpack --env app.platform="staging" --env app.name="test"` | `{ app: { platform: "staging", name: "test" }` |
 
+T> If you want to explicitly set a variable to empty string (`""`), you may need to escape characters on terminal like `npx webpack --env foo=\"\"`
+
 T> See the [environment variables](/guides/environment-variables/) guide for more information on its usage.
 
 In addition to the customized `env` showed above, there are some built-in ones under `env` to be used inside your webpack configuration:
