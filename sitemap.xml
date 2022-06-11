@@ -19,6 +19,9 @@
         <loc>https://webpack.js.org/comparison</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/concepts</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/configuration</loc>
     </url>
     <url>
@@ -35,9 +38,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/license</loc>
@@ -79,10 +79,10 @@
         <loc>https://webpack.js.org/api/compilation-object</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/hot-module-replacement</loc>
+        <loc>https://webpack.js.org/api/contextmodulefactory-hooks</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/contextmodulefactory-hooks</loc>
+        <loc>https://webpack.js.org/api/hot-module-replacement</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/loaders</loc>
@@ -100,10 +100,10 @@
         <loc>https://webpack.js.org/api/node</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/normalmodulefactory-hooks</loc>
+        <loc>https://webpack.js.org/api/parser</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/parser</loc>
+        <loc>https://webpack.js.org/api/normalmodulefactory-hooks</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/passing-a-config</loc>
@@ -128,6 +128,51 @@
     </url>
     <url>
         <loc>https://webpack.js.org/blog/printable</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/entry-points</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/configuration</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/loaders</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/manifest</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/mode</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/module-federation</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/module-resolution</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/modules</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/output</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/plugins</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/targets</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/under-the-hood</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/concepts/why-webpack</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/cache</loc>
@@ -193,13 +238,13 @@
         <loc>https://webpack.js.org/contribute/debugging</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/contribute/plugin-patterns</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/contribute/release-process</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/writers-guide</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/contribute/plugin-patterns</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/writing-a-loader</loc>
@@ -247,10 +292,10 @@
         <loc>https://webpack.js.org/guides/code-splitting</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/code-splitting-async</loc>
+        <loc>https://webpack.js.org/guides/code-splitting-css</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/guides/code-splitting-css</loc>
+        <loc>https://webpack.js.org/guides/code-splitting-async</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/code-splitting-import</loc>
@@ -332,51 +377,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/why-webpack</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/configuration</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/dependency-graph</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/entry-points</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/hot-module-replacement</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/loaders</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/manifest</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/mode</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/module-federation</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/module-resolution</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/modules</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/output</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/plugins</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/targets</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/under-the-hood</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/concepts/why-webpack</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/loaders/babel-loader</loc>
@@ -466,9 +466,6 @@
         <loc>https://webpack.js.org/plugins/automatic-prefetch-plugin</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/plugins/banner-plugin</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/plugins/commons-chunk-plugin</loc>
     </url>
     <url>
@@ -476,6 +473,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/context-exclusion-plugin</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/plugins/banner-plugin</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/context-replacement-plugin</loc>
