@@ -168,7 +168,68 @@ module.exports = {
 const x = require(/* webpackIgnore: true */ 'x');
 ```
 
+<<<<<<< HEAD
 #### module.parser.javascript.exportsPresence $#moduleparserjavascriptexportspresence$
+=======
+#### module.parser.javascript.dynamicImportMode
+
+Specifies global mode for dynamic import.
+
+- Type: `'eager' | 'weak' | 'lazy' | 'lazy-once'`
+- Available: 5.73.0+
+- Example:
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          dynamicImportMode: 'lazy',
+        },
+      },
+    },
+  };
+  ```
+
+#### module.parser.javascript.dynamicImportPrefetch
+
+Specifies global prefetch for dynamic import.
+
+- Type: ` number | boolean`
+- Available: 5.73.0+
+- Example:
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          dynamicImportPrefetch: false,
+        },
+      },
+    },
+  };
+  ```
+
+#### module.parser.javascript.dynamicImportPreload
+
+Specifies global preload for dynamic import.
+
+- Type: ` number | boolean`
+- Available: 5.73.0+
+- Example:
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          dynamicImportPreload: false,
+        },
+      },
+    },
+  };
+  ```
+
+#### module.parser.javascript.exportsPresence
+>>>>>>> ef5ca9a074c3e94ef36f234161cdc8a96e7b9dee
 
 指出在 `\"import ... from ...\"` 与 `\"export ... from ...\"` 中无效导出名称的行为。
 

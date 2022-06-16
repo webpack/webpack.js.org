@@ -7,6 +7,12 @@ updates:
       interval: "daily"
     labels:
       - "dependencies"
+<<<<<<< HEAD
     allowed_updates:
       - match:
         dependency_name: "textlint"
+=======
+    ignore:
+      - dependency-name: "react"
+      - dependency-name: "react-dom"
+>>>>>>> ef5ca9a074c3e94ef36f234161cdc8a96e7b9dee
