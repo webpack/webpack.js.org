@@ -168,13 +168,70 @@ module.exports = {
 const x = require(/* webpackIgnore: true */ 'x');
 ```
 
-#### module.parser.javascript.exportsPresence $#moduleparserjavascriptexportspresence$
+#### module.parser.javascript.dynamicImportMode
+
+指定动态导入的全局模式。
+
+- 类型：`'eager' | 'weak' | 'lazy' | 'lazy-once'`
+- 可用版本：5.73.0+
+- 示例：
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          dynamicImportMode: 'lazy',
+        },
+      },
+    },
+  };
+  ```
+
+#### module.parser.javascript.dynamicImportPrefetch
+
+指定动态导入的全局 prefetch。
+
+- 类型：` number | boolean`
+- 可用版本：5.73.0+
+- 示例：
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          dynamicImportPrefetch: false,
+        },
+      },
+    },
+  };
+  ```
+
+#### module.parser.javascript.dynamicImportPreload
+
+指定动态导入的全局 preload。
+
+- 类型：` number | boolean`
+- 可用版本：5.73.0+
+- 示例：
+  ```js
+  module.exports = {
+    module: {
+      parser: {
+        javascript: {
+          dynamicImportPreload: false,
+        },
+      },
+    },
+  };
+  ```
+
+#### module.parser.javascript.exportsPresence
 
 指出在 `\"import ... from ...\"` 与 `\"export ... from ...\"` 中无效导出名称的行为。
 
-- Type: `'error' | 'warn' | 'auto' | false`
-- Available: 5.62.0+
-- Example:
+- 类型：`'error' | 'warn' | 'auto' | false`
+- 可用版本：5.62.0+
+- 示例：
   ```js
   module.exports = {
     module: {
@@ -191,9 +248,9 @@ const x = require(/* webpackIgnore: true */ 'x');
 
 指出在 `\"import ... from ...\"` 中无效导出名称的行为。
 
-- Type: `'error' | 'warn' | 'auto' | false`
-- Available: 5.62.0+
-- Example:
+- 类型：`'error' | 'warn' | 'auto' | false`
+- 可用版本：5.62.0+
+- 示例：
   ```js
   module.exports = {
     module: {
@@ -210,9 +267,9 @@ const x = require(/* webpackIgnore: true */ 'x');
 
 Enable or disable evaluating `import.meta`.
 
-- Type: `boolean = true`
-- Available: 5.68.0+
-- Example:
+- 类型：`boolean = true`
+- 可用版本：5.68.0+
+- 示例：
   ```js
   module.exports = {
     module: {
@@ -248,9 +305,9 @@ Enable or disable evaluating `import.meta`.
 
 指出在  `\"export ... from ...\"` 中无效导出名称的行为。当在 TypeScript 重新导出类型，从 `\"export ... from ...\"` 迁移到 `\"export type ... from ...\"` 时禁用该配置项是有用的。
 
-- Type: `'error' | 'warn' | 'auto' | false`
-- Available: 5.62.0+
-- Example:
+- 类型：`'error' | 'warn' | 'auto' | false`
+- 可用版本：5.62.0+
+- 示例：
   ```js
   module.exports = {
     module: {

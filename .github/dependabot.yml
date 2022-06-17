@@ -10,3 +10,6 @@ updates:
     allowed_updates:
       - match:
         dependency_name: "textlint"
+    ignore:
+      - dependency-name: "react"
+      - dependency-name: "react-dom"
