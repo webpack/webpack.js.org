@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 // https://github.com/cypress-io/cypress-example-recipes/blob/master/examples/server-communication__offline/cypress/integration/offline-spec.js
 
 const goOffline = () => {
