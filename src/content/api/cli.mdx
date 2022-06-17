@@ -577,13 +577,9 @@ npx webpack --env production    # env.production = true
 | `npx webpack --env foo=bar=app`                                  | `{ foo: "bar=app"}`                            |
 | `npx webpack --env app.platform="staging" --env app.name="test"` | `{ app: { platform: "staging", name: "test" }` |
 
-<<<<<<< HEAD
-T> 请查阅 [environment 变量指南](/guides/environment-variables/)了解更多信息及用法。
-=======
-T> If you want to explicitly set a variable to empty string (`""`), you may need to escape characters on terminal like `npx webpack --env foo=\"\"`
+T> 如果你想将一个变量设置为空字符串（`""`），你可能需要在终端上转义字符，就像这样：`npx webpack --env foo=\"\"`
 
-T> See the [environment variables](/guides/environment-variables/) guide for more information on its usage.
->>>>>>> ef5ca9a074c3e94ef36f234161cdc8a96e7b9dee
+T> 请查阅 [environment 变量指南](/guides/environment-variables/)了解更多信息及用法。
 
 除了上面所说的自定义 `env` 变量，在你的 webpack 配置中也使用了一些 `env` 内置变量：
 

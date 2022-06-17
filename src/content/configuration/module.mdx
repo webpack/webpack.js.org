@@ -168,16 +168,13 @@ module.exports = {
 const x = require(/* webpackIgnore: true */ 'x');
 ```
 
-<<<<<<< HEAD
-#### module.parser.javascript.exportsPresence $#moduleparserjavascriptexportspresence$
-=======
 #### module.parser.javascript.dynamicImportMode
 
-Specifies global mode for dynamic import.
+指定动态导入的全局模式。
 
-- Type: `'eager' | 'weak' | 'lazy' | 'lazy-once'`
-- Available: 5.73.0+
-- Example:
+- 类型：`'eager' | 'weak' | 'lazy' | 'lazy-once'`
+- 可用版本：5.73.0+
+- 示例：
   ```js
   module.exports = {
     module: {
@@ -192,11 +189,11 @@ Specifies global mode for dynamic import.
 
 #### module.parser.javascript.dynamicImportPrefetch
 
-Specifies global prefetch for dynamic import.
+指定动态导入的全局 prefetch。
 
-- Type: ` number | boolean`
-- Available: 5.73.0+
-- Example:
+- 类型：` number | boolean`
+- 可用版本：5.73.0+
+- 示例：
   ```js
   module.exports = {
     module: {
@@ -211,11 +208,11 @@ Specifies global prefetch for dynamic import.
 
 #### module.parser.javascript.dynamicImportPreload
 
-Specifies global preload for dynamic import.
+指定动态导入的全局 preload。
 
-- Type: ` number | boolean`
-- Available: 5.73.0+
-- Example:
+- 类型：` number | boolean`
+- 可用版本：5.73.0+
+- 示例：
   ```js
   module.exports = {
     module: {
@@ -229,13 +226,12 @@ Specifies global preload for dynamic import.
   ```
 
 #### module.parser.javascript.exportsPresence
->>>>>>> ef5ca9a074c3e94ef36f234161cdc8a96e7b9dee
 
 指出在 `\"import ... from ...\"` 与 `\"export ... from ...\"` 中无效导出名称的行为。
 
-- Type: `'error' | 'warn' | 'auto' | false`
-- Available: 5.62.0+
-- Example:
+- 类型：`'error' | 'warn' | 'auto' | false`
+- 可用版本：5.62.0+
+- 示例：
   ```js
   module.exports = {
     module: {
@@ -252,9 +248,9 @@ Specifies global preload for dynamic import.
 
 指出在 `\"import ... from ...\"` 中无效导出名称的行为。
 
-- Type: `'error' | 'warn' | 'auto' | false`
-- Available: 5.62.0+
-- Example:
+- 类型：`'error' | 'warn' | 'auto' | false`
+- 可用版本：5.62.0+
+- 示例：
   ```js
   module.exports = {
     module: {
@@ -271,9 +267,9 @@ Specifies global preload for dynamic import.
 
 Enable or disable evaluating `import.meta`.
 
-- Type: `boolean = true`
-- Available: 5.68.0+
-- Example:
+- 类型：`boolean = true`
+- 可用版本：5.68.0+
+- 示例：
   ```js
   module.exports = {
     module: {
@@ -309,9 +305,9 @@ Enable or disable evaluating `import.meta`.
 
 指出在  `\"export ... from ...\"` 中无效导出名称的行为。当在 TypeScript 重新导出类型，从 `\"export ... from ...\"` 迁移到 `\"export type ... from ...\"` 时禁用该配置项是有用的。
 
-- Type: `'error' | 'warn' | 'auto' | false`
-- Available: 5.62.0+
-- Example:
+- 类型：`'error' | 'warn' | 'auto' | false`
+- 可用版本：5.62.0+
+- 示例：
   ```js
   module.exports = {
     module: {
