@@ -436,11 +436,15 @@ Both `hash` and `timestamp` are optional.
 
 An array of paths that are managed by a package manager and contain a version or a hash in their paths so that all files are immutable.
 
+Make sure to wrap the path in a capture group if you use regular expressions.
+
 ### managedPaths
 
 `(RegExp | string)[]`
 
 An array of paths that are managed by a package manager and can be trusted to not be modified otherwise.
+
+Make sure to wrap the path in a capture group if you use regular expressions.
 
 ### module
 
