@@ -4539,7 +4539,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <a href="https://github.com/webpack-contrib/source-map-loader/actions"><img src="https://github.com/webpack-contrib/source-map-loader/workflows/source-map-loader/badge.svg" alt="tests"/></a>
 <a href="https://codecov.io/gh/webpack-contrib/source-map-loader"><img src="https://codecov.io/gh/webpack-contrib/source-map-loader/branch/master/graph/badge.svg" alt="coverage"/></a>
 <a href="https://gitter.im/webpack/webpack"><img src="https://badges.gitter.im/webpack/webpack.svg" alt="chat"/></a>
-<a href="https://packagephobia.now.sh/result?p=source-map-loader"><img src="https://packagephobia.now.sh/badge?p=source-map-loader" alt="size"/></a></p><p>Extracts source maps from existing source files (from their <code>sourceMappingURL</code>).</p><h2><span id="getting-started"></span>Getting Started<a href="#getting-started" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p>To begin, you&#x27;ll need to install <code>source-map-loader</code>:</p><pre><code class="hljs language-bash"><span class="token function">npm</span> i -D source-map-loader</code></pre><p>Then add the plugin to your <code>webpack</code> config. For example:</p><p><strong>file.js</strong></p><pre><code class="hljs language-js"><span class="token keyword">import</span> css <span class="token keyword">from</span> <span class="token string">&quot;file.css&quot;</span><span class="token punctuation">;</span></code></pre><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+<a href="https://packagephobia.now.sh/result?p=source-map-loader"><img src="https://packagephobia.now.sh/badge?p=source-map-loader" alt="size"/></a></p><p>Extracts source maps from existing source files (from their <code>sourceMappingURL</code>).</p><h2><span id="getting-started"></span>Getting Started<a href="#getting-started" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p>To begin, you&#x27;ll need to install <code>source-map-loader</code>:</p><pre><code class="hljs language-console">npm i -D source-map-loader
+</code></pre><p>or</p><pre><code class="hljs language-console">yarn add -D source-map-loader
+</code></pre><p>or</p><pre><code class="hljs language-console">pnpm add -D source-map-loader
+</code></pre><p>Then add the plugin to your <code>webpack</code> config. For example:</p><p><strong>file.js</strong></p><pre><code class="hljs language-js"><span class="token keyword">import</span> css <span class="token keyword">from</span> <span class="token string">&quot;file.css&quot;</span><span class="token punctuation">;</span></code></pre><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
   module<span class="token operator">:</span> <span class="token punctuation">{</span>
     rules<span class="token operator">:</span> <span class="token punctuation">[</span>
       <span class="token punctuation">{</span>
@@ -5232,23 +5235,16 @@ customElements<span class="token punctuation">.</span><span class="token functio
 <a href="https://packagephobia.now.sh/result?p=stylus-loader"><img src="https://packagephobia.now.sh/badge?p=stylus-loader" alt="size"/></a></p><p>A Stylus loader for webpack. Compiles Styl to CSS.</p><h2><span id="getting-started"></span>Getting Started<a href="#getting-started" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><p>To begin, you&#x27;ll need to install <code>stylus</code> and <code>stylus-loader</code>:</p><pre><code class="hljs language-console">npm install stylus stylus-loader --save-dev
 </code></pre><p>or</p><pre><code class="hljs language-console">yarn add -D stylus stylus-loader
 </code></pre><p>or</p><pre><code class="hljs language-console">pnpm add -D stylus stylus-loader
-
-Then add the loader to your `webpack` config. For example:
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.styl$/,
-        loader: &quot;stylus-loader&quot;, // compiles Styl to CSS
-      },
-    ],
-  },
-};
-</code></pre><p>And run <code>webpack</code> via your preferred method.</p><h2><span id="options"></span>Options<a href="#options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><ul><li><strong><a href="#stylusoptions"><code>stylusOptions</code></a></strong></li><li><strong><a href="#sourcemap"><code>sourceMap</code></a></strong></li><li><strong><a href="#webpackimporter"><code>webpackImporter</code></a></strong></li><li><strong><a href="#additionaldata"><code>additionalData</code></a></strong></li><li><strong><a href="#implementation"><code>implementation</code></a></strong></li></ul><h3><span id="stylusoptions"></span><code>stylusOptions</code><a href="#stylusoptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>Type:</p><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">stylusOptions</span> <span class="token operator">=</span>
+</code></pre><p>Then add the loader to your <code>webpack</code> config. For example:</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    rules<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.styl$/</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">&quot;stylus-loader&quot;</span><span class="token punctuation">,</span> <span class="token comment">// compiles Styl to CSS</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>And run <code>webpack</code> via your preferred method.</p><h2><span id="options"></span>Options<a href="#options" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h2><ul><li><strong><a href="#stylusoptions"><code>stylusOptions</code></a></strong></li><li><strong><a href="#sourcemap"><code>sourceMap</code></a></strong></li><li><strong><a href="#webpackimporter"><code>webpackImporter</code></a></strong></li><li><strong><a href="#additionaldata"><code>additionalData</code></a></strong></li><li><strong><a href="#implementation"><code>implementation</code></a></strong></li></ul><h3><span id="stylusoptions"></span><code>stylusOptions</code><a href="#stylusoptions" aria-hidden="true" tabindex="-1"><span class="header-link"></span></a></h3><p>Type:</p><pre><code class="hljs language-ts"><span class="token keyword">type</span> <span class="token class-name">stylusOptions</span> <span class="token operator">=</span>
   <span class="token operator">|</span> <span class="token punctuation">{</span>
       use<span class="token operator">:</span> <span class="token builtin">Array</span><span class="token operator">&lt;</span><span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">Function</span><span class="token operator">&gt;</span><span class="token punctuation">;</span>
       include<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
