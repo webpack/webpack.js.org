@@ -79,7 +79,7 @@ In DataURIs using the `text/javascript` or `application/javascript` mime type wi
 
 In addition to the module format, flagging modules as ESM also affect the resolving logic, interop logic and the available symbols in modules.
 
-Imports in ESM are resolved more strictly. Relative requests must include a filename and file extension.
+Imports in ESM are resolved more strictly. Relative requests must include a filename and file extension (e.g. `*.js` or `*.mjs`) to disable this behaviour set [`fullySpecified=false`](/configuration/module/#resolvefullyspecified).
 
 T> Requests to packages e.g. `import "lodash"` are still supported.
 
