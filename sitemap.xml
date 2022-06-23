@@ -4,6 +4,9 @@
         <loc>https://webpack.js.org/</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/api</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/awesome-webpack</loc>
     </url>
     <url>
@@ -11,9 +14,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/branding</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/comparison</loc>
@@ -65,15 +65,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/writers-guide</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/blog/2020-12-08-roadmap-2021</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/cli</loc>
@@ -128,6 +119,15 @@
     </url>
     <url>
         <loc>https://webpack.js.org/api/webpack-dev-server</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/blog/2020-10-10-webpack-5-release</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/blog/2020-12-08-roadmap-2021</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/blog/printable</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/concepts/configuration</loc>
@@ -583,13 +583,13 @@
         <loc>https://webpack.js.org/pluginsapi/template</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/api/plugins/compilation</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/api/plugins/compiler</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/module-factories</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/api/plugins/compilation</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/parser</loc>
