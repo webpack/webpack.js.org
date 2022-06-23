@@ -45,7 +45,7 @@ export default function Page(props) {
     }
   }, [props.content]);
 
-  const { hash } = useLocation();
+  const { hash, pathname } = useLocation();
 
   useEffect(() => {
     if (contentLoaded) {
@@ -58,7 +58,7 @@ export default function Page(props) {
         window.scrollTo(0, 0);
       }
     }
-  });
+  }, [contentLoaded, pathname, hash]);
 
   const numberOfContributors = contributors.length;
   const loadRelated = contentLoaded && related && related.length !== 0;
