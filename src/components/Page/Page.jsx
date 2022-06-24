@@ -45,20 +45,36 @@ export default function Page(props) {
     }
   }, [props.content]);
 
-  const { hash, pathname } = useLocation();
+  const { hash } = useLocation();
 
   useEffect(() => {
     if (contentLoaded) {
       if (hash) {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView();
+        const target = document.querySelector('#md-content');
+        // two cases here
+        // 1. server side rendered page, so hash target is already there
+        if (document.querySelector(hash)) {
+          document.querySelector(hash).scrollIntoView();
+        } else {
+          // 2. dynamic loaded content
+          // we need to observe the dom change to tell if hash exists
+          const observer = new MutationObserver(() => {
+            const element = document.querySelector(hash);
+            if (element) {
+              element.scrollIntoView();
+            }
+          });
+          observer.observe(target, {
+            childList: true,
+            attributes: false,
+            subtree: false,
+          });
         }
       } else {
         window.scrollTo(0, 0);
       }
     }
-  }, [contentLoaded, pathname, hash]);
+  }, [contentLoaded, hash]);
 
   const numberOfContributors = contributors.length;
   const loadRelated = contentLoaded && related && related.length !== 0;
@@ -102,7 +118,7 @@ export default function Page(props) {
           </div>
         ) : null}
 
-        {contentRender}
+        <div id="md-content">{contentRender}</div>
 
         {loadRelated && (
           <div className="print:hidden">
