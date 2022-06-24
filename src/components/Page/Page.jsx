@@ -48,6 +48,7 @@ export default function Page(props) {
   const { hash } = useLocation();
 
   useEffect(() => {
+    let observer;
     if (contentLoaded) {
       if (hash) {
         const target = document.querySelector('#md-content');
@@ -58,7 +59,7 @@ export default function Page(props) {
         } else {
           // 2. dynamic loaded content
           // we need to observe the dom change to tell if hash exists
-          const observer = new MutationObserver(() => {
+          observer = new MutationObserver(() => {
             const element = document.querySelector(hash);
             if (element) {
               element.scrollIntoView();
@@ -74,6 +75,11 @@ export default function Page(props) {
         window.scrollTo(0, 0);
       }
     }
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+    };
   }, [contentLoaded, hash]);
 
   const numberOfContributors = contributors.length;
