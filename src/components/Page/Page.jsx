@@ -45,7 +45,7 @@ export default function Page(props) {
     }
   }, [props.content]);
 
-  const { hash } = useLocation();
+  const { hash, pathname } = useLocation();
 
   useEffect(() => {
     let observer;
@@ -80,7 +80,7 @@ export default function Page(props) {
         observer.disconnect();
       }
     };
-  }, [contentLoaded, hash]);
+  }, [contentLoaded, pathname, hash]);
 
   const numberOfContributors = contributors.length;
   const loadRelated = contentLoaded && related && related.length !== 0;
