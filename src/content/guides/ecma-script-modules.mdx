@@ -82,7 +82,7 @@ Node.js 通过设置 `package.json` 中的属性来显式设置文件模块类�
 
 除了模块格式外，将模块标记为 ESM 还会影响解析逻辑，操作逻辑和模块中的可用符号。
 
-导入模块在 ESM 中更为严格，导入相对路径的模块必须包含文件名和文件扩展名。
+导入模块在 ESM 中更为严格，导入相对路径的模块必须包含文件名和文件扩展名（例如 `*.js` 或者 `*.mjs`），除非你设置了 [`fullySpecified=false`](/configuration/module/#resolvefullyspecified)。
 
 T> 依旧支持导入包，例如 `import "lodash"` .
 
