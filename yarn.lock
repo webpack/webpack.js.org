@@ -5175,19 +5175,21 @@ eslint-config-prettier@^8.5.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz#5a81680ec934beca02c7b1a61cf8ca34b66feab1"
   integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
 
-eslint-mdx@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-mdx/-/eslint-mdx-2.0.0.tgz#fbb1fd78390127a04a5525824112f1fdc0dab669"
-  integrity sha512-FqJQCRdS6zY4VYNZhCwGm4O99POUDK/C3mnNug0d4cGF7Lg5GiGYQw9N0CtwTX8d5gDhymM8efpDzKkrRbTZNg==
+eslint-mdx@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-mdx/-/eslint-mdx-2.0.1.tgz#c443943eba275fafbfe15ecd0dfd44c739699dca"
+  integrity sha512-25qjdxWQGDX0zXxnZGfqwEbWjUuY1eCnK7CIq3fNE+5rWSAeleJ/i0nLKcgh6XrvmxKn6ZYcJ9msdeqmL4kPMQ==
   dependencies:
     cosmiconfig "^7.0.1"
     estree-util-visit "^1.1.0"
-    remark-mdx "^2.1.1"
+    remark-mdx "^2.1.2"
     remark-parse "^10.0.1"
     remark-stringify "^10.0.2"
     synckit "^0.7.1"
     tslib "^2.4.0"
     unified "^10.1.2"
+    unist-util-visit "^4.1.0"
+    vfile "^5.3.4"
 
 eslint-plugin-cypress@^2.12.1:
   version "2.12.1"
@@ -5203,14 +5205,14 @@ eslint-plugin-markdown@^2.2.1:
   dependencies:
     mdast-util-from-markdown "^0.8.5"
 
-eslint-plugin-mdx@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-mdx/-/eslint-plugin-mdx-2.0.0.tgz#4afa704ff2cff461ea497d05cd2d523633075070"
-  integrity sha512-EUdaCyngPceMlYTU3tyjywa2E5IP7h0wQ6zFvvr5pcOHu4CFxqmH25ET/Kt3jHtf+9UQOCXlhTQVBLPaSA3kZA==
+eslint-plugin-mdx@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-mdx/-/eslint-plugin-mdx-2.0.1.tgz#07c6a83a7daa98d88d5de354cb7732eba1236590"
+  integrity sha512-BKPKX6+KxOkvKe+ASxZJeBGdrWemM8NtgJrzxzS30/hwxcEo86jsQi9SJmSrWLUs0P9KAAnM2/iW5ry/oRos8g==
   dependencies:
-    eslint-mdx "^2.0.0"
+    eslint-mdx "^2.0.1"
     eslint-plugin-markdown "^2.2.1"
-    remark-mdx "^2.1.1"
+    remark-mdx "^2.1.2"
     remark-parse "^10.0.1"
     remark-stringify "^10.0.2"
     tslib "^2.4.0"
@@ -10549,7 +10551,7 @@ remark-mdx@2.0.0-next.9:
     micromark-extension-mdx "^0.2.0"
     micromark-extension-mdxjs "^0.3.0"
 
-remark-mdx@^2.1.1:
+remark-mdx@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/remark-mdx/-/remark-mdx-2.1.2.tgz#eea2784fa5697e14f6e0686700077986b88b8078"
   integrity sha512-npQagPdczPAv0xN9F8GSi5hJfAe/z6nBjylyfOfjLOmz086ahWrIjlk4BulRfNhA+asutqWxyuT3DFVsxiTVHA==
@@ -12585,7 +12587,7 @@ vfile@^4.0.0:
     unist-util-stringify-position "^2.0.0"
     vfile-message "^2.0.0"
 
-vfile@^5.0.0, vfile@^5.3.2:
+vfile@^5.0.0, vfile@^5.3.2, vfile@^5.3.4:
   version "5.3.4"
   resolved "https://registry.yarnpkg.com/vfile/-/vfile-5.3.4.tgz#bbb8c96b956693bbf70b2c67fdb5781dff769b93"
   integrity sha512-KI+7cnst03KbEyN1+JE504zF5bJBZa+J+CrevLeyIMq0aPU681I2rQ5p4PlnQ6exFtWiUrg26QUdFMnAKR6PIw==
