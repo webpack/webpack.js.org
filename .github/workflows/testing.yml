@@ -62,7 +62,7 @@ jobs:
         uses: actions/cache@v3
         id: build-webpack-persistent-cache
         with:
-          path: node_modules/.cache/webpack
+          path: node_modules/.cache
           key: build-${{ hashFiles('**/webpack.*.js') }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |-
              build-${{ hashFiles('**/webpack.*.js') }}-${{ hashFiles('**/yarn.lock') }}
