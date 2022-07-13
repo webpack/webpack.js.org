@@ -19,6 +19,7 @@ export default (env) =>
       buildDependencies: {
         config: [__filename],
       },
+      cacheDirectory: path.resolve(__dirname, 'node_modules/.cache/webpack')
     },
     entry: {
       index: {
