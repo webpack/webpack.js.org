@@ -57,6 +57,16 @@ jobs:
           cache: yarn
 
       - run: yarn
+      
+      - name: Enable webpack persistent caching
+        uses: actions/cache@v3
+        id: build-webpack-persistent-cache
+        with:
+          path: node_modules/.cache/webpack
+          key: build-${{ hashFiles('**/webpack.*.js') }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |-
+             build-${{ hashFiles('**/webpack.*.js') }}-${{ hashFiles('**/yarn.lock') }}
+             build-${{ hashFiles('**/webpack.*.js') }}-
 
       - name: Build site
         run: yarn build
