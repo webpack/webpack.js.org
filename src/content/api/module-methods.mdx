@@ -435,4 +435,20 @@ const page = 'Foo';
 __webpack_modules__[require.resolveWeak(`./page/${page}`)];
 ```
 
+<<<<<<< HEAD
 T> `require.resolveWeak` 是_通用渲染_（服务器端渲染 SSR + 代码分割 Code Splitting）的基础。例如在 [react-universal-component](https://github.com/faceyspacey/react-universal-component) 等包中的用法。它允许代码在服务器端和客户端初始页面的加载上同步渲染。它要求手动或以某种方式提供 chunk。它可以在不需要指示应该被打包的情况下引入模块。它与 `import()` 一起使用，当用户导航触发额外的导入时，它会被接管。
+=======
+T> `require.resolveWeak` is the foundation of _universal rendering_ (SSR + Code Splitting), as used in packages such as [react-universal-component](https://github.com/faceyspacey/react-universal-component). It allows code to render synchronously on both the server and initial page-loads on the client. It requires that chunks are manually served or somehow available. It's able to require modules without indicating they should be bundled into a chunk. It's used in conjunction with `import()` which takes over when user navigation triggers additional imports.
+
+### warning
+
+If the module source contains a require that cannot be statically analyzed, critical dependencies warning is emitted.
+
+Example code:
+
+```javascript
+someFn(require);
+require.bind(null);
+require(variable);
+```
+>>>>>>> 48a23c513ad904dd811205b977407227c38264af
