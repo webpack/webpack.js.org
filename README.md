@@ -8,7 +8,7 @@
 [![Standard Version][release]][release-url]
 [![chat on gitter][chat]][chat-url]
 
-Guides, documentation, and all things webpack.
+Guides, documentation, and all things webpack. cache test
 
 </div>
 
