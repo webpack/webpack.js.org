@@ -437,16 +437,22 @@ module.exports = {
 
 ### immutablePaths $#immutable-paths$
 
-`[string]`
+`(RegExp | string)[]`
 
 由包管理器管理的路径数组，在其路径中包含一个版本或哈希，以便所有文件都是不可变的（immutable）。
 
-### managedPaths $#managedpaths$
+如果使用正则表达式，请确保将路径包裹在捕获组中。
 
-`[string]`
+### managedPaths $#managedpaths$
+如果使用正则表达式，请确保将路径包裹在捕获组中。
+
+### managedPaths
+
+`(RegExp | string)[]`
 
 由包管理器管理的路径数组，可以信任它不会被修改。
 
+如果使用正则表达式，请确保将路径包裹在捕获组中。
 
 ### module $#module$
 
