@@ -261,6 +261,26 @@ module.exports = {
 };
 ```
 
+### resolve.extensionAlias
+
+`object`
+
+An object which maps extension to extension aliases.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    extensionAlias: {
+      '.js': ['.ts', '.js'],
+      '.mjs': ['.mts', '.mjs'],
+    },
+  },
+};
+```
+
 ### resolve.fallback
 
 `object`
