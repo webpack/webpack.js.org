@@ -461,7 +461,7 @@
   dependencies:
     "@babel/types" "^7.18.6"
 
-"@babel/helper-validator-identifier@^7.18.6":
+"@babel/helper-validator-identifier@^7.16.7", "@babel/helper-validator-identifier@^7.18.6":
   version "7.18.6"
   resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.18.6.tgz#9c97e30d31b2b8c72a1d08984f2ca9b574d7a076"
   integrity sha512-MmetCkz9ej86nJQV+sFCxoGGrUbU3q02kgLciwkrt9QqEB7cP39oKEY0PakknEO0Gu20SskMRi+AYZ3b1TpN9g==
@@ -12624,7 +12624,6 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-<<<<<<< HEAD
 textlint-rule-heading@^1.0.10:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/textlint-rule-heading/-/textlint-rule-heading-1.0.10.tgz#c0159ef0cb75e2ce3dca1ad08b73b03991ce2e23"
@@ -12667,13 +12666,6 @@ textlint@^11.8.2:
     try-resolve "^1.0.1"
     unique-concat "^0.2.2"
 
-throat@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/throat/-/throat-6.0.1.tgz#d514fedad95740c12c2d7fc70ea863eb51ade375"
-  integrity sha512-8hmiGIJMDlwjg7dlJ4yKGLK8EsYqKgPWbG3b4wjJddKNwc7N7Dpn08Df4szr/sZdMVeOstrdYSsqzX6BYbcB+w==
-
-=======
->>>>>>> de1b0e4b16826ae2a2e713ba2766a0a82b19b91e
 throttle-debounce@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/throttle-debounce/-/throttle-debounce-3.0.1.tgz#32f94d84dfa894f786c9a1f290e7a645b6a19abb"
