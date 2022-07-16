@@ -233,7 +233,31 @@ module.exports = {
 };
 ```
 
+<<<<<<< HEAD
 ### resolve.extensions $#resolveextensions$
+=======
+### resolve.extensionAlias
+
+`object`
+
+An object which maps extension to extension aliases.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    extensionAlias: {
+      '.js': ['.ts', '.js'],
+      '.mjs': ['.mts', '.mjs'],
+    },
+  },
+};
+```
+
+### resolve.extensions
+>>>>>>> 98a6bd0a7a9dca226bb68bfc45a53c19ac98ac37
 
 `[string] = ['.js', '.json', '.wasm']`
 
