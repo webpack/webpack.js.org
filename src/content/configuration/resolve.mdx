@@ -233,7 +233,27 @@ module.exports = {
 };
 ```
 
-### resolve.extensions $#resolveextensions$
+### resolve.extensionAlias
+
+`object`
+
+一个将拓展名与拓展名别名映射的对象。
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  //...
+  resolve: {
+    extensionAlias: {
+      '.js': ['.ts', '.js'],
+      '.mjs': ['.mts', '.mjs'],
+    },
+  },
+};
+```
+
+### resolve.extensions
 
 `[string] = ['.js', '.json', '.wasm']`
 
