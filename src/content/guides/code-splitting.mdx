@@ -359,7 +359,7 @@ As `import()` returns a promise, it can be used with [`async` functions](https:/
 ```diff
 -function getComponent() {
 +async function getComponent() {
-   const element = document.createElement('div');
++  const element = document.createElement('div');
 +  const { default: _ } = await import('lodash');
 
 -  return import('lodash')
