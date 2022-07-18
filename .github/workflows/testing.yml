@@ -89,7 +89,7 @@ jobs:
         id: build-webpack-persistent-cache
         with:
           path: node_modules/.cache
-          key: build-${{ hashFiles('**/webpack.*.js') }}-${{ hashFiles('**/yarn.lock') }}
+          key: build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |-
              build-${{ hashFiles('**/webpack.*.js') }}-${{ hashFiles('**/yarn.lock') }}
              build-${{ hashFiles('**/webpack.*.js') }}-
