@@ -57,16 +57,16 @@ jobs:
           cache: yarn
 
       - run: yarn
-      
+
       - name: Enable webpack persistent caching
         uses: actions/cache@v3
         id: build-webpack-persistent-cache
         with:
           path: node_modules/.cache
-          key: build-${{ hashFiles('**/webpack.*.js') }}-${{ hashFiles('**/yarn.lock') }}
+          key: build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |-
-             build-${{ hashFiles('**/webpack.*.js') }}-${{ hashFiles('**/yarn.lock') }}
-             build-${{ hashFiles('**/webpack.*.js') }}-
+            build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
+            build-${{ hashFiles('**/webpack.*.mjs') }}-
 
       - name: Build site
         run: yarn build
@@ -91,8 +91,8 @@ jobs:
           path: node_modules/.cache
           key: build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |-
-             build-${{ hashFiles('**/webpack.*.js') }}-${{ hashFiles('**/yarn.lock') }}
-             build-${{ hashFiles('**/webpack.*.js') }}-
+            build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
+            build-${{ hashFiles('**/webpack.*.mjs') }}-
 
       - name: Cypress run
         uses: cypress-io/github-action@v4

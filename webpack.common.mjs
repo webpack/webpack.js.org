@@ -55,7 +55,7 @@ export default ({ ssg = false }) => ({
     buildDependencies: {
       config: [__filename],
     },
-    cacheDirectory: path.resolve(__dirname, '.cache/webpack'),
+    cacheDirectory: path.resolve(__dirname, 'node_modules/.cache/webpack')
   },
   resolve: {
     extensions: ['.js', '.jsx', '.scss'],
