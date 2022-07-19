@@ -314,7 +314,7 @@ Now, instead of statically importing `lodash`, we'll use dynamic importing to se
 -
 -function component() {
 +function getComponent() {
-   const element = document.createElement('div');
+-  const element = document.createElement('div');
 
 -  // Lodash, now imported by this script
 -  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -359,7 +359,7 @@ As `import()` returns a promise, it can be used with [`async` functions](https:/
 ```diff
 -function getComponent() {
 +async function getComponent() {
-   const element = document.createElement('div');
++  const element = document.createElement('div');
 +  const { default: _ } = await import('lodash');
 
 -  return import('lodash')
