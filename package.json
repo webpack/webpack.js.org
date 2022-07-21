@@ -56,7 +56,8 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "prettier": "prettier --write '**/*.{js,json,jsx,css,scss,md,mdx}'",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "rimraf ./node_modules/.cache/webpack"
   },
   "lint-staged": {
     "*.{js,jsx,md,mdx}": [
