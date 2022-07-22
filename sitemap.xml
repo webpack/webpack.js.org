@@ -184,6 +184,9 @@
         <loc>https://webpack.js.org/configuration/configuration-types</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/configuration/dev-server</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/configuration/devtool</loc>
     </url>
     <url>
@@ -230,9 +233,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/configuration/watch</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/configuration/dev-server</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/contribute/debugging</loc>
@@ -322,6 +322,9 @@
         <loc>https://webpack.js.org/guides/ecma-script-modules</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/guides/entry-advanced</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/guides/environment-variables</loc>
     </url>
     <url>
@@ -341,9 +344,6 @@
     </url>
     <url>
         <loc>https://webpack.js.org/guides/output-management</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/guides/entry-advanced</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/guides/package-exports</loc>
@@ -403,9 +403,6 @@
         <loc>https://webpack.js.org/loaders/imports-loader</loc>
     </url>
     <url>
-        <loc>https://webpack.js.org/loaders/istanbul-instrumenter-loader</loc>
-    </url>
-    <url>
         <loc>https://webpack.js.org/loaders/less-loader</loc>
     </url>
     <url>
@@ -458,6 +455,9 @@
     </url>
     <url>
         <loc>https://webpack.js.org/migrate/5</loc>
+    </url>
+    <url>
+        <loc>https://webpack.js.org/loaders/istanbul-instrumenter-loader</loc>
     </url>
     <url>
         <loc>https://webpack.js.org/plugins/NoEmitOnErrorsPlugin</loc>
@@ -589,6 +589,9 @@
         <loc>https://webpack.js.org/api/plugins/compiler</loc>
     </url>
     <url>
+        <loc>https://webpack.js.org/api/plugins/module-factories</loc>
+    </url>
+    <url>
         <loc>https://webpack.js.org/api/plugins/parser</loc>
     </url>
     <url>
@@ -599,8 +602,5 @@
     </url>
     <url>
         <loc>https://webpack.js.org/api/plugins/template</loc>
-    </url>
-    <url>
-        <loc>https://webpack.js.org/api/plugins/module-factories</loc>
     </url>
 </urlset>
