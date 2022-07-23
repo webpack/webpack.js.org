@@ -24,11 +24,6 @@ export default (env) =>
     name: 'ssg',
     mode: 'production',
     target: 'node',
-    cache: {
-      buildDependencies: {
-        config: [__filename],
-      },
-    },
     module: {
       parser: {
         javascript: {

@@ -318,7 +318,7 @@ webpack-demo
 -
 -function component() {
 +function getComponent() {
-   const element = document.createElement('div');
+-  const element = document.createElement('div');
 
 -  // Lodash, now imported by this script
 -  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
@@ -363,7 +363,7 @@ webpack 5.4.0 compiled successfully in 268 ms
 ```diff
 -function getComponent() {
 +async function getComponent() {
-   const element = document.createElement('div');
++  const element = document.createElement('div');
 +  const { default: _ } = await import('lodash');
 
 -  return import('lodash')
