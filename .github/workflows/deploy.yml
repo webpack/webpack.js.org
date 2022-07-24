@@ -23,6 +23,16 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: yarn
 
+      - name: Enable webpack persistent caching
+        uses: actions/cache@v3
+        id: build-webpack-persistent-cache
+        with:
+          path: node_modules/.cache
+          key: build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |-
+             build-${{ hashFiles('**/webpack.*.mjs') }}-${{ hashFiles('**/yarn.lock') }}
+             build-${{ hashFiles('**/webpack.*.mjs') }}-
+
       - run: yarn --frozen-lockfile
       - name: Build site
         run: yarn build

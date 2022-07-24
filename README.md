@@ -37,7 +37,6 @@ $ yarn start
 
 内容在 [Creative Commons BY 4.0](https://creativecommons.org/licenses/by/4.0/) 许可下可用。
 
-[webpack5-milestone-url]: https://github.com/webpack/webpack.js.org/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22webpack+5%22
 [build-status]: https://github.com/webpack/webpack.js.org/workflows/Deploy/badge.svg
 [build-status-url]: https://github.com/webpack/webpack.js.org/actions
 [chat]: https://badges.gitter.im/webpack/webpack.svg
