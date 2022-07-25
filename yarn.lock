@@ -2103,10 +2103,10 @@
     "@parcel/css-linux-x64-musl" "1.12.0"
     "@parcel/css-win32-x64-msvc" "1.12.0"
 
-"@pkgr/utils@^2.1.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@pkgr/utils/-/utils-2.2.0.tgz#ccbf06cd010684b477dde40ec833a28f0c2136c4"
-  integrity sha512-/+EeY/T/NLCfF4rvgUetl7ERNwoPz5q/p+8CYeAIFblsKSQbVJjmMccs/Y7CsOPv47hXcBrhk5IqOf9AqRNfhg==
+"@pkgr/utils@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@pkgr/utils/-/utils-2.3.0.tgz#3b8491f112a80839450498816767eb03b7db6139"
+  integrity sha512-7dIJ9CRVzBnqyEl7diUHPUFJf/oty2SeoVzcMocc5PeOUDK9KGzvgIBjGRRzzlRDaOjh3ADwH0WeibQvi3ls2Q==
   dependencies:
     cross-spawn "^7.0.3"
     is-glob "^4.0.3"
@@ -2957,6 +2957,11 @@ acorn@^8.0.0, acorn@^8.0.4, acorn@^8.2.4, acorn@^8.4.1, acorn@^8.7.1:
   version "8.7.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.7.1.tgz#0197122c843d1bf6d0a5e83220a788f278f63c30"
   integrity sha512-Xx54uLJQZ19lKygFXOWsscKUbsBZW0CPykPhVQdhIeIwrbPmJzqeASDInc8nKBnp/JT6igTs82qPXz069H8I/A==
+
+acorn@^8.8.0:
+  version "8.8.0"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.8.0.tgz#88c0187620435c7f6015803f5539dae05a9dbea8"
+  integrity sha512-QOxyigPVrpZ2GXT+PFyZTl6TtOFc5egxHIP9IlQ+RbupQuX4RkT/Bee4/kQuC02Xkzg84JcT7oLYtDIQxp+v7w==
 
 agent-base@6:
   version "6.0.2"
@@ -5118,20 +5123,24 @@ eslint-config-prettier@^8.5.0:
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz#5a81680ec934beca02c7b1a61cf8ca34b66feab1"
   integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
 
-eslint-mdx@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-mdx/-/eslint-mdx-2.0.1.tgz#c443943eba275fafbfe15ecd0dfd44c739699dca"
-  integrity sha512-25qjdxWQGDX0zXxnZGfqwEbWjUuY1eCnK7CIq3fNE+5rWSAeleJ/i0nLKcgh6XrvmxKn6ZYcJ9msdeqmL4kPMQ==
+eslint-mdx@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-mdx/-/eslint-mdx-2.0.2.tgz#ef7db81517459517f5f63b170c05ece10f59426f"
+  integrity sha512-MEVpk4Up8DNvabR9chGE2sKhInmSgSdtqEW9CueYTExZB0t+qaT3KGctbDjbcD5YkDbvYhgSCYo/J72ncIPIbw==
   dependencies:
+    acorn "^8.8.0"
+    acorn-jsx "^5.3.2"
     cosmiconfig "^7.0.1"
+    espree "^9.3.2"
     estree-util-visit "^1.1.0"
     remark-mdx "^2.1.2"
     remark-parse "^10.0.1"
     remark-stringify "^10.0.2"
-    synckit "^0.7.1"
+    synckit "^0.8.1"
     tslib "^2.4.0"
     unified "^10.1.2"
     unist-util-visit "^4.1.0"
+    uvu "^0.5.6"
     vfile "^5.3.4"
 
 eslint-plugin-cypress@^2.12.1:
@@ -5141,26 +5150,26 @@ eslint-plugin-cypress@^2.12.1:
   dependencies:
     globals "^11.12.0"
 
-eslint-plugin-markdown@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-markdown/-/eslint-plugin-markdown-2.2.1.tgz#76b8a970099fbffc6cc1ffcad9772b96911c027a"
-  integrity sha512-FgWp4iyYvTFxPwfbxofTvXxgzPsDuSKHQy2S+a8Ve6savbujey+lgrFFbXQA0HPygISpRYWYBjooPzhYSF81iA==
+eslint-plugin-markdown@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-markdown/-/eslint-plugin-markdown-3.0.0.tgz#69a63ab3445076a3c2eb6fce6f5114785b19d318"
+  integrity sha512-hRs5RUJGbeHDLfS7ELanT0e29Ocyssf/7kBM+p7KluY5AwngGkDf8Oyu4658/NZSGTTq05FZeWbkxXtbVyHPwg==
   dependencies:
     mdast-util-from-markdown "^0.8.5"
 
-eslint-plugin-mdx@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-mdx/-/eslint-plugin-mdx-2.0.1.tgz#07c6a83a7daa98d88d5de354cb7732eba1236590"
-  integrity sha512-BKPKX6+KxOkvKe+ASxZJeBGdrWemM8NtgJrzxzS30/hwxcEo86jsQi9SJmSrWLUs0P9KAAnM2/iW5ry/oRos8g==
+eslint-plugin-mdx@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-mdx/-/eslint-plugin-mdx-2.0.2.tgz#df870d86db8924b23940c918407956fb17d35a46"
+  integrity sha512-9mHBCxfB15YaewEHRwmFZVOlnYn7CAWKA4F43oJ8UGYWERTxJjiEqZgfK3QL9wP3zOIubOWcq4gUKzNmGbolVg==
   dependencies:
-    eslint-mdx "^2.0.1"
-    eslint-plugin-markdown "^2.2.1"
+    eslint-mdx "^2.0.2"
+    eslint-plugin-markdown "^3.0.0"
     remark-mdx "^2.1.2"
     remark-parse "^10.0.1"
     remark-stringify "^10.0.2"
     tslib "^2.4.0"
     unified "^10.1.2"
-    vfile "^5.3.2"
+    vfile "^5.3.4"
 
 eslint-plugin-react-hooks@^4.6.0:
   version "4.6.0"
@@ -11648,12 +11657,12 @@ symbol-tree@^3.2.4:
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
 
-synckit@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/synckit/-/synckit-0.7.1.tgz#9aa3a6c81f534ef940ad22fa9a3bae116850ead8"
-  integrity sha512-Cvv0Nzgs4Z0V6761qp4CU2+C15HRmnHaDd+sAtisbOnzIZ5wgl3ne076k28cHo+oY6eN/w0RNzRrf7CJz8dWJg==
+synckit@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/synckit/-/synckit-0.8.1.tgz#697111240114a15a393fcb92786a4218bfead47f"
+  integrity sha512-rJEeygO5PNmcZICmrgnbOd2usi5zWE1ESc0Gn5tTmJlongoU8zCTwMFQtar2UgMSiR68vK9afPQ+uVs2lURSIA==
   dependencies:
-    "@pkgr/utils" "^2.1.0"
+    "@pkgr/utils" "^2.3.0"
     tslib "^2.4.0"
 
 table-layout@^1.0.1:
@@ -12408,6 +12417,16 @@ uvu@^0.5.0:
     kleur "^4.0.3"
     sade "^1.7.3"
 
+uvu@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/uvu/-/uvu-0.5.6.tgz#2754ca20bcb0bb59b64e9985e84d2e81058502df"
+  integrity sha512-+g8ENReyr8YsOc6fv/NVJs2vFdHBnBNdfE49rshrTzDWOlUx4Gq7KOS2GD8eqhy2j+Ejq29+SbKH8yjkAqXqoA==
+  dependencies:
+    dequal "^2.0.0"
+    diff "^5.0.0"
+    kleur "^4.0.3"
+    sade "^1.7.3"
+
 v8-compile-cache@^2.0.3:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.2.0.tgz#9471efa3ef9128d2f7c6a7ca39c4dd6b5055b132"
@@ -12483,7 +12502,7 @@ vfile@^4.0.0:
     unist-util-stringify-position "^2.0.0"
     vfile-message "^2.0.0"
 
-vfile@^5.0.0, vfile@^5.3.2, vfile@^5.3.4:
+vfile@^5.0.0, vfile@^5.3.4:
   version "5.3.4"
   resolved "https://registry.yarnpkg.com/vfile/-/vfile-5.3.4.tgz#bbb8c96b956693bbf70b2c67fdb5781dff769b93"
   integrity sha512-KI+7cnst03KbEyN1+JE504zF5bJBZa+J+CrevLeyIMq0aPU681I2rQ5p4PlnQ6exFtWiUrg26QUdFMnAKR6PIw==
