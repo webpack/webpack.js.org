@@ -56,8 +56,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "prettier": "prettier --write '**/*.{js,json,jsx,css,scss,md,mdx}'",
-    "prepare": "husky install",
-    "postinstall": "rimraf ./node_modules/.cache/webpack"
+    "prepare": "husky install && rimraf ./node_modules/.cache/webpack && yarn-deduplicate --strategy fewer"
   },
   "lint-staged": {
     "*.{js,jsx,md,mdx}": [
@@ -142,7 +141,8 @@
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.3",
     "webpack-merge": "^5.8.0",
-    "workbox-webpack-plugin": "^6.5.3"
+    "workbox-webpack-plugin": "^6.5.3",
+    "yarn-deduplicate": "^5.0.0"
   },
   "dependencies": {
     "@docsearch/react": "^3.0.0-alpha.50",
